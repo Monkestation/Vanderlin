@@ -92,20 +92,23 @@
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	ring = /obj/item/clothing/ring/silver
 	gloves = /obj/item/clothing/gloves/chain
-	if(H.mind)
-		H.mind?.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind?.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+	if(H.mind) //Similar stats to Royal Guards, as they're supposed to be on-par
+		H.mind?.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind?.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind?.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-		H.mind?.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
+		H.mind?.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind?.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind?.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		H.mind?.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
 		H.mind?.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.change_stat(STATKEY_STR, 2)
-		H.change_stat(STATKEY_CON, 2)
+		H.change_stat(STATKEY_STR, 3)
+		H.change_stat(STATKEY_PER, 2)
 		H.change_stat(STATKEY_END, 2)
-		H.change_stat(STATKEY_SPD, -1)
+		H.change_stat(STATKEY_INT, 1)
 		if(!H.has_language(/datum/language/celestial)) // For discussing church matters with the other Clergy
 			H.grant_language(/datum/language/celestial)
 			to_chat(H, "<span class='info'>I can speak Celestial with ,c before my speech.</span>")
