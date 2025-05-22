@@ -42,7 +42,7 @@
 		head = /obj/item/clothing/head/hatfur
 		cloak = /obj/item/clothing/cloak/raincloak/furcloak
 		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
-		beltr = /obj/item/weapon/knife/dagger/steel/special
+		beltr = /obj/item/weapon/knife/dagger
 		beltl = /obj/item/ammo_holder/quiver/arrows
 		backpack_contents = list(/obj/item/reagent_containers/glass/bottle/wine = 1, /obj/item/reagent_containers/glass/cup/silver = 1)
 	if(H.gender == MALE)

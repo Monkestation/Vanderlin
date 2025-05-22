@@ -159,8 +159,8 @@
 
 /datum/outfit/job/footman_bannerman/pre_equip(mob/living/carbon/human/H)
 	..()
-	armor = /obj/item/clothing/armor/cuirass
-	shirt = /obj/item/clothing/armor/chainmail
+	armor = /obj/item/clothing/armor/cuirass/iron
+	shirt = /obj/item/clothing/armor/chainmail/iron
 	neck = /obj/item/clothing/neck/gorget
 	head = /obj/item/clothing/head/helmet/nasal
 	backr = /obj/item/weapon/shield/wood

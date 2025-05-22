@@ -81,7 +81,7 @@
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	backr = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/sword
+	beltr = /obj/item/weapon/sword/iron
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/clothing/neck/chaincoif = 1, /obj/item/weapon/hammer/iron = 1,)
 	if(H.mind)

@@ -40,7 +40,7 @@
 	cloak = pick(/obj/item/clothing/cloak/half/guard, /obj/item/clothing/cloak/half/guardsecond)
 	head = /obj/item/clothing/head/helmet/townwatch
 	pants = /obj/item/clothing/pants/trou/leather/guard
-	wrists = /obj/item/rope/chain
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather
 	gloves = /obj/item/clothing/gloves/leather
@@ -58,11 +58,11 @@
 /datum/outfit/job/guardsman/footman/pre_equip(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/clothing/neck/gorget
-	armor = /obj/item/clothing/armor/chainmail
+	armor = /obj/item/clothing/armor/chainmail/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/sword/short
+	beltr = /obj/item/weapon/sword/iron
 	beltl = /obj/item/weapon/mace/cudgel
 	backpack_contents = list(/obj/item/storage/keyring/guard, /obj/item/weapon/knife/dagger/steel/special)
 
@@ -95,7 +95,7 @@
 
 /datum/outfit/job/guardsman/archer/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/gambeson/heavy
 	shirt = pick(/obj/item/clothing/shirt/undershirt/guard, /obj/item/clothing/shirt/undershirt/guardsecond)
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
@@ -138,18 +138,16 @@
 
 /datum/outfit/job/guardsman/pikeman/pre_equip(mob/living/carbon/human/H)
 	..()
-	armor = /obj/item/clothing/armor/chainmail
+	armor = /obj/item/clothing/armor/chainmail/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	neck = /obj/item/clothing/neck/gorget
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
-	beltl = /obj/item/weapon/sword/short
 	beltr = /obj/item/weapon/mace/cudgel
 	backpack_contents = list(/obj/item/storage/keyring/guard, /obj/item/weapon/knife/dagger/steel/special)
 
 	//Stats for class
 	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)

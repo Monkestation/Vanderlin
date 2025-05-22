@@ -45,7 +45,7 @@
 	if(prob(50))
 		cloak = /obj/item/clothing/cloak/raincloak/red
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/knife/dagger/steel/special
+	beltr = /obj/item/weapon/knife/dagger
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backpack_contents = list(/obj/item/flint)
 	if(H.dna?.species?.id == "dwarf")

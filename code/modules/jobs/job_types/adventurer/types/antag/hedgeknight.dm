@@ -17,12 +17,13 @@
 	pants = /obj/item/clothing/pants/platelegs/rust
 	shoes = /obj/item/clothing/shoes/boots/armor/light/rust
 	belt = /obj/item/storage/belt/leather
+	beltl = /obj/item/weapon/mace/cudgel
 	beltr = /obj/item/weapon/sword/long
 	backr = /obj/item/storage/backpack/satchel/black
 	backl = /obj/item/weapon/shield/tower/metal
-	backpack_contents = list(/obj/item/weapon/knife/dagger = 1)
+	backpack_contents = list(/obj/item/weapon/knife/dagger/steel = 1)
 	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)

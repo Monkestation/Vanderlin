@@ -42,7 +42,7 @@
 	gloves = /obj/item/clothing/gloves/plate
 	pants = /obj/item/clothing/pants/platelegs/captain
 	armor = /obj/item/clothing/armor/captain
-	neck = /obj/item/clothing/neck/gorget
+	neck = /obj/item/clothing/neck/bevor
 	shirt = /obj/item/clothing/shirt/undershirt/guard
 	shoes = /obj/item/clothing/shoes/boots
 	backl = /obj/item/storage/backpack/satchel

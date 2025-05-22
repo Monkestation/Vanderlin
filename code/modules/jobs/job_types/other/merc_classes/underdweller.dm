@@ -22,7 +22,7 @@
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/cuirass/iron
 	shirt = shirt_type
-	shoes = /obj/item/clothing/shoes/boots/armor/light
+	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather/mercenary
 	beltr = /obj/item/weapon/knife/hunting
 	neck = /obj/item/clothing/neck/chaincoif/iron
@@ -49,7 +49,7 @@
 
 	if(H.dna.species.id == "dwarf")
 		H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
-		H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+		H.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 		H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/bombs, 4, TRUE) // Dwarves get to make bombs.
 		head = /obj/item/clothing/head/helmet/leather/minershelm

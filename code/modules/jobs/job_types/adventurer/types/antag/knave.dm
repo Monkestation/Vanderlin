@@ -34,8 +34,9 @@
 	shirt = /obj/item/clothing/shirt/shortshirt/random
 	shoes = /obj/item/clothing/shoes/boots
 	mask = /obj/item/clothing/face/facemask/steel
-	neck = /obj/item/clothing/neck/coif
-	armor = /obj/item/clothing/armor/leather
+	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
+	neck = /obj/item/clothing/neck/chaincoif/iron
+	armor = /obj/item/clothing/armor/leather/advanced
 	H.change_stat(STATKEY_END, 1)
 	H.change_stat(STATKEY_PER, 2)
 	H.change_stat(STATKEY_SPD, 3) //It's all about speed and perception

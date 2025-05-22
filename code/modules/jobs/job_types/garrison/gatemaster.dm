@@ -36,7 +36,7 @@
 	. = ..()
 	head = /obj/item/clothing/head/helmet/townwatch/alt
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/guard
-	wrists = /obj/item/clothing/wrists/bracers/leather
+	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	belt = /obj/item/storage/belt/leather/black
 	pants = /obj/item/clothing/pants/trou/leather/guard
 
@@ -68,9 +68,9 @@
 
 /datum/outfit/job/gatemaster/whip/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/gorget
+	neck = /obj/item/clothing/neck/chaincoif/iron
 	armor = /obj/item/clothing/armor/leather/advanced
-	shirt = /obj/item/clothing/armor/chainmail
+	shirt = /obj/item/clothing/armor/chainmail/iron
 	gloves = /obj/item/clothing/gloves/chain
 	shoes = /obj/item/clothing/shoes/boots
 	beltr = /obj/item/weapon/mace/cudgel
@@ -108,10 +108,11 @@
 
 /datum/outfit/job/gatemaster/mace/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/gorget
+	neck = /obj/item/clothing/neck/chaincoif/iron
 	armor = /obj/item/clothing/armor/cuirass
 	shirt = /obj/item/clothing/armor/chainmail
 	gloves = /obj/item/clothing/gloves/chain
+	wrists = /obj/item/clothing/wrists/bracers
 	shoes = /obj/item/clothing/shoes/boots/armor/light
 	beltr = /obj/item/weapon/mace/steel
 	backr = /obj/item/weapon/shield/heater

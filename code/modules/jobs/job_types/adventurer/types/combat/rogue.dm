@@ -34,7 +34,7 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/mace/cudgel // TEMP until I make a blackjack- for now though this will do.
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-	backpack_contents = list(/obj/item/lockpick, /obj/item/weapon/knife/dagger/steel, /obj/item/clothing/face/shepherd/rag)
+	backpack_contents = list(/obj/item/lockpick, /obj/item/weapon/knife/dagger, /obj/item/clothing/face/shepherd/rag)
 	ADD_TRAIT(H, TRAIT_THIEVESGUILD, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_LIGHT_STEP, TRAIT_GENERIC)

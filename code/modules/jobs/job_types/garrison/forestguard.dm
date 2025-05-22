@@ -60,7 +60,7 @@
 /datum/outfit/job/forestguard/infantry/pre_equip(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/clothing/neck/gorget
-	beltl = /obj/item/weapon/mace/steel/morningstar
+	beltl = /obj/item/weapon/mace/spiked
 	beltr = /obj/item/weapon/axe/iron
 	backpack_contents = list(/obj/item/weapon/knife/hunting = 1, /obj/item/rope/chain = 1, /obj/item/key/forrestgarrison = 1, /obj/item/storage/belt/pouch/coins/poor)
 	H.verbs |= /mob/proc/haltyell
@@ -77,7 +77,6 @@
 	H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 	H.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
@@ -98,7 +97,7 @@
 
 /datum/outfit/job/forestguard/ranger/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/gorget
 	beltl = /obj/item/weapon/knife/cleaver/combat
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
@@ -137,10 +136,9 @@
 
 /datum/outfit/job/forestguard/reaver/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/chaincoif
-	beltl = /obj/item/weapon/mace/steel/morningstar
+	neck = /obj/item/clothing/neck/gorget
+	beltl = /obj/item/weapon/mace/spiked
 	backr = /obj/item/weapon/polearm/halberd/bardiche/woodcutter
-	beltr = /obj/item/weapon/axe/iron
 	backpack_contents = list(/obj/item/weapon/knife/hunting = 1, /obj/item/rope/chain = 1, /obj/item/key/forrestgarrison = 1, /obj/item/storage/belt/pouch/coins/poor)
 	H.verbs |= /mob/proc/haltyell
 	if(H.mind)
