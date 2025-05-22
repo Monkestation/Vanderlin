@@ -90,7 +90,7 @@
 			if(ismob(pulling))
 				user.pulling.forceMove(target)
 			user.forceMove(target)
-			user.start_pulling(pulling,suppress_message = TRUE)
+			user.start_pulling(pulling,supress_message = TRUE)
 			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
 			if(L.mind)
 				L.adjust_experience(/datum/skill/misc/climbing, exp_to_gain, FALSE)

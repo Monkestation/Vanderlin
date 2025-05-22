@@ -693,7 +693,7 @@
 			setDir(WEST)
 
 /mob/face_atom(atom/A)
-	if(!canface(A))
+	if(!canface())
 		return FALSE
 	..()
 

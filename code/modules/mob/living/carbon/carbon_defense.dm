@@ -102,13 +102,13 @@
 		used_limb = parse_zone(I.sublimb_grabbed)
 
 	if(used_limb)
-		target.visible_message(span_warning("[src] grabs [target]'s [used_limb]."), \
-						span_warning("[src] grabs my [used_limb]."), span_hear("I hear shuffling."), null, list(src))
-		to_chat(src, span_info("I grab [target]'s [used_limb]."))
+		target.visible_message("<span class='warning'>[src] grabs [target]'s [used_limb].</span>", \
+						"<span class='warning'>[src] grabs my [used_limb].</span>", "<span class='hear'>I hear shuffling.</span>", null, src)
+		to_chat(src, "<span class='info'>I grab [target]'s [used_limb].</span>")
 	else
-		target.visible_message(span_warning("[src] grabs [target]."), \
-						span_warning("[src] grabs me."), span_hear("I hear shuffling."), null, list(src))
-		to_chat(src, span_info("I grab [target]."))
+		target.visible_message("<span class='warning'>[src] grabs [target].</span>", \
+						"<span class='warning'>[src] grabs me.</span>", "<span class='hear'>I hear shuffling.</span>", null, src)
+		to_chat(src, "<span class='info'>I grab [target].</span>")
 
 /mob/living/carbon/send_grabbed_message(mob/living/carbon/user)
 	var/used_limb = "chest"
@@ -135,20 +135,17 @@
 			return parse_zone(zone)
 		return affecting.name
 
-/mob/living/carbon/proc/find_used_grab_limb(mob/living/user, accurate = FALSE) //for finding the exact limb or inhand to grab
+/mob/living/carbon/proc/find_used_grab_limb(mob/living/user) //for finding the exact limb or inhand to grab
 	var/used_limb = BODY_ZONE_CHEST
 	var/missing_nose = HAS_TRAIT(src, TRAIT_MISSING_NOSE)
 	var/obj/item/bodypart/affecting
-	var/selzone = user.zone_selected
-	if(cmode && !accurate)
-		selzone = accuracy_check(user.zone_selected, user, src, /datum/skill/combat/wrestling, user.used_intent)
-	affecting = get_bodypart(check_zone(selzone))
-	if(selzone && affecting)
-		if(selzone in affecting.grabtargets)
-			if(missing_nose && selzone == BODY_ZONE_PRECISE_NOSE)
+	affecting = get_bodypart(check_zone(user.zone_selected))
+	if(user.zone_selected && affecting)
+		if(user.zone_selected in affecting.grabtargets)
+			if(missing_nose && user.zone_selected == BODY_ZONE_PRECISE_NOSE)
 				used_limb = BODY_ZONE_HEAD
 			else
-				used_limb = selzone
+				used_limb = user.zone_selected
 		else
 			used_limb = affecting.body_zone
 	return used_limb

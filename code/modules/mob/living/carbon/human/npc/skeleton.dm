@@ -329,6 +329,3 @@
 	base_constitution = 8
 	base_endurance = 8
 	base_intelligence = 1
-
-/mob/living/carbon/human/species/skeleton/death_arena/roll_mob_stats()
-	return

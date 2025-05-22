@@ -559,9 +559,6 @@
 	if(pulling == target && stat == CONSCIOUS)
 		//If they dragged themselves and we're currently aggressively grabbing them try to piggyback
 		if(user == target && can_piggyback(target))
-			if(cmode)
-				to_chat(target, span_warning("[src] is too alert to let you piggyback!"))
-				return FALSE
 			piggyback(target)
 			return TRUE
 		//If you dragged them to you and you're aggressively grabbing try to carry them

@@ -57,7 +57,6 @@
 	M.westface()
 	return TRUE
 
-/*
 /datum/keybinding/mob/stop_pulling
 	hotkey_keys = list("Z")
 	classic_keys = list("Z")
@@ -73,7 +72,6 @@
 	else
 		M.stop_pulling()
 	return TRUE
-*/
 
 /*/datum/keybinding/mob/toggle_move_intent
 	hotkey_keys = list("Alt")

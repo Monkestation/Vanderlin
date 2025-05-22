@@ -41,7 +41,7 @@
 	if(nemesis_faction)
 		force -= faction_bonus_force
 
-/obj/item/melee/transforming/proc/transform_weapon(mob/living/user, suppress_message_text)
+/obj/item/melee/transforming/proc/transform_weapon(mob/living/user, supress_message_text)
 	active = !active
 	if(active)
 		force = force_on
@@ -61,14 +61,14 @@
 			attack_verb = attack_verb_off
 		icon_state = initial(icon_state)
 		w_class = initial(w_class)
-	transform_messages(user, suppress_message_text)
+	transform_messages(user, supress_message_text)
 	add_fingerprint(user)
 	return TRUE
 
 /obj/item/melee/transforming/proc/nemesis_effects(mob/living/user, mob/living/target)
 	return
 
-/obj/item/melee/transforming/proc/transform_messages(mob/living/user, suppress_message_text)
+/obj/item/melee/transforming/proc/transform_messages(mob/living/user, supress_message_text)
 	playsound(user, 'sound/blank.ogg', 35, TRUE)  //changed it from 50% volume to 35% because deafness
-	if(!suppress_message_text)
+	if(!supress_message_text)
 		to_chat(user, "<span class='notice'>[src] [active ? "is now active":"can now be concealed"].</span>")

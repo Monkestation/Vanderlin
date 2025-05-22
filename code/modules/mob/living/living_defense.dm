@@ -160,12 +160,12 @@
 		adjust_fire_stacks(1)
 	IgniteMob()
 
-/mob/living/proc/grabbedby(mob/living/carbon/user, suppress_message = FALSE, item_override)
+/mob/living/proc/grabbedby(mob/living/carbon/user, supress_message = FALSE, item_override)
 	if(!user || !src || anchored || !isturf(user.loc))
 		return FALSE
 
 	if(!user.pulling || user.pulling == src)
-		user.start_pulling(src, suppress_message = suppress_message, item_override = item_override)
+		user.start_pulling(src, supress_message = supress_message, item_override = item_override)
 		return
 /*
 	if(!(status_flags & CANPUSH) || HAS_TRAIT(src, TRAIT_PUSHIMMUNE))
@@ -220,11 +220,11 @@
 			self_message = span_warning("I struggle with [user]!")
 		visible_message(span_warning("[user] struggles with [src]!"), self_message, span_hear("I hear aggressive shuffling!"))
 		playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
-		user.Immobilize(1 SECONDS)
-		user.changeNext_move(1 SECONDS)
+		user.Immobilize(2 SECONDS)
+		user.changeNext_move(2 SECONDS)
 		user.adjust_stamina(rand(7,15))
-		src.Immobilize(0.5 SECONDS)
-		src.changeNext_move(0.5 SECONDS)
+		src.Immobilize(1 SECONDS)
+		src.changeNext_move(1 SECONDS)
 		src.adjust_stamina(rand(7,15))
 		return
 
@@ -248,8 +248,7 @@
 		add_log = " (pacifist)"
 	send_grabbed_message(user)
 	if(user != src)
-		if(pulling != user) // If the person we're pulling aggro grabs us don't break the grab
-			stop_pulling()
+		stop_pulling()
 		user.set_pull_offsets(src, user.grab_state)
 	log_combat(user, src, "grabbed", addition="aggressive grab[add_log]")
 	return 1

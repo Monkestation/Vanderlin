@@ -201,7 +201,7 @@
 				if(ismob(pulling))
 					user.pulling.forceMove(target)
 				user.forceMove(target)
-				user.start_pulling(pulling,suppress_message = TRUE)
+				user.start_pulling(pulling,supress_message = TRUE)
 				if(user.m_intent != MOVE_INTENT_SNEAK)
 					playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
 				if(L.mind)

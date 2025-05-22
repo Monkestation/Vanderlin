@@ -149,7 +149,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 			if(ismob(pulling))
 				user.pulling.forceMove(target)
 			user.forceMove(target)
-			user.start_pulling(pulling,suppress_message = TRUE)
+			user.start_pulling(pulling,supress_message = TRUE)
 
 /turf/open/transparent/openspace/attack_ghost(mob/dead/observer/user)
 	var/turf/target = get_step_multiz(src, DOWN)

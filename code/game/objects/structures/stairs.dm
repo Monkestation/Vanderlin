@@ -166,7 +166,7 @@
 	if(pulling)
 		L.stop_pulling()
 		pulling.forceMove(newtarg)
-		L.start_pulling(pulling, suppress_message = TRUE)
+		L.start_pulling(pulling, supress_message = TRUE)
 		if(was_pulled_buckled)
 			var/mob/living/M = pulling
 			if(M.body_position != LYING_DOWN)	// piggyback carry

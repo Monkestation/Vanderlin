@@ -431,7 +431,7 @@
 			return FALSE
 	return TRUE
 
-/mob/living/start_pulling(atom/movable/AM, state, force = pull_force, suppress_message = FALSE, obj/item/item_override, accurate = FALSE)
+/mob/living/start_pulling(atom/movable/AM, state, force = pull_force, supress_message = FALSE, obj/item/item_override)
 	if(!AM || !src)
 		return FALSE
 	if(!(AM.can_be_pulled(src, state, force)))
@@ -473,14 +473,13 @@
 		if(iscarbon(M))
 			var/mob/living/carbon/C = M
 			var/obj/item/grabbing/O = new()
-			var/used_limb = C.find_used_grab_limb(src, accurate)
+			var/used_limb = C.find_used_grab_limb(src)
 			O.name = "[C]'s [parse_zone(used_limb)]"
 			var/obj/item/bodypart/BP = C.get_bodypart(check_zone(used_limb))
 			C.grabbedby += O
 			O.grabbed = C
 			O.grabbee = src
 			O.limb_grabbed = BP
-			BP.grabbedby += O
 			if(item_override)
 				O.sublimb_grabbed = item_override
 			else
@@ -489,9 +488,9 @@
 			put_in_hands(O)
 			O.update_hands(src)
 			if((HAS_TRAIT(src, TRAIT_STRONG_GRABBER) && cmode) || item_override)
-				suppress_message = TRUE
+				supress_message = TRUE
 				C.grippedby(src)
-			if(!suppress_message)
+			if(!supress_message)
 				send_pull_message(M)
 		else
 			var/obj/item/grabbing/O = new()
@@ -505,15 +504,15 @@
 			put_in_hands(O)
 			O.update_hands(src)
 			if((HAS_TRAIT(src, TRAIT_STRONG_GRABBER) && cmode) || item_override)
-				suppress_message = TRUE
+				supress_message = TRUE
 				M.grippedby(src)
-			if(!suppress_message)
+			if(!supress_message)
 				send_pull_message(M)
 
 		update_pull_movespeed()
 		set_pull_offsets(M, state)
 	else
-		if(!suppress_message)
+		if(!supress_message)
 			var/sound_to_play = 'sound/combat/shove.ogg'
 			playsound(src.loc, sound_to_play, 50, TRUE, -1)
 		var/obj/item/grabbing/O = new(src)
@@ -765,8 +764,8 @@
 /mob/living/proc/on_lying_down(new_lying_angle)
 	if(layer == initial(layer)) //to avoid things like hiding larvas.
 		layer = LYING_MOB_LAYER //so mob lying always appear behind standing mobs
-	// ADD_TRAIT(src, TRAIT_UI_BLOCKED, LYING_DOWN_TRAIT)
-	// ADD_TRAIT(src, TRAIT_PULL_BLOCKED, LYING_DOWN_TRAIT)
+	ADD_TRAIT(src, TRAIT_UI_BLOCKED, LYING_DOWN_TRAIT)
+	ADD_TRAIT(src, TRAIT_PULL_BLOCKED, LYING_DOWN_TRAIT)
 	density = FALSE // We lose density and stop bumping passable dense things.
 	if(HAS_TRAIT(src, TRAIT_FLOORED) && !(dir & (NORTH|SOUTH)))
 		setDir(pick(NORTH, SOUTH)) // We are and look helpless.
@@ -777,8 +776,8 @@
 	if(layer == LYING_MOB_LAYER)
 		layer = initial(layer)
 	density = initial(density) // We were prone before, so we become dense and things can bump into us again.
-	// REMOVE_TRAIT(src, TRAIT_UI_BLOCKED, LYING_DOWN_TRAIT)
-	// REMOVE_TRAIT(src, TRAIT_PULL_BLOCKED, LYING_DOWN_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_UI_BLOCKED, LYING_DOWN_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_PULL_BLOCKED, LYING_DOWN_TRAIT)
 
 //Recursive function to find everything a mob is holding. Really shitty proc tbh, you should use get_all_gear for carbons.
 /mob/living/get_contents()
@@ -1158,33 +1157,25 @@
 	if(pulledby.grab_state >= GRAB_AGGRESSIVE)
 		combat_modifier -= 0.1
 
-	var/obj/item/puller_hand = pulledby.get_active_held_item()
-	if(isitem(puller_hand))
-		if(!istype(puller_hand, /obj/item/grabbing) && puller_hand.wlength > WLENGTH_SHORT)  // so you can't pummel them with a weapon
-			combat_modifier += 0.25
+	var/atom/puller_hand = pulledby.get_active_held_item()
+	if(puller_hand && !istype(puller_hand, /obj/item/grabbing)) // so you can't pummel them with a weapon
+		combat_modifier += 0.25
 
 	if(cmode && !L.cmode)
-		combat_modifier += 0.5
+		combat_modifier += 0.3
 	else if(!cmode && L.cmode)
 		combat_modifier -= 0.3
-
-	if(L.buckled)
-		combat_modifier += 0.5
 
 	for(var/obj/item/grabbing/G in grabbedby)
 		if(G.chokehold)
 			combat_modifier -= 0.15
 
-	resist_chance += ((((STASTR - L.STASTR)/2) + wrestling_diff) * 7 + rand(-5, 5))
-	resist_chance *= combat_modifier
-	resist_chance = clamp(resist_chance, 7, 95)
+	resist_chance = clamp((((4 + (((STASTR - L.STASTR)/2) + wrestling_diff)) * 10 + rand(-5, 10)) * combat_modifier), 5, 95)
 
-	// if(moving_resist && client) //we resisted by trying to move
-	client?.move_delay = world.time + 20
-	changeNext_move(CLICK_CD_RESIST)
-	adjust_stamina(rand(4,9))
-	pulledby.adjust_stamina(rand(2,5))
+	if(moving_resist && client) //we resisted by trying to move
+		client.move_delay = world.time + 20
 	if(prob(resist_chance))
+		adjust_stamina(rand(5,15))
 		visible_message("<span class='warning'>[src] breaks free of [pulledby]'s grip!</span>", \
 						"<span class='notice'>I break free of [pulledby]'s grip!</span>", null, null, pulledby)
 		to_chat(pulledby, "<span class='danger'>[src] breaks free of my grip!</span>")
@@ -1194,17 +1185,18 @@
 		var/wrestling_cooldown_reduction = 0
 		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
 			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling)
-		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2.5 SECONDS - wrestling_cooldown_reduction))
-		playsound(src.loc, 'sound/combat/grabbreak.ogg', 50, TRUE, -1)
+		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2.2 SECONDS - wrestling_cooldown_reduction))
+
 		return FALSE
 	else
+		adjust_stamina(rand(5,15))
 		var/shitte = ""
 		if(client?.prefs.showrolls)
 			shitte = " ([resist_chance]%)"
 		visible_message("<span class='warning'>[src] struggles to break free from [pulledby]'s grip!</span>", \
 						"<span class='warning'>I struggle against [pulledby]'s grip![shitte]</span>", null, null, pulledby)
 		to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
-		playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
+
 		return TRUE
 
 /mob/living/carbon/human/resist_grab(moving_resist)
@@ -1229,9 +1221,7 @@
 							visible_message("<span class='warning'>[src] struggles to break free from [pulledby]'s grip!</span>", \
 												"<span class='warning'>I struggle against [pulledby]'s grip!</span>", null, null, pulledby)
 							to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
-							playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
-							client?.move_delay = world.time + 20
-							return TRUE
+							return FALSE
 	return ..()
 
 /mob/living/proc/resist_buckle()
@@ -1889,6 +1879,16 @@
 			if(old_buckled.buckle_lying == 0 && (resting || HAS_TRAIT(src, TRAIT_FLOORED))) // The buckle forced us to stay up (like a chair)
 				set_lying_down() // We want to rest or are otherwise floored, so let's drop on the ground.
 
+/mob/living/set_pulledby(new_pulledby)
+	. = ..()
+	if(. == FALSE) //null is a valid value here, we only want to return if FALSE is explicitly passed.
+		return
+	if(pulledby)
+		if(!. && stat == SOFT_CRIT)
+			ADD_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT)
+	else if(. && stat == SOFT_CRIT)
+		REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT)
+
 ///Proc to modify the value of num_legs and hook behavior associated to this event.
 /mob/living/proc/set_num_legs(new_value)
 	if(num_legs == new_value)
@@ -2223,10 +2223,6 @@
 
 /mob/living/set_pulledby(new_pulledby)
 	. = ..()
-	if(hud_used)
-		for(var/hand in hud_used.hand_slots)
-			var/atom/movable/screen/inventory/hand/H = hud_used.hand_slots[hand]
-			H?.update_icon()
 	if(. == FALSE) //null is a valid value here, we only want to return if FALSE is explicitly passed.
 		return
 	if(pulledby)

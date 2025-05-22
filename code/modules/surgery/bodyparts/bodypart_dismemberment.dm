@@ -78,7 +78,8 @@
 						continue
 				CA.add_stress(stress2give)
 	if(grabbedby)
-		QDEL_LIST(grabbedby)
+		qdel(grabbedby)
+		grabbedby = null
 	drop_limb()
 
 	if(dam_type == BURN)

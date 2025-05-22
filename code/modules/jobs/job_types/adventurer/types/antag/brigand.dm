@@ -34,7 +34,7 @@
 	neck = /obj/item/clothing/neck/coif
 	head = /obj/item/clothing/head/helmet/leather/volfhelm
 	armor = /obj/item/clothing/armor/leather/hide
-	H.change_stat(STATKEY_STR, 2)
+	H.change_stat(STATKEY_STR, 3)
 	H.change_stat(STATKEY_END, 2)
 	H.change_stat(STATKEY_CON, 2)
 	H.change_stat(STATKEY_INT, -3)
