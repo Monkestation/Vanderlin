@@ -626,7 +626,6 @@
 		if(QINTENT_SPELL)
 			if(mmb_intent)
 				qdel(mmb_intent)
-			testing("spellselect [ranged_ability]")
 			mmb_intent = new INTENT_SPELL(src)
 			mmb_intent.releasedrain = ranged_ability.get_fatigue_drain()
 			mmb_intent.chargedrain = ranged_ability.chargedrain

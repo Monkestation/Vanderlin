@@ -59,7 +59,6 @@
 		/mob/dead/observer/rogue/arcaneeye/proc/eye_down,
 		/mob/dead/observer/rogue/arcaneeye/proc/eye_up,
 		/mob/dead/observer/rogue/arcaneeye/proc/vampire_telepathy)
-	testing("BEGIN LOC [loc]")
 	name = "Arcane Eye"
 	grant_all_languages()
 

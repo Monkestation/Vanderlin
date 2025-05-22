@@ -111,15 +111,6 @@
 	var/obj/item/reagent_containers/food/snacks/organ/S = ..()
 	S.icon_state = "heart-off"
 	var/nothing = FALSE
-/*	if(user.mind)
-		var/datum/antagonist/werewolf/C = user.mind.has_antag_datum(/datum/antagonist/werewolf)
-		if(C)
-			var/datum/objective/hearteating/H = locate(/datum/objective/hearteating) in C.objectives
-			if(H)
-				testing("heartseaten++")
-				H.hearts_eaten++
-				nothing = TRUE
-				S.eat_effect = /datum/status_effect/buff/foodbuff*/
 	if(!nothing)
 		S.eat_effect = /datum/status_effect/debuff/uncookedfood
 	return S

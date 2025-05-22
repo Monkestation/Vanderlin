@@ -211,7 +211,6 @@
 				to_chat(H, span_warning("I'm already wearing something on my head."))
 				return
 			else if(H.equip_to_slot_if_possible(hood,SLOT_HEAD,0,0,1))
-				testing("begintog")
 				hoodtoggled = TRUE
 				if(!picked)
 					if(toggle_icon_state)
@@ -225,10 +224,8 @@
 				H.update_inv_neck()
 				H.update_inv_pants()
 				H.update_fov_angles()
-
 	else
 		RemoveHood()
-	testing("endtoggle")
 
 /obj/item/clothing/shirt/robe/newmage/RemoveHood()
 	if(!hood)

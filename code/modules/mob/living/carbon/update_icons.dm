@@ -60,32 +60,6 @@
 	update_inv_legcuffed()
 	update_fire()
 
-/*
-/proc/get_inhand_sprite(/obj/item/I, layer)
-	var/index = "[I.icon_state]"
-	var/icon/inhand_icon = GLOB.inhand_icons[index]
-	if(!inhand_icon) 	//Create standing/laying icons if they don't exist
-		generate_inhand_icon(I)
-	return mutable_appearance(GLOB.inhand_icons[index], layer = -layer)
-
-/proc/generate_inhand_icon(/obj/item/I)
-	testing("GDC [index]")
-	if(sleevetype)
-		var/icon/dismembered		= icon("icon"=icon, "icon_state"=t_color)
-		var/icon/r_mask				= icon("icon"='icons/roguetown/clothing/onmob/helpers/dismemberment.dmi', "icon_state"="r_[sleevetype]")
-		var/icon/l_mask				= icon("icon"='icons/roguetown/clothing/onmob/helpers/dismemberment.dmi', "icon_state"="l_[sleevetype]")
-		switch(sleeveindex)
-			if(1)
-				dismembered.Blend(r_mask, ICON_MULTIPLY)
-				dismembered.Blend(l_mask, ICON_MULTIPLY)
-			if(2)
-				dismembered.Blend(l_mask, ICON_MULTIPLY)
-			if(3)
-				dismembered.Blend(r_mask, ICON_MULTIPLY)
-		dismembered 			= fcopy_rsc(dismembered)
-		testing("GDC added [index]")
-		GLOB.dismembered_clothing_icons[index] = dismembered*/
-
 /mob/living/carbon/update_inv_hands()
 	remove_overlay(HANDS_LAYER)
 	remove_overlay(HANDS_BEHIND_LAYER)

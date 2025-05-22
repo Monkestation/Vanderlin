@@ -164,7 +164,6 @@
 	if (born_of_rock)
 		// the rock tomes are a *lot* easier to make, so we make them worse by them reducing your chances by 20%
 		qualityoflearn *= 1.2
-	testing("Quality of learning is [qualityoflearn]")
 	user.visible_message(span_warning("[user] is filled with arcyne energy! You witness [user.p_their()] body convulse and spark brightly."), \
 	span_notice("Noc blesses me. I have been granted knowledge and wisdom beyond my years, this tome's mysteries unveiled one at a time."))
 	qualityoflearn = qualityoflearn / 100

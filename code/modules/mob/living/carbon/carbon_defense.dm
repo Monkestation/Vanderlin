@@ -74,7 +74,6 @@
 /mob/living/carbon/check_projectile_wounding(obj/projectile/P, def_zone, blocked)
 	var/obj/item/bodypart/BP = get_bodypart(check_zone(def_zone))
 	if(BP)
-		testing("projwound")
 		var/newdam = P.damage * (100-blocked)/100
 		BP.bodypart_attacked_by(P.woundclass, newdam, zone_precise = def_zone, crit_message = TRUE)
 		return TRUE

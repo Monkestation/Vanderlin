@@ -505,7 +505,6 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 //Forwarded action from admin/Topic
 /datum/admin_help/proc/Action(action)
-	testing("Ahelp action: [action]")
 
 	switch(action)
 		if("claimticket")

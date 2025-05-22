@@ -122,7 +122,6 @@
 		to_chat(src, span_warning("[H] is dead already..."))
 		return
 	var/painpercent = (H.get_complex_pain() / (H.STAEND * 12)) * 100
-	testing("Confession time, [painpercent] pain.")
 	if(painpercent < 100)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
@@ -167,7 +166,6 @@
 		to_chat(src, span_warning("[H] is dead already..."))
 		return
 	var/painpercent = (H.get_complex_pain() / (H.STAEND * 12)) * 100
-	testing("Confession time, [painpercent] pain.")
 	if(painpercent < 100)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
@@ -194,19 +192,14 @@
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag", mob/living/carbon/human/user)
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins), confession_type, FALSE, user), 3 SECONDS, TIMER_STOPPABLE)
 	var/responsey = alert(src, "Resist torture?","TEST OF PAIN","Yes","No")
-	testing("Sent resist request to [src].")
-	testing(" User is [user]. confession_time")
 	if(SStimer.timer_id_dict[timerid])
 		deltimer(timerid)
 	else
 		to_chat(src, span_warning("Too late..."))
-		testing("Torture timer ran out.")
 		return
 	if(responsey == "Yes")
-		testing("[src] resisted torture.")
 		confess_sins(confession_type, resist=TRUE, interrogator=user)
 	else
-		testing("[src] gave into torture.")
 		confess_sins(confession_type, resist=FALSE, interrogator=user)
 
 /mob/living/carbon/human/proc/confess_sins(confession_type = "antag", resist, mob/living/carbon/human/interrogator, torture=TRUE, obj/item/paper/confession/confession_paper, false_result)
@@ -231,11 +224,9 @@
 		if(confession_type == "antag")
 			resist_chance += 25
 
-	testing("Resist chance: [resist_chance]")
 	if(!prob(resist_chance))
 		var/list/confessions = list()
 		var/antag_type = null
-		testing("User is [interrogator]. confess_sins")
 		switch(confession_type)
 			if("antag")
 				if(!false_result)
@@ -245,24 +236,20 @@
 						confessions += antag.confess_lines
 						antag_type = antag.name
 						break // Only need one antag type
-				testing("Antag type: [antag_type]")
 			if("patron")
 				if(ispath(false_result, /datum/patron))
 					var/datum/patron/fake_patron = new false_result()
 					if(length(fake_patron.confess_lines))
 						confessions += fake_patron.confess_lines
 						antag_type = fake_patron.name
-						testing("Patron type: [fake_patron.name]")
 				else
 					if(length(patron?.confess_lines))
 						confessions += patron.confess_lines
-						testing("Patron type: [patron.name]")
 						antag_type = patron.name
 
 		if(torture && interrogator && confession_type == "patron")
 			var/datum/patron/interrogator_patron = interrogator.patron
 			var/datum/patron/victim_patron = patron
-			testing("interrogator [interrogator_patron], victim [victim_patron]")
 			switch(interrogator_patron.associated_faith.type)
 				if(/datum/faith/psydon)
 					if(ispath(victim_patron.type, /datum/patron/divine) && victim_patron.type != /datum/patron/divine/necra) //lore
@@ -281,11 +268,9 @@
 				visible_message(span_warning("[name] has already signed a confession!"), "I have already signed a confession!")
 				return
 			var/obj/item/paper/confession/held_confession
-			testing("confession paper: [confession_paper]")
 			if(istype(confession_paper))
 				held_confession = confession_paper
 			else if(interrogator?.is_holding_item_of_type(/obj/item/paper/confession)) // This code is to process gettin a signed confession through torture.
-				testing("User is holding a confession.")
 				held_confession = interrogator.is_holding_item_of_type(/obj/item/paper/confession)
 			if(held_confession && !held_confession.signed) // Check to see if the confession is already signed.
 				// held_confession.bad_type = "AN EVILDOER" // In case new antags are added with confession lines but have yet to be added here.

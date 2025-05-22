@@ -131,8 +131,6 @@
 			last_craft = world.time
 			var/datum/component/personal_crafting/C = H.craftingthing
 			C.roguecraft(location, control, params, H)
-		else
-			testing("what")
 
 /atom/movable/screen/area_creator
 	name = "create new area"
@@ -1630,12 +1628,10 @@
 	var/showing = FALSE
 
 /atom/movable/screen/rmbintent/update_icon()
-	testing("overlayscut")
 	cut_overlays()
 	if(isliving(hud?.mymob))
 		var/mob/living/L = hud.mymob
 		if(L.rmb_intent)
-//			var/image/I = image(icon='icons/mob/roguehud.dmi',icon_state="[L.rmb_intent.icon_state]_x", layer = layer+0.01)
 			add_overlay("[L.rmb_intent.icon_state]_x")
 			name = L.rmb_intent.name
 			desc = L.rmb_intent.desc

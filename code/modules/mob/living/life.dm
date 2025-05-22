@@ -116,9 +116,7 @@
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
 		fire_stacks = min(0, fire_stacks + 1)//So we dry ourselves back to default, nonflammable.
 	if(!on_fire)
-//		testing("handlefyre0 [src]")
 		return TRUE //the mob is no longer on fire, no need to do the rest.
-//	testing("handlefyre1 [src]")
 	if(fire_stacks + divine_fire_stacks > 0)
 		adjust_divine_fire_stacks(-0.05)
 		if(fire_stacks > 0)

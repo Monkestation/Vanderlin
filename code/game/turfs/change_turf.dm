@@ -65,7 +65,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(!GLOB.use_preloader && path == type && !(flags & CHANGETURF_FORCEOP)) // Don't no-op if the map loader requires it to be reconstructed
 		return src
 	if(flags & CHANGETURF_SKIP)
-		testing("fuck3")
 		return new path(src)
 
 	var/old_opacity = opacity
@@ -261,7 +260,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		if(!istype(src, /turf/closed))
 			baseturfs += type
 		baseturfs += new_baseturfs
-		testing("fuck2")
 		return ChangeTurf(fake_turf_type, null, flags)
 	if(!length(baseturfs))
 		baseturfs = list(baseturfs)

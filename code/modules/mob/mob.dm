@@ -41,7 +41,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 	for(var/cc in client_colours)
 		qdel(cc)
 	client_colours = null
-	testing("EPICWIN!! [src] [type]")
 	ghostize(drawskip=TRUE)
 	..()
 	return QDEL_HINT_HARDDEL
@@ -245,9 +244,9 @@ GLOBAL_VAR_INIT(mobids, 1)
 	var/obj/item/W = get_active_held_item()
 
 	if(istype(W))
-		testing("clothes1")
+
 		if(equip_to_slot_if_possible(W, slot,0,0,0))
-			testing("clothes2")
+
 			return 1
 
 	if(!W)

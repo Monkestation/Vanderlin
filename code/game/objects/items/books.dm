@@ -228,7 +228,6 @@
 			return
 		var/picked_cat = input(user, "Categories", "Shipping Ledger") as null|anything in sortList(SSmerchant.supply_cats)
 		if(!picked_cat)
-			testing("yeye")
 			return
 		var/list/pax = list()
 		for(var/pack in SSmerchant.supply_packs)

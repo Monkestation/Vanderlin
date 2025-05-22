@@ -287,7 +287,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	if(key)
 		if(new_character.key != key)					//if we're transferring into a body with a key associated which is not ours
 			if(new_character.key)
-				testing("ghostizz")
 				new_character.ghostize(1)						//we'll need to ghostize so that key isn't mobless.
 	else
 		key = new_character.key
@@ -311,7 +310,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	transfer_martial_arts(new_character)
 	RegisterSignal(new_character, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
-		testing("dotransfer to [new_character]")
 		new_character.key = key		//now transfer the key to link the client to our new body
 	new_character.update_fov_angles()
 	SEND_SIGNAL(old_current, COMSIG_MIND_TRANSFER, new_character)

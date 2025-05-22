@@ -247,20 +247,16 @@
 	for(var/obj/item/I in things)
 		things -= I
 		if(I.loc != thing_loc)
-			testing("debugbag1 [I]")
 			continue
 		if(I.type in rejections) // To limit bag spamming: any given type only complains once
-			testing("debugbag2 [I]")
 			continue
 		if(!can_be_inserted(I, stop_messages = TRUE))	// Note can_be_inserted still makes noise when the answer is no
 			if(real_location.contents.len >= max_items)
 				break
-			testing("debugbag3 [I]")
 			rejections += I.type	// therefore full bags are still a little spammy
 			continue
 
 		handle_item_insertion(I, TRUE)	//The TRUE stops the "You put the [parent] into [S]" insertion message from being displayed.
-		testing("debugbag4 [I]")
 		if (TICK_CHECK)
 			progress.update(progress.goal - things.len)
 			return TRUE
@@ -310,13 +306,11 @@
 	for(var/obj/item/I in things)
 		things -= I
 		if(I.loc != real_location)
-			testing("debugbag5 [I]")
 			continue
 		remove_from_storage(I, target)
 		I.pixel_x = initial(I.pixel_x) + rand(-10,10)
 		I.pixel_y = initial(I.pixel_y) + rand(-10,10)
 		if(trigger_on_found && I.on_found())
-			testing("debugbag6 [I]")
 			return FALSE
 		if(TICK_CHECK)
 			progress.update(progress.goal - length(things))
@@ -481,11 +475,9 @@
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the new_location target, if that is null it's being deleted
 /datum/component/storage/proc/remove_from_storage(atom/movable/AM, atom/new_location)
 	if(!istype(AM))
-		testing("debugbag88")
 		return FALSE
 	var/datum/component/storage/concrete/master = master()
 	if(!istype(master))
-		testing("debugbag99")
 		return FALSE
 	return master.remove_from_storage(AM, new_location)
 
@@ -662,7 +654,6 @@
 	if(real_location == I.loc)
 		return FALSE //Means the item is already in the storage item
 	if(!ismob(host.loc) && !isturf(host.loc))
-		testing("fugg [host] | [host.loc] | [M]")
 		return FALSE
 	if(locked)
 		if(M && !stop_messages)

@@ -142,7 +142,6 @@
 			bitten_names += H.real_name
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple/blockproj(mob/living/carbon/human/H)
-	testing("APPLEHITBEGIN")
 	if(prob(98))
 		H.visible_message(span_notice("[H] is saved by the apple!"))
 		H.dropItemToGround(H.head)
@@ -156,7 +155,6 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.head == src)
-			testing("equipped applz")
 			equippedloc = H.loc
 			START_PROCESSING(SSobj, src)
 

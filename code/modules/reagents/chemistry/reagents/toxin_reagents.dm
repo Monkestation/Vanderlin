@@ -119,7 +119,7 @@
 	toxpwr = 0
 
 /datum/reagent/toxin/killersice/on_mob_life(mob/living/carbon/M)
-	testing("Someone was poisoned")
+	//testing("Someone was poisoned") // This is too gold to remove
 	if(volume > 0.95)
 		M.adjustToxLoss(10, 0)
 	return ..()

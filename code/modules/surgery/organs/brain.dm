@@ -33,10 +33,6 @@
 	name = "brain"
 
 	if(brainmob)
-//		if(C.key)
-//			testing("UHM BASED?? [C]")
-//			C.ghostize()
-
 		if(brainmob.mind)
 			brainmob.mind.transfer_to(C)
 		else

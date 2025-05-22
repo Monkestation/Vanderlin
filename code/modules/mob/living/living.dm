@@ -422,12 +422,10 @@
 	if(CZ)
 		if( !(check_zone(L.zone_selected) in acceptable) )
 			to_chat(L, "<span class='warning'>I can't reach that.</span>")
-			testing("reach2")
 			return FALSE
 	else
 		if( !(L.zone_selected in acceptable) )
 			to_chat(L, "<span class='warning'>I can't reach that.</span>")
-			testing("reach2")
 			return FALSE
 	return TRUE
 
@@ -1486,7 +1484,6 @@
 	if (HAS_TRAIT(src, TRAIT_NOFIRE))
 		return
 	if((fire_stacks > 0 || divine_fire_stacks > 0) && !on_fire)
-		testing("ignis")
 		on_fire = TRUE
 		src.visible_message("<span class='warning'>[src] catches fire!</span>", \
 						"<span class='danger'>I'm set on fire!</span>")

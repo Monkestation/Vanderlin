@@ -243,7 +243,6 @@
 //Infected wake param is just a transition from living to zombie, via zombie_infect()
 //Previously you just died without warning in 3 minutes, now you just become an antag
 /datum/antagonist/zombie/proc/wake_zombie(infected_wake = FALSE)
-	testing("WAKEZOMBIE")
 	if(!owner.current)
 		return
 	var/mob/living/carbon/human/zombie = owner.current

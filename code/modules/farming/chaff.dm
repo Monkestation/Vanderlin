@@ -9,10 +9,9 @@
 /obj/item/natural/chaff/attack_right(mob/user)
 	if(foodextracted && !user.get_active_held_item())
 		to_chat(user, span_warning("I start to shuck [src]..."))
-		if(do_after(user, 4 SECONDS, src)) //ROGTODO make this based on farming skill and speed
+		if(do_after(user, 4 SECONDS, src))
 			user.visible_message(span_notice("[user] shucks [src]."), \
 								span_notice("I shuck [src]."))
-			testing("1")
 			var/obj/item/G = new foodextracted(get_turf(src))
 			user.put_in_active_hand(G)
 			new /obj/item/natural/fibers(get_turf(src))
@@ -22,12 +21,9 @@
 	if(foodextracted && canthresh)
 		new foodextracted(loc)
 		new /obj/item/natural/fibers(loc)
-//		playsound(loc,"plantcross", 90, FALSE) Causes loud reverb in current setup
-//		playsound(loc,"smashlimb", 50, FALSE)
 		qdel(src)
 
 /obj/item/natural/chaff/attackby(obj/item/I, mob/living/user, params)
-	testing("attackb")
 	if(istype(I, /obj/item/weapon/pitchfork))
 		if(user.used_intent.type == DUMP_INTENT)
 			var/obj/item/weapon/pitchfork/W = I

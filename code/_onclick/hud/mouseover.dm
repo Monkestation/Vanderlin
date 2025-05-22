@@ -198,7 +198,6 @@
 
 	//No screen-loc information? abort.
 	if(!PM || !PM["screen-loc"])
-//		testing("Can't find parameters for that mouseover.")
 		return
 
 	//Split screen-loc up into X+Pixel_X and Y+Pixel_Y

@@ -213,7 +213,6 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 		else if(ranged_ability_user.STAINT < 10)
 			var/diffy = 10 - ranged_ability_user.STAINT
 			newtime = newtime + (chargetime * (diffy * 0.02))
-		testing("[chargetime] newtime [newtime]")
 		if(newtime > 0)
 			return newtime
 		else
@@ -235,10 +234,8 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 		else if(ranged_ability_user.STAINT < 10)
 			var/diffy = 10 - ranged_ability_user.STAINT
 			newdrain = newdrain + (releasedrain * (diffy * 0.02))
-//		newdrain = newdrain + (ranged_ability_user.checkwornweight() * 10)
 		if(ranged_ability_user.get_encumbrance() > 0.4)
 			newdrain += 40
-		testing("[releasedrain] newdrain [newdrain]")
 		if(newdrain > 0)
 			return newdrain
 		else
@@ -258,12 +255,10 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 			return FALSE
 	else
 		if(!(src in user.mob_spell_list))
-			testing("cast1")
 			return FALSE
 
 	if(!skipcharge)
 		if(!charge_check(user))
-			testing("cast2")
 			return FALSE
 
 	if(user.stat && !stat_allowed)
@@ -311,10 +306,8 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 	if(req_items.len)
 		var/list/confirmed_items = list()
 		for(var/I in req_items)
-			testing("req item [I]")
 			for(var/obj/item/IN in user.contents)
 				if(istype(IN, I))
-					testing("confirmed [I]")
 					confirmed_items += IN
 					continue
 		if(confirmed_items.len != req_items.len)

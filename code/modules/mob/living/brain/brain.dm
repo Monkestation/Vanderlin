@@ -9,7 +9,6 @@
 
 /mob/living/brain/Initialize()
 	. = ..()
-	testing("WWOLFDNA")
 	create_dna(src)
 	stored_dna.initialize_dna()
 	if(isturf(loc)) //not spawned in an MMI or brain organ (most likely adminspawned)
@@ -32,7 +31,6 @@
 			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
 		if(mind)	//You aren't allowed to return to brains that don't exist
 			mind.current = null
-		testing("BASEDLOL ")
 		ghostize(drawskip=TRUE)		//Ghostize checks for key so nothing else is necessary.
 	return ..()
 
@@ -51,7 +49,6 @@
 /mob/living/brain/can_be_revived()
 	. = 1
 	if(health <= HEALTH_THRESHOLD_DEAD)
-		testing("noresbrain")
 		return 0
 
 /mob/living/brain/fully_replace_character_name(oldname,newname)

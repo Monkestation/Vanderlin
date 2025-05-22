@@ -180,7 +180,6 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 //Individual roundend report
 /datum/antagonist/proc/roundend_report()
-	testing("doreport")
 	var/list/report = list()
 
 	if(!owner)
@@ -199,7 +198,6 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(objectives.len == 0 || objectives_complete)
 		report += "<span class='greentext big'>The [name] was successful!</span>"
 	else
-		testing("redtext")
 		report += "<span class='redtext big'>The [name] has failed!</span>"
 	report += "<br>"
 

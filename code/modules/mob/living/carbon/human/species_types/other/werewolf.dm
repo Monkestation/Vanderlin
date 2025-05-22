@@ -95,7 +95,6 @@
 	if(brutech > usedloss)
 		usedloss = brutech
 	inhand_overlay.alpha = 255 * usedloss
-	testing("damalpha [inhand_overlay.alpha]")
 	hands += inhand_overlay
 	H.overlays_standing[DAMAGE_LAYER] = hands
 	H.apply_overlay(DAMAGE_LAYER)

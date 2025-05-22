@@ -41,11 +41,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/match/proc/matchignite()
 	if(!lit && !burnt)
-		testing("ignis1")
 		playsound(src, "sound/items/match.ogg", 100, FALSE)
 		lit = TRUE
 		icon_state = "match_lit"
-		testing("ignis2")
 		damtype = "fire"
 		force = 3
 		set_light(3)

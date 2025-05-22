@@ -43,12 +43,10 @@
 					if(!R.subtype_reqs && (B in subtypesof(A)))
 						continue
 					if (R.blacklist.Find(B))
-						testing("foundinblacklist")
 						continue
 					if(contents[B] >= R.reqs[A])
 						continue main_loop
 					else
-						testing("removecontent")
 						needed_amount -= contents[B]
 						if(needed_amount <= 0)
 							continue main_loop
@@ -200,7 +198,6 @@
 					return
 				continue
 			if(R.structurecraft && istype(S, R.structurecraft))
-				testing("isstructurecraft")
 				continue
 			if(S.density)
 				to_chat(user, "<span class='warning'>[S] is in the way.</span>")
@@ -578,9 +575,6 @@
 	if(!A.can_craft_here())
 		to_chat(user, "<span class='warning'>I can't craft here.</span>")
 		return
-//	if(user != parent)
-//		testing("c2")
-//		return
 	var/list/data = list()
 	var/list/catty = list()
 	var/list/surroundings = get_surroundings(user)
@@ -588,10 +582,6 @@
 		var/datum/crafting_recipe/R = rec
 		if(!R.always_availible && !(R.type in user?.mind?.learned_recipes)) //User doesn't actually know how to make this.
 			continue
-
-//		if((R.category != cur_category) || (R.subcategory != cur_subcategory))
-//			continue
-
 		if(check_contents(R, surroundings))
 			if(R.name)
 				data += R

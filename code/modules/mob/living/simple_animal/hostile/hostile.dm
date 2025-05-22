@@ -194,7 +194,6 @@
 			continue
 	var/Target = PickTarget(.)
 	if(Target)
-		testing("[src] givetarget [Target]")
 		GiveTarget(Target)
 	return Target //We now have a target
 
@@ -595,7 +594,7 @@
 
 	if(AIStatus == AI_IDLE && FindTarget(tlist, 1))
 		toggle_ai(AI_ON)
-		testing("becomeidle [src]")
+
 
 /mob/living/simple_animal/hostile/proc/ListTargetsLazy(_Z)//Step 1, find out what we can see
 	. = list()

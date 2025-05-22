@@ -149,18 +149,13 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 	updateallghostimages()
 
-	testing("BEGIN LOC [loc]")
-
 	var/turf/T
 	var/mob/body = loc
 	if(ismob(body))
 		T = get_turf(body)				//Where is the body located?
-		testing("body [body] loc [body.loc]")
 		if(!T)
-			testing("no t yyy")
 			if(istype(body, /mob/living/brain))
 				var/obj/Y = body.loc
-				testing("Y [Y] loc [Y.loc]")
 				T = get_turf(Y)
 
 		gender = body.gender
@@ -182,15 +177,6 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 		if(draw_icon)
 			if(ishuman(body))
-//				var/mob/living/carbon/human/body_human = body
-//				var/icon/out_icon = icon('icons/effects/effects.dmi', "nothing")
-//				var/od = body_human.dir
-//				for(var/D in GLOB.cardinals)
-//					body_human.dir = D
-//					COMPILE_OVERLAYS(body)
-//					var/icon/partial = getFlatIcon(body, no_anim = TRUE, base_size = TRUE)
-//					out_icon.Insert(partial,dir=D)
-//				body_human.dir = od
 				var/image/MA = new(body)
 				MA.transform = null //so we are standing
 				appearance = MA
@@ -198,12 +184,10 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 				pixel_x = 0
 				pixel_y = 0
 				invisibility = INVISIBILITY_OBSERVER
-//				icon = out_icon
 				alpha = 100
 	update_icon()
 
 	if(!T)
-		testing("NO T")
 		T = SSmapping.get_station_center()
 
 	forceMove(T)

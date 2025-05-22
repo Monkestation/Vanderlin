@@ -89,7 +89,6 @@
 	if(!istype(attacking_item, /obj/item/weapon/shovel))
 		if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket/wooden))
 			var/obj/item/reagent_containers/glass/bucket/wooden/bucket = attacking_item
-			testing("attempt water make proc should be called now")
 			attemptwatermake(user, bucket)
 			return
 		return ..()

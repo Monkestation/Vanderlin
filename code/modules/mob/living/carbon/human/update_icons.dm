@@ -1815,7 +1815,6 @@ generate/load female uniform sprites matching all previously decided variables
 	if(age == AGE_CHILD)
 		offsets = dna?.species?.offset_features_child
 
-	testing("ehadonly [src]")
 	HD.update_limb()
 
 	add_overlay(HD.get_limb_icon())

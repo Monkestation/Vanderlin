@@ -153,28 +153,16 @@
 					changeNext_move(used_intent.clickcd,used_hand)
 					return
 
-
-//	if(modifiers["shift"] && modifiers["middle"])
-//		changeNext_move(CLICK_CD_MELEE)
-//		ShiftMiddleClickOn(A)
-//		return
-//	if(modifiers["shift"] && modifiers["ctrl"])
-//		CtrlShiftClickOn(A)
-//		return
 	if(modifiers["shift"] && modifiers["right"])
 		ShiftRightClickOn(A, params)
 		return
 	if(modifiers["ctrl"] && modifiers["right"])
-//		face_atom(A)
 		CtrlRightClickOn(A, params)
 		return
 	if(modifiers["alt"] && modifiers["right"])
 		face_atom(A)
 		AltRightClickOn(A, params)
 		return
-//	if(modifiers["shift"] && modifiers["middle"])
-//		ShiftMiddleClickOn(A)
-//		return
 	if(modifiers["middle"])
 		MiddleClickOn(A, params)
 		return
@@ -188,7 +176,6 @@
 		CtrlClickOn(A)
 		return
 	if(modifiers["right"])
-		testing("right")
 		if(!oactive)
 			RightClickOn(A, params)
 			return
@@ -286,7 +273,6 @@
 					resolveAdjacentClick(A,W,params,used_hand)
 					return
 				if(T)
-					testing("beginautoaim")
 					var/list/mobs_here = list()
 					for(var/mob/M in T)
 						if(M.invisibility || M == src)

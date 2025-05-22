@@ -22,7 +22,6 @@
 	if(istext(soundin))
 		switch(soundin)
 			if("laugh")
-				testing("setlaughh")
 				used = pick('sound/vo/male/old/laugh (1).ogg', 'sound/vo/male/old/laugh (2).ogg', 'sound/vo/male/old/laugh (3).ogg')
 			if("scream")
 				used = 'sound/vo/male/old/scream.ogg'

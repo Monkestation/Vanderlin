@@ -164,12 +164,10 @@
 
 /mob/living/simple_animal/hostile/werewolf/update_damage_overlays()
 	remove_overlay(DAMAGE_LAYER)
-	testing("dambegin")
 	var/list/hands = list()
 	var/mutable_appearance/inhand_overlay = mutable_appearance("[icon_state]-dam", layer=-DAMAGE_LAYER)
 	var/numba = 255 * (health / maxHealth)
 	inhand_overlay.alpha = 255 - numba
-	testing("damalpha [inhand_overlay.alpha]")
 	hands += inhand_overlay
 
 	overlays_standing[DAMAGE_LAYER] = hands

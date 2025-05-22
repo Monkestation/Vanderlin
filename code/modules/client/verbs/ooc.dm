@@ -223,14 +223,12 @@ GLOBAL_VAR_INIT(OOC_COLOR, normal_ooc_colour)//If this is null, use the CSS for 
 		to_chat(src, "<span class='boldnotice'>Admin Notice:</span>\n \t [GLOB.admin_notice]")
 	else
 		to_chat(src, "<span class='notice'>There are no admin notices at the moment.</span>")
+
 #ifdef TESTSERVER
 /client/verb/smiteselfverily()
 	set name = "KillSelf"
 	set category = "DEBUGTEST"
-/*
-	set hidden = 1
-	if(!check_rights(0))
-		return*/
+
 	var/confirm = alert(src, "Should I really kill myself?", "Feed the crows", "Yes", "No")
 	if(confirm == "Yes")
 		log_admin("[key_name(usr)] used killself.")
@@ -238,12 +236,6 @@ GLOBAL_VAR_INIT(OOC_COLOR, normal_ooc_colour)//If this is null, use the CSS for 
 		mob.death()
 #endif
 
-/*
-/client/verb/jcoindate()
-	set name = "{CHECKJOINDATE}"
-	set category = "Options"
-	testing("[CheckJoinDate(ckey)]")
-*/
 /mob/dead/new_player/verb/togglobb()
 	set name = "SilenceLobbyMusic"
 	set category = "Options"
@@ -268,8 +260,6 @@ GLOBAL_VAR_INIT(OOC_COLOR, normal_ooc_colour)//If this is null, use the CSS for 
 		return
 	var/list/vl = world.Export("http://ip-api.com/json/[ipaddress]")
 	if (!("CONTENT" in vl) || vl["STATUS"] != "200 OK")
-//		sleep(3000)
-//		return CheckIPCountry(ipaddress)
 		return
 	var/jd = html_encode(file2text(vl["CONTENT"]))
 	var/parsed = ""
@@ -281,14 +271,6 @@ GLOBAL_VAR_INIT(OOC_COLOR, normal_ooc_colour)//If this is null, use the CSS for 
 		search = findtext(jd, ",", pos+1)
 		if(search)
 			return lowertext(copytext(jd, pos+9, search))
-
-//	var/regex/R = regex("\"country\":\"(.*)\"")
-//	if(jd)
-//		if(R.Find(jd))
-//			. = R.group[1]
-//		else
-//			testing("reges cant find")
-//			return "0"
 
 /client/verb/fix_chat()
 	set name = "{FIX CHAT}"

@@ -1700,8 +1700,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(mob)
 		if(isliving(mob)) //no ghost can call this
 			mob.ghostize(can_reenter_corpse)
-		testing("[mob] [mob.type] YEA CLIE")
-
 
 /client/proc/whitelisted()
 	if(whitelisted != 2)

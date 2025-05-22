@@ -12,9 +12,7 @@
 	SEND_SIGNAL(src, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone)
 	var/hit_percent = 1
 	damage = max(damage-blocked,0)
-//	var/hit_percent = (100-blocked)/100
 	if(!damage || (!forced && hit_percent <= 0))
-		testing("faildam")
 		return 0
 	set_typing_indicator(FALSE)
 	var/damage_amount =  forced ? damage : damage * hit_percent
@@ -253,7 +251,6 @@
  * @return TRUE if defense successful, FALSE otherwise
  */
 /mob/living/proc/checkdefense(datum/intent/intenty, mob/living/user)
-	testing("begin defense")
 	if(!cmode || stat || (!canparry && !candodge) || user == src || HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 		return FALSE
 	if(client && used_intent && client.charging && used_intent.tranged && !used_intent.tshield)

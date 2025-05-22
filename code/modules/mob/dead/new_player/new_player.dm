@@ -410,7 +410,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.json")
 
 	for(var/list/category in omegalist)
 		if(!SSjob.name_occupations[category[1]])
-			testing("HELP NO THING FOUND FOR [category[1]]")
 			continue
 
 		var/list/available_jobs = list()

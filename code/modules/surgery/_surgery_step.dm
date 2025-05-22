@@ -261,7 +261,6 @@
 	return english_list(chems, and_text = require_all_chems ? " and " : " or ")
 
 /datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
-	testing("[user] doing surgery step [name] on [target] [target_zone || "body"] with tool [tool || "hands"] and [intent || "none"] intent")
 	if(!can_do_step(user, target, target_zone, tool, intent, try_to_fail))
 		return FALSE
 
@@ -354,7 +353,6 @@
 		detailed_mobs -= target //The patient can't see well what's going on, unless it's something like getting cut
 	user.visible_message(detailed_message, self_message, vision_distance = 1, ignored_mobs = target_detailed ? null : target)
 	for(var/mob/mob in detailed_mobs)
-		testing("[mob]")
 	user.visible_message(vague_message, "", ignored_mobs = detailed_mobs)
 	return TRUE
 

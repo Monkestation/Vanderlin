@@ -168,7 +168,6 @@
 				sentfrom = "Anonymous"
 			if(findtext(send2place, "#"))
 				var/box2find = text2num(copytext(send2place, findtext(send2place, "#")+1))
-				testing("box2find [box2find]")
 				var/found = FALSE
 				for(var/obj/structure/fake_machine/mail/X in SSroguemachine.hermailers)
 					if(X.ournum == box2find)
@@ -381,7 +380,6 @@
 	// Ensure purchase_history is initialized
 	if(!user.purchase_history)
 		user.purchase_history = list()
-		testing("Initialized purchase_history for user")
 
 	// Define the available items, their costs, and max purchases
 	var/list/items = list(
@@ -521,7 +519,6 @@
 			max_purchases = 4
 		),
 	)
-	testing("Items defined: [items]")
 
 	// Populate the options for the shop interface
 	for(var/name in items)
@@ -530,19 +527,14 @@
 		var/max_purchases = item_data["max_purchases"]
 		var/purchase_count = user.purchase_history[name] || 0
 
-		testing("Processing item: [name], cost: [item_cost], max_purchases: [max_purchases], purchase_count: [purchase_count]")
-
 		// If the item has been purchased the maximum number of times, disable it
 		if(purchase_count >= max_purchases)
 			options[name] = "[name] - SOLD OUT"
-			testing("[name] is SOLD OUT")
 		else
 			options[name] = "[name] - [item_cost] confession(s)"
-			testing("[name] available for purchase at [item_cost] confessions")
 
 	// Ask the user to select an item
 	var/selection = input(user, "Select an item to request", "I have [user.confession_points] favors left...") as null | anything in options
-	testing("User selected: [selection]")
 	if(!selection)
 		return
 
@@ -552,31 +544,24 @@
 	var/max_purchases = item_data["max_purchases"]
 	var/purchase_count = user.purchase_history[selection] || 0
 
-	testing("Selected item: [selection], cost: [item_cost], purchase_count: [purchase_count], max_purchases: [max_purchases]")
-
 	// Check if we are still next to the mailer.
 	if(!Adjacent(user))
 		return
 
 	// Check if the item is sold out
 	if(purchase_count >= max_purchases)
-		testing("[selection] is SOLD OUT after selection")
 		to_chat(user, "<span class='warning'>This item is sold out.</span>")
 		return
 
 	// Get the current confession points from the user
 	var/current_points = user.confession_points || 0
-	testing("User confession points: [current_points]")
 	if(current_points < item_cost)
-		testing("User does not have enough confession points: [current_points] < [item_cost]")
 		to_chat(user, "<span class='warning'>You do not have enough favors.</span>")
 		return
 
 	// Deduct the points and give the items
 	user.confession_points -= item_cost
-	testing("Deducted [item_cost] confession points, remaining: [user.confession_points]")
 	user.purchase_history[selection] = purchase_count + 1
-	testing("Updated purchase history for [selection]: [user.purchase_history[selection]]")
 
 	// Loop through the sub-list to generate multiple items
 	for(var/item in item_data)
@@ -585,14 +570,11 @@
 			var/item_count = item["count"]
 			if(item_type && item_count) // Ensure the item list has both type and count defined
 				for(var/i = 1 to item_count)
-					testing("Creating item: [item_type] x[item_count]")
 					var/obj/item/I = new item_type(get_turf(user)) // Create the item at the user's location
 					if(!user.put_in_hands(I)) // Try to put the item in the user's hands
-						testing("Failed to place item in hands, dropping at user's location")
 						I.forceMove(get_turf(user)) // If not, drop it at the user's location
 
 	visible_message("<span class='warning'>The mailbox spits out its contents.</span>")
 	say("HERE IS THE REQUESTED ITEM. WE HOPE IT SERVES YOU WELL.",language = /datum/language/oldpsydonic)
 	playsound(src, 'sound/misc/machinelong.ogg', 100, FALSE, -1)
-	testing("Finished processing user selection and item dispensing")
 	return

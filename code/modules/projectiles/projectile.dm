@@ -543,7 +543,6 @@
 		return FALSE
 	if(!isliving(target))
 		if(direct_target)
-			testing("DIRECT TARGET")
 			if(isturf(target))
 				if(arcshot)
 					return TRUE

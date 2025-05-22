@@ -104,10 +104,8 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	if(HAS_TRAIT(A, TRAIT_I_AM_INVISIBLE_ON_A_BOAT))
 		return FALSE
 	if(direction == DOWN)
-		testing("dir=down")
 		for(var/obj/O in contents)
 			if(O.obj_flags & BLOCK_Z_OUT_DOWN)
-				testing("noout")
 				return FALSE
 		return TRUE
 	if(direction == UP)
@@ -172,14 +170,8 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 		return ..()
 	var/turf/target = get_step_multiz(src, DOWN)
 	if(target)
-		testing("canztrav")
-//		if(can_zFall(P, 2, target))
-//			testing("canztrue")
-//			P.zfalling = TRUE
 		P.forceMove(target)
-//			P.zfalling = FALSE
 		P.visible_message(span_danger("[P] flies down from above!"), vision_distance = COMBAT_MESSAGE_RANGE)
 		P.original = target
 		P.process_hit(target, P.select_target(target))
-		//bump
 		return BULLET_ACT_TURF

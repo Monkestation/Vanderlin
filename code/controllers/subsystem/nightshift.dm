@@ -45,7 +45,6 @@ SUBSYSTEM_DEF(nightshift)
 	var/curtod = settod()
 	if(current_tod != curtod)
 		SSParticleWeather.selected_forecast.set_ambient_temperature(curtod)
-		testing("curtod [curtod] current_tod [current_tod] globtod [GLOB.tod]")
 		current_tod = GLOB.tod
 		update_nightshift()
 

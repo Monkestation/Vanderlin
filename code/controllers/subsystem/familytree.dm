@@ -241,7 +241,6 @@ SUBSYSTEM_DEF(familytree)
 				return
 	//None of the above added the person to a family. This means we must add them to a entirely new house.
 	if(our_species != /datum/species/aasimar)
-		testing("FAMTREE_NEWFAM")
 		families += new /datum/heritage(H)
 
 /*

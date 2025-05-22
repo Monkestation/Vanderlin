@@ -50,11 +50,9 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	testing("yea144")
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	var/list/things = STR.contents()
 	if(things.len)
-		testing("yea64")
 		var/obj/item/I = pick(things)
 		STR.remove_from_storage(I, get_turf(user))
 		user.put_in_hands(I)
@@ -114,11 +112,9 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	testing("yea144")
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	var/list/things = STR.contents()
 	if(things.len)
-		testing("yea64")
 		var/obj/item/I = pick(things)
 		STR.remove_from_storage(I, get_turf(user))
 		user.put_in_hands(I)

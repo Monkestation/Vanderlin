@@ -59,15 +59,12 @@ SUBSYSTEM_DEF(paintings)
 	if(!(istext(painting_title) && istext(author) && istext(author_ckey)))
 		return "This painting is incorrectly formatted!"
 
-	testing("playerpainting2file1")
-
 	var/list/contents = list("painting_title" = "[painting_title]", "author" = "[author]", "author_ckey" = "[author_ckey]", "canvas_size" = canvas_size)
 	//url_encode should escape all the characters that do not belong in a file name. If not, god help us
 	var/file_name = "data/player_generated_paintings/[url_encode(painting_title)].json"
 	text2file(json_encode(contents), file_name)
 
 	if(fexists("data/player_generated_paintings/_painting_titles.json"))
-		testing("playerpainting2file2")
 		var/list/_painting_titles_contents = json_decode(file2text("data/player_generated_paintings/_painting_titles.json"))
 		_painting_titles_contents += "[url_encode(painting_title)]"
 		fdel("data/player_generated_paintings/_painting_titles.json")
@@ -101,7 +98,6 @@ SUBSYSTEM_DEF(paintings)
 	if(!fexists(json_file))
 		return FALSE
 	if(fexists("data/player_generated_paintings/_painting_titles.json"))
-		testing("delplayerbook")
 		fdel(json_file)
 		if(fexists(png))
 			fdel("data/player_generated_paintings/paintings/[painting_title].png")

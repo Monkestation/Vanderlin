@@ -93,7 +93,6 @@
 	detail_color = playerchoice
 	update_icon()
 	for(var/obj/item/clothing/V in L.get_equipped_items(FALSE))
-		testing("clothes to color are [V]")
 		if(V.colorgrenz)
 			V.detail_color = playerchoice
 			V.update_icon()

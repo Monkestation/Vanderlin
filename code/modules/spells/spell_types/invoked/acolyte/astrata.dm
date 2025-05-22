@@ -66,7 +66,6 @@
 
 /obj/effect/proc_holder/spell/invoked/revive/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
-		testing("revived1")
 		var/mob/living/target = targets[1]
 		var/lux_state = target.get_lux_status()
 		if(lux_state != LUX_HAS_LUX)
@@ -98,7 +97,6 @@
 		if(!target.revive(full_heal = FALSE))
 			to_chat(user, "<span class='warning'>Astrata's light fails to heal [target]!</span>")
 			return FALSE
-		testing("revived2")
 		GLOB.vanderlin_round_stats[STATS_ASTRATA_REVIVALS]++
 		target.emote("breathgasp")
 		target.Jitter(100)

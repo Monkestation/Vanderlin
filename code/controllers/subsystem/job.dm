@@ -407,7 +407,6 @@ SUBSYSTEM_DEF(job)
 				if(player.client.prefs.job_preferences[job.title] == level)
 					// If the job isn't filled
 					if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
-						testing("DO pass, Player: [player], Level:[level], Job:[job.title]")
 						AssignRole(player, job)
 						unassigned -= player
 						break

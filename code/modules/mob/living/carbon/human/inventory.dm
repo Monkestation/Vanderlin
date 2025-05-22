@@ -185,15 +185,12 @@
 		if(SLOT_IN_BACKPACK)
 			not_handled = TRUE
 			if(beltr)
-				testing("insert1")
 				if(SEND_SIGNAL(beltr, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
 					not_handled = FALSE
 			if(beltl && not_handled)
-				testing("insert2")
 				if(SEND_SIGNAL(beltl, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
 					not_handled = FALSE
 			if(belt && not_handled)
-				testing("insert3")
 				if(SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
 					not_handled = FALSE
 		else

@@ -618,11 +618,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				continue
 			else if(!istype(M, childtype) && M.gender == MALE && !(M.flags_1 & HOLOGRAM_1)) //Better safe than sorry ;_;
 				partner = M
-				testing("[src] foudnpartner [M]")
-
-//		else if(isliving(M) && !faction_check_mob(M)) //shyness check. we're not shy in front of things that share a faction with us.
-//			testing("[src] wenotalon [M]")
-//			return //we never mate when not alone, so just abort early
 
 	if(alone && partner && children < 3)
 		var/childspawn = pickweight(childtype)
@@ -630,9 +625,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(target)
 			GLOB.vanderlin_round_stats[STATS_ANIMALS_BRED]++
 			return new childspawn(target)
-//			visible_message("<span class='warning'>[src] finally gives birth.</span>")
-//			playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-//			breedchildren--
 
 /mob/living/simple_animal/canUseTopic(atom/movable/M, be_close=FALSE, no_dexterity=FALSE, no_tk=FALSE)
 	if(incapacitated(ignore_grab = TRUE))

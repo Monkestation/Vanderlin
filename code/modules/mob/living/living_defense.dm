@@ -232,7 +232,6 @@
 		var/sound_to_play = 'sound/foley/grab.ogg'
 		playsound(src.loc, sound_to_play, 100, FALSE, -1)
 
-	testing("eheh1")
 	user.setGrabState(GRAB_AGGRESSIVE)
 	if(user.active_hand_index == 1)
 		if(user.r_grab)

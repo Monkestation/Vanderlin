@@ -43,7 +43,6 @@
 		var/curr_range = current_range
 		SetRange(curr_range, TRUE)
 		if(curr_range)
-			testing("HasProx: [host] -> [host]")
 			hasprox_receiver.HasProximity(host)	//if we are processing, we're guaranteed to be a movable
 
 /datum/proximity_monitor/proc/SetRange(range, force_rebuild = FALSE)

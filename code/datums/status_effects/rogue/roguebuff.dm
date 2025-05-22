@@ -5,7 +5,6 @@
 	var/duration_modification = 0
 
 /datum/status_effect/buff/duration_modification/on_creation(mob/living/new_owner, duration_increase)
-	testing("oncreation")
 	if(new_owner)
 		owner = new_owner
 	if(owner)

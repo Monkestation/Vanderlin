@@ -396,8 +396,6 @@
 				addtofield(text2num(id), t) // He wants to edit a field, let him.
 			else
 				info += t // Oh, he wants to edit to the end of the file, let him.
-				testing("[length(info)]")
-				testing("[findtext(info, "\n")]")
 				updateinfolinks()
 			playsound(src, 'sound/items/write.ogg', 100, FALSE)
 			format_browse(info_links, usr)

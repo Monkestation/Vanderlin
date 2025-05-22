@@ -119,10 +119,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 	if(loaded || !owner)
 		return
 
-	testing("Chat loaded for [owner.ckey]")
 	loaded = TRUE
 	showChat()
-
 
 	for(var/message in messageQueue)
 		// whitespace has already been handled by the original to_chat

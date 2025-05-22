@@ -206,7 +206,6 @@ GLOBAL_LIST_EMPTY(ritualslist)
 		to_chat(V, "<span style = \"font-size:110%; font-weight:bold\"><span style = 'color:#8a13bd'>A message from </span><span style = 'color:#[H.voice_color]'>[src.real_name]</span>: [speak]</span>")
 		playsound_local(V.current, 'sound/vo/cult/skvor.ogg', 100)
 
-	testing("[key_name(src)] used cultist telepathy to say: [speak]")
 	log_telepathy("[key_name(src)] used cultist telepathy to say: [speak]")
 
 /obj/effect/decal/cleanable/sigil
@@ -230,13 +229,10 @@ GLOBAL_LIST_EMPTY(ritualslist)
 /obj/effect/decal/cleanable/sigil/Initialize(mapload)
 	. = ..()
 	if(!LAZYLEN(GLOB.ritualslist))
-		testing("initializing ritualslist")
 		GLOB.ritualslist = list()
 		var/static/list/rituals = subtypesof(/datum/ritual)
 		for(var/path in rituals)
 			var/datum/ritual/G = path
-			testing("now initializing: [path]")
-			testing("[G.name]")
 			GLOB.ritualslist[G.name] = G
 
 /obj/effect/decal/cleanable/sigil/proc/consume_ingredients(datum/ritual/R)
@@ -268,7 +264,6 @@ GLOBAL_LIST_EMPTY(ritualslist)
 
 /obj/effect/decal/cleanable/sigil/attack_hand(mob/living/user)
 	. = ..()
-	testing("clicked by [user]")
 	var/list/rituals = list()
 	if(icon_state != "center") // fucking awful but it has to be this way
 		return
@@ -282,11 +277,9 @@ GLOBAL_LIST_EMPTY(ritualslist)
 			rituals |= path.name
 
 	var/ritualnameinput = input(user, "Rituals", "VANDERLIN") as null|anything in rituals
-	testing("ritualnameinput [ritualnameinput]")
 	var/datum/ritual/pickritual
 
 	pickritual = GLOB.ritualslist[ritualnameinput]
-	testing("pickritual [pickritual]")
 
 	var/cardinal_success = FALSE
 	var/center_success = FALSE
@@ -338,14 +331,12 @@ GLOBAL_LIST_EMPTY(ritualslist)
 
 	if(dews >= 4)
 		cardinal_success = TRUE
-		testing("CARDINAL SUCCESS!")
 
 	for(var/atom/A in loc.contents)
 		if(!istype(A, pickritual.center_requirement))
 			continue
 		else
 			center_success = TRUE
-			testing("CENTER SUCCESS!")
 			break
 
 	var/badritualpunishment = FALSE
@@ -363,7 +354,6 @@ GLOBAL_LIST_EMPTY(ritualslist)
 		user.electrocute_act(10, src)
 		return
 
-	testing("Now calling proc")
 	consume_ingredients(pickritual)
 	user.playsound_local(user, 'sound/vo/cult/tesa.ogg', 25)
 	user.whisper("O'vena tesa...")
@@ -492,7 +482,6 @@ GLOBAL_LIST_EMPTY(ritualslist)
 	is_cultist_ritual = TRUE
 
 /proc/convert_cultist(mob/user, turf/C)
-	testing("NOW TESTING CONVERT")
 
 	for(var/mob/living/carbon/human/H in C.contents)
 		if(H != user)
