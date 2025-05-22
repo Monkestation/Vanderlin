@@ -150,6 +150,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Ugly" = TRAIT_UGLY,
 		"Hollow Bones" = TRAIT_HOLLOWBONES,
 		"Light Load" = TRAIT_AMAZING_BACK,
+		"Forester" = TRAIT_FORESTGUARD
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS

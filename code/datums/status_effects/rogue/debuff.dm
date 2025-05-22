@@ -430,3 +430,14 @@
 	name = "Eoran Wine"
 	desc = span_warning("I am intoxicated from ambromsia not meant for mortal mouths.\n")
 	icon_state = "drunk"
+
+/datum/status_effect/debuff/forestguard
+	id = "forestguard"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/forestguard
+	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
+	duration = INFINITY
+
+/atom/movable/screen/alert/status_effect/debuff/forestguard
+	name = "Foreign Lands"
+	desc = span_warning("Goblins hide in the alleys! I must return to the forest!\n")
+	icon_state = "debuff"
