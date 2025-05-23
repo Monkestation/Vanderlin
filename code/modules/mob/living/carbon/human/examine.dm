@@ -82,7 +82,8 @@
 		if(race_name) // race name
 			appendage_to_name += " [race_name]"
 
-		if(used_title && !HAS_TRAIT(src, TRAIT_FOREIGNER)) // job name, don't show job of foreigners.
+		///If a foreign has been recruited by the church,keep etc their title will show up with their new role.
+		if(used_title && (!HAS_TRAIT(src, TRAIT_FOREIGNER) || HAS_TRAIT(src, TRAIT_RECRUITED)))  // job name, don't show job of foreigners.
 			appendage_to_name += ", [used_title]"
 
 		if(appendage_to_name) // if we got any of those paramaters add it to their name

@@ -59,6 +59,7 @@
 #define TRAIT_KITTEN_MOM				"Loved By Kittens"
 /// applied to orphans
 #define TRAIT_ORPHAN 					"Orphan"
+#define TRAIT_RECRUITED					"Recruit" //Trait used to give foreigners their new title
 
 // Divine patron trait bonuses:
 #define TRAIT_SOUL_EXAMINE				"Blessing of Necra"  //can check bodies to see if they have departed
@@ -208,6 +209,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DREAM_WATCHER = span_notice("I'm blessed by Noc, my dreams tell more than the average person.."),
 	TRAIT_AMAZING_BACK = span_notice("I'm able to carry far more on my back!"),
 	TRAIT_HOLLOWBONES = span_danger("My bones are light as air, Its hard to wear armor."),
+	TRAIT_RECRUITED = "I have been recruited!",
 	TRAIT_EARGRAB = span_info("I can keep a tight grip on the ear of unruly children."),
 	TRAIT_KITTEN_MOM = span_info("Kittens love you, they see you are a parent.")
 	))
