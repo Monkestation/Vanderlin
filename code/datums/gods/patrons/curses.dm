@@ -1,8 +1,4 @@
 //the way this file is organized is also cursed! Enjoy
-
-/mob/living/carbon/human
-	/// List of curses on this mob
-	var/list/curses = list()
 /datum/curse
 	var/name = "Debug Curse"
 	/// Whats shown to the player upon being cursed

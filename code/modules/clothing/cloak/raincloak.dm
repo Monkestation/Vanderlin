@@ -17,11 +17,6 @@
 	toggle_icon_state = FALSE
 	salvage_result = /obj/item/natural/hide/cured
 
-/obj/item/clothing/wash_act(clean)
-	. = ..()
-	if(hood)
-		wash_atom(hood,clean)
-
 /obj/item/clothing/cloak/raincloak/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/storage/concrete/grid/cloak)

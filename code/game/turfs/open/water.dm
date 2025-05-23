@@ -396,12 +396,12 @@
 			return
 		var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
 		playsound(user, pick_n_take(wash), 100, FALSE)
-		var/item2wash = user.get_active_held_item()
+		var/obj/item/item2wash = user.get_active_held_item()
 		if(!item2wash)
 			user.visible_message("<span class='info'>[user] starts to wash in [src].</span>")
 			if(do_after(L, 3 SECONDS, src))
 				if(wash_in)
-					wash_atom(user, CLEAN_STRONG)
+					user.wash(CLEAN_WASH)
 				var/datum/reagents/reagents = new()
 				reagents.add_reagent(water_reagent, 4)
 				reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = TOUCH)
@@ -412,7 +412,7 @@
 			user.visible_message("<span class='info'>[user] starts to wash [item2wash] in [src].</span>")
 			if(do_after(L, 3 SECONDS, src))
 				if(wash_in)
-					wash_atom(item2wash, CLEAN_STRONG)
+					item2wash.wash(CLEAN_WASH)
 				playsound(user, pick(wash), 100, FALSE)
 		return
 	..()

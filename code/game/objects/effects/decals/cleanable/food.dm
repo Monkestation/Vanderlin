@@ -3,7 +3,7 @@
 	icon = 'icons/effects/tomatodecal.dmi'
 	gender = NEUTER
 	beauty = -100
-	minimum_clean_strength = CLEAN_MEDIUM
+	clean_type = CLEAN_TYPE_HARD_DECAL
 
 /obj/effect/decal/cleanable/food/tomato_smudge
 	name = "tomato smudge"
@@ -32,12 +32,12 @@
 	name = "salt pile"
 	desc = ""
 	icon_state = "salt_pile"
-	minimum_clean_strength = CLEAN_WEAK
+	clean_type = CLEAN_TYPE_LIGHT_DECAL
 
 /obj/effect/decal/cleanable/food/flour
 	name = "flour"
 	desc = ""
 	icon_state = "flour"
 	mouse_opacity = 0
-	minimum_clean_strength = CLEAN_WEAK
+	clean_type = CLEAN_TYPE_LIGHT_DECAL
 

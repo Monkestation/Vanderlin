@@ -61,16 +61,10 @@
 /mob/proc/update_inv_shoes()
 	return
 
-/mob/proc/update_inv_glasses()
-	return
-
 /mob/proc/update_inv_s_store()
 	return
 
 /mob/proc/update_inv_pockets()
-	return
-
-/mob/proc/update_inv_ears()
 	return
 
 /mob/proc/update_inv_pants()

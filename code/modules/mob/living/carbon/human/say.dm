@@ -30,29 +30,6 @@
 /mob/living/carbon/human/proc/GetSpecialVoice()
 	return special_voice
 
-/mob/living/carbon/human/radio(message, message_mode, list/spans, language)
-	. = ..()
-	if(. != 0)
-		return .
-
-	switch(message_mode)
-		if(MODE_HEADSET)
-			if (ears)
-				ears.talk_into(src, message, , spans, language)
-			return ITALICS | REDUCE_RANGE
-
-		if(MODE_DEPARTMENT)
-			if (ears)
-				ears.talk_into(src, message, message_mode, spans, language)
-			return ITALICS | REDUCE_RANGE
-
-	if(message_mode in GLOB.radiochannels)
-		if(ears)
-			ears.talk_into(src, message, message_mode, spans, language)
-			return ITALICS | REDUCE_RANGE
-
-	return 0
-
 /mob/living/carbon/human/get_alt_name()
 	if(name != GetVoice())
 		return "Unknown [(gender == FEMALE) ? "Woman" : "Man"]"

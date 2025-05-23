@@ -42,7 +42,7 @@
 	var/obj/item/I
 	I = mob.get_active_held_item()
 	if(I)
-		if(I.return_blood_DNA())
+		if(GET_ATOM_BLOOD_DNA(I))
 			testing("yep")
 		else
 			testing("nope")
@@ -86,7 +86,7 @@
 	. = ..()
 	cleaner_component = AddComponent(/datum/component/cleaner, \
 									clean_speed, \
-									CLEAN_MEDIUM, \
+									CLEAN_SCRUB, \
 									100, \
 									TRUE, \
 									CALLBACK(src, PROC_REF(on_pre_clean)), \
@@ -113,7 +113,7 @@
 	effectiveness *= LERP(1, CLEAN_EFFECTIVENESS_SOAP, pSoap)
 
 	cleaner_component.cleaning_effectiveness = (effectiveness * 100) % 100
-	cleaner_component.cleaning_strength = CLAMP(CLEAN_WEAK + ceil(effectiveness), CLEAN_WEAK, CLEAN_IMPRESSIVE)
+	cleaner_component.cleaning_strength = CLEAN_WASH
 	playsound(cleaner, pick('sound/foley/cloth_wipe (1).ogg','sound/foley/cloth_wipe (2).ogg', 'sound/foley/cloth_wipe (3).ogg'), 25, FALSE)
 	return TRUE
 

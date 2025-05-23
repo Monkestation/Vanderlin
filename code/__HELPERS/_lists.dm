@@ -703,6 +703,16 @@ if (length(L) < I) { \
 
 	return TRUE
 
+#define LAZY_LISTS_OR(left_list, right_list)\
+	( length(left_list)\
+		? length(right_list)\
+			? (left_list | right_list)\
+			: left_list.Copy()\
+		: length(right_list)\
+			? right_list.Copy()\
+			: null\
+	)
+
 //Scales a range (i.e 1,100) and picks an item from the list based on your passed value
 //i.e in a list with length 4, a 25 in the 1-100 range will give you the 2nd item
 //This assumes your ranges start with 1, I am not good at math and can't do linear scaling

@@ -227,7 +227,7 @@
 			return ..()
 
 		target.visible_message(span_info("A wave of replenishing water passes through [target]!"), span_notice("I'm engulfed in a wave of replenishing water!"))
-		wash_atom(target, CLEAN_STRONG)
+		target.wash(CLEAN_WASH)
 		var/situational_bonus = 1
 		var/list/water = typesof(/turf/open/water) - typesof(/turf/open/water/acid)
 		// the more water around us, the more we heal, up to times two

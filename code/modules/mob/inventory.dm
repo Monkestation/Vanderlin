@@ -359,8 +359,6 @@
 		items += backr
 	if(backl)
 		items += backl
-	if(ears)
-		items += ears
 	if(gloves)
 		items += gloves
 	if(shoes)

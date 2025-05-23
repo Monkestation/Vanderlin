@@ -23,7 +23,7 @@
 	var/protection = 0
 	var/obj/item/clothing/used
 	//Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
-	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, s_store, ears, wear_ring)
+	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, s_store, wear_ring)
 	for(var/bp in body_parts)
 		if(!bp)
 			continue
@@ -73,7 +73,7 @@
 	if(isbodypart(def_zone))
 		var/obj/item/bodypart/CBP = def_zone
 		def_zone = CBP.body_zone
-	var/list/body_parts = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, s_store, ears, wear_ring) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
+	var/list/body_parts = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, s_store, wear_ring) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
 	for(var/bp in body_parts)
 		if(!bp)
 			continue
@@ -347,8 +347,6 @@
 				brute_loss = ((100 * (2 - round(bomb_armor*0.01, 0.05)) * ddist) - ((100 * (2 - round(bomb_armor*0.01, 0.05))) * fodist) * dmgmod)
 				burn_loss = brute_loss
 			damage_clothes(max(brute_loss - bomb_armor, 0), BRUTE, "blunt")
-//				if (!istype(ears, /obj/item/clothing/ears/earmuffs))
-//					adjustEarDamage(30, 120)
 			Unconscious((50 * ddist) - (15 * fodist))
 			Knockdown(((30 * ddist) - (30 * fodist)) - (bomb_armor * 1.6))
 
@@ -359,8 +357,6 @@
 				brute_loss = ((30 * (2 - round(bomb_armor*0.01, 0.05)) * hdist) - ((30 * (2 - round(bomb_armor*0.01, 0.05))) * fodist) * dmgmod)
 				burn_loss = brute_loss
 			damage_clothes(max(brute_loss - bomb_armor, 0), BRUTE, "blunt")
-//				if (!istype(ears, /obj/item/clothing/ears/earmuffs))
-//					adjustEarDamage(30, 120)
 			Unconscious((10 * hdist) - (5 * fodist))
 			Knockdown(((30 * hdist) - (30 * fodist)) - (bomb_armor * 1.6))
 
@@ -369,9 +365,6 @@
 			if(bomb_armor)
 				brute_loss = (10 * (2 - round(bomb_armor*0.01, 0.05)) * ldist) - ((10 * (2 - round(bomb_armor*0.01, 0.05))) * fodist)
 				damage_clothes(max(brute_loss - bomb_armor, 0), BRUTE, "blunt")
-//				if (!istype(ears, /obj/item/clothing/ears/earmuffs))
-//					adjustEarDamage(15,60)
-
 	take_overall_damage(brute_loss,burn_loss)
 
 	//attempt to dismember bodyparts
@@ -425,7 +418,6 @@
 		if(head_clothes)
 			if(!(head_clothes.resistance_flags & UNACIDABLE))
 				head_clothes.acid_act(acidpwr, acid_volume)
-				update_inv_glasses()
 				update_inv_wear_mask()
 				update_inv_neck()
 				update_inv_head()
@@ -435,8 +427,6 @@
 			. = get_bodypart(BODY_ZONE_HEAD)
 			if(.)
 				damaged += .
-			if(ears)
-				inventory_items_to_kill += ears
 
 	//CHEST//
 	if(!bodyzone_hit || bodyzone_hit == BODY_ZONE_CHEST)
@@ -675,8 +665,6 @@
 			head_clothes = head
 		if(head_clothes)
 			torn_items += head_clothes
-		else if(ears)
-			torn_items += ears
 
 	//CHEST//
 	if(!def_zone || def_zone == BODY_ZONE_CHEST)

@@ -9,6 +9,7 @@
 
 	armor = ARMOR_MINIMAL
 	max_integrity = INTEGRITY_POOR
+	clothing_traits = list(TRAIT_FINGERPRINT_PASSTHROUGH)
 
 /obj/item/clothing/gloves/fingerless/shadowgloves
 	name = "silk gloves"

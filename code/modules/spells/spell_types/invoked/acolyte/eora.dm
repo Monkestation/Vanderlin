@@ -18,7 +18,7 @@
 		return FALSE
 	var/mob/living/selected = targets[1]
 	selected.apply_status_effect(/datum/status_effect/buff/divine_beauty)
-	wash_atom(selected, CLEAN_WEAK)
+	selected.wash(CLEAN_WASH)
 	selected.AddComponent(/datum/component/temporary_pollution_emission, pick(subtypesof(/datum/pollutant/fragrance)), 1, 2 MINUTES)
 	return ..()
 

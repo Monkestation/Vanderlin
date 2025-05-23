@@ -82,7 +82,7 @@
 /turf/open/proc/water_vapor_gas_act()
 	MakeSlippery(TURF_WET_WATER, min_wet_time = 100, wet_time_to_add = 50)
 
-	SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
+	SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WASH)
 	return TRUE
 
 /turf/open/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube, paralyze_amount, force_drop)

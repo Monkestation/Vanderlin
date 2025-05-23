@@ -1319,7 +1319,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		target_zone = BODY_ZONE_CHEST
 	*/
 	playsound(impactee.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-	add_blood_DNA(impactee.return_blood_DNA())
+	add_blood_DNA(GET_ATOM_BLOOD_DNA(impactee))
 	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("A [src] hits you in your [target_zone]!"))
 	impactee.apply_damage(item_weight * fall_speed, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt", damage = item_weight * fall_speed))
 
@@ -1356,3 +1356,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		held_weight += stored_item.item_weight * carry_multiplier
 
 	return has_trait ? held_weight * 0.5 : held_weight
+
+// Update icons if this is being carried by a mob
+/obj/item/wash(clean_types)
+	. = ..()
+	if(ismob(loc))
+		update_slot_icon()

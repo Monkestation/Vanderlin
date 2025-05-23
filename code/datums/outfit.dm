@@ -270,8 +270,6 @@
 		H.shoes.add_fingerprint(H,1)
 	if(H.gloves)
 		H.gloves.add_fingerprint(H,1)
-	if(H.ears)
-		H.ears.add_fingerprint(H,1)
 	if(H.belt)
 		H.belt.add_fingerprint(H,1)
 		for(var/obj/item/I in H.belt.contents)

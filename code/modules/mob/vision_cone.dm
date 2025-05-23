@@ -7,9 +7,6 @@
 /mob
 	var/fovangle
 
-/mob/living/carbon/human
-	fovangle = FOV_DEFAULT
-
 //Procs
 /atom/proc/InCone(atom/center = usr, dir = NORTH)
 	if(get_dist(center, src) == 0 || src == center) return 0

@@ -35,10 +35,6 @@
 		TRAIT_DEATHSIGHT,
 	)
 
-/mob/living/carbon/human
-	/// List of minions that this mob has control over. Used for things like the Lich's "Command Undead" spell.
-	var/list/mob/minions = list()
-
 /datum/antagonist/lich/on_gain()
 	SSmapping.retainer.liches |= owner
 	. = ..()

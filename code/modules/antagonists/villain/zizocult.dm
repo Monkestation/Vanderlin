@@ -214,7 +214,7 @@ GLOBAL_LIST_EMPTY(ritualslist)
 	desc = "Strange runics."
 	icon_state = "center"
 	icon = 'icons/obj/sigils.dmi'
-	minimum_clean_strength = CLEAN_STRONG
+	clean_type = CLEAN_TYPE_HARD_DECAL
 	var/sigil_type
 
 /obj/effect/decal/cleanable/sigil/examine(mob/user)
@@ -707,7 +707,7 @@ GLOBAL_LIST_EMPTY(ritualslist)
 	desc = "It is pulsating."
 	clean_speed = 1
 	clean_effectiveness = 100
-	clean_strength = CLEAN_STRONG
+	clean_strength = CLEAN_ALL
 
 /proc/criminalstool(mob/user, turf/C)
 	new /obj/item/soap/cult(C)

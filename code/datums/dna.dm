@@ -2,7 +2,8 @@
 /////////////////////////// DNA DATUM
 /datum/dna
 	var/unique_enzymes
-	var/uni_identity
+	///Stores the hashed values of traits such as skin tones, hair style, and gender
+	var/unique_identity
 	var/datum/blood_type/human/human_blood_type
 	var/datum/species/species = new /datum/species/human //The type of mutant race the player is if applicable (i.e. potato-man)
 	var/list/features = MANDATORY_FEATURE_LIST
@@ -33,7 +34,7 @@
 	if(!istype(destination))
 		return
 	destination.dna.unique_enzymes = unique_enzymes
-	destination.dna.uni_identity = uni_identity
+	destination.dna.unique_identity = unique_identity
 	destination.dna.human_blood_type = human_blood_type
 	destination.dna.organ_dna = organ_dna
 	destination.set_species(species.type, icon_update=0)
@@ -43,14 +44,14 @@
 
 /datum/dna/proc/copy_dna(datum/dna/new_dna)
 	new_dna.unique_enzymes = unique_enzymes
-	new_dna.uni_identity = uni_identity
+	new_dna.unique_identity = unique_identity
 	new_dna.human_blood_type = human_blood_type
 	new_dna.body_markings = deepCopyList(body_markings)
 	new_dna.features = features.Copy()
 	new_dna.species = new species.type
 	new_dna.real_name = real_name
 
-/datum/dna/proc/generate_uni_identity()
+/datum/dna/proc/generate_unique_identity()
 	. = ""
 	var/list/L = new /list(DNA_UNI_IDENTITY_BLOCKS)
 
@@ -89,34 +90,34 @@
 	var/mob/living/carbon/human/H = holder
 	switch(blocknumber)
 		if(DNA_SKIN_TONE_BLOCK)
-			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.skin_tone))
+			setblock(unique_identity, blocknumber, sanitize_hexcolor(H.skin_tone))
 		if(DNA_EYE_COLOR_BLOCK)
-			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.get_eye_color()))
+			setblock(unique_identity, blocknumber, sanitize_hexcolor(H.get_eye_color()))
 		if(DNA_GENDER_BLOCK)
 			switch(H.gender)
 				if(MALE)
-					setblock(uni_identity, blocknumber, construct_block(G_MALE, 3))
+					setblock(unique_identity, blocknumber, construct_block(G_MALE, 3))
 				if(FEMALE)
-					setblock(uni_identity, blocknumber, construct_block(G_FEMALE, 3))
+					setblock(unique_identity, blocknumber, construct_block(G_FEMALE, 3))
 				else
-					setblock(uni_identity, blocknumber, construct_block(G_PLURAL, 3))
+					setblock(unique_identity, blocknumber, construct_block(G_PLURAL, 3))
 
 /datum/dna/proc/is_same_as(datum/dna/D)
-	if(uni_identity == D.uni_identity && real_name == D.real_name)
+	if(unique_identity == D.unique_identity && real_name == D.real_name)
 		if(species.type == D.species.type && features == D.features && human_blood_type == D.human_blood_type)
 			return 1
 	return 0
 
 //used to update dna UI, UE, and dna.real_name.
 /datum/dna/proc/update_dna_identity()
-	uni_identity = generate_uni_identity()
+	unique_identity = generate_unique_identity()
 	unique_enzymes = generate_unique_enzymes()
 
 /datum/dna/proc/initialize_dna(newblood_type = random_human_blood_type(), skip_index = FALSE)
 	if(newblood_type)
 		human_blood_type = newblood_type
 	unique_enzymes = generate_unique_enzymes()
-	uni_identity = generate_uni_identity()
+	unique_identity = generate_unique_identity()
 	features = random_features()
 
 
@@ -187,7 +188,7 @@
 		dna.human_blood_type = newblood_type
 
 	if(ui)
-		dna.uni_identity = ui
+		dna.unique_identity = ui
 		updateappearance(icon_update=0)
 
 	if(mrace || newfeatures || ui)
@@ -205,7 +206,7 @@
 	if(!has_dna())
 		return
 
-	switch(deconstruct_block(getblock(dna.uni_identity, DNA_GENDER_BLOCK), 3))
+	switch(deconstruct_block(getblock(dna.unique_identity, DNA_GENDER_BLOCK), 3))
 		if(G_MALE)
 			gender = MALE
 		if(G_FEMALE)
@@ -250,8 +251,8 @@
 	if(!has_dna())
 		return
 	var/num = rand(1, DNA_UNI_IDENTITY_BLOCKS)
-	var/newdna = setblock(dna.uni_identity, num, random_string(DNA_BLOCK_SIZE, GLOB.hex_characters))
-	dna.uni_identity = newdna
+	var/newdna = setblock(dna.unique_identity, num, random_string(DNA_BLOCK_SIZE, GLOB.hex_characters))
+	dna.unique_identity = newdna
 	updateappearance(mutations_overlay_update=1)
 
 //value in range 1 to values. values must be greater than 0

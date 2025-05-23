@@ -32,7 +32,6 @@
 
 	var/obj/item/clothing/gloves = null //only used by humans
 	var/obj/item/clothing/shoes = null //only used by humans.
-	var/obj/item/clothing/ears = null //only used by humans.
 
 
 	var/datum/dna/dna = null//Carbon

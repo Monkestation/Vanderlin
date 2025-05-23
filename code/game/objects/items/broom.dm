@@ -36,7 +36,7 @@
 			playsound(user, "clothwipe", 100, TRUE)
 			qdel(O)
 		if(istype(O, /obj/effect/decal/cleanable/blood))
-			add_blood_DNA(O.return_blood_DNA())
+			add_blood_DNA(GET_ATOM_BLOOD_DNA(O))
 			return
 
 /obj/item/broom/attack_turf(turf/T, mob/living/user)
@@ -48,5 +48,5 @@
 			playsound(user, "clothwipe", 100, TRUE)
 			qdel(C)
 		for(var/obj/effect/decal/cleanable/blood/O in T)
-			add_blood_DNA(O.return_blood_DNA())
+			add_blood_DNA(GET_ATOM_BLOOD_DNA(O))
 			return

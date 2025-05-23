@@ -154,10 +154,6 @@
 		return
 	qdel(src)
 
-/mob/living/carbon/human
-	var/mob/living/carbon/human/hostagetaker //Stores the person that took us hostage in a var, allows us to force them to attack the mob and such
-	var/mob/living/carbon/human/hostage //What hostage we have
-
 /mob/living/carbon/human/proc/attackhostage()
 	if(!istype(hostagetaker.get_active_held_item(), /obj/item/weapon))
 		return

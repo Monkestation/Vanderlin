@@ -7,7 +7,8 @@
 	var/mergeable_decal = TRUE //when two of these are on a same tile or do we need to merge them into just one?
 	var/beauty = 0
 	obj_flags = CAN_BE_HIT
-	var/minimum_clean_strength = CLEAN_WEAK
+	///The type of cleaning required to clean the decal. See __DEFINES/cleaning.dm for the options
+	var/clean_type = CLEAN_TYPE_LIGHT_DECAL
 
 /obj/effect/decal/cleanable/Initialize(mapload)
 	. = ..()
@@ -97,7 +98,7 @@
 				add_blood = bloodiness
 			bloodiness -= add_blood
 			S.bloody_shoes[blood_state] = min(MAX_SHOE_BLOODINESS,S.bloody_shoes[blood_state]+add_blood)
-			S.add_blood_DNA(return_blood_DNA())
+			S.add_blood_DNA(GET_ATOM_BLOOD_DNA(src))
 			S.blood_state = blood_state
 			update_icon()
 			H.update_inv_shoes()
@@ -108,7 +109,9 @@
 	else
 		return 0
 
-/obj/effect/decal/cleanable/wash_act(clean)
+/obj/effect/decal/cleanable/wash(clean_types)
 	. = ..()
-	if(clean >= minimum_clean_strength)
+	if (. || (clean_types & clean_type))
 		qdel(src)
+		return TRUE
+	return .

@@ -809,7 +809,7 @@
 /obj/item/weapon/sword/long/exe/cloth/rmb_self(mob/user)
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(user, "clothwipe", 100, TRUE)
-	SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_STRONG)
+	SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_SCRUB)
 	user.visible_message("<span class='warning'>[user] wipes [src] down with its cloth.</span>","<span class='notice'>I wipe [src] down with its cloth.</span>")
 	return
 

@@ -65,7 +65,7 @@
 	. = list()
 //	if(!isinhands)
 //		var/bloody = FALSE
-//		if(HAS_BLOOD_DNA(src))
+//		if(GET_ATOM_BLOOD_DNA_LENGTH(src))
 //			bloody = TRUE
 //		else
 //			bloody = bloody_shoes[BLOOD_STATE_HUMAN]
@@ -100,7 +100,7 @@
 		M.update_inv_shoes()
 
 /obj/item/clothing/shoes/proc/clean_blood(datum/source, strength)
-	if(strength < CLEAN_STRENGTH_BLOOD)
+	if(strength < CLEAN_TYPE_BLOOD)
 		return
 	bloody_shoes = list(BLOOD_STATE_MUD = 0,BLOOD_STATE_HUMAN = 0,BLOOD_STATE_XENO = 0, BLOOD_STATE_OIL = 0, BLOOD_STATE_NOT_BLOODY = 0)
 	blood_state = BLOOD_STATE_NOT_BLOODY

@@ -11,7 +11,7 @@
 	nomouseover = TRUE
 	appearance_flags = NO_CLIENT_COLOR
 	nomouseover = TRUE
-	minimum_clean_strength = CLEAN_STRENGTH_BLOOD
+	clean_type = CLEAN_TYPE_BLOOD
 
 	var/blood_timer
 	var/wash_precent = 0
@@ -19,16 +19,14 @@
 	COOLDOWN_DECLARE(wash_cooldown)
 
 
-/obj/effect/decal/cleanable/blood/add_blood_DNA(list/blood_DNA_to_add)
-	var/datum/component/forensics/D = GetComponent(/datum/component/forensics)
-	var/first_dna = isnull(D) ? 0 : length(D.blood_DNA)
+/obj/effect/decal/cleanable/blood/add_blood_DNA(list/blood_DNA_to_add, no_visuals = FALSE)
 	if(!..())
 		return FALSE
 
 	// Imperfect, ends up with some blood types being double-set-up, but harmless (for now)
 	for(var/new_blood in blood_DNA_to_add)
 		var/datum/blood_type/blood = GLOB.blood_types[blood_DNA_to_add[new_blood]]
-		blood?.set_up_blood(src, first_dna == 0)
+		blood?.set_up_blood(src)
 		var/datum/reagent/blood_reagent = blood?.reagent_type
 		if(initial(blood_reagent?.glows))
 			glows = TRUE
@@ -89,9 +87,8 @@
 /obj/effect/decal/cleanable/blood/lazy_init_reagents()
 	if(!reagents)
 		return
-	var/datum/component/forensics/D = GetComponent(/datum/component/forensics)
-	var/list/all_dna = D?.blood_DNA
 	var/list/reagents_to_add
+	var/list/all_dna = GET_ATOM_BLOOD_DNA(src)
 	for(var/dna_sample as anything in all_dna)
 		var/datum/blood_type/blood = GLOB.blood_types[all_dna[dna_sample]]
 		if(blood)
@@ -106,6 +103,7 @@
 /obj/effect/decal/cleanable/blood/replace_decal(obj/effect/decal/cleanable/C)
 	. = ..()
 	if(C)
+		C.add_blood_DNA(GET_ATOM_BLOOD_DNA(src))
 		C.alpha = initial(alpha)
 		C.bloodiness = initial(bloodiness)
 		C.name = initial(name)

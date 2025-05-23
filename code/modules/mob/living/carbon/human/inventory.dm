@@ -52,6 +52,78 @@
 			return s_store
 	return null
 
+/mob/living/carbon/human/get_slot_by_item(obj/item/looking_for)
+	if(looking_for == back)
+		return SLOT_BACK
+
+	if(looking_for == wear_mask)
+		return SLOT_WEAR_MASK
+
+	if(looking_for == wear_neck)
+		return SLOT_NECK
+
+	if(looking_for == handcuffed)
+		return SLOT_HANDCUFFED
+
+	if(looking_for == legcuffed)
+		return SLOT_LEGCUFFED
+
+	if(looking_for == belt)
+		return SLOT_BELT
+
+	if(looking_for == wear_ring)
+		return SLOT_RING
+
+	if(looking_for == wear_wrists)
+		return SLOT_WRISTS
+
+	if(looking_for == mouth)
+		return SLOT_MOUTH
+
+	if(looking_for == wear_shirt)
+		return SLOT_SHIRT
+
+	if(looking_for == cloak)
+		return SLOT_CLOAK
+
+	if(looking_for == backr)
+		return SLOT_BACK_R
+
+	if(looking_for == backl)
+		return SLOT_BACK_L
+
+	if(looking_for == beltl)
+		return SLOT_BELT_L
+
+	if(looking_for == beltr)
+		return SLOT_BELT_R
+
+	if(looking_for == gloves)
+		return SLOT_GLOVES
+
+	if(looking_for == head)
+		return SLOT_HEAD
+
+	if(looking_for == shoes)
+		return SLOT_SHOES
+
+	if(looking_for == wear_armor)
+		return SLOT_ARMOR
+
+	if(looking_for == wear_pants)
+		return SLOT_PANTS
+
+	if(looking_for == l_store)
+		return SLOT_L_STORE
+
+	if(looking_for == r_store)
+		return SLOT_R_STORE
+
+	if(looking_for == s_store)
+		return SLOT_S_STORE
+
+	return ..()
+
 /mob/living/carbon/human/proc/get_all_slots()
 	. = get_head_slots() | get_body_slots()
 
@@ -84,7 +156,6 @@
 		head,
 		wear_mask,
 		wear_neck,
-		ears,
 		mouth,
 		)
 
@@ -123,8 +194,8 @@
 			update_inv_wrists()
 		if(SLOT_HEAD)
 
-			ears = I
-			update_inv_ears()
+			head = I
+			update_inv_head()
 		if(SLOT_GLOVES)
 
 			gloves = I
@@ -251,10 +322,6 @@
 		gloves = null
 		if(!QDELETED(src))
 			update_inv_gloves()
-	else if(I == ears)
-		ears = null
-		if(!QDELETED(src))
-			update_inv_ears()
 	else if(I == shoes)
 		shoes = null
 		if(!QDELETED(src))
@@ -326,7 +393,7 @@
 	if((I.flags_inv & (HIDEHAIR|HIDEFACIALHAIR)) || (initial(I.flags_inv) & (HIDEHAIR|HIDEFACIALHAIR)))
 		update_body()
 	if(I.flags_inv & HIDEEYES)
-		update_inv_glasses()
+		update_inv_wear_mask()
 	check_armor_class()
 	..()
 
@@ -338,7 +405,7 @@
 		if(istype(C) && C.dynamic_hair_suffix)
 			update_body()
 	if(I.flags_inv & HIDEEYES || forced)
-		update_inv_glasses()
+		update_inv_wear_mask()
 	if(I.flags_inv & HIDEEARS || forced)
 		update_body()
 	check_armor_class()

@@ -1,8 +1,3 @@
-
-/mob/living/carbon/human
-	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
-	var/datum/charflaw/charflaw
-
 /mob/proc/sate_addiction()
 	return
 

@@ -11,7 +11,7 @@
 	throw_range = 7
 	var/clean_speed = 0.75 SECONDS
 	var/clean_effectiveness = 50
-	var/clean_strength = CLEAN_MEDIUM
+	var/clean_strength = CLEAN_SCRUB
 	force_string = "robust... against filth"
 	var/uses = 100
 	var/slip_chance = 15
@@ -166,7 +166,7 @@
 		to_chat(user, span_info("I dissolve some of \the [name] in the water."))
 
 /obj/item/soap/proc/scrub_scrub(mob/living/carbon/human/target, mob/living/carbon/user)
-	wash_atom(target, CLEAN_STRONG)
+	target.wash(clean_strength)
 	user.visible_message(span_info("[user] scrubs [target] with [src]."), span_info("I scrub [target] with [src]."))
 	decreaseUses(5)
 

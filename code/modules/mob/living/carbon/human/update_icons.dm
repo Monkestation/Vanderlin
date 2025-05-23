@@ -505,14 +505,6 @@ There are several things that need to be remembered:
 	apply_overlay(WRISTS_LAYER)
 	apply_overlay(WRISTSLEEVE_LAYER)
 
-/mob/living/carbon/human/update_inv_glasses()
-	return
-
-
-/mob/living/carbon/human/update_inv_ears()
-	return
-
-
 /mob/living/carbon/human/update_inv_shoes()
 	remove_overlay(SHOES_LAYER)
 	remove_overlay(SHOESLEEVE_LAYER)
@@ -1547,7 +1539,7 @@ generate/load female uniform sprites matching all previously decided variables
 				pic.color = get_detail_color()
 			standing.overlays.Add(pic)
 
-	if(!isinhands && HAS_BLOOD_DNA(src))
+	if(!isinhands && GET_ATOM_BLOOD_DNA_LENGTH(src))
 		var/index = "[t_state][sleeveindex]"
 		var/static/list/bloody_onmob = list()
 		var/icon/clothing_icon = bloody_onmob["[index][(coom == "f") ? "_boob" : ""]"]
@@ -1631,7 +1623,7 @@ generate/load female uniform sprites matching all previously decided variables
 				pic.color = I.get_detail_color()
 			sleeves += pic
 
-		if(HAS_BLOOD_DNA(I))
+		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_r[used]
 			if(!blood_overlay)
 				blood_overlay = icon(I.sleeved, used)
@@ -1658,7 +1650,7 @@ generate/load female uniform sprites matching all previously decided variables
 				pic.color = I.get_detail_color()
 			sleeves += pic
 
-		if(HAS_BLOOD_DNA(I))
+		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_l[used]
 			if(!blood_overlay)
 				blood_overlay = icon(I.sleeved, used)

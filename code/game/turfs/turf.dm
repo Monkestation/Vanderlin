@@ -610,3 +610,12 @@
 //Should return new turf
 /turf/proc/Melt()
 	return ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
+
+// When our turf is washed, we may wash everything on top of the turf
+// By default we will only wash mopable things (like blood or vomit)
+// but you may optionally pass in all_contents = TRUE to wash everything
+/turf/wash(clean_types, all_contents = FALSE)
+	. = ..()
+	for(var/atom/movable/to_clean as anything in src)
+		if(all_contents)
+			to_clean.wash(clean_types)
