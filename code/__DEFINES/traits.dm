@@ -433,6 +433,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define CRIT_HEALTH_TRAIT "crit_health"
 #define OXYLOSS_TRAIT "oxyloss"
 #define BLOODLOSS_TRAIT "bloodloss"
+#define TRAIT_PROFANE "profane"
 /// Trait associated to being buckled
 #define BUCKLED_TRAIT "buckled"
 /// Trait associated to being held in a chokehold

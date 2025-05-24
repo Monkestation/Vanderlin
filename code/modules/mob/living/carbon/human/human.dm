@@ -712,6 +712,49 @@
 		return FALSE
 	return ..()
 
+/// copies the physical cosmetic features of another human mob.
+/mob/living/carbon/human/proc/copy_physical_features(mob/living/carbon/human/target)
+	if(!istype(target))
+		return
+
+	job = target.job // NOT assigned_role
+	migrant_type = target.migrant_type
+	faction = target.faction
+	deathsound = target.deathsound
+	dna = target.dna
+	gender = target.gender
+	real_name = target.real_name
+	voice_color = target.voice_color
+	voice_pitch = target.voice_pitch
+	detail_color = target.detail_color
+	skin_tone = target.skin_tone
+	lip_style = target.lip_style
+	lip_color = target.lip_color
+	age = target.age
+	underwear = target.underwear
+	underwear_color = target.underwear_color
+	undershirt = target.undershirt
+	shavelevel = target.shavelevel
+	socks = target.socks
+	advjob = target.advjob
+	spouse_mob = target.spouse_mob
+	spouse_indicator = target.spouse_indicator
+	has_stubble = target.has_stubble
+	headshot_link = target.headshot_link
+	flavortext = target.flavortext
+
+	var/obj/item/bodypart/head/target_head = target.get_bodypart(BODY_ZONE_HEAD)
+	if(!isnull(target_head))
+		var/obj/item/bodypart/head/user_head = get_bodypart(BODY_ZONE_HEAD)
+		user_head.bodypart_features = target_head.bodypart_features
+
+	if(HAS_TRAIT(target, TRAIT_FOREIGNER))
+		ADD_TRAIT(src, TRAIT_FOREIGNER, TRAIT_GENERIC)
+	else
+		REMOVE_TRAIT(src, TRAIT_FOREIGNER, TRAIT_GENERIC)
+
+	regenerate_icons()
+
 /mob/living/carbon/human/species
 	var/race = null
 
