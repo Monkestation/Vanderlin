@@ -44,7 +44,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	owner = null
 	return ..()
 
-/datum/antagonist/proc/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
+/datum/antagonist/proc/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	return
 
 /datum/antagonist/proc/can_be_owned(datum/mind/new_owner)

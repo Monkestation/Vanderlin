@@ -19,7 +19,7 @@
 	increase_votepwr = FALSE
 	var/datum/team/prebels/rev_team
 
-/datum/antagonist/prebel/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
+/datum/antagonist/prebel/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/prebel/head))
 		return "<span class='boldnotice'>A revolution leader.</span>"
 	if(istype(examined_datum, /datum/antagonist/prebel))

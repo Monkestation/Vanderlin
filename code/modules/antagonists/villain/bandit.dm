@@ -17,7 +17,7 @@
 		TRAIT_VILLAIN,
 	)
 
-/datum/antagonist/bandit/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
+/datum/antagonist/bandit/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/bandit))
 		return "<span class='boldnotice'>Another free man. My ally.</span>"
 

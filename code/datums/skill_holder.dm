@@ -57,18 +57,44 @@
 /mob/proc/adjust_experience(skill, amt, silent=FALSE, check_apprentice=TRUE)
 	return ensure_skills().adjust_experience(skill, amt, silent, check_apprentice)
 
+/**
+ * adjusts the skill level
+ * Vars:
+ ** skill - associated skill to change
+ ** amt - how much to change the skill
+ ** silent - wether the player will be notified about their skill change or not
+*/
 /mob/proc/adjust_skillrank(skill, amt, silent=FALSE)
 	return ensure_skills().adjust_skillrank(skill, amt, silent)
 
 /mob/proc/return_our_apprentice_name()
 	return ensure_skills().our_apprentice_name
 
+/**
+ * increases the skill level up to a certain maximum
+ * Vars:
+ ** skill - associated skill to change
+ ** amt - how much to change the skill
+ ** max - maximum amount up to which the skill will be changed
+*/
 /mob/proc/clamped_adjust_skillrank(skill, amt, max, silent=FALSE)
 	return ensure_skills().clamped_adjust_skillrank(skill, amt, max, silent)
 
+/**
+ * sets the skill level to a specific amount
+ * Vars:
+ ** skill - associated skill
+ ** level - which level to set the skill to
+ ** silent - do we notify the player of this change?
+*/
 /mob/proc/set_skillrank(skill, level, silent=TRUE)
 	return ensure_skills().set_skillrank(skill, level, silent)
 
+/**
+ * purges all skill levels back down to 0
+ * Vars:
+ ** silent - do we notify the player of this change?
+*/
 /mob/proc/purge_all_skills(silent=TRUE)
 	return ensure_skills().purge_all_skills(silent)
 

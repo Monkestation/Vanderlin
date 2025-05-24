@@ -25,7 +25,7 @@
 
 	earliest_start = 0 SECONDS
 
-	weight = 0 // Disabled until aspirant is reworked
+	weight = 8
 
 	typepath = /datum/round_event/antagonist/solo/aspirants
 
@@ -38,7 +38,7 @@
 
 	var/list/helping = list("Consort" ,"Hand" ,"Prince" ,"Captain" ,"Steward" ,"Court Magician ","Archivist", "Royal Knight", "Town Elder","Veteran")
 	var/list/possible_helpers = list()
-	for(var/mob/living/living in GLOB.mob_living_list)
+	for(var/mob/living/living in GLOB.human_list) // living checking in human list :)
 		if(!living.client)
 			continue
 		if(is_banned_from(living.client.ckey, ROLE_ASPIRANT))
@@ -49,10 +49,7 @@
 			continue
 		possible_helpers |= living
 
-	var/mob/living/helper = pick_n_take(possible_helpers)
-	helper?.mind?.special_role = "Supporter"
-	helper?.mind?.add_antag_datum(/datum/antagonist/aspirant/supporter)
-
-	helper = pick_n_take(possible_helpers)
-	helper?.mind?.special_role = "Loyalist"
-	helper?.mind?.add_antag_datum(/datum/antagonist/aspirant/loyalist)
+	for(var/i in rand(1, 3)) // random amount of helpers ranging from 1 to 3
+		var/mob/living/helper = pick_n_take(possible_helpers)
+		helper?.mind?.special_role = "Supporter"
+		helper?.mind?.add_antag_datum(/datum/antagonist/aspirant/supporter)

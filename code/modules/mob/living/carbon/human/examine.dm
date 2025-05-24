@@ -186,13 +186,14 @@
 		. += span_necrosis("A LEPER...")
 
 	if(user != src)
-		var/datum/mind/Umind = user.mind
-		if(Umind && mind)
-			for(var/datum/antagonist/aD in mind.antag_datums)
-				for(var/datum/antagonist/bD in Umind.antag_datums)
-					var/shit = bD.examine_friendorfoe(aD,user,src)
-					if(shit)
-						. += shit
+		var/datum/mind/user_mind = user.mind
+		if(user_mind && mind)
+			for(var/datum/antagonist/examined_antag_datum in mind.antag_datums)
+				for(var/datum/antagonist/user_antag_datums in user_mind.antag_datums)
+					var/examine_friend_or_foe_append = user_antag_datums.examine_friendorfoe(examined_antag_datum, user, src)
+					if(examine_friend_or_foe_append)
+						. += examine_friend_or_foe_append
+
 		if(user.mind?.has_antag_datum(/datum/antagonist/vampire))
 			. += span_userdanger("Blood Volume: [blood_volume]")
 		if(HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
@@ -530,15 +531,15 @@
 		var/strength_diff = final_str - L.STASTR
 		switch(strength_diff)
 			if(5 to INFINITY)
-				. += "<span class='warning'><B>[t_He] look[p_s()] much stronger than I.</B></span>"
+				. += span_warning("<B>[t_He] look[p_s()] much stronger than I.</B>")
 			if(1 to 5)
-				. += "<span class='warning'>[t_He] look[p_s()] stronger than I.</span>"
+				. += span_warning("[t_He] look[p_s()] stronger than I.")
 			if(0)
-				. += "[t_He] look[p_s()] about as strong as I."
+				. += span_warning("[t_He] look[p_s()] about as strong as I.")
 			if(-5 to -1)
-				. += "<span class='warning'>[t_He] look[p_s()] weaker than I.</span>"
+				. += span_warning("[t_He] look[p_s()] weaker than I.")
 			if(-INFINITY to -5)
-				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker than I.</B></span>"
+				. += span_warning("<B>[t_He] look[p_s()] much weaker than I.</B>")
 
 		var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
 		if(maniac)
