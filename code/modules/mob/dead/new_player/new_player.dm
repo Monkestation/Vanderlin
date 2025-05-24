@@ -187,6 +187,45 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.json")
 		popup.set_content(dat.Join())
 		popup.open()
 
+/mob/dead/new_player/verb/choosen_hand()
+	set name = "Choose Brother"
+	set category = "OOC"
+	set desc = "Choose your second in command."
+
+	if(SSticker.HasRoundStarted())
+		to_chat(src, span_danger("The round has already begun!"))
+		return
+
+	if(client.prefs.chosen_hand)
+		to_chat(src, span_danger("You already chose [client.prefs.chosen_hand] as your hand!"))
+		return
+
+	var/list/list_without_user =  GLOB.directory.Copy()
+	list_without_user -= client.ckey
+
+	if(!length(list_without_user))
+		to_chat(src, span_danger("There is no one."))
+		return
+
+	var/client/chosen = GLOB.directory[browser_input_list(src, "Who will stand by your side when no one else will?", "MY RIGHT HAND", list_without_user)]
+
+	if(!chosen)
+		return
+
+	if(!(chosen in GLOB.clients))
+		to_chat(src, span_danger("They are no longer here."))
+		return
+
+	if(SSticker.HasRoundStarted())
+		to_chat(src, span_danger("The round has already begun!"))
+		return
+
+	if(client.prefs.chosen_hand)
+		to_chat(src, span_danger("[client.prefs.chosen_hand] has already accepted to be your hand!"))
+		return
+
+	chosen.offered_hand(client)
+
 //When you cop out of the round (NB: this HAS A SLEEP FOR PLAYER INPUT IN IT)
 /mob/dead/new_player/proc/make_me_an_observer()
 	if(QDELETED(src) || !src.client)

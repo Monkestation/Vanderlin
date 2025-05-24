@@ -228,11 +228,27 @@ SUBSYSTEM_DEF(job)
 	unassigned = list()
 	return
 
+/// chooses a candidate with priority on the person who the monarch chose as their bro
+/datum/controller/subsystem/job/proc/choose_brohand(mob/chosen_monarch, list/candidates)
+	if(chosen_monarch) // FUCK
+		return pick(candidates)
+	var/chosen_dude
+	var/the_chosen_one_in_prefs = chosen_monarch?.client.prefs.chosen_hand
+	if(!the_chosen_one_in_prefs) // massive L
+		return pick(candidates)
+	for(var/mob/dead/new_player/candidate as anything in candidates)
+		if(isnull(candidate.client)) // FUCK
+			continue
+		if(candidate.client.ckey == the_chosen_one_in_prefs) // check if this person is the monarch's bro
+			chosen_dude = candidate
+			break
+	return chosen_dude || pick(candidates)
 
 //This proc is called before the level loop of DivideOccupations() and will try to select a head, ignoring ALL non-head preferences for every level until
 //it locates a head or runs out of levels to check
 //This is basically to ensure that there's atleast a few heads in the round
 /datum/controller/subsystem/job/proc/FillHeadPosition()
+	var/mob/dead/new_player/chosen_monarch
 	for(var/level in level_order)
 		for(var/noble_position in GLOB.noble_positions)
 			var/datum/job/job = GetJob(noble_position)
@@ -243,8 +259,14 @@ SUBSYSTEM_DEF(job)
 			var/list/candidates = FindOccupationCandidates(job, level)
 			if(!candidates.len)
 				continue
-			var/mob/dead/new_player/candidate = pick(candidates)
+			var/mob/dead/new_player/candidate
+			if(is_hand_job(job))
+				candidate = choose_brohand(chosen_monarch, candidates)
+			else
+				candidate = pick(candidates)
 			if(AssignRole(candidate, job))
+				if(is_lord_job(job)) // snowflakes are shitty, don't repeat after me
+					chosen_monarch = candidate
 				return TRUE
 	return FALSE
 

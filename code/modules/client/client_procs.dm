@@ -123,6 +123,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
+	if(href_list["accept_hand"])
+		var/client/offerer = locate(href_list["offerer"]) in GLOB.clients
+		accept_hand(offerer)
+
 	if(href_list["playerlist"])
 		if(SSticker.current_state != GAME_STATE_FINISHED)
 			return
@@ -1725,3 +1729,24 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	set category = "OOC"
 
 	show_round_stats(pick_assoc(GLOB.featured_stats))
+
+/client/proc/offered_hand(client/offerer)
+	to_chat(src, span_bignotice("[span_nicegreen(offerer.ckey)] has offered [span_boldred("you")] to be their [span_bold("right hand")], <a href='?accept_hand=1;offerer=[REF(offerer)]'>accept</a>?"))
+
+/client/proc/accept_hand(client/offerer)
+	if(SSticker.HasRoundStarted())
+		to_chat(src, span_danger("The round has already begun!"))
+		return
+
+	if(!(offerer in GLOB.clients))
+		to_chat(src, span_danger("They no longer exist!"))
+		return
+
+	if(offerer.prefs.chosen_hand)
+		to_chat(src, span_danger("You were too late."))
+		return
+
+	offerer.prefs.chosen_hand = ckey
+
+	to_chat(src, span_nicegreen("Accepted."))
+	to_chat(offerer, span_nicegreen("[ckey] has accepted your offer."))
