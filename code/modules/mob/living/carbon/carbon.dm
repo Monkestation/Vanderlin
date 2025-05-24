@@ -1377,11 +1377,13 @@
 
 	add_movespeed_modifier("encumbrance", override = TRUE, multiplicative_slowdown = 5 * precentage)
 
+/// skeletonize all limbs of a carbon mob, pass TRUE as an argument if it's lethal, FALSE if it's not.
 /mob/living/carbon/proc/skeletonize(lethal = TRUE)
 	for(var/obj/item/bodypart/B in bodyparts)
 		B.skeletonize(lethal)
 	update_body_parts()
 
+/// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
 	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -1390,3 +1392,11 @@
 
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(src)
+
+/// beheads the carbon mob, if it doesn't find a head - return false.
+/mob/living/carbon/proc/behead()
+	var/obj/item/bodypart/head/to_dismember = get_bodypart(BODY_ZONE_HEAD)
+	if(to_dismember)
+		to_dismember.dismember()
+		return TRUE
+	return FALSE

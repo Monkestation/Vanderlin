@@ -12,8 +12,7 @@
 	)
 	var/list/phylacteries = list()
 	/// weak reference to the body so we can revive even if decapitated
-	var/datum/weakref/lich_body
-	var/out_of_lives = FALSE
+	var/datum/weakref/lich_body_ref
 
 	innate_traits = list(
 		TRAIT_NOSTAMINA,
@@ -43,7 +42,8 @@
 	SSmapping.retainer.liches |= owner
 	. = ..()
 	if(iscarbon(owner.current))
-		lich_body = WEAKREF(owner.current)
+		lich_body_ref = WEAKREF(owner.current)
+		RegisterSignal(owner.current, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 	owner.special_role = name
 	move_to_spawnpoint()
 	remove_job()
@@ -52,10 +52,14 @@
 	equip_lich()
 	return ..()
 
+/datum/antagonist/lich/on_removal()
+	var/mob/lich_mob = lich_body_ref.resolve()
+	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+
 /datum/antagonist/lich/greet()
+	. = ..()
 	to_chat(owner.current, span_userdanger("The secret of immortality is mine, but this is not enough. A thousand lichdoms have risen and fallen over the eras. Mine will be the one to last."))
 	owner.announce_objectives()
-	..()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/lichintro.ogg', 80, FALSE, pressure_affected = FALSE)
 
 /datum/antagonist/lich/move_to_spawnpoint()
@@ -120,7 +124,6 @@
 	H.set_skillrank(/datum/skill/combat/knives, 5, TRUE)
 	H.set_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 	H.adjust_skillrank(/datum/skill/labor/mathematics, 4, TRUE)
-	//H.set_skillrank(/datum/skill/misc/treatment, 4, TRUE)
 
 	H.change_stat(STATKEY_STR, -1)
 	H.change_stat(STATKEY_INT, 5)
@@ -152,29 +155,64 @@
 		new_phylactery.possessor = lichman
 		H.equip_to_slot_or_del(new_phylactery,SLOT_IN_BACKPACK, TRUE)
 
-/datum/antagonist/lich/proc/consume_phylactery(timer = 10 SECONDS)
-	for(var/obj/item/phylactery/phyl in phylacteries)
-		phyl.be_consumed(timer)
-		phylacteries -= phyl
-		return TRUE
+/// called via COMSIG_LIVING_DEATH
+/datum/antagonist/lich/proc/on_death(/datum/source)
+	SIGNAL_HANDLER
+	INVOKE_ASYNC(src, PROC_REF(attempt_resurrection)) // this proc sleeps
 
+/datum/antagonist/lich/proc/on_fail()
+	to_chat(owner, span_userdanger("No, NO! This cannot be!"))
+	owner.current.gib()
+
+/// Checks if the lich has a phylactery to resurrect to and returns TRUE if successfully resurrected, else returns FALSE.
+/datum/antagonist/lich/proc/attempt_resurrection(timer = 10 SECONDS)
+	var/mob/lich_mob = lich_body_ref.resolve()
+	lich_mob?.visible_message(span_warning("[lich_mob]'s body begins to shake violently!"))
+
+	if(!length(phylacteries)) // it's over.
+		on_fail()
+		return FALSE
+
+	to_chat(owner, span_userdanger("Death is not the end for me. I begin to rise again."))
+
+	for(var/obj/item/phylactery/to_be_consumed in phylacteries) // cycle through all phylacteries until there is none left
+		playsound(src, 'sound/magic/antimagic.ogg', 100, FALSE)
+		phylacteries -= to_be_consumed
+
+		to_be_consumed.start_shaking()
+
+		sleep(timer) // we sleep so we can later check the other phylacteries in the loop
+
+		if(!QDELETED(to_be_consumed)) // check if the phylactery got destroyed while we were resurrecting.
+			if(!to_be_consumed.possessor.rise_anew()) // it's over.
+				on_fail()
+				return FALSE
+			to_be_consumed.possessor.owner.current.forceMove(get_turf(to_be_consumed))
+			qdel(to_be_consumed)
+			return TRUE // resurrection successful
+
+		to_chat(owner, span_userdanger("That phylactery didn't work.. TRY ANOTHER!"))
+
+	on_fail()
+	return FALSE // it's over.
+
+/// Try to revive the lich, if we couldn't revive - call on_death() and return false
 /datum/antagonist/lich/proc/rise_anew(location)
-	var/mob/living/carbon/human/lich_mob
-	if(isbrain(owner.current)) // we have been decapitated, let's reattach to our old body.
-		lich_mob = lich_body.resolve() // current body isn't a human mob, let's use the reference to our old body.
+	var/mob/living/carbon/human/lich_mob = owner.current // who cares about type safety anyways?
+	if(isbrain(lich_mob)) // we have been decapitated, let's reattach to our old body.
+		lich_mob = lich_body_ref.resolve() // current body isn't a human mob, let's use the reference to our old body.
 		if(isnull(lich_mob))
-			return // the old body no longer exists, it's over.
-		var/mob/living/brain/lich_brain = owner.current
-		if(!istype(lich_brain.loc.loc, /obj/item/bodypart/head))
-			return // we have no head, it's over.
-		var/obj/item/bodypart/head/lich_head = lich_brain.loc.loc
-		lich_head.attach_limb(lich_mob)
+			return FALSE // the old body no longer exists, it's over.
+		var/obj/item/bodypart/head/lich_head = owner.current.loc.loc // we are a brain, let's check if we are inside a head. (the first loc is the brain object, the second loc is the head object)
+		if(!istype(lich_head))
+			return FALSE // we are not inside a head, it's over.
+		lich_head.attach_limb(lich_mob) // reattach the head
 	else
 		if(ishuman(owner.current))
 			lich_mob = owner.current // current body is a human mob.
 
 	lich_mob.revive(TRUE, TRUE) // we live, yay.
-	lich_mob.ckey = owner.current.client.ckey
+	owner.transfer_to(lich_mob, TRUE) // move the player back into the lich body.
 
 	lich_mob.skeletonize(FALSE)
 
@@ -183,6 +221,7 @@
 		QDEL_NULL(lich_mob.charflaw)
 	lich_mob.mob_biotypes |= MOB_UNDEAD
 	lich_mob.grant_undead_eyes()
+	return TRUE
 
 /obj/item/phylactery
 	name = "phylactery"
@@ -201,7 +240,7 @@
 
 	var/resurrections = 0
 	var/datum/mind/mind
-	var/respawn_time = 1800
+	var/respawn_time = 3 MINUTES // unused
 
 	var/static/active_phylacteries = 0
 
@@ -209,11 +248,7 @@
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color=rgb(rand(1,255),rand(1,255),rand(1,255)))
 
-/obj/item/phylactery/proc/be_consumed(timer)
+/obj/item/phylactery/proc/start_shaking()
 	var/offset = prob(50) ? -2 : 2
 	animate(src, pixel_x = pixel_x + offset, time = 0.2, loop = -1) //start shaking
 	visible_message(span_warning("[src] begins to glow and shake violently!"))
-	spawn(timer)
-		possessor.rise_anew()
-		possessor.owner.current.forceMove(get_turf(src))
-		qdel(src)
