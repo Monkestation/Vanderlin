@@ -919,7 +919,6 @@
 #include "code\datums\migrants\waves\heartfell_wave.dm"
 #include "code\datums\migrants\waves\itinerant_knight_wave.dm"
 #include "code\datums\migrants\waves\jestertroupe.dm"
-#include "code\datums\migrants\waves\prisoner_wave.dm"
 #include "code\datums\migrants\waves\returning_bannermen.dm"
 #include "code\datums\migrants\waves\rockhill_wave.dm"
 #include "code\datums\migrants\waves\zybantine_wave.dm"

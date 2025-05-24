@@ -4,12 +4,12 @@ SUBSYSTEM_DEF(migrants)
 	runlevels = RUNLEVEL_GAME
 	var/wave_number = 1
 	var/current_wave = null
-	var/time_until_next_wave = 2 MINUTES
+	var/time_until_next_wave = 30 MINUTES
 	var/wave_timer = 0
 
-	var/time_between_waves = 3 MINUTES
-	var/time_between_fail_wave = 90 SECONDS
-	var/wave_wait_time = 30 SECONDS
+	var/time_between_waves = 20 MINUTES
+	var/time_between_fail_wave = 5 MINUTES
+	var/wave_wait_time = 5 MINUTES
 
 	var/list/spawned_waves = list()
 
