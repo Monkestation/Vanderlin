@@ -15,6 +15,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/job/bard
+	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
 /datum/outfit/job/bard/pre_equip(mob/living/carbon/human/H)
 	. = ..()

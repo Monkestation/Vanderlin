@@ -18,7 +18,7 @@
 
 	outfit = /datum/outfit/job/grabber
 	give_bank_account = TRUE
-	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/outfit/job/grabber/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -18,6 +18,7 @@
 	outfit = /datum/outfit/job/adventurer/mason
 	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Mason Apprentice"
+	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 /datum/outfit/job/adventurer/mason/pre_equip(mob/living/carbon/human/H)
 	..()

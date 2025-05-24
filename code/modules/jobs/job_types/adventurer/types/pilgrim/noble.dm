@@ -9,6 +9,7 @@
 	category_tags = list(CTAG_PILGRIM)
 	maximum_possible_slots = 2
 	apprentice_name = "Servant"
+	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 
 /datum/outfit/job/adventurer/noble/pre_equip(mob/living/carbon/human/H)

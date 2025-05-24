@@ -13,6 +13,7 @@
 	maximum_possible_slots = 1
 	pickprob = 15
 	category_tags = list(CTAG_PILGRIM)
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/outfit/job/adventurer/masterblacksmith/pre_equip(mob/living/carbon/human/H)
 	..()

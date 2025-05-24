@@ -14,6 +14,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/job/cheesemaker
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/outfit/job/cheesemaker
 	job_bitflag = BITFLAG_CONSTRUCTOR

@@ -18,6 +18,7 @@
 	maximum_possible_slots = 2
 	pickprob = 30
 	min_pq = 0
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 
 /datum/outfit/job/adventurer/merchant/pre_equip(mob/living/carbon/human/H)

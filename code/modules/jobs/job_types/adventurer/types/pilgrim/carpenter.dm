@@ -8,6 +8,7 @@
 
 	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Carpenter Apprentice"
+	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 /datum/outfit/job/adventurer/carpenter/pre_equip(mob/living/carbon/human/H)
 	..()

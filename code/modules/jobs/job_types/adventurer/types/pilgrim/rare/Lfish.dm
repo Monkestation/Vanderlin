@@ -12,6 +12,7 @@
 	pickprob = 15
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	apprentice_name = "Fisher Apprentice"
+	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 /datum/outfit/job/adventurer/fishermaster/pre_equip(mob/living/carbon/human/H)
 	..()

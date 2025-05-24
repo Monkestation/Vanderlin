@@ -7,6 +7,7 @@
 	outfit = /datum/outfit/job/adventurer/fisher
 	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Fisher Apprentice"
+	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 /datum/outfit/job/adventurer/fisher/pre_equip(mob/living/carbon/human/H)
 	..()
