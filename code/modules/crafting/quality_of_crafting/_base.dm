@@ -108,8 +108,20 @@
 
 	for(var/path as anything in total_list)
 		for(var/required_path as anything in requirements)
-			if(!ispath(path, required_path) || (!subtypes_allowed && (path in subtypesof(required_path))) || (path in all_blacklisted))
+			// Check if path matches the requirement
+			var/type_matches = FALSE
+
+			if(subtypes_allowed)
+				// Allow both exact matches and subtypes
+				type_matches = ispath(path, required_path)
+			else
+				// Allow only exact matches
+				type_matches = (path == required_path)
+
+			// Skip if type doesn't match or is blacklisted
+			if(!type_matches || (path in all_blacklisted))
 				continue
+
 			copied_requirements[required_path] -= total_list[path]
 			if(copied_requirements[required_path] <= 0)
 				copied_requirements -= required_path
@@ -168,10 +180,20 @@
 
 		// Count available items that match this requirement
 		for(var/path as anything in total_list)
-			if(!ispath(path, required_path) || (path in all_blacklisted))
+			// Check if path matches the requirement
+			var/type_matches = FALSE
+
+			if(subtypes_allowed)
+				// Allow both exact matches and subtypes
+				type_matches = ispath(path, required_path)
+			else
+				// Allow only exact matches
+				type_matches = (path == required_path)
+
+			// Skip if type doesn't match or is blacklisted
+			if(!type_matches || (path in all_blacklisted))
 				continue
-			if(!subtypes_allowed && (path in subtypesof(required_path)))
-				continue
+
 			available_amount += total_list[path]
 
 		if(available_amount == 0)
@@ -204,6 +226,12 @@
 
 	return max_crafts
 
+/datum/repeatable_crafting_recipe/proc/item_in_requirements(obj/item/item, list/requirement_list)
+	for(var/required_type in requirement_list)
+		if(item_matches_requirement(item, required_type))
+			return TRUE
+	return FALSE
+
 /**
  * Gathers usable contents from the user and surroundings
  *
@@ -221,7 +249,7 @@
 			usable_contents[I.type]++
 
 	var/obj/item/inactive_hand = user.get_inactive_held_item()
-	if(is_type_in_list(inactive_hand, offhand_repeat_check))
+	if(item_in_requirements(inactive_hand, offhand_repeat_check))
 		for(var/obj/item/item in inactive_hand.contents)
 			if(istype(item, /obj/item/natural/bundle))
 				var/bundle_path = item:stacktype
@@ -321,7 +349,7 @@
 					user.put_in_active_hand(sub_item)
 
 				for(var/requirement in copied_requirements)
-					if(!istype(sub_item, requirement))
+					if(!item_matches_requirement(item, requirement))
 						continue
 					copied_requirements[requirement]--
 					to_delete += sub_item
@@ -512,7 +540,7 @@
 /datum/repeatable_crafting_recipe/proc/get_storage_contents(mob/user)
 	var/list/storage_contents = list()
 	var/obj/item/inactive_hand = user.get_inactive_held_item()
-	if(is_type_in_list(inactive_hand, offhand_repeat_check))
+	if(item_in_requirements(inactive_hand, offhand_repeat_check))
 		for(var/obj/item/item in inactive_hand.contents)
 			storage_contents |= item
 	return storage_contents
@@ -576,7 +604,7 @@
 
 		var/obj/item/active_item = user.get_active_held_item()
 
-		if(put_items_in_hand && !is_type_in_list(active_item, requirements))
+		if(put_items_in_hand && !item_in_requirements(active_item, requirements))
 			handle_active_item_placement(active_item, user)
 
 		// Process items from usable contents
@@ -585,7 +613,7 @@
 			if(!length(copied_requirements))
 				break
 
-			if((!is_type_in_list(item, copied_requirements) && !istype(item, /obj/item/natural/bundle)) || (item.type in all_blacklisted))
+			if((!item_in_requirements(item, copied_requirements) && !istype(item, /obj/item/natural/bundle)) || (item.type in all_blacklisted))
 				continue
 
 			if(istype(item, /obj/item/natural/bundle))
@@ -600,7 +628,7 @@
 					user.put_in_active_hand(item)
 
 				for(var/requirement in copied_requirements)
-					if(!istype(item, requirement))
+					if(!item_matches_requirement(item, requirement))
 						continue
 					copied_requirements[requirement]--
 					if(copied_requirements[requirement] <= 0)
@@ -618,7 +646,7 @@
 				if(!length(copied_requirements))
 					break
 
-				if(!is_type_in_list(item, copied_requirements) || (item.type in all_blacklisted))
+				if(!item_in_requirements(item, copied_requirements) || (item.type in all_blacklisted))
 					continue
 
 				to_chat(user, "You start grabbing [item] from your bag.")
@@ -630,7 +658,7 @@
 						user.put_in_active_hand(item)
 
 					for(var/requirement in copied_requirements)
-						if(!istype(item, requirement))
+						if(!item_matches_requirement(item, requirement))
 							continue
 						copied_requirements[requirement]--
 						if(copied_requirements[requirement] <= 0)
@@ -677,6 +705,19 @@
 		to_chat(user, span_warning("Failed to craft any [name]."))
 
 	return TRUE
+
+
+/datum/repeatable_crafting_recipe/proc/item_matches_requirement(obj/item/item, atom/required_type)
+	if(subtypes_allowed)
+		return istype(item, required_type)
+	else
+		return (item?.type == required_type)
+
+/datum/repeatable_crafting_recipe/proc/type_matches_requirement(atom/item_type, atom/required_type)
+	if(subtypes_allowed)
+		return ispath(item_type, required_type)
+	else
+		return (item_type == required_type)
 
 /**
  * Handles placing active item somewhere safe
@@ -809,7 +850,7 @@
 		if(length(pass_types_in_end))
 			var/list/parts = list()
 			for(var/obj/item/listed as anything in to_delete)
-				if(!is_type_in_list(listed, pass_types_in_end))
+				if(!item_in_requirements(listed, pass_types_in_end))
 					continue
 				parts += listed
 			new_item.CheckParts(parts)

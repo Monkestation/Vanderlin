@@ -214,6 +214,7 @@
 		/obj/item/reagent_containers/food/snacks/meat/mince/beef = 1,
 	)
 	required_table = TRUE
+	subtypes_allowed = FALSE
 	attacked_atom = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 	starting_atom = /obj/item/reagent_containers/food/snacks/veg/onion_sliced
 	output = /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett

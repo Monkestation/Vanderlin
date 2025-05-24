@@ -1407,6 +1407,14 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/rogue/outdoors)
+"qg" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/effect/landmark/bounty_location{
+	location_name = "By the sakura tree";
+	completion_range = 5
+	},
+/turf/open/floor/grass/yel,
+/area/rogue/outdoors)
 "qi" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/dirt/road,
@@ -1810,6 +1818,10 @@
 /obj/structure/flora/grass/herb/hypericum,
 /turf/open/floor/dirt,
 /area/rogue/outdoors/mountains/decap)
+"BB" = (
+/obj/effect/landmark/bounty_location/warehouse,
+/turf/open/floor/wood,
+/area/rogue/indoors)
 "BE" = (
 /turf/closed,
 /area/rogue/outdoors/mountains/decap)
@@ -13869,7 +13881,7 @@ as
 ac
 at
 Ln
-jC
+qg
 dw
 FN
 ew
@@ -17480,7 +17492,7 @@ Zs
 Zx
 Zx
 Zs
-mY
+BB
 mY
 Zs
 QN

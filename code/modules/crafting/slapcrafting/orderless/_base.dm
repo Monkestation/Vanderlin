@@ -137,21 +137,22 @@
 	if(output_item)
 		var/obj/item/reagent_containers/food/snacks/new_item = new output_item(source_turf)
 
-		// Calculate average freshness
-		var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
+		if(istype(new_item))
+			// Calculate average freshness
+			var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
 
-		// Get the user's cooking skill
-		var/cooking_skill = user.get_skill_level(/datum/skill/craft/cooking)
+			// Get the user's cooking skill
+			var/cooking_skill = user.get_skill_level(/datum/skill/craft/cooking)
 
-		// Apply freshness to the new food item
-		new_item.warming = min(5 MINUTES, average_freshness)
+			// Apply freshness to the new food item
+			new_item.warming = min(5 MINUTES, average_freshness)
 
-		// Calculate final quality based on ingredients, skill, and freshness
-		var/final_quality = calculate_food_quality(cooking_skill, highest_quality, average_freshness)
-		new_item.quality = round(final_quality)
+			// Calculate final quality based on ingredients, skill, and freshness
+			var/final_quality = calculate_food_quality(cooking_skill, highest_quality, average_freshness)
+			new_item.quality = round(final_quality)
 
-		// Apply descriptive modifications based on quality
-		apply_food_quality(new_item, final_quality)
+			// Apply descriptive modifications based on quality
+			apply_food_quality(new_item, final_quality)
 
 		// Handle item-specific post-processing by passing used ingredients
 		if(length(used_ingredients))

@@ -71,26 +71,17 @@
 /datum/ai_behavior/find_and_set/in_list
 
 /datum/ai_behavior/find_and_set/in_list/search_tactic(datum/ai_controller/controller, locate_paths, search_range)
-	var/list/found = list()
-	for(var/locate_path in locate_paths)
-		var/single_locate = ..(controller, locate_path, search_range)
-		if(single_locate)
-			found += single_locate
-	if(found.len)
+	var/list/found = typecache_filter_list(oview(search_range, controller.pawn), locate_paths)
+	if(length(found))
 		return pick(found)
 
 /datum/ai_behavior/find_and_set/in_list/saiga
 
 /datum/ai_behavior/find_and_set/in_list/saiga/search_tactic(datum/ai_controller/controller, locate_paths, search_range)
-	var/list/found = list()
-	for(var/locate_path in locate_paths)
-		var/single_locate = ..(controller, locate_path, search_range)
-		if(single_locate)
-			found += single_locate
-	if(found.len)
+	var/list/found = typecache_filter_list(oview(search_range, controller.pawn), locate_paths)
+	if(length(found))
 		controller.set_blackboard_key(BB_BASIC_MOB_FLEEING, FALSE)
 		return pick(found)
-
 
 /datum/ai_behavior/find_and_set/dead_bodies
 
