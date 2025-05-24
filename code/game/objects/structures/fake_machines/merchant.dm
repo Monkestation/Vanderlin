@@ -133,7 +133,7 @@
 	. = ..()
 	set_light(1, 1, 1, l_color =  "#1b7bf1")
 
-/obj/structure/fake_machine/merchantvend/obj_break(damage_flag)
+/obj/structure/fake_machine/merchantvend/obj_break(damage_flag, silent)
 	. = ..()
 	budget2change(budget)
 	set_light(0)

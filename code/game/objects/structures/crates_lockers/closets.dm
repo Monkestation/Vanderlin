@@ -194,7 +194,7 @@
 		new material_drop(loc, material_drop_amount)
 	qdel(src)
 
-/obj/structure/closet/obj_break(damage_flag)
+/obj/structure/closet/obj_break(damage_flag, silent)
 	if(!broken && !(flags_1 & NODECONSTRUCT_1))
 		bust_open()
 	..()

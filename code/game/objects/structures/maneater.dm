@@ -1,22 +1,22 @@
 
 /obj/structure/flora/grass/maneater
-	name = "grass"
 	icon = 'icons/roguetown/mob/monster/maneater.dmi'
 	icon_state = "maneater-hidden"
-	max_integrity = 5
 
 /obj/structure/flora/grass/maneater/update_icon()
 	return
 
 /obj/structure/flora/grass/maneater/real
-	max_integrity = 40
+	icon_state = MAP_SWITCH("maneater-hidden", "maneater")
+	max_integrity = 100
 	integrity_failure = 0.15
 	attacked_sound = list('sound/vo/mobs/plant/pain (1).ogg','sound/vo/mobs/plant/pain (2).ogg','sound/vo/mobs/plant/pain (3).ogg','sound/vo/mobs/plant/pain (4).ogg')
 	buckle_lying = FALSE
 	buckle_prevents_pull = TRUE
 	var/list/eatablez = list(/obj/item/bodypart, /obj/item/organ, /obj/item/reagent_containers/food/snacks/meat)
 	var/last_eat
-	var/aggroed = TRUE
+	var/aggroed = FALSE
+
 	///Proximity monitor associated with this atom, needed for proximity checks.
 	var/datum/proximity_monitor/proximity_monitor
 
@@ -30,7 +30,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/structure/flora/grass/maneater/real/obj_break(damage_flag)
+/obj/structure/flora/grass/maneater/real/obj_break(damage_flag, silent)
 	..()
 	QDEL_NULL(proximity_monitor)
 	unbuckle_all_mobs()

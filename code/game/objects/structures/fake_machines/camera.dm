@@ -20,7 +20,7 @@
 	pixel_x = -5
 	pixel_y = 5
 
-/obj/structure/fake_machine/camera/obj_break(damage_flag)
+/obj/structure/fake_machine/camera/obj_break(damage_flag, silent)
 	..()
 	set_light(0)
 	icon_state = "camera-br"

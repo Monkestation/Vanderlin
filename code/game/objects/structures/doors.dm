@@ -273,7 +273,7 @@
 	. = ..()
 	set_opacity(anchored ? !door_opened : FALSE)
 
-/obj/structure/door/obj_break(damage_flag, mapload)
+/obj/structure/door/obj_break(damage_flag, silent)
 	. = ..()
 	unlock()
 	force_open()

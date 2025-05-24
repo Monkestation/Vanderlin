@@ -308,7 +308,7 @@
 			pic.color = get_detail_color()
 		add_overlay(pic)
 
-/obj/item/clothing/obj_break(damage_flag)
+/obj/item/clothing/obj_break(damage_flag, silent)
 	if(!damaged_clothes)
 		update_clothes_damaged_state(TRUE)
 	var/brokemessage = FALSE

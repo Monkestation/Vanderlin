@@ -236,7 +236,7 @@
 	playsound(src, 'sound/misc/glassknock.ogg', 100)
 
 
-/obj/structure/window/obj_break(damage_flag)
+/obj/structure/window/obj_break(damage_flag, silent)
 	if(!brokenstate)
 		attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 		new /obj/item/natural/glass/shard (get_turf(src))

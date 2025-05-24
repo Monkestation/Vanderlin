@@ -192,7 +192,7 @@ GLOBAL_VAR(moneymaster)
 	to_chat(user, "<span class='info'>I press the right eye.</span>")
 	update_icon()
 */
-/obj/structure/fake_machine/money/obj_break(damage_flag)
+/obj/structure/fake_machine/money/obj_break(damage_flag, silent)
 	..()
 	budget2change(budget)
 	budget = 0
@@ -227,7 +227,7 @@ GLOBAL_VAR(moneymaster)
 	update_icon()
 	GLOB.moneymaster = src
 
-/obj/structure/fake_machine/money/twins/obj_break(damage_flag)
+/obj/structure/fake_machine/money/twins/obj_break(damage_flag, silent)
 	. = ..()
 	GLOB.moneymaster = null
 

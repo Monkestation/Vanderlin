@@ -18,12 +18,9 @@
 		animate(src, pixel_x = oldx+1, time = 0.5)
 		animate(pixel_x = oldx-1, time = 0.5)
 		animate(pixel_x = oldx, time = 0.5)
-	//BREAKING FIRST
 	if(!obj_broken && integrity_failure && obj_integrity <= integrity_failure * max_integrity)
 		obj_break(damage_flag)
-	//DESTROYING SECOND
 	if(!obj_destroyed && obj_integrity <= 0)
-		testing("destroy1")
 		obj_destruction(damage_flag)
 
 
@@ -223,12 +220,13 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	qdel(src)
 
 ///called after the obj takes damage and integrity is below integrity_failure level
-/obj/proc/obj_break(damage_flag)
+/obj/proc/obj_break(damage_flag, silent = FALSE)
 	obj_broken = TRUE
-	if(break_sound)
-		playsound(src, break_sound, 100, TRUE)
-	if(break_message)
-		visible_message(break_message)
+	if(!silent)
+		if(break_sound)
+			playsound(src, break_sound, 100, TRUE)
+		if(break_message)
+			visible_message(break_message)
 
 ///what happens when the obj's integrity reaches zero.
 /obj/proc/obj_destruction(damage_flag)

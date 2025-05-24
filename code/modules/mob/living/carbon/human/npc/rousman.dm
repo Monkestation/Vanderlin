@@ -330,9 +330,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 
 /obj/structure/rousman_hole
 	name = "narrow hole"
-	desc = ""
+	desc = "Is that infernal squeaking coming from this?"
 	icon = 'icons/roguetown/topadd/rousman/structures.dmi'
-	icon_state = ""
+	icon_state = "rousman_hole_inactive"
 	layer = BELOW_OBJ_LAYER
 	density = FALSE
 	anchored = TRUE

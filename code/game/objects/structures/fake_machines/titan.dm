@@ -156,7 +156,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	. = ..()
 	become_hearing_sensitive()
 
-/obj/structure/fake_machine/titan/obj_break(damage_flag)
+/obj/structure/fake_machine/titan/obj_break(damage_flag, silent)
 	..()
 	cut_overlays()
 //	icon_state = "[icon_state]-br"

@@ -206,3 +206,22 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 		log_mapping("[src] at [AREACOORD(src)] tried to lock [payload] but it's already locked!")
 		return
 	payload.lock()
+
+/obj/effect/mapping_helpers/structure
+	name = "structure helper"
+	layer = WALL_OBJ_LAYER
+	plane = GAME_PLANE_UPPER
+	late = TRUE
+
+/obj/effect/mapping_helpers/structure/LateInitialize()
+	var/list/valid = subtypesof(/obj/structure) - typesof(/obj/structure/flora)
+	for(var/obj/structure/S in loc)
+		if(is_type_in_list(S, valid))
+			payload(S)
+			qdel(src)
+			return
+	log_mapping("[src] failed to find target at [AREACOORD(src)]")
+	qdel(src)
+
+/obj/effect/mapping_helpers/structure/proc/payload(obj/payload)
+	return

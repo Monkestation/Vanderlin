@@ -74,7 +74,7 @@
 	popup.set_content(contents)
 	popup.open()
 
-/obj/structure/fake_machine/scomm/obj_break(damage_flag)
+/obj/structure/fake_machine/scomm/obj_break(damage_flag, silent)
 	..()
 	speaking = FALSE
 	listening = FALSE

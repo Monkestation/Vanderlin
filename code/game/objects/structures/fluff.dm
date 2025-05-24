@@ -251,7 +251,7 @@
 	plane = GAME_PLANE
 	layer = WALL_OBJ_LAYER+0.05
 
-/obj/structure/bars/obj_break(damage_flag)
+/obj/structure/bars/obj_break(damage_flag, silent)
 	icon_state = "[initial(icon_state)]b"
 	density = FALSE
 	..()
@@ -317,7 +317,7 @@
 	dir = pick(GLOB.cardinals)
 	return ..()
 
-/obj/structure/bars/grille/obj_break(damage_flag)
+/obj/structure/bars/grille/obj_break(damage_flag, silent)
 	obj_flags = CAN_BE_HIT
 	..()
 
@@ -397,7 +397,7 @@
 		soundloop.stop()
 	..()
 
-/obj/structure/fluff/clock/obj_break(damage_flag)
+/obj/structure/fluff/clock/obj_break(damage_flag, silent)
 	if(!broke)
 		broke = TRUE
 		icon_state = "b[initial(icon_state)]"
@@ -513,7 +513,7 @@
 	soundloop.start()
 	. = ..()
 
-/obj/structure/fluff/wallclock/obj_break(damage_flag)
+/obj/structure/fluff/wallclock/obj_break(damage_flag, silent)
 	if(!broke)
 		broke = TRUE
 		icon_state = "b[initial(icon_state)]"
