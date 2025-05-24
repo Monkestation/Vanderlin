@@ -192,8 +192,8 @@
 		H.confession_time("patron", src)
 
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag", mob/living/carbon/human/user)
-	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins), confession_type, FALSE, user), 3 SECONDS, TIMER_STOPPABLE)
-	var/responsey = alert(src, "Resist torture?","TEST OF PAIN","Yes","No")
+	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins), confession_type, FALSE, user), 10 SECONDS, TIMER_STOPPABLE)
+	var/responsey = alert(src, "Resist torture?","TEST OF PAIN","RESIST!!","CONFESS!!")
 	testing("Sent resist request to [src].")
 	testing(" User is [user]. confession_time")
 	if(SStimer.timer_id_dict[timerid])
@@ -202,7 +202,7 @@
 		to_chat(src, span_warning("Too late..."))
 		testing("Torture timer ran out.")
 		return
-	if(responsey == "Yes")
+	if(responsey == "RESIST!!")
 		testing("[src] resisted torture.")
 		confess_sins(confession_type, resist=TRUE, interrogator=user)
 	else
