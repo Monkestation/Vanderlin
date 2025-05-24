@@ -103,6 +103,9 @@ SUBSYSTEM_DEF(job)
 		if(flag && (!(flag in player.client.prefs.be_special)))
 			JobDebug("FOC flag failed, Player: [player], Flag: [flag], ")
 			continue
+		if(!player.client.prefs.spec_check(player))
+			JobDebug("FOC player has invalid species preference(Patreon/Disabled Species), Player: [player], Job:[job.title], Race: [player.client.prefs.pref_species.name]")
+			continue
 		if(player.mind && (job.title in player.mind.restricted_roles))
 			JobDebug("FOC incompatible with antagonist role, Player: [player]")
 			continue
@@ -356,6 +359,10 @@ SUBSYSTEM_DEF(job)
 
 				if(job.required_playtime_remaining(player.client))
 					JobDebug("DO player not enough xp, Player: [player], Job:[job.title]")
+					continue
+
+				if(!player.client.prefs.spec_check(player)) //This should check if they're allowed to use the specie :thinking:
+					JobDebug("DO player has invalid species preference(Patreon/Disabled Species), Player: [player], Job:[job.title], Race: [player.client.prefs.pref_species.name]")
 					continue
 
 				if(player.mind && (job.title in player.mind.restricted_roles))

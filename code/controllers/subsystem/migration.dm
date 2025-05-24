@@ -281,6 +281,8 @@ SUBSYSTEM_DEF(migrants)
 		return FALSE
 	if(!player.prefs.allowed_respawn())
 		return FALSE
+	if(!player.prefs.spec_check(player))
+		return FALSE
 	if(is_migrant_banned(player.ckey, role.name))
 		return FALSE
 	if(role.allowed_races && !(prefs.pref_species.name in role.allowed_races))
