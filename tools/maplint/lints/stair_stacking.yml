@@ -1,0 +1,4 @@
+﻿/obj/structure/stairs:
+  banned_neighbors:
+  - /turf/closed
+  - /turf/open/transparent
