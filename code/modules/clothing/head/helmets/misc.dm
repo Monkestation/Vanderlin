@@ -295,7 +295,7 @@
 	icon_state = "guardhelm"
 
 	body_parts_covered = COVERAGE_HEAD_NOSE
-	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACE
+	flags_inv = HIDEEARS|HIDEHAIR
 	block2add = FOV_BEHIND
 	max_integrity = INTEGRITY_STANDARD
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
@@ -305,7 +305,7 @@
 
 /obj/item/clothing/head/helmet/townwatch/alt
 	name = "barred helmet"
-	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACE
+	flags_inv = HIDEEARS|HIDEHAIR
 	desc = "An old archaic helmet of a symbol long forgotten. The shape resembles the bars of a gate."
 	icon_state = "gatehelm"
 
