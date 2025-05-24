@@ -156,7 +156,8 @@
 		// Handle item-specific post-processing by passing used ingredients
 		if(length(used_ingredients))
 			new_item.CheckParts(used_ingredients)
-			new_item.OnCrafted(user.dir, user)
+
+		new_item.OnCrafted(user.dir, user)
 
 	qdel(hosted_source)
 

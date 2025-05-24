@@ -813,7 +813,8 @@
 					continue
 				parts += listed
 			new_item.CheckParts(parts)
-			new_item.OnCrafted(user.dir, user)
+
+		new_item.OnCrafted(user.dir, user)
 
 		outputs += new_item
 

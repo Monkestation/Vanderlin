@@ -370,6 +370,7 @@
 		H.mind?.job_bitflag = job_bitflag
 		if(H.familytree_pref != FAMILY_NONE && !visualsOnly && !H.family_datum)
 			SSfamilytree.AddLocal(H, H.familytree_pref)
+			H.ShowFamilyUI(TRUE)
 		if(H.ckey)
 			if(check_crownlist(H.ckey))
 				H.mind.special_items["Champion Circlet"] = /obj/item/clothing/head/crown/sparrowcrown

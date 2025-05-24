@@ -121,7 +121,7 @@
 
 		// When enraged, if low health, prioritize defensive abilities
 		if(health_percentage <= 0.3)
-			if(DRAGON_ATTACK_WING_GUST in possible_attacks && target_in_melee)
+			if((DRAGON_ATTACK_WING_GUST in possible_attacks) && target_in_melee)
 				priority_attacks += DRAGON_ATTACK_WING_GUST
 			if(DRAGON_ATTACK_SHADOW_CLONE in possible_attacks)
 				priority_attacks += DRAGON_ATTACK_SHADOW_CLONE
