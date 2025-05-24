@@ -3,7 +3,7 @@
 	icon_state = "scrying"
 
 /obj/structure/vampire/scryingorb/attack_hand(mob/living/carbon/human/user)
-	if(user.mind.special_role == "Vampire Lord")
+	if(user?.mind.has_antag_datum(/datum/antagonist/vampire/lord))
 		user.visible_message("<font color='red'>[user]'s eyes turn dark red, as they channel the [src]</font>", "<font color='red'>I begin to channel my consciousness into a Predator's Eye.</font>")
 		if(do_after(user, 6 SECONDS, src))
 			user.scry(can_reenter_corpse = 1, force_respawn = FALSE)
