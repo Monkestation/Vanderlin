@@ -1323,7 +1323,6 @@ SUBSYSTEM_DEF(gamemode)
 	GLOB.vanderlin_round_stats[STATS_VAMPIRES] = 0
 	GLOB.vanderlin_round_stats[STATS_DEADITES_ALIVE] = 0
 
-	GLOB.vanderlin_round_stats[STATS_CLINGY_PEOPLE] = 0
 	GLOB.vanderlin_round_stats[STATS_ALCOHOLICS] = 0
 	GLOB.vanderlin_round_stats[STATS_JUNKIES] = 0
 	GLOB.vanderlin_round_stats[STATS_KLEPTOMANIACS] = 0
@@ -1415,8 +1414,6 @@ SUBSYSTEM_DEF(gamemode)
 				GLOB.vanderlin_round_stats[STATS_ALIVE_TRADESMEN]++
 			if(!human_mob.is_literate())
 				GLOB.vanderlin_round_stats[STATS_ILLITERATES]++
-			if(human_mob.has_flaw(/datum/charflaw/clingy))
-				GLOB.vanderlin_round_stats[STATS_CLINGY_PEOPLE]++
 			if(human_mob.has_flaw(/datum/charflaw/addiction/alcoholic))
 				GLOB.vanderlin_round_stats[STATS_ALCOHOLICS]++
 			if(human_mob.has_flaw(/datum/charflaw/addiction/junkie))

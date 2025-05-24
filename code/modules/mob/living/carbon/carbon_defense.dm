@@ -102,6 +102,9 @@
 		used_limb = parse_zone(I.sublimb_grabbed)
 
 	if(used_limb)
+		if(target != src) // No self love here
+			if(used_limb == parse_zone(BODY_ZONE_PRECISE_R_HAND) || used_limb == parse_zone(BODY_ZONE_PRECISE_L_HAND))
+				GLOB.vanderlin_round_stats[STATS_HANDS_HELD]++
 		target.visible_message(span_warning("[src] grabs [target]'s [used_limb]."), \
 						span_warning("[src] grabs my [used_limb]."), span_hear("I hear shuffling."), null, list(src))
 		to_chat(src, span_info("I grab [target]'s [used_limb]."))

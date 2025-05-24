@@ -1,0 +1,160 @@
+{
+	"slurs": {
+		"Humen": [
+			"spoon ear",
+			"round ear",
+			"humie",
+			"mayfly",
+			"psydon's mistake",
+			"psydon's last"
+		],
+		"Elf": [
+			"knife ear",
+			"pointy ear",
+			"sharp ear",
+			"dagger ear",
+			"dagger head",
+			"tree hugger",
+			"leaf lover",
+			"bark sniffer",
+			"weed eater",
+			"tree fucker",
+			"pole-proportioned dendrophile",
+			"mushroom dancer"
+		],
+		"Dark Elf": [
+			"knife ear",
+			"pointy ear",
+			"sharp ear",
+			"dagger ear",
+			"dagger head",
+			"cursed blood",
+			"zizo cursed",
+			"zizo dominated",
+			"spider kisser",
+			"dirt elf",
+			"dirt elves",
+			"shroom sniffer",
+			"cave dweller",
+			"mushroom stain",
+			"drow",
+			"underscum"
+		],
+		"Half-Elf": [
+			"mutt",
+			"mongrel",
+			"half breed",
+			"halfie",
+			"mule"
+		],
+		"Half-Drow": [
+			"mutt",
+			"mongrel",
+			"half breed",
+			"halfie",
+			"mule",
+			"cursed blood",
+			"zizo cursed",
+			"zizo dominated",
+			"drow"
+		],
+		"Dwarf": [
+			"rock licker",
+			"rock fucker",
+			"stone sucker",
+			"stone fucker",
+			"roundie",
+			"hairy stool",
+			"beard goblin",
+			"flea-bearded alestain",
+			"stunty",
+			"stone shitter",
+			"tunnel rat",
+			"keg belly",
+			"gold licker"
+		],
+		"Aasimar": [
+			"god's pet",
+			"god's leftovers",
+			"talking dirt",
+			"golem",
+			"stone face",
+			"pot head"
+		],
+		"Half-Orc": [
+			"greenskin",
+			"greenie",
+			"green skin",
+			"swamp skin",
+			"slime skin",
+			"tusk face",
+			"tusky",
+			"tusker",
+			"scumbreed",
+			"graggarspawn",
+			"pig man",
+			"pig woman"
+		],
+		"Tiefling": [
+			"hellspawn",
+			"demonspawn",
+			"devilspawn",
+			"half hell",
+			"tall imp",
+			"hell touched",
+			"thiefling"
+		],
+		"Rakshari": [
+			"bald thief",
+			"housecat",
+			"stray",
+			"dune rat",
+			"mole rat",
+			"ballsack",
+			"wrinkle wretch",
+			"rat eater",
+			"chain stain"
+		],
+		"Kobold": [
+			"rock eater",
+			"stone muncher",
+			"stunted wyrm",
+			"scaly gnome",
+			"fly eater",
+			"forked tongue",
+			"dragon refuse",
+			"troglodyte",
+			"scaled back",
+			"scale skin",
+			"rock rodent",
+			"rock rat"
+		],
+		"Hollow-Kin": [
+			"zizo's pet",
+			"drow pet",
+			"drow spawn",
+			"stray",
+			"flea bitten",
+			"homunculus"
+		],
+		"Harpy": [
+			"eora's pet",
+			"birdbrain",
+			"egg layer",
+			"feather head",
+			"shitbird",
+			"worm breath",
+			"sky rat",
+			"sky rodent",
+			"magpie"
+		],
+		"Generic": [
+			"whore",
+			"slut",
+			"hedon",
+			"harlot",
+			"zizite",
+			"zizoid"
+		]
+	}
+}
