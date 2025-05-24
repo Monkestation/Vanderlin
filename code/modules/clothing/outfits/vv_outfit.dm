@@ -27,11 +27,6 @@
 			neck = item_path
 		if(SLOT_RING)
 			ring = item_path
-		if(SLOT_L_STORE)
-			l_pocket = item_path
-		if(SLOT_R_STORE)
-			r_pocket = item_path
-
 
 /proc/collect_vv(obj/item/I)
 	//Temporary/Internal stuff, do not copy these.
@@ -59,7 +54,7 @@
 
 	//Copy equipment
 	var/list/result = list()
-	var/list/slots_to_check = list(SLOT_PANTS,SLOT_BACK,SLOT_ARMOR,SLOT_BELT,SLOT_GLOVES,SLOT_SHOES,SLOT_HEAD,SLOT_WEAR_MASK,SLOT_NECK,SLOT_HEAD,SLOT_RING,SLOT_WRISTS,SLOT_S_STORE,SLOT_L_STORE,SLOT_R_STORE)
+	var/list/slots_to_check = list(SLOT_PANTS,SLOT_ARMOR,SLOT_BELT,SLOT_GLOVES,SLOT_SHOES,SLOT_HEAD,SLOT_WEAR_MASK,SLOT_NECK,SLOT_HEAD,SLOT_RING,SLOT_WRISTS)
 	for(var/s in slots_to_check)
 		var/obj/item/I = get_item_by_slot(s)
 		var/vedits = collect_vv(I)
@@ -83,19 +78,6 @@
 			if(vedits)
 				result["RHAND"] = vedits
 	O.vv_values = result
-	//Copy backpack contents if exist.
-	var/obj/item/backpack = get_item_by_slot(SLOT_BACK)
-	if(istype(backpack) && SEND_SIGNAL(backpack, COMSIG_CONTAINS_STORAGE))
-		var/list/bp_stuff = list()
-		var/list/typecounts = list()
-		SEND_SIGNAL(backpack, COMSIG_TRY_STORAGE_RETURN_INVENTORY, bp_stuff, FALSE)
-		for(var/obj/item/I in bp_stuff)
-			if(typecounts[I.type])
-				typecounts[I.type] += 1
-			else
-				typecounts[I.type] = 1
-		O.backpack_contents = typecounts
-		//TODO : Copy varedits from backpack stuff too.
 	//Copy to outfit cache
 	var/outfit_name = stripped_input(usr,"Enter the outfit name")
 	O.name = outfit_name

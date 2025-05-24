@@ -379,13 +379,6 @@
 		items += mouth
 	if(wear_shirt)
 		items += wear_shirt
-	if(include_pockets)
-		if(l_store)
-			items += l_store
-		if(r_store)
-			items += r_store
-		if(s_store)
-			items += s_store
 	return items
 
 /mob/living/proc/unequip_everything()
@@ -419,8 +412,6 @@
 		obscured |= SLOT_BELT_R
 		obscured |= SLOT_BELT_L
 		obscured |= SLOT_BELT
-	if(hidden_slots & HIDESUITSTORAGE)
-		obscured |= SLOT_S_STORE
 
 	return obscured
 
@@ -439,7 +430,7 @@
 	if(M.active_storage && M.active_storage.parent && SEND_SIGNAL(M.active_storage.parent, COMSIG_TRY_STORAGE_INSERT, src,M))
 		return TRUE
 
-	var/list/obj/item/possible = list(M.get_inactive_held_item(), M.get_item_by_slot(SLOT_BELT), M.get_item_by_slot(SLOT_GENERC_DEXTROUS_STORAGE), M.get_item_by_slot(SLOT_BACK))
+	var/list/obj/item/possible = list(M.get_inactive_held_item(), M.get_item_by_slot(SLOT_BELT))
 	for(var/i in possible)
 		if(!i)
 			continue
@@ -463,14 +454,8 @@
 	if (I)
 		I.equip_to_best_slot(src)
 
-//used in code for items usable by both carbon and drones, this gives the proper back slot for each mob.(defibrillator, backpack watertank, ...)
-/mob/proc/getBackSlot()
-	return SLOT_BACK
-
 /mob/proc/getBeltSlot()
 	return SLOT_BELT
-
-
 
 //Inventory.dm is -kind of- an ok place for this I guess
 

@@ -297,8 +297,6 @@
 		var/obj/item/I = get_item_for_held_index(i)
 		dat += "<BR><B>[get_held_index_name(i)]:</B> </td><td><A href='byond://?src=[REF(src)];item=[SLOT_HANDS];hand_index=[i]'>[(I && !(I.item_flags & ABSTRACT)) ? I : "Nothing"]</a>"
 
-	dat += "<BR><B>Back:</B> <A href='byond://?src=[REF(src)];item=[SLOT_BACK]'>[back ? back : "Nothing"]</A>"
-
 	if(handcuffed)
 		dat += "<BR><A href='byond://?src=[REF(src)];item=[SLOT_HANDCUFFED]'>Handcuffed</A>"
 	if(legcuffed)

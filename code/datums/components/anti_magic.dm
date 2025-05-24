@@ -2,7 +2,7 @@
 	var/magic = FALSE
 	var/holy = FALSE
 	var/psychic = FALSE
-	var/allowed_slots = ~ITEM_SLOT_BACKPACK
+	var/allowed_slots
 	var/charges = INFINITY
 	var/blocks_self = TRUE
 	var/datum/callback/reaction

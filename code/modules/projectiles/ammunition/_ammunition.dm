@@ -3,7 +3,7 @@
 	desc = ""
 	icon_state = "s-casing"
 	flags_1 = CONDUCT_1
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_HIP
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
 

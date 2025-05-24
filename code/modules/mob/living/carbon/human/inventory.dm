@@ -4,8 +4,6 @@
 // Return the item currently in the slot ID
 /mob/living/carbon/human/get_item_by_slot(slot_id)
 	switch(slot_id)
-		if(SLOT_BACK)
-			return back
 		if(SLOT_WEAR_MASK)
 			return wear_mask
 		if(SLOT_NECK)
@@ -44,12 +42,6 @@
 			return wear_armor
 		if(SLOT_PANTS)
 			return wear_pants
-		if(SLOT_L_STORE)
-			return l_store
-		if(SLOT_R_STORE)
-			return r_store
-		if(SLOT_S_STORE)
-			return s_store
 	return null
 
 /mob/living/carbon/human/proc/get_all_slots()
@@ -58,7 +50,6 @@
 /mob/living/carbon/human/proc/get_body_slots()
 	return list(
 		back,
-		s_store,
 		handcuffed,
 		legcuffed,
 		wear_armor,
@@ -67,8 +58,6 @@
 		belt,
 		wear_ring,
 		wear_wrists,
-		l_store,
-		r_store,
 		wear_pants,
 		wear_shirt,
 		cloak,
@@ -92,9 +81,6 @@
 	return list(
 		back,
 		belt,
-		l_store,
-		r_store,
-		s_store,
 		backr,
 		backl,
 		beltr,
@@ -144,15 +130,12 @@
 				update_action_buttons_icon() //certain action buttons will no longer be usable.
 			update_inv_armor()
 		if(SLOT_PANTS)
-
 			wear_pants = I
 			update_inv_pants()
 		if(SLOT_SHIRT)
-
 			wear_shirt = I
 			update_inv_shirt()
 		if(SLOT_CLOAK)
-
 			cloak = I
 			update_inv_cloak()
 		if(SLOT_BELT_L)
@@ -162,24 +145,12 @@
 			beltr = I
 			update_inv_belt()
 		if(SLOT_BACK_R)
-
 			backr = I
 			update_inv_back()
 		if(SLOT_BACK_L)
-
 			backl = I
 			update_inv_back()
-		if(SLOT_L_STORE)
-			l_store = I
-			update_inv_pockets()
-		if(SLOT_R_STORE)
-			r_store = I
-			update_inv_pockets()
-		if(SLOT_S_STORE)
-			s_store = I
-			update_inv_s_store()
 		if(SLOT_MOUTH)
-
 			mouth = I
 			update_inv_mouth()
 		if(SLOT_IN_BACKPACK)
@@ -227,8 +198,6 @@
 	if(index && !QDELETED(src) && dna.species.mutanthands) //hand freed, fill with claws, skip if we're getting deleted.
 		put_in_hand(new dna.species.mutanthands(), index)
 	if(I == wear_armor)
-		if(s_store && invdrop)
-			dropItemToGround(s_store, TRUE, silent = silent) //It makes no sense for your suit storage to stay on you if you drop your suit.
 		if(wear_armor.breakouttime) //when unequipping a straightjacket
 			REMOVE_TRAIT(src, TRAIT_RESTRAINED, SUIT_TRAIT)
 			drop_all_held_items() //suit is restraining
@@ -239,11 +208,6 @@
 				update_inv_w_uniform()
 			update_inv_armor()
 	else if(I == wear_pants)
-		if(invdrop)
-			if(r_store)
-				dropItemToGround(r_store, TRUE, silent = silent) //Again, makes sense for pockets to drop.
-			if(l_store)
-				dropItemToGround(l_store, TRUE, silent = silent)
 		wear_pants = null
 		if(!QDELETED(src))
 			update_inv_pants()
@@ -274,18 +238,6 @@
 		wear_wrists = null
 		if(!QDELETED(src))
 			update_inv_wrists()
-	else if(I == r_store)
-		r_store = null
-		if(!QDELETED(src))
-			update_inv_pockets()
-	else if(I == l_store)
-		l_store = null
-		if(!QDELETED(src))
-			update_inv_pockets()
-	else if(I == s_store)
-		s_store = null
-		if(!QDELETED(src))
-			update_inv_s_store()
 	else if(I == wear_shirt)
 		wear_shirt = null
 		if(!QDELETED(src))
@@ -365,37 +317,6 @@
 		qdel(slot)
 	for(var/obj/item/I in held_items)
 		qdel(I)
-
-/mob/living/carbon/human/proc/smart_equipbag() // take most recent item out of bag or place held item in bag
-	if(incapacitated(ignore_grab = TRUE))
-		return
-	var/obj/item/thing = get_active_held_item()
-	var/obj/item/equipped_back = get_item_by_slot(SLOT_BACK)
-	if(!equipped_back) // We also let you equip a backpack like this
-		if(!thing)
-			to_chat(src, "<span class='warning'>I have no backpack to take something out of!</span>")
-			return
-		if(equip_to_slot_if_possible(thing, SLOT_BACK))
-			update_inv_hands()
-		return
-	if(!SEND_SIGNAL(equipped_back, COMSIG_CONTAINS_STORAGE)) // not a storage item
-		if(!thing)
-			equipped_back.attack_hand(src)
-		else
-			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
-		return
-	if(thing) // put thing in backpack
-		if(!SEND_SIGNAL(equipped_back, COMSIG_TRY_STORAGE_INSERT, thing, src))
-			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
-		return
-	if(!equipped_back.contents.len) // nothing to take out
-		to_chat(src, "<span class='warning'>There's nothing in your backpack to take out!</span>")
-		return
-	var/obj/item/stored = equipped_back.contents[equipped_back.contents.len]
-	if(!stored || stored.on_found(src))
-		return
-	stored.attack_hand(src) // take out thing from backpack
-	return
 
 /mob/living/carbon/human/proc/smart_equipbelt() // put held thing in belt or take most recent item out of belt
 	if(incapacitated(ignore_grab = TRUE))

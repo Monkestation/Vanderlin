@@ -3,7 +3,7 @@
 	name = "banhammer"
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "toyhammer"
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_HIP
 	throwforce = 0
 	force = 1
 	w_class = WEIGHT_CLASS_TINY

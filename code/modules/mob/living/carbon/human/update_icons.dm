@@ -268,7 +268,7 @@ There are several things that need to be remembered:
 		update_inv_belt()
 		update_inv_back()
 		update_inv_armor()
-		update_inv_pockets()
+
 		update_inv_neck()
 		update_inv_cloak()
 		update_inv_pants()
@@ -289,7 +289,6 @@ There are several things that need to be remembered:
 	update_inv_belt()
 	update_inv_back()
 	update_inv_armor()
-	update_inv_pockets()
 	update_inv_neck()
 	update_inv_cloak()
 	update_inv_pants()
@@ -565,10 +564,6 @@ There are several things that need to be remembered:
 	apply_overlay(SHOES_LAYER)
 	apply_overlay(SHOESLEEVE_LAYER)
 
-/mob/living/carbon/human/update_inv_s_store()
-	return
-
-
 /mob/living/carbon/human/update_inv_head()
 	remove_overlay(HEAD_LAYER)
 
@@ -783,9 +778,6 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_wear_suit()
 	return
 
-/mob/living/carbon/human/update_inv_pockets()
-	return
-
 /mob/living/carbon/human/update_inv_wear_mask()
 	..()
 	var/list/offsets = dna?.species?.offset_features
@@ -818,12 +810,11 @@ There are several things that need to be remembered:
 	var/list/overcloaks = list()
 	var/list/undercloaks = list()
 	var/list/backbehind = list()
-	if(client && hud_used && hud_used.inv_slots[SLOT_BACK])
-		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK]
+	if(client && hud_used?.inv_slots[SLOT_BACK_R])
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK_R]
 		inv.update_icon()
-		inv = hud_used.inv_slots[SLOT_BACK_R]
-		inv.update_icon()
-		inv = hud_used.inv_slots[SLOT_BACK_L]
+	if(client && hud_used?.inv_slots[SLOT_BACK_L])
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK_L]
 		inv.update_icon()
 	if(backr)
 		if(backr.alternate_worn_layer == CLOAK_BEHIND_LAYER)
@@ -1410,13 +1401,6 @@ There are several things that need to be remembered:
 		if(hud_used.inventory_shown)
 			client.screen += I
 	update_observer_view(I,1)
-
-//update whether our back item appears on our hud.
-/mob/living/carbon/human/update_hud_back(obj/item/I)
-	I.screen_loc = ui_back
-	if(client && hud_used && hud_used.hud_shown)
-		client.screen += I
-	update_observer_view(I)
 
 //update whether our back item appears on our hud.
 /mob/living/carbon/human/update_hud_backr(obj/item/I)

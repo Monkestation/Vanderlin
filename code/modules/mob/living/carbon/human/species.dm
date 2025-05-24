@@ -774,12 +774,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if( !(I.slot_flags & ITEM_SLOT_NECK) )
 				return FALSE
 			return TRUE
-		if(SLOT_BACK)
-			if(H.back)
-				return FALSE
-			if( !(I.slot_flags & ITEM_SLOT_BACK) )
-				return FALSE
-			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_BACK_R)
 			if(H.backr)
 				return FALSE
@@ -919,57 +913,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if( !(I.slot_flags & ITEM_SLOT_WRISTS) )
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
-		if(SLOT_L_STORE)
-			if(HAS_TRAIT(I, TRAIT_NODROP)) //Pockets aren't visible, so you can't move TRAIT_NODROP items into them.
-				return FALSE
-			if(H.l_store)
-				return FALSE
-
-			var/obj/item/bodypart/O = H.get_bodypart(BODY_ZONE_L_LEG)
-
-			if(!H.wear_pants && !nojumpsuit && (!O || O.status != BODYPART_ROBOTIC))
-				if(!disable_warning)
-					to_chat(H, "<span class='warning'>I need a jumpsuit before you can attach this [I.name]!</span>")
-				return FALSE
-			if(I.slot_flags & ITEM_SLOT_DENYPOCKET)
-				return FALSE
-			if( I.w_class <= WEIGHT_CLASS_SMALL || (I.slot_flags & ITEM_SLOT_POCKET) )
-				return TRUE
-		if(SLOT_R_STORE)
-			if(HAS_TRAIT(I, TRAIT_NODROP))
-				return FALSE
-			if(H.r_store)
-				return FALSE
-
-			var/obj/item/bodypart/O = H.get_bodypart(BODY_ZONE_R_LEG)
-
-			if(!H.wear_pants && !nojumpsuit && (!O || O.status != BODYPART_ROBOTIC))
-				if(!disable_warning)
-					to_chat(H, "<span class='warning'>I need a jumpsuit before you can attach this [I.name]!</span>")
-				return FALSE
-			if(I.slot_flags & ITEM_SLOT_DENYPOCKET)
-				return FALSE
-			if( I.w_class <= WEIGHT_CLASS_SMALL || (I.slot_flags & ITEM_SLOT_POCKET) )
-				return TRUE
-			return FALSE
-		if(SLOT_S_STORE)
-			if(HAS_TRAIT(I, TRAIT_NODROP))
-				return FALSE
-			if(H.s_store)
-				return FALSE
-			if(!H.wear_armor)
-				if(!disable_warning)
-					to_chat(H, "<span class='warning'>I need a suit before you can attach this [I.name]!</span>")
-				return FALSE
-			if(!H.wear_armor.allowed)
-				if(!disable_warning)
-					to_chat(H, "<span class='warning'>I somehow have a suit with no defined allowed items for suit storage, stop that.</span>")
-				return FALSE
-			if(I.w_class > WEIGHT_CLASS_BULKY)
-				if(!disable_warning)
-					to_chat(H, "<span class='warning'>The [I.name] is too big to attach!</span>") //should be src?
-				return FALSE
-			return FALSE
 		if(SLOT_HANDCUFFED)
 			if(H.handcuffed)
 				return FALSE

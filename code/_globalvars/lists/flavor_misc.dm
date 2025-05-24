@@ -53,16 +53,6 @@ GLOBAL_LIST_INIT(unarmed_parrysound, list(
 
 GLOBAL_LIST_INIT(ghost_forms_with_accessories_list, list("ghost")) //stores the ghost forms that support hair and other such things
 
-	//Backpacks
-#define GBACKPACK "Grey Backpack"
-#define GSATCHEL "Grey Satchel"
-#define GDUFFELBAG "Grey Duffel Bag"
-#define LSATCHEL "Leather Satchel"
-#define DBACKPACK "Department Backpack"
-#define DSATCHEL "Department Satchel"
-#define DDUFFELBAG "Department Duffel Bag"
-GLOBAL_LIST_INIT(backpacklist, list(DBACKPACK, DSATCHEL, DDUFFELBAG, GBACKPACK, GSATCHEL, GDUFFELBAG, LSATCHEL))
-
 	//Suit/Skirt
 #define PREF_SUIT "Jumpsuit"
 #define PREF_SKIRT "Jumpskirt"

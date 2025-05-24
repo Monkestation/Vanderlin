@@ -197,17 +197,6 @@
 			H.equip_to_slot_or_del(new r_hand(H),SLOT_HANDS, TRUE)
 
 	if(!visualsOnly) // Items in pockets or backpack don't show up on mob's icon.
-		if(l_pocket)
-			H.equip_to_slot_or_del(new l_pocket(H),SLOT_L_STORE, TRUE)
-		if(r_pocket)
-			H.equip_to_slot_or_del(new r_pocket(H),SLOT_R_STORE, TRUE)
-
-//		if(box)
-//			if(!backpack_contents)
-//				backpack_contents = list()
-//			backpack_contents.Insert(1, box)
-//			backpack_contents[box] = 1
-
 		if(backpack_contents)
 			for(var/path in backpack_contents)
 				var/number = backpack_contents[path]
@@ -250,10 +239,6 @@
 /datum/outfit/proc/apply_fingerprints(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
-	if(H.back)
-		H.back.add_fingerprint(H,1)	//The 1 sets a flag to ignore gloves
-		for(var/obj/item/I in H.back.contents)
-			I.add_fingerprint(H,1)
 	if(H.wear_ring)
 		H.wear_ring.add_fingerprint(H,1)
 	if(H.wear_pants)
@@ -276,12 +261,6 @@
 		H.belt.add_fingerprint(H,1)
 		for(var/obj/item/I in H.belt.contents)
 			I.add_fingerprint(H,1)
-	if(H.s_store)
-		H.s_store.add_fingerprint(H,1)
-	if(H.l_store)
-		H.l_store.add_fingerprint(H,1)
-	if(H.r_store)
-		H.r_store.add_fingerprint(H,1)
 	for(var/obj/item/I in H.held_items)
 		I.add_fingerprint(H,1)
 	return 1

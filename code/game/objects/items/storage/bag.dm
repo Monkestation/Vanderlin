@@ -1,5 +1,5 @@
 /obj/item/storage/bag
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_HIP
 
 /obj/item/storage/bag/ComponentInitialize()
 	. = ..()

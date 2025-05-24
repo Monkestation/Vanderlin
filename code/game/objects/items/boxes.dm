@@ -53,7 +53,7 @@
 	icon_state = "matchbox"
 	item_state = "zippo"
 	w_class = WEIGHT_CLASS_TINY
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_HIP
 	foldable = FALSE
 
 /obj/item/storage/box/matches/ComponentInitialize()

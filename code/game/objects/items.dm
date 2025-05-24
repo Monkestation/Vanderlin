@@ -959,16 +959,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(ishuman(owner))
 		H = owner
 	var/flags = slot_flags
-//	if(flags & ITEM_SLOT_OCLOTHING)
-//		owner.update_inv_wear_suit()
-//	if(flags & ITEM_SLOT_ICLOTHING)
-//		owner.update_inv_w_uniform()
 	if(flags & ITEM_SLOT_GLOVES)
 		owner.update_inv_gloves()
-//	if(flags & ITEM_SLOT_HEAD)
-//		owner.update_inv_glasses()
-//	if(flags & ITEM_SLOT_HEAD)
-//		owner.update_inv_ears()
 	if(flags & ITEM_SLOT_MASK)
 		owner.update_inv_wear_mask()
 	if(flags & ITEM_SLOT_SHOES)
@@ -1264,10 +1256,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(altgripped)
 		altgripped = FALSE
 	update_transform()
-	if(user.get_item_by_slot(SLOT_BACK) == src)
-		user.update_inv_back()
-	else
-		user.update_inv_hands()
+	user.update_inv_hands()
 	if(show_message)
 		to_chat(user, "<span class='notice'>I wield [src] normally.</span>")
 	if(user.get_active_held_item() == src)

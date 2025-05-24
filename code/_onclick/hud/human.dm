@@ -502,20 +502,11 @@
 			if(H.belt)
 				H.belt.screen_loc = ui_belt
 				screenmob.client.screen += H.belt
-			if(H.back)
-				H.back.screen_loc = ui_back
-				screenmob.client.screen += H.back
 		else
 			if(H.wear_ring)
 				screenmob.client.screen -= H.wear_ring
 			if(H.belt)
 				screenmob.client.screen -= H.belt
-			if(H.back)
-				screenmob.client.screen -= H.back
-			if(H.l_store)
-				screenmob.client.screen -= H.l_store
-			if(H.r_store)
-				screenmob.client.screen -= H.r_store
 
 	if(hud_version != HUD_STYLE_NOHUD)
 		for(var/obj/item/I in H.held_items)

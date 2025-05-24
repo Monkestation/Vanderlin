@@ -630,9 +630,6 @@ will handle it, but:
 		for(var/obj/item/I in M.held_items)
 			wash_obj(I)
 
-		if(M.back && wash_obj(M.back))
-			M.update_inv_back(0)
-
 		var/list/obscured = M.check_obscured_slots()
 
 		if(M.head && wash_obj(M.head,clean))

@@ -287,7 +287,6 @@
 #define OFFSET_GLASSES "glasses"
 #define OFFSET_EARS "ears"
 #define OFFSET_SHOES "shoes"
-#define OFFSET_S_STORE "s_store"
 #define OFFSET_FACEMASK "mask"
 #define OFFSET_HEAD "head"
 #define OFFSET_FACE "face" //facial hair and hair

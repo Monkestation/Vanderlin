@@ -223,12 +223,6 @@
 	//suit/armorF
 	if(wear_armor && !(SLOT_ARMOR in obscured))
 		. += "[m3] [wear_armor.get_examine_string(user)]."
-		//suit/armor storage
-		if(s_store && !(SLOT_S_STORE in obscured))
-			. += "[m1] carrying [s_store.get_examine_string(user)] on [m2] [wear_armor.name]."
-	//back
-//	if(back)
-//		. += "[m3] [back.get_examine_string(user)] on [m2] back."
 
 	if(cloak && !(SLOT_CLOAK in obscured))
 		. += "[m3] [cloak.get_examine_string(user)] on [m2] shoulders."

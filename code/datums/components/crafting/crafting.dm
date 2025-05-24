@@ -75,8 +75,6 @@
 				if(AM.flags_1 & HOLOGRAM_1)
 					continue
 				. += AM
-	for(var/slot in list(SLOT_R_STORE, SLOT_L_STORE))
-		. += user.get_item_by_slot(slot)
 
 /obj/item/proc/can_craft_with()
 	return TRUE

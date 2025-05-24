@@ -36,9 +36,6 @@
 #define ITEM_SLOT_WRISTS		(1<<18)
 #define ITEM_SLOT_OCLOTHING		(1<<19)
 #define ITEM_SLOT_ICLOTHING		(1<<20)
-#define ITEM_SLOT_POCKET		(1<<21) // this is to allow items with a w_class of WEIGHT_CLASS_NORMAL or WEIGHT_CLASS_BULKY to fit in pockets.
-#define ITEM_SLOT_DENYPOCKET	(1<<22) // this is to deny items with a w_class of WEIGHT_CLASS_SMALL or WEIGHT_CLASS_TINY to fit in pockets.
-#define ITEM_SLOT_BACKPACK		(1<<23)
 
 #define ITEM_SLOT_BACK			ITEM_SLOT_BACK_L | ITEM_SLOT_BACK_R
 
@@ -56,14 +53,18 @@
 #define SLOT_GLOVES			10
 #define SLOT_RING			11
 #define SLOT_WRISTS			12
-#define SLOT_BELT_L			13
-#define SLOT_BELT_R			14
-#define SLOT_ARMOR			15
-#define SLOT_SHIRT			16
-#define SLOT_SHOES			17
-#define SLOT_PANTS			18
-#define SLOT_IN_BACKPACK	19
-#define SLOT_LEGCUFFED		20
+#define SLOT_BELT			13
+#define SLOT_BELT_L			14
+#define SLOT_BELT_R			15
+#define SLOT_ARMOR			16
+#define SLOT_SHIRT			17
+#define SLOT_SHOES			18
+#define SLOT_PANTS			19
+#define SLOT_IN_BACKPACK	20
+#define SLOT_LEGCUFFED		21
+
+#define SLOTS_AMT			21 // Keep this up to date!
+
 
 #define ALL_ITEM_SLOTS list(,\
 	SLOT_BACK_L,\
@@ -88,24 +89,31 @@
 	SLOT_LEGCUFFED,\
 )
 
-
-//old slots
-#define SLOT_BACK			21
-#define SLOT_BELT			22
-#define SLOT_L_STORE		23
-#define SLOT_R_STORE		24
-#define SLOT_S_STORE		25
-#define SLOT_GENERC_DEXTROUS_STORAGE	26
-
-#define SLOTS_AMT			28 // Keep this up to date!
-
+#define DEFAULT_SLOT_PRIORITY list(\
+	SLOT_HEAD,\
+	SLOT_SHIRT,\
+	SLOT_PANTS,\
+	SLOT_GLOVES,\
+	SLOT_SHOES,\
+	SLOT_WEAR_MASK,\
+	SLOT_WRISTS,\
+	SLOT_CLOAK,\
+	SLOT_ARMOR,\
+	SLOT_BACK_L,\
+	SLOT_BACK_R,\
+	SLOT_BELT,\
+	SLOT_BELT_L,\
+	SLOT_BELT_R,\
+	SLOT_MOUTH,\
+	SLOT_NECK,\
+	SLOT_RING,\
+	SLOT_HANDS,\
+)
 
 //I hate that this has to exist
 /proc/slotdefine2slotbit(slotdefine) //Keep this up to date with the value of SLOT BITMASKS and SLOTS (the two define sections above)
 	. = 0
 	switch(slotdefine)
-		if(SLOT_BACK)
-			. = ITEM_SLOT_BACK
 		if(SLOT_WEAR_MASK)
 			. = ITEM_SLOT_MASK
 		if(SLOT_MOUTH)
@@ -134,8 +142,6 @@
 			. = ITEM_SLOT_PANTS
 		if(SLOT_SHIRT)
 			. = ITEM_SLOT_SHIRT
-		if(SLOT_L_STORE, SLOT_R_STORE)
-			. = ITEM_SLOT_POCKET
 		if(SLOT_HANDS)
 			. = ITEM_SLOT_HANDS
 		if(SLOT_IN_BACKPACK)

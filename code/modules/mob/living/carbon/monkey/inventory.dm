@@ -22,12 +22,6 @@
 			if( !(I.slot_flags & ITEM_SLOT_HEAD) )
 				return FALSE
 			return TRUE
-		if(SLOT_BACK)
-			if(back)
-				return FALSE
-			if( !(I.slot_flags & ITEM_SLOT_BACK) )
-				return FALSE
-			return TRUE
 	return FALSE //Unsupported slot
 
 

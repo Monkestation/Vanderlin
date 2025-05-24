@@ -55,9 +55,6 @@
 	var/obj/item/beltr = null
 	var/obj/item/wear_ring = null
 	var/obj/item/wear_wrists = null
-	var/obj/item/r_store = null
-	var/obj/item/l_store = null
-	var/obj/item/s_store = null
 	var/obj/item/cloak = null
 	var/obj/item/clothing/wear_shirt = null
 
@@ -150,7 +147,7 @@
 	torso_class = max(shirt_ac, chest_ac)			//Use heaviest Torso Armor Class
 
 	//Get Limb values, use heaviest pair
-	var/list/accessories = list(head, wear_mask, wear_wrists, wear_neck, cloak, wear_pants, gloves, shoes, belt, s_store)
+	var/list/accessories = list(head, wear_mask, wear_wrists, wear_neck, cloak, wear_pants, gloves, shoes, belt)
 	var/acc_class = ARMOR_CLASS_NONE
 	var/heavy_count = 0
 	var/medium_count = 0

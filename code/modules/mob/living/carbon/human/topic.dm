@@ -123,38 +123,6 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
 				C.put_in_hands(U)
-
-	if(href_list["pockets"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)) //TODO: Make it match (or intergrate it into) strippanel so you get 'item cannot fit here' warnings if mob_can_equip fails
-		var/pocket_side = href_list["pockets"]
-		var/pocket_id = (pocket_side == "right" ? SLOT_R_STORE : SLOT_L_STORE)
-		var/obj/item/pocket_item = (pocket_id == SLOT_R_STORE ? r_store : l_store)
-		var/obj/item/place_item = usr.get_active_held_item() // Item to place in the pocket, if it's empty
-
-		var/delay_denominator = 1
-		if(pocket_item && !(pocket_item.item_flags & ABSTRACT))
-			if(HAS_TRAIT(pocket_item, TRAIT_NODROP))
-				to_chat(usr, span_warning("I try to empty [src]'s [pocket_side] pocket, it seems to be stuck!"))
-			to_chat(usr, span_notice("I try to empty [src]'s [pocket_side] pocket."))
-		else if(place_item && place_item.mob_can_equip(src, usr, pocket_id, 1) && !(place_item.item_flags & ABSTRACT))
-			to_chat(usr, span_notice("I try to place [place_item] into [src]'s [pocket_side] pocket."))
-			delay_denominator = 4
-		else
-			return
-
-		if(do_after(usr, POCKET_STRIP_DELAY/delay_denominator, src)) //placing an item into the pocket is 4 times faster
-			if(pocket_item)
-				if(pocket_item == (pocket_id == SLOT_R_STORE ? r_store : l_store)) //item still in the pocket we search
-					dropItemToGround(pocket_item)
-			else
-				if(place_item)
-					if(place_item.mob_can_equip(src, usr, pocket_id, FALSE, TRUE))
-						usr.temporarilyRemoveItemFromInventory(place_item, TRUE)
-						equip_to_slot(place_item, pocket_id, TRUE)
-					//do nothing otherwise
-				//updating inv screen after handled by living/Topic()
-		else
-			// Display a warning if the user mocks up
-			to_chat(src, span_warning("I feel your [pocket_side] pocket being fumbled with!"))
 	return ..() //end of this massive fucking chain. TODO: make the hud chain not spooky. - Yeah, great job doing that.
 
 /mob/living/proc/check_heartbeat(mob/user)

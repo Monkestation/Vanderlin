@@ -74,15 +74,6 @@
 	inv_box.hud = src
 	static_inventory += inv_box
 
-	inv_box = new /atom/movable/screen/inventory()
-	inv_box.name = "back"
-	inv_box.icon = ui_style
-	inv_box.icon_state = "back"
-	inv_box.screen_loc = ui_monkey_back
-	inv_box.slot_id = SLOT_BACK
-	inv_box.hud = src
-	static_inventory += inv_box
-
 	throw_icon = new /atom/movable/screen/throw_catch()
 	throw_icon.icon = ui_style
 	throw_icon.screen_loc = ui_drop_throw
@@ -126,9 +117,6 @@
 	var/mob/living/carbon/monkey/M = mymob
 
 	if(hud_shown)
-		if(M.back)
-			M.back.screen_loc = ui_monkey_back
-			M.client.screen += M.back
 		if(M.wear_mask)
 			M.wear_mask.screen_loc = ui_monkey_mask
 			M.client.screen += M.wear_mask
@@ -139,8 +127,6 @@
 			M.head.screen_loc = ui_monkey_head
 			M.client.screen += M.head
 	else
-		if(M.back)
-			M.back.screen_loc = null
 		if(M.wear_mask)
 			M.wear_mask.screen_loc = null
 		if(M.head)

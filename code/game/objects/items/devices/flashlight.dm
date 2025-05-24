@@ -12,7 +12,7 @@
 	light_system = MOVABLE_LIGHT
 	light_outer_range = 4
 	light_power = 1
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_HIP
 	possible_item_intents = list(INTENT_GENERIC)
 	var/on = FALSE
 

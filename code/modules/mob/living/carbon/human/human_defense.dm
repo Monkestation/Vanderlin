@@ -22,8 +22,7 @@
 		def_zone = CBP.body_zone
 	var/protection = 0
 	var/obj/item/clothing/used
-	//Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
-	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, s_store, ears, wear_ring)
+	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, ears, wear_ring)
 	for(var/bp in body_parts)
 		if(!bp)
 			continue
@@ -73,7 +72,7 @@
 	if(isbodypart(def_zone))
 		var/obj/item/bodypart/CBP = def_zone
 		def_zone = CBP.body_zone
-	var/list/body_parts = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, s_store, ears, wear_ring) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
+	var/list/body_parts = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, ears, wear_ring)
 	for(var/bp in body_parts)
 		if(!bp)
 			continue
@@ -458,13 +457,6 @@
 				damaged += .
 			if(wear_ring)
 				inventory_items_to_kill += wear_ring
-			if(r_store)
-				inventory_items_to_kill += r_store
-			if(l_store)
-				inventory_items_to_kill += l_store
-			if(s_store)
-				inventory_items_to_kill += s_store
-
 
 	//ARMS & HANDS//
 	if(!bodyzone_hit || bodyzone_hit == BODY_ZONE_L_ARM || bodyzone_hit == BODY_ZONE_R_ARM)

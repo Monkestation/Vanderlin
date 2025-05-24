@@ -381,7 +381,7 @@
 	pixel_x = 0
 	bigboy = FALSE
 	gripsprite = TRUE
-	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_BACK
 	max_integrity = 200
 	minstr = 8
 	sellprice = 5
