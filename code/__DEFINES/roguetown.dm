@@ -1,15 +1,21 @@
 //used in various places
-#define ALL_RACES_LIST					list("human", "demihuman", "harpy","rakshari", "dwarf", "elf", "tiefling", "aasimar", "halforc", "orc", "zizombie", "kobold")
+#define ALL_RACES_LIST					list("human", "demihuman", "harpy", "rakshari", "dwarf", "elf", "tiefling", "aasimar", "halforc", "orc", "zizombie", "kobold", "triton")
+
+/// Races where females get underwear, no underwear for kobold, rakshari and triton
+#define RACES_UNDERWEAR_FEMALE			list("human", "demihuman", "harpy", "dwarf", "elf", "tiefling", "aasimar", "halforc", "orc", "zizombie")
+
+/// Races where males get underwear, identical to above but elves and dwarves are handled seperately
+#define RACES_UNDERWEAR_MALE			list("human", "demihuman", "harpy", "tiefling", "aasimar", "halforc", "orc", "zizombie")
 
 /// All playable races from character selection menu.
-#define RACES_PLAYER_ALL				list("Humen", "Hollow-Kin", "Harpy", "Rakshari", "Half-Elf", "Half-Drow", "Dark Elf", "Elf", "Dwarf", "Tiefling", "Half-Orc", "Aasimar", "Kobold")
+#define RACES_PLAYER_ALL				list("Humen", "Hollow-Kin", "Harpy", "Rakshari", "Half-Elf", "Half-Drow", "Dark Elf", "Elf", "Dwarf", "Tiefling", "Half-Orc", "Aasimar", "Kobold", "Triton")
 
 /// Races not considered discriminated against in Vanderlin. Used for nobility, guards, etc.
 #define RACES_PLAYER_NONDISCRIMINATED	list("Humen", "Half-Elf", "Elf", "Dwarf", "Aasimar")
 /// Races who are nonheretical to the church. Excluded races typically have an inhumen god associated, like Zizo. Used for church/faith roles.
-#define RACES_PLAYER_NONHERETICAL		list("Humen", "Half-Elf", "Elf", "Dwarf", "Aasimar", "Harpy")
+#define RACES_PLAYER_NONHERETICAL		list("Humen", "Half-Elf", "Elf", "Dwarf", "Aasimar", "Harpy", "Triton")
 /// Races who are non-exotic to Vanderlin. These are races from foreign lands with no local pull or uncommon races. Used in miscellaneous cases, when they would not be that role.
-#define RACES_PLAYER_NONEXOTIC			list("Humen", "Hollow-Kin", "Harpy", "Half-Elf", "Half-Drow", "Dark Elf", "Elf", "Dwarf", "Tiefling", "Half-Orc", "Aasimar")
+#define RACES_PLAYER_NONEXOTIC			list("Humen", "Hollow-Kin", "Harpy", "Half-Elf", "Half-Drow", "Dark Elf", "Elf", "Dwarf", "Tiefling", "Half-Orc", "Aasimar", "Triton")
 ///Races that lack lux
 #define RACES_PLAYER_LUXLESS			list("Kobold", "Hollow-Kin", "Rakshari")
 
@@ -25,7 +31,6 @@
 
 /// Guard Races - No Orcs
 #define RACES_PLAYER_GUARD				list("Humen", "Rakshari", "Half-Elf", "Half-Drow", "Elf", "Dwarf", "Tiefling", "Aasimar", "Harpy")
-
 
 #define ALL_TEMPLE_PATRONS 		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
 #define ALL_CLERIC_PATRONS 		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)

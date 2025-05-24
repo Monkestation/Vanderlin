@@ -11,6 +11,12 @@
 #define TEXT_EAST			"[EAST]"
 #define TEXT_WEST			"[WEST]"
 
+/// Use male sprites
+//#define MALE_SPRITES 	NONE
+/// Use female sprites only
+#define FEMALE_SPRITES 	1
+/// Use female sprites and boob
+#define FEMALE_BOOB 	2
 
 //Human Overlays Indexes/////////
 #define REFLECTION_LAYER		49

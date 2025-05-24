@@ -295,7 +295,6 @@
 		/datum/sprite_accessory/hair/head/kusanagi_alt,
 		/datum/sprite_accessory/hair/head/shorthair6,
 		/datum/sprite_accessory/hair/head/helmet,
-
 		)
 
 /datum/customizer_choice/bodypart_feature/hair/head/humanoid/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
@@ -317,6 +316,24 @@
 
 /datum/customizer_choice/bodypart_feature/hair/head/humanoid/bald_default/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
 	return /datum/sprite_accessory/hair/head/bald
+
+/datum/customizer/bodypart_feature/hair/head/triton
+	customizer_choices = list(/datum/customizer_choice/bodypart_feature/hair/head/triton)
+
+/datum/customizer_choice/bodypart_feature/hair/head/triton
+	sprite_accessories = list(
+		/datum/sprite_accessory/hair/head/bald,
+		/datum/sprite_accessory/hair/head/triton/fin,
+		/datum/sprite_accessory/hair/head/triton/seaking,
+		/datum/sprite_accessory/hair/head/triton/siren,
+		/datum/sprite_accessory/hair/head/triton/jellyfish,
+		/datum/sprite_accessory/hair/head/triton/anemonger,
+		/datum/sprite_accessory/hair/head/triton/punkfish,
+		/datum/sprite_accessory/hair/head/triton/weed,
+		/datum/sprite_accessory/hair/head/triton/gorgon,
+		/datum/sprite_accessory/hair/head/triton/lion,
+		/datum/sprite_accessory/hair/head/triton/betta,
+	)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid
 	customizer_choices = list(/datum/customizer_choice/bodypart_feature/hair/facial/humanoid)

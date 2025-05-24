@@ -87,7 +87,7 @@ There are several things that need to be remembered:
 	remove_overlay(LEG_DAMAGE_LAYER)
 	remove_overlay(ARM_DAMAGE_LAYER)
 
-	var/limb_icon = dna.species.dam_icon
+	var/limb_icon = dna.species.dam_icon_m
 	if(age == AGE_CHILD)
 		limb_icon = dna.species.child_dam_icon
 	var/hidechest = FALSE
@@ -95,10 +95,10 @@ There are several things that need to be remembered:
 	var/list/limb_overlaysb = list()
 	var/list/limb_overlaysc = list()
 
-	if((gender == FEMALE && !dna.species.use_m)|| dna.species.use_f)
+	if((gender == FEMALE && !dna.species.swap_female_clothes) || dna.species.swap_male_clothes)
 		limb_icon = dna.species.dam_icon_f
 
-		if(gender == MALE || dna.species.use_m)
+		if(gender == MALE || dna.species.swap_female_clothes)
 			hidechest = TRUE
 
 		var/obj/item/bodypart/CH = get_bodypart(BODY_ZONE_CHEST)
@@ -122,7 +122,7 @@ There are several things that need to be remembered:
 		var/list/armdam_overlays = list()
 		var/obj/item/bodypart/BP = X
 		var/g = BP.offset
-		if(gender == FEMALE || dna.species.use_f)
+		if(gender == FEMALE || dna.species.swap_male_clothes)
 			g = BP.offset_f
 		if(BP.body_zone == BODY_ZONE_HEAD)
 			update_body()
@@ -302,23 +302,25 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_w_uniform()
 	return
 
-
 /mob/living/carbon/human/update_inv_neck()
 	remove_overlay(NECK_LAYER)
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
 
-	if(client && hud_used && hud_used.inv_slots[SLOT_NECK])
+	if(client && hud_used?.inv_slots[SLOT_NECK])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_NECK]
 		inv.update_icon()
 
 	if(wear_neck)
-		var/mutable_appearance/neck_overlay
-
 		if(!(SLOT_NECK in check_obscured_slots()))
-			neck_overlay = wear_neck.build_worn_icon(age = age, default_layer = NECK_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/neck.dmi')
-			if(gender == MALE)
+			var/datum/species/species = dna?.species
+			var/list/offsets = species?.offset_features
+			if(age == AGE_CHILD)
+				offsets = species?.offset_features_child
+			var/use_female_sprites = FALSE
+			if(species?.sexes)
+				if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+					use_female_sprites = FEMALE_SPRITES
+			var/mutable_appearance/neck_overlay = wear_neck.build_worn_icon(age, NECK_LAYER, 'icons/roguetown/clothing/onmob/neck.dmi')
+			if(!use_female_sprites)
 				if(OFFSET_NECK in offsets)
 					neck_overlay.pixel_x += offsets[OFFSET_NECK][1]
 					neck_overlay.pixel_y += offsets[OFFSET_NECK][2]
@@ -329,35 +331,39 @@ There are several things that need to be remembered:
 			overlays_standing[NECK_LAYER] = neck_overlay
 
 		update_hud_neck(wear_neck)
+
 	update_body()
 	apply_overlay(NECK_LAYER)
 
 /mob/living/carbon/human/update_inv_wear_id()
 	remove_overlay(RING_LAYER)
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
 
 	if(client && hud_used)
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_RING]
 		inv.update_icon()
 
-
 	if(wear_ring)
 		wear_ring.screen_loc = rogueui_ringr
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			client.screen += wear_ring
 		update_observer_view(wear_ring)
-		var/use_female_sprites = dna?.species.sexes ? (gender == FEMALE && !dna.species.use_m) || dna.species.use_f : FALSE
-		var/mutable_appearance/id_overlay = wear_ring.build_worn_icon(age = age, default_layer = RING_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/rings.dmi', coom = use_female_sprites)
-		if(!dna?.species.sexes || gender == MALE)
-			if(OFFSET_ID in offsets)
-				id_overlay.pixel_x += offsets[OFFSET_ID][1]
-				id_overlay.pixel_y += offsets[OFFSET_ID][2]
+		var/datum/species/species = dna?.species
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/use_female_sprites = FALSE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+		var/mutable_appearance/id_overlay = wear_ring.build_worn_icon(age, RING_LAYER, 'icons/roguetown/clothing/onmob/rings.dmi')
+		if(!use_female_sprites)
+			if(OFFSET_RING in offsets)
+				id_overlay.pixel_x += offsets[OFFSET_RING][1]
+				id_overlay.pixel_y += offsets[OFFSET_RING][2]
 		else
-			if(OFFSET_ID_F in offsets)
-				id_overlay.pixel_x += offsets[OFFSET_ID_F][1]
-				id_overlay.pixel_y += offsets[OFFSET_ID_F][2]
+			if(OFFSET_RING_F in offsets)
+				id_overlay.pixel_x += offsets[OFFSET_RING_F][1]
+				id_overlay.pixel_y += offsets[OFFSET_RING_F][2]
 		overlays_standing[RING_LAYER] = id_overlay
 
 	apply_overlay(RING_LAYER)
@@ -366,13 +372,16 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_gloves()
 	remove_overlay(GLOVES_LAYER)
 	remove_overlay(GLOVESLEEVE_LAYER)
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
 
-	if(client && hud_used && hud_used.inv_slots[SLOT_GLOVES])
+	if(client && hud_used?.inv_slots[SLOT_GLOVES])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_GLOVES]
 		inv.update_icon()
+
+	var/use_female_sprites = FALSE
+	var/datum/species/species = dna?.species
+	if(species?.sexes)
+		if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+			use_female_sprites = FEMALE_SPRITES
 
 	if(!gloves && bloody_hands)
 		var/mutable_appearance/bloody_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands", -GLOVES_LAYER)
@@ -382,61 +391,56 @@ There are several things that need to be remembered:
 			else if(has_right_hand(FALSE))
 				bloody_overlay.icon_state = "bloodyhands_right"
 
-		if(dna && dna.species.sexes)
-			var/G = (gender == FEMALE) ? "f" : "m"
-			if(G == "f")
-				bloody_overlay.icon_state += "_f"
+		if(use_female_sprites)
+			bloody_overlay.icon_state += "_f"
 
 		overlays_standing[GLOVESLEEVE_LAYER] = bloody_overlay
 
 	if(gloves)
 		gloves.screen_loc = rogueui_gloves
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			if(hud_used.inventory_shown)
 				client.screen += gloves
-		update_observer_view(gloves,1)
-		if(dna && dna.species.sexes)
-			var/racecustom
-			var/mutable_appearance/gloves_overlay
-			if(dna.species.custom_clothes)
-				if(dna.species.custom_id)
-					racecustom = dna.species.custom_id
+		update_observer_view(gloves, 1)
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/racecustom
+		if(species?.custom_clothes)
+			if(species.custom_id)
+				racecustom = species.custom_id
+			else
+				racecustom = species.id
+		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
+		var/mutable_appearance/gloves_overlay = gloves.build_worn_icon(age, GLOVES_LAYER, 'icons/roguetown/clothing/onmob/gloves.dmi', coom = use_female_sprites, sleeveindex = armsindex, customi = racecustom)
+
+		if(!use_female_sprites)
+			if(OFFSET_GLOVES in offsets)
+				gloves_overlay.pixel_x += offsets[OFFSET_GLOVES][1]
+				gloves_overlay.pixel_y += offsets[OFFSET_GLOVES][2]
+		else
+			if(OFFSET_GLOVES_F in offsets)
+				gloves_overlay.pixel_x += offsets[OFFSET_GLOVES_F][1]
+				gloves_overlay.pixel_y += offsets[OFFSET_GLOVES_F][2]
+		overlays_standing[GLOVES_LAYER] = gloves_overlay
+
+		//add sleeve overlays, then offset
+		var/list/sleeves = list()
+		if(gloves.sleeved && armsindex > 0)
+			sleeves = get_sleeves_layer(gloves,armsindex,GLOVESLEEVE_LAYER)
+
+		if(sleeves)
+			for(var/X as anything in sleeves)
+				var/mutable_appearance/S = X
+				if(!use_female_sprites)
+					if(OFFSET_GLOVES in offsets)
+						S.pixel_x += offsets[OFFSET_GLOVES][1]
+						S.pixel_y += offsets[OFFSET_GLOVES][2]
 				else
-					racecustom = dna.species.id
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
-			if((G == "f" && !dna.species.use_m) || dna.species.use_f)
-				gloves_overlay = gloves.build_worn_icon(age = age, default_layer = GLOVES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = TRUE, sleeveindex = armsindex)
-			else
-				gloves_overlay = gloves.build_worn_icon(age = age, default_layer = GLOVES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, sleeveindex = armsindex, customi = racecustom)
-
-			if(gender == MALE)
-				if(OFFSET_GLOVES in offsets)
-					gloves_overlay.pixel_x += offsets[OFFSET_GLOVES][1]
-					gloves_overlay.pixel_y += offsets[OFFSET_GLOVES][2]
-			else
-				if(OFFSET_GLOVES_F in offsets)
-					gloves_overlay.pixel_x += offsets[OFFSET_GLOVES_F][1]
-					gloves_overlay.pixel_y += offsets[OFFSET_GLOVES_F][2]
-			overlays_standing[GLOVES_LAYER] = gloves_overlay
-
-			//add sleeve overlays, then offset
-			var/list/sleeves = list()
-			if(gloves.sleeved && armsindex > 0)
-				sleeves = get_sleeves_layer(gloves,armsindex,GLOVESLEEVE_LAYER)
-
-			if(sleeves)
-				for(var/X in sleeves)
-					var/mutable_appearance/S = X
-					if(gender == MALE)
-						if(OFFSET_GLOVES in offsets)
-							S.pixel_x += offsets[OFFSET_GLOVES][1]
-							S.pixel_y += offsets[OFFSET_GLOVES][2]
-					else
-						if(OFFSET_GLOVES_F in offsets)
-							S.pixel_x += offsets[OFFSET_GLOVES_F][1]
-							S.pixel_y += offsets[OFFSET_GLOVES_F][2]
-				overlays_standing[GLOVESLEEVE_LAYER] = sleeves
+					if(OFFSET_GLOVES_F in offsets)
+						S.pixel_x += offsets[OFFSET_GLOVES_F][1]
+						S.pixel_y += offsets[OFFSET_GLOVES_F][2]
+			overlays_standing[GLOVESLEEVE_LAYER] = sleeves
 
 
 	apply_overlay(GLOVES_LAYER)
@@ -445,62 +449,60 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_wrists()
 	remove_overlay(WRISTS_LAYER)
 	remove_overlay(WRISTSLEEVE_LAYER)
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
 
-	if(client && hud_used && hud_used.inv_slots[SLOT_WRISTS])
+	if(client && hud_used?.inv_slots[SLOT_WRISTS])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_WRISTS]
 		inv.update_icon()
 
 	if(wear_wrists)
 		wear_wrists.screen_loc = rogueui_wrists
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			if(hud_used.inventory_shown)
 				client.screen += wear_wrists
 		update_observer_view(wear_wrists,1)
-		if(dna && dna.species.sexes)
-			var/racecustom
-			if(dna.species.custom_clothes)
-				if(dna.species.custom_id)
-					racecustom = dna.species.custom_id
+		var/datum/species/species = dna?.species
+		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/use_female_sprites = FALSE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+		var/racecustom
+		if(species?.custom_clothes)
+			if(species.custom_id)
+				racecustom = species.custom_id
+			else
+				racecustom = species.id
+		var/mutable_appearance/wrists_overlay = wear_wrists.build_worn_icon(age, WRISTS_LAYER, coom = use_female_sprites, sleeveindex = armsindex, customi = racecustom)
+
+		if(!use_female_sprites)
+			if(OFFSET_WRISTS in offsets)
+				wrists_overlay.pixel_x += offsets[OFFSET_WRISTS][1]
+				wrists_overlay.pixel_y += offsets[OFFSET_WRISTS][2]
+		else
+			if(OFFSET_WRISTS_F in offsets)
+				wrists_overlay.pixel_x += offsets[OFFSET_WRISTS_F][1]
+				wrists_overlay.pixel_y += offsets[OFFSET_WRISTS_F][2]
+		overlays_standing[WRISTS_LAYER] = wrists_overlay
+
+		//add sleeve overlays, then offset
+		var/list/sleeves = list()
+		if(wear_wrists.sleeved && armsindex > 0)
+			sleeves = get_sleeves_layer(wear_wrists,armsindex,WRISTSLEEVE_LAYER)
+
+		if(sleeves)
+			for(var/mutable_appearance/S as anything in sleeves)
+				if(!use_female_sprites)
+					if(OFFSET_WRISTS in offsets)
+						S.pixel_x += offsets[OFFSET_WRISTS][1]
+						S.pixel_y += offsets[OFFSET_WRISTS][2]
 				else
-					racecustom = dna.species.id
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
-			var/mutable_appearance/wrists_overlay
-			if((G == "f" && !dna.species.use_m) || dna.species.use_f)
-				wrists_overlay = wear_wrists.build_worn_icon(age = age, default_layer = WRISTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = TRUE, sleeveindex = armsindex)
-			else
-				wrists_overlay = wear_wrists.build_worn_icon(age = age, default_layer = WRISTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, sleeveindex = armsindex, customi = racecustom)
-
-			if(gender == MALE)
-				if(OFFSET_WRISTS in offsets)
-					wrists_overlay.pixel_x += offsets[OFFSET_WRISTS][1]
-					wrists_overlay.pixel_y += offsets[OFFSET_WRISTS][2]
-			else
-				if(OFFSET_WRISTS_F in offsets)
-					wrists_overlay.pixel_x += offsets[OFFSET_WRISTS_F][1]
-					wrists_overlay.pixel_y += offsets[OFFSET_WRISTS_F][2]
-			overlays_standing[WRISTS_LAYER] = wrists_overlay
-
-			//add sleeve overlays, then offset
-			var/list/sleeves = list()
-			if(wear_wrists.sleeved && armsindex > 0)
-				sleeves = get_sleeves_layer(wear_wrists,armsindex,WRISTSLEEVE_LAYER)
-
-			if(sleeves)
-				for(var/X in sleeves)
-					var/mutable_appearance/S = X
-					if(gender == MALE)
-						if(OFFSET_WRISTS in offsets)
-							S.pixel_x += offsets[OFFSET_WRISTS][1]
-							S.pixel_y += offsets[OFFSET_WRISTS][2]
-					else
-						if(OFFSET_WRISTS_F in offsets)
-							S.pixel_x += offsets[OFFSET_WRISTS_F][1]
-							S.pixel_y += offsets[OFFSET_WRISTS_F][2]
-				overlays_standing[WRISTSLEEVE_LAYER] = sleeves
+					if(OFFSET_WRISTS_F in offsets)
+						S.pixel_x += offsets[OFFSET_WRISTS_F][1]
+						S.pixel_y += offsets[OFFSET_WRISTS_F][2]
+			overlays_standing[WRISTSLEEVE_LAYER] = sleeves
 
 	apply_overlay(WRISTS_LAYER)
 	apply_overlay(WRISTSLEEVE_LAYER)
@@ -516,51 +518,50 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_shoes()
 	remove_overlay(SHOES_LAYER)
 	remove_overlay(SHOESLEEVE_LAYER)
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
+
 	if(client && hud_used)
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_SHOES]
 		inv.update_icon()
 
 	if(shoes)
-		shoes.screen_loc = rogueui_shoes					//move the item to the appropriate screen loc
-		if(client && hud_used && hud_used.hud_shown)
-			if(hud_used.inventory_shown)			//if the inventory is open
-				client.screen += shoes					//add it to client's screen
+		shoes.screen_loc = rogueui_shoes
+		if(client && hud_used?.hud_shown)
+			if(hud_used.inventory_shown)
+				client.screen += shoes
 		update_observer_view(shoes,1)
-		if(dna && dna.species.sexes)
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/footindex = get_limbloss_index(LEG_RIGHT, LEG_LEFT)
-			var/racecustom
-			var/mutable_appearance/shoes_overlay
-			if(dna.species.custom_clothes)
-				if(dna.species.custom_id)
-					racecustom = dna.species.custom_id
-				else
-					racecustom = dna.species.id
-			if((G == "f" && !dna.species.use_m) || dna.species.use_f)
-				shoes_overlay = shoes.build_worn_icon(age = age, default_layer = SHOES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = footindex)
+
+		var/datum/species/species = dna?.species
+		var/footindex = get_limbloss_index(LEG_RIGHT, LEG_LEFT)
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/use_female_sprites = FALSE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+		var/racecustom
+		if(species?.custom_clothes)
+			if(species.custom_id)
+				racecustom = species.custom_id
 			else
-				shoes_overlay = shoes.build_worn_icon(age = age, default_layer = SHOES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, customi = racecustom, sleeveindex = footindex)
+				racecustom = species.id
+		var/mutable_appearance/shoes_overlay = shoes.build_worn_icon(age, SHOES_LAYER, 'icons/mob/clothing/feet.dmi', coom = use_female_sprites, customi = racecustom, sleeveindex = footindex)
+		if(OFFSET_SHOES in offsets)
+			shoes_overlay.pixel_x += offsets[OFFSET_SHOES][1]
+			shoes_overlay.pixel_y += offsets[OFFSET_SHOES][2]
+		overlays_standing[SHOES_LAYER] = shoes_overlay
 
-			if(OFFSET_SHOES in offsets)
-				shoes_overlay.pixel_x += offsets[OFFSET_SHOES][1]
-				shoes_overlay.pixel_y += offsets[OFFSET_SHOES][2]
-			overlays_standing[SHOES_LAYER] = shoes_overlay
+		//add sleeve overlays, then offset
+		var/list/sleeves = list()
+		if(shoes.sleeved && footindex > 0)
+			sleeves = get_sleeves_layer(shoes, footindex, SHOESLEEVE_LAYER)
+		if(sleeves)
+			for(var/mutable_appearance/S as anything in sleeves)
+				if(OFFSET_SHOES in offsets)
+					S.pixel_x += offsets[OFFSET_SHOES][1]
+					S.pixel_y += offsets[OFFSET_SHOES][2]
 
-			//add sleeve overlays, then offset
-			var/list/sleeves = list()
-			if(shoes.sleeved && footindex > 0)
-				sleeves = get_sleeves_layer(shoes,footindex,SHOESLEEVE_LAYER)
-			if(sleeves)
-				for(var/X in sleeves)
-					var/mutable_appearance/S = X
-					if(OFFSET_SHOES in offsets)
-						S.pixel_x += offsets[OFFSET_SHOES][1]
-						S.pixel_y += offsets[OFFSET_SHOES][2]
-
-				overlays_standing[SHOESLEEVE_LAYER] = sleeves
+			overlays_standing[SHOESLEEVE_LAYER] = sleeves
 
 	apply_overlay(SHOES_LAYER)
 	apply_overlay(SHOESLEEVE_LAYER)
@@ -575,21 +576,26 @@ There are several things that need to be remembered:
 	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
 		return
 
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
-
-	if(client && hud_used && hud_used.inv_slots[SLOT_HEAD])
+	if(client && hud_used?.inv_slots[SLOT_HEAD])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_HEAD]
 		inv.update_icon()
 
 	if(head)
 		update_hud_head(head)
+		var/datum/species/species = dna?.species
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/use_female_sprites = FALSE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+
 		overlays_standing[HEAD_LAYER] = head.build_worn_icon(age = age, default_layer = HEAD_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/head.dmi', coom = FALSE)
 		var/mutable_appearance/head_overlay = overlays_standing[HEAD_LAYER]
 		if(head_overlay)
 			remove_overlay(HEAD_LAYER)
-			if(gender == MALE)
+			if(!use_female_sprites)
 				if(OFFSET_HEAD in offsets)
 					head_overlay.pixel_x += offsets[OFFSET_HEAD][1]
 					head_overlay.pixel_y += offsets[OFFSET_HEAD][2]
@@ -598,8 +604,8 @@ There are several things that need to be remembered:
 					head_overlay.pixel_x += offsets[OFFSET_HEAD_F][1]
 					head_overlay.pixel_y += offsets[OFFSET_HEAD_F][2]
 			overlays_standing[HEAD_LAYER] = head_overlay
-		apply_overlay(HEAD_LAYER)
 
+	apply_overlay(HEAD_LAYER)
 	update_body() //hoodies
 
 /mob/living/carbon/human/update_inv_belt()
@@ -617,12 +623,31 @@ There are several things that need to be remembered:
 		inv = hud_used.inv_slots[SLOT_BELT_L]
 		inv.update_icon()
 
+	var/datum/species/species = dna?.species
+	var/use_female_sprites = FALSE
+	if(species?.sexes)
+		if(gender == FEMALE && !species.swap_female_clothes)
+			use_female_sprites = FEMALE_BOOB
+		else if(gender == MALE && species.swap_male_clothes)
+			use_female_sprites = FEMALE_SPRITES
+
+	var/list/offsets = species?.offset_features
+	if(age == AGE_CHILD)
+		offsets = species?.offset_features_child
+
+	var/racecustom
+	if(species?.custom_clothes)
+		if(species.custom_id)
+			racecustom = species.custom_id
+		else
+			racecustom = species.id
+
 	if(beltr)
 		if(beltr.bigboy)
 			beltr.screen_loc = "WEST-4:-16,SOUTH+2:-16"
 		else
 			beltr.screen_loc = rogueui_beltr
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			client.screen += beltr
 		update_observer_view(beltr)
 		if(!(cloak && (cloak.flags_inv & HIDEBELT)))
@@ -642,33 +667,24 @@ There are several things that need to be remembered:
 					onbelt_behind = mutable_appearance(beltr.getmoboverlay("onbelt",prop,behind=TRUE,mirrored=FALSE), layer=-BELT_BEHIND_LAYER)
 					onbelt_overlay = center_image(onbelt_overlay, beltr.inhand_x_dimension, beltr.inhand_y_dimension)
 					onbelt_behind = center_image(onbelt_behind, beltr.inhand_x_dimension, beltr.inhand_y_dimension)
-					if(ishuman(src))
-						var/mob/living/carbon/human/H = src
-						if(H.dna && H.dna.species)
-							var/list/offsets = H.dna.species.offset_features
-							if(H.age == AGE_CHILD)
-								offsets = H.dna.species.offset_features_child
-							if(gender == MALE)
-								if(OFFSET_BELT in offsets)
-									onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
-									onbelt_overlay.pixel_y += offsets[OFFSET_BELT][2]
-									onbelt_behind.pixel_x += offsets[OFFSET_BELT][1]
-									onbelt_behind.pixel_y += offsets[OFFSET_BELT][2]
-							else
-								if(OFFSET_BELT_F in offsets)
-									onbelt_overlay.pixel_x += offsets[OFFSET_BELT_F][1]
-									onbelt_overlay.pixel_y += offsets[OFFSET_BELT_F][2]
-									onbelt_behind.pixel_x += offsets[OFFSET_BELT_F][1]
-									onbelt_behind.pixel_y += offsets[OFFSET_BELT_F][2]
+					if(!use_female_sprites)
+						if(OFFSET_BELT in offsets)
+							onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
+							onbelt_overlay.pixel_y += offsets[OFFSET_BELT][2]
+							onbelt_behind.pixel_x += offsets[OFFSET_BELT][1]
+							onbelt_behind.pixel_y += offsets[OFFSET_BELT][2]
+					else
+						if(OFFSET_BELT_F in offsets)
+							onbelt_overlay.pixel_x += offsets[OFFSET_BELT_F][1]
+							onbelt_overlay.pixel_y += offsets[OFFSET_BELT_F][2]
+							onbelt_behind.pixel_x += offsets[OFFSET_BELT_F][1]
+							onbelt_behind.pixel_y += offsets[OFFSET_BELT_F][2]
 					standing_front += onbelt_overlay
 					standing_behind += onbelt_behind
 			else
-				onbelt_overlay = beltr.build_worn_icon(age = age, default_layer = BELT_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/belt_r.dmi')
+				onbelt_overlay = beltr.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belt_r.dmi')
 				if(onbelt_overlay)
-					var/list/offsets = dna?.species?.offset_features
-					if(age == AGE_CHILD)
-						offsets = dna?.species?.offset_features_child
-					if(gender == MALE)
+					if(!use_female_sprites)
 						if(OFFSET_BELT in offsets)
 							onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
 							onbelt_overlay.pixel_y += offsets[OFFSET_BELT][2]
@@ -683,7 +699,7 @@ There are several things that need to be remembered:
 			beltl.screen_loc = "WEST-2:-16,SOUTH+2:-16"
 		else
 			beltl.screen_loc = rogueui_beltl
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			client.screen += beltl
 		update_observer_view(beltl)
 		if(!(cloak && (cloak.flags_inv & HIDEBELT)))
@@ -703,33 +719,24 @@ There are several things that need to be remembered:
 					onbelt_behind = mutable_appearance(beltl.getmoboverlay("onbelt",prop,behind=TRUE,mirrored=TRUE), layer=-BELT_BEHIND_LAYER)
 					onbelt_overlay = center_image(onbelt_overlay, beltl.inhand_x_dimension, beltl.inhand_y_dimension)
 					onbelt_behind = center_image(onbelt_behind, beltl.inhand_x_dimension, beltl.inhand_y_dimension)
-					if(ishuman(src))
-						var/mob/living/carbon/human/H = src
-						if(H.dna && H.dna.species)
-							var/list/offsets = H.dna.species.offset_features
-							if(H.age == AGE_CHILD)
-								offsets = H.dna.species.offset_features_child
-							if(gender == MALE)
-								if(OFFSET_BELT in offsets)
-									onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
-									onbelt_overlay.pixel_y += offsets[OFFSET_BELT][2]
-									onbelt_behind.pixel_x += offsets[OFFSET_BELT][1]
-									onbelt_behind.pixel_y += offsets[OFFSET_BELT][2]
-							else
-								if(OFFSET_BELT_F in offsets)
-									onbelt_overlay.pixel_x += offsets[OFFSET_BELT_F][1]
-									onbelt_overlay.pixel_y += offsets[OFFSET_BELT_F][2]
-									onbelt_behind.pixel_x += offsets[OFFSET_BELT_F][1]
-									onbelt_behind.pixel_y += offsets[OFFSET_BELT_F][2]
+					if(!use_female_sprites)
+						if(OFFSET_BELT in offsets)
+							onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
+							onbelt_overlay.pixel_y += offsets[OFFSET_BELT][2]
+							onbelt_behind.pixel_x += offsets[OFFSET_BELT][1]
+							onbelt_behind.pixel_y += offsets[OFFSET_BELT][2]
+					else
+						if(OFFSET_BELT_F in offsets)
+							onbelt_overlay.pixel_x += offsets[OFFSET_BELT_F][1]
+							onbelt_overlay.pixel_y += offsets[OFFSET_BELT_F][2]
+							onbelt_behind.pixel_x += offsets[OFFSET_BELT_F][1]
+							onbelt_behind.pixel_y += offsets[OFFSET_BELT_F][2]
 					standing_front += onbelt_overlay
 					standing_behind += onbelt_behind
 			else
-				onbelt_overlay = beltl.build_worn_icon(age = age, default_layer = BELT_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/belt_l.dmi')
+				onbelt_overlay = beltl.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belt_l.dmi')
 				if(onbelt_overlay)
-					var/list/offsets = dna?.species?.offset_features
-					if(age == AGE_CHILD)
-						offsets = dna?.species?.offset_features_child
-					if(gender == MALE)
+					if(!use_female_sprites)
 						if(OFFSET_BELT in offsets)
 							onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
 							onbelt_overlay.pixel_y += offsets[OFFSET_BELT][2]
@@ -741,44 +748,27 @@ There are several things that need to be remembered:
 
 	if(belt)
 		belt.screen_loc = rogueui_belt
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			client.screen += belt
 		update_observer_view(belt)
-		if(!(cloak && (cloak.flags_inv & HIDEBELT)))
-			if(dna && dna.species.sexes)
-				var/G = (gender == FEMALE) ? "f" : "m"
-				var/racecustom
-				var/mutable_appearance/mbeltoverlay
-				if(dna.species.custom_clothes)
-					if(dna.species.custom_id)
-						racecustom = dna.species.custom_id
-					else
-						racecustom = dna.species.id
-				if((G == "f" && !dna.species.use_m) || dna.species.use_f)
-					mbeltoverlay = belt.build_worn_icon(age = age, default_layer = BELT_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/belts.dmi', coom = "f", customi = racecustom)
+		if(!(cloak?.flags_inv & HIDEBELT))
+			var/mutable_appearance/mbeltoverlay = belt.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belts.dmi', coom = use_female_sprites, customi = racecustom)
+			if(mbeltoverlay)
+				if(!use_female_sprites)
+					if(OFFSET_BELT in offsets)
+						mbeltoverlay.pixel_x += offsets[OFFSET_BELT][1]
+						mbeltoverlay.pixel_y += offsets[OFFSET_BELT][2]
 				else
-					mbeltoverlay = belt.build_worn_icon(age = age, default_layer = BELT_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/belts.dmi', coom = FALSE, customi = racecustom)
-				if(mbeltoverlay && !dna.species.custom_clothes)
-					var/list/offsets = dna?.species?.offset_features
-					if(age == AGE_CHILD)
-						offsets = dna?.species?.offset_features_child
-					if(gender == MALE)
-						if(OFFSET_BELT in offsets)
-							mbeltoverlay.pixel_x += offsets[OFFSET_BELT][1]
-							mbeltoverlay.pixel_y += offsets[OFFSET_BELT][2]
-					else
-						if(OFFSET_BELT_F in offsets)
-							mbeltoverlay.pixel_x += offsets[OFFSET_BELT_F][1]
-							mbeltoverlay.pixel_y += offsets[OFFSET_BELT_F][2]
-				standing_front += mbeltoverlay
+					if(OFFSET_BELT_F in offsets)
+						mbeltoverlay.pixel_x += offsets[OFFSET_BELT_F][1]
+						mbeltoverlay.pixel_y += offsets[OFFSET_BELT_F][2]
+			standing_front += mbeltoverlay
 
 	overlays_standing[BELT_LAYER] = standing_front
 	overlays_standing[BELT_BEHIND_LAYER] = standing_behind
 
 	apply_overlay(BELT_LAYER)
 	apply_overlay(BELT_BEHIND_LAYER)
-
-
 
 /mob/living/carbon/human/update_inv_wear_suit()
 	return
@@ -787,44 +777,67 @@ There are several things that need to be remembered:
 	return
 
 /mob/living/carbon/human/update_inv_wear_mask()
-	..()
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
+	remove_overlay(MASK_LAYER)
+
+	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
+		return
+
+	if(client && hud_used?.inv_slots[SLOT_WEAR_MASK])
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_WEAR_MASK]
+		inv.update_icon()
 
 	if(wear_mask)
-		if(!(SLOT_WEAR_MASK in check_obscured_slots()))
-			overlays_standing[MASK_LAYER] = wear_mask.build_worn_icon(default_layer = MASK_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/masks.dmi')
 		update_hud_wear_mask(wear_mask)
+		if(!(SLOT_WEAR_MASK in check_obscured_slots()))
+			var/mutable_appearance/mask_overlay = wear_mask.build_worn_icon(default_layer = MASK_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/masks.dmi')
+			var/datum/species/species = dna?.species
+			var/use_female_sprites = FALSE
+			if(species.sexes)
+				if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+					use_female_sprites = FEMALE_SPRITES
+			var/list/offsets = species?.offset_features
+			if(age == AGE_CHILD)
+				offsets = species?.offset_features_child
+			if(mask_overlay)
+				if(!use_female_sprites)
+					if(OFFSET_FACEMASK in offsets)
+						mask_overlay.pixel_x += offsets[OFFSET_FACEMASK][1]
+						mask_overlay.pixel_y += offsets[OFFSET_FACEMASK][2]
+				else
+					if(OFFSET_FACEMASK_F in offsets)
+						mask_overlay.pixel_x += offsets[OFFSET_FACEMASK_F][1]
+						mask_overlay.pixel_y += offsets[OFFSET_FACEMASK_F][2]
+				overlays_standing[MASK_LAYER] = mask_overlay
 
-	var/mutable_appearance/mask_overlay = overlays_standing[MASK_LAYER]
-	if(mask_overlay)
-		remove_overlay(MASK_LAYER)
-		if(gender == MALE)
-			if(OFFSET_FACEMASK in offsets)
-				mask_overlay.pixel_x += offsets[OFFSET_FACEMASK][1]
-				mask_overlay.pixel_y += offsets[OFFSET_FACEMASK][2]
-		else
-			if(OFFSET_FACEMASK_F in offsets)
-				mask_overlay.pixel_x += offsets[OFFSET_FACEMASK_F][1]
-				mask_overlay.pixel_y += offsets[OFFSET_FACEMASK_F][2]
-		overlays_standing[MASK_LAYER] = mask_overlay
-		apply_overlay(MASK_LAYER)
+	apply_overlay(MASK_LAYER)
 
 /mob/living/carbon/human/update_inv_back()
 	remove_overlay(BACK_LAYER)
 	remove_overlay(BACK_BEHIND_LAYER)
 	remove_overlay(UNDER_CLOAK_LAYER)
-	var/list/overcloaks = list()
-	var/list/undercloaks = list()
-	var/list/backbehind = list()
-	if(client && hud_used && hud_used.inv_slots[SLOT_BACK])
-		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK]
+
+	var/list/overcloaks
+	var/list/undercloaks
+	var/list/backbehind
+
+	if(client && hud_used?.inv_slots[SLOT_BACK_R])
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK_R]
 		inv.update_icon()
-		inv = hud_used.inv_slots[SLOT_BACK_R]
+	if(client && hud_used?.inv_slots[SLOT_BACK_L])
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK_L]
 		inv.update_icon()
-		inv = hud_used.inv_slots[SLOT_BACK_L]
-		inv.update_icon()
+
+	var/datum/species/species = dna?.species
+	var/use_female_sprites = FALSE
+	if(species?.sexes)
+		if(gender == FEMALE && !species.swap_female_clothes)
+			use_female_sprites = FEMALE_BOOB
+		else if(gender == MALE && species.swap_male_clothes)
+			use_female_sprites = FEMALE_SPRITES
+	var/list/offsets = species?.offset_features
+	if(age == AGE_CHILD)
+		offsets = species?.offset_features_child
+
 	if(backr)
 		if(backr.alternate_worn_layer == CLOAK_BEHIND_LAYER)
 			update_inv_cloak()
@@ -846,32 +859,23 @@ There are several things that need to be remembered:
 					behindback_overlay = mutable_appearance(backr.getmoboverlay("onback",prop,behind=TRUE,mirrored=FALSE), layer=-BACK_BEHIND_LAYER)
 					back_overlay = center_image(back_overlay, backr.inhand_x_dimension, backr.inhand_y_dimension)
 					behindback_overlay = center_image(behindback_overlay, backr.inhand_x_dimension, backr.inhand_y_dimension)
-					if(ishuman(src))
-						var/mob/living/carbon/human/H = src
-						if(H.dna && H.dna.species)
-							var/list/offsets = H.dna.species.offset_features
-							if(H.age == AGE_CHILD)
-								offsets = H.dna.species.offset_features_child
-							if(gender == MALE)
-								if(OFFSET_BACK in offsets)
-									back_overlay.pixel_x += offsets[OFFSET_BACK][1]
-									back_overlay.pixel_y += offsets[OFFSET_BACK][2]
-									behindback_overlay.pixel_x += offsets[OFFSET_BACK][1]
-									behindback_overlay.pixel_y += offsets[OFFSET_BACK][2]
-							else
-								if(OFFSET_BACK_F in offsets)
-									back_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
-									back_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
-									behindback_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
-									behindback_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
-					overcloaks += back_overlay
-					backbehind += behindback_overlay
+					if(!use_female_sprites)
+						if(OFFSET_BACK in offsets)
+							back_overlay.pixel_x += offsets[OFFSET_BACK][1]
+							back_overlay.pixel_y += offsets[OFFSET_BACK][2]
+							behindback_overlay.pixel_x += offsets[OFFSET_BACK][1]
+							behindback_overlay.pixel_y += offsets[OFFSET_BACK][2]
+					else
+						if(OFFSET_BACK_F in offsets)
+							back_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
+							back_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
+							behindback_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
+							behindback_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
+					LAZYADD(overcloaks, back_overlay)
+					LAZYADD(backbehind, behindback_overlay)
 			else
-				back_overlay = backr.build_worn_icon(age = age, default_layer = BACK_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/back_r.dmi')
-				var/list/offsets = dna?.species?.offset_features
-				if(age == AGE_CHILD)
-					offsets = dna?.species?.offset_features_child
-				if(gender == MALE)
+				back_overlay = backr.build_worn_icon(age, BACK_LAYER, 'icons/roguetown/clothing/onmob/back_r.dmi')
+				if(!use_female_sprites)
 					if(OFFSET_BACK in offsets)
 						back_overlay.pixel_x += offsets[OFFSET_BACK][1]
 						back_overlay.pixel_y += offsets[OFFSET_BACK][2]
@@ -879,10 +883,11 @@ There are several things that need to be remembered:
 					if(OFFSET_BACK_F in offsets)
 						back_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
 						back_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
+
 				if(backr.alternate_worn_layer == UNDER_CLOAK_LAYER)
-					undercloaks += back_overlay
+					LAZYADD(undercloaks, back_overlay)
 				else
-					overcloaks += back_overlay
+					LAZYADD(overcloaks, back_overlay)
 
 	if(backl)
 		if(backl.alternate_worn_layer == CLOAK_BEHIND_LAYER)
@@ -905,32 +910,23 @@ There are several things that need to be remembered:
 					behindback_overlay = mutable_appearance(backl.getmoboverlay("onback",prop,behind=TRUE,mirrored=TRUE), layer=-BACK_BEHIND_LAYER)
 					back_overlay = center_image(back_overlay, backl.inhand_x_dimension, backl.inhand_y_dimension)
 					behindback_overlay = center_image(behindback_overlay, backl.inhand_x_dimension, backl.inhand_y_dimension)
-					if(ishuman(src))
-						var/mob/living/carbon/human/H = src
-						if(H.dna && H.dna.species)
-							var/list/offsets = H.dna.species.offset_features
-							if(H.age == AGE_CHILD)
-								offsets = H.dna.species.offset_features_child
-							if(gender == MALE)
-								if(OFFSET_BACK in offsets)
-									back_overlay.pixel_x += offsets[OFFSET_BACK][1]
-									back_overlay.pixel_y += offsets[OFFSET_BACK][2]
-									behindback_overlay.pixel_x += offsets[OFFSET_BACK][1]
-									behindback_overlay.pixel_y += offsets[OFFSET_BACK][2]
-							else
-								if(OFFSET_BACK_F in offsets)
-									back_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
-									back_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
-									behindback_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
-									behindback_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
-					overcloaks += back_overlay
-					backbehind += behindback_overlay
+					if(!use_female_sprites)
+						if(OFFSET_BACK in offsets)
+							back_overlay.pixel_x += offsets[OFFSET_BACK][1]
+							back_overlay.pixel_y += offsets[OFFSET_BACK][2]
+							behindback_overlay.pixel_x += offsets[OFFSET_BACK][1]
+							behindback_overlay.pixel_y += offsets[OFFSET_BACK][2]
+					else
+						if(OFFSET_BACK_F in offsets)
+							back_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
+							back_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
+							behindback_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
+							behindback_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
+					LAZYADD(overcloaks, back_overlay)
+					LAZYADD(backbehind, behindback_overlay)
 			else
-				back_overlay = backl.build_worn_icon(age = age, default_layer = BACK_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/back_l.dmi')
-				var/list/offsets = dna?.species?.offset_features
-				if(age == AGE_CHILD)
-					offsets = dna?.species?.offset_features_child
-				if(gender == MALE)
+				back_overlay = backl.build_worn_icon(age, BACK_LAYER, 'icons/roguetown/clothing/onmob/back_l.dmi')
+				if(!use_female_sprites)
 					if(OFFSET_BACK in offsets)
 						back_overlay.pixel_x += offsets[OFFSET_BACK][1]
 						back_overlay.pixel_y += offsets[OFFSET_BACK][2]
@@ -938,16 +934,17 @@ There are several things that need to be remembered:
 					if(OFFSET_BACK_F in offsets)
 						back_overlay.pixel_x += offsets[OFFSET_BACK_F][1]
 						back_overlay.pixel_y += offsets[OFFSET_BACK_F][2]
-				if(backl.alternate_worn_layer == UNDER_CLOAK_LAYER)
-					undercloaks += back_overlay
-				else
-					overcloaks += back_overlay
 
-	if(overcloaks.len)
+				if(backl.alternate_worn_layer == UNDER_CLOAK_LAYER)
+					LAZYADD(undercloaks, back_overlay)
+				else
+					LAZYADD(overcloaks, back_overlay)
+
+	if(LAZYLEN(overcloaks))
 		overlays_standing[BACK_LAYER] = overcloaks
-	if(backbehind.len)
+	if(LAZYLEN(backbehind))
 		overlays_standing[BACK_BEHIND_LAYER] = backbehind
-	if(undercloaks.len)
+	if(LAZYLEN(undercloaks))
 		overlays_standing[UNDER_CLOAK_LAYER] = undercloaks
 
 	apply_overlay(BACK_LAYER)
@@ -959,119 +956,105 @@ There are several things that need to be remembered:
 	remove_overlay(CLOAK_BEHIND_LAYER)
 	remove_overlay(TABARD_LAYER)
 
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
 
-	if(client && hud_used)
+	if(client && hud_used?.inv_slots[SLOT_CLOAK])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_CLOAK]
 		inv.update_icon()
 
-	var/list/cloaklays = list()
+	var/list/cloaklays
+	var/datum/species/species = dna?.species
+	var/use_female_sprites = FALSE
+	if(species?.sexes)
+		if(gender == FEMALE && !species.swap_female_clothes)
+			use_female_sprites = FEMALE_BOOB
+		else if(gender == MALE && species.swap_male_clothes)
+			use_female_sprites = FEMALE_SPRITES
+	var/list/offsets = species?.offset_features
+	if(age == AGE_CHILD)
+		offsets = species?.offset_features_child
+	var/racecustom
+	if(species?.custom_clothes)
+		if(species.custom_id)
+			racecustom = species.custom_id
+		else
+			racecustom = species.id
 
 	if(cloak)
-		cloak.screen_loc = rogueui_cloak					//move the item to the appropriate screen loc
-		if(client && hud_used && hud_used.hud_shown)
-			if(hud_used.inventory_shown)			//if the inventory is open
-				client.screen += cloak					//add it to client's screen
-		update_observer_view(cloak,1)
-		if(dna && dna.species.sexes)
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/racecustom
-			var/mutable_appearance/cloak_overlay
-			if(dna.species.custom_clothes)
-				if(dna.species.custom_id)
-					racecustom = dna.species.custom_id
+		cloak.screen_loc = rogueui_cloak
+		if(client && hud_used?.hud_shown)
+			if(hud_used.inventory_shown)
+				client.screen += cloak
+		update_observer_view(cloak, 1)
+
+		var/mutable_appearance/cloak_overlay = cloak.build_worn_icon(age, CLOAK_LAYER, coom = use_female_sprites, customi = racecustom)
+
+		if(!use_female_sprites)
+			if(OFFSET_CLOAK in offsets)
+				cloak_overlay.pixel_x += offsets[OFFSET_CLOAK][1]
+				cloak_overlay.pixel_y += offsets[OFFSET_CLOAK][2]
+		else
+			if(OFFSET_CLOAK_F in offsets)
+				cloak_overlay.pixel_x += offsets[OFFSET_CLOAK_F][1]
+				cloak_overlay.pixel_y += offsets[OFFSET_CLOAK_F][2]
+		if(cloak.alternate_worn_layer == TABARD_LAYER)
+			overlays_standing[TABARD_LAYER] = cloak_overlay
+		if(cloak.alternate_worn_layer == CLOAK_BEHIND_LAYER)
+			overlays_standing[CLOAK_BEHIND_LAYER] = cloak_overlay
+		if(!cloak.alternate_worn_layer)
+			LAZYADD(cloaklays, cloak_overlay)
+
+		//add sleeve overlays, then offset
+		var/list/cloaksleeves
+		if(cloak.sleeved)
+			cloaksleeves = get_sleeves_layer(cloak,0,CLOAK_LAYER)
+
+		if(LAZYLEN(cloaksleeves))
+			for(var/mutable_appearance/S as anything in cloaksleeves)
+				if(!use_female_sprites)
+					if(OFFSET_SHIRT in offsets)
+						S.pixel_x += offsets[OFFSET_CLOAK][1]
+						S.pixel_y += offsets[OFFSET_CLOAK][2]
 				else
-					racecustom = dna.species.id
-			if(G == "f" && !dna.species.use_m)
-				cloak_overlay = cloak.build_worn_icon(age = age, default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom)
-			else
-				if(dna.species.use_f)
-					cloak_overlay = cloak.build_worn_icon(age = age, default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "e", customi = racecustom)
-				else
-					cloak_overlay = cloak.build_worn_icon(age = age, default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, customi = racecustom)
+					if(OFFSET_SHIRT_F in offsets)
+						S.pixel_x += offsets[OFFSET_CLOAK_F][1]
+						S.pixel_y += offsets[OFFSET_CLOAK_F][2]
+				LAZYADD(cloaklays, S)
 
-			if(gender == MALE)
-				if(OFFSET_CLOAK in offsets)
-					cloak_overlay.pixel_x += offsets[OFFSET_CLOAK][1]
-					cloak_overlay.pixel_y += offsets[OFFSET_CLOAK][2]
-			else
-				if(OFFSET_CLOAK_F in offsets)
-					cloak_overlay.pixel_x += offsets[OFFSET_CLOAK_F][1]
-					cloak_overlay.pixel_y += offsets[OFFSET_CLOAK_F][2]
-			if(cloak.alternate_worn_layer == TABARD_LAYER)
-				overlays_standing[TABARD_LAYER] = cloak_overlay
-			if(cloak.alternate_worn_layer == CLOAK_BEHIND_LAYER)
-				overlays_standing[CLOAK_BEHIND_LAYER] = cloak_overlay
-			if(!cloak.alternate_worn_layer)
-				cloaklays += cloak_overlay
-
-			//add sleeve overlays, then offset
-			var/list/cloaksleeves = list()
-			if(cloak.sleeved)
-				cloaksleeves = get_sleeves_layer(cloak,0,CLOAK_LAYER)
-
-			if(cloaksleeves.len)
-				for(var/X in cloaksleeves)
-					var/mutable_appearance/S = X
-					if(gender == MALE)
-						if(OFFSET_SHIRT in offsets)
-							S.pixel_x += offsets[OFFSET_CLOAK][1]
-							S.pixel_y += offsets[OFFSET_CLOAK][2]
-					else
-						if(OFFSET_SHIRT_F in offsets)
-							S.pixel_x += offsets[OFFSET_CLOAK_F][1]
-							S.pixel_y += offsets[OFFSET_CLOAK_F][2]
-					cloaklays += S
 	if(backr && backr.alternate_worn_layer == CLOAK_BEHIND_LAYER)
 		update_hud_backr(backr)
-		if(dna && dna.species.sexes)
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/racecustom
-			var/mutable_appearance/cloak_overlay
-			if(dna.species.custom_clothes)
-				racecustom = dna.species.id
-			if(G == "f" && !dna.species.use_m)
-				cloak_overlay = backr.build_worn_icon(age = age, default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom)
-			else
-				if(dna.species.use_f)
-					cloak_overlay = backr.build_worn_icon(age = age, default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "e", customi = racecustom)
+		var/mutable_appearance/cloak_overlay = backr.build_worn_icon(age, CLOAK_LAYER, coom = use_female_sprites, customi = racecustom)
+
+		if(!use_female_sprites)
+			if(OFFSET_CLOAK in offsets)
+				cloak_overlay.pixel_x += offsets[OFFSET_CLOAK][1]
+				cloak_overlay.pixel_y += offsets[OFFSET_CLOAK][2]
+		else
+			if(OFFSET_CLOAK_F in offsets)
+				cloak_overlay.pixel_x += offsets[OFFSET_CLOAK_F][1]
+				cloak_overlay.pixel_y += offsets[OFFSET_CLOAK_F][2]
+		if(backr.alternate_worn_layer == TABARD_LAYER)
+			overlays_standing[TABARD_LAYER] = cloak_overlay
+		if(backr.alternate_worn_layer == CLOAK_BEHIND_LAYER)
+			overlays_standing[CLOAK_BEHIND_LAYER] = cloak_overlay
+		if(!backr.alternate_worn_layer)
+			cloaklays += cloak_overlay
+
+		//add sleeve overlays, then offset
+		var/list/cloaksleeves
+		if(backr.sleeved)
+			cloaksleeves = get_sleeves_layer(backr,0,CLOAK_LAYER)
+
+		if(LAZYLEN(cloaksleeves))
+			for(var/mutable_appearance/S in cloaksleeves)
+				if(!use_female_sprites)
+					if(OFFSET_SHIRT in offsets)
+						S.pixel_x += offsets[OFFSET_CLOAK][1]
+						S.pixel_y += offsets[OFFSET_CLOAK][2]
 				else
-					cloak_overlay = backr.build_worn_icon(age = age, default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, customi = racecustom)
-
-			if(gender == MALE)
-				if(OFFSET_CLOAK in offsets)
-					cloak_overlay.pixel_x += offsets[OFFSET_CLOAK][1]
-					cloak_overlay.pixel_y += offsets[OFFSET_CLOAK][2]
-			else
-				if(OFFSET_CLOAK_F in offsets)
-					cloak_overlay.pixel_x += offsets[OFFSET_CLOAK_F][1]
-					cloak_overlay.pixel_y += offsets[OFFSET_CLOAK_F][2]
-			if(backr.alternate_worn_layer == TABARD_LAYER)
-				overlays_standing[TABARD_LAYER] = cloak_overlay
-			if(backr.alternate_worn_layer == CLOAK_BEHIND_LAYER)
-				overlays_standing[CLOAK_BEHIND_LAYER] = cloak_overlay
-			if(!backr.alternate_worn_layer)
-				cloaklays += cloak_overlay
-
-			//add sleeve overlays, then offset
-			var/list/cloaksleeves = list()
-			if(backr.sleeved)
-				cloaksleeves = get_sleeves_layer(backr,0,CLOAK_LAYER)
-
-			if(cloaksleeves.len)
-				for(var/X in cloaksleeves)
-					var/mutable_appearance/S = X
-					if(gender == MALE)
-						if(OFFSET_SHIRT in offsets)
-							S.pixel_x += offsets[OFFSET_CLOAK][1]
-							S.pixel_y += offsets[OFFSET_CLOAK][2]
-					else
-						if(OFFSET_SHIRT_F in offsets)
-							S.pixel_x += offsets[OFFSET_CLOAK_F][1]
-							S.pixel_y += offsets[OFFSET_CLOAK_F][2]
-					cloaklays += S
+					if(OFFSET_SHIRT_F in offsets)
+						S.pixel_x += offsets[OFFSET_CLOAK_F][1]
+						S.pixel_y += offsets[OFFSET_CLOAK_F][2]
+				cloaklays += S
 
 	overlays_standing[CLOAK_LAYER] = cloaklays
 	update_inv_armor() //fixboob
@@ -1083,74 +1066,67 @@ There are several things that need to be remembered:
 	remove_overlay(SHIRT_LAYER)
 	remove_overlay(SHIRTSLEEVE_LAYER)
 
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
-
-	if(client && hud_used)
+	if(client && hud_used?.inv_slots[SLOT_SHIRT])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_SHIRT]
 		inv.update_icon()
 
+	var/use_female_sprites = FALSE
+
 	if(wear_shirt)
 		wear_shirt.screen_loc = rogueui_shirt					//move the item to the appropriate screen loc
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open
 				client.screen += wear_shirt					//add it to client's screen
 		update_observer_view(wear_shirt,1)
-		if(dna && dna.species.sexes)
-			var/mutable_appearance/shirt_overlay
-			var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/racecustom
-			var/hideboob = FALSE
-			if(dna.species.custom_clothes)
-				if(dna.species.custom_id)
-					racecustom = dna.species.custom_id
-				else
-					racecustom = dna.species.id
-			if(wear_armor)
-				var/obj/item/I = wear_armor
-				if(I.flags_inv & HIDEBOOB)
-					hideboob = TRUE
-			if(cloak)
-				var/obj/item/I = cloak
-				if(I.flags_inv & HIDEBOOB)
-					hideboob = TRUE
-			if(G == "f" && !hideboob && !dna.species.use_m)
-				shirt_overlay = wear_shirt.build_worn_icon(age = age, default_layer = SHIRT_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = armsindex)
+		var/datum/species/species = dna?.species
+		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
+		var/hideboob = FALSE
+		if(wear_armor?.flags_inv & HIDEBOOB)
+			hideboob = TRUE
+		if(cloak?.flags_inv & HIDEBOOB)
+			hideboob = TRUE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes)
+				use_female_sprites = hideboob ? FEMALE_SPRITES : FEMALE_BOOB
+			else if(gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/racecustom
+		if(species?.custom_clothes)
+			if(species.custom_id)
+				racecustom = species.custom_id
 			else
-				if(dna.species.use_f || (G == "f" && !dna.species.use_m))
-					shirt_overlay = wear_shirt.build_worn_icon(age = age, default_layer = SHIRT_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "e", customi = racecustom, sleeveindex = armsindex)
+				racecustom = species.id
+		var/mutable_appearance/shirt_overlay = wear_shirt.build_worn_icon(age, SHIRT_LAYER, coom = use_female_sprites, customi = racecustom, sleeveindex = armsindex)
+
+		if(!use_female_sprites)
+			if(OFFSET_SHIRT in offsets)
+				shirt_overlay.pixel_x += offsets[OFFSET_SHIRT][1]
+				shirt_overlay.pixel_y += offsets[OFFSET_SHIRT][2]
+		else
+			if(OFFSET_SHIRT_F in offsets)
+				shirt_overlay.pixel_x += offsets[OFFSET_SHIRT_F][1]
+				shirt_overlay.pixel_y += offsets[OFFSET_SHIRT_F][2]
+		overlays_standing[SHIRT_LAYER] = shirt_overlay
+
+		//add sleeve overlays, then offset
+		var/list/sleeves = list()
+		if(wear_shirt.sleeved && armsindex > 0)
+			sleeves = get_sleeves_layer(wear_shirt, armsindex, SHIRTSLEEVE_LAYER)
+
+		if(sleeves)
+			for(var/mutable_appearance/S as anything in sleeves)
+				if(!use_female_sprites)
+					if(OFFSET_SHIRT in offsets)
+						S.pixel_x += offsets[OFFSET_SHIRT][1]
+						S.pixel_y += offsets[OFFSET_SHIRT][2]
 				else
-					shirt_overlay = wear_shirt.build_worn_icon(age = age, default_layer = SHIRT_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, customi = racecustom, sleeveindex = armsindex)
-
-			if(gender == MALE)
-				if(OFFSET_SHIRT in offsets)
-					shirt_overlay.pixel_x += offsets[OFFSET_SHIRT][1]
-					shirt_overlay.pixel_y += offsets[OFFSET_SHIRT][2]
-			else
-				if(OFFSET_SHIRT_F in offsets)
-					shirt_overlay.pixel_x += offsets[OFFSET_SHIRT_F][1]
-					shirt_overlay.pixel_y += offsets[OFFSET_SHIRT_F][2]
-			overlays_standing[SHIRT_LAYER] = shirt_overlay
-
-			//add sleeve overlays, then offset
-			var/list/sleeves = list()
-			if(wear_shirt.sleeved && armsindex > 0)
-				sleeves = get_sleeves_layer(wear_shirt,armsindex,SHIRTSLEEVE_LAYER)
-
-			if(sleeves)
-				for(var/X in sleeves)
-					var/mutable_appearance/S = X
-					if(gender == MALE)
-						if(OFFSET_SHIRT in offsets)
-							S.pixel_x += offsets[OFFSET_SHIRT][1]
-							S.pixel_y += offsets[OFFSET_SHIRT][2]
-					else
-						if(OFFSET_SHIRT_F in offsets)
-							S.pixel_x += offsets[OFFSET_SHIRT_F][1]
-							S.pixel_y += offsets[OFFSET_SHIRT_F][2]
-				overlays_standing[SHIRTSLEEVE_LAYER] = sleeves
+					if(OFFSET_SHIRT_F in offsets)
+						S.pixel_x += offsets[OFFSET_SHIRT_F][1]
+						S.pixel_y += offsets[OFFSET_SHIRT_F][2]
+			overlays_standing[SHIRTSLEEVE_LAYER] = sleeves
 
 	update_body_parts(redraw = TRUE)
 	dna.species.handle_body(src)
@@ -1163,74 +1139,67 @@ There are several things that need to be remembered:
 	remove_overlay(ARMOR_LAYER)
 	remove_overlay(ARMORSLEEVE_LAYER)
 
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
-
-	if(client && hud_used)
+	if(client && hud_used?.inv_slots[SLOT_ARMOR])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_ARMOR]
 		inv.update_icon()
 
+	var/use_female_sprites = FALSE
+
 	if(wear_armor)
 		wear_armor.screen_loc = rogueui_armor					//move the item to the appropriate screen loc
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open
 				client.screen += wear_armor					//add it to client's screen
 		update_observer_view(wear_armor,1)
-		if(dna && dna.species.sexes)
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/racecustom
-			var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
-			var/mutable_appearance/armor_overlay
-			var/hideboob = FALSE
-			if(cloak)
-				var/obj/item/I = cloak
-				if(I.flags_inv & HIDEBOOB)
-					hideboob = TRUE
-			if(dna.species.custom_clothes)
-				if(dna.species.custom_id)
-					racecustom = dna.species.custom_id
-				else
-					racecustom = dna.species.id
-			if((G == "f" && !hideboob && !dna.species.use_m)|| (G == "f" && !dna.species.use_m))
-				armor_overlay = wear_armor.build_worn_icon(age = age, default_layer = ARMOR_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = armsindex)
+		var/datum/species/species = dna?.species
+		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
+		var/hideboob = FALSE
+		if(cloak?.flags_inv & HIDEBOOB)
+			hideboob = TRUE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes)
+				use_female_sprites = hideboob ? FEMALE_SPRITES : FEMALE_BOOB
+			else if(gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/racecustom
+		if(species?.custom_clothes)
+			if(species?.custom_id)
+				racecustom = species?.custom_id
 			else
-				if(dna.species.use_f)
-					armor_overlay = wear_armor.build_worn_icon(age = age, default_layer = ARMOR_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "e", customi = racecustom, sleeveindex = armsindex)
+				racecustom = species?.id
+		var/mutable_appearance/armor_overlay = wear_armor.build_worn_icon(age, ARMOR_LAYER, coom = use_female_sprites , customi = racecustom, sleeveindex = armsindex)
+		if(!use_female_sprites)
+			if(OFFSET_ARMOR in offsets)
+				armor_overlay.pixel_x += offsets[OFFSET_ARMOR][1]
+				armor_overlay.pixel_y += offsets[OFFSET_ARMOR][2]
+		else
+			if(OFFSET_ARMOR_F in offsets)
+				armor_overlay.pixel_x += offsets[OFFSET_ARMOR_F][1]
+				armor_overlay.pixel_y += offsets[OFFSET_ARMOR_F][2]
+		overlays_standing[ARMOR_LAYER] = armor_overlay
+
+		//add sleeve overlays, then offset
+		var/list/sleeves = list()
+		if(wear_armor.sleeved && armsindex > 0)
+			sleeves = get_sleeves_layer(wear_armor,armsindex,ARMORSLEEVE_LAYER)
+
+		if(sleeves)
+			for(var/mutable_appearance/S as anything in sleeves)
+				if(!use_female_sprites)
+					if(OFFSET_ARMOR in offsets)
+						S.pixel_x += offsets[OFFSET_ARMOR][1]
+						S.pixel_y += offsets[OFFSET_ARMOR][2]
 				else
-					armor_overlay = wear_armor.build_worn_icon(age = age, default_layer = ARMOR_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = null, customi = racecustom, sleeveindex = armsindex)
+					if(OFFSET_ARMOR_F in offsets)
+						S.pixel_x += offsets[OFFSET_ARMOR_F][1]
+						S.pixel_y += offsets[OFFSET_ARMOR_F][2]
+			overlays_standing[ARMORSLEEVE_LAYER] = sleeves
 
-			if(gender == MALE)
-				if(OFFSET_ARMOR in offsets)
-					armor_overlay.pixel_x += offsets[OFFSET_ARMOR][1]
-					armor_overlay.pixel_y += offsets[OFFSET_ARMOR][2]
-			else
-				if(OFFSET_ARMOR_F in offsets)
-					armor_overlay.pixel_x += offsets[OFFSET_ARMOR_F][1]
-					armor_overlay.pixel_y += offsets[OFFSET_ARMOR_F][2]
-			overlays_standing[ARMOR_LAYER] = armor_overlay
-
-			//add sleeve overlays, then offset
-			var/list/sleeves = list()
-			if(wear_armor.sleeved && armsindex > 0)
-				sleeves = get_sleeves_layer(wear_armor,armsindex,ARMORSLEEVE_LAYER)
-
-			if(sleeves)
-				for(var/X in sleeves)
-					var/mutable_appearance/S = X
-					if(gender == MALE)
-						if(OFFSET_ARMOR in offsets)
-							S.pixel_x += offsets[OFFSET_ARMOR][1]
-							S.pixel_y += offsets[OFFSET_ARMOR][2]
-					else
-						if(OFFSET_ARMOR_F in offsets)
-							S.pixel_x += offsets[OFFSET_ARMOR_F][1]
-							S.pixel_y += offsets[OFFSET_ARMOR_F][2]
-				overlays_standing[ARMORSLEEVE_LAYER] = sleeves
-
-	if(gender == FEMALE && dna?.species)
-		update_body_parts(redraw = TRUE)
-		dna.species.handle_body(src)
+	update_body_parts(redraw = TRUE)
+	dna.species.handle_body(src)
 	update_body()
 	update_inv_shirt() // fix boob
 
@@ -1241,67 +1210,61 @@ There are several things that need to be remembered:
 	remove_overlay(PANTS_LAYER)
 	remove_overlay(LEGSLEEVE_LAYER)
 
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
-
-	if(client && hud_used)
+	if(client && hud_used?.inv_slots[SLOT_PANTS])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_PANTS]
 		inv.update_icon()
 
 	if(wear_pants)
 		wear_pants.screen_loc = rogueui_pants					//move the item to the appropriate screen loc
-		if(client && hud_used && hud_used.hud_shown)
+		if(client && hud_used?.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open
 				client.screen += wear_pants					//add it to client's screen
 		update_observer_view(wear_pants,1)
-		if(dna && dna.species.sexes)
-			var/G = (gender == FEMALE) ? "f" : "m"
-			var/racecustom
-			var/legsindex = get_limbloss_index(LEG_RIGHT, LEG_LEFT)
-			var/mutable_appearance/pants_overlay
-			if(dna.species.custom_clothes)
-				if(dna.species.custom_id)
-					racecustom = dna.species.custom_id
-				else
-					racecustom = dna.species.id
-			if(G == "f" && !dna.species.use_m)
-				pants_overlay = wear_pants.build_worn_icon(age = age, default_layer = PANTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = legsindex)
+		var/datum/species/species = dna?.species
+		var/legsindex = get_limbloss_index(LEG_RIGHT, LEG_LEFT)
+		var/use_female_sprites = FALSE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		var/racecustom
+		if(species?.custom_clothes)
+			if(species.custom_id)
+				racecustom = species.custom_id
 			else
-				if(dna.species.use_f)
-					pants_overlay = wear_pants.build_worn_icon(age = age, default_layer = PANTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "e", customi = racecustom, sleeveindex = legsindex)
+				racecustom = species.id
+		var/mutable_appearance/pants_overlay = wear_pants.build_worn_icon(age, PANTS_LAYER, coom = use_female_sprites, customi = racecustom, sleeveindex = legsindex)
+
+		if(!use_female_sprites)
+			if(OFFSET_PANTS in offsets)
+				pants_overlay.pixel_x += offsets[OFFSET_PANTS][1]
+				pants_overlay.pixel_y += offsets[OFFSET_PANTS][2]
+		else
+			if(OFFSET_PANTS_F in offsets)
+				pants_overlay.pixel_x += offsets[OFFSET_PANTS_F][1]
+				pants_overlay.pixel_y += offsets[OFFSET_PANTS_F][2]
+		overlays_standing[PANTS_LAYER] = pants_overlay
+
+		//add sleeve overlays, then offset
+		var/list/sleeves = list()
+		var/femw = use_female_sprites ? "_f" : ""
+		if(wear_pants.sleeved && legsindex > 0 && wear_pants.adjustable != CADJUSTED)
+			sleeves = get_sleeves_layer(wear_pants,legsindex, LEGSLEEVE_LAYER)
+		if(wear_pants.adjustable == CADJUSTED)
+			var/mutable_appearance/overleg = mutable_appearance(wear_pants.mob_overlay_icon, "[wear_pants.icon_state][femw][racecustom ? "_[racecustom]" : ""]", -LEGSLEEVE_LAYER)
+			sleeves += overleg
+		if(sleeves)
+			for(var/mutable_appearance/S as anything in sleeves)
+				if(!use_female_sprites)
+					if(OFFSET_PANTS in offsets)
+						S.pixel_x += offsets[OFFSET_PANTS][1]
+						S.pixel_y += offsets[OFFSET_PANTS][2]
 				else
-					pants_overlay = wear_pants.build_worn_icon(age = age, default_layer = PANTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, customi = racecustom, sleeveindex = legsindex)
-
-			if(G == "m")
-				if(OFFSET_PANTS in offsets)
-					pants_overlay.pixel_x += offsets[OFFSET_PANTS][1]
-					pants_overlay.pixel_y += offsets[OFFSET_PANTS][2]
-			else
-				if(OFFSET_PANTS_F in offsets)
-					pants_overlay.pixel_x += offsets[OFFSET_PANTS_F][1]
-					pants_overlay.pixel_y += offsets[OFFSET_PANTS_F][2]
-			overlays_standing[PANTS_LAYER] = pants_overlay
-
-			//add sleeve overlays, then offset
-			var/list/sleeves = list()
-			var/femw = ((gender == FEMALE && !dna.species.use_m) || dna.species.use_f) ? "_f" : ""
-			if(wear_pants.sleeved && legsindex > 0 && wear_pants.adjustable != CADJUSTED)
-				sleeves = get_sleeves_layer(wear_pants,legsindex,LEGSLEEVE_LAYER)
-			if(wear_pants.adjustable == CADJUSTED)
-				var/mutable_appearance/overleg = mutable_appearance(wear_pants.mob_overlay_icon, "[wear_pants.icon_state][femw][racecustom ? "_[racecustom]" : ""]", -LEGSLEEVE_LAYER)
-				sleeves += overleg
-			if(sleeves)
-				for(var/X in sleeves)
-					var/mutable_appearance/S = X
-					if(gender == MALE)
-						if(OFFSET_PANTS in offsets)
-							S.pixel_x += offsets[OFFSET_PANTS][1]
-							S.pixel_y += offsets[OFFSET_PANTS][2]
-					else
-						if(OFFSET_PANTS_F in offsets)
-							S.pixel_x += offsets[OFFSET_PANTS_F][1]
-							S.pixel_y += offsets[OFFSET_PANTS_F][2]
+					if(OFFSET_PANTS_F in offsets)
+						S.pixel_x += offsets[OFFSET_PANTS_F][1]
+						S.pixel_y += offsets[OFFSET_PANTS_F][2]
 				overlays_standing[LEGSLEEVE_LAYER] = sleeves
 
 	update_body()
@@ -1311,36 +1274,37 @@ There are several things that need to be remembered:
 
 /mob/living/carbon/human/update_inv_mouth()
 	remove_overlay(MOUTH_LAYER)
-	var/list/offsets = dna?.species?.offset_features
-	if(age == AGE_CHILD)
-		offsets = dna?.species?.offset_features_child
 
 	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
 		return
 
-	if(client && hud_used && hud_used.inv_slots[SLOT_MOUTH])
+	if(client && hud_used?.inv_slots[SLOT_MOUTH])
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_MOUTH]
 		inv.update_icon()
 
 	if(mouth)
-		if(!(SLOT_MOUTH in check_obscured_slots()))
-			overlays_standing[MOUTH_LAYER] = mouth.build_worn_icon(age = age, default_layer = MOUTH_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/mouth_items.dmi')
 		update_hud_mouth(mouth)
-
+		var/datum/species/species = dna?.species
+		var/use_female_sprites = FALSE
+		if(species?.sexes)
+			if(gender == FEMALE && !species.swap_female_clothes || gender == MALE && species.swap_male_clothes)
+				use_female_sprites = FEMALE_SPRITES
+		var/list/offsets = species?.offset_features
+		if(age == AGE_CHILD)
+			offsets = species?.offset_features_child
+		if(!(SLOT_MOUTH in check_obscured_slots()))
+			var/mutable_appearance/mouth_overlay = mouth.build_worn_icon(age, MOUTH_LAYER, 'icons/roguetown/clothing/onmob/mouth_items.dmi')
+			if(mouth_overlay)
+				if(!use_female_sprites)
+					if(OFFSET_MOUTH in offsets)
+						mouth_overlay.pixel_x += offsets[OFFSET_MOUTH][1]
+						mouth_overlay.pixel_y += offsets[OFFSET_MOUTH][2]
+				else
+					if(OFFSET_MOUTH_F in offsets)
+						mouth_overlay.pixel_x += offsets[OFFSET_MOUTH_F][1]
+						mouth_overlay.pixel_y += offsets[OFFSET_MOUTH_F][2]
+				overlays_standing[MOUTH_LAYER] = mouth_overlay
 	apply_overlay(MOUTH_LAYER)
-	var/mutable_appearance/mouth_overlay = overlays_standing[MOUTH_LAYER]
-	if(mouth_overlay)
-		remove_overlay(MOUTH_LAYER)
-		if(gender == MALE)
-			if(OFFSET_MOUTH in offsets)
-				mouth_overlay.pixel_x += offsets[OFFSET_MOUTH][1]
-				mouth_overlay.pixel_y += offsets[OFFSET_MOUTH][2]
-		else
-			if(OFFSET_MOUTH_F in offsets)
-				mouth_overlay.pixel_x += offsets[OFFSET_MOUTH_F][1]
-				mouth_overlay.pixel_y += offsets[OFFSET_MOUTH_F][2]
-		overlays_standing[MOUTH_LAYER] = mouth_overlay
-		apply_overlay(MOUTH_LAYER)
 
 //endrogue
 
@@ -1383,7 +1347,7 @@ There are several things that need to be remembered:
 //update whether our head item appears on our hud.
 /mob/living/carbon/human/update_hud_head(obj/item/I)
 	I.screen_loc = rogueui_head
-	if(client && hud_used && hud_used.hud_shown)
+	if(client && hud_used?.hud_shown)
 		if(hud_used.inventory_shown)
 			client.screen += I
 	update_observer_view(I,1)
@@ -1391,14 +1355,14 @@ There are several things that need to be remembered:
 //update whether our mask item appears on our hud.
 /mob/living/carbon/human/update_hud_wear_mask(obj/item/I)
 	I.screen_loc = rogueui_mask
-	if(client && hud_used && hud_used.hud_shown)
+	if(client && hud_used?.hud_shown)
 		if(hud_used.inventory_shown)
 			client.screen += I
 	update_observer_view(I,1)
 
 /mob/living/carbon/human/update_hud_mouth(obj/item/I)
 	I.screen_loc = rogueui_mouth
-	if(client && hud_used && hud_used.hud_shown)
+	if(client && hud_used?.hud_shown)
 		if(hud_used.inventory_shown)
 			client.screen += I
 	update_observer_view(I,1)
@@ -1406,7 +1370,7 @@ There are several things that need to be remembered:
 //update whether our neck item appears on our hud.
 /mob/living/carbon/human/update_hud_neck(obj/item/I)
 	I.screen_loc = rogueui_neck
-	if(client && hud_used && hud_used.hud_shown)
+	if(client && hud_used?.hud_shown)
 		if(hud_used.inventory_shown)
 			client.screen += I
 	update_observer_view(I,1)
@@ -1414,7 +1378,7 @@ There are several things that need to be remembered:
 //update whether our back item appears on our hud.
 /mob/living/carbon/human/update_hud_back(obj/item/I)
 	I.screen_loc = ui_back
-	if(client && hud_used && hud_used.hud_shown)
+	if(client && hud_used?.hud_shown)
 		client.screen += I
 	update_observer_view(I)
 
@@ -1424,7 +1388,7 @@ There are several things that need to be remembered:
 		I.screen_loc = "WEST-4:-16,SOUTH+5:-16"
 	else
 		I.screen_loc = rogueui_backr
-	if(client && hud_used && hud_used.hud_shown)
+	if(client && hud_used?.hud_shown)
 		client.screen += I
 	update_observer_view(I)
 
@@ -1434,7 +1398,7 @@ There are several things that need to be remembered:
 		I.screen_loc = "WEST-2:-16,SOUTH+5:-16"
 	else
 		I.screen_loc = rogueui_backl
-	if(client && hud_used && hud_used.hud_shown)
+	if(client && hud_used?.hud_shown)
 		client.screen += I
 	update_observer_view(I)
 
@@ -1463,23 +1427,21 @@ generate/load female uniform sprites matching all previously decided variables
 
 
 */
-/obj/item/proc/build_worn_icon(age = AGE_ADULT, default_layer = 0, default_icon_file = null, isinhands = FALSE, femaleuniform = NO_FEMALE_UNIFORM, override_state = null, coom = null, customi = null, sleeveindex)
+/obj/item/proc/build_worn_icon(age = AGE_ADULT, default_layer = 0, default_icon_file = null, isinhands = FALSE, femaleuniform = NO_FEMALE_UNIFORM, override_state = null, coom = FALSE, customi = null, sleeveindex)
 	var/t_state
 	var/sleevejazz = sleevetype
 	if(age == AGE_CHILD)
-		coom = null
+		coom = FALSE
 	if(override_state)
 		t_state = override_state
+	else if(isinhands && item_state)
+		t_state = item_state
+	else if(coom)
+		t_state = icon_state + "_f"
+		if(sleevejazz)
+			sleevejazz += "_f"
 	else
-		if(isinhands && item_state)
-			t_state = item_state
-		else
-			if(coom)
-				t_state = icon_state + "_f"
-				if(sleevejazz)
-					sleevejazz += "_f"
-			else
-				t_state = icon_state
+		t_state = icon_state
 	if(customi)
 		t_state += "_[customi]"
 		if(sleevejazz)
@@ -1530,7 +1492,8 @@ generate/load female uniform sprites matching all previously decided variables
 //		for(var/mutable_appearance/MA in worn_overlays)
 //			MA.blend_mode = BLEND_MULTIPLY
 		standing.overlays.Add(worn_overlays)
-	if(!isinhands && coom == "f" && boobed)
+	var/do_boob = (coom == FEMALE_BOOB && boobed)
+	if(!isinhands && do_boob)
 		var/mutable_appearance/boob_overlay = mutable_appearance(file2use, "[t_state]_boob", -layer2use)
 		standing.overlays.Add(boob_overlay)
 
@@ -1540,7 +1503,7 @@ generate/load female uniform sprites matching all previously decided variables
 		if(get_detail_color())
 			pic.color = get_detail_color()
 		standing.overlays.Add(pic)
-		if(!isinhands && coom == "f" && boobed)
+		if(!isinhands && do_boob)
 			pic = mutable_appearance(icon(file2use, "[t_state]_boob[get_detail_tag()]"), -layer2use)
 			pic.appearance_flags = RESET_COLOR
 			if(get_detail_color())
@@ -1556,7 +1519,7 @@ generate/load female uniform sprites matching all previously decided variables
 				clothing_icon = icon(GLOB.dismembered_clothing_icons[index])
 			else
 				clothing_icon = icon(file2use, t_state)
-			if(coom == "f" && boobed)
+			if(do_boob)
 				clothing_icon.Blend(icon(file2use, "[t_state]_boob"), ICON_OVERLAY)
 			clothing_icon.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
 			clothing_icon.Blend(icon(bloody_icon, bloody_icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
@@ -1597,7 +1560,7 @@ generate/load female uniform sprites matching all previously decided variables
 			racecustom = dna.species.custom_id
 		else
 			racecustom = dna.species.id
-	var/index = "[I.icon_state][((gender == FEMALE && !dna.species.use_m)|| dna.species.use_f) ? "_f" : ""][racecustom ? "_[racecustom]" : ""]"
+	var/index = "[I.icon_state][((gender == FEMALE && !dna.species.swap_female_clothes) || dna.species.swap_male_clothes) ? "_f" : ""][racecustom ? "_[racecustom]" : ""]"
 	var/static/list/bloody_r = list()
 	var/static/list/bloody_l = list()
 	if(I.nodismemsleeves && sleeveindex) //armor pauldrons that show up above arms but don't get dismembered

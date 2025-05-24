@@ -23,7 +23,6 @@
 		/datum/sprite_accessory/tail/tiefling,
 		)
 
-
 /datum/customizer/organ/tail/demihuman
 	customizer_choices = list(/datum/customizer_choice/organ/tail/demihuman)
 	allows_disabling = TRUE
@@ -96,4 +95,19 @@
 	allows_accessory_color_customization = FALSE
 	sprite_accessories = list(
 		/datum/sprite_accessory/tail/hawk,
+		)
+
+/obj/item/organ/tail/triton
+	accessory_type = /datum/sprite_accessory/tail/triton
+
+/datum/customizer/organ/tail/triton
+	customizer_choices = list(/datum/customizer_choice/organ/tail/triton)
+	allows_disabling = FALSE
+
+/datum/customizer_choice/organ/tail/triton
+	name = "Triton Bell"
+	organ_type = /obj/item/organ/tail/triton
+	allows_accessory_color_customization = FALSE
+	sprite_accessories = list(
+		/datum/sprite_accessory/tail/triton,
 		)

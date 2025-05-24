@@ -12,6 +12,10 @@
 
 /obj/item/organ/horns/humanoid
 
+/obj/item/organ/horns/triton
+	name = "triton horns"
+	accessory_type = /datum/sprite_accessory/horns/triton
+
 /datum/customizer/organ/horns
 	abstract_type = /datum/customizer/organ/horns
 	name = "Horns"

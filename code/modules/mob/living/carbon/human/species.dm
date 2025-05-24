@@ -2,88 +2,164 @@
 
 GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species
-	var/id	// if the game needs to manually check my race to do something not included in a proc here, it will use this
-	var/limbs_id		//this is used if you want to use a different species limb sprites. Mainly used for angels as they look like humans.
-	var/name	// this is the fluff name. these will be left generic (such as 'Lizardperson' for the lizard race) so servers can change them to whatever
+	/// The name used for examine text and so on
+	var/name
+	/// Fluff description given when selecting this species
 	var/desc
-	var/default_color = "#FFF"	// if alien colors are disabled, this is the color that will be used by that race
+	/// Internal ID of this species used for job checks, etc.
+	var/id
+	/// Override for limbs to use a different species' limbs
+	var/limbs_id
+	/// Limb icon to use to build appearance for males
 	var/limbs_icon_m
+	/// Limb icon to use to build appearance for females
 	var/limbs_icon_f
-	var/icon_override
-	var/icon_override_m
-	var/icon_override_f
-	var/list/possible_ages = ALL_AGES_LIST_WITH_CHILD
-	var/sexes = TRUE		// whether or not the race has sexual characteristics. at the moment this is only 0 for skeletons and shadows
-	var/patreon_req
-	var/max_age = 75
-	var/list/offset_features = list(OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0),\
-	OFFSET_CLOAK = list(0,0), OFFSET_FACEMASK = list(0,0), OFFSET_HEAD = list(0,0), \
-	OFFSET_FACE = list(0,0), OFFSET_BELT = list(0,0), OFFSET_BACK = list(0,0), \
-	OFFSET_NECK = list(0,0), OFFSET_MOUTH = list(0,0), OFFSET_PANTS = list(0,0), \
-	OFFSET_SHIRT = list(0,0), OFFSET_ARMOR = list(0,0), OFFSET_HANDS = list(0,0), \
-	OFFSET_ID_F = list(0,0), OFFSET_GLOVES_F = list(0,0), OFFSET_HANDS_F = list(0,0), \
-	OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,0), OFFSET_HEAD_F = list(0,0), \
-	OFFSET_FACE_F = list(0,0), OFFSET_BELT_F = list(0,0), OFFSET_BACK_F = list(0,0), \
-	OFFSET_NECK_F = list(0,0), OFFSET_MOUTH_F = list(0,0), OFFSET_PANTS_F = list(0,0), \
-	OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))
+	/// if alien colors are disabled, this is the color that will be used by that race
+	var/default_color = "#FFF"
+	/// List of ages that can be selected in prefs for this species
+	var/list/possible_ages = ALL_AGES_LIST_CHILD
+	/// Whether or not this species has sexual characteristics
+	var/sexes = TRUE
+	/// Whether this species a requires patreon subscription to access
+	var/patreon_req = FALSE
 
-	var/dam_icon
+	/// Associative list of FEATURE SLOT to PIXEL ADJUSTMENTS X/Y seperated by gender
+	var/list/offset_features = list(
+		OFFSET_RING = list(0,0),\
+		OFFSET_GLOVES = list(0,0),\
+		OFFSET_WRISTS = list(0,0),\
+		OFFSET_HANDS = list(0,0),\
+		OFFSET_CLOAK = list(0,0),\
+		OFFSET_FACEMASK = list(0,0),\
+		OFFSET_HEAD = list(0,0),\
+		OFFSET_FACE = list(0,0),\
+		OFFSET_BELT = list(0,0),\
+		OFFSET_BACK = list(0,0),\
+		OFFSET_NECK = list(0,0),\
+		OFFSET_MOUTH = list(0,0),\
+		OFFSET_PANTS = list(0,0),\
+		OFFSET_SHIRT = list(0,0),\
+		OFFSET_ARMOR = list(0,0),\
+		OFFSET_RING_F = list(0,0),\
+		OFFSET_GLOVES_F = list(0,0),\
+		OFFSET_WRISTS_F = list(0,0),\
+		OFFSET_HANDS_F = list(0,0),\
+		OFFSET_CLOAK_F = list(0,0),\
+		OFFSET_FACEMASK_F = list(0,0),\
+		OFFSET_HEAD_F = list(0,0),\
+		OFFSET_FACE_F = list(0,0),\
+		OFFSET_BELT_F = list(0,0),\
+		OFFSET_BACK_F = list(0,0),\
+		OFFSET_NECK_F = list(0,0),\
+		OFFSET_MOUTH_F = list(0,0),\
+		OFFSET_PANTS_F = list(0,0),\
+		OFFSET_SHIRT_F = list(0,0),\
+		OFFSET_ARMOR_F = list(0,0),\
+		OFFSET_UNDIES = list(0,0),\
+		OFFSET_UNDIES_F = list(0,0),\
+	)
+
+	/// Type of damage overlay to use
+	var/damage_overlay_type = "human"
+	/// Damage overlays to use for males
+	var/dam_icon_m
+	/// Damge overlays to use for females
 	var/dam_icon_f
-
+	/// String value ranging from t1 to t3 which controls body hair overlays for this species
 	var/hairyness = null
-
-	var/custom_clothes = FALSE //append species id to clothing sprite name
+	/// Append species id to clothing sprite name
+	var/custom_clothes = FALSE
+	/// cCustom id for custom_clothes
 	var/custom_id
-	var/use_f = FALSE //males use female clothes. for elves
-	var/use_m = FALSE //females use male clothes. for aasimar women
+	/// Males use female clothes
+	var/swap_male_clothes = FALSE
+	/// Females use male clothes
+	var/swap_female_clothes = FALSE
 
+	/// Sounds for males
 	var/datum/voicepack/soundpack_m = /datum/voicepack/male
+	/// Sounds for females
 	var/datum/voicepack/soundpack_f = /datum/voicepack/female
 
-	var/hair_color	// this allows races to have specific hair colors... if null, it uses the H's hair/facial hair colors. if "mutcolor", it uses the H's mutant_color
-	var/hair_alpha = 255	// the alpha used by the hair. 255 is completely solid, 0 is transparent.
+	/// Do we use a blood type seperate from default? (Yes, yes we do)
+	var/datum/blood_type/exotic_bloodtype
 
-	var/use_skintones = 0	// does it use skintones or not? (spoiler alert this is only used by humans)
-	var/datum/blood_type/exotic_bloodtype //If my race uses a non standard bloodtype (A+, O-, AB-, etc)
-	var/meat = /obj/item/reagent_containers/food/snacks/meat/steak //What the species drops on gibbing
+	/// What meat do we get from butchering this species?
+	var/meat = /obj/item/reagent_containers/food/snacks/meat/steak
+	/// Food we (SHOULD) get a mood buff from
 	var/liked_food = NONE
+	/// Food we (SHOULD) get a mood debuff from
 	var/disliked_food = GROSS
+	/// Food that (SHOULD) be toxic to us
 	var/toxic_food = TOXIC
-	var/nutrition_mod = 1	// multiplier for nutrition amount consumed per tic
-	var/list/no_equip = list()	// slots the race can't equip stuff to
-	var/nojumpsuit = 0	// this is sorta... weird. it basically lets you equip stuff that usually needs jumpsuits without one, like belts and pockets and ids
-	var/say_mod = "says"	// affects the speech message
-	var/list/default_features = MANDATORY_FEATURE_LIST // Default mutant bodyparts for this species. Don't forget to set one for every mutant bodypart you allow this species to have.
 
-	var/bleed_mod = 1	// multiplier for blood loss
-	var/pain_mod = 1	// multiplier for pain from wounds
+	/// List of slots this species cannot equip things to
+	var/list/no_equip = list()
+	/// TODO CHANGE THIS TO SOMETHING THAT ISN'T POCKETS
+	var/nojumpsuit = FALSE
+	/// Prefix for spoken messages
+	var/say_mod = "says"
+	/// Default mutant bodyparts for this species. Don't forget to set one for every mutant bodypart you allow this species to have.
+	var/list/default_features = MANDATORY_FEATURE_LIST
 
-	var/attack_type = BRUTE //Type of damage attack does
-	var/punchstunthreshold = 0//damage at which punches from this race will stun //yes it should be to the attacked race but it's not useful that way even if it's logical
-	var/siemens_coeff = 1 //base electrocution coefficient
-	var/damage_overlay_type = "human" //what kind of damage overlays (if any) appear on our species when wounded?
-	var/deathsound //used to set the mobs deathsound on species change
-	var/grab_sound //Special sound for grabbing
-	var/datum/outfit/outfit_important_for_life /// A path to an outfit that is important for species life e.g. plasmaman outfit
+	/// Multipler for how quickly nutrition decreases
+	var/nutrition_mod = 1
+	/// Multipler for blood loss
+	var/bleed_mod = 1
+	/// Multipler for pain
+	var/pain_mod = 1
+	/// Electrocution coeffcient
+	var/siemens_coeff = 1
 
-	// species-only traits. Can be found in DNA.dm
-	var/list/species_traits = list()
-	// generic traits tied to having the species
+	/// Type of damage melee attacks do
+	var/attack_type = BRUTE
+	/// Special sound for grabbing for this species
+	var/sound/grab_sound
+	/// Special death sound for this species
+	var/sound/deathsound
+
+	/// A path to an outfit that is important for species life e.g. plasmaman outfit
+	var/datum/outfit/outfit_important_for_life
+
+	/// Generic traits tied to having the species
 	var/list/inherent_traits = list()
-	/// components to add when spawning
+	/// Generic traits tied to having the species and being male
+	var/list/inherent_traits_m
+	/// Generic traits tied to having the species and being female
+	var/list/inherent_traits_f
+	/// Species-only traits used for drawing, can be found in DNA.dm
+	var/list/species_traits = list()
+	/// Components to add when spawning
 	var/list/components_to_add = list()
-	var/inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	///List of factions the mob gain upon gaining this species.
+	/// List of factions the mob gain upon gaining this species.
 	var/list/inherent_factions
+	/// Bitfield for biotypes used by this species
+	var/inherent_biotypes = MOB_ORGANIC | MOB_HUMANOID
 
-	var/attack_verb = "punch"	// punch-specific attack verb
-	var/sound/attack_sound = 'sound/combat/hits/punch/punch (1).ogg'
-	var/sound/miss_sound = 'sound/blank.ogg'
-
+	/// Icon to use when ingulfed in flames
 	var/enflamed_icon = "Standing"
 
-	var/breathid = "o2"
+	/// Items that are used as hands
+	var/obj/item/mutanthands
 
+	/// Does this species ignore gravity
+	var/override_float = FALSE
+
+	/// Bitflag that controls what in game ways can select this species as a spawnable source
+	/// Think magic mirror and pride mirror, slime extract, ERT etc, see defines
+	/// in __DEFINES/mobs.dm, defaults to NONE, so people actually have to think about it
+	var/changesource_flags = NONE
+
+	/// Do we use custom skintones?
+	var/use_skintones = FALSE
+
+	/// Wording for skin tone on examine and on character setup
+	var/skin_tone_wording = "Skin Tone"
+
+	/// List of bodypart features of this species
+	var/list/bodypart_features
+
+	/// List of customizer entries that appear in the features tab
 	var/list/customizer_entries = list()
 
 	/// List of organs this species has.
@@ -99,24 +175,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
-
-	var/obj/item/mutanthands
-
-	var/override_float = FALSE
-
-	//Bitflag that controls what in game ways can select this species as a spawnable source
-	//Think magic mirror and pride mirror, slime extract, ERT etc, see defines
-	//in __DEFINES/mobs.dm, defaults to NONE, so people actually have to think about it
-	var/changesource_flags = NONE
-
-	//Wording for skin tone on examine and on character setup
-	var/skin_tone_wording = "Skin Tone"
-
-	// value for replacing skin tone/origin term
-	var/alt_origin
-
-		/// List of bodypart features of this species
-	var/list/bodypart_features
 
 	/// List of descriptor choices this species gets in preferences customization
 	var/list/descriptor_choices = list(
@@ -142,31 +200,61 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	/// List all of body markings that the player can choose from in customization. Body markings from sets get added to here
 	var/list/body_markings
 
-	///can we be a youngling?
-	var/can_be_youngling = TRUE
-	var/child_icon = 'icons/roguetown/mob/bodies/c/child.dmi'
-	var/child_dam_icon = 'icons/roguetown/mob/bodies/dam/dam_child.dmi'
-	var/list/offset_features_child = list(OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0),\
-	OFFSET_CLOAK = list(0,-4), OFFSET_FACEMASK = list(0,-4), OFFSET_HEAD = list(0,-4), \
-	OFFSET_FACE = list(0,-4), OFFSET_BELT = list(0,0), OFFSET_BACK = list(0,0), \
-	OFFSET_NECK = list(0,-4), OFFSET_MOUTH = list(0,-4), OFFSET_PANTS = list(0,0), \
-	OFFSET_SHIRT = list(0,0), OFFSET_ARMOR = list(0,0), OFFSET_HANDS = list(0,-3), \
-	OFFSET_ID_F = list(0,0), OFFSET_GLOVES_F = list(0,0), OFFSET_HANDS_F = list(0,-3), \
-	OFFSET_CLOAK_F = list(0,-4), OFFSET_FACEMASK_F = list(0,-4), OFFSET_HEAD_F = list(0,-4), \
-	OFFSET_FACE_F = list(0,-4), OFFSET_BELT_F = list(0,0), OFFSET_BACK_F = list(0,0), \
-	OFFSET_NECK_F = list(0,-4), OFFSET_MOUTH_F = list(0,-4), OFFSET_PANTS_F = list(0,0), \
-	OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))
-
 	///Statkey = bonus stat, - for malice.
 	var/list/specstats = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
+
 	///Statkey = bonus stat, - for malice.
 	var/list/specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
+
+	/// Can we be a youngling?
+	var/can_be_youngling = TRUE
+	/// Icon override for children male and female is the same
+	var/child_icon = 'icons/roguetown/mob/bodies/c/child.dmi'
+	/// Child damage icons
+	var/child_dam_icon = 'icons/roguetown/mob/bodies/dam/dam_child.dmi'
+
+	/// Child feature offset lists
+	var/list/offset_features_child = list(
+		OFFSET_RING = list(0,0),\
+		OFFSET_GLOVES = list(0,0),\
+		OFFSET_WRISTS = list(0,0),\
+		OFFSET_HANDS = list(0,-3),\
+		OFFSET_CLOAK = list(0,-4),\
+		OFFSET_FACEMASK = list(0,-4),\
+		OFFSET_HEAD = list(0,-4),\
+		OFFSET_FACE = list(0,-4),\
+		OFFSET_BELT = list(0,0),\
+		OFFSET_BACK = list(0,0),\
+		OFFSET_NECK = list(0,-4),\
+		OFFSET_MOUTH = list(0,-4),\
+		OFFSET_PANTS = list(0,0),\
+		OFFSET_SHIRT = list(0,0),\
+		OFFSET_ARMOR = list(0,0),\
+		OFFSET_UNDIES = list(0,0),\
+		OFFSET_RING_F = list(0,0),\
+		OFFSET_GLOVES_F = list(0,0),\
+		OFFSET_WRISTS_F = list(0,0),\
+		OFFSET_HANDS_F = list(0,-3),\
+		OFFSET_CLOAK_F = list(0,-4),\
+		OFFSET_FACEMASK_F = list(0,-4),\
+		OFFSET_HEAD_F = list(0,-4),\
+		OFFSET_FACE_F = list(0,-4),\
+		OFFSET_BELT_F = list(0,0),\
+		OFFSET_BACK_F = list(0,0),\
+		OFFSET_NECK_F = list(0,-4),\
+		OFFSET_MOUTH_F = list(0,-4),\
+		OFFSET_PANTS_F = list(0,0),\
+		OFFSET_SHIRT_F = list(0,0),\
+		OFFSET_ARMOR_F = list(0,0),\
+		OFFSET_UNDIES_F = list(0,0),\
+	)
+
+	/// Amount of times we got autocorrected?? why is this a thing?
 	var/amtfail = 0
 
 ///////////
 // PROCS //
 ///////////
-
 
 /datum/species/proc/get_accent_list()
 	return
@@ -585,8 +673,16 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			else	//Entries in the list should only ever be items or null, so if it's not an item, we can assume it's an empty hand
 				C.put_in_hands(new mutanthands())
 
-	for(var/X in inherent_traits)
-		ADD_TRAIT(C, X, SPECIES_TRAIT)
+	for(var/trait as anything in inherent_traits)
+		ADD_TRAIT(C, trait, SPECIES_TRAIT)
+
+	if(LAZYLEN(inherent_traits_f) && C.gender == FEMALE)
+		for(var/trait as anything in inherent_traits_f)
+			ADD_TRAIT(C, trait, SPECIES_TRAIT)
+
+	if(LAZYLEN(inherent_traits_m) && C.gender == MALE)
+		for(var/trait as anything in inherent_traits_m)
+			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	for(var/component in components_to_add)
 		C.AddComponent(component)

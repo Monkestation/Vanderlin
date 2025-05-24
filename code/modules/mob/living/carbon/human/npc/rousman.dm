@@ -143,7 +143,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	sexes = 1
 	offset_features = list(OFFSET_HANDS = list(0,-4), OFFSET_HANDS_F = list(0,-4))
 	damage_overlay_type = ""
-	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
+	changesource_flags = WABBAJACK
 	var/raceicon = "rousman"
 
 /datum/species/rousman/update_damage_overlays(mob/living/carbon/human/H)

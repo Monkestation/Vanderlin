@@ -344,5 +344,11 @@
 	name = "TiebTail"
 	icon_state = "tiebtail"
 	specuse = list("tiefling")
-	gender = NEUTER
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
+/datum/sprite_accessory/tail/triton
+	icon = 'icons/mob/sprite_accessory/tails/triton.dmi'
+	name = "Triton"
+	icon_state = "triton"
+	specuse = list("triton")
 	color_key_defaults = list(KEY_SKIN_COLOR)

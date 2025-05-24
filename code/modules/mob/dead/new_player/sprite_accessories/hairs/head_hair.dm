@@ -1115,3 +1115,48 @@
 	icon_state = "helmet"
 	gender = NEUTER
 	specuse = list("human", "dwarf", "elf", "aasimar", "tiefling", "halforc")
+
+/datum/sprite_accessory/hair/head/triton
+	name = "Base Triton"
+	icon = 'icons/mob/sprite_accessory/hair/triton.dmi'
+	specuse = list("triton")
+
+/datum/sprite_accessory/hair/head/triton/fin
+	name = "Fin Hair"
+	icon_state = "fin"
+
+/datum/sprite_accessory/hair/head/triton/seaking
+	name = "Seaking Hair"
+	icon_state = "seaking"
+
+/datum/sprite_accessory/hair/head/triton/siren
+	name = "Siren Hair"
+	icon_state = "siren"
+
+/datum/sprite_accessory/hair/head/triton/jellyfish
+	name = "Jellyfish Hair"
+	icon_state = "jellyfish"
+
+/datum/sprite_accessory/hair/head/triton/anemonger
+	name = "Anemonger Hair"
+	icon_state = "anemonger"
+
+/datum/sprite_accessory/hair/head/triton/punkfish
+	name = "Punkfish Hair"
+	icon_state = "punkfish"
+
+/datum/sprite_accessory/hair/head/triton/weed
+	name = "Weed Hair"
+	icon_state = "weed"
+
+/datum/sprite_accessory/hair/head/triton/gorgon
+	name = "Gorgon Hair"
+	icon_state = "gorgon"
+
+/datum/sprite_accessory/hair/head/triton/lion
+	name = "Lion Hair"
+	icon_state = "lion"
+
+/datum/sprite_accessory/hair/head/triton/betta
+	name = "Betta Hair"
+	icon_state = "betta"

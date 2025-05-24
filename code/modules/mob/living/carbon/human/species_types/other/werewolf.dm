@@ -44,7 +44,7 @@
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
 
-	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
+	changesource_flags = WABBAJACK
 	bleed_mod = 0.2
 	pain_mod = 0.2
 

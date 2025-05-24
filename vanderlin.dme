@@ -2240,6 +2240,7 @@
 #include "code\modules\mob\living\carbon\human\species_types\other\tiefling.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\werewolf.dm"
 #include "code\modules\mob\living\carbon\human\species_types\rakshari\_rakshari.dm"
+#include "code\modules\mob\living\carbon\human\species_types\triton\_triton.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\genfemale.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\genmale.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\female\assassin.dm"
