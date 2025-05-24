@@ -38,7 +38,7 @@
 	H.become_blind("TRAIT_GENERIC")
 	H.advjob = "Assassin"
 	// Assassin now spawns disguised as one of the non-combat drifters. You never know who will stab you in the back.
-	var/disguises = list("Bard", "Beggar", "Fisher", "Hunter", "Miner", "Noble", "Peasant", "Carpenter", "Thief", "Ranger", "Servant", "Assassin")
+	var/disguises = list("Bard", "Beggar", "Fisher", "Hunter", "Miner", "Noble", "Peasant", "Carpenter", "Thief", "Ranger", "Servant", "Assassin", "Faceless One")
 	var/disguisechoice = input("Choose your cover", "Available disguises") as anything in disguises
 
 	if(disguisechoice)
@@ -272,6 +272,22 @@
 			ring = /obj/item/clothing/ring/silver/gemerald
 			backpack_contents = list(/obj/item/reagent_containers/glass/bottle/poison, /obj/item/weapon/knife/dagger/steel/profane, /obj/item/lockpick, /obj/item/storage/fancy/cigarettes/zig, /obj/item/flint)
 			H.set_hair_style(/datum/sprite_accessory/hair/head/bald, FALSE)
+		if("Faceless One") //Sacrifice the disguise and marked for valid for even more drip.
+			head = /obj/item/clothing/head/faceless
+			armor = /obj/item/clothing/shirt/robe/faceless
+			gloves = /obj/item/clothing/gloves/leather/black
+			pants = /obj/item/clothing/pants/trou/leather
+			shoes = /obj/item/clothing/shoes/boots
+			backl = /obj/item/storage/backpack/satchel
+			belt = /obj/item/storage/belt/leather/knifebelt/black/steel
+			beltl = /obj/item/storage/belt/pouch/coins/poor
+			beltr = /obj/item/weapon/knife/dagger/steel
+			cloak = /obj/item/clothing/cloak/faceless
+			shirt = /obj/item/clothing/shirt/undershirt/black
+			mask = /obj/item/clothing/face/lordmask/faceless
+			backpack_contents = list(/obj/item/reagent_containers/glass/bottle/poison, /obj/item/weapon/knife/dagger/steel/profane, /obj/item/lockpick, /obj/item/storage/fancy/cigarettes/zig, /obj/item/flint)
+			ADD_TRAIT(H, TRAIT_FACELESS, TRAIT_GENERIC)
+			H.real_name = get_faceless_name(H)
 
 	H.cure_blind("TRAIT_GENERIC")
 
@@ -289,3 +305,16 @@
 			H.dna.species.soundpack_m = new /datum/voicepack/male/assassin()
 		else
 			H.dna.species.soundpack_f = new /datum/voicepack/female/assassin()
+
+
+/datum/outfit/job/adventurer/assassin/proc/get_faceless_name(mob/living/carbon/human/H)
+	if(is_species(H, /datum/species/rakshari) && prob(10))
+		return "Furless One"
+	else if(is_species(H, /datum/species/harpy) && prob(10))
+		return "Featherless One"
+	else if(is_species(H, /datum/species/kobold) && prob(10))
+		return "Scaleless One"
+	else if(prob(1))
+		return pick("Friendless One", "Maidenless One", "Fatherless One", "Kinless One")
+	else
+		return "Faceless One"

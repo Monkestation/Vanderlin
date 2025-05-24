@@ -82,7 +82,7 @@
 		if(race_name) // race name
 			appendage_to_name += " [race_name]"
 
-		if(used_title && !HAS_TRAIT(src, TRAIT_FOREIGNER)) // job name, don't show job of foreigners.
+		if(used_title && !HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(src, TRAIT_FACELESS)) // job name, don't show job of foreigners.
 			appendage_to_name += ", [used_title]"
 
 		if(appendage_to_name) // if we got any of those paramaters add it to their name
@@ -184,6 +184,9 @@
 
 	if(HAS_TRAIT(src, TRAIT_LEPROSY))
 		. += span_necrosis("A LEPER...")
+
+	if(HAS_TRAIT(src, TRAIT_FACELESS))
+		. += span_userdanger("FACELESS?! AN ASSASSIN!")
 
 	if(user != src)
 		var/datum/mind/Umind = user.mind
@@ -578,7 +581,8 @@
 			. += "<a href='byond://?src=[REF(src)];inspect_limb=[checked_zone]'>Inspect [parse_zone(checked_zone)]</a>"
 			if(body_position == LYING_DOWN && user != src && (user.zone_selected == BODY_ZONE_CHEST))
 				. += "<a href='byond://?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
-		. += "<a href='byond://?src=[REF(src)];view_descriptors=1'>Look at Features</a>"
+		if(!HAS_TRAIT(src, TRAIT_FACELESS))
+			. += "<a href='byond://?src=[REF(src)];view_descriptors=1'>Look at Features</a>"
 
 	// Characters with the hunted flaw will freak out if they can't see someone's face.
 	if(!appears_dead)

@@ -241,3 +241,45 @@
 	dynamic_hair_suffix = null
 	sellprice = 1000
 	resistance_flags = FIRE_PROOF
+
+//................ Faceless Hood ............... //	- Faceless One
+
+/obj/item/clothing/head/faceless //A hood that doesn't cover the face.
+	name = "hood"
+	desc = "Conceals your face, whether against the rain, or the gazes of others."
+	icon_state = "facelesshood"
+	item_state = "facelesshood"
+	color = CLOTHING_SOOT_BLACK
+	dynamic_hair_suffix = ""
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	var/default_hidden = null
+	body_parts_covered = NECK
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/cloth
+
+/obj/item/clothing/head/faceless/AdjustClothes(mob/living/carbon/user)
+	if(loc == user)
+		if(adjustable == CAN_CADJUST)
+			adjustable = CADJUSTED
+			if(toggle_icon_state)
+				icon_state = "[initial(icon_state)]_t"
+			body_parts_covered = NECK|HAIR|EARS|HEAD
+			dynamic_hair_suffix = "+generic"
+			if(ishuman(user))
+				var/mob/living/carbon/H = user
+				H.update_inv_head()
+			block2add = FOV_BEHIND
+		else if(adjustable == CADJUSTED)
+			ResetAdjust(user)
+			dynamic_hair_suffix = ""
+			if(user)
+				if(ishuman(user))
+					var/mob/living/carbon/H = user
+					H.update_inv_head()
+		user.update_fov_angles()
+		user.regenerate_clothes()

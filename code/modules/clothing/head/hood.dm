@@ -177,3 +177,8 @@
 	name = "hood"
 	icon_state = "sorcerer-red"
 	item_state = "sorcerert-red"
+
+
+/obj/item/clothing/head/roguehood/faceless
+	icon_state = "facelesshood" //Credit goes to Cre
+	color = CLOTHING_SOOT_BLACK

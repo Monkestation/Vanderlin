@@ -7,6 +7,21 @@
 /obj/item/clothing/face/lordmask/l
 	icon_state = "lmask_l"
 
+/obj/item/clothing/face/lordmask/faceless
+	name = "half-face"
+	desc = "A face for the faceless."
+	color = CLOTHING_SOOT_BLACK
+
+/obj/item/clothing/face/lordmask/faceless/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+
+/obj/item/clothing/face/lordmask/faceless/dropped(mob/living/carbon/human/user)
+	. = ..()
+	if(QDELETED(src))
+		return
+	qdel(src)
+
 /obj/item/clothing/face/facemask
 	name = "iron mask"
 	icon_state = "imask"
@@ -191,3 +206,4 @@
 	max_integrity = 150
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
+

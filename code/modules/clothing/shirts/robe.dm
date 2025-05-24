@@ -361,3 +361,9 @@
 	picked = TRUE
 	to_chat(user, span_info("[src] magically changes it's colours!"))
 	playsound(src, 'sound/magic/swap.ogg', 50, TRUE)
+
+/obj/item/clothing/shirt/robe/faceless
+	desc = "A slimmed down, fitting robe made of fine silks and fabrics."
+	color = null
+	icon_state = "facelesscloth" //Credit goes to Cre
+	item_state = "facelesscloth"

@@ -298,6 +298,11 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	for(var/mob/living/carbon/human/to_be_outlawed in GLOB.player_list)
 		if(to_be_outlawed.real_name == message)
 			found = TRUE
+		if(to_be_outlawed.advjob == "Faceless One")
+			say("Who? That person doesn't exist!")
+			playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+			reset_mode()
+			return FALSE
 	if(!found)
 		say("That person doesn't exist!")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)

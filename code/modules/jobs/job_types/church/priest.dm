@@ -169,8 +169,12 @@
 		if(length(GLOB.tennite_schisms))
 			to_chat(src, span_warning("I cannot excommunicate anyone during the schism!"))
 			return FALSE
+
 		var/found = FALSE
 		for(var/mob/living/carbon/human/H in GLOB.player_list)
+			if(H.advjob == "Faceless One")
+				to_chat(src, span_danger("I wasn't able to do that!"))
+				return FALSE
 			if(H.real_name == inputty)
 				found = TRUE
 				H.cleric?.excommunicate()
@@ -201,7 +205,10 @@
 			to_chat(src, span_warning("I cannot curse anyone during the schism!"))
 			return FALSE
 		var/found = FALSE
-		for(var/mob/living/carbon/H in GLOB.player_list)
+		for(var/mob/living/carbon/human/H in GLOB.player_list)
+			if(H.advjob == "Faceless One")
+				to_chat(src, span_danger("I wasn't able to do that!"))
+				return FALSE
 			if(H.real_name == inputty)
 				found = TRUE
 				H.add_stress(/datum/stressevent/psycurse)
