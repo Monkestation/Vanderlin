@@ -252,6 +252,10 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/cleanshallow,
 /area/rogue/delver/town)
+"cm" = (
+/obj/effect/landmark/mapGenerator/delvertown,
+/turf/open/transparent/openspace,
+/area/rogue/delver)
 "cq" = (
 /obj/structure/bars/pipe{
 	dir = 4;
@@ -45876,7 +45880,7 @@ TL
 TL
 TL
 TL
-TL
+cm
 "}
 (2,1,2) = {"
 hR

@@ -4,7 +4,8 @@
 		"map_path": "map_files/delvertown",
 		"traits": [
 			{"Up": true, "Turf Weather Effects": true},
-			{"Down": true, "Turf Weather Effects": true}],
+			{"Down": true, "Turf Weather Effects": true}
+		],
 	"minetype": null,
 	"space_empty_levels": 0,
 	"space_ruin_levels": 0
