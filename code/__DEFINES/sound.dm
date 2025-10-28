@@ -120,6 +120,9 @@
 #define DRONING_CAVE_WET "cave_wet"
 #define DRONING_CAVE_LAVA "cave_lava"
 
+#define DRONING_DESERT_DAY "desert_day"
+#define DRONING_DESERT_NIGHT "desert_night"
+
 // Ambient sounds handled by SSambience
 
 #define AMBIENCE_GENERIC "spooky_generic"

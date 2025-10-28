@@ -100,6 +100,11 @@ GLOBAL_LIST_INIT(ambience_spooky_dungeon, list(
 	'sound/ambience/noises/dungeon (5).ogg',
 ))
 
+// Desert
+GLOBAL_LIST_INIT(ambience_desert_day, list('sound/ambience/desertday.ogg'))
+
+GLOBAL_LIST_INIT(ambience_desert_night, list('sound/ambience/desertnight.ogg'))
+
 // Animals
 
 GLOBAL_LIST_INIT(ambience_spooky_rat, list(
@@ -168,4 +173,6 @@ GLOBAL_LIST_INIT(ambience_assoc_droning, list(
 	DRONING_RAIN_IN = GLOB.ambience_rain_indoors,
 	DRONING_RAIN_OUT = GLOB.ambience_rain_outdoors,
 	DRONING_RAIN_SEWER = GLOB.ambience_rain_sewer,
+	DRONING_DESERT_DAY = GLOB.ambience_desert_day,
+	DRONING_DESERT_NIGHT = GLOB.ambience_desert_night,
 ))
