@@ -3053,6 +3053,7 @@
 #include "code\modules\procedural_mapping\dakkamg\dakkamountainmg.dm"
 #include "code\modules\procedural_mapping\dakkamg\dakkaswampmg.dm"
 #include "code\modules\procedural_mapping\dakkamg\dakkatownmg.dm"
+#include "code\modules\procedural_mapping\delvertown\delvertown.dm"
 #include "code\modules\procedural_mapping\mapGeneratorModules\ambushmarkers.dm"
 #include "code\modules\procedural_mapping\mapGeneratorModules\beach.dm"
 #include "code\modules\procedural_mapping\mapGeneratorModules\bog.dm"

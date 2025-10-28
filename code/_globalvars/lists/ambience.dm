@@ -101,8 +101,8 @@ GLOBAL_LIST_INIT(ambience_spooky_dungeon, list(
 ))
 
 // Desert
-GLOBAL_LIST_INIT(ambience_desert_day, list('sound/ambience/desertday.ogg'))
 
+GLOBAL_LIST_INIT(ambience_desert_day, list('sound/ambience/desertday.ogg'))
 GLOBAL_LIST_INIT(ambience_desert_night, list('sound/ambience/desertnight.ogg'))
 
 // Animals

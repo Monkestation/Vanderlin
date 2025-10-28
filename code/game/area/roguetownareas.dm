@@ -1019,6 +1019,17 @@
 	delver_restrictions = TRUE
 	converted_type = /area/rogue/delver
 
+/area/rogue/delver/river
+	name = "delverriver"
+	icon_state = "delverriver"
+	droning_index = DRONING_RIVER_DAY
+	droning_index_night = DRONING_RIVER_NIGHT
+	ambient_index = AMBIENCE_FROG
+	ambient_index_night = AMBIENCE_FOREST
+	background_track = 'sound/music/area/forest.ogg'
+	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_night = 'sound/music/area/forestnight.ogg'
+
 /area/rogue/delver/guild
 	name = "guildhall"
 	icon_state = "delverguild"
