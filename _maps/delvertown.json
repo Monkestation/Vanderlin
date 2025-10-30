@@ -1,11 +1,11 @@
 {
-		"map_name": "Delvertown",
-		"map_file": "delvertown.dmm",
-		"map_path": "map_files/delvertown",
-		"traits": [
-			{"Up": true, "Turf Weather Effects": true},
-			{"Down": true, "Turf Weather Effects": true}
-		],
+	"map_name": "Delvertown",
+	"map_path": "map_files/delvertown",
+	"map_file": "delvertown.dmm",
+	"immigrant_origin": "Far, far away",
+	"monarch_title": "Chief Banking Officer",
+	"monarch_title_f": "Chief Banking Officer",
+	"traits": [{"Up": true, "Turf Weather Effects": true}, {"Down": true, "Turf Weather Effects": true}],
 	"minetype": null,
 	"space_empty_levels": 0,
 	"space_ruin_levels": 0

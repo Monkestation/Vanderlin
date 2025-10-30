@@ -37,3 +37,8 @@ map voyager
 	maxplayers 0
 	votable
 endmap
+
+map delvertown
+	maxplayers 0
+	minplayers 0
+endmap
