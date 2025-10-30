@@ -1,38 +1,92 @@
-/obj/effect/landmark/mapGenerator/delvertown
-	mapGeneratorType = /datum/mapGenerator/delvertown
+/obj/effect/landmark/mapGenerator/delver
+	mapGeneratorType = /datum/mapGenerator/delver
 	endTurfX = 200
 	endTurfY = 200
 	startTurfX = 1
 	startTurfY = 1
 
-/datum/mapGenerator/delvertown
+/datum/mapGenerator/delver
 	modules = list(
 				/datum/mapGeneratorModule/delvertown,
-				/datum/mapGeneratorModule/plains,
-				/datum/mapGeneratorModule/marsh,
-				// /datum/mapGeneratorModule/woods,
-				// /datum/mapGeneratorModule/river,
-				// /datum/mapGeneratorModule/mountain,)
+				/datum/mapGeneratorModule/delverplains,
+				/datum/mapGeneratorModule/delvermarsh,
+				/datum/mapGeneratorModule/delverwoods,
+				/datum/mapGeneratorModule/delverwater,
+				/datum/mapGeneratorModule/delvermtn
 	)
 
-/datum/mapGeneratorModule/delvertown // Grass and other misc atoms for most of the map
+/datum/mapGeneratorModule/delvertown
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
 	allowed_turfs = list(/turf/open/floor/grass, /turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
-	spawnableAtoms = list(/obj/structure/flora/grass = 80,
-						/obj/structure/flora/ausbushes/sparsegrass = 20,
-						/obj/item/natural/rock = 4,
-						/obj/structure/flora/grass/bush = 5,
-						/obj/structure/flora/grass/bush_meagre = 3,
-						// /obj/structure/flora/ausbushes/lavendergrass = 10,
-						// /obj/structure/flora/grass/herb/salvia = 8,
-						/obj/structure/flora/newtree = 5,
-						/obj/structure/table/wood/treestump = 4,)
-	allowed_areas = list(/area/rogue/delver/town, /area/rogue/delver/plains, /area/rogue/delver/woods)
+	spawnableAtoms = list(/obj/structure/flora/grass = 60,
+						/obj/structure/flora/ausbushes/sparsegrass = 10,
+						/obj/structure/flora/grass/bush = 10,
+						/obj/structure/flora/grass/bush_meagre = 8,
+						/obj/structure/flora/ausbushes/lavendergrass = 10,
+						/obj/structure/flora/ausbushes/ppflowers = 10,
+						/obj/structure/flora/grass/herb/salvia = 8,
+						/obj/structure/flora/grass/herb/symphitum = 8,
+						/obj/structure/flora/newtree = 10,
+						/obj/structure/table/wood/treestump = 12)
+	allowed_areas = list(/area/rogue/delver/town)
 
-/datum/mapGeneratorModule/plains
+/datum/mapGeneratorModule/delverplains
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
 	allowed_turfs = list(/turf/open/floor/grass, /turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
-	spawnableAtoms = list(/obj/structure/flora/ausbushes/brflowers = 10)
+	spawnableAtoms = list(/obj/structure/flora/grass = 90,
+					/obj/structure/flora/ausbushes/sparsegrass = 6,
+					/obj/structure/flora/ausbushes/brflowers = 10,
+					/obj/structure/flora/ausbushes/ywflowers = 10,
+					/obj/structure/flora/grass/herb/taraxacum = 8,
+					/obj/structure/flora/grass/herb/calendula = 8,
+					/obj/structure/flora/newtree = 4,
+					/obj/structure/flora/newtree = 8)
 	allowed_areas = list(/area/rogue/delver/plains)
+
+/datum/mapGeneratorModule/delvermarsh
+	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
+	allowed_turfs = list(/turf/open/floor/grass, /turf/open/floor/dirt)
+	excluded_turfs = list(/turf/open/floor/dirt/road)
+	spawnableAtoms = list(/obj/structure/flora/grass = 40,
+						/obj/structure/flora/ausbushes/sparsegrass = 8,
+						/obj/structure/flora/newtree = 12,
+						/obj/structure/flora/tree = 18,
+						/obj/structure/flora/tree/dead_bush = 12,
+						/obj/structure/flora/tree/dying_bush = 4,
+						/obj/structure/flora/grass/thorn_bush = 7,
+						/obj/structure/flora/grass/herb/paris = 6,
+						/obj/structure/flora/grass/herb/euphorbia = 8,
+						/obj/structure/flora/grass/herb/mentha = 6)
+	allowed_areas = list(/area/rogue/delver/marsh)
+
+/datum/mapGeneratorModule/delverwoods
+	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
+	allowed_turfs = list(/turf/open/floor/grass, /turf/open/floor/dirt)
+	excluded_turfs = list(/turf/open/floor/dirt/road)
+	spawnableAtoms = list(/obj/structure/flora/grass = 50,
+						/obj/structure/flora/ausbushes/sparsegrass = 8,
+						/obj/structure/flora/newtree = 60,
+						/obj/structure/flora/tree/dying_bush = 12,
+						/obj/structure/flora/grass/thorn_bush = 8,
+						/obj/structure/flora/grass/herb/hypericum = 8,
+						/obj/structure/flora/grass/herb/rosa = 6,
+						/obj/structure/flora/driftwood = 4)
+	allowed_areas = list(/area/rogue/delver/woods)
+
+/datum/mapGeneratorModule/delverwater
+	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
+	allowed_turfs = list(/turf/open/water)
+	excluded_turfs = list(/turf/open/water/river)
+	spawnableAtoms = list(/obj/structure/flora/grass/water = 10,
+						/obj/structure/flora/ausbushes/reedbush = 6,
+						/obj/structure/flora/grass/water/reeds = 3)
+
+/datum/mapGeneratorModule/delvermtn
+	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
+	allowed_turfs = list(/turf/open/floor/grass, /turf/open/floor/dirt)
+	excluded_turfs = list(/turf/open/floor/dirt/road)
+	spawnableAtoms = list(/obj/structure/flora/grass = 60,
+						/obj/structure/flora/newtree = 20,
+						/obj/structure/flora/grass/thorn_bush = 80)
