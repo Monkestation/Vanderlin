@@ -318,6 +318,16 @@
 	melting_material = /datum/material/steel
 	melt_amount = 100
 
+/obj/item/clothing/face/facemask/steel/steppe
+	name = "steppe war mask"
+	icon_state = "steppemask"
+	desc = "A steel mask shaped like a face with a prominent moustache, used for protection and intimidation by the steppe riders"
+
+/obj/item/clothing/face/facemask/steel/steppebeast
+	name = "steppe beast mask"
+	icon_state = "steppemask_snout"
+	desc = "A steel mask shaped like a beast's face, worn by steppe riders to intimidate their enemies."
+
 /obj/item/clothing/face/facemask/silver
 	name = "silver mask"
 	icon = 'icons/roguetown/clothing/special/adept.dmi'

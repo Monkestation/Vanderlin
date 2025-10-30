@@ -8,7 +8,8 @@
 	equip_delay_self = 3 SECONDS
 	unequip_delay_self = 3 SECONDS
 	emote_environment = 3		// Unknown if this actually works and what it does
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET
 
 	armor = ARMOR_PLATE
@@ -26,6 +27,18 @@
 	body_parts_covered = HEAD_NECK
 	prevent_crits = ALL_EXCEPT_BLUNT
 	block2add = FOV_BEHIND
+
+/obj/item/clothing/head/helmet/heavy/psydonbarbute
+	name = "psydonian barbute"
+	desc = "A barbute styled with Psydonian Imagery."
+	icon_state = "psydonbarbute"
+	item_state = "psydonbarbute"
+
+/obj/item/clothing/head/helmet/heavy/psydonhelm
+	name ="grenzelhoftian armet"
+	desc = "Headwear commonly worn by Templars in service to the Oratorium Throni Vacui. PSYDON Endures."
+	icon_state = "psydonarmet"
+	item_state = "psydonarmet"
 
 //................ Iron Plate Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/ironplate
@@ -269,7 +282,8 @@
 	icon_state = "sinistarhelm"
 	dropshrink = 0.9
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	item_weight = 7 * IRON_MULTIPLIER
 
 /obj/item/clothing/head/helmet/heavy/decorated	// template
@@ -427,3 +441,74 @@
 			var/mob/living/carbon/H = user
 			H.update_inv_head()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm
+	name = "inquisitorial ordinator's helmet"
+	desc = "A design suggested by a Grenzelhoftian smith, inspired by an eccentric count who insisted on sleeping in a coffin. A steel casket with thin slits that allow for deceptively clear vision. The tainted will drown in the blood you bring their way, while this high helm keeps it out of your face."
+	icon_state = "ordinatorhelm"
+	item_state = "ordinatorhelm"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	adjustable = CAN_CADJUST
+	max_integrity = 350
+	var/plumed = FALSE
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/attackby(obj/item/W, mob/living/user, params)
+	..()
+	if(istype(W, /obj/item/natural/feather))
+		user.visible_message(span_warning("[user] starts to fashion plumage using [W] for [src]."))
+		if(do_after(user, 4 SECONDS))
+			var/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/P = new /obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume(get_turf(src.loc))
+			if(user.is_holding(src))
+				user.dropItemToGround(src)
+				user.put_in_hands(P)
+			qdel(src)
+			qdel(W)
+		else
+			user.visible_message(span_warning("[user] stops fashioning plumage for [src]."))
+		return
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume
+	icon_state = "ordinatorhelmplume"
+	item_state = "ordinatorhelmplume"
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/attackby(obj/item/W, mob/living/user, params)
+	if(istype(W, /obj/item/natural/feather))
+		return
+
+/obj/item/clothing/head/helmet/heavy/absolver
+	name = "psydonian conical helm"
+	desc = "Its shape confounds and confuses the enemies of Psydon. Offering unfound protection in its visage, the gaze is horrific to those without understanding."
+	icon_state = "absolutionisthelm"
+	item_state = "absolutionisthelm"
+	emote_environment = 3
+	body_parts_covered = FULL_HEAD|NECK
+	block2add = FOV_RIGHT|FOV_LEFT
+	max_integrity = 450 // Worst vision. Yes.
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	clothing_flags = NONE
+
+/obj/item/clothing/head/helmet/heavy/psybucket
+	name = "psydonian bucket helmet"
+	desc = "Originally just a bucket with a psycross nailed on, it proved surprisingly effective, making its way into common use for inquisitorial templars. Steel encapsulates your head, and His cross facing enemies reminds them that you will endure until they meet oblivion. Only then may you rest."
+	icon_state = "psybucket"
+	item_state = "psybucket"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	adjustable = CAN_CADJUST
+	max_integrity = 400
+
+/obj/item/clothing/head/helmet/heavy/psysallet
+	name = "psydonian sallet"
+	desc = "A boiled leather cap, crowned with steel and veiled with His cross. Fear not - He will show you the way, and He will see your blows well-struck."
+	icon_state = "psysallet"
+	item_state = "psysallet"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	adjustable = CAN_CADJUST
+	max_integrity = 400

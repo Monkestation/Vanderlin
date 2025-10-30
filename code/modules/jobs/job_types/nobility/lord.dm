@@ -42,7 +42,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 //TODO: MOVE THIS INTO TICKER INIT
 /datum/job/lord/after_spawn(mob/living/spawned, client/player_client)
-	..()
+	. = ..()
 	SSticker.rulermob = spawned
 	var/mob/living/carbon/human/H = spawned
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, lord_color_choice)), 7 SECONDS)
@@ -56,6 +56,17 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	to_chat(world, "<br>")
 	if(GLOB.keep_doors.len > 0)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), H), 7 SECONDS)
+
+/datum/outfit/lord/map_override(mob/living/carbon/human/H)
+	if(SSmapping.config.map_name != "Voyage")
+		return
+	head = /obj/item/clothing/head/helmet/leather/tricorn
+	cloak = /obj/item/clothing/cloak/half
+	l_hand = null
+	armor = /obj/item/clothing/armor/leather/jacket/silk_coat
+	shirt = /obj/item/clothing/shirt/undershirt/puritan
+	wrists = null
+	shoes = /obj/item/clothing/shoes/boots
 
 /datum/outfit/lord/pre_equip(mob/living/carbon/human/H)
 	..()

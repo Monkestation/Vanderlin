@@ -20,6 +20,7 @@
 	time = 10 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED | SURGERY_BROKEN
 	skill_min = SKILL_LEVEL_EXPERT
+	skill_median = SKILL_LEVEL_MASTER
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 	var/tainted_lux = FALSE

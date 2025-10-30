@@ -12,13 +12,15 @@
 
 /datum/antagonist/vampire/lord/on_gain()
 	var/mob/living/carbon/human/vampire = owner?.current
-	remove_job()
-	vampire.delete_equipment()
-	vampire.reset_and_reroll_stats()
-	vampire.purge_combat_knowledge()
-	vampire.remove_all_traits()
+	if(SSmapping.config.map_name != "Voyage")
+		remove_job()
+		vampire.delete_equipment()
+		vampire.reset_and_reroll_stats()
+		vampire.purge_combat_knowledge()
+		vampire.remove_all_traits()
 	. = ..()
-	addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
+	if(SSmapping.config.map_name != "Voyage")
+		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
 	vampire.grant_undead_eyes()
 
 /datum/antagonist/vampire/lord/greet()
@@ -45,7 +47,8 @@
 	return TRUE
 
 /datum/antagonist/vampire/lord/move_to_spawnpoint()
-	owner.current.forceMove(pick(GLOB.vlord_starts))
+	if(SSmapping.config.map_name != "Voyage")
+		owner.current.forceMove(pick(GLOB.vlord_starts))
 
 /datum/outfit/vamplord/pre_equip(mob/living/carbon/human/H)
 	..()

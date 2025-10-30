@@ -133,6 +133,8 @@
 
 /obj/structure/fake_machine/drugmachine/attackby(obj/item/I, mob/user, params)
 	. = ..()
+	if(istype(I, /obj/item/coin/inqcoin))
+		return
 	if(istype(I, /obj/item/coin))
 		var/money = I.get_real_price()
 		budget += money

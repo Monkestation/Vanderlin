@@ -55,8 +55,8 @@
 	icon_state = "apothgloves"
 
 /obj/item/clothing/gloves/leather/otavan
-	name = "otavan leather gloves"
-	desc = "A pair of heavy Otavan leather gloves, commonly used by fencers, renowned for their quality."
+	name = "grenzelhoftian leather gloves"
+	desc = "A pair of heavy Grenzelhoftian leather gloves, commonly used by fencers, renowned for their quality."
 	icon_state = "fencergloves"
 	item_state = "fencergloves"
 	armor = ARMOR_LEATHER_GOOD

@@ -53,6 +53,11 @@
 		if(faith.preference_accessible)
 			GLOB.preference_faiths[path] = faith
 
+	// Inquisition Hermes list
+	for (var/path in subtypesof(/datum/inqports))
+		var/datum/inqports/inqports = new path()
+		GLOB.inqsupplies[path] = inqports
+
 	// Patron Gods
 	for(var/path in subtypesof(/datum/patron))
 		var/datum/patron/patron = new path()

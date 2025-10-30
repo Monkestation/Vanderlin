@@ -219,5 +219,7 @@
 			return "Madder"
 		if(FAMILY_THEACEAE)
 			return "Theaceae"
+		if(FAMILY_FRUIT)
+			return "Fruit"
 		else
 			return "Unknown"

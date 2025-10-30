@@ -86,7 +86,7 @@
 	reel = new /obj/item/fishing/reel/abytrident(src)
 	hook = new /obj/item/fishing/hook/abytrident(src)
 	line = new /obj/item/fishing/line/no_line(src)
-	baited = new /obj/item/fishing/bait/no_bait(src)
+	baited = new /obj/item/fishing/lure/no_bait(src)
 	AddComponent(/datum/component/walking_stick)
 
 /obj/item/fishingrod/abyssor_trident/examine(mob/user)
@@ -119,7 +119,7 @@
 
 /obj/item/fishingrod/abyssor_trident/afterattack(obj/target, mob/user, proximity, params)
 	. = ..()
-	baited = new /obj/item/fishing/bait/no_bait(src)
+	baited = new /obj/item/fishing/lure/no_bait(src)
 
 /obj/item/fishing/reel/abytrident
 	name = "trident shaft"
@@ -128,21 +128,36 @@
 
 /obj/item/fishing/hook/abytrident
 	name = "trident prong"
-	deepfishingweight = -2
-	sizemod = list("tiny" = -3, "small" = -2, "normal" = -1, "large" = 1, "prize" = 1)
+	fishing_hook_traits = FISHING_HOOK_NO_ESCAPE|FISHING_HOOK_KILL
 
 /obj/item/fishing/line/no_line
 	name = "lack of attachment"
 
-/obj/item/fishing/bait/no_bait
+
+/obj/item/fishing/lure/no_bait
 	name = "lack of bait"
-	baitpenalty = 10
-	sizemod = list("tiny" = -2, "small" = -2, "normal" = -1, "large" = 1, "prize" = 1)
-	fishinglist = list(/obj/item/reagent_containers/food/snacks/fish/carp = 1,
-					/obj/item/reagent_containers/food/snacks/fish/eel = 1,
-					/obj/item/reagent_containers/food/snacks/fish/shrimp = 1)
-	deeplist = list(/obj/item/reagent_containers/food/snacks/fish/angler = 1,
-					/obj/item/reagent_containers/food/snacks/fish/clownfish = 1)
+	desc = "A special fishing lure for unique circumstances."
+	icon = 'icons/roguetown/items/fishing.dmi'
+	icon_state = "no_bait"
+	spin_frequency = list(2 SECONDS, 3 SECONDS)
+
+/obj/item/fishing/lure/no_bait/is_catchable_fish(obj/item/reagent_containers/food/snacks/fish/fish, list/fish_properties)
+	// Scares off tiny and small fish
+	if(fish.size <= FISH_SIZE_SMALL_MAX)
+		return FALSE
+
+	// Catches carps, eels, shrimp, anglerfish, and clownfish
+	if(istype(fish, /obj/item/reagent_containers/food/snacks/fish/carp))
+		return TRUE
+	if(istype(fish, /obj/item/reagent_containers/food/snacks/fish/eel))
+		return TRUE
+	if(istype(fish, /obj/item/reagent_containers/food/snacks/fish/shrimp))
+		return TRUE
+	if(istype(fish, /obj/item/reagent_containers/food/snacks/fish/angler))
+		return TRUE
+	if(istype(fish, /obj/item/reagent_containers/food/snacks/fish/clownfish))
+		return TRUE
+	return FALSE
 
 /obj/item/fishingrod/abyssor_trident/arcane
 	name = "Arcane Trident"

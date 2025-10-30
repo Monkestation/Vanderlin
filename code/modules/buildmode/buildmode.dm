@@ -136,12 +136,16 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	buttons += new /atom/movable/screen/buildmode/help(null, hud_used, src)
 	dirbutton = new /atom/movable/screen/buildmode/bdir(null, hud_used, src)
 	buttons += dirbutton
-
 	categorybutton = new /atom/movable/screen/buildmode/category(null, hud_used, src)
 	buttons += categorybutton
+
+	var/atom/movable/screen/buildmode/items/itembutton = new(null, hud_used, src)
+	buttons += itembutton
+
 	buttons += new /atom/movable/screen/buildmode/quit(null, hud_used, src)
-	build_options_grid(subtypesof(/datum/buildmode_mode), modeswitch_buttons, /atom/movable/screen/buildmode/modeswitch)
-	build_options_grid(list(SOUTH, EAST, WEST, NORTH, NORTHWEST), dirswitch_buttons, /atom/movable/screen/buildmode/dirswitch)
+
+	build_options_grid(subtypesof(/datum/buildmode_mode), modeswitch_buttons, /atom/movable/screen/buildmode/modeswitch, hud_used)
+	build_options_grid(list(SOUTH, EAST, WEST, NORTH, NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST), dirswitch_buttons, /atom/movable/screen/buildmode/dirswitch, hud_used)
 	build_options_grid(list(
 		BM_CATEGORY_TURF,
 		BM_CATEGORY_OBJ,
@@ -151,7 +155,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 		BM_CATEGORY_CLOTHING,
 		BM_CATEGORY_REAGENT_CONTAINERS,
 		BM_CATEGORY_FOOD,
-	), category_buttons, /atom/movable/screen/buildmode/categoryswitch)
+	), category_buttons, /atom/movable/screen/buildmode/categoryswitch, hud_used)
 
 /**
  * Create or update the preview appearance that follows the cursor
@@ -258,6 +262,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	else
 		preview_image.pixel_x = pixel_x_offset
 		preview_image.pixel_y = pixel_y_offset
+	preview_image.dir = build_dir
 
 /**
  * Clear the current preview

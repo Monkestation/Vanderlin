@@ -31,7 +31,7 @@
 	icon_state = "igauntlets"
 	sellprice = VALUE_IRON_ARMOR/2
 	armor = ARMOR_PLATE_BAD
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/gloves/plate/rust
 	name = "rusted riveted gauntlets"

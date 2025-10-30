@@ -40,6 +40,7 @@
 
 	var/transfer_prints = FALSE
 	abstract_type = /obj/item/clothing/gloves
+	var/unarmed_bonus = 1
 
 /obj/item/clothing/gloves/Initialize(mapload, ...)
 	. = ..()

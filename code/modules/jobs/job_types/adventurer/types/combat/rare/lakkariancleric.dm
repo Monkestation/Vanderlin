@@ -18,7 +18,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/neck/psycross/silver/astrata
-	pants = /obj/item/clothing/pants/trou/leather/quiltedkilt
+	pants = /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/blue
 	shoes = /obj/item/clothing/shoes/boots/leather
 	neck = /obj/item/clothing/neck/coif/cloth // price to pay for being a speedy class, less neck protection
 	belt = /obj/item/storage/belt/leather

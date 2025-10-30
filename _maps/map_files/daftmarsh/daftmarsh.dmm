@@ -633,7 +633,7 @@
 /area/rogue/under/town/sewer)
 "aHf" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/fishing/bait/dough,
+/obj/item/fishing/lure/dough,
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
@@ -6034,7 +6034,7 @@
 /area/rogue/indoors/town/bath)
 "fYy" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/fishing/bait/meat,
+/obj/item/fishing/lure/meat,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
 "fYI" = (
@@ -7619,7 +7619,7 @@
 /turf/open/floor/blocks,
 /area/rogue/indoors/town/cell)
 "hzY" = (
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 1
 	},
 /obj/structure/chair/bench/church/r{
@@ -9704,7 +9704,7 @@
 /turf/closed/wall/mineral/wooddark,
 /area/rogue/indoors/town/dwarfin)
 "jye" = (
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 1
 	},
 /obj/structure/chair/bench/church{
@@ -9908,7 +9908,7 @@
 /turf/open/floor/wood,
 /area/rogue/indoors/town/church/chapel)
 "jEn" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/blocks,
 /area/rogue/outdoors/town/roofs)
 "jEr" = (
@@ -10405,7 +10405,7 @@
 /area/rogue/outdoors/town)
 "kcy" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/fishing/bait,
+/obj/item/fishing/lure,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
 "kcX" = (
@@ -11400,7 +11400,7 @@
 /area/rogue/outdoors/town)
 "lhB" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/fishing/bait/deluxe,
+/obj/item/fishing/lure/deluxe,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
 "lhK" = (
@@ -11873,7 +11873,7 @@
 /area/rogue/indoors/town/church/inquisition)
 "lCR" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/fishing/bait/dough,
+/obj/item/fishing/lure/dough,
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
@@ -13379,7 +13379,7 @@
 /turf/open/floor/wood,
 /area/rogue/outdoors/town/roofs)
 "mZp" = (
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 1
 	},
 /obj/structure/chair/bench/church/mid{
@@ -14154,7 +14154,7 @@
 /area/rogue/outdoors/town)
 "nSz" = (
 /obj/structure/closet/crate/chest,
-/obj/item/fishing/bait/speckled,
+/obj/item/fishing/lure/speckled,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
 "nSU" = (
@@ -21051,7 +21051,7 @@
 /area/rogue/indoors/town/merc_guild)
 "uwn" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/fishing/bait/gray,
+/obj/item/fishing/lure/gray,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)
 "uwy" = (
@@ -21866,7 +21866,7 @@
 /area/rogue/under/town/basement)
 "viM" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/item/fishing/bait/gray,
+/obj/item/fishing/lure/gray,
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
 /area/rogue/indoors/town)

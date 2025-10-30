@@ -42,6 +42,29 @@
 	desc = "But one enactor of Abyssor's rage."
 	icon = 'icons/roguetown/misc/fish.dmi'
 	icon_state = "swordfishcom"
+	fish_id = "swordfish"
+	average_size = 200
+	average_weight = 100000
+	required_fluid_type = FISH_FLUID_SALTWATER
+	required_temperature_min = 18
+	required_temperature_max = 28
+	fishing_difficulty_modifier = 25
+	fish_movement_type = /datum/fish_movement/accelerando
 	force = DAMAGE_DAGGER
 	dropshrink = 0.8
 	possible_item_intents = list(/datum/intent/dagger/thrust, /datum/intent/food)
+	sellprice = 50
+	beauty = 8
+	favorite_bait = list(
+		list(
+			FISH_BAIT_TYPE = FISH_BAIT_FOODTYPE,
+			FISH_BAIT_VALUE = MEAT,
+		),
+	)
+	disliked_bait = list(
+		list(
+			FISH_BAIT_TYPE = FISH_BAIT_FOODTYPE,
+			FISH_BAIT_VALUE = VEGETABLES,
+		),
+	)
+	fish_traits = list(/datum/fish_trait/predator, /datum/fish_trait/territorial)

@@ -100,6 +100,17 @@
 	supports_directions = TRUE
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/stool/bar
+	name = "barstool"
+	desc = "Stool with a cloth cushion."
+	result_type = /obj/structure/chair/stool/bar
+	required_materials = list(
+		/obj/item/grown/log/tree/small = 1,
+		/obj/item/natural/cloth = 1
+	)
+	supports_directions = TRUE
+	craftdiff = 2
+
 /datum/blueprint_recipe/carpentry/loom
 	name = "loom"
 	desc = "A weaving loom for creating textiles."

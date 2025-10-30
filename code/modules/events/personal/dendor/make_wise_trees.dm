@@ -9,6 +9,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_DENDOR,
 		TAG_NATURE,
 	)
 

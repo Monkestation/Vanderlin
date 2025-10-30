@@ -49,7 +49,8 @@
 /obj/item/statue/steel
 	name = "steel statue"
 	icon_state = "ststatue1"
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 50
+	melting_material = /datum/material/steel
 	sellprice = 60
 
 /obj/item/statue/steel/Initialize()

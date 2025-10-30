@@ -225,6 +225,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		QDEL_NULL(src.charflaw)
 	update_body()
 	faction = list(FACTION_RATS)
+	var/turf/turf = get_turf(src)
+	if(SSterrain_generation.get_island_at_location(turf))
+		faction |= "islander"
 	name = "rousman"
 	real_name = "rousman"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)

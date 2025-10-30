@@ -273,7 +273,7 @@
 		if(isopenspace(below))
 			return TRUE
 
-	return !(movement_type & FLYING) && has_gravity(source) && !throwing
+	return !(movement_type & FLYING) && !throwing
 
 /atom/movable/proc/onZImpact(turf/T, levels)
 	var/atom/highest = T
@@ -415,8 +415,6 @@
 	if(A == loc && pulling.density)
 		return FALSE
 	var/move_dir = get_dir(pulling.loc, A)
-	if(!Process_Spacemove(move_dir))
-		return FALSE
 	var/turf/pre_turf = get_turf(pulling)
 	pulling.Move(get_step(pulling.loc, move_dir), move_dir, glide_size)
 	var/turf/post_turf = get_turf(pulling)
@@ -580,8 +578,6 @@
 			if(moving_diagonally == SECOND_DIAG_STEP)
 				if(!. && update_dir)
 					setDir(first_step_dir)
-				else if(!inertia_moving)
-					newtonian_move(dir2angle(direct))
 			moving_diagonally = 0
 			return
 
@@ -624,10 +620,6 @@
 //Called after a successful Move(). By this point, we've already moved
 /atom/movable/proc/Moved(atom/OldLoc, Dir, Forced = FALSE)
 	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, OldLoc, Dir, Forced)
-	if (!inertia_moving)
-		inertia_next_move = world.time + inertia_move_delay
-		newtonian_move(Dir)
-
 	var/turf/old_turf = get_turf(OldLoc)
 	var/turf/new_turf = get_turf(src)
 
@@ -837,39 +829,6 @@
 		var/atom/movable/AM = item
 		AM.onTransitZ(old_z,new_z)
 
-//Called whenever an object moves and by mobs when they attempt to move themselves through space
-//And when an object or action applies a force on src, see newtonian_move() below
-//Return 0 to have src start/keep drifting in a no-grav area and 1 to stop/not start drifting
-//Mobs should return 1 if they should be able to move of their own volition, see client/Move() in mob_movement.dm
-//movement_dir == 0 when stopping or any dir when trying to move
-/atom/movable/proc/Process_Spacemove(movement_dir = 0)
-	if(has_gravity(src))
-		return 1
-
-	if(pulledby)
-		return 1
-
-	if(throwing)
-		return 1
-
-	if(!isturf(loc))
-		return 1
-
-	return 0
-
-
-/atom/movable/proc/newtonian_move(direction) //Only moves the object if it's under no gravity
-	if(!loc || Process_Spacemove(0))
-		inertia_dir = 0
-		return 0
-
-	inertia_dir = direction
-	if(!direction)
-		return 1
-	inertia_last_loc = loc
-	SSspacedrift.processing[src] = src
-	return 1
-
 /atom/movable/proc/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	set waitfor = 0
 	SEND_SIGNAL(src, COMSIG_MOVABLE_IMPACT, hit_atom, throwingdatum)
@@ -1019,25 +978,6 @@
 // called when this atom is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
 /atom/movable/proc/on_enter_storage(datum/component/storage/concrete/S)
 	return
-
-/atom/movable/proc/get_spacemove_backup()
-	var/atom/movable/dense_object_backup
-	for(var/A in orange(1, get_turf(src)))
-		if(isarea(A))
-			continue
-		else if(isturf(A))
-			var/turf/turf = A
-			if(!turf.density)
-				continue
-			return turf
-		else
-			var/atom/movable/AM = A
-			if(!AM.CanPass(src) || AM.density)
-				if(AM.anchored)
-					return AM
-				dense_object_backup = AM
-				break
-	. = dense_object_backup
 
 //called when a mob resists while inside a container that is itself inside something.
 /atom/movable/proc/relay_container_resist(mob/living/user, obj/O)
@@ -1430,7 +1370,7 @@
 /* End language procs */
 /atom/movable/proc/ConveyorMove(movedir)
 	set waitfor = FALSE
-	if(!anchored && has_gravity())
+	if(!anchored)
 		step(src, movedir)
 
 //Returns an atom's power cell, if it has one. Overload for individual items.

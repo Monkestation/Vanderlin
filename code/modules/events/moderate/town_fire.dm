@@ -8,9 +8,8 @@
 	earliest_start = 25 MINUTES
 
 	tags = list(
-		TAG_WORK,
 		TAG_CURSE,
-		TAG_WIDESPREAD,
+		TAG_WORK,
 	)
 
 /datum/round_event/town_fire/start()

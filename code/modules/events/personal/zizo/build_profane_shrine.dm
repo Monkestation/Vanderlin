@@ -9,6 +9,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_ZIZO,
 		TAG_CORRUPTION,
 		TAG_WORK,
 	)

@@ -363,7 +363,7 @@
 /turf/open/floor/dirt,
 /area/rogue/outdoors/bog)
 "cv" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/twig,
 /area/rogue/indoors/mountains)
 "cw" = (
@@ -424,7 +424,7 @@
 /turf/open/floor/church/purple,
 /area/rogue/indoors/lich)
 "cM" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/dirt,
 /area/rogue/outdoors/bog)
 "cQ" = (
@@ -729,7 +729,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/lich)
 "er" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood,
 /area/rogue/indoors/mountains)
@@ -1610,15 +1610,15 @@
 /area/rogue/outdoors/bog)
 "jh" = (
 /obj/structure/table/wood/crafted,
-/obj/item/fishing/bait/deluxe{
+/obj/item/fishing/lure/deluxe{
 	pixel_x = -7;
 	pixel_y = 0
 	},
-/obj/item/fishing/bait/deluxe{
+/obj/item/fishing/lure/deluxe{
 	pixel_x = 7;
 	pixel_y = 9
 	},
-/obj/item/fishing/bait/deluxe{
+/obj/item/fishing/lure/deluxe{
 	pixel_x = -4;
 	pixel_y = 14
 	},
@@ -1707,7 +1707,7 @@
 /turf/open/water/swamp,
 /area/rogue/outdoors/bog)
 "jJ" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/mountains)
 "jK" = (
@@ -2702,7 +2702,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/indoors/mountains)
 "qc" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/grass/cold,
 /area/rogue/outdoors/bog)
@@ -2940,7 +2940,7 @@
 	},
 /area/rogue/outdoors/bog)
 "rI" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood,
 /area/rogue/indoors/lich)
 "rJ" = (
@@ -3536,7 +3536,7 @@
 /turf/open/floor/church,
 /area/rogue/indoors/cave)
 "uN" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /obj/structure/spider/stickyweb{
 	dir = 8
 	},
@@ -3690,7 +3690,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/indoors/lich)
 "vG" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/naturalstone,
 /area/rogue/indoors/mountains)
 "vH" = (
@@ -4174,7 +4174,7 @@
 /turf/open/floor/grass/cold,
 /area/rogue/outdoors/bog)
 "yj" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/grass/cold,
 /area/rogue/outdoors/bog)
 "yn" = (
@@ -4354,7 +4354,7 @@
 /turf/open/floor/ruinedwood,
 /area/rogue/indoors/lich)
 "zr" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/indoors/lich)
 "zs" = (
@@ -4872,7 +4872,7 @@
 /turf/open/floor/cobble/snow,
 /area/rogue/outdoors/bog)
 "Ca" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /obj/effect/decal/cleanable/dirt/cobweb{
 	pixel_y = -2;
 	pixel_x = 1;
@@ -5052,7 +5052,7 @@
 /turf/open/floor/ruinedwood,
 /area/rogue/indoors/lich)
 "CZ" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood,
 /area/rogue/indoors/mountains)
 "Da" = (
@@ -5468,7 +5468,7 @@
 /turf/open/floor/tile/masonic/single,
 /area/rogue/indoors/lich)
 "Fv" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/dirt,
 /area/rogue/indoors/mountains)
 "Fx" = (
@@ -6601,7 +6601,7 @@
 	dir = 4;
 	icon_state = "border"
 	},
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood,
 /area/rogue/outdoors/bog)
 "Mc" = (
@@ -6711,7 +6711,7 @@
 	pixel_x = 0;
 	pixel_y = -31
 	},
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood,
 /area/rogue/indoors/lich)
 "MI" = (
@@ -8315,7 +8315,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/indoors/lich)
 "WS" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/naturalstone,
 /area/rogue/outdoors/bog)
 "WT" = (
@@ -8352,7 +8352,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/outdoors/bog)
 "Xf" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/twig,
 /area/rogue/indoors/mountains)

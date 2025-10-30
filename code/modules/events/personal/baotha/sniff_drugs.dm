@@ -8,6 +8,7 @@
 	min_players = 15
 
 	tags = list(
+		TAG_BAOTHA,
 		TAG_INSANITY,
 		TAG_ALCHEMY,
 	)

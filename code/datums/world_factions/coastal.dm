@@ -76,6 +76,8 @@
 		/datum/supply_pack/seeds/apple,
 		/datum/supply_pack/seeds/blackberry,
 		/datum/supply_pack/seeds/rasberry,
+		/datum/supply_pack/seeds/avocado,
+		/datum/supply_pack/seeds/pineapple,
 		// Livestock - coastal communities
 		/datum/supply_pack/livestock/chicken,
 		/datum/supply_pack/livestock/cat
@@ -103,6 +105,7 @@
 		/datum/supply_pack/jewelry/nomag,
 		// Seeds
 		/datum/supply_pack/seeds/tangerine,
+		/datum/supply_pack/seeds/mango,
 		// Livestock - more valuable
 		/datum/supply_pack/livestock/saiga,
 		/datum/supply_pack/livestock/cow,
@@ -141,6 +144,8 @@
 		/datum/supply_pack/luxury/spectacles_golden,
 		// Seeds
 		/datum/supply_pack/seeds/pear,
+		/datum/supply_pack/seeds/mangosteen,
+		/datum/supply_pack/seeds/dragonfruit,
 		/datum/supply_pack/seeds/poppy
 	)
 	exotic_pool = list(

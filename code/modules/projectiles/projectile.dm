@@ -144,9 +144,12 @@
 	var/bonus_accuracy = 0 //bonus accuracy that cannot be affected by range drop off.
 	///this is basically do we ignore projectile effects?
 	var/dirty = NONE
+	/// If true directly targeted turfs can be hit
+	var/can_hit_turfs = FALSE
+
 	///projectile crit reduce chance since more dmg increases the crit chance it can get absurdly high, 0 for nothing.
 	var/reduce_crit_chance = 0
-	
+
 /obj/projectile/proc/handle_drop()
 	return
 
@@ -455,7 +458,7 @@
 /obj/projectile/proc/can_hit_target(atom/target, direct_target = FALSE, ignore_loc = FALSE)
 	if(QDELETED(target) || LAZYACCESS(impacted, target))
 		return FALSE
-	if(!ignore_loc && (loc != target.loc))
+	if(!ignore_loc && (loc != target.loc) && !(can_hit_turfs && direct_target && loc == target))
 		return FALSE
 	// if pass_flags match, pass through entirely
 	if(target.pass_flags_self & pass_flags)		// phasing
@@ -472,7 +475,7 @@
 		return TRUE
 	if(!isliving(target))
 		if(isturf(target))		// non dense turfs
-			return FALSE
+			return can_hit_turfs && direct_target
 		if(target.layer < PROJECTILE_HIT_THRESHHOLD_LAYER)
 			return FALSE
 		else if(!direct_target)		// non dense objects do not get hit unless specifically clicked
@@ -593,9 +596,6 @@
 	var/turf/current = get_turf(src)
 	var/turf/ending = return_predicted_turf_after_moves(moves, forced_angle)
 	return getline(current, ending)
-
-/obj/projectile/Process_Spacemove(movement_dir = 0)
-	return TRUE	//Bullets don't drift in space
 
 /obj/projectile/process()
 	last_process = world.time

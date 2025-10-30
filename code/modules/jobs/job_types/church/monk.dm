@@ -91,7 +91,7 @@
 				if("Orcish")
 					H.grant_language(/datum/language/orcish)
 					to_chat(H,span_info("\
-					I learned the tongue of the savages in my time.")
+					I learned the tongue of the Orcs in my time.")
 					)
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/padded/pestra
@@ -126,7 +126,7 @@
 			shirt = /obj/item/clothing/armor/gambeson/light
 			armor = /obj/item/clothing/armor/leather
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 			H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/swords, pick(1,3), TRUE)
 			H.adjust_skillrank(/datum/skill/combat/whipsflails, pick(1,3), TRUE)
@@ -136,7 +136,7 @@
 			neck = /obj/item/clothing/neck/psycross/silver/xylix
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 			H.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
 			H.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
 		if(/datum/patron/divine/malum)

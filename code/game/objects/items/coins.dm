@@ -412,3 +412,30 @@
 #undef CTYPE_SILV
 #undef CTYPE_COPP
 #undef MAX_COIN_STACK_SIZE
+
+/obj/item/coin/inqcoin
+	name = "oratorium marque"
+	desc = "A blessed silver coin finished with a unique wash of black dye, bearing the post-kingdom Psycross. Kingsfield has denied the existence of such a coin when queried, as such coinage is rumoured to be used internally by the Oratorium Throni Vacui."
+	icon_state = "i1"
+	sellprice = 0
+	base_type = "i"
+	plural_name = "oratorium marques"
+
+/obj/item/coin/inqcoin/pile/Initialize()
+	. = ..()
+	set_quantity(rand(4,19))
+
+/obj/item/coin/inqcoin/attack_self(mob/living/user)
+	if(quantity > 1 || !base_type)
+		return
+	if(world.time < flip_cd + 30)
+		return
+	flip_cd = world.time
+	playsound(user, 'sound/foley/coinphy (1).ogg', 100, FALSE)
+	if(prob(50))
+		user.visible_message(span_info("[user] flips the coin. ENDVRE!"))
+		heads_tails = TRUE
+	else
+		user.visible_message(span_info("[user] flips the coin. LYVE!"))
+		heads_tails = FALSE
+	update_icon()

@@ -8,7 +8,7 @@
 									//10 is the default weight. 20 is twice more likely; 5 is half as likely as this default.
 									//0 here does NOT disable the event, it just makes it extremely unlikely
 
-	var/earliest_start = 12 MINUTES	//The earliest world.time that an event can start (round-duration in deciseconds) default: 20 mins
+	var/earliest_start = 10 MINUTES	//The earliest world.time that an event can start (round-duration in deciseconds) default: 10 mins
 	var/min_players = 0				//The minimum amount of alive, non-AFK human players on server required to start the event.
 
 	/// How many times this event has occured
@@ -55,7 +55,8 @@
 	var/can_run_post_roundstart = TRUE
 	/// If set then the type or list of types of storytellers we are restricted to being trigged by
 	var/list/allowed_storytellers
-
+	/// List of storytellers that will pick only their dedicated and general events in some cases, like when they are ascendant
+	var/list/dedicated_storytellers
 
 /datum/round_event_control/proc/valid_for_map()
 	return TRUE
@@ -99,8 +100,7 @@
 /datum/round_event_control/wizard
 	wizardevent = TRUE
 
-// Checks if the event can be spawned. Used by event controller and "false alarm" event.
-// Admin-created events override this.
+/// Checks if the event can be spawned. Used by event controller and "false alarm" event. Admin-created events override this.
 /datum/round_event_control/proc/canSpawnEvent(players_amt, gamemode, fake_check = FALSE)
 	if(SSgamemode.current_storyteller?.disable_distribution || SSgamemode.halted_storyteller)
 		return FALSE
@@ -111,7 +111,6 @@
 
 	if(occurrences >= max_occurrences)
 		return FALSE
-
 	if(earliest_start > max(world.time - SSticker.round_start_time, 0))
 		return FALSE
 
@@ -121,9 +120,15 @@
 		return FALSE
 	if(length(todreq) && !(GLOB.tod in todreq))
 		return FALSE
+
 	if(length(allowed_storytellers))
 		if(!(SSgamemode.current_storyteller.type in allowed_storytellers))
 			return FALSE
+	if(length(dedicated_storytellers))
+		if(SSgamemode.current_storyteller.ascendant)
+			if(!(SSgamemode.current_storyteller.type in dedicated_storytellers))
+				return FALSE
+
 	if(req_omen)
 		if(!GLOB.badomens.len)
 			return FALSE

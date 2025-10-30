@@ -75,6 +75,9 @@ And it also helps for the character set panel
 /datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types)
 	var/unwanted_blood = (blood_types & ~blood_preference)
 
+	if(blood_types & BLOOD_PREFERENCE_EUPHORIC)
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_euphoria)
+
 	if(!unwanted_blood)
 		return
 	drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
@@ -510,6 +513,39 @@ And it also helps for the character set panel
 
 /datum/stress_event/bad_blood
 	desc = span_warning("That blood was revolting!")
+	stress_change = 3
+	max_stacks = 10
+	stress_change_per_extra_stack = 3
+	timer = 10 MINUTES
+
+
+/datum/status_effect/debuff/blood_euphoria
+	id = "blood_euphoria"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_euphoria
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_REFRESH
+
+/atom/movable/screen/alert/status_effect/buff/blood_euphoria
+	name = "Sanguine Euphoria"
+	desc = span_good("This type of blood goes down incredibly well.")
+	icon_state = "hunger2"
+
+/datum/status_effect/buff/blood_euphoria/on_apply()
+	. = ..()
+	if(.)
+		owner.add_stress(/datum/stress_event/good_blood)
+		owner.adjustBruteLoss(-5)
+
+/datum/status_effect/buff/blood_euphoria/tick()
+	. = ..()
+	owner.adjustBruteLoss(-2)
+
+/datum/status_effect/buff/blood_euphoria/on_remove()
+	. = ..()
+	owner.remove_stress(/datum/stress_event/good_blood)
+
+/datum/stress_event/good_blood
+	desc = span_good("That blood was euphoric!")
 	stress_change = 3
 	max_stacks = 10
 	stress_change_per_extra_stack = 3

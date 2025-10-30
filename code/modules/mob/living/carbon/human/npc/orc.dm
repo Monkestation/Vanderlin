@@ -161,6 +161,9 @@
 		QDEL_NULL(src.charflaw)
 	update_body()
 	faction = list(FACTION_ORCS)
+	var/turf/turf = get_turf(src)
+	if(SSterrain_generation.get_island_at_location(turf))
+		faction |= "islander"
 	name = "orc"
 	real_name = "orc"
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)

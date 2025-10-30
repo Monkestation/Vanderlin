@@ -280,7 +280,7 @@
 		momentum = 0
 		return MOVELOOP_SKIP_STEP
 	// Forced to not move
-	if(anchored || !has_gravity())
+	if(anchored)
 		return MOVELOOP_SKIP_STEP
 
 	// Going through open space

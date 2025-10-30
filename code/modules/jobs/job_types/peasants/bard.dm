@@ -56,6 +56,8 @@
 	H.change_stat(STATKEY_PER, 1)
 	H.change_stat(STATKEY_SPD, 2)
 	H.change_stat(STATKEY_STR, -1)
+	var/datum/inspiration/I = new /datum/inspiration(H)
+	I.grant_inspiration(H, bard_tier = BARD_T2)
 
 /datum/job/bard/after_spawn(mob/living/spawned, client/player_client)
 	. = ..()

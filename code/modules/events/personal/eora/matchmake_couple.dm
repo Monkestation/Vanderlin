@@ -8,6 +8,7 @@
 	min_players = 35
 
 	tags = list(
+		TAG_EORA,
 		TAG_BOON,
 		TAG_WIDESPREAD,
 	)

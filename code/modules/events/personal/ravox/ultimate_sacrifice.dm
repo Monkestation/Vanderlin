@@ -8,6 +8,7 @@
 	min_players = 35
 
 	tags = list(
+		TAG_RAVOX,
 		TAG_MEDICAL,
 	)
 

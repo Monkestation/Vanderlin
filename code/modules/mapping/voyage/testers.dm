@@ -11,7 +11,7 @@
 /obj/effect/cave_tester
 	icon = 'icons/effects/landmarks_static.dmi'
 	icon_state = "x2"
-	var/datum/cave_biome/biome = /datum/cave_biome/volcanic
+	var/datum/cave_biome/biome = /datum/cave_biome/mushroom
 
 /obj/effect/cave_tester/proc/generate_cave()
 	var/datum/cave_biome/my_biome = new biome()

@@ -65,7 +65,6 @@
 		to_chat(creator, "<span class='warning'>No choice selected. The area remains undefined.</span>")
 		return
 	var/area/newA
-	var/area/oldA = get_area(get_turf(creator))
 	if(!isarea(area_choice))
 		var/str = stripped_input(creator,"New area name:", "Blueprint Editing", "", MAX_NAME_LEN)
 		if(!str || !length(str)) //cancel
@@ -76,7 +75,6 @@
 		newA = new area_choice
 		newA.setup(str)
 		newA.set_dynamic_lighting()
-		newA.has_gravity = oldA.has_gravity
 	else
 		newA = area_choice
 

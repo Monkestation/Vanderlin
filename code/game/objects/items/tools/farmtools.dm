@@ -23,18 +23,15 @@
 	icon_state = "csickle"
 	smeltresult = /obj/item/ingot/copper
 
-
 /obj/item/weapon/pitchfork/copper
 	name = "copper fork"
 	desc = "A simple and rustic tool for working the fields, not a very effective weapon."
-	icon_state = "cfork"
-	item_state = "cfork"
-	SET_BASE_PIXEL(-16, -16)
+	icon_state = "cpitchfork"
+	item_state = "cpitchfork"
 	force_wielded = DAMAGE_SPEAR
 	experimental_inhand = TRUE
 	experimental_onback = TRUE
 	experimental_onhip = TRUE
-	bigboy = TRUE
 	wdefense = 2
 	smeltresult = /obj/item/ingot/copper
 	associated_skill = /datum/skill/combat/polearms

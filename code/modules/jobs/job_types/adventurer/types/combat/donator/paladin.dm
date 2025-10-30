@@ -44,11 +44,11 @@
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/helmet/heavy/necked/ravox
 			wrists = /obj/item/clothing/neck/psycross/silver/ravox
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/xylix)
 			head = /obj/item/clothing/head/helmet/heavy/necked // Placeholder
 			wrists = /obj/item/clothing/neck/psycross/silver/xylix
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
 			wrists = /obj/item/clothing/neck/psycross/silver/pestra

@@ -268,3 +268,9 @@
 	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/messenger_bird = 1)
 	output = /obj/item/reagent_containers/food/snacks/friedmessenger
 	cooked_smell = /datum/pollutant/food/fried_messenger
+
+/datum/container_craft/pan/fat_render
+	name = "Render Fat"
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/fat= 1)
+	output = /obj/item/reagent_containers/food/snacks/tallow
+	cooked_smell = /datum/pollutant/food/fried_messenger

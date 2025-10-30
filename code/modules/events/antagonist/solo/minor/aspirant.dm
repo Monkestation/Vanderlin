@@ -1,7 +1,8 @@
 /datum/round_event_control/antagonist/solo/aspirant
 	name = "Aspirant"
 	tags = list(
-		TAG_VILLIAN,
+		TAG_ZIZO,
+		TAG_VILLAIN,
 	)
 	antag_datum = /datum/antagonist/aspirant
 	roundstart = TRUE
@@ -10,14 +11,15 @@
 	minor_roleset = TRUE
 
 	needed_job = list(
-		"Consort" ,
-		"Hand" ,
-		"Prince" ,
+		"Consort",
+		"Hand",
+		"Prince",
 		"Captain",
 		"Steward",
 		"Court Magician",
+		"Court Physician",
 		"Archivist",
-		"Town Elder"
+		"Noble"
 	)
 
 	base_antags = 1
@@ -37,15 +39,20 @@
 
 	typepath = /datum/round_event/antagonist/solo/aspirant
 
+/datum/round_event_control/antagonist/solo/aspirant/valid_for_map()
+	if(SSmapping.config.map_name != "Voyage")
+		return TRUE
+	return FALSE
+
 /datum/round_event/antagonist/solo/aspirant
 
 /datum/round_event/antagonist/solo/aspirant/start()
-	for(var/datum/mind/antag_mind as anything in setup_minds)
-		add_datum_to_mind(antag_mind, antag_mind.current)
+	. = ..()
 
-	var/list/helping = list("Consort" ,"Hand" ,"Prince" ,"Captain" ,"Steward" ,"Court Magician ","Archivist", "Royal Knight", "Town Elder","Veteran")
+	var/list/helping = list("Consort", "Hand", "Prince", "Captain", "Steward", "Court Magician", "Court Physician", "Archivist", "Noble", "Jester", "Dungeoneer", "Men-at-arms", "Gatemaster", "Butler", "Servant")
 	var/list/possible_helpers = list()
-	for(var/mob/living/living in GLOB.human_list) // living checking in human list :)
+
+	for(var/mob/living/living in GLOB.human_list)
 		if(!living.client)
 			continue
 		if(is_banned_from(living.client.ckey, ROLE_ASPIRANT))
@@ -56,7 +63,13 @@
 			continue
 		possible_helpers |= living
 
-	for(var/i in rand(1, 3)) // random amount of helpers ranging from 1 to 3
+	var/num_helpers = min(rand(1, 3), length(possible_helpers))
+
+	for(var/i in 1 to num_helpers)
 		var/mob/living/helper = pick_n_take(possible_helpers)
-		helper?.mind?.special_role = "Supporter"
-		helper?.mind?.add_antag_datum(/datum/antagonist/aspirant/supporter)
+		if(!helper?.mind)
+			continue
+		helper.mind.add_antag_datum(/datum/antagonist/aspirant/supporter)
+
+	if(SSticker.rulermob?.mind)
+		SSticker.rulermob.mind.add_antag_datum(/datum/antagonist/aspirant/ruler)

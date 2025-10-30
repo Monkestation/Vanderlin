@@ -1104,6 +1104,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	return failed
 
 /client/Click(atom/object, atom/location, control, params)
+	if(SEND_SIGNAL(src, COMSIG_CLIENT_CLICK_DIRTY, object, location, control, params, usr))
+		return
 	if(isatom(object) && HAS_TRAIT(mob, TRAIT_IN_FRENZY))
 		return
 

@@ -60,6 +60,15 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor = list("blunt" = 65, "slash" = 50, "stab" = 25, "piercing" = 25,"fire" = 0, "acid" = 0)
 
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored/blue
+	color = CLOTHING_SKY_BLUE
+
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored/linen
+	color = CLOTHING_LINEN
+
 /obj/item/clothing/pants/trou/leather/masterwork
 	name = "masterwork leather chausses"
 	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimible, reliable."

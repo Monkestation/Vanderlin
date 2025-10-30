@@ -4,6 +4,13 @@
 	"map_file": [
 	"voyager.dmm"
 	],
+	"immigrant_origin": "Kingsfield",
+	"monarch_title": "Captain",
+	"monarch_title_f": "Captain",
+	"other_z": [
+		"_maps/map_files/voyager/island_batch.json",
+		"_maps/map_files/voyager/island_batch2.json"
+	],
 	"traits": [
 	{"Name": "The Sea", "Up": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Down": true}],
 	"minetype": null,

@@ -166,7 +166,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb)
 "tF" = (
-/obj/item/chair/stool/bar/crafted,
+/obj/item/chair/stool/crafted,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/under/tomb/indoors)
 "tZ" = (
@@ -331,7 +331,7 @@
 /turf/open/floor/hexstone,
 /area/rogue/under/tomb)
 "Sz" = (
-/obj/item/chair/stool/bar/crafted,
+/obj/item/chair/stool/crafted,
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb)
 "Td" = (

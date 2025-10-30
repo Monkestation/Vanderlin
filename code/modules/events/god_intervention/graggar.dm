@@ -9,7 +9,12 @@ GLOBAL_LIST_EMPTY(graggar_cullings)
 	earliest_start = 20 MINUTES
 	max_occurrences = 1
 	min_players = 35
-	allowed_storytellers = list(/datum/storyteller/graggar)
+	dedicated_storytellers = list(/datum/storyteller/graggar)
+	allowed_storytellers = INHUMEN_STORYTELLERS
+
+	tags = list(
+		TAG_GRAGGAR,
+	)
 
 /datum/round_event_control/graggar_culling/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()

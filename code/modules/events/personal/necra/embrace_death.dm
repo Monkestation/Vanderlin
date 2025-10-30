@@ -3,11 +3,12 @@
 	track = EVENT_TRACK_PERSONAL
 	typepath = /datum/round_event/necra_embrace
 	weight = 5
-	earliest_start = 40 MINUTES
+	earliest_start = 35 MINUTES
 	max_occurrences = 1
 	min_players = 40
 
 	tags = list(
+		TAG_NECRA,
 		TAG_HAUNTED,
 	)
 

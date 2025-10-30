@@ -217,7 +217,7 @@
 			owner.balloon_alert(owner, "I cannot uphold the channeling!")
 			cancel_casting()
 			return PROCESS_KILL
-		owner.client.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charged.dmi'
+		owner.client?.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charged.dmi'
 		owner.update_mouse_pointer()
 		return PROCESS_KILL
 
@@ -247,6 +247,8 @@
 		RegisterSignal(owner, COMSIG_LIVING_MANA_CHANGED, PROC_REF(update_status_on_signal))
 	if(spell_type == SPELL_MIRACLE)
 		RegisterSignal(owner, COMSIG_LIVING_DEVOTION_CHANGED, PROC_REF(update_status_on_signal))
+	if(spell_type == SPELL_RAGE)
+		RegisterSignal(owner, COMSIG_LIVING_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
 	RegisterSignal(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
@@ -594,6 +596,12 @@
 				L.cursed_freak_out()
 			return sig_return | SPELL_CANCEL_CAST
 
+		if((spell_type == SPELL_MIRACLE) && HAS_TRAIT(cast_on, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON))
+			cast_on.visible_message(span_info("[cast_on] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
+			playsound(cast_on, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+			owner.playsound_local(owner, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+			return sig_return | SPELL_CANCEL_CAST
+
 	if(charge_required && !click_to_activate)
 		// Otherwise we use a simple do_after
 		var/do_after_flags = IGNORE_HELD_ITEM | IGNORE_USER_LOC_CHANGE | IGNORE_USER_DIR_CHANGE
@@ -888,6 +896,15 @@
 
 			return TRUE
 
+		if(SPELL_RAGE)
+			var/mob/living/carbon/human/H = caster
+			if(!istype(H) || !H.rage_datum?.check_rage(spell_cost))
+				if(feedback)
+					owner.balloon_alert(owner, "Not enough Rage!")
+				return FALSE
+
+			return TRUE
+
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
 			if(QDELETED(target) || !istype(target))
@@ -901,6 +918,14 @@
 			if(!gaunt.can_consume_essence(used_cost, attunements))
 				if(feedback)
 					owner.balloon_alert(owner, "Not enough essence!")
+				return FALSE
+
+			return TRUE
+
+		if(SPELL_PSYDONIC_MIRACLE)
+			if(!caster.has_bloodpool_cost(used_cost))
+				if(feedback)
+					owner.balloon_alert(owner, "Need more grace to cast!")
 				return FALSE
 
 			return TRUE
@@ -947,6 +972,12 @@
 				return
 			H.cleric.update_devotion(-used_cost)
 
+		if(SPELL_RAGE)
+			var/mob/living/carbon/human/H = owner
+			if(!istype(H) || !H.rage_datum)
+				return
+			H.rage_datum.update_rage(-used_cost)
+
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
 			if(!gaunt.check_gauntlet_validity(owner))
@@ -958,6 +989,9 @@
 			var/mob/living/caster = owner
 			caster.adjust_bloodpool(-used_cost)
 
+		if(SPELL_PSYDONIC_MIRACLE)
+			var/mob/living/caster = owner
+			caster.adjust_bloodpool(-used_cost)
 
 	return used_cost
 
@@ -1019,8 +1053,8 @@
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 
 	// Cancel the next click with no timeout
-	source.click_intercept_time = INFINITY
-	source.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charging.dmi'
+	source?.click_intercept_time = INFINITY
+	source?.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charging.dmi'
 	owner.update_mouse_pointer()
 
 	charge_started_at = world.time

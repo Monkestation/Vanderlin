@@ -53,12 +53,7 @@
 	if(!isturf(owner.loc))
 		return FALSE
 
-	var/turf/caster_turf = get_turf(owner)
-	// Get the tile infront of the caster, based on their direction
-	var/turf/caster_front_turf = get_step(owner, owner.dir)
-
 	fire_projectile(cast_on)
-	owner.newtonian_move(get_dir(caster_front_turf, caster_turf))
 	if(current_amount <= 0)
 		unset_click_ability(owner, refund_cooldown = FALSE)
 

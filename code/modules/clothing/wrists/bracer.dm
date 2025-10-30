@@ -14,13 +14,28 @@
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 	max_integrity = INTEGRITY_STRONG
 
+/obj/item/clothing/wrists/bracers/naledi
+	name = "sojourner's wrappings"
+	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. Naledian-trained monks rarely share the same fatalistic mindset as their Grenzelhoftian cousins, and - consequency - tend to be averse with binding their wrists in jagged thorns. Unbloodied fingers tend to work far better with the arcyne, too. </br>'..And so, the great tears that they wept when it took it's last breath, the rain of the Weeper, is what marked this era of silence. Fools would tell you that Psydon has died, that they splintered into ‘ten smaller fragments', but that does not make sense. They are everything within and without, they are beyond size and shape. How can everything become something? No, they have merely turned their ear from us. They mourn, for their greatest child and their worst..'"
+	slot_flags = ITEM_SLOT_WRISTS
+	body_parts_covered = ARMS
+	icon_state = "nocwrappings"
+	item_state = "nocwrappings"
+	armor = ARMOR_PADDED_GOOD
+	blade_dulling = DULLING_BASHCHOP
+	color = "#48443B"
+	max_integrity = ARMOR_INT_SIDE_STEEL //Heavy leather-tier protection and critical resistances, steel-tier integrity. Integrity boost encourages hand-to-hand parrying. Weaker than the Psydonic Thorns.
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
+	blocksound = SOFTHIT
+	sewrepair = TRUE
+
 /obj/item/clothing/wrists/bracers/iron
 	name = "iron plate vambraces"
 	desc = "Plate forearm guards that offer good protection while allowing mobility."
 	icon_state = "ibracers"
 	item_state = "ibracers"
 	armor = ARMOR_MAILLE
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 
 
 /obj/item/clothing/wrists/bracers/jackchain
@@ -29,7 +44,7 @@
 	icon_state = "jackchain"
 	item_state = "jackchain"
 	armor = ARMOR_MAILLE
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = /datum/material/steel
@@ -41,7 +56,7 @@
 	icon_state = "ijackchain"
 	item_state = "ijackchain"
 	armor = ARMOR_MAILLE
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	prevent_crits = CUT_AND_MINOR_CRITS
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
@@ -86,3 +101,39 @@
 /obj/item/clothing/wrists/bracers/leather/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
+/obj/item/clothing/wrists/bracers/psythorns
+	name = "psydonian thorns"
+	desc = "Thorns fashioned from pliable yet durable blacksteel - woven and interlinked, fashioned to be wrapped around the wrists."
+	body_parts_covered = ARMS
+	icon_state = "psybarbs"
+	item_state = "psybarbs"
+	armor = list("blunt" = 80, "slash" = 100, "stab" = 90, "piercing" = 80, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
+	blocksound = PLATEHIT
+	resistance_flags = FIRE_PROOF
+	max_integrity = 400
+	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = FALSE
+	alternate_worn_layer = WRISTS_LAYER
+
+/obj/item/clothing/wrists/bracers/psythorns/equipped(mob/user, slot)
+	. = ..()
+	user.update_inv_wrists()
+	user.update_inv_gloves()
+	user.update_inv_armor()
+	user.update_inv_shirt()
+
+/obj/item/clothing/wrists/bracers/psythorns/attack_self(mob/living/user)
+	. = ..()
+	user.visible_message(span_warning("[user] starts to reshape the [src]."))
+	if(do_after(user, 4 SECONDS))
+		var/obj/item/clothing/head/helmet/blacksteel/psythorns/P = new /obj/item/clothing/head/helmet/blacksteel/psythorns(get_turf(src.loc))
+		if(user.is_holding(src))
+			user.dropItemToGround(src)
+			user.put_in_hands(P)
+		user.adjustBruteLoss(25)
+		qdel(src)
+	else
+		user.visible_message(span_warning("[user] stops reshaping [src]."))
+		return

@@ -31,11 +31,19 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"au" = (
+/obj/effect/landmark/tram/queued_path{
+	next_path_id = "cargo_pre_enter";
+	platform_code = "point_1"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "aC" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall";
 	dir = 4
 	},
+/obj/effect/landmark/boat_transfer/ship_side,
 /turf/open/floor/rooftop/green{
 	dir = 8
 	},
@@ -75,14 +83,11 @@
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "aM" = (
-/obj/structure/chair/bench/church/r{
-	dir = 4
-	},
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "aN" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/closet/crate/chest/wicker,
@@ -96,14 +101,16 @@
 	dir = 4
 	},
 /area/rogue/ship/middeck)
-"bb" = (
-/obj/structure/chair/wood/alt/chair_noble{
-	dir = 8;
-	icon_state = "chair1"
+"aT" = (
+/obj/effect/decal/cobbleedge{
+	icon_state = "borderfall"
 	},
-/obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
+/obj/structure/fluff/railing/border,
+/obj/item/tent_kit,
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
+/area/rogue/ship/middeck)
 "bg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -129,6 +136,13 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
+"bn" = (
+/obj/structure/industrial_lift/tram{
+	icon_state = "roofg";
+	dir = 4
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "br" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -142,11 +156,13 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/metal/barograte,
 /area/rogue/ship/middeck)
-"bx" = (
-/turf/closed/wall/mineral/decostone/end{
-	dir = 1
+"by" = (
+/obj/effect/landmark/tram/queued_path/cargo_map_enter{
+	next_path_id = "point_1"
 	},
-/area/rogue/ship/middeck)
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "bz" = (
 /obj/structure/closet/crate/chest/gold,
 /obj/item/reagent_containers/powder/spice,
@@ -172,9 +188,9 @@
 	},
 /area/rogue/ship/middeck)
 "bI" = (
-/obj/effect/landmark/start/manorguardsman,
-/turf/open/floor/carpet/lord/center,
-/area/rogue/ship/nobledeck)
+/obj/effect/landmark/start/cook,
+/turf/open/floor/herringbone,
+/area/rogue/ship/middeck)
 "bK" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/rogue/ship/middeck)
@@ -217,6 +233,17 @@
 /obj/item/natural/cloth,
 /obj/item/natural/cloth,
 /obj/structure/rack/shelf/notdense,
+/obj/item/key/clinic{
+	pixel_x = -9;
+	pixel_y = 32
+	},
+/obj/item/key/clinic{
+	pixel_y = 32
+	},
+/obj/item/key/clinic{
+	pixel_y = 32;
+	pixel_x = 9
+	},
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "bZ" = (
@@ -224,11 +251,9 @@
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
 "cd" = (
-/obj/item/ingot/steel,
-/obj/item/ingot/steel,
 /obj/structure/carpet/green,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "ce" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/ingot/iron,
@@ -236,9 +261,7 @@
 /obj/item/ingot/iron,
 /obj/item/ingot/iron,
 /obj/item/ingot/steel,
-/obj/item/ingot/steel,
-/obj/item/ingot/steel,
-/obj/item/ingot/steel,
+/obj/item/ingot/copper,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "ci" = (
@@ -247,12 +270,27 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"co" = (
+/obj/structure/industrial_lift/tram{
+	icon_state = "corner";
+	icon = 'icons/turf/walls.dmi';
+	density = 1;
+	opacity = 1
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "cp" = (
 /obj/structure/fluff/statue/pillar{
 	density = 1
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
+"cs" = (
+/obj/structure/industrial_lift/tram{
+	fake = 1
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "ct" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/structure/roguetent,
@@ -272,6 +310,7 @@
 	pixel_y = 15;
 	pixel_x = -5
 	},
+/obj/item/needle,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "cF" = (
@@ -283,8 +322,8 @@
 	dir = 4;
 	icon_state = "border"
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "cI" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -306,7 +345,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "cR" = (
 /obj/structure/stairs/fancy/c{
 	dir = 1;
@@ -314,15 +353,18 @@
 	},
 /turf/open/floor/carpet/lord/center,
 /area/rogue/ship/nobledeck)
-"cU" = (
-/obj/structure/window,
-/obj/structure/bars,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
+"cS" = (
+/obj/effect/decal/cobbleedge{
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/railing/border,
+/obj/item/tent_kit,
+/turf/open/floor/hay,
+/area/rogue/ship/middeck)
 "cW" = (
 /obj/item/coin/silver/pile,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "cY" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -334,6 +376,10 @@
 	},
 /turf/open/floor/hay,
 /area/rogue/ship/middeck)
+"cZ" = (
+/obj/structure/dock_bell,
+/turf/open/floor/ruinedwood/chevron,
+/area/rogue/ship/topdeck)
 "db" = (
 /obj/structure/fluff/railing/border{
 	dir = 8;
@@ -384,24 +430,8 @@
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "dh" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/closet/crate/drawer/inn,
-/obj/item/soap,
-/obj/item/soap,
-/obj/item/soap,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/effect/decal/cobbleedge{
-	dir = 10;
-	icon_state = "cobbleedge-e"
-	},
-/turf/open/floor/ruinedwood/two,
-/area/rogue/ship/middeck)
+/turf/open/floor/churchrough,
+/area/rogue/indoors/town/church/chapel)
 "dp" = (
 /obj/structure/table/wood,
 /obj/structure/bars{
@@ -418,13 +448,13 @@
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
 "dr" = (
-/obj/machinery/light/fueled/torchholder/r,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
+/obj/structure/ladder,
+/turf/open/floor/woodturned,
+/area/rogue/ship/topdeck)
 "du" = (
 /obj/effect/landmark/start/templar,
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/churchrough,
+/area/rogue/indoors/town/church/chapel)
 "dy" = (
 /obj/structure/table/wood{
 	icon_state = "largetable";
@@ -462,6 +492,7 @@
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
+/obj/item/fuse/parchment,
 /turf/open/floor/hay,
 /area/rogue/ship/topdeck)
 "dE" = (
@@ -480,8 +511,8 @@
 	pixel_y = 0;
 	pixel_x = 32
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/churchrough,
+/area/rogue/indoors/town/church/chapel)
 "dI" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -490,10 +521,7 @@
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
 "dL" = (
-/obj/structure/door/fancy{
-	lockid = "heir";
-	name = "Heir's Apartment"
-	},
+/obj/structure/door/fancy,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "dN" = (
@@ -502,6 +530,7 @@
 	icon_state = "longtable"
 	},
 /obj/item/paper/scroll,
+/obj/item/natural/feather,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
 "dS" = (
@@ -513,26 +542,35 @@
 /obj/item/ingot/copper,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"dY" = (
-/obj/structure/door{
-	lockid = "physician";
-	name = "physician's office"
+"dX" = (
+/obj/structure/stairs{
+	dir = 4
 	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
+"dY" = (
 /obj/effect/mapping_helpers/access/locker,
+/obj/structure/door,
+/obj/effect/mapping_helpers/access/keyset/town/tailor,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "dZ" = (
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"ec" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/town/church)
 "ee" = (
 /obj/structure/bed/shit,
 /obj/item/bedsheet/cloth,
 /obj/effect/landmark/start/churchling{
 	dir = 4
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "eh" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -541,7 +579,7 @@
 "ei" = (
 /obj/item/bin/water/gross,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "ej" = (
 /obj/structure/table/wood{
 	dir = 8;
@@ -554,6 +592,18 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
+"eq" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
+	},
+/obj/structure/industrial_lift/tram,
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "er" = (
@@ -579,6 +629,14 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"eG" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "eQ" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/landmark/start/mercenary,
@@ -595,11 +653,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
-"eU" = (
-/turf/open/floor/rooftop/green{
-	dir = 4
-	},
-/area/rogue/outdoors/beach)
 "fd" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall";
@@ -610,7 +663,7 @@
 	icon_state = "border"
 	},
 /turf/open/floor/churchmarble,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "fg" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
@@ -634,6 +687,14 @@
 	icon_state = "largetable"
 	},
 /obj/item/weapon/knife/cleaver,
+/obj/item/reagent_containers/peppermill{
+	pixel_y = 10;
+	pixel_x = -9
+	},
+/obj/item/kitchen/rollingpin{
+	pixel_x = 4;
+	pixel_y = -9
+	},
 /turf/open/floor/cobble,
 /area/rogue/ship/middeck)
 "fr" = (
@@ -659,20 +720,30 @@
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
 "fF" = (
-/obj/structure/door/red,
-/obj/effect/mapping_helpers/access/keyset/garrison/captain,
+/obj/structure/door/red{
+	name = "Dungeoneer's Room"
+	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/dungeon,
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
 "fN" = (
-/obj/effect/landmark/start/shepherd,
+/obj/effect/landmark/start/orthodoxist,
 /obj/structure/bed/inn,
 /obj/item/bedsheet/wool,
 /obj/structure/fluff/walldeco/psybanner{
 	pixel_y = 29
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/inq/import)
+"fP" = (
+/obj/structure/door/violet{
+	name = "Mage's Quarters"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tower,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/two,
+/area/rogue/ship/nobledeck)
 "fQ" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/rogue/ship/nobledeck)
@@ -714,6 +785,18 @@
 /obj/structure/fluff/nest,
 /turf/open/floor/hay,
 /area/rogue/outdoors/beach)
+"gb" = (
+/obj/structure/plank{
+	icon_state = "plank"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "gf" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
@@ -736,8 +819,8 @@
 /obj/effect/landmark/start/churchling{
 	dir = 8
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "gq" = (
 /obj/structure/fluff/railing/border{
 	dir = 8;
@@ -749,7 +832,7 @@
 /obj/structure/closet/crate/chest/gold,
 /obj/item/gem/amethyst,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "gv" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/spiral,
@@ -764,30 +847,13 @@
 	},
 /area/rogue/ship/middeck)
 "gI" = (
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 10;
-	icon_state = "cobbleedge-e"
-	},
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/nightmaiden{
-	dir = 4
-	},
 /obj/structure/fluff/wallclock/l,
-/turf/open/floor/ruinedwood/two,
+/turf/open/water/bath,
 /area/rogue/ship/middeck)
 "gK" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
-"gN" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/machinery/light/fueled/torchholder/r,
-/turf/open/floor/carpet/purple,
-/area/rogue/outdoors/beach)
 "gO" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_x = 32;
@@ -799,21 +865,36 @@
 /obj/structure/fake_machine/mail,
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
-"gS" = (
-/obj/structure/fake_machine/vendor,
-/turf/closed/wall/mineral/wooddark,
-/area/rogue/outdoors/beach)
+"gT" = (
+/obj/effect/landmark/start/cook{
+	dir = 8
+	},
+/turf/open/floor/herringbone,
+/area/rogue/ship/middeck)
 "hf" = (
 /obj/item/coin/copper/pile,
 /obj/structure/carpet/green,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
-"hm" = (
+/area/rogue/indoors/town/vault)
+"hi" = (
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
+	},
 /obj/structure/fluff/railing/border{
 	dir = 1;
 	icon_state = "border"
 	},
-/turf/open/floor/ruinedwood/spiral,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
+"hm" = (
+/obj/structure/industrial_lift/tram,
+/obj/structure/fluff/railing/border{
+	dir = 5;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "hs" = (
 /turf/closed/wall/mineral/wooddark,
@@ -834,11 +915,11 @@
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "hA" = (
-/obj/structure/door/violet{
-	name = "Head Butler's Quarters"
-	},
-/obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
+/obj/structure/door/violet{
+	name = "Apprentice's Quarters"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tower,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "hB" = (
@@ -862,9 +943,6 @@
 /area/rogue/ship/middeck)
 "hJ" = (
 /obj/structure/fluff/railing/border{
-	layer = 2.65
-	},
-/obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /obj/structure/fluff/railing/wood{
@@ -876,6 +954,9 @@
 	color = "#ff9a55";
 	pixel_y = 4;
 	layer = 2.6
+	},
+/obj/structure/fluff/railing/border{
+	dir = 10
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
@@ -893,20 +974,8 @@
 /obj/item/reagent_containers/glass/bottle/healthpot,
 /obj/item/reagent_containers/glass/bottle/healthpot,
 /obj/item/clothing/neck/chaincoif,
-/obj/item/clothing/neck/chaincoif,
-/obj/item/clothing/neck/chaincoif,
-/obj/item/clothing/neck/chaincoif,
-/obj/item/clothing/neck/chaincoif,
 /turf/open/floor/twig,
 /area/rogue/ship/middeck)
-"hZ" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 1;
-	icon_state = "border"
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "if" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/closet/crate/chest,
@@ -933,9 +1002,6 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
-"ip" = (
-/turf/closed/wall/mineral/decostone,
-/area/rogue/ship/middeck)
 "iw" = (
 /obj/effect/landmark/start/hunter{
 	dir = 4
@@ -948,12 +1014,15 @@
 /area/rogue/ship/middeck)
 "iA" = (
 /obj/structure/door{
-	lockid = "physician";
-	name = "apothacary bunks"
+	name = "clinic bunks"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/clinic,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"iE" = (
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "iJ" = (
 /obj/structure/closet/crate/chest,
 /obj/item/clothing/armor/chainmail,
@@ -1004,15 +1073,27 @@
 	dir = 1;
 	icon_state = "borderfall"
 	},
-/obj/machinery/light/fueled/lanternpost,
+/obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"jm" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "jq" = (
-/obj/structure/door/viewport,
+/obj/structure/door/viewport{
+	name = "Priest's Quarters"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "jy" = (
 /obj/effect/landmark/start/villager{
 	dir = 8
@@ -1034,7 +1115,7 @@
 	},
 /obj/item/coin/gold/pile,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "jF" = (
 /obj/structure/ladder,
 /turf/open/floor/woodturned,
@@ -1090,11 +1171,13 @@
 /obj/item/burial_shroud,
 /obj/item/burial_shroud,
 /obj/item/burial_shroud,
-/obj/item/burial_shroud,
 /obj/item/candle/skull/lit{
 	pixel_x = -3;
 	pixel_y = 12
 	},
+/obj/item/needle,
+/obj/item/needle,
+/obj/item/needle,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "kh" = (
@@ -1145,14 +1228,12 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "ks" = (
-/obj/item/ingot/steel,
-/obj/item/ingot/steel,
 /obj/structure/stockpile_storage/food,
 /obj/structure/stockpile_storage,
 /obj/structure/stockpile_storage/metal,
 /obj/structure/carpet/green,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "ky" = (
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood/spiral,
@@ -1168,8 +1249,19 @@
 	icon_state = "tablewood3"
 	},
 /obj/item/rope,
+/obj/item/needle,
+/obj/item/needle,
+/obj/item/needle,
+/obj/item/needle,
 /turf/open/floor/hay,
 /area/rogue/ship/topdeck)
+"kF" = (
+/obj/structure/table/wood{
+	icon_state = "tablewood3"
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "kI" = (
 /obj/structure/grindwheel,
 /turf/open/floor/ruinedwood/spiral,
@@ -1206,7 +1298,7 @@
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/storage/backpack/satchel/surgbag,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "kX" = (
 /obj/structure/fluff/railing/border{
 	layer = 2.65
@@ -1223,6 +1315,15 @@
 	},
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
+"le" = (
+/obj/structure/industrial_lift/tram{
+	icon_state = "corner";
+	icon = 'icons/turf/walls.dmi';
+	density = 1;
+	opacity = 1
+	},
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "li" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/carpet/cyan,
@@ -1275,7 +1376,7 @@
 /obj/structure/bed/hay,
 /obj/item/bedsheet/cloth,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "lA" = (
 /obj/structure/table/wood{
 	dir = 6;
@@ -1296,9 +1397,10 @@
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "lH" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
+/obj/effect/landmark/start/nightmaiden{
+	dir = 4
 	},
+/obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "lK" = (
@@ -1327,6 +1429,16 @@
 /obj/item/candle/yellow,
 /obj/item/candle/yellow,
 /obj/item/candle/yellow,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/soap,
+/obj/item/soap,
+/obj/item/soap,
+/obj/item/soap,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "lW" = (
@@ -1352,15 +1464,17 @@
 "md" = (
 /obj/structure/rack,
 /obj/item/clothing/armor/plate/iron,
-/obj/item/clothing/armor/plate/iron,
-/obj/item/clothing/armor/plate,
-/obj/item/clothing/armor/plate,
-/obj/item/clothing/armor/plate,
 /obj/item/clothing/gloves/chain/iron,
-/obj/item/clothing/gloves/chain,
-/obj/item/clothing/gloves/plate,
 /turf/open/floor/twig,
 /area/rogue/ship/middeck)
+"me" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/structure/industrial_lift/tram{
+	icon_state = "roofg";
+	dir = 4
+	},
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "mq" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall";
@@ -1379,6 +1493,18 @@
 "ms" = (
 /turf/closed/sea_fog,
 /area/rogue/outdoors/beach)
+"mv" = (
+/obj/structure/rack/shelf/notdense,
+/obj/item/candle/yellow{
+	pixel_x = -7;
+	pixel_y = 40
+	},
+/obj/item/candle/yellow/lit{
+	pixel_x = 8;
+	pixel_y = 40
+	},
+/turf/open/floor/ruinedwood,
+/area/rogue/ship/middeck)
 "mz" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /obj/effect/decal/cobbleedge{
@@ -1405,10 +1531,9 @@
 /area/rogue/ship/middeck)
 "mI" = (
 /turf/open/water/cleanshallow,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "mJ" = (
 /obj/structure/chair/bench/coucha/r,
-/obj/item/clothing/head/helmet/leather/tricorn,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
 "mM" = (
@@ -1438,13 +1563,12 @@
 /area/rogue/ship/middeck)
 "nf" = (
 /obj/structure/closet/crate/chest/neu_iron,
-/obj/item/paper/confession,
 /obj/item/key/church,
 /obj/item/key/church,
 /obj/item/reagent_containers/glass/cup/silver,
 /obj/item/needle/thorn,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "nl" = (
 /obj/structure/rack/shelf/big{
 	icon_state = "shelf_biggest";
@@ -1485,6 +1609,16 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
+"no" = (
+/obj/structure/industrial_lift/tram{
+	icon_state = "plank2"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "nt" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -1509,7 +1643,9 @@
 /obj/effect/decal/cobbleedge{
 	dir = 8
 	},
-/obj/structure/door/viewport,
+/obj/structure/door/viewport{
+	name = "Merchant Dock"
+	},
 /obj/effect/mapping_helpers/access/keyset/manor/steward,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/two,
@@ -1520,14 +1656,29 @@
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
+"nF" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/town/church)
+"nG" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/indoors/inq/import)
 "nL" = (
-/obj/effect/landmark/start/manorguardsman,
 /obj/structure/stairs/fancy/r{
 	dir = 1;
 	icon_state = "fancy_stairs_r"
 	},
 /turf/open/floor/carpet/lord/right,
 /area/rogue/ship/nobledeck)
+"nQ" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "nR" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -1537,8 +1688,10 @@
 "nS" = (
 /obj/structure/bed/inn,
 /obj/item/bedsheet/wool,
-/obj/effect/landmark/start/gravedigger,
 /obj/structure/fluff/wallclock/r,
+/obj/effect/landmark/start/tailor{
+	dir = 8
+	},
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "oa" = (
@@ -1547,7 +1700,7 @@
 	icon_state = "borderfall"
 	},
 /turf/open/water/cleanshallow,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "oh" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "cobbleedge-sread"
@@ -1563,6 +1716,7 @@
 	dir = 1;
 	pixel_y = 14
 	},
+/obj/effect/landmark/start/adventurerlate,
 /turf/open/floor/twig,
 /area/rogue/outdoors/beach)
 "oo" = (
@@ -1572,12 +1726,6 @@
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
-"op" = (
-/obj/machinery/light/fueled/lanternpost{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "oq" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood,
@@ -1610,16 +1758,15 @@
 /area/rogue/outdoors/beach)
 "oB" = (
 /obj/structure/rack,
-/obj/item/weapon/sword/sabre{
-	pixel_x = -5;
-	pixel_y = 2
-	},
-/obj/item/weapon/sword/sabre,
-/obj/item/weapon/sword/sabre{
-	pixel_x = -5
-	},
-/obj/item/weapon/sword/sabre{
+/obj/item/weapon/sword/sabre/cutlass,
+/obj/item/weapon/sword/sabre/cutlass{
 	pixel_x = 7
+	},
+/obj/item/weapon/sword/sabre/cutlass{
+	pixel_x = 15
+	},
+/obj/item/weapon/sword/sabre/cutlass{
+	pixel_y = 8
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
@@ -1645,18 +1792,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
-"oM" = (
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 10;
-	icon_state = "cobbleedge-e"
-	},
-/obj/item/rope/chain,
-/turf/open/floor/ruinedwood/platform,
-/area/rogue/outdoors/beach)
 "oO" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -1694,31 +1829,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"pb" = (
-/obj/structure/fluff/statue/small,
-/turf/open/floor/ruinedwood/platform,
-/area/rogue/outdoors/beach)
-"ph" = (
-/obj/structure/fluff/railing/border{
-	dir = 1;
-	icon_state = "border"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/beach)
-"pm" = (
-/obj/structure/stairs{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8;
-	icon_state = "border"
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "pn" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -1729,41 +1839,6 @@
 /obj/structure/carpet/cyan,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
-"ps" = (
-/obj/structure/table/wood{
-	icon_state = "largetable"
-	},
-/obj/structure/rack/shelf/notdense{
-	pixel_y = 23
-	},
-/obj/item/gem,
-/obj/item/gem,
-/obj/item/gem,
-/obj/item/reagent_containers/glass/bottle/wine{
-	pixel_y = 36;
-	pixel_x = -5
-	},
-/obj/item/reagent_containers/glass/bottle/wine{
-	pixel_y = 36;
-	pixel_x = -7
-	},
-/obj/item/reagent_containers/glass/bottle/wine/sourwine{
-	pixel_y = 36
-	},
-/obj/item/reagent_containers/glass/bottle/wine/sourwine{
-	pixel_y = 36;
-	pixel_x = 3
-	},
-/obj/item/reagent_containers/glass/bottle/wine/sourwine{
-	pixel_y = 36;
-	pixel_x = 6
-	},
-/obj/item/weapon/sword/sabre,
-/obj/item/weapon/sword/sabre{
-	pixel_x = 7
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "pt" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/candle/yellow,
@@ -1774,10 +1849,6 @@
 /obj/item/candle/yellow,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"pu" = (
-/obj/structure/fake_machine/atm,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "pz" = (
 /obj/item/reagent_containers/glass/mortar{
 	pixel_x = 32
@@ -1811,17 +1882,13 @@
 /area/rogue/ship/middeck)
 "pQ" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/ingot/copper,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
 /turf/open/floor/hay,
 /area/rogue/ship/topdeck)
-"pR" = (
-/obj/item/reagent_containers/glass/cup/wooden,
-/obj/structure/table/wood{
-	icon_state = "tablewood1"
-	},
-/obj/item/reagent_containers/glass/cup/wooden,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "pT" = (
 /obj/structure/table/wood,
 /turf/open/floor/carpet/lord/right,
@@ -1836,9 +1903,6 @@
 /obj/item/clothing/shirt/undershirt/puritan,
 /obj/item/storage/backpack/satchel,
 /obj/item/storage/backpack/satchel,
-/obj/item/clothing/armor/leather/jacket/silk_coat,
-/obj/item/clothing/cloak/half/colored/red,
-/obj/item/clothing/cloak/half,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
 "pW" = (
@@ -1861,12 +1925,14 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"qn" = (
-/obj/structure/closet/crate/chest{
-	base_icon_state = "woodchestalt";
-	icon_state = "woodchestalt"
+"qm" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
 	},
-/turf/open/floor/ruinedwood/spiral,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "qv" = (
 /obj/structure/window/openclose{
@@ -1893,17 +1959,6 @@
 	},
 /turf/open/floor/hay,
 /area/rogue/ship/topdeck)
-"qK" = (
-/obj/structure/closet/crate/drawer/inn,
-/obj/item/key/merchant,
-/obj/item/key/merchant,
-/obj/item/reagent_containers/powder/spice,
-/obj/item/scomstone,
-/obj/item/clothing/head/helmet/leather/tricorn,
-/obj/item/weapon/sword/sabre/cutlass,
-/obj/structure/fluff/wallclock/l,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "qL" = (
 /obj/structure/carpet/purple,
 /turf/open/floor/ruinedwood/two,
@@ -1968,6 +2023,7 @@
 /obj/structure/fluff/railing/wood{
 	dir = 8
 	},
+/obj/item/fuse/parchment,
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
 "rM" = (
@@ -1990,35 +2046,12 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"rT" = (
-/obj/structure/door,
-/obj/effect/mapping_helpers/access/keyset/town/merchant,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
-"rY" = (
-/obj/structure/fluff/railing/border{
-	dir = 1;
-	icon_state = "border"
-	},
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
+"rV" = (
 /obj/effect/landmark/start/shophand{
-	dir = 4
+	dir = 8
 	},
-/obj/item/painting/queen,
-/obj/item/weapon/polearm/spear,
-/obj/item/weapon/polearm/spear{
-	pixel_x = -20;
-	pixel_y = -14
-	},
-/turf/open/floor/rooftop/green{
-	dir = 4
-	},
-/area/rogue/outdoors/beach)
+/turf/open/floor/ruinedwood/two,
+/area/rogue/ship/middeck)
 "sc" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -2036,10 +2069,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
-"sj" = (
-/obj/structure/fake_machine/merchantvend,
-/turf/closed/wall/mineral/wooddark,
-/area/rogue/outdoors/beach)
 "sk" = (
 /obj/structure/bars/grille,
 /turf/open/transparent/openspace,
@@ -2056,29 +2085,13 @@
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
-"ss" = (
-/obj/structure/stairs{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood,
-/area/rogue/outdoors/beach)
+"sw" = (
+/turf/closed/wall/mineral/wooddark/window,
+/area/rogue/indoors/town/church)
 "sA" = (
 /obj/structure/rack/shelf/big,
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
-"sF" = (
-/obj/structure/bed/inn,
-/obj/structure/roguetent{
-	layer = 8
-	},
-/obj/structure/rack/shelf/notdense{
-	pixel_y = -32
-	},
-/obj/item/clothing/head/helmet/leather/tricorn{
-	pixel_y = -32
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "sL" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -2118,12 +2131,12 @@
 	},
 /area/rogue/ship/middeck)
 "tb" = (
-/obj/effect/landmark/start/butler{
-	dir = 8
-	},
 /obj/structure/bed/inn,
 /obj/item/bedsheet/fabric,
 /obj/structure/rack/shelf/notdense,
+/obj/effect/landmark/start/wapprentice{
+	dir = 8
+	},
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "th" = (
@@ -2132,13 +2145,6 @@
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/beach)
-"to" = (
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/turf/open/floor/ruinedwood/spiral,
 /area/rogue/outdoors/beach)
 "tq" = (
 /obj/structure/table/wood{
@@ -2152,43 +2158,7 @@
 /obj/structure/closet/crate/chest/crate,
 /obj/item/gem,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
-"tu" = (
-/obj/structure/table/wood{
-	icon_state = "largetable"
-	},
-/obj/structure/rack/shelf/notdense{
-	pixel_y = 23
-	},
-/obj/item/key/steward{
-	pixel_y = 32;
-	pixel_x = 8
-	},
-/obj/item/paper/scroll,
-/obj/item/natural/feather,
-/obj/item/reagent_containers/glass/bottle/beer/hagwoodbitter{
-	pixel_x = -3;
-	pixel_y = 36
-	},
-/obj/item/reagent_containers/glass/bottle/beer/hagwoodbitter{
-	pixel_x = -8;
-	pixel_y = 36
-	},
-/obj/item/key/steward{
-	pixel_y = 32;
-	pixel_x = 8
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
-"tw" = (
-/turf/open/floor/carpet/purple,
-/area/rogue/outdoors/beach)
-"ty" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
+/area/rogue/indoors/town/vault)
 "tB" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood3"
@@ -2214,8 +2184,8 @@
 /obj/item/clothing/cloak/stabard/templar/abyssor{
 	pixel_x = 15
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/churchrough,
+/area/rogue/indoors/town/church/chapel)
 "tM" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
@@ -2226,12 +2196,18 @@
 /obj/item/ingot/blacksteel,
 /obj/item/ingot/blacksteel,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "tT" = (
 /turf/open/floor/carpet/lord/right{
 	dir = 1
 	},
 /area/rogue/ship/nobledeck)
+"tY" = (
+/obj/effect/landmark/start/jester{
+	dir = 4
+	},
+/turf/closed/wall/mineral/wooddark,
+/area/rogue/ship/topdeck)
 "ud" = (
 /obj/effect/decal/cobbleedge{
 	dir = 9
@@ -2293,11 +2269,6 @@
 /obj/item/clothing/armor/gambeson,
 /obj/item/clothing/armor/gambeson,
 /obj/item/clothing/armor/gambeson,
-/obj/item/clothing/armor/chainmail,
-/obj/item/clothing/armor/chainmail,
-/obj/item/clothing/armor/chainmail,
-/obj/item/clothing/armor/chainmail,
-/obj/item/clothing/armor/chainmail,
 /turf/open/floor/twig,
 /area/rogue/ship/middeck)
 "uv" = (
@@ -2307,10 +2278,9 @@
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "uw" = (
-/obj/structure/door/stone{
-	lockid = "confession"
-	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/structure/door/stone,
+/obj/effect/mapping_helpers/access/keyset/church/inquisition,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
 "uB" = (
@@ -2326,7 +2296,7 @@
 	dir = 8;
 	icon_state = "border"
 	},
-/obj/machinery/light/fueled/lanternpost,
+/obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "uG" = (
@@ -2337,15 +2307,10 @@
 /area/rogue/ship/middeck)
 "uK" = (
 /turf/open/floor/tile/masonic/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "uM" = (
 /obj/structure/closet/crate/drawer/inn,
-/obj/item/key/courtphys{
-	pixel_y = 9
-	},
-/obj/item/key/courtphys{
-	pixel_y = 9
-	},
+/obj/item/needle,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "uN" = (
@@ -2361,7 +2326,6 @@
 /obj/structure/throne{
 	pixel_x = -32
 	},
-/obj/effect/landmark/start/jester,
 /obj/structure/fake_machine/titan{
 	density = 0;
 	pixel_y = 32
@@ -2377,7 +2341,7 @@
 "uX" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "uY" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -2394,7 +2358,13 @@
 "uZ" = (
 /obj/effect/landmark/start/monk,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
+"vc" = (
+/obj/effect/landmark/tram/queued_path/cargo_exit{
+	next_path_id = "cargo_map_exit"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "ve" = (
 /obj/effect/landmark/start/mercenarylate,
 /turf/open/floor/ruinedwood/spiral,
@@ -2416,6 +2386,7 @@
 	pixel_y = 36
 	},
 /obj/structure/rack/shelf/notdense,
+/obj/effect/landmark/start/clinicapprentice,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "vn" = (
@@ -2450,6 +2421,13 @@
 /obj/structure/roguetent,
 /turf/open/floor/hay,
 /area/rogue/ship/middeck)
+"vv" = (
+/obj/structure/door/stone{
+	lockid = "church";
+	name = "Church"
+	},
+/turf/open/floor/churchmarble,
+/area/rogue/indoors/town/church/chapel)
 "vx" = (
 /obj/structure/fluff/walldeco/painting/queen{
 	pixel_x = 32
@@ -2467,7 +2445,7 @@
 	},
 /obj/item/coin/gold/pile,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "vC" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -2501,13 +2479,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
-"vJ" = (
-/obj/structure/closet/crate/chest,
-/obj/structure/floordoor{
-	redstone_id = "droploot"
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/beach)
 "vQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -2515,6 +2486,7 @@
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
+/obj/item/fuse/parchment,
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
 "vU" = (
@@ -2547,12 +2519,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"wg" = (
-/obj/structure/fake_machine/mail/r{
-	pixel_y = 32
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "wh" = (
 /obj/structure/fluff/clock,
 /turf/open/floor/carpet/lord/left{
@@ -2564,12 +2530,8 @@
 	pixel_y = 12;
 	density = 0
 	},
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/inq/import)
 "wv" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/closet/crate/chest/old_crate,
@@ -2588,6 +2550,7 @@
 	dir = 10
 	},
 /obj/structure/fake_machine/steward,
+/obj/item/key/steward,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "wA" = (
@@ -2597,9 +2560,6 @@
 /obj/item/weapon/mace/woodclub/train_sword,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"wC" = (
-/turf/closed/wall/mineral/wooddark,
-/area/rogue/outdoors/beach)
 "wD" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -2607,14 +2567,26 @@
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
 "wE" = (
+/obj/structure/table/wood/plain{
+	layer = 2
+	},
 /obj/structure/door/weak/bolt/shutter{
 	dir = 2
 	},
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
+"wF" = (
+/obj/structure/bed/inn,
+/obj/item/bedsheet/cloth,
+/obj/structure/rack/shelf/notdense,
+/obj/structure/roguetent{
+	layer = 8
+	},
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/ship/middeck)
 "wH" = (
 /obj/structure/rack,
-/obj/item/weapon/axe/steel,
 /obj/item/weapon/axe/battle,
 /obj/machinery/light/fueled/torchholder/l,
 /obj/item/clothing/head/helmet/leather/tricorn,
@@ -2627,15 +2599,16 @@
 	icon_state = "borderfall"
 	},
 /obj/structure/fluff/railing/wood,
-/obj/machinery/light/fueled/lanternpost,
+/obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "wU" = (
-/obj/effect/landmark/start/shepherd,
+/obj/effect/landmark/start/orthodoxist,
 /obj/structure/bed/inn,
 /obj/item/bedsheet/wool,
+/obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/inq/import)
 "wZ" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood3"
@@ -2675,17 +2648,9 @@
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "xn" = (
-/obj/item/candle/yellow/lit{
-	pixel_x = 8;
-	pixel_y = 40
-	},
-/obj/structure/rack/shelf/notdense,
-/obj/item/candle/yellow{
-	pixel_x = -7;
-	pixel_y = 40
-	},
-/turf/open/floor/ruinedwood,
-/area/rogue/ship/middeck)
+/obj/machinery/artificer_table,
+/turf/open/floor/hay,
+/area/rogue/ship/topdeck)
 "xu" = (
 /obj/item/candle/yellow,
 /obj/item/candle/yellow,
@@ -2722,12 +2687,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
-"xJ" = (
-/obj/structure/door/violet,
-/obj/effect/mapping_helpers/access/keyset/town/merchant,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "xM" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -2752,11 +2711,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
-"xW" = (
-/turf/closed/wall/mineral/decostone/end{
-	dir = 8
-	},
-/area/rogue/ship/middeck)
 "yd" = (
 /obj/structure/fluff/wallclock/r,
 /turf/open/floor/ruinedwood/two,
@@ -2836,10 +2790,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"yO" = (
-/obj/item/fake_machine/merchant,
-/turf/open/floor/carpet/purple,
-/area/rogue/outdoors/beach)
 "yX" = (
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
@@ -2895,7 +2845,7 @@
 	pixel_y = 29
 	},
 /turf/open/water/cleanshallow,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "zT" = (
 /obj/structure/chair/wood/alt/fancy{
 	dir = 8
@@ -2906,8 +2856,8 @@
 /obj/structure/bed/shit,
 /obj/item/bedsheet/cloth,
 /obj/effect/landmark/start/churchling,
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "zY" = (
 /obj/structure/rack/shelf/notdense,
 /obj/item/weapon/polearm/spear{
@@ -2933,6 +2883,10 @@
 	},
 /turf/open/floor/twig,
 /area/rogue/ship/middeck)
+"Ac" = (
+/obj/effect/landmark/start/innkeep,
+/turf/open/floor/herringbone,
+/area/rogue/ship/middeck)
 "Ad" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/ruinedwood/spiral,
@@ -2948,13 +2902,20 @@
 /obj/item/gem/blue,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "Ah" = (
 /obj/effect/landmark/start/tailor{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"Aj" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "Ak" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/closet/crate/chest/wicker,
@@ -3007,16 +2968,20 @@
 	},
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
-"AG" = (
-/obj/structure/lever{
-	redstone_id = "droploot"
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "AT" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
+"AU" = (
+/obj/structure/fluff/statue/small{
+	pixel_y = 11;
+	pixel_x = -4
+	},
+/obj/structure/industrial_lift/tram{
+	icon_state = "plank2"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "AZ" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/instrument/flute,
@@ -3039,9 +3004,6 @@
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
-"Bg" = (
-/turf/closed/wall/mineral/decostone/end,
-/area/rogue/ship/middeck)
 "Bi" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -3076,7 +3038,6 @@
 /turf/open/water/bath,
 /area/rogue/ship/middeck)
 "BG" = (
-/obj/item/bedsheet/double_pelt,
 /obj/structure/bed/inn/double,
 /obj/effect/landmark/start/steward,
 /turf/open/floor/ruinedwood/two,
@@ -3127,7 +3088,9 @@
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "Cj" = (
-/obj/structure/door,
+/obj/structure/door{
+	name = "Barracks"
+	},
 /obj/effect/mapping_helpers/access/keyset/garrison/general,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/two,
@@ -3153,25 +3116,14 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/shipbrig)
-"Cp" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/cooked/coppiette,
-/obj/item/reagent_containers/food/snacks/cooked/coppiette,
-/obj/item/reagent_containers/food/snacks/cooked/coppiette,
-/obj/item/reagent_containers/food/snacks/cooked/coppiette,
-/obj/item/reagent_containers/food/snacks/cooked/coppiette,
-/obj/item/reagent_containers/food/snacks/cooked/coppiette,
-/turf/open/floor/carpet/purple,
-/area/rogue/outdoors/beach)
-"Cs" = (
-/obj/structure/closet/crate/chest/wicker,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
+"Cv" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/item/tent_kit,
+/turf/open/floor/hay,
+/area/rogue/ship/middeck)
 "Cw" = (
 /obj/structure/fluff/clock,
 /turf/open/floor/ruinedwood/spiral,
@@ -3198,10 +3150,6 @@
 	},
 /turf/open/water/swamp,
 /area/rogue/ship/middeck)
-"CC" = (
-/obj/structure/fluff/railing/border,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "CE" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
@@ -3242,12 +3190,16 @@
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
 "CS" = (
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
-"CY" = (
-/obj/effect/landmark/start/gravedigger{
-	dir = 4
+/obj/structure/mannequin/male{
+	dir = 8;
+	pixel_y = 0;
+	pixel_x = 12;
+	density = 0
 	},
+/turf/open/floor/hay,
+/area/rogue/ship/topdeck)
+"CY" = (
+/obj/effect/landmark/start/clinicapprentice,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "Da" = (
@@ -3285,6 +3237,12 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
+"Dt" = (
+/obj/effect/landmark/tram/queued_path/cargo_pre_enter{
+	next_path_id = "cargo_stop"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "Du" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall"
@@ -3292,6 +3250,10 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/hay,
 /area/rogue/ship/topdeck)
+"Dv" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/ship/nobledeck)
 "Dw" = (
 /obj/effect/decal/cobbleedge{
 	dir = 10
@@ -3314,12 +3276,8 @@
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/rogue/ship/middeck)
 "DP" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/ladder,
-/turf/open/floor/woodturned,
-/area/rogue/ship/topdeck)
+/turf/closed/wall/mineral/decostone,
+/area/rogue/indoors/town/church/chapel)
 "DQ" = (
 /obj/effect/landmark/ship_marker,
 /turf/closed/sea_fog,
@@ -3368,12 +3326,12 @@
 "Ed" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "Ee" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/fluff/psycross/copper,
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "Em" = (
 /obj/machinery/light/fueled/oven/east,
 /obj/structure/rack/shelf,
@@ -3406,6 +3364,7 @@
 	dir = 1;
 	pixel_y = 14
 	},
+/obj/effect/landmark/start/adventurerlate,
 /turf/open/floor/hay,
 /area/rogue/outdoors/beach)
 "Eq" = (
@@ -3417,7 +3376,7 @@
 	pixel_y = 29
 	},
 /turf/open/water/cleanshallow,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "Ew" = (
 /obj/structure/fluff/walldeco/bigpainting/lake{
 	pixel_x = 0
@@ -3454,6 +3413,11 @@
 /obj/item/clothing/armor/leather/jacket/sea,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"ET" = (
+/obj/structure/table/wood/crafted,
+/obj/item/storage/crucible/random,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/ship/topdeck)
 "EX" = (
 /obj/structure/fluff/railing/border{
 	dir = 9;
@@ -3511,10 +3475,10 @@
 /turf/open/floor/hay,
 /area/rogue/ship/middeck)
 "Fx" = (
-/obj/structure/stairs/stone,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/obj/structure/stairs/stone/church,
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "Fz" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -3529,10 +3493,15 @@
 "FD" = (
 /obj/structure/door/fancy{
 	lockid = "royal";
-	name = "Lord's Apartment"
+	name = "Captain's Chamber"
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
+"FF" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot/copper,
+/turf/open/floor/ruinedwood/two,
+/area/rogue/ship/middeck)
 "FK" = (
 /obj/structure/window/openclose{
 	dir = 1;
@@ -3540,6 +3509,20 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
+"FN" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/item/tent_kit,
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
+/area/rogue/ship/middeck)
 "FO" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
@@ -3558,9 +3541,15 @@
 	dir = 10;
 	icon_state = "cobbleedge-w"
 	},
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/nightmaiden{
-	dir = 8
+/obj/structure/table/wood{
+	dir = 1;
+	icon_state = "tablewood1"
+	},
+/obj/item/candle/yellow/lit{
+	pixel_y = 5
+	},
+/obj/item/candle/yellow/lit{
+	pixel_x = 8
 	},
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
@@ -3600,6 +3589,7 @@
 	},
 /obj/item/book/bibble,
 /obj/item/key/lord,
+/obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
 "Gh" = (
@@ -3651,8 +3641,8 @@
 /obj/structure/chair/bench/church{
 	dir = 4
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "GF" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -3666,15 +3656,25 @@
 /obj/effect/landmark/start/guardsman,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"GH" = (
+/turf/closed/wall/mineral/wooddark,
+/area/rogue/indoors/town/church)
 "GI" = (
 /obj/effect/landmark/start/priest,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "GK" = (
 /obj/structure/bed/shit,
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/shipbrig)
+"GQ" = (
+/obj/effect/landmark/tram/queued_path{
+	next_path_id = "cargo_map_enter";
+	platform_code = "cargo_return_2"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "GR" = (
 /obj/structure/rack,
 /obj/item/weapon/sword/scimitar/messer,
@@ -3685,8 +3685,6 @@
 /obj/item/weapon/sword/scimitar/messer,
 /obj/item/clothing/pants/chainlegs/iron,
 /obj/item/clothing/pants/chainlegs/iron,
-/obj/item/clothing/pants/chainlegs/kilt,
-/obj/item/clothing/pants/chainlegs/kilt,
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
 "GS" = (
@@ -3694,7 +3692,7 @@
 /obj/item/scomstone,
 /obj/item/weapon/whip/antique,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/inq/import)
 "GU" = (
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
@@ -3759,8 +3757,18 @@
 /area/rogue/ship/middeck)
 "HQ" = (
 /obj/structure/table/wood/crafted,
+/obj/item/storage/crucible/random{
+	pixel_y = 2;
+	pixel_x = 5
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"HS" = (
+/obj/structure/plank{
+	icon_state = "plank"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "Ia" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -3785,19 +3793,14 @@
 /obj/item/reagent_containers/glass/cup/silver,
 /obj/item/plate,
 /obj/item/plate,
+/obj/item/storage/messkit,
+/obj/item/storage/messkit,
+/obj/item/storage/messkit,
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
 "It" = (
 /turf/closed/wall/mineral/wooddark/end,
 /area/rogue/ship/nobledeck)
-"Iv" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/beach)
 "Ix" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/bed/shit,
@@ -3805,6 +3808,17 @@
 /obj/structure/carpet/red,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
+"IA" = (
+/obj/structure/industrial_lift/tram,
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
+	},
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "II" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/rogue/ship/nobledeck)
@@ -3828,12 +3842,6 @@
 	dir = 4
 	},
 /area/rogue/ship/middeck)
-"IO" = (
-/obj/structure/floordoor{
-	redstone_id = "droploot"
-	},
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/beach)
 "IT" = (
 /obj/item/ore/coal,
 /obj/effect/landmark/start/mercenary,
@@ -3841,22 +3849,13 @@
 /area/rogue/ship/middeck)
 "IV" = (
 /obj/structure/door/viewport{
-	dir = 1
+	dir = 1;
+	name = "Merchant Dock"
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/steward,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/chevron,
 /area/rogue/ship/middeck)
-"IW" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood3"
-	},
-/obj/structure/bars{
-	icon_state = "barsbent";
-	layer = 2.81
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "IY" = (
 /obj/machinery/light/fueled/lanternpost{
 	pixel_x = 16;
@@ -3865,12 +3864,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"Jc" = (
-/obj/effect/landmark/start/shophand{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "Je" = (
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood,
@@ -3882,22 +3875,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"Jk" = (
-/obj/structure/fluff/railing/border{
-	dir = 1;
-	icon_state = "border"
-	},
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fermentation_keg/beer,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/rooftop/green{
-	dir = 4
-	},
-/area/rogue/outdoors/beach)
 "Jt" = (
 /obj/structure/fluff/railing/border,
 /obj/item/rope,
@@ -3905,11 +3882,11 @@
 /area/rogue/ship/topdeck)
 "Jv" = (
 /obj/structure/closet/crate/crafted_closet/lord,
-/obj/item/clothing/armor/brigandine/coatplates,
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/weapon/sword/long/judgement,
-/obj/item/clothing/gloves/angle,
-/obj/item/clothing/wrists/bracers/leather,
+/obj/item/storage/messkit,
+/obj/item/clothing/head/helmet/leather/tricorn,
+/obj/item/clothing/cloak/half,
+/obj/item/clothing/cloak/half/colored/red,
+/obj/item/clothing/armor/leather/jacket/silk_coat,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
 "Jx" = (
@@ -3933,14 +3910,6 @@
 	pixel_x = -8;
 	pixel_y = 10
 	},
-/obj/item/reagent_containers/glass/bottle{
-	layer = 5;
-	pixel_x = -8;
-	pixel_y = 20
-	},
-/obj/item/key/courtphys,
-/obj/item/key/courtphys,
-/obj/item/key/courtphys,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "JF" = (
@@ -3948,34 +3917,15 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/shipbrig)
 "JI" = (
-/obj/structure/fluff/railing/border{
-	dir = 8;
-	icon_state = "border"
-	},
-/obj/structure/table/wood{
-	dir = 1;
-	icon_state = "tablewood1"
-	},
-/obj/item/natural/cloth,
-/obj/item/candle/yellow/lit{
-	pixel_y = 5
-	},
-/obj/item/candle/yellow/lit{
-	pixel_x = 8
-	},
 /obj/effect/decal/cobbleedge{
 	dir = 10;
 	icon_state = "cobbleedge-w"
 	},
-/turf/open/floor/ruinedwood/two,
+/turf/closed/wall/mineral/wooddark,
 /area/rogue/ship/middeck)
 "JJ" = (
 /turf/open/floor/twig,
 /area/rogue/ship/middeck)
-"JO" = (
-/obj/structure/fluff/statue/small,
-/turf/open/transparent/openspace,
-/area/rogue/outdoors/beach)
 "JP" = (
 /obj/item/reagent_containers/glass/cup/silver{
 	pixel_x = -5;
@@ -3994,43 +3944,9 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"JT" = (
-/obj/structure/table/wood{
-	icon_state = "largetable"
-	},
-/obj/structure/rack/shelf/notdense{
-	pixel_y = 23
-	},
-/obj/structure/fermentation_keg/beer{
-	pixel_y = 8
-	},
-/obj/item/reagent_containers/glass/bottle/manapot{
-	pixel_y = 36;
-	pixel_x = 4
-	},
-/obj/item/reagent_containers/glass/bottle/manapot{
-	pixel_y = 36;
-	pixel_x = 7
-	},
-/obj/item/reagent_containers/glass/bottle/healthpot{
-	pixel_y = 36;
-	pixel_x = -7
-	},
-/obj/item/reagent_containers/glass/bottle/healthpot{
-	pixel_y = 36;
-	pixel_x = -4
-	},
-/obj/item/reagent_containers/glass/bottle/healthpot{
-	pixel_y = 36
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "JU" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall"
-	},
-/obj/machinery/light/fueled/lanternpost{
-	dir = 1
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -4041,6 +3957,9 @@
 /obj/structure/cannon{
 	pixel_y = -16
 	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "JW" = (
@@ -4049,6 +3968,7 @@
 /obj/structure/fluff/walldeco/painting/queen{
 	pixel_x = -32
 	},
+/obj/effect/landmark/start/lord,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
 "JZ" = (
@@ -4057,11 +3977,18 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
+"Kc" = (
+/obj/effect/landmark/tram/queued_path/cargo_map_exit{
+	next_path_id = "cargo_return_1"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "Kd" = (
 /obj/structure/fluff/railing/border,
 /obj/effect/decal/cobbleedge{
 	icon_state = "cobbleedge-sread"
 	},
+/obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "Ki" = (
@@ -4078,11 +4005,10 @@
 /obj/structure/window,
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
-"Kr" = (
-/obj/structure/ladder,
-/turf/open/floor/rooftop/green{
-	dir = 4
-	},
+"Kp" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "Ks" = (
 /obj/structure/bars,
@@ -4114,7 +4040,7 @@
 /area/rogue/ship/middeck)
 "Kw" = (
 /obj/structure/closet/crate/coffin,
-/turf/open/floor/church,
+/turf/open/floor/cobble,
 /area/rogue/ship/middeck)
 "KC" = (
 /obj/structure/fluff/railing/border{
@@ -4148,6 +4074,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
+/obj/item/tent_kit,
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
@@ -4198,6 +4125,15 @@
 	dir = 8
 	},
 /area/rogue/ship/middeck)
+"KZ" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "La" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -4218,10 +4154,6 @@
 /area/rogue/ship/middeck)
 "Li" = (
 /turf/open/water/ocean/deep,
-/area/rogue/outdoors/beach)
-"Ln" = (
-/obj/structure/fermentation_keg/random/water,
-/turf/open/floor/ruinedwood/spiral,
 /area/rogue/outdoors/beach)
 "Lp" = (
 /obj/structure/fermentation_keg,
@@ -4252,19 +4184,12 @@
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
 "LE" = (
-/obj/effect/landmark/start/manorguardsman,
 /obj/structure/stairs/fancy/l{
 	dir = 1;
 	icon_state = "fancy_stairs_l"
 	},
 /turf/open/floor/carpet/lord/left,
 /area/rogue/ship/nobledeck)
-"LI" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood3"
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "LJ" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
@@ -4276,21 +4201,18 @@
 	dir = 4
 	},
 /turf/open/water/cleanshallow,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "LV" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /obj/item/reagent_containers/food/snacks/smallrat,
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "LX" = (
 /obj/structure/fake_machine/mail,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
-"LY" = (
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "Ma" = (
 /obj/structure/bars,
 /obj/structure/window/openclose{
@@ -4337,7 +4259,7 @@
 	},
 /obj/structure/table/wood/fine,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "MF" = (
 /obj/structure/bed/inn,
 /obj/effect/decal/cobbleedge{
@@ -4356,15 +4278,20 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "MQ" = (
 /obj/structure/door/viewport{
-	lockid = "nightman";
 	dir = 8
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/apothecary,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"MU" = (
+/obj/machinery/light/fueled/torchholder/r,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "Na" = (
 /obj/structure/window,
 /obj/structure/roguetent,
@@ -4381,14 +4308,14 @@
 /obj/effect/landmark/start/orphanlate,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"Nl" = (
+"Nk" = (
+/obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
-	dir = 6
+	dir = 8;
+	icon_state = "border"
 	},
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/turf/open/floor/ruinedwood/spiral,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "Nt" = (
 /turf/closed/wall/mineral/wooddark/end,
@@ -4442,11 +4369,15 @@
 /area/rogue/ship/middeck)
 "NV" = (
 /obj/structure/door/viewport{
-	dir = 1
+	dir = 1;
+	name = "Apothecary"
 	},
 /obj/effect/mapping_helpers/access/keyset/town/apothecary,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"NX" = (
+/turf/open/floor/tile/checker,
+/area/rogue/indoors/town/vault)
 "Ob" = (
 /obj/structure/chair/wood/alt/fancy,
 /obj/structure/fluff/walldeco/customflag{
@@ -4480,12 +4411,12 @@
 "Ol" = (
 /obj/structure/fluff/walldeco/psybanner,
 /turf/closed/wall/mineral/wooddark,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "Om" = (
-/turf/closed/wall/mineral/decostone/end{
-	dir = 4
-	},
-/area/rogue/ship/middeck)
+/obj/structure/chair/stool,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "Op" = (
 /obj/structure/fluff/railing/border{
 	dir = 8;
@@ -4533,11 +4464,7 @@
 /obj/structure/table/wood,
 /obj/item/reagent_containers/glass/cup/golden,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
-"OB" = (
-/obj/structure/closet/crate/chest/neu_iron,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
+/area/rogue/indoors/town/church)
 "OF" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/weapon/sword/long/exe/cloth,
@@ -4598,6 +4525,12 @@
 /obj/item/candle/yellow,
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
+"OW" = (
+/obj/structure/industrial_lift/tram{
+	fake = 1
+	},
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "OY" = (
 /obj/structure/door{
 	lockid = "roomiv";
@@ -4609,7 +4542,7 @@
 "OZ" = (
 /obj/structure/carpet/green,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/inq/import)
 "Pb" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -4628,11 +4561,8 @@
 	},
 /area/rogue/ship/middeck)
 "Pg" = (
-/obj/structure/door/fancy{
-	name = "Hand's Chambers"
-	},
-/obj/effect/mapping_helpers/access/keyset/manor/hand,
 /obj/effect/mapping_helpers/access/locker,
+/obj/structure/door/fancy,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "Pl" = (
@@ -4643,9 +4573,13 @@
 /obj/item/candle/yellow,
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
-"Pp" = (
-/obj/structure/ladder,
-/turf/open/floor/ruinedwood/spiral,
+"Ps" = (
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "Pt" = (
 /obj/structure/fluff/railing/border{
@@ -4657,6 +4591,20 @@
 "Pv" = (
 /turf/closed/wall/mineral/wooddark,
 /area/rogue/ship/shipbrig)
+"PJ" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/obj/structure/industrial_lift/tram,
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
+"PL" = (
+/obj/structure/chair/stool,
+/turf/open/floor/churchmarble,
+/area/rogue/indoors/town/church/chapel)
 "PN" = (
 /obj/structure/stairs{
 	dir = 4
@@ -4684,8 +4632,19 @@
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
+/obj/item/fuse/parchment,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"Qf" = (
+/obj/structure/rack/shelf/notdense{
+	pixel_y = 23
+	},
+/obj/structure/table/wood{
+	icon_state = "largetable"
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "Qg" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
@@ -4698,18 +4657,11 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"Qm" = (
-/obj/structure/table/wood,
-/obj/item/coin/silver/pile,
-/obj/item/coin/copper/pile,
-/obj/item/weapon/knife/dagger/navaja,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "Qx" = (
 /obj/structure/bed/inn,
 /obj/item/bedsheet/fabric,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "QB" = (
 /obj/structure/roguetent,
 /turf/open/floor/rooftop/green{
@@ -4763,6 +4715,7 @@
 "QS" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/keyset/manor/general,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/nobledeck)
 "QU" = (
@@ -4818,12 +4771,8 @@
 /turf/open/floor/carpet/lord/left,
 /area/rogue/ship/nobledeck)
 "Rw" = (
-/obj/structure/fluff/railing/border{
-	layer = 2.65
-	},
-/obj/structure/ladder,
-/turf/open/floor/woodturned,
-/area/rogue/ship/topdeck)
+/turf/closed/wall/mineral/wooddark,
+/area/rogue/indoors/town/church/chapel)
 "Rz" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -4834,10 +4783,11 @@
 	pixel_y = 14
 	},
 /obj/structure/fluff/nest,
+/obj/effect/landmark/start/adventurerlate,
 /turf/open/floor/hay,
 /area/rogue/outdoors/beach)
 "RF" = (
-/obj/structure/fermentation_keg/water,
+/obj/machinery/tanningrack,
 /turf/open/floor/hay,
 /area/rogue/ship/topdeck)
 "RH" = (
@@ -4858,6 +4808,11 @@
 /obj/structure/meathook,
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"RL" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/structure/industrial_lift/tram,
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "RO" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -4948,7 +4903,7 @@
 /obj/item/weapon/polearm/woodstaff/aries,
 /obj/item/scomstone,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "Ss" = (
 /turf/open/floor/rooftop/green{
 	dir = 8
@@ -4965,15 +4920,24 @@
 /obj/item/needle/thorn,
 /obj/item/needle/thorn,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "Sy" = (
 /obj/structure/table/wood{
 	layer = 2.8
 	},
+/obj/item/key/garrison,
+/obj/item/key/garrison{
+	pixel_x = 8;
+	pixel_y = 4
+	},
+/obj/item/key/garrison{
+	pixel_y = 4;
+	pixel_x = -9
+	},
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "SB" = (
-/obj/machinery/light/fueled/smelter,
+/obj/machinery/light/fueled/smelter/great,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "SC" = (
@@ -4990,7 +4954,7 @@
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/nobledeck)
 "SO" = (
-/obj/machinery/light/fueled/lanternpost,
+/obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/hay,
 /area/rogue/ship/topdeck)
 "SP" = (
@@ -4998,6 +4962,13 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
+"SR" = (
+/obj/structure/industrial_lift/tram{
+	icon_state = "roofg";
+	dir = 4
+	},
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "ST" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -5012,13 +4983,11 @@
 "Tb" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church)
 "Te" = (
-/obj/structure/chair/bench/church/r{
-	dir = 4
-	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/obj/structure/chair/stool,
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "Tg" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall"
@@ -5041,20 +5010,8 @@
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
 "Ts" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
 /turf/open/floor/churchmarble,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
 "Tv" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -5070,16 +5027,34 @@
 "Tx" = (
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
-"TA" = (
-/obj/structure/bed/inn,
-/obj/structure/roguetent{
-	layer = 8
+"TE" = (
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
 	},
-/obj/structure/rack/shelf/notdense,
-/obj/item/clothing/head/helmet/leather/tricorn{
-	pixel_y = 32
+/obj/item/tent_kit,
+/turf/open/floor/rooftop/green{
+	dir = 4
 	},
-/turf/open/floor/ruinedwood/spiral,
+/area/rogue/ship/middeck)
+"TF" = (
+/obj/effect/landmark/tram/queued_path{
+	next_path_id = "cargo_return_2";
+	platform_code = "cargo_return_1"
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
+"TG" = (
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
+"TK" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/obj/structure/fluff/railing/border,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
 "TN" = (
 /turf/open/transparent/openspace,
@@ -5113,22 +5088,8 @@
 	icon_state = "longtable"
 	},
 /obj/item/reagent_containers/glass/bottle/beer/hagwoodbitter,
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
-"Uj" = (
-/obj/structure/bed/inn/double,
-/obj/item/bedsheet/fabric_double,
-/obj/effect/landmark/start/shophand{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
-"Uo" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/cooked/coppiette,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
+/turf/open/floor/churchrough,
+/area/rogue/indoors/town/church/chapel)
 "Uq" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -5154,20 +5115,27 @@
 /obj/structure/closet/crate/chest/gold,
 /obj/item/ingot/silver,
 /obj/item/ingot/silver,
-/obj/item/ingot/silver,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/checker,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/vault)
 "Uu" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall"
 	},
 /obj/structure/closet/crate/chest/old_crate,
-/obj/projectile/bullet/reusable/cannonball,
-/obj/projectile/bullet/reusable/cannonball,
-/obj/projectile/bullet/reusable/cannonball,
-/obj/projectile/bullet/reusable/cannonball,
+/obj/item/ammo_casing/caseless/cball,
+/obj/item/ammo_casing/caseless/cball,
+/obj/item/ammo_casing/caseless/cball,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/reagent_containers/powder/blastpowder,
+/obj/item/reagent_containers/powder/blastpowder,
+/obj/item/reagent_containers/powder/blastpowder,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "Uv" = (
@@ -5183,6 +5151,7 @@
 /obj/structure/fake_machine/mail{
 	mailtag = "Guard Captain"
 	},
+/obj/effect/landmark/start/dungeoneer,
 /turf/open/floor/wood,
 /area/rogue/ship/middeck)
 "UF" = (
@@ -5221,6 +5190,11 @@
 	dir = 1
 	},
 /area/rogue/ship/topdeck)
+"UV" = (
+/obj/structure/rack/shelf/notdense,
+/obj/structure/industrial_lift/tram,
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "UX" = (
 /obj/structure/rack/shelf/big{
 	icon_state = "shelf_biggest";
@@ -5251,6 +5225,10 @@
 	},
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
+"UY" = (
+/obj/structure/industrial_lift/tram,
+/turf/open/water/ocean/deep,
+/area/rogue/outdoors/beach)
 "UZ" = (
 /obj/item/rope,
 /obj/structure/fluff/railing/border{
@@ -5310,8 +5288,13 @@
 /obj/structure/fluff/railing/wood{
 	dir = 8
 	},
+/obj/item/fuse/parchment,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"Vp" = (
+/obj/effect/landmark/tram/queued_path/cargo_stop,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "Vs" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -5321,7 +5304,7 @@
 	dir = 1;
 	icon_state = "borderfall"
 	},
-/obj/machinery/light/fueled/lanternpost{
+/obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -5330,8 +5313,8 @@
 /obj/effect/landmark/start/churchling{
 	dir = 8
 	},
-/turf/open/floor/church,
-/area/rogue/ship/middeck)
+/turf/open/floor/cobble,
+/area/rogue/indoors/town/church/chapel)
 "VA" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 4;
@@ -5379,9 +5362,6 @@
 /area/rogue/ship/middeck)
 "VL" = (
 /obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /obj/structure/fluff/railing/border{
@@ -5392,6 +5372,11 @@
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9;
+	icon_state = "border";
+	layer = 2.7
 	},
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/beach)
@@ -5410,18 +5395,12 @@
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
 "VS" = (
-/obj/machinery/light/fueled/lanternpost,
+/obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "VU" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
-"VZ" = (
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/beach)
 "Wi" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -5440,7 +5419,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "Wr" = (
-/obj/machinery/light/fueled/lanternpost{
+/obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -5451,16 +5430,25 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/rogue/ship/middeck)
+"Wv" = (
+/obj/effect/landmark/start/feldsher,
+/turf/open/floor/ruinedwood/two,
+/area/rogue/ship/middeck)
 "Wx" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
+/obj/effect/landmark/start/cook,
 /turf/open/floor/cobble,
 /area/rogue/ship/middeck)
 "WB" = (
 /obj/structure/chair/wood,
 /turf/open/floor/herringbone,
 /area/rogue/ship/middeck)
+"WG" = (
+/obj/structure/ship_wheel,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/ship/topdeck)
 "WO" = (
 /obj/structure/stairs{
 	dir = 4
@@ -5498,9 +5486,11 @@
 	},
 /area/rogue/ship/middeck)
 "Xa" = (
-/obj/effect/landmark/start/lord,
-/turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/topdeck)
+/obj/effect/landmark/start/innkeep_son{
+	dir = 4
+	},
+/turf/open/floor/herringbone,
+/area/rogue/ship/middeck)
 "Xb" = (
 /obj/item/candle/yellow/lit{
 	pixel_x = 8;
@@ -5537,9 +5527,18 @@
 /area/rogue/ship/topdeck)
 "Xu" = (
 /obj/structure/door/window{
-	lockid = "physician"
+	name = "Treatment Center"
 	},
+/obj/effect/mapping_helpers/access/keyset/town/clinic,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/two,
+/area/rogue/ship/middeck)
+"XA" = (
+/obj/structure/fluff/railing/border,
+/obj/item/tent_kit,
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
 /area/rogue/ship/middeck)
 "XB" = (
 /obj/structure/fluff/railing/border{
@@ -5582,6 +5581,14 @@
 	},
 /turf/open/floor/twig,
 /area/rogue/ship/middeck)
+"XY" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border,
+/obj/effect/landmark/observer_start,
+/turf/open/floor/ruinedwood/spiral,
+/area/rogue/ship/topdeck)
 "Ya" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall"
@@ -5602,7 +5609,12 @@
 	lockid = "church"
 	},
 /turf/open/floor/churchmarble,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/town/church/chapel)
+"Yn" = (
+/obj/structure/bars,
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "Yw" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall"
@@ -5620,7 +5632,9 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/middeck)
 "Yy" = (
-/obj/effect/landmark/start/gravedigger{
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/fabric_double,
+/obj/effect/landmark/start/tailor{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/two,
@@ -5683,7 +5697,7 @@
 /obj/item/bedsheet/fabric,
 /obj/item/book/bibble,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/ship/middeck)
+/area/rogue/indoors/inq/import)
 "Za" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall";
@@ -5715,12 +5729,23 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
+"Zl" = (
+/obj/machinery/loom,
+/turf/open/floor/hay,
+/area/rogue/ship/topdeck)
 "Zr" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/projectile/bullet/reusable/cannonball,
-/obj/projectile/bullet/reusable/cannonball,
-/obj/projectile/bullet/reusable/cannonball,
-/obj/projectile/bullet/reusable/cannonball,
+/obj/item/ammo_casing/caseless/cball,
+/obj/item/ammo_casing/caseless/cball,
+/obj/item/ammo_casing/caseless/cball,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/fuse/parchment,
+/obj/item/reagent_containers/powder/blastpowder,
+/obj/item/reagent_containers/powder/blastpowder,
+/obj/item/reagent_containers/powder/blastpowder,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/ship/topdeck)
 "Zu" = (
@@ -5736,10 +5761,21 @@
 /area/rogue/ship/middeck)
 "ZB" = (
 /obj/structure/fake_machine/drugmachine{
-	pixel_x = 32
+	pixel_x = 32;
+	density = 0
+	},
+/obj/effect/landmark/start/nightmaiden{
+	dir = 8
 	},
 /turf/open/floor/ruinedwood/two,
 /area/rogue/ship/middeck)
+"ZD" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/obj/structure/industrial_lift/tram,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/beach)
 "ZE" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -12404,10 +12440,10 @@ Rk
 KM
 Rk
 KY
-CY
 jA
 jA
 jA
+jd
 Ze
 Li
 Li
@@ -12608,7 +12644,7 @@ ne
 pM
 RR
 nS
-Yy
+jA
 jA
 Ze
 Li
@@ -13215,7 +13251,7 @@ Ks
 ky
 Ze
 uM
-bR
+Yy
 Ze
 Li
 Li
@@ -13809,7 +13845,7 @@ Li
 Li
 Ze
 uY
-yA
+aT
 Ze
 Ks
 Ks
@@ -13819,7 +13855,7 @@ ne
 bj
 wx
 bj
-Ze
+wx
 hB
 RO
 bO
@@ -14024,7 +14060,7 @@ Fq
 Ze
 Cg
 ko
-gE
+XA
 Ze
 Li
 Li
@@ -14423,9 +14459,9 @@ Ze
 Ze
 wx
 Ze
-ip
+Ze
 uw
-Om
+Ze
 Cg
 vU
 aN
@@ -14622,12 +14658,12 @@ ne
 Ze
 OF
 Ze
-CI
+wF
 ne
 Ze
 wU
-ne
-xW
+nG
+Ze
 Cg
 vU
 wv
@@ -14828,7 +14864,7 @@ UI
 ne
 Ze
 wq
-ne
+nG
 Ze
 Cg
 cI
@@ -15033,7 +15069,7 @@ fN
 OZ
 Ze
 Cg
-vU
+FN
 gE
 Ze
 Li
@@ -15626,7 +15662,7 @@ Li
 Li
 Li
 Ze
-sL
+Cv
 yj
 ne
 Ze
@@ -15636,7 +15672,7 @@ Al
 ne
 wx
 ne
-ne
+gv
 Ze
 Cg
 vU
@@ -15839,7 +15875,7 @@ ne
 Ze
 qP
 ne
-Ze
+wx
 ne
 gn
 if
@@ -16649,7 +16685,7 @@ Ze
 vY
 wx
 Fq
-gn
+TE
 vo
 Ze
 Li
@@ -17041,17 +17077,17 @@ Li
 Li
 Ze
 NB
-yj
+cS
 Ze
 Ze
 Ze
 Ze
 Ze
 LX
-CS
-Ze
+Hu
+GH
 Su
-Ze
+GH
 Ze
 rF
 Cl
@@ -17249,9 +17285,9 @@ Ze
 Gt
 VK
 Ze
-CS
+Hu
 Kw
-Ze
+GH
 uZ
 ly
 Ze
@@ -17266,7 +17302,7 @@ Li
 Li
 Li
 Li
-wC
+Li
 Li
 Li
 Li
@@ -17451,9 +17487,9 @@ lA
 ne
 ne
 dp
-CS
-Ze
-Ze
+Hu
+GH
+GH
 uZ
 AT
 Ze
@@ -17467,9 +17503,9 @@ Li
 Li
 Li
 Li
-wC
-wC
-wC
+Li
+Li
+Li
 Li
 Li
 Li
@@ -17654,10 +17690,10 @@ ne
 Qg
 Ze
 ui
-Ze
+GH
 ei
 uZ
-ne
+nF
 Ze
 Ze
 Ze
@@ -17669,9 +17705,9 @@ Li
 Li
 Li
 Li
-wC
-Jk
-wC
+Li
+Li
+Li
 Li
 Li
 Li
@@ -17853,28 +17889,28 @@ ne
 gv
 ne
 ne
-Om
-ip
-Yl
-Bg
-bx
+Rw
+Rw
+vv
+Rw
+Rw
 ly
-ne
-gv
+nF
+ec
 cN
 Tb
-bK
+sw
 Li
 Li
 Li
 Li
 Li
 Li
-wC
-wC
-rY
-wC
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -18050,33 +18086,33 @@ Li
 Li
 Li
 Ze
-Ze
+Rw
 Ol
-Ze
-ip
+Rw
+DP
 ML
-xW
+Rw
 zW
-ui
-ui
+Ts
+Ts
 Yl
-ne
-ne
-ne
+nF
+nF
+nF
 ly
-Ze
-Ze
+GH
+GH
 Li
 Li
 Li
 Li
 Li
 Li
-wC
-TA
-Jc
-sF
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -18252,21 +18288,21 @@ Li
 Li
 Li
 Li
-Ze
+Rw
 Eq
 ee
 LU
-CS
-GC
+iE
+Om
 Te
-ui
+Ts
 go
-ip
+Rw
 uZ
 kV
 ly
-Ze
-Ze
+GH
+GH
 Li
 Li
 Li
@@ -18274,11 +18310,11 @@ Li
 Li
 Li
 Li
-wC
-pm
-LY
-pm
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -18454,21 +18490,21 @@ Li
 Li
 Li
 Li
-Ze
+Rw
 Ee
 uK
-ui
-ui
-ui
-ui
-ui
-CS
-Ze
-Ze
-Ze
-Ze
-Ze
-Ze
+Ts
+Ts
+Ts
+PL
+Ts
+iE
+Rw
+GH
+GH
+GH
+GH
+GH
 Li
 Li
 Li
@@ -18476,11 +18512,11 @@ Li
 Li
 Li
 Li
-wC
-wC
-rT
-wC
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -18656,21 +18692,21 @@ Li
 Li
 Li
 Li
-Ze
+Rw
 zR
 oa
-CS
+iE
 GC
 Te
-ui
-GC
+PL
+Te
 aM
-Bg
-bx
+Rw
+GH
 Ed
-ne
+nF
 nf
-Ze
+GH
 Li
 Li
 Li
@@ -18678,11 +18714,11 @@ Li
 Li
 Li
 Li
-wC
-JT
-LY
-qK
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -18858,21 +18894,21 @@ Li
 Li
 Li
 Li
-Ze
+Rw
 Ol
 mI
-CS
+iE
 LV
 cF
 fd
 fd
-Ts
+fd
 jq
-ne
+nF
 GI
 Qx
-Ze
-Ze
+GH
+GH
 Li
 Li
 Li
@@ -18880,11 +18916,11 @@ Li
 Li
 Li
 Li
-wC
-ps
-LY
-Qm
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -19060,21 +19096,21 @@ Li
 Li
 Li
 Li
-Ze
-Ze
-Ze
+Rw
+Rw
+Rw
 Vy
 Fx
-CS
-CS
-CS
+dh
+dh
+dh
 tK
-ip
+Rw
 Sr
 OA
-Ze
-Ze
-Ze
+GH
+GH
+GH
 Li
 Li
 Li
@@ -19082,11 +19118,11 @@ Li
 Li
 Li
 Li
-wC
-tu
-wg
-bb
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -19264,17 +19300,17 @@ Li
 Li
 Li
 Li
-Ze
-Ze
-Ze
+Rw
+Rw
+Rw
 du
-CS
+dh
 dF
 Uf
-Ze
-Ze
-Ze
-Ze
+Rw
+GH
+GH
+GH
 Li
 Li
 Li
@@ -19284,11 +19320,11 @@ Li
 Li
 Li
 Li
-wC
-wC
-Uj
-wC
-wC
+Li
+Li
+Li
+Li
+Li
 Li
 Li
 Li
@@ -19468,13 +19504,13 @@ Li
 Li
 Li
 Li
-Ze
-Ze
-Ze
-Ze
-Ze
-Ze
-Ze
+Rw
+Rw
+Rw
+Rw
+Rw
+Rw
+GH
 Li
 Li
 Li
@@ -19487,9 +19523,9 @@ Li
 Li
 Li
 Li
-wC
-wC
-wC
+Li
+Li
+Li
 Li
 Li
 Li
@@ -21301,9 +21337,9 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
+OW
+OW
+OW
 Li
 Li
 Li
@@ -21503,7 +21539,7 @@ Li
 Li
 Li
 Li
-Li
+OW
 Li
 Li
 Li
@@ -21705,7 +21741,7 @@ Li
 Li
 Li
 Li
-Li
+le
 Li
 Li
 Li
@@ -21906,9 +21942,9 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
+le
+le
+le
 Li
 Li
 Li
@@ -22108,9 +22144,9 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
+le
+me
+le
 Li
 Li
 Li
@@ -22309,11 +22345,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+le
+SR
+le
+le
 Li
 Li
 Li
@@ -22511,11 +22547,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+UV
+UY
+UY
+le
 Li
 Li
 Li
@@ -22713,11 +22749,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+IA
+UY
+IA
+le
 Li
 Li
 Li
@@ -22915,11 +22951,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+le
+UY
+le
+le
 Li
 Li
 Li
@@ -23117,11 +23153,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+Qf
+UY
+UY
+le
 Li
 Li
 Li
@@ -23319,11 +23355,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+Qf
+UY
+UY
+le
 Li
 Li
 Li
@@ -23521,11 +23557,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+Qf
+UY
+RL
+le
 Li
 Li
 Li
@@ -23723,11 +23759,11 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
-Li
-Li
+le
+le
+UY
+le
+le
 Li
 Li
 Li
@@ -23926,9 +23962,9 @@ Li
 Li
 Li
 Li
-Li
-Li
-Li
+le
+le
+le
 Li
 Li
 Li
@@ -48572,6 +48608,7 @@ TN
 TN
 TN
 TN
+Kc
 TN
 TN
 TN
@@ -48593,8 +48630,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+TF
 TN
 TN
 TN
@@ -51198,7 +51234,7 @@ TN
 TN
 TN
 TN
-TN
+vc
 TN
 TN
 TN
@@ -52807,7 +52843,7 @@ Tx
 Xu
 jA
 jA
-jA
+CY
 fv
 Ze
 TN
@@ -53211,7 +53247,7 @@ Tx
 pM
 RJ
 pz
-jA
+Wv
 fv
 Ze
 TN
@@ -53620,7 +53656,7 @@ mq
 Ze
 La
 yB
-FZ
+TN
 TN
 TN
 TN
@@ -53822,7 +53858,7 @@ XI
 Ze
 Ze
 SX
-xd
+TN
 TN
 TN
 TN
@@ -54019,12 +54055,12 @@ Tx
 ud
 nx
 Dw
-jA
+rV
 ix
 lZ
 IV
 SX
-xd
+TN
 TN
 TN
 TN
@@ -54225,10 +54261,10 @@ wz
 BG
 YY
 Ze
-SX
-xd
+cZ
 TN
 TN
+Vp
 TN
 TN
 TN
@@ -54428,7 +54464,7 @@ Ze
 Ze
 Ze
 yt
-eo
+TN
 TN
 TN
 TN
@@ -54619,7 +54655,7 @@ XI
 MQ
 XI
 Ze
-Ze
+Tx
 oh
 wb
 wb
@@ -54820,15 +54856,15 @@ Ze
 OQ
 lH
 gI
-dh
 Ze
+Tx
 oh
 wb
 tM
 Wx
 Hu
 uN
-GU
+gT
 In
 Ze
 jF
@@ -55019,11 +55055,11 @@ TN
 Ze
 JP
 XI
-jA
+FF
 Kd
 BA
-BA
-XI
+Ze
+Tx
 oh
 wb
 Zg
@@ -55225,13 +55261,13 @@ jA
 xM
 FP
 JI
-Ze
-xn
+mv
+Tx
 Ze
 Sg
 Hu
 GU
-GU
+bI
 aD
 vQ
 dc
@@ -55427,7 +55463,7 @@ lV
 ZB
 jA
 Ze
-Ze
+Tx
 Tx
 Ze
 Ze
@@ -55628,8 +55664,8 @@ Ze
 Ze
 Ze
 jA
-jA
 NV
+Tx
 Tx
 Tx
 Ze
@@ -55836,7 +55872,7 @@ Mp
 Ze
 Ze
 Ti
-GU
+Xa
 GU
 GU
 nl
@@ -57050,7 +57086,7 @@ Na
 uB
 EJ
 WV
-GU
+Ac
 ZM
 Ze
 TN
@@ -57263,7 +57299,7 @@ TN
 TN
 TN
 TN
-pb
+TN
 TN
 TN
 TN
@@ -57460,13 +57496,13 @@ Ze
 SX
 xd
 TN
+Dt
 TN
 TN
 TN
 TN
-La
-oM
-FZ
+TN
+TN
 TN
 TN
 TN
@@ -57665,11 +57701,11 @@ TN
 TN
 TN
 TN
-La
-Iv
-Uo
-ph
-FZ
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -57867,11 +57903,11 @@ TN
 TN
 TN
 TN
-Ch
-Ln
-AG
-LI
-xd
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -58067,14 +58103,14 @@ db
 eo
 TN
 TN
-La
-pW
-Iv
-pR
-LY
-Ln
-ph
-FZ
+TN
+TN
+TN
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -58269,14 +58305,14 @@ xd
 TN
 TN
 TN
-Ch
-vJ
-LY
-LY
-LY
-qn
-OB
-xd
+TN
+TN
+TN
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -58471,14 +58507,14 @@ EX
 TN
 TN
 TN
-Ch
-IO
-ty
-to
-Nl
-to
-VZ
-xd
+TN
+TN
+TN
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -58660,7 +58696,7 @@ tD
 xi
 KY
 gu
-Lg
+NX
 ME
 KY
 cx
@@ -58673,14 +58709,14 @@ TN
 TN
 TN
 TN
-qS
-Tv
-CC
-yt
-hZ
-yt
-hm
-xd
+TN
+TN
+TN
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -58876,13 +58912,13 @@ TN
 TN
 TN
 TN
-Ch
-op
-ss
-LY
-ss
-LY
-xd
+TN
+TN
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -59078,13 +59114,13 @@ TN
 TN
 TN
 TN
-qS
-wC
-gS
-IW
-xJ
-wC
-eo
+TN
+TN
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -59281,11 +59317,11 @@ TN
 TN
 TN
 TN
-wC
-pu
-LY
-LY
-wC
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -59483,11 +59519,11 @@ TN
 TN
 TN
 TN
-cU
-Pp
-LY
-Cp
-cU
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -59685,11 +59721,11 @@ TN
 TN
 TN
 TN
-sj
-dr
-Cs
-gN
-wC
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -59884,13 +59920,13 @@ TN
 TN
 TN
 TN
+au
 TN
 TN
 TN
 TN
-wC
-cU
-wC
+TN
+TN
 TN
 TN
 TN
@@ -61702,9 +61738,9 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
+AU
+cs
+cs
 TN
 TN
 TN
@@ -61904,7 +61940,7 @@ TN
 TN
 TN
 TN
-TN
+no
 TN
 TN
 TN
@@ -62106,7 +62142,7 @@ TN
 TN
 TN
 TN
-TN
+KZ
 TN
 TN
 TN
@@ -62307,9 +62343,9 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
+hi
+nQ
+Nk
 TN
 TN
 TN
@@ -62509,9 +62545,9 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
+eG
+TG
+Kp
 TN
 TN
 TN
@@ -62710,11 +62746,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+eq
+Aj
+TG
+ZD
+Nk
 TN
 TN
 TN
@@ -62912,11 +62948,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+PJ
+Ps
+jm
+Ps
+TK
 TN
 TN
 TN
@@ -63114,11 +63150,11 @@ TN
 TN
 TN
 TN
+Kp
 TN
+qm
 TN
-TN
-TN
-TN
+KZ
 TN
 TN
 TN
@@ -63316,6 +63352,11 @@ TN
 TN
 TN
 TN
+hm
+dX
+by
+dX
+Kp
 TN
 TN
 TN
@@ -63335,12 +63376,7 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
-TN
+GQ
 TN
 TN
 TN
@@ -63518,11 +63554,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+co
+co
+kF
+TG
+co
 TN
 TN
 TN
@@ -63720,11 +63756,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+co
+TG
+TG
+TG
+co
 TN
 TN
 TN
@@ -63922,11 +63958,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+Yn
+TG
+TG
+TG
+Yn
 TN
 TN
 TN
@@ -64124,11 +64160,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+co
+MU
+TG
+TG
+co
 TN
 TN
 TN
@@ -64327,9 +64363,9 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
+co
+Yn
+co
 TN
 TN
 TN
@@ -93401,7 +93437,7 @@ SX
 Il
 fU
 fU
-Il
+fP
 tT
 Fa
 hs
@@ -95214,7 +95250,7 @@ TN
 TN
 TN
 TN
-Rw
+dr
 GF
 Zr
 iw
@@ -95232,7 +95268,7 @@ VU
 mQ
 Tw
 Ow
-DP
+dr
 TN
 TN
 TN
@@ -96630,14 +96666,14 @@ TN
 TN
 kX
 GF
-Xa
+VU
 VU
 zH
 Lp
 tB
 RX
 sk
-QR
+XY
 sk
 Ae
 VU
@@ -96843,8 +96879,8 @@ rC
 gq
 eC
 VU
-mQ
-Lp
+CS
+Zl
 mQ
 VU
 Jx
@@ -97032,7 +97068,7 @@ TN
 TN
 TN
 TN
-Rw
+dr
 GF
 VU
 VU
@@ -97653,7 +97689,7 @@ VU
 VU
 VU
 VU
-HQ
+ET
 HQ
 Ji
 Rq
@@ -97838,13 +97874,13 @@ TN
 TN
 TN
 TN
-TN
-TN
-kX
-kp
+HS
+HS
+gb
+GF
 VU
 mQ
-TW
+xn
 mQ
 VU
 VU
@@ -98258,7 +98294,7 @@ VU
 PN
 Xo
 HD
-HD
+VU
 VU
 VU
 iS
@@ -98674,7 +98710,7 @@ TN
 TN
 TN
 TN
-JO
+TN
 TN
 TN
 TN
@@ -99262,7 +99298,7 @@ gx
 gx
 gx
 cR
-bI
+gx
 gx
 gx
 gx
@@ -99279,9 +99315,9 @@ TN
 TN
 TN
 TN
-tw
-tw
-tw
+TN
+TN
+TN
 TN
 TN
 TN
@@ -99480,11 +99516,11 @@ TN
 TN
 TN
 TN
-eU
-tw
-yO
-tw
-eU
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -99671,7 +99707,7 @@ uo
 ej
 qD
 hs
-qD
+Dv
 bT
 NE
 II
@@ -99682,11 +99718,11 @@ TN
 TN
 TN
 TN
-eU
-tw
-tw
-tw
-eU
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -99884,11 +99920,11 @@ TN
 TN
 TN
 TN
-eU
-Kr
-eU
-eU
-eU
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -100086,11 +100122,11 @@ TN
 TN
 TN
 TN
-eU
-eU
-eU
-eU
-eU
+TN
+TN
+TN
+TN
+TN
 TN
 TN
 TN
@@ -100289,9 +100325,9 @@ TN
 TN
 TN
 TN
-eU
-eU
-eU
+TN
+TN
+TN
 TN
 TN
 TN
@@ -102103,9 +102139,9 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
+cs
+cs
+cs
 TN
 TN
 TN
@@ -102305,7 +102341,7 @@ TN
 TN
 TN
 TN
-TN
+cs
 TN
 TN
 TN
@@ -102507,7 +102543,7 @@ TN
 TN
 TN
 TN
-TN
+cs
 TN
 TN
 TN
@@ -102709,7 +102745,7 @@ TN
 TN
 TN
 TN
-TN
+cs
 TN
 TN
 TN
@@ -102911,7 +102947,7 @@ TN
 TN
 TN
 TN
-TN
+cs
 TN
 TN
 TN
@@ -103113,7 +103149,7 @@ TN
 TN
 TN
 TN
-TN
+cs
 TN
 TN
 TN
@@ -103315,7 +103351,7 @@ TN
 TN
 TN
 TN
-TN
+cs
 TN
 TN
 TN
@@ -103517,7 +103553,7 @@ TN
 TN
 TN
 TN
-TN
+cs
 TN
 TN
 TN
@@ -103718,9 +103754,9 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
+bn
+bn
+bn
 TN
 TN
 TN
@@ -103919,11 +103955,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+bn
+bn
+bn
+bn
+bn
 TN
 TN
 TN
@@ -104121,11 +104157,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+bn
+bn
+bn
+bn
+bn
 TN
 TN
 TN
@@ -104323,11 +104359,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+bn
+bn
+bn
+bn
+bn
 TN
 TN
 TN
@@ -104525,11 +104561,11 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
-TN
-TN
+bn
+bn
+bn
+bn
+bn
 TN
 TN
 TN
@@ -104728,9 +104764,9 @@ TN
 TN
 TN
 TN
-TN
-TN
-TN
+bn
+bn
+bn
 TN
 TN
 TN
@@ -127095,106 +127131,106 @@ ms
 ms
 ms
 ms
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
 "}
 (2,1,4) = {"
 ms
@@ -127297,6 +127333,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -127395,8 +127432,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (3,1,4) = {"
 ms
@@ -127499,6 +127535,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -127597,8 +127634,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (4,1,4) = {"
 ms
@@ -127701,6 +127737,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -127799,8 +127836,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (5,1,4) = {"
 ms
@@ -127903,6 +127939,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -128001,8 +128038,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (6,1,4) = {"
 ms
@@ -128105,6 +128141,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -128203,8 +128240,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (7,1,4) = {"
 ms
@@ -128307,6 +128343,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -128405,8 +128442,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (8,1,4) = {"
 ms
@@ -128509,6 +128545,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -128607,8 +128644,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (9,1,4) = {"
 ms
@@ -128711,6 +128747,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -128809,8 +128846,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (10,1,4) = {"
 ms
@@ -128913,6 +128949,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -129011,8 +129048,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (11,1,4) = {"
 ms
@@ -129115,6 +129151,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -129213,8 +129250,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (12,1,4) = {"
 ms
@@ -129317,6 +129353,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -129415,8 +129452,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (13,1,4) = {"
 ms
@@ -129519,6 +129555,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -129617,8 +129654,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (14,1,4) = {"
 ms
@@ -129721,6 +129757,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -129819,8 +129856,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (15,1,4) = {"
 ms
@@ -129923,6 +129959,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -130021,8 +130058,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (16,1,4) = {"
 ms
@@ -130125,6 +130161,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -130223,8 +130260,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (17,1,4) = {"
 ms
@@ -130327,6 +130363,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -130425,8 +130462,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (18,1,4) = {"
 ms
@@ -130529,6 +130565,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -130627,8 +130664,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (19,1,4) = {"
 ms
@@ -130731,6 +130767,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -130829,8 +130866,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (20,1,4) = {"
 ms
@@ -130933,6 +130969,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -131031,8 +131068,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (21,1,4) = {"
 ms
@@ -131135,6 +131171,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -131233,8 +131270,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (22,1,4) = {"
 ms
@@ -131337,6 +131373,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -131435,8 +131472,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (23,1,4) = {"
 ms
@@ -131539,6 +131575,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -131637,8 +131674,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (24,1,4) = {"
 ms
@@ -131741,6 +131777,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -131839,8 +131876,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (25,1,4) = {"
 ms
@@ -131943,7 +131979,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -132042,7 +132078,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (26,1,4) = {"
 ms
@@ -132145,7 +132181,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -132244,7 +132280,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (27,1,4) = {"
 ms
@@ -132347,7 +132383,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -132446,7 +132482,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (28,1,4) = {"
 ms
@@ -132549,7 +132585,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -132648,7 +132684,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (29,1,4) = {"
 ms
@@ -132751,7 +132787,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -132850,7 +132886,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (30,1,4) = {"
 ms
@@ -132953,7 +132989,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -133052,7 +133088,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (31,1,4) = {"
 ms
@@ -133155,7 +133191,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -133254,7 +133290,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (32,1,4) = {"
 ms
@@ -133357,7 +133393,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -133456,7 +133492,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (33,1,4) = {"
 ms
@@ -133559,7 +133595,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -133658,7 +133694,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (34,1,4) = {"
 ms
@@ -133761,7 +133797,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -133860,7 +133896,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (35,1,4) = {"
 ms
@@ -133963,7 +133999,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -134062,7 +134098,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (36,1,4) = {"
 ms
@@ -134165,7 +134201,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -134264,7 +134300,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (37,1,4) = {"
 ms
@@ -134367,7 +134403,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -134466,7 +134502,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (38,1,4) = {"
 ms
@@ -134569,7 +134605,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -134668,7 +134704,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (39,1,4) = {"
 ms
@@ -134771,7 +134807,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -134870,7 +134906,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (40,1,4) = {"
 ms
@@ -134973,7 +135009,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -135072,7 +135108,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (41,1,4) = {"
 ms
@@ -135175,7 +135211,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -135274,7 +135310,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (42,1,4) = {"
 ms
@@ -135377,7 +135413,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -135476,7 +135512,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (43,1,4) = {"
 ms
@@ -135579,7 +135615,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -135678,7 +135714,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (44,1,4) = {"
 ms
@@ -135781,7 +135817,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -135880,7 +135916,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (45,1,4) = {"
 ms
@@ -135983,7 +136019,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -136082,7 +136118,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (46,1,4) = {"
 ms
@@ -136185,7 +136221,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -136230,7 +136266,7 @@ ZU
 VI
 VI
 VI
-TY
+tY
 VI
 VI
 VI
@@ -136284,7 +136320,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (47,1,4) = {"
 ms
@@ -136387,7 +136423,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -136486,7 +136522,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (48,1,4) = {"
 ms
@@ -136589,7 +136625,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -136688,7 +136724,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (49,1,4) = {"
 ms
@@ -136791,7 +136827,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -136890,7 +136926,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (50,1,4) = {"
 ms
@@ -136993,7 +137029,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -137092,7 +137128,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (51,1,4) = {"
 ms
@@ -137195,7 +137231,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -137294,7 +137330,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (52,1,4) = {"
 ms
@@ -137397,7 +137433,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -137496,7 +137532,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (53,1,4) = {"
 ms
@@ -137599,7 +137635,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -137698,7 +137734,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (54,1,4) = {"
 ms
@@ -137801,7 +137837,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -137900,7 +137936,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (55,1,4) = {"
 ms
@@ -138003,7 +138039,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -138102,7 +138138,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (56,1,4) = {"
 ms
@@ -138205,7 +138241,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -138304,7 +138340,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (57,1,4) = {"
 ms
@@ -138407,7 +138443,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -138506,7 +138542,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (58,1,4) = {"
 ms
@@ -138609,7 +138645,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -138708,7 +138744,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (59,1,4) = {"
 ms
@@ -138811,7 +138847,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -138856,7 +138892,7 @@ Wi
 rR
 Gm
 pa
-VU
+WG
 pa
 WO
 rR
@@ -138910,7 +138946,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (60,1,4) = {"
 ms
@@ -139013,7 +139049,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -139112,7 +139148,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (61,1,4) = {"
 ms
@@ -139215,7 +139251,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -139314,7 +139350,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (62,1,4) = {"
 ms
@@ -139417,7 +139453,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -139516,7 +139552,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (63,1,4) = {"
 ms
@@ -139619,7 +139655,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -139718,7 +139754,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (64,1,4) = {"
 ms
@@ -139821,7 +139857,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -139920,7 +139956,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (65,1,4) = {"
 ms
@@ -140023,7 +140059,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -140122,7 +140158,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (66,1,4) = {"
 ms
@@ -140225,7 +140261,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -140324,7 +140360,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (67,1,4) = {"
 ms
@@ -140427,7 +140463,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -140526,7 +140562,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (68,1,4) = {"
 ms
@@ -140629,7 +140665,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -140728,7 +140764,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (69,1,4) = {"
 ms
@@ -140831,7 +140867,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -140930,7 +140966,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (70,1,4) = {"
 ms
@@ -141033,7 +141069,7 @@ TN
 TN
 TN
 ms
-TN
+ms
 TN
 TN
 TN
@@ -141132,7 +141168,7 @@ TN
 TN
 TN
 TN
-TN
+ms
 "}
 (71,1,4) = {"
 ms
@@ -141235,6 +141271,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -141333,8 +141370,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (72,1,4) = {"
 ms
@@ -141437,6 +141473,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -141535,8 +141572,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (73,1,4) = {"
 ms
@@ -141639,6 +141675,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -141737,8 +141774,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (74,1,4) = {"
 ms
@@ -141841,6 +141877,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -141939,8 +141976,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (75,1,4) = {"
 ms
@@ -142043,6 +142079,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -142141,8 +142178,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (76,1,4) = {"
 ms
@@ -142245,6 +142281,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -142343,8 +142380,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (77,1,4) = {"
 ms
@@ -142447,6 +142483,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -142545,8 +142582,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (78,1,4) = {"
 ms
@@ -142649,6 +142685,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -142747,8 +142784,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (79,1,4) = {"
 ms
@@ -142851,6 +142887,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -142949,8 +142986,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (80,1,4) = {"
 ms
@@ -143053,6 +143089,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -143151,8 +143188,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (81,1,4) = {"
 ms
@@ -143255,6 +143291,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -143353,8 +143390,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (82,1,4) = {"
 ms
@@ -143457,6 +143493,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -143555,8 +143592,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (83,1,4) = {"
 ms
@@ -143659,6 +143695,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -143757,8 +143794,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (84,1,4) = {"
 ms
@@ -143861,6 +143897,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -143959,8 +143996,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (85,1,4) = {"
 ms
@@ -144063,6 +144099,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -144161,8 +144198,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (86,1,4) = {"
 ms
@@ -144265,6 +144301,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -144363,8 +144400,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (87,1,4) = {"
 ms
@@ -144467,6 +144503,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -144565,8 +144602,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (88,1,4) = {"
 ms
@@ -144669,6 +144705,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -144767,8 +144804,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (89,1,4) = {"
 ms
@@ -144871,6 +144907,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -144969,8 +145006,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (90,1,4) = {"
 ms
@@ -145073,6 +145109,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -145171,8 +145208,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (91,1,4) = {"
 ms
@@ -145275,6 +145311,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -145373,8 +145410,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (92,1,4) = {"
 ms
@@ -145477,6 +145513,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -145575,8 +145612,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (93,1,4) = {"
 ms
@@ -145679,6 +145715,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -145777,8 +145814,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (94,1,4) = {"
 ms
@@ -145881,6 +145917,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -145979,8 +146016,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (95,1,4) = {"
 ms
@@ -146083,6 +146119,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -146181,8 +146218,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (96,1,4) = {"
 ms
@@ -146285,6 +146321,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -146383,8 +146420,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (97,1,4) = {"
 ms
@@ -146487,6 +146523,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -146585,8 +146622,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (98,1,4) = {"
 ms
@@ -146689,6 +146725,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -146787,8 +146824,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (99,1,4) = {"
 ms
@@ -146891,6 +146927,7 @@ TN
 TN
 TN
 ms
+ms
 TN
 TN
 TN
@@ -146989,8 +147026,7 @@ TN
 TN
 TN
 TN
-TN
-TN
+ms
 "}
 (100,1,4) = {"
 ms
@@ -147093,106 +147129,106 @@ ms
 ms
 ms
 ms
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
-TN
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
+ms
 "}
 (101,1,4) = {"
 ms

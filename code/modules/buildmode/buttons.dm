@@ -47,14 +47,27 @@
 	var/datum/buildmode_mode/modetype
 
 /atom/movable/screen/buildmode/modeswitch/Initialize(mapload, datum/hud/hud_owner, datum/buildmode/build_datum, mode_type)
+	. = ..()
 	modetype = mode_type
-	icon_state = "buildmode_[initial(modetype.key)]"
-	name = initial(modetype.key)
+	update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+
+/atom/movable/screen/buildmode/modeswitch/update_icon_state()
+	if(modetype)
+		var/datum/buildmode_mode/M = modetype
+		icon_state = "buildmode_[initial(M.key)]"
+	return ..()
+
+/atom/movable/screen/buildmode/modeswitch/update_name()
+	if(modetype)
+		var/datum/buildmode_mode/M = modetype
+		var/mode_name = initial(M.key)
+		if(!mode_name)
+			mode_name = "Unknown"
+		name = mode_name
 	return ..()
 
 /atom/movable/screen/buildmode/modeswitch/Click()
 	bd.change_mode(modetype)
-	return 1
 
 /atom/movable/screen/buildmode/quit
 	icon_state = "buildquit"

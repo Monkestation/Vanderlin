@@ -471,7 +471,7 @@
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/upper)
 "dX" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /obj/item/clothing/armor/plate{
 	desc = "Plate designed for a rather tall human";
 	name = "Large Halfplate"
@@ -1458,7 +1458,7 @@
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower)
 "ls" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/carpet/purple,
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "lw" = (
@@ -1547,7 +1547,7 @@
 /turf/open/floor/carpet/red,
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "mm" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/twig,
 /area/rogue/under/mountains/anvil/lower)
 "mn" = (
@@ -4642,7 +4642,7 @@
 /area/rogue/under/mountains/anvil/dungeon)
 "Lz" = (
 /obj/effect/decal/cleanable/food/flour,
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /obj/item/weapon/polearm/woodstaff{
 	desc = "A staff with plants growing out of the end.";
 	name = "Elven Staff"
@@ -4822,7 +4822,7 @@
 /turf/open/floor/herringbone,
 /area/rogue/under/mountains/anvil/dungeon)
 "MF" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/indoors/mountains/anvil/surface/building)
 "MG" = (
@@ -4967,7 +4967,7 @@
 /turf/open/floor/grass/red,
 /area/rogue/under/mountains/anvil/dungeon/lower)
 "NP" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/snow/rough,
 /area/rogue/indoors/mountains/anvil/surface/building)
 "NQ" = (
@@ -6421,7 +6421,7 @@
 /turf/closed/wall/mineral/decostone,
 /area/rogue/under/mountains/anvil/dungeon)
 "Za" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /obj/item/clothing/head/roguehood/colored/green{
 	desc = "A rather short green scarf";
 	name = "Green Scarf"

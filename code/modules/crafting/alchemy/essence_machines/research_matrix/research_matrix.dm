@@ -124,10 +124,8 @@
 		if(is_abstract(temp_node.type))
 			continue
 		if(selected_research.type in temp_node.prerequisites)
-			var/can_unlock = TRUE
 			for(var/prereq in temp_node.prerequisites)
 				if(!GLOB.thaumic_research.has_research(prereq))
-					can_unlock = FALSE
 					break
 		qdel(temp_node)
 

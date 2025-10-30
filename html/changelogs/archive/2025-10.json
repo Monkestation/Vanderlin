@@ -855,5 +855,82 @@
                 "rscadd": "puffer shot can be heard on the entire map"
             }
         ]
+    },
+    "2025-10-25": {
+        "DrSirKnight": [
+            {
+                "rscadd": "younglings can be nobles now"
+            },
+            {
+                "balance": "female noble mostly the same as male noble now"
+            }
+        ],
+        "Arkatos": [
+            {
+                "rscadd": "Default king's tax rate changed from 11% to 10%."
+            },
+            {
+                "rscadd": "Untaxed leftovers from depositing to MEISTER are now saved and are taxed in the future deposits when the untaxed amount is actually enough to be taxable. You can't escape paying taxes now, peasants."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "No flaw works properly for both latejoin and roundstart."
+            }
+        ],
+        "Wouju": [
+            {
+                "map": "removed a brazier in the apothecary garden that caused gnomes to get stuck on"
+            },
+            {
+                "balance": "Most surgery steps can now be performed by those with average in medicine, the difficulty is still the same"
+            }
+        ]
+    },
+    "2025-10-27": {
+        "wgtjunior743": [
+            {
+                "bugfix": "Wanted poster works for roundstart bandit and others"
+            },
+            {
+                "bugfix": "Merchant drinks in the goldface not appearing"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added new zizo miracle: snuff lights"
+            }
+        ]
+    },
+    "2025-10-29": {
+        "wgtjunior743": [
+            {
+                "admin": "Bulk Stat change options for admins."
+            }
+        ],
+        "Viviridia": [
+            {
+                "rscadd": "Added new Fruits"
+            },
+            {
+                "rscadd": "Added tarts made from the new fruits"
+            },
+            {
+                "rscadd": "Added new fruits for coastal trader seeds"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "kilts, sashes, and turbans."
+            },
+            {
+                "balance": "kerns now have cloth kilts instead of iron kilts."
+            }
+        ],
+        "Arkatos": [
+            {
+                "bugfix": "Aspirant should now get his rightful supporters."
+            }
+        ]
     }
 }

@@ -32,12 +32,19 @@ GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
 	/datum/job/monk::title,
 	/datum/job/undertaker::title,
-	/datum/job/inquisitor::title,
-	// "Confessor",
 	/datum/job/templar::title,
-	/datum/job/adept::title,
 	))
 GLOBAL_PROTECT(church_positions)
+
+GLOBAL_LIST_INIT(inquisition_positions, list(
+	/datum/job/inquisitor::title,
+	/datum/job/orthodoxist::title,
+	/datum/job/absolver::title,
+	/datum/job/adept::title,
+	))
+GLOBAL_PROTECT(inquisition_positions)
+
+
 
 GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/innkeep::title,
@@ -124,6 +131,7 @@ GLOBAL_LIST_EMPTY(job_assignment_order)
 	sorting_order += GLOB.noble_positions
 	sorting_order += GLOB.garrison_positions
 	sorting_order += GLOB.church_positions
+	sorting_order += GLOB.inquisition_positions
 	sorting_order += GLOB.serf_positions
 	sorting_order += GLOB.company_positions
 	sorting_order += GLOB.peasant_positions

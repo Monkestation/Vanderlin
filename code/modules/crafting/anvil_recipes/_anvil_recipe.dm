@@ -16,7 +16,6 @@
 	var/progress = 0 // 0 to 100%, percentage of completion on this step of crafting (or overall if no extra items required)
 	var/i_type // Category of crafted item. Will determine how it shows on the crafting menu window.
 	var/recipe_name // This is what will be shown when you
-	var/bar_health = 100 // Current material bar health, reduced by failures. At 0 HP it is deleted.
 	var/numberofhits = 0 // Increased every time you hit the bar, the more you have to hit the bar the less quality of the product.
 	var/numberofbreakthroughs = 0 // How many good hits we got on the metal, advances recipes 50% faster, reduces number of hits total, and restores bar_health
 	var/datum/parent // The ingot we're currently working on.
@@ -33,39 +32,58 @@
 	created_item = null
 	return ..()
 
-/datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE)
+/datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE, quality_score = 0)
 	var/moveup = 1
 	var/proab = 0 // Probability to not spoil the bar
-	var/skill_level	= user.get_skill_level(appro_skill)
+	var/skill_level = user.get_skill_level(appro_skill)
+
 	if(progress == 100)
 		to_chat(user, "<span class='info'>It's ready.</span>")
 		user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
 		return FALSE
+
 	if(needed_item)
 		to_chat(user, "<span class='info'>Now it's time to add a [needed_item_text].</span>")
 		user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
 		return FALSE
-	// Calculate probability of fucking up, based on smith's skill level
+
 	if(!skill_level)
-		proab = 25
+		proab = 40
 	else if(skill_level < 4)
-		proab = 33 * skill_level
-	else // No good smith start with skill levels lower than 3
+		proab = 40 + (skill_level * 15) // More gradual increase
+	else
 		proab = 100
-	proab -= craftdiff // Crafting difficulty substracts from your chance to advance
+
+	proab -= craftdiff // Crafting difficulty subtracts from your chance
+	var/quality_bonus = 0
+	if(quality_score > 0)
+		if(quality_score >= 80)
+			quality_bonus = 40 // Excellent performance almost guarantees success
+		else if(quality_score >= 60)
+			quality_bonus = 25
+		else if(quality_score >= 40)
+			quality_bonus = 15
+		else if(quality_score >= 20)
+			quality_bonus = 5
+		if(skill_level < craftdiff)
+			quality_bonus = FLOOR(quality_bonus * 0.50, 1)
+		proab = min(proab + quality_bonus, 100)
+
 	if(has_world_trait(/datum/world_trait/delver))
 		proab = 100
-	// Roll the dice to see if the hit actually causes to accumulate progress
-	if(prob(proab))
-		moveup += round((skill_level * 6) * (breakthrough == 1 ? 1.5 : 1))
+
+	// Roll the dice to see if the hit actually causes progress
+	if(prob(proab) && quality_score > 0)
+		moveup += round((min(50, skill_level * 12)) * (breakthrough ? 1.5 : 1))
+		moveup += quality_bonus
 		moveup -= craftdiff
-		progress = min(progress + moveup, 100)
+		progress = min(progress + max(0, moveup), 100)
 		numberofhits++
 	else
 		moveup = 0
-		numberofhits++ // Increase regardless of success
+		numberofhits++
 
-	// This step is finished, check if more items are needed and restart the process
+	// This step is finished, check if more items are needed
 	if(progress == 100 && additional_items.len)
 		needed_item = pick(additional_items)
 		var/obj/item/I = new needed_item()
@@ -75,31 +93,13 @@
 		progress = 0
 
 	if(!moveup)
-		if(!prob(proab)) // Roll again, this time negatively, for consequences.
+		if(!prob(proab)) // Roll again for consequences
 			user.visible_message("<span class='warning'>[user] strikes poorly!</span>")
 			skill_quality -= 0.5
-			bar_health -= craftdiff / 1.2
-			if(parent)
-				var/obj/item/P = parent
-				switch(skill_level)
-					if(0)
-						bar_health -= 20 // 5 bad hits and ruined.
-					if(1 to 3)
-						bar_health -= floor(20 / skill_level)
-					if(4)
-						bar_health -= 5
-					if(5 to 6)
-						var/mob/living/L = user
-						if(L.stat_roll(STATKEY_LCK,4,10,TRUE)) // Unlucky, not unskilled.
-							bar_health -= craftdiff / 1.2
-				if(bar_health <= 0)
-					user.visible_message("<span class='danger'>[user] destroys the bar!</span>")
-					qdel(P)
 			return FALSE
 		else
 			user.visible_message("<span class='warning'>[user] almost fumbles but recovers!</span>")
 			return FALSE
-
 	else
 		if(user.mind && isliving(user))
 			var/mob/living/L = user
@@ -120,8 +120,6 @@
 
 		if(breakthrough)
 			user.visible_message("<span class='deadsay'>[user] deftly strikes the bar!</span>")
-			if(bar_health < 100)
-				bar_health += 20 // Correcting the mistakes, ironing the kinks. Low chance, so rewarding.
 		else
 			user.visible_message("<span class='info'>[user] strikes the bar!</span>")
 		return TRUE
@@ -132,18 +130,20 @@
 	needed_item_text = null
 
 
-/datum/anvil_recipe/proc/handle_creation(obj/item/I)
+/datum/anvil_recipe/proc/handle_creation(obj/item/I, minigame_success = 30,skill_level = 0)
 	var/datum/quality_calculator/blacksmithing/quality_calc = new(
 		base_qual = 0,
 		mat_qual = material_quality,
-		skill_qual = skill_quality,
+		skill_qual = skill_level, // Pass the success score here
 		perf_qual = numberofhits,
 		diff_mod = craftdiff,
 		components = num_of_materials
 	)
-	if(numberofbreakthroughs)
-		quality_calc.performance_quality -= numberofbreakthroughs
-	quality_calc.apply_quality_to_item(I, TRUE) // TRUE enables masterwork tracking
+	quality_calc.minigame_success = minigame_success
+
+	quality_calc.apply_quality_to_item(I, TRUE)
+	I.add_quench_requirement()
+	addtimer(CALLBACK(I, TYPE_PROC_REF(/obj/item, remove_quench)), 60 SECONDS)
 	qdel(quality_calc)
 
 /datum/anvil_recipe/proc/show_menu(mob/user)
@@ -196,9 +196,9 @@
 		</style>
 		<body>
 		  <div>
-		    <h1>[name]</h1>
-		    <div>
-		      <h1>Steps</h1>
+			<h1>[name]</h1>
+			<div>
+			  <h1>Steps</h1>
 		"}
 	html += "[icon2html(new req_bar, user)] Start with [initial(req_bar.name)] on an anvil.<br>"
 	html += "Hammer the material.<br>"

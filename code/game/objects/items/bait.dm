@@ -72,6 +72,12 @@
 				for(var/obj/structure/flora/grass/bush_meagre/RT in objects)
 					if(can_see(src, RT, 7))
 						possible_targets += RT
+				for(var/obj/structure/flora/grass/herb/RT in objects)
+					if(can_see(src, RT, 7))
+						possible_targets += RT
+				for(var/obj/structure/wild_plant/RT in objects)
+					if(can_see(src, RT, 7))
+						possible_targets += RT
 				for(var/obj/structure/chair/bench/ancientlog/RT in objects)
 					if(can_see(src, RT, 7))
 						possible_targets += RT

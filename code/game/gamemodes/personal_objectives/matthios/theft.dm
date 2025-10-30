@@ -4,7 +4,7 @@
 	triumph_count = 2
 	rewards = list("2 Triumphs", "Matthios grows stronger", "Pickpocketing knowledge")
 	var/stolen_count = 0
-	var/required_count = 3
+	var/required_count = 2
 
 /datum/objective/personal/steal_items/on_creation()
 	. = ..()

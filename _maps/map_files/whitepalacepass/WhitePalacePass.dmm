@@ -4862,7 +4862,7 @@
 "eHv" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/bed/mediocre,
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 8
 	},
 /obj/item/bedsheet/cloth,
@@ -6374,7 +6374,7 @@
 /area/rogue/outdoors/town/roofs)
 "ghV" = (
 /obj/structure/bed/mediocre,
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 8
 	},
 /obj/item/bedsheet/cloth,
@@ -6759,69 +6759,69 @@
 /area/rogue/indoors/town/church)
 "gzP" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/fishing/bait/meat{
+/obj/item/fishing/lure/meat{
 	pixel_x = 3
 	},
-/obj/item/fishing/bait/meat{
+/obj/item/fishing/lure/meat{
 	pixel_x = 11;
 	pixel_y = 6
 	},
-/obj/item/fishing/bait/meat{
+/obj/item/fishing/lure/meat{
 	pixel_x = 11;
 	pixel_y = -2
 	},
-/obj/item/fishing/bait/meat{
+/obj/item/fishing/lure/meat{
 	pixel_x = 5;
 	pixel_y = 9
 	},
-/obj/item/fishing/bait/gray{
+/obj/item/fishing/lure/gray{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/fishing/bait/gray{
+/obj/item/fishing/lure/gray{
 	pixel_x = -10;
 	pixel_y = 7
 	},
-/obj/item/fishing/bait/gray{
+/obj/item/fishing/lure/gray{
 	pixel_x = -5;
 	pixel_y = 12
 	},
-/obj/item/fishing/bait/gray{
+/obj/item/fishing/lure/gray{
 	pixel_x = -8
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = 13;
 	pixel_y = -8
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = 13;
 	pixel_y = -11
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = 9;
 	pixel_y = -3
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = -8;
 	pixel_y = -8
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = -16;
 	pixel_y = -1
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = 4;
 	pixel_y = -13
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = -6;
 	pixel_y = -11
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = 1;
 	pixel_y = -5
 	},
-/obj/item/fishing/bait/dough{
+/obj/item/fishing/lure/dough{
 	pixel_x = -3;
 	pixel_y = -1
 	},
@@ -8108,7 +8108,7 @@
 /area/rogue/indoors/town/garrison)
 "hzT" = (
 /obj/structure/bed/mediocre,
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 8
 	},
 /obj/item/bedsheet/cloth,
@@ -8833,7 +8833,7 @@
 "ikM" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/cloth,
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 4
 	},
 /turf/open/floor/cobble,
@@ -11272,7 +11272,6 @@
 /area/rogue/under/cave)
 "kGU" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/gem/black,
 /turf/open/floor/tile/masonic/spiral,
 /area/rogue/indoors/town/vault)
 "kHs" = (
@@ -11469,7 +11468,7 @@
 "kOD" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/cloth,
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 8
 	},
 /turf/open/floor/cobble,

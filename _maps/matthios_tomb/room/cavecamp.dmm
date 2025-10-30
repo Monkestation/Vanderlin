@@ -32,7 +32,7 @@
 /turf/open/floor/naturalstone,
 /area/rogue/under/tomb/cave)
 "j" = (
-/obj/item/chair/stool/bar/crafted,
+/obj/item/chair/stool/crafted,
 /turf/open/floor/dirt,
 /area/rogue/under/tomb/cave)
 "l" = (

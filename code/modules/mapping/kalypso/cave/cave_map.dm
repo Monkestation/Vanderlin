@@ -15,7 +15,7 @@
 	cave_map = generate_lava_features(cave_map, biome_map, elevation_map, chamber_locations)
 	cave_map = cleanup_caves(cave_map)
 
-	var/list/ore_map = generate_ore_veins(biome_map, elevation_map, cave_map)
+	var/list/ore_map = generate_ore_veins_old(biome_map, elevation_map, cave_map)
 
 	return list("caves" = cave_map, "ores" = ore_map)
 

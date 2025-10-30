@@ -428,4 +428,21 @@
 					'sound/foley/egg_hatching/egghatching2.ogg',
 					'sound/foley/egg_hatching/egghatching3.ogg',
 				)
+			if(SFX_DEFAULT_FISH_SLAP)
+				soundin = pick(
+					'sound/mobs/non-humanoids/fish/fish_slap1.ogg',
+				)
+
+			if(SFX_ALT_FISH_SLAP)
+				soundin = pick(
+					'sound/mobs/non-humanoids/fish/fish_slap2.ogg',
+				)
+			if(SFX_REEL)
+				soundin = pick(
+					'sound/items/reel/reel1.ogg',
+					'sound/items/reel/reel2.ogg',
+					'sound/items/reel/reel3.ogg',
+					'sound/items/reel/reel4.ogg',
+					'sound/items/reel/reel5.ogg',
+				)
 	return soundin

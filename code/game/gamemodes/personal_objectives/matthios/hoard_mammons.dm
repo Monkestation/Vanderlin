@@ -3,13 +3,14 @@
 	category = "Matthios' Chosen"
 	triumph_count = 2
 	rewards = list("2 Triumphs", "Matthios grows stronger", "Ability to see item's value on examine")
-	var/target_mammons = 400
+	var/target_mammons = 300
 	var/current_amount = 0
 	var/check_cooldown = 20 SECONDS
 	var/next_check = 0
 
 /datum/objective/personal/hoard_mammons/on_creation()
 	. = ..()
+	target_mammons = pick(250, 300, 350)
 	START_PROCESSING(SSprocessing, src)
 	update_explanation_text()
 

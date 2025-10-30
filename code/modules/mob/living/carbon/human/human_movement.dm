@@ -19,15 +19,6 @@
 				return 0
 	return ..()
 
-/mob/living/carbon/human/mob_has_gravity()
-	. = ..()
-	if(!.)
-		if(mob_negates_gravity())
-			. = 1
-
-/mob/living/carbon/human/mob_negates_gravity()
-	return ((shoes && shoes.negates_gravity()) || (dna?.species?.negates_gravity(src)))
-
 /mob/living/carbon/human/Move(NewLoc, direct)
 /*	if(fixedeye || tempfixeye)
 		switch(dir)
@@ -46,9 +37,6 @@
 
 	. = ..()
 	if(loc == NewLoc)
-		if(!has_gravity(loc))
-			return
-
 		if(wear_armor)
 			if(body_position != LYING_DOWN)
 				var/obj/item/clothing/C = wear_armor
@@ -100,8 +88,3 @@
 					if(effective > STASTR)
 						if(prob(effective))
 							dropItemToGround(I, silent = FALSE)
-
-/mob/living/carbon/human/Process_Spacemove(movement_dir = 0) //Temporary laziness thing. Will change to handles by species reee.
-	if(dna?.species?.space_move(src))
-		return TRUE
-	return ..()

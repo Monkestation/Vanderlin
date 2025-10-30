@@ -246,7 +246,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 // Updates overlays and vis_contents for outdoor effects
 /datum/controller/subsystem/outdoor_effects/proc/update_outdoor_effect_overlays(atom/movable/outdoor_effect/OE)
 	var/mutable_appearance/MA
-	if (OE.state != SKY_BLOCKED)
+	if ((OE.state != SKY_BLOCKED) || istype(OE.source_turf, /turf/closed/sea_fog))
 		MA = get_sunlight_overlay(1, 1, 1, 1) /* fully lit */
 	else //Indoor - do proper corner checks
 		/* check if we are globally affected or not */

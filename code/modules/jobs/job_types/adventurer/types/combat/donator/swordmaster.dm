@@ -28,7 +28,7 @@
 		var/prev_name = H.name
 		var/honorary = "Ritter"
 		if(H.gender == FEMALE)
-			honorary = "Ritterin"
+			honorary = "Ritter"
 		H.real_name = "[honorary] [prev_real_name]"
 		H.name = "[honorary] [prev_name]"
 

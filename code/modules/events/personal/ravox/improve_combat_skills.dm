@@ -8,7 +8,7 @@
 	min_players = 15
 
 	tags = list(
-		TAG_BATTLE,
+		TAG_RAVOX,
 	)
 
 /datum/round_event_control/ravox_combat/canSpawnEvent(players_amt, gamemode, fake_check)

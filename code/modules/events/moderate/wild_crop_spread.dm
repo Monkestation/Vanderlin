@@ -5,7 +5,7 @@
 	weight = 7
 	max_occurrences = 10
 	min_players = 0
-	earliest_start = 12 MINUTES
+	earliest_start = 10 MINUTES
 
 	tags = list(
 		TAG_NATURE,

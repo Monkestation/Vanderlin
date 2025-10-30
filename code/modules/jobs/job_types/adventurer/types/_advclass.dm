@@ -13,9 +13,10 @@
 	/// What categories we are going to sort it in, handles selection
 	var/list/category_tags = null
 
+
+
 /datum/job/advclass/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
 	// Remove the stun first, then grant us the torch.
 	for(var/datum/status_effect/incapacitating/stun/S in spawned.status_effects)
 		spawned.remove_status_effect(S)

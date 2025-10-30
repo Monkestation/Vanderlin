@@ -108,7 +108,7 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/ravox
 			head = /obj/item/clothing/head/helmet/heavy/necked/ravox
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 			H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		if(/datum/patron/divine/malum)
 			wrists = /obj/item/clothing/neck/psycross/silver/malum
@@ -126,7 +126,7 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/xylix
 			head = /obj/item/clothing/head/helmet/heavy/necked/xylix
 			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 			H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)

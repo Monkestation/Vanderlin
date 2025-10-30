@@ -141,7 +141,7 @@
 /datum/browser/proc/setup_onclose()
 	set waitfor = 0 //winexists sleeps, so we don't need to.
 	for (var/i in 1 to 10)
-		if (user && winexists(user, window_id))
+		if (user && winexists(user?.client, window_id))
 			onclose(user, window_id, owner)
 			break
 

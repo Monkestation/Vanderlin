@@ -4,7 +4,7 @@
 	triumph_count = 2
 	rewards = list("2 Triumphs", "Pestra grows stronger", "Pestra blesses you (+1 Constitution)")
 	var/meals_eaten = 0
-	var/meals_required = 2
+	var/meals_required = 1
 
 /datum/objective/personal/rotten_feast/on_creation()
 	. = ..()
@@ -39,4 +39,4 @@
 	owner.current.set_stat_modifier("pestra_blessing", STATKEY_CON, 1)
 
 /datum/objective/personal/rotten_feast/update_explanation_text()
-	explanation_text = "Let nothing go to waste! Consume [meals_required] pieces of rotten food to gain Pestra's favor!"
+	explanation_text = "Let nothing go to waste! Consume [meals_required] piece of rotten food to gain Pestra's favor!"

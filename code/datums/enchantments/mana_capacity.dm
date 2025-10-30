@@ -10,7 +10,14 @@
 
 	var/list/affecting_mobs = list()
 
-/datum/enchantment/mana_capacity/on_equip(obj/item/source, mob/living/carbon/equipper, slot)
+/datum/enchantment/mana_capacity/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_EQUIPPED
+	RegisterSignal(item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
+	registered_signals += COMSIG_ITEM_DROPPED
+	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+
+/datum/enchantment/mana_capacity/proc/on_equip(obj/item/source, mob/living/carbon/equipper, slot)
 	if(!(source in affecting_mobs))
 		affecting_mobs |= source
 		affecting_mobs[source] = list()
@@ -21,7 +28,7 @@
 	equipper.mana_pool?.set_max_mana(equipper.mana_pool.maximum_mana_capacity + hardcap_increase, change_softcap = FALSE)
 
 
-/datum/enchantment/mana_capacity/on_drop(datum/source, mob/living/carbon/user)
+/datum/enchantment/mana_capacity/proc/on_drop(datum/source, mob/living/carbon/user)
 	if(!(source in affecting_mobs))
 		affecting_mobs |= source
 		affecting_mobs[source] = list()

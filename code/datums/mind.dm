@@ -427,36 +427,57 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
 		to_chat(current, span_danger("Despite my creators current allegiances, my true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless my creator's body is destroyed."))
 
-/// output all memories of a mind
-/datum/mind/proc/show_memory(mob/recipient, window=1)
+/// Output all memories of a mind
+/datum/mind/proc/show_memory(mob/recipient, window = 1)
 	if(!recipient)
 		recipient = current
-	var/output = "<B>[current.real_name]'s Memories:</B><br>"
+	var/name_display = "My"
+	if(current?.real_name)
+		name_display = "[current.real_name]'s"
+	var/output = "<B>[name_display] Memories:</B><br>"
 	output += memory
 
-	if(personal_objectives.len)
-		output += "<B>Personal Objectives:</B>"
+	var/has_personal_objectives = FALSE
+	var/personal_output = ""
+	if(length(personal_objectives))
 		var/personal_count = 1
 		for(var/datum/objective/personal/objective in personal_objectives)
-			output += "<br><B>Personal Goal #[personal_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
+			if(objective.hidden)
+				continue
+			if(!has_personal_objectives)
+				has_personal_objectives = TRUE
+				personal_output += "<B>Personal Objectives:</B>"
+			personal_output += "<br><B>Personal Goal #[personal_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
 			personal_count++
-		output += "<br>"
+		if(has_personal_objectives)
+			personal_output += "<br>"
+
+	output += personal_output
 
 	var/list/all_objectives = list()
+	var/has_antag_objectives = FALSE
+	var/antag_output = ""
+
 	for(var/datum/antagonist/antag_datum_ref in antag_datums)
 		output += antag_datum_ref.antag_memory
 		all_objectives |= antag_datum_ref.objectives
 
-	if(all_objectives.len)
-		output += "<B>Objectives:</B>"
+	if(length(all_objectives))
 		var/antag_obj_count = 1
 		for(var/datum/objective/objective in all_objectives)
-			output += "<br><B>[objective.flavor] #[antag_obj_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
+			if(objective.hidden)
+				continue
+			if(!has_antag_objectives)
+				has_antag_objectives = TRUE
+				antag_output += "<B>Objectives:</B>"
+			antag_output += "<br><B>[objective.flavor] #[antag_obj_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
 			antag_obj_count++
+
+	output += antag_output
 
 	if(window)
 		recipient << browse(output,"window=memory")
-	else if(all_objectives.len || memory || personal_objectives.len)
+	else if(length(all_objectives) || length(personal_objectives) || memory)
 		to_chat(recipient, "<i>[output]</i>")
 
 /// output current targets to the player
@@ -621,27 +642,41 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /// Announces only antagonist objectives
 /datum/mind/proc/announce_antagonist_objectives()
-	var/obj_count = 1
 	for(var/datum/antagonist/antag_datum_ref in antag_datums)
 		if(length(antag_datum_ref.objectives))
-			to_chat(current, span_notice("Your [antag_datum_ref.name] objectives:"))
+			var/obj_count = 1
+			var/has_visible_objectives = FALSE
+			var/objective_output = ""
+
 			for(var/datum/objective/O in antag_datum_ref.objectives)
-				O.update_explanation_text()
-				to_chat(current, "<B>[O.flavor] #[obj_count]</B>: [O.explanation_text]")
-				obj_count++
+				if(!O.hidden)
+					if(!has_visible_objectives)
+						has_visible_objectives = TRUE
+					O.update_explanation_text()
+					objective_output += "<B>[O.flavor] #[obj_count]</B>: [O.explanation_text]<br>"
+					obj_count++
+
+			if(has_visible_objectives)
+				to_chat(current, span_notice("Your [antag_datum_ref.name] objectives:"))
+				to_chat(current, objective_output)
 
 /// Announces only personal objectives
 /datum/mind/proc/announce_personal_objectives()
 	if(length(personal_objectives))
 		var/personal_count = 1
-		var/last_index = length(personal_objectives)
+		var/has_visible_objectives = FALSE
+		var/objective_output = ""
+
 		for(var/datum/objective/personal/O in personal_objectives)
-			O.update_explanation_text()
-			if(personal_count == last_index)
-				to_chat(current, "<B>Personal Goal #[personal_count]</B>: [O.explanation_text]<br>")
-			else
-				to_chat(current, "<B>Personal Goal #[personal_count]</B>: [O.explanation_text]")
-			personal_count++
+			if(!O.hidden)
+				if(!has_visible_objectives)
+					has_visible_objectives = TRUE
+				O.update_explanation_text()
+				objective_output += "<B>Personal Goal #[personal_count]</B>: [O.explanation_text]<br>"
+				personal_count++
+
+		if(has_visible_objectives)
+			to_chat(current, objective_output)
 
 /// Announce all objectives (both types)
 /datum/mind/proc/announce_objectives()

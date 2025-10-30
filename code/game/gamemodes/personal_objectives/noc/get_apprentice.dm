@@ -33,4 +33,4 @@
 	owner.current.set_stat_modifier("noc_blessing", STATKEY_INT, 1)
 
 /datum/objective/personal/get_apprentice/update_explanation_text()
-	explanation_text = "Obtain a new apprentice to pass your knowledge on! Noc is watching..."
+	explanation_text = "Obtain a new apprentice to pass your knowledge on! Noc will be watching."

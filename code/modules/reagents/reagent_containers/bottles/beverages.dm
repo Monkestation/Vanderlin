@@ -140,14 +140,14 @@
 /obj/item/reagent_containers/glass/bottle/avarmead
 	desc = "A bottle with a simple cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/avarmead = 48)
-	auto_label_name = "avar mead"
-	auto_label_desc = "A golden honey-wine brewed in the Avar Steppes. Manages to keep a proper taste while staying strong."
+	auto_label_name = "steppe mead"
+	auto_label_desc = "A golden honey-wine brewed in the steppes. Manages to keep a proper taste while staying strong."
 
 /obj/item/reagent_containers/glass/bottle/avarrice
 	desc = "A bottle with a simple cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/avarrice = 48)
-	auto_label_name = "avarice"
-	auto_label_desc = "A murky, white wine made from rice grown in the steppes of Avar."
+	auto_label_name = "steppe rice"
+	auto_label_desc = "A murky, white wine made from rice grown in the steppes."
 
 /obj/item/reagent_containers/glass/bottle/saigamilk
 	desc = "A bottle with a Running Saiga cork-seal."

@@ -622,7 +622,7 @@
 /turf/closed/wall/mineral/decowood,
 /area/rogue/indoors/shelter/bog)
 "hO" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/dirt,
 /area/rogue/indoors/shelter/bog)
@@ -675,7 +675,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/indoors/shelter/bog)
 "il" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/grass,
 /area/rogue/outdoors/bog)
 "ip" = (
@@ -1216,7 +1216,7 @@
 /turf/open/floor/cobble/mossy,
 /area/rogue/outdoors/bog)
 "qi" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
 "qm" = (
@@ -1456,7 +1456,7 @@
 /turf/open/floor/blocks,
 /area/rogue/outdoors/bog)
 "tO" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/bog)
 "tT" = (
@@ -2162,7 +2162,7 @@
 /turf/closed/wall/mineral/decostone,
 /area/rogue/indoors/shelter/bog)
 "DP" = (
-/obj/item/chair/stool/bar/crafted,
+/obj/item/chair/stool/crafted,
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
 "DT" = (
@@ -2513,7 +2513,7 @@
 /turf/open/floor/wood/nosmooth,
 /area/rogue/indoors/shelter/bog)
 "JA" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/naturalstone,
 /area/rogue/indoors/cave)
 "JC" = (
@@ -2615,7 +2615,7 @@
 /turf/open/transparent/openspace,
 /area/rogue/indoors/shelter/bog)
 "KX" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood/turned,
 /area/rogue/indoors/shelter/bog)
 "KY" = (
@@ -3275,7 +3275,7 @@
 /turf/open/floor/churchmarble,
 /area/rogue/indoors/shelter/bog)
 "Ui" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /obj/item/reagent_containers/food/snacks/cooked/frysteak,
 /turf/open/floor/dirt/road,
 /area/rogue/outdoors/bog)
@@ -3372,7 +3372,7 @@
 /turf/open/floor/churchmarble,
 /area/rogue/indoors/shelter/bog)
 "Vy" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/woodturned/nosmooth,
 /area/rogue/indoors/shelter/bog)
 "Vz" = (

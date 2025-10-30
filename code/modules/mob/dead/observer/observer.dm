@@ -116,6 +116,10 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
 
+/mob/dead/observer/screye/blackmirror
+	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
+	see_in_dark = 100
+
 /mob/dead/observer/screye/Move(n, direct)
 	return
 
@@ -210,8 +214,10 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 	. = ..()
 
-	if(!(istype(src, /mob/dead/observer/rogue/arcaneeye)))
-		verbs += GLOB.ghost_verbs
+	if(!istype(src, /mob/dead/observer/rogue/arcaneeye))
+		if(!istype(src, /mob/dead/observer/screye))
+			client?.verbs += GLOB.ghost_verbs
+			to_chat(src, span_danger("Click the <b>SKULL</b> on the left of your HUD to respawn."))
 
 	grant_all_languages()
 
@@ -1018,10 +1024,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		set_light(1, 1, 2)
 	else
 		set_light(0, 0, 0)
-
-// Ghosts have no momentum, being massless ectoplasm
-/mob/dead/observer/Process_Spacemove(movement_dir)
-	return 1
 
 /mob/dead/observer/vv_edit_var(var_name, var_value)
 	. = ..()

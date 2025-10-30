@@ -121,7 +121,7 @@
 /turf/template_noop,
 /area/template_noop)
 "wE" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/dirt,
 /area/template_noop)
 "yT" = (
@@ -297,7 +297,7 @@
 /turf/open/floor/naturalstone,
 /area/template_noop)
 "Xn" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/hexstone,
 /area/template_noop)
 "XS" = (

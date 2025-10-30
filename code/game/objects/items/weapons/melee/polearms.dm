@@ -13,7 +13,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	max_blade_int = 100
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	minstr = 8
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
@@ -472,6 +472,7 @@
 /obj/item/weapon/polearm/halberd/psydon/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/polearm/halberd/psydon/getonmobprop(tag)
 	. = ..()
@@ -483,6 +484,11 @@
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/polearm/halberd/psydon/relic
+	name = "Sanctum"
+	desc = "These silver-tipped polearms are the bulwark of the Ordo Venatari, borrowing techniques from the Ordo Benetarus. During the early sieges, the Ordos used these to hold the horrors at bay for forty days-and-nites. A time always comes to fight - strike true."
+	icon_state = "psyhalberd"
 
 //................ Bardiche ............... //
 /obj/item/weapon/polearm/halberd/bardiche
@@ -662,7 +668,7 @@
 	animname = "cut"
 	blade_class = BCLASS_CHOP
 	reach = 1
-	damfactor = 2.5
+	damfactor = 1.2
 	chargetime = 10
 	no_early_release = TRUE
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
@@ -674,7 +680,6 @@
 	penfactor = -100
 	misscost = 5
 	chargetime = 5
-	damfactor = 2
 	reach = 2
 
 /obj/item/weapon/spear/naginata

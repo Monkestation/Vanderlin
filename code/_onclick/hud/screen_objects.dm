@@ -654,7 +654,7 @@
 	addtimer(CALLBACK(src, PROC_REF(check_mob)), 3 SECONDS)
 
 /atom/movable/screen/advsetup/Destroy()
-	hud.static_inventory -= src
+	hud?.static_inventory -= src
 	return ..()
 
 /atom/movable/screen/advsetup/proc/check_mob()
@@ -1647,7 +1647,6 @@
 	. = ..()
 	if(client)
 		holder = client
-	. = ..()
 	holder.screen += src
 
 /atom/movable/screen/rintent_selection/Destroy()

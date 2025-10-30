@@ -71,6 +71,28 @@
 	desc = "Pelt from a cabbit."
 	icon_state = "wool2"
 
+/obj/item/natural/fur/direbear
+	desc = "fur from one of Dendor's mightiest creachers."
+	icon_state = "pelt_direbear"
+	color = "#33302b"
+	sellprice = 28
+
+/obj/item/natural/fur/fox
+	desc = "from a venard."
+	icon_state = "pelt_fox"
+	color = null
+
+/obj/item/natural/fur/raccoon
+	desc = "from a raccoon."
+	icon_state = "pelt_raccoon"
+	color = null
+	sellprice = 12
+
+/obj/item/natural/fur/bobcat
+	desc = "from a lynx."
+	icon_state = "pelt_bobcat"
+	color = null
+
 /obj/item/natural/head
 	possible_item_intents = list(/datum/intent/use)
 	layer = 3.1
@@ -174,6 +196,21 @@
 	headpricemax = 7
 	sellprice = 5
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/mince/beef
+
+/obj/item/natural/head/direbear
+	name = "direbear head"
+	desc = "The head of a terrifying direbear."
+	icon_state = "direbearhead"
+	layer = 3.1
+	sellprice = 20
+
+/obj/item/natural/head/fox
+	name = "venard head"
+	desc = "The head of a majestic venard."
+	icon_state = "foxhead"
+	layer = 3.1
+	grid_height = 32
+	sellprice = 6
 
 /obj/item/natural/head/spider
 	name = "beespider head"

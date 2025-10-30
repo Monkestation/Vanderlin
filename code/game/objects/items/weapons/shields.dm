@@ -279,6 +279,27 @@
 
 #undef SHIELD_BANG_COOLDOWN
 
+/obj/item/weapon/shield/tower/metal/psy
+	name = "Covenant"
+	desc = "The Ordo Benetarus holds a mantra: A Psydonian endures. A Psydonian preserves themselves. A Psydonian preserves His flock. Protect them."
+	icon_state = "psyshield"
+	force = 20
+	throwforce = 10
+	throw_speed = 1
+	throw_range = 3
+	wlength = WLENGTH_NORMAL
+	resistance_flags = null
+	flags_1 = CONDUCT_1
+	wdefense = 8
+	coverage = 50
+	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
+	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
+	max_integrity = 300
+
+/obj/item/weapon/shield/tower/metal/psy/Initialize(mapload)
+	. = ..()							//+0 force, +100 int, +1 def, make silver
+	AddComponent(/datum/component/psyblessed, TRUE, 0, FALSE, 100, 1, TRUE)
+
 /obj/item/weapon/shield/tower/buckleriron
 	name = "iron buckler"
 	desc = "A small sized iron shield, popular among mercenaries due to it's light weight and ease of mobility."

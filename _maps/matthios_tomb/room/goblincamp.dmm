@@ -5,7 +5,7 @@
 "ao" = (
 /obj/structure/chair/stool,
 /obj/item/fishingrod,
-/obj/item/fishing/bait,
+/obj/item/fishing/lure,
 /turf/open/floor/ruinedwood,
 /area/rogue/under/tomb/cave)
 "aN" = (
@@ -97,13 +97,13 @@
 /turf/open/floor/dirt,
 /area/rogue/under/tomb/cave)
 "ml" = (
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
 /turf/open/floor/ruinedwood,
 /area/rogue/under/tomb/cave)
 "mQ" = (

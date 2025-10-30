@@ -30,14 +30,15 @@
 * in which the steward sails.
 */
 SUBSYSTEM_DEF(treasury)
-	name = "treasury"
+	name = "Treasury"
 	wait = 1
 	init_order = INIT_ORDER_TREASURY
 	priority = FIRE_PRIORITY_WATER_LEVEL
-	var/tax_value = 0.11
+	var/tax_value = 0.1
 	var/queens_tax = 0.15
 	var/treasury_value = 0
 	var/list/bank_accounts = list()
+	var/list/untaxed_deposits = list()
 	var/list/noble_incomes = list()
 	var/list/stockpile_datums = list()
 	var/multiple_item_penalty = 0.7
@@ -223,23 +224,38 @@ SUBSYSTEM_DEF(treasury)
 		return FALSE
 	if(!character)
 		return FALSE
+
 	var/taxed_amount = 0
 	var/original_amt = amt
 	treasury_value += amt
+
 	if(character in bank_accounts)
 		if(HAS_TRAIT(character, TRAIT_NOBLE))
 			bank_accounts[character] += amt
 		else
-			taxed_amount = round(amt * tax_value)
-			amt -= taxed_amount
-			bank_accounts[character] += amt
+			if(!untaxed_deposits[character])
+				untaxed_deposits[character] = 0
+
+			var/previous_untaxed = untaxed_deposits[character]
+			untaxed_deposits[character] += amt
+
+			var/taxable_amount = untaxed_deposits[character]
+			var/potential_tax = round(taxable_amount * tax_value)
+
+			if(potential_tax >= 1)
+				taxed_amount = potential_tax
+				var/taxed_portion = round(taxed_amount / tax_value)
+				var/net_from_this_deposit = (taxable_amount - taxed_amount) - previous_untaxed
+				bank_accounts[character] += net_from_this_deposit
+				untaxed_deposits[character] = taxable_amount - taxed_portion
+			else
+				bank_accounts[character] += amt
 	else
 		return FALSE
 
 	log_to_steward("+[original_amt] deposited by [character.real_name] of which taxed [taxed_amount]")
 
 	return list(original_amt, taxed_amount)
-
 
 /datum/controller/subsystem/treasury/proc/withdraw_money_account(amt, target)
 	if(!amt)
@@ -265,7 +281,6 @@ SUBSYSTEM_DEF(treasury)
 		return
 	log_to_steward("-[amt] withdrawn by [target_name]")
 	return TRUE
-
 
 /datum/controller/subsystem/treasury/proc/log_to_steward(log)
 	log_entries += log

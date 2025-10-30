@@ -70,6 +70,7 @@
 #define SPAN_DELF "delf"
 #define SPAN_HELL "hellspeak"
 #define SPAN_ORC "orc"
+#define SPAN_OTAVAN "otavan"
 #define SPAN_BEAST "beast"
 #define SPAN_DEEPSPEAK "deepspeak"
 #define SPAN_UNDEAD "undead"

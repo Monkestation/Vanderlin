@@ -17,7 +17,7 @@
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	max_blade_int = 140
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	associated_skill = /datum/skill/combat/knives
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	equip_sound = 'sound/foley/dropsound/holster_sword.ogg'
@@ -146,7 +146,7 @@
 	icon_state = "navaja_c"
 	item_state = "elfdag"
 	var/extended = 0
-	wdefense = 2
+	wdefense = TERRIBLE_PARRY
 	sellprice = 30 //shiny :o
 
 /obj/item/weapon/knife/dagger/navaja/attack_self(mob/user)
@@ -154,7 +154,7 @@
 	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
 	if(extended)
 		force = 20
-		wdefense = 6
+		wdefense = MEDIOCRE_PARRY
 		w_class = WEIGHT_CLASS_NORMAL
 		throwforce = 23
 		icon_state = "navaja_o"
@@ -167,7 +167,7 @@
 		icon_state = "navaja_c"
 		attack_verb = list("stubbed", "poked")
 		sharpness = IS_BLUNT
-		wdefense = 2
+		wdefense = TERRIBLE_PARRY
 
 /obj/item/weapon/knife/scissors
 	possible_item_intents = list(/datum/intent/dagger/thrust, /datum/intent/dagger/cut, /datum/intent/snip)
@@ -354,7 +354,7 @@
 	name ="plaguebringer sickle"
 	desc = "A wicked edge brings feculent delights."
 	icon_state = "pestrasickle"
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 //................ Fanged dagger ............... //
 /obj/item/weapon/knife/dagger/steel/dirk

@@ -126,6 +126,9 @@
 	//to be overridden for customization depending on client prefs,species etc
 	return
 
+/datum/outfit/proc/map_override(mob/living/carbon/human/H, visuals_only = FALSE)
+	return
+
 /**
  * Called after the equip proc has finished
  *
@@ -151,6 +154,7 @@
  */
 /datum/outfit/proc/equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	pre_equip(H, visuals_only)
+	map_override(H, visuals_only)
 
 	if(belt)
 		H.equip_to_slot_or_del(new belt(H),ITEM_SLOT_BELT, TRUE)

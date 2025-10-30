@@ -31,6 +31,7 @@
 	name = "Hollow-Kin Tail"
 	organ_type = /obj/item/organ/tail
 	generic_random_pick = TRUE
+	allows_accessory_color_customization = TRUE
 	sprite_accessories = list(
 		/datum/sprite_accessory/tail/cat,
 		/datum/sprite_accessory/tail/monkey,

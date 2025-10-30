@@ -104,3 +104,28 @@
 	name = "Sugarcane"
 	cost = 50
 	contains = /obj/item/neuFarm/seed/sugarcane
+
+/datum/supply_pack/seeds/avocado
+	name = "Avocado"
+	cost = 30
+	contains = /obj/item/neuFarm/seed/avocado
+
+/datum/supply_pack/seeds/pineapple
+	name = "Ananas"
+	cost = 30
+	contains = /obj/item/neuFarm/seed/pineapple
+
+/datum/supply_pack/seeds/mango
+	name = "Mangga"
+	cost = 30
+	contains = /obj/item/neuFarm/seed/mango
+
+/datum/supply_pack/seeds/mangosteen
+	name = "Mangosteen"
+	cost = 50
+	contains = /obj/item/neuFarm/seed/mangosteen
+
+/datum/supply_pack/seeds/dragonfruit
+	name = "Piyata"
+	cost = 50
+	contains = /obj/item/neuFarm/seed/dragonfruit

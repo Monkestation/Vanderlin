@@ -2447,7 +2447,7 @@
 /area/rogue/indoors)
 "Mc" = (
 /obj/effect/decal/cleanable/debris/stone,
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/blocks,
 /area/rogue/indoors)
 "Md" = (

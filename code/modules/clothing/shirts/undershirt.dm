@@ -104,3 +104,11 @@
 	color = null
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
+
+/obj/item/clothing/shirt/undershirt/sash
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
+	name = "cloth sash"
+	desc = "A simple cloth sash."
+	icon_state = "sash"
+	color = CLOTHING_LINEN
+

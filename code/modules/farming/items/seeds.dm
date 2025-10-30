@@ -179,6 +179,21 @@
 /obj/item/neuFarm/seed/raspberry
 	plant_def_type = /datum/plant_def/raspberry
 
+/obj/item/neuFarm/seed/mango
+	plant_def_type = /datum/plant_def/mango
+
+/obj/item/neuFarm/seed/mangosteen
+	plant_def_type = /datum/plant_def/mangosteen
+
+/obj/item/neuFarm/seed/avocado
+	plant_def_type = /datum/plant_def/avocado
+
+/obj/item/neuFarm/seed/dragonfruit
+	plant_def_type = /datum/plant_def/dragonfruit
+
+/obj/item/neuFarm/seed/pineapple
+	plant_def_type = /datum/plant_def/pineapple
+
 //alchemical
 /obj/item/neuFarm/seed/atropa
 	plant_def_type = /datum/plant_def/alchemical/atropa

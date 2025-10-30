@@ -53,6 +53,7 @@
 	name = "Wild-Kin Ears"
 	organ_type = /obj/item/organ/ears/anthro
 	generic_random_pick = TRUE
+	allows_accessory_color_customization = TRUE
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/cat,
 		/datum/sprite_accessory/ears/axolotl,
@@ -114,6 +115,7 @@
 	name = "Hollow-Kin Ears"
 	organ_type = /obj/item/organ/ears
 	generic_random_pick = TRUE
+	allows_accessory_color_customization = TRUE
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/cat,				//Quality control ; Will not be re-added until sprite touchup. -Remains in with Ook request.
 //		/datum/sprite_accessory/ears/axolotl,  			QC

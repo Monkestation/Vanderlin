@@ -77,6 +77,11 @@
 	/// Number representing how rare the fish is, 0 is the lowest common fish
 	var/rarity_rank = 0
 
+/obj/item/reagent_containers/food/snacks/fish/dead
+	abstract_type = /obj/item/reagent_containers/food/snacks/fish/dead
+	dead = TRUE
+	fish_id = "dead"
+
 /*	........   Cooked food template   ................ */ // No choppping double cooking etc prefixed
 /obj/item/reagent_containers/food/snacks/cooked
 	name = "cooked meat"

@@ -813,6 +813,18 @@
 		message_admins("[key_name_admin(usr)] decreased [key_name_admin(M)]'s [statkey].")
 		show_player_panel_next(M, "stats")
 
+	else if(href_list["bulk_change"])
+		var/mob/living/M = locate(href_list["bulk_change"])
+		var/statkey = href_list["stat"]
+		var/change_stat = input(usr, "Increase or Decrease this stat.", "Bulk Stat Change", 1) as num
+		if(!change_stat)
+			return
+		M.change_stat(statkey, change_stat)
+
+		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s [statkey] by [change_stat].")
+		message_admins("[key_name_admin(usr)] changed [key_name_admin(M)]'s [statkey] by [change_stat].")
+		show_player_panel_next(M, "stats")
+
 	else if(href_list["sendmob"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1223,7 +1235,7 @@
 			return
 
 		var/raisin = stripped_input(usr, "State a short reason for this change", "Game Master", null, null)
-		M.adjust_triumphs(amt2change, FALSE, raisin)
+		M.adjust_triumphs(amt2change, FALSE, raisin, override_bonus = TRUE)
 		message_admins("[key_name_admin(usr)] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 		log_admin("[key_name_admin(usr)] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 

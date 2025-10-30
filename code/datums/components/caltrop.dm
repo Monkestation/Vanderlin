@@ -16,8 +16,6 @@
 
 /datum/component/caltrop/proc/Crossed(datum/source, atom/movable/AM)
 	var/atom/A = parent
-	if(!A.has_gravity())
-		return
 
 	if(!prob(probability))
 		return

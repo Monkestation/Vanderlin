@@ -128,6 +128,8 @@
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+	var/datum/inspiration/I = new /datum/inspiration(H)
+	I.grant_inspiration(H, bard_tier = BARD_T3)
 
 
 
@@ -304,11 +306,11 @@
 			H.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 		if(/datum/patron/divine/ravox)
 			neck = /obj/item/clothing/neck/psycross/silver/ravox
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 			H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		if(/datum/patron/divine/xylix)
 			neck = /obj/item/clothing/neck/psycross/silver/xylix
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 			H.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
 		if(/datum/patron/divine/malum)
 			neck = /obj/item/clothing/neck/psycross/silver/malum
@@ -401,6 +403,8 @@
 
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+	var/datum/inspiration/I = new /datum/inspiration(H)
+	I.grant_inspiration(H, bard_tier = BARD_T3)
 	H.add_spell(/datum/action/cooldown/spell/vicious_mockery)
 	H.add_spell(/datum/action/cooldown/spell/bardic_inspiration)
 

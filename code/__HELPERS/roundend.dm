@@ -414,7 +414,7 @@
 	// Header
 	parts += "<div class='panel stationborder'>"
 	if(GLOB.personal_objective_minds.len)
-		parts += "<div style='text-align: center; font-size: 1.2em;'>GODS' CHAMPIONS:</div>"
+		parts += "<div style='text-align: center; font-size: 1.2em;'>HEROES:</div>"
 		parts += "<hr class='paneldivider'>"
 
 	var/list/successful_champions = list()
@@ -439,7 +439,7 @@
 	for(var/datum/mind/mind as anything in successful_champions)
 		current_index++
 		showed_any_champions = TRUE
-		var/name_with_title = mind.current ? printplayer(mind) : "<b>Unknown Champion</b>"
+		var/name_with_title = mind.current ? printplayer(mind) : "<b>Unknown Hero</b>"
 		parts += name_with_title
 
 		var/obj_count = 1
@@ -453,11 +453,11 @@
 		CHECK_TICK
 
 	if(!has_any_objectives)
-		parts += "<div style='text-align: center;'>No personal objectives were assigned this round.</div>"
+		parts += "<div style='text-align: center;'>No heroes were chosen this round</div>"
 	else if(failed_chosen > 0)
 		if(showed_any_champions)
 			parts += "<br>"
-		parts += "<div style='text-align: center;'>[failed_chosen] of gods' chosen [failed_chosen == 1 ? "has" : "have"] failed to become [failed_chosen == 1 ? "a champion" : "champions"].</div>"
+		parts += "<div style='text-align: center;'>[failed_chosen] [failed_chosen == 1 ? "hero" : "heroes"] [failed_chosen == 1 ? "has" : "have"] failed to complete their calling.</div>"
 
 	parts += "</div>"
 	return parts.Join("<br>")

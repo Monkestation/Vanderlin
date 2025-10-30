@@ -149,10 +149,10 @@
 	// Right column
 	data += "<div style='display: table-cell; width: 50%; vertical-align: top; padding: 0 10px;'>"
 	data += "<font color='#36959c'><span class='bold'>Triumphs Awarded:</span></font> [GLOB.vanderlin_round_stats[STATS_TRIUMPHS_AWARDED]]<br>"
-	data += "<font color='#c237c7'><span class='bold'>Marriages Perfomed:</span></font> [GLOB.vanderlin_round_stats[STATS_MARRIAGES]]<br>"
+	data += "<font color='#c65fc9'><span class='bold'>Marriages Perfomed:</span></font> [GLOB.vanderlin_round_stats[STATS_MARRIAGES]]<br>"
 	data += "<font color='#d7da2f'><span class='bold'>Prayers Made:</span></font> [GLOB.vanderlin_round_stats[STATS_PRAYERS_MADE]]<br>"
 	data += "<font color='#bacfd6'><span class='bold'>Graves Consecrated:</span></font> [GLOB.vanderlin_round_stats[STATS_GRAVES_CONSECRATED]]<br>"
-	data += "<font color='#9c3e46'><span class='bold'>Wandering Deadites:</span></font> [GLOB.vanderlin_round_stats[STATS_DEADITES_ALIVE]]<br>"
+	data += "<font color='#9c3e46'><span class='bold'>Controlled Deadites:</span></font> [GLOB.vanderlin_round_stats[STATS_DEADITES_ALIVE]]<br>"
 	data += "<font color='#0f555c'><span class='bold'>Beards Shaved:</span></font> [GLOB.vanderlin_round_stats[STATS_BEARDS_SHAVED]]<br>"
 	data += "<font color='#6e7c81'><span class='bold'>Skills Learned:</span></font> [GLOB.vanderlin_round_stats[STATS_SKILLS_LEARNED]]<br>"
 	data += "<div style='height: 17.5px;'>&nbsp;</div>"
@@ -228,7 +228,7 @@
 	data += "</div></div>"
 
 	mob << browse(null, "window=vanderlin_influences")
-	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1080, 818)
+	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1085, 820)
 	popup.set_content(data.Join())
 	popup.open()
 
@@ -806,7 +806,7 @@
 	data += "</div>"
 
 	mob << browse(null, "window=vanderlin_influences")
-	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1080, 818)
+	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1085, 820)
 	popup.set_content(data.Join())
 	popup.open()
 

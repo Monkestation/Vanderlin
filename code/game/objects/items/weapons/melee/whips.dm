@@ -77,8 +77,18 @@
 	minstr = 7
 	icon_state = "gwhip"
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	sellprice = 50
+
+/obj/item/weapon/whip/antique/psywhip
+	name = "Daybreak"
+	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humanity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
+	icon_state = "psywhip"
+
+/obj/item/weapon/whip/antique/psywhip/Initialize(mapload)
+	. = ..()					// Pre-blessed, +5 force, +100 INT, +2 Def, Silver.
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 2, TRUE)
 
 
 //................ Silver Whip ............... //
@@ -106,7 +116,7 @@
 
 /obj/item/weapon/whip/psydon/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane

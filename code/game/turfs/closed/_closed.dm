@@ -5,7 +5,7 @@
 	opacity = 1
 	density = TRUE
 	blocks_air = TRUE
-	baseturfs = list(/turf/open/floor/naturalstone, /turf/open/transparent/openspace)
+	baseturfs = /turf/open/floor/naturalstone
 	smoothing_groups = SMOOTH_GROUP_CLOSED
 	pass_flags_self = PASSCLOSEDTURF
 

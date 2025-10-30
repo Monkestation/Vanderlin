@@ -44,7 +44,7 @@
 			D.finish_culling(winner = owner.current, loser = challenger)
 			complete_objective()
 
-/datum/objective/personal/eat_rival_heart/complete_objective()
+/datum/objective/personal/eat_rival_heart/complete_objective(escalatation_type = ESCALATION_INTERVENTION_ONLY)
 	. = ..()
 	to_chat(owner.current, span_greentext("You have proven your strength to Graggar by consuming your rival's heart! Your rival's power is now YOURS!"))
 	adjust_storyteller_influence(GRAGGAR, 30)

@@ -62,7 +62,7 @@
 	var/icon2 = "fibersroll2"
 	var/icon2step = 6
 	var/icon3 = null
-	var/stacktype = /obj/item/natural/fibers/
+	var/stacktype = /obj/item/natural/fibers
 	var/stackname = "fibers"
 	var/items_per_increase = 5
 

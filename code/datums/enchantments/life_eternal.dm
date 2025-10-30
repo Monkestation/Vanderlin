@@ -11,13 +11,22 @@
 		/datum/thaumaturgical_essence/light = 30
 	)
 
-/datum/enchantment/life_eternal/on_equip(obj/item/i, mob/living/user)
+/datum/enchantment/life_eternal/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_EQUIPPED
+	RegisterSignal(item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
+	registered_signals += COMSIG_ITEM_DROPPED
+	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+
+/datum/enchantment/life_eternal/proc/on_equip(obj/item/i, mob/living/user)
 	// Constant slow healing while equipped
 	START_PROCESSING(SSobj, src)
 
+/datum/enchantment/life_eternal/proc/on_drop(obj/item/i, mob/living/user)
+	STOP_PROCESSING(SSobj, src)
+
 /datum/enchantment/life_eternal/process()
-	for(var/obj/item/I in affected_items)
-		if(I.loc && isliving(I.loc))
-			var/mob/living/L = I.loc
-			if(L.health < L.maxHealth)
-				L.heal_bodypart_damage(1, 1)
+	if(enchanted_item.loc && isliving(enchanted_item.loc))
+		var/mob/living/L = enchanted_item.loc
+		if(L.health < L.maxHealth)
+			L.heal_bodypart_damage(1, 1)

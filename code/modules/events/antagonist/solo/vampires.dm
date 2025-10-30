@@ -3,7 +3,7 @@
 	tags = list(
 		TAG_COMBAT,
 		TAG_HAUNTED,
-		TAG_VILLIAN,
+		TAG_VILLAIN,
 	)
 	roundstart = TRUE
 	antag_flag = ROLE_NBEAST
@@ -11,10 +11,10 @@
 
 	weight = 12
 
-	denominator = 80
+	denominator = 40
 
 	base_antags = 1
-	maximum_antags = 2
+	maximum_antags = 3
 
 	earliest_start = 0 SECONDS
 
@@ -34,7 +34,8 @@
 	if(!leader)
 		var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
 		J?.adjust_current_positions(-1)
-		antag_mind.current.unequip_everything()
+		if(SSmapping.config.map_name != "Voyage")
+			antag_mind.current.unequip_everything()
 		antag_mind.add_antag_datum(antag_datum)
 		leader = TRUE
 		return

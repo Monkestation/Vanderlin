@@ -11,7 +11,6 @@ GLOBAL_LIST_INIT(mined_resource_loc, list())
 
 	tags = list(
 		TAG_NATURE,
-		TAG_BOON,
 		TAG_WORK,
 	)
 

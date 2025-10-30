@@ -12,6 +12,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	var/martyr_compatible = 0			//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
 	var/triumph_count = 1
 	var/flavor = "Goal" //so it appear as "goal", "dream", "aspiration", etc
+	var/hidden = FALSE
 
 /datum/objective/New(text, datum/mind/owner)
 	if(text)

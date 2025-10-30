@@ -5,7 +5,7 @@
 
 /datum/repeatable_crafting_recipe/fishing/bait
 	name = "red bait"
-	output = /obj/item/fishing/bait/meat
+	output = /obj/item/fishing/lure/meat
 	output_amount = 6
 	starting_atom = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	requirements = list(
@@ -20,7 +20,7 @@
 
 /datum/repeatable_crafting_recipe/fishing/bait/dough
 	name = "doughy bait"
-	output = /obj/item/fishing/bait/dough
+	output = /obj/item/fishing/lure/dough
 	starting_atom = /obj/item/reagent_containers/food/snacks/dough_slice
 	requirements = list(
 		/obj/item/reagent_containers/powder/flour = 2,
@@ -30,7 +30,7 @@
 
 /datum/repeatable_crafting_recipe/fishing/bait/gray
 	name = "gray bait"
-	output = /obj/item/fishing/bait/gray
+	output = /obj/item/fishing/lure/gray
 	output_amount = 5
 	starting_atom = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	requirements = list(
@@ -42,7 +42,7 @@
 
 /datum/repeatable_crafting_recipe/fishing/bait/speckled
 	name = "speckled bait"
-	output = /obj/item/fishing/bait/speckled
+	output = /obj/item/fishing/lure/speckled
 	output_amount = 3
 	starting_atom = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	requirements = list(

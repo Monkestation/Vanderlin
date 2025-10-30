@@ -1,0 +1,9 @@
+{
+    "map_name": "Islands 5",
+    "map_path": "map_files/voyager",
+	"map_file": [
+	"islands.dmm"
+	],
+	"traits": [
+	{"Name": "The Sea", "Up": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Down": true}]
+}

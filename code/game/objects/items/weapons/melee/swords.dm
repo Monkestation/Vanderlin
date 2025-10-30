@@ -25,7 +25,8 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	flags_1 = CONDUCT_1
 	thrown_bclass = BCLASS_CUT
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	minstr = 7
 	sellprice = 30
 	wdefense = GREAT_PARRY
@@ -52,7 +53,8 @@
 	name = "arming sword"
 	desc = "A trustworthy blade design, the first dedicated tool of war since before the age of history."
 	icon_state = "sword1"
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	sellprice = 30
 
 /obj/item/weapon/sword/arming/Initialize()
@@ -130,6 +132,31 @@
 	wdefense = GOOD_PARRY
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
+
+/obj/item/weapon/sword/short/psy
+	name = "psydonian shortsword"
+	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
+	force = 19
+	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
+	icon_state = "psyswordshort"
+	gripped_intents = null
+	minstr = 4
+	wdefense = 4
+	wlength = WLENGTH_SHORT
+	w_class = WEIGHT_CLASS_NORMAL
+	grid_width = 32
+	grid_height = 96
+
+/obj/item/weapon/sword/short/psy/Initialize(mapload)
+	. = ..()						//+3 force, +100 blade int, +50 int, +1 def, make silver
+	AddComponent(/datum/component/psyblessed, FALSE, 3, 100, 50, 1, TRUE)
+
+/obj/item/weapon/sword/short/psy/preblessed
+
+/obj/item/weapon/sword/short/psy/preblessed/Initialize(mapload)
+	. = ..()
+	// PREBLESS IT +3 force, +100 blade int, +50 int, +1 def, make silver
+	AddComponent(/datum/component/psyblessed, TRUE, 3, 100, 50, 1, TRUE)
 
 /obj/item/weapon/sword/ida
 	force = DAMAGE_SHORTSWORD
@@ -491,6 +518,18 @@
 				"westabove" = 0,
 				)
 
+/obj/item/weapon/sword/rapier/psy/relic
+	name = "Retribution"
+	desc = "A rapier as swift as the inquisitors of the Ordo Venetari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
+	icon_state = "psyrapier"
+	max_integrity = 300
+	max_blade_int = 300
+	wdefense = GOOD_PARRY
+
+/obj/item/weapon/sword/rapier/psy/relic/Initialize(mapload)
+	. = ..()
+	//Pre-blessed, +100 Blade int, +100 int, +2 def, make it silver
+	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 2, TRUE)
 
 
 /obj/item/weapon/sword/rapier/dec
@@ -789,6 +828,15 @@
 	desc = "A curved blade of Zaladin origin meaning 'curved one'. The standard sword that saw the conquest of the Zalad continent and peoples."
 	sellprice = 80
 
+/obj/item/weapon/sword/long/rider/steppe
+	name = "steppe sabre"
+	desc = "A curved blade of nomadic origin, it is used by cavalrymen all across the far steppes."
+	icon_state = "steppe"
+	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/curved)
+	force_wielded = 0
+	gripped_intents = null
+	wdefense = ULTMATE_PARRY
+
 /obj/item/weapon/sword/long/rider/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -801,7 +849,6 @@
 				return list("shrink" = 0.6,"sx" = 3,"sy" = 4,"nx" = -1,"ny" = 4,"wx" = -8,"wy" = 3,"ex" = 7,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.5,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
-
 
 /obj/item/weapon/sword/long/forgotten
 	force = DAMAGE_SWORD * 0.9 // Damage is .9 of a steel sword
@@ -844,7 +891,7 @@
 
 /obj/item/weapon/sword/long/psydon/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/sword/long/decorated
 	force = DAMAGE_SWORD - 5
@@ -863,6 +910,11 @@
 /obj/item/weapon/sword/long/decorated/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/sword/long/oldpsysword
+	name = "old psydonian longsword"
+	desc = "A finely made longsword, plated in a worn-down veneer of grubby silver. It's long seen better daes."
+	icon_state = "psysword"
 
 //................ Greatsword ............... //
 /obj/item/weapon/sword/long/greatsword
@@ -904,7 +956,7 @@
 
 /obj/item/weapon/sword/long/greatsword/psydon/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/sword/long/greatsword/psydon/getonmobprop(tag)
 	. = ..()
@@ -918,6 +970,51 @@
 				return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 4,"sflip" = 4,"wflip" = 1,"eflip" = 0)
 			if("onback")
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
+
+/obj/item/weapon/sword/long/greatsword/psydon/relic
+	name = "Crusade"
+	desc = "The heaviest blade of the Ordo Benetarus. Its unparalleled strength commands even the greatest of foes to fall. Wade through the unholy in Psydon’s name. Let none survive."
+	force = 25
+	icon_state = "psygsword"
+	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
+	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/axe/chop)
+
+/obj/item/weapon/sword/long/greatsword/broadsword/psy
+	name = "old psydonian broadsword"
+	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Adjudicators and Priests of the Holy See for an extended period of time. Its edge remains as lethal as ever, however."
+	icon_state = "oldpsybroadsword"
+	force = 25
+	force_wielded = 30
+	possible_item_intents = list(/datum/intent/sword/cut,/datum/intent/sword/chop,/datum/intent/stab)
+	gripped_intents = list(/datum/intent/sword/cut/zwei, /datum/intent/sword/chop, /datum/intent/sword/lunge, /datum/intent/sword/thrust/estoc)
+	alt_intents = list(/datum/intent/effect/daze, /datum/intent/sword/strike, /datum/intent/sword/bash)
+
+/obj/item/weapon/sword/long/greatsword/broadsword/psy/relic
+	name = "Creed"
+	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You’re the light - show them the way."
+	icon_state = "psybroadsword"
+
+/obj/item/weapon/sword/long/greatsword/broadsword/psy/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen") return list("shrink" = 0.5, "sx" = -14, "sy" = -8, "nx" = 15, "ny" = -7, "wx" = -10, "wy" = -5, "ex" = 7, "ey" = -6, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0, "nturn" = -13, "sturn" = 110, "wturn" = -60, "eturn" = -30, "nflip" = 1, "sflip" = 1, "wflip" = 8, "eflip" = 1)
+			if("wielded") return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
+			if("onback") return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
+			if("onbelt") return list("shrink" = 0.3, "sx" = -4, "sy" = -6, "nx" = 5, "ny" = -6, "wx" = 0, "wy" = -6, "ex" = -1, "ey" = -6, "nturn" = 100, "sturn" = 156, "wturn" = 90, "eturn" = 180, "nflip" = 0, "sflip" = 0, "wflip" = 0, "eflip" = 0, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0)
+
+/obj/item/weapon/sword/long/greatsword/broadsword/psy/relic/Initialize(mapload)
+	. = ..()					//Pre-blessed, +5 DMG, +100 Blade int, +100 int, +2 def, make it silver
+	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 2, TRUE)
+
+/obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten
+	name = "unforgotten blade"
+	desc = "High Inquisitor Archibald once recorded an expedition of seven brave Adjudicators into Gronnian snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in rememberance."
+	icon_state = "forgottenblade"
+
+/obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten/Initialize()
+	. = ..()					//+50 Blade int, +3 DMG, +50 int, +1 def, make it silver
+	AddComponent(/datum/component/psyblessed, FALSE, 3, 50, 50, 1, TRUE)
 
 //................ Flamberge ............... //
 /obj/item/weapon/sword/long/greatsword/flamberge
@@ -1361,7 +1458,8 @@
 	name = "foreign straight blade"
 	desc = "A foreign sword used by cut-throats & thugs. There's a red tassel on the hilt."
 	icon_state = "eastsword1"
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	wdefense = 3
 
 /obj/item/weapon/sword/sabre/mulyeog/rumahench

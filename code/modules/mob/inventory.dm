@@ -272,6 +272,7 @@
 		I.pixel_x = I.base_pixel_x + rand(-6,6)
 		I.pixel_y = I.base_pixel_x + rand(-6,6)
 		I.afterdrop()
+		SEND_SIGNAL(I, COMSIG_ATOM_TEMPORARY_ANIMATION_START, 3)
 
 //for when the item will be immediately placed in a loc other than the ground
 /mob/proc/transferItemToLoc(obj/item/I, newloc = null, force = FALSE, silent = TRUE)

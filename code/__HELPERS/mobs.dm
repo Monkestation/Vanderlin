@@ -196,10 +196,6 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 	var/atom/target_loc = target?.loc
 	var/user_dir = user.dir /* V */
 
-	var/drifting = FALSE
-	if(!user.Process_Spacemove(0) && user.inertia_dir)
-		drifting = TRUE
-
 	var/holding = user.get_active_held_item()
 
 	if(!(timed_action_flags & IGNORE_SLOWDOWNS))
@@ -225,12 +221,8 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 		if(!QDELETED(progbar))
 			progbar.update(world.time - starttime)
 
-		if(drifting && !user.inertia_dir)
-			drifting = FALSE
-			user_loc = user.loc
-
 		if(QDELETED(user) \
-			|| (!(timed_action_flags & IGNORE_USER_LOC_CHANGE) && !drifting && user.loc != user_loc) \
+			|| (!(timed_action_flags & IGNORE_USER_LOC_CHANGE) && user.loc != user_loc) \
 			|| (!(timed_action_flags & IGNORE_HELD_ITEM) && user.get_active_held_item() != holding) \
 			|| (!(timed_action_flags & IGNORE_INCAPACITATED) && HAS_TRAIT(user, TRAIT_INCAPACITATED)) \
 			/* V: */ \

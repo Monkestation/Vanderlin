@@ -206,119 +206,220 @@
 
 	info += "</div>"
 
-/obj/item/paper/confession
-	name = "confession of villainy"
-	icon_state = "confession"
-	base_icon_state = "confession"
-	desc = "A drab piece of parchment stained with the magical ink of the Order lodges. Looking at it fills you with profound guilt."
-	info = "THE GUILTY PARTY ADMITS THEIR SINFUL NATURE AS ___. THEY WILL SERVE ANY PUNISHMENT OR SERVICE AS REQUIRED BY THE ORDER OF THE PSYCROSS UNDER PENALTY OF DEATH.<br/><br/>SIGNED,"
-	var/signed = null
-	var/antag = null // The literal name of the antag, like 'Bandit' or 'worshiper of Zizo'
-	var/bad_type = null // The type of the antag, like 'OUTLAW OF THE THIEF-LORD'
-	textper = 108
-	maxlen = 2000
-	var/confession_type = "antag" //for voluntary confessions
+/obj/item/paper/inqslip
+	name = "inquisition slip"
+	base_icon_state = "slip"
+	dropshrink = 0.75
+	icon_state = "slip"
+	obj_flags = CAN_BE_HIT
+	var/signed
+	var/mob/living/carbon/signee
+	var/marquevalue = 2
+	var/sealed
+	var/waxed
+	var/sliptype = 1
+	var/obj/item/inqarticles/indexer/paired
 
-/obj/item/paper/confession/examine(mob/user)
-	. = ..()
-	. += span_info("Left click with a feather to sign, right click to change confession type.")
-
-/obj/item/paper/confession/attackby(atom/A, mob/living/user, params)
-	if(signed)
-		return
-	if(istype(A, /obj/item/natural/feather))
-		attempt_confession(user)
-		return TRUE
-	return ..()
-
-/obj/item/paper/confession/update_icon_state()
-	. = ..()
-	if(mailer)
-		icon_state = "paper_prep"
-		throw_range = 7
-		return
-	throw_range = initial(throw_range)
-	icon_state = "[base_icon_state][signed ? "signed" : ""]"
-	return
-
-/obj/item/paper/confession/update_name()
-	. = ..()
-	if(mailer)
-		name = "letter"
-	else
-		name = initial(name)
-
-/obj/item/paper/confession/proc/attempt_confession(mob/living/carbon/human/M, mob/user)
-	if(!ishuman(M))
-		return
-	var/input = alert(M, "Sign the confession of your true nature?", "CONFESSION OF [confession_type == "antag" ? "VILLAINY" : "FAITH"]", "Yes", "Lie", "No")
-	if(M.stat >= UNCONSCIOUS)
-		return
-	if(!M.CanReach(src))
-		return
-	if(signed)
-		return
-	if(input == "Yes")
-		playsound(src, 'sound/items/write.ogg', 50, FALSE, ignore_walls = FALSE)
-		M.visible_message(span_info("[M] has agreed to confess their true [confession_type == "antag" ? "villainy" : "faith"]."), span_info("I agree to confess my true nature."), vision_distance = COMBAT_MESSAGE_RANGE)
-		M.confess_sins(confession_type, resist=FALSE, interrogator=user, torture=FALSE, confession_paper = src, false_result = TRUE)
-	else if(input == "Lie")
-		var/fake = TRUE
-		if(confession_type == "patron")
-			var/list/divine_gods = list()
-			for(var/datum/patron/path as anything in GLOB.patrons_by_faith[/datum/faith/divine_pantheon] + GLOB.patrons_by_faith[/datum/faith/psydon])
-				if(!path.name)
-					continue
-				var/pref_name = path.display_name ? path.display_name : path.name
-				divine_gods[pref_name] = path
-			if(length(divine_gods)) // sanity check
-				var/fake_patron = input(M, "Who will you pretend your patron is?", "DECEPTION") as null|anything in divine_gods
-				if(!fake)
-					fake_patron = pick(divine_gods)
-				fake = divine_gods[fake_patron]
-		if(M.stat >= UNCONSCIOUS)
-			return
-		if(!M.CanReach(src))
-			return
-		if(signed)
-			return
-		playsound(src, 'sound/items/write.ogg', 50, FALSE, ignore_walls = FALSE)
-		M.visible_message(span_info("[M] has agreed to confess their true [confession_type == "antag" ? "villainy" : "faith"]."), span_info("I agree to confess my true nature."), vision_distance = COMBAT_MESSAGE_RANGE)
-		M.confess_sins(confession_type, resist=FALSE, interrogator=user, torture=FALSE, confession_paper = src, false_result = fake)
-	else
-		M.visible_message(span_boldwarning("[M] refused to sign the confession!"), span_boldwarning("I refused to sign the confession!"), vision_distance = COMBAT_MESSAGE_RANGE)
-	return
-
-/obj/item/paper/confession/read(mob/user)
+/obj/item/paper/inqslip/read(mob/user)
 	if(!user.client || !user.hud_used)
 		return
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		if(info)
-			user.adjust_experience(/datum/skill/misc/reading, 2, FALSE)
 		return
-	/*font-size: 125%;*/
 	if(in_range(user, src) || isobserver(user))
-		user.hud_used.reads.icon_state = "scroll"
-		user.hud_used.reads.show()
-		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-					<html><head><style type=\"text/css\">
-					body { background-image:url('book.png');background-repeat: repeat; }</style>
-					</head><body scroll=yes>"}
-		dat += "[info]<br>"
-		dat += "<a href='byond://?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
-		dat += "</body></html>"
-		user << browse(dat, "window=reading;size=460x300;can_close=0;can_minimize=0;can_maximize=0;can_resize=0;titlebar=0")
-		onclose(user, "reading", src)
+		if(waxed)
+			to_chat(user, span_notice("This writ has been signed by [signee.real_name], sealed with redtallow, and can now be mailed back through the Hermes. The Archbishop will be pleased with this one."))
+		if(signed)
+			to_chat(user, span_notice("This writ has been signed by [signee.real_name], and can now be mailed back through the Hermes. Sealing it with redtallow would garner more favor from the Archbishop."))
+		else if(signee)
+			to_chat(user, span_notice("This writ is intended to be signed by [signee.real_name]."))
+		else
+			to_chat(user, span_notice("This writ has not yet been signed."))
+
+/obj/item/paper/inqslip/accusation
+	name = "accusation"
+	desc = "A writ of religious suspicion, printed on Grenzelhoftian parchment: one signed not in ink, but blood. Press the accusation against your own bleeding wound in order to obtain a signature. Then pair it with an INDEXER full of the accused's blood. Once done, it is ready to be mailed back to the Oratorium. Fold and seal it, it's only proper."
+	marquevalue = 4
+	sliptype = 0
+
+/obj/item/paper/inqslip/confession
+	name = "confession"
+	base_icon_state = "confession"
+	marquevalue = 6
+	desc = "A writ of religious guilt, printed on Grenzelhoftian parchment: one signed not in ink, but blood. Press the confession against a suspect's bleeding wound, in order to obtain their signature. Once done, it is ready to be mailed back to the Oratorium. Fold and seal it, it's only proper."
+	sliptype = 2
+	var/bad_type // Type of crime confessed to
+	var/antag // Specific antagonist type
+	var/false_confession
+
+/obj/item/paper/inqslip/confession/attemptsign(mob/user, mob/living/carbon/human/M)
+	// Check if they've confessed via torture
+
+	var/forced_signing = HAS_TRAIT(user, TRAIT_HAS_CONFESSED)
+
+	if(paired)
+		if(paired.subject != user)
+			to_chat(M, span_warning("Why am I trying to make them sign this with the wrong [paired] paired with it?"))
+			return
+		else if(forced_signing || (alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", "YES", "NO") != "NO"))
+			signed = TRUE
+			signee = user
+			marquevalue += 2
+			REMOVE_TRAIT(user, TRAIT_HAS_CONFESSED, TRAIT_GENERIC)
+			update_appearance()
+
+	else if(alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", "YES", "NO") != "NO")
+		signed = TRUE
+		signee = user
+		marquevalue += 2
+		REMOVE_TRAIT(user, TRAIT_HAS_CONFESSED, TRAIT_GENERIC)
+		update_appearance()
 	else
-		return "<span class='warning'>I'm too far away to read it.</span>"
+		return
 
-/obj/item/paper/confession/attack_self_secondary(mob/user, params)
-	return SECONDARY_ATTACK_CALL_NORMAL
+/obj/item/paper/inqslip/arrival
+	name = "arrival slip"
+	desc = "A writ of arrival, printed on Grenzelhoftian parchment: one signed not in ink, but blood. Intended for one person and one person only. Press the slip against one's own weeping wounds in order to obtain a fitting signature. Once done, it is ready to be mailed back to the Oratorium."
 
-/obj/item/paper/confession/attack_hand_secondary(mob/user, params)
-	return SECONDARY_ATTACK_CALL_NORMAL
+/obj/item/paper/inqslip/arrival/ortho
+	marquevalue = 4
+
+/obj/item/paper/inqslip/arrival/inq
+	marquevalue = 10
+
+/obj/item/paper/inqslip/arrival/abso
+	marquevalue = 6
+
+/obj/item/paper/inqslip/proc/attemptsign(mob/user, mob/living/carbon/human/M)
+	if(alert(user, "SIGN THE SLIP?", "CONFIRM OR DENY", "YES", "NO") != "NO")
+		signed = TRUE
+		signee = user
+		update_appearance()
+	else
+		return
+
+/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user)
+	if(sealed)
+		return
+	if(signed)
+		to_chat(user, span_warning("It's already been signed."))
+		return
+	if(paired && !paired.full)
+		to_chat(user, span_warning("I should seperate [paired] from [src] before signing it."))
+		return
+	if(sliptype != 2)
+		if(M != user)
+			to_chat(user, span_warning("This is meant to be signed by the holder."))
+			return
+	if(!M.get_bleed_rate())
+		to_chat(user, span_warning("It must be signed in blood."))
+		return
+	if(sliptype == 1)
+		if(signee == M)
+			attemptsign(user)
+		else
+			to_chat(user, span_warning("This slip isn't meant for me."))
+	else if(!sliptype)
+		attemptsign(user)
+	else
+		attemptsign(M, user)
+
+/obj/item/paper/inqslip/attack_self(mob/user)
+	if(!signed)
+		to_chat(user, span_warning("It hasn't been signed yet. Why would I seal it?"))
+		return
+	if(waxed)
+		to_chat(user, span_notice("It's been sealed. It's ready to send back to the Oratorium."))
+		return
+	else if(!sealed)
+		sealed = TRUE
+		update_appearance()
+	else
+		sealed = FALSE
+		update_appearance()
+
+/obj/item/paper/inqslip/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(paired)
+		if(!user.get_active_held_item())
+			user.put_in_active_hand(paired, user.active_hand_index)
+			paired = null
+			update_appearance()
+		return TRUE
+
+/obj/item/paper/inqslip/update_icon_state()
+	. = ..()
+	throw_range = initial(throw_range)
+	if(!sealed)
+		if(paired)
+			if(!paired.full)
+				icon_state = "[base_icon_state]_indexer"
+			else
+				icon_state = "[base_icon_state]_indexer[signed ? "_signed" : "_blood"]"
+		else
+			icon_state = "[base_icon_state][signed ? "_signed" : ""]"
+	else
+		if(!waxed)
+			icon_state = "[base_icon_state]_unsealed"
+		else
+			icon_state = "[base_icon_state]_sealed"
+	return
+
+/obj/item/paper/inqslip/arrival/equipped(mob/user, slot, initial)
+	. = ..()
+	if(!signee)
+		signee = user
+
+/obj/item/paper/inqslip/attacked_by(obj/item/I, mob/living/user)
+	if(istype(I, /obj/item/clothing/ring/signet))
+		var/obj/item/clothing/ring/signet/S = I
+		if(S.tallowed && sealed)
+			waxed = TRUE
+			update_appearance()
+			S.tallowed = FALSE
+			S.update_appearance()
+			playsound(src, 'sound/items/inqslip_sealed.ogg', 75, TRUE, 4)
+			marquevalue += 2
+		else if(S.tallowed && !sealed)
+			to_chat(user,  span_warning("I need to fold the [src] first."))
+		else
+			to_chat(user,  span_warning("The ring hasn't been waxed."))
+
+	if(sliptype != 1)
+		if(istype(I, /obj/item/inqarticles/indexer))
+			var/obj/item/inqarticles/indexer/Q = I
+			if(paired)
+				return
+			if(!Q.subject)
+				if(signed)
+					to_chat(user, span_warning("I should fill [Q] before pairing it with [src]."))
+					return
+				else
+					paired = Q
+					user.transferItemToLoc(Q, src, TRUE)
+					update_appearance()
+			else if(Q.subject && Q.full)
+				if(sliptype == 2)
+					if(Q.subject == signee)
+						paired = Q
+						user.transferItemToLoc(Q, src, TRUE)
+						update_appearance()
+					else
+						if(signed)
+							to_chat(user, span_warning("[Q] doesn't contain the blood of the one who signed [src]."))
+						else
+							to_chat(user, span_warning("I should get a signature before pairing [Q] with [src]."))
+						return
+				else
+					paired = Q
+					user.transferItemToLoc(Q, src, TRUE)
+					update_appearance()
+			else
+				to_chat(user,  span_warning("[Q] isn't completely full."))
+
+/obj/item/paper/inqslip/attack_hand_secondary(mob/user, params)
+	. = ..()
 
 /obj/item/merctoken
 	name = "mercenary token"

@@ -12,6 +12,15 @@
 
 	var/list/last_used = list()
 
+/datum/enchantment/silver/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_AFTERATTACK
+	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+	registered_signals += COMSIG_ITEM_PICKUP
+	RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
+	registered_signals += COMSIG_ITEM_EQUIPPED
+	RegisterSignal(item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
+
 /datum/enchantment/silver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind)
 		return UNAFFECTED
@@ -30,7 +39,7 @@
 		return AFFECTED
 	return UNAFFECTED
 
-/datum/enchantment/silver/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
+/datum/enchantment/silver/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
 		return
 	if(!ishuman(target))
@@ -67,7 +76,7 @@
 		return
 
 
-/datum/enchantment/silver/on_equip(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/silver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
 	var/affected = affected_by_bane(user)
 	if(!affected)
 		return
@@ -80,8 +89,7 @@
 		user.adjustFireLoss(25)
 		user.fire_act(1, 10)
 
-/datum/enchantment/silver/on_pickup(obj/item/i, mob/living/carbon/human/user)
-	. = ..()
+/datum/enchantment/silver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
 	var/affected = affected_by_bane(user)
 	if(!affected)
 		return

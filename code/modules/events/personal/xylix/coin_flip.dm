@@ -8,9 +8,9 @@
 	min_players = 15
 
 	tags = list(
+		TAG_XYLIX,
 		TAG_GAMBLE,
 		TAG_TRICKERY,
-		TAG_UNEXPECTED,
 	)
 
 /datum/round_event_control/xylix_gamble/canSpawnEvent(players_amt, gamemode, fake_check)

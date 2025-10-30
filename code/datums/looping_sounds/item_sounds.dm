@@ -83,3 +83,15 @@
 	mid_length = 60
 	volume = 100
 	extra_range = -1
+
+/datum/looping_sound/blackmirror
+	mid_sounds = list('sound/items/blackmirror_amb.ogg')
+	mid_length = 30
+	volume = 100
+	extra_range = -3
+
+/datum/looping_sound/psydonmusicboxsound
+	mid_sounds = list('sound/magic/psydonmusicbox.ogg')
+	mid_length = 320
+	volume = 50
+	extra_range = 10

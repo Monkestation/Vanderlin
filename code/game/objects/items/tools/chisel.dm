@@ -23,7 +23,8 @@
 	dropshrink = 0.9
 	grid_height = 64
 	grid_width = 32
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 50
+	melting_material = /datum/material/steel
 	var/time_multiplier = 1
 
 /datum/intent/chisel

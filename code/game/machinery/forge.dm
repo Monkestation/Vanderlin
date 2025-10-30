@@ -17,7 +17,7 @@
 			var/tyme = world.time
 			T.hott = tyme
 			T.proxy_heat(150, 1500)
-			addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 100)
+			addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 30 SECONDS)
 			T.update_appearance()
 			user.visible_message("<span class='info'>[user] heats the bar.</span>")
 			if(istype(W, /obj/item/weapon/tongs/stone))

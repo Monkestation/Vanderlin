@@ -21,7 +21,7 @@
 
 /// From base of atom/attack_hand(): (mob/user)
 #define COMSIG_ATOM_ATTACK_HAND "atom_attack_hand"
-/// From base of atom/attack_right(): (mob/user)
+/// From base of atom/attack_hand_secondary(): (mob/user)
 #define COMSIG_ATOM_ATTACK_HAND_SECONDARY "atom_attack_hand_secondary"
 
 /// From base of atom/attack_ghost(): (mob/dead/observer/ghost)

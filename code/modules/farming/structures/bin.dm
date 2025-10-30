@@ -163,51 +163,17 @@
 
 	if(istype(I, /obj/item/weapon/tongs))
 		var/obj/item/weapon/tongs/T = I
-		if(T.held_item && istype(T.held_item, /obj/item/ingot))
-			var/obj/item/ingot/ingot = T.held_item
+		if(T.held_item && HAS_TRAIT(T.held_item, TRAIT_NEEDS_QUENCH))
 			var/removereg = /datum/reagent/water
 			if(!reagents.has_reagent(/datum/reagent/water, 5))
 				removereg = /datum/reagent/water/gross
 				if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
 					to_chat(user, "<span class='warning'>Need more water to quench in.</span>")
 					return
-			if(!T.held_item:currecipe)
-				to_chat(user, "<span class='warning'>Huh?</span>")
-				return
-			if(ingot.currecipe.progress != 100)
-				to_chat(user, "<span class='warning'>It's not finished yet.</span>")
-				return
-			if(!T.hott)
-				to_chat(user, "<span class='warning'>I need to heat it to temper the metal.</span>")
-				return
-			var/used_turf = user.loc
-			if(!isturf(used_turf))
-				used_turf = get_turf(src)
-			// This behemoth of a chunk of code is necessary to create copies of an altered item
-			// Because engine is dumb and doesn't have a copy object proc
-			// We take all values of a recipe, apply them to floating vars, then assign them to every extra copy
-			// (substracting one every time it runs) until we run out of that number
-			var/datum/anvil_recipe/R = T.held_item:currecipe
-			var/obj/item/crafteditem = R.created_item
-			for(var/i in 1 to R.createditem_extra + 1)
-				var/obj/item/IT = new crafteditem(used_turf, TRUE)
-				R.handle_creation(IT)
-				IT.OnCrafted(user.dir, user)
-				I.update_integrity(I.max_integrity, update_atom = FALSE)
-				record_featured_stat(FEATURED_STATS_SMITHS, user)
-				record_featured_object_stat(FEATURED_STATS_FORGED_ITEMS, IT.name)
-
+			reagents.remove_reagent(removereg, 5)
 			playsound(src,pick('sound/items/quench_barrel1.ogg','sound/items/quench_barrel2.ogg'), 100, FALSE)
 			user.visible_message("<span class='info'>[user] tempers \the [T.held_item.name] in \the [src], hot metal sizzling.</span>")
-			QDEL_NULL(T.held_item)
-			T.update_appearance(UPDATE_ICON)
-			reagents.remove_reagent(removereg, 5)
-			var/datum/reagent/water_to_dirty = reagents.has_reagent(/datum/reagent/water, 5)
-			if(water_to_dirty)
-				var/amount_to_dirty = water_to_dirty.volume
-				if(amount_to_dirty)
-					reagents.remove_reagent(/datum/reagent/water, amount_to_dirty)
-					reagents.add_reagent(/datum/reagent/water/gross, amount_to_dirty)
+			T.held_item.remove_quench()
 			update_appearance(UPDATE_ICON)
 			return
 	. = ..()
@@ -225,3 +191,13 @@
 	if(istype(I, /obj/item/dye_pack)) //it works... but we can do better, surely?
 		return
 	. = ..()
+
+/obj/item/proc/remove_quench()
+	if(!HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
+		return
+	REMOVE_TRAIT(src, TRAIT_NEEDS_QUENCH, "quench")
+	remove_filter("heated")
+
+/obj/item/proc/add_quench_requirement()
+	ADD_TRAIT(src, TRAIT_NEEDS_QUENCH, "quench")
+	add_filter("heated", 1, list(type="color", color = list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1)))

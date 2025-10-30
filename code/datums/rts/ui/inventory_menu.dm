@@ -11,9 +11,9 @@
 	var/current_x = 0
 	var/current_y = 0
 
-/atom/movable/screen/worker_inventory_backdrop/Initialize(mapload, datum/hud/hud_owner)
+/atom/movable/screen/worker_inventory_backdrop/New(loc, ...)
 	. = ..()
-	close = new(null, hud_owner)
+	close = new
 
 /atom/movable/screen/worker_inventory_backdrop/Destroy(force)
 	QDEL_NULL(close)

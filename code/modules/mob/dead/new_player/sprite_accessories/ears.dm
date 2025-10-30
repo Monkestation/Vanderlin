@@ -3,7 +3,7 @@
 	icon = 'icons/mob/sprite_accessory/ears/ears.dmi'
 	color_key_name = "Ears"
 	relevant_layers = list(BODY_ADJ_LAYER, BODY_FRONT_LAYER)
-	color_key_defaults = list(KEY_HAIR_COLOR)
+	color_key_defaults = list(KEY_SKIN_COLOR)
 
 /datum/sprite_accessory/ears/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEEARS)

@@ -785,3 +785,106 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/weapon/mace/silver/rungu
+
+/datum/anvil_recipe/weapons/psy/axe
+	name = "Psydonian War Axe (+1 B. Silver, +1 Stick)"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/axe/psydon
+	additional_items = list(/obj/item/ingot/silverblessed, /obj/item/grown/log/tree/stick)
+	i_type = "Weapons"
+/datum/anvil_recipe/weapons/psy/mace
+	name = "Psydonian Mace (+1 B. Silver, +1 Stick)"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/mace/goden/psydon
+	additional_items = list(/obj/item/ingot/silverblessed, /obj/item/grown/log/tree/stick)
+	i_type = "Weapons"
+/datum/anvil_recipe/weapons/psy/spear
+	name = "Psydonian Spear (+1 Small Log)"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/polearm/spear/psydon
+	additional_items = list(/obj/item/grown/log/tree/small)
+	i_type = "Weapons"
+/datum/anvil_recipe/weapons/psy/dagger
+	name = "Psydonian Dagger"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/knife/dagger/silver/psydon
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/shortsword
+	name = "Psydonian Shortsword"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/sword/short/psy
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/katar
+	name = "Psydonian Katar"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/katar/psydon
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/knuckles
+	name = "Psydonian Knuckles"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/knuckles/psydon
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/cudgel
+	name = "Psydonian Handmace"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/mace/cudgel/psy
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/halberd
+	name = "Psydonian Halberd (+1 B. Silver, +1 Small Log)"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/polearm/halberd/psydon
+	additional_items = list(/obj/item/ingot/silverblessed, /obj/item/grown/log/tree/small)
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/gsword
+	name = "Psydonian Greatsword (+1 B. Silver)"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/sword/long/greatsword/psydon
+	additional_items = list(/obj/item/ingot/silverblessed)
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/sword
+	name = "Psydonian Sword"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/sword/long/psydon
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/psy/whip
+	name = "Psydonian Whip (+2 Cured Leather)"
+	req_bar = /obj/item/ingot/silverblessed
+	craftdiff = 3
+	created_item = /obj/item/weapon/whip/psydon
+	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/atgervi_shield
+	name = "kite shield"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/grown/log/tree)
+	created_item = /obj/item/weapon/shield/atgervi
+	i_type = "Shields"
+	craftdiff = 2
+
+/datum/anvil_recipe/weapons/atgervi_axe
+	name = "bearded axe"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/axe/steel/atgervi
+	i_type = "Weapons"
+	craftdiff = 3

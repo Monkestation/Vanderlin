@@ -153,6 +153,11 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 		/obj/item/reagent_containers/food/snacks/produce/fruit/lime,
 		/obj/item/reagent_containers/food/snacks/produce/fruit/tangerine,
 		/obj/item/reagent_containers/food/snacks/produce/fruit/plum,
+		/obj/item/reagent_containers/food/snacks/produce/fruit/mango,
+		/obj/item/reagent_containers/food/snacks/produce/fruit/mangosteen,
+		/obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit,
+		/obj/item/reagent_containers/food/snacks/produce/fruit/avocado,
+		/obj/item/reagent_containers/food/snacks/produce/fruit/pineapple,
 	)
 
 /datum/natural_precursor/grain
@@ -463,6 +468,16 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 		/obj/item/alch/herb/euphorbia
 	)
 
+/datum/natural_precursor/salvia
+	name = "salvia"
+	essence_yields = list(
+		/datum/thaumaturgical_essence/earth = 10,
+		/datum/thaumaturgical_essence/void = 5
+	)
+	init_types = list(
+		/obj/item/alch/herb/salvia
+	)
+
 //air herbs
 /datum/natural_precursor/symphitum
 	name = "symphitum"
@@ -472,6 +487,16 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 	)
 	init_types = list(
 		/obj/item/alch/herb/symphitum
+	)
+
+/datum/natural_precursor/urtica
+	name = "urtica"
+	essence_yields = list(
+		/datum/thaumaturgical_essence/air = 10,
+		/datum/thaumaturgical_essence/void = 5
+	)
+	init_types = list(
+		/obj/item/alch/herb/urtica
 	)
 
 /datum/natural_precursor/euphrasia

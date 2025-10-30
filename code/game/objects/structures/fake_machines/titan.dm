@@ -396,6 +396,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 			return
 		newtax = CLAMP(newtax, 1, 99)
 		SStreasury.tax_value = newtax / 100
+		SStreasury.untaxed_deposits = list()
 		priority_announce("The new tax in Vanderlin shall be [newtax] percent.", "[user.real_name], The Generous [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
 	reset_mode()
 

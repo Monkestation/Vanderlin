@@ -3,6 +3,9 @@
 	return !area.coven_protected
 
 /mob/living
+	var/cached_island_id = null
+	var/last_island_check = 0
+
 	var/mob/living/walk_to_target
 	var/walk_to_duration = 0
 	var/walk_to_steps_taken = 0
@@ -78,14 +81,22 @@
 
 /mob/living/proc/set_bloodpool(newblood)
 	bloodpool = CLAMP(newblood, 0, maxbloodpool)
-	hud_used?.bloodpool?.name = "Bloodpool: [bloodpool]"
-	hud_used?.bloodpool?.desc = "Bloodpool: [bloodpool]/[maxbloodpool]"
+	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+		hud_used?.bloodpool?.name = "Psydon's Grace: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Psydon's Grace: [bloodpool]/[maxbloodpool]"
+	else
+		hud_used?.bloodpool?.name = "Bloodpool: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Bloodpool: [bloodpool]/[maxbloodpool]"
 	hud_used?.bloodpool?.set_value((100 / (maxbloodpool / bloodpool)) / 100, 1 SECONDS)
 
 /mob/living/proc/adjust_bloodpool(adjust)
 	bloodpool = CLAMP(bloodpool + adjust, 0, maxbloodpool)
-	hud_used?.bloodpool?.name = "Bloodpool: [bloodpool]"
-	hud_used?.bloodpool?.desc = "Bloodpool: [bloodpool]/[maxbloodpool]"
+	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+		hud_used?.bloodpool?.name = "Psydon's Grace: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Psydon's Grace: [bloodpool]/[maxbloodpool]"
+	else
+		hud_used?.bloodpool?.name = "Bloodpool: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Bloodpool: [bloodpool]/[maxbloodpool]"
 	if(bloodpool <= 0)
 		hud_used?.bloodpool?.set_value(0, 1 SECONDS)
 	else

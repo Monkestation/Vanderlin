@@ -1661,14 +1661,15 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return FALSE
 	if(user == target)
 		return FALSE
-	if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
-		if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
-			to_chat(user, span_notice("I can't move my legs!"))
+	if(!HAS_TRAIT(user, TRAIT_GARROTED))
+		if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
+			if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
+				to_chat(user, span_notice("I can't move my legs!"))
+				return
+			else															//If only one leg is grabbed
+				to_chat(user, span_notice("I can't move my leg!"))
+				user.resist_grab()
 			return
-		else															//If only one leg is grabbed
-			to_chat(user, span_notice("I can't move my leg!"))
-			user.resist_grab()
-		return
 
 	if(user.stamina >= user.maximum_stamina)
 		return FALSE

@@ -14,11 +14,13 @@
 	ui_icon_state = "oatchaff"
 
 	arg_2 = "Grain"
+
 /datum/persistant_workorder/farm/fruit
 	name = "Farm Fruits"
 	ui_icon_state = "apple"
 
 	arg_2 = "Fruit"
+
 /datum/persistant_workorder/farm/vegetable
 	name = "Farm Vegetables"
 	ui_icon_state = "cabbage"

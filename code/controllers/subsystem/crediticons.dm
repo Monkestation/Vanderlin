@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(credits_icons)
 
 SUBSYSTEM_DEF(crediticons)
 	name = "crediticons"
-	wait = 20
+	wait = 60
 	flags = SS_NO_INIT
 	priority = 1
 	var/list/processing = list()

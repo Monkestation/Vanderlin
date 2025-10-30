@@ -1,5 +1,5 @@
 
-/proc/generate_ore_veins(list/biome_map, list/elevation_map, list/cave_map)
+/proc/generate_ore_veins_old(list/biome_map, list/elevation_map, list/cave_map)
 	world.log << "Generating ore veins using improved vein placement..."
 	var/list/ore_map = list()
 

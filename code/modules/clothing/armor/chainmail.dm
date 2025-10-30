@@ -8,7 +8,8 @@
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_ARMOR
 
 	armor_class = AC_MEDIUM
@@ -28,7 +29,7 @@
 
 	armor = ARMOR_MAILLE_IRON
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	item_weight = 6 * IRON_MULTIPLIER
 
 //................ Hauberk ............... //
@@ -46,6 +47,12 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle)
 
+/obj/item/clothing/armor/chainmail/hauberk/fluted
+	name = "fluted hauberk"
+	desc = "A steel maille, of a pattern popularized by Psydonian templars."
+	icon_state = "ornatehauberk"
+	item_state = "ornatehauberk"
+
 /obj/item/clothing/armor/chainmail/hauberk/iron
 	name = "iron hauberk"
 	desc = "A long shirt of iron maille, heavy on the shoulders. Can be worn as a shirt, but some men with hairy chests consider it torture."
@@ -54,7 +61,7 @@
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 
 	armor = ARMOR_MAILLE_IRON
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	item_weight = 6 * IRON_MULTIPLIER
 
 //................ Ancient Haubergon ............... //

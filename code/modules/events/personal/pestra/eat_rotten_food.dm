@@ -8,7 +8,7 @@
 	min_players = 20
 
 	tags = list(
-		TAG_MEDICAL,
+		TAG_PESTRA,
 	)
 
 /datum/round_event_control/pestra_rotten_feast/canSpawnEvent(players_amt, gamemode, fake_check)

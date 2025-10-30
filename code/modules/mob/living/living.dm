@@ -7,7 +7,10 @@
 				GLOB.weatherproof_z_levels |= "[turf.z]"
 		if("[turf.z]" in GLOB.weatherproof_z_levels)
 			faction |= FACTION_MATTHIOS
-			SSmobs.matthios_mobs |= src
+			SSmatthios_mobs.register_mob(src)
+		if(SSterrain_generation.get_island_at_location(turf))
+			faction |= "islander"
+			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
 
 /mob/living/Initialize()
 	. = ..()
@@ -27,7 +30,10 @@
 
 /mob/living/Destroy()
 	if(FACTION_MATTHIOS in faction)
-		SSmobs.matthios_mobs -= src
+		SSmatthios_mobs.unregister_mob(src)
+	if(cached_island_id)
+		SSisland_mobs.remove_mob(src)
+
 	surgeries = null
 	if(LAZYLEN(status_effects))
 		for(var/s in status_effects)
@@ -595,6 +601,12 @@
 		if(ismob(pulling))
 			var/mob/living/M = pulling
 			M.reset_offsets("pulledby")
+			if(HAS_TRAIT(M, TRAIT_GARROTED))
+				var/obj/item/inqarticles/garrote/gcord = src.get_active_held_item()
+				if(!gcord)
+					gcord = src.get_inactive_held_item()
+				gcord.wipeslate(src)
+
 			if(grab_state >= GRAB_AGGRESSIVE)
 				TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 2 SECONDS - (0.2 SECONDS * get_skill_level(/datum/skill/combat/wrestling)))) // BUFF: Reduced cooldown
 
@@ -1066,8 +1078,6 @@
 			update_vision_cone()
 
 /mob/living/proc/makeTrail(turf/target_turf, turf/start, direction)
-	if(!has_gravity())
-		return
 	var/blood_exists = FALSE
 
 	for(var/obj/effect/decal/cleanable/trail_holder/C in start) //checks for blood splatter already on the floor
@@ -1489,10 +1499,25 @@
 	var/shitte = ""
 	if(client?.prefs.showrolls)
 		shitte = " ([resist_chance]%)"
+	if(HAS_TRAIT(src, TRAIT_GARROTED))
+		var/obj/item/inqarticles/garrote/gcord = L.get_active_held_item()
+		if(!gcord)
+			gcord = L.get_inactive_held_item()
+		to_chat(pulledby, span_warning("[src] struggles against the [gcord]!"))
+		if(!src.mind) // NPCs do less damage to the garrote
+			gcord.take_damage(5)
+		else
+			gcord.take_damage(10)
 	if(prob(resist_chance))
 		visible_message("<span class='warning'>[src] breaks free of [pulledby]'s grip!</span>", \
 						"<span class='notice'>I break free of [pulledby]'s grip![shitte]</span>", null, null, pulledby)
 		to_chat(pulledby, "<span class='danger'>[src] breaks free of my grip!</span>")
+		if(HAS_TRAIT(src, TRAIT_GARROTED))
+			var/obj/item/inqarticles/garrote/gcord = L.get_active_held_item()
+			if(!gcord)
+				gcord = L.get_inactive_held_item()
+			gcord.take_damage(gcord.max_integrity * 0.2)
+			gcord.wipeslate(src)
 		log_combat(pulledby, src, "broke grab")
 		pulledby.stop_pulling()
 
@@ -1503,9 +1528,15 @@
 		playsound(src.loc, 'sound/combat/grabbreak.ogg', 50, TRUE, -1)
 		return FALSE
 	else
-		visible_message("<span class='warning'>[src] struggles to break free from [pulledby]'s grip!</span>", \
-						"<span class='warning'>I struggle against [pulledby]'s grip![shitte]</span>", null, null, pulledby)
-		to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
+		if(!HAS_TRAIT(src, TRAIT_GARROTED))
+			visible_message(span_warning("[src] struggles to break free from [L]'s grip!"), \
+						span_warning("I struggle against [L]'s grip![resist_chance]"), null, null, L)
+		else
+			var/obj/item/inqarticles/garrote/gcord = L.get_active_held_item()
+			if(!gcord)
+				gcord = L.get_inactive_held_item()
+			visible_message(span_warning("[src] struggles to break free from [L]'s [gcord]!"), \
+						span_warning("I struggle against [L]'s [gcord]![resist_chance]"), null, null, L)
 		playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
 		return TRUE
 
@@ -1723,10 +1754,6 @@
 
 	if((action_bitflags & NEED_LIGHT) && !has_light_nearby() && !has_nightvision())
 		to_chat(src, span_warning("You need more light to do this!"))
-		return FALSE
-
-	if((action_bitflags & NEED_GRAVITY) && !has_gravity())
-		to_chat(src, span_warning("You need gravity to do this!"))
 		return FALSE
 
 	return TRUE
@@ -2621,8 +2648,10 @@
 
 	SEND_SIGNAL(src, COMSIG_LIVING_BEFRIENDED, new_friend)
 
-	if(src in SSmobs.matthios_mobs)
-		SSmobs.matthios_mobs -= src
+	if(src in SSmatthios_mobs.matthios_mobs)
+		SSmatthios_mobs.unregister_mob(src)
+	if(cached_island_id)
+		SSisland_mobs.remove_mob(src)
 
 	return TRUE
 

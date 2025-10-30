@@ -927,6 +927,46 @@
 	handle_reactions()
 	SEND_SIGNAL(my_atom, COMSIG_REAGENTS_EXPOSE_TEMPERATURE, null, chem_temp)
 
+/**
+ * Multiplies reagents inside this holder by a specific amount
+ * Arguments
+ *
+ * * multiplier - the amount to multiply each reagent, its a percentile value where < 1 will reduce the volume and
+ * * > 1 will increase the volume. Final multiplier applied to the reagent volume is (1 - multiplier)
+ * * datum/reagent/target_id - multiply only this reagent in this holder leaving others untouched
+ */
+/datum/reagents/proc/multiply(multiplier = 1, datum/reagent/target_id)
+	if(!total_volume)
+		return
+
+	multiplier = round(min(multiplier, maximum_volume / total_volume), CHEMICAL_QUANTISATION_LEVEL)
+	if(multiplier < 0 || multiplier == 1)
+		return
+
+	if(!isnull(target_id) && !ispath(target_id))
+		stack_trace("Bad reagent path [target_id] passed to multiply")
+		return
+
+	var/change = (multiplier - 1) //Get the % change
+	var/reagent_change
+	var/list/cached_reagents = reagent_list
+	for(var/datum/reagent/reagent as anything in cached_reagents)
+		if(!isnull(target_id) && reagent.type != target_id)
+			continue
+
+		reagent_change = reagent.volume * change
+		if(change > 0)
+			add_reagent(reagent.type, reagent_change, no_react = TRUE)
+		else
+			reagent.volume += reagent_change
+
+		if(!isnull(target_id))
+			break
+
+	if(change < 0)
+		update_total()
+	handle_reactions()
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 

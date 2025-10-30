@@ -143,7 +143,7 @@
 /datum/supply_pack/tools/bait
 	name = "Fishing Grub x5"
 	cost = 20
-	contains = list(/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe)
+	contains = list(/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe)
 
 /datum/supply_pack/tools/fishingline
 	name = "Premium Fishing Line"

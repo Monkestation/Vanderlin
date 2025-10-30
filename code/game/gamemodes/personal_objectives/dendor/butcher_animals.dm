@@ -39,4 +39,4 @@
 	owner.current.adjust_skillrank(/datum/skill/labor/butchering, 1)
 
 /datum/objective/personal/butcher_animals/update_explanation_text()
-	explanation_text = "Butcher at least [animals_required] animals to satisfy Dendor."
+	explanation_text = "Butcher [animals_required] animal\s to satisfy Dendor."

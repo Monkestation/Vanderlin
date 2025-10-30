@@ -1854,7 +1854,7 @@
 /turf/closed/mineral/bedrock,
 /area/rogue/indoors/mountains/anvil/surface/building)
 "CQ" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/cobble,
 /area/rogue/under/mountains/anvil/lower/building)
 "CR" = (
@@ -2046,7 +2046,7 @@
 /turf/open/floor/wood/nosmooth/saiga,
 /area/rogue/outdoors/mountains/anvil/snowyforest)
 "Gc" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/dirt/road,
 /area/rogue/under/mountains/anvil/lower/building)
 "Gf" = (

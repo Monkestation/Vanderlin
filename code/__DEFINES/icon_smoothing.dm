@@ -69,7 +69,10 @@ DEFINE_BITFIELD(smooth, list(
 #define SMOOTH_GROUP_WALLS_EREBUS S_TURF(19) //!turf/closed/wall/mineral/underbrick
 #define SMOOTH_GROUP_WALLS_WOOD S_TURF(20) //!turf/closed/wall/mineral/wood
 
-#define MAX_S_TURF 20 //Always match this value with the one above it.
+#define SMOOTH_GROUP_FLOOR_FLESH S_TURF(21)
+#define SMOOTH_GROUP_MUSHROOM S_TURF(22)
+
+#define MAX_S_TURF 22 //Always match this value with the one above it.
 
 /* /obj included */
 

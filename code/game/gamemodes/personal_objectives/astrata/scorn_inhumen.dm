@@ -4,7 +4,7 @@
 	triumph_count = 2
 	rewards = list("2 Triumphs", "Astrata grows stronger", "Ability to silence inhumen")
 	var/spits_done = 0
-	var/spits_required = 2
+	var/spits_required = 1
 
 /datum/objective/personal/inhumen_scorn/on_creation()
 	. = ..()

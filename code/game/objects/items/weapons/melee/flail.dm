@@ -132,7 +132,13 @@
 
 /obj/item/weapon/flail/psydon/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
+
+/obj/item/weapon/flail/psydon/relic
+	name = "Consecratia"
+	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
+	icon_state = "psymorningstar"
+
 
 //................ Peasant Flail ............... // A little confusing still
 /obj/item/weapon/flail/peasant
@@ -150,7 +156,7 @@
 	wbalance = 0
 	wlength = WLENGTH_LONG
 	slot_flags = ITEM_SLOT_BACK
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = INTEGRITY_STRONG + 50
 	sellprice = 20
 	minstr = 8
 
@@ -243,7 +249,8 @@
 	desc = "Weight of wealth in a deadly striking end."
 	icon_state = "matthiosflail"
 	sellprice = 250
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 150
+	melting_material = /datum/material/steel
 	possible_item_intents = list(/datum/intent/flail/strike/matthiosflail)
 	gripped_intents = list(/datum/intent/flail/strike/matthiosflail, /datum/intent/flail/strike/smash/matthiosflail)
 	associated_skill = /datum/skill/combat/whipsflails

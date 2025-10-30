@@ -254,7 +254,6 @@
 		visible_message("<span class='danger'>[src] throws [thrown_thing].</span>", \
 						"<span class='danger'>I toss [thrown_thing].</span>")
 		log_message("has thrown [thrown_thing]", LOG_ATTACK)
-		newtonian_move(get_dir(end_T, src))
 		thrown_thing.safe_throw_at(end_T, thrown_range, thrown_speed, src, null, null, null, move_force)
 		if(!used_sound)
 			used_sound = pick(PUNCHWOOSH)
@@ -300,6 +299,10 @@
 		dat += "<BR><A href='byond://?src=[REF(src)];item=[ITEM_SLOT_HANDCUFFED]'>Handcuffed</A>"
 	if(legcuffed)
 		dat += "<BR><A href='byond://?src=[REF(src)];item=[ITEM_SLOT_LEGCUFFED]'>Legcuffed</A>"
+
+	var/datum/status_effect/bugged/effect = has_status_effect(/datum/status_effect/bugged)
+	if(effect && HAS_TRAIT(user, TRAIT_INQUISITION))
+		dat += "<BR><A href='?src=[REF(src)];item=[effect.device]'>BUGGED</A>"
 
 	dat += {"
 	<BR>
@@ -728,6 +731,15 @@
 	if(HAS_TRAIT(src, TRAIT_XRAY_VISION))
 		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_in_dark = max(see_in_dark, 8)
+
+	if(HAS_TRAIT(src, TRAIT_NOCSHADES))
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_NOCSHADES)
+		see_in_dark = max(see_in_dark, 12)
+		add_client_colour(/datum/client_colour/nocshaded)
+		overlay_fullscreen("inqvision", /atom/movable/screen/fullscreen/inqvision)
+	else
+		remove_client_colour(/datum/client_colour/nocshaded)
+		clear_fullscreen("inqvision")
 
 	if(see_override)
 		see_invisible = see_override

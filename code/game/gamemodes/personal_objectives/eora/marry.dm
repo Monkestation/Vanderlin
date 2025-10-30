@@ -34,7 +34,7 @@
 
 	complete_objective()
 
-/datum/objective/personal/marry/complete_objective()
+/datum/objective/personal/marry/complete_objective(escalatation_type = ESCALATION_INTERVENTION_ONLY)
 	. = ..()
 	owner.current.remove_stress(/datum/stress_event/eora_matchmaking)
 	to_chat(owner.current, span_greentext("You have married and thefore completed Eora's wish!"))

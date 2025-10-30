@@ -67,6 +67,10 @@
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
 
+	var/datum/inspiration/I = new /datum/inspiration(H)
+	I.grant_inspiration(H, bard_tier = BARD_T3)
+
+
 /datum/outfit/mercenary/sworddancer/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/cloak/cape/C = H.get_item_by_slot(ITEM_SLOT_CLOAK)

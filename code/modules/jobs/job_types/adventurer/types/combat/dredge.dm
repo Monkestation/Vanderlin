@@ -629,6 +629,8 @@
 			H.change_stat(STATKEY_END, 1)
 			l_hand = /obj/item/instrument/guitar
 			ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+			var/datum/inspiration/I = new /datum/inspiration(H)
+			I.grant_inspiration(H, bard_tier = BARD_T3)
 			to_chat(H,span_info("\
 			I used to be a bard, the skills never left me. I'm a silver-tongued devil!")
 			)

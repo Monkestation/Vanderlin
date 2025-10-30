@@ -1,11 +1,10 @@
 /atom/movable
-	var/list/particle_emitters = list()
+	var/list/particle_emitters
 
 /atom/movable/Destroy(force)
 	for(var/emitter as anything in particle_emitters)
 		qdel(emitter)
-	if(!LAZYLEN(particle_emitters))
-		particle_emitters = null
+	UNSETEMPTY(particle_emitters)
 	return ..()
 
 /atom/movable/proc/AddParticles(type, create_new = FALSE)
@@ -26,11 +25,11 @@
 	pe = new /obj/particle_emitter(loc, time)
 	pe.host = src
 	pe.AddParticles(type, create_new)
-	particle_emitters |= pe
+	LAZYOR(particle_emitters, pe)
 	return pe
 
 /atom/movable/proc/RemoveEmitter(obj/particle_emitter/emitter)
-	particle_emitters -= emitter
+	LAZYREMOVE(particle_emitters, emitter)
 	qdel(emitter)
 
 /atom/movable/proc/RemoveParticles(delete = FALSE)
@@ -88,7 +87,7 @@
 	if(timer)
 		deltimer(timer)
 	if(host)
-		host.particle_emitters -= src
+		LAZYREMOVE(host.particle_emitters, src)
 		host = null
 	RemoveParticles()
 	return ..()

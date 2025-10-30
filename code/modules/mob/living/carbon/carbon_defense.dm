@@ -122,6 +122,9 @@
 	if(I)
 		used_limb = parse_zone(I.sublimb_grabbed)
 
+	if(HAS_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE))
+		return
+
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		visible_message("<span class='danger'>[user] firmly grips [src]'s [used_limb]!</span>",
 						"<span class='danger'>[user] firmly grips my [used_limb]!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)

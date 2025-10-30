@@ -234,13 +234,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 ///Extra effects to add when the mob is tamed, such as adding a riding component
 /mob/living/simple_animal/proc/tamed(mob/user)
 	INVOKE_ASYNC(src, PROC_REF(emote), "lower_head", null, null, null, TRUE)
-	tame = TRUE
-	if(user)
-		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 55)
-		befriend(user)
-		record_round_statistic(STATS_ANIMALS_TAMED)
-		SEND_SIGNAL(user, COMSIG_ANIMAL_TAMED, src)
-	pet_passive = TRUE
 
 	if(ai_controller)
 		ai_controller.can_idle = FALSE
@@ -260,6 +253,14 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 			)
 			if(!GetComponent(/datum/component/obeys_commands))
 				AddComponent(/datum/component/obeys_commands, pet_commands)
+
+	tame = TRUE
+	if(user)
+		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 55)
+		befriend(user)
+		record_round_statistic(STATS_ANIMALS_TAMED)
+		SEND_SIGNAL(user, COMSIG_ANIMAL_TAMED, src)
+	pet_passive = TRUE
 
 	if(user)
 		owner = user

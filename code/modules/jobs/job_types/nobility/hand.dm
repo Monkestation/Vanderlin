@@ -33,7 +33,7 @@
 /datum/job/hand/after_spawn(mob/living/spawned, client/player_client)
 	. = ..()
 	var/mob/living/carbon/human/H = spawned
-	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, FAMILY_OMMER), 5 SECONDS)
+	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, FAMILY_OMMER), 10 SECONDS)
 
 	if(GLOB.keep_doors.len > 0)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), H), 5 SECONDS)

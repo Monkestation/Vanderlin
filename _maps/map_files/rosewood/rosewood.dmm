@@ -2489,7 +2489,7 @@
 /turf/open/floor/carpet/red,
 /area/rogue/indoors/town/merc_guild)
 "bnq" = (
-/obj/item/fishing/bait/dough,
+/obj/item/fishing/lure/dough,
 /turf/open/water/cleanshallow,
 /area/rogue/indoors/town/cell)
 "bnv" = (
@@ -3824,26 +3824,26 @@
 /area/rogue/indoors/town)
 "bWF" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
 /turf/open/floor/wood,
 /area/rogue/indoors/ship)
 "bWO" = (
@@ -6096,7 +6096,7 @@
 /turf/open/floor/cobblerock/snow,
 /area/rogue/outdoors/town)
 "dao" = (
-/obj/item/fishing/bait/dough,
+/obj/item/fishing/lure/dough,
 /turf/open/floor/dirt,
 /area/rogue/indoors/town/cell)
 "day" = (
@@ -10868,28 +10868,28 @@
 /area/rogue/under/town/basement)
 "fIE" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
 /turf/open/floor/wood,
 /area/rogue/indoors/ship)
 "fIK" = (
@@ -13655,7 +13655,7 @@
 /obj/structure/chair/wood/alt/chair3{
 	dir = 4
 	},
-/obj/effect/landmark/start/shepherd{
+/obj/effect/landmark/start/orthodoxist{
 	dir = 4
 	},
 /turf/open/floor/carpet/royalblack,
@@ -13926,26 +13926,26 @@
 /area/rogue/outdoors/town)
 "hkT" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/gray,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/dough,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
-/obj/item/fishing/bait/speckled,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/gray,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/dough,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
+/obj/item/fishing/lure/speckled,
 /turf/open/floor/wood,
 /area/rogue/indoors/ship)
 "hkW" = (
@@ -16577,7 +16577,7 @@
 /turf/open/water/sewer,
 /area/rogue/under/town/sewer)
 "iIn" = (
-/obj/item/fishing/bait/dough,
+/obj/item/fishing/lure/dough,
 /turf/open/floor/blocks,
 /area/rogue/indoors/town/cell)
 "iIu" = (
@@ -28205,7 +28205,7 @@
 /turf/open/floor/wood,
 /area/rogue/indoors/town/tavern)
 "oFZ" = (
-/obj/item/chair/stool/bar/crafted{
+/obj/item/chair/stool/crafted{
 	pixel_y = 10;
 	pixel_x = 11
 	},
@@ -37090,7 +37090,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/indoors/town/church/chapel)
 "tiA" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/greenstone,
 /area/rogue/under/town/basement)
 "tiF" = (
@@ -41539,7 +41539,7 @@
 /turf/open/floor/carpet/red,
 /area/rogue/indoors/town)
 "vvq" = (
-/obj/item/chair/stool/bar,
+/obj/item/chair/stool,
 /turf/open/floor/ruinedwood,
 /area/rogue/indoors/town)
 "vvB" = (

@@ -40,7 +40,7 @@
 	item_state = "soldierboots"
 	desc = "Lightly armored boots made from iron offering protection against both melee and ranged attacks."
 	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 60, "fire" = 0, "acid" = 0)
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = INTEGRITY_STRONG + 50
 	armor_class = AC_MEDIUM
 	sellprice = 20
 	item_weight = 7 * IRON_MULTIPLIER

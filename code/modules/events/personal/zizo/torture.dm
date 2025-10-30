@@ -8,6 +8,7 @@
 	min_players = 20
 
 	tags = list(
+		TAG_ZIZO,
 		TAG_BLOOD,
 		TAG_INSANITY,
 	)

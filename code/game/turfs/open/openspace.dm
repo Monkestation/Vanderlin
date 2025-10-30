@@ -96,6 +96,8 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 		return FALSE
 	if(HAS_TRAIT(A, TRAIT_I_AM_INVISIBLE_ON_A_BOAT))
 		return FALSE
+	if(HAS_TRAIT(A, "hooked"))
+		return FALSE
 	if(direction == DOWN)
 		for(var/obj/O in contents)
 			if(O.obj_flags & BLOCK_Z_OUT_DOWN)

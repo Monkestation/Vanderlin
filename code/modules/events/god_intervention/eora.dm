@@ -6,7 +6,12 @@
 	earliest_start = 15 MINUTES
 	max_occurrences = 1
 	min_players = 30
-	allowed_storytellers = list(/datum/storyteller/eora)
+	dedicated_storytellers = list(/datum/storyteller/eora)
+	allowed_storytellers = DIVINE_STORYTELLERS
+
+	tags = list(
+		TAG_EORA,
+	)
 
 /datum/round_event/eora_matchmaking/start()
 	var/list/eligible_males = list()

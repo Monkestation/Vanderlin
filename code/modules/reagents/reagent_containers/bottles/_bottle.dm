@@ -306,6 +306,9 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	can_label_container = FALSE
 	custom_icon = TRUE
 
+/obj/item/reagent_containers/glass/bottle/glazed_teapot/tea
+	list_reagents = list(/datum/reagent/consumable/tea/compot = 100)
+
 /obj/item/reagent_containers/glass/bottle/black
 	name = "wine pot"
 	desc = "A wine pot made of glazed clay."

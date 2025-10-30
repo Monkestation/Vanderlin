@@ -7,7 +7,7 @@
 	icon_state = "stairs"
 	anchored = TRUE
 	layer = 2
-	obj_flags = CAN_BE_HIT | IGNORE_SINK
+	obj_flags = CAN_BE_HIT | IGNORE_SINK | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	no_over_text = TRUE
 	var/should_sink = FALSE
 

@@ -1039,6 +1039,7 @@
 	for(var/obj/effect/bees/B in bee_objects)
 		qdel(B)
 	bee_objects.Cut()
+	new /obj/item/queen_bee(get_turf(src))
 	return ..()
 
 /obj/structure/beehive/wild/process()

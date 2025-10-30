@@ -97,7 +97,7 @@
 
 /datum/reagent/consumable/caffeine/on_mob_life(mob/living/carbon/M)
 	. = ..()
-	M.adjust_stamina(5)
+	M.adjust_stamina(-5)
 	M.apply_status_effect(/datum/status_effect/buff/vigor)
 
 /datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M)

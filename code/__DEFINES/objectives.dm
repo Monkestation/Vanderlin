@@ -1,0 +1,4 @@
+#define ESCALATION_NONE "escalation_none"
+#define ESCALATION_PERSONAL_AND_INTERVENTION "escalation_personal_and_intervention"
+#define ESCALATION_PERSONAL_ONLY "escalation_personal_only"
+#define ESCALATION_INTERVENTION_ONLY "escalation_intervention_only"

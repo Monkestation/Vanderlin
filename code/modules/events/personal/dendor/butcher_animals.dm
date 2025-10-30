@@ -8,7 +8,9 @@
 	min_players = 20
 
 	tags = list(
+		TAG_DENDOR,
 		TAG_NATURE,
+		TAG_BLOOD,
 	)
 
 /datum/round_event_control/butcher_animals/canSpawnEvent(players_amt, gamemode, fake_check)

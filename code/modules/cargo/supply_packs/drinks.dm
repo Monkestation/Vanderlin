@@ -1,5 +1,5 @@
 /datum/supply_pack/food/drinks
-	group = "drinks"
+	group = "Drinks"
 
 /datum/supply_pack/food/drinks/water
 	name = "Water Bottle"

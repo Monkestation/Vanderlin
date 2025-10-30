@@ -7,7 +7,12 @@
 	max_occurrences = 1
 	min_players = 25
 	todreq = list("dusk", "dawn", "day")
-	allowed_storytellers = list(/datum/storyteller/astrata)
+	dedicated_storytellers = list(/datum/storyteller/astrata)
+	allowed_storytellers = DIVINE_STORYTELLERS
+
+	tags = list(
+		TAG_ASTRATA,
+	)
 
 /datum/round_event_control/astrata_grandeur/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()

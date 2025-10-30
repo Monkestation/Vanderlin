@@ -310,7 +310,8 @@
 	desc = "A piece of steel plate armor meant to protect the throat and neck of its wearer against decapitation, extending the protection of armor plates."
 	icon_state = "bevor"
 	flags_inv = HIDEFACIALHAIR
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	melt_amount = 100
 	melting_material = /datum/material/steel
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'

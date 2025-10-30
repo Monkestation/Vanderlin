@@ -3,10 +3,15 @@
 	track = EVENT_TRACK_INTERVENTION
 	typepath = /datum/round_event/xylix_fortune
 	weight = 8
-	earliest_start = 20 MINUTES
+	earliest_start = 15 MINUTES
 	max_occurrences = 1
 	min_players = 30
-	allowed_storytellers = list(/datum/storyteller/xylix)
+	dedicated_storytellers = list(/datum/storyteller/xylix)
+	allowed_storytellers = DIVINE_STORYTELLERS
+
+	tags = list(
+		TAG_XYLIX,
+	)
 
 /datum/round_event_control/xylix_fortune/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()

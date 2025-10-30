@@ -30,7 +30,6 @@
 	S.delve = delve
 	z_list += S
 	generate_linkages_for_z_level(new_z)
-	calculate_z_level_gravity(new_z)
 	adding_new_zlevel = FALSE
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_NEW_Z, S)
 	return S
