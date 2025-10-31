@@ -83,10 +83,11 @@
 						/obj/structure/flora/ausbushes/reedbush = 6,
 						/obj/structure/flora/grass/water/reeds = 3)
 
-/datum/mapGeneratorModule/delvermtn
+/datum/mapGeneratorModule/delvermtn //For the hilltops
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
 	allowed_turfs = list(/turf/open/floor/grass, /turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableAtoms = list(/obj/structure/flora/grass = 60,
 						/obj/structure/flora/newtree = 20,
 						/obj/structure/flora/grass/thorn_bush = 80)
+	allowed_areas = list(/area/rogue/delver)
