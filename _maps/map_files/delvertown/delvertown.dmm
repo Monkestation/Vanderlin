@@ -437,10 +437,6 @@
 	},
 /turf/open/floor/dirt,
 /area/rogue/delver/marsh)
-"cZ" = (
-/obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/river)
 "dd" = (
 /obj/structure/chair/hotspring_bench/left{
 	dir = 1
@@ -1998,7 +1994,7 @@
 /area/rogue/outdoors/river)
 "nA" = (
 /obj/structure/fluff/railing/border,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/cleanshallow,
 /area/rogue/outdoors/river)
 "nC" = (
 /obj/structure/fluff/railing/wood{
@@ -2129,10 +2125,6 @@
 	pixel_y = 4;
 	pixel_x = -3
 	},
-/obj/structure/fluff/statue/pillar{
-	pixel_y = 5;
-	pixel_x = -10
-	},
 /turf/open/floor/cobblerock,
 /area/rogue/delver/marsh)
 "oD" = (
@@ -2197,7 +2189,7 @@
 	dir = 8;
 	pixel_y = 0
 	},
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/cleanshallow,
 /area/rogue/delver/town)
 "oW" = (
 /obj/structure/fluff/railing/border,
@@ -2831,13 +2823,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/rogue/delver/marsh)
-"sL" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	pixel_y = 16
-	},
-/turf/open/floor/cobblerock,
-/area/rogue/delver/marsh)
 "sM" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/yel,
@@ -2856,14 +2841,6 @@
 	dir = 5
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/delver/marsh)
-"sW" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = 4;
-	pixel_x = -3
-	},
-/turf/open/floor/cobblerock,
 /area/rogue/delver/marsh)
 "ta" = (
 /obj/structure/fluff/railing/border{
@@ -3290,6 +3267,9 @@
 /obj/effect/landmark/house_spot,
 /turf/closed/basic,
 /area/rogue/delver/plains)
+"wb" = (
+/turf/closed/wall/mineral/wooddark,
+/area/rogue/delver/marsh)
 "wc" = (
 /obj/structure/rotation_piece/cog/large,
 /turf/open/water/river{
@@ -3941,10 +3921,6 @@
 	dir = 4;
 	pixel_x = 1
 	},
-/obj/structure/fluff/statue/pillar{
-	pixel_y = 5;
-	pixel_x = 7
-	},
 /turf/open/floor/cobblerock,
 /area/rogue/delver/marsh)
 "Bk" = (
@@ -4417,7 +4393,7 @@
 	pixel_y = 0;
 	pixel_x = 2
 	},
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/cleanshallow,
 /area/rogue/delver/town)
 "Ff" = (
 /obj/structure/stairs/stone{
@@ -4617,6 +4593,7 @@
 	dir = 4
 	},
 /obj/structure/chair/wood/alt/chair3,
+/obj/structure/carpet/red,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/rogue/delver/inn)
 "GA" = (
@@ -4730,6 +4707,9 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/mixyel,
 /area/rogue/delver/town)
+"Hc" = (
+/turf/open/water/marsh,
+/area/rogue/outdoors/river)
 "He" = (
 /turf/closed/basic,
 /area/rogue/delver/woods)
@@ -6784,6 +6764,7 @@
 /obj/structure/chair/wood/alt/chair3{
 	dir = 1
 	},
+/obj/structure/carpet/red,
 /turf/open/floor/ruinedwood/turned,
 /area/rogue/delver/inn)
 "Wb" = (
@@ -7375,14 +7356,6 @@
 /obj/structure/fluff/railing/wood{
 	dir = 4;
 	pixel_x = 1
-	},
-/obj/structure/fluff/statue/pillar{
-	pixel_y = 5;
-	pixel_x = 7
-	},
-/obj/machinery/light/fueled/torchholder/r{
-	pixel_x = -10;
-	pixel_y = 8
 	},
 /turf/open/floor/cobblerock,
 /area/rogue/delver/marsh)
@@ -16308,8 +16281,8 @@ Vb
 Vb
 Vb
 Vb
-Jy
-cZ
+PA
+gr
 Vb
 XQ
 XQ
@@ -16509,11 +16482,11 @@ Vb
 XQ
 Pc
 XQ
-Jy
-cZ
-Jy
-Jy
-cZ
+PA
+gr
+PA
+PA
+gr
 Li
 Li
 Os
@@ -16537,10 +16510,10 @@ Li
 qI
 qI
 Li
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
 in
 aT
 hP
@@ -16716,41 +16689,41 @@ WL
 WL
 WL
 WL
-Jy
-Jy
+PA
+PA
 Li
 Li
 Li
-cZ
-Jy
-cZ
-cZ
-Jy
+gr
+PA
+gr
+gr
+PA
 Li
 Li
 Li
 Li
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
+PA
+PA
 Li
 Li
-Jy
-Jy
+PA
 WL
 WL
 WL
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
+WL
+PA
+PA
+PA
+PA
+PA
+PA
+PA
+PA
 gd
 qI
 uK
@@ -16920,26 +16893,26 @@ WL
 WL
 WL
 fu
-Jy
-Jy
-Jy
+PA
+PA
+PA
 WL
 WL
 WL
 fu
-Jy
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
+PA
 WL
 WL
 WL
 WL
 WL
 WL
-Jy
-Jy
+PA
+PA
 WL
 WL
 WL
@@ -16953,7 +16926,7 @@ WL
 WL
 fu
 fu
-Jy
+PA
 gd
 uK
 DG
@@ -17145,10 +17118,10 @@ WL
 WL
 WL
 Xf
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
 WL
 WL
 WL
@@ -17156,7 +17129,7 @@ WL
 fu
 fu
 fu
-Jy
+PA
 bA
 DG
 DG
@@ -17336,9 +17309,9 @@ WL
 WL
 WL
 WL
-Jy
-Jy
-Jy
+PA
+PA
+PA
 WL
 WL
 WL
@@ -17346,20 +17319,20 @@ WL
 WL
 WL
 Xf
-Jy
+PA
 oN
 oN
 oN
 oN
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
 WL
 fu
 fu
 fu
-Jy
+PA
 mW
 DG
 Wn
@@ -17522,32 +17495,32 @@ Vb
 Vb
 Vb
 Vb
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
 WL
 WL
 WL
 WL
-Jy
-Jy
-Jy
+PA
+PA
+PA
 WL
 WL
-Jy
-Jy
-Jy
+PA
+PA
+PA
 oN
 oN
 oN
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
+PA
+PA
+PA
 oN
 Yv
 Yv
@@ -17557,11 +17530,11 @@ oN
 oN
 oN
 oN
-Jy
+PA
 WL
 fu
 fu
-Jy
+PA
 bA
 ve
 ve
@@ -17728,15 +17701,15 @@ Vb
 Vb
 XQ
 XQ
-cZ
-cZ
-Jy
-Jy
+gr
+gr
+PA
+PA
 oN
 oN
 oN
-Jy
-cZ
+PA
+gr
 oN
 oN
 oN
@@ -17760,11 +17733,11 @@ Yv
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
-Jy
+PA
 bA
 DG
 DG
@@ -17932,7 +17905,7 @@ XQ
 XQ
 oN
 oN
-cZ
+gr
 oN
 Yv
 wU
@@ -17963,11 +17936,11 @@ mh
 Yv
 Yv
 oN
-Jy
+PA
 fu
 fu
 fu
-Jy
+PA
 gd
 qI
 qI
@@ -18165,12 +18138,12 @@ mh
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
 fu
-Jy
+PA
 gd
 YH
 FG
@@ -18368,12 +18341,12 @@ mh
 Yv
 Yv
 oN
-Jy
+PA
 fu
 fu
 fu
 fu
-Jy
+PA
 gd
 YH
 DG
@@ -18570,12 +18543,12 @@ mh
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
 fu
-Jy
+PA
 gd
 FG
 DG
@@ -18773,11 +18746,11 @@ Yv
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
-Jy
+PA
 gd
 qI
 DG
@@ -18976,11 +18949,11 @@ Yv
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
-Jy
+PA
 gd
 DG
 ve
@@ -19179,10 +19152,10 @@ mh
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
-Jy
+PA
 gd
 ve
 DG
@@ -19384,7 +19357,7 @@ Yv
 oN
 Jy
 fu
-fu
+PA
 gd
 DG
 ve
@@ -19584,10 +19557,10 @@ Hm
 Hm
 iU
 oN
-Jy
+PA
 fu
 fu
-Jy
+PA
 DG
 DG
 Wn
@@ -19786,10 +19759,10 @@ ca
 Hm
 Hm
 oN
-Jy
+PA
 WL
 fu
-Jy
+PA
 DG
 ve
 Wn
@@ -19989,9 +19962,9 @@ ca
 Hm
 Yv
 oN
-Jy
+PA
 fu
-Jy
+PA
 ve
 DG
 DG
@@ -20191,10 +20164,10 @@ ca
 Hm
 Yv
 oN
-Jy
+PA
 fu
 fu
-Jy
+PA
 ve
 ve
 ve
@@ -20393,18 +20366,18 @@ ca
 Hm
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
+PA
+PA
+PA
+PA
 gd
 FG
 FG
@@ -20596,7 +20569,7 @@ Hm
 Yv
 Yv
 oN
-Jy
+PA
 WL
 WL
 WL
@@ -20607,13 +20580,13 @@ WL
 WL
 WL
 fu
-Jy
+PA
 gd
 gd
-Jy
-Jy
-Jy
-Jy
+PA
+PA
+PA
+PA
 gd
 gd
 qI
@@ -20799,8 +20772,8 @@ Yv
 Yv
 Yv
 oN
-Jy
-Jy
+PA
+PA
 WL
 WL
 WL
@@ -20810,14 +20783,14 @@ WL
 WL
 WL
 fu
-Jy
-Jy
+PA
+PA
 WL
 WL
 WL
 fu
-Jy
-Jy
+PA
+PA
 gd
 qI
 qI
@@ -20833,10 +20806,10 @@ FG
 YH
 fO
 tF
-hG
+gU
 eZ
 Tt
-hG
+gU
 Jd
 Fg
 YP
@@ -20847,7 +20820,7 @@ Tt
 gU
 gU
 hG
-eZ
+Tt
 Rs
 Wv
 FG
@@ -21003,9 +20976,9 @@ wU
 Yv
 oN
 oN
-Jy
-Jy
-Jy
+PA
+PA
+PA
 WL
 WL
 WL
@@ -21020,7 +20993,7 @@ WL
 WL
 WL
 fu
-Jy
+PA
 gd
 qI
 FG
@@ -21208,7 +21181,7 @@ Yv
 oN
 oN
 oN
-Jy
+PA
 WL
 WL
 WL
@@ -21223,7 +21196,7 @@ WL
 WL
 WL
 fu
-Jy
+PA
 gd
 FG
 FG
@@ -21411,8 +21384,8 @@ mh
 mh
 Yv
 oN
-Jy
-Jy
+PA
+PA
 WL
 WL
 WL
@@ -21426,7 +21399,7 @@ WL
 fu
 fu
 fu
-Jy
+PA
 gd
 FG
 ve
@@ -21615,20 +21588,20 @@ Yv
 Yv
 oN
 oN
-Jy
-Jy
+PA
+PA
 WL
 WL
 Xf
-Jy
-Jy
-Jy
+PA
+PA
+PA
 WL
 fu
 fu
 fu
 fu
-Jy
+PA
 gd
 FG
 DG
@@ -21819,19 +21792,19 @@ wU
 Yv
 Yv
 oN
-Jy
-Jy
-Jy
+PA
+PA
+PA
 oN
 oN
 oN
-Jy
+PA
 WL
 fu
 fu
 fu
 fu
-Jy
+PA
 gd
 DG
 DG
@@ -22028,12 +22001,12 @@ Yv
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
 fu
-Jy
+PA
 gd
 ve
 ve
@@ -22231,11 +22204,11 @@ mh
 mh
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
-Jy
+PA
 Sj
 ve
 ve
@@ -22434,7 +22407,7 @@ mh
 mh
 Yv
 oN
-Jy
+PA
 fu
 fu
 fu
@@ -22636,7 +22609,7 @@ Yv
 Yv
 Yv
 oN
-Jy
+PA
 WL
 fu
 fu
@@ -22665,7 +22638,7 @@ gU
 gU
 Tt
 hG
-hG
+gU
 Jd
 Wv
 FG
@@ -22839,7 +22812,7 @@ lZ
 FG
 YH
 gd
-Jy
+PA
 WL
 fu
 je
@@ -23042,14 +23015,14 @@ Cn
 FG
 FG
 gd
-Jy
+PA
 WL
 je
 bS
 yj
 bS
 MF
-gk
+jk
 qI
 FG
 iu
@@ -23252,7 +23225,7 @@ bS
 Lm
 MF
 BR
-gk
+jk
 gd
 iu
 iu
@@ -24466,8 +24439,8 @@ gd
 gd
 FG
 gd
-gk
-gk
+jk
+jk
 BR
 BR
 BR
@@ -24670,7 +24643,7 @@ qI
 YH
 gd
 gd
-gk
+jk
 BR
 BR
 jk
@@ -24873,9 +24846,9 @@ oq
 oq
 gq
 gq
-gk
-gk
-UV
+jk
+sB
+Iy
 jk
 gd
 vd
@@ -25076,9 +25049,9 @@ Ho
 gV
 gq
 gd
-gk
-uJ
-gk
+jk
+XK
+jk
 gd
 mI
 vy
@@ -25278,7 +25251,7 @@ iz
 CC
 CD
 FG
-gk
+jk
 gk
 UV
 jk
@@ -30094,7 +30067,7 @@ ca
 ca
 ca
 ca
-Yv
+wU
 wU
 wU
 ol
@@ -30498,7 +30471,7 @@ ca
 ca
 ca
 ca
-wU
+Yv
 wU
 ol
 ol
@@ -30700,7 +30673,7 @@ ca
 iU
 ca
 ca
-wU
+Yv
 wU
 ol
 ol
@@ -30899,12 +30872,12 @@ ca
 ca
 ca
 Yv
-wU
+Yv
 ca
 ca
+Yv
 wU
 wU
-ol
 ol
 ol
 ol
@@ -31101,12 +31074,12 @@ Yv
 Yv
 Yv
 wU
-wU
+Yv
 ca
 ca
+Yv
 wU
 wU
-ol
 ol
 ol
 ol
@@ -31301,15 +31274,15 @@ Yv
 Yv
 Yv
 Yv
-Yv
-Yv
+wU
+wU
 Yv
 ca
 ca
+Yv
 wU
 wU
-ol
-ol
+wU
 ol
 ol
 ol
@@ -31508,10 +31481,10 @@ Yv
 Yv
 ca
 ca
+Yv
 wU
+YC
 wU
-ol
-ol
 ol
 ol
 ol
@@ -31710,9 +31683,9 @@ Yv
 ca
 ca
 ca
+Yv
 wU
 wU
-ol
 ol
 ol
 ol
@@ -31912,7 +31885,7 @@ Yv
 ca
 ca
 ca
-wU
+Yv
 wU
 ol
 ol
@@ -33117,7 +33090,7 @@ ol
 wU
 wU
 wU
-Yv
+iU
 Yv
 ca
 ca
@@ -36025,8 +35998,8 @@ FG
 FG
 ad
 ad
+ad
 PA
-fu
 fu
 PA
 sO
@@ -36226,8 +36199,8 @@ FG
 FG
 FG
 ad
+ad
 PA
-fu
 fu
 VL
 PA
@@ -36831,10 +36804,10 @@ FG
 FG
 FG
 FG
+FG
+Hc
 PA
-fu
-fu
-PA
+GI
 MW
 MW
 nr
@@ -37033,10 +37006,10 @@ FG
 wt
 FG
 FG
-PA
-fu
-fu
-PA
+FG
+nr
+GI
+nr
 sO
 nr
 nr
@@ -37235,10 +37208,10 @@ wt
 FG
 FG
 FG
-PA
-fu
-fu
-PA
+FG
+nr
+nr
+nr
 MW
 MW
 OB
@@ -37438,9 +37411,9 @@ FG
 FG
 FG
 ad
-PA
-fu
-GI
+nr
+nr
+nr
 MW
 yC
 yC
@@ -37641,7 +37614,7 @@ FG
 ad
 FG
 nr
-GI
+nr
 sO
 OB
 yC
@@ -42733,7 +42706,7 @@ Ao
 Ao
 MW
 nr
-zA
+wb
 nr
 nr
 nr
@@ -42933,7 +42906,7 @@ Ao
 Ao
 Ao
 sV
-sW
+Ao
 oz
 MW
 MW
@@ -43134,10 +43107,10 @@ jR
 nr
 nr
 MW
-sL
+Ao
 gy
 GM
-MW
+jR
 zA
 nr
 zA
@@ -43537,11 +43510,11 @@ MW
 zA
 nr
 nr
+wb
 nr
 nr
 nr
-nr
-nr
+wb
 MW
 zA
 zA
@@ -62049,7 +62022,7 @@ Dx
 Uj
 lR
 pQ
-pQ
+oR
 lR
 lR
 LE
@@ -71305,7 +71278,7 @@ TL
 TL
 TL
 TL
-tR
+TL
 tR
 tR
 tR
@@ -71507,7 +71480,7 @@ TL
 TL
 TL
 TL
-tR
+TL
 tR
 tR
 tR
@@ -71709,8 +71682,8 @@ TL
 TL
 TL
 TL
-tR
-tR
+TL
+TL
 tR
 tR
 tR
@@ -71911,8 +71884,8 @@ TL
 TL
 TL
 TL
-tR
-tR
+TL
+TL
 tR
 tR
 tR
@@ -72113,7 +72086,7 @@ TL
 TL
 TL
 TL
-tR
+TL
 tR
 tR
 tR
@@ -83132,9 +83105,9 @@ TL
 TL
 TL
 TL
-TL
-TL
-TL
+ff
+ff
+ff
 TL
 TL
 TL
@@ -83336,7 +83309,7 @@ TL
 ff
 ff
 ff
-TL
+ff
 TL
 TL
 TL
@@ -83736,11 +83709,11 @@ TL
 TL
 TL
 TL
-TL
 jy
 jy
 jy
-TL
+jy
+jy
 TL
 TL
 TL
@@ -83938,11 +83911,11 @@ TL
 TL
 TL
 TL
-TL
-TL
-TL
-TL
-TL
+jy
+jy
+jy
+jy
+jy
 TL
 TL
 TL

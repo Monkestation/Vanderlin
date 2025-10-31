@@ -46,6 +46,7 @@
 
 /datum/mapGeneratorModule/delvermarsh
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
+	include_subtypes = TRUE
 	allowed_turfs = list(/turf/open/floor/grass, /turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableAtoms = list(/obj/structure/flora/grass = 40,
