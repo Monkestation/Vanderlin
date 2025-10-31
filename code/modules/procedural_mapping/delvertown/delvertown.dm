@@ -41,7 +41,6 @@
 					/obj/structure/flora/ausbushes/ywflowers = 10,
 					/obj/structure/flora/grass/herb/taraxacum = 8,
 					/obj/structure/flora/grass/herb/calendula = 8,
-					/obj/structure/flora/newtree = 4,
 					/obj/structure/flora/newtree = 8)
 	allowed_areas = list(/area/rogue/delver/plains)
 
@@ -58,7 +57,8 @@
 						/obj/structure/flora/grass/thorn_bush = 7,
 						/obj/structure/flora/grass/herb/paris = 6,
 						/obj/structure/flora/grass/herb/euphorbia = 8,
-						/obj/structure/flora/grass/herb/mentha = 6)
+						/obj/structure/flora/grass/herb/mentha = 6,
+						/obj/structure/flora/driftwood = 4)
 	allowed_areas = list(/area/rogue/delver/marsh)
 
 /datum/mapGeneratorModule/delverwoods
@@ -71,8 +71,7 @@
 						/obj/structure/flora/tree/dying_bush = 12,
 						/obj/structure/flora/grass/thorn_bush = 8,
 						/obj/structure/flora/grass/herb/hypericum = 8,
-						/obj/structure/flora/grass/herb/rosa = 6,
-						/obj/structure/flora/driftwood = 4)
+						/obj/structure/flora/grass/herb/rosa = 6)
 	allowed_areas = list(/area/rogue/delver/woods)
 
 /datum/mapGeneratorModule/delverwater
@@ -90,4 +89,4 @@
 	spawnableAtoms = list(/obj/structure/flora/grass = 60,
 						/obj/structure/flora/newtree = 20,
 						/obj/structure/flora/grass/thorn_bush = 80)
-	allowed_areas = list(/area/rogue/delver)
+	allowed_areas = list(/area/rogue/delver/mountains)

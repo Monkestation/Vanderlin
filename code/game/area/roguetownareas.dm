@@ -1018,17 +1018,6 @@
 	delver_restrictions = TRUE
 	converted_type = /area/rogue/delver
 
-/area/rogue/delver/river
-	name = "delverriver"
-	icon_state = "delverriver"
-	droning_index = DRONING_RIVER_DAY
-	droning_index_night = DRONING_RIVER_NIGHT
-	ambient_index = AMBIENCE_FROG
-	ambient_index_night = AMBIENCE_FOREST
-	background_track = 'sound/music/area/forest.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/forestnight.ogg'
-
 /area/rogue/delver/guild
 	name = "guildhall"
 	icon_state = "delverguild"
@@ -1039,6 +1028,16 @@
 	background_track_night = 'sound/music/area/sleeping.ogg'
 	plane = INDOOR_PLANE
 	first_time_text = "Guildhall"
+	custom_area_sound = 'sound/misc/stings/generic.ogg'
+
+/area/rogue/delver/inn
+	name = "delverinn"
+	icon_state = "delverinn"
+	droning_index = DRONING_INDOORS
+	ambient_index = AMBIENCE_GENERIC
+	background_track = 'sound/music/area/Folia1490.ogg'
+	first_time_text = "The Drunken Mole"
+	custom_area_sound = 'sound/misc/stings/generic.ogg'
 
 /area/rogue/delver/town
 	name = "delvertown"
@@ -1052,6 +1051,7 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
 	first_time_text = "Town"
+	custom_area_sound = 'sound/misc/stings/generic.ogg'
 
 /area/rogue/delver/marsh
 	name = "delvermarsh"
@@ -1072,6 +1072,8 @@
 	droning_index = DRONING_DESERT_DAY
 	droning_index_night = DRONING_DESERT_NIGHT
 	background_track = 'sound/music/area/field.ogg'
+	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_night = 'sound/music/area/sleeping.ogg'
 	first_time_text = "The Plains"
 	custom_area_sound = 'sound/misc/stings/generic.ogg'
 
@@ -1079,12 +1081,22 @@
 	name = "delverwoods"
 	icon_state = "delverwoods"
 	outdoors = TRUE
+	background_track = 'sound/music/area/forest.ogg'
+	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_night = 'sound/music/area/forestnight.ogg'
 	droning_index = DRONING_FOREST_DAY
 	droning_index_night = DRONING_FOREST_NIGHT
 	ambient_index = AMBIENCE_BIRDS
 	ambient_index_night = AMBIENCE_FOREST
 	first_time_text = "The Wood"
 	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
+
+/area/rogue/delver/mountains
+	name = "delvermountains"
+	icon_state = "delvermountains"
+	outdoors = TRUE
+	droning_index = DRONING_MOUNTAIN
+	ambient_index = AMBIENCE_GENERIC
 
 /area/rogue/ship/topdeck
 	name = "upperdeck"
@@ -1121,7 +1133,6 @@
 	background_track_dusk = null
 	background_track_night = null
 	first_time_text = "The Brig"
-
 
 /area/rogue/indoors/inq
 	name = "The Inquisition"
