@@ -498,6 +498,10 @@
 	},
 /turf/open/floor/grass/yel,
 /area/rogue/delver/marsh)
+"du" = (
+/obj/structure/flora/grass/herb/paris,
+/turf/open/floor/grass/yel,
+/area/rogue/delver/marsh)
 "dv" = (
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/river)
@@ -808,6 +812,16 @@
 	},
 /turf/open/floor/naturalstone,
 /area/rogue/delver/plains)
+"fJ" = (
+/obj/structure/table/wood/treestump,
+/obj/structure/fluff/signage{
+	dir = 2;
+	name = "West - Town Center";
+	pixel_y = 13;
+	pixel_x = -1
+	},
+/turf/open/floor/grass,
+/area/rogue/delver/town)
 "fK" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -1950,6 +1964,10 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
 /area/rogue/delver/marsh)
+"ne" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/abyss_sand/path,
+/area/rogue/delver/mountains)
 "ni" = (
 /obj/structure/chair/bench{
 	dir = 1
@@ -2944,6 +2962,19 @@
 /obj/structure/chair/bench/throne,
 /turf/open/floor/herringbone,
 /area/rogue/delver/mountains)
+"tW" = (
+/obj/structure/fluff/signage{
+	dir = 2;
+	name = "Northwest - Town Center";
+	pixel_y = 5
+	},
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "South - The Plains";
+	pixel_y = -5
+	},
+/turf/open/floor/grass/yel,
+/area/rogue/delver/town)
 "tY" = (
 /obj/structure/fluff/signage{
 	dir = 1;
@@ -3419,6 +3450,19 @@
 "xt" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/rogue/delver/town)
+"xv" = (
+/obj/structure/fluff/signage{
+	dir = 2;
+	name = "West - Town Center";
+	pixel_y = 9
+	},
+/obj/structure/fluff/signage{
+	dir = 8;
+	name = "South - The Plains";
+	pixel_y = -3
+	},
+/turf/open/floor/cobble,
+/area/rogue/delver/town)
 "xw" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -3692,6 +3736,21 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/mineral,
 /area/rogue/indoors/cave)
+"zf" = (
+/obj/structure/fluff/signage{
+	dir = 2;
+	name = "Northwest - The Wood";
+	pixel_y = 13;
+	pixel_x = 1
+	},
+/obj/structure/fluff/signage{
+	dir = 2;
+	name = "West - Town Center";
+	pixel_y = 0;
+	pixel_x = -1
+	},
+/turf/open/floor/grass,
+/area/rogue/delver/town)
 "zh" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -3839,6 +3898,12 @@
 	},
 /turf/open/water/marsh,
 /area/rogue/delver/marsh)
+"AE" = (
+/obj/structure/fluff/buysign{
+	name = "Entering The Plains"
+	},
+/turf/open/floor/grass/yel,
+/area/rogue/delver/plains)
 "AG" = (
 /obj/structure/hotspring/border/three,
 /turf/open/floor/cobblerock/alt,
@@ -3966,6 +4031,10 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/tile/bfloorz,
 /area/rogue/indoors/town/bath)
+"BG" = (
+/obj/structure/flora/grass/herb/euphorbia,
+/turf/open/floor/grass/yel,
+/area/rogue/delver/marsh)
 "BI" = (
 /obj/structure/stairs{
 	dir = 4
@@ -4855,6 +4924,19 @@
 	},
 /turf/open/floor/dirt/road,
 /area/rogue/delver/plains)
+"Ia" = (
+/obj/structure/fluff/signage{
+	dir = 8;
+	name = "South - The Plains";
+	pixel_y = 5
+	},
+/obj/structure/fluff/signage{
+	dir = 2;
+	name = "Southwest - The Marsh";
+	pixel_y = -9
+	},
+/turf/open/floor/grass/mixyel,
+/area/rogue/delver/plains)
 "Id" = (
 /obj/structure/chair/bench/church/smallbench{
 	dir = 8;
@@ -5442,6 +5524,14 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/spiral,
 /area/rogue/delver/inn)
+"LF" = (
+/obj/structure/fluff/signage{
+	dir = 2;
+	name = "South - The Plains";
+	pixel_y = 5
+	},
+/turf/open/floor/grass/yel,
+/area/rogue/delver/town)
 "LG" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 5;
@@ -5795,6 +5885,14 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/mixyel,
 /area/rogue/delver/marsh)
+"OE" = (
+/obj/structure/fluff/signage{
+	dir = 8;
+	name = "South - The Plains";
+	pixel_y = 5
+	},
+/turf/open/floor/grass/yel,
+/area/rogue/delver/town)
 "OG" = (
 /turf/closed/wall/mineral/decowood,
 /area/rogue/delver/inn)
@@ -6306,6 +6404,21 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile/diamond,
 /area/rogue/delver/guild)
+"SB" = (
+/obj/structure/fluff/signage{
+	dir = 8;
+	pixel_y = 12;
+	name = "North - Town";
+	pixel_x = -1
+	},
+/obj/structure/fluff/signage{
+	dir = 4;
+	pixel_y = -2;
+	name = "West - The Marsh";
+	pixel_x = -1
+	},
+/turf/open/floor/dirt/road,
+/area/rogue/delver/plains)
 "SC" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -6917,6 +7030,14 @@
 	},
 /turf/open/floor/hexstone,
 /area/rogue/delver/guild)
+"WQ" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_x = 1
+	},
+/obj/structure/flora/grass/herb/euphorbia,
+/turf/open/floor/grass/yel,
+/area/rogue/delver/marsh)
 "WR" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -10158,7 +10279,7 @@ ad
 ad
 ad
 sJ
-sJ
+LF
 sJ
 Qd
 Hs
@@ -12047,7 +12168,7 @@ od
 od
 WT
 YF
-YF
+ne
 fp
 md
 md
@@ -13813,7 +13934,7 @@ Fy
 Fy
 Fy
 Fy
-Fy
+SB
 Zc
 HB
 Hs
@@ -14195,11 +14316,11 @@ DG
 ve
 lZ
 sM
-Qd
+tW
 DG
 DG
 ve
-Hs
+AE
 UO
 JX
 Hs
@@ -18225,7 +18346,7 @@ Ie
 ve
 DG
 ve
-ve
+xv
 FG
 FG
 sJ
@@ -18239,7 +18360,7 @@ sJ
 sJ
 sJ
 sJ
-sJ
+OE
 Hs
 Hs
 nn
@@ -18603,7 +18724,7 @@ FG
 FG
 FG
 FG
-FG
+fJ
 FG
 Ie
 DG
@@ -19007,7 +19128,7 @@ Uz
 iu
 iu
 FG
-FF
+FG
 FG
 FG
 ve
@@ -20593,7 +20714,7 @@ qI
 qI
 qI
 FG
-FG
+zf
 ve
 DG
 ve
@@ -27315,7 +27436,7 @@ YH
 DG
 DG
 DG
-Om
+Ia
 Om
 Om
 qG
@@ -40679,7 +40800,7 @@ MW
 MW
 nr
 zA
-zA
+du
 nr
 HO
 Nh
@@ -41900,7 +42021,7 @@ et
 nr
 zA
 MW
-zA
+du
 nr
 zA
 nr
@@ -42292,7 +42413,7 @@ nr
 jR
 zA
 nr
-zA
+du
 zA
 nr
 nr
@@ -42502,7 +42623,7 @@ Ao
 Ao
 Ao
 Ao
-zA
+BG
 nr
 nr
 nr
@@ -43101,7 +43222,7 @@ Uy
 Uy
 et
 zA
-zA
+du
 MW
 jR
 nr
@@ -43306,14 +43427,14 @@ MW
 nr
 zA
 MW
-zA
+BG
 zA
 MW
 Bi
 Db
 ZK
 nr
-zA
+du
 MW
 nr
 yC
@@ -44121,7 +44242,7 @@ zA
 yC
 zA
 nr
-zA
+BG
 MW
 nr
 nr
@@ -44312,7 +44433,7 @@ Hh
 Ng
 Nu
 et
-zA
+du
 MW
 nr
 nr
@@ -44923,7 +45044,7 @@ pM
 mm
 pM
 HI
-HI
+WQ
 mm
 XA
 Ng
