@@ -95,8 +95,7 @@
 		/obj/item/clothing/head/inqarticles/blackbag = 1,
 		/obj/item/inqarticles/garrote = 1,
 		/obj/item/grapplinghook = 1,
-		/obj/item/paper/inqslip/arrival/ortho = 1,
-		/obj/item/collar_detonator = 1,
+		/obj/item/paper/inqslip/arrival/ortho = 1
 		)
 
 /datum/outfit/job/confessor/post_equip(mob/living/carbon/human/H, visuals_only)

@@ -374,15 +374,13 @@
 		servile and obedient under threat of its explosive potential detonating on their necks."
 	var/collar_unlocked = TRUE
 	var/is_in_neck_slot = FALSE
-	var/is_going_to_boom = FALSE
 
 /obj/item/clothing/neck/gorget/explosive/examine(mob/user)
 	. = ..()
 	if(collar_unlocked)
-		. += "the red gem gleams faintly, it seems to be unpowered."
+		. += "the red gem shines faintly, it seems to be unlocked."
 	else
-		. += "the red gem gleams intensely, piercing your gaze with its aura."
-
+		. += "the red gem shines intensely, piercing your gaze with its aura."
 /obj/item/clothing/neck/gorget/explosive/Initialize()
 	. = ..()
 
@@ -400,20 +398,7 @@
 		is_in_neck_slot = TRUE
 		return
 
-	//this checks if its inhand, instead of neck slot
 	is_in_neck_slot = FALSE
-
-/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
-	. = ..()
-	if(!istype(interacted_item, /obj/item/collar_detonator))
-		return
-
-	if(!collar_unlocked)
-		collar_unlocked = TRUE
-		to_chat(user, "The red gem's glow of the [src] weakens, it seems to be safe to unequip now!")
-	else
-		to_chat(user, "Collar is already unlocked!")
-
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
@@ -424,54 +409,21 @@
 	return COMPONENT_ITEM_BLOCK_UNEQUIP
 
 /obj/item/clothing/neck/gorget/explosive/proc/prepare_to_go_boom()
-	if(is_going_to_boom)
-		is_going_to_boom = FALSE
-		audible_message(span_notice("Red aura of the [src] slowly fades away"))
-		return
-
 	playsound(src, 'sound/music/musicbox_windup.ogg', 45)
-	visible_message(span_boldwarning("Red aura begins to glow heavily from the [src], It appears to be going off!"))
-	audible_message(span_boldwarning("You hear an eerie tune coming out of [src]"))
+	audible_message(span_boldwarning("Red aura begins to glow heavily from the [src], It appears to be going off!"))
 
-	addtimer(CALLBACK(src, PROC_REF(go_boom)), 7.5 SECONDS)
-	is_going_to_boom = TRUE
+	addtimer(CALLBACK(src, PROC_REF(go_boom)), 18 SECONDS)
 	return
 
 /obj/item/clothing/neck/gorget/explosive/proc/go_boom()
-	if(!is_in_neck_slot || !is_going_to_boom)
-		visible_message(span_notice("The red aura eminating from [src] stops!"))
+	if(!is_in_neck_slot)
+		visible_message("The red aura eminating from [src] stops!")
 		return
 
 	explosion(src, 1, 0, 0, 0) //first one to make sure wearer is damaged heavily
 	explosion(src, 1, 2, 3, 3) //second one to finish the deal
 	qdel(src)
 	return
-
-/obj/item/collar_detonator
-	name = "collar detonator"
-	desc = "What seems to be an ordinary key at first is actually an enchanted contraption designed to \
-		detonate or unlock collar of servitudes used by the inquisition."
-	icon_state = "mazekey"
-	icon = 'icons/roguetown/items/keys.dmi'
-	w_class = WEIGHT_CLASS_TINY
-	dropshrink = 0.75
-	throwforce = 0
-	drop_sound = 'sound/items/gems (1).ogg'
-	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK|ITEM_SLOT_RING
-	grid_height = 64
-	grid_width = 32
-
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
-	. = ..()
-	if(!iscarbon(target))
-		return
-
-	var/mob/living/carbon/to_bomb = target
-	if(istype(to_bomb.get_item_by_slot(ITEM_SLOT_NECK), /obj/item/clothing/neck/gorget/explosive))
-		var/obj/item/clothing/neck/gorget/explosive/collar = to_bomb.get_item_by_slot(ITEM_SLOT_NECK)
-		collar.prepare_to_go_boom()
-	else
-		to_chat(user, span_notice("Target is not wearing a collar of servitude!"))
 
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"

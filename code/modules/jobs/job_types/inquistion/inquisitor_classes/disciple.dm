@@ -83,11 +83,8 @@
 	shoes = /obj/item/clothing/shoes/psydonboots
 	armor = /obj/item/clothing/armor/regenerating/skin/disciple
 	backl = /obj/item/storage/backpack/satchel/otavan
-	backpack_contents = list(
-		/obj/item/key/inquisition = 1,
-		/obj/item/paper/inqslip/arrival/ortho = 1,
-		/obj/item/collar_detonator = 1,
-	) //Kept here for now, until we figure out how to make it better fit in overfilled hands.
+	backpack_contents = list(/obj/item/key/inquisition = 1,
+	/obj/item/paper/inqslip/arrival/ortho = 1) //Kept here for now, until we figure out how to make it better fit in overfilled hands.
 	belt = /obj/item/storage/belt/leather/rope/dark
 	pants = /obj/item/clothing/pants/tights/colored/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
