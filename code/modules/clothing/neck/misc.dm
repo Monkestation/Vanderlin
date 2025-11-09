@@ -367,64 +367,6 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
 
-/obj/item/clothing/neck/gorget/explosive
-	name = "collar of servitude"
-	icon_state = "collar_of_servitude"
-	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
-		servile and obedient under threat of its explosive potential detonating on their necks."
-	var/collar_unlocked = TRUE
-	var/is_in_neck_slot = FALSE
-
-/obj/item/clothing/neck/gorget/explosive/examine(mob/user)
-	. = ..()
-	if(collar_unlocked)
-		. += "the red gem shines faintly, it seems to be unlocked."
-	else
-		. += "the red gem shines intensely, piercing your gaze with its aura."
-/obj/item/clothing/neck/gorget/explosive/Initialize()
-	. = ..()
-
-	RegisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(tries_to_unequip))
-
-/obj/item/clothing/neck/gorget/explosive/Destroy()
-	UnregisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP)
-	return ..()
-
-/obj/item/clothing/neck/gorget/explosive/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	if(slot == ITEM_SLOT_NECK)
-		to_chat(user, span_warning("The collar tightens its hold on you, red aura emenates from its gem. Reminding you of your current station."))
-		collar_unlocked = FALSE
-		is_in_neck_slot = TRUE
-		return
-
-	is_in_neck_slot = FALSE
-
-/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
-	SIGNAL_HANDLER
-	if(collar_unlocked)
-		return
-
-	visible_message(span_warning("The [src] resists the pull to be unlocked!"))
-	return COMPONENT_ITEM_BLOCK_UNEQUIP
-
-/obj/item/clothing/neck/gorget/explosive/proc/prepare_to_go_boom()
-	playsound(src, 'sound/music/musicbox_windup.ogg', 45)
-	audible_message(span_boldwarning("Red aura begins to glow heavily from the [src], It appears to be going off!"))
-
-	addtimer(CALLBACK(src, PROC_REF(go_boom)), 18 SECONDS)
-	return
-
-/obj/item/clothing/neck/gorget/explosive/proc/go_boom()
-	if(!is_in_neck_slot)
-		visible_message("The red aura eminating from [src] stops!")
-		return
-
-	explosion(src, 1, 0, 0, 0) //first one to make sure wearer is damaged heavily
-	explosion(src, 1, 2, 3, 3) //second one to finish the deal
-	qdel(src)
-	return
-
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"
 	desc = "A heavy collar of great age, meant to protect the neck."
