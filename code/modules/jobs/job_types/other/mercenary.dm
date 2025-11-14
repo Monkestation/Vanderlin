@@ -24,9 +24,11 @@
 	is_foreigner = TRUE
 	is_recognized = TRUE
 
-/datum/outfit/mercenary // Reminder message
-	var/tutorial = "<br><br><font color='#855b14'><span class='bold'>The Gaffer, who feeds and houses you may have work for you todae, go see him at the office outside your lodgings.</span></font><br><br>"
+/datum/job/mercenary/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	to_chat(spawned, "<br><br><font color='#855b14'><span class='bold'>The Gaffer, who feeds and houses you may have work for you todae, go see him at the office outside your lodgings.</span></font><br><br>")
 
-/datum/outfit/mercenary/post_equip(mob/living/carbon/human/H)
-	..()
-	to_chat(H, tutorial)
+/datum/job/advclass/mercenary
+	abstract_type = /datum/job/advclass/mercenary
+	blacklisted_species = list(SPEC_ID_HALFLING)
+	category_tags = list(CTAG_MERCENARY)

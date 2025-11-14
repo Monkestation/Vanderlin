@@ -37,7 +37,7 @@
 
 /datum/objective/personal/wise_trees/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("dendor_blessing", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_DENDOR_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/wise_trees/update_explanation_text()
 	explanation_text = "Transform [trees_required] common trees into guardian wise trees using Dendor's blessing."

@@ -620,3 +620,18 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		fdel("[ASSET_CROSS_ROUND_SMART_CACHE_DIRECTORY]/spritesheet_cache.[initial(A.name)].json")
 		cleared++
 	to_chat(usr, "<span class='notice'>Cleared [cleared] asset\s.</span>")
+
+/client/proc/select_job_pack_debug()
+	set category = "Debug"
+	set name = "Select Jobpack"
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	var/pack = browser_input_list(usr, "Select a pack", "Job Packs", GLOB.job_pack_singletons)
+	if(!pack)
+		return
+
+	var/datum/job_pack/real_pack = GLOB.job_pack_singletons[pack]
+
+	real_pack.pick_pack(usr)

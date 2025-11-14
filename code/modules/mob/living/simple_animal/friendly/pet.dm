@@ -14,11 +14,11 @@
 	response_harm_simple = "kick"
 
 /mob/living/simple_animal/pet/giraffe
+	name = "Giraffe Automaton"
+	desc = "An experimental automaton imported from Heartfelt, the pinnacle of creation. She's simply adorable. Everybody loves her."
 	icon_state = "gg"
 	icon_living = "gg"
 	icon_dead = "gg_dead"
-	name = "Giraffe Automaton"
-	desc = "An experimental automaton imported from Heartfelt, the pinnacle of creation. She's simply adorable. Everybody loves her."
 	gender = FEMALE
 	base_strength = 3
 	base_endurance = 4

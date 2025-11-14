@@ -2,7 +2,7 @@
 	title = "Psyaltrist"
 	tutorial = "Every inquisitor has their second. You aim to keep spirits and faith high, while handling the needs of the inquisitor. Not a glamorous role, but a vital one. “Maybe his lordship would prefer the lute, today, over the viola?”"
 	outfit = /datum/outfit/job/psyaltrist
-	traits = list(TRAIT_DODGEEXPERT, TRAIT_EMPATH)
+	traits = list(TRAIT_DODGEEXPERT, TRAIT_EMPATH, TRAIT_PSYDONIAN_GRIT, TRAIT_PSYDONITE)
 	category_tags = list(CTAG_INQUISITION)
 	jobstats = list(
 		STATKEY_STR = 1,

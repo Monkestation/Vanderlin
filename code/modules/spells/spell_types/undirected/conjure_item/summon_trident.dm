@@ -41,15 +41,15 @@
 /obj/item/fishingrod/abyssor_trident
 	name = "trident of the depths"
 	desc = "An instrument of Abyssor's wrath to claim his bounties and punish the ignorant."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "tridentgold"
+	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR+2
 	throwforce = DAMAGE_SPEAR_WIELD
 	possible_item_intents = list(SPEAR_THRUST, ROD_AUTO, ROD_CAST)
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, POLEARM_BASH)
-	icon = 'icons/roguetown/weapons/64.dmi'
-	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
-	icon_state = "tridentgold"
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64

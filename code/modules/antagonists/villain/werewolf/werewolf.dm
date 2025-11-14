@@ -194,10 +194,10 @@
 /obj/item/weapon/werewolf_claw
 	name = "verevolf claw"
 	desc = ""
+	icon = 'icons/roguetown/weapons/32/special.dmi'
 	item_state = null
 	lefthand_file = null
 	righthand_file = null
-	icon = 'icons/roguetown/weapons/32.dmi'
 	max_blade_int = 900
 	max_integrity = 900
 	force = 15

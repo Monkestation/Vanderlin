@@ -87,7 +87,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	return /datum/reagent/consumable/ethanol/beer
 
 /datum/preferences/proc/get_default_hated_drink()
-	return /datum/container_craft/cooking/tea/badidea
+	return /datum/reagent/consumable/tea/badidea
 
 /datum/preferences/proc/get_random_food()
 	if(!length(GLOB.selectable_foods))
@@ -256,6 +256,8 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		return
 
 	character.culinary_preferences = culinary_preferences.Copy()
+	if(has_world_trait(/datum/world_trait/exotic_tastes))
+		character.culinary_preferences[CULINARY_RANDOM_PREFERENCES] = TRUE
 
 	if(character.culinary_preferences[CULINARY_RANDOM_PREFERENCES])
 		character.culinary_preferences[CULINARY_FAVOURITE_FOOD] = get_random_food()

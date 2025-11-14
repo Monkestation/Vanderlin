@@ -55,9 +55,9 @@
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, type)
 	ADD_TRAIT(H, TRAIT_OLDPARTY, TRAIT_GENERIC)
 
-	H.change_stat("speed", 2)
-	H.change_stat("perception", 1)
-	H.change_stat("strength", 1)
+	H.change_stat(STATKEY_SPD, 2)
+	H.change_stat(STATKEY_PER, 1)
+	H.change_stat(STATKEY_STR, 1)
 
 	H.adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE) //they are practicing with their fake ass shit sword but its clearly not paying off yet
 	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
@@ -83,5 +83,5 @@
 		H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.change_stat("perception", 1)
+		H.change_stat(STATKEY_PER, 1)
 

@@ -8,6 +8,8 @@
 
 /datum/objective/personal/retainer/on_creation()
 	. = ..()
+	if(owner?.current)
+		owner.current.add_spell(/datum/action/cooldown/spell/undirected/list_target/convert_role/retainer, source = src)
 	RegisterSignal(SSdcs, COMSIG_GLOBAL_ROLE_CONVERTED, PROC_REF(on_retainer_recruited))
 	update_explanation_text()
 
@@ -31,7 +33,7 @@
 
 /datum/objective/personal/retainer/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("astrata_blessing", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ASTRATA_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/retainer/update_explanation_text()
 	explanation_text = "Recruit at least one retainer to serve you and to demonstrate your ability to lead to Astrata."
@@ -46,8 +48,6 @@
 	accept_message = "I pledge my service to you!"
 	refuse_message = "I must decline your offer."
 
-/datum/action/cooldown/spell/undirected/list_target/convert_role/retainer/Grant(mob/grant_to)
-	. = ..()
-	if(!.)
-		return
-	new_role = "Retainer of [grant_to.real_name]"
+/datum/action/cooldown/spell/undirected/list_target/convert_role/retainer/cast(mob/living/carbon/human/cast_on)
+	new_role = "Retainer of [owner.real_name]"
+	return ..()

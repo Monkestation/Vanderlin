@@ -352,8 +352,8 @@
 /obj/item/weapon/pitchfork
 	name = "pitchfork"
 	desc = "Compost, chaff, hay, it matters not."
-	icon_state = "pitchfork"
 	icon = 'icons/roguetown/weapons/tools.dmi'
+	icon_state = "pitchfork"
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
@@ -365,7 +365,6 @@
 	slot_flags = ITEM_SLOT_BACK
 	blade_dulling = DULLING_BASHCHOP
 	minstr = 6
-	var/list/forked = list()
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH)
 	gripped_intents = list(DUMP_INTENT,POLEARM_BASH,POLEARM_THRUST)
@@ -379,6 +378,8 @@
 	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG
+
+	var/list/forked = list()
 
 /obj/item/weapon/pitchfork/Initialize()
 	. = ..()

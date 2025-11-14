@@ -91,7 +91,7 @@
 			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 			backr = /obj/item/weapon/shield/heater
-			beltl = /obj/item/weapon/sword/short
+			beltl = /obj/item/weapon/sword/short/iron
 			H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 		if(/datum/patron/divine/abyssor)

@@ -20,6 +20,10 @@
 	var/list/miracles_extra = list()
 	/// Traits added by this
 	var/list/traits = list()
+	/// Favorite Specie of said god.
+	var/list/favored_species = list()
+	/// Miracles granted to Favored Species
+	var/list/favored_miracles = list()
 	var/devotion_color = "#3C41A4"
 
 /datum/devotion/Destroy(force)
@@ -106,6 +110,13 @@
 				continue
 			for(var/miracle in miracle_list)
 				grant_miracle(miracle)
+			if(holder_mob.dna?.species?.id in favored_species)
+				var/favored_miracle_list = favored_miracles[tier]
+				if(!islist(favored_miracle_list))
+					favored_miracle_list = list(favored_miracle_list)
+				if(length(favored_miracle_list))
+					for(var/favored_miracle in favored_miracle_list)
+						grant_miracle(favored_miracle)
 
 /datum/devotion/proc/make_priest()
 	devotion = 300

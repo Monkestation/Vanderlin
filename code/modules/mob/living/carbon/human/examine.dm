@@ -142,6 +142,8 @@
 				. += span_love(span_bold("[self_inspect ? "I am" : "[t_He] is"] [is_male ? "handsome" : "beautiful"]!"))
 			if(HAS_TRAIT(src, TRAIT_UGLY))
 				. += span_necrosis(span_bold("[self_inspect ? "I am" : "[t_He] is"] hideous."))
+			if(HAS_TRAIT(src, TRAIT_FAT))
+				. += span_boldwarning(span_bold("[self_inspect ? "I am" : "[t_He] is"] very obese!"))
 		if(length(GLOB.tennite_schisms))
 			var/datum/tennite_schism/S = GLOB.tennite_schisms[1]
 			var/user_side = (WEAKREF(user) in S.supporters_astrata) ? "astrata" : (WEAKREF(user) in S.supporters_challenger) ? "challenger" : null
@@ -167,7 +169,7 @@
 			else
 				. += span_green("A fellow triton")
 
-		if(HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
+		if(ishuman(user) && HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
 			var/mob/living/carbon/human/H = user
 			if(H.age == AGE_CHILD)
 				. += span_userdanger("IT'S A HORRIBLE MONSTER!!!")

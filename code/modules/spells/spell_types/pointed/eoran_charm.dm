@@ -41,7 +41,8 @@
 	var/list/charms_target = list("<b style='color:pink'>Your eyes cannot move away from [owner].</b>", "<b style='color:pink'>You are enchanted by the beauty of the follower of Eora.</b>")
 	cast_on.visible_message(span_warning("[pick(charms_public)]"), span_warning("[pick(charms_target)]"))
 	cast_on.apply_status_effect(/datum/status_effect/eorapacify)
-	cast_on.Immobilize(85)
+	cast_on.apply_status_effect(/datum/status_effect/debuff/mesmerised, 8 SECONDS)
+	cast_on.Immobilize(4 SECONDS)
 
 /datum/action/cooldown/spell/charm/vampire
 	name = "Vampiric Charm"

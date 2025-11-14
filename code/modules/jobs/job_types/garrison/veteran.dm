@@ -252,7 +252,7 @@
 	pants = /obj/item/clothing/pants/grenzelpants
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	beltl = /obj/item/weapon/sword/short
+	beltl = /obj/item/weapon/sword/short/iron
 	beltr = /obj/item/storage/keyring/veteran
 	backr = /obj/item/storage/backpack/satchel/black
 	belt = /obj/item/storage/belt/leather/black

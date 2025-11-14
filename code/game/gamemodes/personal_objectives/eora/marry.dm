@@ -43,7 +43,7 @@
 
 /datum/objective/personal/marry/complete_objectiv/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("eora_marriage", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_EORA_MARRIAGE, STATKEY_LCK, 1)
 
 /datum/objective/personal/marry/update_explanation_text()
 	explanation_text = "Eora wants you to find your true love and marry them! Perhaps [lovebird_name], the [lovebird_job] could be a good match?"

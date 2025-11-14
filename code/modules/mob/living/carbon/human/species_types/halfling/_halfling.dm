@@ -13,6 +13,7 @@
 	skin_tone_wording = "Ancestry"
 
 	default_color = "FFFFFF"
+	native_language = "Halfling"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_LIGHT_STEP, TRAIT_COIN_ILLITERATE, TRAIT_LUCKY_COOK)
 	inherent_skills = list(
@@ -94,6 +95,12 @@
 
 /datum/species/halfling/check_roundstart_eligible()
 	return TRUE
+
+/datum/species/halfling/after_creation(mob/living/carbon/C)
+	..()
+	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
+	C.grant_language(/datum/language/halfling)
+	to_chat(C, "<span class='info'>I can speak Halfling with ,e before my speech.</span>")
 
 /datum/species/halfling/get_skin_list()
 	return sortList(list(

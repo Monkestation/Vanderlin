@@ -43,7 +43,7 @@
 /datum/objective/personal/hoard_mammons/reward_owner()
 	. = ..()
 	ADD_TRAIT(owner.current, TRAIT_SEEPRICES, TRAIT_GENERIC)
-	owner.current.adjust_stat_modifier("matthios_blessing", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_MATTHIOS_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/hoard_mammons/update_explanation_text()
 	explanation_text = "Accumulate at least [target_mammons] mammons in your possession to demonstrate your greediness to Matthios."

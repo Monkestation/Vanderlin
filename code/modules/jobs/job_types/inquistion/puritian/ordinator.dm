@@ -29,6 +29,8 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
 		TRAIT_INQUISITION,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 	)
 
 /datum/outfit/job/inquisitor/ordinator/pre_equip(mob/living/carbon/human/H)

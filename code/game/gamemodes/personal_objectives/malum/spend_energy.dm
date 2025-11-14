@@ -34,7 +34,7 @@
 
 /datum/objective/personal/energy_expenditure/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("malum_blessing", STATKEY_END, 1)
+	owner.current.adjust_stat_modifier(STATMOD_MALUM_BLESSING, STATKEY_END, 1)
 
 /datum/objective/personal/energy_expenditure/update_explanation_text()
 	explanation_text = "Don't be a slacker! Spend at least [energy_required] energy working to satisfy Malum."

@@ -1053,11 +1053,11 @@
 	pixel_x = -2;
 	pixel_y = 12
 	},
-/obj/item/reagent_containers/glass/bottle/teapot/random{
+/obj/item/reagent_containers/glass/carafe/teapot/clay{
 	pixel_x = 9;
 	pixel_y = 1
 	},
-/obj/item/reagent_containers/glass/bottle/teapot/random{
+/obj/item/reagent_containers/glass/carafe/teapot/clay{
 	pixel_x = 10;
 	pixel_y = 12
 	},
@@ -11494,7 +11494,7 @@
 /area/rogue/indoors/town/tavern)
 "kPu" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/item/reagent_containers/glass/bottle/teapot/random,
+/obj/item/reagent_containers/glass/carafe/teapot/clay,
 /obj/item/reagent_containers/glass/cup/clay,
 /obj/item/reagent_containers/glass/cup/clay,
 /obj/item/reagent_containers/glass/cup/fancy_clay,
@@ -20521,7 +20521,7 @@
 /area/rogue/indoors/town/manorgate)
 "tis" = (
 /obj/structure/table/wood/fancy,
-/obj/item/reagent_containers/glass/bottle/teapot/random{
+/obj/item/reagent_containers/glass/carafe/teapot/clay{
 	pixel_x = -5;
 	pixel_y = 7
 	},

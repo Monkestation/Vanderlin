@@ -2,8 +2,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	name = "crossbow"
 	desc = "A mechanical ranged weapon of simple design, affixed with a stirrup and fired via trigger."
-	icon = 'icons/roguetown/weapons/bows.dmi'
-//	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "crossbow0"
 	item_state = "crossbow"
 	possible_item_intents = list(/datum/intent/shoot/crossbow, /datum/intent/arc/crossbow, INTENT_GENERIC)
@@ -24,11 +23,10 @@
 	load_sound = 'sound/foley/nockarrow.ogg'
 	fire_sound = 'sound/combat/Ranged/crossbow-small-shot-02.ogg'
 
-
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 	name = "slurbow"
 	desc = "A lighter weight crossbow with a distinct barrel shroud holding the bolt in place. Light enough to arm by hand. <br>They're popular among among highwaymen and the patrolling lamplighters of Grenzelhoft."
-	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "slurbow0"
 	item_state = "slurbow"
 	possible_item_intents = list(/datum/intent/shoot/crossbow/slurbow, /datum/intent/arc/crossbow/slurbow, INTENT_GENERIC)
@@ -37,7 +35,6 @@
 	hasloadedsprite = TRUE
 	movingreload = TRUE
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_HIP
-
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/getonmobprop(tag)
 	. = ..()

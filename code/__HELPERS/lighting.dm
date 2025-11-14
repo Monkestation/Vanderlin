@@ -13,6 +13,11 @@
 		var/alpha_ratio = alpha/255
 		appearance.color = _EMISSIVE_COLOR(alpha_ratio)
 
+	//Test to make sure emissives with broken or missing icon states are created
+	if(PERFORM_ALL_TESTS(focus_only/invalid_emissives))
+		if(icon_state && !icon_exists(icon, icon_state))
+			stack_trace("An emissive appearance was added with non-existant icon_state \"[icon_state]\" in [icon]!")
+
 	return appearance
 
 /// Produces a mutable appearance glued to the [EMISSIVE_PLANE] dyed to be the [EM_BLOCK_COLOR].

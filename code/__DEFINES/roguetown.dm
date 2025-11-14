@@ -194,6 +194,21 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define TRIUMPH_BUY_GRAGGAR_INFLUENCE "graggar_influence"
 #define TRIUMPH_BUY_MATTHIOS_INFLUENCE "matthios_influence"
 
+#define TRIUMPH_BUY_MATTHIOS_INFLUENCE_REDUCTION "matthios_influence_reduction"
+#define TRIUMPH_BUY_GRAGGAR_INFLUENCE_REDUCTION "graggar_influence_reduction"
+#define TRIUMPH_BUY_BAOTHA_INFLUENCE_REDUCTION "baotha_influence_reduction"
+#define TRIUMPH_BUY_ZIZO_INFLUENCE_REDUCTION "zizo_influence_reduction"
+#define TRIUMPH_BUY_DENDOR_INFLUENCE_REDUCTION "dendor_influence_reduction"
+#define TRIUMPH_BUY_EORA_INFLUENCE_REDUCTION "eora_influence_reduction"
+#define TRIUMPH_BUY_MALUM_INFLUENCE_REDUCTION "malum_influence_reduction"
+#define TRIUMPH_BUY_PESTRA_INFLUENCE_REDUCTION "pestra_influence_reduction"
+#define TRIUMPH_BUY_NECRA_INFLUENCE_REDUCTION "necra_influence_reduction"
+#define TRIUMPH_BUY_XYLIX_INFLUENCE_REDUCTION "xylix_influence_reduction"
+#define TRIUMPH_BUY_ABYSSOR_INFLUENCE_REDUCTION "abyssor_influence_reduction"
+#define TRIUMPH_BUY_RAVOX_INFLUENCE_REDUCTION "ravox_influence_reduction"
+#define TRIUMPH_BUY_NOC_INFLUENCE_REDUCTION "noc_influence_reduction"
+#define TRIUMPH_BUY_ASTRATA_INFLUENCE_REDUCTION "astrata_influence_reduction"
+
 // Misc category and its buys
 #define TRIUMPH_CAT_MISC "MISC"
 
@@ -205,6 +220,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define TRIUMPH_BUY_PSYDON_RETIREMENT "psydon_retirement"
 #define TRIUMPH_BUY_ORPHANAGE_RENOVATION "orphanage_renovation"
 #define TRIUMPH_BUY_LONGER_WEEK "longer_week"
+#define TRIUMPH_BUY_EXOTIC_TASTES "exotic_tastes"
 
 // Bought triumph buys category
 #define TRIUMPH_CAT_ACTIVE_DATUMS "BOUGHT"

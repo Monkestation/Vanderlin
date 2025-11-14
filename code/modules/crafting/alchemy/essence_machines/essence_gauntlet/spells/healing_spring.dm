@@ -19,8 +19,8 @@
 /obj/structure/healing_spring
 	name = "healing spring"
 	desc = "A mystical spring that bubbles with healing waters."
-	icon = 'icons/obj/watercloset.dmi'
-	icon_state = "well"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "healingspring"
 	density = FALSE
 	anchored = TRUE
 

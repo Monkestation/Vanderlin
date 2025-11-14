@@ -1,0 +1,334 @@
+{
+    "2025-11-09": {
+        "PineappleMan929": [
+            {
+                "spellcheck": "no more cum in common language"
+            },
+            {
+                "balance": "Removes (the extremely dead) Psydon's traits, giving them to the inquisition only instead."
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added Kiha's halfling lore to the primer."
+            },
+            {
+                "rscadd": "Added Oratorium/Inquisition to the primer."
+            },
+            {
+                "bugfix": "Inspector's halberd SHOULD be selectable now."
+            },
+            {
+                "bugfix": "removed naledi hallucinations"
+            }
+        ],
+        "SarmentiCampbell": [
+            {
+                "bugfix": "Church Roles can no longer be heretics with the special trait."
+            },
+            {
+                "rscadd": "Harpy Acolytes now receive Eoran Charm as a extra T3."
+            },
+            {
+                "rscadd": "Eoran and Abyssorites Templar can now choose between two weapons, RK get Knuckles or Katar in their seleciton"
+            },
+            {
+                "rscadd": "Monk receive Pugilists bandages."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "bugfix": "Abyssorite Templar armor have side sleeves"
+            },
+            {
+                "rscadd": "rework abyssorite tabard"
+            }
+        ],
+        "Gatsby229": [
+            {
+                "rscadd": "Added Canister bomb"
+            },
+            {
+                "rscadd": "Added Death Shell\\nadd:Added grenade shells\\nadd:Added grenade shells smithing recipe.\\nadd:Added Canister bomb to the inquis shop, have fun you grenzelhoftan psychos\\nadd:Made blastpowder crafted with bombcrafting\\nadd:Made breaching charges crafted with bombcrafting\\nadd:Added Death Shell artificer recipe"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "New Chasm tiles that drop you into a random part of the Tomb of Matthios with more than likely a few broken limbs."
+            },
+            {
+                "map": "New area to Vanderlin Keep next to Treasury."
+            },
+            {
+                "qol": "Archivist can now summon parchment/scrolls as spells."
+            },
+            {
+                "rscadd": "You can now wash off flammables in water by washing yourself or entering it for a period of time."
+            },
+            {
+                "rscadd": "Water will now soak you as you remain in it. Soaking prevents fire but will dry off after a while."
+            },
+            {
+                "rscadd": "Pyromaniacs can now sate their addiction by examining someone who is on fire rather than needing to be close to them. This doesn't apply to non-mobs."
+            },
+            {
+                "balance": "Being soaked dissipates at 40% the rate it previously did."
+            },
+            {
+                "balance": "Removed the need to be scrubbed by someone else when using herbal soap to acquire the buff, but shortened it's duration to 10 minutes instead of 15."
+            },
+            {
+                "rscadd": "Hidden levers can be detected by looking around, similar to a trap. Only visible to those who meet the perception DC of the lever."
+            },
+            {
+                "qol": "Roles that know the keep's hidden door passwords now have it added to their memories."
+            },
+            {
+                "balance": "Hidden doors and levers now have a perception DC to be used. A standard hidden door/lever has a DC of 10. A keep door/lever is 14. Thieves Guild members and Assassins get a +2 bonus to this check."
+            },
+            {
+                "map": "Re-added Keep architectural plans to Vanderlin's archive room. These are used to reveal the locations of the hidden doors."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "rscadd": "an Abyssor Helmet and Armor and a way to craft them."
+            },
+            {
+                "rscadd": "Hostile NPCs of each species"
+            },
+            {
+                "admin": "New admin command to give someone a heart attack"
+            },
+            {
+                "bugfix": "more than 1 one person not being able to roll for a migrant job even if it had more than 1 slot."
+            },
+            {
+                "bugfix": "Assassin not appearing as pilgrim"
+            },
+            {
+                "code_imp": "Rare Classes does not count toward the limit of classes in the class menu."
+            },
+            {
+                "bugfix": "wanted poster not appearing the ressurection"
+            },
+            {
+                "rscadd": "a New Veteran class called : \\\"Faded Brawler\\\""
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added dynamic wounds to replace tiered wounds for carbon mobs."
+            },
+            {
+                "balance": "All carbon wound sources will scale differently when it comes to damage, sew time, bleed etc."
+            },
+            {
+                "balance": "Reduced artery bleed rate to 20."
+            },
+            {
+                "rscadd": "Added halfling species"
+            }
+        ],
+        "Bloo4420": [
+            {
+                "rscadd": "More wearable herbs"
+            }
+        ],
+        "Rannoooo": [
+            {
+                "balance": "Ravager and Reaver gain a iron hauberk instead of a shirt"
+            },
+            {
+                "balance": "Ravager loses crit resistance"
+            },
+            {
+                "balance": "Reaver loses nopainstun in exchange for ignoredamageslowdown"
+            },
+            {
+                "balance": "Ranger gains skilled knives and +1 perception, loses 1 str and medium armor trait. Gains high collier and gambeson"
+            },
+            {
+                "qol": "All subclasses spawn with average sewing."
+            },
+            {
+                "balance": "Brigand buffed from average wrestling to expert, like sellsword. -3 int turned into -1 int."
+            }
+        ],
+        "Dorodomki": [
+            {
+                "balance": "reinforced the men at arms loadouts"
+            },
+            {
+                "rscadd": "Added new clothing, dagger and flint to the merchant pilgrim\\n:cl:\\n## Pre-Merge Checklist\\n- [x] You tested this on a local server.\\n- [x] This code did not runtime during testing.\\n- [x] You documented all of your changes."
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "new city names among other things"
+            },
+            {
+                "rscadd": "Added new items to the loadout selection"
+            },
+            {
+                "rscadd": " New Weapons and their smithing recipes\\nadd:"
+            },
+            {
+                "balance": "rebalanced some lakkarian weapons"
+            }
+        ],
+        "Ambrose997": [
+            {
+                "code_imp": "changed the skillcraft for pyroclastic arrows/bolts to bombcrafting instead of engineering"
+            }
+        ],
+        "Raptorian1": [
+            {
+                "map": "reworks bog entirely on vanderlin"
+            },
+            {
+                "map": "turns vanderlin's bog into a complex dungeon crawl with oblvion styled mechanics."
+            },
+            {
+                "map": "ocean dungeons"
+            },
+            {
+                "map": "lich dungeon"
+            },
+            {
+                "map": "orc dungeons."
+            }
+        ],
+        "Arkatos": [
+            {
+                "rscadd": "Added an option to have random culinary preferences, which will reward you with limited triumphs when consumed. You can now also view your culinary preferences in your character's memories."
+            },
+            {
+                "bugfix": "Fixed several issues with animals not doing anything."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added puffer and lampterns to the inquisshop"
+            },
+            {
+                "balance": "Inquisitor now middle-aged/old"
+            },
+            {
+                "balance": "Ordinator now recieves master skill if old"
+            },
+            {
+                "bugfix": "fixed ordinator armor not inheriting"
+            },
+            {
+                "rscdel": "Removed arcane magic, gem and spellbook from psydonite disciple."
+            },
+            {
+                "rscdel": "Remove Psydonite devotion holders recieving miracles."
+            }
+        ],
+        "Viviridia": [
+            {
+                "rscadd": "Added new mechanics to some spells [entangler, lightning]"
+            },
+            {
+                "balance": "makes flower field 5 cost but no longer consumes flower"
+            },
+            {
+                "balance": "replaces frostbite to cone of frost"
+            },
+            {
+                "bugfix": "fixed touch spell charges"
+            },
+            {
+                "image": "added and modified icons"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "sound": "The absolver now has the inquisitor's combat music."
+            }
+        ]
+    },
+    "2025-11-10": {
+        "Sockssq": [
+            {
+                "rscadd": "horse tail for hollowkins"
+            },
+            {
+                "rscadd": "skunk tail for hollowkins"
+            },
+            {
+                "rscadd": "cow tail for hollowkins"
+            },
+            {
+                "rscadd": "deer tail for hollowkins"
+            },
+            {
+                "bugfix": "clippings in rabbits tail and wag animation"
+            },
+            {
+                "bugfix": "clippings in bat long and bat short tail"
+            },
+            {
+                "bugfix": "clippings in bat long tail and bat short tail wag animation"
+            },
+            {
+                "bugfix": "clippings in fox 2 tail"
+            }
+        ],
+        "Draggeru": [
+            {
+                "map": "Updated the Old Church in Vanderlin (the map)"
+            },
+            {
+                "map": "added small trinkets to the keep and the inn"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "New Special roll: The Glutton. Monarch only... and their family."
+            },
+            {
+                "bugfix": "random teacup stuff"
+            }
+        ],
+        "Bloo4420": [
+            {
+                "image": "Added green brazier"
+            }
+        ],
+        "Arkatos": [
+            {
+                "rscadd": "Added a new communal triumph buy - Exotic Tastes."
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Borrowed time now gets it's own spell icon, yay."
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "rscadd": "5 new facial hairs, 3 new hairs"
+            },
+            {
+                "rscadd": "Rakshari eye sprites"
+            },
+            {
+                "bugfix": "Eyebrows not being colorable"
+            },
+            {
+                "image": "Added dmis for Triton and Rakshari hairs"
+            },
+            {
+                "spellcheck": "Changed typo of \\\"browsz\\\" to \\\"brows\\\""
+            }
+        ],
+        "Rannoooo": [
+            {
+                "rscadd": "Brings back the old forest guard subclass Forest Brawler with some slight tweaks to encourage aggression."
+            }
+        ]
+    }
+}

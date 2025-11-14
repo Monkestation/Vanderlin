@@ -334,7 +334,7 @@
 			STATKEY_PER = 1,
 			STATKEY_SPD = -1,
 		)
-		spawned.adjust_stat_modifier_list("job_stats", old_stats)
+		spawned.adjust_stat_modifier_list(STATMOD_JOB, old_stats)
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
 /datum/outfit/heartfelt_magos

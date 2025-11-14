@@ -40,7 +40,7 @@
 
 /datum/objective/personal/build_zizo_shrine/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("zizo_blessing", STATKEY_LCK, 2)
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_LCK, 2)
 
 /datum/objective/personal/build_zizo_shrine/update_explanation_text()
 	explanation_text = "Construct [target_count] profane shrine[target_count > 1 ? "s" : ""] to spread Zizo's corruption!"

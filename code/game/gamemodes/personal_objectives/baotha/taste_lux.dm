@@ -30,7 +30,7 @@
 
 /datum/objective/personal/taste_lux/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("baotha_blessing", STATKEY_LCK, 2)
+	owner.current.adjust_stat_modifier(STATMOD_BAOTHA_BLESSING, STATKEY_LCK, 2)
 
 /datum/objective/personal/taste_lux/update_explanation_text()
 	explanation_text = "Experience the divine by tasting the forbidden Lux essence! Baotha is watching..."

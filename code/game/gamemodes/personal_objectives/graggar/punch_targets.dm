@@ -38,7 +38,7 @@
 
 /datum/objective/personal/punch_women/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("graggar_blessing", STATKEY_STR, 2)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_STR, 2)
 
 /datum/objective/personal/punch_women/update_explanation_text()
 	explanation_text = "Punch women [punches_required] time\s in the face to demonstrate your devotion to Graggar!"

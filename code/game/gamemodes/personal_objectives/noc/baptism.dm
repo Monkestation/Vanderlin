@@ -33,7 +33,7 @@
 
 /datum/objective/personal/baptism/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("noc_blessing", STATKEY_INT, 1)
+	owner.current.adjust_stat_modifier(STATMOD_NOC_BLESSING, STATKEY_INT, 1)
 
 /datum/objective/personal/baptism/update_explanation_text()
 	explanation_text = "Receive mana baptism in Noc's name to gain their favor!"

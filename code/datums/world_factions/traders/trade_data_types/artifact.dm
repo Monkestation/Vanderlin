@@ -22,7 +22,6 @@
 	initial_products = list()
 	max_custom_items = 1
 	custom_items = list(
-		/obj/item/weapon/mace/goden/steel/ravox = list(1, PRICE_SUBGOD_ARTIFACT, 1),
 		/obj/item/weapon/flail/peasantwarflail/matthios = list(1, PRICE_SUBGOD_ARTIFACT, 1),
 		/obj/item/weapon/sword/long/martyr = list(1, PRICE_SUBGOD_ARTIFACT, 1),
 		/obj/item/weapon/greataxe/dreamscape = list(1, PRICE_SUBGOD_ARTIFACT, 1),

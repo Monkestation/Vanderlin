@@ -318,6 +318,14 @@
 	created_item = /obj/item/clothing/head/helmet/medium/decorated/skullmet
 	craftdiff = 3
 
+/datum/anvil_recipe/armor/steel/rousskull_helm
+
+	name = "Rous Skull helm (+Bone X2)"
+	recipe_name = "A rous skull covering a steel helmet."
+	additional_items = list(/obj/item/alch/bone, /obj/item/alch/bone)
+	created_item = /obj/item/clothing/head/helmet/medium/decorated/rousskullmet
+	craftdiff = 3
+
 /datum/anvil_recipe/armor/iron/cage_helmet
 	name = "feldsher's cage"
 	recipe_name = "a cage helmet"

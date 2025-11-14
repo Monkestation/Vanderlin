@@ -44,8 +44,8 @@
 
 /datum/objective/personal/consume_organs/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("graggar_blessing", STATKEY_STR, 1)
-	owner.current.adjust_stat_modifier("graggar_blessing", STATKEY_CON, 1)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_CON, 1)
 
 /datum/objective/personal/consume_organs/update_explanation_text()
 	explanation_text = "Consume [organs_required] organ\s, including [hearts_required] heart\s, to appease Graggar!"

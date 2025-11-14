@@ -33,7 +33,7 @@
 
 /datum/objective/personal/nobility/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("astrata_blessing", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ASTRATA_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/nobility/update_explanation_text()
 	explanation_text = "Become part of the nobility by any means to gain Astrata's approval!"

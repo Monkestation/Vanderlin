@@ -205,7 +205,7 @@
 /datum/status_effect/buff/psydonic_endurance
 	id = "psydonic_endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
-	effectedstats = list("constitution" = 1,"endurance" = 1)
+	effectedstats = list(STATKEY_CON = 1,STATKEY_END = 1)
 
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()

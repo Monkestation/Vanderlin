@@ -47,7 +47,7 @@
 
 /datum/objective/personal/improve_craft/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("malum_blessing", STATKEY_INT, 1)
+	owner.current.adjust_stat_modifier(STATMOD_MALUM_BLESSING, STATKEY_INT, 1)
 
 /datum/objective/personal/improve_craft/update_explanation_text()
 	explanation_text = "Improve your craft skills by gaining [required_levels] new skill levels through practice or dreams. For Malum!"

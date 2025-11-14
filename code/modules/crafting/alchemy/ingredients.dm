@@ -111,6 +111,13 @@
 
 //BEGIN THE HERBS
 
+/obj/item/alch/herb
+	name = "herb"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
+	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_MASK
+	alternate_worn_layer  = 8.9 //On top of helmet
+	body_parts_covered = NONE
+
 /obj/item/alch/herb/atropa
 	name = "atropa"
 	icon_state = "atropa"
@@ -118,10 +125,6 @@
 /obj/item/alch/herb/matricaria
 	name = "matricaria"
 	icon_state = "matricaria"
-	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
-	body_parts_covered = NONE
-	w_class = WEIGHT_CLASS_TINY
-	alternate_worn_layer  = 8.9
 
 /obj/item/alch/herb/symphitum
 	name = "symphitum"
@@ -142,10 +145,6 @@
 /obj/item/alch/herb/calendula
 	name = "calendula"
 	icon_state = "calendula"
-	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
-	body_parts_covered = NONE
-	w_class = WEIGHT_CLASS_TINY
-	alternate_worn_layer  = 8.9
 
 /obj/item/alch/herb/mentha
 	name = "mentha"
@@ -158,21 +157,12 @@
 /obj/item/alch/herb/salvia
 	name = "salvia"
 	icon_state = "salvia"
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
-	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
-	body_parts_covered = NONE
-	w_class = WEIGHT_CLASS_TINY
-	alternate_worn_layer  = 8.9
 
 /obj/item/alch/herb/rosa
 	name = "rosa"
 	icon_state = "rosa"
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_MOUTH
-	body_parts_covered = NONE
-	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
-	alternate_worn_layer  = 8.9 //On top of helmet
 
 /obj/item/alch/herb/rosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -186,10 +176,6 @@
 /obj/item/alch/herb/euphorbia
 	name = "euphorbia"
 	icon_state = "euphorbia"
-	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
-	body_parts_covered = NONE
-	w_class = WEIGHT_CLASS_TINY
-	alternate_worn_layer  = 8.9
 
 /obj/item/alch/herb/hypericum
 	name = "hypericum"
@@ -206,6 +192,10 @@
 /obj/item/alch/herb/artemisia
 	name = "artemisia"
 	icon_state = "artemisia"
+
+/obj/item/alch/herb/lavender // Not obtainable currently, will correct later
+	name = "lavender"
+	icon_state = "lavender"
 
 /obj/item/alch/thaumicdust
 	name = "thaumic iron dust"

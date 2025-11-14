@@ -38,7 +38,7 @@
 
 /datum/objective/personal/create_abyssoids/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("abyssor_blessing", STATKEY_CON, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ABYSSOR_BLESSING, STATKEY_CON, 1)
 
 /datum/objective/personal/create_abyssoids/update_explanation_text()
 	explanation_text = "Create [abyssoids_required] abyssoid\s from the common leeches, and then distribute them among the ingrate population!"

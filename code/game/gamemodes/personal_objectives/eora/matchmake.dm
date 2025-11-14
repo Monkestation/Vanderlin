@@ -32,7 +32,7 @@
 
 /datum/objective/personal/marriage_broker/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("eora_blessing", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_EORA_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/marriage_broker/update_explanation_text()
 	explanation_text = "Be a matchmaker! Make any marriage happen to please Eora!"

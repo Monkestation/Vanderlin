@@ -27,7 +27,7 @@
 	name = "copper fork"
 	desc = "A simple and rustic tool for working the fields, not a very effective weapon."
 	icon_state = "cpitchfork"
-	item_state = "cpitchfork"
+	item_state = "pitchfork"
 	force_wielded = DAMAGE_SPEAR
 	experimental_inhand = TRUE
 	experimental_onback = TRUE

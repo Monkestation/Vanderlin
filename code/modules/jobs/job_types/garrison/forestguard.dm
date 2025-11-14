@@ -179,6 +179,60 @@
 		ADD_TRAIT(H, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC) //Nopainstun was pretty insane, definitely too much while spawning with a hauberk, this should keep their vibe of angry guy that keeps running at you.
 		ADD_TRAIT(H, TRAIT_FORAGER, TRAIT_GENERIC)
 
+// Hand to Hand
+/datum/job/advclass/forestguard/brawler
+	title = "Forest Brawler"
+	tutorial = "In the goblin wars you took an oath to never wield a weapon, you just enjoy getting your hands dirty too much..."
+	category_tags = list(CTAG_FORGARRISON)
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
+	jobstats = list(
+		STATKEY_END = 2,
+		STATKEY_CON = 2,
+		STATKEY_STR = 3,
+		STATKEY_SPD = -1,
+	)
+
+	skills = list(
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/riding = 2,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/labor/lumberjacking = 3,
+		/datum/skill/craft/carpentry = 1,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/tanning = 1,
+		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/unarmed = 4,
+		/datum/skill/combat/knives = 3,
+		/datum/skill/combat/axesmaces = 1,
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR,
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_FORAGER,
+	)
+
+	cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+	outfit = /datum/outfit/forestguard/brawler
+
+/datum/job/advclass/forestguard/brawler/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.verbs |= /mob/proc/haltyell
+
+/datum/outfit/forestguard/brawler
+	name = "Forest Brawler"
+	head = /obj/item/clothing/head/helmet/medium/decorated/skullmet
+	neck = /obj/item/clothing/neck/gorget
+	armor = /obj/item/clothing/armor/leather/advanced/forrester
+	shirt = /obj/item/clothing/armor/chainmail/hauberk/iron
+	beltr = /obj/item/weapon/axe/iron
+	beltl = /obj/item/weapon/knife/hunting
+	backpack_contents = list(/obj/item/clothing/gloves/bandages/pugilist = 1, /obj/item/rope/chain = 1, /obj/item/storage/belt/pouch/coins/poor)
+	scabbards = list(/obj/item/weapon/scabbard/knife)
+
 // Ruffian, knives, bows and a lot of cooking.
 /datum/job/advclass/forestguard/ruffian
 	title = "Forest Ruffian"
@@ -190,7 +244,7 @@
 
 /datum/outfit/forestguard/ruffian/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/helmet/medium/decorated/skullmet //placeholder, I have to sprite something new for the Brats, like a gator skull
+	head = /obj/item/clothing/head/helmet/medium/decorated/rousskullmet //placeholder, I have to sprite something new for the Brats, like a gator skull
 	neck = /obj/item/clothing/neck/highcollier
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	beltl = /obj/item/weapon/knife/dagger //just a normal iron dagger

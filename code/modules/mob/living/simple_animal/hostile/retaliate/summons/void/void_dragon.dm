@@ -15,17 +15,18 @@
 /mob/living/simple_animal/hostile/retaliate/voiddragon
 	name = "void dragon"
 	desc = "An ancient creature from a bygone age. Now would be a good time to run."
+	icon = 'icons/mob/96x96/ratwood_dragon.dmi'
+	icon_state = "dragon"
+	icon_living = "dragon"
+	icon_dead = "dragon_dead"
+
 	health = 2500
 	maxHealth = 2500
 	attack_verb_continuous = "gouges"
 	attack_verb_simple = "gouge"
 	attack_sound = 'sound/misc/demon_attack1.ogg'
-	icon = 'icons/mob/96x96/ratwood_dragon.dmi'
 	summon_primer = "You are ancient. A creature long since banished to the void ages past, you were trapped in a seemingly timeless abyss. Now you've been freed, returned to the world- and everything has changed. It seems some of your constructs remain buried beneath the ground. How you react to these events, only time can tell."
 	tier = 5
-	icon_state = "dragon"
-	icon_living = "dragon"
-	icon_dead = "dragon_dead"
 	speak_emote = list("roars")
 	base_intents = list(/datum/intent/unarmed/dragonclaw)
 	faction = list("abberant")
@@ -43,7 +44,6 @@
 	var/void_corruption = TRUE
 	dendor_taming_chance = DENDOR_TAME_PROB_NONE
 	food_max = 0
-
 
 	ai_controller = /datum/ai_controller/voiddragon
 

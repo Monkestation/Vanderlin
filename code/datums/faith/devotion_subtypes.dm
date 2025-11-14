@@ -78,6 +78,10 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/projectile/eora_curse,
 		CLERIC_T3 = /datum/action/cooldown/spell/eoran_bloom,
 	)
+	favored_species = list(SPEC_ID_HARPY)
+	favored_miracles = list(
+		CLERIC_T3 = /datum/action/cooldown/spell/charm/eoran
+	)
 
 // Inhumen
 /datum/devotion/inhumen/make_cleric()
@@ -135,10 +139,4 @@
 		CLERIC_T1 = /datum/action/cooldown/spell/baothablessings,
 		CLERIC_T2 = /datum/action/cooldown/spell/projectile/blowingdust,
 		CLERIC_T3 = /datum/action/cooldown/spell/painkiller,
-	)
-
-/datum/devotion/psydon
-	miracles = list(
-		CLERIC_T1 = /datum/action/cooldown/spell/psydonendure,
-		CLERIC_T2 = /datum/action/cooldown/spell/undirected/psydonrespite,
 	)

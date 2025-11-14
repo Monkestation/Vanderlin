@@ -22,6 +22,7 @@
 	give_bank_account = 30
 	min_pq = 10
 	bypass_lastclass = TRUE
+	antag_role = /datum/antagonist/purishep
 
 /datum/outfit/job/inquisitor
 	name = "Inquisitor"

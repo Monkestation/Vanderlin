@@ -39,6 +39,7 @@
 	var/temporary_split_key
 
 	var/list/connected = list("2" = 0, "1" = 0, "8" = 0, "4" = 0)
+	flags_1 = CONDUCT_1
 
 /obj/effect/abstract/liquid_turf/proc/set_connection(dir)
 	connected["[dir]"] = 1

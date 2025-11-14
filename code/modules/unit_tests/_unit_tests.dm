@@ -71,6 +71,7 @@
 #include "create_and_destroy.dm"
 #include "faction_supply_packs.dm"
 #include "focus_only_tests.dm"
+#include "load_map_security.dm"
 #include "map_landmarks.dm"
 #include "mapping.dm"
 #include "projectiles.dm"
@@ -88,6 +89,7 @@
 #include "surgeries.dm"
 #include "timer_sanity.dm"
 #include "unit_test.dm"
+#include "weapon_icons.dm"
 // END_INCLUDE
 
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter

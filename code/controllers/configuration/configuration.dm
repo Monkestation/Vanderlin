@@ -267,7 +267,7 @@ Example config:
 		t = trim(t)
 		if(length(t) == 0)
 			continue
-		else if(copytext(t, 1, 2) == "#")
+		else if(t[1] == "#")
 			continue
 
 		var/pos = findtext(t, " ")
@@ -276,7 +276,7 @@ Example config:
 
 		if(pos)
 			command = lowertext(copytext(t, 1, pos))
-			data = copytext(t, pos + 1)
+			data = copytext(t, pos + length(t[pos]))
 		else
 			command = lowertext(t)
 
@@ -288,9 +288,11 @@ Example config:
 
 		switch (command)
 			if ("map")
-				currentmap = load_map_config("_maps/[data].json")
+				currentmap = load_map_config(data, MAP_DIRECTORY_MAPS)
 				if(currentmap.defaulted)
-					log_config("Failed to load map config for [data]!")
+					var/error_message = "Failed to load map config for [data]!"
+					log_config(error_message)
+					log_mapping(error_message, TRUE)
 					currentmap = null
 			if ("minplayers","minplayer")
 				currentmap.config_min_users = text2num(data)

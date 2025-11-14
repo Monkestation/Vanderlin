@@ -31,7 +31,7 @@
 
 /datum/objective/personal/adopt_orphan/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("eora_blessing", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_EORA_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/adopt_orphan/update_explanation_text()
 	explanation_text = "Adopt an orphan as your own child and provide them a loving home! Eora is counting on you!"

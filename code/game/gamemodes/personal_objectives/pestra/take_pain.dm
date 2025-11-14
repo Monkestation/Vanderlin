@@ -46,7 +46,7 @@
 
 /datum/objective/personal/take_pain/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("pestra_blessing", STATKEY_CON, 1)
+	owner.current.adjust_stat_modifier(STATMOD_PESTRA_BLESSING, STATKEY_CON, 1)
 
 /datum/objective/personal/take_pain/update_explanation_text()
 	explanation_text = "Take enough pain from others upon yourself as an act of mercy and devotion to Pestra."

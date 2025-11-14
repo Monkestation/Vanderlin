@@ -1,7 +1,6 @@
 /obj/item/paper/scroll
 	name = "parchment scroll"
 	icon_state = "scroll"
-	var/open = FALSE
 	slot_flags = null
 	dropshrink = 0.6
 	firefuel = 30 SECONDS
@@ -9,6 +8,7 @@
 	textper = 108
 	maxlen = 2000
 	throw_range = 3
+	var/open = FALSE
 	var/old_render = TRUE
 
 /obj/item/paper/scroll/attackby(obj/item/P, mob/living/carbon/human/user, params)
@@ -127,14 +127,13 @@
 /obj/item/paper/scroll/cargo
 	name = "shipping order"
 	icon_state = "contractunsigned"
+	open = TRUE
+	textper = 150
 	var/signedname
 	var/signedjob
 	var/list/orders = list()
 	var/list/reputation_orders = list()
 	var/list/fufilled_orders = list()
-	open = TRUE
-	textper = 150
-	old_render = FALSE
 
 /obj/item/paper/scroll/cargo/Destroy()
 	for(var/datum/supply_pack/SO in orders)
@@ -471,7 +470,6 @@
 /obj/item/paper/scroll/frumentarii
 	name = "frumentarii scroll"
 	desc = "A list of the hand's fingers. Strike a candidate with this to allow them servitude. Use a writing utensil to cross out a finger."
-	old_render = FALSE
 
 	var/list/real_names = list()
 	var/list/removed_names = list()
@@ -549,7 +547,6 @@
 
 /obj/item/paper/scroll/sold_manifest
 	name = "shipping manifest"
-	old_render = FALSE
 	var/list/count = list()
 	var/list/items = list()
 
@@ -569,8 +566,6 @@
 /obj/item/paper/scroll/sell_price_changes
 	name = "updated purchasing prices"
 	icon_state = "contractsigned"
-	old_render = FALSE
-
 	var/list/sell_prices
 	var/writers_name
 	var/faction

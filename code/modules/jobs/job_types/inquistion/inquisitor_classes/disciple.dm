@@ -27,6 +27,8 @@
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
 		TRAIT_STEELHEARTED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 	)
 
 /obj/item/storage/belt/leather/rope/dark

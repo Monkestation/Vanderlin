@@ -47,7 +47,7 @@
 
 /datum/objective/personal/improve_combat/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("ravox_blessing", STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_RAVOX_BLESSING, STATKEY_STR, 1)
 
 /datum/objective/personal/improve_combat/update_explanation_text()
 	explanation_text = "Improve your combat skills by gaining [required_levels] new skill levels through practice or dreams. For Ravox!"

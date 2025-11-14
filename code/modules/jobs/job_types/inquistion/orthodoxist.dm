@@ -24,6 +24,7 @@
 
 	advclass_cat_rolls = list(CTAG_INQUISITION = 20)
 	same_job_respawn_delay = 30 MINUTES
+	antag_role = /datum/antagonist/purishep
 
 /datum/job/orthodoxist/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()

@@ -170,7 +170,7 @@
 /obj/structure/table/map/baotha{
 	dir = 6
 	},
-/obj/item/reagent_containers/glass/bottle/glazed_teacup{
+/obj/item/reagent_containers/glass/cup/teacup/fancy{
 	pixel_y = 11;
 	pixel_x = -9
 	},
@@ -298,7 +298,6 @@
 /area/rogue/outdoors)
 "bB" = (
 /mob/living/simple_animal/hostile/retaliate/chicken{
-	icon_state = "chicken_black";
 	pixel_x = -6;
 	pixel_y = 6
 	},
@@ -1245,7 +1244,6 @@
 	icon_state = "tundragrass2"
 	},
 /mob/living/simple_animal/hostile/retaliate/chicken{
-	icon_state = "chicken_white";
 	pixel_x = -3;
 	pixel_y = 1
 	},
@@ -2735,7 +2733,7 @@
 /obj/structure/table/map/baotha{
 	dir = 1
 	},
-/obj/item/reagent_containers/glass/bottle/glazed_teapot{
+/obj/item/reagent_containers/glass/carafe/teapot{
 	pixel_y = -3;
 	pixel_x = -3
 	},

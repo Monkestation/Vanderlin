@@ -349,7 +349,7 @@ And it also helps for the character set panel
 	H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 4, 4, TRUE)
 	H.change_stat(STATKEY_STR, pick(1,2))
 	H.change_stat(STATKEY_SPD, 1)
-	H.remove_stat_modifier("innate_age")
+	H.remove_stat_modifier(STATMOD_AGE)
 	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
 	transfix.Grant(H)
 

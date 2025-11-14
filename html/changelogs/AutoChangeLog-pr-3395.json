@@ -1,1 +1,0 @@
-{"author":"CheffieGithub","delete-after":true,"changes":[{"rscadd":"Added dynamic wounds to replace tiered wounds for carbon mobs."},{"balance":"All carbon wound sources will scale differently when it comes to damage, sew time, bleed etc."},{"balance":"Reduced artery bleed rate to 20."}]}

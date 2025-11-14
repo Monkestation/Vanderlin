@@ -36,7 +36,7 @@
 
 /datum/objective/personal/rotten_feast/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("pestra_blessing", STATKEY_CON, 1)
+	owner.current.adjust_stat_modifier(STATMOD_PESTRA_BLESSING, STATKEY_CON, 1)
 
 /datum/objective/personal/rotten_feast/update_explanation_text()
 	explanation_text = "Let nothing go to waste! Consume [meals_required] piece of rotten food to gain Pestra's favor!"

@@ -37,7 +37,7 @@
 /datum/objective/personal/grave_robbery/reward_owner()
 	. = ..()
 	ADD_TRAIT(owner.current, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
-	owner.current.adjust_stat_modifier("matthios_blessing", STATKEY_END, 1)
+	owner.current.adjust_stat_modifier(STATMOD_MATTHIOS_BLESSING, STATKEY_END, 1)
 
 /datum/objective/personal/grave_robbery/update_explanation_text()
 	explanation_text = "Rob at least [graves_required] graves to earn Matthios' respect."

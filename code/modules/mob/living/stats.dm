@@ -79,27 +79,27 @@
 			var/datum/species/species = H.dna.species
 			var/list/specstat_list = (gender == FEMALE) ? species.specstats_f : species.specstats_m
 			for(var/stat in specstat_list)
-				set_stat_modifier("innate_sex", stat, specstat_list[stat])
+				set_stat_modifier(STATMOD_SEX, stat, specstat_list[stat])
 
 		switch(H.age)
 			if(AGE_CHILD)
-				set_stat_modifier("innate_age", STATKEY_STR, -2)
-				set_stat_modifier("innate_age", STATKEY_CON, -2)
-				set_stat_modifier("innate_age", STATKEY_PER, 1)
-				set_stat_modifier("innate_age", STATKEY_END, 1)
-				set_stat_modifier("innate_age", STATKEY_SPD, round(rand(1,2)))
+				set_stat_modifier(STATMOD_AGE, STATKEY_STR, -2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_CON, -2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, round(rand(1,2)))
 			// nothing for adults/immortals,
 			if(AGE_MIDDLEAGED)
-				set_stat_modifier("innate_age", STATKEY_END, 1)
-				set_stat_modifier("innate_age", STATKEY_SPD, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, -1)
 			if(AGE_OLD)
-				set_stat_modifier("innate_age", STATKEY_STR, -2)
-				set_stat_modifier("innate_age", STATKEY_PER, 2)
-				set_stat_modifier("innate_age", STATKEY_END, -1)
-				set_stat_modifier("innate_age", STATKEY_CON, -1)
-				set_stat_modifier("innate_age", STATKEY_INT, 2)
-				set_stat_modifier("innate_age", STATKEY_SPD, -1)
-				set_stat_modifier("innate_age", STATKEY_LCK, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_STR, -2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_END, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_CON, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_INT, 2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_LCK, 1)
 
 		if(HAS_TRAIT(src, TRAIT_PUNISHMENT_CURSE))
 			change_stat(STATKEY_STR, -3)
@@ -174,6 +174,20 @@
 		if(!amount)
 			continue
 		set_stat_modifier(source, stat_key, amount)
+
+/**
+ * Set a stat key to value via a modifier at that moment
+ * * source - Stringed source key
+ * * stat_key - Stat to adjust
+ * * value - Value to adjust to
+ */
+/mob/living/proc/modifier_set_stat_to(source, stat_key, value)
+	if(!source || !stat_key || !value)
+		return
+	var/current = get_stat(stat_key)
+	if(!current)
+		return
+	set_stat_modifier(source, stat_key, value - current)
 
 /mob/living/proc/adjust_stat_modifier(source, stat_key, amount)
 	if(!source || !(stat_key in MOBSTATS) || !amount)

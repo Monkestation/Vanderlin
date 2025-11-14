@@ -160,3 +160,9 @@
 		if(BODY_ZONE_L_ARM)
 			return "foreleg"
 	return ..()
+
+/// Very temporary sprite
+/mob/living/simple_animal/hostile/retaliate/blood/weird
+	icon = 'icons/roguetown/underworld/carriageman.dmi'
+	icon_state = "weird"
+	SET_BASE_PIXEL(-16, 0)

@@ -30,7 +30,7 @@
 
 /datum/objective/personal/get_apprentice/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("noc_blessing", STATKEY_INT, 1)
+	owner.current.adjust_stat_modifier(STATMOD_NOC_BLESSING, STATKEY_INT, 1)
 
 /datum/objective/personal/get_apprentice/update_explanation_text()
 	explanation_text = "Obtain a new apprentice to pass your knowledge on! Noc will be watching."

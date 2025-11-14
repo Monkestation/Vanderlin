@@ -814,7 +814,7 @@
 /area/rogue/outdoors/mountains)
 "jD" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/reagent_containers/glass/bottle/glazed_teacup,
+/obj/item/reagent_containers/glass/cup/teacup/fancy,
 /turf/open/floor/cobblerock,
 /area/rogue/indoors/dungeon)
 "jG" = (
@@ -2159,7 +2159,7 @@
 /area/rogue/outdoors/woods)
 "zD" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/glass/bottle/glazed_teapot/tea,
+/obj/item/reagent_containers/glass/carafe/teapot/tea,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/rogue/indoors/dungeon)
@@ -2583,7 +2583,6 @@
 	desc = "Stone Coffin holding the remains of a Ravox Saint";
 	name = "Saint's coffin"
 	},
-/obj/item/weapon/mace/goden/steel/ravox,
 /obj/item/clothing/head/flowercrown/salvia,
 /obj/item/clothing/neck/psycross/silver/ravox,
 /turf/open/floor/tile/masonic/spiral,
@@ -3823,7 +3822,7 @@
 /area/rogue/outdoors/woods)
 "Rh" = (
 /obj/structure/table/wood/plain,
-/obj/item/reagent_containers/glass/carafe/silver/teapot{
+/obj/item/reagent_containers/glass/carafe/teapot/silver{
 	pixel_x = -3;
 	pixel_y = 0
 	},

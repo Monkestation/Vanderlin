@@ -10,6 +10,7 @@
 	min_pq = 10
 
 	advclass_cat_rolls = list(CTAG_WRETCH = 20)
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	is_foreigner = TRUE
 	job_reopens_slots_on_death = FALSE

@@ -38,7 +38,7 @@
 /datum/supply_pack/weapons/iron/shortsword
 	name = "Iron Short Sword"
 	cost = 30
-	contains = /obj/item/weapon/sword/short
+	contains = /obj/item/weapon/sword/short/iron
 
 /datum/supply_pack/weapons/iron/sword_iron
 	name = "Iron Arming Sword"

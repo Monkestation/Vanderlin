@@ -41,7 +41,7 @@
 			head = /obj/item/clothing/head/helmet/skullcap/cult
 			H.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 			backr = /obj/item/weapon/shield/heater
-			beltl = /obj/item/weapon/sword/short
+			beltl = /obj/item/weapon/sword/short/iron
 			H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
 			H.grant_language(/datum/language/undead)

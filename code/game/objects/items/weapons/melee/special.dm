@@ -6,7 +6,7 @@
 	name = "master's rod"
 	desc = "Bend the knee."
 	icon_state = "scepter"
-	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/special.dmi'
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
 	wlength = WLENGTH_NORMAL
@@ -120,6 +120,7 @@
 	force = 15
 	force_wielded = 15
 	name = "stunmace"
+	icon = 'icons/roguetown/weapons/32/special.dmi'
 	icon_state = "stunmace0"
 	desc = "A dwarven invention, a mace that bears tiny soul-gems that imbue the crown of the mace with lightning mana."
 	gripped_intents = null
@@ -252,8 +253,8 @@
 	possible_item_intents = list(/datum/intent/katar/cut, /datum/intent/katar/thrust)
 	name = "katar"
 	desc = "A blade that sits above the users fist. Commonly used by those proficient at unarmed fighting"
+	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "katar"
-	icon = 'icons/roguetown/weapons/32.dmi'
 	gripsprite = FALSE
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_SMALL
@@ -273,6 +274,7 @@
 /obj/item/weapon/katar/psydon
 	name = "psydonian katar"
 	desc = "An exotic weapon taken from the hands of wandering monks, an esoteric design to the Grenzelhoftian nation. Special care was taken into account towards the user's knuckles: silver-tipped steel from tip to edges, and His holy cross reinforcing the heart of the weapon, with curved shoulders to allow its user to deflect incoming blows - provided they lead it in with the blade."
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psykatar"
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
@@ -282,6 +284,7 @@
 /obj/item/weapon/katar/abyssor
 	name = "barotrauma"
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
+	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
 	force = 24 //Less damage, Original was 27, But more integrity in exchange.
 	max_integrity = 250
@@ -315,10 +318,10 @@
 /obj/item/weapon/knuckles
 	name = "steel knuckles"
 	desc = "A mean looking pair of steel knuckles."
+	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
+	icon_state = "steelknuckle"
 	force = 22
 	possible_item_intents = list(/datum/intent/knuckles/strike,/datum/intent/knuckles/smash)
-	icon = 'icons/roguetown/weapons/32.dmi'
-	icon_state = "steelknuckle"
 	gripsprite = FALSE
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_SMALL
@@ -348,6 +351,7 @@
 /obj/item/weapon/knuckles/psydon
 	name = "psydonian knuckles"
 	desc = "A simple piece of harm molded in a holy mixture of steel and silver, finished with three stumps - Psydon's crown - to crush the heretics' garments and armor into smithereens."
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyknuckle"
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
@@ -357,5 +361,6 @@
 /obj/item/weapon/knuckles/eora
 	name = "close caress"
 	desc = "Some times call for a more intimate approach."
+	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eoraknuckle"
 	force = 24

@@ -24,6 +24,7 @@ spice2.ogg: The Appolo Stars - Power Of The Source
 churchnight.ogg: Fear & Hunger 2: Termina - Cathedral Whispers
 
 CombatRogueMage.ogg : (APAB) All Paladins Are Bastards - Burialgoods (He gave us permission, god bless you Burialgoods - https://www.youtube.com/watch?v=3Z_cOxF1o48)
+CombatBeest.ogg : Last Day As A Man (First Night As A Beast) - Burialgoods - https://youtu.be/zznEa8EhpuQ
 
 
 TRACKS MADE FOR VANDERLIN:
@@ -62,7 +63,7 @@ DEMESNE - Lich
 Ready or Not - Man-at-Arms
 OZYMANDIAS - Dungeon Track 3
 Black Powder - Grenzelhoft
-mechadh - Gaffer
+Good Men Die Young - Gaffer
 
     SeanPhillips (https://youtube.com/@seanphillipsmusic / www.seanphillipsmusic.co.uk)
     Dungeon Track 1 - Unnamed(?)

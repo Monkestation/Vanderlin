@@ -108,17 +108,14 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			phy.bleed_mod *= 0.5
 			for(var/datum/status_effect/effect in dreamer.status_effects) //necessary to prevent exploits
 				dreamer.remove_status_effect(effect)
-			var/extra_strength = max(16 - dreamer.base_strength, 0)
-			var/extra_constitution = max(16 - dreamer.base_constitution, 0)
-			var/extra_endurance = max(16 - dreamer.base_endurance, 0)
-			dreamer.set_stat_modifier("[type]", STATKEY_STR, extra_strength)
-			dreamer.set_stat_modifier("[type]", STATKEY_CON, extra_constitution)
-			dreamer.set_stat_modifier("[type]", STATKEY_END, extra_endurance)
+			dreamer.modifier_set_stat_to("[type]", STATKEY_STR, 16)
+			dreamer.modifier_set_stat_to("[type]", STATKEY_CON, 16)
+			dreamer.modifier_set_stat_to("[type]", STATKEY_END, 16)
 			combat_music_loop = new /datum/looping_sound/maniac_theme_song(dreamer, FALSE)
 			dreamer.verbs += /mob/living/carbon/human/proc/toggle_maniac_music
 			dreamer.verbs += /mob/living/carbon/human/proc/set_custom_music
 			var/obj/item/organ/heart/heart = dreamer.getorganslot(ORGAN_SLOT_HEART)
-			dreamer.remove_stat_modifier("innate_age")
+			dreamer.remove_stat_modifier(STATMOD_AGE)
 			if(heart) // clear any inscryptions, in case of being made maniac midround
 				heart.inscryptions = list()
 				heart.inscryption_keys = list()

@@ -12,6 +12,7 @@
 	if(!target)
 		return FALSE
 	owner.visible_message(span_notice("[owner] preserves [target] with frost magic."))
+	new /obj/effect/temp_visual/solosnake(get_turf(target))
 
 	if(istype(target, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/food = target

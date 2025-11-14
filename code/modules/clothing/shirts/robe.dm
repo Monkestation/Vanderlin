@@ -213,11 +213,11 @@
 	if(!hoodtoggled)
 		if(ishuman(src.loc))
 			var/mob/living/carbon/human/H = src.loc
-			if(slot_flags == ITEM_SLOT_ARMOR)
+			if(slot_flags & ITEM_SLOT_ARMOR)
 				if(H.wear_armor != src)
 					to_chat(H, span_warning("I should put that on first."))
 					return
-			if(slot_flags == ITEM_SLOT_CLOAK)
+			if(slot_flags & ITEM_SLOT_CLOAK)
 				if(H.cloak != src)
 					to_chat(H, span_warning("I should put that on first."))
 					return

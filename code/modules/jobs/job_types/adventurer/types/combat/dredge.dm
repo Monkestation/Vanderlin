@@ -487,8 +487,8 @@
 			I've studied the arcyne, those who step to me shall perish.")
 			)
 		if("Sword2")
-			beltl = /obj/item/weapon/sword/short
-			beltr = /obj/item/weapon/sword/short
+			beltl = /obj/item/weapon/sword/short/iron
+			beltr = /obj/item/weapon/sword/short/iron
 			H.change_stat(STATKEY_END, 1)
 			H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 			H.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)

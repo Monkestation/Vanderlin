@@ -32,6 +32,8 @@
 		TRAIT_KNOWBANDITS,
 		TRAIT_INQUISITION,
 		TRAIT_BLACKBAGGER,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 	)
 
 	jobstats = list(
@@ -49,7 +51,7 @@
 	armor = /obj/item/clothing/armor/leather/jacket/leathercoat/renegade
 	head = /obj/item/clothing/head/helmet/leather/tricorn
 	neck = /obj/item/clothing/neck/highcollier/iron/renegadecollar
-	beltl =  /obj/item/weapon/sword/short
+	beltl =  /obj/item/weapon/sword/short/iron
 	l_hand = /obj/item/weapon/whip // Great length, they don't need to be next to a person to help in apprehending them.
 	pants = /obj/item/clothing/pants/trou/leather
 	backpack_contents = list(/obj/item/storage/keyring/adept = 1, /obj/item/weapon/knife/dagger/silver/psydon = 1, /obj/item/clothing/head/inqarticles/blackbag = 1, /obj/item/inqarticles/garrote = 1,)

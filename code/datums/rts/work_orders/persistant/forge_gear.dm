@@ -23,8 +23,8 @@
 
 /datum/persistant_workorder/craft_gear/axe
 	name = "Craft Axe"
+	ui_icon = 'icons/roguetown/weapons/32/axes_picks.dmi'
 	ui_icon_state = "axe"
-	ui_icon = 'icons/roguetown/weapons/32.dmi'
 	gear_path = list(/obj/item/weapon/axe/copper, /obj/item/weapon/axe/iron)
 	material_cost = list(MAT_INGOT = 2, MAT_WOOD = 1)
 	gear_type = /datum/worker_gear/axe
@@ -47,16 +47,16 @@
 
 /datum/persistant_workorder/craft_gear/tanning_knife
 	name = "Craft Tanning Knife"
+	ui_icon = 'icons/roguetown/weapons/32/knives.dmi'
 	ui_icon_state = "knife"
-	ui_icon = 'icons/roguetown/weapons/32.dmi'
 	gear_path = list(/obj/item/weapon/knife/dagger)
 	material_cost = list(MAT_INGOT = 1)
 	gear_type = /datum/worker_gear/tanning_knife
 
 /datum/persistant_workorder/craft_gear/cooking_knife
 	name = "Craft Cooking Knife"
+	ui_icon = 'icons/roguetown/weapons/32/knives.dmi'
 	ui_icon_state = "knife"
-	ui_icon = 'icons/roguetown/weapons/32.dmi'
 	gear_path = list(/obj/item/weapon/knife/villager, /obj/item/weapon/knife/cleaver)
 	material_cost = list(MAT_INGOT = 1)
 	gear_type = /datum/worker_gear/cooking_knife

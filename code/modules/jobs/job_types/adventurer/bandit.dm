@@ -13,6 +13,7 @@
 	antag_job = TRUE
 
 	advclass_cat_rolls = list(CTAG_BANDIT = 20)
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	is_foreigner = TRUE
 	job_reopens_slots_on_death = FALSE //no endless stream of bandits, unless the migration waves deem it so

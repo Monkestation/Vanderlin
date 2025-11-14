@@ -332,17 +332,21 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * returns 0 if it cannot, 1 if successful
  */
-/mob/proc/equip_to_appropriate_slot(obj/item/W)
-	if(!istype(W))
+/mob/proc/equip_to_appropriate_slot(obj/item/equipping, delete_on_fail = FALSE)
+	if(!istype(equipping))
 		return FALSE
-	var/slot_priority = W.slot_equipment_priority
+
+	var/slot_priority = equipping.slot_equipment_priority
 
 	if(!slot_priority)
 		slot_priority = DEFAULT_SLOT_PRIORITY
 
 	for(var/slot as anything in slot_priority)
-		if(equip_to_slot_if_possible(W, slot, FALSE, TRUE, TRUE)) //qdel_on_fail = 0; disable_warning = 1; redraw_mob = 1
+		if(equip_to_slot_if_possible(equipping, slot, FALSE, TRUE, TRUE)) //qdel_on_fail = 0; disable_warning = 1; redraw_mob = 1
 			return TRUE
+
+	if(delete_on_fail)
+		qdel(equipping)
 
 	return FALSE
 /**
@@ -1332,17 +1336,27 @@ GLOBAL_VAR_INIT(mobids, 1)
 	return TRUE
 
 /// Send a menu that allows for the selection of an item. Randomly selects one after time_limit. selection_list should be an associative list of string and typepath
-/mob/proc/select_equippable(user_client, list/selection_list, time_limit = 20 SECONDS, message = "", title = "")
-	if(QDELETED(src) || !mind)
-		return
+/mob/living/proc/select_equippable(user_client, list/selection_list, time_limit = 20 SECONDS, message = "", title = "")
 	if(!LAZYLEN(selection_list))
 		return
+
 	var/to_send = user_client ? user_client : src
+
 	var/choice = browser_input_list(to_send, message, title, selection_list, timeout = time_limit)
+	if(QDELETED(src))
+		return
+
 	if(!choice)
 		choice = pick(selection_list)
-	var/spawn_item = LAZYACCESS(selection_list, choice)
-	if(!spawn_item)
+
+	var/list/spawn_items = LAZYACCESS(selection_list, choice)
+	if(!islist(spawn_items))
+		spawn_items = list(spawn_items)
+
+	if(!length(spawn_items))
 		return choice
-	equip_to_appropriate_slot(new spawn_item(get_turf(src)))
+
+	for(var/obj/item/spawn_item as anything in spawn_items)
+		equip_to_appropriate_slot(new spawn_item(), TRUE)
+
 	return choice

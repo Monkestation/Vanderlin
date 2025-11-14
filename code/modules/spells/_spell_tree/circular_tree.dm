@@ -578,13 +578,13 @@
 	prerequisites = list(/datum/spell_node/frost_affinity)
 	spell_type = /datum/action/cooldown/spell/chill_touch
 
-/datum/spell_node/frostbite
-	name = "Frostbite"
-	desc = "Cause numbing frost to form on a creature."
+/datum/spell_node/cone_of_frost
+	name = "Cone of Frost"
+	desc = "Let forth a wave of frost to form."
 	node_x = UP_X_RIGHT + 50
 	node_y = UP_Y_TIER_2 + 50
 	prerequisites = list(/datum/spell_node/chill_touch)
-	spell_type = /datum/action/cooldown/spell/status/frostbite
+	spell_type = /datum/action/cooldown/spell/cone/staggered/cone_of_cold
 
 /datum/spell_node/frostbolt
 	name = "Frostbolt"

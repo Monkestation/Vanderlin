@@ -31,6 +31,8 @@
 		TRAIT_INQUISITION,
 		TRAIT_BLACKBAGGER,
 		TRAIT_SILVER_BLESSED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 	)
 
 /datum/outfit/job/confessor/pre_equip(mob/living/carbon/human/H)

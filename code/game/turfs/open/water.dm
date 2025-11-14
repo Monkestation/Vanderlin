@@ -55,6 +55,7 @@
 
 	/// Fishing element for this specific water tile
 	var/datum/fish_source/fishing_datum = /datum/fish_source/ocean
+	flags_1 = CONDUCT_1
 
 /turf/open/water/proc/set_watervolume(volume)
 	water_volume = volume

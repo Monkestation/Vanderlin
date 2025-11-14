@@ -613,20 +613,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/bardbuff
 	duration = 50 // Sanity, so that people outside the bard buff listening area lose the buff after a few seconds
 
-/datum/status_effect/bardicbuff/on_apply()
-	. = ..()
-	if(owner.mind?.has_antag_datum(/datum/antagonist)) // Check if antag datum present
-		if(owner.mind?.isactuallygood()) // Then check if they're actually a "good" antag (purishep, prisoner)
-			for(var/stat in effectedstats)
-				owner.set_stat_modifier("[id]", stat, effectedstats[stat])
-			return TRUE
-		else // Otherwise, no buff
-			return FALSE
-	else // All non antags get the buffs
-		for(var/stat in effectedstats)
-			owner.set_stat_modifier("[id]", stat, effectedstats[stat])
-		return TRUE
-
 // SKELETON BARD BUFF ALERT
 /atom/movable/screen/alert/status_effect/bardbuff
 	name = "Musical Buff"
@@ -709,7 +695,7 @@
 /datum/status_effect/buff/magicknowledge
 	id = "intelligence"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/knowledge
-	effectedstats = list("intelligence" = 2)
+	effectedstats = list(STATKEY_INT = 2)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/knowledge
@@ -720,7 +706,7 @@
 /datum/status_effect/buff/magicstrength
 	id = "strength"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/strength
-	effectedstats = list("strength" = 3)
+	effectedstats = list(STATKEY_STR = 3)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/strength
@@ -731,7 +717,7 @@
 /datum/status_effect/buff/magicstrength/lesser
 	id = "lesser strength"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/strength/lesser
-	effectedstats = list("strength" = 1)
+	effectedstats = list(STATKEY_STR = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/strength/lesser
@@ -743,7 +729,7 @@
 /datum/status_effect/buff/magicspeed
 	id = "speed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/speed
-	effectedstats = list("speed" = 3)
+	effectedstats = list(STATKEY_SPD = 3)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/speed
@@ -754,7 +740,7 @@
 /datum/status_effect/buff/magicspeed/lesser
 	id = "lesser speed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/speed/lesser
-	effectedstats = list("speed" = 1)
+	effectedstats = list(STATKEY_SPD = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/speed/lesser
@@ -765,7 +751,7 @@
 /datum/status_effect/buff/magicendurance
 	id = "endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/endurance
-	effectedstats = list("endurance" = 3)
+	effectedstats = list(STATKEY_END = 3)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/endurance
@@ -776,7 +762,7 @@
 /datum/status_effect/buff/magicendurance/lesser
 	id = "lesser endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/endurance/lesser
-	effectedstats = list("endurance" = 1)
+	effectedstats = list(STATKEY_END = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/endurance/lesser
@@ -788,7 +774,7 @@
 /datum/status_effect/buff/magicconstitution
 	id = "constitution"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/constitution
-	effectedstats = list("constitution" = 3)
+	effectedstats = list(STATKEY_CON = 3)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/constitution
@@ -799,7 +785,7 @@
 /datum/status_effect/buff/magicconstitution/lesser
 	id = "lesser constitution"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/constitution/lesser
-	effectedstats = list("constitution" = 1)
+	effectedstats = list(STATKEY_CON = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/constitution/lesser
@@ -810,7 +796,7 @@
 /datum/status_effect/buff/magicperception
 	id = "perception"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/perception
-	effectedstats = list("perception" = 3)
+	effectedstats = list(STATKEY_PER = 3)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/perception
@@ -821,7 +807,7 @@
 /datum/status_effect/buff/magicperception/lesser
 	id = "lesser perception"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/perception/lesser
-	effectedstats = list("perception" = 1)
+	effectedstats = list(STATKEY_PER = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/perception/lesser
@@ -846,7 +832,7 @@
 /datum/status_effect/debuff/cold
 	id = "Frostveiled"
 	alert_type =  /atom/movable/screen/alert/status_effect/debuff/cold
-	effectedstats = list("speed" = -2)
+	effectedstats = list(STATKEY_SPD = -2)
 	duration = 12 SECONDS
 
 /datum/status_effect/debuff/cold/on_apply()
@@ -863,7 +849,7 @@
 /datum/status_effect/buff/nocblessing
 	id = "nocblessing"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/nocblessing
-	effectedstats = list("intelligence" = 1)
+	effectedstats = list(STATKEY_INT = 1)
 	duration = 30 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/nocblessing
@@ -874,7 +860,7 @@
 /datum/status_effect/buff/nocblessed
 	id = "nocblessed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/nocblessed
-	effectedstats = list("intelligence" = 3, "perception" = 2)
+	effectedstats = list(STATKEY_INT = 3, STATKEY_PER = 2)
 	duration = 300 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/nocblessed
@@ -886,7 +872,7 @@
 /datum/status_effect/buff/seelie_drugs
 	id = "seelie drugs"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
-	effectedstats = list("intelligence" = 2, "endurance" = 4, "speed" = -3)
+	effectedstats = list(STATKEY_INT = 2, STATKEY_END = 4, STATKEY_SPD = -3)
 	duration = 20 SECONDS
 
 /datum/status_effect/buff/powered_steam_armor/on_apply()

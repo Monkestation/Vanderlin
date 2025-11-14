@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(fake_world)
 		door.icon_state = "bars"
 
 	for(var/obj/item/gun/ballistic/revolver/last_resort/gun in fake_world_constructs)
-		gun.icon = 'icons/roguetown/weapons/bows.dmi'
+		gun.icon = 'icons/roguetown/weapons/32/bows.dmi'
 		gun.icon_state = "bow"
 
 	for(var/turf/closed/wall/mineral/underbrick/wall in fake_world_constructs)

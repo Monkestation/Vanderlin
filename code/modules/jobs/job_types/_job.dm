@@ -273,15 +273,15 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
-	spawned.remove_stat_modifier("job_stats") // Reset so no inf stat
-	spawned.adjust_stat_modifier_list("job_stats", jobstats)
+	spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
+	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
 
 	for(var/datum/skill/skill as anything in skills)
 		var/amount_or_list = skills[skill]
 		if(islist(amount_or_list))
 			spawned.clamped_adjust_skillrank(skill, amount_or_list[1], amount_or_list[2], TRUE)
 		else
-			spawned.clamped_adjust_skillrank(skill, amount_or_list, amount_or_list, TRUE) //! This was changed because what the fuck.
+			spawned.adjust_skillrank(skill, amount_or_list, TRUE)
 
 	for(var/X in peopleknowme)
 		for(var/datum/mind/MF in get_minds(X))
@@ -415,6 +415,7 @@
 /mob/living/carbon/human/proc/pick_job_packs(datum/job/equipping)
 	if(!length(equipping.job_packs))
 		return
+
 	var/for_length = 1
 	if(islist(equipping.job_packs[1]))
 		for_length = length(equipping.job_packs)
@@ -425,7 +426,7 @@
 		var/list/job_packs = equipping.job_packs
 		if(islist(equipping.job_packs[i]))
 			job_packs = equipping.job_packs[i]
-		var/datum/job_pack/picked_pack
+
 		var/list/reals = list()
 		for(var/pack as anything in job_packs)
 			var/datum/job_pack/real_pack = GLOB.job_pack_singletons[pack]
@@ -434,11 +435,17 @@
 			reals |= real_pack
 		if(!length(reals))
 			return
+
+		var/datum/job_pack/picked_pack
 		if(!client)
 			picked_pack = GLOB.job_pack_singletons[pick(reals)]
 		else
 			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 20 SECONDS)
+			if(QDELETED(src))
+				return
+
 		previous_picked_types |= picked_pack.type
+
 		picked_pack.pick_pack(src)
 
 /mob/living/proc/dress_up_as_job(datum/job/equipping, visual_only = FALSE)

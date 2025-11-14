@@ -19,6 +19,8 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/learn,
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
+		/datum/action/cooldown/spell/undirected/conjure_item/summon_parchment,
+		/datum/action/cooldown/spell/undirected/conjure_item/summon_parchment/scroll,
 	)
 	give_bank_account = 100
 

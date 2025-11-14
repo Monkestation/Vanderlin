@@ -34,7 +34,7 @@
 /datum/objective/personal/kick_groin/reward_owner()
 	. = ..()
 	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, TRAIT_GENERIC)
-	owner.current.adjust_stat_modifier("zizo_blessing", STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_STR, 1)
 
 /datum/objective/personal/kick_groin/update_explanation_text()
 	explanation_text = "Kick a man in the balls to show your dominance and earn Zizo's approval!"

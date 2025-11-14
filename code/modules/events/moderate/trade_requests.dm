@@ -49,8 +49,6 @@
 /obj/item/paper/scroll/trade_requests
 	name = "trade requests"
 	icon_state = "contractsigned"
-	old_render = FALSE
-
 	var/list/requests
 	var/writers_name
 
@@ -81,7 +79,7 @@
 
 	if(!requests)
 		return
-	if(requests.len)
+	if(length(requests))
 		info += "<ul>"
 		for(var/datum/trade_request/request in requests)
 			info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[request.input_name]x[request.input_amount] for [request.output_name]x[request.output_amount]</li><br/>"

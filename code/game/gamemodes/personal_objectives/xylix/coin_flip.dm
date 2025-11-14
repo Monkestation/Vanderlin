@@ -56,7 +56,7 @@
 
 /datum/objective/personal/coin_flip/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier("xylix_blessing", STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_XYLIX_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/coin_flip/update_explanation_text()
 	explanation_text = "Xylix wants to play a game! Simply flip a [initial(required_coin_type.name)] and see if you win! Only Xylix knows the rules! Or do they?"

@@ -43,13 +43,13 @@
 				if("Melancholic Crankbox - Antimagic")
 					choice = /obj/item/psydonmusicbox
 				if("Daybreak - Silver Whip")
-					choice = /obj/item/weapon/whip/antique/psywhip
+					choice = /obj/item/weapon/whip/psydon/relic
 				if("Sanctum - Silver Halberd")
 					choice = /obj/item/weapon/polearm/halberd/psydon/relic
-					user.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)	//We make sure the weapon is usable by the Inquisitor.
+					user.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)	//We make sure the weapon is usable by the Inquisitor.
 				if("Crusade - Silver Greatsword")
 					choice = /obj/item/weapon/sword/long/greatsword/psydon
-					user.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)		//Ditto.
+					user.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)		//Ditto.
 				if("Censer of Penitence")
 					choice = /obj/item/flashlight/flare/torch/lantern/psycenser
 			to_chat(user, span_info("I have chosen the relic, may HE guide my hand."))
@@ -193,25 +193,6 @@
 					to_chat(H, (span_hypnophrase("A voice calls out from the song for you...")))
 					to_chat(H, (span_cultsmall(pick(lines))))
 
-/*
-Inquisitorial armory down here
-
-/obj/structure/closet/crate/chest/inqarmory
-
-/obj/structure/closet/crate/chest/inqarmory/PopulateContents()
-	.=..()
-	new /obj/item/weapon/huntingknife/idagger/silver/psydagger(src)
-	new /obj/item/weapon/greatsword/psygsword(src)
-	new /obj/item/weapon/polearm/halberd/psyhalberd(src)
-	new /obj/item/weapon/whip/psywhip_lesser
-	new /obj/item/weapon/flail/sflail/psyflail
-	new /obj/item/weapon/spear/psyspear(src)
-	new /obj/item/weapon/sword/long/psysword(src)
-	new /obj/item/weapon/mace/goden/psymace(src)
-	new /obj/item/weapon/stoneaxe/battle/psyaxe(src)
-	*/
-
-
 /atom/movable/screen/alert/status_effect/buff/censerbuff
 	name = "Inspired by Psydon."
 	desc = "The lingering blessing of Pyson tells me to ENDURE."
@@ -221,7 +202,7 @@ Inquisitorial armory down here
 	id = "censer"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/censerbuff
 	duration = 15 MINUTES
-	effectedstats = list("endurance" = 1, "constitution" = 1)
+	effectedstats = list(STATKEY_END = 1, STATKEY_CON = 1)
 
 /datum/stress_event/syoncalamity
 	stress_change = 15
@@ -256,9 +237,9 @@ Inquisitorial armory down here
 /obj/item/flashlight/flare/torch/lantern/psycenser
 	name = "Censer of Penitence"
 	desc = "A device filled with bubbling silver. Its unstable state is dangerous to those who do not know its true nature, but to wield it is great honour for Psydon."
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psycenser"
 	item_state = "psycenser"
-	icon = 'icons/roguetown/weapons/32.dmi'
 	light_outer_range = 8
 	light_color ="#70d1e2"
 	possible_item_intents = list(/datum/intent/flail/strike/smash/golgotha)
@@ -310,7 +291,6 @@ Inquisitorial armory down here
 		new /obj/effect/temp_visual/censer_dust(get_turf(src))
 		next_smoke = world.time + smoke_interval
 
-
 /obj/item/flashlight/flare/torch/lantern/psycenser/turn_off()
 	playsound(src.loc, 'sound/items/censer_off.ogg', 100)
 	STOP_PROCESSING(SSobj, src)
@@ -320,7 +300,6 @@ Inquisitorial armory down here
 		M.update_inv_hands()
 		M.update_inv_belt()
 	damtype = BRUTE
-
 
 /obj/item/flashlight/flare/torch/lantern/psycenser/fire_act(added, maxstacks)
 	return
@@ -333,7 +312,7 @@ Inquisitorial armory down here
 		explosion(get_turf(A),devastation_range = -1, heavy_impact_range = -1, light_impact_range = -1, flame_range = 2, flash_range = 4, smoke = FALSE)
 		fuel = 0
 		turn_off()
-		icon_state = "psycenser-broken"
+		//icon_state = "psycenser-broken"
 		possible_item_intents = list(/datum/intent/weep)
 		user.update_a_intents()
 		for(var/mob/living/carbon/human/H in view(get_turf(src)))
@@ -427,7 +406,6 @@ Inquisitorial armory down here
 		I.name = "blessed [I.name]"
 		if(silver)
 			I.enchant(/datum/enchantment/silver)
-
 
 /obj/effect/temp_visual/censer_dust
 	icon = 'icons/effects/effects.dmi'
