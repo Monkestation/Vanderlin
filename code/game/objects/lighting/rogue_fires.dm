@@ -55,7 +55,7 @@
 /obj/machinery/light/fueled/firebowl/stumpg
 	icon_state = "stumpfireg1"
 	base_state = "stumpfireg"
-	bulb_colour = "#23b25a"
+	bulb_colour = "#a4c21e"
 
 /obj/machinery/light/fueled/firebowl/blackfire
 	desc = "A fire, black as death."
