@@ -186,7 +186,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(is_flying_animal)
 		ADD_TRAIT(src, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT)
 	if(food_max)
-		AddComponent(/datum/component/generic_mob_hunger, food_max, 0.25)
+		var/initial_hunger = food_max * 0.75
+		AddComponent(/datum/component/generic_mob_hunger, food_max, 0.25, starting_hunger = initial_hunger)
 	if(happy_funtime_mob)
 		AddComponent(/datum/component/friendship_container, mob_friends, "friend")
 		AddComponent(/datum/component/happiness_container, 30, list(), list(), food_type)
@@ -722,10 +723,10 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/atom/movable/screen/inventory/hand/H
 		H = hud_used.hand_slots["[hand_index]"]
 		if(H)
-			H.update_appearance()
+			H.update_appearance(UPDATE_OVERLAYS)
 		H = hud_used.hand_slots["[oindex]"]
 		if(H)
-			H.update_appearance()
+			H.update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
 /mob/living/simple_animal/put_in_hands(obj/item/I, del_on_fail = FALSE, merge_stacks = TRUE)
@@ -772,7 +773,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 			return
 	..()
 	M.adjust_experience(/datum/skill/misc/riding, M.STAINT, FALSE)
-	update_appearance()
+	update_appearance(UPDATE_OVERLAYS)
 
 /mob/living/simple_animal/hostile/user_buckle_mob(mob/living/M, mob/user)
 	if(user != M)
@@ -803,7 +804,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(ssaddle)
 			playsound(src, 'sound/foley/saddlemount.ogg', 100, TRUE)
 	..()
-	update_appearance()
+	update_appearance(UPDATE_OVERLAYS)
 
 /mob/living/simple_animal/hostile
 	var/do_footstep = FALSE

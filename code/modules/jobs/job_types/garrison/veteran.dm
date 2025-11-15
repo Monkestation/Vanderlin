@@ -18,6 +18,7 @@
 	allowed_sexes = list(MALE, FEMALE) //same as town guard
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	advclass_cat_rolls = list(CTAG_VETERAN = 20)
 	give_bank_account = 35
@@ -251,7 +252,7 @@
 	pants = /obj/item/clothing/pants/grenzelpants
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	beltl = /obj/item/weapon/sword/short
+	beltl = /obj/item/weapon/sword/short/iron
 	beltr = /obj/item/storage/keyring/veteran
 	backr = /obj/item/storage/backpack/satchel/black
 	belt = /obj/item/storage/belt/leather/black
@@ -303,3 +304,64 @@
 			r_hand = /obj/item/weapon/polearm/halberd
 			H.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE) // SO, fun fact. The description of the grenzel halbardier says they specialize in axes, but they get no axe skill. Maybe this guy is where that rumor came from.
 			H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+
+/datum/job/advclass/veteran/fist
+	title = "Faded Brawler"
+	tutorial = "You needed no sword, no spear, no bow to slay your foes, your fists were enough. \
+	Enemy after enemy, beast after beast, all fell to your unrelenting might. The tales once called you a walking tempest, the one who could shatter stone and silence monsters. \
+	But time, the cruelest opponent, has weathered your body. The hands that once broke boulders now tremble to lift themselves. Still, deep within those aching bones, the old fire stirs... waiting for one last fight."
+	category_tags = list(CTAG_VETERAN)
+	jobstats = list(
+		STATKEY_END = 2,
+		STATKEY_CON = 2,
+		STATKEY_SPD = -1,
+		STATKEY_STR = 2,
+	)
+
+	skills = list(
+		/datum/skill/combat/wrestling = 5,
+		/datum/skill/combat/unarmed = 5,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/medicine = 3,
+		/datum/skill/misc/swimming = 3,
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR,
+		TRAIT_STEELHEARTED,
+	)
+
+	cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+	outfit = /datum/outfit/vet/fist
+
+/datum/outfit/vet/fist
+	name = "Faded Brawler"
+	head = /obj/item/clothing/head/helmet/leather/volfhelm
+	neck = /obj/item/clothing/neck/bevor
+	shoes = /obj/item/clothing/shoes/boots/armor/light
+	armor = /obj/item/clothing/armor/gambeson/heavy
+	shirt = /obj/item/clothing/armor/chainmail
+	wrists = /obj/item/clothing/wrists/bracers/jackchain
+	belt = /obj/item/storage/belt/leather/black
+	beltr = /obj/item/storage/keyring/veteran
+	beltl = /obj/item/flashlight/flare/torch/lantern
+	gloves = /obj/item/clothing/gloves/bandages/pugilist
+	backr = /obj/item/storage/backpack/satchel/black
+	pants = /obj/item/clothing/pants/chainlegs
+	cloak = /obj/item/clothing/cloak/half/vet
+
+/datum/job/advclass/veteran/fist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
+
+	spawned.select_equippable(spawned, list( \
+		"Knuckles" = /obj/item/weapon/knuckles, \
+		"Katar" = /obj/item/weapon/katar, \
+		),
+		message = "Choose your way.",
+		title = "MY FIST IS READY."
+		)

@@ -16,7 +16,6 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_EMOTEMUTE " = TRAIT_EMOTEMUTE,
 		"TRAIT_DEAF" = TRAIT_DEAF,
 		"TRAIT_NEARSIGHT" = TRAIT_NEARSIGHT,
-		"TRAIT_FAT" = TRAIT_FAT,
 		"TRAIT_HUSK" = TRAIT_HUSK,
 		"TRAIT_DUMB" = TRAIT_DUMB,
 		"TRAIT_MONKEYLIKE" = TRAIT_MONKEYLIKE,
@@ -156,6 +155,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Night Owl" = TRAIT_NIGHT_OWL,
 		"Ugly" = TRAIT_UGLY,
 		"Fishface" = TRAIT_FISHFACE,
+		"Obese" = TRAIT_FAT,
 		"Hollow Bones" = TRAIT_HOLLOWBONES,
 		"Light Load" = TRAIT_AMAZING_BACK,
 		"Loved By Kittens" = TRAIT_KITTEN_MOM,
@@ -239,6 +239,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_MISSING_NOSE = span_warning("I struggle to breathe."),
 	TRAIT_DISFIGURED = span_warning("No one can recognize me..."),
 	TRAIT_BEAUTIFUL = span_love("My face was shaped by the gods!"),
+	TRAIT_FAT = span_warning("I need to lose some weight..."),
 	TRAIT_BAD_MOOD = span_warning("Everything just seems to piss me off"),
 	TRAIT_NIGHT_OWL = span_info("I enjoy spending my time in the night"),
 	TRAIT_UGLY = span_necrosis("Do not look in the mirror."),
@@ -299,6 +300,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_BLACKBAGGER = span_info("I've been trained to properly abduct individuals through the use of seizing garrotes and blackbags."),
 	TRAIT_NOCSHADES = span_info("The lens I look through allows me to see in the dark clear as dae, at the cost of greater vision."),
 	TRAIT_LYCANRESILENCE = span_info("Dendor's fury flows through my veins, my wounds regenerate over time..."),
+	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
+	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

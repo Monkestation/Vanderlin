@@ -6,7 +6,7 @@
 	name = "military flail"
 	desc = "A sturdy handle afixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
-	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	sharpness = IS_BLUNT
 	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_NORMAL
@@ -115,6 +115,7 @@
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"
 	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of The Ten left."
+	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "necraflail"
 
 //................ Psydon Flail ............... //
@@ -122,6 +123,7 @@
 	force = DAMAGE_GOOD_FLAIL
 	name = "psydonian flail"
 	desc = "A flail fashioned with the iconography of Psydon, and crafted entirely out of silver."
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflail"
 	melting_material = /datum/material/silver
 	melt_amount = 75
@@ -142,12 +144,12 @@
 
 //................ Peasant Flail ............... // A little confusing still
 /obj/item/weapon/flail/peasant
-	force = DAMAGE_NORMAL_FLAIL
-	force_wielded = DAMAGE_GOOD_FLAIL
 	name = "peasant flail"
 	desc = "What used to be a humble thresher by design, has become a deadly flail with extended range and punch. Favored by the peasantry militia or knight errants."
-	icon = 'icons/roguetown/weapons/64.dmi'
+	icon = 'icons/roguetown/weapons/64/flails.dmi'
 	icon_state = "bigflail"
+	force = DAMAGE_NORMAL_FLAIL
+	force_wielded = DAMAGE_GOOD_FLAIL
 	possible_item_intents = list(/datum/intent/flail/strike/long)
 	gripped_intents = list(/datum/intent/flail/strike/long, /datum/intent/flail/strike/smash/long)
 	bigboy = TRUE
@@ -201,14 +203,14 @@
 	item_damage_type = "blunt"
 
 /obj/item/weapon/flail/peasantwarflail
+	name = "militia thresher"
+	desc = "Just like how a sling's bullet can fell a giant, so too does this great flail follow the principle of converting 'momentum' into 'plate-rupturing force'."
+	icon = 'icons/roguetown/weapons/64/flails.dmi'
+	icon_state = "peasantwarflail"
 	force = 10
 	force_wielded = 35
 	possible_item_intents = list(/datum/intent/flail/strike)
 	gripped_intents = list(/datum/intent/flail/strikerange, /datum/intent/flail/strike/smashrange)
-	name = "militia thresher"
-	desc = "Just like how a sling's bullet can fell a giant, so too does this great flail follow the principle of converting 'momentum' into 'plate-rupturing force'."
-	icon_state = "peasantwarflail"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
@@ -247,6 +249,7 @@
 /obj/item/weapon/flail/peasantwarflail/matthios
 	name = "Gilded Flail"
 	desc = "Weight of wealth in a deadly striking end."
+	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "matthiosflail"
 	sellprice = 250
 	melt_amount = 150

@@ -88,7 +88,7 @@
 		organ.handle_node_injection(node.node_tier, node.node_purity, node.stored_node.slot, node.stored_node, node.icon_state)
 		node.forceMove(src)
 
-	update_appearance()
+	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
 /obj/item/organ/update_overlays()

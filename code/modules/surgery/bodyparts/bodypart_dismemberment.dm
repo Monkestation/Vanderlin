@@ -37,7 +37,7 @@
 		return FALSE
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
-		var/obj/item/clothing/checked_armor = human_owner.checkcritarmor(zone_precise, bclass)
+		var/obj/item/clothing/checked_armor = human_owner.check_crit_armor(zone_precise, bclass)
 		if(checked_armor)
 			var/int_percent = round(((checked_armor.get_integrity() / checked_armor.max_integrity) * 100), 1)
 			if(int_percent > 30 && !HAS_TRAIT(human_owner, TRAIT_CRITICAL_WEAKNESS) && !HAS_TRAIT(human_owner, TRAIT_EASYDISMEMBER))
@@ -247,7 +247,7 @@
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/R = C.hud_used.hand_slots["[held_index]"]
 			if(R)
-				R.update_appearance()
+				R.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
 		C.update_inv_gloves() //to remove the bloody hands overlay
@@ -266,7 +266,7 @@
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/L = C.hud_used.hand_slots["[held_index]"]
 			if(L)
-				L.update_appearance()
+				L.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
 		C.update_inv_gloves() //to remove the bloody hands overlay
@@ -350,7 +350,7 @@
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/hand = C.hud_used.hand_slots["[held_index]"]
 			if(hand)
-				hand.update_appearance()
+				hand.update_appearance(UPDATE_OVERLAYS)
 		C.update_inv_gloves()
 
 	if(special) //non conventional limb attachment

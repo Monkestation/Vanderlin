@@ -781,6 +781,7 @@
 		/datum/repeatable_crafting_recipe/saltfish,
 		/datum/repeatable_crafting_recipe/raisins,
 		/datum/orderless_slapcraft/food/pie,
+		/datum/orderless_slapcraft/food/tart.
 	)
 
 /obj/item/recipe_book/survival
@@ -946,6 +947,7 @@
 		/datum/repeatable_crafting_recipe/bee_treatment/miticide,
 		/datum/repeatable_crafting_recipe/bee_treatment/insecticide,
 		/datum/blueprint_recipe/carpentry/apiary,
+		/datum/repeatable_crafting_recipe/survival/mushmound,
 	)
 
 /obj/item/recipe_book/medical

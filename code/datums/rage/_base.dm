@@ -29,10 +29,9 @@
 
 /datum/rage/Destroy(force)
 	remove()
-	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
-/datum/rage/process()
+/datum/rage/proc/on_life()
 	if(holder_mob.stat >= DEAD)
 		return
 
@@ -47,7 +46,7 @@
 	if(!holder)
 		return
 
-	START_PROCESSING(SSprocessing, src)
+	RegisterSignal(holder, COMSIG_HUMAN_LIFE, PROC_REF(on_life))
 	holder_mob = holder
 	holder_mob.rage_datum = src
 	holder_mob?.hud_used?.initialize_bloodpool()
@@ -110,12 +109,13 @@
 	holder_mob.remove_spell(ability)
 	active_abilities -= ability
 
-/datum/rage/proc/on_stress_added(datum/source, new_stress_amount)
+/datum/rage/proc/on_stress_added(datum/source, datum/stress_event/new_stress)
 	SIGNAL_HANDLER
 
 	if(!holder_mob || holder_mob.stat >= DEAD)
 		return
 
+	var/new_stress_amount = new_stress.stress_change
 	// Calculate rage gain based on total stress - global multiplier
 	// At 0 stress: 1x multiplier, at 5 stress: 1.33x, at 10 stress: 1.67x, at 15 stress: 2x
 	// Negative stress reduces rage gain
@@ -132,6 +132,7 @@
 
 /datum/rage/proc/update_rage(amount)
 	var/old_rage = rage
+	if(holder_mob.stat == DEAD) return
 	rage = clamp(rage + amount, 0, max_rage)
 
 	update_hud()

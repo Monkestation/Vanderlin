@@ -10,6 +10,7 @@
 	min_pq = 10
 
 	advclass_cat_rolls = list(CTAG_WRETCH = 20)
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	is_foreigner = TRUE
 	job_reopens_slots_on_death = FALSE
@@ -33,7 +34,7 @@
 	if(bounty_poster == "Kingsfield Expanse")
 		GLOB.outlawed_players += H.real_name
 	else
-		GLOB.excommunicated_players += H.real_name
+		GLOB.heretical_players += H.real_name
 
 /datum/job/advclass/wretch
 	abstract_type = /datum/job/advclass/wretch

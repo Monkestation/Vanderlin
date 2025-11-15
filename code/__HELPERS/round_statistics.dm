@@ -6,7 +6,7 @@
 #define STATS_ALIVE_RAKSHARI "alive_rakshari"
 #define STATS_ALIVE_AASIMAR "alive_aasimar"
 #define STATS_ALIVE_HOLLOWKINS "alive_hollowkins"
-#define STATS_ALIVE_MEDICATORS "alive_medicators"
+#define STATS_ALIVE_HALFLINGS "alive_halflings"
 #define STATS_VAMPIRES "vampires"
 #define STATS_ALIVE_GARRISON "alive_garrison"
 #define STATS_ALIVE_CLERGY "alive_clergy"
@@ -35,6 +35,7 @@
 #define STATS_TRADE_VALUE_IMPORTED "trade_imported"
 #define STATS_GOLDFACE_VALUE_SPENT "goldface_spent"
 #define STATS_PURITY_VALUE_SPENT "purity_spent"
+#define STATS_HEADEATER_EXPORTS "headeater_exports"
 #define STATS_TAXES_EVADED "taxes_evaded"
 #define STATS_NOBLE_INCOME_TOTAL "noble_income_total"
 #define STATS_DIRECT_TREASURY_TRANSFERS "direct_treasury_transfers"
@@ -44,9 +45,11 @@
 #define STATS_STOCKPILE_REVENUE "stockpile_revenue"
 #define STATS_PEDDLER_REVENUE "peddler_revenue"
 #define STATS_MAMMONS_HELD "mammons_held"
+#define STATS_MAMMONS_IN_BANK "mammons_in_bank"
 #define STATS_MAMMONS_DEPOSITED "mammons_deposited"
 #define STATS_MAMMONS_WITHDRAWN "mammons_withdrawn"
 #define STATS_STARTING_TREASURY "starting_treasury"
+#define STATS_FOREIGNERS "alive_foreigners"
 
 // Influence related statistics
 
@@ -90,6 +93,7 @@
 #define STATS_ANIMALS_BRED "animals_bred"
 #define STATS_FOOD_ROTTED "food_rotted"
 #define STATS_LUX_REVIVALS "lux_revivals"
+#define STATS_ALIVE_MEDICATORS "alive_medicators"
 
 // Dendor
 #define STATS_TREES_CUT "trees_cut"
@@ -253,6 +257,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_ALIVE_HARPIES = 0,
 	STATS_ALIVE_TRITONS = 0,
 	STATS_ALIVE_MEDICATORS = 0,
+	STATS_ALIVE_HALFLINGS = 0,
 	STATS_PEOPLE_DROWNED = 0,
 	STATS_MANA_SPENT = 0,
 	STATS_WATER_CONSUMED  = 0,
@@ -298,6 +303,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_TRADE_VALUE_IMPORTED = 0,
 	STATS_GOLDFACE_VALUE_SPENT = 0,
 	STATS_PURITY_VALUE_SPENT = 0,
+	STATS_HEADEATER_EXPORTS = 0,
 	STATS_TAXES_EVADED = 0,
 	STATS_NOBLE_INCOME_TOTAL = 0,
 	STATS_DIRECT_TREASURY_TRANSFERS = 0,
@@ -307,13 +313,17 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_STOCKPILE_REVENUE = 0,
 	STATS_PEDDLER_REVENUE = 0,
 	STATS_MAMMONS_HELD = 0,
+	STATS_MAMMONS_IN_BANK = 0,
 	STATS_MAMMONS_DEPOSITED = 0,
 	STATS_MAMMONS_WITHDRAWN = 0,
 	STATS_STARTING_TREASURY = 0,
 	STATS_HUNTED_PEOPLE = 0,
+	STATS_FOREIGNERS = 0,
 ))
 
 GLOBAL_LIST_EMPTY(patron_follower_counts)
+
+GLOBAL_LIST_EMPTY(chronicle_featured_stats)
 
 // Featured stats of the round
 #define FEATURED_STATS_TREE_FELLERS "tree_fellers"
@@ -345,6 +355,11 @@ GLOBAL_LIST_EMPTY(patron_follower_counts)
 #define FEATURED_STATS_CROPS "crops"
 #define FEATURED_STATS_FLAWS "flaws"
 
+// Chronicle featured stats only
+#define FEATURED_STATS_JOKESTERS "jokesters"
+#define FEATURED_STATS_CRYBABIES "crybabies"
+#define FEATURED_STATS_DEVOUT "devout"
+
 GLOBAL_LIST_INIT(featured_stats, list(
 	FEATURED_STATS_TREE_FELLERS = list(
 		"name" = "TOP Lumberjacks",
@@ -368,12 +383,12 @@ GLOBAL_LIST_INIT(featured_stats, list(
 	),
 	FEATURED_STATS_SLURS = list(
 		"name" = "TOP Slurs",
-		"color" = "#6e56bd",
+		"color" = "#5c5ac7",
 		"entries" = list()
 	),
 	FEATURED_STATS_SPECIESISTS = list(
 		"name" = "TOP Speciesists",
-		"color" = "#b153dd",
+		"color" = "#986ee6",
 		"entries" = list()
 	),
 	FEATURED_STATS_MINERS = list(
@@ -484,6 +499,9 @@ GLOBAL_LIST_INIT(featured_stats, list(
 	),
 ))
 
+/// Maximum number of chosen chronicle stats
+#define MAX_CHRONICLE_STATS 8
+
 // Chronicle statistics
 #define CHRONICLE_STATS_PSYDON_FAVOURITE "psydon_favourite"
 #define CHRONICLE_STATS_RANDOM_PASSERBY "random_passerby"
@@ -492,13 +510,25 @@ GLOBAL_LIST_INIT(featured_stats, list(
 #define CHRONICLE_STATS_STRONGEST_PERSON "strongest_person"
 #define CHRONICLE_STATS_WEAKEST_PERSON "weakest_person"
 #define CHRONICLE_STATS_SMARTEST_PERSON "smartest_person"
+#define CHRONICLE_STATS_DUMBEST_PERSON "dumbest_person"
 #define CHRONICLE_STATS_RICHEST_PERSON "richest_person"
 #define CHRONICLE_STATS_POOREST_PERSON "poorest_person"
-#define CHRONICLE_STATS_LUCKIEST_PERSON "luckiest_person"
 #define CHRONICLE_STATS_FASTEST_PERSON "fastest_person"
-#define CHRONICLE_STATS_DUMBEST_PERSON "dumbest_person"
 #define CHRONICLE_STATS_SLOWEST_PERSON "slowest_person"
+#define CHRONICLE_STATS_LUCKIEST_PERSON "luckiest_person"
 #define CHRONICLE_STATS_UNLUCKIEST_PERSON "unluckiest_person"
+#define CHRONICLE_STATS_MOST_PERCEPTIVE_PERSON "perceptive_person"
+#define CHRONICLE_STATS_LEAST_PERCEPTIVE_PERSON "unperceptice_person"
+#define CHRONICLE_STATS_MOST_RESILIENT_PERSON "most_resilient_person"
+#define CHRONICLE_STATS_LEAST_RESILIENT_PERSON "least_resilient_person"
+#define CHRONICLE_STATS_MOST_ENDURANT_PERSON "most_endurant_person"
+#define CHRONICLE_STATS_LEAST_ENDURANT_PERSON "least_endurant_person"
+#define CHRONICLE_STATS_MOST_BEAUTIFUL_PERSON "most_beautiful_person"
+#define CHRONICLE_STATS_UGLIEST_PERSON "ugliest_person"
+#define CHRONICLE_STATS_JOKESTER "jokester"
+#define CHRONICLE_STATS_CRYBABY "crybaby"
+#define CHRONICLE_STATS_PIOUS "pious"
+#define CHRONICLE_STATS_FOUL_MOUTH "foul_mouth"
 
 GLOBAL_LIST_EMPTY(chronicle_stats)
 
@@ -532,7 +562,7 @@ GLOBAL_LIST_EMPTY(chronicle_stats)
 	sortTim(entries, GLOBAL_PROC_REF(cmp_stat_count_desc))
 
 	var/list/result = list()
-	for(var/i in 1 to min(14, entries.len))
+	for(var/i in 1 to min(15, entries.len))
 		var/list/entry = entries[i]
 		var/rounded_count = round(entry["count"])
 		result += "[i]. [entry["name"]] - [rounded_count]"
@@ -551,7 +581,7 @@ GLOBAL_LIST_EMPTY(chronicle_stats)
 	sortTim(entries, GLOBAL_PROC_REF(cmp_stat_count_desc))
 
 	var/list/result = list()
-	for(var/i in 1 to min(14, entries.len))
+	for(var/i in 1 to min(15, entries.len))
 		var/list/entry = entries[i]
 		var/rounded_count = round(entry["count"])
 		result += "[i]. [entry["name"]] - [rounded_count]"
@@ -564,32 +594,39 @@ GLOBAL_LIST_EMPTY(chronicle_stats)
 /proc/record_featured_stat(stat_category, mob/living/user, increment = 1)
 	if(SSticker.current_state == GAME_STATE_FINISHED)
 		return
-	if(!stat_category || !user?.real_name || !GLOB.featured_stats[stat_category])
+	if(!stat_category || !user?.real_name)
 		return
 	if(!user)
 		return
 
-	var/list/stat_data = GLOB.featured_stats[stat_category]
-	var/job_title = " (Jobless)"
-	var/datum/mind/M = user.mind
+	if(GLOB.featured_stats[stat_category])
+		var/list/stat_data = GLOB.featured_stats[stat_category]
+		var/job_title = " (Jobless)"
+		var/datum/mind/M = user.mind
 
-	if(M)
-		if(M.assigned_role.title != "Unassigned" && !is_unassigned_job(M.assigned_role))
-			if(user.gender == FEMALE && M.assigned_role.f_title)
-				job_title = " ([M.assigned_role.f_title])"
-			else
-				job_title = " ([M.assigned_role.title])"
-		else if(user.job && user.job != "Unassigned")
-			job_title = " ([user.job])"
-		else if(M.special_role)
-			job_title = " ([M.special_role])"
+		if(M)
+			if(M.assigned_role.title != "Unassigned" && !is_unassigned_job(M.assigned_role))
+				if(user.gender == FEMALE && M.assigned_role.f_title)
+					job_title = " ([M.assigned_role.f_title])"
+				else
+					job_title = " ([M.assigned_role.title])"
+			else if(user.job && user.job != "Unassigned")
+				job_title = " ([user.job])"
+			else if(M.special_role)
+				job_title = " ([M.special_role])"
 
-	var/key = "[user.real_name][job_title]"
+		var/key = "[user.real_name][job_title]"
 
-	if(!stat_data["entries"])
-		stat_data["entries"] = list()
+		if(!stat_data["entries"])
+			stat_data["entries"] = list()
 
-	stat_data["entries"][key] = (stat_data["entries"][key] || 0) + increment
+		stat_data["entries"][key] = (stat_data["entries"][key] || 0) + increment
+
+	if(!GLOB.chronicle_featured_stats[stat_category])
+		GLOB.chronicle_featured_stats[stat_category] = list()
+
+	var/datum/weakref/user_ref = WEAKREF(user)
+	GLOB.chronicle_featured_stats[stat_category][user_ref] = (GLOB.chronicle_featured_stats[stat_category][user_ref] || 0) + increment
 
 /proc/record_featured_object_stat(stat_category, object_name, increment = 1)
 	if(SSticker.current_state == GAME_STATE_FINISHED)

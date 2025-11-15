@@ -147,7 +147,6 @@
 /obj/item/explosive/proc/detonate(mob/living/lanced_by)
 	if (dud_flags)
 		active = FALSE
-		update_appearance()
 		return FALSE
 
 	if(shrapnel_type && shrapnel_radius && !shrapnel_initialized) // add a second check for adding the component in case whatever triggered the grenade went straight to prime (badminnery for example)

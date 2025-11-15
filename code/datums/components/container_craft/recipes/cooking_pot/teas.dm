@@ -92,3 +92,10 @@
 	created_reagent = /datum/reagent/consumable/caffeine/coffee
 	requirements = list(/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted = 2)
 	finished_smell = /datum/pollutant/food/coffee
+
+/datum/container_craft/cooking/tea/waddle
+	name = "Waddle tea"
+	crafting_time = 30 SECONDS
+	created_reagent = /datum/reagent/consumable/tea/waddle
+	requirements = list(/obj/item/reagent_containers/food/snacks/waddle_dried = 2)
+	finished_smell = /datum/pollutant/food/waddle

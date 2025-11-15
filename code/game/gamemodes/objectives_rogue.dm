@@ -45,16 +45,16 @@
 	return (vampire_werewolf() == faction_ident)
 
 /datum/objective/dominate/vampire
-	explanation_text = "Purge this land of all alpha werevolves."
+	explanation_text = "Purge this land of all elder werevolves."
 	faction_ident = "vampire"
 
 /datum/objective/dominate/werewolf
-	explanation_text = "Purge this land of all elder vampires."
+	explanation_text = "Purge this land of all vampire lords."
 	faction_ident = "werewolf"
 
 /datum/objective/werewolf/spread
 	name = "spread"
-	explanation_text = "Have 6 lesser werewolf."
+	explanation_text = "Have 6 lesser werevolfs."
 	triumph_count = 5
 
 /datum/objective/werewolf/spread/check_completion()

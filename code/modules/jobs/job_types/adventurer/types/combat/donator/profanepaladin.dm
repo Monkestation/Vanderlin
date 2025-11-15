@@ -44,7 +44,7 @@
 			shoes = /obj/item/clothing/shoes/boots/armor/matthios
 			H.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 		if(/datum/patron/inhumen/baotha) //give them custom armor i beg
-			head = /obj/item/clothing/head/helmet/heavy/decorated/golden
+			head = /obj/item/clothing/head/helmet/heavy/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
 			armor = /obj/item/clothing/armor/plate
 			gloves = /obj/item/clothing/gloves/plate

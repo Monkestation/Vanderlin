@@ -29,7 +29,7 @@
 
 	possible_ages = NORMAL_AGES_LIST_CHILD
 
-	species_traits = list(EYECOLOR, OLDGREY)
+	species_traits = list(EYECOLOR, HAIR, FACEHAIR, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_KITTEN_MOM)
 
 	specstats_m = list(STATKEY_STR = -2, STATKEY_PER = 2, STATKEY_INT = 0, STATKEY_CON = -2, STATKEY_END = 0, STATKEY_SPD = 2, STATKEY_LCK = 0)
@@ -82,7 +82,7 @@
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
-		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes/rakshari,
 		ORGAN_SLOT_EARS = /obj/item/organ/ears/rakshari,
 		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
@@ -92,6 +92,8 @@
 	)
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
+		/datum/customizer/bodypart_feature/hair/head/humanoid/rakshari,
+		/datum/customizer/bodypart_feature/hair/facial/humanoid/rakshari,
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 	)
@@ -139,5 +141,24 @@
 		"Mountain Rakshari" = SKIN_COLOR_MOUNTAIN_ELF, // - (White 3)
 		"City Rakshari" = SKIN_COLOR_COASTAL_ELF, // - (White 4)
 		"Desert Rakshari" = SKIN_COLOR_WOOD_ELF, // - (Mediterranean 1)
+	))
+
+/datum/species/rakshari/get_hairc_list()
+	return sortList(list(
+		"blond - pale" = "9d8d6e",
+	"blond - dirty" = "88754f",
+	"blond - drywheat" = "d5ba7b",
+	"blond - strawberry" = "c69b71",
+
+	"brown - mud" = "362e25",
+	"brown - oats" = "584a3b",
+	"brown - grain" = "58433b",
+	"brown - soil" = "48322a",
+	"brown - bark" = "2d1300",
+
+	"black - oil" = "181a1d",
+	"black - cave" = "201616",
+	"black - rogue" = "2b201b",
+	"black - midnight" = "1d1b2b",
 	))
 

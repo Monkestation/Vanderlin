@@ -221,7 +221,9 @@
 
 /datum/component/storage/concrete/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, params, storage_click)
 	if(!storing.melting_material)
-		return FALSE
+		var/obj/item/ingot/ingot = storing.smeltresult
+		if(!ispath(ingot, /obj/item/ingot))
+			return FALSE
 	. = ..()
 
 /datum/component/storage/concrete/grid/anvil_bin

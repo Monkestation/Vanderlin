@@ -58,9 +58,9 @@
 					continue
 				C.mob.playsound_local(C.mob, GLOB.patron_sound_themes[initialized_storyteller.name], initialized_storyteller.name == RAVOX ? 70 : 100)
 
-			to_chat(world, "<br>")
-			to_chat(world, "<span style='font-size: 180%; color: [initialized_storyteller.color_theme]'>[initialized_storyteller.name] is ascendant!</span>")
-			to_chat(world, "<br>")
+			bordered_message(world, list(
+				"<span style='font-size: 180%; color: [initialized_storyteller.color_theme]'>[initialized_storyteller.name] is ascendant!</span>",
+			))
 			break
 
 	if(modified)

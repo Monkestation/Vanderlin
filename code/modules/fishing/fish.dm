@@ -24,7 +24,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	verb_say = "glubs"
 	verb_yell = "glubs"
 	obj_flags = CAN_BE_HIT
-	var/dead = TRUE
 	max_integrity = 50
 	sellprice = 10
 	dropshrink = 0.6

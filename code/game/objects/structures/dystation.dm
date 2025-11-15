@@ -38,9 +38,7 @@
 	new /obj/effect/decal/cleanable/dyes(get_turf(src))
 	var/obj/item/bin/I = new(loc)
 	I.kover = TRUE
-	I.update_appearance()
 	return ..()
-
 
 /obj/structure/dye_bin/Initialize(mapload, obj/item/dye_pack/inserted_pack)
 	. = ..()
@@ -168,7 +166,7 @@
 				if(href_list["type"] == "detail" && isclothing(inserted))
 					var/obj/item/clothing/cloth = inserted
 					cloth.detail_color = active_color
-					cloth.update_appearance()
+					cloth.update_appearance(UPDATE_OVERLAYS)
 				else
 					inserted.add_atom_colour(active_color, FIXED_COLOUR_PRIORITY)
 

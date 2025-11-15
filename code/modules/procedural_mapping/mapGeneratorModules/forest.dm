@@ -74,6 +74,8 @@
 		/obj/structure/essence_node = 0.1,
 		/obj/structure/flora/grass/maneater/real = 0.1,
 		/obj/item/restraints/legcuffs/beartrap/armed/camouflage = 0.1,
+		/obj/structure/wild_plant/nospread/mushroom/waddle = 0.5,
+		/obj/structure/wild_plant/nospread/mushroom/merkel = 0.2,
 	)
 
 /datum/mapGeneratorModule/forestwaterturf

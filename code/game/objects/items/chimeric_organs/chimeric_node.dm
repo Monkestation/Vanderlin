@@ -40,14 +40,13 @@
 		if(SPECIAL_NODE)
 			icon_state = "process_organoid-[rand(1,7)]"
 
-	update_appearance()
+	update_appearance(UPDATE_NAME)
 
 /obj/item/chimeric_node/update_name(updates)
 	. = ..()
 	if(!stored_node)
 		return
 	name = "[lowertext(stored_node.name)] chimeric node"
-
 
 /mob/living/proc/generate_random_chimeric_organs(amount = 3)
 	for(var/i=1 to amount)

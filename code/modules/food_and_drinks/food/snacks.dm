@@ -187,7 +187,7 @@ All foods are distributed among various categories. Use common sense.
 		slice_path = null
 		cooktime = 0
 		modified = TRUE
-		rot_away_timer = QDEL_IN_STOPPABLE(src, 10 MINUTES)
+		rot_away_timer = QDEL_IN_STOPPABLE(src, 15 MINUTES)
 		record_round_statistic(STATS_FOOD_ROTTED)
 		return TRUE
 	if(!ismob(loc) && loc)

@@ -100,7 +100,7 @@
 	source_object = null
 	QDEL_NULL(animate_holder)
 
-/datum/component/particle_spewer/process(seconds_per_tick)
+/datum/component/particle_spewer/process()
 	if(spawn_interval != 1)
 		count++
 		if(count < spawn_interval)

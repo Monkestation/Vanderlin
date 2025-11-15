@@ -55,7 +55,7 @@
 			H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 		if("Bow & Sword") //Poacher
 			backl= /obj/item/gun/ballistic/revolver/grenadelauncher/bow
-			beltr = /obj/item/weapon/sword/short //steel sword like literally every adventurer gets
+			beltr = /obj/item/weapon/sword/short/iron //steel sword like literally every adventurer gets
 			beltl = /obj/item/ammo_holder/quiver/arrows
 			head = /obj/item/clothing/head/helmet/leather/volfhelm //cool hat
 			backr = /obj/item/storage/backpack/satchel

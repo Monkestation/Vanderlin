@@ -831,6 +831,7 @@
 	damage_deflection = 16
 	max_integrity = 1400
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
+	flags_1 = CONDUCT_1
 
 /turf/open/floor/metal/alt
 	icon_state = "plating2"

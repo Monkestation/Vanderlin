@@ -1,6 +1,5 @@
 /*ALL MOB-RELATED DEFINES THAT DON'T BELONG IN ANOTHER FILE GO HERE*/
 
-//This was previously in vampirelord.dm and mob/living/stats.dm, the person defined it twice because vampirelord came in below that stats file, so now both of them can get it here.
 #define STATKEY_STR "strength"
 #define STATKEY_PER "perception"
 #define STATKEY_INT "intelligence"
@@ -188,6 +187,8 @@
 #define NUTRITION_LEVEL_STARVING 100
 
 #define HYDRATION_LEVEL_FULL 1000
+#define HYDRATION_LEVEL_WATER_LOGGED 850
+#define HYDRATION_LEVEL_HYDRATED 700
 #define HYDRATION_LEVEL_SMALLTHIRST 600
 #define HYDRATION_LEVEL_THIRSTY 350
 #define HYDRATION_LEVEL_DEHYDRATED 100

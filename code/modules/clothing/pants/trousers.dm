@@ -66,6 +66,9 @@
 /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/blue
 	color = CLOTHING_SKY_BLUE
 
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored/red
+	color = CLOTHING_ROYAL_RED
+
 /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/linen
 	color = CLOTHING_LINEN
 

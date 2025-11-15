@@ -20,15 +20,17 @@
 		/datum/status_effect/incapacitating/knockdown,
 	)
 
+/datum/action/cooldown/spell/undirected/bloodrage/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
+	return isliving(cast_on)
+
 /datum/action/cooldown/spell/undirected/bloodrage/before_cast(mob/living/cast_on)
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
 
-	if(cast_on.stat == DEAD)
-		to_chat(cast_on, span_warning("I am dead."))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
 	if(cast_on.buckled)
 		cast_on.buckled.unbuckle_mob(cast_on)
 

@@ -73,8 +73,8 @@
 		to_chat(owner, "<font color='yellow'>The Equalizing link is made, I am siphoning flame!</font>")
 		var/list/statsmod = list(STATKEY_STR, STATKEY_PER, STATKEY_INT, STATKEY_END, STATKEY_CON, STATKEY_SPD, STATKEY_LCK)
 		for(var/stat_key in statsmod)
-			victim.set_stat_modifier("equalize_spell", stat_key, -totalstatshift)
-			C.set_stat_modifier("equalize_spell", stat_key, totalstatshift)
+			victim.set_stat_modifier(STATMOD_EQUALIZE, stat_key, -totalstatshift)
+			C.set_stat_modifier(STATMOD_EQUALIZE, stat_key, totalstatshift)
 		addtimer(CALLBACK(src, PROC_REF(returnstatstarget), victim), 1 MINUTES) // 2 timers incase only one guy gets deleted or smthing
 		addtimer(CALLBACK(src, PROC_REF(returnstatsuser), C), 1 MINUTES)
 
@@ -83,14 +83,14 @@
 	if(QDELETED(target))
 		return
 	target.remove_filter(EQUALIZED_GLOW)
-	target.remove_stat_modifier("equalize_spell")
+	target.remove_stat_modifier(STATMOD_EQUALIZE)
 	to_chat(target, span_danger("I feel my strength returned to me!"))
 
 /datum/action/cooldown/spell/beam/equalize/proc/returnstatsuser(mob/living/user)
 	if(QDELETED(user))
 		return
 	user.remove_filter(EQUALIZED_GLOW)
-	user.remove_stat_modifier("equalize_spell")
+	user.remove_stat_modifier(STATMOD_EQUALIZE)
 	to_chat(user, "<font color='yellow'>My link wears off, their stolen fire returns to them</font>")
 
 #undef EQUALIZED_GLOW

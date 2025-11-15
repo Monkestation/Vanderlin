@@ -67,28 +67,28 @@
 		string += "Roundstart"
 	if(length(allowed_storytellers) && !(SSgamemode.current_storyteller.type in allowed_storytellers))
 		if(string)
-			string += ","
+			string += ", "
 		string += "Wrong God"
 	if(length(todreq) && !(GLOB.tod in todreq))
 		if(string)
-			string += ","
+			string += ", "
 		string += "Wrong Time of Day"
 	if(occurrences >= max_occurrences)
 		if(string)
-			string += ","
+			string += ", "
 		string += "Cap Reached"
 	if(earliest_start > max(world.time - SSticker.round_start_time, 0))
 		if(string)
-			string += ","
+			string += ", "
 		string +="Too Soon"
 	if(players_amt < min_players)
 		if(string)
-			string += ","
+			string += ", "
 		string += "Lack of players"
 	if(checks_antag_cap)
 		if(!roundstart && !SSgamemode.can_inject_antags())
 			if(string)
-				string += ","
+				string += ", "
 			string += "Too Many Villians"
 	return string
 

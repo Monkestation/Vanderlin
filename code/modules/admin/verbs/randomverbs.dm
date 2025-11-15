@@ -861,6 +861,43 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	punish_log(target, punishment)
 
+/client/proc/heart_attack(mob/living/carbon/target as mob)
+	set name = "Heart Attack"
+	set category = "Fun"
+	if(!check_rights(R_ADMIN) || !check_rights(R_FUN))
+		return
+
+	var/obj/item/organ/heart/heart = target.getorganslot(ORGAN_SLOT_HEART)
+	if(!heart)
+		to_chat(usr,span_warning("The target does not have a Heart!"))
+		return
+
+	var/custom_message
+	var/check = browser_alert(usr, "Do you want a custom message for the heart attack?", "Confirmation", DEFAULT_INPUT_CHOICES)
+	if(check == CHOICE_YES)
+		custom_message = browser_input_text(usr, "Write the Custom Message", "Custom Message")
+		if(!custom_message)
+			to_chat(usr, span_notice("You didn't write the custom message!"))
+			return
+
+	if(QDELETED(target))
+		return
+
+	target.visible_message(target, span_danger("[target] clutches at [target.p_their()] chest!"))
+	target.emote("breathgasp", forced = TRUE)
+	shake_camera(target, 1, 3)
+	target.blur_eyes(40)
+	var/stuffy = list("ZIZO GRABS MY WEARY HEART!","ARGH! MY HEART BEATS NO MORE!","NO... MY HEART HAS BEAT IT'S LAST!","MY HEART HAS GIVEN UP!","MY HEART BETRAYS ME!","THE METRONOME OF MY LIFE STILLS!")
+	if(custom_message)
+		to_chat(target, span_danger("[custom_message]"))
+	else
+		to_chat(target, span_danger("[pick(stuffy)]"))
+
+	punish_log(target, punishment = "Heart Attack")
+	spawn(3 SECONDS)
+		if(!QDELETED(target))
+			target.set_heartattack(TRUE)
+
 /client/proc/punish_log(whom, punishment)
 	var/msg = "[key_name_admin(usr)] punished [key_name_admin(whom)] with [punishment]."
 	message_admins(msg)

@@ -527,7 +527,7 @@
 			backl = /obj/item/storage/backpack/satchel
 			wrists = /obj/item/clothing/wrists/bracers/leather
 		if(4) //zizombie Warrior
-			r_hand = /obj/item/weapon/sword/short
+			r_hand = /obj/item/weapon/sword/short/iron
 			l_hand = /obj/item/weapon/knife/dagger
 			pants = /obj/item/clothing/pants/grenzelpants
 			shoes = /obj/item/clothing/shoes/boots/armor/light

@@ -171,6 +171,28 @@
 	block2add = FOV_BEHIND
 	sellprice = 0 // See above comment
 
+//............... Baothan Helmet ............... //
+
+/obj/item/clothing/head/helmet/heavy/baotha
+	name = "willful helmet"
+	desc = "Baothan knights are an antithesis : the tiefling queen preaches self preservation at the cost of even family or friend. Choosing to embark on a quest to knightlyhood means facing peril at the forefront. \
+	Indeed, many are the upstarts who understood the folly of their journey, and either turned back to the warmth of ozium and wine or died in the process. \
+	The original wearer of this helmet is no such pushover : they do not have the might of Graggar nor the magick of Zizo, and instead rely on their wits and grit to proclaim their unicity in the face of this cold, uncaring world. \
+	It is rumoured that Baotha offers this baroque piece in person, as a reward for the knight's unflinching will in the face of sheer terror, minute after minute, hour after hour. \
+	Fashioned in steel and petals, it has no viewport, the wearer instead having their senses heightened to preternatural levels." // yes, this is a long item description, but it's the only piece of armour unique to Baotha.
+	icon_state = "baothahelm"
+	icon = 'icons/roguetown/clothing/special/baothanknight.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor64x64.dmi'
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	bloody_icon_state = "helmetblood_big"
+	armor = ARMOR_PLATE
+	prevent_crits = ALL_CRITICAL_HITS
+	item_weight = 5 * STEEL_MULTIPLIER
+	block2add = FOV_BEHIND
+	sellprice = 0 // See above comment
+
 //............... Spangenhelm ............... //
 /obj/item/clothing/head/helmet/heavy/viking
 	name = "spangenhelm"
@@ -269,6 +291,14 @@
 /obj/item/clothing/head/helmet/heavy/necked/xylix/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = list(SFX_JINGLE_BELLS))
+
+//................ Abyssor Helmet ............. //
+/obj/item/clothing/head/helmet/heavy/necked/abyssor
+	name = "abyssor helmet"
+	desc = "A great helmet crafted from bronze. The visor is slitted and ridged, evoking the gills of a great sea-beast."
+	icon_state = "abyssorhelm"
+	item_state = "abyssorhelm"
+	item_weight = 6 * IRON_MULTIPLIER
 
 //............... Sinistar (Graggar) Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/sinistar

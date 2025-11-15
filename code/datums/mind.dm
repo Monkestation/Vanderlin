@@ -428,14 +428,35 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		to_chat(current, span_danger("Despite my creators current allegiances, my true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless my creator's body is destroyed."))
 
 /// Output all memories of a mind
-/datum/mind/proc/show_memory(mob/recipient, window = 1)
+/datum/mind/proc/show_memory(mob/recipient, window = TRUE)
 	if(!recipient)
 		recipient = current
 	var/name_display = "My"
 	if(current?.real_name)
 		name_display = "[current.real_name]'s"
-	var/output = "<B>[name_display] Memories:</B><br>"
-	output += memory
+
+	var/output = memory
+
+	if(ishuman(current))
+		var/mob/living/carbon/human/human_current = current
+		if(length(human_current.culinary_preferences))
+			var/favourite_food = human_current.culinary_preferences[CULINARY_FAVOURITE_FOOD]
+			var/favourite_drink = human_current.culinary_preferences[CULINARY_FAVOURITE_DRINK]
+			var/hated_food = human_current.culinary_preferences[CULINARY_HATED_FOOD]
+			var/hated_drink = human_current.culinary_preferences[CULINARY_HATED_DRINK]
+
+			if(favourite_food)
+				var/obj/item/food_instance = favourite_food
+				output += "<br><b>Favourite Food:</b> [capitalize(initial(food_instance.name))]<br>"
+			if(favourite_drink)
+				var/datum/reagent/consumable/drink_instance = favourite_drink
+				output += "<b>Favourite Drink:</b> [capitalize(initial(drink_instance.name))]<br>"
+			if(hated_food)
+				var/obj/item/hated_food_instance = hated_food
+				output += "<b>Hated Food:</b> [capitalize(initial(hated_food_instance.name))]<br>"
+			if(hated_drink)
+				var/datum/reagent/consumable/hated_drink_instance = hated_drink
+				output += "<b>Hated Drink:</b> [capitalize(initial(hated_drink_instance.name))]<br>"
 
 	var/has_personal_objectives = FALSE
 	var/personal_output = ""
@@ -446,7 +467,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 				continue
 			if(!has_personal_objectives)
 				has_personal_objectives = TRUE
-				personal_output += "<B>Personal Objectives:</B>"
+				personal_output += "<br><B>Personal Objectives:</B>"
 			personal_output += "<br><B>Personal Goal #[personal_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
 			personal_count++
 		if(has_personal_objectives)
@@ -469,18 +490,20 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 				continue
 			if(!has_antag_objectives)
 				has_antag_objectives = TRUE
-				antag_output += "<B>Objectives:</B>"
+				antag_output += "<br><B>Objectives:</B>"
 			antag_output += "<br><B>[objective.flavor] #[antag_obj_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
 			antag_obj_count++
 
 	output += antag_output
 
 	if(window)
-		recipient << browse(output,"window=memory")
+		var/datum/browser/memory_browser = new(recipient, "memory", "<div align='center'>[name_display] Memory</div>", 425, 475)
+		memory_browser.set_content(output)
+		memory_browser.open()
 	else if(length(all_objectives) || length(personal_objectives) || memory)
 		to_chat(recipient, "<i>[output]</i>")
 
-/// output current targets to the player
+/// Output current targets to the player
 /datum/mind/proc/recall_targets(mob/recipient, window=1)
 	var/output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
 	for (var/mob/living/carbon in GLOB.mob_living_list) // Iterate through all mobs in the world

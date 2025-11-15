@@ -13,6 +13,7 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/miner
+	give_bank_account = 6
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

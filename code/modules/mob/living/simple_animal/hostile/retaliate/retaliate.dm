@@ -162,12 +162,17 @@
 					var/mob/living/simple_animal/A = new adult_growth(loc)
 					if(tame)
 						A.tame = TRUE
+
+					var/datum/component/generic_mob_hunger/old_hunger = GetComponent(/datum/component/generic_mob_hunger)
+					var/datum/component/generic_mob_hunger/hunger = A.GetComponent(/datum/component/generic_mob_hunger)
+					if(old_hunger && hunger)
+						var/old_hunger_percentage = old_hunger.current_hunger / old_hunger.max_hunger
+						hunger.current_hunger = hunger.max_hunger * old_hunger_percentage
+
 					qdel(src)
 					return
 
-
-
-//Prevents certain items from being targeted as food.
+/// Prevents certain items from being targeted as food.
 /mob/living/simple_animal/hostile/retaliate/proc/PickyEater(atom/thing_to_eat)
 	//Yes we eats this.
 	. = TRUE

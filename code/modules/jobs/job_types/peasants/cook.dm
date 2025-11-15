@@ -11,17 +11,7 @@
 	min_pq = -20
 	bypass_lastclass = TRUE
 
-	allowed_races = list(\
-		SPEC_ID_HUMEN,\
-		SPEC_ID_ELF,\
-		SPEC_ID_HALF_ELF,\
-		SPEC_ID_DWARF,\
-		SPEC_ID_DROW,\
-		SPEC_ID_HALF_DROW,\
-		SPEC_ID_TIEFLING,\
-		SPEC_ID_AASIMAR,\
-		SPEC_ID_HARPY,\
-	)
+	allowed_races = RACES_PLAYER_NONEXOTIC
 
 	outfit = /datum/outfit/cook
 	display_order = JDO_COOK

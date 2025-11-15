@@ -5,12 +5,14 @@
 	cast_range = 0
 	point_cost = 5
 	attunements = list(/datum/attunement/aeromancy)
+	has_visual_effects = FALSE
 
 /datum/action/cooldown/spell/essence/air_walk/cast(atom/cast_on)
 	. = ..()
 	owner.visible_message(span_notice("[owner] steps onto solidified air."))
 	var/mob/living/L = owner
 	L.apply_status_effect(/datum/status_effect/buff/air_walking, 15 SECONDS)
+	new /obj/effect/temp_visual/snake/swarm(null, L)
 
 /atom/movable/screen/alert/status_effect/air_walking
 	name = "Air Walking"

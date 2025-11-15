@@ -2,7 +2,9 @@
 	name = "Aspirant"
 	tags = list(
 		TAG_ZIZO,
+		TAG_BAOTHA,
 		TAG_VILLAIN,
+		TAG_COMBAT,
 	)
 	antag_datum = /datum/antagonist/aspirant
 	roundstart = TRUE
@@ -34,7 +36,8 @@
 		/datum/round_event_control/antagonist/solo/werewolf,
 		/datum/round_event_control/antagonist/solo/zizo_cult
 	)
-	secondary_prob = 90
+	secondary_prob = 75
+	min_players = 25
 	weight = 8
 
 	typepath = /datum/round_event/antagonist/solo/aspirant

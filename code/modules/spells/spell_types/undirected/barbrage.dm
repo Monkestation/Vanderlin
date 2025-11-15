@@ -15,6 +15,12 @@
 	spell_type = SPELL_STAMINA
 	spell_cost = 10
 
+/datum/action/cooldown/spell/undirected/barbrage/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
+	return isliving(owner)
+
 /datum/action/cooldown/spell/undirected/barbrage/cast(mob/living/cast_on)
 	. = ..()
 	cast_on.emote("rage", forced = TRUE)

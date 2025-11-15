@@ -488,3 +488,4 @@
 		/obj/item/natural/fibers = 2
 	)
 	craftdiff = 1
+

@@ -11,7 +11,8 @@
 	var/datum/job/parent_job
 	/// When joining the round, this text will be shown to the player.
 	var/tutorial = null
-
+	/// Id for the Job.
+	var/id
 	//Bitflags for the job
 	var/flag = NONE
 	var/department_flag = NONE
@@ -84,6 +85,8 @@
 	var/list/allowed_sexes = list(MALE, FEMALE)
 	/// Species allowed to be this job
 	var/list/allowed_races = RACES_PLAYER_ALL
+	/// Species blacklisted from this job
+	var/list/blacklisted_species = list()
 	/// Ages allowed to be this job
 	var/list/allowed_ages = ALL_AGES_LIST
 
@@ -271,15 +274,15 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
-	spawned.remove_stat_modifier("job_stats") // Reset so no inf stat
-	spawned.adjust_stat_modifier_list("job_stats", jobstats)
+	spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
+	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
 
 	for(var/datum/skill/skill as anything in skills)
 		var/amount_or_list = skills[skill]
 		if(islist(amount_or_list))
 			spawned.clamped_adjust_skillrank(skill, amount_or_list[1], amount_or_list[2], TRUE)
 		else
-			spawned.clamped_adjust_skillrank(skill, amount_or_list, amount_or_list, TRUE) //! This was changed because what the fuck.
+			spawned.adjust_skillrank(skill, amount_or_list, TRUE)
 
 	for(var/X in peopleknowme)
 		for(var/datum/mind/MF in get_minds(X))
@@ -350,8 +353,21 @@
 	if(length(advclass_cat_rolls))
 		spawned.hugboxify_for_class_selection()
 
+	if(spawned.culinary_preferences[CULINARY_RANDOM_PREFERENCES])
+		var/obj/item/food_instance = spawned.culinary_preferences[CULINARY_FAVOURITE_FOOD]
+		var/datum/reagent/consumable/drink_instance = spawned.culinary_preferences[CULINARY_FAVOURITE_DRINK]
+		var/obj/item/hated_food_instance = spawned.culinary_preferences[CULINARY_HATED_FOOD]
+		var/datum/reagent/consumable/hated_drink_instance = spawned.culinary_preferences[CULINARY_HATED_DRINK]
+
+		bordered_message(spawned, list(
+			"Your favourite food is <span style='color: green;'>[capitalize(initial(food_instance.name))]</span>",
+			"Your favourite drink is <span style='color: green;'>[capitalize(initial(drink_instance.name))]</span>",
+			"Your most hated food is <span style='color: red;'>[capitalize(initial(hated_food_instance.name))]</span>",
+			"Your most hated drink is <span style='color: red;'>[capitalize(initial(hated_drink_instance.name))]</span>",
+		))
+
 	if(job_flags & JOB_SHOW_IN_CREDITS)
-		SScrediticons.processing += spawned
+		START_PROCESSING(SScrediticons, player_client)
 
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))
@@ -400,6 +416,7 @@
 /mob/living/carbon/human/proc/pick_job_packs(datum/job/equipping)
 	if(!length(equipping.job_packs))
 		return
+
 	var/for_length = 1
 	if(islist(equipping.job_packs[1]))
 		for_length = length(equipping.job_packs)
@@ -410,7 +427,7 @@
 		var/list/job_packs = equipping.job_packs
 		if(islist(equipping.job_packs[i]))
 			job_packs = equipping.job_packs[i]
-		var/datum/job_pack/picked_pack
+
 		var/list/reals = list()
 		for(var/pack as anything in job_packs)
 			var/datum/job_pack/real_pack = GLOB.job_pack_singletons[pack]
@@ -419,11 +436,17 @@
 			reals |= real_pack
 		if(!length(reals))
 			return
+
+		var/datum/job_pack/picked_pack
 		if(!client)
 			picked_pack = GLOB.job_pack_singletons[pick(reals)]
 		else
 			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 20 SECONDS)
+			if(QDELETED(src))
+				return
+
 		previous_picked_types |= picked_pack.type
+
 		picked_pack.pick_pack(src)
 
 /mob/living/proc/dress_up_as_job(datum/job/equipping, visual_only = FALSE)
@@ -431,7 +454,14 @@
 
 /mob/living/carbon/human/dress_up_as_job(datum/job/equipping, visual_only = FALSE)
 	dna.species.pre_equip_species_outfit(equipping, src, visual_only)
-	var/datum/outfit/chosen_outfit = (gender == FEMALE && equipping.outfit_female) ? equipping.outfit_female : equipping.outfit
+
+	var/datum/outfit/chosen_outfit
+	var/datum/outfit/outfit_check = (gender == FEMALE && equipping.outfit_female) ? equipping.outfit_female : equipping.outfit
+	if(ispath(outfit_check, /datum/outfit))
+		chosen_outfit = outfit_check
+	else
+		chosen_outfit = GLOB.custom_outfits[outfit_check]
+
 	equipOutfit(chosen_outfit, visual_only)
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
@@ -554,3 +584,193 @@
 
 /datum/job/proc/get_total_positions(latejoin)
 	return latejoin ? total_positions : spawn_positions
+
+/datum/job/proc/get_json_data()
+	var/list/data = list()
+
+	data["job_type"] = type
+	data["title"] = title
+	data["f_title"] = f_title
+	data["enabled"] = enabled
+	data["spawn_positions"] = spawn_positions
+	data["cmode_music"] = cmode_music
+	data["antag_role"] = antag_role
+	data["faction"] = faction
+	data["total_positions"] = total_positions
+	data["tutorial"] = tutorial
+	data["selection_color"] = selection_color
+	data["minimal_player_age"] = minimal_player_age
+	data["exp_requirements"] = exp_requirements
+	data["exp_type"] = exp_type
+	data["paycheck"] = paycheck
+	data["paycheck_department"] = paycheck_department
+	data["display_order"] = display_order
+	data["job_flags"] = job_flags
+	data["allowed_sexes"] = allowed_sexes
+	data["allowed_races"] = allowed_races
+	data["min_pq"] = min_pq
+	data["give_bank_account"] = give_bank_account
+	data["can_random"] = can_random
+	data["always_show_on_latechoices"] = always_show_on_latechoices
+	data["same_job_respawn_delay"] = same_job_respawn_delay
+	data["job_reopens_slots_on_death"] = job_reopens_slots_on_death
+	data["is_foreigner"] = is_foreigner
+	data["is_recognized"] = is_recognized
+	data["shows_in_list"] = shows_in_list
+	data["can_have_apprentices"] = can_have_apprentices
+	data["max_apprentices"] = max_apprentices
+	data["apprentice_name"] = apprentice_name
+	data["magic_user"] = magic_user
+	data["noble_income"] = noble_income
+	data["job_bitflag"] = job_bitflag
+	data["id"] = id
+
+	if(length(skills))
+		var/list/skill_map = list()
+		for(var/skill_path in skills)
+			var/level = skills[skill_path]
+			skill_map[skill_path] = level
+		data["skills"] = skill_map
+	if(length(trainable_skills))
+		data["trainable_skills"] = trainable_skills.Copy()
+	if(length(advclass_cat_rolls))
+		data["advclass_cat_rolls"] = advclass_cat_rolls.Copy()
+	if(length(mind_traits))
+		data["mind_traits"] = mind_traits.Copy()
+	if(length(traits))
+		data["traits"] = traits.Copy()
+	if(length(languages))
+		data["languages"] = languages.Copy()
+	if(length(jobstats))
+		data["jobstats"] = jobstats.Copy()
+	if(length(spells))
+		data["spells"] = spells.Copy()
+	if(length(allowed_ages))
+		data["allowed_ages"] = allowed_ages.Copy()
+	if(length(allowed_patrons))
+		data["allowed_patrons"] = allowed_patrons.Copy()
+
+
+	if(outfit)
+		var/outfit_key = outfit
+		var/list/outfit_data
+
+		// If this is a custom outfit, include its full JSON
+		if(istext(outfit_key) && (outfit_key in GLOB.custom_outfits))
+			var/datum/outfit/O = GLOB.custom_outfits[outfit_key]
+			if(O)
+				outfit_data = O.get_json_data()
+
+		data["outfit"] = list(
+			"id" = outfit_key,
+			"custom_outfit_data" = outfit_data
+		)
+
+
+
+	return data
+
+/datum/job/proc/load_from_json(list/data, mob/admin)
+	if(!islist(data))
+		return
+
+	title = data["title"]
+	f_title = data["f_title"]
+	enabled = data["enabled"]
+	spawn_positions = data["spawn_positions"]
+	cmode_music = data["cmode_music"]
+	outfit = data["outfit"]
+	antag_role = text2path(data["antag_role"])
+	faction = data["faction"]
+	total_positions = data["total_positions"]
+	tutorial = data["tutorial"]
+	selection_color = data["selection_color"]
+	minimal_player_age = data["minimal_player_age"]
+	exp_requirements = data["exp_requirements"]
+	exp_type = data["exp_type"]
+	paycheck = data["paycheck"]
+	paycheck_department = data["paycheck_department"]
+	display_order = data["display_order"]
+	job_flags = data["job_flags"]
+	allowed_sexes = data["allowed_sexes"]
+	allowed_races = data["allowed_races"]
+	min_pq = data["min_pq"]
+	give_bank_account = data["give_bank_account"]
+	can_random = data["can_random"]
+	always_show_on_latechoices = data["always_show_on_latechoices"]
+	same_job_respawn_delay = data["same_job_respawn_delay"]
+	job_reopens_slots_on_death = data["job_reopens_slots_on_death"]
+	is_foreigner = data["is_foreigner"]
+	is_recognized = data["is_recognized"]
+	shows_in_list = data["shows_in_list"]
+	can_have_apprentices = data["can_have_apprentices"]
+	max_apprentices = data["max_apprentices"]
+	apprentice_name = data["apprentice_name"]
+	magic_user = data["magic_user"]
+	noble_income = data["noble_income"]
+	job_bitflag = data["job_bitflag"]
+	id = data["id"]
+
+
+	if(data["skills"])
+		skills = list()
+		for(var/skill_path_text in data["skills"])
+			var/skill_path = text2path(skill_path_text)
+			if(skill_path)
+				var/level = data["skills"][skill_path_text]
+				skills[skill_path] = level
+	if(data["allowed_ages"])
+		var/list/tmp = data["allowed_ages"]
+		allowed_ages = tmp.Copy()
+	if(data["allowed_patrons"])
+		allowed_patrons = list()
+		for(var/allowed_patrons_text in data["allowed_patrons"])
+			var/allowed_patrons_path = text2path(allowed_patrons_text)
+			if(allowed_patrons_path) // valid path
+				allowed_patrons += allowed_patrons_path
+	if(data["trainable_skills"])
+		var/list/tmp = data["trainable_skills"]
+		trainable_skills = tmp.Copy()
+	if(data["advclass_cat_rolls"])
+		var/list/tmp = data["advclass_cat_rolls"]
+		advclass_cat_rolls = tmp.Copy()
+	if(data["mind_traits"])
+		var/list/tmp = data["mind_traits"]
+		mind_traits = tmp.Copy()
+	if(data["traits"])
+		var/list/tmp = data["traits"]
+		traits = tmp.Copy()
+	if(data["languages"])
+		var/list/tmp = data["languages"]
+		languages = tmp.Copy()
+	if(data["jobstats"])
+		var/list/tmp = data["jobstats"]
+		jobstats = tmp.Copy()
+	if(data["spells"])
+		var/list/tmp = data["spells"]
+		spells = tmp.Copy()
+
+
+	if(data["outfit"])
+		var/list/outfit_entry = data["outfit"]
+		if(islist(outfit_entry))
+			var/outfit_id = outfit_entry["id"]
+			var/custom_outfit_data = outfit_entry["custom_outfit_data"]
+
+			if(custom_outfit_data)
+				var/datum/outfit/O = new
+				O.load_from(custom_outfit_data)
+				if(O.id in GLOB.custom_outfits)
+					outfit = O.id
+					return
+				GLOB.custom_outfits[O.id] = O
+				outfit = O.id
+				message_admins("[key_name(usr)]from the job [title] it was loaded a custom outfit: [O.name]")
+				to_chat(admin, span_notice("Successfully loaded outfit [O.name]."))
+			else
+				outfit = outfit_id
+		else
+			outfit = outfit_entry
+
+
+	return TRUE

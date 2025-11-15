@@ -88,18 +88,18 @@
 		var/obj/item/explo_mineral = mineralType
 		var/explo_mineral_amount = mineralAmt
 		var/obj/item/natural/rock/explo_rock = rockType
-		ScrapeAway()
-		GLOB.mined_resource_loc |= get_turf(src)
-		QUEUE_SMOOTH_NEIGHBORS(src)
-		new /obj/item/natural/stone(src)
+		var/turf/new_turf = ScrapeAway()
+		GLOB.mined_resource_loc |= new_turf
+		QUEUE_SMOOTH_NEIGHBORS(new_turf)
+		new /obj/item/natural/stone(new_turf)
 		if(prob(30))
-			new /obj/item/natural/stone(src)
+			new /obj/item/natural/stone(new_turf)
 		if (explo_mineral && (explo_mineral_amount > 0))
 			if(prob(33)) //chance to spawn ore directly
-				new explo_mineral(src)
+				new explo_mineral(new_turf)
 			if(explo_rock)
 				if(prob(23))
-					new explo_rock(src)
+					new explo_rock(new_turf)
 			SSblackbox.record_feedback("tally", "ore_mined", explo_mineral_amount, explo_mineral)
 		else
 			return
@@ -135,7 +135,8 @@
 	var/flags = NONE
 	if(defer_change)
 		flags = CHANGETURF_DEFER_CHANGE
-	ScrapeAway(null, flags)
+	var/turf/new_turf = ScrapeAway(null, flags)
+	GLOB.mined_resource_loc |= new_turf
 	addtimer(CALLBACK(src, PROC_REF(AfterChange)), 1, TIMER_UNIQUE)
 
 /turf/closed/mineral/proc/apply_mining_quality(obj/item/item, mob/living/user)

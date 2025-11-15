@@ -1,7 +1,7 @@
 
 /datum/antagonist/bandit
 	name = "Bandit"
-	roundend_category = "bandits"
+	roundend_category = "Bandits"
 	antagpanel_category = "Bandit"
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_BANDIT

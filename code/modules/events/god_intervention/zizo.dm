@@ -14,7 +14,7 @@
 	)
 
 /datum/round_event/zizo_defilement/start()
-	SSmapping.add_world_trait(/datum/world_trait/zizo_defilement, 15 MINUTES)
+	SSmapping.add_world_trait(/datum/world_trait/zizo_defilement, 20 MINUTES)
 
 	if(is_ascendant(ZIZO))
 		for(var/mob/living/carbon/human/potential_zombie as anything in GLOB.human_list)

@@ -763,3 +763,22 @@
 	icon_state = "mazekey"
 	lockids = list("banditcamp")
 
+
+////// MINOR NOBLES
+/obj/item/key/mnoble1
+	name = "Key of the noble house 1"
+	desc = "A very detailed steel key, has gold details and a purple gemstone on it... is for the noble house number one."
+	icon_state = "noble1"
+	lockids = list("nobles1")
+
+/obj/item/key/mnoble2
+	name = "Key of the noble house 2"
+	desc = "A very detailed steel key, has gold details and a yellow gemstone on it... is for the noble house number two."
+	icon_state = "noble2"
+	lockids = list("nobles2")
+
+/obj/item/key/mnoble3
+	name = "Key of the noble house 3"
+	desc = "A very detailed steel key, has gold details and a red gemstone on it... is for the noble house number three?"
+	icon_state = "noble3"
+	lockids = list("nobles3")

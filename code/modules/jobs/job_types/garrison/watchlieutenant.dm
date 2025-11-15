@@ -20,6 +20,7 @@
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_GUARD
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/lieutenant	//Default outfit.
 	give_bank_account = 50

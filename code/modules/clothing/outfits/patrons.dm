@@ -242,8 +242,8 @@
 /obj/item/clothing/head/helmet/heavy/astratahelm
 	name = "astrata helmet"
 	desc = "Headwear commonly worn by Templars in service to Astrata. The firstborn child's light will forever shine on within its crest."
-	icon_state = "astratahelm"
-	item_state = "astratahelm"
+	icon_state = "astratanhelm"
+	item_state = "astratanhelm"
 	emote_environment = 3
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_BEHIND
@@ -265,8 +265,8 @@
 /obj/item/clothing/head/helmet/heavy/necrahelm
 	name = "necra helmet"
 	desc = "Headwear commonly worn by Templars in service to Necra. Let its skeletal features remind you of the only thing which is guaranteed in life: You will die."
-	icon_state = "necrahelm"
-	item_state = "necrahelm"
+	icon_state = "necranhelm"
+	item_state = "necranhelm"
 	emote_environment = 3
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_BEHIND

@@ -137,7 +137,7 @@
 
 	START_PROCESSING(SStramprocess, src)
 
-/datum/lift_master/tram/process(seconds_per_tick)
+/datum/lift_master/tram/process()
 	if(!travel_distance)
 		addtimer(CALLBACK(src, PROC_REF(unlock_controls), idle_platform), 2 SECONDS)
 		if(SEND_SIGNAL(callback_platform, COMSIG_TRAM_REACHED_PLATFORM, src))

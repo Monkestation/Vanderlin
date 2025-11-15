@@ -4,7 +4,7 @@
 
 	weight = 12
 
-	earliest_start = 15 MINUTES
+	earliest_start = 20 MINUTES
 
 	tags = list(
 		TAG_MATTHIOS,

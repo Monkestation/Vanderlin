@@ -9,6 +9,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 /datum/outfit/adventurer/mage/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -94,7 +94,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	 */
 	var/swap_male_clothes = FALSE
 	/**
-	 * Feales use male clothes, offsets and damage icons.
+	 * Females use male clothes, offsets and damage icons.
 	 * Importantly females still use female limb icons.
 	 * This does not effect stats or inherent traits/skills.
 	 * Females will lose their boob overlays.
@@ -299,6 +299,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return
 	if(language == "Orcish")
 		return strings("accents/halforc_replacement.json", "halforc")
+	if(language == "Halfling")
+		return strings("accents/halfling_replacement.json", "halfling")
 	if(language == "Deepspeak")
 		return strings("accents/triton_replacement.json", "triton")
 	if(language == "Pirate")
@@ -366,7 +368,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				ACCENT_GRENZ,
 				ACCENT_PIRATE,
 				ACCENT_MIDDLE_SPEAK,
-				ACCENT_ZALAD
+				ACCENT_ZALAD,
+				ACCENT_HALFLING
 			)
 
 			///This will only trigger for patreon users
@@ -1209,59 +1212,20 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return //hunger is for BABIES
 
 	// nutrition decrease and satiety
-	if (H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
-		// THEY HUNGER
+	if(H.nutrition > 0 && H.stat != DEAD)
 		var/hunger_rate = (HUNGER_FACTOR * nutrition_mod)
 		H.adjust_nutrition(-hunger_rate)
 
-
-	if (H.hydration > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
-		// THEY HUNGER
+	if(H.hydration > 0 && H.stat != DEAD)
 		var/hunger_rate = HUNGER_FACTOR
-//		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_hydration(-hunger_rate)
 
-
-	if (H.nutrition > NUTRITION_LEVEL_FULL)
-		if(H.overeatduration < 600) //capped so people don't take forever to unfat
-			H.overeatduration++
-	else
-		if(H.overeatduration > 1)
-			H.overeatduration -= 2 //doubled the unfat rate
-
-	//metabolism change
-//	if(H.nutrition > NUTRITION_LEVEL_FAT)
-//		H.metabolism_efficiency = 1
-//	else if(H.nutrition > NUTRITION_LEVEL_FED && H.satiety > 80)
-//		if(H.metabolism_efficiency != 1.25 && !HAS_TRAIT(H, TRAIT_NOHUNGER))
-//			to_chat(H, "<span class='notice'>I feel vigorous.</span>")
-//			H.metabolism_efficiency = 1.25
-//	else if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
-//		if(H.metabolism_efficiency != 0.8)
-//			to_chat(H, "<span class='notice'>I feel sluggish.</span>")
-//		H.metabolism_efficiency = 0.8
-//	else
-//		if(H.metabolism_efficiency == 1.25)
-//			to_chat(H, "<span class='notice'>I no longer feel vigorous.</span>")
-//		H.metabolism_efficiency = 1
-
-	//Hunger slowdown for if mood isn't enabled
-//	if(CONFIG_GET(flag/disable_human_mood))
-//		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-//			var/hungry = (500 - H.nutrition) / 5 //So overeat would be 100 and default level would be 80
-//			if(hungry >= 70)
-//				H.add_movespeed_modifier(MOVESPEED_ID_HUNGRY, override = TRUE, multiplicative_slowdown = (hungry / 50))
-//			else if(isethereal(H))
-//				var/datum/species/ethereal/E = H.dna.species
-//				if(E.get_charge(H) <= ETHEREAL_CHARGE_NORMAL)
-//					H.add_movespeed_modifier(MOVESPEED_ID_HUNGRY, override = TRUE, multiplicative_slowdown = (1.5 * (1 - E.get_charge(H) / 100)))
-//			else
-//				H.remove_movespeed_modifier(MOVESPEED_ID_HUNGRY)
+	if(H.nutrition > NUTRITION_LEVEL_FULL && H.overeatduration < 600)
+		H.overeatduration++ //capped so people don't take forever to unfat
+	else if(H.overeatduration > 1)
+		H.overeatduration -= 2 //doubled the unfat rate
 
 	switch(H.nutrition)
-//		if(NUTRITION_LEVEL_FAT to INFINITY) //currently disabled/999999 define
-//			if(H.energy >= H.max_energy)
-//				H.apply_status_effect(/datum/status_effect/debuff/fat)
 		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
 			H.apply_status_effect(/datum/status_effect/debuff/hungryt1)
 			H.remove_status_effect(/datum/status_effect/debuff/hungryt2)
@@ -1282,8 +1246,6 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	switch(H.hydration)
-//		if(HYDRATION_LEVEL_WATERLOGGED to INFINITY)
-//			H.apply_status_effect(/datum/status_effect/debuff/waterlogged)
 		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
 			H.apply_status_effect(/datum/status_effect/debuff/thirstyt1)
 			H.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
@@ -1899,7 +1861,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				I.take_damage(1, BRUTE, I.damage_type)
 		if(!nodmg)
 			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block))/100), user, selzone, crit_message = TRUE)
-			if(should_embed_weapon(crit_wound, I))
+			if(crit_wound?.should_embed(I))
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE

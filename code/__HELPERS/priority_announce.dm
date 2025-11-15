@@ -67,5 +67,5 @@
 	var/html = "<br><div class='alert_holder'>"
 	for(var/msg in messages)
 		html += "[msg]<br>"
-	html += "</div>"
+	html += "</div><br>"
 	to_chat(target, html)

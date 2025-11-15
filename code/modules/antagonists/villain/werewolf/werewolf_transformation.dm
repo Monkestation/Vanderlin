@@ -3,8 +3,6 @@
 	var/mob/living/carbon/human/H = user
 	if(H.stat == DEAD) return
 	if(H.advsetup) return
-	if(HAS_TRAIT(H, TRAIT_SILVER_BLESSED)) return
-
 	// Werewolf transforms at night AND under the sky
 	if(!HAS_TRAIT(user, TRAIT_WEREWOLF_RAGE))
 		if(GLOB.tod == "night")
@@ -12,8 +10,9 @@
 				var/turf/loc = H.loc
 				if(loc.can_see_sky())
 					var/mob/living/carbon/human/human = user
-					if(human.rage_datum?.rage > human.rage_datum.max_rage - 20)
-						to_chat(H, span_userdanger("The moonlight scorns me... It is too late."))
+					if(!is_species(H, /datum/species/werewolf))
+						if(human.rage_datum?.rage > human.rage_datum.max_rage - 20)
+							to_chat(H, span_userdanger("The moonlight scorns me... It is too late."))
 					human.rage_datum?.update_rage(10)
 
 
@@ -21,7 +20,10 @@
 	werewolf_untransform(null, TRUE, gibbed)
 
 /mob/living/carbon/human/proc/werewolf_transform()
-
+	if(SSticker.current_state == GAME_STATE_FINISHED)
+		return
+	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+		return
 	if(HAS_TRAIT(src, TRAIT_WEREWOLF_RAGE))
 		return
 	if(is_species(src, /datum/species/werewolf))
@@ -92,21 +94,25 @@
 	W.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
 	W.adjust_skillrank(/datum/skill/misc/climbing, 6, TRUE)
 
-	W.set_stat_modifier("[type]", STATKEY_STR, 20)
-	W.set_stat_modifier("[type]", STATKEY_CON, 20)
-	W.set_stat_modifier("[type]", STATKEY_END, 20)
-
+	W.base_constitution = 10 //werewolf.dm in the species has their ACTUAL stats, don't edit these, they'll make them stack ontop of each other.
+	W.base_strength = 10
+	W.base_endurance = 10
+	W.recalculate_stats()
 
 	W.add_spell(/datum/action/cooldown/spell/undirected/howl)
 	W.add_spell(/datum/action/cooldown/spell/undirected/claws)
 	W.add_spell(/datum/action/cooldown/spell/aoe/repulse/howl)
 	W.add_spell(/datum/action/cooldown/spell/woundlick)
+	W.add_spell(/datum/action/cooldown/spell/lunge)
+	W.add_spell(/datum/action/cooldown/spell/throw_target)
 
 	W.rage_datum.grant_to_secondary(W)
 
 	invisibility = oldinv
 
 /mob/living/carbon/human/proc/werewolf_untransform(mob/bleh, dead,gibbed)
+	if(SSticker.current_state == GAME_STATE_FINISHED)
+		return
 	if(!stored_mob)
 		var/mob/living/carbon/human/species/werewolf/wolf = loc
 		if(istype(wolf))
@@ -141,6 +147,8 @@
 	W.remove_spell(/datum/action/cooldown/spell/undirected/claws)
 	W.remove_spell(/datum/action/cooldown/spell/aoe/repulse/howl)
 	W.remove_spell(/datum/action/cooldown/spell/woundlick)
+	W.remove_spell(/datum/action/cooldown/spell/lunge)
+	W.remove_spell(/datum/action/cooldown/spell/throw_target)
 	W.rage_datum.remove_secondary()
 	W.regenerate_icons()
 

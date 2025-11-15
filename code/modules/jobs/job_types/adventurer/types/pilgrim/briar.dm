@@ -247,6 +247,7 @@
 	user.emote("rage", forced = TRUE)
 	ADD_TRAIT(user, TRAIT_STRONGBITE, TRAIT_GENERIC)
 	ADD_TRAIT(user, TRAIT_BESTIALSENSE, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	user.update_sight()
 	user.remove_spell(/datum/action/cooldown/spell/undirected/bless_crops)
 	user.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/briar_claw)
@@ -289,6 +290,7 @@
 	playsound(get_turf(user), pick('sound/vo/mobs/troll/idle1.ogg','sound/vo/mobs/troll/idle2.ogg'), 50, TRUE)
 	to_chat(user, span_good("The rumblings of a troll echo through the trees, your offering was acknowledged by the ancient dwellers of the forest."))
 	user.emote("rage", forced = TRUE)
+	ADD_TRAIT(user, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
 	user.physiology.pain_mod *= 0.6
 	user.remove_spell(/datum/action/cooldown/spell/healing)
 	user.add_spell(/datum/action/cooldown/spell/undirected/shapeshift/troll_form)

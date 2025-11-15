@@ -20,6 +20,11 @@
 		if(C.silent || !C.can_speak())
 			message = "makes a noise. Tears stream down their face."
 
+/datum/emote/living/carbon/human/cry/run_emote(mob/user, params, type_override, intentional, targetted)
+	. = ..()
+	if(. && user.mind)
+		record_featured_stat(FEATURED_STATS_CRYBABIES, user)
+
 /datum/emote/living/carbon/human/eyebrow
 	key = "eyebrow"
 	message = "raises an eyebrow."

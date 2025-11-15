@@ -8,13 +8,13 @@
 		controller.queue_behavior(/datum/ai_behavior/territorial_struggle/raccoon, BB_TRESSPASSER_TARGET, BB_HOSTILE_MEOWS)
 		return SUBTREE_RETURN_FINISH_PLANNING
 
-	controller.queue_behavior(/datum/ai_behavior/find_and_set/raccoon_tresspasser, BB_TRESSPASSER_TARGET, /mob/living/simple_animal/hostile/retaliate/wolf/raccoon)
+	controller.queue_behavior(/datum/ai_behavior/find_and_set/raccoon_tresspasser, BB_TRESSPASSER_TARGET, /mob/living/simple_animal/hostile/retaliate/raccoon)
 
 /datum/ai_behavior/find_and_set/raccoon_tresspasser
 	action_cooldown = 5 SECONDS
 
 /datum/ai_behavior/find_and_set/raccoon_tresspasser/search_tactic(datum/ai_controller/controller, locate_path, search_range)
-	for(var/mob/living/simple_animal/hostile/retaliate/wolf/raccoon/potential_enemy in oview(search_range, controller.pawn))
+	for(var/mob/living/simple_animal/hostile/retaliate/raccoon/potential_enemy in oview(search_range, controller.pawn))
 		if(potential_enemy == controller.pawn)
 			continue
 		var/datum/ai_controller/basic_controller/enemy_controller = potential_enemy.ai_controller
@@ -31,9 +31,9 @@
 /datum/ai_behavior/find_and_set/raccoon_tresspasser/atom_allowed(atom/movable/checking, locate_path, atom/pawn)
 	if(checking == pawn)
 		return FALSE
-	if(!istype(checking, /mob/living/simple_animal/hostile/retaliate/wolf/raccoon))
+	if(!istype(checking, /mob/living/simple_animal/hostile/retaliate/raccoon))
 		return FALSE
-	var/mob/living/simple_animal/hostile/retaliate/wolf/raccoon/potential_enemy = checking
+	var/mob/living/simple_animal/hostile/retaliate/raccoon/potential_enemy = checking
 	var/datum/ai_controller/basic_controller/enemy_controller = potential_enemy.ai_controller
 	if(isnull(enemy_controller))
 		return FALSE

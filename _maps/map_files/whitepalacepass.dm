@@ -1,1 +1,2 @@
-#define FORCE_MAP "_maps/whitepalacepass.json"
+#define FORCE_MAP "whitepalacepass"
+#define FORCE_MAP_DIRECTORY "_maps"

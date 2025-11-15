@@ -3,7 +3,7 @@
 	track = EVENT_TRACK_MODERATE
 	typepath = /datum/round_event/town_fire
 	weight = 3
-	max_occurrences = 2
+	max_occurrences = 4
 	min_players = 0
 	earliest_start = 25 MINUTES
 

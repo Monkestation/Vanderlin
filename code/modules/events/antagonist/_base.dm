@@ -28,7 +28,7 @@
 
 	var/players_amt = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
 
-	if(players_amt < 50)
+	if(players_amt < 45)
 		return
 
 	if(!prob(secondary_prob))

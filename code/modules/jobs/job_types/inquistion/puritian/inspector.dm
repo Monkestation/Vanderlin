@@ -2,7 +2,7 @@
 /datum/job/advclass/puritan/inspector
 	title = "Inquisitor"
 	tutorial = "The head of the Ordo Venatari, your lessons are of a subtle touch and a light step. A silver dagger in the right place at the right time is all that is needed. Preparation is key, and this is something you impart on your students. Be always ready, be always waiting, and always be vigilant."
-	outfit = /datum/outfit/job/inquisitor/inspector
+	outfit = /datum/outfit/inquisitor/inspector
 
 	category_tags = list(CTAG_PURITAN)
 
@@ -14,6 +14,8 @@
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PURITAN,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 	)
 
 	jobstats = list(
@@ -35,11 +37,39 @@
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/sewing = SKILL_LEVEL_APPRENTICE
+		/datum/skill/misc/sewing = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/firearms = SKILL_LEVEL_EXPERT,
 	)
 
-/datum/outfit/job/inquisitor/inspector/pre_equip(mob/living/carbon/human/H)
-	..()
+/datum/job/advclass/puritan/inspector/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.venatari, 100)
+
+	var/static/list/gear = list(
+		"Retribution (Rapier)",
+		"Daybreak (Whip)",
+		"Sanctum (Halberd)",
+		"The Forgotten Blade",
+	)
+	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR RELIQUARY PIECE.", "WIELD THEM IN HIS NAME.", gear)
+	switch(weapon_choice)
+		if("Retribution (Rapier)")
+			spawned.put_in_hands(new /obj/item/weapon/sword/rapier/psy/relic(spawned), TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BELT_L, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+		if("Daybreak (Whip)")
+			spawned.put_in_hands(new /obj/item/weapon/whip/psydon/relic(spawned), TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4)
+		if("Sanctum (Halberd)")
+			spawned.put_in_hands(new /obj/item/weapon/polearm/halberd/psydon/relic(spawned), TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
+		if("The Forgotten Blade")
+			spawned.put_in_hands(new /obj/item/weapon/sword/long/forgotten(spawned), TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+
+
+/datum/outfit/inquisitor/inspector
+	name = "Inspector"
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	neck = /obj/item/clothing/neck/gorget
@@ -63,22 +93,4 @@
 		/obj/item/rope/inqarticles/inquirycord = 1,
 		/obj/item/grapplinghook = 1,
 		/obj/item/paper/inqslip/arrival/inq = 1,
-		)
-
-	var/weapons = list("Retribution (Rapier)", "Daybreak (Whip)", "Sanctum (Halberd)")
-	var/weapon_choice = input(H,"CHOOSE YOUR RELIQUARY PIECE.", "WIELD THEM IN HIS NAME.") as anything in weapons
-	switch(weapon_choice)
-		if("Retribution (Rapier)")
-			H.put_in_hands(new /obj/item/weapon/sword/rapier/psy/relic(H), TRUE)
-			H.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BELT_L, TRUE)
-			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4)
-		if("Daybreak (Whip)")
-			H.put_in_hands(new /obj/item/weapon/whip/antique/psywhip(H), TRUE)
-			H.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4)
-		if("S (Halberd)")
-			H.put_in_hands(new /obj/item/weapon/polearm/halberd/psydon/relic(H), TRUE)
-			H.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4)
-
-/datum/outfit/job/inquisitor/inspector/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	GLOB.inquisition.add_member_to_position(H, GLOB.inquisition.venatari, 100)
+	)

@@ -17,12 +17,14 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/watchman
 	advclass_cat_rolls = list(CTAG_MENATARMS = 20)
 	cmode_music = 'sound/music/cmode/garrison/CombatManAtArms.ogg'
 	give_bank_account = 15
 	min_pq = 6
+	give_bank_account = 30
 
 	job_bitflag = BITFLAG_GARRISON
 
@@ -57,10 +59,10 @@
 /datum/outfit/watchman/pikeman/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
-	armor = /obj/item/clothing/armor/cuirass
-	shirt = /obj/item/clothing/armor/chainmail
-	neck = /obj/item/clothing/neck/chaincoif/iron
-	gloves = /obj/item/clothing/gloves/chain
+	armor = /obj/item/clothing/armor/chainmail/hauberk //leg & arm protection on one piece, nothing else needed
+	shirt = /obj/item/clothing/armor/gambeson/arming
+	neck = /obj/item/clothing/neck/bevor
+	gloves = /obj/item/clothing/gloves/leather
 	beltr = /obj/item/weapon/sword/arming
 	backr = /obj/item/weapon/polearm/spear/billhook
 	backl = /obj/item/storage/backpack/satchel
@@ -98,9 +100,9 @@
 /datum/outfit/watchman/swordsmen/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
-	armor = /obj/item/clothing/armor/leather/advanced
-	shirt = /obj/item/clothing/armor/gambeson
-	neck = /obj/item/clothing/neck/gorget
+	armor = /obj/item/clothing/armor/leather/splint
+	shirt = /obj/item/clothing/armor/gambeson/arming
+	neck = /obj/item/clothing/neck/bevor
 	gloves = /obj/item/clothing/gloves/chain
 	beltr = /obj/item/weapon/sword/rapier
 	backl = /obj/item/storage/backpack/satchel
@@ -135,10 +137,10 @@
 /datum/outfit/watchman/ranger/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
-	armor = /obj/item/clothing/armor/leather/hide
-	shirt = /obj/item/clothing/armor/gambeson/heavy
+	armor = /obj/item/clothing/armor/leather/splint
+	shirt = /obj/item/clothing/armor/gambeson/arming
 	beltr = /obj/item/weapon/mace/cudgel
-	neck = /obj/item/clothing/neck/chaincoif/iron
+	neck = /obj/item/clothing/neck/bevor
 	gloves = /obj/item/clothing/gloves/leather
 	backpack_contents = list(/obj/item/weapon/knife/dagger/steel/special)
 	if(H.mind)

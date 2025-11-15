@@ -23,8 +23,8 @@
 	var/list/broken_states
 	var/list/burnt_states
 
-	spread_chance = 0.85
-	burn_power = 22.5
+	spread_chance = 1.35
+	burn_power = 50
 
 /turf/open/floor/Initialize(mapload)
 	if (!broken_states)
@@ -119,7 +119,6 @@
 	var/turf/open/floor/W = ..()
 	W.icon_regular_floor = old_icon
 	W.setDir(old_dir)
-	W.update_appearance()
 	return W
 
 /turf/open/floor/attackby(obj/item/C, mob/user, params)

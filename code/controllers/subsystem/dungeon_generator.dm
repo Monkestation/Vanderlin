@@ -11,6 +11,8 @@ SUBSYSTEM_DEF(dungeon_generator)
 	var/list/markers = list()
 	var/list/placed_types = list()
 
+	var/dungeon_z = -1 // The definite z level of the first level
+
 	var/multilevel_dungeons = FALSE  // Toggle for multi-level generation
 	var/max_delve_levels = 2        // Maximum dungeon depth
 	var/list/dungeon_levels = list() // Track z-levels for each delve level
@@ -34,6 +36,8 @@ SUBSYSTEM_DEF(dungeon_generator)
 		for(var/obj/effect/dungeon_directional_helper/helper as anything in markers)
 			if(!get_turf(helper))
 				continue
+			if(dungeon_z == -1)
+				dungeon_z = helper.z // this shouldn't ever fail i think
 			find_soulmate(helper.dir, get_turf(helper), helper)
 			markers -= helper
 	return ..()

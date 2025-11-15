@@ -1,7 +1,7 @@
 // Assassin, cultist of graggar. Normally found as a drifter.
 /datum/antagonist/assassin
 	name = "Assassin"
-	roundend_category = "assassins"
+	roundend_category = "Assassins"
 	antagpanel_category = "Assassin"
 	antag_hud_type = ANTAG_HUD_ASSASSIN
 	antag_hud_name = "assassin"

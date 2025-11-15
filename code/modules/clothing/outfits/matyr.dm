@@ -101,7 +101,7 @@
 
 /datum/stress_event/naledimasklost
 	stress_change = 3
-	desc = span_boldred("The mask! Anyone here could be a djinn. I'm exposed.")
+	desc = span_boldred("The mask! Anyone here could be unholy. I'm exposed.")
 	timer = 999 MINUTES
 
 /datum/status_effect/debuff/lost_naledi_mask
@@ -111,14 +111,14 @@
 
 /atom/movable/screen/alert/status_effect/debuff/naledimask
 	name = "Lost Mask"
-	desc = "Djinns and daemons may claim me at any moment without the mask. It is not safe."
+	desc = "The unholy and daemons may claim me at any moment without the mask. It is not safe."
 	icon_state = "muscles"
 
 /obj/item/clothing/face/lordmask/naledi
 	name = "war scholar's mask"
 	item_state = "naledimask"
 	icon_state = "naledimask"
-	desc = "Runes and wards, meant for daemons; the gold has somehow rusted in unnatural, impossible agony. The most prominent of these etchings is in the shape of the Naledian psycross. Armored to protect the wearer's face."
+	desc = "Runes and wards, meant for daemons; the gold has somehow rusted in unnatural, impossible agony. The most prominent of these etchings is in the shape of the psycross. Armored to protect the wearer's face."
 	max_integrity = 100
 	armor = ARMOR_MASK_METAL
 	flags_inv = HIDEFACE
@@ -146,7 +146,7 @@
 	name = "sojourner's mask"
 	item_state = "naledimask"
 	icon_state = "naledimask"
-	desc = "A golden mask, gnarled by the sustained agonies of djinnic corruption; yet as long as its Naledian hexes endure, so too will its wearer. Hand-fitted shingles flank the sides to repel incoming strikes. </br>'..Clad with the stereotype of abruptly disappearing without any forewarning, the typical Sojourner is in constant pursuit of diversifying their erudition. One might arrive to learn the local witch's recipe of sanctifying atropa extract and spend yils in the community trying to master it, while another might work alongside the region's Orthodoxic chapter to slay a lycker lord in exchange for his archive, only to vanish the very next day..'"
+	desc = "A golden mask, hiding the face of those who prefer their fists and agility to speak for them."
 	max_integrity = 150
 	armor = ARMOR_MASK_METAL
 	flags_inv = HIDEFACE

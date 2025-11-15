@@ -3,7 +3,7 @@
 	category = "Graggar's Contestant"
 	triumph_count = 4
 	immediate_effects = list("You will feel stressed until the culling ends (+1 Stress)", "Gained an ability to rip hearts out of corpses", "Gained an ability to locate your rival's heart")
-	rewards = list("4 Triumphs", "Graggar grows stronger", "Overwhelming Power (+2 to all stats)", "Pride of Victory (-1 Stress)")
+	rewards = list("4 Triumphs", "Graggar grows stronger", "Overwhelming Power (+3 to all stats)", "Pride of Victory (-2 Stress)")
 	var/rival_name
 	var/rival_job
 
@@ -47,19 +47,19 @@
 /datum/objective/personal/eat_rival_heart/complete_objective(escalatation_type = ESCALATION_INTERVENTION_ONLY)
 	. = ..()
 	to_chat(owner.current, span_greentext("You have proven your strength to Graggar by consuming your rival's heart! Your rival's power is now YOURS!"))
-	adjust_storyteller_influence(GRAGGAR, 30)
+	adjust_storyteller_influence(GRAGGAR, 40)
 	UnregisterSignal(owner.current, COMSIG_ORGAN_CONSUMED)
 
 /datum/objective/personal/eat_rival_heart/reward_owner()
 	. = ..()
 	owner.current.add_stress(/datum/stress_event/graggar_culling_finished)
-	owner.current.set_stat_modifier("graggar_culling", STATKEY_STR, 2)
-	owner.current.set_stat_modifier("graggar_culling", STATKEY_END, 2)
-	owner.current.set_stat_modifier("graggar_culling", STATKEY_CON, 2)
-	owner.current.set_stat_modifier("graggar_culling", STATKEY_PER, 2)
-	owner.current.set_stat_modifier("graggar_culling", STATKEY_INT, 2)
-	owner.current.set_stat_modifier("graggar_culling", STATKEY_SPD, 2)
-	owner.current.set_stat_modifier("graggar_culling", STATKEY_LCK, 2)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_STR, 3)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_END, 3)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_CON, 3)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_PER, 3)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_INT, 3)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_SPD, 3)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_LCK, 3)
 	owner.current.playsound_local(owner.current, 'sound/misc/gods/graggar_omen.ogg', 100)
 
 /datum/objective/personal/eat_rival_heart/update_explanation_text()

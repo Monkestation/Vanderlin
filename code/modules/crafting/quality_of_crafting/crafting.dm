@@ -933,7 +933,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/jade/teapot
 	name = "joapstone teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotjade
+	output = /obj/item/reagent_containers/glass/carafe/teapot/jade
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/jade/bust
@@ -1092,7 +1092,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/shell/teapot
 	name = "shell teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotshell
+	output = /obj/item/reagent_containers/glass/carafe/teapot/shell
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/shell/amulet
@@ -1261,7 +1261,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/rose/teapot
 	name = "rosellusk teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotrose
+	output = /obj/item/reagent_containers/glass/carafe/teapot/rose
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/rose/ring
@@ -1411,7 +1411,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/teapot
 	name = "onyxa teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotonyxa
+	output = /obj/item/reagent_containers/glass/carafe/teapot/onyxa
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/ring
@@ -1711,7 +1711,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/coral/teapot
 	name = "aoetal teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotcoral
+	output = /obj/item/reagent_containers/glass/carafe/teapot/coral
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/coral/platter
@@ -1861,7 +1861,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/amber/teapot
 	name = "petriamber teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotamber
+	output = /obj/item/reagent_containers/glass/carafe/teapot/amber
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/amber/platter
@@ -1991,7 +1991,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/opal/teapot
 	name = "opaloise teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotopal
+	output = /obj/item/reagent_containers/glass/carafe/teapot/opal
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/opal/platter

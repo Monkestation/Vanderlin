@@ -253,3 +253,29 @@
 	var/atom/throw_target = get_edge_target_turf(basic_mob, get_dir(basic_mob, target)) //ill be real I got no idea why this worked.
 	target.throw_at(throw_target, 7, 4)
 	target.adjustBruteLoss(20)
+
+/datum/ai_behavior/basic_melee_attack/species_hostile/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+	. = ..()
+
+	var/mob/living/pawn = controller.pawn
+	//targetting datum will kill the action if not real anymore
+	var/mob/living/target = controller.blackboard[target_key]
+	if(!isliving(target))
+		return
+	if(!pawn.cmode)
+		pawn.cmode = TRUE
+	var/obj/item/weapon = pawn.get_active_held_item()
+	var/obj/item/offweapon = pawn.get_inactive_held_item()
+	if(HAS_TRAIT(pawn, TRAIT_DODGEEXPERT))
+		pawn.d_intent = INTENT_DODGE
+	else
+		if(weapon)
+			if(pawn.d_intent != INTENT_PARRY)
+				pawn.d_intent = INTENT_PARRY
+	if(weapon)
+		if(!HAS_TRAIT(weapon, TRAIT_WIELDED))
+			if(weapon.force_wielded > weapon.force)
+				if(!offweapon)
+					weapon.attack_self(pawn)
+	if(!weapon && !offweapon)
+		pawn.d_intent = INTENT_DODGE

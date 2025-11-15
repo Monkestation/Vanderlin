@@ -3,7 +3,7 @@
 
 /obj/item/weapon/polearm
 	throwforce = DAMAGE_STAFF
-	icon = 'icons/roguetown/weapons/64.dmi'
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -166,7 +166,7 @@
 	gripped_intents = list(POLEARM_BASH,/datum/intent/mace/smash)
 	name = "iron quarterstaff"
 	desc = "A perfect tool for bounty hunters who prefer their prisoners broken and bruised but not slain. This reinforced staff is capable of clubbing even an armed opponent into submission with some carefully placed strikes."
-	icon_state = "ironstaff"
+	icon_state = "quarterstaff_iron"
 	minstr = 7
 	max_integrity = INTEGRITY_STRONG
 
@@ -175,7 +175,7 @@
 	gripped_intents = list(POLEARM_BASH,/datum/intent/mace/smash)
 	name = "steel quarterstaff"
 	desc = "An unusual sight, a knightly combat staff made out of worked steel and reinforced wood. It is a heavy and powerful weapon, more than capable of beating the living daylights out of any brigand."
-	icon_state = "steelstaff"
+	icon_state = "quarterstaff_steel"
 	minstr = 7
 	max_integrity = INTEGRITY_STRONGEST
 
@@ -227,39 +227,36 @@
 /obj/item/weapon/polearm/spear/abyssor
 	name = "depthseeker"
 	desc = "An instrument of Abyssor's wrath to punish the ignorant."
+	icon = 'icons/roguetown/weapons/64/patron.dmi'
+	icon_state = "gsspear"
 	force_wielded = DAMAGE_SPEAR_WIELD+2
 	throwforce = DAMAGE_SPEAR_WIELD
-	icon_state = "gsspear"
 
 /obj/item/weapon/polearm/spear/assegai
 	name = "iron assegai"
-	desc = "a long spear originating from the southern regions of Lakkari. Lakkarian women in the city of Sebbet are taught to use assegai so they can defend themselves against Zalad bandits."
+	desc = "a long spear originating from the southern regions of Lakkari. Lakkarian women in the city of Sekket are taught to use assegai so they can defend themselves against Zalad bandits."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "assegai_iron"
+	gripsprite = FALSE
 	possible_item_intents = list(SPEAR_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_BASH)
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR_WIELD
-	icon = 'icons/roguetown/weapons/64.dmi'
-	icon_state = "assegai_iron"
-	gripsprite = FALSE
 
 /obj/item/weapon/polearm/spear/steel/assegai
 	name = "steel assegai"
-	desc = "a long spear originating from the southern regions of Lakkari. Lakkarian women in the city of Sebbet are taught to use assegai so they can defend themselves against Zalad bandits."
-	possible_item_intents = list(SPEAR_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_BASH)
-	force_wielded = DAMAGE_SPEAR_WIELD+2
-	throwforce = DAMAGE_SPEAR_WIELD
-	icon = 'icons/roguetown/weapons/64.dmi'
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_steel"
-	gripsprite = FALSE
+	force_wielded = DAMAGE_SPEAR_WIELD + 2
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
-	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_SPEAR_WIELD
 	name = "psydonian spear"
 	desc = "A polearm with a twisting trident head perfect for mangling the bodies of the impure."
+	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyspear"
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR_WIELD
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_STRONG
@@ -298,6 +295,20 @@
 	wbalance = EASY_TO_DODGE
 	sellprice = 60
 
+/obj/item/weapon/polearm/spear/billhook/ji
+	name = "steel dagger-ax"
+	desc = "An eastern polearm of ancient design. It's rarely seen on the battlefield these daes."
+	icon_state = "ji_steel"
+	wdefense = GOOD_PARRY
+	wbalance = null
+	gripsprite = FALSE
+
+/obj/item/weapon/polearm/spear/billhook/ji/iron
+	name = "iron dagger-ax"
+	icon_state = "ji_iron"
+	melting_material = /datum/material/iron
+	melt_amount = 75
+	max_integrity = INTEGRITY_STANDARD
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
@@ -378,15 +389,15 @@
 //originally in the axes.dm file, moved here because they inherit from the bardiche
 //................ Woodcutter Axe ............... //
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter
+	name = "woodcutter axe"
+	desc = "The tool, weapon, and loyal companion of woodcutters. Able to chop mighty trees and repel the threats of the forest."
+	icon = 'icons/roguetown/weapons/64/axes.dmi'
+	icon_state = "woodcutter"
 	slot_flags = ITEM_SLOT_BACK
 	bigboy = TRUE
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	possible_item_intents = list(/datum/intent/axe/cut)
-	name = "woodcutter axe"
-	desc = "The tool, weapon, and loyal companion of woodcutters. Able to chop mighty trees and repel the threats of the forest."
-	icon_state = "woodcutter"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
@@ -417,14 +428,14 @@
 //................ War Axe ............... //
 //attempting to fix transformation issues//it worked wohoo, don't touch it.
 /obj/item/weapon/polearm/halberd/bardiche/warcutter
+	name = "footman war axe"
+	desc = "An enormous spiked axe. The ideal choice for a militiaman wanting to cut a fancy noble whoreson down to size."
+	icon = 'icons/roguetown/weapons/64/axes.dmi'
+	icon_state = "warcutter"
 	slot_flags = ITEM_SLOT_BACK
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
 	possible_item_intents = list(/datum/intent/axe/cut)
-	name = "footman war axe"
-	desc = "An enormous spiked axe. The ideal choice for a militiaman wanting to cut a fancy noble whoreson down to size."
-	icon_state = "warcutter"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	bigboy = TRUE
@@ -459,6 +470,7 @@
 	force_wielded = DAMAGE_HALBERD_WIELD
 	name = "psydonian halberd"
 	desc = "A mighty halberd capable of cutting down the heretical with remarkable ease, be it effigy, man, or beast."
+	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyhalberd"
 	melting_material = /datum/material/silver
 	melt_amount = 150
@@ -514,6 +526,7 @@
 /obj/item/weapon/polearm/halberd/bardiche/dendor
 	name = "summer scythe"
 	desc = "Summer's verdancy runs through the head of this scythe. All the more to sow."
+	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "dendorscythe"
 	gripped_intents = list(POLEARM_THRUST, /datum/intent/spear/cut/bardiche/scythe, /datum/intent/axe/chop/scythe, POLEARM_BASH)
 
@@ -582,6 +595,7 @@
 /obj/item/weapon/polearm/spear/hoplite/abyssal
 	name = "Abyssal spear"
 	desc = "A spear with a toothed end, inspired after the teeth of an abyssal monstrosity"
+	icon = 'icons/roguetown/weapons/64/ancient.dmi'
 	icon_state = "ancient_spear"
 	wdefense = ULTMATE_PARRY
 	sellprice = 40
@@ -599,14 +613,14 @@
 
 //scythe
 /obj/item/weapon/sickle/scythe
+	name = "scythe"
+	desc = "A humble farming tool with long reach, traditionally used to cut grass or wheat."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "scythe"
 	force = 10
 	force_wielded = 20
 	possible_item_intents = list(SPEAR_CUT) //truly just a long knife
 	gripped_intents = list(SPEAR_CUT)
-	name = "scythe"
-	desc = "A humble farming tool with long reach, traditionally used to cut grass or wheat."
-	icon_state = "scythe"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -685,12 +699,12 @@
 /obj/item/weapon/spear/naginata
 	name = "Naginata"
 	desc = "A traditional Kazengunese polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of Kazengunese bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "naginata"
 	force = 16
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/spear/cut/naginata, /datum/intent/spear/bash) // no stab for you little chuddy, it's a slashing weapon
 	gripped_intents = list(/datum/intent/rend/reach, /datum/intent/spear/cut/naginata, /datum/intent/spear/bash)
-	icon_state = "naginata"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	minstr = 7
 	max_blade_int = 50 //Nippon suteeru (dogshit)
 	wdefense = 5
@@ -713,8 +727,8 @@
 	reach = 2
 
 /obj/item/weapon/polearm/woodstaff/naledi
-	name = "naledian warstaff"
-	desc = "A staff carrying the crescent moon of Psydon's knowledge, as well as the black and gold insignia of the war scholars."
+	name = "psydonian warstaff"
+	desc = "A staff carrying the black and gold insignia of the war scholars."
 	icon_state = "naledistaff"
 	possible_item_intents = list(/datum/intent/spear/bash)
 	gripped_intents = list(/datum/intent/spear/bash/ranged,/datum/intent/mace/smash/wood/ranged)

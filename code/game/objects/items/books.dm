@@ -1507,7 +1507,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		to_chat(span_warning("I study [src], but this verba still eludes me..."))
+		to_chat(user, span_warning("I study [src], but this verba still eludes me..."))
 		user.adjust_experience(/datum/skill/misc/reading, 4, FALSE) //?
 		return
 	if(!in_range(user, src) && !isobserver(user))

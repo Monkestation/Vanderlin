@@ -5,15 +5,17 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 1 // THE ONE.
 	spawn_positions = 1
-	allowed_races = list(SPEC_ID_HUMEN)
+	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
 	allowed_patrons = list(/datum/patron/psydon) //You MUST have a Psydonite character to start. Just so people don't get japed into Oops Suddenly Psydon!
 	tutorial = "The Oratorium claims you are naught more than a 'cleric', but you know the truth; you are a sacrificial lamb. Your hands, unmarred through prayer and pacifism, have been gifted with the power to manipulate blood - to siphon away the wounds of others, so that you may endure in their stead. Let your censer's light shepherd the Inquisitor's retinue forth, lest they're led astray by wrath and temptation."
 	selection_color = JCOLOR_INQUISITION
-	outfit = /datum/outfit/job/absolver
+	outfit = /datum/outfit/absolver
 	bypass_lastclass = TRUE
 	display_order = JDO_ABSOLVER
 	min_pq = 3 // Low potential for grief. A pacifist by trade. Also needs to know wtf a PSYDON is.
 	give_bank_account = 15
+	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
+	antag_role = /datum/antagonist/purishep
 
 	traits = list(
 		TRAIT_NOPAINSTUN,
@@ -23,6 +25,8 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 	)
 
 	jobstats = list(
@@ -48,28 +52,35 @@
 		/datum/skill/labor/fishing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE, // they need this so Psydon's Grace works
 	)
+
+	languages = list(/datum/language/oldpsydonic)
 
 
 // REMEMBER FLAGELLANT? REMEMBER LASZLO? THIS IS HIM NOW. FEEL OLD YET?
 
-/datum/job/absolver/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+/datum/job/absolver/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.grant_language(/datum/language/oldpsydonic)
-		H.verbs |= /mob/living/carbon/human/proc/view_inquisition
+	GLOB.inquisition.add_member_to_school(spawned, "Sanctae", 0, "Absolver")
 
-/datum/outfit/job/absolver/pre_equip(mob/living/carbon/human/H)
-	..()
+	spawned.verbs |= /mob/living/carbon/human/proc/view_inquisition
 
-	H.hud_used?.shutdown_bloodpool()
-	H.hud_used?.initialize_bloodpool()
-	H.hud_used?.bloodpool.set_fill_color("#dcdddb")
-	H?.hud_used?.bloodpool?.name = "Psydon's Grace: [H.bloodpool]"
-	H?.hud_used?.bloodpool?.desc = "Devotion: [H.bloodpool]/[H.maxbloodpool]"
-	H.maxbloodpool = 1000
+	spawned.hud_used?.shutdown_bloodpool()
+	spawned.hud_used?.initialize_bloodpool()
+	spawned.hud_used?.bloodpool.set_fill_color("#dcdddb")
+	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
+	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
+	spawned.maxbloodpool = 1000
 
+	var/datum/species/species = spawned.dna?.species
+	if(!species)
+		return
+	species.native_language = "Old Psydonic"
+	species.accent_language = species.get_accent(species.native_language)
+
+/datum/outfit/absolver
+	name = "Absolver"
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
 	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser
@@ -94,7 +105,3 @@
 		/obj/item/natural/worms/leech = 1,
 		/obj/item/key/inquisition = 1,
 		)
-
-/datum/outfit/job/absolver/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	GLOB.inquisition.add_member_to_school(H, "Sanctae", 0, "Absolver")

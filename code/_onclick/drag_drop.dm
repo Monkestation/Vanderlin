@@ -179,6 +179,7 @@
 	var/obj/effect/spell_rune/spell_rune
 	var/datum/intent/curplaying
 	var/accent = ACCENT_DEFAULT
+	var/cmode_timer
 
 /client/MouseUp(object, location, control, params)
 	if(!control)

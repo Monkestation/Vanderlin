@@ -428,7 +428,7 @@
 	ADD_TRAIT(character, TRAIT_BETTER_SLEEP, "[type]")
 	ADD_TRAIT(character, TRAIT_EXTEROCEPTION, "[type]")
 	character.change_stat(STATKEY_LCK, 1)
-	character.add_stress(/datum/stress_event/blessed)
+	character.add_stress(/datum/stress_event/blessed/permanent)
 
 //neutral
 /datum/special_trait/backproblems
@@ -526,7 +526,7 @@
 	greet_text = span_boldwarning("I've been denounced by the church for either reasons legitimate or not!")
 	req_text = "Non-church role"
 	weight = 20
-	restricted_jobs = list(CHURCHMEN)
+	restricted_jobs = list(/datum/job/priest, /datum/job/monk, /datum/job/undertaker, /datum/job/templar, /datum/job/churchling)
 
 /datum/special_trait/hussite/on_apply(mob/living/carbon/human/character, silent)
 	GLOB.excommunicated_players += character.real_name
@@ -664,9 +664,10 @@
 	character.adjust_skillrank(/datum/skill/combat/wrestling, 6, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
 	character.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	character.set_stat_modifier("[type]", STATKEY_STR, 20)
-	character.set_stat_modifier("[type]", STATKEY_CON, 20)
-	character.set_stat_modifier("[type]", STATKEY_END, 20)
+	character.base_constitution = 20
+	character.base_strength = 20
+	character.base_endurance = 20
+	character.recalculate_stats()
 
 /datum/special_trait/my_precious
 	name = "My Precious"
@@ -776,8 +777,8 @@
 	switch(character.patron?.type)
 		if(/datum/patron/divine/astrata)
 			psycross = /obj/item/clothing/neck/psycross/silver/astrata
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/astrata
-			cloak = /obj/item/clothing/cloak/stabard/templar/astrata
+			helmet = /obj/item/clothing/head/helmet/heavy/astratahelm
+			cloak = /obj/item/clothing/cloak/templar/astratan
 			weapon = /obj/item/weapon/sword/long/exe/astrata
 			character.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
@@ -796,14 +797,14 @@
 			character.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
 		if(/datum/patron/divine/necra)
 			psycross = /obj/item/clothing/neck/psycross/silver/necra
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/necra
-			cloak = /obj/item/clothing/cloak/stabard/templar/necra
+			helmet = /obj/item/clothing/head/helmet/heavy/necrahelm
+			cloak = /obj/item/clothing/cloak/templar/necran
 			weapon = /obj/item/weapon/flail/sflail/necraflail
 			character.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 		if(/datum/patron/divine/pestra)
 			psycross = /obj/item/clothing/neck/psycross/silver/pestra
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
-			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
+			cloak = /obj/item/clothing/cloak/templar/pestran
 			weapon = /obj/item/weapon/knife/dagger/steel/pestrasickle
 			character.mind.special_items["Second Weapon"] = /obj/item/weapon/knife/dagger/steel/pestrasickle
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
@@ -820,19 +821,20 @@
 			ADD_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 		if(/datum/patron/divine/ravox)
 			psycross = /obj/item/clothing/neck/psycross/silver/ravox
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/ravox
+			helmet = /obj/item/clothing/head/helmet/heavy/ravoxhelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 			weapon = /obj/item/weapon/sword/long/ravox
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		if(/datum/patron/divine/malum)
 			psycross = /obj/item/clothing/neck/psycross/silver/malum
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
-			cloak = /obj/item/clothing/cloak/stabard/templar/malum
+			cloak = /obj/item/clothing/cloak/templar/malumite
 			weapon = /obj/item/weapon/mace/goden/steel/malum
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 			character.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
 		if(/datum/patron/divine/abyssor)
 			psycross = /obj/item/clothing/neck/psycross/silver/abyssor
+			helmet = /obj/item/clothing/head/helmet/heavy/abyssorgreathelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 			weapon = /obj/item/weapon/polearm/spear/abyssor
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
@@ -841,7 +843,7 @@
 		if(/datum/patron/divine/xylix)
 			psycross = /obj/item/clothing/neck/psycross/silver/xylix
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/xylix
-			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
+			cloak = /obj/item/clothing/cloak/templar/xylixian
 			weapon = /obj/item/weapon/whip/xylix
 			character.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4, TRUE)
 		if(/datum/patron/inhumen/graggar_zizo) //In case a admin decide to give them graggazo roundstart
@@ -849,6 +851,10 @@
 			helmet = /obj/item/clothing/head/helmet/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			weapon = /obj/item/weapon/sword/long/judgement/evil
+		else
+			cloak = /obj/item/clothing/cloak/templar/undivided
+			psycross = /obj/item/clothing/neck/psycross/silver/undivided
+			weapon = /obj/item/weapon/sword/long/decorated
 	if(!character.has_language(/datum/language/celestial))
 		character.grant_language(/datum/language/celestial)
 		to_chat(character, span_info("I can speak Celestial with ,c before my speech."))
@@ -901,3 +907,61 @@
 	character.add_spell(/datum/action/cooldown/spell/undirected/howl/call_of_the_moon, silent = TRUE)
 	ADD_TRAIT(character, TRAIT_NASTY_EATER, "[type]") // eat the raw meat
 
+/datum/special_trait/glutton
+	name = "The Glutton"
+	greet_text = span_notice("Baotha has cursed my entire bloodline, demanding that we indulge in luxuries and dine in decadance.")
+	weight = 20
+	req_text = "Monarch"
+	allowed_jobs = list(/datum/job/lord)
+
+/datum/special_trait/glutton/on_apply(mob/living/carbon/human/character, silent)
+	character.set_stat_modifier("[type]", STATKEY_STR, 5)
+	character.set_stat_modifier("[type]", STATKEY_CON, 7)
+	character.set_stat_modifier("[type]", STATKEY_END, -6)
+	character.set_stat_modifier("[type]", STATKEY_SPD, -10)
+
+	character.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE) // this guy will sit on you
+	character.adjust_skillrank(/datum/skill/misc/athletics, -3, TRUE)
+
+	ADD_TRAIT(character, TRAIT_FAT, "[type]")
+	ADD_TRAIT(character, TRAIT_CRITICAL_RESISTANCE, "[type]")
+
+	character.family_datum.AddFamilyCurse(/datum/family_curse/hunger, 1, BAOTHA)
+
+	character.transform = character.transform.Scale(1.15, 1)
+	character.update_transform()
+	character.RemoveElement(/datum/element/footstep, character.footstep_type, 1, -6)
+	character.AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
+	character.verbs |= /mob/living/carbon/human/proc/emote_burp_loud
+	var/datum/voicepack/glutton/sound_m = new()
+	var/datum/voicepack/glutton/sound_f = new()
+	sound_m.parent_datum = character.dna.species.soundpack_m
+	sound_f.parent_datum = character.dna.species.soundpack_f
+	character.dna.species.soundpack_m = sound_m
+	character.dna.species.soundpack_f = sound_f
+
+/datum/emote/living/burp_loud
+	key = "burploud"
+	emote_type = EMOTE_AUDIBLE
+	key_third_person = "burps gluttonously"
+	message = "burps gluttonously!"
+	snd_range = 4
+	snd_vol = 200
+	mute_time = 100 // little less spammable
+
+/mob/living/carbon/human/proc/emote_burp_loud()
+	set name = "Gluttonous Burp"
+	set category = "Noises"
+
+	emote("burploud", intentional = TRUE)
+
+/datum/special_trait/musical
+	name = "Musical Legend"
+	greet_text = span_notice("I am very good with instruments! though my previous one got stolen..")
+	weight = 50
+
+/datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+	var/datum/inspiration/I = new /datum/inspiration(character)
+	I.grant_inspiration(character, bard_tier = BARD_T2)
+	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)

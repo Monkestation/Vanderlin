@@ -46,6 +46,7 @@
 		/turf/closed/wall/mineral/desert_soapstone,
 		/turf/open/floor/cracked_earth,
 		/turf/open/floor/flesh,
+		/turf/open/dungeon_trap,
 	) \
 	+ typesof(/turf/open/floor/mushroom) \
 	+ typesof(/turf/open/floor/sandstone_tile) \

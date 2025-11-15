@@ -12,13 +12,13 @@
 
 	influence_sets = list(
 		"Set 1" = list(
-			STATS_LAWS_AND_DECREES_MADE = list("name" = "Laws and decrees:", "points" = 2.75, "capacity" = 40),
+			STATS_LAWS_AND_DECREES_MADE = list("name" = "Laws and decrees:", "points" = 2.6, "capacity" = 40),
 		),
 		"Set 2" = list(
-			STATS_ALIVE_NOBLES = list("name" = "Number of nobles:", "points" = 2.375, "capacity" = 60),
+			STATS_ALIVE_NOBLES = list("name" = "Number of nobles:", "points" = 2.25, "capacity" = 60),
 		),
 		"Set 3" = list(
-			STATS_NOBLE_DEATHS = list("name" = "Noble deaths:", "points" = -3.25, "capacity" = -60),
+			STATS_NOBLE_DEATHS = list("name" = "Noble deaths:", "points" = -3.5, "capacity" = -60),
 			STATS_PEOPLE_SMITTEN = list("name" = "People smitten:", "points" = 6, "capacity" = 40),
 		),
 		"Set 4" = list(
@@ -26,8 +26,8 @@
 			STATS_PRAYERS_MADE = list("name" = "Prayers made:", "points" = 1.375, "capacity" = 65),
 		),
 		"Set 5" = list(
-			STATS_TAXES_COLLECTED = list("name" = "Taxes collected:", "points" = 0.21, "capacity" = 80),
-			STATS_SLURS_SPOKEN = list("name" = "Slurs spoken:", "points" = 1.45, "capacity" = 80),
+			STATS_TAXES_COLLECTED = list("name" = "Taxes collected:", "points" = 0.215, "capacity" = 80),
+			STATS_SLURS_SPOKEN = list("name" = "Slurs spoken:", "points" = 1.425, "capacity" = 70),
 		)
 	)
 
@@ -52,10 +52,10 @@
 			STATS_BOOKS_PRINTED = list("name" = "Books printed:", "points" = 4, "capacity" = 40),
 		),
 		"Set 2" = list(
-			STATS_LITERACY_TAUGHT = list("name" = "Literacy taught:", "points" = 10, "capacity" = 65),
+			STATS_LITERACY_TAUGHT = list("name" = "Literacy taught:", "points" = 12.5, "capacity" = 65),
 		),
 		"Set 3" = list(
-			STATS_ILLITERATES = list("name" = "Number of illiterates:", "points" = -2.75, "capacity" = -40),
+			STATS_ILLITERATES = list("name" = "Number of illiterates:", "points" = -2.5, "capacity" = -40),
 		),
 		"Set 4" = list(
 			STATS_SKILLS_DREAMED = list("name" = "Skills dreamed:", "points" = 0.265, "capacity" = 80),
@@ -97,13 +97,13 @@
 			STATS_PARRIES = list("name" = "Parries made:", "points" = 0.0535, "capacity" = 100),
 		),
 		"Set 3" = list(
-			STATS_WARCRIES = list("name" = "Warcries made:", "points" = 0.375, "capacity" = 50),
+			STATS_WARCRIES = list("name" = "Warcries made:", "points" = 0.325, "capacity" = 50),
 		),
 		"Set 4" = list(
 			STATS_YIELDS = list("name" = "Yields made:", "points" = -4, "capacity" = -40),
 		),
 		"Set 5" = list(
-			STATS_UNDERWORLD_DUELS = list("name" = "Underworld duels:", "points" = 6, "capacity" = 65),
+			STATS_UNDERWORLD_DUELS = list("name" = "Underworld duels:", "points" = 6, "capacity" = 60),
 		)
 	)
 
@@ -123,21 +123,21 @@
 
 	influence_sets = list(
 		"Set 1" = list(
-			STATS_FISH_CAUGHT = list("name" = "Fish caught:", "points" = 1.75, "capacity" = 80),
+			STATS_FISH_CAUGHT = list("name" = "Fish caught:", "points" = 1.5, "capacity" = 80),
 		),
 		"Set 2" = list(
 			STATS_WATER_CONSUMED = list("name" = "Water consumed:", "points" = 0.014, "capacity" = 90),
 		),
 		"Set 3" = list(
-			STATS_ABYSSOR_REMEMBERED = list("name" = "Abyssor remembered:", "points" = 1.25, "capacity" = 50),
+			STATS_ABYSSOR_REMEMBERED = list("name" = "Abyssor remembered:", "points" = 1.1, "capacity" = 50),
 			STATS_ALIVE_TRITONS = list("name" = "Number of tritons:", "points" = 8, "capacity" = 70),
 		),
 		"Set 4" = list(
-			STATS_LEECHES_EMBEDDED = list("name" = "Leeches embedded:", "points" = 0.75, "capacity" = 70),
+			STATS_LEECHES_EMBEDDED = list("name" = "Leeches embedded:", "points" = 0.7, "capacity" = 70),
 		),
 		"Set 5" = list(
 			STATS_PEOPLE_DROWNED = list("name" = "People drowned:", "points" = 12, "capacity" = 75),
-			STATS_BATHS_TAKEN = list("name" = "Baths taken:", "points" = 4.25, "capacity" = 60),
+			STATS_BATHS_TAKEN = list("name" = "Baths taken:", "points" = 4, "capacity" = 60),
 		)
 	)
 
@@ -173,7 +173,7 @@
 			STATS_LAUGHS_MADE = list("name" = "Laughs had:", "points" = 0.285, "capacity" = 85),
 		),
 		"Set 2" = list(
-			STATS_GAMES_RIGGED = list("name" = "Games rigged:", "points" = 4.25, "capacity" = 40),
+			STATS_GAMES_RIGGED = list("name" = "Games rigged:", "points" = 4, "capacity" = 40),
 		),
 		"Set 3" = list(
 			STATS_PEOPLE_MOCKED = list("name" = "People mocked:", "points" = 5.5, "capacity" = 60),
@@ -182,7 +182,7 @@
 			STATS_CRITS_MADE = list("name" = "Crits made:", "points" = 0.285, "capacity" = 90),
 		),
 		"Set 5" = list(
-			STATS_SONGS_PLAYED = list("name" = "Songs played:", "points" = 0.8, "capacity" = 70),
+			STATS_SONGS_PLAYED = list("name" = "Songs played:", "points" = 0.775, "capacity" = 70),
 			STATS_MOAT_FALLERS = list("name" = "Moat fallers:", "points" = 5, "capacity" = 50),
 		)
 	)
@@ -246,20 +246,20 @@
 	influence_sets = list(
 		"Set 1" = list(
 			STATS_POTIONS_BREWED = list("name" = "Potions brewed:", "points" = 2.75, "capacity" = 70),
+			STATS_ANIMALS_BRED = list("name" = "Animals bred:", "points" = 1.5, "capacity" = 60),
 		),
 		"Set 2" = list(
-			STATS_WOUNDS_SEWED = list("name" = "Wounds sewed up:", "points" = 0.45, "capacity" = 100),
+			STATS_WOUNDS_SEWED = list("name" = "Wounds sewed up:", "points" = 0.75, "capacity" = 90),
 		),
 		"Set 3" = list(
 			STATS_LUX_HARVESTED = list("name" = "Lux extracted:", "points" = 8, "capacity" = 70),
 			STATS_LUX_REVIVALS = list("name" = "Lux revivals:", "points" = 16, "capacity" = 70),
 		),
 		"Set 4" = list(
-			STATS_ANIMALS_BRED = list("name" = "Animals bred:", "points" = 5.5, "capacity" = 65),
-			STATS_ALIVE_MEDICATORS = list("name" = "Number of medicators:", "points" = 7.5, "capacity" = 70),
+			STATS_ALIVE_MEDICATORS = list("name" = "Number of medicators:", "points" = 8, "capacity" = 70),
 		),
 		"Set 5" = list(
-			STATS_FOOD_ROTTED = list("name" = "Food rotted:", "points" = 0.225, "capacity" = 80),
+			STATS_FOOD_ROTTED = list("name" = "Food rotted:", "points" = 0.175, "capacity" = 80),
 		)
 	)
 
@@ -286,20 +286,20 @@
 
 	influence_sets = list(
 		"Set 1" = list(
-			STATS_MASTERWORKS_FORGED = list("name" = "Masterworks forged:", "points" = 6, "capacity" = 80),
+			STATS_MASTERWORKS_FORGED = list("name" = "Masterworks forged:", "points" = 4.75, "capacity" = 70),
 		),
 		"Set 2" = list(
-			STATS_ROCKS_MINED = list("name" = "Rocks mined:", "points" = 0.25, "capacity" = 100),
+			STATS_ROCKS_MINED = list("name" = "Rocks mined:", "points" = 0.25, "capacity" = 90),
 		),
 		"Set 3" = list(
 			STATS_CRAFT_SKILLS = list("name" = "Craft skills learned:", "points" = 0.7, "capacity" = 80),
 		),
 		"Set 4" = list(
-			STATS_BEARDS_SHAVED = list("name" = "Beards shaved:", "points" = -4, "capacity" = -40),
 			STATS_ALIVE_DWARVES = list("name" = "Number of dwarfs:", "points" = 4.25, "capacity" = 50),
 		),
 		"Set 5" = list(
-			STATS_BLACKSTEEL_SMELTED = list("name" = "Blacksteel smelted:", "points" = 4.75, "capacity" = 65),
+			STATS_BLACKSTEEL_SMELTED = list("name" = "Blacksteel smelted:", "points" = 4.5, "capacity" = 60),
+			STATS_BEARDS_SHAVED = list("name" = "Beards shaved:", "points" = -4, "capacity" = -40),
 		)
 	)
 
@@ -327,21 +327,21 @@
 
 	influence_sets = list(
 		"Set 1" = list(
-			STATS_PARENTS = list("name" = "Number of parents:", "points" = 8.5, "capacity" = 90),
-			STATS_CHILD_POPULATION = list("name" = "Number of children:", "points" = 7, "capacity" = 75),
+			STATS_PARENTS = list("name" = "Number of parents:", "points" = 7.5, "capacity" = 80),
+			STATS_CHILD_POPULATION = list("name" = "Number of children:", "points" = 6.25, "capacity" = 70),
 		),
 		"Set 2" = list(
 			STATS_MARRIAGES = list("name" = "Marriages made:", "points" = 20, "capacity" = 80),
-			STATS_PACIFISTS = list("name" = "Number of pacifists:", "points" = 15, "capacity" = 75),
+			STATS_PACIFISTS = list("name" = "Number of pacifists:", "points" = 12.5, "capacity" = 75),
 		),
 		"Set 3" = list(
-			STATS_HUGS_MADE = list("name" = "Hugs made:", "points" = 2.25, "capacity" = 70),
+			STATS_HUGS_MADE = list("name" = "Hugs made:", "points" = 2.15, "capacity" = 70),
 		),
 		"Set 4" = list(
-			STATS_HANDS_HELD = list("name" = "Hands held:", "points" = 2.25, "capacity" = 70),
+			STATS_HANDS_HELD = list("name" = "Hands held:", "points" = 2.15, "capacity" = 70),
 		),
 		"Set 5" = list(
-			STATS_CLINGY_PEOPLE = list("name" = "Clingy people:", "points" = 6.25, "capacity" = 75),
+			STATS_CLINGY_PEOPLE = list("name" = "Clingy people:", "points" = 4.5, "capacity" = 70),
 			STATS_ALIVE_HARPIES = list("name" = "Number of harpies:", "points" = 8, "capacity" = 70),
 		)
 	)
@@ -375,16 +375,16 @@
 			STATS_WEREVOLVES = list("name" = "Number of werevolves:", "points" = 12.5, "capacity" = 65),
 		),
 		"Set 2" = list(
-			STATS_PLANTS_HARVESTED = list("name" = "Plants harvested:", "points" = 0.675, "capacity" = 90),
+			STATS_PLANTS_HARVESTED = list("name" = "Plants harvested:", "points" = 0.675, "capacity" = 80),
 		),
 		"Set 3" = list(
-			STATS_FOREST_DEATHS = list("name" = "Forest deaths:", "points" = 6, "capacity" = 90),
+			STATS_FOREST_DEATHS = list("name" = "Forest deaths:", "points" = 6, "capacity" = 80),
 		),
 		"Set 4" = list(
 			STATS_DENDOR_SACRIFICES = list("name" = "Sacrifices to Dendor:", "points" = 12.5, "capacity" = 75),
 		),
 		"Set 5" = list(
-			STATS_ANIMALS_TAMED = list("name" = "Animals tamed:", "points" = 5, "capacity" = 60),
+			STATS_ANIMALS_TAMED = list("name" = "Animals tamed:", "points" = 4.5, "capacity" = 60),
 		)
 	)
 
@@ -396,6 +396,7 @@
 	welcome_text = "You will kneel."
 	weight = 4
 	always_votable = TRUE
+	follower_modifier = LOWER_INHUMEN_FOLLOWER_MODIFIER
 	color_theme = "#CC4444"
 
 	tag_multipliers = list(
@@ -427,10 +428,10 @@
 			STATS_DEADITES_WOKEN_UP = list("name" = "Deadites woken up:", "points" = 4.5, "capacity" = 85),
 		),
 		"Set 4" = list(
-			STATS_CLERGY_DEATHS = list("name" = "Clergy killed:", "points" = 12.25, "capacity" = 70),
+			STATS_CLERGY_DEATHS = list("name" = "Clergy killed:", "points" = 12.5, "capacity" = 70),
 		),
 		"Set 5" = list(
-			STATS_TORTURES = list("name" = "Tortures performed:", "points" = 5.75, "capacity" = 70),
+			STATS_TORTURES = list("name" = "Tortures performed:", "points" = 6.25, "capacity" = 70),
 		)
 	)
 
@@ -442,6 +443,7 @@
 	welcome_text = "The world bends to my whims."
 	weight = 4
 	always_votable = TRUE
+	follower_modifier = STANDARD_INHUMEN_MODIFIER
 	color_theme = "#9933FF"
 
 	tag_multipliers = list(
@@ -487,6 +489,7 @@
 	welcome_text = "Victory or death!"
 	weight = 4
 	always_votable = TRUE
+	follower_modifier = STANDARD_INHUMEN_MODIFIER
 	color_theme = "#8B3A3A"
 
 	tag_multipliers = list(
@@ -509,7 +512,7 @@
 	influence_sets = list(
 		"Set 1" = list(
 			STATS_HUNTED_PEOPLE = list("name" = "Number of available prey:", "points" = 10, "capacity" = 80),
-			STATS_ASSASSINATIONS = list("name" = "Successful assasinations:", "points" = 20, "capacity" = 80),
+			STATS_ASSASSINATIONS = list("name" = "Successful assasinations:", "points" = 25, "capacity" = 75),
 		),
 		"Set 2" = list(
 			STATS_BLOOD_SPILT = list("name" = "Blood spilt:", "points" = 0.03, "capacity" = 90),
@@ -518,7 +521,7 @@
 			STATS_ORGANS_EATEN = list("name" = "Organs eaten:", "points" = 4.75, "capacity" = 70),
 		),
 		"Set 4" = list(
-			STATS_LIMBS_BITTEN = list("name" = "Limbs bitten:", "points" = 1.425, "capacity" = 70),
+			STATS_LIMBS_BITTEN = list("name" = "Limbs bitten:", "points" = 1.25, "capacity" = 70),
 			STATS_ALIVE_HALF_ORCS = list("name" = "Number of half-orcs:", "points" = 8.5, "capacity" = 70),
 		),
 		"Set 5" = list(
@@ -534,6 +537,7 @@
 	welcome_text = "Fortune favors the cunning."
 	weight = 4
 	always_votable = TRUE
+	follower_modifier = LOWER_INHUMEN_FOLLOWER_MODIFIER
 	color_theme = "#8B4513"
 
 	tag_multipliers = list(
@@ -555,7 +559,7 @@
 
 	influence_sets = list(
 		"Set 1" = list(
-			STATS_ITEMS_PICKPOCKETED = list("name" = "Items pickpocketed:", "points" = 5.25, "capacity" = 80),
+			STATS_ITEMS_PICKPOCKETED = list("name" = "Items pickpocketed:", "points" = 5.5, "capacity" = 70),
 		),
 		"Set 2" = list(
 			STATS_SHRINE_VALUE = list("name" = "Value offered to his idol:", "points" = 0.0725, "capacity" = 70),
@@ -568,8 +572,8 @@
 			STATS_DODGES = list("name" = "Dodges made:", "points" = 0.0875, "capacity" = 100),
 		),
 		"Set 5" = list(
-			STATS_LOCKS_PICKED = list("name" = "Locks picked:", "points" = 4.5, "capacity" = 80),
-			STATS_GRAVES_ROBBED = list("name" = "Graves robbed:", "points" = 5.75, "capacity" = 60),
+			STATS_LOCKS_PICKED = list("name" = "Locks picked:", "points" = 4.5, "capacity" = 70),
+			STATS_GRAVES_ROBBED = list("name" = "Graves robbed:", "points" = 6, "capacity" = 60),
 		)
 	)
 

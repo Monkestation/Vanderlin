@@ -132,6 +132,7 @@
 	data += "<font color='#6b5ba1'><span class='bold'>Noble Deaths:</span></font> [GLOB.vanderlin_round_stats[STATS_NOBLE_DEATHS]]<br>"
 	data += "<font color='#e6b327'><span class='bold'>Holy Revivals:</span></font> [GLOB.vanderlin_round_stats[STATS_ASTRATA_REVIVALS]]<br>"
 	data += "<font color='#2dc5bd'><span class='bold'>Lux Revivals:</span></font> [GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]]<br>"
+	data += "<font color='#7cc05c'><span class='bold'>Wounds sewed:</span></font> [GLOB.vanderlin_round_stats[STATS_WOUNDS_SEWED]]<br>"
 	data += "<font color='#825b1c'><span class='bold'>Moat Fallers:</span></font> [GLOB.vanderlin_round_stats[STATS_MOAT_FALLERS]]<br>"
 	data += "<font color='#ac5d5d'><span class='bold'>Ankles Broken:</span></font> [GLOB.vanderlin_round_stats[STATS_ANKLES_BROKEN]]<br>"
 	data += "<font color='#e6d927'><span class='bold'>People Smitten:</span></font> [GLOB.vanderlin_round_stats[STATS_PEOPLE_SMITTEN]]<br>"
@@ -152,9 +153,10 @@
 	data += "<font color='#c65fc9'><span class='bold'>Marriages Perfomed:</span></font> [GLOB.vanderlin_round_stats[STATS_MARRIAGES]]<br>"
 	data += "<font color='#d7da2f'><span class='bold'>Prayers Made:</span></font> [GLOB.vanderlin_round_stats[STATS_PRAYERS_MADE]]<br>"
 	data += "<font color='#bacfd6'><span class='bold'>Graves Consecrated:</span></font> [GLOB.vanderlin_round_stats[STATS_GRAVES_CONSECRATED]]<br>"
+	data += "<font color='#7c7f80'><span class='bold'>Graves Robbed:</span></font> [GLOB.vanderlin_round_stats[STATS_GRAVES_ROBBED]]<br>"
 	data += "<font color='#9c3e46'><span class='bold'>Controlled Deadites:</span></font> [GLOB.vanderlin_round_stats[STATS_DEADITES_ALIVE]]<br>"
 	data += "<font color='#0f555c'><span class='bold'>Beards Shaved:</span></font> [GLOB.vanderlin_round_stats[STATS_BEARDS_SHAVED]]<br>"
-	data += "<font color='#6e7c81'><span class='bold'>Skills Learned:</span></font> [GLOB.vanderlin_round_stats[STATS_SKILLS_LEARNED]]<br>"
+	data += "<font color='#9fa3a5'><span class='bold'>Skills Learned:</span></font> [GLOB.vanderlin_round_stats[STATS_SKILLS_LEARNED]]<br>"
 	data += "<div style='height: 17.5px;'>&nbsp;</div>"
 	data += "<font color='#23af4d'><span class='bold'>Plants Harvested:</span></font> [GLOB.vanderlin_round_stats[STATS_PLANTS_HARVESTED]]<br>"
 	data += "<font color='#4492a5'><span class='bold'>Fish Caught:</span></font> [GLOB.vanderlin_round_stats[STATS_FISH_CAUGHT]]<br>"
@@ -189,6 +191,7 @@
 	data += "<font color='#556B2F'><span class='bold'>Garrison:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_GARRISON]]<br>"
 	data += "<font color='#DAA520'><span class='bold'>Clergy:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_CLERGY]]<br>"
 	data += "<font color='#D2691E'><span class='bold'>Tradesmen:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_TRADESMEN]]<br>"
+	data += "<font color='#d0cbd8'><span class='bold'>Foreigners:</span></font> [GLOB.vanderlin_round_stats[STATS_FOREIGNERS]]<br>"
 	data += "<font color='#eb76b0'><span class='bold'>Married:</span></font> [GLOB.vanderlin_round_stats[STATS_MARRIED]]<br>"
 	data += "<div style='height: 17.5px;'>&nbsp;</div>"
 	data += "<font color='#65d6d6'><span class='bold'>Literacy:</span></font> [literacy_rate] %<br>"
@@ -210,6 +213,7 @@
 	data += "<font color='#bd83cc'><span class='bold'>Half-Drows:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_HALF_DROWS]]<br>"
 	data += "<font color='#7729af'><span class='bold'>Dark Elves:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_DARK_ELVES]]<br>"
 	data += "<font color='#30b39f'><span class='bold'>Tritons:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_TRITONS]]<br>"
+	data += "<font color='#c0c25f'><span class='bold'>Halflings:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_HALFLINGS]]<br>"
 	data += "<div style='height: 17.5px;'>&nbsp;</div>"
 	data += "<font color='#228B22'><span class='bold'>Half-Orcs:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_HALF_ORCS]]<br>"
 	data += "<font color='#CD853F'><span class='bold'>Kobolds:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_KOBOLDS]]<br>"
@@ -228,7 +232,7 @@
 	data += "</div></div>"
 
 	mob << browse(null, "window=vanderlin_influences")
-	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1085, 820)
+	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1085, 855)
 	popup.set_content(data.Join())
 	popup.open()
 
@@ -429,7 +433,7 @@
 			data += "<div style='display: table; width: 100%;'>"
 			data += "<div style='display: table-row;'>"
 
-			var/stats_per_column = CEILING(length(SSgamemode.chosen_chronicle_stats)/4, 1)
+			var/stats_per_column = CEILING(length(SSgamemode.chosen_chronicle_stats) / 4, 1)
 			var/current_stat = 1
 
 			for(var/col in 1 to 4)
@@ -493,6 +497,7 @@
 			// Left column
 			data += "<div style='width: 44%; display: flex; justify-content: flex-end;'>"
 			data += "<div style='text-align: left; padding-right: 20px;'>"
+			data += "<div style='margin-bottom: 4px;'><font color='#cdd86f'>Mammons in Accounts: </font>[GLOB.vanderlin_round_stats[STATS_MAMMONS_IN_BANK]]</div>"
 			data += "<div style='margin-bottom: 4px;'><font color='#e6b327'>Regular Vault Income: </font>[GLOB.vanderlin_round_stats[STATS_REGULAR_VAULT_INCOME]]</div>"
 			data += "<div style='margin-bottom: 4px;'><font color='#c57e62'>Sold to Stockpile: </font>[GLOB.vanderlin_round_stats[STATS_STOCKPILE_EXPANSES]]</div>"
 			data += "<div style='margin-bottom: 4px;'><font color='#b6a17f'>Salary Payments: </font>[GLOB.vanderlin_round_stats[STATS_WAGES_PAID]]</div>"
@@ -507,6 +512,7 @@
 			data += "<div style='margin-bottom: 4px;'><font color='#ebbf49'>Mammons Circulating: </font>[GLOB.vanderlin_round_stats[STATS_MAMMONS_HELD]]</div>"
 			data += "<div style='margin-bottom: 4px;'><font color='#db9a59'>Trade Value Exported: </font>[GLOB.vanderlin_round_stats[STATS_TRADE_VALUE_EXPORTED]]</div>"
 			data += "<div style='margin-bottom: 4px;'><font color='#dfbf57'>Trade Value Imported: </font>[GLOB.vanderlin_round_stats[STATS_TRADE_VALUE_IMPORTED]]</div>"
+			data += "<div style='margin-bottom: 4px;'><font color='#c08f83'>HEADEATER Exports: </font>[GLOB.vanderlin_round_stats[STATS_HEADEATER_EXPORTS]]</div>"
 			data += "<div style='margin-bottom: 4px;'><font color='#c0b283'>GOLDFACE Imports: </font>[GLOB.vanderlin_round_stats[STATS_GOLDFACE_VALUE_SPENT]]</div>"
 			data += "<div style='margin-bottom: 4px;'><font color='#b5a642'>PURITY Imports: </font>[GLOB.vanderlin_round_stats[STATS_PURITY_VALUE_SPENT]]</div>"
 			data += "<div><font color='#7495d3'>Peddler Revenue: </font>[GLOB.vanderlin_round_stats[STATS_PEDDLER_REVENUE]]</div>"
@@ -516,7 +522,7 @@
 
 		if("Heroes")
 			data += "<div style='text-align: center; color: #e6e6e6; font-size: 1.2em; margin-bottom: 15px;'>HEROES OF THE REALM</div>"
-			data += "<div style='border-top: 1.5px solid #7a7a7a; margin: 0 auto 20px auto; width: 65%;'></div>"
+			data += "<div style='border-top: 1.5px solid #7a7a7a; margin: 0 auto 20px auto; width: 75%;'></div>"
 
 			if(length(GLOB.personal_objective_minds))
 				data += "<div style='display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px;'>"
@@ -561,7 +567,7 @@
 
 		if("Villains")
 			data += "<div style='text-align: center; color: #d4b4b4; font-size: 1.2em; margin-bottom: 15px;'>VILLAINS OF THE REALM</div>"
-			data += "<div style='border-top: 1.5px solid #8a6a6a; margin: 0 auto 20px auto; width: 65%;'></div>"
+			data += "<div style='border-top: 1.5px solid #8a6a6a; margin: 0 auto 20px auto; width: 75%;'></div>"
 
 			var/list/all_teams = list()
 			var/list/all_antagonists = list()
@@ -684,7 +690,7 @@
 
 		if("Outlaws")
 			data += "<div style='text-align: center; color: #ffd494; font-size: 1.2em; margin-bottom: 15px;'>WANTED OUTLAWS</div>"
-			data += "<div style='border-top: 1.5px solid #aa8a5a; margin: 0 auto 20px auto; width: 65%;'></div>"
+			data += "<div style='border-top: 1.5px solid #aa8a5a; margin: 0 auto 20px auto; width: 75%;'></div>"
 
 			var/list/outlaws = list()
 			for(var/mob/living/carbon/human/outlaw in GLOB.human_list)
@@ -806,7 +812,7 @@
 	data += "</div>"
 
 	mob << browse(null, "window=vanderlin_influences")
-	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1085, 820)
+	var/datum/browser/popup = new(mob, "vanderlin_round_end", "<center>The Chronicle</center>", 1085, 855)
 	popup.set_content(data.Join())
 	popup.open()
 
@@ -814,12 +820,24 @@
 /proc/create_chronicle_holder_block(stat_name, include_title = TRUE, is_second_block = FALSE)
 	var/list/stat_data = GLOB.chronicle_stats[stat_name]
 	if(!stat_data)
-		return is_second_block ? "<div style='margin: 30px 0 15px 0;'><font color='[initial(GLOB.chronicle_stats[stat_name]["title_color"])]'>[initial(GLOB.chronicle_stats[stat_name]["title"])]</font></div>Nobody" : "Nobody"
+		var/initial_title = initial(GLOB.chronicle_stats[stat_name]["title"])
+		var/initial_color = initial(GLOB.chronicle_stats[stat_name]["title_color"])
+		if(is_second_block)
+			return "<div style='margin: 30px 0 15px 0;'><font color='[initial_color]'>[initial_title]</font></div>Nobody"
+		else if(include_title)
+			return "<div style='margin-bottom: 15px;'><font color='[initial_color]'>[initial_title]</font></div>Nobody"
+		else
+			return "Nobody"
 
 	var/datum/weakref/mob_weakref = stat_data["holder"]
 	var/mob/living/holder = mob_weakref?.resolve()
 	if(!holder)
-		return is_second_block ? "<div style='margin: 30px 0 15px 0;'><font color='[stat_data["title_color"]]'>[stat_data["title"]]</font></div>Nobody" : "Nobody"
+		if(is_second_block)
+			return "<div style='margin: 30px 0 15px 0;'><font color='[stat_data["title_color"]]'>[stat_data["title"]]</font></div>Nobody"
+		else if(include_title)
+			return "<div style='margin-bottom: 15px;'><font color='[stat_data["title_color"]]'>[stat_data["title"]]</font></div>Nobody"
+		else
+			return "<div style='margin: 30px 0 15px 0;'><font color='[stat_data["title_color"]]'>[stat_data["title"]]</font></div>Nobody"
 
 	var/list/output = list()
 	if(include_title)

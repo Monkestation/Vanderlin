@@ -50,7 +50,7 @@
 		if(ishumannorthern(src))
 			record_round_statistic(STATS_HUMEN_DEATHS)
 		if(mind)
-			if(mind.assigned_role.title in GLOB.church_positions)
+			if((mind.assigned_role.title in GLOB.church_positions) || (mind.assigned_role.title in GLOB.inquisition_positions))
 				record_round_statistic(STATS_CLERGY_DEATHS)
 			if(mind.has_antag_datum(/datum/antagonist/vampire))
 				record_round_statistic(STATS_VAMPIRES_KILLED)

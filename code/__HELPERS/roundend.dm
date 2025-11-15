@@ -385,8 +385,41 @@
 	return parts.Join()
 
 /datum/controller/subsystem/ticker/proc/players_report()
+	reward_notables()
 	for(var/client/C in GLOB.clients)
 		give_show_playerlist_button(C)
+
+/datum/controller/subsystem/ticker/proc/reward_notables()
+	var/list/notable_minds = list()
+
+	for(var/stat_type in SSgamemode.chosen_chronicle_stats)
+		var/list/stat_data = GLOB.chronicle_stats[stat_type]
+		if(!stat_data)
+			continue
+
+		var/datum/weakref/holder_ref = stat_data["holder"]
+		var/mob/living/carbon/human/notable = holder_ref?.resolve()
+		if(!notable.client || !notable.mind || notable.stat == DEAD)
+			continue
+
+		if(!notable_minds[notable.mind])
+			notable_minds[notable.mind] = list()
+
+		notable_minds[notable.mind] += stat_data["title"]
+
+	if(length(notable_minds) > 0)
+		var/list/shuffled_minds = shuffle(notable_minds)
+		var/recipients_given = 0
+
+		for(var/datum/mind/selected_mind as anything in shuffled_minds)
+			if(recipients_given >= MAX_CHRONICLE_STATS)
+				break
+
+			var/list/titles = notable_minds[selected_mind]
+			var/reason = "Being a notable person ([english_list(titles)])"
+			selected_mind.adjust_triumphs(1, TRUE, reason)
+			to_chat(selected_mind, "<br>")
+			recipients_given++
 
 /datum/controller/subsystem/ticker/proc/display_report(popcount)
 	GLOB.common_report = build_roundend_report()

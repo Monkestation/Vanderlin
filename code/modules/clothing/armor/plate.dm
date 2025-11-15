@@ -196,7 +196,7 @@
 		user.remove_status_effect(/datum/status_effect/buff/psydonic_endurance)
 
 
-/obj/item/clothing/armor/plate/full/fluted/ornate/ordinator
+/obj/item/clothing/armor/plate/fluted/ornate/ordinator
 	name = "inquisitorial ordinator's plate"
 	desc = "A relic that is said to have survived the early sieges of Grenzelhoft, refurbished and repurposed to slay the arch-enemy in the name of Psydon. <br> A fluted cuirass that has been reinforced with thick padding and an additional shoulder piece. You will endure."
 	icon_state = "ordinatorplate"
@@ -205,7 +205,7 @@
 /datum/status_effect/buff/psydonic_endurance
 	id = "psydonic_endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
-	effectedstats = list("constitution" = 1,"endurance" = 1)
+	effectedstats = list(STATKEY_CON = 1,STATKEY_END = 1)
 
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()

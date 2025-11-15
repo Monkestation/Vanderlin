@@ -37,22 +37,28 @@ SUBSYSTEM_DEF(overlays)
 	return iconbro.appearance
 
 /atom/proc/build_appearance_list(build_overlays)
-	if (!islist(build_overlays))
+	if(!islist(build_overlays))
 		build_overlays = list(build_overlays)
-	for (var/overlay in build_overlays)
+
+	for(var/overlay in build_overlays)
 		if(!overlay)
 			build_overlays -= overlay
 			continue
-		if (istext(overlay))
+		if(istext(overlay))
+			// This is too expensive to run normally but running it during CI is a good test
+			// if(PERFORM_ALL_TESTS(focus_only/invalid_overlays))
+			// 	if(!icon_exists(icon, overlay))
+			// 		var/icon_file = "[icon]" || "Unknown Generated Icon"
+			// 		stack_trace("Invalid overlay: Icon object '[icon_file]' [REF(icon)] used in '[src]' [type] is missing icon state [overlay].")
+			// 		continue
 			build_overlays -= overlay
 			build_overlays += iconstate2appearance(icon, overlay)
 		else if(isicon(overlay))
 			build_overlays -= overlay
 			build_overlays += icon2appearance(overlay)
+
 	return build_overlays
 
-#define NOT_QUEUED_ALREADY (!(flags_1 & OVERLAY_QUEUED_1))
-#define QUEUE_FOR_COMPILE flags_1 |= OVERLAY_QUEUED_1; SSoverlays.queue += src;
 /atom/proc/cut_overlays()
 	STAT_START_STOPWATCH
 	overlays = null
@@ -99,11 +105,6 @@ SUBSYSTEM_DEF(overlays)
 		POST_OVERLAY_CHANGE(src)
 		STAT_STOP_STOPWATCH
 		STAT_LOG_ENTRY(SSoverlays.stats, type)
-
-
-
-#undef NOT_QUEUED_ALREADY
-#undef QUEUE_FOR_COMPILE
 
 //TODO: Better solution for these?
 /image/proc/add_overlay(x)

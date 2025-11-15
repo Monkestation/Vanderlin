@@ -21,7 +21,7 @@
 	weight = 4
 	max_occurrences = 2
 
-	earliest_start = 25 MINUTES
+	earliest_start = 20 MINUTES
 
 	tags = list(
 		TAG_HAUNTED,

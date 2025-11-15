@@ -29,6 +29,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
 		/obj/item/clothing/head/helmet/leather/saiga, // idk what kind of recipe to make this
 		/obj/item/clothing/neck/mana_star, // todo?
+		/obj/item/clothing/neck/gorget/explosive, // Inq shop only
 		/obj/item/storage/backpack/backpack/artibackpack/porter, //Unique to Kobl
 		/obj/item/clothing/face/spectacles/inq/spawnpair, //spawn type
 		/obj/item/clothing/face/facemask/steel/confessor/lensed, //manual craft
@@ -48,6 +49,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/helmet/heavy/ordinatorhelm, ///special item //! probably can add this at some point
 		/obj/item/clothing/head/roguehood/psydon/confessor, ///inqport
 		/obj/item/clothing/face/facemask/steel/confessor, ///inqport
+		/obj/item/clothing/neck/psycross/silver/undivided, //Not supposed to get this, not yet at the very least.
 		/obj/item/clothing/gloves/bandages/pugilist,
 		/obj/item/clothing/armor/gambeson/heavy/otavan/inq, ///inqport
 		/obj/item/clothing/armor/gambeson/heavy/otavan, ///null
@@ -61,8 +63,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/armor/cuirass/fluted, //eh
 		/obj/item/clothing/armor/medium/scale/inqcoat/armored, //upgrade
 		/obj/item/clothing/armor/brigandine/light, //basetype,
-		/obj/item/clothing/armor/plate/full/fluted, //basetype
-		/obj/item/clothing/armor/plate/full/fluted/ornate/ordinator, //inqport
+		/obj/item/clothing/armor/plate/fluted/ornate, //basetype
+		/obj/item/clothing/armor/plate/fluted/ornate/ordinator, //inqport
 		/obj/item/clothing/armor/plate/fluted,
 		/obj/item/clothing/cloak/templar, //base type
 
@@ -101,6 +103,7 @@ abstract types are automatically excluded.
 		"goblin",
 		"rare",
 		"captain",
+		"baotha",
 		"matthios",
 		"zizo",
 		"graggar",

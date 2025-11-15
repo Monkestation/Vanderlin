@@ -23,6 +23,42 @@
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
 	vampire.grant_undead_eyes()
 
+/datum/antagonist/vampire/proc/get_thralls()
+	if(!clan_selected)
+		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
+		return
+
+	var/list/restricted_roles = list(
+		"Monarch",
+		"Consort",
+		"Hand",
+		"Captain",
+		"Prince",
+		"Priest",
+		"Merchant",
+		"Forest Warden",
+		"Inquisitor",
+		"Absolver",
+		"Confessor",
+		"Orthodoxist",
+		"Adept",
+		"Royal Knight",
+		"Templar",
+	)
+
+	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, restricted_roles = restricted_roles)
+	var/thralls = rand(2, 3)
+
+	candidates -= owner.current
+
+	for(var/i = 1 to thralls)
+		if(!length(candidates))
+			return
+		var/mob/living/carbon/human/human = pick_n_take(candidates)
+		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
+		human.mind.add_antag_datum(new_antag)
+		human.adjust_bloodpool(500)
+
 /datum/antagonist/vampire/lord/greet()
 	to_chat(owner.current, span_userdanger("I am ancient. I am the Land. And I am now awoken to trespassers upon my domain."))
 	. = ..()

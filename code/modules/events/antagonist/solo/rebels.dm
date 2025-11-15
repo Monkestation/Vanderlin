@@ -17,7 +17,8 @@
 	typepath = /datum/round_event/antagonist/solo/rebel
 	antag_datum = /datum/antagonist/prebel/head
 
-	weight = 4
+	min_players = 30
+	weight = 6
 
 	restricted_roles = list(
 		"Monarch",
@@ -27,6 +28,9 @@
 		"Prince",
 		"Priest",
 		"Inquisitor",
+		"Absolver",
+		"Confessor",
+		"Orthodoxist",
 		"Adept",
 	)
 

@@ -283,7 +283,7 @@
 	sellprice = 35
 
 /obj/item/carvedgem/rose/statue
-	name = "rosellusk urn"
+	name = "rosellusk statue"
 	desc = "A statue carved out of rosellusk."
 	icon_state = "statue_rose"
 	grid_height = 64
@@ -1073,8 +1073,8 @@
 	sellprice = 85
 
 /obj/item/carvedgem/opal/cameo
-	name = "opaloise spoon"
-	desc = "A cameo carved out of shell depicting...someone? Use your imagination on who it could be."
+	name = "opaloise cameo"
+	desc = "A cameo carved out of opaloise depicting...someone? Use your imagination on who it could be."
 	icon_state = "cameo_opal"
 	grid_height = 32
 	grid_width = 32

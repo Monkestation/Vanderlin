@@ -15,6 +15,7 @@
 	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
 	your competition, lest you find yourself dead and floating downstream."
 	outfit = /datum/outfit/chirurgeon
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	jobstats = list(
 		STATKEY_INT = 3,

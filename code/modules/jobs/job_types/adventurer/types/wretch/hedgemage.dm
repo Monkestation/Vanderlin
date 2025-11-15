@@ -9,6 +9,7 @@
 	total_positions = 2
 
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 /datum/outfit/wretch/hedgemage/pre_equip(mob/living/carbon/human/H)
 	..()

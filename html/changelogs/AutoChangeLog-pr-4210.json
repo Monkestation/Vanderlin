@@ -1,0 +1,1 @@
+{"author":"Rannoooo","delete-after":true,"changes":[{"bugfix":"Werewolf stats fixed, down to the intended 15."},{"code_imp":"Removed armor_penetration var from werevolf claws, combined it's value with the claw's penfactor var"}]}

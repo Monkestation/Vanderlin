@@ -8,6 +8,7 @@
 	tutorial = "You are an itinerant Knight, you have embarked alongside your squire on a voyage to fullfil your knightly vows."
 	outfit = /datum/outfit/itinerant_knight
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	jobstats = list(
 		STATKEY_STR = 3,

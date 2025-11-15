@@ -3,7 +3,7 @@
 /datum/ai_planning_subtree/beg_human/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(istype(controller.pawn, /mob/living/simple_animal/hostile/retaliate))
 		var/mob/living/simple_animal/hostile/retaliate/mob = controller.pawn
-		if(SEND_SIGNAL(mob, COMSIG_MOB_RETURN_HUNGER) >= 0.25)
+		if(SEND_SIGNAL(mob, COMSIG_MOB_RETURN_HUNGER) >= 25)
 			return // not hungry
 	if(controller.blackboard_key_exists(BB_HUMAN_BEG_TARGET))
 		controller.queue_behavior(/datum/ai_behavior/beacon_for_food, BB_HUMAN_BEG_TARGET, BB_HUNGRY_MEOW, BB_BEGGING_FOOD_ITEM)

@@ -15,11 +15,11 @@
 	if (up)
 		src.up = up
 		up.down = src
-		up.update_appearance()
+		up.update_appearance(UPDATE_ICON_STATE)
 	if (down)
 		src.down = down
 		down.up = src
-		down.update_appearance()
+		down.update_appearance(UPDATE_ICON_STATE)
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/ladder/Destroy(force)
@@ -38,23 +38,23 @@
 		if (L)
 			down = L
 			L.up = src  // Don't waste effort looping the other way
-			L.update_appearance()
+			L.update_appearance(UPDATE_ICON_STATE)
 	if (!up)
 		L = locate() in GET_TURF_ABOVE(T)
 		if (L)
 			up = L
 			L.down = src  // Don't waste effort looping the other way
-			L.update_appearance()
+			L.update_appearance(UPDATE_ICON_STATE)
 
 	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/ladder/proc/disconnect()
 	if(up && up.down == src)
 		up.down = null
-		up.update_appearance()
+		up.update_appearance(UPDATE_ICON_STATE)
 	if(down && down.up == src)
 		down.up = null
-		down.update_appearance()
+		down.update_appearance(UPDATE_ICON_STATE)
 	up = down = null
 
 /obj/structure/ladder/update_icon_state()

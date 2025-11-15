@@ -22,8 +22,9 @@
 		var/client/C = eligible[1]
 		adjust_triumphs(C, total_pool, FALSE, "Psydon's Retirement Fund", override_bonus = TRUE)
 
-		to_chat(world, span_reallybig("A total of [total_pool] triumph[total_pool == 1 ? " has" : "s have"] been redistributed to 1 beneficiary from the Psydon's Retirement Fund!"))
-		to_chat(world, "<br>")
+		bordered_message(world, list(
+			span_reallybig("A total of [total_pool] triumph[total_pool == 1 ? " has" : "s have"] been redistributed to 1 beneficiary from the Psydon's Retirement Fund!"),
+		))
 
 		SStriumphs.communal_pools[type] = 0
 		SStriumphs.communal_contributions[type] = list()
@@ -102,8 +103,9 @@
 			number_of_beneficiaries++
 			adjust_triumphs(C, distribution[C], FALSE, "Psydon's Retirement Fund", override_bonus = TRUE)
 
-	to_chat(world, span_reallybig("A total of [total_pool] triumph[total_pool == 1 ? " has" : "s have"] been redistributed between [number_of_beneficiaries] beneficiaries from the Psydon's Retirement Fund!"))
-	to_chat(world, "<br>")
+	bordered_message(world, list(
+		span_reallybig("A total of [total_pool] triumph[total_pool == 1 ? " has" : "s have"] been redistributed between [number_of_beneficiaries] beneficiaries from the Psydon's Retirement Fund!"),
+	))
 
 	SStriumphs.communal_pools[type] = 0
 	SStriumphs.communal_contributions[type] = list()

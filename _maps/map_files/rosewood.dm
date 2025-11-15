@@ -1,1 +1,2 @@
-#define FORCE_MAP "_maps/rosewood.json"
+#define FORCE_MAP "rosewood"
+#define FORCE_MAP_DIRECTORY "_maps"

@@ -173,8 +173,8 @@
 	explosion_block = 4
 	hardness = 7
 
-	burn_power = 50
-	spread_chance = 1.3
+	burn_power = 100
+	spread_chance = 1.8
 
 /turf/closed/wall/mineral/wood/window
 	name = "wooden window"
@@ -206,8 +206,8 @@
 	explosion_block = 0
 	hardness = 70
 
-	burn_power = 50
-	spread_chance = 1.3
+	burn_power = 100
+	spread_chance = 1.8
 
 
 /turf/closed/wall/mineral/tent/OnCrafted(dirin, mob/user)
@@ -229,8 +229,8 @@
 	climbdiff = 3
 	explosion_block = 4
 	hardness = 7
-	burn_power = 50
-	spread_chance = 1.3
+	burn_power = 100
+	spread_chance = 1.8
 
 /turf/closed/wall/mineral/wooddark/OnCrafted(dirin, mob/user)
 	if(dirin == NORTH || dirin == SOUTH)
@@ -280,8 +280,8 @@
 	climbdiff = 3
 	hardness = 7
 
-	burn_power = 50
-	spread_chance = 0.9
+	burn_power = 100
+	spread_chance = 1.4
 
 
 /turf/closed/wall/mineral/roofwall/center
@@ -313,8 +313,8 @@
 	explosion_block = 4
 	hardness = 7
 
-	burn_power = 50
-	spread_chance = 1.3
+	burn_power = 100
+	spread_chance = 1.8
 
 /turf/closed/wall/mineral/decowood/Initialize()
 	. = ..()

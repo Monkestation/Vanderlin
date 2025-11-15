@@ -1,99 +1,98 @@
-
 /// Could be bitflags, but that would require a good amount of translations, which eh, either way works for me
 /// When the event is combat oriented (spawning monsters, inherently hostile antags)
 
-#define TAG_ASTRATA "astrata"
-#define TAG_NOC "noc"
-#define TAG_RAVOX "ravox"
-#define TAG_ABYSSOR "abyssor"
-#define TAG_XYLIX "xylix"
-#define TAG_NECRA "necra"
-#define TAG_PESTRA "pestra"
-#define TAG_MALUM "malum"
-#define TAG_EORA "eora"
-#define TAG_DENDOR "dendor"
-#define TAG_ZIZO "zizo"
-#define TAG_BAOTHA "baotha"
-#define TAG_GRAGGAR "graggar"
-#define TAG_MATTHIOS "matthios"
+#define TAG_ASTRATA "Astrata"
+#define TAG_NOC "Noc"
+#define TAG_RAVOX "Ravox"
+#define TAG_ABYSSOR "Abyssor"
+#define TAG_XYLIX "Xylix"
+#define TAG_NECRA "Necra"
+#define TAG_PESTRA "Pestra"
+#define TAG_MALUM "Malum"
+#define TAG_EORA "Eora"
+#define TAG_DENDOR "Dendor"
+#define TAG_ZIZO "Zizo"
+#define TAG_BAOTHA "Baotha"
+#define TAG_GRAGGAR "Graggar"
+#define TAG_MATTHIOS "Matthios"
 
 /// Base tag for god-related logic and identification
-#define TAG_GOD "god"
+#define TAG_GOD "God"
 
 /// Tag used for blessings granted by Eora
-#define TAG_BOON "boon"
+#define TAG_BOON "Boon"
 
 /// Tag reserved for curse mechanics (unused by gods)
-#define TAG_CURSE "curse"
+#define TAG_CURSE "Curse"
 
 /// Tag associated with hauntings, used by Noc and Necra
-#define TAG_HAUNTED "haunted"
+#define TAG_HAUNTED "Haunted"
 
 /// Tag reserved for combat logic (unused by gods)
-#define TAG_COMBAT "combat"
+#define TAG_COMBAT "Combat"
 
 /// Tag used for raid events, associated with Ravox
-#define TAG_RAID "raid"
+#define TAG_RAID "Raid"
 
 /// Tag representing trade interactions, used by Abyssor and Matthios
-#define TAG_TRADE "trade"
+#define TAG_TRADE "Trade"
 
 /// Tag denoting widespread effects, utilized by Eora
-#define TAG_WIDESPREAD "widespread"
+#define TAG_WIDESPREAD "Widespread"
 
 /// Tag reserved for villain roles or actions (unused by gods)
-#define TAG_VILLAIN "villain"
+#define TAG_VILLAIN "Villain"
 
 /// Tag representing medical influences, tied to Pestra
-#define TAG_MEDICAL "medical"
+#define TAG_MEDICAL "Medical"
 
 /// Tag for alchemy-related actions or systems, belonging to Pestra
-#define TAG_ALCHEMY "alchemy"
+#define TAG_ALCHEMY "Alchemy"
 
 /// Tag for nature-related events, tied to Pestra and Dendor
-#define TAG_NATURE "nature"
+#define TAG_NATURE "Nature"
 
 /// Tag representing work-related actions or influence, used by Malum
-#define TAG_WORK "work"
+#define TAG_WORK "Work"
 
 /// Tag for water-related actions or effects, used by Abyssor
-#define TAG_WATER "water"
+#define TAG_WATER "Water"
 
 /// Tag representing magical influence or events, used by Noc and Zizo
-#define TAG_MAGICAL "magical"
+#define TAG_MAGICAL "Magical"
 
 /// Tag denoting battle-related effects, associated with Graggar
-#define TAG_BATTLE "battle"
+#define TAG_BATTLE "Battle"
 
 /// Tag symbolizing blood-related actions, belonging to Graggar
-#define TAG_BLOOD "blood"
+#define TAG_BLOOD "Blood"
 
 /// Tag representing war-like influence, tied to Graggar
-#define TAG_WAR "war"
+#define TAG_WAR "War"
 
 /// Tag for gambling-related systems or events, used by Xylix
-#define TAG_GAMBLE "gamble"
+#define TAG_GAMBLE "Gamble"
 
 /// Tag symbolizing trickery, mischief, or deception, belonging to Zizo and Xylix
-#define TAG_TRICKERY "trickery"
+#define TAG_TRICKERY "Trickery"
 
 /// Tag representing unexpected outcomes or randomness, tied to Zizo and Xylix
-#define TAG_UNEXPECTED "unexpected"
+#define TAG_UNEXPECTED "Unexpected"
 
 /// Tag representing insanity-related mechanics, used by Baotha
-#define TAG_INSANITY "insanity"
+#define TAG_INSANITY "Insanity"
 
 /// Tag for magic-related influence or systems, belonging to Baotha
-#define TAG_MAGIC "magic"
+#define TAG_MAGIC "Magic"
 
 /// Tag denoting disaster-related events or effects, tied to Baotha
-#define TAG_DISASTER "disaster"
+#define TAG_DISASTER "Disaster"
 
 /// Tag representing corruption, used by Matthios
-#define TAG_CORRUPTION "corruption"
+#define TAG_CORRUPTION "Corruption"
 
 /// Tag for loot-related events, effects, or systems, used by Matthios
-#define TAG_LOOT "loot"
+#define TAG_LOOT "Loot"
 
 #define EVENT_TRACK_MUNDANE "Mundane"
 #define EVENT_TRACK_PERSONAL "Personal"

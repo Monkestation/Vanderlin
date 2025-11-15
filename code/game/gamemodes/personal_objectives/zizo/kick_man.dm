@@ -2,7 +2,7 @@
 	name = "Kick Groin"
 	category = "Zizo's Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Zizo grows stronger", "Your nutcracks will be stronger")
+	rewards = list("2 Triumphs", "Zizo grows stronger", "Your nutcracks will be stronger", "Zizo blesses you (+1 Strength)")
 
 /datum/objective/personal/kick_groin/on_creation()
 	. = ..()
@@ -34,6 +34,7 @@
 /datum/objective/personal/kick_groin/reward_owner()
 	. = ..()
 	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, TRAIT_GENERIC)
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_STR, 1)
 
 /datum/objective/personal/kick_groin/update_explanation_text()
 	explanation_text = "Kick a man in the balls to show your dominance and earn Zizo's approval!"

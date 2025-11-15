@@ -10,28 +10,35 @@
 		/datum/attunement/death = 0.2,
 	)
 
-/datum/action/cooldown/spell/enchant_door/cast(mob/living/cast_on)
+/datum/action/cooldown/spell/remove_enchantment/can_cast_spell(feedback)
 	. = ..()
-	var/obj/structure/door/door = locate(/obj/structure/door) in view(1, cast_on)
-	if(!door)
-		return FALSE
+	if(!.)
+		return
+	return owner.mind?.has_antag_datum(/datum/antagonist/overlord)
 
+/datum/action/cooldown/spell/remove_enchantment/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
+	return istype(cast_on, /obj/structure/door)
+
+/datum/action/cooldown/spell/enchant_door/cast(obj/structure/door/target_door)
+	. = ..()
 	var/datum/antagonist/overlord/overlord_datum = owner.mind.has_antag_datum(/datum/antagonist/overlord)
 	if(!overlord_datum)
-		return FALSE
+		return
 
 	// Check if this door is already enchanted
-	if(door.GetComponent(/datum/component/overlord_door_enchantment))
-		to_chat(cast_on, span_warning("This door is already enchanted."))
+	if(target_door.GetComponent(/datum/component/overlord_door_enchantment))
+		to_chat(owner, span_warning("This door is already enchanted."))
 		return FALSE
 
 	// Add enchantment component to existing door
-	door.AddComponent(/datum/component/overlord_door_enchantment, overlord_datum)
-	overlord_datum.enchanted_doors += door
+	target_door.AddComponent(/datum/component/overlord_door_enchantment, overlord_datum)
+	overlord_datum.enchanted_doors += target_door
 
-
-	cast_on.visible_message(span_danger("Dark runes briefly flicker across [door]!"))
-	to_chat(owner, span_notice("You have enchanted [door]. It now leads to your lair."))
+	owner.visible_message(span_danger("Dark runes briefly flicker across \the [target_door]!"))
+	to_chat(owner, span_notice("You have enchanted \the [target_door]. It now leads to your lair."))
 	return TRUE
 
 /datum/component/overlord_door_enchantment
@@ -86,22 +93,26 @@
 		/datum/attunement/death = 0.2,
 	)
 
+/datum/action/cooldown/spell/undirected/enter_overseer_mode/can_cast_spell(feedback)
+	. = ..()
+	if(!.)
+		return
+	return owner.mind?.has_antag_datum(/datum/antagonist/overlord)
+
 /datum/action/cooldown/spell/undirected/enter_overseer_mode/cast(mob/living/cast_on)
 	. = ..()
 	var/datum/antagonist/overlord/overlord_datum = cast_on.mind.has_antag_datum(/datum/antagonist/overlord)
 	if(!overlord_datum)
-		return FALSE
+		return
 
 	if(!overlord_datum.overlord_controller)
 		to_chat(cast_on, span_warning("You have not established a lair yet."))
-		return FALSE
+		return
 
 	if(overlord_datum.controlling_rts)
 		exit_rts_mode(overlord_datum)
 	else
 		enter_rts_mode(overlord_datum)
-
-	return TRUE
 
 /datum/action/cooldown/spell/undirected/enter_overseer_mode/proc/enter_rts_mode(datum/antagonist/overlord/overlord_datum)
 	var/mob/living/overlord_body = overlord_datum.owner.current
@@ -140,32 +151,40 @@
 		/datum/attunement/death = 0.2,
 	)
 
-/datum/action/cooldown/spell/remove_enchantment/cast(mob/living/cast_on)
+	cast_range = 1
+
+/datum/action/cooldown/spell/remove_enchantment/can_cast_spell(feedback)
 	. = ..()
-	var/datum/antagonist/overlord/overlord_datum = owner.mind.has_antag_datum(/datum/antagonist/overlord)
+	if(!.)
+		return
+	return owner.mind?.has_antag_datum(/datum/antagonist/overlord)
+
+/datum/action/cooldown/spell/remove_enchantment/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
+	return istype(cast_on, /obj/structure/door)
+
+/datum/action/cooldown/spell/remove_enchantment/cast(obj/structure/door/target_door)
+	. = ..()
+	var/datum/antagonist/overlord/overlord_datum = owner.mind?.has_antag_datum(/datum/antagonist/overlord)
 	if(!overlord_datum)
-		return FALSE
+		return
 
 	if(!length(overlord_datum.enchanted_doors))
 		to_chat(owner, span_warning("You don't have any enchanted doors."))
-		return FALSE
-
-	var/obj/structure/door/target_door = locate(/obj/structure/door) in view(1, cast_on)
-	if(!target_door)
-		to_chat(owner, span_warning("You need to be next to an enchanted door."))
-		return FALSE
+		return
 
 	var/datum/component/overlord_door_enchantment/enchant = target_door.GetComponent(/datum/component/overlord_door_enchantment)
 	if(!enchant || enchant.linked_overlord != overlord_datum)
 		to_chat(owner, span_warning("This door is not enchanted by you."))
-		return FALSE
+		return
 
 	overlord_datum.enchanted_doors -= target_door
 	qdel(enchant)
 
 	target_door.visible_message(span_danger("The dark energy fades from [target_door]."))
 	to_chat(owner, span_notice("You have removed the enchantment from [target_door]."))
-	return TRUE
 
 /datum/action/cooldown/spell/undirected/summon_worker
 	name = "Summon Worker"
@@ -180,19 +199,23 @@
 		/datum/attunement/death = 0.2,
 	)
 
-/datum/action/cooldown/spell/undirected/summon_worker/cast(mob/living/cast_on)
+/datum/action/cooldown/spell/undirected/summon_worker/can_cast_spell(feedback)
 	. = ..()
-	var/datum/antagonist/overlord/overlord_datum = cast_on.mind.has_antag_datum(/datum/antagonist/overlord)
+	if(!.)
+		return
+	return owner.mind?.has_antag_datum(/datum/antagonist/overlord)
+
+/datum/action/cooldown/spell/undirected/summon_worker/cast(atom/cast_on)
+	. = ..()
+	var/datum/antagonist/overlord/overlord_datum = owner.mind?.has_antag_datum(/datum/antagonist/overlord)
 	if(!overlord_datum)
-		return FALSE
+		return
 
 	if(!overlord_datum.overlord_controller)
-		to_chat(cast_on, span_warning("You have not established a lair yet."))
-		return FALSE
+		to_chat(owner, span_warning("You have not established a lair yet."))
+		return
 
 	if(length(overlord_datum.overlord_controller.worker_mobs))
-		return FALSE
+		return
 
 	overlord_datum.overlord_controller.create_new_worker_mob(get_turf(GLOB.lair_portal))
-
-	return TRUE

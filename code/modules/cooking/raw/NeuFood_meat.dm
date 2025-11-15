@@ -79,7 +79,7 @@
 
 /obj/item/reagent_containers/food/snacks/fish/dead
 	abstract_type = /obj/item/reagent_containers/food/snacks/fish/dead
-	dead = TRUE
+	status = FISH_DEAD
 	fish_id = "dead"
 
 /*	........   Cooked food template   ................ */ // No choppping double cooking etc prefixed

@@ -26,7 +26,7 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fyritius
 	output = /obj/item/ammo_casing/caseless/arrow/pyro
 	craftdiff = 1
-	skillcraft = /datum/skill/craft/engineering
+	skillcraft = /datum/skill/craft/bombs
 	craft_time = 1 SECONDS
 
 /datum/repeatable_crafting_recipe/projectile/pyro_bolt
@@ -40,7 +40,7 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fyritius
 	output = /obj/item/ammo_casing/caseless/bolt/pyro
 	craftdiff = 1
-	skillcraft = /datum/skill/craft/engineering
+	skillcraft = /datum/skill/craft/bombs
 	craft_time = 1 SECONDS
 
 /datum/repeatable_crafting_recipe/projectile/water_arrow

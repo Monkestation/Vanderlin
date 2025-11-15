@@ -189,7 +189,6 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 				pixel_y = base_pixel_y
 				invisibility = INVISIBILITY_OBSERVER
 				alpha = 100
-	update_appearance()
 
 	if(!T)
 		T = SSmapping.get_station_center()
@@ -942,8 +941,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		icon_state = client?.prefs.admin_ghost_icon
 
 	client.prefs.apply_character_randomization_prefs()
-
-	update_appearance()
 
 /mob/dead/observer/can_perform_action(atom/movable/target, action_bitflags)
 	return IsAdminGhost(usr)

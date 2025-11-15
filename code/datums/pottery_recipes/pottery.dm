@@ -20,8 +20,8 @@
 
 /datum/pottery_recipe/teapot
 	name = "Clay Teapot"
-	created_item = /obj/item/reagent_containers/glass/bottle/teapot
+	created_item = /obj/item/reagent_containers/glass/carafe/teapot/clay
 
 /datum/pottery_recipe/decanter
 	name = "Clay Decanter"
-	created_item = /obj/item/reagent_containers/glass/bottle/decanter
+	created_item = /obj/item/reagent_containers/glass/carafe/decanter

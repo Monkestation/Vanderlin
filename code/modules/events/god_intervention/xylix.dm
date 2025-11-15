@@ -28,8 +28,8 @@
 		if(!human_mob.patron || (!is_ascendant(XYLIX) && !istype(human_mob.patron, /datum/patron/divine/xylix)))
 			continue
 
-		var/luck_roll = rand(-2, 4)
-		human_mob.set_stat_modifier("xylix_fortune", STATKEY_LCK, luck_roll)
+		var/luck_roll = rand(-3, 6)
+		human_mob.adjust_stat_modifier(STATMOD_XYLIX_FORTUNE, STATKEY_LCK, luck_roll)
 
 		bordered_message(human_mob, list(
 			span_biginfo("You have caught Xylix's attention and you can feel your fortune changing... Whether you'll laugh or weep about it later... well, that's part of the fun!")

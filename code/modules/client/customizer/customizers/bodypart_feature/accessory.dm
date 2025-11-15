@@ -7,14 +7,16 @@
 /datum/customizer_choice/bodypart_feature/face_detail
 	name = "Face Detail"
 	feature_type = /datum/bodypart_feature/face_detail
-	allows_accessory_color_customization = FALSE
+	allows_accessory_color_customization = TRUE
 	sprite_accessories = list(
 		/datum/sprite_accessory/detail/nothing,
 		/datum/sprite_accessory/detail/burnface_r,
 		/datum/sprite_accessory/detail/burnface_l,
 		/datum/sprite_accessory/detail/burneye_r,
 		/datum/sprite_accessory/detail/burneye_l,
+		/datum/sprite_accessory/detail/brows,
 		/datum/sprite_accessory/detail/brows/dark,
+		/datum/sprite_accessory/detail/unibrow,
 		/datum/sprite_accessory/detail/unibrow/dark,
 		/datum/sprite_accessory/detail/deadeye_r,
 		/datum/sprite_accessory/detail/deadeye_l,
@@ -33,8 +35,6 @@
 		/datum/sprite_accessory/detail/tattoo_lips,
 		/datum/sprite_accessory/detail/tattoo_eye_r,
 		/datum/sprite_accessory/detail/tattoo_eye_l,
-		/datum/sprite_accessory/detail/brows,
-		/datum/sprite_accessory/detail/unibrow,
 	)
 
 /datum/customizer/bodypart_feature/accessory

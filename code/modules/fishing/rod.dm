@@ -238,6 +238,7 @@
 	else
 		if(!isfish)
 			return
+		record_featured_stat(STATS_FISH_CAUGHT, user)
 		var/obj/item/reagent_containers/food/snacks/fish/fish = reward
 		if(HAS_TRAIT(baited, TRAIT_POISONOUS_BAIT) && !HAS_TRAIT(fish, TRAIT_FISH_TOXIN_IMMUNE))
 			var/kill_fish = TRUE
@@ -247,6 +248,8 @@
 					break
 			if(kill_fish)
 				fish.set_status(FISH_DEAD, silent = TRUE)
+		record_round_statistic(STATS_FISH_CAUGHT)
+		record_featured_stat(FEATURED_STATS_FISHERS, user)
 
 	qdel(baited)
 	baited = null

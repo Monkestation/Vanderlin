@@ -2,7 +2,7 @@
 	name = "Sniff Drugs"
 	category = "Baotha's Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Baotha grows stronger", "Ability to recognize alcoholics and junkies on examine")
+	rewards = list("2 Triumphs", "Baotha grows stronger", "Ability to recognize alcoholics and junkies on examine", "Baotha blesses you (+1 Fortune)")
 	var/sniff_count = 0
 	var/required_count = 2
 
@@ -37,6 +37,7 @@
 /datum/objective/personal/sniff_drugs/reward_owner()
 	. = ..()
 	ADD_TRAIT(owner.current, TRAIT_RECOGNIZE_ADDICTS, TRAIT_GENERIC)
+	owner.current.adjust_stat_modifier(STATMOD_BAOTHA_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/sniff_drugs/update_explanation_text()
 	explanation_text = "Sniff [required_count] drugs for Baotha's pleasure!"

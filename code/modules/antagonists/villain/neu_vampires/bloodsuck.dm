@@ -128,15 +128,18 @@
 				INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob/living/carbon/human, vampire_conversion_prompt), src)
 
 /mob/living/carbon/human/proc/vampire_conversion_prompt(mob/living/carbon/sire)
+	if(HAS_TRAIT(src, "choosing"))
+		return
 	var/datum/antagonist/vampire/VDrinker = sire?.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(!istype(VDrinker))
 		return
-
+	ADD_TRAIT(src, "choosing", INNATE_TRAIT)
 	if(browser_alert(src, "Would you like to rise as a vampire spawn? Warning: you will die shall you reject.", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
+		REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
 		to_chat(sire, span_danger("Your victim twitches, yet the curse fails to take over. As if something otherworldly intervenes..."))
 		death()
 		return
-
+	REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
 	visible_message(span_danger("Some dark energy begins to flow from [sire] into [src]..."))
 	visible_message(span_red("[src] rises as a new spawn!"))
 	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(sire.clan, TRUE)

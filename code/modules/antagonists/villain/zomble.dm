@@ -217,14 +217,11 @@
 
 	for(var/datum/status_effect/effect in zombie.status_effects) //necessary to prevent exploits
 		zombie.remove_status_effect(effect)
-	var/offset_strength = 7 - zombie.base_strength
-	var/offset_speed = 2 - zombie.base_speed
-	var/offset_intelligence = 1 - zombie.base_intelligence
-	var/offset_constitution = 5 - zombie.base_constitution
-	zombie.set_stat_modifier("[type]", STATKEY_STR, offset_strength)
-	zombie.set_stat_modifier("[type]", STATKEY_SPD, offset_speed)
-	zombie.set_stat_modifier("[type]", STATKEY_INT, offset_intelligence)
-	zombie.set_stat_modifier("[type]", STATKEY_CON, offset_constitution)
+
+	zombie.modifier_set_stat_to("[type]", STATKEY_STR, 7)
+	zombie.modifier_set_stat_to("[type]", STATKEY_SPD, 2)
+	zombie.modifier_set_stat_to("[type]", STATKEY_INT, 1)
+	zombie.modifier_set_stat_to("[type]", STATKEY_CON, 5)
 
 	zombie.bloodpool = 0 // Again, just in case.
 

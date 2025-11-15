@@ -10,7 +10,7 @@
 
 /datum/antagonist/aspirant
 	name = "Aspirant"
-	roundend_category = "aspirant"
+	roundend_category = "Aspirant"
 	antagpanel_category = "Aspirant"
 	job_rank = ROLE_ASPIRANT
 	show_name_in_check_antagonists = TRUE
@@ -63,7 +63,7 @@
 			to_chat(owner, span_notice("I can retrieve my item from a statue, tree or clock by right clicking it."))
 
 		if(CHOICE_BOMB)
-			owner.special_items["Bomb"] = /obj/item/explosive/bottle
+			owner.special_items["Bomb"] = /obj/item/explosive/canister_bomb
 			aspirant_mob.set_skillrank(/datum/skill/craft/bombs, 6)
 			to_chat(owner, span_notice("I can retrieve my item from a statue, tree or clock by right clicking it."))
 

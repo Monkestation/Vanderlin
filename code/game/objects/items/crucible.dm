@@ -61,12 +61,22 @@
 
 	for(var/obj/item/item in contents)
 		var/datum/material/material = item.melting_material
+		var/melty = item.melt_amount
+		if(!material)
+			var/obj/item/ingot/ingot = item.smeltresult
+			if(!ispath(ingot))
+				continue
+			material = initial(ingot.melting_material)
+			melty = 100
+			if(!material)
+				continue
+
 		if(crucible_temperature < initial(material.melting_point))
 			melting_pot -= item
 			continue
 		melting_pot |= item
 		melting_pot[item] += 5
-		if(melting_pot[item] >= item.melt_amount)
+		if(melting_pot[item] >= melty)
 			melt_item(item)
 
 	if(reagents?.total_volume)
@@ -102,8 +112,15 @@
 /obj/item/storage/crucible/proc/melt_item(obj/item/item)
 	SEND_SIGNAL(item.loc, COMSIG_TRY_STORAGE_TAKE, item, get_turf(src), TRUE)
 	var/list/data = list()
-	data |= item.melting_material
-	data[item.melting_material] = item.melt_amount
+	var/datum/material/material = item.melting_material
+	var/melty = item.melt_amount
+	if(!material)
+		var/obj/item/ingot/ingot = item.smeltresult
+		material = initial(ingot.melting_material)
+		melty = 100
+
+	data |= material
+	data[material] = melty
 
 	// Get quality from the item
 	var/item_quality = 1
@@ -119,7 +136,7 @@
 	// Set quality in the data for the reagent system
 	data["quality"] = item_quality
 
-	reagents.add_reagent(/datum/reagent/molten_metal, item.melt_amount, data, crucible_temperature)
+	reagents.add_reagent(/datum/reagent/molten_metal, melty, data, crucible_temperature)
 	melting_pot -= item
 	qdel(item)
 	update_appearance(UPDATE_OVERLAYS)

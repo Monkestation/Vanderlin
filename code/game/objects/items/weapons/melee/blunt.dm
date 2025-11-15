@@ -2,14 +2,14 @@
 ==========================================================*/
 //................ Mace ............... //
 /obj/item/weapon/mace
+	name = "iron mace"
+	desc = "A heavy iron mace, prefered by those with a grudge against knightly whoresons."
+	icon_state = "mace"
+	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_MACE_WIELD
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
-	name = "iron mace"
-	desc = "A heavy iron mace, prefered by those with a grudge against knightly whoresons."
-	icon_state = "mace"
-	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "mace_greyscale"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
@@ -49,9 +49,9 @@
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	name = "iron rungu"
-	desc = "An iron Lakkarian mace favored by the Shackle-Breakers of Sebbet. It is the bane of Zalad slavers."
+	desc = "An iron Lakkarian mace favored by the Shinobi's of Sekket. It is the bane of Zalad slavers."
 	icon_state = "rungu_iron"
-	icon = 'icons/roguetown/weapons/lakkari.dmi'
+	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
 	equip_sound = "rustle"
@@ -83,6 +83,16 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -6,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 	return ..()
+
+/obj/item/weapon/mace/shishpar/iron
+	name = "iron shishpar"
+	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	force = DAMAGE_MACE+1
+	force_wielded = DAMAGE_MACE_WIELD+2
+	icon_state = "shishpar_iron"
+	wbalance = EASY_TO_DODGE
+	wdefense = GOOD_PARRY
+	sellprice = 35
 
 /*--------------\
 | Strike intent |	moderate AP
@@ -161,6 +171,7 @@
 /obj/item/weapon/mace/courtphysician
 	name = "physician's cane"
 	desc = "A prized cane. Embellished with a golden serpent, representing the Kingsfield university. The pointy end is quite sharp."
+	icon = 'icons/roguetown/weapons/32/special.dmi'
 	icon_state = "fancy_cane"
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/thrust)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
@@ -258,9 +269,9 @@
 
 /obj/item/weapon/mace/steel/rungu
 	name = "steel rungu"
-	desc = "A steel Lakkarian mace favored by the Shackle-Breakers of Sebbet. It is the bane of Zalad slavers."
+	desc = "A steel Lakkarian mace favored by the Shinobi's of Sekket. It is the bane of Zalad slavers."
 	icon_state = "rungu_steel"
-	icon = 'icons/roguetown/weapons/lakkari.dmi'
+	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/steel
 	melt_amount = 150
@@ -268,6 +279,15 @@
 	sellprice = 60
 	wdefense = GOOD_PARRY
 
+/obj/item/weapon/mace/steel/shishpar
+	name = "steel shishpar"
+	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	force = DAMAGE_MACE+2
+	force_wielded = DAMAGE_MACE_WIELD+3
+	icon_state = "shishpar_steel"
+	wbalance = EASY_TO_DODGE
+	wdefense = GREAT_PARRY
+	sellprice = 75
 
 //................ Spiked club ............... //
 /obj/item/weapon/mace/spiked
@@ -380,20 +400,15 @@
 /obj/item/weapon/mace/cudgel/psy
 	name = "psydonian handmace"
 	desc = "A shorthanded mace, a convenient sleeping aid, or a means to root out heresy. It's all in the wrist."
-	resistance_flags = FIRE_PROOF
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflangedmace"
+	resistance_flags = FIRE_PROOF
 	wdefense = 2
 
 /obj/item/weapon/mace/cudgel/psy/Initialize(mapload)
 	. = ..()
 	// +3 force, +100 blade int, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, 100, 50, 1, TRUE)
-
-/obj/item/weapon/mace/cudgel/psy/preblessed
-
-/obj/item/weapon/mace/cudgel/psy/preblessed/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/psyblessed, TRUE, 3, 100, 50, 1, TRUE)
 
 /obj/item/weapon/mace/cudgel/shellrungu
 	name = "shell rungu"
@@ -410,14 +425,14 @@
 	icon_state = "carpentercudgel"
 	desc = "A stubby club reinforced with iron bits, popular among village watchmen and peasant militias. Despite being reinforced and hard-hitting, it still cannot compare to a proper mace."
 
-
 //................ Wooden sword ............... //
 /obj/item/weapon/mace/woodclub/train_sword
-	force = 5
-	force_wielded = 8
 	name = "wooden sword"
 	desc = "Crude wood assembled into the shape of a sword, a terrible weapon to be on the recieving end of during a training spat."
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "wsword"
+	force = 5
+	force_wielded = 8
 	wbalance = DODGE_CHANCE_NORMAL
 	associated_skill = /datum/skill/combat/swords
 	wdefense = ULTMATE_PARRY
@@ -438,14 +453,14 @@
 
 //................ Goedendag ............... //
 /obj/item/weapon/mace/goden
+	name = "warclub"
+	desc = "A two handed club, decorated with a spiked cap crown. A perfect way to say Good Morning to any would be noble-knight."
+	icon = 'icons/roguetown/weapons/64/maces.dmi'
+	icon_state = "goedendag"
 	force = DAMAGE_CLUB
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD
 	possible_item_intents = list(/datum/intent/mace/strike/heavy)
 	gripped_intents = list(/datum/intent/mace/smash/heavy, /datum/intent/mace/thrust)
-	name = "warclub"
-	desc = "A two handed club, decorated with a spiked cap crown. A perfect way to say Good Morning to any would be noble-knight."
-	icon_state = "goedendag"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -514,6 +529,7 @@
 /obj/item/weapon/mace/goden/steel/malum
 	name = "forgefiend"
 	desc = "This hammer's creation took a riddle in its own making. A great sacrifice for perfect quality"
+	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "malumhammer"
 	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
 	max_integrity = 200
@@ -522,6 +538,7 @@
 /obj/item/weapon/mace/goden/psydon
 	name = "psydonian grand mace"
 	desc = "A mighty mace which seems to be a large psycross with a handle, though no less effective at crushing the spirit and bones of the inhumen."
+	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psymace"
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
@@ -549,11 +566,11 @@
 
 //................ Shillelagh ............... //
 /obj/item/weapon/mace/goden/shillelagh		// The Briar signature weapon. Sturdy oak war club.
-	gripped_intents = list(/datum/intent/mace/smash/wood)
 	name = "shillelagh"
 	desc = "Big old oak branch, carved to a deadly weapon."
+	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "shillelagh"
-	icon = 'icons/roguetown/weapons/shillelagh.dmi'
+	gripped_intents = list(/datum/intent/mace/smash/wood)
 	SET_BASE_PIXEL(0, 0)
 	bigboy = FALSE
 	gripsprite = TRUE
@@ -702,19 +719,13 @@
 	sellprice = 60
 	wdefense = GOOD_PARRY
 
-/obj/item/weapon/mace/goden/steel/ravox
-	name = "duel settler"
-	desc = "The tenets of ravoxian duels are enscribed upon the head of this maul."
-	icon_state = "ravoxhammer"
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
-
 //................ Silver ............... //
 
 /obj/item/weapon/mace/silver/rungu
 	name = "silver rungu"
-	desc = "A silver mace favored by Lakkarian clerics. The weapon of choice for the monster-slayers of Napatahuum."
+	desc = "A silver mace favored by Lakkarian clerics. The weapon of choice for the monster-slayers of Sakhumeti."
 	icon_state = "rungu_silver"
-	icon = 'icons/roguetown/weapons/lakkari.dmi'
+	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/silver
 	melt_amount = 150
@@ -723,5 +734,19 @@
 	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/silver/rungu/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/mace/silver/gada
+	name = "regal gada"
+	icon_state = "gada"
+	desc = "A luxurious silver mace of Savannah Elf origin thats been reinforced and embellished with gold. It's considerably heavier compared to other maces."
+	minstr = 8
+	force = DAMAGE_MACE+2
+	wbalance = DODGE_CHANCE_NORMAL
+	wdefense = AVERAGE_PARRY
+	sellprice = 150 // It's silver and gold.
+
+/obj/item/weapon/mace/silver/gada/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)

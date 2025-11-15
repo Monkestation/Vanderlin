@@ -1,7 +1,7 @@
 
 /obj/item/ammo_holder
 	desc = ""
-	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon = 'icons/roguetown/weapons/ammo_holders.dmi'
 	w_class = WEIGHT_CLASS_BULKY
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"

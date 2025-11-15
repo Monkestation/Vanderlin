@@ -100,3 +100,14 @@
 	)
 	finished_smell = /datum/pollutant/food/truffle_stew
 	crafting_time = 40 SECONDS
+
+/datum/container_craft/cooking/borowiki_stew
+	name = "Borowiki Stew"
+	created_reagent = /datum/reagent/consumable/soup/stew/borowiki
+	requirements = list(/obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki = 1)
+	max_optionals = 3
+	optional_wildcard_requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+	)
+	finished_smell = /datum/pollutant/food/borowiki_stew
+	crafting_time = 40 SECONDS

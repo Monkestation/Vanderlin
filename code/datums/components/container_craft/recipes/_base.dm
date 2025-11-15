@@ -350,10 +350,11 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 		// Remove all tracked items
 		for(var/obj/item/item_to_delete in items_to_delete)
 			qdel(item_to_delete)
+
 	var/turf/turf = get_turf(crafter)
 	turf.visible_message(span_green(complete_message))
 
-/datum/container_craft/proc/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
+/datum/container_craft/proc/create_item(obj/item/crafter, mob/living/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	// Variables for quality calculation
 	var/total_freshness = 0
 	var/ingredient_count = 0
@@ -384,6 +385,11 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 
 	// Get the initiator's cooking skill
 	var/cooking_skill = initiator.get_skill_level(used_skill) + initiator.get_inspirational_bonus()
+
+	if(HAS_TRAIT(initiator, TRAIT_LUCKY_COOK))
+		// Every level above 9 increases the chance by 4%
+		if(initiator.stat_roll(STATKEY_LCK, 4, 9))
+			output_amount++
 
 	// Create the output items
 	for(var/j = 1 to output_amount)

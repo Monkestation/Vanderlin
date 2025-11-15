@@ -75,15 +75,19 @@
 	id = "demonic_torment"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_torment
-	var/next_torment = 0
+	COOLDOWN_DECLARE(next_torment)
 
 /datum/status_effect/demonic_torment/on_apply()
 	. = ..()
 	owner.add_stress(/datum/stress_event/infernal_pain)
 
+/datum/status_effect/demonic_torment/on_remove()
+	. = ..()
+	owner?.remove_stress(/datum/stress_event/infernal_pain)
+
 /datum/status_effect/demonic_torment/tick()
-	if(world.time > next_torment && prob(5))
-		next_torment = world.time + rand(100, 300)
+	if(COOLDOWN_FINISHED(src, next_torment) && prob(5))
+		COOLDOWN_START(src, next_torment, rand(10 SECONDS, 30 SECONDS))
 		var/effect = rand(1, 3)
 		switch(effect)
 			if(1)
@@ -101,19 +105,12 @@
 	id = "demonic_despair"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_despair
-	var/next_despair = 0
-
-/datum/status_effect/demonic_despair/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_CON, -1)
-
-/datum/status_effect/demonic_despair/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_CON = -1)
+	COOLDOWN_DECLARE(next_despair)
 
 /datum/status_effect/demonic_despair/tick()
-	if(world.time > next_despair && prob(3))
-		next_despair = world.time + rand(200, 600)
+	if(COOLDOWN_FINISHED(src, next_despair) && prob(3))
+		COOLDOWN_START(src, next_despair, rand(20 SECONDS, 1 MINUTES))
 		var/list/despair_messages = list(
 			"The family curse weighs heavy on me...",
 			"Why was I born into this cursed bloodline?",
@@ -129,20 +126,12 @@
 	id = "demonic_wrath"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_wrath
-	var/next_wrath = 0
-
-/datum/status_effect/demonic_wrath/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_STR, 1)
-	owner.set_stat_modifier("[type]", STATKEY_INT, -1)
-
-/datum/status_effect/demonic_wrath/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_STR = 1, STATKEY_INT = -1)
+	COOLDOWN_DECLARE(next_wrath)
 
 /datum/status_effect/demonic_wrath/tick()
-	if(world.time > next_wrath && prob(4))
-		next_wrath = world.time + rand(150, 400)
+	if(COOLDOWN_FINISHED(src, next_wrath) && prob(4))
+		COOLDOWN_START(src, next_wrath, rand(15 SECONDS, 40 SECONDS))
 		var/found_target = FALSE
 		for(var/mob/living/carbon/human/victim in view(2, owner))
 			if(victim == owner)
@@ -165,20 +154,12 @@
 	id = "demonic_paranoia"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_paranoia
-	var/next_paranoia = 0
-
-/datum/status_effect/demonic_paranoia/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_PER, 1)
-	owner.set_stat_modifier("[type]", STATKEY_SPD, -1)
-
-/datum/status_effect/demonic_paranoia/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_PER = 1, STATKEY_SPD = -1)
+	COOLDOWN_DECLARE(next_paranoia)
 
 /datum/status_effect/demonic_paranoia/tick()
-	if(world.time > next_paranoia && prob(3))
-		next_paranoia = world.time + rand(300, 800)
+	if(COOLDOWN_FINISHED(src, next_paranoia) && prob(3))
+		COOLDOWN_START(src, next_paranoia, rand(30 SECONDS, 80 SECONDS))
 		var/list/paranoid_messages = list(
 			"They know about our family's curse...",
 			"Everyone suspects what we really are.",
@@ -194,14 +175,7 @@
 	id = "demonic_damnation"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_damnation
-
-/datum/status_effect/demonic_damnation/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_CON, -1)
-
-/datum/status_effect/demonic_damnation/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_CON = -1)
 
 /datum/status_effect/demonic_damnation/tick()
 	if(prob(2))
@@ -212,11 +186,11 @@
 	id = "demonic_gluttony"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_gluttony
-	var/next_hunger = 0
+	COOLDOWN_DECLARE(next_hunger)
 
 /datum/status_effect/demonic_gluttony/tick()
-	if(world.time > next_hunger && prob(4))
-		next_hunger = world.time + rand(200, 500)
+	if(COOLDOWN_FINISHED(src, next_hunger) && prob(4))
+		COOLDOWN_START(src, next_hunger, rand(20 SECONDS, 50 SECONDS))
 		var/list/nearby_food = list()
 		for(var/obj/item/reagent_containers/food/F in view(1, owner))
 			nearby_food += F
@@ -230,26 +204,20 @@
 				to_chat(owner, span_userdanger("The family curse compels me to consume this!"))
 				target_food.attack(owner, owner)
 		else
-			to_chat(owner, span_userdanger("I hunger for anything to satisfy this cursed bloodline!"))
+			if(!owner.has_stress_type(/datum/stress_event/cursed_hunger))
+				to_chat(owner, span_userdanger("I hunger for anything to satisfy this cursed bloodline!"))
 			owner.add_stress(/datum/stress_event/cursed_hunger)
 
 /datum/status_effect/demonic_pride
 	id = "demonic_pride"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_pride
-	var/next_pride = 0
-
-/datum/status_effect/demonic_pride/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_CON, 1)
-
-/datum/status_effect/demonic_pride/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_CON = 1)
+	COOLDOWN_DECLARE(next_pride)
 
 /datum/status_effect/demonic_pride/tick()
-	if(world.time > next_pride && prob(3))
-		next_pride = world.time + rand(400, 800)
+	if(COOLDOWN_FINISHED(src, next_pride) && prob(3))
+		COOLDOWN_START(src, next_pride, rand(40 SECONDS, 80 SECONDS))
 		var/list/pride_messages = list(
 			"Our bloodline is superior, curse and all.",
 			"We don't need help from lesser families.",
@@ -264,19 +232,12 @@
 	id = "demonic_isolation"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_isolation
-	var/next_isolation = 0
-
-/datum/status_effect/demonic_isolation/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_SPD, -2)
-
-/datum/status_effect/demonic_isolation/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_SPD = -2)
+	COOLDOWN_DECLARE(next_isolation)
 
 /datum/status_effect/demonic_isolation/tick()
-	if(world.time > next_isolation && prob(4))
-		next_isolation = world.time + rand(300, 700)
+	if(COOLDOWN_FINISHED(src, next_isolation) && prob(4))
+		COOLDOWN_START(src, next_isolation, rand(30 SECONDS, 70 SECONDS))
 		var/found_people = FALSE
 		for(var/mob/living/carbon/human/victim in view(1, owner))
 			if(victim == owner)
@@ -302,20 +263,12 @@
 	id = "demonic_madness"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_madness
-	var/next_madness = 0
-
-/datum/status_effect/demonic_madness/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_INT, -2)
-	owner.set_stat_modifier("[type]", STATKEY_PER, 1)
-
-/datum/status_effect/demonic_madness/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_INT = -2, STATKEY_PER = 1)
+	COOLDOWN_DECLARE(next_madness)
 
 /datum/status_effect/demonic_madness/tick()
-	if(world.time > next_madness && prob(3))
-		next_madness = world.time + rand(200, 600)
+	if(COOLDOWN_FINISHED(src, next_madness) && prob(3))
+		COOLDOWN_START(src, next_madness, rand(20 SECONDS, 1 MINUTES))
 		var/list/mad_messages = list(
 			"The voices in our blood speak to me...",
 			"I see the demons that cursed our ancestors!",
@@ -330,24 +283,18 @@
 	id = "demonic_decay"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_decay
-	var/next_decay = 0
-
-/datum/status_effect/demonic_decay/on_apply()
-	. = ..()
-	owner.set_stat_modifier("[type]", STATKEY_CON, -2)
-
-/datum/status_effect/demonic_decay/on_remove()
-	. = ..()
-	owner.remove_stat_modifier("[type]")
+	effectedstats = list(STATKEY_CON = -2)
+	COOLDOWN_DECLARE(next_decay)
 
 /datum/status_effect/demonic_decay/tick()
-	if(world.time > next_decay && prob(3))
-		next_decay = world.time + rand(400, 900)
+	if(COOLDOWN_FINISHED(src, next_decay) && prob(3))
+		var/cooldown_time = rand(40 SECONDS, 90 SECONDS)
 		var/effect = rand(1, 4)
 		switch(effect)
 			if(1)
 				if(iscarbon(owner))
-					owner:vomit()
+					var/mob/living/carbon/C = owner
+					C.vomit()
 				to_chat(owner, span_userdanger("The family curse sickens your body!"))
 			if(2)
 				owner.Unconscious(15)
@@ -361,7 +308,9 @@
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
 					BP.rotted = TRUE
 					H.regenerate_icons()
+				cooldown_time = 8 MINUTES
 				to_chat(owner, span_userdanger("Your cursed flesh begins to decay!"))
+		COOLDOWN_START(src, next_decay, cooldown_time)
 
 //////////////////////
 /// ALERT SCREENS ///

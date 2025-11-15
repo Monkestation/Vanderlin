@@ -4,7 +4,6 @@
 	description = "If you see this, stop using moondust"
 	reagent_state = LIQUID
 	color = "#c38553"
-	nutriment_factor = 2
 	metabolization_rate = 0.3 // 33% of normal metab
 	taste_description = "grass"
 	taste_mult = 3
@@ -120,22 +119,29 @@
 	name = "Compot"
 	description = "If you see this, stop using moondust"
 	color = "#b38838"
-	nutriment_factor = 2
 	metabolization_rate = 0.2 // 20% of normal metab
 	taste_description = "strong berry taste, its very sweet"
 	taste_mult = 4
 	hydration_factor = 6 //a hydrating, nutritious and convinient drink made of raisins
-	nutriment_factor = 6
+	nutriment_factor = 4
 	quality = 3
 
 /datum/reagent/consumable/tea/tiefbloodtea
 	name = "Tiefling Blood Tea"
 	description = "If you see this, stop using moondust"
 	color = "#bd201b"
-	nutriment_factor = 1
 	metabolization_rate = 0.6 // 60% of normal metab
 	taste_description = "something delightfully sweet, with a smoky aftertaste"
 	taste_mult = 4
-	hydration_factor = 1
 	nutriment_factor = 2
 	quality = 4
+
+/datum/reagent/consumable/tea/waddle
+	name = "Waddle tea"
+	color = "#b57232"
+	metabolization_rate = 0.5
+	taste_description = "slightly earthy, with a meaty aftertaste"
+	taste_mult = 3
+	nutriment_factor = 3
+	quality = 1
+

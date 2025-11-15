@@ -126,6 +126,17 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
+/datum/stock/stockpile/borowiki
+	name = "Borowiki"
+	desc = "A hearty mushroom fit for stews and pies."
+	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 7
+	export_price = 4
+	importexport_amt = 20
+	stockpile_id = STOCK_FOOD
+
 /datum/stock/stockpile/coal
 	name = "Coal"
 	desc = "Chunks of coal used for fuel and alloying."

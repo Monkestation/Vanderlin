@@ -26,7 +26,7 @@ GLOBAL_PROTECT(href_token)
 	var/deadmined
 	var/datum/role_ban_panel/role_ban_panel
 	var/datum/pathfind_debug/path_debug
-
+	var/datum/create_wave/create_wave
 
 /datum/admins/New(datum/admin_rank/R, ckey, force_active = FALSE, protected)
 	if(IsAdminAdvancedProcCall())
@@ -58,6 +58,8 @@ GLOBAL_PROTECT(href_token)
 		activate()
 	else
 		deactivate()
+	create_wave = new
+	create_wave.admin_holder = src
 
 /datum/admins/Destroy()
 	if(IsAdminAdvancedProcCall())

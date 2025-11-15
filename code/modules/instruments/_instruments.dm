@@ -139,7 +139,6 @@
 		soundloop.stress2give = initial(soundloop.stress2give)
 	if(dynamic_icon)
 		lower_from_mouth()
-		update_appearance()
 	// Prevents an exploit
 	for(var/mob/living/L in hearers(7, loc))
 		for(var/datum/status_effect/bardicbuff/b in L.status_effects)
@@ -258,7 +257,6 @@
 	record_round_statistic(STATS_SONGS_PLAYED)
 	if(dynamic_icon)
 		lift_to_mouth()
-		update_icon()
 	START_PROCESSING(SSprocessing, src)
 
 /obj/item/instrument/proc/lift_to_mouth()
@@ -454,4 +452,4 @@
 	"Amoroso" = 'sound/instruments/psyaltery (7).ogg',
 	"Lupian's Lullaby" = 'sound/instruments/psyaltery (8).ogg',
 	"White Wine Before Breakfast" = 'sound/instruments/psyaltery (9).ogg',
-	"Chevalier de Naledi" = 'sound/instruments/psyaltery (10).ogg')
+	"Chevalier de Valeur" = 'sound/instruments/psyaltery (10).ogg')

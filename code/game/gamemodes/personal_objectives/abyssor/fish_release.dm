@@ -13,7 +13,7 @@
 	var/list/possible_fish = list()
 	for(var/fish_type in subtypesof(/obj/item/reagent_containers/food/snacks/fish))
 		var/obj/item/reagent_containers/food/snacks/fish/F = fish_type
-		if(!initial(F.dead))
+		if(F.status != FISH_DEAD)
 			possible_fish += fish_type
 
 	if(length(possible_fish))
@@ -33,7 +33,7 @@
 	if(completed || !owner?.current)
 		return
 
-	if(!istype(fish, target_fish_type) || fish.dead)
+	if(!istype(fish, target_fish_type) || fish.status == FISH_DEAD)
 		return
 
 	released_count++
@@ -51,4 +51,4 @@
 	owner.current.adjust_skillrank(/datum/skill/labor/fishing, 1)
 
 /datum/objective/personal/release_fish/update_explanation_text()
-	explanation_text = "Have an alive [target_fish_name] returned to the water to honor Abyssor."
+	explanation_text = "Release an alive [target_fish_name] back to the water to honor Abyssor."

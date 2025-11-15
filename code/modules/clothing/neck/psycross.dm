@@ -126,3 +126,9 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
+
+/obj/item/clothing/neck/psycross/silver/undivided
+	name = "amulet of the ten"
+	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
+	icon_state = "undivided"
+

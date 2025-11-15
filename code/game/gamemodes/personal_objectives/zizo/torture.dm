@@ -3,7 +3,7 @@
 	category = "Zizo's Chosen"
 	triumph_count = 3
 	immediate_effects = list("Gained an ability to torture others for information")
-	rewards = list("3 Triumphs", "Zizo grows stronger")
+	rewards = list("3 Triumphs", "Zizo grows stronger", "Zizo blesses you (+1 Strength, +1 Endurance)")
 	var/torture_count = 0
 	var/required_count = 1
 
@@ -32,6 +32,11 @@
 	to_chat(owner.current, span_greentext("You have extracted the truth through pain, satisfying Zizo!"))
 	adjust_storyteller_influence(ZIZO, 20)
 	UnregisterSignal(owner.current, COMSIG_TORTURE_PERFORMED)
+
+/datum/objective/personal/torture/reward_owner()
+	. = ..()
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_END, 1)
 
 /datum/objective/personal/torture/update_explanation_text()
 	explanation_text = "Torture someone until they beg for mercy to please Zizo!"

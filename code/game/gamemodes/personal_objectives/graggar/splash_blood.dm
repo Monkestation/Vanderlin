@@ -2,7 +2,7 @@
 	name = "Splash Blood"
 	category = "Graggar's Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Graggar grows stronger", "Graggar blesses you (+1 Strength)")
+	rewards = list("2 Triumphs", "Graggar grows stronger", "Graggar blesses you (+1 Strength, +1 Constitution)")
 
 /datum/objective/personal/blood_splash/on_creation()
 	. = ..()
@@ -36,7 +36,8 @@
 
 /datum/objective/personal/blood_splash/reward_owner()
 	. = ..()
-	owner.current.set_stat_modifier("graggar_blessing", STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_CON, 1)
 
 /datum/objective/personal/blood_splash/update_explanation_text()
 	explanation_text = "There is much power in blood. Splash a bucket full of blood on yourself to appease Graggar!"

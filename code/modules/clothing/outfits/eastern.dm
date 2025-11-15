@@ -41,6 +41,22 @@
 	. = ..()
 	AddComponent(/datum/component/storage/concrete/grid/cloak)
 
+/obj/item/clothing/head/spellcasterhat
+	name = "spellsinger hat"
+	desc = "An oddly shaped hat made of tightly-sewn leather, commonly worn by spellsinger."
+	icon_state = "spellcasterhat"
+	item_state = "spellcasterhat"
+	armor = ARMOR_SPELLSINGER
+	max_integrity = ARMOR_INT_HELMET_LEATHER
+	blocksound = SOFTHIT
+	sewrepair = TRUE
+	flags_inv = HIDEEARS
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	body_parts_covered = HEAD|HAIR|EARS|NOSE|EYES
+	resistance_flags = FIRE_PROOF
+
 /obj/item/clothing/shirt/robe/spellcasterrobe
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "spellsinger robes"

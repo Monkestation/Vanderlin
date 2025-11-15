@@ -98,7 +98,8 @@
 /datum/round_event/antagonist/solo/setup()
 	var/datum/round_event_control/antagonist/solo/cast_control = control
 	antag_count = cast_control.get_antag_amount()
-	message_admins("STORYTELLER:[cast_control.name] spawning [antag_count].")
+	message_admins("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(cast_control.get_candidates())], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
+	log_storyteller("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(cast_control.get_candidates())], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
 	antag_flag = cast_control.antag_flag
 	antag_datum = cast_control.antag_datum
 	restricted_roles = cast_control.restricted_roles

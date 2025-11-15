@@ -60,3 +60,13 @@
 	desc = "<span class='nicegreen'>Nothing like a hearty breakfast to start the shift.</span>\n"
 	stress_change = 2
 	timer = 10 MINUTES
+
+/datum/stress_event/feet_free
+	desc = span_nicegreen("I can move my feet freely!")
+	stress_change = -1
+	timer = -1
+
+/datum/stress_event/feet_constrained
+	desc = span_userdanger("I can't move my feet at all... It's uncomfortable.")
+	stress_change = 1
+	timer = -1

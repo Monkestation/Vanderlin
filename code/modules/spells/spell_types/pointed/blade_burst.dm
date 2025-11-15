@@ -46,6 +46,6 @@
 
 /obj/effect/temp_visual/blade_burst
 	icon = 'icons/effects/effects.dmi'
-	icon_state = "purplesparkles"
+	icon_state = "grassblade"
 	randomdir = FALSE
 	duration = 1 SECONDS

@@ -178,6 +178,12 @@
 	icon_state = "tabard_abyssor"
 	item_state = "tabard_abyssor"
 
+/obj/item/clothing/cloak/stabard/templar/abyssor/alt
+	name = "surcoat of the abyssal order"
+	icon_state = "tabard_abyssor_alt"
+	item_state = "tabard_abyssor_alt"
+
+
 /obj/item/clothing/cloak/stabard/templar/malum
 	name = "surcoat of the malumite order"
 	icon_state = "tabard_malum"

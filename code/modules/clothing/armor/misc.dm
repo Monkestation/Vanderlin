@@ -62,6 +62,19 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_COAT_STEP)
 
+//................ Abyssal Robe ............... //
+/obj/item/clothing/armor/brigandine/abyssor // This is only a brigandine subtype for balance reasons, it should be a cuirass variant.
+	name = "abyssal robe"
+	desc = "A bronze cuirass, its surface etched with swirling wave motifs. Beneath the armor hangs a flowing robe of deep blue cloth, reminiscent of the sea's endless depths. Salt has dulled its shine, but it still carries the dignity of those who serve Abyssor."
+	icon_state = "abyssal_robe"
+	item_state = "abyssal_robe"
+	smeltresult = /obj/item/ingot/bronze
+
+/obj/item/clothing/armor/brigandine/abyssor/Initialize()
+	. = ..()
+	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_COAT_STEP)
+
+
 /obj/item/clothing/armor/brigandine/captain
 	name = "captain's brigandine"
 	desc = "A coat with plates specifically tailored and forged for the captain of Vanderlin."

@@ -10,7 +10,8 @@
 	//I say we let all species be the gaffer, this is job concerns the adventurers and mercs, and those come in all types and sizes,
 	//so it fits better with the wild cards that is this demographic of people
 	//having said that I am gate keeping the moment felinids are in the damn game
-	allowed_ages = list(AGE_MIDDLEAGED,AGE_OLD, AGE_IMMORTAL) //AGE_OLD with the ring on? I say unlikely - clown
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL) //AGE_OLD with the ring on? I say unlikely - clown
+	blacklisted_species = list(SPEC_ID_HALFLING)
 	tutorial = "Forced out of your old adventure party, you applied to the Mercenary guild. Eventually becoming\
 	the next Guild Master. Gone are the excitements of your past, today your life is engrossed with two \
 	things: administrative work, and feeding the monstrous Head Eater. Act as the\
@@ -54,9 +55,9 @@
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, type)
 	ADD_TRAIT(H, TRAIT_OLDPARTY, TRAIT_GENERIC)
 
-	H.change_stat("speed", 2)
-	H.change_stat("perception", 1)
-	H.change_stat("strength", 1)
+	H.change_stat(STATKEY_SPD, 2)
+	H.change_stat(STATKEY_PER, 1)
+	H.change_stat(STATKEY_STR, 1)
 
 	H.adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE) //they are practicing with their fake ass shit sword but its clearly not paying off yet
 	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
@@ -82,5 +83,5 @@
 		H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.change_stat("perception", 1)
+		H.change_stat(STATKEY_PER, 1)
 

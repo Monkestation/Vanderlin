@@ -110,3 +110,6 @@
 
 /datum/ai_planning_subtree/basic_melee_attack_subtree/warden
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/warden
+
+/datum/ai_planning_subtree/basic_melee_attack_subtree/species_hostile
+	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/species_hostile

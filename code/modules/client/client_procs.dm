@@ -420,7 +420,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return null
 
 	GLOB.clients += src
-	GLOB.keys_by_ckey[ckey] += key
+	GLOB.keys_by_ckey[ckey] = key
 	GLOB.directory[ckey] = src
 
 	chatOutput = new /datum/chatOutput(src)

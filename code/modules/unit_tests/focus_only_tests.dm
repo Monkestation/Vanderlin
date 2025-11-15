@@ -9,5 +9,8 @@
 /// Checks that every created emissive has a valid icon_state
 /datum/unit_test/focus_only/invalid_emissives
 
+/// Checks that every overlay passed into build_appearance_list exists in the icon
+/datum/unit_test/focus_only/invalid_overlays
+
 /// Checks that smoothing_groups and smoothing_list are properly sorted in /atom/Initialize
 /datum/unit_test/focus_only/sorted_smoothing_groups

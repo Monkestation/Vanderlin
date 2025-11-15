@@ -16,23 +16,25 @@ SUBSYSTEM_DEF(crediticons)
 	var/list/currentrun = src.currentrun
 
 	while(length(currentrun))
-		var/mob/living/carbon/human/thing = currentrun[length(currentrun)]
+		var/client/client = currentrun[length(currentrun)]
 		currentrun.len--
-		if(QDELETED(thing))
-			processing -= thing
+		if(QDELETED(client))
+			processing -= client
 			if(MC_TICK_CHECK)
 				return
 			continue
-		add_credit(thing)
-		STOP_PROCESSING(SScrediticons, thing)
+		add_credit(client)
+		STOP_PROCESSING(SScrediticons, client)
 		if(MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/crediticons/proc/add_credit(mob/living/carbon/human/actor)
-	if(!actor.mind || !actor.client)
+/datum/controller/subsystem/crediticons/proc/add_credit(client/actor_client)
+	if(!actor_client)
+		return
+	var/mob/living/carbon/human/actor = actor_client.mob
+	if(!istype(actor) || QDELETED(actor))
 		return
 	var/datum/mind/actor_mind = actor.mind
-	var/client/actor_client = actor.client
 	var/datum/job/job = actor_mind.assigned_role
 	var/datum/preferences/preferences = actor_client.prefs
 	if(!preferences)

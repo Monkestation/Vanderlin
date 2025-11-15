@@ -1258,3 +1258,21 @@
 /datum/sprite_accessory/hair/head/medicator/crown
 	name = "Crown"
 	icon_state = "crown"
+
+/datum/sprite_accessory/hair/head/rakshari
+	name = "Base Rakshari"
+	abstract_type = /datum/sprite_accessory/hair/head/rakshari
+	icon = 'icons/mob/sprite_accessory/hair/rakshari.dmi'
+	specuse = list(SPEC_ID_RAKSHARI)
+
+/datum/sprite_accessory/hair/head/rakshari/high_tail
+	name = "High Tail"
+	icon_state = "high_tail"
+
+/datum/sprite_accessory/hair/head/rakshari/doubleknot
+	name = "Double Knot"
+	icon_state = "doubleknot"
+
+/datum/sprite_accessory/hair/head/rakshari/fluffy_tail
+	name = "Fluffy Tail"
+	icon_state = "fluffy_tail"

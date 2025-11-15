@@ -10,12 +10,13 @@
 	antag_flag = ROLE_LICH
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 70
+	denominator = 65
 
 	base_antags = 1
 	maximum_antags = 2
 
-	weight = 12 //temp disabled 12
+	min_players = 25
+	weight = 12
 
 	earliest_start = 0 SECONDS
 

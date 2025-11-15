@@ -277,7 +277,7 @@
 					user.dropItemToGround(src)
 					S.ssaddle = src
 					src.forceMove(S)
-					S.update_appearance()
+					S.update_appearance(UPDATE_OVERLAYS)
 		return
 	..()
 

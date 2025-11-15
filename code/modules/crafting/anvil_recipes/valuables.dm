@@ -107,7 +107,7 @@
 /datum/anvil_recipe/valuables/silver/teapot
 	name = "Silver Teapot"
 	recipe_name = "a Silver Teapot"
-	created_item = /obj/item/reagent_containers/glass/carafe/silver/teapot
+	created_item = /obj/item/reagent_containers/glass/carafe/teapot/silver
 
 /datum/anvil_recipe/valuables/silver/obelisk
 	name = "Silver Obelisk"
@@ -289,7 +289,7 @@
 /datum/anvil_recipe/valuables/gold/teapot
 	name = "Golden Teapot"
 	recipe_name = "a Golden Teapot"
-	created_item = /obj/item/reagent_containers/glass/carafe/gold/teapot
+	created_item = /obj/item/reagent_containers/glass/carafe/teapot/gold
 
 /datum/anvil_recipe/valuables/gold/tablet
 	name = "Golden Tablet"

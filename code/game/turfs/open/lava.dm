@@ -79,8 +79,8 @@
 		START_PROCESSING(SSobj, src)
 		playsound(src, 'sound/misc/lava_death.ogg', 100, FALSE)
 
-/turf/open/lava/process(wait)
-	if(!burn_stuff(null, wait/20))
+/turf/open/lava/process()
+	if(!burn_stuff(null))
 		STOP_PROCESSING(SSobj, src)
 
 /turf/open/lava/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
@@ -108,7 +108,7 @@
 	return ..() && !can_burn_stuff(traveler) // can traverse safely if you won't burn in it
 
 ///Proc that sets on fire something or everything on the turf that's not immune to lava. Returns TRUE to make the turf start processing.
-/turf/open/lava/proc/burn_stuff(atom/movable/to_burn, seconds_per_tick = 1)
+/turf/open/lava/proc/burn_stuff(atom/movable/to_burn)
 	if(is_safe())
 		return FALSE
 
@@ -120,7 +120,7 @@
 			if(LAVA_BE_IGNORING)
 				continue
 			if(LAVA_BE_BURNING)
-				if(!do_burn(burn_target, seconds_per_tick))
+				if(!do_burn(burn_target))
 					continue
 		. = TRUE
 
@@ -170,7 +170,7 @@
 #undef LAVA_BE_PROCESSING
 #undef LAVA_BE_BURNING
 
-/turf/open/lava/proc/do_burn(atom/movable/burn_target, seconds_per_tick = 1)
+/turf/open/lava/proc/do_burn(atom/movable/burn_target)
 	if(QDELETED(burn_target))
 		return FALSE
 
@@ -184,7 +184,7 @@
 			burn_obj.resistance_flags &= ~FIRE_PROOF
 		if(burn_obj.armor?.getRating("fire") > 50) //obj with 100% fire armor still get slowly burned away.
 			burn_obj.armor.setRating(fire = 50)
-		burn_obj.fire_act(temperature_damage, 1000 * seconds_per_tick)
+		burn_obj.fire_act(temperature_damage, 1000)
 		if(QDELETED(burn_obj))
 			return FALSE
 		burn_obj.take_damage(burn_obj.max_integrity * 0.1, BURN, "fire", 0) // fire_act damage is clamped
@@ -196,9 +196,9 @@
 
 	if(isliving(burn_target))
 		var/mob/living/burn_living = burn_target
-		burn_living.adjust_fire_stacks(lava_firestacks * seconds_per_tick)
+		burn_living.adjust_fire_stacks(lava_firestacks)
 		burn_living.IgniteMob()
-		burn_living.adjustFireLoss(lava_damage * seconds_per_tick)
+		burn_living.adjustFireLoss(lava_damage)
 		if(burn_living.health <= 0)
 			burn_living.dust(drop_items = TRUE)
 		return TRUE
@@ -214,7 +214,7 @@
 	immunity_resistance_flags = ACID_PROOF
 	immunity_trait = TRAIT_ACID_IMMUNE
 
-/turf/open/lava/acid/do_burn(atom/movable/burn_target, seconds_per_tick = 1)
+/turf/open/lava/acid/do_burn(atom/movable/burn_target)
 	if(QDELETED(burn_target))
 		return FALSE
 

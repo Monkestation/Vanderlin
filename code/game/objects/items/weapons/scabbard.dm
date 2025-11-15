@@ -1,5 +1,5 @@
 /obj/item/weapon/scabbard
-	icon = 'icons/roguetown/weapons/scabbard.dmi'
+	icon = 'icons/roguetown/weapons/32/scabbard.dmi'
 	alternate_worn_layer = UNDER_CLOAK_LAYER
 
 	resistance_flags = FLAMMABLE

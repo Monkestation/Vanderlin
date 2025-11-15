@@ -133,6 +133,8 @@
  */
 /mob/living/proc/calculate_dodge_score(mob/living/user)
 	var/dodge_score = defprob
+	if(HAS_TRAIT(src, TRAIT_UNDODGING))
+		return 0
 
 	var/obj/item/defending_item = get_active_held_item()
 	var/obj/item/attacking_item

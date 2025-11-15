@@ -94,10 +94,10 @@ While it's not required reading, leadership roles may find this information usef
 	<details>
 		<summary><em> Points of Interest </em></summary>
 
-		<p><strong> - City Of Owbaree </strong><br> Nestled within the northwestern jungle of The Lakkarian Strip, Owbaree is the capital city of Lakkari. Its considered to be one of the most sacred cities to Astratans within Psydonia and the wealthiest city of the Queendom. The Black Empire failed to capture it during the War of the Split Feather. Owbaree is defined by its towering temples to Astrata, complex system of canals, and its gold-crested royal palace. It has only recently opened its doors to those of the inhumen species.	</p>
-		<p><strong> - Barony Of Napatahuum </strong><br> Referred to as the graveyard capital of Faience. Napatahuum is an expansive yet desolate barony with a majority Necran population, which has dropped sharply ever since Zizo's ascension. Clerics and Templars are frequently sent to Napatahuum to clear out the still-rising dead within the city's sprawling tombs.	</p>
-		<p><strong> - City Of Ei Osalla </strong><br> South of the Lakkarian capital city of Owbaree, the coastal city of Ei Osalla serves as the trade hub of Lakkari and is considered the second-wealthiest city in the Queendom. Ei Osalla is renowned for its expansive market district, skilled goldsmiths, and vast underground catacombs, which few dare to explore. There are often intense feuds and conflicts between its majority Astratan nobility and its majority Xylixian commoner population.	</p>
-		<p><strong> - Barony of Sebbet </strong><br> The eastern-most barony of the Queendom of Lakkari, nearing the Zaladin Dynasty's northern border. Desired for its proximity to gold deposits and strategic location next to the Rainbow Mountains. There have been many squabbles between the Queendom of Lakkari and the Zaladin Dynasty over who has the rightful claim to Sebbet, as control over it has shifted multiple times throughout history. Being a majority Xylixian barony, Sebbet is also home to many anti-slaver groups. The most prominent being the Shackle-Breakers of Sebbet, which runs many underground operations throughout the Zaladin Dynasty. The operations of the Shackle-Breakers of Sebbet has drastically soured the already dire relations between the two nations.	</p>
+		<p><strong> - City Of Iwabaree </strong><br> Nestled within the northwestern jungle of The Lakkarian Strip, Iwabaree is the capital city of Lakkari. Its considered to be one of the most sacred cities to Astratans within Psydonia and the wealthiest city of the Queendom. The Black Empire failed to capture it during the War of the Split Feather. Iwabaree is defined by its towering temples to Astrata, complex system of canals, and its gold-crested royal palace. It has only recently opened its doors to those of the inhumen species.	</p>
+		<p><strong> - Barony Of Sakhumeti </strong><br> Referred to as the graveyard capital of Faience. Sakhumeti is an expansive yet desolate barony with a majority Necran population, which has dropped sharply ever since Zizo's ascension. Clerics and Templars are frequently sent to Sakhumeti to clear out the still-rising dead within the city's sprawling tombs.	</p>
+		<p><strong> - City Of Ei Onkara </strong><br> South of the Lakkarian capital city of Iwabaree, the coastal city of Ei Onkara serves as the trade hub of Lakkari and is considered the second-wealthiest city in the Queendom. Ei Onkara is renowned for its expansive market district, skilled goldsmiths, and vast underground catacombs, which few dare to explore. There are often intense feuds and conflicts between its majority Astratan nobility and its majority Xylixian commoner population.	</p>
+		<p><strong> - Barony of Sekket </strong><br> The eastern-most barony of the Queendom of Lakkari, nearing the Zaladin Dynasty's northern border. Desired for its proximity to gold deposits and strategic location next to the Veil of Colors. There have been many squabbles between the Queendom of Lakkari and the Zaladin Dynasty over who has the rightful claim to Sekket, as control over it has shifted multiple times throughout history. Being a majority Xylixian barony, Sekket is also home to many anti-slaver groups. The most prominent being the Shinobi's of Sekket, which runs many underground operations throughout the Zaladin Dynasty. The operations of the Shinobi's of Sekket has drastically soured the already dire relations between the two nations.	</p>
 </details>
 <br>
 
@@ -139,6 +139,18 @@ While it's not required reading, leadership roles may find this information usef
 		Grenzelhoftians proudly assimilate all humens who come under their heel into their Empire, integrating local and cultural identities into their fold before crushing them in favour of their own. Grenzelhoft bears the largest armies in the world and incredible military might, which come under vast scrutiny and disgust as they become increasingly desperate to upkeep their power. Their history is defined by crusades, elven genocide, and general aggression in the supposed name of Psydon and His return to the throne. Orthodox Psydonism is the dominant religion. Critics and pagans are persecuted.
 		<br><br>
 		Their people cannot remember a time when the Empire was not at war, and many have served within its military forces to escape the intense poverty of its lower-class. A world-scale conflict between Grenzelhoft and its neighbours was narrowly avoided in the early 2100s by the rise of a new common enemy: Zizo. Grenzelhoft's forces, explosives, and firearms now supply the Eastern front with vital support under the explicit command of Grenzelhoft's cabal of sun-averse counts and countesses.
+		<br><br>
+
+		<details>
+		<summary><strong> THE ORATORIUM THRONI VACUI </strong> </summary>
+		<br><br>
+		The inquisition, formally known as the Oratorium Throni Vacui, is an order of Psydonite warriors, investigators, and faithful dedicated to cleansing the rot of the inhumen gods from Psydonia, and eventually ushering in the return of Psydon.
+		<br><br>
+		It is divided into three major orders, the stealthy and clever Ordo Venatari, the knightly and honourable Ordo Benetarus, and the reclusive and devout Ordo Sanctae Cruoris. Their leaders are powerful and faithful in equal measure, and below them, operating in small teams, are the Inquisitors, the highest ranking of which are the Herrs Prefekt. Prospective inquisitors are known as Sacrestants, and often join a Prefekt in pairs or trios, competing in the Iter Maledictum for the right to become an inquisitor in full.
+		<br><br>
+		More on the Oratorium's divisions can be found on the wiki: https://wiki.monkestation.com/Oratorium_Throni_Vacui
+		<br><br>
+		</details>
 		<br><br>
 	</details>
 
@@ -184,11 +196,11 @@ While it's not required reading, leadership roles may find this information usef
 		<br>
 		<em> The Gilded Pschent of the South, The Scourge of the Psydonites, The Land of Tombs and Feathers </em>
 		<br><br>
-		Considered to be the second largest elven power and second elven territory to be (sometimes) marked on humen maps, Lakkari is an elven queendom known for its diverse and defensive landscape and intense devotion to Astrata, Necra, and Xylix. Lush tropical rainforests and vast rivers run through the western and northern reaches of the nation, while the east and south are defined by the red dunes of the Hemhem desert, rich in iron and speckled with oases. Even further south are the Rainbow Mountains. A long ridge of colorful mountains rich in ceruleabaster and gold that acts as a natural border from the Zaladin Dynasty.
+		Considered to be the second largest elven power and second elven territory to be (sometimes) marked on humen maps, Lakkari is an elven queendom known for its diverse and defensive landscape and intense devotion to Astrata, Necra, and Xylix. Lush tropical rainforests and vast rivers run through the western and northern reaches of the nation, while the east and south are defined by the red dunes of the Hemhem desert, rich in iron and speckled with oases. Even further south are the Veil of Colors. A long ridge of colorful mountains rich in ceruleabaster and gold that acts as a natural border from the Zaladin Dynasty.
 		<br><br>
-		Despite its richness in natural resources and trade, wealth disparity has plagued Lakkari for centuries; many join the church or military to escape poverty. It is only in recent yils that the current Kandake, Ohemaa of the Dunes, has started to address the issue through a series of reforms the nobility has found incredibly controversial.
+		Despite its richness in natural resources and trade, wealth disparity has plagued Lakkari for centuries; many join the church or military to escape poverty. It is only in recent yils that the current Kandake, Iteru of the Dunes, has started to address the issue through a series of reforms the nobility has found incredibly controversial.
 		<br><br>
-		Lakkari is known for being one of the few elven nations to have successfully resisted Grenzelhoftian imperialism. Although it lost some of its northernmost territories during the War of the Split Feather (2401-2412), the Lakkarians were able to fend off the forces of the Black Empire following their decisive victory in the battle of Mudridge with the assistance of their closest ally, the Valorian Republics. The surviving Grenzelhoftian soldiers of the battle were captured and sent to the Lakkarian capital of Owbaree, where they were publicly executed.
+		Lakkari is known for being one of the few elven nations to have successfully resisted Grenzelhoftian imperialism. Although it lost some of its northernmost territories during the War of the Split Feather (2401-2412), the Lakkarians were able to fend off the forces of the Black Empire following their decisive victory in the battle of Mudridge with the assistance of their closest ally, the Valorian Republics. The surviving Grenzelhoftian soldiers of the battle were captured and sent to the Lakkarian capital of Iwabaree, where they were publicly executed.
 		<br><br>
 	</details>
 	<details>
@@ -522,6 +534,21 @@ While it's not required reading, leadership roles may find this information usef
 		<br><br>
 	</details>
 
+	<details>
+		<summary><strong> Halflings </strong></summary>
+		<br>
+		Halflings, merry-folk, pipe-tokers, these people are one of many names and few insults. Beloved, not for their glory and their honor, like men, or their crafts and stout ales like dwarves, nor the graceful mystique of elfen kind- but for their bright smile and richly warm welcome that they provide even to the most boorish of visitors. Fabled to be a younger kind than most, the oldest records tell of a mingling of an exceptionally petite daughter of the mayor of a hamlet east of Vanderlin's capital and the bogs of Daftmarsh  in a little valley, with the heir to a fortress of Brass dwarves built down into the hills that border it. She couldn't be married off to another well-to-do family due to her stunted form, though pretty as she were. The dwarven heir knew he needed a way to bring the two populi together to stave off the decline of his clan, the beasts of the nearby marshes and the hill-trolls were taking their toll. Trade had declined, for the dwarves, yet the humens of the hamlet continued their sale of highly demanded pipeweed and richly flavored wine.
+		<br><br>
+		As it were, the effort was successful, and their union bore something not alike humenity nor dwarfdom. There was no name, at first, before the decades, centuries, passed, yet this remote place continued on in exclusive inclusion of this new 'folk'. The rowdy merrymaking of the dwarves fusing with the industrial nature of the humens what with their vineyards and smokeleaves defined the county that was born from the marriage of these two once separate groups. The earliest, most prominent record of this place calling it 'The Hearth-hills', soon to be known to sprawl over the hillocks and small valleys that rested east of Vanderlin's capital and shortly north-east of Daftmarsh until it formed a small region of counties, such as Leafland, the most commercially powerful district of this reclusive nation of small-folk. Largely unregulated by the higher powers of Vanderlin, The Hearth-hills developed an almost entirely alien culture in comparison to the rest of the world, with many following in the footsteps of the mayor's daughter and her bearded husband. Slowly, it was not humens and dwarves that dwelt in the hillocks betwixt, but halflings. A hardy, green-thumbed folk who wore not shoes but walked barefoot through Dendor's domains, and grew their westleach leaves and berry vines for wine while the rest of Psydonia was painted red with blood. Not even Zizo's war touched them, for they were a shy folk, and few even knew of them before the most recent Mayor of Leafland sent out his Hill-Trodders to bring messages to nearby rulers to establish trade, Geldon Winefoot.
+		<br><br>
+		What is known of these diminutive folk is their propensity towards hearty fellowship, an altogether lacking of frugality or any regard for coin at all in lieu of bartering and gift-giving. Small tent-shaped homes atop their green hills, and their basements of the finest wines and smoke-leaves that could rival even elven stock. Among their culture, carpentry, farming, and winemaking are the most noble professions- with little regard to the more martially inclined individuals, as while they were a necessity to keep the volves out of the pig-pens, it was the art of the meal and pipe-smoking that they valued. Tales of travelers being overwhelmed with joy by this utterly alien place, filled with raucous laughter and grand festivals for the solstices are not uncommon. Grand feasting contests, sack-races, and tree-climbing competitions the most popular amongst these events, it has, since the public reveal of their presence in the hillocks of Vanderlin, become their main attraction for their civilization.
+		<br><br>
+		And true to their nature, Halflings are most commonly known to have full bellies, smaller frames than that of dwarves and far less width to them as well. Curly hair of warm and earthy coloration, with coarse tufts atop the bridge of their proportionally large feet rather than a propensity to wear any sort of shoe to protect their already leathery soles. No magick is present among these people, blessed not with the grand wizardry of Noc but that simpler everyday magicks of the world, for a halfling goes unseen as easily as the wind blows.
+		<br><br>
+		Truly, they are a hearth in this age.
+		<br><br>
+	</details>
+
 	<hr>
 	<strong><span style="font-size:115%"> DIVINE TOLERATED SPECIES </span></strong>
 	<br><br>
@@ -703,7 +730,7 @@ While it's not required reading, leadership roles may find this information usef
 		<br>
 		A devastating massacre carried out by Psydonite settlers and extremists from The Black Empire at St. Samiyas Convent, a northern Lakkarian convent near the Grenzelhoftian border. The abbess of the convent, alongside a countless number of her churchlings and acolytes, were mercilessly slain for reasons that Lakkarian scholars have long struggled to determine.
 		<br><br>
-		Ohemaa of the Dunes, Lakkari's Kandake, swiftly denounced this act of aggression and declared war on The Black Empire.
+		Iteru of the Dunes, Lakkari's Kandake, swiftly denounced this act of aggression and declared war on The Black Empire.
 		<br><br>
 	</details>
 

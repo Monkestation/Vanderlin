@@ -200,6 +200,10 @@
 	glows = TRUE
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 
+/obj/item/organ/eyes/rakshari
+	name = "eyes of cat"
+	accessory_type = /datum/sprite_accessory/eyes/humanoid/rakshari
+
 /obj/item/organ/eyes/no_render
 	accessory_type = null
 

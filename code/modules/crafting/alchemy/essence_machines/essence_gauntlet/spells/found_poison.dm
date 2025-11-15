@@ -17,12 +17,20 @@
 	for(var/obj/item/I in range(1, target_turf))
 		if(I.reagents && I.reagents.has_reagent(/datum/reagent/toxin))
 			I.visible_message(span_warning("[I] glows with a sickly light!"))
+			new /obj/effect/temp_visual/solosnake(get_turf(I))
 			found_poison = TRUE
 			continue
 		if(I.reagents && I.reagents.has_reagent(/datum/reagent/poison))
 			I.visible_message(span_warning("[I] glows with a sickly light!"))
+			new /obj/effect/temp_visual/solosnake(get_turf(I))
 			found_poison = TRUE
 			continue
 
 	if(!found_poison)
 		to_chat(owner, span_notice("No toxins detected in the area."))
+
+/obj/effect/temp_visual/solosnake
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "solosnake"
+	duration = 2 SECONDS
+	layer = EFFECTS_LAYER

@@ -72,6 +72,11 @@
 	filling_color = "#b44f44"
 	overlay_state = "fill_meat"
 
+/obj/item/reagent_containers/food/snacks/raw_pie/borowiki
+	name = "uncoooked borowiki pie"
+	filling_color = "#7c6b75"
+	overlay_state = "fill_pot"
+
 /*--------------\
 | Pie templates |
 \--------------*/
@@ -141,20 +146,30 @@
 	faretype = FARE_FINE
 	portable = FALSE
 
+// ------ GOOD PIE SLICES -----
 /obj/item/reagent_containers/food/snacks/pieslice/good
 	eat_effect = /datum/status_effect/buff/foodbuff
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/pot
 	filling_color = "#9d8c3b"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/fish
 	filling_color = "#bb5a93"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/meat
 	filling_color = "#b44f44"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/berry
 	filling_color = "#394da5"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/apple
 	filling_color = "#eca48c"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/pear
 	filling_color = "#edd28c"
+
+/obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
+	filling_color = "#7c6b75"
 
 // -------------- MEAT PIE -----------------
 /obj/item/reagent_containers/food/snacks/pie/cooked/meat // bae item
@@ -260,6 +275,23 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/pear
 	tastes = list("baked pears and crispy butterdough" = 1)
 /obj/item/reagent_containers/food/snacks/pie/cooked/pear/good/New()
+	. = ..()
+	good_quality_descriptors()
+
+// -------------- BOROWIKI PIE -----------------
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki
+	name = "borowiki pie"
+	desc = "A savory pie filled with hearty borowiki mushrooms."
+	slices_num = 4
+	list_reagents = list(/datum/reagent/consumable/nutriment = MEATPIE_NUTRITION)
+	tastes = list("borowiki and butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good
+	eat_effect = /datum/status_effect/buff/foodbuff
+	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
+	tastes = list("savory borowiki and crispy butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good/New()
 	. = ..()
 	good_quality_descriptors()
 

@@ -53,6 +53,11 @@
 	stress_change = -5
 	desc = span_green("I feel soothed.")
 
+/datum/stress_event/blessed/permanent
+	timer = INFINITY
+	stress_change = -5
+	desc = span_green("I feel soothed.")
+
 /datum/stress_event/triumph
 	timer = 60 MINUTES
 	stress_change = -10
@@ -234,7 +239,7 @@
 	timer = 30 MINUTES
 
 /datum/stress_event/graggar_culling_finished
-	stress_change = -1
+	stress_change = -2
 	desc = span_green("I have prevailed over my rival! Graggar favours me now!")
 	timer = INFINITY
 

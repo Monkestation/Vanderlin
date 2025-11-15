@@ -269,3 +269,20 @@
 //Perspective stranger looks at --> src
 /mob/living/carbon/human/proc/ReturnRelation(mob/living/carbon/human/stranger)
 	return family_datum.ReturnRelation(src, stranger)
+
+/mob/living/carbon/human/proc/configure_npc_mind(list/skill_map)
+	// Ensure the mob has a mind
+	if(!mind)
+		mind = new /datum/mind(src)
+	mind.current = src
+
+	// Validate input
+	if(!islist(skill_map) || !length(skill_map))
+		return
+
+	// Loop through the skill map and set each skill’s rank
+	for(var/skill_path in skill_map)
+		var/rank = skill_map[skill_path]
+		if(!isnum(rank))
+			continue // skip invalid entries
+		adjust_skillrank(skill_path, rank, TRUE)

@@ -8,8 +8,8 @@
 	"monarch_title": "Captain",
 	"monarch_title_f": "Captain",
 	"other_z": [
-		"_maps/map_files/voyager/island_batch.json",
-		"_maps/map_files/voyager/island_batch2.json"
+		"map_files/voyager/island_batch",
+		"map_files/voyager/island_batch2"
 	],
 	"traits": [
 	{"Name": "The Sea", "Up": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Down": true}],

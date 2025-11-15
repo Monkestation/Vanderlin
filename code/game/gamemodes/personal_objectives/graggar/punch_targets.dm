@@ -2,7 +2,7 @@
 	name = "Punch Women"
 	category = "Graggar's Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Graggar grows stronger", "Graggar blesses you (+1 Strength)")
+	rewards = list("2 Triumphs", "Graggar grows stronger", "Graggar blesses you (+2 Strength)")
 	var/punches_done = 0
 	var/punches_required = 3
 
@@ -38,7 +38,7 @@
 
 /datum/objective/personal/punch_women/reward_owner()
 	. = ..()
-	owner.current.set_stat_modifier("graggar_blessing", STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_STR, 2)
 
 /datum/objective/personal/punch_women/update_explanation_text()
 	explanation_text = "Punch women [punches_required] time\s in the face to demonstrate your devotion to Graggar!"

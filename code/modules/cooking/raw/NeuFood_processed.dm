@@ -331,6 +331,21 @@
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
 
+/***************** Mushrooms *****************/
+
+/obj/item/reagent_containers/food/snacks/waddle_dried
+	name = "dried waddle"
+	desc = "A waddle mushroom that has been dried for use in tea. Not pleasant to eat in this state."
+	icon_state = "driedwaddle"
+	dropshrink = 1
+	bitesize = 3
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	w_class = WEIGHT_CLASS_TINY
+	tastes = list("woody" = 1,"bitter" = 1)
+	foodtype = MUSHROOM
+	faretype = FARE_POOR
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+
 /*------------\
 | Salted milk |
 \------------*/		// The base for making butter and cheese
@@ -647,7 +662,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("cheese" = 1)
 	eat_effect = null
-	rotprocess = 20 MINUTES
+	rotprocess = SHELFLIFE_SHORT
 	slices_num = null
 	slice_path = null
 	become_rot_type = null

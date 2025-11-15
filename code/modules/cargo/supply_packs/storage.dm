@@ -32,3 +32,8 @@
 	name = "Scabbard"
 	cost = 15
 	contains = /obj/item/weapon/scabbard/sword
+
+/datum/supply_pack/storage/tray
+	name = "Tray"
+	cost = 10
+	contains = /obj/item/storage/bag/tray

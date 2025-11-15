@@ -1,7 +1,7 @@
-#define VAMPCOST_ONE 10000
-#define VAMPCOST_TWO 12000
-#define VAMPCOST_THREE 15000
-#define VAMPCOST_FOUR 20000
+#define VAMPCOST_ONE 5000
+#define VAMPCOST_TWO 6000
+#define VAMPCOST_THREE 7500
+#define VAMPCOST_FOUR 10000
 
 /obj/structure/vampire/bloodpool
 	name = "Crimson Crucible"

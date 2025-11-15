@@ -204,7 +204,7 @@
 	// if(sharpened_increase)
 	// 	parent_item.force += sharpened_increase
 	parent_item.name += " (wielded)"
-	parent_item.update_appearance()
+	parent_item.update_appearance(UPDATE_ICON_STATE)
 
 	if(user.get_item_by_slot(ITEM_SLOT_BACK) == parent)
 		user.update_inv_back()
@@ -264,7 +264,7 @@
 		parent_item.name = "[initial(parent_item.name)]"
 
 	// Update icons
-	parent_item.update_appearance()
+	parent_item.update_appearance(UPDATE_ICON_STATE)
 
 	if(istype(user)) // tk showed that we might not have a mob here
 		if(user.get_item_by_slot(ITEM_SLOT_BACK) == parent)

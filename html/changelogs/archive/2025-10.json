@@ -932,5 +932,83 @@
                 "bugfix": "Aspirant should now get his rightful supporters."
             }
         ]
+    },
+    "2025-10-30": {
+        "SarmentiCampbell": [
+            {
+                "rscadd": "Town-sided roles get one triumph per night (two triumphs per two night)"
+            },
+            {
+                "rscadd": "Being readied up when the round start give you great food buff, 30 mammons in a stashed pouch, 1 triumph"
+            }
+        ],
+        "dwasint": [
+            {
+                "rscadd": "werewolfs now use rage to determine transformation\\nchange:werewolfs now heal when above 50 rage and in wolf form"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "A new clothing item, and a new role"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "rscdel": "removes a lot of the godawful replacements in the dwarf accent"
+            },
+            {
+                "qol": "makes dwarves actually a bit comprehendable"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Arrows/Bolts/Darts poisoning someone even if their armor stopped the projectile."
+            },
+            {
+                "bugfix": "\\\"My armor was penetrated\\\" happening all the time even if your armor was not penetrated."
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Ravox and Xylix's church roles (including outlanders) get new tunes from T82-Sulfurhead"
+            }
+        ],
+        "AnDigitalGondola": [
+            {
+                "bugfix": "Fixed invisible wooden stools and copper pitchforks."
+            },
+            {
+                "image": "New sprites for barstools and copper pitchforks."
+            },
+            {
+                "rscadd": "Crafting barstools from a log and cloth with carpentry."
+            },
+            {
+                "map": "Changed the majority of existing barstools into wooden stools."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added Nomadic Herder pilgrim and Khan migration wave"
+            },
+            {
+                "rscadd": "Added new steppe armors, clothing and a sword"
+            },
+            {
+                "balance": "Steppesman mercenary changes, can pick between 2 classes"
+            },
+            {
+                "image": "added various steppes related sprites"
+            },
+            {
+                "spellcheck": "fixed a horrible typo in the steppesman mercenary description"
+            },
+            {
+                "code_imp": "Removed mentions of Avars from drinks"
+            },
+            {
+                "bugfix": "Fixed volf mantle sprite on females"
+            }
+        ]
     }
 }

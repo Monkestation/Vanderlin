@@ -502,13 +502,6 @@ will handle it, but:
 	if(centered)
 		. += world.icon_size
 
-/proc/can_embed(obj/item/weapon)
-	if(HAS_TRAIT(weapon, TRAIT_NODROP) || HAS_TRAIT(weapon, TRAIT_NOEMBED))
-		return FALSE
-	if(!weapon.embedding?.embed_chance)
-		return FALSE
-	return TRUE
-
 /*
 Checks if that loc and dir has an item on the wall
 */

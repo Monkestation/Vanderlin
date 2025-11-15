@@ -21,6 +21,7 @@
 			H.change_stat(STATKEY_CON, 1)
 			H.change_stat(STATKEY_PER, 1)
 			H.grant_language(/datum/language/oldpsydonic)
+			ADD_TRAIT(H, TRAIT_PSYDONIAN_GRIT, TRAIT_GENERIC)
 		if(/datum/patron/divine/astrata)
 			head = /obj/item/clothing/head/helmet/heavy/necked/astrata
 			wrists = /obj/item/clothing/neck/psycross/silver/astrata

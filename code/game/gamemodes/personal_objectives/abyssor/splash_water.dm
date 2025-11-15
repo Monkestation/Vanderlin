@@ -2,7 +2,7 @@
 	name = "Splash Water"
 	category = "Abyssor's Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Abyssor grows stronger", "Abyssor blesses you (+1 Constitution)")
+	rewards = list("2 Triumphs", "Abyssor grows stronger", "Abyssor blesses you (+1 Strength)")
 
 /datum/objective/personal/abyssor_splash/on_creation()
 	. = ..()
@@ -36,7 +36,7 @@
 
 /datum/objective/personal/abyssor_splash/reward_owner()
 	. = ..()
-	owner.current.set_stat_modifier("abyssor_blessing", STATKEY_CON, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ABYSSOR_BLESSING, STATKEY_STR, 1)
 
 /datum/objective/personal/abyssor_splash/update_explanation_text()
 	explanation_text = "Abyssor is RAGING! Splash some ingrate who forgot his name with a bucket full of water!"

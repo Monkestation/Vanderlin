@@ -69,6 +69,8 @@
 		/datum/pet_command/calm,
 	)
 
+	var/has_glowy_eyes = TRUE
+
 /mob/living/simple_animal/hostile/retaliate/spider/mutated
 	icon = 'icons/roguetown/mob/monster/spider.dmi'
 	name = "skallax spider"
@@ -87,7 +89,8 @@
 	gender = MALE
 	if(prob(33))
 		gender = FEMALE
-	update_appearance()
+
+	update_appearance(UPDATE_OVERLAYS)
 
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
@@ -139,7 +142,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/spider/update_overlays()
 	. = ..()
-	if(stat == DEAD)
+	if(stat == DEAD || !has_glowy_eyes)
 		return
 	. += emissive_appearance(icon, "honeys-eyes")
 

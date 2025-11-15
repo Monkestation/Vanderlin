@@ -49,7 +49,7 @@
 /obj/item/reagent_containers/food/snacks/rotten/Initialize()
 	var/mutable_appearance/rotflies = mutable_appearance('icons/roguetown/mob/rotten.dmi', "rotten")
 	add_overlay(rotflies)
-	rot_away_timer = QDEL_IN_STOPPABLE(src, 10 MINUTES)
+	rot_away_timer = QDEL_IN_STOPPABLE(src, 15 MINUTES)
 	. = ..()
 
 /obj/item/reagent_containers/food/snacks/rotten/meat
@@ -414,6 +414,10 @@
 /datum/reagent/consumable/soup/stew/truffle
 	color = "#5f4a0e"
 	taste_description = "rich truffles"
+
+/datum/reagent/consumable/soup/stew/borowiki
+	color = "#7c6b75"
+	taste_description = "hearty borowiki"
 
 /datum/reagent/water/spicy // filler, not important
 	taste_description = "something spicy"

@@ -923,6 +923,14 @@
 	craftdiff = 3
 	category = "Cloak"
 
+/datum/repeatable_crafting_recipe/sewing/abyssortemplar/alt
+	name = "abyssal surcoat(alt)"
+	output = /obj/item/clothing/cloak/stabard/templar/abyssor/alt
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	category = "Cloak"
+
 /datum/repeatable_crafting_recipe/sewing/malumtemplar
 	name = "malumite surcoat"
 	output = /obj/item/clothing/cloak/stabard/templar/malum
@@ -1268,6 +1276,16 @@
 	)
 	craftdiff = 3
 	category = "Armor"
+
+/datum/repeatable_crafting_recipe/sewing/spellcasterhat
+	name = "spellsinger Hat"
+	output = /obj/item/clothing/head/spellcasterhat
+	requirements = list(
+		/obj/item/natural/cloth = 3,
+		/obj/item/natural/hide/cured = 1
+	)
+	craftdiff = 2
+	category = "Hat"
 
 /datum/repeatable_crafting_recipe/sewing/spellcasterrobe
 	name = "spellsinger robes"

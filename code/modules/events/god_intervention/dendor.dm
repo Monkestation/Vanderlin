@@ -102,4 +102,4 @@
 	)
 
 /datum/round_event/dendor_ire/start()
-	SSmapping.add_world_trait(/datum/world_trait/dendor_drought, 15 MINUTES)
+	SSmapping.add_world_trait(/datum/world_trait/dendor_drought, 20 MINUTES)

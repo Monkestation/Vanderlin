@@ -3,7 +3,7 @@
 	category = "Ravox's Chosen"
 	triumph_count = 3
 	immediate_effects = list("Gained an ability to challenge others")
-	rewards = list("3 Triumphs", "Ravox grows stronger")
+	rewards = list("3 Triumphs", "Ravox grows stronger", "Ravox blesses you (+1 Strength)")
 	var/duels_won = 0
 	var/duels_required = 1
 
@@ -23,6 +23,10 @@
 	. = ..()
 	to_chat(owner.current, span_greentext("You have proven your worth in combat! Ravox is pleased!"))
 	adjust_storyteller_influence(RAVOX, 20)
+
+/datum/objective/personal/ravox_duel/reward_owner()
+	. = ..()
+	owner.current.adjust_stat_modifier(STATMOD_RAVOX_BLESSING, STATKEY_STR, 1)
 
 /datum/objective/personal/ravox_duel/update_explanation_text()
 	explanation_text = "Win [duels_required] duel\s with honor against other warriors to prove your might!"
@@ -55,7 +59,7 @@
 		qdel(src)
 
 	if(challenger_mob.surrendering || challenger_mob.incapacitated(IGNORE_GRAB))
-		challenged_mob.visible_message(span_notice("[challenged_mob] defeats [challenged_mob] in the honor duel!"))
+		challenged_mob.visible_message(span_notice("[challenged_mob] defeats [challenger_mob] in the honor duel!"))
 		finish_duel(challenger_mob, challenged_mob)
 		return
 	else if(challenged_mob.surrendering || challenged_mob.incapacitated(IGNORE_GRAB))

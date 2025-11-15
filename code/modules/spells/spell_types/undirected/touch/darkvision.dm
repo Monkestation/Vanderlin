@@ -28,7 +28,7 @@
 /datum/action/cooldown/spell/undirected/touch/darkvision/cast_on_hand_hit(obj/item/melee/touch_attack/hand, mob/living/victim, mob/living/carbon/caster, list/modifiers)
 	. = ..()
 	if(!do_after(caster, 5 SECONDS, victim))
-		return
+		return FALSE
 
 	var/duration_increase = attuned_strength * 2 MINUTES
 
@@ -38,6 +38,7 @@
 		caster.visible_message("[caster] draws a glyph in the air and touches themselves with an arcyne focus.")
 
 	victim.apply_status_effect(/datum/status_effect/buff/darkvision, 10 MINUTES + duration_increase)
+	return TRUE
 
 /obj/item/melee/touch_attack/darkvision
 	name = "\improper arcyne focus"

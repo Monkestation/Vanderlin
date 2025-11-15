@@ -10,7 +10,7 @@
 	)
 
 	hand_path = /obj/item/melee/touch_attack/bladeofpsydon
-	draw_message ="I imagine the perfect weapon, forged by arcyne knowledge, it's edge flawless. \
+	draw_message = "I imagine the perfect weapon, forged by arcyne knowledge, it's edge flawless. \
 	I feel it in my mind's eye -- but it's just out of reach. I pull away it's shadow, a bad copy, and yet it is one of a great weapon nonetheless... "
 	drop_message = "I release my arcyne focus."
 	charges = 3

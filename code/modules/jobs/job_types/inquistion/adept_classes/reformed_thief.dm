@@ -30,6 +30,9 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_DODGEEXPERT,
 		TRAIT_KNOWBANDITS,
+		TRAIT_BLACKBAGGER,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 	)
 	jobstats = list(
 		STATKEY_STR = -1,
@@ -45,14 +48,13 @@
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/splint
 	head = /obj/item/clothing/head/adeptcowl
-	neck = /obj/item/clothing/neck/gorget
+	neck = /obj/item/clothing/neck/gorget/explosive
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backl = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/mace/cudgel
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/shredded
-	backpack_contents = list(/obj/item/lockpick = 1, /obj/item/storage/keyring/adept = 1, /obj/item/weapon/knife/dagger/silver/psydon = 1)
-
+	backpack_contents = list(/obj/item/lockpick = 1, /obj/item/storage/keyring/adept = 1, /obj/item/weapon/knife/dagger/silver/psydon = 1, 	/obj/item/clothing/head/inqarticles/blackbag = 1,	/obj/item/inqarticles/garrote = 1,)
 	H.grant_language(/datum/language/thievescant)
 	to_chat(H, span_info("I can gesture in thieves' cant with ,t before my speech."))
 

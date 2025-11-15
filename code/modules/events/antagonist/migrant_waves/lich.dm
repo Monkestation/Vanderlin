@@ -4,7 +4,7 @@
 
 	weight = 6
 
-	earliest_start = 20 MINUTES
+	earliest_start = 25 MINUTES
 
 	tags = list(
 		TAG_ZIZO,
