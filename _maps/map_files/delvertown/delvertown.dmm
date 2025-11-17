@@ -5144,6 +5144,10 @@
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/darker,
 /area/rogue/delver/inn)
+"Kt" = (
+/obj/structure/coral_formation/small,
+/turf/open/floor/abyss_sand,
+/area/rogue/delver/mountains)
 "Kv" = (
 /obj/machinery/light/fueledstreet/blue{
 	dir = 8
@@ -11360,7 +11364,7 @@ od
 TJ
 IH
 dG
-WT
+Kt
 fp
 tT
 md
