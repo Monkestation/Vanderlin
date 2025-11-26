@@ -145,12 +145,12 @@
 	output = /obj/item/reagent_containers/food/snacks/pie/cooked/poison
 	cooked_smell = /datum/pollutant/food/berry_pie
 
-/datum/container_craft/oven/pie/borowiki
-	name = "Borowiki Pie"
-	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/borowiki = 1)
-	output = /obj/item/reagent_containers/food/snacks/pie/cooked/borowiki
-	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good
-	cooked_smell = /datum/pollutant/food/borowiki_pie
+/datum/container_craft/oven/pie/kirunabal
+	name = "Kirunabal Pie"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/kirunabal = 1)
+	output = /obj/item/reagent_containers/food/snacks/pie/cooked/kirunabal
+	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/kirunabal/good
+	cooked_smell = /datum/pollutant/food/kirunabal_pie
 
 /datum/container_craft/oven/bread
 	name = "Bread"

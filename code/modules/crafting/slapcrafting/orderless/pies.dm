@@ -159,9 +159,9 @@
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit
 
-/datum/orderless_slapcraft/food/pie/borowiki
-	name = "unbaked borowiki pie"
-	requirements = list(/obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki = 3
+/datum/orderless_slapcraft/food/pie/kirunabal
+	name = "unbaked kirunabal pie"
+	requirements = list(/obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal = 3
 		)
 	overlay_state = "fill_pot"
-	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/borowiki
+	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/kirunabal

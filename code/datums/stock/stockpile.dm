@@ -126,10 +126,10 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
-/datum/stock/stockpile/borowiki
-	name = "Borowiki"
+/datum/stock/stockpile/kirunabal
+	name = "Kirunabal"
 	desc = "A hearty mushroom fit for stews and pies."
-	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
+	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal
 	held_items = 2
 	payout_price = 2
 	withdraw_price = 7

@@ -247,9 +247,9 @@
 	icon_state = "caveweep2"
 	plant_type = /datum/plant_def/mushroom/caveweep
 
-/obj/structure/wild_plant/nospread/mushroom/borowiki
-	icon_state = "borowiki2"
-	plant_type = /datum/plant_def/mushroom/borowiki
+/obj/structure/wild_plant/nospread/mushroom/kirunabal
+	icon_state = "kirunabal2"
+	plant_type = /datum/plant_def/mushroom/kirunabal
 
 /* /obj/structure/wild_plant/nospread/mushroom/chanterelle // Removing for now to expand upon later
 	icon_state = "chanterelle2"

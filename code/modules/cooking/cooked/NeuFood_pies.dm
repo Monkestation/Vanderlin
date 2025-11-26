@@ -72,8 +72,8 @@
 	filling_color = "#b44f44"
 	overlay_state = "fill_meat"
 
-/obj/item/reagent_containers/food/snacks/raw_pie/borowiki
-	name = "uncoooked borowiki pie"
+/obj/item/reagent_containers/food/snacks/raw_pie/kirunabal
+	name = "uncoooked kirunabal pie"
 	filling_color = "#7c6b75"
 	overlay_state = "fill_pot"
 
@@ -168,7 +168,7 @@
 /obj/item/reagent_containers/food/snacks/pieslice/good/pear
 	filling_color = "#edd28c"
 
-/obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
+/obj/item/reagent_containers/food/snacks/pieslice/good/kirunabal
 	filling_color = "#7c6b75"
 
 // -------------- MEAT PIE -----------------
@@ -278,20 +278,20 @@
 	. = ..()
 	good_quality_descriptors()
 
-// -------------- BOROWIKI PIE -----------------
-/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki
-	name = "borowiki pie"
-	desc = "A savory pie filled with hearty borowiki mushrooms."
+// -------------- KIRUNABAL PIE -----------------
+/obj/item/reagent_containers/food/snacks/pie/cooked/kirunabal
+	name = "kirunabal pie"
+	desc = "A savory pie filled with hearty kirunabal mushrooms."
 	slices_num = 4
 	list_reagents = list(/datum/reagent/consumable/nutriment = MEATPIE_NUTRITION)
-	tastes = list("borowiki and butterdough" = 1)
+	tastes = list("kirunabal and butterdough" = 1)
 
-/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good
+/obj/item/reagent_containers/food/snacks/pie/cooked/kirunabal/good
 	eat_effect = /datum/status_effect/buff/foodbuff
-	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
-	tastes = list("savory borowiki and crispy butterdough" = 1)
+	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/kirunabal
+	tastes = list("savory kirunabal and crispy butterdough" = 1)
 
-/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good/New()
+/obj/item/reagent_containers/food/snacks/pie/cooked/kirunabal/good/New()
 	. = ..()
 	good_quality_descriptors()
 

@@ -66,7 +66,7 @@
 
 			<h3>Dikarya - Fungus Family</h3>
 			<b>Characteristics:</b> Not truly a plant, this family consists of strange fungi that can be grown without sunlight. Members of this family succumb quickly to cold conditions.<br>
-			<b>Examples:</b> Capillus Mort, Borowiki, Merkel<br>
+			<b>Examples:</b> Capillus Mort, Kirunabal, Merkel<br>
 			<b>Growing Tips:</b> Generally need warm conditions and nitrogen heavy fertilizer to grow. Good for succession planting. Thrive when planted in mushroom mounds.<br>
 			<br>
 

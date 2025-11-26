@@ -15,7 +15,7 @@
 	produce_amount_max = 5
 	produce_time = FAST_PRODUCE_TIME
 	nitrogen_requirement = 0
-	phosphorus_requirement = 30 // Grows well with its companion, borowiki
+	phosphorus_requirement = 30 // Grows well with its companion, kirunabal
 	nitrogen_production = 20
 	phosphorus_production = 0
 	potassium_production = 0
@@ -26,21 +26,21 @@
 	base_genetics.cold_resistance = TRAIT_GRADE_POOR
 	base_genetics.water_efficiency = TRAIT_GRADE_POOR
 
-/datum/plant_def/mushroom/borowiki
-	name = "borowiki cluster"
-	icon_state = "borowiki"
-	produce_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
+/datum/plant_def/mushroom/kirunabal
+	name = "kirunabal cluster"
+	icon_state = "kirunabal"
+	produce_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal
 	produce_amount_min = 2
 	produce_amount_max = 5
 	produce_time = DEFAULT_PRODUCE_TIME
-	nitrogen_requirement = 40 // Borowiki is a cultivar that produces more and heartier mushrooms, but requires more N than most.
+	nitrogen_requirement = 40 // Kirunabal is a cultivar that produces more and heartier mushrooms, but requires more N than most.
 	phosphorus_requirement = 0
 	nitrogen_production = 0
 	phosphorus_production = 20
 	potassium_production = 0
-	seed_identity = "borowiki spores"
+	seed_identity = "kirunabal spores"
 
-/datum/plant_def/mushroom/borowiki/set_genetic_tendencies(datum/plant_genetics/base_genetics)
+/datum/plant_def/mushroom/kirunabal/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.growth_speed = TRAIT_GRADE_GOOD
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
 

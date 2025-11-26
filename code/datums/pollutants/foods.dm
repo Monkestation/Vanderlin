@@ -32,9 +32,9 @@
 	name = "berry pie"
 	scent = "berry pie"
 
-/datum/pollutant/food/borowiki_pie
-	name = "borowiki pie"
-	scent = "borowiki pie"
+/datum/pollutant/food/kirunabal_pie
+	name = "kirunabal pie"
+	scent = "kirunabal pie"
 
 /datum/pollutant/food/bread
 	name = "fresh baked bread"
@@ -208,9 +208,9 @@
 	name = "truffle stew"
 	scent = "truffle stew"
 
-/datum/pollutant/food/borowiki_stew
-	name = "borowiki stew"
-	scent = "borowiki stew"
+/datum/pollutant/food/kirunabal_stew
+	name = "kirunabal stew"
+	scent = "kirunabal stew"
 
 /datum/pollutant/food/cheese_soup
 	name = "cheese soup"
