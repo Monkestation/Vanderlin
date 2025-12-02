@@ -60,7 +60,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 		new /datum/time_of_day/dusk(),
 		new /datum/time_of_day/midnight()
 	)
-	var/list/turf_weather_affectable_z_levels = alist()
+	var/alist/turf_weather_affectable_z_levels = alist()
 	var/next_day = FALSE // Resets when station_time is less than the next start time.
 
 /datum/controller/subsystem/outdoor_effects/Initialize(timeofday)
@@ -86,11 +86,11 @@ SUBSYSTEM_DEF(outdoor_effects)
 	for(var/z in SSmapping.levels_by_trait(ZTRAIT_STATION))
 		if(SSmapping.level_trait(z, ZTRAIT_IGNORE_WEATHER_TRAIT))
 			continue
-		GLOB.SUNLIGHT_QUEUE_WORK += block(1,1,z, world.maxx,world.maxy,z)
+		GLOB.SUNLIGHT_QUEUE_WORK += Z_TURFS(z)
 	for(var/z in SSmapping.levels_by_trait(ZTRAIT_CENTCOM))
 		if(SSmapping.level_trait(z, ZTRAIT_IGNORE_WEATHER_TRAIT))
 			continue
-		GLOB.SUNLIGHT_QUEUE_WORK += block(1,1,z, world.maxx,world.maxy,z)
+		GLOB.SUNLIGHT_QUEUE_WORK += Z_TURFS(z)
 
 /datum/controller/subsystem/outdoor_effects/proc/check_cycle()
 	if(!next_step_datum)
@@ -202,7 +202,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 	// this list can get REALLY LONG so we do this to avoid list copies
 	for (i in 1 to length(GLOB.SUNLIGHT_QUEUE_CORNER))
 		var/turf/T = GLOB.SUNLIGHT_QUEUE_CORNER[i]
-		T.sunlight_corner_queued = FALSE
+		T.turf_flags &= ~TURF_SUNLIGHT_QUEUED
 		var/atom/movable/outdoor_effect/U = T.outdoor_effect
 
 		/* if we haven't initialized but we are affected, create new and check state */

@@ -14,3 +14,7 @@
 /// Attempt to get the turf above and to the side according to Z traits. Should include UP still.
 #define GET_TURF_ABOVE_DIAGONAL(turf, direction) (\
 	(!(turf) || !length(SSmapping.multiz_levels) || !SSmapping.multiz_levels[(turf).z][Z_LEVEL_UP]) ? null : get_step((turf), direction))
+
+/// Similar to GET_TURF_ABOVE, but without unnecessary safety checks, mostly for use in weather/sunlight code.
+/// Assumptions: turf is non-null, SSmapping.multiz_levels has been initialized.
+#define _GET_TURF_ABOVE_UNSAFE(turf) (SSmapping.multiz_levels[(turf).z][Z_LEVEL_UP]) && get_step((turf), UP)
