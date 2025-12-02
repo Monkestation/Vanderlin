@@ -1,11 +1,11 @@
 /obj/effect/mob_spawn/human/demi
-	mob_species = /datum/species/demihuman
+	mob_type = /mob/living/carbon/human/species/demihuman
 
 /obj/effect/mob_spawn/human/demi/trader
 	outfit = /datum/outfit/bard
 
 /obj/effect/mob_spawn/human/elf
-	mob_species = /datum/species/elf/snow
+	mob_type = /mob/living/carbon/human/species/elf/snow
 
 /obj/effect/mob_spawn/human/elf/trader
 	outfit = /datum/outfit/bard

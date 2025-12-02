@@ -13,7 +13,6 @@
 /mob/living/carbon/human/species/elf/dark/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
-	set_species(/datum/species/elf/dark)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
 	job = "Graggarite Dark Elf"

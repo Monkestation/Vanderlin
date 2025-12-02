@@ -40,6 +40,9 @@
 		set_accessory_type(prefs, default_accessory, entry)
 	return entry
 
+// For some reason, it's entirely valid for prefs to be a carbon mob instead.
+// This should likely be better documented, separated into a keyword argument,
+// or made an entirely different proc like randomize_entry_from_mob().
 /datum/customizer_choice/proc/randomize_entry(datum/customizer_entry/entry, datum/preferences/prefs, color = TRUE, accessory = TRUE)
 	if(accessory)
 		var/random_accessory

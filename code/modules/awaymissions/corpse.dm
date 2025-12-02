@@ -117,8 +117,8 @@
 // Base version - place these on maps/templates.
 /obj/effect/mob_spawn/human
 	mob_type = /mob/living/carbon/human
+	// To spawn a specific species, please use a subtype of /mob/living/carbon/human/species as the mob_type.
 	//Human specific stuff.
-	var/mob_species = null		//Set to make them a mutant race such as lizard or skeleton. Uses the datum typepath instead of the ID.
 	var/datum/outfit/outfit = /datum/outfit	//If this is a path, it will be instanced in Initialize()
 	var/disable_pda = TRUE
 	var/disable_sensors = TRUE
@@ -161,8 +161,6 @@
 	return ..()
 
 /obj/effect/mob_spawn/human/equip(mob/living/carbon/human/H)
-	if(mob_species)
-		H.set_species(mob_species)
 	H.cure_husk()
 	H.underwear = "Nude"
 	H.undershirt = "Nude"

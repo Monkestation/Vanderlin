@@ -132,16 +132,13 @@
 	// verbs += /mob/living/proc/mob_sleep
 	verbs += /mob/living/proc/lay_down
 
-	//initialize limbs first
+	create_dna()
 	create_bodyparts()
-
 	setup_human_dna()
 
-	if(dna.species)
-		set_species(dna.species.type)
+	// generates our organs and such
+	set_species(dna.species.type)
 
-	//initialise organs
-	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
 
 	. = ..()
@@ -197,8 +194,7 @@
 
 /mob/living/carbon/human/proc/setup_human_dna()
 	//initialize dna. for spawned humans; overwritten by other code
-	create_dna(src)
-	randomize_human(src)
+	randomize_human_appearance(~RANDOMIZE_SPECIES) // replaced random_human
 	dna.initialize_dna()
 
 /mob/living/carbon/human/Stat()
@@ -936,10 +932,15 @@
 /mob/living/carbon/human/species
 	var/race = null
 
+// take advantage of base-level set_species to avoid calling it
+// over and over and over and over and over again
+/mob/living/carbon/human/species/create_dna()
+	dna = new /datum/dna(src)
+	if(!isnull(race))
+		dna.species = new race
+
 /mob/living/carbon/human/species/Initialize()
 	. = ..()
-	if(race)
-		set_species(race)
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/species/LateInitialize()

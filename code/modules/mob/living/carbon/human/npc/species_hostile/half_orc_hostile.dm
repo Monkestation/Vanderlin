@@ -13,7 +13,6 @@
 /mob/living/carbon/human/species/halforc/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
-	set_species(/datum/species/halforc)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
 	job = "Graggarite Half Orc"

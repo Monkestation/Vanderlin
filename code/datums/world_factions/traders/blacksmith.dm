@@ -20,7 +20,7 @@
 	///The spawner we use to create our look
 	var/obj/effect/mob_spawn/human/spawner_path = /obj/effect/mob_spawn/human/dwarf/trader
 	///Our species to create our look
-	var/species_path = /datum/species/human
+	var/species_path = /datum/species/dwarf/mountain
 	///Casing used to shoot during retaliation
 	var/ranged_attack_casing = /obj/item/ammo_casing/caseless/arrow
 	///Sound to make while doing a retalitory attack
@@ -36,7 +36,7 @@
 /mob/living/simple_animal/hostile/retaliate/blacksmith/Initialize(mapload, custom = FALSE, spawner_type, datum/weakref/_faction_ref)
 	. = ..()
 
-	apply_dynamic_human_appearance(src, species_path = initial(spawner_path.mob_species), mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
+	apply_dynamic_human_appearance(src, species_path = species_path, mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
 
 	AddComponent(/datum/component/blacksmith, trader_data_path = trader_data_path, training_data_path = training_data_path)
 

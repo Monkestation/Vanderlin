@@ -16,7 +16,6 @@ GLOBAL_LIST_INIT(species_hostile, world.file2list('strings/rt/species_hostile.tx
 /mob/living/carbon/human/species/aasimar/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
-	set_species(/datum/species/aasimar)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
 	job = "Graggarite Aasimar"

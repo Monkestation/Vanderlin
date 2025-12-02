@@ -13,7 +13,6 @@
 /mob/living/carbon/human/species/human/space/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
-	set_species(/datum/species/human/space)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
 	job = "Graggarite Human"

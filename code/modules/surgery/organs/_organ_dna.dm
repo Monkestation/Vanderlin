@@ -1,6 +1,6 @@
 /datum/organ_dna
 	/// Type of the organ thats imprinted.
-	var/organ_type
+	var/obj/item/organ/organ_type
 	/// Accessory type thats imprinted.
 	var/accessory_type
 	/// Accessory colors thats imprinted.

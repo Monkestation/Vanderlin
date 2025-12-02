@@ -4,7 +4,7 @@
 	//cloak = /obj/item/clothing/cloak/raincloak/purple
 
 /obj/effect/mob_spawn/human/trition
-	mob_species = /datum/species/triton
+	mob_type = /mob/living/carbon/human/species/triton
 
 /obj/effect/mob_spawn/human/trition/zhong
 	outfit = /datum/outfit/zhongese

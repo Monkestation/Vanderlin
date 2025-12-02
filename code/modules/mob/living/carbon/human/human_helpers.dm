@@ -160,7 +160,7 @@
 
 /// Fully randomizes everything in the character.
 // Reflect changes in [datum/preferences/proc/randomise_appearance_prefs]
-/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_donator = TRUE)
+/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL&~RANDOMIZE_PRONOUNS&~RANDOMIZE_VOICETYPE, include_donator = TRUE)
 	if(!dna)
 		return
 
@@ -169,12 +169,52 @@
 		set_species(new rando_race(), FALSE)
 
 	var/datum/species/species = dna.species
+	// We implicitly expect that dna.species is non-null here.
+	// Some stuff did null-checks, other stuff didn't,
+	// so I removed them and made it consistent.
+	// Also we need to make sure our customizer entries are valid here.
+	species.validate_customizer_entries(src)
+	species.reset_all_customizer_accessory_colors(src)
 
-	if(NOEYESPRITES in species?.species_traits)
+	if(NOEYESPRITES in species.species_traits)
 		randomise_flags &= ~RANDOMIZE_EYE_COLOR
 
 	if(randomise_flags & RANDOMIZE_GENDER)
 		gender = species.sexes ? pick(MALE, FEMALE) : PLURAL
+
+	// by default pronouns and voicetype aren't randomized
+	// c.f. default value for randomise_flags
+	var/list/allowed_voices
+	switch(gender)
+		if(MALE)
+			pronouns = HE_HIM
+			allowed_voices = species.allowed_voicetypes_m
+			voice_type = VOICE_TYPE_MASC
+		if(FEMALE)
+			pronouns = SHE_HER
+			allowed_voices = species.allowed_voicetypes_f
+			voice_type = VOICE_TYPE_FEM
+		if(PLURAL)
+			pronouns = THEY_THEM
+			allowed_voices = VOICE_TYPES_LIST
+			voice_type = VOICE_TYPE_ANDRO
+		else
+			pronouns = IT_ITS
+			allowed_voices = VOICE_TYPES_LIST
+			voice_type = VOICE_TYPE_ANDRO
+
+	if(!LAZYLEN(allowed_voices))
+		allowed_voices = VOICE_TYPE_ANDRO
+
+	if((randomise_flags & RANDOMIZE_VOICETYPE) || !(voice_type in allowed_voices))
+		voice_type = pick(allowed_voices)
+
+	var/list/allowed_pronouns = species.allowed_pronouns
+	if(!LAZYLEN(allowed_pronouns))
+		allowed_pronouns = PRONOUNS_LIST
+
+	if ((randomise_flags & RANDOMIZE_PRONOUNS) || !(pronouns in allowed_pronouns))
+		pronouns = pick(allowed_pronouns)
 
 	if(randomise_flags & RANDOMIZE_AGE)
 		age = pick(species.possible_ages)
@@ -184,6 +224,24 @@
 
 	if(randomise_flags & RANDOMIZE_UNDERWEAR)
 		underwear = species.random_underwear(gender)
+
+	if(randomise_flags & (RANDOMIZE_HAIRSTYLE | RANDOMIZE_HAIR_COLOR))
+		var/datum/customizer_entry/hair/entry = species.get_customizer_entry_of_type(/datum/customizer_entry/hair/head)
+		if(entry)
+			var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
+			var/color = (randomise_flags & RANDOMIZE_HAIR_COLOR)
+			var/accessory = (randomise_flags & RANDOMIZE_HAIRSTYLE)
+			// REALLY weird that a mob is an acceptable value for the prefs argument but what do I know
+			customizer_choice.randomize_entry(entry, src, color, accessory)
+
+	if(randomise_flags & (RANDOMIZE_FACIAL_HAIRSTYLE | RANDOMIZE_FACIAL_HAIR_COLOR))
+		var/datum/customizer_entry/hair/entry = species.get_customizer_entry_of_type(/datum/customizer_entry/hair/facial)
+		if(entry)
+			var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
+			var/color = (randomise_flags & RANDOMIZE_FACIAL_HAIR_COLOR)
+			var/accessory = (randomise_flags & RANDOMIZE_FACIAL_HAIRSTYLE)
+			// see above comment about prefs
+			customizer_choice.randomize_entry(entry, src, color, accessory)
 
 	if(randomise_flags & RANDOMIZE_SKIN_TONE)
 		var/list/skin_list = species.get_skin_list()

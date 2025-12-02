@@ -12,7 +12,6 @@
 /mob/living/carbon/human/species/dwarf/mountain/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
-	set_species(/datum/species/dwarf/mountain)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
 	job = "Graggarite Dwarf"

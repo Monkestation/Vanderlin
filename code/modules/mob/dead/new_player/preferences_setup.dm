@@ -1,6 +1,6 @@
 /// Randomizes our character preferences according to enabled bitflags.
 // Reflect changes in [mob/living/carbon/human/proc/randomize_human_appearance]
-/datum/preferences/proc/randomise_appearance_prefs(randomise_flags = ALL, include_donator = FALSE)
+/datum/preferences/proc/randomise_appearance_prefs(randomise_flags = ALL&~RANDOMIZE_PRONOUNS&~RANDOMIZE_VOICETYPE, include_donator = FALSE)
 	if(randomise_flags & RANDOMIZE_SPECIES)
 		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_donator))]
 		pref_species = new rando_race()
@@ -11,7 +11,8 @@
 	if(randomise_flags & RANDOMIZE_GENDER)
 		gender = pref_species.sexes ? pick(MALE, FEMALE) : PLURAL
 
-	// pronouns and voice should match gender, not randomized
+	// by default pronouns and voicetype aren't randomized
+	// c.f. default value for randomise_flags
 	var/list/allowed_voices
 	switch(gender)
 		if(MALE)
@@ -34,14 +35,14 @@
 	if(!allowed_voices || !length(allowed_voices))
 		allowed_voices = VOICE_TYPE_ANDRO
 
-	if(!(voice_type in allowed_voices))
+	if((randomise_flags & RANDOMIZE_VOICETYPE) || !(voice_type in allowed_voices))
 		voice_type = pick(allowed_voices)
 
 	var/list/allowed_pronouns = pref_species.allowed_pronouns
 	if(!allowed_pronouns || !length(allowed_pronouns))
 		allowed_pronouns = PRONOUNS_LIST
 
-	if (!(pronouns in allowed_pronouns))
+	if ((randomise_flags & RANDOMIZE_PRONOUNS) || !(pronouns in allowed_pronouns))
 		pronouns = pick(allowed_pronouns)
 
 	if(randomise_flags & RANDOMIZE_AGE)

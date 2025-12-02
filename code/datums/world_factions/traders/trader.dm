@@ -38,7 +38,7 @@
 	target.copy_overlays(dynamic_appearance, cut_old = TRUE)
 
 /obj/effect/mob_spawn/human/rakshari
-	mob_species = /datum/species/rakshari
+	mob_type = /mob/living/carbon/human/species/rakshari
 
 /obj/effect/mob_spawn/human/rakshari/trader
 	outfit = /datum/outfit/tailor
@@ -71,7 +71,7 @@
 	///The spawner we use to create our look
 	var/obj/effect/mob_spawn/human/spawner_path = /obj/effect/mob_spawn/human/rakshari/trader
 	///Our species to create our look
-	var/species_path = /datum/species/human
+	var/species_path = /datum/species/rakshari
 	///Casing used to shoot during retaliation
 	var/ranged_attack_casing = /obj/item/ammo_casing/caseless/arrow
 	///Sound to make while doing a retalitory attack
@@ -93,7 +93,7 @@
 		name = "[faction.faction_name] Trader"
 		desc = "A trader from the [faction.faction_name]."
 
-	apply_dynamic_human_appearance(src, species_path = initial(spawner_path.mob_species), mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
+	apply_dynamic_human_appearance(src, species_path = species_path, mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
 
 	if(!custom)
 		var/datum/trader_data/trader_data = new trader_data_path

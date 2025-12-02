@@ -74,6 +74,8 @@
 
 	var/datum/party/current_party
 	var/list/party_hud_elements = list()
+	/// Only load in visual organs (eyes, etc) to avoid unnecessary organ creation and deletion
+	var/visual_only_organs = FALSE
 
 	/// if they get a mana pool
 	has_initial_mana_pool = TRUE

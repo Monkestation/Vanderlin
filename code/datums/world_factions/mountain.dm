@@ -1,5 +1,5 @@
 /obj/effect/mob_spawn/human/dwarf
-	mob_species = /datum/species/dwarf/mountain
+	mob_type = /mob/living/carbon/human/species/dwarf/mountain
 
 /obj/effect/mob_spawn/human/dwarf/trader
 	outfit = /datum/outfit/miner

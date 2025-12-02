@@ -13,7 +13,6 @@
 /mob/living/carbon/human/species/human/halfdrow/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
-	set_species(/datum/species/human/halfdrow)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
 	job = "Graggarite Half-Drow"
