@@ -69,18 +69,17 @@
 	var/list/dungeon_turfs = Z_TURFS(SSdungeon_generator.dungeon_z + 1)
 	var/turf/open/chosen_turf
 	while(!chosen_turf && length(dungeon_turfs))
-		var/turf/T = pick(dungeon_turfs)
+		var/turf/T = pick_n_take(dungeon_turfs)
 		if(istype(T, /turf/open))
 			chosen_turf = T
 		else if(istype(T, /turf/closed/dungeon_void)) // lets you fall through to the bottom level in some places
-			var/turf/dT = get_open_turf_in_dir(T, DOWN)
-			chosen_turf = dT
-
-		for(var/obj/O in chosen_turf?.contents)
-			if(istype(O, /obj/structure))
-				var/obj/structure/S = O
-				if(S.density > 0 && !S.climbable) // keeps you from landing inside bars or something
-					dungeon_turfs = null
-					break
-		dungeon_turfs -= T
+			chosen_turf = GET_TURF_BELOW(T)
+		// no chosen_turf this step so don't bother with the parts after this
+		if(!chosen_turf)
+			continue
+		// check if our chosen_turf actually works
+		for(var/obj/structure/struct in chosen_turf)
+			if(struct.density && !struct.climbable) // keeps you from landing inside bars or something
+				chosen_turf = null // ineligible
+				break
 	return chosen_turf
