@@ -32,7 +32,5 @@ block( \
 #define NO_JAUNT (1 << 2)
 /// Fluid effects can't spawn in this turf
 #define TURF_NO_LIQUID_SPREAD (1<<3)
-/// Prevents weather from acting on this turf
-#define TURF_WEATHER_PROOF (1<<4)
 /// Used for snowstorms (why?)
-#define TURF_EFFECT_AFFECTABLE (1<<5)
+#define TURF_EFFECT_AFFECTABLE (1<<4)
