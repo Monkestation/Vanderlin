@@ -137,7 +137,9 @@
 	setup_human_dna()
 
 	// generates our organs and such
-	set_species(dna.species.type)
+	// pass our existing dna since it's had setup done!!
+	// why does tg not do this? i guess we'll find out!!
+	set_species(dna.species)
 
 	physiology = new()
 
@@ -194,7 +196,11 @@
 
 /mob/living/carbon/human/proc/setup_human_dna()
 	//initialize dna. for spawned humans; overwritten by other code
-	randomize_human_appearance(~RANDOMIZE_SPECIES) // replaced random_human
+	randomize_human_appearance(~(RANDOMIZE_SPECIES|RANDOMIZE_VOICETYPE|RANDOMIZE_PRONOUNS|RANDOMIZE_AGE)) // replaced random_human
+	// these have to be done separately
+	dna.species.validate_customizer_entries(src)
+	dna.species.reset_all_customizer_accessory_colors(src)
+	dna.species.randomize_all_customizer_accessories(src)
 	dna.initialize_dna()
 
 /mob/living/carbon/human/Stat()

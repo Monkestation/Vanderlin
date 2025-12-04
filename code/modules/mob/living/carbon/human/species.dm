@@ -22,6 +22,8 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/sexes = TRUE
 	/// Whether this species a requires donator subscription to access, we removed all donator restrictions for species, but it's here if we ever want to reenable them or smth.
 	var/donator_req = FALSE
+	// Has on_species_gain been called on this yet? Human/species/dna/etc. init ordering is weird...
+	var/tmp/properly_gained = FALSE
 
 	/**
 	 * The list of pronouns this species allows in the character sheet.
@@ -555,13 +557,14 @@ GLOBAL_LIST_EMPTY(donator_races)
 
 //Will regenerate missing organs
 /datum/species/proc/regenerate_organs(mob/living/carbon/C, datum/species/old_species, replace_current=TRUE, list/excluded_zones, datum/preferences/pref_load, visual_only = FALSE)
-	/// Add DNA and create organs from prefs
-	if(pref_load)
-		/// Clear the dna
-		C.dna.organ_dna = list()
-		var/list/organ_dna_list = pref_load.get_organ_dna_list()
-		for(var/organ_slot in organ_dna_list)
-			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+	/// Add DNA and create organs from prefs (or the mob, if no prefs provided)
+	/// Clear the dna
+	C.dna.organ_dna = list()
+	// someone please unfuck the duplication between species and prefs
+	// this is awful
+	var/list/organ_dna_list = get_organ_dna_list(pref_load || C, pref_load ? pref_load.customizer_entries : customizer_entries) // use the mob, since that's evidently allowed
+	for(var/organ_slot in organ_dna_list)
+		C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
 
 	//what should be put in if there is no mutantorgan (brains handled seperately)
 	var/list/slot_mutantorgans = organs
@@ -664,6 +667,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	customizer_entries = SANITIZE_LIST(customizer_entries)
 	listclearnulls(customizer_entries)
 	/// Check if we have any customizer entries that don't match.
+	var/list/customizers_still_needed = LAZYLISTDUPLICATE(customizers)
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/validated = FALSE
 		for(var/customizer_type as anything in customizers)
@@ -676,22 +680,38 @@ GLOBAL_LIST_EMPTY(donator_races)
 			if(entry.type != customizer_choice.customizer_entry_type)
 				continue
 			validated = TRUE
+			customizers_still_needed -= entry.customizer_type
 			break
 
 		if(!validated)
 			customizer_entries -= entry
 
 	/// Check if we have any missing customizer entries
-	for(var/customizer_type as anything in customizers)
-		var/expected_customizer = get_customizer_entry_of_type(customizer_type)
-		if(!expected_customizer)
-			var/datum/customizer/customizer = CUSTOMIZER(customizer_type)
-			customizer_entries += customizer.make_default_customizer_entry(human, FALSE)
+	for(var/customizer_type as anything in customizers_still_needed)
+		var/datum/customizer/customizer = CUSTOMIZER(customizer_type)
+		customizer_entries += customizer.make_default_customizer_entry(human, FALSE)
 
 	/// Validate the variables within customizer entries
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
 		customizer_choice.validate_entry(human, entry)
+
+/// Gets an associative list of organ slots to organ dna created from organ customization
+/proc/get_organ_dna_list(datum/pref_or_mob, list/customizer_entries)
+	var/list/organ_list = list()
+	for(var/datum/customizer_entry/entry as anything in customizer_entries)
+		var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
+		var/datum/customizer/customizer = CUSTOMIZER(entry.customizer_type)
+		if(!customizer.is_allowed(pref_or_mob))
+			continue
+		if(entry.disabled)
+			continue
+		var/datum/organ_dna/dna = customizer_choice.create_organ_dna(entry, pref_or_mob)
+		if(!dna)
+			continue
+		organ_list[customizer_choice.get_organ_slot()] = dna
+
+	return organ_list
 
 // mirrored from /datum/preferences
 /datum/species/proc/get_customizer_entry_of_type(entry_type)
@@ -713,6 +733,8 @@ GLOBAL_LIST_EMPTY(donator_races)
 
 	C.mob_biotypes = inherent_biotypes
 
+	// this is necessary so that regenerate_organs works properly
+	validate_customizer_entries(C)
 	regenerate_organs(C,old_species, pref_load=pref_load, visual_only = C.visual_only_organs)
 
 	if(exotic_bloodtype && C.dna.human_blood_type != exotic_bloodtype)
@@ -775,6 +797,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	else
 		apply_customizers_to_character(C)
 
+	properly_gained = TRUE
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 

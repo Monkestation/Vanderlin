@@ -249,7 +249,14 @@
 
 	if(randomise_flags & RANDOMIZE_EYE_COLOR)
 		var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-		eyes.eye_color = random_eye_color()
+		if(eyes)
+			eyes.eye_color = random_eye_color()
+		else // might be pre-init
+			var/datum/customizer_entry/organ/eyes/entry = species.get_customizer_entry_of_type(/datum/customizer_entry/organ/eyes)
+			if(entry)
+				var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
+				// see above comment about prefs
+				customizer_choice.randomize_entry(entry, src, color, accessory)
 
 	// if(randomise_flags & RANDOMIZE_FEATURES)
 	// 	dna.features = random_features()

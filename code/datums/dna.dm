@@ -146,9 +146,10 @@
 		else
 			return
 		deathsound = new_race.deathsound
-		dna.species.on_species_loss(src, new_race, pref_load)
 		var/datum/species/old_species = dna.species
 		dna.species = new_race
+		if(old_species.properly_gained)
+			old_species.on_species_loss(src, new_race, pref_load)
 		//BODYPARTS AND FEATURES
 		if(pref_load)
 			dna.features = pref_load.features.Copy()
