@@ -1,5 +1,5 @@
 /// Creates a human with the given parameters and returns an appearance of it
-/proc/get_dynamic_human_appearance(outfit_path, species_path = /datum/species/human, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE, animated = TRUE)
+/proc/get_dynamic_human_appearance(outfit_path, species_path = /datum/species/human/northern, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE, animated = TRUE)
 	if(!species_path)
 		return FALSE
 	if(!ispath(species_path))
@@ -25,7 +25,7 @@
 	qdel(dummy)
 	return output
 
-/proc/apply_dynamic_human_appearance(atom/target, outfit_path, species_path = /datum/species/human, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE)
+/proc/apply_dynamic_human_appearance(atom/target, outfit_path, species_path = /datum/species/human/northern, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE)
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(set_dynamic_human_appearance), args)
 
 ///This proc gets an argument of a target and runs
