@@ -101,6 +101,12 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	 */
 	var/swap_female_clothes = FALSE
 
+	var/no_boobs = FALSE
+	/**
+	 * For species that don't have mammaries, like Rakshari.
+	 * Removes boob overlay
+	 */
+
 	/// Sounds for males
 	var/datum/voicepack/soundpack_m = /datum/voicepack/male
 	/// Sounds for females
@@ -301,6 +307,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return strings("accents/halforc_replacement.json", "halforc")
 	if(language == "Halfling")
 		return strings("accents/halfling_replacement.json", "halfling")
+	if(language == "Gutter")
+		return strings("accents/kobold_replacement.json", "kobold")
 	if(language == "Deepspeak")
 		return strings("accents/triton_replacement.json", "triton")
 	if(language == "Pirate")
@@ -369,7 +377,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				ACCENT_PIRATE,
 				ACCENT_MIDDLE_SPEAK,
 				ACCENT_ZALAD,
-				ACCENT_HALFLING
+				ACCENT_HALFLING,
+				ACCENT_KOBOLD
 			)
 
 			///This will only trigger for patreon users
@@ -1458,8 +1467,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				var/easy_dismember = HAS_TRAIT(target, TRAIT_EASYDISMEMBER) || affecting.rotted
 				if(prob(damage/2) || (easy_dismember && prob(damage/2))) //try twice
 					if(affecting.brute_dam > 0)
-						if(affecting.dismember())
-							playsound(get_turf(target), "desceration", 80, TRUE)
+						affecting.dismember()
 
 /*		if(user == target)
 			target.visible_message("<span class='danger'>[user] [atk_verb]ed themself![target.next_attack_msg.Join()]</span>", COMBAT_MESSAGE_RANGE, user)
@@ -1665,7 +1673,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 						target.Immobilize(5)
 						balance += 15
 						target.visible_message("<span class='danger'>[user] puts their foot on [target]'s neck!</span>", \
-										"<span class='danger'>I'm get my throat stepped on by [user]! I can't breathe!</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
+										"<span class='danger'>I get my throat stepped on by [user]! I can't breathe!</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
 					else
 						affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected, crit_message = TRUE)
 						target.visible_message("<span class='danger'>[user] stomps [target]![target.next_attack_msg.Join()]</span>", \
@@ -1816,7 +1824,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	// Allows you to put in item-specific reactions based on species
 	if(user != H)
 		if(H.can_see_cone(user))
-			if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armor_penetration))
+			if(H.check_shields(I, I.force, "\the [I]", MELEE_ATTACK, I.armor_penetration))
 				return 0
 	if(H.check_block())
 		H.visible_message("<span class='warning'>[H] blocks [I]!</span>", \
@@ -1901,7 +1909,6 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		bloody = 1
 		I.add_mob_blood(H)
 		user.update_inv_hands()
-		playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
 
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == BODYPART_ORGANIC)

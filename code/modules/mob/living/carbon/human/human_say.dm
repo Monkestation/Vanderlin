@@ -32,7 +32,14 @@
 
 /mob/living/carbon/human/get_alt_name()
 	if(name != GetVoice())
-		return "Unknown [(gender == FEMALE) ? "Woman" : "Man"]"
+		// This isn't accurate purposely
+		var/appendage = "Figure"
+		switch(client?.prefs.voice_type)
+			if(VOICE_TYPE_FEM)
+				appendage = "Woman"
+			if(VOICE_TYPE_MASC)
+				appendage = "Man"
+		return "Unknown [appendage]"
 
 /mob/living/carbon/human/proc/forcesay(list/append) //this proc is at the bottom of the file because quote fuckery makes notepad++ cri
 	if(stat == CONSCIOUS)

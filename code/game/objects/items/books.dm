@@ -1732,6 +1732,6 @@ ____________End of Example*/
 
 /obj/item/book/rogue/howtogaffer
 	name = "Dont be a gaff, the guild masters manual"
-	desc = "the author page has rotted off with time"
+	desc = "The author page has rotted off with time."
 	bookfile = "Gaff.json"
 	random_cover = TRUE

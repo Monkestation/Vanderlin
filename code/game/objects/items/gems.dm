@@ -234,14 +234,14 @@
 
 /obj/item/gem/oyster
 	name = "fossilized clam"
-	desc = "A fossilized clam shell. It would be a good idea to pry it open with a knife."
+	desc = "A fossilized clamshell. It would be a good idea to pry it open with a knife."
 	icon = 'icons/roguetown/gems/gem_shell.dmi'
 	icon_state = "oyster_closed"
 	sellprice = 5
 
 /obj/item/gem/coral
 	name = "raw aoetal"
-	desc = "Jagged like a hounds tooth. Aoetal is speculated to be the crystalized blood of fallen sailors. It is sacred to Abyssorians and is used in numerous Abyssorian rituals."
+	desc = "Jagged like a hounds tooth. Aoetal is speculated to be the crystallized blood of fallen sailors. It is sacred to Abyssorians and is used in numerous Abyssorian rituals."
 	icon = 'icons/roguetown/gems/gem_coral.dmi'
 	icon_state = "raw_coral"
 	sellprice = 60

@@ -430,7 +430,7 @@
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom = /obj/item/weapon/knife
 	allow_inverse_start = FALSE
-	output = /obj/item/plate/tray
+	output = /obj/item/tray
 	output_amount = 2
 	craft_time = 5 SECONDS
 
@@ -1381,7 +1381,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/cup
 	name = "onyxa cup"
-	output = /obj/item/reagent_containers/glass/cup/opal
+	output = /obj/item/reagent_containers/glass/cup/onyxa
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/bowl

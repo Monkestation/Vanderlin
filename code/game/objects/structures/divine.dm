@@ -38,7 +38,7 @@
 		to_chat(user, "<span class='notice'>The fountain appears to be empty.</span>")
 		return
 	last_process = world.time
-	to_chat(user, "<span class='notice'>The blood feels warm as you touch it. The fountain immediately dries up shortly afterwards.</span>")
+	to_chat(user, "<span class='notice'>The blood feels warm as you touch it. The fountain immediately dries up shortly after.</span>")
 	user.reagents.add_reagent(/datum/reagent/medicine/healthpot,40)
 	update_appearance(UPDATE_ICON_STATE)
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_appearance), UPDATE_ICON_STATE), time_between_uses)

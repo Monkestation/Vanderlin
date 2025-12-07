@@ -1,157 +1,157 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "c" = (
 /obj/item/clothing/armor/cuirass/iron,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "e" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "g" = (
 /obj/item/clothing/head/helmet/ironpot,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "i" = (
 /mob/living/carbon/human/species/skeleton,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "k" = (
 /obj/item/clothing/armor/chainmail/iron,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "l" = (
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/clothing/head/helmet/nasal,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "m" = (
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "n" = (
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/clothing/ring/silver,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "o" = (
 /obj/item/clothing/head/helmet/bascinet,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "p" = (
 /obj/item/clothing/armor/medium/scale,
 /obj/item/weapon/polearm/spear,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "q" = (
 /obj/item/clothing/head/helmet/winged,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "r" = (
 /obj/item/clothing/armor/gambeson/arming,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "s" = (
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/clothing/gloves/plate,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "t" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "u" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "x" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "y" = (
 /mob/living/carbon/human/species/skeleton/npc,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "z" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "A" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "B" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/clothing/ring/silver/rontz,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "C" = (
 /obj/item/clothing/shoes/boots/armor,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "D" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "G" = (
 /obj/item/clothing/head/helmet/skullcap,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "H" = (
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/lockpickring,
 /obj/item/clothing/head/helmet/leather/volfhelm,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "I" = (
 /obj/item/weapon/polearm/spear,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "M" = (
 /obj/item/weapon/sword/iron,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "P" = (
 /obj/item/clothing/armor/cuirass/iron/rust,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Q" = (
 /obj/item/weapon/polearm/spear,
 /mob/living/carbon/human/species/skeleton/npc,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "R" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "S" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "U" = (
 /obj/item/clothing/armor/leather/hide,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "X" = (
 /obj/item/clothing/armor/gambeson,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Y" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Z" = (
 /obj/item/clothing/armor/cuirass/grenzelhoft,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 a

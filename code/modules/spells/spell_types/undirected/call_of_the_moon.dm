@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/undirected/howl/call_of_the_moon
 	name = "Call of the Moon"
-	desc = "Draw upon the the secrets of the hidden firmament to converse with the mooncursed."
+	desc = "Draw upon the secrets of the hidden firmament to converse with the mooncursed."
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy

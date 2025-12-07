@@ -127,3 +127,39 @@
 	desc = "A scabbard designed to hold a sword. This one is lined with golden fittings, fit for a royal."
 	sellprice = 100
 	icon_state = "rscabbard"
+
+
+/obj/item/weapon/scabbard/kazengun
+	name = "simple kazengun scabbard"
+	desc = "A piece of steel lined with wood. Great for batting away blows."
+	sellprice = 100
+	icon_state = "kazscab"
+	item_state = "kazscab"
+	force = DAMAGE_SWORD - 15
+	force_wielded = DAMAGE_SWORD - 15
+	sellprice = 10
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
+	wdefense = GREAT_PARRY
+	w_class = WEIGHT_CLASS_BULKY
+	anvilrepair = /datum/skill/craft/carpentry
+	associated_skill = /datum/skill/combat/shields
+	max_integrity = INTEGRITY_STANDARD
+
+/obj/item/weapon/scabbard/kazengun/apply_components()
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
+	AddComponent(/datum/component/storage/concrete/scabbard/kazengun)
+
+/obj/item/weapon/scabbard/kazengun/steel
+	name = "hwang scabbard"
+	desc = "A cloud-patterned scabbard with a cloth sash. Used for blocking."
+	icon_state = "kazscab_steel"
+	item_state = "kazscab_steel"
+	max_integrity = INTEGRITY_STRONG
+
+/obj/item/weapon/scabbard/kazengun/gold
+	name = "gold-stained Xinyi scabbard"
+	desc = "An ornate, wooden scabbard with a sash. Great for parrying."
+	icon_state = "kazscab_gold"
+	item_state = "kazscab_gold"
+	max_integrity = INTEGRITY_STRONGEST

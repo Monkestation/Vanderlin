@@ -451,3 +451,15 @@
 	west_offset = 18
 	east_offset = 18
 	south_offset = 26
+
+/datum/map_template/dungeon/room/MinorLordKeep
+	mappath = "_maps/matthios_tomb/room/MinorLordKeep.dmm"
+	id = "MinorLordKeep"
+	width = 20
+	height = 20
+
+	west_offset = 10
+	east_offset = 10
+	north_offset = 9
+	south_offset = 9
+

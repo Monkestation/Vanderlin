@@ -64,12 +64,12 @@
 
 /datum/migrant_role/dwarven_company/weaponsmith
 	name = "Dwarven Weaponsmith"
-	greet_text = " You are the weaponsmith of a dwarven expedition, obey your foremand as they lead you in Malum's name into the tomb of Matthios."
+	greet_text = " You are the weaponsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
 	migrant_job = /datum/job/migrant/dwarven_company/weaponsmith
 
 /datum/job/migrant/dwarven_company/weaponsmith
 	title = "Dwarven Weaponsmith"
-	tutorial = " You are the weaponsmith of a dwarven expedition, obey your foremand as they lead you in Malum's name into the tomb of Matthios."
+	tutorial = " You are the weaponsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
 	outfit = /datum/outfit/dwarven_company/weaponsmith
 
 	jobstats = list(
@@ -134,12 +134,12 @@
 
 /datum/migrant_role/dwarven_company/armorsmith
 	name = "Dwarven Armorsmith"
-	greet_text = " You are the armorsmith of a dwarven expedition, obey your foremand as they lead you in Malum's name into the tomb of Matthios."
+	greet_text = " You are the armorsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
 	migrant_job = /datum/job/migrant/dwarven_company/armorsmith
 
 /datum/job/migrant/dwarven_company/armorsmith
 	title = "Dwarven Armorsmith"
-	tutorial = " You are the armorsmith of a dwarven expedition, obey your foremand as they lead you in Malum's name into the tomb of Matthios."
+	tutorial = " You are the armorsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
 	outfit = /datum/outfit/dwarven_company/armorsmith
 
 	jobstats = list(

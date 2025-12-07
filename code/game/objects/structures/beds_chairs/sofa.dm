@@ -17,7 +17,7 @@
 // -------- CannibalHunter's Le' Fancy Couch --------
 /obj/structure/chair/bench/couch
 	name = "fancy couch"
-	desc = "It's quite an elegant couch of the finest quality and color. Crumbs and strands of various hair color- stuffed in the cracks."
+	desc = "It's quite an elegant couch of the finest quality and color. Crumbs and strands of various hair color are stuffed in the cracks."
 	icon = 'icons/roguetown/misc/couch.dmi'
 	icon_state = "couch_single"
 	greyscale_config = /datum/greyscale_config/couch

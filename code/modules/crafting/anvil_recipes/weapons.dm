@@ -14,7 +14,7 @@
 	craftdiff = 0
 ////////////////////////////////////
 
-/datum/anvil_recipe/weapons/tin/lead_bullet
+/datum/anvil_recipe/weapons/tin/lead_bullet //guys how are you making LEAD bullets out of TIN?
 	name = "4x Lead Bullets"
 	recipe_name = "a handful of lead bullets."
 	created_item = /obj/item/ammo_casing/caseless/bullet
@@ -421,6 +421,14 @@
 	created_item = /obj/item/weapon/sword/long/greatsword/zwei
 	craftdiff = 3
 
+/datum/anvil_recipe/weapons/iron/claymore
+	name = "Iron Claymore (+Bar x2)"
+	recipe_name = "a Iron Claymore"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/iron)
+	created_item = /obj/item/weapon/sword/long/greatsword/ironclaymore
+	craftdiff = 3
+
 /datum/anvil_recipe/weapons/iron/elvenclub
 	name = "Elven Warclub"
 	recipe_name = "a Warclub"
@@ -623,7 +631,7 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/kaskara
 
-/datum/anvil_recipe/weapons/steel/
+/datum/anvil_recipe/weapons/steel/kukri
 	name = "Steel Kukri"
 	recipe_name = "a Steel Kukri"
 	appro_skill = /datum/skill/craft/weaponsmithing
@@ -697,6 +705,22 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/weapon/sword/long/greatsword
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/steel/flamberge
+	name = "Flamberge (+Bar x3)"
+	recipe_name = "a Flamberge"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/sword/long/greatsword/flamberge
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/steel/claymore
+	name = "Steel Claymore (+Bar x2)"
+	recipe_name = "a Steel Claymore"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/sword/long/greatsword/steelclaymore
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/silver/noble_sword_scabbard

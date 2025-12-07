@@ -45,7 +45,13 @@
 	body_parts_covered = EYES
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HEAD
 	anvilrepair = /datum/skill/craft/armorsmithing
-	var/lensmoved = FALSE
+	var/lensmoved = TRUE // starts with the lenses out of the way, night vision being off.
+
+/obj/item/clothing/face/spectacles/inq/examine(mob/user) // informs inquisition members of the night vision functionality.
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_INQUISITION))
+		. += span_info("These spectacles posess photosensitive lenses. The user may slide them into place for short-range dark-vision.")
+		. += span_warning("Use the Middle Mouse Button on the glasses, with your jump, bite, etc.. intents OFF to (de)activate nightvision.")
 
 /obj/item/clothing/face/spectacles/inq/spawnpair
 	lensmoved = TRUE
@@ -64,18 +70,22 @@
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))
 		REMOVE_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 		lensmoved = TRUE
+		user.update_sight()
 		return
 	to_chat(user, span_info("You discreetly slide the inner lenses back into place."))
 	ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 	lensmoved = FALSE
+	user.update_sight()
 
 /obj/item/clothing/face/spectacles/inq/dropped(mob/user, slot)
 	..()
 	if(!(slot & ITEM_SLOT_MASK) || slot & ITEM_SLOT_HEAD)
 		if(!lensmoved)
 			REMOVE_TRAIT(user, TRAIT_NOCSHADES, "redlens")
+			user.update_sight()
+			lensmoved = TRUE // set the night vision to off, to avoid weirdness
 			return
-		lensmoved = FALSE
+
 
 
 /obj/item/clothing/face/sack
@@ -100,6 +110,23 @@
 	desc = "An ordinary brown sack. This one has eyeholes cut into it, bearing a crude chalk drawing of Psydon's cross upon its visage. Unsettling for most."
 	icon_state = "sackmask_psy"
 
+/obj/item/clothing/face/antiq
+	name = "Antiquarian's Hood"
+	desc = "The mechanisms inside hum in a strange, mechanical unison - Glowing Gems radiate a dull light outwards, piercing the dark. You have a feeling that this mask has seen things you wouldn't believe."
+	icon_state = "antiqmask"
+	blocksound = SOFTHIT
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	max_integrity = 400 // Respect the drip.
+	sellprice = 300 // Strange foreign device, BOY do I want to sell the shit outta THAT.
+	prevent_crits = list(BCLASS_BLUNT)
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
+	flags_inv = HIDEFACE|HIDEHAIR|HIDEEARS
+	body_parts_covered = FACE|HEAD
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	armor = ARMOR_PADDED
+	sewrepair = TRUE
+
 /obj/item/clothing/face/facemask/steel/confessor
 	name = "strange mask"
 	desc = "It is said that the original version of this mask was used for obscure rituals in Grenzelhoft, and now it has been repurposed as a veil for the cunning hand of the Ordo Venatari. Others say it is a piece of heresy, a necessary evil, capable of keeping its user safe from vile magicks. You can taste copper whenever you draw breath."
@@ -110,6 +137,12 @@
 	melt_amount = 75
 	var/worn = FALSE
 	slot_flags = ITEM_SLOT_MASK
+
+/obj/item/clothing/face/facemask/steel/confessor/examine(mob/user) // informs inquisition members that nocshades can be installed in the mask.
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_INQUISITION) && !istype(src, /obj/item/clothing/face/facemask/steel/confessor/lensed))
+		. += span_info("This mask may have nocshades installed into it.")
+
 
 /obj/item/clothing/face/facemask/steel/confessor/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -145,27 +178,38 @@
 	icon_state = "confessormask_lens"
 	var/lensmoved = TRUE
 
+/obj/item/clothing/face/facemask/steel/confessor/lensed/examine(mob/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_INQUISITION))
+		. += span_info("This mask contains noc-shades, which provide the user with short-range dark-vision when activated.")
+		. += span_warning("Use the Middle Mouse Button on the glasses, with your jump, bite, etc.. intents OFF to (de)activate nightvision.")
+
 /obj/item/clothing/face/facemask/steel/confessor/lensed/equipped(mob/user, slot)
 	..()
 	if(slot & ITEM_SLOT_MASK || slot & ITEM_SLOT_HEAD)
 		if(!lensmoved)
 			ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
+			user.update_sight()
 			return
 
-/obj/item/clothing/face/facemask/steel/confessor/lensed/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, params)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))
 		REMOVE_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 		lensmoved = TRUE
+		user.update_sight()
 		return
 	to_chat(user, span_info("You discreetly slide the inner lenses back into place."))
 	ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 	lensmoved = FALSE
+	user.update_sight()
 
 /obj/item/clothing/face/facemask/steel/confessor/lensed/dropped(mob/user, slot)
 	..()
 	if(!(slot & ITEM_SLOT_MASK) || slot & ITEM_SLOT_HEAD)
 		if(!lensmoved)
 			REMOVE_TRAIT(user, TRAIT_NOCSHADES, "redlens")
+			user.update_sight()
+			lensmoved = TRUE // set the night vision to off, to avoid weirdness
 			return

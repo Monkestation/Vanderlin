@@ -11,6 +11,8 @@
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
+	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
+
 /datum/outfit/wretch/hedgemage/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(prob(1))

@@ -1,11 +1,11 @@
 /datum/migrant_role/sergeant_at_arms
 	name = "Serjeant-at-Arms"
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, you and those under your command have returned upon fullfiling your task."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, you and those under your command have returned upon fulfilling your task."
 	migrant_job = /datum/job/migrant/serjeant_at_arms
 
 /datum/job/migrant/serjeant_at_arms
 	title = "Serjeant-at-Arms"
-	tutorial = "You were apart of an expedition sent by the Monarch to Kingsfield, you and those under your command have returned upon fullfiling your task."
+	tutorial = "You were a part of an expedition sent by the Monarch to Kingsfield, you and those under your command have returned upon fulfilling your task."
 	outfit = /datum/outfit/serjeant_at_arms
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -76,12 +76,12 @@
 
 /datum/migrant_role/archer_bannerman
 	name = "Bannermen Archer"
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	migrant_job = /datum/job/migrant/archer_bannerman
 
 /datum/job/migrant/archer_bannerman
 	title = "Bannermen Archer"
-	tutorial = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	tutorial = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	outfit = /datum/outfit/archer_bannerman
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -141,12 +141,12 @@
 
 /datum/migrant_role/crossbow_bannerman
 	name = "Bannermen Crossbowman"
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	migrant_job = /datum/job/migrant/crossbow_bannerman
 
 /datum/job/migrant/crossbow_bannerman
 	title = "Bannermen Crossbowman"
-	tutorial = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	tutorial = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	outfit = /datum/outfit/crossbow_bannerman
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -206,12 +206,12 @@
 
 /datum/migrant_role/footman_bannerman
 	name = "Bannermen Footman"
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	migrant_job = /datum/job/migrant/footman_bannerman
 
 /datum/job/migrant/footman_bannerman
 	title = "Bannermen Footman"
-	tutorial = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	tutorial = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	outfit = /datum/outfit/footman_bannerman
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -262,12 +262,12 @@
 
 /datum/migrant_role/pikeman_bannerman
 	name = "Bannermen Pikeman"
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	migrant_job = /datum/job/migrant/pikeman_bannerman
 
 /datum/job/migrant/pikeman_bannerman
 	title = "Bannermen Pikeman"
-	tutorial = "You were apart of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fullfiling your task."
+	tutorial = "You were a part of an expedition sent by the Monarch to Kingsfield, you and your serjeant-at-arms have returned upon fulfilling your task."
 	outfit = /datum/outfit/pikeman_bannerman
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -335,7 +335,7 @@
 		/datum/migrant_role/archer_bannerman = 1,
 		/datum/migrant_role/crossbow_bannerman = 1
 	)
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
 
 /datum/migrant_wave/returning_bannermen_down
 	name = "The Bannermen's Return"
@@ -349,7 +349,7 @@
 		/datum/migrant_role/archer_bannerman = 1,
 		/datum/migrant_role/crossbow_bannerman = 1
 	)
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
 
 /datum/migrant_wave/returning_bannermen_down_one
 	name = "The Bannermen's Return"
@@ -362,7 +362,7 @@
 		/datum/migrant_role/pikeman_bannerman = 1,
 		/datum/migrant_role/archer_bannerman = 1,
 	)
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
 
 /datum/migrant_wave/returning_bannermen_down_two
 	name = "The Bannermen's Return"
@@ -374,7 +374,7 @@
 		/datum/migrant_role/footman_bannerman = 1,
 		/datum/migrant_role/pikeman_bannerman = 1,
 	)
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
 
 /datum/migrant_wave/returning_bannermen_down_three
 	name = "The Bannermen's Return"
@@ -385,7 +385,7 @@
 		/datum/migrant_role/sergeant_at_arms = 1,
 		/datum/migrant_role/footman_bannerman = 1,
 	)
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
 
 /datum/migrant_wave/returning_bannermen_down_four
 	name = "The Bannermen's Return"
@@ -394,5 +394,5 @@
 	roles = list(
 		/datum/migrant_role/sergeant_at_arms = 1,
 	)
-	greet_text = "You were apart of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
+	greet_text = "You were a part of an expedition sent by the Monarch to Kingsfield, as it is done, you now return."
 

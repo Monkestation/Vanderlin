@@ -446,9 +446,9 @@
 	flip_cd = world.time
 	playsound(user, 'sound/foley/coinphy (1).ogg', 100, FALSE)
 	if(prob(50))
-		user.visible_message(span_info("[user] flips the coin. ENDVRE!"))
+		user.visible_message(span_info("[user] flips the coin. ENDURE!"))
 		heads_tails = TRUE
 	else
-		user.visible_message(span_info("[user] flips the coin. LYVE!"))
+		user.visible_message(span_info("[user] flips the coin. LIVE!"))
 		heads_tails = FALSE
 	update_icon()

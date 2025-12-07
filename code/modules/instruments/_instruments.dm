@@ -440,7 +440,7 @@
 
 /obj/item/instrument/psyaltery
 	name = "psyaltery"
-	desc = "A traditional form of boxed zither or box-harp that may be played plucked, with a plectrum or with hammers. They are particularly associated with divine beings, aasimars and liturgies."
+	desc = "A traditional form of boxed zither or box-harp that may be played plucked, with a plectrum or with hammers. They are particularly associated with divine beings, Aasimar and liturgies."
 	icon_state = "psyaltery"
 	song_list = list(
 	"Disciples Tower" = 'sound/instruments/psyaltery (1).ogg',

@@ -4,7 +4,7 @@
 	dir = 8
 	},
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "ds" = (
 /obj/structure/window/openclose{
 	dir = 1
@@ -12,32 +12,32 @@
 /obj/structure/curtain/bounty,
 /obj/structure/bars,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "dM" = (
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "et" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "eE" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "gE" = (
 /obj/structure/chair/wood/alt,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "hu" = (
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "hJ" = (
 /obj/structure/fluff/walldeco/bigpainting/lake{
 	pixel_x = 0
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "iG" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -47,46 +47,46 @@
 	dir = 10
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "jj" = (
 /obj/structure/chair/wood/alt{
 	dir = 8
 	},
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "jm" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "md" = (
 /turf/closed/wall/mineral/decowood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "mh" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "mo" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "mX" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "nN" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "pH" = (
 /obj/effect/landmark/settlement_road_node,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "qv" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -95,27 +95,27 @@
 	pixel_x = -32
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "rx" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "tN" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
 	pixel_x = -16;
 	pixel_y = 32
 	},
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "vA" = (
 /turf/closed/wall/mineral/stonebrick{
 	wallclimb = 1;
 	climbdiff = 1
 	},
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "wI" = (
 /obj/structure/table/wood/reinf_long,
 /obj/structure/ladder{
@@ -123,7 +123,7 @@
 	},
 /obj/item/reagent_containers/glass/cup/silver,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "xI" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -137,33 +137,33 @@
 	pixel_y = 7
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "yO" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "zd" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "zP" = (
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Am" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Ce" = (
 /obj/effect/decal/carpet,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Cp" = (
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "CY" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -174,26 +174,26 @@
 	},
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "DH" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Ei" = (
 /obj/structure/bed/inn,
 /obj/item/bedsheet/fabric,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "EZ" = (
 /obj/structure/table/vtable/v2,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Gl" = (
 /obj/structure/bookcase/random_recipes,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "GC" = (
 /obj/structure/table/wood/plain,
 /obj/structure/fluff/millstone{
@@ -206,12 +206,12 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Hi" = (
 /obj/structure/fermentation_keg/water,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Hj" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -224,7 +224,7 @@
 	pixel_y = 6
 	},
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Hw" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/bowl{
@@ -236,7 +236,7 @@
 	pixel_y = -12
 	},
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Id" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
@@ -250,10 +250,10 @@
 	pixel_y = 2
 	},
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Js" = (
 /turf/closed/wall/mineral/wooddark,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "JV" = (
 /obj/structure/window/openclose{
 	dir = 8
@@ -261,14 +261,14 @@
 /obj/structure/curtain/bounty,
 /obj/structure/bars,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "LX" = (
 /obj/structure/window/openclose{
 	dir = 4
 	},
 /obj/structure/curtain/bounty,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Nd" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 8
@@ -282,28 +282,28 @@
 	pixel_y = 1
 	},
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Ne" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/item/clothing/armor/leather/splint,
 /obj/item/weapon/pitchfork,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Nh" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "NS" = (
 /obj/structure/table/vtable,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "NX" = (
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "QK" = (
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "SA" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven{
@@ -311,13 +311,13 @@
 	},
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Tq" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Tu" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven{
@@ -325,7 +325,7 @@
 	},
 /obj/item/cooking/pan,
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "UD" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
 	pixel_y = 32
@@ -334,33 +334,33 @@
 	pixel_x = 15
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Vp" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "VL" = (
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "VR" = (
 /turf/open/transparent/openspace,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "XI" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
 	},
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/carpet/red,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "XS" = (
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Zj" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/bounty,
 /obj/structure/bars,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 
 (1,1,1) = {"
 Js

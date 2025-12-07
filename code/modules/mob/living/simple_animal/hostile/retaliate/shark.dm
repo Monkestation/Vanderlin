@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/shark
 	name = "shark"
-	desc = "Tales of abyssor speak of beasts that grow much larger than this one..."
+	desc = "Tales of Abyssor speak of beasts that grow much larger than this one..."
 	icon = 'icons/mob/broadMobs.dmi'
 	icon_state = "megacarp"
 	icon_living = "megacarp"

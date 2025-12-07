@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 1
-	min_pq = 6
 	bypass_lastclass = TRUE
 
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/servant)
@@ -22,6 +21,14 @@
 	noble_income = 22
 
 	job_bitflag = BITFLAG_ROYALTY
+
+	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_NOBLE)
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600,
+		EXP_TYPE_NOBLE = 300
+	)
+
 
 /datum/job/consort/after_spawn(mob/living/spawned, client/player_client)
 	. = ..()
@@ -46,6 +53,7 @@
 */
 /datum/job/advclass/consort
 	inherit_parent_title = TRUE
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 /datum/job/advclass/consort/highborn
 	title = "Highborn Consort"

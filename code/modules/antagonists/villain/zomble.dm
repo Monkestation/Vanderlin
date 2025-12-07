@@ -29,12 +29,10 @@
 	// we don't use innate_traits here because zombies aren't meant to get their traits on_gain.
 	/// Traits applied to the owner mob when we turn into a zombie
 	var/static/list/traits_zombie = list(
-		TRAIT_NOSTAMINA,
+		TRAIT_NOENERGY,
 		TRAIT_NOMOOD,
-		TRAIT_NOLIMBDISABLE,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
-		TRAIT_CRITICAL_WEAKNESS,
 		TRAIT_NOPAIN,
 		TRAIT_NOBREATH,
 		TRAIT_TOXIMMUNE,
@@ -43,9 +41,9 @@
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLBLOCK,
 		TRAIT_BLOODLOSS_IMMUNE,
-		TRAIT_ZOMBIE_SPEECH,
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
+		TRAIT_CABAL,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -96,6 +94,8 @@
 	owner.current.skills?.skill_experience = list()
 	zombie.cmode_music ='sound/music/cmode/combat_weird.ogg'
 	zombie.bloodpool = 0 // Deadites have no vitae to drain from
+	zombie.candodge = FALSE
+	zombie.canparry = FALSE
 	var/datum/language_holder/mob_language = zombie.get_language_holder()
 	prev_language = mob_language.copy()
 	zombie.remove_all_languages()
@@ -128,6 +128,8 @@
 	zombie.remove_stat_modifier("[type]")
 	zombie.cmode_music = old_cmode_music
 	zombie.set_patron(patron)
+	zombie.candodge = TRUE
+	zombie.canparry = TRUE
 	owner.current.skills?.known_skills = stored_skills
 	owner.current.skills?.skill_experience = stored_experience
 	for(var/trait in traits_zombie)
@@ -139,7 +141,7 @@
 		zombie.set_stat_modifier(TRAIT_ROTMAN, STATKEY_INT, -3)
 		for(var/trait in traits_rotman)
 			ADD_TRAIT(zombie, trait, "[type]")
-		to_chat(zombie, span_green("I no longer crave for flesh... <i>But I still feel ill.</i>"))
+		to_chat(zombie, span_green("I no longer crave flesh... <i>But I still feel ill.</i>"))
 	else
 		if(!was_i_undead)
 			zombie.mob_biotypes &= ~MOB_UNDEAD
@@ -148,7 +150,7 @@
 		zombie.faction += FACTION_NEUTRAL
 		zombie.regenerate_organs()
 		if(has_turned)
-			to_chat(zombie, span_green("I no longer crave for flesh..."))
+			to_chat(zombie, span_green("I no longer crave flesh..."))
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		zombie_part.rotted = FALSE
 		if(zombie_part.can_be_disabled)
@@ -218,10 +220,10 @@
 	for(var/datum/status_effect/effect in zombie.status_effects) //necessary to prevent exploits
 		zombie.remove_status_effect(effect)
 
-	zombie.modifier_set_stat_to("[type]", STATKEY_STR, 7)
-	zombie.modifier_set_stat_to("[type]", STATKEY_SPD, 2)
+	zombie.modifier_set_stat_to("[type]", STATKEY_STR, 12)
+	zombie.modifier_set_stat_to("[type]", STATKEY_SPD, 1)
 	zombie.modifier_set_stat_to("[type]", STATKEY_INT, 1)
-	zombie.modifier_set_stat_to("[type]", STATKEY_CON, 5)
+	zombie.modifier_set_stat_to("[type]", STATKEY_CON, 15)
 
 	zombie.bloodpool = 0 // Again, just in case.
 

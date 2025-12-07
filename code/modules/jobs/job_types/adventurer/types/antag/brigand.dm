@@ -1,4 +1,4 @@
-/datum/job/advclass/brigand //Strength class, starts with axe or flails and medium armor training
+/datum/job/advclass/bandit/brigand //Strength class, starts with axe or flails and medium armor training
 	title = "Brigand"
 	tutorial = "Cast from society, you use your powerful physical might and endurance to take from those who are weaker from you."
 	outfit = /datum/outfit/bandit/brigand

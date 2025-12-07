@@ -164,7 +164,7 @@
 	return bleed_rate
 
 /// How much slower we'll be bleeding for every CON point. 0.1 = 10% slower.
-#define CONSTITUTION_BLEEDRATE_MOD 0.05
+#define CONSTITUTION_BLEEDRATE_MOD 0.03
 
 /// Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/proc/bleed(amt)
@@ -181,11 +181,6 @@
 		con_modifier = our_con - 10
 
 	amt -= amt * con_modifier * CONSTITUTION_BLEEDRATE_MOD
-
-	if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-		amt /= 2
-	if(HAS_TRAIT(src, TRAIT_CRITICAL_WEAKNESS))
-		amt *= 2
 
 	blood_volume = max(blood_volume - amt, 0)
 
@@ -268,7 +263,7 @@
 		return GLOB.blood_types[dna.species.exotic_bloodtype]
 	return GLOB.blood_types[dna.human_blood_type]
 
-// This is has more potential uses, and is probably faster than the old proc.
+// This has more potential uses, and is probably faster than the old proc.
 /proc/get_safe_blood(bloodtype)
 	. = list()
 	if(!bloodtype)
@@ -304,7 +299,7 @@
 
 	if(istype(T, /turf/open/water))
 		var/turf/open/water/W = T
-		if(!W.children)
+		if(!LAZYLEN(W.children))
 			W.water_reagent = blood.reagent_type // this is dumb, but it works for now
 			W.mapped = FALSE // no infinite vitae glitch
 			W.water_volume = 10

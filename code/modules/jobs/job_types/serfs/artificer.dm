@@ -20,6 +20,11 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600
+	)
+
 /datum/outfit/artificer/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)

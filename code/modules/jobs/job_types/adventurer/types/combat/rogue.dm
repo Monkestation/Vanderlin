@@ -8,6 +8,8 @@
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatRogue.ogg'
 
+	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_THIEF)
+
 /datum/outfit/adventurer/rogue/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)

@@ -7,7 +7,6 @@
 	total_positions = 1
 	roll_chance = 15
 	category_tags = list(CTAG_ADVENTURER)
-	min_pq = 2
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	is_recognized = TRUE
 
@@ -46,7 +45,7 @@
 		H.change_stat(STATKEY_PER, 2)
 		H.change_stat(STATKEY_CON, 2)
 		switch(H.patron?.type)
-			if (/datum/patron/psydon, /datum/patron/psydon/progressive)
+			if (/datum/patron/psydon)
 				wrists = /obj/item/clothing/neck/psycross/silver
 			if(/datum/patron/divine/astrata)
 				wrists = /obj/item/clothing/neck/psycross/silver/astrata

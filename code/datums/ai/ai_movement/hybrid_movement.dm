@@ -44,7 +44,7 @@
 			// verify that there are stairs at our current position leading up
 			if(next_step.z > current_turf.z)
 				// Check if there's a valid stair to go up
-				var/turf/above = get_step_multiz(current_turf, UP)
+				var/turf/above = GET_TURF_ABOVE(current_turf)
 				var/can_go_up = FALSE
 
 				if(above && !above.density)
@@ -115,7 +115,7 @@
 					// Check for stairs going up
 					if(next_step.z > movable_pawn.z)
 						for(var/obj/structure/stairs/S in current_turf.contents)
-							var/turf/above = get_step_multiz(current_turf, UP)
+							var/turf/above = GET_TURF_ABOVE(current_turf)
 							if(above)
 								var/turf/dest = get_step(above, S.dir)
 								if(dest == next_step)
@@ -124,7 +124,7 @@
 
 					// Check for stairs going down or falling
 					else if(next_step.z < movable_pawn.z)
-						var/turf/below = get_step_multiz(current_turf, DOWN)
+						var/turf/below = GET_TURF_BELOW(current_turf)
 						if(below == next_step)
 							can_transition = TRUE
 						else

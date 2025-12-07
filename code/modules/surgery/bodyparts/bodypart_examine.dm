@@ -18,7 +18,7 @@
 		if(brainmob.get_ghost(FALSE, TRUE))
 			. += "<span class='info'>Its muscles are still twitching slightly... It still seems to have a bit of life left to it.</span>"
 		else
-			. += "<span class='info'>It seems seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
+			. += "<span class='info'>It seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
 	else if(brain?.decoy_override)
 		. += "<span class='info'>It seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
 	else
@@ -279,7 +279,7 @@
 			if(NUTRITION_LEVEL_FULL to INFINITY)
 				to_chat(src, "<span class='info'>You're completely stuffed!</span>")
 			if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-				to_chat(src, "<span class='info'>You're well fed!</span>")
+				to_chat(src, "<span class='info'>You're well-fed!</span>")
 			if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
 				to_chat(src, "<span class='info'>You're not hungry.</span>")
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)

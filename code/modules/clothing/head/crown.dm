@@ -28,12 +28,12 @@
 
 /obj/item/clothing/head/crown/circlet/goldheaddress
 	name = "zenarii headdress"
-	desc = "a fancy headdress made out of zenarii. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
+	desc = "A fancy headdress made out of zenarii. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_g"
 
 /obj/item/clothing/head/crown/circlet/silverheaddress
 	name = "ziliquae headdress"
-	desc = "a fancy headdress made out of ziliquae. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
+	desc = "A fancy headdress made out of ziliquae. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_s"
 	sellprice = VALUE_SILVER_ITEM
 

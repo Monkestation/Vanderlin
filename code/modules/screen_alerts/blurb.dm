@@ -88,7 +88,7 @@ but should see their own spawn message even if the player already dropped as USC
 		if(speed)
 			sleep(speed)
 
-	addtimer(CALLBACK(GLOBAL_PROC, /proc/fade_blurb, targets, T, fade_time), duration)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(fade_blurb), targets, T, fade_time), duration)
 
 /proc/fade_blurb(list/mob/targets, obj/T, fade_time = 0.5 SECONDS)
 	animate(T, alpha = 0, time = fade_time)

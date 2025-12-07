@@ -14,7 +14,7 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/medicine = 2,
-		/datum/skill/combat/polearms = 3, // have to be atleast somewhat competent with one weapon to have traveled alot
+		/datum/skill/combat/polearms = 3, // have to be at least somewhat competent with one weapon to have traveled alot
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/wrestling = 1,

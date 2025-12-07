@@ -797,7 +797,7 @@
 	var/turf/targloc = get_turf(target)
 	if(targloc && curloc)
 		if(targloc.z > curloc.z)
-			var/turf/above = get_step_multiz(curloc, UP)
+			var/turf/above = GET_TURF_ABOVE(curloc)
 			if(istype(above, /turf/open/transparent/openspace))
 				curloc = above
 	trajectory_ignore_forcemove = TRUE

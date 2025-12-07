@@ -779,7 +779,7 @@
 
 /**
  * `Uncross()` is a default BYOND proc that is called when something is *going*
- * to exit this atom's turf. It is prefered over `Uncrossed` when you want to
+ * to exit this atom's turf. It is preferred over `Uncrossed` when you want to
  * deny that movement, such as in the case of border objects, objects that allow
  * you to walk through them in any direction except the one they block
  * (think side windows).
@@ -982,7 +982,7 @@
 	var/turf/curloc = get_turf(src)
 	if(TT.target_turf && curloc)
 		if(TT.target_turf.z > curloc.z)
-			var/turf/above = get_step_multiz(curloc, UP)
+			var/turf/above = GET_TURF_ABOVE(curloc)
 			if(istype(above, /turf/open/transparent/openspace))
 				forceMove(above)
 	if(spin)

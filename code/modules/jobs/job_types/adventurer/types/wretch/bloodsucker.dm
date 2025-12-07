@@ -32,7 +32,7 @@
 	var/prev_real_name = H.real_name
 	var/prev_name = H.name
 	var/honorary = "Lord"
-	if(H.gender == FEMALE)
+	if(H.pronouns == SHE_HER)
 		honorary = "Lady"
 	H.real_name = "[honorary] [prev_real_name]"
 	H.name = "[honorary] [prev_name]"
@@ -115,7 +115,7 @@
 		var/prev_real_name = H.real_name
 		var/prev_name = H.name
 		var/honorary = "Count"
-		if(H.gender == FEMALE)
+		if(H.pronouns == SHE_HER)
 			honorary = "Countess"
 		H.real_name = "[honorary] [prev_real_name]"
 		H.name = "[honorary] [prev_name]"
@@ -137,7 +137,7 @@
 	cloak = /obj/item/clothing/cloak/tribal // yes, just a cloak
 	H.adjust_skillrank(/datum/skill/misc/sneaking, pick(4,5), TRUE)
 	H.adjust_skillrank(/datum/skill/misc/stealing, pick(4,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/lockpicking, pick (1,2,3,4,5), TRUE) // thug lyfe
+	H.adjust_skillrank(/datum/skill/misc/lockpicking, pick (1,2,3,4,5), TRUE) // thug life
 	H.adjust_skillrank(/datum/skill/misc/climbing, pick(4,5), TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, pick(3,3,4,5), TRUE) // Street-fu
 	H.adjust_skillrank(/datum/skill/combat/unarmed, pick(3,4,5,6), TRUE)

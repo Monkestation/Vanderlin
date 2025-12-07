@@ -316,12 +316,12 @@
 		return
 	if(!number)
 		number = 1
-	var/area/A = GLOB.areas_by_type[/area/rogue/indoors/town/warehouse]
+	var/area/A = GLOB.areas_by_type[/area/indoors/town/warehouse]
 	if(!A)
 		return
 	var/obj/item/I = new D.item_type()
 	var/list/turfs = list()
-	for(var/turf/T in A)
+	for(var/turf/T in A.get_turfs_from_all_zlevels())
 		turfs += T
 	var/turf/T = pick(turfs)
 	I.forceMove(T)

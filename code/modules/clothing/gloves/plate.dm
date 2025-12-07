@@ -73,7 +73,7 @@
 
 /obj/item/clothing/gloves/plate/matthios
 	name = "gilded gauntlets"
-	desc = "Shimmering plate gauntelts. Many riches have been taken with these, and just as many lives."
+	desc = "Shimmering plate gauntlets. Many riches have been taken with these, and just as many lives."
 	icon_state = "matthiosgloves"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'

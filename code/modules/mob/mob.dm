@@ -368,7 +368,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return
 
 	if(ismovableatom(new_perspective))
-		//Set the the thing unless it's us
+		//Set the thing unless it's us
 		if(new_perspective != src)
 			client.perspective = EYE_PERSPECTIVE
 			client.eye = new_perspective
@@ -1359,3 +1359,23 @@ GLOBAL_VAR_INIT(mobids, 1)
 		equip_to_appropriate_slot(new spawn_item(), TRUE)
 
 	return choice
+
+/mob/proc/nobles_seen_servant_work()
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		if(!is_servant_job(H.mind.assigned_role))
+			return
+	else
+		return
+
+	var/list/nobles = list()
+	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
+		if(!target.mind || target.stat != CONSCIOUS)
+			continue
+		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+			continue
+		nobles += target
+	if(length(nobles))
+		for(var/mob/living/carbon/human/target as anything in nobles)
+			if(!target.has_stress_type(/datum/stress_event/noble_seen_servant_work))
+				target.add_stress(/datum/stress_event/noble_seen_servant_work)

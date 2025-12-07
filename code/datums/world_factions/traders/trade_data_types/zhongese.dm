@@ -91,9 +91,9 @@
 	outfit_override = list(/obj/effect/mob_spawn/human/trition/zhong)
 	max_custom_items = 6
 	custom_items = list(
-		/obj/item/weapon/sword/sabre/mulyeog = list(3, 45, 3),
-		/obj/item/weapon/sword/sabre/mulyeog/rumahench = list(4, 65, 2),
-		/obj/item/weapon/sword/sabre/mulyeog/rumacaptain = list(6, 120, 1),
+		/obj/item/weapon/sword/katana/mulyeog = list(3, 45, 3),
+		/obj/item/weapon/sword/katana/mulyeog/rumahench = list(4, 65, 2),
+		/obj/item/weapon/sword/katana/mulyeog/rumacaptain = list(6, 120, 1),
 		/obj/item/weapon/sword/sabre/hook = list(5, 85, 2),
 		/obj/item/weapon/spear/naginata = list(6, 90, 2),
 		/obj/item/weapon/knife/dagger/navaja = list(6, 75, 1),

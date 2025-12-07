@@ -14,7 +14,6 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	faction = FACTION_FOREIGNERS
 	total_positions = 14
 	spawn_positions = 14
-	min_pq = 2
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
@@ -28,6 +27,12 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	is_foreigner = TRUE
 	can_have_apprentices = FALSE
 	scales = TRUE
+
+	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
+
+/datum/job/advclass/combat
+	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
+
 
 /datum/job/adventurer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -406,6 +406,7 @@
 		/datum/sprite_accessory/hair/facial/rakshari/kesh,
 		/datum/sprite_accessory/hair/facial/rakshari/spry,
 		/datum/sprite_accessory/hair/facial/rakshari/whiskered,
+		/datum/sprite_accessory/hair/facial/rakshari/jinni,
 	)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid/triton

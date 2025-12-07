@@ -1,7 +1,7 @@
 
 /obj/structure/closet/crate/chest/inqreliquary
 	name = "oratorium reliquary"
-	desc = "A foreboding red chest with a intricate lock design. It seems to only fit a very specific key. Choose wisely."
+	desc = "A foreboding red chest with an intricate lock design. It seems to only fit a very specific key. Choose wisely."
 	icon_state = "chestweird1"
 	base_icon_state = "chestweird1"
 
@@ -14,7 +14,7 @@
 // Reliquary Box and key - The Box Which contains these
 /obj/structure/reliquarybox
 	name = "oratorium reliquary"
-	desc = "A foreboding red chest with a intricate lock design. It seems to only fit a very specific key. Choose wisely."
+	desc = "A foreboding red chest with an intricate lock design. It seems to only fit a very specific key. Choose wisely."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "chestweird1"
 	anchored = TRUE
@@ -195,7 +195,7 @@
 
 /atom/movable/screen/alert/status_effect/buff/censerbuff
 	name = "Inspired by Psydon."
-	desc = "The lingering blessing of Pyson tells me to ENDURE."
+	desc = "The lingering blessing of Psydon tells me to ENDURE."
 	icon_state = "censerbuff"
 
 /datum/status_effect/buff/censerbuff
@@ -353,10 +353,9 @@
 	var/added_force
 	var/added_blade_int
 	var/added_int
-	var/added_def
 	var/silver
 
-/datum/component/psyblessed/Initialize(preblessed = FALSE, force, blade_int, int, def, makesilver)
+/datum/component/psyblessed/Initialize(preblessed = FALSE, force, blade_int, int, makesilver)
 	if(!istype(parent, /obj/item/weapon))
 		return COMPONENT_INCOMPATIBLE
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
@@ -364,7 +363,6 @@
 	added_force = force
 	added_blade_int = blade_int
 	added_int = int
-	added_def = def
 	silver = makesilver
 	if(pre_blessed)
 		apply_bless()
@@ -402,7 +400,6 @@
 			I.max_blade_int += added_blade_int
 			I.blade_int = I.max_blade_int
 		I.modify_max_integrity(I.max_integrity + added_int)
-		I.wdefense += added_def
 		I.name = "blessed [I.name]"
 		if(silver)
 			I.enchant(/datum/enchantment/silver)
@@ -885,7 +882,7 @@
 /obj/item/inqarticles/garrote/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
 	if(istype(I, /obj/item/rope/inqarticles/inquirycord))
-		user.visible_message(span_warning("[user] starts to rethread the [src] using the [I]."))
+		user.visible_message(span_warning("[user] starts to rethread the [src] using \the [I]."))
 		if(do_after(user, 12 SECONDS, user))
 			qdel(I)
 			obj_broken = FALSE
@@ -956,6 +953,16 @@
 		span_userdanger("[user] [pick("garrotes", "asphyxiates")] me!"), span_hear("I hear the sickening sound of cordage!"), COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, span_danger("I [pick("garrote", "asphyxiate")] [C]!"))
 		user.changeNext_move(CLICK_CD_RESIST)	//Stops spam for choking.
+
+/obj/item/inqarticles/garrote/razor // To yische, who said not to give this out constantly, I respectfully disagree when it comes to assassin
+	name = "Profane Razor" // It's very not non lethal now.  Strangle your prey with glee
+	desc = "A thin strand of phantom black wire strung between steel grasps. The grasps are cold to the touch, even through gloves, and the strand of wire, while appearing fragile, is seemingly unbreakable"
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "garrote"
+	item_state = "garrote"
+	resistance_flags = INDESTRUCTIBLE
+	choke_damage = 20
+	sellprice = 100
 
 /obj/item/clothing/head/inqarticles/blackbag
 	name = "black bag"

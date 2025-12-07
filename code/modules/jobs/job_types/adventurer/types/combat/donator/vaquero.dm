@@ -6,7 +6,6 @@
 	outfit = /datum/outfit/adventurer/vaquero
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
 	category_tags = list(CTAG_ADVENTURER)
-	min_pq = 1
 	roll_chance = 30
 	total_positions = 1
 

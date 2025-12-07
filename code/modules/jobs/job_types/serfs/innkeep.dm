@@ -1,7 +1,7 @@
 /datum/job/innkeep
 	title = "Innkeep"
 	tutorial = "Liquor, lodging, and lavish meals... your business is the beating heart of Vanderlin. \
-	You're the one who provides the the hardworking townsfolk with a place to eat and drink their sorrows away, \
+	You're the one who provides the hardworking townsfolk with a place to eat and drink their sorrows away, \
 	and accommodations for weary travelers passing through."
 	department_flag = SERFS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -19,6 +19,11 @@
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 300
+	)
+
 
 /datum/outfit/innkeep/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -142,7 +142,7 @@
 
 /obj/item/key/clinic
 	name = "clinic key"
-	desc = "The Phyisickers key, for the Clinic doors."
+	desc = "The Physicker's key, for the Clinic doors."
 	icon_state = "mazekey"
 	lockids = list(ACCESS_CLINIC)
 
@@ -750,7 +750,7 @@
 // grenchensnacker
 /obj/item/key/porta
 	name = "strange key"
-	desc = "Was this key enchanted by a locksmith..?"
+	desc = "Was this key enchanted by a locksmith...?"
 	icon_state = "eyekey"
 	lockids = list("porta")
 

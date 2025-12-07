@@ -6,7 +6,6 @@
 	roll_chance = 15
 	outfit = /datum/outfit/adventurer/bladesinger
 	category_tags = list(CTAG_ADVENTURER)
-	min_pq = 2
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 
 /datum/outfit/adventurer/bladesinger/pre_equip(mob/living/carbon/human/H)

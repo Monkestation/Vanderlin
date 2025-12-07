@@ -10,7 +10,6 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 6
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
@@ -36,6 +35,14 @@
 	job_bitflag = BITFLAG_ROYALTY
 
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo) //intentional. This means it's a gamble between Noc or Zizo if your not one already. Don't fucking change this.
+
+	exp_type = list(EXP_TYPE_ADVENTURER, EXP_TYPE_LIVING, EXP_TYPE_MAGICK)
+	exp_types_granted  = list(EXP_TYPE_NOBLE, EXP_TYPE_MAGICK, EXP_TYPE_ADVENTURER)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 1200,
+		EXP_TYPE_ADVENTURER = 300,
+		EXP_TYPE_MAGICK = 300
+	)
 
 /datum/job/magician/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

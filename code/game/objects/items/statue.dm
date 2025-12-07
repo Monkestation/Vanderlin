@@ -69,7 +69,7 @@
 
 /obj/item/statue/iron/deformed
 	name = "deformed iron statue"
-	desc = "Theres something strange about this statue..."
+	desc = "There's something strange about this statue..."
 	icon_state = "istatue1"
 	smeltresult = /obj/item/ore/iron
 	sellprice = 10
@@ -90,7 +90,7 @@
 
 /obj/item/statue/silver/finger
 	name = "silver hand"
-	desc = "A silver statue of a humen hand flashing a common xylixian slight. This offensive item has no value."
+	desc = "A silver statue of a humen hand flashing a common Xylixian slight. This offensive item has no value."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "finger_silv"
 	smeltresult = /obj/item/ingot/silver
@@ -244,7 +244,7 @@
 
 /obj/item/statue/gold/finger
 	name = "golden hand"
-	desc = "A golden statue of a humen hand flashing a common xylixian slight. This offensive item has a measly value."
+	desc = "A golden statue of a humen hand flashing a common Xylixian slight. This offensive item has a measly value."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "finger_gold"
 	smeltresult = /obj/item/ingot/gold

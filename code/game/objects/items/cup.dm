@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/glass/cup
 	name = "metal cup"
-	desc = "An iron cup, it's rim gnawed upon and grimey."
+	desc = "An iron cup, its rim gnawed-upon and grimey."
 	icon = 'icons/roguetown/items/cooking.dmi'
 	icon_state = "cup_iron"
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
@@ -27,7 +27,7 @@
 
 /obj/item/reagent_containers/glass/cup/wooden
 	name = "wooden cup"
-	desc = "A wooden cup that has seen it's fair share of use and barfights."
+	desc = "A wooden cup that has seen its fair share of use and barfights."
 	icon_state = "cup_wooden"
 	resistance_flags = FLAMMABLE
 	grid_height = 32
@@ -54,7 +54,7 @@
 
 /obj/item/reagent_containers/glass/cup/golden
 	name = "golden goblet"
-	desc = "A golden gilded goblet which gleams pathetically despite it's illustrious metal."
+	desc = "A golden gilded goblet which gleams pathetically despite its illustrious metal."
 	icon_state = "cup_golden"
 	dropshrink = 0.65
 	sellprice = 50
@@ -246,7 +246,7 @@
 
 /obj/item/reagent_containers/glass/cup/glassware
 	name = "glass cup"
-	desc = "A fancy glass cup- the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
+	desc = "A fancy glass cup; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon = 'icons/roguetown/items/glass_reagent_container.dmi'
 	icon_state = "clear_cup1"
 	reagent_flags = OPENCONTAINER
@@ -279,7 +279,7 @@
 
 /obj/item/reagent_containers/glass/cup/glassware/shotglass
 	name = "shot glass"
-	desc = "A fancy shot glass- the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
+	desc = "A fancy shot glass; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon_state = "clear_shotglass1"
 	sellprice = VALUE_COMMON_GOODS * 1.5
 	volume = 9
@@ -287,5 +287,5 @@
 
 /obj/item/reagent_containers/glass/cup/glassware/wineglass
 	name = "wine glass"
-	desc = "A fancy wine glass- the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
+	desc = "A fancy wine glass; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon_state = "clear_wineglass1"

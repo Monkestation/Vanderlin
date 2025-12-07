@@ -54,7 +54,7 @@
 	name = "Butchering"
 	desc = "Butchering is a skill that represents your character's ability to butcher animals. The higher your skill in Butchering, the more meat and materials you can get from animals."
 	dreams = list(
-		"...you dream of chiseling a marble statue, a small rabbit... and when you open your eyes, the skin is seperated from the flesh..."
+		"...you dream of chiseling a marble statue, a small rabbit... and when you open your eyes, the skin is separated from the flesh..."
 	)
 
 /datum/skill/labor/lumberjacking

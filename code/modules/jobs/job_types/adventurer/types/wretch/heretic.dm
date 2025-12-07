@@ -6,6 +6,8 @@
 	allowed_patrons = ALL_ICONOCLAST_PATRONS
 	outfit = /datum/outfit/wretch/heretic
 	total_positions = 2
+	exp_type = list(EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
+	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
 /datum/outfit/wretch/heretic/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -54,7 +56,7 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/noc
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 		if(/datum/patron/divine/dendor)
@@ -103,7 +105,7 @@
 			armor = /obj/item/clothing/armor/brigandine/abyssor
 			wrists = /obj/item/clothing/neck/psycross/silver/abyssor
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 			H.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 		if(/datum/patron/divine/xylix)
@@ -115,6 +117,7 @@
 		if(/datum/patron/inhumen/graggar) //They get cooler outfits cause of non-unique weapon
 			head = /obj/item/clothing/head/helmet/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
+			neck = /obj/item/clothing/neck/gorget
 			gloves = /obj/item/clothing/gloves/plate/graggar
 			pants = /obj/item/clothing/pants/platelegs/graggar
 			shoes = /obj/item/clothing/shoes/boots/armor/graggar
@@ -124,6 +127,7 @@
 		if(/datum/patron/inhumen/graggar_zizo)
 			head = /obj/item/clothing/head/helmet/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
+			neck = /obj/item/clothing/neck/gorget
 			gloves = /obj/item/clothing/gloves/plate/graggar
 			pants = /obj/item/clothing/pants/platelegs/graggar
 			shoes = /obj/item/clothing/shoes/boots/armor/graggar
@@ -133,6 +137,7 @@
 		if(/datum/patron/inhumen/zizo)
 			head = /obj/item/clothing/head/helmet/visored/zizo
 			armor = /obj/item/clothing/armor/plate/full/zizo
+			neck = /obj/item/clothing/neck/gorget
 			gloves = /obj/item/clothing/gloves/plate/zizo
 			pants = /obj/item/clothing/pants/platelegs/zizo
 			shoes = /obj/item/clothing/shoes/boots/armor/zizo
@@ -143,6 +148,7 @@
 		if(/datum/patron/inhumen/matthios)
 			head = /obj/item/clothing/head/helmet/heavy/matthios
 			armor = /obj/item/clothing/armor/plate/full/matthios
+			neck = /obj/item/clothing/neck/gorget
 			gloves = /obj/item/clothing/gloves/plate/matthios
 			pants = /obj/item/clothing/pants/platelegs/matthios
 			shoes = /obj/item/clothing/shoes/boots/armor/matthios
@@ -151,6 +157,7 @@
 		if(/datum/patron/inhumen/baotha) //give them custom armor i beg
 			head = /obj/item/clothing/head/helmet/heavy/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
+			neck = /obj/item/clothing/neck/gorget
 			armor = /obj/item/clothing/armor/plate
 			gloves = /obj/item/clothing/gloves/plate
 			pants = /obj/item/clothing/pants/platelegs
@@ -159,7 +166,7 @@
 			H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
-		if(/datum/patron/psydon, /datum/patron/psydon/progressive)
+		if(/datum/patron/psydon)
 			wrists = /obj/item/clothing/neck/psycross/g
 			armor = /obj/item/clothing/armor/cuirass/fluted
 			cloak = /obj/item/clothing/cloak/psydontabard
@@ -240,7 +247,7 @@
 			H.equip_to_appropriate_slot(P)
 			var/obj/item/weapon/knife/dagger/steel/dirk/baotha/L = new(get_turf(src))
 			H.equip_to_appropriate_slot(L)
-		if(/datum/patron/psydon, /datum/patron/psydon/progressive)
+		if(/datum/patron/psydon)
 			var/obj/item/weapon/sword/long/psydon/P = new(get_turf(src))
 			H.equip_to_appropriate_slot(P)
 			var/obj/item/weapon/scabbard/sword/L = new(get_turf(src))

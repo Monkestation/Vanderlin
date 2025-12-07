@@ -101,9 +101,6 @@
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby = list()
 
-/turf
-	var/list/grabbedby = list()
-
 /obj/item/grabbing/Initialize()
 	. = ..()
 	START_PROCESSING(SSfastprocess, src)
@@ -179,9 +176,6 @@
 				part.grabbedby -= src
 				part = null
 				sublimb_grabbed = null
-	if(isturf(grabbed))
-		var/turf/T = grabbed
-		T.grabbedby -= src
 
 	if(grabbee)
 		// Dont stop the pull if another hand grabs the person

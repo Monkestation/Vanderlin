@@ -1,7 +1,7 @@
 
 /obj/item/rope
 	name = "rope"
-	desc = "A series of threads interwined to create a firm rope for binding, hanging and other jobs."
+	desc = "A series of threads intertwined to create a firm rope for binding, hanging and other jobs."
 	gender = PLURAL
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "rope"

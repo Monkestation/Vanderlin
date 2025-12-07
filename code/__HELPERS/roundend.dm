@@ -29,12 +29,6 @@
 			else
 				category = "others"
 				mob_data += list("typepath" = m.type)
-		if(!escaped)
-			if((m.onCentCom()))
-				escaped = "escapees"
-				num_escapees++
-			else
-				escaped = "abandoned"
 		if(!m.mind && (!ishuman(m)))
 			var/list/npc_nest = file_data["[escaped]"]["npcs"]
 			if(npc_nest.Find(initial(m.name)))

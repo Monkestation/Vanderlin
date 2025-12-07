@@ -521,7 +521,7 @@
 		if(matured)
 			. += span_info("It's fully grown but perhaps not yet ripe.")
 		else
-			. += span_info("It´s far from fully grown.")
+			. += span_info("It's far from fully grown.")
 		if(produce_ready)
 			. += span_info("It's ready for harvest.")
 	// Water feedback

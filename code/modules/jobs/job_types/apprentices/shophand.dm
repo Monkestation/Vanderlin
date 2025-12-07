@@ -20,6 +20,8 @@
 	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 
+	exp_types_granted  = list(EXP_TYPE_MERCHANT_COMPANY)
+
 /datum/outfit/shophand/pre_equip(mob/living/carbon/human/H)
 	..()
 	ADD_TRAIT(H, TRAIT_SEEPRICES, type)

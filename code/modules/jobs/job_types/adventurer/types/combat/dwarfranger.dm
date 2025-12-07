@@ -8,6 +8,8 @@
 	min_pq = 0
 	category_tags = list(CTAG_ADVENTURER)
 
+	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
+
 /datum/outfit/adventurer/dranger/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguehood/colored/uncolored

@@ -19,7 +19,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	boobed = FALSE
 	name = "astratan tabard"
-	desc = "The washed out golds of an asratan crusader adorn these fine robes."
+	desc = "The washed out golds of an astratan crusader adorn these fine robes."
 	icon_state = "astratatabard"
 	resistance_flags = FIRE_PROOF
 
@@ -44,7 +44,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	boobed = TRUE
 	name = "pestran tabard"
-	desc = "A simple covering of green cloth, meant to keep rot and blood alike off it's wearer."
+	desc = "A simple covering of green cloth, meant to keep rot and blood alike off its wearer."
 	icon_state = "pestratabard"
 
 /obj/item/clothing/cloak/templar/eoran
@@ -71,7 +71,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	boobed = TRUE
 	name = "undivided tabard"
-	desc = "The refuge of the TEN upon my back. A Undivided House, standing eternal against the encroaching darkness."
+	desc = "The refuge of the TEN upon my back. An Undivided House, standing eternal against the encroaching darkness."
 	icon_state = "seetabard"
 
 

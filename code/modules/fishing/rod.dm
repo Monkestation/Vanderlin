@@ -268,6 +268,7 @@
 	var/time = (0.8 - round(user.get_skill_level(/datum/skill/labor/fishing) * 0.04, 0.1)) SECONDS * bait_speed_mult
 	if(!do_after(user, time, currently_hooked, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE, extra_checks = CALLBACK(src, PROC_REF(fishing_line_check))))
 		return
+	// nothing after this point should sleep (fingers crossed)
 
 	if(currently_hooked.anchored || currently_hooked.move_resist >= MOVE_FORCE_STRONG)
 		balloon_alert(user, "[currently_hooked.p_they()] won't budge!")
@@ -278,26 +279,27 @@
 
 	//Try to move it 'till it's under the user's feet, then try to pick it up
 	var/requires_vertical = (loc.z > currently_hooked.z)
+	var/turf/our_turf = get_turf(src) // this probably shouldn't change during this proc... probably.
 	if(isitem(currently_hooked))
 		var/obj/item/item = currently_hooked
 		var/turf/old_loc = get_turf(currently_hooked)
-		step_towards(item, get_turf(src))
+		step_towards(item, our_turf)
 		if((old_loc == get_turf(currently_hooked)) && requires_vertical)
 			ADD_TRAIT(currently_hooked, "hooked", type)
-			currently_hooked.forceMove(GET_TURF_ABOVE(currently_hooked))
+			currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
 			addtimer(CALLBACK(src, PROC_REF(remove_hooked), currently_hooked), 1 SECONDS)
 		if(item.loc == user.loc && (item.interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))
 			user.put_in_inactive_hand(item)
 			QDEL_NULL(fishing_line)
 	//Not an item, so just delete the line if it's adjacent to the user.
-	else if(get_dist(currently_hooked,get_turf(src)) > 1)
+	else if(get_dist(currently_hooked,our_turf) > 1)
 		var/turf/old_loc = get_turf(currently_hooked)
-		step_towards(currently_hooked, get_turf(src))
+		step_towards(currently_hooked, our_turf)
 		if((old_loc == get_turf(currently_hooked)) && requires_vertical)
 			ADD_TRAIT(currently_hooked, "hooked", type)
-			currently_hooked.forceMove(GET_TURF_ABOVE(currently_hooked))
+			currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
 			addtimer(CALLBACK(src, PROC_REF(remove_hooked), currently_hooked), 1 SECONDS)
-		if(get_dist(currently_hooked,get_turf(src)) <= 1)
+		if(get_dist(currently_hooked,our_turf) <= 1)
 			QDEL_NULL(fishing_line)
 	else
 		QDEL_NULL(fishing_line)
@@ -423,7 +425,7 @@
 	if(isopenspace(atom_hit_by_hook_projectile))
 		dropped = TRUE
 		while(isopenspace(atom_hit_by_hook_projectile))
-			atom_hit_by_hook_projectile = GET_TURF_BELOW(atom_hit_by_hook_projectile)
+			atom_hit_by_hook_projectile = GET_TURF_BELOW(atom_hit_by_hook_projectile) // we know this will always be a turf so no need for get_turf
 
 	if(dropped)
 		for(var/mob/living/mob in atom_hit_by_hook_projectile.contents)

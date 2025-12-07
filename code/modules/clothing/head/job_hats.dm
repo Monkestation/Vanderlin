@@ -106,7 +106,7 @@
 
 /obj/item/clothing/head/wizhat/witch
 	name = "witch hat"
-	desc = "While offically, Witches heretical to Astrata and risk harrassment by the faithkeepers, quite a few mages and pestrans wear such hats anyways as a fashion statement."
+	desc = "While officially, Witches heretical to Astrata and risk harassment by the faithkeepers, quite a few mages and Pestrans wear such hats anyways as a fashion statement."
 	icon_state = "witchhat"
 	detail_tag = "_detail"
 	detail_color = CLOTHING_SOOT_BLACK
@@ -141,3 +141,22 @@
 	item_state = "courthat"
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+
+/obj/item/clothing/head/maidband
+	name = "maid headband"
+	desc = "A pleated cloth headband. It has gained widespread popularity from Valorian nobles travelling with their servants."
+	icon_state = "maidband"
+	body_parts_covered = NONE
+
+/obj/item/clothing/head/maidband/Initialize(mapload, ...)
+	. = ..()
+	// I fucking love pilgrims
+	AddComponent(
+		/datum/component/equipment_stress/job_specific, \
+		/datum/stress_event/maidband, \
+		list(TRAIT_VILLAIN = null, TRAIT_NOBLE = /datum/stress_event/maidband/noble), \
+		immune_jobs = list(/datum/job/prince, /datum/job/squire, /datum/job/advclass/pilgrim/noble, /datum/job/advclass/pilgrim/rare/zaladin, /datum/job/advclass/pilgrim/rare/grenzelhoft, /datum/job/advclass/pilgrim/rare/merchant), \
+		immune_departments = (NOBLEMEN | GARRISON | OUTSIDERS | COMPANY), \
+		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \
+		inverse = TRUE, \
+	)

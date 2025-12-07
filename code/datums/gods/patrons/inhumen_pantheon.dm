@@ -61,7 +61,7 @@
 	name = MATTHIOS
 	domain = "God of Thievery, Ill-Gotten Gains, and Highwaymen"
 	desc = "Legendary humen bandit whose name was attributed to countless great thefts. It is because of his legacy that nobles clutch their coin purses to their chests in town."
-	flaws = "Pride, Greed, Orneryness"
+	flaws = "Pride, Greed, Orneriness"
 	worshippers = "Outlaws, Noble-Haters, Downtrodden Peasantry"
 	sins = "Clumsiness, Stupidity, Humility"
 	boons = "You can see the most expensive item someone is carrying."
@@ -115,6 +115,7 @@
 	// if a non-maniac somehow gets this patron,
 	// something interesting should happen if they try to pray.
 	INVOKE_ASYNC(follower, GLOBAL_PROC_REF(cant_wake_up), follower)  //Something interesting happened.
+	message_admins("[ADMIN_LOOKUPFLW(follower)] has been gibbed due to praying as a non-maniac with their patron set to Graggazo. Whoops..")
 	return FALSE
 
 /datum/patron/inhumen/graggar_zizo/hear_prayer(mob/living/follower, message)

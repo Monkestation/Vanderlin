@@ -1,56 +1,56 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "b" = (
 /obj/item/natural/stone,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "c" = (
 /obj/item/natural/stone{
 	pixel_y = -4;
 	pixel_x = 6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "e" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "B" = (
 /obj/item/natural/stone{
 	pixel_x = -17;
 	pixel_y = 18
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "C" = (
 /obj/item/natural/stone{
 	pixel_x = -1;
 	pixel_y = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "S" = (
 /obj/item/natural/stone{
 	pixel_x = 10;
 	pixel_y = -6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "T" = (
 /obj/item/natural/stone{
 	pixel_x = -6;
 	pixel_y = -16
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Y" = (
 /obj/item/natural/stone{
 	pixel_x = -17;
 	pixel_y = -6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 a

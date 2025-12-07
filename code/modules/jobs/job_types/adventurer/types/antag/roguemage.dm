@@ -1,4 +1,4 @@
-/datum/job/advclass/roguemage //mage class - like the adventurer mage, but more evil.
+/datum/job/advclass/bandit/roguemage //mage class - like the adventurer mage, but more evil.
 	title = "Rogue Mage"
 	tutorial = "Those fools at the academy laughed at you and cast you from the ivory tower of higher learning and magickal practice. \
 	No matter - you will ascend to great power one day, but first you need wealth - vast amounts of it. \
@@ -6,6 +6,8 @@
 	outfit = /datum/outfit/bandit/roguemage
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/cmode/antag/CombatRogueMage.ogg'
+	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
+
 
 /datum/outfit/bandit/roguemage/pre_equip(mob/living/carbon/human/H)
 	..()

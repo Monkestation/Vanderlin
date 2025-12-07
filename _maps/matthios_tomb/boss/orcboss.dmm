@@ -2,59 +2,59 @@
 "as" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aK" = (
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "fV" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hr" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hM" = (
 /obj/machinery/light/fueled/wallfire,
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ih" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jb" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ji" = (
 /obj/structure/table/vtable/v2,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "lo" = (
 /obj/structure/chair/stool,
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "mA" = (
 /obj/structure/chair/bench/throne,
 /obj/item/clothing/ring/active/nomag,
 /mob/living/carbon/human/species/orc/warlord/skilled,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ni" = (
 /mob/living/carbon/human/species/orc/warrior,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "pF" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "qb" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
@@ -67,10 +67,10 @@
 	pixel_x = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "qv" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "qI" = (
 /obj/structure/table/vtable,
 /obj/item/gem/diamond,
@@ -92,7 +92,7 @@
 	pixel_x = 6
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tg" = (
 /obj/structure/table/wood/reinf_long,
 /obj/item/clothing/face/shepherd/clothmask{
@@ -103,17 +103,17 @@
 	pixel_x = -6
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tA" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "vi" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "vD" = (
 /obj/structure/roguetent,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "wr" = (
 /obj/structure/toilet,
 /obj/item/clothing/neck/psycross/g,
@@ -129,118 +129,118 @@
 	},
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "wR" = (
 /obj/structure/window/openclose,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "xz" = (
 /obj/structure/chair/stool,
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "yI" = (
 /obj/structure/table/wood/large/corner,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "BM" = (
 /obj/structure/ladder,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Cg" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "CY" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "CZ" = (
 /obj/structure/door/stone,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Dx" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "DI" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "EV" = (
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Fq" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "GG" = (
 /obj/item/weapon/shovel,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ha" = (
 /obj/structure/ladder,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ig" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "IJ" = (
 /obj/structure/chair/stool,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Kd" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "KT" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Lj" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Lu" = (
 /obj/structure/roguetent,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Md" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Mr" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "MQ" = (
 /obj/structure/closet/dirthole/closed/loot,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "OH" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "OX" = (
 /obj/structure/gate/bars/preopen,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "PP" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Qw" = (
 /mob/living/carbon/human/species/orc/warrior,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Qy" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
 	},
 /obj/item/clothing/neck/menears,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "QB" = (
 /obj/structure/table/wood/counter/end,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Rc" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/clothing/head/fancyhat,
@@ -251,18 +251,18 @@
 /obj/item/clothing/cloak/half/colored/random,
 /obj/item/clothing/armor/leather/vest/colored/black,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "TD" = (
 /obj/item/clothing/shoes/nobleboot{
 	pixel_x = 1;
 	pixel_y = 15
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "TO" = (
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ug" = (
 /obj/item/reagent_containers/glass/cup/skull{
 	pixel_x = -9
@@ -276,19 +276,19 @@
 	pixel_x = 12
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Um" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Wk" = (
 /obj/item/clothing/neck/elfears,
 /obj/structure/table/wood/large/corner,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Yl" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 
 (1,1,1) = {"
 DI

@@ -13,6 +13,9 @@
 		/datum/attunement/blood = 0.5,
 	)
 
+	invocation = "throws out his hand!"
+	invocation_type = INVOCATION_EMOTE
+
 	charge_time = 2 SECONDS
 	charge_drain = 1
 	cooldown_time = 10 SECONDS

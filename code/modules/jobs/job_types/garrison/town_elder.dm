@@ -11,16 +11,22 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 10 // Requires knowledge and good rp for the classes.
 	bypass_lastclass = TRUE
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/militia)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONHERETICAL
 	blacklisted_species = list(SPEC_ID_HALFLING)
-
+	cmode_music = "sound/music/cmode/towner/CombatElder.ogg"
 	advclass_cat_rolls = list(CTAG_TOWN_ELDER = 20)
 	give_bank_account = 50
 	can_have_apprentices = FALSE
+
+	exp_type = list(EXP_TYPE_BARD, EXP_TYPE_LIVING)
+	exp_types_granted  = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_BARD)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 1200,
+		EXP_TYPE_BARD = 300
+	)
 
 
 /mob/living/carbon/human/proc/townannouncement()
@@ -38,7 +44,7 @@
 
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/rogue/indoors/town/tavern))
+		if(!istype(get_area(src), /area/indoors/town/tavern))
 			to_chat(src, "<span class='warning'>I need to do this from the tavern.</span>")
 			return FALSE
 		priority_announce("[inputty]", title = "[src.real_name], The Town Elder Speaks", sound = 'sound/misc/bell.ogg')
@@ -69,6 +75,9 @@
 		spawn_instrument = /obj/item/instrument/lute
 	H.equip_to_slot_or_del(new spawn_instrument(H),ITEM_SLOT_BACK_R, TRUE)
 
+/datum/job/advclass/town_elder
+	exp_types_granted  = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_BARD)
+
 /datum/job/advclass/town_elder/mayor
 	title = "Mayor"
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED // Due to the inherent nobility coming from being a mayor, non-humen species are barred.
@@ -78,8 +87,6 @@
 	category_tags = list(CTAG_TOWN_ELDER)
 
 // Mayor start with slight changes, they were turned noble and got more money, also highly skilled in merchant skills.
-
-
 
 /datum/outfit/town_elder/mayor/pre_equip(mob/living/carbon/human/H)
 
@@ -262,7 +269,7 @@
 			H.virginity = FALSE
 		if(/datum/patron/divine/noc)
 			neck = /obj/item/clothing/neck/psycross/silver/noc
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
 			switch(language)
 				if("Dwarvish")
@@ -302,7 +309,7 @@
 			ADD_TRAIT(H, TRAIT_SEEDKNOW, TRAIT_GENERIC)
 		if(/datum/patron/divine/abyssor)
 			neck = /obj/item/clothing/neck/psycross/silver/abyssor
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 			H.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 		if(/datum/patron/divine/ravox)
 			neck = /obj/item/clothing/neck/psycross/silver/ravox

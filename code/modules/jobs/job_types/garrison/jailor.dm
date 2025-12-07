@@ -12,7 +12,6 @@
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 0
-	min_pq = 4
 
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL) // He's a wierd elderly man that is fucking jacked- this will make for a memorable character I think.
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
@@ -22,6 +21,12 @@
 	cmode_music = 'sound/music/cmode/nobility/CombatDungeoneer.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
+
+	exp_type = list(EXP_TYPE_GARRISON)
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_GARRISON = 300
+	)
 
 /datum/outfit/jailor/pre_equip(mob/living/carbon/human/H)
 	..()

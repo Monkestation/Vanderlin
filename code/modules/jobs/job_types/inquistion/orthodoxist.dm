@@ -6,7 +6,7 @@
 	spawn_positions = 2
 	allowed_races = RACES_PLAYER_GRENZ
 	bypass_lastclass = TRUE
-	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
+	cmode_music = 'sound/music/cmode/church/CombatInquisitor2.ogg'
 	allowed_patrons = list(
 		/datum/patron/psydon
 	)
@@ -20,13 +20,18 @@
 
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ORTHODOXIST
-	min_pq = 0 // We need you to be atleast kinda competent to do this. This is a soft antaggy sorta role. Also needs to know wtf a PSYDON is
 
 	advclass_cat_rolls = list(CTAG_INQUISITION = 20)
 	same_job_respawn_delay = 30 MINUTES
 	antag_role = /datum/antagonist/purishep
 
 	languages = list(/datum/language/oldpsydonic)
+
+	exp_type = list(EXP_TYPE_INQUISITION)
+	exp_types_granted  = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_INQUISITION = 120
+	)
 
 /datum/job/orthodoxist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -46,3 +51,6 @@
 	if(species)
 		species.native_language = "Old Psydonic"
 		species.accent_language = species.get_accent(species.native_language)
+
+/datum/job/advclass/sacrestant
+	exp_types_granted  = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)

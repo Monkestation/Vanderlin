@@ -200,6 +200,7 @@
 								user.put_in_hands(result)
 								user.visible_message("<span class='notice'>[user] finishes cooking [result].</span>")
 								to_chat(user, "<span class='notice'>[chosen_recipe.complete_message]</span>")
+								user.nobles_seen_servant_work()
 								return TRUE
 						return FALSE
 

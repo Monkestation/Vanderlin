@@ -279,6 +279,7 @@
 #define COMSIG_TRY_STORAGE_CAN_INSERT "storage_can_equip"				//(obj/item/insertion_candidate, mob/user, silent) - returns bool
 #define COMSIG_STORAGE_CLOSED "storage_close"
 #define COMSIG_STORAGE_REMOVED "storage_item_removed"
+#define COMSIG_STORAGE_ADDED "storage_item_added"
 
 // ~storage component
 ///from base of datum/component/storage/can_user_take(): (mob/user)

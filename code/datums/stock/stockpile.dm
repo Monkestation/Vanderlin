@@ -1,4 +1,4 @@
-// Guidelines for Stockpiles. Items should always cost ~50% more to withdraw than was recieved for depositing.
+// Guidelines for Stockpiles. Items should always cost ~50% more to withdraw than was received for depositing.
 // Export Prices should fall between the payout and the withdraw, unless the item is incredibly cheap.
 
 /datum/stock/stockpile

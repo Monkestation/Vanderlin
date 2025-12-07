@@ -49,7 +49,7 @@
 	var/prev_real_name = spawned.real_name
 	var/prev_name = spawned.name
 	var/honorary = "Khan"
-	if(spawned.gender == FEMALE)
+	if(spawned.pronouns == SHE_HER)
 		honorary = "Khatun"
 	spawned.real_name = "[prev_real_name] [honorary]"
 	spawned.name = "[prev_name] [honorary]"

@@ -12,7 +12,6 @@
 	outfit = /datum/outfit/absolver
 	bypass_lastclass = TRUE
 	display_order = JDO_ABSOLVER
-	min_pq = 3 // Low potential for grief. A pacifist by trade. Also needs to know wtf a PSYDON is.
 	give_bank_account = 15
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
@@ -27,6 +26,7 @@
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
 	)
 
 	jobstats = list(
@@ -56,6 +56,12 @@
 	)
 
 	languages = list(/datum/language/oldpsydonic)
+
+	exp_type = list(EXP_TYPE_INQUISITION)
+	exp_types_granted  = list(EXP_TYPE_INQUISITION)
+	exp_requirements = list(
+		EXP_TYPE_INQUISITION = 600
+	)
 
 
 // REMEMBER FLAGELLANT? REMEMBER LASZLO? THIS IS HIM NOW. FEEL OLD YET?

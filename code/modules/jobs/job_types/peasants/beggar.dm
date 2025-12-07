@@ -56,10 +56,11 @@
 
 	H.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2,3,4,5), TRUE)
 	H.adjust_skillrank(/datum/skill/misc/stealing, pick(1,2,3,4,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/lockpicking, pick (1,2,3,4,5), TRUE) // thug lyfe
+	H.adjust_skillrank(/datum/skill/misc/lockpicking, pick (1,2,3,4,5), TRUE) // thug life
 	H.adjust_skillrank(/datum/skill/misc/climbing, pick(2,3,4,5), TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2,3), TRUE) // Street-fu
 	H.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2,3), TRUE)
+	H.adjust_skillrank(/datum/skill/craft/alchemy, pick(1,2,3), TRUE)
 	H.base_fortune = rand(1, 20)
 	H.recalculate_stats(FALSE)
 	if(prob(5))

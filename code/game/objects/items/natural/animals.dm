@@ -34,7 +34,7 @@
 /obj/item/natural/cured/essence
 	name = "essence of wilderness"
 	icon_state = "wessence"
-	desc = "A mystical essence embued with the power of Dendor. Merely holding it transports one's mind to ancient times."
+	desc = "A mystical essence imbued with the power of Dendor. Merely holding it transports one's mind to ancient times."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
@@ -78,18 +78,18 @@
 	sellprice = 28
 
 /obj/item/natural/fur/fox
-	desc = "from a venard."
+	desc = "Fur from a venard."
 	icon_state = "pelt_fox"
 	color = null
 
 /obj/item/natural/fur/raccoon
-	desc = "from a raccoon."
+	desc = "Fur from a raccoon."
 	icon_state = "pelt_raccoon"
 	color = null
 	sellprice = 12
 
 /obj/item/natural/fur/bobcat
-	desc = "from a lynx."
+	desc = "Fur from a lynx."
 	icon_state = "pelt_bobcat"
 	color = null
 

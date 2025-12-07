@@ -133,7 +133,7 @@
 //................ Vial Bolt ............... //
 /obj/item/ammo_casing/caseless/bolt/vial
 	name = "vial bolt"
-	desc = "An bolt with its tip replaced by a vial of... something, shatters on impact."
+	desc = "A bolt with its tip replaced by a vial of... something, shatters on impact."
 	icon_state = "bolt_vial"
 	abstract_type = /obj/item/ammo_casing/caseless/bolt/vial
 	max_integrity = 10
@@ -159,7 +159,7 @@
 
 /obj/projectile/bullet/reusable/bolt/vial
 	name = "vial bolt"
-	desc = "An bolt with its tip replaced by a vial of... something, shatters on impact."
+	desc = "A bolt with its tip replaced by a vial of... something, shatters on impact."
 	icon_state = "boltvial_proj"
 	abstract_type = /obj/projectile/bullet/reusable/bolt/vial
 	ammo_type = null
@@ -188,13 +188,13 @@
 	return ..()
 
 /obj/projectile/bullet/reusable/bolt/vial/water
-	desc = "An bolt with its tip replaced by a vial of water, shatters on impact."
+	desc = "A bolt with its tip replaced by a vial of water, shatters on impact."
 	reagent = /datum/reagent/water
 
 //................ Water Bolt ............... //
 /obj/item/ammo_casing/caseless/bolt/water
 	name = "water bolt"
-	desc = "An bolt with its tip replaced by a water crystal, creates a splash on impact."
+	desc = "A bolt with its tip replaced by a water crystal, creates a splash on impact."
 	icon_state = "bolt_water"
 	projectile_type = /obj/projectile/bullet/reusable/bolt/water
 	max_integrity = 10
@@ -206,7 +206,7 @@
 
 /obj/projectile/bullet/reusable/bolt/water
 	name = "water bolt"
-	desc = "An bolt with its tip replaced by a water crystal, creates a splash on impact."
+	desc = "A bolt with its tip replaced by a water crystal, creates a splash on impact."
 	icon_state = "boltwater_proj"
 	ammo_type = null
 	can_inject = FALSE
@@ -514,6 +514,14 @@
 	reduce_crit_chance = 5 //Reduces crit chance
 	dismemberment = 0 //Can't dismember
 
+/obj/projectile/bullet/reusable/bullet/on_hit(atom/target)
+	var/atom/throw_target = get_edge_target_turf(firer, get_dir(firer, target))
+	if(ismob(target))
+		var/mob/living/carbon/target_mob = target
+		target_mob.safe_throw_at(throw_target, 1, 4)
+		target_mob.Knockdown(SHOVE_KNOCKDOWN_SOLID)
+	..()
+
 /obj/projectile/bullet/fragment
 	name = "smaller lead ball"
 	desc = "Haha. You're not able to see this!"
@@ -610,7 +618,7 @@
 
 /obj/item/ammo_casing/caseless/dart
 	name = "dart"
-	desc = "A thorn fasioned into a primitive dart."
+	desc = "A thorn fashioned into a primitive dart."
 	projectile_type = /obj/projectile/bullet/reusable/dart
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "dart"

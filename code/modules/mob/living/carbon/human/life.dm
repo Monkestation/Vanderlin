@@ -259,8 +259,7 @@
 		last_fire_update = null
 		..()
 
-/mob/living/carbon/human/SoakMob(locations)
-	. = ..()
+/mob/living/carbon/human/SoakMob(locations, dirty_water = FALSE, rain = FALSE)
 	var/coverhead
 	//add belt slots to this for rusting
 	var/list/body_parts = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, wear_ring)
@@ -273,10 +272,28 @@
 				coverhead = TRUE
 	if(locations & HEAD)
 		if(!coverhead)
-			var/mob/living/carbon/V = src
-			V.add_stress(/datum/stress_event/coldhead)
-//END FIRE CODE
+			add_stress(/datum/stress_event/coldhead)
 
+	if(locations & CHEST)
+		if(!rain)
+			ExtinguishMob()
+		for(var/obj/item/clothing/C in get_equipped_items())
+			if(C.wetable)
+				C.wet.add_water(20, dirty_water)
+		if(locations & HEAD)
+			adjust_fire_stacks(-2)
+		else
+			adjust_fire_stacks(-1)
+	else
+		if(locations == FEET)
+			var/obj/item/clothing/C = shoes
+			if(C && C.wetable)
+				C.wet.add_water(20, dirty_water)
+		else
+			var/list/below_chest = list(wear_pants, shoes)
+			for(var/obj/item/clothing/C in below_chest)
+				if(C.wetable)
+					C.wet.add_water(20, dirty_water)
 
 //This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, CHEST, GROIN, etc. See setup.dm for the full list)
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.

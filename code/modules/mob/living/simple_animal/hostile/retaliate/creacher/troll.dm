@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/troll
 	name = "troll"
-	desc = "Elven legends say these monsters were servants of Dendor tasked to guard his realm; nowadays they are sometimes found in the company of orcs."
+	desc = "Elven legends say these monsters were servants of Dendor tasked to guard his realm; nowadays, they are sometimes found in the company of orcs."
 	icon = 'icons/mob/creacher/trolls/troll.dmi'
 	icon_state = "troll"
 	icon_living = "troll"
@@ -243,7 +243,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/troll/axe
 	name = "Troll Skull-Splitter"
-	desc = "This one seems smarter than the rest... And it's axe could cut a man in two."
+	desc = "This one seems smarter than the rest... And its axe could cut a man in two."
 	icon = 'icons/mob/creacher/trolls/troll_axe.dmi'
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/strange = 2, \
 					/obj/item/natural/hide = 3, \
@@ -253,7 +253,7 @@
 	base_intents = list(/datum/intent/simple/troll_axe)
 	attack_sound = list('sound/combat/wooshes/blunt/wooshhuge (1).ogg','sound/combat/wooshes/blunt/wooshhuge (2).ogg','sound/combat/wooshes/blunt/wooshhuge (3).ogg')
 	loot = list(/obj/item/weapon/axe/iron/troll)
-	deathmessage = "As the creacher tumbles, it falls upon it's axe, snapping the handle."
+	deathmessage = "As the creacher tumbles, it falls upon its axe, snapping the handle."
 
 /datum/intent/simple/troll_axe
 	name = "troll axe"

@@ -15,7 +15,6 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/grant_title,
 	)
-	min_pq = 10
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ROYALTY
@@ -25,6 +24,13 @@
 	give_bank_account = 120
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
+
+	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600,
+		EXP_TYPE_NOBLE = 300,
+	)
 
 /datum/outfit/hand
 	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
@@ -42,12 +48,15 @@
 
 /datum/job/hand/proc/know_agents(mob/living/carbon/human/H)
 	if(!GLOB.roundstart_court_agents.len)
-		to_chat(H, span_notice("You begun the week with no agents."))
+		to_chat(H, span_notice("You began the week with no agents."))
 	else
-		to_chat(H, span_notice("We begun the week with these agents:"))
+		to_chat(H, span_notice("We began the week with these agents:"))
 		for(var/name in GLOB.roundstart_court_agents)
 			to_chat(H, span_notice(name))
 		H.mind.cached_frumentarii |= GLOB.roundstart_court_agents
+
+/datum/job/advclass/hand
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 /datum/job/advclass/hand/hand
 	title = "Hand"

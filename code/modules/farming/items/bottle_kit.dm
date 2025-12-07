@@ -54,7 +54,7 @@
 
 /obj/item/reagent_containers/glass/bottle/brewing_bottle
 	name = "brewer's bottle"
-	desc = "A bottle with a special cork. When sealed, it is valuable commodity for trade."
+	desc = "A bottle with a special cork. When sealed, it is a valuable commodity for trade."
 	icon =  'icons/obj/bottle.dmi'
 	icon_state = "brew_bottle"
 	volume = 50

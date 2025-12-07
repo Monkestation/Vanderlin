@@ -54,21 +54,16 @@
 
 /mob/living/carbon/human/species/elf/snow/base/unskilled/naked/after_creation()
 	..()
-	configure_npc_mind(list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/whipsflails = 1,
-		/datum/skill/combat/polearms = 1,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/shields = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 1
-	))
+	adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
+
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
@@ -81,21 +76,15 @@
 
 /mob/living/carbon/human/species/elf/snow/base/skilled/naked/after_creation()
 	..()
-	configure_npc_mind(list(
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/athletics = 3
-	))
+	adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
@@ -110,24 +99,18 @@
 
 /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked/after_creation()
 	..()
-	configure_npc_mind(list(
-		/datum/skill/combat/wrestling = 5,
-		/datum/skill/combat/unarmed = 5,
-		/datum/skill/misc/athletics = 5,
-		/datum/skill/combat/knives = 5,
-		/datum/skill/combat/swords = 5,
-		/datum/skill/combat/axesmaces = 5,
-		/datum/skill/combat/swords = 5,
-		/datum/skill/combat/whipsflails = 5,
-		/datum/skill/combat/polearms = 5,
-		/datum/skill/combat/knives = 5,
-		/datum/skill/combat/shields = 5,
-		/datum/skill/combat/unarmed = 5,
-		/datum/skill/misc/athletics = 5
-	))
+	adjust_skillrank(/datum/skill/combat/polearms, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, 5, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 5, TRUE)
+
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-
 
 // --- Light Gear ----
 
@@ -144,12 +127,11 @@
 /mob/living/carbon/human/species/elf/snow/base/unskilled/light_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/knives = pick(1,2),
-		/datum/skill/combat/swords = pick(1,2),
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 1
-	))
+	adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1
 	equipOutfit(new /datum/outfit/npc/light_gear)
 
@@ -168,12 +150,13 @@
 	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/athletics = 2
-	))
+
+	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1
 	equipOutfit(new /datum/outfit/npc/light_gear)
 
@@ -191,12 +174,12 @@
 	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/knives = 5,
-		/datum/skill/combat/swords = 5,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/misc/athletics = 4
-	))
+	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives,5, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1
 	equipOutfit(new /datum/outfit/npc/light_gear)
 
@@ -215,16 +198,16 @@
 /mob/living/carbon/human/species/elf/snow/base/unskilled/medium_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/axesmaces = pick(1,2),
-		/datum/skill/combat/swords = pick(1,2),
-		/datum/skill/combat/whipsflails = pick(1,2),
-		/datum/skill/combat/polearms = pick(1,2),
-		/datum/skill/combat/shields = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 1
 
-	))
+	adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces,pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails,pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms,pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed,1, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
+
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
 	equipOutfit(new /datum/outfit/npc/medium_gear)
 
@@ -239,15 +222,14 @@
 /mob/living/carbon/human/species/elf/snow/base/skilled/medium_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/athletics = 2
-	))
+	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces,3, TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails,3, TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms,3, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed,2, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
 	equipOutfit(new /datum/outfit/npc/medium_gear)
 
@@ -263,15 +245,14 @@
 	..()
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/axesmaces = 5,
-		/datum/skill/combat/swords = 5,
-		/datum/skill/combat/whipsflails = 5,
-		/datum/skill/combat/polearms = 5,
-		/datum/skill/combat/shields = 4,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/misc/athletics = 4
-	))
+	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces,5, TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails,5, TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms,5, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed,4, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
 	equipOutfit(new /datum/outfit/npc/medium_gear)
 
@@ -290,15 +271,14 @@
 /mob/living/carbon/human/species/elf/snow/base/unskilled/heavy_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/axesmaces = pick(1,2),
-		/datum/skill/combat/swords = pick(1,2),
-		/datum/skill/combat/whipsflails = pick(1,2),
-		/datum/skill/combat/shields = pick(1,2),
-		/datum/skill/combat/polearms = pick(1,2),
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 1
-	))
+	adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces,pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails,pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms,pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, pick(1,2), TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed,1, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 3
 	equipOutfit(new /datum/outfit/npc/heavy_gear)
 
@@ -314,15 +294,14 @@
 /mob/living/carbon/human/species/elf/snow/base/skilled/heavy_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/athletics = 2
-	))
+	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces,3, TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails,3, TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms,3, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed,2, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 3
 	equipOutfit(new /datum/outfit/npc/heavy_gear)
 
@@ -339,14 +318,13 @@
 	..()
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	configure_npc_mind(list(
-		/datum/skill/combat/axesmaces = 5,
-		/datum/skill/combat/swords = 5,
-		/datum/skill/combat/whipsflails = 5,
-		/datum/skill/combat/polearms = 5,
-		/datum/skill/combat/shields = 5,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/misc/athletics = 4
-	))
+	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces,5, TRUE)
+	adjust_skillrank(/datum/skill/combat/whipsflails,5, TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms,5, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 5, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed,4, TRUE)
+	adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 3
 	equipOutfit(new /datum/outfit/npc/heavy_gear)

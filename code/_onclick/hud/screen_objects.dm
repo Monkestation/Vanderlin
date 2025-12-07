@@ -704,17 +704,14 @@
 	if(isliving(hud?.mymob))
 		var/mob/living/L = hud.mymob
 		if(L.eyesclosed)
-			L.eyesclosed = 0
-			L.cure_blind("eyelids")
-			update_appearance(UPDATE_ICON)
+			L.set_eyes_closed(FALSE)
 			return
 
 	if(LAZYACCESS(modifiers, LEFT_CLICK))
 		if(_y>=29 || _y<=4)
 			if(isliving(hud.mymob))
 				var/mob/living/L = hud.mymob
-				L.eyesclosed = 1
-				L.become_blind("eyelids")
+				L.set_eyes_closed(TRUE)
 		else
 			toggle(usr)
 

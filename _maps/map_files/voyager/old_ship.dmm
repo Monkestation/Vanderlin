@@ -5,7 +5,7 @@
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "bX" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -28,13 +28,13 @@
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
-/area/rogue)
+/area)
 "dq" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "dx" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -49,17 +49,17 @@
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
 /turf/open/floor/carpet/purple,
-/area/rogue)
+/area)
 "eo" = (
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "eQ" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "gB" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
@@ -67,14 +67,14 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "hq" = (
 /obj/structure/table/wood,
 /obj/item/coin/silver/pile,
 /obj/item/coin/copper/pile,
 /obj/item/weapon/knife/dagger/navaja,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "ij" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -83,31 +83,31 @@
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "ik" = (
 /obj/structure/fake_machine/vendor,
 /turf/closed/wall/mineral/wooddark,
-/area/rogue)
+/area)
 "iT" = (
 /obj/structure/fake_machine/atm,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "ko" = (
 /obj/structure/floordoor{
 	redstone_id = "droploot"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "lr" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "nF" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "ob" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -134,7 +134,7 @@
 	pixel_x = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "og" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -142,20 +142,20 @@
 	icon_state = "border"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "qp" = (
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "rF" = (
 /obj/structure/fluff/railing/border{
 	dir = 8;
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "sl" = (
 /turf/open/water/ocean/deep,
-/area/rogue)
+/area)
 "sr" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -167,7 +167,7 @@
 	},
 /obj/item/rope/chain,
 /turf/open/floor/ruinedwood/platform,
-/area/rogue)
+/area)
 "tl" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -175,7 +175,7 @@
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "tv" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -210,52 +210,52 @@
 	pixel_x = 7
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "vY" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood3"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "xi" = (
 /obj/structure/fluff/statue/small,
 /turf/open/floor/ruinedwood/platform,
-/area/rogue)
+/area)
 "yy" = (
 /obj/structure/ladder,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "yF" = (
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
-/area/rogue)
+/area)
 "yR" = (
 /obj/effect/landmark/start/shophand{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "za" = (
 /obj/item/fake_machine/merchant,
 /turf/open/floor/carpet/purple,
-/area/rogue)
+/area)
 "ze" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Ad" = (
 /obj/structure/fake_machine/merchantvend,
 /turf/closed/wall/mineral/wooddark,
-/area/rogue)
+/area)
 "Ah" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Dj" = (
 /obj/item/reagent_containers/glass/cup/wooden,
 /obj/structure/table/wood{
@@ -263,7 +263,7 @@
 	},
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "DP" = (
 /obj/structure/bed/inn,
 /obj/structure/roguetent{
@@ -276,7 +276,7 @@
 	pixel_y = -32
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Gj" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -287,7 +287,7 @@
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Gr" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -295,7 +295,7 @@
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Gt" = (
 /obj/structure/bed/inn,
 /obj/structure/roguetent{
@@ -306,7 +306,7 @@
 	pixel_y = 32
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Hb" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -337,7 +337,7 @@
 	pixel_y = 36
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Hp" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -353,11 +353,11 @@
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
-/area/rogue)
+/area)
 "HF" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "IJ" = (
 /obj/structure/closet/crate/drawer/inn,
 /obj/item/key/merchant,
@@ -368,23 +368,23 @@
 /obj/item/weapon/sword/sabre/cutlass,
 /obj/structure/fluff/wallclock/l,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Js" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "JC" = (
 /obj/structure/lever{
 	redstone_id = "droploot"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Ke" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "KA" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood3"
@@ -394,19 +394,19 @@
 	layer = 2.81
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Lg" = (
 /obj/structure/closet/crate/chest,
 /obj/structure/floordoor{
 	redstone_id = "droploot"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Lq" = (
 /obj/structure/window,
 /obj/structure/bars,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "LE" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 8;
@@ -414,35 +414,35 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "LF" = (
 /obj/structure/ladder,
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
-/area/rogue)
+/area)
 "LU" = (
 /obj/structure/fluff/statue/small,
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Ml" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
 	icon_state = "border"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "NR" = (
 /obj/structure/closet/crate/chest{
 	base_icon_state = "woodchestalt";
 	icon_state = "woodchestalt"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "QG" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Rx" = (
 /obj/structure/stairs{
 	dir = 4
@@ -452,76 +452,76 @@
 	icon_state = "border"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Sv" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Th" = (
 /turf/open/floor/carpet/purple,
-/area/rogue)
+/area)
 "Tq" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Us" = (
 /obj/structure/stairs{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue)
+/area)
 "VB" = (
 /obj/machinery/light/fueled/lanternpost{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Wo" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
 	icon_state = "border"
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Wu" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "Xk" = (
 /obj/structure/fake_machine/mail/r{
 	pixel_y = 32
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "XA" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "XI" = (
 /obj/structure/fluff/railing/border,
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "XS" = (
 /turf/closed/wall/mineral/wooddark,
-/area/rogue)
+/area)
 "YP" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/carpet/purple,
-/area/rogue)
+/area)
 "ZI" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
 	icon_state = "border"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 
 (1,1,1) = {"
 sl

@@ -296,7 +296,7 @@
 // ------------ ACCEPTABLE BEDS ----------------------
 /obj/structure/bed/hay
 	name = "hay bed"
-	desc = "A bed padded with hay. At least your not sleeping on the floor."
+	desc = "A bed padded with hay. At least you're not sleeping on the floor."
 	icon_state = "haybed"
 	sleepy = 1
 	debris = list(/obj/item/grown/log/tree/small = 1)

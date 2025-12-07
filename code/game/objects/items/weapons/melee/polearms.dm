@@ -234,7 +234,7 @@
 
 /obj/item/weapon/polearm/spear/assegai
 	name = "iron assegai"
-	desc = "a long spear originating from the southern regions of Lakkari. Lakkarian women in the city of Sekket are taught to use assegai so they can defend themselves against Zalad bandits."
+	desc = "A long spear originating from the southern regions of Lakkari. Lakkarian women in the city of Sekket are taught to use assegai so they can defend themselves against Zalad bandits."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_iron"
 	gripsprite = FALSE

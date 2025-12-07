@@ -323,7 +323,7 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 		/obj/item/gem/turq,//frost because its associated with necra
 	)
 
-//we can assume opal is really dense due to being seen as crystalized rainbow
+//we can assume opal is really dense due to being seen as crystallized rainbow
 //also something about E = cm^2, you get the idea I hope
 /datum/natural_precursor/gem_energia
 	name = "energia gem"

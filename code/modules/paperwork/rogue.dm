@@ -305,7 +305,7 @@
 		to_chat(user, span_warning("It's already been signed."))
 		return
 	if(paired && !paired.full)
-		to_chat(user, span_warning("I should seperate [paired] from [src] before signing it."))
+		to_chat(user, span_warning("I should separate [paired] from [src] before signing it."))
 		return
 	if(sliptype != 2)
 		if(M != user)
@@ -422,7 +422,7 @@
 
 /obj/item/merctoken
 	name = "mercenary token"
-	desc = "A small, palm-fitting bound scroll - a minuature writ of commendation for a mercenary under MGE."
+	desc = "A small, palm-fitting bound scroll - a miniature writ of commendation for a mercenary under MGE."
 	icon_state = "merctoken"
 	icon = 'icons/roguetown/items/misc.dmi'
 	w_class = WEIGHT_CLASS_TINY

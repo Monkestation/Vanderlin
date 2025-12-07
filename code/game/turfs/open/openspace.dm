@@ -125,7 +125,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 		var/mob/living/L = user
 		if(L.stat != CONSCIOUS)
 			return
-		var/turf/target = get_step_multiz(src, DOWN)
+		var/turf/target = GET_TURF_BELOW(src)
 		if(!target)
 			to_chat(user, "<span class='warning'>I can't climb there.</span>")
 			return
@@ -145,7 +145,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 			user.start_pulling(pulling,suppress_message = TRUE)
 
 /turf/open/transparent/openspace/attack_ghost(mob/dead/observer/user)
-	var/turf/target = get_step_multiz(src, DOWN)
+	var/turf/target = GET_TURF_BELOW(src)
 	if(!user.Adjacent(src))
 		return
 	if(!target)

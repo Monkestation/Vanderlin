@@ -469,7 +469,7 @@
 		NP.ckey = M.ckey
 		if(living)
 			if(alert(usr, "Would you like to also delete the living mob [key_name(M)]?", "Message", "Yes", "No") == "Yes")
-				log_admin("[key_name(usr)] has chosen to delete the [M] mob while sending the client to lobby.")
+				log_admin("[key_name(usr)] has chosen to delete \the [M] mob while sending the client to lobby.")
 				qdel(M)
 		else
 			qdel(M)

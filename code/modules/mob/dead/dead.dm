@@ -217,7 +217,8 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 
 /// Transfers the player client to the new mob.
 /mob/dead/proc/transfer_character()
-	if(!new_character)
+	. = new_character
+	if(!.)
 		return
 	new_character.key = key
 	new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)

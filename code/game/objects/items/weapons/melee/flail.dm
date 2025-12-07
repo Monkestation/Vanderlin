@@ -4,7 +4,7 @@
 	force = DAMAGE_NORMAL_FLAIL
 	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
 	name = "military flail"
-	desc = "A sturdy handle afixed to a cruel spiked ball with a harrowing metal chain."
+	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	sharpness = IS_BLUNT

@@ -22,6 +22,7 @@
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CHURCH
+	exp_types_granted  = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
 /datum/outfit/churchling
 	name = "Churchling"

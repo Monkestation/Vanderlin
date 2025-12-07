@@ -7,6 +7,13 @@
 	use_static = TRUE
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF)
 
+/datum/sprite_accessory/accessories/rakshari
+	name = ""
+	icon = 'icons/mob/sprite_accessory/accessory/rakshari.dmi'
+	gender = NEUTER
+	use_static = TRUE
+	specuse = list(SPEC_ID_RAKSHARI)
+
 /datum/sprite_accessory/accessories/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEFACE)
 
@@ -62,3 +69,23 @@
 	icon_state = "eyepiercealt"
 	gender = FEMALE
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF)
+
+/datum/sprite_accessory/accessories/rakshari
+	abstract_type = /datum/sprite_accessory/accessories/rakshari
+	specuse = list(SPEC_ID_RAKSHARI)
+
+/datum/sprite_accessory/accessories/rakshari/gilded_g
+	name = "Gilded (G)"
+	icon_state = "gilded_g"
+
+/datum/sprite_accessory/accessories/rakshari/cat_earrings_g
+	name = "Cat Earrings (G)"
+	icon_state = "cat_earrings_g"
+
+/datum/sprite_accessory/accessories/rakshari/gilded_s
+	name = "Gilded (S)"
+	icon_state = "gilded_s"
+
+/datum/sprite_accessory/accessories/rakshari/cat_earrings_s
+	name = "Cat Earrings (S)"
+	icon_state = "cat_earrings_s"

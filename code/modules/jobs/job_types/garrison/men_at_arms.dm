@@ -13,7 +13,6 @@
 	faction = FACTION_TOWN
 	total_positions = 4
 	spawn_positions = 4
-	min_pq = 6
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
@@ -22,11 +21,15 @@
 	outfit = /datum/outfit/watchman
 	advclass_cat_rolls = list(CTAG_MENATARMS = 20)
 	cmode_music = 'sound/music/cmode/garrison/CombatManAtArms.ogg'
-	give_bank_account = 15
-	min_pq = 6
 	give_bank_account = 30
 
 	job_bitflag = BITFLAG_GARRISON
+
+	exp_type = list(EXP_TYPE_GARRISON)
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_GARRISON = 600
+	)
 
 /datum/outfit/watchman/pre_equip(mob/living/carbon/human/H)
 	. = ..()
@@ -45,6 +48,10 @@
 
 /datum/job/men_at_arms/after_spawn(mob/living/carbon/spawned, client/player_client)
 	..()
+
+/datum/job/advclass/menatarms
+	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/menatarms/watchman_pikeman
 	title = "Pikeman Men-At-Arms"

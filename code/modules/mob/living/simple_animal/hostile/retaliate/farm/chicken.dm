@@ -182,7 +182,7 @@
 
 /obj/structure/fluff/nest
 	name = "nest"
-	desc = "a chicken's nest."
+	desc = "A chicken's nest."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "nest"
 	density = FALSE

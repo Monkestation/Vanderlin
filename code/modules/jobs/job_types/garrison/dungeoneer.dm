@@ -12,7 +12,6 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 10
 
 	allowed_races = RACES_PLAYER_NONEXOTIC
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -23,6 +22,14 @@
 	cmode_music = 'sound/music/cmode/nobility/CombatDungeoneer.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
+
+	exp_type = list(EXP_TYPE_GARRISON)
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_GARRISON = 300
+	)
+
+	traits = list(TRAIT_STEELHEARTED)
 
 /datum/outfit/dungeoneer/pre_equip(mob/living/carbon/human/H)
 	..()

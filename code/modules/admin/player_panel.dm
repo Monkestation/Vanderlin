@@ -230,7 +230,10 @@
 
 				if(iscarbon(M)) //Carbon stuff
 					if(ishuman(M))
-						M_job = M.job
+						if(M.mind?.assigned_role.parent_job)
+							M_job = M.mind.assigned_role.parent_job.title
+						else
+							M_job = M.job
 					else if(ismonkey(M))
 						M_job = "Monkey"
 					else

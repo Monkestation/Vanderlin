@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 1
 	bypass_lastclass = TRUE
 	selection_color = "#192bc2"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
@@ -18,6 +17,13 @@
 
 	outfit = /datum/outfit/merchant
 	give_bank_account = 200
+
+	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_MERCHANT_COMPANY)
+	exp_types_granted  = list(EXP_TYPE_MERCHANT_COMPANY)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600,
+		EXP_TYPE_MERCHANT_COMPANY = 300,
+	)
 
 /datum/outfit/merchant/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -8,6 +8,7 @@
 	total_positions = 5
 
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
+	exp_types_granted  = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MEDICAL)
 
 /datum/outfit/mercenary/ironmaiden
 	head = /obj/item/clothing/head/helmet/sallet

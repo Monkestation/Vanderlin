@@ -4,10 +4,13 @@
 
 	outfit = /datum/outfit/adventurer/briar
 	category_tags = list(CTAG_PILGRIM)
-	tutorial = "Stoic gardeners or flesh-eating predators, all can follow Dendors path. <br>His Briars scorn civilized living, many embracing their animal nature, being fickle and temperamental."
+	tutorial = "Stoic gardeners or flesh-eating predators, all can follow Dendor's path. <br>His Briars scorn civilized living, many embracing their animal nature, being fickle and temperamental."
 //	allowed_patrons = list(/datum/patron/divine/dendor)		this doesn't work so long its a subclass type. Besides its preferable to forceswitch as it does to make selection less clunky.
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 	total_positions = 4	// to be lowered to 2? once testing is done
+
+	exp_types_granted  = list(EXP_TYPE_CLERIC)
+
 
 /datum/outfit/adventurer/briar/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -69,7 +72,7 @@
 		devotion.grant_to(H)
 
 /datum/outfit/adventurer/briar
-	var/tutorial = "<br><br><font color='#44720e'><span class='bold'>You know well how to make a shrine to Dendor, wood, thorns, and the head of a favored animal.<br><br>Choose a path stinging, devouring or growing, and make your sacrifices...<br><br>Remember - Dendor will only grant special powers from Blessing the first time you do recieve it, and only those mastering all his Miracles can unlock their full potential.  </span></font><br><br>"
+	var/tutorial = "<br><br><font color='#44720e'><span class='bold'>You know well how to make a shrine to Dendor, wood, thorns, and the head of a favored animal.<br><br>Choose a path stinging, devouring or growing, and make your sacrifices...<br><br>Remember - Dendor will only grant special powers from Blessing the first time you do receive it, and only those mastering all his Miracles can unlock their full potential.  </span></font><br><br>"
 
 /datum/outfit/adventurer/briar/post_equip(mob/living/carbon/human/H)
 	..()
@@ -227,7 +230,7 @@
 
 /obj/item/dendor_blessing/devouring/check_blessing_requirements(mob/living/user)
 	if(!user.get_spell(/datum/action/cooldown/spell/undirected/bless_crops))
-		to_chat(user, span_warning("My faith to Dendor isn't sufficient enough..."))
+		to_chat(user, span_warning("My faith to Dendor is insufficient..."))
 		return FALSE
 	return ..()
 
@@ -281,7 +284,7 @@
 
 /obj/item/dendor_blessing/lording/check_blessing_requirements(mob/living/user)
 	if(!user.get_spell(/datum/action/cooldown/spell/healing))
-		to_chat(user, span_warning("My faith to Dendor isn't sufficient enough..."))
+		to_chat(user, span_warning("My faith to Dendor is insufficient..."))
 		return FALSE
 	return ..()
 

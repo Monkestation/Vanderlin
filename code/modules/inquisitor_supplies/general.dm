@@ -73,14 +73,15 @@
 	for(var/i in 1 to 2)
 		new /obj/item/rope/chain(src)
 
-/datum/inqports/supplies/collar
-	name = "3 Collars of Servitude Alongside Key"
-	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/collar
+/datum/inqports/supplies/adeptset
+	name = "3 Sets of Adept Equipment Alongside Key"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/adeptset
 	marquescost = 8
 
-/obj/structure/closet/crate/chest/inqcrate/supplies/collar/populate_contents()
+/obj/structure/closet/crate/chest/inqcrate/supplies/adeptset/populate_contents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/neck/gorget/explosive(src)
+		new /obj/item/clothing/face/facemask/silver(src) ///Silver masks added for lore reasons.
 	new /obj/item/collar_detonator(src)
 
 /datum/inqports/supplies/redpotions
@@ -255,6 +256,22 @@
 	new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol(src)
 	new /obj/item/storage/belt/pouch/bullets(src)
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)
+
+/*
+//Added this and then realized it wasn't actually in the bounty and I'm just stupid. It's staying here incase somebody wants it.
+
+/datum/inqports/equipment/musket
+	name = "1 Musket with bayonet, 4 lead bullets and powder flask"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/musket
+	marquescost = 30 //needs balancing
+	maximum = 1
+
+/obj/structure/closet/crate/chest/inqcrate/equipment/musket/PopulateContents()
+	new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket(src)
+	new /obj/item/weapon/knife/dagger/bayonet(src)
+	new /obj/item/storage/belt/pouch/bullets(src)
+	new /obj/item/reagent_containers/glass/bottle/aflask(src)
+*/
 
 /datum/inqports/equipment/lantern
 	name = "3 Iron Lamptern"

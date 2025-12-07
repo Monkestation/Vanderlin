@@ -1,4 +1,4 @@
-/datum/job/advclass/psydoniantemplar // A templar, but for the Inquisition
+/datum/job/advclass/sacrestant/psydoniantemplar // A templar, but for the Inquisition
 	title = "Psydonian Templar"
 	tutorial = "You are among the strongest students of the Ordo Benetarus. Top of your classes in both physical skill and intellectual matters, you’re here to prove you’re worthy of becoming an inquisitor. One simple step, before your skill is recognized."
 	allowed_sexes = list(MALE, FEMALE)
@@ -9,8 +9,9 @@
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_CON = 2,
-		STATKEY_END = 3,
-	)
+		STATKEY_END = 2,
+		STATKEY_SPD = -2,
+	) //4 Statline
 
 	skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
@@ -34,11 +35,12 @@
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
 	)
 
 	voicepack_m = /datum/voicepack/male/knight
 
-/datum/job/advclass/psydoniantemplar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/sacrestant/psydoniantemplar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Templar")
 

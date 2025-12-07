@@ -966,6 +966,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 				if(!fallingas)
 					to_chat(src, span_warning("I'll fall asleep soon..."))
 				fallingas++
+				if(istype(buckled, /obj/structure/bed))
+					var/obj/structure/bed/bed_check = buckled
+					if(bed_check.sheet_tucked)
+						if(fallingas > 10)
+							to_chat(src, ("This bed is so cozy..."))
+							add_stress(/datum/stress_event/cozy_sleep)
+							Sleeping(30 SECONDS)
+							bed_check.sheet_tucked = FALSE
+
 				if(fallingas > 15)
 					Sleeping(300)
 			else if(eyesclosed && fallingas >= 10 && cant_fall_asleep)

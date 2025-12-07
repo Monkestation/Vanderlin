@@ -386,9 +386,9 @@
 /obj/item/clothing/neck/gorget/explosive/examine(mob/user)
 	. = ..()
 	if(collar_unlocked)
-		. += "the red gem gleams faintly, it seems to be unpowered."
+		. += "The red gem gleams faintly, it seems to be unpowered."
 	else
-		. += "the red gem gleams intensely, piercing your gaze with its aura."
+		. += "The red gem gleams intensely, piercing your gaze with its aura."
 
 /obj/item/clothing/neck/gorget/explosive/Initialize()
 	. = ..()
@@ -402,7 +402,7 @@
 /obj/item/clothing/neck/gorget/explosive/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(slot == ITEM_SLOT_NECK)
-		to_chat(user, span_warning("The collar tightens its hold on you, red aura emenates from its gem. Reminding you of your lowly station."))
+		to_chat(user, span_warning("The collar tightens its hold on you. A red aura emanates from its gem, reminding you of your lowly station."))
 		collar_unlocked = FALSE
 		is_in_neck_slot = TRUE
 		return
@@ -417,7 +417,7 @@
 
 	if(!collar_unlocked)
 		collar_unlocked = TRUE
-		to_chat(user, "The red gem's glow of the [src] weakens, it seems to be safe to unequip now!")
+		to_chat(user, "The red gem inset in \the [src] dims its glow, it seems to be safe to take off now!")
 	else
 		to_chat(user, "Collar is already unlocked!")
 
@@ -433,11 +433,11 @@
 /obj/item/clothing/neck/gorget/explosive/proc/prepare_to_go_boom()
 	if(is_going_to_boom)
 		is_going_to_boom = FALSE
-		audible_message(span_notice("Red aura of the [src] slowly fades away"))
+		visible_message(span_notice("Red aura of the [src] slowly fades away."))
 		return
 
 	playsound(src, 'sound/music/musicbox_windup.ogg', 45)
-	visible_message(span_boldwarning("Red aura begins to glow heavily from the [src], It appears to be going off!"))
+	visible_message(span_boldwarning("A red aura begins to glow heavily from the [src], it appears to be going off!"))
 	audible_message(span_boldwarning("You hear an eerie tune coming out of [src]"))
 
 	addtimer(CALLBACK(src, PROC_REF(go_boom)), 7.5 SECONDS)
@@ -445,7 +445,7 @@
 
 /obj/item/clothing/neck/gorget/explosive/proc/go_boom()
 	if(!is_in_neck_slot || !is_going_to_boom)
-		visible_message(span_notice("The red aura eminating from [src] stops!"))
+		visible_message(span_notice("The red aura emanating from [src] stops!"))
 		return
 
 	explosion(src, 1, 1, 2, 3) //first one to make sure wearer is damaged heavily
@@ -600,7 +600,7 @@
 		total_sellprice += I.sellprice
 		for(var/obj/item/item in I.contents)
 			total_sellprice += item.sellprice
-		to_chat(user, span_notice("The item and its contents is worth [total_sellprice] mammons."))
+		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
 
 /obj/item/clothing/neck/shalal
 	name = "desert rider medal"

@@ -14,6 +14,9 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/bard
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
+	exp_type = list(EXP_TYPE_BARD)
+	exp_types_granted  = list(EXP_TYPE_BARD)
+
 
 /datum/outfit/bard/pre_equip(mob/living/carbon/human/H)
 	. = ..()

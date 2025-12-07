@@ -3,36 +3,98 @@
 	if(!user)
 		return
 	var/obj/item/held_item = user.get_active_held_item()
-	if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
-		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
-			var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
-			if(has_stubble)
-				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+	if(user.cmode)
+		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_NECK))
+			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+				playsound(src, 'sound/surgery/scalpel1.ogg', 100, TRUE, -1)
 				if(user == src)
-					user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] stubble with [held_item].</span>")
+					user.visible_message("<span class='danger'>[user] starts to slit [user.p_their()] throat with [held_item].</span>")
 				else
-					user.visible_message("<span class='danger'>[user] starts to shave [src]'s stubble with [held_item].</span>")
+					user.visible_message("<span class='danger'>[user] starts to slit [src]'s throat with [held_item].</span>")
 				if(do_after(user, 5 SECONDS, src))
-					has_stubble = FALSE
-					update_body()
-				else
-					held_item.melee_attack_chain(user, src, params)
-			else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
-				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
-				if(user == src)
-					user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] facehairs with [held_item].</span>")
-				else
-					user.visible_message("<span class='danger'>[user] starts to shave [src]'s facehairs with [held_item].</span>")
-				if(do_after(user, 5 SECONDS, src))
-					set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
-					update_body()
-					record_round_statistic(STATS_BEARDS_SHAVED)
-					if(dna?.species)
-						if(dna.species.id == SPEC_ID_DWARF)
-							var/mob/living/carbon/V = src
-							V.add_stress(/datum/stress_event/dwarfshaved)
-				else
-					held_item.melee_attack_chain(user, src, params)
+					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
+					part.add_wound(/datum/wound/artery/neck)
+	else
+		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
+			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
+				if(has_stubble)
+					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+					if(user == src)
+						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] stubble with [held_item].</span>")
+					else
+						user.visible_message("<span class='danger'>[user] starts to shave [src]'s stubble with [held_item].</span>")
+					if(do_after(user, 5 SECONDS, src))
+						has_stubble = FALSE
+						update_body()
+					else
+						held_item.melee_attack_chain(user, src, params)
+				else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
+					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+					if(user == src)
+						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] facehairs with [held_item].</span>")
+					else
+						user.visible_message("<span class='danger'>[user] starts to shave [src]'s facehairs with [held_item].</span>")
+					if(do_after(user, 5 SECONDS, src))
+						set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
+						update_body()
+						record_round_statistic(STATS_BEARDS_SHAVED)
+						if(dna?.species)
+							if(dna.species.id == SPEC_ID_DWARF)
+								var/mob/living/carbon/V = src
+								V.add_stress(/datum/stress_event/dwarfshaved)
+					else
+						held_item.melee_attack_chain(user, src, params)
+		else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_R_FOOT || user.zone_selected == BODY_ZONE_PRECISE_L_FOOT))
+			var/obj/item/clothing/shoes/shoes_check
+			var/mob/living/carbon/target
+			if(user == src)
+				return
+			else if(iscarbon(src))
+				target = src
+				shoes_check = locate(/obj/item/clothing/shoes) in list(target.shoes)
+			if(shoes_check)
+				if(istype(held_item, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 0)
+					var/obj/item/natural/cloth/cloth_check = held_item
+					if(cloth_check.reagents.total_volume < 0.1)
+						to_chat(user, span_warning("[cloth_check] is too dry to polish with!"))
+						return
+					var/DirtyWater = cloth_check.reagents.get_reagent_amount(/datum/reagent/water/gross)
+					if(DirtyWater)
+						to_chat(user, span_warning("[cloth_check] water is too dirty to polish anything with it!"))
+						return
+					to_chat(user, ("You start polishing the [shoes_check] with the [cloth_check]"))
+					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
+					if(do_after(user, 2 SECONDS, src))
+						cloth_check.reagents.remove_all(1)
+						shoes_check.polished = 1
+						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle)
+						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
+						if(HAS_TRAIT(user, TRAIT_NOBLE))
+							user.add_stress(/datum/stress_event/noble_polishing_shoe)
+						target.add_stress(/datum/stress_event/shiny_shoes)
+						to_chat(user, ("You polished the [shoes_check]."))
+					return
+				else if(istype(held_item, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 1)
+					to_chat(user, span_notice("The [shoes_check] are already polished."))
+					return
+				if(istype(held_item, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 1)
+					to_chat(user, ("You start polishing the [shoes_check] with the animal"))
+					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
+					if(do_after(user, 2 SECONDS, src))
+						shoes_check.polished = 2
+						if(HAS_TRAIT(user, TRAIT_NOBLE))
+							user.add_stress(/datum/stress_event/noble_polishing_shoe)
+						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
+						if(particle_spewer)
+							qdel(particle_spewer)
+						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
+						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
+						target.add_stress(/datum/stress_event/extra_shiny_shoes)
+						to_chat(user, ("You polished the [shoes_check]."))
+					return
+				if(istype(held_item, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 2)
+					to_chat(user, ("You can't possibily make it shine more."))
 
 /mob/living/carbon/human/Initialize()
 	// verbs += /mob/living/proc/mob_sleep
@@ -913,3 +975,19 @@
 		return
 
 	message_admins("[ADMIN_LOOKUPFLW_PP(src)] is a [mind.assigned_role.get_informed_title(src)] and has been disconnected for more than 30 seconds!")
+
+/mob/living/carbon/human/nobles_seen_servant_work()
+	if(!is_servant_job(mind.assigned_role))
+		return
+
+	var/list/nobles = list()
+	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
+		if(!target.mind || target.stat != CONSCIOUS)
+			continue
+		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+			continue
+		nobles += target
+	if(length(nobles))
+		for(var/mob/living/carbon/human/target as anything in nobles)
+			if(!target.has_stress_type(/datum/stress_event/noble_seen_servant_work))
+				target.add_stress(/datum/stress_event/noble_seen_servant_work)

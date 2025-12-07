@@ -12,6 +12,8 @@
 	apprentice_name = "Aspiring Bard"
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
+	exp_types_granted  = list(EXP_TYPE_BARD)
+
 /datum/outfit/adventurer/bard/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)

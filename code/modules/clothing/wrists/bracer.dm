@@ -93,7 +93,7 @@
 
 /obj/item/clothing/wrists/bracers/leather/masterwork
 	name = "masterwork leather bracers"
-	desc = "These bracers are a craftsmanship marvel. Made with the finest leather. Strong, nimible, reliable."
+	desc = "These bracers are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST) //We're getting chop here
 	max_integrity = INTEGRITY_STANDARD + 100

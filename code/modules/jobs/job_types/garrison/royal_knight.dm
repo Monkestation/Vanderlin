@@ -10,7 +10,6 @@
 	faction = FACTION_TOWN
 	total_positions = 2
 	spawn_positions = 2
-	min_pq = 8
 	bypass_lastclass = TRUE
 	selection_color = "#920909"
 
@@ -23,8 +22,17 @@
 	cmode_music = 'sound/music/cmode/nobility/CombatKnight.ogg'
 	job_bitflag = BITFLAG_GARRISON
 
+	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_GARRISON = 900,
+		EXP_TYPE_COMBAT = 1200
+	)
+
+
 /datum/job/advclass/royalknight
 	inherit_parent_title = TRUE
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/royalknight/knight
 	title = "Royal Knight"
@@ -90,7 +98,7 @@
 	var/prev_real_name = H.real_name
 	var/prev_name = H.name
 	var/honorary = "Sir"
-	if(H.gender == FEMALE)
+	if(H.pronouns == SHE_HER)
 		honorary = "Dame"
 	H.real_name = "[honorary] [prev_real_name]"
 	H.name = "[honorary] [prev_name]"

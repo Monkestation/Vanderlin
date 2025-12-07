@@ -24,6 +24,13 @@
 	is_foreigner = TRUE
 	is_recognized = TRUE
 
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted  = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600
+	)
+
+
 /datum/job/mercenary/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	to_chat(spawned, "<br><br><font color='#855b14'><span class='bold'>The Gaffer, who feeds and houses you may have work for you todae, go see him at the office outside your lodgings.</span></font><br><br>")
@@ -32,3 +39,4 @@
 	abstract_type = /datum/job/advclass/mercenary
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	category_tags = list(CTAG_MERCENARY)
+	exp_types_granted  = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT)

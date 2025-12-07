@@ -17,7 +17,7 @@
 	contains = /obj/item/reagent_containers/glass/bottle/beer/spottedhen
 
 /datum/supply_pack/food/drinks/blackgoat
-	name = "Jackberry Mix"
+	name = "Jacksberry Mix"
 	cost = 20
 	contains = /obj/item/reagent_containers/glass/bottle/beer/blackgoat
 

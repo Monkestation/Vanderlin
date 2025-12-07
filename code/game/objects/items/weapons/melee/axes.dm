@@ -364,7 +364,7 @@
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "steel kasuyu"
-	desc = "An steel axe hailing from the nation of Lakkari. Great for felling trees and foes alike."
+	desc = "A steel axe hailing from the nation of Lakkari. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
 	max_blade_int = 300
@@ -449,7 +449,7 @@
 //................ Great Axe ............... //
 /obj/item/weapon/greataxe
 	name = "greataxe"
-	desc = "A iron great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure.."
+	desc = "An iron great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure.."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "igreataxe"
 	force = DAMAGE_AXE
@@ -497,7 +497,7 @@
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/mace/strike) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
 	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe, /datum/intent/mace/strike) //Axe-equivalent to the Godendag or Grand Mace.
 	name = "psydonic poleaxe"
-	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axhead of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders - following the disastrous Massacre of Blastenghyll - have shifted their focus towards arming their paladins with longer-lasting greatweapons."
+	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders - following the disastrous Massacre of Blastenghyll - have shifted their focus towards arming their paladins with longer-lasting greatweapons."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverpolearm"
 	minstr = 12
@@ -510,7 +510,7 @@
 
 /obj/item/weapon/greataxe/steel
 	name = "steel greataxe"
-	desc = "A steel great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure.."
+	desc = "A steel great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure."
 	icon_state = "sgreataxe"
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
@@ -521,7 +521,7 @@
 
 /obj/item/weapon/greataxe/steel/doublehead // Trades more damage for being worse to parry with and easier to dodge of.
 	name = "double-headed steel greataxe"
-	desc = "A steel great axe with a wicked double-bladed head. Perfect for cutting either men or trees into stumps.."
+	desc = "A steel great axe with a wicked double-bladed head. Perfect for cutting either men or trees into stumps."
 	icon_state = "doublegreataxe"
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/spear/bash) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe/doublehead, /datum/intent/axe/chop/battle/greataxe/doublehead,  /datum/intent/spear/bash)

@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 2
 	spawn_positions = 2
-	min_pq = 8
 	bypass_lastclass = TRUE
 
 // Medicators and Tritons are hallowed in the eyes of the Ten, no matter how much Astrata dislikes it, Harpies do not get to be templars because they literally cannot wear plate armour nor lift their weapons.
@@ -23,6 +22,14 @@
 
 	allowed_patrons = ALL_TEMPLAR_PATRONS
 	job_bitflag = BITFLAG_CHURCH
+
+	exp_type = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT)
+	exp_types_granted  = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
+	exp_requirements = list(
+		EXP_TYPE_CHURCH = 900,
+		EXP_TYPE_COMBAT = 900
+	)
+
 
 /datum/outfit/templar
 	name = "Templar"
@@ -70,7 +77,7 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/noc
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 			H.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
@@ -92,7 +99,7 @@
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			beltr = /obj/item/reagent_containers/glass/bottle/poison //Jackberry poison, Pestrans are Alchemists, Physicians.
+			beltr = /obj/item/reagent_containers/glass/bottle/poison //Jacksberry poison, Pestrans are Alchemists, Physicians.
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
@@ -120,7 +127,7 @@
 			armor = /obj/item/clothing/armor/brigandine/abyssor
 			wrists = /obj/item/clothing/neck/psycross/silver/abyssor
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 			H.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 		if(/datum/patron/divine/xylix)
 			wrists = /obj/item/clothing/neck/psycross/silver/xylix

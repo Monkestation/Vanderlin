@@ -3,7 +3,7 @@
 //................ Mace ............... //
 /obj/item/weapon/mace
 	name = "iron mace"
-	desc = "A heavy iron mace, prefered by those with a grudge against knightly whoresons."
+	desc = "A heavy iron mace, preferred by those with a grudge against knightly whoresons."
 	icon_state = "mace"
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	force = DAMAGE_MACE
@@ -281,7 +281,7 @@
 
 /obj/item/weapon/mace/steel/shishpar
 	name = "steel shishpar"
-	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but it's capable of delivering devastating blows."
 	force = DAMAGE_MACE+2
 	force_wielded = DAMAGE_MACE_WIELD+3
 	icon_state = "shishpar_steel"
@@ -412,7 +412,7 @@
 
 /obj/item/weapon/mace/cudgel/shellrungu
 	name = "shell rungu"
-	desc = "A ceremonial rungu carved out of clam shell. Not intended for combat. Its used in various Sea and Coastal Elven rituals and ceremonies."
+	desc = "A ceremonial rungu carved out of a clam shell. Not intended for combat. It's used in various Sea and Coastal Elven rituals and ceremonies."
 	icon = 'icons/roguetown/gems/gem_shell.dmi'
 	icon_state = "rungu_shell"
 
@@ -428,7 +428,7 @@
 //................ Wooden sword ............... //
 /obj/item/weapon/mace/woodclub/train_sword
 	name = "wooden sword"
-	desc = "Crude wood assembled into the shape of a sword, a terrible weapon to be on the recieving end of during a training spat."
+	desc = "Crude wood assembled into the shape of a sword, a terrible weapon to be on the receiving end of during a training spat."
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "wsword"
 	force = 5
@@ -454,7 +454,7 @@
 //................ Goedendag ............... //
 /obj/item/weapon/mace/goden
 	name = "warclub"
-	desc = "A two handed club, decorated with a spiked cap crown. A perfect way to say Good Morning to any would be noble-knight."
+	desc = "A two-handed club, decorated with a spiked cap crown. A perfect way to say Good Morning to any would be noble-knight."
 	icon = 'icons/roguetown/weapons/64/maces.dmi'
 	icon_state = "goedendag"
 	force = DAMAGE_CLUB
@@ -504,7 +504,7 @@
 /obj/item/weapon/mace/goden/steel
 	gripped_intents = list(/datum/intent/mace/smash/heavy) // It's a 2h flanged mace, not a goedendag.
 	name = "grand mace"
-	desc = "A casted polearm, rumored to be the weapon-design used by Psydon himself."
+	desc = "A cast polearm, rumored to be the weapon-design used by Psydon himself."
 	icon_state = "polemace"
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/steel
@@ -598,7 +598,7 @@
 //................ Dwarf Warhammer ............... // - Unique Langobardo weapon
 /obj/item/weapon/mace/goden/steel/warhammer
 	name = "dwarven warhammer"
-	desc = "A great dwarven warhammer made of stern steel, enscratched with oaths of battle and time."
+	desc = "A great dwarven warhammer made of stern steel, engraved with oaths of battle and time."
 	icon_state = "warhammer"
 	wlength = WLENGTH_GREAT
 	swingsound = BLUNTWOOSH_HUGE
@@ -622,7 +622,7 @@
 	force_wielded = DAMAGE_CLUB_WIELD
 	slowdown = 1
 	name = "copper warclub"
-	desc = "A two handed club, decorated with a crown of spikes. A barbaric besign, good enough to be used as a weapon."
+	desc = "A two-handed club, decorated with a crown of spikes. A barbaric design, good enough to be used as a weapon."
 	icon_state = "cwarclub"
 	melting_material = /datum/material/copper
 	melt_amount = 75
@@ -740,7 +740,7 @@
 /obj/item/weapon/mace/silver/gada
 	name = "regal gada"
 	icon_state = "gada"
-	desc = "A luxurious silver mace of Savannah Elf origin thats been reinforced and embellished with gold. It's considerably heavier compared to other maces."
+	desc = "A luxurious silver mace of Savannah Elf origin that's been reinforced and embellished with gold. It's considerably heavier compared to other maces."
 	minstr = 8
 	force = DAMAGE_MACE+2
 	wbalance = DODGE_CHANCE_NORMAL

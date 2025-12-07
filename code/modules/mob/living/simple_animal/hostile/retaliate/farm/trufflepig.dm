@@ -13,7 +13,7 @@
 
 /turf/open/floor/dirt/Initialize()
 	. = ..()
-	if(istype(loc, /area/rogue/outdoors/bog))
+	if(istype(loc, /area/outdoors/bog))
 		if(!((locate(/obj/structure) in src) || (locate(/obj/machinery) in src)))
 			if(prob(4))
 				hidden_truffles = TRUE
@@ -242,7 +242,7 @@
 	. = ..()
 	hangry_meter += 1
 	if(hangry_meter > 9)
-		to_chat(M, "<span class='notice'>The pig squeals in anger. Its sulking and refusing to work until it gets delicious truffles.</span>")
+		to_chat(M, "<span class='notice'>The pig squeals in anger. It's sulking and refusing to work until it gets delicious truffles.</span>")
 		playsound(get_turf(src), 'sound/vo/mobs/pig/hangry.ogg', 120, TRUE, -1)
 		return
 	if(M.used_intent.type == INTENT_HELP)

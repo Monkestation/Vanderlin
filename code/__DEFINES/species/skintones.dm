@@ -160,6 +160,12 @@
 /// Pale Orange "#d69558"
 #define SKIN_COLOR_TOXIN "d69558"
 
+// RAKSHARI SKIN TONES
+/// Black "#41414e"
+#define SKIN_COLOR_NIGHTSHADE "41414e"
+/// Orange "#cc9552"
+#define SKIN_COLOR_QUICKSAND "cc9552" //Apparently sphynx cats can be orange, who knew!
+
 // SPECIAL SKIN TONES
 /// Sickly green
 #define SKIN_COLOR_ROT "878f79"

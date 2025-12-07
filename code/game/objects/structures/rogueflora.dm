@@ -541,7 +541,7 @@
 // swarmpweed bush
 /obj/structure/flora/grass/swampweed
 	name = "bunch of swampweed"
-	desc = "a green root good for smoking."
+	desc = "A green root, good for smoking."
 	icon_state = "swampweed1"
 	base_icon_state = "swampweed"
 	num_random_icons = 3

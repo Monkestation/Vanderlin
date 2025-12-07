@@ -1,0 +1,124 @@
+{
+    "2025-12-02": {
+        "SarmentiCampbell": [
+            {
+                "rscadd": "Added a new special trait related to baotha"
+            },
+            {
+                "qol": "Admins now know if someone got gibbed due to being given a admin-only patron"
+            },
+            {
+                "code_imp": "un-hardcode maniac's theme song and turn it into a component"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Gives Noccites, Abyssor, the town elder and the veteran new cmode themes."
+            }
+        ]
+    },
+    "2025-12-03": {
+        "wgtjunior743": [
+            {
+                "bugfix": "Inquisition shop not working"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "balance": "Beggars now roll Alchemy skill."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixed children rendering adult sleeves, resulting in hunchbacks. Fixed male dwarves having belts at their feet."
+            },
+            {
+                "rscdel": "Removed Steward from Halfling Jobs"
+            },
+            {
+                "rscadd": "New Servant/Butler Outifts"
+            },
+            {
+                "rscadd": "Servant Bell"
+            },
+            {
+                "rscadd": "Galadros Kobold Patron"
+            }
+        ],
+        "lmenvs": [
+            {
+                "bugfix": "Sacrestants can no longer roll antag"
+            },
+            {
+                "bugfix": "Players who roll antag can no longer pick the Assassin subclass when signing up as Pilgrim."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Unknowns are idenified by voice type and body type instead of pronouns."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "bugfix": "vampires don't instantly kill someone if they suck when victim runs out of vitae."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Flameberges and Claymores now craftable at the smith"
+            },
+            {
+                "rscadd": "New Coppergate helmet with a decorative varient. Can be forged too"
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "spellcheck": "Changed \\\"ass\\\" to \\\"ass \\\" to override \\\"donkeyume\\\""
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "rscadd": "Added new spell and changed a inquisitor buy for it."
+            }
+        ]
+    },
+    "2025-12-04": {
+        "snowyseshi": [
+            {
+                "bugfix": "possible fire nuke fix"
+            }
+        ]
+    },
+    "2025-12-05": {
+        "PineappleMan929": [
+            {
+                "rscdel": "Kills legendary pilgrims"
+            }
+        ]
+    },
+    "2025-12-06": {
+        "Bloo4420": [
+            {
+                "rscadd": "Proper outdoor cell area subtype"
+            }
+        ]
+    },
+    "2025-12-07": {
+        "NotDeirun": [
+            {
+                "bugfix": "Fixed (lesser) miracles healing/doing more damage than it is supposed to."
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "image": "Added wyrmish and halfspeak icons to language.dmi"
+            },
+            {
+                "code_imp": "Created kobold_replacement.json"
+            },
+            {
+                "bugfix": "Adds Halfspeak to tongue.dm"
+            }
+        ]
+    }
+}

@@ -161,7 +161,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 	if(isolation_craft && length(available_items))
 		return FALSE
 
-	//if we don't have atleast this nothing worked
+	//if we don't have at least this nothing worked
 	if(highest_multiplier < 1)
 		return FALSE
 

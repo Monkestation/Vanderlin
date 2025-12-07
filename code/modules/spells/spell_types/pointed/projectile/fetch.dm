@@ -10,6 +10,10 @@
 		/datum/attunement/aeromancy = 0.4,
 	)
 
+	//yoink
+	invocation = "YO'EIN'KAR!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 1.5 SECONDS
 	charge_drain = 2
 	charge_slowdown = 0.3

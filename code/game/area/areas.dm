@@ -264,28 +264,18 @@ GLOBAL_LIST_EMPTY(teleportlocs)
  * Register this area as belonging to a z level
  *
  * Ensures the item is added to the SSmapping.areas_in_z list for this z
- *
- * It also goes through every item in this areas contents and sets the area level z to it
- * breaking the exat first time it does this, this seems crazy but what would I know, maybe
- * areas don't have a valid z themself or something
  */
 /area/proc/reg_in_areas_in_z()
 	if(!has_contained_turfs())
-		var/list/areas_in_z = SSmapping.areas_in_z
-		var/z
-		update_areasize()
-		for(var/i in 1 to contents.len)
-			var/atom/thing = contents[i]
-			if(!thing)
-				continue
-			z = thing.z
-			break
-		if(!z)
-			WARNING("No z found for [src]")
-			return
-		if(!areas_in_z["[z]"])
-			areas_in_z["[z]"] = list()
-		areas_in_z["[z]"] += src
+		return
+	var/list/areas_in_z = SSmapping.areas_in_z
+	update_areasize()
+	if(!z)
+		WARNING("No z found for [src]")
+		return
+	if(!areas_in_z["[z]"])
+		areas_in_z["[z]"] = list()
+	areas_in_z["[z]"] += src
 
 /// Setup all ambience tracks
 /area/proc/setup_ambience()
@@ -333,13 +323,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 //			weather_icon = TRUE
 //	if(!weather_icon)
 //		icon_state = null
-	return ..()
-
-/**
- * Update the icon of the area (overridden to always be null for space
- */
-/area/space/update_icon_state()
-	icon_state = null
 	return ..()
 
 /**

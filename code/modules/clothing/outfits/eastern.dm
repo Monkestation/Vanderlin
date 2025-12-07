@@ -1,6 +1,6 @@
 /obj/item/clothing/cloak/eastcloak1
 	name = "cloud-cutter's cloak"
-	desc = "A brown cloak with white swirls. Some Kazengites may recognize it as an old militaristic symbol."
+	desc = "A brown cloak with white swirls. A few may recognize it as an old militaristic symbol."
 	color = null
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	icon_state = "eastcloak1"
@@ -28,7 +28,7 @@
 
 /obj/item/clothing/cloak/psyaltrist
 	name = "psyalter's stole"
-	desc = "A silk stole embroidered with silver fillagree and with concealed pockets in its back worn over a hymnal-scroll. It is worn as the traditional garb of a graduate of the choir leaders of the cathedrals of Grenzelhoft, and is a symbol of their station."
+	desc = "A silk stole embroidered with silver filigree and with concealed pockets in its back worn over a hymnal-scroll. It is worn as the traditional garb of a graduate of the choir leaders of the cathedrals of Grenzelhoft, and is a symbol of their station."
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 	icon_state = "psaltertabard"
 	item_state = "psaltertabard"
@@ -46,7 +46,7 @@
 	desc = "An oddly shaped hat made of tightly-sewn leather, commonly worn by spellsinger."
 	icon_state = "spellcasterhat"
 	item_state = "spellcasterhat"
-	armor = ARMOR_SPELLSINGER
+	armor = ARMOR_LEATHER_GOOD
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
 	sewrepair = TRUE
@@ -62,7 +62,7 @@
 	name = "spellsinger robes"
 	desc = "A set of reinforced, leather-padded robes worn by spellblades."
 	body_parts_covered = COVERAGE_FULL
-	armor = ARMOR_SPELLSINGER
+	armor = ARMOR_LEATHER_GOOD
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	armor_class = AC_LIGHT
 	icon_state = "spellcasterrobe"
@@ -82,7 +82,7 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	body_parts_covered = COVERAGE_FULL
-	armor = ARMOR_SPELLSINGER
+	armor = ARMOR_LEATHER
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
@@ -101,7 +101,7 @@
 	desc = "A dobo robe with a red tassel. Leather inlays are sewn in. It looks sturdier than a simple robe."
 	icon_state = "eastsuit2"
 	item_state = "eastsuit2"
-	armor = ARMOR_LEATHER_STUDDED // Makes it the equivalence of studded with less integrity and better armor
+	armor = ARMOR_LEATHER_GOOD // Makes it the equivalence of studded with less integrity and better armor
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MEDIUM
 
 //craftable variation of eastsuit, essentially requiring the presence of a tailor with relevant materials
@@ -113,18 +113,19 @@
 	icon_state = "eastsuit1"
 	item_state = "eastsuit1"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
-	armor = ARMOR_LEATHER_STUDDED
+	armor = ARMOR_LEATHER_GOOD
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MEDIUM
 
 
 /obj/item/clothing/armor/basiceast/captainrobe
 	name = "foreign robes"
-	desc = "Flower-styled robes, said to have been infused with magical protection. The Merchant Guild says that this is from the southern Kazengite region."
+	desc = "Flower-styled robes."
 	icon_state = "eastsuit4"
 	item_state = "eastsuit4"
-	armor = ARMOR_LEATHER_STUDDED
+	armor = ARMOR_LEATHER_GOOD
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER + 25 // Head Honcho gets a buff
 	sellprice = 25
+
 
 // this robe spawns on a role that offers no leg protection nor further upgrades to the loadout, in exchange for better roundstart gear
 
@@ -188,7 +189,7 @@
 	desc = "A reinforced bamboo hat."
 	icon_state = "easthat"
 	item_state = "easthat"
-	armor = ARMOR_SPELLSINGER
+	armor = ARMOR_PADDED_GOOD
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
 	sewrepair = TRUE
@@ -222,13 +223,13 @@
 /obj/item/clothing/neck/psycross/shell
 	name = "oyster shell necklace"
 	icon_state = "oyster_necklace"
-	desc = "A necklace of strung-up sea shells, the calming noise they make when they clack together is reminiscent of a shellfish's claws. They remind you that while men no longer live in water, Abyssor will always remember our origins."
+	desc = "A necklace of strung-up seashells, the calming noise they make when they clack together is reminiscent of a shellfish's claws. They remind you that while men no longer live in water, Abyssor will always remember our origins."
 	sellprice = 25
 
 /obj/item/clothing/neck/psycross/shell/bracelet
 	name = "shell bracelet"
 	icon_state = "oyster_bracelet"
-	desc = "A beaded bracelet made from sea shells, their rough exterior and glossy interior reminding you that Abyssor's children hide the best gifts at the deepest spots beneath the waves."
+	desc = "A beaded bracelet made from seashells, their rough exterior and glossy interior reminding you that Abyssor's children hide the best gifts at the deepest spots beneath the waves."
 	sellprice = 15
 	slot_flags = ITEM_SLOT_WRISTS
 
@@ -303,11 +304,11 @@
 
 /obj/item/clothing/shirt/undershirt/easttats
 	name = "bouhoi bujeog tattoos"
-	desc = "A mystic style of tattoos adopted by the Ruma Clan, emulating a practice performed by warrior monks of the Xinyi Dynasty. They are your way of identifying fellow clan members, an sign of companionship and secretive brotherhood. These are styled into the shape of clouds, created by a mystical ink which shifts and moves in ripples like a pond to harden where your skin is struck. It's movement causes you to shudder."
+	desc = "A mystic style of tattoos used to honor the kin that fell generations ago, a sign of companionship and secretive brotherhood. These are styled into the shape of clouds, created by a mystical ink which shifts and moves in ripples like a pond to harden where your skin is struck. Its movement causes you to shudder."
 	resistance_flags = FIRE_PROOF
 	icon_state = "easttats"
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
-	armor = list("blunt" = 30, "slash" = 50, "stab" = 50, "piercing" = 20, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 20, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	body_parts_covered = COVERAGE_FULL
 	icon = 'icons/roguetown/clothing/shirts.dmi'
@@ -316,6 +317,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	allowed_race = RACES_PLAYER_ALL
+	surgery_cover = FALSE
 	max_integrity = 600 //Bad armor protection and very basic crit protection, but incredibly hard to break completely
 	flags_inv = null //free the breast
 	var/repair_amount = 6 //The amount of integrity the tattoos will repair themselves

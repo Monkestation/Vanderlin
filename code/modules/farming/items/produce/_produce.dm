@@ -409,7 +409,7 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit/lime
 	name = "lime"
 	seed = /obj/item/neuFarm/seed/lime
-	desc = "Along with its other citrus cousins, limes are well loved by sailors and seafolk for their ability to keep and stave off scurvy."
+	desc = "Along with its other citrus cousins, limes are well-loved by sailors and seafolk for their ability to keep and stave off scurvy."
 	icon_state = "lime"
 	bitesize = 2
 	foodtype = FRUIT

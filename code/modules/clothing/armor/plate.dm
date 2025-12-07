@@ -102,7 +102,7 @@
 
 /obj/item/clothing/armor/plate/decorated
 	name = "decorated halfplate"
-	desc = "A halfplate decorated with an gold ornament on the chestplate. A status symbol that doesnt lose out on practicality. "
+	desc = "A halfplate decorated with a gold ornament on the chestplate. A status symbol that doesn't lose out on practicality. "
 	icon_state = "halfplate_decorated"
 	icon = 'icons/roguetown/clothing/special/decorated_armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/decorated_armor.dmi'
@@ -111,7 +111,7 @@
 
 /obj/item/clothing/armor/plate/decorated/corset
 	name = "decorated halfplate with corset"
-	desc = "A halfplate decorated with an gold ornament on the chestplate and a fine silk corset. More for decoration then actual use."
+	desc = "A halfplate decorated with a gold ornament on the chestplate and a fine silk corset. More for decoration then actual use."
 	icon_state = "halfplate_decorated_corset"
 
 //................ Zizo Armor ...............//
@@ -183,17 +183,7 @@
 	max_integrity = 400
 	melt_amount = 150
 	melting_material = /datum/material/silver
-	armor = ARMOR_BRIGANDINE // overall worse because of the endurance buff
-
-/obj/item/clothing/armor/plate/fluted/ornate/equipped(mob/living/user, slot)
-	. = ..()
-	if(slot & ITEM_SLOT_ARMOR)
-		user.apply_status_effect(/datum/status_effect/buff/psydonic_endurance)
-
-/obj/item/clothing/armor/plate/fluted/ornate/dropped(mob/living/carbon/human/user)
-	. = ..()
-	if(istype(user) && user?.wear_armor == src)
-		user.remove_status_effect(/datum/status_effect/buff/psydonic_endurance)
+	armor = ARMOR_PLATE // overall worse because of the endurance buff //Changed to Plate armor
 
 
 /obj/item/clothing/armor/plate/fluted/ornate/ordinator

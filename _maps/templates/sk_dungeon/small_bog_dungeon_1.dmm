@@ -2,124 +2,124 @@
 "al" = (
 /obj/structure/door/violet,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "aZ" = (
 /obj/structure/chair/bench/church/smallbench,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "bA" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/cleanshallow,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "cB" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "cM" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "cP" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "df" = (
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "dy" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "dN" = (
 /obj/structure/fluff/walldeco/psybanner/red{
 	pixel_y = 32
 	},
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "fC" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "fE" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gz" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gS" = (
 /obj/structure/table/church{
 	dir = 1
 	},
 /obj/item/clothing/neck/psycross/silver,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "hB" = (
 /turf/open/water/cleanshallow,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ld" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "lL" = (
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "mr" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "mE" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "nA" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "nW" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "rt" = (
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "rC" = (
 /obj/structure/fluff/psycross/crafted,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "rJ" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "rL" = (
 /obj/structure/bed/hay,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "rR" = (
 /turf/open/floor/blocks/green,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sa" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sl" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sA" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ty" = (
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "uB" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "uC" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -128,68 +128,68 @@
 	dir = 8
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "uZ" = (
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "vG" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/shirt/robe/necra,
 /obj/item/clothing/head/padded/deathshroud,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wa" = (
 /obj/structure/fluff/psycross,
 /turf/open/floor/ruinedwood/turned/alt{
 	dir = 1
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wi" = (
 /obj/item/coin/copper,
 /turf/open/water/cleanshallow,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wK" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "xI" = (
 /obj/structure/fluff/walldeco/psybanner/red{
 	pixel_y = 32
 	},
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "xJ" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Aa" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Al" = (
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "An" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Av" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "AT" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "AX" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "BI" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -198,73 +198,73 @@
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "BQ" = (
 /turf/open/floor/hexstone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Ci" = (
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "CW" = (
 /obj/structure/table/church,
 /obj/item/clothing/head/helmet/heavy/necked/necra,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "CZ" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Dp" = (
 /obj/structure/well/fountain,
 /turf/open/floor/hexstone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Dr" = (
 /obj/structure/chair/bench/church/smallbench,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Gs" = (
 /obj/structure/door/weak/bolt,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "GU" = (
 /obj/structure/chair/bench/church/smallbench,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "HR" = (
 /obj/structure/fluff/statue/psy,
 /turf/open/floor/blocks/green,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Id" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Ix" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "IL" = (
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Jt" = (
 /obj/structure/door/violet,
 /turf/open/floor/hexstone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "MK" = (
 /obj/structure/table/wood/plain,
 /obj/item/natural/cloth,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Og" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/coin/silver,
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "OE" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -273,20 +273,20 @@
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "OM" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ON" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/neck/psycross/silver/necra,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "OQ" = (
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Pw" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -295,71 +295,71 @@
 	dir = 4
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "PC" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Qk" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Rb" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Rk" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Rs" = (
 /obj/structure/fluff/psycross,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Sf" = (
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Tp" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Tt" = (
 /obj/structure/table/church/m,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "UI" = (
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Vj" = (
 /turf/open/floor/ruinedwood/turned/alt{
 	dir = 1
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Wk" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Wo" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/neck/psycross/silver/noc,
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "WF" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "WP" = (
 /obj/structure/flora/grass/maneater/real,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "YA" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/neck/psycross/silver/ravox,
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 
 (1,1,1) = {"
 Rk

@@ -1348,7 +1348,7 @@
 
 		return TRUE
 
-	to_chat(src, span_warning("I fail to do a counter attack!"))
+	to_chat(src, span_warning("I fail to do a counterattack!"))
 	return FALSE
 
 /mob/living/proc/get_positioning_modifier(mob/living/target)
@@ -1761,7 +1761,7 @@
 
 /mob/living/proc/can_use_guns(obj/item/G)//actually used for more than guns!
 	if(G.trigger_guard == TRIGGER_GUARD_NONE)
-		to_chat(src, "<span class='warning'>I are unable to fire this!</span>")
+		to_chat(src, "<span class='warning'>I am unable to fire this!</span>")
 		return FALSE
 	if(G.trigger_guard != TRIGGER_GUARD_ALLOW_ALL && !IsAdvancedToolUser())
 		to_chat(src, "<span class='warning'>I try to fire [G], but can't use the trigger!</span>")
@@ -1922,7 +1922,8 @@
 		return TRUE
 	return FALSE
 
-/mob/living/proc/SoakMob(locations)
+
+/mob/living/proc/SoakMob(locations, dirty_water = FALSE, rain = FALSE)
 	if(locations & CHEST)
 		ExtinguishMob()
 		if(locations & HEAD)
@@ -2941,3 +2942,19 @@
 
 /mob/living/proc/is_dead() // bwuh
 	return (!QDELETED(src) && (stat >= DEAD))
+
+/// Set the eyesclosed var updating blindness and UI as needed
+/mob/living/proc/set_eyes_closed(closed)
+	if(eyesclosed == closed)
+		return
+
+	eyesclosed = closed
+
+	if(eyesclosed)
+		become_blind("eyelids")
+	else
+		cure_blind("eyelids")
+
+	if(hud_used)
+		var/atom/movable/screen/eye_intent/eyet = locate() in hud_used.static_inventory
+		eyet?.update_appearance(UPDATE_ICON)

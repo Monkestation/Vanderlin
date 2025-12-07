@@ -1,66 +1,66 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "d" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "k" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "n" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "o" = (
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "t" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "A" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "B" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "I" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "M" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Q" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "S" = (
 /obj/item/natural/rock/gemerald,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "U" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "W" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "X" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Y" = (
 /turf/open/lava,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 
 (1,1,1) = {"
 a

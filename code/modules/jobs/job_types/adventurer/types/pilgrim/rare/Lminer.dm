@@ -7,7 +7,7 @@
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/adventurer/minermaster
 	total_positions = 1
-	roll_chance = 15
+	roll_chance = 0
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	apprentice_name = "Miner Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'

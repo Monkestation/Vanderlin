@@ -154,16 +154,12 @@
 
 ///this will always use the highest value given depending on if set for negative
 /turf/proc/add_turf_temperature(key, value, weight = 1)
-	if(!temperature_sources)
-		temperature_sources = list()
-
-	temperature_sources[key] = list(value, weight)
+	LAZYSET(temperature_sources, key, list(value, weight))
 	rebuild_turf_temperature()
 
 
 /turf/proc/remove_turf_temperature(key)
-	if(temperature_sources && (key in temperature_sources))
-		temperature_sources -= key
+	LAZYREMOVE(temperature_sources, key)
 	rebuild_turf_temperature()
 
 /turf/proc/rebuild_turf_temperature()
@@ -190,7 +186,7 @@
 			ambient_temperature = 0
 		ambient_temperature += 10
 	if(!("[z]" in GLOB.cellar_z))
-		if(SSmapping.level_has_any_trait(z, list(ZTRAIT_CELLAR_LIKE)))
+		if(SSmapping.level_trait(z, ZTRAIT_CELLAR_LIKE))
 			GLOB.cellar_z |= "[z]"
 	if("[z]" in GLOB.cellar_z)
 		ambient_temperature = 11 + CEILING(ambient_temperature * 0.1, 1)

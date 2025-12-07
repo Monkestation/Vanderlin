@@ -13,7 +13,7 @@
 		return
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(changewarcry))
 
-///Called on COMSIG_HUMAN_MELEE_UNARMED_ATTACK. Yells the warcry and and reduces punch cooldown.
+///Called on COMSIG_HUMAN_MELEE_UNARMED_ATTACK. Yells the warcry and reduces punch cooldown.
 /datum/component/wearertargeting/punchcooldown/proc/reducecooldown(mob/living/carbon/M, atom/target)
 	if(M.used_intent.type == INTENT_HARM && isliving(target))
 		M.changeNext_move(CLICK_CD_RAPID)

@@ -57,7 +57,7 @@
 				var/turf/T = get_step(src, dir)
 				if(istype(T, /turf/closed/mineral/random))
 					Spread(T)
-	var/turf/open/transparent/openspace/target = get_step_multiz(src, UP)
+	var/turf/open/transparent/openspace/target = GET_TURF_ABOVE(src)
 	if(istype(target))
 		target.ChangeTurf(/turf/open/floor/naturalstone)
 
@@ -222,7 +222,7 @@
 	smoothing_list = SMOOTH_GROUP_MINERAL_WALLS
 	turf_type = /turf/open/floor/naturalstone
 	above_floor = /turf/open/floor/naturalstone
-	baseturfs = list(/turf/open/floor/naturalstone)
+	baseturfs = /turf/open/floor/naturalstone
 	wallclimb = TRUE
 	max_integrity = 400
 	///if this isn't empty, swaps to one of them via pickweight
@@ -236,7 +236,7 @@
 		var/path = pickweight(mineralSpawnChanceList)
 		var/turf/T = ChangeTurf(path,null,CHANGETURF_IGNORE_AIR)
 
-		if(T && ismineralturf(T))
+		if(ismineralturf(T))
 			var/turf/closed/mineral/M = T
 			M.mineralAmt = rand(1, 5)
 			M.turf_type = src.turf_type
@@ -493,7 +493,7 @@
 
 /turf/closed/mineral/bedrock
 	name = "rock"
-	desc = "Seems barren, and nigh indestructable."
+	desc = "Seems barren, and nigh-indestructible."
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "bedrock")
 	max_integrity = 10000000

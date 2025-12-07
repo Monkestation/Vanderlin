@@ -14,7 +14,7 @@
 /turf/open/water
 	gender = PLURAL
 	name = "water"
-	desc = "It's.. well, water."
+	desc = "It's... well, water."
 	icon = 'icons/turf/newwater.dmi'
 	icon_state = "together"
 	baseturfs = /turf/open/water
@@ -48,8 +48,8 @@
 	var/swimdir = FALSE
 	var/notake = FALSE // cant pick up with reagent containers
 	var/set_relationships_on_init = TRUE
-	var/list/blocked_flow_directions = list("2" = 0, "1" = 0, "8" = 0, "4" = 0)
-	var/childless = FALSE
+	// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
+	var/blocked_flow_directions = 0
 
 	var/cached_use = 0
 
@@ -96,8 +96,11 @@
 	check_surrounding_water()
 
 /turf/open/water/proc/toggle_block_state(dir, value)
-	blocked_flow_directions["[dir]"] = value
-	if(blocked_flow_directions["[dir]"])
+	if(value)
+		blocked_flow_directions |= dir
+	else
+		blocked_flow_directions &= ~dir
+	if(blocked_flow_directions & dir)
 		var/turf/open/water/river/water = get_step(src, dir)
 		if(!istype(water))
 			return
@@ -343,6 +346,9 @@
 			return
 	if(water_volume < 10)
 		return
+	var/dirty_water_turf = FALSE
+	if(cleanliness_factor < 0)
+		dirty_water_turf = TRUE
 	if(istype(AM, /obj/item/reagent_containers/food/snacks/fish))
 		var/obj/item/reagent_containers/food/snacks/fish/F = AM
 		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F)
@@ -351,13 +357,18 @@
 		else
 			F.visible_message("<span class='warning'>[F] slowly sinks motionlessly into \the [src] and disappears...</span>")
 		qdel(F)
+	if(istype(AM, /obj/item/clothing))
+		var/obj/item/clothing/cloth = AM
+		if(cloth.wetable)
+			cloth.wet.add_water(20, dirty_water_turf)
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/L = AM
 		if(L.body_position == LYING_DOWN || water_level == 3)
-			L.SoakMob(FULL_BODY)
-		else
-			if(water_level == 2)
-				L.SoakMob(BELOW_CHEST)
+			L.SoakMob(FULL_BODY, dirty_water_turf)
+		else if(water_level == 2)
+			L.SoakMob(BELOW_CHEST, dirty_water_turf)
+		else if(water_level == 1)
+			L.SoakMob(FEET, dirty_water_turf)
 		if(water_overlay)
 			if(water_level > 1 && !istype(oldLoc, type))
 				playsound(AM, 'sound/foley/waterenter.ogg', 100, FALSE)
@@ -453,6 +464,14 @@
 	if(do_after(user, 3 SECONDS, src))
 		if(wash_in)
 			item2wash.wash(CLEAN_WASH)
+		if(istype(item2wash, /obj/item/clothing))
+			var/obj/item/clothing/item2wash_cloth = item2wash
+			if(item2wash_cloth && item2wash_cloth.wetable)
+				if(cleanliness_factor > 0)
+					item2wash_cloth.wet.add_water(20, dirty = FALSE, washed_properly = TRUE)
+				else
+					item2wash_cloth.wet.add_water(20, dirty = TRUE, washed_properly = TRUE)
+		user.nobles_seen_servant_work()
 		playsound(user, pick(wash), 100, FALSE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
@@ -695,7 +714,7 @@
 
 /turf/open/water/river
 	name = "water"
-	desc = "Crystal clear water! Flowing swiflty along the river."
+	desc = "Crystal clear water! Flowing swiftly along the river."
 	icon_state = MAP_SWITCH("rocky", "rivermove-dir")
 	water_level = 3
 	slowdown = 20

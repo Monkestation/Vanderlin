@@ -170,7 +170,7 @@
 
 	if(href_list["cancel"])
 		if(!triggering)
-			to_chat(usr, "<span class='admin'>I are too late to cancel that event</span>")
+			to_chat(usr, "<span class='admin'>I am too late to cancel that event</span>")
 			return
 		triggering = FALSE
 		message_admins("[key_name_admin(usr)] cancelled event [name].")
@@ -311,7 +311,7 @@
 	SSevents.running -= src
 
 
-//Sets up the event then adds the event to the the list of running events
+//Sets up the event then adds the event to the list of running events
 /datum/round_event/New(my_processing = TRUE, datum/round_event_control/source)
 	control = source
 	processing = my_processing

@@ -15,12 +15,12 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONHERETICAL
-
 	outfit = /datum/outfit/undertaker
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
-
 	job_bitflag = BITFLAG_CHURCH
+
+	exp_types_granted  = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
 /datum/outfit/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()

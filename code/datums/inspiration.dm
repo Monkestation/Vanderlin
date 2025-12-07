@@ -67,7 +67,7 @@ GLOBAL_LIST_INIT(learnable_songst3, (list(/datum/action/cooldown/spell/undirecte
 	if(!inspiration)
 		return FALSE
 	if(inspiration.audience.len >= inspiration.maxaudience)
-		to_chat(src, "I cannot maintain a audience larger than [inspiration.maxaudience]!")
+		to_chat(src, "I cannot maintain an audience larger than [inspiration.maxaudience]!")
 		return FALSE
 	var/list/folksnearby = list()
 	for(var/mob/living/carbon/human/folks in view(7, loc))

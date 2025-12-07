@@ -286,8 +286,8 @@
 	if(src && user)
 		prob2defend = 0
 
-	if(!can_see_cone(user))
-		if(d_intent == INTENT_PARRY)
+	if(!can_see_cone(user)) //for future, if you can't see the attacker, parrying will be useless, unless you're on dodge intent. this also affect being blinded?
+		if(d_intent == INTENT_PARRY && !HAS_TRAIT(src, TRAIT_BLINDFIGHTING))
 			return FALSE
 		prob2defend = max(prob2defend - 15, 0)
 

@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 8
 	spawn_positions = 8
-	min_pq = 4
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
@@ -19,6 +18,12 @@
 	advclass_cat_rolls = list(CTAG_GARRISON = 20)	//Handles class selection.
 	give_bank_account = 30
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
+
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 300
+	)
 
 //................. City Watchmen Base .............. //
 /datum/outfit/guardsman/pre_equip(mob/living/carbon/human/H)
@@ -37,6 +42,9 @@
 	if(H.cloak)
 		if(!findtext(H.cloak.name,"([H.real_name])"))
 			H.cloak.name = "[H.cloak.name]"+" "+"([H.real_name])"
+
+/datum/job/advclass/garrison
+	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 // EVERY TOWN GUARD SHOULD HAVE AT LEAST THREE CLUB SKILL
 

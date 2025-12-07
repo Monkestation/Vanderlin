@@ -60,7 +60,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "claw"
 	name = "bear paw"
-	desc = "its huge"
+	desc = "It's huge!"
 	layer = FLY_LAYER
 	plane = GAME_PLANE_UPPER
 	randomdir = FALSE

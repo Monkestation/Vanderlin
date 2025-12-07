@@ -266,7 +266,7 @@
 	if(do_after(mob_viewer, 3.5 SECONDS, mob_viewer))
 		if(isliving(mob_viewer))
 			var/mob/living/L = mob_viewer
-			to_chat(mob_viewer, "<span class='notice'>I succesfuly remove the durathread strand.</span>")
+			to_chat(mob_viewer, "<span class='notice'>I successfully remove the durathread strand.</span>")
 			L.remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 
 /datum/status_effect/pacify/on_apply()

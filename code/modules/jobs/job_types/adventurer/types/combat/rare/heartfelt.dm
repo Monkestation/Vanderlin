@@ -5,7 +5,6 @@
 	allowed_sexes = list(MALE)
 	allowed_races = list(SPEC_ID_HUMEN)
 	outfit = /datum/outfit/adventurer/heartfeltlord
-	min_pq = 2
 	total_positions = 1
 	roll_chance = 50
 

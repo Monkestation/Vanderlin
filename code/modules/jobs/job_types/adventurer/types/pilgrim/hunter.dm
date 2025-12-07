@@ -60,4 +60,4 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/adventurer/hunter // Everything is the same
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
-	apprentice_name = "Hunteress Apprentice"
+	apprentice_name = "Huntress Apprentice"

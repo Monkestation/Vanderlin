@@ -6,6 +6,9 @@
 	charge_sound = 'sound/magic/charging_lightning.ogg'
 	sparks_amt = 5
 
+	invocation = "THUNDER STRIKE!!!"
+	invocation_type = INVOCATION_SHOUT
+
 	cast_range = 8
 	point_cost = 3
 	attunements = list(

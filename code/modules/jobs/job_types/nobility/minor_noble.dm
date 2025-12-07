@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 2
 	spawn_positions = 2
-	min_pq = 1
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
@@ -27,12 +26,14 @@
 
 	job_bitflag = BITFLAG_ROYALTY
 
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
+
 /datum/outfit/noble/pre_equip(mob/living/carbon/human/H)
 	..()
 	var/prev_real_name = H.real_name
 	var/prev_name = H.name
 	var/honorary = "Lord"
-	if(H.gender == FEMALE)
+	if(H.pronouns == SHE_HER)
 		honorary = "Lady"
 	H.real_name = "[honorary] [prev_real_name]"
 	H.name = "[honorary] [prev_name]"

@@ -49,6 +49,8 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
+	exp_types_granted  = list(EXP_TYPE_MEDICAL)
+
 /datum/job/clinicapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age != AGE_CHILD)
