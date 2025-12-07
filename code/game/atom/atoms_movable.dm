@@ -982,7 +982,7 @@
 	var/turf/curloc = get_turf(src)
 	if(TT.target_turf && curloc)
 		if(TT.target_turf.z > curloc.z)
-			var/turf/above = get_step_multiz(curloc, UP)
+			var/turf/above = GET_TURF_ABOVE(curloc)
 			if(istype(above, /turf/open/transparent/openspace))
 				forceMove(above)
 	if(spin)

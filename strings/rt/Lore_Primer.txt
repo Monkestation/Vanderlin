@@ -440,19 +440,30 @@ While it's not required reading, leadership roles may find this information usef
 	<em> Worship out of spite. </em>
 	<br><br>
 
+  	<details>
+		<summary><strong> Heartfeltian Horror </strong></summary>
+		<br>
+		Something stirs deep beneath the city. Rumours of a great machine, bidding the rabid automatons forth with purpose.
+		<br><br>
+	</details>
+
 	<details>
+		<summary><strong> Galadros </strong></summary>
+		<br>
+		An ancient rock wyrm of greed and gluttony with an insatiable hunger for Lux. Revered by some Kobolds as the Great Wyrm.
+		<br><br>
+		In the farthest reaches of Faience in a mountain range intraversable by all but the subterranean, generations of Kobolds have carved out his stronghold, Kruskros. There he is coiled, waiting and hungry. His size is so great his true form cannot be fully speculated. The short lifespan of the Kobold makes present knowledge scarce, and many indentured to him never leave his sanctum. Even so, his name appears in texts dating back to the time of Psydon.
+		<br><br>
+		Kobolds who fail Galadros are either fed to him or banished from Kruskros. The latter is considered a worse punishment, as most of them have developed a co-dependency that can take the rest of their lives to break. The shame of failing the Great Wyrm is greater than that of death.
+		<br><br>
+	</details>
+
+  	<details>
 		<summary><strong> Rashan-Kahl </strong></summary>
 		<br>
 		The twin-faced god of ambition and chains. Worshipped mainly by the rakshari out of in spite of The Ten.
 		<br><br>
 		Rashan represents both creation and destruction, freedom and bondage- a duality that mirrors the rakshari’s complex relationship with power. Temples to Rashan-Kahl often double as marketplaces, symbolizing the transactional nature of life.
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> Heartfeltian Horror </strong></summary>
-		<br>
-		Something stirs deep beneath the city. Rumours of a great machine, bidding the rabid automatons forth with purpose.
 		<br><br>
 	</details>
 

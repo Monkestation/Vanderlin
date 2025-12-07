@@ -30,15 +30,15 @@
 		if(/datum/patron/divine/noc)
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
 			wrists = /obj/item/clothing/neck/psycross/silver/noc
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
 			wrists = /obj/item/clothing/neck/psycross/silver/dendor
 			H.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 		if(/datum/patron/divine/abyssor)
-			head = /obj/item/clothing/head/helmet/heavy/necked // Placeholder
+			head = /obj/item/clothing/head/helmet/heavy/necked/abyssor
 			wrists = /obj/item/clothing/neck/psycross/silver/abyssor
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/necra)
 			head = /obj/item/clothing/head/helmet/heavy/necked/necra
 			wrists = /obj/item/clothing/neck/psycross/silver/necra
@@ -48,7 +48,7 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/ravox
 			H.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/xylix)
-			head = /obj/item/clothing/head/helmet/heavy/necked // Placeholder
+			head = /obj/item/clothing/head/helmet/heavy/necked/xylix
 			wrists = /obj/item/clothing/neck/psycross/silver/xylix
 			H.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/divine/pestra)

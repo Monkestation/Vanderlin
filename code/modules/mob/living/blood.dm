@@ -164,7 +164,7 @@
 	return bleed_rate
 
 /// How much slower we'll be bleeding for every CON point. 0.1 = 10% slower.
-#define CONSTITUTION_BLEEDRATE_MOD 0.05
+#define CONSTITUTION_BLEEDRATE_MOD 0.03
 
 /// Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/proc/bleed(amt)

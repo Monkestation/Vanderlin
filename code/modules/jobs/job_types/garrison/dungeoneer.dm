@@ -29,6 +29,8 @@
 		EXP_TYPE_GARRISON = 300
 	)
 
+	traits = list(TRAIT_STEELHEARTED)
+
 /datum/outfit/dungeoneer/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/dungeoneer

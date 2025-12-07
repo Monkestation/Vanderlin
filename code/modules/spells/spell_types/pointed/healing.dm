@@ -191,24 +191,25 @@
 					cast_on.visible_message(span_info("No Gods answer these prayers."), span_notice("No Gods answer these prayers."))
 					return
 				cast_on.visible_message(span_info("A choral sound comes from above and [cast_on] is healed!"), span_notice("I am bathed in healing choral hymns!"))
-
+	var/amount_healed = base_healing
+	
 	if(conditional_buff)
 		to_chat(owner, span_greentext("Channeling my patron's power is easier in these conditions!"))
-		base_healing += situational_bonus
+		amount_healed += situational_bonus
 
-	cast_on.adjustToxLoss(-base_healing)
-	cast_on.adjustOxyLoss(-base_healing)
+	cast_on.adjustToxLoss(-amount_healed)
+	cast_on.adjustOxyLoss(-amount_healed)
 	cast_on.blood_volume += blood_restoration
 	if(!iscarbon(cast_on))
-		cast_on.adjustBruteLoss(-base_healing)
-		cast_on.adjustFireLoss(-base_healing)
+		cast_on.adjustBruteLoss(-amount_healed)
+		cast_on.adjustFireLoss(-amount_healed)
 		return
 
 	var/mob/living/carbon/C = cast_on
 	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(owner.zone_selected))
 	if(affecting)
-		affecting.heal_damage(base_healing, base_healing)
-		affecting.heal_wounds(base_healing * wound_modifier)
+		affecting.heal_damage(amount_healed, amount_healed)
+		affecting.heal_wounds(amount_healed * wound_modifier)
 		C.update_damage_overlays()
 
 /datum/action/cooldown/spell/healing/profane

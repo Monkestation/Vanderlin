@@ -13,6 +13,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/steward
 	give_bank_account = 100

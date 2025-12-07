@@ -108,8 +108,7 @@
 				if(current_pick.always_spawn_with) //If the ruin has part below, make sure that z exists.
 					for(var/v in current_pick.always_spawn_with)
 						if(current_pick.always_spawn_with[v] == PLACE_BELOW)
-							var/turf/T = locate(1,1,target_z)
-							if(!GET_TURF_BELOW(T))
+							if(!SSmapping.multiz_levels[target_z][Z_LEVEL_DOWN])
 								if(forced_z)
 									continue outer
 								else

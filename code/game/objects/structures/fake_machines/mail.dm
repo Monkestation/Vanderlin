@@ -503,7 +503,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		switch(accusation.paired.subject.patron.type)
 			if(/datum/patron/inhumen/matthios, /datum/patron/inhumen/zizo, /datum/patron/inhumen/graggar,
 			   /datum/patron/inhumen/baotha, /datum/patron/godless/godless, /datum/patron/godless/autotheist,
-			   /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/rashan)
+			   /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/rashan,
+			   /datum/patron/godless/galadros)
 				is_correct = TRUE
 
 	// Check excommunication
@@ -866,7 +867,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			everyhermes.inqlock()
 
 	if(href_list["buy"])
-		var/list/spawnable
+		var/list/spawnable = list()
 		for(var/turf/turf as anything in get_adjacent_open_turfs(get_turf(src)))
 			if(turf.is_blocked_turf(TRUE, src))
 				continue

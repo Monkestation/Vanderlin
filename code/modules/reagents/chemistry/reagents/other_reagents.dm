@@ -181,8 +181,10 @@
 	if(!istype(M))
 		return
 	if(method == TOUCH)
-		M.adjust_fire_stacks(-(reac_volume / 10))
-		M.SoakMob(FULL_BODY)
+		var/turf/turf_check = get_turf(M)
+		if(!istype(turf_check, /turf/open/water))
+			M.adjust_fire_stacks(-(reac_volume / 10))
+			M.SoakMob(FULL_BODY)
 	return ..()
 
 

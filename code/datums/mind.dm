@@ -202,18 +202,19 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /// check if this mind knows X
 /datum/mind/proc/do_i_know(datum/mind/person, name)
 	if(!person && !name)
-		return
+		return FALSE
 	if(person)
 		var/mob/living/carbon/human/H = person.current
 		if(!istype(H))
 			return
 		for(var/P in known_people)
-			if(H.real_name == P)
+			if(lowertext(H.real_name) == lowertext(P))
 				return TRUE
-	if(name)
+	else if(name)
 		for(var/P in known_people)
-			if(name == P)
+			if(lowertext(name) == lowertext(P))
 				return TRUE
+	return FALSE
 
 /// we are removed from X's known people
 /datum/mind/proc/become_unknown_to(person)

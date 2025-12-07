@@ -159,15 +159,6 @@
 				deconstruct(TRUE, 1)
 			return
 
-	if(istype(I, /obj/item/plate/tray))
-		var/obj/item/plate/tray/T = I
-		if(T.contents.len > 0) // If the tray isn't empty
-			for(var/obj/item/scattered_item as anything in T.contents)
-				scattered_item.forceMove(drop_location())
-			user.visible_message(span_notice("[user] empties [I] on [src]."))
-			return
-		// If the tray IS empty, continue on (tray will be placed on the table like other items)
-
 	if(!user.cmode)
 		if(!(I.item_flags & ABSTRACT))
 			if(user.transferItemToLoc(I, drop_location(), silent = FALSE))

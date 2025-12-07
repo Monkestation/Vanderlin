@@ -56,7 +56,7 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/noc
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 		if(/datum/patron/divine/dendor)
@@ -105,7 +105,7 @@
 			armor = /obj/item/clothing/armor/brigandine/abyssor
 			wrists = /obj/item/clothing/neck/psycross/silver/abyssor
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 			H.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 		if(/datum/patron/divine/xylix)

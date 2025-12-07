@@ -331,7 +331,7 @@
 		if(!ignore_z && z_message_type == Z_MODE_ONE_CEILING && hearing_movable.z != z)
 			var/listener_has_ceiling = TRUE
 			var/turf/listener_turf = get_turf(hearing_movable)
-			var/turf/listener_ceiling = get_step_multiz(listener_turf, UP)
+			var/turf/listener_ceiling = GET_TURF_ABOVE(listener_turf) // optimize, this is inside a loop
 			if(!listener_ceiling || istransparentturf(listener_ceiling))
 				listener_has_ceiling = FALSE
 			if(listener_turf.z < speaker_turf.z && listener_has_ceiling) //Listener is below the speaker and has a ceiling above them

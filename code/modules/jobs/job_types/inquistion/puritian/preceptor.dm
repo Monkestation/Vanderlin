@@ -30,7 +30,9 @@
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 		TRAIT_DODGEEXPERT,
-		TRAIT_DUALWIELDER
+		TRAIT_DUALWIELDER,
+		TRAIT_FOREIGNER,
+		TRAIT_RECOGNIZED,
 	)
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

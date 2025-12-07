@@ -132,3 +132,19 @@
 	prevent_crits = MINOR_CRITICALS
 	max_integrity = INTEGRITY_STANDARD
 
+/obj/item/clothing/pants/trou/formal
+	name = "formal trousers"
+	desc = "A formal pair of formal trousers."
+	icon_state = "butlerpants"
+	item_state = "butlerpants"
+	detail_tag = "_detail"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_maids.dmi'
+	salvage_result = /obj/item/natural/cloth
+	detail_color = CLOTHING_DARK_INK
+
+/obj/item/clothing/pants/trou/formal/shorts
+	name = "trouser shorts"
+	desc = "A pair of formal trouser shorts, fit for any strapping young lad."
+	icon_state = "butlershorts"
+	item_state = "butlershorts"
+	detail_color = CLOTHING_SOOT_BLACK

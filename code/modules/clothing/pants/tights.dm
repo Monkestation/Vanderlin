@@ -19,6 +19,9 @@
 /obj/item/clothing/pants/tights/colored/black
 	color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/pants/tights/colored/white
+	color = CLOTHING_CHALK_WHITE
+
 /obj/item/clothing/pants/tights/colored/red
 	color = CLOTHING_BLOOD_RED
 

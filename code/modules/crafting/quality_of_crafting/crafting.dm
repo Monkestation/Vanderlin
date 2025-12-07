@@ -430,7 +430,7 @@
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom = /obj/item/weapon/knife
 	allow_inverse_start = FALSE
-	output = /obj/item/plate/tray
+	output = /obj/item/tray
 	output_amount = 2
 	craft_time = 5 SECONDS
 

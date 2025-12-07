@@ -965,3 +965,20 @@
 	var/datum/inspiration/I = new /datum/inspiration(character)
 	I.grant_inspiration(character, bard_tier = BARD_T2)
 	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
+
+/datum/special_trait/baothan
+	name = "Adored by Baotha"
+	greet_text = span_notice("Baotha adore me so much that she gave me some goodies, dope tbh.")
+	weight = 10
+	allowed_patrons = list(/datum/patron/inhumen/baotha)
+	req_text = "Have Baotha as your Patron and do not be a Iconoclast, a profane paladin or a inhumen cleric"
+	restricted_jobs = list(/datum/job/advclass/wretch/heretic, /datum/job/advclass/combat/inhumencleric, /datum/job/advclass/combat/profanepaladin)
+
+/datum/special_trait/baothan/on_apply(mob/living/carbon/human/character, silent)
+	var/holder = character.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_churching()
+		devotion.grant_to(character)
+	character.mind.special_items["Baotha's Gift"] = /obj/item/clothing/head/corruptflower
+	character.AddComponent(/datum/component/theme_music)

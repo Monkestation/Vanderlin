@@ -103,25 +103,27 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		to_chat(user, span_warning("The ritual requires a parchment with a name."))
 		return
 	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
-	if(!user.mind || !user.mind.do_i_know(name = paper_name))
+	if(!user.mind?.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
-	for(var/mob/living/carbon/human/HL in GLOB.human_list)
+	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
 		if(HL.real_name != paper_name)
 			continue
-		if(HL.mind.assigned_role.title in GLOB.church_positions)
+		if(HL == SSticker.rulermob)
+			break
+		if(HL.mind?.assigned_role.title in GLOB.church_positions)
 			to_chat(HL, span_warning("I sense an unholy presence loom near my soul."))
 			to_chat(user, span_danger("They are protected..."))
-			break
-		if(HL == SSticker.rulermob)
 			break
 		if(istype(HL.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(HL.wear_wrists, /obj/item/clothing/neck/psycross/silver))
 			to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
 			break
-		if(HAS_TRAIT(HL, TRAIT_NOSLEEP))
-			break
-		to_chat(HL, span_userdanger("I'm so sleepy..."))
-		HL.SetSleeping(5 SECONDS)
+		if(!HAS_TRAIT(HL, TRAIT_NOSLEEP))
+			to_chat(HL, span_userdanger("I'm so sleepy..."))
+			HL.SetSleeping(5 SECONDS)
+		else
+			to_chat(HL, span_userdanger("My eyes close on their own!"))
+			HL.set_eyes_closed(TRUE)
 		addtimer(CALLBACK(src, PROC_REF(kidnap), HL, center), 3 SECONDS)
 		qdel(P)
 		break

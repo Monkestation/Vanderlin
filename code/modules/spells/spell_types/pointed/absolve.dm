@@ -11,6 +11,7 @@
 	invocation_type = "shout"
 	associated_skill = /datum/skill/magic/holy
 	cooldown_time = 30 SECONDS // 60 seconds cooldown
+	button_icon_state = "ABSOLVE"
 
 /datum/action/cooldown/spell/psydonabsolve/cast(mob/living/carbon/human/H)
 	. = ..()

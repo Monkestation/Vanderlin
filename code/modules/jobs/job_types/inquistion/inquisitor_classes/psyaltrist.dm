@@ -27,7 +27,9 @@
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
-		TRAIT_PSYDONITE,)
+		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
+		)
 
 	spells = list(/datum/action/cooldown/spell/vicious_mockery)
 

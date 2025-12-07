@@ -39,7 +39,7 @@
 		return name_override
 	if(face_name)
 		if(id_name && (id_name != face_name))
-			return "Unknown [(pronouns == SHE_HER) ? "Woman" : "Man"]"
+			return "Unknown [(gender == FEMALE) ? "Woman" : "Man"]"
 		return face_name
 	if(id_name)
 		return id_name

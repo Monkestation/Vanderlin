@@ -29,6 +29,7 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
 	)
 
 	languages = list(/datum/language/oldpsydonic)

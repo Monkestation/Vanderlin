@@ -21,6 +21,9 @@
 	//Players will be allowed to spawn in as jobs that are set to "Station"
 	var/faction = FACTION_NONE
 
+	///Whether this job can be chosen if the player is already an antagonist
+	var/antags_can_pick = TRUE
+
 	/// How many players can be this job
 	var/total_positions = 0
 

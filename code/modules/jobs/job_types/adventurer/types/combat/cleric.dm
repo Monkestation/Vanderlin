@@ -61,7 +61,7 @@
 		if(/datum/patron/divine/noc)
 			wrists = /obj/item/clothing/neck/psycross/silver/noc
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/pestra)
 			wrists = /obj/item/clothing/neck/psycross/silver/pestra
 			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
@@ -69,7 +69,7 @@
 		if(/datum/patron/divine/abyssor)
 			wrists = /obj/item/clothing/neck/psycross/silver/abyssor
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			H.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 			beltl = /obj/item/fishingrod //no attachements, cleric can either discard it or embrace abyssor and fish like man was made to do
 			H.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 		if(/datum/patron/divine/malum)

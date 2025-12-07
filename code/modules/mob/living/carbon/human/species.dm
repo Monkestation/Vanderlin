@@ -307,6 +307,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return strings("accents/halforc_replacement.json", "halforc")
 	if(language == "Halfling")
 		return strings("accents/halfling_replacement.json", "halfling")
+	if(language == "Gutter")
+		return strings("accents/kobold_replacement.json", "kobold")
 	if(language == "Deepspeak")
 		return strings("accents/triton_replacement.json", "triton")
 	if(language == "Pirate")
@@ -375,7 +377,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				ACCENT_PIRATE,
 				ACCENT_MIDDLE_SPEAK,
 				ACCENT_ZALAD,
-				ACCENT_HALFLING
+				ACCENT_HALFLING,
+				ACCENT_KOBOLD
 			)
 
 			///This will only trigger for patreon users

@@ -156,7 +156,7 @@
 	if(!M)
 		return
 	var/message_to_admins = span_adminnotice("<b> [key_name(usr)] has sent ([M.name]/[M.key]):</b> to cryo. <BR>")
-	var/message_to_admin_user = span_notice(cryo_mob(M))
+	var/message_to_admin_user = span_notice(cryo_mob(M, TRUE))
 
 	to_chat(src, message_to_admin_user)
 	log_admin(message_to_admins)

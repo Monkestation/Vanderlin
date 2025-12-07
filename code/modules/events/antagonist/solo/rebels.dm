@@ -30,8 +30,9 @@
 		"Inquisitor",
 		"Absolver",
 		"Confessor",
-		"Orthodoxist",
+		"Sacrestants",
 		"Adept",
+		"Assassin",
 	)
 
 /datum/round_event_control/antagonist/solo/rebel/valid_for_map()

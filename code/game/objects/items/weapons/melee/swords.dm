@@ -1100,6 +1100,13 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	sellprice = 120
 
+/obj/item/weapon/sword/long/greatsword/steelflamberge
+	name = "steel flamberge"
+	desc = "A steel variant of the Flamberge, It's wave-like form distributes force better, and is less likely to break on impact."
+	icon_state = "steelflamberge"
+	wbalance = DODGE_CHANCE_NORMAL
+	sellprice = 120
+
 /obj/item/weapon/sword/long/greatsword/zwei
 	possible_item_intents = list(/datum/intent/sword/cut/zwei, /datum/intent/sword/thrust/zwei, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/long, /datum/intent/sword/strike, /datum/intent/sword/chop/long)

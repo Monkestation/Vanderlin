@@ -164,7 +164,8 @@
 	var/defdrain = 5
 	var/encumbrance = 0
 
-	var/eyesclosed = 0
+	/// If the mob's eyes are closed, blinded
+	var/eyesclosed = FALSE
 	var/fallingas = 0
 
 	var/bleed_rate = 0 //how much are we bleeding

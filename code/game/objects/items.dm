@@ -213,6 +213,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/anvilrepair
 	// Boolean. If TRUE, this item can be repaired using a needle.
 	var/sewrepair
+	// Boolean. sewrepair normally dictates dyeing, this is an override for non-sewn items to be dyeable.
+	// In the future this might deserve its own refactor.
+	var/dyeable
 
 	var/breakpath
 
@@ -300,6 +303,14 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/update_overlays()
 	. = ..()
+	//details tags for items/clothes
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		. += pic
+
 	// Add quality overlay to the food item
 	if(recipe_quality <= 0 || !ismob(loc))
 		return
@@ -323,10 +334,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/wielded_force = force_wielded ? force_wielded : force
 		AddComponent(/datum/component/two_handed, force_unwielded = force, force_wielded = wielded_force, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)), wield_blocking = wield_block)
 
-/obj/item/proc/get_detail_tag() //this is for extra layers on clothes
+/obj/item/proc/get_detail_tag() //this is for extra layers on clothes or items
 	return detail_tag
 
-/obj/item/proc/get_detail_color() //this is for extra layers on clothes
+/obj/item/proc/get_detail_color() //this is for extra layers on clothes or items
 	return detail_color
 
 /// Handles sprite changes and decals
@@ -460,6 +471,14 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		grid_width = (w_class * world.icon_size)
 	if(grid_height <= 0)
 		grid_height = (w_class * world.icon_size)
+
+	if(uses_lord_coloring)
+		if(GLOB.lordprimary && GLOB.lordsecondary)
+			lordcolor()
+		else
+			RegisterSignal(SSdcs, COMSIG_LORD_COLORS_SET, TYPE_PROC_REF(/obj/item, lordcolor))
+	else if(get_detail_color()) // Lord color does this
+		update_appearance(UPDATE_OVERLAYS)
 
 	update_transform()
 	apply_components()
