@@ -1006,8 +1006,7 @@
 	delver_restrictions = TRUE
 	converted_type = /area/delver
 
-/area/ship/topdeck
-/area/rogue/delver/guild
+/area/delver/guild
 	name = "guildhall"
 	icon_state = "delverguild"
 	droning_index = DRONING_INDOORS
@@ -1019,7 +1018,7 @@
 	first_time_text = "Guildhall"
 	custom_area_sound = 'sound/misc/stings/generic.ogg'
 
-/area/rogue/delver/inn
+/area/delver/inn
 	name = "delverinn"
 	icon_state = "delverinn"
 	droning_index = DRONING_INDOORS
@@ -1028,7 +1027,7 @@
 	first_time_text = "The Drunken Mole"
 	custom_area_sound = 'sound/misc/stings/generic.ogg'
 
-/area/rogue/delver/town
+/area/delver/town
 	name = "delvertown"
 	icon_state = "delvertown"
 	outdoors = TRUE
@@ -1042,7 +1041,7 @@
 	first_time_text = "Town"
 	custom_area_sound = 'sound/misc/stings/generic.ogg'
 
-/area/rogue/delver/marsh
+/area/delver/marsh
 	name = "delvermarsh"
 	icon_state = "delvermarsh"
 	outdoors = TRUE
@@ -1054,7 +1053,7 @@
 	first_time_text = "The Marsh"
 	custom_area_sound = 'sound/misc/stings/BogSting.ogg'
 
-/area/rogue/delver/plains
+/area/delver/plains
 	name = "delverplains"
 	icon_state = "delverplains"
 	outdoors = TRUE
@@ -1066,7 +1065,7 @@
 	first_time_text = "The Plains"
 	custom_area_sound = 'sound/misc/stings/generic.ogg'
 
-/area/rogue/delver/woods
+/area/delver/woods
 	name = "delverwoods"
 	icon_state = "delverwoods"
 	outdoors = TRUE
@@ -1080,14 +1079,14 @@
 	first_time_text = "The Wood"
 	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
 
-/area/rogue/delver/mountains
+/area/delver/mountains
 	name = "delvermountains"
 	icon_state = "delvermountains"
 	outdoors = TRUE
 	droning_index = DRONING_MOUNTAIN
 	ambient_index = AMBIENCE_GENERIC
 
-/area/rogue/ship/topdeck
+/area/ship/topdeck
 	name = "upperdeck"
 	icon_state = "roofs"
 	droning_index = DRONING_BOAT
