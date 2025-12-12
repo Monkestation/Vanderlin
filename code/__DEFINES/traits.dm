@@ -516,6 +516,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Ignores body_parts_covered during the add_fingerprint() proc. Works both on the person and the item in the glove slot.
 #define TRAIT_FINGERPRINT_PASSTHROUGH "fingerprint_passthrough"
 
+
 /// The mob will automatically breach the Masquerade when seen by others, with no exceptions
 #define TRAIT_UNMASQUERADE		"unmasquerade"
 /// Makes gambling incredibly effective, and causes random beneficial events to happen for the mob.
