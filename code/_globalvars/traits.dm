@@ -149,6 +149,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Eyes of Matthios" = TRAIT_MATTHIOS_EYES,
 		"Magical Visions" = TRAIT_SEE_LEYLINES,
 		"Poison Bite" = TRAIT_POISONBITE,
+		"Blood Drinker" = TRAIT_BLOODDRINKER,
+		"Foul Blood"	= TRAIT_FOULBLOOD,
 		"Tiny" = TRAIT_TINY,
 		"Foreigner" = TRAIT_FOREIGNER,
 		"Beautiful" = TRAIT_BEAUTIFUL,

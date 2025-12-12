@@ -19,6 +19,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
+	// if you're going to make a clan that doesn't drink blood for some reason, this needs to be moved to each individual clan type.
+	innate_traits = list(TRAIT_BLOODDRINKER)
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan = /datum/clan/nosferatu, forced_clan = FALSE)
 	. = ..()
