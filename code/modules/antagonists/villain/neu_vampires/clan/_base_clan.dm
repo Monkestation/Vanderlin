@@ -30,6 +30,7 @@ And it also helps for the character set panel
 	)
 
 	var/blood_preference = BLOOD_PREFERENCE_ALL
+	var/blood_disgust
 
 	var/list/disliked_clans = list()
 	var/list/liked_clans = list()
@@ -73,15 +74,14 @@ And it also helps for the character set panel
 	return "any blood"
 
 /datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types)
-	var/unwanted_blood = (blood_types & ~blood_preference)
+	var/wanted_blood = (blood_types & blood_preference)
+	var/unwanted_blood = (blood_types & blood_disgust)
 
-	if(blood_types & BLOOD_PREFERENCE_EUPHORIC)
-		drinker.apply_status_effect(/datum/status_effect/debuff/blood_euphoria)
-
-	if(!unwanted_blood)
-		return
-	drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
-	to_chat(drinker, span_warning("This blood tastes revolting to you!"))
+	if(wanted_blood && !unwanted_blood)
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_preference)
+	if(unwanted_blood && !wanted_blood)
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
+		to_chat(drinker, span_warning("This blood tastes revolting to you!"))
 
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
@@ -523,28 +523,28 @@ And it also helps for the character set panel
 	timer = 10 MINUTES
 
 
-/datum/status_effect/debuff/blood_euphoria
-	id = "blood_euphoria"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_euphoria
+/datum/status_effect/debuff/blood_preference
+	id = "blood_preference"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_preference
 	duration = 30 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 
-/atom/movable/screen/alert/status_effect/buff/blood_euphoria
+/atom/movable/screen/alert/status_effect/buff/blood_preference
 	name = "Sanguine Euphoria"
 	desc = span_good("This type of blood goes down incredibly well.")
 	icon_state = "hunger2"
 
-/datum/status_effect/buff/blood_euphoria/on_apply()
+/datum/status_effect/buff/blood_preference/on_apply()
 	. = ..()
 	if(.)
 		owner.add_stress(/datum/stress_event/good_blood)
 		owner.adjustBruteLoss(-5)
 
-/datum/status_effect/buff/blood_euphoria/tick()
+/datum/status_effect/buff/blood_preference/tick()
 	. = ..()
 	owner.adjustBruteLoss(-2)
 
-/datum/status_effect/buff/blood_euphoria/on_remove()
+/datum/status_effect/buff/blood_preference/on_remove()
 	. = ..()
 	owner.remove_stress(/datum/stress_event/good_blood)
 

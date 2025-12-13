@@ -16,7 +16,8 @@
 	name = "House Thronleer"
 	desc = "TBA"
 	curse = "Weakness of the soul."
-	blood_preference = BLOOD_PREFERENCE_FANCY
+	blood_preference = BLOOD_PREFERENCE_FANCY | BLOOD_PREFERENCE_EUPHORIC | BLOOD_PREFERENCE_HOLY
+	blood_disgust = BLOOD_PREFERENCE_RATS
 	clane_covens = list(
 		/datum/coven/obfuscate,
 		/datum/coven/presence,
@@ -25,7 +26,8 @@
 	leader = /datum/clan_leader/thronleer
 
 /datum/clan/thronleer/get_blood_preference_string()
-	return "prepared blood"
+	//return "prepared blood" we dont have this yet...
+	return "aristocrats, silver-blessed, and the holy"
 
 /datum/clan/thronleer/get_downside_string()
 	return "weak in fights"

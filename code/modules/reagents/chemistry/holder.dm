@@ -176,9 +176,10 @@
 
 	return master
 
-/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = null, show_message = TRUE, round_robin = FALSE)
+/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = null, show_message = TRUE, round_robin = FALSE, list/ignored_reagents)
 	//if preserve_data=0, the reagents data will be lost. Usefull if you use data for some strange stuff and don't want it to be transferred.
 	//if round_robin=TRUE, so transfer 5 from 15 water, 15 sugar and 15 plasma becomes 10, 15, 15 instead of 13.3333, 13.3333 13.3333. Good if you hate floating point errors
+	//ignored_reagents will not factor it into the total volume of the solution. It calculates as if they did not exist.
 	var/list/cached_reagents = reagent_list
 	if(!target || !total_volume)
 		return
@@ -196,13 +197,17 @@
 		R = target.reagents
 		target_atom = target
 
-	amount = min(min(amount, src.total_volume), R.maximum_volume-R.total_volume)
+	var/used_volume = src.total_volume
+	for(var/datum/reagent/T as anything in cached_reagents)
+		if(is_type_in_list(T, ignored_reagents))
+			used_volume -= T.volume
+	amount = min(min(amount, used_volume), R.maximum_volume-R.total_volume)
 	var/trans_data = null
 	var/transfer_log = list()
 	if(!round_robin)
-		var/part = amount / src.total_volume
+		var/part = amount / used_volume
 		for(var/datum/reagent/T as anything in cached_reagents)
-			if(remove_blacklisted && !T.can_synth)
+			if((remove_blacklisted && !T.can_synth) || is_type_in_list(T, ignored_reagents))
 				continue
 			var/transfer_amount = T.volume * part
 			if(preserve_data)

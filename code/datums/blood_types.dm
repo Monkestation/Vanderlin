@@ -43,6 +43,21 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	blood_data["gender"] = sampled_from.gender
 	blood_data["real_name"] = sampled_from.real_name
 	blood_data["factions"] = sampled_from.faction
+
+	blood_data["preferences"] |= (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
+	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_SLEEPING
+	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/zombie))
+		blood_data["preferences"] &= ~BLOOD_PREFERENCE_LIVING
+		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD
+	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD|BLOOD_PREFERENCE_KIN
+		blood_data["preferences"]  &= ~BLOOD_PREFERENCE_LIVING
+	if(HAS_TRAIT(sampled_from, TRAIT_NOBLE))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_FANCY
+	if(HAS_TRAIT(sampled_from, TRAIT_SILVER_BLESSED))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_EUPHORIC
+
 	return blood_data
 
 /**
@@ -60,7 +75,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	contains_lux = TRUE
 	used_table = /datum/chimeric_table/human
 
-/datum/blood_type/human/get_blood_data(mob/living/carbon/sampled_from)
+/datum/blood_type/human/get_blood_data(mob/living/carbon/human/sampled_from)
 	if(!istype(sampled_from) || isnull(sampled_from.dna))
 		return ..()
 
@@ -73,7 +88,8 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 		temp_chem[trace_chem.type] = trace_chem.volume
 	blood_data["trace_chem"] = list2params(temp_chem)
 
-	blood_data["mind"] = sampled_from.mind || sampled_from.last_mind
+	var/datum/mind/M = sampled_from.mind || sampled_from.last_mind
+	blood_data["mind"] = M
 	blood_data["ckey"] = sampled_from.ckey || ckey(sampled_from.last_mind?.key)
 	blood_data["cloneable"] = !sampled_from.suiciding
 	blood_data["blood_type"] = sampled_from.dna.human_blood_type
@@ -81,6 +97,23 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	blood_data["real_name"] = sampled_from.real_name
 	blood_data["features"] = sampled_from.dna.features
 	blood_data["factions"] = sampled_from.faction
+
+	blood_data["preferences"] |= (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
+	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_SLEEPING
+	if(M?.has_antag_datum(/datum/antagonist/zombie))
+		blood_data["preferences"] &= ~BLOOD_PREFERENCE_LIVING
+		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD
+	if(M?.has_antag_datum(/datum/antagonist/vampire))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD|BLOOD_PREFERENCE_KIN
+		blood_data["preferences"]  &= ~BLOOD_PREFERENCE_LIVING
+	if(HAS_TRAIT(sampled_from, TRAIT_NOBLE))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_FANCY
+	if(HAS_TRAIT(sampled_from, TRAIT_SILVER_BLESSED))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_EUPHORIC
+	if(sampled_from.cleric && istype(sampled_from.patron, /datum/patron/divine))
+		blood_data["preferences"] |= BLOOD_PREFERENCE_HOLY
+
 	return blood_data
 
 
@@ -176,6 +209,11 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 /datum/blood_type/human/corrupted/rousman
 	name = "Rousman"
 	used_table = /datum/chimeric_table/rousman
+
+/datum/blood_type/human/corrupted/rousman/get_blood_data(mob/living/carbon/human/sampled_from)
+	var/list/blood_data = ..()
+	if(blood_data)
+		blood_data["preferences"] |= BLOOD_PREFERENCE_RATS
 
 /datum/blood_type/human/corrupted/zizombie
 	name = "Zizombie"

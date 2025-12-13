@@ -8,8 +8,11 @@
 		/datum/coven/quietus,
 		/datum/coven/bloodheal
 	)
+	blood_preference = BLOOD_PREFERENCE_KIN | BLOOD_PREFERENCE_FANCY
+	blood_disgust = BLOOD_PREFERENCE_RATS | BLOOD_PREFERENCE_EUPHORIC
 	clane_traits = list(
 		TRAIT_STRONGBITE,
+		TRAIT_BLOODDRINKER,
 		TRAIT_NOHUNGER,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
