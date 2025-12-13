@@ -454,16 +454,16 @@
 * sleeve icons.
 * taken from /mob/living/carbon/proc/get_sleeves_layer()
 */
-/obj/structure/mannequin/proc/MakeSleeveLayer(obj/item/I, cloth_slot, layer2use = ARMORSLEEVE_LAYER, sleeveindex = 4)
+/obj/structure/mannequin/proc/MakeSleeveLayer(obj/item/I, cloth_slot, layer2use = ARMOR_LAYER, sleeveindex = 4)
 	switch(cloth_slot)
 		if(SLOT_MANNEQUIN_WRISTS)
-			layer2use = WRISTSLEEVE_LAYER
+			layer2use = WRISTS_LAYER
 		if(SLOT_MANNEQUIN_GLOVES)
-			layer2use = GLOVESLEEVE_LAYER
+			layer2use = GLOVES_LAYER
 		if(SLOT_MANNEQUIN_ARMOR)
-			layer2use = ARMORSLEEVE_LAYER
+			layer2use = ARMOR_LAYER
 		if(SLOT_MANNEQUIN_SHIRT)
-			layer2use = SHIRTSLEEVE_LAYER
+			layer2use = SHIRT_LAYER
 		if(SLOT_MANNEQUIN_CLOAK)
 			layer2use = CLOAK_LAYER
 

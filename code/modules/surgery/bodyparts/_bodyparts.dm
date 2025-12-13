@@ -13,7 +13,6 @@
 	var/mob/living/carbon/original_owner
 	var/status = BODYPART_ORGANIC
 
-	var/static_icon = FALSE
 	var/body_zone //BODY_ZONE_CHEST, BODY_ZONE_L_ARM, etc , used for def_zone
 	var/aux_zone // used for hands
 	var/aux_layer
@@ -93,8 +92,6 @@
 	grid_height = 64
 
 	resistance_flags = FLAMMABLE
-
-	var/wound_icon_state
 
 	var/punch_modifier = 1 // for modifying arm punching damage
 	var/acid_damage_intensity = 0
@@ -609,31 +606,23 @@
 
 //Gives you a proper icon appearance for the dismembered limb
 /obj/item/bodypart/proc/get_limb_icon(dropped, hideaux = FALSE)
+	RETURN_TYPE(/list)
+
 	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
 	var/icon_gender = (body_gender == FEMALE) ? "f" : "m" //gender of the icon, if applicable
 
-	var/image_dir = 0
-	if(dropped && !skeletonized)
-		if(static_icon)
-			icon = initial(icon)
-			icon_state = initial(icon_state)
-			return
-		image_dir = SOUTH
-		if(dmg_overlay_type)
-			if(brutestate)
-				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_[icon_gender]", -DAMAGE_LAYER, image_dir)
-			if(burnstate)
-				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]_[icon_gender]", -DAMAGE_LAYER, image_dir)
+	if(!skeletonized && dropped && dmg_overlay_type)
+		if(brutestate)
+			. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0", -DAMAGE_LAYER)
+		if(burnstate)
+			. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]", -DAMAGE_LAYER)
 
-	var/mutable_appearance/limb = mutable_appearance(layer = -BODYPARTS_LAYER)
-	if(wound_icon_state)
-		limb.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[wound_icon_state]_flesh"), flags = MASK_INVERSE)
-	if(acid_damage_intensity)
-		limb.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]_flesh"), flags = MASK_INVERSE)
-	limb.dir = image_dir
+	var/image/limb = image(layer = -BODYPARTS_LAYER)
 	var/image/aux
+
+	icon_exists_or_scream(limb.icon, limb.icon_state) //Prints a stack trace on the first failure of a given iconstate.
 
 	. += limb
 
@@ -646,90 +635,72 @@
 				limb.icon_state = "[animal_origin]_[body_zone]"
 		return
 
-//	if((body_zone != BODY_ZONE_HEAD && body_zone != BODY_ZONE_CHEST))
-//		should_draw_gender = FALSE
 	should_draw_gender = TRUE
 
-	var/skel = skeletonized ? "_s" : ""
-
-	if(is_organic_limb())
-		if(should_draw_greyscale)
-			limb.icon = species_icon
-			if(should_draw_gender)
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
-			else
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
-		else
-			limb.icon = 'icons/mob/human_parts.dmi'
-			if(should_draw_gender)
-				limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
-			else
-				limb.icon_state = "[species_id]_[body_zone]"
-		if(aux_zone && !hideaux)
-			aux = image(limb.icon, "[aux_zone][skel]", -(aux_layer), image_dir)
-			. += aux
-			if(wound_icon_state || acid_damage_intensity)
-				var/mutable_appearance/skeleton = mutable_appearance(layer = -(aux_layer))
-				skeleton.icon = species_icon
-				skeleton.icon_state = "[aux_zone]_s"
-				if(wound_icon_state)
-					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-				if(acid_damage_intensity)
-					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[aux_zone]_acid[acid_damage_intensity]"))
-				skeleton.dir = image_dir
-				. += skeleton
-		if(blocks_emissive != EMISSIVE_BLOCK_NONE && !istype(owner, /mob/living/carbon/human/dummy))
-			var/mutable_appearance/limb_em_block = mutable_appearance(limb.icon, limb.icon_state, plane = EMISSIVE_PLANE, appearance_flags = KEEP_APART)
-			limb_em_block.dir = image_dir
-			limb_em_block.color = GLOB.em_block_color
-			limb.overlays += limb_em_block
-
-			if(aux_zone && !hideaux)
-				var/mutable_appearance/aux_em_block = mutable_appearance(aux.icon, aux.icon_state, plane = EMISSIVE_PLANE, appearance_flags = KEEP_APART)
-				aux_em_block.dir = image_dir
-				aux_em_block.color = GLOB.em_block_color
-				aux.overlays += aux_em_block
-
-
-	else
+	if(!is_organic_limb())
 		limb.icon = species_icon
 		limb.icon_state = "pr_[body_zone]"
 		if(aux_zone)
 			if(!hideaux)
-				aux = image(limb.icon, "pr_[aux_zone]", -aux_layer, image_dir)
+				aux = image(limb.icon, "pr_[aux_zone]", -aux_layer)
 				. += aux
 		return
 
+	var/skel = skeletonized ? "_s" : ""
+
+	if(should_draw_greyscale)
+		limb.icon = species_icon
+		limb.icon_state = "[body_zone][skel]"
+	else
+		limb.icon = 'icons/mob/human_parts.dmi'
+		if(should_draw_gender)
+			limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
+		else
+			limb.icon_state = "[species_id]_[body_zone]"
+
+	if(aux_zone && !hideaux)
+		aux = image(limb.icon, "[aux_zone][skel]", -(aux_layer))
+		. += aux
+
+	if(blocks_emissive != EMISSIVE_BLOCK_NONE && !istype(owner, /mob/living/carbon/human/dummy))
+		var/mutable_appearance/limb_em_block = emissive_blocker(limb.icon, limb.icon_state, appearance_flags = KEEP_APART)
+		limb.overlays += limb_em_block
+
+		if(aux_zone && !hideaux)
+			var/mutable_appearance/aux_em_block = emissive_blocker(aux.icon, aux.icon_state, appearance_flags = KEEP_APART)
+			aux.overlays += aux_em_block
+
 	var/draw_organ_features = TRUE
 	var/draw_bodypart_features = TRUE
-	if(owner && owner.dna)
+	if(owner?.dna)
 		var/datum/species/owner_species = owner.dna.species
 		if(NO_ORGAN_FEATURES in owner_species.species_traits)
 			draw_organ_features = FALSE
 		if(NO_BODYPART_FEATURES in owner_species.species_traits)
 			draw_bodypart_features = FALSE
 
-	if(!skeletonized && draw_organ_features)
+	var/draw_color =  mutation_color || species_color || skin_tone
+	if(rotted || (owner && HAS_TRAIT(owner, TRAIT_ROTMAN)))
+		draw_color = SKIN_COLOR_ROT
+	if(draw_color)
+		limb.color = "#[draw_color]"
+		if(aux_zone && !hideaux)
+			aux.color = "#[draw_color]"
+
+	// No need to handle leg layering if dropped, we only face south anyways
+	if(!dropped && ((body_zone == BODY_ZONE_R_LEG) || (body_zone == BODY_ZONE_L_LEG)))
+		// Legs are a bit goofy in regards to layering, and we will need two images instead of one to fix that
+		var/obj/item/bodypart/leg_source = src
+		for(var/image/limb_image in .)
+			// Remove the old, unmasked image
+			. -= limb_image
+			// Add two masked images based on the old one
+			. += leg_source.generate_masked_leg(limb_image)
+
+	if(skeletonized)
+		return
+
+	if(draw_organ_features)
 		for(var/obj/item/organ/organ as anything in get_organs())
 			if(!organ.is_visible())
 				continue
@@ -738,21 +709,12 @@
 				. += organ_appearance
 
 	// Feature overlays
-	if(!skeletonized && draw_bodypart_features)
+	if(draw_bodypart_features)
 		for(var/datum/bodypart_feature/feature as anything in bodypart_features)
 			var/overlays = feature.get_bodypart_overlay(src)
 			if(!overlays)
 				continue
 			. += overlays
-
-	if(should_draw_greyscale && !skeletonized)
-		var/draw_color =  mutation_color || species_color || skin_tone
-		if(rotted || (owner && HAS_TRAIT(owner, TRAIT_ROTMAN)))
-			draw_color = SKIN_COLOR_ROT
-		if(draw_color)
-			limb.color = "#[draw_color]"
-			if(aux_zone && !hideaux)
-				aux.color = "#[draw_color]"
 
 ///since organs aren't actually stored in the bodypart themselves while attached to a person, we have to query the owner for what we should have
 /obj/item/bodypart/proc/get_organs()
@@ -830,7 +792,7 @@
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
 	aux_zone = BODY_ZONE_PRECISE_L_HAND
-	aux_layer = HANDS_PART_LAYER
+	aux_layer = BODYPARTS_HIGH_LAYER
 	body_damage_coeff = 1
 	held_index = 1
 	px_x = -6
@@ -923,7 +885,7 @@
 	body_zone = BODY_ZONE_R_ARM
 	body_part = ARM_RIGHT
 	aux_zone = BODY_ZONE_PRECISE_R_HAND
-	aux_layer = HANDS_PART_LAYER
+	aux_layer = BODYPARTS_HIGH_LAYER
 	body_damage_coeff = 1
 	held_index = 2
 	px_x = 6
@@ -1017,8 +979,6 @@
 	body_damage_coeff = 1
 	px_x = -2
 	px_y = 12
-	aux_zone = "l_leg_above"
-	aux_layer = LEG_PART_LAYER
 	subtargets = list(BODY_ZONE_PRECISE_L_FOOT)
 	grabtargets = list(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_L_LEG)
 	dismember_wound = /datum/wound/dismemberment/l_leg
@@ -1099,8 +1059,6 @@
 	body_damage_coeff = 1
 	px_x = 2
 	px_y = 12
-	aux_zone = "r_leg_above"
-	aux_layer = LEG_PART_LAYER
 	subtargets = list(BODY_ZONE_PRECISE_R_FOOT)
 	grabtargets = list(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_R_LEG)
 	dismember_wound = /datum/wound/dismemberment/r_leg
