@@ -420,6 +420,7 @@ GLOBAL_PROTECT(no_child_icons)
 			bloody_overlay.icon_state += "_f"
 
 		overlays_standing[GLOVES_LAYER] = bloody_overlay
+		apply_overlay(GLOVES_LAYER)
 		return
 
 	if(gloves)
@@ -1115,7 +1116,7 @@ GLOBAL_PROTECT(no_child_icons)
 
 		// Sleeves overlays
 		if(legsindex > 0 && wear_pants.sleeved)
-			pants_overlay.overlays += get_sleeves_layer(wear_pants, legsindex, PANTS_LAYER)
+			pants_overlay.add_overlay(get_sleeves_layer(wear_pants, legsindex, PANTS_LAYER))
 
 		if(LAZYACCESS(offsets, OFFSET_PANTS))
 			pants_overlay.pixel_x += offsets[OFFSET_PANTS][1]
