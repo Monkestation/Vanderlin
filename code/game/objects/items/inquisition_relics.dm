@@ -953,7 +953,11 @@
 		C.visible_message(span_danger("[user] [pick("garrotes", "asphyxiates")] [C]!"), \
 		span_userdanger("[user] [pick("garrotes", "asphyxiates")] me!"), span_hear("I hear the sickening sound of cordage!"), COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, span_danger("I [pick("garrote", "asphyxiate")] [C]!"))
-		user.changeNext_move(choke_change_next)
+		var/pain = /obj/item/inqarticles/garrote
+		if(!pain)
+			user.changeNext_move(assassin_choke)	//Stops spam for choking.
+		else
+			user.changeNext_move(choke_change_next)
 
 /obj/item/inqarticles/garrote/razor // To yische, who said not to give this out constantly, I respectfully disagree when it comes to assassin
 	name = "Profane Razor" // Its very not non lethal now.  Strangle your prey with glee
@@ -962,7 +966,7 @@
 	icon_state = "garrote"
 	item_state = "garrote"
 	resistance_flags = INDESTRUCTIBLE
-	var/choke_change_next = 2 SECONDS
+	var/assassin_choke = 2 SECONDS
 	choke_damage = 20
 	sellprice = 100
 
