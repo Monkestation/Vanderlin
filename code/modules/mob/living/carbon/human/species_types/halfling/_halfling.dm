@@ -27,7 +27,7 @@
 
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/male/male_short.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/dwarf.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/female/dwarf.dmi'
 	swap_male_clothes = TRUE
 	custom_clothes = TRUE
