@@ -46,8 +46,8 @@
 	liked_food = NONE
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/tall.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/regular.dmi'
 
 	exotic_bloodtype = /datum/blood_type/human/demihuman
 

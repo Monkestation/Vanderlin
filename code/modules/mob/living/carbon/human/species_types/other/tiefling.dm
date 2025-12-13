@@ -45,8 +45,8 @@
 
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mm.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/regular.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/regular.dmi'
 
 	offset_features_m = list(
 		OFFSET_RING = list(0,0),\

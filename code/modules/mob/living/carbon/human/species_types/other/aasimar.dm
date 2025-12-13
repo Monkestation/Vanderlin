@@ -37,8 +37,8 @@
 	possible_ages = list(AGE_IMMORTAL)
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mm.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/regular.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/regular.dmi'
 
 	soundpack_m = /datum/voicepack/male/serious
 

@@ -40,8 +40,8 @@
 
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mm.dmi'	//If we want to be funny, change these in the future? Has to be subtle.
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'	//We don't want this species to be meta-detectable.
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/regular.dmi'	//If we want to be funny, change these in the future? Has to be subtle.
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/regular.dmi'	//We don't want this species to be meta-detectable.
 
 	soundpack_m = /datum/voicepack/male						//Also a funny potential switch, more feasible to stay covert given that this is tied to emotes almost exclusively.
 	soundpack_f = /datum/voicepack/female

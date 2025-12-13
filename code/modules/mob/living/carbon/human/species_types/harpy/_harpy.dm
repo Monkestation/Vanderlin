@@ -29,8 +29,8 @@
 	possible_ages = NORMAL_AGES_LIST_CHILD
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/harpy.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/harpy.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/harpy.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/harpy.dmi'
 
 	soundpack_m = /datum/voicepack/male
 	soundpack_f = /datum/voicepack/female

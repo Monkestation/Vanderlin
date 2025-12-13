@@ -37,8 +37,8 @@
 	possible_ages = NORMAL_AGES_LIST_CHILD
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt_muscular.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/ft_muscular.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/tall_muscular.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/tall_muscular.dmi'
 
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
 

@@ -37,8 +37,8 @@
 
 	native_language = "Gutter"
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/f/kobold.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/kobold.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/female/kobold.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/kobold.dmi'
 
 	enflamed_icon = "widefire"
 

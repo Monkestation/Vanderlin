@@ -40,8 +40,8 @@
 
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/md.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fd.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/male/dwarf.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/dwarf.dmi'
 
 	hairyness = "t3"
 

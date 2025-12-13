@@ -39,8 +39,8 @@
 	specstats_m = list(STATKEY_PER = 1, STATKEY_INT = 2, STATKEY_SPD = -1, STATKEY_CON = -1)
 	specstats_f = list(STATKEY_PER = 1, STATKEY_INT = 2, STATKEY_SPD = -1, STATKEY_CON = -1)
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/f/medicator.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/medicator.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/female/medicator.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/female/medicator.dmi'
 
 	soundpack_m = /datum/voicepack/male/medicator
 	soundpack_f = /datum/voicepack/female/medicator
