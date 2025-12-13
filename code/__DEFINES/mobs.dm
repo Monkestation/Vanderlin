@@ -386,3 +386,134 @@
 #define FORBID_TELEKINESIS_REACH (1<<3)
 /// If resting on the floor is allowed to perform action
 #define ALLOW_RESTING (1<<4)
+
+/// Use male sprites
+#define MALE_SPRITES 0
+/// Use female sprites only
+#define FEMALE_SPRITES 1
+/// Use female sprites and boob
+#define FEMALE_BOOB 2
+
+// Mob Overlays Indexes
+// Higher value = lower overlay
+
+/// Total number of layers for mob overlays
+/// KEEP THIS UP-TO-DATE OR SHIT WILL BREAK
+/// Also consider updating layers_to_offset
+#define TOTAL_LAYERS 52
+
+/// Layer for stink particles
+#define SMELL_LAYER 51
+/// Mutations. Tk headglows, cold resistance glow, etc
+#define MUTATIONS_LAYER 50
+/// Cloaks that layer behind
+#define CLOAK_BEHIND_LAYER 49
+/// Gloves that layer behind
+#define HANDS_BEHIND_LAYER 48
+/// Belts that layer behind
+#define BELT_BEHIND_LAYER 47
+/// Back items that layer behind
+#define BACK_BEHIND_LAYER 46
+/// Certain mutantrace features (tail when looking south) that must appear behind the body parts
+#define BODY_BEHIND_LAYER 45
+/// Things under the bodyparts but above the "behind body" layer
+#define BODY_UNDER_LAYER 44
+/// Layer for bodyparts that should appear behind every other bodypart - Mostly, legs when facing WEST or EAST
+#define BODYPARTS_LOW_LAYER 43
+/// Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
+#define BODYPARTS_LAYER 42
+/// Certain mutantrace features (snout, body markings) that must appear above the body parts
+#define BODY_ADJ_LAYER 41
+/// Underwear, undershirts, socks, eyes, lips(makeup)
+#define BODY_LAYER 40
+/// Mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
+#define FRONT_MUTATIONS_LAYER 39
+/// Damage indicators (cuts and burns)
+#define DAMAGE_LAYER 38
+/// Pants layer
+#define PANTS_LAYER 37
+/// Shoes layer
+#define SHOES_LAYER	36
+/// Pants that go above shoes (skirts)
+#define PANTS_HIGH_LAYER 35
+/// Leg bodypart layer
+#define LEG_PART_LAYER 34
+/// Leg damage layer
+#define LEG_DAMAGE_LAYER 33
+/// Leg sleeves layer
+#define LEGSLEEVE_LAYER 31 // Must be above leg parts
+/// Shoes sleeves layer ??
+#define SHOESLEEVE_LAYER 32
+/// Shirt layer
+#define SHIRT_LAYER 30
+/// Layer for bodyparts that should appear above every other bodypart - Currently only used for hands
+#define BODYPARTS_HIGH_LAYER 29
+/// Gloves layer
+#define GLOVES_LAYER 28
+/// Wrists layer
+#define WRISTS_LAYER 27
+/// Armor layer
+#define ARMOR_LAYER 26
+/// Tabbard layer (why not cloak? don't know)
+#define TABARD_LAYER 25
+/// Belt layer, only when looking south
+#define BELT_LAYER 24
+/// Things that layer under cloaks
+#define UNDER_CLOAK_LAYER 23
+/// Arm damage layer
+#define ARM_DAMAGE_LAYER 22
+// Sleeves must be above hand parts
+/// Shirt sleeves
+#define SHIRTSLEEVE_LAYER 21
+/// Gloves sleeves layer
+#define GLOVESLEEVE_LAYER 20
+/// Wrists sleeves layer
+#define WRISTSLEEVE_LAYER 19
+/// Armor sleeves layer
+#define ARMORSLEEVE_LAYER 18
+/// Ring layer
+#define RING_LAYER 17
+/// Glasses layer
+#define GLASSES_LAYER 16
+/// Neck layer
+#define NECK_LAYER 15
+/// Back layer (for backpacks and equipment on your back)
+#define BACK_LAYER 14
+/// Cloak layer, only when looking north or west/east
+#define CLOAK_LAYER 13
+/// Hair layer
+#define HAIR_LAYER 12 // TODO: make part of head layer?
+/// Mouth layer (cigarettes, pipes)
+#define MOUTH_LAYER	11
+/// Face mask layer
+#define MASK_LAYER 10
+/// Head layer
+#define HEAD_LAYER 9
+/// Handcuff layer (when your hands are cuffed)
+#define HANDCUFF_LAYER 8
+/// Legcuff layer (when your feet are cuffed)
+#define LEGCUFF_LAYER 7
+/// Hands layer (for the actual hand, not the arm... I think?)
+#define HANDS_LAYER 6
+/// Body front layer. Usually used for mutant bodyparts that need to be in front of stuff (e.g. cat ears)
+#define BODY_FRONT_LAYER 5
+/// Blood cult ascended halo, because there's currently no better solution for adding/removing
+#define HALO_LAYER 4
+/// Vampire bite overlay. (???)
+#define BITE_LAYER 3
+/// Fire overlay layer
+#define FIRE_LAYER 2
+/// The highest most layer for mob overlays.
+#define HIGHEST_LAYER 1
+
+#define BACK_CLOAK_SOUTH_LAYER (BODY_BEHIND_LAYER+1)
+
+//Human Overlay Index Shortcuts for alternate_worn_layer, layers
+//Because I *KNOW* somebody will think layer+1 means "above"
+//IT DOESN'T OK, IT MEANS "UNDER"
+#define UNDER_ARMOR_LAYER (ARMOR_LAYER+1)
+#define UNDER_HAT_LAYER (HEAD_LAYER+1)
+
+//AND -1 MEANS "ABOVE", OK?, OK!?!
+#define ABOVE_SHOES_LAYER (SHOES_LAYER-1)
+#define ABOVE_BODY_FRONT_LAYER (BODY_FRONT_LAYER-1)

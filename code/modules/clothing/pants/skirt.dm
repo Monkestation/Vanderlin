@@ -5,13 +5,11 @@
 	item_state = "skirt"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/pants.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_pants.dmi'
+	alternate_worn_layer = PANTS_HIGH_LAYER
 	color = CLOTHING_LINEN
 
 /obj/item/clothing/pants/skirt/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
-
-/obj/item/clothing/pants/skirt/colored/random
-	name = "skirt"
 
 /obj/item/clothing/pants/skirt/colored/random/Initialize()
 	color = pick(CLOTHING_SALMON, CLOTHING_BERRY_BLUE, CLOTHING_SPRING_GREEN, CLOTHING_PEAR_YELLOW)

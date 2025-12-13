@@ -8,7 +8,6 @@
 /mob/living/carbon/human/proc/remove_bite()
 	remove_overlay(BITE_LAYER)
 
-
 /mob/living/proc/drinksomeblood(mob/living/carbon/victim, sublimb_grabbed)
 	if(world.time <= next_move)
 		return
