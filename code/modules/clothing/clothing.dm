@@ -408,21 +408,20 @@ BLIND     // can't see anything
 	female_clothing_icon = fcopy_rsc(female_clothing_icon)
 	GLOB.female_clothing_icons[index] = female_clothing_icon
 
-/proc/generate_dismembered_clothing(index, t_color, icon, sleeveindex, sleevetype)
-	if(sleevetype)
-		var/icon/dismembered = icon("icon"=icon, "icon_state"=t_color)
-		var/icon/r_mask = icon("icon"='icons/roguetown/clothing/onmob/helpers/dismemberment.dmi', "icon_state"="r_[sleevetype]")
-		var/icon/l_mask = icon("icon"='icons/roguetown/clothing/onmob/helpers/dismemberment.dmi', "icon_state"="l_[sleevetype]")
-		switch(sleeveindex)
-			if(1)
-				dismembered.Blend(r_mask, ICON_MULTIPLY)
-				dismembered.Blend(l_mask, ICON_MULTIPLY)
-			if(2)
-				dismembered.Blend(l_mask, ICON_MULTIPLY)
-			if(3)
-				dismembered.Blend(r_mask, ICON_MULTIPLY)
-		dismembered = fcopy_rsc(dismembered)
-		GLOB.dismembered_clothing_icons[index] = dismembered
+/proc/generate_dismembered_clothing(index, icon_state, icon, sleeve_flag, sleevetype)
+	if(!index || !icon_state || !icon || !sleeve_flag || !sleevetype)
+		return
+
+	var/icon/dismembered = icon(icon, icon_state)
+
+	if(sleeve_flag & SLEEVES_LEFT)
+		dismembered.Blend(icon('icons/roguetown/clothing/onmob/helpers/dismemberment.dmi', "l_[sleevetype]"), ICON_MULTIPLY)
+
+	if(sleeve_flag & SLEEVES_RIGHT)
+		dismembered.Blend(icon('icons/roguetown/clothing/onmob/helpers/dismemberment.dmi', "r_[sleevetype]"), ICON_MULTIPLY)
+
+	dismembered = fcopy_rsc(dismembered)
+	GLOB.dismembered_clothing_icons[index] = dismembered
 
 /obj/item/clothing/pants/AltClick(mob/user)
 	if(..())

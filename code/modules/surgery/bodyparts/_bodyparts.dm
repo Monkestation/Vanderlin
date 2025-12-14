@@ -619,7 +619,15 @@
 		if(burnstate)
 			. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]", -DAMAGE_LAYER)
 
-	var/image/limb = image(layer = -BODYPARTS_LAYER)
+	var/used_layer = BODYPARTS_LAYER
+
+	// This is to layer sleeves correctly on all directions
+	// Because EAST and WEST have a different layer entirely which requires arms to layer higher
+	// :(
+	if(body_part & ARMS && dir & (EAST | WEST))
+		used_layer = BODYPARTS_HIGH_LAYER
+
+	var/image/limb = image(layer = -used_layer)
 	var/image/aux
 
 	icon_exists_or_scream(limb.icon, limb.icon_state) //Prints a stack trace on the first failure of a given iconstate.

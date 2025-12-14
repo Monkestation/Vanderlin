@@ -7,3 +7,8 @@
 #define AC_LIGHT 1
 #define AC_MEDIUM 2
 #define AC_HEAVY 3
+
+/// Missing left
+#define SLEEVES_LEFT (1 << 0)
+/// Missing right
+#define SLEEVES_RIGHT (1 << 1)

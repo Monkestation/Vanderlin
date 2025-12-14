@@ -433,7 +433,7 @@
 		var/obj/item/clothing/pants/C = worn_thing
 		fitting = C.fitted
 
-	var/added_overlays = worn_thing.build_worn_icon(default_layer = clothing_layer, default_icon_file = overlay_icon, isinhands = FALSE, femaleuniform = fitting, coom = is_female)
+	var/added_overlays = worn_thing.build_worn_icon(default_layer = clothing_layer, default_icon_file = overlay_icon, isinhands = FALSE, add_boob = is_female)
 	//Cloaks refuse to be shown behind the mannequin unless they are applied to the underlays.
 	if(clothing_layer >= CLOAK_BEHIND_LAYER)
 		underlays += added_overlays

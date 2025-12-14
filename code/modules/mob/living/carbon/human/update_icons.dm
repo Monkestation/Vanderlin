@@ -50,15 +50,20 @@ There are several things that need to be remembered:
 GLOBAL_LIST_INIT(no_child_icons, list(/obj/item/clothing/head, /obj/item/clothing/face, /obj/item/clothing/cloak, /obj/item/clothing/gloves, /obj/item/clothing/neck))
 GLOBAL_PROTECT(no_child_icons)
 
-/mob/living/carbon/proc/get_limbloss_index(limbr, limbl)
-	var/jazz = 1
+/// Get sleeve flags for limb loss
+/mob/living/carbon/proc/get_limb_sleeve_flag(limbr, limbl)
+	var/sleeve_flag = (SLEEVES_RIGHT | SLEEVES_LEFT) // Assume we have neither
 	for(var/obj/item/bodypart/affecting as anything in bodyparts)
-		if(affecting.body_part == limbr)
-			jazz += 1
-		if(affecting.body_part == limbl)
-			jazz += 2
-	return jazz
+		if(!sleeve_flag)
+			break
 
+		// Remove the flag if we find the part
+		if(affecting.body_part == limbr)
+			sleeve_flag &= ~SLEEVES_RIGHT
+		else if(affecting.body_part == limbl)
+			sleeve_flag &= ~SLEEVES_LEFT
+
+	return sleeve_flag
 
 /mob/living/carbon/human/update_body()
 	dna?.species?.handle_body(src) //create destroy moment
@@ -443,10 +448,11 @@ GLOBAL_PROTECT(no_child_icons)
 			else
 				racecustom = species.id
 
-		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
-		var/mutable_appearance/gloves_overlay = gloves.build_worn_icon(age, GLOVES_LAYER, 'icons/roguetown/clothing/onmob/gloves.dmi', coom = use_female_sprites, sleeveindex = armsindex, customi = racecustom)
+		var/armsindex = get_limb_sleeve_flag(ARM_RIGHT, ARM_LEFT)
 
-		if(gloves.sleeved && armsindex > 0)
+		var/mutable_appearance/gloves_overlay = gloves.build_worn_icon(age, GLOVES_LAYER, 'icons/roguetown/clothing/onmob/gloves.dmi', add_boob = use_female_sprites, sleeve_flags = armsindex, customi = racecustom)
+
+		if(gloves.sleeved)
 			gloves_overlay.add_overlay(get_sleeves_layer(gloves, armsindex, GLOVES_LAYER))
 
 		if(LAZYACCESS(offsets, OFFSET_GLOVES))
@@ -469,7 +475,7 @@ GLOBAL_PROTECT(no_child_icons)
 				client.screen += wear_wrists
 		update_observer_view(wear_wrists,1)
 		var/datum/species/species = dna?.species
-		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
+		var/armsindex = get_limb_sleeve_flag(ARM_RIGHT, ARM_LEFT)
 
 		var/use_female_sprites = FALSE
 		if(species?.sexes)
@@ -489,9 +495,9 @@ GLOBAL_PROTECT(no_child_icons)
 			else
 				racecustom = species.id
 
-		var/mutable_appearance/wrists_overlay = wear_wrists.build_worn_icon(age, WRISTS_LAYER, coom = use_female_sprites, sleeveindex = armsindex, customi = racecustom)
+		var/mutable_appearance/wrists_overlay = wear_wrists.build_worn_icon(age, WRISTS_LAYER, add_boob = use_female_sprites, sleeve_flags = armsindex, customi = racecustom)
 
-		if(wear_wrists.sleeved && armsindex > 0)
+		if(wear_wrists.sleeved)
 			wrists_overlay.add_overlay(get_sleeves_layer(wear_wrists, armsindex, WRISTS_LAYER))
 
 		if(LAZYACCESS(offsets, OFFSET_WRISTS))
@@ -516,7 +522,7 @@ GLOBAL_PROTECT(no_child_icons)
 		update_observer_view(shoes,1)
 
 		var/datum/species/species = dna?.species
-		var/footindex = get_limbloss_index(LEG_RIGHT, LEG_LEFT)
+		var/footindex = get_limb_sleeve_flag(LEG_RIGHT, LEG_LEFT)
 
 		var/use_female_sprites = FALSE
 		if(species?.sexes)
@@ -536,9 +542,9 @@ GLOBAL_PROTECT(no_child_icons)
 			else
 				racecustom = species.id
 
-		var/mutable_appearance/shoes_overlay = shoes.build_worn_icon(age, SHOES_LAYER, 'icons/mob/clothing/feet.dmi', coom = use_female_sprites, customi = racecustom, sleeveindex = footindex)
+		var/mutable_appearance/shoes_overlay = shoes.build_worn_icon(age, SHOES_LAYER, 'icons/mob/clothing/feet.dmi', add_boob = use_female_sprites, customi = racecustom, sleeve_flags = footindex)
 
-		if(shoes.sleeved && footindex > 0)
+		if(shoes.sleeved)
 			shoes_overlay.add_overlay(get_sleeves_layer(shoes, footindex, SHOES_LAYER))
 
 		if(LAZYACCESS(offsets, OFFSET_SHOES))
@@ -574,7 +580,7 @@ GLOBAL_PROTECT(no_child_icons)
 		else
 			offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_m
 
-		overlays_standing[HEAD_LAYER] = head.build_worn_icon(age = age, default_layer = HEAD_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/head.dmi', coom = FALSE)
+		overlays_standing[HEAD_LAYER] = head.build_worn_icon(age = age, default_layer = HEAD_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/head.dmi', add_boob = FALSE)
 		var/mutable_appearance/head_overlay = overlays_standing[HEAD_LAYER]
 		if(head_overlay)
 			if(LAZYACCESS(offsets, OFFSET_HEAD))
@@ -705,7 +711,7 @@ GLOBAL_PROTECT(no_child_icons)
 			client.screen += belt
 		update_observer_view(belt)
 		if(!(cloak?.flags_inv & HIDEBELT))
-			var/mutable_appearance/mbeltoverlay = belt.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belts.dmi', coom = use_female_sprites, customi = racecustom)
+			var/mutable_appearance/mbeltoverlay = belt.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belts.dmi', add_boob = use_female_sprites, customi = racecustom)
 			if(mbeltoverlay)
 				if(LAZYACCESS(offsets, OFFSET_BELT))
 					mbeltoverlay.pixel_x += offsets[OFFSET_BELT][1]
@@ -909,7 +915,7 @@ GLOBAL_PROTECT(no_child_icons)
 				client.screen += cloak
 		update_observer_view(cloak, 1)
 
-		var/mutable_appearance/cloak_overlay = cloak.build_worn_icon(age, CLOAK_LAYER, coom = use_female_sprites, customi = racecustom)
+		var/mutable_appearance/cloak_overlay = cloak.build_worn_icon(age, CLOAK_LAYER, add_boob = use_female_sprites, customi = racecustom)
 
 		if(LAZYACCESS(offsets, OFFSET_CLOAK))
 			cloak_overlay.pixel_x += offsets[OFFSET_CLOAK][1]
@@ -924,7 +930,7 @@ GLOBAL_PROTECT(no_child_icons)
 		//add sleeve overlays, then offset
 		var/list/cloaksleeves
 		if(cloak.sleeved)
-			cloaksleeves = get_sleeves_layer(cloak,0,CLOAK_LAYER)
+			cloaksleeves = get_sleeves_layer(cloak, NONE, CLOAK_LAYER)
 
 		if(LAZYLEN(cloaksleeves))
 			for(var/mutable_appearance/S as anything in cloaksleeves)
@@ -935,7 +941,7 @@ GLOBAL_PROTECT(no_child_icons)
 
 	if(backr && backr.alternate_worn_layer == CLOAK_BEHIND_LAYER)
 		update_hud_backr(backr)
-		var/mutable_appearance/cloak_overlay = backr.build_worn_icon(age, CLOAK_LAYER, coom = use_female_sprites, customi = racecustom)
+		var/mutable_appearance/cloak_overlay = backr.build_worn_icon(age, CLOAK_LAYER, add_boob = use_female_sprites, customi = racecustom)
 
 		if(LAZYACCESS(offsets, OFFSET_CLOAK))
 			cloak_overlay.pixel_x += offsets[OFFSET_CLOAK][1]
@@ -967,6 +973,7 @@ GLOBAL_PROTECT(no_child_icons)
 
 /mob/living/carbon/human/update_inv_shirt()
 	remove_overlay(SHIRT_LAYER)
+	remove_overlay(SLEEVES_LAYER)
 
 	if(client && hud_used)
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_SHIRT) + 1]
@@ -1009,16 +1016,23 @@ GLOBAL_PROTECT(no_child_icons)
 			else
 				racecustom = species.id
 
-		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
+		var/armsindex = get_limb_sleeve_flag(ARM_RIGHT, ARM_LEFT)
 
-		var/mutable_appearance/shirt_overlay = wear_shirt.build_worn_icon(age, SHIRT_LAYER, coom = use_female_sprites, customi = racecustom, sleeveindex = armsindex)
-
-		if(wear_shirt.sleeved && armsindex > 0)
-			shirt_overlay.add_overlay(get_sleeves_layer(wear_shirt, armsindex, SHIRT_LAYER))
+		var/mutable_appearance/shirt_overlay = wear_shirt.build_worn_icon(age, SHIRT_LAYER, add_boob = use_female_sprites, customi = racecustom, sleeve_flags = armsindex)
 
 		if(LAZYACCESS(offsets, OFFSET_SHIRT))
 			shirt_overlay.pixel_x += offsets[OFFSET_SHIRT][1]
 			shirt_overlay.pixel_y += offsets[OFFSET_SHIRT][2]
+
+		// The only one that needs to be seperate to layer over arms
+		if(wear_shirt.sleeved)
+			var/list/mutable_appearance/sleeves_overlays = get_sleeves_layer(wear_shirt, armsindex, SLEEVES_LAYER)
+			for(var/mutable_appearance/sleeve as anything in sleeves_overlays)
+				if(LAZYACCESS(offsets, OFFSET_SHIRT))
+					sleeve.pixel_x += offsets[OFFSET_SHIRT][1]
+					sleeve.pixel_y += offsets[OFFSET_SHIRT][2]
+			overlays_standing[SLEEVES_LAYER] = sleeves_overlays
+			apply_overlay(SLEEVES_LAYER)
 
 		overlays_standing[SHIRT_LAYER] = shirt_overlay
 		apply_overlay(SHIRT_LAYER)
@@ -1037,34 +1051,42 @@ GLOBAL_PROTECT(no_child_icons)
 		if(client && hud_used?.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open
 				client.screen += wear_armor					//add it to client's screen
+
 		update_observer_view(wear_armor,1)
+
 		var/datum/species/species = dna?.species
-		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
 		var/hideboob = FALSE
+
 		if(cloak?.flags_inv & HIDEBOOB)
 			hideboob = TRUE
 		if(species?.no_boobs)
 			hideboob = TRUE
+
 		var/use_female_sprites = FALSE
 		if(species?.sexes)
 			if(gender == FEMALE && !species.swap_female_clothes)
 				use_female_sprites = hideboob ? FEMALE_SPRITES : FEMALE_BOOB
 			else if(gender == MALE && species.swap_male_clothes)
 				use_female_sprites = FEMALE_SPRITES
+
 		var/list/offsets
 		if(use_female_sprites)
 			offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_f
 		else
 			offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_m
+
 		var/racecustom
 		if(species?.custom_clothes)
 			if(species?.custom_id)
 				racecustom = species?.custom_id
 			else
 				racecustom = species?.id
-		var/mutable_appearance/armor_overlay = wear_armor.build_worn_icon(age, ARMOR_LAYER, coom = use_female_sprites , customi = racecustom, sleeveindex = armsindex)
 
-		if(wear_armor.sleeved && armsindex > 0)
+		var/armsindex = get_limb_sleeve_flag(ARM_RIGHT, ARM_LEFT)
+
+		var/mutable_appearance/armor_overlay = wear_armor.build_worn_icon(age, ARMOR_LAYER, add_boob = use_female_sprites , customi = racecustom, sleeve_flags = armsindex)
+
+		if(wear_armor.sleeved)
 			armor_overlay.add_overlay(get_sleeves_layer(wear_armor, armsindex, ARMOR_LAYER))
 
 		if(LAZYACCESS(offsets, OFFSET_ARMOR))
@@ -1109,13 +1131,13 @@ GLOBAL_PROTECT(no_child_icons)
 		if(species?.custom_clothes)
 			racecustom = species.custom_id || species.id
 
-		var/legsindex = get_limbloss_index(LEG_RIGHT, LEG_LEFT)
+		var/legsindex = get_limb_sleeve_flag(LEG_RIGHT, LEG_LEFT)
 
 		// Base pants overlay
-		var/mutable_appearance/pants_overlay = wear_pants.build_worn_icon(age, PANTS_LAYER, coom = use_female_sprites, customi = racecustom, sleeveindex = legsindex)
+		var/mutable_appearance/pants_overlay = wear_pants.build_worn_icon(age, PANTS_LAYER, add_boob = use_female_sprites, customi = racecustom, sleeve_flags = legsindex)
 
 		// Sleeves overlays
-		if(legsindex > 0 && wear_pants.sleeved)
+		if(wear_pants.sleeved)
 			pants_overlay.add_overlay(get_sleeves_layer(wear_pants, legsindex, PANTS_LAYER))
 
 		if(LAZYACCESS(offsets, OFFSET_PANTS))
@@ -1170,20 +1192,19 @@ GLOBAL_PROTECT(no_child_icons)
 		apply_overlay(LEGCUFF_LAYER)
 		throw_alert("legcuffed", /atom/movable/screen/alert/restrained/legcuffed, new_master = src.legcuffed)
 
-/proc/wear_female_version(t_color, icon, layer, type)
-	var/index = t_color
+/proc/wear_female_version(icon_state, icon, layer, type)
+	var/index = icon_state
 	var/icon/female_clothing_icon = GLOB.female_clothing_icons[index]
 	if(!female_clothing_icon) 	//Create standing/laying icons if they don't exist
-		generate_female_clothing(index,t_color,icon,type)
-	return mutable_appearance(GLOB.female_clothing_icons[t_color], layer = -layer)
+		generate_female_clothing(index, icon_state, icon, type)
+	return mutable_appearance(GLOB.female_clothing_icons[icon_state], layer = -layer)
 
-/proc/wear_dismembered_version(t_color, icon, layer, sleeveindex, type)
-	var/index = "[t_color][sleeveindex]"
+/proc/wear_dismembered_version(icon_state, icon, layer, sleeve_flag, type)
+	var/index = "[icon_state][sleeve_flag]"
 	var/icon/clothing_icon = GLOB.dismembered_clothing_icons[index]
 	if(!clothing_icon) 	//Create standing/laying icons if they don't exist
-		generate_dismembered_clothing(index,t_color,icon,sleeveindex, type)
+		generate_dismembered_clothing(index, icon_state, icon, sleeve_flag, type)
 	return mutable_appearance(GLOB.dismembered_clothing_icons[index], layer = -layer)
-
 
 /mob/living/carbon/human/proc/get_overlays_copy(list/unwantedLayers)
 	var/list/out = new
@@ -1268,26 +1289,25 @@ default_icon_file: The icon file to draw states from if no other icon file is sp
 isinhands: If true then alternate_worn_icon is skipped so that default_icon_file is used,
 in this situation default_icon_file is expected to match either the lefthand_ or righthand_ file var
 
-femalueuniform: A value matching a uniform item's fitted var, if this is anything but NO_FEMALE_UNIFORM, we
-generate/load female uniform sprites matching all previously decided variables
-
-
 */
-/obj/item/proc/build_worn_icon(age = AGE_ADULT, default_layer = 0, default_icon_file = null, isinhands = FALSE, femaleuniform = NO_FEMALE_UNIFORM, override_state = null, coom = FALSE, customi = null, sleeveindex)
+/obj/item/proc/build_worn_icon(age = AGE_ADULT, default_layer = 0, default_icon_file = null, isinhands = FALSE, override_state = null, add_boob = FALSE, customi = null, sleeve_flags = NONE)
 	var/t_state
 	var/sleevejazz = sleevetype
+
 	if(age == AGE_CHILD)
-		coom = FALSE
+		add_boob = FALSE
+
 	if(override_state)
 		t_state = override_state
 	else if(isinhands && item_state)
 		t_state = item_state
-	else if(coom)
+	else if(add_boob)
 		t_state = icon_state + "_f"
 		if(sleevejazz)
 			sleevejazz += "_f"
 	else
 		t_state = icon_state
+
 	if(customi)
 		t_state += "_[customi]"
 		if(sleevejazz)
@@ -1296,6 +1316,7 @@ generate/load female uniform sprites matching all previously decided variables
 	var/t_icon = mob_overlay_icon
 	if(age == AGE_CHILD && !is_type_in_list(src, GLOB.no_child_icons))
 		t_state += "_child"
+
 	if(!t_icon)
 		t_icon = default_icon_file
 
@@ -1309,21 +1330,16 @@ generate/load female uniform sprites matching all previously decided variables
 	//Find a valid layer from variables+arguments
 	var/layer2use = alternate_worn_layer || default_layer
 
-	if(r_sleeve_status == SLEEVE_TORN || r_sleeve_status == SLEEVE_ROLLED)
-		if(sleeveindex == 4 || sleeveindex == 2)
-			sleeveindex -= 1
-	if(l_sleeve_status == SLEEVE_TORN || l_sleeve_status == SLEEVE_ROLLED)
-		if(sleeveindex == 4 || sleeveindex == 3)
-			sleeveindex -= 2
+	if(!(sleeve_flags & SLEEVES_RIGHT) && (r_sleeve_status == SLEEVE_TORN || r_sleeve_status == SLEEVE_ROLLED))
+		sleeve_flags |= SLEEVES_RIGHT
 
-	var/mutable_appearance/standing
-	if(sleeved && sleevejazz && sleeveindex < 4) //cut out sleeves from north/south sprites
-		if(!nodismemsleeves)
-			standing = wear_dismembered_version(t_state, file2use, layer2use, sleeveindex, sleevejazz)
-		else
-			sleeveindex = 4
-	if(!standing)
-		standing = mutable_appearance(file2use, t_state, -layer2use)
+	if(!(sleeve_flags & SLEEVES_LEFT) && (l_sleeve_status == SLEEVE_TORN || l_sleeve_status == SLEEVE_ROLLED))
+		sleeve_flags |= SLEEVES_LEFT
+
+	var/mutable_appearance/standing = mutable_appearance(file2use, t_state, -layer2use)
+
+	if(!nodismemsleeves && sleeved && sleevejazz && sleeve_flags) //cut out sleeves from north/south sprites
+		standing = wear_dismembered_version(t_state, file2use, layer2use, sleeve_flags, sleevejazz)
 
 	//Get the overlays for this item when it's being worn
 	//eg: ammo counters, primed grenade flashes, etc.
@@ -1331,7 +1347,7 @@ generate/load female uniform sprites matching all previously decided variables
 	var/list/worn_overlays = worn_overlays(standing, isinhands, file2use, dummy_block = istype(mob_type, /mob/living/carbon/human/dummy))
 	if(worn_overlays && worn_overlays.len)
 		standing.overlays.Add(worn_overlays)
-	var/do_boob = (coom == FEMALE_BOOB && boobed)
+	var/do_boob = (add_boob == FEMALE_BOOB && boobed)
 	if(!isinhands && do_boob)
 		var/mutable_appearance/boob_overlay = mutable_appearance(file2use, "[t_state]_boob", -layer2use)
 		standing.overlays.Add(boob_overlay)
@@ -1350,11 +1366,11 @@ generate/load female uniform sprites matching all previously decided variables
 			standing.overlays.Add(pic)
 
 	if(!isinhands && GET_ATOM_BLOOD_DNA_LENGTH(src))
-		var/index = "[t_state][sleeveindex]"
+		var/index = "[t_state][sleeve_flags]"
 		var/static/list/bloody_onmob = list()
-		var/icon/clothing_icon = bloody_onmob["[index][(coom == "f") ? "_boob" : ""]"]
+		var/icon/clothing_icon = bloody_onmob["[index][do_boob ? "_boob" : ""]"]
 		if(!clothing_icon)
-			if(sleeved && sleeveindex < 4) //cut out sleeves from north/south sprites
+			if(sleeved && sleeve_flags) //cut out sleeves from north/south sprites
 				clothing_icon = icon(GLOB.dismembered_clothing_icons[index])
 			else
 				clothing_icon = icon(file2use, t_state)
@@ -1362,7 +1378,7 @@ generate/load female uniform sprites matching all previously decided variables
 				clothing_icon.Blend(icon(file2use, "[t_state]_boob"), ICON_OVERLAY)
 			clothing_icon.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
 			clothing_icon.Blend(icon(bloody_icon, bloody_icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
-			bloody_onmob["[index][(coom == "f") ? "_boob" : ""]"] = fcopy_rsc(clothing_icon)
+			bloody_onmob["[index][do_boob ? "_boob" : ""]"] = fcopy_rsc(clothing_icon)
 		var/mutable_appearance/pic = mutable_appearance(clothing_icon, -layer2use)
 		standing.overlays.Add(pic)
 
@@ -1381,16 +1397,15 @@ generate/load female uniform sprites matching all previously decided variables
 
 	return standing
 
-/mob/living/carbon/proc/get_sleeves_layer(obj/item/I, sleeveindex, layer2use)
+/mob/living/carbon/proc/get_sleeves_layer(obj/item/I, sleeve_flags, layer2use)
 	if(!I || !layer2use)
 		return
 
-	if(I.r_sleeve_status == SLEEVE_TORN || I.r_sleeve_status == SLEEVE_ROLLED)
-		if(sleeveindex == 4 || sleeveindex == 2)
-			sleeveindex -= 1
-	if(I.l_sleeve_status == SLEEVE_TORN || I.l_sleeve_status == SLEEVE_ROLLED)
-		if(sleeveindex == 4 || sleeveindex == 3)
-			sleeveindex -= 2
+	if(!(sleeve_flags & SLEEVES_RIGHT) && (I.r_sleeve_status == SLEEVE_TORN || I.r_sleeve_status == SLEEVE_ROLLED))
+		sleeve_flags |= SLEEVES_RIGHT
+
+	if(!(sleeve_flags & SLEEVES_LEFT) && (I.l_sleeve_status == SLEEVE_TORN || I.l_sleeve_status == SLEEVE_ROLLED))
+		sleeve_flags |= SLEEVES_LEFT
 
 	var/index = I.icon_state
 	var/mob/living/carbon/human/HM = src
@@ -1398,11 +1413,15 @@ generate/load female uniform sprites matching all previously decided variables
 		index += "_child"
 	else if(gender == FEMALE ^ dna.species.swap_female_clothes)
 		index += "_f"
+
 	if(dna.species.custom_clothes)
 		index += "_[dna.species.custom_id ? dna.species.custom_id : dna.species.id]"
 
-	if(I.nodismemsleeves && sleeveindex) //armor pauldrons that show up above arms but don't get dismembered
-		sleeveindex = 4
+	if(I.nodismemsleeves && sleeve_flags) //armor pauldrons that show up above arms but don't get dismembered
+		sleeve_flags = NONE
+
+	if(sleeve_flags & SLEEVES_LEFT && sleeve_flags & SLEEVES_RIGHT)
+		return
 
 	var/leftused = FALSE
 	var/rightused = FALSE
@@ -1419,9 +1438,9 @@ generate/load female uniform sprites matching all previously decided variables
 	var/static/list/bloody_l = list()
 	var/list/sleeves = list()
 
-	if(sleeveindex == 2 || sleeveindex == 4 || !sleeveindex)
+	if(!sleeve_flags || !(sleeve_flags & SLEEVES_RIGHT))
 		var/used = "r_[index]"
-		if(!sleeveindex && rightused)
+		if(!sleeve_flags && rightused)
 			used = "xr_[index]"
 
 		sleeves += mutable_appearance(I.sleeved, used, -layer2use, alpha = I.alpha, color = I.color, appearance_flags = (RESET_COLOR | RESET_ALPHA))
@@ -1441,11 +1460,10 @@ generate/load female uniform sprites matching all previously decided variables
 				bloody_r[used] = fcopy_rsc(blood_overlay)
 			sleeves += mutable_appearance(blood_overlay, layer = -layer2use)
 
-	if(sleeveindex == 3 || sleeveindex == 4 || !sleeveindex)
+	if(!sleeve_flags || !(sleeve_flags & SLEEVES_LEFT))
 		var/used = "l_[index]"
-		if(!sleeveindex)
-			if(leftused)
-				used = "xl_[index]"
+		if(!sleeve_flags && leftused)
+			used = "xl_[index]"
 
 		sleeves += mutable_appearance(I.sleeved, used, -layer2use, alpha = I.alpha, color = I.color, appearance_flags = (RESET_COLOR | RESET_ALPHA))
 
@@ -1626,6 +1644,7 @@ generate/load female uniform sprites matching all previously decided variables
 
 /mob/living/carbon/human/proc/update_smell(smelly_icon = "generic_mob_smell")
 	remove_overlay(SMELL_LAYER)
+
 	if(hygiene == HYGIENE_LEVEL_DISGUSTING) //You have literally ignored your stank for so long that you physically can't get dirtier.
 		overlays_standing[SMELL_LAYER] = mutable_appearance('icons/mob/smelly.dmi', smelly_icon, -SMELL_LAYER)
 		apply_overlay(SMELL_LAYER)

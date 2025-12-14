@@ -65,6 +65,7 @@
 /mob/living/carbon/update_inv_hands(hide_experimental = FALSE)
 	remove_overlay(HANDS_LAYER)
 	remove_overlay(HANDS_BEHIND_LAYER)
+
 	var/age = AGE_ADULT
 	var/datum/species/species
 	if(ishuman(src))

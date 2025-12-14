@@ -78,14 +78,15 @@
 
 //................ Leather Vest ............... //	- has no sleeves.  - can be worn in armor OR shirt slot
 /obj/item/clothing/armor/leather/vest
-	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	name = "leather vest"
 	desc = "Obviously no sleeves, won't really protect much but it's at least padded enough to be an armor, and can be worn against the skin snugly."
 	icon_state = "vest"
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	color = CLOTHING_BARK_BROWN
 	blade_dulling = DULLING_BASHCHOP
 	blocksound = SOFTHIT
 	sewrepair = TRUE
+
 	sleevetype = null
 	sleeved = null
 
@@ -94,6 +95,8 @@
 	prevent_crits = CUT_AND_MINOR_CRITS
 	salvage_result = /obj/item/natural/hide/cured
 	item_weight = 2.2
+
+	alternate_worn_layer = ARMOR_LAYER
 
 /obj/item/clothing/armor/leather/vest/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
