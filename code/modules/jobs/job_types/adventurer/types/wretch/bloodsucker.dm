@@ -5,7 +5,7 @@
 	total_positions = 10
 	roll_chance = 100
 
-	pack_title = "Bloodsucker archetypes"
+	pack_title = "Fledgling Origins"
 	pack_message = "Choose your past"
 	job_packs = list(
 		/datum/job_pack/bloodsucker_noble,

@@ -82,7 +82,7 @@
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	head = /obj/item/clothing/head/fancyhat
 
-/datum/outfit/adventurer/noble/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/noble/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == FEMALE)
 		shirt = /obj/item/clothing/shirt/dress/silkdress/colored/random
