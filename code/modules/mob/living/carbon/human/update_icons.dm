@@ -1381,10 +1381,9 @@ generate/load female uniform sprites matching all previously decided variables
 
 	return standing
 
-/mob/living/carbon/proc/get_sleeves_layer(obj/item/I,sleeveindex,layer2use)
-	if(!I)
+/mob/living/carbon/proc/get_sleeves_layer(obj/item/I, sleeveindex, layer2use)
+	if(!I || !layer2use)
 		return
-	var/list/sleeves = list()
 
 	if(I.r_sleeve_status == SLEEVE_TORN || I.r_sleeve_status == SLEEVE_ROLLED)
 		if(sleeveindex == 4 || sleeveindex == 2)
@@ -1402,8 +1401,6 @@ generate/load female uniform sprites matching all previously decided variables
 	if(dna.species.custom_clothes)
 		index += "_[dna.species.custom_id ? dna.species.custom_id : dna.species.id]"
 
-	var/static/list/bloody_r = list()
-	var/static/list/bloody_l = list()
 	if(I.nodismemsleeves && sleeveindex) //armor pauldrons that show up above arms but don't get dismembered
 		sleeveindex = 4
 
@@ -1418,22 +1415,22 @@ generate/load female uniform sprites matching all previously decided variables
 			else
 				leftused = TRUE
 
+	var/static/list/bloody_r = list()
+	var/static/list/bloody_l = list()
+	var/list/sleeves = list()
+
 	if(sleeveindex == 2 || sleeveindex == 4 || !sleeveindex)
 		var/used = "r_[index]"
-		if(!sleeveindex)
-			if(rightused)
-				used = "xr_[index]"
-		var/mutable_appearance/r_sleeve = mutable_appearance(I.sleeved, used, layer=-layer2use)
-		r_sleeve.color = I.color
-		r_sleeve.alpha = I.alpha
-		sleeves += r_sleeve
+		if(!sleeveindex && rightused)
+			used = "xr_[index]"
+
+		sleeves += mutable_appearance(I.sleeved, used, -layer2use, alpha = I.alpha, color = I.color, appearance_flags = (RESET_COLOR | RESET_ALPHA))
 
 		if(I.get_detail_tag())
-			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
-//			pic.appearance_flags = RESET_COLOR
+			var/mutable_appearance/detail = mutable_appearance(I.sleeved, "[used][I.get_detail_tag()]", -layer2use)
 			if(I.get_detail_color())
-				pic.color = I.get_detail_color()
-			sleeves += pic
+				detail.color = I.get_detail_color()
+			sleeves += detail
 
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_r[used]
@@ -1442,25 +1439,21 @@ generate/load female uniform sprites matching all previously decided variables
 				blood_overlay.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
 				blood_overlay.Blend(icon(I.bloody_icon, I.bloody_icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 				bloody_r[used] = fcopy_rsc(blood_overlay)
-			var/mutable_appearance/pic = mutable_appearance(blood_overlay, layer=-layer2use)
-			sleeves += pic
+			sleeves += mutable_appearance(blood_overlay, layer = -layer2use)
 
 	if(sleeveindex == 3 || sleeveindex == 4 || !sleeveindex)
 		var/used = "l_[index]"
 		if(!sleeveindex)
 			if(leftused)
 				used = "xl_[index]"
-		var/mutable_appearance/l_sleeve = mutable_appearance(I.sleeved, used, layer=-layer2use)
-		l_sleeve.color = I.color
-		l_sleeve.alpha = I.alpha
-		sleeves += l_sleeve
+
+		sleeves += mutable_appearance(I.sleeved, used, -layer2use, alpha = I.alpha, color = I.color, appearance_flags = (RESET_COLOR | RESET_ALPHA))
 
 		if(I.get_detail_tag())
-			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
-//			pic.appearance_flags = RESET_COLOR
+			var/mutable_appearance/detail = mutable_appearance(I.sleeved, "[used][I.get_detail_tag()]", -layer2use)
 			if(I.get_detail_color())
-				pic.color = I.get_detail_color()
-			sleeves += pic
+				detail.color = I.get_detail_color()
+			sleeves += detail
 
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_l[used]
@@ -1469,11 +1462,9 @@ generate/load female uniform sprites matching all previously decided variables
 				blood_overlay.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
 				blood_overlay.Blend(icon(I.bloody_icon, I.bloody_icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 				bloody_l[used] = fcopy_rsc(blood_overlay)
-			var/mutable_appearance/pic = mutable_appearance(blood_overlay, layer=-layer2use)
-			sleeves += pic
+			sleeves += mutable_appearance(blood_overlay, layer = -layer2use)
 
 	return sleeves
-
 
 /obj/item/proc/get_held_offsets()
 	var/list/L
