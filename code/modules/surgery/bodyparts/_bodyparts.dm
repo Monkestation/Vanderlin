@@ -800,7 +800,7 @@
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
 	aux_zone = BODY_ZONE_PRECISE_L_HAND
-	aux_layer = BODYPARTS_HIGH_LAYER
+	aux_layer = BODYPARTS_HANDS_LAYER
 	body_damage_coeff = 1
 	held_index = 1
 	px_x = -6
@@ -893,7 +893,7 @@
 	body_zone = BODY_ZONE_R_ARM
 	body_part = ARM_RIGHT
 	aux_zone = BODY_ZONE_PRECISE_R_HAND
-	aux_layer = BODYPARTS_HIGH_LAYER
+	aux_layer = BODYPARTS_HANDS_LAYER
 	body_damage_coeff = 1
 	held_index = 2
 	px_x = 6

@@ -85,7 +85,7 @@ GLOBAL_PROTECT(no_child_icons)
 
 
 /mob/living/carbon/human/update_damage_overlays()
-	START_PROCESSING(SSdamoverlays,src)
+	START_PROCESSING(SSdamoverlays, src)
 
 /mob/living/carbon/human/proc/update_damage_overlays_real()
 	var/datum/species/species = dna?.species
@@ -93,8 +93,6 @@ GLOBAL_PROTECT(no_child_icons)
 		return
 
 	remove_overlay(DAMAGE_LAYER)
-	remove_overlay(LEG_DAMAGE_LAYER)
-	remove_overlay(ARM_DAMAGE_LAYER)
 
 	var/use_female_sprites = MALE_SPRITES
 	if(species?.sexes)
@@ -111,8 +109,11 @@ GLOBAL_PROTECT(no_child_icons)
 		offsets = is_child ? species.offset_features_child : species.offset_features_m
 		limb_icon = is_child ? species.child_dam_icon : species.dam_icon_m
 
+	if(!limb_icon)
+		return
+
 	var/hidechest = TRUE
-	if(use_female_sprites)
+	if(use_female_sprites && !is_child)
 		var/obj/item/bodypart/CH = get_bodypart(BODY_ZONE_CHEST)
 		if(CH)
 			if(wear_armor?.flags_inv & HIDEBOOB)
@@ -124,137 +125,50 @@ GLOBAL_PROTECT(no_child_icons)
 			else
 				hidechest = FALSE
 
-	var/list/limb_overlaysa = list()
-	var/list/limb_overlaysb = list()
-	var/list/limb_overlaysc = list()
-	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		var/list/damage_overlays = list()
-		var/list/legdam_overlays = list()
-		var/list/armdam_overlays = list()
-		if(BP.body_zone == BODY_ZONE_HEAD)
-			update_body()
-		var/bleed_checker = FALSE
-		var/list/wound_overlays
-		if(!BP.skeletonized)
-			if(BP.brutestate)
-				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[BP.brutestate]0", -DAMAGE_LAYER)
-				damage_overlays += damage_overlay
-				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_[BP.brutestate]0", -LEG_DAMAGE_LAYER)
-				legdam_overlays += legdam_overlay
-				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_[BP.brutestate]0", -ARM_DAMAGE_LAYER)
-				armdam_overlays += armdam_overlay
-			if(BP.burnstate)
-				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_0[BP.burnstate]", -DAMAGE_LAYER)
-				damage_overlays += damage_overlay
-				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_0[BP.burnstate]", -LEG_DAMAGE_LAYER)
-				legdam_overlays += legdam_overlay
-				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_0[BP.burnstate]", -ARM_DAMAGE_LAYER)
-				armdam_overlays += armdam_overlay
-			if(BP.get_bleed_rate())
-				bleed_checker = TRUE
-				if(BP.bandage)
-					var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_b", -DAMAGE_LAYER)
-					damage_overlay.color = BP.bandage.color
-					damage_overlays += damage_overlay
-					var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_b", -LEG_DAMAGE_LAYER)
-					legdam_overlay.color = BP.bandage.color
-					legdam_overlays += legdam_overlay
-					var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_b", -ARM_DAMAGE_LAYER)
-					armdam_overlay.color = BP.bandage.color
-					armdam_overlays += armdam_overlay
-			wound_overlays = list()
-			for(var/datum/wound/wound as anything in BP.wounds)
-				if(!wound.mob_overlay)
-					continue
-				wound_overlays |= wound.mob_overlay
-			for(var/wound_overlay in wound_overlays)
-				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[wound_overlay]", -DAMAGE_LAYER)
-				damage_overlays += damage_overlay
-				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_[wound_overlay]", -LEG_DAMAGE_LAYER)
-				legdam_overlays += legdam_overlay
-				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_[wound_overlay]", -ARM_DAMAGE_LAYER)
-				armdam_overlays += armdam_overlay
-		if(!bleed_checker && BP.bandage)
-			var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_b", -DAMAGE_LAYER)
-			damage_overlay.color = BP.bandage.color
-			damage_overlays += damage_overlay
-			var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_b", -LEG_DAMAGE_LAYER)
-			legdam_overlay.color = BP.bandage.color
-			legdam_overlays += legdam_overlay
-			var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_b", -ARM_DAMAGE_LAYER)
-			armdam_overlay.color = BP.bandage.color
-			armdam_overlays += armdam_overlay
-		if(BP.aux_zone && !((BP.body_zone == BODY_ZONE_CHEST) && hidechest))
-			if(!BP.skeletonized)
-				if(BP.brutestate)
-					var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.aux_zone]_[BP.brutestate]0", -DAMAGE_LAYER)
-					damage_overlays += damage_overlay
-					var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.aux_zone]_[BP.brutestate]0", -LEG_DAMAGE_LAYER)
-					legdam_overlays += legdam_overlay
-					var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.aux_zone]_[BP.brutestate]0", -ARM_DAMAGE_LAYER)
-					armdam_overlays += armdam_overlay
-				if(BP.burnstate)
-					var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.aux_zone]_0[BP.burnstate]", -DAMAGE_LAYER)
-					damage_overlays += damage_overlay
-					var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.aux_zone]_0[BP.burnstate]", -LEG_DAMAGE_LAYER)
-					legdam_overlays += legdam_overlay
-					var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.aux_zone]_0[BP.burnstate]", -ARM_DAMAGE_LAYER)
-					armdam_overlays += armdam_overlay
-				if(bleed_checker)
-					if(BP.bandage)
-						var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.aux_zone]_b", -DAMAGE_LAYER)
-						damage_overlay.color = BP.bandage.color
-						damage_overlays += damage_overlay
-						var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.aux_zone]_b", -LEG_DAMAGE_LAYER)
-						legdam_overlay.color = BP.bandage.color
-						legdam_overlays += legdam_overlay
-						var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.aux_zone]_b", -ARM_DAMAGE_LAYER)
-						armdam_overlay.color = BP.bandage.color
-						armdam_overlays += armdam_overlay
-				//We got the wound overlays before, it's all good
-				for(var/wound_overlay in wound_overlays)
-					var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.aux_zone]_[wound_overlay]", -DAMAGE_LAYER)
-					damage_overlays += damage_overlay
-					var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.aux_zone]_[wound_overlay]", -LEG_DAMAGE_LAYER)
-					legdam_overlays += legdam_overlay
-					var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.aux_zone]_[wound_overlay]", -ARM_DAMAGE_LAYER)
-					armdam_overlays += armdam_overlay
-			if(!bleed_checker && BP.bandage)
-				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.aux_zone]_b", -DAMAGE_LAYER)
-				damage_overlay.color = BP.bandage.color
-				damage_overlays += damage_overlay
-				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.aux_zone]_b", -LEG_DAMAGE_LAYER)
-				legdam_overlay.color = BP.bandage.color
-				legdam_overlays += legdam_overlay
-				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.aux_zone]_b", -ARM_DAMAGE_LAYER)
-				armdam_overlay.color = BP.bandage.color
-				armdam_overlays += armdam_overlay
+	var/mutable_appearance/damage_overlay = mutable_appearance(layer = -DAMAGE_LAYER, appearance_flags = KEEP_TOGETHER)
+	
+	for(var/obj/item/bodypart/body_part as anything in bodyparts)
+		if(!body_part.dmg_overlay_type || body_part.skeletonized)
+			continue
 
-		var/used_offset = BP.offset
-		for(var/mutable_appearance/M as anything in damage_overlays)
-			if(used_offset in offsets)
-				M.pixel_x += offsets[used_offset][1]
-				M.pixel_y += offsets[used_offset][2]
-			limb_overlaysa += M
-		for(var/mutable_appearance/M as anything in legdam_overlays)
-			if(used_offset in offsets)
-				M.pixel_x += offsets[used_offset][1]
-				M.pixel_y += offsets[used_offset][2]
-			limb_overlaysb += M
-		for(var/mutable_appearance/M as anything in armdam_overlays)
-			if(used_offset in offsets)
-				M.pixel_x += offsets[used_offset][1]
-				M.pixel_y += offsets[used_offset][2]
-			limb_overlaysc += M
+		var/used_layer = DAMAGE_LAYER
 
-	overlays_standing[DAMAGE_LAYER] = limb_overlaysa
-	overlays_standing[LEG_DAMAGE_LAYER] = limb_overlaysb
-	overlays_standing[ARM_DAMAGE_LAYER] = limb_overlaysc
+		// This sucks but its not as bad as having 3 lists of overlays
+		if(body_part.body_part & ARMS && dir & (EAST | WEST))
+			used_layer = BODYPARTS_HIGH_LAYER - 0.1 // :(((
 
+		var/no_aux = (hidechest && body_part.body_part & CHEST)
+
+		if(body_part.brutestate)
+			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_[body_part.brutestate]0", -used_layer))
+			if(!no_aux && body_part.aux_zone)
+				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_[body_part.brutestate]0", -used_layer))
+
+		if(body_part.burnstate)
+			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_0[body_part.burnstate]", -used_layer))
+			if(!no_aux && body_part.aux_zone)
+				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_0[body_part.burnstate]", -used_layer))
+
+		if(body_part.bandage)
+			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_b", -used_layer))
+			if(!no_aux && body_part.aux_zone)
+				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_b", -used_layer))
+
+		for(var/datum/wound/wound as anything in body_part.wounds)
+			if(!wound.mob_overlay)
+				continue
+			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_[wound.mob_overlay]", -DAMAGE_LAYER))
+		
+		var/used_offset = body_part.offset
+		if(used_offset in offsets)
+			damage_overlay.pixel_x += offsets[used_offset][1]
+			damage_overlay.pixel_y += offsets[used_offset][2]
+
+	if(!length(damage_overlay.overlays))
+		return
+
+	overlays_standing[DAMAGE_LAYER] = damage_overlay
 	apply_overlay(DAMAGE_LAYER)
-	apply_overlay(LEG_DAMAGE_LAYER)
-	apply_overlay(ARM_DAMAGE_LAYER)
-
 
 /* --------------------------------------- */
 

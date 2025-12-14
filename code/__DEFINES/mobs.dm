@@ -400,47 +400,45 @@
 /// Total number of layers for mob overlays
 /// KEEP THIS UP-TO-DATE OR SHIT WILL BREAK
 /// Also consider updating layers_to_offset
-#define TOTAL_LAYERS 46
+#define TOTAL_LAYERS 45
 
 /// Layer for stink particles
-#define SMELL_LAYER 45
+#define SMELL_LAYER 44
 /// Mutations. Tk headglows, cold resistance glow, etc
-#define MUTATIONS_LAYER 44
+#define MUTATIONS_LAYER 43
 /// Cloaks that layer behind
-#define CLOAK_BEHIND_LAYER 43
+#define CLOAK_BEHIND_LAYER 42
 /// Gloves that layer behind
-#define HANDS_BEHIND_LAYER 42
+#define HANDS_BEHIND_LAYER 41
 /// Belts that layer behind
-#define BELT_BEHIND_LAYER 41
+#define BELT_BEHIND_LAYER 40
 /// Back items that layer behind
-#define BACK_BEHIND_LAYER 40
+#define BACK_BEHIND_LAYER 39
 /// Certain mutantrace features (tail when looking south) that must appear behind the body parts
-#define BODY_BEHIND_LAYER 39
+#define BODY_BEHIND_LAYER 38
 /// Things under the bodyparts but above the "behind body" layer
-#define BODY_UNDER_LAYER 38
+#define BODY_UNDER_LAYER 37
 /// Layer for bodyparts that should appear behind every other bodypart - Mostly, legs when facing WEST or EAST
-#define BODYPARTS_LOW_LAYER 37
+#define BODYPARTS_LOW_LAYER 36
 /// Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
-#define BODYPARTS_LAYER 36
+#define BODYPARTS_LAYER 35
 /// Certain mutantrace features (snout, body markings) that must appear above the body parts
-#define BODY_ADJ_LAYER 35
+#define BODY_ADJ_LAYER 34
 /// Underwear, undershirts, socks, eyes, lips(makeup)
-#define BODY_LAYER 34
+#define BODY_LAYER 33
 /// Mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
-#define FRONT_MUTATIONS_LAYER 33
+#define FRONT_MUTATIONS_LAYER 32
 /// Damage indicators (cuts and burns)
-#define DAMAGE_LAYER 32
+#define DAMAGE_LAYER 31
 /// Pants layer
-#define PANTS_LAYER 31
+#define PANTS_LAYER 30
 /// Shoes layer
-#define SHOES_LAYER	30
+#define SHOES_LAYER	29
 /// Pants that go above shoes (skirts)
-#define PANTS_HIGH_LAYER 29
-/// Leg damage layer
-#define LEG_DAMAGE_LAYER 28
+#define PANTS_HIGH_LAYER 28
 /// Shirt layer
 #define SHIRT_LAYER 27
-/// Layer for bodyparts that should appear above every other bodypart - used for hands and arms
+/// Layer for bodyparts that should appear above every other bodypart - used for arms when facing EAST / WEST
 #define BODYPARTS_HIGH_LAYER 26
 /// Gloves layer
 #define GLOVES_LAYER 24
@@ -456,8 +454,8 @@
 #define BELT_LAYER 20
 /// Things that layer under cloaks
 #define UNDER_CLOAK_LAYER 19
-/// Arm damage layer
-#define ARM_DAMAGE_LAYER 18
+/// Hands bodypart layer
+#define BODYPARTS_HANDS_LAYER 18
 /// Ring layer
 #define RING_LAYER 17
 /// Glasses layer
