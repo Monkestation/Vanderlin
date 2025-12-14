@@ -763,7 +763,7 @@
 
 /obj/structure/mannequin/male/bodypartsNightmare()
 	var/isfemale = (gender == FEMALE ? "f" : "m")
-	var/mutable_appearance/bodyparts = mutable_appearance('icons/obj/mannequin.dmi', "mannequin_arms[isfemale]", -BODYPARTS_HIGH_LAYER)
+	var/mutable_appearance/bodyparts = mutable_appearance('icons/obj/mannequin.dmi', "mannequin_arms[isfemale]", -BODYPARTS_HANDS_LAYER)
 
 	return bodyparts
 
