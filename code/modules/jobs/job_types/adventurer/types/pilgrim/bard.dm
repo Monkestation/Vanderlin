@@ -67,7 +67,7 @@
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backpack_contents = list(/obj/item/flint = 1)
 
-/datum/outfit/adventurer/bard/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/bard/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(prob(30))
 		gloves = /obj/item/clothing/gloves/fingerless

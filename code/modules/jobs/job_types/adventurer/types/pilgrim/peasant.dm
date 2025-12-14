@@ -61,7 +61,7 @@
 	)
 
 
-/datum/outfit/adventurer/peasant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/peasant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/random, /obj/item/clothing/shirt/shortshirt/colored/random)
 	head = pick(/obj/item/clothing/head/strawhat, /obj/item/clothing/head/armingcap, /obj/item/clothing/head/headband/colored/red, /obj/item/clothing/head/roguehood/colored/random)

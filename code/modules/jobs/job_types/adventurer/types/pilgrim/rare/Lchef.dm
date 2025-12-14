@@ -49,7 +49,7 @@
 	beltr = /obj/item/cooking/pan
 	beltl = /obj/item/weapon/knife/cleaver
 
-/datum/outfit/adventurer/masterchef/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/masterchef/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	var/packcontents = pickweight(list("Honey" = 1, "Truffles" = 1, "Bacon" = 1))
 	switch(packcontents)

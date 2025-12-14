@@ -43,6 +43,6 @@
 	beltl = /obj/item/weapon/knife/villager
 	backpack_contents = list(/obj/item/flint = 1)
 
-/datum/outfit/adventurer/woodcutter/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/woodcutter/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	head = pick(/obj/item/clothing/head/hatfur, /obj/item/clothing/head/hatblu, /obj/item/clothing/head/brimmed)

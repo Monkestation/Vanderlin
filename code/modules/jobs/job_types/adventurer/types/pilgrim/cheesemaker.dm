@@ -51,6 +51,6 @@
 		/obj/item/book/yeoldecookingmanual = 1
 	)
 
-/datum/outfit/adventurer/cheesemaker/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/cheesemaker/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	shoes = pick(/obj/item/clothing/shoes/simpleshoes, /obj/item/clothing/shoes/boots/leather)

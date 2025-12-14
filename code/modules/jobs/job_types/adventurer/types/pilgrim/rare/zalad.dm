@@ -73,7 +73,7 @@
 	neck = /obj/item/clothing/neck/shalal/emir
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/veryrich = 1)
 
-/datum/outfit/adventurer/zalad/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/zalad/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == FEMALE)
 		shirt = /obj/item/clothing/shirt/dress/silkdress/colored/black

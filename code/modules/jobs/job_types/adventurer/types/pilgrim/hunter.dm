@@ -61,7 +61,7 @@
 		/obj/item/flashlight/flare/torch/lantern = 1
 	)
 
-/datum/outfit/adventurer/hunter/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/hunter/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/random, /obj/item/clothing/shirt/shortshirt/colored/random)
 	shoes = pick(/obj/item/clothing/shoes/simpleshoes, /obj/item/clothing/shoes/boots/leather)

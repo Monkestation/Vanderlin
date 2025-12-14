@@ -43,7 +43,7 @@
 	beltr = /obj/item/cooking/pan
 	beltl = /obj/item/flint
 
-/datum/outfit/adventurer/fisher/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/fisher/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/random

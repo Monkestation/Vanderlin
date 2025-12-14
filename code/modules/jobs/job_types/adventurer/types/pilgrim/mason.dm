@@ -49,7 +49,7 @@
 	beltr = /obj/item/weapon/chisel
 	backl = /obj/item/storage/backpack/backpack
 
-/datum/outfit/adventurer/mason/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/mason/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	head = pick(/obj/item/clothing/head/hatfur, /obj/item/clothing/head/hatblu)
 	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/random, /obj/item/clothing/shirt/tunic/colored/random)

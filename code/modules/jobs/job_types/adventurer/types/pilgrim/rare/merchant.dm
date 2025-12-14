@@ -60,7 +60,7 @@
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	ring = /obj/item/clothing/ring/silver
 
-/datum/outfit/adventurer/merchant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/merchant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == FEMALE)
 		armor = /obj/item/clothing/armor/gambeson/heavy/dress

@@ -53,7 +53,7 @@
 		/obj/item/weapon/chisel = 1
 	)
 
-/datum/outfit/adventurer/grandmastermason/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/grandmastermason/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.dna.species.id == SPEC_ID_DWARF)
 		head = /obj/item/clothing/head/helmet/leather/minershelm

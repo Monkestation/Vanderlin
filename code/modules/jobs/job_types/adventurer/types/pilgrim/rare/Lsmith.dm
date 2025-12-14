@@ -79,7 +79,7 @@
 		/obj/item/storage/crucible/random = 1
 	)
 
-/datum/outfit/adventurer/masterblacksmith/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/masterblacksmith/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == FEMALE)
 		shoes = /obj/item/clothing/shoes/shortboots

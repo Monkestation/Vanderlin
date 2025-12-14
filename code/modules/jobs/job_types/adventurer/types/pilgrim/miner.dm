@@ -51,7 +51,7 @@
 		/obj/item/weapon/knife/villager = 1
 	)
 
-/datum/outfit/adventurer/miner/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/pilgrim/miner/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	head = pick(/obj/item/clothing/head/armingcap, /obj/item/clothing/head/headband/colored/red, /obj/item/clothing/head/roguehood/colored/random)
 	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/random, /obj/item/clothing/shirt/shortshirt/colored/random)
