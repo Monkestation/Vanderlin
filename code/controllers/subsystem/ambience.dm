@@ -111,9 +111,9 @@ SUBSYSTEM_DEF(ambience)
 	if(!client || isobserver(client.mob))
 		return
 
-	var/datum/antagonist/maniac/maniac = mind?.has_antag_datum(/datum/antagonist/maniac)
+	var/datum/component/theme_music/theme_music = src.GetComponent(/datum/component/theme_music)
 
-	if(!can_hear() || maniac?.music_enabled)
+	if(!can_hear() || theme_music?.music_enabled)
 		cancel_looping_ambience()
 		return
 

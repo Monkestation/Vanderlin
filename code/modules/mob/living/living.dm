@@ -742,10 +742,13 @@
 	set hidden = 1
 	if(stat)
 		return
-	if(pulledby)
-		to_chat(src, span_warning("I'm grabbed!"))
-		resist_grab()
-		return
+	if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
+		var/fail_resist = resist_grab()
+		if(fail_resist)
+			to_chat(src, span_warning("I failed to resist their grab and i can't get up!"))
+			return FALSE
+		else
+			to_chat(src, span_notice("I resisted their grab!"))
 	if(resting)
 		if(!HAS_TRAIT(src, TRAIT_FLOORED))
 			visible_message(span_notice("[src] begins standing up."), span_notice("I begin to stand up."))
@@ -830,11 +833,16 @@
 			set_resting(TRUE, silent = TRUE)
 		return
 
+	if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
+		var/fail_resist = resist_grab()
+		if(fail_resist)
+			return
+
 	set_body_position(STANDING_UP)
 	set_lying_angle(0)
 
 /mob/living/proc/rest_checks_callback()
-	if(resting || body_position == STANDING_UP || HAS_TRAIT(src, TRAIT_FLOORED) || pulledby)
+	if(resting || body_position == STANDING_UP || HAS_TRAIT(src, TRAIT_FLOORED))
 		return FALSE
 	return TRUE
 
@@ -1308,7 +1316,12 @@
 	changeNext_move(CLICK_CD_MELEE)
 
 	if(prob(counter_chance))
-		var/counter_type = pick(list("knee" = 45, "elbow" = 45, "stomp" = 10))
+		var/fist_skill = get_skill_level(/datum/skill/combat/unarmed)
+		var/counter_type
+		if(fist_skill >= 4)
+			counter_type = pick(list("knee" = 45, "elbow" = 45,  "stomp" = 10))
+		else
+			counter_type = pick(list("knee" = 50, "elbow" = 50))
 		switch(counter_type)
 			if("knee")
 				visible_message("<span class='danger'>[src] drives a knee into [attacker]'s midsection!</span>", \
@@ -1478,19 +1491,31 @@
 		if(G.chokehold)
 			combat_modifier -= 0.1 // BUFF: Reduced chokehold penalty (was 0.15)
 
-	resist_chance += ((((STASTR - L.STASTR)/4) + wrestling_diff) * 5 + rand(-5, 5))
+	resist_chance += ((((STASTR - L.STASTR)/3) + wrestling_diff) * 5)
 	resist_chance *= combat_modifier * stamina_factor * (1/positioning_modifier)
-	resist_chance = clamp(resist_chance, 8, 90)
+	resist_chance = clamp(resist_chance, 5, 95)
 
 	var/time_grabbed = S_TIMER_COOLDOWN_TIMELEFT(src, "broke_free")
 	if(time_grabbed)
 		resist_chance += min(time_grabbed / 50, 20) // Up to +20% after long grabs
 
 	if(moving_resist) //we resisted by trying to move
-		client?.move_delay = world.time + 20
+		client?.move_delay = world.time + 50
 
-	adjust_stamina(rand(3,7))
-	pulledby.adjust_stamina(rand(2,6))
+	var/pain_factor = 1
+	if(istype(pulledby, /mob/living/carbon))
+		var/mob/living/carbon/C = pulledby
+		var/pain = C.get_pain_factor()
+		if(pain)
+			if(resist_chance <= 20)
+				pain_factor += (pain * 1.5)
+			else
+				pain_factor += (pain * 1.2)
+
+	resist_chance *= pain_factor
+
+	adjust_stamina(rand(2,5))
+	pulledby.adjust_stamina(rand(2,5))
 	if(iscarbon(pulledby))
 		var/mob/living/carbon/carbon_pulledby = pulledby
 		carbon_pulledby.add_grab_fatigue(0.5)

@@ -3,7 +3,6 @@
 	tutorial = "Tinkering Dwarves that like to blow things up."
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/adventurer/dbomb
-	min_pq = 0
 	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/adventurer/dbomb/pre_equip(mob/living/carbon/human/H)

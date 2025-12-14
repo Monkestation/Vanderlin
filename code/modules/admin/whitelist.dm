@@ -21,7 +21,8 @@ GLOBAL_PROTECT(whitelist)
 		load_whitelist()
 #ifdef TESTSERVER
 	var/plevel = check_patreon_lvl(ckey)
-	if(plevel >= 3)
+	var/tlevel = check_twitch_lvl(ckey)
+	if(plevel >= 3 || tlevel >= 1)
 		return TRUE
 #endif
 	return (ckey in GLOB.whitelist)

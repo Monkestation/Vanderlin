@@ -4,7 +4,6 @@
 	allowed_races = list(SPEC_ID_RAKSHARI)
 	outfit = /datum/outfit/mercenary/desert_pirate
 	total_positions = 3
-	min_pq = 0
 	category_tags = list(CTAG_MERCENARY)
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'

@@ -4,7 +4,7 @@
 	outfit = /datum/outfit/bandit/sawbones
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/cmode/antag/CombatBandit3.ogg'
-	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_MEDICAL)
+	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MEDICAL)
 
 /datum/outfit/bandit/sawbones/pre_equip(mob/living/carbon/human/H)
 	..()

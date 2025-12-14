@@ -90,10 +90,6 @@
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
 
-/datum/reagent/water/gross/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method == INGEST) // Make sure you DRANK the toxic water before giving damage
-		..()
-
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M)
 	..()
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER )) // lets orcs and goblins drink bogwater
@@ -159,20 +155,24 @@
 	O.extinguish()
 	O.acid_level = 0
 
-
 	if(istype(O, /obj/item/bin))
 		var/obj/item/bin/RB = O
 		if(!RB.kover)
 			if(RB.reagents)
 				RB.reagents.add_reagent(src.type, reac_volume)
-
 	else if(istype(O, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/RB = O
 		if(RB.reagents)
 			RB.reagents.add_reagent(src.type, reac_volume)
-
 	else if(istype(O, /obj/item/natural/cloth))
 		O.wash(CLEAN_WASH)
+	else if(istype(O, /obj/item/clothing))
+		var/obj/item/clothing/O_clothing = O
+		if(O_clothing.wetable)
+			if(!holder.has_reagent(/datum/reagent/water/gross))
+				O_clothing.wet.add_water(20, dirty = FALSE)
+			else
+				O_clothing.wet.add_water(20, dirty = TRUE)
 /*
  *	Water reaction to a mob
  */
