@@ -136,7 +136,6 @@
 	additional_items = list(/obj/item/ingot/bronze)
 	created_item = /obj/item/weapon/whip/urumi/bronze
 
-
 /datum/anvil_recipe/weapons/bronze/mace
 	name = "Bronze Mace (+ Stick)"
 	additional_items = list(/obj/item/grown/log/tree/stick)
