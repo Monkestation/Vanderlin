@@ -131,28 +131,22 @@ GLOBAL_PROTECT(no_child_icons)
 		if(!body_part.dmg_overlay_type || body_part.skeletonized)
 			continue
 
-		var/used_layer = DAMAGE_LAYER
-
-		// This sucks but its not as bad as having 3 lists of overlays
-		if(body_part.body_part & ARMS && dir & (EAST | WEST))
-			used_layer = BODYPARTS_HIGH_LAYER - 0.1 // :(((
-
 		var/no_aux = (hidechest && body_part.body_part & CHEST)
 
 		if(body_part.brutestate)
-			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_[body_part.brutestate]0", -used_layer))
+			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_[body_part.brutestate]0", -DAMAGE_LAYER))
 			if(!no_aux && body_part.aux_zone)
-				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_[body_part.brutestate]0", -used_layer))
+				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_[body_part.brutestate]0", -DAMAGE_LAYER))
 
 		if(body_part.burnstate)
-			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_0[body_part.burnstate]", -used_layer))
+			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_0[body_part.burnstate]", -DAMAGE_LAYER))
 			if(!no_aux && body_part.aux_zone)
-				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_0[body_part.burnstate]", -used_layer))
+				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_0[body_part.burnstate]", -DAMAGE_LAYER))
 
 		if(body_part.bandage)
-			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_b", -used_layer))
+			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_b", -DAMAGE_LAYER))
 			if(!no_aux && body_part.aux_zone)
-				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_b", -used_layer))
+				damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.aux_zone]_b", -DAMAGE_LAYER))
 
 		for(var/datum/wound/wound as anything in body_part.wounds)
 			if(!wound.mob_overlay)
