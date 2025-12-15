@@ -376,7 +376,6 @@
 	//The consequences of coded sexual dimorphism.
 	var/is_female = (gender == FEMALE ? TRUE : FALSE)
 	var/clothing_layer
-	var/fitting
 	//If we run the sleeve formatting proc
 	var/sleeves = FALSE
 	switch(slot_worn_on)
@@ -428,10 +427,6 @@
 
 	if(worn_thing.alternate_worn_layer)
 		clothing_layer = worn_thing.alternate_worn_layer
-
-	if(istype(worn_thing, /obj/item/clothing/pants))
-		var/obj/item/clothing/pants/C = worn_thing
-		fitting = C.fitted
 
 	var/added_overlays = worn_thing.build_worn_icon(default_layer = clothing_layer, default_icon_file = overlay_icon, isinhands = FALSE, add_boob = is_female)
 	//Cloaks refuse to be shown behind the mannequin unless they are applied to the underlays.

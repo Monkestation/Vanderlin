@@ -96,7 +96,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	item_weight = 2.2
 
-	alternate_worn_layer = ARMOR_LAYER
+	alternate_worn_layer = SHIRT_HIGH_LAYER
 
 /obj/item/clothing/armor/leather/vest/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

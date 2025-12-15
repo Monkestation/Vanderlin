@@ -21,7 +21,6 @@
 	desc = ""
 	icon_state = "shortshirt"
 	item_state = "shortshirt"
-	r_sleeve_status = SLEEVE_TORN
-	l_sleeve_status = SLEEVE_TORN
+	sleeved = null
 	body_parts_covered = CHEST|VITALS
 	torn_sleeve_number = 2

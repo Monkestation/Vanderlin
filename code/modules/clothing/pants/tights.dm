@@ -45,10 +45,6 @@
 
 /obj/item/clothing/pants/tights/colored/vagrant/Initialize()
 	color = pick(CLOTHING_MUD_BROWN, CLOTHING_OLD_LEATHER, CLOTHING_SPRING_GREEN, CLOTHING_BARK_BROWN, CLOTHING_CANVAS	)
-	if(prob(50))
-		r_sleeve_status = SLEEVE_NORMAL
-		l_sleeve_status = SLEEVE_TORN
-		body_parts_covered = GROIN|LEG_RIGHT
 	return ..()
 
 /obj/item/clothing/pants/tights/colored/guard

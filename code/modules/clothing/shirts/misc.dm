@@ -3,8 +3,7 @@
 	desc = "A sleeveless shirt woven of glossy material."
 	icon_state = "shadowshirt"
 	item_state = "shadowshirt"
-	r_sleeve_status = SLEEVE_TORN
-	l_sleeve_status = SLEEVE_TORN
+	sleeved = null
 	body_parts_covered = CHEST|VITALS
 	allowed_race = RACES_PLAYER_ELF_ALL
 	allowed_sex = list(FEMALE)
