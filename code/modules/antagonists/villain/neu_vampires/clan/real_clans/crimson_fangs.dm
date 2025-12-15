@@ -25,3 +25,6 @@
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_NOENERGY,
 	)
+
+/datum/clan/crimson_fang/get_blood_preference_string()
+	return "the blood of your kindred or nobility"

@@ -18,4 +18,4 @@
 	H.AddComponent(/datum/component/vampire_disguise)
 
 /datum/clan/caitiff/get_blood_preference_string()
-	return "any which is neither holy nor kindred"
+	return "any blood that is neither holy nor kindred"

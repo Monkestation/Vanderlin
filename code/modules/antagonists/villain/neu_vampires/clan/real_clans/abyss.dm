@@ -19,5 +19,5 @@
 /datum/clan/abyss/get_downside_string()
 	return "burn in sunlight, and in the presence of the Ten"
 
-/datum/clan/caitiff/get_blood_preference_string()
+/datum/clan/abyss/get_blood_preference_string()
 	return "the blood of all living but the holy"

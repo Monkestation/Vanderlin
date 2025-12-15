@@ -16,25 +16,23 @@
 		return 0
 	if(!force && world.time < last_drinkblood_use + 2 SECONDS)
 		return 0
-	if(victim.dna?.species && (NOBLOOD in victim.dna.species.species_traits))
+	if(victim.blood_volume <= 0 || HAS_TRAIT(victim, TRAIT_HUSK) || (victim.dna?.species && (NOBLOOD in victim.dna.species.species_traits)))
 		to_chat(src, span_warning("Sigh. No blood."))
 		return 0
-	if(victim.blood_volume <= 0)
-		to_chat(src, span_warning("Sigh. No blood."))
-		return 0
-	if(reagents.total_volume >= reagents.maximum_volume)
+	var/datum/antagonist/vampire/VDrinker = mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/VVictim = victim.mind?.has_antag_datum(/datum/antagonist/vampire)
+	//VDrinkers get exception to this because they can still drink vitae
+	if(!VDrinker && ingest && reagents.total_volume >= reagents.maximum_volume)
 		to_chat(src, span_warning("Can't drink any more..."))
 		return 0
-	var/mob/living/carbon/human/human_victim
-	if(ishuman(victim))
-		human_victim = victim
-		human_victim.add_bite_animation()
 
 	last_drinkblood_use = world.time
 	changeNext_move(CLICK_CD_MELEE)
 
-	var/datum/antagonist/vampire/VDrinker = mind?.has_antag_datum(/datum/antagonist/vampire)
-	var/datum/antagonist/vampire/VVictim = victim.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/mob/living/carbon/human/human_victim
+	if(ishuman(victim))
+		human_victim = victim
+		human_victim.add_bite_animation()
 
 	for(var/atom/I in victim.contents)
 		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
@@ -42,7 +40,7 @@
 			return 0
 
 	var/datum/blood_type/victim_blood = victim.get_blood_type()
-	var/list/blood_data = victim_blood.get_blood_data()
+	var/list/blood_data = victim_blood?.get_blood_data(victim)
 	var/used_vitae = 0 // sets blood data at the end of the proc
 
 	// You need the blooddrinker trait. otherwise, you'll throw up. A side effect of this is compatibility with non-human vampires
@@ -52,7 +50,7 @@
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
 	else
 		if(VDrinker)
-			if(!victim.mind) // We're drinking from an NPC or a person who disconnected from the game
+			if(!victim.mind) // We're drinking from an NPC
 				if(victim.bloodpool >= 250)
 					used_vitae = 250
 				else
@@ -86,7 +84,7 @@
 							INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob/living/carbon/human, vampire_conversion_prompt), src)
 
 	var/blood_purity = 1 // what % of the drink_amt are we actually drinking as blood?
-	if(ingest)
+	if(ingest && reagents.total_volume < reagents.maximum_volume)
 		if(victim.reagents.total_volume)
 			var/list/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood)
 			var/trans_volume = victim.reagents.total_volume
@@ -97,8 +95,8 @@
 				victim.reagents.trans_to(src, drink_amt * (1 - blood_purity), 1, transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
 		//this is how much is actually gonna be added as a reagent. we can't just fill them with 1:1 blood values
 		var/blood_to_drink = min(victim.blood_volume, drink_amt * blood_purity) * 0.2
-		blood_data["vitae"] = used_vitae / blood_to_drink
-		var/datum/reagents/holder = new(blood_to_drink)
+		blood_data?["vitae"] = used_vitae / blood_to_drink
+		var/datum/reagents/holder = new(maximum = blood_to_drink)
 		var/datum/blood_type/BT = get_blood_type()
 		// if someone adds kool aid as a blood type then blood_data here might need some work
 		holder.add_reagent(BT.reagent_type, blood_to_drink, blood_data, no_react = TRUE)
@@ -107,7 +105,6 @@
 		if(used_vitae > 0)
 			adjust_bloodpool(used_vitae)
 			clan?.handle_bloodsuck(src, blood_data["preferences"])
-
 
 	if(used_vitae > 0)
 		victim.adjust_bloodpool(VVictim ? -used_vitae * 2 : -used_vitae) //twice the loss
