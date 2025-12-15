@@ -39,12 +39,6 @@
 	icon_state = "sstatue[pick(1,2)]"
 	enchant(/datum/enchantment/silver)
 
-/obj/item/statue/bronze
-	name = "bronze statue"
-	icon_state = "bstatue1"
-	smeltresult = /obj/item/ingot/bronze
-	sellprice = 25
-
 /*	..................   Misc   ................... */
 /obj/item/statue/silver/gnome
 	name = "petrified gnome"
@@ -390,13 +384,18 @@
 
 /*	.................. Bronze  ................... */
 
+/obj/item/statue/bronze
+	name = "bronze statue"
+	icon_state = "bstatue1"
+	smeltresult = /obj/item/ingot/bronze
+	sellprice = 25
+
 /obj/item/statue/bronze/volf
 	name = "bronze volf bust"
 	desc = "A bronzeen bust resembling a volf's head."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "volf_bronze"
 	dropshrink = 0.7
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 30
 
 /obj/item/statue/bronze/volf/Initialize()
@@ -408,7 +407,6 @@
 	desc = "A large decorative bronze urn."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "urn_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 50
 
 /obj/item/statue/bronze/urn/Initialize()
@@ -420,7 +418,6 @@
 	desc = "A large decorative bronze vase."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "vase_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 15
 
 /obj/item/statue/bronze/vase/Initialize()
@@ -432,7 +429,6 @@
 	desc = "A large decorative bronze vase. It's quite fancy!"
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "fancyvase_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 30
 
 /obj/item/statue/bronze/vasefancy/Initialize()
@@ -444,7 +440,6 @@
 	desc = "A bust made out of bronze."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "bust_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 30
 
 /obj/item/statue/bronze/bust/Initialize()
@@ -478,7 +473,6 @@
 	desc =  "An obelisk made out of bronze."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "obelisk_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 25
 
 /obj/item/statue/bronze/obelisk/Initialize()
@@ -490,7 +484,6 @@
 	desc =  "A tablet made out of bronze."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "tablet_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 25
 
 /obj/item/statue/bronze/tablet/Initialize()
@@ -513,7 +506,6 @@
 	desc =  "An elven totem made out of bronze."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "elven_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	sellprice = 25
 
 /obj/item/statue/bronze/totem/Initialize()
