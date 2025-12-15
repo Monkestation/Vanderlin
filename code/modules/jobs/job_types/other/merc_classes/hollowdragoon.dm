@@ -26,7 +26,7 @@
 	beltl = /obj/item/weapon/sword
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(/obj/item/weapon/sword::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor, /obj/item/weapon/knife/dagger)
 
 /datum/outfit/mercenary/dragoon/pre_equip(mob/living/carbon/human/H)

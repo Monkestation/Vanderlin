@@ -54,8 +54,9 @@
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR RELIQUARY PIECE.", "WIELD THEM IN HIS NAME.", gear)
 	switch(weapon_choice)
 		if("Retribution (Rapier)")
-			spawned.put_in_hands(new /obj/item/weapon/sword/rapier/psy/relic(spawned), TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BELT_L, TRUE)
+			var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/rapier/psy/relic
+			spawned.put_in_hands(new sword_type(spawned), TRUE)
+			spawned.equip_to_slot_or_del(new sword_type:associated_scabbard_type, ITEM_SLOT_BELT_L, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 		if("Daybreak (Whip)")
 			spawned.put_in_hands(new /obj/item/weapon/whip/psydon/relic(spawned), TRUE)

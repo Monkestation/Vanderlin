@@ -48,10 +48,11 @@
 	if(prob(50))
 		cloak = /obj/item/clothing/cloak/raincloak/colored/red
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/knife/dagger/steel/special
+	var/const/obj/item/weapon/knife_type = /obj/item/weapon/knife/dagger/steel/special
+	beltr = knife_type
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backpack_contents = list(/obj/item/flint)
-	scabbards = list(/obj/item/weapon/scabbard/knife)
+	scabbards = list(knife_type::associated_scabbard_type)
 	if(H.dna?.species?.id == SPEC_ID_DWARF)
 		H.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)

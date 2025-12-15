@@ -62,10 +62,11 @@
 	shirt = /obj/item/clothing/armor/chainmail
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/boots/armor
-	beltl = /obj/item/weapon/sword/sabre
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/sabre
+	beltl = sword_type
 	beltr = /obj/item/storage/keyring/veteran
 	backr = /obj/item/storage/backpack/satchel/black
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 	cloak = /obj/item/clothing/cloak/half/vet
 	belt = /obj/item/storage/belt/leather/black
 	H.cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'

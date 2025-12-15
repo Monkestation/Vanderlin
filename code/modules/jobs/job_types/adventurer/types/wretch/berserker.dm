@@ -18,12 +18,13 @@
 	belt = /obj/item/storage/belt/leather
 	neck =	/obj/item/clothing/neck/chaincoif/iron
 	armor = /obj/item/clothing/armor/leather/advanced
+	var/const/obj/item/weapon/knife_type = /obj/item/weapon/knife/hunting
 	backpack_contents = list(
-		/obj/item/weapon/knife/hunting = 1,
+		(knife_type) = 1,
 		/obj/item/flashlight/flare/torch/lantern = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/weapon/scabbard/knife = 1,
+		knife_type::associated_scabbard_type = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,	//Small health vial
 	)
 	H.add_spell(/datum/action/cooldown/spell/undirected/barbrage)

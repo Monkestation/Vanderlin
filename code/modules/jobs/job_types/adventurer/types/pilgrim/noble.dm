@@ -68,23 +68,15 @@
 		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade, \
 		)
 	var/choice = H.select_equippable(H, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
-	if(!choice)
+	if(!choice || !selectable[choice])
 		return
-		//Yeah this is copied from how lieutenant does it which in turn was copied from how rk does it lmao
-	var/shield_type = null
-	switch(choice)
-		if("Dagger")
-			H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-			var/scabbard = new /obj/item/weapon/scabbard/knife/noble()
-			if(!H.equip_to_appropriate_slot(scabbard))
-				qdel(scabbard)
-		if("Rapier")
-			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-			var/scabbard = new /obj/item/weapon/scabbard/sword/noble()
-			if(!H.equip_to_appropriate_slot(scabbard))
-				qdel(scabbard)
-		if("Cane Blade")
-			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-			var/scabbard = new /obj/item/weapon/scabbard/cane()
-			if(!H.equip_to_appropriate_slot(scabbard))
-				qdel(scabbard)
+	var/obj/item/weapon/chosen_weapon_type = selectable[choice]
+	var/used_skill = chosen_weapon_type::associated_skill // get us up to apprentice in our chosen weapon's skill
+	if(used_skill)
+		H.clamped_adjust_skillrank(used_skill, 2, 2, TRUE)
+	var/obj/item/weapon/scabbard/used_scabbard_type = chosen_weapon_type::associated_scabbard_type
+	if(used_scabbard_type::fancy_variant) // upgrade from base -> noble, if available
+		used_scabbard_type = used_scabbard_type::fancy_variant
+	if(used_scabbard_type)
+		var/obj/item/weapon/scabbard/scabbard = new used_scabbard_type()
+		H.equip_to_appropriate_slot(scabbard, delete_on_fail = TRUE)

@@ -15,8 +15,9 @@
 	belt = /obj/item/storage/belt/leather/mercenary/black
 	armor = /obj/item/clothing/armor/cuirass/rare/elven
 	backl = /obj/item/storage/backpack/satchel
-	beltl = /obj/item/weapon/knife/dagger/steel/special
-	scabbards = list(/obj/item/weapon/scabbard/knife)
+	var/const/obj/item/weapon/knife_type = /obj/item/weapon/knife/dagger/steel/special
+	beltl = knife_type
+	scabbards = list(knife_type::associated_scabbard_type)
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	pants = /obj/item/clothing/pants/trou/leather
 	neck = /obj/item/clothing/neck/chaincoif

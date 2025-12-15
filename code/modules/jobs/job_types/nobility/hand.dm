@@ -80,8 +80,9 @@
 	backpack_contents = list(/obj/item/weapon/knife/dagger/steel = 1, /obj/item/storage/keyring/hand = 1, /obj/item/paper/scroll/frumentarii/roundstart = 1)
 	armor = /obj/item/clothing/armor/leather/jacket/handjacket
 	pants = /obj/item/clothing/pants/tights/colored/black
-	beltr = /obj/item/weapon/sword/rapier/dec
-	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
+	var/const/obj/item/weapon/sword/sword_type = /obj/item/weapon/sword/rapier/dec
+	beltr = sword_type
+	scabbards = list(sword_type::associated_scabbard_type::fancy_variant::fancy_variant) // royal variant of sword scabbard. twice as fancy!
 	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)

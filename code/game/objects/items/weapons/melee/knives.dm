@@ -28,6 +28,7 @@
 	melt_amount = 50
 	sharpness = IS_SHARP
 	sellprice = 30
+	associated_scabbard_type = /obj/item/weapon/scabbard/knife
 
 	grid_height = 64
 	grid_width = 32

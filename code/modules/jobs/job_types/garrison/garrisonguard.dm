@@ -64,9 +64,10 @@
 	shirt = /obj/item/clothing/armor/gambeson
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/sword/short/iron
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/short/iron
+	beltr = sword_type
 	beltl = /obj/item/weapon/mace/cudgel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/rope/chain)
 
 
@@ -143,9 +144,10 @@
 	neck = /obj/item/clothing/neck/gorget
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
-	beltl = /obj/item/weapon/sword/short/iron
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/short/iron
+	beltl = sword_type
 	beltr = /obj/item/weapon/mace/cudgel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/rope/chain)
 
 	//Stats for class

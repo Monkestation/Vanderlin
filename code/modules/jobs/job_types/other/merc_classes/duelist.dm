@@ -41,15 +41,17 @@
 		H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/cooking, 3, TRUE)
+	var/obj/item/weapon/sword_type = null
 	var/rando = rand(1,6)
 	switch(rando)
 		if(1 to 2)
-			beltl = /obj/item/weapon/sword/rapier
+			sword_type = /obj/item/weapon/sword/rapier
 		if(3 to 4)
-			beltl = /obj/item/weapon/sword/rapier/silver //Correct, They have a chance to receive a silver rapier, due to them being from Valoria.
+			sword_type = /obj/item/weapon/sword/rapier/silver //Correct, They have a chance to receive a silver rapier, due to them being from Valoria.
 		if(5 to 6)
-			beltl = /obj/item/weapon/sword/rapier/dec
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+			sword_type = /obj/item/weapon/sword/rapier/dec
+	beltl = sword_type
+	scabbards = list(sword_type::associated_scabbard_type)
 	H.merctype = 8
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	H.change_stat(STATKEY_END, 2)

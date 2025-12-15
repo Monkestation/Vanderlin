@@ -24,10 +24,11 @@
 	shirt = shirt_type
 	shoes = /obj/item/clothing/shoes/boots/armor/light
 	belt = /obj/item/storage/belt/leather/mercenary
-	beltr = /obj/item/weapon/knife/hunting
+	var/const/obj/item/weapon/knife_type = /obj/item/weapon/knife/hunting
+	beltr = knife_type
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	backl = /obj/item/storage/backpack/backpack
-	scabbards = list(/obj/item/weapon/scabbard/knife)
+	scabbards = list(knife_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor=1)
 	if(H.mind)
 		H.adjust_skillrank(/datum/skill/labor/mining, 3, TRUE)

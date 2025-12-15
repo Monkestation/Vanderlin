@@ -96,24 +96,23 @@
 		"Sword" = /obj/item/weapon/sword/iron, \
 		)
 	var/choice = H.select_equippable(H, selectable, time_limit = 1 MINUTES, message = "Choose your secondary weapon", title = "LIEUTENANT")
-	if(!choice)
+	if(!choice || !selectable[choice])
 		return
+	var/obj/item/weapon/chosen_weapon_type = selectable[choice] // only gets the compiled in skill so you better hope it isnt changed at runtime
+	H.clamped_adjust_skillrank(chosen_weapon_type::associated_skill, 3, 3, TRUE) // get us up to expert in our chosen weapon's skill
 	//yeah this is copied from how royal knights do it
-	var/shield_type = null
+	var/obj/item/weapon/shield/shield_type = null
 	switch(choice)
 		if("Flail")
-			H.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 2, 3, TRUE)
 			shield_type = new /obj/item/weapon/shield/wood()
 		if("Spear")
-			H.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 3, TRUE)
 			shield_type = new /obj/item/weapon/shield/tower/buckleriron()
 		if("Sword")
-			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
 			shield_type = new /obj/item/weapon/shield/heater()
-			var/scabbard = new /obj/item/weapon/scabbard/sword()
-			if(!H.equip_to_appropriate_slot(scabbard))
-				qdel(scabbard)
+	var/scabbard_type = chosen_weapon_type::associated_scabbard_type
+	if(scabbard_type) // not all weapons get scabbards, mostly just swords/knives
+		var/obj/item/weapon/scabbard/scabbard = new scabbard_type()
+		H.equip_to_appropriate_slot(scabbard, delete_on_fail = TRUE)
 	if(shield_type)//just incase
-		H.clamped_adjust_skillrank(/datum/skill/combat/shields, 3, 3, TRUE)
-		if(!H.equip_to_appropriate_slot(shield_type))
-			qdel(shield_type)
+		H.clamped_adjust_skillrank(shield_type::associated_skill, 3, 3, TRUE) // future-proofed in case shields ever get different skill types or something
+		H.equip_to_appropriate_slot(shield_type, delete_on_fail = TRUE)

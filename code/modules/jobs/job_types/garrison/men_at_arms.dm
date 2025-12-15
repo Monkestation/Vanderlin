@@ -70,10 +70,11 @@
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	neck = /obj/item/clothing/neck/bevor
 	gloves = /obj/item/clothing/gloves/leather
-	beltr = /obj/item/weapon/sword/arming
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/arming
+	beltr = sword_type
 	backr = /obj/item/weapon/polearm/spear/billhook
 	backl = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/weapon/knife/dagger/steel/special)
 	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)

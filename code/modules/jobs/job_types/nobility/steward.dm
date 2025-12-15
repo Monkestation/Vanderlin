@@ -44,9 +44,10 @@
 	armor = /obj/item/clothing/armor/gambeson/steward
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/steward
-	beltl = /obj/item/weapon/knife/dagger/steel
+	var/const/obj/item/weapon/knife_type = /obj/item/weapon/knife/dagger/steel
+	beltl = knife_type
 	backr = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/knife)
+	scabbards = list(knife_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/rich = 1, /obj/item/lockpickring/mundane = 1)
 
 	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)

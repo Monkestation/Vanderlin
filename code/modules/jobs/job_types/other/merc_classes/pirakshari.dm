@@ -29,7 +29,8 @@
 
 
 	pants = /obj/item/clothing/pants/trou/leather
-	beltr = /obj/item/weapon/sword/sabre
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/sabre
+	beltr = sword_type
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
 	beltl= /obj/item/ammo_holder/quiver/arrows
 	shoes = /obj/item/clothing/shoes/ridingboots
@@ -40,7 +41,7 @@
 	armor = /obj/item/clothing/armor/leather/splint
 	backr = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/neck/keffiyeh/colored/uncolored
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor, /obj/item/weapon/knife/dagger)
 
 	H.merctype = 1 //Desert Rider chain, 0 for Desert Rider Medal

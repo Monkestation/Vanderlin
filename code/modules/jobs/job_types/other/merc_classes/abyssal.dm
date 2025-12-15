@@ -16,8 +16,9 @@
 	armor = /obj/item/clothing/armor/medium/scale
 	head = /obj/item/clothing/head/helmet/winged
 	neck = /obj/item/clothing/neck/chaincoif/iron
-	beltl = /obj/item/weapon/sword/sabre/cutlass
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/sabre/cutlass
+	beltl = sword_type
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/key/mercenary, /obj/item/storage/belt/pouch/coins/poor, /obj/item/reagent_containers/food/snacks/fish/swordfish) //soul
 
 	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)

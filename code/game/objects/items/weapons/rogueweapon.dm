@@ -32,6 +32,8 @@
 	var/list/possible_enhancements
 	var/renamed_name
 	var/axe_cut = 0
+	// If we want to spawn a scabbard for this weapon, what type should we use?
+	var/obj/item/weapon/scabbard/associated_scabbard_type = null
 	istrainable = TRUE // You can train weapon skills on a dummy with these.
 
 /obj/item/weapon/Initialize(mapload)

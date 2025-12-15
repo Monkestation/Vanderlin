@@ -49,7 +49,7 @@
 	belt = /obj/item/storage/belt/leather/mercenary/black
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	beltr = /obj/item/weapon/sword/long/rider/steppe
-	beltl= /obj/item/ammo_holder/quiver/arrows
+	beltl = /obj/item/ammo_holder/quiver/arrows
 	shirt = /obj/item/clothing/armor/gambeson/light/steppe
 	pants = /obj/item/clothing/pants/tights/colored/red
 	neck = /obj/item/storage/belt/pouch/coins/poor
@@ -58,7 +58,7 @@
 	armor = /obj/item/clothing/armor/medium/scale/steppe
 	head = /obj/item/clothing/head/helmet/bascinet/steppe
 	mask = /obj/item/clothing/face/facemask/steel/steppe
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(/obj/item/weapon/sword/long/rider/steppe::associated_scabbard_type)
 	backpack_contents = list(/obj/item/weapon/knife/hunting = 1, /obj/item/tent_kit = 1)
 
 /datum/outfit/mercenary/steppesman/pre_equip(mob/living/carbon/human/H)

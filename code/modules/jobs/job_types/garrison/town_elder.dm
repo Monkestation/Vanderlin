@@ -378,8 +378,9 @@
 	armor = /obj/item/clothing/armor/leather/jacket/silk_coat
 	cloak = /obj/item/clothing/cloak/half
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/sword/arming
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/arming
+	beltr = sword_type
+	scabbards = list(sword_type::associated_scabbard_type)
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/mid = 1, /obj/item/storage/keyring/elder = 1, /obj/item/paper/scroll = 5, /obj/item/natural/feather = 1)
 

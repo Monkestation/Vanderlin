@@ -250,7 +250,7 @@
 		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 			var/obj/item/weapon/sword/long/psydon/P = new(get_turf(src))
 			H.equip_to_appropriate_slot(P)
-			var/obj/item/weapon/scabbard/sword/L = new(get_turf(src))
+			var/obj/item/weapon/scabbard/L = new P.associated_scabbard_type(get_turf(src))
 			H.equip_to_appropriate_slot(L)
 		else
 			var/obj/item/weapon/sword/long/decorated/P = new(get_turf(src))

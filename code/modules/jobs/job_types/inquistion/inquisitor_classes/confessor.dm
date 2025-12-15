@@ -47,14 +47,14 @@
 		switch(weapon_choice)
 			if("Blessed Psydonic Dagger")
 				l_hand = /obj/item/weapon/knife/dagger/silver/psydon
-				r_hand = /obj/item/weapon/scabbard/knife
+				r_hand = /obj/item/weapon/knife/dagger/silver/psydon::associated_scabbard_type
 				H.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
 			if("Psydonic Handmace")
 				l_hand = /obj/item/weapon/mace/cudgel/psy
 				H.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
 			if("Psydonic Shortsword")
 				l_hand = /obj/item/weapon/sword/short/psy
-				r_hand = /obj/item/weapon/scabbard/sword
+				r_hand = /obj/item/weapon/sword/short/psy::associated_scabbard_type
 				H.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 		var/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
 		var/armor_choice = input(H, "Choose your ARCHETYPE.", "TAKE UP PSYDON'S DUTY.") as anything in armors

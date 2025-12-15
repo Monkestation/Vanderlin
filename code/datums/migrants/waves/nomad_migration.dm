@@ -61,7 +61,7 @@
 	belt = /obj/item/storage/belt/leather/steel
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	beltr = /obj/item/weapon/sword/long/rider/steppe // dual wielder warlord
-	beltl= /obj/item/weapon/sword/long/rider/steppe
+	beltl = /obj/item/weapon/sword/long/rider/steppe
 	shirt = /obj/item/clothing/armor/gambeson/light/steppe
 	pants = /obj/item/clothing/pants/tights/colored/red
 	neck = /obj/item/storage/belt/pouch/coins/rich
@@ -69,7 +69,7 @@
 	backr = /obj/item/storage/backpack/satchel
 	armor = /obj/item/clothing/armor/medium/scale/steppe
 	head = /obj/item/clothing/head/helmet/bascinet/steppe
-	scabbards = list(/obj/item/weapon/scabbard/sword, /obj/item/weapon/scabbard/sword)
+	scabbards = list(/obj/item/weapon/sword/long/rider/steppe::associated_scabbard_type, /obj/item/weapon/sword/long/rider/steppe::associated_scabbard_type)
 	backpack_contents = list(/obj/item/weapon/knife/hunting = 1, /obj/item/tent_kit = 1, /obj/item/clothing/face/facemask/steel/steppe = 1, /obj/item/reagent_containers/glass/bottle/avarmead = 1)
 
 /datum/migrant_role/nomadrider

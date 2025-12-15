@@ -31,6 +31,7 @@
 	minstr = 7
 	sellprice = 30
 	wdefense = GREAT_PARRY
+	associated_scabbard_type = /obj/item/weapon/scabbard/sword
 
 /obj/item/weapon/sword/getonmobprop(tag)
 	. = ..()
@@ -201,6 +202,7 @@
 	minstr = 6
 	wbalance = VERY_HARD_TO_DODGE
 	bigboy = FALSE
+	associated_scabbard_type = /obj/item/weapon/scabbard/cane
 	SET_BASE_PIXEL(0, 0)
 
 /*-------\
@@ -1024,6 +1026,7 @@
 	minstr = 11
 	wbalance = EASY_TO_DODGE
 	sellprice = 90
+	associated_scabbard_type = null // no scabbards fit this
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
 	. = ..()
@@ -1315,6 +1318,7 @@
 	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime, executions."
 	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
+	associated_scabbard_type = null // no scabbards fit this currently
 
 /obj/item/weapon/sword/long/exe/getonmobprop(tag)
 	. = ..()
@@ -1574,6 +1578,7 @@
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	melt_amount = 75
 	melting_material = /datum/material/steel
+	associated_scabbard_type = /obj/item/weapon/scabbard/kazengun // the katana scabbard!
 
 
 /obj/item/weapon/sword/katana/mulyeog

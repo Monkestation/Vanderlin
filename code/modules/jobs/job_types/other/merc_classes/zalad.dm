@@ -25,13 +25,14 @@
 	gloves = /obj/item/clothing/gloves/angle
 	belt = /obj/item/storage/belt/leather/mercenary/shalal
 	armor = /obj/item/clothing/armor/brigandine/coatplates
-	beltr = /obj/item/weapon/sword/long/rider
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/long/rider
+	beltr = sword_type
 	beltl= /obj/item/flashlight/flare/torch/lantern
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	pants = /obj/item/clothing/pants/tights/colored/red
 	neck = /obj/item/clothing/neck/keffiyeh/colored/red
 	backl = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor)
 	if(!H.has_language(/datum/language/zalad))
 		H.grant_language(/datum/language/zalad)

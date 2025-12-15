@@ -59,8 +59,9 @@
 			neck = /obj/item/clothing/neck/chaincoif/iron
 			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short //Coupled with the racial PER malus, abysmal damage, but good for poison arrows.
 			beltr = /obj/item/ammo_holder/quiver/arrows
-			beltl = /obj/item/weapon/sword/sabre/stalker
-			scabbards = list(/obj/item/weapon/scabbard/sword)
+			var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/sabre/stalker
+			beltl = sword_type
+			scabbards = list(sword_type::associated_scabbard_type)
 
 			H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)

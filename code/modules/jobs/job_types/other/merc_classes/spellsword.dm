@@ -23,7 +23,7 @@
 	beltr = /obj/item/weapon/sword
 	beltl = /obj/item/storage/magebag/poor
 	backl = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(/obj/item/weapon/sword::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor, /obj/item/weapon/knife/dagger, /obj/item/reagent_containers/glass/bottle/manapot, /obj/item/book/granter/spellbook/apprentice, /obj/item/chalk)
 
 // Just a better adventurer warrior

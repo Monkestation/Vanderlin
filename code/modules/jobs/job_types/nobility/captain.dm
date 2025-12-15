@@ -53,10 +53,11 @@
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/shield/tower/metal
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/sword/sabre/dec
+	var/const/obj/item/weapon/sword/sword_type = /obj/item/weapon/sword/sabre/dec
+	beltl = sword_type
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
-	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
+	scabbards = list(sword_type::associated_scabbard_type::fancy_variant) // noble variant of sword scabbard. fancy!
 	backpack_contents = list(/obj/item/storage/keyring/captain = 1, /obj/item/signal_horn = 1)
 	H.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)

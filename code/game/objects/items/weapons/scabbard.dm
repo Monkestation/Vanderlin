@@ -10,6 +10,9 @@
 	wdefense = BAD_PARRY
 	max_integrity = INTEGRITY_WORST
 	possible_item_intents = list(SHIELD_BASH)
+	// If it exists, the typepath of a fancy (often nobility or leadership) variant of this scabbard.
+	// Sometimes that variant may have its own fancy variant.
+	var/obj/item/weapon/scabbard/fancy_variant = null
 
 /obj/item/weapon/scabbard/Initialize()
 	. = ..()
@@ -51,6 +54,7 @@
 	associated_skill = /datum/skill/combat/knives
 	sewrepair = TRUE
 	sellprice = 10
+	fancy_variant = /obj/item/weapon/scabbard/knife/noble
 
 	grid_width = 32
 	grid_height = 64
@@ -77,12 +81,14 @@
 	desc = "A slingable sheath made of leather, enamored with elaborate silver decorations, often seen on the hips of nobles"
 	sellprice = 50
 	icon_state = "nsheath"
+	fancy_variant = /obj/item/weapon/scabbard/knife/royal
 
 /obj/item/weapon/scabbard/knife/royal
 	name = "gold decorated knife sheath"
 	desc = "A slingable sheath made of leather, enamored with exquisite golden decorations, often seen on the hips of royalty"
 	sellprice = 100
 	icon_state = "rsheath"
+	fancy_variant = null // as fancy as it comes!
 
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
@@ -98,6 +104,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
+	fancy_variant = /obj/item/weapon/scabbard/sword/noble
 
 /obj/item/weapon/scabbard/sword/apply_components()
 	. = ..()
@@ -121,12 +128,14 @@
 	desc = "A scabbard designed to hold a sword. This one is decorated on a silver platter."
 	sellprice = 50
 	icon_state = "nscabbard"
+	fancy_variant = /obj/item/weapon/scabbard/sword/royal
 
 /obj/item/weapon/scabbard/sword/royal
 	name = "gold decorated scabbard"
 	desc = "A scabbard designed to hold a sword. This one is lined with golden fittings, fit for a royal."
 	sellprice = 100
 	icon_state = "rscabbard"
+	fancy_variant = null // as fancy as it comes!
 
 /obj/item/weapon/scabbard/cane
 	name = "fancy cane"
@@ -142,6 +151,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
+	fancy_variant = null // as fancy as it comes!
 
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
@@ -220,6 +230,7 @@
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/shields
 	max_integrity = INTEGRITY_STANDARD
+	fancy_variant = /obj/item/weapon/scabbard/kazengun/steel
 
 /obj/item/weapon/scabbard/kazengun/apply_components()
 	. = ..()
@@ -232,6 +243,7 @@
 	icon_state = "kazscab_steel"
 	item_state = "kazscab_steel"
 	max_integrity = INTEGRITY_STRONG
+	fancy_variant = /obj/item/weapon/scabbard/kazengun/gold
 
 /obj/item/weapon/scabbard/kazengun/gold
 	name = "gold-stained Xinyi scabbard"
@@ -239,3 +251,4 @@
 	icon_state = "kazscab_gold"
 	item_state = "kazscab_gold"
 	max_integrity = INTEGRITY_STRONGEST
+	fancy_variant = null // as fancy as it comes!

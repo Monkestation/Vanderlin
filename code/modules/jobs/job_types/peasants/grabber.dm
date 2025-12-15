@@ -48,8 +48,9 @@
 	pants = /obj/item/clothing/pants/tights/sailor
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/weapon/mace/cudgel
-	beltl = /obj/item/weapon/sword/sabre/cutlass
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/sabre/cutlass
+	beltl = sword_type
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/keyring/stevedore)
 	if(H.gender == MALE)
 		shoes = /obj/item/clothing/shoes/boots/leather

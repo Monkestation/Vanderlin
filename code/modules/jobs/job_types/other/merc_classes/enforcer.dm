@@ -44,7 +44,6 @@
 
 /datum/outfit/mercenary/enforcer
 	name = "Gun-In"
-	var/is_leader = FALSE //does nothing except give you a cooler blade.
 
 /datum/outfit/mercenary/enforcer/pre_equip(mob/living/carbon/human/H)
 	shirt = /obj/item/clothing/shirt/undershirt/easttats
@@ -63,14 +62,15 @@
 
 /datum/outfit/mercenary/enforcer/post_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
-	if(prob(10) && !is_leader)
+	var/obj/item/weapon/sword/katana/mulyeog/sword_type = /obj/item/weapon/sword/katana/mulyeog/rumahench
+	var/is_leader = FALSE
+	if(prob(10)) // 10% chance of cool leader sword
+		sword_type = /obj/item/weapon/sword/katana/mulyeog/rumacaptain
 		is_leader = TRUE
-		var/obj/item/weapon/sword/katana/mulyeog/rumacaptain/P = new(get_turf(src))
-		H.equip_to_appropriate_slot(P)
-		var/obj/item/weapon/scabbard/kazengun/gold/L = new(get_turf(src))
-		H.equip_to_appropriate_slot(L)
-	else
-		var/obj/item/weapon/sword/katana/mulyeog/rumahench/P = new(get_turf(src))
-		H.equip_to_appropriate_slot(P)
-		var/obj/item/weapon/scabbard/kazengun/steel/L = new(get_turf(src))
-		H.equip_to_appropriate_slot(L)
+	var/obj/item/weapon/sword/katana/mulyeog/P = new sword_type(get_turf(src))
+	H.equip_to_appropriate_slot(P)
+	var/obj/item/weapon/scabbard/scabbard_type = P.associated_scabbard_type::fancy_variant // give us the steel variant instead of wood
+	if(is_leader)
+		scabbard_type = scabbard_type::fancy_variant // leader gets gold
+	var/obj/item/weapon/scabbard/kazengun/L = new scabbard_type(get_turf(src))
+	H.equip_to_appropriate_slot(L)

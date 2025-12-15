@@ -62,8 +62,9 @@
 				spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 		if("Crusade (Greatsword) and a Silver Dagger")
 			spawned.put_in_hands(new /obj/item/weapon/sword/long/greatsword/psydon/relic(get_turf(spawned)), TRUE)
-			spawned.put_in_hands(new /obj/item/weapon/knife/dagger/silver/psydon(get_turf(spawned)), TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/knife, ITEM_SLOT_BACK_L, TRUE)
+			var/const/obj/item/weapon/dagger_type = /obj/item/weapon/knife/dagger/silver/psydon
+			spawned.put_in_hands(new dagger_type(get_turf(spawned)), TRUE)
+			spawned.equip_to_slot_or_del(new dagger_type::associated_scabbard_type, ITEM_SLOT_BACK_L, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
 			if(spawned.age == AGE_OLD)

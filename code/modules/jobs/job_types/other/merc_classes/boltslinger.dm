@@ -15,14 +15,15 @@
 	gloves = /obj/item/clothing/gloves/angle
 	belt = /obj/item/storage/belt/leather/mercenary
 	armor = /obj/item/clothing/armor/cuirass
-	beltr = /obj/item/weapon/sword/iron
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/iron
+	beltr = sword_type
 	beltl = /obj/item/ammo_holder/quiver/bolts
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	backl = /obj/item/storage/backpack/satchel
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	pants = /obj/item/clothing/pants/tights/colored/black
 	neck = /obj/item/clothing/neck/chaincoif
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor, /obj/item/weapon/knife/hunting)
 	if(H.mind)
 		H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)

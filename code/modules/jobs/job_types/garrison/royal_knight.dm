@@ -52,9 +52,10 @@
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard  // Wear the King's colors
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	belt = /obj/item/storage/belt/leather
-	beltr = /obj/item/weapon/sword/arming
+	var/const/obj/item/weapon/sword/sword_type = /obj/item/weapon/sword/arming
+	beltr = sword_type
 	backl = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
+	scabbards = list(sword_type::associated_scabbard_type::fancy_variant) // noble variant of sword scabbard. fancy!
 	backpack_contents = list(/obj/item/storage/keyring/manorguard = 1)
 
 	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)

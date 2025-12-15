@@ -29,8 +29,9 @@
 	gloves = /obj/item/clothing/gloves/plate
 	shoes = /obj/item/clothing/shoes/boots/armor
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/sword/arming
-	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
+	var/const/obj/item/weapon/sword/sword_type = /obj/item/weapon/sword/arming
+	beltr = sword_type
+	scabbards = list(sword_type::associated_scabbard_type::fancy_variant) // noble variant of sword scabbard. fancy!
 	H.add_spell(/datum/action/cooldown/spell/undirected/list_target/convert_role/brotherhood)
 	if(H.dna?.species?.id == SPEC_ID_HUMEN)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/knight()

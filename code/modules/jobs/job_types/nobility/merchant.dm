@@ -31,14 +31,15 @@
 	neck = /obj/item/clothing/neck/mercator
 	backr = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/veryrich = 1, /obj/item/merctoken = 1)
-	beltr = /obj/item/weapon/sword/rapier
+	var/const/obj/item/weapon/sword_type = /obj/item/weapon/sword/rapier
+	beltr = sword_type
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/mace/cane/merchant
 	wrists = /obj/item/storage/keyring/merchant
 	armor = /obj/item/clothing/shirt/robe/merchant
 	head = /obj/item/clothing/head/chaperon/colored/greyscale/silk/random
 	ring = /obj/item/clothing/ring/gold/guild_mercator
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	scabbards = list(sword_type::associated_scabbard_type)
 
 	if(H.gender == MALE)
 		shirt = /obj/item/clothing/shirt/undershirt/sailor
