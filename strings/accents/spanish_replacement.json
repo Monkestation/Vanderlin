@@ -14,6 +14,7 @@
 		"hello": "hola",
 		"goodbye": "adiós",
 		"bye": "adiós",
+		"friend": "amigo",
 		"father": "padre",
 		"mother": "madre",
 		"brother": "hermano",
@@ -26,14 +27,14 @@
 		"because": "porque",
 		"why": "por qué",
 		"what ": "qué ",
-		"good": "bien",
 		"good morning": "buenos días",
 		"good evening": "buenas tardes",
 		"good afternoon": "buenas tardes",
 		"good night": "buenas noches",
-		"king": "rey",
+		"good": "bien",
 		"queen": "reina",
-		"kingdom": "reino"
+		"kingdom": "reino",
+		"king": "rey"
 		}
 
 }
