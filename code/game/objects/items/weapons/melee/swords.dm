@@ -85,7 +85,6 @@
 	sellprice = 10
 	smeltresult = /obj/item/ingot/bronze
 
-
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
 	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
