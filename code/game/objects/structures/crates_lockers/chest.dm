@@ -84,7 +84,8 @@
 		var/obj/item/neuFarm/seed/random = pick(subtypesof(/obj/item/neuFarm/seed) - /obj/item/neuFarm/seed/mixed_seed)
 		new random(src)
 
-/obj/structure/closet/crate/chest/wicker/random_bee_keeping/PopulateContents()
+/obj/structure/closet/crate/chest/wicker/random_bee_keeping/populate_contents()
+
 	var/static/list/spawnable = list(
 		/obj/item/neuFarm/seed/benedictus = 8, // normal honey
 		/obj/item/neuFarm/seed/valeriana = 7, // normal honey
