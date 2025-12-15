@@ -104,7 +104,7 @@
 	additional_items = list(/obj/item/ingot/bronze, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/bronze
 
-/datum/anvil_recipe/weapons/bronze/cane //someone forgot to set this as a cane
+/datum/anvil_recipe/weapons/bronze/cane
 	name = "Artificer Cane (+ Copper)"
 	additional_items = list(/obj/item/ingot/copper)
 	created_item = /obj/item/weapon/mace/cane/bronze
