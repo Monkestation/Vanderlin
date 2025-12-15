@@ -912,7 +912,7 @@
 
 /datum/anvil_recipe/weapons/steel/elvenclub
 	name = "Steel Elven Warclub"
-	recipe_name = "a Elven Warclub"
+	recipe_name = "a Steel Elven Warclub"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/mace/elvenclub/steel
 
