@@ -154,7 +154,7 @@
 // --------- MALLET -----------
 /obj/item/weapon/hammer/wood
 	name = "wooden mallet"
-	desc = "A wooden mallet is an artificers second best friend! But it may also come in handy to a smith..."
+	desc = "A wooden mallet is an artificer's second-best friend! But it may also come in handy to a smith..."
 	icon_state = "hammer_w"
 	dropshrink = 0.9
 	experimental_onhip = FALSE

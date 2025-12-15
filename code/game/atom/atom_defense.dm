@@ -46,7 +46,7 @@
 /// Handles the integrity of an atom changing. This must be called instead of changing integrity directly.
 /atom/proc/update_integrity(new_value, update_atom = TRUE, damage_flag)
 	if(!uses_integrity)
-		CRASH("/atom/proc/update_integrity() was called on [src] when it doesnt use integrity!")
+		CRASH("/atom/proc/update_integrity() was called on [src] when it doesn't use integrity!")
 	var/old_value = atom_integrity
 	new_value = max(0, new_value)
 	if(atom_integrity == new_value)
@@ -71,7 +71,7 @@
 
 /obj/item/update_integrity(new_value, update_atom = TRUE, damage_flag)
 	if(!uses_integrity)
-		CRASH("/atom/proc/update_integrity() was called on [src] when it doesnt use integrity!")
+		CRASH("/atom/proc/update_integrity() was called on [src] when it doesn't use integrity!")
 	var/old_value = atom_integrity
 	new_value = max(0, new_value)
 	if(atom_integrity == new_value)
@@ -175,7 +175,7 @@
 ///changes max_integrity while retaining current health percentage, returns TRUE if the atom got broken.
 /atom/proc/modify_max_integrity(new_max, can_break = TRUE, damage_type = BRUTE)
 	if(!uses_integrity)
-		CRASH("/atom/proc/modify_max_integrity() was called on [src] when it doesnt use integrity!")
+		CRASH("/atom/proc/modify_max_integrity() was called on [src] when it doesn't use integrity!")
 	var/current_integrity = atom_integrity
 	var/current_max = max_integrity
 

@@ -244,7 +244,7 @@
 
 /obj/structure/broodmother_egg
 	name = "egg"
-	desc = "an egg..."
+	desc = "An egg..."
 	abstract_type = /obj/structure/broodmother_egg
 	icon = 'icons/obj/broodmother_32x.dmi'
 	var/hatched = FALSE

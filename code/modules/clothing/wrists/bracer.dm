@@ -14,6 +14,12 @@
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 	max_integrity = INTEGRITY_STRONG
 
+/obj/item/clothing/wrists/bracers/ancient
+	name = "ancient vambraces"
+	desc = "Very old vambraces."
+	icon_state = "ancientbracers"
+	item_state = "ancientbracers"
+
 /obj/item/clothing/wrists/bracers/naledi
 	name = "sojourner's wrappings"
 	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. It provides more freedom of movement than the traditional steel thorns."
@@ -93,7 +99,7 @@
 
 /obj/item/clothing/wrists/bracers/leather/masterwork
 	name = "masterwork leather bracers"
-	desc = "These bracers are a craftsmanship marvel. Made with the finest leather. Strong, nimible, reliable."
+	desc = "These bracers are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST) //We're getting chop here
 	max_integrity = INTEGRITY_STANDARD + 100

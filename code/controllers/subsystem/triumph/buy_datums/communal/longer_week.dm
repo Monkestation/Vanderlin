@@ -3,6 +3,7 @@
 	desc = "Contribute to extend the working week (round) by 2 whole daes (40 mins) at minimum! Automatically refunds if it does not reach its goal before the round starts."
 	triumph_buy_id = TRIUMPH_BUY_LONGER_WEEK
 	maximum_pool = 60
+	disabled = TRUE
 
 /datum/triumph_buy/communal/preround/longer_week/on_activate()
 	. = ..()

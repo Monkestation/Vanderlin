@@ -17,7 +17,7 @@
 	else
 		key = key_holder:key
 
-	// patreon triumph increase
+	// donator triumph increase
 	if((key_is_donator(key) || ckey_is_donator(ckey)) && !override_bonus && (amount > 0))
 		amount *= 1.5
 
@@ -27,7 +27,7 @@
 		return
 
 	SStriumphs.triumph_adjust(amount, ckey)
-	SStriumphs.adjust_leaderboard(key)
+	SStriumphs.adjust_leaderboard(GLOB.keys_by_ckey[ckey])
 
 	var/adjustment_verb
 	if(amount > 0)

@@ -26,7 +26,7 @@
 		return FALSE
 	if(!human.rage_datum)
 		return FALSE
-	if(!human.rage_datum.check_rage(text2num(RAGE_LEVEL_HIGH)))
+	if(!human.rage_datum.check_rage(text2num(RAGE_LEVEL_MEDIUM)))
 		return FALSE
 	return TRUE
 

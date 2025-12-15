@@ -87,8 +87,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		user.visible_message("<span class='warning'>[user] pulls the lever.</span>")
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		if(do_after(user, used_time))
-			for(var/obj/structure/O in redstone_attached)
-				spawn(0) O.redstone_triggered(user)
+			for(var/obj/structure/structure in redstone_attached)
+				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
 			trigger_wire_network(user)
 			toggled = !toggled
 			icon_state = "leverfloor[toggled]"
@@ -102,8 +102,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		user.log_message("kicked the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
 		if(prob(L.STASTR * 4))
-			for(var/obj/structure/O in redstone_attached)
-				spawn(0) O.redstone_triggered(user)
+			for(var/obj/structure/structure in redstone_attached)
+				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
 			trigger_wire_network(user)
 			toggled = !toggled
 			icon_state = "leverfloor[toggled]"
@@ -128,8 +128,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		L.changeNext_move(CLICK_CD_MELEE)
 		user.visible_message(span_danger("[user] presses a hidden button."), span_notice("I push a hidden button."))
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
-		for(var/obj/structure/O in redstone_attached)
-			INVOKE_ASYNC(O, PROC_REF(redstone_triggered), user)
+		for(var/obj/structure/structure in redstone_attached)
+			INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
 		trigger_wire_network(user)
 		toggled = !toggled
 		playsound(src, 'sound/foley/lever.ogg', 100, extrarange = 3)
@@ -191,7 +191,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		if(!adjc.redstone_structure)
 			continue
 		structures += adjc
-	var/input = input("Choose structure to link", "REPEATER") as null|anything in structures
+	var/input = browser_input_list(user, "Choose structure to link", "REPEATER", structures)
 	if(input)
 		playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
 		if(istype(linked_thing, /obj/structure/repeater))
@@ -211,16 +211,13 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 			repeat_times = 5
 		if(2)
 			repeat_times = rand(2,8)
-	if(repeat_times)
-		for(var/i in 1 to repeat_times)
-			linked_thing.redstone_triggered(user)
-			sleep(5)
-	else
+
+	if(!repeat_times)
 		if(mode == 3)
 			for(var/i in 1 to INFINITY)
 				if(QDELETED(src) || mode != 3)
 					break
-				linked_thing.redstone_triggered(user)
+				INVOKE_ASYNC(linked_thing, PROC_REF(redstone_triggered), user)
 				sleep(5)
 		else if(mode == 0)
 			for(var/i in 1 to INFINITY)
@@ -230,8 +227,13 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 					explosion(src, light_impact_range = 1, flame_range = 2, smoke = TRUE, soundin = pick('sound/misc/explode/bottlebomb (1).ogg','sound/misc/explode/bottlebomb (2).ogg'))
 					qdel(src)
 					break
-				linked_thing.redstone_triggered(user)
+				INVOKE_ASYNC(linked_thing, PROC_REF(redstone_triggered), user)
 				sleep(5)
+		return
+
+	for(var/i in 1 to repeat_times)
+		INVOKE_ASYNC(linked_thing, PROC_REF(redstone_triggered), user)
+		sleep(5)
 
 /obj/structure/pressure_plate
 	name = "pressure plate"
@@ -269,8 +271,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 
 /obj/structure/pressure_plate/proc/triggerplate()
 	playsound(src, 'sound/misc/pressurepad_up.ogg', 65, extrarange = 2)
-	for(var/obj/structure/O in redstone_attached)
-		INVOKE_ASYNC(O, TYPE_PROC_REF(/obj/structure, redstone_triggered))
+	for(var/obj/structure/structure in redstone_attached)
+		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered))
 
 /obj/structure/pressure_plate/attack_hand(mob/user)
 	. = ..()

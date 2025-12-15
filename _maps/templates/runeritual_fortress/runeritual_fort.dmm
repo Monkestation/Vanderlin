@@ -1,49 +1,49 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors)
+/area/outdoors)
 "b" = (
 /obj/structure/forcefield/casted/strong,
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "c" = (
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "d" = (
 /obj/structure/door/arcyne/bolt/caster{
 	dir = 8
 	},
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "e" = (
 /turf/open/floor/greenstone/runed,
-/area/rogue/outdoors)
+/area/outdoors)
 "f" = (
 /obj/structure/door/arcyne/bolt/caster{
 	dir = 4
 	},
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "g" = (
 /obj/structure/door/arcyne/bolt/caster,
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "h" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "i" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "j" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/greenstone,
-/area/rogue/outdoors)
+/area/outdoors)
 "k" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/greenstone/runed,
-/area/rogue/outdoors)
+/area/outdoors)
 
 (1,1,1) = {"
 a

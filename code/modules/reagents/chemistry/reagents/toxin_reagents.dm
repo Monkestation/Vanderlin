@@ -78,7 +78,7 @@
 
 /datum/reagent/toxin/venom
 	name = "Venom"
-	description = "An exotic poison extracted from highly toxic fauna. Causes scaling amounts of toxin damage and bruising depending and dosage. Often decays into Histamine."
+	description = "An exotic poison extracted from highly toxic fauna. Causes scaling amounts of toxin damage and bruising depending on dosage. Often decays into Histamine."
 	reagent_state = LIQUID
 	color = "#F0FFF0"
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
@@ -188,7 +188,7 @@
 
 /datum/reagent/toxin/manabloom_juice
 	name = "Manabloom Juice"
-	description = "A potent mana regeneration extract, it however has the issue of stopping your bodies ability to naturally disperse mana."
+	description = "A potent mana regeneration extract, it however has the issue of stopping your body's ability to naturally disperse mana."
 	glows = TRUE
 	color = "#6eb9e4"
 	taste_description = "flowers"

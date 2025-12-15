@@ -22,7 +22,7 @@
 	. = ..()
 	if(can_connect_wires)
 		update_wire_connections()
-	update_appearance()
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/redstone/Destroy()
 	. = ..()
@@ -31,7 +31,7 @@
 		component.connected_components -= src
 		component.clear_power_source(src) // Remove us as a power source
 		component.update_wire_connections()
-		component.update_appearance()
+		component.update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/redstone/proc/update_wire_connections()
 	if(!can_connect_wires)
@@ -59,7 +59,7 @@
 				if(component.can_connect_to(src, reverse_dir))
 					component.wire_connections["[reverse_dir]"] = 1
 					component.connected_components |= src
-					component.update_appearance()
+					component.update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/redstone/proc/can_connect_to(obj/structure/redstone/other, dir)
 	return TRUE // Override in subclasses for specific connection rules
@@ -100,7 +100,7 @@
 	if(max_power != power_level)
 		power_level = max_power
 		powered = (power_level > 0)
-		update_appearance()
+		update_appearance(UPDATE_OVERLAYS)
 		propagate_power(user, source)
 
 	updating_power = FALSE

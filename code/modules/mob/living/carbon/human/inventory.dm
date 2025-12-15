@@ -266,8 +266,8 @@
 		check_armor_class()
 
 	if(hud_used)
-		hud_used.throw_icon?.update_appearance()
-		hud_used.give_intent?.update_appearance()
+		hud_used.throw_icon?.update_appearance(UPDATE_ICON_STATE)
+		hud_used.give_intent?.update_appearance(UPDATE_ICON_STATE)
 
 	return not_handled //For future deeper overrides
 

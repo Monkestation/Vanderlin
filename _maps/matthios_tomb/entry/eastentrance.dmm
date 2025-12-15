@@ -2,24 +2,24 @@
 "aY" = (
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "bh" = (
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "bz" = (
 /obj/structure/table/wood/plain,
 /obj/item/weapon/knife/cleaver,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "bD" = (
 /obj/structure/fluff/statue/evil,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "cA" = (
 /obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "dw" = (
 /obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
@@ -32,39 +32,39 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "gj" = (
 /obj/structure/well,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "hf" = (
 /obj/structure/window/openclose{
 	dir = 4
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "iJ" = (
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jn" = (
 /turf/open/floor/carpet/red,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "kd" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "kG" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "kP" = (
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "lo" = (
 /obj/structure/bed/inn,
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ls" = (
 /obj/structure/table/church{
 	dir = 1
@@ -82,58 +82,58 @@
 	pixel_y = 11
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "lU" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "mf" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "mM" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "mT" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "no" = (
 /obj/structure/table/wood/plain,
 /obj/structure/fluff/millstone,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ns" = (
 /obj/structure/window/openclose,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nG" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oF" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oZ" = (
 /obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "rl" = (
 /obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "wE" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "yi" = (
 /obj/structure/fluff/statue/knightalt,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "yn" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "zz" = (
 /obj/structure/closet/crate/chest,
 /obj/item/neuFarm/seed/wheat,
@@ -160,11 +160,11 @@
 /obj/item/neuFarm/seed/apple,
 /obj/item/neuFarm/seed/apple,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "AT" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Bv" = (
 /obj/structure/table/church,
 /obj/item/flashlight/flare/torch/metal{
@@ -179,58 +179,58 @@
 	pixel_y = 6
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "BZ" = (
 /obj/machinery/light/fueled/oven/east,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ca" = (
 /obj/structure/closet/crate/chest/crafted,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Cn" = (
 /obj/structure/stairs/stone/church{
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ef" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "FY" = (
 /obj/structure/dungeon_exit,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Gi" = (
 /obj/structure/fluff/statue/knightalt/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "GM" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Hl" = (
 /obj/structure/window/openclose{
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Hw" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "LD" = (
 /obj/item/reagent_containers/glass/bucket/wooden/alter,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ma" = (
 /obj/effect/decal/cleanable/sigil,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Mh" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Mq" = (
 /obj/structure/table/church/m,
 /obj/item/reagent_containers/glass/bottle/waterskin{
@@ -245,69 +245,69 @@
 	pixel_y = 7
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Oo" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "OY" = (
 /obj/structure/stairs/stone/church{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Pp" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "QX" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Re" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Rf" = (
 /obj/structure/window/openclose{
 	dir = 8
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "RX" = (
 /obj/structure/door,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Sc" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "UE" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ve" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/clothing/shirt/robe/colored/plain,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Vp" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Xo" = (
 /obj/structure/gate/preopen,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Xz" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "XC" = (
 /obj/structure/closet/crate/drawer/inn,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ZN" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 mT

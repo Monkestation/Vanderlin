@@ -26,8 +26,9 @@
 		"Inquisitor",
 		"Absolver",
 		"Confessor",
-		"Orthodoxist",
+		"Sacrestants",
 		"Adept",
+		"Assassin",
 	)
 
 	denominator = 30

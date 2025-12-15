@@ -1,58 +1,58 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "b" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "c" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "d" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "e" = (
 /mob/living/simple_animal/hostile/retaliate/wolf,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "f" = (
 /obj/item/weapon/polearm/spear/stone,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "g" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "h" = (
 /obj/machinery/light/fueled/campfire,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "i" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "j" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "k" = (
 /obj/structure/closet/crate/chest/crafted,
 /obj/item/reagent_containers/food/snacks/friedrat,
 /obj/item/reagent_containers/food/snacks/fryfish/eel,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "l" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "m" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 
 (1,1,1) = {"
 a

@@ -48,7 +48,7 @@
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/splint
 	head = /obj/item/clothing/head/adeptcowl
-	neck = /obj/item/clothing/neck/gorget
+	neck = /obj/item/clothing/neck/gorget/explosive
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backl = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/mace/cudgel

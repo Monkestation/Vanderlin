@@ -260,12 +260,29 @@
 	effectedstats = list(STATKEY_STR = 1, STATKEY_END = 2, STATKEY_PER = -2, STATKEY_INT = -2) //endurance to boost pain treshold, not powerful enough to warrant total painkilling
 	duration = 30 SECONDS
 
+/datum/status_effect/buff/adrenalinerush
+	id = "adrenalinerush"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/adrenalinerush
+	effectedstats = list(STATKEY_SPD = 4, STATKEY_END = 2, STATKEY_CON = 2) // Meant as a 'GET THE FUCK OUT' spell.
+	duration = 2 MINUTES
+
 /atom/movable/screen/alert/status_effect/buff/barbrage
 	name = "Barbaric Rage"
 	desc = span_nicegreen("WITNESS ME!")
 	icon_state = "ravox"
 
 /datum/status_effect/buff/barbrage/on_remove()
+	. = ..()
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.apply_status_effect(/datum/status_effect/debuff/barbfalter)
+
+/atom/movable/screen/alert/status_effect/buff/adrenalinerush
+	name = "Adrenaline Rush"
+	desc = span_nicegreen("THE WIND IS PUSHING ME INTO THE CURRENT AGAIN! I FEEL THE BLOOD IN MY VEINS!")
+	icon_state = "bestialsense"
+
+/datum/status_effect/buff/adrenalinerush/on_remove()
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
@@ -362,7 +379,7 @@
 		var/mob/living/carbon/human/C = owner
 		C.emote("pain", forced = TRUE)
 		playsound(get_turf(C), 'sound/gore/flesh_eat_03.ogg', 100, TRUE)
-		to_chat(C, span_warning("Dendors transformation fades, flesh shrinking back. My body aches..."))
+		to_chat(C, span_warning("Dendor's transformation fades, flesh shrinking back. My body aches..."))
 		C.adjustBruteLoss(10)
 		C.apply_status_effect(/datum/status_effect/debuff/barbfalter)
 		C.resize = (1/1.2)
@@ -865,7 +882,7 @@
 
 /atom/movable/screen/alert/status_effect/buff/nocblessed
 	name = "Blessed by Noc"
-	desc = "I have been blessed by Noc since i was born, with his help i can see and think better than anyone."
+	desc = "I have been blessed by Noc since I was born, with his help I can see and think better than anyone."
 	icon_state = "intelligence"
 
 

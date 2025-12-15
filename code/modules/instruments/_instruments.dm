@@ -139,7 +139,6 @@
 		soundloop.stress2give = initial(soundloop.stress2give)
 	if(dynamic_icon)
 		lower_from_mouth()
-		update_appearance()
 	// Prevents an exploit
 	for(var/mob/living/L in hearers(7, loc))
 		for(var/datum/status_effect/bardicbuff/b in L.status_effects)
@@ -258,7 +257,6 @@
 	record_round_statistic(STATS_SONGS_PLAYED)
 	if(dynamic_icon)
 		lift_to_mouth()
-		update_icon()
 	START_PROCESSING(SSprocessing, src)
 
 /obj/item/instrument/proc/lift_to_mouth()
@@ -442,7 +440,7 @@
 
 /obj/item/instrument/psyaltery
 	name = "psyaltery"
-	desc = "A traditional form of boxed zither or box-harp that may be played plucked, with a plectrum or with hammers. They are particularly associated with divine beings, aasimars and liturgies."
+	desc = "A traditional form of boxed zither or box-harp that may be played plucked, with a plectrum or with hammers. They are particularly associated with divine beings, Aasimar and liturgies."
 	icon_state = "psyaltery"
 	song_list = list(
 	"Disciples Tower" = 'sound/instruments/psyaltery (1).ogg',

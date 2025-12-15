@@ -32,7 +32,7 @@
 	// sound played for owner
 	playsound(owner, pick('sound/vo/mobs/wwolf/howl (1).ogg', 'sound/vo/mobs/wwolf/howl (2).ogg'), 75, TRUE)
 
-	for(var/mob/player in (GLOB.player_list - owner))
+	for(var/mob/player as anything in (GLOB.player_list - owner))
 		if(!player.mind)
 			continue
 		if(player.stat == DEAD)

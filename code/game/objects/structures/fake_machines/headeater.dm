@@ -49,7 +49,7 @@
 
 /obj/structure/fake_machine/headeater
 	name = "head eating HAILER"
-	desc = "A machine that feeds on certain heads for coin, this itteration seems unfinished, what a sell out."
+	desc = "A machine that feeds on certain heads for coin, this iteration seems unfinished, what a sell out."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "headeater"
 	density = FALSE

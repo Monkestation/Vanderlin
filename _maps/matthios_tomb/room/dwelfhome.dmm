@@ -1,39 +1,39 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/lava,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "b" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "c" = (
 /obj/item/fishingrod,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "h" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "i" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "m" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "n" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "u" = (
 /obj/effect/spawner/map_spawner/tree,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "v" = (
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "B" = (
 /obj/item/natural/worms,
 /obj/item/natural/worms{
@@ -53,55 +53,55 @@
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "C" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "D" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "H" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "I" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "K" = (
 /mob/living/simple_animal/hostile/retaliate/mole,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "L" = (
 /turf/open/water/cleanshallow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "N" = (
 /obj/structure/roguerock,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "P" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Q" = (
 /obj/structure/flora/rock,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "T" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "V" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "X" = (
 /obj/structure/flora/rock/pile,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Y" = (
 /mob/living/simple_animal/hostile/retaliate/saigabuck,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 
 (1,1,1) = {"
 D

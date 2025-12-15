@@ -11,6 +11,7 @@
 	invocation_type = "shout"
 	associated_skill = /datum/skill/magic/holy
 	cooldown_time = 1 MINUTES // 60 seconds cooldown
+	button_icon_state = "WEEP"
 
 /datum/action/cooldown/spell/psydonlux_tamper/cast(mob/living/carbon/human/H)
 	. = ..()

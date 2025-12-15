@@ -4,7 +4,7 @@
 	force = DAMAGE_NORMAL_FLAIL
 	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
 	name = "military flail"
-	desc = "A sturdy handle afixed to a cruel spiked ball with a harrowing metal chain."
+	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	sharpness = IS_BLUNT
@@ -111,6 +111,12 @@
 	minstr = 4
 	max_integrity = INTEGRITY_STRONGEST
 	sellprice = 35
+
+/obj/item/weapon/flail/sflail/ancient
+	force = DAMAGE_GOOD_FLAIL
+	name = "ancient flail"
+	desc = "An ancient knightly flail made of worked steel, with a flanged head. An effective and brutal design."
+	icon_state = "aflail"
 
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"

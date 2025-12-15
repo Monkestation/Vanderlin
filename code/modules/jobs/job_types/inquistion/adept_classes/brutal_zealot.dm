@@ -2,9 +2,9 @@
 // Brutal Zealot, a class balanced to town guard, with noticeably more strength but less intelligence and perception. Axe/Mace and shield focus.
 /datum/job/advclass/adept/bzealot
 	title = "Brutal Zealot"
+
 	tutorial = "You are a former thug who has been given a chance to redeem yourself by the Inquisitor. You serve him and Psydon with your physical strength and zeal."
 	outfit = /datum/outfit/adept/bzealot
-
 	category_tags = list(CTAG_ADEPT)
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
@@ -44,7 +44,7 @@
 	//Armor for class
 	belt = /obj/item/storage/belt/leather
 	head = /obj/item/clothing/head/adeptcowl
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/gorget/explosive
 	armor = /obj/item/clothing/armor/chainmail
 	cloak = /obj/item/clothing/cloak/tabard/adept
 	beltl = /obj/item/weapon/mace/spiked

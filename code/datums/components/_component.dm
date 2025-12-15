@@ -4,7 +4,7 @@
  * The component datum
  *
  * A component should be a single standalone unit
- * of functionality, that works by receiving signals from it's parent
+ * of functionality, that works by receiving signals from its parent
  * object to provide some single functionality (i.e a slippery component)
  * that makes the object it's attached to cause people to slip over.
  * Useful when you want shared behaviour independent of type inheritance
@@ -145,7 +145,7 @@
  * Register to listen for a signal from the passed in target
  *
  * This sets up a listening relationship such that when the target object emits a signal
- * the source datum this proc is called upon, will recieve a callback to the given proctype
+ * the source datum this proc is called upon, will receive a callback to the given proctype
  * Return values from procs registered must be a bitfield
  *
  * Arguments:

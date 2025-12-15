@@ -10,7 +10,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 
 	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR
 
@@ -23,14 +22,18 @@
 	var/list/broken_states
 	var/list/burnt_states
 
-	spread_chance = 0.85
-	burn_power = 22.5
+	spread_chance = 1.35
+	burn_power = 50
 
 /turf/open/floor/Initialize(mapload)
 	if (!broken_states)
 		broken_states = typelist("broken_states", list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
 	else
 		broken_states = typelist("broken_states", broken_states)
+	if (!attacked_sound)
+		attacked_sound = typelist("attacked_sound", list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg'))
+	else
+		attacked_sound = typelist("attacked_sound", attacked_sound)
 	burnt_states = typelist("burnt_states", burnt_states)
 	if(!broken && broken_states && (icon_state in broken_states))
 		broken = TRUE
@@ -119,7 +122,6 @@
 	var/turf/open/floor/W = ..()
 	W.icon_regular_floor = old_icon
 	W.setDir(old_dir)
-	W.update_appearance()
 	return W
 
 /turf/open/floor/attackby(obj/item/C, mob/user, params)

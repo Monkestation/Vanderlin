@@ -6,6 +6,8 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	move_resist = INFINITY
 	throwforce = 0
+	/// For instant transfer once the round is set up
+	var/mob/living/new_character
 
 /mob/dead/Initialize()
 	SHOULD_CALL_PARENT(FALSE)
@@ -198,3 +200,34 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 /mob/dead/onTransitZ(old_z,new_z)
 	..()
 	update_z(new_z)
+
+/// Creates a new playable mob for this client.
+/mob/dead/proc/create_character(atom/destination)
+	if(!client || QDELETED(src))
+		return
+	if(!mind?.assigned_role)
+		return
+	mind.active = FALSE
+	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
+	mind.transfer_to(spawning_mob)
+	spawning_mob.after_creation()
+	GLOB.chosen_names += spawning_mob.real_name
+	new_character = spawning_mob
+	return spawning_mob
+
+/// Transfers the player client to the new mob.
+/mob/dead/proc/transfer_character()
+	. = new_character
+	if(!.)
+		return
+	new_character.key = key
+	new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+	var/area/joined_area = get_area(new_character.loc)
+	if(joined_area)
+		joined_area.on_joining_game(new_character)
+	if(new_character.client)
+		var/atom/movable/screen/splash/Spl = new(null, null, new_character.client, TRUE, FALSE)
+		Spl.Fade(TRUE)
+	new_character = null
+	qdel(src)
+

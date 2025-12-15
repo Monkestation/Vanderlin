@@ -63,7 +63,7 @@
 
 	explosion(owner, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire)
 	owner.adjustBruteLoss(damage)
-	owner.visible_message(span_warning("A thunderous boom eminates from [owner]!"), span_danger("A thunderous boom eminates from me!"))
+	owner.visible_message(span_warning("A thunderous boom emanates from [owner]!"), span_danger("A thunderous boom emanates from me!"))
 
 	boomed = TRUE
 

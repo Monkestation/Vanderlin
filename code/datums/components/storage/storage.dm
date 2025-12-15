@@ -404,7 +404,7 @@
 	open_storage_on_signal(source, user)
 	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
-/// Signal handler to open up the storage when we recieve a signal.
+/// Signal handler to open up the storage when we receive a signal.
 /datum/component/storage/proc/open_storage_on_signal(datum/source, mob/to_show)
 	SIGNAL_HANDLER
 

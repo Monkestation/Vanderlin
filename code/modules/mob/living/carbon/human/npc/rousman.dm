@@ -437,13 +437,13 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	job = "Assassin Rousman"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/npc/rousman/assassin)
+	equipOutfit(new /datum/outfit/npc/rousman/assassin)
 	dodgetime = 13
 	canparry = TRUE
 	flee_in_pain = TRUE
 	wander = TRUE
 
-/datum/outfit/job/npc/rousman/assassin/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/npc/rousman/assassin/pre_equip(mob/living/carbon/human/H)
 	..()
 
 	H.base_strength = rand(6, 10)
@@ -475,13 +475,13 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	job = "Seer Rousman"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/npc/rousman/seer)
+	equipOutfit(new /datum/outfit/npc/rousman/seer)
 	dodgetime = 13
 	canparry = TRUE
 	flee_in_pain = TRUE
 	wander = TRUE
 
-/datum/outfit/job/npc/rousman/seer/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/npc/rousman/seer/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = rand(4, 8)
 	H.base_perception = rand(6, 10)

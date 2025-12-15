@@ -72,6 +72,11 @@
 	filling_color = "#b44f44"
 	overlay_state = "fill_meat"
 
+/obj/item/reagent_containers/food/snacks/raw_pie/borowiki
+	name = "uncoooked borowiki pie"
+	filling_color = "#7c6b75"
+	overlay_state = "fill_pot"
+
 /*--------------\
 | Pie templates |
 \--------------*/
@@ -141,20 +146,30 @@
 	faretype = FARE_FINE
 	portable = FALSE
 
+// ------ GOOD PIE SLICES -----
 /obj/item/reagent_containers/food/snacks/pieslice/good
 	eat_effect = /datum/status_effect/buff/foodbuff
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/pot
 	filling_color = "#9d8c3b"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/fish
 	filling_color = "#bb5a93"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/meat
 	filling_color = "#b44f44"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/berry
 	filling_color = "#394da5"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/apple
 	filling_color = "#eca48c"
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/pear
 	filling_color = "#edd28c"
+
+/obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
+	filling_color = "#7c6b75"
 
 // -------------- MEAT PIE -----------------
 /obj/item/reagent_containers/food/snacks/pie/cooked/meat // bae item
@@ -211,7 +226,7 @@
 // -------------- BERRY PIE -----------------
 /obj/item/reagent_containers/food/snacks/pie/cooked/berry
 	name = "berry pie"
-	desc = "A sweet pie made from jackberries. A popular choice for banquets among peasants, and enjoyed by all."
+	desc = "A sweet pie made from jacksberries. A popular choice for banquets among peasants, and enjoyed by all."
 	list_reagents = list(/datum/reagent/consumable/nutriment = FRUITPIE_NUTRITION)
 	slices_num = 4
 	tastes = list("butterdough" = 1, "berries" = 1)
@@ -263,13 +278,30 @@
 	. = ..()
 	good_quality_descriptors()
 
+// -------------- BOROWIKI PIE -----------------
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki
+	name = "borowiki pie"
+	desc = "A savory pie filled with hearty borowiki mushrooms."
+	slices_num = 4
+	list_reagents = list(/datum/reagent/consumable/nutriment = MEATPIE_NUTRITION)
+	tastes = list("borowiki and butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good
+	eat_effect = /datum/status_effect/buff/foodbuff
+	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
+	tastes = list("savory borowiki and crispy butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good/New()
+	. = ..()
+	good_quality_descriptors()
+
 /*--------\
 | Handpie |
 \--------*/		// dwarven pie on the go, good shelflife until bitten, made from pie dough and mince, truffles or jacksberries
 
 /obj/item/reagent_containers/food/snacks/foodbase/handpieraw
 	name = "raw handpie"
-	desc = "The dwarven take on pies, called pierogi in their dialect. A fistfull of food to stand the test of time."
+	desc = "The dwarven take on pies, called pierogi in their dialect. A fistful of food to stand the test of time."
 	icon_state = "handpie_raw"
 	cooked_smell = /datum/pollutant/food/pie_base
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
@@ -312,7 +344,7 @@
 
 /obj/item/reagent_containers/food/snacks/handpie
 	name = "handpie"
-	desc = "The dwarven take on pies, called pierogi in their dialect. A fistfull of food to stand the test of time. This is pretty dry."
+	desc = "The dwarven take on pies, called pierogi in their dialect. A fistful of food to stand the test of time. This is pretty dry."
 	icon_state = "handpie"
 	bitesize = 4
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = BUTTERDOUGHSLICE_NUTRITION)
@@ -321,7 +353,7 @@
 	faretype = FARE_FINE
 
 /obj/item/reagent_containers/food/snacks/handpie/good
-	desc = "The dwarven take on pies, called pierogi in their dialect. A fistfull of food to stand the test of time."
+	desc = "The dwarven take on pies, called pierogi in their dialect. A fistful of food to stand the test of time."
 	eat_effect = /datum/status_effect/buff/foodbuff
 	bitesize = 4
 	tastes = list("crispy dough" = 1)

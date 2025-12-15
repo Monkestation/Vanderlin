@@ -10,7 +10,7 @@
 	spell_cost = 60
 	charge_time = 1
 	cooldown_time = 2 MINUTES
-
+	associated_skill = /datum/skill/misc/music
 
 /datum/status_effect/buff/playing_dirge
 	id = "play_dirge"

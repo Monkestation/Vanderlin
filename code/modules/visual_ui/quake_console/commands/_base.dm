@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(console_commands, init_possible_commands())
 		return FALSE
 	if(required_args && !fake)
 		if(length(arg_list) < required_args)
-			output.add_line("ERROR: Invalid Syntax Format requires [required_args] arguements [length(arg_list)] recieved.")
+			output.add_line("ERROR: Invalid Syntax Format requires [required_args] arguements [length(arg_list)] received.")
 			return FALSE
 	return TRUE
 

@@ -35,6 +35,9 @@
 	var/sound/S = soundin
 	if(!istype(S))
 		S = sound(get_sfx(soundin))
+	if(!istype(S))
+		CRASH("playsound(): sound is still a list after get_sfx")
+
 	var/maxdistance = SOUND_RANGE + extrarange
 	var/source_z = turf_source.z
 	var/list/listeners = SSmobs.clients_by_zlevel[source_z].Copy()
@@ -88,6 +91,9 @@
 
 	if(!S)
 		S = sound(get_sfx(soundin))
+
+	if(!istype(S))
+		CRASH("playsound_local(): sound is still a list after get_sfx")
 
 	S.wait = 0 //No queue
 	S.channel = channel || SSsounds.random_available_channel()

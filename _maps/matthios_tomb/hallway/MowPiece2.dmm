@@ -2,7 +2,7 @@
 "af" = (
 /obj/item/organ/brain,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "ai" = (
 /obj/item/weapon/knife/dagger/silver,
 /obj/item/natural/stone,
@@ -24,7 +24,7 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "bT" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/weapon/sword/rapier/silver,
@@ -34,7 +34,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "bU" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /obj/structure/bed/mediocre,
@@ -42,21 +42,21 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "cP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/bed/mediocre,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "eB" = (
 /obj/effect/decal/cleanable/blood,
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "eI" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "gg" = (
 /obj/structure/table/wood/plain,
 /obj/item/natural/cloth,
@@ -65,66 +65,66 @@
 	pixel_x = -7
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "gm" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/item/reagent_containers/glass/bowl,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "gU" = (
 /obj/item/organ/lungs,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "kp" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "lP" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "mb" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "mo" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /obj/item/ingot/gold,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "mJ" = (
 /obj/item/reagent_containers/food/snacks/rotten/meat,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "oy" = (
 /obj/structure/door,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "oD" = (
 /obj/item/organ/brain,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "pp" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "px" = (
 /obj/item/ingot/gold,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "pz" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "pY" = (
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/structure/table/wood/plain,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "rl" = (
 /turf/open/floor/blocks,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "sO" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -132,105 +132,105 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "to" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /obj/structure/bed/mediocre,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "tJ" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "uV" = (
 /obj/item/clothing/neck/psycross/silver,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "xG" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "yE" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "zd" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /obj/item/reagent_containers/food/snacks/pie/cooked/apple,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "As" = (
 /turf/closed/wall/mineral/wooddark,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Be" = (
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ed" = (
 /obj/item/reagent_containers/food/snacks/rotten/meat,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "FU" = (
 /obj/item/organ/tongue,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ga" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Hf" = (
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ig" = (
 /obj/item/organ/lungs,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Kb" = (
 /obj/effect/decal/cleanable/blood,
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Kr" = (
 /obj/item/paper/scroll,
 /obj/structure/table/wood/plain,
 /obj/item/natural/feather,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "KI" = (
 /obj/structure/table/wood/plain,
 /obj/item/needle,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "KJ" = (
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "LW" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "MI" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Nl" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "NR" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Oo" = (
 /obj/item/reagent_containers/food/snacks/rotten/meat,
 /obj/item/organ/heart,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Qs" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "RT" = (
 /obj/structure/table/wood/plain,
 /obj/item/weapon/knife/hunting{
@@ -254,45 +254,45 @@
 	pixel_x = 9
 	},
 /turf/open/floor/blocks,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Tu" = (
 /obj/item/reagent_containers/glass/bottle/beer,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Tw" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "TS" = (
 /obj/item/clothing/face/facemask/goldmask,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ud" = (
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Xw" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "XA" = (
 /obj/item/organ/eyes,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Yz" = (
 /obj/item/organ/heart,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "YR" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Zv" = (
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 xG

@@ -52,7 +52,7 @@
 	if(body_zone == BODY_ZONE_HEAD)
 		C.visible_message("<span class='danger'><B>[C] is [pick("BRUTALLY","VIOLENTLY","BLOODILY","MESSILY")] DECAPITATED!</B></span>")
 	else
-		C.visible_message("<span class='danger'><B>The [src.name] is [pick("torn off", "sundered", "severed", "seperated", "unsewn")]!</B></span>")
+		C.visible_message("<span class='danger'><B>The [src.name] is [pick("torn off", "sundered", "severed", "separated", "unsewn")]!</B></span>")
 	C.emote("painscream")
 	src.add_mob_blood(C)
 	C.add_stress(/datum/stress_event/dismembered)
@@ -247,7 +247,7 @@
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/R = C.hud_used.hand_slots["[held_index]"]
 			if(R)
-				R.update_appearance()
+				R.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
 		C.update_inv_gloves() //to remove the bloody hands overlay
@@ -266,7 +266,7 @@
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/L = C.hud_used.hand_slots["[held_index]"]
 			if(L)
-				L.update_appearance()
+				L.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
 		C.update_inv_gloves() //to remove the bloody hands overlay
@@ -350,7 +350,7 @@
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/hand = C.hud_used.hand_slots["[held_index]"]
 			if(hand)
-				hand.update_appearance()
+				hand.update_appearance(UPDATE_OVERLAYS)
 		C.update_inv_gloves()
 
 	if(special) //non conventional limb attachment

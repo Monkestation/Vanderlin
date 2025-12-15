@@ -49,7 +49,7 @@
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	tastes = list("salted roasted seeds" = 1)
 	name = "salted roasted seeds"
-	desc = "Too saly for rats, delectable for humens."
+	desc = "Too salty for rats, delectable for humens."
 	icon_state = "roastseeds"
 	dropshrink = 0.8
 	color = "#e5b175"

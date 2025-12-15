@@ -18,60 +18,60 @@
 	pixel_y = 11
 	},
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "af" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "ag" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "ai" = (
 /turf/open/floor/metal/barograte/open,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "al" = (
 /obj/item/natural/poo/cow,
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "am" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "ap" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aq" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "as" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "av" = (
 /obj/item/natural/worms/leech,
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aA" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aF" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aG" = (
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aL" = (
 /obj/item/natural/poo,
 /obj/item/natural/poo,
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aO" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aP" = (
 /obj/item/natural/poo,
 /obj/item/natural/poo{
@@ -91,48 +91,45 @@
 	},
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aU" = (
 /turf/closed/wall/mineral/pipe,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aW" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aY" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /obj/item/natural/poo,
 /turf/open/water/sewer,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "iO" = (
 /obj/structure/ladder,
 /turf/open/floor/metal/barograte/open,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "oB" = (
 /obj/item/weapon/sword/long/greatsword/zwei,
 /turf/open/floor/metal/barograte/open,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "px" = (
 /obj/item/clothing/cloak/heartfelt{
 	name = "shit stained cloak";
 	desc = "You are the lord of this shithouse."
 	},
 /turf/open/floor/metal/barograte/open,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "zc" = (
 /obj/item/gear,
 /turf/open/floor/metal/barograte/open,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "Hv" = (
 /obj/structure/toilet,
 /turf/open/floor/metal/barograte/open,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "Mg" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
 /turf/open/floor/metal/barograte/open,
-/area/rogue/under/tomb/sewer)
-"Ry" = (
-/turf/open/water/sewer,
-/area/centcom/supplypod/loading/ert)
+/area/under/tomb/sewer)
 
 (1,1,1) = {"
 aW
@@ -349,7 +346,7 @@ ag
 as
 aG
 aG
-Ry
+aG
 aU
 aU
 aG

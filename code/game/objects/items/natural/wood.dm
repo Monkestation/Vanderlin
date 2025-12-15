@@ -274,7 +274,7 @@
 
 /obj/item/grown/log/tree/essence
 	name = "essence of lumber"
-	desc = "A mystical essence embued with the power of Dendor. Very good source of fuel."
+	desc = "A mystical essence imbued with the power of Dendor. Very good source of fuel."
 	icon_state = "lessence"
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	static_debris = null

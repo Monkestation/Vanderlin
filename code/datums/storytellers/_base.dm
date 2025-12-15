@@ -112,13 +112,13 @@
 		log_storyteller("Running SSgamemode.current_roundstart_event\[[SSgamemode.current_roundstart_event]\]")
 		SSgamemode.ran_roundstart = TRUE
 
-	add_points(1)
+	add_points()
 	handle_tracks()
 
 /// Add points to all tracks while respecting the multipliers.
-/datum/storyteller/proc/add_points(seconds_per_tick)
+/datum/storyteller/proc/add_points()
 	var/datum/controller/subsystem/gamemode/mode = SSgamemode
-	var/base_point = EVENT_POINT_GAINED_PER_SECOND * seconds_per_tick * mode.event_frequency_multiplier
+	var/base_point = EVENT_POINT_GAINED_PER_SECOND * mode.event_frequency_multiplier
 	for(var/track in mode.event_track_points)
 		if(track == EVENT_TRACK_OMENS)
 			if(!length(GLOB.badomens))

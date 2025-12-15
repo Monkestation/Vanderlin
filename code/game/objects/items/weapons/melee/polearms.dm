@@ -234,7 +234,7 @@
 
 /obj/item/weapon/polearm/spear/assegai
 	name = "iron assegai"
-	desc = "a long spear originating from the southern regions of Lakkari. Lakkarian women in the city of Sebbet are taught to use assegai so they can defend themselves against Zalad bandits."
+	desc = "A long spear originating from the southern regions of Lakkari. Lakkarian women in the city of Sekket are taught to use assegai so they can defend themselves against Zalad bandits."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_iron"
 	gripsprite = FALSE
@@ -522,6 +522,13 @@
 	wdefense = AVERAGE_PARRY
 	axe_cut = 10
 	sellprice = 30
+
+/obj/item/weapon/polearm/halberd/bardiche/ancient
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	name = "bardiche"
+	desc = "A grand axe of northern design, renowned for easily chopping off limbs clean with brutal strength."
+	icon_state = "ancient_bardiche"
 
 /obj/item/weapon/polearm/halberd/bardiche/dendor
 	name = "summer scythe"

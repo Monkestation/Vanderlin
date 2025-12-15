@@ -111,7 +111,7 @@ SUBSYSTEM_DEF(treasury)
 */
 /datum/controller/subsystem/treasury/proc/CalcVaultIncome()
 	vault_accounting = list()
-	var/area/A = GLOB.areas_by_type[/area/rogue/indoors/town/vault]
+	var/area/A = GLOB.areas_by_type[/area/indoors/town/vault]
 	var/passive_income = 0
 	for(var/obj/I in A)
 		if(!isturf(I.loc))

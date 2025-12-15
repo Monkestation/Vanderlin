@@ -10,6 +10,9 @@
 		/datum/attunement/death = 0.4,
 	)
 
+	invocation = "HYDRO MURIATIC!!!!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 3 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.7

@@ -82,9 +82,9 @@
 
 /mob/proc/psydo_nyte()
 	sleep(2)
-	overlay_fullscreen("LYVES", /atom/movable/screen/fullscreen/zezuspsyst)
+	overlay_fullscreen("LIVES", /atom/movable/screen/fullscreen/zezuspsyst)
 	sleep(2)
-	clear_fullscreen("LYVES")
+	clear_fullscreen("LIVES")
 
 ///Apply the blurry overlays to a mobs clients screen
 /mob/proc/update_eye_blur()

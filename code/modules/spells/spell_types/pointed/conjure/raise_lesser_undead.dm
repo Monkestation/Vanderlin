@@ -5,6 +5,9 @@
 	self_cast_possible = FALSE
 	sound = 'sound/magic/magnet.ogg'
 
+	invocation = "SERVE ME!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 2 SECONDS
 	charge_drain = 1
 	charge_slowdown = 1.3

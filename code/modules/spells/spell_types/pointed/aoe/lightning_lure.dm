@@ -11,6 +11,9 @@
 		/datum/attunement/electric = 0.9
 	)
 
+	invocation = "Lighnting Lure!!!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 2.5 SECONDS
 	charge_drain = 1
 	charge_slowdown = 1.3

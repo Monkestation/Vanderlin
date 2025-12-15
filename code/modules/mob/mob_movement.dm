@@ -1,4 +1,4 @@
-w/**
+/**
  * If your mob is concious, drop the item in the active hand
  *
  * This is a hidden verb, likely for binding with winset for hotkeys
@@ -157,7 +157,7 @@ w/**
 				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
 	else
 		if(L.dir != target_dir)
-			// Remove sprint intent if we change direction, but only if we sprinted atleast 1 tile
+			// Remove sprint intent if we change direction, but only if we sprinted at least 1 tile
 			if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
 				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
 
@@ -583,7 +583,7 @@ w/**
 			m_intent = MOVE_INTENT_RUN
 	if(hud_used && hud_used.static_inventory)
 		for(var/atom/movable/screen/rogmove/selector in hud_used.static_inventory)
-			selector.update_appearance()
+			selector.update_appearance(UPDATE_ICON_STATE)
 	if(!silent)
 		playsound_local(src, 'sound/misc/click.ogg', 100)
 

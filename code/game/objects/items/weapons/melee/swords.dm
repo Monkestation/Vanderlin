@@ -92,6 +92,7 @@
 	. = ..()						//+3 force, +100 blade int, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, 100, 50, 1, TRUE)
 
+
 //................ Arming Sword ............... //
 /obj/item/weapon/sword/arming
 	name = "arming sword"
@@ -162,7 +163,7 @@
 
 /obj/item/weapon/sword/ida
 	name = "steel ida"
-	desc = "A Lakkarian short sword with a tapered leaf-shaped blade. It's popular amongst the lower class of Ei Osalla."
+	desc = "A Lakkarian short sword with a tapered leaf-shaped blade. It's popular amongst the lower class of Ei Onkara."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_steel"
 	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
@@ -183,6 +184,24 @@
 	wbalance = HARD_TO_DODGE
 	sellprice = 20
 	smeltresult = /obj/item/ingot/iron
+
+/obj/item/weapon/sword/rapier/caneblade
+	name = "cane blade"
+	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing"
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
+	icon_state = "caneblade"
+	sellprice = 100 //Gold handle
+	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier)
+	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
+	force_wielded = 0
+	gripped_intents = null
+	alt_intents = null
+	parrysound = "rapier"
+	swingsound = BLADEWOOSH_SMALL
+	minstr = 6
+	wbalance = VERY_HARD_TO_DODGE
+	bigboy = FALSE
+	SET_BASE_PIXEL(0, 0)
 
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
@@ -254,7 +273,7 @@
 /obj/item/weapon/sword/sabre/dadao
 	name = "steel dadao"
 	icon_state = "dadao_steel"
-	desc = "Also sometimes refered to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
+	desc = "Sometimes also referred to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
 	force = DAMAGE_SWORD+1
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/curved)
 	gripped_intents = list(/datum/intent/axe/chop, /datum/intent/sword/thrust/curved)
@@ -404,7 +423,7 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop, /datum/intent/sword/thrust/curved)
 	name = "iron sengese"
-	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but its a force to be reckoned with in the hands of a master."
+	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_iron"
 	swingsound = BLADEWOOSH_SMALL
@@ -417,7 +436,7 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop, /datum/intent/sword/thrust/curved)
 	name = "steel sengese"
-	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but its a force to be reckoned with in the hands of a master."
+	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_steel"
 	swingsound = BLADEWOOSH_SMALL
@@ -430,7 +449,7 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop, /datum/intent/sword/thrust/curved)
 	name = "silver sengese"
-	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but its a force to be reckoned with in the hands of a master."
+	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_silver"
 	swingsound = BLADEWOOSH_SMALL
@@ -575,7 +594,7 @@
 
 /obj/item/weapon/sword/rapier/psy/relic
 	name = "retribution"
-	desc = "A rapier as swift as the inquisitors of the Ordo Venetari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
+	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
 
 /obj/item/weapon/sword/rapier/dec
 	icon_state = "decrapier"
@@ -584,7 +603,7 @@
 
 /obj/item/weapon/sword/rapier/nimcha
 	name = "nimcha"
-	desc = "A swift sword of Lakkarian origin. It's popular with the noblewomen of Ei Osalla."
+	desc = "A swift sword of Lakkarian origin. It's popular with the noblewomen of Ei Onkara."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "nimcha"
 	wbalance = HARD_TO_DODGE
@@ -676,12 +695,14 @@
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	sellprice = 60
+	grid_height = 96
+	grid_width = 64
 
 /obj/item/weapon/sword/long/shotel
 	name = "steel shotel"
 	icon_state = "shotel_steel"
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
-	desc = "a long curved blade of Lakkarian Design. Shotels are the weapon of choice for pegasus knights."
+	desc = "A long, curved blade of Lakkarian Design. Shotels are the weapon of choice for pegasus knights."
 	possible_item_intents = list(/datum/intent/sword/cut/long, /datum/intent/sword/chop/long)
 	gripped_intents = list(/datum/intent/sword/cut/long, /datum/intent/sword/chop/long/shotel)
 	swingsound = BLADEWOOSH_LARGE
@@ -720,6 +741,7 @@
 	sellprice = 60
 	max_integrity = INTEGRITY_STANDARD - 50
 	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/long/death
 	color = CLOTHING_SOOT_BLACK
@@ -742,7 +764,7 @@
 /obj/item/weapon/sword/long/aruval
 	name = "steel aruval"
 	icon_state = "aruval_steel"
-	desc = "A long billhook machete of Savannah Elf origin. It was originally designed to cut large branches, but has since evolved into being a formiddable weapon."
+	desc = "A long billhook machete of Savannah Elf origin. It was originally designed to cut large branches, but has since evolved into a formidable weapon."
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/thrust/long, /datum/intent/sword/strike, /datum/intent/sword/cut/long, /datum/intent/sword/disarm)
 	gripsprite = FALSE
@@ -860,7 +882,7 @@
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	icon_state = "vlord"
 	name = "Jaded Fang"
-	desc = "An ancestral long blade with an ominous glow, serrated with barbs along it's edges. Stained with a strange green tint."
+	desc = "An ancestral long blade with an ominous glow, serrated with barbs along its edges. Stained with a strange green tint."
 	sellprice = 363
 	static_price = TRUE
 
@@ -915,7 +937,7 @@
 
 /obj/item/weapon/sword/long/forgotten
 	name = "forgotten blade"
-	desc = "A large silver-alloy sword made in a revisionist style, honoring Psydon. Best known as the prefered weapon of Inquisitorial Lodges."
+	desc = "A large silver-alloy sword made in a revisionist style, honoring Psydon. Best known as the preferred weapon of Inquisitorial Lodges."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "oldpsybroadsword"
 	force = DAMAGE_SWORD * 0.9 // Damage is .9 of a steel sword
@@ -929,6 +951,8 @@
 	wdefense = GREAT_PARRY
 	sellprice = 90
 	last_used = 0
+	melting_material = /datum/material/silver
+	melt_amount = 75
 
 /obj/item/weapon/sword/long/forgotten/Initialize(mapload)
 	. = ..()
@@ -936,7 +960,7 @@
 
 /obj/item/weapon/sword/long/ravox
 	name = "duel settler"
-	desc = "The tenets of ravoxian duels are enscribed upon the blade of this sword."
+	desc = "The tenets of Ravoxian duels are inscribed upon the blade of this sword."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "ravoxflamberge"
 	force = DAMAGE_SWORD + 2
@@ -953,6 +977,8 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 100
 	last_used = 0
+	melting_material = /datum/material/silver
+	melt_amount = 75
 
 /obj/item/weapon/sword/long/psydon/Initialize(mapload)
 	. = ..()
@@ -972,6 +998,8 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 160
 	last_used = 0
+	melting_material = /datum/material/silver
+	melt_amount = 75
 
 /obj/item/weapon/sword/long/decorated/Initialize(mapload)
 	. = ..()
@@ -1021,6 +1049,8 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 150
 	minstr = 11
+	melting_material = /datum/material/silver
+	melt_amount = 150
 
 /obj/item/weapon/sword/long/greatsword/psydon/Initialize(mapload)
 	. = ..()
@@ -1047,22 +1077,19 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/axe/chop)
 
-/obj/item/weapon/sword/long/greatsword/broadsword/psy
+/obj/item/weapon/sword/long/broadsword/psy
 	name = "old psydonian broadsword"
 	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Adjudicators and Priests of the Holy See for an extended period of time. Its edge remains as lethal as ever, however."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psybroadsword"
-	force = 25
-	force_wielded = 30
-	possible_item_intents = list(/datum/intent/sword/cut,/datum/intent/sword/chop,/datum/intent/stab)
-	gripped_intents = list(/datum/intent/sword/cut/zwei, /datum/intent/sword/chop, /datum/intent/sword/lunge, /datum/intent/sword/thrust/estoc)
-	alt_intents = list(/datum/intent/effect/daze, /datum/intent/sword/strike, /datum/intent/sword/bash)
+	melting_material = /datum/material/silver
+	melt_amount = 150
 
-/obj/item/weapon/sword/long/greatsword/broadsword/psy/relic
+/obj/item/weapon/sword/long/broadsword/psy/relic
 	name = "Creed"
 	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You’re the light - show them the way."
 
-/obj/item/weapon/sword/long/greatsword/broadsword/psy/getonmobprop(tag)
+/obj/item/weapon/sword/long/broadsword/psy/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -1071,24 +1098,31 @@
 			if("onback") return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
 			if("onbelt") return list("shrink" = 0.3, "sx" = -4, "sy" = -6, "nx" = 5, "ny" = -6, "wx" = 0, "wy" = -6, "ex" = -1, "ey" = -6, "nturn" = 100, "sturn" = 156, "wturn" = 90, "eturn" = 180, "nflip" = 0, "sflip" = 0, "wflip" = 0, "eflip" = 0, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0)
 
-/obj/item/weapon/sword/long/greatsword/broadsword/psy/relic/Initialize(mapload)
+/obj/item/weapon/sword/long/broadsword/psy/relic/Initialize(mapload)
 	. = ..()					//Pre-blessed, +5 DMG, +100 Blade int, +100 int, +2 def, make it silver
 	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 2, TRUE)
 
-/obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten
+/obj/item/weapon/sword/long/greatsword/psydon/unforgotten
 	name = "unforgotten blade"
-	desc = "High Inquisitor Archibald once recorded an expedition of seven brave Adjudicators into Gronnian snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in rememberance."
+	desc = "High Inquisitor Archibald once recorded an expedition of seven brave Adjudicators into Gronnian snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
 	icon_state = "forgottenblade"
 
-/obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten/Initialize()
+/obj/item/weapon/sword/long/greatsword/psydon/unforgotten/Initialize()
 	. = ..()					//+50 Blade int, +3 DMG, +50 int, +1 def, make it silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, 50, 50, 1, TRUE)
 
 //................ Flamberge ............... //
 /obj/item/weapon/sword/long/greatsword/flamberge
 	name = "flamberge"
-	desc = "Commonly known as a flame-bladed sword, this weapon has an undulating blade. It's wave-like form distributes force better, and is less likely to break on impact."
+	desc = "Commonly known as a flame-bladed sword, this weapon has an undulating blade. Its wave-like form distributes force better, and is less likely to break on impact."
 	icon_state = "flamberge"
+	wbalance = DODGE_CHANCE_NORMAL
+	sellprice = 120
+
+/obj/item/weapon/sword/long/greatsword/steelflamberge
+	name = "steel flamberge"
+	desc = "A steel variant of the Flamberge, It's wave-like form distributes force better, and is less likely to break on impact."
+	icon_state = "steelflamberge"
 	wbalance = DODGE_CHANCE_NORMAL
 	sellprice = 120
 
@@ -1097,12 +1131,14 @@
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/long, /datum/intent/sword/strike, /datum/intent/sword/chop/long)
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	name = "zweihander"
-	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that it's handling properties are more akin to that of a polearm than a sword."
+	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
 	icon_state = "steelzwei"
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 150 // Iron tier
 	max_integrity = INTEGRITY_STRONG
 	sellprice = 60
+	melting_material = /datum/material/iron
+	melt_amount = 225
 
 /obj/item/weapon/sword/long/greatsword/zwei/getonmobprop(tag)
 	. = ..()
@@ -1168,7 +1204,7 @@
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike, /datum/intent/sword/chop/long)
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	name = "iron claymore"
-	desc = "A large sword orginiating from the Northen land of Caledon, a proud Warrior nation beholden to Ravox"
+	desc = "A large sword originating from the northern land of Caledon, a proud warrior nation beholden to Ravox."
 	icon_state = "ironclaymore"
 	minstr = 10
 	smeltresult = /obj/item/ingot/iron
@@ -1195,7 +1231,7 @@
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike, /datum/intent/sword/chop/long)
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	name = "steel claymore"
-	desc = "A steel variant of the standard Claymore, the mainstay weapon of the wandering Mercanary Gallowglass' of Kaledon."
+	desc = "A steel variant of the standard Claymore, the mainstay weapon of the wandering mercenary Gallowglass of Kaledon."
 	icon_state = "steelclaymore"
 	minstr = 10
 	max_blade_int = INTEGRITY_STRONG
@@ -1522,27 +1558,43 @@
 		. += "A hollow replica of the usual longsword design presumebly made for showsake, useless in real battle"
 
 
-/obj/item/weapon/sword/sabre/mulyeog
-	force = 25
+//A weapon meant to be used with two hands.
+/obj/item/weapon/sword/katana
+	name = "katana"
+	desc = "A foreign sword."
+	icon_state = "eastsword1"
+	force_wielded = 28
+	possible_item_intents = list(/datum/intent/katana/cut/one_hand_cut, /datum/intent/sword/strike)
+	gripped_intents = list(/datum/intent/katana/cut, /datum/intent/katana/arc, /datum/intent/sword/strike, /datum/intent/katana/precision_cut)
+	swingsound = BLADEWOOSH_MED
+	parrysound = "bladedmedium"
+	pickup_sound = "brandish_blade"
+	wlength = WLENGTH_NORMAL
+	wdefense = GOOD_PARRY
+	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
+	melt_amount = 75
+	melting_material = /datum/material/steel
+
+
+/obj/item/weapon/sword/katana/mulyeog
 	name = "foreign straight blade"
 	desc = "A foreign sword used by cut-throats & thugs. There's a red tassel on the hilt."
 	icon_state = "eastsword1"
-	melt_amount = 75
-	melting_material = /datum/material/steel
-	wdefense = 3
 
-/obj/item/weapon/sword/sabre/mulyeog/rumahench
+/obj/item/weapon/sword/katana/mulyeog/rumahench
 	name = "hwang blade"
-	desc = "A foreign steel sword with cloud patterns on the groove. An blade of the Ruma clan's insignia along it."
+	desc = "A foreign steel sword with cloud patterns on the groove."
 	icon_state = "eastsword2"
 
-/obj/item/weapon/sword/sabre/mulyeog/rumacaptain
-	force = 30
+/obj/item/weapon/sword/katana/mulyeog/rumacaptain
+	force = 25
+	force_wielded = 30
 	name = "samjeongdo"
-	desc = "A gold-stained with cloud patterns on the groove. One of a kind. It is a symbol of status within the Ruma clan."
+	desc = "A gold-stained with cloud patterns on the groove. One of a kind."
 	icon_state = "eastsword3"
-	max_integrity = 180
-	wdefense = 4
+	wdefense = GREAT_PARRY
+
+
 
 /obj/item/weapon/sword/sabre/hook
 	name = "hook sword"

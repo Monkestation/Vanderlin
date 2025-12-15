@@ -363,7 +363,7 @@ SUBSYSTEM_DEF(triumphs)
 				continue
 
 			position_number++
-			webpage += "[position_number]. [capitalize(key)] - [FLOOR(triumph_leaderboard[key], 1)]<br>"
+			webpage += "[position_number]. [key] - [FLOOR(triumph_leaderboard[key], 1)]<br>"
 			if(position_number >= 20)
 				break
 	else

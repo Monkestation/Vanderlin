@@ -187,7 +187,7 @@
 			chop_to = length(key) + 2
 		else if(key == "," && !mods[LANGUAGE_EXTENSION])
 			for(var/datum/language/LD as anything in GLOB.all_languages)
-				if(initial(LD.key) == message[1 + length(message[1])])
+				if(initial(LD.key) == lowertext(message[1 + length(message[1])]))
 					if(!can_speak_in_language(LD))
 						return message
 					mods[LANGUAGE_EXTENSION] = LD

@@ -69,7 +69,7 @@
 	classic_keys = list()
 	name = "activate_inhand"
 	full_name = "Activate in-hand"
-	description = "Uses whatever item you have inhand"
+	description = "Uses whatever item you have in-hand"
 
 /datum/keybinding/living/activate_inhand/down(client/user)
 	. = ..()

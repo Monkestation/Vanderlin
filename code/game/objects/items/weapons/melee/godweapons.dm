@@ -50,7 +50,7 @@
 		user.playsound_local(user, pick('sound/misc/godweapons/gorefeast1.ogg', 'sound/misc/godweapons/gorefeast2.ogg', 'sound/misc/godweapons/gorefeast3.ogg'), 70)
 		message = pick(GOREFEAST_UNWORTHY)
 	else
-		to_chat(user, span_danger("Gorefeast begins to thump, ecstatically upon your touch on the boney shaft."))
+		to_chat(user, span_danger("Gorefeast begins to thump ecstatically upon your touch on the boney shaft."))
 		user.playsound_local(user, pick('sound/misc/godweapons/gorefeast4.ogg', 'sound/misc/godweapons/gorefeast5.ogg', 'sound/misc/godweapons/gorefeast6.ogg'), 70)
 		message = pick(GOREFEAST_WORTHY)
 	addtimer(CALLBACK(src, PROC_REF(do_message), message), 2 SECONDS)

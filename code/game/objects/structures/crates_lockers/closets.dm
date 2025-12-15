@@ -64,7 +64,7 @@
 		addtimer(CALLBACK(src, PROC_REF(take_contents)), 0)
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE)
-	PopulateContents()
+	populate_contents()
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_MAGICALLY_UNLOCKED = PROC_REF(on_magic_unlock),
 	)
@@ -75,7 +75,7 @@
 	return ..()
 
 //USE THIS TO FILL IT, NOT INITIALIZE OR NEW
-/obj/structure/closet/proc/PopulateContents()
+/obj/structure/closet/proc/populate_contents()
 	return
 
 // TODO: REIMPLEMENT TG CLOSET AND CRATE OVERLAYS

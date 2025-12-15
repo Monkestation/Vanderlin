@@ -25,7 +25,7 @@
 	icon_state = "dryad"
 	icon_living = "dryad"
 	icon_dead = "vvd"
-	summon_primer = "You are a dryad, a large sized fae. You spend time tending to forests, guarding sacred ground from tresspassers. Now you've been pulled from your home into a new world, that is decidedly less wild and natural. How you react to these events, only time can tell."
+	summon_primer = "You are a dryad, a large sized fae. You spend time tending to forests, guarding sacred ground from trespassers. Now you've been pulled from your home into a new world, that is decidedly less wild and natural. How you react to these events, only time can tell."
 	tier = 3
 	gender = MALE
 	emote_hear = null

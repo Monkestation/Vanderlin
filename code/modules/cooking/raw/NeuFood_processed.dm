@@ -12,7 +12,7 @@
 	icon_state = "fat"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	eat_effect = /datum/status_effect/debuff/uncookedfood
-	possible_item_intents = list(/datum/intent/food, /datum/intent/splash)
+	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
 
 /obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, proximity)
 	if(user.used_intent.type == /datum/intent/food)
@@ -47,6 +47,7 @@
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
 			qdel(src)
 			R.reagents.remove_reagent(/datum/reagent/consumable/sugar, 33)
+			user.nobles_seen_servant_work()
 	else
 		to_chat(user, span_warning("You need to put [src] on a table to work on it."))
 
@@ -107,7 +108,7 @@
 // -------------- CHOCOLATE -----------------
 /obj/item/reagent_containers/food/snacks/chocolate
 	name = "chocolate bar"
-	desc = "Unbelievably fancy chocolate, imported all the way from distant Grenzlehoft"
+	desc = "Unbelievably fancy chocolate, imported all the way from distant Grenzelhoft"
 	icon_state = "chocolate"
 	bitesize = 4
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
@@ -331,6 +332,21 @@
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
 
+/***************** Mushrooms *****************/
+
+/obj/item/reagent_containers/food/snacks/waddle_dried
+	name = "dried waddle"
+	desc = "A waddle mushroom that has been dried for use in tea. Not pleasant to eat in this state."
+	icon_state = "driedwaddle"
+	dropshrink = 1
+	bitesize = 3
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	w_class = WEIGHT_CLASS_TINY
+	tastes = list("woody" = 1,"bitter" = 1)
+	foodtype = MUSHROOM
+	faretype = FARE_POOR
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+
 /*------------\
 | Salted milk |
 \------------*/		// The base for making butter and cheese
@@ -372,6 +388,7 @@
 				reagents.remove_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
 			new /obj/item/reagent_containers/food/snacks/butter(drop_location())
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT))
+			user.nobles_seen_servant_work()
 		return
 	..()
 
@@ -463,6 +480,7 @@
 					reagents.remove_reagent(milk, 5)
 					new cheese(drop_location())
 					user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT))
+				user.nobles_seen_servant_work()
 			return
 	..()
 
@@ -478,6 +496,7 @@
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
 				qdel(I)
 				qdel(src)
+				user.nobles_seen_servant_work()
 			return
 		else
 			to_chat(user, span_warning("You need to put [src] on a table to work on it."))
@@ -553,6 +572,7 @@
 				icon_state = "cheesewheel_end"
 				desc = "Slowly solidifying, best left alone a bit longer."
 				addtimer(CALLBACK(src, PROC_REF(maturing_done)), 5 MINUTES)
+				user.nobles_seen_servant_work()
 		else
 			to_chat(user, span_warning("You need to put [src] on a table to work on it."))
 	else

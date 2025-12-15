@@ -1,7 +1,7 @@
 // TODO make this a projectile jesus
 /datum/action/cooldown/spell/chill_touch
 	name = "Chill Touch"
-	desc = "A skeletal hand grips your target, the targetted zone changes the effect."
+	desc = "A skeletal hand grips your target, the targeted zone changes the effect."
 	sound = 'sound/magic/whiteflame.ogg'
 	self_cast_possible = FALSE
 
@@ -11,7 +11,7 @@
 		/datum/attunement/death = 0.2,
 	)
 
-	invocation = "Be torn apart!"
+	invocation = "Death grip you!"
 	invocation_type = INVOCATION_SHOUT
 	spell_flags = SPELL_RITUOS
 	charge_time = 2 SECONDS
@@ -40,7 +40,7 @@
 
 /obj/item/chilltouch
 	name = "Skeletal Hand"
-	desc = "A ghostly, skeletal hand which moves of it's own accord."
+	desc = "A ghostly, skeletal hand which moves of its own accord."
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bounty"
 

@@ -2,7 +2,6 @@
 	title = "Wanderer"
 	tutorial = "You are a member of the Merry Band, a humble guild of wanderers who have united under one common desire. Wandering for the sake of experiencing the beauty and diversity of Faience to the fullest extent. As the motto of the Merry Band goes, \"Make every step count and may your journeys be full of wonder\"."
 	total_positions = 5
-	min_pq = 0
 	category_tags = list(CTAG_PILGRIM)
 	outfit = /datum/outfit/adventurer/wanderingpilgrim
 
@@ -14,7 +13,7 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/medicine = 2,
-		/datum/skill/combat/polearms = 3, // have to be atleast somewhat competent with one weapon to have traveled alot
+		/datum/skill/combat/polearms = 3, // have to be at least somewhat competent with one weapon to have traveled alot
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/wrestling = 1,

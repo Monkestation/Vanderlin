@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish
 	abstract_type = /obj/item/reagent_containers/food/snacks/fish
 	name = "fish"
-	desc = "very bland"
+	desc = "Very bland."
 	desc = ""
 	icon_state = "carpcom"
 	icon = 'icons/roguetown/misc/fish.dmi'
@@ -1270,7 +1270,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 /obj/item/reagent_containers/food/snacks/chocolate_carp
 	name = "le carp au chocolat"
-	desc = "Plundered grenzlehoftian chocolate drizzled over fish, this abomination is a delicacy to dark elves. In this case the eyeless cave fish has been substituted for a carp."
+	desc = "Plundered Grenzelhoftian chocolate drizzled over fish, this abomination is a delicacy to dark elves. In this case the eyeless cave fish has been substituted for a carp."
 	icon_state = "chocolatecarp"
 	bitesize = 4
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)

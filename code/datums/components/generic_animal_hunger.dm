@@ -87,7 +87,7 @@
 	SIGNAL_HANDLER
 	return (current_hunger / max_hunger) * 100
 
-/datum/component/generic_mob_hunger/process(seconds_per_tick)
+/datum/component/generic_mob_hunger/process()
 	if(hunger_paused || !hunger_drain || (feed_pause_end > world.time))
 		return
 

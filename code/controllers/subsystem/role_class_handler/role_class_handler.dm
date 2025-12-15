@@ -140,7 +140,7 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	if(picked_class.inherit_parent_title)
 		if(old)
-			if(H.gender == FEMALE && old.f_title)
+			if(H.pronouns == SHE_HER && old.f_title)
 				picked_class.title_override = old.f_title
 			else
 				picked_class.title_override = old.title

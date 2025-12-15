@@ -58,7 +58,7 @@
 
 /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	name = "lakkarian jupon"
-	desc = "a thick, quilted jupon with an iron heart protector. Apart of the standard traveling uniform for Lakkarian clerics. It's great for the southern desert's heat and northern tundra's cold."
+	desc = "a thick, quilted jupon with an iron heart protector. A part of the standard traveling uniform for Lakkarian clerics. It's great for the southern desert's heat and northern tundra's cold."
 	icon_state = "lakkarijupon"
 	max_integrity = INTEGRITY_STRONG
 	r_sleeve_status = SLEEVE_NORMAL
@@ -120,7 +120,7 @@
 //................ Arming Jacket ............... //
 /obj/item/clothing/armor/gambeson/arming
 	name = "arming jacket"
-	desc = "Thick quilted cloth, a gambesson for the discerning knight. it is meant to be used under heavier armor."
+	desc = "Thick quilted cloth, a gambeson for the discerning knight. it is meant to be used under heavier armor."
 	icon_state = "arming"
 	sellprice = VALUE_GAMBESSON+BONUS_VALUE_MODEST
 
@@ -158,4 +158,3 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_CHOP)
 	armor = ARMOR_PADDED
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-

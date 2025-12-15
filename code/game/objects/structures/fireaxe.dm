@@ -25,12 +25,12 @@
 	if(istype(I, /obj/item/weapon/sword/long/heirloom) && !heirloom)
 		var/obj/item/weapon/sword/long/heirloom/F = I
 		if(HAS_TRAIT(F, TRAIT_WIELDED))
-			to_chat(user, "<span class='warning'>Unwield the [F.name] first.</span>")
+			to_chat(user, "<span class='warning'>Unwield \the [F] first.</span>")
 			return
 		if(!user.transferItemToLoc(F, src))
 			return
 		heirloom = F
-		to_chat(user, "<span class='notice'>I place the [F.name] back in the [name].</span>")
+		to_chat(user, "<span class='notice'>I place \the [F] back in \the [src].</span>")
 		update_appearance(UPDATE_ICON_STATE)
 		return
 	return ..()
@@ -41,8 +41,8 @@
 		return
 	if(heirloom)
 		user.put_in_hands(heirloom)
+		to_chat(user, "<span class='notice'>I take \the [heirloom] from \the [src].</span>")
 		heirloom = null
-		to_chat(user, "<span class='notice'>I take the sword from the [name].</span>")
 		src.add_fingerprint(user)
 		update_appearance(UPDATE_ICON_STATE)
 		return
@@ -75,11 +75,11 @@
 	desc = "A fitting resting place for a Psydonian sword etched and scratched by endurance long past."
 	icon = 'icons/obj/wallmounts.dmi'
 	icon_state = "fireaxe"
-	heirloom = /obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten/
+	heirloom = /obj/item/weapon/sword/long/greatsword/psydon/unforgotten/
 
 /obj/structure/fireaxecabinet/unforgotten/Initialize()
 	. = ..()
-	heirloom = new /obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten
+	heirloom = new /obj/item/weapon/sword/long/greatsword/psydon/unforgotten
 	desc = heirloom.desc
 	update_icon()
 
@@ -89,12 +89,12 @@
 
 /obj/structure/fireaxecabinet/unforgotten/attackby(obj/item/I, mob/user, params)
 	if(open || obj_broken)
-		if(istype(I, /obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten/) && !heirloom)
-			var/obj/item/weapon/sword/long/greatsword/broadsword/psy/unforgotten/F = I
+		if(istype(I, /obj/item/weapon/sword/long/greatsword/psydon/unforgotten/) && !heirloom)
+			var/obj/item/weapon/sword/long/greatsword/psydon/unforgotten/F = I
 			if(!user.transferItemToLoc(F, src))
 				return
 			heirloom = F
-			to_chat(user, "<span class='notice'>I place the [F.name] back in the [name].</span>")
+			to_chat(user, "<span class='notice'>I place \the [F] back in \the [src].</span>")
 			desc = F.desc
 			update_appearance()
 			return

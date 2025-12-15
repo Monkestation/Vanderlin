@@ -10,6 +10,9 @@
 		/datum/attunement/ice = 0.9
 	)
 
+	invocation = "Bite of Frost!!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 3 SECONDS
 	charge_drain = 1
 	cooldown_time = 25 SECONDS

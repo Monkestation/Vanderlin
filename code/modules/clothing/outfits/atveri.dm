@@ -8,7 +8,7 @@
 
 /obj/item/clothing/armor/leather/heavy/atgervi
 	name = "shamanic coat"
-	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is too desire for more."
+	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is to desire for more."
 	icon_state = "atgervi_shaman_coat"
 	item_state = "atgervi_shaman_coat"
 
@@ -45,7 +45,7 @@
 
 /obj/item/clothing/head/helmet/leather/saiga/atgervi
 	name = "moose hood"
-	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans, To slay a Grinning moose in the final hunt alone and fashion a hood from it's head."
+	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans, To slay a Grinning moose in the final hunt alone and fashion a hood from its head."
 	icon_state = "atgervi_shaman"
 	item_state = "atgervi_shaman"
 	flags_inv = HIDEEARS|HIDEFACE
@@ -88,7 +88,7 @@
 
 /obj/item/weapon/axe/steel/atgervi
 	name = "Bearded Axe"
-	desc = "A large axe easily wielded in one hand or two, With a large hooked axehead to tearing into flesh and armor and ripping it away brutally."
+	desc = "A large axe easily wielded in one hand or two, With a large hooked axe head to tearing into flesh and armor and ripping it away brutally."
 	icon_state = "atgervi_axe"
 	item_state = "atgervi_axe"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'

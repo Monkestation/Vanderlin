@@ -89,7 +89,8 @@
 	gender = MALE
 	if(prob(33))
 		gender = FEMALE
-	update_appearance()
+
+	update_appearance(UPDATE_OVERLAYS)
 
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 

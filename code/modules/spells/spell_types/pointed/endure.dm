@@ -24,7 +24,7 @@
 	charge_time = 1
 	cast_range = 2
 	sound = 'sound/magic/ENDVRE.ogg'
-	invocation = "LYVE, ENDURE!" // holy larp yelling for healing is silly
+	invocation = "LIVE, ENDURE!" // holy larp yelling for healing is silly
 	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	cooldown_time = 30 SECONDS

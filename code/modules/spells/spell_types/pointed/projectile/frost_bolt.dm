@@ -9,6 +9,9 @@
 		/datum/attunement/ice = 0.7,
 	)
 
+	invocation = "Beam of Frost!!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 2 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.7

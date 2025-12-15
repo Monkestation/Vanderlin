@@ -142,6 +142,9 @@
 /obj/item/clothing/shirt/clothvest/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
+/obj/item/clothing/shirt/clothvest/colored/red
+	color = CLOTHING_ROYAL_RED
+
 /obj/item/clothing/shirt/clothvest/colored/random/Initialize()
 	color = pick(CLOTHING_LINEN, CLOTHING_BARK_BROWN, CLOTHING_FOREST_GREEN, CLOTHING_BERRY_BLUE, CLOTHING_BLOOD_RED, CLOTHING_PEAR_YELLOW, CLOTHING_ROYAL_TEAL)
 	return ..()

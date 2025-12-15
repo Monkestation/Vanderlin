@@ -70,6 +70,11 @@
 	if(!silent && owner.current)
 		to_chat(owner.current,span_danger("I am no longer a [special_role]!"))
 	owner.special_role = null
+	owner.current.remove_spell(/datum/action/cooldown/spell/undirected/werewolf_form)
+	owner.current.UnregisterSignal(owner.current, COMSIG_RAGE_BOTTOMED)
+	owner.current.UnregisterSignal(owner.current, COMSIG_RAGE_OVERRAGE)
+
+
 	return ..()
 
 /datum/antagonist/werewolf/proc/add_objective(datum/objective/O)
@@ -184,7 +189,7 @@
 	attack_verb = list("claws", "mauls", "eviscerates")
 	animname = "claw"
 	hitsound = "genslash"
-	penfactor = 30
+	penfactor = 45
 	candodge = TRUE
 	canparry = TRUE
 	miss_text = "slashes the air!"
@@ -203,7 +208,6 @@
 	force = 15
 	block_chance = 0
 	wdefense = 2
-	armor_penetration = 15
 	associated_skill = /datum/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = EASY_TO_DODGE

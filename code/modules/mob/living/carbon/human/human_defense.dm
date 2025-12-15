@@ -558,7 +558,7 @@
 		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
 			to_chat(src, "<span class='notice'>I attempt to remove the durathread strand from around my neck.</span>")
 			if(do_after(src, 3.5 SECONDS, src))
-				to_chat(src, "<span class='notice'>I succesfuly remove the durathread strand.</span>")
+				to_chat(src, "<span class='notice'>I successfully remove the durathread strand.</span>")
 				remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 			return
 		check_for_injuries(M)

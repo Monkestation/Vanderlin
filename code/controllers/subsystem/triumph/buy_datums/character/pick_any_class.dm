@@ -29,7 +29,7 @@
 
 /datum/job/advclass/pick_everything
 	title = "Pick-Classes"
-	tutorial = "This will open up another menu when you spawn allowing you to pick from any class as long as its not disabled."
+	tutorial = "This will open up another menu when you spawn allowing you to pick from any class as long as it's not disabled."
 	allowed_races = ALL_RACES_LIST
 	total_positions = 0
 

@@ -177,6 +177,18 @@
 /obj/effect/mapping_helpers/access/keyset/manor/physician
 	accesses = list(ACCESS_PHYSICIAN)
 
+/obj/effect/mapping_helpers/access/keyset/manor/Noble1
+	accesses = list(ACCESS_NOBLE1)
+	difficulty = 2
+
+/obj/effect/mapping_helpers/access/keyset/manor/Noble2
+	accesses = list(ACCESS_NOBLE2)
+	difficulty = 2
+
+/obj/effect/mapping_helpers/access/keyset/manor/Noble3
+	accesses = list(ACCESS_NOBLE3)
+	difficulty = 2
+
 // Thatchwood
 
 /obj/effect/mapping_helpers/access/keyset/thatchwood/inn1

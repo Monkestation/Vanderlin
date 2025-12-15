@@ -140,18 +140,9 @@ GLOBAL_LIST_EMPTY(job_assignment_order)
 	sorting_order += GLOB.youngfolk_positions
 	return sorting_order
 
-GLOBAL_LIST_INIT(exp_jobsmap, list(
-	EXP_TYPE_TOWNER = list("titles" = peasant_positions | apprentices_positions | youngfolk_positions | serf_positions | company_positions ),
-	EXP_TYPE_NOBLE = list("titles" = noble_positions),
-	EXP_TYPE_CHURCH = list("titles" = church_positions),
-	EXP_TYPE_GUARDS = list("titles" = garrison_positions),
-	EXP_TYPE_ADVENTURER = list("titles" = allmig_positions),
-))
-
 GLOBAL_LIST_INIT(exp_specialmap, list(
 	EXP_TYPE_LIVING = list(), // all living mobs
 	EXP_TYPE_ANTAG = list(),
 	EXP_TYPE_GHOST = list(), // dead people, observers
 ))
-GLOBAL_PROTECT(exp_jobsmap)
 GLOBAL_PROTECT(exp_specialmap)

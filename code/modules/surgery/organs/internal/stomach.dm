@@ -11,7 +11,7 @@
 	decay_factor = STANDARD_ORGAN_DECAY
 
 	low_threshold_passed = "<span class='info'>My stomach flashes with pain before subsiding. Food doesn't seem like a good idea right now.</span>"
-	high_threshold_passed = "<span class='warning'>My stomach flares up with constant pain- you can hardly stomach the idea of food right now!</span>"
+	high_threshold_passed = "<span class='warning'>My stomach flares up with constant pain. I can hardly stomach the idea of food right now!</span>"
 	high_threshold_cleared = "<span class='info'>The pain in my stomach dies down for now, but food still seems unappealing.</span>"
 	low_threshold_cleared = "<span class='info'>The last bouts of pain in my stomach have died out.</span>"
 
@@ -35,12 +35,12 @@
 	if(Nutri)
 		if(prob((damage/40) * Nutri.volume * Nutri.volume))
 			H.vomit(damage)
-			to_chat(H, "<span class='warning'>My stomach reels in pain as you're incapable of holding down all that food!</span>")
+			to_chat(H, "<span class='warning'>My stomach reels in pain as I'm incapable of holding down all that food!</span>")
 
 	else if(Nutri && damage > high_threshold)
 		if(prob((damage/10) * Nutri.volume * Nutri.volume))
 			H.vomit(damage)
-			to_chat(H, "<span class='warning'>My stomach reels in pain as you're incapable of holding down all that food!</span>")
+			to_chat(H, "<span class='warning'>My stomach reels in pain as I'm incapable of holding down all that food!</span>")
 
 /obj/item/organ/stomach/proc/handle_disgust(mob/living/carbon/human/H)
 	if(H.disgust)

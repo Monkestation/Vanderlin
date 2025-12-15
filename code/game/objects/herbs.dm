@@ -1,6 +1,6 @@
 /obj/structure/flora/grass/herb
 	name = "herbbush"
-	desc = "A bush,for an herb. This shouldn't show up."
+	desc = "A bush, for an herb. This shouldn't show up."
 	icon = 'icons/roguetown/misc/herbfoliage.dmi'
 	icon_state = "spritemeplz"
 	num_random_icons = 0
@@ -62,7 +62,7 @@
 
 /obj/structure/flora/grass/herb/random
 	name = "random herb"
-	desc = "Haha, im in danger."
+	desc = "Haha, I'm in danger."
 	icon_state = "herb_random"
 
 /obj/structure/flora/grass/herb/random/Initialize()

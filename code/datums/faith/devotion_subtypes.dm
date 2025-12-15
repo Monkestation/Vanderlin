@@ -34,7 +34,7 @@
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/avert),
 		CLERIC_T1 = /datum/action/cooldown/spell/burial_rites,
-		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/soul_speak, /datum/action/cooldown/spell/aoe/abrogation),
+		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/locate_dead, /datum/action/cooldown/spell/aoe/abrogation, /datum/action/cooldown/spell/undirected/soul_speak, ),
 		CLERIC_T3 = /datum/action/cooldown/spell/aoe/churn_undead,
 	)
 	traits = list(TRAIT_DEATHSIGHT)

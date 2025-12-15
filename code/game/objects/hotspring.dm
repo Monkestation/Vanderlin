@@ -16,7 +16,7 @@
 	grow = 0.037
 
 ///these were unfortunately requested to not be smoothed. I will likely create a smooth helper version aswell though
-///the issue is they would need atleast a 2x2 to smooth proper.
+///the issue is they would need at least a 2x2 to smooth proper.
 /obj/structure/hotspring
 	abstract_type = /obj/structure/hotspring
 	name = "hot spring"

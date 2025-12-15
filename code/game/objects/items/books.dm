@@ -1699,7 +1699,7 @@ ____________End of Example*/
 	verses_file = "strings/psybibble.txt"
 
 /obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user)
-	if(istype(user) && user.patron.type == /datum/patron/psydon)
+	if(istype(user) && istype(user.patron, /datum/patron/psydon))
 		if(!user.can_read(src))
 			return
 		M.apply_status_effect(/datum/status_effect/buff/blessed)
@@ -1732,6 +1732,6 @@ ____________End of Example*/
 
 /obj/item/book/rogue/howtogaffer
 	name = "Dont be a gaff, the guild masters manual"
-	desc = "the author page has rotted off with time"
+	desc = "The author page has rotted off with time."
 	bookfile = "Gaff.json"
 	random_cover = TRUE

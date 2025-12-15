@@ -26,7 +26,7 @@
 
 	//splash down, not on open spaces.
 	while(istype(epicenter, /turf/open/transparent/openspace))
-		var/turf/downcheck = get_step_multiz(epicenter, DOWN)
+		var/turf/downcheck = GET_TURF_BELOW(epicenter)
 		if(downcheck)
 			epicenter = downcheck
 		else

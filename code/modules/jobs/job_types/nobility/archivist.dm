@@ -9,12 +9,11 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 4
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
-
+	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	outfit = /datum/outfit/archivist
 	spells = list(
 		/datum/action/cooldown/spell/undirected/learn,
@@ -26,6 +25,13 @@
 
 	job_bitflag = BITFLAG_ROYALTY
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
+
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_MAGICK, EXP_TYPE_NOBLE)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 300
+	)
+
 
 /datum/job/archivist/after_spawn(mob/living/carbon/spawned, client/player_client)
 	. = ..()

@@ -388,7 +388,7 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 
 /datum/fish_trait/mixotroph
 	name = "Mixotroph"
-	catalog_description = "This fish is capable of substaining itself by producing its own sources of energy (food)."
+	catalog_description = "This fish is capable of subsisting itself by producing its own sources of energy (food)."
 	incompatible_traits = list(/datum/fish_trait/predator, /datum/fish_trait/necrophage)
 
 /datum/fish_trait/mixotroph/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)

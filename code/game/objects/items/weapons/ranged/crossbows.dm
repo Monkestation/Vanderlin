@@ -25,7 +25,7 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 	name = "slurbow"
-	desc = "A lighter weight crossbow with a distinct barrel shroud holding the bolt in place. Light enough to arm by hand. <br>They're popular among among highwaymen and the patrolling lamplighters of Grenzelhoft."
+	desc = "A lighter weight crossbow with a distinct barrel shroud holding the bolt in place. Light enough to arm by hand. <br>They're popular among highwaymen and the patrolling lamplighters of Grenzelhoft."
 	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "slurbow0"
 	item_state = "slurbow"

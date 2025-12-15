@@ -65,4 +65,4 @@
 	roles = list(
 		/datum/migrant_role/daywalker = 1,
 	)
-	greet_text = "You give the Monarch's demense a message. You tell them it's open season on all suckheads."
+	greet_text = "You give the Monarch's demesne a message. You tell them it's open season on all suckheads."

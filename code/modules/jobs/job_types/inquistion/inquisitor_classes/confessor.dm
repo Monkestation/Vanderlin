@@ -1,17 +1,17 @@
-/datum/job/advclass/confessor
+/datum/job/advclass/sacrestant/confessor
 	title = "Confessor"
-	tutorial = "Psydonite hunters, unmatched in the fields of subterfuge and investigation. There is no suspect too powerful to investigate, no room too guarded to infiltrate, and no weakness too hidden to exploit. The Ordo Venetari trained you, and this, your final hunt as a student, will prove the wisdom of their teachings."
+	tutorial = "Psydonite hunters, unmatched in the fields of subterfuge and investigation. There is no suspect too powerful to investigate, no room too guarded to infiltrate, and no weakness too hidden to exploit. The Ordo Venatari trained you, and this, your final hunt as a student, will prove the wisdom of their teachings."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-	outfit = /datum/outfit/job/confessor
+	outfit = /datum/outfit/confessor
 	category_tags = list(CTAG_INQUISITION)
 
 	jobstats = list(
 		STATKEY_SPD = 3,
-		STATKEY_END = 3,
+		STATKEY_END = 1,
 		STATKEY_PER = 2,
-		STATKEY_STR = -1
-	)
+		STATKEY_STR = -2
+	) //4 Statline
 	skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN, //Should rely on the seizing garrote to properly subdue foes.
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
@@ -33,9 +33,13 @@
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
 	)
+/datum/job/advclass/sacrestant/confessor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Confessor")
 
-/datum/outfit/job/confessor/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/confessor/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
 		var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
@@ -97,9 +101,6 @@
 		/obj/item/clothing/head/inqarticles/blackbag = 1,
 		/obj/item/inqarticles/garrote = 1,
 		/obj/item/grapplinghook = 1,
-		/obj/item/paper/inqslip/arrival/ortho = 1
+		/obj/item/paper/inqslip/arrival/ortho = 1,
+		/obj/item/collar_detonator = 1,
 		)
-
-/datum/outfit/job/confessor/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	GLOB.inquisition.add_member_to_school(H, "Order of the Venatari", 0, "Confessor")

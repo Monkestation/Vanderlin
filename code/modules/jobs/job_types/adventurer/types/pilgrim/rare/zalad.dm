@@ -5,7 +5,6 @@
 	outfit = /datum/outfit/adventurer/zalad
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 1
-	min_pq = 0
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 	is_recognized = TRUE
@@ -46,7 +45,7 @@
 		var/prev_real_name = H.real_name
 		var/prev_name = H.name
 		var/honorary = "Emir"
-		if(H.gender == FEMALE)
+		if(H.pronouns == SHE_HER)
 			honorary = "Amirah"
 		H.real_name = "[honorary] [prev_real_name]"
 		H.name = "[honorary] [prev_name]"

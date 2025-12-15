@@ -114,7 +114,7 @@
 		var/turf/cardinal_turf = get_step(src, direction)
 		for(var/obj/effect/abstract/liquid_turf/pipe in cardinal_turf)
 			if(!istype(pipe))
-				return
+				continue
 			set_connection(get_dir(src, pipe))
 			pipe.set_connection(get_dir(pipe, src))
 	if(z)
@@ -143,7 +143,7 @@
 				return
 			set_connection(get_dir(src, pipe))
 			pipe.set_connection(get_dir(pipe, src))
-			pipe.update_appearance()
+			pipe.update_appearance(UPDATE_ICON)
 
 	for(var/direction in GLOB.cardinals)
 		var/turf/turf = get_step(src, direction)
@@ -199,6 +199,7 @@
 			if(!turf.liquids)
 				continue
 			turf.liquids.update_appearance(UPDATE_OVERLAYS)
+		update_appearance(UPDATE_OVERLAYS)
 
 /obj/effect/abstract/liquid_turf/proc/set_fire_effect()
 	if(displayed_content)

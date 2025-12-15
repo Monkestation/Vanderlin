@@ -50,7 +50,7 @@
 
 /obj/structure/underworld/carriageman
 	name = "The Carriageman"
-	desc = "They will take the reigns and lead the way. But only if the price I can pay."
+	desc = "They will take the reins and lead the way. But only if the price I can pay."
 	icon = 'icons/roguetown/underworld/enigma_carriageman.dmi'
 	icon_state = "carriageman"
 	layer = ABOVE_MOB_LAYER

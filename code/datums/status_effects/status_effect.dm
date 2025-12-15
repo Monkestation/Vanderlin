@@ -47,9 +47,10 @@
 		duration = world.time + duration
 	tick_interval = world.time + tick_interval
 	if(alert_type)
-		var/atom/movable/screen/alert/status_effect/A = owner.throw_alert(id, alert_type)
-		A?.attached_effect = src //so the alert can reference us, if it needs to
-		linked_alert = A //so we can reference the alert, if we need to
+		var/atom/movable/screen/alert/status_effect/A = owner?.throw_alert(id, alert_type)
+		if(A)
+			A?.attached_effect = src //so the alert can reference us, if it needs to
+			linked_alert = A //so we can reference the alert, if we need to
 	START_PROCESSING(SSfastprocess, src)
 	return TRUE
 

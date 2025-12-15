@@ -105,7 +105,7 @@
 	if(has_viewport)
 		. += span_info("It has a built-in viewport.")
 	if(has_bolt)
-		. += span_info("It's lock is a deadbolt.")
+		. += span_info("Its lock is a deadbolt.")
 	if(lock?.uses_key)
 		. += span_info("There is a keyhole below the handle.")
 

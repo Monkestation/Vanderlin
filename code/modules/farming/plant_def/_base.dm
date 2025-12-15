@@ -30,6 +30,8 @@
 	var/seed_color
 	/// Whether the plant can grow underground
 	var/can_grow_underground = FALSE
+	/// Whether the plant can grow in mushroom mound
+	var/mound_growth = FALSE
 
 	// NPK nutrient requirements (consumed during growth)
 	var/nitrogen_requirement = 30      // For leafy growth
@@ -221,5 +223,7 @@
 			return "Theaceae"
 		if(FAMILY_FRUIT)
 			return "Fruit"
+		if(FAMILY_DIKARYA)
+			return "Dikarya"
 		else
 			return "Unknown"

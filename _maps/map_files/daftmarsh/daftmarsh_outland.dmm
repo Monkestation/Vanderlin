@@ -4,89 +4,89 @@
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "am" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "au" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "av" = (
 /obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "aw" = (
 /obj/machinery/light/fueled/oven/south,
 /obj/effect/decal/cleanable/food/flour,
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "aA" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "aE" = (
 /obj/structure/chair/wood/alt{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "aH" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "aK" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "aN" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "aQ" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "aS" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/copper,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "aT" = (
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "aU" = (
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "aW" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "aX" = (
 /obj/effect/landmark/chest_or_mimic,
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bc" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "bd" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/dirt/road,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "be" = (
 /obj/structure/bars,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bg" = (
 /obj/structure/flora/grass/bush/wall/tall{
 	pixel_x = -8
@@ -96,42 +96,42 @@
 	pixel_y = 8
 	},
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bi" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bj" = (
 /obj/structure/door/green,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "bl" = (
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "bm" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-forest-to-outlands";
 	aportalid = "daftmarsh-forest-to-town"
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "bn" = (
 /obj/structure/stairs,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bv" = (
 /turf/closed/mineral/random,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bw" = (
 /turf/closed/wall/mineral/wooddark/slitted,
-/area/rogue/indoors)
+/area/indoors)
 "bx" = (
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "by" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bA" = (
 /obj/structure/stairs{
 	dir = 4;
@@ -142,11 +142,11 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "bD" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bE" = (
 /obj/structure/stairs{
 	dir = 4;
@@ -154,11 +154,11 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "bI" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bJ" = (
 /obj/structure/closet/crate/chest/wicker{
 	name = "tip basket"
@@ -182,7 +182,7 @@
 /obj/item/clothing/armor/leather/hide/goblin,
 /obj/item/bodypart/r_leg/zizombie,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bN" = (
 /obj/structure/spider/stickyweb,
 /obj/item/reagent_containers/food/snacks/spiderhoney{
@@ -195,14 +195,14 @@
 	},
 /obj/structure/table/church/m,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bR" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "bS" = (
 /obj/structure/rack,
 /obj/item/weapon/shovel/small{
@@ -214,25 +214,25 @@
 	pixel_y = -1
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "bT" = (
 /obj/structure/spider/cocoon,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "cg" = (
 /obj/structure/chair/bench/throne,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ci" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "cj" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "cl" = (
 /obj/item/natural/bundle/stoneblock{
 	pixel_x = -5;
@@ -251,7 +251,7 @@
 	pixel_y = -4
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "cv" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -261,14 +261,14 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "cK" = (
 /obj/structure/door/red,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "cL" = (
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "cN" = (
 /obj/structure/dungeon_entry,
 /obj/structure/fluff/walldeco/vinez{
@@ -276,34 +276,34 @@
 	pixel_y = 51
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "cO" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "cU" = (
 /obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "cX" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_tangerine,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "dg" = (
 /obj/structure/spider/nest,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "dr" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "du" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/sugar{
@@ -323,45 +323,45 @@
 	pixel_y = -7
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "dx" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "dy" = (
 /turf/open/water/river{
 	dir = 8
 	},
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "dB" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-basin-to-outlands";
 	aportalid = "daftmarsh-basin-to-town"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dF" = (
 /turf/closed/mineral/random/med,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "dH" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "dM" = (
 /obj/structure/fluff/signage{
 	name = "Lil' Gobbyville"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "dO" = (
 /obj/item/natural/stoneblock{
 	pixel_x = -5;
 	pixel_y = 0
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "dP" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bowl{
@@ -400,14 +400,14 @@
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "dS" = (
 /turf/open/floor/wood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "dV" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "dW" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/fat{
@@ -431,37 +431,37 @@
 	pixel_y = -2
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "eb" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "eg" = (
 /obj/machinery/anvil/crafted,
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "ei" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "ej" = (
 /mob/living/simple_animal/hostile/retaliate/troll/cave,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ek" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/wool,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "el" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "eq" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/item/natural/rock/mana_crystal,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "er" = (
 /obj/structure/rack/shelf/big{
 	pixel_y = 10
@@ -482,11 +482,11 @@
 /obj/item/natural/feather,
 /obj/item/natural/feather,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "et" = (
 /obj/item/natural/poo/horse,
 /turf/open/water/sewer,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ew" = (
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
@@ -498,12 +498,12 @@
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "eA" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/nest,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "eB" = (
 /obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
@@ -512,19 +512,19 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple,
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "eH" = (
 /obj/effect/waterfall,
 /turf/closed/mineral/random,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "eM" = (
 /obj/structure/bed/hay,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "eN" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "eR" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/rope/chain,
@@ -549,7 +549,7 @@
 /obj/item/rope/chain,
 /obj/item/rope/chain,
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "eT" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/bundle/cloth{
@@ -561,37 +561,37 @@
 	pixel_y = -2
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "eV" = (
 /obj/item/natural/rock,
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "eW" = (
 /obj/item/natural/stone,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "eX" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "ff" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "DO NOT TOUCH THIS COLUMN AT ALL. This is copy/pasted from Daftmarsh and always will be. Make it work!"
 	},
 /turf/closed/mineral/bedrock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fk" = (
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fl" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/vampire,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "fm" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/bottle/sugar{
@@ -607,14 +607,14 @@
 	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fn" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "fo" = (
 /turf/closed/indestructible/wooddark,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fq" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/fluff/railing/border{
@@ -623,15 +623,15 @@
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ft" = (
 /obj/structure/roguetent,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fx" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fy" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -640,49 +640,49 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fC" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "fD" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "fE" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "fM" = (
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "fP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/rack,
 /obj/item/weapon/knife/scissors,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "fR" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "fY" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/dirt/road,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "ge" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/wood/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "gm" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	icon_state = "cobweb2"
@@ -693,107 +693,107 @@
 	pixel_x = 0
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "go" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "gr" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "gu" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gv" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "gy" = (
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "gA" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "gB" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
 	},
 /turf/open/floor/wood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "gG" = (
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gO" = (
 /obj/structure/fluff/walldeco/vinez{
 	pixel_x = 5;
 	pixel_y = 51
 	},
 /turf/closed/mineral/random/med,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "gT" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "gY" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/wooddark/slitted,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "gZ" = (
 /mob/living/carbon/human/species/goblin/moon,
 /obj/structure/bed/sleepingbag,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/ring/gold,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hf" = (
 /obj/item/reagent_containers/powder/salt,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hi" = (
 /obj/structure/bars,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hl" = (
 /obj/item/natural/rock/coal,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hm" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ho" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/indoors)
+/area/indoors)
 "hv" = (
 /obj/item/natural/rock/salt,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hB" = (
 /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "hF" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "hG" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "hI" = (
 /obj/item/ore/gold{
 	pixel_x = 9;
 	pixel_y = 3
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hM" = (
 /obj/structure/fluff/walldeco/bigpainting,
 /obj/structure/table/wood/plain,
@@ -810,10 +810,10 @@
 	pixel_y = 9
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hN" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "hO" = (
 /obj/item/reagent_containers/food/snacks/sugar{
 	pixel_x = 5;
@@ -821,30 +821,30 @@
 	},
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hS" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hV" = (
 /obj/item/mana_battery/mana_crystal/standard,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "hX" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "hZ" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ia" = (
 /obj/machinery/light/fueled/forge,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "ie" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/powder/moondust{
@@ -880,51 +880,51 @@
 	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ij" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "io" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "ir" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "iv" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "ix" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "iJ" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "iQ" = (
 /obj/structure/rack,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "iS" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "ja" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/mineral/random/high,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "jd" = (
 /obj/structure/bridge_stakes{
 	dir = 1
@@ -933,31 +933,31 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "jj" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "jo" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ju" = (
 /turf/closed,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "jx" = (
 /obj/item/ore/coal{
 	pixel_x = 7;
 	pixel_y = 4
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "jy" = (
 /obj/structure/fluff/signage{
 	name = "Salem - South";
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "jz" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -965,20 +965,20 @@
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "jC" = (
 /obj/structure/window/solid,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "jI" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "jP" = (
 /obj/effect/decal/cleanable/blood,
 /mob/living/carbon/human/species/goblin,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "jR" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/clay{
@@ -998,28 +998,28 @@
 	pixel_y = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "jV" = (
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "jW" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "jY" = (
 /obj/item/reagent_containers/powder/salt,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "jZ" = (
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "kb" = (
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "kc" = (
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "kd" = (
 /obj/structure/door/viewport{
 	dir = 1
@@ -1027,7 +1027,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/metal/alt,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "kf" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /obj/item/cooking/pan{
@@ -1039,76 +1039,76 @@
 	pixel_y = 6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ki" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/indoors)
+/area/indoors)
 "kl" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "km" = (
 /obj/item/natural/stone{
 	pixel_x = -4;
 	pixel_y = 2
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "kn" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Salem"
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "kp" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "kq" = (
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "kx" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "kB" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "kE" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "kF" = (
 /obj/item/natural/stone{
 	pixel_x = 5;
 	pixel_y = -8
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "kI" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "Skeleton tower needs finishing."
 	},
 /turf/closed/wall/mineral/decostone/center,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "kN" = (
 /obj/item/natural/bundle/stoneblock,
 /obj/structure/bars/grille,
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "kP" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "kQ" = (
 /obj/item/reagent_containers/food/snacks/sugar{
 	pixel_x = -10;
@@ -1116,10 +1116,10 @@
 	},
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "kS" = (
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "kW" = (
 /obj/structure/door/viewport{
 	dir = 8
@@ -1127,57 +1127,57 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/metal/alt,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "li" = (
 /obj/structure/rack,
 /obj/item/weapon/hammer/wood,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "ll" = (
 /turf/closed/wall/mineral/decostone/center,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lm" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lp" = (
 /obj/item/mana_battery/mana_crystal/cut,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lt" = (
 /obj/structure/rack,
 /obj/item/weapon/knife/stone,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "lz" = (
 /turf/open/lava,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lA" = (
 /turf/closed/mineral,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "lD" = (
 /turf/closed/mineral/random/high,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lK" = (
 /obj/structure/flora/tree,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "lN" = (
 /obj/effect/landmark/chest_or_mimic,
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lO" = (
 /turf/closed/wall/mineral/decostone/cand,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lP" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lT" = (
 /obj/structure/bridge,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "lW" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -1187,14 +1187,14 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "lX" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-cave-to-outlands";
 	aportalid = "daftmarsh-outlands-to-cave"
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "md" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/ore/gold{
@@ -1218,21 +1218,21 @@
 	pixel_y = 9
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mj" = (
 /turf/open/floor/twig,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "mk" = (
 /obj/structure/flora/grass/water,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "mo" = (
 /obj/machinery/light/fueled/hearth/big_fireplace,
 /turf/closed/wall/mineral/wooddark/slitted,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mp" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "mr" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/reagent_containers/food/snacks/truffles,
@@ -1241,28 +1241,28 @@
 /obj/item/reagent_containers/food/snacks/truffles,
 /obj/item/reagent_containers/food/snacks/truffles,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mu" = (
 /obj/structure/fluff/walldeco/painting/seraphina,
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mv" = (
 /obj/structure/bridge_stakes{
 	dir = 8
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mw" = (
 /obj/structure/table/wood/counter,
 /obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_plum,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mz" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mA" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/weapon/hammer/copper{
@@ -1277,17 +1277,17 @@
 	pixel_x = 5
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "mC" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/rack,
 /obj/item/weapon/knife/dagger,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "mE" = (
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mF" = (
 /obj/item/reagent_containers/glass/bucket/pot/copper{
 	pixel_x = 12;
@@ -1297,11 +1297,11 @@
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mG" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mM" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -1310,10 +1310,10 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mO" = (
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "mT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -1322,7 +1322,7 @@
 /obj/structure/rack,
 /obj/item/weapon/mace,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "mU" = (
 /obj/structure/flora/grass/bush/wall/tall{
 	pixel_y = -3;
@@ -1334,23 +1334,23 @@
 	pixel_y = 11
 	},
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mX" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/closed/mineral,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "mY" = (
 /obj/machinery/light/fueled/lanternpost,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "mZ" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nf" = (
 /obj/structure/flora/grass/herb/euphrasia,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "nh" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
@@ -1358,82 +1358,82 @@
 	name = "Salem Garrison"
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "nj" = (
 /obj/structure/roguetent,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "np" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 1
 	},
 /turf/open/floor/cobblerock/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "nB" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "nC" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "nD" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/cocoon,
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nF" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nG" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/water/swamp/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "nH" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "nI" = (
 /obj/structure/fluff/signage{
 	name = "Daftmarsh - West";
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "nK" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nN" = (
 /turf/closed/wall/mineral/stone/window,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nO" = (
 /obj/item/reagent_containers/food/snacks/rotten/meat{
 	pixel_x = -8;
 	pixel_y = -9
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nP" = (
 /obj/item/natural/rock,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nQ" = (
 /obj/structure/door/weak/bolt{
 	dir = 4
 	},
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "nX" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "oa" = (
 /obj/item/natural/stoneblock,
 /obj/item/natural/stone{
@@ -1441,7 +1441,7 @@
 	pixel_y = 0
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "oc" = (
 /obj/structure/stairs{
 	dir = 8
@@ -1451,64 +1451,64 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "oA" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "oH" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "oO" = (
 /turf/open/floor/twig/platform,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "oP" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "oQ" = (
 /obj/structure/bars,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "oR" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "oY" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/paper,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "pb" = (
 /obj/item/natural/stoneblock{
 	pixel_x = 5;
 	pixel_y = 7
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "pd" = (
 /obj/item/natural/bundle/stoneblock,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "pf" = (
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "pg" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "pn" = (
 /turf/closed/mineral,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "pr" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "px" = (
 /obj/item/grown/log/tree/small{
 	pixel_x = -5;
@@ -1531,14 +1531,14 @@
 	pixel_y = -1
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "pz" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "pB" = (
 /obj/item/ore/coal{
 	pixel_x = -7;
@@ -1547,213 +1547,213 @@
 /obj/machinery/light/fueled/forge,
 /obj/structure/bars/grille,
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "pF" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/dirt,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "pL" = (
 /turf/closed/mineral/random/med,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "pO" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "pQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "pV" = (
 /obj/structure/chair/wood/alt{
 	dir = 1
 	},
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "pY" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "pZ" = (
 /obj/structure/innouous_rock/safe,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qb" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "qc" = (
 /obj/structure/flora/grass/herb/salvia,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "qd" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/spawner/map_spawner/loot/common,
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ql" = (
 /obj/structure/roguerock,
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "qr" = (
 /turf/closed/mineral/random/med,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "qs" = (
 /turf/open/water/river{
 	dir = 1
 	},
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "qv" = (
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qz" = (
 /obj/item/natural/rock,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qA" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/tree,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "qB" = (
 /obj/structure/door{
 	name = "Salem Smithy"
 	},
 /obj/effect/mapping_helpers/access/keyset/thatchwood/smith,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "qH" = (
 /obj/structure/closet/crate/chest/gold,
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qI" = (
 /turf/closed/wall/mineral/stone/window,
-/area/rogue/indoors)
+/area/indoors)
 "qJ" = (
 /obj/machinery/anvil,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qN" = (
 /obj/structure/toilet,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qQ" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
 	},
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qS" = (
 /obj/item/natural/rock/coal,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qU" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qW" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "qY" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "rd" = (
 /obj/item/reagent_containers/food/snacks/fat{
 	pixel_x = -5;
 	pixel_y = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "rt" = (
 /obj/item/natural/rock,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "rB" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "rD" = (
 /obj/structure/fluff/statue/knight/interior/gen,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "rG" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "rI" = (
 /obj/item/ore/coal{
 	pixel_x = -7;
 	pixel_y = 6
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "rS" = (
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sd" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
 	pixel_y = 0
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "sg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/wood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "si" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sj" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_apple,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sl" = (
 /obj/item/natural/rock/coal,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sn" = (
 /obj/structure/stairs,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "sq" = (
 /obj/structure/bridge_stakes,
 /obj/structure/bridge_stakes{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ss" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "su" = (
 /obj/item/chair,
 /obj/item/ammo_casing/caseless/bolt,
@@ -1761,18 +1761,18 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
 /obj/effect/decal/remains/human,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sy" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sD" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "sF" = (
 /obj/structure/flora/grass/bush/wall/tall{
 	pixel_y = -3;
@@ -1785,25 +1785,25 @@
 	layer = 4.8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sG" = (
 /obj/item/weapon/whip/spiderwhip{
 	pixel_x = 6;
 	pixel_y = 6
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sH" = (
 /turf/open/floor/woodturned,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sI" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sM" = (
 /obj/item/reagent_containers/powder/salt,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "sN" = (
 /obj/structure/rack/shelf/big{
 	pixel_y = 10
@@ -1812,7 +1812,7 @@
 	pixel_y = 16
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "sO" = (
 /obj/structure/stairs{
 	dir = 1
@@ -1821,11 +1821,11 @@
 	dir = 4
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "sR" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "sS" = (
 /obj/structure/table/wood/large_new{
 	icon_state = "alt_largetable";
@@ -1836,29 +1836,29 @@
 	pixel_y = -1
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "sU" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sZ" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "tc" = (
 /obj/item/natural/stone{
 	pixel_x = 10;
 	pixel_y = 10
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "te" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "tn" = (
 /turf/open/lava,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "tr" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/ore/gold{
@@ -1878,41 +1878,41 @@
 	pixel_y = 9
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "tA" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "tB" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "tD" = (
 /obj/structure/fluff/customsign{
 	name = "Salem Square"
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "tF" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "tG" = (
 /turf/open/floor/cobble,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "tH" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "tJ" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_plum,
 /turf/open/floor/twig/platform,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "tQ" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -1922,36 +1922,36 @@
 	icon_state = "borderfall"
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "tT" = (
 /obj/structure/flora/grass/herb/matricaria,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "tU" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/rack,
 /obj/item/weapon/pitchfork,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "tV" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "tW" = (
 /turf/closed/wall/mineral/decowood,
-/area/rogue/indoors)
+/area/indoors)
 "tX" = (
 /obj/structure/bed/hay,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "tY" = (
 /obj/item/clothing/neck/mana_star{
 	desc = ""
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ub" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -1962,39 +1962,39 @@
 	pixel_y = 8
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "uf" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "uh" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/nest,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "uk" = (
 /mob/living/simple_animal/hostile/retaliate/troll/cave{
 	name = "Grond the Entrapped"
 	},
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ul" = (
 /obj/structure/fluff/signage{
 	name = "Daftmarsh - South";
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "uo" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "uq" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "uA" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
@@ -2003,43 +2003,43 @@
 	dir = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "uE" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "uI" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "uO" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
 	},
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "uR" = (
 /turf/open/water/marsh/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "uT" = (
 /obj/structure/flora/newtree,
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "vf" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "vt" = (
 /obj/structure/stairs,
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "vw" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
@@ -2049,58 +2049,58 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "vz" = (
 /turf/open/floor/blocks,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "vA" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "vL" = (
 /turf/open/water/marsh/deep,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "vQ" = (
 /turf/open/water/marsh,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "vT" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "vW" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/mineral/random/med,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "wa" = (
 /obj/item/natural/rock/iron,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "wd" = (
 /obj/effect/spawner/map_spawner/treeorstump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wf" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/nest,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "wg" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "ws" = (
 /obj/structure/fluff/walldeco/vinez{
 	pixel_x = 5;
 	pixel_y = 51
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wx" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/mineral,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "wL" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/rack,
@@ -2109,41 +2109,41 @@
 	pixel_x = -4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "wO" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "wQ" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "wR" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "wT" = (
 /obj/structure/table/vtable/v2,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "xb" = (
 /obj/item/natural/rock/mana_crystal,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xe" = (
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "xg" = (
 /turf/open/water/swamp/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "xi" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xj" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/rack,
@@ -2153,7 +2153,7 @@
 	pixel_y = -4
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "xl" = (
 /obj/structure/door/green{
 	name = "forrest warden bedroom"
@@ -2161,17 +2161,17 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "xp" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "xs" = (
 /obj/structure/window/solid,
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "xu" = (
 /obj/structure/table/wood/plain,
 /obj/structure/fluff/millstone,
@@ -2184,43 +2184,43 @@
 	pixel_y = -6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xy" = (
 /obj/structure/spider/nest,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xA" = (
 /obj/item/natural/rock/iron,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xC" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xK" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xL" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "xN" = (
 /mob/living/simple_animal/hostile/retaliate/minotaur/axe,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "xY" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32;
 	pixel_x = 0
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "yd" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/item/mana_battery/mana_crystal/standard,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "yh" = (
 /mob/living/carbon/human/species/orc/warlord/skilled,
 /mob/living/carbon/human/species/orc/warlord/skilled,
@@ -2231,31 +2231,31 @@
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/weapon/knife/cleaver/combat,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ym" = (
 /mob/living/simple_animal/hostile/skeleton/bow,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "yx" = (
 /obj/item/natural/stone{
 	pixel_x = 4;
 	pixel_y = -4
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "yC" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/tree,
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "yF" = (
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "yI" = (
 /turf/open/floor/wood/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "yL" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32;
@@ -2263,7 +2263,7 @@
 	},
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "yM" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -2271,7 +2271,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "yN" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
@@ -2279,42 +2279,42 @@
 /obj/item/reagent_containers/glass/bottle/redwine,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "yO" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32;
 	pixel_x = 0
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "yQ" = (
 /obj/structure/table/stone_small,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "yT" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "yV" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "zb" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/indoors)
+/area/indoors)
 "ze" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zh" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "zl" = (
 /obj/item/natural/stone{
 	pixel_x = -10;
 	pixel_y = 0
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "zp" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/ore/gold{
@@ -2334,11 +2334,11 @@
 	pixel_y = -10
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "zr" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "zs" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -2355,7 +2355,7 @@
 	pixel_y = 2
 	},
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "zt" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/jellycake_base{
@@ -2371,7 +2371,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "zv" = (
 /obj/structure/rack/shelf/biggest{
 	pixel_x = 1;
@@ -2380,83 +2380,83 @@
 /obj/item/cooking/pan,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "zx" = (
 /obj/structure/bars,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "zz" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "zB" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "zD" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "zE" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zJ" = (
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zV" = (
 /turf/open/floor/cobblerock/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zX" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Aa" = (
 /obj/machinery/light/fueled/oven/east,
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "Af" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ah" = (
 /obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Ai" = (
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "Al" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "Ao" = (
 /obj/structure/chair/stool,
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Ap" = (
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Ar" = (
 /obj/structure/bed/bear,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Au" = (
 /obj/structure/chair/wood/alt,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Av" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ay" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "AB" = (
 /obj/item/natural/stone{
 	pixel_x = -4;
@@ -2467,7 +2467,7 @@
 	pixel_y = 6
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "AJ" = (
 /obj/structure/table/wood/large_new{
 	icon_state = "alt_largetable";
@@ -2482,132 +2482,132 @@
 	pixel_y = 5
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "AS" = (
 /obj/structure/bed/hay,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "AX" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "AY" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Bc" = (
 /turf/open/floor/rooftop/green,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Bf" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "Bh" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Bj" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Bk" = (
 /obj/effect/landmark/mapGenerator/forest,
 /obj/effect/landmark/mapGenerator/anvil,
 /turf/closed,
-/area/rogue)
+/area)
 "Bl" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Bo" = (
 /obj/structure/roguerock,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Bt" = (
 /turf/closed/mineral/random/med,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "By" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "BC" = (
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "BE" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "BJ" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "BK" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "BL" = (
 /obj/structure/door/weak/bolt{
 	dir = 4;
 	name = "Salem Gate"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "BM" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "BO" = (
 /obj/structure/bars/grille,
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "BS" = (
 /obj/effect/spawner/map_spawner/treeorstump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "BV" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "BW" = (
 /obj/structure/door/iron/bars,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "BX" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "BY" = (
 /obj/structure/bridge_stakes{
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "BZ" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Cb" = (
 /turf/open/water/marsh/deep,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ce" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "Ch" = (
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/fabric_double,
 /obj/structure/trophy/deer,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ci" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/decorstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Cm" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate,
@@ -2624,7 +2624,7 @@
 	pixel_y = 0
 	},
 /turf/open/floor/twig/platform,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Co" = (
 /obj/structure/stairs{
 	dir = 1
@@ -2633,27 +2633,27 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Cv" = (
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Cw" = (
 /mob/living/carbon/human/species/goblin,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Cy" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Cz" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "CC" = (
 /obj/structure/fake_machine/musicbox/mannor,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "CG" = (
 /obj/structure/rack/shelf/notdense,
 /obj/item/cooking/pan{
@@ -2661,100 +2661,100 @@
 	pixel_y = 24
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "CN" = (
 /obj/structure/flora/tree,
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "CR" = (
 /turf/closed/wall/mineral/wooddark,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "CS" = (
 /obj/item/bedsheet/cloth,
 /obj/structure/bed/mediocre,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "CV" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "CZ" = (
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/indoors)
+/area/indoors)
 "Db" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/mineral,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Dc" = (
 /turf/closed/wall/mineral/decorstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Dd" = (
 /obj/structure/closet/crate/chest/crafted,
 /obj/effect/spawner/map_spawner/loot/magic,
 /obj/effect/spawner/map_spawner/loot/food,
 /obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "De" = (
 /turf/open/floor/dirt,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "Df" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Dh" = (
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Dk" = (
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Dx" = (
 /obj/structure/flora/tree/wise,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Dy" = (
 /obj/structure/innouous_rock,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "DD" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/tray,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "DE" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "DG" = (
 /turf/closed/mineral/bedrock/cold,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "DJ" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "DK" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "DL" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "DM" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "DN" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "DR" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/bodypart/head/goblin{
@@ -2778,13 +2778,13 @@
 	pixel_y = 2
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ed" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "El" = (
 /obj/structure/chair/wood/alt,
 /obj/structure/fluff/railing/wood{
@@ -2792,27 +2792,27 @@
 	},
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Eo" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Eu" = (
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ew" = (
 /turf/closed/wall/mineral/decostone/center,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "Ex" = (
 /obj/structure/fake_machine/musicbox,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "EF" = (
 /turf/closed/mineral/random,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "EJ" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/item/natural/poo{
@@ -2828,26 +2828,26 @@
 	pixel_y = 1
 	},
 /turf/open/water/sewer,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "EM" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "EN" = (
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ER" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "ET" = (
 /obj/structure/closet/crate/coffin,
 /mob/living/carbon/human/species/skeleton,
 /obj/effect/spawner/map_spawner/loot/rare,
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "EW" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/cooking/pan{
@@ -2863,62 +2863,62 @@
 	pixel_y = -1
 	},
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "EX" = (
 /obj/item/reagent_containers/glass/bucket/wooden{
 	pixel_y = -1;
 	pixel_x = -8
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "EZ" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Fc" = (
 /obj/structure/bed/hay,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Fi" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Fp" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Fr" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Fs" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/marsh/deep,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Fu" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/bandit,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Fy" = (
 /turf/open/floor/dirt/road,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "Fz" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/ladder,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "FA" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-town-to-outlands";
 	aportalid = "daftmarsh-outlands-to-town"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "FB" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/waterskin{
@@ -2934,17 +2934,17 @@
 	pixel_y = -8
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "FC" = (
 /obj/structure/bars,
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "FD" = (
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "FK" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/clay{
@@ -2964,11 +2964,11 @@
 	pixel_y = 9
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "FP" = (
 /obj/structure/door/green,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "FS" = (
 /obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/fat,
@@ -2987,41 +2987,41 @@
 /obj/item/reagent_containers/food/snacks/fat,
 /obj/item/reagent_containers/food/snacks/fat,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "FV" = (
 /obj/structure/handcart,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Gd" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Gl" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/natural/feather,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "Gm" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "Go" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Gs" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "Gu" = (
 /obj/structure/closet/crate/coffin,
 /mob/living/carbon/human/species/skeleton,
 /obj/effect/spawner/map_spawner/loot/medium,
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Gw" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/reagent_containers/powder/flour{
@@ -3037,7 +3037,7 @@
 	pixel_y = 3
 	},
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "GE" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bucket/pot{
@@ -3048,22 +3048,22 @@
 	pixel_y = -3
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "GF" = (
 /obj/structure/door/stone,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "GG" = (
 /obj/item/weapon/polearm/spear/hoplite/winged,
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/blood/gibs/body,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "GM" = (
 /obj/structure/door/stone,
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "GQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -3072,18 +3072,18 @@
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "GR" = (
 /obj/item/mana_battery/mana_crystal/small,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "GT" = (
 /mob/living/simple_animal/hostile/retaliate/poltergeist,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "GX" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ha" = (
 /obj/structure/rack,
 /obj/item/ore/coal,
@@ -3102,59 +3102,59 @@
 	pixel_y = -8
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "Hf" = (
 /obj/structure/innouous_rock,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Hi" = (
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Hj" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Hk" = (
 /obj/effect/landmark/mapGenerator/forest,
 /obj/effect/landmark/mapGenerator/anvil,
 /obj/effect/landmark/mapGenerator/bog,
 /turf/closed,
-/area/rogue)
+/area)
 "Hl" = (
 /obj/structure/flora/grass/herb/atropa,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Ht" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Hv" = (
 /obj/structure/chair/wood/alt,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Hw" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "Hx" = (
 /obj/structure/fluff/signage{
 	name = "Daftmarsh - West";
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Hy" = (
 /obj/structure/fluff/signage{
 	name = "Gobbo Heightz"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "HE" = (
 /turf/closed/mineral/salt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "HJ" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "HK" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -3174,27 +3174,27 @@
 	pixel_y = -4
 	},
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "HM" = (
 /obj/item/natural/stoneblock{
 	pixel_x = -2;
 	pixel_y = 9
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "HS" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "HT" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "HU" = (
 /obj/structure/kneestingers,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Ig" = (
 /obj/structure/door/green{
 	name = "Salem Garrison"
@@ -3202,65 +3202,65 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Il" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Im" = (
 /obj/item/natural/rock/salt,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "In" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Is" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Ix" = (
 /obj/structure/rack,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "IC" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "IF" = (
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "IG" = (
 /obj/item/natural/poo,
 /turf/open/water/sewer,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "IH" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "II" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/structure/bed/shit,
 /obj/structure/bed/shit,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "IL" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /obj/machinery/light/fueled/torchholder,
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "IO" = (
 /obj/structure/door/green{
 	name = "forrest garrison barracks"
@@ -3268,36 +3268,36 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "IP" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "IT" = (
 /turf/closed/mineral,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "IW" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ja" = (
 /obj/item/natural/rock/mana_crystal,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Jd" = (
 /obj/structure/roguetent,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "Je" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "Ji" = (
 /obj/structure/door/weak/bolt{
 	dir = 8;
 	name = "Salem Gate"
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Jn" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -3308,62 +3308,62 @@
 /obj/item/paint_brush,
 /obj/item/paint_palette/filled,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Jy" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/tree,
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "JB" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "JD" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "JH" = (
 /obj/item/natural/bundle/stoneblock{
 	pixel_x = 4;
 	pixel_y = 18
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "JI" = (
 /turf/open/floor/carpet/royalblack,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "JN" = (
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "JT" = (
 /obj/item/natural/rock/salt,
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "JV" = (
 /obj/structure/table/wood/large_new{
 	icon_state = "alt_largetable";
 	dir = 10
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "JY" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "JZ" = (
 /obj/structure/noose/gallows,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Ka" = (
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Kb" = (
 /obj/structure/table/stone_small,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Kd" = (
 /obj/item/reagent_containers/food/snacks/spiderhoney{
 	pixel_x = 2;
@@ -3376,17 +3376,17 @@
 /obj/structure/spider/stickyweb,
 /obj/structure/table/church/m,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Kg" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Kj" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/decorstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Kw" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "Kx" = (
 /obj/structure/meathook,
 /obj/effect/decal/remains/human,
@@ -3396,60 +3396,60 @@
 	pixel_y = -3
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "KA" = (
 /turf/open/floor/rooftop{
 	dir = 1
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "KJ" = (
 /obj/item/natural/rock/salt,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "KR" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/dirt,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "KW" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-cave-to-outlands";
 	aportalid = "daftmarsh-outlands-to-cave"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "KZ" = (
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Lb" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Lc" = (
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Lj" = (
 /obj/structure/kneestingers,
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Lk" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Lp" = (
 /turf/open/floor/cobblerock,
-/area/rogue/indoors)
+/area/indoors)
 "Lw" = (
 /obj/structure/roguetent,
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ly" = (
 /obj/structure/roguetent,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Lz" = (
 /obj/item/ore/iron{
 	pixel_x = -8;
@@ -3460,7 +3460,7 @@
 	pixel_y = -5
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "LL" = (
 /obj/item/natural/stoneblock{
 	pixel_x = 2;
@@ -3479,18 +3479,18 @@
 	pixel_y = -6
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "LM" = (
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "LN" = (
 /obj/structure/chair/wood/alt,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "LO" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "LR" = (
 /obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/produce/fruit/lime,
@@ -3519,7 +3519,7 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit/plum,
 /obj/item/reagent_containers/food/snacks/produce/fruit/plum,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "LS" = (
 /obj/structure/rack/shelf/biggest,
 /obj/machinery/light/fueled/torchholder/r,
@@ -3545,81 +3545,81 @@
 	pixel_y = -2
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "LU" = (
 /obj/structure/bridge_stakes{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "LW" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Me" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Mf" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Mj" = (
 /obj/structure/door/stone,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Mn" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Mq" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Mr" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Mt" = (
 /obj/structure/table/wood/counter,
 /obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_pear,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Mu" = (
 /turf/closed/wall/mineral/wooddark,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "My" = (
 /obj/structure/toilet,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/item/natural/poo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Mz" = (
 /obj/structure/dungeon_entry,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "ME" = (
 /obj/structure/fluff/signage{
 	dir = 4;
 	name = "Salem"
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "MF" = (
 /obj/effect/decal/remains/human,
 /obj/item/mana_battery/mana_crystal/small,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "MI" = (
 /obj/structure/spider/stickyweb,
 /obj/item/weapon/shield/tower/spidershield,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "MK" = (
 /obj/item/natural/stoneblock,
 /obj/item/ore/coal{
@@ -3627,66 +3627,66 @@
 	pixel_y = 0
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "MS" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "MU" = (
 /obj/item/storage/backpack/backpack,
 /obj/item/mana_battery/mana_crystal/cut,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "MX" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "MZ" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Nd" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Nh" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Ni" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Nm" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Nr" = (
 /obj/structure/bridge_stakes{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Nw" = (
 /obj/effect/landmark/mapGenerator/anvil,
 /obj/effect/landmark/mapGenerator/bog,
 /turf/closed,
-/area/rogue)
+/area)
 "Nx" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "NH" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "NL" = (
 /obj/item/reagent_containers/food/snacks/sugar{
 	pixel_x = -13;
@@ -3694,34 +3694,34 @@
 	},
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "NS" = (
 /obj/structure/stairs/fancy/r{
 	dir = 1
 	},
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "NU" = (
 /obj/effect/landmark/mapGenerator/rosewood/forest,
 /obj/effect/landmark/mapGenerator/roguetownfield,
 /obj/effect/landmark/mapGenerator/anvil,
 /turf/closed,
-/area/rogue)
+/area)
 "Oc" = (
 /obj/structure/stairs/fancy/c{
 	dir = 1
 	},
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Od" = (
 /mob/living/carbon/human/species/goblin/npc/hell{
 	name = "Troll Keeper"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Of" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ol" = (
 /obj/structure/fluff/walldeco/vinez{
 	pixel_x = 5;
@@ -3733,12 +3733,12 @@
 	pixel_y = 51
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Oq" = (
 /obj/item/mana_battery/mana_crystal/small,
 /obj/item/natural/rock/mana_crystal,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ov" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/clay{
@@ -3758,13 +3758,13 @@
 	pixel_y = 10
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "OC" = (
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "OE" = (
 /turf/closed/mineral/random/cold/med,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "OG" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 4
@@ -3773,35 +3773,35 @@
 	dir = 4
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "OH" = (
 /obj/effect/waterfall,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "OJ" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "OL" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "OO" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "Pa" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Ph" = (
 /obj/structure/fluff/signage{
 	name = "Daftmarsh - West";
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Pn" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/tangerine_dried{
@@ -3825,79 +3825,79 @@
 	pixel_y = -5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Pp" = (
 /obj/structure/chair/wood/alt,
 /mob/living/carbon/human/species/goblin/npc/hell{
 	name = "birthday goblin"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Pr" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Pu" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "All these roads are temporary for the playtest."
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Pw" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Px" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Py" = (
 /obj/structure/fluff/signage{
 	name = "Daftmarsh - West";
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "Pz" = (
 /obj/structure/bars,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "PC" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "PD" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "PF" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "PH" = (
 /obj/structure/fluff/statue/spider,
 /obj/structure/table/church/m,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "PI" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "PK" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-forest-to-outlands";
 	aportalid = "daftmarsh-forest-to-town"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "PN" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "PW" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/fabric,
@@ -3906,62 +3906,62 @@
 	pixel_x = 0
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Qd" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-cave-to-outlands";
 	aportalid = "daftmarsh-outlands-to-cave"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Qf" = (
 /turf/closed,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "Qk" = (
 /obj/structure/table/wood/treestump/shroomstump,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Qm" = (
 /obj/structure/chair/wood/alt{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Qn" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/marsh/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Qo" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Qq" = (
 /obj/structure/bridge_stakes,
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Qt" = (
 /obj/structure/bars,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Qv" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/spawner/map_spawner/loot/medium,
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "QA" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "QG" = (
 /obj/item/mana_battery/mana_crystal/small,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "QH" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -3977,39 +3977,39 @@
 	pixel_y = -6
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "QI" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "QL" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "QM" = (
 /obj/machinery/light/fueled/lanternpost{
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "QR" = (
 /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "QS" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/hexstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "QU" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "QZ" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Re" = (
 /obj/structure/table/vtable,
 /obj/item/recipe_book/survival{
@@ -4017,68 +4017,68 @@
 	pixel_x = 3
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Rf" = (
 /obj/item/ore/iron{
 	pixel_x = 7;
 	pixel_y = -3
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Rg" = (
 /obj/structure/ladder,
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Rh" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ri" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/twig,
-/area/rogue/indoors)
+/area/indoors)
 "Rl" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Ro" = (
 /obj/structure/window/solid,
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Rp" = (
 /obj/structure/innouous_rock/safe,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Rs" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Rv" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Rw" = (
 /turf/closed/mineral,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "RD" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "RH" = (
 /obj/item/natural/stoneblock{
 	pixel_x = 7;
 	pixel_y = -14
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "RJ" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/produce/sugarcane,
@@ -4097,40 +4097,40 @@
 /obj/item/reagent_containers/food/snacks/sugar,
 /obj/item/reagent_containers/food/snacks/sugar,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "RS" = (
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "RV" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "RX" = (
 /obj/item/natural/stoneblock{
 	pixel_x = 10;
 	pixel_y = 12
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "RZ" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Sb" = (
 /obj/structure/bridge_stakes{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Sc" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Sd" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 8
@@ -4147,22 +4147,22 @@
 	pixel_y = 2
 	},
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Se" = (
 /turf/open/floor/rooftop,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Sg" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Sh" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Sj" = (
 /obj/structure/rack,
 /obj/item/ingot/copper{
@@ -4176,30 +4176,30 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "Sr" = (
 /obj/item/ore/coal{
 	pixel_x = 6;
 	pixel_y = 5
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Sw" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "SA" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "SD" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "SE" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "SH" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -4209,15 +4209,15 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/wood/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "SJ" = (
 /obj/structure/bed/hay,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/twig/platform,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "SK" = (
 /turf/closed,
-/area/rogue)
+/area)
 "SL" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -4226,7 +4226,7 @@
 /obj/structure/rack,
 /obj/item/weapon/mace/woodclub/crafted,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "SP" = (
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/double_pelt,
@@ -4234,7 +4234,7 @@
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/cocoon,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "SS" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 4
@@ -4244,14 +4244,14 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Tb" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Td" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -4259,96 +4259,96 @@
 /turf/open/water/river/dirt{
 	dir = 8
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Te" = (
 /obj/structure/window/stained/silver,
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Th" = (
 /obj/structure/bridge,
 /turf/open/transparent/openspace,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Tm" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
 	},
 /obj/structure/chair/wood/alt,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Tn" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Tq" = (
 /obj/structure/bridge_stakes{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ty" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Tz" = (
 /obj/machinery/light/fueled/smelter/great,
 /obj/structure/bars/grille,
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "TE" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "TF" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "TH" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "TI" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/pelt,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "TK" = (
 /obj/item/natural/stoneblock{
 	pixel_x = -5;
 	pixel_y = 11
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "TL" = (
 /obj/item/fishingrod/fisher,
 /obj/structure/rack/shelf/biggest,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "TN" = (
 /obj/item/natural/stone{
 	pixel_x = 8;
 	pixel_y = 7
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "TU" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Salem - West"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "TX" = (
 /mob/living/carbon/human/species/orc/warlord/skilled{
 	name = "Skullcarver the Dustlord"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "TY" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/clay{
@@ -4368,48 +4368,48 @@
 	pixel_y = 6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Uc" = (
 /turf/open/floor/dirt,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "Us" = (
 /obj/machinery/light/fueled/oven/south,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Uv" = (
 /obj/structure/bridge{
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ux" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "Uz" = (
 /obj/item/mana_battery/mana_crystal/small,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "UA" = (
 /turf/closed/mineral/random,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "UB" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/tree,
 /turf/open/water/river/dirt{
 	dir = 1
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "UC" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "UF" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "UI" = (
 /obj/structure/stairs{
 	dir = 1
@@ -4419,13 +4419,13 @@
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "UN" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "UO" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32;
@@ -4435,29 +4435,29 @@
 	dir = 4
 	},
 /turf/open/transparent/openspace,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "UR" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "US" = (
 /obj/item/natural/rock/mana_crystal,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "UX" = (
 /obj/structure/bed/shit,
 /turf/open/floor/dirt/road,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "Vi" = (
 /obj/structure/flora/grass/bush{
 	pixel_x = -20;
 	pixel_y = 30
 	},
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Vk" = (
 /turf/closed/mineral/random/high,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "Vp" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
@@ -4467,7 +4467,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "VB" = (
 /mob/living/carbon/human/species/goblin/npc/hell{
 	health = 0;
@@ -4476,40 +4476,40 @@
 	},
 /obj/item/natural/poo/cow,
 /turf/open/water/sewer,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "VG" = (
 /obj/structure/fluff/buysign{
 	name = "Chez Fleshrender"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "VL" = (
 /turf/closed/wall/mineral/stone/window,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "VM" = (
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "VN" = (
 /turf/open/water/river/dirt{
 	dir = 1
 	},
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "VS" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "VV" = (
 /turf/closed/mineral/random/cold,
-/area/rogue/under/town/caverogue)
+/area/under/cave)
 "VW" = (
 /obj/item/reagent_containers/powder/salt,
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "VZ" = (
 /obj/item/weapon/pick/steel,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "We" = (
 /obj/structure/stairs,
 /obj/structure/fluff/railing/wood{
@@ -4517,31 +4517,31 @@
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Wf" = (
 /obj/item/natural/stoneblock{
 	pixel_x = -5;
 	pixel_y = 13
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Wg" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/cobblerock,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Wl" = (
 /obj/structure/well,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Wn" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/structure/chair/wood/alt,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Wq" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/vampire,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Wv" = (
 /obj/structure/closet/crate/chest/gold,
 /obj/effect/spawner/map_spawner/loot/magic,
@@ -4551,65 +4551,65 @@
 /obj/item/reagent_containers/powder/moondust_purest,
 /obj/item/reagent_containers/powder/moondust_purest,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Wz" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "WA" = (
 /obj/structure/innouous_rock,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "WB" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "WC" = (
 /obj/structure/table/wood/counter/end{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "WD" = (
 /obj/structure/closet/crate/chest,
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "WJ" = (
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/decorstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "WO" = (
 /turf/closed/wall/mineral/wooddark/slitted,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "WQ" = (
 /obj/structure/table/wood/crafted,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "WW" = (
 /turf/open/water/marsh,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "WX" = (
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Xc" = (
 /obj/item/reagent_containers/food/snacks/rotten/meat{
 	pixel_x = 4;
 	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Xe" = (
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "Xf" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/grass/red,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Xi" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/jellycake_tangerine{
@@ -4625,25 +4625,25 @@
 	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Xn" = (
 /turf/closed/wall/mineral/decostone/center,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Xt" = (
 /obj/structure/door/red,
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Xv" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "XA" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/tile/kitchen,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "XF" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/tray,
@@ -4653,7 +4653,7 @@
 	pixel_y = 9
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "XI" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
@@ -4664,40 +4664,40 @@
 	pixel_x = 2
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "XK" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "XQ" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "daftmarsh-basin-to-outlands";
 	aportalid = "daftmarsh-basin-to-town"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "XR" = (
 /obj/structure/stairs/fancy/l{
 	dir = 1
 	},
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "XT" = (
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "XU" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Ya" = (
 /turf/closed/mineral,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Yb" = (
 /obj/structure/flora/grass/water,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Yc" = (
 /obj/item/toy/cards/deck{
 	pixel_x = -4;
@@ -4708,7 +4708,7 @@
 	dir = 6
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "Ye" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -4718,13 +4718,13 @@
 	icon_state = "borderfall"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "Yl" = (
 /obj/structure/table/wood/counter,
 /obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_apple,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Ym" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/mould/ingot{
@@ -4735,7 +4735,7 @@
 	pixel_x = -7
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "Yu" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -4745,42 +4745,42 @@
 	},
 /mob/living/carbon/human/species/goblin/npc/hell,
 /turf/open/floor/twig,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Yx" = (
 /obj/structure/spider/stickyweb,
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/naturalstone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "YA" = (
 /obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods_safe)
+/area/outdoors/woods_safe)
 "YB" = (
 /obj/item/natural/bundle/stoneblock{
 	pixel_x = 2;
 	pixel_y = 4
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "YC" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/indoors/town/cell)
+/area/indoors/town/cell)
 "YF" = (
 /turf/open/floor/dirt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "YG" = (
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "YM" = (
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/rtfield)
+/area/outdoors/rtfield)
 "YO" = (
 /obj/item/ore/coal{
 	pixel_x = -7;
 	pixel_y = -7
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "YP" = (
 /obj/structure/fluff/walldeco/bigpainting{
 	pixel_x = 1;
@@ -4788,55 +4788,55 @@
 	},
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/wood,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "YW" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32;
 	pixel_x = 0
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors/villagegarrison)
+/area/indoors/villagegarrison)
 "YX" = (
 /obj/structure/window,
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "YZ" = (
 /obj/structure/flora/grass/herb/atropa,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Zf" = (
 /turf/open/water/marsh,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Zj" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "Zt" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/swamp/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Zu" = (
 /mob/living/simple_animal/hostile/retaliate/poltergeist,
 /turf/open/floor/cobble,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 "Zy" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /turf/open/floor/woodturned/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
 "Zz" = (
 /obj/effect/spawner/traveltile_spawner/vertical/inhumen,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ZV" = (
 /turf/closed/mineral/random/high,
-/area/rogue/under/mountains/anvil/upper)
+/area/under/mountains/anvil/upper)
 "ZX" = (
 /obj/item/bin/water/gross,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "ZZ" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/mountains/anvil/lower)
+/area/under/mountains/anvil/lower)
 
 (1,1,1) = {"
 SK

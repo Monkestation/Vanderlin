@@ -167,7 +167,7 @@
 		TRAIT_SEEPRICES,
 	)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_hand
 	shirt = /obj/item/clothing/shirt/undershirt
@@ -247,7 +247,7 @@
 	var/prev_real_name = spawned.real_name
 	var/prev_name = spawned.name
 	var/honorary = "Sir"
-	if(spawned.gender == FEMALE)
+	if(spawned.pronouns == SHE_HER)
 		honorary = "Dame"
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
@@ -454,7 +454,7 @@
 	)
 
 	traits = list(TRAIT_SEEPRICES)
-	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_artificer
 	head = /obj/item/clothing/head/articap

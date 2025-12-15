@@ -25,7 +25,7 @@
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage = 0)
 	spawnableTurfs = list(/turf/open/water/swamp = 5,
 	                     /turf/open/floor/dirt = 80)
-	allowed_areas = list(/area/rogue/outdoors/bog)
+	allowed_areas = list(/area/outdoors/bog)
 
 /datum/mapGeneratorModule/dswampwater
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -34,4 +34,4 @@
 						/obj/structure/kneestingers = 60)
 	allowed_turfs = list(/turf/open/water/swamp,
 						/turf/open/water/swamp/deep)
-	allowed_areas = list(/area/rogue/outdoors/bog)
+	allowed_areas = list(/area/outdoors/bog)

@@ -40,7 +40,7 @@
 
 	if(owner_turf?.turf_flags & NO_JAUNT)
 		if(feedback)
-			to_chat(owner, span_danger("An otherwordly force is preventing you from jaunting here."))
+			to_chat(owner, span_danger("An otherworldly force is preventing you from jaunting here."))
 		return FALSE
 
 	return isliving(owner)

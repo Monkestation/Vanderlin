@@ -20,6 +20,8 @@ SUBSYSTEM_DEF(job)
 	var/list/latejoin_trackers = list()
 
 	var/list/level_order = list(JP_HIGH,JP_MEDIUM,JP_LOW)
+	/// Map of jobs indexed by the experience type they grant.
+	var/list/experience_jobs_map = list()
 
 /datum/controller/subsystem/job/Initialize(timeofday)
 	if(!length(all_occupations))
@@ -43,6 +45,10 @@ SUBSYSTEM_DEF(job)
 		if(job.job_flags & JOB_NEW_PLAYER_JOINABLE)
 			joinable_occupations += job
 
+		for(var/t in job.exp_types_granted)
+			if(!(t in experience_jobs_map))
+				experience_jobs_map[t] = list()
+			experience_jobs_map[t] += job
 	if(SSmapping.map_adjustment)
 		SSmapping.map_adjustment.job_change()
 	return TRUE
@@ -119,9 +125,8 @@ SUBSYSTEM_DEF(job)
 		if(!job.player_old_enough(player.client))
 			JobDebug("GRJ player not old enough, Player: [player]")
 			continue
-
 		if(job.required_playtime_remaining(player.client))
-			JobDebug("GRJ player not enough xp, Player: [player]")
+			JobDebug("GRJ player not enough playtime, Player: [player], Job: [job.title]")
 			continue
 
 		if(player.mind && (job.title in player.mind.restricted_roles))
@@ -137,11 +142,6 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
 
-		#ifdef USES_PQ
-		if(get_playerquality(player.ckey) < job.min_pq)
-			continue
-		#endif
-
 		if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
 			JobDebug("GRJ incompatible with age, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
@@ -149,11 +149,6 @@ SUBSYSTEM_DEF(job)
 		if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
 			JobDebug("GRJ incompatible with sex, Player: [player], Job: [job.title]")
 			continue
-		#ifdef USES_PQ
-		if(get_playerquality(player.ckey) < job.min_pq)
-			JobDebug("GRJ incompatible with minPQ, Player: [player], Job: [job.title]")
-			continue
-		#endif
 
 		if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))
 			JobDebug("GRJ incompatible with leprosy, Player: [player], Job: [job.title]")
@@ -281,7 +276,7 @@ SUBSYSTEM_DEF(job)
 					continue
 
 				if(job.required_playtime_remaining(player.client))
-					JobDebug("DO player not enough xp, Player: [player], Job:[job.title]")
+					JobDebug("DO player not enough playtime, Player: [player], Job: [job.title]")
 					continue
 
 				if(player.mind && (job.title in player.mind.restricted_roles))
@@ -301,12 +296,6 @@ SUBSYSTEM_DEF(job)
 				if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
 					JobDebug("DO incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 					continue
-
-				#ifdef USES_PQ
-				if(get_playerquality(player.ckey) < job.min_pq)
-					JobDebug("DO player lacks Quality. Player: [player], Job: [job.title]")
-					continue
-				#endif
 
 				if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
 					JobDebug("DO player already played class, Player: [player], Job: [job.title]")
@@ -515,11 +504,6 @@ SUBSYSTEM_DEF(job)
 			if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
 				continue
 
-			#ifdef USES_PQ
-			if(get_playerquality(player.ckey) < job.min_pq)
-				continue
-			#endif
-
 			if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
 				continue
 
@@ -662,7 +646,7 @@ SUBSYSTEM_DEF(job)
 				young++
 				continue
 			if(job.required_playtime_remaining(player.client))
-				young++
+				never++
 				continue
 			switch(player.client.prefs.job_preferences[job.title])
 				if(JP_HIGH)
@@ -784,11 +768,6 @@ SUBSYSTEM_DEF(job)
 
 	if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
 		return
-
-	#ifdef USES_PQ
-	if(get_playerquality(player.ckey) < job.min_pq)
-		return
-	#endif
 
 	if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
 		return

@@ -21,12 +21,12 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/component/temporary_pollution_emission/process(seconds_per_tick)
+/datum/component/temporary_pollution_emission/process()
 	var/turf/my_turf = get_turf(parent)
 	if(QDELETED(my_turf) || COOLDOWN_FINISHED(src, expiry_time))
 		qdel(src)
 		return
-	my_turf.pollute_turf(pollutant_type, pollutant_amount * (seconds_per_tick / 10))
+	my_turf.pollute_turf(pollutant_type, pollutant_amount)
 
 /datum/component/temporary_pollution_emission/proc/wash_off()
 	SIGNAL_HANDLER

@@ -1,7 +1,7 @@
 //TODO: Sounds, Visuals
 /obj/machinery/essence/enchantment_altar
 	name = "enchanting table"
-	desc = "An pedestal made of obsidian, it acts as a alchemical focus to allow for a item to be infused and enchanted with the essences of the environment."
+	desc = "A pedestal made of obsidian, it acts as an alchemical focus to allow for an item to be infused and enchanted with the essences of the environment."
 	icon = 'icons/roguetown/misc/altar.dmi'
 	icon_state = "altar"
 	density = TRUE

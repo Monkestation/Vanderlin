@@ -226,7 +226,7 @@
 
 /datum/reagent/consumable/honey
 	name = "Honey"
-	description = "Sweet sweet honey that decays into sugar. Has antibacterial and natural healing properties."
+	description = "Sweet, sweet honey that decays into sugar. Has antibacterial and natural healing properties."
 	color = "#d3a308"
 	nutriment_factor = 15 * REAGENTS_METABOLISM
 	metabolization_rate = 1 * REAGENTS_METABOLISM

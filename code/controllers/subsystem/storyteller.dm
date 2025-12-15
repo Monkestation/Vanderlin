@@ -231,6 +231,14 @@ SUBSYSTEM_DEF(gamemode)
 			CHRONICLE_STATS_MOST_BEAUTIFUL_PERSON,
 			CHRONICLE_STATS_UGLIEST_PERSON,
 		),
+		"Emotion" = list(
+			CHRONICLE_STATS_JOKESTER,
+			CHRONICLE_STATS_CRYBABY,
+		),
+		"Piety" = list(
+			CHRONICLE_STATS_PIOUS,
+			CHRONICLE_STATS_FOUL_MOUTH,
+		),
 	)
 
 	/// Chosen chronicle stats of the notable people, which show at the end round panel
@@ -1020,7 +1028,7 @@ SUBSYSTEM_DEF(gamemode)
 		if(GAMEMODE_PANEL_MAIN)
 			var/even = TRUE
 			dat += "<h2>Event Tracks:</h2>"
-			dat += "<font color='#888888'><i>Every track represents progression towards scheduling an event of it's severity</i></font>"
+			dat += "<font color='#888888'><i>Every track represents progression towards scheduling an event of its severity</i></font>"
 			dat += "<table align='center'; width='100%'; height='100%'; style='background-color:#13171C'>"
 			dat += "<tr style='vertical-align:top'>"
 			dat += "<td width=25%><b>Track</b></td>"
@@ -1601,11 +1609,9 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_PACIFISTS)
 			if(human_mob.family_datum && human_mob.family_member_datum)
 				var/datum/family_member/member = human_mob.family_member_datum
-				// Check if they have children (making them a parent)
 				if(member.children.len > 0)
 					record_round_statistic(STATS_PARENTS)
-				// Check if married or has children
-				if(human_mob.IsWedded() || member.children.len > 0)
+				if(human_mob.IsWedded())
 					record_round_statistic(STATS_MARRIED)
 
 			// Species
@@ -1781,6 +1787,57 @@ SUBSYSTEM_DEF(gamemode)
 	if(length(potential_passers) > 0)
 		var/mob/living/carbon/human/selected_passerby = pick(potential_passers)
 		set_chronicle_stat(CHRONICLE_STATS_RANDOM_PASSERBY, selected_passerby, "RANDOM PASSERBY", "#888888", "just happening to be here")
+
+	// Featured chronicle stats
+	var/highest_laughs = -1
+	var/highest_cries = -1
+	var/highest_prayers = -1
+	var/highest_slurs = -1
+	var/mob/living/top_jokester
+	var/mob/living/top_crybaby
+	var/mob/living/top_pious
+	var/mob/living/top_foul_mouth
+
+	for(var/stat_category in GLOB.chronicle_featured_stats)
+		var/list/category_data = GLOB.chronicle_featured_stats[stat_category]
+		for(var/datum/weakref/mob_ref in category_data)
+			var/mob/living/mob = mob_ref.resolve()
+			if(!mob || !(mob in current_valid_humans))
+				continue
+
+			var/count = category_data[mob_ref]
+
+			if(stat_category == FEATURED_STATS_JOKESTERS)
+				if(count > highest_laughs)
+					highest_laughs = count
+					top_jokester = mob
+
+			if(stat_category == FEATURED_STATS_CRYBABIES)
+				if(count > highest_cries)
+					highest_cries = count
+					top_crybaby = mob
+
+			if(stat_category == FEATURED_STATS_DEVOUT)
+				if(count > highest_prayers)
+					highest_prayers = count
+					top_pious = mob
+
+			if(stat_category == FEATURED_STATS_SPECIESISTS)
+				if(count > highest_slurs)
+					highest_slurs = count
+					top_foul_mouth = mob
+
+	if(top_jokester && highest_laughs > 1)
+		set_chronicle_stat(CHRONICLE_STATS_JOKESTER, top_jokester, "JOKESTER", "#fff89b", "[highest_laughs] laughs")
+
+	if(top_crybaby && highest_cries > 1)
+		set_chronicle_stat(CHRONICLE_STATS_CRYBABY, top_crybaby, "CRYBABY", "#8bc1ee", "[highest_cries] cries")
+
+	if(top_pious && highest_prayers > 1)
+		set_chronicle_stat(CHRONICLE_STATS_PIOUS, top_pious, "PIOUS", "#faf5c7", "[highest_prayers] prayers")
+
+	if(top_foul_mouth && highest_slurs > 1)
+		set_chronicle_stat(CHRONICLE_STATS_FOUL_MOUTH, top_foul_mouth, "FOUL MOUTH", "#e23f3f", "[highest_slurs] slurs")
 
 	pick_chronicle_stats()
 

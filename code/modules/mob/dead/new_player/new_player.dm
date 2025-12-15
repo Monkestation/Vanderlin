@@ -10,8 +10,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	var/ready = FALSE
 	/// Referenced when you want to delete the new_player later on in the code.
 	var/spawning = FALSE
-	/// For instant transfer once the round is set up
-	var/mob/living/new_character
 	/// Used to make sure someone doesn't get spammed with messages if they're ineligible for roles
 	var/ineligible_for_roles = FALSE
 
@@ -200,7 +198,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(observer.client && observer.client.prefs)
 		observer.real_name = observer.client.prefs.real_name
 		observer.name = observer.real_name
-	observer.update_appearance()
 	observer.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 	QDEL_NULL(mind)
 	qdel(src)
@@ -217,7 +214,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		if(JOB_UNAVAILABLE_RACE_BANNED)
 			return "You are currently banned from playing that species."
 		if(JOB_UNAVAILABLE_PLAYTIME)
-			return "You do not have enough relevant playtime for [jobtitle]."
+			return "You do not have enough playtime for [jobtitle]."
 		if(JOB_UNAVAILABLE_SLOTFULL)
 			return "[jobtitle] is already filled to capacity."
 		if(JOB_UNAVAILABLE_AGE)
@@ -230,8 +227,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 			return "[jobtitle] requires more faith."
 		if(JOB_UNAVAILABLE_QUALITY)
 			return "[jobtitle] requires higher player quality."
-		if(JOB_UNAVAILABLE_PATREON)
-			return "Your patreon tier is not high enough for [jobtitle]."
+		if(JOB_UNAVAILABLE_DONATOR)
+			return "You need to be a donator to have play as [jobtitle]."
 		if(JOB_UNAVAILABLE_ACCOUNTAGE)
 			return "Your account is not old enough for [jobtitle]."
 		if(JOB_UNAVAILABLE_LASTCLASS)
@@ -308,11 +305,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		(length(job.blacklisted_species) && (client.prefs.pref_species.id in job.blacklisted_species)))
 		if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
 			return JOB_UNAVAILABLE_RACE
-
-	#ifdef USES_PQ
-	if(!isnull(job.min_pq) && (get_playerquality(ckey) < job.min_pq))
-		return JOB_UNAVAILABLE_QUALITY
-	#endif
 	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
 		return JOB_UNAVAILABLE_SEX
 	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
@@ -495,28 +487,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	popup.set_content(jointext(dat, ""))
 	popup.open(FALSE) // 0 is passed to open so that it doesn't use the onclose() proc
 
-/// Creates, assigns and returns the new_character to spawn as. Assumes a valid mind.assigned_role exists.
-/mob/dead/new_player/proc/create_character(atom/destination)
-	spawning = TRUE
-	close_spawn_windows()
-
-	mind.active = FALSE //we wish to transfer the key manually
-	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
-	if(QDELETED(src) || !client)
-		return // Disconnected while checking for the appearance ban.
-
-	if(client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
-		client.activate_triumph_buy(TRIUMPH_BUY_RACE_ALL)
-
-	mind.transfer_to(spawning_mob)
-	//client.init_verbs()
-	new_character = . = spawning_mob //right into left
-
-	spawning_mob.after_creation()
-
-	GLOB.chosen_names += spawning_mob.real_name
-
-
 /mob/proc/after_creation()
 	return
 
@@ -524,22 +494,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(dna?.species)
 		dna.species.after_creation(src)
 	roll_mob_stats()
-
-/mob/dead/new_player/proc/transfer_character()
-	. = new_character
-	if(!.)
-		return
-	new_character.key = key		//Manually transfer the key to log them in
-	new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
-	var/area/joined_area = get_area(new_character.loc)
-	if(joined_area)
-		joined_area.on_joining_game(new_character)
-	if(new_character.client)
-		var/atom/movable/screen/splash/Spl = new(null, null, new_character.client, TRUE, FALSE)
-		Spl.Fade(TRUE)
-	new_character = null
-	qdel(src)
-
 
 /mob/dead/new_player/Move()
 	return 0

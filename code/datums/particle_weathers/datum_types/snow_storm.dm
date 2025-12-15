@@ -169,7 +169,7 @@
 		bordered_snow.update_appearance(UPDATE_OVERLAYS)
 
 
-/obj/structure/snow/process(delta_time)
+/obj/structure/snow/process()
 	if(!SSParticleWeather.runningWeather)
 		damage_act(3)
 	else if(!istype(SSParticleWeather.runningWeather, /datum/weather_effect/snow))

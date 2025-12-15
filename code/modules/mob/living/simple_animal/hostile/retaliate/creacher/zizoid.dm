@@ -97,10 +97,6 @@
 	gib()
 	qdel(src)
 
-/mob/living/simple_animal/hostile/retaliate/blood/death(gibbed)
-	..()
-	update_appearance()
-
 /mob/living/simple_animal/hostile/retaliate/blood/get_sound(input)
 	switch(input)
 		if("aggro")

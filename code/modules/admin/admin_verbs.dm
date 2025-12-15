@@ -66,6 +66,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 	/client/proc/toggle_specific_triumph_buy, /*toggle whether specific triumphs can be bought*/
 	/client/proc/toggle_jobs_for_persistent, /*toggles jobs for the persistent server*/
+	/client/proc/wave_creation_tools, /*custom job manage, custom wave manage and custom outfit manage*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
 //	/datum/admins/proc/show_player_panel,	/*shows an interface for individual players, with various links (links require additional flags*/
 //	/datum/verbs/menu/Admin/verb/playerpanel,
@@ -93,7 +94,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/cmd_admin_headset_message,	/*send an message to somebody through their headset as CentCom*/
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
-	/client/proc/centcom_podlauncher,/*Open a window to launch a Supplypod and configure it or it's contents*/
 	/client/proc/check_antagonists,		/*shows all antags*/
 	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
 	/client/proc/Getmob,				/*teleports a mob to our location*/
@@ -104,6 +104,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
 	/client/proc/jumptoturf,			/*allows us to jump to a specific turf*/
 	/client/proc/spawn_in_test_area,
+	/client/proc/jump_to_test_area,
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/cmd_admin_local_narrate,	/*sends text to all mobs within view of atom*/
@@ -200,7 +201,6 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/get_dynex_range,		//*debug verbs for dynex explosions.
 	/client/proc/set_dynex_scale,
 	/client/proc/cmd_display_del_log,
-	/client/proc/outfit_manager,
 	/client/proc/debug_huds,
 	/client/proc/map_export,
 	/client/proc/map_template_load,

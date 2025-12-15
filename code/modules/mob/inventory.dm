@@ -171,8 +171,8 @@
 	I.pixel_x = I.base_pixel_x
 	I.pixel_y = I.base_pixel_y
 	if(hud_used)
-		hud_used.throw_icon?.update_appearance()
-		hud_used.give_intent?.update_appearance()
+		hud_used.throw_icon?.update_appearance(UPDATE_ICON_STATE)
+		hud_used.give_intent?.update_appearance(UPDATE_ICON_STATE)
 	if((istype(I, /obj/item/weapon) || istype(I, /obj/item/gun) || I.force >= 15) && !forced && client)
 		// is this the right hand?
 		var/right_hand = FALSE
@@ -289,7 +289,7 @@
 /mob/proc/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE) //Force overrides TRAIT_NODROP for things like wizarditis and admin undress.
 													//Use no_move if the item is just gonna be immediately moved afterward
 													//Invdrop is used to prevent stuff in pockets dropping. only set to false if it's going to immediately be replaced
-	if(!I) //If there's nothing to drop, the drop is automatically succesfull. If(unEquip) should generally be used to check for TRAIT_NODROP.
+	if(!I) //If there's nothing to drop, the drop is automatically successful. If(unEquip) should generally be used to check for TRAIT_NODROP.
 		update_inv_hands()
 		update_a_intents()
 		return TRUE
@@ -320,8 +320,8 @@
 				I.forceMove(newloc)
 		I.dropped(src, silent)
 	if(hud_used)
-		hud_used.throw_icon?.update_appearance()
-		hud_used.give_intent?.update_appearance()
+		hud_used.throw_icon?.update_appearance(UPDATE_ICON_STATE)
+		hud_used.give_intent?.update_appearance(UPDATE_ICON_STATE)
 	update_a_intents()
 	SEND_SIGNAL(I, COMSIG_ITEM_POST_UNEQUIP, force, newloc, no_move, invdrop, silent)
 	SEND_SIGNAL(src, COMSIG_MOB_UNEQUIPPED_ITEM, I, force, newloc, no_move, invdrop, silent)
@@ -420,7 +420,7 @@
 
 /obj/item/proc/equip_to_best_slot(mob/M)
 	if(src != M.get_active_held_item())
-		to_chat(M, span_warning("I are not holding anything to equip!"))
+		to_chat(M, span_warning("I am not holding anything to equip!"))
 		return FALSE
 
 	if(M.equip_to_appropriate_slot(src))

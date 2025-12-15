@@ -9,6 +9,9 @@
 		/datum/attunement/blood = 0.7,
 	)
 
+	invocation = "DR'N LF'E!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 3 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.7

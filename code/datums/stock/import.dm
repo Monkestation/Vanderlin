@@ -26,7 +26,7 @@
 	export_price = 125
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/wheat/PopulateContents()
+/obj/structure/closet/crate/chest/steward/wheat/populate_contents()
 	for(var/i in 1 to 5)
 		new /obj/item/reagent_containers/food/snacks/produce/grain/wheat(src)
 
@@ -37,7 +37,7 @@
 	export_price = 150
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/townguard/PopulateContents()
+/obj/structure/closet/crate/chest/steward/townguard/populate_contents()
 	new /obj/item/clothing/head/helmet/townwatch(src)
 	new /obj/item/clothing/cloak/half/guard(src)
 	new /obj/item/clothing/armor/gambeson(src)
@@ -53,7 +53,7 @@
 	export_price = 350
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/manatarms/PopulateContents()
+/obj/structure/closet/crate/chest/steward/manatarms/populate_contents()
 	new /obj/item/clothing/head/helmet/kettle(src)
 	new /obj/item/clothing/neck/chaincoif/iron(src)
 	new /obj/item/clothing/cloak/stabard/guard(src)
@@ -70,7 +70,7 @@
 	export_price = 400
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/crossbow/PopulateContents()
+/obj/structure/closet/crate/chest/steward/crossbow/populate_contents()
 	for(var/i in 1 to 3)
 		new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow(src)
 		new /obj/item/ammo_holder/quiver/bolts(src)
@@ -82,7 +82,7 @@
 	export_price = 250
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/saigabuck/PopulateContents()
+/obj/structure/closet/crate/chest/steward/saigabuck/populate_contents()
 	new /mob/living/simple_animal/hostile/retaliate/saigabuck/tame/saddled(src)
 
 /datum/stock/import/cow
@@ -92,7 +92,7 @@
 	export_price = 150
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/cow/PopulateContents()
+/obj/structure/closet/crate/chest/steward/cow/populate_contents()
 	new /mob/living/simple_animal/hostile/retaliate/cow(src)
 
 /datum/stock/import/bull
@@ -102,7 +102,7 @@
 	export_price = 200
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/bull/PopulateContents()
+/obj/structure/closet/crate/chest/steward/bull/populate_contents()
 	new /mob/living/simple_animal/hostile/retaliate/bull(src)
 
 /datum/stock/import/goat
@@ -112,7 +112,7 @@
 	export_price = 150
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/goat/PopulateContents()
+/obj/structure/closet/crate/chest/steward/goat/populate_contents()
 	new /mob/living/simple_animal/hostile/retaliate/goat(src)
 
 /datum/stock/import/goatmale
@@ -122,7 +122,7 @@
 	export_price = 200
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/goatmale/PopulateContents()
+/obj/structure/closet/crate/chest/steward/goatmale/populate_contents()
 	new /mob/living/simple_animal/hostile/retaliate/goatmale(src)
 
 /datum/stock/import/chicken
@@ -132,7 +132,7 @@
 	export_price = 100
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/chicken/PopulateContents()
+/obj/structure/closet/crate/chest/steward/chicken/populate_contents()
 	new /mob/living/simple_animal/hostile/retaliate/chicken(src)
 
 /datum/stock/import/farmequip
@@ -142,7 +142,7 @@
 	export_price = 250
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/farmequip/PopulateContents()
+/obj/structure/closet/crate/chest/steward/farmequip/populate_contents()
 	new /obj/item/weapon/hoe(src)
 	new /obj/item/weapon/pitchfork(src)
 	new /obj/item/weapon/sickle(src)

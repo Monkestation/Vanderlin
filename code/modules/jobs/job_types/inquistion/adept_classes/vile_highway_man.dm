@@ -50,7 +50,7 @@
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/jacket/leathercoat/renegade
 	head = /obj/item/clothing/head/helmet/leather/tricorn
-	neck = /obj/item/clothing/neck/highcollier/iron/renegadecollar
+	neck = /obj/item/clothing/neck/gorget/explosive
 	beltl =  /obj/item/weapon/sword/short/iron
 	l_hand = /obj/item/weapon/whip // Great length, they don't need to be next to a person to help in apprehending them.
 	pants = /obj/item/clothing/pants/trou/leather

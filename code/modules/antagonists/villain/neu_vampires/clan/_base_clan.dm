@@ -115,6 +115,9 @@ And it also helps for the character set panel
 		setup_vampire_abilities(H)
 		apply_vampire_look(H)
 
+		var/datum/component/vampire_disguise/disguise_comp = H.GetComponent(/datum/component/vampire_disguise)
+		disguise_comp.apply_disguise(H)
+
 		H.playsound_local(get_turf(H), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
 		for(var/datum/coven/coven as anything in clane_covens)
 			H.give_coven(coven)
@@ -230,6 +233,7 @@ And it also helps for the character set panel
 /datum/clan/proc/apply_clan_components(mob/living/carbon/human/H)
 	H.AddComponent(/datum/component/sunlight_vulnerability)
 	H.AddComponent(/datum/component/vampire_disguise)
+
 
 /datum/clan/proc/disable_covens(mob/living/carbon/human/vampire)
 	for(var/coven as anything in vampire.covens)

@@ -102,7 +102,7 @@
 
 /obj/item/bait/sweet
 	name = "bag of sweetbait"
-	desc = "This bait doesn't smell as bad. I might even try a bite.."
+	desc = "This bait doesn't smell as bad. I might even try a bite..."
 	icon_state = "baitp"
 	attracted_types = list(/mob/living/simple_animal/hostile/retaliate/goat = 33,
 							/mob/living/simple_animal/hostile/retaliate/goatmale = 33,
@@ -125,7 +125,7 @@
 
 /obj/item/bait/forestdelight
 	name = "meat wrapped in strange herbs"
-	desc = "a piece of rotten and rancid meat wrapped in several herbs. The aroma induces both vomit and a nice herbal odor"
+	desc = "A piece of rotten and rancid meat wrapped in several herbs. The aroma induces both vomit and a nice herbal odor."
 	icon_state = "baitbriar"
 	attracted_types = list (/mob/living/simple_animal/hostile/retaliate/mole/briars = 50,
 						/mob/living/simple_animal/pet/cat/cabbit = 5) // cause get rabbited

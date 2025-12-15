@@ -323,6 +323,8 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 
 GLOBAL_LIST_EMPTY(patron_follower_counts)
 
+GLOBAL_LIST_EMPTY(chronicle_featured_stats)
+
 // Featured stats of the round
 #define FEATURED_STATS_TREE_FELLERS "tree_fellers"
 #define FEATURED_STATS_THIEVES "thieves"
@@ -352,6 +354,11 @@ GLOBAL_LIST_EMPTY(patron_follower_counts)
 #define FEATURED_STATS_SPELLS "spells"
 #define FEATURED_STATS_CROPS "crops"
 #define FEATURED_STATS_FLAWS "flaws"
+
+// Chronicle featured stats only
+#define FEATURED_STATS_JOKESTERS "jokesters"
+#define FEATURED_STATS_CRYBABIES "crybabies"
+#define FEATURED_STATS_DEVOUT "devout"
 
 GLOBAL_LIST_INIT(featured_stats, list(
 	FEATURED_STATS_TREE_FELLERS = list(
@@ -518,6 +525,10 @@ GLOBAL_LIST_INIT(featured_stats, list(
 #define CHRONICLE_STATS_LEAST_ENDURANT_PERSON "least_endurant_person"
 #define CHRONICLE_STATS_MOST_BEAUTIFUL_PERSON "most_beautiful_person"
 #define CHRONICLE_STATS_UGLIEST_PERSON "ugliest_person"
+#define CHRONICLE_STATS_JOKESTER "jokester"
+#define CHRONICLE_STATS_CRYBABY "crybaby"
+#define CHRONICLE_STATS_PIOUS "pious"
+#define CHRONICLE_STATS_FOUL_MOUTH "foul_mouth"
 
 GLOBAL_LIST_EMPTY(chronicle_stats)
 
@@ -583,32 +594,39 @@ GLOBAL_LIST_EMPTY(chronicle_stats)
 /proc/record_featured_stat(stat_category, mob/living/user, increment = 1)
 	if(SSticker.current_state == GAME_STATE_FINISHED)
 		return
-	if(!stat_category || !user?.real_name || !GLOB.featured_stats[stat_category])
+	if(!stat_category || !user?.real_name)
 		return
 	if(!user)
 		return
 
-	var/list/stat_data = GLOB.featured_stats[stat_category]
-	var/job_title = " (Jobless)"
-	var/datum/mind/M = user.mind
+	if(GLOB.featured_stats[stat_category])
+		var/list/stat_data = GLOB.featured_stats[stat_category]
+		var/job_title = " (Jobless)"
+		var/datum/mind/M = user.mind
 
-	if(M)
-		if(M.assigned_role.title != "Unassigned" && !is_unassigned_job(M.assigned_role))
-			if(user.gender == FEMALE && M.assigned_role.f_title)
-				job_title = " ([M.assigned_role.f_title])"
-			else
-				job_title = " ([M.assigned_role.title])"
-		else if(user.job && user.job != "Unassigned")
-			job_title = " ([user.job])"
-		else if(M.special_role)
-			job_title = " ([M.special_role])"
+		if(M)
+			if(M.assigned_role.title != "Unassigned" && !is_unassigned_job(M.assigned_role))
+				if(user.pronouns == SHE_HER && M.assigned_role.f_title)
+					job_title = " ([M.assigned_role.f_title])"
+				else
+					job_title = " ([M.assigned_role.title])"
+			else if(user.job && user.job != "Unassigned")
+				job_title = " ([user.job])"
+			else if(M.special_role)
+				job_title = " ([M.special_role])"
 
-	var/key = "[user.real_name][job_title]"
+		var/key = "[user.real_name][job_title]"
 
-	if(!stat_data["entries"])
-		stat_data["entries"] = list()
+		if(!stat_data["entries"])
+			stat_data["entries"] = list()
 
-	stat_data["entries"][key] = (stat_data["entries"][key] || 0) + increment
+		stat_data["entries"][key] = (stat_data["entries"][key] || 0) + increment
+
+	if(!GLOB.chronicle_featured_stats[stat_category])
+		GLOB.chronicle_featured_stats[stat_category] = list()
+
+	var/datum/weakref/user_ref = WEAKREF(user)
+	GLOB.chronicle_featured_stats[stat_category][user_ref] = (GLOB.chronicle_featured_stats[stat_category][user_ref] || 0) + increment
 
 /proc/record_featured_object_stat(stat_category, object_name, increment = 1)
 	if(SSticker.current_state == GAME_STATE_FINISHED)

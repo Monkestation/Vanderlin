@@ -10,6 +10,9 @@
 		/datum/attunement/aeromancy = 0.4,
 	)
 
+	invocation = "Repel!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 3 SECONDS
 	charge_drain = 2
 	charge_slowdown = 0.3

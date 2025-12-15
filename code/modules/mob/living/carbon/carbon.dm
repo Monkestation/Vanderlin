@@ -63,15 +63,15 @@
 	var/oindex = active_hand_index
 	active_hand_index = held_index
 	if(hud_used)
-		hud_used.throw_icon?.update_appearance()
-		hud_used.give_intent?.update_appearance()
+		hud_used.throw_icon?.update_appearance(UPDATE_ICON_STATE)
+		hud_used.give_intent?.update_appearance(UPDATE_ICON_STATE)
 		var/atom/movable/screen/inventory/hand/H
 		H = hud_used.hand_slots["[oindex]"]
 		if(H)
-			H.update_appearance()
+			H.update_appearance(UPDATE_OVERLAYS)
 		H = hud_used.hand_slots["[held_index]"]
 		if(H)
-			H.update_appearance()
+			H.update_appearance(UPDATE_OVERLAYS)
 		H = hud_used.action_intent
 
 	update_a_intents()
@@ -167,14 +167,14 @@
 	in_throw_mode = 0
 	if(client && hud_used)
 		hud_used.throw_icon?.throwy = 0
-		hud_used.throw_icon?.update_appearance()
+		hud_used.throw_icon?.update_appearance(UPDATE_ICON_STATE)
 
 
 /mob/living/carbon/proc/throw_mode_on()
 	in_throw_mode = 1
 	if(client && hud_used)
 		hud_used.throw_icon?.throwy = 1
-		hud_used.throw_icon?.update_appearance()
+		hud_used.throw_icon?.update_appearance(UPDATE_ICON_STATE)
 
 /mob/proc/throw_item(atom/target, offhand = FALSE)
 	SEND_SIGNAL(src, COMSIG_MOB_THROW, target)
@@ -854,7 +854,7 @@
 		clear_fullscreen("DDZ")
 	if(hud_used)
 		if(hud_used.stressies)
-			hud_used.stressies.update_appearance()
+			hud_used.stressies.update_appearance(UPDATE_OVERLAYS)
 //	if(blood_volume <= 0)
 //		overlay_fullscreen("DD", /atom/movable/screen/fullscreen/crit/death)
 //	else
@@ -1367,11 +1367,15 @@
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
 	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
+	var/eyecolor = eyes.eye_color
+	var/eyesecond = eyes.second_color
 	if(eyes)
 		eyes.Remove(src,1)
 		QDEL_NULL(eyes)
 
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
+	eyes.eye_color = eyecolor
+	eyes.second_color = eyesecond
 	eyes.Insert(src)
 
 /mob/living/carbon/wash(clean_types)
@@ -1418,3 +1422,24 @@
 	if(!dna?.species)
 		return
 	return dna?.species.id == species
+
+/mob/living/carbon/proc/get_pain_factor()
+	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+		return FALSE
+
+	var/raw = get_complex_pain()
+	var/shock = calculate_shock_stage()
+
+	// Shock reduces pain perception
+	if(shock >= 60)
+		var/shock_reduction = min(0.3, shock * 0.001)
+		raw *= (1 - shock_reduction)
+
+	// Endurance scaling
+	var/painpercent = (raw/(STAEND * 13)) * 100
+
+	// Apply tolerance
+	painpercent *= (1 - (pain_tolerance * 0.01))
+
+	// Return normalized value between 0 and 1
+	return clamp(painpercent/100, 0, 1)

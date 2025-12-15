@@ -44,20 +44,12 @@
 	if(length(allowed_patrons) && !(to_check.patron.type in allowed_patrons))
 		return FALSE
 
+	if(!antags_can_pick && to_check.mind?.special_role)
+		return FALSE
+
 	if(total_positions > -1)
 		if(current_positions >= total_positions)
 			return FALSE
 
-#ifdef USES_PQ
-	if(min_pq != -100) // If someone sets this we actually do the check.
-		if(get_playerquality(to_check.client.ckey) < min_pq)
-			return FALSE
-#endif
-
-#ifdef USES_PQ
-	var/pq_prob = roll_chance + max(get_playerquality(to_check.client.ckey) / 2, 0) // Takes the base pick rate of the rare class and adds the client's pq divided by 2 or 0, whichever is higher. Allows a maximum of 65 pick probability at 100 pq
-#else
-	var/pq_prob = roll_chance
-#endif
-	if(prob(pq_prob))
+	if(prob(roll_chance))
 		return TRUE

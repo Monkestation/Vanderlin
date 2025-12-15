@@ -463,7 +463,6 @@
 	else
 		new /mob/living/carbon/human/species/goblin/npc(get_turf(src))
 	gobs++
-	update_appearance()
 	if(living_player_count() < 10)
 		maxgobs = 1
 	if(gobs < maxgobs)
@@ -475,7 +474,6 @@
 	if(spawning)
 		return
 	spawning = TRUE
-	update_appearance()
 	addtimer(CALLBACK(src, PROC_REF(creategob)), 2 SECONDS)
 
 /obj/structure/gob_portal/Destroy()

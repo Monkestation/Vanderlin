@@ -11,7 +11,7 @@
 	decay_factor = STANDARD_ORGAN_DECAY
 
 	low_threshold_passed = "<span class='info'>My ears begin to resonate with an internal ring sometimes.</span>"
-	now_failing = "<span class='warning'>I are unable to hear at all!</span>"
+	now_failing = "<span class='warning'>I am unable to hear at all!</span>"
 	now_fixed = "<span class='info'>Noise slowly begins filling my ears once more.</span>"
 	low_threshold_cleared = "<span class='info'>The ringing in my ears has died down.</span>"
 

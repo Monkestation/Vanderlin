@@ -1,6 +1,6 @@
 /datum/job/advclass/mercenary/kern
 	title = "Kern"
-	tutorial = "A mercanary hailing from Kaledon, you fight under your Gallowglass or for your own coin, you fled with your fellow countrymen to escape the Grenzelhoftian Occupation of your homeland."
+	tutorial = "A mercenary hailing from Kaledon, you fight under your Gallowglass or for your own coin, you fled with your fellow countrymen to escape the Grenzelhoftian Occupation of your homeland."
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
 		SPEC_ID_ELF,\

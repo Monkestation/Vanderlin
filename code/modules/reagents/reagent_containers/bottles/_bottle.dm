@@ -164,7 +164,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	desc = "Inside is a scroll, pop it open and read the ancient wisdoms."
 	icon = 'icons/roguetown/items/glass_reagent_container.dmi'
 	dropshrink = 0.8
-	icon_state = "clear_bottle1"
+	icon_state = "clear_bottle1_message"
 	w_class = WEIGHT_CLASS_NORMAL
 	var/obj/item/paper/contained
 
@@ -186,6 +186,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	btle.closed = FALSE
 	user.dropItemToGround(src, silent=TRUE)
 	user.put_in_active_hand(btle)
+	user.put_in_hands(contained)
 	contained = null
 	qdel(src)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN

@@ -240,7 +240,6 @@
 		var/probability = I.get_dismemberment_chance(affecting, user)
 		if(prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, user.zone_selected))
 			I.add_mob_blood(src)
-			playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
 		return TRUE //successful attack
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE

@@ -1,7 +1,7 @@
 //Raccoons are a faster, still hostile, version of a wolf and bobcat, but the weakest of the three.
 /mob/living/simple_animal/hostile/retaliate/raccoon
 	name = "rakun"
-	desc = "An adorable albiet dangerous creacher of Vanderlin's northern coast, known to steal food from bins or eat small game."
+	desc = "An adorable albeit dangerous creacher of Vanderlin's northern coast, known to steal food from bins or eat small game."
 	icon = 'icons/roguetown/mob/monster/raccoon.dmi'
 	icon_state = "raccoon"
 	icon_living = "raccoon"

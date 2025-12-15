@@ -29,7 +29,7 @@
 	tier = 5
 	speak_emote = list("roars")
 	base_intents = list(/datum/intent/unarmed/dragonclaw)
-	faction = list("abberant")
+	faction = list("aberrant")
 	melee_damage_lower = 40
 	melee_damage_upper = 40
 	retreat_distance = 0
@@ -138,7 +138,7 @@
 /mob/living/simple_animal/hostile/retaliate/voiddragon/proc/summon_obelisk()
 	var/list/spawnLists = list(/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk,/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk)
 	var/reinforcement_count = 2
-	src.visible_message(span_cultbigbold("[src] summons abberant obelisks from beneath the ground."))
+	src.visible_message(span_cultbigbold("[src] summons aberrant obelisks from beneath the ground."))
 	while(reinforcement_count > 0)
 		var/list/turflist = list()
 		for(var/turf/t in RANGE_TURFS(1, src))
@@ -300,7 +300,7 @@
 	ai_controller.PauseAi(5 SECONDS)
 	if(do_after(user, 5 SECONDS, target = src))
 		user.Beam(target,icon_state="lightning[rand(1,12)]",time=5)
-		src.visible_message(span_colossus("[src] unleashes a storm of lightning from it's maw."))
+		src.visible_message(span_colossus("[src] unleashes a storm of lightning from its maw."))
 		Bolt(user,target,30,5,user)
 		src.move_resist = initial(src.move_resist)
 
