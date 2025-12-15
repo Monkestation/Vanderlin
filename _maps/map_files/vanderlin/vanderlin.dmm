@@ -27302,7 +27302,7 @@
 /turf/closed/wall/mineral/pipe,
 /area/under/cave)
 "nRe" = (
-/obj/structure/apiary,
+/obj/structure/apiary/starter,
 /turf/open/floor/dirt,
 /area/outdoors/rtfield/safe)
 "nRg" = (
