@@ -45,10 +45,6 @@
 	smeltresult = /obj/item/ingot/bronze
 	sellprice = 25
 
-/obj/item/statue/bronze/Initialize()
-	. = ..()
-	icon_state = "bstatue[pick(1)]"
-
 /*	..................   Misc   ................... */
 /obj/item/statue/silver/gnome
 	name = "petrified gnome"
