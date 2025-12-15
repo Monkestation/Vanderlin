@@ -152,17 +152,20 @@
 
 /obj/item/clothing/MiddleClick(mob/living/user, params)
 	. = ..()
+	
 	if(!istype(user) || nodismemsleeves)
 		return
 
 	var/time_to_tear = 6 SECONDS
+	var/salvaged_amount = 3
 	var/on_living = (loc == user)
 
 	if(on_living)
 		time_to_tear = 9 SECONDS
-		user.visible_message(span_userdanger("[user] begins to rip open their [src]!"), span_notice("I begin to rip open my [src]!"))
+		salvaged_amount = 2
+		user.visible_message(span_danger("[user] starts to tear [src] apart! while they are wearing it..."), span_notice("I start to tear [src] apart!"))
 	else
-		user.visible_message(span_danger("[user] begins to tear [src] into cloth!"), span_notice("I begin to tear [src] into cloth"))
+		user.visible_message(span_danger("[user] begins to rip [src] into strips!"), span_notice("I begin to rip [src] into strips."))
 
 	playsound(src, 'sound/foley/cloth_rip.ogg', 50, TRUE)
 
@@ -170,13 +173,13 @@
 		return
 
 	if(on_living)
-		user.visible_message(span_userdanger("[user] rips open their [src]!"), span_notice("I rip open [src]!"))
+		user.visible_message(span_danger("[user] tears [src] apart!"), span_notice("I tear [src] apart!"))
 	else
-		user.visible_message(span_danger("[user] tears [src] into cloth!"), span_notice("I tear [src] into cloth"))
+		user.visible_message(span_danger("[user] rips [src] into strips!"), span_notice("I rip [src] into strips."))
 
 	playsound(src, 'sound/foley/cloth_rip.ogg', 50, TRUE)
 
-	for(var/i in 1 to 3)
+	for(var/i in 1 to salvaged_amount)
 		var/obj/item/salvaged = new salvage_result(get_turf(user))
 		user.put_in_hands(salvaged)
 

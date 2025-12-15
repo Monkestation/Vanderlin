@@ -887,7 +887,6 @@ GLOBAL_PROTECT(no_child_icons)
 
 /mob/living/carbon/human/update_inv_shirt()
 	remove_overlay(SHIRT_LAYER)
-	remove_overlay(SLEEVES_LAYER)
 
 	if(client && hud_used)
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_SHIRT) + 1]
@@ -934,22 +933,15 @@ GLOBAL_PROTECT(no_child_icons)
 
 		var/mutable_appearance/shirt_overlay = wear_shirt.build_worn_icon(age, SHIRT_LAYER, add_boob = use_female_sprites, customi = racecustom, sleeve_flags = armsindex)
 
+		shirt_overlay.add_overlay(get_sleeves_layer(wear_shirt, armsindex, SLEEVES_LAYER))
+
 		if(LAZYACCESS(offsets, OFFSET_SHIRT))
 			shirt_overlay.pixel_x += offsets[OFFSET_SHIRT][1]
 			shirt_overlay.pixel_y += offsets[OFFSET_SHIRT][2]
-
-		// The only one that needs to be seperate to layer over arms
-		if(wear_shirt.sleeved)
-			var/list/mutable_appearance/sleeves_overlays = get_sleeves_layer(wear_shirt, armsindex, SLEEVES_LAYER)
-			for(var/mutable_appearance/sleeve as anything in sleeves_overlays)
-				if(LAZYACCESS(offsets, OFFSET_SHIRT))
-					sleeve.pixel_x += offsets[OFFSET_SHIRT][1]
-					sleeve.pixel_y += offsets[OFFSET_SHIRT][2]
-			overlays_standing[SLEEVES_LAYER] = sleeves_overlays
-			apply_overlay(SLEEVES_LAYER)
-
+				
 		overlays_standing[SHIRT_LAYER] = shirt_overlay
-		apply_overlay(SHIRT_LAYER)
+
+	apply_overlay(SHIRT_LAYER)
 
 	update_body()
 
@@ -1244,12 +1236,6 @@ in this situation default_icon_file is expected to match either the lefthand_ or
 	//Find a valid layer from variables+arguments
 	var/layer2use = alternate_worn_layer || default_layer
 
-	if(!(sleeve_flags & SLEEVES_RIGHT) && (r_sleeve_status == SLEEVE_TORN || r_sleeve_status == SLEEVE_ROLLED))
-		sleeve_flags |= SLEEVES_RIGHT
-
-	if(!(sleeve_flags & SLEEVES_LEFT) && (l_sleeve_status == SLEEVE_TORN || l_sleeve_status == SLEEVE_ROLLED))
-		sleeve_flags |= SLEEVES_LEFT
-
 	var/mutable_appearance/standing = mutable_appearance(file2use, t_state, -layer2use)
 
 	if(!nodismemsleeves && sleeved && sleevejazz && sleeve_flags) //cut out sleeves from north/south sprites
@@ -1314,12 +1300,6 @@ in this situation default_icon_file is expected to match either the lefthand_ or
 /mob/living/carbon/proc/get_sleeves_layer(obj/item/I, sleeve_flags, layer2use)
 	if(!I || !layer2use)
 		return
-
-	if(!(sleeve_flags & SLEEVES_RIGHT) && (I.r_sleeve_status == SLEEVE_TORN || I.r_sleeve_status == SLEEVE_ROLLED))
-		sleeve_flags |= SLEEVES_RIGHT
-
-	if(!(sleeve_flags & SLEEVES_LEFT) && (I.l_sleeve_status == SLEEVE_TORN || I.l_sleeve_status == SLEEVE_ROLLED))
-		sleeve_flags |= SLEEVES_LEFT
 
 	var/index = I.icon_state
 	var/mob/living/carbon/human/HM = src
@@ -1453,8 +1433,6 @@ in this situation default_icon_file is expected to match either the lefthand_ or
 	..()
 	update_body()
 
-
-
 /mob/living/carbon/human/proc/update_observer_view(obj/item/I, inventory)
 	if(observers && observers.len)
 		for(var/mob/dead/observe as anything in observers)
@@ -1470,6 +1448,8 @@ in this situation default_icon_file is expected to match either the lefthand_ or
 					break
 
 /mob/living/carbon/human/update_body_parts(redraw = FALSE)
+	update_damage_overlays()
+
 	//CHECK FOR UPDATE
 	var/oldkey = icon_render_key
 	icon_render_key = generate_icon_render_key()
@@ -1489,24 +1469,24 @@ in this situation default_icon_file is expected to match either the lefthand_ or
 
 	//GENERATE NEW LIMBS
 	var/list/new_limbs = list()
-	var/hideboob = FALSE //used to tell if we should hide boobs, basically
+	
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
+		var/hideboob = FALSE //used to tell if we should hide boobs, basically
 		if(BP.body_zone == BODY_ZONE_CHEST)
 			if(wear_armor?.flags_inv & HIDEBOOB)
 				hideboob = TRUE
-			if(wear_shirt?.flags_inv & HIDEBOOB)
+			else if(wear_shirt?.flags_inv & HIDEBOOB)
 				hideboob = TRUE
-			if(cloak?.flags_inv & HIDEBOOB)
+			else if(cloak?.flags_inv & HIDEBOOB)
 				hideboob = TRUE
-			new_limbs += BP.get_limb_icon(hideaux = hideboob)
-		else
-			new_limbs += BP.get_limb_icon()
-	if(new_limbs.len)
+
+		new_limbs += BP.get_limb_icon(hideaux = hideboob)
+
+	if(length(new_limbs))
 		overlays_standing[BODYPARTS_LAYER] = new_limbs
 		limb_icon_cache[icon_render_key] = new_limbs
 
 	apply_overlay(BODYPARTS_LAYER)
-	update_damage_overlays()
 
 /mob/proc/update_body_parts_head_only()
 	return
