@@ -1,15 +1,44 @@
 /datum/job/advclass/combat/heartfeltlord
 	title = "Lord of Heartfelt"
-	tutorial = "You are the proud lord of Heartfelt, \
-	but why have you come to Vanderlin?"
-	allowed_sexes = list(MALE)
+	tutorial = "You are the lord of Heartfelt, \
+	your kingdom lies in ruins ever since it's mechanical servants rose up. \
+	You have since fled to the kingdom of Vanderlin, \
+	the exact reason of your stay here are up to you."
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(SPEC_ID_HUMEN)
 	outfit = /datum/outfit/adventurer/heartfeltlord
 	total_positions = 1
 	roll_chance = 50
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
+	skills = list(
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/crossbows = 3,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/knives = 3,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/reading = 4,
+		/datum/skill/misc/riding = 3,
+		/datum/skill/craft/cooking = 1,
+	)
+	traits = list(
+		TRAIT_NOBLE,
+		TRAIT_HEAVYARMOR,
+	)
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_INT = 3,
+		STATKEY_END = 3,
+		STATKEY_SPD = 1,
+		STATKEY_PER = 2,
+		STATKEY_LCK = 5,
+	)
 
-/datum/outfit/adventurer/heartfeltlord/pre_equip(mob/living/carbon/human/H)
-	..()
+/datum/outfit/adventurer/heartfeltlord
+	name = "Lord of Heartfelt"
 	shirt = /obj/item/clothing/shirt/undershirt
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/clothing/neck/gorget
@@ -23,25 +52,4 @@
 	gloves = /obj/item/clothing/gloves/leather/black
 	neck = /obj/item/clothing/neck/chaincoif
 	beltl = /obj/item/weapon/sword/long
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.change_stat(STATKEY_STR, 1)
-		H.change_stat(STATKEY_INT, 3)
-		H.change_stat(STATKEY_END, 3)
-		H.change_stat(STATKEY_SPD, 1)
-		H.change_stat(STATKEY_PER, 2)
-		H.change_stat(STATKEY_LCK, 5)
 
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)

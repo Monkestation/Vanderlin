@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 4
 	spawn_positions = 4
-	min_pq = -50
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
@@ -17,7 +16,7 @@
 	outfit = /datum/outfit/grabber
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
-	exp_types_granted  = list(EXP_TYPE_MERCHANT_COMPANY)
+	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 
 /datum/outfit/grabber/pre_equip(mob/living/carbon/human/H)
 	..()

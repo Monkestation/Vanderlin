@@ -74,6 +74,7 @@
 	dropshrink = 0.5
 	var/textper = 100
 	var/maxlen = 2000
+	var/writable = TRUE
 
 	var/cached_mailer
 	var/cached_mailedto
@@ -439,6 +440,8 @@
 		return
 
 	if(istype(P, /obj/item/natural/feather/infernal))
+		if(!writable)
+			return
 		if(trapped)
 			to_chat(user, span_warning("[src] is already trapped."))
 		else
@@ -446,6 +449,8 @@
 			trapped = TRUE
 
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
+		if(!writable)
+			return
 		if(user.is_blind())
 			to_chat(user, span_warning("I want to write on [src], but I cannot."))
 			return

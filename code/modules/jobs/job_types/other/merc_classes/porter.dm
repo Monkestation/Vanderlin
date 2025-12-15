@@ -26,7 +26,7 @@
 		/datum/skill/labor/mathematics = 2,
 		//Can't expect those kobolds to not be thieves or assist with such things.
 		/datum/skill/misc/stealing = 2,
-		/datum/skill/misc/lockpicking,
+		/datum/skill/misc/lockpicking = 2,
 		//Jack of All Trade, Master of None.
 		/datum/skill/misc/sewing = 3,
 		/datum/skill/misc/medicine = 3,

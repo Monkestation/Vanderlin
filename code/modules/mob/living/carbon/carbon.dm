@@ -1422,3 +1422,24 @@
 	if(!dna?.species)
 		return
 	return dna?.species.id == species
+
+/mob/living/carbon/proc/get_pain_factor()
+	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+		return FALSE
+
+	var/raw = get_complex_pain()
+	var/shock = calculate_shock_stage()
+
+	// Shock reduces pain perception
+	if(shock >= 60)
+		var/shock_reduction = min(0.3, shock * 0.001)
+		raw *= (1 - shock_reduction)
+
+	// Endurance scaling
+	var/painpercent = (raw/(STAEND * 13)) * 100
+
+	// Apply tolerance
+	painpercent *= (1 - (pain_tolerance * 0.01))
+
+	// Return normalized value between 0 and 1
+	return clamp(painpercent/100, 0, 1)

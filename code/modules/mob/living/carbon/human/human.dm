@@ -14,6 +14,38 @@
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/artery/neck)
+		else if(user.pulledby)
+			if(ishuman(user.pulledby) && isliving(user))
+				var/mob/living/carbon/human/grabber = user.pulledby
+				var/mob/living/grabbed = user
+				if(grabbed.has_status_effect(/datum/status_effect/grab_counter_cd))
+					to_chat(user, span_warning("I already tried to counter someone grab recently!"))
+					return
+				var/skill_diff = 0
+				var/modifier = 1
+				if(user.mind)
+					skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling))
+				if(grabber.mind)
+					skill_diff -= (grabber.get_skill_level(/datum/skill/combat/wrestling))
+				skill_diff = max(skill_diff, 1)
+				var/base_chance = 20
+				if(HAS_TRAIT(user, TRAIT_RESTRAINED))
+					modifier -= 0.5
+				var/counter_chance = (base_chance * skill_diff) * modifier
+				counter_chance = CLAMP(counter_chance, 5, 95)
+				if(prob(counter_chance))
+					grabber.Stun(10)
+					grabber.stop_pulling()
+					to_chat(user, span_notice("[grabber] fell for my grab counter!"))
+					to_chat(grabber, span_danger("I fall for [src]'s grab counter!"))
+				else
+					grabbed.Stun(20)
+					var/fail_message = "[grabber] did not fall for my grab counter..."
+					if(user.client?.prefs.showrolls)
+						fail_message += " [counter_chance]%"
+					to_chat(grabber, span_notice("[src] failed to counter my grab!"))
+					to_chat(user, span_warning(fail_message))
+				grabbed.apply_status_effect(/datum/status_effect/grab_counter_cd)
 	else
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)

@@ -30,6 +30,19 @@
 	var/last_season_check = 0
 	var/seasonal_activity = 1.0 // Modifier for bee activity
 
+/obj/effect/bees/Initialize(mapload, ...)
+	. = ..()
+	START_PROCESSING(SSfaster_obj, src)
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/effect/bees/Destroy(force)
+	target = null
+	merge_target = null
+	hive = null
+	last_pollinated = null
+	attacked_mobs = null
+	return ..()
+
 /obj/effect/bees/update_overlays()
 	. = ..()
 	var/bee_spawn = bee_count - 1
@@ -42,11 +55,6 @@
 		bee.pixel_y = rand(12, -12)
 		bee.color = bee_color // Apply genetic color
 		. += bee
-
-/obj/effect/bees/Initialize()
-	. = ..()
-	START_PROCESSING(SSfaster_obj, src)
-	update_appearance(UPDATE_OVERLAYS)
 
 /obj/effect/bees/process()
 	// Handle movement and merging

@@ -5,7 +5,6 @@
 	outfit = /datum/outfit/adventurer/grenzelhoft
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 1
-	min_pq = 0
 	is_recognized = TRUE
 
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'

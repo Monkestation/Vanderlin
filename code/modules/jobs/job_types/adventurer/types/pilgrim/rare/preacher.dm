@@ -7,7 +7,6 @@
 	outfit = /datum/outfit/adventurer/preacher
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 1
-	min_pq = 0
 
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
@@ -30,7 +29,8 @@
 		if(!H.has_language(/datum/language/oldpsydonic))
 			H.grant_language(/datum/language/oldpsydonic)
 			to_chat(H, "<span class='info'>I can speak Old Psydonic with ,m before my speech.</span>")
-		H.set_patron(/datum/patron/psydon, TRUE)
+		if(!istype(H.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
+			H.set_patron(/datum/patron/psydon, TRUE)
 	ADD_TRAIT(H, TRAIT_FOREIGNER, TRAIT_GENERIC)
 	if(H.dna?.species.id == SPEC_ID_HUMEN)
 		H.dna.species.native_language = "Old Psydonic"

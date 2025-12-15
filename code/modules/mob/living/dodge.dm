@@ -5,11 +5,10 @@
  * @param mob/living/user The attacker
  * @return TRUE if dodge successful, FALSE otherwise
  */
-/mob/living/proc/attempt_dodge(datum/intent/intenty, mob/living/user)
+/mob/living/proc/attempt_dodge(datum/intent/intenty, mob/living/user, can_dodge_see = TRUE)
 	// Early return conditions specifically for dodging
 	if((pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) || pulling || (world.time < last_dodge + dodgetime && !istype(rmb_intent, /datum/rmb_intent/riposte)) ||  has_status_effect(/datum/status_effect/debuff/riposted) || src.loc == user.loc || (intenty && !intenty.candodge) || !candodge)
 		return FALSE
-	last_dodge = world.time
 
 	// Calculate dodge directions based on relative positions
 	var/list/dirry = calculate_dodge_directions(user)
@@ -17,7 +16,7 @@
 	// Find a valid dodge turf
 	var/turf/turfy = find_dodge_turf(dirry)
 
-	if(do_dodge(user, turfy))
+	if(do_dodge(user, turfy, can_dodge_see))
 		flash_fullscreen("blackflash2")
 		user.aftermiss()
 		var/attacking_item = user.get_active_held_item()
@@ -36,7 +35,7 @@
  * @param turf/target_turf The turf to dodge to
  * @return TRUE if dodge successful, FALSE otherwise
  */
-/mob/living/proc/do_dodge(mob/living/user, turf/target_turf)
+/mob/living/proc/do_dodge(mob/living/user, turf/target_turf, can_dodge_see)
 	if(dodgecd || stamina >= maximum_stamina || body_position == LYING_DOWN)
 		return FALSE
 
@@ -66,6 +65,10 @@
 				dodge_speed = floor(dodge_speed * 0.25)
 				drained += 12
 
+		var/time_since_last = world.time - last_dodge
+
+		if(time_since_last < 2 SECONDS)
+			drained += 5
 
 
 		if((H.get_encumbrance() > 0.7) || H.legcuffed)
@@ -80,6 +83,9 @@
 		if(!H.adjust_stamina(drained))
 			to_chat(src, span_warning("I'm too tired to dodge!"))
 			return FALSE
+
+	if(!can_dodge_see)
+		dodge_score -= 40
 
 	dodge_score = clamp(dodge_score, 0, 95)
 	var/dodgeroll = rand(1, 100)
@@ -106,6 +112,7 @@
 	if(client)
 		record_round_statistic(STATS_DODGES)
 
+	last_dodge = world.time
 	return TRUE
 
 /**

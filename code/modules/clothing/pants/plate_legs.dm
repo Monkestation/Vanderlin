@@ -32,6 +32,13 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_STEP)
 
+/obj/item/clothing/pants/platelegs/ancient
+	name = "ancient chausses"
+	desc = "Cuisses made of plated steel, offering additional protection against blunt force."
+	gender = PLURAL
+	icon_state = "ancientplate_legs"
+	item_state = "ancientplate_legs"
+
 /obj/item/clothing/pants/platelegs/iron
 	name = "iron plated chausses"
 	desc = "Cuisses made of plated iron, offering additional protection against blunt force."

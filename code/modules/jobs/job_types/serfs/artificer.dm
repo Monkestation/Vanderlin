@@ -9,14 +9,13 @@
 	faction = FACTION_TOWN
 	total_positions = 3
 	spawn_positions = 3
-	min_pq = -50
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/artificer
 	give_bank_account = 8
-	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
@@ -50,11 +49,11 @@
 	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/belt/pouch/coins/mid
-	beltl = /obj/item/storage/keyring/artificer
+	beltl = /obj/item/weapon/mace/cane/bronze
 	mask = /obj/item/clothing/face/goggles
 	backl = /obj/item/storage/backpack/backpack
 	ring = /obj/item/clothing/ring/silver/makers_guild
-	backpack_contents = list(/obj/item/weapon/hammer/steel = 1, /obj/item/flashlight/flare/torch/lantern = 1, /obj/item/weapon/knife/villager = 1, /obj/item/weapon/chisel = 1)
+	backpack_contents = list(/obj/item/weapon/hammer/steel = 1, /obj/item/flashlight/flare/torch/lantern = 1, /obj/item/weapon/knife/villager = 1, /obj/item/weapon/chisel = 1, /obj/item/storage/keyring/artificer = 1)
 
 	H.change_stat(STATKEY_STR, 1)
 	H.change_stat(STATKEY_INT, 2)

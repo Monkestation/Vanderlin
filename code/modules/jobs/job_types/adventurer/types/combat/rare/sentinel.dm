@@ -7,7 +7,6 @@
 	outfit = /datum/outfit/adventurer/sentinel
 	outfit = /datum/outfit/adventurer/sentinel
 	total_positions = 1
-	min_pq = 0
 	roll_chance = 30
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'

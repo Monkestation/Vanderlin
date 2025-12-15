@@ -13,7 +13,7 @@
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
-
+	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	outfit = /datum/outfit/archivist
 	spells = list(
 		/datum/action/cooldown/spell/undirected/learn,
@@ -27,7 +27,7 @@
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 
 	exp_type = list(EXP_TYPE_LIVING)
-	exp_types_granted  = list(EXP_TYPE_MAGICK, EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_MAGICK, EXP_TYPE_NOBLE)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)

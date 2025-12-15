@@ -118,6 +118,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 	var/list/notes = list() //RTD add notes button
 
+	//assoc list of frumentarii you know of to a BOOL of if they are still frumentarii
 	var/list/cached_frumentarii = list()
 
 	var/datum/sleep_adv/sleep_adv = null
