@@ -317,6 +317,7 @@
 	melt_amount = 75
 	max_integrity = INTEGRITY_STANDARD
 	max_blade_int = 95
+
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
 	force = DAMAGE_SPEAR
