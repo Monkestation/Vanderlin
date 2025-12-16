@@ -61,7 +61,7 @@
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire))
 		if(!SEND_SIGNAL(examined_datum.owner, COMSIG_DISGUISE_STATUS))
-			return "<span class='boldnotice'>Another kind of deadite.</span>"
+			return span_boldnotice("Not food, not right..")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return "<span class='boldnotice'>Another deadite. My ally.</span>"
 	if(istype(examined_datum, /datum/antagonist/skeleton))

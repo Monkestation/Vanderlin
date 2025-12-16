@@ -560,7 +560,7 @@
 		return FALSE
 	user.adjust_triumphs(1)
 	init_profane_soul(target, user) // If we got the soul, store them in the dagger.
-	qdel(target) // Get rid of that ghost!
+	qdel(chosen_ghost) // Get rid of that ghost!
 	return TRUE
 
 /obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls(mob/user) // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.

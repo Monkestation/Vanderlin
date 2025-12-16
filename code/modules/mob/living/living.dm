@@ -960,7 +960,6 @@
 	set_nutrition(NUTRITION_LEVEL_FED + 50)
 	bodytemperature = BODYTEMP_NORMAL
 	set_blindness(0)
-	set_blurriness(0)
 	set_dizziness(0)
 	cure_nearsighted()
 	cure_blind()
@@ -976,7 +975,6 @@
 	divine_fire_stacks = 0
 	confused = 0
 	dizziness = 0
-	drowsyness = 0
 	stuttering = 0
 	slurring = 0
 	jitteriness = 0
@@ -2232,8 +2230,6 @@
 			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
 			if(E)
 				E.setOrganDamage(var_value)
-		if("eye_blurry")
-			set_blurriness(var_value)
 		if("maxHealth")
 			updatehealth()
 		if("resize")

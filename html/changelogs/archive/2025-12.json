@@ -272,5 +272,29 @@
                 "bugfix": "Jobs that were imported not transfering the language properly to chars."
             }
         ]
+    },
+    "2025-12-14": {
+        "lmenvs": [
+            {
+                "bugfix": "fixed incorrect column query for twitch_data"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed a bug where assassins would delete the body of a target when it no longer had a soul in it."
+            }
+        ]
+    },
+    "2025-12-16": {
+        "CheffieGithub": [
+            {
+                "rscadd": "Added herb seeds to vanderlin farm aparies."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixed bug where Blood Steal would not take Vitae when it was supposed to."
+            }
+        ]
     }
 }
