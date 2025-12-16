@@ -236,3 +236,9 @@
 
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)
+
+	//List of active diseases
+	/// list of all diseases in a mob
+	var/list/diseases
+	/// Disease IDs we are resistant to
+	var/list/disease_resistances

@@ -27,6 +27,8 @@
 		//Breathing, if applicable
 		handle_temperature()
 		handle_breathing(times_fired)
+		handle_diseases()
+
 		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 			handle_wounds()
 			handle_embedded_objects()
@@ -121,6 +123,9 @@
 	return
 
 /mob/living/proc/handle_breathing(times_fired)
+	return
+
+/mob/living/proc/handle_diseases()
 	return
 
 /mob/living/proc/handle_random_events()

@@ -29,3 +29,12 @@
 	#define COMPONENT_BLOCK_MOB_CHANGE (1<<0)
 /// from /mob/proc/change_mob_type_unchecked() : ()
 #define COMSIG_MOB_CHANGED_TYPE "mob_changed_type"
+
+/// Called when a carbon attempts to breath, before the breath has actually occurred
+#define COMSIG_CARBON_ATTEMPT_BREATHE "carbon_attempt_breathe"
+	// Prevents the breath
+	#define COMSIG_CARBON_BLOCK_BREATH (1 << 0)
+
+/// Called when a carbon breathes, before the breath has actually occurred
+#define COMSIG_CARBON_PRE_BREATHE "carbon_pre_breathe"
+

@@ -32,13 +32,26 @@
 /mob/living/proc/get_ear_protection()
 	return 0
 
-/mob/living/proc/is_mouth_covered(head_only = 0, mask_only = 0)
+/**
+ * Checks if our mob has their mouth covered.
+ *
+ * Note that we only care about [ITEM_SLOT_HEAD] and [ITEM_SLOT_MASK].
+ *  (so if you check all slots, it'll return head, then mask)
+ *That is also the priority order
+ * Arguments
+ * * check_flags: What item slots should we check?
+ *
+ * Retuns a truthy value (a ref to what is covering mouth), or a falsy value (null)
+ */
+/mob/living/proc/is_mouth_covered(check_flags = ALL)
 	return FALSE
 
 /mob/living/proc/is_eyes_covered(check_glasses = 1, check_head = 1, check_mask = 1)
 	return FALSE
+
 /mob/living/proc/is_pepper_proof(check_head = TRUE, check_mask = TRUE)
 	return FALSE
+
 /mob/living/proc/on_hit(obj/projectile/P)
 	return BULLET_ACT_HIT
 
@@ -327,7 +340,7 @@
 			to_chat(M, "<span class='info'>I don't want to hurt anyone!</span>")
 			return FALSE
 
-		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
+		if(M.is_muzzled() || M.is_mouth_covered(ITEM_SLOT_MASK))
 			to_chat(M, "<span class='warning'>I can't bite with my mouth covered!</span>")
 			return FALSE
 		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
@@ -357,7 +370,7 @@
 			to_chat(M, "<span class='info'>I don't want to hurt anyone!</span>")
 			return FALSE
 
-		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
+		if(M.is_muzzled() || M.is_mouth_covered(ITEM_SLOT_MASK))
 			to_chat(M, "<span class='warning'>I can't bite with my mouth covered!</span>")
 			return FALSE
 		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
