@@ -54,7 +54,7 @@
 	if (!sealed) // if it's not sealed, process as usual.
 		. = ..()
 	else // if it's sealed, you must unseal it with a sharp object first.
-		to_chat(user, span_warning("The casket is sealed with red tallow, you must slice it open with a dagger or knife first."))
+		to_chat(user, span_warning("[src] is sealed with red tallow, you must slice it open with a dagger or knife first."))
 
 /obj/structure/closet/crate/coffin/examine(mob/user)
 	. = ..()
