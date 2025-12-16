@@ -45,7 +45,7 @@
 		TRAIT_ROTMAN,
 		TRAIT_CABAL,
 		TRAIT_BLOODDRINKER,
-		TRAIT_FOULBLOOD,
+		TRAIT_NASTY_EATER,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -57,7 +57,7 @@
 		TRAIT_TOXIMMUNE,
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
-		TRAIT_FOULBLOOD,
+		TRAIT_NASTY_EATER,
 	)
 	var/mutable_appearance/rotflies
 

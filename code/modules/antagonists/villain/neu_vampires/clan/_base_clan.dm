@@ -14,6 +14,7 @@ And it also helps for the character set panel
 
 	/// List of traits that are applied to members of this Clan
 	var/list/clane_traits = list(
+		TRAIT_BLOODDRINKER,
 		TRAIT_STRONGBITE,
 		TRAIT_NOENERGY,
 		TRAIT_NOHUNGER,
@@ -29,8 +30,8 @@ And it also helps for the character set panel
 		TRAIT_LIMBATTACHMENT,
 	)
 
-	var/blood_preference = BLOOD_PREFERENCE_ALL
-	var/blood_disgust
+	var/blood_preference = BLOOD_PREFERENCE_FANCY | BLOOD_PREFERENCE_HOLY | BLOOD_PREFERENCE_EUPHORIC
+	var/blood_disgust = BLOOD_PREFERENCE_RATS
 
 	var/list/disliked_clans = list()
 	var/list/liked_clans = list()

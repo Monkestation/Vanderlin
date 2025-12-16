@@ -2,7 +2,7 @@
 	// vitae is not the actual amount of vitae in the blood, it's a multiplier for how much vitae is in each unit of blood.
 	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"preferences"=BLOOD_PREFERENCE_DEAD, "vitae"=0)
 	name = "Blood"
-	color = "#C80000" // rgb: 200, 0, 0
+	color = COLOR_BLOOD
 	metabolization_rate = 5 //fast rate so it disappears fast.
 	taste_description = "iron"
 	taste_mult = 1.3
@@ -10,40 +10,59 @@
 	glass_name = "glass of tomato juice"
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
-	var/hydration = 4 // it's like a shitty water for blood drinkers
+	var/toxicity = 2 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
 	name = "Tiefling Blood"
 	glows = TRUE
+	toxicity = 0 // yum
+
+/datum/reagent/blood/putrid
+	name = "Putrid Blood"
+	color = "#94463b"
+	taste_description = "rot"
+	taste_mult = 1.8
+	toxicity = 5
 
 /datum/reagent/blood/on_transfer(atom/A, method=TOUCH, trans_volume)
 	if(!ismob(A))
 		data["preferences"] &= ~(BLOOD_PREFERENCE_LIVING|BLOOD_PREFERENCE_SLEEPING)
-		data["preferences"] |= BLOOD_PREFERENCE_DEAD
 	. = ..()
 
 /datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(iscarbon(L))
-		var/mob/living/carbon/C = L
-		var/datum/blood_type/blood = L.get_blood_type()
-		if(blood?.reagent_type == type && method == INJECT && (data["blood_type"] in blood.compatible_types))
-			C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
-	if((method == INGEST) && L.clan)
-		var/vitae = reac_volume * data["vitae"]
-		if(vitae > 0)
-			L.adjust_hydration(vitae * 0.1)
-			L.adjust_bloodpool(vitae)
-			L.clan.handle_bloodsuck(L, data["preferences"])
+	. = ..()
 	if(method == INJECT || (HAS_TRAIT(L, TRAIT_SANGUINE) && method == INGEST))
 		SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
+	if(L.clan && data["vitae"] > 0)
+		var/vitae = reac_volume * data["vitae"]
+		L.adjust_hydration(vitae * 0.1)
+		L.adjust_bloodpool(vitae)
+		L.clan.handle_bloodsuck(L, data["preferences"])
 
-/datum/reagent/blood/on_mob_life(mob/living/carbon/M)
-	. = ..()
-	if(HAS_TRAIT(M, TRAIT_BLOODDRINKER))
-		if(!HAS_TRAIT(M, TRAIT_NOHUNGER))
-			M.adjust_hydration(hydration)
-		if(M.blood_volume < BLOOD_VOLUME_NORMAL && !(M.dna?.species && (NOBLOOD in M.dna.species.species_traits)))
-			M.blood_volume = min(M.blood_volume+1, BLOOD_VOLUME_NORMAL)
+	//only carbons who have injected/injested past this point
+	if(!iscarbon(L) || !(method == INJECT || method == INGEST))
+		return
+	var/mob/living/carbon/C = L
+	if(!(C.dna?.species && (NOBLOOD in C.dna.species.species_traits)))
+		return
+	var/datum/blood_type/blood = L.get_blood_type()
+	var/compatible = ispath(blood?.reagent_type, type) || (data["blood_type"] in blood?.compatible_types)
+	// /datum/reagent/blood/tiefling, /datum/reagent/blood = TRUE
+	// /datum/reagent/blood
+	if(method == INJECT && compatible) //we're compatible so add the blood
+		L.blood_volume = min(L.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		return
+	if(method == INGEST && (toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) && (compatible || HAS_TRAIT(L, TRAIT_NASTY_EATER)))))
+		if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
+			L.adjust_hydration(reac_volume * 0.2)
+		if(L.blood_volume < BLOOD_VOLUME_NORMAL)
+			L.blood_volume = min(L.blood_volume + reac_volume * 0.2 , BLOOD_VOLUME_NORMAL)
+		return
+	var/tox = toxicity * reac_volume
+	if(HAS_TRAIT(L, TRAIT_POISON_RESILIENCE))
+		tox *= 0.5
+	L.adjustToxLoss(tox)
+	C.add_nausea(tox * 2)
 
 /datum/reagent/blood/on_merge(list/mix_data, other_volume)
 	. = ..()
@@ -58,15 +77,12 @@
 		return
 	if(reac_volume < 3)
 		return
-
 	var/obj/effect/decal/cleanable/blood/B = locate() in T //find some blood here
 	if(!B)
 		B = new(T)
 	if(data["blood_DNA"])
 		B.add_blood_DNA(list(data["blood_DNA"] = data["blood_type"]))
 
-/datum/reagent/blood/green
-	color = "#05af01"
 
 /datum/reagent/water
 	name = "Water"

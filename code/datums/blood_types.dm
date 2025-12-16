@@ -187,7 +187,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	used_table = /datum/chimeric_table/troll
 
 /datum/blood_type/fey
-	name = "fey"
+	name = "Fey"
 	used_table = /datum/chimeric_table/fey
 
 /datum/blood_type/lycan
@@ -218,7 +218,9 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 /datum/blood_type/human/corrupted/zizombie
 	name = "Zizombie"
+	reagent_type = /datum/reagent/blood/putrid
 
 /datum/blood_type/putrid
 	name = "Putrid"
+	reagent_type = /datum/reagent/blood/putrid
 	used_table = /datum/chimeric_table/putrid

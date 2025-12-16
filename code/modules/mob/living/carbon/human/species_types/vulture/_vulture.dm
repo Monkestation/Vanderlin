@@ -31,7 +31,7 @@
 	hygiene_mod = 1.25
 
 	species_traits = list(NO_UNDERWEAR, HAIR, OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_NASTY_EATER, TRAIT_FOULBLOOD)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_NASTY_EATER)
 	inherent_skills = list(
 		/datum/skill/misc/medicine = 1,
 	)

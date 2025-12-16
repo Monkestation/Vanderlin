@@ -35,7 +35,6 @@
 	clane_traits = list(
 		TRAIT_STRONGBITE,
 		TRAIT_BLOODDRINKER,
-		TRAIT_FOULBLOOD,
 		TRAIT_KEENEARS,
 		TRAIT_NOENERGY,
 		TRAIT_NOHUNGER,
@@ -49,6 +48,7 @@
 		TRAIT_NOAMBUSH,
 		TRAIT_DARKVISION,
 		TRAIT_LIMBATTACHMENT,
+		TRAIT_NASTY_EATER,
 	)
 
 /datum/clan/nosferatu/get_downside_string()
