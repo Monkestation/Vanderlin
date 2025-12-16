@@ -410,7 +410,8 @@
 
 /obj/effect/bombard_zone/neurotoxin/apply_effect(mob/living/carbon/C)
 	C.adjustOxyLoss(3)
-	C.blur_eyes(2)
+	C.adjust_eye_blur(4 SECONDS)
+	
 	if(prob(10))
 		C.apply_damage(2, TOX)
 
