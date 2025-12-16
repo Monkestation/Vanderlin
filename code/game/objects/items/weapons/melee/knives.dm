@@ -673,7 +673,7 @@
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"
-	desc = ""
+	desc = "A tossblade forged from bronze. It's not as reliable compared to other tossblades, but it's much cheaper to make."
 	item_state = "bone_dagger"
 	force = DAMAGE_DAGGER
 	throwforce = DAMAGE_DAGGER + 10
