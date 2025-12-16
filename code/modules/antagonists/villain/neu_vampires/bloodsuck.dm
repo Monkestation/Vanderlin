@@ -94,7 +94,7 @@
 				blood_purity = victim.blood_volume / (victim.blood_volume + trans_volume)
 				victim.reagents.trans_to(src, drink_amt * (1 - blood_purity), 1, transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
 		//this is how much is actually gonna be added as a reagent. we can't just fill them with 1:1 blood values
-		var/blood_to_drink = min(victim.blood_volume, drink_amt * blood_purity) * 0.2
+		var/blood_to_drink = min(victim.blood_volume, drink_amt * blood_purity)
 		blood_data?["vitae"] = used_vitae / blood_to_drink
 		var/datum/reagents/holder = new(maximum = blood_to_drink)
 		var/datum/blood_type/BT = get_blood_type()
