@@ -398,20 +398,12 @@
 	dropshrink = 0.7
 	sellprice = 60
 
-/obj/item/statue/bronze/volf/Initialize()
-	. = ..()
-	icon_state = "volf_bronze"
-
 /obj/item/statue/bronze/urn
 	name = "bronze urn"
 	desc = "A large decorative bronze urn."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "urn_bronze"
 	sellprice = 60 // because its two bronze bars
-
-/obj/item/statue/bronze/urn/Initialize()
-	. = ..()
-	icon_state = "urn_bronze"
 
 /obj/item/statue/bronze/vase
 	name = "bronze vase"
@@ -420,20 +412,12 @@
 	icon_state = "vase_bronze"
 	sellprice = 30
 
-/obj/item/statue/bronze/vase/Initialize()
-	. = ..()
-	icon_state = "vase_bronze"
-
 /obj/item/statue/bronze/vasefancy
 	name = "fancy bronze vase"
 	desc = "A large decorative bronze vase. It's quite fancy!"
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "fancyvase_bronze"
 	sellprice = 60
-
-/obj/item/statue/bronze/vasefancy/Initialize()
-	. = ..()
-	icon_state = "fancyvase_bronze"
 
 /obj/item/statue/bronze/bust
 	name = "bronze bust"
@@ -442,20 +426,12 @@
 	icon_state = "bust_bronze"
 	sellprice = 30
 
-/obj/item/statue/bronze/bust/Initialize()
-	. = ..()
-	icon_state = "bust_bronze"
-
 /obj/item/statue/bronze/figurine
 	name = "bronze figurine"
 	desc = "A figurine made out of bronze. Popular among adults as a decoration, popular among children as a toy."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "figurine_bronze"
 	sellprice = 15
-
-/obj/item/statue/bronze/figurine/Initialize()
-	. = ..()
-	icon_state = "figurine_bronze"
 
 /obj/item/statue/bronze/cameo
 	name = "bronze cameo"
@@ -464,20 +440,12 @@
 	icon_state = "cameo_bronze"
 	sellprice = 15
 
-/obj/item/statue/bronze/cameo/Initialize()
-	. = ..()
-	icon_state = "cameo_bronze"
-
 /obj/item/statue/bronze/obelisk
 	name = "bronze obelisk"
 	desc =  "An obelisk made out of bronze."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "obelisk_bronze"
 	sellprice = 30
-
-/obj/item/statue/bronze/obelisk/Initialize()
-	. = ..()
-	icon_state = "obelisk_bronze"
 
 /obj/item/statue/bronze/tablet
 	name = "bronze tablet"
@@ -486,20 +454,12 @@
 	icon_state = "tablet_bronze"
 	sellprice = 30
 
-/obj/item/statue/bronze/tablet/Initialize()
-	. = ..()
-	icon_state = "tablet_bronze"
-
 /obj/item/statue/bronze/fish
 	name = "bronze fish figurine"
 	desc =  "A fish figurine made out of bronze."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "fish_bronze"
 	sellprice = 15
-
-/obj/item/statue/bronze/fish/Initialize()
-	. = ..()
-	icon_state = "fish_bronze"
 
 /obj/item/statue/bronze/totem
 	name = "bronze totem"
@@ -508,17 +468,9 @@
 	icon_state = "elven_bronze"
 	sellprice = 30
 
-/obj/item/statue/bronze/totem/Initialize()
-	. = ..()
-	icon_state = "elven_bronze"
-
 /obj/item/statue/bronze/comb
-	name = "bronze comb "
+	name = "bronze comb"
 	desc =  "A bronze comb, great for combing your hair or lack thereof."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "comb_bronze"
 	sellprice = 15
-
-/obj/item/statue/bronze/comb/Initialize()
-	. = ..()
-	icon_state = "comb_bronze"
