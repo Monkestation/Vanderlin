@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 5
 	spawn_positions = 5
-	min_pq = -100
 
 	allowed_races = RACES_PLAYER_ALL
 

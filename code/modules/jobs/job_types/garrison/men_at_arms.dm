@@ -26,7 +26,7 @@
 	job_bitflag = BITFLAG_GARRISON
 
 	exp_type = list(EXP_TYPE_GARRISON)
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 600
 	)
@@ -51,7 +51,7 @@
 
 /datum/job/advclass/menatarms
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/menatarms/watchman_pikeman
 	title = "Pikeman Men-At-Arms"

@@ -7,7 +7,7 @@
 	outfit = /datum/outfit/wretch/heretic
 	total_positions = 2
 	exp_type = list(EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
-	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
+	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
 /datum/outfit/wretch/heretic/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -166,7 +166,7 @@
 			H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
-		if(/datum/patron/psydon)
+		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 			wrists = /obj/item/clothing/neck/psycross/g
 			armor = /obj/item/clothing/armor/cuirass/fluted
 			cloak = /obj/item/clothing/cloak/psydontabard
@@ -247,7 +247,7 @@
 			H.equip_to_appropriate_slot(P)
 			var/obj/item/weapon/knife/dagger/steel/dirk/baotha/L = new(get_turf(src))
 			H.equip_to_appropriate_slot(L)
-		if(/datum/patron/psydon)
+		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 			var/obj/item/weapon/sword/long/psydon/P = new(get_turf(src))
 			H.equip_to_appropriate_slot(P)
 			var/obj/item/weapon/scabbard/sword/L = new(get_turf(src))

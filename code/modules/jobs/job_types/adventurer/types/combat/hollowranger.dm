@@ -10,12 +10,10 @@
 		SPEC_ID_HARPY,\
 	)
 	outfit = /datum/outfit/adventurer/hollowranger
-	min_pq = 0
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
-	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
-
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
 
 /datum/outfit/adventurer/hollowranger/pre_equip(mob/living/carbon/human/H)
 	..()

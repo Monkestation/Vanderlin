@@ -210,7 +210,7 @@
 	name = "Psydon's Drunkest Rider"
 	greet_text = span_notice("I ride! None of the laws shall stop me for that is Psydon's divine will!")
 	req_text = "Worship Psydon"
-	allowed_patrons = list(/datum/patron/psydon)
+	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 	weight = 100
 
 /datum/special_trait/psydons_rider/on_apply(mob/living/carbon/human/character, silent)
@@ -830,7 +830,7 @@
 			psycross = /obj/item/clothing/neck/psycross/silver/malum
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
 			cloak = /obj/item/clothing/cloak/templar/malumite
-			weapon = /obj/item/weapon/mace/goden/steel/malum
+			weapon = /obj/item/weapon/hammer/sledgehammer/war/malum
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 			character.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
 		if(/datum/patron/divine/abyssor)

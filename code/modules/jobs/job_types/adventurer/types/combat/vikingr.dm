@@ -4,9 +4,7 @@
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/adventurer/vikingr
 	category_tags = list(CTAG_ADVENTURER)
-	min_pq = 0
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
-
 
 /datum/outfit/adventurer/vikingr/pre_equip(mob/living/carbon/human/H)
 	..()

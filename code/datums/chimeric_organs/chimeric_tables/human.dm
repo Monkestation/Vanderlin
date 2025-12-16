@@ -42,6 +42,9 @@
 	output_nodes = list(
 		/datum/chimeric_node/output/blasting = 10,
 	)
+	special_nodes = list(
+		/datum/chimeric_node/special/tiny = 20,
+	)
 	base_blood_cost = 0.3
 	node_tier = 1
 	node_purity_min = 30

@@ -1,6 +1,6 @@
 // This code handles different species in the game.
 GLOBAL_LIST_EMPTY(roundstart_races)
-GLOBAL_LIST_EMPTY(patreon_races)
+GLOBAL_LIST_EMPTY(donator_races)
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -20,8 +20,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	var/list/possible_ages = ALL_AGES_LIST_CHILD
 	/// Whether or not this species has sexual characteristics
 	var/sexes = TRUE
-	/// Whether this species a requires patreon subscription to access, we removed all patreon restrictions for species, but it's here if we ever want to reenable them or smth.
-	var/patreon_req = FALSE
+	/// Whether this species a requires donator subscription to access, we removed all donator restrictions for species, but it's here if we ever want to reenable them or smth.
+	var/donator_req = FALSE
 
 	/**
 	 * The list of pronouns this species allows in the character sheet.
@@ -381,7 +381,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				ACCENT_KOBOLD
 			)
 
-			///This will only trigger for patreon users
+			///This will only trigger for donators
 			if(human.accent in accents_list)
 				/// If the human is using a specie with multiple accents
 				if(length(human.dna.species.multiple_accents))
@@ -446,19 +446,19 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		if(!S.check_roundstart_eligible())
 			continue
 		GLOB.roundstart_races += S.name
-		if(S.patreon_req)
-			GLOB.patreon_races += S.name
+		if(S.donator_req)
+			GLOB.donator_races += S.name
 		qdel(S)
 	if(!LAZYLEN(GLOB.roundstart_races))
 		GLOB.roundstart_races += "Humen" // GLOB.species_list uses name and should probably be refactored
 	sortTim(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
 
-/proc/get_selectable_species(patreon = TRUE)
+/proc/get_selectable_species(donator = TRUE)
 	if(!LAZYLEN(GLOB.roundstart_races))
 		generate_selectable_species()
 	var/list/species = GLOB.roundstart_races.Copy()
-	if(!patreon)
-		species -= GLOB.patreon_races
+	if(!donator)
+		species -= GLOB.donator_races
 	return species
 
 /datum/species/proc/check_roundstart_eligible()
