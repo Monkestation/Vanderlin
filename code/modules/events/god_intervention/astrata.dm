@@ -18,7 +18,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(GLOB.patron_follower_counts["Astrata"] < 3)
+	if(GLOB.patron_follower_counts[/datum/patron/divine/astrata::name] < 3)
 		return FALSE
 
 /datum/round_event/astrata_grandeur/start()

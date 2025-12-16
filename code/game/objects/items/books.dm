@@ -1699,7 +1699,7 @@ ____________End of Example*/
 	verses_file = "strings/psybibble.txt"
 
 /obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user)
-	if(istype(user) && user.patron.type == /datum/patron/psydon)
+	if(istype(user) && istype(user.patron, /datum/patron/psydon))
 		if(!user.can_read(src))
 			return
 		M.apply_status_effect(/datum/status_effect/buff/blessed)

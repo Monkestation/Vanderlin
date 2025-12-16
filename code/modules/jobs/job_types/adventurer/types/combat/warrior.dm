@@ -5,9 +5,7 @@
 	allowed_races = RACES_PLAYER_NONEXOTIC
 	outfit = /datum/outfit/adventurer/sfighter
 	category_tags = list(CTAG_ADVENTURER)
-	min_pq = 0
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
-
 
 /datum/outfit/adventurer/sfighter/pre_equip(mob/living/carbon/human/H)
 	..()

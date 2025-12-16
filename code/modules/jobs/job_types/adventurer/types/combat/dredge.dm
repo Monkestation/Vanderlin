@@ -6,7 +6,6 @@
 	outfit = /datum/outfit/adventurer/dredge
 	category_tags = list(CTAG_ADVENTURER)
 	total_positions = 7
-	min_pq = 0
 
 /datum/outfit/adventurer/dredge/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -171,7 +170,8 @@
 			if(!H.has_language(/datum/language/oldpsydonic))
 				H.grant_language(/datum/language/oldpsydonic)
 				to_chat(H, "<span class='info'>I can speak Old Psydonic with ,m before my speech.</span>")
-			H.set_patron(/datum/patron/psydon, TRUE)
+			if(!istype(H.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
+				H.set_patron(/datum/patron/psydon, TRUE)
 			to_chat(H,span_info("\
 			The Ten are false gods, and I loathe those that worship the true corpse god, Necra. Psydon lives, my life for Psydon.")
 			)

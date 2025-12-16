@@ -204,7 +204,10 @@
 
 		var/list/known_frumentarii = user.mind?.cached_frumentarii
 		if(name in known_frumentarii)
-			. += span_greentext("<b>[m1] an agent of the court!</b>")
+			if(known_frumentarii[name])
+				. += span_greentext("<b>[m1] an agent of the court!</b>")
+			else
+				. += span_redtext("[m1] an ex-agent of the court.")
 
 		if(user != src)
 			if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
@@ -645,7 +648,7 @@
 				. += span_notice("Inscryption[N ? " by [N]'s " : ""][W ? "Wonder #[W]" : ""]: [K ? K : ""]")
 
 	if(!obscure_name) // Miniature headshot on examine
-		if(headshot_link && client?.patreon?.has_access(ACCESS_ASSISTANT_RANK))
+		if(headshot_link && client?.is_donator())
 			. += "<img src=[headshot_link] width=100 height=100/>"
 
 	if(Adjacent(user))
@@ -678,7 +681,7 @@
 		if(skipface && user.has_flaw(/datum/charflaw/hunted) && user != src)
 			user.add_stress(/datum/stress_event/hunted)
 
-	if(!obscure_name && (flavortext || ((headshot_link || ooc_extra_link) && client?.patreon?.has_access(ACCESS_ASSISTANT_RANK)))) // only show flavor text if there is a flavor text and we show headshot
+	if(!obscure_name && (flavortext || ((headshot_link || ooc_extra_link) && client?.is_donator()))) // only show flavor text if there is a flavor text and we show headshot
 		. += "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>"
 
 	var/trait_exam = common_trait_examine()

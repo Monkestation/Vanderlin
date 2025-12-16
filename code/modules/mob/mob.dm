@@ -676,7 +676,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  */
 /mob/MouseDrop_T(atom/dropping, atom/user)
 	. = ..()
-	if(ismob(dropping) && dropping != user)
+	if(ismob(dropping) && dropping != user && src == user)
 		var/mob/M = dropping
 		M.show_inv(user)
 		return TRUE

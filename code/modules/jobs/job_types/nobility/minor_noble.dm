@@ -26,7 +26,7 @@
 
 	job_bitflag = BITFLAG_ROYALTY
 
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 /datum/outfit/noble/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -47,8 +47,10 @@
 	H.adjust_skillrank(/datum/skill/misc/music, rand(1,2), TRUE)
 	H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-
+	H.change_stat(STATKEY_SPD, 1)
+	H.change_stat(STATKEY_CON, 1)
 	H.change_stat(STATKEY_INT, 1)
+
 	shoes = /obj/item/clothing/shoes/boots
 	backl = /obj/item/storage/backpack/satchel
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
@@ -62,20 +64,41 @@
 		if(/datum/patron/inhumen/baotha)
 			H.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 	if(H.gender == FEMALE)
-		H.change_stat(STATKEY_SPD, 1)
 		shirt = /obj/item/clothing/shirt/dress/silkdress/colored/random
 	if(H.gender == MALE)
-		H.change_stat(STATKEY_CON, 1)
 		pants = /obj/item/clothing/pants/tights/colored/black
 		shirt = /obj/item/clothing/shirt/tunic/colored/random
 	if(H.age == AGE_CHILD)
-		beltr = /obj/item/weapon/knife/dagger/steel/special
-		scabbards = list(/obj/item/weapon/scabbard/knife)
-		H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		backpack_contents = list(/obj/item/reagent_containers/glass/carafe/teapot/tea = 1, /obj/item/reagent_containers/glass/cup/teacup/fancy = 3)
 	else
-		beltr = /obj/item/weapon/sword/rapier/dec
-		scabbards = list(/obj/item/weapon/scabbard/sword/noble)
-		H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 		backpack_contents = list(/obj/item/reagent_containers/glass/bottle/wine = 1, /obj/item/reagent_containers/glass/cup/silver = 1)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+
+/datum/outfit/noble/post_equip(mob/living/carbon/human/H)
+	. = ..()
+	var/static/list/selectable = list( \
+		"Dagger" = /obj/item/weapon/knife/dagger/silver, \
+		"Rapier" = /obj/item/weapon/sword/rapier/dec, \
+		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade, \
+		)
+	var/choice = H.select_equippable(H, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
+	if(!choice)
+		return
+		//Yeah this is copied from how lieutenant does it which in turn was copied from how rk does it lmao
+	var/shield_type = null
+	switch(choice)
+		if("Dagger")
+			H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+			var/scabbard = new /obj/item/weapon/scabbard/knife/noble()
+			if(!H.equip_to_appropriate_slot(scabbard))
+				qdel(scabbard)
+		if("Rapier")
+			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			var/scabbard = new /obj/item/weapon/scabbard/sword/noble()
+			if(!H.equip_to_appropriate_slot(scabbard))
+				qdel(scabbard)
+		if("Cane Blade")
+			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			var/scabbard = new /obj/item/weapon/scabbard/cane()
+			if(!H.equip_to_appropriate_slot(scabbard))
+				qdel(scabbard)

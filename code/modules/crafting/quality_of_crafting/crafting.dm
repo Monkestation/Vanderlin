@@ -347,6 +347,36 @@
 	output = /obj/item/weapon/whip/cane
 	craftdiff = 0
 
+/datum/repeatable_crafting_recipe/crafting/cane
+	name = "wooden cane"
+	requirements = list(
+		/obj/item/grown/log/tree= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/grown/log/tree
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/weapon/mace/cane
+	required_intent = /datum/intent/dagger/cut
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/naturalcane
+	name = "natural wooden cane"
+	requirements = list(
+		/obj/item/grown/log/tree/small= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/grown/log/tree/small
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/weapon/mace/cane/natural
+	required_intent = /datum/intent/dagger/cut
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/crafting/spoon
 	name = "wooden spoon"
 	requirements = list(

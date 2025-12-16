@@ -785,7 +785,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 			if(!O ||!O.id)
 				continue
-			if(O.id in already_added_custom_jobs)
+			if(O.id in already_added_custom_outfits)
 				continue
 
 			outfits_list += O.id
