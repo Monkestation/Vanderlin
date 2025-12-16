@@ -88,6 +88,8 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 	/// Mouse hover text for this hud
 	var/atom/movable/screen/movable/mouseover/maptext/mouse_over_text
 
+	var/list/team_finder_arrows = list()
+
 /datum/hud/New(mob/owner)
 	mymob = owner
 
@@ -144,6 +146,7 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 	QDEL_NULL(palette_actions)
 	QDEL_NULL(listed_actions)
 	QDEL_LIST(floating_actions)
+	QDEL_LIST(team_finder_arrows)
 
 	inv_slots.Cut()
 	action_intent = null
@@ -215,6 +218,8 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 				screenmob.client.screen += hotkeybuttons
 			if(length(infodisplay))
 				screenmob.client.screen += infodisplay
+			if(length(team_finder_arrows))
+				screenmob.client.screen += team_finder_arrows
 
 			screenmob.client.screen += toggle_palette
 

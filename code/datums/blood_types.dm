@@ -72,6 +72,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 /// A base type for all blood used by humans (NOT humanoids), for organization's sake
 /datum/blood_type/human
+	name = "Human"
 	contains_lux = TRUE
 	used_table = /datum/chimeric_table/human
 
@@ -217,3 +218,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 /datum/blood_type/human/corrupted/zizombie
 	name = "Zizombie"
+
+/datum/blood_type/putrid
+	name = "Putrid"
+	used_table = /datum/chimeric_table/putrid

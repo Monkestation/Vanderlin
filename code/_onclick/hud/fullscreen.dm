@@ -12,7 +12,7 @@
 	screen.icon_state = "[initial(screen.icon_state)][severity]"
 	screen.severity = severity
 	if (client && screen.should_show_to(src))
-		screen.update_for_view(client.view)
+		screen.update_for_view(client.view, src)
 		client.screen += screen
 
 	return screen
@@ -93,7 +93,7 @@
 	var/severity = 0
 	var/show_when_dead = FALSE
 
-/atom/movable/screen/fullscreen/proc/update_for_view(client_view)
+/atom/movable/screen/fullscreen/proc/update_for_view(client_view, mob/mob)
 	if (screen_loc == "CENTER-7,CENTER-7" && view != client_view)
 		var/list/actualview = getviewsize(client_view)
 		view = client_view

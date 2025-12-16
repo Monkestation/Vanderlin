@@ -72,6 +72,8 @@
 	for(var/kb_name in prefs.key_bindings[full_key])
 		keycount++
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
+		if(istype(kb, /datum/keybinding/client/say))
+			continue
 		if(kb)
 			if(kb.can_use(src) && kb.down(src) && keycount >= MAX_COMMANDS_PER_KEY)
 				break
@@ -104,6 +106,8 @@
 	// can hold different keys and releasing any should be handled by the key binding specifically
 	for (var/kb_name in prefs.key_bindings[_key])
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
+		if(istype(kb, /datum/keybinding/client/say))
+			continue
 		if(kb)
 			if(kb.up(src))
 				break

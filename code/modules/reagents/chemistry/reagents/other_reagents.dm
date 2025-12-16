@@ -26,18 +26,15 @@
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		var/datum/blood_type/blood = L.get_blood_type()
-		if(blood?.reagent_type == type && method == INJECT)
-			if(!(data["blood_type"] in blood.compatible_types))
-				C.reagents.add_reagent(/datum/reagent/toxin, reac_volume * 0.5)
-			else
-				C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		if(blood?.reagent_type == type && method == INJECT && (data["blood_type"] in blood.compatible_types))
+			C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 	if((method == INGEST) && L.clan)
 		var/vitae = reac_volume * data["vitae"]
 		if(vitae > 0)
 			L.adjust_hydration(vitae * 0.1)
 			L.adjust_bloodpool(vitae)
 			L.clan.handle_bloodsuck(L, data["preferences"])
-	if(method == INJECT)
+	if(method == INJECT || (HAS_TRAIT(L, TRAIT_SANGUINE) && method == INGEST))
 		SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
 
 /datum/reagent/blood/on_mob_life(mob/living/carbon/M)
