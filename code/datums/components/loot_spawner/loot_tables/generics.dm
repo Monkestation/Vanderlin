@@ -16,7 +16,7 @@
 			/obj/item/statue/bronze/vase = 2
 			/obj/item/statue/bronze/totem = 1,
 			/obj/item/statue/bronze/comb = 3,
-			/obj/item/weapon/knife/dagger/bronze = 8,
+			/obj/item/weapon/knife/dagger/bronze = 8
 		)
 	)
 
