@@ -155,13 +155,11 @@
 	set_stat_modifier(TRAIT_LEPROSY, STATKEY_SPD, -3)
 	set_stat_modifier(TRAIT_LEPROSY, STATKEY_INT, -3)
 	set_stat_modifier(TRAIT_LEPROSY, STATKEY_LCK, -3)
-	ADD_TRAIT(src, TRAIT_FOULBLOOD, TRAIT_LEPROSY)
 
 ///Called when TRAIT_LEPROSY is removed from the mob.
 /mob/living/proc/on_leprosy_trait_loss(datum/source)
 	SIGNAL_HANDLER
 	remove_stat_modifier(TRAIT_LEPROSY)
-	REMOVE_TRAIT(src, TRAIT_FOULBLOOD, TRAIT_LEPROSY)
 
 ///Called when TRAIT_CRATEMOVER is added to the mob.
 /mob/living/proc/on_cratemover_trait_gain(datum/source)
