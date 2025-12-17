@@ -63,8 +63,6 @@
 	bitesize = 1
 	dropshrink = 0.75
 
-
-
 /obj/item/reagent_containers/food/snacks/tallow/red
 	name = "redtallow"
 	desc = "Fatty tissue is harvested from slain creachurs and rendered of its membraneous sinew to produce a hard shelf-stable \
