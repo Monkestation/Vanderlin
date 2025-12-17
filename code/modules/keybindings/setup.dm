@@ -46,6 +46,19 @@
 		var/command = macro_set[key]
 		winset(src, "default-[REF(key)]", "parent=default;name=[key];command=[command]")
 
+
+	var/chat_handled = FALSE
+	for(var/full_key in prefs.key_bindings)
+		if(chat_handled)
+			break
+		for(var/kb_name in prefs.key_bindings[full_key])
+			var/datum/keybinding/client/say/kb = GLOB.keybindings_by_name[kb_name]
+			if(!istype(kb))
+				continue
+			chat_handled = TRUE
+			winset(src, "default-[REF(full_key)]", "parent=default;name=[full_key];command=.open_say")
+			break
+
 	if(!skip_macro_mode)
 		if(prefs.hotkeys)
 			winset(src, null, "input.focus=true command=activeInput input.background-color=[COLOR_INPUT_ENABLED] input.text-color = #EEEEEE")

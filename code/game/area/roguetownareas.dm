@@ -674,7 +674,7 @@
 /area/indoors/town/clocktower
 	first_time_text = "Clocktower"
 	icon_state = "clocktower"
-	background_track = "sound/music/area/clocktower_ambience.ogg"
+	background_track = 'sound/music/area/clocktower_ambience.ogg'
 
 /area/indoors/town/orphanage
 	first_time_text = "The Orphanage"

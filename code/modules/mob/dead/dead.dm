@@ -208,7 +208,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	if(!mind?.assigned_role)
 		return
 	mind.active = FALSE
-	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
+	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination, islatejoin)
 	mind.transfer_to(spawning_mob)
 	spawning_mob.after_creation()
 	GLOB.chosen_names += spawning_mob.real_name

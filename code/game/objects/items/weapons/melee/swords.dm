@@ -644,7 +644,7 @@
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
 	name = "ancient khopesh"
-	desc = "A bronze weapon of war from the era of Apotheosis. This blade is older than a few elven generations, but has been very well-maintained and still keeps a good edge."
+	desc = "A bronze weapon of war from the age of Psydon's reign. This blade is older than a few elven generations, but has been very well-maintained and still keeps a good edge."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "khopesh"
 	item_state = "khopesh"
