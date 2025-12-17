@@ -9,7 +9,7 @@
 	outfit = /datum/outfit/adventurer/fishermaster
 
 	total_positions = 1
-	roll_chance = 15
+	roll_chance = 0
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	apprentice_name = "Fisher Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'

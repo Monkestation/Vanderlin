@@ -154,7 +154,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(target.mob_biotypes & MOB_UNDEAD)
 		to_chat(user, span_warning("The fruits of her work prevent me from changing my appearance..."))
 		return
-	target.randomize_human_appearance(include_patreon = FALSE)
+	target.randomize_human_appearance(include_donator = FALSE)
 	target.regenerate_clothes()
 	target.update_body()
 

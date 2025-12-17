@@ -68,6 +68,15 @@ abstract types are automatically excluded.
 		/obj/item/clothing/armor/plate/fluted,
 		/obj/item/clothing/cloak/templar, //base type
 		/obj/item/clothing/face/antiq, //implied to be a weird heartfelt technoitem. good luck replicating this. unique to antiquarian
+		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
+		/obj/item/clothing/armor/chainmail/hauberk/ancient,// ancient is currently for vampire death knight
+		/obj/item/clothing/armor/plate/ancient,
+		/obj/item/clothing/gloves/plate/ancient,
+		/obj/item/clothing/head/helmet/heavy/ancient,
+		/obj/item/clothing/neck/gorget/ancient,
+		/obj/item/clothing/pants/platelegs/ancient,
+		/obj/item/clothing/wrists/bracers/ancient,
+
 		/obj/item/clothing/wrists/bracers/naledi //Inqstuff
 	)
 	// these don't use misc_flags = CRAFTING_TEST_EXCLUDE because we want to explicitly know which paths we are excluding.

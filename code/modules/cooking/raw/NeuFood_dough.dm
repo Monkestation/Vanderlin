@@ -52,6 +52,7 @@
 			if(do_after(user,long_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/foodbase/hardtack_raw(loc)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.nobles_seen_servant_work()
 				qdel(src)
 		else
 			to_chat(user, span_warning("Put [src] on a table before working it!"))
@@ -100,6 +101,7 @@
 			if(do_after(user, short_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/piedough(loc)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.nobles_seen_servant_work()
 				qdel(src)
 		if(I.get_sharpness())
 			playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
@@ -111,7 +113,7 @@
 					new /obj/item/reagent_containers/food/snacks/foodbase/prezzel_raw(loc)
 				qdel(src)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
-
+				user.nobles_seen_servant_work()
 	else
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
 
@@ -219,6 +221,7 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheddarslice))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -231,6 +234,7 @@
 			foodtype = GRAIN | DAIRY
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cooked/egg))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -242,6 +246,7 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/fat/salo/slice))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -253,6 +258,7 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/butterslice))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -264,6 +270,7 @@
 			foodtype = GRAIN | DAIRY
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -275,6 +282,7 @@
 			foodtype = GRAIN | MEAT | VEGETABLES
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	return ..()
 

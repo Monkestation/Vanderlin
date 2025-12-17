@@ -124,6 +124,13 @@
 	if(!succeeded)
 		controller.clear_blackboard_key(target_key)
 
+/datum/ai_behavior/basic_melee_attack/meatvine/finish_action(datum/ai_controller/controller, succeeded, target_key, targetting_datum_key, hiding_location_key)
+	var/atom/target = controller.blackboard[target_key]
+	. = ..()
+	if(!succeeded)
+		controller.clear_blackboard_key(target_key)
+		controller.set_blackboard_key_assoc(BB_MEATVINE_ATTACK_FAIL, target, world.time)
+
 /datum/ai_behavior/basic_melee_attack/mimic/finish_action(datum/ai_controller/controller, succeeded, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 	if(!succeeded)

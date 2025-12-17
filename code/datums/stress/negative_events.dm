@@ -429,7 +429,27 @@
 /datum/stress_event/noble_ate_without_table
 	stress_change = 1
 	desc = span_red("Eating such a meal without a table? Churlish.")
-	timer = 2 MINUTES
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_ate_without_plate
+	stress_change = 1
+	desc = span_red("To eat without a plate... how utterly uncivilized.")
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_ate_with_just_a_fork
+	stress_change = 1
+	desc = span_red("Eating off a bare fork, this is hardly proper dining.")
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_tarnished_cloth
+	stress_change = 1
+	desc = span_red("This is beneath me... a noble should dry their cloth in a proper place.")
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_polishing_shoe
+	stress_change = 3
+	desc = span_red("This menial chore insults my station, i should not need to polish a pair of shoes.")
+	timer = 5 MINUTES
 
 /datum/stress_event/destroyed_past //gaffer destroying their trophies
 	stress_change = 4
@@ -710,3 +730,18 @@
 	timer = 1 MINUTES
 	stress_change = 1
 	desc = span_red("The horrid wails of the dead call for relief! I can ENDURE such calls...")
+
+/datum/stress_event/wet_cloth
+	stress_change = 1
+	desc = span_red("I am wearing wet clothes.. ugh.")
+	timer = 1 MINUTES
+
+/datum/stress_event/dirty_platter
+	stress_change = 1
+	desc = span_red("I ate off a dirty platter..")
+	timer = 1 MINUTES
+
+/datum/stress_event/dirty_bowl
+	stress_change = 1
+	desc = span_red("I ate off a dirty bowl..")
+	timer = 1 MINUTES

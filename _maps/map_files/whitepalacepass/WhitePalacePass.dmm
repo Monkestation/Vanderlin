@@ -5916,21 +5916,6 @@
 /area/under/cavewet)
 "fKF" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
 /obj/item/natural/feather,
 /obj/item/natural/feather,
 /obj/item/natural/feather,
@@ -8340,6 +8325,10 @@
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/grass/cold,
 /area/outdoors/rtfield/safe)
+"hKX" = (
+/obj/structure/dryclothes,
+/turf/open/floor/grass/cold,
+/area/outdoors/rtfield/safe)
 "hLw" = (
 /obj/structure/door/window{
 	name = "Tailor"
@@ -9626,6 +9615,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/smithy)
+"jdw" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/water/cleanshallow,
+/area/outdoors/rtfield/safe)
 "jdN" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass/cold,
@@ -22293,6 +22286,9 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
+"uRz" = (
+/turf/open/water/cleanshallow,
+/area/outdoors/rtfield/safe)
 "uRD" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt,
@@ -171613,7 +171609,7 @@ nse
 iJC
 iJC
 iJC
-iJC
+hKX
 jMd
 eJr
 cgE
@@ -171812,9 +171808,9 @@ gio
 iJC
 iJC
 nse
-iJC
-iJC
-iJC
+hKX
+uRz
+uRz
 iJC
 tLB
 dnx
@@ -172015,8 +172011,8 @@ iJC
 iJC
 iJC
 ivY
-nkN
-iJC
+jdw
+uRz
 jMd
 jMd
 tLB

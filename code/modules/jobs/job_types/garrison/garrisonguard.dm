@@ -20,7 +20,7 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
 	exp_type = list(EXP_TYPE_LIVING)
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
@@ -44,7 +44,7 @@
 			H.cloak.name = "[H.cloak.name]"+" "+"([H.real_name])"
 
 /datum/job/advclass/garrison
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 // EVERY TOWN GUARD SHOULD HAVE AT LEAST THREE CLUB SKILL
 

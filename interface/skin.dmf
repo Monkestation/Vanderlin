@@ -232,3 +232,23 @@ window "stonekeep_prefwin"
 		saved-params = "zoom;letterbox;zoom-mode"
 		icon-size = 64
 		zoom-mode = distort
+
+
+window "native_say"
+	elem "native_say"
+		type = MAIN
+		pos = 848,500
+		size = 231x35
+		anchor1 = 50,50
+		anchor2 = 50,50
+		is-visible = false
+		saved-params = ""
+		statusbar = false
+		can-minimize = false
+	elem "browser"
+		type = BROWSER
+		pos = 0,0
+		size = 231x35
+		anchor1 = 0,0
+		anchor2 = 0,0
+		saved-params = ""

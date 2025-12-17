@@ -255,137 +255,162 @@
 
 /datum/stress_event/hug
 	desc = "<span class='nicegreen'>Hugs are nice.</span>\n"
-	stress_change = 1
+	stress_change = -1
 	timer = 2 MINUTES
 
 /datum/stress_event/betterhug
 	desc = "<span class='nicegreen'>Someone was very nice to me.</span>\n"
-	stress_change = 3
+	stress_change = -3
 	timer = 4 MINUTES
 
 /datum/stress_event/besthug
 	desc = "<span class='nicegreen'>Someone is great to be around, they make me feel so happy!</span>\n"
-	stress_change = 5
+	stress_change = -5
 	timer = 4 MINUTES
 
 /datum/stress_event/arcade
 	desc = "<span class='nicegreen'>I beat the arcade game!</span>\n"
-	stress_change = 3
+	stress_change = -3
 	timer = 8 MINUTES
 
 /datum/stress_event/blessing
 	desc = "<span class='nicegreen'>I've been blessed.</span>\n"
-	stress_change = 3
+	stress_change = -3
 	timer = 8 MINUTES
 
 /datum/stress_event/book_nerd
 	desc = "<span class='nicegreen'>I have recently read a book.</span>\n"
-	stress_change = 1
+	stress_change = -1
 	timer = 5 MINUTES
 
 /datum/stress_event/exercise
 	desc = "<span class='nicegreen'>Working out releases those endorphins!</span>\n"
-	stress_change = 2
+	stress_change = -2
 	timer = 5 MINUTES
 
 /datum/stress_event/pet_animal
 	desc = "<span class='nicegreen'>Animals are adorable! I can't stop petting them!</span>\n"
-	stress_change = 2
+	stress_change = -2
 	timer = 5 MINUTES
 
 /datum/stress_event/perform_cpr
 	desc = "<span class='nicegreen'>It feels good to save a life.</span>\n"
-	stress_change = 6
+	stress_change = -6
 	timer = 8 MINUTES
 
 /datum/stress_event/oblivious
 	desc = "<span class='nicegreen'>What a lovely day.</span>\n"
-	stress_change = 3
+	stress_change = -3
 
 /datum/stress_event/jolly
 	desc = "<span class='nicegreen'>I feel happy for no particular reason.</span>\n"
-	stress_change = 6
+	stress_change = -6
 	timer = 2 MINUTES
 
 /datum/stress_event/focused
 	desc = "<span class='nicegreen'>I have a goal, and I will reach it, whatever it takes!</span>\n" //Used for syndies, nukeops etc so they can focus on their goals
-	stress_change = 4
+	stress_change = -4
 	hidden = TRUE
 
 /datum/stress_event/creeping
 	desc = "<span class='greentext'>The voices have released their hooks on my mind! I feel free again!</span>\n" //creeps get it when they are around their obsession
-	stress_change = 18
+	stress_change = -18
 	timer = 3 SECONDS
 	hidden = TRUE
 
 /datum/stress_event/revolution
 	desc = "<span class='nicegreen'>VIVA LA REVOLUTION!</span>\n"
-	stress_change = 3
+	stress_change = -3
 	hidden = TRUE
 
 /datum/stress_event/cult
 	desc = "<span class='nicegreen'>I have seen the truth, praise the almighty one!</span>\n"
-	stress_change = 10 //maybe being a cultist isnt that bad after all
+	stress_change = -10 //maybe being a cultist isnt that bad after all
 	hidden = TRUE
 
 /datum/stress_event/family_heirloom
 	desc = "<span class='nicegreen'>My family heirloom is safe with me.</span>\n"
-	stress_change = 1
+	stress_change = -1
 
 /datum/stress_event/goodmusic
 	desc = "<span class='nicegreen'>There is something soothing about this music.</span>\n"
-	stress_change = 3
+	stress_change = -3
 	timer = 60 SECONDS
 
 /datum/stress_event/chemical_euphoria
 	desc = "<span class='nicegreen'>Heh...hehehe...hehe...</span>\n"
-	stress_change = 4
+	stress_change = -4
 
 /datum/stress_event/chemical_laughter
 	desc = "<span class='nicegreen'>Laughter really is the best medicine! Or is it?</span>\n"
-	stress_change = 4
+	stress_change = -4
 	timer = 3 MINUTES
 
 /datum/stress_event/chemical_superlaughter
 	desc = "<span class='nicegreen'>*WHEEZE*</span>\n"
-	stress_change = 12
+	stress_change = -12
 	timer = 3 MINUTES
 
 /datum/stress_event/religiously_comforted
 	desc = "<span class='nicegreen'>I am comforted by the presence of a holy person.</span>\n"
-	stress_change = 3
+	stress_change = -3
 	timer = 5 MINUTES
 
 /datum/stress_event/sacrifice_good
 	desc ="<span class='nicegreen'>The gods are pleased with this offering!</span>\n"
-	stress_change = 5
+	stress_change = -5
 	timer = 3 MINUTES
 
 /datum/stress_event/artok
 	desc = "<span class='nicegreen'>It's nice to see people are making art around here.</span>\n"
-	stress_change = 2
+	stress_change = -2
 	timer = 5 MINUTES
 
 /datum/stress_event/artgood
 	desc = "<span class='nicegreen'>What a thought-provoking piece of art. I'll remember that for a while.</span>\n"
-	stress_change = 4
+	stress_change = -4
 	timer = 5 MINUTES
 
 /datum/stress_event/artgreat
 	desc = "<span class='nicegreen'>That work of art was so great it made me believe in the goodness of humanity. Says a lot in a place like this.</span>\n"
-	stress_change = 6
+	stress_change = -6
 	timer = 5 MINUTES
 
 /datum/stress_event/bottle_flip
 	desc = "<span class='nicegreen'>The bottle landing like that was satisfying.</span>\n"
-	stress_change = 2
+	stress_change = -2
 	timer = 3 MINUTES
 
 /datum/stress_event/nanite_happiness
 	desc = "<span class='nicegreen robot'>+++++++HAPPINESS ENHANCEMENT+++++++</span>\n"
-	stress_change = 7
+	stress_change = -7
 
 /datum/stress_event/bathcleaned
 	desc = "<span class='nicegreen'>I feel like I've been scrubbed by a Goddess!</span>\n"
-	stress_change = 5
+	stress_change = -5
+	timer = 10 MINUTES
+
+/datum/stress_event/cozy_sleep
+	stress_change = -2
+	desc = span_green("Sleeping on a tidy bed is so much better!")
+	timer = 5 MINUTES
+
+/datum/stress_event/washed_cloth
+	stress_change = -2
+	desc = span_green("This cloth was washed and dried, it smells better.")
+	timer = 5 MINUTES
+
+/datum/stress_event/shiny_shoes
+	stress_change = -1
+	desc = span_green("My shoes are shiny, it is nice to look at them.")
+	timer = 15 MINUTES
+
+/datum/stress_event/extra_shiny_shoes
+	stress_change = -2
+	desc = span_green("My shoes are SO shiny, this is incredible!")
+	timer = 15 MINUTES
+
+/datum/stress_event/noble_seen_servant_work
+	stress_change = -2
+	desc = span_green("The servants are working well as they should.. what a great place.")
 	timer = 10 MINUTES

@@ -15,7 +15,25 @@
 	wind                   = 2
 	spin                   = 0 // explicitly set spin to 0 - there is a bug that seems to carry generators over from old particle effects
 
-/datum/particle_weather/rain_gentle
+/datum/particle_weather/rain/try_weather_act(mob/living/L)
+	if(!L.mind)
+		return
+	if(!can_weather(L))
+		stop_weather_sound_effect(L)
+		return
+	weather_sound_effect(L)
+	if(can_weather_effect(L))
+		weather_act(L)
+		var/mob/living/carbon/C = L
+		if(!istype(C))
+			return
+		var/obj/item/clothing/head/hooded/rainhood = C.head
+		if(!istype(rainhood))
+			C.SoakMob(FULL_BODY, dirty_water = FALSE, rain = TRUE)
+		else
+			C.SoakMob(FEET, dirty_water = FALSE, rain = TRUE)
+
+/datum/particle_weather/rain/rain_gentle
 	name = "Rain"
 	desc = "Gentle Rain, la la description."
 	particleEffectType = /particles/weather/rain
@@ -35,7 +53,7 @@
 
 	temperature_modification = -1
 
-/datum/particle_weather/rain_storm
+/datum/particle_weather/rain/rain_storm
 	name = "Rain"
 	desc = "Gentle Rain, la la description."
 	particleEffectType = /particles/weather/rain
@@ -57,7 +75,7 @@
 
 	COOLDOWN_DECLARE(thunder)
 
-/datum/particle_weather/rain_storm/tick()
+/datum/particle_weather/rain/rain_storm/tick()
 	if(!COOLDOWN_FINISHED(src, thunder))
 		return
 
@@ -97,3 +115,4 @@
 		var/turf/lightning_turf = get_turf(lightning_destination)
 		new /obj/effect/temp_visual/target/lightning(lightning_turf)
 		COOLDOWN_START(src, thunder, rand(5, 40) * 1 SECONDS)
+

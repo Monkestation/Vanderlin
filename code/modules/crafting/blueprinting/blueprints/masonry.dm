@@ -101,8 +101,7 @@
 	craftdiff = 1
 
 /datum/blueprint_recipe/masonry/stone_stairs_down/check_craft_requirements(mob/user, turf/T, obj/structure/blueprint/blueprint)
-	var/turf/partner = get_step_multiz(get_turf(blueprint), DOWN)
-	partner = get_step(partner, turn(blueprint.blueprint_dir, 180))
+	var/turf/partner = get_step_multiz(get_turf(blueprint), DOWN|turn(blueprint.blueprint_dir, 180))
 	if(!isopenturf(partner))
 		to_chat(user, span_warning("Need an openspace at the turf below!"))
 		return FALSE

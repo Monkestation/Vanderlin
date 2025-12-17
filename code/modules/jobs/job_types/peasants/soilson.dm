@@ -12,7 +12,6 @@
 	faction = FACTION_TOWN
 	total_positions = 12
 	spawn_positions = 12
-	min_pq = -100
 	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 
@@ -106,7 +105,6 @@
 	total_positions = 6
 	spawn_positions = 6
 	allowed_ages = list(AGE_CHILD)
-	min_pq = -100
 	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 

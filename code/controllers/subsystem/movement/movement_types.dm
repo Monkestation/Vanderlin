@@ -624,7 +624,7 @@
 
 /datum/move_loop/minecart/move()
 	var/atom/old_loc = moving.loc
-	var/atom/new_loc = get_step(moving, direction)
+	var/turf/new_loc = get_step(moving, direction)
 	if(locate(/obj/structure/minecart_rail) in old_loc)
 		if(istype(new_loc, /turf/open/transparent/openspace))
 			var/turf/below_turf = GET_TURF_BELOW(new_loc)

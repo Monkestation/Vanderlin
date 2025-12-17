@@ -117,8 +117,20 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/turf/T = loc
 		if(T.intact && level == 1) //fire can't damage things hidden below the floor.
 			return
-	if(added && !(resistance_flags & FIRE_PROOF))
+
+	var/is_wet = FALSE
+
+	if(istype(src, /obj/item/clothing))
+		var/obj/item/clothing/cloth = src
+		if(cloth.wet)
+			var/dry_amount = round(added / 5)
+			cloth.wet.use_water(dry_amount)
+
+			if(cloth.wet.water_stacks < 0)
+				is_wet = TRUE   // supress the damage while it still wet
+	if(!is_wet && added && !(resistance_flags & FIRE_PROOF))
 		take_damage(CLAMP(0.02 * added, 0, 20), BURN, "fire", 0)
+
 	if(!(resistance_flags & ON_FIRE) && (resistance_flags & FLAMMABLE) && !(resistance_flags & FIRE_PROOF))
 		resistance_flags |= ON_FIRE
 		SSfire_burning.processing[src] = src

@@ -286,6 +286,10 @@
 /obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
+"dl" = (
+/obj/structure/dryclothes,
+/turf/open/floor/ruinedwood/spiral,
+/area/ship/topdeck)
 "dm" = (
 /obj/structure/carpet/red,
 /turf/open/floor/herringbone,
@@ -3952,6 +3956,7 @@
 /area/ship/nobledeck)
 "KK" = (
 /obj/structure/fluff/railing/border,
+/obj/structure/dryclothes,
 /turf/open/floor/hay,
 /area/ship/topdeck)
 "KN" = (
@@ -95862,7 +95867,7 @@ RB
 Uz
 Uz
 hb
-Uz
+dl
 Uz
 cv
 EP
@@ -96258,7 +96263,7 @@ zs
 Uz
 fe
 Zx
-Uz
+dl
 NW
 ir
 bx

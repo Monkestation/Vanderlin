@@ -6,7 +6,7 @@
 	outfit = /datum/outfit/wretch/necromancer
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	total_positions = 1
-	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
+	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 
 /datum/outfit/wretch/necromancer/pre_equip(mob/living/carbon/human/H)
 	..()

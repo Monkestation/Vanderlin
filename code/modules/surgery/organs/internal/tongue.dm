@@ -21,7 +21,8 @@
 		/datum/language/thievescant,
 		/datum/language/orcish,
 		/datum/language/deepspeak,
-		/datum/language/undead
+		/datum/language/undead,
+		/datum/language/halfling
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)

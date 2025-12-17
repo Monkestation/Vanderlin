@@ -8018,6 +8018,10 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/tile/bath,
 /area/indoors/town/manor)
+"hwb" = (
+/obj/structure/dryclothes,
+/turf/open/floor/dirt,
+/area/outdoors/town)
 "hwu" = (
 /obj/structure/winch{
 	gid = "keepgatenorth";
@@ -24449,13 +24453,6 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/obj/item/plate/tray{
-	pixel_y = 5
-	},
-/obj/item/plate/tray,
-/obj/item/plate/tray{
-	pixel_y = -6
-	},
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/wood,
 /area/under/town/basement)
@@ -25434,7 +25431,6 @@
 /area/outdoors/town)
 "xOw" = (
 /obj/structure/rack,
-/obj/item/plate/tray,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/town/sewer)
 "xOD" = (
@@ -121014,12 +121010,12 @@ grJ
 lvF
 grJ
 ioU
-bJI
+hwb
 pin
 pin
 pin
 pin
-bJI
+hwb
 ioU
 rQe
 rQe
