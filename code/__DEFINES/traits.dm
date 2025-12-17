@@ -401,7 +401,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SEE_LEYLINES				"Magical Visions"
 #define TRAIT_POISONBITE				"Poison Bite"
 #define TRAIT_BLOODDRINKER				"Blood Drinker" // Can drink blood without vomiting
-#define TRAIT_FOULBLOOD					"Foul Blood"	// Ignore Blood Drinker trait and make you puke anyway, unless you also have foul blood
 #define TRAIT_FORAGER					"Expert Forager"
 #define TRAIT_TINY 						"Tiny"
 #define TRAIT_DREAM_WATCHER				"Noc Blessed" //Unique Trait of the Dream Watcher Town Elder Class, they have a chance to know about antags or gods influences.
