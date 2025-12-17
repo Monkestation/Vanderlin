@@ -14,6 +14,7 @@
 
 /datum/job/rousman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.change_mob_type(/mob/living/carbon/human/species/rousman, delete_old_mob = TRUE)
 	spawned.set_species(/datum/species/rousman)
 	spawned.name = "Rousman"
 	spawned.real_name = "Rousman"
