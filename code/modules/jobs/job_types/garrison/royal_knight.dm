@@ -1,6 +1,6 @@
 /datum/job/royalknight
 	title = "Royal Knight"
-	tutorial = "You are a knight of the royal garrison, elevated by your skill and steadfast devotion. \
+	tutorial = "You are a knight of the royal family, elevated by your skill and steadfast devotion. \
 	Sworn to protect the royal family, you stand as their shield, upholding their rule with steel and sacrifice. \
 	Yet service is not without its trials, and your loyalty will be tested in ways both seen and unseen. \
 	In the end, duty is a path you must walk carefully."

@@ -3,7 +3,8 @@
 	desc = "Create a portal to return to MY mansion"
 	has_visual_effects = FALSE
 
-	charge_required = FALSE
+	charge_required = TRUE
+	charge_time = 3 SECONDS
 	cooldown_time = 15 MINUTES
 	spell_cost = 0
 

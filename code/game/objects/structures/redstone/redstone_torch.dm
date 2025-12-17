@@ -1,106 +1,133 @@
 /obj/structure/redstone/torch
 	name = "redstone torch"
-	desc = "A torch that provides constant redstone power to adjacent sides. Can be inverted by powering the block it's attached to."
+	desc = "A torch that provides constant redstone power. Inverts when the attached block is powered."
 	icon_state = "torch"
-	power_level = 15
-	powered = TRUE
-	var/attached_dir = SOUTH // Direction the torch is attached to (opposite of output)
-	var/inverted = FALSE // Whether the torch is currently inverted (off due to input power)
-	var/base_power = 15 // The power level when not inverted
+	redstone_role = REDSTONE_ROLE_SOURCE
+	var/attached_dir = SOUTH
+	var/inverted = FALSE
+	var/base_power = 15
 	can_connect_wires = TRUE
-	send_wall_power = FALSE // Torches don't send power through walls
+	send_wall_power = FALSE
 
 /obj/structure/redstone/torch/Initialize()
 	. = ..()
-	attached_dir = dir // The direction the torch faces (attached to opposite wall)
-	update_directional_connections()
-
-	return INITIALIZE_HINT_LATELOAD
+	attached_dir = dir
+	power_level = base_power
 
 /obj/structure/redstone/torch/LateInitialize()
 	. = ..()
-	if(!inverted)
-		set_power(base_power, null, null) // No source since this IS the source
+	schedule_network_update()
 
+/obj/structure/redstone/torch/get_source_power()
+	return inverted ? 0 : base_power
 
-/obj/structure/redstone/torch/proc/update_directional_connections()
-	// Clear existing connections
-	wire_connections = list("2" = 0, "1" = 0, "8" = 0, "4" = 0)
-	connected_components = list()
+/obj/structure/redstone/torch/get_effective_power()
+	return get_source_power()
 
-	// Connect to all sides except the attached side
-	var/list/output_dirs = list(NORTH, SOUTH, EAST, WEST)
-	output_dirs -= attached_dir // Remove the attached direction
+/obj/structure/redstone/torch/get_output_directions()
+	var/list/dirs = GLOB.cardinals.Copy()
+	dirs -= attached_dir
+	return dirs
 
-	for(var/check_dir in output_dirs)
-		var/turf/check_turf = get_step(src, check_dir)
+/obj/structure/redstone/torch/get_input_directions()
+	return list(attached_dir)
 
-		// Check for redstone components
-		for(var/obj/structure/redstone/component in check_turf)
-			if(component.can_connect_wires && component.can_connect_to(src, turn(check_dir, 180)))
-				wire_connections[dir2text(check_dir)] = 1
-				connected_components += component
+/obj/structure/redstone/torch/can_connect_to(obj/structure/redstone/other, direction)
+	// Connect to wires on non-attached sides for output
+	// Don't visually connect on attached side
+	return (direction != attached_dir)
 
-/obj/structure/redstone/torch/receive_power(incoming_power, obj/structure/redstone/source, mob/user)
-	// Torches are inverted by power coming from the attached block
-	// Check if the power is coming from the attached direction (through the wall)
-	var/source_dir = get_dir(src, source)
+/obj/structure/redstone/torch/can_receive_from(obj/structure/redstone/source, direction)
+	// Accept power from attached side for inversion
+	return (direction == attached_dir)
 
-	// For wall torches, we want to check if power is coming from the attached block
-	// This could be from a repeater pushing power through the wall
-	if(source_dir == attached_dir || source == src.loc) // Power from attached block or turf
-		var/should_invert = (incoming_power > 0)
+/obj/structure/redstone/torch/receive_source_power(incoming_power, obj/structure/redstone/source)
+	// This is called during propagation when another source tries to power us
+	// For wall power: check if source is powering through our attached wall
+	if(!source.send_wall_power)
+		return
 
-		if(should_invert != inverted)
-			inverted = should_invert
+	var/turf/attached_turf = get_step(src, attached_dir)
+	if(!isclosedturf(attached_turf))
+		return
 
-			if(inverted)
-				set_power(0, user, null)
-				powered = FALSE
-			else
-				set_power(base_power, user, null)
-				powered = TRUE
+	// Source must be adjacent to our attached wall
+	var/turf/source_turf = get_turf(source)
+	var/source_adjacent_to_wall = FALSE
+	for(var/d in GLOB.cardinals)
+		if(get_step(attached_turf, d) == source_turf)
+			source_adjacent_to_wall = TRUE
+			break
 
-			update_overlays()
+	if(!source_adjacent_to_wall)
+		return
 
-/obj/structure/redstone/torch/can_connect_to(obj/structure/redstone/other, dir)
-	// Don't connect to the attached side
-	return (dir != attached_dir)
+	if(incoming_power > 0 && !inverted)
+		inverted = TRUE
+		power_level = 0
 
-/obj/structure/redstone/torch/get_power_directions()
-	// Torches output to all sides except the attached side
-	var/list/output_dirs = GLOB.cardinals.Copy()
-	output_dirs -= attached_dir
-	return output_dirs
+/obj/structure/redstone/torch/on_power_changed()
+	var/should_be_inverted = check_receiving_power()
+
+	if(should_be_inverted != inverted)
+		inverted = should_be_inverted
+		power_level = get_source_power()
+		// Need to repropagate since our output changed
+		spawn(1)
+			schedule_network_update()
+
+/obj/structure/redstone/torch/proc/check_receiving_power()
+	var/turf/attached_turf = get_step(src, attached_dir)
+
+	// Case 1: Direct connection - check for powered redstone on attached side
+	if(!isclosedturf(attached_turf))
+		for(var/obj/structure/redstone/R in attached_turf)
+			if(R == src)
+				continue
+			if(!(R.redstone_role & REDSTONE_ROLE_SOURCE) && R.power_level > 0)
+				// It's powered dust/repeater/etc
+				if(REVERSE_DIR(attached_dir) in R.get_output_directions())
+					return TRUE
+			else if((R.redstone_role & REDSTONE_ROLE_SOURCE) && R.get_source_power() > 0)
+				// It's an active source
+				if(REVERSE_DIR(attached_dir) in R.get_output_directions())
+					return TRUE
+		return FALSE
+
+	// Case 2: Wall - check for wall power sources around the wall
+	for(var/check_dir in GLOB.cardinals)
+		var/turf/around_wall = get_step(attached_turf, check_dir)
+		if(around_wall == loc)
+			continue  // Skip our own turf
+
+		for(var/obj/structure/redstone/R in around_wall)
+			if(!R.send_wall_power)
+				continue
+			if(R.power_level > 0 || ((R.redstone_role & REDSTONE_ROLE_SOURCE) && R.get_source_power() > 0))
+				return TRUE
+
+	return FALSE
 
 /obj/structure/redstone/torch/update_overlays()
 	. = ..()
 	var/mutable_appearance/attachment_overlay = mutable_appearance(icon, "torch_attachment")
 	attachment_overlay.dir = attached_dir
-	overlays += attachment_overlay
+	. += attachment_overlay
 
-	if(powered && !inverted)
+	if(!inverted)
 		var/mutable_appearance/power_overlay = mutable_appearance(icon, "torch_on")
-		overlays += power_overlay
-	else if(inverted)
-		var/mutable_appearance/inverted_overlay = mutable_appearance(icon, "torch_inverted")
-		overlays += inverted_overlay
-
-/obj/structure/redstone/torch/proc/dir2text(direction)
-	switch(direction)
-		if(NORTH) return "1"
-		if(SOUTH) return "2"
-		if(EAST) return "4"
-		if(WEST) return "8"
-		else return "1"
-
-/obj/structure/redstone/torch/examine(mob/user)
-	. = ..()
-	. += "It is attached to the [dir2text_readable(attached_dir)] side."
-	if(inverted)
-		. += "The torch is currently inverted (off) due to input power."
+		. += power_overlay
 	else
-		. += "The torch is currently providing power to adjacent sides."
+		var/mutable_appearance/inverted_overlay = mutable_appearance(icon, "torch_inverted")
+		. += inverted_overlay
+
+/obj/structure/redstone/torch/AltClick(mob/user)
+	if(!Adjacent(user))
+		return
+	attached_dir = turn(attached_dir, 90)
+	dir = attached_dir
+	to_chat(user, "<span class='notice'>You rotate the [name] to attach to the [dir2text_readable(attached_dir)] side.</span>")
+	schedule_network_update()
 
 /obj/structure/redstone/torch/proc/dir2text_readable(direction)
 	switch(direction)
@@ -108,16 +135,9 @@
 		if(SOUTH) return "south"
 		if(EAST) return "east"
 		if(WEST) return "west"
-		else return "north"
+	return "unknown"
 
-/obj/structure/redstone/torch/AltClick(mob/user)
-	if(!Adjacent(user))
-		return
-
-	attached_dir = turn(attached_dir, 90)
-	dir = attached_dir
-	to_chat(user, "<span class='notice'>You rotate the [name] to attach to the [dir2text_readable(attached_dir)] side.</span>")
-	update_directional_connections()
-
-	for(var/obj/structure/redstone/component in connected_components)
-		component.update_wire_connections()
+/obj/structure/redstone/torch/examine(mob/user)
+	. = ..()
+	. += "It is attached to the [dir2text_readable(attached_dir)] side."
+	. += inverted ? "The torch is inverted (off)." : "The torch is providing power."

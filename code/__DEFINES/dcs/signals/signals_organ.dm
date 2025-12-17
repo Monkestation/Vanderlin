@@ -3,3 +3,4 @@
 #define COMSIG_CHIMERIC_ORGAN_FAILURE "chimeric_organ_failure"
 #define COMSIG_DEVOUR_OVERDRIVE "devour_overdrive"
 #define COMSIG_HANDLE_INFUSION "handle_infusion"
+#define COMSIG_CHIMERIC_ORGAN_TRIGGER "chimeric_organ_trigger"

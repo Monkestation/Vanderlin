@@ -124,6 +124,8 @@ SUBSYSTEM_DEF(ambience)
 
 	if(!used && music_enabled)
 		used = my_area?.get_current_buzz(has_light_nearby())
+		if(!used || islist(used))
+			return
 	if(cmode && cmode_music)
 		used = cmode_music
 		vol *= 1.2
@@ -147,3 +149,31 @@ SUBSYSTEM_DEF(ambience)
 		return
 	SEND_SOUND(src, sound(null, repeat = 0, wait = 0, channel = CHANNEL_BUZZ))
 	client.current_ambient_sound = null
+
+/mob/proc/test_area_sounds()
+	for(var/area/area as anything in subtypesof(/area))
+		if(!initial(area.background_track))
+			continue
+		to_chat(src, initial(area.name))
+		refresh_looping_ambience(initial(area.background_track))
+		sleep(0.2 SECONDS)
+		if(!client)
+			world << "Crashed at [initial(area.name)]"
+
+	for(var/area/area as anything in subtypesof(/area))
+		if(!initial(area.background_track_dusk))
+			continue
+		to_chat(src, initial(area.name))
+		refresh_looping_ambience(initial(area.background_track_dusk))
+		sleep(0.2 SECONDS)
+		if(!client)
+			world << "Crashed at [initial(area.name)] dusk"
+
+	for(var/area/area as anything in subtypesof(/area))
+		if(!initial(area.background_track_night))
+			continue
+		to_chat(src, initial(area.name))
+		refresh_looping_ambience(initial(area.background_track_night))
+		sleep(0.2 SECONDS)
+		if(!client)
+			world << "Crashed at [initial(area.name)] night"
