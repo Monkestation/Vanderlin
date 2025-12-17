@@ -40,6 +40,8 @@
 	return new particle_path()
 
 /obj/effect/abstract/particle_holder/Destroy(force)
+	var/atom/movable/lie_about_areas = parent
+	lie_about_areas.vis_contents -= src
 	QDEL_NULL(particles)
 	parent = null
 	return ..()

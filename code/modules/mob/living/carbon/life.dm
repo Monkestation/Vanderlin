@@ -611,12 +611,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(client)
 			handle_dizziness()
 
-	if(drowsyness)
-		drowsyness = max(drowsyness - restingpwr, 0)
-		blur_eyes(2)
-		if(prob(5))
-			AdjustSleeping(100)
-
 	//Jitteriness
 	if(jitteriness)
 		do_jitter_animation(jitteriness)
@@ -669,12 +663,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 61)
 			adjustToxLoss(1)
 			if(prob(50))
-				blur_eyes(5)
+				set_eye_blur_if_lower(10 SECONDS)
 
 		if(drunkenness >= 71)
 			adjustToxLoss(1)
 			if(prob(10))
-				blur_eyes(5)
+				set_eye_blur_if_lower(10 SECONDS)
 
 		if(drunkenness >= 81)
 			adjustToxLoss(3)

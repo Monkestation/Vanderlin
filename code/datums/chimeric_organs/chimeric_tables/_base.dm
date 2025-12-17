@@ -19,6 +19,21 @@
 	var/list/output_nodes = list()
 	var/list/special_nodes = list()
 
+	var/list/generic_outputs = list(
+		/datum/chimeric_node/output/hallucinate = 1,
+		/datum/chimeric_node/output/healing_coma = 1,
+		/datum/chimeric_node/output/vomit = 1,
+	)
+	var/list/generic_inputs = list(
+		/datum/chimeric_node/input/reagent = 1,
+		/datum/chimeric_node/input/revival = 1,
+		/datum/chimeric_node/input/heartbeat = 1,
+	)
+	var/list/generic_specials = list(
+		/datum/chimeric_node/special/repeater = 1,
+		/datum/chimeric_node/special/delayer = 1,
+	)
+
 /mob/living/proc/generate_chimeric_node_from_mob()
 	var/datum/blood_type/blood = get_blood_type()
 	var/datum/chimeric_table/table_type
@@ -28,11 +43,15 @@
 		return null
 	var/datum/chimeric_table/table = new table_type()
 	var/list/available_slots = list()
-	if(length(table.input_nodes))
+
+	var/list/inputs = table.input_nodes.Copy() + table.generic_inputs.Copy()
+	var/list/outputs = table.output_nodes.Copy() + table.generic_outputs.Copy()
+	var/list/specials = table.special_nodes.Copy() + table.generic_specials.Copy()
+	if(length(inputs))
 		available_slots[INPUT_NODE] = 10
-	if(length(table.output_nodes))
+	if(length(outputs))
 		available_slots[OUTPUT_NODE] = 10
-	if(length(table.special_nodes))
+	if(length(specials))
 		available_slots[SPECIAL_NODE] = 1
 	if(!length(available_slots))
 		available_slots = list(INPUT_NODE = 10, OUTPUT_NODE = 10, SPECIAL_NODE = 1)
@@ -40,11 +59,11 @@
 	var/list/node_pool
 	switch(selected_slot)
 		if(INPUT_NODE)
-			node_pool = table.input_nodes.Copy()
+			node_pool = inputs
 		if(OUTPUT_NODE)
-			node_pool = table.output_nodes.Copy()
+			node_pool = outputs
 		if(SPECIAL_NODE)
-			node_pool = table.special_nodes.Copy()
+			node_pool = specials
 
 	if(!length(node_pool))
 		node_pool = get_weighted_nodes_by_tier(selected_slot, table.node_tier)
@@ -158,43 +177,46 @@
 	html += "<div class='section'>"
 	html += "<h2>Available Node Types</h2>"
 
-	if(length(input_nodes))
+	if(length(input_nodes) || length(generic_inputs))
 		html += "<div style='border: 1px solid cyan; padding: 10px; margin: 5px 0;'>"
 		html += "<h3 style='color: cyan;'>Input Nodes</h3>"
 		var/total_weight = 0
-		for(var/node_type in input_nodes)
-			total_weight += input_nodes[node_type]
+		var/list/nodes = input_nodes + generic_inputs
+		for(var/node_type in nodes)
+			total_weight += nodes[node_type]
 
-		for(var/datum/chimeric_node/node_type as anything in input_nodes)
-			var/weight = input_nodes[node_type]
+		for(var/datum/chimeric_node/node_type as anything in nodes)
+			var/weight = nodes[node_type]
 			var/node_name = initial(node_type.name)
 			var/likelihood = get_likelihood_text(weight)
 			html += "• <b>[node_name]</b> - [likelihood]<br>"
 		html += "</div>"
 
-	if(length(output_nodes))
+	if(length(output_nodes) || length(generic_outputs))
 		html += "<div style='border: 1px solid orange; padding: 10px; margin: 5px 0;'>"
 		html += "<h3 style='color: orange;'>Output Nodes</h3>"
 		var/total_weight = 0
-		for(var/node_type in output_nodes)
-			total_weight += output_nodes[node_type]
+		var/list/nodes = output_nodes + generic_outputs
+		for(var/node_type in nodes)
+			total_weight += nodes[node_type]
 
-		for(var/datum/chimeric_node/node_type as anything in output_nodes)
-			var/weight = output_nodes[node_type]
+		for(var/datum/chimeric_node/node_type as anything in nodes)
+			var/weight = nodes[node_type]
 			var/node_name = initial(node_type.name)
 			var/likelihood = get_likelihood_text(weight)
 			html += "• <b>[node_name]</b> - [likelihood]<br>"
 		html += "</div>"
 
-	if(length(special_nodes))
+	if(length(special_nodes) || length(generic_specials))
 		html += "<div style='border: 1px solid purple; padding: 10px; margin: 5px 0;'>"
 		html += "<h3 style='color: purple;'>Special Nodes</h3>"
 		var/total_weight = 0
-		for(var/node_type in special_nodes)
-			total_weight += special_nodes[node_type]
+		var/list/nodes = special_nodes + generic_specials
+		for(var/node_type in nodes)
+			total_weight += nodes[node_type]
 
-		for(var/datum/chimeric_node/node_type as anything in special_nodes)
-			var/weight = special_nodes[node_type]
+		for(var/datum/chimeric_node/node_type as anything in nodes)
+			var/weight = nodes[node_type]
 			var/node_name = initial(node_type.name)
 			var/likelihood = get_likelihood_text(weight)
 			html += "• <b>[node_name]</b> - [likelihood]<br>"
