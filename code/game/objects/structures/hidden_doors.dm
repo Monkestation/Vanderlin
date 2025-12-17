@@ -47,7 +47,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 /datum/secret_door_manager/proc/on_job_spawn(source, datum/job/job, mob/living/spawned, client/player_client)
 	SIGNAL_HANDLER
 	if((job.type in vips) || (accessor_trait && (accessor_trait in job.mind_traits) || (accessor_trait in job.traits)))
-		var/msg = "The [id]'s secret doors answer to: '[open_phrase]'"
+		var/msg = "The [memory_name] secret doors answer to: '[open_phrase]'"
 		spawned.mind?.store_memory(msg)
 
 /datum/secret_door_manager/proc/add_door(obj/structure/door/secret/new_door)
