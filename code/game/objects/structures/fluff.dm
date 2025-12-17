@@ -175,7 +175,7 @@
 	density = TRUE
 	anchored = TRUE
 	blade_dulling = DULLING_BASHCHOP
-	pass_flags_self = PASSTABLE|PASSGRILLE|LETPASSTHROW|PASSSTRUCTURE|NOTLETPASSTHROWNMOB
+	pass_flags_self = PASSGRILLE|LETPASSTHROW|PASSSTRUCTURE|NOTLETPASSTHROWNMOB
 	max_integrity = 700
 	damage_deflection = 12
 	integrity_failure = 0.15
