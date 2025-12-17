@@ -79,6 +79,7 @@
 
 	var/blood_purity = 1 // what % of the drink_amt are we actually drinking as blood?
 	if(ingest && reagents.total_volume < reagents.maximum_volume)
+		var/ingesting_volume = min(reagents.maximum_volume - reagents.total_volume, drink_amt)
 		if(victim.reagents.total_volume)
 			var/list/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood)
 			var/trans_volume = victim.reagents.total_volume
@@ -86,15 +87,13 @@
 				trans_volume -= victim.reagents.get_reagent_amount(reagent_type)
 			if(trans_volume > 0)
 				blood_purity = victim.blood_volume / (victim.blood_volume + trans_volume)
-				victim.reagents.trans_to(src, drink_amt * (1 - blood_purity), 1, transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
-		//this is how much is actually gonna be added as a reagent. we can't just fill them with 1:1 blood values
-		var/blood_to_drink = min(victim.blood_volume, drink_amt * blood_purity)
+				victim.reagents.trans_to(src, ingesting_volume * (1 - blood_purity), 1, transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
+		var/blood_to_drink = min(victim.blood_volume, ingesting_volume * blood_purity)
 		blood_data?["vitae"] = used_vitae / blood_to_drink
 		var/datum/reagents/holder = new(maximum = blood_to_drink)
-		var/datum/blood_type/BT = get_blood_type()
 		// if someone adds kool aid as a blood type then blood_data here might need some work
-		holder.add_reagent(BT.reagent_type, blood_to_drink, blood_data, no_react = TRUE)
-		holder.trans_to(src, holder.total_volume, src, method = INGEST)
+		holder.add_reagent(victim_blood.reagent_type, blood_to_drink, blood_data, no_react = TRUE)
+		holder.trans_to(src, holder.total_volume, transfered_by=src, method = INGEST)
 	else
 		if(used_vitae > 0)
 			adjust_bloodpool(used_vitae)
@@ -103,7 +102,7 @@
 	if(used_vitae > 0)
 		victim.adjust_bloodpool(VVictim ? -used_vitae * 2 : -used_vitae) //twice the loss
 	var/bloodloss =  min(victim.blood_volume, drink_amt * blood_purity)
-	victim.blood_volume = victim.blood_volume - bloodloss
+	victim.blood_volume -= bloodloss
 	victim.handle_blood()
 
 	playsound(loc, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
