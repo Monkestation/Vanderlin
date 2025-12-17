@@ -10,12 +10,18 @@ DEFINE_BITFIELD(visibility_flags, list(
 ))
 
 //Disease Flags
-#define CURABLE (1<<0)
-#define CAN_CARRY (1<<1)
-#define CAN_RESIST (1<<2)
-#define CHRONIC (1<<3)
+/// Is curable
+#define CURABLE (1 << 0)
+/// Is uncurable (Not the same as lacking CURABLE)
+#define UNCURABLE (1 << 1)
+/// Can be carried and asymptomatic
+#define CAN_CARRY (1 << 2)
+/// Disease can be resisted
+#define CAN_RESIST (1 << 3)
+/// Incapable of going below stage 1
+#define CHRONIC (1<<4)
 /// Instead of instantly curing the disease, cures will simply reduce the stage
-#define INCREMENTAL_CURE (1<<4)
+#define INCREMENTAL_CURE (1<<5)
 
 //Spread Flags
 #define DISEASE_SPREAD_SPECIAL (1<<0)
@@ -50,8 +56,6 @@ DEFINE_BITFIELD(spread_flags, list(
 #define DISEASE_SEVERITY_DANGEROUS "Dangerous"
 /// Diseases that can quickly kill an unprepared victim (fungal tb, gbs)
 #define DISEASE_SEVERITY_BIOHAZARD "BIOHAZARD"
-/// Diseases that are uncurable (hms)
-#define DISEASE_SEVERITY_UNCURABLE "Uncurable"
 
 //Severity Guaranteed Cycles or how long before a disease can potentially self-cure
 /// Positive diseases should not self-cure by themselves, but if they do, they cure fast

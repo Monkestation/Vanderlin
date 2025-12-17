@@ -83,7 +83,11 @@
 
 //add this disease if the host does not already have too many
 /datum/disease/proc/try_infect(mob/living/infectee)
+	if(required_organ && !has_required_infectious_organ(infectee, required_organ))
+		return FALSE
+
 	infect(infectee)
+
 	return TRUE
 
 //add the disease with no checks
@@ -95,21 +99,22 @@
 
 	register_disease_signals()
 
-	var/turf/source_turf = get_turf(infectee)
-	log_virus("[key_name(infectee)] was infected by disease: [admin_details()] at [loc_name(source_turf)]")
+	log_virus("[key_name(infectee)] was infected by disease: [admin_details()] at [loc_name(get_turf(infectee))]")
 
 /datum/disease/proc/after_add()
 	return
 
 /datum/disease/proc/cure(add_resistance = TRUE)
-	if(severity == DISEASE_SEVERITY_UNCURABLE) //aw man :(
+	if(disease_flags & UNCURABLE) //aw man :(
 		return
+
 	if(affected_mob)
 		if(add_resistance && (disease_flags & CAN_RESIST))
 			LAZYOR(affected_mob.disease_resistances, get_disease_id())
+
 		if(affected_mob.ckey)
-			var/cure_turf = get_turf(affected_mob)
-			log_virus("[key_name(affected_mob)] was cured of disease: [admin_details()] at [loc_name(cure_turf)]")
+			log_virus("[key_name(affected_mob)] was cured of disease: [admin_details()] at [loc_name(get_turf(affected_mob))]")
+
 	qdel(src)
 
 /datum/disease/proc/remove_disease()
@@ -146,10 +151,9 @@
 	var/cure_mod
 	var/bad_immune = HAS_TRAIT(affected_mob, TRAIT_WASTING_SICKNESS) ? 2 : 1
 
-	if(required_organ)
-		if(!has_required_infectious_organ(affected_mob, required_organ))
-			cure(add_resistance = FALSE)
-			return FALSE
+	if(required_organ && !has_required_infectious_organ(affected_mob, required_organ))
+		cure(add_resistance = FALSE)
+		return FALSE
 
 	if(has_cure())
 		cure_mod = cure_chance / bad_immune
@@ -159,11 +163,10 @@
 			return
 		if(disease_flags & CURABLE && prob(cure_mod))
 			if(disease_flags & INCREMENTAL_CURE)
-				if (!update_stage(stage - 1))
+				if(!update_stage(stage - 1))
 					return FALSE
-			else
-				cure()
-				return FALSE
+			cure()
+			return FALSE
 
 	if(stage == max_stages && stage_peaked != TRUE) //mostly a sanity check in case we manually set a disease to max stages
 		stage_peaked = TRUE
@@ -199,15 +202,14 @@
 			recovery_prob *= DISEASE_PEAKED_RECOVERY_MULTIPLIER
 
 		if(slowdown != 1) //using spaceacillin can help get them over the finish line to kill a disease with decreasing effect over time
-			recovery_prob += clamp((((1 - slowdown)*(DISEASE_SLOWDOWN_RECOVERY_BONUS * 2)) * ((DISEASE_SLOWDOWN_RECOVERY_BONUS_DURATION - chemical_offsets) / DISEASE_SLOWDOWN_RECOVERY_BONUS_DURATION)), 0, DISEASE_SLOWDOWN_RECOVERY_BONUS)
+			recovery_prob += clamp((((1 - slowdown) * (DISEASE_SLOWDOWN_RECOVERY_BONUS * 2)) * ((DISEASE_SLOWDOWN_RECOVERY_BONUS_DURATION - chemical_offsets) / DISEASE_SLOWDOWN_RECOVERY_BONUS_DURATION)), 0, DISEASE_SLOWDOWN_RECOVERY_BONUS)
 			chemical_offsets = min(chemical_offsets + 1, DISEASE_SLOWDOWN_RECOVERY_BONUS_DURATION)
 
 		if(!HAS_TRAIT(affected_mob, TRAIT_NOHUNGER))
 			if(affected_mob.satiety < 0 || affected_mob.nutrition < NUTRITION_LEVEL_STARVING) //being malnourished makes it a lot harder to defeat your illness
 				recovery_prob -= DISEASE_MALNUTRITION_RECOVERY_PENALTY
-			else
-				if(affected_mob.satiety >= 0)
-					recovery_prob += round((DISEASE_SATIETY_RECOVERY_MULTIPLIER * (affected_mob.satiety/MAX_SATIETY)), 0.1)
+			else if(affected_mob.satiety >= 0)
+				recovery_prob += round((DISEASE_SATIETY_RECOVERY_MULTIPLIER * (affected_mob.satiety/MAX_SATIETY)), 0.1)
 
 		switch(affected_mob.stress)
 			if(-INFINITY to STRESS_VGOOD)
@@ -366,8 +368,6 @@
 //Use this to compare severities
 /proc/get_disease_severity_value(severity)
 	switch(severity)
-		if(DISEASE_SEVERITY_UNCURABLE)
-			return 0
 		if(DISEASE_SEVERITY_POSITIVE)
 			return 1
 		if(DISEASE_SEVERITY_NONTHREAT)

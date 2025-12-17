@@ -4,17 +4,12 @@
 	max_stages = 3
 	stage_prob = 5
 
-	disease_flags = NONE
-	severity = DISEASE_SEVERITY_UNCURABLE
+	disease_flags = UNCURABLE
+	severity = DISEASE_SEVERITY_BIOHAZARD
 	spread_flags = DISEASE_SPREAD_NON_CONTAGIOUS
 	bypasses_immunity = TRUE
 
-/datum/disease/lycanthropy/try_infect(mob/living/infectee)
-	if(!ishuman(infectee))
-		return FALSE
-
-	var/mob/living/carbon/human/human_infectee = infectee
-
+/datum/disease/lycanthropy/try_infect(/mob/living/carbon/human/human_infectee)
 	var/static/list/silver_items = list(
 		/obj/item/clothing/neck/psycross/silver,
 		/obj/item/clothing/neck/silveramulet
