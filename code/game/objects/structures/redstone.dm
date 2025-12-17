@@ -160,11 +160,11 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	accessor_trait = TRAIT_KNOW_KEEP_DOORS
 
 /obj/structure/lever/hidden/inquisition
-	hidden_dc = 15
+	hidden_dc = 14
 	accessor_trait = TRAIT_KNOW_INQUISITION_DOORS
 
 /obj/structure/lever/hidden/thieves_guild
-	hidden_dc = 12
+	hidden_dc = 13
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 
 /obj/structure/repeater

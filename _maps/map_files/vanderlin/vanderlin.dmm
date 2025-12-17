@@ -14108,6 +14108,13 @@
 	},
 /turf/open/floor/grass/eora,
 /area/outdoors/eora)
+"heI" = (
+/obj/structure/flora/grass,
+/obj/structure/fluff/walldeco/vinez,
+/turf/open/floor/twig{
+	dir = 4
+	},
+/area/under/cave)
 "heW" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -16499,10 +16506,6 @@
 "irh" = (
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/manor/throne)
-"irC" = (
-/obj/structure/fluff/walldeco/vinez,
-/turf/open/transparent/openspace,
-/area/under/cave)
 "irI" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/stairs{
@@ -198579,9 +198582,9 @@ jmf
 gPX
 uAv
 uMZ
-wal
+heI
 gbZ
-eEx
+mdX
 qLS
 ocQ
 eVG
@@ -198780,10 +198783,10 @@ xTa
 ofP
 mMp
 osa
-irC
-irC
-ljy
-ljy
+nZD
+noe
+viO
+eEx
 qLS
 ocQ
 eVG
@@ -198982,11 +198985,11 @@ qGM
 hzp
 uWX
 wal
-ljy
-ljy
-ljy
-ljy
-ljy
+viO
+viO
+roU
+eEx
+mdX
 eVG
 eVG
 xKu
@@ -199184,10 +199187,10 @@ uWX
 gaU
 eEx
 uAv
-ljy
-ljy
-ljy
-ljy
+viO
+viO
+mdX
+eEx
 gaU
 uWX
 uWX
@@ -199389,7 +199392,7 @@ uWX
 uWX
 mbd
 eEx
-ljy
+eEx
 vVS
 eVG
 ocQ

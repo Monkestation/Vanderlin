@@ -1,42 +1,131 @@
-GLOBAL_LIST_EMPTY(hidden_door_managers)
+GLOBAL_LIST_EMPTY(secret_door_managers)
 
-/// do NOT initialize these without an id.
-/datum/hidden_door_manager
+/// Secret door managers are used for a network of hidden doors.
+/// They allow the use of verbal passwords with VIPs, adding memories for passwords, and syncing these passwords together.
+/// If a hidden door grid doesn't use passwords it doesn't necessarily need this, but it is capable of working with a mix of both
+/// doors that use phrases and ones that don't.
+/// Usually these are created through the secret door creator effect if one doesn't already exist.
+/datum/secret_door_manager
+	/// ID index for GLOB list
 	var/id
+	/// Trait required to access
 	var/accessor_trait
-	var/list/vip
-
+	/// List of VIP roles who can edit our secret doors
+	var/list/vips
+	/// The name the doors will be referred to by in the memory note
+	var/memory_name
+	/// List of doors managed by this datum
 	var/list/doors = list()
-	//don't set this directly unless it's part of initialization. use set_phrase()
+	/// Phrase spoken to open the door
+	/// don't set this directly unless it's part of initialization. use set_phrase()
 	var/open_phrase
 
-/datum/hidden_door_manager/New(_id, _accessor_trait, list/_vip)
+/datum/secret_door_manager/New(_id, _accessor_trait, list/_vips, _memory_name, _open_phrase)
 	RegisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN, PROC_REF(on_job_spawn))
 	if(!_id)
+		stack_trace("[src] ([type]) has no ID!")
 		qdel(src)
 		return
+	if(GLOB.secret_door_managers[_id])
+		stack_trace("[src] tried to initialize with ID [id] when it has already been added!")
+		qdel(src)
+		return GLOB.secret_door_managers[id]
 	id = _id
 	accessor_trait = _accessor_trait
-	vip = _vip
-	GLOB.hidden_door_managers[id] = src
+	vips = _vips
+	memory_name = _memory_name
+	open_phrase = _open_phrase || "[open_word()] [magic_word()]"
+	GLOB.secret_door_managers[id] = src
 
-/datum/hidden_door_manager/Destroy(force, ...)
+/datum/secret_door_manager/Destroy(force, ...)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN)
-	GLOB.hidden_door_managers -= id
 	for(var/obj/structure/door/secret/door in doors)
-		door.door_manager = null
+		UnregisterSignal(door, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_HEAR))
+	GLOB.secret_door_managers -= id
 	. = ..()
 
-/datum/hidden_door_manager/proc/set_phrase(new_phrase)
-	open_phrase = new_phrase
-	for(var/obj/structure/door/secret/door in doors)
-		door.open_phrase = new_phrase
-
-/datum/hidden_door_manager/proc/on_job_spawn(source, datum/job/job, mob/living/spawned, client/player_client)
-	//really these two factors should be synced but ya never know.
-	if((job.type in vip) || (accessor_trait && (accessor_trait in job.mind_traits) || (accessor_trait in job.traits)))
+/datum/secret_door_manager/proc/on_job_spawn(source, datum/job/job, mob/living/spawned, client/player_client)
+	SIGNAL_HANDLER
+	if((job.type in vips) || (accessor_trait && (accessor_trait in job.mind_traits) || (accessor_trait in job.traits)))
 		var/msg = "The [id]'s secret doors answer to: '[open_phrase]'"
 		spawned.mind?.store_memory(msg)
+
+/datum/secret_door_manager/proc/add_door(obj/structure/door/secret/new_door)
+	if(new_door in doors)
+		return
+	RegisterSignal(new_door, COMSIG_MOVABLE_HEAR, PROC_REF(door_hear))
+	RegisterSignal(new_door, COMSIG_PARENT_QDELETING, PROC_REF(clear_door))
+	doors |= new_door
+
+/datum/secret_door_manager/proc/remove_door(obj/structure/door/secret/to_remove)
+	var/obj/structure/door/old_door = locate(to_remove) in doors
+	if(!old_door)
+		return
+	UnregisterSignal(old_door, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_HEAR))
+	doors -= old_door
+
+/datum/secret_door_manager/proc/clear_door(obj/structure/door/source)
+	SIGNAL_HANDLER
+	doors -= source
+
+/datum/secret_door_manager/proc/door_hear(obj/structure/door/secret/source, list/hearing_args)
+	var/mob/living/speaker = hearing_args[HEARING_SPEAKER]
+	if(!istype(speaker))
+		return
+	if(speaker == source)
+		return // in the event you have added living people to the door listener like a fucking buffoon
+	if(!source.use_phrases)
+		return
+	if(source.obj_broken) //door is broken
+		return
+	if(get_dist(speaker, source) > source.speaking_distance)
+		return
+	if(!is_type_in_list(hearing_args[HEARING_LANGUAGE], source.lang))
+		return
+
+	var/message2recognize = SANITIZE_HEAR_MESSAGE(hearing_args[HEARING_RAW_MESSAGE])
+	if(findtext(message2recognize, open_phrase))
+		if(source.door_opened)
+			source.force_closed()
+		else
+			source.force_closed()
+		return
+
+	if(length(vips) > 0) // VIP check
+		var/datum/job/J = speaker.mind?.assigned_role
+		while(istype(J))
+			if(is_type_in_list(J, vips))
+				break
+			J = (J != J.parent_job ? J.parent_job : null)
+		if(!istype(J))
+			return
+
+	var/say_string
+	if(findtext(message2recognize, "help"))
+		say_string = "'say phrase'... 'set phrase'..."
+	else if(findtext(message2recognize, "say phrase"))
+		say_string = "[open_phrase]..."
+	else if(speaker.client && findtext(message2recognize, "set phrase"))
+		var/new_pass = stripped_input(speaker, "What should the new open phrase be?", max_length = 32)
+		if(!new_pass || QDELETED(speaker) || QDELETED(source) || QDELETED(src))
+			return
+		var/sanitized_pass = SANITIZE_HEAR_MESSAGE(new_pass)
+		if(length(sanitized_pass) > 0)
+			open_phrase = sanitized_pass
+			say_string = "You may open us with '[open_phrase]' now..."
+		else
+			say_string = "A poor choice."
+	if(say_string)
+		source.send_speech(span_purple(say_string), source.speaking_distance, source, message_language = hearing_args[HEARING_LANGUAGE], message_mods = list(WHISPER_MODE = MODE_WHISPER))
+
+/datum/secret_door_manager/proc/open_word()
+	return pick("open", "pass", "part", "break", "reveal", "unbar", "extend", "widen", "unfold", "rise",
+		"remember", "end the", "bring", "forget", "endless", "forgotten")
+
+/datum/secret_door_manager/proc/magic_word()
+	return pick("abyss", "fire", "wind", "shadow", "nite", "oblivion", "void", "time", "dead", "decay", "endless",
+		"gods", "ancient", "twisted", "corrupt", "secrets", "lore", "text", "sacrifice", "deal", "pact", "bargain", "dreams",
+		"nitemare", "vision", "hunger",	"lust")
 
 
 /obj/structure/door/secret
@@ -64,37 +153,32 @@ GLOBAL_LIST_EMPTY(hidden_door_managers)
 	repair_skill = null
 	metalizer_result = null
 
-	//the perception DC to use this door
-	var/hidden_dc = 10
-
-	var/datum/hidden_door_manager/door_manager
-	//used for door manager
-	var/id
-	/// Used for traits that automatically indicate there is a hidden door here.
+	/// used to identify a hidden door is here with no checks
 	var/accessor_trait
-
+	/// The perception DC to use this door
+	var/hidden_dc = 10
+	/// Used for traits that automatically indicate there is a hidden door here.
 	var/use_phrases = FALSE
-	var/open_phrase = "open sesame"
+	/// How far this door can be heard from, or hear someone else
 	var/speaking_distance = 1
-	var/lang = /datum/language/common
-	var/list/vip
+	/// What languages this door is capable of speaking if it uses phrases
+	var/lang = list(/datum/language/common)
 
 /obj/structure/door/secret/Initialize(mapload, ...)
 	AddElement(/datum/element/update_icon_blocker)
 	. = ..()
-	open_phrase = "[open_word()] [magic_word()]"
-	if(id)
-		door_manager = GLOB.hidden_door_managers[id] || new /datum/hidden_door_manager(id, accessor_trait, vip)
-		door_manager.doors += src
-		if(door_manager.open_phrase)
-			open_phrase = door_manager.open_phrase
-		else
-			door_manager.open_phrase = open_phrase
 
 /obj/structure/door/secret/Destroy(force)
-	door_manager?.doors -= src
 	lose_hearing_sensitivity()
 	return ..()
+
+/obj/structure/door/proc/add_to_door_manager(id)
+	if(!id)
+		return
+	var/datum/secret_door_manager/manager = GLOB.secret_door_managers[id]
+	if(!manager)
+		return
+	manager.add_door(src)
 
 /obj/structure/door/secret/redstone_triggered(mob/user)
 	if(!door_opened)
@@ -127,44 +211,6 @@ GLOBAL_LIST_EMPTY(hidden_door_managers)
 			var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
 			if(L.STAPER + bonuses >= hidden_dc)
 				. += span_purple("Something isn't right about this wall...")
-
-/obj/structure/door/secret/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), original_message)
-	if(!use_phrases)
-		return FALSE
-	var/mob/living/carbon/human/H = speaker
-	if(speaker == src) //door speaking to itself
-		return FALSE
-	var/distance = get_dist(speaker, src)
-	if(distance > speaking_distance)
-		return FALSE
-	if(obj_broken) //door is broken
-		return FALSE
-	if(!ishuman(speaker))
-		return FALSE
-
-	var/message2recognize = SANITIZE_HEAR_MESSAGE(original_message)
-
-	if(is_type_in_list(H.mind?.assigned_role, vip)) //are they a VIP?
-		var/list/mods = list(WHISPER_MODE = MODE_WHISPER)
-		if(findtext(message2recognize, "help"))
-			send_speech(span_purple("'say phrase'... 'set phrase'..."), speaking_distance, src, message_language = lang, message_mods = mods)
-			return TRUE
-		if(findtext(message2recognize, "say phrase"))
-			send_speech(span_purple("[open_phrase]..."), speaking_distance, src, message_language = lang, message_mods = mods)
-			return TRUE
-		if(findtext(message2recognize, "set phrase"))
-			var/new_pass = stripped_input(H, "What should the new open phrase be?")
-			open_phrase = new_pass
-			door_manager?.set_phrase(new_pass)
-			send_speech(span_purple("It is done, [flavor_name()]..."), speaking_distance, src, message_language = lang, message_mods = mods)
-			return TRUE
-
-	if(findtext(message2recognize, open_phrase))
-		if(!door_opened)
-			force_open()
-		else
-			force_closed()
-		return TRUE
 
 /obj/structure/door/secret/Open(silent = FALSE)
 	switching_states = TRUE
@@ -234,43 +280,7 @@ GLOBAL_LIST_EMPTY(hidden_door_managers)
 	air_update_turf(TRUE)
 	switching_states = FALSE
 
-/// mood determines opinion of the magic word. 1 = positive, 2 = negative
-/obj/structure/door/secret/proc/open_word()
-	return pick("open", "pass", "part", "break", "reveal", "unbar", "extend", "widen", "unfold", "rise", "remember")
 
-/obj/structure/door/secret/proc/magic_word()
-	return pick("sesame", "abyss", "fire", "wind", "psydonia", "shadow", "nite", "oblivion", "void", "time", "dead", "decay",
-		"gods", "ancient", "twisted", "corrupt", "secrets", "lore", "text", "ritual", "sacrifice", "deal", "pact", "bargain", "ritual", "dream",
-		"nitemare", "vision", "hunger",	"lust", "psydon")
-
-/obj/structure/door/secret/proc/flavor_name()
-	return pick("my friend", "love", "my love", "honey", "darling", "knave", "stranger", "companion", "mate", "you harlot",
-		"comrade", "fellow", "chum", "bafoon")
-
-///// DOOR TYPES //////
-/obj/structure/door/secret/keep
-	id = "keep"
-	hidden_dc = 14
-	use_phrases = TRUE
-	accessor_trait = TRAIT_KNOW_KEEP_DOORS
-	vip = list(/datum/job/lord, /datum/job/consort, /datum/job/prince, /datum/job/hand, /datum/job/butler, /datum/job/archivist)
-
-//little note on these. This is specifically for psydonic inquisition. if you use these for rosewood's they are going to have issues with the fact it's psydonic.
-/obj/structure/door/secret/inquisition
-	id = "inquisition"
-	hidden_dc = 15
-	use_phrases = TRUE
-	accessor_trait = TRAIT_KNOW_INQUISITION_DOORS
-	vip = list(/datum/job/inquisitor)
-	lang = /datum/language/oldpsydonic
-
-/obj/structure/door/secret/thieves_guild
-	hidden_dc = 12
-	use_phrases = TRUE
-	id = "thieves' guild"
-	accessor_trait = TRAIT_KNOW_THIEF_DOORS
-	vip = list(/datum/job/matron)
-	lang = /datum/language/thievescant
 
 ///// MAPPERS /////
 /obj/effect/mapping_helpers/secret_door_creator
@@ -279,21 +289,43 @@ GLOBAL_LIST_EMPTY(hidden_door_managers)
 	icon_state = "hidden_door"
 
 	var/redstone_id
-
-	var/obj/structure/door/secret/door_type = /obj/structure/door/secret
 	var/override_floor = TRUE //Will only use the below as the floor tile if true. Source turf have at least 1 baseturf to use false
 	var/turf/open/floor_turf = /turf/open/floor/blocks
+	var/hidden_dc = 10
+	var/use_phrases = FALSE
+	var/list/lang = list(/datum/language/common)
+
+	/// this information is all for the door manager
+	var/manager_id
+	/// this is used by both the door manager and a nonlinked door
+	var/accessor_trait
+	var/list/vips = list()
+	var/memory_name
+	/// optional preset open phrase for a door manager
+	var/open_phrase
 
 /obj/effect/mapping_helpers/secret_door_creator/Initialize()
 	if(!isclosedturf(get_turf(src)))
 		return ..()
 	var/turf/closed/source_turf = get_turf(src)
-	var/obj/structure/door/secret/new_door = new door_type(source_turf)
+	var/obj/structure/door/secret/new_door = new(source_turf)
+
+	new_door.accessor_trait = accessor_trait
+	new_door.hidden_dc = hidden_dc
+	new_door.use_phrases = use_phrases
+	new_door.lang = lang
+
+	if(manager_id)
+		var/datum/secret_door_manager/manager = GLOB.secret_door_managers[manager_id]
+		if(!manager)
+			manager = new /datum/secret_door_manager(manager_id, accessor_trait, vips, memory_name, open_phrase)
+		manager.add_door(new_door)
 
 	new_door.name = source_turf.name
 	new_door.desc = source_turf.desc
 	new_door.icon = source_turf.icon
 	new_door.icon_state = source_turf.icon_state
+	new_door.dir = source_turf.dir
 	new_door.color = source_turf.color
 
 	new_door.uses_integrity = source_turf.uses_integrity
@@ -324,23 +356,57 @@ GLOBAL_LIST_EMPTY(hidden_door_managers)
 		source_turf.ChangeTurf(floor_turf)
 	else
 		source_turf.ChangeTurf(source_turf.baseturfs[1])
-
 	. = ..()
+
 
 /obj/effect/mapping_helpers/secret_door_creator/keep
 	name = "Keep Secret Door Creator"
 	color = "#792BD0"
-	door_type = /obj/structure/door/secret/keep
 	override_floor = FALSE
+	hidden_dc = 14
+	use_phrases = TRUE
+	lang = list(/datum/language/common)
+
+	manager_id = "keep"
+	accessor_trait = TRAIT_KNOW_KEEP_DOORS
+	memory_name = "keep's"
+	vips = list(/datum/job/lord, /datum/job/consort, /datum/job/prince, /datum/job/hand, /datum/job/butler, /datum/job/archivist)
+
+/obj/effect/mapping_helpers/secret_door_creator/keep/Initialize()
+	if(SSmapping.config.map_name == "Rosewood")
+		lang = list(/datum/language/common, /datum/language/elvish)
+	. = ..()
+
 
 /obj/effect/mapping_helpers/secret_door_creator/inquisition
 	name = "Inquisition Secret Door Creator"
 	color = "#d02b2b"
-	door_type = /obj/structure/door/secret/inquisition
 	override_floor = FALSE
+	hidden_dc = 14
+	use_phrases = TRUE
+	lang = list(/datum/language/oldpsydonic)
+
+	manager_id = "inquisition"
+	accessor_trait = TRAIT_KNOW_INQUISITION_DOORS
+	memory_name = "Oratorium's"
+	vips = list(/datum/job/inquisitor)
+
+/obj/effect/mapping_helpers/secret_door_creator/inquisition/Initialize()
+	if(SSmapping.config.map_name == "Rosewood")
+		memory_name = "Order's"
+		lang = list(/datum/language/elvish)
+	. = ..()
+
 
 /obj/effect/mapping_helpers/secret_door_creator/thieves_guild
 	name = "Thieves' Guild Secret Door Creator"
 	color = "#3ed02b"
-	door_type = /obj/structure/door/secret/thieves_guild
 	override_floor = FALSE
+	hidden_dc = 13
+	use_phrases = TRUE
+	lang = list(/datum/language/thievescant, /datum/language/common)
+
+	manager_id = "thief"
+	accessor_trait = TRAIT_KNOW_THIEF_DOORS
+	memory_name = "thieves' guild's"
+	vips = list(/datum/job/matron)
