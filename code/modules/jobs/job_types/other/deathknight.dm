@@ -44,8 +44,7 @@
 
 	spawned.set_patron(/datum/patron/inhumen/zizo)
 
-/datum/outfit/deathknight/pre_equip(mob/living/carbon/human/H)
-	. = ..()
+/datum/outfit/deathknight
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/platelegs/ancient
 	shoes = /obj/item/clothing/shoes/boots/armor/vampire
