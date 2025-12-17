@@ -202,8 +202,9 @@
 	if(!grave_to_consecrate)
 		return FALSE
 // If the grave contains a sanctified casket, mark the tomb as doubly-sanctified. This will make anyone trying to graverob regret it.
-	if(grave_to_consecrate.has_consecrated_coffin)
-		double_consecrated = TRUE
+	for(var/obj/structure/closet/crate/coffin/coffin in grave_to_consecrate.contents)
+		if (coffin.consecrated)
+			double_consecrated = TRUE
 	return double_consecrated
 
 /// Proc that finds the client associated with a given corpse and either 1. Lets ghosts skip Underworld and return to lobby 2. Gives spirits a toll

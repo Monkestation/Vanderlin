@@ -65,34 +65,37 @@
 			. += span_warning("It is sealed, but has no body.")
 
 /obj/structure/closet/crate/coffin/attacked_by(obj/item/I, mob/living/user)
-	if(!user.cmode)
-		if(istype(I, /obj/item/inqarticles/tallowpot)) // consecrating and sealing a coffin with tallow.
-			var/obj/item/inqarticles/tallowpot/pot = I
-			if(!pot.tallow)
-				to_chat(user, span_warning("I lack tallow in the pot."))
-			else
-				if(!pot.heatedup)
-					to_chat(user, span_warning("The tallow is not warm enough."))
-					return
-				if (istype(src, /obj/structure/closet/crate/coffin/vampire)) // you cannot seal a vampire lord's casket.
-					to_chat(user, span_warning("The coffin's material prevents the tallow from sticking, it's seeping right off!"))
-					return
-				to_chat(user, span_info("I start sealing the coffin with tallow.."))
-				if(!do_after(user, 5 SECONDS, src))
-					return
-				if(pacify_coffin(src, user))
-					add_overlay("graveconsecrated")
-					user.visible_message(span_rose("[user] seals and consecrates [src]."), span_rose("I seal the coffin, consecrating it. I may bury it to protect it's inhabitant further."))
-					SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
-					record_round_statistic(STATS_GRAVES_CONSECRATED)
-					consecrated = TRUE
-				else
-					to_chat(user, span_warning("The consecration failed, but you did seal the coffin."))
-				sealed = TRUE
-				icon_state = "casketconsecrated"
-				pot.remaining = max(pot.remaining - 150, 0) // take only 150 since each process tick removes 20 from the tallow pot, and sometimes people wait.
+	if(istype(I, /obj/item/inqarticles/tallowpot)) // consecrating and sealing a coffin with tallow.
+		var/obj/item/inqarticles/tallowpot/pot = I
+		if(!pot.tallow)
+			to_chat(user, span_warning("I lack tallow in the pot."))
 			return
-		if(user.used_intent.type == /datum/intent/dagger/cut && istype(I, /obj/item/weapon/knife)) // unsealing a coffin
+
+		if(!pot.heatedup)
+			to_chat(user, span_warning("The tallow is not warm enough."))
+			return
+
+		if (istype(src, /obj/structure/closet/crate/coffin/vampire)) // you cannot seal a vampire lord's casket.
+			to_chat(user, span_warning("The coffin's material prevents the tallow from sticking, it's seeping right off!"))
+			return
+
+		to_chat(user, span_info("I start sealing the coffin with tallow.."))
+		if(!do_after(user, 5 SECONDS, src))
+			return
+		if(pacify_coffin(src, user))
+			add_overlay("graveconsecrated")
+			user.visible_message(span_rose("[user] seals and consecrates [src]."), span_rose("I seal the coffin, consecrating it. I may bury it to protect it's inhabitant further."))
+			SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
+			record_round_statistic(STATS_GRAVES_CONSECRATED)
+			consecrated = TRUE
+		else
+			to_chat(user, span_warning("The consecration failed, but you did seal the coffin."))
+		sealed = TRUE
+		icon_state = "casketconsecrated"
+		pot.remaining = max(pot.remaining - 150, 0) // take only 150 since each process tick removes 20 from the tallow pot, and sometimes people wait.
+		return
+	if(user.used_intent.type == /datum/intent/dagger/cut && istype(I, /obj/item/weapon/knife)) // unsealing a coffin
+		if(!user.cmode)
 			if (!sealed)
 				to_chat(user, span_info("The coffin has no seal to remove."))
 			else
@@ -113,8 +116,7 @@
 				sealed = FALSE
 				consecrated = FALSE
 				icon_state = "casket"
-		return
-	. = ..()
+		. = ..()
 
 
 

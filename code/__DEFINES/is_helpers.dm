@@ -213,4 +213,3 @@ GLOBAL_VAR_INIT(magic_appearance_detecting_image, new /image) // appearances are
 #define isappearance_or_image(thing) (isimage(thing) || (!ispath(thing) && istype(GLOB.magic_appearance_detecting_image, thing)))
 
 #define isfish(A) (istype(A, /obj/item/reagent_containers/food/snacks/fish))
-#define isredtallow(A) (istype(A,/obj/item/reagent_containers/food/snacks/tallow/red))

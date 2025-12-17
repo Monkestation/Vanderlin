@@ -675,7 +675,7 @@
 
 /obj/item/inqarticles/tallowpot/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
-	if(isredtallow(I))
+	if(istype(I,/obj/item/reagent_containers/food/snacks/tallow/red))
 		if(!tallow)
 			var/obj/item/reagent_containers/food/snacks/tallow/red/Q = I
 			tallow = Q
@@ -685,7 +685,7 @@
 		else
 			to_chat(user, span_info("The [src] already has redtallow in it."))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/tallow)) // Tells players to make redtallow.
-		if(!isredtallow(I))
+		if(!istype(I,/obj/item/reagent_containers/food/snacks/tallow/red))
 			to_chat(user,span_warning("Normal tallow lacks the properties to act as wax. Add viscera to it first."))
 			return
 
