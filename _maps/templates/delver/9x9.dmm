@@ -3,6 +3,9 @@
 /obj/structure/door/fancy,
 /turf/open/floor/cobble,
 /area/indoors)
+"c" = (
+/turf/open/openspace,
+/area/template_noop)
 "d" = (
 /obj/structure/fluff/railing/tall,
 /obj/structure/fluff/railing/tall{
@@ -10,6 +13,10 @@
 	},
 /turf/open/floor/grass,
 /area/template_noop)
+"g" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/underbrick,
+/area/indoors)
 "o" = (
 /obj/structure/stairs{
 	dir = 4
@@ -19,13 +26,6 @@
 "p" = (
 /turf/open/floor/cobble,
 /area/indoors)
-"r" = (
-/obj/structure/sign/property_sign/claim,
-/turf/closed/wall/mineral/underbrick,
-/area/indoors)
-"u" = (
-/turf/open/openspace,
-/area/template_noop)
 "x" = (
 /obj/structure/fluff/railing/tall,
 /turf/open/floor/grass,
@@ -33,7 +33,7 @@
 "B" = (
 /turf/open/floor/rooftop/green,
 /area/template_noop)
-"K" = (
+"D" = (
 /turf/open/openspace,
 /area/indoors)
 "N" = (
@@ -76,7 +76,7 @@ P
 P
 p
 p
-r
+g
 "}
 (3,1,1) = {"
 W
@@ -213,14 +213,14 @@ B
 "}
 (6,1,2) = {"
 W
-K
+D
 P
 P
 P
 P
 W
-u
-u
+c
+c
 "}
 (7,1,2) = {"
 N
@@ -230,8 +230,8 @@ P
 P
 P
 N
-u
-u
+c
+c
 "}
 (8,1,2) = {"
 W
@@ -241,8 +241,8 @@ P
 P
 P
 W
-u
-u
+c
+c
 "}
 (9,1,2) = {"
 W
@@ -252,6 +252,6 @@ W
 W
 W
 W
-u
-u
+c
+c
 "}
