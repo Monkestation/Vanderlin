@@ -30,7 +30,7 @@
 		/datum/coven/bloodheal
 	)
 	blood_preference = BLOOD_PREFERENCE_RATS | BLOOD_PREFERENCE_DEAD | BLOOD_PREFERENCE_KIN
-	blood_disgust = BLOOD_PREFERENCE_FANCY | BLOOD_PREFERENCE_EUPHORIC
+	blood_disgust = BLOOD_PREFERENCE_FANCY
 
 	clane_traits = list(
 		TRAIT_STRONGBITE,

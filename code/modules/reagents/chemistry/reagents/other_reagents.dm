@@ -10,7 +10,7 @@
 	glass_name = "glass of tomato juice"
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
-	var/toxicity = 1 // how toxic will this be to digest to people who cannot drink it
+	var/toxicity = 0.8 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
 	name = "Tiefling Blood"

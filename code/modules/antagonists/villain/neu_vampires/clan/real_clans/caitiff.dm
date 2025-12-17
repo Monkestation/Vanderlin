@@ -2,7 +2,7 @@
 	name = "Caitiff"
 	desc = "The clanless, an outcast from vampire society. Fortunately for you the curse of kain is not strong enough for you to combust in daylight."
 	blood_preference = null
-	blood_disgust = BLOOD_PREFERENCE_HOLY | BLOOD_PREFERENCE_KIN
+	blood_disgust = BLOOD_PREFERENCE_KIN
 	clane_covens = list(
 		/datum/coven/auspex,
 		/datum/coven/obfuscate,
@@ -18,4 +18,4 @@
 	H.AddComponent(/datum/component/vampire_disguise)
 
 /datum/clan/caitiff/get_blood_preference_string()
-	return "any blood that is neither holy nor kindred"
+	return "any blood that is not kindred"
