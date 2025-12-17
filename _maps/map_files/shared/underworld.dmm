@@ -14,9 +14,7 @@
 /turf/open/floor/churchrough,
 /area/underworld)
 "fC" = (
-/obj/structure/bars{
-	max_integrity = 700000
-	},
+/obj/structure/bars/cemetery/underworld,
 /turf/open/floor/church,
 /area/underworld)
 "kH" = (
@@ -114,7 +112,7 @@
 /turf/open/floor/churchrough,
 /area/underworld)
 "Bj" = (
-/obj/structure/bars,
+/obj/structure/bars/cemetery/underworld,
 /turf/open/floor/churchrough,
 /area/underworld)
 "Cn" = (

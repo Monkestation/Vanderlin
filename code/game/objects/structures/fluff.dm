@@ -221,6 +221,12 @@
 /obj/structure/bars/cemetery
 	icon_state = "cemetery"
 
+/// like bars but indestructible and you cant throw through them
+/obj/structure/bars/cemetery/underworld
+	pass_flags_self = PASSSTRUCTURE
+	resistance_flags = INDESTRUCTIBLE
+	max_integrity = 9999
+
 /obj/structure/bars/passage
 	icon_state = "passage0"
 	density = TRUE
