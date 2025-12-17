@@ -90,12 +90,12 @@
 		if(!run_stress)
 			break
 		var/datum/job/PJ = J // let's check parent class for those pesky advclasses
-		while(istype(PJ))
+		while(PJ)
 			//if either your mob job or your mind job are an immune job or department, we will not run the stress.
 			if(is_type_in_list(PJ, immune_jobs) || (PJ.department_flag & immune_departments && !is_type_in_list(PJ, department_exceptions)))
 				run_stress = FALSE
 				break
-			PJ = PJ?.parent_job
+			PJ = PJ.parent_job
 	//xor will invert the result if its TRUE.
 	if(run_stress ^ inverse)
 		return ..()
