@@ -41,6 +41,11 @@
 	armor = ARMOR_PLATE_GOOD
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
 
+/obj/item/clothing/armor/plate/ancient
+	name = "ancient plate"
+	desc = "An ornate, ceremonial plate of considerable age."
+	icon_state = "ancientplate"
+
 //................ Full Plate Armor ............... //
 /obj/item/clothing/armor/plate/full
 	name = "plate armor"

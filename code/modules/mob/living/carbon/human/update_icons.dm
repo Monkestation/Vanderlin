@@ -47,6 +47,8 @@ There are several things that need to be remembered:
 
 
 */
+GLOBAL_LIST_INIT(no_child_icons, list(/obj/item/clothing/head, /obj/item/clothing/face, /obj/item/clothing/cloak, /obj/item/clothing/gloves, /obj/item/clothing/neck))
+GLOBAL_PROTECT(no_child_icons)
 
 /mob/living/carbon/proc/get_limbloss_index(limbr, limbl)
 	var/jazz = 1
@@ -1350,9 +1352,8 @@ generate/load female uniform sprites matching all previously decided variables
 		if(sleevejazz)
 			sleevejazz += "_[customi]"
 	var/t_icon = mob_overlay_icon
-	if(age == AGE_CHILD)
-		if(!istype(src, /obj/item/clothing/head) && !istype(src, /obj/item/clothing/face) && !istype(src, /obj/item/clothing/cloak) && !istype(src, /obj/item/clothing/gloves) && !istype(src, /obj/item/clothing/neck))
-			t_state += "_child"
+	if(age == AGE_CHILD && !is_type_in_list(src, GLOB.no_child_icons))
+		t_state += "_child"
 	if(!t_icon)
 		t_icon = default_icon_file
 
@@ -1460,7 +1461,7 @@ generate/load female uniform sprites matching all previously decided variables
 
 	var/index = I.icon_state
 	var/mob/living/carbon/human/HM = src
-	if(istype(HM) && HM.age == AGE_CHILD)
+	if(istype(HM) && HM.age == AGE_CHILD && !is_type_in_list(I, GLOB.no_child_icons))
 		index += "_child"
 	else if(gender == FEMALE ^ dna.species.swap_female_clothes)
 		index += "_f"

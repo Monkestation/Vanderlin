@@ -373,6 +373,11 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
 
+/obj/item/clothing/neck/gorget/ancient
+	name = "gorget"
+	icon_state = "ancientgorget"
+	desc = "A very old gorget."
+
 /obj/item/clothing/neck/gorget/explosive
 	name = "collar of servitude"
 	icon_state = "collar_of_servitude"

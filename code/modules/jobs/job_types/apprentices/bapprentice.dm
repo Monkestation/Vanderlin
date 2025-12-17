@@ -16,11 +16,11 @@
 	outfit = /datum/outfit/bapprentice
 	display_order = JDO_BAPP
 	give_bank_account = TRUE
-	min_pq = -10
+
 	bypass_lastclass = TRUE
 
 	can_have_apprentices = FALSE
-
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 /datum/outfit/bapprentice/pre_equip(mob/living/carbon/human/H)

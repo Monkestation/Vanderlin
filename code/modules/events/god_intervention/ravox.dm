@@ -17,7 +17,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(GLOB.patron_follower_counts["Ravox"] < 3)
+	if(GLOB.patron_follower_counts[/datum/patron/divine/ravox::name] < 3)
 		return FALSE
 
 /datum/round_event/ravox_resolve/start()

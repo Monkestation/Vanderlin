@@ -117,7 +117,7 @@
 		var/mob/living/L = hit_atom
 		if(stunning)
 			L.Paralyze(20) //splat!
-		L.adjust_blurriness(1)
+		L.adjust_eye_blur(2 SECONDS)
 		L.visible_message("<span class='warning'>[L] is hit by [src]!</span>", "<span class='danger'>I'm hit by [src]!</span>")
 	qdel(src)
 

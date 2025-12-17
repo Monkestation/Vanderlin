@@ -21,7 +21,7 @@
 	noble_income = 11
 
 	exp_type = list(EXP_TYPE_GARRISON)
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 1500
 	)

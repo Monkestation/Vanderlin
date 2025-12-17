@@ -158,7 +158,7 @@
 		if(!ispath(path, /datum/supply_pack))
 			message_admins("MERCHANT [usr.key] IS TRYING TO BUY A [path] WITH THE GOLDFACE. THIS IS AN EXPLOIT.")
 			return
-		var/datum/supply_pack/picked_pack = new path
+		var/datum/supply_pack/picked_pack = SSmerchant.supply_packs[path]
 		base_price = picked_pack.cost
 		taxes = round(SStreasury.tax_value * base_price)
 		final_price = round(base_price + taxes)
