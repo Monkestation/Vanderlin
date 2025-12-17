@@ -347,3 +347,33 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit = 1)
 	output = /obj/item/reagent_containers/food/snacks/tart/cooked/dragonfruit
 	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/bakedman
+	hides_from_books = TRUE
+	name = "Gingerbread man"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_man= 1)
+	output = /obj/item/reagent_containers/food/snacks/bakedman
+	cooked_smell = /datum/pollutant/food/biscuit
+
+
+/datum/container_craft/oven/bakedastrata
+	hides_from_books = TRUE
+	name = "Gingerbread Solar"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_astrata= 1)
+	output = /obj/item/reagent_containers/food/snacks/bakedastrata
+	cooked_smell = /datum/pollutant/food/biscuit
+
+/datum/container_craft/oven/bakednoc
+	hides_from_books = TRUE
+	name = "Gingerbread Moon"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_noc= 1)
+	output = /obj/item/reagent_containers/food/snacks/bakednoc
+	cooked_smell = /datum/pollutant/food/biscuit
+
+/datum/container_craft/oven/bakedpsycross
+	hides_from_books = TRUE
+	name = "Gingerbread Psycross"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_psycross= 1)
+	output = /obj/item/reagent_containers/food/snacks/bakedpsycross
+	cooked_smell = /datum/pollutant/food/biscuit
+

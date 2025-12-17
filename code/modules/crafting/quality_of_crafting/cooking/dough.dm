@@ -89,3 +89,32 @@
 	crafting_sound = 'sound/foley/kneading.ogg'
 	crafting_message = "combine dough slices"
 	extra_chance = 100
+/datum/repeatable_crafting_recipe/cooking/honey_dough
+	name = "Honey dough"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/dough = 1,
+		/obj/item/reagent_containers/food/snacks/spiderhoney/honey = 1,
+	)
+	starting_atom = /obj/item/reagent_containers/food/snacks/spiderhoney/honey
+	attacked_atom = /obj/item/reagent_containers/food/snacks/dough
+	output = /obj/item/reagent_containers/food/snacks/honey_dough
+	required_table = TRUE
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/kneading_alt.ogg'
+	crafting_message = "knead honey into the dough"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/gingerbread_dough
+	name = "Gingerbread dough"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/honey_dough = 1,
+		/obj/item/reagent_containers/powder/herbs = 1,
+	)
+	starting_atom = /obj/item/reagent_containers/powder/herbs
+	attacked_atom = /obj/item/reagent_containers/food/snacks/honey_dough
+	output = /obj/item/reagent_containers/food/snacks/gingerbread_dough
+	required_table = TRUE
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/kneading_alt.ogg'
+	crafting_message = "knead spices into the dough"
+	extra_chance = 100

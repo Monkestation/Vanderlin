@@ -1030,3 +1030,139 @@
 			eat_effect = /datum/status_effect/buff/foodbuff
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
 			qdel(I)
+
+/*	.................   Gingerbread  ................... */
+
+/obj/item/reagent_containers/food/snacks/honey_dough
+	name = "honeydough"
+	desc = "Wasps swarm to it."
+	icon_state = "honeydough"
+	slices_num = 0
+	bitesize = 3
+	slice_batch = FALSE
+	slice_path = /obj/item/reagent_containers/food/snacks/butterdough_slice
+	w_class = WEIGHT_CLASS_NORMAL
+	slice_sound = FALSE
+	rotprocess = SHELFLIFE_EXTREME
+
+/obj/item/reagent_containers/food/snacks/gingerbread_dough
+	name = "Gingerbread dough"
+	desc = "the smell is overwhelming."
+	icon_state = "gingerbreaddough"
+	slices_num = 2
+	bitesize = 3
+	slice_batch = TRUE
+	slice_path = /obj/item/reagent_containers/food/snacks/gingerbreaddough_slice
+	w_class = WEIGHT_CLASS_NORMAL
+	slice_sound = TRUE
+	rotprocess = SHELFLIFE_EXTREME
+
+/obj/item/reagent_containers/food/snacks/gingerbreaddough_slice
+	name = "Gingerbread dough piece"
+	desc = "Eating it will make your tummy hurt."
+	icon_state = "gingerbreaddoughslice"
+	slices_num = 0
+	rotprocess = SHELFLIFE_EXTREME
+	w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/reagent_containers/food/snacks/gingerbreaddough_slice/attackby(obj/item/I, mob/living/user, params)
+	. = ..()
+	if(.)
+		return
+	if(user.mind)
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+	var/found_table = locate(/obj/structure/table) in (loc)
+	if(isturf(loc)&& (found_table))
+		if(istype(I, /obj/item/kitchen/rollingpin))
+			playsound(get_turf(user), 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+			to_chat(user, span_notice("Flattening [src]..."))
+			if(do_after(user, short_cooktime, src))
+				new /obj/item/reagent_containers/food/snacks/flat_gingerbread(loc)
+				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				qdel(src)
+	else
+		to_chat(user, span_warning("Put [src] on a table before working it!"))
+
+/obj/item/reagent_containers/food/snacks/flat_gingerbread
+	name = "Flat gingerbread"
+	desc = "Ready to be cut into shape."
+	icon_state = "gingerbreaddoughflatten"
+	dropshrink = 0.9
+	w_class = WEIGHT_CLASS_NORMAL
+	rotprocess = SHELFLIFE_LONG
+
+/obj/item/reagent_containers/food/snacks/foodbase/raw_man
+	name = "Unbaked Gingerbread man"
+	icon_state = "rawman"
+	dropshrink = 0.8
+	eat_effect = null
+	rotprocess = SHELFLIFE_LONG
+
+/obj/item/reagent_containers/food/snacks/foodbase/raw_astrata
+	name = "Unbaked Gingerbread Solar"
+	icon_state = "rawastrata"
+	dropshrink = 0.8
+	eat_effect = null
+	rotprocess = SHELFLIFE_LONG
+
+/obj/item/reagent_containers/food/snacks/foodbase/raw_noc
+	name = "Unbaked Gingerbread moon"
+	icon_state = "rawnoc"
+	dropshrink = 0.8
+	eat_effect = null
+	rotprocess = SHELFLIFE_LONG
+
+/obj/item/reagent_containers/food/snacks/foodbase/raw_psycross
+	name = "Unbaked Gingerbread psycross"
+	icon_state = "rawpsycross"
+	dropshrink = 0.8
+	eat_effect = null
+	rotprocess = SHELFLIFE_LONG
+
+/obj/item/reagent_containers/food/snacks/bakedman
+	name = "Gingerbread Man"
+	desc = "Some zelous followers of The Ten consider this as Graggarite heresy."
+	icon_state = "bakedman"
+	base_icon_state = "bakedman"
+	dropshrink = 0.8
+	biting = TRUE
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	tastes = list("sweet spices" = 1)
+	faretype = FARE_FINE
+	eat_effect = /datum/status_effect/buff/foodbuff
+
+/obj/item/reagent_containers/food/snacks/bakedastrata
+	name = "Gingerbread Solar"
+	desc = "A perfect shape for a cookie."
+	icon_state = "bakedastrata"
+	base_icon_state = "bakedastrata"
+	dropshrink = 0.8
+	biting = TRUE
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	tastes = list("sweet spices" = 1)
+	faretype = FARE_FINE
+	eat_effect = /datum/status_effect/buff/foodbuff
+
+/obj/item/reagent_containers/food/snacks/bakednoc
+	name = "Gingerbread Moon"
+	desc = "You feel the weregingerbreadvolf awaken in you."
+	icon_state = "bakednoc"
+	base_icon_state = "bakednoc"
+	dropshrink = 0.8
+	biting = TRUE
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	tastes = list("sweet spices" = 1)
+	faretype = FARE_FINE
+	eat_effect = /datum/status_effect/buff/foodbuff
+
+/obj/item/reagent_containers/food/snacks/bakedpsycross
+	name = "Gingerbread Psycross"
+	desc = "A reminder for children that He endures."
+	icon_state = "bakedpsycross"
+	base_icon_state = "bakedpsycross"
+	dropshrink = 0.8
+	biting = TRUE
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	tastes = list("sweet spices" = 1)
+	faretype = FARE_FINE
+	eat_effect = /datum/status_effect/buff/foodbuff
