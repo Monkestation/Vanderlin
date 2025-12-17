@@ -242,6 +242,7 @@
 	density = TRUE
 	opacity = TRUE
 	redstone_structure = TRUE
+	pass_flags_self = PASSSTRUCTURE
 
 /obj/structure/bars/passage/shutter/redstone_triggered(mob/user)
 	if(obj_broken)

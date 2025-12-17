@@ -325,7 +325,7 @@
 	if(mover.pass_flags & pass_flags_self)
 		return TRUE
 	if(mover.throwing && (pass_flags_self & LETPASSTHROW))
-		if(!ismob(mover) || !(pass_flags_self & NOTLETPASSTHROWNMOB))
+		if(!(ismob(mover) || ismobholder(mover)) || !(pass_flags_self & NOTLETPASSTHROWNMOB))
 			return TRUE
 	return !density
 
