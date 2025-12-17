@@ -116,6 +116,7 @@
 				sealed = FALSE
 				consecrated = FALSE
 				icon_state = "casket"
+				return
 		. = ..()
 
 
