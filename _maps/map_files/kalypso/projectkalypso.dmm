@@ -252,7 +252,7 @@
 /area/outdoors)
 "bo" = (
 /obj/structure/fluff/walldeco/vinez/blue,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "bs" = (
 /obj/structure/wild_plant/nospread/potato{
@@ -697,7 +697,7 @@
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "dJ" = (
 /obj/structure/bars,
@@ -1063,7 +1063,7 @@
 /area/outdoors)
 "fw" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "fy" = (
 /mob/living/simple_animal/hostile/retaliate/wolf,
@@ -1542,7 +1542,7 @@
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "hK" = (
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -2212,7 +2212,7 @@
 /area/outdoors)
 "la" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "lb" = (
 /obj/structure/fluff/railing/tall{
@@ -2682,7 +2682,7 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "nu" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "nv" = (
 /obj/structure/flora/grass,
@@ -3159,7 +3159,7 @@
 /obj/effect/decal/cobbleedge/alt{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "pD" = (
 /obj/structure/flora/grass/bush_meagre{
@@ -4453,7 +4453,7 @@
 	dir = 1;
 	pixel_y = 14
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "wE" = (
 /obj/structure/flora/newbranch/leafless{
@@ -5542,7 +5542,7 @@
 /obj/effect/decal/cobblerockedge{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "Cs" = (
 /obj/structure/flora/newtree{
@@ -6396,7 +6396,7 @@
 /turf/open/floor/cobblerock,
 /area/outdoors)
 "Hd" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "He" = (
 /obj/item/reagent_containers/glass/bottle,
@@ -6671,7 +6671,7 @@
 	pixel_y = 10;
 	pixel_x = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "Ih" = (
 /obj/effect/decal/cleanable/debris/stone,
@@ -7632,7 +7632,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "Ns" = (
 /obj/structure/flora/newtree,
@@ -9005,7 +9005,7 @@
 /area/outdoors)
 "UI" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/west,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "UK" = (
 /obj/structure/flora/grass{
@@ -9207,7 +9207,7 @@
 /area/outdoors)
 "VO" = (
 /obj/structure/flora/newtree,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors)
 "VQ" = (
 /turf/open/water/swamp/deep,

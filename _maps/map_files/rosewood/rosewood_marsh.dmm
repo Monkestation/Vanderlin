@@ -55,7 +55,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "am" = (
 /turf/open/floor/tile,
@@ -282,7 +282,7 @@
 /turf/open/floor/naturalstone,
 /area/indoors/mountains)
 "bG" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/mountains)
 "bI" = (
 /obj/structure/flora/tree,
@@ -443,7 +443,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "cW" = (
 /obj/structure/spider/stickyweb,
@@ -952,7 +952,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "fI" = (
 /obj/structure/spider/nest/constructed,
@@ -1016,7 +1016,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "gk" = (
 /obj/effect/decal/cleanable/blood,
@@ -1127,7 +1127,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "gI" = (
 /obj/structure/bed/hay,
@@ -1255,7 +1255,7 @@
 	dir = 1
 	},
 /obj/effect/decal/shadow_floor,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "hi" = (
 /obj/structure/fermentation_keg/distiller,
@@ -1636,7 +1636,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "jn" = (
 /obj/structure/door,
@@ -2046,7 +2046,7 @@
 	dir = 1
 	},
 /obj/effect/decal/shadow_floor,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "mm" = (
 /obj/structure/table/vtable,
@@ -2180,13 +2180,13 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
 "mY" = (
-/turf/open/transparent,
+/turf/open,
 /area/indoors/lich)
 "mZ" = (
 /obj/effect/decal/shadow_floor{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "na" = (
 /obj/structure/fluff/railing/border,
@@ -2227,7 +2227,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "nn" = (
 /obj/machinery/light/fueled/wallfire{
@@ -2280,7 +2280,7 @@
 /area/outdoors/bog)
 "nx" = (
 /obj/effect/landmark/hammer/dev_text,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "ny" = (
 /obj/structure/fluff/railing/wood,
@@ -2354,7 +2354,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "nS" = (
 /obj/structure/stairs/stone{
@@ -3583,7 +3583,7 @@
 /area/outdoors/bog)
 "uY" = (
 /obj/structure/forcefield/strong,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "vb" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -3608,7 +3608,7 @@
 /area/indoors/mountains)
 "vj" = (
 /obj/effect/decal/shadow_floor,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "vl" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -3717,7 +3717,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "vN" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "vO" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -3784,7 +3784,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "wi" = (
 /obj/structure/fermentation_keg/random/beer,
@@ -3822,7 +3822,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "wt" = (
 /obj/structure/table/wood/plain,
@@ -3861,7 +3861,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "wC" = (
 /obj/structure/closet/crate/drawer,
@@ -4044,7 +4044,7 @@
 /area/indoors/lich)
 "xy" = (
 /obj/effect/decal/shadow_floor,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "xz" = (
 /obj/effect/decal/shadow_floor{
@@ -4243,7 +4243,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "yJ" = (
 /turf/closed/mineral/bedrock/cold,
@@ -4424,7 +4424,7 @@
 /area/indoors/lich)
 "zN" = (
 /obj/structure/bridge,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "zQ" = (
 /obj/structure/fluff/railing/border{
@@ -4917,7 +4917,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "Cp" = (
 /obj/structure/table/wood/plain_alt,
@@ -5113,7 +5113,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 5
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "Do" = (
 /obj/structure/chair/stool,
@@ -5377,7 +5377,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 5
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "EM" = (
 /obj/structure/table/wood/plain,
@@ -5480,7 +5480,7 @@
 /area/outdoors/bog)
 "FD" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "FE" = (
 /obj/structure/table/stone_small,
@@ -5650,7 +5650,7 @@
 	dir = 9
 	},
 /obj/effect/decal/shadow_floor,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "Gv" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
@@ -5690,7 +5690,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "GK" = (
 /obj/structure/fermentation_keg/random/beer,
@@ -6574,7 +6574,7 @@
 "LY" = (
 /obj/structure/forcefield/strong,
 /obj/structure/forcefield/strong,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "Ma" = (
 /obj/structure/fluff/railing/border{
@@ -6922,7 +6922,7 @@
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/lich)
 "Oi" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "Oj" = (
 /obj/machinery/light/fueled/wallfire/candle/l{
@@ -7172,7 +7172,7 @@
 	dir = 9
 	},
 /obj/effect/decal/shadow_floor,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "PK" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
@@ -7708,7 +7708,7 @@
 /obj/structure/bridge{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "Ts" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -7999,7 +7999,7 @@
 	dir = 8;
 	icon_state = "borderfall"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "US" = (
 /obj/structure/flora/newtree/snow,
@@ -8056,7 +8056,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/lich)
 "Vj" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
@@ -8206,7 +8206,7 @@
 /turf/open/floor/churchbrick,
 /area/indoors/lich)
 "Wm" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/cave)
 "Wn" = (
 /obj/item/natural/glass/shard,
@@ -8649,7 +8649,7 @@
 /turf/open/floor/church,
 /area/indoors/cave)
 "Zd" = (
-/turf/closed/transparent,
+/turf/closed,
 /area/indoors/lich)
 "Zg" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,

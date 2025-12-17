@@ -189,11 +189,7 @@
 						controller.clear_blackboard_key(future_path_blackboard_key)
 
 				// Update current path - remove steps we've completed
-				var/datum/weakref/used_ref = WEAKREF(controller)
-				if(!(used_ref in falling_back))
-					falling_back |= used_ref
-					falling_back[used_ref] = TRUE
-				if(get_turf(movable_pawn) == next_step || (istype(next_step, /turf/open/transparent) && get_turf(movable_pawn) == GET_TURF_BELOW(next_step)))
+				if(get_turf(movable_pawn) == next_step || (istype(next_step, /turf/open) && get_turf(movable_pawn) == GET_TURF_BELOW(next_step)))
 					controller.movement_path.Cut(1,2)
 					if(length(controller.movement_path))
 						var/turf/double_checked = controller.movement_path[1]

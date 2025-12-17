@@ -43,7 +43,7 @@
 /turf/open/floor/dirt,
 /area/rouge/under/tomb/wilds/ambush)
 "I" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/rouge/under/tomb/wilds)
 "K" = (
 /obj/effect/spawner/map_spawner/treeorbush,

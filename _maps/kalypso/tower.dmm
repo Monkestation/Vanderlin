@@ -89,7 +89,7 @@
 /turf/open/floor/ruinedwood,
 /area/template_noop)
 "ru" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/template_noop)
 "sR" = (
 /obj/structure/table/wood/counter,

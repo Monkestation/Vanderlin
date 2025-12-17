@@ -147,7 +147,7 @@ Sunlight System
 
 //non-weatherproof turfs
 /turf/var/weatherproof = TRUE
-/turf/open/transparent/openspace/weatherproof = FALSE
+/turf/open/openspace/weatherproof = FALSE
 
 /datum/lighting_corner/var/list/sunlight_objects /* list of sunlight objects affecting this corner */
 /datum/lighting_corner/var/sunFalloff = 0 /* smallest distance to sunlight turf, for sunlight falloff */

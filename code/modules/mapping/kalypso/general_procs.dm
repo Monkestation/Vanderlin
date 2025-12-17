@@ -98,7 +98,7 @@ GLOBAL_LIST_EMPTY(flora_blocked_tiles)
 			generate_elevated_terrain(air_turf, biome, temperature, moisture, elevation, relative_height, x, y, env_data)
 		else
 			// This level should be open space
-			air_turf.ChangeTurf(/turf/open/transparent/openspace, flags = CHANGETURF_SKIP)
+			air_turf.ChangeTurf(/turf/open/openspace, flags = CHANGETURF_SKIP)
 
 /proc/generate_mineral_wall_base(turf/T, biome, elevation, x, y, list/env_data)
 	generate_river_terrain(T, env_data, x, y)

@@ -10,7 +10,7 @@
 	var/clawfootstep = null
 	var/heavyfootstep = null
 	var/footstepstealth = FALSE
-	baseturfs = /turf/open/transparent/openspace
+	baseturfs = /turf/open/openspace
 
 	smoothing_groups = SMOOTH_GROUP_OPEN
 

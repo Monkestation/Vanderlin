@@ -4,7 +4,7 @@
 	dir = 4;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "bX" = (
 /obj/structure/fluff/railing/border{
@@ -96,7 +96,7 @@
 /obj/structure/floordoor{
 	redstone_id = "droploot"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "lr" = (
 /turf/open/floor/ruinedwood/spiral,
@@ -106,7 +106,7 @@
 	dir = 1;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "ob" = (
 /obj/structure/table/wood{
@@ -144,14 +144,14 @@
 /turf/open/floor/ruinedwood/spiral,
 /area)
 "qp" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "rF" = (
 /obj/structure/fluff/railing/border{
 	dir = 8;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "sl" = (
 /turf/open/water/ocean/deep,
@@ -174,7 +174,7 @@
 	dir = 4;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "tv" = (
 /obj/structure/table/wood{
@@ -254,7 +254,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Dj" = (
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -286,7 +286,7 @@
 	dir = 4;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Gr" = (
 /obj/structure/fluff/railing/border,
@@ -294,7 +294,7 @@
 	dir = 8;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Gt" = (
 /obj/structure/bed/inn,
@@ -400,7 +400,7 @@
 /obj/structure/floordoor{
 	redstone_id = "droploot"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Lq" = (
 /obj/structure/window,
@@ -423,7 +423,7 @@
 /area)
 "LU" = (
 /obj/structure/fluff/statue/small,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Ml" = (
 /obj/structure/fluff/railing/border{
@@ -457,7 +457,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Th" = (
 /turf/open/floor/carpet/purple,
@@ -483,13 +483,13 @@
 	dir = 5;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Wu" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "Xk" = (
 /obj/structure/fake_machine/mail/r{
@@ -505,7 +505,7 @@
 /area)
 "XI" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 "XS" = (
 /turf/closed/wall/mineral/wooddark,

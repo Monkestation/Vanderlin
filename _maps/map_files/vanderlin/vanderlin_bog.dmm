@@ -2273,7 +2273,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "bnY" = (
 /obj/structure/closet/crate/chest/neu_fancy,
@@ -2561,7 +2561,7 @@
 	dir = 8;
 	icon_state = "border"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "bEP" = (
 /obj/structure/fluff/railing/border{
@@ -2797,7 +2797,7 @@
 /turf/open/floor/wood,
 /area/indoors/ship)
 "bVp" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/shelter/bog)
 "bVB" = (
 /obj/structure/flora/tree,
@@ -3308,7 +3308,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "cHL" = (
 /obj/structure/fluff/railing/wood{
@@ -3325,7 +3325,7 @@
 /area/under/cavewet)
 "cJi" = (
 /obj/structure/bed/inn/double,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "cJS" = (
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
@@ -3889,7 +3889,7 @@
 	dir = 10
 	},
 /obj/machinery/light/fueled/wallfire/candle/lamp,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "dvm" = (
 /obj/structure/fluff/railing/border,
@@ -4084,7 +4084,7 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/outie{
 	dir = 1
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "dIH" = (
 /obj/item/reagent_containers/food/snacks/fish/carp,
@@ -4113,7 +4113,7 @@
 /turf/open/water/bath,
 /area/indoors/town/clocktower)
 "dKv" = (
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "dLa" = (
 /obj/structure/closet/crate/chest/old_crate,
@@ -5236,7 +5236,7 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "fpm" = (
 /obj/structure/rack/shelf/biggest,
@@ -5266,7 +5266,7 @@
 /area/indoors/shelter/bog)
 "fsC" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "fsQ" = (
 /obj/structure/fluff/railing/stonehedge{
@@ -5372,7 +5372,7 @@
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/ring/onyxa,
 /obj/effect/spawner/map_spawner/loot/potion_poisons,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "fyy" = (
 /obj/structure/fluff/railing/stonehedge{
@@ -5732,7 +5732,7 @@
 /area/under/cavewet)
 "fUm" = (
 /obj/item/reagent_containers/food/snacks/fish/clownfish,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cavewet)
 "fUp" = (
 /obj/structure/bookcase/random,
@@ -6704,7 +6704,7 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "hhY" = (
 /obj/structure/bed/sleepingbag/deluxe,
@@ -7083,7 +7083,7 @@
 /obj/structure/bars/pipe{
 	dir = 5
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "hOv" = (
 /obj/effect/decal/cleanable/food/salt,
@@ -7109,7 +7109,7 @@
 /area/indoors/town/clocktower)
 "hQJ" = (
 /obj/effect/waterfall,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "hRu" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -7185,7 +7185,7 @@
 	pixel_x = 0;
 	pixel_y = 9
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "hVU" = (
 /obj/structure/table/church{
@@ -8369,7 +8369,7 @@
 "jwd" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/fluff/wallclock/vampire,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "jwY" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -9318,7 +9318,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
 "kEu" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "kEQ" = (
 /obj/effect/spawner/map_spawner/loot/potion_stats,
@@ -9727,7 +9727,7 @@
 /mob/living/simple_animal/hostile/retaliate/mimic{
 	faction = list("mimic","Undead")
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "lhE" = (
 /obj/structure/flora/rock/water,
@@ -9763,7 +9763,7 @@
 	faction = list("Hostile");
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/mince/fish = 5, /obj/item/alch/viscera = 2)
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cavewet)
 "llo" = (
 /obj/structure/carpet/purple,
@@ -9827,7 +9827,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cavewet)
 "lnq" = (
 /obj/structure/stairs/stone/church{
@@ -10200,7 +10200,7 @@
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "lKi" = (
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cavewet)
 "lKv" = (
 /turf/open/water/ocean/deep,
@@ -10512,7 +10512,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "mjQ" = (
 /obj/structure/window/openclose/reinforced{
@@ -11221,7 +11221,7 @@
 	pixel_x = -17;
 	pixel_y = -18
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "nnx" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -11574,7 +11574,7 @@
 	pixel_x = -17;
 	pixel_y = -18
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "nPg" = (
 /obj/structure/table/wood/crafted,
@@ -12711,7 +12711,7 @@
 /area/indoors/town/magician)
 "pww" = (
 /obj/item/reagent_containers/food/snacks/fish/carp,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cavewet)
 "pwH" = (
 /obj/structure/flora/tree,
@@ -13617,7 +13617,7 @@
 	name = "Shadow of the Past"
 	},
 /obj/structure/fake_machine/camera/left,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "qYb" = (
 /obj/structure/chair/stool/bar,
@@ -14578,7 +14578,7 @@
 	pixel_x = -17;
 	pixel_y = -18
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "smk" = (
 /obj/structure/fluff/walldeco/church/line,
@@ -15633,7 +15633,7 @@
 	dir = 10
 	},
 /obj/structure/fake_machine/camera/right,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "tVD" = (
 /obj/structure/trap/wall_projectile{
@@ -15884,7 +15884,7 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 9
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "ukw" = (
 /obj/structure/fermentation_keg/hagwoodbitter{
@@ -15953,7 +15953,7 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cavewet)
 "upT" = (
 /obj/structure/table/wood/fancy/black,
@@ -17072,7 +17072,7 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 10
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/clocktower)
 "vSt" = (
 /obj/machinery/tanningrack,
@@ -17401,7 +17401,7 @@
 	},
 /area/under/cavewet)
 "woH" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "woO" = (
 /obj/structure/fluff/railing/border{
@@ -17473,7 +17473,7 @@
 /turf/open/floor/ruinedwood/turned,
 /area/ship/topdeck)
 "wzx" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/ship/topdeck)
 "wzP" = (
 /obj/effect/decal/shadow_floor{
@@ -18622,7 +18622,7 @@
 	dir = 8
 	},
 /obj/structure/flora/pillar,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "xUi" = (
 /obj/structure/flora/pillar,

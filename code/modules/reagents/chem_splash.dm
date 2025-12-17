@@ -25,7 +25,7 @@
 		return
 
 	//splash down, not on open spaces.
-	while(istype(epicenter, /turf/open/transparent/openspace))
+	while(istype(epicenter, /turf/open/openspace))
 		var/turf/downcheck = GET_TURF_BELOW(epicenter)
 		if(downcheck)
 			epicenter = downcheck

@@ -296,7 +296,7 @@
 			for (C as anything in T.get_corners(source_turf))
 				corners[C] = 0
 			turfs += T
-			var/turf/open/transparent/O = T
+			var/turf/open/O = T
 			if(istype(O) && light_depth >= 1)
 				var/turf/open/B = GET_TURF_BELOW(T)
 				if(isopenturf(B))
@@ -304,14 +304,14 @@
 						corners[C] = 0
 					turfs += B
 					if(light_depth > 1)
-						if(istype(B, /turf/open/transparent))
+						if(istype(B, /turf/open))
 							B = GET_TURF_BELOW(B)
 							if(isopenturf(B))
 								for(C as anything in B.get_corners(source_turf))
 									corners[C] = 0
 								turfs += B
 						if(light_depth > 2)
-							if(istype(B, /turf/open/transparent))
+							if(istype(B, /turf/open))
 								B = GET_TURF_BELOW(B)
 								if(isopenturf(B))
 									for(C as anything in B.get_corners(source_turf))
@@ -319,7 +319,7 @@
 									turfs += B
 			if(light_height >= 1)
 				var/turf/open/B = GET_TURF_ABOVE(T)
-				if(istype(B, /turf/open/transparent))
+				if(istype(B, /turf/open))
 					for(C as anything in B.get_corners(source_turf))
 						corners[C] = 0
 					turfs += B
