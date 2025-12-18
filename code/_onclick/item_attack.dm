@@ -592,10 +592,30 @@
 /mob/living/proc/simple_limb_hit(zone)
 	if(!zone)
 		return ""
-	if(istype(src, /mob/living/simple_animal))
-		return zone
-	else
-		return "body"
+	return "body"
+
+/mob/living/simple_animal/simple_limb_hit(zone)
+	if(!zone)
+		return ""
+	return zone
+
+// A reusable proc for base quadruped limb zone resolution.
+// Does not include all zones.
+/proc/base_quadruped_limb_hit(zone)
+	switch(zone)
+		if(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS)
+			return "head"
+		if(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND) // front legs
+			return "foreleg"
+		if(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
+			return "leg"
+		if(BODY_ZONE_PRECISE_GROIN)
+			return "tail"
+		if(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG) // back legs
+			return "leg"
+		if(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+			return "foreleg"
+	return zone
 
 /obj/item/proc/funny_attack_effects(mob/living/target, mob/living/user, nodmg)
 	return
