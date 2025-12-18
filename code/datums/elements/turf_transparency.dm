@@ -17,8 +17,8 @@
 	else
 		our_turf.plane = TRANSPARENT_FLOOR_PLANE
 
-	RegisterSignal(target, COMSIG_TURF_MULTIZ_DEL, .proc/on_multiz_turf_del)
-	RegisterSignal(target, COMSIG_TURF_MULTIZ_NEW, .proc/on_multiz_turf_new)
+	RegisterSignal(target, COMSIG_TURF_MULTIZ_DEL, PROC_REF(on_multiz_turf_del))
+	RegisterSignal(target, COMSIG_TURF_MULTIZ_NEW, PROC_REF(on_multiz_turf_new))
 
 	ADD_TRAIT(our_turf, TURF_Z_TRANSPARENT_TRAIT, ELEMENT_TRAIT(type))
 
@@ -30,7 +30,7 @@
 /datum/element/turf_z_transparency/Detach(datum/source)
 	. = ..()
 	var/turf/our_turf = source
-	our_turf.vis_contents.len = 0
+	our_turf.vis_contents.Cut()
 	UnregisterSignal(our_turf, list(COMSIG_TURF_MULTIZ_NEW, COMSIG_TURF_MULTIZ_DEL))
 	REMOVE_TRAIT(our_turf, TURF_Z_TRANSPARENT_TRAIT, ELEMENT_TRAIT(type))
 
@@ -40,16 +40,9 @@
 	if(below_turf) // If we actually have somethign below us, display it.
 		our_turf.vis_contents += below_turf
 	else
-		our_turf.vis_contents.len = 0 // Nuke the list
+		our_turf.vis_contents.Cut() // Nuke the list
 		add_baseturf_underlay(our_turf)
 
-	if(isclosedturf(our_turf)) //Show girders below closed turfs
-		var/mutable_appearance/girder_underlay = mutable_appearance('icons/obj/structures.dmi', "girder", layer = TURF_LAYER-0.01)
-		girder_underlay.appearance_flags = RESET_ALPHA | RESET_COLOR
-		our_turf.underlays += girder_underlay
-		var/mutable_appearance/plating_underlay = mutable_appearance('icons/turf/floors.dmi', "plating", layer = TURF_LAYER-0.02)
-		plating_underlay = RESET_ALPHA | RESET_COLOR
-		our_turf.underlays += plating_underlay
 	return TRUE
 
 /datum/element/turf_z_transparency/proc/on_multiz_turf_del(turf/our_turf, turf/below_turf, dir)
