@@ -68,12 +68,12 @@
 				return
 			playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 			if(!iscarbon(L))
-				L.gib(no_organs=TRUE)
+				L.gib(TRUE,TRUE,TRUE)
 				return
 			var/mob/living/carbon/C = L
 			var/obj/item/bodypart/limb = C.get_bodypart_complex(list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)) || C.get_bodypart(BODY_ZONE_HEAD)
 			if(!limb)
-				C.gib(no_organs=TRUE, safe_gib=TRUE)
+				C.gib(TRUE,TRUE,TRUE,TRUE)
 				return
 			if(limb.dismember())
 				qdel(limb)
