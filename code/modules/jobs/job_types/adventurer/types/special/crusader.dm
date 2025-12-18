@@ -1,7 +1,7 @@
 /datum/job/advclass/pilgrim/rare/crusader
 	title = "Totod Order Emissary"
-	tutorial = "The Crusaders are knights who have pledged their wealth and lands to the Church, \
-	taking up the banner of the Totod Order dedicated to retaking Valoria. \
+	tutorial = "The Crusaders are knights who have pledged their wealth and lands to the church, \
+	taking up the banner of the Totod Order dedicated to retaking the Barrows against the forces of Zizo. \
 	Three cults provide knights for the Order: Astrata, Necra and Ravox. \
 	You were sent to Vanderlin by the Order to get any and all assistance from the faithful for the Crusade."
 	allowed_races = RACES_PLAYER_NONHERETICAL

@@ -23,7 +23,7 @@
 	job_bitflag = BITFLAG_ROYALTY
 
 	exp_type = list(EXP_TYPE_MEDICAL)
-	exp_types_granted  = list(EXP_TYPE_NOBLE, EXP_TYPE_MEDICAL)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_MEDICAL)
 	exp_requirements = list(
 		EXP_TYPE_MEDICAL = 900
 	)
@@ -41,7 +41,7 @@
 	neck = /obj/item/clothing/neck/courtphysician
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/physician
-	beltr = /obj/item/weapon/mace/courtphysician
+	beltr = /obj/item/weapon/mace/cane/courtphysician
 	armor = /obj/item/clothing/shirt/robe/courtphysician
 	ring = /obj/item/clothing/ring/feldsher_ring
 	if(H.gender == FEMALE)
