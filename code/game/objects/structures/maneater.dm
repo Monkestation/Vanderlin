@@ -54,45 +54,29 @@
 			STOP_PROCESSING(SSobj, src)
 			return TRUE
 		return
+	if(world.time < last_eat + 8 SECONDS)
+		return
 	for(var/mob/living/L as anything in buckled_mobs)
-		if(world.time > last_eat + 8 SECONDS)
-			if(L.status_flags & GODMODE)
-				continue
-			last_eat = world.time
-			L.flash_fullscreen("redflash3")
-			playsound(src.loc, pick('sound/vo/mobs/plant/attack (1).ogg','sound/vo/mobs/plant/attack (2).ogg','sound/vo/mobs/plant/attack (3).ogg','sound/vo/mobs/plant/attack (4).ogg'), 100, FALSE, -1)
-			if(iscarbon(L))
-				var/mob/living/carbon/C = L
-				src.visible_message("<span class='danger'>[src] starts to rip apart [C]!</span>")
-				spawn(8 SECONDS)
-					if(C && (C.buckled == src))
-						var/obj/item/bodypart/limb
-						var/list/limb_list = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-						for(var/zone in limb_list)
-							limb = C.get_bodypart(zone)
-							if(limb)
-								playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-								limb.dismember()
-								qdel(limb)
-								return
-						limb = C.get_bodypart(BODY_ZONE_HEAD)
-						if(limb)
-							playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-							limb.dismember()
-							qdel(limb)
-							return
-						limb = C.get_bodypart(BODY_ZONE_CHEST)
-						if(limb)
-							if(!limb.dismember())
-								C.death()
-								C.gib()
-							return
-			else
-				src.visible_message("<span class='danger'>[src] starts to rip apart [L]!</span>")
-				spawn(8 SECONDS)
-					if(L && (L.buckled == src))
-						L.gib()
-						return
+		if(L.status_flags & GODMODE)
+			continue
+		last_eat = world.time
+		L.flash_fullscreen("redflash3")
+		visible_message("<span class='danger'>[src] starts to rip apart [L]!</span>")
+		playsound(src, pick('sound/vo/mobs/plant/attack (1).ogg','sound/vo/mobs/plant/attack (2).ogg','sound/vo/mobs/plant/attack (3).ogg','sound/vo/mobs/plant/attack (4).ogg'), 100, FALSE, -1)
+		spawn(8 SECONDS)
+			if(!(L?.buckled == src))
+				return
+			playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
+			if(!iscarbon(L))
+				L.gib(no_organs=TRUE)
+				return
+			var/mob/living/carbon/C = L
+			var/obj/item/bodypart/limb = C.get_bodypart_complex(list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)) || C.get_bodypart(BODY_ZONE_HEAD)
+			if(!limb)
+				C.gib(no_organs=TRUE, safe_gib=TRUE)
+				return
+			if(limb.dismember())
+				qdel(limb)
 
 /obj/structure/flora/grass/maneater/real/update_icon_state()
 	. = ..()
