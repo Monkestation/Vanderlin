@@ -153,11 +153,11 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	repair_skill = null
 	metalizer_result = null
 
-	/// used to identify a hidden door is here with no checks
+	/// Used for traits that automatically indicate there is a hidden door here.
 	var/accessor_trait
 	/// The perception DC to use this door
 	var/hidden_dc = 10
-	/// Used for traits that automatically indicate there is a hidden door here.
+	/// Does this door respond to open phrases? If so, it also needs to be on a hidden door manager.
 	var/use_phrases = FALSE
 	/// How far this door can be heard from, or hear someone else
 	var/speaking_distance = 1
