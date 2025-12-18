@@ -21,7 +21,6 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	var/open_phrase
 
 /datum/secret_door_manager/New(_id, _accessor_trait, list/_vips, _memory_name, _open_phrase)
-	RegisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN, PROC_REF(on_job_spawn))
 	if(!_id)
 		stack_trace("[src] ([type]) has no ID!")
 		qdel(src)
@@ -30,6 +29,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 		stack_trace("[src] tried to initialize with ID [id] when it has already been added!")
 		qdel(src)
 		return
+	RegisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN, PROC_REF(on_job_spawn))
 	id = _id
 	accessor_trait = _accessor_trait
 	vips = _vips
