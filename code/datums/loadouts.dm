@@ -142,10 +142,6 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 	name = "Shredded Cloak"
 	item_path = /obj/item/clothing/cloak/shredded
 
-/datum/loadout_item/vicious
-	name = "Vicious Cloak"
-	item_path = /obj/item/clothing/cloak/graggar
-
 //SHOES
 
 /datum/loadout_item/babouche
