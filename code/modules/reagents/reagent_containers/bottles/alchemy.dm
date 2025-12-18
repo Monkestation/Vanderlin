@@ -6,22 +6,22 @@
 //////////////////////////
 
 /obj/item/reagent_containers/glass/bottle/healthpot
-	list_reagents = list(/datum/reagent/medicine/healthpot = 50)
+	list_reagents = list(/datum/reagent/medicine/healthpot = 75)
 
 /obj/item/reagent_containers/glass/bottle/stronghealthpot
-	list_reagents = list(/datum/reagent/medicine/stronghealth = 50)
+	list_reagents = list(/datum/reagent/medicine/stronghealth = 75)
 
 /obj/item/reagent_containers/glass/bottle/manapot
-	list_reagents = list(/datum/reagent/medicine/manapot = 50)
+	list_reagents = list(/datum/reagent/medicine/manapot = 75)
 
 /obj/item/reagent_containers/glass/bottle/strongmanapot
-	list_reagents = list(/datum/reagent/medicine/strongmana = 50)
+	list_reagents = list(/datum/reagent/medicine/strongmana = 75)
 
 /obj/item/reagent_containers/glass/bottle/stampot
-	list_reagents = list(/datum/reagent/medicine/stampot = 50)
+	list_reagents = list(/datum/reagent/medicine/stampot = 75)
 
 /obj/item/reagent_containers/glass/bottle/strongstampot
-	list_reagents = list(/datum/reagent/medicine/strongstam = 50)
+	list_reagents = list(/datum/reagent/medicine/strongstam = 75)
 
 /obj/item/reagent_containers/glass/bottle/poison
 	list_reagents = list(/datum/reagent/berrypoison = 15)
@@ -39,13 +39,13 @@
 	list_reagents = list(/datum/reagent/killersice = 15)
 
 /obj/item/reagent_containers/glass/bottle/water
-	list_reagents = list(/datum/reagent/water = 50)
+	list_reagents = list(/datum/reagent/water = 75)
 
 /obj/item/reagent_containers/glass/bottle/antidote
-	list_reagents = list(/datum/reagent/medicine/antidote = 50)
+	list_reagents = list(/datum/reagent/medicine/antidote = 75)
 
 /obj/item/reagent_containers/glass/bottle/diseasecure
-	list_reagents = list(/datum/reagent/medicine/diseasecure = 50)
+	list_reagents = list(/datum/reagent/medicine/diseasecure = 75)
 
 /obj/item/reagent_containers/glass/bottle/vial/strpot
 	list_reagents = list(/datum/reagent/buff/strength = 25)
