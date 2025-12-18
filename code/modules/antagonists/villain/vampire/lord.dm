@@ -28,7 +28,7 @@
 		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
 		return
 
-	var/list/restricted_roles = list(
+	var/list/restricted_roles = typecacheof(list(
 		/datum/job/lord,
 		/datum/job/consort,
 		/datum/job/priest,
@@ -42,7 +42,7 @@
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/templar,
-	)
+	))
 
 	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, no_antags = TRUE, restricted_roles = restricted_roles)
 	var/thralls = rand(2, 3)
