@@ -67,7 +67,7 @@
 		seer.apply_effect(15, EFFECT_KNOCKDOWN)
 		var/target_turf = get_turf(seer)
 		if(get_turf(seer) == get_turf(src))
-			for(var/i in 1 to pick(3, 7))
+			for(var/i in 1 to rand(3, 7))
 				target_turf = get_step(target_turf, pick(ALL_CARDINALS))
 		else
 			for(var/i in 1 to pick(1, 2))

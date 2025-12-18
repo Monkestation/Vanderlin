@@ -48,9 +48,9 @@
 
 /datum/job/artificer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, pick(1,3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, rand(1,3), TRUE)
 
 /datum/outfit/artificer
 	name = "Artificer"
