@@ -439,3 +439,19 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 		sleep(1)
 	if(set_original_dir)
 		AM.setDir(originaldir)
+
+/proc/try_take_stash(obj/structure, mob/living/user, params, retval)
+	if(!isliving(user) || !LAZYLEN(user.mind?.special_items))
+		return retval
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
+	if(!item)
+		return
+	if(!user.Adjacent(structure)) // check post-sleep
+		return
+	var/path2item = user.mind.special_items[item]
+	if(!path2item)
+		return
+	user.mind.special_items -= item
+	var/obj/item/I = new path2item(user.loc)
+	user.put_in_hands(I)
