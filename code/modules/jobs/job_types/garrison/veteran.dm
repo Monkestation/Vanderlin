@@ -323,7 +323,7 @@
 		"Zweihander" = /obj/item/weapon/sword/long/greatsword/zwei, \
 		"Halberd" = /obj/item/weapon/polearm/halberd \
 	)
-	var/weapon_choice = spawned.select_equippable(spawned, weapons, "CHOOSE YOUR WEAPON.", "TAKE UP ARMS")
+	var/weapon_choice = spawned.select_equippable(spawned, weapons, message = "CHOOSE YOUR WEAPON.", title  = "TAKE UP ARMS")
 	switch(weapon_choice)
 		if("Zweihander")
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)

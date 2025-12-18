@@ -4,9 +4,9 @@
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = RACES_PLAYER_ALL
+	spawn_type = /mob/living/carbon/human/species/rousman
 	outfit = /datum/outfit/rousman
 	give_bank_account = FALSE
-
 
 	traits = list(
 		TRAIT_HEAVYARMOR
@@ -14,9 +14,12 @@
 
 /datum/job/rousman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.set_species(/datum/species/rousman)
 	spawned.name = "Rousman"
 	spawned.real_name = "Rousman"
+
+	if(spawned.charflaw)
+		QDEL_NULL(spawned.charflaw)
+
 	spawned.remove_all_languages()
 	spawned.grant_language(/datum/language/common)
 

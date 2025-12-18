@@ -40,16 +40,16 @@
 /datum/job/advclass/bandit/sellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/weapons = list(
-		"Spear & Crossbow" = list(/obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/long/psydon),
-		"Sword & Buckler" = list(/obj/item/weapon/polearm/spear/billhook,  /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow),
+		"Spear & Crossbow" = list(/obj/item/weapon/polearm/spear/billhook,  /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow),
+		"Sword & Buckler" = list(/obj/item/weapon/sword , /obj/item/weapon/shield/tower/buckleriron)
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")
 	switch(weapon_choice)
 		if("Spear & Crossbow")
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/kettle, ITEM_SLOT_HEAD, TRUE)
 		if("Sword & Buckler")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/sallet, ITEM_SLOT_HEAD, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 
 
 /datum/outfit/bandit/sellsword
