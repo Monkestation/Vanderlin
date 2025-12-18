@@ -29,7 +29,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	if(GLOB.secret_door_managers[_id])
 		stack_trace("[src] tried to initialize with ID [id] when it has already been added!")
 		qdel(src)
-		return GLOB.secret_door_managers[id]
+		return
 	id = _id
 	accessor_trait = _accessor_trait
 	vips = _vips
