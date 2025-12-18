@@ -360,7 +360,7 @@
 
 //.................. Bearded Axe ...............//
 /obj/item/weapon/axe/steel/atgervi
-	name = "bearded Axe"
+	name = "bearded axe"
 	desc = "A large axe easily wielded in one hand or two, With a large hooked axe head to tearing into flesh and armor and ripping it away brutally."
 	icon_state = "atgervi_axe"
 	item_state = "atgervi_axe"
