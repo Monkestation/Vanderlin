@@ -65,7 +65,6 @@
 		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
 
 	if(alert("Do you wish to be recognized as a non-foreigner?", "", "Yes", "No") == "Yes")
-		message_admins("REJECT TRIGGER")
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 
 	wretch_select_bounty(spawned)
