@@ -1054,7 +1054,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 
 /obj/item/reagent_containers/food/snacks/gingerbread_dough
-	name = "Gingerbread dough"
+	name = "gingerbread dough"
 	desc = "the smell is overwhelming."
 	icon_state = "gingerbreaddough"
 	slices_num = 2
@@ -1066,7 +1066,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 
 /obj/item/reagent_containers/food/snacks/gingerbreaddough_slice
-	name = "Gingerbread dough piece"
+	name = "gingerbread dough piece"
 	desc = "Eating it will make your tummy hurt."
 	icon_state = "gingerbreaddoughslice"
 	slices_num = 0
@@ -1092,7 +1092,7 @@
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
 
 /obj/item/reagent_containers/food/snacks/flat_gingerbread
-	name = "Flat gingerbread"
+	name = "flat gingerbread"
 	desc = "Ready to be cut into shape."
 	icon_state = "gingerbreaddoughflatten"
 	dropshrink = 0.9
@@ -1100,35 +1100,26 @@
 	rotprocess = SHELFLIFE_LONG
 
 /obj/item/reagent_containers/food/snacks/foodbase/raw_man
-	name = "Unbaked Gingerbread man"
-	icon_state = "rawman"
-	dropshrink = 0.8
-	eat_effect = null
-	rotprocess = SHELFLIFE_LONG
+    name = "unbaked gingerbread man"
+    icon_state = "rawman"
+    dropshrink = 0.8
+    eat_effect = null
+    rotprocess = SHELFLIFE_LONG
 
-/obj/item/reagent_containers/food/snacks/foodbase/raw_astrata
-	name = "Unbaked Gingerbread Solar"
-	icon_state = "rawastrata"
-	dropshrink = 0.8
-	eat_effect = null
-	rotprocess = SHELFLIFE_LONG
+/obj/item/reagent_containers/food/snacks/foodbase/raw_man/astrata
+    name = "unbaked gingerbread sun"
+    icon_state = "rawastrata"
 
-/obj/item/reagent_containers/food/snacks/foodbase/raw_noc
-	name = "Unbaked Gingerbread moon"
-	icon_state = "rawnoc"
-	dropshrink = 0.8
-	eat_effect = null
-	rotprocess = SHELFLIFE_LONG
+/obj/item/reagent_containers/food/snacks/foodbase/raw_man/noc
+    name = "unbaked gingerbread moon"
+    icon_state = "rawnoc"
 
-/obj/item/reagent_containers/food/snacks/foodbase/raw_psycross
-	name = "Unbaked Gingerbread psycross"
-	icon_state = "rawpsycross"
-	dropshrink = 0.8
-	eat_effect = null
-	rotprocess = SHELFLIFE_LONG
+/obj/item/reagent_containers/food/snacks/foodbase/raw_man/psycross
+    name = "unbaked gingerbread psycross"
+    icon_state = "rawpsycross"
 
 /obj/item/reagent_containers/food/snacks/bakedman
-	name = "Gingerbread Man"
+	name = "gingerbread man"
 	desc = "Some zelous followers of The Ten consider this as Graggarite heresy."
 	icon_state = "bakedman"
 	base_icon_state = "bakedman"
@@ -1139,38 +1130,21 @@
 	faretype = FARE_FINE
 	eat_effect = /datum/status_effect/buff/foodbuff
 
-/obj/item/reagent_containers/food/snacks/bakedastrata
-	name = "Gingerbread Solar"
+/obj/item/reagent_containers/food/snacks/bakedman/astrata
+	name = "gingerbread sun"
 	desc = "A perfect shape for a cookie."
 	icon_state = "bakedastrata"
 	base_icon_state = "bakedastrata"
-	dropshrink = 0.8
-	biting = TRUE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
-	tastes = list("sweet spices" = 1)
-	faretype = FARE_FINE
-	eat_effect = /datum/status_effect/buff/foodbuff
 
-/obj/item/reagent_containers/food/snacks/bakednoc
-	name = "Gingerbread Moon"
+/obj/item/reagent_containers/food/snacks/bakedman/noc
+	name = "gingerbread moon"
 	desc = "You feel the weregingerbreadvolf awaken in you."
 	icon_state = "bakednoc"
 	base_icon_state = "bakednoc"
-	dropshrink = 0.8
-	biting = TRUE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
-	tastes = list("sweet spices" = 1)
-	faretype = FARE_FINE
-	eat_effect = /datum/status_effect/buff/foodbuff
 
-/obj/item/reagent_containers/food/snacks/bakedpsycross
-	name = "Gingerbread Psycross"
+/obj/item/reagent_containers/food/snacks/bakedman/psycross
+	name = "gingerbread psycross"
 	desc = "A reminder for children that He endures."
 	icon_state = "bakedpsycross"
 	base_icon_state = "bakedpsycross"
-	dropshrink = 0.8
-	biting = TRUE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
-	tastes = list("sweet spices" = 1)
-	faretype = FARE_FINE
-	eat_effect = /datum/status_effect/buff/foodbuff
+

@@ -358,22 +358,22 @@
 
 /datum/container_craft/oven/bakedastrata
 	hides_from_books = TRUE
-	name = "Gingerbread Solar"
-	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_astrata= 1)
-	output = /obj/item/reagent_containers/food/snacks/bakedastrata
+	name = "gingerbread sun"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_man/astrata= 1)
+	output = /obj/item/reagent_containers/food/snacks/bakedman/astrata
 	cooked_smell = /datum/pollutant/food/biscuit
 
 /datum/container_craft/oven/bakednoc
 	hides_from_books = TRUE
-	name = "Gingerbread Moon"
-	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_noc= 1)
-	output = /obj/item/reagent_containers/food/snacks/bakednoc
+	name = "gingerbread moon"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_man/noc= 1)
+	output = /obj/item/reagent_containers/food/snacks/bakedman/noc
 	cooked_smell = /datum/pollutant/food/biscuit
 
 /datum/container_craft/oven/bakedpsycross
 	hides_from_books = TRUE
-	name = "Gingerbread Psycross"
-	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_psycross= 1)
-	output = /obj/item/reagent_containers/food/snacks/bakedpsycross
+	name = "gingerbread psycross"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/raw_man/psycross= 1)
+	output = /obj/item/reagent_containers/food/snacks/bakedman/psycross
 	cooked_smell = /datum/pollutant/food/biscuit
 

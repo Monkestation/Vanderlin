@@ -102,3 +102,32 @@
 	craft_time = 6 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	extra_chance = 100
+
+	// -------------------------- Gingerbread ------------------------------ //
+
+/datum/repeatable_crafting_recipe/cooking/gingerbreadman
+	abstract_type = /datum/repeatable_crafting_recipe/cooking/gingerbreadman
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/flat_gingerbread = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list("cuts dough into shape...","cut dough into shape...", 'sound/foley/dropsound/food_drop.ogg'),
+	)
+	subtypes_allowed = TRUE
+	starting_atom = /obj/item/weapon/knife
+	attacked_atom = /obj/item/reagent_containers/food/snacks/flat_gingerbread
+	tool_use_time = 1 SECONDS
+	craft_time = 4 SECONDS
+	output_amount = 1
+/datum/repeatable_crafting_recipe/cooking/gingerbreadman/man
+	name = "man"
+	output = /obj/item/reagent_containers/food/snacks/foodbase/raw_man
+/datum/repeatable_crafting_recipe/cooking/gingerbreadman/astrata
+	name = "sun"
+	output = /obj/item/reagent_containers/food/snacks/foodbase/raw_man/astrata
+/datum/repeatable_crafting_recipe/cooking/gingerbreadman/noc
+	name = "moon"
+	output = /obj/item/reagent_containers/food/snacks/foodbase/raw_man/noc
+/datum/repeatable_crafting_recipe/cooking/gingerbreadman/psycross
+	name = "psycross"
+	output = /obj/item/reagent_containers/food/snacks/foodbase/raw_man/psycross
