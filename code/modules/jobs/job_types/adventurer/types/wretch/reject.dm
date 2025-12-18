@@ -52,7 +52,6 @@
 		TRAIT_BEAUTIFUL,
 		TRAIT_DODGEEXPERT,
 		TRAIT_LIGHT_STEP,
-		TRAIT_FOREIGNER
 	)
 
 /datum/job/advclass/wretch/reject/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -66,6 +65,7 @@
 		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
 
 	if(alert("Do you wish to be recognized as a non-foreigner?", "", "Yes", "No") == "Yes")
+		message_admins("REJECT TRIGGER")
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 
 	wretch_select_bounty(spawned)
