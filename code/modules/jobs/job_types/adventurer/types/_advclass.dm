@@ -14,8 +14,9 @@
 	var/list/category_tags = null
 	/// Bypass the class_cat_alloc_attempts limits and always be rolled
 	var/bypass_class_cat_limits = FALSE
-
-
+	/// Should reset STATMOD_JOB, set to FALSE if you want to be additive to parent's stats.
+	/// Doesn't effect skills only stats.
+	var/should_reset_stats = TRUE
 
 /datum/job/advclass/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -145,7 +145,8 @@ SUBSYSTEM_DEF(role_class_handler)
 			else
 				picked_class.title_override = old.title
 
-	SSjob.EquipRank(H, picked_class, H.client)
+	SSjob.EquipRank(H, picked_class, H.client, reset_job_stats = picked_class.should_reset_stats)
+
 	apply_loadouts(H, H.client)
 
 // A dum helper to adjust the class amount, we could do it elsewhere but this will also inform any relevant class handlers open.

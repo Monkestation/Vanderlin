@@ -42,6 +42,8 @@
 
 	category_tags = list(CTAG_ROYALKNIGHT)
 
+	should_reset_stats = FALSE
+
 /datum/outfit/royalknight
 	var/reduced_skill = FALSE
 
@@ -161,6 +163,8 @@
 	outfit = /datum/outfit/royalknight/steam
 
 	category_tags = list(CTAG_ROYALKNIGHT)
+
+	should_reset_stats = FALSE
 
 /datum/outfit/royalknight/steam
 
