@@ -1052,11 +1052,13 @@
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 
+	var/spell_timeout = 3 MINUTES
+
 	// Cancel the next click with 3 minutes timeout
-	source?.click_intercept_time = world.time + 3 MINUTES
+	source?.click_intercept_time = world.time + spell_timeout
 	// This is a failsafe to cancel casting in extreme circimstances that aren't covered here
 	// We need to call cancel_casting
-	auto_cancel_timer = addtimer(CALLBACK(src, PROC_REF(cancel_casting)), 3 MINUTES, TIMER_STOPPABLE)
+	auto_cancel_timer = addtimer(CALLBACK(src, PROC_REF(cancel_casting)), spell_timeout, TIMER_STOPPABLE)
 	source?.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charging.dmi'
 	owner.update_mouse_pointer()
 
@@ -1068,6 +1070,7 @@
 /datum/action/cooldown/spell/proc/try_casting(client/source, atom/_target, turf/location, control, params)
 	SIGNAL_HANDLER
 
+	// Stop the failsafe timer
 	if(auto_cancel_timer)
 		deltimer(auto_cancel_timer)
 
