@@ -87,7 +87,7 @@
 	jobs |= list(user.mind?.assigned_role) // jobs tend to lie, so let's check both.
 
 	var/run_stress = TRUE // by default, we will try and run stress.
-	for(var/datum/job/J as anything in jobs)
+	for(var/datum/job/J in jobs)
 		if(J.parent_job)
 			J = J.parent_job
 
