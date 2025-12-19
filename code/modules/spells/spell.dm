@@ -1049,9 +1049,6 @@
 	// Register here because the mouse up can get triggered before the mouse down otherwise
 	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
 	RegisterSignal(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
-
-	on_start_charge()
-
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 
@@ -1063,6 +1060,7 @@
 	source?.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charging.dmi'
 	owner.update_mouse_pointer()
 
+	on_start_charge()
 	charge_started_at = world.time
 	charge_target_time = get_adjusted_charge_time()
 
@@ -1074,16 +1072,13 @@
 		deltimer(auto_cancel_timer)
 
 	// This can happen
-	if(!source || !charge_started_at)
+	if(!source || !charge_started_at || !can_cast_spell(TRUE))
 		cancel_casting()
 		return
 
 	var/success = world.time >= (charge_started_at + charge_target_time)
-	if(!on_end_charge(success))
+	if(!on_end_charge(success)) // Give them another try if they mess up the timing
 		RegisterSignal(source, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(start_casting))
-		return
-
-	if(!can_cast_spell(TRUE))
 		return
 
 	var/list/modifiers = params2list(params)
