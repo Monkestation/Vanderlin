@@ -764,6 +764,8 @@
 
 /// Cancel casting and all its effects.
 /datum/action/cooldown/spell/proc/cancel_casting()
+	if(QDELETED(src)) // Timer
+		return
 	charged = FALSE
 	end_charging()
 
