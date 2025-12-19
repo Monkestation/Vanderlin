@@ -1,6 +1,6 @@
 /datum/job/advclass/mercenary/zalad
 	title = "Red Sands"
-	tutorial = "A cutthroat from the western countries, you've headed into foreign lands to make even greater coin than you had prior."
+	tutorial = "A cutthroat from Zalad lands, you've headed into foreign lands to make even greater coin than you had prior."
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
 		SPEC_ID_RAKSHARI,\

@@ -1,7 +1,7 @@
 /datum/job/hand
 	title = "Hand"
 	tutorial = "You owe everything to your liege. \
-	You are the most trusted of the ruler- their ommer, in fact. \
+	You are the most trusted of the ruler- their sibling, in fact. \
 	You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, \
 	something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. \
 	You have killed more men with those lips than any blademaster could ever claim to.\

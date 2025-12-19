@@ -300,7 +300,7 @@
 				owner.Unconscious(15)
 				to_chat(owner, span_userdanger("Your cursed heritage weakens you!"))
 			if(3)
-				owner.blur_eyes(8)
+				owner.set_eye_blur_if_lower(16 SECONDS)
 				to_chat(owner, span_userdanger("The curse clouds your vision!"))
 			if(4)
 				if(ishuman(owner))

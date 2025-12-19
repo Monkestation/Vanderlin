@@ -70,7 +70,7 @@
 	M.dizziness += 1
 	M.adjust_energy(-25)
 	if(M.stamina > 75)
-		M.drowsyness += 2
+		M.adjust_drowsiness(4 SECONDS)
 	else
 		M.adjust_stamina(15)
 	..()

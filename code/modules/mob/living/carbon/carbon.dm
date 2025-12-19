@@ -607,7 +607,7 @@
 		if(stat != DEAD)
 			playsound(src, pick('sound/vo/throat.ogg','sound/vo/throat2.ogg','sound/vo/throat3.ogg'), 100, FALSE)
 
-	blur_eyes(10)
+	set_eye_blur_if_lower(20 SECONDS)
 
 	var/turf/T = get_turf(src)
 	if(!blood)

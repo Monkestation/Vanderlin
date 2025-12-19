@@ -135,14 +135,15 @@
 	var/sleep_chance = 1
 	if(owner.m_intent == MOVE_INTENT_RUN)
 		sleep_chance += 2
-	if(owner.drowsyness)
+	var/drowsy = !!owner.has_status_effect(/datum/status_effect/drowsiness)
+	if(drowsy)
 		sleep_chance += 3
 	if(prob(sleep_chance))
 		to_chat(owner, "<span class='warning'>I fall asleep.</span>")
 		owner.Sleeping(60)
-	else if(!owner.drowsyness && prob(sleep_chance * 2))
+	else if(!drowsy && prob(sleep_chance * 2))
 		to_chat(owner, "<span class='warning'>I feel tired...</span>")
-		owner.drowsyness += 10
+		owner.adjust_drowsiness(20 SECONDS)
 
 /datum/brain_trauma/severe/monophobia
 	name = "Monophobia"

@@ -65,8 +65,6 @@
 	var/choice = spawned.select_equippable(spawned, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
 	if(!choice)
 		return
-		//Yeah this is copied from how lieutenant does it which in turn was copied from how rk does it lmao
-	var/shield_type = null
 	switch(choice)
 		if("Dagger")
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
