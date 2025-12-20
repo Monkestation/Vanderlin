@@ -1,1 +1,0 @@
-{"author":"Somniworld","delete-after":true,"changes":[{"qol":"Adds a description to nocshades and the confessor mask regarding night-vision + the ability to put nocshades in the confessor's mask."},{"bugfix":"Fixes the Noc-Shades not updating your nightvision when turned on/off or taken off."}]}

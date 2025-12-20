@@ -279,6 +279,7 @@
 #define COMSIG_TRY_STORAGE_CAN_INSERT "storage_can_equip"				//(obj/item/insertion_candidate, mob/user, silent) - returns bool
 #define COMSIG_STORAGE_CLOSED "storage_close"
 #define COMSIG_STORAGE_REMOVED "storage_item_removed"
+#define COMSIG_STORAGE_ADDED "storage_item_added"
 
 // ~storage component
 ///from base of datum/component/storage/can_user_take(): (mob/user)
@@ -333,3 +334,12 @@
 #define COMSIG_ITEM_ATTACK_EFFECT "item_attack_effect"
 #define COMSIG_ITEM_ATTACK_EFFECT_SELF "item_attack_effect_self"
 #define COMSIG_DOOR_OPENED "door_open"
+
+/// send this signal to add /datum/component/vis_radius to a list of mobs or one mob: (mob/mob_or_mobs)
+#define COMSIG_SHOW_RADIUS "show_radius"
+/// send this signal to remove /datum/component/vis_radius to a mobs: ()
+#define COMSIG_HIDE_RADIUS "hide_radius"
+/// send this signal to remove a list of tip ids(use tip_names as tip ids): (/list/tip_ids_to_remove)
+#define COMSIG_TIPS_REMOVE "comsig_tip_remove"
+///used incase we care about a tracker dying
+#define COMSIG_LIVING_TRACKER_REMOVED "tracker_removed"

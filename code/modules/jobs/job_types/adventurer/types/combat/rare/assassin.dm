@@ -7,6 +7,7 @@
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 2
 	inherit_parent_title = TRUE //this prevents advjob from being set back to "Assassin" in equipme
+	antags_can_pick = FALSE //Assassins are antagonists by default, so they can't be chosen if you're already an antagonist.
 
 /datum/outfit/adventurer/assassin/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -243,20 +244,32 @@
 			H.adjust_skillrank(/datum/skill/combat/crossbows, -2, TRUE)
 		if("Servant") // You think you're safe? No keys to the keep though. Hopefully less people pick Noble with this in mind.
 			H.job = "Servant"
-			H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+			if(H.gender == MALE)
+				shirt = /obj/item/clothing/shirt/undershirt/formal
+				if(H.age == AGE_OLD)
+					pants = /obj/item/clothing/pants/trou/formal
+				else
+					pants = /obj/item/clothing/pants/trou/formal/shorts
+				belt = /obj/item/storage/belt/leather/suspenders
+				shoes = /obj/item/clothing/shoes/boots
+			else
+				armor = /obj/item/clothing/shirt/dress/maid/servant
+				shoes = /obj/item/clothing/shoes/simpleshoes
+				belt = /obj/item/storage/belt/leather/cloth_belt
+				pants = /obj/item/clothing/pants/tights/colored/white
+				cloak = /obj/item/clothing/cloak/apron/maid
+				head = /obj/item/clothing/head/maidband
+			backl = /obj/item/storage/backpack/satchel
+			// uh oh! we can't use a different belt! it'll blow our cover!
+			backpack_contents = list(/obj/item/recipe_book/cooking = 1,
+				/obj/item/reagent_containers/glass/bottle/poison = 1,
+				/obj/item/weapon/knife/dagger/steel/profane = 1,
+				/obj/item/lockpick = 1)
+			beltl = /obj/item/storage/belt/pouch/coins/poor
+			beltr = /obj/item/weapon/knife/villager
+			H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE) // gets them high enough to dye and do actual servant stuff
 			H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/cooking, 3, TRUE) // Trustworthy poisoner.
-			shoes = /obj/item/clothing/shoes/simpleshoes
-			pants = /obj/item/clothing/pants/tights/colored/uncolored
-			shirt = /obj/item/clothing/shirt/undershirt/colored/uncolored
-			belt = /obj/item/storage/belt/leather/assassin
-			beltl = /obj/item/storage/belt/pouch/coins/poor
-			backl = /obj/item/storage/backpack/satchel
-			if(H.gender == MALE)
-				armor = /obj/item/clothing/armor/leather/vest/colored/black
-			else
-				cloak = /obj/item/clothing/cloak/apron
-			backpack_contents = list(/obj/item/recipe_book/cooking = 1)
 			REMOVE_TRAIT(H, TRAIT_FOREIGNER, TRAIT_GENERIC)
 		if("Faceless One") //Sacrifice the disguise and marked for valid for even more drip.
 			head = /obj/item/clothing/head/faceless

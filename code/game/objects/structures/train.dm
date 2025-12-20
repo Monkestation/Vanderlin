@@ -64,7 +64,7 @@
 	say(span_notice("[departing_mob == user ? "Out of their own volition, " : "Ushered by [user], "][departing_mob] is departing from [SSmapping.config.map_name]."))
 	cryo_mob(departing_mob)
 
-/proc/cryo_mob(mob/departing_mob)
+/proc/cryo_mob(mob/departing_mob, admin = FALSE)
 	if(QDELETED(departing_mob))
 		return "Tried to cryo a deleted mob!"
 	GLOB.actors_list -= departing_mob.mobid // mob cryod - get him outta here.
@@ -86,6 +86,7 @@
 	else
 		J.adjust_current_positions(-1)
 	qdel(departing_mob)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_HUMAN_ENTER_CRYO, departing_mob, admin)
 	return "[mob_name] successfully cryo'd!"
 
 /obj/structure/train/carriage //A temporary subform of the train that is just a carriage	name = "train"

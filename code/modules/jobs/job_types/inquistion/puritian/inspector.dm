@@ -3,7 +3,7 @@
 	title = "Inquisitor"
 	tutorial = "The head of the Ordo Venatari, your lessons are of a subtle touch and a light step. A silver dagger in the right place at the right time is all that is needed. Preparation is key, and this is something you impart on your students. Be always ready, be always waiting, and always be vigilant."
 	outfit = /datum/outfit/inquisitor/inspector
-
+	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/adept)
 	category_tags = list(CTAG_PURITAN)
 
 	traits = list(
@@ -16,6 +16,8 @@
 		TRAIT_PURITAN,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
+		TRAIT_RECOGNIZED,
 	)
 
 	jobstats = list(

@@ -33,7 +33,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	job_bitflag = BITFLAG_ROYALTY
 
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING, EXP_TYPE_LEADERSHIP)
-	exp_types_granted  = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 1200,
 		EXP_TYPE_NOBLE = 900,
@@ -111,10 +111,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	H.change_stat(STATKEY_PER, 2)
 	H.change_stat(STATKEY_LCK, 5)
 	if(H.gender == MALE)
-		pants = /obj/item/clothing/pants/tights/colored/black
-		shirt = /obj/item/clothing/shirt/undershirt/colored/black
+		pants = /obj/item/clothing/pants/trou/formal
+		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		armor = /obj/item/clothing/armor/gambeson/arming
-		shoes = /obj/item/clothing/shoes/boots
+		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak
 		if(H.dna?.species)
 			if(H.dna.species.id == SPEC_ID_HUMEN)
@@ -122,7 +122,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	else
 		pants = /obj/item/clothing/pants/tights/colored/random
 		armor = /obj/item/clothing/shirt/dress/royal
-		shoes = /obj/item/clothing/shoes/shortboots
+		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak/ladycloak
 		wrists = /obj/item/clothing/wrists/royalsleeves
 

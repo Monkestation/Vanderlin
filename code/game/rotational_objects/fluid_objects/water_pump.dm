@@ -151,7 +151,7 @@
 	add_overlay(water_spray)
 	if(isopenspace(pipe_turf))
 		while(isopenspace(pipe_turf))
-			pipe_turf = get_step_multiz(pipe_turf, DOWN)
+			pipe_turf = GET_TURF_BELOW(pipe_turf)
 
 	var/datum/reagent/faux_reagent = new pumping_from.water_reagent
 	faux_reagent.on_aeration(rotations_per_minute, get_turf(src))

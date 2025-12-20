@@ -4,6 +4,7 @@
 	icon = 'icons/roguetown/items/cooking.dmi'
 	icon_state = "platter"
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	possible_item_intents = list(/datum/intent/use, /datum/intent/food)
 	w_class = WEIGHT_CLASS_NORMAL
 	///How many things fit on this plate?
 	var/max_items = 2
@@ -15,8 +16,47 @@
 	var/placement_offset = -15
 	grid_width = 32
 	grid_height = 32
+	var/max_fork_usages = 5
+	var/fork_usages = 0
+	var/dirty = FALSE
+	var/cleaned = FALSE
+	var/start_dirty = FALSE
 
-/obj/item/plate/attackby(obj/item/I, mob/user, params)
+/obj/item/plate/dirty
+	dirty = TRUE
+
+/obj/item/plate/Initialize(mapload, ...)
+	. = ..()
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/plate/attackby(obj/item/I, mob/living/carbon/user, params)
+	if(!length(contents) && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
+		if(dirty)
+			var/obj/item/natural/cloth/cloth_check = I
+			if(cloth_check.reagents.total_volume < 0.1)
+				to_chat(user, span_warning("[cloth_check] is too dry to clean with!"))
+				return
+			var/dirtyWater = cloth_check.reagents.get_reagent_amount(/datum/reagent/water/gross)
+			if(dirtyWater)
+				to_chat(user, span_warning("[cloth_check] water is too dirty to clean anything with it!"))
+				return
+			to_chat(user, ("You start cleaning the [src] with the [cloth_check]"))
+			if(do_after(user, 2 SECONDS, src))
+				cloth_check.reagents.remove_all(1)
+				dirty = FALSE
+				update_appearance(UPDATE_OVERLAYS)
+				AddComponent(/datum/component/particle_spewer/sparkle)
+				user.nobles_seen_servant_work()
+				fork_usages = 0
+				cleaned = TRUE
+				to_chat(user, ("You cleaned the [src]"))
+				return
+		else
+			to_chat(user, span_notice("This platter is already clean."))
+			return
+	if(length(contents) && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
+		to_chat(user, span_warning("You can't clean the [src] while it has food on it!."))
+		return
 	if(item_flags & IN_STORAGE)
 		to_chat(user, span_warning("I cannot reach [src]."))
 		return
@@ -26,6 +66,7 @@
 	if(contents.len >= max_items)
 		to_chat(user, span_notice("[src] can't fit more items!"))
 		return
+
 	var/list/modifiers = params2list(params)
 	//Center the icon where the user clicked.
 	if(!LAZYACCESS(modifiers, ICON_X) || !LAZYACCESS(modifiers, ICON_Y))
@@ -42,6 +83,8 @@
 	if(!iscarbon(A))
 		return
 	if(!contents.len)
+		return
+	if(user.used_intent.type != /datum/intent/food)
 		return
 	var/obj/item/object_to_eat = contents[1]
 	A.attackby(object_to_eat, user)
@@ -109,6 +152,16 @@
 			scattered_item.forceMove(drop_location())
 		user.visible_message(span_notice("[user] empties [src] on the floor."))
 
+/obj/item/plate/examine(mob/user)
+	. = ..()
+	desc = initial(desc)
+	if(dirty)
+		desc += span_boldwarning("\nThis platter is filthy... absolutely disgusting.")
+	else if(cleaned)
+		desc += span_notice("\nThis platter was cleaned recently!")
+	else
+		desc += "\nThis platter looks properly stored and clean enough."
+
 /obj/item/plate/clay
 	name = "clay platter"
 	desc = "A fragile platter made from fired clay. Probably shouldn't throw it."
@@ -132,6 +185,7 @@
 	icon_state = "platter_copper"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	max_fork_usages = 7
 
 /obj/item/plate/pewter
 	name = "pewter platter"
@@ -139,6 +193,7 @@
 	icon_state = "platter_tin"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	max_fork_usages = 7
 
 /obj/item/plate/silver
 	name = "silver platter"
@@ -148,6 +203,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 12
 	smeltresult = /obj/item/ingot/silver
+	max_fork_usages = 9
 
 /obj/item/plate/silver/Initialize(mapload)
 	. = ..()
@@ -161,6 +217,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 20
 	smeltresult = /obj/item/ingot/gold
+	max_fork_usages = 11
 
 /obj/item/plate/jade
 	name = "joapstone platter"
@@ -169,6 +226,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
+	max_fork_usages = 11
 
 /obj/item/plate/onyxa
 	name = "onyxa platter"
@@ -177,6 +235,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 40
+	max_fork_usages = 11
 
 /obj/item/plate/shell
 	name = "shell platter"
@@ -185,6 +244,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 20
+	max_fork_usages = 11
 
 /obj/item/plate/rose
 	name = "rosellusk platter"
@@ -193,6 +253,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 25
+	max_fork_usages = 11
 
 /obj/item/plate/amber
 	name = "petriamber platter"
@@ -201,6 +262,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
+	max_fork_usages = 11
 
 /obj/item/plate/opal
 	name = "opaloise platter"
@@ -209,6 +271,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 90
+	max_fork_usages = 11
 
 /obj/item/plate/coral
 	name = "aoetal platter"
@@ -217,6 +280,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 70
+	max_fork_usages = 11
 
 /obj/item/plate/turq
 	name = "ceruleabaster platter"
@@ -225,16 +289,53 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 85
+	max_fork_usages = 11
 
-/obj/item/plate/tray
+/obj/item/tray
 	name = "tray"
 	desc = "Best used when hosting for banquets or drunken taverns."
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "tray"
-	max_items = 6
-	grid_width = 64
-	grid_height = 32
+	force = 5
+	throwforce = 10
+	throw_speed = 3
+	throw_range = 5
+	w_class = WEIGHT_CLASS_BULKY
 
-/obj/item/plate/tray/psy
+/obj/item/tray/psy
 	name = "tray"
 	icon_state = "tray_psy"
+
+/obj/item/tray/Initialize(mapload, ...)
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/grid/tray)
+
+/obj/item/tray/attack(mob/living/M, mob/living/user)
+	..()
+	// Drop all the things. All of them.
+	var/list/obj/item/oldContents = contents.Copy()
+	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_QUICK_EMPTY)
+
+	// Make each item scatter a bit
+	for(var/obj/item/I in oldContents)
+		if(I)
+			do_scatter(I)
+
+	if(prob(10))
+		M.Paralyze(4 SECONDS)
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/tray/proc/do_scatter(obj/item/I)
+	if(I)
+		for(var/i in 1 to rand(1, 2))
+			var/xOffset = rand(-16, 16)  // Adjust the range as needed
+			var/yOffset = rand(-16, 16)  // Adjust the range as needed
+			I.x = xOffset
+			I.y = yOffset
+
+			sleep(rand(2, 4))
+
+/obj/item/plate/update_overlays()
+	. = ..()
+	if(dirty)
+		. += mutable_appearance(icon, "dirty_platter")

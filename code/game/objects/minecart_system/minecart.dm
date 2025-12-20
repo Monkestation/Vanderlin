@@ -16,6 +16,8 @@
 	var/momentum = 0
 	///the id we just travelled to
 	var/last_travelled_to = ""
+	///do we have a hopper attached?
+	var/hopper_mode = FALSE
 
 /obj/structure/closet/crate/miningcar/Initialize(mapload)
 	. = ..()
@@ -49,6 +51,16 @@
 	. = ..()
 	if(!on_rails || momentum <= 0)
 		return
+
+	if(hopper_mode)
+		for(var/turf/turf in range(1, src))
+			if(locate(/obj/structure/roller) in get_turf(turf))
+				continue
+			for(var/obj/item/item in turf.contents)
+				if(item.anchored)
+					continue
+				item.forceMove(src)
+				visible_message(span_notice("[src] hopper up [item]."))
 
 	// Handling running OVER people
 	for(var/mob/living/smacked in loc)

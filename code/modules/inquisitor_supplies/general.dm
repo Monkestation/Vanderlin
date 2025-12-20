@@ -73,14 +73,15 @@
 	for(var/i in 1 to 2)
 		new /obj/item/rope/chain(src)
 
-/datum/inqports/supplies/collar
-	name = "3 Collars of Servitude Alongside Key"
-	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/collar
+/datum/inqports/supplies/adeptset
+	name = "3 Sets of Adept Equipment Alongside Key"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/adeptset
 	marquescost = 8
 
-/obj/structure/closet/crate/chest/inqcrate/supplies/collar/populate_contents()
+/obj/structure/closet/crate/chest/inqcrate/supplies/adeptset/populate_contents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/neck/gorget/explosive(src)
+		new /obj/item/clothing/face/facemask/silver(src) ///Silver masks added for lore reasons.
 	new /obj/item/collar_detonator(src)
 
 /datum/inqports/supplies/redpotions

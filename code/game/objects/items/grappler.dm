@@ -150,9 +150,9 @@ Reel teleports the attached atom to the grabbed turf.
 	var/turf/last_step
 	switch(state)
 		if(GRAPPLER_ZUP)
-			last_step = get_step_multiz(Tu, UP)
+			last_step = GET_TURF_ABOVE(Tu)
 		if(GRAPPLER_ZDOWN)
-			last_step = get_step_multiz(Tu, DOWN)
+			last_step = GET_TURF_BELOW(Tu)
 		if(GRAPPLER_NOZ)
 			last_step = Tu
 	var/success = FALSE

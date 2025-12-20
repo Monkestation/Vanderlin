@@ -982,7 +982,7 @@
 	var/turf/curloc = get_turf(src)
 	if(TT.target_turf && curloc)
 		if(TT.target_turf.z > curloc.z)
-			var/turf/above = get_step_multiz(curloc, UP)
+			var/turf/above = GET_TURF_ABOVE(curloc)
 			if(istype(above, /turf/open/transparent/openspace))
 				forceMove(above)
 	if(spin)
@@ -1416,6 +1416,8 @@
 
 	for(var/lt in H.languages)
 		var/datum/language/langtype = lt
+		if(!ispath(langtype))
+			langtype = text2path(langtype)
 		if(!can_speak_in_language(langtype))
 			continue
 

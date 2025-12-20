@@ -21,7 +21,8 @@
 		/datum/language/thievescant,
 		/datum/language/orcish,
 		/datum/language/deepspeak,
-		/datum/language/undead
+		/datum/language/undead,
+		/datum/language/halfling
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)
@@ -58,10 +59,7 @@
 	modifies_speech = TRUE
 
 /obj/item/organ/tongue/fish/handle_speech(datum/source, list/speech_args)
-	var/static/regex/fishtongue_s = new("s", "g")
-	var/static/regex/fishtongue_S = new("S", "g")
-	var/static/regex/fishtongue_z = new("z", "g")
-	var/static/regex/fishtongue_Z = new("Z", "g")
+	var/static/regex/fishtongue_sibilants = regex(@"([sz])", "gi")
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(!message)
 		return
@@ -71,10 +69,7 @@
 		return
 
 	if(message[1] != "*")
-		message = fishtongue_s.Replace(message, "sss")
-		message = fishtongue_S.Replace(message, "SSS")
-		message = fishtongue_z.Replace(message, "zzz")
-		message = fishtongue_Z.Replace(message, "ZZZ")
+		message = fishtongue_sibilants.Replace(message, "$1$1$1") // triple the letter
 	speech_args[SPEECH_MESSAGE] = message
 
 /obj/item/organ/tongue/fly
@@ -222,11 +217,7 @@
 	modifies_speech = TRUE
 
 /obj/item/organ/tongue/snail/handle_speech(datum/source, list/speech_args)
-	var/new_message
 	var/message = speech_args[SPEECH_MESSAGE]
-	for(var/i in 1 to length(message))
-		if(findtext("ABCDEFGHIJKLMNOPWRSTUVWXYZabcdefghijklmnopqrstuvwxyz", message[i])) //Im open to suggestions
-			new_message += message[i] + message[i] + message[i] //aaalllsssooo ooopppeeennn tttooo sssuuuggggggeeessstttiiiooonsss
-		else
-			new_message += message[i]
-	speech_args[SPEECH_MESSAGE] = new_message
+	var/static/regex/stretch_regex = regex(@"(\l)", "g") // every letter, case-insensitive, return match in group 1
+	stretch_regex.Replace(message, "$1$1$1") // triple every letter
+	speech_args[SPEECH_MESSAGE] = stretch_regex.Replace(message, "$1$1$1") // triple every letter

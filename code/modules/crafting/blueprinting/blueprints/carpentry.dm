@@ -175,8 +175,7 @@
 	craftdiff = 1
 
 /datum/blueprint_recipe/carpentry/wooden_stairs_down/check_craft_requirements(mob/user, turf/T, obj/structure/blueprint/blueprint)
-	var/turf/partner = get_step_multiz(get_turf(blueprint), DOWN)
-	partner = get_step(partner, turn(blueprint.blueprint_dir, 180))
+	var/turf/partner = get_step_multiz(get_turf(blueprint), turn(blueprint.blueprint_dir, 180)|DOWN)
 	if(!isopenturf(partner))
 		to_chat(user, span_warning("Need an openspace at the turf below!"))
 		return FALSE
@@ -488,4 +487,14 @@
 		/obj/item/natural/fibers = 2
 	)
 	craftdiff = 1
+
+/datum/blueprint_recipe/carpentry/dryclothes
+	name = "Clothline"
+	desc = "It can dry clothes well."
+	result_type = /obj/structure/dryclothes
+	required_materials = list(
+		/obj/item/grown/log/tree/small = 2,
+		/obj/item/rope = 2
+	)
+	craftdiff = 0
 

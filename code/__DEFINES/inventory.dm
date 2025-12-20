@@ -130,7 +130,7 @@
 #define HEAD_EXCEPT_MOUTH	(HEAD | NOSE | EYES | EARS | HAIR)
 #define HEAD_NECK	(HEAD | MOUTH | NOSE | EYES | EARS | HAIR | NECK)
 #define BELOW_HEAD	(CHEST | GROIN | VITALS | ARMS | HANDS | LEGS | FEET)
-#define BELOW_CHEST	(GROIN | VITALS | LEGS | FEET) //for water
+#define BELOW_CHEST	(GROIN | LEGS | FEET) //for water
 #define FULL_BODY	(FULL_HEAD | NECK | BELOW_HEAD)
 
 //defines for the index of hands

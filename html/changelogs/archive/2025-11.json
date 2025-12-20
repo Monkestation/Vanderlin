@@ -714,5 +714,152 @@
                 "rscadd": "Adds Extremist Psydonism."
             }
         ]
+    },
+    "2025-11-24": {
+        "Somniworld": [
+            {
+                "qol": "Adds a description to nocshades and the confessor mask regarding night-vision + the ability to put nocshades in the confessor's mask."
+            },
+            {
+                "bugfix": "Fixes the Noc-Shades not updating your nightvision when turned on/off or taken off."
+            },
+            {
+                "bugfix": "The Oratorium reliquary menu no longer is French"
+            },
+            {
+                "rscadd": "Grants Necran clergy a new T2 miracle : Locate corpse, which allows them to find bodies, though said body may be a deadite."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "New Mercenary: Elvish Housecarl"
+            }
+        ],
+        "Gatsby229": [
+            {
+                "rscadd": "Adds throat slitting"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscdel": "Longer Week is disabled unless an admin re-enables it for the time being."
+            },
+            {
+                "qol": "Removed the timelock from the tomb of Matthios"
+            }
+        ]
+    },
+    "2025-11-25": {
+        "KevinfromHP": [
+            {
+                "bugfix": "Admin Communal Triumph Disabling"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "needing to click on extremist to see the lore primer stuff"
+            },
+            {
+                "bugfix": "The Citywatchmen Lieutenant got their Halt verb"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "map": "Daftmarsh re-enabled."
+            },
+            {
+                "map": "Daftmarsh inquisiton updated."
+            },
+            {
+                "map": "Daftmarsh has merchant landmarks."
+            },
+            {
+                "map": "Daftmarsh has clinic apprentices (2)."
+            },
+            {
+                "map": "Daftmarsh has a meat hook in a new basement room."
+            },
+            {
+                "bugfix": "Vanderlin areas."
+            },
+            {
+                "rscadd": "Inquisition imports spawn from the hermes they are bought at. (yes the pope/whatever shoved a crate in there)"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "rscdel": "Removes Forest Brawler by blasting him into the sun forever this time. He returned to his home planet. Fuck off."
+            }
+        ]
+    },
+    "2025-11-26": {
+        "wgtjunior743": [
+            {
+                "admin": "Admin Player Panel search based on the players parent job if they have one."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "balance": "Removed bleed mod from crit weakness/resistance"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Re-added the ability for deadites to see Zizoites (Of the Cabal)."
+            }
+        ]
+    },
+    "2025-11-27": {
+        "Draggeru": [
+            {
+                "map": "Unfuck Rosewood so it works"
+            }
+        ]
+    },
+    "2025-11-29": {
+        "wgtjunior743": [
+            {
+                "rscadd": "Makes the description of stress events visible for both positive and negative."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "balance": "Steelhearted added to dungeoneer"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "The adept's silver mask may now have it's little prongs retracted via right click."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Remove case sensitivity from the call"
+            }
+        ]
+    },
+    "2025-11-30": {
+        "snowyseshi": [
+            {
+                "rscadd": "Added amulet of Zizo and gave it to drow knight and squire."
+            },
+            {
+                "image": "Zizo Amulet"
+            },
+            {
+                "bugfix": "drow squire not getting his knife skill"
+            },
+            {
+                "rscadd": "Added foreigner trait to inquisition"
+            },
+            {
+                "rscadd": "Added icon to absolve and weep"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "balance": "Caps Grenzelhoft Mercenary to 2, due to his musket."
+            }
+        ]
     }
 }

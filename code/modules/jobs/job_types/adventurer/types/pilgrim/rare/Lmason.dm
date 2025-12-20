@@ -8,7 +8,7 @@
 	outfit = /datum/outfit/adventurer/grandmastermason
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	total_positions = 1
-	roll_chance = 15
+	roll_chance = 0
 	apprentice_name = "Mason Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE

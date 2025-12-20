@@ -507,7 +507,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		switch(subject?.patron.type)
 			if(/datum/patron/inhumen/matthios, /datum/patron/inhumen/zizo, /datum/patron/inhumen/graggar,
 			   /datum/patron/inhumen/baotha, /datum/patron/godless/godless, /datum/patron/godless/autotheist,
-			   /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/rashan)
+			   /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/rashan,
+			   /datum/patron/godless/galadros)
 				is_correct = TRUE
 
 	// Check excommunication
@@ -534,8 +535,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 	// Handle rejections
 	if(is_duplicate || is_selfreport)
-		qdel(accusation.paired)
-		qdel(accusation)
+		QDEL_NULL(accusation.paired) // do this before the paper so it isn't cleared
+		QDEL_NULL(accusation)
 		visible_message(span_warning("[user] sends something."))
 		playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 
@@ -869,6 +870,15 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			everyhermes.inqlock()
 
 	if(href_list["buy"])
+		var/list/spawnable = list()
+		for(var/turf/turf as anything in get_adjacent_open_turfs(get_turf(src)))
+			if(turf.is_blocked_turf(TRUE, src))
+				continue
+			spawnable += turf
+
+		if(!length(spawnable))
+			return
+
 		var/path = text2path(href_list["buy"])
 		var/datum/inqports/PA = GLOB.inqsupplies[path]
 
@@ -880,14 +890,10 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			coin_loaded = FALSE
 			update_appearance()
 		playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
-		var/list/turfs = list()
-		var/area/A = GLOB.areas_by_type[/area/indoors/inq/import]
-		for(var/turf/T in A)
-			turfs += T
-		var/turf/T = pick(turfs)
-		var/pathi = pick(PA.item_type)
-		playsound(T, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
-		new pathi(get_turf(T))
+
+		var/obj/bought = new PA.item_type(pick(spawnable))
+		if(isitem(bought))
+			usr.put_in_hands(bought, FALSE)
 
 	return display_marquette(usr)
 

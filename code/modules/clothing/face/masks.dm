@@ -339,10 +339,29 @@
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 100
+	var/cross_retracted = 0 // Does the silver mask has it's 3 little spuds retracted or not. Used for toggling.
 
 /obj/item/clothing/face/facemask/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/face/facemask/silver/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	if(!cross_retracted)
+		icon_state = "silvermask_rimless"
+		cross_retracted = 1
+		playsound(user, 'sound/items/indexer_shut.ogg', 65, TRUE)
+	else
+		icon_state = "silvermask"
+		cross_retracted = 0
+		playsound(user, 'sound/items/indexer_open.ogg', 65, TRUE)
+	update_appearance(UPDATE_ICON)
+	if(loc == user && ishuman(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_head()
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/clothing/face/facemask/shadowfacemask
 	name = "anthraxi war mask"

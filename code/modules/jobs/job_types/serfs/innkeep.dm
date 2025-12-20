@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = -10
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONEXOTIC
@@ -23,7 +22,6 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
-
 
 /datum/outfit/innkeep/pre_equip(mob/living/carbon/human/H)
 	..()

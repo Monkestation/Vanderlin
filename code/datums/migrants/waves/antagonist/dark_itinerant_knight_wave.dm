@@ -53,6 +53,7 @@
 	belt = /obj/item/storage/belt/leather/steel
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/weapon/sword/long/greatsword/zizo
+	wrists = /obj/item/clothing/neck/psycross/zizo
 
 /datum/migrant_role/dark_itinerant_squire
 	name = "Underling Squire"
@@ -76,7 +77,7 @@
 
 	skills = list(
 		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives,
+		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/bows = 2,
 		/datum/skill/combat/crossbows = 2,
 		/datum/skill/combat/wrestling = 1,
@@ -106,6 +107,7 @@
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	backr = /obj/item/storage/backpack/satchel
+	neck = /obj/item/clothing/neck/psycross/zizo
 
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,

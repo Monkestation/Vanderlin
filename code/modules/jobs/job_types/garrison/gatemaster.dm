@@ -23,7 +23,7 @@
 	job_bitflag = BITFLAG_GARRISON
 
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_LIVING)
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300,
 		EXP_TYPE_GARRISON = 300
@@ -46,7 +46,7 @@
 /datum/job/advclass/gatemaster
 	inherit_parent_title = TRUE
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/gatemaster/gatemaster_whip
 	title = "Chainguard Gatemaster"

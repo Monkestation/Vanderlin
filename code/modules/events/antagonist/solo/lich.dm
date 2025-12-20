@@ -24,9 +24,9 @@
 	antag_datum = /datum/antagonist/lich
 
 	restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Priest",
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
 	)
 
 

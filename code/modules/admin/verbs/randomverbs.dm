@@ -156,7 +156,7 @@
 	if(!M)
 		return
 	var/message_to_admins = span_adminnotice("<b> [key_name(usr)] has sent ([M.name]/[M.key]):</b> to cryo. <BR>")
-	var/message_to_admin_user = span_notice(cryo_mob(M))
+	var/message_to_admin_user = span_notice(cryo_mob(M, TRUE))
 
 	to_chat(src, message_to_admin_user)
 	log_admin(message_to_admins)
@@ -856,7 +856,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	target.visible_message(target, span_danger("[target] clutches at [target.p_their()] chest!"))
 	target.emote("breathgasp", forced = TRUE)
 	shake_camera(target, 1, 3)
-	target.blur_eyes(40)
+	target.set_eye_blur_if_lower(80 SECONDS)
 	var/stuffy = list("ZIZO GRABS MY WEARY HEART!","ARGH! MY HEART BEATS NO MORE!","NO... MY HEART HAS BEAT IT'S LAST!","MY HEART HAS GIVEN UP!","MY HEART BETRAYS ME!","THE METRONOME OF MY LIFE STILLS!")
 	if(custom_message)
 		to_chat(target, span_danger("[custom_message]"))

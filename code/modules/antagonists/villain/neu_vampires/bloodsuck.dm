@@ -88,16 +88,13 @@
 							victim.adjustBruteLoss(-50, TRUE)
 							victim.adjustFireLoss(-50, TRUE)
 							return
-						else
-							victim.blood_volume = 0
 					if(ishuman(victim) && !victim.clan)
 						if(victim.stat != DEAD)
-							to_chat(src, "<span class='warning'>This sad sacrifice for your own pleasure affects something deep in your mind.</span>")
-							AdjustMasquerade(-1)
-							victim.death()
+							to_chat(src, "<span class='warning'>Your victim faints from the excessive draining.</span>")
+							victim.SetUnconscious(50 SECONDS)
 					if(!ishuman(victim))
 						if(victim.stat != DEAD)
-							victim.death()
+							victim.SetUnconscious(50 SECONDS)
 		else // Don't larp as a vampire, kids.
 			to_chat(src, span_warning("I'm going to puke..."))
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
@@ -121,7 +118,7 @@
 	log_combat(src, victim, "drank blood from ")
 
 	if(ishuman(victim) && mind)
-		if(clan_position?.can_assign_positions && victim.bloodpool <= 150)
+		if(clan_position?.can_assign_positions && victim.bloodpool <= 150 && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
 			if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
 				to_chat(src, span_warning("I decide [victim] is unworthy."))
 			else

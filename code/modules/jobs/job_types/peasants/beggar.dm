@@ -11,7 +11,6 @@
 	faction = FACTION_TOWN
 	total_positions = 15
 	spawn_positions = 15
-	min_pq = -100
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 
@@ -60,6 +59,7 @@
 	H.adjust_skillrank(/datum/skill/misc/climbing, pick(2,3,4,5), TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2,3), TRUE) // Street-fu
 	H.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2,3), TRUE)
+	H.adjust_skillrank(/datum/skill/craft/alchemy, pick(1,2,3), TRUE)
 	H.base_fortune = rand(1, 20)
 	H.recalculate_stats(FALSE)
 	if(prob(5))

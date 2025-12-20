@@ -39,7 +39,7 @@
 		return name_override
 	if(face_name)
 		if(id_name && (id_name != face_name))
-			return "Unknown [(pronouns == SHE_HER) ? "Woman" : "Man"]"
+			return "Unknown [(gender == FEMALE) ? "Woman" : "Man"]"
 		return face_name
 	if(id_name)
 		return id_name
@@ -160,12 +160,12 @@
 
 /// Fully randomizes everything in the character.
 // Reflect changes in [datum/preferences/proc/randomise_appearance_prefs]
-/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_patreon = TRUE)
+/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_donator = TRUE)
 	if(!dna)
 		return
 
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_patreon))]
+		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_donator))]
 		set_species(new rando_race(), FALSE)
 
 	var/datum/species/species = dna.species

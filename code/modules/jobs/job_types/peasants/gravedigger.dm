@@ -11,7 +11,6 @@
 	faction = FACTION_TOWN
 	total_positions = 3
 	spawn_positions = 3
-	min_pq = -10
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONHERETICAL
@@ -20,7 +19,7 @@
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 	job_bitflag = BITFLAG_CHURCH
 
-	exp_types_granted  = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
+	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
 /datum/outfit/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -33,6 +32,8 @@
 	beltl = /obj/item/storage/keyring/gravetender
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	backr = /obj/item/weapon/shovel
+	if(H.age == AGE_OLD)
+		l_hand = /obj/item/weapon/mace/cane/necran
 
 	if(H.patron != /datum/patron/divine/necra)
 		H.set_patron(/datum/patron/divine/necra)

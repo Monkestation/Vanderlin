@@ -1154,6 +1154,7 @@
 "ban" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/face/cigarette/pipe/westman,
+/obj/item/servant_bell/lord,
 /turf/open/floor/carpet/red,
 /area/indoors/town/manor)
 "baZ" = (
@@ -3381,6 +3382,10 @@
 	},
 /obj/item/alch/herb/rosa{
 	pixel_x = 6
+	},
+/obj/item/servant_bell/lord{
+	pixel_x = 4;
+	pixel_y = 15
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/manor)
@@ -5911,21 +5916,6 @@
 /area/under/cavewet)
 "fKF" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
-/obj/item/paper/confession,
 /obj/item/natural/feather,
 /obj/item/natural/feather,
 /obj/item/natural/feather,
@@ -8335,6 +8325,10 @@
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/grass/cold,
 /area/outdoors/rtfield/safe)
+"hKX" = (
+/obj/structure/dryclothes,
+/turf/open/floor/grass/cold,
+/area/outdoors/rtfield/safe)
 "hLw" = (
 /obj/structure/door/window{
 	name = "Tailor"
@@ -9621,6 +9615,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/smithy)
+"jdw" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/water/cleanshallow,
+/area/outdoors/rtfield/safe)
 "jdN" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass/cold,
@@ -10652,6 +10650,14 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/under/tomb/indoors/church)
+"kgf" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/servant_bell,
+/obj/item/servant_bell,
+/obj/item/servant_bell,
+/obj/item/servant_bell,
+/turf/open/floor/ruinedwood/turned,
+/area/under/town/basement)
 "kgq" = (
 /obj/effect/decal/carpet,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -15392,6 +15398,7 @@
 /area/indoors/town)
 "otw" = (
 /obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/servant_bell/lord,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
 "otH" = (
@@ -16095,6 +16102,7 @@
 /area/under/town/basement)
 "pax" = (
 /obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/servant_bell/lord,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/town/basement)
 "pbj" = (
@@ -17421,6 +17429,7 @@
 "qiO" = (
 /obj/structure/closet/crate/drawer,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/servant_bell/lord,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/manor)
 "qjq" = (
@@ -20412,6 +20421,7 @@
 /obj/item/book/bibble,
 /obj/item/book/law,
 /obj/item/key/lord,
+/obj/item/servant_bell/lord,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor)
 "thj" = (
@@ -22031,6 +22041,7 @@
 /area/indoors/town/clocktower)
 "uHa" = (
 /obj/structure/closet/crate/drawer,
+/obj/item/servant_bell/lord,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/manor)
 "uHn" = (
@@ -22275,6 +22286,9 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
+"uRz" = (
+/turf/open/water/cleanshallow,
+/area/outdoors/rtfield/safe)
 "uRD" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt,
@@ -125520,7 +125534,7 @@ sDf
 dRO
 iqp
 mos
-aRq
+kgf
 trh
 xSJ
 xQF
@@ -171595,7 +171609,7 @@ nse
 iJC
 iJC
 iJC
-iJC
+hKX
 jMd
 eJr
 cgE
@@ -171794,9 +171808,9 @@ gio
 iJC
 iJC
 nse
-iJC
-iJC
-iJC
+hKX
+uRz
+uRz
 iJC
 tLB
 dnx
@@ -171997,8 +172011,8 @@ iJC
 iJC
 iJC
 ivY
-nkN
-iJC
+jdw
+uRz
 jMd
 jMd
 tLB

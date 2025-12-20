@@ -9,7 +9,6 @@
 		SPEC_ID_TIEFLING,\
 	)
 	outfit = /datum/outfit/adventurer/barbarian
-	min_pq = 0
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 

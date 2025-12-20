@@ -20,7 +20,7 @@
 	traits = list(TRAIT_MEDIUMARMOR)
 	languages = list(/datum/language/oldpsydonic)
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 5
+	total_positions = 2
 
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 

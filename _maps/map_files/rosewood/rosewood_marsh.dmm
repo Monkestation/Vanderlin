@@ -831,10 +831,7 @@
 /turf/open/floor/tile/masonic/single,
 /area/indoors/lich)
 "fc" = (
-/obj/structure/dungeon_entry/center{
-	pixel_x = -48;
-	pixel_y = 0
-	},
+/obj/structure/dungeon_entry,
 /turf/closed/mineral/bedrock/cold,
 /area/outdoors/bog)
 "fd" = (
@@ -5088,7 +5085,7 @@
 /area/indoors/lich)
 "Di" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/gem/black,
+/obj/item/gem/onyxa,
 /obj/item/gem/red,
 /obj/item/gem/red,
 /obj/item/coin/gold/pile,
@@ -7428,7 +7425,7 @@
 /area/indoors/cave)
 "Rs" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/clothing/armor/cuirass/elven,
+/obj/item/clothing/armor/cuirass/rare/elven,
 /obj/item/clothing/head/helmet/sallet/elven,
 /turf/open/floor/twig,
 /area/indoors/mountains)

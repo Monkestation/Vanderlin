@@ -84,6 +84,7 @@
 			meal_properties()
 			bitesize = initial(bitesize)
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.nobles_seen_servant_work()
 	return ..()
 
 /obj/item/reagent_containers/food/snacks/cooked/herbsteak
@@ -435,4 +436,5 @@
 			tastes = list("spicy birdmeat" = 2)
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.nobles_seen_servant_work()
 	return ..()

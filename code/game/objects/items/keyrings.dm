@@ -259,7 +259,7 @@
 	keys = list(/obj/item/key/dungeon, /obj/item/key/manor, /obj/item/key/walls, /obj/item/key/atarms)
 
 /obj/item/storage/keyring/butler
-	keys = list(/obj/item/key/manor, /obj/item/key/guest)
+	keys = list(/obj/item/key/manor, /obj/item/key/guest, /obj/item/key/atarms)
 
 /obj/item/storage/keyring/jester
 	keys = list(/obj/item/key/manor, /obj/item/key/atarms, /obj/item/key/walls)

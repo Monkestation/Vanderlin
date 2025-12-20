@@ -115,7 +115,7 @@
 	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/armor/leather/vest/colored/black
-	color = CLOTHING_DARK_INK
+	color = CLOTHING_SOOT_BLACK
 
 /obj/item/clothing/armor/leather/vest/colored/innkeep // repath to correct padded vest some day
 	name = "padded vest"
@@ -129,7 +129,7 @@
 	icon_state = "winterjacket"
 	detail_tag = "_detail"
 	color = CLOTHING_WHITE
-	detail_color = CLOTHING_SOOT_BLACK
+	detail_color = CLOTHING_DARK_INK
 	uses_lord_coloring = LORD_PRIMARY
 
 //................ Jacket ............... //	- Has a small storage space
@@ -140,10 +140,7 @@
 
 	body_parts_covered = COVERAGE_SHIRT
 	item_weight = 2.2
-
-/obj/item/clothing/armor/leather/jacket/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
 /obj/item/clothing/armor/leather/jacket/dropped(mob/living/carbon/human/user)
 	..()
@@ -216,6 +213,24 @@
 	sellprice = VALUE_LEATHER_ARMOR_LORD
 
 	body_parts_covered = COVERAGE_SHIRT
+
+//................ Silk Jacket ............... //
+
+/obj/item/clothing/armor/leather/jacket/tailcoat
+	name = "tailcoat"
+	desc = "A finely-sewn tailcoat often worn by those on the brink of the upper echelons of Astratan caste."
+	icon_state = "butlercoat"
+	item_state = "butlercoat"
+	detail_tag = "_detail"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_maids.dmi'
+	detail_color = CLOTHING_DARK_INK
+	slot_flags = ITEM_SLOT_ARMOR
+	armor = ARMOR_PADDED
+	allowed_ages = ALL_AGES_LIST
+
+/obj/item/clothing/armor/leather/jacket/tailcoat/lord
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	uses_lord_coloring = LORD_SECONDARY
 
 //................ Hand´s Coat ............... //
 /obj/item/clothing/armor/leather/jacket/hand

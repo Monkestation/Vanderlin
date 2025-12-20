@@ -13,6 +13,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/steward
 	give_bank_account = 100
@@ -22,7 +23,7 @@
 	job_bitflag = BITFLAG_ROYALTY
 
 	exp_type = list(EXP_TYPE_LIVING)
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)

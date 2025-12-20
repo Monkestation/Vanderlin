@@ -68,7 +68,7 @@
 						splash_holder.my_atom = src
 						splash_holder.add_reagent(reagent, FLOOR(input.water_pressure * 0.5, 1))
 					splash_holder.reaction(mob, TOUCH, 1)
-				pipe_turf = get_step_multiz(pipe_turf, DOWN)
+				pipe_turf = GET_TURF_BELOW(pipe_turf)
 		if(istype(pipe_turf, /turf/open/water))
 			var/turf/open/water/water = pipe_turf
 			if(water.mapped)

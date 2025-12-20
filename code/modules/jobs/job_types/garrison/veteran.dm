@@ -17,13 +17,13 @@
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
-
+	cmode_music = "sound/music/cmode/towner/CombatVeteran.ogg"
 	advclass_cat_rolls = list(CTAG_VETERAN = 20)
 	give_bank_account = 35
 	can_have_apprentices = FALSE
 	job_bitflag = BITFLAG_GARRISON
 	exp_type = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
-	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 	exp_requirements = list(
 		EXP_TYPE_ADVENTURER = 300,
 		EXP_TYPE_COMBAT = 1500
@@ -45,7 +45,7 @@
 
 /datum/job/advclass/veteran
 	inherit_parent_title = TRUE
-	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/veteran/battlemaster
 	title = "Veteran Battlemaster"
@@ -252,7 +252,7 @@
 /datum/outfit/vet/merc/pre_equip(mob/living/carbon/human/H)
 	neck = /obj/item/clothing/neck/gorget
 	wrists = /obj/item/clothing/wrists/bracers
-	shirt = /obj/item/clothing/shirt/grenzelhoft // You do NOT get the BLACKSTEEL CUIRASS because yours BROKE & I hate you. Go on a personal quest to replace it or something.
+	shirt = /obj/item/clothing/shirt/grenzelhoft // You do NOT get the BLACKSTEEL CUIRASS because you're BROKE & I hate you. Go on a personal quest to replace it or something.
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/cuirass/iron
 	pants = /obj/item/clothing/pants/grenzelpants
@@ -339,7 +339,6 @@
 		TRAIT_STEELHEARTED,
 	)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 	outfit = /datum/outfit/vet/fist
 
 /datum/outfit/vet/fist

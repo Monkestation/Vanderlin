@@ -17,7 +17,7 @@
 	else
 		key = key_holder:key
 
-	// patreon triumph increase
+	// donator triumph increase
 	if((key_is_donator(key) || ckey_is_donator(ckey)) && !override_bonus && (amount > 0))
 		amount *= 1.5
 

@@ -271,7 +271,13 @@
 				if(iscarbon(M) && M != user)
 					user.adjust_stamina(rand(1,3) * spam_penalty)
 					var/mob/living/carbon/C = M
-					if(get_location_accessible(C, BODY_ZONE_PRECISE_NECK))
+					var/obj/item/clothing/neck/neck_armor = C.wear_neck
+					var/throat_protected = FALSE
+					if(neck_armor)
+						throat_protected = (neck_armor.armor_class != ARMOR_CLASS_NONE)
+					if(C.head && istype(C.head, /obj/item/clothing/head/helmet/heavy/necked))
+						throat_protected = TRUE
+					if(!throat_protected)
 						if(prob(23))
 							C.emote("choke")
 						var/choke_damage = user.STASTR * 0.75 // this is too busted

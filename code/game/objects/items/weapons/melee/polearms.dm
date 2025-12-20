@@ -523,6 +523,13 @@
 	axe_cut = 10
 	sellprice = 30
 
+/obj/item/weapon/polearm/halberd/bardiche/ancient
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	name = "bardiche"
+	desc = "A grand axe of northern design, renowned for easily chopping off limbs clean with brutal strength."
+	icon_state = "ancient_bardiche"
+
 /obj/item/weapon/polearm/halberd/bardiche/dendor
 	name = "summer scythe"
 	desc = "Summer's verdancy runs through the head of this scythe. All the more to sow."

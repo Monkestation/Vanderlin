@@ -40,7 +40,7 @@
 
 /datum/ai_behavior/fishing/setup(datum/ai_controller/controller, target_key)
 	. = ..()
-	var/atom/target = controller.blackboard[target_key]
+	var/turf/open/target = controller.blackboard[target_key]
 	if(QDELETED(target))
 		return FALSE
 	if(!isopenspace(target) && !istype(target, /turf/open/water))

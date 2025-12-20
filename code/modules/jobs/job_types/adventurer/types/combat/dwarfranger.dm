@@ -5,10 +5,9 @@
 	protect dwarfish settlements from wild beasts and sell their notes to the cartographers."
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/adventurer/dranger
-	min_pq = 0
 	category_tags = list(CTAG_ADVENTURER)
 
-	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
 
 /datum/outfit/adventurer/dranger/pre_equip(mob/living/carbon/human/H)
 	..()

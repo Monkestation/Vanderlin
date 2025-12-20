@@ -227,3 +227,17 @@
 
 	prefs.safe_transfer_prefs_to(new_human)
 	new_human.ckey = ckey
+
+/client/proc/jump_to_test_area()
+	set name = "Jump to Test Area"
+	set desc = ""
+	set category = "GameMaster"
+
+	if(!holder)
+		return
+
+	var/turf/warp_place = pick(GLOB.admin_warp)
+	if(!warp_place)
+		return
+
+	usr.forceMove(warp_place)

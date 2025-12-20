@@ -3,7 +3,7 @@
 	title = "Ordinator"
 	tutorial = "The head of the Ordo Benetarus, your lessons are the most brutal of them all. Through adversity and challenge, your students will learn what it means to stand in Psydon’s name, unwavering and unblinking. Your body as hard as steel, your skills tempered through battles unending, every monster you’ve faced has fallen before you. Your students march to their doom, but with your lessons, they may yet emerge shaped in Psydon’s image, and your own."
 	outfit = /datum/outfit/inquisitor/ordinator
-
+	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/adept)
 	category_tags = list(CTAG_PURITAN)
 
 	skills = list(
@@ -30,6 +30,8 @@
 		TRAIT_INQUISITION,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
+		TRAIT_RECOGNIZED,
 	)
 
 /datum/job/advclass/puritan/ordinator/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -46,11 +48,7 @@
 	switch(gear_choice)
 		if("Covenant And Creed (Broadsword + Shield)")
 			spawned.put_in_hands(new /obj/item/weapon/sword/long/broadsword/psy/relic(get_turf(spawned)), TRUE)
-			spawned.put_in_hands(new /obj/item/paper/inqslip/arrival/inq(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/metal/psy, ITEM_SLOT_BACK_R, TRUE)
-			var/annoyingbag = spawned.get_item_by_slot(ITEM_SLOT_BACK_L)
-			qdel(annoyingbag)
-			spawned.equip_to_slot_or_del(new /obj/item/storage/keyring/inquisitor, ITEM_SLOT_BACK_L, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/shields, 4, 4, TRUE)
 			if(spawned.age == AGE_OLD)
