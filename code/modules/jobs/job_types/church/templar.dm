@@ -87,6 +87,11 @@
 			var/choice = spawned.select_equippable(spawned, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
 			if(!choice)
 				return
+			switch(choice)
+				if("Heartstring (Rapier)")
+					spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+				if("Close Caress (Knuckles)")
+					spawned.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		if(/datum/patron/divine/ravox)
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
@@ -103,6 +108,11 @@
 			var/choice = spawned.select_equippable(spawned, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
 			if(!choice)
 				return
+			switch(choice)
+				if("DepthSeeker (Spear)")
+					spawned.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+				if("Barotrauma (Katars)")
+					spawned.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		if(/datum/patron/divine/xylix)
 			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
