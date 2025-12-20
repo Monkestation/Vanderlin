@@ -105,9 +105,9 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/ravox)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			var/sword_skill = pick(1, 3)
-			var/whip_skill = pick(1, 3)
-			var/axe_skill = pick(0, 1)
+			var/sword_skill = rand(1,3)
+			var/whip_skill = rand(1,3)
+			var/axe_skill = rand(0,1)
 			spawned.adjust_skillrank(/datum/skill/combat/swords, sword_skill, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, whip_skill, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, axe_skill, TRUE)
