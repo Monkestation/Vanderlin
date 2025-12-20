@@ -133,6 +133,7 @@
 #include "code\__DEFINES\procpath.dm"
 #include "code\__DEFINES\profile.dm"
 #include "code\__DEFINES\projectiles.dm"
+#include "code\__DEFINES\pronouns.dm"
 #include "code\__DEFINES\putrid.dm"
 #include "code\__DEFINES\qdel.dm"
 #include "code\__DEFINES\radial_defines.dm"

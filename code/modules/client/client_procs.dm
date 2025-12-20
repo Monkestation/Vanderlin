@@ -136,11 +136,13 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(!holder)
 			return
 		var/title = href_list["id"]
+		var/author = href_list["author_ckey"]
 		if(!title)
 			return
-		if(alert("Are you sure you want to delete the book '[title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
-			if(SSlibrarian.del_player_book(title))
-				message_admins("[key_name_admin(src)] has deleted player made book called: '[title]'")
+		var/real_title = url_decode(title)
+		if(alert("Are you sure you want to delete the book '[real_title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
+			if(SSlibrarian.del_player_book(title, author))
+				message_admins("[key_name_admin(src)] has deleted player made book called: '[real_title]' by [author]")
 				manage_books()
 
 	if(href_list["show_book"])

@@ -321,5 +321,35 @@
                 "bugfix": "a getting up bug"
             }
         ]
+    },
+    "2025-12-19": {
+        "KevinfromHP": [
+            {
+                "bugfix": "Player book library tweaks"
+            }
+        ]
+    },
+    "2025-12-20": {
+        "Rockslp": [
+            {
+                "balance": "Removed the bonus damage from Bearded Axe and lowers the defense value to make sense, leaving the greater weapon length due to the small log in the crafting recipe"
+            },
+            {
+                "spellcheck": "Uppercase for Bearded Axe in the smithing menu."
+            },
+            {
+                "code_imp": "Moved the Bearded Axe to axes.dm"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Antags can no longer roll roundstart or midround antag"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Throwing/Shooting through bars."
+            }
+        ]
     }
 }

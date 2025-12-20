@@ -28,33 +28,31 @@
 		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
 		return
 
-	var/list/restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Hand",
-		"Captain",
-		"Prince",
-		"Priest",
-		"Merchant",
-		"Forest Warden",
-		"Inquisitor",
-		"Absolver",
-		"Confessor",
-		"Sacrestants",
-		"Adept",
-		"Royal Knight",
-		"Templar",
-		"Assassin",
-	)
+	var/list/restricted_roles = typecacheof(list(
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
+	))
 
-	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, restricted_roles = restricted_roles)
+	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, no_antags = TRUE, restricted_roles = restricted_roles)
 	var/thralls = rand(2, 3)
 
 	candidates -= owner.current
 
+	if(!length(candidates))
+		return
+
 	for(var/i = 1 to thralls)
-		if(!length(candidates))
-			return
 		var/mob/living/carbon/human/human = pick_n_take(candidates)
 		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
 		human.mind.add_antag_datum(new_antag)
