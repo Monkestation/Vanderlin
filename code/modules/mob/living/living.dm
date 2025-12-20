@@ -811,6 +811,12 @@
 	set waitfor = FALSE
 	var/timer = 2
 
+	if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
+		var/fail_resist = resist_grab()
+		if(fail_resist)
+			set_resting(TRUE, silent = TRUE)
+			return
+
 	if(iscarbon(src))
 		var/mob/living/carbon/getter_upper = src
 		var/obj/item/clothing/armor/got_armor = getter_upper.get_item_by_slot(ITEM_SLOT_ARMOR) //grabs the item in your armorslot
@@ -832,11 +838,6 @@
 		if(body_position == LYING_DOWN)
 			set_resting(TRUE, silent = TRUE)
 		return
-
-	if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
-		var/fail_resist = resist_grab()
-		if(fail_resist)
-			return
 
 	set_body_position(STANDING_UP)
 	set_lying_angle(0)

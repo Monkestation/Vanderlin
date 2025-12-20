@@ -844,6 +844,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	var/dat = "<table style='border-collapse: separate; border-spacing: 0 10px; width: 100%;'>"
 	dat += "<tr>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Title</th>"
+	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Player Author</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Author</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Category</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Actions</th>"
@@ -857,11 +858,12 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 		dat += "<tr>"
 		dat += "<td style='padding: 12px 15px;'>[book["book_title"]]</td>"
+		dat += "<td style='padding: 12px 15px;'>[book["author_ckey"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["author"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["category"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>"
 		dat += "<a href='?src=[REF(src)];show_book=1;id=[url_encode(encoded_title)]' style='margin-right: 10px;'>View</a>"
-		dat += "<a href='?src=[REF(src)];delete_book=1;id=[url_encode(encoded_title)]'>Delete</a>"
+		dat += "<a href='?src=[REF(src)];delete_book=1;author_ckey=[book["author_ckey"]];id=[url_encode(encoded_title)]'>Delete</a>"
 		dat += "</td>"
 		dat += "</tr>"
 

@@ -21,18 +21,19 @@
 	weight = 6
 
 	restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Hand",
-		"Captain",
-		"Prince",
-		"Priest",
-		"Inquisitor",
-		"Absolver",
-		"Confessor",
-		"Sacrestants",
-		"Adept",
-		"Assassin",
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
 	)
 
 /datum/round_event_control/antagonist/solo/rebel/valid_for_map()
