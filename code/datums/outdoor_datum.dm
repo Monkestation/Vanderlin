@@ -95,8 +95,10 @@ Sunlight System
 	for(T in view(CEILING(GLOBAL_LIGHT_RANGE, 1), source_turf))
 		if(T.opacity) /* get_corners used to do opacity checks for arse */
 			continue
-		if (!T.lighting_corners_initialised)
+		if(!T.lighting_corners_initialised)
 			T.lighting_build_overlay()
+		if(!length(T.corners))
+			continue
 		corners |= T.corners
 		turfs += T
 
@@ -141,7 +143,7 @@ Sunlight System
 /turf/var/weatherproof = TRUE
 /turf/open/transparent/openspace/weatherproof = FALSE
 
-/datum/lighting_corner/var/list/sunlight_objects = list() /* list of sunlight objects affecting this corner */
+/datum/lighting_corner/var/list/sunlight_objects /* list of sunlight objects affecting this corner */
 /datum/lighting_corner/var/sunFalloff = 0 /* smallest distance to sunlight turf, for sunlight falloff */
 
 /* loop through and find our strongest sunlight value */
@@ -199,7 +201,7 @@ Sunlight System
 		if(outdoor_effect.weatherproof)
 			SSParticleWeather.weathered_turfs -= src
 		else
-			if((!(turf_flags & TURF_WEATHER_PROOF) && (z in SSoutdoor_effects.turf_weather_affectable_z_levels)))
+			if(!isclosedturf(src) && (!(turf_flags & TURF_WEATHER_PROOF) && (z in SSoutdoor_effects.turf_weather_affectable_z_levels)))
 				SSParticleWeather.weathered_turfs |= src
 
 /* runs up the Z stack for this turf, returns a assoc (SKYVISIBLE, WEATHERPROOF)*/

@@ -6,14 +6,26 @@
 	requires_processing = TRUE
 	max_pathing_attempts = 12
 	max_path_distance = 30
-	var/fallbacking = FALSE
-	var/fallback_fail = 0
+
+	var/list/fallback_fail = list()
+	var/list/falling_back = list()
 
 	// Variables for asynchronous path generation
 	var/repath_anticipation_distance = 5 // Start generating new path when this close to the end
 	var/future_path_blackboard_key = BB_FUTURE_MOVEMENT_PATH
 
+	var/next_resolve = 0
+	var/max_basic_failures = 3 // How many consecutive basic movement failures before switching to A*
+
 /datum/ai_movement/hybrid_pathing/process(delta_time)
+	if(world.time < next_resolve)
+		next_resolve = world.time + 5 MINUTES
+
+		for(var/datum/weakref/weakref in falling_back)
+			if(!weakref.resolve())
+				fallback_fail -= weakref
+				falling_back -= weakref
+
 	for(var/datum/ai_controller/controller as anything in moving_controllers)
 		if(!(future_path_blackboard_key in controller.blackboard))
 			controller.add_blackboard_key(future_path_blackboard_key, null)
@@ -44,7 +56,7 @@
 			// verify that there are stairs at our current position leading up
 			if(next_step.z > current_turf.z)
 				// Check if there's a valid stair to go up
-				var/turf/above = get_step_multiz(current_turf, UP)
+				var/turf/above = GET_TURF_ABOVE(current_turf)
 				var/can_go_up = FALSE
 
 				if(above && !above.density)
@@ -60,8 +72,11 @@
 				if(!can_go_up)
 					controller.movement_path = null
 					controller.clear_blackboard_key(future_path_blackboard_key)
-					fallbacking = FALSE
-					fallback_fail = 0
+					var/datum/weakref/weak = WEAKREF(controller)
+					if(weak in falling_back)
+						falling_back[weak] = FALSE
+					if(weak in fallback_fail)
+						fallback_fail[weak] = FALSE
 					continue
 
 		// Basic movement for targets on the same z-level with no existing path
@@ -74,16 +89,30 @@
 			if(!is_type_in_typecache(target_turf, GLOB.dangerous_turfs) && can_move)
 				step_to(movable_pawn, target_turf, controller.blackboard[BB_CURRENT_MIN_MOVE_DISTANCE], controller.movement_delay)
 
-				if(current_loc == get_turf(movable_pawn))
-					advanced = TRUE
-					controller.movement_path = null
-					controller.clear_blackboard_key(future_path_blackboard_key)
-					fallbacking = TRUE
-					SEND_SIGNAL(movable_pawn, COMSIG_AI_GENERAL_CHANGE, "Unable to Basic Move swapping to AStar.")
-
-			if(!advanced)
-				if(current_loc == get_turf(movable_pawn)) // Did we even move after trying to move?
+				// Check if movement was successful
+				if(current_loc != get_turf(movable_pawn))
+					// Successful basic movement - reset failure counter and clear fallback state
+					controller.pathing_attempts = 0
+					var/datum/weakref/weak = WEAKREF(controller)
+					falling_back -= weak
+					fallback_fail -= weak
+				else
+					// Movement failed - increment failure counter
 					controller.pathing_attempts++
+
+					// Only switch to A* after multiple consecutive failures
+					if(controller.pathing_attempts >= max_basic_failures)
+						advanced = TRUE
+						controller.movement_path = null
+						controller.clear_blackboard_key(future_path_blackboard_key)
+						var/datum/weakref/weak = WEAKREF(controller)
+						if(!(weak in falling_back))
+							falling_back |= weak
+							falling_back[weak] = FALSE
+						falling_back[weak] = TRUE
+						SEND_SIGNAL(movable_pawn, COMSIG_AI_GENERAL_CHANGE, "Unable to Basic Move after [max_basic_failures] attempts, swapping to AStar.")
+
+					// Check if we've exceeded maximum pathing attempts
 					if(controller.pathing_attempts >= max_pathing_attempts)
 						controller.CancelActions()
 						SEND_SIGNAL(movable_pawn, COMSIG_AI_GENERAL_CHANGE, "Failed pathfinding cancelling.")
@@ -115,7 +144,7 @@
 					// Check for stairs going up
 					if(next_step.z > movable_pawn.z)
 						for(var/obj/structure/stairs/S in current_turf.contents)
-							var/turf/above = get_step_multiz(current_turf, UP)
+							var/turf/above = GET_TURF_ABOVE(current_turf)
 							if(above)
 								var/turf/dest = get_step(above, S.dir)
 								if(dest == next_step)
@@ -124,7 +153,7 @@
 
 					// Check for stairs going down or falling
 					else if(next_step.z < movable_pawn.z)
-						var/turf/below = get_step_multiz(current_turf, DOWN)
+						var/turf/below = GET_TURF_BELOW(current_turf)
 						if(below == next_step)
 							can_transition = TRUE
 						else
@@ -157,6 +186,10 @@
 						controller.clear_blackboard_key(future_path_blackboard_key)
 
 				// Update current path - remove steps we've completed
+				var/datum/weakref/used_ref = WEAKREF(controller)
+				if(!(used_ref in falling_back))
+					falling_back |= used_ref
+					falling_back[used_ref] = TRUE
 				if(get_turf(movable_pawn) == next_step || (istype(next_step, /turf/open/transparent) && get_turf(movable_pawn) == GET_TURF_BELOW(next_step)))
 					controller.movement_path.Cut(1,2)
 					if(length(controller.movement_path))
@@ -165,17 +198,23 @@
 						if(get_turf(movable_pawn) == double_checked) // Handle z-level stack issues
 							controller.movement_path.Cut(1,2)
 
-					if(!length(controller.movement_path) && fallbacking)
-						fallbacking = FALSE
+					if(!length(controller.movement_path) && falling_back[used_ref])
+						falling_back[used_ref] = FALSE
+						// Successfully completed A* path - allow basic movement again on next iteration
+						controller.pathing_attempts = 0
 				else
-					if(!fallbacking)
+					if(!falling_back[used_ref])
 						generate_path = TRUE
 						controller.clear_blackboard_key(future_path_blackboard_key)
 					else
-						fallback_fail++
-						if(fallback_fail >= 2)
+						fallback_fail[used_ref]++
+						if(fallback_fail[used_ref] >= 2)
+							fallback_fail[used_ref] = 0
 							generate_path = TRUE
-							fallbacking = FALSE
+							if(!(used_ref in falling_back))
+								falling_back |= used_ref
+								falling_back[used_ref] = FALSE
+							falling_back[used_ref] = FALSE
 							controller.clear_blackboard_key(future_path_blackboard_key)
 
 				// If we're nearing the end of our path, preemptively generate the next path

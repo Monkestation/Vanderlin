@@ -1,7 +1,7 @@
 
 /obj/item/rope
 	name = "rope"
-	desc = "A series of threads interwined to create a firm rope for binding, hanging and other jobs."
+	desc = "A series of threads intertwined to create a firm rope for binding, hanging and other jobs."
 	gender = PLURAL
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "rope"
@@ -62,12 +62,15 @@
 	if(!istype(C))
 		return
 
+	var/surrender_mod = 1
+	if(C.surrendering || HAS_TRAIT(C, TRAIT_BAGGED))
+		surrender_mod = 0.5
 	if(user.aimheight >= 5)
 		if(!C.handcuffed)
 			if(C.num_hands)
 				C.visible_message(span_warning("[user] is trying to tie [C]'s arms with [src.name]!"), \
 									span_danger("[user] is trying to tie my arms with [src.name]!"))
-				if(do_after(user, 6 SECONDS * (C.surrendering ? 0.5 : 1), C) && C.num_hands)
+				if(do_after(user, 6 SECONDS * (surrender_mod), C) && C.num_hands)
 					apply_cuffs(C, user, leg = FALSE)
 					C.visible_message(span_warning("[user] ties [C]' arms with [src.name]."), \
 										span_danger("[user] ties my arms up with [src.name]."))
@@ -238,11 +241,10 @@
 	if(has_buckled_mobs())
 		for(var/m in buckled_mobs)
 			var/mob/living/buckled_mob = m
-			if(buckled_mob.has_gravity())
-				buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
-				to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
-				buckled_mob.adjustBruteLoss(10)
-				buckled_mob.Knockdown(60)
+			buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
+			to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
+			buckled_mob.adjustBruteLoss(10)
+			buckled_mob.Knockdown(60)
 	return ..()
 
 /obj/structure/noose/attackby(obj/item/W, mob/user, params)
@@ -312,30 +314,29 @@
 		return
 	for(var/m in buckled_mobs)
 		var/mob/living/buckled_mob = m
-		if(buckled_mob.has_gravity())
-			if(buckled_mob.get_bodypart("head"))
-				if(buckled_mob.stat != DEAD)
-					if(locate(/obj/structure/chair) in get_turf(src)) // So you can kick down the chair and make them hang, and stuff.
-						return
-					if(!HAS_TRAIT(buckled_mob, TRAIT_NOBREATH))
-						buckled_mob.adjustOxyLoss(10)
-						if(prob(20))
-							buckled_mob.emote("gasp")
-					if(prob(25))
-						var/flavor_text = list("<span class='danger'>[buckled_mob]'s legs flail for anything to stand on.</span>",\
-												"<span class='danger'>[buckled_mob]'s hands are desperately clutching the noose.</span>",\
-												"<span class='danger'>[buckled_mob]'s limbs sway back and forth with diminishing strength.</span>")
-						buckled_mob.visible_message(pick(flavor_text))
-					playsound(buckled_mob.loc, 'sound/foley/noose_idle.ogg', 30, 1, -3)
-				else
-					if(prob(1))
-						var/obj/item/bodypart/head/head = buckled_mob.get_bodypart("head")
-						if(head.brute_dam >= 50)
-							if(head.dismemberable)
-								head.dismember()
+		if(buckled_mob.get_bodypart("head"))
+			if(buckled_mob.stat != DEAD)
+				if(locate(/obj/structure/chair) in get_turf(src)) // So you can kick down the chair and make them hang, and stuff.
+					return
+				if(!HAS_TRAIT(buckled_mob, TRAIT_NOBREATH))
+					buckled_mob.adjustOxyLoss(10)
+					if(prob(20))
+						buckled_mob.emote("gasp")
+				if(prob(25))
+					var/flavor_text = list("<span class='danger'>[buckled_mob]'s legs flail for anything to stand on.</span>",\
+											"<span class='danger'>[buckled_mob]'s hands are desperately clutching the noose.</span>",\
+											"<span class='danger'>[buckled_mob]'s limbs sway back and forth with diminishing strength.</span>")
+					buckled_mob.visible_message(pick(flavor_text))
+				playsound(buckled_mob.loc, 'sound/foley/noose_idle.ogg', 30, 1, -3)
 			else
-				buckled_mob.visible_message("<span class='danger'>[buckled_mob] drops from the noose!</span>")
-				buckled_mob.Knockdown(60)
-				buckled_mob.pixel_y = buckled_mob.base_pixel_y
-				buckled_mob.pixel_x = buckled_mob.base_pixel_x
-				unbuckle_all_mobs(force=1)
+				if(prob(1))
+					var/obj/item/bodypart/head/head = buckled_mob.get_bodypart("head")
+					if(head.brute_dam >= 50)
+						if(head.dismemberable)
+							head.dismember()
+		else
+			buckled_mob.visible_message("<span class='danger'>[buckled_mob] drops from the noose!</span>")
+			buckled_mob.Knockdown(60)
+			buckled_mob.pixel_y = buckled_mob.base_pixel_y
+			buckled_mob.pixel_x = buckled_mob.base_pixel_x
+			unbuckle_all_mobs(force=1)

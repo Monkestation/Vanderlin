@@ -129,8 +129,8 @@
 	if(check_deescalate())
 		return
 	if(stage > 1)
-		to_chat(parent, span_danger("You lose focus steading [weapon] towards [target]!"))
-		to_chat(target, span_userdanger("[parent] loses their focus steading [weapon] towards you!"))
+		to_chat(parent, span_danger("You lose focus steadying [weapon] towards [target]!"))
+		to_chat(target, span_userdanger("[parent] loses their focus steadying [weapon] towards you!"))
 		update_stage(1)
 
 ///Update the damage multiplier for whatever stage we're entering into

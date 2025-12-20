@@ -41,9 +41,8 @@ SUBSYSTEM_DEF(triumphs)
 
 	/// List of top ten for display in browser page on button click
 	var/list/triumph_leaderboard = list()
-	var/triumph_leaderboard_positions_tracked = 20
-	// A cache for triumphs. Basically when client first hops in for the session we will cram their ckey in and retrieve from file
-	// When the server session is about to end we will write it all in.
+	/// A cache for triumphs. Basically when client first hops in for the session we will cram their ckey in and retrieve from file
+	/// When the server session is about to end we will write it all in.
 	var/list/triumph_amount_cache = list()
 	/// Similiar to the triumph amount cache, but stores triumph buys the ckey has bought
 	var/list/triumph_buy_owners = list()
@@ -56,8 +55,10 @@ SUBSYSTEM_DEF(triumphs)
 	var/triumph_buys_enabled = TRUE
 	/// Init list to hold triumph buy menus for the session (aka menu data) (Assc list "ckey" = datum)
 	var/list/active_triumph_menus = list()
-	/// Display limit per page in a category on the user menu
-	var/page_display_limit = 11
+	/// Display limit per page in a non communal category on the user menu
+	var/page_display_limit = 14
+	/// Display limit per page in a communal category on the user menu
+	var/communal_display_limit = 4
 	// This represents the triumph buy organization on the main SS for triumphs, each key is a category name.
 	// And then the list will have a number in a string that leads to a list of datums
 	var/list/list/list/central_state_data = list( // this is updated to be a list of lists in subsystem Initialize
@@ -104,8 +105,9 @@ SUBSYSTEM_DEF(triumphs)
 
 	// Figure out how many lists we are about to make to represent the pages
 	for(var/catty_key in central_state_data)
-		var/page_count = ceil(central_state_data[catty_key]/page_display_limit) // Get the page count total
-		central_state_data[catty_key] = list() // Now we swap the numbers out for lists on each cat as it will contain lists representing one page
+		var/current_limit = (catty_key == TRIUMPH_CAT_COMMUNAL) ? communal_display_limit : page_display_limit
+		var/page_count = ceil(central_state_data[catty_key]/current_limit)
+		central_state_data[catty_key] = list()
 
 		// Now fill in the lists starting at index "1"
 		for(var/page_numba in 1 to page_count)
@@ -115,7 +117,7 @@ SUBSYSTEM_DEF(triumphs)
 				if(current_triumph_buy_datum.category == catty_key)
 					central_state_data[catty_key]["[page_numba]"] += current_triumph_buy_datum
 					copy_list -= current_triumph_buy_datum
-				if(central_state_data[catty_key]["[page_numba]"].len == page_display_limit)
+				if(central_state_data[catty_key]["[page_numba]"].len == current_limit)
 					break
 
 /// This occurs when you try to buy a triumph condition and sets it up
@@ -164,7 +166,7 @@ SUBSYSTEM_DEF(triumphs)
 	return TRUE
 
 /// This occurs when you try to unbuy a triumph condition and removes it, also used for refunding due to conflicts
-/datum/controller/subsystem/triumphs/proc/attempt_to_unbuy_triumph_condition(client/C, datum/triumph_buy/triumph_buy, reason = "\improper REFUND", force = FALSE)
+/datum/controller/subsystem/triumphs/proc/attempt_to_unbuy_triumph_condition(client/C, datum/triumph_buy/triumph_buy, reason = "\improper MANUAL REFUND", force = FALSE)
 	var/previous_owner_ckey = triumph_buy.ckey_of_buyer
 	if(previous_owner_ckey != C?.ckey)
 		if(C)
@@ -176,11 +178,10 @@ SUBSYSTEM_DEF(triumphs)
 		return FALSE
 	var/refund_amount = triumph_buy.triumph_cost
 	if(C?.ckey)
-		C.adjust_triumphs(refund_amount, counted = FALSE, silent = TRUE)
+		C.adjust_triumphs(refund_amount, counted = FALSE, silent = TRUE, override_bonus = TRUE)
 		to_chat(C, span_redtext("You were refunded [refund_amount] triumph\s due to \a [reason]."))
-
 	else if(previous_owner_ckey)
-		global.adjust_triumphs(previous_owner_ckey, refund_amount, previous_owner_ckey, override_bonus = TRUE)
+		triumph_adjust(refund_amount, previous_owner_ckey)
 
 	if(triumph_buy.limited)
 		triumph_buy_stocks[triumph_buy.type]++
@@ -220,6 +221,12 @@ SUBSYSTEM_DEF(triumphs)
 			continue
 
 		triumph_buy.show_menu()
+
+/datum/controller/subsystem/triumphs/proc/refresh_communal_menus()
+	for(var/ckey in active_triumph_menus)
+		var/datum/triumph_buy_menu/menu = active_triumph_menus[ckey]
+		if(menu && menu.current_category == TRIUMPH_CAT_COMMUNAL)
+			menu.show_menu()
 
 /// We cleanup the datum thats just holding the stuff for displaying the menu.
 /datum/controller/subsystem/triumphs/proc/remove_triumph_buy_menu(client/C)
@@ -334,26 +341,30 @@ SUBSYSTEM_DEF(triumphs)
 
 		var/cur_client_triumph_count = not_new_guy["triumph_count"]
 		triumph_amount_cache[target_ckey] = cur_client_triumph_count
-		return cur_client_triumph_count
+		return FLOOR(cur_client_triumph_count, 1)
 
-	return triumph_amount_cache[target_ckey]
+	return FLOOR(triumph_amount_cache[target_ckey], 1)
 
 /*
-	TRIUMPH LEADERBOARD STUFF
+	TRIUMPH LEADERBOARD
 */
 
 /// Displays leaderboard browser popup
 /datum/controller/subsystem/triumphs/proc/show_triumph_leaderboard(client/C)
-	var/webpage = "<div style='text-align:center'>Current Season: [GLOB.triumph_wipe_season]</div>"
+	var/webpage = "<div style='text-align:center'>Current Season: [GLOB.triumph_wipe_season || 1]</div>"
 	webpage += "<hr>"
 
-	if(triumph_leaderboard.len)
+	if(length(triumph_leaderboard))
 		var/position_number = 0
 
 		for(var/key in triumph_leaderboard)
+			var/check_ckey = ckey(key)
+			if(!isnull(GLOB.admin_datums[check_ckey]) || !isnull(GLOB.deadmins[check_ckey]) || !isnull(GLOB.protected_admins[check_ckey]) || check_ckey == "mechadaleearnhardt")
+				continue
+
 			position_number++
-			webpage += "[position_number]. [key] - [triumph_leaderboard[key]]<br>"
-			if(position_number >= triumph_leaderboard_positions_tracked)
+			webpage += "[position_number]. [key] - [FLOOR(triumph_leaderboard[key], 1)]<br>"
+			if(position_number >= 20)
 				break
 	else
 		webpage += "The hall of triumphs is empty"
@@ -372,21 +383,13 @@ SUBSYSTEM_DEF(triumphs)
 
 	sort_leaderboard()
 
-/datum/controller/subsystem/triumphs/proc/adjust_leaderboard(CLIENT_KEY_not_CKEY)
-	var/user_key = CLIENT_KEY_not_CKEY
+/datum/controller/subsystem/triumphs/proc/adjust_leaderboard(user_key)
 	var/triumph_total = triumph_amount_cache[ckey(user_key)]
 
-	for(var/existing_key in triumph_leaderboard)
-		if(ckey(existing_key) == ckey(user_key))
-			triumph_leaderboard.Remove(existing_key)
+	if(triumph_leaderboard[user_key] || triumph_leaderboard[ckey(user_key)])
+		triumph_leaderboard.Remove(user_key)
+		triumph_leaderboard.Remove(ckey(user_key))
 
-	if(triumph_leaderboard_positions_tracked > triumph_leaderboard.len)
-		triumph_leaderboard[user_key] = triumph_total
-
-	if(triumph_leaderboard[triumph_leaderboard[triumph_leaderboard.len]] > triumph_total)
-		return
-
-	triumph_leaderboard.Cut(triumph_leaderboard.len)
 	triumph_leaderboard[user_key] = triumph_total
 	sort_leaderboard()
 
@@ -410,8 +413,7 @@ SUBSYSTEM_DEF(triumphs)
 
 	triumph_leaderboard = sorted_list
 
-/// Called when an admin disables a Triumph Buy.
-/// Refunds all current owners of that Triumph Buy and disactive it.
+/// Called when an admin disables a Triumph Buy. Refunds all current owners of that Triumph Buy and deactive it.
 /datum/controller/subsystem/triumphs/proc/refund_from_admin_toggle(datum/triumph_buy/TB)
 	if(!TB)
 		return

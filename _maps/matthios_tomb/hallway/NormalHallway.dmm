@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "r" = (
 /obj/item/natural/stone{
 	pixel_y = -10;
@@ -25,17 +25,17 @@
 	},
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "t" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "u" = (
 /obj/item/natural/stone{
 	pixel_x = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "A" = (
 /obj/item/natural/stone{
 	pixel_y = 7;
@@ -43,10 +43,10 @@
 	},
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "E" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "H" = (
 /obj/item/natural/stone{
 	pixel_y = 9;
@@ -54,13 +54,13 @@
 	},
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "I" = (
 /obj/item/natural/stone{
 	pixel_y = -8
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 a

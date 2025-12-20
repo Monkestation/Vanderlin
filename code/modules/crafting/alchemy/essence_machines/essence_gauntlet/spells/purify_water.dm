@@ -12,6 +12,7 @@
 	if(!isobj(target))
 		return FALSE
 	owner.visible_message(span_notice("[owner] purifies [target] with life-giving energy."))
+	new /obj/effect/temp_visual/solosnake(get_turf(target))
 
 	if(target.reagents)
 		target.reagents.remove_all_type(/datum/reagent/toxin)

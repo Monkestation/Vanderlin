@@ -1,14 +1,26 @@
 /datum/objective/personal/release_fish
-	name = "Release Rare Fish"
+	name = "Release Fish"
 	category = "Abyssor's Chosen"
 	triumph_count = 2
 	rewards = list("2 Triumphs", "Abyssor grows stronger", "Fishing knowledge")
 	var/released_count = 0
 	var/required_count = 1
-	var/required_rarity_rank = 1
+	var/target_fish_type
+	var/target_fish_name
 
 /datum/objective/personal/release_fish/on_creation()
 	. = ..()
+	var/list/possible_fish = list()
+	for(var/fish_type in subtypesof(/obj/item/reagent_containers/food/snacks/fish))
+		var/obj/item/reagent_containers/food/snacks/fish/F = fish_type
+		if(F.status != FISH_DEAD)
+			possible_fish += fish_type
+
+	if(length(possible_fish))
+		target_fish_type = pick(possible_fish)
+		var/obj/item/reagent_containers/food/snacks/fish/F = target_fish_type
+		target_fish_name = initial(F.name)
+
 	RegisterSignal(SSdcs, COMSIG_GLOBAL_FISH_RELEASED, PROC_REF(on_fish_released))
 	update_explanation_text()
 
@@ -16,26 +28,27 @@
 	UnregisterSignal(SSdcs, COMSIG_GLOBAL_FISH_RELEASED)
 	return ..()
 
-/datum/objective/personal/release_fish/proc/on_fish_released(datum/source, fish_type, raritymod)
+/datum/objective/personal/release_fish/proc/on_fish_released(datum/source, obj/item/reagent_containers/food/snacks/fish/fish)
 	SIGNAL_HANDLER
 	if(completed || !owner?.current)
 		return
 
-	if(!(raritymod >= required_rarity_rank))
+	if(!istype(fish, target_fish_type) || fish.status == FISH_DEAD)
 		return
 
 	released_count++
 	if(released_count >= required_count)
 		complete_objective()
 
-/datum/objective/personal/release_fish/proc/complete_objective()
-	to_chat(owner.current, span_greentext("A rare fish has been returned to the depths, pleasing Abyssor!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
+/datum/objective/personal/release_fish/complete_objective()
+	. = ..()
+	to_chat(owner.current, span_greentext("The [target_fish_name] has been returned to the depths, pleasing Abyssor!"))
 	adjust_storyteller_influence(ABYSSOR, 20)
-	owner.current.adjust_skillrank(/datum/skill/labor/fishing, 1)
-	escalate_objective()
 	UnregisterSignal(SSdcs, COMSIG_GLOBAL_FISH_RELEASED)
 
+/datum/objective/personal/release_fish/reward_owner()
+	. = ..()
+	owner.current.adjust_skillrank(/datum/skill/labor/fishing, 1)
+
 /datum/objective/personal/release_fish/update_explanation_text()
-	explanation_text = "Have any rare or better fish returned to the water to honor Abyssor."
+	explanation_text = "Release an alive [target_fish_name] back to the water to honor Abyssor."

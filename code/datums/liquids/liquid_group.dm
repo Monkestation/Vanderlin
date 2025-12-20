@@ -297,21 +297,65 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		var/turfs_to_remove = round(length(members) - (total_reagent_volume / 6))
 		if(turfs_to_remove <= 0)
 			return
-		while(turfs_to_remove > 0)
-			turfs_to_remove--
-			if(members && length(members))
-				var/turf/picked_turf = pick(members)
-				if(!QDELETED(picked_turf.liquids))
-					remove_from_group(picked_turf)
-					QDEL_NULL(picked_turf.liquids)
-					removed_turf |= picked_turf
-					if(!total_reagent_volume)
-						reagents_per_turf = 0
-					else
-						reagents_per_turf = total_reagent_volume / length(members)
-				else
-					members -= picked_turf
 
+		var/list/connection_cache = list()
+		for(var/turf/edge_turf in cached_edge_turfs)
+			var/liquid_neighbor_count = 0
+			for(var/turf/adjacent in edge_turf.atmos_adjacent_turfs)
+				if(!QDELETED(adjacent.liquids) && adjacent.liquids.liquid_group == src)
+					liquid_neighbor_count++
+			connection_cache[edge_turf] = liquid_neighbor_count
+
+		while(turfs_to_remove > 0 && length(cached_edge_turfs))
+			turfs_to_remove--
+
+			var/turf/best_candidate
+			var/lowest_connections = INFINITY
+
+			for(var/turf/edge_turf in cached_edge_turfs)
+				var/connections = connection_cache[edge_turf]
+				if(isnull(connections)) // In case new edges were added
+					connections = 0
+					for(var/turf/adjacent in edge_turf.atmos_adjacent_turfs)
+						if(!QDELETED(adjacent.liquids) && adjacent.liquids.liquid_group == src)
+							connections++
+					connection_cache[edge_turf] = connections
+
+				if(connections < lowest_connections)
+					lowest_connections = connections
+					best_candidate = edge_turf
+					if(lowest_connections == 1) // Can't get better than this
+						break
+
+			if(!best_candidate)
+				break
+
+			if(!QDELETED(best_candidate.liquids))
+				remove_from_group(best_candidate, FALSE)
+				QDEL_NULL(best_candidate.liquids)
+				removed_turf |= best_candidate
+				cached_edge_turfs -= best_candidate
+				connection_cache -= best_candidate
+				if(best_candidate in burning_members)
+					extinguish(best_candidate)
+
+				for(var/dir in GLOB.cardinals)
+					var/turf/open/open_turf = get_step(best_candidate, dir)
+					if(!isopenturf(open_turf) || QDELETED(open_turf.liquids))
+						continue
+					check_edges(open_turf)
+					if(connection_cache[open_turf])
+						connection_cache[open_turf]--
+
+				if(!total_reagent_volume)
+					reagents_per_turf = 0
+				else
+					reagents_per_turf = total_reagent_volume / length(members)
+			else
+				cached_edge_turfs -= best_candidate
+				connection_cache -= best_candidate
+
+		get_group_burn()
 		if(!length(removed_turf))
 			return
 		try_bulk_split(removed_turf)
@@ -569,17 +613,19 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 /datum/liquid_group/proc/process_fire()
 	get_group_burn()
 
-	var/reagents_to_remove = group_burn_rate * (length(burning_members))
+	var/reagents_to_remove = group_burn_rate * 0.2 * (length(burning_members))
 	for(var/turf/floor in burning_members)
 		if(!(floor in cached_edge_turfs))
 			continue
-		var/modifier = 1
+		var/modifier = 3
 		if(SSParticleWeather.runningWeather?.target_trait == PARTICLEWEATHER_RAIN)
 			if(!floor.outdoor_effect?.weatherproof)
-				modifier = 0.5
+				modifier *= 0.5
 		if(prob(floor.spread_chance * modifier))
 			for(var/turf/ranged_floor in range(1, floor))
 				if(ranged_floor == floor || !ranged_floor.burn_power || (ranged_floor in members))
+					continue
+				if(!(ranged_floor in floor.atmos_adjacent_turfs))
 					continue
 				var/obj/effect/hotspot/located_fire = locate() in ranged_floor
 				if(!located_fire)
@@ -590,37 +636,6 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		return
 
 	remove_any(amount = reagents_to_remove)
-
-	if(!reagents_per_turf)
-		return
-
-	if(group_burn_rate >= reagents_per_turf)
-		var/list/removed_turf = list()
-		var/number = round(group_burn_rate / reagents_per_turf)
-		for(var/num in 1 to number)
-			if(!length(burning_members))
-				break
-			var/turf/picked_turf = burning_members[1]
-			extinguish(picked_turf)
-			remove_from_group(picked_turf)
-			QDEL_NULL(picked_turf.liquids)
-			removed_turf |= picked_turf
-
-
-		for(var/turf/remover in removed_turf)
-			for(var/dir in GLOB.cardinals)
-				var/turf/open/open_turf = get_step(remover, dir)
-				if(!isopenturf(open_turf) || QDELETED(open_turf.liquids))
-					continue
-				check_edges(open_turf)
-
-		while(length(removed_turf))
-			var/turf/picked_turf = pick(removed_turf)
-			var/list/output = try_split(picked_turf, TRUE)
-			removed_turf -= picked_turf
-			for(var/turf/outputted_turf in output)
-				if(outputted_turf in removed_turf)
-					removed_turf -= outputted_turf
 
 
 /datum/liquid_group/proc/ignite_turf(turf/member)
@@ -654,7 +669,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 	if(!cached_fire_spreads[member])
 		build_fire_cache(member)
 
-	var/modifier = 1
+	var/modifier = 25 //yea this is nuts
 	if(SSParticleWeather.runningWeather?.target_trait == PARTICLEWEATHER_RAIN)
 		modifier = 0.5
 	for(var/turf/open/adjacent_turf in cached_fire_spreads[member])
@@ -867,6 +882,13 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 	if(!length(new_group.members))
 		qdel(new_group)
 		return FALSE
+
+	if(length(new_group.burning_members))
+		new_group.get_group_burn()
+		for(var/turf/burning_turf in new_group.burning_members)
+			if(!QDELETED(burning_turf.liquids))
+				burning_turf.liquids.fire_state = new_group.group_fire_state
+				burning_turf.liquids.set_fire_effect()
 
 	if(return_list)
 		return connected_liquids

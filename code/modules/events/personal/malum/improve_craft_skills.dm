@@ -8,6 +8,7 @@
 	min_players = 15
 
 	tags = list(
+		TAG_MALUM,
 		TAG_WORK,
 	)
 
@@ -43,8 +44,10 @@
 	var/datum/objective/personal/improve_craft/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE MALUM'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Malum wants you to hone your craft! Improve your crafting skills to earn Malum's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE MALUM'S CHOSEN!"),
+		span_notice("Malum wants you to hone your craft! Improve your crafting skills to earn Malum's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/magic/dwarf_chant01.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

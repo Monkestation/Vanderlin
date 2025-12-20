@@ -10,7 +10,12 @@
 		/datum/thaumaturgical_essence/poison = 20
 	)
 
-/datum/enchantment/vampiric/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/enchantment/vampiric/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_AFTERATTACK
+	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+
+/datum/enchantment/vampiric/proc/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
 		return
 	if(isliving(target) && isliving(user))

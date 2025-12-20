@@ -1,6 +1,7 @@
 /datum/action/cooldown/spell/transfrom_tree
 	name = "Transform Tree"
 	button_icon_state = "entangle"
+	sound = null
 	has_visual_effects = FALSE
 	self_cast_possible = FALSE
 	charge_required = FALSE
@@ -41,7 +42,7 @@
 		to_chat(H, span_warning("You must target a normal, living tree adjacent to you!"))
 		return
 
-	var/turf/below = get_step_multiz(target, DOWN)
+	var/turf/below = GET_TURF_BELOW(get_turf(target))
 	if(below && istype(below, /turf/open/transparent/openspace))
 		to_chat(H, span_warning("You must target the base of the tree!"))
 		return

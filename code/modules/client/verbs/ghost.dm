@@ -58,6 +58,6 @@
 		O.paid = TRUE
 		to_chat(src, span_biginfo("Necra has guaranteed your passage to the next life. Your toll has been already paid."))
 
-	var/area/rogue/underworld/underworld = get_area(spawn_loc)
+	var/area/underworld/underworld = get_area(spawn_loc)
 	underworld.Entered(O, null)
 	verbs -= /client/proc/descend

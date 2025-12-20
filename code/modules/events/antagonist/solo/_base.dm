@@ -1,5 +1,6 @@
 /datum/round_event_control/antagonist/solo
 	typepath = /datum/round_event/antagonist/solo
+	max_occurrences = 2
 	/// How many baseline antags do we spawn
 	var/base_antags = 1
 	/// How many maximum antags can we spawn
@@ -23,8 +24,7 @@
 	var/midround_antag_pref_arg = round_started ? FALSE : TRUE
 
 	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, observers = TRUE, midround_antag_pref = midround_antag_pref_arg, restricted_roles = restricted_roles)
-	candidates = trim_candidates(candidates)
-	return candidates
+	return trim_candidates(candidates)
 
 /datum/round_event_control/antagonist/solo/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
@@ -47,10 +47,9 @@
 	var/midround_antag_pref_arg = round_started ? FALSE : TRUE
 
 	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, FALSE, new_players_arg, living_players_arg, midround_antag_pref = midround_antag_pref_arg, \
-													restricted_roles = restricted_roles, required_roles = exclusive_roles)
-	candidates = trim_candidates(candidates)
-	return candidates
+													no_antags = TRUE, restricted_roles = restricted_roles, required_roles = exclusive_roles)
 
+	return trim_candidates(candidates)
 
 /datum/round_event_control/antagonist/solo/return_failure_string(players_amt)
 	. =..()
@@ -63,7 +62,6 @@
 		. += "Not Enough Candidates!"
 
 	return .
-
 
 /datum/round_event/antagonist/solo
 	// ALL of those variables are internal. Check the control event to change them
@@ -97,7 +95,8 @@
 /datum/round_event/antagonist/solo/setup()
 	var/datum/round_event_control/antagonist/solo/cast_control = control
 	antag_count = cast_control.get_antag_amount()
-	message_admins("STORYTELLER:[cast_control.name] spawning [antag_count].")
+	message_admins("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(cast_control.get_candidates())], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
+	log_storyteller("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(cast_control.get_candidates())], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
 	antag_flag = cast_control.antag_flag
 	antag_datum = cast_control.antag_datum
 	restricted_roles = cast_control.restricted_roles

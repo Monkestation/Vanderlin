@@ -10,7 +10,6 @@
 	faction = FACTION_TOWN
 	total_positions = 4
 	spawn_positions = 4
-	min_pq = 0
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL

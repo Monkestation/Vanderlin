@@ -23,7 +23,7 @@
 	. = ..()
 
 	if(cast_on.stat != DEAD)
-		to_chat(owner, span_warning("The weakling still pulses with life! Graggar demands you finish them properly first!"))
+		to_chat(owner, span_warning("The weakling still pulses with life! Graggar demands you finish them off first!"))
 		return
 
 	// Calculate actual time based on butchery skill
@@ -38,7 +38,7 @@
 		return
 
 	if(cast_on.stat != DEAD)
-		to_chat(owner, span_warning("The weakling still pulses with life! Graggar demands you finish them properly first!"))
+		to_chat(owner, span_warning("The weakling still pulses with life! Graggar demands you finish them off first!"))
 		return
 
 	var/obj/item/organ/heart/heart = cast_on.getorganslot(ORGAN_SLOT_HEART)

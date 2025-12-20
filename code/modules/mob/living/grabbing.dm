@@ -101,9 +101,6 @@
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby = list()
 
-/turf
-	var/list/grabbedby = list()
-
 /obj/item/grabbing/Initialize()
 	. = ..()
 	START_PROCESSING(SSfastprocess, src)
@@ -179,9 +176,6 @@
 				part.grabbedby -= src
 				part = null
 				sublimb_grabbed = null
-	if(isturf(grabbed))
-		var/turf/T = grabbed
-		T.grabbedby -= src
 
 	if(grabbee)
 		// Dont stop the pull if another hand grabs the person
@@ -277,7 +271,13 @@
 				if(iscarbon(M) && M != user)
 					user.adjust_stamina(rand(1,3) * spam_penalty)
 					var/mob/living/carbon/C = M
-					if(get_location_accessible(C, BODY_ZONE_PRECISE_NECK))
+					var/obj/item/clothing/neck/neck_armor = C.wear_neck
+					var/throat_protected = FALSE
+					if(neck_armor)
+						throat_protected = (neck_armor.armor_class != ARMOR_CLASS_NONE)
+					if(C.head && istype(C.head, /obj/item/clothing/head/helmet/heavy/necked))
+						throat_protected = TRUE
+					if(!throat_protected)
 						if(prob(23))
 							C.emote("choke")
 						var/choke_damage = user.STASTR * 0.75 // this is too busted

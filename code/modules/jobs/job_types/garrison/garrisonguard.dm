@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 8
 	spawn_positions = 8
-	min_pq = 4
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
@@ -19,6 +18,12 @@
 	advclass_cat_rolls = list(CTAG_GARRISON = 20)	//Handles class selection.
 	give_bank_account = 30
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
+
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 300
+	)
 
 //................. City Watchmen Base .............. //
 /datum/outfit/guardsman/pre_equip(mob/living/carbon/human/H)
@@ -38,6 +43,9 @@
 		if(!findtext(H.cloak.name,"([H.real_name])"))
 			H.cloak.name = "[H.cloak.name]"+" "+"([H.real_name])"
 
+/datum/job/advclass/garrison
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+
 // EVERY TOWN GUARD SHOULD HAVE AT LEAST THREE CLUB SKILL
 
 //................. Axes, Maces, Swords, Shields .............. //
@@ -56,7 +64,7 @@
 	shirt = /obj/item/clothing/armor/gambeson
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/sword/short
+	beltr = /obj/item/weapon/sword/short/iron
 	beltl = /obj/item/weapon/mace/cudgel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(/obj/item/rope/chain)
@@ -135,7 +143,7 @@
 	neck = /obj/item/clothing/neck/gorget
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
-	beltl = /obj/item/weapon/sword/short
+	beltl = /obj/item/weapon/sword/short/iron
 	beltr = /obj/item/weapon/mace/cudgel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(/obj/item/rope/chain)

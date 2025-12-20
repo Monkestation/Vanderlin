@@ -9,12 +9,17 @@
 		/datum/thaumaturgical_essence/poison = 15,
 		/datum/thaumaturgical_essence/water = 10
 	)
-	var/list/last_used = list()
+	var/last_used
 
-/datum/enchantment/frostbite/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/enchantment/frostbite/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_AFTERATTACK
+	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+
+/datum/enchantment/frostbite/proc/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
 		return
-	if(world.time < (src.last_used[source] + (20 SECONDS)))
+	if(world.time < (last_used + 20 SECONDS))
 		return
 
 	if(isliving(target))
@@ -23,4 +28,4 @@
 		to_chat(L, span_warning("You feel a bone-chilling cold!"))
 		L.add_movespeed_modifier("frostbite", 0.5)
 		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, remove_movespeed_modifier), "frostbite"), 10 SECONDS)
-	last_used[source] = world.time
+	last_used = world.time

@@ -1,6 +1,6 @@
 /datum/antagonist/wretch
 	name = "Wretch"
-	roundend_category = "wretches"
+	roundend_category = "Wretches"
 	antagpanel_category = "Wretches"
 	show_name_in_check_antagonists = TRUE
 	antag_flags = FLAG_ANTAG_CAP_IGNORE

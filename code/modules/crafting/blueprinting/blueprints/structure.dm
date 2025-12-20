@@ -175,7 +175,7 @@
 
 /datum/blueprint_recipe/structure/wallcandle
 	name = "Wall Candles"
-	desc = "Stone wall-mounted candle holders."
+	desc = "Stone wall-mounted candleholders."
 	result_type = /obj/machinery/light/fueled/wallfire/candle
 	required_materials = list(
 		/obj/item/natural/stone = 1,
@@ -191,7 +191,7 @@
 
 /datum/blueprint_recipe/structure/wallcandleblue
 	name = "Wall Candles (Blue)"
-	desc = "Stone wall-mounted candle holders with blue flames."
+	desc = "Stone wall-mounted candleholders with blue flames."
 	result_type = /obj/machinery/light/fueled/wallfire/candle/blue
 	required_materials = list(
 		/obj/item/natural/stone = 1,

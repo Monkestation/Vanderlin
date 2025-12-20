@@ -59,5 +59,8 @@
 
 	ADD_TRAIT(cast_on, TRAIT_RECRUITED, TRAIT_GENERIC)
 	cast_on.job = new_role
+	var/datum/job/job_real = SSjob.GetJob(new_role)
+	if(job_real)
+		cast_on.mind?.set_assigned_role(new_role)
 
 	SEND_SIGNAL(SSdcs, COMSIG_GLOBAL_ROLE_CONVERTED, owner, cast_on, new_role)

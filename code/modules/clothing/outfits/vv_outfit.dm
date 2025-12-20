@@ -110,8 +110,9 @@
 	//Copy to outfit cache
 	var/outfit_name = stripped_input(usr,"Enter the outfit name")
 	O.name = outfit_name
-	GLOB.custom_outfits += O
-	to_chat(usr,"Outfit registered, use select equipment to equip it.")
+	O.id = "[O.name]_[world.time]"
+	GLOB.custom_outfits[O.id] = O
+	to_chat(usr,"Outfit [O.id] registered, use select equipment to equip it.")
 
 /datum/outfit/varedit/post_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()

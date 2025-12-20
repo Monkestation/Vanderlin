@@ -78,37 +78,35 @@
 		var/knowledgable = (willroll - bloodroll) >= 3
 
 		if(!powerful)
-			if(istype(target.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(target.wear_wrists, /obj/item/clothing/neck/psycross/silver) ) //Subpath fix.
+			var/static/list/silver_items = list(
+				/obj/item/clothing/neck/psycross/silver,
+				/obj/item/clothing/neck/silveramulet
+			)
+			if(is_type_in_list(target.wear_wrists, silver_items) || is_type_in_list(target.wear_neck, silver_items))
 				var/extra = "!"
 				if(knowledgable)
 					extra = ", I sense the caster was [owner]!"
 				to_chat(target, "<font color='white'>The silver psycross shines and protect me from unholy magic[extra]</font>")
 				to_chat(owner, span_userdanger("[target] has my BANE! It causes me to fail to ensnare their mind!"))
+				return
 
 		if(bloodroll >= willroll)
-			target.drowsyness = min(target.drowsyness + 50, 150)
-			switch(target.drowsyness)
-				if(0 to 50)
+			target.adjust_drowsiness_up_to(100 SECONDS, 300 SECONDS)
+			var/datum/status_effect/drowsiness/drowsy = target.get_status_effect(/datum/status_effect/drowsiness)
+			switch(drowsy.duration)
+				if(0 to 100 SECONDS)
 					to_chat(target, "You feel like a curtain is coming over your mind.")
 					to_chat(owner, "The mind of [target] gives way slightly.")
 					target.Slowdown(20)
-				if(51 to 90)
+				if(101 SECONDS to 180 SECONDS)
 					to_chat(target, "Your eyelids force themselves shut as you feel intense lethargy.")
 					to_chat(owner, "[target] will not be able to resist much more.")
-					target.eyesclosed = TRUE
-					target.become_blind("eyelids")
-					if(target.hud_used)
-						for(var/atom/movable/screen/eye_intent/eyet in target.hud_used.static_inventory)
-							eyet.update_appearance(UPDATE_ICON)
+					target.set_eyes_closed(TRUE)
 					target.Slowdown(50)
-				if(91 to INFINITY)
+				if(180 SECONDS to INFINITY)
 					to_chat(target, span_userdanger("You can't take it anymore. Your legs give out as you fall into the dreamworld."))
 					to_chat(owner, "[target] is mine now.")
-					target.eyesclosed = TRUE
-					target.become_blind("eyelids")
-					if(target.hud_used)
-						for(var/atom/movable/screen/eye_intent/eyet in target.hud_used.static_inventory)
-							eyet.update_appearance(UPDATE_ICON)
+					target.set_eyes_closed(TRUE)
 					target.Slowdown(50)
 					addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, Sleeping), 1 MINUTES), 5 SECONDS)
 			continue

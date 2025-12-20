@@ -26,12 +26,12 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 					var/obj/item/paper/P = new(X.loc)
 					P.mailer = "death witness"
 					P.mailedto = "steward of roguetown"
-					P.update_appearance()
+					P.update_appearance(UPDATE_NAME | UPDATE_ICON_STATE)
 					P.info = I
 					var/datum/component/storage/STR = X.GetComponent(/datum/component/storage)
 					STR.handle_item_insertion(P, prevent_warning=TRUE)
 					X.new_mail=TRUE
-					X.update_appearance()
+					X.update_appearance(UPDATE_ICON_STATE)
 				playsound(X, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 				var/the_track = 'sound/misc/cas1.ogg'
 				if(death_queue.len >= 2)
@@ -50,9 +50,9 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 	if(!T)
 		return
 	var/area/AR = get_area(T)
-	var/list/L = list(/area/rogue/outdoors/town,\
-/area/rogue/indoors/town,\
-/area/rogue/under/town)
+	var/list/L = list(/area/outdoors/town,\
+/area/indoors/town,\
+/area/under/town)
 	for(var/X in L)
 		if(istype(AR, X))
 			return TRUE

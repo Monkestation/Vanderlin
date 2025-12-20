@@ -6,7 +6,6 @@
 	allowed_races = list(SPEC_ID_HUMEN)
 	outfit = /datum/outfit/adventurer/heartfelthand
 	total_positions = 1
-	min_pq = 1
 	roll_chance = 50
 
 /datum/outfit/adventurer/heartfelthand/pre_equip(mob/living/carbon/human/H)

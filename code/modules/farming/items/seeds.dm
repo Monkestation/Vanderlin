@@ -179,6 +179,21 @@
 /obj/item/neuFarm/seed/raspberry
 	plant_def_type = /datum/plant_def/raspberry
 
+/obj/item/neuFarm/seed/mango
+	plant_def_type = /datum/plant_def/mango
+
+/obj/item/neuFarm/seed/mangosteen
+	plant_def_type = /datum/plant_def/mangosteen
+
+/obj/item/neuFarm/seed/avocado
+	plant_def_type = /datum/plant_def/avocado
+
+/obj/item/neuFarm/seed/dragonfruit
+	plant_def_type = /datum/plant_def/dragonfruit
+
+/obj/item/neuFarm/seed/pineapple
+	plant_def_type = /datum/plant_def/pineapple
+
 //alchemical
 /obj/item/neuFarm/seed/atropa
 	plant_def_type = /datum/plant_def/alchemical/atropa
@@ -233,3 +248,35 @@
 
 /obj/item/neuFarm/seed/tea
 	plant_def_type = /datum/plant_def/tea
+
+// ----- SPORES ----- //
+
+/obj/item/neuFarm/seed/spore
+	name = "mushroom spores"
+	desc = "Used to inoculate soil with mycelium for cultivation."
+	icon_state = "spores"
+
+/obj/item/neuFarm/seed/spore/Initialize(mapload, datum/plant_genetics/passed_genetics)
+	. = ..()
+	if(plant_def_type)
+		var/datum/plant_def/def = GLOB.plant_defs[plant_def_type]
+		color = def.seed_color // make a new spore color list later
+
+/obj/item/neuFarm/seed/spore/capillus
+	plant_def_type = /datum/plant_def/mushroom/capillus
+
+/obj/item/neuFarm/seed/spore/waddle
+	plant_def_type = /datum/plant_def/mushroom/waddle
+
+/obj/item/neuFarm/seed/spore/merkel
+	plant_def_type = /datum/plant_def/mushroom/merkel
+
+/obj/item/neuFarm/seed/spore/caveweep
+	plant_def_type = /datum/plant_def/mushroom/caveweep
+
+/obj/item/neuFarm/seed/spore/borowiki
+	plant_def_type = /datum/plant_def/mushroom/borowiki
+
+/* /obj/item/neuFarm/seed/spore/chanterelle // Removing for now to expand upon later
+	plant_def_type = /datum/plant_def/mushroom/chanterelle */
+

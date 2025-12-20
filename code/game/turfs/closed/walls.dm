@@ -7,7 +7,7 @@
 	icon_state = "wall"
 	explosion_block = 1
 
-	baseturfs = list(/turf/open/floor/dirt/road)
+	baseturfs = /turf/open/floor/dirt/road
 
 	smoothing_groups = SMOOTH_GROUP_CLOSED_WALL
 

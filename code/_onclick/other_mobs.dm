@@ -192,10 +192,13 @@
 			var/mob/living/carbon/human/H = src
 			if(user?.mind && mind)
 				if(user.dna?.species && istype(user.dna.species, /datum/species/werewolf))
-					if(caused_wound)
-						caused_wound.werewolf_infect_attempt()
-					if(prob(30))
-						user.werewolf_feed(src)
+					if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+						to_chat(user, span_warning("BLEH! [src] tastes of SILVER! My gift cannot take hold."))
+					else
+						if(caused_wound)
+							caused_wound.werewolf_infect_attempt()
+						if(prob(30))
+							user.werewolf_feed(src)
 				if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
 					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
 

@@ -138,7 +138,7 @@
 					break
 		if(success)
 			to_chat(user, span_info("I dump all the compostables inside [attacking_item] into [src]."))
-			attacking_item.update_appearance()
+			attacking_item.update_appearance(UPDATE_ICON_STATE)
 		else
 			to_chat(user, span_warning("There's nothing in [attacking_item] that can be composted."))
 		return TRUE

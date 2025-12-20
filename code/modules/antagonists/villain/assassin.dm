@@ -1,7 +1,7 @@
 // Assassin, cultist of graggar. Normally found as a drifter.
 /datum/antagonist/assassin
 	name = "Assassin"
-	roundend_category = "assassins"
+	roundend_category = "Assassins"
 	antagpanel_category = "Assassin"
 	antag_hud_type = ANTAG_HUD_ASSASSIN
 	antag_hud_name = "assassin"
@@ -24,7 +24,7 @@
 	)
 
 /datum/antagonist/assassin/on_gain()
-	owner.current.cmode_music = list('sound/music/cmode/antag/CombatAssassin.ogg')
+	owner.current.cmode_music = 'sound/music/cmode/antag/CombatAssassin.ogg'
 	if(owner.current.job != "Drifter") // This code only runs if the assassin is assigned midround and is not a drifter.
 		owner.current.set_patron(/datum/patron/inhumen/graggar, TRUE)
 		var/old_knife_skill = owner.current.get_skill_level(/datum/skill/combat/knives)
@@ -34,13 +34,17 @@
 		if(old_sneak_skill < 5) // If the assassined player has less than 5 sneak skill, get them to 5.
 			owner.current.adjust_skillrank(/datum/skill/misc/sneaking, 5 - old_sneak_skill, TRUE)
 		var/yea = /obj/item/weapon/knife/dagger/steel/profane
+		var/wah = /obj/item/inqarticles/garrote/razor
+		var/gah = /obj/item/lockpick
 		owner.special_items["Profane Dagger"] = yea // Assigned assassins can get their special dagger from right clicking certain objects.
-		to_chat(owner.current, "<span class='danger'>I've blended in well up until this point, but it's time for the Hunted of Graggar to perish. I must get my dagger from where I hid it.</span>")
+		owner.special_items["Profane Razor"] = wah //the mistakes of coders past trickle down to me here, so shitty var names persist
+		owner.special_items["Lock Pick"] = gah
+		to_chat(owner.current, "<span class='danger'>I've blended in well up until this point, but it's time for the Hunted of Graggar to perish. I have tools hidden away in case I am captured or need to infiltrate a compound without weapons.</span>")
 	return ..()
 
 /mob/living/carbon/human/proc/who_targets() // Verb for the assassin to remember their targets.
 	set name = "Remember Targets"
-	set category = "Graggar"
+	set category = "Assassin"
 	if(!mind)
 		return
 	mind.recall_targets(src)

@@ -4,12 +4,14 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/hedgemage
-	category_tags = list(CTAG_WRETCH)
 
 	cmode_music = 'sound/music/cmode/antag/CombatRogueMage.ogg'
 	total_positions = 2
 
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
+	blacklisted_species = list(SPEC_ID_HALFLING)
+
+	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 
 /datum/outfit/wretch/hedgemage/pre_equip(mob/living/carbon/human/H)
 	..()

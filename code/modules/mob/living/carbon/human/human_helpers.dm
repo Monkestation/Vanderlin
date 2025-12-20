@@ -107,7 +107,12 @@
 	if(QDELETED(src) || !ishuman(src))
 		return
 
-	var/damage = 12
+	var/damage
+	if(STASTR > 12 || STASTR < 10)
+		damage = STASTR
+	else
+		damage = 12
+
 	var/used_str = STASTR
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
@@ -115,6 +120,11 @@
 
 	if(domhand)
 		used_str = get_str_arms(used_hand)
+
+	var/obj/G = get_item_by_slot(ITEM_SLOT_GLOVES)
+	if(istype(G, /obj/item/clothing/gloves))
+		var/obj/item/clothing/gloves/GL = G
+		damage = (damage * GL.unarmed_bonus)
 
 	if(used_str >= 11)
 		damage = max(damage * (1 + ((used_str - 10) * 0.03)), 1)
@@ -150,12 +160,12 @@
 
 /// Fully randomizes everything in the character.
 // Reflect changes in [datum/preferences/proc/randomise_appearance_prefs]
-/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_patreon = TRUE)
+/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_donator = TRUE)
 	if(!dna)
 		return
 
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_patreon))]
+		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_donator))]
 		set_species(new rando_race(), FALSE)
 
 	var/datum/species/species = dna.species

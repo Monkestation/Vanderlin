@@ -1,6 +1,7 @@
 /datum/action/cooldown/spell/transfer_pain
 	name = "Take Pain"
 	button_icon_state = "curse"
+	sound = null
 	has_visual_effects = FALSE
 
 	cast_range = 1

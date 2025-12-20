@@ -88,46 +88,45 @@
 /turf/open/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube, paralyze_amount, force_drop)
 	if(C.movement_type & FLYING)
 		return 0
-	if(has_gravity(src))
-		var/obj/buckled_obj
-		if(C.buckled)
-			buckled_obj = C.buckled
-			if(!(lube&GALOSHES_DONT_HELP)) //can't slip while buckled unless it's lube.
-				return 0
-		else
-			if(!(lube&SLIP_WHEN_CRAWLING) && (C.body_position == LYING_DOWN) || !(C.status_flags & CANKNOCKDOWN)) // can't slip unbuckled mob if they're lying or can't fall.
-				return 0
-			if(C.m_intent == MOVE_INTENT_WALK && (lube&NO_SLIP_WHEN_WALKING))
-				return 0
-		if(!(lube&SLIDE_ICE))
-			to_chat(C, "<span class='notice'>I slipped[ O ? " on the [O.name]" : ""]!</span>")
-			playsound(C.loc, 'sound/blank.ogg', 50, TRUE, -3)
+	var/obj/buckled_obj
+	if(C.buckled)
+		buckled_obj = C.buckled
+		if(!(lube&GALOSHES_DONT_HELP)) //can't slip while buckled unless it's lube.
+			return 0
+	else
+		if(!(lube&SLIP_WHEN_CRAWLING) && (C.body_position == LYING_DOWN) || !(C.status_flags & CANKNOCKDOWN)) // can't slip unbuckled mob if they're lying or can't fall.
+			return 0
+		if(C.m_intent == MOVE_INTENT_WALK && (lube&NO_SLIP_WHEN_WALKING))
+			return 0
+	if(!(lube&SLIDE_ICE))
+		to_chat(C, "<span class='notice'>I slipped[ O ? " on the [O.name]" : ""]!</span>")
+		playsound(C.loc, 'sound/blank.ogg', 50, TRUE, -3)
 
-		C.add_stress(/datum/stress_event/slipped)
-		if(force_drop)
-			for(var/obj/item/I in C.held_items)
-				C.accident(I)
+	C.add_stress(/datum/stress_event/slipped)
+	if(force_drop)
+		for(var/obj/item/I in C.held_items)
+			C.accident(I)
 
-		var/olddir = C.dir
-		C.moving_diagonally = 0 //If this was part of diagonal move slipping will stop it.
-		if(!(lube & SLIDE_ICE))
-			C.Knockdown(knockdown_amount)
-			C.Paralyze(paralyze_amount)
-			C.stop_pulling()
-		else
-			C.Knockdown(1)
+	var/olddir = C.dir
+	C.moving_diagonally = 0 //If this was part of diagonal move slipping will stop it.
+	if(!(lube & SLIDE_ICE))
+		C.Knockdown(knockdown_amount)
+		C.Paralyze(paralyze_amount)
+		C.stop_pulling()
+	else
+		C.Knockdown(1)
 
-		if(buckled_obj)
-			buckled_obj.unbuckle_mob(C)
-			lube |= SLIDE_ICE
+	if(buckled_obj)
+		buckled_obj.unbuckle_mob(C)
+		lube |= SLIDE_ICE
 
-		if(lube&SLIDE)
-			new /datum/forced_movement(C, get_ranged_target_turf(C, olddir, 4), 1, FALSE, CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon, spin), 1, 1))
-		else if(lube&SLIDE_ICE)
-			if(C.force_moving) //If we're already slipping extend it
-				qdel(C.force_moving)
-			new /datum/forced_movement(C, get_ranged_target_turf(C, olddir, 1), 1, FALSE)	//spinning would be bad for ice, fucks up the next dir
-		return 1
+	if(lube&SLIDE)
+		new /datum/forced_movement(C, get_ranged_target_turf(C, olddir, 4), 1, FALSE, CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon, spin), 1, 1))
+	else if(lube&SLIDE_ICE)
+		if(C.force_moving) //If we're already slipping extend it
+			qdel(C.force_moving)
+		new /datum/forced_movement(C, get_ranged_target_turf(C, olddir, 1), 1, FALSE)	//spinning would be bad for ice, fucks up the next dir
+	return 1
 
 /turf/open/proc/MakeSlippery(wet_setting = TURF_WET_WATER, min_wet_time = 0, wet_time_to_add = 0, max_wet_time = MAXIMUM_WET_TIME, permanent)
 	AddComponent(/datum/component/wet_floor, wet_setting, min_wet_time, wet_time_to_add, max_wet_time, permanent)
@@ -155,16 +154,12 @@
 
 ///this will always use the highest value given depending on if set for negative
 /turf/proc/add_turf_temperature(key, value, weight = 1)
-	if(!temperature_sources)
-		temperature_sources = list()
-
-	temperature_sources[key] = list(value, weight)
+	LAZYSET(temperature_sources, key, list(value, weight))
 	rebuild_turf_temperature()
 
 
 /turf/proc/remove_turf_temperature(key)
-	if(temperature_sources && (key in temperature_sources))
-		temperature_sources -= key
+	LAZYREMOVE(temperature_sources, key)
 	rebuild_turf_temperature()
 
 /turf/proc/rebuild_turf_temperature()
@@ -191,7 +186,7 @@
 			ambient_temperature = 0
 		ambient_temperature += 10
 	if(!("[z]" in GLOB.cellar_z))
-		if(SSmapping.level_has_any_trait(z, list(ZTRAIT_CELLAR_LIKE)))
+		if(SSmapping.level_trait(z, ZTRAIT_CELLAR_LIKE))
 			GLOB.cellar_z |= "[z]"
 	if("[z]" in GLOB.cellar_z)
 		ambient_temperature = 11 + CEILING(ambient_temperature * 0.1, 1)

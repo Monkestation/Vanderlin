@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/revel_in_slaughter
 	name = "Revel in Slaughter"
-	desc = "The blood of your enemy shall boil, their skin feeling as if it's being ripped apart! Gaggar demands their blood must FLOW!!!"
+	desc = "The blood of your enemy shall boil, their skin feeling as if it's being ripped apart! Graggar demands their blood must FLOW!!!"
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/antimagic.ogg'
 
@@ -45,6 +45,6 @@
 	phy.pain_mod *= 1.5
 	addtimer(VARSET_CALLBACK(phy, bleed_mod, phy.bleed_mod /= 1.5), 25 SECONDS)
 	addtimer(VARSET_CALLBACK(phy, pain_mod, phy.pain_mod /= 1.5), 15 SECONDS)
-	human_target.visible_message(span_danger("[human_target]'s wounds become inflammed as their vitality is sapped away!"))
-	to_chat(human_target, span_warning("My skins feels like pins and needles, as if something were ripping and tearing at me!"))
+	human_target.visible_message(span_danger("[human_target]'s wounds become inflamed as their vitality is sapped away!"))
+	to_chat(human_target, span_warning("My skin feels like pins and needles, as if something were ripping and tearing at me!"))
 

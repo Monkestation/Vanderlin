@@ -52,14 +52,13 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		to_chat(user, span_danger("The veil is too strong to support more than seven lackeys."))
 		return
 	var/datum/antagonist/zizocultist/PR = user.mind.has_antag_datum(/datum/antagonist/zizocultist)
-	var/alert = browser_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST? (Resisting: 1 TRI)", "???", list("Yield", "Resist"))
+	var/alert = browser_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
 	target.Immobilize(3 SECONDS)
 	if(alert == "Yield")
 		to_chat(target, span_notice("I see the truth now! It all makes so much sense! They aren't HERETICS! They want the BEST FOR US!"))
 		PR.add_cultist(target.mind)
 		target.praise()
 	else
-		target.adjust_triumphs(-1)
 		target.visible_message(span_danger("[target] thrashes around, unyielding!"))
 		to_chat(target, span_danger("Yield."))
 		if(target.electrocute_act(10))
@@ -104,25 +103,27 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		to_chat(user, span_warning("The ritual requires a parchment with a name."))
 		return
 	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
-	if(!user.mind || !user.mind.do_i_know(name = paper_name))
+	if(!user.mind?.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
-	for(var/mob/living/carbon/human/HL in GLOB.human_list)
+	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
 		if(HL.real_name != paper_name)
 			continue
-		if(HL.mind.assigned_role.title in GLOB.church_positions)
+		if(HL == SSticker.rulermob)
+			break
+		if(HL.mind?.assigned_role.title in GLOB.church_positions)
 			to_chat(HL, span_warning("I sense an unholy presence loom near my soul."))
 			to_chat(user, span_danger("They are protected..."))
-			break
-		if(HL == SSticker.rulermob)
 			break
 		if(istype(HL.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(HL.wear_wrists, /obj/item/clothing/neck/psycross/silver))
 			to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
 			break
-		if(HAS_TRAIT(HL, TRAIT_NOSLEEP))
-			break
-		to_chat(HL, span_userdanger("I'm so sleepy..."))
-		HL.SetSleeping(5 SECONDS)
+		if(!HAS_TRAIT(HL, TRAIT_NOSLEEP))
+			to_chat(HL, span_userdanger("I'm so sleepy..."))
+			HL.SetSleeping(5 SECONDS)
+		else
+			to_chat(HL, span_userdanger("My eyes close on their own!"))
+			HL.set_eyes_closed(TRUE)
 		addtimer(CALLBACK(src, PROC_REF(kidnap), HL, center), 3 SECONDS)
 		qdel(P)
 		break
@@ -153,7 +154,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(target.mob_biotypes & MOB_UNDEAD)
 		to_chat(user, span_warning("The fruits of her work prevent me from changing my appearance..."))
 		return
-	target.randomize_human_appearance(include_patreon = FALSE)
+	target.randomize_human_appearance(include_donator = FALSE)
 	target.regenerate_clothes()
 	target.update_body()
 
@@ -242,7 +243,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /datum/ritual/transmutation/allseeingeye/invoke(mob/living/user, turf/center)
 	. = ..()
 	new /obj/item/scrying/eye(center)
-	to_chat(user, span_notice("The All-seeying Eye. To see beyond sight."))
+	to_chat(user, span_notice("The All-seeing Eye. To see beyond sight."))
 
 /datum/ritual/transmutation/criminalstool
 	name = "Criminal's Tool"

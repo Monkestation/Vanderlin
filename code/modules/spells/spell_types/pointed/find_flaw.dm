@@ -1,6 +1,7 @@
 /datum/action/cooldown/spell/find_flaw
 	name = "Find Flaw"
 	button_icon_state = "tragedy"
+	sound = null
 	self_cast_possible = FALSE
 	has_visual_effects = FALSE
 

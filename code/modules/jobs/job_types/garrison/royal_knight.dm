@@ -1,6 +1,6 @@
 /datum/job/royalknight
 	title = "Royal Knight"
-	tutorial = "You are a knight of the royal garrison, elevated by your skill and steadfast devotion. \
+	tutorial = "You are a knight of the royal family, elevated by your skill and steadfast devotion. \
 	Sworn to protect the royal family, you stand as their shield, upholding their rule with steel and sacrifice. \
 	Yet service is not without its trials, and your loyalty will be tested in ways both seen and unseen. \
 	In the end, duty is a path you must walk carefully."
@@ -10,20 +10,29 @@
 	faction = FACTION_TOWN
 	total_positions = 2
 	spawn_positions = 2
-	min_pq = 8
 	bypass_lastclass = TRUE
 	selection_color = "#920909"
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	advclass_cat_rolls = list(CTAG_ROYALKNIGHT = 20)
 	give_bank_account = 60
 	cmode_music = 'sound/music/cmode/nobility/CombatKnight.ogg'
 	job_bitflag = BITFLAG_GARRISON
 
+	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_GARRISON = 900,
+		EXP_TYPE_COMBAT = 1200
+	)
+
+
 /datum/job/advclass/royalknight
 	inherit_parent_title = TRUE
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/royalknight/knight
 	title = "Royal Knight"
@@ -89,7 +98,7 @@
 	var/prev_real_name = H.real_name
 	var/prev_name = H.name
 	var/honorary = "Sir"
-	if(H.gender == FEMALE)
+	if(H.pronouns == SHE_HER)
 		honorary = "Dame"
 	H.real_name = "[honorary] [prev_real_name]"
 	H.name = "[honorary] [prev_name]"
@@ -99,7 +108,9 @@
 		"Halberd" = /obj/item/weapon/polearm/halberd, \
 		"Longsword" = /obj/item/weapon/sword/long, \
 		"Sabre" = /obj/item/weapon/sword/sabre/dec, \
-		"Unarmed" = /obj/item/weapon/knife/dagger/steel \
+		"Unarmed" = /obj/item/weapon/knife/dagger/steel, \
+		"Knuckles" = /obj/item/weapon/knuckles, \
+		"Katar" = /obj/item/weapon/katar \
 		)
 	var/choice = H.select_equippable(H, selectable, message = "Choose Your Specialisation", title = "KNIGHT")
 	if(!choice)
@@ -119,6 +130,12 @@
 		if("Unarmed")
 			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 3, 5, TRUE)
 			H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, 4, TRUE)
+			grant_shield = FALSE
+		if("Knuckles")
+			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4, TRUE)
+			grant_shield = FALSE
+		if("Katar")
+			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4, TRUE)
 			grant_shield = FALSE
 	if(grant_shield)
 		H.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)

@@ -4,9 +4,9 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/necromancer
-	category_tags = list(CTAG_WRETCH)
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	total_positions = 1
+	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 
 /datum/outfit/wretch/necromancer/pre_equip(mob/living/carbon/human/H)
 	..()

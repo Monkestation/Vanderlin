@@ -9,6 +9,11 @@
 	earliest_start = 35 MINUTES
 	todreq = list("night", "dawn", "day", "dusk")
 
+	tags = list(
+		TAG_RAID,
+		TAG_BATTLE,
+	)
+
 /datum/round_event/gobinvade
 	announceWhen	= 50
 	var/spawncount = 5

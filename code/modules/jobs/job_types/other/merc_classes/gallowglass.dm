@@ -1,7 +1,7 @@
 
 /datum/job/advclass/mercenary/gallowglass
 	title = "Gallowglass"
-	tutorial = "A claymore wielding mercanary hailing from the land of Kaledon, you are a fighter for coin, having fled the Grenzelhoftian occupation of your homeland. Your Kerns fight under you."
+	tutorial = "A claymore-wielding mercenary hailing from the land of Kaledon, you are a fighter for coin, having fled the Grenzelhoftian occupation of your homeland. Your Kerns fight under you."
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
 		SPEC_ID_ELF,\

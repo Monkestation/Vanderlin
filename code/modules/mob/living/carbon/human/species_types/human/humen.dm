@@ -27,9 +27,6 @@
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
-	inherent_skills = list(
-		/datum/skill/misc/reading = 1,
-	)
 
 	use_skintones = TRUE
 
@@ -109,8 +106,14 @@
 		"Subtropical" = SKIN_COLOR_SUBTROPICAL, // - (Mediterranean)
 		"Tropical Dry" = SKIN_COLOR_TROPICALDRY, // - (Mediterranean 2)
 		"Tropical Wet" = SKIN_COLOR_TROPICALWET, // - (Latin 2)
-		"Desert" = SKIN_COLOR_DESERT, //  - (Middle-east)
+		"Desert" = SKIN_COLOR_DESERT, //  - (Middle-east 1)
+		"Oasis" = SKIN_COLOR_OASIS, // - (Middle-east 2)
 		"Crimson Lands" = SKIN_COLOR_CRIMSONLANDS, // - (Black)
+		"Volcanic" = SKIN_COLOR_VOLCANIC, // - Melanesian
+		"Island" = SKIN_COLOR_ISLAND, // - Polynesian
+		"Taiga" = SKIN_COLOR_TAIGA, // - Native American 1
+		"Swamp" = SKIN_COLOR_SWAMP, // - Native American 2
+
 	))
 
 /datum/species/human/northern/get_hairc_list()

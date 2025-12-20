@@ -32,7 +32,7 @@
 "atu",
 "bus",
 "con",
-"cum",
+"com",
 "ent",
 "era",
 "ere",

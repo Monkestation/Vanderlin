@@ -1,10 +1,9 @@
 /datum/job/advclass/wretch/disgraced //Deserted, just without the MAA and the orders.
 	title = "Disgraced Knight"
-	tutorial = "You were once a venerated and revered knight - now, a traitor who abandoned your liege. You lyve the lyfe of an outlaw, shunned and looked down upon by society."
+	tutorial = "You were once a venerated and revered knight - now, a traitor who abandoned your liege. You live the life of an outlaw, shunned and looked down upon by society."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED //Royal Knight
 	outfit = /datum/outfit/wretch/disgraced
-	category_tags = list(CTAG_WRETCH)
 	total_positions = 1
 
 /datum/outfit/wretch/disgraced/pre_equip(mob/living/carbon/human/H)
@@ -58,7 +57,7 @@
 	var/prev_real_name = H.real_name
 	var/prev_name = H.name
 	var/honorary = "Sir"
-	if(H.gender == FEMALE)
+	if(H.pronouns == SHE_HER)
 		honorary = "Dame"
 	H.real_name = "[honorary] [prev_real_name]"
 	H.name = "[honorary] [prev_name]"

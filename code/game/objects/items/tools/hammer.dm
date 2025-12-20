@@ -7,7 +7,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	sharpness = IS_BLUNT
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
@@ -148,12 +148,13 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	time_multiplier = 0.8
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 50
+	melting_material = /datum/material/steel
 
 // --------- MALLET -----------
 /obj/item/weapon/hammer/wood
 	name = "wooden mallet"
-	desc = "A wooden mallet is an artificers second best friend! But it may also come in handy to a smith..."
+	desc = "A wooden mallet is an artificer's second-best friend! But it may also come in handy to a smith..."
 	icon_state = "hammer_w"
 	dropshrink = 0.9
 	experimental_onhip = FALSE
@@ -188,16 +189,15 @@
 	time_multiplier = 1.1
 
 /obj/item/weapon/hammer/sledgehammer
+	name = "sledgehammer"
+	desc = "It's almost asking to be put to work."
+	icon = 'icons/roguetown/weapons/32/clubs.dmi'
+	icon_state = "sledgehammer"
 	force = DAMAGE_HAMMER + 5
 	force_wielded = DAMAGE_HAMMER_WIELD + 5
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
-	name = "sledgehammer"
-	desc = "It's almost asking to be put to work."
-	icon_state = "sledgehammer"
-	icon = 'icons/roguetown/weapons/32.dmi'
 	sharpness = IS_BLUNT
-	//dropshrink = 0.8
 	wbalance = -1 // Heavy
 	minstr = 8
 	gripsprite = TRUE
@@ -219,28 +219,29 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/weapon/hammer/sledgehammer/war
+	name = "steel sledgehammer"
+	desc = "A heavy steel sledgehammer, a weapon designed to make knights run in fear, the best option for a common soldier against a knight."
+	icon = 'icons/roguetown/weapons/32/clubs.dmi'
+	icon_state = "warbonker"
 	force = DAMAGE_HAMMER + 5
 	force_wielded = DAMAGE_HAMMER_WIELD + 10
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
-	name = "steel sledgehammer"
-	desc = "A heavy steel sledgehammer, a weapon designed to make knights run in fear, the best option for a common soldier against a knight."
-	icon_state = "warbonker"
-	icon = 'icons/roguetown/weapons/32.dmi'
 	max_integrity = INTEGRITY_STRONGEST
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 50
+	melting_material = /datum/material/steel
 	time_multiplier = 1.5 //it's for crushing skulls not nails
 
 /obj/item/weapon/hammer/sledgehammer/war/malum
+	name = "forgefiend"
+	desc = "This hammer's creation took a riddle in its own making. A great sacrifice for perfect quality"
+	icon = 'icons/roguetown/weapons/64/patron.dmi'
+	icon_state = "malumhammer"
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD
 	possible_item_intents = list(/datum/intent/mace/strike/heavy)
 	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
-	name = "forgefiend"
-	desc = "This hammer's creation took a riddle in its own making. A great sacrifice for perfect quality"
 	parrysound = list('sound/combat/parry/parrygen.ogg')
-	icon_state = "malumhammer"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
@@ -251,7 +252,8 @@
 	w_class = WEIGHT_CLASS_HUGE
 	slot_flags = ITEM_SLOT_BACK
 	max_integrity = INTEGRITY_STRONGEST * 1.2
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 50
+	melting_material = /datum/material/steel
 	melting_material = /datum/material/steel
 	resistance_flags = FIRE_PROOF
 	minstr = 10

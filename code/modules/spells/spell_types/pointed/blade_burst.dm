@@ -8,6 +8,10 @@
 	attunements = list(
 		/datum/attunement/earth = 0.5,
 	)
+
+	invocation = "Earth pierce you!!!"
+	invocation_type = INVOCATION_SHOUT
+
 	spell_flags = SPELL_RITUOS
 	charge_time = 2 SECONDS
 	charge_drain = 1
@@ -46,6 +50,6 @@
 
 /obj/effect/temp_visual/blade_burst
 	icon = 'icons/effects/effects.dmi'
-	icon_state = "purplesparkles"
+	icon_state = "grassblade"
 	randomdir = FALSE
 	duration = 1 SECONDS

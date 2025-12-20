@@ -8,6 +8,7 @@
 	min_players = 15
 
 	tags = list(
+		TAG_BAOTHA,
 		TAG_INSANITY,
 		TAG_ALCHEMY,
 	)
@@ -44,8 +45,10 @@
 	var/datum/objective/personal/sniff_drugs/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE BAOTHA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Baotha demands chemical ecstasy! Sniff drugs to earn Baotha's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE BAOTHA'S CHOSEN!"),
+		span_notice("Baotha demands chemical ecstasy! Sniff drugs to earn Baotha's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/baotha_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

@@ -8,7 +8,7 @@
 	min_players = 20
 
 	tags = list(
-		TAG_MEDICAL,
+		TAG_PESTRA,
 	)
 
 /datum/round_event_control/pestra_rotten_feast/canSpawnEvent(players_amt, gamemode, fake_check)
@@ -43,8 +43,10 @@
 	var/datum/objective/personal/rotten_feast/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE PESTRA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Everything can be reused. Consume rotten food to earn Pestra's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE PESTRA'S CHOSEN!"),
+		span_notice("Everything can be reused. Consume rotten food to earn Pestra's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/magic/cosmic_expansion.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

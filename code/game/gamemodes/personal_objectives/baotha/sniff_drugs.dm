@@ -2,7 +2,7 @@
 	name = "Sniff Drugs"
 	category = "Baotha's Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Baotha grows stronger", "Ability to recognize alcoholics and junkies on examine")
+	rewards = list("2 Triumphs", "Baotha grows stronger", "Ability to recognize alcoholics and junkies on examine", "Baotha blesses you (+1 Fortune)")
 	var/sniff_count = 0
 	var/required_count = 2
 
@@ -24,15 +24,20 @@
 
 	sniff_count++
 	if(sniff_count >= required_count)
-		to_chat(owner.current, span_greentext("You have sniffed enough drugs to complete Baotha's objective!"))
-		owner.current.adjust_triumphs(triumph_count)
-		completed = TRUE
-		adjust_storyteller_influence(BAOTHA, 20)
-		ADD_TRAIT(owner.current, TRAIT_RECOGNIZE_ADDICTS, TRAIT_GENERIC)
-		escalate_objective()
-		UnregisterSignal(owner.current, COMSIG_DRUG_SNIFFED)
+		complete_objective()
 	else
 		to_chat(owner.current, span_notice("Drug sniffed! Sniff [required_count - sniff_count] more to complete Baotha's objective."))
+
+/datum/objective/personal/sniff_drugs/complete_objective()
+	. = ..()
+	to_chat(owner.current, span_greentext("You have sniffed enough drugs to complete Baotha's objective!"))
+	adjust_storyteller_influence(BAOTHA, 20)
+	UnregisterSignal(owner.current, COMSIG_DRUG_SNIFFED)
+
+/datum/objective/personal/sniff_drugs/reward_owner()
+	. = ..()
+	ADD_TRAIT(owner.current, TRAIT_RECOGNIZE_ADDICTS, TRAIT_GENERIC)
+	owner.current.adjust_stat_modifier(STATMOD_BAOTHA_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/sniff_drugs/update_explanation_text()
 	explanation_text = "Sniff [required_count] drugs for Baotha's pleasure!"

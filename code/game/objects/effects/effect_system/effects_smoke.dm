@@ -62,6 +62,8 @@
 		return 0
 	if(C.smoke_delay)
 		return 0
+	if(istype(C.wear_mask, /obj/item/clothing/face/facemask/steel/confessor))
+		return 0
 	C.smoke_delay++
 	addtimer(CALLBACK(src, PROC_REF(remove_smoke_delay), C), 10)
 	return 1

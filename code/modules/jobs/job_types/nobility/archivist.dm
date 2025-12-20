@@ -9,20 +9,36 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 4
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-
+	blacklisted_species = list(SPEC_ID_HALFLING)
+	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	outfit = /datum/outfit/archivist
 	spells = list(
 		/datum/action/cooldown/spell/undirected/learn,
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
+		/datum/action/cooldown/spell/undirected/conjure_item/summon_parchment,
+		/datum/action/cooldown/spell/undirected/conjure_item/summon_parchment/scroll,
 	)
 	give_bank_account = 100
 
 	job_bitflag = BITFLAG_ROYALTY
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
+
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_MAGICK, EXP_TYPE_NOBLE)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 300
+	)
+
+
+/datum/job/archivist/after_spawn(mob/living/carbon/spawned, client/player_client)
+	. = ..()
+	var/mob/living/carbon/human/H = spawned
+	if(GLOB.keep_doors.len > 0)
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), H), 5 SECONDS)
+	ADD_TRAIT(H, TRAIT_KNOWKEEPPLANS, TRAIT_GENERIC)
 
 /datum/outfit/archivist/pre_equip(mob/living/carbon/human/H)
 	..()

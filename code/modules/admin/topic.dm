@@ -469,7 +469,7 @@
 		NP.ckey = M.ckey
 		if(living)
 			if(alert(usr, "Would you like to also delete the living mob [key_name(M)]?", "Message", "Yes", "No") == "Yes")
-				log_admin("[key_name(usr)] has chosen to delete the [M] mob while sending the client to lobby.")
+				log_admin("[key_name(usr)] has chosen to delete \the [M] mob while sending the client to lobby.")
 				qdel(M)
 		else
 			qdel(M)
@@ -813,6 +813,18 @@
 		message_admins("[key_name_admin(usr)] decreased [key_name_admin(M)]'s [statkey].")
 		show_player_panel_next(M, "stats")
 
+	else if(href_list["bulk_change"])
+		var/mob/living/M = locate(href_list["bulk_change"])
+		var/statkey = href_list["stat"]
+		var/change_stat = input(usr, "Increase or Decrease this stat.", "Bulk Stat Change", 1) as num
+		if(!change_stat)
+			return
+		M.change_stat(statkey, change_stat)
+
+		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s [statkey] by [change_stat].")
+		message_admins("[key_name_admin(usr)] changed [key_name_admin(M)]'s [statkey] by [change_stat].")
+		show_player_panel_next(M, "stats")
+
 	else if(href_list["sendmob"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1054,30 +1066,6 @@
 			log_admin("[key_name(usr)] has kicked [afkonly ? "all AFK" : "all"] clients from the lobby. [length(listkicked)] clients kicked: [strkicked ? strkicked : "--"]")
 		else
 			to_chat(usr, "You may only use this when the game is running.")
-
-	else if(href_list["create_outfit_finalize"])
-		if(!check_rights(R_ADMIN))
-			return
-		create_outfit_finalize(usr,href_list)
-	else if(href_list["load_outfit"])
-		if(!check_rights(R_ADMIN))
-			return
-		load_outfit(usr)
-	else if(href_list["create_outfit_menu"])
-		if(!check_rights(R_ADMIN))
-			return
-		create_outfit(usr)
-	else if(href_list["delete_outfit"])
-		if(!check_rights(R_ADMIN))
-			return
-		var/datum/outfit/O = locate(href_list["chosen_outfit"]) in GLOB.custom_outfits
-		delete_outfit(usr,O)
-	else if(href_list["save_outfit"])
-		if(!check_rights(R_ADMIN))
-			return
-		var/datum/outfit/O = locate(href_list["chosen_outfit"]) in GLOB.custom_outfits
-		save_outfit(usr,O)
-
 	else if(href_list["viewruntime"])
 		var/datum/error_viewer/error_viewer = locate(href_list["viewruntime"])
 		if(!istype(error_viewer))
@@ -1223,7 +1211,7 @@
 			return
 
 		var/raisin = stripped_input(usr, "State a short reason for this change", "Game Master", null, null)
-		M.adjust_triumphs(amt2change, FALSE, raisin)
+		M.adjust_triumphs(amt2change, FALSE, raisin, override_bonus = TRUE)
 		message_admins("[key_name_admin(usr)] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 		log_admin("[key_name_admin(usr)] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 

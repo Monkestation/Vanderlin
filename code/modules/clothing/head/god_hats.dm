@@ -8,7 +8,7 @@
 
 /obj/item/clothing/head/roguehood/nochood
 	name = "moon hood"
-	desc = "The face of the Moon Prince. Worn by the faitful of Noc."
+	desc = "The face of the Moon Prince. Worn by the faithful of Noc."
 	icon_state = "nochood"
 	flags_inv = HIDEEARS|HIDEHAIR
 	default_hidden = HIDEEARS|HIDEHAIR

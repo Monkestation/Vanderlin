@@ -13,6 +13,10 @@
 		/datum/attunement/blood = 0.5,
 	)
 
+	invocation_type = INVOCATION_EMOTE
+	invocation = span_userdanger("<b>%CASTER</b> casts %PRONOUN_their hands outward!")
+	invocation_self_message = span_danger("I throw out an unholy snare!")
+
 	charge_time = 2 SECONDS
 	charge_drain = 1
 	cooldown_time = 10 SECONDS

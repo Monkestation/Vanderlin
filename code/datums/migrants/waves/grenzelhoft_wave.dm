@@ -145,12 +145,12 @@
 
 /datum/migrant_role/grenzelhoft_knight
 	name = "Grenzelhoft Knight"
-	greet_text = "Your liege, the count and the countess have both took the duty given by the Kaiser himself to voyage to Vanderlin, ensure their survival and obey their orders."
+	greet_text = "Your liege, the count and the countess have both took the duty given by the council to voyage to Vanderlin, ensure their survival and obey their orders."
 	migrant_job = /datum/job/migrant/grenzelhoft_knight
 
 /datum/job/migrant/grenzelhoft_knight
 	title = "Grenzelhoft Knight"
-	tutorial = "Your liege, the count and the countess have both took the duty given by the Kaiser himself to voyage to Vanderlin, ensure their survival and obey their orders."
+	tutorial = "Your liege, the count and the countess have both took the duty given by the council to voyage to Vanderlin, ensure their survival and obey their orders."
 	outfit = /datum/outfit/grenzelhoft_knight
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_GRENZ
@@ -181,7 +181,7 @@
 	var/prev_real_name = spawned.real_name
 	var/prev_name = spawned.name
 	var/honorary = "Ritter"
-	if(spawned.gender == FEMALE)
+	if(spawned.pronouns == SHE_HER)
 		honorary = "Ritterin"
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
@@ -209,12 +209,12 @@
 
 /datum/migrant_role/grenzelhoft_man_at_arms
 	name = "Grenzelhoft Man-at-Arms"
-	greet_text = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the Ritter and make sure the nobles you arrived with surive."
+	greet_text = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the count and make sure the nobles you arrived with survive."
 	migrant_job = /datum/job/migrant/grenzelhoft_man_at_arms
 
 /datum/job/migrant/grenzelhoft_man_at_arms
 	title = "Grenzelhoft Man-at-Arms"
-	tutorial = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the Ritter and make sure the nobles you arrived with surive."
+	tutorial = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the count and make sure the nobles you arrived with survive."
 	outfit = /datum/outfit/grenzelhoft_man_at_arms
 	allowed_races = RACES_PLAYER_GRENZ
 
@@ -285,7 +285,7 @@
 		/datum/migrant_role/grenzelhoft_countess = 1,
 		/datum/migrant_role/grenzelhoft_knight = 1,
 		/datum/migrant_role/grenzelhoft_man_at_arms = 2)
-	greet_text = "The Kaiser of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."
+	greet_text = "The council of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."
 
 /datum/migrant_wave/grenzelhoft_visit_down
 	name = "The Grenzelhoft visit"
@@ -296,4 +296,4 @@
 		/datum/migrant_role/grenzelhoft_count = 1,
 		/datum/migrant_role/grenzelhoft_countess = 1,
 		/datum/migrant_role/grenzelhoft_knight = 1)
-	greet_text = "The Kaiser of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."
+	greet_text = "The council of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."

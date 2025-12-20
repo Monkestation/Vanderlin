@@ -62,3 +62,10 @@
 			to_chat(target, "[span_minorannounce("<font color = purple>[title]</font color><BR>[message]")]<BR>")
 			if(target.client.prefs.toggles & SOUND_ANNOUNCEMENTS)
 				target.playsound_local(target, 'sound/misc/alert.ogg', 100)
+
+/proc/bordered_message(mob/target, list/messages)
+	var/html = "<br><div class='alert_holder'>"
+	for(var/msg in messages)
+		html += "[msg]<br>"
+	html += "</div><br>"
+	to_chat(target, html)

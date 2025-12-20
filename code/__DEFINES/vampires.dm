@@ -12,6 +12,7 @@
 #define BLOOD_PREFERENCE_KIN (1<<4)
 #define BLOOD_PREFERENCE_FANCY (1<<5)
 #define BLOOD_PREFERENCE_RATS (1<<6)
+#define BLOOD_PREFERENCE_EUPHORIC (1<<7)
 
 #define TATTOO_SILENT	"Silent Casting"
 

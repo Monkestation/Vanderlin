@@ -22,9 +22,9 @@
 /obj/structure/ice_zone
 	name = "frozen zone"
 	desc = "A magic pile of ice used to chill things."
-	icon = 'icons/turf/floors.dmi'
-	icon_state = "carpet_c_primary"
-	alpha = 150
+	icon = 'icons/effects/freeze.dmi'
+	icon_state = "ice_shards"
+	alpha = 200
 	density = FALSE
 	anchored = TRUE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP

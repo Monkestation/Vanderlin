@@ -28,6 +28,10 @@
 	lockid_list = list(ACCESS_MANOR)
 	locked = TRUE
 
+/datum/lock/key/atarms
+	lockid_list = list(ACCESS_AT_ARMS)
+	locked = TRUE
+
 /datum/lock/key/inn
 	lockid_list = list(ACCESS_INN)
 	locked = TRUE

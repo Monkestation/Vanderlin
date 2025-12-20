@@ -1,6 +1,6 @@
 /obj/structure/flora/grass/tangler
 	name = "twisting shrub"
-	desc = "Green, spiky and....I think I saw it move!"
+	desc = "Green, spiky and... I think I saw it move!"
 	icon = 'icons/roguetown/mob/monster/tangler.dmi'
 	icon_state = "tangler_hidden"
 	num_random_icons = 0
@@ -17,12 +17,18 @@
 	var/aggroed = TRUE
 	///Proximity monitor associated with this atom, needed for proximity checks.
 	var/datum/proximity_monitor/proximity_monitor
+	var/list/activation_words = list("rise","awake", "rush", "bloom")
+	var/list/deactivation_words = list("rest", "sleep", "hush", "hide")
+	var/speaking_distance = 4
 
 /obj/structure/flora/grass/tangler/real/Initialize()
 	. = ..()
 	proximity_monitor = new(src, 1)
+	become_hearing_sensitive()
+	update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 
 /obj/structure/flora/grass/tangler/real/Destroy()
+	lose_hearing_sensitivity()
 	QDEL_NULL(proximity_monitor)
 	unbuckle_all_mobs()
 	STOP_PROCESSING(SSobj, src)
@@ -50,7 +56,7 @@
 					playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 					qdel(F)
 					return
-		if(world.time > aggroed + 10 SECONDS)
+		if(world.time > aggroed + 15 SECONDS)
 			aggroed = 0
 			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 			STOP_PROCESSING(SSobj, src)
@@ -104,7 +110,7 @@
 /obj/structure/flora/grass/tangler/real/HasProximity(atom/movable/AM)
 	if(has_buckled_mobs())
 		return
-	if(!(world.time > last_eat + 5 SECONDS))
+	if(!(world.time > last_eat + 5 SECONDS) && !aggroed)
 		return
 	if(istype(AM, /mob/living))
 		var/mob/living/L = AM
@@ -143,3 +149,36 @@
 	else if(istype(mover, /obj/projectile) && prob(30))
 		return ..()
 	return ..()
+
+/obj/structure/flora/grass/tangler/real/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), original_message)
+	if(!isliving(speaker))
+		return FALSE
+	var/mob/living/L = speaker
+	if(get_dist(L, src) > speaking_distance)
+		return FALSE
+	if(obj_broken)
+		return FALSE
+	if(!HAS_TRAIT(L, TRAIT_DENDOR_GROWING))
+		return FALSE
+
+	var/message2recognize = SANITIZE_HEAR_MESSAGE(raw_message)
+
+	for(var/word in deactivation_words)
+		if(findtext(message2recognize, word))
+			if(aggroed)
+				aggroed = 0
+				update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+				unbuckle_all_mobs()
+				STOP_PROCESSING(SSobj, src)
+				return TRUE
+
+	for(var/word in activation_words)
+		if(findtext(message2recognize, word))
+			if(!aggroed)
+				aggroed = world.time
+				last_eat = world.time
+				update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+				START_PROCESSING(SSobj, src)
+				return TRUE
+
+	return FALSE

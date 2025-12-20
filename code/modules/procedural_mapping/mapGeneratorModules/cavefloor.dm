@@ -13,13 +13,13 @@
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
 	allowed_turfs = list(/turf/open/floor/dirt/road,/turf/open/water,/turf/open/floor/volcanic)
 	spawnableAtoms = list(/obj/item/natural/stone = 5, /obj/structure/roguerock=5, /obj/item/natural/rock=3, /obj/structure/kneestingers=1, /obj/item/restraints/legcuffs/beartrap/armed/camouflage=1, /obj/structure/innouous_rock = 1)
-	allowed_areas = list(/area/rogue/under/cave/spider,/area/rogue/indoors/cave,/area/rogue/under/cavewet,/area/rogue/under/cave,/area/rogue/under/cavelava)
+	allowed_areas = list(/area/under/cave/spider,/area/indoors/cave,/area/under/cavewet,/area/under/cave,/area/under/cavelava)
 
 /datum/mapGeneratorModule/cavedirt
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/dirt)
 	spawnableAtoms = list(/obj/structure/flora/shroom_tree=16, /obj/structure/roguerock=8, /obj/structure/closet/dirthole/closed/loot=3, /obj/item/natural/stone=10, /obj/item/natural/rock=8, /obj/structure/kneestingers = 0, /obj/item/restraints/legcuffs/beartrap/armed/camouflage=0)
-	allowed_areas = list(/area/rogue/under/cave/spider,/area/rogue/indoors/cave,/area/rogue/under/cavewet,/area/rogue/under/cave,/area/rogue/under/cavelava)
+	allowed_areas = list(/area/under/cave/spider,/area/indoors/cave,/area/under/cavewet,/area/under/cave,/area/under/cavelava)
 
 /obj/effect/landmark/mapGenerator/cave/lava
 	mapGeneratorType = /datum/mapGenerator/cave/lava
@@ -45,12 +45,12 @@
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
 	allowed_turfs = list(/turf/open/floor/dirt)
 	spawnableAtoms = list(/obj/structure/spider/stickyweb=10)
-	allowed_areas = list(/area/rogue/under/cave/spider)
+	allowed_areas = list(/area/under/cave/spider)
 
 /datum/mapGeneratorModule/sewerwaterturf
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	allowed_turfs = list(/turf/open/water/cleanshallow)
-	allowed_areas = list(/area/rogue/under/town/sewer)
+	allowed_areas = list(/area/under/town/sewer)
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 20,
 	                        /obj/structure/kneestingers = 1)
 

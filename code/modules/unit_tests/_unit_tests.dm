@@ -71,8 +71,10 @@
 #include "create_and_destroy.dm"
 #include "faction_supply_packs.dm"
 #include "focus_only_tests.dm"
+#include "load_map_security.dm"
 #include "map_landmarks.dm"
 #include "mapping.dm"
+#include "mindbound_actions.dm"
 #include "projectiles.dm"
 #include "reagent_id_typos.dm"
 #include "reagent_names.dm"
@@ -84,10 +86,14 @@
 #include "spawn_humans.dm"
 #include "spawn_mobs.dm"
 #include "species_whitelists.dm"
+#include "spell_invocations.dm"
+#include "spell_names.dm"
+#include "spell_shapeshift.dm"
 #include "subsystem_init.dm"
 #include "surgeries.dm"
 #include "timer_sanity.dm"
 #include "unit_test.dm"
+#include "weapon_icons.dm"
 // END_INCLUDE
 
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter

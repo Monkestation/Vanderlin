@@ -34,7 +34,7 @@
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/avert),
 		CLERIC_T1 = /datum/action/cooldown/spell/burial_rites,
-		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/soul_speak, /datum/action/cooldown/spell/aoe/abrogation),
+		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/locate_dead, /datum/action/cooldown/spell/aoe/abrogation, /datum/action/cooldown/spell/undirected/soul_speak, ),
 		CLERIC_T3 = /datum/action/cooldown/spell/aoe/churn_undead,
 	)
 	traits = list(TRAIT_DEATHSIGHT)
@@ -78,6 +78,10 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/projectile/eora_curse,
 		CLERIC_T3 = /datum/action/cooldown/spell/eoran_bloom,
 	)
+	favored_species = list(SPEC_ID_HARPY)
+	favored_miracles = list(
+		CLERIC_T3 = /datum/action/cooldown/spell/charm/eoran
+	)
 
 // Inhumen
 /datum/devotion/inhumen/make_cleric()
@@ -106,7 +110,7 @@
 
 /datum/devotion/inhumen/zizo
 	miracles = list(
-		CLERIC_T0 = /datum/action/cooldown/spell/undirected/touch/orison,
+		CLERIC_T0 = list(/datum/action/cooldown/spell/undirected/touch/orison, /datum/action/cooldown/spell/aoe/snuff),
 		CLERIC_T1 = /datum/action/cooldown/spell/projectile/profane,
 		CLERIC_T2 = /datum/action/cooldown/spell/conjure/raise_lesser_undead,
 		CLERIC_T3 = /datum/action/cooldown/spell/undirected/rituos,

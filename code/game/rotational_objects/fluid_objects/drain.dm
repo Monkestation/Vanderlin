@@ -42,8 +42,6 @@
 	else
 		visible_message(span_warning("[src] needs to be placed on or near a water pipe!"))
 
-	update_appearance()
-
 /obj/structure/fluid_drain/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	if(connected_pipe && current_providing_reagent)
@@ -83,8 +81,6 @@
 			current_providing_reagent = null
 			visible_message(span_notice("[src] runs out of fluid to provide."))
 
-	update_appearance()
-
 /obj/structure/fluid_drain/proc/drain_nearby_liquids()
 	if(processes < processes_required)
 		processes++
@@ -118,7 +114,7 @@
 			drain_amount = targeted_group.total_reagent_volume
 
 		if(drain_amount > 0)
-			targeted_group.trans_to_seperate_group(collected_fluids, drain_amount, merge = TRUE)
+			targeted_group.trans_to_seperate_group(collected_fluids, drain_amount)
 
 			// Visual effect
 			show_drain_effect(T)

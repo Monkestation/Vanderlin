@@ -8,6 +8,11 @@
 	req_omen = TRUE
 	todreq = list("dusk", "night")
 
+	tags = list(
+		TAG_HAUNTED,
+		TAG_CURSE,
+	)
+
 /datum/round_event/lightsout
 	announceWhen	= 1
 

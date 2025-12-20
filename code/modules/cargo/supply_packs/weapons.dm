@@ -17,17 +17,22 @@
 
 /datum/supply_pack/weapons/shield/wood
 	name = "Wooden Shield"
-	cost = 10
+	cost = 20
 	contains = /obj/item/weapon/shield/wood
 
 /datum/supply_pack/weapons/shield/towershield
 	name = "Tower Shield"
-	cost = 30
+	cost = 35
 	contains = /obj/item/weapon/shield/tower
+
+/datum/supply_pack/weapons/shield/atgervishield
+	name = "Atgervi Shield"
+	cost = 30
+	contains = /obj/item/weapon/shield/atgervi
 
 /datum/supply_pack/weapons/shield/iron
 	name = "Iron Buckler"
-	cost = 30
+	cost = 25
 	contains = /obj/item/weapon/shield/tower/buckleriron
 
 // IRON MELEE WEAPONS
@@ -35,110 +40,240 @@
 /datum/supply_pack/weapons/iron
 	group = "Weapons (Iron)"
 
-/datum/supply_pack/weapons/iron/shortsword
-	name = "Iron Short Sword"
-	cost = 30
-	contains = /obj/item/weapon/sword/short
+/datum/supply_pack/weapons/iron/iwodao
+	name = "Iron Wo Dao"
+	cost = 25
+	contains = /obj/item/weapon/sword/scimitar/wodao/iron
 
-/datum/supply_pack/weapons/iron/sword_iron
-	name = "Iron Arming Sword"
+/datum/supply_pack/weapons/iron/isengese
+	name = "Iron Sengese"
+	cost = 25
+	contains = /obj/item/weapon/sword/scimitar/sengese/iron
+
+/datum/supply_pack/weapons/iron/iirumi
+	name = "Iron Irumi"
+	cost = 30
+	contains = /obj/item/weapon/whip/urumi/iron
+
+/datum/supply_pack/weapons/iron/idadao
+	name = "Iron Dadao"
+	cost = 45
+	contains = /obj/item/weapon/sword/sabre/dadao/iron
+
+/datum/supply_pack/weapons/iron/ihwi
+	name = "Iron Hwi"
+	cost = 45
+	contains = /obj/item/weapon/sword/sabre/hwi/iron
+
+/datum/supply_pack/weapons/iron/ikhopesh
+	name = "Iron Khopesh"
+	cost = 25
+	contains = /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
+
+/datum/supply_pack/weapons/iron/ikaskara
+	name = "Iron Kaskara"
+	cost = 25
+	contains = /obj/item/weapon/sword/kaskara/iron
+
+/datum/supply_pack/weapons/iron/iida
+	name = "Iron Ida"
+	cost = 25
+	contains = /obj/item/weapon/sword/ida/iron
+
+/datum/supply_pack/weapons/iron/iaruval
+	name = "Iron Aruval"
+	cost = 70
+	contains = /obj/item/weapon/sword/long/aruval/iron
+
+/datum/supply_pack/weapons/iron/injora
+	name = "Iron Seme"
+	cost = 15
+	contains = /obj/item/weapon/knife/njora/iron
+
+/datum/supply_pack/weapons/iron/irungu
+	name = "Iron Rungu"
+	cost = 25
+	contains = /obj/item/weapon/mace/rungu/iron
+
+/datum/supply_pack/weapons/iron/insapo
+	name = "Iron Kasuyu"
+	cost = 25
+	contains = /obj/item/weapon/axe/nsapo/iron
+
+/datum/supply_pack/weapons/iron/ijile
+	name = "Iron Jile"
+	cost = 12
+	contains = /obj/item/weapon/knife/jile/iron
+
+/datum/supply_pack/weapons/iron/ikukri
+	name = "Iron Kukri"
+	cost = 15
+	contains = /obj/item/weapon/knife/dagger/kukri/iron
+
+/datum/supply_pack/weapons/iron/ishishpar
+	name = "Iron Shishpar"
+	cost = 45
+	contains = /obj/item/weapon/mace/shishpar/iron
+
+/datum/supply_pack/weapons/iron/iassegai
+	name = "Iron Assegai"
 	cost = 35
-	contains = /obj/item/weapon/sword/iron
+	contains = /obj/item/weapon/polearm/spear/assegai
 
-/datum/supply_pack/weapons/iron/mace
-	name = "Iron Mace"
+/datum/supply_pack/weapons/iron/iwaraxe
+	name = "Iron War Axe"
+	cost = 50
+	contains = /obj/item/weapon/polearm/halberd/bardiche/warcutter
+
+/datum/supply_pack/weapons/iron/navaja
+	name = "Navaja"
+	cost = 25
+	contains = /obj/item/weapon/knife/dagger/navaja
+
+/datum/supply_pack/weapons/iron/bayonet
+	name = "Musket Bayonet"
+	cost = 23
+	contains = /obj/item/weapon/knife/dagger/bayonet
+
+/datum/supply_pack/weapons/iron/iflail
+	name = "Iron Flail"
 	cost = 30
-	contains = /obj/item/weapon/mace
-
-/datum/supply_pack/weapons/iron/axe
-	name = "Iron Axe"
-	cost = 30
-	contains = /obj/item/weapon/axe
-
-/datum/supply_pack/weapons/iron/huntingknife
-	name = "Iron Hunting Knife"
-	cost = 20
-	contains = /obj/item/weapon/knife/hunting
-
-/datum/supply_pack/weapons/iron/dagger
-	name = "Iron Dagger"
-	cost = 20
-	contains = /obj/item/weapon/knife/dagger
-
-/datum/supply_pack/weapons/iron/spear
-	name = "Iron Spear"
-	cost = 30
-	contains = /obj/item/weapon/polearm/spear
-
-/datum/supply_pack/weapons/iron/flail
-	name = "Military Flail"
-	cost = 35
 	contains = /obj/item/weapon/flail
-
-/datum/supply_pack/weapons/iron/greatmace
-	name = "Iron Warclub"
-	cost = 60
-	contains = /obj/item/weapon/mace/goden
-
-/datum/supply_pack/weapons/iron/greatsword
-	name = "Zweihander"
-	cost = 70
-	contains = /obj/item/weapon/sword/long/greatsword/zwei
-
-/datum/supply_pack/weapons/iron/bardiche
-	name = "Bardiche"
-	cost = 70
-	contains = /obj/item/weapon/polearm/halberd/bardiche
 
 // STEEL MELEE WEAPONS
 
 /datum/supply_pack/weapons/steel
 	group = "Weapons (Steel)"
 
-/datum/supply_pack/weapons/steel/sword
-	name = "Steel Arming Sword"
+/datum/supply_pack/weapons/steel/wodao
+	name = "Steel Wo Dao"
 	cost = 50
-	contains = /obj/item/weapon/sword
+	contains = /obj/item/weapon/sword/scimitar/wodao
 
-/datum/supply_pack/weapons/steel/smace
-	name = "Flanged Steel Mace"
+/datum/supply_pack/weapons/steel/sengese
+	name = "Steel Sengese"
 	cost = 50
-	contains = /obj/item/weapon/mace/steel
+	contains = /obj/item/weapon/sword/scimitar/sengese
 
-/datum/supply_pack/weapons/steel/saxe
-	name = "Steel Axe"
+/datum/supply_pack/weapons/steel/irumi
+	name = "Steel Irumi"
+	cost = 60
+	contains = /obj/item/weapon/whip/urumi
+
+/datum/supply_pack/weapons/steel/dadao
+	name = "Steel Dadao"
+	cost = 90
+	contains = /obj/item/weapon/sword/sabre/dadao
+
+/datum/supply_pack/weapons/steel/hwi
+	name = "Steel Hwi"
+	cost = 90
+	contains = /obj/item/weapon/sword/sabre/hwi
+
+/datum/supply_pack/weapons/steel/khopesh
+	name = "Steel Khopesh"
 	cost = 50
-	contains = /obj/item/weapon/axe/steel
+	contains = /obj/item/weapon/sword/scimitar/lakkarikhopesh
 
-/datum/supply_pack/weapons/steel/baxe
-	name = "Battle Axe"
+/datum/supply_pack/weapons/steel/kaskara
+	name = "Steel Kaskara"
+	cost = 50
+	contains = /obj/item/weapon/sword/kaskara
+
+/datum/supply_pack/weapons/steel/ida
+	name = "Steel Ida"
+	cost = 50
+	contains = /obj/item/weapon/sword/ida
+
+/datum/supply_pack/weapons/steel/aruval
+	name = "Steel Aruval"
+	cost = 125
+	contains = /obj/item/weapon/sword/long/aruval
+
+/datum/supply_pack/weapons/steel/njora
+	name = "Steel Seme"
+	cost = 25
+	contains = /obj/item/weapon/knife/njora/steel
+
+/datum/supply_pack/weapons/steel/rungu
+	name = "Steel Rungu"
+	cost = 50
+	contains = /obj/item/weapon/mace/steel/rungu
+
+/datum/supply_pack/weapons/steel/jile
+	name = "Steel Jile"
+	cost = 25
+	contains = /obj/item/weapon/knife/jile/steel
+
+/datum/supply_pack/weapons/steel/kukri
+	name = "Steel Kukri"
+	cost = 45
+	contains = /obj/item/weapon/knife/dagger/kukri/steel
+
+/datum/supply_pack/weapons/steel/shishpar
+	name = "Steel Shishpar"
+	cost = 90
+	contains = /obj/item/weapon/mace/steel/shishpar
+
+/datum/supply_pack/weapons/steel/assegai
+	name = "Steel Assegai"
+	cost = 60
+	contains = /obj/item/weapon/polearm/spear/steel/assegai
+
+/datum/supply_pack/weapons/steel/atgervi
+	name = "Steel Atgervi Axe"
+	cost = 60
+	contains = /obj/item/weapon/axe/steel/atgervi
+
+/datum/supply_pack/weapons/steel/paxe
+	name = "Pickaxe"
+	cost = 90
+	contains = /obj/item/weapon/pick/paxe
+
+/datum/supply_pack/weapons/steel/sbattleaxe
+	name = "Steel Battle Axe"
 	cost = 60
 	contains = /obj/item/weapon/axe/battle
 
-/datum/supply_pack/weapons/steel/sdagger
-	name = "Steel Dagger"
-	cost = 26
-	contains = /obj/item/weapon/knife/dagger/steel
+/datum/supply_pack/weapons/steel/knuckles
+	name = "Steel Knuckles"
+	cost = 45
+	contains = /obj/item/weapon/knuckles
 
 /datum/supply_pack/weapons/steel/sflail
 	name = "Steel Flail"
-	cost = 32
+	cost = 50
 	contains = /obj/item/weapon/flail/sflail
 
-/datum/supply_pack/weapons/steel/greatmace
-	name = "Steel Greatmace"
+/datum/supply_pack/weapons/steel/doublesgreataxe
+	name = "Double-Headed Steel Greataxe"
 	cost = 120
-	contains = /obj/item/weapon/mace/goden/steel
+	contains = /obj/item/weapon/greataxe/steel/doublehead
 
-/datum/supply_pack/weapons/steel/greatsword
-	name = "Steel Greatsword"
-	cost = 150
-	contains = /obj/item/weapon/sword/long/greatsword
+/datum/supply_pack/weapons/steel/sgreataxe
+	name = "Steel Greataxe"
+	cost = 90
+	contains = /obj/item/weapon/greataxe/steel
 
-/datum/supply_pack/weapons/steel/halberd
-	name = "Halberd"
-	cost = 120 // no more free money
-	contains = /obj/item/weapon/polearm/halberd
+/datum/supply_pack/weapons/steel/scutlass
+	name = "Cutlass"
+	cost = 50
+	contains = /obj/item/weapon/sword/sabre/cutlass
+
+/datum/supply_pack/weapons/steel/mulyeog
+	name = "Mulyeog"
+	cost = 80
+	contains = /obj/item/weapon/sword/katana/mulyeog
+
+/datum/supply_pack/weapons/steel/nimcha
+	name = "Nimcha"
+	cost = 80
+	contains = /obj/item/weapon/sword/rapier/nimcha
+
+/datum/supply_pack/weapons/steel/steppesabre
+	name = "Steppe Sabre"
+	cost = 80
+	contains = /obj/item/weapon/sword/long/rider/steppe
 
 /*
 /datum/supply_pack/weapons/nets
@@ -155,22 +290,37 @@
 
 /datum/supply_pack/weapons/ranged/puffer
 	name = "Smuggled Püffer"
-	cost = 800
+	cost = 500
 	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+
+/datum/supply_pack/weapons/ranged/musket
+	name = "Smuggled Musket"
+	cost = 750 //needs balancing
+	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket
+
+/datum/supply_pack/weapons/ranged/cannon
+	name = "Cannon"
+	cost = 800
+	contains = /obj/structure/cannon
 
 /datum/supply_pack/weapons/ranged/crossbow
 	name = "Crossbow"
 	cost = 50
 	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 
+/datum/supply_pack/weapons/ranged/slurbow
+	name = "Slurbow"
+	cost = 150
+	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
+
 /datum/supply_pack/weapons/ranged/bow
 	name = "Hunting Bow"
-	cost = 30
+	cost = 20
 	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 
 /datum/supply_pack/weapons/ranged/longbow
 	name = "Longbow"
-	cost = 40
+	cost = 30
 	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
 
 /datum/supply_pack/weapons/ranged/shortbow
@@ -180,22 +330,22 @@
 
 /datum/supply_pack/weapons/ranged/tossbladeiron
 	name = "Iron Tossblade Belt"
-	cost = 30
+	cost = 60
 	contains = /obj/item/storage/belt/leather/knifebelt/black/iron
 
 /datum/supply_pack/weapons/ranged/tossbladesteel
 	name = "Steel Tossblade Belt"
-	cost = 40
+	cost = 120
 	contains = /obj/item/storage/belt/leather/knifebelt/black/steel
 
 /datum/supply_pack/weapons/ranged/whip
 	name = "Leather Whip"
-	cost = 20
+	cost = 30
 	contains = /obj/item/weapon/whip
 
 /datum/supply_pack/weapons/ranged/bomb
 	name = "Bottle Bomb"
-	cost = 40
+	cost = 35
 	contains = /obj/item/explosive/bottle/homemade
 
 // AMMO & Quivers (for ranged)
@@ -205,12 +355,17 @@
 
 /datum/supply_pack/weapons/ammo/Blowpouch
 	name = "Empty Dart Pouch"
-	cost = 15 // this is so unused i will just leave it cheap ngl
+	cost = 10 // this is so unused i will just leave it cheap ngl
 	contains = /obj/item/ammo_holder/dartpouch
+
+/datum/supply_pack/weapons/ammo/Blowpouchp
+	name = "Poison Dart Pouch"
+	cost = 30
+	contains = /obj/item/ammo_holder/dartpouch/poisondarts
 
 /datum/supply_pack/weapons/ammo/quivers
 	name = "Empty Quiver"
-	cost = 25
+	cost = 20
 	contains = /obj/item/ammo_holder/quiver
 
 /datum/supply_pack/weapons/ammo/arrowquiver
@@ -220,18 +375,33 @@
 
 /datum/supply_pack/weapons/ammo/boltquiver
 	name = "Quiver of Bolts"
-	cost = 40
+	cost = 50
 	contains = /obj/item/ammo_holder/quiver/bolts
 
 /datum/supply_pack/weapons/ammo/bullets
 	name = "Pouch of Lead Bullets"
-	cost = 60
+	cost = 100
 	contains = /obj/item/storage/belt/pouch/bullets
 
 /datum/supply_pack/weapons/ammo/bullets
 	name = "Gunpowder Flask"
-	cost = 120
+	cost = 150
 	contains = /obj/item/reagent_containers/glass/bottle/aflask
+
+/datum/supply_pack/weapons/ammo/cannonball
+	name = "Cannon Ball"
+	cost = 100
+	contains = /obj/item/ammo_casing/caseless/cball
+
+/datum/supply_pack/weapons/ammo/fuseparchment
+	name = "Parchment Fuse"
+	cost = 10
+	contains = /obj/item/fuse/parchment
+
+/datum/supply_pack/weapons/ammo/powder
+	name = "Blast Powder"
+	cost = 200
+	contains = /obj/item/reagent_containers/powder/blastpowder
 
 /datum/supply_pack/weapons/ammo/arrows
 	name = "Arrow x10"
@@ -245,7 +415,7 @@
 
 /datum/supply_pack/weapons/ammo/bolts
 	name = "Crossbow Bolt x10"
-	cost = 30
+	cost = 40
 	contains = list(/obj/item/ammo_casing/caseless/bolt, /obj/item/ammo_casing/caseless/bolt,
 					/obj/item/ammo_casing/caseless/bolt, /obj/item/ammo_casing/caseless/bolt,
 					/obj/item/ammo_casing/caseless/bolt, /obj/item/ammo_casing/caseless/bolt,

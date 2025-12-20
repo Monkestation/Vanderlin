@@ -29,6 +29,8 @@
 	if(istype(held_item, /obj/item/weapon/shield))
 		held_item = living_pawn.get_inactive_held_item()
 	if(held_item)
+		if(istype(held_item, /obj/item/weapon/shield))
+			return FALSE
 		var/obj/item/weapon/candidate = checking
 		if(held_item.force >= candidate.force)
 			return FALSE

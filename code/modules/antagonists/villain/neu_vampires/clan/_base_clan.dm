@@ -75,6 +75,9 @@ And it also helps for the character set panel
 /datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types)
 	var/unwanted_blood = (blood_types & ~blood_preference)
 
+	if(blood_types & BLOOD_PREFERENCE_EUPHORIC)
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_euphoria)
+
 	if(!unwanted_blood)
 		return
 	drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
@@ -111,6 +114,9 @@ And it also helps for the character set panel
 
 		setup_vampire_abilities(H)
 		apply_vampire_look(H)
+
+		var/datum/component/vampire_disguise/disguise_comp = H.GetComponent(/datum/component/vampire_disguise)
+		disguise_comp.apply_disguise(H)
 
 		H.playsound_local(get_turf(H), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
 		for(var/datum/coven/coven as anything in clane_covens)
@@ -227,6 +233,7 @@ And it also helps for the character set panel
 /datum/clan/proc/apply_clan_components(mob/living/carbon/human/H)
 	H.AddComponent(/datum/component/sunlight_vulnerability)
 	H.AddComponent(/datum/component/vampire_disguise)
+
 
 /datum/clan/proc/disable_covens(mob/living/carbon/human/vampire)
 	for(var/coven as anything in vampire.covens)
@@ -346,7 +353,7 @@ And it also helps for the character set panel
 	H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 4, 4, TRUE)
 	H.change_stat(STATKEY_STR, pick(1,2))
 	H.change_stat(STATKEY_SPD, 1)
-	H.remove_stat_modifier("innate_age")
+	H.remove_stat_modifier(STATMOD_AGE)
 	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
 	transfix.Grant(H)
 
@@ -510,6 +517,39 @@ And it also helps for the character set panel
 
 /datum/stress_event/bad_blood
 	desc = span_warning("That blood was revolting!")
+	stress_change = 3
+	max_stacks = 10
+	stress_change_per_extra_stack = 3
+	timer = 10 MINUTES
+
+
+/datum/status_effect/debuff/blood_euphoria
+	id = "blood_euphoria"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_euphoria
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_REFRESH
+
+/atom/movable/screen/alert/status_effect/buff/blood_euphoria
+	name = "Sanguine Euphoria"
+	desc = span_good("This type of blood goes down incredibly well.")
+	icon_state = "hunger2"
+
+/datum/status_effect/buff/blood_euphoria/on_apply()
+	. = ..()
+	if(.)
+		owner.add_stress(/datum/stress_event/good_blood)
+		owner.adjustBruteLoss(-5)
+
+/datum/status_effect/buff/blood_euphoria/tick()
+	. = ..()
+	owner.adjustBruteLoss(-2)
+
+/datum/status_effect/buff/blood_euphoria/on_remove()
+	. = ..()
+	owner.remove_stress(/datum/stress_event/good_blood)
+
+/datum/stress_event/good_blood
+	desc = span_good("That blood was euphoric!")
 	stress_change = 3
 	max_stacks = 10
 	stress_change_per_extra_stack = 3

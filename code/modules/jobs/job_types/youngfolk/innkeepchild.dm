@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = -5
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_CHILD)

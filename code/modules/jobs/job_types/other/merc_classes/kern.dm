@@ -1,6 +1,6 @@
 /datum/job/advclass/mercenary/kern
 	title = "Kern"
-	tutorial = "A mercanary hailing from Kaledon, you fight under your Gallowglass or for your own coin, you fled with your fellow countrymen to escape the Grenzelhoftian Occupation of your homeland."
+	tutorial = "A mercenary hailing from Kaledon, you fight under your Gallowglass or for your own coin, you fled with your fellow countrymen to escape the Grenzelhoftian Occupation of your homeland."
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
 		SPEC_ID_ELF,\
@@ -26,7 +26,7 @@
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
-	pants = /obj/item/clothing/pants/chainlegs/kilt/iron
+	pants = /obj/item/clothing/pants/skirt/patkilt
 	backl = /obj/item/weapon/polearm/spear
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backpack_contents = list(/obj/item/weapon/knife/villager = 1)

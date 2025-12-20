@@ -1,1 +1,2 @@
-#define FORCE_MAP "_maps/daftmarsh.json"
+#define FORCE_MAP "daftmarsh"
+#define FORCE_MAP_DIRECTORY "_maps"

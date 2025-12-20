@@ -8,7 +8,7 @@
 /mob/living/simple_animal/hostile/retaliate/leylinelycan
 	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "Leyline Lycan"
-	desc = "A creature made of leyline energy. It is highly territorial and guards it's home leyline jealously."
+	desc = "A creature made of leyline energy. It is highly territorial and guards its home leyline jealously."
 	icon_state = "leycreature"
 	icon_living = "leycreature"
 	icon_dead = "leycreature"

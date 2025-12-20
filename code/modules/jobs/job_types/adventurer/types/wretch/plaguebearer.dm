@@ -4,7 +4,6 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/plaguebearer
-	category_tags = list(CTAG_WRETCH)
 	total_positions = 2
 
 /datum/outfit/wretch/plaguebearer/pre_equip(mob/living/carbon/human/H)

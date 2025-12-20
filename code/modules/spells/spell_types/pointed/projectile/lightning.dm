@@ -6,6 +6,9 @@
 	charge_sound = 'sound/magic/charging_lightning.ogg'
 	sparks_amt = 5
 
+	invocation = "THUNDER STRIKE!!!"
+	invocation_type = INVOCATION_SHOUT
+
 	cast_range = 8
 	point_cost = 3
 	attunements = list(
@@ -38,3 +41,4 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		L.electrocute_act(1, src)
+		L.apply_status_effect(/datum/status_effect/debuff/electrified)

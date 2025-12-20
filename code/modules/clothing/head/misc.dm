@@ -24,6 +24,12 @@
 	icon_state = "knitcap"
 	min_cold_protection_temperature = -5
 
+/obj/item/clothing/head/turban
+	name = "turban"
+	desc = "A headwrap worn throughout the southern parts of Faience."
+	icon_state = "turban"
+	min_cold_protection_temperature = -5
+
 /obj/item/clothing/head/headband
 	name = "headband"
 	desc = "A piece of cloth worn around the temple."
@@ -38,6 +44,22 @@
 /obj/item/clothing/head/headband/colored/red
 	color = CLOTHING_BLOOD_RED
 
+/obj/item/clothing/head/headband/naledi
+	name = "sojourner's headband"
+	desc = "A traditional monk's headband, for those disciples who prefer the sweat out of their eyes."
+	icon_state = "headband"
+	color = "#48443b"
+	sewrepair = TRUE
+	resistance_flags = FIRE_PROOF
+	armor = ARMOR_HEAD_PSYDON //Higher-tier protection for pugilist-centric classes. Fits the 'glass cannon' style, and prevents instant death through a glancing headshot on the intended archetype.
+	blade_dulling = DULLING_BASHCHOP
+	body_parts_covered = HEAD|HAIR|EARS
+	max_integrity = ARMOR_INT_SIDE_STEEL //High leather-tier protection and critical resistances, steel-tier integrity. Integrity boost encourages hand-to-hand parrying. Weaker than the Psydonic Thorns.
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
+	blocksound = SOFTHIT
+	//dropshrink = 0.75
+	dynamic_hair_suffix = null
+
 /obj/item/clothing/head/shawl
 	name = "shawl"
 	desc = "Keeps the hair in check, and looks proper."
@@ -48,7 +70,6 @@
 	name = "brimmed hat"
 	desc = "A simple brimmed hat that provides some relief from the sun."
 	icon_state = "brimmed"
-
 
 //................ Fur Hats ............... //
 /obj/item/clothing/head/hatfur
@@ -204,7 +225,7 @@
 		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
 		return
 	target.visible_message("<span class='warning'>[user] forces [src] onto [target]'s head!</span>", \
-	"<span class='danger'>[target] forces [src] onto your head!</span>", "<i>I cant see anything.</i>")
+	"<span class='danger'>[target] forces [src] onto your head!</span>", "<i>I can't see anything.</i>")
 	if(ishuman(target)) // If the target is human and not in combat mode, stun them the same way a feint would.
 		var/mob/living/carbon/human/T = target
 		if(!T.cmode)
@@ -322,3 +343,65 @@
 	block2add = FOV_BEHIND
 	anvilrepair = /datum/skill/craft/armorsmithing
 	sewrepair = FALSE
+
+/obj/item/clothing/head/roguehood/psydon
+	name = "psydonian hood"
+	desc = "A hood worn by Psydon's disciples, oft-worn in conjunction with its matching tabard. Made with spell-laced fabric to provide some protection."
+	icon_state = "psydonhood"
+	item_state = "psydonhood"
+	color = null
+	blocksound = SOFTHIT
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	body_parts_covered = NECK | HEAD | HAIR
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	armor = list("blunt" = 70, "slash" = 70, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	max_integrity = 200
+
+/obj/item/clothing/head/roguehood/psydon/AdjustClothes(mob/living/carbon/user)
+	if(loc == user)
+		if(adjustable == CAN_CADJUST)
+			adjustable = CADJUSTED
+			if(toggle_icon_state)
+				icon_state = "[initial(icon_state)]"
+			flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+			body_parts_covered = NECK|HAIR|EARS|HEAD
+			if(ishuman(user))
+				var/mob/living/carbon/H = user
+				H.update_inv_head()
+			block2add = FOV_BEHIND
+		else if(adjustable == CADJUSTED)
+			ResetAdjust(user)
+		user.update_fov_angles()
+		user.regenerate_clothes()
+
+/obj/item/clothing/head/roguehood/psydon/ResetAdjust(mob/user)
+	. = ..()
+	if(toggle_icon_state)
+		icon_state = "[initial(icon_state)]_t"
+	flags_inv = default_hidden
+	if(iscarbon(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_head()
+
+/obj/item/clothing/head/roguehood/psydon/confessor
+	name = "confessional hood"
+	desc = "A loose-fitting piece of leatherwear that can be tightened on the move. Keeps rain, blood, and the tears of the sullied away."
+	icon_state = "confessorhood"
+	item_state = "confessorhood"
+	color = null
+	body_parts_covered = NECK | HEAD | HAIR
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	armor = list("blunt" = 70, "slash" = 70, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	max_integrity = 200
+

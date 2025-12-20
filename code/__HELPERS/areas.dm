@@ -40,9 +40,7 @@
 	var/static/area_or_turf_fail_types = typecacheof(list(
 		))
 	// Ignore these areas and dont let people expand them. They can expand into them though
-	var/static/blacklisted_areas = typecacheof(list(
-		/area/space,
-		))
+	var/static/blacklisted_areas = typecacheof(list())
 	var/list/turfs = detect_room(get_turf(creator), area_or_turf_fail_types, BP_MAX_ROOM_SIZE*2)
 	if(!turfs)
 		to_chat(creator, "<span class='warning'>The new area must be completely airtight.</span>")
@@ -65,7 +63,6 @@
 		to_chat(creator, "<span class='warning'>No choice selected. The area remains undefined.</span>")
 		return
 	var/area/newA
-	var/area/oldA = get_area(get_turf(creator))
 	if(!isarea(area_choice))
 		var/str = stripped_input(creator,"New area name:", "Blueprint Editing", "", MAX_NAME_LEN)
 		if(!str || !length(str)) //cancel
@@ -76,7 +73,6 @@
 		newA = new area_choice
 		newA.setup(str)
 		newA.set_dynamic_lighting()
-		newA.has_gravity = oldA.has_gravity
 	else
 		newA = area_choice
 
@@ -104,7 +100,7 @@
 
 	newA.reg_in_areas_in_z()
 
-	to_chat(creator, "<span class='notice'>I have created a new area, named [newA.name]. It is now weather proof, and constructing an APC will allow it to be powered.</span>")
+	to_chat(creator, "<span class='notice'>I have created a new area, named [newA.name]. It is now weatherproof, and constructing an APC will allow it to be powered.</span>")
 	return TRUE
 
 #undef BP_MAX_ROOM_SIZE

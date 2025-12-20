@@ -23,15 +23,17 @@
 	display_order = JDO_PRINCE
 	give_bank_account = TRUE
 	bypass_lastclass = TRUE
-	min_pq = 4
 
 	can_have_apprentices = FALSE
 	noble_income = 20
 
+	exp_types_granted = list(EXP_TYPE_NOBLE)
+
+
 /datum/job/prince/after_spawn(mob/living/carbon/spawned, client/player_client)
 	. = ..()
 	var/mob/living/carbon/human/H = spawned
-	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, FAMILY_PROGENY), 5 SECONDS)
+	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, FAMILY_PROGENY), 10 SECONDS)
 	if(GLOB.keep_doors.len > 0)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), H), 5 SECONDS)
 	ADD_TRAIT(H, TRAIT_KNOWKEEPPLANS, TRAIT_GENERIC)
@@ -40,6 +42,8 @@
 	inherit_parent_title = TRUE
 	allowed_ages = list(AGE_ADULT, AGE_CHILD)
 	allowed_races = RACES_PLAYER_ROYALTY
+	exp_type = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 /datum/job/advclass/heir/daring
 	title = "Daring Twit"

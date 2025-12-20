@@ -3,7 +3,7 @@
 	tutorial = "You have seen countless wounds over your time. \
 	Stitched the sores of blades, sealed honey over the bubous of plague. \
 	A thousand deaths stolen from the Carriagemen, yet these people will still call you a charlatan. \
-	Atleast the Apothecary understands you. \
+	At least the Apothecary understands you. \
 	You have combined ownership of the Apothecarian Workshop and the Clinic with the Apothecary. Best to work together."
 	department_flag = SERFS
 	display_order = JDO_FELDSHER
@@ -11,7 +11,6 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 2
 	bypass_lastclass = TRUE
 
 	trainable_skills = list(/datum/skill/misc/medicine)
@@ -56,6 +55,15 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
+	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_MEDICAL)
+	exp_types_granted = list(EXP_TYPE_MEDICAL)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600,
+		EXP_TYPE_MEDICAL = 300
+
+	)
+
+
 /datum/job/feldsher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(0,0,1), TRUE)
@@ -77,3 +85,4 @@
 	wrists = /obj/item/storage/keyring/clinic
 	beltl = /obj/item/storage/fancy/ifak
 	beltr = /obj/item/storage/belt/pouch
+	ring = /obj/item/clothing/ring/feldsher_ring

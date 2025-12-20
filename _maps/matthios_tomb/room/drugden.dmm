@@ -2,27 +2,27 @@
 "cy" = (
 /obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "cA" = (
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "dx" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/table/vtable,
 /obj/item/storage/belt/pouch,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "eS" = (
 /obj/effect/decal/cleanable/sigil/N,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "fo" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hc" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
@@ -30,92 +30,92 @@
 	pixel_y = -5
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hr" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "ht" = (
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hA" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hL" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hU" = (
 /obj/structure/bed/shit,
 /obj/item/statue/iron,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "il" = (
 /obj/structure/stairs/d,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "io" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "iy" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/statue/silver,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "iO" = (
 /obj/effect/decal/cleanable/sigil/W,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jl" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "js" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jL" = (
 /obj/item/soap/bath{
 	pixel_y = -5
 	},
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jV" = (
 /turf/closed/wall/mineral/decowood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jX" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "kv" = (
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "mv" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oo" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oR" = (
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "oT" = (
 /obj/structure/door/swing,
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oW" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "px" = (
 /obj/structure/stairs,
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "qU" = (
 /obj/effect/decal/cleanable/sigil,
 /obj/item/reagent_containers/powder/ozium{
@@ -141,7 +141,7 @@
 	pixel_x = 14
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "qZ" = (
 /obj/structure/rack/shelf/big,
 /obj/item/perfume/random{
@@ -152,17 +152,17 @@
 	pixel_x = 12
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "rz" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tg" = (
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ug" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "uv" = (
 /obj/structure/table/vtable,
 /obj/item/weapon/knife/dagger/silver{
@@ -170,7 +170,7 @@
 	pixel_x = 6
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "xm" = (
 /obj/structure/rack/shelf/big,
 /obj/item/perfume/random{
@@ -181,40 +181,40 @@
 	pixel_x = 13
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "yB" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "yX" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "AD" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Be" = (
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Cj" = (
 /obj/item/statue/steel,
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Cy" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "CB" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Dh" = (
 /turf/open/floor/rooftop{
 	dir = 1
 	},
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Ff" = (
 /obj/item/soap{
 	pixel_x = -3;
@@ -222,49 +222,49 @@
 	},
 /obj/structure/door/swing,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Fy" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "FC" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Gb" = (
 /obj/item/soap/bath{
 	pixel_y = -5
 	},
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Gm" = (
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ha" = (
 /turf/open/floor/rooftop{
 	dir = 4
 	},
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "If" = (
 /obj/structure/door/swing,
 /obj/item/soap/bath{
 	pixel_y = -5
 	},
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ii" = (
 /turf/closed/indestructible/roguewindow,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Iq" = (
 /turf/open/floor/rooftop,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "IM" = (
 /obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "JE" = (
 /turf/closed/wall/mineral/decowood/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "JH" = (
 /obj/structure/rack/shelf/big,
 /obj/item/perfume/random{
@@ -275,40 +275,40 @@
 	pixel_y = 27
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "JN" = (
 /obj/item/gem/violet,
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Kf" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/closet/crate/drawer/inn,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "LC" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "LO" = (
 /obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Nh" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/closet/crate/drawer/inn,
 /obj/item/gem/blue,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Pk" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /obj/item/clothing/ring/gold/gemerald,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Px" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "RE" = (
 /obj/structure/table/vtable/v2,
 /obj/item/weapon/knife/dagger/silver{
@@ -325,33 +325,33 @@
 	pixel_x = 10
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "RU" = (
 /obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "SC" = (
 /obj/item/storage/belt/pouch,
 /obj/structure/table/vtable/v2,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "TO" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "WI" = (
 /turf/open/floor/rooftop{
 	dir = 8
 	},
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "WN" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Yt" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Zk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/rack/shelf/big,
@@ -363,16 +363,16 @@
 	pixel_x = 14
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Zx" = (
 /obj/structure/bed/shit,
 /obj/item/statue/iron/deformed,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ZQ" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/tile,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 
 (1,1,1) = {"
 hr

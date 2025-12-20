@@ -1,6 +1,6 @@
 // This code handles different species in the game.
 GLOBAL_LIST_EMPTY(roundstart_races)
-GLOBAL_LIST_EMPTY(patreon_races)
+GLOBAL_LIST_EMPTY(donator_races)
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -20,8 +20,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	var/list/possible_ages = ALL_AGES_LIST_CHILD
 	/// Whether or not this species has sexual characteristics
 	var/sexes = TRUE
-	/// Whether this species a requires patreon subscription to access, we removed all patreon restrictions for species, but it's here if we ever want to reenable them or smth.
-	var/patreon_req = FALSE
+	/// Whether this species a requires donator subscription to access, we removed all donator restrictions for species, but it's here if we ever want to reenable them or smth.
+	var/donator_req = FALSE
 
 	/**
 	 * The list of pronouns this species allows in the character sheet.
@@ -94,12 +94,18 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	 */
 	var/swap_male_clothes = FALSE
 	/**
-	 * Feales use male clothes, offsets and damage icons.
+	 * Females use male clothes, offsets and damage icons.
 	 * Importantly females still use female limb icons.
 	 * This does not effect stats or inherent traits/skills.
 	 * Females will lose their boob overlays.
 	 */
 	var/swap_female_clothes = FALSE
+
+	var/no_boobs = FALSE
+	/**
+	 * For species that don't have mammaries, like Rakshari.
+	 * Removes boob overlay
+	 */
 
 	/// Sounds for males
 	var/datum/voicepack/soundpack_m = /datum/voicepack/male
@@ -299,6 +305,10 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return
 	if(language == "Orcish")
 		return strings("accents/halforc_replacement.json", "halforc")
+	if(language == "Halfling")
+		return strings("accents/halfling_replacement.json", "halfling")
+	if(language == "Gutter")
+		return strings("accents/kobold_replacement.json", "kobold")
 	if(language == "Deepspeak")
 		return strings("accents/triton_replacement.json", "triton")
 	if(language == "Pirate")
@@ -366,10 +376,12 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				ACCENT_GRENZ,
 				ACCENT_PIRATE,
 				ACCENT_MIDDLE_SPEAK,
-				ACCENT_ZALAD
+				ACCENT_ZALAD,
+				ACCENT_HALFLING,
+				ACCENT_KOBOLD
 			)
 
-			///This will only trigger for patreon users
+			///This will only trigger for donators
 			if(human.accent in accents_list)
 				/// If the human is using a specie with multiple accents
 				if(length(human.dna.species.multiple_accents))
@@ -434,19 +446,19 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		if(!S.check_roundstart_eligible())
 			continue
 		GLOB.roundstart_races += S.name
-		if(S.patreon_req)
-			GLOB.patreon_races += S.name
+		if(S.donator_req)
+			GLOB.donator_races += S.name
 		qdel(S)
 	if(!LAZYLEN(GLOB.roundstart_races))
 		GLOB.roundstart_races += "Humen" // GLOB.species_list uses name and should probably be refactored
 	sortTim(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
 
-/proc/get_selectable_species(patreon = TRUE)
+/proc/get_selectable_species(donator = TRUE)
 	if(!LAZYLEN(GLOB.roundstart_races))
 		generate_selectable_species()
 	var/list/species = GLOB.roundstart_races.Copy()
-	if(!patreon)
-		species -= GLOB.patreon_races
+	if(!donator)
+		species -= GLOB.donator_races
 	return species
 
 /datum/species/proc/check_roundstart_eligible()
@@ -1209,59 +1221,20 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return //hunger is for BABIES
 
 	// nutrition decrease and satiety
-	if (H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
-		// THEY HUNGER
+	if(H.nutrition > 0 && H.stat != DEAD)
 		var/hunger_rate = (HUNGER_FACTOR * nutrition_mod)
 		H.adjust_nutrition(-hunger_rate)
 
-
-	if (H.hydration > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
-		// THEY HUNGER
+	if(H.hydration > 0 && H.stat != DEAD)
 		var/hunger_rate = HUNGER_FACTOR
-//		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_hydration(-hunger_rate)
 
-
-	if (H.nutrition > NUTRITION_LEVEL_FULL)
-		if(H.overeatduration < 600) //capped so people don't take forever to unfat
-			H.overeatduration++
-	else
-		if(H.overeatduration > 1)
-			H.overeatduration -= 2 //doubled the unfat rate
-
-	//metabolism change
-//	if(H.nutrition > NUTRITION_LEVEL_FAT)
-//		H.metabolism_efficiency = 1
-//	else if(H.nutrition > NUTRITION_LEVEL_FED && H.satiety > 80)
-//		if(H.metabolism_efficiency != 1.25 && !HAS_TRAIT(H, TRAIT_NOHUNGER))
-//			to_chat(H, "<span class='notice'>I feel vigorous.</span>")
-//			H.metabolism_efficiency = 1.25
-//	else if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
-//		if(H.metabolism_efficiency != 0.8)
-//			to_chat(H, "<span class='notice'>I feel sluggish.</span>")
-//		H.metabolism_efficiency = 0.8
-//	else
-//		if(H.metabolism_efficiency == 1.25)
-//			to_chat(H, "<span class='notice'>I no longer feel vigorous.</span>")
-//		H.metabolism_efficiency = 1
-
-	//Hunger slowdown for if mood isn't enabled
-//	if(CONFIG_GET(flag/disable_human_mood))
-//		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-//			var/hungry = (500 - H.nutrition) / 5 //So overeat would be 100 and default level would be 80
-//			if(hungry >= 70)
-//				H.add_movespeed_modifier(MOVESPEED_ID_HUNGRY, override = TRUE, multiplicative_slowdown = (hungry / 50))
-//			else if(isethereal(H))
-//				var/datum/species/ethereal/E = H.dna.species
-//				if(E.get_charge(H) <= ETHEREAL_CHARGE_NORMAL)
-//					H.add_movespeed_modifier(MOVESPEED_ID_HUNGRY, override = TRUE, multiplicative_slowdown = (1.5 * (1 - E.get_charge(H) / 100)))
-//			else
-//				H.remove_movespeed_modifier(MOVESPEED_ID_HUNGRY)
+	if(H.nutrition > NUTRITION_LEVEL_FULL && H.overeatduration < 600)
+		H.overeatduration++ //capped so people don't take forever to unfat
+	else if(H.overeatduration > 1)
+		H.overeatduration -= 2 //doubled the unfat rate
 
 	switch(H.nutrition)
-//		if(NUTRITION_LEVEL_FAT to INFINITY) //currently disabled/999999 define
-//			if(H.energy >= H.max_energy)
-//				H.apply_status_effect(/datum/status_effect/debuff/fat)
 		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
 			H.apply_status_effect(/datum/status_effect/debuff/hungryt1)
 			H.remove_status_effect(/datum/status_effect/debuff/hungryt2)
@@ -1282,8 +1255,6 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	switch(H.hydration)
-//		if(HYDRATION_LEVEL_WATERLOGGED to INFINITY)
-//			H.apply_status_effect(/datum/status_effect/debuff/waterlogged)
 		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
 			H.apply_status_effect(/datum/status_effect/debuff/thirstyt1)
 			H.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
@@ -1496,8 +1467,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				var/easy_dismember = HAS_TRAIT(target, TRAIT_EASYDISMEMBER) || affecting.rotted
 				if(prob(damage/2) || (easy_dismember && prob(damage/2))) //try twice
 					if(affecting.brute_dam > 0)
-						if(affecting.dismember())
-							playsound(get_turf(target), "desceration", 80, TRUE)
+						affecting.dismember()
 
 /*		if(user == target)
 			target.visible_message("<span class='danger'>[user] [atk_verb]ed themself![target.next_attack_msg.Join()]</span>", COMBAT_MESSAGE_RANGE, user)
@@ -1661,14 +1631,15 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return FALSE
 	if(user == target)
 		return FALSE
-	if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
-		if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
-			to_chat(user, span_notice("I can't move my legs!"))
+	if(!HAS_TRAIT(user, TRAIT_GARROTED))
+		if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
+			if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
+				to_chat(user, span_notice("I can't move my legs!"))
+				return
+			else															//If only one leg is grabbed
+				to_chat(user, span_notice("I can't move my leg!"))
+				user.resist_grab()
 			return
-		else															//If only one leg is grabbed
-			to_chat(user, span_notice("I can't move my leg!"))
-			user.resist_grab()
-		return
 
 	if(user.stamina >= user.maximum_stamina)
 		return FALSE
@@ -1702,7 +1673,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 						target.Immobilize(5)
 						balance += 15
 						target.visible_message("<span class='danger'>[user] puts their foot on [target]'s neck!</span>", \
-										"<span class='danger'>I'm get my throat stepped on by [user]! I can't breathe!</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
+										"<span class='danger'>I get my throat stepped on by [user]! I can't breathe!</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
 					else
 						affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected, crit_message = TRUE)
 						target.visible_message("<span class='danger'>[user] stomps [target]![target.next_attack_msg.Join()]</span>", \
@@ -1853,7 +1824,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	// Allows you to put in item-specific reactions based on species
 	if(user != H)
 		if(H.can_see_cone(user))
-			if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armor_penetration))
+			if(H.check_shields(I, I.force, "\the [I]", MELEE_ATTACK, I.armor_penetration))
 				return 0
 	if(H.check_block())
 		H.visible_message("<span class='warning'>[H] blocks [I]!</span>", \
@@ -1898,7 +1869,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				I.take_damage(1, BRUTE, I.damage_type)
 		if(!nodmg)
 			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block))/100), user, selzone, crit_message = TRUE)
-			if(should_embed_weapon(crit_wound, I))
+			if(crit_wound?.should_embed(I))
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE
@@ -1938,7 +1909,6 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		bloody = 1
 		I.add_mob_blood(H)
 		user.update_inv_hands()
-		playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
 
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == BODYPART_ORGANIC)

@@ -6,9 +6,10 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/adventurer/inhumencleric
 	category_tags = list(CTAG_ADVENTURER)
-	min_pq = 0
 	total_positions = 4
 	allowed_patrons = ALL_PROFANE_PATRONS
+
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
 /datum/outfit/adventurer/inhumencleric/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -41,7 +42,7 @@
 			head = /obj/item/clothing/head/helmet/skullcap/cult
 			H.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 			backr = /obj/item/weapon/shield/heater
-			beltl = /obj/item/weapon/sword/short
+			beltl = /obj/item/weapon/sword/short/iron
 			H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
 			H.grant_language(/datum/language/undead)

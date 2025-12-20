@@ -62,7 +62,7 @@
 	var/icon2 = "fibersroll2"
 	var/icon2step = 6
 	var/icon3 = null
-	var/stacktype = /obj/item/natural/fibers/
+	var/stacktype = /obj/item/natural/fibers
 	var/stackname = "fibers"
 	var/items_per_increase = 5
 
@@ -267,7 +267,7 @@
 /obj/item/natural/abyssalflame//T4 mage summon loot
 	name = "abyssal flame"
 	icon_state = "abyssalflame"
-	desc = "A  flickering, black flame contained in a crystal; the heart of an archfiend. Or atleast, what passes for one. It pulses with dense thrums of magick."
+	desc = "A flickering, black flame contained in a crystal; the heart of an archfiend. Or, at least, what passes for one. It pulses with dense thrums of magick."
 	resistance_flags = FIRE_PROOF
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
@@ -346,7 +346,7 @@
 /obj/item/natural/elementalmote
 	name = "elemental mote"
 	icon_state = "mote"
-	desc = "A mystical essence embued with the power of Dendor. Merely holding it transports one's mind to ancient times."
+	desc = "A mystical essence imbued with the power of Dendor. Merely holding it transports one's mind to ancient times."
 	resistance_flags = FIRE_PROOF
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
@@ -363,7 +363,7 @@
 /obj/item/natural/elementalshard
 	name = "elemental shard"
 	icon_state = "shard"
-	desc = "A mystical essence embued with the power of Dendor. Merely holding it transports one's mind to ancient times."
+	desc = "A mystical essence imbued with the power of Dendor. Merely holding it transports one's mind to ancient times."
 	resistance_flags = FIRE_PROOF
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
@@ -380,7 +380,7 @@
 /obj/item/natural/elementalfragment
 	name = "elemental fragment"
 	icon_state = "fragment"
-	desc = "A mystical essence embued with the power of Dendor. Merely holding it transports one's mind to ancient times."
+	desc = "A mystical essence imbued with the power of Dendor. Merely holding it transports one's mind to ancient times."
 	resistance_flags = FIRE_PROOF
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
@@ -397,7 +397,7 @@
 /obj/item/natural/elementalrelic
 	name = "elemental relic"
 	icon_state = "relic"
-	desc = "A mystical essence embued with the power of Dendor. Merely holding it transports one's mind to ancient times."
+	desc = "A mystical essence imbued with the power of Dendor. Merely holding it transports one's mind to ancient times."
 	resistance_flags = FIRE_PROOF
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20

@@ -26,6 +26,7 @@
 	food_type = list(/obj/item/bodypart,
 					/obj/item/organ,
 					/obj/item/reagent_containers/food/snacks/meat)
+	pooptype = /obj/structure/spider/stickyweb
 
 	base_intents = list(/datum/intent/simple/bite)
 	attack_sound = list('sound/vo/mobs/spider/attack (1).ogg','sound/vo/mobs/spider/attack (2).ogg','sound/vo/mobs/spider/attack (3).ogg','sound/vo/mobs/spider/attack (4).ogg')
@@ -68,6 +69,8 @@
 		/datum/pet_command/calm,
 	)
 
+	var/has_glowy_eyes = TRUE
+
 /mob/living/simple_animal/hostile/retaliate/spider/mutated
 	icon = 'icons/roguetown/mob/monster/spider.dmi'
 	name = "skallax spider"
@@ -86,7 +89,8 @@
 	gender = MALE
 	if(prob(33))
 		gender = FEMALE
-	update_appearance()
+
+	update_appearance(UPDATE_OVERLAYS)
 
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
@@ -95,12 +99,13 @@
 /mob/living/simple_animal/hostile/retaliate/spider/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
 	if(!..())
 		return
-	production += rand(30, 50)
+	production += 50
 
 /mob/living/simple_animal/hostile/retaliate/spider/AttackingTarget()
 	. = ..()
 	if(. && isliving(target))
 		var/mob/living/L = target
+		production += 10
 		if(L.reagents)
 			L.reagents.add_reagent(/datum/reagent/toxin/venom, 1)
 
@@ -111,6 +116,10 @@
 		SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
 		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
 		qdel(O)
+		if(is_species(user, /datum/species/elf/dark))
+			production += 50
+		else
+			production += 25
 		if(tame && owner == user)
 			return TRUE
 		var/realchance = tame_chance
@@ -133,7 +142,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/spider/update_overlays()
 	. = ..()
-	if(stat == DEAD)
+	if(stat == DEAD || !has_glowy_eyes)
 		return
 	. += emissive_appearance(icon, "honeys-eyes")
 

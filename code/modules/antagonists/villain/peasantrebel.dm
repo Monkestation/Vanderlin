@@ -3,7 +3,7 @@
 
 /datum/antagonist/prebel
 	name = "Peasant Rebel"
-	roundend_category = "peasant rebels"
+	roundend_category = "Peasant Rebels"
 	antagpanel_category = "Peasant Rebellion"
 	job_rank = ROLE_PREBEL
 	antag_hud_type = ANTAG_HUD_REV

@@ -138,7 +138,7 @@
 	var/prev_real_name = spawned.real_name
 	var/prev_name = spawned.name
 	var/honorary = "Sir"
-	if(spawned.gender == FEMALE)
+	if(spawned.pronouns == SHE_HER)
 		honorary = "Dame"
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
@@ -218,7 +218,7 @@
 			STATKEY_PER = 1,
 			STATKEY_SPD = 1,
 		)
-		spawned.adjust_stat_modifier_list("job_stats", old_stats)
+		spawned.adjust_stat_modifier_list(STATMOD_JOB, old_stats)
 
 /datum/outfit/rockhill/serjeant_at_arms
 	name = "Rockhill Serjeant"
@@ -239,12 +239,12 @@
 
 /datum/migrant_role/footman_guard
 	name = "Guardsmen of Rockhill"
-	greet_text = "Your Serjeant has been ordered by the mayor of rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
+	greet_text = "Your Serjeant has been ordered by the mayor of Rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
 	migrant_job = /datum/job/migrant/footman_bannerman/rockhill
 
 /datum/job/migrant/footman_bannerman/rockhill
 	title = "Guardsmen of Rockhill"
-	tutorial = "Your Serjeant has been ordered by the mayor of rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
+	tutorial = "Your Serjeant has been ordered by the mayor of Rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
 	is_foreigner = TRUE
 
 /datum/migrant_wave/rockhill_wave

@@ -40,7 +40,9 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 	if(!challenger || !H)
 		return
 
-	to_chat(H, span_notice("There is an active schism within the Ten! [challenger.name] has challenged Astrata's leadership!"))
+	bordered_message(H, list(
+		span_notice("There is an active schism within the Ten! [challenger.name] has challenged Astrata's leadership!")
+	))
 	setup_mob(H)
 
 /datum/tennite_schism/proc/setup_mob(mob/living/carbon/human/H)
@@ -51,7 +53,9 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 	choose.Grant(H)
 
 	if(!is_tennite(H))
-		to_chat(H, span_notice("Even though you are not a tennite and won't matter in the ultimate resolution of this conflict, you may pretend to be one and use the schism to further your own goals..."))
+		bordered_message(H, list(
+			span_notice("Even though you are not a Tennite and won't matter in the ultimate resolution of this conflict, you may pretend to be one and use the schism to further your own goals...")
+		))
 
 /datum/tennite_schism/proc/process_winner()
 	var/datum/patron/challenger = challenger_god.resolve()
@@ -298,9 +302,9 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 	name = "Schism within the Ten"
 	track = EVENT_TRACK_INTERVENTION
 	typepath = /datum/round_event/schism_within_ten
-	weight = 0.25
+	weight = 2
 	max_occurrences = 1
-	min_players = 55
+	min_players = 50
 	earliest_start = 20 MINUTES
 	allowed_storytellers = list(/datum/storyteller/noc, /datum/storyteller/ravox, /datum/storyteller/necra, /datum/storyteller/xylix, /datum/storyteller/pestra, /datum/storyteller/abyssor, /datum/storyteller/dendor, /datum/storyteller/malum)
 
@@ -342,7 +346,9 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 			continue
 
 		if(human_mob.patron == strongest_challenger)
-			to_chat(human_mob, span_notice("You hear a divine calling from your patron - the time has come to challenge Astrata's authority! Prepare for the coming schism!"))
+			bordered_message(human_mob, list(
+				span_notice("You hear a divine calling from your patron - the time has come to challenge Astrata's authority! Prepare for the coming schism!")
+			))
 			human_mob.playsound_local(human_mob, 'sound/magic/marked.ogg', 100)
 
 	new /datum/tennite_schism(strongest_challenger)

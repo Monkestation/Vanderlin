@@ -12,6 +12,7 @@
 	var/arg_2
 	var/arg_3
 	var/arg_4
+	var/arg_5
 
 /datum/persistant_workorder/New(obj/effect/building_node/source)
 	. = ..()
@@ -22,4 +23,4 @@
 		return
 	if(worker.controller_mind.current_task)
 		return
-	worker.controller_mind.set_current_task(work_type, arg_1, arg_2, arg_3, arg_4)
+	worker.controller_mind.set_current_task(work_type, arg_1, arg_2, arg_3, arg_4, arg_5)

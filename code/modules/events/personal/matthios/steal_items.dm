@@ -8,6 +8,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_MATTHIOS,
 		TAG_TRICKERY,
 		TAG_LOOT,
 	)
@@ -52,8 +53,10 @@
 	var/datum/objective/personal/steal_items/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE MATTHIOS' CHOSEN!"))
-	to_chat(chosen_one, span_notice("Matthios demands you prove your cunning! Pickpocket fools to earn Matthios' favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE MATTHIOS' CHOSEN!"),
+		span_notice("Matthios demands you prove your cunning! Pickpocket fools to earn Matthios' favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/matthios_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

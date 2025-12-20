@@ -2,58 +2,58 @@
 "an" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "bA" = (
 /obj/structure/noose/gallows,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "bJ" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "da" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "dk" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "dv" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "dY" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/lava/acid,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "eK" = (
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "fK" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "hC" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/lava/acid,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "hE" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hK" = (
 /obj/machinery/light/fueled/campfire,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ih" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "it" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/sleepingbag,
@@ -61,67 +61,67 @@
 /obj/effect/spawner/map_spawner/loot/food,
 /obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "jt" = (
 /obj/structure/roguetent,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jA" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "jJ" = (
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "jL" = (
 /obj/structure/bed/shit,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jO" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "kG" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "lt" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "lE" = (
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "me" = (
 /turf/open/floor/metal/alt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "mE" = (
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "mV" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "nm" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "np" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/effect/spawner/map_spawner/loot,
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nJ" = (
 /obj/structure/table/church/m,
 /obj/item/clothing/neck/psycross/silver/ravox,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "nR" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -133,258 +133,258 @@
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "oW" = (
 /turf/closed/wall/mineral/stone/window,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "pO" = (
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "qe" = (
 /obj/structure/table/church{
 	dir = 1
 	},
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "qx" = (
 /obj/structure/table/church,
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "qX" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "qZ" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "rA" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "sb" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "sp" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "sX" = (
 /obj/structure/roguetent,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "uk" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "uw" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "uE" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "wr" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "yp" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "zf" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "zW" = (
 /obj/machinery/light/fueled/campfire/pyre,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "AG" = (
 /obj/structure/bed/shit,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ce" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Cj" = (
 /turf/open/lava/acid,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Dw" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "FD" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "FI" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "FK" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Gf" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Gk" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Gs" = (
 /obj/structure/chair/stool,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Hq" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Hs" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "HQ" = (
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "HZ" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/effect/spawner/map_spawner/loot,
 /obj/effect/spawner/map_spawner/loot,
 /obj/item/clothing/shoes/boots,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ib" = (
 /turf/open/water/cleanshallow,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ie" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ID" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "IU" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "NB" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "NM" = (
 /obj/item/statue/gold,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ou" = (
 /obj/item/bin/water/gross,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ow" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "OY" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ps" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Rs" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Rw" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "RM" = (
 /turf/open/water/swamp,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "RN" = (
 /obj/structure/fluff/railing/border,
 /turf/open/lava/acid,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "SW" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/lava/acid,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "To" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "TI" = (
 /turf/open/floor/churchrough,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "TW" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Uc" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ul" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "UW" = (
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "VO" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Wk" = (
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Wm" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "WC" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "WS" = (
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "WU" = (
 /obj/structure/chair/stool,
 /turf/open/floor/churchrough,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "WY" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "YK" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 
 (1,1,1) = {"
 Ce

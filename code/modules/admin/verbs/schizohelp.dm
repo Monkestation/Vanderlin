@@ -306,5 +306,5 @@ GLOBAL_LIST_EMPTY(voice_names)
 
 	if(length(answers) >= max_answers && !ask_again && !locked)
 		locked = TRUE
-		to_chat(schizo, span_notice("<i>The voices grow silent... I must meditate another time if i wish for more guidance or i could ASK AGAIN one of the voices...</i>"))
+		to_chat(schizo, span_notice("<i>The voices grow silent... I must meditate another time if i wish for more guidance or I could ASK AGAIN one of the voices...</i>"))
 		addtimer(CALLBACK(src, PROC_REF(decay)), delete_timer)

@@ -8,6 +8,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_XYLIX,
 		TAG_TRICKERY,
 	)
 
@@ -40,8 +41,10 @@
 	var/datum/objective/personal/mock/noble/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE XYLIX'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Xylix demands entertainment! Viciously mock [new_objective.required_count] nobles to prove your wit and earn Xylix's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE XYLIX'S CHOSEN!"),
+		span_notice("Xylix demands entertainment! Viciously mock [new_objective.required_count] nobles to prove your wit and earn Xylix's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen_male_female.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

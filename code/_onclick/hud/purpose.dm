@@ -49,26 +49,23 @@
 	data += "</div>"
 	data += "<div style='border-top: 1px solid #444; width: 80%; margin: 0 auto 15px auto;'></div>"
 
-	data += "<div style='padding: 0 10px;'>"
+	data += "<div style='padding: 0 20px;'>"
 	for(var/datum/objective/personal/objective in categories[current_category])
 		var/completed = objective.completed
-		data += "<B>[objective.name]</B>:<br> [objective.explanation_text] "
+		data += "<B>[objective.name]</B>:<br><ul style='margin: 1px 0;'><li> [objective.explanation_text] "
 		data += "<span style='color:[completed ? "#5cb85c" : "#d9534f"]'>"
-		data += "[completed ? "(COMPLETED)" : "(NOT COMPLETED)"]</span>"
+		data += "[completed ? "(COMPLETED)" : "(NOT COMPLETED)"]</span></li></ul>"
 
 		if(length(objective.immediate_effects))
-			data += "<br>"
 			data += "<br><span style='color: #f1d669;'><B>Immediate Effects:</B></span>"
-			data += "<ul style='color: #f1d669; margin: 2px 0;'>"
+			data += "<ul style='color: #f1d669; margin: 1px 0;'>"
 			for(var/effect in objective.immediate_effects)
 				data += "<li>[effect]</li>"
 			data += "</ul>"
-		else if(length(objective.rewards))
-			data += "<br>"
 
 		if(length(objective.rewards))
 			data += "<br><span style='color: #80b077;'><B>Rewards:</B></span>"
-			data += "<ul style='color: #80b077; margin: 2px 0;'>"
+			data += "<ul style='color: #80b077; margin: 1px 0;'>"
 			for(var/reward in objective.rewards)
 				data += "<li>[reward]</li>"
 			data += "</ul>"

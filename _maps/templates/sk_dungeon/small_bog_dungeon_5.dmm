@@ -2,143 +2,143 @@
 "ac" = (
 /obj/structure/roguetent,
 /turf/closed/wall/mineral/tent,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "aS" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Tighty"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "bq" = (
 /obj/effect/decal/remains/wolf,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "co" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Grippy"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ct" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "cN" = (
 /mob/living/simple_animal/hostile/retaliate/saiga,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "dY" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ed" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Loopy"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "fV" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gh" = (
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gE" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gJ" = (
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "gP" = (
 /obj/structure/table/wood/plain,
 /obj/item/clothing/ring/gold,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "he" = (
 /obj/item/bodypart/head,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "hA" = (
 /mob/living/carbon/human/species/orc/ambush{
 	name = "Grog"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "hU" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "iN" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "jH" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "jJ" = (
 /obj/structure/door/weak/bolt{
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ka" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "kp" = (
 /obj/machinery/tanningrack,
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/item/natural/hide,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "lP" = (
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "lX" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "mt" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Goony"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "nA" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/rotten/mince,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "oc" = (
 /obj/structure/fluff/nest,
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "oj" = (
 /obj/structure/fluff/nest,
 /mob/living/simple_animal/hostile/retaliate/goat,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "oO" = (
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "oS" = (
 /obj/item/bodypart/head,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "pa" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -147,11 +147,11 @@
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "pf" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "pk" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -160,52 +160,52 @@
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "pF" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "pQ" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Mork"
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "pR" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "qv" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "qH" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /obj/structure/table/wood/treestump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "qW" = (
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "rj" = (
 /obj/structure/bed/shit,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "rF" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sh" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "sD" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "tc" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -214,35 +214,35 @@
 	pixel_y = 7
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "tm" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "tR" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "tU" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Blarg"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "uf" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "vX" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Whitey"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wp" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -251,14 +251,14 @@
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wC" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "wG" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -267,7 +267,7 @@
 	dir = 4
 	},
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "xf" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -279,25 +279,25 @@
 	pixel_y = 7
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "xy" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "xU" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "yC" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "zA" = (
 /obj/structure/fluff/psycross/crafted/shrine/dendor_volf,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "zN" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -308,15 +308,15 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "zR" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "At" = (
 /obj/effect/decal/remains/wolf,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Bi" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -328,15 +328,15 @@
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Dn" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Dy" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "DH" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -346,49 +346,49 @@
 	pixel_y = -1
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "DM" = (
 /mob/living/simple_animal/hostile/retaliate/goat,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "DN" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "DY" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Ei" = (
 /mob/living/carbon/human/species/orc/warlord/skilled{
 	name = "Gragnar, the Knight Slayer"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Es" = (
 /obj/effect/decal/remains/wolf,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Fu" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Twigie"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "FH" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "FO" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Gy" = (
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "GE" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -397,153 +397,153 @@
 	pixel_y = -4
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Hk" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "HT" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Jk" = (
 /obj/structure/table/wood/plain,
 /obj/item/clothing/head/crown/circlet/stink,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "JF" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Gobbie"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Kl" = (
 /obj/effect/decal/cleanable/blood/old,
 /mob/living/carbon/human/species/orc/marauder{
 	name = "Blarg"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "KF" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Zeekie"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Lc" = (
 /mob/living/carbon/human/species/orc/warrior{
 	name = "Twarg"
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "LE" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "MK" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/golden,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ML" = (
 /obj/structure/table/wood/plain,
 /obj/item/clothing/head/helmet/heavy/crusader,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Nj" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "No" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "NK" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Oh" = (
 /mob/living/carbon/human/species/orc/tribal{
 	name = "Yloz"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "OD" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Sc" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "St" = (
 /obj/structure/bed/shit,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Tg" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Zookie"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "TV" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "UN" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/rotten/meat,
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Vw" = (
 /obj/structure/flora/grass,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Vz" = (
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "XD" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Rippy"
 	},
 /turf/open/floor/twig,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Yt" = (
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "YK" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "YQ" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Zr" = (
 /mob/living/carbon/human/species/goblin/npc/ambush{
 	name = "Sloppy"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "ZI" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 
 (1,1,1) = {"
 tR

@@ -28,6 +28,11 @@
 	fill_type = /obj/item/ammo_casing/caseless/bolt/water
 	fill_to = 10
 
+/obj/item/ammo_holder/quiver/bolt/holy
+	fill_type = /obj/item/ammo_casing/caseless/bolt/holy
+	fill_to = 10
+
+
 /obj/item/ammo_holder/quiver/bolts/pyro
 	fill_type = /obj/item/ammo_casing/caseless/bolt/pyro
 	fill_to = 10

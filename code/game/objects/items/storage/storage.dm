@@ -9,7 +9,7 @@
 	. = ..()
 	if(component_type)
 		AddComponent(component_type)
-	PopulateContents()
+	populate_contents()
 
 /obj/item/storage/get_dumping_location(obj/item/storage/source,mob/user)
 	return src
@@ -37,7 +37,7 @@
 /obj/item/storage/contents_explosion(severity, target)
 //Cyberboss says: "USE THIS TO FILL IT, NOT INITIALIZE OR NEW"
 
-/obj/item/storage/proc/PopulateContents()
+/obj/item/storage/proc/populate_contents()
 	for(var/path in populate_contents)
 		var/obj/item/new_item = new path(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_item, null, TRUE, TRUE))

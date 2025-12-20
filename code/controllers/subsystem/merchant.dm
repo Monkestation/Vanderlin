@@ -207,10 +207,11 @@ SUBSYSTEM_DEF(merchant)
 		return
 
 	// Find spawn location on or near the boat
-	var/obj/structure/industrial_lift/tram/platform = cargo_boat?.lift_platforms?[1]
-	if(!platform)
-		return
-	var/turf/spawn_turf = get_turf(platform)
+	var/list/possible_turfs = list()
+	for(var/obj/structure/industrial_lift/lift in cargo_boat.lift_platforms)
+		possible_turfs |= cargo_boat.get_valid_turfs(lift)
+	var/atom/spawn_turf = get_turf(pick(possible_turfs))
+
 	if(!spawn_turf)
 		return
 

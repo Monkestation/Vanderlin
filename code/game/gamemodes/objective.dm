@@ -12,6 +12,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	var/martyr_compatible = 0			//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
 	var/triumph_count = 1
 	var/flavor = "Goal" //so it appear as "goal", "dream", "aspiration", etc
+	var/hidden = FALSE
 
 /datum/objective/New(text, datum/mind/owner)
 	if(text)
@@ -62,7 +63,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	if(M.force_escaped)
 		return TRUE
 	var/area/A = get_area(M.current)
-	if(istype(A, /area/rogue/indoors/town/cell))
+	if(istype(A, /area/indoors/town/cell))
 		return FALSE
 	return TRUE
 
@@ -183,23 +184,6 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 		explanation_text = "Assassinate or exile [target.name], the [!target_role_type ? target.assigned_role.title : target.special_role]."
 	else
 		explanation_text = "Free Objective"
-
-/datum/objective/maroon
-	name = "maroon"
-	var/target_role_type=FALSE
-	martyr_compatible = 1
-
-/datum/objective/maroon/check_completion()
-	return !target || !considered_alive(target) || (!target.current.onCentCom())
-
-/datum/objective/maroon/update_explanation_text()
-	if(target && target.current)
-		explanation_text = "Prevent [target.name], the [!target_role_type ? target.assigned_role.title : target.special_role], from escaping alive."
-	else
-		explanation_text = "Free Objective"
-
-/datum/objective/maroon/admin_edit(mob/admin)
-	admin_simple_target_pick(admin)
 
 /datum/objective/debrain
 	name = "debrain"
@@ -409,29 +393,6 @@ GLOBAL_LIST_EMPTY(possible_items)
 	update_explanation_text()
 	return target_amount
 
-/datum/objective/capture/update_explanation_text()
-	. = ..()
-	explanation_text = "Capture [target_amount] lifeform\s with an energy net. Live, rare specimens are worth more."
-
-/datum/objective/capture/check_completion()//Basically runs through all the mobs in the area to determine how much they are worth.
-	var/captured_amount = 0
-	var/area/centcom/holding/A = GLOB.areas_by_type[/area/centcom/holding]
-	for(var/mob/living/carbon/human/M in A)//Humans.
-		if(M.stat == DEAD)//Dead folks are worth less.
-			captured_amount+=0.5
-			continue
-		captured_amount+=1
-	for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
-		captured_amount+=0.1
-
-	return captured_amount >= target_amount
-
-/datum/objective/capture/admin_edit(mob/admin)
-	var/count = input(admin,"How many mobs to capture ?","capture",target_amount) as num|null
-	if(count)
-		target_amount = count
-	update_explanation_text()
-
 /datum/objective/protect_object
 	name = "protect object"
 	var/obj/protect_target
@@ -503,7 +464,6 @@ GLOBAL_LIST_EMPTY(possible_items)
 
 	var/list/allowed_types = sortList(list(
 		/datum/objective/assassinate,
-		/datum/objective/maroon,
 		/datum/objective/debrain,
 		/datum/objective/protect,
 		/datum/objective/escape,

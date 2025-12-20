@@ -4,9 +4,10 @@
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/adventurer/lakkariancleric
 	category_tags = list(CTAG_ADVENTURER)
-	min_pq = 0
 	roll_chance = 25
 	total_positions = 2
+
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
 /datum/outfit/adventurer/lakkariancleric/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -18,7 +19,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/neck/psycross/silver/astrata
-	pants = /obj/item/clothing/pants/trou/leather/quiltedkilt
+	pants = /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/blue
 	shoes = /obj/item/clothing/shoes/boots/leather
 	neck = /obj/item/clothing/neck/coif/cloth // price to pay for being a speedy class, less neck protection
 	belt = /obj/item/storage/belt/leather

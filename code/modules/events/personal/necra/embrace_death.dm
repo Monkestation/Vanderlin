@@ -3,11 +3,12 @@
 	track = EVENT_TRACK_PERSONAL
 	typepath = /datum/round_event/necra_embrace
 	weight = 5
-	earliest_start = 40 MINUTES
+	earliest_start = 35 MINUTES
 	max_occurrences = 1
 	min_players = 40
 
 	tags = list(
+		TAG_NECRA,
 		TAG_HAUNTED,
 	)
 
@@ -54,8 +55,10 @@
 	var/datum/objective/personal/embrace_death/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE NECRA'S CHOSEN!"))
-	to_chat(chosen_one, span_biginfo("You have lived a good life as a follower of the Ten, but everything must come to an end. Necra wishes you to embrace death and earn a well deserved rest. Say goodbye to your loved ones, and take care of all remaining affairs, for this death will final. Your soul will have a guaranteed place in the Cycle."))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE MARKED BY NECRA!"),
+		span_biginfo("You have lived a good life as a follower of the Ten, but everything must come to an end. Necra wishes you to embrace death and earn a well deserved rest. Say goodbye to your loved ones, and take care of all remaining affairs, for this death will final. Your soul will have a guaranteed place in the Cycle."),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/ambience/noises/genspooky (1).ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

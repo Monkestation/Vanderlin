@@ -1,16 +1,16 @@
 /datum/round_event_control/antagonist/migrant_wave/lich
-	name = "Wanderling Lich"
+	name = "Wandering Lich"
 	wave_type = /datum/migrant_wave/lich
 
-	weight = 6 //temp disabled 6
-	max_occurrences = 2
+	weight = 6
 
-	earliest_start = 15 MINUTES
+	earliest_start = 25 MINUTES
 
 	tags = list(
+		TAG_ZIZO,
 		TAG_HAUNTED,
 		TAG_COMBAT,
-		TAG_VILLIAN,
+		TAG_VILLAIN,
 	)
 
 /datum/migrant_wave/lich
@@ -19,4 +19,3 @@
 		/datum/migrant_role/lich = 1,
 	)
 	can_roll = FALSE
-

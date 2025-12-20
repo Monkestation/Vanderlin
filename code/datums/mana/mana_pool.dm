@@ -188,7 +188,7 @@
 // 1. we recharge
 // 2. we transfer mana
 // 3. we discharge excess mana
-/datum/mana_pool/process(seconds_per_tick)
+/datum/mana_pool/process()
 
 	donation_budget_this_tick = (max_donation_rate_per_second)
 

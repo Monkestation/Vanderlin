@@ -25,8 +25,8 @@
 							/obj/item/natural/rock/random = 0.5)
 	spawnableTurfs = list(/turf/open/floor/cobblerock = 25,
 							/turf/open/floor/dirt = 10)
-	allowed_areas = list(/area/rogue/under/town/caverogue,
-							/area/rogue/under/cavewet)
+	allowed_areas = list(/area/under/cave,
+							/area/under/cavewet)
 
 /datum/mapGeneratorModule/rosewoodcave/dirt
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
@@ -38,8 +38,8 @@
 							/obj/item/grown/log/tree/stick = 4,
 							/obj/structure/flora/grass/bush_meagre/tundra = 1)
 	spawnableTurfs = list()
-	allowed_areas = list(/area/rogue/under/town/caverogue,
-							/area/rogue/under/cavewet)
+	allowed_areas = list(/area/under/cave,
+							/area/under/cavewet)
 
 /datum/mapGeneratorModule/rosewoodcave/sewers
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -49,7 +49,7 @@
 							/obj/structure/flora/grass/water = 4,
 							/obj/structure/flora/grass/water/reeds = 2)
 	spawnableTurfs = list()
-	allowed_areas = list(/area/rogue/under/town/sewer)
+	allowed_areas = list(/area/under/town/sewer)
 
 /datum/mapGeneratorModule/rosewoodcave/wet
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -59,4 +59,4 @@
 							/obj/structure/flora/grass/water = 4,
 							/obj/structure/flora/grass/water/reeds = 8)
 	spawnableTurfs = list()
-	allowed_areas = list(/area/rogue/under/cavewet)
+	allowed_areas = list(/area/under/cavewet)

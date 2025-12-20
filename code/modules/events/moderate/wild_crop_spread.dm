@@ -5,7 +5,7 @@
 	weight = 7
 	max_occurrences = 10
 	min_players = 0
-	earliest_start = 12 MINUTES
+	earliest_start = 10 MINUTES
 
 	tags = list(
 		TAG_NATURE,
@@ -14,7 +14,7 @@
 
 /datum/round_event/wild_crops/start()
 	. = ..()
-	var/list/turfs = get_area_turfs(/area/rogue/outdoors/woods, subtypes = TRUE)
+	var/list/turfs = get_area_turfs(/area/outdoors/woods, subtypes = TRUE)
 	for(var/i = 1 to rand(2, 12))
 		var/failing = TRUE
 		while(failing)

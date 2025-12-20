@@ -10,10 +10,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	var/ready = FALSE
 	/// Referenced when you want to delete the new_player later on in the code.
 	var/spawning = FALSE
-	/// For instant transfer once the round is set up
-	var/mob/living/new_character
 	/// Used to make sure someone doesn't get spammed with messages if they're ineligible for roles
 	var/ineligible_for_roles = FALSE
+
+	/// Cached character data for multi-ready slots
+	var/list/multi_ready_characters = list()
+	/// Current character index being used
+	var/multi_ready_index = 1
+
+	var/multi_ready_assigned_slot = 0
 
 	hud_type = /datum/hud/new_player
 
@@ -46,6 +51,79 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player/prepare_huds()
 	return
+
+
+/// Called when player readies up - caches all selected character data
+/mob/dead/new_player/proc/cache_multi_ready_characters()
+	multi_ready_characters = list()
+	multi_ready_index = 1
+
+	if(!client?.prefs?.multi_char_ready || !length(client.prefs.multi_ready_slots))
+		return
+
+	var/original_slot = client.prefs.default_slot
+
+	for(var/slot in client.prefs.multi_ready_slots)
+		client.prefs.load_character(slot)
+		var/list/char_data = list(
+			"slot" = slot,
+			"real_name" = client.prefs.real_name,
+			"gender" = client.prefs.gender,
+			"age" = client.prefs.age,
+			"pref_species" = client.prefs.pref_species,
+			"selected_patron" = client.prefs.selected_patron,
+			"job_preferences" = client.prefs.job_preferences?.Copy(),
+			"features" = client.prefs.features?.Copy(),
+			"charflaw" = client.prefs.charflaw,
+			"skin_tone" = client.prefs.skin_tone,
+			"eye_color" = client.prefs.eye_color,
+			"underwear" = client.prefs.underwear,
+			"undershirt" = client.prefs.undershirt,
+			"socks" = client.prefs.socks,
+			"pronouns" = client.prefs.pronouns,
+			"voice_type" = client.prefs.voice_type,
+			"voice_color" = client.prefs.voice_color,
+			"domhand" = client.prefs.domhand,
+			"flavortext" = client.prefs.flavortext,
+			"headshot_link" = client.prefs.headshot_link,
+		)
+		multi_ready_characters += list(char_data)
+
+	client.prefs.load_character(original_slot)
+
+/// Applies cached character data at given index to preferences
+/mob/dead/new_player/proc/apply_multi_ready_character(index)
+	if(!length(multi_ready_characters) || index > length(multi_ready_characters))
+		return FALSE
+
+	var/list/char_data = multi_ready_characters[index]
+	if(!char_data)
+		return FALSE
+
+	var/datum/preferences/P = client.prefs
+	P.real_name = char_data["real_name"]
+	P.gender = char_data["gender"]
+	P.age = char_data["age"]
+	P.pref_species = char_data["pref_species"]
+	P.selected_patron = char_data["selected_patron"]
+	P.job_preferences = char_data["job_preferences"]
+	P.features = char_data["features"]
+	P.charflaw = char_data["charflaw"]
+	P.skin_tone = char_data["skin_tone"]
+	P.eye_color = char_data["eye_color"]
+	P.underwear = char_data["underwear"]
+	P.undershirt = char_data["undershirt"]
+	P.socks = char_data["socks"]
+	P.pronouns = char_data["pronouns"]
+	P.voice_type = char_data["voice_type"]
+	P.voice_color = char_data["voice_color"]
+	P.domhand = char_data["domhand"]
+	P.flavortext = char_data["flavortext"]
+	P.headshot_link = char_data["headshot_link"]
+
+	P.default_slot = char_data["slot"]
+	multi_ready_index = index
+	return TRUE
 
 /mob/dead/new_player/proc/new_player_panel()
 	if(!SSassets.initialized)
@@ -200,7 +278,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(observer.client && observer.client.prefs)
 		observer.real_name = observer.client.prefs.real_name
 		observer.name = observer.real_name
-	observer.update_appearance()
 	observer.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 	QDEL_NULL(mind)
 	qdel(src)
@@ -217,7 +294,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		if(JOB_UNAVAILABLE_RACE_BANNED)
 			return "You are currently banned from playing that species."
 		if(JOB_UNAVAILABLE_PLAYTIME)
-			return "You do not have enough relevant playtime for [jobtitle]."
+			return "You do not have enough playtime for [jobtitle]."
 		if(JOB_UNAVAILABLE_SLOTFULL)
 			return "[jobtitle] is already filled to capacity."
 		if(JOB_UNAVAILABLE_AGE)
@@ -230,8 +307,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 			return "[jobtitle] requires more faith."
 		if(JOB_UNAVAILABLE_QUALITY)
 			return "[jobtitle] requires higher player quality."
-		if(JOB_UNAVAILABLE_PATREON)
-			return "Your patreon tier is not high enough for [jobtitle]."
+		if(JOB_UNAVAILABLE_DONATOR)
+			return "You need to be a donator to have play as [jobtitle]."
 		if(JOB_UNAVAILABLE_ACCOUNTAGE)
 			return "Your account is not old enough for [jobtitle]."
 		if(JOB_UNAVAILABLE_LASTCLASS)
@@ -304,16 +381,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		return JOB_UNAVAILABLE_PLAYTIME
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
-	if(length(job.allowed_races) && !(client.prefs.pref_species.id in job.allowed_races))
+	if((length(job.allowed_races) && !(client.prefs.pref_species.id in job.allowed_races)) || \
+		(length(job.blacklisted_species) && (client.prefs.pref_species.id in job.blacklisted_species)))
 		if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
 			return JOB_UNAVAILABLE_RACE
-/*	if(length(job.allowed_patrons) && !(client.prefs.selected_patron.type in job.allowed_patrons))
-		return JOB_UNAVAILABLE_DEITY */
-
-	#ifdef USES_PQ
-	if(!isnull(job.min_pq) && (get_playerquality(ckey) < job.min_pq))
-		return JOB_UNAVAILABLE_QUALITY
-	#endif
 	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
 		return JOB_UNAVAILABLE_SEX
 	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
@@ -348,6 +419,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
 	if(!destination)
 		CRASH("Failed to find a latejoin spawn point.")
+	islatejoin = TRUE
 	var/mob/living/character = create_character(destination)
 	character.islatejoin = TRUE
 	if(!character)
@@ -393,6 +465,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		GLOB.company_positions,
 		GLOB.youngfolk_positions,
 		GLOB.allmig_positions,
+		GLOB.inquisition_positions,
 	)
 
 	for(var/list/category in omegalist)
@@ -433,6 +506,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 					cat_name = "Young Folk"
 				if (OUTSIDERS)
 					cat_name = "Outsiders"
+				if (INQUISITION)
+					cat_name = "Inquisition"
 
 			dat += "<fieldset style='width: 185px; border: 2px solid [cat_color]; display: inline'>"
 			dat += "<legend align='center' style='font-weight: bold; color: [cat_color]'>[cat_name]</legend>"
@@ -493,28 +568,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	popup.set_content(jointext(dat, ""))
 	popup.open(FALSE) // 0 is passed to open so that it doesn't use the onclose() proc
 
-/// Creates, assigns and returns the new_character to spawn as. Assumes a valid mind.assigned_role exists.
-/mob/dead/new_player/proc/create_character(atom/destination)
-	spawning = TRUE
-	close_spawn_windows()
-
-	mind.active = FALSE //we wish to transfer the key manually
-	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
-	if(QDELETED(src) || !client)
-		return // Disconnected while checking for the appearance ban.
-
-	if(client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
-		client.activate_triumph_buy(TRIUMPH_BUY_RACE_ALL)
-
-	mind.transfer_to(spawning_mob)
-	//client.init_verbs()
-	new_character = . = spawning_mob //right into left
-
-	spawning_mob.after_creation()
-
-	GLOB.chosen_names += spawning_mob.real_name
-
-
 /mob/proc/after_creation()
 	return
 
@@ -522,22 +575,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(dna?.species)
 		dna.species.after_creation(src)
 	roll_mob_stats()
-
-/mob/dead/new_player/proc/transfer_character()
-	. = new_character
-	if(!.)
-		return
-	new_character.key = key		//Manually transfer the key to log them in
-	new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
-	var/area/joined_area = get_area(new_character.loc)
-	if(joined_area)
-		joined_area.on_joining_game(new_character)
-	if(new_character.client)
-		var/atom/movable/screen/splash/Spl = new(null, null, new_character.client, TRUE, FALSE)
-		Spl.Fade(TRUE)
-	new_character = null
-	qdel(src)
-
 
 /mob/dead/new_player/Move()
 	return 0

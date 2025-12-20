@@ -35,6 +35,11 @@
 			var/favorite_food_type = human_eater.culinary_preferences[CULINARY_FAVOURITE_FOOD]
 			var/obj/item/reagent_containers/food/snacks/favorite_food_instance = favorite_food_type
 			timer = timer * max(initial(favorite_food_instance.faretype), 1)
+
+			if(human_eater.culinary_preferences[CULINARY_RANDOM_PREFERENCES] && !human_eater.culinary_preferences[FAVOURITE_FOOD_TRIUMPH])
+				human_eater.adjust_triumphs(1)
+				human_eater.culinary_preferences[FAVOURITE_FOOD_TRIUMPH] = TRUE
+
 			return TRUE
 
 /datum/stress_event/favourite_drink
@@ -54,6 +59,11 @@
 			var/favorite_drink_type = human_drinker.culinary_preferences[CULINARY_FAVOURITE_DRINK]
 			var/datum/reagent/consumable/favorite_drink_instance = favorite_drink_type
 			timer = timer * max(1 + initial(favorite_drink_instance.quality), 1)
+
+			if(human_drinker.culinary_preferences[CULINARY_RANDOM_PREFERENCES] && !human_drinker.culinary_preferences[FAVOURITE_DRINK_TRIUMPH])
+				human_drinker.adjust_triumphs(1)
+				human_drinker.culinary_preferences[FAVOURITE_DRINK_TRIUMPH] = TRUE
+
 			return TRUE
 
 /datum/stress_event/hated_food

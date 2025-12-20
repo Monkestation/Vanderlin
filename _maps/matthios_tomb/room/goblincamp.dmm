@@ -1,31 +1,31 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ae" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ao" = (
 /obj/structure/chair/stool,
 /obj/item/fishingrod,
-/obj/item/fishing/bait,
+/obj/item/fishing/lure,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aN" = (
 /mob/living/carbon/human/species/goblin/npc/cave,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "bZ" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "cD" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "cG" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "cJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -34,10 +34,10 @@
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "dh" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "eU" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/item/weapon/polearm/spear/billhook,
@@ -55,109 +55,109 @@
 	name = "Level 1 Goblin"
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "ff" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "fu" = (
 /turf/open/water/river,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "hy" = (
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ii" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "iN" = (
 /obj/structure/door/stone,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "jO" = (
 /mob/living/simple_animal/hostile/orc/orc_marauder,
 /turf/open/floor/snow/patchy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "kc" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "kd" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/glass/bottle/wine,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "kK" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven/east,
 /obj/item/cooking/pan,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "lZ" = (
 /mob/living/carbon/human/species/goblin/npc/cave,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ml" = (
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
-/obj/item/fishing/bait/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
+/obj/item/fishing/lure/meat,
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "mQ" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "mU" = (
 /turf/open/floor/snow,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "nG" = (
 /obj/structure/chair/stool,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "on" = (
 /turf/open/floor/snow/patchy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "op" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "oH" = (
 /turf/open/water,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "pe" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "pt" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "pB" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "qh" = (
 /obj/structure/barricade/wooden,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rD" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "rS" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "sG" = (
 /turf/open/water/river{
 	dir = 8
 	},
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "vX" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/reagent_containers/glass/bottle/waterskin,
@@ -166,24 +166,24 @@
 /obj/item/reagent_containers/food/snacks/cheese,
 /obj/item/reagent_containers/food/snacks/cheese,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "wL" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "wP" = (
 /obj/structure/table/wood,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "yw" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/snacks/meat/salami,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "yB" = (
 /obj/effect/spawner/map_spawner/loot/magic,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "yN" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -192,248 +192,248 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "zc" = (
 /obj/structure/door/stone,
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "zp" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "zM" = (
 /obj/effect/spawner/map_spawner/loot/potion_vitals,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "zZ" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven/east,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ad" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/snow/patchy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ax" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "AA" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/goblin/npc/cave,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "AK" = (
 /obj/structure/fermentation_keg/random/beer,
 /obj/item/reagent_containers/glass/cup/golden,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "AR" = (
 /obj/machinery/light/fueled/campfire,
 /obj/item/reagent_containers/food/snacks/meat/salami,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Cd" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/snow/patchy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ct" = (
 /obj/structure/door/stone,
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Cz" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/glass/bottle/redwine,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "CE" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "CK" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/flashlight/flare/torch/lantern/bronzelamptern,
 /obj/item/flashlight/flare/torch/lantern/bronzelamptern,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "CQ" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "CS" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "EL" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Fe" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "FU" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "HA" = (
 /obj/structure/door/stone,
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Ib" = (
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "IS" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "JS" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Kr" = (
 /turf/closed/wall/mineral/tent,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "KC" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "KV" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "LB" = (
 /obj/structure/roguetent,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Md" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/metal,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "My" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "MJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "MQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ne" = (
 /mob/living/simple_animal/hostile/orc/spear2,
 /turf/open/floor/snow/patchy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Op" = (
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Pa" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/snow/patchy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Pu" = (
 /obj/structure/bed/shit,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "QS" = (
 /obj/structure/table/wood,
 /obj/structure/fluff/millstone,
 /obj/item/weapon/knife/dagger,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Rc" = (
 /mob/living/carbon/human/species/goblin/npc/cave,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "RK" = (
 /obj/item/weapon/mace/woodclub,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Sc" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ss" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "SZ" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "UV" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "UY" = (
 /turf/open/floor/snow,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "VO" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "WR" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Xg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "XD" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "XN" = (
 /turf/open/water/river{
 	dir = 4
 	},
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Yd" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/item/gem/yellow,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ys" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "YE" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Zo" = (
 /turf/open/floor/grass/cold,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 
 (1,1,1) = {"
 ae

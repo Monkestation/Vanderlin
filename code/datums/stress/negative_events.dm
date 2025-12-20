@@ -207,7 +207,7 @@
 /datum/stress_event/delf
 	timer = 30 SECONDS
 	stress_change = 1
-	desc = "<span class='red'>A loathesome dark elf.</span>"
+	desc = "<span class='red'>A loathsome dark elf.</span>"
 
 /datum/stress_event/tieb
 	timer = 30 SECONDS
@@ -237,7 +237,7 @@
 /datum/stress_event/paratalk
 	timer = 2 MINUTES
 	stress_change = 2
-	desc = "<span class='red'>They are plotting against me in evil tongues..</span>"
+	desc = "<span class='red'>They are plotting against me in evil tongues...</span>"
 
 /datum/stress_event/paraforeigner
 	timer = 2 MINUTES
@@ -345,6 +345,17 @@
 	desc = span_boldred("<B>I have seen something nightmarish, and I fear for my life!</B>")
 	timer = 999 MINUTES
 
+
+/datum/stress_event/confessed
+	stress_change = 3
+	desc = span_red("I've confessed to sin.")
+	timer = 15 MINUTES
+
+/datum/stress_event/confessedgood
+	stress_change = 1
+	desc = span_red("I've confessed to sin, it feels good.")
+	timer = 15 MINUTES
+
 /datum/stress_event/maniac_woke_up
 	stress_change = 10
 	desc = span_boldred("No... I want to go back...")
@@ -360,6 +371,35 @@
 	stress_change = 5
 	desc = span_boldred("I have failed the guillotine drop! What a shame!")
 
+//// 1 stress event for each type of clothing! ///
+/datum/stress_event/maiddress
+	timer = 999 MINUTES
+	stress_change = 5
+	desc = span_red("I really don't like wearing this. It's servant clothing.")
+
+/datum/stress_event/maiddress/noble
+	stress_change = 6
+	desc = span_red("Wearing this is beneath me! I will not tolerate this another second!")
+
+/datum/stress_event/maidband
+	timer = 999 MINUTES
+	stress_change = 3
+	desc = span_red("I really don't like wearing this. It's servant clothing.")
+
+/datum/stress_event/maidband/noble
+	stress_change = 4
+	desc = span_red("Wearing this is beneath me! I will not tolerate this another second!")
+
+/datum/stress_event/maidapron
+	timer = 999 MINUTES
+	stress_change = 3
+	desc = span_red("I really don't like wearing this. It's servant clothing.")
+
+/datum/stress_event/maidapron/noble
+	stress_change = 5
+	desc = span_red("Wearing this is beneath me! I will not tolerate this another second!")
+
+/// End Maid stress
 
 /datum/stress_event/noble_impoverished_food
 	stress_change = 3
@@ -389,7 +429,27 @@
 /datum/stress_event/noble_ate_without_table
 	stress_change = 1
 	desc = span_red("Eating such a meal without a table? Churlish.")
-	timer = 2 MINUTES
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_ate_without_plate
+	stress_change = 1
+	desc = span_red("To eat without a plate... how utterly uncivilized.")
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_ate_with_just_a_fork
+	stress_change = 1
+	desc = span_red("Eating off a bare fork, this is hardly proper dining.")
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_tarnished_cloth
+	stress_change = 1
+	desc = span_red("This is beneath me... a noble should dry their cloth in a proper place.")
+	timer = 5 MINUTES
+
+/datum/stress_event/noble_polishing_shoe
+	stress_change = 3
+	desc = span_red("This menial chore insults my station, i should not need to polish a pair of shoes.")
+	timer = 5 MINUTES
 
 /datum/stress_event/destroyed_past //gaffer destroying their trophies
 	stress_change = 4
@@ -645,7 +705,43 @@
 	stress_change = 50
 	timer = 1000 MINUTES
 
+/datum/stress_event/consumed_tainted_lux
+	desc = span_warning("Why did I drink that?")
+	stress_change = 15
+	timer = 10 MINUTES
+
 /datum/stress_event/dead_bird
 	timer = 5 MINUTES
 	stress_change = 3
 	desc = span_red("My precious bird won't answer my call...")
+
+/datum/stress_event/soulchurnerhorror
+	timer = 10 SECONDS
+	stress_change = 50
+	desc = span_red("The horrid wails of the dead call for relief! WHAT HAVE I DONE?!")
+
+/datum/stress_event/soulchurner
+	timer = 1 MINUTES
+	stress_change = 10
+	desc = span_red("The horrid wails of the dead call for relief!")
+
+
+/datum/stress_event/soulchurnerpsydon
+	timer = 1 MINUTES
+	stress_change = 1
+	desc = span_red("The horrid wails of the dead call for relief! I can ENDURE such calls...")
+
+/datum/stress_event/wet_cloth
+	stress_change = 1
+	desc = span_red("I am wearing wet clothes.. ugh.")
+	timer = 1 MINUTES
+
+/datum/stress_event/dirty_platter
+	stress_change = 1
+	desc = span_red("I ate off a dirty platter..")
+	timer = 1 MINUTES
+
+/datum/stress_event/dirty_bowl
+	stress_change = 1
+	desc = span_red("I ate off a dirty bowl..")
+	timer = 1 MINUTES

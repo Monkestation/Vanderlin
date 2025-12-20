@@ -32,7 +32,7 @@
 	// sound played for owner
 	playsound(owner, pick('sound/vo/mobs/wwolf/howl (1).ogg', 'sound/vo/mobs/wwolf/howl (2).ogg'), 75, TRUE)
 
-	for(var/mob/player in (GLOB.player_list - owner))
+	for(var/mob/player as anything in (GLOB.player_list - owner))
 		if(!player.mind)
 			continue
 		if(player.stat == DEAD)
@@ -83,3 +83,30 @@
 		owner.put_in_hands(r, TRUE, FALSE, TRUE)
 		//owner.visible_message("Your claws extend.", "You feel your claws extending.", "You hear a sound of claws extending.")
 		extended = TRUE
+
+/datum/action/cooldown/spell/woundlick
+	name = "Lick the wounds"
+	desc = "Heal the wounds of somebody"
+	button_icon_state = "diagnose"
+
+	cast_range = 1
+
+	spell_cost = 0
+	charge_required = FALSE
+
+/datum/action/cooldown/spell/woundlick/cast(mob/living/carbon/human/cast_on)
+	. = ..()
+	if(!istype(cast_on))
+		return
+
+	if(do_after(owner, 7 SECONDS, cast_on))
+		var/ramount = 20
+		var/rid = /datum/reagent/medicine/healthpot
+		cast_on.reagents.add_reagent(rid, ramount)
+		rid = /datum/reagent/water
+		cast_on.reagents.add_reagent(rid, ramount)
+
+		if(cast_on.mind?.has_antag_datum(/datum/antagonist/werewolf))
+			cast_on.visible_message(span_green("[owner] is licking [cast_on]'s wounds with its tongue!"), span_notice("My kin has covered my wounds..."))
+		else
+			cast_on.visible_message(span_green("[owner] is licking [cast_on]'s wounds with its tongue!"), span_notice("That thing... Did it lick my wounds?"))

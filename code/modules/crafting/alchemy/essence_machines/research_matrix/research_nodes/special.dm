@@ -1,6 +1,6 @@
 /datum/thaumic_research_node/gnome_hat_chance
 	name = "Gnomish Perfection"
-	desc = "The pinnacle of life, Gnomes with Hats. If Psydon would be here to witness this, he would weep tears of joy."
+	desc = "The pinnacle of life, Gnomes with Hats. If Psydon were here to witness this, he would weep tears of joy."
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/gnome_speed/three, /datum/thaumic_research_node/gnome_efficency/three)
 	required_essences = list(

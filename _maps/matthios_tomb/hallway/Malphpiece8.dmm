@@ -1,106 +1,106 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ds" = (
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ed" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "eC" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "fu" = (
 /obj/structure/fluff/walldeco/painting/seraphina,
 /obj/structure/fluff/walldeco/painting/seraphina,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "fy" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "fE" = (
 /obj/structure/flora/shroom_tree,
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ha" = (
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "iX" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "jk" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "jt" = (
 /obj/structure/door/stone,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "jG" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "kc" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "nq" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "oX" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/reagent_containers/glass/cup/golden,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "qw" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rf" = (
 /obj/structure/fluff/walldeco/painting,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rh" = (
 /obj/structure/bed/shit,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rI" = (
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rO" = (
 /obj/machinery/light/fueled/torchholder/c,
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rV" = (
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "sa" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/reagent_containers/glass/bottle/stronghealthpot,
 /obj/item/reagent_containers/food/snacks/cheddar/aged,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "sI" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "sS" = (
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "tb" = (
 /obj/structure/fluff/walldeco/painting/castle,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "tk" = (
 /obj/structure/door/fancy,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "uF" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/weapon/pitchfork/copper,
@@ -108,62 +108,62 @@
 /obj/item/clothing/face/cigarette/pipe,
 /obj/item/reagent_containers/food/snacks/produce/swampweed_dried,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "uG" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ww" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "wU" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "zx" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/ore/gold,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "zI" = (
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "zN" = (
 /obj/structure/chair/stool,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "BA" = (
 /obj/structure/fluff/walldeco/painting/crown,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Ev" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/clothing/ring/gold,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "EA" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Fh" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Fw" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "FE" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Hu" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/clothing/face/facemask/goldmask,
@@ -179,67 +179,67 @@
 /obj/item/lockpickring,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Kf" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/statue/gold,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Kt" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Ln" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Ng" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Oz" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "PZ" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "RZ" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/ingot/gold,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "TV" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/statue/gold/loot,
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "WT" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Xb" = (
 /obj/structure/fluff/walldeco/painting/queen,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Xd" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Yk" = (
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Yu" = (
 /obj/structure/fluff/statue/evil,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "YO" = (
 /turf/open/water/swamp,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 
 (1,1,1) = {"
 Kt

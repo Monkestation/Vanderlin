@@ -4,7 +4,6 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/rouschild
-	category_tags = list(CTAG_WRETCH)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 	total_positions = 2
 

@@ -9,10 +9,10 @@
 	faction = FACTION_NEUTRAL
 	total_positions = 6
 	spawn_positions = 4
-	min_pq = 4
 	antag_job = TRUE
 
 	advclass_cat_rolls = list(CTAG_BANDIT = 20)
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	is_foreigner = TRUE
 	job_reopens_slots_on_death = FALSE //no endless stream of bandits, unless the migration waves deem it so
@@ -24,3 +24,12 @@
 	traits = list(TRAIT_NOAMBUSH)
 
 	antag_role = /datum/antagonist/bandit
+
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 900
+	)
+/datum/job/advclass/bandit
+	exp_types_granted = list(EXP_TYPE_COMBAT)
+

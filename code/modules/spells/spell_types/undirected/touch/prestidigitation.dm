@@ -111,7 +111,7 @@
 	var/gatherspeed =  3.5 SECONDS - (skill_level * 3)
 	if (istype(target, /turf/open/lava))
 		if (do_after(owner, gatherspeed, target))
-			to_chat(owner, span_notice("I mold a handful of oozing lava  with my arcyne power, rapidly hardening it!"))
+			to_chat(owner, span_notice("I mold a handful of oozing lava with my arcyne power, rapidly hardening it!"))
 			new /obj/item/natural/obsidian(owner.loc)
 
 /datum/action/cooldown/spell/undirected/touch/prestidigitation/proc/create_spark()

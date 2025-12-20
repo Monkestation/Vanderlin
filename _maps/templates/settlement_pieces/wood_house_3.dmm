@@ -1,0 +1,406 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/effect/landmark/settlement_road_node,
+/turf/open/floor/wood,
+/area/template_noop)
+"c" = (
+/obj/structure/stairs{
+	dir = 2
+	},
+/turf/open/floor/ruinedwood,
+/area/template_noop)
+"d" = (
+/turf/open/floor/rooftop/green,
+/area)
+"f" = (
+/turf/closed/wall/mineral/roofwall/center,
+/area)
+"h" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/template_noop)
+"i" = (
+/obj/effect/landmark/settlement_mob_spawn,
+/turf/open/floor/cobble,
+/area/template_noop)
+"l" = (
+/turf/closed/wall/mineral/roofwall/middle{
+	dir = 4
+	},
+/area)
+"n" = (
+/obj/structure/chair/wood{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/template_noop)
+"o" = (
+/obj/structure/stairs{
+	dir = 2
+	},
+/turf/open/floor/dirt,
+/area/template_noop)
+"q" = (
+/turf/open/transparent/openspace,
+/area/template_noop)
+"r" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/cobble,
+/area/template_noop)
+"s" = (
+/turf/closed/wall/mineral/roofwall/middle{
+	dir = 2
+	},
+/area)
+"t" = (
+/turf/open/floor/rooftop/green{
+	dir = 1
+	},
+/area)
+"v" = (
+/obj/effect/landmark/settlement_mob_spawn,
+/turf/open/floor/wood,
+/area/template_noop)
+"w" = (
+/obj/structure/bridge,
+/turf/open/transparent/openspace,
+/area/template_noop)
+"x" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/transparent/openspace,
+/area/template_noop)
+"y" = (
+/turf/closed/wall/mineral/decostone,
+/area/template_noop)
+"D" = (
+/obj/structure/window/openclose,
+/turf/open/floor/wood,
+/area/template_noop)
+"F" = (
+/turf/open/floor/wood,
+/area/template_noop)
+"G" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/template_noop)
+"H" = (
+/turf/open/floor/ruinedwood,
+/area/template_noop)
+"K" = (
+/obj/structure/window/openclose{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/template_noop)
+"L" = (
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
+/area)
+"M" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/template_noop)
+"O" = (
+/turf/closed/wall/mineral/roofwall/middle{
+	dir = 8
+	},
+/area)
+"Q" = (
+/obj/structure/table/wood/crafted,
+/turf/open/floor/wood,
+/area/template_noop)
+"R" = (
+/turf/template_noop,
+/area)
+"T" = (
+/turf/open/floor/rooftop/green{
+	dir = 8
+	},
+/area)
+"U" = (
+/turf/open/floor/cobble,
+/area/template_noop)
+"V" = (
+/obj/structure/bed/mediocre,
+/turf/open/floor/wood,
+/area/template_noop)
+"W" = (
+/obj/structure/chair/wood{
+	dir = 8;
+	pixel_y = 0
+	},
+/turf/open/floor/wood,
+/area/template_noop)
+"Y" = (
+/obj/effect/landmark/settlement_mob_spawn,
+/turf/open/floor/ruinedwood,
+/area/template_noop)
+"Z" = (
+/turf/closed/wall/mineral/roofwall/middle{
+	dir = 1
+	},
+/area)
+
+(1,1,1) = {"
+h
+a
+a
+h
+r
+U
+U
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+h
+U
+i
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+U
+U
+y
+"}
+(4,1,1) = {"
+a
+a
+a
+h
+a
+a
+h
+"}
+(5,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}
+(6,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}
+(7,1,1) = {"
+h
+a
+a
+a
+a
+a
+h
+"}
+
+(1,1,2) = {"
+h
+q
+x
+h
+q
+q
+q
+"}
+(2,1,2) = {"
+q
+q
+x
+q
+M
+q
+q
+"}
+(3,1,2) = {"
+w
+w
+H
+w
+Y
+c
+y
+"}
+(4,1,2) = {"
+q
+q
+x
+h
+x
+q
+h
+"}
+(5,1,2) = {"
+q
+q
+x
+q
+x
+q
+q
+"}
+(6,1,2) = {"
+w
+w
+H
+H
+H
+w
+w
+"}
+(7,1,2) = {"
+h
+q
+x
+q
+x
+q
+h
+"}
+
+(1,1,3) = {"
+h
+G
+G
+h
+q
+q
+q
+"}
+(2,1,3) = {"
+G
+v
+V
+G
+q
+q
+q
+"}
+(3,1,3) = {"
+D
+F
+F
+G
+q
+q
+o
+"}
+(4,1,3) = {"
+G
+n
+F
+h
+K
+G
+h
+"}
+(5,1,3) = {"
+G
+Q
+F
+F
+F
+F
+G
+"}
+(6,1,3) = {"
+G
+W
+F
+F
+F
+v
+b
+"}
+(7,1,3) = {"
+h
+G
+G
+G
+G
+G
+h
+"}
+
+(1,1,4) = {"
+t
+Z
+s
+d
+R
+R
+R
+"}
+(2,1,4) = {"
+t
+Z
+s
+d
+R
+R
+R
+"}
+(3,1,4) = {"
+t
+Z
+s
+d
+R
+R
+R
+"}
+(4,1,4) = {"
+t
+Z
+s
+d
+T
+T
+T
+"}
+(5,1,4) = {"
+t
+Z
+f
+O
+O
+O
+O
+"}
+(6,1,4) = {"
+t
+Z
+f
+l
+l
+l
+l
+"}
+(7,1,4) = {"
+t
+Z
+s
+L
+L
+L
+L
+"}

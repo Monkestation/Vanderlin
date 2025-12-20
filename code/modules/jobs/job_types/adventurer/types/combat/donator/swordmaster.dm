@@ -5,7 +5,6 @@
 	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR) // not RACES_PLAYER_GRENZ because dwarves don't have a sprite for this armor
 	outfit = /datum/outfit/adventurer/swordmaster
 	total_positions = 1
-	min_pq = 2
 	roll_chance = 15
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
@@ -27,7 +26,7 @@
 		var/prev_real_name = H.real_name
 		var/prev_name = H.name
 		var/honorary = "Ritter"
-		if(H.gender == FEMALE)
+		if(H.pronouns == SHE_HER)
 			honorary = "Ritterin"
 		H.real_name = "[honorary] [prev_real_name]"
 		H.name = "[honorary] [prev_name]"

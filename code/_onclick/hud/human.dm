@@ -298,10 +298,8 @@
 	zone_select =  new /atom/movable/screen/zone_sel(null, src)
 	zone_select.icon = 'icons/mob/roguehud64.dmi'
 	zone_select.screen_loc = rogueui_targetdoll
-	zone_select.update_appearance()
+	zone_select.update_appearance(UPDATE_OVERLAYS)
 	static_inventory += zone_select
-
-	zone_select.update_appearance()
 
 	stamina = new /atom/movable/screen/stamina()
 	infodisplay += stamina
@@ -316,7 +314,7 @@
 	for(var/atom/movable/screen/inventory/inv in (static_inventory + toggleable_inventory))
 		if(inv.slot_id)
 			inv_slots[TOBITSHIFT(inv.slot_id) + 1] = inv
-			inv.update_appearance()
+			inv.update_appearance(UPDATE_ICON_STATE)
 
 	update_locked_slots()
 	mymob.update_a_intents()

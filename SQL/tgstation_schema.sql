@@ -325,6 +325,10 @@ CREATE TABLE `player` (
   `accountjoindate` DATE DEFAULT NULL,
   `flags` smallint(5) unsigned DEFAULT '0' NOT NULL,
   `discord_id` BIGINT(20) NULL DEFAULT NULL,
+  `twitch_rank` VARCHAR(32) NOT NULL DEFAULT '',
+  `twitch_user` VARCHAR(32) NOT NULL DEFAULT '',
+  `patreon_key` VARCHAR(32) NOT NULL DEFAULT 'None',
+  `patreon_rank` VARCHAR(32) NOT NULL DEFAULT 'None',
   PRIMARY KEY (`ckey`),
   KEY `idx_player_cid_ckey` (`computerid`,`ckey`),
   KEY `idx_player_ip_ckey` (`ip`,`ckey`)

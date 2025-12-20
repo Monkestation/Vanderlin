@@ -26,3 +26,8 @@
 	name = "Triton Eyes"
 	icon_state = "triton"
 	use_static = TRUE
+
+/datum/sprite_accessory/eyes/humanoid/rakshari
+	name = "Rakshari Eyes"
+	icon_state = "rakshari"
+	use_static = TRUE

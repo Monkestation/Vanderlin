@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	return
 
 /// Aplies after the user mob is fully spawned and has mind
-/datum/charflaw/proc/after_spawn(mob/user)
+/datum/charflaw/proc/after_spawn(mob/user, client/mob_client)
 	return
 
 /// Applies when the flaw is deleted
@@ -136,13 +136,14 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	desc = "I'm a normal person, how rare! (Consumes 3 triumphs or randomizes)"
 	random_exempt = TRUE
 
-/datum/charflaw/noflaw/after_spawn(mob/user)
+/datum/charflaw/noflaw/after_spawn(mob/user, client/mob_client)
 	. = ..()
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
-	if(H.get_triumphs() >= 3)
-		H.adjust_triumphs(-3)
+	var/triumphs = get_triumph_amount(mob_client.ckey)
+	if(triumphs >= 3)
+		adjust_triumphs(mob_client.ckey, -3)
 		H.set_flaw(/datum/charflaw/eznoflaw)
 		return
 	H.get_random_flaw()
@@ -165,7 +166,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 				var/obj/item/I = H.wear_mask
 				if(!I.obj_broken)
 					return
-	H.blur_eyes(2)
+	H.set_eye_blur_if_lower(4 SECONDS)
 	H.apply_status_effect(/datum/status_effect/debuff/badvision)
 
 /datum/status_effect/debuff/badvision
@@ -699,7 +700,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 		// Severe migraine effects
 		if(prob(30)) // 30% chance of severe episode
-			H.blur_eyes(rand(3, 6))
+			H.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))
 			to_chat(H, span_boldwarning("A severe migraine strikes! Your vision blurs and your head pounds!"))
 		else
 			to_chat(H, span_warning("A migraine headache begins to build."))
@@ -789,7 +790,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 		return
 	var/mob/living/L = user
 
-	L.adjust_stat_modifier("[REF(src)]", STATKEY_INT, rand(-2, -5)) //this would probably make the average manorc a vegetable
+	L.adjust_stat_modifier(STATMOD_FLAW, STATKEY_INT, rand(-2, -5)) //this would probably make the average manorc a vegetable
 
 /datum/charflaw/witless_pixie/after_spawn(mob/user)
 	if(!ishuman(user))

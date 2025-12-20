@@ -10,6 +10,9 @@
 		/datum/attunement/arcyne = 0.7,
 	)
 
+	invocation = "MAGIC MISSILE!!!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 1 SECONDS
 	charge_drain = 1
 	charge_slowdown = 1.3

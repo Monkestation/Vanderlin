@@ -17,6 +17,9 @@
 	var/message
 
 /datum/action/cooldown/spell/undirected/list_target/vicious_mimicry/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
 	return isliving(cast_on)
 
 /datum/action/cooldown/spell/undirected/list_target/vicious_mimicry/before_cast(mob/living/cast_on)

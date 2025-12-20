@@ -50,7 +50,7 @@
 	belt = pick(/obj/item/storage/belt/leather, /obj/item/storage/belt/leather/rope)
 
 	beltr = /obj/item/weapon/mace/cudgel
-	beltl = /obj/item/weapon/sword/short
+	beltl = /obj/item/weapon/sword/short/iron
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/weapon/shield/wood
 	backpack_contents = list(/obj/item/flint = 1, /obj/item/weapon/knife/villager = 1)

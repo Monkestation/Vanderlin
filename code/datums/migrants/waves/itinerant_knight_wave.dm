@@ -1,13 +1,14 @@
 /datum/migrant_role/itinerant_knight
 	name = "Itinerant Knight"
-	greet_text = "You are an itinerant Knight, you have embarked alongside your squire on a voyage to fullfil your knightly vows."
+	greet_text = "You are an itinerant Knight, you have embarked alongside your squire on a voyage to fulfill your knightly vows."
 	migrant_job = /datum/job/migrant/itinerant_knight
 
 /datum/job/migrant/itinerant_knight
 	title = "Itinerant Knight"
-	tutorial = "You are an itinerant Knight, you have embarked alongside your squire on a voyage to fullfil your knightly vows."
+	tutorial = "You are an itinerant Knight, you have embarked alongside your squire on a voyage to fulfill your knightly vows."
 	outfit = /datum/outfit/itinerant_knight
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	jobstats = list(
 		STATKEY_STR = 3,
@@ -139,7 +140,7 @@
 		/datum/migrant_role/itinerant_knight = 1,
 		/datum/migrant_role/itinerant_squire = 1,
 	)
-	greet_text = "The weight of Psydon's cross is heavy, the vows you have undertaken heavier, a Knight and their squire has took to the road to fullfill them."
+	greet_text = "The weight of Psydon's cross is heavy, the vows you have undertaken heavier, a Knight and their squire have taken to the road to fulfill them."
 
 /datum/migrant_wave/knight_down
 	name = "The Knightly Journey"
@@ -149,4 +150,4 @@
 	roles = list(
 		/datum/migrant_role/itinerant_knight = 1,
 	)
-	greet_text = "The weight of Psydon's cross is heavy, the vows you have undertaken heavier, a Knight has took to the road to fullfill them."
+	greet_text = "The weight of Psydon's cross is heavy, the vows you have undertaken heavier, a Knight has taken to the road to fulfill them."

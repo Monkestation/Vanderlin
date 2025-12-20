@@ -11,7 +11,6 @@ GLOBAL_LIST_INIT(mined_resource_loc, list())
 
 	tags = list(
 		TAG_NATURE,
-		TAG_BOON,
 		TAG_WORK,
 	)
 
@@ -19,7 +18,7 @@ GLOBAL_LIST_INIT(mined_resource_loc, list())
 	. = ..()
 	if(!.)
 		return FALSE
-	if(!LAZYLEN(GLOB.mined_resource_loc))
+	if(LAZYLEN(GLOB.mined_resource_loc) < 12)
 		return FALSE
 
 /datum/round_event/collapsing_earth
@@ -27,13 +26,28 @@ GLOBAL_LIST_INIT(mined_resource_loc, list())
 		/turf/closed/mineral/random/high_nonval = 5,
 		/turf/closed/mineral/random/med_nonval = 10,
 		/turf/closed/mineral/random/low_nonval = 15,
-
 		/turf/closed/mineral/random/low_valuable = 7,
 		/turf/closed/mineral/random/med_valuable = 4,
 	)
 
 /datum/round_event/collapsing_earth/start()
 	. = ..()
-	for(var/i = 1 to rand(1, 25))
-		var/turf/open/turf = pick(GLOB.mined_resource_loc)
-		turf.try_respawn_mined_chunks(150, weighted_rocks)
+	if(LAZYLEN(GLOB.mined_resource_loc) < 12)
+		return
+
+	for(var/i = 1 to rand(4, 12))
+		var/turf/open/floor/naturalstone/turf = pick(GLOB.mined_resource_loc)
+		if(!istype(turf))
+			GLOB.mined_resource_loc -= turf
+			continue
+
+		var/mob/living/mob_check = locate(/mob/living) in turf
+		if(mob_check)
+			continue
+
+		for(var/mob/living/L in view(7, turf))
+			shake_camera(L, 3, 3)
+
+		turf.visible_message(span_warning("The ceiling has collapsed, revealing fresh mineral vein!"))
+
+		turf.try_respawn_mined_chunks(100, weighted_rocks)

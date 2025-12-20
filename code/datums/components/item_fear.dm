@@ -11,7 +11,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/component/scared_of_item/process(seconds_per_tick)
+/datum/component/scared_of_item/process()
 	var/mob/living/simple_animal/basic_mob = parent
 
 	if(isliving(parent))

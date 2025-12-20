@@ -8,6 +8,7 @@
 	min_players = 35
 
 	tags = list(
+		TAG_NOC,
 		TAG_MAGICAL,
 	)
 
@@ -16,7 +17,7 @@
 	if(!.)
 		return FALSE
 
-	if(!length(GLOB.mana_fountains))
+	if(!length(GLOB.mana_fountains) || SSmapping.config.map_name == "Vanderlin")
 		return FALSE
 
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
@@ -31,7 +32,7 @@
 	return FALSE
 
 /datum/round_event/noc_baptism/start()
-	if(!length(GLOB.mana_fountains))
+	if(!length(GLOB.mana_fountains) || SSmapping.config.map_name == "Vanderlin")
 		return
 
 	var/list/valid_targets = list()
@@ -54,8 +55,10 @@
 	var/datum/objective/personal/baptism/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE NOC'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Noc demands that you learn the ways of the arcyne! Seek baptism in the mana fountain to earn Noc's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE NOC'S CHOSEN!"),
+		span_notice("Noc demands that you learn the ways of the arcyne! Seek baptism in the mana fountain to earn Noc's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/ambience/noises/mystical (4).ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

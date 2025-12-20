@@ -6,7 +6,6 @@
 	outfit = /datum/outfit/adventurer/dredge
 	category_tags = list(CTAG_ADVENTURER)
 	total_positions = 7
-	min_pq = 0
 
 /datum/outfit/adventurer/dredge/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -171,7 +170,8 @@
 			if(!H.has_language(/datum/language/oldpsydonic))
 				H.grant_language(/datum/language/oldpsydonic)
 				to_chat(H, "<span class='info'>I can speak Old Psydonic with ,m before my speech.</span>")
-			H.set_patron(/datum/patron/psydon, TRUE)
+			if(!istype(H.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
+				H.set_patron(/datum/patron/psydon, TRUE)
 			to_chat(H,span_info("\
 			The Ten are false gods, and I loathe those that worship the true corpse god, Necra. Psydon lives, my life for Psydon.")
 			)
@@ -487,8 +487,8 @@
 			I've studied the arcyne, those who step to me shall perish.")
 			)
 		if("Sword2")
-			beltl = /obj/item/weapon/sword/short
-			beltr = /obj/item/weapon/sword/short
+			beltl = /obj/item/weapon/sword/short/iron
+			beltr = /obj/item/weapon/sword/short/iron
 			H.change_stat(STATKEY_END, 1)
 			H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 			H.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
@@ -629,6 +629,8 @@
 			H.change_stat(STATKEY_END, 1)
 			l_hand = /obj/item/instrument/guitar
 			ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+			var/datum/inspiration/I = new /datum/inspiration(H)
+			I.grant_inspiration(H, bard_tier = BARD_T3)
 			to_chat(H,span_info("\
 			I used to be a bard, the skills never left me. I'm a silver-tongued devil!")
 			)

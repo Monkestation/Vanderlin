@@ -4,10 +4,12 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/adventurer/profanepaladin
 	total_positions = 1
-	min_pq = 2
 	roll_chance = 15
 	category_tags = list(CTAG_ADVENTURER)
 	allowed_patrons = ALL_PROFANE_PATRONS
+
+	exp_type = list(EXP_TYPE_ADVENTURER, EXP_TYPE_LIVING, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
 /datum/outfit/adventurer/profanepaladin/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -44,7 +46,7 @@
 			shoes = /obj/item/clothing/shoes/boots/armor/matthios
 			H.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 		if(/datum/patron/inhumen/baotha) //give them custom armor i beg
-			head = /obj/item/clothing/head/helmet/heavy/decorated/golden
+			head = /obj/item/clothing/head/helmet/heavy/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
 			armor = /obj/item/clothing/armor/plate
 			gloves = /obj/item/clothing/gloves/plate

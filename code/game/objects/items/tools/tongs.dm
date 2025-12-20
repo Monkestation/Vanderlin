@@ -29,7 +29,7 @@
 	. = ..()
 	hott = world.time
 	update_appearance(UPDATE_ICON_STATE)
-	addtimer(CALLBACK(src, PROC_REF(make_unhot), world.time), 10 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(make_unhot), world.time), 30 SECONDS)
 
 /obj/item/weapon/tongs/update_icon_state()
 	. = ..()
@@ -81,7 +81,7 @@
 	if(!istype(A))
 		return ..()
 
-	if(A.tool_flags & TOOL_USAGE_TONGS)
+	if(A.tool_flags & TOOL_USAGE_TONGS || HAS_TRAIT(A, TRAIT_NEEDS_QUENCH))
 		if(!held_item)
 			user.visible_message("<span class='info'>[user] picks up [A] with [src].</span>")
 			held_item = A

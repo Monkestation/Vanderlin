@@ -64,6 +64,12 @@
 			<b>Growing Tips:</b> Variable family - some members are excellent food crops while others may be toxic. Generally productive.<br>
 			<br>
 
+			<h3>Dikarya - Fungus Family</h3>
+			<b>Characteristics:</b> Not truly a plant, this family consists of strange fungi that can be grown without sunlight. Members of this family succumb quickly to cold conditions.<br>
+			<b>Examples:</b> Capillus Mort, Borowiki, Merkel<br>
+			<b>Growing Tips:</b> Generally need warm conditions and nitrogen heavy fertilizer to grow. Good for succession planting. Thrive when planted in mushroom mounds.<br>
+			<br>
+
 			<h2>Crop Rotation Benefits</h2>
 			<b>Nutrient Management:</b> Different families have varying nutrient needs - rotate heavy feeders (grains) with light feeders (herbs) and nutrient producers (legumes when available).<br>
 			<b>Pest Control:</b> Family rotation disrupts pest cycles as many insects specialize on specific plant families.<br>

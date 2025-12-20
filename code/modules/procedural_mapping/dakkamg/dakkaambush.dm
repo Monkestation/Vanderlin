@@ -4,7 +4,7 @@
 	clusterMax = 3
 	clusterMin = 2
 	checkdensity = FALSE
-	allowed_areas = list(/area/rogue/outdoors)
+	allowed_areas = list(/area/outdoors)
 	allowed_turfs = list(/turf/open/floor/dirt/ambush)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 

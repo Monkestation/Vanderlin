@@ -2,13 +2,12 @@
 
 /datum/job/advclass/combat/lancer
 	title = "Lancer"
-	tutorial = "Working for many years as a famous mercenary in the southern Humen kingdoms, you've started heading north to avoid the skeletons of your past. With your polearm by your side, you can face down any foe."
+	tutorial = "Working for many years as a famous mercenary in Zaladin, you have left your country to avoid the skeletons of your past. With your polearm by your side, you can face down any foe."
 	allowed_sexes = list(MALE)
 	allowed_races = list(SPEC_ID_HUMEN)
 	outfit = /datum/outfit/adventurer/lancer
 	total_positions = 1
 	roll_chance = 15
-	min_pq = 2
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 	is_recognized = TRUE

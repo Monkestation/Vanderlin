@@ -12,6 +12,12 @@
 
 #define COMSIG_ATOM_STEAM_INCREASE "steam_increase"
 
+#define COMSIG_ATOM_WATER_USE "water_usage"
+
+#define COMSIG_ATOM_WATER_INCREASE "water_increase"
+
+#define COMSIG_ATOM_PROXY_WATER_USE "proxy_water_usage"
+
 ///from base of atom/attackby(): (/obj/item, /mob/living, params)
 #define COMSIG_ATOM_ATTACKBY "atom_attackby"
 /// From base of [atom/proc/attacby_secondary()]: (/obj/item/weapon, /mob/user, params)
@@ -21,7 +27,7 @@
 
 /// From base of atom/attack_hand(): (mob/user)
 #define COMSIG_ATOM_ATTACK_HAND "atom_attack_hand"
-/// From base of atom/attack_right(): (mob/user)
+/// From base of atom/attack_hand_secondary(): (mob/user)
 #define COMSIG_ATOM_ATTACK_HAND_SECONDARY "atom_attack_hand_secondary"
 
 /// From base of atom/attack_ghost(): (mob/dead/observer/ghost)

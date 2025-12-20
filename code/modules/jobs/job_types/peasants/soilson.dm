@@ -12,7 +12,6 @@
 	faction = FACTION_TOWN
 	total_positions = 12
 	spawn_positions = 12
-	min_pq = -100
 	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 
@@ -23,6 +22,15 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
+
+/datum/outfit/farmer/map_override(mob/living/carbon/human/H)
+	if(SSmapping.config.map_name != "Voyage")
+		return
+	head = /obj/item/clothing/head/armingcap
+	shirt = /obj/item/clothing/shirt/undershirt/sailor
+	pants = /obj/item/clothing/pants/tights/sailor
+	wrists = null
+	shoes = /obj/item/clothing/shoes/boots
 
 /datum/outfit/farmer/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -97,7 +105,6 @@
 	total_positions = 6
 	spawn_positions = 6
 	allowed_ages = list(AGE_CHILD)
-	min_pq = -100
 	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 

@@ -85,6 +85,7 @@ GLOBAL_LIST_EMPTY(prayers)
 
 	. = TRUE //the prayer has succeeded by this point forward
 	GLOB.prayers |= prayer
+	record_featured_stat(FEATURED_STATS_DEVOUT, follower)
 	record_round_statistic(STATS_PRAYERS_MADE)
 
 	if(findtext(prayer, name))

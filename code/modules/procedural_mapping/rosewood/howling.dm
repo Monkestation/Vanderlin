@@ -22,7 +22,7 @@
 						/obj/item/natural/rock = 5,
 						/obj/item/grown/log/tree/stick = 10,
 						/obj/structure/flora/grass/pyroclasticflowers = 20)
-	allowed_areas = list(/area/rogue/outdoors/mountains/anvil/snowyforest)
+	allowed_areas = list(/area/outdoors/mountains/anvil/snowyforest)
 
 /datum/mapGeneratorModule/undermountain
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -32,7 +32,7 @@
 						/obj/item/natural/rock/random_ore = 5,
 						/obj/structure/flora/shroom_tree = 5,
 						/obj/item/restraints/legcuffs/beartrap/armed = 2)
-	allowed_areas = list(/area/rogue/under/mountains/anvil/lower)
+	allowed_areas = list(/area/under/mountains/anvil/lower)
 
 /datum/mapGeneratorModule/grove
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -42,4 +42,4 @@
 						/obj/structure/flora/grass/herb/random = 2,
 						/obj/structure/flora/grass/bush = 4,
 						/obj/item/grown/log/tree/stick = 10)
-	allowed_areas = list(/area/rogue/outdoors/mountains/anvil/grove)
+	allowed_areas = list(/area/outdoors/mountains/anvil/grove)

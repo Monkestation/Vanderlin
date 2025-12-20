@@ -618,3 +618,27 @@
 				/obj/item/natural/cloth = 2)
 	craftdiff = 6
 	category = "Undershirt"
+
+/datum/repeatable_crafting_recipe/sewing/weaving/weddingdress
+	name = "wedding silk dress"
+	output = /obj/item/clothing/shirt/dress/silkdress/weddingdress
+	requirements = list(
+		/obj/item/natural/silk = 3
+	)
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/sewing/weaving/absolver
+	name = "absolver's robe"
+	output = /obj/item/clothing/cloak/absolutionistrobe
+	requirements = list(
+		/obj/item/natural/silk = 3
+	)
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/sewing/weaving/ordinatorcape
+	name = "ordinator cape"
+	output = /obj/item/clothing/cloak/ordinatorcape
+	requirements = list(
+		/obj/item/natural/silk = 3
+	)
+	craftdiff = 3

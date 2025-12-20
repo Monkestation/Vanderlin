@@ -104,17 +104,32 @@ SUBSYSTEM_DEF(migrants)
 
 /datum/controller/subsystem/migrants/proc/try_spawn_wave()
 	var/datum/migrant_wave/wave = MIGRANT_WAVE(current_wave)
-	/// Create initial assignment list
-	/// migrant_role = client (initally migrant_role = null)
-	var/list/assignments = list()
+	/// Create indexed assignment slots and role map
+	var/list/assignments = list()  // indexed list of clients (null = empty slot)
+	var/list/assignment_roles = list()  // indexed list of role types per slot
 	/// Populate it
 	for(var/role_type in wave.roles)
 		var/amount = wave.roles[role_type]
 		for(var/i in 1 to amount)
-			assignments[role_type] = null
-	/// Shuffle assignments so role rolling is not consistent
-	assignments = shuffle(assignments)
+			assignments += null
+			assignment_roles += role_type
 
+	/// Shuffle assignments so role rolling is not consistent
+	var/list/slot_order = list()
+	for(var/i in 1 to assignments.len)
+		slot_order += i
+	slot_order = shuffle(slot_order)
+
+	var/list/shuffled_assignments = list()
+	var/list/shuffled_assignment_roles = list()
+	for(var/idx in slot_order)
+		shuffled_assignments += assignments[idx]
+		shuffled_assignment_roles += assignment_roles[idx]
+
+	assignments = shuffled_assignments
+	assignment_roles = shuffled_assignment_roles
+
+	///Get active migrants and shuffle them
 	var/list/active_migrants = get_active_migrants()
 	active_migrants = shuffle(active_migrants)
 
@@ -124,17 +139,20 @@ SUBSYSTEM_DEF(migrants)
 		return FALSE
 
 	/// Try to assign priority players to positions
-	for(var/assignment in assignments)
+	for(var/i in 1 to assignments.len)
 		if(!length(active_migrants))
-			break // Out of migrants, we're screwed and will fail
-		if(!isnull(assignments[assignment]))
+			break
+		if(!isnull(assignments[i]))
 			continue
-		var/list/priority = get_priority_players(active_migrants, assignment, current_wave)
+
+		var/role_type = assignment_roles[i]
+		var/list/priority = get_priority_players(active_migrants, role_type, current_wave)
 		if(!length(priority))
 			continue
+
 		var/client/picked
 		for(var/client/client as anything in priority)
-			if(!can_be_role(client, assignment))
+			if(!can_be_role(client, role_type))
 				continue
 			picked = client
 			break
@@ -142,19 +160,20 @@ SUBSYSTEM_DEF(migrants)
 			continue
 
 		active_migrants -= picked
-		assignments[assignment] = picked
+		assignments[i] = picked
 		picked_migrants += picked
 
 	/// Assign rest of the players to positions
-	for(var/assignment in assignments)
+	for(var/i in 1 to assignments.len)
 		if(!length(active_migrants))
 			break // Out of migrants, we're screwed and will fail
-		if(!isnull(assignments[assignment]))
+		if(!isnull(assignments[i]))
 			continue
 
+		var/role_type = assignment_roles[i]
 		var/client/picked
 		for(var/client/client as anything in active_migrants)
-			if(!can_be_role(client, assignment))
+			if(!can_be_role(client, role_type))
 				continue
 			picked = client
 			break
@@ -162,7 +181,7 @@ SUBSYSTEM_DEF(migrants)
 			continue
 
 		active_migrants -= picked
-		assignments[assignment] = picked
+		assignments[i] = picked
 		picked_migrants += picked
 
 	/// Find spawn points for the assignments
@@ -177,14 +196,15 @@ SUBSYSTEM_DEF(migrants)
 		client.prefs.migrant.post_spawn()
 
 	/// Spawn the migrants, hooray
-	for(var/assignment in assignments)
-		var/client/client = assignments[assignment]
+	for(var/i in 1 to assignments.len)
+		var/client/client = assignments[i]
 		if(!client)
 			continue
+		var/role_type = assignment_roles[i]
 		var/turf/spawn_turf = pick_n_take(turfs)
 		if(!spawn_turf)
 			spawn_turf = fallback_location
-		spawn_migrant(wave, assignment, client, spawn_turf)
+		spawn_migrant(wave, role_type, client, spawn_turf)
 
 	// Increment wave spawn counter
 	var/used_wave_type = wave.type
@@ -195,7 +215,7 @@ SUBSYSTEM_DEF(migrants)
 	spawned_waves[used_wave_type] += 1
 
 	reset_wave_contributions(wave)
-	message_admins("MIGRANTS: Spawned wave: [wave.name] (players: [assignments.len]) at [ADMIN_VERBOSEJMP(spawn_location)]")
+	message_admins("MIGRANTS: Spawned wave: [wave.name] (players: [picked_migrants.len]) at [ADMIN_VERBOSEJMP(spawn_location)]")
 
 	unset_all_active_migrants()
 
@@ -389,6 +409,12 @@ SUBSYSTEM_DEF(migrants)
 		if(!(player.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
 			to_chat(player, span_warning("Wrong species. Your prioritized role only allows [migrant_job.allowed_races.Join(", ")]."))
 			can_join = FALSE
+
+	if(length(migrant_job.blacklisted_species) && (prefs.pref_species.id in migrant_job.blacklisted_species))
+		if(!(player.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
+			to_chat(player, span_warning("Wrong species. Your prioritized role disallows [migrant_job.blacklisted_species.Join(", ")]."))
+			can_join = FALSE
+
 	if(length(migrant_job.allowed_sexes) && !(prefs.gender in migrant_job.allowed_sexes))
 		to_chat(player, span_warning("Wrong gender. Your prioritized role only allows [migrant_job.allowed_sexes.Join(", ")]."))
 		can_join = FALSE

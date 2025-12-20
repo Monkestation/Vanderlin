@@ -1,11 +1,11 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "c" = (
 /obj/structure/dungeon_descent,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "e" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -14,21 +14,21 @@
 	pixel_y = 7
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "f" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "i" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "j" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "l" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "m" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -43,48 +43,48 @@
 	pixel_y = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "r" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "v" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "w" = (
 /obj/structure/stairs,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "x" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/reagent_containers/glass/bottle/waterskin,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "y" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "z" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "C" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "D" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "F" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "G" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "H" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
@@ -94,44 +94,44 @@
 	pixel_x = 5
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "I" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "N" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "P" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "T" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "U" = (
 /obj/structure/fluff/statue/evil,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "V" = (
 /obj/structure/roguetent/preopen,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "W" = (
 /obj/structure/dungeon_exit,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "X" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Y" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 
 (1,1,1) = {"
 j

@@ -1,4 +1,3 @@
-
 /obj/machinery/anvil
 	icon = 'icons/roguetown/misc/forge.dmi'
 	name = "anvil"
@@ -10,7 +9,10 @@
 	damage_deflection = 25
 	climbable = TRUE
 	var/previous_material_quality = 0
-	var/cool_time = 10 SECONDS
+	var/cool_time = 30 SECONDS
+	var/smithing = FALSE // Is a minigame currently active?
+	var/obj/item/working_material // Reference to the material being worked
+	var/always_perfect = FALSE // Debug/admin flag
 
 /obj/machinery/anvil/crafted
 	icon_state = "caveanvil"
@@ -23,6 +25,9 @@
 /obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/weapon/tongs))
 		var/obj/item/weapon/tongs/T = W
+		if(smithing)
+			to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
+			return
 		if(hingot)
 			if(T.held_item && istype(T.held_item, /obj/item/ingot))
 				if(hingot.currecipe && hingot.currecipe.needed_item && istype(T.held_item, hingot.currecipe.needed_item))
@@ -67,59 +72,26 @@
 		if(!hott)
 			to_chat(user, "<span class='warning'>The bar has gone too cold to continue working on it.</span>")
 			return
+		if(smithing)
+			to_chat(user, "<span class='warning'>Already working on this!</span>")
+			return
 		if(!hingot.currecipe)
 			if(!choose_recipe(user))
 				return
-			user.flash_fullscreen("whiteflash")
-			shake_camera(user, 1, 1)
-			playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 		if(has_world_trait(/datum/world_trait/delver))
 			if(!has_recipe_unlocked(user.key, hingot.currecipe.type))
 				return
-		var/used_str = user.STASTR
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			if(C.domhand)
-				used_str = C.get_str_arms(C.used_hand)
-			C.adjust_stamina(max(30 - (used_str * 3), 0))
-		var/total_chance = 7 * user.get_skill_level(hingot.currecipe.appro_skill)
-		var/breakthrough = 0
-		if(prob(1 + total_chance))
-			user.flash_fullscreen("whiteflash")
-			var/datum/effect_system/spark_spread/S = new()
-			var/turf/front = get_turf(src)
-			S.set_up(1, 1, front)
-			S.start()
-			breakthrough = 1
-			hingot.currecipe.numberofbreakthroughs++
 
-		if(!hingot.currecipe.advance(user, breakthrough))
-			shake_camera(user, 1, 1)
-			playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
-
-		playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
-
-		for(var/mob/M in GLOB.player_list)
-			if(!is_in_zweb(M.z,src.z))
-				continue
-			var/turf/M_turf = get_turf(M)
-			var/far_smith_sound = sound(pick('sound/items/smithdist1.ogg','sound/items/smithdist2.ogg','sound/items/smithdist3.ogg'))
-			if(M_turf)
-				var/dist = get_dist(M_turf, loc)
-				if(dist < 7)
-					continue
-				M.playsound_local(M_turf, null, 100, 1, get_rand_frequency(), falloff_exponent = 5, S = far_smith_sound)
-
-		if(istype(hammer, /obj/item/weapon/hammer/wood))
-			hammer.take_damage(hammer.max_integrity * 0.03, BRUTE, "blunt")
+		// Start the minigame instead of direct hammering
+		start_minigame(user, hammer)
 		return
 
 	if(hingot && hingot.currecipe && hingot.currecipe.needed_item && istype(W, hingot.currecipe.needed_item))
 		hingot.currecipe.item_added(user)
 		if(istype(W, /obj/item/ingot))
 			var/obj/item/ingot/I = W
-			hingot.currecipe.material_quality += I.quality
-			previous_material_quality = I.quality
+			hingot.currecipe.material_quality += I.recipe_quality
+			previous_material_quality = I.recipe_quality
 		else
 			hingot.currecipe.material_quality += previous_material_quality
 		hingot.currecipe.num_of_materials += 1
@@ -132,13 +104,91 @@
 		return
 	..()
 
+/obj/machinery/anvil/proc/start_minigame(mob/user, obj/item/weapon/hammer/hammer)
+	if(!hingot || !hingot.currecipe)
+		return
+
+	smithing = TRUE
+	working_material = hingot
+
+	var/difficulty_modifier = hingot.currecipe.craftdiff
+
+	var/datum/anvil_challenge/challenge = new(src, hingot.currecipe, user, difficulty_modifier)
+	if(!challenge)
+		smithing = FALSE
+		working_material = null
+		return
+
+
+/obj/machinery/anvil/proc/process_minigame_result(quality_score, mob/living/user, total_fail)
+	if(!hingot || !hingot.currecipe)
+		return
+
+	var/datum/anvil_recipe/recipe = hingot.currecipe
+	var/breakthrough = quality_score >= 80
+	if(total_fail)
+		quality_score = 0
+	var/success = recipe.advance(user, breakthrough, quality_score)
+
+	if(!success)
+		shake_camera(user, 1, 1)
+		playsound(src, 'sound/items/bsmithfail.ogg', 100, FALSE)
+
+	if(success)
+		var/skill_boost = 0
+		if(quality_score >= 80)
+			skill_boost = quality_score * 2
+			recipe.numberofbreakthroughs++
+		else if(quality_score >= 60)
+			skill_boost = quality_score * 1.5
+		else if(quality_score >= 40)
+			skill_boost = quality_score
+		else if(quality_score >= 20)
+			skill_boost = quality_score * 0.5
+
+		recipe.skill_quality += skill_boost
+
+	if(recipe.progress >= 100 && !recipe.additional_items.len && !recipe.needed_item)
+		complete_recipe(user, quality_score)
+
+	working_material = null
+
+/obj/machinery/anvil/proc/complete_recipe(mob/living/user, quality_score)
+	if(!hingot || !hingot.currecipe)
+		return
+
+	var/datum/anvil_recipe/recipe = hingot.currecipe
+	var/obj/item/I = new recipe.created_item(loc)
+
+	I.OnCrafted(user.dir, user)
+
+	var/skill_level = 0
+	if(user)
+		skill_level = user.get_skill_level(recipe.appro_skill)
+
+	recipe.handle_creation(I, quality_score, skill_level)
+
+	record_featured_stat(FEATURED_STATS_SMITHS, user)
+	record_featured_object_stat(FEATURED_STATS_FORGED_ITEMS, I.name)
+
+	for(var/i in 1 to recipe.createditem_extra)
+		var/obj/item/extra = new recipe.created_item(loc)
+		extra.OnCrafted(user.dir, user)
+		recipe.handle_creation(extra, quality_score, skill_level)
+
+	user.visible_message("<span class='info'>[user] finishes crafting [I]!</span>")
+
+	qdel(hingot)
+	hingot = null
+	update_appearance(UPDATE_OVERLAYS)
+
 /obj/machinery/anvil/proc/choose_recipe(mob/user)
 	if(!hingot || !hott)
 		return
 
 	var/list/valid_types = list()
 	for(var/datum/anvil_recipe/R in GLOB.anvil_recipes)
-		if(is_abstract(R.type)) //these recipes are initialized
+		if(is_abstract(R.type))
 			continue
 
 		if(has_world_trait(/datum/world_trait/delver))
@@ -152,7 +202,11 @@
 	if(!valid_types.len)
 		return
 
-	var/i_type_choice = browser_input_list(user, "Choose a category", "Anvil", valid_types)
+	var/i_type_choice
+	if(length(valid_types) == 1)
+		i_type_choice = valid_types[1]
+	else
+		i_type_choice = browser_input_list(user, "Choose a category", "Anvil", valid_types)
 	if(!i_type_choice)
 		return
 
@@ -171,16 +225,23 @@
 			appro_recipe -= R
 
 	if(appro_recipe.len)
-		var/datum/chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
+		var/datum/chosen_recipe
+		if(length(appro_recipe) == 1)
+			chosen_recipe = appro_recipe[1]
+		else
+			chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
 		if(!hingot.currecipe && chosen_recipe)
 			hingot.currecipe = new chosen_recipe.type(hingot)
-			hingot.currecipe.material_quality += hingot.quality
-			previous_material_quality = hingot.quality
+			hingot.currecipe.material_quality += hingot.recipe_quality
+			previous_material_quality = hingot.recipe_quality
 			return TRUE
 
 	return FALSE
 
 /obj/machinery/anvil/attack_hand(mob/user, params)
+	if(smithing)
+		to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
+		return
 	if(hingot)
 		if(hott)
 			to_chat(user, "<span class='warning'>It's too hot to handle with your hands.</span>")

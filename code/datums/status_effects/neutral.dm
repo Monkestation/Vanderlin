@@ -105,22 +105,43 @@
 	id = "bugged"
 	duration = -1
 	status_type = STATUS_EFFECT_MULTIPLE
-	alert_type = null
-	var/mob/living/listening_in
+	alert_type = /atom/movable/screen/alert/bugged
+	var/obj/item/listeningdevice/device
 
-/datum/status_effect/bugged/on_apply(mob/living/new_owner, mob/living/tracker)
+/datum/status_effect/bugged/on_apply(mob/living/new_owner, obj/item/listeningdevice/tracker)
 	. = ..()
 	if (.)
 		RegisterSignal(new_owner, COMSIG_MOVABLE_HEAR, PROC_REF(handle_hearing))
 
+
 /datum/status_effect/bugged/on_remove()
-	. = ..()
+	..()
+
 	UnregisterSignal(owner, COMSIG_MOVABLE_HEAR)
+	if(device)
+		owner.contents.Remove(device)
+		device.forceMove(owner.loc)
+		owner.put_in_hands(device)
+
 
 /datum/status_effect/bugged/proc/handle_hearing(datum/source, list/hearing_args)
-	listening_in.show_message(hearing_args[HEARING_MESSAGE])
+//	listening_in.show_message(hearing_args[HEARING_MESSAGE])
+	device.Hear(hearing_args[HEARING_MESSAGE], hearing_args[HEARING_SPEAKER], raw_message = hearing_args[HEARING_RAW_MESSAGE])
 
-/datum/status_effect/bugged/on_creation(mob/living/new_owner, duration_override, mob/living/tracker)
-	. = ..()
-	if(.)
-		listening_in = tracker
+/atom/movable/screen/alert/bugged
+	name = "BUGGED"
+	desc = "AN AUDIO-PARASITE ON ME."
+	icon_state = "blackeye"
+
+/atom/movable/screen/alert/bugged/Click()
+	var/mob/living/L = usr
+
+	if(!L.has_status_effect(/datum/status_effect/bugged))
+		return FALSE
+
+	to_chat(L, span_notice("I tug and rip out the parasite."))
+	playsound(L, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
+
+	L.remove_status_effect(/datum/status_effect/bugged)
+
+	return TRUE

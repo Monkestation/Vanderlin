@@ -26,7 +26,7 @@
 
 /obj/item/clothing/head/helmet/leather/advanced
 	name = "hardened leather helmet"
-	desc = "Sturdy, durable, flexible. A confortable and reliable hood made of hardened leather."
+	desc = "Sturdy, durable, flexible. A comfortable and reliable hood made of hardened leather."
 	max_integrity = INTEGRITY_STANDARD + 50
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
@@ -34,7 +34,7 @@
 
 /obj/item/clothing/head/helmet/leather/masterwork
 	name = "masterwork leather helmet"
-	desc = "This helmet is a craftsmanship marvel. Made with the finest leather. Strong, nimible, reliable."
+	desc = "This helmet is a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	max_integrity = INTEGRITY_STANDARD + 100
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
@@ -56,6 +56,12 @@
 	max_integrity = INTEGRITY_POOR
 	clothing_flags = NONE
 	item_weight = 0.5
+
+/obj/item/clothing/head/helmet/leather/headscarf/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/head/helmet/leather/headscarf/colored/red
+	color = CLOTHING_ROYAL_RED
 
 //............... Buckled Hat ............... //
 /obj/item/clothing/head/helmet/leather/inquisitor

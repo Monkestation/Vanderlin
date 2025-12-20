@@ -14,12 +14,12 @@
 /turf/open/water
 	gender = PLURAL
 	name = "water"
-	desc = "It's.. well, water."
+	desc = "It's... well, water."
 	icon = 'icons/turf/newwater.dmi'
 	icon_state = "together"
 	baseturfs = /turf/open/water
 	slowdown = 20
-	turf_flags = NONE
+	turf_flags = TURF_WEATHER_PROOF
 	var/obj/effect/overlay/water/water_overlay
 	var/obj/effect/overlay/water/top/water_top_overlay
 	bullet_sizzle = TRUE
@@ -36,6 +36,8 @@
 	shine = SHINE_SHINY
 	no_over_text = FALSE
 	water_level = 2
+	spread_chance = 0
+	burn_power = 0
 	var/uses_level = TRUE
 	var/datum/reagent/water_reagent = /datum/reagent/water
 	var/mapped = TRUE // infinite source of water
@@ -46,12 +48,16 @@
 	var/swimdir = FALSE
 	var/notake = FALSE // cant pick up with reagent containers
 	var/set_relationships_on_init = TRUE
-	var/list/blocked_flow_directions = list("2" = 0, "1" = 0, "8" = 0, "4" = 0)
-	var/childless = FALSE
+	// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
+	var/blocked_flow_directions = 0
 
 	var/cached_use = 0
 
 	var/cleanliness_factor = 1 //related to hygiene for washing
+
+	/// Fishing element for this specific water tile
+	var/datum/fish_source/fishing_datum = /datum/fish_source/ocean
+	flags_1 = CONDUCT_1
 
 /turf/open/water/proc/set_watervolume(volume)
 	water_volume = volume
@@ -90,8 +96,11 @@
 	check_surrounding_water()
 
 /turf/open/water/proc/toggle_block_state(dir, value)
-	blocked_flow_directions["[dir]"] = value
-	if(blocked_flow_directions["[dir]"])
+	if(value)
+		blocked_flow_directions |= dir
+	else
+		blocked_flow_directions &= ~dir
+	if(blocked_flow_directions & dir)
 		var/turf/open/water/river/water = get_step(src, dir)
 		if(!istype(water))
 			return
@@ -206,6 +215,10 @@
 
 /turf/open/water/Initialize()
 	. = ..()
+
+	if(!isnull(fishing_datum))
+		add_lazy_fishing(fishing_datum)
+
 	if(mapped)
 		if(prob(0.1))
 			new /obj/item/bottlemessage/ancient(src)
@@ -333,18 +346,29 @@
 			return
 	if(water_volume < 10)
 		return
+	var/dirty_water_turf = FALSE
+	if(cleanliness_factor < 0)
+		dirty_water_turf = TRUE
 	if(istype(AM, /obj/item/reagent_containers/food/snacks/fish))
 		var/obj/item/reagent_containers/food/snacks/fish/F = AM
-		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F.type, F.rarity_rank)
-		F.visible_message("<span class='warning'>[F] dives into \the [src] and disappears!</span>")
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F)
+		if(!F.status != FISH_DEAD)
+			F.visible_message("<span class='warning'>[F] dives into \the [src] and disappears!</span>")
+		else
+			F.visible_message("<span class='warning'>[F] slowly sinks motionlessly into \the [src] and disappears...</span>")
 		qdel(F)
+	if(istype(AM, /obj/item/clothing))
+		var/obj/item/clothing/cloth = AM
+		if(cloth.wetable)
+			cloth.wet.add_water(20, dirty_water_turf)
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/L = AM
 		if(L.body_position == LYING_DOWN || water_level == 3)
-			L.SoakMob(FULL_BODY)
-		else
-			if(water_level == 2)
-				L.SoakMob(BELOW_CHEST)
+			L.SoakMob(FULL_BODY, dirty_water_turf)
+		else if(water_level == 2)
+			L.SoakMob(BELOW_CHEST, dirty_water_turf)
+		else if(water_level == 1)
+			L.SoakMob(FEET, dirty_water_turf)
 		if(water_overlay)
 			if(water_level > 1 && !istype(oldLoc, type))
 				playsound(AM, 'sound/foley/waterenter.ogg', 100, FALSE)
@@ -416,15 +440,16 @@
 				adjust_originate_watervolume(-2)
 			playsound(user, pick(wash), 100, FALSE)
 
-			//handle hygiene
-			if(isliving(user))
-				var/mob/living/hygiene_target = user
-				var/list/equipped_items = hygiene_target.get_equipped_items()
-				if(length(equipped_items) > 0)
-					to_chat(user, span_notice("I could probably clean myself faster if I weren't wearing clothes..."))
-					hygiene_target.adjust_hygiene(HYGIENE_GAIN_CLOTHED * cleanliness_factor)
-				else
-					hygiene_target.adjust_hygiene(HYGIENE_GAIN_UNCLOTHED * cleanliness_factor)
+			L.ExtinguishMob()
+			//handle hygiene and clean off alcohol
+			var/list/equipped_items = L.get_equipped_items()
+			if(length(equipped_items) > 0)
+				to_chat(user, span_notice("I could probably clean myself faster if I weren't wearing clothes..."))
+				L.adjust_hygiene(HYGIENE_GAIN_CLOTHED * cleanliness_factor)
+				L.adjust_fire_stacks(-4)
+			else
+				L.adjust_hygiene(HYGIENE_GAIN_UNCLOTHED * cleanliness_factor)
+				L.adjust_fire_stacks(-2)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, params)
@@ -439,6 +464,14 @@
 	if(do_after(user, 3 SECONDS, src))
 		if(wash_in)
 			item2wash.wash(CLEAN_WASH)
+		if(istype(item2wash, /obj/item/clothing))
+			var/obj/item/clothing/item2wash_cloth = item2wash
+			if(item2wash_cloth && item2wash_cloth.wetable)
+				if(cleanliness_factor > 0)
+					item2wash_cloth.wet.add_water(20, dirty = FALSE, washed_properly = TRUE)
+				else
+					item2wash_cloth.wet.add_water(20, dirty = TRUE, washed_properly = TRUE)
+		user.nobles_seen_servant_work()
 		playsound(user, pick(wash), 100, FALSE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
@@ -681,7 +714,7 @@
 
 /turf/open/water/river
 	name = "water"
-	desc = "Crystal clear water! Flowing swiflty along the river."
+	desc = "Crystal clear water! Flowing swiftly along the river."
 	icon_state = MAP_SWITCH("rocky", "rivermove-dir")
 	water_level = 3
 	slowdown = 20
@@ -726,7 +759,7 @@
 		for(var/obj/structure/S in src)
 			if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 				return
-		if((A.loc == src) && A.has_gravity())
+		if((A.loc == src))
 			if(!istype(get_step(src, dir), /turf/open/water))
 				var/list/viable_cardinals = list()
 				var/inverse = REVERSE_DIR(dir)
@@ -769,10 +802,11 @@
 	icon = 'icons/turf/floors.dmi'
 	neighborlay_self = null
 	water_level = 2
-	slowdown = 4
+	slowdown = 2
 	swim_skill = TRUE
 	wash_in = TRUE
 	water_reagent = /datum/reagent/water/salty
+	fishing_datum = /datum/fish_source/ocean
 
 /turf/open/water/ocean/deep
 	name = "salt water"
@@ -780,9 +814,10 @@
 	icon_state = "ash"
 	icon = 'icons/turf/floors.dmi'
 	water_level = 3
-	slowdown = 8
+	slowdown = 4
 	swim_skill = TRUE
 	wash_in = TRUE
+	fishing_datum = /datum/fish_source/ocean/deep
 
 /datum/reagent/water/salty
 	taste_description = "salt"

@@ -2,138 +2,136 @@
 "bL" = (
 /obj/structure/flora/tree/underworld,
 /turf/open/floor/dirt,
-/area/rogue/underworld)
+/area/underworld)
 "df" = (
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "dF" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = 0;
 	pixel_x = -32
 	},
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "fC" = (
-/obj/structure/bars{
-	max_integrity = 700000
-	},
+/obj/structure/bars/cemetery/underworld,
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "kH" = (
 /turf/open/transparent/openspace,
-/area/rogue/underworld)
+/area/underworld)
 "lw" = (
 /obj/structure/table/wood/fine/altar,
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "mn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/underworld/arena,
-/area/rogue/underworld)
+/area/underworld)
 "ol" = (
 /turf/open/floor/churchmarble,
-/area/rogue/underworld)
+/area/underworld)
 "oU" = (
 /obj/structure/rack/underworld,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "oZ" = (
 /obj/structure/flora/tree/underworld,
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /turf/open/floor/underworld/arena,
-/area/rogue/underworld)
+/area/underworld)
 "qV" = (
 /obj/structure/underworld/barrier,
 /turf/open/floor/underworld/space,
-/area/rogue/underworld)
+/area/underworld)
 "sz" = (
 /turf/closed/wall/mineral/underbrick,
-/area/rogue/underworld)
+/area/underworld)
 "sO" = (
 /turf/open/floor/underworld/road,
-/area/rogue)
+/area)
 "tO" = (
 /obj/structure/flora/tree/underworld,
 /turf/open/floor/underworld/road,
-/area/rogue)
+/area)
 "uo" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/underworld/arena,
-/area/rogue/underworld)
+/area/underworld)
 "vI" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "wY" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
 	pixel_y = 0
 	},
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "xe" = (
 /obj/structure/underworld/necra{
 	pixel_x = -64
 	},
 /obj/structure/underworld/barrier,
 /turf/open/floor/underworld/space,
-/area/rogue/underworld)
+/area/underworld)
 "xn" = (
 /turf/open/floor/underworld/space,
-/area/rogue/underworld)
+/area/underworld)
 "xG" = (
 /obj/effect/landmark/underworld_spawnpoint,
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "xS" = (
 /obj/structure/stairs/stone/church{
 	dir = 8
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "zq" = (
 /turf/open/floor/dirt,
-/area/rogue/underworld)
+/area/underworld)
 "zs" = (
 /obj/structure/rack/underworld,
 /obj/structure/rack/underworld,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "zx" = (
 /obj/structure/stairs/stone/church{
 	dir = 1
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "AF" = (
 /obj/structure/underworld/carriage{
 	pixel_x = -100
 	},
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "Bj" = (
-/obj/structure/bars,
+/obj/structure/bars/cemetery/underworld,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "Cn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = 0;
 	pixel_x = -32
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "CP" = (
 /obj/effect/landmark/death_arena/second,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "Df" = (
 /obj/structure/stairs/stone/church{
 	dir = 8
 	},
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "DM" = (
 /obj/structure/stairs/stone/church{
 	dir = 1
@@ -143,15 +141,15 @@
 	pixel_y = 0
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "Ea" = (
 /obj/structure/rack/underworld,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "EV" = (
 /turf/closed/indestructible/wooddark/mast,
-/area/rogue)
+/area)
 "GV" = (
 /obj/structure/underworld/ravox{
 	layer = 4.82;
@@ -159,36 +157,36 @@
 	pixel_y = -6
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "Ip" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
 	pixel_y = 0
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "IK" = (
 /obj/structure/underworld/coinspawner,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "IP" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "Jx" = (
 /obj/structure/underworld/coinspawner,
 /turf/open/floor/underworld/road,
-/area/rogue/underworld)
+/area/underworld)
 "Kf" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "KU" = (
 /turf/closed/indestructible/wooddark/mast,
-/area/rogue/underworld)
+/area/underworld)
 "Lk" = (
 /turf/open/floor/underworld/road,
-/area/rogue/underworld)
+/area/underworld)
 "LG" = (
 /obj/structure/stairs/stone/church{
 	dir = 1
@@ -198,91 +196,91 @@
 	pixel_x = -32
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "Mw" = (
 /obj/effect/landmark/underworld_pull_location,
 /turf/open/floor/underworld/road,
-/area/rogue/underworld)
+/area/underworld)
 "ME" = (
 /obj/structure/rack/underworld,
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "OG" = (
 /obj/structure/flora/tree/underworld,
 /turf/open/floor/underworld/arena,
-/area/rogue/underworld)
+/area/underworld)
 "Pr" = (
 /turf/open/floor/dirt,
-/area/rogue)
+/area)
 "PP" = (
 /obj/structure/flora/tree/underworld,
 /turf/open/floor/underworld/road,
-/area/rogue/underworld)
+/area/underworld)
 "Qn" = (
 /obj/structure/stairs/stone/church{
 	dir = 1
 	},
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "Qv" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "RL" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/churchmarble,
-/area/rogue/underworld)
+/area/underworld)
 "Sp" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/churchmarble,
-/area/rogue/underworld)
+/area/underworld)
 "Tb" = (
 /obj/structure/underworld/barrier,
 /turf/open/floor/underworld/road,
-/area/rogue/underworld)
+/area/underworld)
 "Td" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /turf/open/floor/underworld/arena,
-/area/rogue/underworld)
+/area/underworld)
 "Th" = (
 /obj/structure/underworld/carriageman{
 	pixel_x = -15;
 	pixel_y = -20
 	},
 /turf/open/floor/underworld/road,
-/area/rogue/underworld)
+/area/underworld)
 "TB" = (
 /obj/structure/flora/tree/underworld,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/underworld/arena,
-/area/rogue/underworld)
+/area/underworld)
 "TM" = (
 /obj/effect/landmark/death_arena,
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "Vk" = (
 /turf/open/floor/underworld/arena,
-/area/rogue/underworld)
+/area/underworld)
 "Vp" = (
 /obj/structure/gate/bars{
 	gid = "death";
 	max_integrity = 5000000
 	},
 /turf/open/floor/churchrough,
-/area/rogue/underworld)
+/area/underworld)
 "Wt" = (
 /turf/open/floor/church,
-/area/rogue/underworld)
+/area/underworld)
 "Zm" = (
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 
 (1,1,1) = {"
 sO

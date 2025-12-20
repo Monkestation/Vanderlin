@@ -1,1 +1,2 @@
-#define FORCE_MAP "_maps/projectkalypso.json"
+#define FORCE_MAP "projectkalypso"
+#define FORCE_MAP_DIRECTORY "_maps"

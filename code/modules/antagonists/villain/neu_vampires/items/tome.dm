@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 			dat += "<i>After contact was made between the planes, it was a matter of time before some people would appear who would actively seek Nar-Sie.\
 					<br><br>Either because his love of drama and chaos resonated with them, and they wanted to become his heralds, performing sacrifices for his amusement, \
 					or because they were in awe with his... \"otherworldlyness?\" People who had lived until now grounded in reality, and became quite fascinated with something mystic, yet tangible.\
-					<br><br>And of course, then came those who seeked to defy him. Either in the name of their own gods, or out of their own sense of morality, but little do those know, \
+					<br><br>And of course, then came those who sought to defy him. Either in the name of their own gods, or out of their own sense of morality, but little do those know, \
 					Nar-Sie loves them equally, and doesn't care too much from whom the blood spills.</i>"
 		if (PAGE_LORE3)
 			dat={"<div align="center"><b>Addendum III: "The geometer's calling card"</b></div><br>"}

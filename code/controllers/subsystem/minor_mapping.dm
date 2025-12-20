@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(minor_mapping)
 		for(var/t in block(locate(1,1,z), locate(world.maxx,world.maxy,z)))
 			if(isfloorturf(t))
 				var/area/A = get_area(t)
-				if(istype(A, /area/rogue/outdoors))
+				if(istype(A, /area/outdoors))
 					suitable += t
 
 	return shuffle(suitable)

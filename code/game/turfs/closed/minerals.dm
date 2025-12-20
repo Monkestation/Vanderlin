@@ -57,7 +57,7 @@
 				var/turf/T = get_step(src, dir)
 				if(istype(T, /turf/closed/mineral/random))
 					Spread(T)
-	var/turf/open/transparent/openspace/target = get_step_multiz(src, UP)
+	var/turf/open/transparent/openspace/target = GET_TURF_ABOVE(src)
 	if(istype(target))
 		target.ChangeTurf(/turf/open/floor/naturalstone)
 
@@ -88,18 +88,18 @@
 		var/obj/item/explo_mineral = mineralType
 		var/explo_mineral_amount = mineralAmt
 		var/obj/item/natural/rock/explo_rock = rockType
-		ScrapeAway()
-		GLOB.mined_resource_loc |= get_turf(src)
-		QUEUE_SMOOTH_NEIGHBORS(src)
-		new /obj/item/natural/stone(src)
+		var/turf/new_turf = ScrapeAway()
+		GLOB.mined_resource_loc |= new_turf
+		QUEUE_SMOOTH_NEIGHBORS(new_turf)
+		new /obj/item/natural/stone(new_turf)
 		if(prob(30))
-			new /obj/item/natural/stone(src)
+			new /obj/item/natural/stone(new_turf)
 		if (explo_mineral && (explo_mineral_amount > 0))
 			if(prob(33)) //chance to spawn ore directly
-				new explo_mineral(src)
+				new explo_mineral(new_turf)
 			if(explo_rock)
 				if(prob(23))
-					new explo_rock(src)
+					new explo_rock(new_turf)
 			SSblackbox.record_feedback("tally", "ore_mined", explo_mineral_amount, explo_mineral)
 		else
 			return
@@ -135,7 +135,8 @@
 	var/flags = NONE
 	if(defer_change)
 		flags = CHANGETURF_DEFER_CHANGE
-	ScrapeAway(null, flags)
+	var/turf/new_turf = ScrapeAway(null, flags)
+	GLOB.mined_resource_loc |= new_turf
 	addtimer(CALLBACK(src, PROC_REF(AfterChange)), 1, TIMER_UNIQUE)
 
 /turf/closed/mineral/proc/apply_mining_quality(obj/item/item, mob/living/user)
@@ -221,7 +222,7 @@
 	smoothing_list = SMOOTH_GROUP_MINERAL_WALLS
 	turf_type = /turf/open/floor/naturalstone
 	above_floor = /turf/open/floor/naturalstone
-	baseturfs = list(/turf/open/floor/naturalstone)
+	baseturfs = /turf/open/floor/naturalstone
 	wallclimb = TRUE
 	max_integrity = 400
 	///if this isn't empty, swaps to one of them via pickweight
@@ -235,7 +236,7 @@
 		var/path = pickweight(mineralSpawnChanceList)
 		var/turf/T = ChangeTurf(path,null,CHANGETURF_IGNORE_AIR)
 
-		if(T && ismineralturf(T))
+		if(ismineralturf(T))
 			var/turf/closed/mineral/M = T
 			M.mineralAmt = rand(1, 5)
 			M.turf_type = src.turf_type
@@ -492,7 +493,7 @@
 
 /turf/closed/mineral/bedrock
 	name = "rock"
-	desc = "Seems barren, and nigh indestructable."
+	desc = "Seems barren, and nigh-indestructible."
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "bedrock")
 	max_integrity = 10000000

@@ -178,7 +178,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/villager
 	name = "Towner"
 	icon_state = "arrow"
-	jobspawn_override = list("Fisher","Noble","Hunter","Lumberjack","Miner","Bard","Carpenter","Cheesemaker")
+	jobspawn_override = list("Hunter","Lumberjack","Miner","Bard","Carpenter","Cheesemaker")
 
 /obj/effect/landmark/start/cheesemaker
 	name = "Cheesemaker"
@@ -201,7 +201,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Inquisitor"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/shepherd
+/obj/effect/landmark/start/orthodoxist
+	name = "Orthodoxist"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/absolver
+	name = "Absolver"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/adept
 	name = "Adept"
 	icon_state = "arrow"
 

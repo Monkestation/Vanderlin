@@ -12,7 +12,8 @@
 	blade_dulling = DULLING_BASH
 	sewrepair = FALSE
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 
 	armor_class = AC_HEAVY
 	armor = ARMOR_PLATE_GOOD

@@ -12,7 +12,6 @@
 	)
 	outfit = /datum/outfit/adventurer/qatil
 	total_positions = 1
-	min_pq = 0
 	roll_chance = 25
 	category_tags = list(CTAG_ADVENTURER)
 

@@ -6,29 +6,29 @@
 	},
 /obj/item/coin/gold,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "b" = (
 /obj/structure/flora/tree/evil,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "c" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "d" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/flare/torch/metal,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "e" = (
 /obj/structure/spider/cocoon,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "f" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "g" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /obj/structure/fluff/walldeco/psybanner{
@@ -38,189 +38,189 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "h" = (
 /obj/item/weapon/pick,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "i" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 8
 	},
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "j" = (
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "k" = (
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "l" = (
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "m" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "n" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/head/crown/circlet/sleepless,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "o" = (
 /obj/item/clothing/head/helmet/skullcap,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "p" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "q" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "r" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "s" = (
 /obj/structure/table/wood,
 /obj/item/clothing/ring/silver,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "t" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "u" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /obj/structure/fluff/walldeco/psybanner{
 	pixel_y = 32
 	},
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "v" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "w" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	icon_state = "cobweb2"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "y" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "A" = (
 /obj/structure/spider/stickyweb,
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "B" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "C" = (
 /obj/structure/spider/cocoon,
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 8
 	},
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "D" = (
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "E" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "F" = (
 /turf/open/water/swamp/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "G" = (
 /obj/structure/spider/stickyweb,
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "H" = (
 /obj/structure/bed/shit,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "I" = (
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "J" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "K" = (
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "L" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "M" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "N" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "O" = (
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "Q" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "R" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "S" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "T" = (
 /obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "U" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "V" = (
 /turf/closed/mineral/random/high,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "W" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "X" = (
 /obj/structure/table/wood,
 /obj/item/clothing/neck/psycross/silver,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "Y" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 8
 	},
 /obj/item/flint,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 "Z" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/caves)
+/area/outdoors/caves)
 
 (1,1,1) = {"
 m

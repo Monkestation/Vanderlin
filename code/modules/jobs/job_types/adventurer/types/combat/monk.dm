@@ -6,9 +6,11 @@
 	total_positions = 4
 
 	outfit = /datum/outfit/adventurer/monk
-	min_pq = 0
+
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
 	allowed_patrons = ALL_TEMPLE_PATRONS  //randomize patron if not in ten
 
@@ -19,6 +21,7 @@
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	armor = /obj/item/clothing/shirt/robe/colored/plain
 	wrists = /obj/item/clothing/wrists/bracers/leather
+	gloves = /obj/item/clothing/gloves/bandages/pugilist
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/backpack

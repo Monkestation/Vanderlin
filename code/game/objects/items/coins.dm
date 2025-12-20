@@ -100,42 +100,48 @@
 	if(isobserver(user))
 		. += span_info("[quantity_to_words(quantity)] [denomination] ([get_real_price()] mammon)")
 		return
-	var/intelligence = user.mind?.current.STAINT
 
-	if(quantity > 1)  // Just so you don't count single coins, observers don't need to count.
-		var/list/skill_data = coin_skill(user, quantity)
-		var/fuzzy_quantity = CLAMP(quantity + skill_data["error"], 1,  (quantity > 20) ? INFINITY : 20) // Cap at 20 only for small stacks)
-		var/uncertainty_phrases = list("maybe","you think","roughly","perhaps","around","probably")
-
-		switch(intelligence)						// Intelligence-based messaging
-			if(0 to 6)
-				user.visible_message(span_small(span_notice("[user] clumsily starts to count [src].")),span_small(span_notice("I clumsily start counting [src]...")), vision_distance = 2)
-			if(7 to 9)
-				user.visible_message(span_small(span_notice("[user] begins counting [src].")),span_small(span_notice("I begin counting [src].")), vision_distance = 2)
-			if(10 to 13)
-				user.visible_message(span_small(span_notice("[user] counts [src].")),span_small(span_notice("I count [src].")), vision_distance = 2)
-			if(14 to INFINITY)
-				user.visible_message(span_small(span_info("[user] effortlessly tallies [src].")),span_small(span_notice("I effortlessly tally [src].")), vision_distance = 2)
-
-		if(!do_after(user, skill_data["delay"]))
-			return
-
-		var/estimated_value = fuzzy_quantity * sellprice
-		estimated_value = CLAMP(estimated_value, sellprice, INFINITY)
-		var/description = "[quantity_to_words(fuzzy_quantity)] [denomination]"
-		var/value_text
-		if(intelligence >= 10)
-			value_text = "[estimated_value] mammon"
+	if(HAS_TRAIT(user, TRAIT_COIN_ILLITERATE))
+		if(quantity <= 1)
+			. += span_info("A coin.")
 		else
-			value_text = "~[estimated_value] mammon"
-			if(intelligence <= 7)
-				value_text = "[pick(uncertainty_phrases)] [value_text]"
-				if(prob(30))
-					value_text += "?"
-		. += span_info("[description] ([value_text])")
-	else
+			. += span_info("[quantity_to_words(quantity)] coins.")
+		return
+
+	var/intelligence = user.mind?.current.STAINT
+	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
 
+	var/list/skill_data = coin_skill(user, quantity)
+	var/fuzzy_quantity = CLAMP(quantity + skill_data["error"], 1,  (quantity > 20) ? INFINITY : 20) // Cap at 20 only for small stacks)
+	var/uncertainty_phrases = list("maybe","you think","roughly","perhaps","around","probably")
+
+	switch(intelligence)						// Intelligence-based messaging
+		if(0 to 6)
+			user.visible_message(span_small(span_notice("[user] clumsily starts to count [src].")),span_small(span_notice("I clumsily start counting [src]...")), vision_distance = 2)
+		if(7 to 9)
+			user.visible_message(span_small(span_notice("[user] begins counting [src].")),span_small(span_notice("I begin counting [src].")), vision_distance = 2)
+		if(10 to 13)
+			user.visible_message(span_small(span_notice("[user] counts [src].")),span_small(span_notice("I count [src].")), vision_distance = 2)
+		if(14 to INFINITY)
+			user.visible_message(span_small(span_info("[user] effortlessly tallies [src].")),span_small(span_notice("I effortlessly tally [src].")), vision_distance = 2)
+
+	if(!do_after(user, skill_data["delay"]))
+		return
+
+	var/estimated_value = fuzzy_quantity * sellprice
+	estimated_value = CLAMP(estimated_value, sellprice, INFINITY)
+	var/description = "[quantity_to_words(fuzzy_quantity)] [denomination]"
+	var/value_text
+	if(intelligence >= 10)
+		value_text = "[estimated_value] mammon"
+	else
+		value_text = "~[estimated_value] mammon"
+		if(intelligence <= 7)
+			value_text = "[pick(uncertainty_phrases)] [value_text]"
+			if(prob(30))
+				value_text += "?"
+	. += span_info("[description] ([value_text])")
 
 /obj/item/coin/attack_hand(mob/user)
 	if(user.get_inactive_held_item() == src && quantity > 1)
@@ -222,13 +228,20 @@
 
 /obj/item/coin/proc/quantity_to_words(amount)
 	switch(amount)
-		if(1 to 4) return "A few"
-		if(5 to 9) return "Several"
-		if(10 to 14) return "A dozen or so"
-		if(15 to 19) return "A large number of"
-		if(20) return "A full stack of"
-		if(21 to INFINITY) return "An unbelieavably big stack of"
-		else return "Some"
+		if(1 to 4)
+			return "A few"
+		if(5 to 9)
+			return "Several"
+		if(10 to 14)
+			return "A dozen or so"
+		if(15 to 19)
+			return "A large number of"
+		if(20)
+			return "A full stack of"
+		if(21 to INFINITY)
+			return "An unbelieavably big stack of"
+		else
+			return "Some"
 
 /obj/item/coin/proc/merge(obj/item/coin/G, mob/user)
 	if(!G)
@@ -412,3 +425,30 @@
 #undef CTYPE_SILV
 #undef CTYPE_COPP
 #undef MAX_COIN_STACK_SIZE
+
+/obj/item/coin/inqcoin
+	name = "oratorium marque"
+	desc = "A blessed silver coin finished with a unique wash of black dye, bearing the post-kingdom Psycross. Kingsfield has denied the existence of such a coin when queried, as such coinage is rumoured to be used internally by the Oratorium Throni Vacui."
+	icon_state = "i1"
+	sellprice = 0
+	base_type = "i"
+	plural_name = "oratorium marques"
+
+/obj/item/coin/inqcoin/pile/Initialize()
+	. = ..()
+	set_quantity(rand(4,19))
+
+/obj/item/coin/inqcoin/attack_self(mob/living/user)
+	if(quantity > 1 || !base_type)
+		return
+	if(world.time < flip_cd + 30)
+		return
+	flip_cd = world.time
+	playsound(user, 'sound/foley/coinphy (1).ogg', 100, FALSE)
+	if(prob(50))
+		user.visible_message(span_info("[user] flips the coin. ENDURE!"))
+		heads_tails = TRUE
+	else
+		user.visible_message(span_info("[user] flips the coin. LIVE!"))
+		heads_tails = FALSE
+	update_icon()

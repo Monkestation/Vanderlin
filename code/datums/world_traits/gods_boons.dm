@@ -3,7 +3,7 @@
 	desc = "Increases the fertility of crops, making them grow faster and heartier."
 
 /datum/world_trait/dendor_drought
-	name = "Dendor's Malus"
+	name = "Dendor's Ire"
 	desc = "Decreases the fertility of crops, making them grow slower."
 
 /datum/world_trait/pestra_mercy

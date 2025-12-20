@@ -1,7 +1,7 @@
 /datum/job/hand
 	title = "Hand"
 	tutorial = "You owe everything to your liege. \
-	You are the most trusted of the ruler- their ommer, in fact. \
+	You are the most trusted of the ruler- their sibling, in fact. \
 	You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, \
 	something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. \
 	You have killed more men with those lips than any blademaster could ever claim to.\
@@ -15,7 +15,6 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/grant_title,
 	)
-	min_pq = 10
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ROYALTY
@@ -26,6 +25,13 @@
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 
+	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600,
+		EXP_TYPE_NOBLE = 300,
+	)
+
 /datum/outfit/hand
 	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
 	belt = /obj/item/storage/belt/leather/steel
@@ -33,21 +39,31 @@
 /datum/job/hand/after_spawn(mob/living/spawned, client/player_client)
 	. = ..()
 	var/mob/living/carbon/human/H = spawned
-	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, FAMILY_OMMER), 5 SECONDS)
+	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, FAMILY_OMMER), 10 SECONDS)
 
 	if(GLOB.keep_doors.len > 0)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), H), 5 SECONDS)
+	// i know this sucks, but due to how job loading is, we can't just get the agents to load before the hand without some reworks
+	if(SSticker.current_state < GAME_STATE_PLAYING)
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(agent_callback), H))
+	else
+		agent_callback(H)
 	ADD_TRAIT(H, TRAIT_KNOWKEEPPLANS, TRAIT_GENERIC)
-	addtimer(CALLBACK(src, PROC_REF(know_agents), H), 5 SECONDS)
+
+/datum/job/hand/proc/agent_callback(mob/living/carbon/human/H)
+	addtimer(CALLBACK(src, PROC_REF(know_agents), H), 6 SECONDS)
 
 /datum/job/hand/proc/know_agents(mob/living/carbon/human/H)
 	if(!GLOB.roundstart_court_agents.len)
-		to_chat(H, span_notice("You begun the week with no agents."))
+		to_chat(H, span_notice("You began the week with no agents."))
 	else
-		to_chat(H, span_notice("We begun the week with these agents:"))
+		to_chat(H, span_notice("We began the week with these agents:"))
 		for(var/name in GLOB.roundstart_court_agents)
 			to_chat(H, span_notice(name))
-		H.mind.cached_frumentarii |= GLOB.roundstart_court_agents
+			H.mind.cached_frumentarii[name] = TRUE
+
+/datum/job/advclass/hand
+	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 /datum/job/advclass/hand/hand
 	title = "Hand"

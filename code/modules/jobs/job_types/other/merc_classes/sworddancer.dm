@@ -38,7 +38,7 @@
 	H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 	H.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
 	H.add_spell(/datum/action/cooldown/spell/vicious_mockery)
-
+	H.add_spell(/datum/action/cooldown/spell/bardic_inspiration)
 	H.adjust_blindness(-3)
 	var/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
@@ -66,6 +66,10 @@
 
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+
+	var/datum/inspiration/I = new /datum/inspiration(H)
+	I.grant_inspiration(H, bard_tier = BARD_T3)
+
 
 /datum/outfit/mercenary/sworddancer/post_equip(mob/living/carbon/human/H)
 	..()

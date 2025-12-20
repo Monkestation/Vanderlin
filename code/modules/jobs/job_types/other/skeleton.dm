@@ -137,7 +137,7 @@
 
 	switch(pick(1,6))
 		if (1)
-			var/obj/item/weapon/sword/short/P = new()
+			var/obj/item/weapon/sword/short/iron/P = new()
 			H.put_in_hands(P, forced = TRUE)
 		if (2)
 			var/obj/item/weapon/axe/copper/P = new()

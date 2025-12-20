@@ -21,6 +21,10 @@
 	var/list/sexes_adjust
 	/// Jobs that have age adjustments /datum/job = list(AGE_CHILD, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	var/list/ages_adjust
+	/// Migrant waves that are banned from spawning.
+	/// This doesn't handle downgraded waves so if can_roll is true on one, it needs to be added.
+	/// /datum/migrant_wave = list(/datum/migrant_wave/crusade)
+	var/list/migrant_blacklist
 
 /// called on map config is loaded.
 /// You need to change things manually here.
@@ -44,6 +48,10 @@
 	for(var/job as anything in ages_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_ages = ages_adjust[job]
+	// Now migrants
+	for(var/migrant as anything in migrant_blacklist)
+		var/datum/migrant_wave/W = MIGRANT_WAVE(migrant)
+		W?.can_roll = FALSE
 
 /**
  * job_type`</datum/job/J>`: Type of the job that's being adjusted \

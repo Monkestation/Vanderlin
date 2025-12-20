@@ -831,6 +831,7 @@
 	damage_deflection = 16
 	max_integrity = 1400
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
+	flags_1 = CONDUCT_1
 
 /turf/open/floor/metal/alt
 	icon_state = "plating2"
@@ -988,12 +989,14 @@
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	landsound = 'sound/foley/jumpland/grassland.ogg'
 	slowdown = 0
+	var/randomized = TRUE
 	var/blood_sand = FALSE
 
 /turf/open/floor/sand/Initialize()
 	. = ..()
-	var/random_num = rand(1, 12)
-	icon_state = "sand-[random_num]"
+	if(randomized)
+		var/random_num = rand(1, 12)
+		icon_state = "sand-[random_num]"
 
 /turf/open/floor/sand/proc/make_bloodied()
 	if(blood_sand)
@@ -1036,10 +1039,7 @@
 
 /turf/open/floor/sand/bloodied
 	icon_state = "bloody"
-
-/turf/open/floor/sand/bloodied/Initialize(mapload)
-	. = ..()
-	make_bloodied()
+	randomized = FALSE
 
 /turf/open/floor/sandstone_tile
 	icon = 'icons/delver/desert_objects.dmi'
@@ -1063,7 +1063,74 @@
 /turf/open/floor/cracked_earth
 	icon = 'icons/delver/desert_objects.dmi'
 	icon_state = "cracked_earth"
+	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_DIRT_ROAD
 
 /turf/open/floor/cracked_earth/Initialize(mapload)
 	. = ..()
 	dir = pick(GLOB.cardinals)
+
+/turf/open/floor/flesh
+	name = "nerve threads"
+	icon = 'icons/turf/flesh_tile.dmi'
+	desc = "A pulsing mass of flesh. It shivers and writhes at any touch."
+	icon_state = MAP_SWITCH("flesh_tile", "flesh_tile-0")
+	transform = MAP_SWITCH(TRANSLATE_MATRIX(-16, -16), matrix())
+	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_FLESH
+	smoothing_list = SMOOTH_GROUP_FLOOR_FLESH
+	layer = HIGH_TURF_LAYER
+	color = "#bf5252"
+
+/turf/open/floor/flesh/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
+	. = ..()
+	if (!.)
+		return
+
+	if(!smoothing_flags)
+		return
+
+	var/matrix/translation = new
+	translation.Translate(-9, -9)
+	transform = translation
+
+	underlay_appearance.transform = transform
+
+/turf/open/floor/mushroom
+	name = "mushroom floor"
+	desc = "A patch of mushrooms."
+	icon_state = "mushroom"
+	base_icon_state = "mushroom"
+	transform = MAP_SWITCH(TRANSLATE_MATRIX(-9, -9), matrix())
+	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = SMOOTH_GROUP_MUSHROOM
+	smoothing_list = SMOOTH_GROUP_CLOSED_WALL + SMOOTH_GROUP_MUSHROOM
+	icon = 'icons/turf/smooth/floors/mushroom.dmi'
+	layer = HIGH_TURF_LAYER
+	color = "#777777"
+	var/mushroom_color = "red"
+
+/turf/open/floor/mushroom/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
+	. = ..()
+	if (!.)
+		return
+
+	if(!smoothing_flags)
+		return
+
+	var/matrix/translation = new
+	translation.Translate(-9, -9)
+	transform = translation
+
+	underlay_appearance.transform = transform
+
+/turf/open/floor/mushroom/blue
+	icon_state = "mushroom_blue"
+	base_icon_state = "mushroom_blue"
+	icon = 'icons/turf/smooth/floors/mushroom_blue.dmi'
+	mushroom_color = "blue"
+
+/turf/open/floor/mushroom/green
+	icon_state = "mushroom_green"
+	base_icon_state = "mushroom_green"
+	icon = 'icons/turf/smooth/floors/mushroom_green.dmi'
+	mushroom_color = "green"

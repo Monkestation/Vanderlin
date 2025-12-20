@@ -1,11 +1,11 @@
 /datum/round_event_control/fishing_boon
-	name = "Rainy Day Fishing Boost"
+	name = "Rainy Day"
 	track = EVENT_TRACK_MODERATE
 	typepath = /datum/round_event/fishing_boon
 	weight = 5
 	max_occurrences = 8
 	min_players = 0
-	earliest_start = 12 MINUTES
+	earliest_start = 10 MINUTES
 
 	tags = list(
 		TAG_NATURE,

@@ -23,8 +23,8 @@
 	requires_bodypart_type = BODYPART_ORGANIC
 
 /datum/surgery/chimeric_grafting
-	name = "Chimeric Node Grafting"
-	desc = "Graft a harvested node into a chimeric organ."
+	name = "Humor Grafting"
+	desc = "Graft a harvested humor into a chimeric organ."
 	category = "Pestran"
 	steps = list(
 		/datum/surgery_step/incise,
@@ -68,6 +68,7 @@
 	var/obj/item/organ/selected_organ
 
 /datum/surgery_step/create_chimeric_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
+	/*
 	var/list/available_organs = target.get_organs_in_zone(target_zone)
 
 	if(!available_organs.len)
@@ -94,7 +95,9 @@
 		if(!choice)
 			return FALSE
 		selected_organ = organ_names[choice]
+	*/
 
+	selected_organ = target.getorganslot(ORGAN_SLOT_HEART)
 	if(!selected_organ)
 		return FALSE
 
@@ -144,8 +147,8 @@
 
 
 /datum/surgery_step/graft_chimeric_node
-	name = "graft chimeric node"
-	desc = "Graft a harvested node into a chimeric organ."
+	name = "graft humor"
+	desc = "Graft a harvested humor into a chimeric organ."
 	implements = list(
 		TOOL_SCALPEL = 80,
 		TOOL_SHARP = 60,
@@ -160,7 +163,7 @@
 /datum/surgery_step/graft_chimeric_node/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/obj/item/held = user.get_inactive_held_item()
 	if(!istype(held, /obj/item/chimeric_node))
-		to_chat(user, span_warning("You need to hold a chimeric node in your other hand to graft it!"))
+		to_chat(user, span_warning("You need to hold a humor in your other hand to graft it!"))
 		return FALSE
 
 	var/list/available_organs = target.get_organs_in_zone(target_zone)
@@ -247,13 +250,22 @@
 
 	var/datum/chimeric_node/new_node = node_to_graft.stored_node
 
-	chimeric.handle_node_injection(
+	var/value = chimeric.handle_node_injection(
 		tier = node_to_graft.node_tier,
 		purity = node_to_graft.node_purity,
 		slot = node_slot,
 		injected_node = new_node
 	)
 
+	if(!value)
+		display_results(
+			user,
+			target,
+			span_warning("[selected_organ.name] has failed!"),
+			span_warning("[user] recoils."),
+			""
+		)
+		return FALSE
 	node_to_graft.stored_node = null
 	qdel(node_to_graft)
 	node_to_graft = null
@@ -307,8 +319,8 @@
 
 	if(length(blood_costs_by_type))
 		to_chat(user, span_notice("Blood types that can sustain this organ:"))
-		for(var/blood_type in blood_costs_by_type)
-			to_chat(user, span_notice("  [blood_type]: [round(blood_costs_by_type[blood_type], 0.1)] units/sec"))
+		for(var/datum/blood_type/blood_type as anything in blood_costs_by_type)
+			to_chat(user, span_notice("  [initial(blood_type.name)] Blood: [round(blood_costs_by_type[blood_type], 0.1)] units/sec"))
 
 	to_chat(target, span_userdanger("You feel alien flesh merging with your [selected_organ.name]!"))
 

@@ -33,7 +33,7 @@
 	for(var/atom/movable/screen/inventory/inv in (static_inventory + toggleable_inventory))
 		if(inv.slot_id)
 			inv_slots[TOBITSHIFT(inv.slot_id) + 1] = inv
-			inv.update_appearance()
+			inv.update_appearance(UPDATE_ICON_STATE)
 
 /datum/hud/spirit/persistent_inventory_update()
 	if(!mymob)

@@ -20,7 +20,7 @@
 
 	var/atom/movable/screen/strategy_ui/controller_button/exit/exit
 
-/atom/movable/screen/strategy_ui/controller_ui/Initialize(mapload, datum/hud/hud_owner)
+/atom/movable/screen/strategy_ui/controller_ui/New(loc, ...)
 	. = ..()
 	create_and_position_buttons()
 

@@ -5,7 +5,7 @@
 // BEER - Cheap, Plentiful, Saviours of Family Life
 /obj/item/reagent_containers/glass/bottle/beer
 	name = "bottle of beer"
-	desc = "A bottle that contains a generic housebrewed small-beer. It has an improvised corkseal made of hardened clay."
+	desc = "A bottle that contains a generic housebrewed small-beer. It has an improvised cork-seal made of hardened clay."
 	list_reagents = list(/datum/reagent/consumable/ethanol/beer = 70)
 	fancy = TRUE
 	auto_label = TRUE
@@ -20,7 +20,7 @@
 	desc = "A bottle with the black goat kriek cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/blackgoat = 70)
 	auto_label_name = "black goat"
-	auto_label_desc = "A fruit-sour beer brewed with jackberries for a tangy taste."
+	auto_label_desc = "A fruit-sour beer brewed with jacksberries for a tangy taste."
 
 /obj/item/reagent_containers/glass/bottle/beer/ratkept
 	desc = "A bottle with surprisingly no cork-seal. On the glass is carved the word \"ONI-N\", the 'O' seems to have been scratched out completely. Dubious."
@@ -76,7 +76,7 @@
 	desc = "A bottle with a black ink cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/sourwine = 70)
 	auto_label_name = "black eagle sour"
-	auto_label_desc = "A Grenzelholft classic, extremely sour wine that is watered down with mineral water."
+	auto_label_desc = "A Grenzelhoft classic, extremely sour wine that is watered down with mineral water."
 
 /obj/item/reagent_containers/glass/bottle/redwine
 	desc = "A bottle with the Valorian Merchant Guild cork-seal."
@@ -123,7 +123,7 @@
 	desc = "A bottle with the Lirvas-crest cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/rtoper = 48)
 	auto_label_name = "larvas cider"
-	auto_label_desc = "An especially tart cider from the petty kingdom of Lirvas. Rumor has it the brewers let the barrels age in the bog, which results in that especially stong flavour."
+	auto_label_desc = "An especially tart cider from the petty kingdom of Lirvas. Rumor has it the brewers let the barrels age in the bog, which results in that especially strong flavour."
 
 /obj/item/reagent_containers/glass/bottle/nred
 	desc = "A bottle with the City of Norwandine cork-seal."
@@ -132,7 +132,7 @@
 	auto_label_desc = "A red ale brewed to perfection in the lands of Hammerhold."
 
 /obj/item/reagent_containers/glass/bottle/gronnmead
-	desc = "A bottle with a Shieldmaiden Berewrey cork-seal."
+	desc = "A bottle with a Shieldmaiden Brewery cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/gronnmead = 48)
 	auto_label_name = "gronn mead"
 	auto_label_desc = "A deep red honey-wine, refined with the red berries native to Gronns highlands."
@@ -140,14 +140,14 @@
 /obj/item/reagent_containers/glass/bottle/avarmead
 	desc = "A bottle with a simple cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/avarmead = 48)
-	auto_label_name = "avar mead"
-	auto_label_desc = "A golden honey-wine brewed in the Avar Steppes. Manages to keep a proper taste while staying strong."
+	auto_label_name = "steppe mead"
+	auto_label_desc = "A golden honey-wine brewed in the steppes. Manages to keep a proper taste while staying strong."
 
 /obj/item/reagent_containers/glass/bottle/avarrice
 	desc = "A bottle with a simple cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/avarrice = 48)
-	auto_label_name = "avarice"
-	auto_label_desc = "A murky, white wine made from rice grown in the steppes of Avar."
+	auto_label_name = "steppe rice"
+	auto_label_desc = "A murky, white wine made from rice grown in the steppes."
 
 /obj/item/reagent_containers/glass/bottle/saigamilk
 	desc = "A bottle with a Running Saiga cork-seal."
@@ -165,7 +165,7 @@
 	desc = "A bottle with a Golden Swan cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/kgunsake = 48)
 	auto_label_name = "kazengun sake"
-	auto_label_desc = "A translucient, pale-blue liquid made from rice. A favourite drink of the warlords and nobles of Kazengun."
+	auto_label_desc = "A translucent, pale-blue liquid made from rice. A favourite drink of the warlords and nobles of Kazengun."
 
 /obj/item/reagent_containers/glass/bottle/kgunplum
 	list_reagents = list(/datum/reagent/consumable/ethanol/kgunplum = 48)

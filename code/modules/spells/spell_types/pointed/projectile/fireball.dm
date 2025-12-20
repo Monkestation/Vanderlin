@@ -11,6 +11,9 @@
 		/datum/attunement/fire = 0.5
 	)
 
+	invocation = "ONI SOMA!!!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 2.5 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.7
@@ -19,8 +22,7 @@
 	spell_flags = SPELL_RITUOS
 	projectile_type = /obj/projectile/magic/aoe/fireball/rogue
 
-	invocation = "ONI SOMA!!!"
-	invocation_type = INVOCATION_SHOUT
+
 
 /datum/action/cooldown/spell/projectile/fireball/ready_projectile(obj/projectile/magic/aoe/fireball/to_fire, atom/target, mob/user, iteration)
 	. = ..()
@@ -30,9 +32,6 @@
 
 /datum/action/cooldown/spell/projectile/fireball/baali
 	name = "Infernal Fireball"
-
-	invocation = "FR BRTH"
-	invocation_type = "whisper"
 
 	associated_skill = /datum/skill/magic/blood
 

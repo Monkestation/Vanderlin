@@ -19,6 +19,8 @@
 	lock = /datum/lock/key
 	can_add_lock = TRUE
 
+	var/omni_bolt = FALSE
+
 	/// Can people riding go through without falling off their mount
 	var/ridethrough = FALSE
 	/// If TRUE when bumped open we callback close
@@ -103,7 +105,7 @@
 	if(has_viewport)
 		. += span_info("It has a built-in viewport.")
 	if(has_bolt)
-		. += span_info("It's lock is a deadbolt.")
+		. += span_info("Its lock is a deadbolt.")
 	if(lock?.uses_key)
 		. += span_info("There is a keyhole below the handle.")
 
@@ -197,7 +199,7 @@
 		if(obj_broken)
 			to_chat(user, span_warning("The bolt has nothing to latch to!"))
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(get_dir(src, user) == dir)
+		if((get_dir(src, user) == dir) || omni_bolt)
 			lock?.toggle(user)
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		to_chat(user, span_notice("I can't reach the bolt from this side."))
@@ -466,6 +468,7 @@
 	dir = NORTH
 	lock = /datum/lock/locked
 	animate_time = 2.1 SECONDS
+	omni_bolt = TRUE
 
 /obj/structure/door/iron
 	name = "iron door"

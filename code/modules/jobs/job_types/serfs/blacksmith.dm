@@ -8,7 +8,6 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-	min_pq = 0
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
@@ -86,7 +85,6 @@
 	outfit = /datum/outfit/weaponsmith
 	display_order = JDO_WSMITH
 	give_bank_account = 30
-	min_pq = 0
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

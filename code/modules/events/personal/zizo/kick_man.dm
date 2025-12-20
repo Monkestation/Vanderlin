@@ -8,6 +8,7 @@
 	min_players = 20
 
 	tags = list(
+		TAG_ZIZO,
 		TAG_BATTLE,
 	)
 
@@ -47,8 +48,10 @@
 	var/datum/objective/personal/kick_groin/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE ZIZO'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Men are weak and must be dominated. Kick a male in the nuts to satisfy Zizo!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE ZIZO'S CHOSEN!"),
+		span_notice("Men are weak and must be dominated. Kick a male in the nuts to satisfy Zizo!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/zizo_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

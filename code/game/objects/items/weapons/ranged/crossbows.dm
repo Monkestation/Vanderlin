@@ -2,8 +2,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	name = "crossbow"
 	desc = "A mechanical ranged weapon of simple design, affixed with a stirrup and fired via trigger."
-	icon = 'icons/roguetown/weapons/bows.dmi'
-//	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "crossbow0"
 	item_state = "crossbow"
 	possible_item_intents = list(/datum/intent/shoot/crossbow, /datum/intent/arc/crossbow, INTENT_GENERIC)
@@ -13,11 +12,29 @@
 	randomspread = 1
 	spread = 0
 	can_parry = TRUE
+	var/chargingspeed = 40
+	var/reloadtime = 40
+	var/movingreload = FALSE
+	var/hasloadedsprite = FALSE
+
 	force = 10
 	var/cocked = FALSE
 	cartridge_wording = "bolt"
 	load_sound = 'sound/foley/nockarrow.ogg'
 	fire_sound = 'sound/combat/Ranged/crossbow-small-shot-02.ogg'
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
+	name = "slurbow"
+	desc = "A lighter weight crossbow with a distinct barrel shroud holding the bolt in place. Light enough to arm by hand. <br>They're popular among highwaymen and the patrolling lamplighters of Grenzelhoft."
+	icon = 'icons/roguetown/weapons/32/bows.dmi'
+	icon_state = "slurbow0"
+	item_state = "slurbow"
+	possible_item_intents = list(/datum/intent/shoot/crossbow/slurbow, /datum/intent/arc/crossbow/slurbow, INTENT_GENERIC)
+	damfactor = 0.6
+	reloadtime = 20
+	hasloadedsprite = TRUE
+	movingreload = TRUE
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_HIP
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/getonmobprop(tag)
 	. = ..()
@@ -28,23 +45,53 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
+
 /datum/intent/shoot/crossbow
 	chargedrain = 0 //no drain to aim a crossbow
+	var/basetime = 40
+
+/datum/intent/shoot/crossbow/slurbow
+	chargedrain = 0 //no drain to aim a crossbow
+	basetime = 20
 
 /datum/intent/shoot/crossbow/get_chargetime()
-	var/mob/living/master = get_master_mob()
-	if(master && chargetime)
+	if(mastermob && chargetime)
+		var/mob/living/mob = mastermob.resolve()
 		var/newtime = chargetime
 		//skill block
-		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/crossbows) * 3)
+		newtime = newtime + basetime
+		newtime = newtime - (mob.get_skill_level(/datum/skill/combat/crossbows) * 4.25) // minus 4.25 per skill point
+		newtime = newtime - ((mob.STAPER)) // minus 1 per perception
+		if(newtime > 1)
+			return newtime
+		else
+			return 1
+	return chargetime
+
+/datum/intent/arc/crossbow
+	chargetime = 1
+	var/basetime = 40
+	chargedrain = 0 //no drain to aim a crossbow
+
+/datum/intent/arc/crossbow/slurbow
+	chargetime = 1
+	basetime = 20
+	chargedrain = 0
+
+/datum/intent/arc/crossbow/get_chargetime()
+	if(mastermob && chargetime)
+		var/mob/living/mob = mastermob.resolve()
+		var/newtime = chargetime
+		//skill block
+		newtime = newtime + basetime
+		newtime = newtime - (mob.get_skill_level(/datum/skill/combat/crossbows) * 20)
 		//per block
 		newtime = newtime + 20
-		newtime = newtime - (master.STAPER)
+		newtime = newtime - ((mob.STAPER)*1.5)
 		if(newtime > 0)
 			return newtime
 		else
-			return 0.1
+			return 10
 	return chargetime
 
 /datum/intent/shoot/musket
@@ -121,24 +168,35 @@
 		cocked = FALSE
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attack_self(mob/living/user, params)
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attack_self(mob/living/user)
 	if(chambered)
-		return ..()
-	if(!cocked)
-		to_chat(user, "<span class='info'>I step on the stirrup and use all my might...</span>")
-		if(do_after(user, (4 SECONDS - user.STASTR), user))
-			playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
-			cocked = TRUE
+		..()
 	else
-		to_chat(user, "<span class='warning'>I carefully de-cock the crossbow.</span>")
-		cocked = FALSE
-	update_appearance(UPDATE_ICON_STATE)
+		if(!cocked)
+			to_chat(user, span_info("I step on the stirrup and use all my might..."))
+			if(!movingreload)
+				if(do_after(user, reloadtime - user.STASTR, target = user))
+					playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
+					cocked = TRUE
+			else
+				if(do_after(user, reloadtime - user.STASTR, user, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_USER_DIR_CHANGE)))
+					playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
+					cocked = TRUE
+		else
+			to_chat(user, span_warning("I carefully de-cock the crossbow."))
+			cocked = FALSE
+	update_icon()
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attackby(obj/item/A, mob/user, params)
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
 		if(cocked)
-			return ..()
-		to_chat(user, "<span class='warning'>I need to cock the crossbow first.</span>")
+			if((loc == user) && (user.get_inactive_held_item() != src))
+				return
+			..()
+		else
+			to_chat(user, span_warning("I need to cock the bow first."))
+
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(user.client)

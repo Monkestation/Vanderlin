@@ -575,8 +575,9 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		platform.horizontal_speed = 0.1
 		base_horizontal_speed = 0.1
 		horizontal_speed = 0.1
-		platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-		platform.alpha = 0
+		if(!platform.fake)
+			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
+			platform.alpha = 0
 		for(var/atom/movable/movable in platform.lift_load)
 			if(ismob(movable))
 				platform.RemoveItemFromLift(movable)
@@ -588,6 +589,8 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			movable.alpha = 0
 
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
+			if(moving_platform.fake)
+				continue
 			moving_platform.horizontal_speed = 0.1
 			moving_platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
 			moving_platform.alpha = 0
@@ -598,8 +601,9 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		platform.horizontal_speed = 4
 		base_horizontal_speed = 4
 		horizontal_speed = 4
-		platform.obj_flags |= BLOCK_Z_OUT_DOWN
-		platform.alpha = 255
+		if(!platform.fake)
+			platform.obj_flags |= BLOCK_Z_OUT_DOWN
+			platform.alpha = 255
 		for(var/atom/movable/movable in objects_pre_alpha)
 			movable.alpha = objects_pre_alpha[movable]
 			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
@@ -607,6 +611,8 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			movable.density = initial(movable.density)
 
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
+			if(moving_platform.fake)
+				continue
 			moving_platform.horizontal_speed = 4
 			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
 			moving_platform.alpha = 255
@@ -812,6 +818,9 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 	var/list/valid_turfs = list()
 	for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 		var/is_valid_turf = TRUE
+		if(moving_platform.fake)
+			is_valid_turf = FALSE
+			continue
 		var/turf/possible_turf = get_turf(moving_platform)
 		for(var/obj/structure/structure in possible_turf)
 			if(structure == moving_platform)

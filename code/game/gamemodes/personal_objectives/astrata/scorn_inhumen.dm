@@ -4,7 +4,7 @@
 	triumph_count = 2
 	rewards = list("2 Triumphs", "Astrata grows stronger", "Ability to silence inhumen")
 	var/spits_done = 0
-	var/spits_required = 2
+	var/spits_required = 1
 
 /datum/objective/personal/inhumen_scorn/on_creation()
 	. = ..()
@@ -26,15 +26,18 @@
 
 	if(spits_done < spits_required)
 		to_chat(owner.current, span_notice("Inhumen scorned! Scorn [spits_required - spits_done] more to complete the objective!"))
+	else
+		complete_objective()
 
-	if(spits_done >= spits_required)
-		to_chat(owner.current, span_greentext("You have scorned enough inhumen and completed Astrata's objective!"))
-		owner.current.adjust_triumphs(triumph_count)
-		completed = TRUE
-		adjust_storyteller_influence(ASTRATA, 20)
-		owner.current.add_spell(/datum/action/cooldown/spell/silence_inhumen, source = src)
-		escalate_objective()
-		UnregisterSignal(owner.current, COMSIG_SPAT_ON)
+/datum/objective/personal/inhumen_scorn/complete_objective()
+	. = ..()
+	to_chat(owner.current, span_greentext("You have scorned enough inhumen and completed Astrata's objective!"))
+	adjust_storyteller_influence(ASTRATA, 20)
+	UnregisterSignal(owner.current, COMSIG_SPAT_ON)
+
+/datum/objective/personal/inhumen_scorn/reward_owner()
+	. = ..()
+	owner.current.add_spell(/datum/action/cooldown/spell/silence_inhumen, source = src)
 
 /datum/objective/personal/inhumen_scorn/update_explanation_text()
 	explanation_text = "Spit on [spits_required] inhumen to gain Astrata's approval!"

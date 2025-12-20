@@ -2,175 +2,175 @@
 "b" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "d" = (
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "f" = (
 /obj/structure/bookcase,
 /obj/item/book/blackmountain,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "g" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "h" = (
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "i" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "j" = (
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "l" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "n" = (
 /obj/structure/bookcase,
 /obj/item/book/tales1,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "p" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "q" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "r" = (
 /obj/structure/bookcase,
 /obj/item/book/godofdreamsandnightmares,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "s" = (
 /obj/structure/bookcase,
 /obj/item/book/abyssor,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "t" = (
 /obj/structure/door/violet,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "u" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "v" = (
 /obj/structure/bookcase,
 /obj/item/book/law,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "w" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "x" = (
 /obj/structure/bookcase,
 /obj/item/book/tales3,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "y" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
 	},
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "z" = (
 /turf/open/floor/blocks/paving,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "A" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "B" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "C" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "D" = (
 /obj/structure/bookcase,
 /obj/item/book/xylix,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "F" = (
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "H" = (
 /obj/structure/bookcase,
 /obj/item/book/arcyne,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "I" = (
 /obj/structure/bookcase,
 /obj/item/book/nitebeast,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "L" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "M" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 1
 	},
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "N" = (
 /turf/open/water/swamp/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "O" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/head/helmet/heavy/necked/noc,
 /obj/item/clothing/ring/silver/noc,
 /obj/item/clothing/neck/psycross/silver/noc,
 /turf/open/floor/herringbone,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Q" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/water/swamp,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "R" = (
 /obj/structure/bookcase,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "S" = (
 /obj/structure/bookcase,
 /obj/item/book/beardling,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "U" = (
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "V" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "W" = (
 /obj/structure/bookcase,
 /obj/item/book/knowledge1,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "X" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Y" = (
 /obj/structure/bookcase,
 /obj/item/book/robber,
 /turf/open/floor/blocks,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "Z" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 
 (1,1,1) = {"
 u

@@ -701,7 +701,7 @@ if (length(L) < I) { \
 		used_key_list[input_key] = 1
 	return input_key
 
-//Flattens a keyed list into a list of it's contents
+//Flattens a keyed list into a list of its contents
 /proc/flatten_list(list/key_list)
 	if(!islist(key_list))
 		return null
@@ -803,6 +803,24 @@ GLOBAL_LIST_EMPTY(string_lists)
 
 	return GLOB.string_lists[string_id] = values
 
+///A wrapper for baseturf string lists, to offer support of non list values, and a stack_trace if we have major issues
+/proc/baseturfs_string_list(list/values, turf/baseturf_holder)
+	if(!islist(values))
+		return values //baseturf things
+	// return values
+	if(length(values) > 10)
+		stack_trace("The baseturfs list of [baseturf_holder] at [baseturf_holder.x], [baseturf_holder.y], [baseturf_holder.x] is [length(values)], it should never be this long, investigate. I've set baseturfs to a flashing wall as a visual queue")
+		baseturf_holder.ChangeTurf(/turf/closed/indestructible/baseturfs_ded, list(/turf/closed/indestructible/baseturfs_ded), flags = CHANGETURF_FORCEOP)
+		return string_list(list(/turf/closed/indestructible/baseturfs_ded)) //I want this reported god damn it
+
+	return string_list(values)
+
+/turf/closed/indestructible/baseturfs_ded
+	name = "Report this"
+	desc = "It looks like base turfs went to the fucking moon, TELL YOUR LOCAL CODER TODAY"
+	icon = 'icons/turf/debug.dmi'
+	icon_state = "fucked_baseturfs"
+
 /// Runtimes if the passed in list is not sorted
 /proc/assert_sorted(list/list, name, cmp = GLOBAL_PROC_REF(cmp_numeric_asc))
 	var/last_value = list[1]
@@ -814,3 +832,78 @@ GLOBAL_LIST_EMPTY(string_lists)
 			stack_trace("[name] is not sorted. value at [index] ([value]) is in the wrong place compared to the previous value of [last_value] (when compared to by [cmp])")
 
 		last_value = value
+
+
+///Converts a bitfield to a list of numbers (or words if a wordlist is provided)
+/proc/bitfield_to_list(bitfield = 0, list/wordlist)
+	var/list/return_list = list()
+	if(islist(wordlist))
+		var/max = min(wordlist.len, 24)
+		var/bit = 1
+		for(var/i in 1 to max)
+			if(bitfield & bit)
+				return_list += wordlist[i]
+			bit = bit << 1
+	else
+		for(var/bit_number = 0 to 23)
+			var/bit = 1 << bit_number
+			if(bitfield & bit)
+				return_list += bit
+
+	return return_list
+
+/**
+ * Like typesof() or subtypesof(), but returns a typecache instead of a list.
+ * This time it also uses the associated values given by the input list for the values of the subtypes.
+ *
+ * Latter values from the input list override earlier values.
+ * Thus subtypes should come _after_ parent types in the input list.
+ * Notice that this is the opposite priority of [/proc/is_type_in_list] and [/proc/is_path_in_list].
+ *
+ * Arguments:
+ * - path: A typepath or list of typepaths with associated values.
+ * - single_value: The assoc value used if only a single path is passed as the first variable.
+ * - only_root_path: Whether the typecache should be specifically of the passed types.
+ * - ignore_root_path: Whether to ignore the root path when caching subtypes.
+ * - clear_nulls: Whether to remove keys with null assoc values from the typecache after generating it.
+ */
+/proc/zebra_typecacheof(path, single_value = TRUE, only_root_path = FALSE, ignore_root_path = FALSE, clear_nulls = FALSE)
+	if(isnull(path))
+		return
+
+	if(ispath(path))
+		if (isnull(single_value))
+			return
+
+		. = list()
+		if(only_root_path)
+			.[path] = single_value
+			return
+
+		for(var/subtype in (ignore_root_path ? subtypesof(path) : typesof(path)))
+			.[subtype] = single_value
+		return
+
+	if(!islist(path))
+		CRASH("Tried to create a typecache of [path] which is neither a typepath nor a list.")
+
+	. = list()
+	var/list/pathlist = path
+	if(only_root_path)
+		for(var/current_path in pathlist)
+			.[current_path] = pathlist[current_path]
+	else if(ignore_root_path)
+		for(var/current_path in pathlist)
+			for(var/subtype in subtypesof(current_path))
+				.[subtype] = pathlist[current_path]
+	else
+		for(var/current_path in pathlist)
+			for(var/subpath in typesof(current_path))
+				.[subpath] = pathlist[current_path]
+
+	if(!clear_nulls)
+		return
+
+	for(var/cached_path in .)
+		if (isnull(.[cached_path]))
+			. -= cached_path

@@ -7,7 +7,7 @@
 	name = "whip"
 	desc = "A leather whip, intertwining rope, leather and a fanged tip to inflict enormous pain. Favored by slavers and beast-tamers."
 	icon_state = "whip"
-	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
 	wlength = WLENGTH_GREAT
@@ -53,6 +53,20 @@
 	canparry = FALSE //Has reach and can't be parried, but needs to be charged and punishes misses.
 	item_damage_type = "slash"
 
+/datum/intent/whip/cut
+	name = "cut"
+	blade_class = BCLASS_CUT
+	attack_verb = list("slashes", "lacerates")
+	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
+	chargetime = 5
+	recovery = 5
+	penfactor = 5
+	reach = 2
+	misscost = 7
+	icon_state = "incut"
+	canparry = FALSE
+	item_damage_type = "slash"
+
 /*-------------\
 | Crack intent |
 \-------------*/
@@ -77,15 +91,16 @@
 	minstr = 7
 	icon_state = "gwhip"
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	sellprice = 50
-
 
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
 	name = "silver whip"
 	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on Nitebeasts."
-	icon_state = "silverwhip"
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
+	icon_state = "psywhip_lesser"
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
 	last_used = 0
@@ -96,22 +111,32 @@
 
 //................ Psydon Whip ............... //
 /obj/item/weapon/whip/psydon
-	force = DAMAGE_WHIP+2
 	name = "psydonian whip"
 	desc = "A whip fashioned with the iconography of Psydon, and crafted entirely out of silver."
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psywhip"
+	force = DAMAGE_WHIP+2
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
 	last_used = 0
 
 /obj/item/weapon/whip/psydon/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
+
+/obj/item/weapon/whip/psydon/relic
+	name = "Daybreak"
+	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humanity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
+
+/obj/item/weapon/whip/psydon/relic/Initialize(mapload)
+	. = ..()					// Pre-blessed, +5 force, +100 INT, +2 Def, Silver.
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 2, TRUE)
 
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane
 	name = "caning stick"
 	desc = "A thin cane meant for striking others as punishment."
+	icon = 'icons/roguetown/weapons/32/special.dmi'
 	icon_state = "canestick"
 	possible_item_intents = list(/datum/intent/whip/lash/cane)
 	force = DAMAGE_WHIP / 2
@@ -166,6 +191,7 @@
 	force = DAMAGE_WHIP+3
 	name = "lashkiss whip"
 	desc = "A dark whip with segmented, ashen spines for a base. Claimed to be hewn from dendrified prisoners of terror."
+	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderwhip"
 	minstr = 6
 
@@ -174,7 +200,7 @@
 	force = DAMAGE_WHIP+3
 	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash/metal)
 	name = "chain whip"
-	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more then anyone else with this."
+	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more than anyone else with this."
 	icon_state = "whip_chain"
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
@@ -192,18 +218,59 @@
 /datum/intent/whip/crack/metal
 	penfactor = 20
 
-
 //................ Xylix Whip ............... //
 /obj/item/weapon/whip/xylix
 	name = "cackle lash"
 	force = DAMAGE_WHIP+4
 	desc = "The chimes of this whip are said to sound as the trickster's laughter itself."
+	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "xylixwhip"
-
+	anvilrepair = /datum/skill/craft/weaponsmithing
 /obj/item/weapon/whip/nagaika
 	name = "nagaika whip"
 	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
 	icon_state = "nagaika"
 	force = 25		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
 	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/sword/strike)
-	wdefense = 1	//Akin to a cudgel, still terrible at parrying though. Better than nothing I guess; thing is used irl as a counter-weapon to knives.
+	wdefense = BAD_PARRY	//Akin to a cudgel, still terrible at parrying though. Better than nothing I guess; thing is used irl as a counter-weapon to knives.
+
+//................ Urumi ............... //
+
+/obj/item/weapon/whip/urumi
+	name = "steel urumi"
+	desc = "A long, flexible whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
+	icon_state = "urumi_steel"
+	force = DAMAGE_WHIP+3
+	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/whip/cut,)
+	anvilrepair = /datum/skill/craft/weaponsmithing
+	smeltresult = /obj/item/ingot/steel
+	resistance_flags = FIRE_PROOF
+	minstr = 5
+	sharpness = IS_SHARP
+	max_blade_int = 175
+	max_integrity = INTEGRITY_STANDARD
+	blade_dulling = DULLING_BASH
+	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
+	can_parry = TRUE
+
+/obj/item/weapon/whip/urumi/iron
+	name = "iron urumi"
+	icon_state = "urumi_iron"
+	force = DAMAGE_WHIP+2
+	smeltresult = /obj/item/ingot/iron
+	max_blade_int = 150
+	wdefense = BAD_PARRY
+	can_parry = TRUE
+
+/obj/item/weapon/whip/urumi/silver
+	name = "silver urumi"
+	icon_state = "urumi_silver"
+	force = DAMAGE_WHIP+2
+	smeltresult = /obj/item/ingot/silver
+	max_blade_int= 130
+	wdefense = BAD_PARRY
+	can_parry = TRUE
+
+/obj/item/weapon/whip/urumi/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)

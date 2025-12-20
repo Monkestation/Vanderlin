@@ -298,3 +298,12 @@
 	item_state = "lakkaritabard"
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	allowed_race = SPECIES_BASE_BODY
+
+/obj/item/clothing/cloak/poncho
+
+	name = "cloth poncho"
+	desc = "A loose garment that is usually draped across ones upper body. No one's quite sure of its cultural origin."
+	icon_state = "poncho"
+	item_state = "poncho"
+	boobed = FALSE
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'

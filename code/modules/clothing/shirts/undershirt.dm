@@ -68,7 +68,7 @@
 
 /obj/item/clothing/shirt/undershirt/fancy
 	name = "fancy tunic"
-	desc = "A button-down shirt woven from fine sliks with a decorated front and cuffs."
+	desc = "A button-down shirt woven from fine silks with a decorated front and cuffs."
 	icon_state = "fancyshirt"
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
@@ -104,3 +104,26 @@
 	color = null
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
+
+/obj/item/clothing/shirt/undershirt/sash
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
+	name = "cloth sash"
+	desc = "A simple cloth sash."
+	icon_state = "sash"
+	color = CLOTHING_LINEN
+
+/obj/item/clothing/shirt/undershirt/sash/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/shirt/undershirt/sash/colored/white
+	color = CLOTHING_CHALK_WHITE
+
+/obj/item/clothing/shirt/undershirt/sash/colored/random/Initialize()
+	color = pick(CLOTHING_CHALK_WHITE, CLOTHING_ROYAL_RED, CLOTHING_LINEN, CLOTHING_MAGE_ORANGE, CLOTHING_ROYAL_TEAL, CLOTHING_SWAMPWEED)
+	return ..()
+
+/obj/item/clothing/shirt/undershirt/formal
+	name = "formal shirt"
+	desc = "A comfortable yet functional dress shirt often worn by the staff of a noble household."
+	icon_state = "butlershirt"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_maids.dmi'

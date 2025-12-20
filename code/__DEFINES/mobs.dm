@@ -1,6 +1,5 @@
 /*ALL MOB-RELATED DEFINES THAT DON'T BELONG IN ANOTHER FILE GO HERE*/
 
-//This was previously in vampirelord.dm and mob/living/stats.dm, the person defined it twice because vampirelord came in below that stats file, so now both of them can get it here.
 #define STATKEY_STR "strength"
 #define STATKEY_PER "perception"
 #define STATKEY_INT "intelligence"
@@ -188,6 +187,8 @@
 #define NUTRITION_LEVEL_STARVING 100
 
 #define HYDRATION_LEVEL_FULL 1000
+#define HYDRATION_LEVEL_WATER_LOGGED 850
+#define HYDRATION_LEVEL_HYDRATED 700
 #define HYDRATION_LEVEL_SMALLTHIRST 600
 #define HYDRATION_LEVEL_THIRSTY 350
 #define HYDRATION_LEVEL_DEHYDRATED 100
@@ -375,15 +376,13 @@
 ///How much a mob's sprite should be moved when they're lying down
 #define PIXEL_Y_OFFSET_LYING -6
 
-/// If gravity must be present to perform action (can't use pens without gravity)
-#define NEED_GRAVITY (1<<0)
 /// If reading is required to perform action (can't read a book if you are illiterate)
-#define NEED_LITERACY (1<<1)
+#define NEED_LITERACY (1<<0)
 /// If lighting must be present to perform action (can't heal someone in the dark)
-#define NEED_LIGHT (1<<2)
+#define NEED_LIGHT (1<<1)
 /// If other mobs (monkeys, aliens, etc) can perform action (can't use computers if you are a monkey)
-#define NEED_DEXTERITY (1<<3)
+#define NEED_DEXTERITY (1<<2)
 /// If telekinesis is forbidden to perform action from a distance (ex. canisters are blacklisted from telekinesis manipulation)
-#define FORBID_TELEKINESIS_REACH (1<<5)
+#define FORBID_TELEKINESIS_REACH (1<<3)
 /// If resting on the floor is allowed to perform action
-#define ALLOW_RESTING (1<<7)
+#define ALLOW_RESTING (1<<4)

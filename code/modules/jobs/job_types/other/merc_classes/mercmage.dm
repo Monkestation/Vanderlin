@@ -10,16 +10,18 @@
 	You have the scars and the arcyne prowess to prove it, after all.\
 	\n\n\ \
 	Yet after all this, you still think to yourself, that this work is beneath you, as your sense of pride protests every morning. \
-	But it all goes away whenever a zenarii filled pouch is thrown your way, for a while atleast."
+	But it all goes away whenever a zenarii filled pouch is thrown your way, for a while at least."
 	//not RACES_PLAYER_NONDISCRIMINATED becauses they are a FOREIGN noble
 	allowed_races = RACES_PLAYER_FOREIGNNOBLE
 	outfit = /datum/outfit/mercenary/sellmage
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 2 //balance slop
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)//they were a mage, or learnt magic, before becoming a mercenary
+	blacklisted_species = list(SPEC_ID_HALFLING)
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)//only noc or zizo worshippers can be mages
+	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 
 /datum/outfit/mercenary/sellmage/pre_equip(mob/living/carbon/human/H)
 	..()

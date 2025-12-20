@@ -24,7 +24,7 @@
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast
 	name = "gorefeast"
 	desc = "It is said that with this axe alone, Graggar slew a thousand men. With you, it will slay a thousand more."
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "gorefeast"
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
@@ -50,7 +50,7 @@
 		user.playsound_local(user, pick('sound/misc/godweapons/gorefeast1.ogg', 'sound/misc/godweapons/gorefeast2.ogg', 'sound/misc/godweapons/gorefeast3.ogg'), 70)
 		message = pick(GOREFEAST_UNWORTHY)
 	else
-		to_chat(user, span_danger("Gorefeast begins to thump, ecstatically upon your touch on the boney shaft."))
+		to_chat(user, span_danger("Gorefeast begins to thump ecstatically upon your touch on the boney shaft."))
 		user.playsound_local(user, pick('sound/misc/godweapons/gorefeast4.ogg', 'sound/misc/godweapons/gorefeast5.ogg', 'sound/misc/godweapons/gorefeast6.ogg'), 70)
 		message = pick(GOREFEAST_WORTHY)
 	addtimer(CALLBACK(src, PROC_REF(do_message), message), 2 SECONDS)
@@ -96,7 +96,7 @@
 	name = "neant"
 	desc = "A dark scythe with a long chain, used to cut the life essence from people, or whip them into shape. The blade is an ominous purple."
 	icon_state = "neant"
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FIRE_PROOF
@@ -237,7 +237,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta
 	name = "turbulenta"
 	desc = "Rarely does she even care about combat, but when she does... Baotha was quite the markswoman."
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "turbulenta"
 	base_icon = "turbulenta"
 	slot_flags = ITEM_SLOT_BACK
@@ -367,7 +367,7 @@
 //┌─────────────── PLEONEXIA ───────────────┐//
 /obj/item/weapon/sword/long/pleonexia
 	icon_state = "pleonexia"
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	name = "pleonexia"
 	desc = "A sword of legend. If they are true, then this is the blade of Matthios himself. Rumor has it, it steals space and time."
 	swingsound = BLADEWOOSH_LARGE

@@ -22,7 +22,7 @@
 /datum/customizer_choice/organ/wings/harpy
 	name = "Wings"
 	organ_type = /obj/item/organ/wings/flight/harpy
-	allows_accessory_color_customization = FALSE
+	allows_accessory_color_customization = TRUE
 	sprite_accessories = list(
 		/datum/sprite_accessory/wings/large/harpyswept,
 	)

@@ -14,6 +14,9 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/bard
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
+	exp_type = list(EXP_TYPE_BARD)
+	exp_types_granted = list(EXP_TYPE_BARD)
+
 
 /datum/outfit/bard/pre_equip(mob/living/carbon/human/H)
 	. = ..()
@@ -56,6 +59,8 @@
 	H.change_stat(STATKEY_PER, 1)
 	H.change_stat(STATKEY_SPD, 2)
 	H.change_stat(STATKEY_STR, -1)
+	var/datum/inspiration/I = new /datum/inspiration(H)
+	I.grant_inspiration(H, bard_tier = BARD_T3)
 
 /datum/job/bard/after_spawn(mob/living/spawned, client/player_client)
 	. = ..()

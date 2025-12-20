@@ -152,7 +152,9 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		/// stuff in this sets everyting in initialize args
 		/obj/effect/fuse,
 		///shit that calls explosion() should probably not be called in empty space
-		/obj/effect/temp_visual/target/meteor
+		/obj/effect/temp_visual/target/meteor,
+		/obj/structure/meatvine/papameat,
+		/obj/effect/meatvine_controller,
 	)
 	///this does some wonky things that we don't want in a test area
 	ignore += typesof(/obj/structure/stockpile_storage,)

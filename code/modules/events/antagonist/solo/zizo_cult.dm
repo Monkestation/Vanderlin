@@ -1,17 +1,19 @@
 /datum/round_event_control/antagonist/solo/zizo_cult
 	name = "Zizo Cult"
 	tags = list(
+		TAG_ZIZO,
 		TAG_COMBAT,
-		TAG_VILLIAN,
+		TAG_VILLAIN,
 	)
 	roundstart = TRUE
 	antag_flag = ROLE_ZIZOIDCULTIST
 	shared_occurence_type = SHARED_HIGH_THREAT
 
 	base_antags = 1
-	maximum_antags = 3
+	maximum_antags = 4
 
-	weight = 4
+	min_players = 35
+	weight = 6
 
 	earliest_start = 0 SECONDS
 
@@ -19,18 +21,19 @@
 	antag_datum = /datum/antagonist/zizocultist
 
 	restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Hand",
-		"Captain",
-		"Prince",
-		"Priest",
-		"Merchant",
-		"Forest Warden",
-		"Inquisitor",
-		"Adept",
-		"Royal Knight",
-		"Templar",
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
 	)
 
 /datum/round_event/antagonist/solo/zizo_cultist

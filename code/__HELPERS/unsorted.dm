@@ -453,7 +453,7 @@ It takes into account:
 NOTE: if your atom has non-standard bounds then this proc
 will handle it, but:
  * if the bounds are even, then there are an even amount of "middle" turfs, the one to the EAST, NORTH, or BOTH is picked
-(this may seem bad, but you're atleast as close to the center of the atom as possible, better than byond's default loc being all the way off)
+(this may seem bad, but you're at least as close to the center of the atom as possible, better than byond's default loc being all the way off)
  * if the bounds are odd, the true middle turf of the atom is returned
 
 */
@@ -501,13 +501,6 @@ will handle it, but:
 	. = bounds_dist(A, B) + sqrt((((A.pixel_x+B.pixel_x)**2) + ((A.pixel_y+B.pixel_y)**2)))
 	if(centered)
 		. += world.icon_size
-
-/proc/can_embed(obj/item/weapon)
-	if(HAS_TRAIT(weapon, TRAIT_NODROP) || HAS_TRAIT(weapon, TRAIT_NOEMBED))
-		return FALSE
-	if(!weapon.embedding?.embed_chance)
-		return FALSE
-	return TRUE
 
 /*
 Checks if that loc and dir has an item on the wall
@@ -800,9 +793,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	for(type in view(range, GLOB.dview_mob))
 
 #define FOR_DVIEW_END GLOB.dview_mob.loc = null
-
-
-#define UNTIL(X) while(!(X)) stoplag()
 
 /proc/get_mob_or_brainmob(occupant)
 	var/mob/living/mob_occupant

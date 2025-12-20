@@ -93,3 +93,10 @@
 			var/mob/living/carbon/H = user
 			H.update_inv_head()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/clothing/head/helmet/medium/decorated/rousskullmet
+	name = "rous skullmet"
+	desc = "A crude helmet constructed with the skull of a rous, typically used by the problem children sent to the Foresters."
+	icon = 'icons/roguetown/clothing/special/forest_guard.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
+	icon_state = "skullmet_ruffian"

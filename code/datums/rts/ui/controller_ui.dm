@@ -18,11 +18,10 @@
 	var/mob/living/worker_mob
 	var/datum/worker_mind/worker_mind
 
-/atom/movable/screen/controller_ui/controller_ui/Initialize(mapload, datum/hud/hud_owner, mob/living/worker, datum/worker_mind/creation_source)
+/atom/movable/screen/controller_ui/controller_ui/New(mob/living/worker, datum/worker_mind/creation_source)
 	. = ..()
 	worker_mob = worker
 	worker_mind = creation_source
-
 	create_and_position_buttons()
 
 /atom/movable/screen/controller_ui/controller_ui/Destroy(force)

@@ -31,7 +31,7 @@
 	for(var/mob/living/simple_animal/pet/cat/kitten/K in oview(kitten_detection_range, cat_pawn))
 		if(K.stat == DEAD)
 			continue
-		if(SEND_SIGNAL(K, COMSIG_MOB_RETURN_HUNGER) > 0.25)
+		if(SEND_SIGNAL(K, COMSIG_MOB_RETURN_HUNGER) > 25)
 			continue
 
 		var/dist = get_dist(cat_pawn, K)

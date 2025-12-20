@@ -91,12 +91,14 @@
 		if(mobber)
 			UnregisterSignal(mobber, COMSIG_LIVING_DEATH)
 
+/datum/action/cooldown/spell/pragmas_charm/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
+	return isanimal(cast_on)
+
 /datum/action/cooldown/spell/pragmas_charm/cast(mob/living/simple_animal/cast_on)
 	. = ..()
-	if(!istype(cast_on))
-		to_chat(owner, span_danger("can't charm this!"))
-		return FALSE
-
 	for(var/datum/weakref/mob_ref as anything in charmed_mobs)
 		var/mob/mob = mob_ref.resolve()
 		if(isnull(mob))
@@ -104,15 +106,15 @@
 
 	if(check_present(cast_on))
 		to_chat(owner, span_danger("already charmed!"))
-		return FALSE
+		return
 
 	if(length(charmed_mobs) >= 3)
 		to_chat(owner, span_danger("too many charmed! can only charm 3!"))
-		return FALSE
+		return
 
 	if(cast_on.is_dead())
 		to_chat(owner, span_danger("it's dead!"))
-		return FALSE
+		return
 
 	charmed_mobs += WEAKREF(cast_on)
 	RegisterSignal(cast_on, COMSIG_LIVING_DEATH, PROC_REF(on_mob_death))
@@ -123,3 +125,40 @@
 	cast_on.ai_controller.set_blackboard_key(BB_PET_TARGETING_DATUM, new /datum/targetting_datum/basic/not_friends())
 	cast_on.befriend(owner)
 	cast_on.pet_passive = TRUE
+
+/// Tainted Lux from goblins, rous and others.
+
+/obj/item/reagent_containers/lux_tainted
+	name = "tainted lux"
+	desc = "A warped remnant of soulstuff, twisted by the touch of darker powers. It quivers with a sickly pulse, its surface slick like spoiled yolk."
+	icon = 'icons/roguetown/items/produce.dmi'
+	icon_state = "tainted_lux"
+	item_state = "tainted_lux"
+	possible_transfer_amounts = list()
+	volume = 15
+	list_reagents = list(/datum/reagent/lux_tainted = 5)
+	grind_results = list(/datum/reagent/lux_tainted = 5)
+	sellprice = 25
+
+/datum/reagent/lux_tainted
+	name = "Tainted lux"
+	description = "A degraded echo of the soul's essence, tainted by profane influence. It carries the stain of malice and fragmentation."
+	color = "#1a1038"
+	overdose_threshold = 5
+	metabolization_rate = 0.1
+
+/datum/reagent/lux_tainted/overdose_process(mob/living/M)
+	M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.5*REM)
+	M.adjustFireLoss(0.5*REM, 0)
+	..()
+	. = 1
+
+/datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M)
+	if(M.has_flaw(/datum/charflaw/addiction/junkie))
+		M.sate_addiction()
+	if(M.has_status_effect(/datum/status_effect/debuff/lux_drained))
+		to_chat(M, span_green("This tastes awful, it won't help me feel my soul again.."))
+	if(M.has_status_effect(/datum/status_effect/debuff/flaw_lux_taken))
+		to_chat(M, span_green("This tastes awful, it won't help me feel my soul again.."))
+	M.add_stress(/datum/stress_event/consumed_tainted_lux)
+	..()

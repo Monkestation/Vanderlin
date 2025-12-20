@@ -7,6 +7,10 @@
 	max_occurrences = 1
 	min_players = 25
 
+	tags = list(
+		TAG_ASTRATA,
+	)
+
 /datum/round_event_control/astrata_nobility/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
 	if(!.)
@@ -47,8 +51,10 @@
 	var/datum/objective/personal/nobility/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE ASTRATA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Astrata wishes you to ascend in status! Become a part of the nobility to earn Astrata's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE ASTRATA'S CHOSEN!"),
+		span_notice("Astrata wishes you to ascend in status! Become a part of the nobility to earn Astrata's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/magic/bless.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

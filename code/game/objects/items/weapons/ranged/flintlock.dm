@@ -1,7 +1,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
 	name = "puffer"
 	desc = "The current zenith of Dwarven and Humen cooperation on the Eastern continent. It uses alchemical blastpowder to propel metal balls for devastating effect."
-	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/guns.dmi'
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 	icon_state = "puffer_uncocked_ramrod"
@@ -14,11 +14,12 @@
 	experimental_inhand = FALSE
 	experimental_onback = FALSE
 	var/click_delay = 0.5
+	var/damage_mult = 1.625
 	var/obj/item/ramrod/rod
 	cartridge_wording = "ball"
 	var/rammed = FALSE
 	load_sound = 'sound/foley/nockarrow.ogg'
-	fire_sound = 'sound/combat/Ranged/muskshoot.ogg'
+	fire_sound = null // handled in shoot_live_shot()
 	equip_sound = 'sound/foley/gun_equip.ogg'
 	pickup_sound = 'sound/foley/gun_equip.ogg'
 	drop_sound = 'sound/foley/gun_drop.ogg'
@@ -32,6 +33,7 @@
 	sellprice = 200 // This kind of equipment is very hard to come by in Rockhill.
 	grid_height = 32
 	grid_width = 96
+	var/wheellock = TRUE
 	var/cocked = FALSE
 	var/ramrod_inserted = TRUE
 	var/powdered = FALSE
@@ -46,8 +48,18 @@
 	user.playsound_local(get_turf(user), 'sound/foley/tinnitus.ogg', 60, FALSE) // muh realism or something
 	new /obj/effect/particle_effect/smoke(get_turf(user))
 
+	for(var/mob/M in GLOB.player_list)
+		if(!is_in_zweb(M.z, src.z))
+			continue
+		var/turf/M_turf = get_turf(M)
+		var/shot_sound = sound('sound/combat/Ranged/muskshoot.ogg')
+		if(M_turf)
+			M.playsound_local(M_turf, null, 100, 1, get_rand_frequency(), S = shot_sound)
+
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/shoot_with_empty_chamber(mob/living/user)
-	if(!cocked || !wound)
+	if(!cocked)
+		return
+	if(wheellock && !wound)
 		return
 	playsound(src.loc, 'sound/combat/Ranged/muskclick.ogg', 100, FALSE)
 	cocked = FALSE
@@ -75,6 +87,8 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_self_secondary(mob/user, params)
 	. = ..()
+	if(!wheellock)
+		return
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	if(user.get_skill_level(/datum/skill/combat/firearms) <= 0)
@@ -117,7 +131,7 @@
 		return
 	if(!powdered)
 		return
-	if(!wound)
+	if(wheellock && !wound)
 		return
 	if(user.client)
 		if(user.client.chargedprog >= 100)
@@ -134,7 +148,7 @@
 		if(user.STAPER > 8)
 			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
 			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-		BB.damage = BB.damage *1.625 // 80 * 1.5 = 130 of damage.
+		BB.damage = BB.damage * damage_mult // 80 * 1.5 = 130 of damage.
 		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
 	playsound(src.loc, 'sound/combat/Ranged/muskclick.ogg', 100, FALSE)
 	cocked = FALSE
@@ -243,3 +257,230 @@
 
 	QDEL_IN(src, rand(2 SECONDS, 5 SECONDS)) //Apparently, a puffer being broken can still be shot, because that make sense. so we're qdel'ing it right after.
 	visible_message(span_warning("The puffer begins to crumble, the enchantment falls!"))
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket
+	name = "musket"
+	icon = 'icons/roguetown/weapons/64/guns.dmi'
+	icon_state = "musket_uncocked_ramrod"
+	item_state = "musket"
+	bigboy = TRUE
+	recoil = 10
+	randomspread = 2
+	spread = 2
+	force = 10
+	experimental_inhand = TRUE
+	experimental_onback = TRUE
+	damage_mult = 3.5
+	dropshrink = 0.7
+	possible_item_intents = list(INTENT_GENERIC)
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	associated_skill = /datum/skill/combat/polearms
+	slot_flags = ITEM_SLOT_BACK
+	wlength = WLENGTH_LONG
+	w_class = WEIGHT_CLASS_BULKY
+	wdefense = GOOD_PARRY
+	blade_dulling = DULLING_BASHCHOP
+	max_blade_int = 100
+	sellprice = 400
+	wheellock = FALSE
+	var/bayonet_affixed = FALSE
+	rod = /obj/item/ramrod/musket
+	var/obj/item/weapon/knife/dagger/bayonet/bayonet
+	can_parry = TRUE
+	max_integrity = 30
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/Initialize()
+	. = ..()
+	var/obj/item/ramrod/musket/rrod = new(src)
+	rod = rrod
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attack_self(mob/living/user, params)
+	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
+	interact(user)
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/update_icon_state()
+	. = ..()
+	icon_state = "musket_[cocked ? "cocked" : "uncocked"][ramrod_inserted ? "_ramrod" : ""][bayonet_affixed ? "_bayonet" : ""]"
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen") return list(
+				"shrink" = 0.5,
+				"sx" = -2,
+				"sy" = 0,
+				"nx" = 11,
+				"ny" = 0,
+				"wx" = -4,
+				"wy" = -4,
+				"ex" = 2,
+				"ey" = 0,
+				"nturn" = 0,
+				"sturn" = 0,
+				"wturn" = 0,
+				"eturn" = 0,
+				"nflip" = 0,
+				"sflip" = 0,
+				"wflip" = 5,
+				"eflip" = 0,
+				"northabove" = 0,
+				"southabove" = 1,
+				"eastabove" = 1,
+				"westabove" = 0
+				)
+			if("wielded") return list(
+				"shrink" = 0.5,
+				"sx" = 0,
+				"sy" = -3,
+				"nx" = 0,
+				"ny" = -2,
+				"wx" = -4,
+				"wy" = -3,
+				"ex" = 4,
+				"ey" = -3,
+				"nturn" = -45,
+				"sturn" = 45,
+				"wturn" = 45,
+				"eturn" = 45,
+				"nflip" = 4,
+				"sflip" = 0,
+				"wflip" = 5,
+				"eflip" = 0,
+				"northabove" = 0,
+				"southabove" = 1,
+				"eastabove" = 1,
+				"westabove" = 0
+				)
+			if("onback")
+				return list(
+					"shrink" = 0.5,
+					"sx" = 1,
+					"sy" = -1,
+					"nx" = 1,
+					"ny" = -1,
+					"wx" = -1,
+					"wy" = 0,
+					"ex" = 1,
+					"ey" = -1,
+					"nturn" = 0,
+					"sturn" = 0,
+					"wturn" = 0,
+					"eturn" = 0,
+					"nflip" = 5,
+					"sflip" = 5,
+					"wflip" = 5,
+					"eflip" = 5,
+					"northabove" = 1,
+					"southabove" = 0,
+					"eastabove" = 0,
+					"westabove" = 0)
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attack_self_secondary(mob/user, params)
+	if(bayonet)
+		if(do_after(user, 2 SECONDS, src))
+			user.put_in_hands(bayonet)
+			bayonet_affixed = FALSE
+			possible_item_intents -= SPEAR_THRUST
+			gripped_intents -= POLEARM_THRUST
+			sharpness = IS_BLUNT
+			bayonet.max_blade_int = max_blade_int
+			bayonet.blade_int = blade_int
+			max_blade_int = 0
+			blade_int = 0
+			armor_penetration = 0
+			spread -= bayonet.spread
+			force -= bayonet.force
+			bayonet = null
+			to_chat(user, span_info("I remove the bayonet from \the [src]."))
+			playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
+		update_appearance(UPDATE_ICON_STATE)
+	..()
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attackby(obj/item/I, mob/user, params)
+	var/ramtime = 5.5
+	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(istype(H.get_active_held_item(), /obj/item/weapon/knife/dagger/bayonet))
+			if(!H.is_holding(src))
+				to_chat(user, span_warning("I need to hold \the [src] to affix a bayonet to it!"))
+				return
+			if(do_after(user, ramtime SECONDS, src))
+				var/obj/item/weapon/knife/dagger/bayonet/attached_bayonet = H.get_active_held_item()
+				attached_bayonet.forceMove(src)
+				bayonet = attached_bayonet
+				bayonet_affixed = TRUE
+				possible_item_intents += SPEAR_THRUST
+				gripped_intents += POLEARM_THRUST
+				sharpness = IS_SHARP
+				max_blade_int = attached_bayonet.max_blade_int
+				blade_int = attached_bayonet.blade_int
+				armor_penetration = 5
+				spread += bayonet.spread
+				force += bayonet.force
+				to_chat(user, span_info("I affix the bayonet to \the [src]."))
+				playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
+			update_appearance(UPDATE_ICON_STATE)
+	..()
+
+/obj/item/weapon/knife/dagger/bayonet
+	name = "bayonet"
+	force = 10
+	max_blade_int = 100
+	var/spread = 2
+
+/obj/item/ramrod/musket
+	name = "musket ram rod"
+	desc = ""
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "ramrod_musket"
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user) //this is probably shitcode but I'm tired and I'm not repathing the guns to be /weapons, it's better than the musket being a delimbinator 9000
+	if(!get_sharpness() || !affecting.can_dismember(src))
+		return 0
+
+	var/total_dam = affecting.get_damage()
+	var/nuforce = get_complex_damage(src, user)
+	var/pristine_blade = TRUE
+	if(max_blade_int && dismember_blade_int)
+		var/blade_int_modifier = (blade_int / dismember_blade_int)
+		//blade is about as sharp as a brick it won't dismember shit
+		if(blade_int_modifier <= 0.15)
+			return 0
+		nuforce *= blade_int_modifier
+		pristine_blade = (blade_int >= (dismember_blade_int * 0.95))
+
+	if(user)
+		if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+			nuforce = 0
+		else if(istype(user.rmb_intent, /datum/rmb_intent/strong))
+			nuforce *= 1.1
+
+		if(user.used_intent.blade_class == BCLASS_CHOP) //chopping attacks always attempt dismembering
+			nuforce *= 1.1
+		else if(user.used_intent.blade_class == BCLASS_CUT)
+			if(!pristine_blade && (total_dam < affecting.max_damage * 0.8))
+				return 0
+		else
+			return 0
+
+	if(nuforce < 23) //End force needs to be at least this high, after accounting for strong intent and chop. An iron messer should be able to do it, but not a dagger.
+		return 0
+
+	var/probability = (nuforce * (total_dam / affecting.max_damage) - 5) //More weight given to total damage accumulated on the limb
+	if(affecting.body_zone == BODY_ZONE_HEAD) //Decapitations are harder to pull off in general
+		probability *= 0.5
+	var/hard_dismember = HAS_TRAIT(affecting, TRAIT_HARDDISMEMBER)
+	var/easy_dismember = affecting.rotted || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
+	if(affecting.owner)
+		if(!hard_dismember)
+			hard_dismember = HAS_TRAIT(affecting.owner, TRAIT_HARDDISMEMBER)
+		if(!easy_dismember)
+			easy_dismember = HAS_TRAIT(affecting.owner, TRAIT_EASYDISMEMBER)
+	if(hard_dismember)
+		return min(probability, 5)
+	else if(easy_dismember)
+		return probability * 1.5
+	return probability

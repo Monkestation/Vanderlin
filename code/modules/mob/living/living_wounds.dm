@@ -220,7 +220,7 @@
 
 /// Simple version for adding an embedded object - DO NOT CALL THIS ON CARBON MOBS!
 /mob/living/proc/simple_add_embedded_object(obj/item/embedder, silent = FALSE, crit_message = FALSE)
-	if(!embedder || !can_embed(embedder) || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) || HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+	if(!embedder || !embedder.can_embed() || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) || HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 		return FALSE
 	LAZYADD(simple_embedded_objects, embedder)
 	embedder.is_embedded = TRUE

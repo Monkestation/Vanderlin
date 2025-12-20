@@ -9,7 +9,6 @@
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 1
-	min_pq = 6
 	bypass_lastclass = TRUE
 
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/servant)
@@ -23,10 +22,18 @@
 
 	job_bitflag = BITFLAG_ROYALTY
 
+	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 600,
+		EXP_TYPE_NOBLE = 300
+	)
+
+
 /datum/job/consort/after_spawn(mob/living/spawned, client/player_client)
-	..()
+	. = ..()
 	var/mob/living/carbon/human/H = spawned
-	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, (H.gender == FEMALE) ? FAMILY_MOTHER : FAMILY_FATHER), 3 SECONDS)
+	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, (H.gender == FEMALE) ? FAMILY_MOTHER : FAMILY_FATHER), 7 SECONDS)
 	if(GLOB.keep_doors.len > 0)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), H), 5 SECONDS)
 	ADD_TRAIT(H, TRAIT_KNOWKEEPPLANS, TRAIT_GENERIC)
@@ -46,6 +53,7 @@
 */
 /datum/job/advclass/consort
 	inherit_parent_title = TRUE
+	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 /datum/job/advclass/consort/highborn
 	title = "Highborn Consort"

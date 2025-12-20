@@ -114,7 +114,7 @@
 	udder_mob = null
 	on_generate_callback = null
 
-/obj/item/udder/process(seconds_per_tick)
+/obj/item/udder/process()
 	if(isanimal(udder_mob))
 		var/mob/living/simple_animal/simple_animal = udder_mob
 		if(SEND_SIGNAL(simple_animal, COMSIG_MOB_RETURN_HUNGER) <= 0)

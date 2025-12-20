@@ -1,6 +1,6 @@
 /datum/antagonist/harlequinn
 	name = "Harlequinn"
-	roundend_category = "harlequinn"
+	roundend_category = "Harlequinn"
 	antagpanel_category = "Harlequinn"
 	job_rank = ROLE_HARLEQUINN
 	antag_hud_name = "harlequinn"

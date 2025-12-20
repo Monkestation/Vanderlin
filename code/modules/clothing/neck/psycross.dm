@@ -8,6 +8,16 @@
 	sellprice = 10
 	experimental_onhip = TRUE
 
+// INHUMEN PSYCROSSES
+
+/obj/item/clothing/neck/psycross/zizo
+	name = "Amulet of Zizo"
+	desc = "Through power dominate, through domination rule, through Zizo become the divinity you were always meant to be."
+	icon_state = "zcross"
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
+	sellprice = 0
+	experimental_onhip = TRUE
+
 // SILVER PSYCROSS START
 
 /obj/item/clothing/neck/psycross/silver
@@ -126,3 +136,9 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
+
+/obj/item/clothing/neck/psycross/silver/undivided
+	name = "amulet of the ten"
+	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
+	icon_state = "undivided"
+

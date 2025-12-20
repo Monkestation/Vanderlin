@@ -133,6 +133,9 @@
 		QDEL_NULL(src.charflaw)
 	update_body()
 	faction = list(FACTION_UNDEAD)
+	var/turf/turf = get_turf(src)
+	if(SSterrain_generation.get_island_at_location(turf))
+		faction |= "islander"
 	name = "zizombie"
 	real_name = "zizombie"
 	mob_biotypes |= MOB_UNDEAD
@@ -158,6 +161,7 @@
 	damage_overlay_type = "human"
 	changesource_flags = WABBAJACK
 	var/raceicon = "zizombie"
+	exotic_bloodtype = /datum/blood_type/human/corrupted/zizombie
 
 /datum/species/zizombie/update_damage_overlays(mob/living/carbon/human/H)
 	return
@@ -523,7 +527,7 @@
 			backl = /obj/item/storage/backpack/satchel
 			wrists = /obj/item/clothing/wrists/bracers/leather
 		if(4) //zizombie Warrior
-			r_hand = /obj/item/weapon/sword/short
+			r_hand = /obj/item/weapon/sword/short/iron
 			l_hand = /obj/item/weapon/knife/dagger
 			pants = /obj/item/clothing/pants/grenzelpants
 			shoes = /obj/item/clothing/shoes/boots/armor/light

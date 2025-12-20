@@ -23,7 +23,7 @@
 		return
 
 	var/datum/job/user_job = SSjob.GetJob(user.job)
-	if(user_job && !(initial(user_job.type) in approved_jobs))
+	if(user_job && !(initial(user_job.type) in approved_jobs) && (SSmapping.config.map_name != "Voyager"))
 		if(!COOLDOWN_FINISHED(src, outsider_ring_bell))
 			return
 

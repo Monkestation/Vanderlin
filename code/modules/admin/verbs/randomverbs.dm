@@ -156,7 +156,7 @@
 	if(!M)
 		return
 	var/message_to_admins = span_adminnotice("<b> [key_name(usr)] has sent ([M.name]/[M.key]):</b> to cryo. <BR>")
-	var/message_to_admin_user = span_notice(cryo_mob(M))
+	var/message_to_admin_user = span_notice(cryo_mob(M, TRUE))
 
 	to_chat(src, message_to_admin_user)
 	log_admin(message_to_admins)
@@ -720,6 +720,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		ADMIN_PUNISHMENT_MEATPIE,
 		ADMIN_PUNISHMENT_GODHAND,
 		ADMIN_PUNISHMENT_FORCECOLLAR,
+		ADMIN_PUNISHMENT_PSYDON,
 	)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
@@ -740,38 +741,21 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 199, 199)
 		if(ADMIN_PUNISHMENT_GIB)
 			target.gib(FALSE)
+		if(ADMIN_PUNISHMENT_PSYDON)
+			sleep(60)
+			target.psydo_nyte()
+			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
+			sleep(20)
+			target.psydo_nyte()
+			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
+			sleep(15)
+			target.psydo_nyte()
+			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
+			sleep(10)
+			target.gib(FALSE)
+
 		if(ADMIN_PUNISHMENT_BSA)
 			bluespace_artillery(target)
-		if(ADMIN_PUNISHMENT_SUPPLYPOD_QUICK)
-			var/target_path = input(usr,"Enter typepath of an atom you'd like to send with the pod (type \"empty\" to send an empty pod):" ,"Typepath","/obj/item/reagent_containers/food/snacks/grown/harebell") as null|text
-			var/obj/structure/closet/supplypod/centcompod/pod = new()
-			pod.damage = 40
-			pod.explosionSize = list(0,0,0,2)
-			pod.effectStun = TRUE
-			if (isnull(target_path)) //The user pressed "Cancel"
-				return
-			if (target_path != "empty")//if you didn't type empty, we want to load the pod with a delivery
-				var/delivery = text2path(target_path)
-				if(!ispath(delivery))
-					delivery = pick_closest_path(target_path)
-					if(!delivery)
-						alert("ERROR: Incorrect / improper path given.")
-						return
-				new delivery(pod)
-			new /obj/effect/DPtarget(get_turf(target), pod)
-		if(ADMIN_PUNISHMENT_SUPPLYPOD)
-			var/datum/centcom_podlauncher/plaunch  = new(usr)
-			if(!holder)
-				return
-			plaunch.specificTarget = target
-			plaunch.launchChoice = 0
-			plaunch.damageChoice = 1
-			plaunch.explosionChoice = 1
-			plaunch.temp_pod.damage = 40//bring the mother fuckin ruckus
-			plaunch.temp_pod.explosionSize = list(0,0,0,2)
-			plaunch.temp_pod.effectStun = TRUE
-			plaunch.ui_interact(usr)
-			return //We return here because punish_log() is handled by the centcom_podlauncher datum
 
 		if(ADMIN_PUNISHMENT_CBT)
 			if(!ishuman(target))
@@ -846,6 +830,43 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			H.add_stress(/datum/stress_event/collarcurse)
 
 	punish_log(target, punishment)
+
+/client/proc/heart_attack(mob/living/carbon/target as mob)
+	set name = "Heart Attack"
+	set category = "Fun"
+	if(!check_rights(R_ADMIN) || !check_rights(R_FUN))
+		return
+
+	var/obj/item/organ/heart/heart = target.getorganslot(ORGAN_SLOT_HEART)
+	if(!heart)
+		to_chat(usr,span_warning("The target does not have a Heart!"))
+		return
+
+	var/custom_message
+	var/check = browser_alert(usr, "Do you want a custom message for the heart attack?", "Confirmation", DEFAULT_INPUT_CHOICES)
+	if(check == CHOICE_YES)
+		custom_message = browser_input_text(usr, "Write the Custom Message", "Custom Message")
+		if(!custom_message)
+			to_chat(usr, span_notice("You didn't write the custom message!"))
+			return
+
+	if(QDELETED(target))
+		return
+
+	target.visible_message(target, span_danger("[target] clutches at [target.p_their()] chest!"))
+	target.emote("breathgasp", forced = TRUE)
+	shake_camera(target, 1, 3)
+	target.set_eye_blur_if_lower(80 SECONDS)
+	var/stuffy = list("ZIZO GRABS MY WEARY HEART!","ARGH! MY HEART BEATS NO MORE!","NO... MY HEART HAS BEAT IT'S LAST!","MY HEART HAS GIVEN UP!","MY HEART BETRAYS ME!","THE METRONOME OF MY LIFE STILLS!")
+	if(custom_message)
+		to_chat(target, span_danger("[custom_message]"))
+	else
+		to_chat(target, span_danger("[pick(stuffy)]"))
+
+	punish_log(target, punishment = "Heart Attack")
+	spawn(3 SECONDS)
+		if(!QDELETED(target))
+			target.set_heartattack(TRUE)
 
 /client/proc/punish_log(whom, punishment)
 	var/msg = "[key_name_admin(usr)] punished [key_name_admin(whom)] with [punishment]."

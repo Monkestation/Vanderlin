@@ -316,7 +316,7 @@
 				door_index++
 
 	for(var/turf/turf in wall_coords + door_coords + upper_wall_coords)
-		turf.reassess_stack()
+		turf?.reassess_stack()
 
 	assembled = TRUE
 	forceMove(center_turf)

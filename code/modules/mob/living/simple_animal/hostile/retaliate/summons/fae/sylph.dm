@@ -47,7 +47,7 @@
 	ranged = TRUE
 	rapid = 3
 	projectiletype = /obj/projectile/magic/frostbolt/greater
-	ranged_message = "throws icey magick"
+	ranged_message = "throws icy magick"
 
 	ai_controller = /datum/ai_controller/sylph
 

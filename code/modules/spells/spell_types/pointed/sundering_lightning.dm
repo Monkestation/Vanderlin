@@ -9,6 +9,10 @@
 	attunements = list(
 		/datum/attunement/electric = 0.9
 	)
+
+	invocation = "Lightning strikes more than twice!"
+	invocation_type = INVOCATION_SHOUT
+
 	spell_flags = SPELL_RITUOS
 	charge_time = 3.5 SECONDS
 	charge_drain = 1

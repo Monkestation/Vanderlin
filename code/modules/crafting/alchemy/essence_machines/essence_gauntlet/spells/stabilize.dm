@@ -17,5 +17,6 @@
 		return
 
 	owner.visible_message(span_notice("[owner] stabilizes [target] with magical force."))
+	new /obj/effect/temp_visual/solosnake(get_turf(target))
 	target.anchored = TRUE
 	addtimer(VARSET_CALLBACK(target, anchored, FALSE), 30 SECONDS)

@@ -11,7 +11,7 @@
 
 /obj/item/carvedgem/shell
 	name = "shell base"
-	desc = "if you encountered this, its a bug!"
+	desc = "if you encountered this, it's a bug!"
 	icon = 'icons/roguetown/gems/gem_shell.dmi'
 	icon_state = "raw_shell"
 	grid_height = 32
@@ -19,23 +19,23 @@
 
 /obj/item/carvedgem/shell/openoyster
 	name = "open fossilized clam"
-	desc = "A clam shell that has recently been opened. You could split the shell in two with a knife."
+	desc = "A clamshell that has recently been opened. You could split the shell in two with a knife."
 	icon_state = "oyster_open"
 	grid_height = 96
 	grid_width = 64
 	sellprice = 320
 
 /obj/item/carvedgem/shell/rawshell
-	name = "clam shell"
-	desc = "A piece of a fossilized clam shell. Although not as valuable as other gems, it holds a special place in Coastal and Sea Elven cultures. The origin of these clams is still under heavy speculation."
+	name = "clamshell"
+	desc = "A piece of a fossilized clamshell. Although not as valuable as other gems, it holds a special place in Coastal and Sea Elven cultures. The origin of these clams is still under heavy speculation."
 	icon_state = "raw_shell"
 	grid_height = 32
 	grid_width = 32
 	sellprice = 10
 
 /obj/item/carvedgem/shell/cutgem
-	name = "polished clam shell"
-	desc = "A polished piece of fossilized clam shell."
+	name = "polished clamshell"
+	desc = "A polished piece of fossilized clamshell."
 	icon_state = "cutgem_shell"
 	grid_height = 32
 	grid_width = 32
@@ -156,7 +156,7 @@
 
 /obj/item/carvedgem/shell/turtle
 	name = "turtle carving"
-	desc = "A medium sized carving of a sea turtle made out of clam shell. Sea turtle eggs have unfortunately become a delicacy for Grenzelhoftians, causing their population to rapidly decline."
+	desc = "A medium-sized carving of a sea turtle made out of clamshell. Sea turtle eggs have unfortunately become a delicacy for Grenzelhoftians, causing their population to rapidly decline."
 	icon_state = "turtle_shell"
 	grid_height = 64
 	grid_width = 64
@@ -164,7 +164,7 @@
 //.....................Rose......................//
 /obj/item/carvedgem/rose/
 	name = "rose base"
-	desc = "if you are seeing this, its a bug, report it to coders"
+	desc = "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_rose.dmi'
 	icon_state = "raw_rose"
 	grid_height = 32
@@ -172,7 +172,7 @@
 
 /obj/item/carvedgem/rose/rawrose
 	name = "raw rosellusk"
-	desc = "Pink and lustrous, these pearls produced by fossilized clam shells are valued by Eorans: and are usually gifted to expecting mothers and newlyweds."
+	desc = "Pink and lustrous, these pearls produced by fossilized clamshells are valued by Eorans: and are usually gifted to expecting mothers and newlyweds."
 	icon_state = "raw_rose"
 	grid_height = 32
 	grid_width = 32
@@ -283,7 +283,7 @@
 	sellprice = 35
 
 /obj/item/carvedgem/rose/statue
-	name = "rosellusk urn"
+	name = "rosellusk statue"
 	desc = "A statue carved out of rosellusk."
 	icon_state = "statue_rose"
 	grid_height = 64
@@ -309,7 +309,7 @@
 
 /obj/item/carvedgem/rose/carp
 	name = "rosellusk carp statue"
-	desc = "A medium sized carving of a carp made out of rosellusk. The fish have been selectively bred by Eorans to bring out beautiful patterns in their scales, but have become invasive in some regions due to carelessness."
+	desc = "A medium-sized carving of a carp made out of rosellusk. The fish have been selectively bred by Eorans to bring out beautiful patterns in their scales, but have become invasive in some regions due to carelessness."
 	icon_state = "carp_rose"
 	grid_height = 64
 	grid_width = 64
@@ -319,7 +319,7 @@
 
 /obj/item/carvedgem/jade
 	name = "joapstone base"
-	desc =  "if you are seeing this, its a bug, report it to coders"
+	desc =  "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "cutgem_jade"
 	grid_height = 32
@@ -457,7 +457,7 @@
 
 /obj/item/carvedgem/onyxa
 	name = "onyxa base"
-	desc = "if you are seeing this, its a bug, report it to coders"
+	desc = "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_onyxa.dmi'
 	icon_state = "cutgem_onyxa"
 	grid_height = 32
@@ -465,7 +465,7 @@
 
 /obj/item/carvedgem/onyxa/cutgem
 	name = "polished onyxa gem"
-	desc = "a cut and polished piece of onyxa."
+	desc = "A cut and polished piece of onyxa."
 	icon_state = "cutgem_onyxa"
 	grid_height = 32
 	grid_width = 32
@@ -473,7 +473,7 @@
 
 /obj/item/carvedgem/onyxa/fork
 	name = "onyxa fork"
-	desc = "a fork carved out of onyxa, far too delicate to eat with."
+	desc = "A fork carved out of onyxa, far too delicate to eat with."
 	icon_state = "fork_onyxa"
 	grid_height = 32
 	grid_width = 32
@@ -481,7 +481,7 @@
 
 /obj/item/carvedgem/onyxa/spoon
 	name = "onyxa spoon"
-	desc = "a spoon carved out of onyxa, far too delicate to eat with."
+	desc = "A spoon carved out of onyxa, far too delicate to eat with."
 	icon_state = "spoon_onyxa"
 	grid_height = 32
 	grid_width = 32
@@ -603,7 +603,7 @@
 
 /obj/item/carvedgem/turq
 	name = "ceruleabaster base"
-	desc = "if you are seeing this, its a bug, report it to coders"
+	desc = "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_turq.dmi'
 	icon_state = "cutgem_turq"
 	grid_height = 32
@@ -731,7 +731,7 @@
 
 /obj/item/carvedgem/turq/ka
 	name = "ceruleabaster ka statue"
-	desc = "A large carving of a ka spirit from Lakkarian myth. Believed to help guide the recently parted to Necras domain."
+	desc = "A large carving of a ka spirit from Lakkarian myth. Believed to help guide the recently parted to Necra's domain."
 	icon_state = "ka_turq"
 	grid_height = 64
 	grid_width = 32
@@ -750,7 +750,7 @@
 
 /obj/item/carvedgem/coral
 	name = "aoetal base"
-	desc = "if you are seeing this, its a bug, report it to coders"
+	desc = "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_coral.dmi'
 	icon_state = "cutgem_coral"
 	grid_height = 32
@@ -896,7 +896,7 @@
 
 /obj/item/carvedgem/amber
 	name = "petriamber base"
-	desc = "if you are seeing this, its a bug, report it to coders"
+	desc = "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_amber.dmi'
 	icon_state = "cutgem_amber"
 	grid_height = 32
@@ -904,7 +904,7 @@
 
 /obj/item/carvedgem/amber/cutgem
 	name = "cut petriamber gem"
-	desc = "a cut and polished piece of petriamber."
+	desc = "A cut and polished piece of petriamber."
 	icon_state = "cutgem_amber"
 	grid_height = 32
 	grid_width = 32
@@ -928,7 +928,7 @@
 
 /obj/item/carvedgem/amber/cameo
 	name = "petriamber cameo"
-	desc = "A cameo carved out of petriamber depicting...someone? Use your imagination on who it could be.."
+	desc = "A cameo carved out of petriamber depicting... someone? Use your imagination on who it could be..."
 	icon_state = "cameo_amber"
 	grid_height = 32
 	grid_width = 32
@@ -1024,7 +1024,7 @@
 
 /obj/item/carvedgem/amber/beaver
 	name = "petriamber beaver statue"
-	desc = "A medium sized carving of a beaver made out of petriamber. Beavers known to build dams and congregate around shipwrecks. Some sailors consider them to be a bad omen."
+	desc = "A medium-sized carving of a beaver made out of petriamber. Beavers known to build dams and congregate around shipwrecks. Some sailors consider them to be a bad omen."
 	icon_state = "beaver_amber"
 	grid_height = 64
 	grid_width = 64
@@ -1042,7 +1042,7 @@
 
 /obj/item/carvedgem/opal
 	name = "opaloise base"
-	desc = "if you are seeing this, its a bug, report it to coders"
+	desc = "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_opal.dmi'
 	icon_state = "cutgem_opal"
 	grid_height = 32
@@ -1073,8 +1073,8 @@
 	sellprice = 85
 
 /obj/item/carvedgem/opal/cameo
-	name = "opaloise spoon"
-	desc = "A cameo carved out of shell depicting...someone? Use your imagination on who it could be."
+	name = "opaloise cameo"
+	desc = "A cameo carved out of opaloise depicting...someone? Use your imagination on who it could be."
 	icon_state = "cameo_opal"
 	grid_height = 32
 	grid_width = 32
@@ -1154,7 +1154,7 @@
 
 /obj/item/carvedgem/opal/statue
 	name = "opaloise statue"
-	desc = "A statue  carved out of opaloise."
+	desc = "A statue carved out of opaloise."
 	icon_state = "statue_opal"
 	grid_height = 64
 	grid_width = 32
@@ -1170,7 +1170,7 @@
 
 /obj/item/carvedgem/opal/crab
 	name = "opaloise crab sculpture"
-	desc = "A large sculpture of a crab carved out of opaloise. Don't stick your fingers in its pincers, thats a terrible idea."
+	desc = "A large sculpture of a crab carved out of opaloise. Don't stick your fingers in its pincers, that's a terrible idea."
 	icon_state = "crab_opal"
 	grid_height = 64
 	grid_width = 64

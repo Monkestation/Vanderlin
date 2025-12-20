@@ -37,6 +37,15 @@
 	)
 
 
+//Adventurer's belt start with a needle, cloth and just that, good luck buddy
+
+/obj/item/storage/belt/leather/adventurer
+	populate_contents = list(
+		/obj/item/needle/thorn,
+		/obj/item/natural/cloth,
+	)
+
+
 //Garrison's belt starts with a simple needle, and a key to their hideout.
 
 /obj/item/storage/belt/leather/fgarrison
@@ -114,6 +123,21 @@
 	if(do_after(user, 1.5 SECONDS, src))
 		qdel(src)
 		user.put_in_active_hand(new salvage_result(get_turf(user)))
+
+/obj/item/storage/belt/leather/rope/dark
+	color = "#505050"
+
+/obj/item/storage/belt/leather/suspenders
+	name = "suspenders"
+	desc = "A pair of suspenders which go over the shoulders. Used for keeping one's pants in place in an admittably fashionable style."
+	icon_state = "suspenders"
+	alternate_worn_layer = ARMOR_LAYER
+
+/obj/item/storage/belt/leather/cloth_belt
+	name = "cloth belt"
+	desc = "This belt has been sewn out of cloth, as opposed to tied. Which makes it superior. Obviously."
+	icon_state = "clothsash"
+	salvage_result = /obj/item/natural/cloth
 
 /obj/item/storage/belt/leather/cloth
 	name = "cloth sash"
@@ -219,6 +243,7 @@
 	name = "cloth pouch"
 	desc = "Usually used for holding small amount of coins."
 	icon_state = "clothpouch"
+	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/coin_pouch/cloth
 
 //Poison darts pouch
@@ -245,12 +270,12 @@
 	alternate_worn_layer = UNDER_CLOAK_LAYER
 	component_type = /datum/component/storage/concrete/grid/satchel
 
-
 /obj/item/storage/backpack/satchel/cloth
 	name = "cloth knapsack"
 	desc = "A rudimentary cloth sack strapped to the back for storing small amounts of items."
 	icon_state = "clothbackpack"
 	item_state = "clothbackpack"
+	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth
 
 /obj/item/storage/backpack/satchel/heartfelt
@@ -259,7 +284,13 @@
 		/obj/item/paper/heartfelt,
 	)
 
-/obj/item/storage/backpack/satchel/mule/PopulateContents()
+/obj/item/storage/backpack/satchel/otavan
+	name = "grenzelhoftian leather satchel"
+	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
+	icon_state = "osatchel"
+	item_state = "osatchel"
+
+/obj/item/storage/backpack/satchel/mule/populate_contents()
 	for(var/i in 1 to 3)
 		switch(rand(1,4))
 			if(1)
@@ -357,6 +388,13 @@
 		/obj/item/natural/worms/leech,
 		/obj/item/weapon/surgery/hammer,
 		/obj/item/natural/bundle/fibers/full,
+	)
+
+/obj/item/storage/backpack/satchel/musketeer
+	populate_contents = list(
+		/obj/item/weapon/knife/dagger/bayonet,
+		/obj/item/storage/belt/pouch/coins/poor,
+		/obj/item/reagent_containers/glass/bottle/aflask
 	)
 
 /obj/item/storage/belt/leather/knifebelt
