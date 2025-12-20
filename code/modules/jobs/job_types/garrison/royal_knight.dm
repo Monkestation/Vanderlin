@@ -29,32 +29,6 @@
 		EXP_TYPE_COMBAT = 1200
 	)
 
-/datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
-
-	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
-		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Sir"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Dame"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
-/datum/job/advclass/royalknight
-	inherit_parent_title = TRUE
-	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
-
-/datum/job/advclass/royalknight
-	title = "Royal Knight"
-	tutorial = "The classic Knight in shining armor. Slightly more skilled then their Steam counterpart but has worse armor."
-
-	outfit = /datum/outfit/royalknight/knight
-
-	category_tags = list(CTAG_ROYALKNIGHT)
 	jobstats = list(
 		STATKEY_STR = 3,
 		STATKEY_PER = 2,
@@ -88,6 +62,25 @@
 		TRAIT_NOBLE
 	)
 
+/datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.verbs |= /mob/proc/haltyell
+
+	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
+		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
+
+	var/prev_real_name = spawned.real_name
+	var/prev_name = spawned.name
+	var/honorary = "Sir"
+	if(spawned.pronouns == SHE_HER)
+		honorary = "Dame"
+	spawned.real_name = "[honorary] [prev_real_name]"
+	spawned.name = "[honorary] [prev_name]"
+
+/datum/job/advclass/royalknight
+	inherit_parent_title = TRUE
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+
 /datum/job/advclass/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	select_knight_specialization(spawned)
@@ -103,10 +96,6 @@
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
 	backpack_contents = list(/obj/item/storage/keyring/manorguard = 1)
-
-/datum/job/advclass/royalknight
-	inherit_parent_title = TRUE
-	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/royalknight/knight
 	title = "Royal Knight"
