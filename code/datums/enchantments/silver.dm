@@ -14,8 +14,8 @@
 
 /datum/enchantment/silver/register_triggers(atom/item)
 	. = ..()
-	registered_signals += COMSIG_ITEM_AFTERATTACK
-	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+	registered_signals += COMSIG_ITEM_ATTACK
+	RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
 	registered_signals += COMSIG_ITEM_PICKUP
 	RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
@@ -36,7 +36,7 @@
 	return UNAFFECTED
 
 /datum/enchantment/silver/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
-	if(!proximity_flag)
+	if(!user.CanReach(target))
 		return
 	if(!ishuman(target))
 		return

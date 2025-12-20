@@ -13,15 +13,19 @@
 	minor_roleset = TRUE
 
 	needed_job = list(
-		"Consort",
-		"Hand",
-		"Prince",
-		"Captain",
-		"Steward",
-		"Court Magician",
-		"Court Physician",
-		"Archivist",
-		"Noble"
+		/datum/job/consort,
+		/datum/job/hand,
+		/datum/job/prince,
+		/datum/job/captain,
+		/datum/job/steward,
+		/datum/job/magician,
+		/datum/job/courtphys,
+		/datum/job/archivist,
+		/datum/job/minor_noble,
+	)
+
+	restricted_roles = list(
+		/datum/job/lord,
 	)
 
 	base_antags = 1
@@ -52,26 +56,40 @@
 /datum/round_event/antagonist/solo/aspirant/start()
 	. = ..()
 
-	var/list/helping = list("Consort", "Hand", "Prince", "Captain", "Steward", "Court Magician", "Court Physician", "Archivist", "Noble", "Jester", "Dungeoneer", "Men-at-arms", "Gatemaster", "Butler", "Servant")
+	var/static/list/helping = list(
+		/datum/job/consort,
+		/datum/job/hand,
+		/datum/job/prince,
+		/datum/job/captain,
+		/datum/job/steward,
+		/datum/job/magician,
+		/datum/job/courtphys,
+		/datum/job/archivist,
+		/datum/job/minor_noble,
+		/datum/job/jester,
+		/datum/job/dungeoneer,
+		/datum/job/men_at_arms,
+		/datum/job/gatemaster,
+		/datum/job/butler,
+		/datum/job/servant,
+	)
 	var/list/possible_helpers = list()
 
-	for(var/mob/living/living in GLOB.human_list)
-		if(!living.client)
+	for(var/mob/living/carbon/human/helper in GLOB.player_list)
+		if(!helper.client || !helper.mind)
 			continue
-		if(is_banned_from(living.client.ckey, ROLE_ASPIRANT))
+		if(is_banned_from(helper.client.ckey, ROLE_ASPIRANT))
 			continue
-		if(!(living.mind?.assigned_role.title in helping))
+		if(!is_type_in_list(helper.mind.assigned_role, helping))
 			continue
-		if(living.mind in setup_minds)
+		if(helper.mind in setup_minds)
 			continue
-		possible_helpers |= living
+		possible_helpers |= helper
 
 	var/num_helpers = min(rand(1, 3), length(possible_helpers))
 
 	for(var/i in 1 to num_helpers)
 		var/mob/living/helper = pick_n_take(possible_helpers)
-		if(!helper?.mind)
-			continue
 		helper.mind.add_antag_datum(/datum/antagonist/aspirant/supporter)
 
 	if(SSticker.rulermob?.mind)

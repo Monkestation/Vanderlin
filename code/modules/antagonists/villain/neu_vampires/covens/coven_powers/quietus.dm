@@ -215,14 +215,6 @@
 	. = ..()
 	owner.add_spell(/datum/action/cooldown/spell/projectile/acid_splash/quietus, TRUE)
 
-/datum/action/cooldown/spell/projectile/acid_splash/quietus
-	projectile_type = /obj/projectile/magic/acidsplash/quietus
-
-/obj/projectile/magic/acidsplash/quietus
-	damage = 80
-	flag = "magic"
-	speed = 2
-
 //DAGON'S CALL
 /datum/coven_power/quietus/dagons_call
 	name = "Dagon's Call"

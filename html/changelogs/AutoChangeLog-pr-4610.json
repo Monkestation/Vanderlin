@@ -1,0 +1,1 @@
+{"author":"Rockslp","delete-after":true,"changes":[{"balance":"Removed the bonus damage from Bearded Axe and lowers the defense value to make sense, leaving the greater weapon length due to the small log in the crafting recipe"},{"spellcheck":"Uppercase for Bearded Axe in the smithing menu."},{"code_imp":"Moved the Bearded Axe to axes.dm"}]}

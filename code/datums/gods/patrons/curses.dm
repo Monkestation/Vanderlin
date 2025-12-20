@@ -188,7 +188,7 @@
 		if(2)
 			owner.Unconscious(20)
 		if(3)
-			owner.blur_eyes(10)
+			owner.set_eye_blur_if_lower(20 SECONDS)
 		if(4)
 			var/obj/item/bodypart/BP = pick(owner.bodyparts)
 			BP.rotted = TRUE
