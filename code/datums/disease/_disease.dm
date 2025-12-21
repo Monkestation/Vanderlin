@@ -49,7 +49,7 @@
 	/// Is the host a carrier
 	var/carrier = FALSE
 	/// Does it skip species disease immunity check? Some things may diseases and not viruses
-	var/bypasses_immunity = FALSE 
+	var/bypasses_immunity = FALSE
 	/// Severity of the disease
 	var/severity = DISEASE_SEVERITY_NONTHREAT
 	/// If the disease requires an organ for the effects to function, robotic organs are immune to disease unless inorganic biology symptom is present
@@ -60,6 +60,8 @@
 	var/process_dead = FALSE
 	/// Modifier to spreading chance
 	var/spreading_modifier = 1
+	/// List of humors associated with this disease
+	var/list/humors = list()
 
 /datum/disease/New()
 	viable_mobtypes = typecacheof(viable_mobtypes)
@@ -195,7 +197,7 @@
 			else
 				cycles_to_beat = max(DISEASE_RECOVERY_SCALING, DISEASE_CYCLES_NONTHREAT)
 
-		peaked_cycles += stage/max_stages //every cycle we spend sick counts towards eventually curing the disease, faster at higher stages
+		peaked_cycles += stage / max_stages //every cycle we spend sick counts towards eventually curing the disease, faster at higher stages
 		recovery_prob += DISEASE_RECOVERY_CONSTANT + (peaked_cycles / (cycles_to_beat / DISEASE_RECOVERY_SCALING)) //more severe viruses are beaten back more aggressively after the peak
 
 		if(stage_peaked)
@@ -352,17 +354,17 @@
 		return FALSE
 
 	var/obj/item/organ/target_organ = target.getorganslot(required_organ_slot)
-	
+
 	if(!istype(target_organ))
 		return FALSE
 
 	return TRUE
 
 /// Handles spreading via air when our mob breathes
-/datum/disease/proc/on_breath(datum/source, seconds_per_tick, ...)
+/datum/disease/proc/on_breath(datum/source)
 	SIGNAL_HANDLER
 
-	if(SPT_PROB(infectivity * 4, seconds_per_tick))
+	if(prob(infectivity * 4))
 		airborne_spread()
 
 //Use this to compare severities

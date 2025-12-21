@@ -1032,6 +1032,7 @@
 #include "code\datums\components\unusual_effects\sparkle.dm"
 #include "code\datums\debug\path_debug.dm"
 #include "code\datums\disease\_disease.dm"
+#include "code\datums\disease\_humors.dm"
 #include "code\datums\disease\disease_mob_procs.dm"
 #include "code\datums\disease\diseases\lycanthropy.dm"
 #include "code\datums\dungeon_generator\dungeon_decent.dm"

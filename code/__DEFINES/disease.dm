@@ -117,7 +117,12 @@ DEFINE_BITFIELD(spread_flags, list(
 #define DISEASE_MINIMUM_CHEMICAL_CURE_CHANCE 5
 
 // Humors
-#define HUMOR_YELLOW_BILE "Yellow Bile"
-#define HUMOR_BLACK_BILE "Black Bile"
-#define HUMOR_PHLEGM "Phlegm"
-#define HUMOR_BLOOD "Blood"
+#define HUMOR_BLOOD "Sanguine" // warm and moist
+#define HUMOR_YELLOW_BILE "Choleric" // warm and dry
+#define HUMOR_PHLEGM "Phlegmatic" // cold and moist
+#define HUMOR_BLACK_BILE "Malancholic" // cold and dry
+
+#define HUMOR_DRY "Dry"
+#define HUMOR_WARM "Warm"
+#define HUMOR_WET "Wet"
+#define HUMOR_COLD "COLD"

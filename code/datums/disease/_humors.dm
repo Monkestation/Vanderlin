@@ -1,0 +1,129 @@
+/**
+ * The humors, vital building blocks of the humen body.
+ *
+ * Used as a component of diseases to cause different effects or even cure them, if they are balanced.
+ */
+/datum/humor
+	// Fluff
+	var/name = ""
+	var/special_name = ""
+	var/season = ""
+	var/element = ""
+	/// Ages that are more affected
+	var/list/ages = list()
+	/// Selection of "Cold" "Dry" "Warm" "Moist" used for temperature/clothes wetness checks
+	var/list/temperaments = list()
+	/// Associated organ to check
+	var/obj/item/organ/associated_organ = null
+
+/// Warm humors are made worse by cold conditions and viceaversa
+/// Dry humors are made worse by wet conditions and viceaversa
+/datum/humor/proc/temperament_modifier(mob/living/effecting)
+	// Below 1 = bad, Above 1 = good
+	var/temperature_mod = 1
+	var/wetness_mod = 1
+
+	var/temperature = effecting.bodytemperature
+	var/difference = temperature - BODYTEMP_NORMAL
+
+	var/number_wet_items = 0
+
+	if(iscarbon(effecting))
+		var/mob/living/carbon/carbon_effecting = effecting
+		for(var/obj/item/clothing/clothing in carbon_effecting.get_equipped_items(include_pockets = TRUE))
+			var/datum/wet/wet_datum = clothing.wet
+			if(!wet_datum)
+				continue
+			if(wet_datum.water_stacks > 0)
+				number_wet_items++
+
+	// This is going to be disgusting
+	for(var/temperament in temperaments)
+		switch(temperament)
+			if(HUMOR_WARM)
+				if(temperature > BODYTEMP_NORMAL)
+					if(difference > 15)
+						temperature_mod *= 0.7
+					else if(difference >= 10)
+						temperature_mod *= 1.2
+					else if(difference >= 5)
+						temperature_mod *= 1.5
+				else // Colder
+					if(difference < -10)
+						temperature_mod *= 0.6
+					else
+						temperature_mod *= 0.4
+
+			if(HUMOR_COLD)
+				if(temperature < BODYTEMP_NORMAL)
+					if(difference < -15)
+						temperature_mod *= 0.7
+					else if(difference <= -10)
+						temperature_mod *= 1.2
+					else if(difference <= -5)
+						temperature_mod *= 1.5
+				else // Hotter
+					if(difference > 10)
+						temperature_mod *= 0.6
+					else
+						temperature_mod *= 0.4
+
+			if(HUMOR_DRY)
+				if(number_wet_items <= 0)
+					wetness_mod *= 1.4
+				else
+					wetness_mod *= (1 / number_wet_items)
+
+			if(HUMOR_WET)
+				if(number_wet_items <= 0)
+					wetness_mod *= 0.6
+				else
+					wetness_mod *= 1 + (1 / number_wet_items)
+
+	var/datum/particle_weather/running = SSParticleWeather.runningWeather
+	if(running && istype(running, /datum/particle_weather/rain))
+		if(running.can_weather(effecting))
+			wetness_mod *= 1.5
+
+	var/final_mod = 1 * temperature_mod * (wetness_mod * 0.7)
+
+	return final_mod
+
+/datum/humor/proc/recovery_prob_mod(datum/disease/disease, mob/living/effecting)
+	return temperament_modifier(effecting)
+
+/datum/humor/blood
+	name = HUMOR_BLOOD
+	special_name = "Blood"
+	season = "Spring"
+	element = "Air"
+	ages = list(AGE_CHILD)
+	temperaments = list(HUMOR_WARM, HUMOR_WET)
+	associated_organ = /obj/item/organ/liver
+
+/datum/humor/yellow_bile
+	name = HUMOR_YELLOW_BILE
+	special_name = "Yellow Bile"
+	season = "Summer"
+	element = "Fire"
+	ages = list(AGE_ADULT)
+	temperaments = list(HUMOR_WARM, HUMOR_DRY)
+	associated_organ = /obj/item/organ/stomach // Good enough
+
+/datum/humor/black_bile
+	name = HUMOR_BLACK_BILE
+	special_name = "Black Bile"
+	season = "Autumn"
+	element = "Earth"
+	ages = list(AGE_ADULT, AGE_MIDDLEAGED)
+	temperaments = list(HUMOR_COLD, HUMOR_DRY)
+	associated_organ = /obj/item/organ/guts
+
+/datum/humor/phlegm
+	name = HUMOR_PHLEGM
+	special_name = "Phlegm"
+	season = "Winter"
+	element = "Water"
+	ages = list(AGE_OLD, AGE_IMMORTAL)
+	temperaments = list(HUMOR_COLD, HUMOR_WET)
+	associated_organ = /obj/item/organ/lungs
