@@ -1,4 +1,3 @@
-//dwarf, master mason
 
 /datum/job/mason
 	title = "Mason"
