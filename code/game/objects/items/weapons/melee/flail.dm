@@ -112,6 +112,12 @@
 	max_integrity = INTEGRITY_STRONGEST
 	sellprice = 35
 
+/obj/item/weapon/flail/sflail/ancient
+	force = DAMAGE_GOOD_FLAIL
+	name = "ancient flail"
+	desc = "An ancient knightly flail made of worked steel, with a flanged head. An effective and brutal design."
+	icon_state = "aflail"
+
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"
 	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of The Ten left."

@@ -167,7 +167,7 @@
 		TRAIT_SEEPRICES,
 	)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_hand
 	shirt = /obj/item/clothing/shirt/undershirt
@@ -454,7 +454,7 @@
 	)
 
 	traits = list(TRAIT_SEEPRICES)
-	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_artificer
 	head = /obj/item/clothing/head/articap

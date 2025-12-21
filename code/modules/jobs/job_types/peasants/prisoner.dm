@@ -13,7 +13,6 @@
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 2
-	min_pq = -100
 	can_random = FALSE
 	banned_leprosy = FALSE
 	bypass_lastclass = TRUE

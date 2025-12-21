@@ -6,10 +6,16 @@
 
 	associated_skill = /datum/skill/misc/music
 
-	charge_required = FALSE
-	spell_type = NONE
-	cooldown_time = 1 MINUTES
 	invocation_type = INVOCATION_SHOUT
+	invocation = "Let fortune favour the bold!"
+
+	spell_type = NONE
+	associated_skill = /datum/skill/misc/music
+	associated_stat = STATKEY_INT
+
+	charge_required = FALSE
+	cooldown_time = 1 MINUTES
+
 	has_visual_effects = FALSE
 
 /datum/action/cooldown/spell/bardic_inspiration/is_valid_target(atom/cast_on)
@@ -23,11 +29,9 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 
-	var/message
+	var/message = initial(invocation)
 
-	if(owner.cmode && ishuman(owner))
-		message = "Let fortune favour the bold!"
-	else
+	if(!owner.cmode && ishuman(owner))
 		message = browser_input_text(owner, "How will I inspire this fellow?", "XYLIX")
 		if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 			return . | SPELL_CANCEL_CAST

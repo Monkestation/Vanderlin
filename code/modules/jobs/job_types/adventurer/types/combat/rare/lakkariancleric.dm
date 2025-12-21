@@ -7,7 +7,7 @@
 	roll_chance = 25
 	total_positions = 2
 
-	exp_types_granted  = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
 /datum/outfit/adventurer/lakkariancleric/pre_equip(mob/living/carbon/human/H)
 	..()

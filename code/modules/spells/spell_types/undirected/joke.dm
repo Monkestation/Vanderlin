@@ -5,8 +5,12 @@
 	antimagic_flags = NONE
 
 	invocation_type = INVOCATION_SHOUT
+	invocation = "Death will be laughing in the end."
 
 	spell_type = NONE
+	associated_skill = null
+	associated_stat = STATKEY_INT
+
 	charge_required = FALSE
 	sound = null
 	has_visual_effects = FALSE
@@ -19,9 +23,11 @@
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
+
 	message = browser_input_text(owner, "Say something funny!", "XLYIX")
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
+
 	if(!message)
 		reset_cooldown()
 		return . | SPELL_CANCEL_CAST

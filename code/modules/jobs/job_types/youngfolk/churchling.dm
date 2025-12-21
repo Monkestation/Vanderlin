@@ -10,7 +10,6 @@
 	faction = FACTION_TOWN
 	total_positions = 2
 	spawn_positions = 2
-	min_pq = -10
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_CHILD)
@@ -22,7 +21,7 @@
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CHURCH
-	exp_types_granted  = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
+	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
 /datum/outfit/churchling
 	name = "Churchling"

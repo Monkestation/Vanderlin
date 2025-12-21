@@ -64,6 +64,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		return
 
 	msg = emoji_parse(msg)
+	msg = parsemarkdown_basic(msg, limited = TRUE, barebones = TRUE)
 
 
 	if(!holder)
@@ -382,7 +383,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		return TRUE
 
 	// staff/donators can choose whatever pronouns they want given, you know, we trust them to use them like a normal person
-	if (usr && is_admin(usr) || patreon.is_donator())
+	if (usr && is_admin(usr) || patreon.is_donator() || twitch.is_donator())
 		return TRUE
 
 	var/pronouns = splittext(value, "/")

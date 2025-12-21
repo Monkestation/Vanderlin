@@ -87,3 +87,17 @@
 	node_tier = 2
 	node_purity_min = 30
 	node_purity_max = 55
+
+/datum/chimeric_table/putrid
+	name = "Putrid"
+	compatible_blood_types = list(
+		/datum/blood_type/putrid,
+	)
+	preferred_blood_types = list(
+		/datum/blood_type/putrid,
+	)
+	incompatible_blood_types = list()
+	base_blood_cost = 0.3
+	node_tier = 3
+	node_purity_min = 0
+	node_purity_max = 120
