@@ -29,20 +29,17 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/sewing = 1,
-		/datum/skill/craft/cooking = 1,
-
+	/datum/skill/combat/axesmaces = 2,
+	/datum/skill/labor/mining = 3,
+	/datum/skill/combat/wrestling = 1,
+	/datum/skill/combat/unarmed = 1,
+	/datum/skill/craft/crafting = 3,
+	/datum/skill/craft/masonry = 4,
+	/datum/skill/craft/engineering = 1,
+	/datum/skill/misc/swimming = 2,
+	/datum/skill/misc/climbing = 3,
+	/datum/skill/misc/athletics = 3,
+	/datum/skill/misc/reading = 1,
 	)
 
 /datum/job/mason/after_spawn(mob/living/carbon/human/spawned, client/player_client)
