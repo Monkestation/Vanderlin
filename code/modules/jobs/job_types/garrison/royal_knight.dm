@@ -97,6 +97,11 @@
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
 	backpack_contents = list(/obj/item/storage/keyring/manorguard = 1)
 
+/datum/outfit/royalknight/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
+	. = ..()
+	if(H.cloak && !findtext(H.cloak.name, "([H.real_name])"))
+		H.cloak.name = "[H.cloak.name] ([H.real_name])"
+
 /datum/job/advclass/royalknight/knight
 	title = "Royal Knight"
 	tutorial = "The classic Knight in shining armor. Slightly more skilled then their Steam counterpart but has worse armor."
@@ -109,11 +114,6 @@
 	head = /obj/item/clothing/head/helmet/visored/royalknight
 	gloves = /obj/item/clothing/gloves/plate
 	shoes = /obj/item/clothing/shoes/boots/armor
-
-/datum/outfit/royalknight/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
-	. = ..()
-	if(H.cloak && !findtext(H.cloak.name, "([H.real_name])"))
-		H.cloak.name = "[H.cloak.name] ([H.real_name])"
 
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"
