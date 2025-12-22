@@ -41,7 +41,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	)
 
 
-/datum/job/lord/get_informed_title(mob/mob, change_title = FALSE, new_title)
+/datum/job/lord/get_informed_title(mob/mob, ignore_pronouns, change_title = FALSE, new_title)
 	if(change_title)
 		ruler_title = new_title
 		return "[ruler_title]"

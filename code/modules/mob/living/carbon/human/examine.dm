@@ -40,35 +40,44 @@
 		user.add_stress(/datum/stress_event/saw_old_party)
 
 /mob/living/carbon/human/examine(mob/user)
-	var/ignore_pronouns = FALSE
-	if(user != src && !user.mind?.do_i_know(null, real_name))
-		ignore_pronouns = TRUE
-	//this is very slightly better than it was because you can use it more places. still can't do \his[src] though.
-	var/t_He = p_they(TRUE, ignore_pronouns = ignore_pronouns)
-	var/t_his = p_their(ignore_pronouns = ignore_pronouns)
-	var/t_has = p_have(ignore_pronouns = ignore_pronouns)
-	var/t_is = p_are(ignore_pronouns = ignore_pronouns)
-	var/obscure_name
-	var/race_name = dna?.species.name
 	var/self_inspect = FALSE
+	if(user == src)
+		self_inspect = TRUE
+
+	var/temp_gender = null
+	var/obscure_name = FALSE
+	var/ignore_pronouns = FALSE
+	if(!self_inspect && !isobserver(user))
+		if(name != get_visible_name())
+			obscure_name = TRUE
+			temp_gender = PLURAL
+		if(obscure_name || !user.mind?.do_i_know(name = real_name)) // If you don't know someone use their bodytype
+			ignore_pronouns = TRUE
+
+	var/race_name = dna?.species.name
 	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
-	if(maniac && (user != src))
+	if(!self_inspect && maniac)
 		race_name = "disgusting pig"
 
-	var/m1 = "[t_He] [t_is]"
-	var/m2 = "[t_his]"
-	var/m3 = "[t_He] [t_has]"
-	. = list()
-	if(user == src)
+	var/t_He = p_they(TRUE, temp_gender, ignore_pronouns)
+	var/t_his = p_their(FALSE, temp_gender, ignore_pronouns)
+	var/t_has = p_have(temp_gender, ignore_pronouns)
+	var/t_is  = p_are(temp_gender, ignore_pronouns)
+
+	var/m1
+	var/m2
+	var/m3
+
+	if(!self_inspect)
+		m1 = "[t_He] [t_is]"
+		m2 = "[t_his]"
+		m3 = "[t_He] [t_has]"
+	else
 		m1 = "I am"
 		m2 = "my"
 		m3 = "I have"
 
-	if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
-		obscure_name = TRUE
-
-	if(isobserver(user))
-		obscure_name = FALSE
+	. = list()
 
 	/// header
 	. += span_info("ø ------------ ø")
@@ -82,9 +91,8 @@
 		var/used_name = name
 		if(isobserver(user))
 			used_name = real_name
-		if(user == src)
-			self_inspect = TRUE
-		var/used_title = get_role_title()
+
+		var/used_title = get_role_title(ignore_pronouns)
 
 		// building the examine identity
 		statement_of_identity += "<EM>[used_name]</EM>"
@@ -92,8 +100,8 @@
 		var/appendage_to_name
 		if(race_name) // race name
 			appendage_to_name += " [race_name]"
-// job name, don't show job of foreigners.
 
+		// job name, don't show job of foreigners.
 		if(used_title && !HAS_TRAIT(src, TRAIT_FACELESS) && (!HAS_TRAIT(src, TRAIT_FOREIGNER) || HAS_TRAIT(src, TRAIT_RECRUITED) || HAS_TRAIT(src, TRAIT_RECOGNIZED)))
 			appendage_to_name += ", [used_title]"
 
@@ -312,7 +320,7 @@
 		. += "[m3] [gloves.get_examine_string(user)] on [m2] hands."
 	else if(GET_ATOM_BLOOD_DNA_LENGTH(src))
 		if(num_hands)
-			. += span_warning("[t_He] [t_has] [num_hands > 1 ? "" : "a"] blood-stained hand[num_hands > 1 ? "s" : ""]!")
+			. += span_warning("[m3] [num_hands > 1 ? "" : "a"] blood-stained hand[num_hands > 1 ? "s" : ""]!")
 
 	//belt
 	if(belt && !(obscured & ITEM_SLOT_BELT))
@@ -464,11 +472,6 @@
 	var/list/msg_list = list()
 	if(nutrition < (NUTRITION_LEVEL_STARVING - 50))
 		msg_list += "[m1] looking emaciated."
-//	else if(nutrition >= NUTRITION_LEVEL_FAT)
-//		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
-//			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy."
-//		else
-//			msg += "[t_He] [t_is] quite chubby."
 	if(HAS_TRAIT(user, TRAIT_EXTEROCEPTION))
 		switch(nutrition)
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)

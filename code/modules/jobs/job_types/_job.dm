@@ -572,15 +572,16 @@
 /datum/job/proc/remove_spells(mob/living/equipped_human)
 	equipped_human.remove_spells(source = src)
 
-/datum/job/proc/get_informed_title(mob/mob)
+/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
 	if(mob.admin_title)
 		return mob.admin_title
 
 	if(title_override)
 		return title_override
 
-	if(mob.pronouns == SHE_HER && f_title)
-		return f_title
+	if(f_title)
+		if(ignore_pronouns && mob.gender == FEMALE || !ignore_pronouns && mob.pronouns == SHE_HER)
+			return f_title
 
 	return title
 
