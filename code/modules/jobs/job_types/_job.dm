@@ -280,7 +280,7 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
-	if(!parent_job) // Prevent the advclass job removing the parent job given stats.
+	if(!parent_job) // Prevent the advclass job from removing the parent job stats.
 		spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
 	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
 
