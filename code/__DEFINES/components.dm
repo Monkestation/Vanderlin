@@ -175,6 +175,8 @@
 #define COMSIG_ITEM_DROPPED "item_drop"
 ///from base of obj/item/pickup(): (/mob/taker)
 #define COMSIG_ITEM_PICKUP "item_pickup"
+///from base of obj/item/afterpickup(): (/mob/taker)
+#define COMSIG_ITEM_AFTER_PICKUP "item_after_pickup"
 ///from base of mob/living/carbon/attacked_by(): (mob/living/carbon/target, mob/living/user, hit_zone)
 #define COMSIG_ITEM_ATTACK_ZONE "item_attack_zone"
 ///from base of obj/item/hit_reaction(): (list/args)

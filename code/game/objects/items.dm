@@ -828,14 +828,20 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+
 	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
+
 	item_flags |= IN_INVENTORY
 
 // called just after an item is successfully picked up (loc has changed)
 /obj/item/proc/afterpickup(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+
+	SEND_SIGNAL(src, COMSIG_ITEM_AFTER_PICKUP, user)
+
 	if(isliving(user))
-		user:encumbrance_to_speed()
+		var/mob/living/L = user
+		L.encumbrance_to_speed()
 
 /obj/item/proc/afterdrop(mob/user)
 

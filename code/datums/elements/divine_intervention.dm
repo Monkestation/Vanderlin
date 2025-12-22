@@ -14,11 +14,11 @@
 	src.allows_pantheon = allows_pantheon
 	src.stress_event = stress_event
 	src.sets_alight = sets_alight
-	RegisterSignal(target, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
+	RegisterSignal(target, COMSIG_ITEM_AFTER_PICKUP, PROC_REF(on_pickup))
 
 /datum/element/divine_intervention/Detach(obj/item/item)
 	. = ..()
-	UnregisterSignal(item, COMSIG_ITEM_PICKUP)
+	UnregisterSignal(item, COMSIG_ITEM_AFTER_PICKUP)
 
 /datum/element/divine_intervention/proc/on_pickup(obj/item/source, mob/user)
 	SIGNAL_HANDLER
@@ -42,7 +42,15 @@
 		mob.add_stress(/datum/stress_event/divine_punishment)
 
 	if(sets_alight && punishment >= PUNISHMENT_BURN)
-		to_chat(mob, span_warning("[patron.name] spurns me for touching their sacred item, \the [source]!"))
-		mob.adjust_fire_stacks(4)
-		mob.IgniteMob()
-		mob.drop_all_held_items()
+		to_chat(mob, "[span_cult(patron.name)] bellows, [span_userdanger("Drop it.")]")
+		addtimer(CALLBACK(src, PROC_REF(immolation), source, user), 3 SECONDS)
+
+/datum/element/divine_intervention/proc/immolation(obj/item/holy, mob/living/cooked)
+	if(QDELETED(holy) || QDELETED(cooked))
+		return
+	if(holy.loc != cooked)
+		return
+	to_chat(cooked, span_warning("[patron.name] spurns me for holding their sacred item, \the [holy]!"))
+	cooked.adjust_divine_fire_stacks(5)
+	cooked.IgniteMob()
+	cooked.drop_all_held_items()
