@@ -18,7 +18,7 @@
 	item_duration = 0
 
 /datum/action/cooldown/spell/undirected/conjure_item/summon_trident/miracle
-	name = "Summon Trident"
+	name = "Summon Abyssal Trident"
 	desc = "Summon a trident from Abyssor's domain."
 	button_icon_state = "lightning"
 	sound = 'sound/foley/jumpland/waterland.ogg'

@@ -42,7 +42,7 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/ventriloquate
 
 /datum/outfit/jestertroupe
-	name = "Buffoon"
+	name = "Buffoon (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/jester
 	pants = /obj/item/clothing/pants/tights
 	armor = /obj/item/clothing/shirt/jester

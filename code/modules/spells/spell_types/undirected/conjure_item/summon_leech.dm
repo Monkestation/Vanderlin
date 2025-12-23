@@ -20,7 +20,7 @@
 	item_duration = 0
 
 /datum/action/cooldown/spell/undirected/conjure_item/summon_leech/pestra
-	name = "Summon Leech"
+	name = "Pestra's Leech"
 	desc = "Summon a leech by Pestra's will."
 	button_icon_state = "diagnose"
 

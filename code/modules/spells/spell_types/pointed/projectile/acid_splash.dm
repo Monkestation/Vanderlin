@@ -27,6 +27,11 @@
 	to_fire.aoe_range *= attuned_strength
 	to_fire.strength_modifier *= attuned_strength
 
+/datum/action/cooldown/spell/projectile/acid_splash/quietus
+	name = "Caustic Splash"
+
+	projectile_type = /obj/projectile/magic/acidsplash/quietus
+
 /obj/projectile/magic/acidsplash
 	name = "acid bubble"
 	icon_state = "acid_splash"
@@ -36,6 +41,9 @@
 	speed = 3
 	var/aoe_range = 1
 	var/strength_modifier = 1
+
+/obj/projectile/magic/acidsplash/quietus
+	damage = 80
 
 /obj/projectile/magic/acidsplash/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()

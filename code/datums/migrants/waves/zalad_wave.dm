@@ -60,7 +60,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/emir
-	name = "Zalad Emir"
+	name = "Zalad Emir (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	gloves = /obj/item/clothing/gloves/leather
 	head = /obj/item/clothing/head/crown/circlet
@@ -146,7 +146,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/amirah
-	name = "Zalad Amirah"
+	name = "Zalad Amirah (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	gloves = /obj/item/clothing/gloves/leather
 	head = /obj/item/clothing/head/crown/nyle
@@ -177,7 +177,7 @@
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_ZALADIN
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 3,
 		STATKEY_PER = 1,
@@ -225,7 +225,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/furusiyya
-	name = "Furusiyya"
+	name = "Furusiyya (Migrant Wave)"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	shoes = /obj/item/clothing/shoes/boots/rare/zaladplate
@@ -261,7 +261,7 @@
 	outfit = /datum/outfit/zalad_migration/zalad_guard
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_END = 2,
@@ -292,7 +292,7 @@
 
 /datum/job/migrant/zalad_migration/zalad_guard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1))
+	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1), TRUE)
 
 	if(spawned.dna?.species)
 		if(spawned.dna.species.id == SPEC_ID_HUMEN)
@@ -303,7 +303,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/zalad_guard
-	name = "Zalad Soldier"
+	name = "Zalad Soldier (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	head = /obj/item/clothing/head/helmet/sallet/zalad
 	gloves = /obj/item/clothing/gloves/angle
@@ -326,6 +326,7 @@
 	title = "Qatil"
 	tutorial = "You are the Amirah's confident and most loyal protector, you shan't let them die in these wretched lands."
 	outfit = /datum/outfit/zalad_migration/qatil
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	allowed_races = list(
 		SPEC_ID_HUMEN,
 		SPEC_ID_ELF,
@@ -378,7 +379,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/qatil
-	name = "Qatil"
+	name = "Qatil (Migrant Wave)"
 	pants = /obj/item/clothing/pants/trou/leather
 	beltr = /obj/item/weapon/knife/dagger/steel/special
 	shoes = /obj/item/clothing/shoes/shalal

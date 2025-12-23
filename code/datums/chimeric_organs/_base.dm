@@ -122,6 +122,12 @@
 /datum/chimeric_node/proc/check_active()
 	return
 
+/datum/chimeric_node/proc/removal_setup()
+	return
+
+/datum/chimeric_node/proc/final_setup()
+	return
+
 /datum/chimeric_node/proc/set_values(node_purity, tier)
 	src.node_purity = node_purity
 	src.tier = tier

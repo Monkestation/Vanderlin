@@ -1,5 +1,5 @@
 /datum/job/cheesemaker
-	title =  "Cheesemaker"
+	title = "Cheesemaker"
 	tutorial = "Some say Dendor brings bountiful harvests - this much is true, but rot brings forth life. \
 	From life brings decay, and from decay brings life. Like your father before you, you let milk rot into cheese. \
 	This is your duty, this is your call."
@@ -16,17 +16,27 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-/datum/outfit/cheesemaker/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
+	jobstats = list(
+		STATKEY_INT = 1,
+		STATKEY_CON = 2
+	)
+
+	skills = list(
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/labor/taming = 1,
+		/datum/skill/craft/cooking = 4,
+		/datum/skill/labor/farming = 2
+	)
+
+	traits = list()
+
+/datum/outfit/cheesemaker
+	name = "Cheesemaker"
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
@@ -37,6 +47,10 @@
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	beltr = /obj/item/reagent_containers/glass/bottle/waterskin/milk
 	beltl = /obj/item/weapon/knife/villager
-	backpack_contents = list(/obj/item/reagent_containers/powder/salt = 3, /obj/item/reagent_containers/food/snacks/cheddar = 1, /obj/item/natural/cloth = 2, /obj/item/book/yeoldecookingmanual = 1)
-	H.change_stat(STATKEY_INT, 1)
-	H.change_stat(STATKEY_CON, 2)
+
+	backpack_contents = list(
+		/obj/item/reagent_containers/powder/salt = 3,
+		/obj/item/reagent_containers/food/snacks/cheddar = 1,
+		/obj/item/natural/cloth = 2,
+		/obj/item/book/yeoldecookingmanual = 1
+	)
