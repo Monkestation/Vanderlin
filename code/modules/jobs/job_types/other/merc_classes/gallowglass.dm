@@ -47,3 +47,4 @@
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
 	pants = /obj/item/clothing/pants/skirt/patkilt/colored/blue
 	backl = /obj/item/weapon/sword/long/greatsword/steelclaymore
+	backr = /obj/item/storage/backpack/satchel
