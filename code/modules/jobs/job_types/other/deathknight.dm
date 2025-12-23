@@ -24,14 +24,11 @@
 		/datum/skill/misc/athletics = 3,
 	)
 
-	traits = list(
+/datum/job/skeleton/knight/New()
+	. = ..()
+	traits += list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_CRITICAL_WEAKNESS
-	)
-
-	spells = list(
-		/datum/action/cooldown/spell/projectile/lightning,
-		/datum/action/cooldown/spell/projectile/fetch
 	)
 
 /datum/job/skeleton/knight/after_spawn(mob/living/carbon/spawned, client/player_client)
