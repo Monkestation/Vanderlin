@@ -51,7 +51,7 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
 
 /datum/outfit/gaoler
-	name = "Gaoler"
+	name = "Gaoler (Migrant Wave)"
 	head = /obj/item/clothing/head/menacing
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	pants = /obj/item/clothing/pants/trou
@@ -73,7 +73,7 @@
 	migrant_job = /datum/job/migrant/mig_prisoner
 
 /datum/job/migrant/mig_prisoner
-	title = "Prisoner"
+	title = "Prisoner (Migrant Wave)"
 	tutorial = "You had fled Vanderlin, took refuge in Heartfelt yet the lords over there caught you and thus handed you over to those who sought you before."
 	outfit = /datum/outfit/mig_prisoner
 	is_foreigner = FALSE

@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/undirected/shapeshift/rat_vampire
-	name = "Rat Form"
+	name = "Vampiric Rat Form"
 	desc = "Transform into a small rat. Damage is not inherited between forms."
 
 	attunements = list(

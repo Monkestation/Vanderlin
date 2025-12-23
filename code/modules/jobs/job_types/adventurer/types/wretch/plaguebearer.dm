@@ -6,13 +6,54 @@
 	outfit = /datum/outfit/wretch/plaguebearer
 	total_positions = 2
 
-/datum/outfit/wretch/plaguebearer/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_INT = 3,
+		STATKEY_PER = 3,
+		STATKEY_CON = 3
+	)
+
+	skills = list(
+		/datum/skill/combat/bows = 3,
+		/datum/skill/combat/knives = 4,
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/craft/crafting = 3,
+		/datum/skill/craft/carpentry = 3,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/misc/medicine = 4,
+		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/alchemy = 5,
+		/datum/skill/labor/farming = 3,
+		/datum/skill/craft/bombs = 3
+	)
+
+	traits = list(
+		TRAIT_LEGENDARY_ALCHEMIST,
+		TRAIT_FORAGER,
+		TRAIT_EMPATH,
+		TRAIT_DEADNOSE
+	)
+
+	spells = list(
+		/datum/action/cooldown/spell/diagnose,
+		/datum/action/cooldown/spell/undirected/conjure_item/poison_bomb
+	)
+
+
+/datum/job/advclass/wretch/plaguebearer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	wretch_select_bounty(spawned)
+
+/datum/outfit/wretch/plaguebearer
+	name = "Plaguebearer (Wretch)"
 	mask = /obj/item/clothing/face/phys/plaguebearer
 	head = /obj/item/clothing/head/roguehood/phys
 	shoes = /obj/item/clothing/shoes/boots/leather
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
-	backl =	/obj/item/storage/backpack/satchel/surgbag
+	backl = /obj/item/storage/backpack/satchel/surgbag
 	backr = /obj/item/storage/backpack/satchel
 	pants = /obj/item/clothing/pants/tights/colored/random
 	gloves = /obj/item/clothing/gloves/leather/phys
@@ -29,29 +70,3 @@
 		/obj/item/flint = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
-	H.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/carpentry, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/alchemy, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/farming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/bombs, 3, TRUE) //to craft smoke bombs.
-	ADD_TRAIT(H, TRAIT_LEGENDARY_ALCHEMIST, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_FORAGER, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_DEADNOSE, TRAIT_GENERIC)
-	H.change_stat(STATKEY_INT, 3)
-	H.change_stat(STATKEY_PER, 3)
-	H.change_stat(STATKEY_CON, 3)
-	H.add_spell(/datum/action/cooldown/spell/diagnose)
-	H.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/poison_bomb)
-	wretch_select_bounty(H)
-

@@ -181,6 +181,7 @@
 	var/datum/intent/curplaying
 	var/accent = ACCENT_DEFAULT
 	var/cmode_timer
+	var/monitor_key
 
 /client/MouseUp(object, location, control, params)
 	if(!control)

@@ -60,25 +60,6 @@
 //		clear_alert("blind")
 		clear_fullscreen("blind")
 //		remove_client_colour(/datum/client_colour/monochrome/blind)
-/**
- * Make the mobs vision blurry
- */
-/mob/proc/blur_eyes(amount)
-	if(amount>0)
-		eye_blurry = max(amount, eye_blurry)
-	update_eye_blur()
-
-/**
- * Adjust the current blurriness of the mobs vision by amount
- */
-/mob/proc/adjust_blurriness(amount)
-	eye_blurry = max(eye_blurry+amount, 0)
-	update_eye_blur()
-
-///Set the mobs blurriness of vision to an amount
-/mob/proc/set_blurriness(amount)
-	eye_blurry = max(amount, 0)
-	update_eye_blur()
 
 /mob/proc/psydo_nyte()
 	sleep(2)

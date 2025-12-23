@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure
 	var/redstone_structure = FALSE //If you want the structure to interact with player built redstone
 	var/redstone_id //Used for connecting mapload structures
+	var/last_redstone_power
 	var/list/redstone_attached = list()
 
 /obj/structure/multitool_act(mob/living/user, obj/item/I)
