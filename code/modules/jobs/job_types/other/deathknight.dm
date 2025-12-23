@@ -24,7 +24,9 @@
 		/datum/skill/misc/athletics = 3,
 	)
 
-	traits = list(
+/datum/job/skeleton/knight/New()
+	. = ..()
+	traits += list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_CRITICAL_WEAKNESS
 	)
