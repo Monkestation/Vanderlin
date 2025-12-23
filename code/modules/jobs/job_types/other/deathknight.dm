@@ -29,11 +29,6 @@
 		TRAIT_CRITICAL_WEAKNESS
 	)
 
-	spells = list(
-		/datum/action/cooldown/spell/projectile/lightning,
-		/datum/action/cooldown/spell/projectile/fetch
-	)
-
 /datum/job/skeleton/knight/after_spawn(mob/living/carbon/spawned, client/player_client)
 	SSmapping.find_and_remove_world_trait(/datum/world_trait/death_knight)
 	SSmapping.retainer.death_knights |= spawned.mind
