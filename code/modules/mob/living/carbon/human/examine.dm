@@ -226,14 +226,14 @@
 					else if(hated_drink)
 						. += span_notice("They hate [hated_drink.name].")
 
-				if(HAS_TRAIT(src, TRAIT_LEPROSY))
-					. += span_necrosis("A LEPER...")
+			if(HAS_TRAIT(src, TRAIT_LEPROSY))
+				. += span_necrosis("A LEPER...")
 
-				if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
-					. += span_userdanger("MANIAC!")
+			if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
+				. += span_userdanger("MANIAC!")
 
-				if(HAS_TRAIT(src, TRAIT_FACELESS))
-					. += span_userdanger("FACELESS?! AN ASSASSIN!")
+			if(HAS_TRAIT(src, TRAIT_FACELESS))
+				. += span_userdanger("FACELESS?! AN ASSASSIN!")
 
 			var/list/known_frumentarii = user.mind?.cached_frumentarii
 			if(name in known_frumentarii)
