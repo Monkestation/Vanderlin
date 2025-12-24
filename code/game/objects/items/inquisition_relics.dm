@@ -675,7 +675,7 @@
 
 /obj/item/inqarticles/tallowpot/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
-	if(istype(I,/obj/item/reagent_containers/food/snacks/tallow/red))
+	if(istype(I, /obj/item/reagent_containers/food/snacks/tallow/red))
 		if(!tallow)
 			var/obj/item/reagent_containers/food/snacks/tallow/red/Q = I
 			tallow = Q
