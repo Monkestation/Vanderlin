@@ -96,7 +96,7 @@
 		return
 	if(user.used_intent.type == /datum/intent/dagger/cut && istype(I, /obj/item/weapon/knife)) // unsealing a coffin
 		if(!user.cmode)
-			if (!sealed)
+			if(!sealed)
 				to_chat(user, span_info("The coffin has no seal to remove."))
 			else
 				to_chat(user, span_info("I start unsealing the coffin.."))
