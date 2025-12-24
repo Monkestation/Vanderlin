@@ -768,7 +768,8 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/thrust/long, /datum/intent/sword/strike, /datum/intent/sword/cut/long, /datum/intent/sword/disarm)
 	gripsprite = FALSE
-	dropshrink = 0.9
+	dropshrink = 0.8
+	minstr = 10
 	sellprice = 60
 	max_integrity = 175
 
