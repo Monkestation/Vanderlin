@@ -920,7 +920,6 @@
 /area/ship/nobledeck)
 "fP" = (
 /obj/structure/door/fancy{
-	lockid = "royal";
 	name = "Balcony"
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/lord,
@@ -1483,7 +1482,6 @@
 /area/outdoors/beach)
 "jU" = (
 /obj/structure/door/fancy{
-	lockid = "royal";
 	name = "Balcony"
 	},
 /obj/effect/mapping_helpers/access/locker,
@@ -1835,7 +1833,6 @@
 /area/ship/middeck)
 "mI" = (
 /obj/structure/door/fancy{
-	lockid = "royal";
 	name = "Captain's Quarters"
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/lord,
@@ -2697,7 +2694,6 @@
 /area/ship/nobledeck)
 "sA" = (
 /obj/structure/door/stone{
-	lockid = "church";
 	name = "Church Bunks"
 	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
@@ -3241,7 +3237,6 @@
 /area/ship/middeck)
 "vw" = (
 /obj/structure/door/stone{
-	lockid = "church";
 	name = "Church Kitchen"
 	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
@@ -5351,7 +5346,6 @@
 /area/ship/nobledeck)
 "KC" = (
 /obj/structure/door/stone{
-	lockid = "church";
 	name = "Kitchen Pantry"
 	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
@@ -5608,11 +5602,10 @@
 /turf/open/floor/wood,
 /area/ship/middeck)
 "Mn" = (
+/obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/structure/door/stone{
-	lockid = "church";
 	name = "Church"
 	},
-/obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/church/chapel)
 "Ms" = (
@@ -7467,10 +7460,6 @@
 /obj/structure/fluff/wallclock/r,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/nobledeck)
-"Xq" = (
-/obj/effect/mapping_helpers/access/locker,
-/turf/closed/wall/mineral/wooddark,
-/area/ship/nobledeck)
 "Xu" = (
 /obj/structure/fluff/walldeco/psybanner{
 	pixel_y = -32
@@ -7563,7 +7552,6 @@
 /area/indoors/town/church/chapel)
 "Ye" = (
 /obj/structure/door/stone{
-	lockid = "church";
 	name = "Church"
 	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
@@ -96474,7 +96462,7 @@ Pz
 Pz
 Pz
 LO
-Xq
+LO
 Uk
 LO
 rb
