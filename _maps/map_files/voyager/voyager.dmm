@@ -852,6 +852,9 @@
 /area/ship/middeck)
 "fo" = (
 /obj/structure/window/stained/yellow,
+/obj/structure/curtain/bounty/dir{
+	dir = 8
+	},
 /turf/open/floor/metal/barograte,
 /area/ship/middeck)
 "fr" = (
@@ -5576,6 +5579,9 @@
 /obj/structure/window/openclose/reinforced{
 	dir = 8
 	},
+/obj/structure/curtain/bounty/dir{
+	dir = 8
+	},
 /turf/open/floor/metal/barograte,
 /area/ship/nobledeck)
 "Md" = (
@@ -6714,6 +6720,9 @@
 /area/ship/nobledeck)
 "SJ" = (
 /obj/structure/window/stained/yellow,
+/obj/structure/curtain/bounty/dir{
+	dir = 4
+	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town/church/chapel)
 "SO" = (
@@ -96047,7 +96056,7 @@ BC
 BC
 BC
 BC
-we
+ty
 JQ
 JQ
 JQ
@@ -96067,7 +96076,7 @@ Sv
 KB
 KB
 oe
-ic
+gM
 BC
 BC
 BC
@@ -101723,7 +101732,7 @@ ZM
 Jy
 CZ
 CZ
-ic
+gM
 BC
 BC
 BC
@@ -101925,7 +101934,7 @@ og
 og
 WI
 oO
-ic
+gM
 BC
 BC
 BC
@@ -102127,7 +102136,7 @@ gg
 VP
 JW
 ef
-ic
+gM
 BC
 BC
 BC
@@ -103122,7 +103131,7 @@ Ap
 Cr
 Jl
 Cr
-we
+ty
 vI
 OJ
 OJ
@@ -103132,7 +103141,7 @@ cw
 OJ
 OJ
 ui
-ic
+gM
 Cr
 Jl
 Cr
