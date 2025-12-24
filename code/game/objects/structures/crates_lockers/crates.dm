@@ -50,7 +50,7 @@
 	var/sealed = FALSE // is the casket sealed? If not, we can still open and close it freely.
 	var/consecrated = FALSE // Is the casket consecrated (AKA was there someone inside when we sealed it)?
 
-/obj/structure/closet/crate/coffin/open(mob/living/user)
+/obj/structure/closet/crate/coffin/attack_hand(mob/living/user)
 	if (!sealed) // if it's not sealed, process as usual.
 		. = ..()
 	else // if it's sealed, you must unseal it with a sharp object first.
