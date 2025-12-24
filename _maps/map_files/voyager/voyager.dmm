@@ -1494,12 +1494,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
-"kb" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/industrial_lift/tram,
-/obj/machinery/light/fueled/torchholder/metal_torch/west,
-/turf/open/transparent/openspace,
-/area/outdoors/beach)
 "kd" = (
 /obj/structure/stockpile_storage/metal,
 /turf/open/floor/metal/barograte,
@@ -3293,7 +3287,6 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/obj/machinery/light/fueled/torchholder/metal_torch/west,
 /turf/open/transparent/openspace,
 /area/outdoors/beach)
 "vU" = (
@@ -4844,6 +4837,9 @@
 /obj/structure/stairs{
 	dir = 4
 	},
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
 /turf/open/water/ocean/deep,
 /area/outdoors/beach)
 "Gu" = (
@@ -5892,6 +5888,12 @@
 	},
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
+"NV" = (
+/obj/structure/industrial_lift/tram{
+	fake = 1
+	},
+/turf/open/water/ocean/deep,
+/area/outdoors/beach)
 "NW" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiral,
@@ -7350,8 +7352,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/nobledeck)
 "Wy" = (
+/obj/machinery/light/fueled/torchholder/r,
 /obj/structure/industrial_lift/tram,
-/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/transparent/openspace,
 /area/outdoors/beach)
 "WA" = (
@@ -24568,9 +24570,9 @@ IR
 IR
 IR
 IR
-IR
-IR
-IR
+NV
+NV
+NV
 IR
 IR
 IR
@@ -24770,7 +24772,7 @@ IR
 IR
 IR
 IR
-IR
+NV
 IR
 IR
 IR
@@ -64970,8 +64972,8 @@ BC
 BC
 BC
 Oz
-BC
-BC
+SY
+SY
 BC
 BC
 BC
@@ -66587,7 +66589,7 @@ vS
 mg
 ov
 mg
-kb
+XW
 BC
 BC
 BC
@@ -67394,7 +67396,7 @@ BC
 Bl
 Wy
 aQ
-Wy
+aQ
 Bl
 BC
 BC
@@ -105370,9 +105372,9 @@ BC
 BC
 BC
 BC
-BC
-BC
-BC
+SY
+SY
+SY
 BC
 BC
 BC
@@ -105572,7 +105574,7 @@ BC
 BC
 BC
 BC
-BC
+SY
 BC
 BC
 BC
