@@ -35,15 +35,16 @@
 /datum/outfit/mercenary/gallowglass
 	name = "Gallowglass (Mercenary)"
 	shoes = /obj/item/clothing/shoes/boots/leather
-	head = /obj/item/clothing/head/helmet/nasal
-	gloves = /obj/item/clothing/gloves/chain/iron
+	head = /obj/item/clothing/head/helmet/gallowglass
+	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary/black
-	armor = /obj/item/clothing/armor/cuirass
-	cloak = /obj/item/clothing/cloak/stabard/kaledon
-	neck = /obj/item/clothing/neck/gorget
+	armor = /obj/item/clothing/armor/chainmail/hauberk/iron
+	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/green
+	neck = /obj/item/clothing/neck/chaincoif/iron
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/weapon/mace/cudgel
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
-	pants = /obj/item/clothing/pants/chainlegs/kilt
+	pants = /obj/item/clothing/pants/skirt/patkilt/colored/blue
 	backl = /obj/item/weapon/sword/long/greatsword/steelclaymore
+	backr = /obj/item/storage/backpack/satchel

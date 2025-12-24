@@ -106,8 +106,6 @@
 	if (opacity)
 		has_opaque_atom = TRUE
 
-	QUEUE_SMOOTH_NEIGHBORS(src)
-
 	if(shine)
 		make_shiny(shine)
 
@@ -318,7 +316,7 @@
 	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
 
 /turf/proc/zFall(atom/movable/A, levels = 1, force = FALSE)
-	var/turf/target = get_step_multiz(src, DOWN)
+	var/turf/target = GET_TURF_BELOW(src)
 	if(!target || (!isobj(A) && !ismob(A)))
 		return FALSE
 	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))

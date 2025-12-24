@@ -1,0 +1,1 @@
+{"author":"KevinfromHP","delete-after":true,"changes":[{"bugfix":"Fixes Maneaters being able to eat limbs even through armor"},{"code_imp":"Code Maintenance on the Maneater proc which was gross"}]}

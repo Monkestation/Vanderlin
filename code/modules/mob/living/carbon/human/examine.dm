@@ -253,6 +253,9 @@
 	if(HAS_TRAIT(src, TRAIT_FACELESS))
 		. += span_userdanger("FACELESS?! AN ASSASSIN!")
 
+	if(HAS_TRAIT(src, TRAIT_ABOMINATION))
+		. += span_userdanger("WHAT IS THAT ABOMINATION!")
+
 	if(user != src)
 		var/datum/mind/user_mind = user.mind
 		if(user_mind && mind)

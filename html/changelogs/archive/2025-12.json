@@ -351,5 +351,20 @@
                 "bugfix": "Throwing/Shooting through bars."
             }
         ]
+    },
+    "2025-12-24": {
+        "snowyseshi": [
+            {
+                "rscadd": "Acolytes can't be vampires anymore"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Death knights having spells when it was supposed to be gone"
+            },
+            {
+                "bugfix": "Death knights not having the normal skeleton traits"
+            }
+        ]
     }
 }
