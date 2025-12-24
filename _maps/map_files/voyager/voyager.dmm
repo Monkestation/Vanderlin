@@ -3141,7 +3141,13 @@
 /obj/structure/table/wood{
 	icon_state = "tablewood3"
 	},
-/obj/item/rope,
+/obj/item/rope{
+	pixel_x = 5
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = -7;
+	pixel_y = 3
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
 "uS" = (
@@ -5515,9 +5521,7 @@
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
-/obj/structure/guillotine{
-	pixel_x = -3
-	},
+/obj/structure/guillotine,
 /turf/open/floor/ruinedwood/darker,
 /area/ship/topdeck)
 "LE" = (
@@ -6728,6 +6732,12 @@
 "SS" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood3"
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = -7
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 5
 	},
 /turf/open/floor/hay,
 /area/ship/topdeck)
