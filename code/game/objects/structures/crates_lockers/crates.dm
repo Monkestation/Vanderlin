@@ -67,16 +67,16 @@
 /obj/structure/closet/crate/coffin/attacked_by(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/inqarticles/tallowpot)) // consecrating and sealing a coffin with tallow.
 		var/obj/item/inqarticles/tallowpot/pot = I
+		if(istype(src, /obj/structure/closet/crate/coffin/vampire)) // you cannot seal a vampire lord's casket.
+			to_chat(user, span_warning("The coffin's material prevents the tallow from sticking, it's seeping right off!"))
+			return
+
 		if(!pot.tallow)
 			to_chat(user, span_warning("I lack tallow in the pot."))
 			return
 
 		if(!pot.heatedup)
 			to_chat(user, span_warning("The tallow is not warm enough."))
-			return
-
-		if (istype(src, /obj/structure/closet/crate/coffin/vampire)) // you cannot seal a vampire lord's casket.
-			to_chat(user, span_warning("The coffin's material prevents the tallow from sticking, it's seeping right off!"))
 			return
 
 		to_chat(user, span_info("I start sealing the coffin with tallow.."))
@@ -118,8 +118,6 @@
 				icon_state = "casket"
 				return
 		. = ..()
-
-
 
 /obj/structure/closet/crate/coffin/vampire
 	name = "sleep casket"
