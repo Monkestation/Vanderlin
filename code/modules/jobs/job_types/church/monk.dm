@@ -17,39 +17,149 @@
 
 	outfit = /datum/outfit/monk
 	give_bank_account = TRUE
-	allowed_patrons = ALL_TEMPLE_PATRONS
 	job_bitflag = BITFLAG_CHURCH
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
+	jobstats = list(
+		STATKEY_INT = 1,
+		STATKEY_END = 2,
+		STATKEY_PER = -1
+	)
+
+	skills = list(
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/misc/medicine = 3,
+		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/axesmaces = 1,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/magic/holy = 3,
+		/datum/skill/craft/cooking = 2
+	)
+
+	languages = list(/datum/language/celestial)
+
+/datum/job/monk/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
+
+	spawned.virginity = TRUE
+	switch(spawned.patron?.type)
+		if(/datum/patron/divine/astrata)
+			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/divine/necra)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
+			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
+		if(/datum/patron/divine/eora)
+			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
+			spawned.virginity = FALSE
+			spawned.adjust_skillrank(/datum/skill/misc/music, 2, TRUE)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
+		if(/datum/patron/divine/noc)
+			spawned.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
+			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
+			switch(language)
+				if("Dwarvish")
+					spawned.grant_language(/datum/language/dwarvish)
+					to_chat(spawned,span_info("\
+					I learned the tongue of the mountain dwellers.")
+					)
+				if("Elvish")
+					spawned.grant_language(/datum/language/elvish)
+					to_chat(spawned,span_info("\
+					I learned the tongue of the primordial species.")
+					)
+				if("Hellspeak")
+					spawned.grant_language(/datum/language/hellspeak)
+					to_chat(spawned,span_info("\
+					I learned the tongue of the hellspawn.")
+					)
+				if("Zaladin")
+					spawned.grant_language(/datum/language/zalad)
+					to_chat(spawned,span_info("\
+					I learned the tongue of Zaladin.")
+					)
+				if("Orcish")
+					spawned.grant_language(/datum/language/orcish)
+					to_chat(spawned,span_info("\
+					I learned the tongue of the savages in my time.")
+					)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
+		if(/datum/patron/divine/pestra)
+			spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
+			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/divine/dendor)
+			spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
+			spawned.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
+			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)
+			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+		if(/datum/patron/divine/abyssor)
+			spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
+			spawned.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
+		if(/datum/patron/divine/ravox)
+			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+			var/sword_skill = rand(1,3)
+			var/whip_skill = rand(1,3)
+			var/axe_skill = rand(0,1)
+			spawned.adjust_skillrank(/datum/skill/combat/swords, sword_skill, TRUE)
+			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, whip_skill, TRUE)
+			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, axe_skill, TRUE)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
+		if(/datum/patron/divine/xylix)
+			spawned.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
+			spawned.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
+		if(/datum/patron/divine/malum)
+			spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, 2, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/smelting, 2, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/masonry, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+			ADD_TRAIT(spawned, TRAIT_MALUMFIRE, TRAIT_GENERIC)
+			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+
+	var/holder = spawned.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_acolyte()
+		devotion.grant_to(spawned)
+
 /datum/outfit/monk
 	name = "Acolyte"
-
-/datum/outfit/monk/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.virginity = TRUE
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/key/church
-	backpack_contents = list(/obj/item/needle)
-	switch(H.patron?.type)
+	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
+	backpack_contents = list(
+		/obj/item/needle = 1
+	)
+
+/datum/outfit/monk/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	switch(equipped_human.patron?.type)
 		if(/datum/patron/divine/astrata)
 			head = /obj/item/clothing/head/roguehood/astrata
 			neck = /obj/item/clothing/neck/psycross/silver/astrata
 			wrists = /obj/item/clothing/wrists/wrappings
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/astrata
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-		if(/datum/patron/divine/necra) //Necra acolytes are now gravetenders
+		if(/datum/patron/divine/necra)
 			head = /obj/item/clothing/head/padded/deathshroud
 			neck = /obj/item/clothing/neck/psycross/silver/necra
 			shoes = /obj/item/clothing/shoes/boots
 			pants = /obj/item/clothing/pants/trou/leather/mourning
 			armor = /obj/item/clothing/shirt/robe/necra
-			H.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
-			ADD_TRAIT(H, TRAIT_DEADNOSE, TRAIT_GENERIC)//accustomed to death
-			if(H.age == AGE_OLD)
+			if(equipped_human.age == AGE_OLD)
 				l_hand = /obj/item/weapon/mace/cane/necran
 			else
 				backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
@@ -58,77 +168,28 @@
 			neck = /obj/item/clothing/neck/psycross/silver/eora
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/eora
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
-			ADD_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
-			H.virginity = FALSE
-			H.adjust_skillrank(/datum/skill/misc/music, 2, TRUE)
 		if(/datum/patron/divine/noc)
 			head = /obj/item/clothing/head/roguehood/nochood
 			neck = /obj/item/clothing/neck/psycross/silver/noc
 			wrists = /obj/item/clothing/wrists/nocwrappings
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/noc
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
-			H.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
-			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
-			switch(language)
-				if("Dwarvish")
-					H.grant_language(/datum/language/dwarvish)
-					to_chat(H,span_info("\
-					I learned the tongue of the mountain dwellers.")
-					)
-				if("Elvish")
-					H.grant_language(/datum/language/elvish)
-					to_chat(H,span_info("\
-					I learned the tongue of the primordial race.")
-					)
-				if("Hellspeak")
-					H.grant_language(/datum/language/hellspeak)
-					to_chat(H,span_info("\
-					I learned the tongue of the hellspawn.")
-					)
-				if("Zaladin")
-					H.grant_language(/datum/language/zalad)
-					to_chat(H,span_info("\
-					I learned the tongue of Zaladin.")
-					)
-				if("Orcish")
-					H.grant_language(/datum/language/orcish)
-					to_chat(H,span_info("\
-					I learned the tongue of the Orcs in my time.")
-					)
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/padded/pestra
 			neck = /obj/item/clothing/neck/psycross/silver/pestra
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/pestra
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
-			backpack_contents = list(/obj/item/needle/blessed)
+			backpack_contents += /obj/item/needle/blessed
 		if(/datum/patron/divine/dendor)
 			head = /obj/item/clothing/head/padded/briarthorns
 			neck = /obj/item/clothing/neck/psycross/silver/dendor
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/dendor
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
-			H.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
-			H.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
-			ADD_TRAIT(H, TRAIT_SEEDKNOW, TRAIT_GENERIC)
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/padded/abyssor
 			neck = /obj/item/clothing/neck/psycross/silver/abyssor
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/abyssor
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
-			H.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
-			H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/helmet/leather/headscarf
 			neck = /obj/item/clothing/neck/psycross/silver/ravox
@@ -136,21 +197,11 @@
 			shirt = /obj/item/clothing/armor/gambeson/light
 			armor = /obj/item/clothing/armor/leather
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
-			H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/combat/swords, pick(1,3), TRUE)
-			H.adjust_skillrank(/datum/skill/combat/whipsflails, pick(1,3), TRUE)
-			H.adjust_skillrank(/datum/skill/combat/axesmaces, pick(0,1), TRUE)
 		if(/datum/patron/divine/xylix)
 			head = /obj/item/clothing/head/roguehood/colored/random
 			neck = /obj/item/clothing/neck/psycross/silver/xylix
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
-			H.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-			H.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
 		if(/datum/patron/divine/malum)
 			head = /obj/item/clothing/head/headband/colored/red
 			neck = /obj/item/clothing/neck/psycross/silver/malum
@@ -158,46 +209,8 @@
 			armor = /obj/item/clothing/shirt/robe/colored/red
 			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 			backpack_contents += /obj/item/weapon/hammer/iron
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			H.adjust_skillrank(/datum/skill/craft/blacksmithing, 2, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/smelting, 2, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/masonry, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-			ADD_TRAIT(H, TRAIT_MALUMFIRE, TRAIT_GENERIC)
-		else // Failsafe
+		else
 			head = /obj/item/clothing/head/roguehood/colored/random
 			neck = /obj/item/clothing/neck/psycross/silver
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/plain
-			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-
-
-	H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE) // They get this and a wooden staff to defend themselves
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/magic/holy, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-	H.change_stat(STATKEY_INT, 1)
-	H.change_stat(STATKEY_END, 2) // For casting lots of spells, and working long hours without sleep at the church
-	H.change_stat(STATKEY_PER, -1)
-	if(!H.has_language(/datum/language/celestial)) // For discussing church matters with the other Clergy
-		H.grant_language(/datum/language/celestial)
-		to_chat(H, "<span class='info'>I can speak Celestial with ,c before my speech.</span>")
-
-	var/holder = H.patron.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_acolyte()
-		devotion.grant_to(H)

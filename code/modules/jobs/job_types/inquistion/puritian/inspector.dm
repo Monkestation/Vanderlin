@@ -69,7 +69,7 @@
 
 
 /datum/outfit/inquisitor/inspector
-	name = "Inspector"
+	name = "Inspector (Herr Prafekt)"
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	neck = /obj/item/clothing/neck/gorget

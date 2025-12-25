@@ -10,7 +10,6 @@
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
-
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/artificer
@@ -24,24 +23,37 @@
 		EXP_TYPE_LIVING = 600
 	)
 
-/datum/outfit/artificer/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,3), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,3), TRUE)
-	H.adjust_skillrank(/datum/skill/labor/lumberjacking, rand(1,3), TRUE)
-	H.adjust_skillrank(/datum/skill/craft/masonry, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/engineering, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/lockpicking, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mining, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/smelting, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_INT = 2,
+		STATKEY_END = 1,
+		STATKEY_CON = 1,
+		STATKEY_SPD = -1,
+	)
 
+	skills = list(
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/craft/masonry = 3,
+		/datum/skill/craft/crafting = 4,
+		/datum/skill/craft/engineering = 4,
+		/datum/skill/misc/lockpicking = 3,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/labor/mining = 2,
+		/datum/skill/craft/smelting = 4,
+		/datum/skill/misc/reading = 2,
+		/datum/skill/labor/mathematics = 2,
+	)
+
+/datum/job/artificer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, pick(1,3), TRUE)
+
+/datum/outfit/artificer
+	name = "Artificer"
 	head = /obj/item/clothing/head/articap
 	armor = /obj/item/clothing/armor/leather/jacket/artijacket
 	pants = /obj/item/clothing/pants/trou/artipants
@@ -53,14 +65,17 @@
 	mask = /obj/item/clothing/face/goggles
 	backl = /obj/item/storage/backpack/backpack
 	ring = /obj/item/clothing/ring/silver/makers_guild
-	backpack_contents = list(/obj/item/weapon/hammer/steel = 1, /obj/item/flashlight/flare/torch/lantern = 1, /obj/item/weapon/knife/villager = 1, /obj/item/weapon/chisel = 1, /obj/item/storage/keyring/artificer = 1)
 
-	H.change_stat(STATKEY_STR, 1)
-	H.change_stat(STATKEY_INT, 2)
-	H.change_stat(STATKEY_END, 1)
-	H.change_stat(STATKEY_CON, 1)
-	H.change_stat(STATKEY_SPD, -1)
+	backpack_contents = list(
+		/obj/item/weapon/hammer/steel = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/weapon/knife/villager = 1,
+		/obj/item/weapon/chisel = 1,
+		/obj/item/storage/keyring/artificer = 1
+	)
 
-	if(H.dna.species.id == SPEC_ID_DWARF)
+/datum/outfit/artificer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.dna.species.id == SPEC_ID_DWARF)
 		head = /obj/item/clothing/head/helmet/leather/minershelm
-		H.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+		equipped_human.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'

@@ -15,7 +15,7 @@
 	allowed_races = RACES_PLAYER_NONEXOTIC
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_patrons = list(/datum/patron/divine/noc)
-
+	exp_types_granted  = list(EXP_TYPE_MAGICK)
 	jobstats = list(
 		STATKEY_STR = -1,
 		STATKEY_INT = 4,
@@ -44,7 +44,7 @@
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
 /datum/outfit/magic_teacher
-	name = "Magic School Teacher"
+	name = "Magic School Teacher (Migrant Wave)"
 	head = /obj/item/clothing/head/wizhat
 	backr = /obj/item/storage/backpack/satchel
 	armor = /obj/item/clothing/shirt/robe/colored/black
@@ -72,7 +72,7 @@
 	allowed_ages = list(AGE_CHILD)
 	allowed_races = RACES_PLAYER_NONEXOTIC
 	allowed_patrons = list(/datum/patron/divine/noc)
-
+	exp_types_granted  = list(EXP_TYPE_MAGICK)
 	jobstats = list(
 		STATKEY_STR = -1,
 		STATKEY_INT = 3,
@@ -98,12 +98,12 @@
 
 /datum/job/migrant/magic_student/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/magic/arcane, pick(2,2,2,3))
+	spawned.adjust_skillrank(/datum/skill/magic/arcane, pick(2,2,2,3), TRUE)
 	if(prob(5))
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
 /datum/outfit/magic_student
-	name = "Magic School Student"
+	name = "Magic School Student (Migrant Wave)"
 	neck = /obj/item/clothing/neck/mana_star
 	belt  =	/obj/item/storage/belt/leather
 	beltl = /obj/item/book/granter/spellbook/adept

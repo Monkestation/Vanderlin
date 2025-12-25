@@ -47,6 +47,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/outfit/heartfelt_lord
+	name = "Lord of Heartfelt (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/undershirt
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/clothing/neck/gorget
@@ -107,6 +108,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/outfit/heartfelt_lady
+	name = "Lady of Heartfelt (Migrant Wave)"
 	head = /obj/item/clothing/head/hennin
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	cloak = /obj/item/clothing/cloak/heartfelt
@@ -170,6 +172,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_hand
+	name = "Hand of Heartfelt (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/undershirt
 	belt = /obj/item/storage/belt/leather/black
 	shoes = /obj/item/clothing/shoes/nobleboot
@@ -195,7 +198,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_PER = 1,
@@ -257,6 +260,7 @@
 		SEND_SIGNAL(boiler, COMSIG_ATOM_STEAM_INCREASE, rand(500, 900))
 
 /datum/outfit/heartfelt_knight
+	name = "Knight of Heartfelt (Migrant Wave)"
 	backl = /obj/item/clothing/cloak/boiler
 	armor = /obj/item/clothing/armor/steam
 	shoes = /obj/item/clothing/shoes/boots/armor/steam
@@ -292,7 +296,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_patrons = list(/datum/patron/divine/noc)
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_MAGICK)
 	jobstats = list(
 		STATKEY_STR = -1,
 		STATKEY_CON = -1,
@@ -338,6 +342,7 @@
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
 /datum/outfit/heartfelt_magos
+	name = "Magos of Heartfelt (Migrant Wave)"
 	neck = /obj/item/clothing/neck/talkstone
 	cloak = /obj/item/clothing/cloak/black_cloak
 	armor = /obj/item/clothing/shirt/robe/colored/black
@@ -365,6 +370,7 @@
 	outfit = /datum/outfit/heartfelt_prior
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	allowed_patrons = list(/datum/patron/divine/astrata)
+	exp_types_granted  = list(EXP_TYPE_CLERIC)
 
 	jobstats = list(
 		STATKEY_STR = -1,
@@ -392,7 +398,7 @@
 	spawned.virginity = TRUE
 
 	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1)
+		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
@@ -401,6 +407,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/heartfelt_prior
+	name = "Heartfelt Prior (Migrant Wave)"
 	neck = /obj/item/clothing/neck/psycross/silver
 	shirt = /obj/item/clothing/shirt/undershirt/priest
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -457,6 +464,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_artificer
+	name = "Supreme Artificer (Migrant Wave)"
 	head = /obj/item/clothing/head/articap
 	armor = /obj/item/clothing/armor/leather/jacket/artijacket
 	pants = /obj/item/clothing/pants/trou/artipants

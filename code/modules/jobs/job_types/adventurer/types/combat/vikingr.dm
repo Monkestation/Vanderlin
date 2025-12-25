@@ -31,30 +31,27 @@
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	backl = /obj/item/weapon/shield/wood
-	var/weapontype = pickweight(list("Bow" = 2, "Axe" = 2 , "Claymore" = 1)) // Rolls for either axe , bow or claymore vikingr
-	switch(weapontype) // Skill for main weapon is decided by choice
+	head = /obj/item/clothing/head/helmet/nasal
+
+/datum/outfit/adventurer/vikingr/pre_equip(mob/living/carbon/human/H, visuals_only)
+	. = ..()
+	var/weapontype = pickweight(list("Bow" = 2, "Axe" = 2, "Claymore" = 1))
+
+	switch(weapontype)
 		if("Bow")
-			beltl = /obj/item/ammo_holder/quiver/arrows //womp womp, guess bow users cant have coins
+			beltl = /obj/item/ammo_holder/quiver/arrows // womp womp, guess bow users cant have coins
 			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
 			head = /obj/item/clothing/head/roguehood/colored/black
 			beltr = /obj/item/weapon/sword/iron
-			H.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 		if("Axe")
 			backr = /obj/item/weapon/polearm/halberd/bardiche/woodcutter
 			beltr = /obj/item/storage/belt/pouch/coins/poor
 			head = /obj/item/clothing/head/helmet/nasal
 			beltl = /obj/item/weapon/sword/iron
-			H.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 		if("Claymore")
 			backr = /obj/item/weapon/sword/long/greatsword/ironclaymore
 			beltl = /obj/item/weapon/axe/iron
 			beltr = /obj/item/storage/belt/pouch/coins/poor
 			head = /obj/item/clothing/head/helmet/nasal
-			H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 
 
-	H.change_stat(STATKEY_STR, 3) // Vikingr are Strong
-	H.change_stat(STATKEY_END, 1)
-	H.change_stat(STATKEY_CON, -1) // You've drunk a little bit too much mead and smoked too much pipeweed in your time
-	H.change_stat(STATKEY_INT, -2) // VERY Muscle brains
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC) //Needs the armour training for the chainmaile

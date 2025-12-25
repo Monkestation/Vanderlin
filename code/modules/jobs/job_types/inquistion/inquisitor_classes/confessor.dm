@@ -12,13 +12,14 @@
 		STATKEY_PER = 2,
 		STATKEY_STR = -2
 	) //4 Statline
+
 	skills = list(
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN, //Should rely on the seizing garrote to properly subdue foes.
+		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/climbing = SKILL_LEVEL_MASTER,
-		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN, //Ensures that captured individuals are less likely to die, if subdued with harsher force.
+		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/stealing = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_EXPERT,
@@ -35,54 +36,61 @@
 		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER,
 	)
+
+	languages = list(/datum/language/otavan)
+
 /datum/job/advclass/sacrestant/confessor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Confessor")
 
-/datum/outfit/confessor/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.mind)
-		var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
-		var/weapon_choice = input(H,"Choose your WEAPON.", "TAKE UP PSYDON'S ARMS.") as anything in weapons
-		switch(weapon_choice)
-			if("Blessed Psydonic Dagger")
-				l_hand = /obj/item/weapon/knife/dagger/silver/psydon
-				r_hand = /obj/item/weapon/scabbard/knife
-				H.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
-			if("Psydonic Handmace")
-				l_hand = /obj/item/weapon/mace/cudgel/psy
-				H.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
-			if("Psydonic Shortsword")
-				l_hand = /obj/item/weapon/sword/short/psy
-				r_hand = /obj/item/weapon/scabbard/sword
-				H.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
-		var/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
-		var/armor_choice = input(H, "Choose your ARCHETYPE.", "TAKE UP PSYDON'S DUTY.") as anything in armors
-		switch(armor_choice)
-			if("Confessor - Slurbow, Leather Maillecoat")
-				head = /obj/item/clothing/head/roguehood/psydon/confessor
-				armor = /obj/item/clothing/armor/leather/jacket/leathercoat/confessor
-				shirt = /obj/item/clothing/armor/gambeson/heavy/inq
-				backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
-			if("Arbalist - Crossbow, Lightweight Brigandine")
-				head = /obj/item/clothing/head/headband
-				armor = /obj/item/clothing/armor/brigandine/light
-				backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-				REMOVE_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-				H.change_stat(STATKEY_CON, 1)
-				H.change_stat(STATKEY_STR, 2)
-				H.change_stat(STATKEY_PER, 1) //Applies a base statblock of 11/11/11/13 to CON, STR, SPD and PER - compared to the standard 10/9/13/12 + DODGE EXPERT. Physically adept and capable of higher ranged damage..
-				H.change_stat(STATKEY_SPD, -2) //..but with a massive loss to mobility and damage evasion, alongside the naturally low defense of their sidearms.
-		var/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
-		var/boltchoice = input(H,"Choose your MUNITIONS.", "TAKE UP PSYDON'S MISSILES.") as anything in quivers
-		switch(boltchoice)
-			if("Bolts - Steel-Tipped")
-				beltl = /obj/item/ammo_holder/quiver/bolts
-			if("Sunderbolts - Silver-Tipped, Halved Damage")
-				beltl = /obj/item/ammo_holder/quiver/bolt/holy
+	var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
+	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "TAKE UP PSYDON'S ARMS.", weapons)
 
+	switch(weapon_choice)
+		if("Blessed Psydonic Dagger")
+			spawned.put_in_hands(new /obj/item/weapon/knife/dagger/silver/psydon(get_turf(spawned)), TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/knife, ITEM_SLOT_BACK_R, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
+		if("Psydonic Handmace")
+			spawned.put_in_hands(new /obj/item/weapon/mace/cudgel/psy(get_turf(spawned)), TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
+		if("Psydonic Shortsword")
+			spawned.put_in_hands(new /obj/item/weapon/sword/short/psy(get_turf(spawned)), TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BACK_R, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 
-	H.grant_language(/datum/language/otavan)
+	// Armor/archetype selection
+	var/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
+	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARCHETYPE.", "TAKE UP PSYDON'S DUTY.", armors)
+
+	switch(armor_choice)
+		if("Confessor - Slurbow, Leather Maillecoat")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/roguehood/psydon/confessor, ITEM_SLOT_HEAD, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/jacket/leathercoat/confessor, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson/heavy/inq, ITEM_SLOT_SHIRT, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow, ITEM_SLOT_BACK_L, TRUE)
+		if("Arbalist - Crossbow, Lightweight Brigandine")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/headband, ITEM_SLOT_HEAD, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine/light, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow, ITEM_SLOT_BACK_L, TRUE)
+			REMOVE_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, -2)
+
+	// Bolt selection
+	var/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
+	var/boltchoice = browser_input_list(spawned, "CHOOSE YOUR MUNITIONS.", "TAKE UP PSYDON'S MISSILES.", quivers)
+
+	switch(boltchoice)
+		if("Bolts - Steel-Tipped")
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_L, TRUE)
+		if("Sunderbolts - Silver-Tipped, Halved Damage")
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolt/holy, ITEM_SLOT_BELT_L, TRUE)
+
+/datum/outfit/confessor
+	name = "Confessor (Sacrestants)"
 	cloak = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/neck/psycross/silver
 	gloves = /obj/item/clothing/gloves/leather/otavan
@@ -103,4 +111,4 @@
 		/obj/item/grapplinghook = 1,
 		/obj/item/paper/inqslip/arrival/ortho = 1,
 		/obj/item/collar_detonator = 1,
-		)
+	)

@@ -14,30 +14,55 @@
 	total_positions = 1
 	roll_chance = 25
 	category_tags = list(CTAG_ADVENTURER)
-
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
-/datum/outfit/adventurer/qatil/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/lockpicking, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/traps, 1, TRUE)
-		H.change_stat(STATKEY_STR, 1)
-		H.change_stat(STATKEY_SPD, 2)
-		H.change_stat(STATKEY_END, 1)
+	skills = list(
+		/datum/skill/combat/knives = 4,
+		/datum/skill/combat/swords = 2,
+		/datum/skill/combat/crossbows = 2,
+		/datum/skill/combat/bows = 2,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/sneaking = 4,
+		/datum/skill/misc/stealing = 2,
+		/datum/skill/misc/lockpicking = 3,
+		/datum/skill/craft/traps = 1,
+	)
 
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_SPD = 2,
+		STATKEY_END = 1,
+	)
+
+	traits = list(
+		TRAIT_DODGEEXPERT,
+		TRAIT_STEELHEARTED,
+	)
+
+	languages = list(/datum/language/zalad)
+
+/datum/job/advclass/adventurer/qatil/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/datum/species/species = spawned.dna?.species
+	if(!species)
+		return
+
+	if(species.id == SPEC_ID_HUMEN)
+		species.native_language = "Zalad"
+		species.accent_language = species.get_accent(species.native_language)
+
+	else if((species.id == SPEC_ID_HALF_ELF) || (species.id == SPEC_ID_HALF_DROW))
+		if(species.native_language == "Imperial")
+			species.native_language = "Zalad"
+			species.accent_language = species.get_accent(species.native_language)
+
+/datum/outfit/adventurer/qatil
+	name = "Qatil (Adventurer)"
 	pants = /obj/item/clothing/pants/trou/leather
 	beltr = /obj/item/weapon/knife/dagger/steel/special
 	shoes = /obj/item/clothing/shoes/shalal
@@ -47,20 +72,8 @@
 	armor = /obj/item/clothing/armor/leather/splint
 	backl = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/neck/keffiyeh/colored/red
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor, /obj/item/lockpick)
-	if(!H.has_language(/datum/language/zalad))
-		H.grant_language(/datum/language/zalad)
-		to_chat(H, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
-
-	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-
-	if(H.dna?.species)
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			H.dna.species.native_language = "Zalad"
-			H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-		if((H.dna.species.id == SPEC_ID_HALF_ELF) || (H.dna.species.id == SPEC_ID_HALF_DROW))
-			if(H.dna.species.native_language == "Imperial")
-				H.dna.species.native_language = "Zalad"
-				H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/lockpick = 1
+	)
 
