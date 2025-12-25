@@ -3,6 +3,7 @@
 // Used on admin testing area only.
 
 GLOBAL_LIST_INIT(IconStates_cache, list())
+GLOBAL_LIST_INIT(has_behind_cache, list()) // cheaty hack to avoid repeated list searches
 
 // 32x32 in-hand helper item
 /obj/item/inhand_tester
@@ -70,19 +71,18 @@ GLOBAL_LIST_INIT(IconStates_cache, list())
 	var/icon/blended
 	var/skipoverlays = FALSE
 	if(behind)
-		if(!(icon in GLOB.IconStates_cache))
-			var/icon/J = new(icon)
-			var/list/istates = J.IconStates()
-			GLOB.IconStates_cache |= icon
+		if(!GLOB.IconStates_cache[icon])
+			var/list/istates = icon_states(icon)
 			GLOB.IconStates_cache[icon] = istates
+			GLOB.has_behind_cache[icon] = ("[icon_state]_behind" in istates)
 
-		if("[icon_state]_behind" in GLOB.IconStates_cache[icon])
-			blended = icon("icon" = icon, "icon_state" = "[icon_state]_behind")
+		if(GLOB.has_behind_cache[icon])
+			blended = icon(icon = icon, icon_state = "[icon_state]_behind")
 			skipoverlays = TRUE
 		else
-			blended = icon("icon" = icon, "icon_state" = icon_state)
+			blended = icon(icon = icon, icon_state = icon_state)
 	else
-		blended = icon("icon" = icon, "icon_state" = icon_state)
+		blended = icon(icon = icon, icon_state = icon_state)
 
 	if(!blended)
 		blended = getFlatIcon(src)
@@ -123,13 +123,13 @@ GLOBAL_LIST_INIT(IconStates_cache, list())
 			render_this_dir = TRUE
 	if(render_this_dir)
 		holder = icon(blended)
-		masky = icon("icon"=used_mask, "icon_state"="north")
+		masky = icon(icon=used_mask, icon_state="north")
 		holder.Blend(masky, ICON_MULTIPLY)
-		if("nflip" in used_prop)
+		if(!isnull(used_prop["nflip"]))
 			holder.Flip(used_prop["nflip"])
-		if("nturn" in used_prop)
+		if(!isnull(used_prop["nturn"]))
 			holder.Turn(used_prop["nturn"])
-		if("nx" in used_prop)
+		if(!isnull(used_prop["nx"]))
 			if(mirrored)
 				px += used_prop["nx"]*-1
 				var/biggu = FALSE
@@ -141,10 +141,10 @@ GLOBAL_LIST_INIT(IconStates_cache, list())
 //				else
 			else
 				px += used_prop["nx"]
-		if("ny" in used_prop)
+		if(!isnull(used_prop["ny"]))
 			py = used_prop["ny"]
 		ax = 0
-		if("shrink" in used_prop)
+		if(!isnull(used_prop["shrink"]))
 			holder.Scale(UW*used_prop["shrink"],UH*used_prop["shrink"])
 			ax = 32-(holder.Width()/2)
 		px += ax
@@ -165,13 +165,13 @@ GLOBAL_LIST_INIT(IconStates_cache, list())
 		px = 0
 		py = 0
 		holder = icon(blended)
-		masky = icon("icon"=used_mask, "icon_state"="south")
+		masky = icon(icon=used_mask, icon_state="south")
 		holder.Blend(masky, ICON_MULTIPLY)
-		if("sflip" in used_prop)
+		if(!isnull(used_prop["sflip"]))
 			holder.Flip(used_prop["sflip"])
-		if("sturn" in used_prop)
+		if(!isnull(used_prop["sturn"]))
 			holder.Turn(used_prop["sturn"])
-		if("sx" in used_prop)
+		if(!isnull(used_prop["sx"]))
 			if(mirrored)
 				px += used_prop["sx"]*-1
 				var/biggu = FALSE
@@ -183,10 +183,10 @@ GLOBAL_LIST_INIT(IconStates_cache, list())
 //				else
 			else
 				px += used_prop["sx"]
-		if("sy" in used_prop)
+		if(!isnull(used_prop["sy"]))
 			py += used_prop["sy"]
 		ax = 0
-		if("shrink" in used_prop)
+		if(!isnull(used_prop["shrink"]))
 			holder.Scale(UW*used_prop["shrink"],UH*used_prop["shrink"])
 			ax = 32-(holder.Width()/2)
 		px += ax
@@ -213,20 +213,20 @@ GLOBAL_LIST_INIT(IconStates_cache, list())
 		px = 0
 		py = 0
 		holder = icon(blended)
-		masky = icon("icon"=used_mask, "icon_state"="east")
+		masky = icon(icon=used_mask, icon_state="east")
 		holder.Blend(masky, ICON_MULTIPLY)
-		if("[usedtag]flip" in used_prop)
+		if(!isnull(used_prop["[usedtag]flip"]))
 			holder.Flip(used_prop["[usedtag]flip"])
-		if("[usedtag]turn" in used_prop)
+		if(!isnull(used_prop["[usedtag]turn"]))
 			holder.Turn(used_prop["[usedtag]turn"])
-		if("[usedtag]x" in used_prop)
+		if(!isnull(used_prop["[usedtag]x"]))
 			px = used_prop["[usedtag]x"]
 			if(mirrored)
 				px = px*-1
-		if("[usedtag]y" in used_prop)
+		if(!isnull(used_prop["[usedtag]y"]))
 			py = used_prop["[usedtag]y"]
 		ax = 0
-		if("shrink" in used_prop)
+		if(!isnull(used_prop["shrink"]))
 			holder.Scale(UW*used_prop["shrink"],UH*used_prop["shrink"])
 			ax = 32-(holder.Width()/2)
 		px += ax
@@ -253,20 +253,20 @@ GLOBAL_LIST_INIT(IconStates_cache, list())
 		px = 0
 		py = 0
 		holder = icon(blended)
-		masky = icon("icon"=used_mask, "icon_state"="west")
+		masky = icon(icon=used_mask, icon_state="west")
 		holder.Blend(masky, ICON_MULTIPLY)
-		if("[usedtag]flip" in used_prop)
+		if(!isnull(used_prop["[usedtag]flip"]))
 			holder.Flip(used_prop["[usedtag]flip"])
-		if("[usedtag]turn" in used_prop)
+		if(!isnull(used_prop["[usedtag]turn"]))
 			holder.Turn(used_prop["[usedtag]turn"])
-		if("[usedtag]x" in used_prop)
+		if(!isnull(used_prop["[usedtag]x"]))
 			px = used_prop["[usedtag]x"]
 			if(mirrored)
 				px = px*-1
-		if("[usedtag]y" in used_prop)
+		if(!isnull(used_prop["[usedtag]y"]))
 			py = used_prop["[usedtag]y"]
 		ax = 0
-		if("shrink" in used_prop)
+		if(!isnull(used_prop["shrink"]))
 			holder.Scale(UW*used_prop["shrink"],UH*used_prop["shrink"])
 			ax = 32-(holder.Width()/2)
 		px += ax

@@ -21,54 +21,54 @@
 
 //Generates its spawnable atoms and turfs
 /datum/mapGeneratorModule/proc/generate()
+	SHOULD_NOT_SLEEP(TRUE)
 	if(!mother)
 		return
 	excluded_turfs = typecacheof(excluded_turfs)
 	allowed_turfs = typecacheof(allowed_turfs)
 	allowed_areas = typecacheof(allowed_areas, only_root_path = !include_subtypes)
 	var/list/map = mother.map
-	for(var/turf/T in map)
+	for(var/turf/T as anything in map)
 		place(T)
-		CHECK_TICK
 
 
 //Place a spawnable atom or turf on this turf
 /datum/mapGeneratorModule/proc/place(turf/T)
-	if(!T)
-		return 0
-	var/clustering = 0
+	SHOULD_NOT_SLEEP(TRUE)
+	var/clustering = FALSE
 	var/skipLoopIteration = FALSE
 
-	if(excluded_turfs[T.type])
+	if(excluded_turfs?[T.type])
 		return
 
-	if(allowed_turfs.len && !allowed_turfs[T.type])
+	if(!allowed_turfs?[T.type])
 		return
 
-	if(allowed_areas.len)
-		var/area/A = get_area(T)
-		if(!allowed_areas[A.type])
-			return
+	// no need for get_area, that has an extra get_turf we don't need
+	if(!allowed_areas?[T.loc?.type])
+		return
 
+	// cache these as local (non-datum) vars
+	var/list/spawnableTurfs = src.spawnableTurfs
+	var/list/spawnableAtoms = src.spawnableAtoms
+	// Don't recheck the flags in every iteration.
+	var/cluster_same_turfs = clusterCheckFlags & CLUSTER_CHECK_SAME_TURFS
+	var/cluster_diff_turfs = clusterCheckFlags & CLUSTER_CHECK_DIFFERENT_TURFS
 	//Turfs don't care whether atoms can be placed here
 	for(var/turfPath in spawnableTurfs)
-
+		var/spawn_prob = spawnableTurfs[turfPath]
+		if(spawn_prob <= 0) // impossible, skip
+			continue
 		//Clustering!
 		if(clusterMax && clusterMin)
-
 			//You're the same as me? I hate you I'm going home
-			if(clusterCheckFlags & CLUSTER_CHECK_SAME_TURFS)
+			if(cluster_same_turfs)
 				clustering = rand(clusterMin,clusterMax)
-				for(var/turf/F as anything in RANGE_TURFS(clustering,T))
-					if(istype(F,turfPath))
-						skipLoopIteration = TRUE
-						break
-				if(skipLoopIteration)
-					skipLoopIteration = FALSE
+				if(locate(turfPath) in RANGE_TURFS(clustering,T))
 					continue
 
 			//You're DIFFERENT to me? I hate you I'm going home
-			if(clusterCheckFlags & CLUSTER_CHECK_DIFFERENT_TURFS)
+			if(cluster_diff_turfs)
 				clustering = rand(clusterMin,clusterMax)
 				for(var/turf/F as anything in RANGE_TURFS(clustering,T))
 					if(!(istype(F,turfPath)))
@@ -79,20 +79,24 @@
 					continue
 
 		//Success!
-		if(prob(spawnableTurfs[turfPath]))
+		if(prob(spawn_prob))
 			T.ChangeTurf(turfPath)
 
 
 	//Atoms DO care whether atoms can be placed here
-	if(checkPlaceAtom(T))
-
+	if(length(spawnableAtoms) && checkPlaceAtom(T)) // don't check if we don't have atoms to place
+		// Don't recheck the flags in every loop.
+		var/cluster_same_atoms = clusterCheckFlags & CLUSTER_CHECK_SAME_ATOMS
+		var/cluster_diff_atoms = clusterCheckFlags & CLUSTER_CHECK_DIFFERENT_ATOMS
 		for(var/atomPath in spawnableAtoms)
+			var/spawn_prob = spawnableAtoms[atomPath]
+			if(spawn_prob <= 0) // impossible, don't bother checking
+				continue
 
 			//Clustering!
 			if(clusterMax && clusterMin)
-
 				//You're the same as me? I hate you I'm going home
-				if(clusterCheckFlags & CLUSTER_CHECK_SAME_ATOMS)
+				if(cluster_same_atoms)
 					clustering = rand(clusterMin, clusterMax)
 					for(var/atom/movable/M in range(clustering,T))
 						if(istype(M,atomPath))
@@ -103,7 +107,7 @@
 						continue
 
 				//You're DIFFERENT from me? I hate you I'm going home
-				if(clusterCheckFlags & CLUSTER_CHECK_DIFFERENT_ATOMS)
+				if(cluster_diff_atoms)
 					clustering = rand(clusterMin, clusterMax)
 					for(var/atom/movable/M in range(clustering,T))
 						if(!(istype(M,atomPath)))
@@ -114,7 +118,7 @@
 						continue
 
 			//Success!
-			if(prob(spawnableAtoms[atomPath]))
+			if(prob(spawn_prob))
 				new atomPath(T)
 
 	. = 1

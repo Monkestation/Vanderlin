@@ -7,24 +7,53 @@
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'
 
-/datum/outfit/bandit/sellsword/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+	jobstats = list(
+		STATKEY_STR = 2,
+		STATKEY_END = 2,
+		STATKEY_CON = 1,
+		STATKEY_SPD = 1,
+	)
+
+	skills = list(
+		/datum/skill/combat/polearms = 4,
+		/datum/skill/combat/axesmaces = 3,
+		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/whipsflails = 4,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/bows = 2,
+		/datum/skill/combat/crossbows = 3,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/craft/carpentry = 1,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/misc/medicine = 1,
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR,
+	)
+
+/datum/job/advclass/bandit/sellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/static/list/weapons = list(
+		"Spear & Crossbow" = list(/obj/item/weapon/polearm/spear/billhook,  /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow),
+		"Sword & Buckler" = list(/obj/item/weapon/sword , /obj/item/weapon/shield/tower/buckleriron)
+	)
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")
+	switch(weapon_choice)
+		if("Spear & Crossbow")
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/kettle, ITEM_SLOT_HEAD, TRUE)
+		if("Sword & Buckler")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/sallet, ITEM_SLOT_HEAD, TRUE)
+
+
+/datum/outfit/bandit/sellsword
+	name = "Sellsword (Bandit)"
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/armor/gambeson
@@ -34,22 +63,3 @@
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/chainmail
-	H.change_stat(STATKEY_STR, 2) //less buffs than brigand but no int debuff
-	H.change_stat(STATKEY_END, 2)
-	H.change_stat(STATKEY_CON, 1)
-	H.change_stat(STATKEY_SPD, 1)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	H.adjust_blindness(-3)
-	var/weapons = list("Spear & Crossbow","Sword & Buckler")
-	var/weapon_choice = input("Choose your weapon.", "TAKE UP ARMS") as anything in weapons
-	H.set_blindness(0)
-	switch(weapon_choice)
-		if("Spear & Crossbow") //Deserter watchman. Maybe should be shield and spear? spear and crossbow is kinda clumsy
-			backl= /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow //we really need to make this not a grenade launcher subtype
-			beltr = /obj/item/ammo_holder/quiver/bolts
-			r_hand = /obj/item/weapon/polearm/spear/billhook
-			head = /obj/item/clothing/head/helmet/kettle
-		if("Sword & Buckler") //Mercenary on the wrong side of the law
-			backl= /obj/item/weapon/shield/tower/buckleriron
-			beltr = /obj/item/weapon/sword //steel sword like literally every adventurer gets
-			head = /obj/item/clothing/head/helmet/sallet
