@@ -695,11 +695,11 @@
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/ship/nobledeck)
 "eL" = (
-/obj/structure/closet/crate/chest/old_crate,
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
+/obj/structure/closet/crate/chest/neu,
 /turf/open/floor/hay,
 /area/ship/middeck)
 "eM" = (
@@ -714,11 +714,6 @@
 /turf/open/floor/church,
 /area/ship/middeck)
 "eP" = (
-/obj/structure/closet/crate/chest{
-	base_icon_state = "woodchestalt";
-	icon_state = "woodchestalt";
-	name = "meat chest"
-	},
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/item/reagent_containers/food/snacks/egg,
@@ -733,6 +728,7 @@
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
+/obj/structure/closet/crate/chest/neu,
 /turf/open/floor/herringbone,
 /area/ship/middeck)
 "eS" = (
@@ -3041,7 +3037,6 @@
 /area/ship/nobledeck)
 "uj" = (
 /obj/structure/fluff/railing/border,
-/obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
@@ -3050,6 +3045,7 @@
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
+/obj/structure/closet/crate/chest/neu,
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
@@ -5046,7 +5042,6 @@
 	dir = 1
 	},
 /obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/item/reagent_containers/food/snacks/meat/steak,
@@ -5054,6 +5049,7 @@
 /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet,
 /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet,
 /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet,
+/obj/structure/closet/crate/chest/neu,
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
