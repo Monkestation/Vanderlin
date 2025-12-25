@@ -51,7 +51,7 @@
 	shoes = /obj/item/clothing/shoes/nobleboot
 	beltl = /obj/item/ammo_holder/quiver/bolt/holy
 	mask = /obj/item/clothing/face/goggles
-	beltr = /obj/item/weapon/sword/long/forgotten ///Giving them something that ISNT an exact copy of the witch hunter.
+	beltr = /obj/item/weapon/sword/silver ///Giving them something that ISNT an exact copy of the witch hunter.
 	belt = /obj/item/storage/belt/leather/steel
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 	backr = /obj/item/storage/backpack/satchel
