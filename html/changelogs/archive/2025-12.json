@@ -351,5 +351,65 @@
                 "bugfix": "Throwing/Shooting through bars."
             }
         ]
+    },
+    "2025-12-24": {
+        "snowyseshi": [
+            {
+                "rscadd": "Acolytes can't be vampires anymore"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Death knights having spells when it was supposed to be gone"
+            },
+            {
+                "bugfix": "Death knights not having the normal skeleton traits"
+            }
+        ]
+    },
+    "2025-12-25": {
+        "snowyseshi": [
+            {
+                "rscadd": "Added new Zizo rituals"
+            },
+            {
+                "rscadd": "Added 2 new traits"
+            },
+            {
+                "rscadd": "Skeletons are of the cabal"
+            },
+            {
+                "balance": "cultists recieve 2 polearm levels, up to skilled."
+            },
+            {
+                "balance": "cultists don't have a cap anymore"
+            },
+            {
+                "balance": "garrison and nobles can become cultists now"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new mason role for the town. Essentially the pilgrim mason, except a towner."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Rework Gallowglass, as well as new helmet."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixes Maneaters being able to eat limbs even through armor"
+            },
+            {
+                "code_imp": "Code Maintenance on the Maneater proc which was gross"
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "code_imp": "Added new words to spanish_replacement.json"
+            }
+        ]
     }
 }

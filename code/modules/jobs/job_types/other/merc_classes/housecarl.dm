@@ -38,7 +38,7 @@
 	spawned.merctype = 9
 
 /datum/outfit/mercenary/housecarl
-	name = "Housecarl"
+	name = "Housecarl (Mercenary)"
 	head = /obj/item/clothing/head/helmet/nasal
 	shoes = /obj/item/clothing/shoes/boots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown

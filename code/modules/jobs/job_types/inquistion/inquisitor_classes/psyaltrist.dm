@@ -57,7 +57,7 @@
 	spawned.select_equippable(player_client, instruments)
 
 /datum/outfit/psyaltrist
-	name = "Psyaltrist"
+	name = "Psyaltrist (Sacrestants)"
 	armor = /obj/item/clothing/armor/leather/studded/psyaltrist
 	backl = /obj/item/storage/backpack/satchel/otavan
 	cloak = /obj/item/clothing/cloak/psyaltrist

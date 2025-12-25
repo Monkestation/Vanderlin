@@ -2,7 +2,7 @@
 	title = "Butcher"
 	tutorial = "Some say youre a strange individual, \
 	some say youre a cheat while some claim you are a savant in the art of sausage making. \
-	Without your skilled hands and knifework most of the livestock around the town would be wasted. "
+	Without your skilled hands and knifework most of the livestock around the town would be wasted."
 	display_order = JDO_BUTCHER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	department_flag = PEASANTS
@@ -19,37 +19,48 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-/datum/outfit/beastmaster/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_CON = 2,
+		STATKEY_INT = -1
+	)
 
+	skills = list(
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/craft/cooking = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/labor/taming = 5,
+		/datum/skill/craft/tanning = 2,
+		/datum/skill/misc/riding = 1,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/labor/butchering = 5
+	)
+
+	traits = list(
+		TRAIT_STEELHEARTED
+	)
+
+/datum/outfit/beastmaster
+	name = "Butcher"
 	belt = /obj/item/storage/belt/leather
-	beltr= /obj/item/storage/meatbag
-	beltl= /obj/item/key/butcher
+	beltr = /obj/item/storage/meatbag
+	beltl = /obj/item/key/butcher
 	backl = /obj/item/storage/backpack/satchel
 	armor = /obj/item/clothing/armor/leather/vest/colored/butcher
 	shoes = /obj/item/clothing/shoes/boots/leather
-	backpack_contents = list(/obj/item/kitchen/spoon, /obj/item/reagent_containers/food/snacks/truffles, /obj/item/weapon/knife/hunting)
 
-	if(H.gender == MALE)
+	backpack_contents = list(
+		/obj/item/kitchen/spoon = 1,
+		/obj/item/reagent_containers/food/snacks/truffles = 1,
+		/obj/item/weapon/knife/hunting = 1
+	)
+
+/datum/outfit/beastmaster/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/trou
 		wrists = /obj/item/clothing/wrists/bracers/leather
 	else
 		shirt = /obj/item/clothing/shirt/dress/gen/colored/random
-
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC) // Used to dismembering live stock, desensitized to it.
-
-	H.change_stat(STATKEY_STR, 1)
-	H.change_stat(STATKEY_CON, 2) // Built sturdy due to HIGH PROTEIN DIET
-	H.change_stat(STATKEY_INT, -1)
-
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE) // Not a trained cook, but knows a thing or two
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/taming, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/tanning, 2, TRUE) // Better than a soilson, but doesn't outshine a hunter or a weaver
-	H.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/butchering, 5, TRUE)
-

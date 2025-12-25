@@ -5,11 +5,65 @@
 	allowed_races = list(SPEC_ID_TIEFLING)
 	outfit = /datum/outfit/mercenary/sworddancer
 	category_tags = list(CTAG_MERCENARY)
-
 	total_positions = 2
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg' // Not a noble, but it fits really well
 
+
+	spells = list(
+		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/bardic_inspiration
+	)
+
+
+	jobstats = list(
+		STATKEY_PER = 2,
+		STATKEY_SPD = 2,
+		STATKEY_END = -1
+	)
+
+	skills = list(
+		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/misc/music = 4,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/misc/medicine = 1,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/craft/crafting = 1,
+		/datum/skill/craft/cooking = 4
+	)
+
+	traits = list(
+		TRAIT_DODGEEXPERT,
+		TRAIT_BARDIC_TRAINING
+	)
+
+/datum/job/advclass/mercenary/sworddancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.merctype = 9
+
+	spawned.select_equippable(player_client, list(
+		"Harp" = /obj/item/instrument/harp,
+		"Lute" = /obj/item/instrument/lute,
+		"Accordion" = /obj/item/instrument/accord,
+		"Guitar" = /obj/item/instrument/guitar,
+		"Flute" = /obj/item/instrument/flute,
+		"Drum" = /obj/item/instrument/drum,
+		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
+		"Viola" = /obj/item/instrument/viola
+		),
+		message = "Choose your instrument.",
+		title = "XYLIX"
+	)
+
+	var/datum/inspiration/I = new /datum/inspiration(spawned)
+	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+
 /datum/outfit/mercenary/sworddancer
+	name = "Sword Dancer (Mercenary)"
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random
@@ -21,60 +75,11 @@
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/weapon/knife/dagger/steel/special
 	beltl = /obj/item/weapon/sword/rapier
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor)
-
-/datum/outfit/mercenary/sworddancer/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
-	H.add_spell(/datum/action/cooldown/spell/vicious_mockery)
-	H.add_spell(/datum/action/cooldown/spell/bardic_inspiration)
-	H.adjust_blindness(-3)
-	var/instruments = list(
-		"Harp" = /obj/item/instrument/harp,
-		"Lute" = /obj/item/instrument/lute,
-		"Accordion" = /obj/item/instrument/accord,
-		"Guitar" = /obj/item/instrument/guitar,
-		"Flute" = /obj/item/instrument/flute,
-		"Drum" = /obj/item/instrument/drum,
-		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola)
-	var/instrument_choice = input("Choose your instrument.", "XYLIX") as anything in instruments
-
-	if(instrument_choice && instruments[instrument_choice])
-		backr = instruments[instrument_choice]
-	else
-		backr = /obj/item/instrument/lute
-
-	H.adjust_blindness(0)
-
-	H.merctype = 9
-
-	H.change_stat(STATKEY_PER, 2)
-	H.change_stat(STATKEY_SPD, 2)
-	H.change_stat(STATKEY_END, -1)
-
-	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
-
-	var/datum/inspiration/I = new /datum/inspiration(H)
-	I.grant_inspiration(H, bard_tier = BARD_T3)
+	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1)
 
 
-/datum/outfit/mercenary/sworddancer/post_equip(mob/living/carbon/human/H)
-	..()
-	var/obj/item/clothing/cloak/cape/C = H.get_item_by_slot(ITEM_SLOT_CLOAK)
+/datum/outfit/mercenary/sworddancer/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	var/obj/item/clothing/cloak/cape/C = equipped_human.get_item_by_slot(ITEM_SLOT_CLOAK)
 	if(C)
 		C.color = CLOTHING_MUSTARD_YELLOW
-
-

@@ -13,6 +13,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
+	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/adept
@@ -22,6 +23,8 @@
 
 	job_bitflag = BITFLAG_CHURCH
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
+	antag_role = /datum/antagonist/purishep
+	languages = list(/datum/language/oldpsydonic)
 
 /datum/outfit/adept // Base outfit for Adepts, before loadouts
 	name = "Adept"
@@ -32,23 +35,14 @@
 	shirt = /obj/item/clothing/armor/gambeson/light/colored/black
 	wrists = /obj/item/clothing/neck/psycross/silver
 
-/datum/outfit/adept/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.mind)
-		if(H.mind.has_antag_datum(/datum/antagonist))
-			return
-		var/datum/antagonist/new_antag = new /datum/antagonist/purishep()
-		H.mind.add_antag_datum(new_antag)
-		if(!istype(H.patron, /datum/patron/psydon)) // adepts are loser scum, we should allow them to be extremist psydonites
-			H.set_patron(/datum/patron/psydon, TRUE)
-		H.verbs |= /mob/living/carbon/human/proc/torture_victim
-		H.verbs |= /mob/living/carbon/human/proc/faith_test
-		H.verbs |= /mob/living/carbon/human/proc/view_inquisition
+/datum/job/advclass/adept/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", -10, "Reformed Thief")
+	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+	spawned.verbs |= /mob/living/carbon/human/proc/faith_test
+	spawned.verbs |= /mob/living/carbon/human/proc/view_inquisition
 
-		if(!H.has_language(/datum/language/oldpsydonic))
-			H.grant_language(/datum/language/oldpsydonic)
-			to_chat(H, span_info("I can speak Old Psydonic with ,m before my speech."))
-		H.mind.teach_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
+	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
 
 /datum/job/advclass/adept
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)

@@ -12,6 +12,22 @@
 	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 5.5 * STEEL_MULTIPLIER
 
+
+//................ Gallowglass ............... //
+
+/obj/item/clothing/head/helmet/gallowglass
+	name = "gallowglass helmet"
+	desc = "Worn by proud fighters of the clans of Kaledon."
+	icon_state = "gallowglass"
+	sellprice = VALUE_STEEL_SMALL_ITEM
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = /datum/material/steel
+	melt_amount = 75
+
+
+	max_integrity = INTEGRITY_STRONGEST
+	item_weight = 5.5 * STEEL_MULTIPLIER
+
 //................ Coppergate ............... //
 /obj/item/clothing/head/helmet/coppergate
 	name = "coppergate helmet"

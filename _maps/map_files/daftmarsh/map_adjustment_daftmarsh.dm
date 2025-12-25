@@ -21,6 +21,7 @@
 		/datum/job/cook = 1,
 		/datum/job/servant = 2,
 		/datum/job/carpenter = 2, //Towner roles don't need nearly as many, here.
+		/datum/job/mason = 2,
 		/datum/job/hunter = 2,
 		/datum/job/bard = 3,
 		/datum/job/miner = 4,
