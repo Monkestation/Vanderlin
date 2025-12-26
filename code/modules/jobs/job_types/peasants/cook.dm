@@ -19,36 +19,49 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-/datum/outfit/cook/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/butchering, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/farming, 1, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+	jobstats = list(
+		STATKEY_CON = 2
+	)
+
+	skills = list(
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/craft/cooking = 4,
+		/datum/skill/craft/crafting = 1,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/labor/butchering = 3,
+		/datum/skill/labor/taming = 1,
+		/datum/skill/labor/farming = 1
+	)
+
+/datum/job/cook/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+
+/datum/outfit/cook
+	name = "Cook"
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/key/tavern
 	beltr = /obj/item/weapon/knife/villager
-	if(H.gender == MALE)
+	head = /obj/item/clothing/head/cookhat
+	neck = /obj/item/storage/belt/pouch/coins/poor
+	shoes = /obj/item/clothing/shoes/simpleshoes
+	cloak = /obj/item/clothing/cloak/apron/cook
+
+	backpack_contents = list(
+		/obj/item/recipe_book/cooking = 1
+	)
+
+/datum/outfit/cook/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/random
 		shirt = /obj/item/clothing/shirt/shortshirt/colored/random
-		shoes = /obj/item/clothing/shoes/simpleshoes
-		cloak = /obj/item/clothing/cloak/apron/cook
-		head = /obj/item/clothing/head/cookhat
-		neck = /obj/item/storage/belt/pouch/coins/poor
-		H.change_stat(STATKEY_CON, 2)
 	else
 		shirt = /obj/item/clothing/shirt/undershirt/lowcut
 		armor = /obj/item/clothing/armor/corset
 		pants = /obj/item/clothing/pants/skirt/colored/red
-		cloak = /obj/item/clothing/cloak/apron/cook
-		head = /obj/item/clothing/head/cookhat
-		shoes = /obj/item/clothing/shoes/simpleshoes
-		neck = /obj/item/storage/belt/pouch/coins/poor
-		H.change_stat(STATKEY_CON, 2)
-	backpack_contents = list(/obj/item/recipe_book/cooking)
+
+
+

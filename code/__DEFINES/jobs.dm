@@ -129,7 +129,7 @@
 #define JDO_BAPP 22
 #define JDO_ARTIFICER 23
 
-#define JDO_MASON 24
+
 
 #define JDO_BUTLER 25
 #define JDO_SERVANT 26
@@ -143,10 +143,12 @@
 #define JDO_FISHER 28.3
 #define JDO_HUNTER 28.4
 #define JDO_CARPENTER 28.6
+#define JDO_MASON 28.61
 #define JDO_CHEESEMAKER 28.7
 #define JDO_MINER 28.8
 #define JDO_MATRON 28.9
 #define JDO_GRAVEMAN 29
+
 
 #define JDO_JESTER 30
 #define JDO_BARD 30.1

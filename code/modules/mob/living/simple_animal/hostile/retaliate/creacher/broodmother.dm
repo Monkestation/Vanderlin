@@ -153,9 +153,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/get_biomass_amounts()
 	return list(
-		1 = tier_1_biomass_amount,
-		2 = tier_2_biomass_amount,
-		3 = tier_3_biomass_amount,
+		tier_1_biomass_amount,
+		tier_2_biomass_amount,
+		tier_3_biomass_amount,
 		)
 
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/attempt_lay_egg(tier)

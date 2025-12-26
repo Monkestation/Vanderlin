@@ -11,35 +11,50 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
-
 	outfit = /datum/outfit/carpenter
 	give_bank_account = 8
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-/datum/outfit/carpenter/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/carpentry, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, pick(3,3,4), TRUE)
-	H.adjust_skillrank(/datum/skill/labor/lumberjacking, 3, TRUE)
-	if(prob(5))
-		H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/labor/lumberjacking, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_END = 1,
+		STATKEY_INT = 1,
+		STATKEY_CON = 1,
+		STATKEY_SPD = -1,
+	)
 
-	head = pick(/obj/item/clothing/head/hatfur, /obj/item/clothing/head/hatblu, /obj/item/clothing/head/brimmed)
+	skills = list(
+		/datum/skill/misc/medicine = 1,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/craft/crafting = 3,
+		/datum/skill/craft/cooking = 1,
+		/datum/skill/craft/carpentry = 5,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/labor/lumberjacking = 3,
+	)
+
+	traits = list()
+
+/datum/job/carpenter/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1), TRUE)
+
+	if(prob(5))
+		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
+
+/datum/outfit/carpenter
+	name = "Carpenter"
 	neck = /obj/item/clothing/neck/coif
 	armor = /obj/item/clothing/armor/gambeson/light/striped
 	pants = /obj/item/clothing/pants/trou
@@ -51,9 +66,18 @@
 	beltl = /obj/item/weapon/hammer/steel
 	backr = /obj/item/weapon/axe/iron
 	backl = /obj/item/storage/backpack/backpack
-	backpack_contents = list(/obj/item/flint = 1, /obj/item/weapon/knife/villager = 1, /obj/item/recipe_book/carpentry = 1)
-	H.change_stat(STATKEY_STR, 1)
-	H.change_stat(STATKEY_END, 1) // Tree chopping builds endurance
-	H.change_stat(STATKEY_INT, 1)
-	H.change_stat(STATKEY_CON, 1)
-	H.change_stat(STATKEY_SPD, -1)
+
+	backpack_contents = list(
+		/obj/item/flint = 1,
+		/obj/item/weapon/knife/villager = 1,
+		/obj/item/recipe_book/carpentry = 1,
+	)
+
+/datum/outfit/carpenter/pre_equip(mob/living/carbon/human/H, visuals_only)
+	. = ..()
+	head = pick(
+		/obj/item/clothing/head/hatfur,
+		/obj/item/clothing/head/hatblu,
+		/obj/item/clothing/head/brimmed,
+	)
+

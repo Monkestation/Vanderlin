@@ -6,7 +6,59 @@
 	outfit = /datum/outfit/wretch/pyromaniac
 	total_positions = 2
 
-/datum/outfit/wretch/pyromaniac/pre_equip(mob/living/carbon/human/H)
+	jobstats = list(
+		STATKEY_END = 3,
+		STATKEY_CON = 3,
+		STATKEY_INT = 3
+	)
+
+	skills = list(
+		/datum/skill/combat/bows = 2,
+		/datum/skill/combat/crossbows = 2,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/reading = 2,
+		/datum/skill/craft/traps = 4,
+		/datum/skill/craft/alchemy = 4,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/craft/engineering = 3,
+		/datum/skill/labor/farming = 1,
+		/datum/skill/craft/bombs = 4
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR,
+		TRAIT_FORAGER
+	)
+
+/datum/job/advclass/wretch/pyromaniac/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectableweapon = list(
+		"Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
+		"Crossbow" = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+	)
+	var/weaponschoice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")
+	if(!weaponschoice)
+		return
+
+	switch(weaponschoice)
+		if("Bow")
+			var/obj/item/ammo_holder/quiver/arrows/pyro/P = new(get_turf(spawned))
+			spawned.equip_to_appropriate_slot(P)
+			to_chat(spawned, span_info("You are able to make more bow ammunitions with iron, blast powder and some planks."))
+		if("Crossbow")
+			var/obj/item/ammo_holder/quiver/bolts/pyro/P = new(get_turf(spawned))
+			spawned.equip_to_appropriate_slot(P)
+			to_chat(spawned, span_info("You are able to make more crossbow ammunitions with iron, blast powder and some planks."))
+
+	wretch_select_bounty(spawned)
+
+/datum/outfit/wretch/pyromaniac
+	name = "Pyromaniac (Wretch)"
 	head = /obj/item/clothing/head/roguehood/colored/red
 	mask = /obj/item/clothing/face/facemask
 	neck = /obj/item/clothing/neck/chaincoif/iron
@@ -28,42 +80,3 @@
 		/obj/item/flint = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
-	H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/traps, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/alchemy, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/engineering, 3, TRUE) //...Apparently to craft pyro ammos?
-	H.adjust_skillrank(/datum/skill/labor/farming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/bombs, 4, TRUE) //To craft bombs.
-	H.change_stat(STATKEY_END, 3)
-	H.change_stat(STATKEY_CON, 3)
-	H.change_stat(STATKEY_INT, 3)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_FORAGER, TRAIT_GENERIC)
-
-/datum/outfit/wretch/pyromaniac/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	var/static/list/selectableweapon = list(
-		"Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
-		"Crossbow" = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-	)
-	var/weaponschoice = H.select_equippable(H, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")
-	if(!weaponschoice)
-		return
-	switch(weaponschoice)
-		if("Bow")
-			var/obj/item/ammo_holder/quiver/arrows/pyro/P = new(get_turf(src))
-			H.equip_to_appropriate_slot(P)
-		if("Crossbow")
-			var/obj/item/ammo_holder/quiver/bolts/pyro/P = new(get_turf(src))
-			H.equip_to_appropriate_slot(P)
-	to_chat(H, span_info("You are able to make more ammunitions for your weapon of choice with iron, blast powder and some planks."))
-	wretch_select_bounty(H)

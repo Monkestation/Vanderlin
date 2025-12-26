@@ -7,24 +7,57 @@
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	total_positions = 1
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
+	allowed_patrons = list(/datum/patron/inhumen/zizo)
+	spell_points = 7
+	languages = list(/datum/language/undead)
+	faction = FACTION_CABAL
 
-/datum/outfit/wretch/necromancer/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_STR = -1,
+		STATKEY_CON = -1,
+		STATKEY_INT = 4
+	)
+
+	skills = list(
+		/datum/skill/combat/polearms = 3,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/misc/reading = 5,
+		/datum/skill/craft/alchemy = 4,
+		/datum/skill/magic/arcane = 4
+	)
+
+	traits = list(
+		TRAIT_CABAL,
+		TRAIT_INHUMENCAMP,
+		TRAIT_GRAVEROBBER,
+		TRAIT_DEADNOSE
+	)
+
+	spells = list(
+		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
+		/datum/action/cooldown/spell/eyebite,
+		/datum/action/cooldown/spell/projectile/sickness,
+		/datum/action/cooldown/spell/conjure/raise_lesser_undead/necromancer,
+		/datum/action/cooldown/spell/gravemark,
+		/datum/action/cooldown/spell/control_undead
+	)
+
+/datum/job/advclass/wretch/necromancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 	if(prob(1))
-		H.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	H.set_patron(/datum/patron/inhumen/zizo) //Zizo only, obviously.
-	H.mind.current.faction += FACTION_CABAL
-	H.mana_pool?.intrinsic_recharge_sources &= ~MANA_ALL_LEYLINES
-	H.mana_pool?.set_intrinsic_recharge(MANA_SOULS)
-	H.mana_pool?.ethereal_recharge_rate += 0.1
-	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/alchemy, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/magic/arcane, 4, TRUE)
+		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
+
+	spawned.mana_pool?.intrinsic_recharge_sources &= ~MANA_ALL_LEYLINES
+	spawned.mana_pool?.set_intrinsic_recharge(MANA_SOULS)
+	spawned.mana_pool?.ethereal_recharge_rate += 0.1
+
+	wretch_select_bounty(spawned)
+
+/datum/outfit/wretch/necromancer
+	name = "Necromancer (Wretch)"
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/chaincoif
@@ -43,24 +76,8 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1
 	)
-	H.change_stat(STATKEY_STR, -1)
-	H.change_stat(STATKEY_CON, -1)
-	H.change_stat(STATKEY_INT, 4)
-	H.adjust_spell_points(7)
-	H.grant_language(/datum/language/undead)
-	H.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
-	H.add_spell(/datum/action/cooldown/spell/eyebite)
-	H.add_spell(/datum/action/cooldown/spell/projectile/sickness)
-	H.add_spell(/datum/action/cooldown/spell/conjure/raise_lesser_undead/necromancer)
-	H.add_spell(/datum/action/cooldown/spell/gravemark)
-	H.add_spell(/datum/action/cooldown/spell/control_undead)
-	ADD_TRAIT(H, TRAIT_CABAL, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_INHUMENCAMP, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_DEADNOSE, TRAIT_GENERIC)
-	wretch_select_bounty(H)
 
-/datum/outfit/wretch/necromancer/post_equip(mob/living/carbon/human/H)
+/datum/outfit/wretch/necromancer/post_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	var/static/list/selectablehat = list(
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
@@ -71,10 +88,10 @@
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 		"Ominous hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/cult,
 	)
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "NECROMANCER")
 	var/static/list/selectablerobe = list(
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
 	)
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
+	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "NECROMANCER")
