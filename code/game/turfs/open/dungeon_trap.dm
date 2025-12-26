@@ -75,8 +75,12 @@
 		else if(istype(T, /turf/closed/dungeon_void)) // lets you fall through to the bottom level in some places
 			chosen_turf = GET_TURF_BELOW(T)
 		// no chosen_turf this step so don't bother with the parts after this
-		if(!chosen_turf)
+		if(!istype(chosen_turf, /turf/open)) // don't put us in walls
 			continue
+		if(islava(chosen_turf)) // please someone centralize these safety checks, i'm only adding this here bc a maintainer asked and i'm lazy
+			var/turf/open/lava/lava_turf = chosen_turf
+			if(!lava_turf.is_safe())
+				continue // don't drop someone into lava or acid
 		// check if our chosen_turf actually works
 		for(var/obj/structure/struct in chosen_turf)
 			if(struct.density && !struct.climbable) // keeps you from landing inside bars or something
