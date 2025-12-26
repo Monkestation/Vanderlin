@@ -207,11 +207,11 @@ Sunlight System
 	if(outdoor_effect)
 		outdoor_effect.state = TempState
 		outdoor_effect.weatherproof = turf_weatherproof
-		if(turf_flags & TURF_BEING_WEATHERED)
-			if(outdoor_effect.weatherproof)
+		if(turf_weatherproof) // we're weatherproof so make sure we're not being weathered
+			if(turf_flags & TURF_BEING_WEATHERED) // only remove it from the list if we're sure it's already in it
 				SSParticleWeather.weathered_turfs -= src
 				turf_flags &= ~TURF_BEING_WEATHERED
-		else if(!isclosedturf(src) && SSoutdoor_effects.turf_weather_affectable_z_levels[z])
+		else if(SSoutdoor_effects.turf_weather_affectable_z_levels[z]) // not weatherproof, enable weathering if allowed
 			turf_flags |= TURF_BEING_WEATHERED
 			SSParticleWeather.weathered_turfs += src
 

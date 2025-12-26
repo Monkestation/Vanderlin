@@ -19,7 +19,7 @@
 	icon_state = "together"
 	baseturfs = /turf/open/water
 	slowdown = 20
-	turf_flags = TURF_WEATHER_PROOF
+	weatherproof = TRUE // weather can't pass through water, it's blocked. this doesn't make the turf itself weatherproof only a turf beneath it
 	var/obj/effect/overlay/water/water_overlay
 	var/obj/effect/overlay/water/top/water_top_overlay
 	bullet_sizzle = TRUE
