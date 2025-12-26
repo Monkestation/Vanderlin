@@ -224,7 +224,7 @@
 			gloves = /obj/item/clothing/gloves/plate/matthios
 			pants = /obj/item/clothing/pants/platelegs/matthios
 			shoes = /obj/item/clothing/shoes/boots/armor/matthios
-			beltl = /obj/item/weapon/flail/peasantwarflail/matthios
+			backr = /obj/item/weapon/flail/peasantwarflail/matthios
 		if(/datum/patron/inhumen/baotha)
 			head = /obj/item/clothing/head/helmet/heavy/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses

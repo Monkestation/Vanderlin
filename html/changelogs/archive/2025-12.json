@@ -411,5 +411,12 @@
                 "code_imp": "Added new words to spanish_replacement.json"
             }
         ]
+    },
+    "2025-12-26": {
+        "TheMrGlasses": [
+            {
+                "bugfix": "Matthios Iconoclast now correctly spawns with their flail."
+            }
+        ]
     }
 }
