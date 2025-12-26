@@ -1,3 +1,7 @@
+// These defines determine the level of consecration a grave has received. This helps determine the consequences of graverobbing.
+#define NOT_CONSECRATED 0
+#define CONSECRATED 1
+#define DOUBLY_CONSECRATED 2
 
 /obj/structure/closet/dirthole
 	name = "hole"
@@ -17,7 +21,7 @@
 	alternative_icon_handling = TRUE
 	var/stage = 1
 	var/faildirt = 0
-	var/is_consecrated = 0 // Has the "burial rites" miracle been used on this grave. 0 = No consecration. 1 = Simple consecration (you get cursed by Necra) 2 and above = Double consecration (your lux gets ripped out, or a limb gets skeletonized.)
+	var/is_consecrated = NOT_CONSECRATED // Has the "burial rites" miracle been used on this grave. 0 = No consecration. 1 = Simple consecration (you get cursed by Necra) 2 and above = Double consecration (your lux gets ripped out, or a limb gets skeletonized.)
 
 
 /obj/structure/closet/dirthole/Initialize()
@@ -197,12 +201,12 @@
 			climb_offset = 0
 			open()
 			switch(is_consecrated) // this is where we handle folks being cursed by Necra for graverobbing.
-				if(0) // not consecrated, proceed
+				if(NOT_CONSECRATED) // not consecrated, proceed
 					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
 						qdel(G)
 					return
 
-				if(1) // consecrated, if you're not necran clergy or a treasure hunter, you get cursed.
+				if(CONSECRATED) // consecrated, if you're not necran clergy or a treasure hunter, you get cursed.
 					if(ishuman(user))
 						var/mob/living/L = user
 						if(L.patron?.type != /datum/patron/divine/necra) // non-necran get tagged as graverobbers in EOR stats.
@@ -217,7 +221,7 @@
 					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
 						qdel(G)
 
-				if(2 to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or I explode your lux.
+				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or I explode your lux.
 					if(ishuman(user))
 						var/mob/living/carbon/human/L = user
 						var/list/limb_list = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM) // used to pick which arm to skeletonize
@@ -270,7 +274,7 @@
 		stage_update()
 		attacking_shovel.heldclod = new(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-		is_consecrated = 0 // remove consecration levels
+		is_consecrated = NOT_CONSECRATED // remove consecration levels
 
 
 
