@@ -6,31 +6,14 @@
 
 	return FALSE
 
-/mob/living/proc/can_contract_disease(datum/disease/disease)
-	if(stat == DEAD && !disease.process_dead)
-		return FALSE
-
-	if(disease.get_disease_id() in disease_resistances)
-		return FALSE
-
-	if(has_disease(disease))
-		return FALSE
-
-	if(!(disease.infectable_biotypes & mob_biotypes))
-		return FALSE
-
-	if(!disease.is_viable_mobtype(type))
-		return FALSE
-
-	return TRUE
-
 /mob/living/proc/contract_contact_disease(datum/disease/disease)
-	if(!can_contract_disease(disease))
+	if(!disease.can_infect(src))
 		return FALSE
-	disease.try_infect(src)
+
+	return disease.infect(src)
 
 /mob/living/carbon/contract_contact_disease(datum/disease/disease, target_zone)
-	if(!can_contract_disease(disease))
+	if(!disease.can_infect(src))
 		return FALSE
 
 	var/passed = TRUE
@@ -92,8 +75,10 @@
 				if(passed && isobj(infecting_human.shoes))
 					passed = prob(base_chance - 20)
 
-	if(passed)
-		disease.try_infect(src)
+	if(!passed)
+		return FALSE
+
+	return disease.infect(src)
 
 /**
  * Handle being contracted a disease via airborne transmission
@@ -107,7 +92,7 @@
 		return FALSE
 	if(!disease.has_required_infectious_organ(src, ORGAN_SLOT_LUNGS))
 		return FALSE
-	return force_contract_disease(disease)
+	return contract_disease(disease)
 
 /// Checks if this mob can currently spread air based diseases.
 /// Nondeterministic
@@ -159,11 +144,13 @@
 	return TRUE
 
 /// Proc to use when you 100% want to try to infect someone (ignoreing protective clothing and such), as long as they aren't immune
-/mob/living/proc/force_contract_disease(datum/disease/disease, del_on_fail = FALSE)
-	if(!can_contract_disease(disease) || !disease.try_infect(src))
+/mob/living/proc/contract_disease(datum/disease/disease, del_on_fail = FALSE)
+	if(!disease.can_infect(src))
 		if(del_on_fail)
 			qdel(disease)
 		return FALSE
+
+	disease.infect(src)
 
 	return TRUE
 
@@ -172,4 +159,4 @@
 		return
 	var/datum/disease/infection = new disease
 
-	force_contract_disease(infection, TRUE)
+	contract_disease(infection, TRUE)

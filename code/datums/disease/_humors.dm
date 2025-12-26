@@ -30,42 +30,39 @@
 
 	if(iscarbon(effecting))
 		var/mob/living/carbon/carbon_effecting = effecting
-		for(var/obj/item/clothing/clothing in carbon_effecting.get_equipped_items(include_pockets = TRUE))
+		for(var/obj/item/clothing/clothing in carbon_effecting.get_equipped_items())
 			var/datum/wet/wet_datum = clothing.wet
 			if(!wet_datum)
 				continue
 			if(wet_datum.water_stacks > 0)
 				number_wet_items++
 
-	// This is going to be disgusting
 	for(var/temperament in temperaments)
 		switch(temperament)
 			if(HUMOR_WARM)
-				if(temperature > BODYTEMP_NORMAL)
-					if(difference > 15)
+				switch(difference)
+					if(15 to INFINITY)
 						temperature_mod *= 0.7
-					else if(difference >= 10)
+					if(10 to 15)
 						temperature_mod *= 1.2
-					else if(difference >= 5)
+					if(5 to 10)
 						temperature_mod *= 1.5
-				else // Colder
-					if(difference < -10)
+					if(-15 to -10)
 						temperature_mod *= 0.6
-					else
+					if(-INFINITY to -15)
 						temperature_mod *= 0.4
 
 			if(HUMOR_COLD)
-				if(temperature < BODYTEMP_NORMAL)
-					if(difference < -15)
+				switch(difference)
+					if(-INFINITY to -15)
 						temperature_mod *= 0.7
-					else if(difference <= -10)
+					if(-15 to -10)
 						temperature_mod *= 1.2
-					else if(difference <= -5)
+					if(-10 to -5)
 						temperature_mod *= 1.5
-				else // Hotter
-					if(difference > 10)
+					if(10 to 15)
 						temperature_mod *= 0.6
-					else
+					if(15 to INFINITY)
 						temperature_mod *= 0.4
 
 			if(HUMOR_DRY)
@@ -89,8 +86,17 @@
 
 	return final_mod
 
-/datum/humor/proc/recovery_prob_mod(datum/disease/disease, mob/living/effecting)
-	return temperament_modifier(effecting)
+/datum/humor/proc/get_humor_modifier(datum/disease/disease, mob/living/effecting)
+	// Organs blow right now, no healing, barely any damage/loss effects
+	// Needs to be healable before we give dieases for poor health
+
+	var/matching_age = FALSE
+	if(ishuman(effecting))
+		var/mob/living/carbon/human/human_effecting = effecting
+		if(human_effecting.age in ages)
+			matching_age = TRUE
+
+	return temperament_modifier(effecting) * (matching_age ? 1.2 : 0.8)
 
 /datum/humor/blood
 	name = HUMOR_BLOOD

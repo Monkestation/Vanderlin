@@ -1,6 +1,6 @@
 /datum/disease/lycanthropy
 	name = "Lycanthropy"
-	
+
 	max_stages = 3
 	stage_prob = 5
 
@@ -9,7 +9,11 @@
 	spread_flags = DISEASE_SPREAD_NON_CONTAGIOUS
 	bypasses_immunity = TRUE
 
-/datum/disease/lycanthropy/try_infect(/mob/living/carbon/human/human_infectee)
+/datum/disease/lycanthropy/can_infect(mob/living/carbon/human/human_infectee)
+	. = ..()
+	if(!.)
+		return FALSE
+
 	var/static/list/silver_items = list(
 		/obj/item/clothing/neck/psycross/silver,
 		/obj/item/clothing/neck/silveramulet
@@ -18,8 +22,6 @@
 	if(is_type_in_list(human_infectee.wear_wrists, silver_items) || is_type_in_list(human_infectee.wear_neck, silver_items))
 		if(prob(50))
 			return FALSE
-	
-	return ..()
 
 /datum/disease/lycanthropy/after_add()
 	to_chat(affected_mob, span_userdanger("I feel horrible... REALLY horrible."))
@@ -28,9 +30,9 @@
 	. = ..()
 	if(!.)
 		return
-	
+
 	var/mob/living/carbon/human/infected = affected_mob
-	
+
 	switch(stage)
 		if(1)
 			if(prob(4))
@@ -39,7 +41,7 @@
 				to_chat(infected, span_warning("I feel dizzy."))
 			if(prob(1))
 				to_chat(infected, span_warning("I smell... blood."))
-		
+
 		if(2)
 			if(prob(5))
 				to_chat(infected, span_userdanger("The itching won't stop!"))

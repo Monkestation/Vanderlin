@@ -306,6 +306,7 @@
 #include "code\_globalvars\bitfields.dm"
 #include "code\_globalvars\browser.dm"
 #include "code\_globalvars\configuration.dm"
+#include "code\_globalvars\disease.dm"
 #include "code\_globalvars\game_modes.dm"
 #include "code\_globalvars\genetics.dm"
 #include "code\_globalvars\logging.dm"

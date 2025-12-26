@@ -75,33 +75,46 @@
 /datum/disease/proc/admin_details()
 	return "[name] : [type]"
 
-/datum/disease/proc/is_same(datum/disease/D)
-	if(istype(D, type))
-		return TRUE
-	return FALSE
+/datum/disease/proc/is_same(datum/disease/disease)
+	return istype(disease, type)
 
 /datum/disease/proc/get_disease_id()
 	return "[type]"
 
-//add this disease if the host does not already have too many
-/datum/disease/proc/try_infect(mob/living/infectee)
+/// Check if its possible to infect this host
+/datum/disease/proc/can_infect(mob/living/infectee)
+	if(infectee.stat == DEAD && !process_dead)
+		return FALSE
+
+	if(!is_viable_mobtype(infectee))
+		return FALSE
+
+	if(infectee.has_disease(src))
+		return FALSE
+
+	if(get_disease_id() in infectee.disease_resistances)
+		return FALSE
+
+	if(!(infectable_biotypes & infectee.mob_biotypes))
+		return FALSE
+
 	if(required_organ && !has_required_infectious_organ(infectee, required_organ))
 		return FALSE
 
-	infect(infectee)
-
 	return TRUE
 
-//add the disease with no checks
+// Infect a host with our disease
 /datum/disease/proc/infect(mob/living/infectee)
 	LAZYADD(infectee.diseases, src)
 	affected_mob = infectee
+
+	log_virus("[key_name(infectee)] was infected by disease: [admin_details()] at [loc_name(get_turf(infectee))]")
 
 	after_add()
 
 	register_disease_signals()
 
-	log_virus("[key_name(infectee)] was infected by disease: [admin_details()] at [loc_name(get_turf(infectee))]")
+	return TRUE
 
 /datum/disease/proc/after_add()
 	return
@@ -135,15 +148,17 @@
 
 /// Register any relevant signals for the disease
 /datum/disease/proc/register_disease_signals()
-	if(isnull(affected_mob))
+	if(QDELETED(affected_mob))
 		return
+
 	if(spread_flags & DISEASE_SPREAD_AIRBORNE)
 		RegisterSignal(affected_mob, COMSIG_CARBON_PRE_BREATHE, PROC_REF(on_breath))
 
 /// Unregister any relevant signals for the disease
 /datum/disease/proc/unregister_disease_signals()
-	if(isnull(affected_mob))
+	if(QDELETED(affected_mob))
 		return
+
 	UnregisterSignal(affected_mob, COMSIG_CARBON_PRE_BREATHE)
 
 ///Proc to process the disease and decide on whether to advance, cure or make the symptoms appear. Returns a boolean on whether to continue acting on the symptoms or not.
@@ -199,6 +214,9 @@
 
 		peaked_cycles += stage / max_stages //every cycle we spend sick counts towards eventually curing the disease, faster at higher stages
 		recovery_prob += DISEASE_RECOVERY_CONSTANT + (peaked_cycles / (cycles_to_beat / DISEASE_RECOVERY_SCALING)) //more severe viruses are beaten back more aggressively after the peak
+
+		if(length(humors))
+			recovery_prob *= tally_humor_modifiers()
 
 		if(stage_peaked)
 			recovery_prob *= DISEASE_PEAKED_RECOVERY_MULTIPLIER
@@ -337,16 +355,8 @@
  * Arguments:
  * * mob_type - Type path to check against the viable_mobtypes list.
  */
-/datum/disease/proc/is_viable_mobtype(mob_type)
-	for(var/viable_type in viable_mobtypes)
-		if(ispath(mob_type, viable_type))
-			return TRUE
-
-	// Let's only do this check if it fails. Did some genius coder pass in a non-type argument?
-	if(!ispath(mob_type))
-		stack_trace("Non-path argument passed to mob_type variable: [mob_type]")
-
-	return FALSE
+/datum/disease/proc/is_viable_mobtype(mob/living/infectee)
+	return viable_mobtypes[infectee.type]
 
 /// Checks if the mob has the required organ and it's not robotic or affected by inorganic biology
 /datum/disease/proc/has_required_infectious_organ(mob/living/carbon/target, required_organ_slot)
@@ -366,6 +376,18 @@
 
 	if(prob(infectivity * 4))
 		airborne_spread()
+
+/datum/disease/proc/tally_humor_modifiers()
+	if(!length(humors))
+		return 1
+
+	var/multipler = 1
+
+	for(var/humor in humors)
+		var/datum/humor/real_humor = GLOB.humor_instances[humor]
+		multipler *= real_humor.get_humor_modifier()
+
+	return multipler
 
 //Use this to compare severities
 /proc/get_disease_severity_value(severity)
