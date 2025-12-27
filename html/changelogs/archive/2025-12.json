@@ -418,5 +418,12 @@
                 "bugfix": "Matthios Iconoclast now correctly spawns with their flail."
             }
         ]
+    },
+    "2025-12-27": {
+        "Draggeru": [
+            {
+                "map": "Removes the bars from the keep balcony and the wizard college"
+            }
+        ]
     }
 }
