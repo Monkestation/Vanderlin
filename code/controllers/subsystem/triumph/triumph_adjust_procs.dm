@@ -1,4 +1,5 @@
 /proc/adjust_triumphs(datum/key_holder, amount, counted = TRUE, reason, silent = FALSE, override_bonus = FALSE)
+	var/unsafe_ckey = FALSE //for handling offline ckeys
 	if(!key_holder)
 		return
 
@@ -11,7 +12,8 @@
 	if(!ismob(key_holder) && !ismind(key_holder) && !isclient(key_holder))
 		var/possible_ckey = key_holder
 		if(!(possible_ckey in GLOB.keys_by_ckey))
-			return
+			unsafe_ckey = TRUE
+			ckey = possible_ckey
 		else
 			ckey = key_holder // in the case that a ckey is passed (ie in triumphs refund)
 	else
@@ -27,6 +29,10 @@
 		return
 
 	SStriumphs.triumph_adjust(amount, ckey)
+
+	if(unsafe_ckey)
+		return
+
 	SStriumphs.adjust_leaderboard(GLOB.keys_by_ckey[ckey])
 
 	var/adjustment_verb
