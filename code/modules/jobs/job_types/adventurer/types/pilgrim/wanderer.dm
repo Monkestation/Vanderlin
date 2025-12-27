@@ -3,7 +3,7 @@
 	tutorial = "You are a member of the Merry Band, a humble guild of wanderers who have united under one common desire. Wandering for the sake of experiencing the beauty and diversity of Faience to the fullest extent. As the motto of the Merry Band goes, \"Make every step count and may your journeys be full of wonder\"."
 	total_positions = 5
 	category_tags = list(CTAG_PILGRIM)
-	outfit = /datum/outfit/adventurer/wanderingpilgrim
+	outfit = /datum/outfit/pilgrim/wanderingpilgrim
 
 	jobstats = list(
 		STATKEY_LCK = 1 //Wanderers are meant to be a blank slate, so they dont really have anything. But i think some bonus luck would be make sense for them.
@@ -30,7 +30,7 @@
 	spawned.grant_language(language)
 	to_chat(spawned, span_notice("I learned the tongue of [initial(language.name)] through my travels."))
 
-/datum/outfit/adventurer/wanderingpilgrim
+/datum/outfit/pilgrim/wanderingpilgrim
 	name = "Wandering Pilgrim"
 	head = /obj/item/clothing/head/helmet/leather/headscarf
 	shoes = /obj/item/clothing/shoes/sandals

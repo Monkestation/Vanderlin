@@ -48,9 +48,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(istype(target.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(target.wear_wrists, /obj/item/clothing/neck/psycross/silver) )
 		to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
 		return
-	if(length(SSmapping.retainer.cultists) >= 8)
-		to_chat(user, span_danger("The veil is too strong to support more than seven lackeys."))
-		return
 	var/datum/antagonist/zizocultist/PR = user.mind.has_antag_datum(/datum/antagonist/zizocultist)
 	var/alert = browser_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
 	target.Immobilize(3 SECONDS)
@@ -86,6 +83,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	target.mind?.set_assigned_role(summon_job)
 	target.dress_up_as_job(summon_job)
 	summon_job.after_spawn(target, target.client)
+	ADD_TRAIT(target, TRAIT_CABAL, TRAIT_GENERIC)
 
 	to_chat(target, span_userdanger("I am returned to serve. I will obey, so that I may return to rest."))
 	to_chat(target, span_userdanger("My master is [user]."))
@@ -173,6 +171,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	desc = "It sparkles with forbidden magic energy. It makes all the heart aches go away."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "heart-on"
+	w_class =  WEIGHT_CLASS_SMALL
 
 /obj/item/corruptedheart/attack(mob/living/target, mob/living/user, params)
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
@@ -245,6 +244,15 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	new /obj/item/scrying/eye(center)
 	to_chat(user, span_notice("The All-seeing Eye. To see beyond sight."))
 
+/datum/ritual/transmutation/cross
+	name = "Summon Amulet of Zizo"
+	center_requirement = /obj/item/clothing/neck/psycross
+
+/datum/ritual/transmutation/cross/invoke(mob/living/user, turf/center)
+	. = ..()
+	new /obj/item/clothing/neck/psycross/zizo(center)
+	to_chat(user, span_notice("The psycross is transmuted into an amulet of Zizo."))
+
 /datum/ritual/transmutation/criminalstool
 	name = "Criminal's Tool"
 	center_requirement = /obj/item/natural/cloth
@@ -312,28 +320,90 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 			to_chat(HL, "<i>You hear a voice in your head... <b>[info]</i></b>")
 		qdel(P)
 
-/datum/ritual/transmutation/summonweapons
-	name = "Summon Weaponry"
-	center_requirement = /obj/item/ingot/steel
-	is_cultist_ritual = TRUE
+/datum/ritual/transmutation/summonoutfit
+	name = "Summon Cult Outfit"
+	center_requirement = /obj/item/natural/cloth
 
-/datum/ritual/transmutation/summonweapons/invoke(mob/living/user, turf/center)
+/datum/ritual/transmutation/summonoutfit/invoke(mob/living/user, turf/center)
 	var/datum/effect_system/spark_spread/S = new(center)
 	S.set_up(1, 1, center)
 	S.start()
 
 	new /obj/item/clothing/head/helmet/skullcap/cult(center)
-	new /obj/item/clothing/head/helmet/skullcap/cult(center)
 
 	new /obj/item/clothing/cloak/half/shadowcloak/cult(center)
-	new /obj/item/clothing/cloak/half/shadowcloak/cult(center)
-
-	new /obj/item/weapon/sword/scimitar/falchion(center)
-	new /obj/item/weapon/knife/hunting(center)
-	new /obj/item/weapon/mace/spiked(center)
 
 	new /obj/item/rope/chain(center)
-	new /obj/item/rope/chain(center)
+
+	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+
+/datum/ritual/transmutation/summonneant
+	name = "Summon Neant"
+	center_requirement = /obj/item/reagent_containers/lux
+	n_req = /mob/living/carbon/human
+	s_req = /obj/item/ingot/steel
+
+	is_cultist_ritual = TRUE
+
+/datum/ritual/transmutation/summonneant/invoke(mob/living/user, turf/center)
+	var/mob/living/carbon/human/noble = locate() in get_step(center, NORTH)
+	if(!(noble.is_noble()))
+		return
+	noble.gib()
+	var/datum/effect_system/spark_spread/S = new(center)
+	S.set_up(1, 1, center)
+	S.start()
+
+	new /obj/item/weapon/polearm/neant(center)
+
+	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+
+/datum/ritual/transmutation/summonarmor
+	name = "Summon Darksteel Armor"
+	center_requirement = /mob/living/carbon/human
+	n_req = /obj/item/ingot/steel
+	s_req = /obj/item/ingot/steel
+
+	is_cultist_ritual = TRUE
+
+/datum/ritual/transmutation/summonarmor/invoke(mob/living/user, turf/center)
+	var/mob/living/carbon/human/target = locate() in center.contents
+	if(!target)
+		return
+	if(target.stat == DEAD)
+		target.gib(FALSE, FALSE, FALSE)
+	var/datum/effect_system/spark_spread/S = new(center)
+	S.set_up(1, 1, center)
+	S.start()
+
+	new /obj/item/clothing/armor/plate/full/zizo(center)
+
+	new /obj/item/clothing/pants/platelegs/zizo(center)
+
+	new /obj/item/clothing/shoes/boots/armor/zizo(center)
+
+	new /obj/item/clothing/head/helmet/heavy/zizo(center)
+
+	new /obj/item/clothing/gloves/plate/zizo(center)
+
+	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+
+/datum/ritual/transmutation/summonweapon
+	name = "Summon Weapons"
+	center_requirement = /obj/item/ingot/steel
+
+	is_cultist_ritual = TRUE
+
+/datum/ritual/transmutation/summonweapon/invoke(mob/living/user, turf/center)
+	var/datum/effect_system/spark_spread/S = new(center)
+	S.set_up(1, 1, center)
+	S.start()
+
+	new /obj/item/weapon/sword/long/greatsword/zizo(center)
+
+	new /obj/item/weapon/sword/arming(center)
+
+	new /obj/item/weapon/mace/steel(center)
 
 	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
@@ -386,6 +456,82 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	target.grant_undead_eyes()
 	to_chat(target, span_notice("I no longer fear the dark."))
 
+/datum/ritual/fleshcrafting/undead
+	name = "Dominate Undead"
+	center_requirement = /mob/living/carbon/human
+
+	w_req = /obj/item/organ/brain
+	e_req = /obj/item/organ/brain
+	n_req = /obj/item/reagent_containers/food/snacks/rotten/meat
+
+	is_cultist_ritual = TRUE
+
+/datum/ritual/fleshcrafting/undead/invoke(mob/living/user, turf/center)
+	var/mob/living/carbon/human/target = locate() in center.contents
+	if(!target)
+		return
+	target.faction = list(FACTION_UNDEAD)
+	target.add_spell(/datum/action/cooldown/spell/gravemark)
+	target.add_spell(/datum/action/cooldown/spell/control_undead)
+	target.add_spell(/datum/action/cooldown/spell/decompose)
+	to_chat(target, span_notice("The undead bow down to my will."))
+
+/datum/ritual/fleshcrafting/arcane
+	name = "Siphon Arcane"
+	center_requirement = /mob/living/carbon/human
+
+	n_req = /mob/living/carbon/human
+
+	is_cultist_ritual = TRUE
+
+/datum/ritual/fleshcrafting/arcane/invoke(mob/living/user, turf/center)
+	var/mob/living/carbon/human/cultist = locate() in center.contents
+	var/mob/living/carbon/human/mage = locate() in get_step(center, NORTH)
+	if(!(mage.mana_pool?.intrinsic_recharge_sources & MANA_ALL_LEYLINES))
+		return
+	mage.gib()
+	cultist.adjust_skillrank(/datum/skill/magic/arcane, 4, TRUE)
+	cultist.adjust_spell_points(18)
+	cultist.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+	cultist.generate_random_attunements(rand(6, 8))
+	to_chat(cultist, span_notice("Stolen Arcane prowess floods my mind, ZIZO empowers me."))
+
+/datum/ritual/fleshcrafting/curse
+    name = "Hollow Curse"
+    center_requirement = /mob/living/carbon/human
+
+    w_req = /obj/item/alch/sinew
+    e_req = /obj/item/alch/sinew
+    n_req = /obj/item/natural/fur/volf
+    s_req = /obj/item/natural/fur/volf
+
+/datum/ritual/fleshcrafting/curse/invoke(mob/living/user, turf/center)
+	var/mob/living/carbon/human/target = locate() in center.contents
+	if(!target)
+		return
+	if(!target.mind)
+		to_chat(target, span_warning("A mindless servant is useless to me!"))
+		return
+	if(target.mob_biotypes & MOB_UNDEAD)
+		to_chat(target, span_warning("The curse doesn't take hold!"))
+		return
+	if(target.mind.has_antag_datum(/datum/antagonist/werewolf))
+		to_chat(target, span_warning("The curse doesn't take hold!"))
+		return
+	to_chat(target, span_warning("My very being, body, soul, and mind is contorted and twisted violently into a ball of flesh and fur, until I am reshaped anew as an abomination!"))
+	addtimer(CALLBACK(src, PROC_REF(get_hollowed), target, center), 5 SECONDS)
+
+/datum/ritual/fleshcrafting/curse/proc/get_hollowed(mob/living/victim, turf/place)
+    if(QDELETED(victim))
+        return
+    if(place != get_turf(victim))
+        return
+    if(!victim.mind)
+        return
+    var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
+    victim.mind.transfer_to(wll)
+    victim.gib()
+
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"
 	center_requirement = /mob/living/carbon/human
@@ -402,6 +548,40 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
 	target.change_stat(STATKEY_STR, -2)
 	target.change_stat(STATKEY_CON, -3)
+
+/datum/ritual/fleshcrafting/immortality
+	name = "Flawed Immortality"
+	center_requirement = /mob/living/carbon/human
+
+	n_req = /mob/living/carbon/human
+
+/datum/ritual/fleshcrafting/immortality/invoke(mob/living/user, turf/center)
+	var/mob/living/carbon/human/target = locate() in center.contents
+	var/mob/living/carbon/human/victim = locate() in get_step(center, NORTH)
+	if(!(is_species(victim, /datum/species/aasimar)))
+		return
+	victim.gib()
+	ADD_TRAIT(user, TRAIT_NOPAIN, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_NODISMEMBER, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_NODEATH, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_NOBREATH, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_BLOODLOSS_IMMUNE, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_ZOMBIE_IMMUNE, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_WOUNDREGEN, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_PACIFISM, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_SPELLBLOCK, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_ABOMINATION, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_NOHARDCRIT, TRAIT_GENERIC)
+	ADD_TRAIT(user, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
+	to_chat(target, span_notice("ZIZO EMPOWERS ME!! SOMETHING HAS GONE WRONG, THE RITUAL FAILED BUT WHAT IT LEFT ME WITH IS STILL POWER!!"))
+	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_STR, -3)
+	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_SPD, -4)
+	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_END, -4)
+	target.Knockdown(5 SECONDS)
+	target.emote("agony", forced = TRUE)
+	target.add_spell(/datum/action/cooldown/spell/undirected/regenerate)
 
 /datum/ritual/fleshcrafting/fleshform
 	name = "Stronger Form"

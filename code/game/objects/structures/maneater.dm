@@ -12,9 +12,13 @@
 	buckle_lying = FALSE
 	buckle_prevents_pull = TRUE
 	var/list/eatablez = list(/obj/item/bodypart, /obj/item/organ, /obj/item/reagent_containers/food/snacks/meat)
-	var/last_eat
-	var/aggroed = FALSE
+	var/list/attack_sounds = list('sound/vo/mobs/plant/attack (1).ogg','sound/vo/mobs/plant/attack (2).ogg','sound/vo/mobs/plant/attack (3).ogg','sound/vo/mobs/plant/attack (4).ogg')
 
+	COOLDOWN_DECLARE(activity_cooldown)
+	/// timer max, when its over we sleep again
+	var/sleep_time = 24 SECONDS
+	/// when the timer has 16 seconds left (so 8 seconds in), we can eat again
+	var/munch_time = 16 SECONDS
 	///Proximity monitor associated with this atom, needed for proximity checks.
 	var/datum/proximity_monitor/proximity_monitor
 
@@ -38,74 +42,60 @@
 	proximity_monitor = new(src, 1)
 
 /obj/structure/flora/grass/maneater/real/process()
-	if(!has_buckled_mobs())
-		if(world.time > last_eat + 8 SECONDS)
-			var/list/around = view(1, src)
-			for(var/obj/item/F in around)
-				if(is_type_in_list(F, eatablez))
-					aggroed = world.time
-					last_eat = world.time
-					playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-					qdel(F)
-					return
-		if(world.time > aggroed + 30 SECONDS)
-			aggroed = 0
-			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
-			STOP_PROCESSING(SSobj, src)
-			return TRUE
+	if(COOLDOWN_FINISHED(src, activity_cooldown))
+		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+		STOP_PROCESSING(SSobj, src)
+		return TRUE
+	// we can't munch yet, we're on cooldown
+	if(COOLDOWN_TIMELEFT(src, activity_cooldown) > munch_time)
 		return
 	for(var/mob/living/L as anything in buckled_mobs)
-		if(world.time > last_eat + 8 SECONDS)
-			if(L.status_flags & GODMODE)
-				continue
-			last_eat = world.time
-			L.flash_fullscreen("redflash3")
-			playsound(src.loc, pick('sound/vo/mobs/plant/attack (1).ogg','sound/vo/mobs/plant/attack (2).ogg','sound/vo/mobs/plant/attack (3).ogg','sound/vo/mobs/plant/attack (4).ogg'), 100, FALSE, -1)
-			if(iscarbon(L))
-				var/mob/living/carbon/C = L
-				src.visible_message("<span class='danger'>[src] starts to rip apart [C]!</span>")
-				spawn(8 SECONDS)
-					if(C && (C.buckled == src))
-						var/obj/item/bodypart/limb
-						var/list/limb_list = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-						for(var/zone in limb_list)
-							limb = C.get_bodypart(zone)
-							if(limb)
-								playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-								limb.dismember()
-								qdel(limb)
-								return
-						limb = C.get_bodypart(BODY_ZONE_HEAD)
-						if(limb)
-							playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-							limb.dismember()
-							qdel(limb)
-							return
-						limb = C.get_bodypart(BODY_ZONE_CHEST)
-						if(limb)
-							if(!limb.dismember())
-								C.death()
-								C.gib()
-							return
-			else
-				src.visible_message("<span class='danger'>[src] starts to rip apart [L]!</span>")
-				spawn(8 SECONDS)
-					if(L && (L.buckled == src))
-						L.gib()
-						return
+		if(L.status_flags & GODMODE)
+			continue
+		L.flash_fullscreen("redflash3")
+		visible_message(span_danger("[src] starts to rip apart [L]!"))
+		playsound(src, pick(attack_sounds), 100, FALSE, -1)
+		addtimer(CALLBACK(src, PROC_REF(munch), L), sleep_time - munch_time)
+		COOLDOWN_START(src, activity_cooldown, sleep_time)
+		return
+	//if we made it this far there's no one buckled or theyre eating
+	for(var/obj/item/F in view(1, src))
+		if(!is_type_in_list(F, eatablez))
+			continue
+		if(isbodypart(F))
+			var/obj/item/bodypart/BP = F
+			if(BP.status == BODYPART_ROBOTIC)
+				continue // they're still gonna eat that wooden arm off you as a carbon
+		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
+		qdel(F)
+		COOLDOWN_START(src, activity_cooldown, sleep_time)
+		return
+
+/obj/structure/flora/grass/maneater/real/proc/munch(mob/living/L)
+	if(!(L?.buckled == src))
+		return
+	playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		var/obj/item/bodypart/limb = C.get_bodypart_complex(list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)) || C.get_bodypart(BODY_ZONE_HEAD)
+		if(limb)
+			if(limb.dismember())
+				qdel(limb)
+			return
+	L.gib(TRUE,TRUE,TRUE,TRUE) //no organs but drops all the items assuming its carbon
 
 /obj/structure/flora/grass/maneater/real/update_icon_state()
 	. = ..()
 	if(obj_broken)
 		icon_state = "maneater-dead"
-	else if(aggroed)
-		icon_state = "maneater"
-	else
+	else if(COOLDOWN_FINISHED(src, activity_cooldown))
 		icon_state = "maneater-hidden"
+	else
+		icon_state = "maneater"
 
 /obj/structure/flora/grass/maneater/real/update_name()
 	. = ..()
-	if(obj_broken || aggroed)
+	if(obj_broken || !COOLDOWN_FINISHED(src, activity_cooldown))
 		name = "MANEATER"
 	else
 		name = "grass"
@@ -135,38 +125,41 @@
 /obj/structure/flora/grass/maneater/real/HasProximity(atom/movable/AM)
 	if(has_buckled_mobs())
 		return
-	if(world.time > last_eat + 8 SECONDS)
-		var/list/around = view(src, 1) // scan for enemies
-		if(!(AM in around))
+	if(COOLDOWN_TIMELEFT(src, activity_cooldown) > munch_time)
+		return // we just ate so we don't care
+	var/list/around = view(src, 1) // scan for enemies
+	if(!(AM in around))
+		return
+	if(isliving(AM))
+		var/mob/living/L = AM
+		if(COOLDOWN_FINISHED(src, activity_cooldown) && L.m_intent == MOVE_INTENT_SNEAK)
 			return
-		if(istype(AM, /mob/living))
-			var/mob/living/L = AM
-			if(!aggroed)
-				if(L.m_intent == MOVE_INTENT_SNEAK)
-					return
-			if(L.status_flags & GODMODE)
+		if(L.status_flags & GODMODE)
+			return
+		if(L.buckling)
+			return // Something else is buckling them, maybe another maneater even
+		buckle_mob(L, TRUE, check_loc = FALSE)
+		START_PROCESSING(SSobj, src)
+		if(!HAS_TRAIT(L, TRAIT_NOPAIN))
+			L.emote("painscream", forced = TRUE)
+		visible_message(span_danger("[src] snatches [L]!"))
+		playsound(loc, pick(attack_sounds), 100, FALSE, -1)
+		COOLDOWN_START(src, activity_cooldown, sleep_time)
+		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+		return
+	if(is_type_in_list(AM, eatablez))
+		if(isbodypart(AM))
+			var/obj/item/bodypart/BP = AM
+			if(BP.status == BODYPART_ROBOTIC)
 				return
-			aggroed = world.time
-			last_eat = world.time
-			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
-			buckle_mob(L, TRUE, check_loc = FALSE)
-			START_PROCESSING(SSobj, src)
-			if(!HAS_TRAIT(L, TRAIT_NOPAIN))
-				L.emote("painscream", forced = TRUE)
-			src.visible_message("<span class='danger'>[src] snatches [L]!</span>")
-			playsound(src.loc, pick('sound/vo/mobs/plant/attack (1).ogg','sound/vo/mobs/plant/attack (2).ogg','sound/vo/mobs/plant/attack (3).ogg','sound/vo/mobs/plant/attack (4).ogg'), 100, FALSE, -1)
-		if(istype(AM, /obj/item))
-			if(is_type_in_list(AM, eatablez))
-				aggroed = world.time
-				last_eat = world.time
-				START_PROCESSING(SSobj, src)
-				update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
-				playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-				qdel(AM)
-				return
+		START_PROCESSING(SSobj, src)
+		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
+		qdel(AM)
+		COOLDOWN_START(src, activity_cooldown, sleep_time)
+		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 
 /obj/structure/flora/grass/maneater/real/attackby(obj/item/W, mob/user, params)
 	. = ..()
-	if(!aggroed)
+	if(COOLDOWN_TIMELEFT(src, activity_cooldown) < munch_time)
+		COOLDOWN_START(src, activity_cooldown, munch_time)
 		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
-	aggroed = world.time

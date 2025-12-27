@@ -75,7 +75,7 @@
 				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 
 /datum/outfit/inquisitor/ordinator
-	name = "Ordinator"
+	name = "Ordinator (Herr Prafekt)"
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	armor = /obj/item/clothing/armor/plate/fluted/ornate/ordinator
 	belt = /obj/item/storage/belt/leather/steel
