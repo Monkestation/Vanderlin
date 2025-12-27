@@ -1,5 +1,5 @@
 /proc/adjust_triumphs(datum/key_holder, amount, counted = TRUE, reason, silent = FALSE, override_bonus = FALSE)
-	var/unsafe_ckey = FALSE //for handling offline ckeys
+
 	if(!key_holder)
 		return
 
@@ -8,6 +8,7 @@
 
 	var/key
 	var/ckey
+	var/unsafe_ckey = FALSE //for handling offline ckeys
 
 	if(!ismob(key_holder) && !ismind(key_holder) && !isclient(key_holder))
 		var/possible_ckey = key_holder
