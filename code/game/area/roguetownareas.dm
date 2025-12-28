@@ -125,7 +125,7 @@
 	background_track = 'sound/music/area/field.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
-	converted_type = /area/rogue/indoors/shelter/rtfield
+	converted_type = /area/indoors/shelter/rtfield
 
 /area/indoors/shelter/rtfield
 	icon_state = "rtfield"

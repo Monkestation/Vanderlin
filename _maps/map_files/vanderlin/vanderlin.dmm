@@ -589,7 +589,7 @@
 	pixel_y = -8
 	},
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "aqB" = (
 /obj/structure/bridge_stakes{
 	dir = 4
@@ -692,7 +692,7 @@
 	pixel_y = 17
 	},
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "atp" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/cobble/mossy,
@@ -3054,6 +3054,10 @@
 	dir = 8
 	},
 /area/indoors/soilsons)
+"bvn" = (
+/obj/structure/fluff/walldeco/vinez/red,
+/turf/open/floor/naturalstone,
+/area/under/cavewet)
 "bvu" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/paper,
@@ -3528,7 +3532,7 @@
 /obj/effect/lily_petal,
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "bHA" = (
 /obj/structure/water_pipe,
 /turf/open/floor/rooftop{
@@ -3952,7 +3956,7 @@
 	pixel_y = -7
 	},
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "bQr" = (
 /obj/structure/chair/bench/church/r{
 	dir = 1
@@ -4954,7 +4958,7 @@
 "crD" = (
 /obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "crI" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -7271,7 +7275,7 @@
 "duY" = (
 /obj/effect/lily_petal,
 /turf/open/floor/naturalstone,
-/area/under/cave)
+/area/under/cavewet)
 "dva" = (
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town)
@@ -14759,7 +14763,7 @@
 	pixel_y = -11
 	},
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "hqn" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/natural/cloth,
@@ -16010,7 +16014,7 @@
 	pixel_y = 16
 	},
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "hWM" = (
 /obj/structure/rack,
 /obj/item/clothing/armor/chainmail/hauberk/iron,
@@ -27531,7 +27535,7 @@
 /area/under/town/basement)
 "nxZ" = (
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "nye" = (
 /obj/item/rope,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -29068,6 +29072,10 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile,
 /area/indoors/town/manor/halls/e)
+"oso" = (
+/obj/structure/fluff/walldeco/vinez/red,
+/turf/closed/mineral,
+/area/under/cavewet)
 "osp" = (
 /obj/structure/door/violet{
 	name = "Royal Guard's Storage"
@@ -29086,7 +29094,7 @@
 /obj/effect/falling_sakura,
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "osA" = (
 /obj/structure/fermentation_keg/beer,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -30662,7 +30670,7 @@
 	pixel_y = -17
 	},
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "pdi" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -34625,7 +34633,7 @@
 "rjk" = (
 /obj/effect/lily_petal/three,
 /turf/open/floor/naturalstone,
-/area/under/cave)
+/area/under/cavewet)
 "rjA" = (
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/town)
@@ -38115,7 +38123,7 @@
 "taS" = (
 /obj/effect/lily_petal/two,
 /turf/open/floor/naturalstone,
-/area/under/cave)
+/area/under/cavewet)
 "tbb" = (
 /obj/structure/fluff/walldeco/sign/merchantsign/left{
 	pixel_y = -1
@@ -43402,7 +43410,7 @@
 /obj/structure/flora/grass/herb/rosa,
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "vGD" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
@@ -44751,7 +44759,7 @@
 "wqe" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/open/floor/grass/eora,
-/area/under/cave)
+/area/under/cavewet)
 "wqn" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/manor/servanthead)
@@ -65792,12 +65800,12 @@ unl
 unl
 unl
 qFx
-qFx
-qFx
-vXk
-qFx
-qFx
-qFx
+unl
+unl
+oso
+unl
+unl
+unl
 qFx
 qFx
 qFx
@@ -65994,15 +66002,15 @@ qFx
 qFx
 qFx
 qFx
-qFx
-vXk
+unl
+oso
 wqe
 crD
 nxZ
-qFx
-qFx
-qFx
-qFx
+unl
+unl
+unl
+unl
 qFx
 qFx
 ido
@@ -66196,15 +66204,15 @@ qFx
 qFx
 qFx
 qFx
-vXk
+oso
 wqe
 nxZ
 nxZ
 crD
 wqe
-vXk
-qFx
-qFx
+oso
+unl
+unl
 qFx
 qFx
 ido
@@ -66398,15 +66406,15 @@ qFx
 qFx
 qFx
 qFx
-vXk
+oso
 crD
 nxZ
 wqe
 wqe
 wqe
 crD
-qFx
-qFx
+unl
+unl
 qFx
 qFx
 ido
@@ -66600,7 +66608,7 @@ qFx
 qFx
 qFx
 qFx
-qFx
+unl
 nxZ
 vGy
 pcX
@@ -66608,7 +66616,7 @@ hql
 aqy
 nxZ
 nxZ
-vXk
+oso
 qFx
 qFx
 ido
@@ -66798,19 +66806,19 @@ qFx
 qFx
 qFx
 qFx
-qFx
-nNY
-nNY
-nNY
-qFx
-vXk
+unl
+gCP
+gCP
+gCP
+unl
+oso
 wqe
 nxZ
 bQp
 atf
 nxZ
 crD
-vXk
+oso
 qFx
 qFx
 ido
@@ -67000,19 +67008,19 @@ qFx
 qFx
 qFx
 qFx
-nNY
-nNY
-nNY
-nNY
+gCP
+gCP
+gCP
+gCP
 taS
-nNY
-qPd
+gCP
+bvn
 bHu
 crD
 nxZ
 hWK
 nxZ
-vXk
+oso
 qFx
 qFx
 ido
@@ -67202,19 +67210,19 @@ qFx
 qFx
 vXk
 qPd
-nNY
-nNY
-nNY
-nNY
-qFx
-nNY
+gCP
+gCP
+gCP
+gCP
+unl
+gCP
 rjk
-nNY
+gCP
 wqe
 osx
 crD
-vXk
-vXk
+oso
+oso
 qFx
 qFx
 ido
@@ -67402,21 +67410,21 @@ fYq
 qFx
 qFx
 qFx
-qFx
-qPd
-qPd
-vXk
-nNY
+unl
+bvn
+bvn
+oso
+gCP
 duY
-nNY
-qFx
-nNY
-nNY
+gCP
+unl
+gCP
+gCP
 nxZ
 wqe
-qPd
-qFx
-qFx
+bvn
+unl
+unl
 qFx
 ido
 ido
@@ -67604,16 +67612,16 @@ fYq
 qFx
 qFx
 qFx
-qFx
-nNY
-nNY
-qFx
-qFx
-vXk
-nNY
-nNY
-nNY
-vXk
+unl
+gCP
+gCP
+unl
+unl
+oso
+gCP
+gCP
+gCP
+oso
 qFx
 qFx
 qFx
@@ -67806,13 +67814,13 @@ fYq
 qFx
 qFx
 qFx
-qFx
-nNY
-nNY
-qFx
-qFx
-vXk
-vXk
+unl
+gCP
+gCP
+unl
+unl
+oso
+oso
 vXk
 vXk
 gWb
@@ -68008,13 +68016,13 @@ fYq
 qFx
 qFx
 qFx
-qFx
-nNY
-nNY
-nNY
-qFx
-qFx
-qFx
+unl
+gCP
+gCP
+gCP
+unl
+unl
+unl
 qFx
 qFx
 qFx
@@ -68210,13 +68218,13 @@ fYq
 qFx
 qFx
 qFx
-qFx
-qFx
-nNY
-nNY
-nNY
-vXk
-vXk
+unl
+unl
+gCP
+gCP
+gCP
+oso
+oso
 qFx
 qFx
 qFx
@@ -68413,12 +68421,12 @@ qFx
 qFx
 qFx
 qFx
-qFx
-nNY
-qPd
-qPd
-vXk
-qFx
+unl
+gCP
+bvn
+bvn
+oso
+unl
 qFx
 qFx
 qFx
@@ -68615,12 +68623,12 @@ qFx
 qFx
 qFx
 qFx
-qFx
-vXk
-qPd
-nNY
-nNY
-qFx
+unl
+oso
+bvn
+gCP
+gCP
+unl
 qFx
 qFx
 qFx
@@ -68817,14 +68825,14 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-nNY
-nNY
-nNY
-nNY
-vXk
-qFx
+unl
+unl
+gCP
+gCP
+gCP
+gCP
+oso
+unl
 qFx
 qFx
 qFx
@@ -69018,15 +69026,15 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-nNY
-nNY
-nNY
-vXk
-vXk
+unl
+unl
+unl
+unl
+gCP
+gCP
+gCP
+oso
+oso
 qFx
 qFx
 qFx
