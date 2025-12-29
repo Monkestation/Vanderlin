@@ -22,22 +22,19 @@
 	typepath = /datum/round_event/antagonist/solo/vampires_and_werewolves
 
 	restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Hand",
-		"Captain",
-		"Prince",
-		"Priest",
-		"Merchant",
-		"Forest Warden",
-		"Inquisitor",
-		"Absolver",
-		"Confessor",
-		"Sacrestants",
-		"Adept",
-		"Royal Knight",
-		"Templar",
-		"Assassin",
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
 	)
 
 /datum/round_event/antagonist/solo/vampires_and_werewolves

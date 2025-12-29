@@ -729,7 +729,7 @@
 	if(world.time >= next_stage_time && corruption_stage < max_stage)
 		advance_corruption_stage()
 
-	attempt_spread()
+	spread()
 
 /datum/status_effect/void_corruption/proc/apply_damage()
 	if(QDELETED(owner) || owner.stat == DEAD)
@@ -765,7 +765,7 @@
 	damage_tick = initial(damage_tick) * (1 - (corruption_stage * 0.2))  // Damage occurs more frequently
 	spread_chance = initial(spread_chance) + (corruption_stage * 10)     // More likely to spread
 
-/datum/status_effect/void_corruption/proc/attempt_spread()
+/datum/status_effect/void_corruption/proc/spread()
 	if(corruption_stage < 2 || !prob(spread_chance))
 		return
 

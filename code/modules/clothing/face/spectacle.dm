@@ -19,6 +19,12 @@
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
 
+/obj/item/clothing/face/spectacles/monocle
+	name = "silver monocle"
+	icon_state = "monocle"
+	max_integrity = 35
+
+
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)
 	if(isliving(crosser) && !obj_broken)
 		take_damage(11, BRUTE, "blunt", 1)

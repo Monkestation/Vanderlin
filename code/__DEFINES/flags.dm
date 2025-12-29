@@ -100,6 +100,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define LETPASSCLICKS (1<<10)
 /// Allows you to pass over windows and window-adjacent stuff, like windows and windoors. Does not include doors with glass in them.
 #define PASSWINDOW (1<<11)
+/// Specific catch case for thrown mobs (jumping). Useless unless used with LETPASSTHROW.
+#define NOTLETPASSTHROWNMOB (1<<12)
 
 //Movement Types
 /// Regular ground based movment

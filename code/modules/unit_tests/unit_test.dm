@@ -152,7 +152,9 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		/// stuff in this sets everyting in initialize args
 		/obj/effect/fuse,
 		///shit that calls explosion() should probably not be called in empty space
-		/obj/effect/temp_visual/target/meteor
+		/obj/effect/temp_visual/target/meteor,
+		/obj/structure/meatvine/papameat,
+		/obj/effect/meatvine_controller,
 	)
 	///this does some wonky things that we don't want in a test area
 	ignore += typesof(/obj/structure/stockpile_storage,)
@@ -177,6 +179,8 @@ GLOBAL_LIST_EMPTY(required_map_items)
 	ignore += typesof(/obj/effect/buildmode_line)
 	//runtimes without a landmark to spawn on
 	ignore += typesof(/obj/structure/industrial_lift)
+	//will delay the test a LOT and cause a ton of spawns
+	ignore += typesof(/obj/effect/landmark/mapGenerator)
 
 	ignore += typesof(/obj/effect/spawner)
 	ignore += typesof(/atom/movable/screen)

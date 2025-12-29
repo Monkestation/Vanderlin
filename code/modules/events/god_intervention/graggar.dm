@@ -20,7 +20,7 @@ GLOBAL_LIST_EMPTY(graggar_cullings)
 	. = ..()
 	if(!.)
 		return FALSE
-	if(GLOB.patron_follower_counts["Graggar"] < 2)
+	if(GLOB.patron_follower_counts[/datum/patron/inhumen/graggar::name] < 2)
 		return FALSE
 
 /datum/round_event/graggar_culling/start()

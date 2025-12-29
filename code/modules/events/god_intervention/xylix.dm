@@ -17,7 +17,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(GLOB.patron_follower_counts["Xylix"] < 2)
+	if(GLOB.patron_follower_counts[/datum/patron/divine/xylix::name] < 2)
 		return FALSE
 
 /datum/round_event/xylix_fortune/start()

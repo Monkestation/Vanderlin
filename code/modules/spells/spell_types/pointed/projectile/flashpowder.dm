@@ -21,6 +21,6 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		to_chat(L, span_userdanger("OH, GODS ABOVE! MY EYES ARE BURNING!!"))
-		L.blur_eyes(20)
+		L.set_eye_blur_if_lower(40 SECONDS)
 		L.blind_eyes(4)
 		L.emote("agony", forced = TRUE)

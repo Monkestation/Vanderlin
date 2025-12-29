@@ -36,9 +36,9 @@
 	..()
 
 /datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M)
-	M.dizziness = max(0,M.dizziness-5)
-	M.drowsyness = max(0,M.drowsyness-3)
-	M.AdjustSleeping(-40)
+	M.adjust_drowsiness(-10 SECONDS)
+	M.adjust_drowsiness(-6 SECONDS)
+	M.AdjustSleeping(-4 SECONDS)
 	M.adjust_bodytemperature(2, 0, BODYTEMP_NORMAL)
 	..()
 	. = 1

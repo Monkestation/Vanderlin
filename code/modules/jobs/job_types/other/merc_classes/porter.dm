@@ -26,7 +26,7 @@
 		/datum/skill/labor/mathematics = 2,
 		//Can't expect those kobolds to not be thieves or assist with such things.
 		/datum/skill/misc/stealing = 2,
-		/datum/skill/misc/lockpicking,
+		/datum/skill/misc/lockpicking = 2,
 		//Jack of All Trade, Master of None.
 		/datum/skill/misc/sewing = 3,
 		/datum/skill/misc/medicine = 3,
@@ -58,7 +58,7 @@
 	spawned.merctype = 9
 
 /datum/outfit/mercenary/porter
-	name = "Porter"
+	name = "Porter (Mercenary)"
 	head = /obj/item/clothing/head/articap/porter
 	armor = /obj/item/clothing/armor/leather/jacket/artijacket/porter
 	pants = /obj/item/clothing/pants/trou

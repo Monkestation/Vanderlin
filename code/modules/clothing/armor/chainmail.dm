@@ -75,3 +75,8 @@
 	armor = ARMOR_SCALE
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	item_weight = 7 * STEEL_MULTIPLIER
+
+/obj/item/clothing/armor/chainmail/hauberk/ancient
+	name = "ancient hauberk"
+	desc = "A very old hauberk."
+	icon_state = "ancienthauberk"

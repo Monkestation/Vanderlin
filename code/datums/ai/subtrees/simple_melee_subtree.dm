@@ -38,6 +38,9 @@
 /datum/ai_planning_subtree/basic_melee_attack_subtree/gator_attack
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/gator_attack
 
+/datum/ai_planning_subtree/basic_melee_attack_subtree/meatvine
+	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/meatvine
+
 /datum/ai_behavior/basic_melee_attack/gator_attack
 	action_cooldown = 0.5 SECONDS
 	var/death_roll_chance = 15 // Chance to perform a death roll on attack

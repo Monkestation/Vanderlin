@@ -104,6 +104,11 @@
 	additional_items = list(/obj/item/ingot/bronze, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/bronze
 
+/datum/anvil_recipe/weapons/bronze/spear
+	name = "Artificer Cane (+ Copper)"
+	additional_items = list(/obj/item/ingot/copper)
+	created_item = /obj/item/weapon/mace/cane/bronze
+
 // --------- IRON ------------ Middle Tier, what most disgusting Men at Arms have
 /datum/anvil_recipe/weapons/iron
 	abstract_type = /datum/anvil_recipe/weapons/iron
@@ -1026,9 +1031,16 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/atgervi_axe
-	name = "bearded axe"
+	name = "Bearded axe"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/axe/steel/atgervi
 	i_type = "Weapons"
 	craftdiff = 3
+
+/datum/anvil_recipe/weapons/mace/cane/noble
+	name = "Decorated Cane (+ Gold Ingot + Large Log)"
+	craftdiff = 3
+	additional_items = list(/obj/item/ingot/gold, /obj/item/grown/log/tree)
+	created_item = /obj/item/weapon/mace/cane/noble
+	i_type = "Weapons"

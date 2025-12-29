@@ -1,9 +1,9 @@
 /datum/job/jester
 	title = "Jester"
 	tutorial = "The Grenzelhofts were known for their Jesters, wisemen with a tongue just as sharp as their wit. \
-		You command a position of a fool, envious of the position your superiors have upon you. \
-		Your cheap tricks and illusions of intelligence will only work for so long, \
-		and someday you'll find yourself at the end of something sharper than you."
+	You command a position of a fool, envious of the position your superiors have upon you. \
+	Your cheap tricks and illusions of intelligence will only work for so long, \
+	and someday you'll find yourself at the end of something sharper than you."
 	department_flag = PEASANTS
 	display_order = JDO_JESTER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -14,18 +14,79 @@
 
 	allowed_races = RACES_PLAYER_ALL
 
-
 	outfit = /datum/outfit/jester
 	spells = list(
 		/datum/action/cooldown/spell/undirected/joke,
 		/datum/action/cooldown/spell/undirected/tragedy,
 		/datum/action/cooldown/spell/undirected/fart,
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/vicious_mockery
 	)
 	give_bank_account = TRUE
 
-/datum/outfit/jester/pre_equip(mob/living/carbon/human/H)
-	..()
+	skills = list(
+		/datum/skill/combat/knives = 1,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/misc/riding = 1,
+		/datum/skill/craft/bombs = 1,
+		/datum/skill/labor/fishing = 1,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/sneaking = 1,
+		/datum/skill/misc/stealing = 1,
+		/datum/skill/misc/lockpicking = 1,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/music = 1,
+		/datum/skill/craft/cooking = 1,
+		/datum/skill/combat/firearms = 1
+	)
+
+	traits = list(
+		TRAIT_EMPATH,
+		TRAIT_NUTCRACKER,
+		TRAIT_ZJUMP,
+		TRAIT_SHAKY_SPEECH
+	)
+
+/datum/job/jester/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	// Randomize base stats
+	spawned.base_intelligence = rand(1, 20)
+	spawned.base_fortune = rand(1, 20)
+	spawned.base_strength = rand(1, 20)
+	spawned.base_constitution = rand(1, 20)
+	spawned.base_perception = rand(1, 20)
+	spawned.base_speed = rand(1, 20)
+	spawned.base_endurance = rand(1, 20)
+	spawned.recalculate_stats(FALSE)
+
+	// Random bonus skill adjustments
+	spawned.adjust_skillrank(/datum/skill/combat/knives, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/riding, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/craft/bombs, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/labor/fishing, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/reading, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/stealing, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/lockpicking, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/climbing, pick(0,1), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(0,0,0,0,1), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/music, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/craft/cooking, pick(1,2,3,4,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/firearms, pick(1,2,3,4,5), TRUE)
+
+	if(spawned.base_strength > 16)
+		spawned.cmode_music = 'sound/music/cmode/nobility/CombatJesterSTR.ogg'
+	else
+		spawned.cmode_music = pick('sound/music/cmode/nobility/CombatJester1.ogg', 'sound/music/cmode/nobility/CombatJester2.ogg')
+
+	spawned.verbs |= /mob/living/carbon/human/proc/ventriloquate
+	spawned.verbs |= /mob/living/carbon/human/proc/ear_trick
+
+/datum/outfit/jester
+	name = "Jester"
 	shoes = /obj/item/clothing/shoes/jester
 	pants = /obj/item/clothing/pants/tights
 	armor = /obj/item/clothing/shirt/jester
@@ -34,43 +95,6 @@
 	beltl = /obj/item/storage/belt/pouch
 	head = /obj/item/clothing/head/jester
 	neck = /obj/item/clothing/neck/coif
-	H.adjust_skillrank(/datum/skill/combat/knives, pick(1,2,3,4,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2,3,4,5,6), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, pick(1,2,3,4,5,6), TRUE)
-	H.adjust_skillrank(/datum/skill/craft/bombs, pick(1,2,3,4,5,6), TRUE)
-	H.adjust_skillrank(/datum/skill/labor/fishing, pick(1,2,3,4,5,6), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2,3), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, pick(1,2,3,4,5,6), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2,3,4,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/stealing, pick(1,2,3,4,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/lockpicking, pick(1,2,3,4,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, pick(4,5), TRUE) // Pirouette, but falling and hurting yourself IS pretty funny.
-	H.adjust_skillrank(/datum/skill/misc/athletics, pick(4,4,4,4,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/music, pick(1,2,3,4,5,6), TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, pick(1,2,3,4,5,6), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/firearms, pick(1,2,3,4,5,6), TRUE)
-
-	H.base_intelligence = rand(1, 20)
-	H.base_fortune = rand(1, 20)
-	H.base_strength = rand(1, 20)
-	H.base_constitution = rand(1, 20)
-	H.base_perception = rand(1, 20)
-	H.base_speed = rand(1, 20)
-	H.base_endurance = rand(1, 20)
-
-	H.recalculate_stats(FALSE)
-
-	if(H.base_strength > 16) //all natural, baby
-		H.cmode_music = 'sound/music/cmode/nobility/CombatJesterSTR.ogg'
-	else
-		H.cmode_music = pick('sound/music/cmode/nobility/CombatJester1.ogg', 'sound/music/cmode/nobility/CombatJester2.ogg')
-
-	H.verbs |= /mob/living/carbon/human/proc/ventriloquate
-	H.verbs |= /mob/living/carbon/human/proc/ear_trick
-	ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_ZJUMP, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_SHAKY_SPEECH, TRAIT_GENERIC)
 
 //Ventriloquism! Make things speak!
 

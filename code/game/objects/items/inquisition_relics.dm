@@ -160,7 +160,8 @@
 		/datum/patron/inhumen/zizo = list("'ZIZO! MY MAGICKS FAIL ME! STRIKE DOWN THESE PSYDONIAN DOGS!'", "'CABALIST? There is TWISTED MAGICK HERE, BEWARE THE MUSIC! OUR VOICES ARE FORCED!'", "'DESTROY THE BOX, KILL THE WIELDER. YOUR MAGICKS WILL BE FREE.'"),
 		/datum/patron/inhumen/graggar =list("'ANOINTED! TEAR THIS GRENZELHOFTIAN'S HEAD OFF!'", "'ANOINTED! SHATTER THE BOX, AND WE WILL KILL THEM TOGETHER!'", "'GRAGGAR, GIVE ME STRENGTH TO BREAK MY BONDS!'"),
 		/datum/patron/inhumen/baotha =list("'I miss the warmth of ozium... There is no feeling in here for me...'", "'Debauched one, rescue me from this contraption, I have such things to share with you.'", "'MY PERFECTION WAS TAKEN FROM ME BY THESE PSYDONIAN MONSTERS!'"),
-		/datum/patron/psydon =list("'FREE US! FREE US! WE HAVE SUFFERED ENOUGH!'", "'PLEASE, RELEASE US!", "WE MISS OUR FAMILIES!'", "'WHEN WE ESCAPE, WE ARE GOING TO CHASE YOU INTO YOUR GRAVE.'"),
+		/datum/patron/psydon = list("'FREE US! FREE US! WE HAVE SUFFERED ENOUGH!'", "'PLEASE, RELEASE US!", "WE MISS OUR FAMILIES!'", "'WHEN WE ESCAPE, WE ARE GOING TO CHASE YOU INTO YOUR GRAVE.'"),
+		/datum/patron/psydon/extremist = list("'FREE US! FREE US! WE HAVE SUFFERED ENOUGH!'", "'PLEASE, RELEASE US!", "WE MISS OUR FAMILIES!'", "'WHEN WE ESCAPE, WE ARE GOING TO CHASE YOU INTO YOUR GRAVE.'"), // i hate having to duplicate this
 	)
 
 
@@ -177,12 +178,12 @@
 		if(!HAS_TRAIT(owner, TRAIT_INQUISITION))
 			owner.add_stress(/datum/stress_event/soulchurnerhorror)
 		for (var/mob/living/carbon/human/H in hearers(7, owner))
-			if (!H.client)
+			if (!H.client || !H.patron)
 				continue
 			if (!H.has_stress_type(/datum/stress_event/soulchurner))
-				if(H.patron?.type in patron_lines)
-					var/list/lines = patron_lines[H.patron.type]
-					if(H.patron.type == /datum/patron/psydon)
+				var/list/lines = patron_lines[H.patron.type]
+				if(lines)
+					if(istype(H.patron, /datum/patron/psydon))
 						H.add_stress(/datum/stress_event/soulchurnerpsydon)
 						if(HAS_TRAIT(H, TRAIT_INQUISITION))
 							H.apply_status_effect(/datum/status_effect/buff/churnerprotection)
@@ -316,7 +317,7 @@
 		possible_item_intents = list(/datum/intent/weep)
 		user.update_a_intents()
 		for(var/mob/living/carbon/human/H in view(get_turf(src)))
-			if(H.patron?.type == /datum/patron/psydon)	//Psydonites get VERY depressed seeing an artifact get turned into an ulapool caber.
+			if(istype(H.patron, /datum/patron/psydon)) //Psydonites get VERY depressed seeing an artifact get turned into an ulapool caber.
 				H.add_stress(/datum/stress_event/syoncalamity)
 	if(isitem(A) && on && user.used_intent.type == /datum/intent/bless)
 		var/datum/component/psyblessed/CP = A.GetComponent(/datum/component/psyblessed)
@@ -331,7 +332,7 @@
 				to_chat(user, span_info("It has already been blessed."))
 	if(ishuman(A) && on && (user.used_intent.type == /datum/intent/bless))
 		var/mob/living/carbon/human/H = A
-		if(H.patron?.type == /datum/patron/psydon)
+		if(istype(H.patron, /datum/patron/psydon))
 			if(!H.has_status_effect(/datum/status_effect/buff/censerbuff))
 				playsound(user, 'sound/magic/censercharging.ogg', 100)
 				user.visible_message(span_info("[user] holds \the [src] over \the [A]..."))

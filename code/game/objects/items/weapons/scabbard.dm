@@ -128,6 +128,82 @@
 	sellprice = 100
 	icon_state = "rscabbard"
 
+/obj/item/weapon/scabbard/cane
+	name = "fancy cane"
+	desc = "A polished, dark wooden cane, decorated with gold and silver. Often carried by nobility, even those without a limp, simply to flaunt their wealth to the peasantry. This one contains a concealed blade!"
+	icon_state = "canesheath"
+
+	force = DAMAGE_MACE - 4
+	force_wielded = DAMAGE_MACE - 2
+	wdefense = MEDIOCRE_PARRY
+	sellprice = 45
+
+	slot_flags = ITEM_SLOT_HIP
+	w_class = WEIGHT_CLASS_BULKY
+	anvilrepair = /datum/skill/craft/carpentry
+	associated_skill = /datum/skill/combat/swords
+
+/obj/item/weapon/scabbard/cane/apply_components()
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
+	AddComponent(/datum/component/storage/concrete/scabbard/sword)
+
+/obj/item/weapon/scabbard/cane/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list(
+					"shrink" = 0.5,
+					"sx" = -6,
+					"sy" = -6,
+					"nx" = 6,
+					"ny" = -5,
+					"wx" = -1,
+					"wy" = -5,
+					"ex" = -1,
+					"ey" = -5,
+					"nturn" = -45,
+					"sturn" = -45,
+					"wturn" = -45,
+					"eturn" = -45,
+					"nflip" = 0,
+					"sflip" = 0,
+					"wflip" = 0,
+					"eflip" = 0,
+					"northabove" = FALSE,
+					"southabove" = TRUE,
+					"eastabove" = TRUE,
+					"westabove" = FALSE
+				)
+			if("wielded")
+				return list(
+					"shrink" = 0.5,
+					"sx" = 0,
+					"sy" = 0,
+					"nx" = 0,
+					"ny" = 0,
+					"wx" = -3,
+					"wy" = 0,
+					"ex" = 3,
+					"ey" = 0,
+					"nturn" = -90,
+					"sturn" = 0,
+					"wturn" = -90,
+					"eturn" = 0,
+					"nflip" = 0,
+					"sflip" = 0,
+					"wflip" = 0,
+					"eflip" = 0,
+					"northabove" = FALSE,
+					"southabove" = TRUE,
+					"eastabove" = TRUE,
+					"westabove" = TRUE
+				)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+
 
 /obj/item/weapon/scabbard/kazengun
 	name = "simple kazengun scabbard"
