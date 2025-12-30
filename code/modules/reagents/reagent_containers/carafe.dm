@@ -102,6 +102,16 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 35
 
+/obj/item/reagent_containers/glass/carafe/teapot/bronze
+	name = "bronze teapot"
+	desc = "A dainty bronze teapot. The perfect item for a noble's tea party."
+	icon = 'icons/roguetown/items/precious_objects.dmi'
+	icon_state = "teapot_bronze"
+	fill_icon_thresholds = null
+	dropshrink = 1.0
+	smeltresult = /obj/item/ingot/bronze
+	sellprice = 25
+
 /obj/item/reagent_containers/glass/carafe/teapot/jade
 	name = "joapstone teapot"
 	desc = "A dainty teapot carved out of joapstone."
