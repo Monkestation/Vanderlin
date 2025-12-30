@@ -235,7 +235,7 @@
 				say("[src] is not legitimate") //keeping it hush hush that they are fucking broke.
 				return
 			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
-			say("Enjoy the [voucherpay] mammons from the ever generous crown, 'we look forward to future achivements!'")
+			say("Enjoy the [voucherpay] mammons from the ever generous crown, 'we look forward to your future achivements!'")
 			budget2change(voucherpay, H)
 			SStreasury.treasury_value -= voucherpay
 			qdel(voucher)
