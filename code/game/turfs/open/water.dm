@@ -799,7 +799,7 @@
 	desc = "The waves lap at the coast, hungry to swallow the land. Doesn't look too deep."
 	icon_state = MAP_SWITCH("gravel", "gravelW")
 	icon = 'icons/turf/natural/water_mapping.dmi'
-	neighborlay_self = null
+	neighborlay_self = "edgesalt"
 	water_level = 2
 	slowdown = 2
 	swim_skill = TRUE
