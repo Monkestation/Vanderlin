@@ -1073,6 +1073,8 @@
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	landsound = 'sound/foley/jumpland/grassland.ogg'
 	slowdown = 0
+	var/randomized = TRUE
+	var/blood_sand = FALSE
 
 /turf/open/floor/sand/Initialize()
 	. = ..()
@@ -1088,8 +1090,6 @@
 	icon_state = "sand-1"
 	name = "sand"
 	desc = "Warm sand that, sadly, have been mixed with dirt."
-	var/randomized = TRUE
-	var/blood_sand = FALSE
 
 /turf/open/floor/sand/desert/Initialize()
 	. = ..()
@@ -1104,7 +1104,7 @@
 	icon_state = "bloody"
 
 	for(var/direction in list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))
-		var/turf/open/floor/sand/adjacent_turf = get_step(src, direction)
+		var/turf/open/floor/sand/desert/adjacent_turf = get_step(src, direction)
 		if(istype(adjacent_turf))
 			var/dir_name = dir_to_name(direction)
 			adjacent_turf.set_bloody_direction(dir_name)
@@ -1135,7 +1135,7 @@
 			return "sw"
 	return "n" // fallback
 
-/turf/open/floor/sand/desert/bloodied
+/turf/open/floor/sand/bloodied
 	icon_state = "bloody"
 	randomized = FALSE
 
