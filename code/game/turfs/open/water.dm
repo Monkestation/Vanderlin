@@ -715,7 +715,7 @@
 /turf/open/water/river
 	name = "water"
 	desc = "Crystal clear water! Flowing swiftly along the river."
-	icon_state = MAP_SWITCH("rocky", "rivermove-dir")
+	icon_state = MAP_SWITCH("rock", "rivermove-dir")
 	water_level = 3
 	slowdown = 20
 	swim_skill = TRUE
@@ -776,12 +776,12 @@
 				A.ConveyorMove(dir)
 
 /turf/open/water/river/dirt
-	icon_state = MAP_SWITCH("dirty", "rivermovealt-dir")
+	icon_state = MAP_SWITCH("dirt", "rivermovealt-dir")
 	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
 
 /turf/open/water/river/blood
-	icon_state = MAP_SWITCH("rocky", "rivermovealt2-dir")
+	icon_state = MAP_SWITCH("rock", "rivermovealt2-dir")
 	water_reagent = /datum/reagent/blood
 	cleanliness_factor = -5
 

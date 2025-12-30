@@ -18,27 +18,44 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 
-/datum/outfit/grabber/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_END = 1,
+		STATKEY_CON = 1,
+		STATKEY_SPD = -1,
+	)
 
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE) // You get a cudgel for nonlethal self defense and that's it.
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)//they can use the merchant machine and that's it
-	H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/firearms, 1, TRUE) // TALLY HO
-	H.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+	skills = list(
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/shields = 1,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/knives = 1,
+		/datum/skill/combat/firearms = 1,
+		/datum/skill/combat/crossbows = 1,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/swimming = 4,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/labor/mathematics = 1
+	)
 
-	H.change_stat(STATKEY_STR, 1)
-	H.change_stat(STATKEY_END, 1)
-	H.change_stat(STATKEY_CON, 1)
-	H.change_stat(STATKEY_SPD, -1)
+	traits = list(
+		TRAIT_CRATEMOVER
+	)
+
+/datum/job/grabber/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(spawned.gender == MALE)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
+	else
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, 1)
+
+/datum/outfit/grabber
+	name = "Stevedore"
 	backr = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/fingerless
@@ -50,15 +67,16 @@
 	beltr = /obj/item/weapon/mace/cudgel
 	beltl = /obj/item/weapon/sword/sabre/cutlass
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(/obj/item/storage/keyring/stevedore)
-	if(H.gender == MALE)
+
+	backpack_contents = list(
+		/obj/item/storage/keyring/stevedore = 1
+	)
+
+/datum/outfit/grabber/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
 		shoes = /obj/item/clothing/shoes/boots/leather
 		head = /obj/item/clothing/head/headband/colored/red
-		H.change_stat(STATKEY_CON, 1)
-		H.change_stat(STATKEY_STR, 1)//thug bodytype
 	else
 		shoes = /obj/item/clothing/shoes/gladiator
 		head = /obj/item/clothing/head/headband
-		H.change_stat(STATKEY_INT, 1)
-		H.change_stat(STATKEY_SPD, 1)
-	ADD_TRAIT(H, TRAIT_CRATEMOVER, type)

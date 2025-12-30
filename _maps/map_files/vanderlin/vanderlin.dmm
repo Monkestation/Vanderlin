@@ -897,6 +897,9 @@
 /obj/structure/guillotine,
 /turf/open/floor/wood,
 /area/outdoors/town)
+"ayc" = (
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/mountains)
 "ayf" = (
 /obj/structure/chair/stool,
 /turf/open/floor/blocks/stonered/tiny,
@@ -4718,9 +4721,6 @@
 /area/indoors/town/clinic_large/apothecary)
 "cra" = (
 /obj/structure/window/openclose,
-/obj/structure/bars/alt{
-	pixel_y = -3
-	},
 /turf/open/floor/greenstone,
 /area/indoors/town/magician)
 "crc" = (
@@ -18619,6 +18619,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks,
 /area/indoors/town/manor/servant)
+"jvR" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/newtree,
+/turf/open/floor/grass,
+/area/outdoors/mountains)
 "jvS" = (
 /turf/open/floor/blocks/green,
 /area/under/town/sewer)
@@ -39887,9 +39892,6 @@
 "utK" = (
 /obj/structure/window/openclose{
 	dir = 4
-	},
-/obj/structure/bars/alt{
-	pixel_y = -3
 	},
 /turf/open/floor/woodturned,
 /area/indoors/town/manor/halls/w)
@@ -146341,7 +146343,7 @@ mMy
 juM
 juM
 fbo
-wVs
+mfp
 koE
 btu
 nlt
@@ -146543,7 +146545,7 @@ mMy
 juM
 juM
 xnG
-wVs
+mfp
 kri
 btu
 nlt
@@ -164991,7 +164993,7 @@ ehg
 etN
 ehg
 ehg
-ehg
+nRe
 tNj
 ehg
 lHk
@@ -165192,13 +165194,13 @@ luh
 luh
 pAm
 ehg
-sUm
+tNj
 tNj
 jMw
 efl
 tNj
 qym
-ehg
+rHS
 ehg
 tNj
 ehg
@@ -165399,7 +165401,7 @@ tNj
 ehg
 ehg
 tNj
-qym
+ehg
 qym
 jMw
 ehg
@@ -165599,9 +165601,9 @@ nsZ
 tNj
 tNj
 ehg
-nRe
-gVK
-qFx
+ehg
+sUm
+tNj
 dAs
 etN
 vGR
@@ -165801,10 +165803,10 @@ luh
 luh
 wsS
 tNj
-gVK
-etN
-qFx
-qFx
+ehg
+jMw
+ehg
+tNj
 qFx
 qFx
 qFx
@@ -202782,11 +202784,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 htI
@@ -202984,11 +202986,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 htI
@@ -203186,11 +203188,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 htI
@@ -204197,6 +204199,7 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
@@ -204204,8 +204207,7 @@ htI
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 qFx
@@ -204399,6 +204401,7 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
@@ -204406,8 +204409,7 @@ htI
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 szw
 qFx
@@ -204601,6 +204603,7 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
@@ -204608,8 +204611,7 @@ htI
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 sCd
 qFx
@@ -204798,11 +204800,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 htI
@@ -205000,11 +205002,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 htI
@@ -205202,11 +205204,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 htI
@@ -205404,11 +205406,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 htI
 htI
 htI
@@ -205606,11 +205608,11 @@ htI
 htI
 htI
 htI
+ayc
 htI
 htI
 htI
-htI
-htI
+ayc
 qWl
 ljH
 szw
@@ -205796,8 +205798,6 @@ htI
 htI
 htI
 htI
-sCd
-cxH
 htI
 htI
 htI
@@ -205810,9 +205810,11 @@ htI
 htI
 htI
 htI
-htI
-htI
-htI
+ayc
+ayc
+ayc
+ayc
+ayc
 sCd
 szw
 fiF
@@ -205995,14 +205997,14 @@ szw
 jQx
 cxH
 cxH
-szw
-szw
-qWl
-szw
-fiF
-szw
-sCd
-szw
+htI
+htI
+htI
+htI
+htI
+htI
+htI
+htI
 htI
 htI
 htI
@@ -206200,12 +206202,12 @@ qWl
 szw
 szw
 cxH
-sCd
-szw
-sCd
-szw
-haA
-szw
+htI
+htI
+htI
+htI
+htI
+htI
 szw
 qWl
 szw
@@ -206395,19 +206397,19 @@ qFx
 qFx
 fiF
 fiF
-qWl
+jvR
 szw
-fiF
-fiF
-fiF
-fiF
+szw
+szw
+haA
+szw
 szw
 szw
 nES
 cxH
 sCd
 szw
-szw
+haA
 ljH
 szw
 haA
@@ -206597,13 +206599,13 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
 fiF
 fiF
 fiF
+qWl
+fiF
+fiF
+qWl
 sCd
 szw
 qWl
@@ -206801,15 +206803,15 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
 fiF
+szw
+fiF
+szw
+szw
 sCd
 haA
 szw
-fiF
+szw
 szw
 szw
 szw
@@ -207005,16 +207007,16 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
+fiF
+fiF
 fiF
 fiF
 qWl
-fiF
-fiF
-fiF
+szw
+jvR
+szw
 jQx
-sCd
+ljH
 qWl
 szw
 sCd
@@ -207209,12 +207211,12 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+fiF
+fiF
+fiF
+szw
+fiF
+fiF
 qFx
 qFx
 qFx
@@ -207413,8 +207415,8 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
+fiF
+fiF
 qFx
 qFx
 qFx

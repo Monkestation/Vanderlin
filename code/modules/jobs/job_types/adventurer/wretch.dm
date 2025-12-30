@@ -34,14 +34,13 @@
 	to_chat(spawned, span_boldwarning("You are not an antagonist in the sense you kill everyone you're near, it is up to you to pave your own story. It is your choice if you want to take the roll of a highwayman or robber, or to follow a path of redemption, as your role exists to add flavor the round."))
 	to_chat(spawned, span_boldwarning("In the same manner, you are NOT an adventurer."))
 
+/datum/job/advclass/wretch
+	abstract_type = /datum/job/advclass/wretch
+	category_tags = list(CTAG_WRETCH)
 
-/datum/outfit/wretch/proc/wretch_select_bounty(mob/living/carbon/human/H)
+/datum/job/advclass/wretch/proc/wretch_select_bounty(mob/living/carbon/human/H)
 	var/bounty_poster = browser_input_list(H, "Who placed a bounty on you?", "Filthy Criminal", list("The Divine Pantheon", "Kingsfield Expanse"))
 	if(bounty_poster == "Kingsfield Expanse")
 		GLOB.outlawed_players += H.real_name
 	else
 		GLOB.heretical_players += H.real_name
-
-/datum/job/advclass/wretch
-	abstract_type = /datum/job/advclass/wretch
-	category_tags = list(CTAG_WRETCH)
