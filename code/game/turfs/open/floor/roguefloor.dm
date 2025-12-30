@@ -553,6 +553,7 @@
 /*	..................   Church Floors   ................... */
 
 /turf/open/floor/churchmarble
+	icon = 'icons/turf/constructed/church.dmi'
 	icon_state = "church_marble"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -575,6 +576,7 @@
 	ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 
 /turf/open/floor/church
+	icon = 'icons/turf/constructed/church.dmi'
 	icon_state = "church"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -595,7 +597,8 @@
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/churchbrick
-	icon_state = "church_brick"
+	icon = 'icons/turf/constructed/church.dmi'
+	icon_state = "church_marble"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -615,6 +618,7 @@
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/churchrough
+	icon = 'icons/turf/constructed/church.dmi'
 	icon_state = "church_rough"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -637,63 +641,63 @@
 // Church Variants
 // Purple
 /turf/open/floor/church/purple
-	icon_state = "church_purple"
+	icon_state = "church-purple"
 
 /turf/open/floor/churchmarble/purple
-	icon_state = "church_marble_purple"
+	icon_state = "church-purple_marble"
 
 /turf/open/floor/churchrough/purple
-	icon_state = "church_rough_purple"
+	icon_state = "church-purple_rough"
 
 // Violet - old purple
 /turf/open/floor/church/violet
-	icon_state = "church_violet"
+	icon_state = "church-violet"
 
 /turf/open/floor/churchmarble/violet
-	icon_state = "church_marble_violet"
+	icon_state = "church-violet_marble"
 
 /turf/open/floor/churchrough/violet
-	icon_state = "church_rough_violet"
+	icon_state = "church-violet_rough"
 
 // Rust - Maroon, good for inhumen.
 /turf/open/floor/church/rust
-	icon_state = "church_violet"
+	icon_state = "church-rust"
 
 /turf/open/floor/churchmarble/rust
-	icon_state = "church_marble_rust"
+	icon_state = "church-rust_marble"
 
 /turf/open/floor/churchrough/rust
-	icon_state = "church_rough_rust"
+	icon_state = "church-rust_rough"
 
 // Pale - Sandy, use in Deshret maybe
 /turf/open/floor/church/pale
-	icon_state = "church_pale"
+	icon_state = "church-pale"
 
 /turf/open/floor/churchmarble/pale
-	icon_state = "church_marble_pale"
+	icon_state = "church-pale_marble"
 
 /turf/open/floor/churchrough/pale
-	icon_state = "church_rough_pale"
+	icon_state = "church-pale_rough"
 
 // Gold - Astratan theme?
 /turf/open/floor/church/gold
-	icon_state = "church_gold"
+	icon_state = "church-gold"
 
 /turf/open/floor/churchmarble/gold
-	icon_state = "church_marble_gold"
+	icon_state = "church-gold_marble"
 
 /turf/open/floor/churchrough/gold
-	icon_state = "church_rough_gold"
+	icon_state = "church-gold_marble"
 
 // Green - Dendor shrines.
 /turf/open/floor/church/green
-	icon_state = "church_green"
+	icon_state = "church-green"
 
 /turf/open/floor/churchmarble/green
-	icon_state = "church_marble_green"
+	icon_state = "church-green_marble"
 
 /turf/open/floor/churchrough/green
-	icon_state = "church_rough_green"
+	icon_state = "church-green_rough"
 
 //
 /turf/open/floor/herringbone
@@ -1080,6 +1084,8 @@
 	icon_state = "sandgravel"
 
 /turf/open/floor/sand/desert
+	icon = 'icons/delver/desert_objects.dmi'
+	icon_state = "sand-1"
 	name = "sand"
 	desc = "Warm sand that, sadly, have been mixed with dirt."
 	var/randomized = TRUE
