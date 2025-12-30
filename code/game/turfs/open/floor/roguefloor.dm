@@ -1075,6 +1075,10 @@
 	slowdown = 0
 	var/randomized = TRUE
 	var/blood_sand = FALSE
+	smoothing_flags = SMOOTH_EDGE
+	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_DIRT
+	smoothing_list = SMOOTH_GROUP_FLOOR_DIRT_ROAD
+	neighborlay = "graveledge"
 
 /turf/open/floor/sand/Initialize()
 	. = ..()
