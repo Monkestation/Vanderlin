@@ -391,7 +391,7 @@
 /datum/blueprint_recipe/floor/bath/pool
 	name = "Pool Edge Tile"
 	desc = "Clean bathroom-style tiling made of stone blocks."
-	result_type = /turf/open/floor/tile/bath
+	result_type = /turf/open/floor/tile/bath/pool
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
 	)
