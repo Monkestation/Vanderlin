@@ -1068,7 +1068,6 @@
 	icon = 'icons/turf/natural/smooth_edges.dmi'
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND
-	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_DIRT_ROAD
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	landsound = 'sound/foley/jumpland/grassland.ogg'
@@ -1076,8 +1075,7 @@
 	var/randomized = TRUE
 	var/blood_sand = FALSE
 	smoothing_flags = SMOOTH_EDGE
-	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_DIRT
-	smoothing_list = SMOOTH_GROUP_FLOOR_DIRT_ROAD
+	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_DIRT_ROAD
 	neighborlay = "graveledge"
 
 /turf/open/floor/sand/Initialize()
