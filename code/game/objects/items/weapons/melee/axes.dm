@@ -261,6 +261,38 @@
 	minstr = 10
 	wdefense = AVERAGE_PARRY
 
+//................ Bronze ............... //
+/obj/item/weapon/axe/bronze
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	name = "bronze axe"
+	desc = "Tool, weapon, loyal bronze companion."
+	icon_state = "axe_bronze"
+	max_blade_int = 150
+	max_integrity = INTEGRITY_STANDARD
+	melting_material = /datum/material/bronze
+	melt_amount = 100
+	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	parrysound = "sword"
+	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+
+	wdefense = MEDIOCRE_PARRY
+	minstr = 6
+
+	sellprice = 20
+
+/obj/item/weapon/axe/bronze/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -12,"sy" = -10,"nx" = 12,"ny" = -10,"wx" = -8,"wy" = -7,"ex" = 3,"ey" = -9,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = -12,"sy" = 3,"nx" = 12,"ny" = 2,"wx" = -8,"wy" = 2,"ex" = 4,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+
 //................ Psydonian Axe ............... //
 /obj/item/weapon/axe/psydon
 	force = DAMAGE_AXE

@@ -12,11 +12,59 @@
 	roll_chance = 30
 	is_recognized = TRUE
 
-	allowed_patrons = list(/datum/patron/divine/astrata, /datum/patron/divine/necra, /datum/patron/divine/ravox)
+	jobstats = list(
+		STATKEY_END = 2,
+		STATKEY_CON = 2,
+		STATKEY_STR = 1
+	)
 
-/datum/outfit/adventurer/crusader/pre_equip(mob/living/carbon/human/H)
-	..()
+	skills = list(
+		/datum/skill/combat/crossbows = 2,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/swords = 2,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/shields = 2,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/riding = 4,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/reading = 2,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/cooking = 1
+	)
 
+	traits = list(
+		TRAIT_STEELHEARTED,
+		TRAIT_HEAVYARMOR
+	)
+
+	languages = list(/datum/language/oldpsydonic)
+
+/datum/job/advclass/pilgrim/rare/crusader/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	switch(spawned.patron?.type)
+		if(/datum/patron/divine/astrata)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
+		if(/datum/patron/divine/necra)
+			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
+		else
+			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
+
+	if(spawned.gender == FEMALE)
+		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+	else
+		spawned.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
+
+	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
+		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
+
+	to_chat(spawned, "<br><br><font color='#bdc34a'><span class='bold'>You have been sent from the Totod Order on a mission to aid your struggle against the Blood Barons somehow. The details of your mission may vary, perhaps to find allies, funding, or a agent of the enemy...</span></font><br><br>")
+
+/datum/outfit/adventurer/crusader
+	name = "Totod Order Emissary (Adventurer)"
 	head = /obj/item/clothing/head/helmet/heavy/crusader
 	neck = /obj/item/clothing/neck/coif/cloth
 	armor = /obj/item/clothing/armor/chainmail/hauberk
@@ -29,70 +77,28 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/sword/silver
 
-	switch(H.patron?.name)
-		if("Astrata")
-			H.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
-			cloak = /obj/item/clothing/cloak/stabard/templar/astrata // Gold for Astrata regardless of gender
+/datum/outfit/adventurer/crusader/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	switch(equipped_human.patron?.type)
+		if(/datum/patron/divine/astrata)
+			cloak = /obj/item/clothing/cloak/stabard/templar/astrata
 			wrists = /obj/item/clothing/neck/psycross/silver/astrata
-		if("Necra")
-			H.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
+		if(/datum/patron/divine/necra)
 			cloak = /obj/item/clothing/cloak/stabard/templar/necra
 			wrists = /obj/item/clothing/neck/psycross/silver/necra
-		else // Failsafe
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
-			cloak = /obj/item/clothing/cloak/stabard/templar/ravox // Gold version regardless of gender or patron
+		else
+			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 			wrists = /obj/item/clothing/neck/psycross/silver/ravox
 
-	H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	H.change_stat(STATKEY_END, 2)
-	H.change_stat(STATKEY_CON, 2)
-	H.change_stat(STATKEY_STR, 1)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	if(H.dna?.species)
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-
-	// Females are crossbow and dagger based
-	if(H.gender == FEMALE)
+	if(equipped_human.gender == FEMALE)
 		head = /obj/item/clothing/head/helmet/heavy/crusader/t
 		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 		beltl = /obj/item/weapon/knife/dagger/silver
 		beltr = /obj/item/ammo_holder/quiver/bolts
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		backl = /obj/item/storage/backpack/satchel/black
 		backpack_contents = list(/obj/item/storage/belt/pouch/coins/rich = 1)
-	// Males are sword and shield based
 	else
-		H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
 		beltr = /obj/item/storage/belt/pouch/coins/rich
-	// Finally, grant us the language
-
-	if(!H.has_language(/datum/language/oldpsydonic))
-		H.grant_language(/datum/language/oldpsydonic)
-		to_chat(H, "<span class='info'>I can speak Old Psydonic with ,m before my speech.</span>")
-
-/datum/outfit/adventurer/crusader // Reminder message
-	var/tutorial = "<br><br><font color='#bdc34a'><span class='bold'>You have been sent from the Totod Order on a mission to aid your struggle against the Blood Barons somehow. The details of your mission may vary, perhaps to find allies, funding, or a agent of the enemy...</span></font><br><br>"
-
-/datum/outfit/adventurer/crusader/post_equip(mob/living/carbon/human/H)
-	..()
-	to_chat(H, tutorial)
-
 
 /obj/item/clothing/cloak/stabard/crusader
 	name = "surcoat of the golden order"

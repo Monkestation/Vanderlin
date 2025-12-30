@@ -16,6 +16,7 @@
 	cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
+	allowed_patrons = list(/datum/patron/divine/astrata)
 
 	outfit = /datum/outfit/priest
 	spells = list(
@@ -31,15 +32,50 @@
 		EXP_TYPE_CHURCH = 900,
 	)
 
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_INT = 2,
+		STATKEY_END = 2,
+		STATKEY_SPD = 1
+	)
 
+	skills = list(
+		/datum/skill/misc/reading = 5,
+		/datum/skill/magic/holy = 4,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/polearms = 3,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/sewing = 3,
+		/datum/skill/misc/medicine = 3,
+		/datum/skill/craft/cooking = 1,
+		/datum/skill/labor/mathematics = 3
+	)
 
-/datum/outfit/priest/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.virginity = TRUE
-	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	H.verbs |= /mob/living/carbon/human/proc/churchcurse
-	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
+	languages = list(/datum/language/celestial)
+
+/datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
+
+	spawned.verbs |= /mob/living/carbon/human/proc/coronate_lord
+	spawned.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
+	spawned.verbs |= /mob/living/carbon/human/proc/churchcurse
+	spawned.verbs |= /mob/living/carbon/human/proc/churchannouncement
+
+	spawned.virginity = TRUE
+
+	var/holder = spawned.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_priest()
+		devotion.grant_to(spawned)
+
+/datum/outfit/priest
+	name = "Priest"
 	neck = /obj/item/clothing/neck/psycross/silver/astrata
 	head = /obj/item/clothing/head/priestmask
 	shirt = /obj/item/clothing/shirt/undershirt/priest
@@ -49,43 +85,13 @@
 	belt = /obj/item/storage/belt/leather/rope
 	armor = /obj/item/clothing/shirt/robe/priest
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/needle = 1, /obj/item/storage/belt/pouch/coins/rich = 1 )
+	backpack_contents = list(
+		/obj/item/needle = 1,
+		/obj/item/storage/belt/pouch/coins/rich = 1
+	)
+	l_hand = /obj/item/weapon/polearm/woodstaff/aries
 
-	var/obj/item/weapon/polearm/woodstaff/aries/P = new()
-	H.put_in_hands(P, forced = TRUE)
-
-	if(H.patron != /datum/patron/divine/astrata) // For some stupid reason this was checking for Dendor before.
-		H.set_patron(/datum/patron/divine/astrata)
-
-	H.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/magic/holy, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE) // Privilege of being the SECOND biggest target in the game, and arguably the worse of the two targets to lose
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-	H.change_stat(STATKEY_STR, 1) // One slot and a VERY important role, it deserves a half-decent statline
-	H.change_stat(STATKEY_INT, 2)
-	H.change_stat(STATKEY_END, 2)
-	H.change_stat(STATKEY_SPD, 1)
-	if(!H.has_language(/datum/language/celestial)) // For discussing church matters with the other Clergy
-		H.grant_language(/datum/language/celestial)
-		to_chat(H, "<span class='info'>I can speak Celestial with ,c before my speech.</span>")
-	var/holder = H.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_priest()
-		devotion.grant_to(H)
-	H.update_icons()
-
-/datum/job/priest/demoted //just used to change the priest title
+/datum/job/priest/demoted
 	title = "Ex-Priest"
 	f_title = "Ex-Priestess"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_EQUIP_RANK)
@@ -94,7 +100,7 @@
 	total_positions = 0
 	spawn_positions = 0
 
-/datum/job/priest/vice //just used to change the priest title
+/datum/job/priest/vice
 	title = "Vice Priest"
 	f_title = "Vice Priestess"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_EQUIP_RANK)
@@ -133,11 +139,9 @@
 	var/datum/job/lord_job = SSjob.GetJobType(/datum/job/lord)
 	var/datum/job/consort_job = SSjob.GetJobType(/datum/job/consort)
 	for(var/mob/living/carbon/human/HL in GLOB.human_list)
-		//this sucks ass. refactor to locate the current ruler/consort
 		if(HL.mind)
 			if(is_lord_job(HL.mind.assigned_role) || is_consort_job(HL.mind.assigned_role))
 				HL.mind.set_assigned_role(SSjob.GetJobType(/datum/job/villager))
-		//would be better to change their title directly, but that's not possible since the title comes from the job datum
 		if(HL.job == "Monarch")
 			HL.job = "Ex-Monarch"
 			lord_job?.remove_spells(HL)
@@ -148,7 +152,7 @@
 	var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 	coronated.mind.set_assigned_role(/datum/job/lord)
 	lord_job?.get_informed_title(coronated, TRUE, new_title)
-	coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
+	coronated.job = "Monarch"
 	lord_job?.add_spells(coronated)
 	SSticker.rulermob = coronated
 	GLOB.badomens -= OMEN_NOLORD
@@ -216,7 +220,6 @@
 				GLOB.heretical_players += inputty
 				priority_announce("[real_name] has put Xylix's curse of woe on [inputty] for offending the church!", title = "SHAME", sound = 'sound/misc/excomm.ogg')
 				break
-
 
 /mob/living/carbon/human/proc/churchannouncement()
 	set name = "Announcement"

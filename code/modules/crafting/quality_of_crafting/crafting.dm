@@ -1051,7 +1051,7 @@
 	name = "opened clam"
 	output = list (
 		/obj/item/carvedgem/shell/openoyster,
-		/obj.item/carvedgem/rose/rawrose
+		/obj/item/carvedgem/rose/rawrose
 	)
 
 	requirements = list(

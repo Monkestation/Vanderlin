@@ -58,7 +58,7 @@
 	spawned.merctype = 9
 
 /datum/outfit/mercenary/porter
-	name = "Porter"
+	name = "Porter (Mercenary)"
 	head = /obj/item/clothing/head/articap/porter
 	armor = /obj/item/clothing/armor/leather/jacket/artijacket/porter
 	pants = /obj/item/clothing/pants/trou

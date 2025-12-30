@@ -19,18 +19,51 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)//they were a mage, or learnt magic, before becoming a mercenary
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
-
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)//only noc or zizo worshippers can be mages
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
+	magic_user = TRUE
+	spell_points = 8 //less than courtmagician, more than an adventurer wizard
 
-/datum/outfit/mercenary/sellmage/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_END = 1,
+		STATKEY_INT = 4,
+		STATKEY_CON = -1,
+		STATKEY_PER = -1,
+		STATKEY_STR = -1
+	)
 
-	H.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+	skills = list(
+		/datum/skill/combat/knives = 1,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/magic/arcane = 4,
+		/datum/skill/combat/polearms = 3,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/craft/crafting = 1,
+		/datum/skill/misc/medicine = 1,
+		/datum/skill/misc/reading = 4
+	)
 
+	traits = list(
+		TRAIT_NOBLE
+	)
+
+/datum/job/advclass/mercenary/sellmage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.merctype = 9
+	// Random rare combat music (1% chance)
 	if(prob(1)) //extremely rare just like court mage
-		H.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
+		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
+	// Age-based stat adjustments
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1) //to counteract the innate endurance loss
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, -1)  //instead they lose some perception
+
+/datum/outfit/mercenary/sellmage
+	name = "Sellmage (Mercenary)"
 	shirt = /obj/item/clothing/armor/chainmail/iron //intended, iron chainmail underneath the robe to stop knives
 	ring = /obj/item/clothing/ring/silver
 	gloves = /obj/item/clothing/gloves/leather
@@ -41,55 +74,30 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor //broke
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
-	backpack_contents = list(/obj/item/book/granter/spellbook/adept = 1, /obj/item/chalk = 1, /obj/item/reagent_containers/glass/bottle/manapot = 1)
+	backpack_contents = list(
+		/obj/item/book/granter/spellbook/adept = 1,
+		/obj/item/chalk = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot = 1
+	)
 
-	//combat
-	H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/magic/arcane, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-
-	//athleticism and movement
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-
-	//misc skills
-	H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-
-	if(H.age == AGE_OLD)
-		H.change_stat(STATKEY_END, 1)//to counteract the innate endurance loss
-		H.change_stat(STATKEY_PER, -1)//instead they lose some perception
-
-	//increased endurance more than common mages due to them being a merc
-	H.change_stat(STATKEY_END, 1)
-	H.change_stat(STATKEY_INT, 4)
-	H.change_stat(STATKEY_CON, -1)
-	H.change_stat(STATKEY_PER, -1)
-	H.change_stat(STATKEY_STR, -1)
-
-	H.adjust_spell_points(8)//less than courtmagician, more than an a adventurer wizard
-
-	H.merctype = 9
-
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-
-/datum/outfit/mercenary/sellmage/post_equip(mob/living/carbon/human/H)
+/datum/outfit/mercenary/sellmage/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
+	if(visuals_only)
+		return
+
+	// Hat selection (visual equipment)
 	var/static/list/selectablehat = list(
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
 		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
 		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 	)
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+	equipped_human.select_equippable(equipped_human, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+
+	// Robe selection (visual equipment)
 	var/static/list/selectablerobe = list(
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 	)
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
+	equipped_human.select_equippable(equipped_human, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")

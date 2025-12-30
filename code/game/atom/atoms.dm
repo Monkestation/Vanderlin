@@ -296,8 +296,12 @@
 	QDEL_NULL(light)
 	QDEL_NULL(ai_controller)
 
+	// We used to remove stuff from the smoothing queue here,
+	// but list removals can be REALLY costly.
+	// If this is qdeleted and the flag is unset, it'll just get skipped
+	// which is way faster.
 	if(smoothing_flags & SMOOTH_QUEUED)
-		SSicon_smooth.remove_from_queues(src)
+		smoothing_flags &= ~SMOOTH_QUEUED
 
 	return ..()
 

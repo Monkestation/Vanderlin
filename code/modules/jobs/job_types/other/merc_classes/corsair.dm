@@ -7,36 +7,46 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 	total_positions = 5
 
+	jobstats = list(
+		STATKEY_END = 2,
+		STATKEY_SPD = 3
+	)
+
+	skills = list(
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/wrestling = 4,
+		/datum/skill/labor/fishing = 3,
+		/datum/skill/misc/swimming = 4,
+		/datum/skill/misc/climbing = 5,
+		/datum/skill/misc/sneaking = 2,
+		/datum/skill/misc/lockpicking = 3,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/craft/cooking = 3
+	)
+
+	traits = list(
+		TRAIT_DODGEEXPERT
+	)
+
 /datum/outfit/adventurer/corsair
+	name = "Corsair (Mercenary)"
 	head = /obj/item/clothing/head/helmet/leather/headscarf
 	pants = /obj/item/clothing/pants/tights/sailor
 	belt = /obj/item/storage/belt/leather/mercenary
 	armor = /obj/item/clothing/armor/leather/jacket/sea
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/natural/worms/leech = 2, /obj/item/storage/belt/pouch/coins/mid)
+	backpack_contents = list(
+		/obj/item/natural/worms/leech = 2,
+		/obj/item/storage/belt/pouch/coins/mid = 1
+	)
 	backr = /obj/item/fishingrod/fisher
 	beltl = /obj/item/weapon/sword/sabre/cutlass
 	beltr = /obj/item/weapon/knife/dagger
 	scabbards = list(/obj/item/weapon/scabbard/sword, /obj/item/weapon/scabbard/knife)
 	shoes = /obj/item/clothing/shoes/boots
 
-/datum/outfit/adventurer/corsair/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.mind)
-
-		H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE) // Swords / Nonlethal.
-		H.adjust_skillrank(/datum/skill/labor/fishing, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE) // For jumping off roofs. Don't lower.
-		H.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE) // Most other classes have better Sneaking.
-		H.adjust_skillrank(/datum/skill/misc/lockpicking, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE) // Very athletic from climbing masts and being on boats all the time.
-		H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/cooking, 3, TRUE)
-
+/datum/outfit/adventurer/corsair/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/sailor, /obj/item/clothing/shirt/undershirt/sailor/red)
-	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	H.change_stat(STATKEY_END, 2)
-	H.change_stat(STATKEY_SPD, 3) // Hit-And-Run.
