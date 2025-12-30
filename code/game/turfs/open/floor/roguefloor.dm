@@ -991,7 +991,7 @@
 	icon_state = "path_abyss"
 
 /turf/open/floor/sand
-	name = "sand"
+	name = "gravelly sand"
 	desc = "Dark grey gravel which has been ground smooth by water over aeons."
 	icon_state = "gravel"
 	icon = 'icons/turf/natural/smooth_edges.dmi'
@@ -1010,17 +1010,21 @@
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/sand/sandstone
+	name = "sandstone gravel"
 	desc = "Chunky sandstone, disintegrated naturally over time into a less-than-comfortable cobble."
 	icon_state = "sandgravel"
 
-/*  //Until we have sprites for this that don't clash with the turf artstyle, this will be disabled. See Delver folder for the old sprites and how bright they are. -Aberra
-/turf/open/floor/sand/Initialize()
+/turf/open/floor/sand/desert
+	name = "sand"
+	desc = "Warm sand that, sadly, have been mixed with dirt."
+
+/turf/open/floor/sand/desert/Initialize()
 	. = ..()
 	if(randomized)
 		var/random_num = rand(1, 12)
 		icon_state = "sand-[random_num]"
 
-/turf/open/floor/sand/proc/make_bloodied()
+/turf/open/floor/sand/desert/proc/make_bloodied()
 	if(blood_sand)
 		return
 	blood_sand = TRUE
@@ -1032,13 +1036,13 @@
 			var/dir_name = dir_to_name(direction)
 			adjacent_turf.set_bloody_direction(dir_name)
 
-/turf/open/floor/sand/proc/set_bloody_direction(direction_name)
+/turf/open/floor/sand/desert/proc/set_bloody_direction(direction_name)
 	if(blood_sand)
 		return
 	blood_sand = TRUE
 	icon_state = "bloody-[direction_name]"
 
-/turf/open/floor/sand/proc/dir_to_name(direction)
+/turf/open/floor/sand/desert/proc/dir_to_name(direction)
 	switch(direction)
 		if(NORTH)
 			return "n"
@@ -1057,9 +1061,8 @@
 		if(SOUTHWEST)
 			return "sw"
 	return "n" // fallback
-*/
 
-/turf/open/floor/sand/bloodied
+/turf/open/floor/sand/desert/bloodied
 	icon_state = "bloody"
 	randomized = FALSE
 
