@@ -28,12 +28,13 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600
 	)
-
+	traits = list(
+		TRAIT_MERCGUILD,
+	)
 
 /datum/job/mercenary/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	to_chat(spawned, "<br><br><font color='#855b14'><span class='bold'>The Gaffer, who feeds and houses you may have work for you todae, go see him at the office outside your lodgings.</span></font><br><br>")
-	ADD_TRAIT(spawned, TRAIT_MERCGUILD, TRAIT_GENERIC)
 	for(var/obj/effect/landmark/contracthole/merchole in GLOB.landmarks_list)
 		if(istype(merchole, /obj/effect/landmark/contracthole))
 			merchole.addcontract(spawned)

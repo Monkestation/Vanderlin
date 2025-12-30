@@ -169,6 +169,10 @@
 		playsound(src, 'sound/vo/vomit.ogg', 100, TRUE)
 		budget2change(income)
 
+#define IMMATURE 0
+#define ANGSTY 1
+#define IMPERFECT 2
+
 /obj/structure/fake_machine/falseheadeater
 	name = "ANKLE BITER"
 	desc = "Disgusting..."
@@ -176,7 +180,7 @@
 	icon_state = "infestation_1"
 	density = TRUE
 	blade_dulling = DULLING_BASH
-	var/headeaterspread
+	var/headeaterspread = IMMATURE
 
 /obj/structure/fake_machine/falseheadeater/process()
 	. = ..()
@@ -225,38 +229,41 @@
 	return ..()
 
 /obj/structure/fake_machine/falseheadeater/proc/infection()
-	if(!headeaterspread)
-		headeaterspread = 1
-	if(headeaterspread == 1)
-		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+	if(headeaterspread == IMMATURE)
 		headeaterspread++
-		playsound(src, 'sound/gore/flesh_eat_03.ogg', 70, FALSE, ignore_walls = TRUE)
-		addtimer(CALLBACK(src, PROC_REF(infection)), 20 MINUTES)
-		set_light(1, 1, 1, l_color =  "#b40909")
-		return
-	if(headeaterspread == 2)
-		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
-		headeaterspread++
-		playsound(src, 'sound/gore/flesh_eat_03.ogg', 70, FALSE, ignore_walls = TRUE)
-		return
+	switch(headeaterspread)
+		if(ANGSTY)
+			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+			headeaterspread++
+			playsound(src, 'sound/gore/flesh_eat_03.ogg', 70, FALSE, ignore_walls = TRUE)
+			addtimer(CALLBACK(src, PROC_REF(infection)), 20 MINUTES)
+			set_light(1, 1, 1, l_color =  "#b40909")
+		if(IMPERFECT)
+			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+			headeaterspread++
+			playsound(src, 'sound/gore/flesh_eat_03.ogg', 70, FALSE, ignore_walls = TRUE)
 
 /obj/structure/fake_machine/falseheadeater/update_name()
 	. = ..()
-	if(headeaterspread == 1)
-		name = "CHEST BURSTER"
-		return
-	if(headeaterspread == 2)
-		name = "FACE EATER"
+	switch(headeaterspread)
+		if(ANGSTY)
+			name = "CHEST BURSTER"
+		if(IMPERFECT)
+			name = "FACE EATER"
 
 /obj/structure/fake_machine/falseheadeater/update_icon_state()
 	. = ..()
-	if(headeaterspread == 1)
-		icon_state = "infestation_2"
-		return
-	if(headeaterspread == 2)
-		icon_state = "infestation_3"
+	switch(headeaterspread)
+		if(ANGSTY)
+			icon_state = "infestation_2"
+		if(IMPERFECT)
+			icon_state = "infestation_3"
 
 /obj/structure/fake_machine/falseheadeater/proc/infestation_death()
 	playsound(src, 'sound/combat/gib (1).ogg', 70, FALSE, ignore_walls = TRUE)
 	//N/A needs the butchering effect of speweing blood and guts everywhere
 	qdel(src)
+
+#undef IMMATURE
+#undef ANGSTY
+#undef IMPERFECT

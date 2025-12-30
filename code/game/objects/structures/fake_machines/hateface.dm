@@ -111,7 +111,6 @@
 				addtimer(CALLBACK(src, PROC_REF(monitorflick)), time)
 
 	START_PROCESSING(SSroguemachine, src)
-	return
 
 /obj/structure/fake_machine/hateface/proc/hate_monologue_say(hate_words)
 	if(!hate_words)
@@ -139,7 +138,6 @@
 		return
 	else
 		. += "Gilded worms do tombs enfold."
-
 
 /obj/structure/fake_machine/hateface/attackby(obj/item/I, mob/user, params)
 	. = ..()

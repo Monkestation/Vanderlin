@@ -178,8 +178,8 @@
 	if(!words)
 		return
 	say(words)
-	for(var/mob/living/carbon/human/noble in range(src, loc))
-		if(HAS_TRAIT(noble, TRAIT_NOBLE) && !HAS_TRAIT(noble, TRAIT_DEAF)) //I know trait deaf isn't it but I cant find the code for canhear
+	for(var/mob/living/carbon/human/noble in get_hearers_in_view(DEFAULT_MESSAGE_RANGE, loc))
+		if(noble.can_hear() && HAS_TRAIT(noble, TRAIT_NOBLE)) //I know trait deaf isn't it but I cant find the code for canhear
 			noble.add_stress(/datum/stress_event/getmerced)
 	//N/A these should make sound
 	//N/A and an overlay for a bit

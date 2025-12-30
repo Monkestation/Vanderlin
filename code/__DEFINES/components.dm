@@ -188,8 +188,6 @@
 ///signal for gaffer ring destroyed, if you dont like my location send me rod directly into my ; this sucks.
 #define COMSIG_GAFFER_RING_DESTROYED "gaffer_ring_destroyed"
 
-//#define COMSIG_HEADEATER_CONTRACT "hcontract_does_thing" //^ sorry grung, its about to suck more.
-
 // /obj/item/clothing signals
 #define COMSIG_CLOTHING_STEP_ACTION "clothing_step_action"			//from base of obj/item/clothing/shoes/proc/step_action(): ()
 

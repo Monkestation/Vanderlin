@@ -69,8 +69,9 @@
 			dat += "<A href='byond://?src=[REF(src)];read=[REF(H)]'>[H.name]</A> [auth ? "<A href='byond://?src=[REF(src)];write=[REF(H)]'>Write</A> <A href='byond://?src=[REF(src)];remove=[REF(H)]'>Remove</A> <A href='byond://?src=[REF(src)];rename=[REF(H)]'>Rename</A>": ""]<BR>"
 		else
 			dat += "<A href='byond://?src=[REF(src)];read=[REF(H)]'>[H.name]</A> [auth ? "<A href='byond://?src=[REF(src)];remove=[REF(H)]'>Remove</A>" : ""]<BR>"
-	user << browse("<HEAD><TITLE>Notices</TITLE></HEAD>[dat]","window=HAILER")
-	onclose(user, "HAILER")
+	var/datum/browser/popup = new(user, "Notices", "HAILER", 260, 400)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/structure/fake_machine/hailer/Topic(href, href_list)
 	..()
@@ -169,9 +170,9 @@
 	for(var/obj/item/H in SSroguemachine.hailer)
 		if(istype(H, /obj/item/paper))
 			dat += "<A href='byond://?src=[REF(src)];read=[REF(H)]'>[H.name]</A><BR>"
-
-	user << browse("<HEAD><TITLE>Notices</TITLE></HEAD>[dat]","window=HAILER BOARD")
-	onclose(user, "HAILER BOARD")
+	var/datum/browser/popup = new(user, "Notices", "HAILER BOARD", 260, 400)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/structure/fake_machine/hailerboard/Topic(href, href_list)
 	..()
@@ -242,8 +243,9 @@
 				dat += "<A href='byond://?src=[REF(src)];read=[REF(H)]'>[H.name]</A> [auth ? "<A href='byond://?src=[REF(src)];write=[REF(H)]'>Write</A> <A href='byond://?src=[REF(src)];remove=[REF(H)]'>Remove</A> <A href='byond://?src=[REF(src)];rename=[REF(H)]'>Rename</A>": ""]<BR>"
 			else
 				dat += "<A href='byond://?src=[REF(src)];read=[REF(H)]'>[H.name]</A> [auth ? "<A href='byond://?src=[REF(src)];remove=[REF(H)]'>Remove</A>" : ""]<BR>"
-	user << browse("<HEAD><TITLE>Notices</TITLE></HEAD>[dat]","window=HAILER")
-	onclose(user, "HAILER")
+	var/datum/browser/popup = new(user, "Notices", "INN HAILER", 260, 400)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/structure/fake_machine/hailer/inn_hailer/Topic(href, href_list)
 	..()
