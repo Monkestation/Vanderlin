@@ -81,7 +81,7 @@
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
 
 /datum/outfit/psydoniantemplar
-	name = "Psydonian Templar"
+	name = "Psydonian Templar (Sacrestants)"
 	wrists = /obj/item/clothing/neck/psycross/silver
 	cloak = /obj/item/clothing/cloak/psydontabard
 	backr = /obj/item/weapon/shield/tower/metal

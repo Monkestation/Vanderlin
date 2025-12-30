@@ -99,10 +99,6 @@
 		if(EFFECT_STUTTER)
 			if((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) // stun is usually associated with stutter
 				stuttering = max(stuttering,(effect * hit_percent))
-		if(EFFECT_EYE_BLUR)
-			blur_eyes(effect * hit_percent)
-		if(EFFECT_DROWSY)
-			drowsyness = max(drowsyness,(effect * hit_percent))
 		if(EFFECT_JITTER)
 			if((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE))
 				jitteriness = max(jitteriness,(effect * hit_percent))
@@ -128,10 +124,6 @@
 		apply_effect(slur, EFFECT_SLUR, blocked)
 	if(stutter)
 		apply_effect(stutter, EFFECT_STUTTER, blocked)
-	if(eyeblur)
-		apply_effect(eyeblur, EFFECT_EYE_BLUR, blocked)
-	if(drowsy)
-		apply_effect(drowsy, EFFECT_DROWSY, blocked)
 	if(jitter)
 		apply_effect(jitter, EFFECT_JITTER, blocked)
 	return BULLET_ACT_HIT

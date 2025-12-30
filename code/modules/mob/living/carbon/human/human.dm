@@ -781,7 +781,7 @@
 
 /mob/living/carbon/human/do_after_coefficent()
 	. = ..()
-	. *= physiology.do_after_speed
+	. *= physiology?.do_after_speed
 
 /mob/living/carbon/human/updatehealth(amount)
 	. = ..()
@@ -884,6 +884,11 @@
 		ADD_TRAIT(src, TRAIT_FACELESS, TRAIT_GENERIC)
 	else
 		REMOVE_TRAIT(src, TRAIT_FACELESS, TRAIT_GENERIC)
+
+	if(HAS_TRAIT(target, TRAIT_ABOMINATION))
+		ADD_TRAIT(src, TRAIT_ABOMINATION, TRAIT_GENERIC)
+	else
+		REMOVE_TRAIT(src, TRAIT_ABOMINATION, TRAIT_GENERIC)
 
 	regenerate_icons()
 

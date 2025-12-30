@@ -11,6 +11,7 @@
 	var/list/looty = list()
 	var/herbtype
 	var/obj/effect/skill_tracker/alchemy_plants/alchemy_effect
+	var/obj/item/reagent_containers/food/snacks/spiderhoney/honey/honey_type
 
 	var/timerid
 	var/harvested = FALSE
@@ -88,6 +89,7 @@
 	icon_state = "atropa2"
 
 	herbtype = /obj/item/alch/herb/atropa
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
 /obj/structure/flora/grass/herb/matricaria
 	name = "matricaria"
@@ -118,6 +120,7 @@
 	icon_state = "paris2"
 
 	herbtype = /obj/item/alch/herb/paris
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
 /obj/structure/flora/grass/herb/calendula
 	name = "calendula"

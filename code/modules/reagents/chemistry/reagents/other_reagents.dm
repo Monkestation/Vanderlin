@@ -19,15 +19,13 @@
 		var/mob/living/carbon/C = L
 		var/datum/blood_type/blood = L.get_blood_type()
 		if(blood?.reagent_type == type && (method == INJECT || (method == INGEST && C.dna && C.dna.species && (DRINKSBLOOD in C.dna.species.species_traits))))
-			if(!(data["blood_type"] in blood.compatible_types))
-				C.reagents.add_reagent(/datum/reagent/toxin, reac_volume * 0.5)
-			else
+			if((data["blood_type"] in blood.compatible_types))
 				C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 
 	if((method == INGEST) && L.clan)
 		L.adjust_bloodpool(reac_volume)
 		L.clan.handle_bloodsuck(BLOOD_PREFERENCE_FANCY)
-	if(method == INJECT)
+	if(method == INJECT || (HAS_TRAIT(L, TRAIT_SANGUINE) && (method == INGEST)))
 		SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
 
 

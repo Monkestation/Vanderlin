@@ -18,46 +18,62 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-/datum/outfit/fisher/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, pick(1,2), TRUE)
-	H.adjust_skillrank(/datum/skill/labor/fishing, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, pick(2,2,3), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-		H.change_stat(STATKEY_CON, 1)
-		H.change_stat(STATKEY_PER, 1)
-	else
-		H.change_stat(STATKEY_CON, 2)
-	if(H.gender == MALE)
+	jobstats = list(
+		STATKEY_CON = 2,
+		STATKEY_PER = 1
+	)
+
+	skills = list(
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/craft/cooking = 2,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/labor/fishing = 4,
+		/datum/skill/misc/medicine = 1,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/misc/reading = 1
+	)
+
+/datum/job/fisher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, -1)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
+
+	spawned.adjust_skillrank(/datum/skill/misc/sewing, pick(0,1), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1), TRUE)
+
+/datum/outfit/fisher
+	name = "Fisher"
+	neck = /obj/item/storage/belt/pouch/coins/poor
+	armor = /obj/item/clothing/armor/gambeson/light/striped
+	head = /obj/item/clothing/head/fisherhat
+	belt = /obj/item/storage/belt/leather
+	beltr = /obj/item/cooking/pan
+	beltl = /obj/item/flint
+	backl = /obj/item/storage/backpack/satchel
+	backr = /obj/item/fishingrod/fisher
+
+	backpack_contents = list(
+		/obj/item/weapon/shovel/small = 1,
+		/obj/item/natural/worms = 1
+	)
+
+/datum/outfit/fisher/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/random
 		shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 		shoes = /obj/item/clothing/shoes/boots/leather
-		neck = /obj/item/storage/belt/pouch/coins/poor
-		head = /obj/item/clothing/head/fisherhat
-		armor = /obj/item/clothing/armor/gambeson/light/striped
-		backl = /obj/item/storage/backpack/satchel
-		belt = /obj/item/storage/belt/leather
-		backr = /obj/item/fishingrod/fisher
-		beltr = /obj/item/cooking/pan
-		beltl = /obj/item/flint
-		backpack_contents = list(/obj/item/weapon/knife/villager = 1, /obj/item/natural/worms = 1, /obj/item/weapon/shovel/small = 1, /obj/item/recipe_book/survival = 1)
-
+		backpack_contents += list(
+			/obj/item/weapon/knife/villager = 1,
+			/obj/item/recipe_book/survival = 1
+		)
 	else
 		shirt = /obj/item/clothing/shirt/dress/gen/colored/random
-		armor = /obj/item/clothing/armor/gambeson/light/striped
 		shoes = /obj/item/clothing/shoes/boots/leather
-		neck = /obj/item/storage/belt/pouch/coins/poor
-		head = /obj/item/clothing/head/fisherhat
-		backl = /obj/item/storage/backpack/satchel
-		backr = /obj/item/fishingrod/fisher
-		belt = /obj/item/storage/belt/leather
-		beltr = /obj/item/cooking/pan
-		beltl = /obj/item/flint
-		backpack_contents = list(/obj/item/weapon/knife/hunting = 1, /obj/item/natural/worms = 1, /obj/item/weapon/shovel/small = 1)
+		backpack_contents += list(
+			/obj/item/weapon/knife/hunting = 1
+		)

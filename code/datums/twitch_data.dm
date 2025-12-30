@@ -31,7 +31,7 @@
 	if(!SSdbcore.IsConnectedCross())
 		SSdbcore.Connect_Cross()
 
-	var/datum/DBQuery/query_get_key = SSdbcore.NewQuery("SELECT twitch_key, twitch_rank FROM [format_table_name("player")] WHERE ckey = :ckey", list("ckey" = owner.ckey), db = TRUE)
+	var/datum/DBQuery/query_get_key = SSdbcore.NewQuery("SELECT twitch_user, twitch_rank FROM [format_table_name("player")] WHERE ckey = :ckey", list("ckey" = owner.ckey), db = TRUE)
 	if(query_get_key.warn_execute())
 		if(query_get_key.NextRow())
 			client_key = query_get_key.item[1]

@@ -533,7 +533,7 @@
 	if(!(precast_result & SPELL_NO_FEEDBACK))
 		// We do invocation and sound effects here, before actual cast
 		// That way stuff like teleports or shape-shifts can be invoked before ocurring
-		spell_feedback()
+		spell_feedback(owner)
 
 	if(length(attunements))
 		handle_attunements()
@@ -676,27 +676,36 @@
 		caster.finish_spell_visual_effects(attunements)
 
 /// Provides feedback after a spell cast occurs, in the form of a cast sound and/or invocation
-/datum/action/cooldown/spell/proc/spell_feedback()
-	if(!owner)
+/datum/action/cooldown/spell/proc/spell_feedback(mob/living/invoker)
+	if(!invoker)
 		return
 
-	if(invocation_type != INVOCATION_NONE)
-		invocation()
+	///even INVOCATION_NONE should go through this because the signal might change that
+	invocation(invoker)
 
 	if(sound)
 		playsound(get_turf(owner), sound, 50, TRUE)
 
 /// The invocation that accompanies the spell, called from spell_feedback() before cast().
-/datum/action/cooldown/spell/proc/invocation()
-	switch(invocation_type)
+/datum/action/cooldown/spell/proc/invocation(mob/living/invoker)
+	//lists can be sent by reference, a string would be sent by value
+	var/list/invocation_list = list(invocation, invocation_type)
+	SEND_SIGNAL(invoker, COMSIG_MOB_PRE_INVOCATION, src, invocation_list)
+	var/used_invocation_message = invocation_list[INVOCATION_MESSAGE]
+	var/used_invocation_type = invocation_list[INVOCATION_TYPE]
+
+	switch(used_invocation_type)
 		if(INVOCATION_SHOUT)
-			owner.say(invocation, forced = "spell ([src])")
+			invoker.say(used_invocation_message, forced = "spell ([src])")
 
 		if(INVOCATION_WHISPER)
-			owner.whisper(invocation, forced = "spell ([src])")
+			invoker.whisper(used_invocation_message, forced = "spell ([src])")
 
 		if(INVOCATION_EMOTE)
-			owner.visible_message(invocation, invocation_self_message)
+			invoker.visible_message(
+				capitalize(replace_pronouns(replacetext(used_invocation_message, "%CASTER", invoker.name), invoker)),
+				capitalize(replace_pronouns(replacetext(invocation_self_message, "%CASTER", invoker.name), invoker)),
+			)
 
 /// When we start charging the spell called from set_click_ability or start_casting
 /datum/action/cooldown/spell/proc/on_start_charge()

@@ -13,6 +13,13 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	/// Used to make sure someone doesn't get spammed with messages if they're ineligible for roles
 	var/ineligible_for_roles = FALSE
 
+	/// Cached character data for multi-ready slots
+	var/list/multi_ready_characters = list()
+	/// Current character index being used
+	var/multi_ready_index = 1
+
+	var/multi_ready_assigned_slot = 0
+
 	hud_type = /datum/hud/new_player
 
 /mob/dead/new_player/Initialize()
@@ -44,6 +51,79 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player/prepare_huds()
 	return
+
+
+/// Called when player readies up - caches all selected character data
+/mob/dead/new_player/proc/cache_multi_ready_characters()
+	multi_ready_characters = list()
+	multi_ready_index = 1
+
+	if(!client?.prefs?.multi_char_ready || !length(client.prefs.multi_ready_slots))
+		return
+
+	var/original_slot = client.prefs.default_slot
+
+	for(var/slot in client.prefs.multi_ready_slots)
+		client.prefs.load_character(slot)
+		var/list/char_data = list(
+			"slot" = slot,
+			"real_name" = client.prefs.real_name,
+			"gender" = client.prefs.gender,
+			"age" = client.prefs.age,
+			"pref_species" = client.prefs.pref_species,
+			"selected_patron" = client.prefs.selected_patron,
+			"job_preferences" = client.prefs.job_preferences?.Copy(),
+			"features" = client.prefs.features?.Copy(),
+			"charflaw" = client.prefs.charflaw,
+			"skin_tone" = client.prefs.skin_tone,
+			"eye_color" = client.prefs.eye_color,
+			"underwear" = client.prefs.underwear,
+			"undershirt" = client.prefs.undershirt,
+			"socks" = client.prefs.socks,
+			"pronouns" = client.prefs.pronouns,
+			"voice_type" = client.prefs.voice_type,
+			"voice_color" = client.prefs.voice_color,
+			"domhand" = client.prefs.domhand,
+			"flavortext" = client.prefs.flavortext,
+			"headshot_link" = client.prefs.headshot_link,
+		)
+		multi_ready_characters += list(char_data)
+
+	client.prefs.load_character(original_slot)
+
+/// Applies cached character data at given index to preferences
+/mob/dead/new_player/proc/apply_multi_ready_character(index)
+	if(!length(multi_ready_characters) || index > length(multi_ready_characters))
+		return FALSE
+
+	var/list/char_data = multi_ready_characters[index]
+	if(!char_data)
+		return FALSE
+
+	var/datum/preferences/P = client.prefs
+	P.real_name = char_data["real_name"]
+	P.gender = char_data["gender"]
+	P.age = char_data["age"]
+	P.pref_species = char_data["pref_species"]
+	P.selected_patron = char_data["selected_patron"]
+	P.job_preferences = char_data["job_preferences"]
+	P.features = char_data["features"]
+	P.charflaw = char_data["charflaw"]
+	P.skin_tone = char_data["skin_tone"]
+	P.eye_color = char_data["eye_color"]
+	P.underwear = char_data["underwear"]
+	P.undershirt = char_data["undershirt"]
+	P.socks = char_data["socks"]
+	P.pronouns = char_data["pronouns"]
+	P.voice_type = char_data["voice_type"]
+	P.voice_color = char_data["voice_color"]
+	P.domhand = char_data["domhand"]
+	P.flavortext = char_data["flavortext"]
+	P.headshot_link = char_data["headshot_link"]
+
+	P.default_slot = char_data["slot"]
+	multi_ready_index = index
+	return TRUE
 
 /mob/dead/new_player/proc/new_player_panel()
 	if(!SSassets.initialized)
@@ -339,6 +419,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
 	if(!destination)
 		CRASH("Failed to find a latejoin spawn point.")
+	islatejoin = TRUE
 	var/mob/living/character = create_character(destination)
 	character.islatejoin = TRUE
 	if(!character)

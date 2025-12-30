@@ -33,7 +33,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 
 /datum/outfit/deprived
-	name = "Deprived"
+	name = "Deprived (Migrant Wave)"
 	head = /obj/item/clothing/head/menacing
 	pants = /obj/item/clothing/pants/trou
 	shoes = /obj/item/clothing/shoes/simpleshoes

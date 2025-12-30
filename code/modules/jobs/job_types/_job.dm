@@ -262,7 +262,8 @@
 		ADD_TRAIT(spawned, trait, JOB_TRAIT)
 
 	for(var/datum/language/to_learn as anything in languages)
-		spawned.grant_language(to_learn)
+		if(!spawned.has_language(to_learn))
+			spawned.grant_language(to_learn)
 
 	if(is_foreigner)
 		ADD_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
@@ -279,6 +280,7 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
+	// When we have sourced skill mods (praying, add to this as well)
 	if(clear_job_stats) // Reset for most non-advclasses
 		spawned.remove_stat_modifier(STATMOD_JOB)
 
@@ -452,7 +454,8 @@
 			if(QDELETED(src))
 				return
 
-		previous_picked_types |= picked_pack.type
+		if(picked_pack.type)
+			previous_picked_types |= picked_pack.type
 
 		picked_pack.pick_pack(src)
 
@@ -530,23 +533,36 @@
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_LATEJOIN_SPAWN, src, spawning)
 
 /// Spawns the mob to be played as, taking into account preferences and the desired spawn point.
-/datum/job/proc/get_spawn_mob(client/player_client, atom/spawn_point)
+/datum/job/proc/get_spawn_mob(client/player_client, atom/spawn_point, latejoining)
 	var/mob/living/spawn_instance
 
 	spawn_instance = new spawn_type(player_client.mob.loc)
 	spawn_point.JoinPlayerHere(spawn_instance, TRUE)
-	spawn_instance.apply_prefs_job(player_client, src)
+	spawn_instance.apply_prefs_job(player_client, src, latejoining)
 	if(!player_client)
 		qdel(spawn_instance)
 		return // Disconnected while checking for the appearance ban.
 	return spawn_instance
 
+/mob/dead/new_player/proc/ensure_multi_ready_character_loaded()
+	if(!multi_ready_assigned_slot || !client?.prefs)
+		return FALSE
+
+	// Force reload the assigned character slot
+	client.prefs.load_character(multi_ready_assigned_slot)
+	client.prefs.default_slot = multi_ready_assigned_slot
+
+	return TRUE
+
 /// Applies the preference options to the spawning mob, taking the job into account. Assumes the client has the proper mind.
-/mob/living/proc/apply_prefs_job(client/player_client, datum/job/job)
+/mob/living/proc/apply_prefs_job(client/player_client, datum/job/job, latejoining = FALSE)
 	return
 
-/mob/living/carbon/human/apply_prefs_job(client/player_client, datum/job/job)
+/mob/living/carbon/human/apply_prefs_job(client/player_client, datum/job/job, latejoining = FALSE)
 	var/fully_randomize = is_banned_from(player_client.ckey, "Appearance")
+	var/mob/dead/new_player/np = player_client?.mob
+	if(istype(np) && player_client?.prefs?.multi_char_ready && !latejoining)
+		np.ensure_multi_ready_character_loaded()
 	if(!player_client)
 		return // Disconnected while checking for the appearance ban.
 	if(fully_randomize)
@@ -785,5 +801,6 @@
 			outfit = O.id
 		else
 			outfit = data["outfit"]
+
 
 	return TRUE

@@ -232,6 +232,15 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/ui_scale
 	/// Assoc list of culinary preferences, where the key is the type of the culinary preference, and value is food/drink typepath
 	var/list/culinary_preferences = list()
+	///this is our chat scale
+	var/chat_scale = 1
+
+	/// Whether multi-character readying is enabled
+	var/multi_char_ready = FALSE
+	/// List of character slot indices selected for multi-ready (in priority order)
+	var/list/multi_ready_slots = list()
+
+	var/datum/multi_ready_ui/multi_ready_panel
 
 /datum/preferences/New(client/C)
 	parent = C
@@ -299,9 +308,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	// FIRST ROW
 	dat += "<tr>"
 	dat += "<td style='width:33%;text-align:left'>"
-	dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
+	dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a> <br>"
+	dat += "<a href='?_src_=prefs;preference=multi;task=menu'>Character Ready Order</a>"
+	dat += "<br><b>Chat Scale:</b> <a href='?_src_=prefs;preference=chat_scale;task=input'>[chat_scale]</a>"
 	dat += "</td>"
-
 
 	dat += "<td style='width:33%;text-align:center'>"
 	if(SStriumphs.triumph_buys_enabled)
@@ -900,6 +910,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			else
 				SetChoices(user)
 		return 1
+	else if(href_list["preference"] == "multi")
+		if(isnewplayer(user))
+			var/mob/dead/new_player/player = user
+			player.cache_multi_ready_characters()
+		open_multi_ready()
+		return 1
 
 	else if(href_list["preference"] == "antag")
 		switch(href_list["task"])
@@ -999,7 +1015,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						key_bindings -= old_key
 				key_bindings[full_key] += list(kb_name)
 				key_bindings[full_key] = sortList(key_bindings[full_key])
-
+				var/datum/keybinding/client/say/kb = GLOB.keybindings_by_name[kb_name]
+				if(istype(kb))
+					user.client.set_macros()
 				DIRECT_OUTPUT(user, browse(null, "window=capturekeypress"))
 				user.client.update_movement_keys()
 				save_preferences()
@@ -1426,6 +1444,14 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if (!isnull(desiredfps))
 						clientfps = desiredfps
 						parent.fps = desiredfps
+
+				if ("chat_scale")
+					var/desiredfps = input(user, "Choose your desired chat scale. (1 = default, 2 = doubled", "Character Preference", chat_scale)  as null|num
+					if(desiredfps > 0)
+						if (!isnull(desiredfps))
+							chat_scale = desiredfps
+						user.client?.native_say.refresh_channels()
+
 				if("ui")
 					var/pickedui = input(user, "Choose your UI style.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_styles)
 					if(pickedui)
@@ -1683,10 +1709,16 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if("save")
 					save_preferences()
 					save_character()
+					if(isnewplayer(user))
+						var/mob/dead/new_player/player = user
+						player.cache_multi_ready_characters()
 
 				if("load")
 					load_preferences()
 					load_character()
+					if(isnewplayer(user))
+						var/mob/dead/new_player/player = user
+						player.cache_multi_ready_characters()
 
 				if("changeslot")
 					selected_accent = ACCENT_DEFAULT

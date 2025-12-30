@@ -10,35 +10,42 @@
 	outfit = /datum/outfit/mercenary/kern
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 4
-
 	cmode_music = 'sound/music/cmode/Combat_Dwarf.ogg'
 
-/datum/outfit/mercenary/kern/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_SPD = 2,
+		STATKEY_END = 1,
+		STATKEY_STR = -1
+	)
+
+	skills = list(
+		/datum/skill/combat/polearms = 4,
+		/datum/skill/combat/bows = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/athletics = 3
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR
+	)
+
+/datum/outfit/mercenary/kern
+	name = "Kern (Mercenary)"
 	shoes = /obj/item/clothing/shoes/boots/leather
 	head = /obj/item/clothing/head/roguehood/colored/black
 	belt = /obj/item/storage/belt/leather/mercenary/black
 	armor = /obj/item/clothing/armor/chainmail/iron
-	cloak = /obj/item/clothing/cloak/stabard/kaledon
+	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/green
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/leather
 	neck = /obj/item/clothing/neck/gorget
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
-	pants = /obj/item/clothing/pants/skirt/patkilt
+	pants = /obj/item/clothing/pants/skirt/patkilt/colored/blue
 	backl = /obj/item/weapon/polearm/spear
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backpack_contents = list(/obj/item/weapon/knife/villager = 1)
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE) // Main weapon skill
-		H.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)// Secondary Weapon Skill
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE) // Better at climbing than the Gallowglass
-		H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.change_stat(STATKEY_SPD, 2) // fast, not strong
-	H.change_stat(STATKEY_END, 1)
-	H.change_stat(STATKEY_STR, -1)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
