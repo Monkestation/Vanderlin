@@ -2,7 +2,7 @@
 
 /turf/open/lava
 	name = "lava"
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/natural/whole.dmi'
 	icon_state = "lava"
 	gender = PLURAL //"That's some lava."
 	baseturfs = /turf/open/lava //lava all the way down

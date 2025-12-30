@@ -137,6 +137,7 @@
 /turf/open/floor/grass
 	name = "grass"
 	desc = "Grass, sodden in mud and bogwater."
+	icon = 'icons/turf/natural/smooth_edges.dmi'
 	icon_state = "grass"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -159,13 +160,19 @@
 	. = ..()
 	ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
 
+/turf/open/floor/grass/healthy
+	name = "healthy grass"
+	desc = "Grass, somehow greener on this side."
+	icon_state = "grass_healthy"
+	neighborlay = "grass_healthyedge"
+
 /turf/open/floor/grass/mixyel
 	icon_state = "grass_yelmix"
 	neighborlay = "grass_yelmixedge"
 
 /turf/open/floor/grass/red
 	name = "red grass"
-	desc = "Grass, ripe with Dendor's blood."
+	desc = "Grass, ripe with Dendor's bloody marrow."
 	icon_state = "grass_red"
 	neighborlay = "grass_rededge"
 
@@ -190,11 +197,13 @@
 /turf/open/floor/grass/eora
 	icon_state = "hellgrass"
 	neighborlay = "hellgrass"
+
 /*	..................   Snow   ................... */
 
 /turf/open/floor/snow
 	name = "snow"
 	desc = "A gentle blanket of snow."
+	icon = 'icons/turf/natural/smooth_edges.dmi'
 	icon_state = "snow"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -227,6 +236,7 @@
 /turf/open/floor/dirt
 	name = "dirt"
 	desc = "The dirt is pocked with the scars of countless wars."
+	icon = 'icons/turf/natural/smooth_edges.dmi'
 	icon_state = "dirt"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -322,6 +332,7 @@
 	if(!muddy)
 		water_level = max(water_level-100,0)
 		muddy = TRUE
+		icon = 'icons/turf/natural/whole.dmi'
 		icon_state = "mud[rand (1,3)]"
 		name = "mud"
 		slowdown = 2
@@ -353,6 +364,7 @@
 /turf/open/floor/underworld/road
 	name = "ash"
 	desc = "Smells like burnt wood."
+	icon = 'icons/turf/natural/whole.dmi'
 	icon_state = "ash"
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -879,6 +891,7 @@
 	icon_state = "carpet_inn"
 
 /turf/open/floor/naturalstone
+	icon = 'icons/turf/natural/whole.dmi'
 	icon_state = "digstone"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -979,9 +992,9 @@
 
 /turf/open/floor/sand
 	name = "sand"
-	desc = "Warm sand that, sadly, have been mixed with dirt."
-	icon_state = "sand-1"
-	icon = 'icons/delver/desert_objects.dmi'
+	desc = "Dark grey gravel which has been ground smooth by water over aeons."
+	icon_state = "gravel"
+	icon = 'icons/turf/natural/smooth_edges.dmi'
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND
 	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_DIRT_ROAD
@@ -992,6 +1005,15 @@
 	var/randomized = TRUE
 	var/blood_sand = FALSE
 
+/turf/open/floor/sand/Initialize()
+	. = ..()
+	dir = pick(GLOB.cardinals)
+
+/turf/open/floor/sand/sandstone
+	desc = "Chunky sandstone, disintegrated naturally over time into a less-than-comfortable cobble."
+	icon_state = "sandgravel"
+
+/*  //Until we have sprites for this that don't clash with the turf artstyle, this will be disabled. See Delver folder for the old sprites and how bright they are. -Aberra
 /turf/open/floor/sand/Initialize()
 	. = ..()
 	if(randomized)
@@ -1035,7 +1057,7 @@
 		if(SOUTHWEST)
 			return "sw"
 	return "n" // fallback
-
+*/
 
 /turf/open/floor/sand/bloodied
 	icon_state = "bloody"
