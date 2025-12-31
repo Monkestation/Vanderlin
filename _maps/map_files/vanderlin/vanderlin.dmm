@@ -5189,6 +5189,12 @@
 /obj/item/clothing/cloak/apron/brown,
 /turf/open/floor/wood,
 /area/indoors/town/smithy)
+"ctS" = (
+/obj/structure/chair/wood/alt{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/smithy)
 "ctT" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/turned,
@@ -5995,6 +6001,15 @@
 	},
 /turf/open/floor/blocks,
 /area/outdoors/town)
+"cMH" = (
+/obj/structure/table/wood/plain_alt,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/wood,
+/area/indoors/town/smithy)
 "cMI" = (
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -9867,6 +9882,7 @@
 "eGc" = (
 /obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/structure/door/window,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood,
 /area/indoors/town/manor/halls/w)
 "eGf" = (
@@ -32983,7 +32999,7 @@
 	dir = 8
 	},
 /turf/open/floor/wood,
-/area/indoors/town)
+/area/indoors/town/smithy)
 "pXf" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/cobble,
@@ -33143,6 +33159,10 @@
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/herringbone,
 /area/indoors/town/manor/library)
+"qaX" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood,
+/area/indoors/town/smithy)
 "qbb" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/shop)
@@ -41127,7 +41147,7 @@
 /area/indoors/town/smithy)
 "udw" = (
 /obj/structure/fluff/walldeco/vinez,
-/turf/open/transparent/openspace,
+/turf/closed/mineral,
 /area/outdoors/mountains)
 "udF" = (
 /obj/machinery/light/fueled/wallfire/candle{
@@ -45587,6 +45607,9 @@
 	},
 /turf/open/transparent/openspace,
 /area/outdoors/town)
+"wkE" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/town/smithy)
 "wkH" = (
 /obj/structure/window/openclose{
 	dir = 4
@@ -47867,7 +47890,7 @@
 	dir = 1
 	},
 /obj/structure/fluff/walldeco/vinez,
-/turf/open/transparent/openspace,
+/turf/closed/mineral,
 /area/outdoors/mountains)
 "xnX" = (
 /obj/structure/closet/crate/chest/crate,
@@ -151890,11 +151913,11 @@ bYD
 tye
 bYD
 dqK
-eIF
-pWA
-vHN
-vHN
-eIF
+eKZ
+qaX
+jyt
+jyt
+eKZ
 odZ
 vHN
 vHN
@@ -152092,11 +152115,11 @@ ubf
 tcc
 bYD
 aeq
-nxU
-vHN
-pWA
-xiY
-nxU
+wkE
+jyt
+qaX
+ctS
+wkE
 vys
 ydU
 pWA
@@ -152294,11 +152317,11 @@ biV
 jtX
 mVa
 aeq
-noR
+eeU
 pWU
 pWU
-vgy
-noR
+cMH
+eeU
 arK
 vHN
 vHN
@@ -152496,11 +152519,11 @@ aqk
 aqk
 bYD
 snB
-pwZ
-mWr
-wSI
-eeE
-pwZ
+nce
+udv
+fTa
+hCL
+nce
 mWr
 eeE
 pwZ
