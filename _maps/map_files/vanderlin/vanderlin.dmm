@@ -4181,18 +4181,6 @@
 /obj/structure/toilet,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/clinic_large/apothecary)
-"bTG" = (
-/obj/structure/closet/crate/chest,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/butter,
-/obj/item/reagent_containers/food/snacks/meat/sausage,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/turf/open/floor/hexstone,
-/area/under/cave)
 "bTO" = (
 /obj/effect/landmark/tram/queued_path/cargo_map_exit{
 	next_path_id = "cargo_return_1"
@@ -6493,13 +6481,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/manor/servanthead)
-"dal" = (
-/obj/machinery/light/fueled/wallfire/candle,
-/obj/structure/door/stone,
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/church/general,
-/turf/open/floor/tile,
-/area/under/cave)
 "dar" = (
 /turf/open/floor/twig,
 /area/under/town/sewer)
@@ -8799,9 +8780,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/manor)
-"eew" = (
-/turf/open/floor/hexstone,
-/area/under/cave)
 "eex" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 1
@@ -15137,9 +15115,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
-"hpO" = (
-/turf/open/floor/tile,
-/area/under/cave)
 "hpU" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -15762,10 +15737,6 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
-"hFO" = (
-/obj/effect/mapping_helpers/access/locker,
-/turf/closed/wall/mineral/wooddark,
-/area/indoors/soilsons)
 "hFT" = (
 /obj/structure/chair/wood/alt/fancy{
 	dir = 4
@@ -16069,18 +16040,6 @@
 "hNR" = (
 /turf/closed/mineral/bedrock,
 /area/indoors/town/manor)
-"hOe" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/cooking/pan{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/reagent_containers/glass/bucket/pot{
-	pixel_x = -4;
-	pixel_y = 12
-	},
-/turf/open/floor/tile,
-/area/under/cave)
 "hOw" = (
 /obj/structure/flora/grass/bush_meagre,
 /obj/machinery/light/fueled/torchholder{
@@ -18259,11 +18218,6 @@
 /obj/item/book/bibble/psy,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
-"iQS" = (
-/obj/machinery/light/fueled/torchholder/c,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/hexstone,
-/area/under/cave)
 "iRf" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/manor/hand)
@@ -19704,10 +19658,6 @@
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/herringbone,
 /area/indoors/town/manor)
-"jzb" = (
-/obj/machinery/tanningrack,
-/turf/open/floor/tile,
-/area/under/cave)
 "jzd" = (
 /obj/structure/water_pipe,
 /turf/closed/wall/mineral/pipe,
@@ -19895,18 +19845,6 @@
 /obj/structure/fluff/walldeco/psybanner,
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/church/chapel)
-"jEd" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/weapon/knife/cleaver{
-	pixel_x = -3;
-	pixel_y = 2
-	},
-/obj/item/kitchen/rollingpin{
-	pixel_x = 5;
-	pixel_y = -5
-	},
-/turf/open/floor/hexstone,
-/area/under/cave)
 "jEv" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing,
 /turf/open/floor/cobble/mossy,
@@ -20494,10 +20432,6 @@
 /obj/structure/window/openclose,
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
-"jSe" = (
-/obj/structure/window/stained/yellow,
-/turf/open/floor/church,
-/area/under/cave)
 "jSi" = (
 /obj/effect/landmark/start/villager,
 /turf/open/floor/wood,
@@ -26444,11 +26378,6 @@
 "mFi" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"mFl" = (
-/obj/machinery/light/fueled/hearth,
-/obj/machinery/light/fueled/oven/east,
-/turf/open/floor/tile,
-/area/under/cave)
 "mGi" = (
 /obj/structure/closet/crate/chest/old_crate{
 	name = "meat crate"
@@ -27455,15 +27384,6 @@
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
-"ndR" = (
-/obj/structure/table/wood{
-	icon_state = "longtable"
-	},
-/obj/structure/fluff/millstone{
-	pixel_y = 10
-	},
-/turf/open/floor/tile,
-/area/under/cave)
 "neb" = (
 /obj/effect/decal/cobblerockedge/alt{
 	dir = 10
@@ -36368,17 +36288,6 @@
 /obj/structure/window/openclose,
 /turf/open/floor/woodturned,
 /area/indoors/town/magician)
-"rEo" = (
-/obj/structure/table/wood{
-	dir = 1;
-	icon_state = "longtable"
-	},
-/obj/item/reagent_containers/peppermill{
-	pixel_x = -6;
-	pixel_y = 8
-	},
-/turf/open/floor/tile,
-/area/under/cave)
 "rEp" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8
@@ -37712,16 +37621,6 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
 /area/outdoors/town)
-"snM" = (
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/structure/closet/crate/chest,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/turf/open/floor/hexstone,
-/area/under/cave)
 "sof" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/church/purple,
@@ -39985,10 +39884,6 @@
 /obj/structure/carpet/red,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/manor)
-"txs" = (
-/obj/structure/table/wood/plain_alt,
-/turf/open/floor/tile,
-/area/under/cave)
 "txx" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/ruinedwood/two,
@@ -45523,11 +45418,6 @@
 "wje" = (
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
-"wjs" = (
-/obj/machinery/light/fueled/oven/east,
-/obj/machinery/light/fueled/hearth,
-/turf/open/floor/tile,
-/area/under/cave)
 "wju" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood,
@@ -159269,7 +159159,7 @@ rpD
 rpD
 teq
 qSj
-hFO
+qSj
 xbj
 oZQ
 ben
@@ -168658,13 +168548,13 @@ qFx
 qFx
 qFx
 qFx
-dal
-jSe
-hWI
-cyp
-gpW
-rZq
-hzx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -168860,13 +168750,13 @@ qFx
 qFx
 qFx
 qFx
-iQS
-txs
-hWI
-hWI
-hWI
-jSe
-hWI
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -169062,13 +168952,13 @@ qFx
 qFx
 qFx
 qFx
-eew
-jzb
-mFl
-wjs
-txs
-ndR
-hWI
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -169264,13 +169154,13 @@ qFx
 qFx
 qFx
 qFx
-eew
-hpO
-hpO
-hpO
-hpO
-rEo
-jSe
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -169466,13 +169356,13 @@ qFx
 qFx
 qFx
 qFx
-eew
-eew
-hpO
-hpO
-hpO
-hOe
-jSe
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -169668,13 +169558,13 @@ qFx
 qFx
 qFx
 qFx
-snM
-eew
-eew
-eew
-eew
-jEd
-jSe
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -169870,13 +169760,13 @@ qFx
 qFx
 qFx
 qFx
-hWI
-bTG
-eew
-eew
-eew
-eew
-hWI
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
