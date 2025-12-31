@@ -316,7 +316,7 @@
 
 /obj/item/weapon/knuckles
 	name = "steel knuckles"
-	desc = "A mean looking pair of steel knuckles."
+	desc = "A steel knuckle duster, for when you want to bash a beggars teeth in." ///Original description didn't work since you would need two for a "pair"
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "steelknuckle"
 	force = 22

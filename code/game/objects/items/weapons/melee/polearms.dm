@@ -621,9 +621,9 @@
 //scythe
 /obj/item/weapon/sickle/scythe
 	name = "scythe"
-	desc = "A humble farming tool with long reach, traditionally used to cut grass or wheat."
+	desc = "A humble iron farming tool with long reach, traditionally used to cut grass or wheat."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
-	icon_state = "scythe"
+	icon_state = "peasantscythe"
 	force = 10
 	force_wielded = 20
 	possible_item_intents = list(SPEAR_CUT) //truly just a long knife
@@ -648,10 +648,43 @@
 	blade_dulling = DULLING_BASHCHOP
 	wdefense = 2
 	thrown_bclass = BCLASS_CUT
-	throwforce = 25
+	throwforce = 10 ///Who throws a scythe?
 	sellprice = 10
 
 /obj/item/weapon/sickle/scythe/Initialize()
+	. = ..()
+	AddComponent(/datum/component/walking_stick)
+
+/obj/item/weapon/sickle/steelscythe
+	name = "steel scythe"
+	desc = "A steel scythe used to cut down crops and enemies alike."
+	icon_state = "scythe"
+	force = 15
+	force_wielded = 25
+	possible_item_intents = list(SPEAR_CUT) //same as iron scythe
+	gripped_intents = list(SPEAR_CUT)
+	SET_BASE_PIXEL(-16, -16)
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	bigboy = TRUE
+	gripsprite = TRUE
+	wlength = WLENGTH_GREAT
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK
+	resistance_flags = FLAMMABLE // Weapon still made mostly of wood
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST //Steel integrity
+	minstr = 8 //Steel is heavier
+	melting_material = /datum/material/steel
+	melt_amount = 100
+	associated_skill = /datum/skill/combat/polearms
+	blade_dulling = DULLING_BASHCHOP
+	wdefense = 3 //Has a better grip, and a larger blade
+	thrown_bclass = BCLASS_CUT
+	throwforce = 15
+	sellprice = 40 //A bit more expensive due to better materials
+
+/obj/item/weapon/sickle/steelscythe/Initialize()
 	. = ..()
 	AddComponent(/datum/component/walking_stick)
 
