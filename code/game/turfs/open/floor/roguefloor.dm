@@ -1,5 +1,6 @@
 /*	..................   Wooden Floors   ................... */
 /turf/open/floor/ruinedwood
+	icon = 'icons/turf/constructed/wood.dmi'
 	icon_state = "wooden_floor"
 	footstep = FOOTSTEP_WOOD
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -50,6 +51,7 @@
 	icon_state = "tavern"
 
 /turf/open/floor/twig
+	icon = 'icons/turf/constructed/wood.dmi'
 	icon_state = "twig"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -118,6 +120,7 @@
 
 /turf/open/floor/rooftop
 	name = "roof"
+	icon = 'icons/turf/constructed/roof.dmi'
 	icon_state = MAP_SWITCH("roof", "roof-arw")
 	footstep = FOOTSTEP_WOOD
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -137,7 +140,7 @@
 /turf/open/floor/grass
 	name = "grass"
 	desc = "Grass, sodden in mud and bogwater."
-	icon = 'icons/turf/natural/smooth_edges.dmi'
+	icon = 'icons/turf/natural/grasses.dmi'
 	icon_state = "grass"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -203,7 +206,7 @@
 /turf/open/floor/snow
 	name = "snow"
 	desc = "A gentle blanket of snow."
-	icon = 'icons/turf/natural/smooth_edges.dmi'
+	icon = 'icons/turf/natural/snow.dmi'
 	icon_state = "snow"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -236,7 +239,7 @@
 /turf/open/floor/dirt
 	name = "dirt"
 	desc = "The dirt is pocked with the scars of countless wars."
-	icon = 'icons/turf/natural/smooth_edges.dmi'
+	icon = 'icons/turf/natural/soils.dmi'
 	icon_state = "dirt"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -332,7 +335,7 @@
 	if(!muddy)
 		water_level = max(water_level-100,0)
 		muddy = TRUE
-		icon = 'icons/turf/natural/whole.dmi'
+		icon = 'icons/turf/natural/soils.dmi'
 		icon_state = "mud[rand (1,3)]"
 		name = "mud"
 		slowdown = 2
@@ -364,7 +367,7 @@
 /turf/open/floor/underworld/road
 	name = "ash"
 	desc = "Smells like burnt wood."
-	icon = 'icons/turf/natural/whole.dmi'
+	icon = 'icons/turf/natural/ash.dmi'
 	icon_state = "ash"
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -379,6 +382,7 @@
 /turf/open/floor/underworld/arena
 	name = "sandy ash"
 	desc = "This has been pranced upon by countless skeletal fighters."
+	icon = 'icons/turf/natural/ash.dmi'
 	icon_state = "ash3"
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -413,6 +417,7 @@
 /turf/open/floor/volcanic
 	name = "dirt"
 	desc = "The dirt is pocked with the scars of tectonic movement."
+	icon = 'icons/turf/natural/soils.dmi'
 	icon_state = "lavafloor"
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -431,6 +436,7 @@
 /turf/open/floor/hay
 	name = "hay"
 	desc = "A light covering of hay strewn across the ground."
+	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "hay"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -440,6 +446,7 @@
 
 /*	..................   Stone Block Floors   ................... */
 /turf/open/floor/blocks
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "blocks"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -531,6 +538,7 @@
 	icon_state = "glyph6"
 
 /turf/open/floor/hexstone
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "hexstone"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -701,6 +709,7 @@
 
 //
 /turf/open/floor/herringbone
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "herringbone"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -723,6 +732,7 @@
 
 /*	..................   Cobblestone   ................... */
 /turf/open/floor/cobble
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "cobblestone1"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -769,6 +779,7 @@
 	icon_state = "snowcobble[rand(1,3)]"
 
 /turf/open/floor/cobblerock
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "cobblerock"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -796,7 +807,7 @@
 /obj/effect/decal/cobbleedge
 	name = ""
 	desc = ""
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "cobblestone_edges"
 	mouse_opacity = 0
 
@@ -882,6 +893,7 @@
 	icon_state = "tile"
 
 /turf/open/floor/concrete
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "concretefloor1"
 	landsound = 'sound/foley/jumpland/stoneland.ogg'
 	footstep = FOOTSTEP_STONE
@@ -904,6 +916,7 @@
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/metal
+	icon = 'icons/turf/constructed/metal.dmi'
 	icon_state = "plating1"
 	landsound = 'sound/foley/jumpland/metalland.ogg'
 	footstep = FOOTSTEP_PLATING
@@ -934,7 +947,6 @@
 	icon_state = "barograteopen"
 
 /turf/open/floor/carpet/lord
-	icon = 'icons/turf/floors.dmi'
 	icon_state = ""
 
 /turf/open/floor/carpet/lord/Initialize()
@@ -957,12 +969,17 @@
 /turf/open/floor/carpet/lord/right
 	icon_state = "carpet_r"
 
+/turf/open/floor/carpet/lord/corner
+	icon_state = "carpet_corner"
+
+/turf/open/floor/carpet/lord/corrner_inner
+	icon_state = "carpet_cornerin"
+
 /turf/open/floor/carpet/green
-	icon = 'icons/turf/floors.dmi'
 	icon_state = "carpet_inn"
 
 /turf/open/floor/naturalstone
-	icon = 'icons/turf/natural/whole.dmi'
+	icon = 'icons/turf/natural/stones.dmi'
 	icon_state = "digstone"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -971,6 +988,7 @@
 	landsound = 'sound/foley/jumpland/grassland.ogg'
 
 /turf/open/floor/plank
+	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "plank"
 	footstep = FOOTSTEP_WOOD
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -1065,7 +1083,7 @@
 	name = "gravelly sand"
 	desc = "Dark grey gravel which has been ground smooth by water over aeons."
 	icon_state = "gravel"
-	icon = 'icons/turf/natural/smooth_edges.dmi'
+	icon = 'icons/turf/natural/soils.dmi'
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
