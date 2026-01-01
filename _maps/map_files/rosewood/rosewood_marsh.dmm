@@ -2180,7 +2180,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
 "mY" = (
-/turf/open,
+/turf/open/openspace,
 /area/indoors/lich)
 "mZ" = (
 /obj/effect/decal/shadow_floor{
