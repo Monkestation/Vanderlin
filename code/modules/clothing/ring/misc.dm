@@ -466,21 +466,21 @@
 	desc = "A rough fingerpiece made up of darkened gold, the crude ring is engraved with the picture of thistles in rudimentary fashion, as if chilized by tools far too large for its size."
 	icon_state = "ring_duel"
 	sellprice = 0
-	var/datum/weakref/merchant
 
 /obj/item/clothing/ring/weepers_boon/equipped(mob/user, slot)
 	. = ..()
-	merchant = WEAKREF(user)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/ring/weepers_boon/dropped(mob/user)
 	. = ..()
-	merchant = null
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/ring/weepers_boon/process()
 	. = ..()
-	var/mob/themerchant = merchant.resolve()
+	if(!ismob(loc))
+		STOP_PROCESSING(SSobj, src)
+		return
+	var/mob/themerchant = loc
 	if(!isliving(themerchant))
 		return
 	if(!themerchant.client && !themerchant.ckey)
@@ -494,8 +494,3 @@
 		)
 		to_chat(themerchant, span_danger(text))
 		themerchant.add_stress(/datum/stress_event/weepersring)
-
-/obj/item/clothing/ring/weepers_boon/Destroy()
-	if(merchant)
-		merchant = null
-	. = ..()

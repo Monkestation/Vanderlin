@@ -660,21 +660,21 @@
 	name = "Nescient's chain"
 	desc = "A magnificant neckpiece made up of gold and gems, the interlocking gold chains are expertly engraved with poppies." //idk is it "poppies" in vanderlin common?
 	icon_state = "amuletg"
-	var/datum/weakref/innkeep
 
 /obj/item/clothing/neck/tyrants_chain/equipped(mob/user, slot)
 	. = ..()
-	innkeep = WEAKREF(user)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/neck/tyrants_chain/dropped(mob/user)
 	. = ..()
-	innkeep = null
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/neck/tyrants_chain/process()
 	. = ..()
-	var/mob/innkeeper = innkeep.resolve()
+	if(!ismob(loc))
+		STOP_PROCESSING(SSobj, src)
+		return
+	var/mob/innkeeper = loc
 	if(!isliving(innkeeper))
 		return
 	if(!innkeeper.client && !innkeeper.ckey)
@@ -689,8 +689,3 @@
 		)
 		to_chat(innkeeper, span_green(text))
 		innkeeper.add_stress(/datum/stress_event/tyrantschain)
-
-/obj/item/clothing/neck/tyrants_chain/Destroy()
-	if(innkeep)
-		innkeep = null
-	. = ..()
