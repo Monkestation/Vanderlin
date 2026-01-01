@@ -276,7 +276,3 @@
 
 /obj/item/neuFarm/seed/spore/kirunabal
 	plant_def_type = /datum/plant_def/mushroom/kirunabal
-
-/* /obj/item/neuFarm/seed/spore/chanterelle // Removing for now to expand upon later
-	plant_def_type = /datum/plant_def/mushroom/chanterelle */
-

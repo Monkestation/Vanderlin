@@ -179,6 +179,18 @@
 	auto_label_name = "kazengun shochu"
 	auto_label_desc = "A clean alcohol made by distilling rice. With a dry and clean finish. Popular amongst the warrior caste of Kazengun."
 
+/obj/item/reagent_containers/glass/bottle/dwarven_wine
+	desc = "A bottle with a kirunabal mushroom cork-seal."
+	list_reagents = list(/datum/reagent/consumable/ethanol/dwarven_wine/aged = 48)
+	auto_label_name = "kenisonolian wine"
+	auto_label_desc = "An aged bottle of wine, brewed from kirunabal mushrooms in the dwarven city of Kenisonol."
+
+/obj/item/reagent_containers/glass/bottle/black/drow_wine
+	desc = "A bottle with an ominous cork-seal."
+	list_reagents = list(/datum/reagent/consumable/ethanol/drow_wine/aged = 48)
+	auto_label_name = "subterran wine"
+	auto_label_desc = "An aged bottle of wine, brewed from fungus and spiderhoney from deep within Subterra."
+
 // Zhongese Drinks
 /obj/item/reagent_containers/glass/bottle/black/huangjiu
 	desc = "A bottle with a red seal."

@@ -698,20 +698,7 @@
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 
-/* /obj/item/reagent_containers/food/snacks/produce/mushroom/chanterelle // Removing for now to expand upon later
-	name = "chanterelle"
-	desc =
-	icon_state = "chanterelle"
-	seed = /obj/item/neuFarm/seed/spore/chanterelle
-	throwforce = 0
-	tastes = list("fruity" = 1,"earthy" = 1)
-	w_class = WEIGHT_CLASS_TINY
-	throw_speed = 1
-	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
-	dropshrink = 0.8
-	rotprocess = SHELFLIFE_DECENT
-
+/*
 /obj/item/reagent_containers/food/snacks/produce/garlic
 	name = "garlic"
 	desc = "Your last line of defense against the vampiric horde."

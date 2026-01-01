@@ -657,5 +657,55 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	color = "#F8FDFC"
 	quality = DRINK_VERYGOOD
 
+/datum/reagent/consumable/ethanol/dwarven_wine
+	name = "Kenisonolian Wine"
+	boozepwr = 80
+	taste_description = "savory wine with a smooth finish"
+	color = "#7c6b75"
+	quality = DRINK_VERYGOOD
+	age_path = /datum/reagent/consumable/ethanol/dwarven_wine/aged
+	age_time = 10 MINUTES
+
+/datum/reagent/consumable/ethanol/dwarven_wine/aged
+	name = "Aged Kenisonolian Wine"
+	boozepwr = 80
+	taste_description = "aged savory wine with a smooth finish"
+	color = "#7c6b75"
+	quality = DRINK_VERYGOOD
+	age_path = /datum/reagent/consumable/ethanol/dwarven_wine/delectable
+
+/datum/reagent/consumable/ethanol/dwarven_wine/delectable
+	name = "Delectable Kenisonolian Wine"
+	boozepwr = 80
+	taste_description = "delectably aged savory wine with a smooth finish"
+	color = "#7c6b75"
+	quality = DRINK_VERYGOOD
+	age_path = null
+
+/datum/reagent/consumable/ethanol/drow_wine
+	name = "Subterran Wine"
+	boozepwr = 70
+	taste_description = "savory wine with a sweet finish"
+	color = "#7c6b75"
+	quality = DRINK_VERYGOOD
+	age_path = /datum/reagent/consumable/ethanol/drow_wine/aged
+	age_time = 10 MINUTES
+
+/datum/reagent/consumable/ethanol/drow_wine/aged
+	name = "Aged Subterran Wine"
+	boozepwr = 70
+	taste_description = "aged savory wine with a sweet finish"
+	color = "#7c6b75"
+	quality = DRINK_VERYGOOD
+	age_path = /datum/reagent/consumable/ethanol/drow_wine/delectable
+
+/datum/reagent/consumable/ethanol/drow_wine/delectable
+	name = "Delectable Subterran Wine"
+	boozepwr = 70
+	taste_description = "delectably aged savory wine with a sweet finish"
+	color = "#7c6b75"
+	quality = DRINK_VERYGOOD
+	age_path = null
+
 #undef ALCOHOL_THRESHOLD_MODIFIER
 #undef ALCOHOL_EXPONENT

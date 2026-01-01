@@ -55,7 +55,6 @@
 		/datum/reagent/consumable/ethanol/blackberry/delectable = 10 MINUTES,
 	)
 
-
 /datum/brewing_recipe/wine/tiefling_wine
 	name = "Tiefling Blood Wine"
 	reagent_to_brew = /datum/reagent/consumable/ethanol/tiefling
@@ -65,4 +64,24 @@
 	age_times = list(
 		/datum/reagent/consumable/ethanol/tiefling/aged = 5 MINUTES,
 		/datum/reagent/consumable/ethanol/tiefling/delectable = 10 MINUTES,
+	)
+
+/datum/brewing_recipe/wine/dwarven_wine
+	name = "Kenisonolian Wine"
+	reagent_to_brew = /datum/reagent/consumable/ethanol/dwarven_wine
+	needed_reagents = list(/datum/reagent/water = 100)
+	needed_items = list(/obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal = 3, /obj/item/reagent_containers/food/snacks/sugar = 1)
+	age_times = list(
+		/datum/reagent/consumable/ethanol/dwarven_wine/aged = 5 MINUTES,
+		/datum/reagent/consumable/ethanol/dwarven_wine/delectable = 10 MINUTES,
+	)
+
+/datum/brewing_recipe/wine/drow_wine
+	name = "Subterran Wine"
+	reagent_to_brew = /datum/reagent/consumable/ethanol/drow_wine
+	needed_reagents = list(/datum/reagent/water = 100)
+	needed_items = list(/obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal = 3, /obj/item/reagent_containers/food/snacks/spiderhoney = 1)
+	age_times = list(
+		/datum/reagent/consumable/ethanol/drow_wine/aged = 5 MINUTES,
+		/datum/reagent/consumable/ethanol/drow_wine/delectable = 10 MINUTES,
 	)
