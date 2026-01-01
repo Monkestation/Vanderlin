@@ -672,8 +672,7 @@
 /obj/item/clothing/neck/tyrants_chain/process()
 	. = ..()
 	if(!ismob(loc))
-		STOP_PROCESSING(SSobj, src)
-		return
+		return PROCESS_KILL
 	var/mob/innkeeper = loc
 	if(!isliving(innkeeper))
 		return

@@ -478,8 +478,7 @@
 /obj/item/clothing/ring/weepers_boon/process()
 	. = ..()
 	if(!ismob(loc))
-		STOP_PROCESSING(SSobj, src)
-		return
+		return PROCESS_KILL
 	var/mob/themerchant = loc
 	if(!isliving(themerchant))
 		return
