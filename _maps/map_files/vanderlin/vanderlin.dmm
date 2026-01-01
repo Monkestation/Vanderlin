@@ -1246,17 +1246,6 @@
 	dir = 8
 	},
 /area/outdoors/beach)
-"aFY" = (
-/obj/machinery/light/fueled/hearth/big_fireplace{
-	pixel_x = 0;
-	pixel_y = -29;
-	density = 0
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/twig{
-	dir = 4
-	},
-/area/indoors/soilsons)
 "aGb" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -14344,6 +14333,12 @@
 "gWB" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/outdoors/exposed/church)
+"gXg" = (
+/obj/structure/flora/grass/bush/wall/tall{
+	pixel_y = 13
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/rtfield/safe)
 "gXk" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -16372,6 +16367,12 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"hWu" = (
+/obj/structure/flora/grass/bush_meagre{
+	pixel_y = 21
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/rtfield/safe)
 "hWE" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -29080,6 +29081,12 @@
 	dir = 8
 	},
 /area/outdoors/river)
+"nZD" = (
+/obj/structure/flora/grass/bush_meagre{
+	pixel_y = 21
+	},
+/turf/open/floor/dirt,
+/area/outdoors/rtfield/safe)
 "nZP" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -47997,6 +48004,13 @@
 "xsq" = (
 /turf/closed/mineral,
 /area/outdoors/mountains)
+"xsC" = (
+/obj/machinery/light/fueled/hearth/big_fireplace{
+	pixel_x = 0;
+	density = 0
+	},
+/turf/closed/wall/mineral/stone/moss,
+/area/indoors/soilsons)
 "xsT" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "CourtPhys"
@@ -113083,8 +113097,8 @@ xRm
 caW
 naD
 mSK
-wOS
-keo
+mSK
+kKV
 naD
 naD
 naD
@@ -113285,9 +113299,9 @@ caW
 bgx
 mSK
 mSK
-keo
-keo
-keo
+kKV
+kKV
+kKV
 kKV
 naD
 naD
@@ -113488,10 +113502,10 @@ xJl
 keo
 kKV
 kKV
-keo
-keo
 kKV
 kKV
+kKV
+keo
 naD
 naD
 naD
@@ -113687,13 +113701,13 @@ wxv
 hWE
 ssT
 kKV
+kKV
+keo
+kKV
 keo
 kKV
 kKV
 kKV
-kKV
-kKV
-keo
 keo
 naD
 naD
@@ -113891,9 +113905,9 @@ eKS
 kKV
 kKV
 kKV
-keo
+kKV
 mSK
-wOS
+mSK
 mSK
 kKV
 kKV
@@ -114096,10 +114110,10 @@ kKV
 mSK
 mSK
 mSK
-wOS
 mSK
-kKV
+mSK
 keo
+kKV
 naD
 naD
 mSK
@@ -114300,7 +114314,7 @@ mSK
 mSK
 mSK
 kKV
-keo
+kKV
 kKV
 bwa
 naD
@@ -114499,8 +114513,8 @@ keo
 kKV
 kKV
 mSK
-wOS
-keo
+mSK
+kKV
 kKV
 kKV
 kKV
@@ -114702,7 +114716,7 @@ kKV
 kKV
 kKV
 kKV
-keo
+kKV
 keo
 kKV
 keo
@@ -116722,7 +116736,7 @@ kKV
 naD
 naD
 naD
-bwa
+naD
 naD
 naD
 keo
@@ -117944,7 +117958,7 @@ pDG
 jJb
 ecq
 wlc
-scS
+nZD
 tNj
 scS
 ehg
@@ -118146,7 +118160,7 @@ tKQ
 tKQ
 wIm
 tzJ
-tNj
+hWu
 tNj
 scS
 ehg
@@ -118346,9 +118360,9 @@ vAS
 pVv
 gzm
 pyQ
-aFY
-ayw
-tNj
+pyQ
+xsC
+gXg
 scS
 ehg
 ehg
@@ -118550,7 +118564,7 @@ ctB
 boP
 boP
 ayw
-tNj
+gXg
 tNj
 tNj
 scS
@@ -118752,7 +118766,7 @@ uTR
 dTG
 dTG
 wlc
-tNj
+hWu
 ehg
 tNj
 scS
@@ -118954,7 +118968,7 @@ xPD
 dTG
 nqF
 wlc
-ehg
+nZD
 ehg
 scS
 ehg
