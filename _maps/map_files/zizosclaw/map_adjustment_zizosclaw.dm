@@ -5,20 +5,20 @@
 */
 
 #define DARK_ELF list(\
-	SPEC_ID_ELF,\
-	SPEC_ID_HALF_ELF\
+	SPEC_ID_DROW,\
+	SPEC_ID_HALF_DROW\
 )
 
-/datum/map_adjustment/rosewood
+/datum/map_adjustment/zizosclaw
 	map_file_name = "zizosclaw.dmm"
 	species_adjust = list(
-		/datum/job/lord = POINTY_EARS,
-		/datum/job/prince = POINTY_EARS,
-		/datum/job/hand = POINTY_EARS,
-		/datum/job/captain = POINTY_EARS
+		/datum/job/lord = DARK_ELF,
+		/datum/job/prince = DARK_ELF,
+		/datum/job/hand = DARK_ELF,
+		/datum/job/captain = DARK_ELF
 	)
 
-#undef POINTY_EARS
+#undef DARK_ELF
 
 	ages_adjust = list(
 		/datum/job/forestguard = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
