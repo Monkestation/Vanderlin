@@ -426,6 +426,14 @@
 	created_item = /obj/item/weapon/mace/goden
 	craftdiff = 2
 
+/datum/anvil_recipe/weapons/iron/spiked
+	name = "Spiked Club (+Small Log)"
+	recipe_name = "a Spiked Iron Club"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/mace/spiked
+	craftdiff = 2
+
 /datum/anvil_recipe/weapons/iron/zweihander
 	name = "Zweihander (+Bar x2)"
 	recipe_name = "a Zweihander"
@@ -558,6 +566,12 @@
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/weapon/mace/steel/rungu
 
+/datum/anvil_recipe/weapons/steel/morningstar
+	name = "Steel Morningstar (+Small Log)"
+	recipe_name = "a Steel Morningstar"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/mace/steel/morningstar
 
 /datum/anvil_recipe/weapons/steel/sledgehammer
 	name = "Steel Sledgehammer (+Small Log)"

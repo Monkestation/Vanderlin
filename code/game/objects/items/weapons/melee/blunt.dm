@@ -360,8 +360,8 @@
 
 //................ Morningstar ............... //
 /obj/item/weapon/mace/steel/morningstar
-	force = DAMAGE_MACE+2
-	force_wielded = DAMAGE_MACE_WIELD+3
+	force = DAMAGE_MACE+4
+	force_wielded = DAMAGE_MACE_WIELD+5 ///Steel should do more damage than Iron.
 	name = "morningstar"
 	icon_state = "spiked_club_old"
 	max_integrity = 300
