@@ -828,14 +828,20 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+
 	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
+
 	item_flags |= IN_INVENTORY
 
 // called just after an item is successfully picked up (loc has changed)
 /obj/item/proc/afterpickup(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
+
+	SEND_SIGNAL(src, COMSIG_ITEM_AFTER_PICKUP, user)
+
 	if(isliving(user))
-		user:encumbrance_to_speed()
+		var/mob/living/L = user
+		L.encumbrance_to_speed()
 
 /obj/item/proc/afterdrop(mob/user)
 
@@ -981,10 +987,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
 	if (!eyes)
 		return
-	M.adjust_blurriness(3)
+	M.adjust_eye_blur(6 SECONDS)
 	eyes.applyOrganDamage(rand(2,4))
 	if(eyes.damage >= 10)
-		M.adjust_blurriness(15)
+		M.adjust_eye_blur(30 SECONDS)
 		if(M.stat != DEAD)
 			to_chat(M, "<span class='danger'>My eyes start to bleed profusely!</span>")
 		if(!(HAS_TRAIT(M, TRAIT_BLIND) || HAS_TRAIT(M, TRAIT_NEARSIGHT)))
@@ -994,7 +1000,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			if(M.stat != DEAD)
 				if(M.drop_all_held_items())
 					to_chat(M, "<span class='danger'>I drop what you're holding and clutch at my eyes!</span>")
-			M.adjust_blurriness(10)
+			M.adjust_eye_blur(20 SECONDS)
 			M.Unconscious(20)
 			M.Paralyze(40)
 		if (prob(eyes.damage - 10 + 1))

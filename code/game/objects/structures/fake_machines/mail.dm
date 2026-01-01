@@ -531,8 +531,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 	// Handle rejections
 	if(is_duplicate || is_selfreport)
-		qdel(accusation.paired)
-		qdel(accusation)
+		QDEL_NULL(accusation.paired) // do this before the paper so it isn't cleared
+		QDEL_NULL(accusation)
 		visible_message(span_warning("[user] sends something."))
 		playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 

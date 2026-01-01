@@ -124,9 +124,9 @@
 			var/datum/wound/r = temp_recipe
 			category = r.category
 		else if(ispath(path, /datum/chimeric_node))
-			category = "Chimeric Node"
+			category = "Humors"
 		else if(ispath(path, /datum/chimeric_table))
-			category = "Chimeric Dossier"
+			category = "Humor Dossier"
 		else if(ispath(path, /obj/item/reagent_containers/food/snacks/fish))
 			category = "Fish"
 

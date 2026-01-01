@@ -119,7 +119,7 @@
 	cost = 5
 	node_x = -50
 	node_y = 50
-	prerequisites = list(/datum/spell_node/dark_attunement, /datum/spell_node/electric_affinity)
+	prerequisites = list(/datum/spell_node/dark_affinity, /datum/spell_node/electric_affinity)
 	is_passive = TRUE
 
 /datum/spell_node/blood_pact/on_node_buy(mob/user)
@@ -516,7 +516,7 @@
 	prerequisites = list(/datum/spell_node/frost_affinity)
 	spell_type = /datum/action/cooldown/spell/aoe/on_turf/snap_freeze
 
-/datum/spell_node/dark_attunement
+/datum/spell_node/dark_affinity
 	name = "Dark Affinity"
 	desc = "Feel the light vanish."
 	cost = 3
@@ -525,7 +525,7 @@
 	prerequisites = list(/datum/spell_node/prestidigitation)
 	is_passive = TRUE
 
-/datum/spell_node/death_affinity/on_node_buy(mob/user)
+/datum/spell_node/dark_affinity/on_node_buy(mob/user)
 	user.mana_pool?.adjust_attunement(/datum/attunement/dark, 0.15)
 	to_chat(user, span_notice("The void whispers secrets to you."))
 
@@ -534,7 +534,7 @@
 	desc = "Let forth a wave of maddening mind-energy."
 	node_x = UP_X_LEFT
 	node_y = UP_Y_TIER_2
-	prerequisites = list(/datum/spell_node/dark_attunement)
+	prerequisites = list(/datum/spell_node/dark_affinity)
 	spell_type = /datum/action/cooldown/spell/cone/staggered/eldritch_blast
 
 /datum/spell_node/encode_thoughts
@@ -542,7 +542,7 @@
 	desc = "Incept an intrusive thought into the mind of your target. They may not agree with it."
 	node_x = UP_X_LEFT - 50
 	node_y = UP_Y_TIER_2
-	prerequisites = list(/datum/spell_node/dark_attunement)
+	prerequisites = list(/datum/spell_node/dark_affinity)
 	spell_type = /datum/action/cooldown/spell/undirected/list_target/encode_thoughts
 
 /datum/spell_node/mind_sliver

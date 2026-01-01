@@ -1,18 +1,19 @@
-//!! IMPORTANT: spawn() is used here for a very specific reason, we want propagation inside networks to essentially always be a tick apart per updating source
 /obj/structure/redstone
 	name = "redstone component"
 	icon = 'icons/obj/redstone.dmi'
 	anchored = TRUE
 	density = FALSE
-	var/powered = FALSE
-	var/power_level = 0 // 0-15 for redstone dust
-	var/list/connected_components = list()
-	var/list/wire_connections = list("2" = 0, "1" = 0, "8" = 0, "4" = 0) // NSEW
-	var/can_connect_wires = TRUE
-	var/send_wall_power = TRUE // Control whether this component can send power through walls
-	var/list/power_sources = list() // Track all power sources and their strengths
-	var/list/power_update_queue = list() // Prevent infinite loops during updates
-	var/updating_power = FALSE
+
+	var/power_level = 0           // Current power level (0-15)
+	var/redstone_role = NONE         // Bitmask of roles
+	var/can_connect_wires = TRUE  // Whether dust can connect to this
+	var/send_wall_power = FALSE   // Whether this component can power through walls
+	var/true_pattern              // For custom wire overlay patterns
+	var/should_block = TRUE
+
+	// Network tracking
+	var/static/list/update_queue = list()
+	var/static/updating_network = FALSE
 
 /obj/structure/redstone/Initialize()
 	. = ..()
@@ -20,223 +21,405 @@
 
 /obj/structure/redstone/LateInitialize()
 	. = ..()
-	if(can_connect_wires)
-		update_wire_connections()
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/redstone/Destroy()
 	. = ..()
-	// Clean up connections when destroyed
-	for(var/obj/structure/redstone/component in connected_components)
-		component.connected_components -= src
-		component.clear_power_source(src) // Remove us as a power source
-		component.update_wire_connections()
-		component.update_appearance(UPDATE_OVERLAYS)
+	var/list/neighbors = get_connected_neighbors()
+	for(var/obj/structure/redstone/neighbor in neighbors)
+		spawn(1)
+			neighbor.schedule_network_update()
 
-/obj/structure/redstone/proc/update_wire_connections()
-	if(!can_connect_wires)
+// ============================================
+// NETWORK UPDATE SYSTEM
+// ============================================
+
+/obj/structure/redstone/proc/schedule_network_update()
+	if(src in update_queue)
 		return
+	update_queue += src
+	if(!updating_network)
+		spawn(1)
+			process_update_queue()
 
-	// Reset connections
-	for(var/dir in wire_connections)
-		wire_connections[dir] = 0
-	connected_components = list()
+/obj/structure/redstone/proc/process_update_queue()
+	if(updating_network)
+		return
+	updating_network = TRUE
 
-	// Check all cardinal directions
-	for(var/direction in GLOB.cardinals)
-		var/turf/target_turf = get_step(src, direction)
-		for(var/obj/structure/redstone/component in target_turf)
-			if(!component.can_connect_wires)
+	var/list/all_components = list()
+	while(length(update_queue))
+		var/obj/structure/redstone/R = update_queue[1]
+		update_queue -= R
+		if(!QDELETED(R))
+			all_components |= R.get_network()
+
+	if(length(all_components))
+		recalculate_network(all_components)
+
+	updating_network = FALSE
+
+/proc/recalculate_network(list/components)
+	// Step 1: Reset all non-source power levels
+	// BUT: check if component is actively outputting (like a repeater with output_active)
+	for(var/obj/structure/redstone/R in components)
+		if(R.redstone_role & REDSTONE_ROLE_SOURCE)
+			continue
+		// Check if this component is actively generating power (processors like repeaters)
+		if(R.get_source_power() > 0)
+			continue
+		R.power_level = 0
+
+	// Step 2: Propagate from sources using BFS by power level
+	var/list/to_process = list()
+
+	// Start with all sources AND any component actively outputting power
+	for(var/obj/structure/redstone/R in components)
+		if(R.get_source_power() > 0)
+			to_process += R
+
+	// Process in order of power level (highest first)
+	var/iterations = 0
+	var/max_iterations = length(components) * 16
+
+	while(length(to_process) && iterations < max_iterations)
+		iterations++
+
+		var/obj/structure/redstone/highest = null
+		var/highest_power = -1
+		for(var/obj/structure/redstone/R in to_process)
+			var/p = R.get_effective_power()
+			if(p > highest_power)
+				highest_power = p
+				highest = R
+
+		if(!highest || highest_power <= 0)
+			break
+
+		to_process -= highest
+
+		var/list/neighbors = highest.get_power_output_neighbors()
+		for(var/obj/structure/redstone/neighbor in neighbors)
+			if(neighbor.redstone_role & REDSTONE_ROLE_SOURCE)
+				neighbor.receive_source_power(highest_power, highest)
+				var/source_power = neighbor.get_source_power()
+				if(source_power > 0 && !(neighbor in to_process))
+					to_process += neighbor
 				continue
 
-			var/connection_dir = get_dir(src, component)
-			if(can_connect_to(component, connection_dir))
-				wire_connections["[connection_dir]"] = 1
-				connected_components += component
+			// Skip neighbors that are actively outputting - they're self-powered
+			if(neighbor.get_source_power() > 0)
+				if(!(neighbor in to_process))
+					to_process += neighbor
+				continue
 
-				// Update the other component's connection too
-				var/reverse_dir = get_dir(component, src)
-				if(component.can_connect_to(src, reverse_dir))
-					component.wire_connections["[reverse_dir]"] = 1
-					component.connected_components |= src
-					component.update_appearance(UPDATE_OVERLAYS)
+			var/received = neighbor.calculate_received_power(highest_power, highest)
+			if(received > neighbor.power_level)
+				neighbor.power_level = received
+				if(!(neighbor in to_process))
+					to_process += neighbor
 
-/obj/structure/redstone/proc/can_connect_to(obj/structure/redstone/other, dir)
-	return TRUE // Override in subclasses for specific connection rules
+	// Step 3: Update all appearances and trigger outputs
+	for(var/obj/structure/redstone/R in components)
+		R.on_power_changed()
+		R.update_appearance(UPDATE_OVERLAYS)
+		R.trigger_adjacent_structures()
 
-/obj/structure/redstone/proc/set_power(new_power_level, mob/user, obj/structure/redstone/source)
-	if(updating_power)
-		return
+// ============================================
+// NON-REDSTONE STRUCTURE INTERACTION
+// ============================================
 
-	updating_power = TRUE
-
-	if(source)
-		if(new_power_level > 0)
-			power_sources[ref(source)] = source
-		else
-			power_sources -= ref(source)
-	else
-		if(new_power_level > 0)
-			power_sources["direct"] = new_power_level
-		else
-			power_sources -= "direct"
-
-	var/max_power = 0
-
-	// Check direct power
-	if("direct" in power_sources)
-		max_power = max(max_power, power_sources["direct"])
-
-	for(var/source_key in power_sources)
-		if(source_key == "direct")
+/obj/structure/redstone/proc/trigger_adjacent_structures()
+	// Check all adjacent turfs for non-redstone structures
+	for(var/direction in GLOB.cardinals)
+		var/turf/T = get_step(src, direction)
+		if(!T)
 			continue
-		var/obj/structure/redstone/source_obj = power_sources[source_key]
-		if(source_obj && !QDELETED(source_obj))
-			var/received_power = calculate_received_power(source_obj)
-			max_power = max(max_power, received_power)
+
+		// Check for wall power transmission
+		if(send_wall_power && isclosedturf(T))
+			trigger_structures_through_wall(direction, T)
 		else
-			power_sources -= source_key
+			// Direct adjacency
+			for(var/obj/structure/S in T)
+				if(S.redstone_structure && !istype(S, /obj/structure/redstone))
+					// Only trigger on powered/unpowered state changes (0 to non-zero or non-zero to 0)
+					var/was_powered = (S.last_redstone_power > 0)
+					var/is_powered = (power_level > 0)
+					if(was_powered != is_powered)
+						S.last_redstone_power = power_level
+						S.redstone_triggered(power_level, src)
 
-	if(max_power != power_level)
-		power_level = max_power
-		powered = (power_level > 0)
-		update_appearance(UPDATE_OVERLAYS)
-		propagate_power(user, source)
+	// Also check current turf
+	for(var/obj/structure/S in loc)
+		if(S.redstone_structure && !istype(S, /obj/structure/redstone))
+			// Only trigger on powered/unpowered state changes
+			var/was_powered = (S.last_redstone_power > 0)
+			var/is_powered = (power_level > 0)
+			if(was_powered != is_powered)
+				S.last_redstone_power = power_level
+				S.redstone_triggered(power_level, src)
 
-	updating_power = FALSE
+/obj/structure/redstone/proc/trigger_structures_through_wall(direction, turf/wall_turf)
+	var/list/turfs_to_check = list()
 
+	// 1. Check cardinal directions around the wall (Standard horizontal wall power)
+	for(var/check_dir in GLOB.cardinals)
+		if(check_dir == REVERSE_DIR(direction))
+			continue
+		var/turf/T = get_step(wall_turf, check_dir)
+		if(T) turfs_to_check += T
 
-/obj/structure/redstone/proc/calculate_received_power(obj/structure/redstone/source_obj)
-	// Default: receive the source's current power level
-	return source_obj.power_level
+	// 2. Check Vertical (Multi-Z wall power)
+	// A repeater powering a wall should trigger machines sitting ON TOP of the wall or BELOW it
+	var/turf/above = GET_TURF_ABOVE(wall_turf)
+	if(above) turfs_to_check += above
 
+	var/turf/below = GET_TURF_BELOW(wall_turf)
+	if(below) turfs_to_check += below
 
-/obj/structure/redstone/proc/propagate_power(mob/user, obj/structure/redstone/source)
-	// Default behavior: send power in all directions
-	var/list/power_directions = get_power_directions()
-	for(var/direction in power_directions)
-		send_power_in_direction(direction, user, source)
+	// Process all identified turfs
+	for(var/turf/T in turfs_to_check)
+		for(var/obj/structure/S in T)
+			if(S.redstone_structure && !istype(S, /obj/structure/redstone))
+				var/was_powered = (S.last_redstone_power > 0)
+				var/is_powered = (power_level > 0)
+				if(was_powered != is_powered)
+					S.last_redstone_power = power_level
+					S.redstone_triggered(power_level, src)
 
-/obj/structure/redstone/proc/get_power_directions()
-	// Default: send power in all cardinal directions
+// ============================================
+// COMPONENT INTERFACE PROCS
+// ============================================
+
+/obj/structure/redstone/proc/get_network_neighbors()
+	// By default, same as connected neighbors
+	return get_connected_neighbors()
+
+// Get all components in this network via BFS
+/obj/structure/redstone/proc/get_network()
+	var/list/network = list(src)
+	var/list/to_check = list(src)
+
+	while(length(to_check))
+		var/obj/structure/redstone/current = to_check[1]
+		to_check -= current
+
+		// Standard neighbor traversal
+		var/list/neighbors = current.get_network_neighbors()
+		for(var/obj/structure/redstone/neighbor in neighbors)
+			if(!(neighbor in network))
+				network += neighbor
+				to_check += neighbor
+
+		// --- WALL POWER LOGIC ---
+
+		// A. If THIS component sends wall power, look for recipients (Cardinals + Vertical)
+		if(current.send_wall_power)
+			for(var/direction in GLOB.cardinals)
+				var/turf/T = get_step(current, direction)
+				if(isclosedturf(T))
+					// get_wall_power_neighbors now handles the vertical checks (see below)
+					var/list/wall_neighbors = current.get_wall_power_neighbors(direction, T)
+					for(var/obj/structure/redstone/neighbor in wall_neighbors)
+						if(!(neighbor in network))
+							network += neighbor
+							to_check += neighbor
+
+		// B. If THIS component receives wall power, look for sources through walls
+		if(current.can_connect_wires)
+
+			// 1. Check Horizontal Walls (Standard)
+			for(var/direction in GLOB.cardinals)
+				var/turf/T = get_step(current, direction)
+				if(isclosedturf(T))
+					// Check neighbors of that wall for sources
+					for(var/check_dir in GLOB.cardinals)
+						var/turf/source_turf = get_step(T, check_dir)
+						for(var/obj/structure/redstone/potential_source in source_turf)
+							// (Logic shortened: Check if source powers the wall)
+							if(potential_source.send_wall_power && (REVERSE_DIR(check_dir) in potential_source.get_output_directions()))
+								if(!(potential_source in network))
+									network += potential_source
+									to_check += potential_source
+
+			// 2. Check Vertical Walls (Multi-Z)
+			// If I am dust, check the turf BELOW me. Is it a wall?
+			var/turf/turf_below = GET_TURF_BELOW(current.loc)
+			if(turf_below && isclosedturf(turf_below))
+				// Look for sources on the LOWER Z-level pointing at this wall
+				for(var/check_dir in GLOB.cardinals)
+					var/turf/source_turf = get_step(turf_below, check_dir) // Side of the wall
+					for(var/obj/structure/redstone/potential_source in source_turf)
+						// If that source is pointing AT the wall below me
+						if(potential_source.send_wall_power && (REVERSE_DIR(check_dir) in potential_source.get_output_directions()))
+							if(!(potential_source in network))
+								network += potential_source
+								to_check += potential_source
+
+			// If I am dust, check the turf ABOVE me. Is it a wall? (Rare, but possible)
+			var/turf/turf_above = GET_TURF_ABOVE(current.loc)
+			if(turf_above && isclosedturf(turf_above))
+				for(var/check_dir in GLOB.cardinals)
+					var/turf/source_turf = get_step(turf_above, check_dir)
+					for(var/obj/structure/redstone/potential_source in source_turf)
+						if(potential_source.send_wall_power && (REVERSE_DIR(check_dir) in potential_source.get_output_directions()))
+							if(!(potential_source in network))
+								network += potential_source
+								to_check += potential_source
+
+	return network
+
+// Get neighbors this component connects to
+/obj/structure/redstone/proc/get_connected_neighbors()
+	var/list/neighbors = list()
+	for(var/direction in get_connection_directions())
+		var/turf/T = get_step(src, direction)
+		for(var/obj/structure/redstone/R in T)
+			if(can_connect_to(R, direction) && R.can_connect_to(src, REVERSE_DIR(direction)))
+				neighbors += R
+	return neighbors
+
+// Get neighbors we output power TO
+/obj/structure/redstone/proc/get_power_output_neighbors()
+	var/list/neighbors = list()
+	for(var/direction in get_output_directions())
+		var/turf/T = get_step(src, direction)
+		for(var/obj/structure/redstone/R in T)
+			if(R.can_receive_from(src, REVERSE_DIR(direction)))
+				neighbors += R
+
+		// Check for wall power (powering torches through solid blocks)
+		if(send_wall_power && isclosedturf(T))
+			var/list/wall_neighbors = get_wall_power_neighbors(direction, T)
+			neighbors |= wall_neighbors
+
+	return neighbors
+
+// Find components that can be powered through a wall
+// Find components that can be powered through a wall
+/obj/structure/redstone/proc/get_wall_power_neighbors(direction, turf/wall_turf)
+	var/list/neighbors = list()
+
+	// 1. Horizontal check (Around the wall)
+	for(var/check_dir in GLOB.cardinals)
+		if(check_dir == REVERSE_DIR(direction))
+			continue
+
+		var/turf/beyond_wall = get_step(wall_turf, check_dir)
+
+		// Add torches attached to wall
+		for(var/obj/structure/redstone/torch/torch in beyond_wall)
+			if(torch.attached_dir == REVERSE_DIR(check_dir))
+				neighbors += torch
+
+		// Add dust/wire
+		for(var/obj/structure/redstone/dust/dust in beyond_wall)
+			neighbors += dust
+
+		// Add repeaters facing away from wall
+		for(var/obj/structure/redstone/repeater/rep in beyond_wall)
+			if(REVERSE_DIR(rep.facing_dir) == REVERSE_DIR(check_dir))
+				neighbors += rep
+
+	// 2. Vertical Check (Up/Down)
+	// Check Above (Classic behavior: Repeater into block powers dust on top of block)
+	var/turf/above = GET_TURF_ABOVE(wall_turf)
+	if(above)
+		for(var/obj/structure/redstone/dust/dust in above)
+			neighbors += dust
+		// Note: Usually repeaters/torches on top don't receive power FROM the block they sit on
+		// unless specific conditions are met, but you can add them here if desired.
+
+	// Check Below (Repeater into block powers dust below block)
+	var/turf/below = GET_TURF_BELOW(wall_turf)
+	if(below)
+		for(var/obj/structure/redstone/dust/dust in below)
+			neighbors += dust
+
+	return neighbors
+
+// Directions we can connect wires to
+/obj/structure/redstone/proc/get_connection_directions()
 	return GLOB.cardinals
 
+// Directions we output power to
+/obj/structure/redstone/proc/get_output_directions()
+	return GLOB.cardinals
+
+// Directions we accept power from
 /obj/structure/redstone/proc/get_input_directions()
-	// Default: allows power in from any cardinal direction
 	return GLOB.cardinals
 
-/obj/structure/redstone/proc/send_power_in_direction(direction, mob/user, obj/structure/redstone/source)
-	var/turf/target_turf = get_step(src, direction)
+// Can we connect to this component?
+/obj/structure/redstone/proc/can_connect_to(obj/structure/redstone/other, direction)
+	return can_connect_wires
 
-	// Send power to regular redstone components
-	for(var/obj/structure/redstone/component in target_turf)
-		if(component == source)
-			continue // Don't send power back to the source
+// Can we receive power from this source?
+/obj/structure/redstone/proc/can_receive_from(obj/structure/redstone/source, direction)
+	if(!can_connect_wires)
+		return FALSE
+	return (direction in get_input_directions())
 
-		if(!component.can_connect_wires)
-			continue
+// For sources: what power do we generate?
+/obj/structure/redstone/proc/get_source_power()
+	return 0
 
-		if(!component.can_connect_to(src, turn(direction, 180)))
-			continue
+// For all: what power do we effectively have for propagation?
+/obj/structure/redstone/proc/get_effective_power()
+	if(redstone_role & REDSTONE_ROLE_SOURCE)
+		return get_source_power()
+	return power_level
 
-		// Add to update queue to prevent infinite loops
-		if(!(component in power_update_queue))
-			power_update_queue += component
-			spawn(1)
-				power_update_queue -= component
-				component.receive_power(power_level, src, user)
+// Calculate power received from a neighbor
+/obj/structure/redstone/proc/calculate_received_power(incoming_power, obj/structure/redstone/source)
+	return incoming_power
 
-	// Send power through walls if enabled
-	if(send_wall_power && isclosedturf(target_turf))
-		send_wall_power_in_direction(direction, target_turf, user, source)
+// For sources that can be inverted (torches)
+/obj/structure/redstone/proc/receive_source_power(incoming_power, obj/structure/redstone/source)
+	return
 
-/obj/structure/redstone/proc/send_wall_power_in_direction(direction, turf/wall_turf, mob/user, obj/structure/redstone/source)
-	for(var/check_direction in GLOB.cardinals)
-		if(check_direction == REVERSE_DIR(direction))
-			continue
-		var/turf/beyond_wall = get_step(wall_turf, check_direction)
+// Called after power calculation is complete
+/obj/structure/redstone/proc/on_power_changed()
+	return
 
-		for(var/obj/structure/redstone/component in beyond_wall)
-			if(istype(component, /obj/structure/redstone/torch))
-				var/obj/structure/redstone/torch/torch = component
-				// Check if this torch is attached to the wall we're powering through
-				if(torch.attached_dir == turn(check_direction, 180)) // Torch attached to the wall we're behind
-					// Send power to invert the torch
-					if(!(torch in power_update_queue))
-						power_update_queue += torch
-						spawn(1)
-							power_update_queue -= torch
-							torch.receive_power(power_level, src, user)
-			else
-				if(direction in component.get_input_directions())
-					if(!(component in power_update_queue))
-						power_update_queue += component
-						spawn(1)
-							power_update_queue -= component
-							component.receive_power(power_level, src, user)
-
-
-/obj/structure/redstone/proc/receive_power(incoming_power, obj/structure/redstone/source, mob/user)
-	// Default behavior - just pass through the power
-	set_power(incoming_power, user, source)
-
-/obj/structure/redstone/proc/clear_power_source(obj/structure/redstone/source)
-	// Remove a specific power source
-	if(source)
-		power_sources -= ref(source)
-	else
-		power_sources -= "direct"
-
-	var/max_power = 0
-
-	// Check direct power
-	if("direct" in power_sources)
-		max_power = max(max_power, power_sources["direct"])
-
-	// Check object sources by looking at their CURRENT power level
-	for(var/source_key in power_sources)
-		if(source_key == "direct")
-			continue
-		var/obj/structure/redstone/source_obj = power_sources[source_key]
-		if(source_obj && !QDELETED(source_obj))
-			var/received_power = calculate_received_power(source_obj)
-			max_power = max(max_power, received_power)
-		else
-			power_sources -= source_key
-
-	if(max_power != power_level)
-		set_power(max_power, null, null)
-
-/obj/structure/redstone/redstone_triggered(mob/user) //this is essentially legacy code
-	set_power(15, user, null) // External trigger acts as temporary power source
-
-	spawn(2)
-		clear_power_source(null)
-
+// ============================================
+// OVERLAYS
+// ============================================
 /obj/structure/redstone/update_overlays()
 	. = ..()
 	if(!can_connect_wires)
 		return
 
-	// Create wire overlay pattern
 	var/wire_pattern = ""
-	for(var/dir in wire_connections)
-		if(wire_connections[dir])
-			wire_pattern += dir
+	// Order matters for icon_state naming: SOUTH(2), NORTH(1), WEST(8), EAST(4)
+	for(var/direction in list(SOUTH, NORTH, WEST, EAST))
+		var/turf/T = get_step(src, direction)
+		for(var/obj/structure/redstone/R in T)
+			if(can_connect_to(R, direction) && R.can_connect_to(src, REVERSE_DIR(direction)))
+				wire_pattern += "[direction]"
+				break
 
-	if(wire_pattern)
-		var/mutable_appearance/wire_overlay = mutable_appearance(icon, "wire_[wire_pattern]")
-		wire_overlay.layer = layer - 0.01
-		if(powered)
-			wire_overlay.color = "#FF0000" // Red when powered
-		else
-			wire_overlay.color = "#8B4513" // Brown when unpowered
-		. += wire_overlay
+	var/pattern_to_use = true_pattern ? true_pattern : (wire_pattern ? wire_pattern : "wire")
+	var/mutable_appearance/wire_overlay = mutable_appearance(icon, "wire_[pattern_to_use]")
+	wire_overlay.layer = layer - 0.01
+	if(power_level > 0)
+		var/brightness = 0.3 + (power_level / 15.0) * 0.7
+		wire_overlay.color = rgb(255 * brightness, 0, 0)
 	else
-		var/mutable_appearance/wire_overlay = mutable_appearance(icon, "wire")
-		wire_overlay.layer = layer - 0.01
-		if(powered)
-			wire_overlay.color = "#FF0000" // Red when powered
-		else
-			wire_overlay.color = "#8B4513" // Brown when unpowered
-		. += wire_overlay
+		wire_overlay.color = "#8B4513"
+	. += wire_overlay
+
+	if(power_level > 0)
+		var/mutable_appearance/em = emissive_appearance(icon, "wire_[pattern_to_use]")
+		. += em
+		if(should_block)
+			var/mutable_appearance/em_block = emissive_blocker(icon, icon_state)
+			. += em_block
+
+/proc/trigger_redstone_at(turf/T, power_level, mob/user)
+	for(var/obj/structure/redstone/component in T)
+		if(component.can_connect_wires)
+			// Temporarily act as a source
+			component.power_level = max(component.power_level, power_level)
+			component.schedule_network_update()

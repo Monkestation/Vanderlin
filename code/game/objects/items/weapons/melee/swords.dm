@@ -73,6 +73,18 @@
 	sellprice = 15
 	smeltresult = /obj/item/ingot/iron
 
+/obj/item/weapon/sword/short/bronze
+	name = "bronze short sword"
+	desc = "A bronze sword of shortened design and a reduced grip for single hand use."
+	icon_state = "shortsword_bronze"
+	force = DAMAGE_SHORTSWORD
+	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 85
+	wdefense = GOOD_PARRY
+	wbalance = HARD_TO_DODGE
+	sellprice = 10
+	smeltresult = /obj/item/ingot/bronze
+
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
 	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
@@ -91,6 +103,7 @@
 /obj/item/weapon/sword/short/psy/Initialize(mapload)
 	. = ..()						//+3 force, +100 blade int, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, 100, 50, 1, TRUE)
+
 
 //................ Arming Sword ............... //
 /obj/item/weapon/sword/arming
@@ -141,6 +154,17 @@
 	wdefense = GOOD_PARRY
 	smeltresult = /obj/item/ingot/iron
 
+/obj/item/weapon/sword/bronze
+	name = "bronze sword"
+	desc = "A simple and reliable bronze sword."
+	icon_state = "sword_bronze"
+	force = DAMAGE_SWORD-1
+	force_wielded = DAMAGE_SWORD_WIELD-1
+	max_blade_int = 150
+	max_integrity = INTEGRITY_STANDARD
+	wdefense = AVERAGE_PARRY
+	smeltresult = /obj/item/ingot/bronze
+
 /obj/item/weapon/sword/kaskara
 	name = "steel kaskara"
 	desc = "A steel sword of ancient Lakkarian design, predating the standard equipment of pegasus riders."
@@ -183,6 +207,24 @@
 	wbalance = HARD_TO_DODGE
 	sellprice = 20
 	smeltresult = /obj/item/ingot/iron
+
+/obj/item/weapon/sword/rapier/caneblade
+	name = "cane blade"
+	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing"
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
+	icon_state = "caneblade"
+	sellprice = 100 //Gold handle
+	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier)
+	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
+	force_wielded = 0
+	gripped_intents = null
+	alt_intents = null
+	parrysound = "rapier"
+	swingsound = BLADEWOOSH_SMALL
+	minstr = 6
+	wbalance = VERY_HARD_TO_DODGE
+	bigboy = FALSE
+	SET_BASE_PIXEL(0, 0)
 
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
@@ -260,12 +302,20 @@
 	gripped_intents = list(/datum/intent/axe/chop, /datum/intent/sword/thrust/curved)
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
+	swingsound = BLADEWOOSH_MED
 	smeltresult = /obj/item/ingot/steel
 
 /obj/item/weapon/sword/sabre/dadao/iron
 	name = "iron dadao"
 	icon_state = "dadao_iron"
 	smeltresult = /obj/item/ingot/iron
+
+/obj/item/weapon/sword/sabre/dadao/bronze
+	name = "bronze dadao"
+	icon_state = "dadao_bronze"
+	smeltresult = /obj/item/ingot/bronze
+	max_blade_int = 95
+	max_integrity = INTEGRITY_STANDARD
 
 //................ Shalal Sabre ............... //
 /obj/item/weapon/sword/sabre/shalal
@@ -329,7 +379,6 @@
 	icon_state = "falchion"
 	swingsound = BLADEWOOSH_HUGE
 	wbalance = EASY_TO_DODGE
-	sellprice = 100
 
 /obj/item/weapon/sword/scimitar/ngombe
 	name = "ngombe ngulu"
@@ -425,7 +474,13 @@
 	minstr = 6
 	sellprice = 45
 
-/obj/item/weapon/sword/scimitar/sengese/silver
+/obj/item/weapon/sword/scimitar/sengese/bronze
+	name = "bronze sengese"
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
+	icon_state = "sengese_bronze"
+	sellprice = 15
+	smeltresult = /obj/item/ingot/bronze
+
 /obj/item/weapon/sword/scimitar/sengese/silver
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop, /datum/intent/sword/thrust/curved)
@@ -625,7 +680,7 @@
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
 	name = "ancient khopesh"
-	desc = "A bronze weapon of war from the era of Apotheosis. This blade is older than a few elven generations, but has been very well-maintained and still keeps a good edge."
+	desc = "A bronze weapon of war from the age of Psydon's reign. This blade is older than a few elven generations, but has been very well-maintained and still keeps a good edge."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "khopesh"
 	item_state = "khopesh"

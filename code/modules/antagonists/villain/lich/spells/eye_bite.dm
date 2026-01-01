@@ -28,4 +28,4 @@
 	)
 	cast_on.adjustBruteLoss(30)
 	cast_on.blind_eyes(2)
-	cast_on.blur_eyes(10)
+	cast_on.set_eye_blur_if_lower(20 SECONDS)

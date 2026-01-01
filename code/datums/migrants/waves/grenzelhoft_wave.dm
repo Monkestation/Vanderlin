@@ -55,7 +55,7 @@
 	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/grenzelhoft_count
-	name = "Grenzelhoft Count"
+	name = "Grenzelhoft Count (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
 	wrists = /obj/item/clothing/neck/psycross/g
@@ -127,7 +127,7 @@
 	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/grenzelhoft_countess
-	name = "Grenzelhoft Countess"
+	name = "Grenzelhoft Countess (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
 	wrists = /obj/item/clothing/neck/psycross/g
@@ -145,17 +145,17 @@
 
 /datum/migrant_role/grenzelhoft_knight
 	name = "Grenzelhoft Knight"
-	greet_text = "Your liege, the count and the countess have both took the duty given by the Kaiser himself to voyage to Vanderlin, ensure their survival and obey their orders."
+	greet_text = "Your liege, the count and the countess have both took the duty given by the council to voyage to Vanderlin, ensure their survival and obey their orders."
 	migrant_job = /datum/job/migrant/grenzelhoft_knight
 
 /datum/job/migrant/grenzelhoft_knight
 	title = "Grenzelhoft Knight"
-	tutorial = "Your liege, the count and the countess have both took the duty given by the Kaiser himself to voyage to Vanderlin, ensure their survival and obey their orders."
+	tutorial = "Your liege, the count and the countess have both took the duty given by the council to voyage to Vanderlin, ensure their survival and obey their orders."
 	outfit = /datum/outfit/grenzelhoft_knight
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_GRENZ
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_END = 2,
@@ -193,7 +193,7 @@
 	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/grenzelhoft_knight
-	name = "Grenzelhoft Knight"
+	name = "Grenzelhoft Knight (Migrant Wave)"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr = /obj/item/weapon/sword/long/greatsword/flamberge
 	beltl = /obj/item/storage/belt/pouch/coins/mid
@@ -209,15 +209,15 @@
 
 /datum/migrant_role/grenzelhoft_man_at_arms
 	name = "Grenzelhoft Man-at-Arms"
-	greet_text = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the Herr Präfekt and make sure the nobles you arrived with survive."
+	greet_text = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the count and make sure the nobles you arrived with survive."
 	migrant_job = /datum/job/migrant/grenzelhoft_man_at_arms
 
 /datum/job/migrant/grenzelhoft_man_at_arms
 	title = "Grenzelhoft Man-at-Arms"
-	tutorial = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the Herr Präfekt and make sure the nobles you arrived with survive."
+	tutorial = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the count and make sure the nobles you arrived with survive."
 	outfit = /datum/outfit/grenzelhoft_man_at_arms
 	allowed_races = RACES_PLAYER_GRENZ
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_END = 1,
@@ -242,9 +242,9 @@
 
 /datum/job/migrant/grenzelhoft_man_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/whipsflails, pick(1, 1, 2))
-	spawned.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2, 3))
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0, 0, 1))
+	spawned.adjust_skillrank(/datum/skill/combat/whipsflails, pick(1, 1, 2), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2, 3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0, 0, 1), TRUE)
 
 	if(!spawned.dna?.species)
 		return
@@ -253,7 +253,7 @@
 	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/grenzelhoft_man_at_arms
-	name = "Grenzelhoft Man-at-Arms"
+	name = "Grenzelhoft Man-at-Arms (Migrant Wave)"
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	neck = /obj/item/clothing/neck/chaincoif
 	pants = /obj/item/clothing/pants/grenzelpants
@@ -285,7 +285,7 @@
 		/datum/migrant_role/grenzelhoft_countess = 1,
 		/datum/migrant_role/grenzelhoft_knight = 1,
 		/datum/migrant_role/grenzelhoft_man_at_arms = 2)
-	greet_text = "The Kaiser of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."
+	greet_text = "The council of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."
 
 /datum/migrant_wave/grenzelhoft_visit_down
 	name = "The Grenzelhoft visit"
@@ -296,4 +296,4 @@
 		/datum/migrant_role/grenzelhoft_count = 1,
 		/datum/migrant_role/grenzelhoft_countess = 1,
 		/datum/migrant_role/grenzelhoft_knight = 1)
-	greet_text = "The Kaiser of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."
+	greet_text = "The council of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."

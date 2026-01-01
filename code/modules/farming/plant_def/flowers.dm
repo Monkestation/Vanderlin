@@ -56,6 +56,7 @@
 	nitrogen_production = 0
 	phosphorus_production = 0
 	seed_identity = "manabloom seeds"
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/luminescent
 
 /datum/plant_def/manabloom/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD
@@ -76,6 +77,7 @@
 	nitrogen_production = 40
 	phosphorus_production = 0
 	seed_identity = "poppy seeds"
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/poppy
 
 /datum/plant_def/poppy/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD

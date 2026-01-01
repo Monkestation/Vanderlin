@@ -68,12 +68,12 @@
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 		if("Quarterstaff")
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 3, 3)
-			spawned.adjust_stat_modifier("job_stats", STATKEY_PER, 1)
-			spawned.adjust_stat_modifier("job_stats", STATKEY_INT, 1)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
 	spawned.equip_to_slot_or_del(new gloves_to_wear, ITEM_SLOT_GLOVES, TRUE)
 
 /datum/outfit/disciple
-	name = "Disciple"
+	name = "Disciple (Sacrestants)"
 	shoes = /obj/item/clothing/shoes/psydonboots
 	armor = /obj/item/clothing/armor/regenerating/skin/disciple
 	backl = /obj/item/storage/backpack/satchel/otavan

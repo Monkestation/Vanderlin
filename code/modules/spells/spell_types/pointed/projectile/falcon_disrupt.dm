@@ -197,7 +197,7 @@
 	if(!L)
 		return
 	falcon_fx = new /obj/effect/falcon_strike_fx(get_turf(L), L)
-	L.adjust_blurriness(4)
+	L.adjust_eye_blur(8 SECONDS)
 	L.Immobilize(2 SECONDS)
 	return TRUE
 

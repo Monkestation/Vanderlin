@@ -1,3 +1,5 @@
+#define LIBRARY_JSON "_book_titles"
+
 SUBSYSTEM_DEF(librarian)
 	name = "Librarian"
 	init_order = INIT_ORDER_PATH
@@ -53,33 +55,39 @@ SUBSYSTEM_DEF(librarian)
 	return list()
 
 /datum/controller/subsystem/librarian/proc/playerbook2file(input, book_title = "Unknown", author = "Unknown", author_ckey = "Unknown", icon = "basic_book", category = "Myths & Tales")
+	var/encoded_title = url_encode(book_title)
+	if(encoded_title == LIBRARY_JSON)
+		message_admins(span_boldred("[ADMIN_PP(usr.client.key)] has attempted to overwrite data/player_generated_books/[LIBRARY_JSON].json, the master list of books. This is an exploit and attempt to grief."))
+		log_admin("NOTICE: [usr.client.key] has attempted to overwrite data/player_generated_books/[LIBRARY_JSON].json, the master list of books. This is an exploit and attempt to grief.")
+		return "What a stupid name for a book."
 	if(!input)
 		return "There is no text in the book!"
-	if(fexists("data/player_generated_books/[url_encode(book_title)].json"))
-		return "there is already a book by this title!"
-	if(!(istext(input) && istext(book_title) && istext(author) && istext(author_ckey) && istext(icon)))
+	if(fexists("data/player_generated_books/[encoded_title].json"))
+		return "There is already a book by this title!"
+	if(!(istext(input) && istext(encoded_title) && istext(author) && istext(author_ckey) && istext(icon)))
 		return "This book is incorrectly formatted!"
 
 	var/list/contents = list("book_title" = "[book_title]", "author" = "[author]", "author_ckey" = "[author_ckey]", "icon" = "[icon]",  "text" = "[input]", "category" = category)
 	//url_encode should escape all the characters that do not belong in a file name. If not, god help us
-	var/file_name = "data/player_generated_books/[url_encode(book_title)].json"
-	text2file(json_encode(contents), file_name)
+	text2file(json_encode(contents), "data/player_generated_books/[encoded_title].json")
 
-	if(fexists("data/player_generated_books/_book_titles.json"))
-		var/list/_book_titles_contents = json_decode(file2text("data/player_generated_books/_book_titles.json"))
-		_book_titles_contents += "[url_encode(book_title)]"
-		fdel("data/player_generated_books/_book_titles.json")
-		text2file(json_encode(_book_titles_contents), "data/player_generated_books/_book_titles.json")
+	if(fexists("data/player_generated_books/[LIBRARY_JSON].json"))
+		var/list/_book_titles_contents = json_decode(file2text("data/player_generated_books/[LIBRARY_JSON].json"))
+		_book_titles_contents += "[encoded_title]"
+		fdel("data/player_generated_books/[LIBRARY_JSON].json")
+		text2file(json_encode(_book_titles_contents), "data/player_generated_books/[LIBRARY_JSON].json")
 		message_admins("Book [book_title] has been saved to the player book database by [author_ckey]([author])")
 		return "You have a feeling the newly written book will remain in the archive for a very long time..."
 	else
 		message_admins("!!! _book_titles.json no longer exists, previous book title list has been lost. making a new one without old books... !!!")
-		text2file(json_encode(list(book_title)), "data/player_generated_books/_book_titles.json")
-		return "_book_titles.json no longer exists, yell at your server host that some books have been lost!"
+		text2file(json_encode(list(book_title)), "data/player_generated_books/[LIBRARY_JSON].json")
+		return "[LIBRARY_JSON].json no longer exists, yell at your server host that some books have been lost!"
 
 /datum/controller/subsystem/librarian/proc/file2playerbook(filename)
-	if(!filename)
+	if(!filename || filename == LIBRARY_JSON)
 		return list()
+	if(SANITIZE_FILENAME(filename) in books)
+		return books[SANITIZE_FILENAME(filename)]
 	var/json_file = file("data/player_generated_books/[filename].json")
 	if(fexists(json_file))
 		var/list/contents = json_decode(file2text(json_file))
@@ -92,45 +100,53 @@ SUBSYSTEM_DEF(librarian)
 	return list()
 
 /datum/controller/subsystem/librarian/proc/player_book_exists(book_title)
-	if(!book_title)
+	if(!book_title || book_title == LIBRARY_JSON)
 		return FALSE
-	return fexists("data/player_generated_books/[book_title].json")
+	return books[book_title]
 
-/datum/controller/subsystem/librarian/proc/del_player_book(book_title)
-	if(!book_title)
+/datum/controller/subsystem/librarian/proc/del_player_book(encoded_title, author_ckey)
+	if(!encoded_title)
+		return FALSE
+	if(encoded_title == LIBRARY_JSON)
+		message_admins(span_boldred("[ADMIN_PP(usr.client.key)] has attempted to delete data/player_generated_books/[LIBRARY_JSON].json, the master list of books. This is an exploit and attempt to grief."))
+		log_admin("NOTICE: [usr.client.key] has attempted to delete data/player_generated_books/[LIBRARY_JSON].json, the master list of books. This is an exploit and attempt to grief.")
+		return FALSE
+	if(!books[SANITIZE_FILENAME(encoded_title)])
 		return FALSE
 
-	var/encoded_title = url_encode(book_title)
 	var/json_file = file("data/player_generated_books/[encoded_title].json")
-
 	if(!fexists(json_file))
 		return FALSE
+	var/list/deleting_book = json_decode(file2text(json_file))
+	if(!isnull(deleting_book) && deleting_book["author_ckey"] && deleting_book["author_ckey"] != author_ckey)
+		message_admins("[ADMIN_PP(usr.client.key)] could not delete data/player_generated_books/[encoded_title].json. Sent author_ckey [author_ckey] does not match author [deleting_book["author_ckey"]]. This is abnormal.")
+		return FALSE
 
-	if(fexists("data/player_generated_books/_book_titles.json"))
+	if(fexists("data/player_generated_books/[LIBRARY_JSON].json"))
 		fdel(json_file)
-		var/list/_book_titles_contents = json_decode(file2text("data/player_generated_books/_book_titles.json"))
+		var/list/_book_titles_contents = json_decode(file2text("data/player_generated_books/[LIBRARY_JSON].json"))
 		_book_titles_contents -= encoded_title
-		fdel("data/player_generated_books/_book_titles.json")
-		text2file(json_encode(_book_titles_contents), "data/player_generated_books/_book_titles.json")
+		fdel("data/player_generated_books/[LIBRARY_JSON].json")
+		text2file(json_encode(_book_titles_contents), "data/player_generated_books/[LIBRARY_JSON].json")
 		update_books()
 		return TRUE
 	else
-		message_admins("!!! _book_titles.json no longer exists, previous book title list has been lost. !!!")
+		message_admins("!!! [LIBRARY_JSON].json no longer exists, previous book title list has been lost. !!!")
 		return FALSE
 
 /datum/controller/subsystem/librarian/proc/pull_player_book_titles()
-	if(fexists(file("data/player_generated_books/_book_titles.json")))
-		var/json_file = file("data/player_generated_books/_book_titles.json")
+	if(fexists(file("data/player_generated_books/[LIBRARY_JSON].json")))
+		var/json_file = file("data/player_generated_books/[LIBRARY_JSON].json")
 		var/json_list = json_decode(file2text(json_file))
 		return json_list
 	else
-		message_admins("!!! _book_titles.json no longer exists, previous book title list has been lost. !!!")
+		message_admins("!!! [LIBRARY_JSON].json no longer exists, previous book title list has been lost. !!!")
 
 /datum/controller/subsystem/librarian/proc/update_books()
 	books = list()
-	books = pull_player_book_titles()
-	for(var/book in books)
-		if(!length(file2playerbook(book)))
-			books -= book
+	for(var/book_file in pull_player_book_titles())
+		if(!length(file2playerbook(book_file)))
 			continue
-		books[book] = file2playerbook(book)
+		books[SANITIZE_FILENAME(book_file)] = file2playerbook(book_file)
+
+#undef LIBRARY_JSON

@@ -3,7 +3,6 @@
 	title = "Vile Renegade"
 	tutorial = "You were a former outlaw who has been given a chance to redeem yourself by the Inquisitor. You serve him and Psydon with your survival skills."
 	outfit = /datum/outfit/adept/highwayman
-
 	category_tags = list(CTAG_ADEPT)
 	cmode_music = 'sound/music/cmode/towner/CombatGaffer.ogg'
 
@@ -20,8 +19,8 @@
 		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/sewing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE, // Try to stablize more heretics for questioning.
-		/datum/skill/labor/mathematics = SKILL_LEVEL_APPRENTICE, // Smart... For a knave.
+		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/labor/mathematics = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/firearms = SKILL_LEVEL_NOVICE
 	)
@@ -43,22 +42,24 @@
 		STATKEY_CON = -1
 	)
 
+	voicepack_m = /datum/voicepack/male/knight
 
-/datum/outfit/adept/highwayman/pre_equip(mob/living/carbon/human/H)
-	..()
-	//Armor for class
+/datum/job/advclass/adept/highwayman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", -10, "Renegade")
+
+/datum/outfit/adept/highwayman
+	name = "Vile Renegade (Adept)"
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/jacket/leathercoat/renegade
 	head = /obj/item/clothing/head/helmet/leather/tricorn
 	neck = /obj/item/clothing/neck/gorget/explosive
-	beltl =  /obj/item/weapon/sword/short/iron
+	beltl = /obj/item/weapon/sword/short/iron
 	l_hand = /obj/item/weapon/whip // Great length, they don't need to be next to a person to help in apprehending them.
 	pants = /obj/item/clothing/pants/trou/leather
-	backpack_contents = list(/obj/item/storage/keyring/adept = 1, /obj/item/weapon/knife/dagger/silver/psydon = 1, /obj/item/clothing/head/inqarticles/blackbag = 1, /obj/item/inqarticles/garrote = 1,)
-
-	if(H.dna?.species)
-		H.dna.species.soundpack_m = new /datum/voicepack/male/knight() // We're going with gentleman-thief here.
-
-/datum/outfit/adept/highwayman/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	GLOB.inquisition.add_member_to_school(H, "Order of the Venatari", -10, "Renegade")
+	backpack_contents = list(
+		/obj/item/storage/keyring/adept = 1,
+		/obj/item/weapon/knife/dagger/silver/psydon = 1,
+		/obj/item/clothing/head/inqarticles/blackbag = 1,
+		/obj/item/inqarticles/garrote = 1,
+	)
