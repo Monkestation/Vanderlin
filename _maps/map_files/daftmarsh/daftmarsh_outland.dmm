@@ -292,7 +292,6 @@
 /area/outdoors/woods_safe)
 "cX" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_tangerine,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -1255,7 +1254,6 @@
 /area/under/mountains/anvil/lower)
 "mw" = (
 /obj/structure/table/wood/counter,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_plum,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -1729,7 +1727,6 @@
 /area/under/mountains/anvil/lower)
 "sj" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_apple,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -1909,7 +1906,6 @@
 /area/under/mountains/anvil/lower)
 "tJ" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_plum,
 /turf/open/floor/twig/platform,
 /area/under/mountains/anvil/lower)
@@ -2724,7 +2720,6 @@
 /area/under/mountains/anvil/lower)
 "DD" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "DE" = (
@@ -3585,7 +3580,6 @@
 /area/under/mountains/anvil/lower)
 "Mt" = (
 /obj/structure/table/wood/counter,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_pear,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -4646,7 +4640,6 @@
 /area/indoors/villagegarrison)
 "XF" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_pear,
 /obj/item/candle/lit{
 	pixel_x = 0;
@@ -4721,7 +4714,6 @@
 /area/outdoors/woods_safe)
 "Yl" = (
 /obj/structure/table/wood/counter,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_apple,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
