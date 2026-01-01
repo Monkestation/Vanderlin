@@ -830,6 +830,10 @@
 /obj/effect/decal/cobblerockedge/alt
 	icon_state = "cobblealt_edges"
 
+/obj/effect/decal/borderfall
+	icon = 'icons/turf/constructed/misc.dmi'
+	icon_state = "borderfall"
+
 /*	..................   Miscellany   ................... */
 /turf/open/floor/tile
 	icon = 'icons/turf/constructed/tile.dmi'
