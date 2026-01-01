@@ -658,6 +658,7 @@
 /obj/item/weapon/sickle/steelscythe
 	name = "steel scythe"
 	desc = "A steel scythe used to cut down crops and enemies alike."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "scythe"
 	force = 15
 	force_wielded = 25
