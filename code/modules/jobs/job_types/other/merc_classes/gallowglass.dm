@@ -38,13 +38,13 @@
 	head = /obj/item/clothing/head/helmet/gallowglass
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary/black
-	armor = /obj/item/clothing/armor/chainmail/hauberk/iron
-	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/green
+	armor = /obj/item/clothing/armor/chainmail/iron
+	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/mageblue
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/weapon/mace/cudgel
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
-	pants = /obj/item/clothing/pants/skirt/patkilt/colored/blue
+	pants = /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
 	backl = /obj/item/weapon/sword/long/greatsword/steelclaymore
 	backr = /obj/item/storage/backpack/satchel

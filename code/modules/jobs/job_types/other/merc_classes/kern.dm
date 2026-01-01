@@ -38,14 +38,14 @@
 	head = /obj/item/clothing/head/roguehood/colored/black
 	belt = /obj/item/storage/belt/leather/mercenary/black
 	armor = /obj/item/clothing/armor/chainmail/iron
-	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/green
+	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/mageblue
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/leather
 	neck = /obj/item/clothing/neck/gorget
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
-	pants = /obj/item/clothing/pants/skirt/patkilt/colored/blue
+	pants = /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
 	backl = /obj/item/weapon/polearm/spear
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backpack_contents = list(/obj/item/weapon/knife/villager = 1)
