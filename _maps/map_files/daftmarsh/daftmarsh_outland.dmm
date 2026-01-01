@@ -1704,6 +1704,13 @@
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"rT" = (
+/obj/structure/window/solid,
+/obj/structure/bars/alt{
+	pixel_y = -3
+	},
+/turf/open/floor/wood,
+/area/indoors)
 "sd" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
@@ -1913,9 +1920,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/cobble,
 /area/outdoors/woods_safe)
@@ -4039,6 +4045,9 @@
 /area/under/mountains/anvil/upper)
 "Ro" = (
 /obj/structure/window/solid,
+/obj/structure/bars/alt{
+	pixel_y = -3
+	},
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "Rp" = (
@@ -4706,9 +4715,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/woods_safe)
@@ -109144,11 +109152,11 @@ zB
 zB
 IP
 bw
-jC
+rT
 tW
 bw
 tW
-jC
+rT
 tW
 bw
 zB
@@ -114191,7 +114199,7 @@ zB
 IP
 zB
 IP
-jC
+rT
 cL
 Lp
 ZX
@@ -114214,7 +114222,7 @@ lt
 zD
 Xe
 fP
-jC
+rT
 zB
 IP
 IP
@@ -114393,7 +114401,7 @@ zB
 IP
 zB
 IP
-jC
+rT
 Lp
 Lp
 Lp
@@ -114618,7 +114626,7 @@ xj
 zD
 zD
 li
-jC
+rT
 IP
 zB
 zB
@@ -115001,11 +115009,11 @@ IP
 zB
 CZ
 ho
-jC
+rT
 zb
 zb
 ho
-jC
+rT
 ho
 CZ
 fE
