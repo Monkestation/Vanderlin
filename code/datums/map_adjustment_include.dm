@@ -10,3 +10,4 @@
 #include "..\..\_maps\map_files\daftmarsh\map_adjustment_daftmarsh.dm"
 #include "..\..\_maps\map_files\whitepalacepass\map_adjustment_whitepalacepass.dm"
 #include "..\..\_maps\map_files\voyager\map_adjustment_voyager.dm"
+#include "..\..\_maps\map_files\zizosclaw\map_adjustment_zizosclaw.dm"
