@@ -437,5 +437,63 @@
                 "admin": "More admin ghost choices"
             }
         ]
+    },
+    "2025-12-31": {
+        "lmenvs": [
+            {
+                "code_imp": "adjust_triumphs allows for any ckey to be passed"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "A few be special like the skeleton one not working"
+            }
+        ],
+        "JILMbIX": [
+            {
+                "rscadd": "Added anvil craft for knuckles, and leatherworking craft for bullets pouch"
+            },
+            {
+                "bugfix": "leather belt and leather trousers are craftable again"
+            }
+        ],
+        "Mercadier": [
+            {
+                "qol": "Nooses no longer require a hammer to build."
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "balance": "Changed Glass bottles to hold 75 units, shot glasses to hold 5, and teacups to hold 25."
+            }
+        ],
+        "Gigigger": [
+            {
+                "balance": "reduced overpriced sellprices of opened clam, falchion and dwarven warhammer"
+            },
+            {
+                "bugfix": "now raw rosellusk can be obtained by opening clam, as intended"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "Added new bronze items."
+            }
+        ],
+        "aberrantQuesrist": [
+            {
+                "bugfix": "River tiles now show after having been broken for far too long."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "ported shivering animation from TG"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "bugfix": "Retouched the Vagabond hairstyle"
+            }
+        ]
     }
 }
