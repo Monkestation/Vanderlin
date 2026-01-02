@@ -37,3 +37,7 @@ map voyager
 	maxplayers 0
 	votable
 endmap
+
+map zizosclaw
+	maxplayers 50
+endmap
