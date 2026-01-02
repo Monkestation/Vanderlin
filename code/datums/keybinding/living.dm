@@ -291,13 +291,3 @@
 	full_name = "View Pet Commands"
 	description = "Hold down to see all the commands you can give your pets!"
 	keybind_signal = COMSIG_KB_LIVING_VIEW_PET_COMMANDS
-
-/datum/keybinding/living/swim_up
-	hotkey_keys = list("ShiftR")
-	name = "swim_up"
-	full_name = "Swim Up"
-	description = "Attempt to swim upwards"
-
-/datum/keybinding/living/swim_up/down(client/user)
-	. = ..()
-
