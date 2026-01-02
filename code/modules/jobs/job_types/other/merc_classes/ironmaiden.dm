@@ -11,9 +11,9 @@
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MEDICAL)
 
 	jobstats = list(
-		STATKEY_STR = 2,
+		STATKEY_STR = 1,
 		STATKEY_END = 2,
-		STATKEY_INT = 2
+		STATKEY_INT = 1
 	)
 
 	skills = list(

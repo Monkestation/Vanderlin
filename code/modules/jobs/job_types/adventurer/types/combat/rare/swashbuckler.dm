@@ -20,7 +20,7 @@
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/labor/fishing = 3,
 		/datum/skill/misc/swimming = 4,
 		/datum/skill/misc/climbing = 3,

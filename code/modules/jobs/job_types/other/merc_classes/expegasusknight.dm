@@ -7,7 +7,7 @@
 	total_positions = 5
 
 	jobstats = list(
-		STATKEY_END = 2,
+		STATKEY_END = 1,
 		STATKEY_STR = 1,
 		STATKEY_SPD = 2
 	)
@@ -21,7 +21,7 @@
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 4,
 		/datum/skill/misc/medicine = 1,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/shields = 3,
 		/datum/skill/misc/reading = 2,
 		/datum/skill/misc/riding = 3

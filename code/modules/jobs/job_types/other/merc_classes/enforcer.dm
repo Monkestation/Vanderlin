@@ -8,7 +8,7 @@
 	cmode_music = 'sound/music/cmode/Combat_Weird.ogg'
 
 	jobstats = list(
-		STATKEY_CON = 3,
+		STATKEY_CON = 2,
 		STATKEY_END = 2,
 		STATKEY_PER = 1,
 		STATKEY_INT = -1,
@@ -19,19 +19,18 @@
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 4,
 		/datum/skill/misc/sneaking = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/shields = 3,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/labor/mathematics = 3, //They use math to calculate the trajectory of attacks, so they can parry behind them, trust, ook told me
 	)
 
 	traits = list(
-		TRAIT_HARDDISMEMBER,
 		TRAIT_NOPAINSTUN,
 		TRAIT_BREADY,
 		TRAIT_BLINDFIGHTING,

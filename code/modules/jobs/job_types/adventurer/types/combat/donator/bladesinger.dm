@@ -12,7 +12,7 @@
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,

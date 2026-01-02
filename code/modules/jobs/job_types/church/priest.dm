@@ -43,7 +43,7 @@
 		/datum/skill/misc/reading = 5,
 		/datum/skill/magic/holy = 4,
 		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/misc/athletics = 3,

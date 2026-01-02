@@ -24,8 +24,8 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 1,
 		/datum/skill/craft/crafting = 2,//they need this to craft bottles
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 4,
@@ -60,6 +60,7 @@
 	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(0,0,1), TRUE)
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
+		ADD_TRAIT(spawned, TRAIT_POISON_RESILIENCE, TRAIT_GENERIC)
 
 /datum/outfit/apothecary
 	name = "Apothecary"

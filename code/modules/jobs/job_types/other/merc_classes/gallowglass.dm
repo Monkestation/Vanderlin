@@ -15,13 +15,14 @@
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_END = 1,
+		STATKEY_CON = 1,
 		STATKEY_SPD = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/climbing = 3,
