@@ -1317,7 +1317,7 @@
 	craftdiff = 4
 
 /datum/anvil_recipe/armor/atgervi_hauberk
-	name = "vagarian hauberk"
+	name = "vagarian hauberk (+Steel Ingot)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/chainmail/hauberk/atgervi

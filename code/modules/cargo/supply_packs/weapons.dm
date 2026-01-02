@@ -3,13 +3,14 @@
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
 
-// PRICESHEET: (this prices are based on aprox 1.5X before tax of prices of the player market at 11/08/25 )
+// PRICESHEET: (this prices are based on aprox 2X before tax of prices of the player market at 01/01/26 )
 // Leather = 20 per
-// Iron = 30 per
-// Steel = 50 per
-// Wood = betwen 10-20
+// Iron = 60 per - Based off a smith charge of 30 per ingot
+// Steel = 80 per - Based off a smith charge of 40 per ingot
+// Gold = 100 per = Based off a smith charge of 50 per ingot
+// Wood = 10 mammonons per small log
 // essential items can be discounted because nobody even makes those anyways.
-// any item can be little more or less , this is just a reference to not outcompete the smiths.
+// any item can be little more or less , the merchant is not a replacement for a local smith.
 
 
 /datum/supply_pack/weapons/shield
@@ -22,17 +23,17 @@
 
 /datum/supply_pack/weapons/shield/towershield
 	name = "Tower Shield"
-	cost = 35
+	cost = 60
 	contains = /obj/item/weapon/shield/tower
 
 /datum/supply_pack/weapons/shield/atgervishield
 	name = "Atgervi Shield"
-	cost = 30
+	cost = 90 //One steel + One small log
 	contains = /obj/item/weapon/shield/atgervi
 
 /datum/supply_pack/weapons/shield/iron
 	name = "Iron Buckler"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/shield/tower/buckleriron
 
 // IRON MELEE WEAPONS
@@ -42,222 +43,222 @@
 
 /datum/supply_pack/weapons/iron/iwodao
 	name = "Iron Wo Dao"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/sword/scimitar/wodao/iron
 
 /datum/supply_pack/weapons/iron/isengese
 	name = "Iron Sengese"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/sword/scimitar/sengese/iron
 
 /datum/supply_pack/weapons/iron/iirumi
 	name = "Iron Irumi"
-	cost = 30
+	cost = 60
 	contains = /obj/item/weapon/whip/urumi/iron
 
 /datum/supply_pack/weapons/iron/idadao
 	name = "Iron Dadao"
-	cost = 45
+	cost = 120
 	contains = /obj/item/weapon/sword/sabre/dadao/iron
 
 /datum/supply_pack/weapons/iron/ihwi
 	name = "Iron Hwi"
-	cost = 45
+	cost = 120
 	contains = /obj/item/weapon/sword/sabre/hwi/iron
 
 /datum/supply_pack/weapons/iron/ikhopesh
 	name = "Iron Khopesh"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
 
 /datum/supply_pack/weapons/iron/ikaskara
 	name = "Iron Kaskara"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/sword/kaskara/iron
 
 /datum/supply_pack/weapons/iron/iida
 	name = "Iron Ida"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/sword/ida/iron
 
 /datum/supply_pack/weapons/iron/iaruval
 	name = "Iron Aruval"
-	cost = 70
+	cost = 180
 	contains = /obj/item/weapon/sword/long/aruval/iron
 
 /datum/supply_pack/weapons/iron/injora
 	name = "Iron Seme"
-	cost = 15
+	cost = 30 //Making knives gives 2 knives per ingot usually.
 	contains = /obj/item/weapon/knife/njora/iron
 
 /datum/supply_pack/weapons/iron/irungu
 	name = "Iron Rungu"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/mace/rungu/iron
 
 /datum/supply_pack/weapons/iron/insapo
 	name = "Iron Kasuyu"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/axe/nsapo/iron
 
 /datum/supply_pack/weapons/iron/ijile
 	name = "Iron Jile"
-	cost = 12
+	cost = 30
 	contains = /obj/item/weapon/knife/jile/iron
 
 /datum/supply_pack/weapons/iron/ikukri
 	name = "Iron Kukri"
-	cost = 15
+	cost = 60
 	contains = /obj/item/weapon/knife/dagger/kukri/iron
 
 /datum/supply_pack/weapons/iron/ishishpar
 	name = "Iron Shishpar"
-	cost = 45
+	cost = 120
 	contains = /obj/item/weapon/mace/shishpar/iron
 
 /datum/supply_pack/weapons/iron/iassegai
 	name = "Iron Assegai"
-	cost = 35
+	cost = 60
 	contains = /obj/item/weapon/polearm/spear/assegai
 
 /datum/supply_pack/weapons/iron/iwaraxe
 	name = "Iron War Axe"
-	cost = 50
+	cost = 120
 	contains = /obj/item/weapon/polearm/halberd/bardiche/warcutter
 
 /datum/supply_pack/weapons/iron/navaja
 	name = "Navaja"
-	cost = 25
+	cost = 60
 	contains = /obj/item/weapon/knife/dagger/navaja
 
 /datum/supply_pack/weapons/iron/bayonet
 	name = "Musket Bayonet"
-	cost = 23
+	cost = 30
 	contains = /obj/item/weapon/knife/dagger/bayonet
 
 /datum/supply_pack/weapons/iron/iflail
 	name = "Iron Flail"
-	cost = 30
+	cost = 60
 	contains = /obj/item/weapon/flail
 
 // STEEL MELEE WEAPONS
 
-/datum/supply_pack/weapons/steel
+/datum/supply_pack/weapons/steels
 	group = "Weapons (Steel)"
 
 /datum/supply_pack/weapons/steel/wodao
 	name = "Steel Wo Dao"
-	cost = 50
+	cost = 80
 	contains = /obj/item/weapon/sword/scimitar/wodao
 
 /datum/supply_pack/weapons/steel/sengese
 	name = "Steel Sengese"
-	cost = 50
+	cost = 80
 	contains = /obj/item/weapon/sword/scimitar/sengese
 
 /datum/supply_pack/weapons/steel/irumi
 	name = "Steel Irumi"
-	cost = 60
+	cost = 160
 	contains = /obj/item/weapon/whip/urumi
 
 /datum/supply_pack/weapons/steel/dadao
 	name = "Steel Dadao"
-	cost = 90
+	cost = 160
 	contains = /obj/item/weapon/sword/sabre/dadao
 
 /datum/supply_pack/weapons/steel/hwi
 	name = "Steel Hwi"
-	cost = 90
+	cost = 160
 	contains = /obj/item/weapon/sword/sabre/hwi
 
 /datum/supply_pack/weapons/steel/khopesh
 	name = "Steel Khopesh"
-	cost = 50
+	cost = 80
 	contains = /obj/item/weapon/sword/scimitar/lakkarikhopesh
 
 /datum/supply_pack/weapons/steel/kaskara
 	name = "Steel Kaskara"
-	cost = 50
+	cost = 80
 	contains = /obj/item/weapon/sword/kaskara
 
 /datum/supply_pack/weapons/steel/ida
 	name = "Steel Ida"
-	cost = 50
+	cost = 80
 	contains = /obj/item/weapon/sword/ida
 
 /datum/supply_pack/weapons/steel/aruval
 	name = "Steel Aruval"
-	cost = 125
+	cost = 240
 	contains = /obj/item/weapon/sword/long/aruval
 
 /datum/supply_pack/weapons/steel/njora
 	name = "Steel Seme"
-	cost = 25
+	cost = 40 //2 knives per ingot
 	contains = /obj/item/weapon/knife/njora/steel
 
 /datum/supply_pack/weapons/steel/rungu
 	name = "Steel Rungu"
-	cost = 50
+	cost = 80
 	contains = /obj/item/weapon/mace/steel/rungu
 
 /datum/supply_pack/weapons/steel/jile
 	name = "Steel Jile"
-	cost = 25
+	cost = 40
 	contains = /obj/item/weapon/knife/jile/steel
 
 /datum/supply_pack/weapons/steel/kukri
 	name = "Steel Kukri"
-	cost = 45
+	cost = 80
 	contains = /obj/item/weapon/knife/dagger/kukri/steel
 
 /datum/supply_pack/weapons/steel/shishpar
 	name = "Steel Shishpar"
-	cost = 90
+	cost = 160
 	contains = /obj/item/weapon/mace/steel/shishpar
 
 /datum/supply_pack/weapons/steel/assegai
 	name = "Steel Assegai"
-	cost = 60
+	cost = 90
 	contains = /obj/item/weapon/polearm/spear/steel/assegai
 
 /datum/supply_pack/weapons/steel/atgervi
 	name = "Steel Atgervi Axe"
-	cost = 60
+	cost = 90
 	contains = /obj/item/weapon/axe/steel/atgervi
 
 /datum/supply_pack/weapons/steel/paxe
 	name = "Pickaxe"
-	cost = 90
+	cost = 170 ///2 bars, one small log
 	contains = /obj/item/weapon/pick/paxe
 
 /datum/supply_pack/weapons/steel/sbattleaxe
 	name = "Steel Battle Axe"
-	cost = 60
+	cost = 160
 	contains = /obj/item/weapon/axe/battle
 
 /datum/supply_pack/weapons/steel/knuckles
 	name = "Steel Knuckles"
-	cost = 45
+	cost = 80
 	contains = /obj/item/weapon/knuckles
 
 /datum/supply_pack/weapons/steel/sflail
 	name = "Steel Flail"
-	cost = 50
+	cost = 95 ///One bar, one chain, one stick
 	contains = /obj/item/weapon/flail/sflail
 
 /datum/supply_pack/weapons/steel/doublesgreataxe
 	name = "Double-Headed Steel Greataxe"
-	cost = 120
+	cost = 330 ///Four steel bars, one small log (youch expensive)
 	contains = /obj/item/weapon/greataxe/steel/doublehead
 
 /datum/supply_pack/weapons/steel/sgreataxe
 	name = "Steel Greataxe"
-	cost = 90
+	cost = 250 ///Three steel bars, one small log (youch expensive)
 	contains = /obj/item/weapon/greataxe/steel
 
 /datum/supply_pack/weapons/steel/scutlass
 	name = "Cutlass"
-	cost = 50
+	cost = 80
 	contains = /obj/item/weapon/sword/sabre/cutlass
 
 /datum/supply_pack/weapons/steel/mulyeog
@@ -267,13 +268,18 @@
 
 /datum/supply_pack/weapons/steel/nimcha
 	name = "Nimcha"
-	cost = 80
+	cost = 180 ///One steel, one gold.
 	contains = /obj/item/weapon/sword/rapier/nimcha
 
 /datum/supply_pack/weapons/steel/steppesabre
 	name = "Steppe Sabre"
-	cost = 80
+	cost = 160
 	contains = /obj/item/weapon/sword/long/rider/steppe
+
+/datum/supply_pack/weapons/steel/katana
+	name = "Steel Katana"
+	cost = 160 ///This ones more expensive because katanas are essentially lost relics.
+	contains = /obj/item/weapon/sword/katana/mulyeog
 
 /*
 /datum/supply_pack/weapons/nets
