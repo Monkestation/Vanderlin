@@ -792,15 +792,18 @@
 
 /turf/open/water/river/tainted
 	icon_state = MAP_SWITCH("rock", "rivermove_rockt")
+	desc = "Shimmering, cloudy water. Flowing swiftly along the river."
 	water_reagent = /datum/reagent/water/tainted
 
 /turf/open/water/river/blood
 	icon_state = MAP_SWITCH("rock", "rivermove_rockb")
+	desc = "Bloodflow! Flowing swiftly along the vein."
 	water_reagent = /datum/reagent/blood
 	cleanliness_factor = -5
 
 /turf/open/water/river/dirt
 	icon_state = MAP_SWITCH("dirt", "rivermove_dirtg")
+	desc = "Disgusting, swampy bogwater! Flowing swiftly along the river."
 	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
 
