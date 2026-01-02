@@ -212,7 +212,7 @@
 /turf/closed/mineral/random
 	name = "rock"
 	desc = "Seems barren."
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_low")
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_CLOSED + SMOOTH_GROUP_MINERAL_WALLS

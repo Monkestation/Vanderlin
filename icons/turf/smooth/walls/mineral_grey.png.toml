@@ -1,2 +1,2 @@
-output_name = "mineral_grey"
+output_name = "mineral"
 template = "diagonal_32x32.toml"

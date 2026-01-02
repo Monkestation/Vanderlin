@@ -297,7 +297,7 @@
 /turf/open/floor/cobblerock,
 /area/under/cave)
 "yH" = (
-/turf/closed/mineral,
+/turf/closed/mineral/deep,
 /area/under/cave)
 "yL" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -617,7 +617,7 @@
 /turf/open/floor/churchmarble,
 /area/under/cave)
 "Xx" = (
-/turf/closed/mineral,
+/turf/closed/mineral/deep,
 /area/under/cavewet)
 "XF" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
