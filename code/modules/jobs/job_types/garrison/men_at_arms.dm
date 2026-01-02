@@ -117,7 +117,7 @@
 		STATKEY_END = 2,
 		STATKEY_STR = 2,
 		STATKEY_CON = 1,
-		STATKEY_INT = -1
+		STATKEY_SPD = -1
 	)
 
 	skills = list(
@@ -147,7 +147,7 @@
 	neck = /obj/item/clothing/neck/bevor
 	gloves = /obj/item/clothing/gloves/chain
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/greataxe
+	backr = /obj/item/weapon/greataxe/steel
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel/special = 1
 	)
