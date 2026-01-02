@@ -9,7 +9,6 @@
 // BEGIN_INCLUDE
 #include "_odlint.dm"
 #include "_maps\_basemap.dm"
-#include "_maps\map_files\zizosclaw\zizosclaw.dmm"
 #include "_maps\templates\arcyne_fortress.dm"
 #include "_maps\templates\bog_shack_small.dm"
 #include "_maps\templates\malum_anvil_dungeon_large.dm"
