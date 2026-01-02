@@ -2,20 +2,96 @@
 "a" = (
 /turf/closed/mineral,
 /area)
+"b" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/transparent/openspace,
+/area)
+"c" = (
+/turf/open/water/blood,
+/area)
+"d" = (
+/turf/open/floor/blocks,
+/area)
 "e" = (
 /turf/open/water/river{
 	dir = 8
 	},
 /area)
+"g" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/transparent/openspace,
+/area)
+"h" = (
+/obj/machinery/light/fueledstreet,
+/turf/open/floor/blocks,
+/area)
 "k" = (
 /turf/open/water/cleanshallow,
+/area)
+"l" = (
+/turf/open/water/river/blood{
+	dir = 8
+	},
 /area)
 "m" = (
 /obj/structure/soil/mushmound,
 /turf/open/floor/dirt,
 /area)
+"n" = (
+/turf/open/water/river/blood{
+	dir = 4
+	},
+/area)
+"o" = (
+/turf/open/floor/metal/barograte/open,
+/area)
+"p" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/blocks,
+/area)
+"q" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/naturalstone,
+/area)
+"r" = (
+/obj/machinery/light/fueledstreet{
+	dir = 1
+	},
+/turf/open/floor/blocks,
+/area)
+"s" = (
+/turf/open/floor/herringbone,
+/area)
 "t" = (
 /turf/closed/wall/mineral/decorstone,
+/area)
+"v" = (
+/obj/effect/landmark/latejoin,
+/turf/open/floor/naturalstone,
+/area)
+"w" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/floor/naturalstone,
+/area)
+"x" = (
+/obj/effect/landmark/observer_start,
+/turf/open/floor/naturalstone,
+/area)
+"y" = (
+/turf/closed/wall/mineral/stone,
 /area)
 "A" = (
 /turf/open/floor/cobble/mossy,
@@ -27,14 +103,55 @@
 "E" = (
 /turf/closed/mineral/bedrock,
 /area)
+"G" = (
+/obj/structure/fluff/railing/border,
+/turf/open/transparent/openspace,
+/area)
 "H" = (
 /turf/open/floor/naturalstone,
 /area)
 "I" = (
 /turf/open/floor/dirt/road,
 /area)
+"J" = (
+/obj/machinery/light/fueledstreet/midlamp,
+/turf/open/floor/herringbone,
+/area)
+"K" = (
+/obj/structure/fluff/psycross/zizocross,
+/turf/open/floor/herringbone,
+/area)
+"L" = (
+/turf/open/floor/cobble,
+/area)
+"N" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/transparent/openspace,
+/area)
 "O" = (
 /turf/open/transparent/openspace,
+/area)
+"Q" = (
+/obj/structure/kneestingers,
+/turf/open/water/blood,
+/area)
+"R" = (
+/obj/effect/landmark/start/lord,
+/turf/open/floor/naturalstone,
+/area)
+"S" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/transparent/openspace,
+/area)
+"U" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/naturalstone,
 /area)
 "V" = (
 /obj/structure/flora/shroom_tree,
@@ -42,6 +159,12 @@
 /area)
 "W" = (
 /turf/open/floor/dirt,
+/area)
+"X" = (
+/turf/closed/wall/mineral/stonebrick,
+/area)
+"Y" = (
+/turf/open/water/river/blood,
 /area)
 "Z" = (
 /turf/open/floor/cobblerock,
@@ -62581,6 +62704,8 @@ a
 a
 a
 a
+Y
+n
 a
 a
 a
@@ -62592,9 +62717,7 @@ a
 a
 a
 a
-a
-a
-a
+l
 a
 a
 a
@@ -62784,6 +62907,7 @@ a
 a
 a
 a
+n
 a
 a
 a
@@ -62795,8 +62919,7 @@ a
 a
 a
 a
-a
-a
+l
 a
 a
 a
@@ -62986,6 +63109,7 @@ a
 a
 a
 a
+n
 a
 a
 a
@@ -62997,8 +63121,7 @@ a
 a
 a
 a
-a
-a
+l
 a
 a
 a
@@ -63188,6 +63311,7 @@ a
 a
 a
 a
+n
 a
 a
 a
@@ -63199,8 +63323,7 @@ a
 a
 a
 a
-a
-a
+l
 a
 a
 a
@@ -63390,6 +63513,8 @@ a
 a
 a
 a
+Y
+n
 a
 a
 a
@@ -63399,10 +63524,8 @@ a
 a
 a
 a
-a
-a
-a
-a
+Y
+l
 a
 a
 a
@@ -63593,6 +63716,7 @@ a
 a
 a
 a
+n
 a
 a
 a
@@ -63602,8 +63726,7 @@ a
 a
 a
 a
-a
-a
+l
 a
 a
 a
@@ -63795,6 +63918,7 @@ a
 a
 a
 a
+n
 a
 a
 a
@@ -63804,8 +63928,7 @@ a
 a
 a
 a
-a
-a
+l
 a
 a
 a
@@ -64004,10 +64127,10 @@ a
 a
 a
 a
-a
-a
-a
-a
+Y
+Y
+Y
+l
 a
 a
 a
@@ -64202,11 +64325,11 @@ a
 a
 a
 a
-a
-a
-a
-a
-a
+Y
+Y
+Y
+Y
+l
 a
 a
 a
@@ -64408,7 +64531,7 @@ a
 a
 a
 a
-a
+l
 a
 a
 a
@@ -64610,7 +64733,7 @@ a
 a
 a
 a
-a
+l
 a
 a
 a
@@ -64812,7 +64935,7 @@ a
 a
 a
 a
-a
+l
 a
 a
 a
@@ -65014,7 +65137,7 @@ a
 a
 a
 a
-a
+l
 a
 a
 a
@@ -65216,7 +65339,7 @@ a
 a
 a
 a
-a
+l
 a
 a
 a
@@ -65418,7 +65541,7 @@ a
 a
 a
 a
-a
+l
 a
 a
 a
@@ -97737,7 +97860,7 @@ H
 H
 H
 H
-I
+W
 H
 H
 H
@@ -97939,7 +98062,7 @@ H
 H
 H
 H
-I
+W
 H
 H
 H
@@ -98343,7 +98466,7 @@ H
 H
 H
 H
-I
+W
 W
 H
 H
@@ -98950,7 +99073,7 @@ H
 H
 H
 W
-I
+W
 H
 H
 H
@@ -99352,11 +99475,11 @@ H
 H
 H
 H
-I
+W
 I
 I
 W
-I
+W
 H
 H
 H
@@ -99553,12 +99676,12 @@ H
 H
 H
 H
-I
+W
 I
 m
 I
 W
-I
+W
 H
 H
 H
@@ -99755,13 +99878,13 @@ H
 H
 H
 H
-I
+W
 A
 m
 I
 I
 D
-I
+W
 H
 H
 O
@@ -99956,14 +100079,14 @@ a
 H
 H
 H
-I
+W
 H
 A
 W
 A
 W
 I
-I
+W
 H
 H
 O
@@ -100165,7 +100288,7 @@ W
 A
 m
 I
-I
+W
 W
 H
 O
@@ -100366,7 +100489,7 @@ A
 m
 A
 W
-I
+W
 H
 W
 H
@@ -100561,14 +100684,14 @@ a
 a
 a
 H
-I
+W
 A
 m
 W
 W
 A
 m
-I
+W
 H
 W
 H
@@ -100763,7 +100886,7 @@ a
 a
 a
 H
-I
+W
 A
 m
 A
@@ -100771,7 +100894,7 @@ A
 W
 W
 A
-I
+W
 H
 H
 H
@@ -100973,7 +101096,7 @@ A
 W
 W
 A
-I
+W
 Z
 H
 W
@@ -101174,7 +101297,7 @@ W
 m
 A
 W
-I
+W
 H
 Z
 H
@@ -101572,14 +101695,14 @@ a
 H
 H
 W
-I
+W
 W
 A
 m
 W
 W
 A
-I
+W
 H
 Z
 H
@@ -101773,7 +101896,7 @@ a
 H
 H
 H
-I
+W
 H
 V
 A
@@ -101781,7 +101904,7 @@ W
 I
 I
 A
-I
+W
 H
 Z
 H
@@ -101976,9 +102099,9 @@ H
 H
 H
 H
-I
+W
 H
-I
+W
 m
 I
 I
@@ -102178,13 +102301,13 @@ H
 H
 H
 H
-I
-I
+W
+W
 W
 W
 I
 W
-I
+W
 H
 H
 H
@@ -102386,7 +102509,7 @@ I
 I
 W
 H
-I
+W
 H
 H
 H
@@ -102581,15 +102704,15 @@ H
 H
 H
 H
-H
-W
-I
-I
-W
-H
-H
-H
-H
+d
+d
+d
+d
+d
+d
+d
+d
+d
 H
 H
 H
@@ -102780,18 +102903,18 @@ a
 a
 H
 H
+c
+Q
 H
-H
-H
-H
-H
-W
-I
-W
-H
-H
-H
-H
+d
+d
+d
+d
+d
+d
+d
+d
+d
 H
 H
 H
@@ -102983,19 +103106,19 @@ a
 H
 H
 H
+O
 H
+d
+d
+J
+s
+s
+s
+J
+d
+d
 H
-H
-H
-W
-W
-H
-H
-H
-H
-H
-H
-H
+O
 H
 H
 H
@@ -103181,25 +103304,25 @@ a
 a
 a
 a
-H
-H
-H
-H
-H
-H
-H
-H
-W
-W
-H
-H
-H
-H
-H
-H
-H
-H
-H
+p
+d
+d
+h
+o
+d
+d
+d
+s
+s
+s
+s
+s
+d
+d
+d
+o
+h
+d
 H
 H
 H
@@ -103383,25 +103506,25 @@ a
 a
 a
 a
-H
-H
-H
-H
-H
-H
-H
-H
-I
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
+p
+d
+d
+d
+o
+d
+d
+d
+s
+s
+K
+s
+s
+d
+d
+d
+o
+d
+d
 H
 H
 H
@@ -103584,26 +103707,26 @@ a
 a
 a
 a
-H
-H
-H
-H
-H
-H
-H
-H
-H
-I
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
+a
+p
+d
+d
+r
+o
+d
+d
+d
+s
+s
+s
+s
+s
+d
+d
+d
+o
+r
+d
 H
 H
 H
@@ -103791,19 +103914,19 @@ H
 H
 H
 H
-H
-H
-H
-W
-H
-H
-H
-H
-H
-H
-H
-H
-H
+O
+G
+d
+d
+J
+s
+s
+s
+J
+d
+d
+N
+O
 H
 H
 H
@@ -103991,25 +104114,25 @@ H
 H
 H
 H
+c
+Q
 H
+G
+d
+d
+d
+d
+d
+d
+d
+d
+d
+N
+X
+X
 H
-H
-H
-H
-I
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
+X
+X
 H
 O
 O
@@ -104193,21 +104316,21 @@ H
 H
 H
 H
+y
+y
 H
-H
-H
-H
-H
-I
-H
-H
-H
-H
-H
-H
-H
-H
-H
+G
+d
+d
+d
+d
+d
+d
+d
+d
+d
+N
+X
 H
 H
 H
@@ -104397,19 +104520,19 @@ H
 H
 H
 H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
+y
+L
+L
+Z
+y
+d
+d
+d
+g
+S
+S
+b
+X
 H
 H
 H
@@ -104599,19 +104722,19 @@ H
 H
 H
 H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
-H
+L
+L
+L
+L
+O
+o
+o
+o
+N
+X
+X
+X
+X
 H
 H
 H
@@ -104801,15 +104924,15 @@ H
 H
 H
 H
+y
+L
+L
+L
 H
-H
-H
-H
-H
-H
-H
-H
-H
+d
+d
+d
+q
 H
 H
 H
@@ -105004,14 +105127,14 @@ H
 H
 H
 H
+y
+Z
+L
 H
-H
-H
-H
-H
-H
-H
-H
+d
+d
+d
+q
 H
 H
 H
@@ -105206,14 +105329,14 @@ H
 H
 H
 H
-H
-H
-H
-H
-H
-H
-H
-H
+y
+Z
+L
+d
+d
+d
+r
+q
 H
 H
 H
@@ -105409,13 +105532,13 @@ H
 H
 H
 H
-H
-H
-H
-H
-H
-H
-H
+y
+L
+d
+d
+d
+U
+w
 H
 H
 H
@@ -105613,9 +105736,9 @@ H
 H
 H
 H
-H
-H
-H
+d
+d
+d
 H
 H
 H
@@ -105815,9 +105938,9 @@ H
 H
 H
 H
-H
-H
-H
+d
+d
+d
 H
 H
 H
@@ -106017,9 +106140,9 @@ H
 H
 H
 H
-H
-H
-H
+d
+d
+d
 H
 H
 H
@@ -106219,9 +106342,9 @@ H
 H
 H
 H
-H
-H
-H
+d
+d
+d
 H
 H
 H
@@ -140953,9 +141076,9 @@ t
 H
 H
 H
-H
-H
-H
+R
+x
+v
 H
 H
 H
@@ -143578,10 +143701,10 @@ H
 H
 H
 H
-H
-H
-H
-H
+d
+d
+d
+p
 O
 O
 O
@@ -143780,10 +143903,10 @@ H
 H
 H
 H
-H
-H
-H
-H
+d
+d
+d
+p
 O
 O
 O
@@ -143982,10 +144105,10 @@ H
 H
 H
 H
-H
-H
-H
-O
+d
+d
+d
+p
 O
 O
 O
