@@ -95,6 +95,14 @@
 	M.adjustToxLoss(1)
 	M.add_nausea(12) //Over 8 units will cause puking
 
+/datum/reagent/water/tainted
+	taste_description = "mushroom"
+	color = "#9673bec6"
+
+/datum/reagent/water/tainted/on_mob_life(mob/living/carbon/M)
+	// Nobody is exempt, nobody can drink this without bad effects.
+	M.add_nausea(1)
+	// Special status eventually, TODO fungal infection.
 
 /*
  *	Water reaction to turf
