@@ -141,7 +141,7 @@
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/medicine = 2
 	)
@@ -317,7 +317,6 @@
 		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 
 	var/static/list/weapons = list( \
 		"Zweihander" = /obj/item/weapon/sword/long/greatsword/zwei, \
@@ -367,7 +366,7 @@
 	skills = list(
 		/datum/skill/combat/wrestling = 5,
 		/datum/skill/combat/unarmed = 5,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/climbing = 4,
 		/datum/skill/misc/medicine = 3,

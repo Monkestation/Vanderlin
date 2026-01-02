@@ -642,7 +642,7 @@
 	character.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	character.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+	character.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)

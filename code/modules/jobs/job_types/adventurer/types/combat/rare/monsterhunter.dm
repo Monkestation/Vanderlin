@@ -13,7 +13,7 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/axesmaces = 2,

@@ -163,7 +163,7 @@
 	skills = list(
 		/datum/skill/misc/reading = 1,
 		/datum/skill/labor/mathematics = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/unarmed = 1,
@@ -245,9 +245,9 @@
 	skills = list(
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/magic/holy = 3,
 		/datum/skill/misc/music = 4
@@ -408,8 +408,8 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/swimming = 3,
@@ -419,7 +419,7 @@
 		/datum/skill/misc/reading = 4,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/music = 6,
-		/datum/skill/misc/athletics = 4
+		/datum/skill/misc/athletics = 2
 	)
 
 	traits = list(

@@ -43,7 +43,7 @@
 		/datum/skill/combat/axesmaces = 4,
 		/datum/skill/combat/bows = 4,
 		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 3,

@@ -75,7 +75,7 @@
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/misc/reading = 1
@@ -123,7 +123,7 @@
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/misc/reading = 1
@@ -173,7 +173,7 @@
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/misc/reading = 1
 	)

@@ -24,7 +24,7 @@
 		/datum/skill/craft/engineering = 2,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/knives = 3,
@@ -382,8 +382,8 @@
 
 	skills = list(
 		/datum/skill/craft/engineering = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/misc/reading = 6,
 		/datum/skill/craft/alchemy = 3,
@@ -444,8 +444,8 @@
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 1,
 		/datum/skill/labor/lumberjacking = 2,
 		/datum/skill/craft/masonry = 3,
 		/datum/skill/craft/crafting = 4,

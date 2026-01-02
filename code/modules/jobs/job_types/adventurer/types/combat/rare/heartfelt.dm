@@ -19,7 +19,7 @@
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/riding = 3,
 		/datum/skill/craft/cooking = 1,

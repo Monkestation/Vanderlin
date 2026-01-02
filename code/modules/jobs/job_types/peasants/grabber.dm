@@ -37,7 +37,7 @@
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/swimming = 4,
 		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/labor/mathematics = 1
 	)
 
