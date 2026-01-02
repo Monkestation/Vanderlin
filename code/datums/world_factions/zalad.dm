@@ -141,7 +141,7 @@
 		/datum/supply_pack/armor/steel/zplatehelm,
 		/datum/supply_pack/armor/steel/zsallet,
 		/datum/supply_pack/armor/steel/zplatearmor,
-		/datum/supply_pack/armor/steel/zplategloves,
+	//datum/supply_pack/armor/steel/zplategloves, this doesnt exist?
 		/datum/supply_pack/armor/steel/zplateboots,
 		// Weapons
 		/datum/supply_pack/weapons/iron/iassegai,
