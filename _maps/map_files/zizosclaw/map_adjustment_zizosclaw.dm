@@ -92,7 +92,7 @@
 		/datum/job/archivist,
 		/datum/job/guardsman,
 		/datum/job/merchant,
-		/datum/job/shophand
+		/datum/job/shophand,
 		/datum/job/grabber,
 		/datum/job/artificer,
 	)
