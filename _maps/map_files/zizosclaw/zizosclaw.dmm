@@ -109,6 +109,12 @@
 	dir = 4
 	},
 /area/under/cave)
+"kX" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "lh" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/chair/bench/church{
@@ -197,6 +203,13 @@
 "rW" = (
 /turf/open/floor/naturalstone,
 /area/under/cavewet)
+"sj" = (
+/obj/machinery/light/fueledstreet/midlamp{
+	pixel_x = -32;
+	pixel_y = 26
+	},
+/turf/open/floor/blocks,
+/area/under/cave)
 "sv" = (
 /obj/effect/landmark/latejoin,
 /turf/open/floor/carpet/lord/center,
@@ -208,6 +221,13 @@
 /obj/structure/window/stained/zizo,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/church/rust,
+/area/under/cave)
+"tn" = (
+/obj/machinery/light/fueledstreet/midlamp{
+	pixel_x = 0;
+	pixel_y = -3
+	},
+/turf/open/floor/blocks,
 /area/under/cave)
 "tE" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -290,14 +310,24 @@
 	dir = 8
 	},
 /area/under/cavewet)
-"xy" = (
-/turf/closed/mineral/moss,
-/area/under/cave)
 "xT" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "Green window variant eventually."
 	},
 /turf/open/floor/cobblerock,
+/area/under/cave)
+"xV" = (
+/obj/machinery/light/fueledstreet/midlamp{
+	pixel_x = 0;
+	pixel_y = 26
+	},
+/turf/open/floor/blocks,
+/area/under/cave)
+"yy" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/floor/naturalstone,
 /area/under/cave)
 "yH" = (
 /turf/closed/mineral/deep,
@@ -314,6 +344,13 @@
 "yY" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
+/area/under/cave)
+"zb" = (
+/obj/machinery/light/fueledstreet/midlamp{
+	pixel_x = -32;
+	pixel_y = -3
+	},
+/turf/open/floor/blocks,
 /area/under/cave)
 "zo" = (
 /turf/open/floor/tile/masonic{
@@ -402,10 +439,6 @@
 /area/under/cave)
 "Hf" = (
 /turf/open/floor/blocks/stonered,
-/area/under/cave)
-"Hl" = (
-/obj/machinery/light/fueledstreet/midlamp,
-/turf/open/floor/herringbone,
 /area/under/cave)
 "HT" = (
 /turf/open/water/river{
@@ -564,6 +597,11 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
+/obj/structure/fluff/railing/border/corner{
+	dir = 9;
+	pixel_x = 0;
+	pixel_y = -3
+	},
 /turf/open/transparent/openspace,
 /area/under/cave)
 "TH" = (
@@ -628,6 +666,20 @@
 /area/under/cave)
 "Yc" = (
 /turf/open/floor/blocks,
+/area/under/cave)
+"Yh" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border/corner{
+	dir = 9;
+	pixel_x = 0;
+	pixel_y = -3
+	},
+/turf/open/floor/naturalstone,
 /area/under/cave)
 "YD" = (
 /obj/structure/window/stained/zizo,
@@ -64011,21 +64063,21 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -64214,20 +64266,20 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -64416,19 +64468,19 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -64619,18 +64671,18 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -64821,18 +64873,18 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -65024,17 +65076,17 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -65226,17 +65278,17 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -65429,16 +65481,16 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -65632,14 +65684,14 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -65834,13 +65886,13 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -66037,12 +66089,12 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -66239,11 +66291,11 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -66442,10 +66494,10 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -66644,10 +66696,10 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
-Xx
-Xx
+rW
+rW
+rW
+rW
 rW
 rW
 rW
@@ -66848,8 +66900,8 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
+rW
+rW
 rW
 rW
 rW
@@ -67050,8 +67102,8 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
+rW
+rW
 rW
 rW
 rW
@@ -67252,8 +67304,8 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
+rW
+rW
 rW
 rW
 rW
@@ -67454,8 +67506,8 @@ Xx
 Xx
 Xx
 Xx
-Xx
-Xx
+rW
+rW
 rW
 rW
 rW
@@ -67657,7 +67709,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -67859,7 +67911,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -68061,7 +68113,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -68263,7 +68315,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -68465,7 +68517,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -68667,7 +68719,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -70080,7 +70132,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -70282,7 +70334,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -70484,7 +70536,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -70686,7 +70738,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -70888,7 +70940,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -71090,7 +71142,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -71292,7 +71344,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -71494,7 +71546,7 @@ Xx
 Xx
 Xx
 Xx
-Xx
+rW
 rW
 rW
 rW
@@ -99133,9 +99185,9 @@ ri
 ri
 GI
 yH
-xy
-xy
-xy
+yH
+yH
+yH
 ri
 ri
 ri
@@ -99336,9 +99388,9 @@ ri
 ri
 GI
 yH
-xy
-xy
-xy
+yH
+yH
+yH
 ri
 ri
 ri
@@ -99538,9 +99590,9 @@ ri
 ri
 ri
 ri
-xy
-xy
-xy
+yH
+yH
+yH
 ri
 ri
 ri
@@ -100141,8 +100193,8 @@ yH
 yH
 yY
 ri
-xy
-xy
+yH
+yH
 ri
 ri
 Ni
@@ -100343,13 +100395,13 @@ yH
 yH
 yY
 ri
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
 ri
-xy
+yH
 CL
 CL
 CL
@@ -100545,13 +100597,13 @@ yH
 yH
 js
 ri
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 CL
 CL
 ri
@@ -100747,14 +100799,14 @@ yH
 ri
 ri
 ri
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 ri
 lv
@@ -100948,15 +101000,15 @@ yH
 yY
 ri
 yY
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 ri
 Fw
@@ -101149,16 +101201,16 @@ yH
 yY
 ri
 ri
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 QF
 Fw
@@ -101351,16 +101403,16 @@ ri
 yH
 yH
 yH
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 CL
 QF
 Fw
@@ -101555,14 +101607,14 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 ri
 Fw
@@ -101757,13 +101809,13 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 CL
 CL
@@ -101959,13 +102011,13 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 ri
 QF
@@ -101983,7 +102035,7 @@ QF
 Yc
 Yc
 Yc
-ri
+CL
 MJ
 MJ
 MJ
@@ -102161,13 +102213,13 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 ri
 QF
@@ -102185,7 +102237,7 @@ ri
 Yc
 Yc
 Yc
-ri
+QF
 ri
 MJ
 MJ
@@ -102363,12 +102415,12 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
 ri
 CL
 ri
@@ -102387,8 +102439,8 @@ ri
 Yc
 Yc
 Yc
-ri
-ri
+CL
+QF
 MJ
 MJ
 MJ
@@ -102565,12 +102617,12 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
+yH
+yH
 CL
 CL
 ri
@@ -102589,7 +102641,7 @@ CL
 Yc
 Yc
 Yc
-ri
+CL
 ri
 MJ
 MJ
@@ -102769,10 +102821,10 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
-xy
+yH
+yH
+yH
+yH
 ri
 CL
 ri
@@ -102791,7 +102843,7 @@ Di
 Yc
 Yc
 Yc
-ri
+QF
 ri
 MJ
 MJ
@@ -102971,9 +103023,9 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
+yH
+yH
+yH
 tK
 ur
 Qr
@@ -102993,7 +103045,7 @@ ri
 Yc
 Yc
 Yc
-ri
+QF
 ri
 MJ
 MJ
@@ -103173,13 +103225,14 @@ yH
 yH
 yH
 yH
-xy
-xy
-xy
+yH
+yH
+yH
 QF
 tU
 ri
 ri
+tn
 Yc
 Yc
 Yc
@@ -103187,15 +103240,14 @@ Yc
 Yc
 Yc
 Yc
-Yc
-Yc
+xV
 CL
 Di
 ri
 Yc
 Yc
 Yc
-ri
+CL
 ri
 MJ
 MJ
@@ -103375,8 +103427,8 @@ yH
 yH
 yH
 yH
-xy
-xy
+yH
+yH
 ri
 ri
 Di
@@ -103577,8 +103629,8 @@ ws
 MJ
 yH
 yH
-xy
-xy
+yH
+yH
 QF
 QF
 ri
@@ -103586,11 +103638,11 @@ MJ
 ri
 Yc
 Yc
-Hl
 mz
 mz
 mz
-Hl
+mz
+mz
 Yc
 Yc
 ri
@@ -103599,7 +103651,7 @@ ri
 Yc
 Yc
 Yc
-ri
+QF
 ri
 MJ
 MJ
@@ -103779,7 +103831,7 @@ yH
 yH
 yH
 yH
-xy
+yH
 BV
 Yc
 Yc
@@ -103801,8 +103853,8 @@ rH
 Yc
 Yc
 Yc
-ri
-ri
+QF
+CL
 MJ
 MJ
 MJ
@@ -103981,7 +104033,7 @@ yH
 yH
 yH
 yH
-xy
+yH
 BV
 Yc
 Yc
@@ -104003,7 +104055,7 @@ Yc
 Yc
 Yc
 Yc
-ri
+QF
 ri
 MJ
 MJ
@@ -104183,7 +104235,7 @@ yH
 yH
 yH
 yH
-xy
+yH
 BV
 Yc
 Yc
@@ -104205,7 +104257,7 @@ Tt
 Yc
 Yc
 Yc
-ri
+QF
 ri
 MJ
 MJ
@@ -104394,19 +104446,19 @@ MJ
 GP
 Yc
 Yc
-Hl
 mz
 mz
 mz
-Hl
+mz
+mz
 Yc
 Yc
 AN
 MJ
 ri
+QF
 ri
-ri
-ri
+CL
 ri
 ri
 ri
@@ -104796,6 +104848,7 @@ vx
 tK
 tK
 GP
+zb
 Yc
 Yc
 Yc
@@ -104803,8 +104856,7 @@ Yc
 Yc
 Yc
 Yc
-Yc
-Yc
+sj
 AN
 YE
 CL
@@ -104816,10 +104868,10 @@ YE
 ri
 ri
 ri
-ri
-ri
-ri
-ri
+MJ
+MJ
+MJ
+MJ
 MJ
 MJ
 MJ
@@ -105018,10 +105070,10 @@ YE
 ri
 ri
 ri
-ri
-ri
-ri
-ri
+MJ
+MJ
+MJ
+MJ
 MJ
 MJ
 MJ
@@ -105221,9 +105273,9 @@ ri
 ri
 ri
 ri
-ri
-ri
-ri
+MJ
+MJ
+MJ
 MJ
 MJ
 MJ
@@ -105423,9 +105475,9 @@ ri
 ri
 ri
 ri
-ri
-ri
-ri
+MJ
+MJ
+MJ
 MJ
 MJ
 MJ
@@ -105626,8 +105678,8 @@ ri
 ri
 ri
 ri
-ri
-ri
+MJ
+MJ
 MJ
 MJ
 MJ
@@ -105811,7 +105863,7 @@ vx
 Yc
 Yc
 Yc
-Tt
+Yc
 AN
 YE
 CL
@@ -105828,8 +105880,8 @@ ri
 ri
 ri
 ri
-ri
-ri
+MJ
+MJ
 MJ
 MJ
 MJ
@@ -106013,7 +106065,7 @@ vx
 Yc
 Yc
 Yc
-jg
+Yh
 gm
 YE
 CL
@@ -106031,7 +106083,7 @@ ri
 ri
 ri
 ri
-ri
+MJ
 MJ
 MJ
 MJ
@@ -106233,7 +106285,7 @@ ri
 ri
 ri
 ri
-ri
+MJ
 MJ
 MJ
 MJ
@@ -106435,7 +106487,7 @@ ri
 ri
 ri
 ri
-ri
+MJ
 MJ
 MJ
 MJ
@@ -106619,7 +106671,7 @@ ri
 Yc
 Yc
 Yc
-ri
+kX
 MJ
 YE
 CL
@@ -106820,8 +106872,8 @@ ri
 ri
 Yc
 Yc
-Yc
-ri
+Tt
+kX
 ri
 YE
 YE
@@ -107022,8 +107074,8 @@ ri
 Yc
 Yc
 Yc
-ri
-ri
+jg
+yy
 ri
 ri
 ri

@@ -148,6 +148,14 @@
 	icon_state = "border"
 	pass_crawl = FALSE
 
+/obj/structure/fluff/railing/border/inner
+	icon_state = "border_inner"
+	density = FALSE
+
+/obj/structure/fluff/railing/border/corner
+	icon_state = "border_corner"
+	density = FALSE
+
 /obj/structure/fluff/railing/tall
 	name = "wooden fence"
 	desc = "A sturdy fence of wooden planks."
