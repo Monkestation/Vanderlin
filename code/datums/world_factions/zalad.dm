@@ -155,6 +155,7 @@
 		/datum/supply_pack/weapons/ammo/Blowpouch,
 		/datum/supply_pack/weapons/steel/khopesh,
 		/datum/supply_pack/weapons/steel/steppesabre,
+		/datum/supply_pack/weapons/steel/katana
 		// Food
 		/datum/supply_pack/food/drinks/spottedhen,
 		/datum/supply_pack/food/roastedcoffee,
