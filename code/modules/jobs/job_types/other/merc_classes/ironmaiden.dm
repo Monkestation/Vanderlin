@@ -13,7 +13,7 @@
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_END = 2,
-		STATKEY_INT = 1
+		STATKEY_INT = 2
 	)
 
 	skills = list(
@@ -21,7 +21,7 @@
 		/datum/skill/misc/medicine = 4,
 		/datum/skill/misc/sewing = 3,
 		/datum/skill/misc/reading = 3, // Using the higher value (3) since there were two entries with different values
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/alchemy = 2,
 		/datum/skill/labor/mathematics = 3
