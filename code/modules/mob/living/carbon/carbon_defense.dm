@@ -122,6 +122,9 @@
 	if(I)
 		used_limb = parse_zone(I.sublimb_grabbed)
 
+	if(HAS_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE))
+		return
+
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		visible_message("<span class='danger'>[user] firmly grips [src]'s [used_limb]!</span>",
 						"<span class='danger'>[user] firmly grips my [used_limb]!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
@@ -237,7 +240,6 @@
 		var/probability = I.get_dismemberment_chance(affecting, user)
 		if(prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, user.zone_selected))
 			I.add_mob_blood(src)
-			playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
 		return TRUE //successful attack
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
@@ -420,7 +422,7 @@
 
 		if(eyes.damage > 10)
 			blind_eyes(damage)
-			blur_eyes(damage * rand(3, 6))
+			set_eye_blur_if_lower(damage * rand(6 SECONDS, 12 SECONDS))
 
 			if(eyes.damage > 20)
 				if(prob(eyes.damage - 20))

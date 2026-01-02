@@ -15,22 +15,3 @@
 	muteinmouth = TRUE
 	spitoutmouth = FALSE
 	w_class = WEIGHT_CLASS_TINY
-
-/obj/item/natural/feather/pre_attack_secondary(atom/A, mob/living/carbon/human/user, params)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(istype(A, /obj/item/paper/confession))
-		var/obj/item/paper/confession/confessional = A
-		if(confessional.signed)
-			return
-		var/response = alert(user, "What voluntary confession do I want?","","Villainy", "Faith")
-		if(!response)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(response == "Villainy")
-			confessional.confession_type = "antag"
-			confessional.name = "confession of villainy"
-		else
-			confessional.confession_type = "patron"
-			confessional.name = "confession of faith"
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN

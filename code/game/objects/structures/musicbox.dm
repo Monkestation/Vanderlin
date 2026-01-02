@@ -73,7 +73,7 @@
 
 /obj/structure/fake_machine/musicbox
 	name = "wax music device"
-	desc = "A marvelous device created by Heartfelts artificers before its fall, it plays a variety of songs from across Faience, as if their preformers where within the same room."
+	desc = "A marvelous device created by Heartfelts artificers before its fall, it plays a variety of songs from across Faience, as if their performers were within the same room."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "music0"
 	density = TRUE
@@ -109,7 +109,7 @@
 	. += "Volume: [curvol]/100"
 	if(lock_check(TRUE))
 		. += span_info("It's [locked() ? "locked" : "unlocked"].")
-		. += span_info("It's keyhole has [access2string()] etched next to it.")
+		. += span_info("Its keyhole has [access2string()] etched next to it.")
 
 /obj/structure/fake_machine/musicbox/proc/toggle_music()
 	if(!playing)

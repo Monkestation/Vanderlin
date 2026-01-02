@@ -3,7 +3,7 @@
 	category = "Zizo's Chosen"
 	triumph_count = 2
 	immediate_effects = list("Gained an ability to construct profane shrines")
-	rewards = list("2 Triumphs", "Zizo grows stronger")
+	rewards = list("2 Triumphs", "Zizo grows stronger", "Zizo blesses you (+2 Fortune)")
 	var/target_type = /obj/structure/fluff/psycross/zizocross
 	var/target_count = 2
 	var/current_count = 0
@@ -30,12 +30,17 @@
 		to_chat(owner.current, span_notice("You have built [current_count] out of [target_count] profane shrines."))
 		return
 
+	complete_objective()
+
+/datum/objective/personal/build_zizo_shrine/complete_objective()
+	. = ..()
 	to_chat(owner.current, span_greentext("You have built all the required profane shrines, completing Zizo's objective!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(ZIZO, 20)
-	escalate_objective()
 	UnregisterSignal(owner.current, COMSIG_ITEM_CRAFTED)
+
+/datum/objective/personal/build_zizo_shrine/reward_owner()
+	. = ..()
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_LCK, 2)
 
 /datum/objective/personal/build_zizo_shrine/update_explanation_text()
 	explanation_text = "Construct [target_count] profane shrine[target_count > 1 ? "s" : ""] to spread Zizo's corruption!"

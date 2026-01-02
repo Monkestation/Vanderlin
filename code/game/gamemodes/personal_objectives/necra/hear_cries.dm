@@ -3,12 +3,12 @@
 	category = "Necra's Chosen"
 	triumph_count = 2
 	immediate_effects = list("Gained a temporary ability to listen to the cries of the dead")
-	rewards = list("2 Triumphs", "Necra grows stronger", "Deaths won't disturb you anymore")
+	rewards = list("2 Triumphs", "Necra grows stronger", "Death and suffering won't disturb you")
 	var/time_required = 3 MINUTES
 	var/time_spent = 0
 	var/last_check = 0
 	var/check_interval = 10 SECONDS
-	var/area/church_area = /area/rogue/indoors/town/church
+	var/area/church_area = /area/indoors/town/church
 	var/list/heard_messages = list()
 
 /datum/objective/personal/listen_whispers/on_creation()
@@ -55,14 +55,15 @@
 	if(time_spent >= time_required && !completed)
 		complete_objective()
 
-/datum/objective/personal/listen_whispers/proc/complete_objective()
+/datum/objective/personal/listen_whispers/complete_objective()
+	. = ..()
 	to_chat(owner.current, span_greentext("You have listened to the whispers of the dead long enough to satisfy Necra!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(NECRA, 20)
-	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	escalate_objective()
 	STOP_PROCESSING(SSprocessing, src)
+
+/datum/objective/personal/listen_whispers/reward_owner()
+	. = ..()
+	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 
 /datum/objective/personal/listen_whispers/update_explanation_text()
 	explanation_text = "Necra wants you to understand death better. Spend at least [time_required / (1 MINUTES)] minutes in the church listening to the whispers of the dead while wearing an amulet of Necra."

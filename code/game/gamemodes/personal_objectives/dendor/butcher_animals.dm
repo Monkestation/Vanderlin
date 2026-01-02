@@ -28,14 +28,15 @@
 	else
 		to_chat(owner.current, span_notice("Animal butchered! Butcher [animals_required - animals_butchered] more to complete Dendor's will."))
 
-/datum/objective/personal/butcher_animals/proc/complete_objective()
+/datum/objective/personal/butcher_animals/complete_objective()
+	. = ..()
 	to_chat(owner.current, span_greentext("You've butchered enough animals to satisfy Dendor!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(DENDOR, 20)
-	owner.current.adjust_skillrank(/datum/skill/labor/butchering, 1)
-	escalate_objective()
 	UnregisterSignal(owner.current, COMSIG_MOB_BUTCHERED)
 
+/datum/objective/personal/butcher_animals/reward_owner()
+	. = ..()
+	owner.current.adjust_skillrank(/datum/skill/labor/butchering, 1)
+
 /datum/objective/personal/butcher_animals/update_explanation_text()
-	explanation_text = "Butcher at least [animals_required] animals to satisfy Dendor."
+	explanation_text = "Butcher [animals_required] animal\s to satisfy Dendor."

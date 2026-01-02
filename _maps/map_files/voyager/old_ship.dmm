@@ -1,0 +1,1292 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bc" = (
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area)
+"bX" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/effect/landmark/start/shophand{
+	dir = 4
+	},
+/obj/item/painting/queen,
+/obj/item/weapon/polearm/spear,
+/obj/item/weapon/polearm/spear{
+	pixel_x = -20;
+	pixel_y = -14
+	},
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
+/area)
+"dq" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"dx" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/turf/open/floor/carpet/purple,
+/area)
+"eo" = (
+/obj/structure/closet/crate/chest/wicker,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"eQ" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"gB" = (
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/fabric_double,
+/obj/effect/landmark/start/shophand{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"hq" = (
+/obj/structure/table/wood,
+/obj/item/coin/silver/pile,
+/obj/item/coin/copper/pile,
+/obj/item/weapon/knife/dagger/navaja,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"ij" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"ik" = (
+/obj/structure/fake_machine/vendor,
+/turf/closed/wall/mineral/wooddark,
+/area)
+"iT" = (
+/obj/structure/fake_machine/atm,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"ko" = (
+/obj/structure/floordoor{
+	redstone_id = "droploot"
+	},
+/turf/open/transparent/openspace,
+/area)
+"lr" = (
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"nF" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area)
+"ob" = (
+/obj/structure/table/wood{
+	icon_state = "largetable"
+	},
+/obj/structure/rack/shelf/notdense{
+	pixel_y = 23
+	},
+/obj/item/key/steward{
+	pixel_y = 32;
+	pixel_x = 8
+	},
+/obj/item/paper/scroll,
+/obj/item/natural/feather,
+/obj/item/reagent_containers/glass/bottle/beer/hagwoodbitter{
+	pixel_x = -3;
+	pixel_y = 36
+	},
+/obj/item/reagent_containers/glass/bottle/beer/hagwoodbitter{
+	pixel_x = -8;
+	pixel_y = 36
+	},
+/obj/item/key/steward{
+	pixel_y = 32;
+	pixel_x = 8
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"og" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"qp" = (
+/turf/open/transparent/openspace,
+/area)
+"rF" = (
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area)
+"sl" = (
+/turf/open/water/ocean/deep,
+/area)
+"sr" = (
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 10;
+	icon_state = "cobbleedge-e"
+	},
+/obj/item/rope/chain,
+/turf/open/floor/ruinedwood/platform,
+/area)
+"tl" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area)
+"tv" = (
+/obj/structure/table/wood{
+	icon_state = "largetable"
+	},
+/obj/structure/rack/shelf/notdense{
+	pixel_y = 23
+	},
+/obj/item/gem,
+/obj/item/gem,
+/obj/item/gem,
+/obj/item/reagent_containers/glass/bottle/wine{
+	pixel_y = 36;
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/glass/bottle/wine{
+	pixel_y = 36;
+	pixel_x = -7
+	},
+/obj/item/reagent_containers/glass/bottle/wine/sourwine{
+	pixel_y = 36
+	},
+/obj/item/reagent_containers/glass/bottle/wine/sourwine{
+	pixel_y = 36;
+	pixel_x = 3
+	},
+/obj/item/reagent_containers/glass/bottle/wine/sourwine{
+	pixel_y = 36;
+	pixel_x = 6
+	},
+/obj/item/weapon/sword/sabre,
+/obj/item/weapon/sword/sabre{
+	pixel_x = 7
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"vY" = (
+/obj/structure/table/wood{
+	icon_state = "tablewood3"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"xi" = (
+/obj/structure/fluff/statue/small,
+/turf/open/floor/ruinedwood/platform,
+/area)
+"yy" = (
+/obj/structure/ladder,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"yF" = (
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
+/area)
+"yR" = (
+/obj/effect/landmark/start/shophand{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"za" = (
+/obj/item/fake_machine/merchant,
+/turf/open/floor/carpet/purple,
+/area)
+"ze" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Ad" = (
+/obj/structure/fake_machine/merchantvend,
+/turf/closed/wall/mineral/wooddark,
+/area)
+"Ah" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/turf/open/transparent/openspace,
+/area)
+"Dj" = (
+/obj/item/reagent_containers/glass/cup/wooden,
+/obj/structure/table/wood{
+	icon_state = "tablewood1"
+	},
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"DP" = (
+/obj/structure/bed/inn,
+/obj/structure/roguetent{
+	layer = 8
+	},
+/obj/structure/rack/shelf/notdense{
+	pixel_y = -32
+	},
+/obj/item/clothing/head/helmet/leather/tricorn{
+	pixel_y = -32
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Gj" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area)
+"Gr" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area)
+"Gt" = (
+/obj/structure/bed/inn,
+/obj/structure/roguetent{
+	layer = 8
+	},
+/obj/structure/rack/shelf/notdense,
+/obj/item/clothing/head/helmet/leather/tricorn{
+	pixel_y = 32
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Hb" = (
+/obj/structure/table/wood{
+	icon_state = "largetable"
+	},
+/obj/structure/rack/shelf/notdense{
+	pixel_y = 23
+	},
+/obj/structure/fermentation_keg/beer{
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/glass/bottle/manapot{
+	pixel_y = 36;
+	pixel_x = 4
+	},
+/obj/item/reagent_containers/glass/bottle/manapot{
+	pixel_y = 36;
+	pixel_x = 7
+	},
+/obj/item/reagent_containers/glass/bottle/healthpot{
+	pixel_y = 36;
+	pixel_x = -7
+	},
+/obj/item/reagent_containers/glass/bottle/healthpot{
+	pixel_y = 36;
+	pixel_x = -4
+	},
+/obj/item/reagent_containers/glass/bottle/healthpot{
+	pixel_y = 36
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Hp" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fermentation_keg/beer,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
+/area)
+"HF" = (
+/obj/structure/fermentation_keg/random/water,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"IJ" = (
+/obj/structure/closet/crate/drawer/inn,
+/obj/item/key/merchant,
+/obj/item/key/merchant,
+/obj/item/reagent_containers/powder/spice,
+/obj/item/scomstone,
+/obj/item/clothing/head/helmet/leather/tricorn,
+/obj/item/weapon/sword/sabre/cutlass,
+/obj/structure/fluff/wallclock/l,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Js" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"JC" = (
+/obj/structure/lever{
+	redstone_id = "droploot"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Ke" = (
+/obj/structure/door/violet,
+/obj/effect/mapping_helpers/access/keyset/town/merchant,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"KA" = (
+/obj/structure/table/wood{
+	icon_state = "tablewood3"
+	},
+/obj/structure/bars{
+	icon_state = "barsbent";
+	layer = 2.81
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Lg" = (
+/obj/structure/closet/crate/chest,
+/obj/structure/floordoor{
+	redstone_id = "droploot"
+	},
+/turf/open/transparent/openspace,
+/area)
+"Lq" = (
+/obj/structure/window,
+/obj/structure/bars,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"LE" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 8;
+	icon_state = "chair1"
+	},
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"LF" = (
+/obj/structure/ladder,
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
+/area)
+"LU" = (
+/obj/structure/fluff/statue/small,
+/turf/open/transparent/openspace,
+/area)
+"Ml" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"NR" = (
+/obj/structure/closet/crate/chest{
+	base_icon_state = "woodchestalt";
+	icon_state = "woodchestalt"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"QG" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Rx" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Sv" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/transparent/openspace,
+/area)
+"Th" = (
+/turf/open/floor/carpet/purple,
+/area)
+"Tq" = (
+/obj/structure/fluff/railing/border,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Us" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood,
+/area)
+"VB" = (
+/obj/machinery/light/fueled/lanternpost{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"Wo" = (
+/obj/structure/fluff/railing/border{
+	dir = 5;
+	icon_state = "border"
+	},
+/turf/open/transparent/openspace,
+/area)
+"Wu" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/transparent/openspace,
+/area)
+"Xk" = (
+/obj/structure/fake_machine/mail/r{
+	pixel_y = 32
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"XA" = (
+/obj/structure/door,
+/obj/effect/mapping_helpers/access/keyset/town/merchant,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/spiral,
+/area)
+"XI" = (
+/obj/structure/fluff/railing/border,
+/turf/open/transparent/openspace,
+/area)
+"XS" = (
+/turf/closed/wall/mineral/wooddark,
+/area)
+"YP" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/carpet/purple,
+/area)
+"ZI" = (
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area)
+
+(1,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+"}
+(2,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+"}
+(3,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+sl
+sl
+sl
+"}
+(4,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+XS
+XS
+sl
+sl
+"}
+(5,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+Hp
+XS
+sl
+sl
+"}
+(6,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+XS
+bX
+XS
+XS
+sl
+"}
+(7,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+Gt
+yR
+DP
+XS
+sl
+"}
+(8,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+Rx
+lr
+Rx
+XS
+sl
+"}
+(9,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+XS
+XA
+XS
+XS
+sl
+"}
+(10,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+Hb
+lr
+IJ
+XS
+sl
+"}
+(11,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+tv
+lr
+hq
+XS
+sl
+"}
+(12,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+ob
+Xk
+LE
+XS
+sl
+"}
+(13,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+XS
+gB
+XS
+XS
+sl
+"}
+(14,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+XS
+XS
+XS
+sl
+sl
+"}
+(15,1,1) = {"
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+sl
+"}
+
+(1,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+xi
+qp
+qp
+qp
+"}
+(2,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Ah
+sr
+Wo
+qp
+qp
+"}
+(3,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Ah
+tl
+dq
+Gj
+Wo
+qp
+"}
+(4,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+XI
+HF
+JC
+vY
+nF
+qp
+"}
+(5,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Ah
+bc
+tl
+Dj
+lr
+HF
+Gj
+Wo
+"}
+(6,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+XI
+Lg
+lr
+lr
+lr
+NR
+QG
+nF
+"}
+(7,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+XI
+ko
+ze
+ZI
+ij
+ZI
+eQ
+nF
+"}
+(8,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Wu
+Gr
+Tq
+rF
+og
+rF
+Ml
+nF
+"}
+(9,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+XI
+VB
+Us
+lr
+Us
+lr
+nF
+"}
+(10,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Wu
+XS
+ik
+KA
+Ke
+XS
+Sv
+"}
+(11,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+XS
+iT
+lr
+lr
+XS
+qp
+"}
+(12,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Lq
+yy
+lr
+dx
+Lq
+qp
+"}
+(13,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Ad
+Js
+eo
+YP
+XS
+qp
+"}
+(14,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+XS
+Lq
+XS
+qp
+qp
+"}
+(15,1,2) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+
+(1,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+(2,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+(3,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+(4,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+(5,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+(6,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+LU
+qp
+qp
+qp
+"}
+(7,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+(8,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}
+(9,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+Th
+Th
+Th
+qp
+qp
+"}
+(10,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+yF
+Th
+za
+Th
+yF
+qp
+"}
+(11,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+yF
+Th
+Th
+Th
+yF
+qp
+"}
+(12,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+yF
+LF
+yF
+yF
+yF
+qp
+"}
+(13,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+yF
+yF
+yF
+yF
+yF
+qp
+"}
+(14,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+yF
+yF
+yF
+qp
+qp
+"}
+(15,1,3) = {"
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+qp
+"}

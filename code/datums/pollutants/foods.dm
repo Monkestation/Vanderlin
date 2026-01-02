@@ -32,6 +32,10 @@
 	name = "berry pie"
 	scent = "berry pie"
 
+/datum/pollutant/food/borowiki_pie
+	name = "borowiki pie"
+	scent = "borowiki pie"
+
 /datum/pollutant/food/bread
 	name = "fresh baked bread"
 	scent = "fresh baked bread"
@@ -204,6 +208,10 @@
 	name = "truffle stew"
 	scent = "truffle stew"
 
+/datum/pollutant/food/borowiki_stew
+	name = "borowiki stew"
+	scent = "borowiki stew"
+
 /datum/pollutant/food/cheese_soup
 	name = "cheese soup"
 	scent = "cheese soup"
@@ -247,3 +255,7 @@
 /datum/pollutant/food/fried_messenger
 	name = "fried messenger"
 	scent = "fried messenger"
+
+/datum/pollutant/food/waddle
+	name = "meaty smell"
+	scent = "meaty smell"

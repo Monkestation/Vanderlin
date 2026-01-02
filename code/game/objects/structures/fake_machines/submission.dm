@@ -35,7 +35,7 @@
 					say("Couldn't find where to send the submission.")
 					return
 				var/list/turfs = list()
-				for(var/turf/T in A)
+				for(var/turf/T in A.get_turfs_from_all_zlevels())
 					turfs += T
 				var/turf/T = pick(turfs)
 				I.forceMove(T)

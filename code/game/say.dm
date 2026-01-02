@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/rendered = compose_message(src, message_language, message, , spans, message_mods)
 	for(var/atom/movable/hearing_movable as anything in get_hearers_in_view(range, source))
 		if(!hearing_movable) // theoretically this should use as anything because it shouldnt be able to get nulls but there are reports that it does.
-			stack_trace("somehow theres a null returned from get_hearers_in_view() in send_speech!")
+			stack_trace("somehow there's a null returned from get_hearers_in_view() in send_speech!")
 			continue
 		hearing_movable.Hear(rendered, src, message_language, message, , spans, message_mods, original_message)
 
@@ -101,7 +101,14 @@ GLOBAL_LIST_INIT(freqtospan, list(
 			if(!HAS_TRAIT(src, TRAIT_KEENEARS))
 				if(istype(speaker, /mob/living))
 					var/mob/living/L = speaker
-					namepart = "Unknown [(L.gender == FEMALE) ? "Woman" : "Man"]"
+					// This isn't accurate purposely
+					var/appendage = "Figure"
+					switch(L.client?.prefs.voice_type)
+						if(VOICE_TYPE_FEM)
+							appendage = "Woman"
+						if(VOICE_TYPE_MASC)
+							appendage = "Man"
+					namepart = "Unknown [appendage]"
 				else
 					namepart = "Unknown"
 			spanpart1 = "<span class='smallyell'>"

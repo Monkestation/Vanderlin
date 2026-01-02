@@ -9,12 +9,16 @@
 	)
 	var/last_used
 
+/datum/enchantment/briarcurse/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_AFTERATTACK
+	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+
 /datum/enchantment/briarcurse/add_item(obj/item/enchanter)
 	.=..()
 	enchanter.force += 10
 
-/datum/enchantment/briarcurse/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
-	.=..()
+/datum/enchantment/briarcurse/proc/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
 		return
 	if(isliving(target))

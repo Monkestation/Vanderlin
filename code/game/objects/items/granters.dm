@@ -43,7 +43,7 @@
 
 /obj/item/book/granter/attack_self(mob/user, params)
 	if(user.mind?.has_studied == TRUE)
-		to_chat(user, span_notice("I struggle to study my arcane notes more- Perhaps a good rest would help."))
+		to_chat(user, span_notice("I struggle to study my arcane notes more. Perhaps a good rest would help."))
 		return FALSE
 	if(reading)
 		to_chat(user, span_notice("I am already reading this!"))

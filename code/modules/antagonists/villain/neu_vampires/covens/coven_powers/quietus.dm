@@ -69,9 +69,9 @@
 /datum/coven_power/quietus/silence_of_death/proc/should_affect_target(mob/living/carbon/human/target)
 	if(target == owner)
 		return FALSE
-	if(target.clan_position?.is_subordinate_to(owner))
+	if(target.clan_position?.is_subordinate_to(owner.clan_position))
 		return FALSE
-	if(target.clan_position?.is_superior_to(owner))
+	if(target.clan_position?.is_superior_to(owner.clan_position))
 		return FALSE
 	return TRUE
 
@@ -214,14 +214,6 @@
 /datum/coven_power/quietus/taste_of_death/post_gain()
 	. = ..()
 	owner.add_spell(/datum/action/cooldown/spell/projectile/acid_splash/quietus, TRUE)
-
-/datum/action/cooldown/spell/projectile/acid_splash/quietus
-	projectile_type = /obj/projectile/magic/acidsplash/quietus
-
-/obj/projectile/magic/acidsplash/quietus
-	damage = 80
-	flag = "magic"
-	speed = 2
 
 //DAGON'S CALL
 /datum/coven_power/quietus/dagons_call

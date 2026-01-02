@@ -1,6 +1,7 @@
 /datum/action/cooldown/spell/adopt_child
 	name = "Adopt Child"
 	button_icon_state = "love"
+	sound = null
 	self_cast_possible = FALSE
 	has_visual_effects = FALSE
 

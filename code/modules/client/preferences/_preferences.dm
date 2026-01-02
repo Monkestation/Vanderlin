@@ -223,8 +223,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/has_spawned = FALSE
 	///our selected accent
 	var/selected_accent = ACCENT_DEFAULT
-	/// If our owner has patreon access
-	var/patreon = FALSE
+	/// If our owner is patreon or twitch sub
+	var/donator = FALSE
 	/// If our owner is from a race that has more than one accent
 	var/change_accent = FALSE
 
@@ -232,6 +232,15 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/ui_scale
 	/// Assoc list of culinary preferences, where the key is the type of the culinary preference, and value is food/drink typepath
 	var/list/culinary_preferences = list()
+	///this is our chat scale
+	var/chat_scale = 1
+
+	/// Whether multi-character readying is enabled
+	var/multi_char_ready = FALSE
+	/// List of character slot indices selected for multi-ready (in priority order)
+	var/list/multi_ready_slots = list()
+
+	var/datum/multi_ready_ui/multi_ready_panel
 
 /datum/preferences/New(client/C)
 	parent = C
@@ -243,7 +252,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	// C/parent can be a client_interface
 	if(isclient(parent))
-		patreon = parent?.patreon?.has_access(ACCESS_ASSISTANT_RANK)
+		donator = parent.is_donator()
 
 	for(var/custom_name_id in GLOB.preferences_custom_names)
 		custom_names[custom_name_id] = get_default_name(custom_name_id)
@@ -256,7 +265,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			unlock_content = C.IsByondMember()
 			if(unlock_content)
 				max_save_slots += 5
-		if(patreon)
+		if(donator)
 			max_save_slots += 30
 	var/loaded_preferences_successfully = load_preferences()
 	if(loaded_preferences_successfully)
@@ -265,7 +274,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				real_name = pref_species.random_name(gender,1)
 			return
 	//we couldn't load character data so just randomize the character appearance + name
-	randomise_appearance_prefs(include_patreon = patreon)		//let's create a random character then - rather than a fat, bald and naked man.
+	randomise_appearance_prefs(include_donator = donator)		//let's create a random character then - rather than a fat, bald and naked man.
 	if(!charflaw)
 		charflaw = pick(GLOB.character_flaws)
 		charflaw = GLOB.character_flaws[charflaw]
@@ -299,9 +308,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	// FIRST ROW
 	dat += "<tr>"
 	dat += "<td style='width:33%;text-align:left'>"
-	dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
+	dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a> <br>"
+	dat += "<a href='?_src_=prefs;preference=multi;task=menu'>Character Ready Order</a>"
+	dat += "<br><b>Chat Scale:</b> <a href='?_src_=prefs;preference=chat_scale;task=input'>[chat_scale]</a>"
 	dat += "</td>"
-
 
 	dat += "<td style='width:33%;text-align:center'>"
 	if(SStriumphs.triumph_buys_enabled)
@@ -397,9 +407,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><BR>"
 
 	dat += "<b>Flaw:</b> <a href='?_src_=prefs;preference=charflaw;task=input'>[charflaw]</a><BR>"
-	var/datum/faith/selected_faith = GLOB.faithlist[selected_patron?.associated_faith]
+	var/datum/faith/selected_faith = GLOB.faithlist[selected_patron.associated_faith]
 	dat += "<b>Faith:</b> <a href='?_src_=prefs;preference=faith;task=input'>[selected_faith?.name || "FUCK!"]</a><BR>"
-	dat += "<b>Patron:</b> <a href='?_src_=prefs;preference=patron;task=input'>[selected_patron?.name || "FUCK!"]</a><BR>"
+	dat += "<b>Patron:</b> <a href='?_src_=prefs;preference=patron;task=input'>[selected_patron.name || "FUCK!"]</a><BR>"
 	dat += "<b>Family:</b> <a href='?_src_=prefs;preference=family'>[family ? family : "None"]</a><BR>"
 	if(family == FAMILY_FULL || family == FAMILY_NEWLYWED)
 		dat += "<b>Preferred Spouse:</b> <a href='?_src_=prefs;preference=setspouse'>[setspouse ? setspouse : "None"]</a><BR>"
@@ -519,7 +529,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	popup.open(FALSE)
 	onclose(user, "capturekeypress", src)
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Captain", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 295, height = 620) //295 620
+/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Captain", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 400, height = 620) //400 620
 	if(!SSjob)
 		return
 
@@ -581,14 +591,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 			HTML += "<tr bgcolor='#000000'><td width='60%' align='right'>"
 			var/rank = job.title
-			var/used_name = (gender == FEMALE && job.f_title) ? job.f_title : job.title
+			var/used_name = (pronouns == SHE_HER && job.f_title) ? job.f_title : job.title
 			lastJob = job
 			if(is_role_banned(user.ckey, job.title))
 				HTML += "[used_name]</td> <td><a href='?_src_=prefs;bancheck=[rank]'> BANNED</a></td></tr>"
-				continue
-			var/required_playtime_remaining = job.required_playtime_remaining(user.client)
-			if(required_playtime_remaining)
-				HTML += "[used_name]</td> <td><font color=red> \[ [get_exp_format(required_playtime_remaining)] as [job.get_exp_req_type()] \] </font></td></tr>"
 				continue
 			if(!job.player_old_enough(user.client))
 				var/available_in_days = job.available_in_days(user.client)
@@ -598,27 +604,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if(job.whitelist_req && (!user.client.whitelisted()))
 					HTML += "<font color=#6183a5>[used_name]</font></td> <td> </td></tr>"
 					continue
-
-			if(get_playerquality(user.ckey) < job.min_pq)
-				HTML += "<font color=#a36c63>[used_name] (Min PQ: [job.min_pq])</font></td> <td> </td></tr>"
+			var/lock_html = get_job_lock_html(job, user, used_name)
+			if(lock_html)
+				HTML += lock_html
 				continue
-			if(length(job.allowed_ages) && !(user.client.prefs.age in job.allowed_ages))
-				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
-				continue
-			if(length(job.allowed_races) && !(user.client.prefs.pref_species.id in job.allowed_races))
-				if(!(user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
-					HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
-					continue
-			if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron.type in job.allowed_patrons))
-				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
-				continue
-			if(length(job.allowed_sexes) && !(user.client.prefs.gender in job.allowed_sexes))
-				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
-				continue
-
 			HTML += {"
 				<style>
-
 					.tutorialhover {
 						position: relative;
 						display: inline-block;
@@ -919,6 +910,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			else
 				SetChoices(user)
 		return 1
+	else if(href_list["preference"] == "multi")
+		if(isnewplayer(user))
+			var/mob/dead/new_player/player = user
+			player.cache_multi_ready_characters()
+		open_multi_ready()
+		return 1
 
 	else if(href_list["preference"] == "antag")
 		switch(href_list["task"])
@@ -1018,7 +1015,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						key_bindings -= old_key
 				key_bindings[full_key] += list(kb_name)
 				key_bindings[full_key] = sortList(key_bindings[full_key])
-
+				var/datum/keybinding/client/say/kb = GLOB.keybindings_by_name[kb_name]
+				if(istype(kb))
+					user.client.set_macros()
 				DIRECT_OUTPUT(user, browse(null, "window=capturekeypress"))
 				user.client.update_movement_keys()
 				save_preferences()
@@ -1179,7 +1178,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 				if("patron")
 					var/list/patrons_named = list()
-					for(var/path as anything in GLOB.patrons_by_faith[selected_patron?.associated_faith || initial(default_patron.associated_faith)])
+					for(var/path as anything in GLOB.patrons_by_faith[selected_patron.associated_faith || initial(default_patron.associated_faith)])
 						var/datum/patron/patron = GLOB.preference_patrons[path]
 						if(!patron.name)
 							continue
@@ -1188,7 +1187,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 								continue
 						var/pref_name = patron.display_name ? patron.display_name : patron.name
 						patrons_named[pref_name] = patron
-					var/datum/faith/current_faith = GLOB.faithlist[selected_patron?.associated_faith] || GLOB.faithlist[initial(default_patron.associated_faith)]
+					var/datum/faith/current_faith = GLOB.faithlist[selected_patron.associated_faith] || GLOB.faithlist[initial(default_patron.associated_faith)]
 					var/god_input = browser_input_list(user, "SELECT YOUR HERO'S PATRON GOD", uppertext("\The [current_faith.name]"), patrons_named, selected_patron)
 					if(god_input)
 						selected_patron = patrons_named[god_input]
@@ -1209,10 +1208,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						voice_color = sanitize_hexcolor(new_voice)
 
 				if("headshot")
-					if(!patreon)
-						to_chat(user, "This is a patreon exclusive feature, your headshot link will be applied but others will only be able to view it if you are a patreon supporter.")
+					if(!donator)
+						to_chat(user, "This is a donator exclusive feature, your headshot link will be applied but others will only be able to view it if you are a Patreon supporter or Twitch subscriber.")
 
-					to_chat(user, span_notice("Please use an image of the head and shoulder area to maintain immersion level. Lastly, ["<span class='bold'>do not use a real life photo or use any image that is less than serious.</span>"]"))
+					to_chat(user, span_notice("Please use an image of the head and shoulder area to maintain immersion level. Lastly, ["<span class='bold'>do not use a real life photo or ANYTHING AI generated.</span>"]"))
 					to_chat(user, span_notice("If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser."))
 					to_chat(user, span_notice("Keep in mind that the photo will be downsized to 325x325 pixels, so the more square the photo, the better it will look."))
 					var/new_headshot_link = input(user, "Input the headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Headshot", headshot_link) as text|null
@@ -1261,7 +1260,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 				if("species")
 					selected_accent = ACCENT_DEFAULT
-					var/list/selectable = get_selectable_species(patreon)
+					var/list/selectable = get_selectable_species(donator)
 					var/result = browser_input_list(user, "SELECT YOUR HERO'S PEOPLE:", "VANDERLIN FAUNA", selectable, pref_species)
 
 					if(result)
@@ -1351,8 +1350,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					popup.set_content(dat.Join())
 					popup.open(FALSE)
 				if("ooc_extra")
-					if(!patreon)
-						to_chat(user, "This is a patreon exclusive feature, your OOC Extra link will be applied but others will only be able to view it if you are a patreon supporter.")
+					if(!donator)
+						to_chat(user, "This is a donator exclusive feature, your OOC Extra link will be applied but others will only be able to view it if you are a patreon supporter or Twitch Subscriber.")
 
 					to_chat(user, span_notice("Add a link from a suitable host (catbox, etc) to an mp3, mp4, or jpg / png file to have it embed at the bottom of your OOC notes."))
 					to_chat(user, span_notice("If the link doesn't show up properly in-game, ensure that it's a direct link that opens properly in a browser."))
@@ -1418,12 +1417,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						change_accent = TRUE
 					else
 						change_accent = FALSE
-					if(!patreon && !change_accent)
-						to_chat(user, "Sorry, this option is Patreon-exclusive or unavailable to your race.")
+					if(!donator && !change_accent)
+						to_chat(user, "Sorry, this option is Donator-exclusive or unavailable to your race.")
 						selected_accent = ACCENT_DEFAULT
 						return
 					var/accent
-					if(patreon)
+					if(donator)
 						accent = browser_input_list(user, "CHOOSE YOUR HERO'S ACCENT", "VOICE OF THE WORLD", GLOB.accent_list, selected_accent)
 						if(accent)
 							selected_accent = accent
@@ -1445,6 +1444,14 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if (!isnull(desiredfps))
 						clientfps = desiredfps
 						parent.fps = desiredfps
+
+				if ("chat_scale")
+					var/desiredfps = input(user, "Choose your desired chat scale. (1 = default, 2 = doubled", "Character Preference", chat_scale)  as null|num
+					if(desiredfps > 0)
+						if (!isnull(desiredfps))
+							chat_scale = desiredfps
+						user.client?.native_say.refresh_channels()
+
 				if("ui")
 					var/pickedui = input(user, "Choose your UI style.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_styles)
 					if(pickedui)
@@ -1478,15 +1485,15 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						print_special_text(user, next_special_trait)
 						return
 					to_chat(user, span_boldwarning("You will become special for one round, this could be something negative, positive or neutral and could have a high impact on your character and your experience. You cannot back out from or reroll this, and it will not carry over to other rounds."))
-					if(!patreon)
+					if(!donator)
 						to_chat(user, span_boldwarning("THIS COSTS 1 TRIUMPH"))
 						if(user.get_triumphs() < 1)
 							to_chat(user, span_bignotice("YOU DON'T HAVE ENOUGH TRIUMPHS."))
 							return
-					var/result = alert(user, "You'll receive a unique trait for one round\n You cannot back out from or reroll this\nDo you really want to spend 1 triumph for it?", "Be Special", "Yes", "No")
+					var/result = alert(user, "You'll receive a unique trait for one round\n You cannot back out from or reroll this.\nDo you really wish to [donator ? "" : "spend 1 triumph and " ]proceed?", "Be Special", "Yes", "No")
 					if(result != "Yes")
 						return
-					if(!patreon)
+					if(!donator)
 						user.adjust_triumphs(-1)
 					if(next_special_trait)
 						return
@@ -1702,10 +1709,16 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if("save")
 					save_preferences()
 					save_character()
+					if(isnewplayer(user))
+						var/mob/dead/new_player/player = user
+						player.cache_multi_ready_characters()
 
 				if("load")
 					load_preferences()
 					load_character()
+					if(isnewplayer(user))
+						var/mob/dead/new_player/player = user
+						player.cache_multi_ready_characters()
 
 				if("changeslot")
 					selected_accent = ACCENT_DEFAULT
@@ -1724,11 +1737,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if(choice)
 						choice = choices[choice]
 						if(!load_character(choice))
-							randomise_appearance_prefs(include_patreon = patreon)
+							randomise_appearance_prefs(include_donator = donator)
 							save_character()
 
 				if("randomiseappearanceprefs")
-					randomise_appearance_prefs(include_patreon = patreon)
+					randomise_appearance_prefs(include_donator = donator)
 					customizer_entries = list()
 					validate_customizer_entries()
 					reset_all_customizer_accessory_colors()
@@ -1746,7 +1759,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 /// Sanitization checks to be performed before using these preferences.
 /datum/preferences/proc/sanitize_chosen_prefs()
-	if(!(pref_species.name in get_selectable_species(patreon)))
+	if(!(pref_species.name in get_selectable_species(donator)))
 		pref_species = new /datum/species/human/northern
 		save_character()
 
@@ -1850,9 +1863,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	else
 		change_accent = FALSE
 
-	if(patreon)
+	if(donator)
 		character.accent = selected_accent
-	if(change_accent && !patreon)
+	if(change_accent && !donator)
 		character.accent = selected_accent
 		change_accent = FALSE
 
@@ -1998,8 +2011,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/set_loadout(mob/user, loadout_number, datum/loadout_item/loadout)
 	if(!loadout)
 		return
-	if(!patreon)
-		to_chat(user, span_danger("This is a patreon feature!"))
+	if(!donator)
+		to_chat(user, span_danger("This is a donator feature!"))
 		return FALSE
 
 	if(loadout == "None")
@@ -2012,3 +2025,75 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		to_chat(user, span_notice("[loadout.name]"))
 		if(loadout.description)
 			to_chat(user, "[loadout.description]")
+
+/datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
+	var/player_species = user.client.prefs.pref_species.id
+	var/fails_allowed = length(job.allowed_races) && !(player_species in job.allowed_races)
+	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+	if(fails_allowed || fails_blacklist)
+		if(!user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
+			var/list/allowed_races = job.allowed_races.Copy()
+			for(var/blacklist in job.blacklisted_species)
+				allowed_races -= blacklist
+			var/races_text = jointext(allowed_races, ", ")
+			return make_lock_row(
+				used_name,
+				"\[SPECIES LOCK\]",
+				"<b>Species Needed:</b><br>[races_text]"
+			)
+	if(length(job.allowed_ages) && !(user.client.prefs.age in job.allowed_ages))
+		var/ages_text = jointext(job.allowed_ages, ", ")
+		return make_lock_row(
+			used_name,
+			"\[AGE LOCK\]",
+			"<b>Ages Needed:</b><br>[ages_text]"
+		)
+	if(length(job.allowed_sexes) && !(user.client.prefs.gender in job.allowed_sexes))
+		var/sexes_text = jointext(job.allowed_sexes, ", ")
+		return make_lock_row(
+			used_name,
+			"\[SEX LOCK\]",
+			"<b>Sexes Needed:</b><br>[sexes_text]"
+		)
+	if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron.type in job.allowed_patrons))
+		var/list/patron_list = list()
+		for(var/mult_patron in job.allowed_patrons)
+			var/datum/patron/P = new mult_patron
+			patron_list += (P.display_name ? P.display_name : P.name)
+			qdel(P)
+		var/patron_text = jointext(patron_list, ", ")
+
+		return make_lock_row(
+			used_name,
+			"\[PATRON LOCK\]",
+			"<b>Patron Needed:</b><br>[patron_text]"
+		)
+	if(job.required_playtime_remaining(user.client))
+		var/list/lines = list()
+		for(var/t in job.exp_requirements)
+			var/needed = job.exp_requirements[t]
+			var/have = user.client.calc_exp_type(t)
+			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
+		var/text = jointext(lines, "<br>")
+
+		return make_lock_row(
+			used_name,
+			"\[TIME LOCK\]",
+			"<b>Requirements:</b><br>[text]"
+		)
+	// No lock
+	return FALSE
+
+/datum/preferences/proc/make_lock_row(used_name, lock_text, body_text)
+	return {"
+		[used_name]
+	</td>
+	<td>
+		<div class='tutorialhover'>
+			<font color=#a36c63>[lock_text]</font>
+			<span class='tutorial'>[body_text]</span>
+		</div>
+	</td>
+	</tr>
+	"}
+

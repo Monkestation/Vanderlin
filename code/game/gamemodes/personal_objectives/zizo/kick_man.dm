@@ -2,7 +2,7 @@
 	name = "Kick Groin"
 	category = "Zizo's Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Zizo grows stronger", "Your nutcracks will be stronger")
+	rewards = list("2 Triumphs", "Zizo grows stronger", "Your nutcracks will be stronger", "Zizo blesses you (+1 Strength)")
 
 /datum/objective/personal/kick_groin/on_creation()
 	. = ..()
@@ -25,14 +25,16 @@
 	else
 		complete_objective()
 
-/datum/objective/personal/kick_groin/proc/complete_objective()
+/datum/objective/personal/kick_groin/complete_objective()
+	. = ..()
 	to_chat(owner.current, span_greentext("You've established your dominance over this man and completed Zizo's objective!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(ZIZO, 20)
-	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, TRAIT_GENERIC)
-	escalate_objective()
 	UnregisterSignal(owner.current, COMSIG_MOB_KICK)
+
+/datum/objective/personal/kick_groin/reward_owner()
+	. = ..()
+	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, TRAIT_GENERIC)
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_STR, 1)
 
 /datum/objective/personal/kick_groin/update_explanation_text()
 	explanation_text = "Kick a man in the balls to show your dominance and earn Zizo's approval!"

@@ -1,10 +1,8 @@
 	/*==============*
 	*				*
-	*	  Dwarf		*
+	*	  Kobold	*
 	*				*
 	*===============*/
-
-//	( + Poison Resistance )
 
 /mob/living/carbon/human/species/kobold
 	race = /datum/species/kobold
@@ -37,13 +35,15 @@
 
 	changesource_flags = WABBAJACK
 
+	native_language = "Gutter"
+
 	limbs_icon_m = 'icons/roguetown/mob/bodies/f/kobold.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/kobold.dmi'
 
 	enflamed_icon = "widefire"
 
-	soundpack_m = /datum/voicepack/male/dwarf
-	soundpack_f = /datum/voicepack/female/dwarf
+	soundpack_m = /datum/voicepack/male/kobold
+	soundpack_f = /datum/voicepack/male/kobold
 
 	exotic_bloodtype = /datum/blood_type/human/kobold
 
@@ -94,6 +94,7 @@
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 	)
+	COOLDOWN_DECLARE(kobold_cooldown)
 
 /datum/species/kobold/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
@@ -111,6 +112,22 @@
 
 /datum/species/kobold/check_roundstart_eligible()
 	return TRUE
+
+/datum/species/kobold/after_creation(mob/living/carbon/C)
+	..()
+	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
+
+/datum/species/kobold/spec_life(mob/living/carbon/human/H)
+	. = ..()
+	if(prob(1) && !(H.rogue_sneaking))
+		if(!COOLDOWN_FINISHED(src, kobold_cooldown))
+			return
+		var/emote = "sniff"
+		if(prob(35))
+			emote = "cough"
+		H.emote(emote, forced = TRUE)
+
+		COOLDOWN_START(src, kobold_cooldown, 5 MINUTES)
 
 /datum/species/kobold/get_skin_list()
 	return sortList(list(

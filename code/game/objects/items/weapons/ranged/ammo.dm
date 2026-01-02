@@ -61,7 +61,9 @@
 /obj/projectile/bullet/reusable/bolt/on_hit(atom/target, blocked = FALSE)
 	if(can_inject && iscarbon(target))
 		var/mob/living/carbon/M = target
-		if(blocked != 100) // not completely blocked
+		var/armor = M.run_armor_check(def_zone, flag, "", "",armor_penetration, damage)
+		var/armor_real_check = max(0, armor - damage)
+		if(armor_real_check == 0)
 			if(M.can_inject(null, FALSE, def_zone, piercing)) // Pass the hit zone to see if it can inject by whether it hit the head or the body.
 				..()
 				reagents.reaction(M, INJECT)
@@ -131,7 +133,7 @@
 //................ Vial Bolt ............... //
 /obj/item/ammo_casing/caseless/bolt/vial
 	name = "vial bolt"
-	desc = "An bolt with its tip replaced by a vial of... something, shatters on impact."
+	desc = "A bolt with its tip replaced by a vial of... something, shatters on impact."
 	icon_state = "bolt_vial"
 	abstract_type = /obj/item/ammo_casing/caseless/bolt/vial
 	max_integrity = 10
@@ -157,7 +159,7 @@
 
 /obj/projectile/bullet/reusable/bolt/vial
 	name = "vial bolt"
-	desc = "An bolt with its tip replaced by a vial of... something, shatters on impact."
+	desc = "A bolt with its tip replaced by a vial of... something, shatters on impact."
 	icon_state = "boltvial_proj"
 	abstract_type = /obj/projectile/bullet/reusable/bolt/vial
 	ammo_type = null
@@ -186,13 +188,13 @@
 	return ..()
 
 /obj/projectile/bullet/reusable/bolt/vial/water
-	desc = "An bolt with its tip replaced by a vial of water, shatters on impact."
+	desc = "A bolt with its tip replaced by a vial of water, shatters on impact."
 	reagent = /datum/reagent/water
 
 //................ Water Bolt ............... //
 /obj/item/ammo_casing/caseless/bolt/water
 	name = "water bolt"
-	desc = "An bolt with its tip replaced by a water crystal, creates a splash on impact."
+	desc = "A bolt with its tip replaced by a water crystal, creates a splash on impact."
 	icon_state = "bolt_water"
 	projectile_type = /obj/projectile/bullet/reusable/bolt/water
 	max_integrity = 10
@@ -204,7 +206,7 @@
 
 /obj/projectile/bullet/reusable/bolt/water
 	name = "water bolt"
-	desc = "An bolt with its tip replaced by a water crystal, creates a splash on impact."
+	desc = "A bolt with its tip replaced by a water crystal, creates a splash on impact."
 	icon_state = "boltwater_proj"
 	ammo_type = null
 	can_inject = FALSE
@@ -223,6 +225,38 @@
 		target_loc = get_turf(target)
 	chem_splash(target_loc, 3, list(reagents))
 	return ..()
+
+
+/obj/item/ammo_casing/caseless/bolt/holy
+	name = "sunderbolt"
+	desc = "A silver-tipped bolt, containing a small vial of holy water. Though it inflicts lesser wounds on living flesh, it exceeds when employed against the unholy; a snap and a crack, followed by a fiery surprise. </br>'One baptism for the remission of sins.'"
+	projectile_type = /obj/projectile/bullet/reusable/bolt/holy
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	caliber = "regbolt"
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "bolt_holywater"
+	dropshrink = 0.6
+	max_integrity = 10
+	force = 10
+/obj/item/ammo_casing/caseless/bolt/holy/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/water/blessed, 5)
+
+/obj/projectile/bullet/reusable/bolt/holy
+	name = "sunderbolt"
+	damage = 35 //Halved damage, but same penetration.
+	damage_type = BRUTE
+	armor_penetration = 50
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "bolthwater_proj"
+	ammo_type = /obj/item/ammo_casing/caseless/bolt/holy
+	range = 15
+	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
+	embedchance = 100
+	woundclass = BCLASS_PIERCE
+	flag = "piercing"
+	speed = 0.5
+
 
 /*-------\
 | Arrows |
@@ -272,7 +306,9 @@
 /obj/projectile/bullet/reusable/arrow/on_hit(atom/target, blocked = FALSE)
 	if(can_inject && iscarbon(target))
 		var/mob/living/carbon/M = target
-		if(blocked != 100) // not completely blocked
+		var/armor = M.run_armor_check(def_zone, flag, "", "",armor_penetration, damage)
+		var/armor_real_check = max(0, armor - damage)
+		if(armor_real_check == 0)
 			if(M.can_inject(null, FALSE, def_zone, piercing)) // Pass the hit zone to see if it can inject by whether it hit the head or the body.
 				..()
 				reagents.reaction(M, INJECT)
@@ -478,6 +514,14 @@
 	reduce_crit_chance = 5 //Reduces crit chance
 	dismemberment = 0 //Can't dismember
 
+/obj/projectile/bullet/reusable/bullet/on_hit(atom/target)
+	var/atom/throw_target = get_edge_target_turf(firer, get_dir(firer, target))
+	if(ismob(target))
+		var/mob/living/carbon/target_mob = target
+		target_mob.safe_throw_at(throw_target, 1, 4)
+		target_mob.Knockdown(SHOVE_KNOCKDOWN_SOLID)
+	..()
+
 /obj/projectile/bullet/fragment
 	name = "smaller lead ball"
 	desc = "Haha. You're not able to see this!"
@@ -574,7 +618,7 @@
 
 /obj/item/ammo_casing/caseless/dart
 	name = "dart"
-	desc = "A thorn fasioned into a primitive dart."
+	desc = "A thorn fashioned into a primitive dart."
 	projectile_type = /obj/projectile/bullet/reusable/dart
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "dart"
@@ -610,7 +654,9 @@
 /obj/projectile/bullet/reusable/dart/on_hit(atom/target, blocked = FALSE)
 	if(iscarbon(target))
 		var/mob/living/carbon/M = target
-		if(blocked != 100) // not completely blocked
+		var/armor = M.run_armor_check(def_zone, flag, "", "",armor_penetration, damage)
+		var/armor_real_check = max(0, armor - damage)
+		if(armor_real_check == 0)
 			if(M.can_inject(null, FALSE, def_zone, piercing)) // Pass the hit zone to see if it can inject by whether it hit the head or the body.
 				..()
 				reagents.reaction(M, INJECT)

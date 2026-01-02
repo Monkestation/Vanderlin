@@ -226,7 +226,7 @@
 					span_danger("[src] tears [W] off of [target]'s face!"), \
 					"<span class='userdanger'>[src] tears [W] off of your face!</span>")
 		target.equip_to_slot_if_possible(src, ITEM_SLOT_MASK, 0, 1, 1)
-		var/datum/cb = CALLBACK(src,/obj/item/clothing/face/goblin_mask/proc/eat_head)
+		var/datum/cb = CALLBACK(src, TYPE_PROC_REF(/obj/item/clothing/face/goblin_mask, eat_head))
 		for(var/i in 1 to 10)
 			addtimer(cb, (i - 1) * 1.5 SECONDS)
 		spawn(16 SECONDS)
@@ -325,9 +325,7 @@
 	if(iscarbon(AM) && owner)
 		if(AM != owner)
 			var/mob/living/carbon/L = AM
-			for(var/obj/item/I in L.get_equipped_items(include_pockets = TRUE))
-				if(I)
-					L.dropItemToGround(I, TRUE)
+			L.drop_all_held_items()
 			qdel(src)
 
 //CHANJELIN WARD

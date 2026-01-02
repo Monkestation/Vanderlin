@@ -8,6 +8,9 @@
 		/datum/attunement/arcyne = 0.4,
 	)
 
+	invocation = "H'ld D'wn!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 2 SECONDS
 	charge_drain = 2
 	cooldown_time = 25 SECONDS

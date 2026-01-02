@@ -13,6 +13,8 @@
 	murder, you've elected to taint it in self-defense. Find an employer, and make a use for yourself. Cut the middleman, \
 	avoid working with any guilds."
 	outfit = /datum/outfit/bodyguard
+	blacklisted_species = list(SPEC_ID_HALFLING)
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 
 	jobstats = list(
 		STATKEY_STR = 1,
@@ -35,7 +37,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
 /datum/outfit/bodyguard
-	name = "Bodyguard"
+	name = "Bodyguard (Migrant Wave)"
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	neck = /obj/item/clothing/neck/coif
 	gloves = /obj/item/clothing/gloves/angle

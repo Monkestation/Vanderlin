@@ -21,7 +21,7 @@
 	return delve_level + mob_tier
 
 /datum/mob_affix_system/proc/enhance_mob(mob/living/simple_animal/hostile/retaliate/target, delve_level, bonus_affixes = 0)
-	if(!target)
+	if(!target || !istype(target))
 		return null
 
 	// Apply base stat scaling

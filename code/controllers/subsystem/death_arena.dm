@@ -202,7 +202,7 @@ SUBSYSTEM_DEF(death_arena)
 
 /obj/structure/underworld/ravox
 	name = "Ravox"
-	desc = "Ravox, God of Warfare, Justice, and Bravery. He finds solice in his friendship with Necra and his retreat to the Underworld. Upon your gaze, he gives you a respectful nod. Damn, he's cool.."
+	desc = "Ravox, God of Warfare, Justice, and Bravery. He finds solace in his friendship with Necra and his retreat to the Underworld. Upon your gaze, he gives you a respectful nod. Damn, he's cool.."
 	icon = 'icons/roguetown/underworld/ravox.dmi'
 	icon_state = "ravox"
 	layer = ABOVE_MOB_LAYER

@@ -45,9 +45,7 @@
 	else
 		//can overfill you with blood, but at a slower rate
 		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM)
-	var/list/wCount = M.get_wounds()
-	if(wCount.len > 0)
-		M.heal_wounds(6) //at a motabalism of .5 U a tick this translates to 240WHP healing with 20 U Most wounds are unsewn 15-100.
+	M.heal_wounds(6) //at a motabalism of .5 U a tick this translates to 240WHP healing with 20 U Most wounds are unsewn 15-100.
 	if(volume > 0.99)
 		M.adjustBruteLoss(-7*REM, 0)
 		M.adjustFireLoss(-7*REM, 0)

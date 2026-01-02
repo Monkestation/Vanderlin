@@ -103,7 +103,8 @@
 		orbiter.glide_size = movable_parent.glide_size
 
 	orbiter.abstract_move(get_turf(parent))
-	to_chat(orbiter, span_notice("Now orbiting [parent]."))
+	if(!istype(orbiter, /mob/dead/observer/screye))
+		to_chat(orbiter, span_notice("Now orbiting [parent]."))
 
 /datum/component/orbiter/proc/end_orbit(atom/movable/orbiter, refreshing=FALSE)
 	if(!orbiter_list[orbiter])

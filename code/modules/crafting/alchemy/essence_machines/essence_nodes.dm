@@ -163,7 +163,7 @@
 	if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
 		. += span_notice("This node generates [temp_essence.name].")
 	else
-		. += span_notice("This node generate essence smelling of [temp_essence.smells_like].")
+		. += span_notice("This node generates essence smelling of [temp_essence.smells_like].")
 
 	. += span_notice("This node generates [temp_essence.name].")
 	. += span_notice("Essence: [current_essence]/[max_essence] units")
@@ -195,7 +195,7 @@
 
 /obj/item/essence_node_portable
 	name = "essence node"
-	desc = "A large amount of essence still wrapped within it's enviormental shell. It still beats with alchemical energy."
+	desc = "A large amount of essence still wrapped within its environmental shell. It still beats with alchemical energy."
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "essence"
 	w_class = WEIGHT_CLASS_BULKY

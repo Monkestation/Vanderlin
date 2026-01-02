@@ -130,7 +130,7 @@
 	time = 15 SECONDS
 	requires_bodypart = TRUE
 	requires_bodypart_type = BODYPART_ROBOTIC
-	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_EXPERT
 	surgery_flags = NONE
 	preop_sound = 'sound/foley/sewflesh.ogg'

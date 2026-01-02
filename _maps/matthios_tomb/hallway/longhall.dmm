@@ -1,20 +1,20 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "b" = (
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "e" = (
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "f" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "k" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip{
@@ -22,26 +22,26 @@
 	pixel_y = -3
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "m" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "n" = (
 /obj/item/statue/silver,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "o" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "p" = (
 /obj/item/reagent_containers/food/snacks/meat/steak{
 	pixel_x = 8;
 	pixel_y = 14
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "r" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 4
@@ -50,41 +50,41 @@
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "s" = (
 /obj/structure/handcart,
 /obj/item/weapon/knife/cleaver,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "u" = (
 /obj/item/reagent_containers/glass/carafe/silver,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "x" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "y" = (
 /obj/item/clothing/ring/silver,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "z" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "A" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "C" = (
 /obj/item/weapon/knife/cleaver,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "D" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "F" = (
 /obj/item/reagent_containers/food/snacks/meat/steak{
 	pixel_x = -12;
@@ -92,45 +92,45 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "I" = (
 /obj/effect/decal/cleanable/blood{
 	pixel_x = -9
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "J" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
 	},
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "K" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "L" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "M" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "U" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "V" = (
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "W" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "X" = (
 /obj/item/reagent_containers/food/snacks/meat/steak{
 	pixel_x = 8;
@@ -138,11 +138,11 @@
 	},
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Z" = (
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 a

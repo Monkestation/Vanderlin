@@ -2,7 +2,7 @@
 "a" = (
 /obj/structure/door/fancy,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "d" = (
 /obj/structure/fluff/railing/tall,
 /obj/structure/fluff/railing/tall{
@@ -18,10 +18,10 @@
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "p" = (
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "x" = (
 /obj/structure/fluff/railing/tall,
 /turf/open/floor/grass,
@@ -32,14 +32,14 @@
 "E" = (
 /obj/structure/sign/property_for_sale,
 /turf/closed/wall/mineral/underbrick,
-/area/rogue/indoors)
+/area/indoors)
 "N" = (
 /obj/structure/window/stained,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "P" = (
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "Q" = (
 /turf/open/floor/grass,
 /area/template_noop)
@@ -51,10 +51,10 @@
 /area/template_noop)
 "U" = (
 /turf/open/transparent/openspace,
-/area/rogue/indoors)
+/area/indoors)
 "W" = (
 /turf/closed/wall/mineral/underbrick,
-/area/rogue/indoors)
+/area/indoors)
 
 (1,1,1) = {"
 W

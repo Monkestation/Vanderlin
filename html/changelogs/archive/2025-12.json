@@ -1,0 +1,499 @@
+{
+    "2025-12-02": {
+        "SarmentiCampbell": [
+            {
+                "rscadd": "Added a new special trait related to baotha"
+            },
+            {
+                "qol": "Admins now know if someone got gibbed due to being given a admin-only patron"
+            },
+            {
+                "code_imp": "un-hardcode maniac's theme song and turn it into a component"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Gives Noccites, Abyssor, the town elder and the veteran new cmode themes."
+            }
+        ]
+    },
+    "2025-12-03": {
+        "wgtjunior743": [
+            {
+                "bugfix": "Inquisition shop not working"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "balance": "Beggars now roll Alchemy skill."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixed children rendering adult sleeves, resulting in hunchbacks. Fixed male dwarves having belts at their feet."
+            },
+            {
+                "rscdel": "Removed Steward from Halfling Jobs"
+            },
+            {
+                "rscadd": "New Servant/Butler Outifts"
+            },
+            {
+                "rscadd": "Servant Bell"
+            },
+            {
+                "rscadd": "Galadros Kobold Patron"
+            }
+        ],
+        "lmenvs": [
+            {
+                "bugfix": "Sacrestants can no longer roll antag"
+            },
+            {
+                "bugfix": "Players who roll antag can no longer pick the Assassin subclass when signing up as Pilgrim."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Unknowns are idenified by voice type and body type instead of pronouns."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "bugfix": "vampires don't instantly kill someone if they suck when victim runs out of vitae."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Flameberges and Claymores now craftable at the smith"
+            },
+            {
+                "rscadd": "New Coppergate helmet with a decorative varient. Can be forged too"
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "spellcheck": "Changed \\\"ass\\\" to \\\"ass \\\" to override \\\"donkeyume\\\""
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "rscadd": "Added new spell and changed a inquisitor buy for it."
+            }
+        ]
+    },
+    "2025-12-04": {
+        "snowyseshi": [
+            {
+                "bugfix": "possible fire nuke fix"
+            }
+        ]
+    },
+    "2025-12-05": {
+        "PineappleMan929": [
+            {
+                "rscdel": "Kills legendary pilgrims"
+            }
+        ]
+    },
+    "2025-12-06": {
+        "Bloo4420": [
+            {
+                "rscadd": "Proper outdoor cell area subtype"
+            }
+        ]
+    },
+    "2025-12-07": {
+        "NotDeirun": [
+            {
+                "bugfix": "Fixed (lesser) miracles healing/doing more damage than it is supposed to."
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "image": "Added wyrmish and halfspeak icons to language.dmi"
+            },
+            {
+                "code_imp": "Created kobold_replacement.json"
+            },
+            {
+                "bugfix": "Adds Halfspeak to tongue.dm"
+            }
+        ]
+    },
+    "2025-12-08": {
+        "snowyseshi": [
+            {
+                "balance": "Artery bleedrate increased, CON affects bloodloss less."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Ascending as vamp lord not giving 2 of each stats to your direct subordinates"
+            }
+        ]
+    },
+    "2025-12-10": {
+        "TheMrGlasses": [
+            {
+                "bugfix": "Gourmand special now lets you eat rotten things without getting sick."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Porter now got lockpicking average as intended"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "bugfix": "fixed maniac music overlapping"
+            },
+            {
+                "rscdel": "deleted unused maniac vars"
+            }
+        ],
+        "Somniworld": [
+            {
+                "balance": "the Find Corpse Necran miracle now costs 15 devotion, down from 50, it also has a CD of 30 seconds, down from 60."
+            }
+        ],
+        "TerraGS": [
+            {
+                "bugfix": "Message bottles work again and initialize with the proper icon."
+            }
+        ]
+    },
+    "2025-12-11": {
+        "KevinfromHP": [
+            {
+                "bugfix": "Child Cloaks"
+            },
+            {
+                "qol": "Language prefixes will now work in uppercase."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Ordinator Broadsword + Shield weapon archetype spawns with their bag and keys"
+            }
+        ],
+        "Syndro101": [
+            {
+                "map": "heavily modified Vanderlin's Keep dungeon, minor ground floor changes. Minor Changes to the coastal manor."
+            },
+            {
+                "bugfix": "fixes the meat in the coastal manor kitchen into the proper subtype, meat/steak"
+            }
+        ],
+        "Gigigger": [
+            {
+                "bugfix": "fixed death and dark affinities. now both of them giving right attunements"
+            }
+        ],
+        "TerraGS": [
+            {
+                "bugfix": "Butchering now only drops the head when finished rather than each time you stop."
+            }
+        ]
+    },
+    "2025-12-12": {
+        "Somniworld": [
+            {
+                "rscadd": "Shophand, Wizard/Clinicapprentices, Squires and Archivists now have combat mode music"
+            },
+            {
+                "rscadd": "Artificiers and Iron maiden now use the combat mode theme of Heartfelt"
+            },
+            {
+                "refactor": "refactored the court mage's job file to be more inline with our coding guidelines."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Death knight new armor and stat tweaks"
+            },
+            {
+                "image": "ancient sprites moved into other DMI files"
+            }
+        ],
+        "TerraGS": [
+            {
+                "bugfix": "GOLDFACE and PURITY are now more consistent with price checks"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Ported hair from Monke main."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Changes to how the Hand's List works, Fixes for Hand not recognizing their agents."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Dirty water can extinguish mobs as it should"
+            },
+            {
+                "rscadd": "Throwing water from a bucket or other containers on a piece of clothing can make it wet"
+            }
+        ],
+        "lmenvs": [
+            {
+                "qol": "Subscribers to the server Host, TheDukeofOOK, on Twitch now receive donator perks!"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "rscadd": "Canes!"
+            }
+        ]
+    },
+    "2025-12-13": {
+        "DrSirKnight": [
+            {
+                "bugfix": "Lore primer tabs show properly again"
+            }
+        ],
+        "Draggeru": [
+            {
+                "map": "Various Rosewood map fixes"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Custom Waves with one or more job only saving the first job of the outfit for all of them"
+            },
+            {
+                "bugfix": "Custom outfits being repeating and appearing more than once when selecting an outfit for a job"
+            },
+            {
+                "bugfix": "Jobs that were imported not transfering the language properly to chars."
+            }
+        ]
+    },
+    "2025-12-14": {
+        "lmenvs": [
+            {
+                "bugfix": "fixed incorrect column query for twitch_data"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed a bug where assassins would delete the body of a target when it no longer had a soul in it."
+            }
+        ]
+    },
+    "2025-12-16": {
+        "CheffieGithub": [
+            {
+                "rscadd": "Added herb seeds to vanderlin farm aparies."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixed bug where Blood Steal would not take Vitae when it was supposed to."
+            }
+        ]
+    },
+    "2025-12-17": {
+        "TerraGS": [
+            {
+                "bugfix": "Attempting to repair certain structures no longer runtimes."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "server": "Adds -UseBasicParsing to Node Verification"
+            },
+            {
+                "bugfix": "taming through petting tweaks"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "bugfix": "fixed lore inconsistencies here and there and grammar fixes"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "a getting up bug"
+            }
+        ]
+    },
+    "2025-12-19": {
+        "KevinfromHP": [
+            {
+                "bugfix": "Player book library tweaks"
+            }
+        ]
+    },
+    "2025-12-20": {
+        "Rockslp": [
+            {
+                "balance": "Removed the bonus damage from Bearded Axe and lowers the defense value to make sense, leaving the greater weapon length due to the small log in the crafting recipe"
+            },
+            {
+                "spellcheck": "Uppercase for Bearded Axe in the smithing menu."
+            },
+            {
+                "code_imp": "Moved the Bearded Axe to axes.dm"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Antags can no longer roll roundstart or midround antag"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Throwing/Shooting through bars."
+            }
+        ]
+    },
+    "2025-12-24": {
+        "snowyseshi": [
+            {
+                "rscadd": "Acolytes can't be vampires anymore"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Death knights having spells when it was supposed to be gone"
+            },
+            {
+                "bugfix": "Death knights not having the normal skeleton traits"
+            }
+        ]
+    },
+    "2025-12-25": {
+        "snowyseshi": [
+            {
+                "rscadd": "Added new Zizo rituals"
+            },
+            {
+                "rscadd": "Added 2 new traits"
+            },
+            {
+                "rscadd": "Skeletons are of the cabal"
+            },
+            {
+                "balance": "cultists recieve 2 polearm levels, up to skilled."
+            },
+            {
+                "balance": "cultists don't have a cap anymore"
+            },
+            {
+                "balance": "garrison and nobles can become cultists now"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new mason role for the town. Essentially the pilgrim mason, except a towner."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Rework Gallowglass, as well as new helmet."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixes Maneaters being able to eat limbs even through armor"
+            },
+            {
+                "code_imp": "Code Maintenance on the Maneater proc which was gross"
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "code_imp": "Added new words to spanish_replacement.json"
+            }
+        ]
+    },
+    "2025-12-26": {
+        "TheMrGlasses": [
+            {
+                "bugfix": "Matthios Iconoclast now correctly spawns with their flail."
+            }
+        ]
+    },
+    "2025-12-27": {
+        "Draggeru": [
+            {
+                "map": "Removes the bars from the keep balcony and the wizard college"
+            }
+        ]
+    },
+    "2025-12-28": {
+        "snowyseshi": [
+            {
+                "bugfix": "fixed bloodsucker bum getting more skills than he should"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "admin": "More admin ghost choices"
+            }
+        ]
+    },
+    "2025-12-31": {
+        "lmenvs": [
+            {
+                "code_imp": "adjust_triumphs allows for any ckey to be passed"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "A few be special like the skeleton one not working"
+            }
+        ],
+        "JILMbIX": [
+            {
+                "rscadd": "Added anvil craft for knuckles, and leatherworking craft for bullets pouch"
+            },
+            {
+                "bugfix": "leather belt and leather trousers are craftable again"
+            }
+        ],
+        "Mercadier": [
+            {
+                "qol": "Nooses no longer require a hammer to build."
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "balance": "Changed Glass bottles to hold 75 units, shot glasses to hold 5, and teacups to hold 25."
+            }
+        ],
+        "Gigigger": [
+            {
+                "balance": "reduced overpriced sellprices of opened clam, falchion and dwarven warhammer"
+            },
+            {
+                "bugfix": "now raw rosellusk can be obtained by opening clam, as intended"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "Added new bronze items."
+            }
+        ],
+        "aberrantQuesrist": [
+            {
+                "bugfix": "River tiles now show after having been broken for far too long."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "ported shivering animation from TG"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "bugfix": "Retouched the Vagabond hairstyle"
+            }
+        ]
+    }
+}

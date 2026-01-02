@@ -8,9 +8,9 @@
 	. = ..()
 	SSmapping.add_world_trait(/datum/world_trait/orphanage_renovated, 0)
 
-	to_chat(world, "<br>")
-	to_chat(world, span_reallybig("The Orphanage has been renovated! Eora smiles upon you all!"))
-	to_chat(world, "<br>")
+	bordered_message(world, list(
+		span_reallybig("The Orphanage has been renovated! Eora smiles upon you all!"),
+	))
 
 	for(var/client/C in GLOB.clients)
 		if(!C?.mob)

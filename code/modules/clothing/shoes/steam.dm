@@ -1,6 +1,6 @@
 /obj/item/clothing/shoes/boots/armor/steam
 	name = "steamknight boots"
-	desc = "Part of the the steamknight armor. Requires knowledge in engineering to operate."
+	desc = "Part of the steamknight armor. Requires knowledge in engineering to operate."
 	icon = 'icons/roguetown/clothing/steamknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/steamknight_onmob.dmi'
 	icon_state = "steamknight_boots"

@@ -205,7 +205,6 @@
 		var/atom/target = null
 		var/list/ranges = power_to_ranges(power)
 
-		in_turf.explosion_level = max(in_turf.explosion_level, explosion_severity)
 		INVOKE_ASYNC(in_turf, TYPE_PROC_REF(/atom, ex_act), explosion_severity, target, in_turf, ranges["devastation"], ranges["heavy"], ranges["light"], ranges["flame"])
 
 		for(var/atom/A in in_turf)

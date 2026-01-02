@@ -6,7 +6,14 @@
 	max_occurrences = 2
 	min_players = 0
 	req_omen = TRUE
+	earliest_start = 35 MINUTES
 	todreq = list("night")
+
+
+	tags = list(
+		TAG_RAID,
+		TAG_BATTLE,
+	)
 
 /datum/round_event/skellyinvade
 	announceWhen	= 50

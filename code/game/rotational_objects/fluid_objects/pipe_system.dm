@@ -56,7 +56,7 @@
 		for(var/obj/structure/water_pipe/pipe in cardinal_turf)
 			if(!istype(pipe))
 				continue
-			pipe.unset_connection(get_dir_multiz(pipe, old_turf))
+			pipe.unset_connection(REVERSE_DIR(direction))
 			pipe.update_appearance(UPDATE_OVERLAYS)
 			directional_pipes |= pipe
 

@@ -10,12 +10,17 @@
 		/datum/thaumaturgical_essence/chaos = 15
 	)
 
-	var/list/last_used = list()
+	var/last_used
 
-/datum/enchantment/lightning/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/enchantment/lightning/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_AFTERATTACK
+	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+
+/datum/enchantment/lightning/proc/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
 		return
-	if(world.time < (src.last_used[source] + (1 MINUTES + 40 SECONDS))) //thanks borbop
+	if(world.time < (last_used + 100 SECONDS))
 		return
 
 	if(isliving(target))
@@ -28,4 +33,4 @@
 			if(prob(30))
 				nearby.electrocute_act(5, source, 1)
 				new /obj/effect/temp_visual/lightning(get_turf(target), get_turf(nearby))
-	last_used[source] = world.time
+	last_used = world.time

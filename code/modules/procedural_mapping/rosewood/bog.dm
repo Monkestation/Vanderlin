@@ -33,7 +33,7 @@
 							/obj/structure/innocent_bush = 1,
 							)
 	spawnableTurfs = list(/turf/open/water/swamp = 5)
-	allowed_areas = list(/area/rogue/outdoors/bog)
+	allowed_areas = list(/area/outdoors/bog)
 
 /datum/mapGeneratorModule/marshwater
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -41,4 +41,4 @@
 						/obj/structure/flora/grass/water/reeds = 80,
 						/obj/structure/kneestingers = 60)
 	allowed_turfs = list(/turf/open/water/swamp, /turf/open/water/swamp/deep)
-	allowed_areas = list(/area/rogue/outdoors/bog)
+	allowed_areas = list(/area/outdoors/bog)

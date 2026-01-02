@@ -65,7 +65,7 @@
 	move_to_spawnpoint()
 	remove_job()
 	lich.delete_equipment()
-	owner.current?.remove_stat_modifier("innate_age")
+	owner.current?.remove_stat_modifier(STATMOD_AGE)
 	skele_look()
 	equip_lich()
 

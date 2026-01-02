@@ -55,10 +55,12 @@
 	if(!prob(cast_on.dendor_taming_chance))
 		to_chat(owner, span_warning("\The [cast_on] resists your soothing!"))
 		return
+
 	owner.visible_message(
 		span_greentext("[owner] soothes \the [cast_on] with Dendor's whisper."),
 		span_notice("I tame the beast with Dendor's whisper."),
 	)
+
 	cast_on.LoadComponent(/datum/component/obeys_commands, pet_commands)
 	cast_on.ai_controller.can_idle = FALSE
 	cast_on.ai_controller.add_to_top(/datum/ai_planning_subtree/pet_planning)
@@ -67,3 +69,12 @@
 	cast_on.befriend(owner)
 	cast_on.pet_passive = TRUE
 	cast_on.tamed(owner)
+
+	if(HAS_TRAIT(owner, TRAIT_DENDOR_GROWING))
+		ADD_TRAIT(cast_on, TRAIT_ENTANGLER_IMMUNE, MAGIC_TRAIT)
+	if(HAS_TRAIT(owner, TRAIT_DENDOR_STINGING))
+		ADD_TRAIT(cast_on, TRAIT_KNEESTINGER_IMMUNITY, MAGIC_TRAIT)
+	if(HAS_TRAIT(owner, TRAIT_DENDOR_DEVOURING))
+		ADD_TRAIT(cast_on, TRAIT_CRITICAL_RESISTANCE, MAGIC_TRAIT)
+	if(HAS_TRAIT(owner, TRAIT_DENDOR_LORDING))
+		ADD_TRAIT(cast_on, TRAIT_CRITICAL_RESISTANCE, MAGIC_TRAIT)

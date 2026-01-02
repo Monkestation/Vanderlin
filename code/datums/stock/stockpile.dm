@@ -1,4 +1,4 @@
-// Guidelines for Stockpiles. Items should always cost ~50% more to withdraw than was recieved for depositing.
+// Guidelines for Stockpiles. Items should always cost ~50% more to withdraw than was received for depositing.
 // Export Prices should fall between the payout and the withdraw, unless the item is incredibly cheap.
 
 /datum/stock/stockpile
@@ -123,6 +123,17 @@
 	payout_price = 2
 	withdraw_price = 6
 	export_price = 5
+	importexport_amt = 20
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/borowiki
+	name = "Borowiki"
+	desc = "A hearty mushroom fit for stews and pies."
+	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 7
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 

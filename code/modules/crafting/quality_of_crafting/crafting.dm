@@ -347,6 +347,36 @@
 	output = /obj/item/weapon/whip/cane
 	craftdiff = 0
 
+/datum/repeatable_crafting_recipe/crafting/cane
+	name = "wooden cane"
+	requirements = list(
+		/obj/item/grown/log/tree= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/grown/log/tree
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/weapon/mace/cane
+	required_intent = /datum/intent/dagger/cut
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/naturalcane
+	name = "natural wooden cane"
+	requirements = list(
+		/obj/item/grown/log/tree/small= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/grown/log/tree/small
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/weapon/mace/cane/natural
+	required_intent = /datum/intent/dagger/cut
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/crafting/spoon
 	name = "wooden spoon"
 	requirements = list(
@@ -430,7 +460,7 @@
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom = /obj/item/weapon/knife
 	allow_inverse_start = FALSE
-	output = /obj/item/plate/tray
+	output = /obj/item/tray
 	output_amount = 2
 	craft_time = 5 SECONDS
 
@@ -933,7 +963,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/jade/teapot
 	name = "joapstone teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotjade
+	output = /obj/item/reagent_containers/glass/carafe/teapot/jade
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/jade/bust
@@ -1021,7 +1051,7 @@
 	name = "opened clam"
 	output = list (
 		/obj/item/carvedgem/shell/openoyster,
-		/obj.item/carvedgem/rose/rawrose
+		/obj/item/carvedgem/rose/rawrose
 	)
 
 	requirements = list(
@@ -1092,7 +1122,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/shell/teapot
 	name = "shell teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotshell
+	output = /obj/item/reagent_containers/glass/carafe/teapot/shell
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/shell/amulet
@@ -1261,7 +1291,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/rose/teapot
 	name = "rosellusk teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotrose
+	output = /obj/item/reagent_containers/glass/carafe/teapot/rose
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/rose/ring
@@ -1381,7 +1411,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/cup
 	name = "onyxa cup"
-	output = /obj/item/reagent_containers/glass/cup/opal
+	output = /obj/item/reagent_containers/glass/cup/onyxa
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/bowl
@@ -1411,7 +1441,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/teapot
 	name = "onyxa teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotonyxa
+	output = /obj/item/reagent_containers/glass/carafe/teapot/onyxa
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/onyxa/ring
@@ -1711,7 +1741,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/coral/teapot
 	name = "aoetal teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotcoral
+	output = /obj/item/reagent_containers/glass/carafe/teapot/coral
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/coral/platter
@@ -1861,7 +1891,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/amber/teapot
 	name = "petriamber teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotamber
+	output = /obj/item/reagent_containers/glass/carafe/teapot/amber
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/amber/platter
@@ -1991,7 +2021,7 @@
 
 /datum/repeatable_crafting_recipe/crafting/opal/teapot
 	name = "opaloise teapot"
-	output = /obj/item/reagent_containers/glass/carafe/teapotopal
+	output = /obj/item/reagent_containers/glass/carafe/teapot/opal
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/opal/platter

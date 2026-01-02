@@ -1,84 +1,83 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/transparent/openspace,
-/area/rogue)
+/area)
 "c" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "d" = (
 /obj/structure/roguetent/preopen,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "f" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue)
+/area)
 "g" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "i" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "o" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "p" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "q" = (
 /obj/structure/table/wood/counter{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "s" = (
 /turf/closed/dungeon_void,
-/area/rogue)
+/area)
 "u" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "v" = (
 /mob/living/carbon/human/species/skeleton/npc,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "w" = (
 /obj/structure/dungeon_exit{
-	dungeon_id = "center";
-	entry_requirements = list("Time" = "day")
+	dungeon_id = "center"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "B" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "C" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "D" = (
 /turf/closed/mineral/bedrock,
-/area/rogue)
+/area)
 "E" = (
 /obj/structure/stairs,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "K" = (
 /obj/structure/fluff/statue/evil,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "N" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "O" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -93,33 +92,33 @@
 	pixel_y = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "Q" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/reagent_containers/glass/bottle/waterskin,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "S" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "V" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "W" = (
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 "X" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue)
+/area)
 "Y" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/hexstone,
-/area/rogue)
+/area)
 
 (1,1,1) = {"
 s

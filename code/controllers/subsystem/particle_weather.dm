@@ -81,7 +81,7 @@ SUBSYSTEM_DEF(ParticleWeather)
 		runningWeather.start()
 	else
 		var/randTime = rand(0, 6000) + initial(runningWeather.weather_duration_upper)
-		addtimer(CALLBACK(runningWeather, /datum/particle_weather/proc/start), randTime, TIMER_UNIQUE|TIMER_STOPPABLE) //Around 0-10 minutes between weathers
+		addtimer(CALLBACK(runningWeather, TYPE_PROC_REF(/datum/particle_weather, start)), randTime, TIMER_UNIQUE|TIMER_STOPPABLE) //Around 0-10 minutes between weathers
 
 /datum/controller/subsystem/ParticleWeather/proc/end_current_weather()
 	runningWeather?.end()

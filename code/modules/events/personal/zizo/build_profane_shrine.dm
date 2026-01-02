@@ -9,6 +9,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_ZIZO,
 		TAG_CORRUPTION,
 		TAG_WORK,
 	)
@@ -49,8 +50,10 @@
 	var/datum/objective/personal/build_zizo_shrine/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE ZIZO'S CHOSEN!"))
-	to_chat(chosen_one, span_biginfo("Zizo wants you to spread corruption! Construct [new_objective.target_count] profane shrines using your newly gained knowledge to complete Zizo's will!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE ZIZO'S CHOSEN!"),
+		span_biginfo("Zizo wants you to spread corruption! Construct [new_objective.target_count] profane shrines using your newly gained knowledge to complete Zizo's will!"),
+	))
 	to_chat(chosen_one, span_notice("You can construct unholy shrines with one small log, two stones and three wooden stakes."))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/zizo_omen.ogg', 100)
 

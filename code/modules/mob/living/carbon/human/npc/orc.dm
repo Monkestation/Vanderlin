@@ -161,6 +161,9 @@
 		QDEL_NULL(src.charflaw)
 	update_body()
 	faction = list(FACTION_ORCS)
+	var/turf/turf = get_turf(src)
+	if(SSterrain_generation.get_island_at_location(turf))
+		faction |= "islander"
 	name = "orc"
 	real_name = "orc"
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
@@ -185,8 +188,8 @@
 	sexes = 1
 	damage_overlay_type = ""
 	changesource_flags = WABBAJACK
-	exotic_bloodtype = /datum/blood_type/human/orc
 	var/raceicon = "orc"
+	exotic_bloodtype = /datum/blood_type/human/corrupted/orc
 
 /datum/species/orc/update_damage_overlays(mob/living/carbon/human/H)
 	return
@@ -302,8 +305,8 @@
 				armor = /obj/item/clothing/armor/plate/orc
 				head = /obj/item/clothing/head/helmet/orc
 			else
-				r_hand = /obj/item/weapon/sword/short
-				l_hand = /obj/item/weapon/sword/short
+				r_hand = /obj/item/weapon/sword/short/iron
+				l_hand = /obj/item/weapon/sword/short/iron
 				armor = /obj/item/clothing/armor/plate/orc
 				head = /obj/item/clothing/head/helmet/orc
 			if(prob(80))
@@ -434,7 +437,7 @@
 			armor = /obj/item/clothing/armor/chainmail/iron/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			r_hand = /obj/item/weapon/sword/iron
-			l_hand = /obj/item/weapon/sword/short
+			l_hand = /obj/item/weapon/sword/short/iron
 			head = /obj/item/clothing/head/helmet/leather
 		if(5) //Marauder Ironblade
 			if(prob(50))
@@ -551,7 +554,7 @@
 			head = /obj/item/clothing/head/helmet/orc/warlord
 		if(3) // WE DON'T WANNA GO TO WAR TODAY BUT THE LORD OF THE LASH SAYS "NAY NAY NAY!!" WE'RE GONNA MARCH ALL DAE, ALL DAE, ALL DAE! WHERE THERE'S A WHIP THERE'S A WAY!!
 			r_hand = /obj/item/weapon/whip/antique
-			l_hand = /obj/item/weapon/sword/short
+			l_hand = /obj/item/weapon/sword/short/iron
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
 		if(4) // Big Sword and Big Shield

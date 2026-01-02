@@ -17,9 +17,6 @@
 	#define COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE COMPONENT_MOVABLE_BLOCK_PRE_MOVE
 /// From base of /client/Move(): (direction, old_direction)
 #define COMSIG_MOB_CLIENT_MOVED "mob_client_moved"
-///from base of atom/movable/newtonian_move(): (inertia_direction)
-#define COMSIG_MOVABLE_NEWTONIAN_MOVE "movable_newtonian_move"
-	#define COMPONENT_MOVABLE_NEWTONIAN_BLOCK (1<<0)
 
 #define COMSIG_MOB_FOOD_EAT "mob_food_ate"
 

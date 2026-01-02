@@ -4,6 +4,8 @@
 	/// Cached appearance for disguise
 	var/cache_skin
 	var/cache_eyes
+	var/cache_eye_secondary
+	var/cache_hetero
 	var/cache_hair
 	/// Transform cooldown
 	COOLDOWN_DECLARE(transform_cooldown)
@@ -27,7 +29,11 @@
 
 /datum/component/vampire_disguise/proc/cache_original_appearance(mob/living/carbon/human/H)
 	cache_skin = H.skin_tone
-	cache_eyes = H.get_eye_color()
+	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
+	cache_eyes = eyes.eye_color
+	cache_eye_secondary = eyes.second_color
+	cache_hetero = FALSE
+
 	cache_hair = H.get_hair_color()
 
 /datum/component/vampire_disguise/proc/handle_disguise_upkeep(mob/living/carbon/human/source)
@@ -67,7 +73,8 @@
 
 	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
-		eyes.eye_color = cache_eyes
+		H.set_eye_color(cache_eye_secondary, cache_eye_secondary, FALSE)
+
 
 	H.update_organ_colors()
 	H.update_body()

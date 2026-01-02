@@ -100,6 +100,16 @@
 
 		return FALSE
 
+/mob/living/proc/get_shield_block_chance()
+	var/obj/item/weapon/shield = get_active_held_item()
+	if(!istype(shield))
+		shield = get_inactive_held_item()
+	if(!istype(shield))
+		return 0
+
+	var/shield_skill = max(1, get_skill_level(/datum/skill/combat/shields))
+
+	return shield.wdefense * shield_skill * 2
 /**
  * Calculate defense values for parrying
  * @param obj/item/mainhand The item in main hand

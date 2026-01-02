@@ -26,7 +26,7 @@
 	/// Whether the container is open or not
 	var/is_open = FALSE
 
-/obj/item/storage/fancy/PopulateContents()
+/obj/item/storage/fancy/populate_contents()
 	if(!spawn_type)
 		return ..()
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_FILL_TYPE, spawn_type)

@@ -59,6 +59,7 @@
 	bd.change_mode(modetype)
 
 /atom/movable/screen/buildmode/dirswitch
+	icon_state = "build"
 	var/dir_type
 
 /atom/movable/screen/buildmode/dirswitch/Initialize(mapload, datum/hud/hud_owner, datum/buildmode/build_datum, dir)

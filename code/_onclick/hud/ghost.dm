@@ -26,10 +26,9 @@
 			if(G.client.holder)
 				if(istype(G, /mob/dead/observer/rogue/arcaneeye))
 					return
-				if(istype(G, /mob/dead/observer/profane)) // Souls trapped by a dagger can return to lobby if they want, at the cost of a triumph.
-					if(alert("Return to the lobby? This will cost a triumph!", "", "Yes", "No") == "Yes")
+				if(istype(G, /mob/dead/observer/profane)) // Souls trapped by a dagger can return to lobby if they want
+					if(alert("Return to the lobby?", "", "Yes", "No") == "Yes")
 						G.returntolobby()
-						G.adjust_triumphs(-1)
 				G.client.descend()
 				return
 

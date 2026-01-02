@@ -25,7 +25,7 @@
 	var/turf/southwest = locate(CLAMP(x - (direction & WEST ? range : 0), 1, world.maxx), CLAMP(y - (direction & SOUTH ? range : 0), 1, world.maxy), CLAMP(z, 1, world.maxz))
 	var/turf/northeast = locate(CLAMP(x + (direction & EAST ? range : 0), 1, world.maxx), CLAMP(y + (direction & NORTH ? range : 0), 1, world.maxy), CLAMP(z, 1, world.maxz))
 
-	for(var/i in block(southwest, northeast))
+	for(var/turf/i as anything in block(southwest, northeast))
 		holder.vis_contents += i
 
 	if(direction & SOUTH)
@@ -150,18 +150,62 @@
 
 	var/turf/destination
 	if(from_above)
-		// Always 1 z-level above the target turf
 		destination = locate(target_turf.x, target_turf.y, CLAMP(target_turf.z + 1, 1, world.maxz))
 		if(!destination)
 			destination = target_turf
 	else
 		destination = target_turf
 
-	crosser.forceMove(destination)
+	// Calculate pixel offset based on movement direction
+	var/pixel_offset = world.icon_size
+	var/initial_pixel_x = 0
+	var/initial_pixel_y = 0
 
+	if(mirage_direction & NORTH)
+		initial_pixel_y = -pixel_offset
+	else if(mirage_direction & SOUTH)
+		initial_pixel_y = pixel_offset
+
+	if(mirage_direction & EAST)
+		initial_pixel_x = -pixel_offset
+	else if(mirage_direction & WEST)
+		initial_pixel_x = pixel_offset
+
+	// Determine glide time
+	var/glide_time = crosser.glide_size || world.icon_size
 	if(ismob(crosser))
 		var/mob/M = crosser
-		to_chat(M, span_notice("You cross through the mirage..."))
+		if(M.client?.glide_size)
+			glide_time = M.client.glide_size
+
+	// Set pixel offset BEFORE teleporting
+	crosser.pixel_x += initial_pixel_x
+	crosser.pixel_y += initial_pixel_y
+
+	// Handle client eye animation if it's a mob with a client
+	var/client/C
+	if(ismob(crosser))
+		var/mob/M = crosser
+		C = M.client
+		if(C)
+			// Offset the client's eye position
+			C.pixel_x += initial_pixel_x
+			C.pixel_y += initial_pixel_y
+
+	// Teleport to destination
+	crosser.forceMove(destination)
+
+	if(isliving(crosser))
+		var/mob/living/M = crosser
+		if(!M.client)
+			M.force_island_check()
+
+	// Animate both the mob and client back to normal
+	animate(crosser, pixel_x = crosser.pixel_x - initial_pixel_x, pixel_y = crosser.pixel_y - initial_pixel_y, time = glide_time, flags = ANIMATION_PARALLEL)
+
+	if(C)
+		animate(C, pixel_x = C.pixel_x - initial_pixel_x, pixel_y = C.pixel_y - initial_pixel_y, time = glide_time, flags = ANIMATION_PARALLEL)
+		to_chat(C, span_notice("You cross through the mirage..."))
 
 	return TRUE
 
@@ -169,3 +213,4 @@
 	name = "Mirage holder"
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	vis_flags = VIS_INHERIT_PLANE | VIS_HIDE

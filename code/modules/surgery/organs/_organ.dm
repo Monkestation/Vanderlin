@@ -88,7 +88,7 @@
 		organ.handle_node_injection(node.node_tier, node.node_purity, node.stored_node.slot, node.stored_node, node.icon_state)
 		node.forceMove(src)
 
-	update_appearance()
+	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
 /obj/item/organ/update_overlays()
@@ -205,8 +205,7 @@
 	if(bitecount >= bitesize)
 		record_featured_stat(FEATURED_STATS_CRIMINALS, eater)
 		record_round_statistic(STATS_ORGANS_EATEN)
-		check_culling(eater)
-		SEND_SIGNAL(eater, COMSIG_ORGAN_CONSUMED, src.type)
+		SEND_SIGNAL(eater, COMSIG_ORGAN_CONSUMED, type, organ_inside)
 	. = ..()
 	eat_effect = initial(eat_effect)
 
@@ -214,31 +213,10 @@
 	QDEL_NULL(organ_inside)
 	return ..()
 
-/obj/item/reagent_containers/food/snacks/organ/proc/check_culling(mob/living/eater)
-	return
-
 /obj/item/reagent_containers/food/snacks/organ/heart
 	name = "heart"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
 	grind_results = list(/datum/reagent/organpoison = 6)
-
-/obj/item/reagent_containers/food/snacks/organ/heart/check_culling(mob/living/eater)
-	. = ..()
-	if(!organ_inside)
-		return
-
-	for(var/datum/culling_duel/D in GLOB.graggar_cullings)
-		var/obj/item/organ/heart/d_challenger_heart = D.challenger_heart?.resolve()
-		var/obj/item/organ/heart/d_target_heart = D.target_heart?.resolve()
-		var/mob/living/carbon/human/challenger = D.challenger?.resolve()
-		var/mob/living/carbon/human/target = D.target?.resolve()
-
-		if(organ_inside == d_target_heart && eater == challenger)
-			D.process_win(winner = eater, loser = target)
-			return TRUE
-		else if(organ_inside == d_challenger_heart && eater == target)
-			D.process_win(winner = eater, loser = challenger)
-			return TRUE
 
 /obj/item/reagent_containers/food/snacks/organ/lungs
 	name = "lungs"

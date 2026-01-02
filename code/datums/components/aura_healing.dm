@@ -93,7 +93,7 @@
 
 	return ..()
 
-/datum/component/aura_healing/process(seconds_per_tick)
+/datum/component/aura_healing/process()
 	var/should_show_effect = COOLDOWN_FINISHED(src, last_heal_effect_time)
 	if (should_show_effect)
 		COOLDOWN_START(src, last_heal_effect_time, HEAL_EFFECT_COOLDOWN)
@@ -117,24 +117,24 @@
 			new /obj/effect/temp_visual/heal(get_turf(candidate), healing_color)
 
 		if (iscarbon(candidate))
-			candidate.adjustBruteLoss(-brute_heal * seconds_per_tick, updating_health = FALSE)
-			candidate.adjustFireLoss(-burn_heal * seconds_per_tick, updating_health = FALSE)
+			candidate.adjustBruteLoss(-brute_heal, updating_health = FALSE)
+			candidate.adjustFireLoss(-burn_heal, updating_health = FALSE)
 
 		if (iscarbon(candidate))
 			// Toxin healing is forced for slime people
-			candidate.adjustToxLoss(-toxin_heal * seconds_per_tick, updating_health = FALSE, forced = TRUE)
+			candidate.adjustToxLoss(-toxin_heal, updating_health = FALSE, forced = TRUE)
 
-			candidate.adjustOxyLoss(-suffocation_heal * seconds_per_tick, updating_health = FALSE)
-			candidate.adjustCloneLoss(-clone_heal * seconds_per_tick, updating_health = FALSE)
+			candidate.adjustOxyLoss(-suffocation_heal, updating_health = FALSE)
+			candidate.adjustCloneLoss(-clone_heal, updating_health = FALSE)
 
 			for (var/organ in organ_healing)
-				candidate.adjustOrganLoss(organ, -organ_healing[organ] * seconds_per_tick)
+				candidate.adjustOrganLoss(organ, -organ_healing[organ])
 		else if (isanimal(candidate))
 			var/mob/living/simple_animal/animal_candidate = candidate
-			animal_candidate.adjustHealth(-simple_heal * seconds_per_tick, updating_health = FALSE)
+			animal_candidate.adjustHealth(-simple_heal, updating_health = FALSE)
 
 		if (candidate.blood_volume < BLOOD_VOLUME_NORMAL)
-			candidate.blood_volume += blood_heal * seconds_per_tick
+			candidate.blood_volume += blood_heal
 
 		candidate.updatehealth()
 

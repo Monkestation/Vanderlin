@@ -4,7 +4,7 @@
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "aF" = (
 /obj/structure/table/wood/plain,
 /obj/item/cooking/skewer{
@@ -36,39 +36,39 @@
 	pixel_y = -4
 	},
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aR" = (
 /obj/structure/window/openclose{
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "bN" = (
 /obj/effect/waterfall,
 /turf/open/water/river,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "dn" = (
 /obj/structure/door,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "dz" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "eO" = (
 /turf/open/water/river{
 	dir = 1
 	},
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "fv" = (
 /turf/open/water/river,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "fw" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "fC" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "ge" = (
 /obj/structure/table/wood/nice,
 /obj/item/candle/yellow/lit/infinite{
@@ -89,10 +89,10 @@
 	pixel_x = 2
 	},
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "gO" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "hV" = (
 /obj/item/reagent_containers/glass/bucket/wooden{
 	pixel_y = 14;
@@ -103,18 +103,18 @@
 	pixel_y = 10
 	},
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "if" = (
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "iS" = (
 /obj/structure/irrigation_channel,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "jt" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "le" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/structure/closet/crate/chest/wicker,
@@ -126,11 +126,11 @@
 /obj/item/natural/chaff/oat,
 /obj/item/natural/chaff/oat,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "lH" = (
 /obj/structure/soil,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "qB" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/neuFarm/seed/wheat,
@@ -161,10 +161,10 @@
 	pixel_y = -1
 	},
 /turf/open/floor/grass,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "tr" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tz" = (
 /obj/structure/fluff/millstone,
 /obj/structure/table/wood/plain,
@@ -173,7 +173,7 @@
 	pixel_y = 19
 	},
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tE" = (
 /obj/structure/rack/shelf,
 /obj/structure/rack/shelf/biggest,
@@ -195,152 +195,152 @@
 	pixel_y = -5
 	},
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tY" = (
 /obj/structure/vertical_gearbox{
 	dir = 4
 	},
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ys" = (
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "za" = (
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "zM" = (
 /obj/structure/irrigation_channel,
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "BU" = (
 /obj/structure/table/wood/plain,
 /obj/item/cooking/pan,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "CP" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Dl" = (
 /obj/structure/rack/shelf,
 /obj/structure/bookcase/random_recipes,
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "DI" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Eb" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "EE" = (
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Fn" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
 	},
 /turf/open/floor/grass,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "GT" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/soil,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "HL" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/item/bin/water,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "HV" = (
 /obj/structure/gearbox,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "JU" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "KL" = (
 /obj/structure/ladder,
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "KV" = (
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "KX" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/pelt,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "La" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Lj" = (
 /obj/structure/window/openclose{
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Mo" = (
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "MF" = (
 /obj/structure/pottery_lathe,
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ny" = (
 /turf/open/water/river{
 	dir = 4
 	},
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "NL" = (
 /obj/structure/window/openclose{
 	dir = 8
 	},
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Pi" = (
 /obj/structure/rotation_piece,
 /obj/structure/window/openclose,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "PK" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "TL" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Vz" = (
 /obj/structure/waterwheel,
 /turf/open/water/river{
 	dir = 4
 	},
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 "Yg" = (
 /obj/structure/ladder,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Yh" = (
 /obj/structure/vertical_gearbox,
 /turf/open/floor/wood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "YB" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/copper,
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "YE" = (
 /turf/open/floor/grass,
-/area/rogue/under/tomb/cave/wet)
+/area/under/tomb/cave/wet)
 
 (1,1,1) = {"
 dz

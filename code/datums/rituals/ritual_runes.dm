@@ -754,7 +754,7 @@ GLOBAL_LIST(teleport_runes)
 
 /obj/effect/decal/cleanable/roguerune/arcyne/summoning/attack_hand(mob/living/user)
 	if(summoning && isarcyne(user))
-		to_chat(user, span_warning("You release the summon from it's containment!"))
+		to_chat(user, span_warning("You release the summon from its containment!"))
 		playsound(usr, 'sound/magic/teleport_diss.ogg', 75, TRUE)
 		do_invoke_glow()
 		sleep(20)
@@ -807,7 +807,7 @@ GLOBAL_LIST(teleport_runes)
 
 /obj/effect/decal/cleanable/roguerune/arcyne/summoning/adv	//160x160 rune t2(5x5 tile)
 	name = "warded sealate confinement matrix"
-	desc = "An thoroughly warded confinement matrix improved with the addition of a sealate matrix; used to hold larger, dangerous things when summoned."
+	desc = "A thoroughly-warded confinement matrix improved with the addition of a sealate matrix; used to hold larger, dangerous things when summoned."
 	icon = 'icons/effects/160x160.dmi'
 	icon_state = "warded"
 	runesize = 2
@@ -818,7 +818,7 @@ GLOBAL_LIST(teleport_runes)
 
 /obj/effect/decal/cleanable/roguerune/arcyne/summoning/max	//224x224 rune t3(7x7 tile)
 	name = "noc's eye warded sealate confinement matrix"
-	desc = "An thoroughly warded confinement matrix improved with a Noc's eye sealing measure and the addition of a sealate matrix; used to hold the largest, most dangerous things summonable."
+	desc = "A thoroughly-warded confinement matrix improved with a Noc's eye sealing measure and the addition of a sealate matrix; used to hold the largest, most dangerous things summonable."
 	icon = 'icons/effects/224x224.dmi'
 	icon_state = "huge_runeblued"
 	runesize = 3

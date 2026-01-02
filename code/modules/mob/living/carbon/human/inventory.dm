@@ -153,39 +153,47 @@
 
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
 // Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
-/mob/living/carbon/human/equip_to_slot(obj/item/I, slot, initial)
+/mob/living/carbon/human/equip_to_slot(obj/item/equipping, slot, initial = FALSE, redraw_mob = FALSE)
 	if(!..()) //a check failed or the item has already found its slot
 		return
 
 	var/not_handled = FALSE //Added in case we make this type path deeper one day
 	switch(slot)
 		if(ITEM_SLOT_BELT)
-
-			belt = I
+			if(belt)
+				return
+			belt = equipping
 			update_inv_belt()
 		if(ITEM_SLOT_RING)
-			wear_ring = I
+			if(wear_ring)
+				return
+			wear_ring = equipping
 			update_inv_ring()
 		if(ITEM_SLOT_WRISTS)
-
-			wear_wrists = I
+			if(wear_wrists)
+				return
+			wear_wrists = equipping
 			update_inv_wrists()
 		if(ITEM_SLOT_HEAD)
-
-			head = I
+			if(head)
+				return
+			head = equipping
 			update_inv_head()
 		if(ITEM_SLOT_GLOVES)
-
-			gloves = I
+			if(gloves)
+				return
+			gloves = equipping
 			update_inv_gloves()
 		if(ITEM_SLOT_SHOES)
-
-			shoes = I
+			if(shoes)
+				return
+			shoes = equipping
 			update_inv_shoes()
 		if(ITEM_SLOT_ARMOR)
-
-			wear_armor = I
-			if(I.flags_inv & HIDEJUMPSUIT)
+			if(wear_armor)
+				return
+			wear_armor = equipping
+			if(equipping.flags_inv & HIDEJUMPSUIT)
 				update_inv_shirt()
 			if(wear_armor.breakouttime) //when equipping a straightjacket
 				ADD_TRAIT(src, TRAIT_RESTRAINED, SUIT_TRAIT)
@@ -193,60 +201,73 @@
 				update_mob_action_buttons() //certain action buttons will no longer be usable.
 			update_inv_armor()
 		if(ITEM_SLOT_PANTS)
-			wear_pants = I
+			if(wear_pants)
+				return
+			wear_pants = equipping
 			update_inv_pants()
 		if(ITEM_SLOT_SHIRT)
-			wear_shirt = I
+			if(wear_shirt)
+				return
+			wear_shirt = equipping
 			update_inv_shirt()
 		if(ITEM_SLOT_CLOAK)
-			cloak = I
+			if(cloak)
+				return
+			cloak = equipping
 			update_inv_cloak()
 		if(ITEM_SLOT_BELT_L)
-			beltl = I
+			if(beltl)
+				return
+			beltl = equipping
 			update_inv_belt()
 		if(ITEM_SLOT_BELT_R)
-			beltr = I
+			if(beltr)
+				return
+			beltr = equipping
 			update_inv_belt()
 		if(ITEM_SLOT_BACK_R)
-			backr = I
+			if(backr)
+				return
+			backr = equipping
 			update_inv_back()
 		if(ITEM_SLOT_BACK_L)
-			backl = I
+			if(backl)
+				return
+			backl = equipping
 			update_inv_back()
 		if(ITEM_SLOT_MOUTH)
-			mouth = I
+			if(mouth)
+				return
+			mouth = equipping
 			update_inv_mouth()
 		if(ITEM_SLOT_BACKPACK)
 			not_handled = TRUE
 			if(beltr)
-				if(SEND_SIGNAL(beltr, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+				if(SEND_SIGNAL(beltr, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
 					not_handled = FALSE
 			if(beltl && not_handled)
-				if(SEND_SIGNAL(beltl, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+				if(SEND_SIGNAL(beltl, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
 					not_handled = FALSE
 			if(belt && not_handled)
-				if(SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, I, src, TRUE))
+				if(SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
 					not_handled = FALSE
 			if(backr && not_handled)
-				if(SEND_SIGNAL(backr, COMSIG_TRY_STORAGE_CAN_INSERT, I, src, TRUE))
+				if(SEND_SIGNAL(backr, COMSIG_TRY_STORAGE_CAN_INSERT, equipping, src, TRUE))
 					not_handled = FALSE
 			if(backl && not_handled)
-				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_CAN_INSERT, I, src, TRUE))
+				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_CAN_INSERT, equipping, src, TRUE))
 					not_handled = FALSE
 		else
 			not_handled = TRUE
-//		else
-//			to_chat(src, "<span class='danger'>I am trying to equip this item to an unsupported inventory slot. Report this to a coder!</span>")
 
 	//Item is handled and in slot, valid to call callback, for this proc should always be true
 	if(!not_handled)
-		I.equipped(src, slot, initial)
+		equipping.equipped(src, slot, initial)
 		check_armor_class()
 
-
 	if(hud_used)
-		hud_used.throw_icon?.update_appearance()
-		hud_used.give_intent?.update_appearance()
+		hud_used.throw_icon?.update_appearance(UPDATE_ICON_STATE)
+		hud_used.give_intent?.update_appearance(UPDATE_ICON_STATE)
 
 	return not_handled //For future deeper overrides
 

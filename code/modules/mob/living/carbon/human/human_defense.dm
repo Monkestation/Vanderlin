@@ -77,7 +77,7 @@
 	return protection
 
 /// Return the armor that blocks the crit
-/mob/living/carbon/human/proc/checkcritarmor(def_zone, d_type)
+/mob/living/carbon/human/proc/check_crit_armor(def_zone, d_type)
 	if(!d_type)
 		return FALSE
 	var/obj/item/clothing/best_armor
@@ -215,7 +215,7 @@
 		blocked = TRUE
 	else if(I)
 		if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
-			if(can_embed(I) && prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+			if(I.can_embed() && prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 				//throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 				var/obj/item/bodypart/L = pick(bodyparts)
 				L.add_embedded_object(I, silent = FALSE, crit_message = TRUE)
@@ -558,7 +558,7 @@
 		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
 			to_chat(src, "<span class='notice'>I attempt to remove the durathread strand from around my neck.</span>")
 			if(do_after(src, 3.5 SECONDS, src))
-				to_chat(src, "<span class='notice'>I succesfuly remove the durathread strand.</span>")
+				to_chat(src, "<span class='notice'>I successfully remove the durathread strand.</span>")
 				remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 			return
 		check_for_injuries(M)

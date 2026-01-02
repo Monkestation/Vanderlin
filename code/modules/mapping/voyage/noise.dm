@@ -223,3 +223,29 @@
 			active.Cut(rand_idx, rand_idx + 1)
 
 	return points
+
+/datum/noise_generator/proc/generate_voronoi_cells(min_x, max_x, min_y, max_y, num_cells)
+	var/list/cells = list()
+
+	// Generate random seed points for Voronoi cells
+	for(var/i = 1 to num_cells)
+		var/seed_x = min_x + rand() * (max_x - min_x)
+		var/seed_y = min_y + rand() * (max_y - min_y)
+		cells += list(list("x" = seed_x, "y" = seed_y, "id" = i))
+
+	return cells
+
+/datum/noise_generator/proc/get_voronoi_cell(x, y, list/cells)
+	var/closest_cell = null
+	var/min_dist = INFINITY
+
+	for(var/list/cell in cells)
+		var/dx = x - cell["x"]
+		var/dy = y - cell["y"]
+		var/dist = sqrt(dx * dx + dy * dy)
+
+		if(dist < min_dist)
+			min_dist = dist
+			closest_cell = cell
+
+	return closest_cell

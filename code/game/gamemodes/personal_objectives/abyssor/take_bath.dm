@@ -19,8 +19,6 @@
 	SIGNAL_HANDLER
 	if(completed)
 		return
-	if(!owner.current)
-		return
 
 	var/amulet_found = FALSE
 	for(var/obj/item/clothing/neck/current_item in owner.current.get_equipped_items(TRUE))
@@ -32,14 +30,15 @@
 
 	complete_objective()
 
-/datum/objective/personal/abyssor_bath/proc/complete_objective()
+/datum/objective/personal/abyssor_bath/complete_objective()
+	. = ..()
 	to_chat(owner.current, span_greentext("You have honored Abyssor by taking a relaxing bath while wearing his amulet!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(ABYSSOR, 20)
-	owner.current.add_stress(/datum/stress_event/abyssor_serenity)
-	escalate_objective()
 	UnregisterSignal(owner.current, COMSIG_BATH_TAKEN)
+
+/datum/objective/personal/abyssor_bath/reward_owner()
+	. = ..()
+	owner.current.add_stress(/datum/stress_event/abyssor_serenity)
 
 /datum/objective/personal/abyssor_bath/update_explanation_text()
 	explanation_text = "Abyssor is calm at the moment. Take a relaxing bath while wearing his amulet to honor him!"

@@ -1,13 +1,16 @@
 /datum/action/cooldown/spell/projectile/frost_bolt
 	name = "Frost Bolt"
 	desc = "A ray of frozen energy, slowing the first thing it touches and lightly damaging it."
-	button_icon = "frostbolt"
+	button_icon_state = "frostbite"
 	sound = 'sound/magic/whiteflame.ogg'
 
 	point_cost = 1
 	attunements = list(
 		/datum/attunement/ice = 0.7,
 	)
+
+	invocation = "Beam of Frost!!"
+	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 2 SECONDS
 	charge_drain = 1

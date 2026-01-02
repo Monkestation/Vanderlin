@@ -12,11 +12,11 @@
 	cone_levels = 4
 	respect_density = TRUE
 	delay_between_level = 0.05 SECONDS
-
+	point_cost = 3
 	attunements = list(
 		/datum/attunement/ice = 0.3,
 	)
-
+	button_icon_state = "frostbolt"
 	charge_time = 2 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.7
@@ -45,6 +45,11 @@
 	/// How long do objects remain frozen for?
 	/// 0 seconds mean no objects are frozen, INFINITY means infinite duration freeze
 	var/unfreeze_object_duration = 20 SECONDS
+
+/datum/action/cooldown/spell/cone/staggered/cone_of_cold/cast(atom/cast_on)
+	. = ..()
+	new /obj/effect/temp_visual/dir_setting/icecone(get_step(cast_on, cast_on.dir), cast_on.dir)
+	playsound(cast_on, 'sound/combat/wooshes/blunt/wooshhuge (2).ogg', 50, TRUE)
 
 /datum/action/cooldown/spell/cone/staggered/cone_of_cold/do_turf_cone_effect(turf/target_turf, atom/caster, level)
 	if(!turf_freeze_type || unfreeze_turf_duration <= 0 SECONDS) // 0 duration = don't apply the slip
@@ -89,3 +94,22 @@
 /// Unfreezes this obj if its frozen
 /obj/proc/unfreeze()
 	SEND_SIGNAL(src, COMSIG_OBJ_UNFREEZE)
+
+/obj/effect/temp_visual/dir_setting/icecone
+	icon = 'icons/effects/160x160.dmi'
+	icon_state = "ice_cone"
+	duration = 3 SECONDS
+
+/obj/effect/temp_visual/dir_setting/icecone/setDir(dir)
+	. = ..()
+	switch(dir)
+		if(NORTH)
+			pixel_x = -64
+		if(SOUTH)
+			pixel_x = -64
+			pixel_y = -128
+		if(EAST)
+			pixel_y = -64
+		if(WEST)
+			pixel_y = -64
+			pixel_x = -128

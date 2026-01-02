@@ -1,4 +1,4 @@
-/area/rogue/under/dungeon
+/area/under/dungeon
 	icon_state = "basement"
 	soundenv = 5
 	droning_index = DRONING_BASEMENT
@@ -9,7 +9,7 @@
 	background_track_dusk = null
 	background_track_night = null
 
-/area/rogue/indoors/dungeon
+/area/indoors/dungeon
 	droning_index = DRONING_BASEMENT
 	droning_index_night = DRONING_BASEMENT
 	ambient_index = AMBIENCE_DUNGEON

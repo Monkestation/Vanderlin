@@ -6,7 +6,6 @@
 	icon_state = "supplypod"
 	SET_BASE_PIXEL(-16, -5)
 	layer = TABLE_LAYER //So that the crate inside doesn't appear underneath
-	allow_objects = TRUE
 	allow_dense = TRUE
 	can_weld_shut = FALSE
 	armor = list("blunt" = 30, "slash" = 30, "stab" = 30,  "piercing" = 50, "fire" = 100, "acid" = 80)

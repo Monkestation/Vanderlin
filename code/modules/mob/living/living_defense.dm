@@ -1,24 +1,23 @@
 
 /mob/living/proc/run_armor_check(def_zone = null, attack_flag = "blunt", absorb_text = null, soften_text = null, armor_penetration, penetrated_text, damage, blade_dulling)
 	var/armor = getarmor(def_zone, attack_flag, damage, armor_penetration, blade_dulling)
+	var/armor_check = 0
 
-	//the if "armor" check is because this is used for everything on /living, including humans
-	if(armor > 0 && armor_penetration)
-		armor = max(0, armor - armor_penetration)
-		if(penetrated_text)
-			to_chat(src, "<span class='danger'>[penetrated_text]</span>")
-		else
-			to_chat(src, "<span class='danger'>My armor was penetrated!</span>")
-	else if(armor >= 130)
-		if(absorb_text)
-			to_chat(src, "<span class='notice'>[absorb_text]</span>")
-		else
-			to_chat(src, "<span class='notice'>My armor absorbs the blow!</span>")
-	else if(armor > 0)
-		if(soften_text)
-			to_chat(src, "<span class='warning'>[soften_text]</span>")
-		else
-			to_chat(src, "<span class='warning'>My armor softens the blow!</span>")
+	// Only run armor logic if there actually is armor
+	if(armor > 0)
+		if(armor_penetration)
+			armor = max(0, armor - armor_penetration)
+		armor_check = max(0, armor - damage)
+
+		// Decide feedback based on how much damage got through
+		if(armor_check == 0 && armor_penetration)
+			to_chat(src, "<span class='danger'>[penetrated_text || "My armor was penetrated!"]</span>")
+		else if(armor_check > 0)
+			if(armor_penetration)
+				to_chat(src, "<span class='warning'>[soften_text || "My armor softens the blow!"]</span>")
+			else
+				to_chat(src, "<span class='notice'>[absorb_text || "My armor absorbs the blow!"]</span>")
+
 	return armor
 
 
@@ -132,7 +131,7 @@
 				else
 					simple_woundcritroll(I.thrown_bclass, I.throwforce, null, zone, crit_message = TRUE)
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
-						if(can_embed(I) && prob(I.embedding.embed_chance) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+						if(I.can_embed() && prob(I.embedding.embed_chance) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 							simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 					I.do_special_attack_effect(I.thrownby, null, null, src, null, thrown = TRUE)
 			visible_message("<span class='danger'>[src] is hit by [I]![next_attack_msg.Join()]</span>", \
@@ -181,6 +180,9 @@
 		skill_diff -= (get_skill_level(/datum/skill/combat/wrestling))
 
 	if(user == src)
+		instant = TRUE
+
+	if(HAS_TRAIT(user, TRAIT_NOSTRUGGLE))
 		instant = TRUE
 
 	if(surrendering)
@@ -259,6 +261,9 @@
 	return list(/datum/intent/grab/move)
 
 /mob/living/proc/send_grabbed_message(mob/living/carbon/user)
+	if(HAS_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE))
+		return
+
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		visible_message("<span class='danger'>[user] firmly grips [src]!</span>",
 						"<span class='danger'>[user] firmly grips me!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)

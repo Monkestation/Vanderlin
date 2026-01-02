@@ -28,9 +28,9 @@
 /obj/structure/ice_bridge
 	name = "ice bridge"
 	desc = "A solid bridge made of magical ice."
-	icon = 'icons/turf/floors.dmi'
-	icon_state = "carpet_c_primary"
-	alpha = 150
+	icon = 'icons/effects/freeze.dmi'
+	icon_state = "ice_bridge"
+	alpha = 255
 	density = FALSE
 	anchored = TRUE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP

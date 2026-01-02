@@ -5,7 +5,7 @@
 	icon_state = "warden"
 	icon_living = "warden"
 	icon_dead = "vvd"
-	summon_primer = "You are an warden, a moderate elemental. Elementals such as yourself guard your plane from intrusion zealously. Now you've been pulled from your home into a new world, that is decidedly less peaceful then your carefully guarded plane. How you react to these events, only time can tell."
+	summon_primer = "You are a warden, a moderate elemental. Elementals such as yourself guard your plane from intrusion zealously. Now you've been pulled from your home into a new world, that is decidedly less peaceful then your carefully guarded plane. How you react to these events, only time can tell."
 	tier = 2
 	gender = MALE
 	emote_hear = null

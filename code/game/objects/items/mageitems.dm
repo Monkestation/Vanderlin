@@ -92,7 +92,7 @@
 	if(istype(M,/obj/item/ore/cinnabar))
 		if(amount < 8)
 			amount = 8
-			to_chat(user, span_notice("I press acryne magic into the [M] and the red crystals within melt into quicksilver, quickly sinking into the [src]."))
+			to_chat(user, span_notice("I press arcyne magic into \the [M] and the red crystals within melt into quicksilver, quickly sinking into the [src]."))
 	else
 		return ..()
 
@@ -157,7 +157,7 @@
 		var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
 		if(do_after(user, crafttime, target = src))
 			playsound(loc, 'sound/magic/scrapeblade.ogg', 100, TRUE)
-			to_chat(user, span_notice("I press acryne magic into the blade and it throbs in a deep purple..."))
+			to_chat(user, span_notice("I press arcyne magic into the blade and it throbs in a deep purple..."))
 			var/obj/arcyne_knife = new /obj/item/weapon/knife/dagger/silver/arcyne
 			qdel(M)
 			qdel(src)
@@ -224,12 +224,12 @@
 	icon_state = "amethyst"
 	sellprice = 18
 	arcyne_potency = 25
-	desc = "A pink crystal, it surges with magical energy, yet it's artificial nature means it' worth little."
+	desc = "A pink crystal, it surges with magical energy, yet its artificial nature means it's worth little."
 	attuned = /datum/attunement/arcyne
 
 /obj/item/mimictrinket
 	name = "mimic trinket"
-	desc = "A small mimic, imbued with the arcyne to make it docile. It can transform into most things it touchs. "
+	desc = "A small mimic, imbued with the arcyne to make it docile. It can transform into most things it touches."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "mimic_trinket"
 	possible_item_intents = list(/datum/intent/use)
@@ -505,7 +505,7 @@
 		return ..()
 
 /obj/item/rope/chain/bindingshackles/t5
-	name = "abberant planar binding shackles"
+	name = "aberrant planar binding shackles"
 	tier = 5
 
 /obj/item/rope/chain/bindingshackles/attack(mob/living/simple_animal/hostile/retaliate/captive, mob/living/user)
@@ -548,7 +548,7 @@
 
 		//no candidates, raise as npc
 		else
-			to_chat(user, span_notice("The [captive] stares at you with mindless hate. The binding attempt failed to draw out it's intelligence!"))
+			to_chat(user, span_notice("The [captive] stares at you with mindless hate. The binding attempt failed to draw out its intelligence!"))
 
 		return FALSE
 	return FALSE
@@ -600,6 +600,7 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	body_parts_covered = NONE
 	alternate_worn_layer  = 8.9
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
 	list_reagents = list(/datum/reagent/toxin/manabloom_juice = SNACK_CHUNKY)
 	seed = /obj/item/neuFarm/seed/manabloom
 

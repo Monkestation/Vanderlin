@@ -61,6 +61,12 @@
 			msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
 	//Fire/water stacks
+	if(on_fire)
+		var/fire_text = "[m1] on fire!"
+		if(user.has_flaw(/datum/charflaw/addiction/pyromaniac))
+			fire_text += span_boldred(" IT'S BEAUTIFUL!")
+			user.sate_addiction()
+		msg += fire_text
 	if(fire_stacks + divine_fire_stacks > 0)
 		msg += "[m1] covered in something flammable."
 	else if(fire_stacks < 0 && !on_fire)

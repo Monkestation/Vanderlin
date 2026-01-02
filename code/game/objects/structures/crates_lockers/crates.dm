@@ -6,7 +6,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	can_weld_shut = FALSE
 	horizontal = TRUE
-	allow_objects = TRUE
 	allow_dense = FALSE
 	dense_when_open = TRUE
 	climbable = TRUE

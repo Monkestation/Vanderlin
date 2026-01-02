@@ -5,8 +5,14 @@
 	max_occurrences = 1
 	min_players = 4
 	earliest_start = 35 MINUTES
-	tags = list(TAG_HAUNTED, TAG_COMBAT, TAG_RAID)
 	track = EVENT_TRACK_RAIDS
+
+	tags = list(
+		TAG_WAR,
+		TAG_RAID,
+		TAG_COMBAT,
+	)
+
 	var/last_siege
 	var/raid_text = "The skeleton horde approaches."
 

@@ -28,6 +28,7 @@ SUBSYSTEM_DEF(acid)
 			continue
 
 		if(O.acid_level && O.acid_processing())
+			EMPTY_BLOCK_GUARD // ????? wtf
 		else
 			O.cut_overlay(GLOB.acid_overlay, TRUE)
 			processing -= O

@@ -20,9 +20,9 @@
 
 	var/atom/movable/screen/strategy_ui/controller_button/exit/exit
 
-/atom/movable/screen/strategy_ui/controller_ui/Initialize(mapload, datum/hud/hud_owner)
+/atom/movable/screen/strategy_ui/controller_ui/New(loc, ...)
 	. = ..()
-	create_and_position_buttons(hud_owner)
+	create_and_position_buttons()
 
 /atom/movable/screen/strategy_ui/controller_ui/Destroy(force)
 	QDEL_NULL(actions)
@@ -81,18 +81,18 @@
 	client.screen -= move
 	client.screen -= exit
 
-/atom/movable/screen/strategy_ui/controller_ui/proc/create_and_position_buttons(datum/hud/hud_owner)
-	actions = new(null, hud_owner)
-	units = new(null, hud_owner)
-	ability = new(null, hud_owner)
-	stat = new(null, hud_owner)
-	decor = new(null, hud_owner)
-	traps = new(null, hud_owner)
-	builds = new(null, hud_owner)
-	bottom = new(null, hud_owner)
-	destroy = new(null, hud_owner)
-	move = new(null, hud_owner)
-	exit = new(null, hud_owner)
+/atom/movable/screen/strategy_ui/controller_ui/proc/create_and_position_buttons()
+	actions = new(null, src)
+	units = new(null, src)
+	ability = new(null, src)
+	stat = new(null, src)
+	decor = new(null, src)
+	traps = new(null, src)
+	builds = new(null, src)
+	bottom = new(null, src)
+	destroy = new(null, src)
+	move = new(null, src)
+	exit = new(null, src)
 
 	update_screen_loc()
 	update_all()

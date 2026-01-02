@@ -125,6 +125,8 @@
 /datum/wound/fracture/head/brain/on_life()
 	. = ..()
 	owner.adjustOxyLoss(2.5)
+	if(HAS_TRAIT(owner, TRAIT_ROTMAN)) // brain crit kills deadites
+		owner.death()
 
 /datum/wound/fracture/head/eyes
 	name = "orbital fracture"

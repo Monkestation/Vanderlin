@@ -1,11 +1,11 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ag" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ah" = (
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ai" = (
 /obj/item/weapon/shield/tower/buckleriron,
 /obj/item/weapon/sword/khopesh,
@@ -16,81 +16,81 @@
 /obj/item/clothing/armor/cuirass/copperchest,
 /obj/structure/closet/crate/chest,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ak" = (
 /obj/structure/door/fancy,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "an" = (
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "at" = (
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "av" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aw" = (
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ax" = (
 /obj/structure/bed/shit,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ay" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aA" = (
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aE" = (
 /obj/structure/door/stone,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aF" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aG" = (
 /turf/closed/wall/mineral/wooddark/end,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aI" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aL" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aM" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aQ" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aT" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aU" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aZ" = (
 /obj/structure/table/wood/plain/alt,
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /obj/item/reagent_containers/food/snacks/cheddar/aged,
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "fh" = (
 /obj/structure/table/vtable,
 /obj/item/paper/scroll,
 /obj/item/clothing/ring/gold,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "iS" = (
 /obj/structure/table/wood/nice/decorated,
 /obj/item/clothing/face/cigarette/pipe/westman,
@@ -100,19 +100,19 @@
 /obj/item/reagent_containers/glass/cup/skull,
 /obj/item/reagent_containers/glass/cup/silver,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "lx" = (
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "rm" = (
 /obj/structure/chair/wood,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "uR" = (
 /obj/structure/bed/inn/double,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "vD" = (
 /obj/structure/table/wood/nice/decorated,
 /obj/item/candle/yellow/lit/infinite/strong/skull,
@@ -120,30 +120,30 @@
 /obj/item/reagent_containers/glass/bottle/redwine,
 /obj/item/statue/gold,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "zA" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "HU" = (
 /obj/structure/table/vtable/v2,
 /obj/item/book/godofdreamsandnightmares,
 /obj/item/natural/feather,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "LZ" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "QP" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "TY" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/ruinedwood/chevron,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 
 (1,1,1) = {"
 aT

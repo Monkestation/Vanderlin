@@ -21,5 +21,6 @@
 	name = "silence zone"
 	desc = "An area of magical silence."
 	icon = 'icons/effects/effects.dmi'
-	icon_state = "empowerment"
+	icon_state = "shield-grey"
+	alpha = 150
 	duration = 30 SECONDS

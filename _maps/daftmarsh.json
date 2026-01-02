@@ -13,7 +13,7 @@
 		{"Down": true, "Turf Weather Effects": true}
 	],
 	"other_z": [
-		"_maps/map_files/daftmarsh/daftmarsh_outland.json"
+		"map_files/daftmarsh/daftmarsh_outland"
 	],
 	"minetype": null,
 	"space_empty_levels": 0,

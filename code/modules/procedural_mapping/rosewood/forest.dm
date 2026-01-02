@@ -31,8 +31,8 @@
 							/turf/open/floor/snow/patchy = 15,
 							/turf/open/floor/grass/cold = 5,
 							/turf/open/floor/dirt = 5)
-	allowed_areas = list(/area/rogue/outdoors/woods,
-							/area/rogue/outdoors/woods_safe)
+	allowed_areas = list(/area/outdoors/woods,
+							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestturfs/dirt
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -63,8 +63,8 @@
 							/obj/item/natural/stone = 2,
 							/obj/item/natural/rock = 4,
 							/obj/item/grown/log/tree/stick = 6)
-	allowed_areas = list(/area/rogue/outdoors/woods,
-							/area/rogue/outdoors/woods_safe)
+	allowed_areas = list(/area/outdoors/woods,
+							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestsnow/grass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -93,8 +93,8 @@
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 2,
 							/obj/item/grown/log/tree/stick = 8)
-	allowed_areas = list(/area/rogue/outdoors/woods,
-							/area/rogue/outdoors/woods_safe)
+	allowed_areas = list(/area/outdoors/woods,
+							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestgrass/grass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -115,8 +115,8 @@
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 2,
 							/obj/item/grown/log/tree/stick = 8)
-	allowed_areas = list(/area/rogue/outdoors/woods,
-							/area/rogue/outdoors/woods_safe)
+	allowed_areas = list(/area/outdoors/woods,
+							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestdirt
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
@@ -135,8 +135,8 @@
 							/obj/item/grown/log/tree/stick = 8,
 							/obj/structure/closet/dirthole/closed/loot= 1,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0.5)
-	allowed_areas = list(/area/rogue/outdoors/woods,
-							/area/rogue/outdoors/woods_safe)
+	allowed_areas = list(/area/outdoors/woods,
+							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestdirt/grass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -161,6 +161,6 @@
 		                    /obj/structure/flora/grass/water/reeds = 30,
 	                        /obj/structure/kneestingers = 20,
 							/obj/structure/roguerock = 5)
-	allowed_areas = list(/area/rogue/outdoors/woods,
-							/area/rogue/outdoors/woods_safe,
-							/area/rogue/under/cave)
+	allowed_areas = list(/area/outdoors/woods,
+							/area/outdoors/woods_safe,
+							/area/under/cave)

@@ -99,10 +99,6 @@
 		if(EFFECT_STUTTER)
 			if((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) // stun is usually associated with stutter
 				stuttering = max(stuttering,(effect * hit_percent))
-		if(EFFECT_EYE_BLUR)
-			blur_eyes(effect * hit_percent)
-		if(EFFECT_DROWSY)
-			drowsyness = max(drowsyness,(effect * hit_percent))
 		if(EFFECT_JITTER)
 			if((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE))
 				jitteriness = max(jitteriness,(effect * hit_percent))
@@ -128,10 +124,6 @@
 		apply_effect(slur, EFFECT_SLUR, blocked)
 	if(stutter)
 		apply_effect(stutter, EFFECT_STUTTER, blocked)
-	if(eyeblur)
-		apply_effect(eyeblur, EFFECT_EYE_BLUR, blocked)
-	if(drowsy)
-		apply_effect(drowsy, EFFECT_DROWSY, blocked)
 	if(jitter)
 		apply_effect(jitter, EFFECT_JITTER, blocked)
 	return BULLET_ACT_HIT
@@ -283,12 +275,14 @@
 		return FALSE
 
 	var/prob2defend = user.defprob
+	var/can_dodge_see = TRUE
 	if(src && user)
 		prob2defend = 0
 
-	if(!can_see_cone(user))
-		if(d_intent == INTENT_PARRY)
+	if(!can_see_cone(user)) //for future, if you can't see the attacker, parrying will be useless, unless you're on dodge intent. this also affect being blinded?
+		if(d_intent == INTENT_PARRY && !HAS_TRAIT(src, TRAIT_BLINDFIGHTING))
 			return FALSE
+		can_dodge_see = FALSE
 		prob2defend = max(prob2defend - 15, 0)
 
 	if(m_intent == MOVE_INTENT_RUN)
@@ -299,6 +293,6 @@
 		if(INTENT_PARRY)
 			return attempt_parry(intenty, user, prob2defend)
 		if(INTENT_DODGE)
-			return attempt_dodge(intenty, user)
+			return attempt_dodge(intenty, user, can_dodge_see)
 
 	return FALSE

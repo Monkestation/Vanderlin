@@ -33,41 +33,60 @@
 		return
 	user.open_gear_ui(src)
 
-/obj/effect/building_node/proc/store_gear(obj/item/item, gear_type)
+
+/obj/effect/building_node/proc/store_gear(obj/item/item, datum/worker_gear/gear_datum)
 	if(!stored_gear)
 		stored_gear = list()
-	stored_gear[gear_type] = item
+
+	var/slot_type = gear_datum?.slot || "unknown"
+	var/gear_type = gear_datum?.type || /datum/worker_gear
+
+	// Create unique key
+	var/gear_key = "[slot_type]_[gear_type]_[stored_gear.len + 1]"
+
+	// Store both item and gear datum
+	stored_gear[gear_key] = list("item" = item, "gear" = gear_datum)
 	item.forceMove(src)
 
-/obj/effect/building_node/proc/retrieve_gear(gear_type)
-	if(!stored_gear || !(gear_type in stored_gear))
+	return gear_key
+
+/obj/effect/building_node/proc/retrieve_gear(gear_key)
+	if(!stored_gear || !(gear_key in stored_gear))
 		return null
 
-	var/obj/item/item = stored_gear[gear_type]
-	stored_gear -= gear_type
-	return item
+	var/list/gear_data = stored_gear[gear_key]
+	stored_gear -= gear_key
 
-/obj/effect/building_node/proc/get_stored_gear(gear_type)
+	return gear_data // Returns list("item" = item, "gear" = gear_datum)
+
+/obj/effect/building_node/proc/get_stored_gear(gear_key)
 	if(!stored_gear)
 		return null
-	return stored_gear[gear_type]
+	return stored_gear[gear_key]
 
-/obj/effect/building_node/proc/get_stored_gear_by_type(slot_type)
+/obj/effect/building_node/proc/get_stored_gear_by_slot(slot_type)
 	if(!stored_gear)
 		return list()
 
 	var/list/matching_gear = list()
 	for(var/gear_key in stored_gear)
-		if(findtext(gear_key, slot_type))
-			matching_gear[gear_key] = stored_gear[gear_key]
+		var/list/gear_data = stored_gear[gear_key]
+		var/datum/worker_gear/gear = gear_data["gear"]
+		if(gear && gear.slot == slot_type)
+			matching_gear[gear_key] = gear_data
 
 	return matching_gear
 
+/obj/effect/building_node/proc/get_all_stored_gear()
+	if(!stored_gear)
+		return list()
+	return stored_gear.Copy()
+
 /obj/effect/building_node/proc/get_storage_capacity(slot_type)
-	return 6 // override in subtypes if needed
+	return 20 // Can store 20 items per slot type
 
 /obj/effect/building_node/proc/get_stored_count(slot_type)
-	var/list/matching = get_stored_gear_by_type(slot_type)
+	var/list/matching = get_stored_gear_by_slot(slot_type)
 	return length(matching)
 
 /obj/effect/building_node/proc/can_store_more(slot_type)

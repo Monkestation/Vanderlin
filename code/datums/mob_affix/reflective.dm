@@ -13,13 +13,12 @@
 	if(world.time < last_damage)
 		return
 	if(damagetype == BRUTE)
-		new /obj/effect/temp_visual/retaliate
 		var/reflect_damage = round(damage * (0.3 * intensity))
+		last_damage = world.time + 10 SECONDS
 		for(var/mob/living/M in range(1, source))
-			if(M != source && !(REF(M) in source.faction) && !(M in SSmobs.matthios_mobs))
+			if(M != source && !faction_check(source.faction, M.faction) && !(M in SSmatthios_mobs.matthios_mobs))
 				M.apply_damage(reflect_damage, BRUTE)
 				M.visible_message(span_warning("[M] is hurt by [source]'s reflective hide!"))
-				last_damage = world.time + 10 SECONDS
 				break // Only reflect to one nearby enemy
 
 /obj/effect/temp_visual/retaliate

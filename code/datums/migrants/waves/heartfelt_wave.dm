@@ -9,6 +9,7 @@
 	outfit = /datum/outfit/heartfelt_lord
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
 
 	jobstats = list(
@@ -46,6 +47,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/outfit/heartfelt_lord
+	name = "Lord of Heartfelt (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/undershirt
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/clothing/neck/gorget
@@ -72,6 +74,7 @@
 	outfit = /datum/outfit/heartfelt_lady
 	allowed_sexes = list(FEMALE)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
 
 	jobstats = list(
@@ -105,6 +108,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/outfit/heartfelt_lady
+	name = "Lady of Heartfelt (Migrant Wave)"
 	head = /obj/item/clothing/head/hennin
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	cloak = /obj/item/clothing/cloak/heartfelt
@@ -137,6 +141,7 @@
 	tutorial = "You are the Hand of Heartfelt, burdened by the perception of failure in protecting your Lord's domain. Despite doubts from others, your loyalty remains steadfast as you journey to Vanderlin, determined to fulfill your duties."
 	outfit = /datum/outfit/heartfelt_hand
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
 
 	jobstats = list(
@@ -164,9 +169,10 @@
 		TRAIT_SEEPRICES,
 	)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_hand
+	name = "Hand of Heartfelt (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/undershirt
 	belt = /obj/item/storage/belt/leather/black
 	shoes = /obj/item/clothing/shoes/nobleboot
@@ -190,8 +196,9 @@
 	tutorial = "You are a Knight of Heartfelt, once part of a brotherhood in service to your Lord. Now, alone and committed to safeguarding what remains of your court, you ride to Vanderlin, resolved to ensure their safe arrival."
 	outfit = /datum/outfit/heartfelt_knight
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_PER = 1,
@@ -243,7 +250,7 @@
 	var/prev_real_name = spawned.real_name
 	var/prev_name = spawned.name
 	var/honorary = "Sir"
-	if(spawned.gender == FEMALE)
+	if(spawned.pronouns == SHE_HER)
 		honorary = "Dame"
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
@@ -253,6 +260,7 @@
 		SEND_SIGNAL(boiler, COMSIG_ATOM_STEAM_INCREASE, rand(500, 900))
 
 /datum/outfit/heartfelt_knight
+	name = "Knight of Heartfelt (Migrant Wave)"
 	backl = /obj/item/clothing/cloak/boiler
 	armor = /obj/item/clothing/armor/steam
 	shoes = /obj/item/clothing/shoes/boots/armor/steam
@@ -285,9 +293,10 @@
 	tutorial = "You are the Magos of Heartfelt, renowned for your arcane knowledge yet unable to foresee the tragedy that befell your home. Drawn by a guiding star to Vanderlin, you seek answers and perhaps a new purpose in the wake of destruction."
 	outfit = /datum/outfit/heartfelt_magos
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_patrons = list(/datum/patron/divine/noc)
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_MAGICK)
 	jobstats = list(
 		STATKEY_STR = -1,
 		STATKEY_CON = -1,
@@ -329,10 +338,11 @@
 			STATKEY_PER = 1,
 			STATKEY_SPD = -1,
 		)
-		spawned.adjust_stat_modifier_list("job_stats", old_stats)
+		spawned.adjust_stat_modifier_list(STATMOD_JOB, old_stats)
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
 /datum/outfit/heartfelt_magos
+	name = "Magos of Heartfelt (Migrant Wave)"
 	neck = /obj/item/clothing/neck/talkstone
 	cloak = /obj/item/clothing/cloak/black_cloak
 	armor = /obj/item/clothing/shirt/robe/colored/black
@@ -360,6 +370,7 @@
 	outfit = /datum/outfit/heartfelt_prior
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	allowed_patrons = list(/datum/patron/divine/astrata)
+	exp_types_granted  = list(EXP_TYPE_CLERIC)
 
 	jobstats = list(
 		STATKEY_STR = -1,
@@ -387,7 +398,7 @@
 	spawned.virginity = TRUE
 
 	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1)
+		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
@@ -396,6 +407,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/heartfelt_prior
+	name = "Heartfelt Prior (Migrant Wave)"
 	neck = /obj/item/clothing/neck/psycross/silver
 	shirt = /obj/item/clothing/shirt/undershirt/priest
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -445,12 +457,14 @@
 		/datum/skill/labor/mining = 2,
 		/datum/skill/craft/smelting = 4,
 		/datum/skill/misc/reading = 2,
+		/datum/skill/craft/bombs= 4,
 	)
 
 	traits = list(TRAIT_SEEPRICES)
-	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 /datum/outfit/heartfelt_artificer
+	name = "Supreme Artificer (Migrant Wave)"
 	head = /obj/item/clothing/head/articap
 	armor = /obj/item/clothing/armor/leather/jacket/artijacket
 	pants = /obj/item/clothing/pants/trou/artipants

@@ -1,50 +1,50 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed,
-/area/rogue)
+/area)
 "d" = (
 /turf/closed/mineral/bedrock,
-/area/rogue)
+/area)
 "g" = (
 /obj/effect/landmark/start/lich,
 /turf/open/floor/blocks/paving,
-/area/rogue)
+/area)
 "n" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue)
+/area)
 "r" = (
 /turf/closed/splashscreen,
-/area/rogue)
+/area)
 "u" = (
 /obj/effect/landmark/start/new_player,
 /turf/open/floor/blocks,
-/area/rogue)
+/area)
 "x" = (
 /obj/effect/landmark/start/vampireknight,
 /turf/open/floor/blocks/paving,
-/area/rogue)
+/area)
 "y" = (
 /obj/effect/landmark/start/vampirespawn,
 /turf/open/floor/blocks/paving,
-/area/rogue)
+/area)
 "F" = (
 /obj/effect/landmark/start/bandit,
 /turf/open/floor/blocks/paving,
-/area/rogue)
+/area)
 "H" = (
 /obj/effect/landmark/admin,
 /turf/open/floor/blocks/paving,
-/area/rogue)
+/area)
 "P" = (
 /obj/effect/landmark/start/vampirelord,
 /turf/open/floor/blocks/paving,
-/area/rogue)
+/area)
 "X" = (
 /turf/closed/basic,
-/area/rogue)
+/area)
 "Z" = (
 /turf/open/floor/blocks/paving,
-/area/rogue)
+/area)
 
 (1,1,1) = {"
 a

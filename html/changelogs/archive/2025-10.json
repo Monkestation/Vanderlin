@@ -720,5 +720,295 @@
                 "map": "added various items to the vampire lord manor"
             }
         ]
+    },
+    "2025-10-22": {
+        "wgtjunior743": [
+            {
+                "bugfix": "Steward pay by class not working for some jobs"
+            },
+            {
+                "bugfix": "Monarch Change Position not giving female titles for those who are females."
+            },
+            {
+                "bugfix": "Hand(besides the Hand class) and Consort not getting their extra vote weight"
+            },
+            {
+                "bugfix": "a job related family tree bug"
+            },
+            {
+                "bugfix": "Garrision recruit and other \\\"fake\\\" jobs titles appearing as Unknown."
+            }
+        ],
+        "AnDigitalGondola": [
+            {
+                "balance": "Gave werewolves brushwalking."
+            },
+            {
+                "balance": "Getting pulled across a meagre bush will not immobilize mobs."
+            }
+        ],
+        "Arkatos": [
+            {
+                "rscadd": "Lux offerings to the Matthios idol now count towards overall bandit contributions and are triumph capped together with them."
+            },
+            {
+                "rscdel": "Deleted triumph loss from seeing your spouse die, resisting conversions and returning to lobby from assasins's dagger."
+            },
+            {
+                "bugfix": "Honor duels now reward victories properly."
+            },
+            {
+                "bugfix": "Dendor task \\\"Butcher animals\\\" now works properly."
+            },
+            {
+                "bugfix": "Fixed a case where notable people were not assigned properly."
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "added ponchos"
+            },
+            {
+                "rscadd": "Added new jewelry and their crafting recipes"
+            }
+        ],
+        "SarmentiCampbell": [
+            {
+                "balance": "Some Minor Maniac Hallucination/graggazo changes"
+            }
+        ]
+    },
+    "2025-10-23": {
+        "Somniworld": [
+            {
+                "rscadd": "Gave the Feldsher a ring denoting their ability to manipulate and extract lux legally. Stop lynching them, kthx."
+            },
+            {
+                "balance": "Tolerated inhumen species may now become butlers and court physicians."
+            },
+            {
+                "balance": "Tritons and medicators can now become Templars."
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "Added new skin tones"
+            }
+        ],
+        "Arkatos": [
+            {
+                "rscadd": "Graggar's Culling god intervention event now uses personal objectives."
+            },
+            {
+                "rscadd": "Eora's Matchmaking god intervention event now uses personal objectives."
+            },
+            {
+                "qol": "Some important chat messages should be harder to miss."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Sword Dancer now has bardic inspiration"
+            },
+            {
+                "bugfix": "Silver Amulet not protecting from transfix"
+            },
+            {
+                "bugfix": "Psycross / SIlver amulet not protecting from transfix besides the message."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "bugfix": "fixed crimson fangs vampires not having infinite energy"
+            },
+            {
+                "rscadd": "Admin Spell: Arcane Bullet"
+            }
+        ],
+        "AnDigitalGondola": [
+            {
+                "balance": "Made beespider attacks and hand feeding add spiderhoney production."
+            },
+            {
+                "balance": "Flattened spiderhoney production values."
+            },
+            {
+                "rscadd": "Gave beespiders the ability to make webs after being fed consistently."
+            },
+            {
+                "rscadd": "Four new sub-types of honey made by apiaries favoring specific plants."
+            },
+            {
+                "image": "Three new sprites for mad honey, rouge honey, and moon honey."
+            },
+            {
+                "bugfix": "Made inserting a new bee queen give constructed apiaries a single bee to start building a hive."
+            }
+        ],
+        "DrSirKnight": [
+            {
+                "rscadd": "New trait for servants to show royal family likes and dislikes"
+            }
+        ],
+        "grungussuss": [
+            {
+                "rscadd": "puffer shot can be heard on the entire map"
+            }
+        ]
+    },
+    "2025-10-25": {
+        "DrSirKnight": [
+            {
+                "rscadd": "younglings can be nobles now"
+            },
+            {
+                "balance": "female noble mostly the same as male noble now"
+            }
+        ],
+        "Arkatos": [
+            {
+                "rscadd": "Default king's tax rate changed from 11% to 10%."
+            },
+            {
+                "rscadd": "Untaxed leftovers from depositing to MEISTER are now saved and are taxed in the future deposits when the untaxed amount is actually enough to be taxable. You can't escape paying taxes now, peasants."
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "No flaw works properly for both latejoin and roundstart."
+            }
+        ],
+        "Wouju": [
+            {
+                "map": "removed a brazier in the apothecary garden that caused gnomes to get stuck on"
+            },
+            {
+                "balance": "Most surgery steps can now be performed by those with average in medicine, the difficulty is still the same"
+            }
+        ]
+    },
+    "2025-10-27": {
+        "wgtjunior743": [
+            {
+                "bugfix": "Wanted poster works for roundstart bandit and others"
+            },
+            {
+                "bugfix": "Merchant drinks in the goldface not appearing"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added new zizo miracle: snuff lights"
+            }
+        ]
+    },
+    "2025-10-29": {
+        "wgtjunior743": [
+            {
+                "admin": "Bulk Stat change options for admins."
+            }
+        ],
+        "Viviridia": [
+            {
+                "rscadd": "Added new Fruits"
+            },
+            {
+                "rscadd": "Added tarts made from the new fruits"
+            },
+            {
+                "rscadd": "Added new fruits for coastal trader seeds"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "kilts, sashes, and turbans."
+            },
+            {
+                "balance": "kerns now have cloth kilts instead of iron kilts."
+            }
+        ],
+        "Arkatos": [
+            {
+                "bugfix": "Aspirant should now get his rightful supporters."
+            }
+        ]
+    },
+    "2025-10-30": {
+        "SarmentiCampbell": [
+            {
+                "rscadd": "Town-sided roles get one triumph per night (two triumphs per two night)"
+            },
+            {
+                "rscadd": "Being readied up when the round start give you great food buff, 30 mammons in a stashed pouch, 1 triumph"
+            }
+        ],
+        "dwasint": [
+            {
+                "rscadd": "werewolfs now use rage to determine transformation\\nchange:werewolfs now heal when above 50 rage and in wolf form"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "A new clothing item, and a new role"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "rscdel": "removes a lot of the godawful replacements in the dwarf accent"
+            },
+            {
+                "qol": "makes dwarves actually a bit comprehendable"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "Arrows/Bolts/Darts poisoning someone even if their armor stopped the projectile."
+            },
+            {
+                "bugfix": "\\\"My armor was penetrated\\\" happening all the time even if your armor was not penetrated."
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Ravox and Xylix's church roles (including outlanders) get new tunes from T82-Sulfurhead"
+            }
+        ],
+        "AnDigitalGondola": [
+            {
+                "bugfix": "Fixed invisible wooden stools and copper pitchforks."
+            },
+            {
+                "image": "New sprites for barstools and copper pitchforks."
+            },
+            {
+                "rscadd": "Crafting barstools from a log and cloth with carpentry."
+            },
+            {
+                "map": "Changed the majority of existing barstools into wooden stools."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added Nomadic Herder pilgrim and Khan migration wave"
+            },
+            {
+                "rscadd": "Added new steppe armors, clothing and a sword"
+            },
+            {
+                "balance": "Steppesman mercenary changes, can pick between 2 classes"
+            },
+            {
+                "image": "added various steppes related sprites"
+            },
+            {
+                "spellcheck": "fixed a horrible typo in the steppesman mercenary description"
+            },
+            {
+                "code_imp": "Removed mentions of Avars from drinks"
+            },
+            {
+                "bugfix": "Fixed volf mantle sprite on females"
+            }
+        ]
     }
 }

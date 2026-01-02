@@ -3,7 +3,8 @@
 	icon = 'icons/effects/snow.dmi'
 	icon_state = "trench_base"
 
-	var/list/diged = list("2" = 0, "1" = 0, "8" = 0, "4" = 0)
+	// A bitflag of dug directions, only works because we only allow cardinals.
+	var/list/diged = 0
 	var/water_logged = FALSE
 	var/turf/open/water/water_parent
 	var/datum/reagent/water_reagent
@@ -36,20 +37,20 @@
 			irrigation_channel.update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/irrigation_channel/proc/set_diged_ways(dir)
-	diged["[dir]"] = TRUE
+	diged |= dir
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/irrigation_channel/proc/unset_diged_ways(dir)
-	diged["[dir]"] = 0
+	diged &= ~dir
 	update_appearance(UPDATE_OVERLAYS)
 
 
 /obj/structure/irrigation_channel/update_overlays()
 	. = ..()
 	var/new_overlay = ""
-	for(var/i in diged)
-		if(diged[i])
-			new_overlay += i
+	for(var/dir_to_check in GLOB.cardinals)
+		if(diged & dir_to_check)
+			new_overlay += num2text(dir_to_check)
 	icon_state = "[new_overlay]"
 	if(!new_overlay)
 		icon_state = "trench_base"
@@ -69,7 +70,7 @@
 				var/turf/open/water/water = cardinal_turf
 				if(water.water_volume < 10)
 					continue
-				if(water.blocked_flow_directions["[get_dir(water, src)]"])
+				if(water.blocked_flow_directions & get_dir(water, src))
 					continue
 				water_logged = TRUE
 				water_parent = water
@@ -88,7 +89,7 @@
 				water_logged = TRUE
 				update_appearance(UPDATE_OVERLAYS)
 	else
-		if(water_parent.blocked_flow_directions["[get_dir(water_parent, src)]"])
+		if(water_parent.blocked_flow_directions & get_dir(water_parent, src))
 			water_logged = FALSE
 			update_appearance(UPDATE_OVERLAYS)
 
@@ -125,6 +126,6 @@
 		if(!do_after(user, 4 SECONDS * shovel.time_multiplier, src))
 			return
 		QDEL_NULL(shovel.heldclod)
-		shovel.update_appearance()
+		shovel.update_appearance(UPDATE_OVERLAYS)
 		qdel(src)
 		return TRUE

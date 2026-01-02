@@ -314,3 +314,14 @@
 	attacked_atom = /obj/item/natural/clay
 	skillcraft = /datum/skill/craft/masonry
 	output = /obj/item/natural/raw_brick
+
+/datum/repeatable_crafting_recipe/survival/mushmound
+	name = "mushroom mound"
+	requirements = list(
+		/obj/item/natural/chaff = 2,
+		/obj/item/natural/poo = 2,
+	)
+	attacked_atom = /obj/item/natural/poo
+	starting_atom = /obj/item/natural/chaff
+	output = /obj/structure/soil/mushmound
+	craftdiff = 0

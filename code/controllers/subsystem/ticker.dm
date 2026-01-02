@@ -363,7 +363,7 @@ SUBSYSTEM_DEF(ticker)
 	SEND_SIGNAL(src, COMSIG_TICKER_ROUND_STARTING, world.time)
 	round_start_irl = REALTIMEOFDAY
 
-	INVOKE_ASYNC(SSdbcore, /datum/controller/subsystem/dbcore/proc/SetRoundStart)
+	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore, SetRoundStart))
 
 	message_admins(span_boldnotice("Welcome to [SSmapping.config.map_name]!"))
 
@@ -416,7 +416,7 @@ SUBSYSTEM_DEF(ticker)
 			S.after_round_start()
 		else
 			stack_trace("[S] [S.type] found in start landmarks list, which isn't a start landmark!")
-
+	SSgamemode.refresh_alive_stats(first_post_roundstart_check = TRUE)
 
 //These callbacks will fire after roundstart key transfer
 /datum/controller/subsystem/ticker/proc/OnRoundstart(datum/callback/cb)

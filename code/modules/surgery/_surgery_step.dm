@@ -58,25 +58,23 @@
 	var/skill_median = SKILL_LEVEL_JOURNEYMAN
 	/// Modifiers to success chance when you're above the median
 	var/list/skill_bonuses = list(
-		1 = 0.2,
-		2 = 0.4,
-		3 = 0.6,
-		4 = 0.8,
-		5 = 1,
-		6 = 2,
+		0.2,
+		0.4,
+		0.6,
+		0.8,
+		1,
+		2,
 	)
 	/// Modifiers to success chance when you're below the median
 	var/list/skill_maluses = list(
-		1 = -0.2,
-		2 = -0.4,
-		3 = -0.6,
-		4 = -0.8,
-		5 = -1,
-		6 = -2,
+		-0.2,
+		-0.4,
+		-0.6,
+		-0.8,
+		-1,
+		-2,
 	)
 
-	/// Handles techweb-oriented surgeries
-	var/requires_tech = FALSE
 	/**
 	 * type; doesn't show up if this type exists.
 	 * Set to /datum/surgery_step if you want to hide a "base" surgery  (useful for typing parents IE healing.dm just make sure to null it out again)
@@ -95,30 +93,10 @@
 		return FALSE
 	if(!tool_check(user, tool))
 		return FALSE
-	if(!validate_tech(user, target, target_zone, intent))
-		return FALSE
 	if(!validate_user(user, target, target_zone, intent))
 		return FALSE
 	if(!validate_target(user, target, target_zone, intent))
 		return FALSE
-
-	return TRUE
-
-/datum/surgery_step/proc/validate_tech(mob/user, mob/living/target, target_zone, datum/intent/intent)
-	SHOULD_CALL_PARENT(TRUE)
-	// Always return false in this case
-	if(replaced_by == /datum/surgery_step)
-		return FALSE
-
-	// True surgeons (like abductor scientists) need no instructions
-	if(HAS_TRAIT(user, TRAIT_SURGEON) || (user.mind && HAS_TRAIT(user.mind, TRAIT_SURGEON)))
-		// only show top-level surgeries
-		if(replaced_by)
-			return FALSE
-		return TRUE
-
-	if(!requires_tech && !replaced_by)
-		return TRUE
 
 	return TRUE
 

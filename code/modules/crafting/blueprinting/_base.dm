@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 			to_chat(user, "<span class='warning'>There's already a light post here!</span>")
 			return FALSE
 		if(locate(/obj/machinery/light/fueledstreet) in T)
-			to_chat(user, "<span class='warning'>There's already a street light here!</span>")
+			to_chat(user, "<span class='warning'>There's already a street lamp here!</span>")
 			return FALSE
 		if(locate(/obj/structure/noose) in T)
 			to_chat(user, "<span class='warning'>There's already a noose here!</span>")

@@ -19,4 +19,3 @@
 	// Restore some durability or repair minor damage
 	if(target.get_integrity() < target.max_integrity)
 		target.repair_damage(10)
-		target.update_appearance()

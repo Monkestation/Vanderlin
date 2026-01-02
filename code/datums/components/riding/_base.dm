@@ -178,7 +178,7 @@
 	if(!turf_check(next, current))
 		to_chat(user, "<span class='warning'>My \the [AM] can not go onto [next]!</span>")
 		return
-	if(!Process_Spacemove(direction) || !isturf(AM.loc))
+	if(!isturf(AM.loc))
 		return
 	step(AM, direction)
 
@@ -196,9 +196,6 @@
 /datum/component/riding/proc/Unbuckle(atom/movable/M)
 	addtimer(CALLBACK(parent, TYPE_PROC_REF(/atom/movable, unbuckle_mob), M), 0, TIMER_UNIQUE)
 
-/datum/component/riding/proc/Process_Spacemove(direction)
-	var/atom/movable/AM = parent
-	return override_allow_spacemove || AM.has_gravity()
 
 /datum/component/riding/proc/account_limbs(mob/living/M)
 	if(M.usable_legs < 2 && !slowed)

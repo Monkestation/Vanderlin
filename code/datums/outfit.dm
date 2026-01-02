@@ -17,6 +17,9 @@
 	///Name of the outfit (shows up in the equip admin verb)
 	var/name = "Naked"
 
+	/// Id for outfits,it is used with the Custom Outfits Glob.
+	var/id
+
 	/// Type path of item to go in suit slot
 	var/suit = null
 
@@ -126,6 +129,9 @@
 	//to be overridden for customization depending on client prefs,species etc
 	return
 
+/datum/outfit/proc/map_override(mob/living/carbon/human/H, visuals_only = FALSE)
+	return
+
 /**
  * Called after the equip proc has finished
  *
@@ -151,6 +157,7 @@
  */
 /datum/outfit/proc/equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	pre_equip(H, visuals_only)
+	map_override(H, visuals_only)
 
 	if(belt)
 		H.equip_to_slot_or_del(new belt(H),ITEM_SLOT_BELT, TRUE)
@@ -322,6 +329,14 @@
 	.["beltr"] = beltr
 	.["shoes"] = shoes
 	.["scabbards"] = scabbards
+	.["id"] = id
+	if(length(scabbards))
+		var/list/scabbard_text = list()
+		for(var/path in scabbards)
+			scabbard_text += "[path]"
+		.["scabbards"] = scabbard_text
+	else
+		.["scabbards"] = list()
 
 /// Prompt the passed in mob client to download this outfit as a json blob
 /datum/outfit/proc/save_to_file(mob/admin)
@@ -354,10 +369,12 @@
 	beltl = text2path(outfit_data["beltl"])
 	beltr = text2path(outfit_data["beltr"])
 	shoes = text2path(outfit_data["shoes"])
-	var/scabbard_data1 = outfit_data["scabbards"][1]
-	if(scabbard_data1)
-		LAZYADD(scabbards, scabbard_data1)
-	var/scabbard_data2 = outfit_data["scabbards"][2]
-	if(scabbard_data2)
-		LAZYADD(scabbards, scabbard_data2)
+	id = outfit_data["id"]
+	var/list/scabbard_list = outfit_data["scabbards"]
+	if(islist(scabbard_list))
+		for(var/scabbard_path in scabbard_list)
+			var/path = text2path(scabbard_path)
+			if(path)
+				LAZYADD(scabbards, path)
+
 	return TRUE

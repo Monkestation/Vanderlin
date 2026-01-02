@@ -1,8 +1,5 @@
 /obj/item/weapon
-	name = ""
-	desc = ""
-	icon_state = "sabre"
-	icon = 'icons/roguetown/weapons/32.dmi'
+	name = "weapon"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	force = 15

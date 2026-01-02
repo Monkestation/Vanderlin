@@ -18,7 +18,7 @@
 
 /obj/item/clothing/shoes/boots/rare/elfplate
 	name = "dark elvish plated boots"
-	desc = "Bizzarrely shaped boots of exquisite dark elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
+	desc = "Bizarrely shaped boots of exquisite dark elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
 	body_parts_covered = FEET
 	icon_state = "elfshoes"
 	item_state = "elfshoes"
@@ -29,7 +29,7 @@
 
 /obj/item/clothing/shoes/boots/rare/elfplate/welfplate
 	name = "elvish plated boots"
-	desc = "Bizzarrely shaped boots of exquisite elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
+	desc = "Bizarrely shaped boots of exquisite elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
 	icon_state = "welfshoes"
 	item_state = "welfshoes"
 

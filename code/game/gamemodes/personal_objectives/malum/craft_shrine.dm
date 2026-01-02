@@ -34,14 +34,18 @@
 	if(current_count < target_count)
 		to_chat(owner.current, span_notice("You have built [current_count] out of [target_count] sacred crosses."))
 		return
+	else
+		complete_objective()
 
+/datum/objective/personal/craft_shrine/complete_objective()
+	. = ..()
 	to_chat(owner.current, span_greentext("You have built all the required sacred crosses, completing Malum's objective!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(MALUM, 20)
-	owner.current.adjust_skillrank(/datum/skill/craft/crafting, 1)
-	escalate_objective()
 	UnregisterSignal(owner.current, COMSIG_ITEM_CRAFTED)
+
+/datum/objective/personal/craft_shrine/reward_owner()
+	. = ..()
+	owner.current.adjust_skillrank(/datum/skill/craft/crafting, 1)
 
 /datum/objective/personal/craft_shrine/update_explanation_text()
 	explanation_text = "Build [target_count] wooden pantheon cross[target_count > 1 ? "es" : ""] to demonstrate your devotion to Malum."

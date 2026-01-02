@@ -86,13 +86,13 @@
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
-	base_strength = 6
-	base_perception = 8
-	base_endurance = 8
+	base_strength = 9
+	base_perception = 11
+	base_endurance = 9
 	base_constitution = 8
-	base_intelligence = 4
-	base_speed = 9
-	base_fortune = 6
+	base_intelligence = 8
+	base_speed = 11
+	base_fortune = 9
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 
 	set_patron(master.patron)
@@ -100,6 +100,7 @@
 	mob_biotypes = MOB_UNDEAD
 	faction = list(FACTION_UNDEAD)
 	ambushable = FALSE
+	candodge = FALSE
 
 	skeletonize(FALSE)
 	skele_look()

@@ -34,7 +34,7 @@
 /obj/item/natural/cured/essence
 	name = "essence of wilderness"
 	icon_state = "wessence"
-	desc = "A mystical essence embued with the power of Dendor. Merely holding it transports one's mind to ancient times."
+	desc = "A mystical essence imbued with the power of Dendor. Merely holding it transports one's mind to ancient times."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
@@ -71,6 +71,28 @@
 	desc = "Pelt from a cabbit."
 	icon_state = "wool2"
 
+/obj/item/natural/fur/direbear
+	desc = "fur from one of Dendor's mightiest creachers."
+	icon_state = "pelt_direbear"
+	color = "#33302b"
+	sellprice = 28
+
+/obj/item/natural/fur/fox
+	desc = "Fur from a venard."
+	icon_state = "pelt_fox"
+	color = null
+
+/obj/item/natural/fur/raccoon
+	desc = "Fur from a raccoon."
+	icon_state = "pelt_raccoon"
+	color = null
+	sellprice = 12
+
+/obj/item/natural/fur/bobcat
+	desc = "Fur from a lynx."
+	icon_state = "pelt_bobcat"
+	color = null
+
 /obj/item/natural/head
 	possible_item_intents = list(/datum/intent/use)
 	layer = 3.1
@@ -88,7 +110,7 @@
 			headpricemin = floor(headpricemin * 0.75)
 			headpricemax = floor(headpricemax * 0.75)
 		if(1)
-			//nothing
+			EMPTY_BLOCK_GUARD
 		if(2)
 			sellprice = floor(sellprice * 1.25)
 			headpricemin = floor(headpricemin * 1.25)
@@ -175,6 +197,21 @@
 	sellprice = 5
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 
+/obj/item/natural/head/direbear
+	name = "direbear head"
+	desc = "The head of a terrifying direbear."
+	icon_state = "direbearhead"
+	layer = 3.1
+	sellprice = 20
+
+/obj/item/natural/head/fox
+	name = "venard head"
+	desc = "The head of a majestic venard."
+	icon_state = "foxhead"
+	layer = 3.1
+	grid_height = 32
+	sellprice = 6
+
 /obj/item/natural/head/spider
 	name = "beespider head"
 	desc = "The severed head of a venomous beespider."
@@ -240,7 +277,7 @@
 					user.dropItemToGround(src)
 					S.ssaddle = src
 					src.forceMove(S)
-					S.update_appearance()
+					S.update_appearance(UPDATE_OVERLAYS)
 		return
 	..()
 

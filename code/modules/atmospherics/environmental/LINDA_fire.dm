@@ -194,7 +194,7 @@
 	if(SSParticleWeather.runningWeather?.target_trait == PARTICLEWEATHER_RAIN) //this does apply to indoor turfs but w/e
 		var/turf/floor= get_turf(src)
 		if(!floor?.outdoor_effect?.weatherproof)
-			modifier = 0.5
+			modifier *= 0.5
 	if(isturf(get_turf(src)))
 		var/turf/floor= get_turf(src)
 		floor.burn_power = max(0, floor.burn_power - (1 * firelevel))

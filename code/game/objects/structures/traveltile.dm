@@ -10,8 +10,12 @@
 	var/aportalloc = "a"
 
 /obj/structure/fluff/testportal/Initialize()
-	name = aportalloc
+	LAZYADD(GLOB.testportals, src)
 	return ..()
+
+/obj/structure/fluff/testportal/Destroy()
+	. = ..()
+	LAZYREMOVE(GLOB.testportals, src)
 
 /obj/structure/fluff/testportal/attack_hand(mob/user)
 	var/fou

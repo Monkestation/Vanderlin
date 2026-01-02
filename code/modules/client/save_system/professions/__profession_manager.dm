@@ -169,7 +169,7 @@ GLOBAL_LIST_EMPTY(player_profession_managers)
 				new_abilities += ability_type
 
 	// If this is one of the active professions and we have a mob, refresh passives
-	if(profession_name in active_professions && attached_mob)
+	if(attached_mob && (profession_name in active_professions))
 		refresh_passives()
 
 	// Notify player of unlocks

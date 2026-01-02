@@ -20,6 +20,8 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	var/datum/reagent/restoration_chem
 	///do we contain Lux?
 	var/contains_lux = FALSE
+	///is our lux tainted?
+	var/tainted_lux = FALSE
 	///the chimeric table we pull from when creating chimeric nodes based on this blood
 	var/datum/chimeric_table/used_table
 
@@ -55,6 +57,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 /// A base type for all blood used by humans (NOT humanoids), for organization's sake
 /datum/blood_type/human
+	name = "Human"
 	contains_lux = TRUE
 	used_table = /datum/chimeric_table/human
 
@@ -142,18 +145,6 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	name = "Elf"
 	used_table = /datum/chimeric_table/elf
 
-/datum/blood_type/human/goblin
-	name = "Goblin"
-	used_table = /datum/chimeric_table/goblin
-
-/datum/blood_type/human/rousman
-	name = "Rousman"
-	used_table = /datum/chimeric_table/rousman
-
-/datum/blood_type/human/orc
-	name = "Orc"
-	used_table = /datum/chimeric_table/orc
-
 /datum/blood_type/animal
 	name = "Animal"
 	used_table = /datum/chimeric_table/animal
@@ -169,3 +160,27 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 /datum/blood_type/lycan
 	name = "Lycan"
 	used_table = /datum/chimeric_table/lycan
+
+/datum/blood_type/human/corrupted
+	contains_lux = TRUE
+	tainted_lux = TRUE
+	reagent_type = /datum/reagent/blood
+
+/datum/blood_type/human/corrupted/goblin
+	name = "Goblin"
+	used_table = /datum/chimeric_table/goblin
+
+/datum/blood_type/human/corrupted/orc
+	name = "Orc"
+	used_table = /datum/chimeric_table/orc
+
+/datum/blood_type/human/corrupted/rousman
+	name = "Rousman"
+	used_table = /datum/chimeric_table/rousman
+
+/datum/blood_type/human/corrupted/zizombie
+	name = "Zizombie"
+
+/datum/blood_type/putrid
+	name = "Putrid"
+	used_table = /datum/chimeric_table/putrid

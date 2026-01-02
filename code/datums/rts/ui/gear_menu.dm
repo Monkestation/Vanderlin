@@ -10,9 +10,9 @@
 	var/current_x = 0
 	var/current_y = 0
 
-/atom/movable/screen/gear_menu_backdrop/Initialize(mapload, datum/hud/hud_owner)
+/atom/movable/screen/gear_menu_backdrop/New(loc, ...)
 	. = ..()
-	close = new(null, hud_owner)
+	close = new
 
 /atom/movable/screen/gear_menu_backdrop/proc/open_ui(mob/camera/strategy_controller/opener, obj/effect/building_node/node)
 	close_uis(opener)

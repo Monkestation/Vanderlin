@@ -12,14 +12,52 @@
 
 /datum/antagonist/vampire/lord/on_gain()
 	var/mob/living/carbon/human/vampire = owner?.current
-	remove_job()
-	vampire.delete_equipment()
-	vampire.reset_and_reroll_stats()
-	vampire.purge_combat_knowledge()
-	vampire.remove_all_traits()
+	if(SSmapping.config.map_name != "Voyage")
+		remove_job()
+		vampire.delete_equipment()
+		vampire.reset_and_reroll_stats()
+		vampire.purge_combat_knowledge()
+		vampire.remove_all_traits()
 	. = ..()
-	addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
+	if(SSmapping.config.map_name != "Voyage")
+		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
 	vampire.grant_undead_eyes()
+
+/datum/antagonist/vampire/proc/get_thralls()
+	if(!clan_selected)
+		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
+		return
+
+	var/list/restricted_roles = typecacheof(list(
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
+		/datum/job/monk,
+	))
+
+	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, no_antags = TRUE, restricted_roles = restricted_roles)
+	var/thralls = rand(2, 3)
+
+	candidates -= owner.current
+
+	if(!length(candidates))
+		return
+
+	for(var/i = 1 to thralls)
+		var/mob/living/carbon/human/human = pick_n_take(candidates)
+		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
+		human.mind.add_antag_datum(new_antag)
+		human.adjust_bloodpool(500)
 
 /datum/antagonist/vampire/lord/greet()
 	to_chat(owner.current, span_userdanger("I am ancient. I am the Land. And I am now awoken to trespassers upon my domain."))
@@ -45,7 +83,8 @@
 	return TRUE
 
 /datum/antagonist/vampire/lord/move_to_spawnpoint()
-	owner.current.forceMove(pick(GLOB.vlord_starts))
+	if(SSmapping.config.map_name != "Voyage")
+		owner.current.forceMove(pick(GLOB.vlord_starts))
 
 /datum/outfit/vamplord/pre_equip(mob/living/carbon/human/H)
 	..()

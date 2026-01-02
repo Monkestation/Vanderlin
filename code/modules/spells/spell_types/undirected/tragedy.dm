@@ -6,8 +6,12 @@
 	antimagic_flags = NONE
 
 	invocation_type = INVOCATION_SHOUT
+	invocation = "Death will be laughing in the end."
 
 	spell_type = NONE
+	associated_skill = null
+	associated_stat = STATKEY_INT
+
 	charge_required = FALSE
 	sound = null
 

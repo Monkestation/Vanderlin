@@ -8,7 +8,6 @@
 	faction = FACTION_FOREIGNERS
 	total_positions = 20
 	spawn_positions = 20
-	min_pq = -20
 	banned_leprosy = FALSE
 	bypass_lastclass = TRUE
 
@@ -24,3 +23,11 @@
 	can_have_apprentices = TRUE
 
 	selection_color = "#a33096"
+
+/datum/job/advclass/pilgrim
+	abstract_type = /datum/job/advclass/pilgrim
+	category_tags = list(CTAG_PILGRIM)
+
+/datum/job/advclass/pilgrim/rare
+	abstract_type = /datum/job/advclass/pilgrim/rare
+	roll_chance = 30

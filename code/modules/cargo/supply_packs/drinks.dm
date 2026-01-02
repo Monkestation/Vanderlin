@@ -1,5 +1,5 @@
 /datum/supply_pack/food/drinks
-	group = "drinks"
+	group = "Drinks"
 
 /datum/supply_pack/food/drinks/water
 	name = "Water Bottle"
@@ -17,7 +17,7 @@
 	contains = /obj/item/reagent_containers/glass/bottle/beer/spottedhen
 
 /datum/supply_pack/food/drinks/blackgoat
-	name = "Jackberry Mix"
+	name = "Jacksberry Mix"
 	cost = 20
 	contains = /obj/item/reagent_containers/glass/bottle/beer/blackgoat
 
@@ -85,3 +85,48 @@
 	name = "Valmora Blue Wine"
 	cost = 305
 	contains = /obj/item/reagent_containers/glass/bottle/elfblue
+
+/datum/supply_pack/food/drinks/black1
+	name = "Baijiu"
+	cost = 30
+	contains = /obj/item/reagent_containers/glass/bottle/black/baijiu
+
+/datum/supply_pack/food/drinks/black2
+	name = "Huangjiu"
+	cost = 30
+	contains = /obj/item/reagent_containers/glass/bottle/black/huangjiu
+
+/datum/supply_pack/food/drinks/black3
+	name = "Komuchisake"
+	cost = 45
+	contains = /obj/item/reagent_containers/glass/bottle/black/komuchisake
+
+/datum/supply_pack/food/drinks/black4
+	name = "Murkwine"
+	cost = 25
+	contains = /obj/item/reagent_containers/glass/bottle/black/murkwine
+
+/datum/supply_pack/food/drinks/black5
+	name = "Nocshine"
+	cost = 40
+	contains = /obj/item/reagent_containers/glass/bottle/black/nocshine
+
+/datum/supply_pack/food/drinks/black6
+	name = "Shejiu"
+	cost = 30
+	contains = /obj/item/reagent_containers/glass/bottle/black/shejiu
+
+/datum/supply_pack/food/drinks/black7
+	name = "Whipwine"
+	cost = 25
+	contains = /obj/item/reagent_containers/glass/bottle/black/whipwine
+
+/datum/supply_pack/food/drinks/black8
+	name = "Yaojiu"
+	cost = 50
+	contains = /obj/item/reagent_containers/glass/bottle/black/yaojiu
+
+/datum/supply_pack/food/drinks/tealeaves
+	name = "Ground Tea Leaves"
+	cost = 10
+	contains = /obj/item/reagent_containers/food/snacks/produce/tealeaves_ground

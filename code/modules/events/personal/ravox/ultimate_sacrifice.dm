@@ -8,6 +8,7 @@
 	min_players = 35
 
 	tags = list(
+		TAG_RAVOX,
 		TAG_MEDICAL,
 	)
 
@@ -47,8 +48,10 @@
 	var/datum/objective/personal/ultimate_sacrifice/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE RAVOX'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("There is an honor in sacrifice. You have been granted a power by Ravox to sacrifice your own life to revive another. Beware, as you won't be able to be revived ever again. Use it only as a last resort to see a truly heinous injustice undone."))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE RAVOX'S CHOSEN!"),
+		span_notice("There is an honor in sacrifice. You have been granted a power by Ravox to sacrifice your own life to revive another. Beware, as you won't be able to be revived ever again. Use it only as a last resort to see a truly heinous injustice undone."),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/vo/male/knight/rage (6).ogg', 70)
 
 	chosen_one.mind.announce_personal_objectives()

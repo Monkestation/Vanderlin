@@ -1,8 +1,10 @@
 /datum/round_event_control/antagonist/solo/maniac
 	name = "Maniacs"
 	tags = list(
-		TAG_VILLIAN,
-		TAG_HAUNTED
+		TAG_ZIZO,
+		TAG_GRAGGAR,
+		TAG_VILLAIN,
+		TAG_COMBAT,
 	)
 	antag_datum = /datum/antagonist/maniac
 	roundstart = TRUE
@@ -11,24 +13,30 @@
 	minor_roleset = TRUE
 
 	restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Priest",
-		"Captain",
-		"Hand",
-		"Forest Warden",
-		"Royal Knight",
-		"Templar",
-		"Bandit",
-		"Wretch"
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
 	)
+
+	denominator = 30
 
 	base_antags = 1
 	maximum_antags = 2
 
 	earliest_start = 0 SECONDS
 
-	weight = 9
+	min_players = 25
+	weight = 8
 	secondary_events = list(
 		/datum/round_event_control/antagonist/solo/lich,
 		/datum/round_event_control/antagonist/solo/rebel,
@@ -37,7 +45,7 @@
 		/datum/round_event_control/antagonist/solo/werewolf,
 		/datum/round_event_control/antagonist/solo/zizo_cult
 	)
-	secondary_prob = 90
+	secondary_prob = 75
 	typepath = /datum/round_event/antagonist/solo/maniac
 
 /datum/round_event_control/antagonist/solo/maniac/canSpawnEvent(players_amt, gamemode, fake_check)
@@ -46,10 +54,10 @@
 	. = ..()
 
 /datum/round_event_control/antagonist/solo/maniac/midround
-	name = "Maniacs Midround"
+	name = "Maniac Awakening"
 	roundstart = FALSE
-	weight = 12
-	max_occurrences = 2
+	shared_occurence_type = null
+	weight = 6
 	base_antags = 1
 	earliest_start = 30 MINUTES
 	maximum_antags = 2

@@ -34,7 +34,7 @@
 
 /obj/item/clothing/armor/leather/masterwork
 	name = "masterwork leather armor"
-	desc = "This leather armor is a craftsmanship marvel. Made with the finest leather. Strong, nimible, reliable."
+	desc = "This leather armor is a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	max_integrity = INTEGRITY_STANDARD + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
 	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
@@ -53,6 +53,17 @@
 	armor = ARMOR_LEATHER
 	salvage_result = /obj/item/natural/hide/cured
 
+/obj/item/clothing/armor/leather/hide/steppe
+	name = "steppe hide armor"
+	desc = "Worn by riders of the steppe, this leather armor is padded with beast fur for warmth and comfort"
+	icon_state = "hatangafur"
+	sellprice = VALUE_LEATHER_ARMOR_FUR
+
+	armor = ARMOR_LEATHER_GOOD
+	body_parts_covered = COVERAGE_FULL
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 6.7
+
 //................ Splint Mail ............... //
 /obj/item/clothing/armor/leather/splint
 	name = "splint armor"
@@ -64,7 +75,6 @@
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 6.7
-
 
 //................ Leather Vest ............... //	- has no sleeves.  - can be worn in armor OR shirt slot
 /obj/item/clothing/armor/leather/vest
@@ -105,7 +115,7 @@
 	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/armor/leather/vest/colored/black
-	color = CLOTHING_DARK_INK
+	color = CLOTHING_SOOT_BLACK
 
 /obj/item/clothing/armor/leather/vest/colored/innkeep // repath to correct padded vest some day
 	name = "padded vest"
@@ -119,7 +129,7 @@
 	icon_state = "winterjacket"
 	detail_tag = "_detail"
 	color = CLOTHING_WHITE
-	detail_color = CLOTHING_SOOT_BLACK
+	detail_color = CLOTHING_DARK_INK
 	uses_lord_coloring = LORD_PRIMARY
 
 //................ Jacket ............... //	- Has a small storage space
@@ -130,10 +140,7 @@
 
 	body_parts_covered = COVERAGE_SHIRT
 	item_weight = 2.2
-
-/obj/item/clothing/armor/leather/jacket/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
 /obj/item/clothing/armor/leather/jacket/dropped(mob/living/carbon/human/user)
 	..()
@@ -207,11 +214,29 @@
 
 	body_parts_covered = COVERAGE_SHIRT
 
+//................ Silk Jacket ............... //
+
+/obj/item/clothing/armor/leather/jacket/tailcoat
+	name = "tailcoat"
+	desc = "A finely-sewn tailcoat often worn by those on the brink of the upper echelons of Astratan caste."
+	icon_state = "butlercoat"
+	item_state = "butlercoat"
+	detail_tag = "_detail"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_maids.dmi'
+	detail_color = CLOTHING_DARK_INK
+	slot_flags = ITEM_SLOT_ARMOR
+	armor = ARMOR_PADDED
+	allowed_ages = ALL_AGES_LIST
+
+/obj/item/clothing/armor/leather/jacket/tailcoat/lord
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	uses_lord_coloring = LORD_SECONDARY
+
 //................ Hand´s Coat ............... //
 /obj/item/clothing/armor/leather/jacket/hand
 	name = "noble coat"
 	icon_state = "handcoat"
-	desc = "A quality silken coat, discretely lined with thin metal platr on the inside to protect its affluent wearer."
+	desc = "A quality silken coat, discretely lined with a thin metal plate on the inside to protect its affluent wearer."
 	sellprice = VALUE_LEATHER_ARMOR_LORD
 
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
@@ -237,6 +262,19 @@
 	boobed = TRUE
 	armor = ARMOR_LEATHER
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
+
+/obj/item/clothing/armor/leather/jacket/leathercoat/confessor
+	name = "confessional coat"
+	desc = "A sturdy raincoat draped atop of a tightly-fastened boiled leather cuirass. The Ordo Venatari trainees often fashion little pieces of memorabilia and stitch it into the lower pockets of the coat to remind the confessors that their cause is virtuous, and that they mustn’t lose sight of what matters."
+	icon_state = "confessorcoat"
+	item_state = "confessorcoat"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	body_parts_covered = COVERAGE_FULL
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
+	armor = ARMOR_LEATHER
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
+	max_integrity = 250
 
 /obj/item/clothing/armor/leather/jacket/leathercoat/black
 	name = "black leather coat"
@@ -270,3 +308,20 @@
 	name = "renegade's coat"
 	desc = "An insulated leather coat with capelets. It protects you well from the elements, a useful thing for those who like to wait in ambush."
 	color = CLOTHING_ASH_GREY
+
+/obj/item/clothing/armor/leather/studded/psyaltrist
+	name = "cuir-bouilli armor"
+	desc = "Treated, water-boiled and composite-layered leather armor of fine Grenzelhoftian make."
+	icon_state = "cuirbouilli"
+	item_state = "cuirbouilli"
+
+/obj/item/clothing/armor/leather/heavy
+	name = "hardened leather armor"
+	desc = "A heavy steerhide jerkin with enough body to stand on its own. It forms a stiff, protective mantle \
+	for its wearer, shielding from blows and weather alike."
+	icon_state = "roguearmor_belt"
+	item_state = "roguearmor_belt"
+	armor = ARMOR_LEATHER_GOOD
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
+	sellprice = 20

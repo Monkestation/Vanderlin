@@ -11,13 +11,18 @@
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORWARDEN
-	min_pq = 8
 	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
-
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	blacklisted_species = list(SPEC_ID_HALFLING)
+
+	exp_type = list(EXP_TYPE_GARRISON)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)
+	exp_requirements = list(
+		EXP_TYPE_GARRISON = 900
+	)
 
 	outfit = /datum/outfit/forestwarden
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest)
@@ -26,8 +31,53 @@
 
 	job_bitflag = BITFLAG_GARRISON
 
-/datum/outfit/forestwarden/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_STR = 2,
+		STATKEY_PER = 1,
+		STATKEY_INT = 3,
+		STATKEY_END = 3,
+		STATKEY_SPD = 1
+	)
+
+	skills = list(
+		/datum/skill/combat/axesmaces = 4,
+		/datum/skill/combat/bows = 4,
+		/datum/skill/combat/crossbows = 2,
+		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/knives = 3,
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/reading = 2,
+		/datum/skill/misc/riding = 3,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/labor/lumberjacking = 1,
+		/datum/skill/craft/carpentry = 1,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/tanning = 2
+	)
+
+	traits = list(
+		TRAIT_HEAVYARMOR,
+		TRAIT_NOBLE,
+		TRAIT_FORAGER
+	)
+
+/datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/prev_real_name = spawned.real_name
+	var/prev_name = spawned.name
+	var/honorary = "Sir"
+	if(spawned.pronouns == SHE_HER)
+		honorary = "Dame"
+	spawned.real_name = "[honorary] [prev_real_name]"
+	spawned.name = "[honorary] [prev_name]"
+
+	spawned.verbs |= /mob/proc/haltyell
+
+/datum/outfit/forestwarden
+	name = "Forest Warden"
 	cloak = /obj/item/clothing/cloak/wardencloak
 	armor = /obj/item/clothing/armor/plate
 	shirt = /obj/item/clothing/armor/chainmail
@@ -42,30 +92,9 @@
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	backr = /obj/item/weapon/polearm/halberd/bardiche/warcutter
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/weapon/knife/hunting = 1, /obj/item/rope/chain = 1, /obj/item/key/forrestgarrison = 1, /obj/item/signal_horn = 1)
-
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/lumberjacking, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/tanning, 2, TRUE)
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_PER, 1)
-	H.change_stat(STATKEY_INT, 3)
-	H.change_stat(STATKEY_END, 3)
-	H.change_stat(STATKEY_SPD, 1)
-	H.verbs |= /mob/proc/haltyell
-	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_FORAGER, TRAIT_GENERIC)
+	backpack_contents = list(
+		/obj/item/weapon/knife/hunting = 1,
+		/obj/item/rope/chain = 1,
+		/obj/item/key/forrestgarrison = 1,
+		/obj/item/signal_horn = 1
+	)

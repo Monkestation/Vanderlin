@@ -221,7 +221,9 @@
 
 /datum/component/storage/concrete/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, params, storage_click)
 	if(!storing.melting_material)
-		return FALSE
+		var/obj/item/ingot/ingot = storing.smeltresult
+		if(!ispath(ingot, /obj/item/ingot))
+			return FALSE
 	. = ..()
 
 /datum/component/storage/concrete/grid/anvil_bin
@@ -282,7 +284,7 @@
 		/obj/item/reagent_containers/food/snacks/fish,
 		/obj/item/natural/worms,
 		/obj/item/natural/bundle/worms,
-		/obj/item/fishing/bait,
+		/obj/item/fishing/lure,
 		/obj/item/grown/log/tree/stick,
 		/obj/item/natural/bundle/stick,
 		/obj/item/weapon/knife,//wouldn't it be cool to smuggle a knife somewhere via a bucket?
@@ -371,3 +373,21 @@
 			)
 		)
 	)
+
+/datum/component/storage/concrete/grid/drying_rack
+	max_w_class = WEIGHT_CLASS_HUGE
+	screen_max_rows = 8
+	screen_max_columns = 4
+
+/datum/component/storage/concrete/grid/drying_rack/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/clothing))
+
+/datum/component/storage/concrete/grid/tray
+	max_w_class = WEIGHT_CLASS_BULKY
+	screen_max_rows = 6
+	screen_max_columns = 1
+
+/datum/component/storage/concrete/grid/tray/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/plate))

@@ -3,7 +3,7 @@
 	required_args = 3
 
 /datum/console_command/execute_delayed/help_information(obj/abstract/visual_ui_element/scrollable/console_output/output)
-	output.add_line("execute_delayed {SIGNAL} {TIME} {PROC} - will trigger set proc when the signal is recieved on the mob")
+	output.add_line("execute_delayed {SIGNAL} {TIME} {PROC} - will trigger set proc when the signal is received on the mob")
 	output.add_line("  variables can be set as named by going {VAR}={VALUE}")
 	output.add_line("  time is set in seconds")
 

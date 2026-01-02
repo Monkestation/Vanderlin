@@ -9,5 +9,10 @@
 
 /datum/mob_affix/explosive/proc/explosive_death(mob/living/simple_animal/hostile/retaliate/source, gibbed)
 	SIGNAL_HANDLER
+
+	source.visible_message(span_danger("[source] starts to hiss!"))
+	addtimer(CALLBACK(src, PROC_REF(exploding), source), 5 SECONDS)
+
+/datum/mob_affix/explosive/proc/exploding(mob/living/simple_animal/hostile/retaliate/source)
 	source.visible_message(span_danger("[source] explodes violently!"))
-	explosion(source, 0, 1, 2)
+	cell_explosion(get_turf(source), 30, 0.01)

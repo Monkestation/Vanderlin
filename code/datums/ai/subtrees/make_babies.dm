@@ -14,7 +14,7 @@
 	if(!SPT_PROB(chance, seconds_per_tick))
 		return
 	var/mob/living/simple_animal/mob = controller.pawn
-	if(SEND_SIGNAL(mob, COMSIG_MOB_RETURN_HUNGER) < 0.15)
+	if(SEND_SIGNAL(mob, COMSIG_MOB_RETURN_HUNGER) < 25)
 		return
 	if(controller.blackboard_key_exists(BB_BABIES_TARGET))
 		controller.queue_behavior(reproduce_behavior, BB_BABIES_TARGET, BB_BABIES_CHILD_TYPES)

@@ -111,7 +111,21 @@
 					emote("painmoan")
 			else
 				if(effective_pain >= pain_threshold) // Dynamic threshold based on endurance
-					if(prob(probby) && !HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+					if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT))
+						// Major pain event - increase tolerance
+						pain_tolerance += tolerance_gain_rate
+						last_major_pain_time = world.time
+						if(prob(25)) // PSYDONIC WEIGHTED COINFLIP. TWEAK THIS AS THOU WILT. DON'T LET THEM BE BROKEN, PSYDON WILLING. THROW CON-MAXXERS A BONE, TOO.
+							Immobilize(15) // EAT A MICROSTUN. YOU'RE AVOIDING A PAINCRIT.
+							if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT))
+								visible_message(span_info("[src] audibly grits their teeth. ENDURING through their pain."), span_info("Through my faith in HIM, I ENDURE."))
+							else
+								visible_message(span_info("[src] trembled for a moment, but they remain stood."), span_info("My strong constitution keeps me upright."))
+							stuttering += 5
+							emote("painmoan")
+							return
+
+					if(prob(probby) && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/buff/psyhealing))
 						// Major pain event - increase tolerance
 						pain_tolerance += tolerance_gain_rate
 						last_major_pain_time = world.time
@@ -597,12 +611,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(client)
 			handle_dizziness()
 
-	if(drowsyness)
-		drowsyness = max(drowsyness - restingpwr, 0)
-		blur_eyes(2)
-		if(prob(5))
-			AdjustSleeping(100)
-
 	//Jitteriness
 	if(jitteriness)
 		do_jitter_animation(jitteriness)
@@ -655,12 +663,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 61)
 			adjustToxLoss(1)
 			if(prob(50))
-				blur_eyes(5)
+				set_eye_blur_if_lower(10 SECONDS)
 
 		if(drunkenness >= 71)
 			adjustToxLoss(1)
 			if(prob(10))
-				blur_eyes(5)
+				set_eye_blur_if_lower(10 SECONDS)
 
 		if(drunkenness >= 81)
 			adjustToxLoss(3)
@@ -952,6 +960,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 				if(!fallingas)
 					to_chat(src, span_warning("I'll fall asleep soon..."))
 				fallingas++
+				if(istype(buckled, /obj/structure/bed))
+					var/obj/structure/bed/bed_check = buckled
+					if(bed_check.sheet_tucked)
+						if(fallingas > 10)
+							to_chat(src, ("This bed is so cozy..."))
+							add_stress(/datum/stress_event/cozy_sleep)
+							Sleeping(30 SECONDS)
+							bed_check.sheet_tucked = FALSE
+
 				if(fallingas > 15)
 					Sleeping(300)
 			else if(eyesclosed && fallingas >= 10 && cant_fall_asleep)

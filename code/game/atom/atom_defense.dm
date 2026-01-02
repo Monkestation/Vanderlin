@@ -45,9 +45,8 @@
 
 /// Handles the integrity of an atom changing. This must be called instead of changing integrity directly.
 /atom/proc/update_integrity(new_value, update_atom = TRUE, damage_flag)
-	SHOULD_NOT_OVERRIDE(TRUE)
 	if(!uses_integrity)
-		CRASH("/atom/proc/update_integrity() was called on [src] when it doesnt use integrity!")
+		CRASH("/atom/proc/update_integrity() was called on [src] when it doesn't use integrity!")
 	var/old_value = atom_integrity
 	new_value = max(0, new_value)
 	if(atom_integrity == new_value)
@@ -69,6 +68,35 @@
 				atom_destruction(damage_flag)
 
 	SEND_SIGNAL(src, COMSIG_ATOM_INTEGRITY_CHANGED, old_value, new_value)
+
+/obj/item/update_integrity(new_value, update_atom = TRUE, damage_flag)
+	if(!uses_integrity)
+		CRASH("/atom/proc/update_integrity() was called on [src] when it doesn't use integrity!")
+	var/old_value = atom_integrity
+	new_value = max(0, new_value)
+	if(atom_integrity == new_value)
+		return
+	atom_integrity = new_value
+
+	if(update_atom)
+		if(new_value > old_value)
+			if(integrity_failure && (atom_integrity > integrity_failure * max_integrity))
+				atom_fix()
+		else
+			//BREAKING FIRST
+			if(integrity_failure && atom_integrity <= integrity_failure * max_integrity)
+				var/silent = !(old_value > integrity_failure * max_integrity)
+				atom_break(damage_flag, silent)
+
+			//DESTROYING SECOND
+			if(atom_integrity <= 0)
+				if(item_flags & ITEM_ONLY_BREAK)
+					atom_integrity = 1
+					return
+				atom_destruction(damage_flag)
+
+	SEND_SIGNAL(src, COMSIG_ATOM_INTEGRITY_CHANGED, old_value, new_value)
+
 
 /// This mostly exists to keep atom_integrity private. Might be useful in the future.
 /atom/proc/get_integrity()
@@ -147,7 +175,7 @@
 ///changes max_integrity while retaining current health percentage, returns TRUE if the atom got broken.
 /atom/proc/modify_max_integrity(new_max, can_break = TRUE, damage_type = BRUTE)
 	if(!uses_integrity)
-		CRASH("/atom/proc/modify_max_integrity() was called on [src] when it doesnt use integrity!")
+		CRASH("/atom/proc/modify_max_integrity() was called on [src] when it doesn't use integrity!")
 	var/current_integrity = atom_integrity
 	var/current_max = max_integrity
 

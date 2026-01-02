@@ -6,7 +6,12 @@
 	earliest_start = 10 MINUTES
 	max_occurrences = 2
 	min_players = 20
-	allowed_storytellers = list(/datum/storyteller/abyssor)
+	dedicated_storytellers = list(/datum/storyteller/abyssor)
+	allowed_storytellers = DIVINE_STORYTELLERS
+
+	tags = list(
+		TAG_ABYSSOR,
+	)
 
 /datum/round_event/abyssor_rage/start()
 	SSmapping.add_world_trait(/datum/world_trait/abyssor_rage, 20 MINUTES)

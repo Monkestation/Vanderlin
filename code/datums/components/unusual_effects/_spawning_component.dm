@@ -14,7 +14,7 @@
 	///the unusual_description grabbed into the actual handler itself only needed when used as an unusual
 	var/unusual_description = "teehee"
 	///the duration we last
-	var/duration = 0
+	var/duration = 0.7 SECONDS
 	///the spawn intervals in game ticks
 	var/spawn_interval = 1
 	///particles still in the process of animating
@@ -100,7 +100,7 @@
 	source_object = null
 	QDEL_NULL(animate_holder)
 
-/datum/component/particle_spewer/process(seconds_per_tick)
+/datum/component/particle_spewer/process()
 	if(spawn_interval != 1)
 		count++
 		if(count < spawn_interval)

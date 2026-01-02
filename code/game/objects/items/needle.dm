@@ -17,8 +17,8 @@
 	grid_width = 32
 	grid_height = 32
 	/// Amount of uses left
-	var/stringamt = 20
-	var/maxstring = 20
+	var/stringamt = 24
+	var/maxstring = 24
 	/// If this needle is infinite
 	var/infinite = FALSE
 	/// If this needle can be used to repair items
@@ -53,7 +53,7 @@
 //		qdel(src)
 
 /obj/item/needle/attack(mob/living/M, mob/user)
-	sew(M, user)
+	sew_wounds(M, user)
 
 /obj/item/needle/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/natural/fibers))
@@ -121,73 +121,56 @@
 		return TRUE
 	return ..()
 
-/obj/item/needle/proc/sew(mob/living/target, mob/living/user)
-	if(!istype(user))
-		return FALSE
-	var/mob/living/doctor = user
-	var/mob/living/carbon/human/patient = target
-	var/boon = doctor?.get_learning_boon(/datum/skill/misc/medicine)
-	if(stringamt < 1)
-		to_chat(user, "<span class='warning'>The needle has no thread left!</span>")
-		return
-	if(!get_location_accessible(patient, check_zone(doctor.zone_selected)))
-		to_chat(doctor, "<span class='warning'>Something in the way.</span>")
-		return FALSE
-	var/list/sewable
-	var/obj/item/bodypart/affecting
-	if(iscarbon(patient))
-		affecting = patient.get_bodypart(check_zone(doctor.zone_selected))
-		if(!affecting)
-			to_chat(doctor, "<span class='warning'>That limb is missing.</span>")
-			return FALSE
-		if(affecting.bandage)
-			to_chat(doctor, "<span class='warning'>There is a bandage in the way.</span>")
-			return FALSE
-		sewable = affecting.get_sewable_wounds()
-	else
-		sewable = patient.get_sewable_wounds()
-	if(!length(sewable))
-		to_chat(doctor, "<span class='warning'>There aren't any wounds to be sewn.</span>")
-		return FALSE
-	var/datum/wound/target_wound = input(doctor, "Which wound?", "[src]") as null|anything in sewable
-	if(!target_wound)
+/obj/item/needle/proc/sew_wounds(mob/living/carbon/target, mob/living/user)
+	if(!istype(user) || !istype(target))
 		return FALSE
 
-	playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
-	var/moveup = 10
-	if(doctor.mind)
-		moveup = ((doctor.get_skill_level(/datum/skill/misc/medicine)+1) * 5)
-	while(!QDELETED(target_wound) && !QDELETED(src) && \
-		!QDELETED(user) && (target_wound.sew_progress < target_wound.sew_threshold) && \
-		stringamt >= 1)
-		if(!do_after(doctor, 2 SECONDS, patient))
-			break
-		playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
-		target_wound.sew_progress = min(target_wound.sew_progress + moveup, target_wound.sew_threshold)
-		if(target_wound.sew_progress < target_wound.sew_threshold)
-			continue
-		if(doctor.mind)
-			var/amt2raise = doctor.STAINT * 2
-			doctor.adjust_experience(/datum/skill/misc/medicine, amt2raise * boon)
-		use(1)
-		target_wound.sew_wound()
-		if(patient == doctor)
-			doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [doctor.p_them()]self.</span>", "<span class='notice'>I stitch \a [target_wound.name] on my [affecting].</span>")
-		else
-			if(affecting)
-				doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient]'s [affecting].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient]'s [affecting].</span>")
-			else
-				doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient].</span>")
-		log_combat(doctor, patient, "sew", "needle")
-		return TRUE
-	return FALSE
+	if(stringamt < 1)
+		to_chat(user, span_warning("The needle has no thread left!"))
+		return FALSE
+
+	var/mob/living/doctor = user
+	var/mob/living/carbon/patient = target
+
+	if(!get_location_accessible(patient, check_zone(doctor.zone_selected)))
+		to_chat(doctor, span_warning("Something is in the way."))
+		return FALSE
+
+	var/list/sewable
+	var/obj/item/bodypart/affecting = patient.get_bodypart(check_zone(doctor.zone_selected))
+	if(!affecting)
+		to_chat(doctor, span_warning("That limb is missing."))
+		return FALSE
+
+	if(affecting.bandage)
+		to_chat(doctor, span_warning("There is a bandage in the way."))
+		return FALSE
+
+	sewable = affecting.get_sewable_wounds()
+
+	if(!length(sewable))
+		to_chat(doctor, span_warning("There aren't any wounds to be sewn."))
+		return FALSE
+
+	var/datum/wound/target_wound
+	if(length(sewable) > 1)
+		target_wound = browser_input_list(doctor, "Which wound?", "WOUND CRAFT", sewable)
+	else
+		target_wound = sewable[1]
+	if(!target_wound || QDELETED(target_wound) || QDELETED(src) || QDELETED(doctor) || QDELETED(user))
+		return FALSE
+
+	if(!target_wound.do_sewing_step(doctor, src))
+		return FALSE
+
+	return TRUE
 
 /obj/item/needle/thorn
 	name = "needle"
 	icon_state = "thornneedle"
 	desc = "This rough needle can be used to sew cloth and wounds."
-	stringamt = 5
-	maxstring = 5
+	stringamt = 8
+	maxstring = 8
 	anvilrepair = null
 	melting_material = null
 

@@ -37,8 +37,8 @@
 	spawnableTurfs = list(/turf/open/floor/snow/rough = 10,
 							/turf/open/floor/snow/patchy = 10,
 							/turf/open/floor/grass/cold = 5)
-	allowed_areas = list(/area/rogue/outdoors/rtfield,
-							/area/rogue/outdoors/rtfield/safe)
+	allowed_areas = list(/area/outdoors/rtfield,
+							/area/outdoors/rtfield/safe)
 
 /datum/mapGeneratorModule/rosewoodsnow/grass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -47,9 +47,9 @@
 	excluded_turfs = list()
 	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 5)
 	spawnableTurfs = list()
-	allowed_areas = list(/area/rogue/outdoors/rtfield,
-							/area/rogue/outdoors/rtfield/safe,
-							/area/rogue/outdoors/town)
+	allowed_areas = list(/area/outdoors/rtfield,
+							/area/outdoors/rtfield/safe,
+							/area/outdoors/town)
 
 /datum/mapGeneratorModule/rosewoodsnow/grass/patchy
 		allowed_turfs = list(/turf/open/floor/snow/patchy)
@@ -74,17 +74,17 @@
 							/obj/structure/closet/dirthole/closed/loot=0.75,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0.5)
 	spawnableTurfs = list(/turf/open/floor/dirt/road=5)
-	allowed_areas = list(/area/rogue/outdoors/rtfield,
-							/area/rogue/outdoors/rtfield/safe)
+	allowed_areas = list(/area/outdoors/rtfield,
+							/area/outdoors/rtfield/safe)
 
 /datum/mapGeneratorModule/rosewooddirt/grass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 10)
-	allowed_areas = list(/area/rogue/outdoors/rtfield,
-							/area/rogue/outdoors/rtfield/safe,
-							/area/rogue/outdoors/town)
+	allowed_areas = list(/area/outdoors/rtfield,
+							/area/outdoors/rtfield/safe,
+							/area/outdoors/town)
 
 /datum/mapGeneratorModule/rosewooddirt/road
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -94,9 +94,9 @@
 							/obj/item/natural/stone = 4,
 							/obj/item/natural/rock = 1,
 							/obj/item/grown/log/tree/stick = 4)
-	allowed_areas = list(/area/rogue/outdoors/rtfield,
-							/area/rogue/outdoors/rtfield/safe,
-							/area/rogue/outdoors/town)
+	allowed_areas = list(/area/outdoors/rtfield,
+							/area/outdoors/rtfield/safe,
+							/area/outdoors/town)
 
 /datum/mapGeneratorModule/rosewoodgrass
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -114,8 +114,8 @@
 							/obj/item/natural/rock = 2,
 							/obj/item/grown/log/tree/stick = 8)
 	spawnableTurfs = list()
-	allowed_areas = list(/area/rogue/outdoors/rtfield,
-							/area/rogue/outdoors/rtfield/safe)
+	allowed_areas = list(/area/outdoors/rtfield,
+							/area/outdoors/rtfield/safe)
 
 /datum/mapGeneratorModule/rosewoodgrass/grass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
@@ -123,6 +123,6 @@
 	excluded_turfs = list()
 	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 50)
 	spawnableTurfs = list()
-	allowed_areas = list(/area/rogue/outdoors/rtfield,
-							/area/rogue/outdoors/rtfield/safe,
-							/area/rogue/outdoors/town)
+	allowed_areas = list(/area/outdoors/rtfield,
+							/area/outdoors/rtfield/safe,
+							/area/outdoors/town)

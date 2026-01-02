@@ -60,6 +60,10 @@
 					blood_handle |= BLOOD_PREFERENCE_KIN
 					blood_handle  &= ~BLOOD_PREFERENCE_LIVING
 
+				if(HAS_TRAIT(victim, TRAIT_SILVER_BLESSED))
+					blood_handle |= BLOOD_PREFERENCE_FANCY
+					blood_handle |= BLOOD_PREFERENCE_EUPHORIC
+
 				if(victim.bloodpool > 0)
 					victim.blood_volume = max(victim.blood_volume-45, 0)
 					if(ishuman(victim))
@@ -84,16 +88,13 @@
 							victim.adjustBruteLoss(-50, TRUE)
 							victim.adjustFireLoss(-50, TRUE)
 							return
-						else
-							victim.blood_volume = 0
 					if(ishuman(victim) && !victim.clan)
 						if(victim.stat != DEAD)
-							to_chat(src, "<span class='warning'>This sad sacrifice for your own pleasure affects something deep in your mind.</span>")
-							AdjustMasquerade(-1)
-							victim.death()
+							to_chat(src, "<span class='warning'>Your victim faints from the excessive draining.</span>")
+							victim.SetUnconscious(50 SECONDS)
 					if(!ishuman(victim))
 						if(victim.stat != DEAD)
-							victim.death()
+							victim.SetUnconscious(50 SECONDS)
 		else // Don't larp as a vampire, kids.
 			to_chat(src, span_warning("I'm going to puke..."))
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
@@ -117,22 +118,25 @@
 	log_combat(src, victim, "drank blood from ")
 
 	if(ishuman(victim) && mind)
-		if(clan_position?.can_assign_positions && victim.bloodpool <= 150)
+		if(clan_position?.can_assign_positions && victim.bloodpool <= 150 && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
 			if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
 				to_chat(src, span_warning("I decide [victim] is unworthy."))
 			else
 				INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob/living/carbon/human, vampire_conversion_prompt), src)
 
 /mob/living/carbon/human/proc/vampire_conversion_prompt(mob/living/carbon/sire)
+	if(HAS_TRAIT(src, "choosing"))
+		return
 	var/datum/antagonist/vampire/VDrinker = sire?.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(!istype(VDrinker))
 		return
-
+	ADD_TRAIT(src, "choosing", INNATE_TRAIT)
 	if(browser_alert(src, "Would you like to rise as a vampire spawn? Warning: you will die shall you reject.", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
+		REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
 		to_chat(sire, span_danger("Your victim twitches, yet the curse fails to take over. As if something otherworldly intervenes..."))
 		death()
 		return
-
+	REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
 	visible_message(span_danger("Some dark energy begins to flow from [sire] into [src]..."))
 	visible_message(span_red("[src] rises as a new spawn!"))
 	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(sire.clan, TRUE)

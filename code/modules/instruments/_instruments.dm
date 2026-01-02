@@ -139,7 +139,6 @@
 		soundloop.stress2give = initial(soundloop.stress2give)
 	if(dynamic_icon)
 		lower_from_mouth()
-		update_appearance()
 	// Prevents an exploit
 	for(var/mob/living/L in hearers(7, loc))
 		for(var/datum/status_effect/bardicbuff/b in L.status_effects)
@@ -258,7 +257,6 @@
 	record_round_statistic(STATS_SONGS_PLAYED)
 	if(dynamic_icon)
 		lift_to_mouth()
-		update_icon()
 	START_PROCESSING(SSprocessing, src)
 
 /obj/item/instrument/proc/lift_to_mouth()
@@ -439,3 +437,19 @@
 	desc = "The blessed essence of harpysong. How did you get this... you monster!"
 	icon = 'icons/obj/surgery.dmi'
 	not_held = TRUE
+
+/obj/item/instrument/psyaltery
+	name = "psyaltery"
+	desc = "A traditional form of boxed zither or box-harp that may be played plucked, with a plectrum or with hammers. They are particularly associated with divine beings, Aasimar and liturgies."
+	icon_state = "psyaltery"
+	song_list = list(
+	"Disciples Tower" = 'sound/instruments/psyaltery (1).ogg',
+	"Green Sleeves" = 'sound/instruments/psyaltery (2).ogg',
+	"Midyear Melancholy" = 'sound/instruments/psyaltery (3).ogg',
+	"Santa Psydonia" = 'sound/instruments/psyaltery (4).ogg',
+	"Le Venardine" = 'sound/instruments/psyaltery (5).ogg',
+	"Azurea Fair" = 'sound/instruments/psyaltery (6).ogg',
+	"Amoroso" = 'sound/instruments/psyaltery (7).ogg',
+	"Lupian's Lullaby" = 'sound/instruments/psyaltery (8).ogg',
+	"White Wine Before Breakfast" = 'sound/instruments/psyaltery (9).ogg',
+	"Chevalier de Valeur" = 'sound/instruments/psyaltery (10).ogg')

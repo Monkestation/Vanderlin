@@ -3,7 +3,7 @@
 	..()
 	//Mind updates
 	sync_mind()
-	mind.show_memory(src, 0)
+	mind.show_memory(src, FALSE)
 
 	update_a_intents()
 	update_damage_hud()

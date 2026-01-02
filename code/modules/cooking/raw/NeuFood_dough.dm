@@ -52,6 +52,7 @@
 			if(do_after(user,long_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/foodbase/hardtack_raw(loc)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.nobles_seen_servant_work()
 				qdel(src)
 		else
 			to_chat(user, span_warning("Put [src] on a table before working it!"))
@@ -100,10 +101,11 @@
 			if(do_after(user, short_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/piedough(loc)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.nobles_seen_servant_work()
 				qdel(src)
 		if(I.get_sharpness())
 			playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
-			to_chat(user, span_notice("Cutting the dough in strips and making a prezzel..."))
+			to_chat(user, span_notice("Cutting the dough into strips and making a prezzel..."))
 			if(do_after(user, short_cooktime, src))
 				if(user.get_skill_level(/datum/skill/craft/cooking) >= 2 || isdwarf(user))
 					new /obj/item/reagent_containers/food/snacks/foodbase/prezzel_raw/good(loc)
@@ -111,7 +113,7 @@
 					new /obj/item/reagent_containers/food/snacks/foodbase/prezzel_raw(loc)
 				qdel(src)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
-
+				user.nobles_seen_servant_work()
 	else
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
 
@@ -219,6 +221,7 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheddarslice))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -231,6 +234,7 @@
 			foodtype = GRAIN | DAIRY
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cooked/egg))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -242,6 +246,7 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/fat/salo/slice))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -253,6 +258,7 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/butterslice))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -264,6 +270,7 @@
 			foodtype = GRAIN | DAIRY
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
@@ -275,6 +282,7 @@
 			foodtype = GRAIN | MEAT | VEGETABLES
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	return ..()
 
@@ -709,7 +717,7 @@
 
 /obj/item/reagent_containers/food/snacks/strawbycake_cooked
 	name = "strawberry cake"
-	desc = "Tradidtionally made with sugarbeet frosting, an elvish treat as old as time. Commonly served at elf weddings."
+	desc = "Traditionally made with sugarbeet frosting, an elvish treat as old as time. Commonly served at elf weddings."
 	icon_state = "strawberrycake"
 	dropshrink = 0.8
 	slices_num = 6
@@ -757,7 +765,7 @@
 
 /obj/item/reagent_containers/food/snacks/crimsoncake_cooked
 	name = "crimson pine cake"
-	desc = "A fusion of Crimson Elf and Grenzlehoftian cuisines, the cake originates from the Valorian Republics. Rumor has it that one of the many casus belli in the Republics was based upon a disagreement on the cakes exact recipe."
+	desc = "A fusion of Crimson Elf and Grenzelhoftian cuisines, the cake originates from the Valorian Republics. Rumor has it that one of the many casus belli in the Republics was based upon a disagreement on the cakes exact recipe."
 	icon_state = "crimsonpinecake"
 	slices_num = 6
 	slice_path = /obj/item/reagent_containers/food/snacks/crimsoncake_slice
@@ -902,7 +910,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake
 	name = "griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevelance no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
 	bitesize = 6
 	icon_state = "griddlecake"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -920,7 +928,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/lemon
 	name = "lemon griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevelance no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
 	bitesize = 6
 	icon_state = "griddlecakelemon"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -939,7 +947,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	name = "apple griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevelance no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
 	bitesize = 6
 	icon_state = "griddlecakeapple"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -958,7 +966,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	name = "jacksberry griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevelance no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
 	bitesize = 6
 	icon_state = "griddlecakeberry"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -975,7 +983,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry_poison
 	name = "jacksberry griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevelance no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
 	bitesize = 6
 	icon_state = "griddlecakeberry"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR, /datum/reagent/berrypoison = 12)

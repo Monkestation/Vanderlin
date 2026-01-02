@@ -38,31 +38,32 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 	/// How many "health points" this wound has, AKA how hard it is to heal
 	var/whp = 60
-	/// How many "health points" this wound gets after being sewn
-	var/sewn_whp = 30
 	/// How much this wound bleeds
-	var/bleed_rate
-	/// Bleed rate when sewn
-	var/sewn_bleed_rate = 0.01
+	var/bleed_rate = 0
 	/// Some wounds clot over time, reducing bleeding - This is the rate at which they do so
 	var/clotting_rate = 0.01
-	/// Clotting rate when sewn
-	var/sewn_clotting_rate = 0.02
 	/// Clotting will not go below this amount of bleed_rate
-	var/clotting_threshold
-	/// Clotting will not go below this amount of bleed_rate when sewn
-	var/sewn_clotting_threshold = 0
+	var/clotting_threshold = null
 	/// How much pain this wound causes while on a mob
 	var/woundpain = 0
-	/// Pain this wound causes after being sewn
-	var/sewn_woundpain = 0
+
+	/// If TRUE, this wound can be sewn
+	var/can_sew = FALSE
 	/// Sewing progress, because sewing wounds is snowflakey
 	var/sew_progress = 0
 	/// When sew_progress reaches this, the wound is sewn
 	var/sew_threshold = 100
+	/// How many "health points" this wound gets after being sewn
+	var/sewn_whp = 30
+	/// Bleed rate when sewn
+	var/sewn_bleed_rate = 0.01
+	/// Clotting rate when sewn
+	var/sewn_clotting_rate = 0.02
+	/// Clotting will not go below this amount of bleed_rate when sewn
+	var/sewn_clotting_threshold = 0
+	/// Pain this wound causes after being sewn
+	var/sewn_woundpain = 0
 
-	/// If TRUE, this wound can be sewn
-	var/can_sew = FALSE
 	/// If TRUE, this wound can be cauterized
 	var/can_cauterize = FALSE
 	/// If TRUE, this disables limbs
@@ -87,10 +88,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Time taken until werewolf infection comes in
 	var/werewolf_infection_time = 2 MINUTES
 	/// Actual infection timer
-	var/werewolf_infection_timer
+	var/werewolf_infection_timer = null
 
 	/// Ingores "bloody wound" checks for wound applications
-	var/ignore_bloody
+	var/ignore_bloody = FALSE
+
+	/// List of associated bclasses for this wound
+	/// Primary use is for wound application
+	var/list/associated_bclasses = list()
 
 /datum/wound/Destroy(force)
 	. = ..()
@@ -182,7 +187,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		if(sounding)
 			playsound(affected.owner, sounding, 100, vary = FALSE)
 	return TRUE
-
 
 /// Effects when a wound is gained on a bodypart
 /datum/wound/proc/on_bodypart_gain(obj/item/bodypart/affected)
@@ -280,8 +284,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /// Heals this wound by the given amount, and deletes it if it's healed completely
 /datum/wound/proc/heal_wound(heal_amount)
 	// Wound cannot be healed normally, whp is null
-	if(isnull(whp))
-		return 0
+	if(isnull(whp) || !heal_amount)
+		return FALSE
 	var/amount_healed = min(whp, round(heal_amount, DAMAGE_PRECISION))
 	whp -= amount_healed
 	if(whp <= 0)
@@ -292,7 +296,67 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 				remove_from_mob(src)
 			else
 				qdel(src)
+
 	return amount_healed
+
+// Kinda icky
+/// Repeatable step that heals the wound, on the wound for overrides
+/datum/wound/proc/do_sewing_step(mob/living/doctor, obj/item/needle/sewing)
+	if(!doctor || !sewing || QDELETED(src))
+		return FALSE
+
+	while(sew_progress < sew_threshold)
+		if(sewing?.stringamt < 1 || QDELETED(src) || QDELETED(owner) || QDELETED(doctor) || QDELETED(sewing))
+			return FALSE
+
+		playsound(owner.loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
+
+		if(!do_after(doctor, 5 SECONDS, owner))
+			return FALSE
+
+		if(owner)
+			log_combat(doctor, owner, "sew wound", sewing)
+
+		sewing_step_complete(doctor, owner)
+
+		sewing?.use(1)
+
+	return TRUE
+
+/datum/wound/proc/sewing_step_complete(mob/living/doctor)
+	if(!doctor || QDELETED(src))
+		return FALSE
+
+	var/healing_power = (doctor.get_skill_level(/datum/skill/misc/medicine) + 1) * 12.5
+	var/was_completed = FALSE
+
+	var/mob/living/patient = owner
+	var/obj/item/bodypart/affecting = bodypart_owner
+
+	sew_progress = clamp(round(sew_progress + healing_power), 0, sew_threshold)
+
+	if(sew_progress == sew_threshold)
+		sew_wound()
+		was_completed = TRUE
+
+	var/modifier = was_completed ? 1.5 : 0.3
+	var/amt2raise = doctor.STAINT * modifier
+	doctor.adjust_experience(/datum/skill/misc/medicine, amt2raise * doctor.get_learning_boon(/datum/skill/misc/medicine))
+
+	var/extra_text
+
+	if(was_completed)
+		extra_text = " Closing it."
+
+	if(patient == doctor)
+		doctor.visible_message(span_notice("[doctor] sews \a [name] on [doctor.p_them()]self.[extra_text]"), span_notice("I stitch \a [name] on [affecting ? "my [affecting]" : "myself"].[extra_text]"))
+	else
+		if(affecting)
+			doctor.visible_message(span_notice("[doctor] sews \a [name] on [patient]'s [affecting].[extra_text]"), span_notice("I stitch \a [name] on [patient]'s [affecting].[extra_text]"))
+		else
+			doctor.visible_message(span_notice("[doctor] sews \a [name] on [patient].[extra_text]"), span_notice("I stitch \a [name] on [patient].[extra_text]"))
+
+	return was_completed
 
 /// Sews the wound up, changing its properties to the sewn ones
 /datum/wound/proc/sew_wound()
@@ -383,13 +447,13 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	owner.Knockdown(1)
 	return wolfy
 
-/// Returns whether or not this wound should embed a weapon
-/proc/should_embed_weapon(datum/wound/wound_or_boolean, obj/item/weapon)
-	if(!istype(wound_or_boolean))
+/// Returns whether or not this wound should embed an item
+/datum/wound/proc/should_embed(obj/item/embedder)
+	if(!embedder)
 		return FALSE
-	if(weapon && !can_embed(weapon))
+	if(!embedder.can_embed())
 		return FALSE
-	return prob(wound_or_boolean.embed_chance)
+	return prob(embed_chance)
 
 /datum/wound/proc/generate_html(mob/user)
 	var/client/client = user
@@ -517,3 +581,187 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /datum/wound/proc/show_menu(mob/user)
 	user << browse(generate_html(user), "window=wound;size=600x900")
+
+/// Basis for dynamic wounds that increase in severity with damage
+/datum/wound/dynamic
+	abstract_type = /datum/wound/dynamic
+	clotting_rate = 0.4
+	/// Has reached the maximum level
+	var/is_maxed = FALSE
+	/// Has reached the maximum level clamped by armor
+	var/is_armor_maxed = FALSE
+	/// Assoc list, name to severity ie ("lethal" = 15) by default uses bleed rate but can be overriden
+	var/list/severity_names = list()
+
+	// Upgrade vars
+	// Damage is used to increase each value by a multiplier
+	/// Multiplier that bleeding is increased by possibly clamped by bleed_clamp and bleed_clamp_armor
+	var/upgrade_bleed_rate = 0
+	/// Bleeding clamp upgrade per level
+	var/upgrade_bleed_clamp = null
+	/// Bleeding clamp when armored per level
+	var/upgrade_bleed_clamp_armor = null
+	/// Full clamp to bleed when effective armour is on the wounded limb
+	var/protected_bleed_clamp = null
+
+	/// Multiplier that whp increased by
+	var/upgrade_whp = 0
+	/// Multiplier that sew threshold is increased by
+	var/upgrade_sew_threshold = 0
+	/// Multiplier that wound pain is increased by
+	var/upgrade_pain = 0
+
+/datum/wound/dynamic/heal_wound(heal_amount)
+	. = ..()
+	if(!. || QDELETED(src))
+		return
+	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
+	var/healing_amount = round(heal_amount, DAMAGE_PRECISION) * 0.01 * healing_multiplier
+
+	downgrade(healing_amount)
+
+/datum/wound/dynamic/sew_wound()
+	if(!can_sew)
+		return FALSE
+	sewn_bleed_rate = round(bleed_rate * 0.05, DAMAGE_PRECISION)
+	sewn_whp = round(whp * 0.45, DAMAGE_PRECISION)
+	sewn_clotting_rate = round(clotting_rate * 1.2, DAMAGE_PRECISION)
+	sewn_clotting_threshold = round(clotting_threshold * 0.45, DAMAGE_PRECISION)
+	sewn_woundpain = round(woundpain * 0.4, DAMAGE_PRECISION)
+	return ..()
+
+/datum/wound/dynamic/sewing_step_complete(mob/living/doctor)
+	if(!doctor)
+		return
+
+	// Inverse, bigger wound = less heal
+	// BUT only effects value reduction not sewing progress
+	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
+	// Reduces the upgrade values by this percentage, can never fully deplete the said values
+	var/healing_power = 0.03 * healing_multiplier * ((doctor.get_skill_level(/datum/skill/misc/medicine) + 1) * 1.4) // Vibe numbers...
+
+	downgrade(healing_power)
+
+	return ..()
+
+/// Get the increase multiplier of the relevant upgrade value (bleed_rate by default)
+/datum/wound/dynamic/proc/get_relevant_increase()
+	if(!bleed_rate || !initial(bleed_rate))
+		return 1
+	return bleed_rate / initial(bleed_rate)
+
+/// Update name based on severity
+/datum/wound/dynamic/proc/update_name()
+	var/prefix
+	for(var/sevname in severity_names)
+		if(severity_names[sevname] <= bleed_rate)
+			prefix = sevname
+	name = "[prefix ? "[prefix] " : ""][initial(name)]"	//[adjective] [name], aka, "gnarly slash" or "slash"
+
+#define CLOT_THRESHOLD_INCREASE_PER_HIT 0.1	//This raises the MINIMUM bleed the wound can clot to.
+#define CLOT_DECREASE_PER_HIT 0.05	//This reduces the amount of clotting the wound has.
+
+/// Upgrades a wound's stats based on damage dealt.
+/datum/wound/dynamic/proc/upgrade(bclass, damage)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if(is_maxed || is_sewn())
+		return FALSE
+
+	var/obj/item/clothing/armor
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		armor = human_owner.check_crit_armor(src, bclass)
+
+	// Ass code we need diseases
+	if(!armor && werewolf_infection_timer)
+		deltimer(werewolf_infection_timer)
+		werewolf_infection_timer = null
+		werewolf_infect_attempt()
+
+	var/upper_clamp = ARTERY_LIMB_BLEEDRATE
+	if(armor && upgrade_bleed_clamp_armor)
+		upper_clamp = upgrade_bleed_clamp_armor
+	else if(upgrade_bleed_clamp)
+		upper_clamp = upgrade_bleed_clamp
+	bleed_rate += clamp(damage * upgrade_bleed_rate, 0.1, upper_clamp)
+	whp += damage * upgrade_whp
+	sew_threshold += damage * upgrade_sew_threshold
+	woundpain += damage * upgrade_pain
+
+	if(armor_check(armor))
+		return FALSE
+
+	if(maxed_check())
+		is_maxed = TRUE
+		return TRUE
+
+	update_name()
+
+	if(clotting_rate)
+		clotting_rate = max(0.01, (clotting_rate - CLOT_DECREASE_PER_HIT))
+	if(clotting_threshold)
+		clotting_threshold += CLOT_THRESHOLD_INCREASE_PER_HIT
+
+	return TRUE
+
+#undef CLOT_THRESHOLD_INCREASE_PER_HIT
+#undef CLOT_DECREASE_PER_HIT
+
+/// Like upgrade() but takes a multipler as percentage to decrease values by instead
+/datum/wound/dynamic/proc/downgrade(multiplier)
+	if(is_sewn())
+		return // All these values get changed at this point so additional modifiers aren't required
+
+	whp = max(whp - (whp * multiplier), initial(whp))
+
+	if(sew_threshold > 0)
+		sew_threshold = max(sew_threshold - (sew_threshold * multiplier), initial(sew_threshold))
+	if(woundpain > 0)
+		woundpain = max(woundpain - (woundpain * multiplier), initial(woundpain))
+	if(bleed_rate > 0)
+		var/clamp = initial(bleed_rate)
+		if(!isnull(clotting_threshold) && clotting_threshold < clamp)
+			clamp = clotting_threshold
+		bleed_rate = max(bleed_rate - (bleed_rate * multiplier), clamp)
+
+	update_name()
+
+#define CLOT_RATE_ARTERY 0	//Artery exceptions. Essentially overrides the clotting threshold.
+#define CLOT_THRESHOLD_ARTERY 2
+
+/// Check if the wound is maxed out, by default uses bleeding rate but something like a hemotoma might want to change that
+/datum/wound/dynamic/proc/maxed_check()
+	if(bleed_rate < ARTERY_LIMB_BLEEDRATE)
+		return FALSE
+	bleed_rate = ARTERY_LIMB_BLEEDRATE
+	clotting_rate = CLOT_RATE_ARTERY
+	clotting_threshold = CLOT_THRESHOLD_ARTERY
+	playsound(owner, 'sound/combat/wound_tear.ogg', 100, TRUE)
+	owner.visible_message(
+		span_crit("The wound gushes open from [bodypart_owner.owner]'s \
+		<b>[bodypart_owner]</b>, nicking an artery!")
+	)
+	update_name()
+	return TRUE
+
+#undef CLOT_RATE_ARTERY
+#undef CLOT_THRESHOLD_ARTERY
+
+/datum/wound/dynamic/proc/armor_check(obj/item/clothing/armor)
+	if(!armor || isnull(protected_bleed_clamp))
+		is_armor_maxed = FALSE
+		return FALSE
+	if(bleed_rate < protected_bleed_clamp)
+		return FALSE
+	bleed_rate = protected_bleed_clamp
+	if(is_armor_maxed)
+		return TRUE
+	playsound(owner, 'sound/combat/armored_wound.ogg', 100, TRUE)
+	owner.visible_message(
+		span_crit("The wound tears open from [bodypart_owner.owner]'s \
+		<b>[bodypart_owner]</b>, but [bodypart_owner.p_their()] [armor] won't let it go any further!")
+	)
+	is_armor_maxed = TRUE
+	update_name()
+	return TRUE

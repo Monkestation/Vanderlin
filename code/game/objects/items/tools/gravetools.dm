@@ -14,7 +14,7 @@
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	sharpness = IS_BLUNT
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG

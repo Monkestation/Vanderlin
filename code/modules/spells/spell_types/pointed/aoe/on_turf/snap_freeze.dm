@@ -46,7 +46,7 @@
 	duration = 0.5 SECONDS
 
 /obj/effect/temp_visual/snap_freeze
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "shieldsparkles"
+	icon = 'icons/effects/freeze.dmi'
+	icon_state = "ice_shards"
 	randomdir = FALSE
 	duration = 1 SECONDS

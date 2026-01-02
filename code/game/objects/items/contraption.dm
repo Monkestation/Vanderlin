@@ -116,7 +116,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 		if(current_charge)
-			to_chat(user, span_info("I try to insert the [I.name] but theres already \a [initial(accepted_power_source.name)] inside!"))
+			to_chat(user, span_info("I try to insert the [I.name] but there's already \a [initial(accepted_power_source.name)] inside!"))
 			playsound(src, 'sound/combat/hits/blunt/woodblunt (2).ogg', 100, TRUE)
 			shake_camera(user, 1, 1)
 		else
@@ -165,7 +165,7 @@
 
 /obj/item/contraption/wood_metalizer
 	name = "wood metalizer"
-	desc = "A creation of genious or insanity. This cursed contraption is somehow able to turn wood into metal."
+	desc = "A creation of genius or insanity. This cursed contraption is somehow able to turn wood into metal."
 	icon_state = "metalizer"
 	on_icon = "metalizer_flick"
 	off_icon = "metalizer_off"

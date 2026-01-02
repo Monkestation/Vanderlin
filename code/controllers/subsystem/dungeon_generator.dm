@@ -11,6 +11,8 @@ SUBSYSTEM_DEF(dungeon_generator)
 	var/list/markers = list()
 	var/list/placed_types = list()
 
+	var/dungeon_z = -1 // The definite z level of the first level
+
 	var/multilevel_dungeons = FALSE  // Toggle for multi-level generation
 	var/max_delve_levels = 2        // Maximum dungeon depth
 	var/list/dungeon_levels = list() // Track z-levels for each delve level
@@ -34,6 +36,8 @@ SUBSYSTEM_DEF(dungeon_generator)
 		for(var/obj/effect/dungeon_directional_helper/helper as anything in markers)
 			if(!get_turf(helper))
 				continue
+			if(dungeon_z == -1)
+				dungeon_z = helper.z // this shouldn't ever fail i think
 			find_soulmate(helper.dir, get_turf(helper), helper)
 			markers -= helper
 	return ..()
@@ -92,7 +96,6 @@ SUBSYSTEM_DEF(dungeon_generator)
 			if(is_abstract(path))
 				continue
 			var/datum/map_template/dungeon/template = new path
-			created_types += template
 			created_types[template] = template.rarity
 
 	var/picked_type = pickweight(parent_types)
@@ -116,18 +119,30 @@ SUBSYSTEM_DEF(dungeon_generator)
 
 	if(!try_pickedtype_first(picked_type, direction, creator, looking_for_love, current_delve_level))
 		var/list/true_list = created_types.Copy()
+		// inlining pickweight here to make it faster
+		// since we want to avoid re-totaling it
+		var/true_total = 0
+		for(var/datum/map_template/dungeon/template in true_list)
+			if(istype(template, picked_type) || istype(template, /datum/map_template/dungeon/entry))
+				true_list -= template
+				continue
+			if(!true_list[template])
+				true_list[template] = 1
+			true_total += true_list[template]
 		while(picking)
 			if(!GET_TURF_ABOVE(creator))
-				message_admins("[ADMIN_JMP(creator)] A dungeon piece was set to spawn on a top level z. This is not intended, their is a bad template.")
+				message_admins("[ADMIN_JMP(creator)] A dungeon piece was set to spawn on a top level z. This is not intended, there is a bad template.")
 				return
 			if(!length(true_list))
 				return
-			var/datum/map_template/dungeon/template = pickweight(true_list)
+			var/chosen = rand(1, true_total)
+			var/datum/map_template/dungeon/template
+			for(template in true_list)
+				chosen -= true_list[template]
+				if(chosen <= 0)
+					break // go with template
+			true_total -= true_list[template]
 			true_list -= template
-			if(is_abstract(template))
-				continue
-			if(is_type_in_list(template, list(subtypesof(picked_type) + subtypesof(/datum/map_template/dungeon/entry))))
-				continue
 
 			var/turf/true_spawn = calculate_spawn_position(template, direction, creator)
 			if(!true_spawn || !validate_spawn_area(template, true_spawn))
@@ -150,15 +165,27 @@ SUBSYSTEM_DEF(dungeon_generator)
 	var/picking = TRUE
 	var/list/true_list = created_types.Copy()
 
+	// inlining pickweight here to make it faster
+	// since we want to avoid re-totaling it
+	var/true_total = 0
+	for(var/datum/map_template/dungeon/template in true_list)
+		if(!istype(template, picked_type))
+			true_list -= template
+			continue
+		if(!true_list[template])
+			true_list[template] = 1
+		true_total += true_list[template]
 	while(picking)
 		if(!length(true_list))
 			return FALSE
-		var/datum/map_template/dungeon/template = pickweight(true_list)
+		var/chosen = rand(1, true_total)
+		var/datum/map_template/dungeon/template
+		for(template in true_list)
+			chosen -= true_list[template]
+			if(chosen <= 0)
+				break // go with template
+		true_total -= true_list[template]
 		true_list -= template
-		if(is_abstract(template))
-			continue
-		if(!is_type_in_list(template, subtypesof(picked_type)))
-			continue
 
 		var/turf/true_spawn = calculate_spawn_position(template, direction, creator)
 		if(!true_spawn || !validate_spawn_area(template, true_spawn))

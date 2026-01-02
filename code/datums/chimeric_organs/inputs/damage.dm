@@ -19,7 +19,7 @@
 	. = ..()
 	minimum_damage = rand(max(1, minimum_damage - (3 + ((100 - node_purity) * 0.2))), minimum_damage + (3 + ((100 - node_purity) * 0.2)))
 
-/datum/chimeric_node/input/damage/proc/on_damage_taken(datum/source, damage_type, damage_amount)
+/datum/chimeric_node/input/damage/proc/on_damage_taken(datum/source, damage_amount, damage_type)
 	SIGNAL_HANDLER
 
 	if(damage_amount < minimum_damage)

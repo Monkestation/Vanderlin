@@ -23,6 +23,7 @@
 	time = 8 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED | SURGERY_BROKEN
 	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_EXPERT
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 
@@ -50,14 +51,23 @@
 		"[user] extracts lux from [target]'s innards.")
 		return FALSE
 	else
-		display_results(user, target, span_notice("You extract a single dose of lux from [target]'s heart."),
-			"[user] extracts lux from [target]'s innards.",
-			"[user] extracts lux from [target]'s innards.")
-		new /obj/item/reagent_containers/lux(target.loc)
-		if(target.has_status_effect(/datum/status_effect/buff/received_lux))
+		if(target.get_lux_tainted_status() || target.has_status_effect(/datum/status_effect/debuff/tainted_lux) || target.has_status_effect(/datum/status_effect/debuff/received_tainted_lux))
+			display_results(user, target, span_notice("You extract a single dose of tainted lux from [target]'s heart."),
+				"[user] extracts tainted lux from [target]'s innards.",
+				"[user] extracts tainted lux from [target]'s innards.")
+			new /obj/item/reagent_containers/lux_tainted(target.loc)
+		else
+			display_results(user, target, span_notice("You extract a single dose of lux from [target]'s heart."),
+				"[user] extracts lux from [target]'s innards.",
+				"[user] extracts lux from [target]'s innards.")
+			new /obj/item/reagent_containers/lux(target.loc)
+		if(target.has_status_effect(/datum/status_effect/debuff/received_tainted_lux))
+			target.remove_status_effect(/datum/status_effect/debuff/received_tainted_lux)
+		else if(target.has_status_effect(/datum/status_effect/buff/received_lux))
 			target.remove_status_effect(/datum/status_effect/buff/received_lux)
 		else
 			target.apply_status_effect(/datum/status_effect/debuff/lux_drained)
+			target.remove_status_effect(/datum/status_effect/debuff/tainted_lux)
 		SEND_SIGNAL(user, COMSIG_LUX_EXTRACTED, target)
 		record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 		record_round_statistic(STATS_LUX_HARVESTED)

@@ -88,7 +88,7 @@
 		// Check for alchemical recipe first
 		var/datum/alch_grind_recipe/foundrecipe = find_recipe()
 		if(!foundrecipe)
-			to_chat(user, span_warning("You dont think that will work!"))
+			to_chat(user, span_warning("I don't think that will work!"))
 			return
 		// Process alchemical recipe
 		user.visible_message(span_info("[user] begins grinding up [I]."))

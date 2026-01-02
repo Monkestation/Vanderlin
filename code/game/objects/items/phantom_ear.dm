@@ -1,6 +1,6 @@
 /obj/item/phantom_ear
 	name = "Phantom Ear"
-	desc = "A spectral fascimile of an ear."
+	desc = "A spectral facsimile of an ear."
 	var/chat_icon = 'icons/Phantom_Ear_Icon.dmi'
 	var/chat_icon_state = "sparkly_ear_icon"
 	icon = 'icons/roguetown/misc/phantomear.dmi'
@@ -43,7 +43,7 @@
 /obj/item/phantom_ear/proc/timed_delete()
 	if(QDELETED(src))
 		return
-	src.visible_message(span_warning("The [src] escapes this worlds grasp!"))
+	src.visible_message(span_warning("The [src] escapes this world's grasp!"))
 	if(linked_living)
 		to_chat(linked_living.resolve(), span_warning("I feel a tension release, my phantom ear has safely escaped!"))
 	qdel(src)
@@ -53,7 +53,7 @@
 	user.visible_message(span_warning("[user] thrusts [user.p_their()] hand into the air and clenches tightly, as a pale ear materializes in its grasp!"))
 	playsound(src, 'sound/vo/mobs/rat/rat_life.ogg', 100, FALSE, -1)
 	name = "Phantom Ear"
-	desc = "A spectral fascimile of an ear that squirms in your hand."
+	desc = "A spectral facsimile of an ear that squirms in your hand."
 	icon_state = "round_round_ear"
 	hear_radius = 0
 	invisibility = NONE

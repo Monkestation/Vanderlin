@@ -15,3 +15,4 @@
 
 	for(var/obj/structure/soil/plant in range(1, target_turf))
 		plant.bless_soil()
+		new /obj/effect/temp_visual/bless_swirl(get_turf(plant))

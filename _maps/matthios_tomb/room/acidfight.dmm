@@ -1,51 +1,51 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "af" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ag" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/item/weapon/shield/tower/metal,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ah" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ai" = (
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "aj" = (
 /obj/item/natural/poo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "aw" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "aG" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "aI" = (
 /turf/open/lava/acid,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "aS" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "aT" = (
 /obj/item/weapon/mace/steel,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "gp" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "hA" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "kF" = (
 /obj/structure/fluff/big_chain,
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "lG" = (
 /obj/item/natural/worms{
 	pixel_y = 12
@@ -59,61 +59,61 @@
 	pixel_x = 9
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "lO" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/item/natural/poo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "nA" = (
 /obj/structure/bars/pipe/left,
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nC" = (
 /obj/structure/ladder,
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "oB" = (
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/dmusicbox,
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "rg" = (
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "rS" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "so" = (
 /turf/open/floor/metal{
 	dir = 4
 	},
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "to" = (
 /obj/structure/bed/shit,
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tq" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/structure/bars/pipe,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "uy" = (
 /obj/structure/fluff/wallclock,
 /obj/item/flashlight/flare/torch/lantern/copper,
 /obj/structure/closet/crate/chest,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "uR" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "uV" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "wj" = (
 /obj/item/ammo_casing/caseless/bolt{
 	pixel_x = -9
@@ -132,36 +132,36 @@
 	pixel_x = 11
 	},
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "wo" = (
 /obj/item/fishingrod,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "zY" = (
 /obj/structure/ladder,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ar" = (
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Av" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "AC" = (
 /turf/closed/wall/mineral/pipe,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ji" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "OZ" = (
 /obj/structure/floordoor,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "PL" = (
 /obj/structure/bars/pipe,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Rl" = (
 /obj/item/gear{
 	pixel_x = -6
@@ -175,35 +175,35 @@
 	pixel_y = 5
 	},
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "RX" = (
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Sk" = (
 /obj/item/weapon/flail,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Vk" = (
 /turf/open/floor/metal{
 	dir = 8
 	},
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "WZ" = (
 /obj/item/natural/poo/cow,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Xv" = (
 /obj/item/natural/poo,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "YL" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ZG" = (
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/metal/barograte,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 
 (1,1,1) = {"
 ah

@@ -3,7 +3,7 @@
 	category = "Dendor's Chosen"
 	triumph_count = 2
 	immediate_effects = list("Gained an ability to make wise trees")
-	rewards = list("2 Triumphs", "Dendor grows stronger")
+	rewards = list("2 Triumphs", "Dendor grows stronger", "Dendor blesses you (+1 Fortune)")
 	var/trees_transformed = 0
 	var/trees_required = 3
 
@@ -29,13 +29,15 @@
 	if(trees_transformed >= trees_required)
 		complete_objective()
 
-/datum/objective/personal/wise_trees/proc/complete_objective()
+/datum/objective/personal/wise_trees/complete_objective()
+	. = ..()
 	to_chat(owner.current, span_greentext("You have created enough wise trees to satisfy Dendor!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(DENDOR, 20)
-	escalate_objective()
 	UnregisterSignal(owner.current, COMSIG_TREE_TRANSFORMED)
+
+/datum/objective/personal/wise_trees/reward_owner()
+	. = ..()
+	owner.current.adjust_stat_modifier(STATMOD_DENDOR_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/wise_trees/update_explanation_text()
 	explanation_text = "Transform [trees_required] common trees into guardian wise trees using Dendor's blessing."

@@ -8,6 +8,7 @@
 	min_players = 30
 
 	tags = list(
+		TAG_BAOTHA,
 		TAG_INSANITY,
 	)
 
@@ -47,8 +48,10 @@
 	var/datum/objective/personal/taste_lux/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE BAOTHA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Seek out and taste Lux to experience true pleasure and make Baotha proud! You might need to grind it first though..."))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE BAOTHA'S CHOSEN!"),
+		span_notice("Seek out and taste Lux to experience true pleasure and make Baotha proud! You might need to grind it first though..."),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/baotha_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

@@ -206,3 +206,53 @@
 /obj/structure/wild_plant/nospread/fyritiusflower
 	icon_state = "fyritius2"
 	plant_type = /datum/plant_def/fyritiusflower
+
+/obj/structure/wild_plant/nospread/mango
+	icon_state = "mangotree2"
+	plant_type = /datum/plant_def/mango
+
+/obj/structure/wild_plant/nospread/avocado
+	icon_state = "avocadotree2"
+	plant_type = /datum/plant_def/avocado
+
+/obj/structure/wild_plant/nospread/mangosteen
+	icon_state = "mangosteentree2"
+	plant_type = /datum/plant_def/mangosteen
+
+/obj/structure/wild_plant/nospread/pineapple
+	icon_state = "pineapple2"
+	plant_type = /datum/plant_def/pineapple
+
+/obj/structure/wild_plant/nospread/dragonfruit
+	icon_state = "dragonfruit2"
+	plant_type = /datum/plant_def/dragonfruit
+
+/* Wild Mushrooms */
+/obj/structure/wild_plant/nospread/mushroom
+	icon = 'icons/roguetown/misc/dikaryawild.dmi'
+
+/obj/structure/wild_plant/nospread/mushroom/capillus
+	icon_state = "capillus2"
+	plant_type = /datum/plant_def/mushroom/capillus
+
+/obj/structure/wild_plant/nospread/mushroom/waddle
+	icon_state = "waddle2"
+	plant_type = /datum/plant_def/mushroom/waddle
+
+/obj/structure/wild_plant/nospread/mushroom/merkel
+	icon_state = "merkel2"
+	plant_type = /datum/plant_def/mushroom/merkel
+
+/obj/structure/wild_plant/nospread/mushroom/caveweep
+	icon_state = "caveweep2"
+	plant_type = /datum/plant_def/mushroom/caveweep
+
+/obj/structure/wild_plant/nospread/mushroom/borowiki
+	icon_state = "borowiki2"
+	plant_type = /datum/plant_def/mushroom/borowiki
+
+/* /obj/structure/wild_plant/nospread/mushroom/chanterelle // Removing for now to expand upon later
+	icon_state = "chanterelle2"
+	plant_type = /datum/plant_def/mushroom/chanterelle */
+
+

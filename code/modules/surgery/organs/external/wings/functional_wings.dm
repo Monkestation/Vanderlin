@@ -102,7 +102,7 @@
 	if(!flying)
 		if(!can_fly())
 			return
-		if(do_after(owner, 5 SECONDS, owner))
+		if(do_after(owner, 5 SECONDS, owner, extra_checks = CALLBACK(src, PROC_REF(can_fly))))
 			start_flying()
 		return
 	if(do_after(owner, 5 SECONDS, owner))
@@ -117,6 +117,9 @@
 		return FALSE
 	if(!isturf(flier.loc))
 		to_chat(flier, span_warning("I need space to fly!"))
+		return FALSE
+	if(flier.pulledby?.grab_state >= GRAB_AGGRESSIVE)
+		to_chat(flier, span_warning("I can't fly while being grabbed so tightly!"))
 		return FALSE
 	if(flier.body_position != STANDING_UP)
 		to_chat(flier, span_warning("I can't spread my wings!"))

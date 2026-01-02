@@ -1,6 +1,6 @@
 /datum/triumph_buy/pick_any_class
 	name = "No Advanced Class Restrictions"
-	desc = "Get a single run of any advanced class from any job! You must join as any job that has advanced classes to begin with. WARNING: PREPARE FOR UNFORESEEN CONSEQUENCES."
+	desc = "Get a single run of any advanced class from any job! You must join as any job that has advanced classes to begin with. WARNING: THIS CAN EASILY BREAK AND ADMINS ARE NOT OBLIGED TO FIX YOUR CHARACTER."
 	triumph_buy_id = TRIUMPH_BUY_ANY_CLASS
 	triumph_cost = 20
 	category = TRIUMPH_CAT_CHARACTER
@@ -29,7 +29,7 @@
 
 /datum/job/advclass/pick_everything
 	title = "Pick-Classes"
-	tutorial = "This will open up another menu when you spawn allowing you to pick from any class as long as its not disabled."
+	tutorial = "This will open up another menu when you spawn allowing you to pick from any class as long as it's not disabled."
 	allowed_races = ALL_RACES_LIST
 	total_positions = 0
 
@@ -40,6 +40,10 @@
 		if(!length(CHECKS.category_tags))
 			continue
 		if(CTAG_WRETCH in CHECKS.category_tags)
+			continue
+		if(CTAG_INQUISITION in CHECKS.category_tags)
+			continue
+		if(CTAG_PURITAN in CHECKS.category_tags)
 			continue
 		possible_classes += CHECKS
 

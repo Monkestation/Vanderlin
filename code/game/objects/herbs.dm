@@ -1,6 +1,6 @@
 /obj/structure/flora/grass/herb
 	name = "herbbush"
-	desc = "A bush,for an herb. This shouldn't show up."
+	desc = "A bush, for an herb. This shouldn't show up."
 	icon = 'icons/roguetown/misc/herbfoliage.dmi'
 	icon_state = "spritemeplz"
 	num_random_icons = 0
@@ -11,6 +11,7 @@
 	var/list/looty = list()
 	var/herbtype
 	var/obj/effect/skill_tracker/alchemy_plants/alchemy_effect
+	var/obj/item/reagent_containers/food/snacks/spiderhoney/honey/honey_type
 
 	var/timerid
 	var/harvested = FALSE
@@ -62,7 +63,7 @@
 
 /obj/structure/flora/grass/herb/random
 	name = "random herb"
-	desc = "Haha, im in danger."
+	desc = "Haha, I'm in danger."
 	icon_state = "herb_random"
 
 /obj/structure/flora/grass/herb/random/Initialize()
@@ -88,6 +89,7 @@
 	icon_state = "atropa2"
 
 	herbtype = /obj/item/alch/herb/atropa
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
 /obj/structure/flora/grass/herb/matricaria
 	name = "matricaria"
@@ -118,6 +120,7 @@
 	icon_state = "paris2"
 
 	herbtype = /obj/item/alch/herb/paris
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
 /obj/structure/flora/grass/herb/calendula
 	name = "calendula"

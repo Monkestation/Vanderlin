@@ -255,7 +255,7 @@ GLOBAL_LIST_INIT(attunement_colors, list(
 
 /datum/attunement/earth
 	name = "Earth"
-	desc = "The very ground you stand on, a raging earthquake, or an paven roads, earth is all encompassing."
+	desc = "The very ground you stand on, a raging earthquake, or a paved road, earth is all encompassing."
 
 	alignments = list(
 		/datum/patron/divine/dendor = 1.2,
@@ -289,7 +289,7 @@ GLOBAL_LIST_INIT(attunement_colors, list(
 
 /datum/attunement/time
 	name = "Time"
-	desc = "A unique and nigh-impossible element to master by all but those with either endless lifespans, or non-euclidian existence. Measured by all civilizations, and the defining aspect of countless realms and systems."
+	desc = "A unique and nigh-impossible element to master by all but those with either endless lifespans, or non-Euclidean existence. Measured by all civilizations, and the defining aspect of countless realms and systems."
 
 	alignments = list(
 		/datum/patron/divine/necra = 1,

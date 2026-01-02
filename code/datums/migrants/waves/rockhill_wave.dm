@@ -44,7 +44,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/outfit/rockhill/mayor
-	name = "Mayor of Rockhill"
+	name = "Mayor of Rockhill (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/undershirt
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/clothing/neck/gorget
@@ -88,7 +88,7 @@
 	outfit = /datum/outfit/rockhill/knight
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_PER = 1,
@@ -138,13 +138,13 @@
 	var/prev_real_name = spawned.real_name
 	var/prev_name = spawned.name
 	var/honorary = "Sir"
-	if(spawned.gender == FEMALE)
+	if(spawned.pronouns == SHE_HER)
 		honorary = "Dame"
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
 
 /datum/outfit/rockhill/knight
-	name = "Knight of Rockhill"
+	name = "Knight of Rockhill (Migrant Wave)"
 	head = /obj/item/clothing/head/helmet
 	gloves = /obj/item/clothing/gloves/plate
 	pants = /obj/item/clothing/pants/platelegs
@@ -176,7 +176,7 @@
 	tutorial = "The Mayor of Rockhill has conscripted you and your mens to go see the rulers of Vanderlin."
 	outfit = /datum/outfit/rockhill/serjeant_at_arms
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_INT = 2,
@@ -218,10 +218,10 @@
 			STATKEY_PER = 1,
 			STATKEY_SPD = 1,
 		)
-		spawned.adjust_stat_modifier_list("job_stats", old_stats)
+		spawned.adjust_stat_modifier_list(STATMOD_JOB, old_stats)
 
 /datum/outfit/rockhill/serjeant_at_arms
-	name = "Rockhill Serjeant"
+	name = "Rockhill Serjeant (Migrant Wave)"
 	head = /obj/item/clothing/head/helmet/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/half/vet
@@ -239,12 +239,12 @@
 
 /datum/migrant_role/footman_guard
 	name = "Guardsmen of Rockhill"
-	greet_text = "Your Serjeant has been ordered by the mayor of rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
+	greet_text = "Your Serjeant has been ordered by the mayor of Rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
 	migrant_job = /datum/job/migrant/footman_bannerman/rockhill
 
 /datum/job/migrant/footman_bannerman/rockhill
 	title = "Guardsmen of Rockhill"
-	tutorial = "Your Serjeant has been ordered by the mayor of rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
+	tutorial = "Your Serjeant has been ordered by the mayor of Rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
 	is_foreigner = TRUE
 
 /datum/migrant_wave/rockhill_wave

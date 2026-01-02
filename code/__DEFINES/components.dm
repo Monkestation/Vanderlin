@@ -53,7 +53,6 @@
 	#define COMSIG_ATOM_BLOCKS_BSA_BEAM 1
 #define COMSIG_ATOM_DIR_CHANGE "atom_dir_change"				//from base of atom/setDir(): (old_dir, new_dir)
 #define COMSIG_ATOM_CONTENTS_DEL "atom_contents_del"			//from base of atom/handle_atom_del(): (atom/deleted)
-#define COMSIG_ATOM_HAS_GRAVITY "atom_has_gravity"				//from base of atom/has_gravity(): (turf/location, list/forced_gravities)
 #define COMSIG_ATOM_CANREACH "atom_can_reach"					//from internal loop in atom/movable/proc/CanReach(): (list/next)
 	#define COMPONENT_BLOCK_REACH 1
 #define COMSIG_ATOM_SCREWDRIVER_ACT "atom_screwdriver_act"		//from base of atom/screwdriver_act(): (mob/living/user, obj/item/I)
@@ -176,6 +175,8 @@
 #define COMSIG_ITEM_DROPPED "item_drop"
 ///from base of obj/item/pickup(): (/mob/taker)
 #define COMSIG_ITEM_PICKUP "item_pickup"
+///from base of obj/item/afterpickup(): (/mob/taker)
+#define COMSIG_ITEM_AFTER_PICKUP "item_after_pickup"
 ///from base of mob/living/carbon/attacked_by(): (mob/living/carbon/target, mob/living/user, hit_zone)
 #define COMSIG_ITEM_ATTACK_ZONE "item_attack_zone"
 ///from base of obj/item/hit_reaction(): (list/args)
@@ -280,6 +281,7 @@
 #define COMSIG_TRY_STORAGE_CAN_INSERT "storage_can_equip"				//(obj/item/insertion_candidate, mob/user, silent) - returns bool
 #define COMSIG_STORAGE_CLOSED "storage_close"
 #define COMSIG_STORAGE_REMOVED "storage_item_removed"
+#define COMSIG_STORAGE_ADDED "storage_item_added"
 
 // ~storage component
 ///from base of datum/component/storage/can_user_take(): (mob/user)
@@ -334,3 +336,12 @@
 #define COMSIG_ITEM_ATTACK_EFFECT "item_attack_effect"
 #define COMSIG_ITEM_ATTACK_EFFECT_SELF "item_attack_effect_self"
 #define COMSIG_DOOR_OPENED "door_open"
+
+/// send this signal to add /datum/component/vis_radius to a list of mobs or one mob: (mob/mob_or_mobs)
+#define COMSIG_SHOW_RADIUS "show_radius"
+/// send this signal to remove /datum/component/vis_radius to a mobs: ()
+#define COMSIG_HIDE_RADIUS "hide_radius"
+/// send this signal to remove a list of tip ids(use tip_names as tip ids): (/list/tip_ids_to_remove)
+#define COMSIG_TIPS_REMOVE "comsig_tip_remove"
+///used incase we care about a tracker dying
+#define COMSIG_LIVING_TRACKER_REMOVED "tracker_removed"

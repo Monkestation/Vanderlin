@@ -31,10 +31,10 @@
 	H.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE)
 	H.add_spell(/datum/action/cooldown/spell/undirected/shadow_step, TRUE)
 	H.add_spell(/datum/action/cooldown/spell/enhanced_mimicry, TRUE)
-	H.change_stat("strength", 2)
-	H.change_stat("endurance", 2)
-	H.change_stat("perception", 1)
-	H.change_stat("speed", 2)
+	H.change_stat(STATKEY_STR, 2)
+	H.change_stat(STATKEY_END, 2)
+	H.change_stat(STATKEY_PER, 1)
+	H.change_stat(STATKEY_SPD, 2)
 
 	backpack_contents = list(
 		/obj/item/harlequinn_disguise_kit,

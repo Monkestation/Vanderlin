@@ -28,6 +28,7 @@
 		owner.adjust_triumphs(profane.release_profane_souls(owner)) // Every soul saved earns you a big fat triumph.
 		return
 	if(pacify_coffin(cast_on, owner))
+		cast_on.add_overlay("graveconsecrated")
 		owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on]."))
 		SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
 		record_round_statistic(STATS_GRAVES_CONSECRATED)

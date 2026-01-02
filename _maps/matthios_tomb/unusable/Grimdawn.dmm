@@ -1,49 +1,49 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "b" = (
 /obj/item/reagent_containers/glass/bottle/beer/ratkept,
 /obj/item/reagent_containers/glass/bottle/beer/ratkept,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "d" = (
 /obj/item/natural/poo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "e" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "i" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/zizombie/npc/GRENZEL,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "l" = (
 /obj/structure/roguetent,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "n" = (
 /obj/item/coin/silver,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "q" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "z" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "D" = (
 /obj/effect/decal/cleanable/vomit/old,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "H" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "J" = (
 /obj/item/reagent_containers/glass/bottle/beer/ratkept,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "K" = (
 /obj/structure/toilet,
 /obj/structure/flora/grass/maneater/real{
@@ -53,10 +53,10 @@
 	pixel_y = -2
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Q" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "U" = (
 /obj/item/paper{
 	pixel_y = 19
@@ -70,7 +70,7 @@
 	pixel_x = -4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 a

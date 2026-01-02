@@ -8,8 +8,8 @@
 	min_players = 25
 
 	tags = list(
+		TAG_XYLIX,
 		TAG_TRICKERY,
-		TAG_UNEXPECTED,
 	)
 
 /datum/round_event_control/xylix_mocking/canSpawnEvent(players_amt, gamemode, fake_check)
@@ -48,8 +48,10 @@
 	var/datum/objective/personal/mock/monarch/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE XYLIX'S CHOSEN!"))
-	to_chat(chosen_one, span_biginfo("Xylix demands great entertainment! Seek out and viciously mock the monarch to prove your devotion and earn Xylix's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE XYLIX'S CHOSEN!"),
+		span_biginfo("Xylix demands great entertainment! Seek out and viciously mock the monarch to prove your devotion and earn Xylix's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen_male_female.ogg', 100)
 
 	chosen_one.add_spell(/datum/action/cooldown/spell/vicious_mockery)

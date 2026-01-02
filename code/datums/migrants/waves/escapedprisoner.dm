@@ -17,6 +17,7 @@
 	too rusted to stay together, broke as you jumped into the river. The tiny voice you forgot you had echoed in the back of \
 	your mind. 'I'm not going back.'"
 	outfit = /datum/outfit/escprisoner
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	jobstats = list(
 		STATKEY_CON = -2,
@@ -54,7 +55,7 @@
 	GLOB.outlawed_players |= spawned.real_name
 
 /datum/outfit/escprisoner
-	name = "Escaped Prisoner"
+	name = "Escaped Prisoner (Migrant Wave)"
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
 	mask = /obj/item/clothing/face/facemask/prisoner
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown

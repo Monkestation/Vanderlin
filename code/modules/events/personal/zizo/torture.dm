@@ -8,6 +8,7 @@
 	min_players = 20
 
 	tags = list(
+		TAG_ZIZO,
 		TAG_BLOOD,
 		TAG_INSANITY,
 	)
@@ -47,8 +48,10 @@
 	chosen_one.verbs |= /mob/living/carbon/human/proc/torture_victim
 	chosen_one.verbs |= /mob/living/carbon/human/proc/faith_test
 
-	to_chat(chosen_one, span_userdanger("YOU ARE ZIZO'S CHOSEN!"))
-	to_chat(chosen_one, span_biginfo("Zizo demands suffering! Extract information through pain to earn Zizo's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE ZIZO'S CHOSEN!"),
+		span_biginfo("Zizo demands suffering! Extract information through pain to earn Zizo's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/zizo_omen.ogg', 100)
 
 	to_chat(chosen_one, span_notice("You have gained an ability to <b>torture</b> others!"))

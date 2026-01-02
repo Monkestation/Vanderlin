@@ -26,7 +26,7 @@
 	. = ..()
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
-			cast_on.visible_message(span_warning("[cast_on] overpowers being inflammed!"), span_greentext("I overpower being inflammed!"))
+			cast_on.visible_message(span_warning("[cast_on] overpowers being inflamed!"), span_greentext("I overpower being inflamed!"))
 			return
 		if(ishuman(cast_on)) //BLEED AND PAIN
 			var/mob/living/carbon/human/human_target = cast_on
@@ -35,7 +35,7 @@
 			phy.pain_mod *= 1.5
 			addtimer(VARSET_CALLBACK(phy, bleed_mod, phy.bleed_mod /= 1.5), 19 SECONDS)
 			addtimer(VARSET_CALLBACK(phy, pain_mod, phy.pain_mod /= 1.5), 19 SECONDS)
-			human_target.visible_message(span_danger("[cast_on]'s wounds become inflammed as their vitality is sapped away!"), span_userdanger("Ravox inflammes my wounds and weakens my body!"))
+			human_target.visible_message(span_danger("[cast_on]'s wounds become inflamed as their vitality is sapped away!"), span_userdanger("Ravox inflames my wounds and weakens my body!"))
 		return
 
 	cast_on.visible_message(span_info("Warmth radiates from [cast_on] as their wounds seal over!"), span_notice("The pain from my wounds fade as warmth radiates from my soul!"))

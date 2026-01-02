@@ -1,10 +1,10 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "l" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "q" = (
 /obj/structure/rack/shelf/biggest{
 	pixel_y = 17
@@ -17,28 +17,28 @@
 	pixel_y = -7
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "z" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "P" = (
 /obj/structure/fermentation_keg/random/water{
 	pixel_y = 3
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Q" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "X" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 X

@@ -9,7 +9,7 @@
 	desc = "Treasures are sent to the vault, where they accrue value over time. Payout is a percentage is based on the price of the treasure, with taxes removed from the payout after."
 	item_type = /obj/item
 	payout_price = 10
-	transport_item = /area/rogue/indoors/town/vault
+	transport_item = /area/indoors/town/vault
 	percent_bounty = TRUE
 
 /datum/stock/bounty/treasure/get_payout_price(obj/item/I)

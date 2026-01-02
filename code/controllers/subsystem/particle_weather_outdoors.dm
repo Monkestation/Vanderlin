@@ -171,6 +171,10 @@ SUBSYSTEM_DEF(outdoor_effects)
 		if(T)
 			T.get_sky_and_weather_states()
 			if(T.outdoor_effect)
+				// this may be causing some trivial GC fails for outdoor_effect
+				// but that doesn't seem to cause much of a performance impact in my testing
+				// if that changes, use |= instead of +=, and if that's still too slow
+				// then add a flag on outdoor_effect to prevent duplicate queueing
 				GLOB.SUNLIGHT_QUEUE_UPDATE += T.outdoor_effect
 
 		if(init_tick_checks)
@@ -214,7 +218,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 
 			/* in case we aren't indoor somehow, wack us into the proc queue, we will be skipped on next indoor check */
 			if(U.state != SKY_BLOCKED)
-				GLOB.SUNLIGHT_QUEUE_UPDATE += T.outdoor_effect
+				GLOB.SUNLIGHT_QUEUE_UPDATE += U // no need for |= because we just made U
 
 		if(U.state != SKY_BLOCKED)
 			continue
@@ -246,7 +250,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 // Updates overlays and vis_contents for outdoor effects
 /datum/controller/subsystem/outdoor_effects/proc/update_outdoor_effect_overlays(atom/movable/outdoor_effect/OE)
 	var/mutable_appearance/MA
-	if (OE.state != SKY_BLOCKED)
+	if ((OE.state != SKY_BLOCKED) || istype(OE.source_turf, /turf/closed/sea_fog))
 		MA = get_sunlight_overlay(1, 1, 1, 1) /* fully lit */
 	else //Indoor - do proper corner checks
 		/* check if we are globally affected or not */
@@ -274,11 +278,10 @@ SUBSYSTEM_DEF(outdoor_effects)
 	OE.luminosity = MA.luminosity
 
 //Retrieve an overlay from the list - create if necessary
-/datum/controller/subsystem/outdoor_effects/proc/get_sunlight_overlay(fr, fg, fb, fa)
-	var/index = "[fr]|[fg]|[fb]|[fa]"
-	LAZYINITLIST(sunlight_overlays)
-	if(!sunlight_overlays[index])
-		sunlight_overlays[index] = create_sunlight_overlay(fr, fg, fb, fa)
+/datum/controller/subsystem/outdoor_effects/proc/get_sunlight_overlay(fr = 0, fg = 0, fb = 0, fa = 0)
+	var/index = jointext(args, "|") // using = 0 ensures that the index still works even if we don't pass all args
+	if(!sunlight_overlays?[index])
+		LAZYSET(sunlight_overlays, index, create_sunlight_overlay(fr, fg, fb, fa))
 	return sunlight_overlays[index]
 
 //get our weather overlay

@@ -25,13 +25,18 @@
 	grid_height = 32
 	item_weight = 7 * IRON_MULTIPLIER
 
+/obj/item/clothing/gloves/plate/ancient
+	name = "ancient gauntlets"
+	desc = "Ancient plated gauntlets made out of steel."
+	icon_state = "agauntlets"
+
 /obj/item/clothing/gloves/plate/iron
 	name = "iron plate gauntlets"
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."
 	icon_state = "igauntlets"
 	sellprice = VALUE_IRON_ARMOR/2
 	armor = ARMOR_PLATE_BAD
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/gloves/plate/rust
 	name = "rusted riveted gauntlets"
@@ -73,7 +78,7 @@
 
 /obj/item/clothing/gloves/plate/matthios
 	name = "gilded gauntlets"
-	desc = "Shimmering plate gauntelts. Many riches have been taken with these, and just as many lives."
+	desc = "Shimmering plate gauntlets. Many riches have been taken with these, and just as many lives."
 	icon_state = "matthiosgloves"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'

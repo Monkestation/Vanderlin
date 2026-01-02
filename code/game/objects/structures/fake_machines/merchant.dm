@@ -115,7 +115,7 @@
 	var/final_price = 0
 	var/taxes = 0
 	// this is the list of supply groups that you can purchase with this machine
-	var/list/unlocked_cats = list("Apparel","Storage","Armor(Light)","Armor(Steel)","Food","drinks","Jewelry","Luxury","Tools","Seeds","Shields","Medicine","Raw Materials",
+	var/list/unlocked_cats = list("Apparel","Storage","Armor(Light)","Armor(Steel)","Food","Drinks","Jewelry","Luxury","Tools","Seeds","Shields","Medicine","Raw Materials",
 								"Weapons (Iron)","Weapons (Steel)","Weapons (Ranged)","Ammunition")
 
 /obj/structure/fake_machine/merchantvend/Initialize()
@@ -158,7 +158,7 @@
 		if(!ispath(path, /datum/supply_pack))
 			message_admins("MERCHANT [usr.key] IS TRYING TO BUY A [path] WITH THE GOLDFACE. THIS IS AN EXPLOIT.")
 			return
-		var/datum/supply_pack/picked_pack = new path
+		var/datum/supply_pack/picked_pack = SSmerchant.supply_packs[path]
 		base_price = picked_pack.cost
 		taxes = round(SStreasury.tax_value * base_price)
 		final_price = round(base_price + taxes)

@@ -20,12 +20,11 @@
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 4 SECONDS
-	requires_tech = TRUE
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED
 	skill_min = SKILL_LEVEL_APPRENTICE
-	skill_median = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 	success_sound = 'sound/surgery/retractor2.ogg'
 	failure_sound = 'sound/surgery/organ2.ogg'
 	/// How much brute damage we heal per completion
@@ -37,11 +36,6 @@
 	 * Smaller Number = More Healing!
 	 */
 	var/missinghpbonus = 0
-
-/datum/surgery_step/heal/validate_tech(mob/user, mob/living/target, target_zone, datum/intent/intent)
-	if(!brutehealing && !burnhealing)
-		return FALSE
-	return ..()
 
 /datum/surgery_step/heal/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	. = ..()
@@ -113,74 +107,17 @@
 /datum/surgery_step/heal/brute/basic
 	name = "Tend bruises"
 	brutehealing = 10
-	missinghpbonus = 7.5
-	requires_tech = FALSE
-	replaced_by = /datum/surgery_step/heal/brute/upgraded
-
-/datum/surgery_step/heal/brute/upgraded
-	name = "Tend bruises (Adv.)"
-	brutehealing = 10
 	missinghpbonus = 5
-	requires_tech = TRUE
-	replaced_by = /datum/surgery_step/heal/brute/upgraded/femto
-
-/datum/surgery_step/heal/brute/upgraded/femto
-	name = "Tend bruises (Exp.)"
-	brutehealing = 10
-	missinghpbonus = 2.5
-	requires_tech = TRUE
-	replaced_by = null
 
 /********************BURN STEPS********************/
 /datum/surgery_step/heal/burn/basic
 	name = "Tend burns"
 	burnhealing = 10
-	missinghpbonus = 7.5
-	requires_tech = FALSE
-	replaced_by = /datum/surgery_step/heal/burn/upgraded
-
-/datum/surgery_step/heal/burn/upgraded
-	name = "Tend burns (Adv.)"
-	burnhealing = 10
 	missinghpbonus = 5
-	requires_tech = TRUE
-	replaced_by = /datum/surgery_step/heal/burn/upgraded/femto
-
-/datum/surgery_step/heal/burn/upgraded/femto
-	name = "Tend burns (Exp.)"
-	burnhealing = 10
-	missinghpbonus = 2.5
-	requires_tech = TRUE
-	replaced_by = null
 
 /********************COMBO STEPS********************/
 /datum/surgery_step/heal/combo
 	name = "Tend damage"
 	brutehealing = 6
 	burnhealing = 6
-	missinghpbonus = 7.5
-	requires_tech = FALSE
-	replaced_by = /datum/surgery_step/heal/combo/upgraded
-
-/datum/surgery_step/heal/combo/upgraded
-	name = "Tend damage (Adv.)"
-	brutehealing = 6
-	burnhealing = 6
 	missinghpbonus = 5
-	requires_tech = TRUE
-	replaced_by = /datum/surgery_step/heal/combo/upgraded/femto
-
-/datum/surgery_step/heal/combo/upgraded/femto
-	name = "Tend damage (Exp.)"
-	brutehealing = 6
-	burnhealing = 6
-	missinghpbonus = 2.5
-	requires_tech = TRUE
-	replaced_by = null
-
-/datum/surgery_step/heal/combo/upgraded/femto/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
-	display_results(user, target, "<span class='warning'>I screwed up!</span>",
-		"<span class='warning'>[user] screws up!</span>",
-		"<span class='notice'>[user] fixes some of [target]'s wounds.</span>", TRUE)
-	target.take_bodypart_damage(5,5)
-	return TRUE

@@ -2,101 +2,101 @@
 "c" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "e" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "f" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "h" = (
 /obj/structure/table/wood/plain,
 /obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "j" = (
 /obj/structure/ladder/unbreakable,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "k" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "m" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "o" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "p" = (
 /obj/structure/wallladder{
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "s" = (
 /obj/effect/decal/remains/human{
 	pixel_y = 12
 	},
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "t" = (
 /turf/closed/wall/mineral/wooddark/slitted,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "v" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "w" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "y" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "z" = (
 /obj/structure/door/stone,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "B" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "C" = (
 /obj/structure/ladder/unbreakable,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "D" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/window,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "G" = (
 /turf/open/floor/twig,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "I" = (
 /turf/closed/wall/mineral/wooddark/slitted,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "R" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "S" = (
 /turf/open/floor/rooftop/green,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "W" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "X" = (
 /obj/structure/fluff/walldeco/vinez/offset,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Z" = (
 /turf/open/floor/rooftop/green{
 	dir = 8
 	},
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 
 (1,1,1) = {"
 W

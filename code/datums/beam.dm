@@ -7,6 +7,8 @@
  * The effect which is what the beams are made out of. They're placed in a line from the origin to target, rotated towards the target and snipped off at the end.
  * These effects are kept in a list and constantly created and destroyed (hence the proc names draw and reset, reset destroying all effects and draw creating more.)
  *
+ * Now supports rendering beams across multiple Z-levels!
+ *
  * You can add more special effects to the beam itself by changing what the drawn beam effects do. For example you can make a vine that pricks people by making the beam_type
  * include a crossed proc that damages the crosser. Examples in venus_human_trap.dm
 */
@@ -47,6 +49,8 @@
 	var/override_target_pixel_x = null
 	/// If set will be used instead of targets's pixel_y in offset calculations
 	var/override_target_pixel_y = null
+	/// If TRUE, renders the beam on all Z-levels between origin and target
+	var/render_on_z_levels = TRUE
 
 /datum/beam/New(
 	origin,
@@ -66,6 +70,7 @@
 	override_origin_pixel_y = null,
 	override_target_pixel_x = null,
 	override_target_pixel_y = null,
+	render_on_z_levels = TRUE,
 )
 	src.origin = origin
 	src.target = target
@@ -82,6 +87,7 @@
 	src.override_origin_pixel_y = override_origin_pixel_y
 	src.override_target_pixel_x = override_target_pixel_x
 	src.override_target_pixel_y = override_target_pixel_y
+	src.render_on_z_levels = render_on_z_levels
 
 	if(mana_pool)
 		src.mana_pool = mana_pool
@@ -102,8 +108,8 @@
 		visuals.invisibility = invisibility
 	visuals.update_appearance()
 	Draw()
-	RegisterSignal(origin, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing))
-	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing))
+	RegisterSignal(origin, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing) , TRUE)
+	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing) , TRUE)
 
 /**
  * Triggered by signals set up when the beam is set up. If it's still sane to create a beam, it removes the old beam, creates a new one. Otherwise it kills the beam.
@@ -115,7 +121,7 @@
  */
 /datum/beam/proc/redrawing(atom/movable/mover, atom/oldloc, direction)
 	SIGNAL_HANDLER
-	if(origin && target && get_dist(origin,target)<max_distance && origin.z == target.z)
+	if(origin && target && get_dist(origin,target)<max_distance)
 		QDEL_LIST(elements)
 		INVOKE_ASYNC(src, PROC_REF(Draw))
 	else
@@ -137,36 +143,29 @@
 	var/origin_py = (isnull(override_origin_pixel_y) ? origin.pixel_y : override_origin_pixel_y) + origin.pixel_y
 	var/target_px = (isnull(override_target_pixel_x) ? target.pixel_x : override_target_pixel_x) + target.pixel_x
 	var/target_py = (isnull(override_target_pixel_y) ? target.pixel_y : override_target_pixel_y) + target.pixel_y
+	if(istype(origin, /mob/living/simple_animal/hostile/retaliate/troll))
+		origin_px += 32
+	if(istype(target, /mob/living/simple_animal/hostile/retaliate/troll))
+		target_px += 32
 	var/Angle = get_angle_raw(origin.x, origin.y, origin_px, origin_py, target.x , target.y, target_px, target_py)
-	///var/Angle = round(get_angle(origin,target))
 	var/matrix/rot_matrix = matrix()
 	var/turf/origin_turf = get_turf(origin)
 	rot_matrix.Turn(Angle)
-
 	//Translation vector for origin and target
 	var/DX = (32*target.x+target_px)-(32*origin.x+origin_px)
 	var/DY = (32*target.y+target_py)-(32*origin.y+origin_py)
 	var/N = 0
 	var/length = round(sqrt((DX)**2+(DY)**2)) //hypotenuse of the triangle formed by target and origin's displacement
+	//get z list
+	var/list/z_levels = list(origin.z)
+	if(render_on_z_levels && origin.z != target.z)
+		var/z_step = origin.z < target.z ? 1 : -1
+		for(var/z = origin.z + z_step; (z_step > 0 ? z <= target.z : z >= target.z); z += z_step)
+			z_levels += z
 
 	for(N in 0 to length-1 step 32)//-1 as we want < not <=, but we want the speed of X in Y to Z and step X
 		if(QDELETED(src))
 			break
-		var/obj/effect/ebeam/segment = new beam_type(origin_turf, src)
-		elements += segment
-
-		//Assign our single visual ebeam to each ebeam's vis_contents
-		//ends are cropped by a transparent box icon of length-N pixel size laid over the visuals obj
-		if(N+32>length) //went past the target, we draw a box of space to cut away from the beam sprite so the icon actually ends at the center of the target sprite
-			var/icon/II = new(icon, icon_state)//this means we exclude the overshooting object from the visual contents which does mean those visuals don't show up for the final bit of the beam...
-			II.DrawBox(null,1,(length-N),32,32)//in the future if you want to improve this, remove the drawbox and instead use a 513 filter to cut away at the final object's icon
-			segment.icon = II
-			segment.color = beam_color
-		else
-			segment.vis_contents += visuals
-		segment.plane = visuals.plane
-		segment.transform = rot_matrix
-
 		//Calculate pixel offsets (If necessary)
 		var/Pixel_x
 		var/Pixel_y
@@ -178,10 +177,9 @@
 			Pixel_y = 0
 		else
 			Pixel_y = round(cos(Angle)+32*cos(Angle)*(N+16)/32)
-
 		//Position the effect so the beam is one continous line
-		var/final_x = segment.x
-		var/final_y = segment.y
+		var/final_x = origin_turf.x
+		var/final_y = origin_turf.y
 		if(abs(Pixel_x)>32)
 			final_x += Pixel_x > 0 ? round(Pixel_x/32) : CEILING(Pixel_x/32, 1)
 			Pixel_x %= 32
@@ -189,9 +187,31 @@
 			final_y += Pixel_y > 0 ? round(Pixel_y/32) : CEILING(Pixel_y/32, 1)
 			Pixel_y %= 32
 
-		segment.forceMove(locate(final_x, final_y, segment.z))
-		segment.pixel_x = origin_px + Pixel_x
-		segment.pixel_y = origin_py + Pixel_y
+		var/turf/check_turf = locate(final_x, final_y, origin.z)
+		var/is_open_space = istype(check_turf, /turf/open/transparent/openspace)
+
+		for(var/z_level in z_levels)
+			if(z_level < origin.z && !is_open_space)
+				continue
+
+			var/turf/segment_turf = locate(final_x, final_y, z_level)
+			if(!segment_turf)
+				continue
+			var/obj/effect/ebeam/segment = new beam_type(segment_turf, src)
+			elements += segment
+			//Assign our single visual ebeam to each ebeam's vis_contents
+			//ends are cropped by a transparent box icon of length-N pixel size laid over the visuals obj
+			if(N+32>length) //went past the target, we draw a box of space to cut away from the beam sprite so the icon actually ends at the center of the target sprite
+				var/icon/II = new(icon, icon_state)
+				II.DrawBox(null,1,(length-N),32,32)
+				segment.icon = II
+				segment.color = beam_color
+			else
+				segment.vis_contents += visuals
+			segment.plane = visuals.plane
+			segment.transform = rot_matrix
+			segment.pixel_x = origin_px + Pixel_x
+			segment.pixel_y = origin_py + Pixel_y
 		CHECK_TICK
 
 /// Effect beam object
@@ -286,11 +306,12 @@
  * Unless you're making a custom beam effect (see the beam_type argument), you won't actually have to mess with any other procs. Make sure you store the return of this Proc, you'll need it
  * to kill the beam.
  * **Arguments:**
- * BeamTarget: Where you're beaming from. Where do you get origin? You didn't read the docs, fuck you.
+ * BeamTarget: Where you're beaming to. The origin is the atom calling this proc.
  * icon_state: What the beam's icon_state is. The datum effect isn't the ebeam object, it doesn't hold any icon and isn't type dependent.
  * icon: What the beam's icon file is. Don't change this, man. All beam icons should be in beam.dmi anyways.
  * maxdistance: how far the beam will go before stopping itself. Used mainly for two things: preventing lag if the beam may go in that direction and setting a range to abilities that use beams.
  * beam_type: The type of your custom beam. This is for adding other wacky stuff for your beam only. Most likely, you won't (and shouldn't) change it.
+ * render_on_z_levels: If TRUE, renders the beam on all Z-levels between origin and target. Defaults to TRUE.
  */
 /atom/proc/Beam(atom/BeamTarget,
 	icon_state = "1-full",
@@ -308,7 +329,8 @@
 	override_origin_pixel_y = null,
 	override_target_pixel_x = null,
 	override_target_pixel_y = null,
+	render_on_z_levels = FALSE,
 )
-	var/datum/beam/newbeam = new(src, BeamTarget, icon, icon_state, time, max_distance, beam_type, beam_color, emissive, beam_layer, beam_plane, invisibility, mana_pool, override_origin_pixel_x, override_origin_pixel_y, override_target_pixel_x, override_target_pixel_y)
+	var/datum/beam/newbeam = new(src, BeamTarget, icon, icon_state, time, max_distance, beam_type, beam_color, emissive, beam_layer, beam_plane, invisibility, mana_pool, override_origin_pixel_x, override_origin_pixel_y, override_target_pixel_x, override_target_pixel_y, render_on_z_levels)
 	INVOKE_ASYNC(newbeam, TYPE_PROC_REF(/datum/beam, Start))
 	return newbeam

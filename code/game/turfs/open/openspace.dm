@@ -18,12 +18,12 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	var/can_cover_up = TRUE
 	var/can_build_on = TRUE
 	dynamic_lighting = 1
-	turf_flags = NONE
 	path_weight = 500
 	smoothing_flags = SMOOTH_EDGE
 	smoothing_groups = SMOOTH_GROUP_FLOOR_OPEN_SPACE
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "staticedge"
+	turf_flags = TURF_WEATHER_PROOF
 
 /turf/open/transparent/openspace/Initialize() // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
@@ -96,6 +96,8 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 		return FALSE
 	if(HAS_TRAIT(A, TRAIT_I_AM_INVISIBLE_ON_A_BOAT))
 		return FALSE
+	if(HAS_TRAIT(A, "hooked"))
+		return FALSE
 	if(direction == DOWN)
 		for(var/obj/O in contents)
 			if(O.obj_flags & BLOCK_Z_OUT_DOWN)
@@ -123,7 +125,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 		var/mob/living/L = user
 		if(L.stat != CONSCIOUS)
 			return
-		var/turf/target = get_step_multiz(src, DOWN)
+		var/turf/target = GET_TURF_BELOW(src)
 		if(!target)
 			to_chat(user, "<span class='warning'>I can't climb there.</span>")
 			return
@@ -143,7 +145,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 			user.start_pulling(pulling,suppress_message = TRUE)
 
 /turf/open/transparent/openspace/attack_ghost(mob/dead/observer/user)
-	var/turf/target = get_step_multiz(src, DOWN)
+	var/turf/target = GET_TURF_BELOW(src)
 	if(!user.Adjacent(src))
 		return
 	if(!target)

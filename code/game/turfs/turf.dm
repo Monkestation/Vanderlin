@@ -47,6 +47,9 @@
 
 	var/list/datum/automata_cell/autocells
 
+	///The typepath we use for lazy fishing on turfs, to save on world init time.
+	var/fish_source
+
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
 	if(var_name in banned_edits)
@@ -102,8 +105,6 @@
 
 	if (opacity)
 		has_opaque_atom = TRUE
-
-	QUEUE_SMOOTH_NEIGHBORS(src)
 
 	if(shine)
 		make_shiny(shine)
@@ -169,6 +170,44 @@
 /turf/proc/multiz_turf_new(turf/T, dir)
 	reassess_stack()
 
+
+/**
+ * the following are some fishing-related optimizations to shave off as much
+ * time we spend implementing the fishing as possible, even if that means
+ * hackier code, because we've hundreds of turfs like lava, water etc every round,
+ */
+/turf/proc/add_lazy_fishing(fish_source_path)
+	RegisterSignal(src, COMSIG_FISHING_ROD_CAST, PROC_REF(add_fishing_spot_comp))
+	RegisterSignal(src, COMSIG_NPC_FISHING, PROC_REF(on_npc_fishing))
+	RegisterSignal(src, COMSIG_FISH_RELEASED_INTO, PROC_REF(on_fish_release_into))
+	RegisterSignal(src, COMSIG_TURF_CHANGE, PROC_REF(remove_lazy_fishing))
+	ADD_TRAIT(src, TRAIT_FISHING_SPOT, INNATE_TRAIT)
+	fish_source = fish_source_path
+
+/turf/proc/remove_lazy_fishing()
+	SIGNAL_HANDLER
+	UnregisterSignal(src, list(
+		COMSIG_FISHING_ROD_CAST,
+		COMSIG_NPC_FISHING,
+		COMSIG_FISH_RELEASED_INTO,
+		COMSIG_TURF_CHANGE,
+	))
+	REMOVE_TRAIT(src, TRAIT_FISHING_SPOT, INNATE_TRAIT)
+	fish_source = null
+
+/turf/proc/add_fishing_spot_comp(datum/source, obj/item/fishingrod/rod, mob/user, automated)
+	SIGNAL_HANDLER
+	var/datum/component/fishing_spot/spot = source.AddComponent(/datum/component/fishing_spot, GLOB.preset_fish_sources[fish_source])
+	remove_lazy_fishing()
+	return spot.handle_cast(arglist(args))
+
+/turf/proc/on_npc_fishing(datum/source, list/fish_spot_container)
+	SIGNAL_HANDLER
+	fish_spot_container[NPC_FISHING_SPOT] = GLOB.preset_fish_sources[fish_source]
+
+/turf/proc/on_fish_release_into(datum/source, obj/item/reagent_containers/food/snacks/fish/fish, mob/living/releaser)
+	SIGNAL_HANDLER
+	GLOB.preset_fish_sources[fish_source].readd_fish(src, fish, releaser)
 
 /turf/proc/is_blocked_turf(exclude_mobs = FALSE, source_atom = null, list/ignore_atoms, type_list = FALSE)
 	if((!isnull(source_atom) && !CanPass(source_atom, get_dir(src, source_atom))) || density)
@@ -277,7 +316,7 @@
 	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
 
 /turf/proc/zFall(atom/movable/A, levels = 1, force = FALSE)
-	var/turf/target = get_step_multiz(src, DOWN)
+	var/turf/target = GET_TURF_BELOW(src)
 	if(!target || (!isobj(A) && !ismob(A)))
 		return FALSE
 	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))
@@ -362,7 +401,7 @@
 	var/turf/current_target
 	if(fake_baseturf_type)
 		if(length(fake_baseturf_type)) // We were given a list, just apply it and move on
-			baseturfs = fake_baseturf_type
+			baseturfs = baseturfs_string_list(fake_baseturf_type, src)
 			return
 		current_target = fake_baseturf_type
 	else
@@ -378,9 +417,9 @@
 	if(created_baseturf_lists[current_target])
 		var/list/premade_baseturfs = created_baseturf_lists[current_target]
 		if(length(premade_baseturfs))
-			baseturfs = premade_baseturfs.Copy()
+			baseturfs = baseturfs_string_list(premade_baseturfs.Copy(), src)
 		else
-			baseturfs = premade_baseturfs
+			baseturfs = baseturfs_string_list(premade_baseturfs, src)
 		return baseturfs
 
 	var/turf/next_target = initial(current_target.baseturfs)
@@ -401,7 +440,7 @@
 		current_target = next_target
 		next_target = initial(current_target.baseturfs)
 
-	baseturfs = new_baseturfs
+	baseturfs = baseturfs_string_list(new_baseturfs, src)
 	created_baseturf_lists[new_baseturfs[new_baseturfs.len]] = new_baseturfs.Copy()
 	return new_baseturfs
 
@@ -553,8 +592,7 @@
 	return
 
 /turf/handle_fall(mob/faller)
-	if(has_gravity(src))
-		playsound(src, "bodyfall", 100, TRUE)
+	playsound(src, "bodyfall", 100, TRUE)
 	faller.drop_all_held_items()
 
 /turf/proc/photograph(limit=20)
