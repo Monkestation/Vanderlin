@@ -2,9 +2,9 @@
     "map_name": "Zizo's Claw",
     "map_path": "map_files/zizosclaw",
     "map_file": "zizosclaw.dmm",
-	"immigrant_origin": "Vanderlin",
-	"monarch_title": "Count",
-	"monarch_title_f": "Countess",
+	"immigrant_origin": "The Silken Road",
+	"monarch_title": "NOT APPLICABLE - REPORT BUG",
+	"monarch_title_f": "Marquise",
 	"traits": [
 		{"Up": true},
 		{"Up": true, "Down": true},

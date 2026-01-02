@@ -13,6 +13,8 @@
 	var/map_file_name // = "vanderlin.dmm"
 	/// Jobs that this map won't use
 	var/list/blacklist
+	/// Unique map jobs
+	var/list/whitelist
 	/// Jobs that have slots changed /datum/job = num
 	var/list/slot_adjust
 	/// Jobs that have species adjustments /datum/job = list("humen")
@@ -39,6 +41,9 @@
 		change_job_position(job, 0)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.job_flags &= ~(JOB_NEW_PLAYER_JOINABLE)
+	for(var/job as anything in whitelist)
+		var/datum/job/J = SSjob.GetJobType(job)
+		J?.job_flags &= (JOB_NEW_PLAYER_JOINABLE)
 	for(var/job as anything in slot_adjust)
 		change_job_position(job, slot_adjust[job])
 	for(var/job as anything in species_adjust)
@@ -47,7 +52,7 @@
 	for(var/job as anything in sexes_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_sexes = sexes_adjust[job]
-	for(var/job as anything is patron_adjust)
+	for(var/job as anything in patron_adjust)
 		var/datum/job/J  = SSjob.GetJobType(job)
 		J?.allowed_patrons = patron_adjust[job]
 	for(var/job as anything in ages_adjust)
