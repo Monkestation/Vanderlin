@@ -107,7 +107,7 @@
 /datum/job/advclass/menatarms/watchman_axeman
 	title = "Axeman Men-At-Arms"
 	tutorial = "You once warded the town, beating the poor and killing the senseless. \
-	You were quite a good dancer, you've blended that skill with your blade- \
+	Now you charge straight ahead, those infront cannot stop the weight of your axe- \
 	exanguinated personally by one of the Monarch's best. \
 	You are poor, and your belly is yet full."
 	outfit = /datum/outfit/watchman/axeman
@@ -130,7 +130,8 @@
 		/datum/skill/misc/climbing = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1
+		/datum/skill/craft/crafting = 1,
+		/datum/skill/labor/lumberjacking = 1
 	)
 
 	traits = list(
