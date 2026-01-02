@@ -427,10 +427,10 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/iron/spiked
-	name = "Spiked Club (+Small Log)"
+	name = "Spiked Club (+Small Log, +Iron Bar)"
 	recipe_name = "a Spiked Iron Club"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/iron)
 	created_item = /obj/item/weapon/mace/spiked
 	craftdiff = 2
 
@@ -567,10 +567,10 @@
 	created_item = /obj/item/weapon/mace/steel/rungu
 
 /datum/anvil_recipe/weapons/steel/morningstar
-	name = "Steel Morningstar (+Small Log)"
+	name = "Steel Morningstar (+Small Log, +Steel Bar)"
 	recipe_name = "a Steel Morningstar"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/steel/morningstar
 
 /datum/anvil_recipe/weapons/steel/sledgehammer
@@ -597,7 +597,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/weapons/steel/battleaxe
-	name = "Battle Axe (+Bar x2)"
+	name = "Battle Axe (+Steel Bar)" ///Said it cost 3 steel but only cost 2.
 	recipe_name = "a Battle Axe"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel)
