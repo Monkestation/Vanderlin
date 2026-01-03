@@ -1,13 +1,13 @@
-/obj/effect/mob_spawn/human/demi
+/obj/effect/mob_spawn/demi
 	mob_species = /datum/species/demihuman
 
-/obj/effect/mob_spawn/human/demi/trader
+/obj/effect/mob_spawn/demi/trader
 	outfit = /datum/outfit/bard
 
-/obj/effect/mob_spawn/human/elf
+/obj/effect/mob_spawn/elf
 	mob_species = /datum/species/elf/snow
 
-/obj/effect/mob_spawn/human/elf/trader
+/obj/effect/mob_spawn/elf/trader
 	outfit = /datum/outfit/bard
 
 /datum/world_faction/coastal_merchants
@@ -15,8 +15,8 @@
 	desc = "Seafaring traders with exotic wares"
 	faction_color = "#4682B4"
 	trader_outfits = list(
-		/obj/effect/mob_spawn/human/demi/trader,
-		/obj/effect/mob_spawn/human/elf/trader
+		/obj/effect/mob_spawn/demi/trader,
+		/obj/effect/mob_spawn/elf/trader
 	)
 	trader_type_weights = list(
 		/datum/trader_data/sake_merchant = 4,

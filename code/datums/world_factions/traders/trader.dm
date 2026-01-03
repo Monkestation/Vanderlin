@@ -1,46 +1,7 @@
-/// Creates a human with the given parameters and returns an appearance of it
-/proc/get_dynamic_human_appearance(outfit_path, species_path = /datum/species/human, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE, animated = TRUE)
-	if(!species_path)
-		return FALSE
-	if(!ispath(species_path))
-		stack_trace("Attempted to call get_dynamic_human_appearance() with an instantiated species_path. Pass the species datum typepath instead.")
-		return FALSE
-	var/mob/living/carbon/human/dummy/dummy = new()
-	dummy.set_species(species_path)
-	dummy.stat = DEAD //this is to avoid side effects of mob spawners
-	dummy.underwear = "Nude"
-	dummy.undershirt = "Nude"
-	dummy.socks = "Nude"
-	if(outfit_path)
-		var/datum/outfit/outfit = new outfit_path()
-		dummy.equipOutfit(outfit, TRUE)
-	else if(mob_spawn_path)
-		var/obj/effect/mob_spawn/spawner = new mob_spawn_path(null, TRUE)
-		spawner.special(dummy, dummy)
-		spawner.equip(dummy)
-	for(var/obj/item/carried_item in dummy)
-		if(bloody_slots & carried_item.slot_flags)
-			carried_item.add_mob_blood(dummy)
-	var/mutable_appearance/output = dummy.appearance
-	qdel(dummy)
-	return output
-
-/proc/apply_dynamic_human_appearance(atom/target, outfit_path, species_path = /datum/species/human, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE)
-	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(set_dynamic_human_appearance), args)
-
-///This proc gets an argument of a target and runs
-/proc/set_dynamic_human_appearance(list/arguments)
-	var/atom/target = arguments[1] //1st argument is the target
-	var/dynamic_appearance = get_dynamic_human_appearance(arglist(arguments.Copy(2))) //the rest of the arguments starting from 2 matter to the proc
-	//target.icon = 'icons/mob/human/human.dmi'
-	target.icon_state = ""
-	target.appearance_flags |= KEEP_TOGETHER
-	target.copy_overlays(dynamic_appearance, cut_old = TRUE)
-
-/obj/effect/mob_spawn/human/rakshari
+/obj/effect/mob_spawn/rakshari
 	mob_species = /datum/species/rakshari
 
-/obj/effect/mob_spawn/human/rakshari/trader
+/obj/effect/mob_spawn/rakshari/trader
 	outfit = /datum/outfit/tailor
 
 /mob/living/simple_animal/hostile/retaliate/trader
@@ -69,7 +30,7 @@
 	///The currency name
 	var/currency_name = "zennies"
 	///The spawner we use to create our look
-	var/obj/effect/mob_spawn/human/spawner_path = /obj/effect/mob_spawn/human/rakshari/trader
+	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/rakshari/trader
 	///Our species to create our look
 	var/species_path = /datum/species/human
 	///Casing used to shoot during retaliation

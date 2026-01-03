@@ -18,7 +18,7 @@
 	///The currency name
 	var/currency_name = "zennies"
 	///The spawner we use to create our look
-	var/obj/effect/mob_spawn/human/spawner_path = /obj/effect/mob_spawn/human/dwarf/trader
+	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/dwarf/trader
 	///Our species to create our look
 	var/species_path = /datum/species/human
 	///Casing used to shoot during retaliation

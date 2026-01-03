@@ -12,12 +12,12 @@
 	shoes = /obj/item/clothing/shoes/nobleboot/duelboots
 	pants = /obj/item/clothing/pants/trou/leathertights
 
-/obj/effect/mob_spawn/human/elf/artifact
+/obj/effect/mob_spawn/elf/artifact
 	outfit = /datum/outfit/artifact
 
 /datum/trader_data/artifact_weapons
 	name = "Artifact"
-	outfit_override = list(/obj/effect/mob_spawn/human/elf/artifact)
+	outfit_override = list(/obj/effect/mob_spawn/elf/artifact)
 
 	initial_products = list()
 	max_custom_items = 1

@@ -1,7 +1,7 @@
-/obj/effect/mob_spawn/human/rakshari
+/obj/effect/mob_spawn/rakshari
 	mob_species = /datum/species/rakshari
 
-/obj/effect/mob_spawn/human/rakshari/banker
+/obj/effect/mob_spawn/rakshari/banker
 	outfit = /datum/outfit/tailor
 
 /mob/living/simple_animal/hostile/retaliate/banker
@@ -24,7 +24,7 @@
 	///The currency name
 	var/currency_name = "zennies"
 	///The spawner we use to create our look
-	var/obj/effect/mob_spawn/human/spawner_path = /obj/effect/mob_spawn/human/rakshari/banker
+	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/rakshari/banker
 	///Our species to create our look
 	var/species_path = /datum/species/human
 	///Casing used to shoot during retaliation

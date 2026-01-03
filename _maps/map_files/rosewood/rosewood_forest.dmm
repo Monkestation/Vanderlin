@@ -1356,7 +1356,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/woods)
 "Ck" = (
-/obj/effect/mob_spawn/human/corpse,
+/obj/effect/mob_spawn/corpse/human,
 /turf/open/floor/snow,
 /area/outdoors/woods)
 "Cp" = (

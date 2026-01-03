@@ -1,7 +1,7 @@
-/obj/effect/mob_spawn/human/dwarf
+/obj/effect/mob_spawn/dwarf
 	mob_species = /datum/species/dwarf/mountain
 
-/obj/effect/mob_spawn/human/dwarf/trader
+/obj/effect/mob_spawn/dwarf/trader
 	outfit = /datum/outfit/miner
 
 /datum/world_faction/mountain_clans
@@ -9,7 +9,7 @@
 	desc = "Hardy dwarves from the mountain passes"
 	faction_color = "#708090"
 	trader_outfits = list(
-		/obj/effect/mob_spawn/human/dwarf/trader
+		/obj/effect/mob_spawn/dwarf/trader
 	)
 	trader_type_weights = list(
 		/datum/trader_data/weapon_merchant = 15,

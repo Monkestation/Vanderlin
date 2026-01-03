@@ -386,3 +386,6 @@
 #define FORBID_TELEKINESIS_REACH (1<<3)
 /// If resting on the floor is allowed to perform action
 #define ALLOW_RESTING (1<<4)
+
+/// In dynamic human icon gen we don't replace the held item.
+#define NO_REPLACE 0

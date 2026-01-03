@@ -113,13 +113,14 @@
 	unique_identity = generate_unique_identity()
 	unique_enzymes = generate_unique_enzymes()
 
-/datum/dna/proc/initialize_dna(newblood_type = random_human_blood_type(), skip_index = FALSE)
+/datum/dna/proc/initialize_dna(newblood_type = random_human_blood_type(), create_mutation_blocks = TRUE, randomize_features = TRUE)
 	if(newblood_type)
 		human_blood_type = newblood_type
-	unique_enzymes = generate_unique_enzymes()
-	unique_identity = generate_unique_identity()
-	features = random_features()
-
+	if(create_mutation_blocks)
+		unique_enzymes = generate_unique_enzymes()
+		unique_identity = generate_unique_identity()
+	if(randomize_features)
+		features = random_features()
 
 /datum/dna/stored //subtype used by brain mob's stored_dna
 
@@ -136,24 +137,30 @@
 			stored_dna.species = mrace //not calling any species update procs since we're a brain, not a monkey/human
 
 
-/mob/living/carbon/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null)
-	if(mrace && has_dna())
-		var/datum/species/new_race
-		if(ispath(mrace))
-			new_race = new mrace
-		else if(istype(mrace))
-			new_race = mrace
-		else
-			return
-		deathsound = new_race.deathsound
-		dna.species.on_species_loss(src, new_race, pref_load)
-		var/datum/species/old_species = dna.species
-		dna.species = new_race
-		//BODYPARTS AND FEATURES
-		if(pref_load)
-			dna.features = pref_load.features.Copy()
-			dna.body_markings = deepCopyList(pref_load.body_markings)
-		dna.species.on_species_gain(src, old_species, pref_load)
+/mob/living/carbon/set_species(datum/species/species, icon_update = TRUE, datum/preferences/pref_load = null)
+	if(!species || !has_dna())
+		return
+
+	var/datum/species/new_race
+	if(ispath(species))
+		new_race = new species
+	else if(istype(species))
+		new_race = species
+	else
+		return
+
+	deathsound = new_race.deathsound
+	dna.species.on_species_loss(src, new_race, pref_load)
+
+	var/datum/species/old_species = dna.species
+	dna.species = new_race
+
+	//BODYPARTS AND FEATURES
+	if(pref_load)
+		dna.features = pref_load.features.Copy()
+		dna.body_markings = deepCopyList(pref_load.body_markings)
+
+	dna.species.on_species_gain(src, old_species, pref_load)
 
 /mob/living/carbon/human/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null)
 	if(pref_load)
