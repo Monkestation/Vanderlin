@@ -18,7 +18,7 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/music = 1,
@@ -103,7 +103,7 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/music = 1,
@@ -269,7 +269,7 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/lockpicking = 1,
 		/datum/skill/combat/axesmaces = 2,

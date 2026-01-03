@@ -27,7 +27,7 @@
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 4,
 		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 2,

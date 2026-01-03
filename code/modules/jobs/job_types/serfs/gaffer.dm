@@ -50,7 +50,7 @@
 		/datum/skill/combat/crossbows = 4,
 		/datum/skill/combat/bows = 5,
 		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/misc/reading = 5,

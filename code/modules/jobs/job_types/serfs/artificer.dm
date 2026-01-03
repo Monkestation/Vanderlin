@@ -38,7 +38,7 @@
 		/datum/skill/craft/engineering = 4,
 		/datum/skill/misc/lockpicking = 3,
 		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/labor/mining = 2,
 		/datum/skill/craft/smelting = 4,

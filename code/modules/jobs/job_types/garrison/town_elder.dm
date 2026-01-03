@@ -413,7 +413,7 @@
 		/datum/skill/combat/swords = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/sewing = 1,
 		/datum/skill/misc/reading = 4,

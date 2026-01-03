@@ -18,7 +18,7 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 3,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/music = 1,
@@ -91,7 +91,7 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 3,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/music = 1,

@@ -16,7 +16,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/knives = 4,
 		/datum/skill/combat/unarmed = 5,
 		/datum/skill/craft/crafting = 2,

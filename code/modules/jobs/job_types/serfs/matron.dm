@@ -47,7 +47,7 @@
 		/datum/skill/misc/reading = 3,
 		/datum/skill/combat/knives = 5,
 		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 	)
 
 	jobstats = list(

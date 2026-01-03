@@ -71,7 +71,7 @@
 		/datum/skill/combat/shields = 3,
 		/datum/skill/combat/swords = 2,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
