@@ -41198,7 +41198,7 @@
 /area/outdoors/beach/boat)
 "tOP" = (
 /obj/structure/window/openclose,
-/turf/closed/basic,
+/turf/open/floor/greenstone,
 /area/indoors/town/magician)
 "tOT" = (
 /obj/structure/flora/grass/water,
