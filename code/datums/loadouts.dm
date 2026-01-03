@@ -261,6 +261,8 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 	name = "Jester's Shoes"
 	item_path = /obj/item/clothing/shoes/jester
 
+//FACE
+
 /datum/loadout_item/ragmask
 	name = "Halfmask"
 	item_path = /obj/item/clothing/face/shepherd/rag
