@@ -33,7 +33,6 @@
 		EXP_TYPE_ADVENTURER = 300,
 		EXP_TYPE_THIEF = 300
 	)
-	mind_traits = list(TRAIT_KNOW_THIEF_DOORS)
 
 	skills = list(
 		/datum/skill/misc/sewing = 3,
@@ -58,6 +57,9 @@
 		STATKEY_SPD =  2
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_THIEF_DOORS
+	)
 	traits = list(
 		TRAIT_THIEVESGUILD,
 		TRAIT_OLDPARTY,

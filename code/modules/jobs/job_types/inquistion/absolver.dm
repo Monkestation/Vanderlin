@@ -17,6 +17,9 @@
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	traits = list(
 		TRAIT_NOPAINSTUN,
 		TRAIT_PACIFISM,
@@ -57,7 +60,6 @@
 	)
 
 	languages = list(/datum/language/oldpsydonic)
-	mind_traits = list(TRAIT_KNOW_INQUISITION_DOORS)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
 	exp_types_granted = list(EXP_TYPE_INQUISITION)
