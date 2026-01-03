@@ -25,7 +25,7 @@
 
 	jobstats = list(
 		STATKEY_STR = 1,
-		STATKEY_CON = 1,
+		STATKEY_CON = 2,
 		STATKEY_END = 1,
 		STATKEY_INT = -1
 	)

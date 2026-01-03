@@ -21,8 +21,9 @@
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_INT = -2,
-		STATKEY_END = 1,
-		STATKEY_CON = 1
+		STATKEY_END = 2,
+		STATKEY_CON = 1,
+		STATKEY_LCK = 1
 	)
 
 	skills = list(
