@@ -7,7 +7,7 @@
 	total_positions = 5
 
 	jobstats = list(
-		STATKEY_END = 1,
+		STATKEY_END = 2,
 		STATKEY_STR = 1,
 		STATKEY_SPD = 2
 	)
