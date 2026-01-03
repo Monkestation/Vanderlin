@@ -19,8 +19,9 @@
 	can_have_apprentices = TRUE
 
 	jobstats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = -1,
+		STATKEY_INT = 3,
+		STATKEY_SPD = 1,
+		STATKEY_PER = -1
 	)
 
 	skills = list(
