@@ -41,6 +41,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/cloak/psydontabard/alt, ///same here
 		/obj/item/clothing/face/spectacles/inq, //these are powerful
 		/obj/item/clothing/shirt/undershirt/easttats, ///no
+		/obj/item/clothing/shirt/undershirt/easttats/tribal, ///no
 		/obj/item/clothing/armor/leather/heavy, ///abstract type
 		/obj/item/clothing/head/helmet/heavy/psydonbarbute, //buyable
 		/obj/item/clothing/head/helmet/heavy/psysallet, //buyable
