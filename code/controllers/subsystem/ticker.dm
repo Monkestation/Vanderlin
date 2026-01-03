@@ -634,6 +634,10 @@ SUBSYSTEM_DEF(ticker)
 	if(usr && !check_rights(R_SERVER, TRUE))
 		return
 
+	if(reboot_timer)
+		stack_trace("Reboot called twice")
+		return
+
 	if(!delay)
 		delay = CONFIG_GET(number/round_end_countdown) * 10
 
