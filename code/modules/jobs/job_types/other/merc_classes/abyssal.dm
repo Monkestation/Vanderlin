@@ -64,7 +64,7 @@
 	head = /obj/item/clothing/head/helmet/winged
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	beltl = /obj/item/weapon/sword/sabre/cutlass
-	wrists = /obj/item/clothing/wrists/bracers/iron
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(
 		/obj/item/key/mercenary,
