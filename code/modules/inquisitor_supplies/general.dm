@@ -85,7 +85,7 @@
 	new /obj/item/collar_detonator(src)
 
 /datum/inqports/supplies/redpotions
-	name = "3 Bottles of Red"
+	name = "3 Bottles of lifeblood"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/redpots
 	marquescost = 6
 
@@ -94,7 +94,7 @@
 		new /obj/item/reagent_containers/glass/bottle/healthpot(src)
 
 /datum/inqports/supplies/lifebloodvials
-	name = "3 Vials of Strong Red"
+	name = "3 Vials of Strong lifeblood"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/sredvials
 	maximum = 4
 	marquescost = 10
@@ -104,7 +104,7 @@
 		new /obj/item/reagent_containers/glass/bottle/alchemical/healthpotnew(src)
 
 /datum/inqports/supplies/bluepotions
-	name = "3 Bottles of Blue"
+	name = "3 Bottles of mana"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/bluepots
 	marquescost = 8
 
@@ -113,7 +113,7 @@
 		new /obj/item/reagent_containers/glass/bottle/manapot(src)
 
 /datum/inqports/supplies/strongbluevials
-	name = "3 Vials of Strong Blue"
+	name = "3 Vials of Strong mana"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/sbluevials
 	maximum = 4
 	marquescost = 16
@@ -380,7 +380,7 @@
 /datum/inqports/wardrobe/fencerset
 	name = "The Grenzelhoftian Fencer's Finest Set Crate"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/fencerset
-	marquescost = 14
+	marquescost = 8
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/fencerset/populate_contents()
 	new /obj/item/clothing/armor/gambeson/heavy/otavan/inq(src)
@@ -392,7 +392,7 @@
 /datum/inqports/wardrobe/confessionalcombo
 	name = "The Confessional Combination"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/confessionalcombo
-	marquescost = 14
+	marquescost = 6
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/confessionalcombo/populate_contents()
 	new /obj/item/clothing/head/roguehood/psydon/confessor(src)
@@ -401,7 +401,7 @@
 /datum/inqports/wardrobe/inspectorcoat
 	name = "The Inquisition's Finest Coats and Hats"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/inspectorcoats
-	marquescost = 18
+	marquescost = 12
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/inspectorcoats/populate_contents()
 	for(var/i in 1 to 3)
@@ -411,7 +411,7 @@
 /datum/inqports/wardrobe/inspector
 	name = "The Inquisitorial Inspector's Best Crate"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/inspector
-	marquescost = 18
+	marquescost = 10
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/inspector/populate_contents()
 	new /obj/item/clothing/head/leather/inqhat(src)
@@ -422,7 +422,7 @@
 /datum/inqports/wardrobe/fencersthree
 	name = "The Fencer's Gambeson Three-Pack"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/fencersthree
-	marquescost = 16
+	marquescost = 5
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/fencersthree/populate_contents()
 	for(var/i in 1 to 3)
@@ -431,7 +431,7 @@
 /datum/inqports/wardrobe/psydonianstandard
 	name = "The Inquisitorial Standard"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/psydonian
-	marquescost = 12
+	marquescost = 6
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/psydonian/populate_contents()
 	new /obj/item/clothing/pants/tights/colored/black(src)
@@ -442,7 +442,7 @@
 /datum/inqports/wardrobe/nobledressup
 	name = "The Cost of Nobility Crate"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/nobledressup
-	marquescost = 24
+	marquescost = 16
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/nobledressup/populate_contents()
 	new /obj/item/clothing/cloak/lordcloak/ladycloak(src)
