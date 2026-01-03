@@ -22,7 +22,7 @@
 		STATKEY_STR = 1,
 		STATKEY_END = 2,
 		STATKEY_CON = 1,
-		STATKEY_SPD = -1
+		STATKEY_SPD = -1,
 	)
 
 	skills = list(
@@ -110,6 +110,7 @@
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_END = 2,
+		STATKEY_CON = 1,
 		STATKEY_SPD = -1,
 	)
 
