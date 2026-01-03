@@ -441,3 +441,88 @@
 	craftdiff = SKILL_LEVEL_MASTER
 	req_bar = /obj/item/ingot/silverblessed/bullion
 	created_item = /obj/item/clothing/ring/signet/silver
+
+// --------- BRONZE -----------
+
+/datum/anvil_recipe/valuables/bronze
+	req_bar = /obj/item/ingot/bronze
+	abstract_type = /datum/anvil_recipe/valuables/bronze
+	craftdiff = 1
+//////////////////////////////////////////////
+
+/datum/anvil_recipe/valuables/bronze/statue
+	name = "Bronze Statue"
+	recipe_name = "a Bronze Statue"
+	created_item = /obj/item/statue/bronze
+
+/datum/anvil_recipe/valuables/bronze/bust
+	name = "Bronze Bust"
+	recipe_name = "a Bronze Bust"
+	created_item = /obj/item/statue/bronze/bust
+
+/datum/anvil_recipe/valuables/bronze/volf
+	name = "Bronze Volf Bust (+ Bronze Bar)"
+	recipe_name = "a Bronze Volf Bust"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/statue/bronze/volf
+
+/datum/anvil_recipe/valuables/bronze/urn
+	name = "Bronze Urn (+ Bronze Bar)"
+	recipe_name = "a Bronze Urn"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/statue/bronze/urn
+
+/datum/anvil_recipe/valuables/bronze/vasefancy
+	name = "Fancy Bronze Vase (+ Bronze Bar)"
+	recipe_name = "a Fancy Bronze Vase"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/statue/bronze/vasefancy
+
+/datum/anvil_recipe/valuables/bronze/vase
+	name = "Bronze Vase"
+	recipe_name = "a Bronze Vase"
+	created_item = /obj/item/statue/bronze/vase
+
+/datum/anvil_recipe/valuables/bronze/obelisk
+	name = "Bronze Obelisk"
+	recipe_name = "a Bronze Obelisk"
+	created_item = /obj/item/statue/bronze/obelisk
+
+/datum/anvil_recipe/valuables/bronze/totem
+	name = "Bronze Totem"
+	recipe_name = "a Bronze Totem"
+	created_item = /obj/item/statue/bronze/totem
+
+/datum/anvil_recipe/valuables/bronze/teapot
+	name = "Bronze Teapot"
+	recipe_name = "a Bronze Teapot"
+	created_item = /obj/item/reagent_containers/glass/carafe/teapot/bronze
+
+/datum/anvil_recipe/valuables/bronze/tablet
+	name = "Bronze Tablet"
+	recipe_name = "a Bronze Tablet"
+	created_item = /obj/item/statue/bronze/tablet
+
+/datum/anvil_recipe/valuables/bronze/cameo
+	name = "2x Bronze Cameos"
+	recipe_name = "two Bronze Cameos"
+	created_item = /obj/item/statue/bronze/cameo
+	createditem_extra = 1
+
+/datum/anvil_recipe/valuables/bronze/comb
+	name = "2x Bronze Combs"
+	recipe_name = "two Bronze Combs"
+	created_item = /obj/item/statue/bronze/comb
+	createditem_extra = 1
+
+/datum/anvil_recipe/valuables/bronze/figurine
+	name = "2x Bronze Figurines"
+	recipe_name = "two Bronze Figurines"
+	created_item = /obj/item/statue/bronze/figurine
+	createditem_extra = 1
+
+/datum/anvil_recipe/valuables/bronze/fish
+	name = "2x Bronze Fish Figurines"
+	recipe_name = "two bronze Fish Figurines"
+	created_item = /obj/item/statue/bronze/fish
+	createditem_extra = 1

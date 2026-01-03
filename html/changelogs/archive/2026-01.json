@@ -1,0 +1,31 @@
+{
+    "2026-01-02": {
+        "aberrantQuesrist": [
+            {
+                "bugfix": "Updates the date to reflect the new year."
+            },
+            {
+                "rscadd": "New cow sprites."
+            },
+            {
+                "refactor": "Pulls the floors.dmi file apart into an easier navigable and better organized batch. QoL for spriters."
+            },
+            {
+                "rscadd": "New turf types, sands and grass."
+            },
+            {
+                "rscadd": "New sprites for sand, saltwater, and modified mosaic tiles."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "image": "new oak shield herald"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "spellcheck": "little accent thing so people spell inquisition titles right"
+            }
+        ]
+    }
+}
