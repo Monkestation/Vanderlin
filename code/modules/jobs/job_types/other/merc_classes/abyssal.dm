@@ -15,7 +15,7 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/swords = 2,
 	)
 
@@ -32,7 +32,6 @@
 		var/obj/item/weapon/shield/tower/buckleriron/shield = new(get_turf(src))
 		spawned.equip_to_appropriate_slot(aby_spear)
 		spawned.equip_to_appropriate_slot(shield)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
