@@ -350,3 +350,10 @@
 		src.last_repair = world.time
 		update_integrity(min(atom_integrity + src.repair_amount, src.max_integrity))
 	..()
+
+/obj/item/clothing/shirt/undershirt/easttats/tribal
+	name = "Tribal Tattoos"
+	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."
+	armor = list("blunt" = 0, "slash" = 0, "stab" = 0, "piercing" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = null
+	resistance_flags = INDESTRUCTIBLE

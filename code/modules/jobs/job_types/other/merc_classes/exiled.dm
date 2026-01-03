@@ -51,13 +51,12 @@
 	name = "Exiled Warrior (Mercenary)"
 	beltr = /obj/item/weapon/axe/iron
 	neck = /obj/item/clothing/neck/coif
-	pants = /obj/item/clothing/pants/loincloth
+	pants = /obj/item/clothing/pants/trou/leather/advanced
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary
 	beltl = /obj/item/weapon/axe/iron
 	head = /obj/item/clothing/head/helmet/leather
-	armor = /obj/item/clothing/armor/leather/hide
-	shirt = /obj/item/clothing/armor/gambeson
+	armor = /obj/item/clothing/shirt/undershirt/easttats/tribal
 	shoes = /obj/item/clothing/shoes/boots/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
