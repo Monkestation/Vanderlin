@@ -687,9 +687,10 @@ GLOBAL_LIST_EMPTY(Beucratic_triumps)
 	if(adressedto)
 		var/mob/adressedtoref  = adressedto.resolve()
 		if(adressedtoref == user)
-			if(coolness > 0)
-				user.add_stress(/datum/stress_event/autograph_fangirl_1)
-				coolness--
+			if(!HAS_TRAIT(adressedtoref, TRAIT_MERCGUILD))
+				if(coolness > 0)
+					user.add_stress(/datum/stress_event/autograph_fangirl_1)
+					coolness--
 		to_chat(user, span_info("This autograph is addressed to [adressedtoref.real_name]"))
 	return
 	/*
@@ -736,11 +737,24 @@ GLOBAL_LIST_EMPTY(Beucratic_triumps)
 			if(signed)
 				to_chat(user, span_warning("This is already signed"))
 				return
+			var/list/things = list()
+			for(var/mob/living/carbon/human/special in oview(7, user) - user) //can't give autographs to random mobs, this will surely be changed
+				if(!special.get_face_name(null))
+					continue
+				things += special
+			if(!length(things))
+				user.balloon_alert(user, "There is no one to sign this for...")
+				return
+			var/atom/fan = browser_input_list(user, "Who here should I address this to?", "SIGN THE PLATITUDE", sortList(things))
+			if(QDELETED(src) || QDELETED(user) || QDELETED(fan))
+				return
 			playsound(src, 'sound/items/write.ogg', 50, FALSE, ignore_walls = FALSE)
-			visible_message("[user] writes on the [src]")
+			visible_message("[user] signs the [src]")
 			signed = WEAKREF(user)
+			adressedto = WEAKREF(fan)
 			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 			return
+		/*
 		if(!adressedto)
 			playsound(src, 'sound/items/write.ogg', 50, FALSE, ignore_walls = FALSE)
 			visible_message("[user] writes on the [src]")
@@ -749,6 +763,7 @@ GLOBAL_LIST_EMPTY(Beucratic_triumps)
 			return
 		to_chat(user, span_warning("This is already signed"))
 		return
+		*/
 		//var/renown = GLOB.mob_renown_list[user.mobid]
 		////N/A canned until port. the mercenary check should be fine enough, its 1 point of happiness it can't be that bad
 		//if(renown <= 3)
