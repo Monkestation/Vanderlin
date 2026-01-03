@@ -5399,12 +5399,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
-/obj/item/paper/merchantprotectionpact,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -5420,6 +5414,7 @@
 	pixel_x = 4;
 	pixel_y = 11
 	},
+/obj/item/paper/merchantprotectionpact,
 /turf/open/floor/wood,
 /area/indoors/town/shop)
 "eEK" = (
@@ -9073,18 +9068,13 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/structure/fake_machine/hateface,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /obj/effect/decal/borderfall{
 	dir = 1
 	},
+/obj/structure/fake_machine/hateface,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
 "hSX" = (
