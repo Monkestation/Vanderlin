@@ -68,6 +68,7 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/stabard/colored/dungeon
+	armor = /obj/item/clothing/armor/cuirass/iron/rust
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	pants = /obj/item/clothing/pants/trou
