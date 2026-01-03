@@ -35,6 +35,11 @@
 			for(var/datum/wound/wound as anything in get_wounds())
 				wound.heal_wound(1)
 
+		if(HAS_TRAIT(src, TRAIT_WOUNDREGEN))
+			//passively heal wounds
+			for(var/datum/wound/wound as anything in get_wounds())
+				wound.heal_wound(10)
+
 		/// ENDURE AS HE DOES.
 		if(!stat && HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) && !HAS_TRAIT(src, TRAIT_PARALYSIS))
 			handle_wounds()
@@ -203,7 +208,7 @@
 		else if(!stat && !(HAS_TRAIT(src, TRAIT_BLIND)))
 			adjust_blindness(-1)
 	else if(eye_blurry)			//blurry eyes heal slowly
-		adjust_blurriness(-1)
+		adjust_eye_blur(-2 SECONDS)
 
 /mob/living/proc/update_damage_hud()
 	return

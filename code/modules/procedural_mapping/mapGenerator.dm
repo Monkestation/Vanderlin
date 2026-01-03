@@ -87,11 +87,12 @@
 
 //Requests the mapGeneratorModule(s) to (re)generate
 /datum/mapGenerator/proc/generate()
+	SHOULD_NOT_SLEEP(TRUE)
 	syncModules()
-	if(!modules || !modules.len)
+	if(!LAZYLEN(modules))
 		return
 	for(var/datum/mapGeneratorModule/mod in modules)
-		INVOKE_ASYNC(mod, TYPE_PROC_REF(/datum/mapGeneratorModule, generate))
+		mod.generate()
 
 
 //Requests the mapGeneratorModule(s) to (re)generate this one turf

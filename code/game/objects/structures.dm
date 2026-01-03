@@ -59,13 +59,12 @@
 	return ..()
 
 /obj/structure/proc/trigger_wire_network(mob/user)
-	// Find connected redstone components and trigger them
-	var/power_level = last_redstone_state ? 15 : 0
+	last_redstone_state = !last_redstone_state
+	var/power = last_redstone_state ? 15 : 0
+
 	for(var/direction in GLOB.cardinals)
 		var/turf/target_turf = get_step(src, direction)
-		for(var/obj/structure/redstone/component in target_turf)
-			component.set_power(power_level, user, null) // Lever acts as power source
-	last_redstone_state = !last_redstone_state
+		trigger_redstone_at(target_turf, power, user)
 
 /obj/structure/pre_lock_interact(mob/living/user)
 	if(obj_broken)

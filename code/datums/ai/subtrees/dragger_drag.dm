@@ -55,7 +55,7 @@
 
 	if(iscarbon(victim))
 		var/mob/living/carbon/carbon_victim = victim
-		carbon_victim.blur_eyes(10)
+		carbon_victim.set_eye_blur_if_lower(20 SECONDS)
 		carbon_victim.confused += 5
 		to_chat(carbon_victim, span_userdanger("The [dragger_pawn.name] grabs you and drags you into darkness!"))
 

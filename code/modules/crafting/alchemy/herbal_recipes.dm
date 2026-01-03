@@ -237,15 +237,16 @@
 	metabolization_rate = 0.5
 	overdose_threshold = 40
 	taste_description = "deeply relaxing herbs"
-	var/sleep_power = 30
+	var/sleep_power = 60 SECONDS
 
 /datum/reagent/medicine/herbal/valeriana_draught/on_mob_metabolize(mob/living/M)
 	. = ..()
 	M.add_stress(/datum/stress_event/herbal_calm)
 
 /datum/reagent/medicine/herbal/valeriana_draught/on_mob_life(mob/living/carbon/M)
-	if(M.drowsyness < sleep_power)
-		M.drowsyness = min(M.drowsyness + 5, sleep_power)
+	var/datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
+	if(drowsiness?.duration < sleep_power)
+		M.adjust_drowsiness_up_to(10 SECONDS, 60 SECONDS)
 	M.adjust_stamina(2)
 	. = ..()
 
@@ -369,8 +370,8 @@
 	M.add_stress(/datum/stress_event/herbal_focus)
 
 /datum/reagent/buff/herbal/scholar_focus/on_mob_life(mob/living/carbon/M)
-	if(M.drowsyness > 0)
-		M.drowsyness = max(0, M.drowsyness - 3)
+	if(M.has_status_effect(/datum/status_effect/drowsiness))
+		M.adjust_drowsiness(-6 SECONDS)
 	//TODO: Boost learning and skill gain slightly
 	if(prob(5))
 		to_chat(M, span_notice("Your mind feels sharp and focused."))
@@ -423,7 +424,7 @@
 /datum/reagent/poison/herbal/atropa_concentrate/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(3)
 	if(prob(20))
-		M.blur_eyes(5)
+		M.set_eye_blur_if_lower(10 SECONDS)
 		M.confused = max(M.confused, 5)
 	. = ..()
 

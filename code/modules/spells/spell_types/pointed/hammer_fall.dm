@@ -22,7 +22,6 @@
 		/obj/item/weapon/hammer,
 		/obj/item/weapon/mace/goden/steel/warhammer,
 		/obj/item/weapon/mace/warhammer,
-		/obj/item/weapon/mace/goden/steel/malum,
 	))
 
 /datum/action/cooldown/spell/hammer_fall/can_cast_spell(feedback)

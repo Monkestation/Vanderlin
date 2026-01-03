@@ -310,6 +310,14 @@
 	melt_amount = 75
 	max_integrity = INTEGRITY_STANDARD
 
+/obj/item/weapon/polearm/spear/billhook/ji/bronze
+	name = "bronze dagger-ax"
+	icon_state = "ji_bronze"
+	melting_material = /datum/material/bronze
+	melt_amount = 75
+	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 95
+
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
 	force = DAMAGE_SPEAR
@@ -522,6 +530,13 @@
 	wdefense = AVERAGE_PARRY
 	axe_cut = 10
 	sellprice = 30
+
+/obj/item/weapon/polearm/halberd/bardiche/ancient
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	name = "bardiche"
+	desc = "A grand axe of northern design, renowned for easily chopping off limbs clean with brutal strength."
+	icon_state = "ancient_bardiche"
 
 /obj/item/weapon/polearm/halberd/bardiche/dendor
 	name = "summer scythe"

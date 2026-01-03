@@ -63,6 +63,13 @@
 		return
 #endif
 
+	// this is evil. don't do this. it is extremely slow. i just really hate harddels
+#ifndef REFERENCE_DOING_IT_LIVE
+	for(var/list/some_list) // ALL LISTS EVER
+		// only show the first 4 items
+		DoSearchVar(some_list, "Lists -> [length(some_list) < 5 ? json_encode(some_list) : json_encode(some_list.Copy(1, 5))]", starting_time)
+#endif
+
 	log_reftracker("Completed search for references to a [type].")
 
 /datum/proc/DoSearchVar(potential_container, container_name, search_time, recursion_count, is_special_list)

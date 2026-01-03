@@ -59,6 +59,7 @@
 
 
 /datum/action/cooldown/spell/conjure/raise_lesser_undead/necromancer
+	name = "Lesser Necromancy"
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE
 	associated_skill = /datum/skill/magic/arcane

@@ -219,6 +219,10 @@
 	var/sliptype = 1
 	var/obj/item/inqarticles/indexer/paired
 
+/obj/item/paper/inqslip/Destroy()
+	paired = null
+	return ..()
+
 /obj/item/paper/inqslip/read(mob/user)
 	if(!user.client || !user.hud_used)
 		return
@@ -465,58 +469,79 @@
 
 /obj/item/paper/scroll/frumentarii/roundstart/Initialize()
 	. = ..()
-	real_names |= GLOB.roundstart_court_agents
+	if(SSticker.current_state < GAME_STATE_PLAYING)
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(get_agents)))
+	else
+		get_agents()
+
+/obj/item/paper/scroll/frumentarii/roundstart/proc/get_agents()
+	for(var/CA in GLOB.roundstart_court_agents)
+		fingers[CA] = TRUE
+	rebuild_info()
 
 /obj/item/paper/scroll/frumentarii
 	name = "frumentarii scroll"
 	desc = "A list of the hand's fingers. Strike a candidate with this to allow them servitude. Use a writing utensil to cross out a finger."
 
-	var/list/real_names = list()
-	var/list/removed_names = list()
-	var/names = 12
+	//assoc list of TRUE and FALSE. TRUE indicates the agent is an active finger while FALSE is a severed finger
+	var/list/fingers = list()
+	var/names = 5
+	writable = FALSE
+	resistance_flags = FIRE_PROOF // let's maybe not burn this
 
 /obj/item/paper/scroll/frumentarii/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
 	. = ..()
-	if(length(real_names) + length(removed_names) >= names)
-		to_chat(user, span_notice("The scroll is full"))
+	if(!user.mind)
 		return
-
+	if(!HAS_TRAIT(user, TRAIT_NOBLE))
+		return
+	if(length(fingers) >= names)
+		to_chat(user, span_notice("[src] is full"))
+		return
 	if(!isliving(target))
 		return
 	var/mob/living/attacked_target = target
-
-	if(attacked_target.real_name in real_names)
-		return
-
 	if(!attacked_target.client)
 		return
+	if(attacked_target.real_name in fingers)
+		return
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		if(H.family_datum == SSfamilytree.ruling_family)
+			to_chat(user, span_warning("I can't turn a member of the royal family into a finger."))
+			return
 
 	var/choice = input(attacked_target,"Do you wish to become one of the Hand's fingers?","Binding Contract",null) as null|anything in list("Yes", "No")
-
 	if(choice != "Yes")
 		return
 
-	real_names |= attacked_target.real_name
-	removed_names -= attacked_target.real_name
-
-	user.mind.cached_frumentarii |= attacked_target.real_name
+	fingers[attacked_target.real_name] = TRUE
+	user.mind.cached_frumentarii = fingers
 	rebuild_info()
-
 
 /obj/item/paper/scroll/frumentarii/attackby(obj/item/P, mob/living/carbon/human/user, params)
 	. = ..()
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
-		var/remove = input(user,"Who are we removing from the fingers","Binding Contract",null) as null|anything in real_names
-		if(remove)
-			real_names -= remove
-			removed_names |= remove
-
+		if(!open)
+			return
+		var/list/choices = list()
+		for(var/F in fingers)
+			if(fingers[F] == TRUE)
+				choices[F] = F
+			else
+				choices["<s>[F]</s>"] = F
+		var/choice = browser_input_list(user, "Reattach/Sever a Finger", "THE LIST", choices)
+		if(!choice || QDELETED(src) || QDELETED(user))
+			return
+		var/finger = choices[choice]
+		fingers[finger] = !fingers[finger]
+		user.mind.cached_frumentarii = fingers
+		playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
 	rebuild_info()
 
 /obj/item/paper/scroll/frumentarii/read(mob/user)
 	. = ..()
-	user.mind.cached_frumentarii |= real_names
-	user.mind.cached_frumentarii -= removed_names
+	user.mind.cached_frumentarii += fingers
 
 /obj/item/paper/scroll/frumentarii/proc/rebuild_info()
 	info = null
@@ -524,14 +549,11 @@
 	info += "<h2 style='color:#06080F;font-family:\"Segoe Script\"'>Known Agents</h2>"
 	info += "<hr/>"
 
-	if(length(real_names))
-		for(var/real_name in real_names)
-			info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[real_name]</li><br/>"
-
-	if(length(removed_names))
-		for(var/removed_name in removed_names)
-			info += "<s><li style='color:#610018;font-size:11px;font-family:\"Segoe Script\"'>[removed_name]</li></s><br/>"
-
+	for(var/F in fingers)
+		if(fingers[F])
+			info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[F]</li><br/>"
+		else
+			info += "<s><li style='color:#610018;font-size:11px;font-family:\"Segoe Script\"'>[F]</li></s><br/>"
 	info += "</div>"
 
 

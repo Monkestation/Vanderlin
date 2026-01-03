@@ -62,6 +62,7 @@
 		spawned.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
 
 /datum/outfit/apothecary
+	name = "Apothecary"
 	armor = /obj/item/clothing/armor/gambeson/apothecary
 	shoes = /obj/item/clothing/shoes/apothboots
 	shirt = /obj/item/clothing/shirt/apothshirt

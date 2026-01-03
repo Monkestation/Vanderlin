@@ -138,11 +138,18 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["enable_tips"]		>> enable_tips
 	S["tip_delay"]			>> tip_delay
 	S["ui_scale"]			>> ui_scale
+	S["chat_scale"]			>> chat_scale
+	S["multi_char_ready"] >> multi_char_ready
+
+	S["multi_ready_slots"] >> multi_ready_slots
+	if(!islist(multi_ready_slots))
+		multi_ready_slots = list()
 
 	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
 
-
+	if(!chat_scale)
+		chat_scale = 1
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
 		update_preferences(needs_update, S)		//needs_update = savefile_version if we need an update (positive integer)
@@ -241,7 +248,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["enable_tips"], enable_tips)
 	WRITE_FILE(S["tip_delay"], tip_delay)
 	WRITE_FILE(S["ui_scale"], ui_scale)
+	WRITE_FILE(S["chat_scale"], chat_scale)
 	WRITE_FILE(S["key_bindings"], key_bindings)
+	WRITE_FILE(S["multi_char_ready"], multi_char_ready)
+	WRITE_FILE(S["multi_ready_slots"], multi_ready_slots)
 	return TRUE
 
 /datum/preferences/proc/_load_species(S)
@@ -268,7 +278,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	validate_loadouts()
 
 /datum/preferences/proc/validate_loadouts()
-	if(!parent.patreon.has_access(ACCESS_ASSISTANT_RANK))
+	if(!parent.patreon.has_access(ACCESS_ASSISTANT_RANK) && !parent.twitch.has_access(ACCESS_TWITCH_SUB_TIER_1))
 		loadout1 = null
 		loadout2 = null
 		loadout3 = null

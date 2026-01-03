@@ -8,14 +8,12 @@
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN
-
 	display_order = JDO_CLINICAPPRENTICE
-
 	total_positions = 4
 	spawn_positions = 4
-
 	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
+	give_bank_account = 5
 
 	//ALL races and ALL ages are intended
 	//a contrast to Noc gatekeeping knowledge, anyone is allowed to learn about Pestra's medicine and alchemy
@@ -23,8 +21,15 @@
 	//you can have 20 year olds in the same group as 60 year olds
 	allowed_ages = ALL_AGES_LIST_CHILD
 	allowed_races = RACES_PLAYER_ALL
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	outfit = /datum/outfit/clinicapprentice
+	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	give_bank_account = 5
+	exp_types_granted = list(EXP_TYPE_MEDICAL)
+
+	jobstats = list(
+		STATKEY_INT = 1
+	)
 
 	skills = list(
 		/datum/skill/combat/wrestling = 1,
@@ -33,16 +38,12 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/alchemy = 2,
-		/datum/skill/misc/medicine = 2,
-	)
-
-	jobstats = list(
-		STATKEY_INT = 1,
+		/datum/skill/misc/medicine = 2
 	)
 
 	traits = list(
 		TRAIT_FORAGER,
-		TRAIT_EMPATH,
+		TRAIT_EMPATH
 	)
 
 	outfit = /datum/outfit/clinicapprentice
@@ -59,6 +60,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 
 /datum/outfit/clinicapprentice
+	name = "Clinic Apprentice"
 	head = /obj/item/clothing/head/roguehood/colored/black
 	backl = /obj/item/storage/backpack/satchel/surgbag/shit
 	shoes = /obj/item/clothing/shoes/simpleshoes

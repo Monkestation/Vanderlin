@@ -10,7 +10,8 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 // The idea is that they're a slippery bastard. Cantrip focused, stealth-focused. They rely on their spells.
-
+	languages = list(/datum/language/thievescant)
+	allowed_patrons = list(/datum/patron/godless/defiant) // This one has seen too much. Matthiosans are not compatible with Heartfelt.
 
 	skills = list(
 		/datum/skill/combat/axesmaces = SKILL_LEVEL_JOURNEYMAN, // Needed just for NPC's.
@@ -53,9 +54,10 @@
 		/datum/action/cooldown/spell/undirected/conjure_item/calling_card
 	)
 
+
 /datum/outfit/wretch/antiquarian/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.set_patron(/datum/patron/godless/defiant) // This one has seen too much. Matthiosans are not compatible with Heartfelt.
+	name = "Antiquarian (Wretch)"
 	mask = /obj/item/clothing/face/antiq
 	shoes = /obj/item/clothing/shoes/boots/leather
 	cloak = /obj/item/clothing/cloak/raincloak/colored/mortus
@@ -73,20 +75,16 @@
 		/obj/item/grapplinghook = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
-	wretch_select_bounty(H)
 
-	H.grant_language(/datum/language/thievescant)
-	to_chat(H, span_info("I can gesture in thieves' cant with ,t before my speech."))
-
-/datum/outfit/wretch/antiquarian/post_equip(mob/living/carbon/human/H, visuals_only)
+/datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
 	if(alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
-		var/prev_real_name = H.real_name
-		var/prev_name = H.name
+		var/prev_real_name = spawned.real_name
+		var/prev_name = spawned.name
 		var/title
 		var/list/titles = list("The Keeper", "The Phantom", "The Crow", "The Raven", "The Magpie", "The Courier", "The Mask", "The Shadow", "The Ghost", "The Fence", "The Intruder", "The Infiltrator", "The Filcher", "The Grifter", "He Who Walks", "The Invisible", "The Watcher", "The Master Thief", "The Dark Project", "The Lurker", "Prince of Shadows", "The Night Watch", "The Antiquarian", "Acquisitions Expert", "Cleptologist", "The Specialist", "The Stalker", "Of Deadly Shadows", "The Trickster", "The Respectable Citizen", "The Locksmith", "The Acquirer", "The Collector", "The Skeleton Key", "The Art Critic", "Recovery Specialist" ) //Dude, Trust.
 		title = pick(titles)
-		H.real_name = "[prev_real_name], [title]"
-		H.name = "[prev_name], [title]"
+		spawned.real_name = "[prev_real_name], [title]"
+		spawned.name = "[prev_name], [title]"
 
+	wretch_select_bounty(spawned)

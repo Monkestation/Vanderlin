@@ -43,7 +43,7 @@
 	spawned.merctype = 9
 
 /datum/outfit/mercenary/enforcer
-	name = "Gun-In"
+	name = "Gun-In (Mercenary)"
 	var/is_leader = FALSE //does nothing except give you a cooler blade.
 
 /datum/outfit/mercenary/enforcer/pre_equip(mob/living/carbon/human/H)

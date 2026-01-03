@@ -4,12 +4,16 @@
 	button_icon_state = "tragedy"
 	sound = 'sound/magic/mockery.ogg'
 
+	invocation_type = INVOCATION_SHOUT
+	invocation = "Your mother was a hampster and your father smelt of elderberries!"
+
+	spell_type = NONE
 	associated_skill = /datum/skill/misc/music
+	associated_stat = STATKEY_INT
 
 	charge_required = FALSE
-	spell_type = NONE
 	cooldown_time = 30 SECONDS
-	invocation_type = INVOCATION_SHOUT
+
 	has_visual_effects = FALSE
 
 /datum/action/cooldown/spell/vicious_mockery/is_valid_target(atom/cast_on)
