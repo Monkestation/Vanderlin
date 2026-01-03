@@ -30,6 +30,6 @@
 	else
 		cast_on.Slowdown(3)
 		cast_on.Dizzy(4)
-		cast_on.blur_eyes(10)
+		cast_on.set_eye_blur_if_lower(20 SECONDS)
 		cast_on.emote("drown")
 	return

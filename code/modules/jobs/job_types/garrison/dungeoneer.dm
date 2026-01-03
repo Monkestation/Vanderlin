@@ -18,13 +18,12 @@
 
 	outfit = /datum/outfit/dungeoneer
 	give_bank_account = 50
-
 	cmode_music = 'sound/music/cmode/nobility/CombatDungeoneer.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
 
 	exp_type = list(EXP_TYPE_GARRISON)
-	exp_types_granted  = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 300
 	)
@@ -35,38 +34,39 @@
 		STATKEY_END = 2,
 		STATKEY_CON = 1,
 		STATKEY_SPD = -1,
-		STATKEY_PER = -1,
+		STATKEY_PER = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/whipsflails = 1,
+		/datum/skill/combat/whipsflails = 3,
 		/datum/skill/combat/wrestling = 4,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/swords = 1,
 		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/craft/cooking = 1,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/traps = 3
 	)
 
-	traits = list(TRAIT_STEELHEARTED)
+	traits = list(
+		TRAIT_STEELHEARTED
+	)
 
 /datum/job/dungeoneer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(prob(30))
-		spawned.clamped_adjust_skillrank(/datum/skill/misc/medicine, 1, 2, TRUE)
 	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
-	if(spawned.dna?.species?.id == SPEC_ID_HUMEN)
+
+	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
 
 /datum/outfit/dungeoneer
+	name = "Dungeoneer"
 	head = /obj/item/clothing/head/dungeoneer
-	neck = 	/obj/item/clothing/neck/coif
-	armor = /obj/item/clothing/armor/cuirass/iron/rust
+	neck = /obj/item/storage/belt/pouch/coins/poor
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/stabard/colored/dungeon
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
 	wrists = /obj/item/clothing/wrists/bracers/leather

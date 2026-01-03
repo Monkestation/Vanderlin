@@ -388,6 +388,19 @@
 	skillcraft = /datum/skill/craft/masonry
 	craftdiff = 2
 
+/datum/blueprint_recipe/floor/bath/pool
+	name = "Pool Edge Tile"
+	desc = "Clean bathroom-style tiling made of stone blocks."
+	result_type = /turf/open/floor/tile/bath/pool
+	required_materials = list(
+		/obj/item/natural/stoneblock = 2
+	)
+	construct_tool = /obj/item/weapon/hammer
+	category = "Floors"
+	floor_object = TRUE
+	skillcraft = /datum/skill/craft/masonry
+	craftdiff = 2
+
 /datum/blueprint_recipe/floor/bfloorz
 	name = "Blue Floor Tile"
 	desc = "Distinctive blue flooring made of stone blocks."
@@ -578,6 +591,19 @@
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
 		/obj/item/natural/dirtclod = 2
+	)
+	construct_tool = /obj/item/weapon/shovel
+	category = "Floors"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/floor/grasshealthy
+	name = "Healthy Grass"
+	desc = "A bit of extra fertilizer makes the difference."
+	result_type = /turf/open/floor/grass/healthy
+	required_materials = list(
+		/obj/item/natural/fibers = 3,
+		/obj/item/neuFarm/seed = 1,
+		/obj/item/natural/dirtclod = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"

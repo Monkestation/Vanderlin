@@ -21,7 +21,7 @@
 		return
 	current_beats = 0
 	for(var/mob/living/carbon/human/human in view(7, hosted_carbon))
-		if(istype(human.dna.species, disliked_species))
+		if(is_species(human, disliked_species))
 			var/potency = node_purity / 100
 			trigger_output(potency)
 			return

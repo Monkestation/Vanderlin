@@ -175,6 +175,8 @@
 #define COMSIG_ITEM_DROPPED "item_drop"
 ///from base of obj/item/pickup(): (/mob/taker)
 #define COMSIG_ITEM_PICKUP "item_pickup"
+///from base of obj/item/afterpickup(): (/mob/taker)
+#define COMSIG_ITEM_AFTER_PICKUP "item_after_pickup"
 ///from base of mob/living/carbon/attacked_by(): (mob/living/carbon/target, mob/living/user, hit_zone)
 #define COMSIG_ITEM_ATTACK_ZONE "item_attack_zone"
 ///from base of obj/item/hit_reaction(): (list/args)
@@ -334,3 +336,12 @@
 #define COMSIG_ITEM_ATTACK_EFFECT "item_attack_effect"
 #define COMSIG_ITEM_ATTACK_EFFECT_SELF "item_attack_effect_self"
 #define COMSIG_DOOR_OPENED "door_open"
+
+/// send this signal to add /datum/component/vis_radius to a list of mobs or one mob: (mob/mob_or_mobs)
+#define COMSIG_SHOW_RADIUS "show_radius"
+/// send this signal to remove /datum/component/vis_radius to a mobs: ()
+#define COMSIG_HIDE_RADIUS "hide_radius"
+/// send this signal to remove a list of tip ids(use tip_names as tip ids): (/list/tip_ids_to_remove)
+#define COMSIG_TIPS_REMOVE "comsig_tip_remove"
+///used incase we care about a tracker dying
+#define COMSIG_LIVING_TRACKER_REMOVED "tracker_removed"

@@ -625,7 +625,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/proc/set_blackboard_key_assoc(key, thing, value)
 	if(!islist(blackboard[key]))
 		CRASH("set_blackboard_key_assoc called on non-list key [key]!")
-	TRACK_AI_DATUM_TARGET(thing, key)
+
 	TRACK_AI_DATUM_TARGET(value, key)
 	blackboard[key][thing] = value
 	post_blackboard_key_set(key)

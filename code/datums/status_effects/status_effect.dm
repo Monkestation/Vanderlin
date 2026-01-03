@@ -116,6 +116,18 @@
 /datum/status_effect/proc/nextmove_adjust()
 	return 0
 
+/// Remove [seconds] of duration from the status effect, qdeling / ending if we eclipse the current world time.
+/datum/status_effect/proc/remove_duration(seconds)
+	if(duration == -1) // Infinite duration
+		return FALSE
+
+	duration -= seconds
+	if(duration <= world.time)
+		qdel(src)
+		return TRUE
+
+	return FALSE
+
 ////////////////
 // ALERT HOOK //
 ////////////////

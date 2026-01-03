@@ -24,8 +24,7 @@
 	var/midround_antag_pref_arg = round_started ? FALSE : TRUE
 
 	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, observers = TRUE, midround_antag_pref = midround_antag_pref_arg, restricted_roles = restricted_roles)
-	candidates = trim_candidates(candidates)
-	return candidates
+	return trim_candidates(candidates)
 
 /datum/round_event_control/antagonist/solo/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
@@ -48,10 +47,9 @@
 	var/midround_antag_pref_arg = round_started ? FALSE : TRUE
 
 	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, FALSE, new_players_arg, living_players_arg, midround_antag_pref = midround_antag_pref_arg, \
-													restricted_roles = restricted_roles, required_roles = exclusive_roles)
-	candidates = trim_candidates(candidates)
-	return candidates
+													no_antags = TRUE, restricted_roles = restricted_roles, required_roles = exclusive_roles)
 
+	return trim_candidates(candidates)
 
 /datum/round_event_control/antagonist/solo/return_failure_string(players_amt)
 	. =..()
@@ -64,7 +62,6 @@
 		. += "Not Enough Candidates!"
 
 	return .
-
 
 /datum/round_event/antagonist/solo
 	// ALL of those variables are internal. Check the control event to change them

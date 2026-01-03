@@ -1416,6 +1416,8 @@
 
 	for(var/lt in H.languages)
 		var/datum/language/langtype = lt
+		if(!ispath(langtype))
+			langtype = text2path(langtype)
 		if(!can_speak_in_language(langtype))
 			continue
 

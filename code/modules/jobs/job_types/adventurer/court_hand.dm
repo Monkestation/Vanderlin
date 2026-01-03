@@ -18,7 +18,7 @@
 	can_have_apprentices = FALSE
 	scales = FALSE
 
-	exp_types_granted  = list(EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_COMBAT)
 
 //Hooking in here does not mess with their equipment procs
 /datum/job/adventurer/courtagent/after_spawn(mob/living/spawned, client/player_client)
