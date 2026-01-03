@@ -11,34 +11,56 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
-
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
-
 	outfit = /datum/outfit/steward
 	give_bank_account = 100
 	noble_income = 16
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-
 	job_bitflag = BITFLAG_ROYALTY
-
 	exp_type = list(EXP_TYPE_LIVING)
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
 
+	jobstats = list(
+		STATKEY_STR = -2,
+		STATKEY_INT = 5,
+		STATKEY_CON = -2
+	)
+
+	skills = list(
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/reading = 6,
+		/datum/skill/misc/riding = 2,
+		/datum/skill/misc/stealing = 2,
+		/datum/skill/misc/sneaking = 2,
+		/datum/skill/misc/lockpicking = 6,
+		/datum/skill/labor/mathematics = 5
+	)
+
+	traits = list(
+		TRAIT_SEEPRICES,
+		TRAIT_NOBLE
+	)
+
 /datum/outfit/steward/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.virginity = TRUE
 	if(H.gender == FEMALE)
 		shirt = /obj/item/clothing/shirt/dress/stewarddress
 	else
 		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		pants = /obj/item/clothing/pants/trou/leathertights
 
-	ADD_TRAIT(H, TRAIT_SEEPRICES, type)
+/datum/job/steward/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.virginity = TRUE
+
+/datum/outfit/steward
+	name = "Steward"
 	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
+	shirt = /obj/item/clothing/shirt/dress/stewarddress
 	head = /obj/item/clothing/head/stewardtophat
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	armor = /obj/item/clothing/armor/gambeson/steward
@@ -47,16 +69,13 @@
 	beltl = /obj/item/weapon/knife/dagger/steel
 	backr = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/knife)
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/rich = 1, /obj/item/lockpickring/mundane = 1)
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/rich = 1,
+		/obj/item/lockpickring/mundane = 1
+	)
 
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/lockpicking, 6, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 5, TRUE)
-	H.change_stat(STATKEY_STR, -2)
-	H.change_stat(STATKEY_INT, 5)
-	H.change_stat(STATKEY_CON, -2)
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+/datum/outfit/steward/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
+		shirt = /obj/item/clothing/shirt/undershirt/fancy
+		pants = /obj/item/clothing/pants/trou/leathertights

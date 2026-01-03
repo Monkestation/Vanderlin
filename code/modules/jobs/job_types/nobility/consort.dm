@@ -29,16 +29,23 @@
 		EXP_TYPE_NOBLE = 300
 	)
 
+	traits = list(
+		TRAIT_KNOWKEEPPLANS,
+		TRAIT_NOBLE,
+		TRAIT_NUTCRACKER
+	)
 
-/datum/job/consort/after_spawn(mob/living/spawned, client/player_client)
+
+/datum/job/consort/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/mob/living/carbon/human/H = spawned
-	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, (H.gender == FEMALE) ? FAMILY_MOTHER : FAMILY_FATHER), 7 SECONDS)
+	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, (spawned.gender == FEMALE) ? FAMILY_MOTHER : FAMILY_FATHER), 7 SECONDS)
 	if(GLOB.keep_doors.len > 0)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), H), 5 SECONDS)
-	ADD_TRAIT(H, TRAIT_KNOWKEEPPLANS, TRAIT_GENERIC)
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), spawned), 5 SECONDS)
+	if(istype(spawned.patron, /datum/patron/inhumen/baotha))
+		spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
-/datum/outfit/consort // Default equipment regardless of class.
+/datum/outfit/consort
+	name = "Consort"
 	head = /obj/item/clothing/head/crown/nyle/consortcrown
 	shoes = /obj/item/clothing/shoes/boots
 	ring = /obj/item/clothing/ring/silver
@@ -59,140 +66,214 @@
 	title = "Highborn Consort"
 	tutorial = "Of a minor noble house, yours is a rather typical tale; you were trained in manners, literature, and intrigue, all to be married off to the next ruler of this damned peninsula."
 	outfit = /datum/outfit/consort/highborn
-
 	category_tags = list(CTAG_CONSORT)
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
-/datum/outfit/consort/highborn/pre_equip(mob/living/carbon/human/H)
+	spells = list(
+		/datum/action/cooldown/spell/undirected/call_bird,
+	)
+
+	jobstats = list(
+		STATKEY_INT = 3,
+		STATKEY_END = 1,
+		STATKEY_PER = 3,
+		STATKEY_SPD = 1,
+		STATKEY_LCK = 5
+	)
+
+	skills = list(
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/misc/sneaking = 1,
+		/datum/skill/misc/riding = 1,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/labor/mathematics = 3
+	)
+
+	traits = list(
+		TRAIT_SEEPRICES
+	)
+
+/datum/job/advclass/consort/highborn/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(H.gender == MALE)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+
+/datum/outfit/consort/highborn
+	name = "Highborn Consort"
+	pants = /obj/item/clothing/pants/tights/colored/random
+	armor = /obj/item/clothing/armor/leather/vest/winterjacket
+	shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
+
+/datum/outfit/consort/highborn/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/black
 		shirt = /obj/item/clothing/shirt/undershirt/colored/black
 		armor = /obj/item/clothing/armor/leather/vest/winterjacket
-	else
-		pants = /obj/item/clothing/pants/tights/colored/random
-		armor = /obj/item/clothing/armor/leather/vest/winterjacket
-		shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
-
-
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-	H.change_stat(STATKEY_INT, 3)
-	H.change_stat(STATKEY_END, 1)
-	H.change_stat(STATKEY_PER, 3)
-	H.change_stat(STATKEY_SPD, 1)
-	H.change_stat(STATKEY_LCK, 5)
-	H.add_spell(/datum/action/cooldown/spell/undirected/call_bird)
-	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
-	switch(H.patron?.type)
-		if(/datum/patron/inhumen/baotha)
-			H.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
 /datum/job/advclass/consort/courtesan
 	title = "Courtesan Consort"
 	tutorial = "Though initially none envied your lot in life, it's certain that your midnight talents haven't gone to waste. Your honeyed words and charm have brought you right to being a ruler's beloved consort."
 	outfit = /datum/outfit/consort/courtesan
-
 	category_tags = list(CTAG_CONSORT)
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
-/datum/outfit/consort/courtesan/pre_equip(mob/living/carbon/human/H)
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_INT = -1,
+		STATKEY_END = 2,
+		STATKEY_SPD = 1,
+		STATKEY_LCK = 3
+	)
+
+	skills = list(
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/knives = 3,
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/sneaking = 3,
+		/datum/skill/misc/stealing = 3,
+		/datum/skill/misc/riding = 2,
+		/datum/skill/misc/lockpicking = 2,
+		/datum/skill/labor/mathematics = 2
+	)
+
+/datum/job/advclass/consort/courtesan/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(H.gender == MALE)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
+
+/datum/outfit/consort/courtesan
+	name = "Courtesan Consort"
+	pants = /obj/item/clothing/pants/tights/colored/random
+	shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
+	armor = /obj/item/clothing/armor/leather/vest/winterjacket
+	cloak = /obj/item/clothing/cloak/raincloak/furcloak
+
+/datum/outfit/consort/courtesan/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/black
 		shirt = /obj/item/clothing/shirt/undershirt/colored/black
 		armor = /obj/item/clothing/armor/leather/vest/winterjacket // this is kind of stupid but i love it anyway
-	else
-		pants = /obj/item/clothing/pants/tights/colored/random
-		shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
-		armor = /obj/item/clothing/armor/leather/vest/winterjacket
-		cloak = /obj/item/clothing/cloak/raincloak/furcloak
+		cloak = null
 
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/stealing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE) // oh you know
-	H.adjust_skillrank(/datum/skill/misc/lockpicking, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	H.change_stat(STATKEY_STR, 1)
-	H.change_stat(STATKEY_INT, -1)
-	H.change_stat(STATKEY_END, 2)
-	H.change_stat(STATKEY_SPD, 1)
-	H.change_stat(STATKEY_LCK, 3)
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
-	switch(H.patron?.type)
-		if(/datum/patron/inhumen/baotha)
-			H.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
 /datum/job/advclass/consort/lowborn
 	title = "Lowborn Consort"
 	tutorial = "You never could have dreamed your life would be like this. Though your origins are humble, something special about you - whether it was your good looks, your kind heart, or your bravery - has brought you into Vanderlin Keep."
 	outfit = /datum/outfit/consort/lowborn
-
 	category_tags = list(CTAG_CONSORT)
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
-/datum/outfit/consort/lowborn/pre_equip(mob/living/carbon/human/H)
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_CON = 2,
+		STATKEY_INT = -2,
+		STATKEY_END = 3,
+		STATKEY_SPD = -1,
+		STATKEY_LCK = 1
+	)
+
+	skills = list(
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/polearms = 2,
+		/datum/skill/misc/sewing = 3,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/labor/farming = 3,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/craft/cooking = 3,
+		/datum/skill/craft/crafting = 3,
+		/datum/skill/misc/riding = 1
+	)
+
+	traits = list(
+		TRAIT_SEEDKNOW
+	)
+
+/datum/job/advclass/consort/lowborn/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(H.gender == MALE)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
+
+/datum/outfit/consort/lowborn
+	name = "Lowborn Consort"
+	shirt = /obj/item/clothing/shirt/dress/silkdress/colored/princess
+	armor = /obj/item/clothing/armor/leather/jacket/silk_coat
+
+/datum/outfit/consort/lowborn/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/green
 		shirt = /obj/item/clothing/shirt/undershirt/colored/black
 		armor = /obj/item/clothing/shirt/tunic/colored/green
-	else
-		shirt = /obj/item/clothing/shirt/dress/silkdress/colored/princess
-		armor = /obj/item/clothing/armor/leather/jacket/silk_coat
 
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/farming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.change_stat(STATKEY_STR, 1)
-	H.change_stat(STATKEY_CON, 2) // good old peasant constitution. in exchange for making them dumb, they will be STRONG.
-	H.change_stat(STATKEY_INT, -2) // either a hapless dumbass, or just not educated
-	H.change_stat(STATKEY_END, 3)
-	H.change_stat(STATKEY_SPD, -1)
-	H.change_stat(STATKEY_LCK, 1)
-	ADD_TRAIT(H, TRAIT_SEEDKNOW, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
-	switch(H.patron?.type)
-		if(/datum/patron/inhumen/baotha)
-			H.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
 /datum/job/advclass/consort/courtesan/night_spy
 	title = "Night-Mother's Spy Consort"
 	tutorial = "Raised by the guild to report on all the Monarch's action. Using your honeyed words and charm have brought you right to being a ruler's beloved consort."
 	outfit = /datum/outfit/consort/courtesan/spy
-
 	category_tags = list(CTAG_CONSORT)
+	exp_types_granted  = list(EXP_TYPE_NOBLE)
+	languages = list(/datum/language/thievescant)
+
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_INT = -1,
+		STATKEY_END = 2,
+		STATKEY_SPD = 1,
+		STATKEY_LCK = 3
+	)
+
+	skills = list(
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/knives = 3,
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/sneaking = 3,
+		/datum/skill/misc/stealing = 3,
+		/datum/skill/misc/riding = 2,
+		/datum/skill/misc/lockpicking = 2,
+		/datum/skill/labor/mathematics = 2
+	)
+
+	traits = list(
+		TRAIT_THIEVESGUILD
+	)
+
+/datum/job/advclass/consort/courtesan/night_spy/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/combat/knives, 1)
+
+/datum/outfit/consort/courtesan/spy
+	name = "Night-Mother's Spy Consort"
+	pants = /obj/item/clothing/pants/tights/colored/random
+	shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
+	armor = /obj/item/clothing/armor/leather/vest/winterjacket
+	cloak = /obj/item/clothing/cloak/raincloak/furcloak
+
+/datum/outfit/consort/courtesan/spy/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == MALE)
+		pants = /obj/item/clothing/pants/tights/colored/black
+		shirt = /obj/item/clothing/shirt/undershirt/colored/black
+		armor = /obj/item/clothing/armor/leather/vest/winterjacket // this is kind of stupid but i love it anyway
+		cloak = null
 
 /datum/job/exlady //just used to change the consort title
 	title = "Ex-Consort"
@@ -201,10 +282,3 @@
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_CONSORT
-
-/datum/outfit/consort/courtesan/spy/pre_equip(mob/living/carbon/human/H)
-	. = ..()
-	H.grant_language(/datum/language/thievescant)
-	to_chat(H, "<span class='info'>I can gesture in thieves' cant with ,t before my speech.</span>")
-	ADD_TRAIT(H, TRAIT_THIEVESGUILD, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)

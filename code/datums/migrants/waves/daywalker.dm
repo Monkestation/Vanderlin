@@ -8,7 +8,7 @@
 	tutorial = "Some knaves are always trying to wade upstream. You witnessed your entire village be consumed by a subservient vampiric horde - the local Priest grabbed you, and brought you to a remote Monastery; ever since then you've sworn revenge against the restless dead. The Templars showed you everything you needed to know. You walk in the day, so that the undead may only walk in the night."
 	outfit = /datum/outfit/daywalker
 	allowed_races = list(SPEC_ID_HUMEN)
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_CON = 1,
@@ -42,7 +42,7 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
 
 /datum/outfit/daywalker
-	name = "Daywalker"
+	name = "Daywalker (Migrant Wave)"
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	neck = /obj/item/clothing/neck/psycross/silver/astrata
 	gloves = /obj/item/clothing/gloves/fingerless/shadowgloves

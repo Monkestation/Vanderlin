@@ -292,7 +292,6 @@
 /area/outdoors/woods_safe)
 "cX" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_tangerine,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -1255,7 +1254,6 @@
 /area/under/mountains/anvil/lower)
 "mw" = (
 /obj/structure/table/wood/counter,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_plum,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -1706,6 +1704,13 @@
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"rT" = (
+/obj/structure/window/solid,
+/obj/structure/bars/alt{
+	pixel_y = -3
+	},
+/turf/open/floor/wood,
+/area/indoors)
 "sd" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
@@ -1729,7 +1734,6 @@
 /area/under/mountains/anvil/lower)
 "sj" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_apple,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -1909,7 +1913,6 @@
 /area/under/mountains/anvil/lower)
 "tJ" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_plum,
 /turf/open/floor/twig/platform,
 /area/under/mountains/anvil/lower)
@@ -1917,9 +1920,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/cobble,
 /area/outdoors/woods_safe)
@@ -2724,7 +2726,6 @@
 /area/under/mountains/anvil/lower)
 "DD" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "DE" = (
@@ -3585,7 +3586,6 @@
 /area/under/mountains/anvil/lower)
 "Mt" = (
 /obj/structure/table/wood/counter,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_pear,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -4045,6 +4045,9 @@
 /area/under/mountains/anvil/upper)
 "Ro" = (
 /obj/structure/window/solid,
+/obj/structure/bars/alt{
+	pixel_y = -3
+	},
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "Rp" = (
@@ -4646,7 +4649,6 @@
 /area/indoors/villagegarrison)
 "XF" = (
 /obj/structure/table/wood/plain,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_pear,
 /obj/item/candle/lit{
 	pixel_x = 0;
@@ -4713,15 +4715,13 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/woods_safe)
 "Yl" = (
 /obj/structure/table/wood/counter,
-/obj/item/plate/tray,
 /obj/item/reagent_containers/food/snacks/jellycake_apple,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -109152,11 +109152,11 @@ zB
 zB
 IP
 bw
-jC
+rT
 tW
 bw
 tW
-jC
+rT
 tW
 bw
 zB
@@ -114199,7 +114199,7 @@ zB
 IP
 zB
 IP
-jC
+rT
 cL
 Lp
 ZX
@@ -114222,7 +114222,7 @@ lt
 zD
 Xe
 fP
-jC
+rT
 zB
 IP
 IP
@@ -114401,7 +114401,7 @@ zB
 IP
 zB
 IP
-jC
+rT
 Lp
 Lp
 Lp
@@ -114626,7 +114626,7 @@ xj
 zD
 zD
 li
-jC
+rT
 IP
 zB
 zB
@@ -115009,11 +115009,11 @@ IP
 zB
 CZ
 ho
-jC
+rT
 zb
 zb
 ho
-jC
+rT
 ho
 CZ
 fE
