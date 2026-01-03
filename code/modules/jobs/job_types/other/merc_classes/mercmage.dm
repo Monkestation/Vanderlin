@@ -27,7 +27,7 @@
 	jobstats = list(
 		STATKEY_END = 1,
 		STATKEY_INT = 3,
-		STATKEY_CON = -2,
+		STATKEY_CON = -1,
 		STATKEY_PER = -1,
 		STATKEY_STR = -2,
 		STATKEY_SPD = -1
@@ -65,7 +65,7 @@
 
 /datum/outfit/mercenary/sellmage
 	name = "Sellmage (Mercenary)"
-	shirt = /obj/item/clothing/armor/gambeson/light
+	shirt = /obj/item/clothing/armor/gambeson
 	ring = /obj/item/clothing/ring/silver
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary
