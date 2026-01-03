@@ -27,5 +27,23 @@
                 "spellcheck": "little accent thing so people spell inquisition titles right"
             }
         ]
+    },
+    "2026-01-03": {
+        "Syndro101": [
+            {
+                "map": "remake of the voyage ship"
+            },
+            {
+                "bugfix": "closes https://github.com/Monkestation/Vanderlin/issues/4676 and closes https://github.com/Monkestation/Vanderlin/issues/4677"
+            }
+        ],
+        "aberrantQuesrist": [
+            {
+                "map": "Cleaned up Daftmarsh, QoL updates."
+            },
+            {
+                "bugfix": "Male cows no longer have udders."
+            }
+        ]
     }
 }
