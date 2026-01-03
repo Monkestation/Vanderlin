@@ -36,8 +36,8 @@
 		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 2)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 2)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 2)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, -1)
 	if(spawned.gender == MALE)
 		// Male: arcyne trident wielder
