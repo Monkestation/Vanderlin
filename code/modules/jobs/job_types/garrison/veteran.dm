@@ -317,6 +317,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 
 	var/static/list/weapons = list( \
 		"Zweihander" = /obj/item/weapon/sword/long/greatsword/zwei, \
