@@ -1936,7 +1936,7 @@
 /area/outdoors/town)
 "aTA" = (
 /obj/structure/chair/stool,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "aTU" = (
 /obj/structure/bookcase/random/thesis,
@@ -2422,7 +2422,7 @@
 	name = "Clinic"
 	},
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "bhU" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -3049,7 +3049,7 @@
 	dir = 1
 	},
 /obj/item/weapon/surgery/scalpel,
-/turf/open/floor/churchrough/gold,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "bwZ" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -3113,7 +3113,7 @@
 /obj/structure/curtain/bounty{
 	color = "grey"
 	},
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "bzU" = (
 /obj/structure/chair/bench/church/r{
@@ -3129,7 +3129,7 @@
 	dir = 8
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "bzW" = (
 /obj/structure/fermentation_keg,
@@ -3263,7 +3263,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
-/turf/open/floor/churchrough/gold,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "bDL" = (
 /obj/structure/fluff/railing/border,
@@ -3725,7 +3725,7 @@
 	},
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
 /obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "bOY" = (
 /obj/structure/door/stone,
@@ -6779,7 +6779,7 @@
 /obj/structure/door/stone{
 	name = "Clinic"
 	},
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "djh" = (
 /obj/item/ore/coal,
@@ -8289,6 +8289,10 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
+"dRJ" = (
+/obj/structure/window/stained/silver/alt,
+/turf/open/floor/churchrough,
+/area/indoors/town/clinic_large)
 "dRY" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/hexstone,
@@ -8642,7 +8646,7 @@
 /turf/open/floor/sand,
 /area/outdoors/beach)
 "ebV" = (
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "ecc" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -9720,7 +9724,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "eFa" = (
 /obj/structure/bars,
@@ -10069,7 +10073,7 @@
 	name = "Clinic"
 	},
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
-/turf/open/floor/churchrough/green,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "eNl" = (
 /obj/structure/table/wood/plain_alt,
@@ -10323,10 +10327,6 @@
 	},
 /turf/open/floor/cobble,
 /area/under/cave)
-"eUF" = (
-/obj/structure/window/solid,
-/turf/open/floor/church/pale,
-/area/indoors/town/clinic_large)
 "eUK" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -10334,7 +10334,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "eUR" = (
 /obj/structure/stairs,
@@ -10781,7 +10781,7 @@
 	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "fel" = (
 /obj/structure/flora/grass,
@@ -10984,7 +10984,7 @@
 /area/indoors/town/smithy)
 "fiU" = (
 /obj/structure/ladder,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "fiZ" = (
 /obj/structure/roguerock{
@@ -12470,7 +12470,7 @@
 	dir = 4
 	},
 /obj/structure/chair/stool,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "fUv" = (
 /turf/closed/mineral,
@@ -13193,7 +13193,7 @@
 /area/indoors/town/manor/lord_appt)
 "gnu" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "gnw" = (
 /obj/structure/fluff/railing/wood{
@@ -15269,7 +15269,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "hnI" = (
 /obj/structure/chair/stool{
@@ -16826,7 +16826,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "icQ" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -17491,7 +17491,7 @@
 	dir = 4
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "itS" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -19107,7 +19107,7 @@
 	dir = 1
 	},
 /obj/machinery/light/fueled/firebowl/standing/blue,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "jkd" = (
 /obj/structure/table/wood/plain_alt,
@@ -20127,7 +20127,7 @@
 /area/outdoors/exposed/church)
 "jGJ" = (
 /obj/effect/landmark/start/clinicapprentice,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "jGR" = (
 /obj/structure/roguerock,
@@ -20900,7 +20900,7 @@
 	amount = 3;
 	pixel_y = -7
 	},
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "kbF" = (
 /obj/structure/fluff/statue/gargoyle/moss/candles,
@@ -23176,7 +23176,7 @@
 	dir = 8
 	},
 /obj/structure/fake_machine/scomm/l,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "ldv" = (
 /obj/machinery/light/fueled/torchholder/c,
@@ -23886,7 +23886,7 @@
 /area/indoors/town/garrison)
 "lvp" = (
 /obj/structure/closet/crate/chest/neu,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "lvr" = (
 /turf/open/floor/woodturned/nosmooth,
@@ -26247,7 +26247,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "mBT" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -27607,7 +27607,7 @@
 	pixel_y = 5
 	},
 /obj/item/recipe_book/medical,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "nki" = (
 /turf/open/floor/churchrough,
@@ -28090,7 +28090,7 @@
 	pixel_x = -6;
 	pixel_y = 10
 	},
-/turf/open/floor/churchrough/gold,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "nuU" = (
 /obj/structure/table/wood/plain_alt,
@@ -28377,7 +28377,7 @@
 	},
 /obj/structure/rack/shelf/notdense,
 /obj/effect/landmark/start/clinicapprentice,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "nCr" = (
 /obj/structure/fermentation_keg/random/water,
@@ -28904,7 +28904,7 @@
 	},
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
 /obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/churchrough/green,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "nSl" = (
 /obj/structure/closet/crate/chest/crate,
@@ -30916,7 +30916,7 @@
 /obj/structure/fake_machine/atm{
 	pixel_y = -32
 	},
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "oNT" = (
 /obj/effect/mapping_helpers/access/keyset/town/bathhouse,
@@ -31001,9 +31001,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobble,
 /area/indoors/town/church)
-"oQb" = (
-/turf/open/floor/churchmarble/pale,
-/area/indoors/town/clinic_large)
 "oQo" = (
 /obj/structure/chair/stool,
 /obj/structure/fluff/walldeco/painting/seraphina{
@@ -31656,7 +31653,7 @@
 /obj/effect/landmark/start/clinicapprentice{
 	dir = 1
 	},
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "pfj" = (
 /obj/structure/door/iron,
@@ -32207,7 +32204,7 @@
 	dir = 4
 	},
 /obj/structure/chair/stool,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "puv" = (
 /obj/structure/fluff/railing/wood,
@@ -32240,7 +32237,7 @@
 "pvQ" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/closet/crate/chest/neu,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "pvT" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -32776,7 +32773,7 @@
 	pixel_x = -6;
 	pixel_y = 7
 	},
-/turf/open/floor/churchrough/gold,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "pHA" = (
 /obj/structure/table/wood{
@@ -33146,7 +33143,7 @@
 "pUJ" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/chair/stool,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "pUO" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -33298,7 +33295,7 @@
 	},
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
 /obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "qah" = (
 /obj/structure/table/wood/counter,
@@ -36328,7 +36325,7 @@
 "rvi" = (
 /obj/structure/fluff/walldeco/feldshersign,
 /obj/structure/table/wood/reinf_long,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "rvn" = (
 /obj/structure/ladder,
@@ -37434,7 +37431,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/chair/stool,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "rWy" = (
 /obj/structure/rack,
@@ -37649,12 +37646,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/blocks,
 /area/indoors/town/magician)
-"saU" = (
-/obj/structure/fluff/walldeco/church/line{
-	dir = 1
-	},
-/turf/open/floor/church/pale,
-/area/indoors/town/clinic_large)
 "saZ" = (
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
@@ -39346,7 +39337,7 @@
 /obj/effect/landmark/start/clinicapprentice{
 	dir = 4
 	},
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "sTN" = (
 /obj/structure/chair/wood/alt{
@@ -40104,7 +40095,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
-/turf/open/floor/churchrough/gold,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "tmo" = (
 /obj/machinery/essence/research_matrix,
@@ -42862,7 +42853,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
-/turf/open/floor/churchmarble/pale,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "uFN" = (
 /obj/structure/stairs/stone/church{
@@ -44618,7 +44609,7 @@
 	dir = 8
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
-/turf/open/floor/church/pale,
+/turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "vtT" = (
 /obj/structure/table/wood/fancy/purple,
@@ -44971,7 +44962,7 @@
 	pixel_x = -30;
 	pixel_y = 18
 	},
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "vDa" = (
 /obj/structure/fluff/walldeco/stone{
@@ -46551,7 +46542,7 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/table/wood/plain_alt,
 /obj/item/natural/cloth,
-/turf/open/floor/churchrough/pale,
+/turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
 "wrV" = (
 /obj/structure/door/window{
@@ -47933,7 +47924,7 @@
 /area/under/town/basement)
 "wWH" = (
 /obj/structure/bed/mediocre,
-/turf/open/floor/churchrough/gold,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "wWP" = (
 /obj/item/paper,
@@ -48017,7 +48008,7 @@
 "wZa" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/bed/mediocre,
-/turf/open/floor/churchrough/gold,
+/turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "wZb" = (
 /obj/structure/fireaxecabinet/south,
@@ -107994,10 +107985,10 @@ khd
 vfY
 xoY
 lAf
-dib
+dRJ
 eNi
 eNi
-dib
+dRJ
 lAf
 uEH
 jFB
@@ -108197,8 +108188,8 @@ neD
 neD
 upW
 hnH
-oQb
-oQb
+wYL
+wYL
 jkb
 lAf
 lAf
@@ -108399,11 +108390,11 @@ uXl
 lAf
 lAf
 uFl
-oQb
-oQb
-oQb
+wYL
+wYL
+wYL
 qaa
-oQb
+wYL
 oxd
 lAf
 wjN
@@ -108601,11 +108592,11 @@ hEV
 lAf
 bzO
 hnH
-oQb
-oQb
+wYL
+wYL
 gnu
 qaa
-oQb
+wYL
 fTw
 lAf
 lAf
@@ -109005,7 +108996,7 @@ lAf
 lAf
 bzO
 hnH
-oQb
+wYL
 eUK
 vtP
 ldu
@@ -109207,8 +109198,8 @@ vCY
 lBX
 lBX
 fef
-oQb
-saU
+wYL
+cGn
 tlV
 wWH
 wWH
@@ -109405,12 +109396,12 @@ vfY
 neD
 olz
 pUJ
-oQb
-oQb
-oQb
-oQb
-oQb
-saU
+wYL
+wYL
+wYL
+wYL
+wYL
+cGn
 bDK
 pGS
 bwO
@@ -109607,12 +109598,12 @@ vfY
 neD
 olz
 pUJ
-oQb
-oQb
-oQb
-oQb
-oQb
-saU
+wYL
+wYL
+wYL
+wYL
+wYL
+cGn
 tlV
 wWH
 wWH
@@ -109809,8 +109800,8 @@ sMH
 rXd
 uZM
 pUJ
-oQb
-oQb
+wYL
+wYL
 fUo
 ptL
 rWx
@@ -110013,12 +110004,12 @@ osm
 dib
 bhT
 diL
-dib
+dRJ
 lAf
 qgz
-eUF
-dib
-dib
+dRJ
+dRJ
+dRJ
 lAf
 lAf
 lAf
