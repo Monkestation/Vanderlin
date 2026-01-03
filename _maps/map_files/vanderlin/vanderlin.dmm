@@ -11945,6 +11945,10 @@
 /obj/item/reagent_containers/powder/moondust,
 /turf/open/floor/carpet/red,
 /area/indoors/town/merc_guild)
+"fHi" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "fHj" = (
 /obj/structure/door/viewport{
 	dir = 4;
@@ -16730,6 +16734,10 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"hXB" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "hXP" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fermentation_keg,
@@ -28396,6 +28404,13 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/theatre)
+"nAY" = (
+/mob/living/simple_animal/hostile/retaliate/spider,
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor3-old"
+	},
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "nBd" = (
 /turf/closed/wall/mineral/roofwall/innercorner{
 	dir = 1
@@ -36495,6 +36510,10 @@
 /obj/item/reagent_containers/glass/cup/teacup,
 /turf/open/floor/wood,
 /area/indoors/town/manor)
+"rwV" = (
+/obj/effect/decal/remains/xeno,
+/turf/open/floor/concrete,
+/area/under/town/basement)
 "rxl" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -41374,6 +41393,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
+"tPQ" = (
+/obj/effect/decal/remains/human,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "tPS" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/manor/kitchen/cellar)
@@ -45768,6 +45791,7 @@
 /area/under/town/basement)
 "vTK" = (
 /obj/structure/chair/bench/coucha,
+/obj/structure/spider/stickyweb,
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "vUb" = (
@@ -70354,8 +70378,8 @@ qFx
 qFx
 jEQ
 fBg
-nxW
-nxW
+fHi
+fHi
 nxW
 eVO
 dYE
@@ -70556,7 +70580,7 @@ qFx
 qFx
 grz
 vTK
-fBg
+hXB
 nxW
 gsU
 gsU
@@ -70962,8 +70986,8 @@ nxW
 fBg
 nxW
 nxW
-nxW
-nxW
+fHi
+fHi
 jEQ
 qvf
 cAA
@@ -71361,9 +71385,9 @@ sTQ
 veL
 lrh
 jEQ
-nxW
+fHi
 grz
-nxW
+nAY
 nxW
 nxW
 nxW
@@ -71563,7 +71587,7 @@ rxs
 sTQ
 mSh
 jEQ
-nxW
+fHi
 dYE
 nxW
 wTU
@@ -71770,7 +71794,7 @@ fPU
 nxW
 wTU
 xbk
-wTU
+rwV
 nxW
 dYE
 qvf
@@ -71969,7 +71993,7 @@ veL
 jEQ
 nxW
 dYE
-nxW
+fHi
 wTU
 wTU
 wTU
@@ -72171,9 +72195,9 @@ veL
 jEQ
 nxW
 jEQ
-nxW
-nxW
-nxW
+fHi
+fHi
+tPQ
 nxW
 nxW
 jEQ
