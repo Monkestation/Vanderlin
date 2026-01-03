@@ -1131,12 +1131,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
-"aBL" = (
-/obj/effect/mapping_helpers/access/keyset/town/tower,
-/obj/effect/mapping_helpers/access/locker,
-/obj/structure/window/openclose,
-/turf/open/floor/greenstone,
-/area/indoors/town/magician)
 "aBS" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/brflowers,
@@ -107281,7 +107275,7 @@ kwJ
 kwJ
 eYe
 jFB
-aBL
+tOP
 dwK
 ars
 saI
