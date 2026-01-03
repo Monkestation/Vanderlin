@@ -21,6 +21,7 @@
 		/datum/skill/combat/knives = 1,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/craft/crafting = 1,
+		/datum/skill/misc/music = list(4, 4),
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 3,
@@ -46,10 +47,17 @@
 
 /datum/job/advclass/pilgrim/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.clamped_adjust_skillrank(/datum/skill/misc/music, 4, 4, TRUE)
-
-	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
-		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+	var/static/list/instruments = list(
+		"Harp" = /obj/item/instrument/harp,
+		"Lute" = /obj/item/instrument/lute,
+		"Accordion" = /obj/item/instrument/accord,
+		"Guitar" = /obj/item/instrument/guitar,
+		"Flute" = /obj/item/instrument/flute,
+		"Drum" = /obj/item/instrument/drum,
+		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
+		"Viola" = /obj/item/instrument/viola
+	)
+	spawned.select_equippable(player_client, instruments, 10 SECONDS, "Choose your instrument.", "XYLIX")
 
 	var/datum/inspiration/I = new /datum/inspiration(spawned)
 	I.grant_inspiration(spawned, bard_tier = BARD_T3)
@@ -61,6 +69,7 @@
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	belt = /obj/item/storage/belt/leather
+	cloak = /obj/item/clothing/cloak/raincloak/colored/blue
 	armor = /obj/item/clothing/armor/leather/vest
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/weapon/knife/dagger/steel/special
@@ -72,23 +81,5 @@
 	if(prob(30))
 		gloves = /obj/item/clothing/gloves/fingerless
 
-	cloak = /obj/item/clothing/cloak/raincloak/colored/blue
 	if(prob(50))
 		cloak = /obj/item/clothing/cloak/raincloak/colored/red
-
-	var/instruments = list(
-		"Harp" = /obj/item/instrument/harp,
-		"Lute" = /obj/item/instrument/lute,
-		"Accordion" = /obj/item/instrument/accord,
-		"Guitar" = /obj/item/instrument/guitar,
-		"Flute" = /obj/item/instrument/flute,
-		"Drum" = /obj/item/instrument/drum,
-		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola
-	)
-	var/instrument_choice = input("Choose your instrument.", "XYLIX") as anything in instruments
-	equipped_human.set_blindness(0)
-	if(instrument_choice && instruments[instrument_choice])
-		backr = instruments[instrument_choice]
-	else
-		backr = /obj/item/instrument/lute
