@@ -559,7 +559,7 @@ SUBSYSTEM_DEF(gamemode)
 		if(QDELETED(player) || !player.client || !player.mind || player.mind.picking)
 			continue
 
-		if(job_ban && is_banned_from(player.ckey, list(job_ban)))
+		if(job_ban && is_banned_from(player.ckey, job_ban))
 			continue
 
 		var/checked_one_box = FALSE

@@ -8,10 +8,8 @@
 //then you MUST update the database!
 #define ROLE_MANIAC				"Maniac"
 #define ROLE_WEREWOLF			"Werewolf"
-#define ROLE_VAMPIRE			"Vampire"
-#define ROLE_NBEAST				"Vampire Lord"
+#define ROLE_NBEAST				"Vampire"
 #define ROLE_BANDIT				"Bandit"
-#define ROLE_DELF				"Dark Elf"
 #define ROLE_PREBEL				"Peasant Rebel"
 #define ROLE_ZIZOIDCULTIST		"Zizoid Cultist"
 #define ROLE_LICH				"Lich"
