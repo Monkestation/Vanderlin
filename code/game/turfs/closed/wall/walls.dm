@@ -26,7 +26,7 @@
 	opacity = FALSE
 	max_integrity = 800
 	explosion_block = 2
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE|LETPASSTHROW|NOTLETPASSTHROWNMOB
 
 /turf/closed/wall/mineral/stone/window/Initialize()
 	. = ..()
@@ -84,7 +84,7 @@
 	opacity = FALSE
 	max_integrity = 1800
 	explosion_block = 2
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE|LETPASSTHROW|NOTLETPASSTHROWNMOB
 
 /turf/closed/wall/mineral/decorstone/window/Initialize()
 	. = ..()

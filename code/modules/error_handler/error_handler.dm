@@ -137,6 +137,10 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 				desclines += ("  " + line) // Pad any unpadded lines, so they look pretty
 			else
 				desclines += line
+			if(findtext(line, "src:") && isdatum(caller.src)) // append qdel info after this line
+				// jank
+				var/datum/caller_src = caller.src
+				desclines += "  src.gc_destroyed: [caller_src.gc_destroyed]"
 	if(usrinfo) //If this info isn't null, it hasn't been added yet
 		desclines.Add(usrinfo)
 	if(silencing)
@@ -155,7 +159,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 #ifdef UNIT_TESTS
 	if(GLOB.current_test)
 		//good day, sir
-		GLOB.current_test.Fail("[main_line]\n[desclines.Join("\n")]")
+		GLOB.current_test.Fail("[main_line]\n[desclines.Join("\n")]", file = E.file, line = E.line)
 #endif
 
 

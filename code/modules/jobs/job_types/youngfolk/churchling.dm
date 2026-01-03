@@ -23,36 +23,53 @@
 	job_bitflag = BITFLAG_CHURCH
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
+	jobstats = list(
+		STATKEY_PER = 1,
+		STATKEY_SPD = 2
+	)
+
+	skills = list(
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/sneaking = 4,
+		/datum/skill/misc/medicine = 1,
+		/datum/skill/magic/holy = 2,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/craft/crafting = 1,
+		/datum/skill/craft/cooking = 1
+	)
+
+	languages = list(/datum/language/celestial)
+
+/datum/job/churchling/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/holder = spawned.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_churching()
+		devotion.grant_to(spawned)
+
 /datum/outfit/churchling
 	name = "Churchling"
-
-/datum/outfit/churchling/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	if(H.gender == FEMALE)
-		head = /obj/item/clothing/head/armingcap
-		armor = /obj/item/clothing/shirt/dress/gen/colored/random
-		shirt = /obj/item/clothing/shirt/undershirt
-	else
-		armor = /obj/item/clothing/shirt/robe
-		shirt = /obj/item/clothing/shirt/undershirt
+	neck = /obj/item/clothing/neck/psycross/silver/undivided
+	armor = /obj/item/clothing/shirt/robe
+	shirt = /obj/item/clothing/shirt/undershirt
 	pants = /obj/item/clothing/pants/tights
 	belt = /obj/item/storage/belt/leather/rope
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	beltl = /obj/item/key/church
-	neck = /obj/item/clothing/neck/psycross/silver
-	switch(H.patron?.type)
+
+/datum/outfit/churchling/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == FEMALE)
+		head = /obj/item/clothing/head/armingcap
+		armor = /obj/item/clothing/shirt/dress/gen/colored/random
+		shirt = /obj/item/clothing/shirt/undershirt
+
+	switch(equipped_human.patron?.type)
 		if(/datum/patron/divine/astrata)
 			neck = /obj/item/clothing/neck/psycross/silver/astrata
-		if(/datum/patron/divine/necra) //Necra acolytes are now gravetenders
+		if(/datum/patron/divine/necra)
 			neck = /obj/item/clothing/neck/psycross/silver/necra
 		if(/datum/patron/divine/eora)
 			neck = /obj/item/clothing/neck/psycross/silver/eora
@@ -70,15 +87,3 @@
 			neck = /obj/item/clothing/neck/psycross/silver/xylix
 		if(/datum/patron/divine/malum)
 			neck = /obj/item/clothing/neck/psycross/silver/malum
-
-	H.change_stat(STATKEY_PER, 1)
-	H.change_stat(STATKEY_SPD, 2)
-	if(!H.has_language(/datum/language/celestial)) // For discussing church matters with the other Clergy
-		H.grant_language(/datum/language/celestial)
-		to_chat(H, "<span class='info'>I can speak Celestial with ,c before my speech.</span>")
-
-	var/holder = H.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_churching()
-		devotion.grant_to(H)

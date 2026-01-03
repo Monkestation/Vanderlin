@@ -85,17 +85,17 @@
 /datum/component/equipment_stress/job_specific/apply_stress(mob/user)
 	var/list/jobs = list(SSjob.GetJob(user.job))
 	jobs |= list(user.mind?.assigned_role) // jobs tend to lie, so let's check both.
+
 	var/run_stress = TRUE // by default, we will try and run stress.
 	for(var/datum/job/J in jobs)
-		if(!run_stress)
+		if(J.parent_job)
+			J = J.parent_job
+
+		//if either your mob job or your mind job are an immune job or department, we will not run the stress.
+		if(is_type_in_list(J, immune_jobs) || (J.department_flag & immune_departments && !is_type_in_list(J, department_exceptions)))
+			run_stress = FALSE
 			break
-		var/datum/job/PJ = J // let's check parent class for those pesky advclasses
-		while(PJ)
-			//if either your mob job or your mind job are an immune job or department, we will not run the stress.
-			if(is_type_in_list(PJ, immune_jobs) || (PJ.department_flag & immune_departments && !is_type_in_list(PJ, department_exceptions)))
-				run_stress = FALSE
-				break
-			PJ = PJ.parent_job
+
 	//xor will invert the result if its TRUE.
 	if(run_stress ^ inverse)
 		return ..()
