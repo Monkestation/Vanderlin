@@ -406,3 +406,8 @@
 			to_chat(user, "<span class='warning'>I'm trapped!</span>")
 		return
 	container_resist(user)
+
+
+#undef NOT_CONSECRATED
+#undef CONSECRATED
+#undef DOUBLY_CONSECRATED

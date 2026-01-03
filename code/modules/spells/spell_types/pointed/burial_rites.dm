@@ -41,7 +41,7 @@
 			if(istype(cast_on, /obj/structure/closet/dirthole)) // if it's a grave, increase it's level of consecration.
 				var/obj/structure/closet/dirthole/grave = cast_on
 				grave.is_consecrated += 1
-				if(grave.is_consecrated < CONSECRATED) // don't count graves as being consecrated multiple time for Necra
+				if(grave.is_consecrated < 1) // don't count graves as being consecrated multiple time for Necra
 					SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
 					record_round_statistic(STATS_GRAVES_CONSECRATED)
 			return
