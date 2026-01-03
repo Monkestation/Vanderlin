@@ -8,9 +8,9 @@
 	cmode_music = 'sound/music/cmode/Combat_Weird.ogg'
 
 	jobstats = list(
-		STATKEY_CON = 2,
+		STATKEY_CON = 3,
 		STATKEY_END = 2,
-		STATKEY_PER = 2,
+		STATKEY_PER = 1,
 		STATKEY_INT = -1,
 		STATKEY_SPD = -1,
 	) //4 - Statline - The Idea is that they're tanky and supposed to be able to block hits for a longer time, hence higher CON and END
