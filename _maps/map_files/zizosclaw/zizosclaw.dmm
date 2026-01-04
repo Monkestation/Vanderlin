@@ -556,6 +556,10 @@
 	},
 /turf/open/transparent/openspace,
 /area/under/cavewet)
+"nz" = (
+/obj/structure/flora/newtree/mushroom/green,
+/turf/open/floor/naturalstone,
+/area/under/cavewet)
 "nC" = (
 /obj/structure/bars/cemetery/vertical,
 /turf/open/floor/dirt,
@@ -798,6 +802,10 @@
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/cave)
+"tm" = (
+/obj/structure/flora/newtree/mushroom/red,
+/turf/open/floor/naturalstone,
+/area/under/cavewet)
 "tn" = (
 /obj/machinery/light/fueledstreet/midlamp{
 	pixel_x = 0;
@@ -1594,6 +1602,10 @@
 	dir = 8
 	},
 /area/under/cave)
+"LE" = (
+/obj/structure/flora/newtree/mushroom/yellow,
+/turf/open/floor/naturalstone,
+/area/under/cavewet)
 "LO" = (
 /obj/structure/fluff/walldeco/sign/saiga{
 	name = "The Bloodied Newt"
@@ -53014,7 +53026,7 @@ rW
 rW
 rW
 rW
-vO
+rW
 rW
 rW
 rW
@@ -53221,7 +53233,7 @@ rW
 rW
 rW
 rW
-vO
+rW
 rW
 rW
 rW
@@ -53823,7 +53835,7 @@ rW
 rW
 rW
 rW
-vO
+rW
 rW
 rW
 rW
@@ -54828,14 +54840,14 @@ rW
 rW
 rW
 rW
+rW
+rW
+rW
 vO
 rW
 rW
 rW
-rW
-rW
-rW
-rW
+tm
 rW
 rW
 rW
@@ -55444,7 +55456,7 @@ rW
 rW
 rW
 rW
-Wj
+ZN
 rW
 Xl
 Xl
@@ -55639,11 +55651,11 @@ rW
 rW
 rW
 rW
+nz
 rW
 rW
 rW
-rW
-rW
+LE
 rW
 rW
 ZN
@@ -56050,7 +56062,7 @@ rW
 rW
 rW
 ZN
-pn
+rW
 pn
 rW
 rW
@@ -57680,7 +57692,7 @@ ZN
 rW
 rW
 rW
-vO
+rW
 rW
 rW
 ik
@@ -58485,7 +58497,7 @@ ZN
 ZN
 rW
 rW
-vO
+rW
 rW
 Vd
 Vd
@@ -59494,7 +59506,7 @@ Xx
 Xx
 Xx
 rW
-vO
+rW
 rW
 Vd
 Vd

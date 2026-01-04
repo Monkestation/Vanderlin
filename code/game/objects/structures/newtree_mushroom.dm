@@ -149,24 +149,141 @@
 	icon_state = "mushbranchb-extend"
 	base_icon_state = "mushbranchb-extend"
 	glowcolour = "#aee8ec"
-	underlay_base = "center-mushroom-blue"
+	underlay_base = "center-mushroomb"
 	num_underlay_icons = 1
 
 /obj/structure/flora/newbranch/mushroom/blue
 	icon_state = "mushbranchb-end1"
 	base_icon_state = "mushbranchb-end"
 	glowcolour = "#aee8ec"
-	underlay_base = "center-mushroom-blue"
+	underlay_base = "center-mushroomb"
 	num_underlay_icons = 1
 
 /obj/structure/flora/newleaf/corner/mushroom/blue
-	icon_state = "corner-mushroom-blue"
-	base_icon_state = "corner-mushroom-blue"
+	icon_state = "corner-mushroomb1"
+	base_icon_state = "corner-mushroomb1"
 	num_random_icons = 0
 	glowcolour = "#799ece"
 
 /obj/structure/flora/newleaf/mushroom/blue
-	icon_state = "center-mushroom-blue"
-	base_icon_state = "center-mushroom-blue"
+	icon_state = "center-mushroomb1"
+	base_icon_state = "center-mushroomb1"
 	num_random_icons = 0
 	glowcolour = "#799ece"
+
+// Green
+/obj/structure/flora/newtree/mushroom/green
+	icon_state = "mushtreeg"
+	base_icon_state = "mushtreeg"
+	underlay_base = "center-mushroom-green"
+	num_underlay_icons = 1
+	glowcolour = "#aee8ec"
+	tree_stem = /obj/structure/flora/newtree/mushroom/green
+	tree_branch = /obj/structure/flora/newbranch/mushroom/green
+	tree_branch_connector = /obj/structure/flora/newbranch/connector/mushroom/green
+	leaf_corner = /obj/structure/flora/newleaf/corner/mushroom/green
+	leaf_full = /obj/structure/flora/newleaf/mushroom/green
+
+/obj/structure/flora/newbranch/connector/mushroom/green
+	icon_state = "mushbranchg-extend"
+	base_icon_state = "mushbranchg-extend"
+	glowcolour = "#c1f1d4"
+	underlay_base = "center-mushroomg"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newbranch/mushroom/green
+	icon_state = "mushbranchg-end1"
+	base_icon_state = "mushbranchg-end"
+	glowcolour = "#c1f1d4"
+	underlay_base = "center-mushroomg"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newleaf/corner/mushroom/green
+	icon_state = "corner-mushroomg1"
+	base_icon_state = "corner-mushroomg1"
+	num_random_icons = 0
+	glowcolour = "#79ceab"
+
+/obj/structure/flora/newleaf/mushroom/green
+	icon_state = "center-mushroomg1"
+	base_icon_state = "center-mushroomg1"
+	num_random_icons = 0
+	glowcolour = "#79ceab"
+
+// Yellow
+/obj/structure/flora/newtree/mushroom/yellow
+	icon_state = "mushtreey"
+	base_icon_state = "mushtreey"
+	underlay_base = "center-mushroom-yellow"
+	num_underlay_icons = 1
+	glowcolour = "#aee8ec"
+	tree_stem = /obj/structure/flora/newtree/mushroom/yellow
+	tree_branch = /obj/structure/flora/newbranch/mushroom/yellow
+	tree_branch_connector = /obj/structure/flora/newbranch/connector/mushroom/yellow
+	leaf_corner = /obj/structure/flora/newleaf/corner/mushroom/yellow
+	leaf_full = /obj/structure/flora/newleaf/mushroom/yellow
+
+/obj/structure/flora/newbranch/connector/mushroom/yellow
+	icon_state = "mushbranchy-extend"
+	base_icon_state = "mushbranchy-extend"
+	glowcolour = "#edf0c8"
+	underlay_base = "center-mushroomy"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newbranch/mushroom/yellow
+	icon_state = "mushbranchy-end1"
+	base_icon_state = "mushbranchy-end"
+	glowcolour = "#edf0c8"
+	underlay_base = "center-mushroomy"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newleaf/corner/mushroom/yellow
+	icon_state = "corner-mushroomy1"
+	base_icon_state = "corner-mushroomy1"
+	num_random_icons = 0
+	glowcolour = "#ce9f79"
+
+/obj/structure/flora/newleaf/mushroom/yellow
+	icon_state = "center-mushroomy1"
+	base_icon_state = "center-mushroomy1"
+	num_random_icons = 0
+	glowcolour = "#ce9f79"
+
+// Red
+/obj/structure/flora/newtree/mushroom/red
+	icon_state = "mushtreer"
+	base_icon_state = "mushtreer"
+	underlay_base = "center-mushroom-red"
+	num_underlay_icons = 1
+	glowcolour = "#aee8ec"
+	tree_stem = /obj/structure/flora/newtree/mushroom/red
+	tree_branch = /obj/structure/flora/newbranch/mushroom/red
+	tree_branch_connector = /obj/structure/flora/newbranch/connector/mushroom/red
+	leaf_corner = /obj/structure/flora/newleaf/corner/mushroom/red
+	leaf_full = /obj/structure/flora/newleaf/mushroom/red
+
+/obj/structure/flora/newbranch/connector/mushroom/red
+	icon_state = "mushbranchr-extend"
+	base_icon_state = "mushbranchr-extend"
+	glowcolour = "#edf0c8"
+	underlay_base = "center-mushroomr"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newbranch/mushroom/red
+	icon_state = "mushbranchr-end1"
+	base_icon_state = "mushbranchr-end"
+	glowcolour = "#edf0c8"
+	underlay_base = "center-mushroomr"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newleaf/corner/mushroom/red
+	icon_state = "corner-mushroomr1"
+	base_icon_state = "corner-mushroomr1"
+	num_random_icons = 0
+	glowcolour = "#ce9f79"
+
+/obj/structure/flora/newleaf/mushroom/red
+	icon_state = "center-mushroomr1"
+	base_icon_state = "center-mushroomr1"
+	num_random_icons = 0
+	glowcolour = "#ce9f79"
