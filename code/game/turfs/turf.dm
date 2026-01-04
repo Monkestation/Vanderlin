@@ -622,9 +622,9 @@
 		return
 	// Make toxins and blazaam vomit look different
 	if(toxvomit == VOMIT_PURPLE)
-		V.icon_state = "vomitpurp_[pick(1,4)]"
+		V.icon_state = "vomitpurp_[rand(1,4)]"
 	else if (toxvomit == VOMIT_TOXIC)
-		V.icon_state = "vomittox_[pick(1,4)]"
+		V.icon_state = "vomittox_[rand(1,4)]"
 	if (iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(C.reagents)
