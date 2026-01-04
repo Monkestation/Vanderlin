@@ -440,24 +440,24 @@
 #define SHIRT_LAYER 28
 /// For items that go in shirt or armor slots and clothes like armor (vests)
 #define SHIRT_HIGH_LAYER 27
-/// Layer for bodyparts that should appear above every other bodypart - used for arms when facing EAST / WEST
+/// Layer for bodyparts that should appear above every other bodypart
 #define BODYPARTS_HIGH_LAYER 26
-/// Gloves layer
-#define GLOVES_LAYER 24
 /// Shirt sleeves layer
 #define SLEEVES_LAYER 25
 /// Wrists layer
-#define WRISTS_LAYER 23
+#define WRISTS_LAYER 24
 /// Armor layer
-#define ARMOR_LAYER 22
+#define ARMOR_LAYER 23
 /// Tabbard layer (why not cloak? don't know)
-#define TABARD_LAYER 21
+#define TABARD_LAYER 22
 /// Belt layer, only when looking south
-#define BELT_LAYER 20
+#define BELT_LAYER 21
 /// Things that layer under cloaks
-#define UNDER_CLOAK_LAYER 19
+#define UNDER_CLOAK_LAYER 20
 /// Hands bodypart layer
-#define BODYPARTS_HANDS_LAYER 18
+#define BODYPARTS_HANDS_LAYER 19
+/// Gloves layer
+#define GLOVES_LAYER 18
 /// Ring layer
 #define RING_LAYER 17
 /// Glasses layer
