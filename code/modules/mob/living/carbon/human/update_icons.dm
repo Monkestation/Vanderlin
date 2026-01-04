@@ -126,7 +126,7 @@ GLOBAL_PROTECT(no_child_icons)
 				hidechest = FALSE
 
 	var/mutable_appearance/damage_overlay = mutable_appearance(layer = -DAMAGE_LAYER, appearance_flags = KEEP_TOGETHER)
-	
+
 	for(var/obj/item/bodypart/body_part as anything in bodyparts)
 		if(!body_part.dmg_overlay_type || body_part.skeletonized)
 			continue
@@ -152,7 +152,7 @@ GLOBAL_PROTECT(no_child_icons)
 			if(!wound.mob_overlay)
 				continue
 			damage_overlay.add_overlay(mutable_appearance(limb_icon, "[body_part.body_zone]_[wound.mob_overlay]", -DAMAGE_LAYER))
-		
+
 		var/used_offset = body_part.offset
 		if(used_offset in offsets)
 			damage_overlay.pixel_x += offsets[used_offset][1]
@@ -497,6 +497,7 @@ GLOBAL_PROTECT(no_child_icons)
 			overlays_standing[HEAD_LAYER] = head_overlay
 
 	apply_overlay(HEAD_LAYER)
+	update_body_parts(redraw = TRUE)
 	update_body() //hoodies
 
 /mob/living/carbon/human/update_inv_belt(hide_experimental = FALSE)
@@ -932,7 +933,7 @@ GLOBAL_PROTECT(no_child_icons)
 		if(LAZYACCESS(offsets, OFFSET_SHIRT))
 			shirt_overlay.pixel_x += offsets[OFFSET_SHIRT][1]
 			shirt_overlay.pixel_y += offsets[OFFSET_SHIRT][2]
-				
+
 		overlays_standing[SHIRT_LAYER] = shirt_overlay
 
 	apply_overlay(SHIRT_LAYER)
@@ -1463,7 +1464,7 @@ in this situation default_icon_file is expected to match either the lefthand_ or
 
 	//GENERATE NEW LIMBS
 	var/list/new_limbs = list()
-	
+
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
 		var/hideboob = FALSE //used to tell if we should hide boobs, basically
 		if(BP.body_zone == BODY_ZONE_CHEST)
