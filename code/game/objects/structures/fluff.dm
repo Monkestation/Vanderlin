@@ -227,7 +227,11 @@
 	icon_state = initial(icon_state)
 
 /obj/structure/bars/cemetery
+	icon = 'icons/roguetown/misc/fence.dmi'
 	icon_state = "cemetery"
+
+/obj/structure/bars/cemetery/vertical
+	icon_state = "cemetery_vert"
 
 /// like bars but indestructible and you cant throw through them
 /obj/structure/bars/cemetery/underworld
