@@ -205,13 +205,6 @@
 /datum/job_pack/bloodsucker_bum
 	name = "The Bum"
 
-	pack_skills = list(
-		/datum/skill/craft/crafting = 4,
-		/datum/skill/craft/carpentry = 3,
-		/datum/skill/misc/sewing = 4,
-		/datum/skill/combat/axesmaces = 4
-	)
-
 	pack_traits = list(
 		TRAIT_DODGEEXPERT,
 	)

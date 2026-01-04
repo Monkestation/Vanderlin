@@ -366,5 +366,134 @@
                 "bugfix": "Death knights not having the normal skeleton traits"
             }
         ]
+    },
+    "2025-12-25": {
+        "snowyseshi": [
+            {
+                "rscadd": "Added new Zizo rituals"
+            },
+            {
+                "rscadd": "Added 2 new traits"
+            },
+            {
+                "rscadd": "Skeletons are of the cabal"
+            },
+            {
+                "balance": "cultists recieve 2 polearm levels, up to skilled."
+            },
+            {
+                "balance": "cultists don't have a cap anymore"
+            },
+            {
+                "balance": "garrison and nobles can become cultists now"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new mason role for the town. Essentially the pilgrim mason, except a towner."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Rework Gallowglass, as well as new helmet."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixes Maneaters being able to eat limbs even through armor"
+            },
+            {
+                "code_imp": "Code Maintenance on the Maneater proc which was gross"
+            }
+        ],
+        "YellowHarlequin": [
+            {
+                "code_imp": "Added new words to spanish_replacement.json"
+            }
+        ]
+    },
+    "2025-12-26": {
+        "TheMrGlasses": [
+            {
+                "bugfix": "Matthios Iconoclast now correctly spawns with their flail."
+            }
+        ]
+    },
+    "2025-12-27": {
+        "Draggeru": [
+            {
+                "map": "Removes the bars from the keep balcony and the wizard college"
+            }
+        ]
+    },
+    "2025-12-28": {
+        "snowyseshi": [
+            {
+                "bugfix": "fixed bloodsucker bum getting more skills than he should"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "admin": "More admin ghost choices"
+            }
+        ]
+    },
+    "2025-12-31": {
+        "lmenvs": [
+            {
+                "code_imp": "adjust_triumphs allows for any ckey to be passed"
+            }
+        ],
+        "wgtjunior743": [
+            {
+                "bugfix": "A few be special like the skeleton one not working"
+            }
+        ],
+        "JILMbIX": [
+            {
+                "rscadd": "Added anvil craft for knuckles, and leatherworking craft for bullets pouch"
+            },
+            {
+                "bugfix": "leather belt and leather trousers are craftable again"
+            }
+        ],
+        "Mercadier": [
+            {
+                "qol": "Nooses no longer require a hammer to build."
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "balance": "Changed Glass bottles to hold 75 units, shot glasses to hold 5, and teacups to hold 25."
+            }
+        ],
+        "Gigigger": [
+            {
+                "balance": "reduced overpriced sellprices of opened clam, falchion and dwarven warhammer"
+            },
+            {
+                "bugfix": "now raw rosellusk can be obtained by opening clam, as intended"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "Added new bronze items."
+            }
+        ],
+        "aberrantQuesrist": [
+            {
+                "bugfix": "River tiles now show after having been broken for far too long."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "ported shivering animation from TG"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "bugfix": "Retouched the Vagabond hairstyle"
+            }
+        ]
     }
 }

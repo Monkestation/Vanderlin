@@ -36,6 +36,14 @@
 		/obj/item/natural/fibers = 2,
 	)
 	output = /obj/item/ammo_holder/dartpouch
+	
+/datum/repeatable_crafting_recipe/leather/storage/bulletpouch
+	name = "bullet pouch"
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2,
+	)
+	output = /obj/item/ammo_holder/bullet
 
 /datum/repeatable_crafting_recipe/leather/storage/magepouch
 	name = "summoners pouch"
@@ -251,7 +259,7 @@
 	name = "leather pants"
 	output = /obj/item/clothing/pants/trou/leather
 
-/datum/repeatable_crafting_recipe/leather/pants
+/datum/repeatable_crafting_recipe/leather/pants/mourning
 	name = "mourning pants"
 	output = /obj/item/clothing/pants/trou/leather/mourning
 
@@ -344,7 +352,7 @@
 	output = /obj/item/storage/belt/leather
 	craftdiff = 2
 
-/datum/repeatable_crafting_recipe/leather/belt
+/datum/repeatable_crafting_recipe/leather/suspenders
 	name = "suspenders"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,

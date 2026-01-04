@@ -269,6 +269,22 @@
 	held_items[I]["NAME"] = I.name
 	held_items[I]["PRICE"] = 20
 
+/obj/structure/fake_machine/vendor/voyage
+	lockids = list(ACCESS_INN)
+
+/obj/structure/fake_machine/vendor/voyage/Initialize()
+	. = ..()
+	for(var/X in list(/obj/item/key/roomi, /obj/item/key/roomii, /obj/item/key/roomiii))
+		var/obj/I = new X(src)
+		held_items[I] = list()
+		held_items[I]["NAME"] = I.name
+		held_items[I]["PRICE"] = 20
+	for(var/X in list(/obj/item/key/luxroomi))
+		var/obj/I = new X(src)
+		held_items[I] = list()
+		held_items[I]["NAME"] = I.name
+		held_items[I]["PRICE"] = 60
+
 /obj/structure/fake_machine/vendor/steward
 	lockids = list(ACCESS_STEWARD)
 	light_color = "#1b7bf1"
@@ -304,12 +320,15 @@
 	name = "INNKEEP"
 	lockids = list(ACCESS_INN)
 
+/obj/structure/fake_machine/vendor/voyage
+	name = "SHIPMATE"
+	lockids = list(ACCESS_INN)
+
 /obj/structure/fake_machine/vendor/butcher
 	name = "BUTCHER"
 	lockids = list(ACCESS_BUTCHER)
 	lighting_color = "#8d1818"
 	filled_overlay = "vendor-butcher"
-
 
 /obj/structure/fake_machine/vendor/soilson
 	name = "FARMHAND"

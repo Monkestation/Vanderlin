@@ -104,10 +104,66 @@
 	additional_items = list(/obj/item/ingot/bronze, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/bronze
 
-/datum/anvil_recipe/weapons/bronze/spear
+/datum/anvil_recipe/weapons/bronze/cane
 	name = "Artificer Cane (+ Copper)"
 	additional_items = list(/obj/item/ingot/copper)
 	created_item = /obj/item/weapon/mace/cane/bronze
+
+/datum/anvil_recipe/weapons/bronze/shortsword
+	name = "Bronze Shortsword"
+	created_item = /obj/item/weapon/sword/short/bronze
+
+/datum/anvil_recipe/weapons/bronze/sword
+	name = "Bronze Sword"
+	created_item = /obj/item/weapon/sword/bronze
+
+/datum/anvil_recipe/weapons/bronze/sengese
+	name = "Bronze Sengese"
+	created_item = /obj/item/weapon/sword/scimitar/sengese/bronze
+
+/datum/anvil_recipe/weapons/bronze/dadao
+	name = "Bronze Dadao (+1 Bronze Bar)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/weapon/sword/sabre/dadao/bronze
+
+/datum/anvil_recipe/weapons/bronze/dadao
+	name = "Bronze Shishpar (+1 Bronze Bar)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/weapon/mace/shishpar/bronze
+
+/datum/anvil_recipe/weapons/bronze/urumi
+	name = "Bronze Urumi (+1 Bronze Bar)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/weapon/whip/urumi/bronze
+
+/datum/anvil_recipe/weapons/bronze/mace
+	name = "Bronze Mace (+ Stick)"
+	additional_items = list(/obj/item/grown/log/tree/stick)
+	created_item = /obj/item/weapon/mace/bronze
+
+/datum/anvil_recipe/weapons/bronze/axe
+	name = "Bronze Axe (+ Stick)"
+	additional_items = list(/obj/item/grown/log/tree/stick)
+	created_item = /obj/item/weapon/axe/bronze
+
+/datum/anvil_recipe/weapons/bronze/elvenclub
+	name = "Bronze Elven Warclub"
+	created_item = /obj/item/weapon/mace/elvenclub/bronze
+
+/datum/anvil_recipe/weapons/bronze/dagger
+	name = "2x Bronze Daggers"
+	created_item = /obj/item/weapon/knife/dagger/bronze
+	createditem_extra = 1
+
+/datum/anvil_recipe/weapons/bronze/throwingdagger
+	name = "3x Bronze Throwing Daggers"
+	created_item = /obj/item/weapon/knife/throwingknife/bronze
+	createditem_extra = 2
+
+/datum/anvil_recipe/weapons/bronze/ji
+	name = "Bronze Dagger-Ax (+ Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/billhook/ji/bronze
 
 // --------- IRON ------------ Middle Tier, what most disgusting Men at Arms have
 /datum/anvil_recipe/weapons/iron
@@ -641,7 +697,13 @@
 	recipe_name = "a Steel Kukri"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/knife/dagger/kukri/steel
-
+	
+/datum/anvil_recipe/weapons/steel/knuckles	
+	name = "Knuckles"
+	recipe_name = "a Steel Knuckles"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/knuckles
+	
 /datum/anvil_recipe/weapons/steel/dagger_steel
 	name = "2x Steel Daggers"
 	recipe_name = "a couple Daggers"
@@ -855,10 +917,9 @@
 	created_item = /obj/item/weapon/sword/scimitar/falchion
 
 /datum/anvil_recipe/weapons/steel/elvenclub
-	name = "Regal Elven Warclub (+Gold bar)"
-	recipe_name = "a Elven Warclub"
+	name = "Steel Elven Warclub"
+	recipe_name = "a Steel Elven Warclub"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/ingot/gold)
 	created_item = /obj/item/weapon/mace/elvenclub/steel
 
 // --------- SILVER ------------  Harder to craft, does less damage and has less durability than steel, but banes undead.
@@ -931,9 +992,17 @@
 
 /datum/anvil_recipe/weapons/silver/gada
 	name = "Regal Gada (+1 Gold bar)"
+	recipe_name = "a Regal Gada"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/gold)
 	created_item = /obj/item/weapon/mace/silver/gada
+
+/datum/anvil_recipe/weapons/silver/elvenclub
+	name = "Regal Elven Club (+1 Gold bar)"
+	recipe_name = "a Silver Elven Warclub"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/weapon/mace/elvenclub/silver
 
 /datum/anvil_recipe/weapons/psy/axe
 	name = "Psydonian War Axe (+1 B. Silver, +1 Stick)"

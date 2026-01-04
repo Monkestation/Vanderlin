@@ -11,7 +11,12 @@
 			/obj/item/clothing/armor/leather = 10,
 			/obj/item/clothing/gloves/chain/iron = 3,
 			/obj/item/clothing/neck/coif = 3,
-			/obj/item/natural/poo = 5
+			/obj/item/natural/poo = 5,
+			/obj/item/statue/bronze/figurine = 3,
+			/obj/item/statue/bronze/vase = 2,
+			/obj/item/statue/bronze/totem = 1,
+			/obj/item/statue/bronze/comb = 3,
+			/obj/item/weapon/knife/dagger/bronze = 8
 		)
 	)
 
@@ -134,7 +139,17 @@
 			/obj/item/weapon/polearm/eaglebeak/lucerne = 10,
 			/obj/item/weapon/mace = 10,
 			/obj/item/weapon/sword/scimitar/messer = 10,
+			/obj/item/weapon/mace/elvenclub = 7,
+			/obj/item/weapon/sword/sabre/dadao/bronze = 5,
+			/obj/item/weapon/sword/short/bronze = 10,
+			/obj/item/weapon/sword/bronze = 10,
+			/obj/item/weapon/mace/bronze = 10,
+			/obj/item/weapon/polearm/spear/billhook/ji/bronze = 3,
 			/obj/item/weapon/flail/militia = 10,
+			/obj/item/weapon/mace/shishpar/bronze = 5,
+			/obj/item/weapon/whip/urumi/bronze = 2,
+			/obj/item/weapon/mace/elvenclub/bronze = 4,
+			/obj/item/weapon/axe/bronze = 10,
 			/obj/item/weapon/sword/short/iron = 10,
 			/obj/item/weapon/sword/long/greatsword/zwei = 10,
 			/obj/item/gun/ballistic/revolver/grenadelauncher/bow/short = 10,
