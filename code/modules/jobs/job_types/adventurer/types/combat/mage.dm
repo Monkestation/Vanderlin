@@ -18,6 +18,7 @@
 	skills = list(
 		/datum/skill/misc/reading = 4,
 		/datum/skill/magic/arcane = 3,
+		/datum/skill/combat/polearms = 2,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/craft/alchemy = 2,
