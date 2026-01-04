@@ -62,7 +62,7 @@
 		"Rapier" = /obj/item/weapon/sword/rapier/dec, \
 		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade, \
 		)
-	var/choice = spawned.select_equippable(spawned, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
+	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
 	if(!choice)
 		return
 	switch(choice)

@@ -41,7 +41,7 @@
 		"Spear" = /obj/item/weapon/polearm/spear, \
 		"Regal Elven Club" = /obj/item/weapon/mace/elvenclub/steel \
 		)
-	var/choice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Weapon", title = "Black Oak's Guardian")
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon", title = "Black Oak's Guardian")
 	if(!choice)
 		return
 	switch(choice)
