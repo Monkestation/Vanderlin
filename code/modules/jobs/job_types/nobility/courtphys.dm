@@ -9,28 +9,51 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
-
 	allowed_races = RACES_PLAYER_NONHERETICAL
-
 	outfit = /datum/outfit/courtphys
 	give_bank_account = 100
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
-
-	spells = list(
-		/datum/action/cooldown/spell/diagnose,
-	)
-
+	spells = list(/datum/action/cooldown/spell/diagnose)
 	job_bitflag = BITFLAG_ROYALTY
-
 	exp_type = list(EXP_TYPE_MEDICAL)
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_MEDICAL)
-	exp_requirements = list(
-		EXP_TYPE_MEDICAL = 900
+	exp_requirements = list(EXP_TYPE_MEDICAL = 900)
+
+	jobstats = list(
+		STATKEY_STR = -1,
+		STATKEY_INT = 4,
+		STATKEY_CON = -1
 	)
 
-/datum/outfit/courtphys/pre_equip(mob/living/carbon/human/H)
+	skills = list(
+		/datum/skill/misc/reading = 5,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/sewing = 3,
+		/datum/skill/misc/medicine = 5,
+		/datum/skill/craft/alchemy = 3,
+		/datum/skill/labor/mathematics = 3
+	)
+
+	traits = list(
+		TRAIT_EMPATH,
+		TRAIT_STEELHEARTED,
+		TRAIT_DEADNOSE,
+		TRAIT_LEGENDARY_ALCHEMIST
+	)
+
+/datum/job/courtphys/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	H.virginity = TRUE
+	spawned.virginity = TRUE
+
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+
+	if(spawned.dna?.species?.id in RACES_PLAYER_NONDISCRIMINATED)
+		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+
+/datum/outfit/courtphys
+	name = "Court Physician"
 	shoes = /obj/item/clothing/shoes/shortboots
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	backr = /obj/item/storage/backpack/satchel
@@ -44,25 +67,10 @@
 	beltr = /obj/item/weapon/mace/cane/courtphysician
 	armor = /obj/item/clothing/shirt/robe/courtphysician
 	ring = /obj/item/clothing/ring/feldsher_ring
-	if(H.gender == FEMALE)
+
+/datum/outfit/courtphys/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.gender == FEMALE)
 		pants = /obj/item/clothing/pants/skirt/colored/random
 	else
 		pants = /obj/item/clothing/pants/tights/colored/random
-	H.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/alchemy, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.change_stat(STATKEY_STR, -1)
-	H.change_stat(STATKEY_INT, 4)
-	H.change_stat(STATKEY_CON, -1)
-	ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_DEADNOSE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_LEGENDARY_ALCHEMIST, TRAIT_GENERIC)
-	if(H.dna.species.id in RACES_PLAYER_NONDISCRIMINATED) // Astrata forbid a medicator gets nobility
-		ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)

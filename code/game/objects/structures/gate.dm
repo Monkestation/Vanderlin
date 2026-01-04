@@ -42,6 +42,7 @@ GLOBAL_LIST_EMPTY(biggates)
 	icon_state = "bar1"
 	base_state = "bar"
 	opacity = FALSE
+	pass_flags_self = PASSGRILLE|LETPASSTHROW|PASSSTRUCTURE|NOTLETPASSTHROWNMOB
 
 /obj/structure/gate/bars/preopen
 	icon_state = "bar0"

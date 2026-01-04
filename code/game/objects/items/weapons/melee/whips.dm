@@ -262,6 +262,15 @@
 	wdefense = BAD_PARRY
 	can_parry = TRUE
 
+/obj/item/weapon/whip/urumi/bronze
+	name = "bronze urumi"
+	icon_state = "urumi_bronze"
+	force = DAMAGE_WHIP
+	smeltresult = /obj/item/ingot/bronze
+	max_blade_int = 100
+	wdefense = BAD_PARRY
+	can_parry = TRUE
+
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
 	icon_state = "urumi_silver"

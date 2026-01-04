@@ -8,20 +8,41 @@
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
-/datum/outfit/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
+	jobstats = list(
+		STATKEY_STR = 2,
+		STATKEY_INT = -1,
+		STATKEY_END = 2,
+		STATKEY_CON = 1,
+		STATKEY_SPD = 1
+	)
+
+	skills = list(
+		/datum/skill/combat/polearms = 3,
+		/datum/skill/combat/bows = 3,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/misc/reading = 4,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/craft/crafting = 1,
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/medicine = 3,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/riding = 2,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/craft/cooking = 1,
+		/datum/skill/craft/tanning = 1
+	)
+
+	traits = list(
+		TRAIT_STEELHEARTED,
+		TRAIT_DEADNOSE,
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_NOPAINSTUN
+	)
+
+/datum/outfit/adventurer/amazon
+	name = "Amazon (Adventurer)"
 	neck = /obj/item/ammo_holder/dartpouch/poisondarts
 	backl = /obj/item/weapon/polearm/spear
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
@@ -32,12 +53,3 @@
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	armor = /obj/item/clothing/armor/amazon_chainkini
 	shoes = /obj/item/clothing/shoes/boots
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_INT, -1)
-	H.change_stat(STATKEY_END, 2)
-	H.change_stat(STATKEY_CON, 1)
-	H.change_stat(STATKEY_SPD, 1)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_DEADNOSE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOPAINSTUN, TRAIT_GENERIC)

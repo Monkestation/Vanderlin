@@ -106,8 +106,6 @@
 	if (opacity)
 		has_opaque_atom = TRUE
 
-	QUEUE_SMOOTH_NEIGHBORS(src)
-
 	if(shine)
 		make_shiny(shine)
 
@@ -318,7 +316,7 @@
 	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
 
 /turf/proc/zFall(atom/movable/A, levels = 1, force = FALSE)
-	var/turf/target = get_step_multiz(src, DOWN)
+	var/turf/target = GET_TURF_BELOW(src)
 	if(!target || (!isobj(A) && !ismob(A)))
 		return FALSE
 	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))
@@ -624,9 +622,9 @@
 		return
 	// Make toxins and blazaam vomit look different
 	if(toxvomit == VOMIT_PURPLE)
-		V.icon_state = "vomitpurp_[pick(1,4)]"
+		V.icon_state = "vomitpurp_[rand(1,4)]"
 	else if (toxvomit == VOMIT_TOXIC)
-		V.icon_state = "vomittox_[pick(1,4)]"
+		V.icon_state = "vomittox_[rand(1,4)]"
 	if (iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(C.reagents)

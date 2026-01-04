@@ -179,6 +179,8 @@ GLOBAL_LIST_EMPTY(required_map_items)
 	ignore += typesof(/obj/effect/buildmode_line)
 	//runtimes without a landmark to spawn on
 	ignore += typesof(/obj/structure/industrial_lift)
+	//will delay the test a LOT and cause a ton of spawns
+	ignore += typesof(/obj/effect/landmark/mapGenerator)
 
 	ignore += typesof(/obj/effect/spawner)
 	ignore += typesof(/atom/movable/screen)

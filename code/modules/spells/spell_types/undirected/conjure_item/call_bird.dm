@@ -23,6 +23,7 @@
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/grenzel
+	name = "Call Imperial Messenger"
 	destinations = list(
 		"My family" = "their family",
 		"Grenzelhoft Imperiate" = "the Grenzelhoft Imperiate",
@@ -30,18 +31,21 @@
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/priest
+	name = "Call Holy Messenger"
 	destinations = list(
 		"The Archbishop" = "the Archbishop",
 		"Cancel" = "cancel",
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/zalad
+	name = "Call Guild Messenger"
 	destinations = list(
 		"The Mercator Guild" = "the Mercator Guild",
 		"Cancel" = "cancel",
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/inquisitor
+	name = "Call Inquisitorial Messenger"
 	destinations = list(
 		"Holy Bishop of the Inquisition" = "the Holy Bishop of the Inquisition",
 		"Cancel" = "cancel",
