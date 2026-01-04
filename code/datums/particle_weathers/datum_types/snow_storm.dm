@@ -16,7 +16,7 @@
 
 /datum/particle_weather/snow_gentle
 	name = "Gentle Snow"
-	desc = "Gentle Rain, la la description."
+	desc = "Gentle Snow, la la description."
 	particleEffectType = /particles/weather/snow
 
 	scale_vol_with_severity = TRUE
@@ -41,7 +41,7 @@
 
 /datum/particle_weather/snow_storm
 	name = "Snow Storm"
-	desc = "Gentle Rain, la la description."
+	desc = "Snow Storm, la la description."
 	particleEffectType = /particles/weather/snow
 
 	scale_vol_with_severity = TRUE
@@ -68,6 +68,8 @@
 	probability = 40
 
 /datum/weather_effect/snow/effect_affect(turf/target_turf)
+	if(isgroundlessturf(target_turf))
+		return // snow cannot accumulate here
 	if(!target_turf.snow)
 		new /obj/structure/snow(target_turf, 1)
 	else
@@ -78,13 +80,6 @@
 
 /datum/particle_weather/snow_storm/weather_act(mob/living/L)
 	L.snow_shiver = world.time + 10 SECONDS
-
-
-/datum/weather_effect/snow_storm/effect_affect(turf/target_turf)
-	if(!target_turf.snow)
-		new /obj/structure/snow(target_turf, 1)
-	else
-		target_turf.snow.weathered(src)
 
 /particles/fog
 	icon = 'icons/effects/particles/smoke.dmi'

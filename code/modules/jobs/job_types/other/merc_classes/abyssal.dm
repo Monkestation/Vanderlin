@@ -15,7 +15,7 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/polearms = 4,
 		/datum/skill/combat/swords = 2,
 	)
 
@@ -68,5 +68,4 @@
 	backpack_contents = list(
 		/obj/item/key/mercenary,
 		/obj/item/storage/belt/pouch/coins/poor,
-		/obj/item/reagent_containers/food/snacks/fish/swordfish
 	)
