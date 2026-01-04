@@ -27,6 +27,8 @@
 	if(has_reflection)
 		create_reflection()
 	recalculate_stats()
+	for(var/mob_prefab in mob_prefabs)
+		assign_mob_prefab_to_target(target, mob_prefab)
 
 /mob/living/Destroy()
 	if(FACTION_MATTHIOS in faction)
