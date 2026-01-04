@@ -29,7 +29,6 @@
 	)
 
 	traits = list(
-		TRAIT_DODGEEXPERT,
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED
 	)
