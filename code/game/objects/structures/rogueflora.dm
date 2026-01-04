@@ -402,6 +402,8 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
+			if(!looty.len && (world.time > res_replenish))
+				loot_replenish()
 			if(prob(50) && looty.len)
 				if(looty.len == 1)
 					res_replenish = world.time + 8 MINUTES
@@ -412,6 +414,8 @@
 					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
 					return
 			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
+			if(looty.len)
+				attack_hand(user)
 			if(!looty.len)
 				to_chat(user, "<span class='warning'>Picked clean.</span>")
 
@@ -525,6 +529,8 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
+			if(!looty2.len && (world.time > res_replenish2))
+				loot_replenish2()
 			if(prob(50) && looty2.len)
 				if(looty2.len == 1)
 					res_replenish2 = world.time + 8 MINUTES
@@ -535,6 +541,8 @@
 					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					return
 			user.visible_message(span_warning("[user] searches through [src]."))
+			if(looty2.len)
+				attack_hand(user)
 			if(!looty2.len)
 				to_chat(user, span_warning("Picked clean."))
 
@@ -568,6 +576,8 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
+			if(!looty3.len && (world.time > res_replenish3))
+				loot_replenish3()
 			if(prob(50) && looty3.len)
 				if(looty3.len == 1)
 					res_replenish3 = world.time + 8 MINUTES
@@ -578,6 +588,8 @@
 					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
 					return
 			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
+			if(looty3.len)
+				attack_hand(user)
 			if(!looty3.len)
 				to_chat(user, "<span class='warning'>Picked clean.</span>")
 
