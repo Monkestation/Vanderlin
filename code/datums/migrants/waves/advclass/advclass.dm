@@ -160,6 +160,7 @@
 
 /datum/migrant_wave/folkheroes
 	name = "Folkheroes"
+	max_spawns = 1
 	downgrade_wave = /datum/migrant_wave/folkheroes_down_one
 	weight = 8
 	roles = list(
