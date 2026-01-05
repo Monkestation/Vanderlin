@@ -35,7 +35,7 @@
 	faretype = FARE_NEUTRAL
 	modified = TRUE
 	rotprocess = SHELFLIFE_DECENT
-	bitesize = 5
+	bitesize = 4
 
 /obj/item/reagent_containers/food/snacks/cooked/frysteak_onion
 	name = "frysteak and onions"
