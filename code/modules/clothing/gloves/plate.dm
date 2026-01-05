@@ -34,7 +34,7 @@
 	name = "iron plate gauntlets"
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."
 	icon_state = "igauntlets"
-	sellprice = VALUE_IRON_ARMOR/2
+	sellprice = VALUE_IRON_ARMOR
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
 

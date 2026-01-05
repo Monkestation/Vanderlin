@@ -132,11 +132,6 @@
 	craftdiff = 0
 
 // IRON CHAIN ARMOR
-/datum/anvil_recipe/armor/iron/chainmail
-	name = "Iron Maille"
-	recipe_name = "an iron maille shirt"
-	created_item = /obj/item/clothing/armor/chainmail/iron
-
 /datum/anvil_recipe/armor/iron/chainkini
 	name = "Iron Chainkini (+fur)"
 	recipe_name = "Fur skirt and maille chest holder"
@@ -189,14 +184,6 @@
 	created_item = /obj/item/clothing/neck/highcollier/iron/renegadecollar
 	craftdiff = 1
 
-/datum/anvil_recipe/armor/iron/chainglove
-	name = "2x Iron Chain Gauntlets"
-	recipe_name = "two pairs of Chain Gauntlets"
-	req_bar = /obj/item/ingot/iron
-	created_item = /obj/item/clothing/gloves/chain/iron
-	createditem_extra = 1
-	craftdiff = 0
-
 /datum/anvil_recipe/armor/iron/igauntlets
 	name = "Iron Plate Gauntlets"
 	recipe_name = "a pair of Plate Gauntlets"
@@ -219,20 +206,6 @@
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/armor/chainmail/iron
 
-/datum/anvil_recipe/armor/iron/hauberk
-	name = "Hauberk (+Bar)"
-	recipe_name = "a Hauberk"
-	req_bar = /obj/item/ingot/iron
-	additional_items = list(/obj/item/ingot/iron)
-	created_item = /obj/item/clothing/armor/chainmail/hauberk/iron
-
-/datum/anvil_recipe/armor/iron/cuirass
-	name = "Iron Cuirass"
-	recipe_name = "a cuirass"
-	req_bar = /obj/item/ingot/iron
-	created_item = /obj/item/clothing/armor/cuirass/iron
-	craftdiff = 0
-
 /datum/anvil_recipe/armor/iron/platefull
 	name = "Iron Plate Armor (+Bar x3)"
 	recipe_name = "a full set of Full-Plate Armor"
@@ -244,7 +217,6 @@
 /datum/anvil_recipe/armor/iron/platefull_shadow
 	name = "Iron Plate Shadow Armor (+Bar x3)"
 	recipe_name = "a full set of Full-Plate Shadow Armor"
-	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/ingot/iron,/obj/item/ingot/iron,/obj/item/ingot/iron)
 	created_item = /obj/item/clothing/armor/cuirass/iron/shadowplate
 	craftdiff = 2
@@ -252,7 +224,6 @@
 /datum/anvil_recipe/armor/iron/halfplate
 	name = "Iron Half-plate (+Bar x2)"
 	recipe_name = "a Half-Plate Armor"
-	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/ingot/iron,/obj/item/ingot/iron)
 	created_item = /obj/item/clothing/armor/plate/iron
 	craftdiff = 1
@@ -342,11 +313,6 @@
 	recipe_name = "a sturdy lakkarian cap"
 	created_item = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	additional_items = list(/obj/item/ingot/gold)
-
-/datum/anvil_recipe/armor/iron/nasal_helmet
-	name = "Nasal helmet"
-	recipe_name = "a Nasal helmet"
-	created_item = /obj/item/clothing/head/helmet/nasal
 
 /datum/anvil_recipe/armor/iron/skullcap
 	name = "x2 Skullcap"

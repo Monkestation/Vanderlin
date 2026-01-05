@@ -27,6 +27,7 @@
 	body_parts_covered = HEAD_NECK
 	prevent_crits = ALL_EXCEPT_BLUNT
 	block2add = FOV_BEHIND
+	sellprice = VALUE_STEEL_HELMET*3 + SKILL_1
 
 /obj/item/clothing/head/helmet/heavy/psydonbarbute
 	name = "psydonian barbute"
@@ -47,7 +48,7 @@
 	icon_state = "ironplate"
 	flags_inv = HIDEEARS
 	smeltresult = /obj/item/ingot/iron
-	sellprice = VALUE_CHEAP_IRON_HELMET
+	sellprice = VALUE_IRON_ARMOR*2
 	block2add = FOV_BEHIND
 
 	armor = ARMOR_PLATE_BAD
@@ -306,6 +307,7 @@
 	icon_state = "abyssorhelm"
 	item_state = "abyssorhelm"
 	item_weight = 6 * IRON_MULTIPLIER
+	sellprice = VALUE_BRONZE_ITEM + SKILL_2
 
 //............... Sinistar (Graggar) Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/sinistar

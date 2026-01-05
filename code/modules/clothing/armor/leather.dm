@@ -94,6 +94,7 @@
 	prevent_crits = CUT_AND_MINOR_CRITS
 	salvage_result = /obj/item/natural/hide/cured
 	item_weight = 2.2
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_2
 
 /obj/item/clothing/armor/leather/vest/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -189,6 +190,7 @@
 
 	armor = ARMOR_LEATHER
 	body_parts_covered = COVERAGE_VEST
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_3
 
 //................ Silk Coat ............... //
 /obj/item/clothing/armor/leather/jacket/silk_coat

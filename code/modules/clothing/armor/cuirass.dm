@@ -76,6 +76,7 @@
 	icon_state = "shadowplate"
 	item_state = "shadowplate"
 	allowed_race = list(SPEC_ID_ELF, SPEC_ID_DROW)
+	sellprice = VALUE_IRON_ARMOR*4 + SKILL_1
 
 /obj/item/clothing/armor/cuirass/copperchest
 	name = "heart protector"

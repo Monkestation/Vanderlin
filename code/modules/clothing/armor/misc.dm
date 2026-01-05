@@ -16,6 +16,7 @@
 	icon_state = "corset"
 	armor = ARMOR_PADDED
 	body_parts_covered = COVERAGE_VEST
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC*2 + SKILL_2
 
 //................ Amazon chainkini ............... //
 /obj/item/clothing/armor/amazon_chainkini
@@ -69,6 +70,7 @@
 	icon_state = "abyssal_robe"
 	item_state = "abyssal_robe"
 	smeltresult = /obj/item/ingot/bronze
+	sellprice = VALUE_BRONZE_ITEM*2 + M_MISC + SKILL_2
 
 /obj/item/clothing/armor/brigandine/abyssor/Initialize()
 	. = ..()

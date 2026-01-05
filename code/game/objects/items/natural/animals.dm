@@ -261,7 +261,7 @@
 	gripped_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
-	sellprice = 80
+	sellprice = VALUE_MEDIUM_LEATHER + SKILL_1
 
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)

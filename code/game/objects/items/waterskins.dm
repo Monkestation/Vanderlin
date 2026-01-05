@@ -9,7 +9,7 @@
 	fill_icon_thresholds = null
 	volume = 60
 	dropshrink = 0.5
-	sellprice = 50
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK
 	obj_flags = CAN_BE_HIT
 	reagent_flags = TRANSFERABLE | AMOUNT_VISIBLE

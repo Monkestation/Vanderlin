@@ -109,7 +109,7 @@
 	name = "horned cap"
 	desc = "A crude horned cap usually worn by brute barbarians to invoke fear unto their enemies."
 	icon_state = "hornedcap"
-	sellprice = VALUE_CHEAP_IRON_HELMET
+	sellprice = VALUE_IRON_ARMOR
 	item_weight = 5.5 * IRON_MULTIPLIER
 
 //................ Winged Cap ............... //
@@ -122,6 +122,7 @@
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	bloody_icon_state = "helmetblood_big"
 	item_weight = 5.5 * IRON_MULTIPLIER
+	sellprice = VALUE_IRON_ARMOR
 
 //................ Kettle Helmet ............... //
 /obj/item/clothing/head/helmet/kettle
@@ -189,7 +190,7 @@
 	desc = "a crimson red iron cap decorated with gold trims and embellishments. The design of this Lakkarian helmet hasn't changed in centuries."
 	icon_state = "lakkaricap"
 	item_state = "lakkaricap"
-	sellprice = 50
+	sellprice = VALUE_IRON_HELMET + M_GOLD
 	flags_inv = null
 	armor = ARMOR_SCALE
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -211,6 +212,7 @@
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
 	item_weight = 5.5 * COPPER_MULTIPLIER
+	sellprice = VALUE_DIRT_CHEAP
 
 //............... Battle Nun ........................... (unique kit for the role, iron coif mechanically.)
 /obj/item/clothing/head/helmet/battlenun
@@ -468,6 +470,7 @@
 	icon = 'icons/roguetown/clothing/special/gatemaster.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gatemaster.dmi'
 	icon_state = "master_helm"
+	sellprice = VALUE_IRON_ARMOR*2
 
 /obj/item/clothing/head/helmet/townbarbute
 	name = "town watchman barbute"
@@ -565,6 +568,7 @@
 	body_parts_covered = FULL_HEAD
 	prevent_crits = BLUNT_AND_MINOR_CRITS
 	item_weight = 5.5 * STEEL_MULTIPLIER
+	sellprice = VALUE_IRON_HELMET
 
 /obj/item/clothing/head/helmet/blacksteel
 	abstract_type = /obj/item/clothing/head/helmet/blacksteel

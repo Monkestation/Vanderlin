@@ -292,6 +292,7 @@
 
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
+	sellprice = VALUE_IRON_ARMOR
 
 /obj/item/clothing/neck/gorget/copper
 	name = "neck protector"
@@ -302,6 +303,7 @@
 	armor_class = AC_MEDIUM
 	armor = ARMOR_LEATHER_GOOD
 	max_integrity = INTEGRITY_POOR
+	sellprice = VALUE_DIRT_CHEAP
 
 
 //..................................................................................................................................
@@ -368,6 +370,7 @@
 	body_parts_covered = NECK
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
+	sellprice = VALUE_IRON_ARMOR
 
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
@@ -499,6 +502,7 @@
 	smeltresult = /obj/item/ingot/bronze
 	melting_material = /datum/material/bronze
 	armor = ARMOR_MAILLE_GOOD
+	sellprice = VALUE_BRONZE_ITEM
 
 /obj/item/clothing/neck/highcollier
 	name = "high collier"
@@ -557,12 +561,14 @@
 	smeltresult = /obj/item/ingot/iron
 	melt_amount = 100
 	melting_material = /datum/material/iron
+	sellprice = VALUE_IRON_ARMOR
 
 /obj/item/clothing/neck/highcollier/iron/renegadecollar
 	icon_state = "renegadecollar"
 	name = "black collar"
 	desc = "A tough leather collar concealing iron chain mail, meant to be paired with its jacket. This one also covers not only the neck and mouth, but also the nose and ears."
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
+	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 
 //........................................................................................
 /*---------------\

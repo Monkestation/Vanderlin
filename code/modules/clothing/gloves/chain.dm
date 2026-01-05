@@ -41,6 +41,7 @@
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 50
+	sellprice = VALUE_IRON_ARMOR/2
 
 /obj/item/clothing/gloves/chain/iron/shadowgauntlets
 	name = "darkplate gauntlets"

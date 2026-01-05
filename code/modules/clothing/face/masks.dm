@@ -43,6 +43,7 @@
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 50
+	sellprice = VALUE_IRON_SMALL_ITEM
 
 /obj/item/clothing/face/facemask/goldnosechain
 	name = "gold nosechain"
@@ -474,6 +475,7 @@
 	sewrepair = FALSE
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/copper
+	sellprice = VALUE_DIRT_CHEAP
 
 //................ Druids Mask ............... //
 /obj/item/clothing/face/druid

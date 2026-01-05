@@ -343,6 +343,7 @@
 	block2add = FOV_BEHIND
 	anvilrepair = /datum/skill/craft/armorsmithing
 	sewrepair = FALSE
+	sellprice = VALUE_STEEL_HELMET + M_MISC + SKILL_1
 
 /obj/item/clothing/head/roguehood/psydon
 	name = "psydonian hood"

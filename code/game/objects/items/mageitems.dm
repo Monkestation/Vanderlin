@@ -9,6 +9,7 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	component_type = /datum/component/storage/concrete/grid/magebag
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_1
 
 /obj/item/storage/magebag/examine(mob/user)
 	. = ..()

@@ -107,6 +107,7 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	component_type = /datum/component/storage/concrete/grid/sack/meat
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_1
 
 /obj/item/storage/meatbag/attack_hand_secondary(mob/user, params)
 	. = ..()

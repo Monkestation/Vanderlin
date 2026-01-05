@@ -13,6 +13,7 @@
 	max_integrity = INTEGRITY_POOR
 	salvage_result = null
 	item_weight = 3
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_2
 
 /obj/item/clothing/gloves/leather/black
 	color = CLOTHING_SOOT_BLACK
@@ -88,3 +89,4 @@
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
 	item_weight = 4
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_2

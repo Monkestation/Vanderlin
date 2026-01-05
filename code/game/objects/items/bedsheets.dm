@@ -99,6 +99,7 @@ LINEN BINS
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "pelt_bedsheet"
 	item_state = "pelt_bedsheet"
+	sellprice = VALUE_MEDIUM_LEATHER + M_CLOTH + SKILL_1
 
 /obj/item/bedsheet/wool
 	desc = ""
@@ -111,6 +112,7 @@ LINEN BINS
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "double_pelt_bedsheet"
 	item_state = "double_pelt_bedsheet"
+	sellprice = VALUE_HUGE_LEATHER + M_CLOTH*2 + SKILL_2
 
 /obj/item/bedsheet/fabric
 	desc = ""

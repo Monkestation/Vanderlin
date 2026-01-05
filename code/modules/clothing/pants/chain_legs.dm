@@ -39,6 +39,7 @@
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 6 * IRON_MULTIPLIER
+	sellprice = VALUE_IRON_ARMOR
 
 /obj/item/clothing/pants/chainlegs/kilt
 	name = "steel chain kilt"
@@ -57,3 +58,4 @@
 	smeltresult = /obj/item/ingot/iron
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
+	sellprice = VALUE_IRON_ARMOR

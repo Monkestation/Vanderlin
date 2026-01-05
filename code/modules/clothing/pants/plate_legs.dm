@@ -49,6 +49,7 @@
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 9 * IRON_MULTIPLIER
+	sellprice = VALUE_IRON_ARMOR
 
 /obj/item/clothing/pants/platelegs/captain
 	name = "captain's chausses"

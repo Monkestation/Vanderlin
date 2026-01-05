@@ -130,6 +130,7 @@
 	bloody_icon_state = "helmetblood_big"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+	sellprice = VALUE_STEEL_ARMOR*3 + SKILL_1
 
 /obj/item/clothing/head/helmet/heavy/crusader/t
 	desc = "A silver gilded bucket helm, inscriptions in old Psydonic are found embezeled on every inch of silver. Grenzelhoft specializes in these helmets, the Totod order has been purchasing them en-masse."
@@ -140,6 +141,7 @@
 	bloody_icon_state = "itemblood"
 	worn_x_dimension = 32
 	worn_y_dimension = 32
+	sellprice = VALUE_STEEL_ARMOR*3 + SKILL_1
 
 /obj/item/clothing/cloak/cape/crusader/Initialize(mapload, ...)
 	. = ..()

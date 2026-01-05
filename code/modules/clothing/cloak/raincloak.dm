@@ -19,6 +19,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	color = CLOTHING_BARK_BROWN
 	wetable = FALSE
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_2
 
 /obj/item/clothing/cloak/raincloak/Initialize(mapload, ...)
 	. = ..()
@@ -88,6 +89,7 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/fur
 	min_cold_protection_temperature = -20
+	sellprice = VALUE_MEDIUM_LEATHER + M_FUR + SKILL_2
 
 /obj/item/clothing/cloak/raincloak/furcloak/Initialize()
 	. = ..()

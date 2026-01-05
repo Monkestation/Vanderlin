@@ -64,6 +64,7 @@
 	item_state = "simpleshoe"
 	color = CLOTHING_OLD_LEATHER
 	salvage_result = null
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_1
 
 /obj/item/clothing/shoes/simpleshoes/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -90,6 +91,7 @@
 	item_state = "gladiator"
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_1
 
 /obj/item/clothing/shoes/sandals
 	name = "sandals"
@@ -99,6 +101,7 @@
 	item_state = "sandals"
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	sellprice = VALUE_SMALL_LEATHER + M_MISC
 
 /obj/item/clothing/shoes/rare
 	abstract_type = /obj/item/clothing/shoes/rare

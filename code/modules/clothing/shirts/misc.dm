@@ -18,6 +18,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	body_parts_covered = CHEST|VITALS
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_3
 
 /obj/item/clothing/shirt/rags
 	slot_flags = ITEM_SLOT_ARMOR
@@ -54,6 +55,7 @@
 	boobed = TRUE
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_3
 
 /obj/item/clothing/shirt/grenzelhoft
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR

@@ -5,6 +5,7 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	max_storage = 20
 	ammo_type = list (/obj/item/ammo_casing/caseless/arrow, /obj/item/ammo_casing/caseless/bolt)
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_1
 
 /obj/item/ammo_holder/quiver/arrows
 	fill_type = /obj/item/ammo_casing/caseless/arrow
@@ -48,7 +49,8 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK
 	max_storage = 10
 	ammo_type = list(/obj/item/ammo_casing/caseless/bullet)
-	
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_1
+
 /obj/item/ammo_holder/bullet/bullets
 	fill_type = /obj/item/ammo_casing/caseless/bullet
 
@@ -59,6 +61,7 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK
 	max_storage = 10
 	ammo_type = list(/obj/item/ammo_casing/caseless/dart)
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_1
 
 /obj/item/ammo_holder/dartpouch/darts
 	fill_type = /obj/item/ammo_casing/caseless/dart

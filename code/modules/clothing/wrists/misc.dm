@@ -120,6 +120,7 @@
 	resistance_flags = FIRE_PROOF
 	anvilrepair = /datum/skill/craft/armorsmithing
 	sewrepair = FALSE
+	sellprice = VALUE_DIRT_CHEAP
 
 //Queensleeves
 /obj/item/clothing/wrists/royalsleeves

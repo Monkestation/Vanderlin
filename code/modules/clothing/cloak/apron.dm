@@ -13,6 +13,7 @@
 /obj/item/clothing/cloak/apron/brown
 	color = CLOTHING_BARK_BROWN
 	salvage_result = /obj/item/natural/hide/cured
+	sellprice = VALUE_SMALL_LEATHER + M_CLOTH*2 + SKILL_2
 
 /obj/item/clothing/cloak/apron/waist
 	name = "apron"

@@ -53,7 +53,7 @@
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = 200 //meant to be weaker than iron plated boots, better options are out there waiting at the smith
 	armor_class = AC_LIGHT
-	sellprice = VALUE_IRON_ARMOR
+	sellprice = VALUE_LEATHER_ARMOR_PLUS //this is half an iron bar and one leather as the recipe makes two
 	item_weight = 6 * IRON_MULTIPLIER
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
@@ -95,12 +95,13 @@
 	item_state = "leatherboots"
 	armor = list("blunt" = 20, "slash" = 20, "stab" = 20,  "piercing" = 10, "fire" = 0, "acid" = 0)
 	resistance_flags = FLAMMABLE
-	sellprice = 10
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC*2 + SKILL_1
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 	item_weight = 3
 	max_integrity = INTEGRITY_STANDARD
 	wetable = FALSE
+
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BOOTS ARE INTENDED
 //KEEP THIS IN MIND

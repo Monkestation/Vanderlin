@@ -32,6 +32,7 @@
 	sellprice = VALUE_IRON_ARMOR
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
+	sellprice = VALUE_IRON_ARMOR*3
 
 /obj/item/clothing/armor/plate/vampire
 	name = "ancient plate"
@@ -65,7 +66,7 @@
 	desc = "Full iron plate. Leg protecting tassets, groin cup, armored vambraces."
 	icon_state = "iplate"
 	item_state = "iplate"
-	sellprice = VALUE_IRON_ARMOR*2
+	sellprice = VALUE_IRON_ARMOR*4 + SKILL_1
 	smeltresult = /obj/item/ingot/iron
 
 	armor = ARMOR_PLATE_BAD

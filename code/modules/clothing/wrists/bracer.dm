@@ -42,6 +42,7 @@
 	item_state = "ibracers"
 	armor = ARMOR_MAILLE
 	max_integrity = INTEGRITY_STRONG
+	sellprice = VALUE_IRON_ARMOR
 
 
 /obj/item/clothing/wrists/bracers/jackchain
@@ -67,6 +68,7 @@
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 75
+	sellprice = VALUE_IRON_ARMOR/2
 
 /obj/item/clothing/wrists/bracers/leather
 	name = "leather bracers"
@@ -85,6 +87,7 @@
 	sewrepair = TRUE
 	salvage_result = null
 	max_integrity = INTEGRITY_STANDARD
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BRACERS ARE INTENDED
 //KEEP THIS IN MIND

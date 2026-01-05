@@ -37,7 +37,7 @@
 	slot_flags = ITEM_SLOT_CLOAK
 	allowed_sex = list(MALE)
 	allowed_race = SPECIES_BASE_BODY
-	sellprice = 50
+	sellprice = VALUE_MEDIUM_LEATHER + M_FUR*2 + SKILL_3
 	nodismemsleeves = TRUE
 	min_cold_protection_temperature = -20
 
@@ -178,6 +178,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
+	sellprice = VALUE_MEDIUM_LEATHER + M_SILK + SKILL_3
 
 //.............inquisitor cloaks......... (For inquisitors..)
 /obj/item/clothing/cloak/cape/puritan
@@ -268,7 +269,7 @@
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
+	sellprice = VALUE_MEDIUM_LEATHER + M_SILK + SKILL_2
 
 /obj/item/clothing/cloak/silktabard
 	name = "fine silk tabard"

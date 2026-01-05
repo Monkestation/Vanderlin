@@ -36,7 +36,7 @@
 		/obj/item/natural/fibers = 2,
 	)
 	output = /obj/item/ammo_holder/dartpouch
-	
+
 /datum/repeatable_crafting_recipe/leather/storage/bulletpouch
 	name = "bullet pouch"
 	requirements = list(
@@ -77,7 +77,6 @@
 		/obj/item/natural/cloth = 1,
 	)
 	output = /obj/item/storage/belt/pouch
-	sellprice = 6
 
 /datum/repeatable_crafting_recipe/leather/storage/satchel
 	name = "leather satchel"
@@ -166,7 +165,10 @@
 /// Clothing
 /datum/repeatable_crafting_recipe/leather/gloves
 	name = "leather gloves"
-	output_amount = 2
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2
+	)
 	output = /obj/item/clothing/gloves/leather
 	craftdiff = 2
 
@@ -182,7 +184,7 @@
 	name = "physicker gloves"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/gloves/leather/phys
 
@@ -190,23 +192,23 @@
 	name = "apothecary gloves"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/gloves/leather/apothecary
 
 /datum/repeatable_crafting_recipe/leather/gloves/otavan_gloves
 	name = "grenzelhoftian gloves"
 	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/gloves/leather/otavan
 
 /datum/repeatable_crafting_recipe/leather/gloves/inquisitor_gloves
 	name = "inquisitor gloves"
 	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/gloves/leather/otavan/inqgloves
 
@@ -214,7 +216,7 @@
 	name = "apothecary trou"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/pants/trou/apothecary
 
@@ -222,7 +224,7 @@
 	name = "artificer trou"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/pants/trou/artipants
 
@@ -230,7 +232,7 @@
 	name = "leather tights"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/pants/trou/leathertights
 
@@ -238,46 +240,77 @@
 	name = "belt pants"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/pants/trou/beltpants
 
 /datum/repeatable_crafting_recipe/leather/gloves/duelist_gloves
-	name = "dueslist gloves"
+	name = "duelist gloves"
 	requirements = list(
-		/obj/item/natural/hide/cured = 3,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2
 	)
 	output = /obj/item/clothing/gloves/leather/duelgloves
 
 /datum/repeatable_crafting_recipe/leather/bracers
 	name = "leather bracers"
-	output_amount = 2
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2
+	)
 	output = /obj/item/clothing/wrists/bracers/leather
 
 /datum/repeatable_crafting_recipe/leather/pants
 	name = "leather pants"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 2
 	output = /obj/item/clothing/pants/trou/leather
 
 /datum/repeatable_crafting_recipe/leather/pants/mourning
 	name = "mourning pants"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 2
+	)
 	output = /obj/item/clothing/pants/trou/leather/mourning
 
 /datum/repeatable_crafting_recipe/leather/shoes
 	name = "leather shoes"
-	output_amount = 2
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 1
 	output = /obj/item/clothing/shoes/simpleshoes
 
 /datum/repeatable_crafting_recipe/leather/buckle_shoes
 	name = "leather buckle shoes"
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 1
 	output = /obj/item/clothing/shoes/simpleshoes/buckle
 
 /datum/repeatable_crafting_recipe/leather/boots
 	name = "leather boots"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 1
 	output = /obj/item/clothing/shoes/boots/leather
 
 /datum/repeatable_crafting_recipe/leather/corset
 	name = "corset"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 2
 	output = /obj/item/clothing/armor/corset
 
 /datum/repeatable_crafting_recipe/leather/sandals
@@ -295,13 +328,13 @@
 		/obj/item/natural/fibers = 1
 	)
 	output = /obj/item/clothing/shoes/gladiator
-	sellprice = 17
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/leather/cloak
 	name = "leather raincloak"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1
 	)
 	output = /obj/item/clothing/cloak/raincloak
 	craftdiff = 2
@@ -331,7 +364,7 @@
 		/obj/item/natural/silk = 1,
 	)
 	output = /obj/item/clothing/cloak/graggar
-	craftdiff = 4
+	craftdiff = 2
 
 
 /datum/repeatable_crafting_recipe/leather/cloakfur_black
@@ -341,7 +374,7 @@
 		/obj/item/natural/fur = 2,
 	)
 	output = /obj/item/clothing/cloak/black_cloak
-	craftdiff = 4
+	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/leather/belt
 	name = "leather belt"
@@ -350,7 +383,7 @@
 		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/storage/belt/leather
-	craftdiff = 2
+	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/leather/suspenders
 	name = "suspenders"
@@ -366,14 +399,16 @@
 	name = "leather vest"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/armor/leather/vest
-	craftdiff = 3
+	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/leather/seajacket
 	name = "sea jacket"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/armor/leather/jacket/sea
 	craftdiff = 3
@@ -382,6 +417,7 @@
 	name = "apothecary shirt"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/shirt/apothshirt
 	craftdiff = 3
@@ -390,6 +426,7 @@
 	name = "jester's tunick"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/shirt/jester
 	craftdiff = 3

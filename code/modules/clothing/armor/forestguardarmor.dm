@@ -77,6 +77,7 @@
 	icon = 'icons/roguetown/clothing/special/forest_guard.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "skullmet_volf"
+	sellprice = VALUE_STEEL_ARMOR_FINE + SKILL_2
 
 /obj/item/clothing/head/helmet/medium/decorated/skullmet/attack_hand_secondary(mob/user, params)
 	. = ..()
@@ -100,3 +101,4 @@
 	icon = 'icons/roguetown/clothing/special/forest_guard.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "skullmet_ruffian"
+	sellprice = VALUE_STEEL_ARMOR_FINE + SKILL_2

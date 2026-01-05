@@ -5,6 +5,7 @@
 	item_state = "leather"
 	equip_sound = 'sound/blank.ogg'
 	var/empty_when_dropped = TRUE
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_1
 
 /obj/item/storage/belt/leather/dropped(mob/living/carbon/human/user)
 	..()
@@ -132,6 +133,7 @@
 	desc = "A pair of suspenders which go over the shoulders. Used for keeping one's pants in place in an admittably fashionable style."
 	icon_state = "suspenders"
 	alternate_worn_layer = ARMOR_LAYER
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + M_CLOTH*2 + SKILL_3
 
 /obj/item/storage/belt/leather/cloth_belt
 	name = "cloth belt"
@@ -175,6 +177,7 @@
 	component_type = /datum/component/storage/concrete/grid/coin_pouch
 	grid_height = 64
 	grid_width = 32
+	sellprice = M_LEATHER + M_CLOTH + SKILL_1
 
 /obj/item/storage/belt/pouch/coins/mid/Initialize()
 	. = ..()
@@ -269,6 +272,7 @@
 	bloody_icon_state = "bodyblood"
 	alternate_worn_layer = UNDER_CLOAK_LAYER
 	component_type = /datum/component/storage/concrete/grid/satchel
+	sellprice = VALUE_MEDIUM_LEATHER + M_ROPE + SKILL_1
 
 /obj/item/storage/backpack/satchel/cloth
 	name = "cloth knapsack"
@@ -318,6 +322,7 @@
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
 	component_type = /datum/component/storage/concrete/grid/backpack
+	sellprice = VALUE_BIG_LEATHER + M_ROPE + SKILL_2
 
 /obj/item/storage/backpack/backpack/Initialize()
 	. = ..()

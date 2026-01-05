@@ -50,7 +50,7 @@
 	wbalance = HARD_TO_DODGE
 	associated_skill = /datum/skill/combat/knives
 	sewrepair = TRUE
-	sellprice = 10
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC*2 + SKILL_2
 
 	grid_width = 32
 	grid_height = 64
@@ -98,6 +98,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
+	sellprice = VALUE_MEDIUM_LEATHER + M_WOOD + M_ROPE + SKILL_2
 
 /obj/item/weapon/scabbard/sword/apply_components()
 	. = ..()

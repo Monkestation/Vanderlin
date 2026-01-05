@@ -1577,16 +1577,6 @@
 	craftdiff = 1
 	category = "Cloak"
 
-/datum/repeatable_crafting_recipe/sewing/graggar_cloak
-	name = "vicious cloak"
-	output = /obj/item/clothing/cloak/graggar
-	requirements = list(
-		/obj/item/natural/cloth = 2,
-		/obj/item/natural/hide/cured = 1
-	)
-	craftdiff = 2
-	category = "Cloak"
-
 /datum/repeatable_crafting_recipe/sewing/forrestercloak
 	name = "forrester cloak"
 	output = /obj/item/clothing/cloak/forrestercloak

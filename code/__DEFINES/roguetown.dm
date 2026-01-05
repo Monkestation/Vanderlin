@@ -238,6 +238,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define M_MISC		1	// random stuff like stones or fibres I guess
 #define M_WOOD		2	// one small log.
 #define M_CLOTH		2	// one cloth piece
+#define M_ROPE		M_MISC*3 // three fibers.
 #define M_GRAIN		1	// one threshed wheat grain
 #define M_FUR		M_CLOTH * 2
 #define M_SILK		M_CLOTH * 2	// one silk thread
@@ -262,12 +263,13 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define M_AMBER		50
 #define M_OPAL		80
 
-// Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit. Craftdiffs 0 and 1 add nothing because this has only 5 tiers for some reason?
-#define SKILL_1		2  //craftdiff 2
-#define SKILL_2		4 //difficulty 3
-#define SKILL_3		6 //difficulty 4
-#define SKILL_4		8 //difficulty 5 (master)
-#define SKILL_5		10 //difficulty 6 (legendary)
+// Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit.
+#define SKILL_1		2
+#define SKILL_2		4
+#define SKILL_3		6
+#define SKILL_4		8
+#define SKILL_5		10
+#define SKILL_6		12
 
 // Work costs - valued VERY low compared to raw materials, this is a problem but at least its systemic and visible now and can be adjusted. Very rough, time to gather stuff, refine it etc etc as well as crafting time itself.
 #define W_MINOR		2				// Less than 10 seconds of work
@@ -306,6 +308,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define VALUE_SMALL_LEATHER			M_LEATHER+W_MINOR
 #define VALUE_MEDIUM_LEATHER		M_LEATHER*2+W_MINOR
 #define VALUE_BIG_LEATHER			M_LEATHER*3+W_MINOR
+#define VALUE_HUGE_LEATHER			M_LEATHER*4+W_MINOR
 #define VALUE_SMALL_FUR				M_FUR+M_MISC*2+W_MINOR
 
 #define VALUE_LIGHT_GAMBESSON		M_CLOTH*2+M_MISC+W_MINOR

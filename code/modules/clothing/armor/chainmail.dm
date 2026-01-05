@@ -58,7 +58,7 @@
 	desc = "A long shirt of iron maille, heavy on the shoulders. Can be worn as a shirt, but some men with hairy chests consider it torture."
 	icon_state = "ihauberk"
 	item_state = "ihauberk"
-	sellprice = VALUE_IRON_ARMOR_UNUSUAL
+	sellprice = VALUE_IRON_ARMOR*2
 
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG

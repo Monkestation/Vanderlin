@@ -381,6 +381,7 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "bedroll_r"
 	bed_path = /obj/structure/bed/sleepingbag/deluxe
+	sellprice = VALUE_MEDIUM_LEATHER + M_ROPE + SKILL_2
 
 /obj/structure/bed/post_buckle_mob(mob/living/M)
 	..()
