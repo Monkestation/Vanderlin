@@ -37,6 +37,8 @@
 /datum/job/advclass/puritan/ordinator/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
 
 	var/static/list/gear = list(
 		"Covenant And Creed (Broadsword + Shield)",
