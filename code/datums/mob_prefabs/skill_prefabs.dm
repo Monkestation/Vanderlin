@@ -52,7 +52,6 @@
 		target.dodgetime = min(target.dodgetime, dodgetime)
 
 
-/// COMBAT SETS ///
 /datum/mob_prefab/skills/combat
 	abstract_type = /datum/mob_prefab/skills/combat
 

@@ -37,7 +37,12 @@
 	outfit = /datum/outfit/npc/medium_gear
 	ai_armorclass = 2
 
+/datum/mob_prefab/loadout/medium/no_painstun
+	traits = list(TRAIT_NOPAINSTUN)
 
 /datum/mob_prefab/loadout/heavy
 	outfit = /datum/outfit/npc/heavy_gear
 	ai_armorclass = 3
+
+/datum/mob_prefab/loadout/heavy/no_painstun
+	traits = list(TRAIT_NOPAINSTUN)

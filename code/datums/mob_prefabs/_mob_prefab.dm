@@ -17,10 +17,10 @@ GLOBAL_LIST_INIT(mob_prefabs, init_mob_prefabs())
 		return FALSE
 	return prefab.assign_prefab(target)
 
-
 /mob/living
-	var/list/mob_prefabs
-
+	var/list/stat_prefabs
+	var/list/skill_prefabs
+	var/list/outfit_prefabs
 
 /// mob prefabs hold preset data sets for mobs to apply on creation.
 /// for the most part this is used for stat blocks, skills, traits, but could see use otherwise if needed.
