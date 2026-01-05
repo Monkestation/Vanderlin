@@ -1,5 +1,6 @@
 
 /obj/structure/flora/newtree/mushroom
+	name = "mushtree"
 	icon = 'icons/roguetown/misc/tree_mushroom.dmi'
 	icon_state = "mushtree"
 	base_icon_state = "mushtree"
@@ -15,7 +16,7 @@
 
 /obj/structure/flora/newtree/mushroom/New()
 	..()
-	set_light(1.5, 1.5, 1.5, l_color = glowcolour)
+	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newtree/mushroom/build_trees()
 	var/turf/target = GET_TURF_ABOVE(get_turf(src))
@@ -86,7 +87,7 @@
 
 /obj/structure/flora/newbranch/connector/mushroom/New()
 	..()
-	set_light(1.5, 1.5, 1.5, l_color = glowcolour)
+	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newbranch/mushroom
 	name = "shroom branch"
@@ -100,7 +101,7 @@
 
 /obj/structure/flora/newbranch/mushroom/New()
 	..()
-	set_light(1.5, 1.5, 1.5, l_color = glowcolour)
+	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newleaf/corner/mushroom
 	name = "shroom cluster"
@@ -113,7 +114,7 @@
 
 /obj/structure/flora/newleaf/corner/mushroom/New()
 	..()
-	set_light(1.5, 1.5, 1.5, l_color = glowcolour)
+	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newleaf/mushroom
 	name = "shroom cluster"
@@ -126,7 +127,7 @@
 
 /obj/structure/flora/newleaf/mushroom/New()
 	..()
-	set_light(1.5, 1.5, 1.5, l_color = glowcolour)
+	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /*
 	COLOURS:

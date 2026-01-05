@@ -90,7 +90,7 @@
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
 	gender = MALE
-	if(prob(33))
+	if(prob(50))
 		gender = FEMALE
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 	update_appearance(UPDATE_OVERLAYS)
@@ -163,3 +163,48 @@
 		if(BODY_ZONE_L_ARM)
 			return "foreleg"
 	return ..()
+
+/mob/living/simple_animal/hostile/retaliate/wolf/cave
+	name = "marrov"
+	desc = "Also known as 'Loup d'os,' a subspecies of volves who delved too deep, twisted by the corrupting forces of the hells into fearsome, merciless monsters."
+	icon_state = "marrov"
+	icon_living = "marrov"
+	icon_dead = "marrovd"
+
+	botched_butcher_results = list(/obj/item/natural/fur/volf = 1,
+						/obj/item/alch/bone = 1)
+	butcher_results = list(/obj/item/natural/hide = 1,
+						/obj/item/natural/fur/volf = 2,
+						/obj/item/alch/sinew = 2,
+						/obj/item/alch/bone = 1)
+	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1,
+						/obj/item/natural/hide = 2,
+						/obj/item/natural/fur/volf = 3,
+						/obj/item/alch/sinew = 2,
+						/obj/item/alch/bone = 4)
+	head_butcher = /obj/item/natural/head/volf
+
+	// You must sacrifice someone/something to tame this. Can't just be an animal.
+	food_type = list(/obj/item/bodypart,
+					/obj/item/organ)
+
+	// These are made to FUCKING KILL YOU.
+	melee_damage_lower = 20
+	melee_damage_upper = 20
+	base_constitution = 9
+	base_strength = 8
+	base_speed = 15
+	vision_range = 10
+	aggro_vision_range = 10
+	remains_type = /obj/effect/decal/remains/wolf/marrov
+
+/mob/living/simple_animal/hostile/retaliate/wolf/cave/update_overlays()
+	. = ..()
+	if(stat == DEAD)
+		return
+	. += emissive_appearance(icon, "marrove")
+
+/obj/effect/decal/remains/wolf/marrov
+
+	icon_state = "marrovbones"
+
