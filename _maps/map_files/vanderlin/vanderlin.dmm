@@ -16975,7 +16975,7 @@
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/church)
 "idE" = (
-/obj/structure/window/openclose,
+/obj/structure/window/solid,
 /turf/open/floor/ruinedwood/turned/alt{
 	dir = 1
 	},
@@ -19523,6 +19523,14 @@
 /obj/item/plate,
 /obj/item/plate,
 /obj/item/plate,
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
 "jrT" = (
@@ -28812,10 +28820,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor/halls/e)
-"nJw" = (
-/obj/structure/window/openclose,
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "nJA" = (
 /obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
@@ -31560,6 +31564,10 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town/shop)
+"oWS" = (
+/obj/structure/window/solid,
+/turf/open/floor/woodturned,
+/area/indoors/town/tavern)
 "oWT" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 8
@@ -31868,7 +31876,6 @@
 	lockid = "butler"
 	},
 /obj/item/clothing/cloak/stole/red,
-/obj/item/clothing/cloak/chasuble,
 /obj/item/storage/backpack/satchel,
 /obj/item/weapon/polearm/woodstaff/aries,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -36872,6 +36879,18 @@
 /obj/item/reagent_containers/glass/cup/silver,
 /obj/item/reagent_containers/glass/carafe/silver,
 /obj/effect/spawner/guaranteed_map_spawner/listed/cups,
+/obj/item/kitchen/fork/iron,
+/obj/item/kitchen/fork/iron,
+/obj/item/kitchen/fork/iron,
+/obj/item/kitchen/fork/iron,
+/obj/item/kitchen/spoon/iron,
+/obj/item/kitchen/spoon/iron,
+/obj/item/kitchen/spoon/iron,
+/obj/item/kitchen/spoon/iron,
+/obj/item/reagent_containers/glass/bowl/iron,
+/obj/item/reagent_containers/glass/bowl/iron,
+/obj/item/reagent_containers/glass/bowl/iron,
+/obj/item/reagent_containers/glass/bowl/iron,
 /turf/open/floor/woodturned,
 /area/indoors/town/manor/kitchen/cellar)
 "rCb" = (
@@ -41484,6 +41503,13 @@
 	},
 /turf/open/floor/dirt/road,
 /area/indoors/soilsons)
+"tOo" = (
+/obj/structure/door/weak/bolt{
+	name = "bathroom";
+	dir = 4
+	},
+/turf/open/floor/blocks/paving,
+/area/under/town/basement)
 "tOA" = (
 /turf/closed/wall/mineral/wood/window,
 /area/indoors/town/manor)
@@ -77426,7 +77452,7 @@ jEQ
 grz
 fYq
 jEQ
-iwZ
+tOo
 fYq
 grz
 jEQ
@@ -78220,7 +78246,7 @@ jhx
 jhx
 vbN
 lnw
-mLF
+vCE
 vbN
 vbN
 qFx
@@ -79028,7 +79054,7 @@ jhx
 jhx
 vbN
 vCE
-mLF
+vCE
 vbN
 vbN
 qFx
@@ -154383,12 +154409,12 @@ nlt
 xhZ
 fVi
 pny
-hop
-hop
+oWS
+oWS
 pny
 pny
-hop
-hop
+oWS
+oWS
 pny
 fVi
 izG
@@ -155386,7 +155412,7 @@ nlt
 nlt
 nlt
 xhZ
-nJw
+bqc
 cUs
 vyn
 wVk
@@ -155992,7 +156018,7 @@ nlt
 nlt
 nlt
 xhZ
-nJw
+bqc
 jWY
 jWY
 jWY
@@ -156194,7 +156220,7 @@ nlt
 nlt
 nlt
 xhZ
-nJw
+bqc
 uyX
 uyX
 uyX
@@ -156800,7 +156826,7 @@ nlt
 nlt
 nlt
 xhZ
-nJw
+bqc
 uyX
 uyX
 uyX
@@ -157607,7 +157633,7 @@ tLI
 nlt
 nlt
 xhZ
-nJw
+bqc
 jWY
 eQx
 kwb
@@ -158011,7 +158037,7 @@ tLI
 nlt
 nlt
 xhZ
-nJw
+bqc
 jWY
 bfG
 kwb
@@ -159032,11 +159058,11 @@ pny
 pny
 fVi
 pny
-uQT
+oWS
 pny
 fVi
 pny
-uQT
+oWS
 pny
 fVi
 izG
@@ -194784,7 +194810,7 @@ pny
 pny
 wkH
 pny
-pny
+wkH
 pny
 pny
 rHw
@@ -199431,7 +199457,7 @@ pny
 nZg
 pny
 pny
-pny
+nZg
 pny
 pny
 pny
