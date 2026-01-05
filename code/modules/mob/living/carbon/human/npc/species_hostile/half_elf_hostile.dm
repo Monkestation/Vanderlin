@@ -10,7 +10,7 @@
 	d_intent = INTENT_PARRY
 
 
-/mob/living/carbon/human/species/halfelf/base/Initialize()
+/mob/living/carbon/human/species/human/halfelf/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
 	set_species(/datum/species/human/halfelf)
@@ -23,84 +23,84 @@
 
 // --- Base Variants ---
 
-/mob/living/carbon/human/species/halfelf/base/unskilled
+/mob/living/carbon/human/species/human/halfelf/base/unskilled
 	skill_prefabs = list(/datum/mob_prefab/skills/combat/weak)
 
-/mob/living/carbon/human/species/halfelf/base/average
+/mob/living/carbon/human/species/human/halfelf/base/average
 	skill_prefabs = list(/datum/mob_prefab/skills/combat/average)
 
-/mob/living/carbon/human/species/halfelf/base/skilled
+/mob/living/carbon/human/species/human/halfelf/base/skilled
 	flee_in_pain = FALSE
 	skill_prefabs = list(/datum/mob_prefab/skills/combat/skilled)
 
-/mob/living/carbon/human/species/halfelf/base/very_skilled
+/mob/living/carbon/human/species/human/halfelf/base/very_skilled
 	flee_in_pain = FALSE
 	skill_prefabs = list(/datum/mob_prefab/skills/combat/expert)
 
 // --- Naked ---
 
-/mob/living/carbon/human/species/halfelf/base/unskilled/naked
+/mob/living/carbon/human/species/human/halfelf/base/unskilled/naked
 	stat_prefabs = list(/datum/mob_prefab/stats/weak)
 
-/mob/living/carbon/human/species/halfelf/base/average/naked
+/mob/living/carbon/human/species/human/halfelf/base/average/naked
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 
-/mob/living/carbon/human/species/halfelf/base/skilled/naked
+/mob/living/carbon/human/species/human/halfelf/base/skilled/naked
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 
-/mob/living/carbon/human/species/halfelf/base/very_skilled/naked
+/mob/living/carbon/human/species/human/halfelf/base/very_skilled/naked
 	stat_prefabs = list(/datum/mob_prefab/stats/hard)
 
 // --- Light Gear ----
 
-/mob/living/carbon/human/species/halfelf/base/unskilled/light_gear
+/mob/living/carbon/human/species/human/halfelf/base/unskilled/light_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/weak)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/light)
 
-/mob/living/carbon/human/species/halfelf/base/average/light_gear
+/mob/living/carbon/human/species/human/halfelf/base/average/light_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/light)
 
-/mob/living/carbon/human/species/halfelf/base/skilled/light_gear
+/mob/living/carbon/human/species/human/halfelf/base/skilled/light_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/light/dualwield)
 
-/mob/living/carbon/human/species/halfelf/base/very_skilled/light_gear
+/mob/living/carbon/human/species/human/halfelf/base/very_skilled/light_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/hard)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/light/dualwield)
 
 // --- Medium Gear ----
 
-/mob/living/carbon/human/species/halfelf/base/unskilled/medium_gear
+/mob/living/carbon/human/species/human/halfelf/base/unskilled/medium_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/weak)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/medium)
 
-/mob/living/carbon/human/species/halfelf/base/average/medium_gear
+/mob/living/carbon/human/species/human/halfelf/base/average/medium_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/medium)
 
-/mob/living/carbon/human/species/halfelf/base/skilled/medium_gear
+/mob/living/carbon/human/species/human/halfelf/base/skilled/medium_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/medium/no_painstun)
 
-/mob/living/carbon/human/species/halfelf/base/very_skilled/medium_gear
+/mob/living/carbon/human/species/human/halfelf/base/very_skilled/medium_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/hard)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/medium/no_painstun)
 
 // --- Heavy Gear ----
 
-/mob/living/carbon/human/species/halfelf/base/unskilled/heavy_gear
+/mob/living/carbon/human/species/human/halfelf/base/unskilled/heavy_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/weak)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/medium)
 
-/mob/living/carbon/human/species/halfelf/base/average/heavy_gear
+/mob/living/carbon/human/species/human/halfelf/base/average/heavy_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/medium)
 
-/mob/living/carbon/human/species/halfelf/base/skilled/heavy_gear
+/mob/living/carbon/human/species/human/halfelf/base/skilled/heavy_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/average)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/heavy/no_painstun)
 
-/mob/living/carbon/human/species/halfelf/base/very_skilled/heavy_gear
+/mob/living/carbon/human/species/human/halfelf/base/very_skilled/heavy_gear
 	stat_prefabs = list(/datum/mob_prefab/stats/hard)
 	outfit_prefabs = list(/datum/mob_prefab/loadout/heavy/no_painstun)
