@@ -69,5 +69,4 @@
 	backpack_contents = list(
 		/obj/item/key/mercenary,
 		/obj/item/storage/belt/pouch/coins/poor,
-		/obj/item/reagent_containers/food/snacks/fish/swordfish
 	)
