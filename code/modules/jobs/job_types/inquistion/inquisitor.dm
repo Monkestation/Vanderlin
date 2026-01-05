@@ -8,7 +8,6 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
-		SPEC_ID_DWARF,\
 	)
 	//You MUST have a Psydonite character to start. Just so people don't get japed into Oops Suddenly Psydon!
 	allowed_patrons = list(/datum/patron/psydon) // you have to keep the official church stance, no way an extremist psydonite could become inquisitor
