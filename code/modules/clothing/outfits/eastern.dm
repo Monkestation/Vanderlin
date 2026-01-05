@@ -317,6 +317,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	allowed_race = RACES_PLAYER_ALL
+	misc_flags = CRAFTING_TEST_EXCLUDE
 	surgery_cover = FALSE
 	max_integrity = 600 //Bad armor protection and very basic crit protection, but incredibly hard to break completely
 	flags_inv = null //free the breast
@@ -354,6 +355,6 @@
 /obj/item/clothing/shirt/undershirt/easttats/tribal
 	name = "Tribal Tattoos"
 	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."
-	armor = list("blunt" = 0, "slash" = 0, "stab" = 0, "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor = ARMOR_NONE
 	prevent_crits = null
 	resistance_flags = INDESTRUCTIBLE
