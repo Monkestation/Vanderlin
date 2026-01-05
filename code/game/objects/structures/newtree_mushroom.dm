@@ -20,7 +20,7 @@
 
 /obj/structure/flora/newtree/mushroom/build_trees()
 	var/turf/target = GET_TURF_ABOVE(get_turf(src))
-	if((istype(target, /turf/open/transparent/openspace)) && (target.z < 6))
+	if((istype(target, /turf/open/transparent/openspace)) && (target.z < 6) && (prob(50)))
 		var/obj/T = new tree_stem(target)
 		T.icon_state = icon_state
 		T.update_appearance(UPDATE_OVERLAYS)

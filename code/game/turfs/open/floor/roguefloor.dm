@@ -1065,7 +1065,7 @@
 
 /turf/open/transparent/glass
 	name = "Glass floor"
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "woodglass"
 
 	footstep = FOOTSTEP_PLATING
