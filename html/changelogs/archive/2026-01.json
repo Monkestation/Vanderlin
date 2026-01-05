@@ -45,5 +45,45 @@
                 "bugfix": "Male cows no longer have udders."
             }
         ]
+    },
+    "2026-01-05": {
+        "flleeppyy": [
+            {
+                "code_imp": "add new CI linter to check for unescaped brackets"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "balance": "tweaked dungeoneer's loadout, giving them knuckles and adjusting skills."
+            }
+        ],
+        "Bloo4420": [
+            {
+                "bugfix": "invisible royal truffles"
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds several new items to the patreon loadout options."
+            }
+        ],
+        "Somniworld": [
+            {
+                "balance": "Made all mage summons give the same amount of resources for their tier. For instance a sprite now drops 6 fairy dust, the same way an imp drops 6 Infernal ashes."
+            },
+            {
+                "bugfix": "Noc's Eye warded summoning matrices no longer get bricked if you try to summon something alone."
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Kobolds can be blue now."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "bugfix": "gave abyssal guard their weapon skill and removed their swordfish"
+            }
+        ]
     }
 }
