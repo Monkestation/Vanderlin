@@ -1,4 +1,4 @@
-/datum/job/advclass/folkhero/duelist
+/datum/job/advclass/mercenary/duelist
 	title = "Duelist"
 	tutorial = "A swordsman from Valoria, wielding a rapier with deadly precision and driven by honor and a thirst for coin, they duel with unmatched precision, seeking glory and wealth."
 	allowed_races = list(\
@@ -10,7 +10,7 @@
 		SPEC_ID_AASIMAR,\
 		SPEC_ID_HALF_ORC,\
 	) //Yes, Horcs get to be Duelists, Not Drows though.
-	outfit = /datum/outfit/folkhero/duelist
+	outfit = /datum/outfit/mercenary/duelist
 	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Placeholder music since apparently i can't use one from the internet...
 	total_positions = 2
@@ -23,7 +23,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/misc/swimming = 3,
@@ -40,12 +40,12 @@
 		TRAIT_DODGEEXPERT
 	)
 
-/datum/job/advclass/folkhero/duelist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/mercenary/duelist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 8
 
-/datum/outfit/folkhero/duelist
-	name = "Duelist (Folkhero)"
+/datum/outfit/mercenary/duelist
+	name = "Duelist (Mercenary)"
 	head = /obj/item/clothing/head/leather/duelhat
 	cloak = /obj/item/clothing/cloak/half/duelcape
 	armor = /obj/item/clothing/armor/leather/jacket/leathercoat/duelcoat
@@ -58,7 +58,7 @@
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/mid = 1)
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 
-/datum/outfit/folkhero/duelist/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/mercenary/duelist/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	var/rando = rand(1,6)
 	switch(rando)
