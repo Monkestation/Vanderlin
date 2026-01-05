@@ -14,7 +14,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_HARPY, SPEC_ID_HOLLOWKIN)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_HARPY, SPEC_ID_HOLLOWKIN, SPEC_ID_RAKSHARI)
 
 	outfit = null
 	outfit_female = null
