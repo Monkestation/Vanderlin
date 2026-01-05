@@ -212,7 +212,7 @@
 	melt_amount = 75
 	dropshrink = 0.8
 	thrown_bclass = BCLASS_STAB
-	sellprice = 22
+	sellprice = VALUE_IRON_ITEM/2 + M_WOOD
 
 /obj/item/weapon/polearm/spear/getonmobprop(tag)
 	. = ..()
@@ -242,12 +242,14 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_BASH)
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR_WIELD
+	sellprice = VALUE_IRON_ITEM + M_WOOD
 
 /obj/item/weapon/polearm/spear/steel/assegai
 	name = "steel assegai"
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_steel"
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
+	sellprice = VALUE_STEEL_ITEM + M_WOOD
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -262,7 +264,7 @@
 	max_integrity = INTEGRITY_STRONG
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
-	sellprice = 60
+	sellprice = M_BSILVER + M_WOOD + SKILL_2
 
 /obj/item/weapon/polearm/spear/psydon/Initialize(mapload)
 	. = ..()
@@ -293,7 +295,7 @@
 	max_integrity = INTEGRITY_STRONG
 	wdefense = ULTMATE_PARRY
 	wbalance = EASY_TO_DODGE
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM + M_WOOD + SKILL_2
 
 /obj/item/weapon/polearm/spear/billhook/ji
 	name = "steel dagger-ax"
@@ -302,6 +304,7 @@
 	wdefense = GOOD_PARRY
 	wbalance = null
 	gripsprite = FALSE
+	sellprice = VALUE_STEEL_ITEM + M_WOOD
 
 /obj/item/weapon/polearm/spear/billhook/ji/iron
 	name = "iron dagger-ax"
@@ -309,6 +312,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	max_integrity = INTEGRITY_STANDARD
+	sellprice = VALUE_IRON_ITEM + M_WOOD
 
 /obj/item/weapon/polearm/spear/billhook/ji/bronze
 	name = "bronze dagger-ax"
@@ -317,6 +321,7 @@
 	melt_amount = 75
 	max_integrity = INTEGRITY_STANDARD
 	max_blade_int = 95
+	sellprice = VALUE_DIRT_CHEAP + M_WOOD
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
@@ -348,7 +353,7 @@
 	melting_material = null
 	melt_amount = 75
 	dropshrink = 0.9
-	sellprice = 15
+	sellprice = VALUE_DIRT_CHEAP/2 + M_WOOD
 	throw_speed = 3
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
@@ -381,7 +386,7 @@
 	dropshrink = 0.8
 	wdefense = ULTMATE_PARRY
 	wbalance = EASY_TO_DODGE
-	sellprice = 90
+	sellprice = VALUE_STEEL_ITEM*2 + M_WOOD + SKILL_3
 
 /obj/item/weapon/polearm/halberd/getonmobprop(tag)
 	. = ..()
@@ -419,7 +424,7 @@
 	dropshrink = 0.95
 	minstr = 8
 	axe_cut = 15
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM + M_WOOD
 
 /obj/item/weapon/woodchopper/getonmobprop(tag)
 	. = ..()
@@ -458,7 +463,7 @@
 	minstr = 10
 	wdefense = 3
 	axe_cut = 15
-	sellprice = 20
+	sellprice = VALUE_IROM_ITEM*2 + M_WOOD + SKILL_1
 
 /obj/item/weapon/polearm/halberd/bardiche/warcutter/getonmobprop(tag)
 	. = ..()
@@ -487,7 +492,7 @@
 	max_integrity = INTEGRITY_STRONG
 	minstr = 11
 	axe_cut = 10
-	sellprice = 100
+	sellprice = M_BSILVER*2 + SKILL_2
 
 /obj/item/weapon/polearm/halberd/psydon/Initialize(mapload)
 	. = ..()
@@ -529,7 +534,7 @@
 	minstr = 10
 	wdefense = AVERAGE_PARRY
 	axe_cut = 10
-	sellprice = 30
+	sellprice = VALUE_IRON_ITEM*2 + M_WOOD + SKILL_1
 
 /obj/item/weapon/polearm/halberd/bardiche/ancient
 	force = DAMAGE_AXE
@@ -563,7 +568,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	dropshrink = 0.8
 	wbalance = EASY_TO_DODGE
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM*2 + M_WOOD + SKILL_2
 
 /obj/item/weapon/polearm/eaglebeak/getonmobprop(tag)
 	. = ..()
@@ -584,7 +589,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	max_integrity = INTEGRITY_STRONG
-	sellprice = 40
+	sellprice = VALUE_IRON_ITEM*2 + M_WOOD + SKILL_1
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
 
@@ -624,6 +629,7 @@
 	melt_amount = 75
 	force = 20
 	force_wielded = 25
+	sellprice = VALUE_DIRT_CHEAP*2 + M_WOOD
 
 
 //scythe

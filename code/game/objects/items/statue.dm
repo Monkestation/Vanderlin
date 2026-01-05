@@ -32,7 +32,7 @@
 	name = "silver statue"
 	icon_state = "sstatue1"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 90
+	sellprice = VALUE_SILVER_ITEM + SKILL_2
 
 /obj/item/statue/silver/Initialize()
 	. = ..()
@@ -51,7 +51,7 @@
 	icon_state = "ststatue1"
 	melt_amount = 50
 	melting_material = /datum/material/steel
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM + SKILL_1
 
 /obj/item/statue/steel/Initialize()
 	. = ..()
@@ -61,7 +61,7 @@
 	name = "iron statue"
 	icon_state = "istatue1"
 	smeltresult = /obj/item/ingot/iron
-	sellprice = 40
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/statue/iron/Initialize()
 	. = ..()
@@ -72,7 +72,7 @@
 	desc = "There's something strange about this statue..."
 	icon_state = "istatue1"
 	smeltresult = /obj/item/ore/iron
-	sellprice = 10
+	sellprice = VALUE_IRON_SMALL_ITEM
 
 /*	..................   Silver  ................... */
 /obj/item/statue/silver/volf
@@ -82,7 +82,7 @@
 	icon_state = "volf_silv"
 	dropshrink = 0.7
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 45
+	sellprice = VALUE_SILVER_ITEM*2 + SKILL_2
 
 /obj/item/statue/silver/volf/Initialize()
 	. = ..()

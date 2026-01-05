@@ -206,6 +206,7 @@
 	smeltresult = /obj/item/ingot/iron
 	grid_width = null
 	grid_height = null
+	sellprice = VALUE_IRON_ITEM + M_WOOD
 
 /obj/item/weapon/hammer/sledgehammer/getonmobprop(tag)
 	. = ..()
@@ -231,6 +232,7 @@
 	melt_amount = 50
 	melting_material = /datum/material/steel
 	time_multiplier = 1.5 //it's for crushing skulls not nails
+	sellprice = VALUE_STEEL_ITEM + M_WOOD
 
 /obj/item/weapon/hammer/sledgehammer/war/malum
 	name = "forgefiend"

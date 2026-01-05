@@ -247,13 +247,14 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define M_STEEL		M_IRON+W_MODERATE	// one steel bar
 #define M_SILVER	M_IRON*3	// one silver bar
 #define M_GOLD		M_IRON*5	// one gold bar
+#define M_BSILVER	M_SILVER //Placeholder for blessed silver. Inquisition shit.
 
-// Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit.
-#define SKILL_1		2
-#define SKILL_2		4
-#define SKILL_3		6
-#define SKILL_4		8
-#define SKILL_5		10
+// Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit. Craftdiffs 0 and 1 add nothing.
+#define SKILL_1		2  //craftdiff 2
+#define SKILL_2		4 //difficulty 3
+#define SKILL_3		6 //difficulty 4
+#define SKILL_4		8 //difficulty 5 (master)
+#define SKILL_5		10 //difficulty 6 (legendary)
 
 // Work costs - valued VERY low compared to raw materials, this is a problem but at least its systemic and visible now and can be adjusted. Very rough, time to gather stuff, refine it etc etc as well as crafting time itself.
 #define W_MINOR		2				// Less than 10 seconds of work

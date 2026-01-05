@@ -170,6 +170,7 @@
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	sellprice = VALUE_IRON_ITEM + M_WOOD + SKILL_1
 
 /obj/item/weapon/shield/tower/spidershield
 	name = "spider shield"
@@ -236,7 +237,7 @@
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
 	blade_dulling = DULLING_BASH
-	sellprice = 30
+	sellprice = VALUE_STEEL_ITEM*2 + M_LEATHER + SKILL_2
 	melting_material = /datum/material/steel
 	melt_amount = 90
 	design_chosen = FALSE
@@ -325,6 +326,7 @@
 	max_integrity = INTEGRITY_STRONG - 50
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/weapon/shield/tower/buckleriron/getonmobprop(tag)
 	. = ..()

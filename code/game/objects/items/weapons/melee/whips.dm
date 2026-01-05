@@ -104,6 +104,7 @@
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
 	last_used = 0
+	sellprice = VALUE_SILVER_ITEM + VALUE_MEDIUM_LEATHER + SKILL_3
 
 /obj/item/weapon/whip/silver/Initialize(mapload)
 	. = ..()
@@ -119,6 +120,7 @@
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
 	last_used = 0
+	sellprice = M_BSILVER + VALUE_MEDIUM_LEATHER + SKILL_2
 
 /obj/item/weapon/whip/psydon/Initialize(mapload)
 	. = ..()
@@ -208,6 +210,7 @@
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	minstr = 9
 	melt_amount = 75
+	sellprice = VALUE_IRON_ITEM*2 + SKILL_2
 
 /datum/intent/whip/lash/metal
 	chargetime = 10
@@ -252,6 +255,7 @@
 	blade_dulling = DULLING_BASH
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
 	can_parry = TRUE
+	sellprice = VALUE_STEEL_ITEM*2
 
 /obj/item/weapon/whip/urumi/iron
 	name = "iron urumi"
@@ -261,6 +265,7 @@
 	max_blade_int = 150
 	wdefense = BAD_PARRY
 	can_parry = TRUE
+	sellprice = VALUE_IRON_ITEM*2
 
 /obj/item/weapon/whip/urumi/bronze
 	name = "bronze urumi"
@@ -270,6 +275,7 @@
 	max_blade_int = 100
 	wdefense = BAD_PARRY
 	can_parry = TRUE
+	sellprice = VALUE_DIRT_CHEAP*2
 
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
@@ -279,6 +285,7 @@
 	max_blade_int= 130
 	wdefense = BAD_PARRY
 	can_parry = TRUE
+	sellprice = VALUE_SILVER_ITEM*2 + SKILL_3
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()

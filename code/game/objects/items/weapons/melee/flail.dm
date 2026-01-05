@@ -84,6 +84,7 @@
 	name = "militia flail"
 	desc = "A lucky hit from such a flail can squash a cheap helmet along with the wearer's skull."
 	icon_state = "militiaflail"
+	sellprice = VALUE_IRON_ITEM + M_MISC*2
 
 //................ Wooden Flail ............... // Obsolete by the thresher? No smash so its bad
 /obj/item/weapon/flail/towner
@@ -110,7 +111,7 @@
 	melt_amount = 75
 	minstr = 4
 	max_integrity = INTEGRITY_STRONGEST
-	sellprice = 35
+	sellprice = VALUE_STEEL_ITEM + M_MISC*2
 
 /obj/item/weapon/flail/sflail/ancient
 	force = DAMAGE_GOOD_FLAIL
@@ -165,7 +166,7 @@
 	wlength = WLENGTH_LONG
 	slot_flags = ITEM_SLOT_BACK
 	max_integrity = INTEGRITY_STRONG + 50
-	sellprice = 20
+	sellprice = VALUE_STEEL_ITEM + M_WOOD + M_MISC + SKILL_2
 	minstr = 8
 
 /obj/item/weapon/flail/peasant/getonmobprop(tag)

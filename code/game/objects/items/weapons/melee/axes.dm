@@ -171,7 +171,7 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	wdefense = AVERAGE_PARRY
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM*3 + SKILL_2
 	melting_material = /datum/material/steel
 	melt_amount = 150
 
@@ -206,7 +206,7 @@
 	wdefense = MEDIOCRE_PARRY
 	minstr = 6
 
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM + M_MISC
 
 /obj/item/weapon/axe/iron/getonmobprop(tag)
 	. = ..()
@@ -238,7 +238,7 @@
 	wdefense = MEDIOCRE_PARRY
 	minstr = 6
 
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM + M_MISC
 
 /obj/item/weapon/axe/nsapo/getonmobprop(tag)
 
@@ -280,7 +280,7 @@
 	wdefense = MEDIOCRE_PARRY
 	minstr = 6
 
-	sellprice = 20
+	sellprice = VALUE_DIRT_CHEAP + M_MISC
 
 /obj/item/weapon/axe/bronze/getonmobprop(tag)
 	. = ..()
@@ -311,7 +311,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	wdefense = MEDIOCRE_PARRY
 	minstr = 6
-	sellprice = 60
+	sellprice = M_BSILVER*2 + M_MISC + SKILL_2
 
 /obj/item/weapon/axe/psydon/Initialize(mapload)
 	. = ..()
@@ -354,7 +354,7 @@
 	swingsound = BLADEWOOSH_MED
 	wdefense = MEDIOCRE_PARRY
 	minstr = 6
-	sellprice = 50
+	sellprice = VALUE_STEEL_ITEM*2 + M_MISC + SKILL_2
 	pickmult = 1.2 // It's a pick...
 	axe_cut = 15 // ...and an Axe!
 	toolspeed = 2
@@ -376,7 +376,7 @@
 	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	wdefense = AVERAGE_PARRY
 	minstr = 6
-	sellprice = 35
+	sellprice = VALUE_STEEL_ITEM + M_MISC
 	axe_cut = 15 // Better than iron
 
 /obj/item/weapon/axe/steel/getonmobprop(tag)
@@ -401,6 +401,7 @@
 	wlength = WLENGTH_LONG
 	experimental_onhip = TRUE
 	max_blade_int = 250 //Trades some durability for weapon length
+	sellprice = VALUE_STEEL_ITEM + SKILL_2
 
 /obj/item/weapon/axe/steel/atgervi/getonmobprop(tag)
 	. = ..()
@@ -432,7 +433,7 @@
 
 	wdefense = GOOD_PARRY
 	minstr = 8
-	sellprice = 45
+	sellprice = VALUE_STEEL_ITEM + M_MISC
 	axe_cut = 15
 
 /obj/item/weapon/axe/nsapo/getonmobprop(tag)
@@ -463,7 +464,7 @@
 	melt_amount = 150
 	wlength = WLENGTH_SHORT
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
-	sellprice = 15
+	sellprice = VALUE_DIRT_CHEAP*2
 /obj/item/weapon/axe/copper/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -533,7 +534,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	melting_material = /datum/material/iron
 	melt_amount = 150
-	sellprice = 60
+	sellprice = VALUE_IRON_ITEM*3 + M_WOOD + SKILL_2
 
 /obj/item/weapon/greataxe/getonmobprop(tag)
 	. = ..()
@@ -573,7 +574,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
 	melt_amount = 150
-	sellprice = 90
+	sellprice = VALUE_STEEL_ITEM*3 + M_WOOD + SKILL_3
 
 /obj/item/weapon/greataxe/steel/doublehead // Trades more damage for being worse to parry with and easier to dodge of.
 	name = "double-headed steel greataxe"
@@ -586,7 +587,7 @@
 	melt_amount = 180
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
-	sellprice = 100
+	sellprice = VALUE_STEEL_ITEM*4 + M_WOOD + SKILL_4
 
 /obj/item/weapon/greataxe/steel/doublehead/graggar
 	name = "vicious greataxe"

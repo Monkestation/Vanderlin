@@ -61,7 +61,7 @@
 	minstr = 4
 	wdefense = GREAT_PARRY
 	wbalance = HARD_TO_DODGE
-	sellprice = 30
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/short/iron
 	desc = "An iron sword of shortened design and a reduced grip for single hand use."
@@ -70,7 +70,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	wdefense = GOOD_PARRY
 	wbalance = HARD_TO_DODGE
-	sellprice = 15
+	sellprice = VALUE_IRON_ITEM
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/weapon/sword/short/bronze
@@ -82,7 +82,7 @@
 	max_blade_int = 85
 	wdefense = GOOD_PARRY
 	wbalance = HARD_TO_DODGE
-	sellprice = 10
+	sellprice = VALUE_DIRT_CHEAP
 	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/weapon/sword/short/psy
@@ -99,6 +99,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_width = 32
 	grid_height = 96
+	sellprice = M_BSILVER + SKILL_2
 
 /obj/item/weapon/sword/short/psy/Initialize(mapload)
 	. = ..()						//+3 force, +100 blade int, +50 int, +1 def, make silver
@@ -112,7 +113,7 @@
 	icon_state = "sword1"
 	melt_amount = 75
 	melting_material = /datum/material/steel
-	sellprice = 30
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/arming/Initialize()
 	. = ..()
@@ -121,7 +122,7 @@
 
 /obj/item/weapon/sword/decorated
 	icon_state = "decsword1"
-	sellprice = 140
+	sellprice = VALUE_STEEL_ITEM + VALUE_GOLD_ITEM + SKILL_2
 
 /obj/item/weapon/sword/decorated/Initialize()
 	. = ..()
@@ -137,7 +138,7 @@
 	force_wielded = DAMAGE_SWORD_WIELD-1
 	smeltresult = /obj/item/ingot/silver
 	max_integrity = INTEGRITY_STRONG
-	sellprice = 45
+	sellprice = VALUE_SILVER_ITEM + SKILL_3
 	last_used = 0
 
 /obj/item/weapon/sword/silver/Initialize(mapload)
@@ -153,6 +154,7 @@
 	max_integrity = INTEGRITY_STRONG
 	wdefense = GOOD_PARRY
 	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/weapon/sword/bronze
 	name = "bronze sword"
@@ -164,6 +166,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	wdefense = AVERAGE_PARRY
 	smeltresult = /obj/item/ingot/bronze
+	sellprice = VALUE_DIRT_CHEAP
 
 /obj/item/weapon/sword/kaskara
 	name = "steel kaskara"
@@ -183,6 +186,7 @@
 	max_integrity = INTEGRITY_STRONG
 	wdefense = GOOD_PARRY
 	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/weapon/sword/ida
 	name = "steel ida"
@@ -195,7 +199,7 @@
 	minstr = 5
 	wdefense = GOOD_PARRY
 	wbalance = HARD_TO_DODGE
-	sellprice = 50
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/ida/iron
 	name = "iron ida"
@@ -205,7 +209,7 @@
 	minstr = 4
 	wdefense = GOOD_PARRY
 	wbalance = HARD_TO_DODGE
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/weapon/sword/rapier/caneblade
@@ -240,6 +244,7 @@
 	swingsound = BLADEWOOSH_SMALL
 	minstr = 5
 	wdefense = ULTMATE_PARRY
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/sabre/hwi
 	name = "steel hwi"
@@ -252,6 +257,7 @@
 	minstr = 7
 	wdefense = GREAT_PARRY
 	swingsound = BLADEWOOSH_LARGE
+	sellprice = VALUE_STEEL_ITEM*2
 
 /obj/item/weapon/sword/sabre/hwi/iron
 	name = "iron hwi"
@@ -259,12 +265,13 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "hwi_iron"
 	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ITEM*2
 
 /obj/item/weapon/sword/sabre/dec
 	name = "decorated sabre"
 	desc = "A sabre decorated with fashionable gold accents without sacrificing its lethal practicality."
 	icon_state = "decsaber"
-	sellprice = 140
+	sellprice = VALUE_STEEL_ITEM + VALUE_GOLD_ITEM + SKILL_2
 
 /obj/item/weapon/sword/sabre/stalker
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/short)
@@ -292,6 +299,7 @@
 	icon_state = "cutlass"
 	minstr = 6
 	wbalance = HARD_TO_DODGE
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/sabre/dadao
 	name = "steel dadao"
@@ -304,11 +312,13 @@
 	wbalance = EASY_TO_DODGE
 	swingsound = BLADEWOOSH_MED
 	smeltresult = /obj/item/ingot/steel
+	sellprice = VALUE_STEEL_ITEM*2
 
 /obj/item/weapon/sword/sabre/dadao/iron
 	name = "iron dadao"
 	icon_state = "dadao_iron"
 	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ITEM*2
 
 /obj/item/weapon/sword/sabre/dadao/bronze
 	name = "bronze dadao"
@@ -316,6 +326,7 @@
 	smeltresult = /obj/item/ingot/bronze
 	max_blade_int = 95
 	max_integrity = INTEGRITY_STANDARD
+	sellprice = VALUE_DIRT_CHEAP*2
 
 //................ Shalal Sabre ............... //
 /obj/item/weapon/sword/sabre/shalal
@@ -371,6 +382,7 @@
 	icon_state = "scimitar"
 	swingsound = BLADEWOOSH_LARGE
 	wdefense = AVERAGE_PARRY
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/scimitar/falchion
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/axe/chop)
@@ -379,6 +391,7 @@
 	icon_state = "falchion"
 	swingsound = BLADEWOOSH_HUGE
 	wbalance = EASY_TO_DODGE
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/scimitar/ngombe
 	name = "ngombe ngulu"
@@ -391,6 +404,7 @@
 	minstr = 8 //this thing is HEAVY
 	swingsound = BLADEWOOSH_HUGE
 	wbalance = EASY_TO_DODGE
+	sellprice = VALUE_STEEL_ITEM*2
 
 /obj/item/weapon/sword/scimitar/messer
 	name = "messer"
@@ -400,7 +414,7 @@
 	gripped_intents = list(/datum/intent/sword/chop, /datum/intent/sword/thrust)
 	minstr = 8 // Heavy blade used by orcs
 	wbalance = EASY_TO_DODGE
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
@@ -412,7 +426,7 @@
 	icon_state = "khopesh_iron"
 	swingsound = BLADEWOOSH_LARGE
 	wbalance = EASY_TO_DODGE
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh
@@ -424,7 +438,7 @@
 	icon_state = "khopesh_steel"
 	swingsound = BLADEWOOSH_LARGE
 	wbalance = EASY_TO_DODGE
-	sellprice = 45
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/scimitar/ada/iron
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop)
@@ -435,7 +449,7 @@
 	icon_state = "ada_iron"
 	swingsound = BLADEWOOSH_LARGE
 	wdefense = AVERAGE_PARRY
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/weapon/sword/scimitar/ada
@@ -447,7 +461,7 @@
 	icon_state = "ada_steel"
 	swingsound = BLADEWOOSH_LARGE
 	wdefense = AVERAGE_PARRY
-	sellprice = 45
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/scimitar/sengese/iron
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop)
@@ -459,7 +473,7 @@
 	swingsound = BLADEWOOSH_SMALL
 	wdefense = GOOD_PARRY
 	minstr = 6
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/weapon/sword/scimitar/sengese
@@ -472,13 +486,13 @@
 	swingsound = BLADEWOOSH_SMALL
 	wdefense = GOOD_PARRY
 	minstr = 6
-	sellprice = 45
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/scimitar/sengese/bronze
 	name = "bronze sengese"
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "sengese_bronze"
-	sellprice = 15
+	sellprice = VALUE_DIRT_CHEAP
 	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/weapon/sword/scimitar/sengese/silver
@@ -491,7 +505,7 @@
 	swingsound = BLADEWOOSH_SMALL
 	wdefense = GOOD_PARRY
 	minstr = 7
-	sellprice = 30
+	sellprice = VALUE_SILVER_ITEM + SKILL_3
 	smeltresult = /obj/item/ingot/silver
 
 /obj/item/weapon/sword/scimitar/sengese/silver/Initialize(mapload)
@@ -510,6 +524,7 @@
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	smeltresult = /obj/item/ingot/steel
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/scimitar/wodao/iron
 	name = "iron wo dao"
@@ -517,6 +532,7 @@
 	max_blade_int = 125
 	max_integrity = INTEGRITY_STANDARD
 	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ITEM
 
 /*--------\
 | Rapiers |		Onehanded, slightly weaker cut, more AP thrust, harder to dodge.
@@ -539,6 +555,7 @@
 	wbalance = VERY_HARD_TO_DODGE
 	SET_BASE_PIXEL(-16, -16)
 	dropshrink = 0.8
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/sword/rapier/getonmobprop(tag)
 	. = ..()
@@ -635,7 +652,7 @@
 /obj/item/weapon/sword/rapier/dec
 	icon_state = "decrapier"
 	desc = "A rapier decorated with gold inlaid on its hilt. A regal weapon fit for nobility."
-	sellprice = 140
+	sellprice = VALUE_STEEL_ITEM + VALUE_GOLD_ITEM + SKILL_2
 
 /obj/item/weapon/sword/rapier/nimcha
 	name = "nimcha"
@@ -644,7 +661,7 @@
 	icon_state = "nimcha"
 	wbalance = HARD_TO_DODGE
 	dropshrink = 0.8
-	sellprice = 140 // its made with gold and steel, thats pretty valuable
+	sellprice = VALUE_STEEL_ITEM + VALUE_GOLD_ITEM + SKILL_2
 
 //................ Lord's Rapier ............... //
 /obj/item/weapon/sword/rapier/dec/lord
@@ -663,7 +680,7 @@
 	smeltresult = /obj/item/ingot/silver
 	max_blade_int = 240 // .8 of base steel
 	max_integrity = 400 // .8 of base steel
-	sellprice = 45
+	sellprice = VALUE_SILVER_ITEM + SKILL_3
 	last_used = 0
 
 /obj/item/weapon/sword/rapier/silver/Initialize(mapload)
@@ -730,7 +747,7 @@
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM*2 + SKILL_2
 	grid_height = 96
 	grid_width = 64
 
@@ -753,7 +770,7 @@
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.8
-	sellprice = 80
+	sellprice = VALUE_STEEL_ITEM*2
 	max_integrity = INTEGRITY_STRONG - 50 //this thing is long as hell, it would be more likely to break over time
 
 /obj/item/weapon/sword/long/shotel/getonmobprop(tag)
@@ -774,7 +791,7 @@
 /obj/item/weapon/sword/long/shotel/iron
 	name = "iron shotel"
 	icon_state = "shotel_iron"
-	sellprice = 60
+	sellprice = VALUE_IRON_ITEM*2
 	max_integrity = INTEGRITY_STANDARD - 50
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
@@ -805,7 +822,7 @@
 	gripped_intents = list(/datum/intent/sword/thrust/long, /datum/intent/sword/strike, /datum/intent/sword/cut/long, /datum/intent/sword/disarm)
 	gripsprite = FALSE
 	dropshrink = 0.9
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM*3
 	max_integrity = 175
 
 /obj/item/weapon/sword/long/aruval/getonmobprop(tag)
@@ -826,7 +843,7 @@
 /obj/item/weapon/sword/long/aruval/iron
 	name = "iron aruval"
 	icon_state = "aruval_iron"
-	sellprice = 35
+	sellprice = VALUE_IRON_ITEM*3
 	max_integrity = 125
 	smeltresult = /obj/item/ingot/iron
 
@@ -985,7 +1002,7 @@
 	smeltresult = /obj/item/ingot/silver
 	wbalance = -1
 	wdefense = GREAT_PARRY
-	sellprice = 90
+	sellprice = VALUE_SILVER_ITEM + VALUE_STEEL_ITEM + SKILL_3
 	last_used = 0
 	melting_material = /datum/material/silver
 	melt_amount = 75
@@ -1011,7 +1028,7 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/long, /datum/intent/sword/strike, /datum/intent/sword/chop/long)
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 100
+	sellprice = M_BSILVER + SKILL_2
 	last_used = 0
 	melting_material = /datum/material/silver
 	melt_amount = 75
@@ -1032,7 +1049,7 @@
 	max_blade_int = 200
 	max_integrity = 300
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 160
+	sellprice = VALUE_SILVER_ITEM*2 + VALUE_GOLD_ITEM + SKILL_3
 	last_used = 0
 	melting_material = /datum/material/silver
 	melt_amount = 75
@@ -1059,7 +1076,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	minstr = 11
 	wbalance = EASY_TO_DODGE
-	sellprice = 90
+	sellprice = VALUE_STEEL_ITEM*3 + SKILL_3
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
 	. = ..()
@@ -1083,7 +1100,7 @@
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/long, /datum/intent/sword/strike, /datum/intent/sword/chop/long)
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 150
+	sellprice = M_BSILVER*2 + SKILL_2
 	minstr = 11
 	melting_material = /datum/material/silver
 	melt_amount = 150
@@ -1172,7 +1189,7 @@
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 150 // Iron tier
 	max_integrity = INTEGRITY_STRONG
-	sellprice = 60
+	sellprice = VALUE_IRON_ITEM*3 + SKILL_2
 	melting_material = /datum/material/iron
 	melt_amount = 225
 
@@ -1246,7 +1263,7 @@
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 150 // Iron tier
 	max_integrity = INTEGRITY_STRONG
-	sellprice = 90
+	sellprice = VALUE_IRON_ITEM*3 + SKILL_2
 
 /obj/item/weapon/sword/long/greatsword/ironclaymore/getonmobprop(tag)
 	. = ..()
@@ -1272,7 +1289,7 @@
 	minstr = 10
 	max_blade_int = INTEGRITY_STRONG
 	max_integrity = 450
-	sellprice = 110
+	sellprice = VALUE_STEEL_ITEM*3 + SKILL_3
 
 /obj/item/weapon/sword/long/greatsword/steelclaymore/getonmobprop(tag)
 	. = ..()
@@ -1414,7 +1431,7 @@
 	dropshrink = 0.90
 	smeltresult = /obj/item/ingot/copper
 	wbalance = -1
-	sellprice = 10
+	sellprice = VALUE_DIRT_CHEAP + M_MISC
 
 /obj/item/weapon/sword/coppermesser/getonmobprop(tag)
 	. = ..()
@@ -1458,7 +1475,7 @@
 	slot_flags = ITEM_SLOT_BACK//how the fuck you could put this thing on your hip?
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/copper
-	sellprice = 25//lets make the two bars worth it
+	sellprice = VALUE_DIRT_CHEAP*2
 
 
 
@@ -1494,6 +1511,7 @@
 	max_blade_int = 300
 	wdefense = GREAT_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/weapon/estoc/getonmobprop(tag)
 	. = ..()
@@ -1560,6 +1578,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	dropshrink = 0.80
 	wdefense = AVERAGE_PARRY
+	sellprice = VALUE_DIRT_CHEAP
 
 //................ Gaffer's vanity sword ............... //
 

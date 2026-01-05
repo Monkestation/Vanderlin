@@ -27,7 +27,7 @@
 	minstr = 7
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM + M_MISC
 	blade_dulling = DULLING_BASHCHOP
 	grid_height = 64
 	grid_width = 32
@@ -68,7 +68,7 @@
 	minstr = 7
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
-	sellprice = 20
+	sellprice = VALUE_IRON_ITEM + M_MISC
 	blade_dulling = DULLING_BASHCHOP
 	grid_height = 64
 	grid_width = 32
@@ -92,7 +92,7 @@
 	icon_state = "shishpar_iron"
 	wbalance = EASY_TO_DODGE
 	wdefense = GOOD_PARRY
-	sellprice = 35
+	sellprice = VALUE_IRON_ITEM*2
 
 /*--------------\
 | Strike intent |	moderate AP
@@ -188,7 +188,7 @@
 	icon_state = "noble_cane"
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
-	sellprice = 200
+	sellprice = VALUE_GOLD_ITEM + M_WOOD + SKILL_2
 	minstr = 5
 	force = DAMAGE_MACE - 3
 	force_wielded = DAMAGE_MACE - 1
@@ -226,7 +226,7 @@
 	icon_state = "artificer_cane"
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
-	sellprice = 35
+	sellprice = VALUE_DIRT_CHEAP*2
 	minstr = 4
 	force = DAMAGE_MACE - 3
 	force_wielded = DAMAGE_MACE - 1
@@ -323,7 +323,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM*2
 	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/steel/rungu
@@ -335,7 +335,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM + M_MISC
 	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/steel/shishpar
@@ -346,7 +346,7 @@
 	icon_state = "shishpar_steel"
 	wbalance = EASY_TO_DODGE
 	wdefense = GREAT_PARRY
-	sellprice = 75
+	sellprice = VALUE_STEEL_ITEM*2
 
 //................ Spiked club ............... //
 /obj/item/weapon/mace/spiked
@@ -377,6 +377,7 @@
 	max_integrity = INTEGRITY_STRONG-50
 	wbalance = HARD_TO_DODGE
 	wdefense = MEDIOCRE_PARRY
+	sellprice = VALUE_IRON_ITEM + M_MISC
 
 /obj/item/weapon/mace/bludgeon/getonmobprop(tag)
 	. = ..()
@@ -401,7 +402,7 @@
 	minstr = 5
 	melting_material = /datum/material/copper
 	melt_amount = 75
-	sellprice = 10
+	sellprice = VALUE_DIRT_CHEAP + M_MISC
 	wdefense = MEDIOCRE_PARRY
 
 
@@ -463,6 +464,7 @@
 	icon_state = "psyflangedmace"
 	resistance_flags = FIRE_PROOF
 	wdefense = 2
+	sellprice = M_BSILVER + SKILL_2
 
 /obj/item/weapon/mace/cudgel/psy/Initialize(mapload)
 	. = ..()
@@ -535,7 +537,7 @@
 	parrysound = "parrywood"
 	max_integrity = INTEGRITY_STRONG
 	wbalance = EASY_TO_DODGE
-	sellprice = 35
+	sellprice = VALUE_IRON_ITEM + M_WOOD + SKILL_1
 	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/goden/getonmobprop(tag)
@@ -570,7 +572,7 @@
 	melt_amount = 75
 	max_integrity = INTEGRITY_STRONGEST
 //	slowdown = 1
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM + M_WOOD + SKILL_2
 	wbalance = DODGE_CHANCE_NORMAL
 
 /obj/item/weapon/mace/goden/steel/getonmobprop(tag)
@@ -594,7 +596,7 @@
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 100
+	sellprice = M_BSILVER*2 + M_MISC + SKILL_2
 	wdefense = GOOD_PARRY
 	minstr = 11
 
@@ -694,6 +696,7 @@
 	melt_amount = 75
 	blade_dulling = DULLING_BASH
 	wdefense = GOOD_PARRY
+	sellprice = VALUE_IRON_ITEM + M_MISC
 
 /obj/item/weapon/mace/warhammer/getonmobprop(tag)
 	if(tag)
@@ -715,6 +718,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	wdefense = GREAT_PARRY
+	sellprice = VALUE_STEEL_ITEM*2
 
 /datum/intent/mace/warhammer/stab
 	name = "thrust"
@@ -754,6 +758,7 @@
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/axe/cut, /datum/intent/axe/chop) //can't smash with this weapon.
 	minstr = 5
 	sharpness = IS_SHARP
+	sellprice = VALUE_IRON_ITEM + SKILL_1
 
 /obj/item/weapon/mace/elvenclub/steel
 	name = "steel elven war club"
@@ -765,7 +770,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 60
+	sellprice = VALUE_STEEL_ITEM
 	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/elvenclub/bronze
@@ -777,6 +782,7 @@
 	minstr = 5
 	melting_material = /datum/material/bronze
 	melt_amount = 100
+	sellprice = VALUE_DIRT_CHEAP
 
 /obj/item/weapon/mace/elvenclub/silver
 	name = "regal elven war club"
@@ -790,7 +796,7 @@
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 150
+	sellprice = VALUE_SILVER_ITEM + VALUE_GOLD_ITEM + SKILL_3
 	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/elvenclub/silver/Initialize(mapload)
@@ -808,7 +814,7 @@
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 45
+	sellprice = VALUE_SILVER_ITEM + M_MISC + SKILL_3
 	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/silver/rungu/Initialize(mapload)
@@ -823,7 +829,7 @@
 	force = DAMAGE_MACE+2
 	wbalance = DODGE_CHANCE_NORMAL
 	wdefense = AVERAGE_PARRY
-	sellprice = 150 // It's silver and gold.
+	sellprice = VALUE_SILVER_ITEM + VALUE_GOLD_ITEM + SKILL_3
 
 /obj/item/weapon/mace/silver/gada/Initialize(mapload)
 	. = ..()
@@ -838,7 +844,7 @@
 	minstr = 6
 	wbalance = DODGE_CHANCE_NORMAL
 	wdefense = AVERAGE_PARRY
-	sellprice = 25
+	sellprice = VALUE_DIRT_CHEAP + M_MISC
 
 /obj/item/weapon/mace/shishpar/bronze
 	name = "bronze shishpar"
@@ -848,6 +854,6 @@
 	icon_state = "shishpar_bronze"
 	wbalance = EASY_TO_DODGE
 	wdefense = GOOD_PARRY
-	sellprice = 25
+	sellprice = VALUE_DIRT_CHEAP*2
 	max_blade_int = 105
 	max_integrity = INTEGRITY_STANDARD

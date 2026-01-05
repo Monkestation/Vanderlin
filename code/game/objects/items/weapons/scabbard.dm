@@ -75,13 +75,13 @@
 /obj/item/weapon/scabbard/knife/noble
 	name = "silver decorated knife sheath"
 	desc = "A slingable sheath made of leather, enamored with elaborate silver decorations, often seen on the hips of nobles"
-	sellprice = 50
+	sellprice = VALUE_SILVER_ITEM + VALUE_MEDIUM_LEATHER + M_MISC*2
 	icon_state = "nsheath"
 
 /obj/item/weapon/scabbard/knife/royal
 	name = "gold decorated knife sheath"
 	desc = "A slingable sheath made of leather, enamored with exquisite golden decorations, often seen on the hips of royalty"
-	sellprice = 100
+	sellprice = VALUE_GOLD_ITEM + VALUE_MEDIUM_LEATHER + M_MISC*2
 	icon_state = "rsheath"
 
 /obj/item/weapon/scabbard/sword
@@ -119,13 +119,13 @@
 /obj/item/weapon/scabbard/sword/noble
 	name = "silver decorated scabbard"
 	desc = "A scabbard designed to hold a sword. This one is decorated on a silver platter."
-	sellprice = 50
+	sellprice = VALUE_SILVER_ITEM + VALUE_MEDIUM_LEATHER + M_WOOD + M_MISC
 	icon_state = "nscabbard"
 
 /obj/item/weapon/scabbard/sword/royal
 	name = "gold decorated scabbard"
 	desc = "A scabbard designed to hold a sword. This one is lined with golden fittings, fit for a royal."
-	sellprice = 100
+	sellprice = VALUE_GOLD_ITEM + VALUE_MEDIUM_LEATHER + M_WOOD + M_MISC
 	icon_state = "rscabbard"
 
 /obj/item/weapon/scabbard/cane

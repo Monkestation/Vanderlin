@@ -78,6 +78,7 @@
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = 300
 	experimental_inhand = FALSE
+	sellprice = VALUE_STEEL_ITEM + M_WOOD + SKILL_1
 
 /obj/item/weapon/shield/atgervi/getonmobprop(tag)
 	. = ..()

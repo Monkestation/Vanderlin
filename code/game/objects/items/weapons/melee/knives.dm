@@ -135,7 +135,7 @@
 	wbalance = HARD_TO_DODGE
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	sellprice = 6
+	sellprice = VALUE_STEEL_ITEM
 
 
 /obj/item/weapon/knife/dagger/navaja
@@ -255,6 +255,7 @@
 	melt_amount = 75
 	wbalance = 0 // Except this one, too huge and used to chop
 	dropshrink = 0.9
+	sellprice = VALUE_IRON_ITEM
 
 //................ Hack-Knife ............... //
 /obj/item/weapon/knife/cleaver/combat
@@ -288,7 +289,7 @@
 	icon_state = "dagger_bronze"
 	melting_material = /datum/material/bronze
 	melt_amount = 75
-	sellprice = 10
+	sellprice = VALUE_DIRT_CHEAP/2
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
@@ -298,7 +299,7 @@
 	icon_state = "idagger"
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	sellprice = 12
+	sellprice = VALUE_IRON_SMALL_ITEM
 
 /obj/item/weapon/knife/jile/iron
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
@@ -307,7 +308,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
 	melting_material = null
-	sellprice = 12
+	sellprice = VALUE_IRON_SMALL_ITEM
 	dropshrink = 1.0
 
 /obj/item/weapon/knife/dagger/kukri/iron
@@ -316,6 +317,7 @@
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER+1
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/weapon/knife/njora/iron
 
@@ -325,7 +327,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_iron"
 	melting_material = null
-	sellprice = 12
+	sellprice = VALUE_IRON_SMALL_ITEM
 	dropshrink = 1.0
 
 //................ Steel Dagger ............... //
@@ -337,6 +339,7 @@
 	melt_amount = 75
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
+	sellprice = VALUE_STEEL_SMALL_ITEM
 
 /obj/item/weapon/knife/jile/steel
 	name = "steel jile"
@@ -347,7 +350,7 @@
 	melting_material = null
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
-	sellprice = 20
+	sellprice = VALUE_STEEL_SMALL_ITEM
 	dropshrink = 1.0
 
 /obj/item/weapon/knife/njora/steel
@@ -359,7 +362,7 @@
 	melting_material = null
 	wdefense = AVERAGE_PARRY
 	wbalance = HARD_TO_DODGE
-	sellprice = 20
+	sellprice = VALUE_STEEL_SMALL_ITEM
 	dropshrink = 1.0
 
 /obj/item/weapon/knife/dagger/steel/special
@@ -372,6 +375,7 @@
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER+1
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
+	sellprice = VALUE_STEEL_ITEM
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
 	name ="plaguebringer sickle"
@@ -410,7 +414,7 @@
 	melting_material = /datum/material/silver
 	max_blade_int = 120
 	max_integrity = INTEGRITY_STRONG * 0.8
-	sellprice = 45
+	sellprice = VALUE_SILVER_ITEM + SKILL_2
 	last_used = 0
 
 /obj/item/weapon/knife/dagger/silver/Initialize(mapload)
@@ -423,7 +427,7 @@
 	desc = "A silver dagger favored by close range fighters of the inquisition."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psydagger"
-	sellprice = 60
+	sellprice = M_BSILVER + SKILL_2
 
 //................ Profane Dagger ............... //
 /obj/item/weapon/knife/dagger/steel/profane
@@ -640,6 +644,7 @@
 	icon_state = "villagernife"
 	melting_material = /datum/material/iron
 	melt_amount = 25
+	sellprice = VALUE_IRON_ITEM/3
 
 /obj/item/weapon/knife/copper
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
@@ -653,7 +658,7 @@
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	melting_material = /datum/material/copper
 	melt_amount = 50
-	sellprice = 10
+	sellprice = VALUE_DIRT_CHEAP/2
 
 
 /obj/item/weapon/knife/throwingknife
@@ -684,7 +689,7 @@
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 20, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
 	melt_amount = 50
-	sellprice = 2
+	sellprice = VALUE_DIRT_CHEAP/3
 
 /obj/item/weapon/knife/throwingknife/steel
 	name = "steel tossblade"

@@ -2,7 +2,7 @@
 	name = "golden halfmask"
 	desc = "Half of your face turned gold."
 	icon_state = "lmask"
-	sellprice = 50
+	sellprice = VALUE_GOLD_ITEM + SKILL_1
 
 /obj/item/clothing/face/lordmask/l
 	icon_state = "lmask_l"
@@ -340,6 +340,7 @@
 	melting_material = /datum/material/silver
 	melt_amount = 100
 	var/cross_retracted = 0 // Does the silver mask has it's 3 little spuds retracted or not. Used for toggling.
+	sellprice = VALUE_SILVER_ITEM + SKILL_1
 
 /obj/item/clothing/face/facemask/silver/Initialize(mapload)
 	. = ..()
