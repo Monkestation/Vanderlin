@@ -44,6 +44,10 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_NOBLE,
 		TRAIT_MEDIUMARMOR,
+		TRAIT_SILVER_BLESSED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
+		TRAIT_INQUISITION,
 	)
 
 	languages = list(/datum/language/oldpsydonic)
@@ -120,6 +124,10 @@
 	traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
+		TRAIT_SILVER_BLESSED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
+		TRAIT_INQUISITION,
 	)
 
 	languages = list(/datum/language/oldpsydonic)
@@ -129,10 +137,10 @@
 /datum/job/migrant/inquisition_crusader/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.gender == FEMALE)
-		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 	else
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
 
 	if(!istype(spawned.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
