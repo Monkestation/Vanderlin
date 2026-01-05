@@ -161,6 +161,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_WRETCH			"CAT_WRETCH"
 #define CTAG_INQUISITION	"CAT_INQUISITION"	// For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
+#define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
 
 // Character category and its buys
 #define TRIUMPH_CAT_CHARACTER "CHARACTER"

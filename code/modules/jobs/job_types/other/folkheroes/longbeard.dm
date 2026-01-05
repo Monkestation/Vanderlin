@@ -3,10 +3,9 @@
 	tutorial = "You've earned your place as one of the old grumblers, a pinnacle of tradition, justice, and willpower. You've come to establish order in these lands, and with your hammer of grudges you'll see it through."
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
 	allowed_races = list(SPEC_ID_DWARF)
-	outfit = /datum/outfit/adventurer/longbeard
+	outfit = /datum/outfit/folkhero/longbeard
 	total_positions = 1
-	roll_chance = 15
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
 	skills = list(
@@ -35,8 +34,8 @@
 		TRAIT_STEELHEARTED, // Nothing fazes a longbeard
 	)
 
-/datum/outfit/adventurer/longbeard
-	name = "Longbeard (Adventurer)"
+/datum/outfit/folkhero/longbeard
+	name = "Longbeard (Folkhero)"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr = /obj/item/weapon/mace/goden/steel/warhammer
 	beltl = /obj/item/storage/belt/pouch/coins/mid
