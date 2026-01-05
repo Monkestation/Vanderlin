@@ -14,6 +14,7 @@
 	icon_state = "choe"
 	smeltresult = /obj/item/ingot/copper
 	time_multiplier = 0.5
+	sellprice = VALUE_DIRT_CHEAP + M_MISC*2
 
 /obj/item/weapon/sickle/copper
 	possible_item_intents = list(DAGGER_CUT)
@@ -22,6 +23,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "csickle"
 	smeltresult = /obj/item/ingot/copper
+	sellprice = VALUE_DIRT_CHEAP + M_MISC
 
 /obj/item/weapon/pitchfork/copper
 	name = "copper fork"
@@ -35,6 +37,7 @@
 	wdefense = 2
 	smeltresult = /obj/item/ingot/copper
 	associated_skill = /datum/skill/combat/polearms
+	sellprice = VALUE_DIRT_CHEAP + M_MISC*2
 
 /obj/item/weapon/pitchfork/copper/getonmobprop(tag)
 	. = ..()

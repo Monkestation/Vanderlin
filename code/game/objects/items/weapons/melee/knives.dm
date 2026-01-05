@@ -178,6 +178,7 @@
 	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	sellprice = VALUE_IRON_ITEM
 
 /datum/intent/snip // The salvaging intent! Used only for the scissors for now!
 	name = "snip"
@@ -231,6 +232,7 @@
 	icon_state = "sscissors"
 	melting_material = /datum/material/steel
 	melt_amount = 75
+	sellprice = VALUE_STEEL_ITEM
 
 //................ Cleaver ............... //
 /obj/item/weapon/knife/cleaver
@@ -289,7 +291,7 @@
 	icon_state = "dagger_bronze"
 	melting_material = /datum/material/bronze
 	melt_amount = 75
-	sellprice = VALUE_DIRT_CHEAP/2
+	sellprice = VALUE_BRONZE_ITEM/2
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
@@ -689,7 +691,7 @@
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 20, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
 	melt_amount = 50
-	sellprice = VALUE_DIRT_CHEAP/3
+	sellprice = VALUE_BRONZE_ITEM/3
 
 /obj/item/weapon/knife/throwingknife/steel
 	name = "steel tossblade"

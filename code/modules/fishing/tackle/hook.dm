@@ -89,6 +89,7 @@
 	icon_state = "ironhook"
 	fishing_hook_traits = FISHING_HOOK_WEIGHTED
 	rod_overlay_icon_state = "hook_weighted_overlay"
+	sellprice = VALUE_IRON_ITEM/3
 
 /obj/item/fishing/hook/deluxe
 	name = "wooden lure"

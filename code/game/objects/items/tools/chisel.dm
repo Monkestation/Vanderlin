@@ -26,6 +26,7 @@
 	melt_amount = 50
 	melting_material = /datum/material/steel
 	var/time_multiplier = 1
+	sellprice = VALUE_STEEL_ITEM
 
 /datum/intent/chisel
 	name = "chisel"
@@ -42,8 +43,10 @@
 	name = "iron chisel"
 	smeltresult = /obj/item/ingot/iron
 	time_multiplier = 1.1
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/weapon/chisel/bronze
 	name = "bronze chisel"
 	smeltresult = /obj/item/ingot/bronze
 	time_multiplier = 1.2
+	sellprice = VALUE_BRONZE_ITEM

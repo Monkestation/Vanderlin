@@ -354,7 +354,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/tools/silver/servantbell
-	name = "x3 Service Bells"
+	name = "3x Service Bells"
 	created_item = /obj/item/servant_bell
 	createditem_extra = 2
 	craftdiff = 3

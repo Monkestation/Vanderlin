@@ -16,6 +16,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	var/pickmult = 1 // Multiplier of how much extra picking force we do to rocks.
+	sellprice = VALUE_IRON_ITEM + M_MISC
 
 /obj/item/weapon/pick/getonmobprop(tag)
 	. = ..()
@@ -41,6 +42,7 @@
 	associated_skill = /datum/skill/combat/axesmaces
 	melting_material = /datum/material/copper
 	melt_amount = 75
+	sellprice = VALUE_DIRT_CHEAP + M_MISC
 
 /obj/item/weapon/pick/steel
 	name = "steel pick"
@@ -53,6 +55,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	pickmult = 1.2
+	sellprice = VALUE_STEEL_ITEM + M_MISC
 
 /obj/item/weapon/pick/stone
 	name = "stone pick"

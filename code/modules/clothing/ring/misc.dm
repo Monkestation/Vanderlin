@@ -2,7 +2,7 @@
 /obj/item/clothing/ring/silver
 	name = "silver ring"
 	icon_state = "ring_s"
-	sellprice = 33
+	sellprice = VALUE_SILVER_TINY_ITEM + SKILL_2
 
 /obj/item/clothing/ring/silver/Initialize(mapload)
 	. = ..()
@@ -12,73 +12,73 @@
 	name = "makers' ring"
 	desc = "The wearer is a proud member of the Makers' guild."
 	icon_state = "guild_mason"
-	sellprice = 0
+	sellprice = VALUE_SILVER_ITEM + SKILL_5
 
 /obj/item/clothing/ring/silver/dorpel
 	name = "dorpel ring"
 	icon_state = "s_ring_diamond"
-	sellprice = 140
+	sellprice = VALUE_SILVER_ITEM + SKILL_3 + M_DORPEL
 
 /obj/item/clothing/ring/silver/blortz
 	name = "blortz ring"
 	icon_state = "s_ring_quartz"
-	sellprice = 110
+	sellprice = VALUE_SILVER_ITEM + SKILL_3 + M_BLORTZ
 
 /obj/item/clothing/ring/silver/saffira
 	name = "saffira ring"
 	icon_state = "s_ring_sapphire"
-	sellprice = 95
+	sellprice = VALUE_SILVER_ITEM + SKILL_3 + M_SAFFIRA
 
 /obj/item/clothing/ring/silver/gemerald
 	name = "gemerald ring"
 	icon_state = "s_ring_emerald"
-	sellprice = 80
+	sellprice = VALUE_SILVER_ITEM + SKILL_3 + M_GEMERALD
 
 /obj/item/clothing/ring/silver/toper
 	name = "toper ring"
 	icon_state = "s_ring_topaz"
-	sellprice = 65
+	sellprice = VALUE_SILVER_ITEM + SKILL_3 + M_TOPER
 
 /obj/item/clothing/ring/silver/rontz
 	name = "rontz ring"
 	icon_state = "s_ring_ruby"
-	sellprice = 130
+	sellprice = VALUE_SILVER_ITEM + SKILL_3 + M_RONTZ
 
 /obj/item/clothing/ring/gold
 	name = "gold ring"
 	icon_state = "ring_g"
-	sellprice = 70
+	sellprice = VALUE_GOLD_TINY_ITEM + SKILL_3
 
 /obj/item/clothing/ring/gold/guild_mercator
 	name = "Mercator ring"
 	desc = "The wearer is a proud member of the Mercator guild."
 	icon_state = "guild_mercator"
-	sellprice = 0
+	sellprice = VALUE_GOLD_ITEM + SKILL_5
 
 /obj/item/clothing/ring/gold/dorpel
 	name = "dorpel ring"
 	icon_state = "g_ring_diamond"
-	sellprice = 270
+	sellprice = VALUE_GOLD_ITEM + SKILL_4 + M_DORPEL
 
 /obj/item/clothing/ring/gold/blortz
 	name = "blortz ring"
 	icon_state = "g_ring_quartz"
-	sellprice = 245
+	sellprice = VALUE_GOLD_ITEM + SKILL_4 + M_BLORTZ
 
 /obj/item/clothing/ring/gold/saffira
 	name = "saffira ring"
 	icon_state = "g_ring_sapphire"
-	sellprice = 200
+	sellprice = VALUE_GOLD_ITEM + SKILL_4 + M_SAFFIRA
 
 /obj/item/clothing/ring/gold/gemerald
 	name = "gemerald ring"
 	icon_state = "g_ring_emerald"
-	sellprice = 195
+	sellprice = VALUE_GOLD_ITEM + SKILL_4 + M_GEMERALD
 
 /obj/item/clothing/ring/gold/toper
 	name = "toper ring"
 	icon_state = "g_ring_topaz"
-	sellprice = 180
+	sellprice = VALUE_GOLD_ITEM + SKILL_4 + M_TOPER
 
 /obj/item/clothing/ring/gold/rontz
 	name = "rontz ring"
@@ -417,21 +417,17 @@
 	return
 
 /obj/item/clothing/ring/signet
-	name = "Signet Ring"
 	name = "signet ring"
 	icon_state = "signet"
-	icon_state = "signet"
-	desc = "A large golden ring engraved with the Symbol of Psydon."
 	desc = "A large golden signet ring engraved with the Symbol of Psydon."
-	sellprice = 135
-	sellprice = 135
+	sellprice = VALUE_GOLD_ITEM + SKILL_3
 	var/tallowed = FALSE
 
 /obj/item/clothing/ring/signet/silver
 	name = "silver signet ring"
 	icon_state = "signet_silver"
 	desc = "A ring of blessed silver, bearing the Archbishop's symbol. By dipping it in melted redtallow, it can seal writs of religious importance."
-	sellprice = 90
+	sellprice = M_BSILVER + SKILL_4
 
 /obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, params)
 	. = ..()

@@ -29,6 +29,7 @@
 	grid_width = 32
 	grid_height = 96
 	var/time_multiplier = 1 //multipler to do_after times
+	sellprice = VALUE_IRON_ITEM + M_MISC*2
 
 /obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, params)
 	. = ..()

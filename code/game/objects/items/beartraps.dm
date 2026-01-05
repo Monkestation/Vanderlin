@@ -194,6 +194,8 @@
 	desc = "Curious is the trapmaker's art. Their efficacy unwitnessed by their own eyes."
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	sellprice = VALUE_IRON_ITEM
+
 
 /obj/item/restraints/legcuffs/beartrap/crafted/makeshift
 	makeshift_prob = 15 //50 - 15 = 35% chance to set up instead of flat 50%

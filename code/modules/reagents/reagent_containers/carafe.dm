@@ -25,7 +25,7 @@
 	icon_state = "silver_carafe"
 	fill_icon_thresholds = null
 	dropshrink = 0.8
-	sellprice = 45
+	sellprice = VALUE_SILVER_ITEM + SKILL_2
 	last_used = 0
 
 /obj/item/reagent_containers/glass/carafe/silver/Initialize(mapload)
@@ -48,7 +48,7 @@
 	icon_state = "gold_carafe"
 	fill_icon_thresholds = null
 	dropshrink = 0.8
-	sellprice = 65
+	sellprice = VALUE_GOLD_ITEM + SKILL_2
 
 
 /* Teapots */
@@ -90,7 +90,7 @@
 	fill_icon_thresholds = null
 	dropshrink = 1.0
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 65
+	sellprice = VALUE_GOLD_ITEM + SKILL_3
 
 /obj/item/reagent_containers/glass/carafe/teapot/silver
 	name = "silver teapot"
@@ -100,7 +100,7 @@
 	fill_icon_thresholds = null
 	dropshrink = 1.0
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 35
+	sellprice = VALUE_SILVER_ITEM + SKILL_2
 
 /obj/item/reagent_containers/glass/carafe/teapot/bronze
 	name = "bronze teapot"
@@ -110,7 +110,7 @@
 	fill_icon_thresholds = null
 	dropshrink = 1.0
 	smeltresult = /obj/item/ingot/bronze
-	sellprice = 25
+	sellprice = VALUE_BRONZE_ITEM
 
 /obj/item/reagent_containers/glass/carafe/teapot/jade
 	name = "joapstone teapot"

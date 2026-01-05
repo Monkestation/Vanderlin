@@ -187,6 +187,7 @@
 	max_blade_int = 50
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/skill/combat/knives
+	sellprice = VALUE_IRON_ITEM + M_MISC
 
 /obj/item/weapon/sickle/New()
 	. = ..()
@@ -238,6 +239,7 @@
 	wlength = 66
 	var/time_multiplier = 1
 	max_integrity = INTEGRITY_POOR
+	sellprice = VALUE_IRON_ITEM + M_MISC*2
 
 /obj/item/weapon/hoe/Initialize()
 	. = ..()
@@ -380,6 +382,7 @@
 	wlength = WLENGTH_LONG
 
 	var/list/forked = list()
+	sellprice = VALUE_IRON_ITEM + M_MISC*2
 
 /obj/item/weapon/pitchfork/Initialize()
 	. = ..()

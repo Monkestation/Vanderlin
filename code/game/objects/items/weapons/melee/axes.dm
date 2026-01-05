@@ -280,7 +280,7 @@
 	wdefense = MEDIOCRE_PARRY
 	minstr = 6
 
-	sellprice = VALUE_DIRT_CHEAP + M_MISC
+	sellprice = VALUE_BRONZE_ITEM + M_MISC
 
 /obj/item/weapon/axe/bronze/getonmobprop(tag)
 	. = ..()

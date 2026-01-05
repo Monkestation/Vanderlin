@@ -82,7 +82,7 @@
 	max_blade_int = 85
 	wdefense = GOOD_PARRY
 	wbalance = HARD_TO_DODGE
-	sellprice = VALUE_DIRT_CHEAP
+	sellprice = VALUE_BRONZE_ITEM
 	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/weapon/sword/short/psy
@@ -166,7 +166,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	wdefense = AVERAGE_PARRY
 	smeltresult = /obj/item/ingot/bronze
-	sellprice = VALUE_DIRT_CHEAP
+	sellprice = VALUE_BRONZE_ITEM
 
 /obj/item/weapon/sword/kaskara
 	name = "steel kaskara"
@@ -326,7 +326,7 @@
 	smeltresult = /obj/item/ingot/bronze
 	max_blade_int = 95
 	max_integrity = INTEGRITY_STANDARD
-	sellprice = VALUE_DIRT_CHEAP*2
+	sellprice = VALUE_BRONZE_ITEM*2
 
 //................ Shalal Sabre ............... //
 /obj/item/weapon/sword/sabre/shalal
@@ -492,7 +492,7 @@
 	name = "bronze sengese"
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "sengese_bronze"
-	sellprice = VALUE_DIRT_CHEAP
+	sellprice = VALUE_BRONZE_ITEM
 	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/weapon/sword/scimitar/sengese/silver
@@ -1578,7 +1578,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	dropshrink = 0.80
 	wdefense = AVERAGE_PARRY
-	sellprice = VALUE_DIRT_CHEAP
+	sellprice = VALUE_BRONZE_ITEM
 
 //................ Gaffer's vanity sword ............... //
 

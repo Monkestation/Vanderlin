@@ -522,6 +522,7 @@
 	anvilrepair = /datum/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
 	component_type = /datum/component/storage/concrete/grid/headhook
+	sellprice = VALUE_IRON_ITEM + M_MISC*2
 
 /obj/item/storage/hip/headhook/bronze
 	name = "bronze head hook"

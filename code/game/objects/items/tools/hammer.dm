@@ -140,6 +140,7 @@
 	icon_state = "hammer"
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
+	sellprice = VALUE_IRON_ITEM + M_MISC
 
 // --------- STEEL HAMMER -----------
 /obj/item/weapon/hammer/steel
@@ -187,6 +188,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/ingot/copper
 	time_multiplier = 1.1
+	sellprice = VALUE_DIRT_CHEAP + M_MISC
 
 /obj/item/weapon/hammer/sledgehammer
 	name = "sledgehammer"

@@ -226,7 +226,7 @@
 	icon_state = "artificer_cane"
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
-	sellprice = VALUE_DIRT_CHEAP*2
+	sellprice = VALUE_BRONZE_ITEM*2
 	minstr = 4
 	force = DAMAGE_MACE - 3
 	force_wielded = DAMAGE_MACE - 1
@@ -782,7 +782,7 @@
 	minstr = 5
 	melting_material = /datum/material/bronze
 	melt_amount = 100
-	sellprice = VALUE_DIRT_CHEAP
+	sellprice = VALUE_BRONZE_ITEM
 
 /obj/item/weapon/mace/elvenclub/silver
 	name = "regal elven war club"
@@ -844,7 +844,7 @@
 	minstr = 6
 	wbalance = DODGE_CHANCE_NORMAL
 	wdefense = AVERAGE_PARRY
-	sellprice = VALUE_DIRT_CHEAP + M_MISC
+	sellprice = VALUE_BRONZE_ITEM + M_MISC
 
 /obj/item/weapon/mace/shishpar/bronze
 	name = "bronze shishpar"
@@ -854,6 +854,6 @@
 	icon_state = "shishpar_bronze"
 	wbalance = EASY_TO_DODGE
 	wdefense = GOOD_PARRY
-	sellprice = VALUE_DIRT_CHEAP*2
+	sellprice = VALUE_BRONZE_ITEM*2
 	max_blade_int = 105
 	max_integrity = INTEGRITY_STANDARD

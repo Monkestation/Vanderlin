@@ -124,12 +124,13 @@
 	icon_state = "spoon_iron"
 	melting_material = /datum/material/iron
 	melt_amount = 20
+	sellprice = VALUE_IRON_ITEM/2
 
 /obj/item/kitchen/spoon/pewter
 	name = "pewter spoon"
 	icon_state = "spoon_iron"
 	melting_material = /datum/material/tin
-	melt_amount = 20
+	melt_amount = VALUE_DIRT_CHEAP/2
 
 /obj/item/kitchen/fork
 	name = "wooden fork"
@@ -142,12 +143,13 @@
 	icon_state = "fork_iron"
 	melting_material = /datum/material/iron
 	melt_amount = 20
+	sellprice = VALUE_IRON_ITEM/2
 
 /obj/item/kitchen/fork/pewter
 	name = "pewter fork"
 	icon_state = "fork_iron"
 	melting_material = /datum/material/tin
-	melt_amount = 20
+	melt_amount = VALUE_DIRT_CHEAP/2
 
 /obj/item/reagent_containers/glass/bowl
 	name = "bowl"

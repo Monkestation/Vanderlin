@@ -25,6 +25,7 @@
 	destroy_sound = 'sound/items/pickbreak.ogg'
 	grid_width = 32
 	grid_height = 64
+	sellprice = VALUE_IRON_ITEM/3
 
 //custom key
 /obj/item/key/custom

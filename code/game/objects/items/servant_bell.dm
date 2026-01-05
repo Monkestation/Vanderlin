@@ -28,6 +28,7 @@
 	COOLDOWN_DECLARE(nearby_ring_bell)
 	var/nearby_cooldown = 5 SECONDS
 	var/hear_distance = 40 // just a little shorter than Vanderlin's manor
+	sellprice = VALUE_SILVER_ITEM/3 + SKILL_2
 
 /obj/item/servant_bell/Initialize(mapload)
 	. = ..()

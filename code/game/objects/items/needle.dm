@@ -23,6 +23,7 @@
 	var/infinite = FALSE
 	/// If this needle can be used to repair items
 	var/can_repair = TRUE
+	sellprice = VALUE_IRON_ITEM/3
 
 /obj/item/needle/examine()
 	. = ..()

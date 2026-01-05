@@ -186,6 +186,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	max_fork_usages = 7
+	sellprice = VALUE_DIRT_CHEAP/2
 
 /obj/item/plate/pewter
 	name = "pewter platter"
@@ -194,6 +195,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	max_fork_usages = 7
+	sellprice = VALUE_DIRT_CHEAP/2
 
 /obj/item/plate/silver
 	name = "silver platter"
@@ -201,7 +203,7 @@
 	icon_state = "platter_silver"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	sellprice = 12
+	sellprice = VALUE_SILVER_ITEM/2 + SKILL_2
 	smeltresult = /obj/item/ingot/silver
 	max_fork_usages = 9
 
@@ -215,7 +217,7 @@
 	icon_state = "platter_gold"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	sellprice = 20
+	sellprice = VALUE_GOLD_ITEM + SKILL_1
 	smeltresult = /obj/item/ingot/gold
 	max_fork_usages = 11
 

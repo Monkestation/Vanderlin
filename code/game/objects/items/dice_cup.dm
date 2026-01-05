@@ -18,6 +18,7 @@
 	var/max_dice = 8
 	var/list/dice_list = list()
 	var/list/last_roll = list()
+	sellprice = VALUE_IRON_ITEM/3
 
 //done so we can have pre-filled dice cups
 /obj/item/dice_cup/Initialize()

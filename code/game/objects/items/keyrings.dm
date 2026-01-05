@@ -17,6 +17,7 @@
 	component_type = /datum/component/storage/concrete/grid/keyring
 	var/list/keys = list() //Used to generate starting keys on initialization, check contents instead for actual keys
 	var/list/combined_access
+	sellprice = VALUE_IRON_ITEM/3
 
 /obj/item/storage/keyring/Initialize()
 	. = ..()
@@ -118,6 +119,7 @@
 	experimental_inhand = FALSE
 	dropshrink = 0.7
 	var/how_many_lockpicks = 9
+	sellprice = VALUE_IRON_ITEM/3
 
 /obj/item/lockpickring/Initialize()
 	. = ..()

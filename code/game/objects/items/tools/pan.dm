@@ -18,6 +18,7 @@
 	anvilrepair = /datum/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
 	ingsize = 3
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/cooking/pan/Initialize()
 	. = ..()

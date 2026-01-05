@@ -75,6 +75,7 @@
 	melt_amount = 80
 	var/processing_amount = 0 ///we use this to "reserve" reagents
 	var/static/list/recipe_list = list()
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/reagent_containers/glass/bucket/pot/Initialize(mapload, vol)
 	. = ..()
@@ -90,6 +91,7 @@
 /obj/item/reagent_containers/glass/bucket/pot/copper
 	icon_state = "pote_copper"
 	melting_material = /datum/material/copper
+	sellprice = VALUE_DIRT_CHEAP
 
 /obj/item/reagent_containers/glass/bucket/pot/stone
 	icon_state = "pote_stone"

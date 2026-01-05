@@ -12,7 +12,7 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sellprice = 60
+	sellprice = VALUE_GOLD_ITEM/2 + SKILL_3
 
 /obj/item/clothing/neck/silveramulet
 	name = "silver amulet"
@@ -22,7 +22,7 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sellprice = 35
+	sellprice = VALUE_SILVER_ITEM/2 + SKILL_2
 
 /obj/item/clothing/neck/silveramulet/Initialize()
 	. = ..()

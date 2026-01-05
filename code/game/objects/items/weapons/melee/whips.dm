@@ -275,7 +275,7 @@
 	max_blade_int = 100
 	wdefense = BAD_PARRY
 	can_parry = TRUE
-	sellprice = VALUE_DIRT_CHEAP*2
+	sellprice = VALUE_BRONZE_ITEM*2
 
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"

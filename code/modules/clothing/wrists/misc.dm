@@ -16,7 +16,7 @@
 	name = "silver bracelets"
 	slot_flags = ITEM_SLOT_WRISTS
 	icon_state = "bracelets"
-	sellprice = 30
+	sellprice = VALUE_SILVER_ITEM/2 + SKILL_2
 
 /obj/item/clothing/wrists/silverbracelet/Initialize()
 	. = ..()
@@ -92,7 +92,7 @@
 	name = "gold bracelets"
 	slot_flags = ITEM_SLOT_WRISTS
 	icon_state = "braceletg"
-	sellprice = 65
+	sellprice = VALUE_GOLD_ITEM/2 + SKILL_3
 
 /obj/item/clothing/wrists/bracers/rare
 	abstract_type = /obj/item/clothing/wrists/bracers/rare

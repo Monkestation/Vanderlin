@@ -248,8 +248,21 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define M_SILVER	M_IRON*3	// one silver bar
 #define M_GOLD		M_IRON*5	// one gold bar
 #define M_BSILVER	M_SILVER //Placeholder for blessed silver. Inquisition shit.
+#define M_GEMERALD  44 //Gems are placeholder values for now
+#define M_BLORTZ	88
+#define M_TOPER		25
+#define M_SAFFIRA	56
+#define M_DORPEL	121
+#define M_RONTZ		100
+#define M_ONYXA	 	30
+#define M_JOAPSTONE	50
+#define M_CLAM		6
+#define M_AEOTAL	60
+#define M_CERULEA	75
+#define M_AMBER		50
+#define M_OPAL		80
 
-// Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit. Craftdiffs 0 and 1 add nothing.
+// Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit. Craftdiffs 0 and 1 add nothing because this has only 5 tiers for some reason?
 #define SKILL_1		2  //craftdiff 2
 #define SKILL_2		4 //difficulty 3
 #define SKILL_3		6 //difficulty 4
@@ -278,6 +291,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define VALUE_CHEAP_CLOTHING	M_CLOTH+W_MINOR
 #define VALUE_FINE_CLOTHING		M_CLOTH+M_SILK+W_MINOR
 #define VALUE_FANCY_HAT			M_SILK+W_MINOR+BONUS_VALUE_SMALL
+#define VALUE_BRONZE_ITEM		VALUE_DIRT_CHEAP + W_MINOR
 #define VALUE_IRON_SMALL_ITEM	VALUE_IRON_ITEM/2
 #define VALUE_IRON_ITEM			M_IRON+W_MINOR
 #define VALUE_STEEL_SMALL_ITEM	VALUE_STEEL_ITEM/2

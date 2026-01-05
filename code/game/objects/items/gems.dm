@@ -164,7 +164,7 @@
 	desc = "Glints with verdant brilliance."
 	//color = "#15af158c"
 	icon_state = "emerald_cut"
-	sellprice = 44
+	sellprice = M_GEMERALD
 	dropshrink = 0.4
 	attuned = /datum/attunement/earth
 	effect_template = /datum/gem_effect/gemerald
@@ -174,7 +174,7 @@
 	desc = "Pale blue, like a frozen tear."
 	//color = "#1ca5aa8c"
 	icon_state = "quartz_cut"
-	sellprice = 88
+	sellprice = M_BLORTZ
 	dropshrink = 0.4
 	attuned = /datum/attunement/ice
 	effect_template = /datum/gem_effect/blortz
@@ -184,7 +184,7 @@
 	desc = "Its amber hues remind you of the sunset."
 	//color = "#e6a0088c"
 	icon_state = "topaz_cut"
-	sellprice = 25
+	sellprice = M_TOPER
 	dropshrink = 0.4
 	attuned = /datum/attunement/electric
 	effect_template = /datum/gem_effect/toper
@@ -194,7 +194,7 @@
 	desc = "This gem is admired by many wizards."
 	//color = "#1733b38c"
 	icon_state = "sapphire_cut"
-	sellprice = 56
+	sellprice = M_SAFFIRA
 	dropshrink = 0.4
 	attuned = /datum/attunement/arcyne
 	effect_template = /datum/gem_effect/saffira
@@ -204,7 +204,7 @@
 	desc = "Beautifully pure, it demands respect."
 	//color = "#ffffff8c"
 	icon_state = "diamond_cut"
-	sellprice = 121
+	sellprice = M_DORPEL
 	dropshrink = 0.4
 	attuned = /datum/attunement/light
 	effect_template = /datum/gem_effect/dorpel
@@ -214,7 +214,7 @@
 	desc = "Glistening with unkempt rage."
 	//color = "#ff00008c"
 	icon_state = "ruby_cut"
-	sellprice = 100
+	sellprice = M_RONTZ
 	attuned = /datum/attunement/fire
 	effect_template = /datum/gem_effect/rubor
 
@@ -223,49 +223,49 @@
 	desc = "A piece of fossilized spider honey that glimmers in the dark. It was once prized by the Drow, but it's significance to their culture has long been replaced by the more common saffira."
 	icon = 'icons/roguetown/gems/gem_onyxa.dmi'
 	icon_state = "raw_onyxa"
-	sellprice = 30
+	sellprice = M_ONYXA
 
 /obj/item/gem/jade
 	name = "raw joapstone"
 	desc = "A dull green gem. Joapstone is valued in multiple humen cultures and is believed to bring good fortune."
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "raw_jade"
-	sellprice = 50
+	sellprice = M_JOAPSTONE
 
 /obj/item/gem/oyster
 	name = "fossilized clam"
 	desc = "A fossilized clamshell. It would be a good idea to pry it open with a knife."
 	icon = 'icons/roguetown/gems/gem_shell.dmi'
 	icon_state = "oyster_closed"
-	sellprice = 5
+	sellprice = M_CLAM
 
 /obj/item/gem/coral
 	name = "raw aoetal"
 	desc = "Jagged like a hounds tooth. Aoetal is speculated to be the crystallized blood of fallen sailors. It is sacred to Abyssorians and is used in numerous Abyssorian rituals."
 	icon = 'icons/roguetown/gems/gem_coral.dmi'
 	icon_state = "raw_coral"
-	sellprice = 60
+	sellprice = M_AEOTAL
 
 /obj/item/gem/turq
 	name = "raw ceruleabaster"
 	desc = "A beautiful teal gem that is easily carved. It is prized by the Elves of Lakkari and is heavily associated with Necra. Ceruleabaster carvings often decorate Lakkarian tombs."
 	icon = 'icons/roguetown/gems/gem_turq.dmi'
 	icon_state = "raw_turq"
-	sellprice = 75
+	sellprice = M_CERULEA
 
 /obj/item/gem/amber
 	name = "raw petriamber"
 	desc = "A chunk of fossilized mushroom that shines radiantly in sunlight. It's prized amongst Astratans."
 	icon = 'icons/roguetown/gems/gem_amber.dmi'
 	icon_state = "raw_amber"
-	sellprice = 50
+	sellprice = M_AMBER
 
 /obj/item/gem/opal
 	name = "raw opaloise"
 	desc = "A dazzling gem that is remarkably valuable. Opaloise is widely speculated to be the crystallized essence left behind by rainbows, and is greatly prized by aboriginal Crimson Elves."
 	icon = 'icons/roguetown/gems/gem_opal.dmi'
 	icon_state = "raw_opal"
-	sellprice = 80
+	sellprice = M_OPAL
 
 /// riddle
 

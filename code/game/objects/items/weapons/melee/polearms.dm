@@ -321,7 +321,7 @@
 	melt_amount = 75
 	max_integrity = INTEGRITY_STANDARD
 	max_blade_int = 95
-	sellprice = VALUE_DIRT_CHEAP + M_WOOD
+	sellprice = VALUE_BRONZE_ITEM + M_WOOD
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
@@ -463,7 +463,7 @@
 	minstr = 10
 	wdefense = 3
 	axe_cut = 15
-	sellprice = VALUE_IROM_ITEM*2 + M_WOOD + SKILL_1
+	sellprice = VALUE_IRON_ITEM*2 + M_WOOD + SKILL_1
 
 /obj/item/weapon/polearm/halberd/bardiche/warcutter/getonmobprop(tag)
 	. = ..()
@@ -629,7 +629,7 @@
 	melt_amount = 75
 	force = 20
 	force_wielded = 25
-	sellprice = VALUE_DIRT_CHEAP*2 + M_WOOD
+	sellprice = VALUE_BRONZE_ITEM*2 + M_WOOD
 
 
 //scythe

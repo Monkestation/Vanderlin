@@ -59,7 +59,7 @@
 	sewrepair = FALSE
 	anvilrepair = /datum/skill/craft/armorsmithing
 	clothing_flags = FALSE
-	sellprice = VALUE_GOLD_ITEM
+	sellprice = VALUE_GOLD_ITEM/2 + SKILL_3
 
 /obj/item/clothing/face/facemask/silvernosechain
 	name = "silver nosechain"
@@ -76,7 +76,7 @@
 	sewrepair = FALSE
 	anvilrepair = /datum/skill/craft/armorsmithing
 	clothing_flags = FALSE
-	sellprice = VALUE_SILVER_ITEM
+	sellprice = VALUE_SILVER_ITEM/2 + SKILL_2
 
 /obj/item/clothing/face/facemask/silvernosechain/Initialize()
 	. = ..()
@@ -97,7 +97,7 @@
 	sewrepair = FALSE
 	anvilrepair = /datum/skill/craft/armorsmithing
 	clothing_flags = FALSE
-	sellprice = VALUE_GOLD_ITEM
+	sellprice = VALUE_GOLD_ITEM + SKILL_3
 
 /obj/item/clothing/face/facemask/silverveil
 	name = "silver face veil"
@@ -114,7 +114,7 @@
 	sewrepair = FALSE
 	anvilrepair = /datum/skill/craft/armorsmithing
 	clothing_flags = FALSE
-	sellprice = VALUE_SILVER_ITEM
+	sellprice = VALUE_SILVER_ITEM + SKILL_2
 
 /obj/item/clothing/face/facemask/silverveil/Initialize()
 	. = ..()

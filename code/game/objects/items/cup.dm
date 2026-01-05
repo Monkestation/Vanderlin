@@ -20,6 +20,7 @@
 	drinksounds = list('sound/items/drink_cup (1).ogg','sound/items/drink_cup (2).ogg','sound/items/drink_cup (3).ogg','sound/items/drink_cup (4).ogg','sound/items/drink_cup (5).ogg')
 	fillsounds = list('sound/items/fillcup.ogg')
 	gripped_intents = list(INTENT_POUR)
+	sellprice = VALUE_IRON_ITEM/3
 
 /obj/item/reagent_containers/glass/cup/Initialize(mapload, vol)
 	. = ..()
@@ -38,14 +39,14 @@
 	name = "goblet"
 	desc = "A steel goblet that bears a few dents from previous scuffles."
 	icon_state = "cup_steel"
-	sellprice = 10
+	sellprice = VALUE_STEEL_ITEM/3
 
 /obj/item/reagent_containers/glass/cup/silver
 	name = "silver goblet"
 	desc = "A silver goblet, its surface adorned with intricate carvings and runes."
 	icon_state = "cup_silver"
 	dropshrink = 0.65
-	sellprice = 30
+	sellprice = VALUE_SILVER_ITEM/3 + SKILL_2
 	last_used = 0
 
 /obj/item/reagent_containers/glass/cup/silver/Initialize(mapload, vol)
@@ -57,7 +58,7 @@
 	desc = "A golden gilded goblet which gleams pathetically despite its illustrious metal."
 	icon_state = "cup_golden"
 	dropshrink = 0.65
-	sellprice = 50
+	sellprice = VALUE_GOLD_ITEM/3 + SKILL_2
 
 /obj/item/reagent_containers/glass/cup/skull
 	name = "skull goblet"

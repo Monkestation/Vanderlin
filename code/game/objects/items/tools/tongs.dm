@@ -14,6 +14,7 @@
 	grid_height = 96
 	var/obj/item/held_item = null
 	var/hott = 0
+	sellprice = VALUE_IRON_ITEM
 
 /obj/item/weapon/tongs/examine(mob/user)
 	. = ..()
