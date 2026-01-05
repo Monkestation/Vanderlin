@@ -119,7 +119,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(SSlighting.initialized)
 		if(SSoutdoor_effects.initialized)
 			outdoor_effect = old_outdoor_effect
-			get_sky_and_weather_states()
+			update_sky_and_weather_states()
 
 		recalc_atom_opacity()
 		lighting_object = old_lighting_object
