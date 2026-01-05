@@ -14,6 +14,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_HARPY, SPEC_ID_HOLLOWKIN)
 
 	outfit = null
 	outfit_female = null
@@ -29,7 +30,6 @@
 
 /datum/job/advclass/folkhero
 	abstract_type = /datum/job/advclass/folkhero
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_HARPY, SPEC_ID_HOLLOWKIN)
 	category_tags = list(CTAG_FOLKHEROES)
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 

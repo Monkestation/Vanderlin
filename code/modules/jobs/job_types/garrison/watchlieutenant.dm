@@ -38,6 +38,7 @@
 		/datum/skill/combat/swords = 1,
 		/datum/skill/combat/polearms = 1,
 		/datum/skill/combat/whipsflails = 1,
+		/datum/skill/combat/shields = 3,
 		/datum/skill/combat/bows = 2,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/wrestling = 3,
@@ -78,9 +79,6 @@
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword(), ITEM_SLOT_BACK_L, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
-
-	// Shield skill for all choices
-	spawned.clamped_adjust_skillrank(/datum/skill/combat/shields, 3, 3, TRUE)
 
 /datum/outfit/lieutenant
 	name = "City Watch Lieutenant"
