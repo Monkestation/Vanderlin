@@ -65,7 +65,7 @@
 /datum/outfit/dungeoneer
 	name = "Dungeoneer"
 	head = /obj/item/clothing/head/dungeoneer
-	neck = /obj/item/storage/belt/pouch/coins/poor
+	neck = /obj/item/clothing/neck/coif
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/stabard/colored/dungeon
 	armor = /obj/item/clothing/armor/cuirass/iron/rust
