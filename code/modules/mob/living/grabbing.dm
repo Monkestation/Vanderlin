@@ -258,6 +258,17 @@
 
 	combat_modifier *= ((skill_diff * 0.1) + 1)
 
+	var/static/list/mean_grabs = list(
+		/datum/intent/grab/hostage,
+		/datum/intent/grab/choke,
+		/datum/intent/grab/twist,
+		/datum/intent/grab/twistitem,
+		/datum/intent/grab/hostage
+	)
+
+	if(HAS_TRAIT(user, TRAIT_PACIFISM) && is_type_in_list(user.used_intent, mean_grabs))
+		to_chat(user, span_warning("I don't want to harm [M]!"))
+		return FALSE
 	switch(user.used_intent.type)
 		if(/datum/intent/grab/upgrade)
 			if(!(M.status_flags & CANPUSH) || HAS_TRAIT(M, TRAIT_PUSHIMMUNE))
@@ -541,6 +552,9 @@
 			user.Move_Pulled(get_turf(attacked_atom))
 		if(/datum/intent/grab/smash)
 			if(!iscarbon(grabbed))
+				return
+			if(HAS_TRAIT(user, TRAIT_PACIFISM))
+				to_chat(user, span_warning("I don't want to harm [grabbed]!"))
 				return
 			if(user.body_position == LYING_DOWN)
 				to_chat(user, span_warning("I must stand."))
