@@ -58,6 +58,7 @@
 	switch(weapon_choice)
 		if("Discipline - Unarmed")
 			gloves_to_wear = /obj/item/clothing/gloves/bandages/pugilist
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
 		if("Katar")
