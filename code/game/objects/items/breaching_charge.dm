@@ -137,7 +137,7 @@
 							next_pass |= mineralio
 			for(var/turf/closed/mineral/mineral_wave in turfs) // now we kill all the stones
 				mineral_wave.gets_drilled(detonator)
-				mineral_wave.pollute_turf(/datum/pollutant/smoke, 70)
+				mineral_wave.pollute_turf(/datum/pollutant/smoke/thicc, 70)
 			playsound(target_turf, 'sound/combat/hits/onstone/stonedeath.ogg', 100, FALSE)
 			if(length(next_pass))
 				turfs += next_pass
