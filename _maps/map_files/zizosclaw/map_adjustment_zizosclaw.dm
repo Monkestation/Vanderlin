@@ -127,6 +127,7 @@
 		/datum/job/fisher,
 		/datum/job/armorsmith, // Armorsmith + Weaponsmith = Blacksmith
 		/datum/job/weaponsmith,
+		/datum/job/forestguard, // Gloomstalker
 
 	)
 
