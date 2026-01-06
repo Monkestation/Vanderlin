@@ -39,6 +39,7 @@
 	var/craftdiff = 1
 	///our skilltype
 	var/datum/skill/skillcraft = /datum/skill/craft/crafting
+	///sets the minimun skill required to craft
 	var/minimum_skill_level = 0
 	///the amount of time the atom in question spends doing this recipe
 	var/craft_time = 1 SECONDS
@@ -97,7 +98,7 @@
 		return FALSE
 
 	if(minimum_skill_level)
-		if(user?.get_skill_level(skillcraft) <= minimum_skill_level)
+		if(user?.get_skill_level(skillcraft) < minimum_skill_level)
 			return FALSE
 
 	if(required_table && !locate(/obj/structure/table) in get_turf(attacked_item))
