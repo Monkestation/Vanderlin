@@ -22,7 +22,7 @@
 	throwforce = 5
 	wdefense = 0
 	minstr = 4
-	sellprice = 30
+	sellprice = VALUE_MEDIUM_LEATHER + SKILL_1
 	grid_width = 32
 	grid_height = 64
 

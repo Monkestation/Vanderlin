@@ -11,7 +11,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	anvilrepair = null
 	sewrepair = TRUE
-	sellprice = VALUE_LEATHER_HELMET
+	sellprice = VALUE_LEATHER_HELMET + SKILL_1
 
 	armor = ARMOR_LEATHER_BAD
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
@@ -49,7 +49,7 @@
 	desc = "Rolled cloth. Gives some protection at least."
 	icon_state = "headscarf"
 	color = CLOTHING_BARK_BROWN
-	sellprice = VALUE_LEATHER_HELMET/2
+	sellprice = VALUE_SMALL_LEATHER + SKILL_1
 	armor = ARMOR_PADDED
 	body_parts_covered = HEAD|HAIR
 	prevent_crits =  MINOR_CRITICALS
@@ -68,12 +68,14 @@
 	name = "buckled hat"
 	desc = "A black top hat with a buckle on top, favored by Witch Hunters and Inquisitors."
 	icon_state = "puritan_hat"
+	sellprice = VALUE_BIG_LEATHER + SKILL_3
 
 //............... Tricorn ............... //
 /obj/item/clothing/head/helmet/leather/tricorn
 	name = "tricorn hat"
 	desc = "A black leather hat with a shaped brim that has been folded to form three points."
 	icon_state = "renegadetricorn"
+	sellprice = VALUE_MEDIUM_LEATHER + SKILL_2
 
 //............... Ominous Hood ............... //
 /obj/item/clothing/head/helmet/leather/hood_ominous // a leather coif locked to headslot since you cannot pull it back. Crit prevent between armor items a little weird, this is leather coif, compare to helmet
@@ -82,7 +84,7 @@
 	icon_state = "ominous"
 	dynamic_hair_suffix = ""
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
-	sellprice = VALUE_LEATHER_HELMET/2
+	sellprice = VALUE_LEATHER_HELMET + SKILL_3
 
 	armor = ARMOR_PADDED_GOOD
 	body_parts_covered = NECK|HAIR|EARS|HEAD
@@ -92,6 +94,7 @@
 	name = "hardened helmet"
 	desc = "A conical helmet made from boiled leather and metal fittings."
 	icon_state = "leatherhelm_old"
+	sellprice = VALUE_MEDIUM_LEATHER + M_IRON + SKILL_3
 
 //............... Volf Helmet ............... //
 /obj/item/clothing/head/helmet/leather/volfhelm
@@ -153,3 +156,4 @@
 	prevent_crits =  MINOR_CRITICALS
 	body_parts_covered = HEAD|HAIR
 	dynamic_hair_suffix = ""
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_2

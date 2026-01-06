@@ -15,6 +15,7 @@
 	detail_tag = "_det"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
+	sellprice = VALUE_HUGE_LEATHER + M_FUR*2 + SKILL_4
 
 /obj/item/clothing/cloak/lordcloak/Initialize(mapload, ...)
 	. = ..()

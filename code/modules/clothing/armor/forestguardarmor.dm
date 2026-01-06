@@ -21,6 +21,7 @@
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
 	sewrepair = TRUE
+	sellprice = VALUE_MEDIUM_LEATHER + M_SILK + SKILL_4
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	icon_state = "snowcloak"
@@ -40,6 +41,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
+	sellprice = VALUE_MEDIUM_LEATHER + M_SILK*2 + SKILL_5
 
 /obj/item/clothing/cloak/wardencloak/Initialize(mapload, ...)
 	. = ..()

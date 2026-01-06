@@ -16,6 +16,7 @@
 	worn_y_dimension = 64
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	bloody_icon_state = "helmetblood_big"
+	sellprice = VALUE_MEDIUM_LEATHER + SKILL_2
 
 /obj/item/clothing/head/strawhat
 	name = "crude straw hat"
@@ -65,6 +66,7 @@
 	name = "jester's hat"
 	desc = "Just remember that the last laugh is on you."
 	icon_state = "jester"
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/head/jester/Initialize()
 	. = ..()
@@ -77,6 +79,7 @@
 	name = "teller's hat"
 	icon_state = "tophat"
 	color = CLOTHING_SOOT_BLACK
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/head/wizhat
 	name = "wizard hat"
@@ -123,6 +126,7 @@
 	icon_state = "inqhat"
 	item_state = "inqhat"
 	sewrepair = TRUE
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/head/leather/inqhat/vigilante
 	name = "fancy hat"
@@ -133,6 +137,7 @@
 	icon_state = "physicianhat"
 	item_state = "physicianhat"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	sellprice = VALUE_SMALL_LEATHER + SKILL_1
 
 /obj/item/clothing/head/courtphysician
 	name = "court physician's beret"

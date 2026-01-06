@@ -132,6 +132,7 @@
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
+	sellprice = VALUE_SMALL_LEATHER + SKILL_2 + M_MISC
 
 
 /obj/item/clothing/neck/coif/AdjustClothes(mob/user)
@@ -198,6 +199,7 @@
 	armor = ARMOR_LEATHER
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_2
 
 /obj/item/clothing/neck/bellcollar
 	name = "bell collar"
@@ -216,6 +218,7 @@
 	armor = ARMOR_LEATHER
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
+	sellprice = VALUE_SMALL_LEATHER + M_MISC*2 + SKILL_2 + M_IRON
 
 /obj/item/clothing/neck/bellcollar/Initialize()
 	. = ..()

@@ -7,7 +7,7 @@
 	icon_state = "blackboots"
 	item_state = "blackboots"
 	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 5, "fire" = 0, "acid" = 0)
-	sellprice = 10
+	sellprice = VALUE_MEDIUM_LEATHER + M_CLOTH + SKILL_2
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 	max_integrity = INTEGRITY_STANDARD
@@ -112,6 +112,7 @@
 	max_integrity = INTEGRITY_STANDARD + 50
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch
 	name = "watch boots"
@@ -120,6 +121,7 @@
 	gender = PLURAL
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_4 + M_IRON
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch/Initialize()
 	. = ..()
@@ -149,6 +151,7 @@
 	item_weight = 3
 	min_cold_protection_temperature = -20
 	wetable = FALSE
+	sellprice = VALUE_LEATHER_ARMOR_FUR + SKILL_1
 
 /obj/item/clothing/shoes/boots/furlinedanklets
 	name = "fur lined anklets"
@@ -162,6 +165,7 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/fur
 	min_cold_protection_temperature = -20
+	sellprice = VALUE_SMALL_LEATHER + M_FUR
 
 /obj/item/clothing/shoes/boots/clothlinedanklets
 	name = "cloth lined anklets"

@@ -7,7 +7,7 @@
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
 	armor = list("blunt" = 20, "slash" = 20, "stab" = 20,  "piercing" = 15, "fire" = 0, "acid" = 0)
-	sellprice = 10
+	sellprice = VALUE_LEATHER_ARMOR + M_CLOTH + SKILL_4
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 
@@ -21,6 +21,7 @@
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC*2 + SKILL_4
 
 /obj/item/clothing/shoes/shortboots
 	name = "shortboots"
@@ -32,6 +33,7 @@
 	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	sellprice = VALUE_MEDIUM_LEATHER + SKILL_1
 
 /obj/item/clothing/shoes/ridingboots
 	name = "riding boots"
@@ -41,7 +43,7 @@
 	gender = PLURAL
 	icon_state = "ridingboots"
 	item_state = "ridingboots"
-	sellprice = 10
+	sellprice = VALUE_SMALL_LEATHER + M_CLOTH + SKILL_3
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 	wetable = FALSE
@@ -53,7 +55,7 @@
 	icon_state = "apothboots"
 	item_state = "apothboots"
 	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 5, "fire" = 0, "acid" = 0)
-	sellprice = 10
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC*2 + SKILL_4
 	wetable = FALSE
 
 /obj/item/clothing/shoes/simpleshoes
@@ -119,7 +121,7 @@
 	gender = PLURAL
 	icon_state = "shalal"
 	item_state = "shalal"
-	sellprice = 15
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_4
 	wetable = FALSE
 
 /obj/item/clothing/shoes/tribal
@@ -133,7 +135,7 @@
 	name = "funny shoes"
 	desc = "Shoes typically worn by a Jester."
 	icon_state = "jestershoes"
-	sellprice = 10
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/shoes/jester/Initialize()
 	. = ..()
@@ -145,7 +147,7 @@
 	item_state = "grenzelboots"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 15, "fire" = 0, "acid" = 0)
-	sellprice = 20
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_4
 	wetable = FALSE
 
 /obj/item/clothing/shoes/otavan
@@ -159,17 +161,20 @@
 	max_integrity = 200
 	armor = ARMOR_LEATHER_GOOD
 	wetable = FALSE
+	sellprice = VALUE_BIG_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/shoes/otavan/inqboots
 	name = "inquisitorial boots"
 	desc = "The steel-lined heels click."
 	icon_state = "inqboots"
 	item_state = "inqboots"
+	sellprice = VALUE_BIG_LEATHER + M_MISC + SKILL_5
 
 //Valorian Duelist Merc - On par with grenzelhoftian's stats.
 /obj/item/clothing/shoes/nobleboot/duelboots
 	desc = "Boots custom fit for a Valorian Duelist. Footwork is paramount in a duel, so good boots are a must."
 	armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 15, "fire" = 0, "acid" = 0)
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC*2 + SKILL_4
 
 /obj/item/clothing/shoes/psydonboots
 	name = "enduring boots"

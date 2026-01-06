@@ -74,6 +74,7 @@
 	item_state = "apothover"
 
 	armor = ARMOR_PADDED_GOOD
+	sellprice = VALUE_BIG_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/armor/gambeson/steward
 	name = "steward tailcoat"
@@ -84,6 +85,7 @@
 	armor = ARMOR_PADDED_GOOD
 	icon = 'icons/roguetown/clothing/special/steward.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/steward.dmi'
+	sellprice = VALUE_BIG_LEATHER + M_MISC + SKILL_4
 
 //................ Padded Dress ............... //
 /obj/item/clothing/armor/gambeson/heavy/dress

@@ -36,6 +36,7 @@
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	detail_color = CLOTHING_BERRY_BLUE
 	uses_lord_coloring = LORD_PRIMARY
+	sellprice = VALUE_MEDIUM_LEATHER + M_SILK*2 + SKILL_6
 
 /obj/item/clothing/cloak/cape/archivist
 	icon_state = "puritan_cape"

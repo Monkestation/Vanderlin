@@ -11,9 +11,11 @@
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
 	item_weight = 4
+	sellprice = VALUE_SMALL_LEATHER + M_FUR + SKILL_1
 
 /obj/item/clothing/gloves/angle/grenzel
 	name = "grenzelhoft gloves"
 	desc = "Regal gloves of Grenzelhoftian design, more a fashion statement than actual protection."
 	icon_state = "grenzelgloves"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
+	sellprice = VALUE_SMALL_LEATHER + M_FUR + SKILL_4

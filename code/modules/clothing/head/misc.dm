@@ -70,6 +70,7 @@
 	name = "brimmed hat"
 	desc = "A simple brimmed hat that provides some relief from the sun."
 	icon_state = "brimmed"
+	sellprice = VALUE_SMALL_LEATHER + SKILL_1
 
 //................ Fur Hats ............... //
 /obj/item/clothing/head/hatfur
@@ -243,6 +244,7 @@
 	icon_state = "adeptscowl"
 	item_state = "adeptscowl"
 	flags_inv = HIDEEARS|HIDEHAIR
+	sellprice = VALUE_LEATHER_HELMET + SKILL_3
 
 /*----------\
 | Graveyard |	- Not used or ingame in any way except admeme spawning them.

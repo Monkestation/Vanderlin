@@ -461,6 +461,7 @@
 	name = "leather helmet"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/head/helmet/leather
 	craftdiff = 1
@@ -469,6 +470,7 @@
 	name = "leather coif"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/neck/coif
 	craftdiff = 2
@@ -477,6 +479,7 @@
 	name = "leather jacket"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/armor/leather/jacket
 	craftdiff = 1
@@ -485,6 +488,7 @@
 	name = "leather armor"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/armor/leather
 	craftdiff = 1
@@ -545,7 +549,6 @@
 	name = "riding boots"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
-		/obj/item/natural/fibers = 2,
 		/obj/item/natural/cloth = 1,
 	)
 	output = /obj/item/clothing/shoes/ridingboots
@@ -554,21 +557,24 @@
 /datum/repeatable_crafting_recipe/leather/leathercoat
 	name = "leather coat"
 	output = /obj/item/clothing/armor/leather/jacket/leathercoat
-	requirements = list(/obj/item/natural/hide/cured = 2,
-				/obj/item/natural/fibers = 2)
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1
+	)
 	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/leather/leathercoat/black // never add items with the same names
 	name = "black leather coat"
 	output = /obj/item/clothing/armor/leather/jacket/leathercoat/black
 	requirements = list(/obj/item/natural/hide/cured = 2,
-				/obj/item/natural/fibers = 2)
+				/obj/item/natural/fibers = 1)
 	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/leather/ominous_hood
 	name = "ominous hood"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/head/helmet/leather/hood_ominous
 	craftdiff = 3
@@ -576,7 +582,8 @@
 /datum/repeatable_crafting_recipe/leather/adept_cowl
 	name = "adept cowl"
 	requirements = list(
-		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/head/adeptcowl
 	craftdiff = 3
@@ -595,7 +602,7 @@
 	output = /obj/item/clothing/shoes/nobleboot
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 2,
+		/obj/item/natural/fibers = 1,
 		/obj/item/natural/cloth = 2,
 	)
 	craftdiff = 4
@@ -669,7 +676,6 @@
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
 	)
-	output_amount = 1
 	output = /obj/item/clothing/head/physhat
 	craftdiff = 1
 

@@ -65,7 +65,7 @@
 	slot_flags = ITEM_SLOT_CLOAK
 	allowed_sex = list(MALE)
 	allowed_race = SPECIES_BASE_BODY
-	sellprice = 50
+	sellprice = VALUE_MEDIUM_LEATHER + M_SILK*2 + SKILL_5
 	nodismemsleeves = TRUE
 
 /obj/item/clothing/cloak/half
@@ -166,6 +166,7 @@
 	slot_flags = ITEM_SLOT_CLOAK
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_CLOAK
+	sellprice = VALUE_MEDIUM_LEATHER + M_SILK + SKILL_6
 
 //............... Battle Nun ........................... (unique kit for the role, tabard for aesthetics)
 /obj/item/clothing/cloak/battlenun

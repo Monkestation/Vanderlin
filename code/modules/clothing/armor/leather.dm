@@ -11,7 +11,7 @@
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	sewrepair = TRUE
 	smeltresult = /obj/item/fertilizer/ash
-	sellprice = VALUE_LEATHER_ARMOR
+	sellprice = VALUE_LEATHER_ARMOR + SKILL_1
 
 	armor_class = AC_LIGHT
 	armor = ARMOR_LEATHER_BAD
@@ -48,7 +48,7 @@
 	name = "hide armor"
 	desc = "A leather armor with additional internal padding of creacher fur. Offers slightly higher integrity and comfort."
 	icon_state = "hidearmor"
-	sellprice = VALUE_LEATHER_ARMOR_FUR
+	sellprice = VALUE_FUR_ARMOR + SKILL_2
 
 	armor = ARMOR_LEATHER
 	salvage_result = /obj/item/natural/hide/cured
@@ -57,7 +57,7 @@
 	name = "steppe hide armor"
 	desc = "Worn by riders of the steppe, this leather armor is padded with beast fur for warmth and comfort"
 	icon_state = "hatangafur"
-	sellprice = VALUE_LEATHER_ARMOR_FUR
+	sellprice = VALUE_LEATHER_ARMOR_FUR + SKILL_2
 
 	armor = ARMOR_LEATHER_GOOD
 	body_parts_covered = COVERAGE_FULL
@@ -142,6 +142,7 @@
 	body_parts_covered = COVERAGE_SHIRT
 	item_weight = 2.2
 	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+	sellprice = VALUE_LEATHER_ARMOR + SKILL_1
 
 /obj/item/clothing/armor/leather/jacket/dropped(mob/living/carbon/human/user)
 	..()
@@ -172,6 +173,7 @@
 	armor = ARMOR_MAILLE_IRON
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	salvage_result = /obj/item/natural/cloth
+	sellprice = VALUE_HUGE_LEATHER + M_MISC*2 + SKILL_4
 
 /obj/item/clothing/armor/leather/jacket/gatemaster_jacket/armored
 	name = "gatemaster's coat"
@@ -179,6 +181,7 @@
 	icon_state = "master_coat_cuirass"
 	blocksound = PLATEHIT
 	armor = ARMOR_MAILLE_GOOD
+	sellprice = VALUE_HUGE_LEATHER + M_MISC*2 + SKILL_4 + M_IRON
 
 //................ Sea Jacket ............... //
 /obj/item/clothing/armor/leather/jacket/sea
@@ -264,6 +267,7 @@
 	boobed = TRUE
 	armor = ARMOR_LEATHER
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
+	sellprice = VALUE_LEATHER_ARMOR + SKILL_3
 
 /obj/item/clothing/armor/leather/jacket/leathercoat/confessor
 	name = "confessional coat"
@@ -297,11 +301,13 @@
 	armor = ARMOR_LEATHER_GOOD
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = list(BCLASS_CUT, BCLASS_TWIST, BCLASS_STAB)
+	sellprice = VALUE_BIG_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/armor/leather/jacket/leathercoat/renegade
 	name = "renegade's coat"
 	desc = "An insulated leather coat with capelets. It protects you well from the elements, a useful thing for those who like to wait in ambush."
 	icon_state = "renegadecoat"
+	sellprice = VALUE_BIG_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/armor/leather/jacket/leathercoat/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

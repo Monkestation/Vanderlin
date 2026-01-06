@@ -99,6 +99,7 @@
 	armor = list("blunt" = 60, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST) //We're losing stab here
 	max_integrity = INTEGRITY_STANDARD + 50
+	sellprice = VALUE_SMALL_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/wrists/bracers/leather/masterwork
 	name = "masterwork leather bracers"

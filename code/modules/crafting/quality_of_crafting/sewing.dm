@@ -1567,37 +1567,6 @@
 	craftdiff = 3
 	category = "Cloak"
 
-/datum/repeatable_crafting_recipe/sewing/wardencloak
-	name = "warden cloak"
-	output = /obj/item/clothing/cloak/wardencloak
-	requirements = list(
-		/obj/item/natural/cloth = 2,
-		/obj/item/natural/hide/cured = 1
-	)
-	craftdiff = 1
-	category = "Cloak"
-
-/datum/repeatable_crafting_recipe/sewing/forrestercloak
-	name = "forrester cloak"
-	output = /obj/item/clothing/cloak/forrestercloak
-	requirements = list(
-		/obj/item/natural/cloth = 2,
-		/obj/item/natural/hide/cured = 1
-	)
-	craftdiff = 1
-	category = "Cloak"
-
-/datum/repeatable_crafting_recipe/sewing/snowcloak
-	name = "snow cloak"
-	output = /obj/item/clothing/cloak/forrestercloak/snow
-	requirements = list(
-		/obj/item/natural/cloth = 2,
-		/obj/item/natural/hide/cured = 1,
-		/obj/item/natural/fur = 1
-	)
-	craftdiff = 1
-	category = "Cloak"
-
 /datum/repeatable_crafting_recipe/sewing/psyaltrist
 	name = "psyalter's stole"
 	output = /obj/item/clothing/cloak/psyaltrist
