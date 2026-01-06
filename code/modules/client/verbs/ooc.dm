@@ -64,6 +64,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		return
 
 	msg = emoji_parse(msg)
+	msg = parsemarkdown_basic(msg, limited = TRUE, barebones = TRUE)
 
 
 	if(!holder)

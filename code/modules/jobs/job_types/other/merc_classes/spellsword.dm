@@ -5,13 +5,48 @@
 	outfit = /datum/outfit/mercenary/spellsword
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5
-
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
+	magic_user = TRUE
+	spell_points = 5
+
+	jobstats = list(
+		STATKEY_STR = 2,
+		STATKEY_INT = 1,
+		STATKEY_SPD = -1
+	)
+
+	skills = list(
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/knives = 1,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/misc/medicine = 1,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/magic/arcane = 1,
+		/datum/skill/craft/alchemy = 1
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR
+	)
+
+	spells = list(
+		/datum/action/cooldown/spell/undirected/touch/prestidigitation
+	)
+
+/datum/job/advclass/mercenary/spellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.merctype = 9
 
 /datum/outfit/mercenary/spellsword
+	name = "Spellsword (Mercenary)"
 	armor = /obj/item/clothing/armor/cuirass/iron
 	neck = /obj/item/clothing/neck/gorget
 	wrists = /obj/item/clothing/wrists/bracers/leather
@@ -24,31 +59,10 @@
 	beltl = /obj/item/storage/magebag/poor
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor, /obj/item/weapon/knife/dagger, /obj/item/reagent_containers/glass/bottle/manapot, /obj/item/book/granter/spellbook/apprentice, /obj/item/chalk)
-
-// Just a better adventurer warrior
-/datum/outfit/mercenary/spellsword/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
-
-	H.merctype = 9
-
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_INT, 1)
-	H.change_stat(STATKEY_SPD, -1)
-	H.adjust_spell_points(5)
-	H.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
-
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/weapon/knife/dagger = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot = 1,
+		/obj/item/book/granter/spellbook/apprentice = 1,
+		/obj/item/chalk = 1
+	)

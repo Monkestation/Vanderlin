@@ -166,7 +166,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 				var/obj/item/I = H.wear_mask
 				if(!I.obj_broken)
 					return
-	H.blur_eyes(2)
+	H.set_eye_blur_if_lower(4 SECONDS)
 	H.apply_status_effect(/datum/status_effect/debuff/badvision)
 
 /datum/status_effect/debuff/badvision
@@ -700,7 +700,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 
 		// Severe migraine effects
 		if(prob(30)) // 30% chance of severe episode
-			H.blur_eyes(rand(3, 6))
+			H.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))
 			to_chat(H, span_boldwarning("A severe migraine strikes! Your vision blurs and your head pounds!"))
 		else
 			to_chat(H, span_warning("A migraine headache begins to build."))

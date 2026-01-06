@@ -62,12 +62,12 @@
 
 	for(var/mob/living/seer in view(7, src))
 		shake_camera(seer, max(1, round(blastpowder_amount / 20), max(1, round(blastpowder_amount / 10))))
-		seer.apply_effect(max(5, round(blastpowder_amount / 3)), EFFECT_EYE_BLUR)
+		seer.adjust_eye_blur_up_to((blastpowder_amount / 1.5) SECONDS, 10 SECONDS)
 	for(var/mob/living/seer in view(1, src))
 		seer.apply_effect(15, EFFECT_KNOCKDOWN)
 		var/target_turf = get_turf(seer)
 		if(get_turf(seer) == get_turf(src))
-			for(var/i in 1 to pick(3, 7))
+			for(var/i in 1 to rand(3, 7))
 				target_turf = get_step(target_turf, pick(ALL_CARDINALS))
 		else
 			for(var/i in 1 to pick(1, 2))

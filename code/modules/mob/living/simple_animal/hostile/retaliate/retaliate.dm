@@ -75,21 +75,20 @@
 
 /mob/living/simple_animal/hostile/retaliate/attack_hand(mob/living/carbon/human/M)
 	. = ..()
-	if(M.used_intent.type == INTENT_HELP)
-		if(tame)
-			var/friend_ref = REF(M)
-			if(!(friend_ref in faction))
-				befriend(M)
-
-		if(enemies.len)
-			if(tame)
-				enemies = list()
-				src.visible_message("<span class='notice'>[src] calms down.</span>")
+	if(M.used_intent.type == INTENT_HELP && tame)
+		if(!owner)
+			owner = M
+		if(owner != M)
+			return
+		befriend(M)
+		if(length(enemies))
+			enemies.Cut()
+			visible_message(span_notice("[src] calms down."))
 
 /mob/living/simple_animal/hostile/retaliate
 	var/aggressive = 0
 
-/mob/living/simple_animal/hostile/retaliate/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE)
+/mob/living/simple_animal/hostile/retaliate/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE)
 	. = ..()
 	if(!.)
 		return

@@ -663,6 +663,13 @@
 	craftdiff = 1
 	createditem_extra = 1
 
+
+/datum/anvil_recipe/armor/steel/gallowglass
+	name = "Gallowglass Helmet"
+	recipe_name = "Gallowglass Helm"
+	created_item = /obj/item/clothing/head/helmet/gallowglass
+	craftdiff = 1
+
 /datum/anvil_recipe/armor/steel/coppergate
 	name = "Coppergate helmet"
 	recipe_name = "coppergate helmet"

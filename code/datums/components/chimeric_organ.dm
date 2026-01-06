@@ -43,6 +43,10 @@
 	RegisterSignal(parent, COMSIG_ORGAN_INSERTED, PROC_REF(on_inserted))
 	RegisterSignal(parent, COMSIG_ORGAN_REMOVED, PROC_REF(on_removed))
 
+	var/obj/item/organ/O = parent
+	if(O.owner)
+		on_inserted(null, O.owner)
+
 /datum/component/chimeric_organ/Destroy()
 	stop_processing()
 	cleanup_nodes()
@@ -70,10 +74,16 @@
 	for(var/datum/chimeric_node/output/listed_output as anything in outputs)
 		listed_output.hosted_carbon = organ_owner
 		listed_output.register_listeners(organ_owner)
+		listed_output.final_setup()
 
 	for(var/datum/chimeric_node/input/listed_input as anything in inputs)
 		listed_input.hosted_carbon = organ_owner
 		listed_input.register_triggers(organ_owner)
+		listed_input.final_setup()
+
+	for(var/datum/chimeric_node/special/listed_special as anything in special_nodes)
+		listed_special.hosted_carbon = organ_owner
+		listed_special.final_setup()
 
 	start_processing()
 
@@ -85,8 +95,12 @@
 
 	for(var/datum/chimeric_node/input/listed_input as anything in inputs)
 		listed_input.unregister_triggers()
+		listed_input.removal_setup()
 	for(var/datum/chimeric_node/output/listed_output as anything in outputs)
 		listed_output.unregister_listeners(organ_owner)
+		listed_output.removal_setup()
+	for(var/datum/chimeric_node/special/listed_special as anything in special_nodes)
+		listed_special.removal_setup()
 
 	organ_owner = null
 
@@ -278,6 +292,7 @@
 			var/datum/chimeric_node/special/injected_special = injected_node
 			injected_special.setup()
 			handle_special_injection(injected_special)
+	return TRUE
 
 /datum/component/chimeric_organ/proc/consume_any_blood(datum/component/blood_stability/blood_stab, amount)
 	for(var/blood_type in blood_stab.blood_stability)

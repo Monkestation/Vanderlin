@@ -111,9 +111,8 @@
 	if(design_chosen)
 		return
 
-	if(!('icons/roguetown/weapons/wood_heraldry.dmi' in GLOB.IconStates_cache))
-		var/icon/icon_file = new('icons/roguetown/weapons/wood_heraldry.dmi')
-		GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'] = icon_file.IconStates()
+	if(isnull(GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi']))
+		GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'] = icon_states('icons/roguetown/weapons/wood_heraldry.dmi')
 
 	var/picked_name = browser_input_list(user, "Choose a Heraldry", "Heraldry", GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'])
 	if(!picked_name)
@@ -256,9 +255,8 @@
 	if(design_chosen)
 		return
 
-	if(!('icons/roguetown/weapons/shield_heraldry.dmi' in GLOB.IconStates_cache))
-		var/icon/icon_file = new('icons/roguetown/weapons/shield_heraldry.dmi')
-		GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi'] = icon_file.IconStates()
+	if(isnull(GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi']))
+		GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi'] = icon_states('icons/roguetown/weapons/shield_heraldry.dmi')
 
 	var/picked_name = browser_input_list(user, "Choose a Heraldry", "Heraldry", sortList(GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi']))
 	if(!picked_name)

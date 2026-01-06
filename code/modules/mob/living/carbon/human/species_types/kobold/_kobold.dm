@@ -136,6 +136,7 @@
 		"Stonepaw" = SKIN_COLOR_STONEPAW,
 		"Emberhide" = SKIN_COLOR_EMBERHIDE,
 		"Sandswept" = SKIN_COLOR_SANDSWEPT,
+		"Icepack" = SKIN_COLOR_ICEPACK,
 	))
 
 /datum/species/kobold/get_possible_names(gender = MALE)

@@ -18,49 +18,67 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_INT = -2,
+		STATKEY_END = 1,
+		STATKEY_CON = 1
+	)
+
+	skills = list(
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/labor/mining = 4,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/medicine = 1,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/craft/traps = 1,
+		/datum/skill/craft/engineering = 2,
+		/datum/skill/craft/blacksmithing = 1,
+		/datum/skill/craft/smelting = 2,
+		/datum/skill/misc/reading = 1
+	)
+
+/datum/job/miner/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_skillrank(/datum/skill/craft/smelting, pick(0,1,1,2), TRUE)
+
+/datum/outfit/miner
+	name = "Miner"
+	head = /obj/item/clothing/head/armingcap
+	pants = /obj/item/clothing/pants/trou
+	armor = /obj/item/clothing/armor/gambeson/light/striped
+	shirt = /obj/item/clothing/shirt/undershirt/colored/random
+	shoes = /obj/item/clothing/shoes/boots/leather
+
+	belt = /obj/item/storage/belt/leather
+	neck = /obj/item/storage/belt/pouch/coins/poor
+	beltl = /obj/item/weapon/pick
+	backr = /obj/item/weapon/shovel
+	backl = /obj/item/storage/backpack/backpack
+
+	backpack_contents = list(
+		/obj/item/flint = 1,
+		/obj/item/weapon/knife/villager = 1,
+		/obj/item/storage/keyring/artificer = 1
+	)
+
 /datum/outfit/miner/map_override(mob/living/carbon/human/H)
 	if(SSmapping.config.map_name != "Voyage")
 		return
 	head = /obj/item/clothing/head/armingcap
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
-	wrists = null
 	shoes = /obj/item/clothing/shoes/boots
 
-/datum/outfit/miner/pre_equip(mob/living/carbon/human/H)
-	..()
-	head = /obj/item/clothing/head/armingcap
-	pants = /obj/item/clothing/pants/trou
-	armor = /obj/item/clothing/armor/gambeson/light/striped
-	shirt = /obj/item/clothing/shirt/undershirt/colored/random
-	shoes = /obj/item/clothing/shoes/boots/leather
-	belt = /obj/item/storage/belt/leather
-	neck = /obj/item/storage/belt/pouch/coins/poor
-	beltl = /obj/item/weapon/pick
-	backr = /obj/item/weapon/shovel
-	backl = /obj/item/storage/backpack/backpack
-	backpack_contents = list(/obj/item/flint = 1, /obj/item/weapon/knife/villager = 1, /obj/item/storage/keyring/artificer = 1)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mining, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/traps, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/engineering, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)//I assume they would know a thing or two about smithing
-	H.adjust_skillrank(/datum/skill/craft/smelting, pick(2,3,3,4), TRUE)//if they are such good smelters
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.change_stat(STATKEY_STR, 1)
-	H.change_stat(STATKEY_INT, -2)
-	H.change_stat(STATKEY_END, 1)
-	H.change_stat(STATKEY_CON, 1)
-
-	if(H.dna.species.id == SPEC_ID_DWARF)
+/datum/outfit/miner/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if (equipped_human.dna.species.id == SPEC_ID_DWARF)
 		head = /obj/item/clothing/head/helmet/leather/minershelm
-		H.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+		equipped_human.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
 	else
 		beltr = /obj/item/flashlight/flare/torch/lantern
+

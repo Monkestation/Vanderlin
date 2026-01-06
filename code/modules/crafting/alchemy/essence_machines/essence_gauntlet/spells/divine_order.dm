@@ -1,3 +1,10 @@
+/datum/action/cooldown/spell/essence/divine_order
+	name = "Divine Order"
+	desc = "Call upon the divine to bring perfect order."
+	button_icon_state = "rune4"
+	cast_range = 3
+	attunements = list(/datum/attunement/polymorph)
+
 /datum/action/cooldown/spell/essence/divine_order/cast(atom/cast_on)
 	. = ..()
 	var/turf/target_turf = get_turf(cast_on)

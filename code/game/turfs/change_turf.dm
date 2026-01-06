@@ -119,7 +119,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(SSlighting.initialized)
 		if(SSoutdoor_effects.initialized)
 			outdoor_effect = old_outdoor_effect
-			get_sky_and_weather_states()
+			update_sky_and_weather_states()
 
 		recalc_atom_opacity()
 		lighting_object = old_lighting_object
@@ -133,6 +133,11 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 				lighting_build_overlay()
 			else
 				lighting_clear_overlay()
+
+	// only queue for smoothing if SSatom initialized us, and we'd be changing smoothing state
+	if(flags_1 & INITIALIZED_1)
+		QUEUE_SMOOTH_NEIGHBORS(src)
+		QUEUE_SMOOTH(src)
 
 	return W
 
@@ -322,8 +327,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		ImmediateCalculateAdjacentTurfs()
 	else
 		CALCULATE_ADJACENT_TURFS(src)
-
-	QUEUE_SMOOTH_NEIGHBORS(src)
 
 	HandleTurfChange(src)
 

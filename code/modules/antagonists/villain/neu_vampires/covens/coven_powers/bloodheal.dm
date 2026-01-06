@@ -72,7 +72,7 @@
 		if(eyes)
 			eyes.applyOrganDamage(-HEAL_BASHING_LETHAL * (level * 0.5))
 			owner.adjust_blindness(-HEAL_AGGRAVATED * (level * 0.5))
-			owner.adjust_blurriness(-HEAL_AGGRAVATED * (level * 0.5))
+			owner.adjust_eye_blur(-HEAL_AGGRAVATED * (level) SECONDS)
 
 	// Masquerade violation check
 	if(level >= 3)

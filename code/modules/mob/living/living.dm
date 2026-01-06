@@ -811,6 +811,12 @@
 	set waitfor = FALSE
 	var/timer = 2
 
+	if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
+		var/fail_resist = resist_grab()
+		if(fail_resist)
+			set_resting(TRUE, silent = TRUE)
+			return
+
 	if(iscarbon(src))
 		var/mob/living/carbon/getter_upper = src
 		var/obj/item/clothing/armor/got_armor = getter_upper.get_item_by_slot(ITEM_SLOT_ARMOR) //grabs the item in your armorslot
@@ -832,11 +838,6 @@
 		if(body_position == LYING_DOWN)
 			set_resting(TRUE, silent = TRUE)
 		return
-
-	if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
-		var/fail_resist = resist_grab()
-		if(fail_resist)
-			return
 
 	set_body_position(STANDING_UP)
 	set_lying_angle(0)
@@ -960,7 +961,6 @@
 	set_nutrition(NUTRITION_LEVEL_FED + 50)
 	bodytemperature = BODYTEMP_NORMAL
 	set_blindness(0)
-	set_blurriness(0)
 	set_dizziness(0)
 	cure_nearsighted()
 	cure_blind()
@@ -976,7 +976,6 @@
 	divine_fire_stacks = 0
 	confused = 0
 	dizziness = 0
-	drowsyness = 0
 	stuttering = 0
 	slurring = 0
 	jitteriness = 0
@@ -2232,8 +2231,6 @@
 			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
 			if(E)
 				E.setOrganDamage(var_value)
-		if("eye_blurry")
-			set_blurriness(var_value)
 		if("maxHealth")
 			updatehealth()
 		if("resize")

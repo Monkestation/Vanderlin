@@ -92,15 +92,16 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/charactet_eligible_for_trait(mob/living/carbon/human/character, client/player, trait_type)
 	var/datum/special_trait/special = SPECIAL_TRAIT(trait_type)
-	var/datum/job/job
-	if(character.job)
-		job = SSjob.name_occupations[character.job]
+	var/datum/job/job = character?.mind.assigned_role
+	var/datum/job/parent_job = job?.parent_job
 	if(!isnull(special.allowed_jobs))
 		if(!job)
 			return FALSE
-		if(!(job.type in special.allowed_jobs))
+		if(!(job.type in special.allowed_jobs) && !(parent_job?.type in special.allowed_jobs))
 			return FALSE
 	if(!isnull(special.restricted_jobs) && job && (job.type in special.restricted_jobs))
+		return FALSE
+	if(!isnull(special.restricted_jobs) && parent_job && (parent_job.type in special.restricted_jobs))
 		return FALSE
 	if(!isnull(special.allowed_races) && !(character.dna.species.id in special.allowed_races))
 		return FALSE

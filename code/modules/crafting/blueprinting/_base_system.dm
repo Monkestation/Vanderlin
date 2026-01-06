@@ -27,7 +27,7 @@
 	holder.screen += buttons
 	holder.click_intercept = src
 	init_blueprint_recipes()
-	RegisterSignal(holder.mob, COMSIG_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
+	RegisterSignal(holder.mob, COMSIG_USER_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
 	RegisterSignal(holder?.mob, COMSIG_ATOM_MOUSE_ENTERED, PROC_REF(on_mouse_moved_pre))
 
 /datum/blueprint_system/proc/quit()
@@ -39,7 +39,7 @@
 		recipe_browser.close()
 		recipe_browser = null
 	if(holder?.mob)
-		UnregisterSignal(holder.mob, COMSIG_MOUSE_ENTERED)
+		UnregisterSignal(holder.mob, COMSIG_USER_MOUSE_ENTERED)
 		UnregisterSignal(holder.mob, COMSIG_ATOM_MOUSE_ENTERED)
 	qdel(src)
 
@@ -376,7 +376,7 @@
 			var content = "<div class='tooltip-name'>" + name + "</div>";
 			content += "<div class='tooltip-desc'>" + desc + "</div>";
 			content += "<div class='tooltip-materials'>Build with: " + initiateItem + "<br>";
-			if (materialsJson && materialsJson !== '[]') {
+			if (materialsJson && materialsJson !== '\[]') {
 				try {
 					var materials = JSON.parse(materialsJson);
 					content += "<div class='tooltip-materials'>Materials:<br>";
@@ -389,7 +389,7 @@
 				}
 			}
 
-			if (featuresJson && featuresJson !== '[]') {
+			if (featuresJson && featuresJson !== '\[]') {
 				try {
 					var features = JSON.parse(featuresJson);
 					content += "<div class='tooltip-features'>Features: " + features.join(', ') + "</div>";
