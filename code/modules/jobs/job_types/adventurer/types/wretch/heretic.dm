@@ -192,7 +192,7 @@
 			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
 			beltl = /obj/item/weapon/whip/xylix
 		if(/datum/patron/inhumen/graggar)
-			head = /obj/item/clothing/head/helmet/graggar
+			head = /obj/item/clothing/head/helmet/heavy/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
 			neck = /obj/item/clothing/neck/gorget
 			gloves = /obj/item/clothing/gloves/plate/graggar
