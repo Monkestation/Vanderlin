@@ -26,7 +26,7 @@
 		/datum/language/elvish,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
-		/datum/language/orcish,
+		/datum/language/orcish
 	)
 
 	traits = list(	TRAIT_DODGEEXPERT,
