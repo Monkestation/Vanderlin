@@ -170,6 +170,7 @@
 	icon_state = "marrov"
 	icon_living = "marrov"
 	icon_dead = "marrovd"
+	faction = list(FACTION_UNDEAD)
 
 	botched_butcher_results = list(/obj/item/natural/fur/volf = 1,
 						/obj/item/alch/bone = 1)
@@ -182,7 +183,7 @@
 						/obj/item/natural/fur/volf = 3,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 4)
-	head_butcher = /obj/item/natural/head/volf
+	head_butcher = /obj/item/natural/head/volf	// TODO: unique head.
 
 	// You must sacrifice someone/something to tame this. Can't just be an animal.
 	food_type = list(/obj/item/bodypart,
@@ -194,8 +195,9 @@
 	base_constitution = 9
 	base_strength = 8
 	base_speed = 15
-	vision_range = 10
-	aggro_vision_range = 10
+	move_to_delay = 1
+	vision_range = 6	// You can sneak around easier.
+	aggro_vision_range = 6
 	remains_type = /obj/effect/decal/remains/wolf/marrov
 
 /mob/living/simple_animal/hostile/retaliate/wolf/cave/update_overlays()

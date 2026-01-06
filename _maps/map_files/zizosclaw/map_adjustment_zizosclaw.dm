@@ -9,8 +9,10 @@
 	SPEC_ID_HALF_DROW\
 )
 
-#define HOLLOWKIN list(\
-	SPEC_ID_HOLLOWKIN\
+#define SERVANTRY list(\
+	SPEC_ID_HOLLOWKIN,\
+	SPEC_ID_DROW,\
+	SPEC_ID_HALF_DROW\
 )
 
 // Those raised to Zizonian worship, or converted/brainwashed to an extent to be trusted as leadership.
@@ -34,7 +36,9 @@
 		/datum/job/steward = DARK_ELF,
 		/datum/job/courtphys = DARK_ELF,
 		/datum/job/royalknight = DARK_ELF,
-		/datum/job/servant = HOLLOWKIN,
+		// Hollowkin servantry:
+		/datum/job/servant = SERVANTRY,
+		/datum/job/butler = SERVANTRY,
 	)
 	patron_adjust = list(
 		/datum/job/lord = ZIZO_DEVOTEE,
@@ -55,8 +59,22 @@
 		/datum/job/captain = AGE_POST_CONQUEST,
 	)
 
+	jobname_adjust = list(
+		/datum/job/farmer = list(
+			"title" = "Celson",
+			"title_fem" = "Celbride",
+			),
+		/datum/job/soilchild = list(
+			"title" = "Sporeling",
+			"title_fem" = "Sporeling",
+		),
+		/datum/job/carpenter = list(
+			"title" = "Capcarver"
+		),
+	)
+
 #undef DARK_ELF
-#undef HOLLOWKIN
+#undef SERVANTRY
 #undef ZIZO_DEVOTEE
 #undef AGE_POST_CONQUEST
 
@@ -82,10 +100,12 @@
 		/datum/job/forestguard,
 		/datum/job/mercenary,
 		/datum/job/gaffer,
+		/datum/job/gaffer_assistant,
 		/datum/job/mageapprentice,
 		/datum/job/clinicapprentice,
 		/datum/job/lieutenant,
 		/datum/job/tapster,
+		/datum/job/jester, // Zizo says no fun allowed! Xylixians sob.
 		// Old party
 		/datum/job/matron,
 		/datum/job/town_elder,
@@ -93,17 +113,26 @@
 		/datum/job/magician,
 		/datum/job/gatemaster,
 		// Roles overridden by variant:
-		/datum/job/apothecary,
-		/datum/job/feldsher, //Apoth & feldsher combined into Shroom.
-		/datum/job/archivist,
-		/datum/job/guardsman,
-		/datum/job/merchant,
+		/datum/job/apothecary, // Apoth + feldsher = Mycologist.
+		/datum/job/feldsher,
+		/datum/job/archivist, // Court Mage + archivist = Sanguine Scholar
+		/datum/job/guardsman, // Redcap
+		/datum/job/merchant, // Marchand-mercier.
 		/datum/job/shophand,
 		/datum/job/grabber,
-		/datum/job/artificer,
+		/datum/job/artificer, // Tinkerer.
+		/datum/job/mason, // Mason + Miner = Stoneson/Stonebride.
+		/datum/job/miner,
+		/datum/job/hunter, // Fisher + Hunter = Orion
+		/datum/job/fisher,
+		/datum/job/armorsmith, // Armorsmith + Weaponsmith = Blacksmith
+		/datum/job/weaponsmith,
+
 	)
 
 	migrant_blacklist = list(
 		/datum/migrant_wave/crusade,
 		/datum/migrant_wave/grenzelhoft_visit,
 	)
+
+	//whitelist = list ()
