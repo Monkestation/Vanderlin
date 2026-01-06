@@ -609,6 +609,19 @@
 	category = "Floors"
 	floor_object = TRUE
 
+/datum/blueprint_recipe/floor/grasscave
+	name = "Cave Moss"
+	desc = "Mossy fronds best suited to lightless living."
+	result_type = /turf/open/floor/grass/cave
+	required_materials = list(
+		/obj/item/natural/fibers = 3,
+		/obj/item/neuFarm/seed = 1,
+		/obj/item/natural/dirtclod = 2
+	)
+	construct_tool = /obj/item/weapon/shovel
+	category = "Floors"
+	floor_object = TRUE
+
 /datum/blueprint_recipe/floor/hay
 	name = "Hay"
 	desc = "Some hay."
