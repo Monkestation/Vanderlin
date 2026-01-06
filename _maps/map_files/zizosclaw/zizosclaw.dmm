@@ -1243,6 +1243,10 @@
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/manor/feast)
+"lL" = (
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "lT" = (
 /obj/structure/table/vtable/v2,
 /turf/open/floor/churchmarble,
@@ -1883,6 +1887,12 @@
 /obj/structure/plasticflaps,
 /turf/open/water/river/blood,
 /area/indoors/town/clocktower)
+"sU" = (
+/obj/structure/flora/grass/bush/cave{
+	icon_state = "bush_cave2"
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "sV" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/blocks/stonered,
@@ -3515,6 +3525,10 @@
 "Io" = (
 /turf/closed/wall/mineral/pipe,
 /area/under/cave)
+"Ix" = (
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "IB" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/decorstone,
@@ -3662,6 +3676,9 @@
 /obj/structure/throne{
 	name = "Throne of The Claw"
 	},
+/obj/structure/fake_machine/titan{
+	pixel_y = 32
+	},
 /turf/open/floor/carpet/lord/right{
 	dir = 1
 	},
@@ -3747,6 +3764,10 @@
 	},
 /turf/open/transparent/openspace,
 /area/under/cavewet)
+"KM" = (
+/obj/structure/flora/grass/bush/wall/cave,
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "KN" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -4433,6 +4454,10 @@
 /obj/structure/table/optable,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/manor/phys)
+"RV" = (
+/obj/structure/flora/grass/bush/wall/cave,
+/turf/open/floor/dirt,
+/area/under/cave)
 "RZ" = (
 /obj/structure/fake_machine/stockpile,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4885,6 +4910,10 @@
 	},
 /turf/open/floor/church/purple,
 /area/indoors/town/manor/guest/meeting)
+"VW" = (
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/dirt,
+/area/under/cave)
 "VY" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/storage/keyring,
@@ -143996,7 +144025,7 @@ Lr
 pV
 ri
 ri
-ri
+Ix
 dh
 ri
 Vy
@@ -145007,7 +145036,7 @@ CL
 ri
 zV
 ri
-ri
+Ix
 Ni
 ri
 ri
@@ -145812,7 +145841,7 @@ HS
 dp
 OK
 gr
-xd
+RV
 CL
 ri
 QF
@@ -148234,7 +148263,7 @@ Hf
 sV
 Hf
 ko
-CL
+lL
 ri
 Yc
 Yc
@@ -148436,7 +148465,7 @@ YM
 YM
 Hf
 ko
-QF
+VW
 ri
 Yc
 Yc
@@ -149648,7 +149677,7 @@ YM
 YM
 Hf
 ko
-ri
+Ix
 QF
 ri
 tK
@@ -149839,7 +149868,7 @@ yH
 yH
 ri
 wh
-ri
+ia
 zu
 ko
 JW
@@ -149850,7 +149879,7 @@ Hf
 Ul
 Hf
 ko
-CL
+lL
 HM
 QF
 tK
@@ -150245,7 +150274,7 @@ ri
 dh
 Vr
 QF
-ri
+ia
 QF
 hM
 qj
@@ -150449,7 +150478,7 @@ Vr
 QF
 CL
 ri
-CL
+lL
 WC
 qj
 HM
@@ -150651,7 +150680,7 @@ XD
 ri
 ri
 QF
-QF
+ia
 ri
 wh
 ao
@@ -150849,11 +150878,11 @@ ri
 ri
 CL
 dh
-CL
+KM
 QF
 CL
 ri
-ri
+sU
 oq
 dh
 MJ
@@ -151051,7 +151080,7 @@ ri
 ri
 CL
 ME
-ri
+iY
 HM
 oq
 AQ

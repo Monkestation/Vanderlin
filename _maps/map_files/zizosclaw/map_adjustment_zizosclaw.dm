@@ -9,6 +9,10 @@
 	SPEC_ID_HALF_DROW\
 )
 
+#define HOLLOWKIN list(\
+	SPEC_ID_HOLLOWKIN\
+)
+
 // Those raised to Zizonian worship, or converted/brainwashed to an extent to be trusted as leadership.
 #define ZIZO_DEVOTEE list(\
 	/datum/patron/inhumen/zizo\
@@ -30,6 +34,7 @@
 		/datum/job/steward = DARK_ELF,
 		/datum/job/courtphys = DARK_ELF,
 		/datum/job/royalknight = DARK_ELF,
+		/datum/job/servant = HOLLOWKIN,
 	)
 	patron_adjust = list(
 		/datum/job/lord = ZIZO_DEVOTEE,
@@ -51,6 +56,7 @@
 	)
 
 #undef DARK_ELF
+#undef HOLLOWKIN
 #undef ZIZO_DEVOTEE
 #undef AGE_POST_CONQUEST
 
