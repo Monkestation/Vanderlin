@@ -99,19 +99,3 @@
 	max_integrity = 300
 	repair_time = 20 SECONDS
 
-/obj/item/clothing/armor/regenerating/skin/graggar
-	name = "sini-star brand"
-	desc = "An omen of ill portent created through repeated exposure to the Dark Star's energies. The bearer's fate, no matter how long it takes, is preordained; death by fiery dismemberment."
-	icon = 'icons/roguetown/clothing/masks.dmi'
-	icon_state = "sinistarmark"
-	armor = ARMOR_SCALE
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
-	blocksound = SOFTHIT
-	item_flags = DROPDEL
-	slot_flags = ITEM_SLOT_MASK
-	body_parts_covered = FACE
-	max_integrity = 400
-	repair_time = 20 SECONDS
-
-	repairmsg_end = "My body is renewed under the Dark Star's rays"
-

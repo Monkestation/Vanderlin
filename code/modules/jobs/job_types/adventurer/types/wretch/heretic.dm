@@ -115,19 +115,18 @@
 			H.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 			H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 		if(/datum/patron/inhumen/graggar) //They get cooler outfits cause of non-unique weapon
-			head = /obj/item/clothing/head/helmet/graggar
+			head = /obj/item/clothing/head/helmet/heavy/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
 			neck = /obj/item/clothing/neck/gorget
 			gloves = /obj/item/clothing/gloves/plate/graggar
 			pants = /obj/item/clothing/pants/platelegs/graggar
 			shoes = /obj/item/clothing/shoes/boots/armor/graggar
 			cloak = /obj/item/clothing/cloak/graggar
-			mask = /obj/item/clothing/armor/regenerating/skin/graggar
 			H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 			ADD_TRAIT(H, TRAIT_STRONGBITE, TRAIT_GENERIC)
 			H.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 		if(/datum/patron/inhumen/graggar_zizo)
-			head = /obj/item/clothing/head/helmet/graggar
+			head = /obj/item/clothing/head/helmet/heavy/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
 			neck = /obj/item/clothing/neck/gorget
 			gloves = /obj/item/clothing/gloves/plate/graggar
