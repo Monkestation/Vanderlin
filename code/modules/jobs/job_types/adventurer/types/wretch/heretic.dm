@@ -199,6 +199,7 @@
 			pants = /obj/item/clothing/pants/platelegs/graggar
 			shoes = /obj/item/clothing/shoes/boots/armor/graggar
 			cloak = /obj/item/clothing/cloak/graggar
+			backr = /obj/item/weapon/greataxe/steel/doublehead/graggar
 			H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 			ADD_TRAIT(H, TRAIT_STRONGBITE, TRAIT_GENERIC)
 			H.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
