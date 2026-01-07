@@ -32,6 +32,17 @@
 /mob/living/proc/get_ear_protection()
 	return 0
 
+/**
+ * Checks if our mob has their mouth covered.
+ *
+ * Note that we only care about [ITEM_SLOT_HEAD] and [ITEM_SLOT_MASK].
+ *  (so if you check all slots, it'll return head, then mask)
+ *That is also the priority order
+ * Arguments
+ * * check_flags: What item slots should we check?
+ *
+ * Retuns a truthy value (a ref to what is covering mouth), or a falsy value (null)
+ */
 /mob/living/proc/is_mouth_covered(head_only = 0, mask_only = 0)
 	return FALSE
 
@@ -228,13 +239,13 @@
 
 	user.setGrabState(GRAB_AGGRESSIVE)
 	if(user.active_hand_index == 1)
-		if(user.r_grab)
-			user.r_grab.grab_state = GRAB_AGGRESSIVE
-			user.r_grab.update_grab_intents()
+		var/obj/item/grabbing/grab_to_update = user.r_grab || user.l_grab
+		grab_to_update?.grab_state = GRAB_AGGRESSIVE
+		grab_to_update?.update_grab_intents()
 	if(user.active_hand_index == 2)
-		if(user.l_grab)
-			user.l_grab.grab_state = GRAB_AGGRESSIVE
-			user.l_grab.update_grab_intents()
+		var/obj/item/grabbing/grab_to_update = user.l_grab || user.r_grab
+		grab_to_update?.grab_state = GRAB_AGGRESSIVE
+		grab_to_update?.update_grab_intents()
 
 	var/add_log = ""
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
@@ -247,31 +258,30 @@
 	log_combat(user, src, "grabbed", addition="aggressive grab[add_log]")
 	return 1
 
-/turf/proc/grabbedintents(mob/living/user)
+/turf/proc/grabbedintents(mob/living/user, atom/grabbed)
 	//RTD up and down
 	return list(/datum/intent/grab/move)
 
-/obj/proc/grabbedintents(mob/living/user, precise)
+/obj/proc/grabbedintents(mob/living/user, atom/grabbed)
 	return list(/datum/intent/grab/move)
 
-/obj/item/grabbedintents(mob/living/user, precise)
+/obj/item/grabbedintents(mob/living/user, atom/grabbed)
 	return list(/datum/intent/grab/remove, /datum/intent/grab/twistitem)
 
-/mob/proc/grabbedintents(mob/living/user, precise)
+/mob/proc/grabbedintents(mob/living/user, atom/grabbed, precise)
 	return list(/datum/intent/grab/move)
 
 /mob/living/proc/send_grabbed_message(mob/living/carbon/user)
-	if(HAS_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE))
-		return
-
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		visible_message("<span class='danger'>[user] firmly grips [src]!</span>",
-						"<span class='danger'>[user] firmly grips me!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
-		to_chat(user, "<span class='danger'>I firmly grip [src]!</span>")
+		visible_message(span_danger("[user] firmly grips [src]!"), \
+						src != user ? span_danger("[user] firmly grips me!") : "", \
+						span_hear("I hear aggressive shuffling!"), null, user)
+		to_chat(user, span_danger("I firmly grip [src != user ? "[src]" : "myself"]!"))
 	else
-		visible_message("<span class='danger'>[user] tightens [user.p_their()] grip on [src]!</span>", \
-						"<span class='danger'>[user] tightens [user.p_their()] grip on me!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
-		to_chat(user, "<span class='danger'>I tighten my grip on [src]!</span>")
+		visible_message(span_danger("[user] tightens [user.p_their()] grip on [src]!"), \
+						src != user ? span_danger("[user] tightens [user.p_their()] grip on me!") : "", \
+						span_hear("I hear aggressive shuffling!"), null, user)
+		to_chat(user, span_danger("I tighten my grip on [src != user ? "[src]" : "myself"]!"))
 
 /mob/living/attack_animal(mob/living/simple_animal/M)
 	if(M.swinging)

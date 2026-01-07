@@ -667,8 +667,7 @@
 		cmode = TRUE
 		playsound_local(src, 'sound/misc/combon.ogg', 100)
 		ADD_TRAIT(src, TRAIT_BLOCKED_DIAGONAL, "combat")
-		if(cmode_timer)
-			deltimer(cmode_timer)
+		deltimer(cmode_timer)
 
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)

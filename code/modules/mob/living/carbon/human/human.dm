@@ -35,7 +35,7 @@
 				counter_chance = CLAMP(counter_chance, 5, 95)
 				if(prob(counter_chance))
 					grabber.Stun(10)
-					grabber.stop_pulling()
+					grabber.stop_pulling(pulling_broke_free = TRUE)
 					to_chat(user, span_notice("[grabber] fell for my grab counter!"))
 					to_chat(grabber, span_danger("I fall for [src]'s grab counter!"))
 				else

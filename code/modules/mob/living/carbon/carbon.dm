@@ -207,9 +207,9 @@
 					if(!throwable_mob.buckled)
 						var/obj/item/grabbing/other_grab = offhand ? get_active_held_item() : get_inactive_held_item()
 						if(grab_state < GRAB_AGGRESSIVE)
-							stop_pulling()
+							stop_pulling(pulling_broke_free = TRUE)
 							return
-						stop_pulling()
+						stop_pulling(pulling_broke_free = TRUE)
 						if(HAS_TRAIT(src, TRAIT_PACIFISM))
 							to_chat(src, span_notice("I gently let go of [throwable_mob]."))
 							return
@@ -258,14 +258,6 @@
 		if(!used_sound)
 			used_sound = pick(PUNCHWOOSH)
 		playsound(src, used_sound, 60, FALSE)
-
-// /mob/living/carbon/restrained(IGNORE_GRAB)
-// //	. = (handcuffed || (!ignore_grab && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE))
-// 	if(handcuffed)
-// 		return TRUE
-// 	if(pulledby && !ignore_grab)
-// 		if(pulledby != src)
-// 			return TRUE
 
 /mob/living/carbon/proc/canBeHandcuffed()
 	return 0
@@ -316,6 +308,9 @@
 	loc?.handle_fall(src)//it's loc so it doesn't call the mob's handle_fall which does nothing
 
 /mob/living/carbon/is_muzzled()
+	for(var/obj/item/clothing/clothing in get_equipped_items())
+		if(clothing.clothing_flags & BLOCKS_SPEECH)
+			return TRUE
 	return FALSE
 
 /obj/structure
