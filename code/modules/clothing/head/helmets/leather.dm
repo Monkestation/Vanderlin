@@ -153,11 +153,3 @@
 	prevent_crits =  MINOR_CRITICALS
 	body_parts_covered = HEAD|HAIR
 	dynamic_hair_suffix = ""
-
-/obj/item/clothing/head/leather/hood
-	name = "leather hood"
-	desc = "A simple, if foreboding hood made out of leather. Worn by street thug and honest yeoman both."
-	icon_state = "leatherhood"
-	item_state = "leatherhood"
-	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
-	flags_inv = HIDEFACE

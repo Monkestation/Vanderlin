@@ -1036,6 +1036,6 @@
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fibers = 1,
 	)
-	output = /obj/item/clothing/head/leather/hood
+	output = /obj/item/clothing/head/roguehood/leather
 	craftdiff = 2
 	category = "Hat"
