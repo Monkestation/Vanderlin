@@ -100,7 +100,7 @@
 
 	//Effects of bloodloss
 	if(!(sigreturn & HANDLE_BLOOD_NO_EFFECTS))
-		if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+		if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE) && stat != DEAD)
 			switch(blood_volume)
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(3))
