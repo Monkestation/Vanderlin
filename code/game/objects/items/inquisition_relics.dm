@@ -837,6 +837,8 @@
 		wield_block_offhand = wield_block)
 
 /obj/item/inqarticles/garrote/proc/reset_garrote()
+	SIGNAL_HANDLER
+
 	var/mob/living/garrote_victim = victim?.resolve()
 	if(garrote_victim)
 		REMOVE_TRAIT(garrote_victim, TRAIT_MUTE, "garroteCordage")
@@ -866,7 +868,7 @@
 /obj/item/inqarticles/garrote/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
 	if(istype(I, /obj/item/rope/inqarticles/inquirycord))
-		user.visible_message(span_warning("[user] starts to rethread the [src] using \the [I]."))
+		user.visible_message(span_notice("[user] starts to rethread the [src] using \the [I]."))
 		if(do_after(user, 12 SECONDS, user))
 			qdel(I)
 			update_integrity(max_integrity)

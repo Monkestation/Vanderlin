@@ -591,19 +591,27 @@
 			offset = GRAB_PIXEL_SHIFT_AGGRESSIVE
 	var/target_pixel_x = M.base_pixel_x + M.body_position_pixel_x_offset
 	var/target_pixel_y = M.base_pixel_y + M.body_position_pixel_y_offset
-	switch(get_cardinal_dir(M, src))
+	switch(get_dir(M, src))
 		if(NORTH)
 			animate(M, pixel_x = target_pixel_x, pixel_y = target_pixel_y + offset, 3)
+		if(NORTHEAST)
+			animate(M, pixel_x = target_pixel_x + offset, pixel_y = target_pixel_y + offset, 3)
+		if(EAST)
+			if(M.lying_angle == 270) //update the dragged dude's direction if we've turned
+				M.set_lying_angle(90)
+			animate(M, pixel_x = target_pixel_x + offset, pixel_y = target_pixel_y, 3)
+		if(SOUTHEAST)
+			animate(M, pixel_x = target_pixel_x + offset, pixel_y = target_pixel_y - offset, 3)
 		if(SOUTH)
 			animate(M, pixel_x = target_pixel_x, pixel_y = target_pixel_y - offset, 3)
-		if(EAST)
-			// if(M.lying_angle == 270) //update the dragged dude's direction if we've turned
-			// 	M.set_lying_angle(90)
-			animate(M, pixel_x = target_pixel_x + offset, pixel_y = target_pixel_y, 3)
+		if(SOUTHWEST)
+			animate(M, pixel_x = target_pixel_x - offset, pixel_y = target_pixel_y - offset, 3)
 		if(WEST)
-			// if(M.lying_angle == 90)
-			// 	M.set_lying_angle(270)
+			if(M.lying_angle == 90)
+				M.set_lying_angle(270)
 			animate(M, pixel_x = target_pixel_x - offset, pixel_y = target_pixel_y, 3)
+		if(NORTHWEST)
+			animate(M, pixel_x = target_pixel_x - offset, pixel_y = target_pixel_y + offset, 3)
 
 /mob/living/proc/reset_pull_offsets(mob/living/M, override)
 	if(!override && M.buckled)
