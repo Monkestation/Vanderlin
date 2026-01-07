@@ -45,6 +45,7 @@
 	icon = 'icons/roguetown/clothing/patron_robes.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_robes.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_patron_robes.dmi'
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/abyssor
 	name = "sea robe"
@@ -53,6 +54,7 @@
 	icon = 'icons/roguetown/clothing/patron_robes.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_robes.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/patron_robes.dmi'
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/astrata
 	name = "sun robe"
@@ -60,12 +62,14 @@
 	icon_state = "astratarobe"
 
 	sleeved = null
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/noc
 	name = "moon robe"
 	desc = "The cloth of a follower of Noc."
 	icon_state = "nocrobe"
 	sleeved = null
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 //someone should make sure the necromancer robe gets dwarf and child sprites
 /obj/item/clothing/shirt/robe/necromancer
@@ -80,21 +84,25 @@
 	name = "briar robe"
 	desc = "Nature nurtures us and we, in turn, will nurture it back in the end."
 	icon_state = "dendorrobe"
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/eora
 	name = "eoran robe"
 	desc = "Holy robes, intended for use by followers of Eora"
 	icon_state = "eorarobes"
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/eora/alt
 	name = "eoran straps"
 	desc = "Sanctified, form fitting straps. Used by more radical followers of the Eoran Church"
 	icon_state = "eorastraps"
+	sellprice = 80 //placeholder for eep
 
 /obj/item/clothing/shirt/robe/necra
 	name = "mourning robe"
 	desc = "Black robes which cover the body not unlike those in depictions of the Carriageman himself."
 	icon_state = "necrarobe"
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/priest
 	name = "solar vestments"
@@ -144,7 +152,7 @@
 	name = "guilder jacket"
 	desc = "A fancy jacket common with members of the Mercator Guild."
 	icon_state = "merrobe"
-	sellprice = 30
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/nun
 	name = "nun habit"
@@ -152,6 +160,7 @@
 	item_state = "nun"
 	allowed_race = SPECIES_BASE_BODY
 	allowed_sex = list(FEMALE)
+	sellprice = M_SILK*3 + W_MINOR + SKILL_3
 
 /obj/item/clothing/shirt/robe/feld
 	name = "feldsher's robe"
@@ -185,7 +194,7 @@
 	flags_inv = HIDEBOOB
 	allowed_race = SPECIES_BASE_BODY
 	color = null
-	sellprice = 100
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_4
 
 /obj/item/clothing/shirt/robe/newmage
 	name = "mage robe"

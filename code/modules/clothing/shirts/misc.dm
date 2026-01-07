@@ -9,6 +9,7 @@
 	allowed_race = RACES_PLAYER_ELF_ALL
 	allowed_sex = list(FEMALE)
 	salvage_result = /obj/item/natural/silk
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + M_CLOTH + SKILL_4
 
 /obj/item/clothing/shirt/apothshirt
 	name = "apothecary shirt"

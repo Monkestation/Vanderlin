@@ -55,11 +55,13 @@
 	icon_state = "puritan_shirt"
 	allowed_race = SPECIES_BASE_BODY
 	salvage_result = /obj/item/natural/silk
+	sellprice = M_SILK*5 + W_MINOR + SKILL_3
 
 /obj/item/clothing/shirt/undershirt/artificer
 	name = "heartfeltian suit"
 	desc = "Typical fashion of the best Heartfelt engineers."
 	icon_state = "artishirt"
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + M_SILK + SKILL_4
 
 /obj/item/clothing/shirt/undershirt/lowcut
 	name = "low cut tunic"
@@ -73,6 +75,7 @@
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + M_SILK + SKILL_4
 
 /obj/item/clothing/shirt/undershirt/sailor
 	icon_state = "sailorblues"
@@ -104,6 +107,7 @@
 	color = null
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
+	sellprice = M_SILK + W_MINOR + SKILL_1
 
 /obj/item/clothing/shirt/undershirt/sash
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK

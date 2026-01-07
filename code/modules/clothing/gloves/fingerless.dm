@@ -18,3 +18,4 @@
 	sleeved = 'icons/roguetown/clothing/newclothes/onmob/onmobgloves.dmi'
 	icon_state = "shadowgloves"
 	salvage_result = /obj/item/natural/silk
+	sellprice = VALUE_FINE_CLOTHING + SKILL_2

@@ -115,6 +115,7 @@
 	color = null
 
 	prevent_crits = MINOR_CRITICALS
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + M_CLOTH + SKILL_3
 
 //............... Physicians Hood ............... //
 /obj/item/clothing/head/roguehood/phys
@@ -125,6 +126,7 @@
 	color = null
 
 	prevent_crits = MINOR_CRITICALS
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 
 
 /obj/item/clothing/head/hooded/magehood

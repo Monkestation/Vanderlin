@@ -103,6 +103,7 @@
 	l_sleeve_status = SLEEVE_NORMAL
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + SKILL_4
 
 /obj/item/clothing/pants/trou/apothecary
 	name = "apothecary trousers"

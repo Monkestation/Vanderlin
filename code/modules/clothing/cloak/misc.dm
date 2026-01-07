@@ -10,6 +10,7 @@
 	allowed_sex = list(MALE)
 	allowed_race = SPECIES_BASE_BODY
 	nodismemsleeves = TRUE
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + SKILL_4
 
 
 /obj/item/clothing/cloak/stole
@@ -20,6 +21,7 @@
 	sleevetype = null
 	body_parts_covered = null
 	flags_inv = null
+	sellprice = VALUE_FINE_CLOTHING + SKILL_4
 
 /obj/item/clothing/cloak/stole/red
 	icon_state = "stole_red"
@@ -86,6 +88,7 @@
 	color = CLOTHING_SOOT_BLACK
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = SPECIES_BASE_BODY
+	sellprice = VALUE_FINE_CLOTHING + SKILL_3
 
 /obj/item/clothing/cloak/half/Initialize(mapload, ...)
 	. = ..()
@@ -126,6 +129,7 @@
 	inhand_mod = TRUE
 	toggle_icon_state = FALSE
 	salvage_result = /obj/item/natural/silk
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + M_SILK + SKILL_4
 
 /obj/item/clothing/cloak/half/shadowcloak/cult
 	name = "ominous cloak"
@@ -185,6 +189,7 @@
 /obj/item/clothing/cloak/cape/puritan
 	icon_state = "puritan_cape"
 	allowed_race = SPECIES_BASE_BODY
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + SKILL_3
 
 /obj/item/clothing/cloak/cape/inquisitor
 	name = "Inquisitors Cloak"
@@ -279,6 +284,7 @@
 	item_state = "silktabard"
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
+	sellprice = M_SILK*3 + W_MINOR + SKILL_3
 
 /obj/item/clothing/cloak/shredded
 	name = "shredded cloak"

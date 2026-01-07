@@ -5,6 +5,7 @@
 	icon = 'icons/roguetown/clothing/patron_hoods.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_hoods.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 
 /obj/item/clothing/head/roguehood/nochood
 	name = "moon hood"
@@ -18,6 +19,7 @@
 	prevent_crits = MINOR_CRITICALS
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 
 /obj/item/clothing/head/padded/deathface
 	name = "death shroud"
@@ -33,12 +35,7 @@
 	desc = "Worn by the faithful of Necra, or less savory individuals."
 	icon_state = "necrahood"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
-
-/obj/item/clothing/head/padded/pestra
-	name = "naga hood"
-	desc = "Worn by the faithful of Pestra. Resembling the face of the Naga clothed in rot."
-	icon_state = "pestrahood"
-	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 
 /obj/item/clothing/head/padded/abyssor
 	name = "sea hood"
@@ -47,6 +44,7 @@
 	icon = 'icons/roguetown/clothing/patron_hoods.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_robes.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 
 /obj/item/clothing/head/roguehood/eora
 	name = "opera hood"
@@ -59,7 +57,8 @@
 	worn_y_dimension = 64
 	resistance_flags = FIRE_PROOF // Made of metal
 	armor = ARMOR_WEAK
-	salvage_result = NUTRITION_LEVEL_HUNGRY
+	//salvage_result = NUTRITION_LEVEL_HUNGRY this is too fucking funny to remove
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 
 /obj/item/clothing/head/roguehood/astrata
 	name = "sun hood"
@@ -69,6 +68,7 @@
 
 	armor = ARMOR_MINIMAL
 	prevent_crits = MINOR_CRITICALS
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 
 /obj/item/clothing/head/roguehood/priest
 	name = "solar visage"

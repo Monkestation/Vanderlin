@@ -262,6 +262,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define M_CERULEA	75
 #define M_AMBER		50
 #define M_OPAL		80
+#define M_ESSENCE	20 //essences of lumber or wilderness
 
 // Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit.
 #define SKILL_1		2
@@ -304,7 +305,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define VALUE_GOLD_ITEM			M_GOLD+W_MODERATE
 #define VALUE_GOLD_RARE_ITEM	VALUE_GOLD_ITEM+BONUS_VALUE_MODEST
 
-#define VALUE_PADDED_DRESS			M_SILK*5+W_MODERATE+BONUS_VALUE_TINY
+#define VALUE_PADDED_DRESS			M_SILK*4+W_MODERATE+M_LEATHER+M_MISC*2
 #define VALUE_SMALL_LEATHER			M_LEATHER+W_MINOR
 #define VALUE_MEDIUM_LEATHER		M_LEATHER*2+W_MINOR
 #define VALUE_BIG_LEATHER			M_LEATHER*3+W_MINOR

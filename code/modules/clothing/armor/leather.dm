@@ -111,6 +111,7 @@
 	icon_state = "leathervest"
 	color = "#d69c87" // custom coloring
 	item_weight = 1.8
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_2
 
 //................ Other Vests ............... //
 /obj/item/clothing/armor/leather/vest/colored/butler
@@ -134,6 +135,7 @@
 	color = CLOTHING_WHITE
 	detail_color = CLOTHING_DARK_INK
 	uses_lord_coloring = LORD_PRIMARY
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + M_SILK + SKILL_4
 
 //................ Jacket ............... //	- Has a small storage space
 /obj/item/clothing/armor/leather/jacket
@@ -158,6 +160,7 @@
 	name = "artificer jacket"
 	icon_state = "artijacket"
 	desc = "A thick leather jacket adorned with fur and cog decals. The height of Heartfelt fashion."
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + M_SILK + SKILL_4
 
 /obj/item/clothing/armor/leather/jacket/artijacket/porter
 	name = "leather jacket"
@@ -203,7 +206,7 @@
 	desc = "An expertly padded coat made from the finest silks. Long may live the nobility that dons it."
 	icon_state = "bliaut"
 	sleevetype = "shirt"
-	sellprice = VALUE_LEATHER_ARMOR_LORD
+	sellprice = VALUE_FINE_CLOTHING + M_SILK*2 + M_FUR*2 + SKILL_5
 
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
 	prevent_crits = CUT_AND_MINOR_CRITS
@@ -220,6 +223,7 @@
 	sellprice = VALUE_LEATHER_ARMOR_LORD
 
 	body_parts_covered = COVERAGE_SHIRT
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + M_SILK + SKILL_4
 
 //................ Silk Jacket ............... //
 
@@ -247,6 +251,7 @@
 	sellprice = VALUE_LEATHER_ARMOR_LORD
 
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + M_SILK*2 + SKILL_4
 
 /obj/item/clothing/armor/leather/jacket/handjacket
 	name = "noble jacket"
@@ -258,6 +263,7 @@
 	detail_color = CLOTHING_BERRY_BLUE
 	body_parts_covered = COVERAGE_SHIRT
 	uses_lord_coloring = LORD_PRIMARY
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + M_SILK*2 + SKILL_4
 
 /obj/item/clothing/armor/leather/jacket/leathercoat
 	name = "leather coat"

@@ -46,7 +46,7 @@
 	name = "padded gambeson"
 	desc = "Thick, padded, this will help a little even against arrows. A wise man carried steel as well, but it will do in a pinch."
 	icon_state = "gambesonp"
-	sellprice = VALUE_HEAVY_GAMBESSON
+	sellprice = VALUE_HEAVY_GAMBESSON + SKILL_4
 
 	armor = ARMOR_PADDED_GOOD
 
@@ -95,7 +95,7 @@
 	allowed_race = SPECIES_BASE_BODY
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
-	sellprice = VALUE_PADDED_DRESS
+	sellprice = VALUE_PADDED_DRESS + SKILL_4
 
 	body_parts_covered = COVERAGE_FULL
 
@@ -135,6 +135,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/newclothes/onmob/onmobdrip.dmi'
 	sleeved = 'icons/roguetown/clothing/newclothes/onmob/sleeves_robes.dmi'
 	icon_state = "shadowrobe"
+	sellprice = VALUE_PADDED_DRESS + SKILL_4
 
 
 //................ Striped Tunic ............... // - Light gambesson type

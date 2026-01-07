@@ -40,7 +40,7 @@
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
 	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
-	sellprice = M_ESSENCE + M_ MISC + SKILL_5 + VALUE_LEATHER_HELMET
+	sellprice = M_ESSENCE + M_MISC + SKILL_5 + VALUE_LEATHER_HELMET
 
 /obj/item/clothing/head/helmet/leather/masterwork/Initialize()
 	. = ..()

@@ -17,6 +17,7 @@
 	sleevetype = "noblecoat"
 	color = CLOTHING_WHITE
 	boobed = TRUE
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_3
 
 /obj/item/clothing/shirt/tunic/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

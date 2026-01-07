@@ -404,6 +404,15 @@
 	output = /obj/item/clothing/armor/leather/vest
 	craftdiff = 2
 
+/datum/repeatable_crafting_recipe/leather/vest/butcher
+	name = "butcher vest"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/clothing/armor/leather/vest/colored/butcher
+	craftdiff = 2
+
 /datum/repeatable_crafting_recipe/leather/seajacket
 	name = "sea jacket"
 	requirements = list(

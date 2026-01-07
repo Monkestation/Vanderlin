@@ -135,6 +135,7 @@
 	name = "briar thorns"
 	desc = "The pain it causes perhaps can distract from the whispers of a mad God overpowering your sanity..."
 	icon_state = "briarthorns"
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + M_MISC*3 + SKILL_3//thorns used in crafting.
 
 /obj/item/clothing/head/padded/briarthorns/pickup(mob/living/user)
 	. = ..()

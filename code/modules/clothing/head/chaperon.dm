@@ -20,6 +20,7 @@
 
 /obj/item/clothing/head/chaperon/colored/greyscale/silk
 	icon_state = "chap_silk"
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + SKILL_4
 
 /obj/item/clothing/head/chaperon/colored/greyscale/silk/random/Initialize()
 	color = pick_assoc(GLOB.noble_dyes)

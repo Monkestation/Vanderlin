@@ -371,6 +371,7 @@
 	icon_state = "shadowfacemask"
 	smeltresult = null// the mask is made out of silk and cloth, turns out it was giving "free" iron
 	melting_material = null
+	sellprice = VALUE_FINE_CLOTHING + SKILL_3
 
 /obj/item/clothing/face/shepherd
 	name = "halfmask"
@@ -384,6 +385,7 @@
 	experimental_onhip = TRUE
 	salvage_amount = 1
 	gas_transfer_coefficient = 0.3
+	sellprice = VALUE_FINE_CLOTHING + SKILL_1
 
 /obj/item/clothing/face/shepherd/AdjustClothes(mob/user)
 	if(loc == user)
@@ -414,6 +416,7 @@
 	name = "purple halfmask"
 	icon_state = "shadowmask"
 	desc = "Tiny drops of white dye mark its front, not unlike teeth. A smile that leers from shadow."
+	sellprice = VALUE_FINE_CLOTHING + SKILL_3
 
 /obj/item/clothing/face/feld
 	name = "feldsher's mask"
@@ -426,6 +429,7 @@
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	sewrepair = TRUE
 	gas_transfer_coefficient = 0.3
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH*2 + SKILL_1
 
 /obj/item/clothing/face/phys
 	name = "physicker's mask"
@@ -438,6 +442,7 @@
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	sewrepair = TRUE
 	gas_transfer_coefficient = 0.3
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_1
 
 /obj/item/clothing/face/courtphysician
 	name = "court physican's mask"
@@ -452,6 +457,7 @@
 	gas_transfer_coefficient = 0.3
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + M_CLOTH*2 + SKILL_2 + M_MISC
 
 /obj/item/clothing/face/phys/plaguebearer
 	name = "plague's mask"
@@ -531,4 +537,5 @@
 	salvage_result = /obj/item/natural/silk
 	flags_inv = HIDEFACE
 	resistance_flags = FLAMMABLE
+	sellprice = VALUE_FINE_CLOTHING + M_CLOTH + SKILL_3
 

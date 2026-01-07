@@ -44,6 +44,7 @@
 	desc = "Habits worn by nuns of the pantheon's faith."
 	icon_state = "nun"
 	allowed_race = RACES_PLAYER_ALL
+	sellprice = M_SILK*2 + W_MINOR + SKILL_3
 
 /obj/item/clothing/head/fancyhat
 	name = "fancy hat"
@@ -116,6 +117,7 @@
 
 /obj/item/clothing/head/wizhat/gen
 	icon_state = "wizardhatgen"
+	sellprice = VALUE_FINE_CLOTHING + M_MISC + SKILL_3
 
 /obj/item/clothing/head/leather
 	abstract_type = /obj/item/clothing/head/leather
@@ -146,6 +148,7 @@
 	item_state = "courthat"
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	sellprice = VALUE_FINE_CLOTHING + M_SILK + M_CLOTH*2 + SKILL_3
 
 /obj/item/clothing/head/maidband
 	name = "maid headband"

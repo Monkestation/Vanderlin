@@ -7,6 +7,7 @@
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 	salvage_result = /obj/item/natural/silk
+	sellprice = M_SILK*2 + W_MINOR + SKILL_1
 
 /obj/item/clothing/pants/grenzelpants
 	name = "grenzelhoftian paumpers"
