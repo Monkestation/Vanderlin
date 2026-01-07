@@ -31,6 +31,7 @@
 	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/armor/leather/masterwork
 	name = "masterwork leather armor"
@@ -38,6 +39,7 @@
 	max_integrity = INTEGRITY_STANDARD + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
 	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+	sellprice = M_ESSENCE + M_MISC + SKILL_5 + VALUE_LEATHER_ARMOR
 
 /obj/item/clothing/armor/leather/masterwork/Initialize()
 	. = ..()
@@ -322,6 +324,7 @@
 	desc = "Treated, water-boiled and composite-layered leather armor of fine Grenzelhoftian make."
 	icon_state = "cuirbouilli"
 	item_state = "cuirbouilli"
+	sellprice = VALUE_BIG_LEATHER + M_IRON + SKILL_3
 
 /obj/item/clothing/armor/leather/heavy
 	name = "hardened leather armor"

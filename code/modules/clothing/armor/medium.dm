@@ -79,6 +79,7 @@
 	melting_material = /datum/material/steel
 	equip_delay_self = 4 SECONDS
 	blocksound = SOFTHIT
+	sellprice = VALUE_MEDIUM_LEATHER + SKILL_4 + M_STEEL*2
 
 /obj/item/clothing/armor/medium/scale/inqcoat/Initialize()
 	. = ..()

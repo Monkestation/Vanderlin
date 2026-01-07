@@ -37,7 +37,7 @@
 	desc = "A mystical essence imbued with the power of Dendor. Merely holding it transports one's mind to ancient times."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
-	sellprice = 20
+	sellprice = M_ESSENCE
 
 /obj/item/natural/fur // a piece of skin with animal hair on it. Could be called a fur but its untanned and also encompasses rat skins and goat skins so pelt is more suitable at least to my ears.
 	name = "fur"

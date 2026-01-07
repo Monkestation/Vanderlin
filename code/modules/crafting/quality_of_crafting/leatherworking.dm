@@ -1057,7 +1057,7 @@
 	name = "enduring boots"
 	output = /obj/item/clothing/shoes/psydonboots
 	requirements = list(
-		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fibers = 1,
 	)
 	craftdiff = 3

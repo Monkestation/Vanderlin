@@ -287,3 +287,4 @@
 	lumber_amount = 0
 	grid_height = 64
 	grid_width = 64
+	sellprice = M_ESSENCE

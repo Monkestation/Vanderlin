@@ -47,6 +47,7 @@
 	max_integrity = INTEGRITY_POOR + 50
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_4
 
 /obj/item/clothing/pants/trou/leather/advanced/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -80,6 +81,7 @@
 	max_integrity = INTEGRITY_POOR + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
+	sellprice = M_ESSENCE + M_MISC + SKILL_5 + VALUE_MEDIUM_LEATHER + M_MISC*2
 
 /obj/item/clothing/pants/trou/leather/masterwork/Initialize()
 	. = ..()

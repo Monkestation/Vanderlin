@@ -11,18 +11,21 @@
 	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is to desire for more."
 	icon_state = "atgervi_shaman_coat"
 	item_state = "atgervi_shaman_coat"
+	sellprice = VALUE_MEDIUM_LEATHER + M_FUR*2 + SKILL_2
 
 /obj/item/clothing/pants/trou/leather/atgervi
 	name = "fur pants"
 	desc = "Thick fur pants made to endure the coldest winds, offering a share of protection from fang and claw of beast or men alike."
 	icon_state = "atgervi_pants"
 	item_state = "atgervi_pants"
+	sellprice = VALUE_SMALL_LEATHER + M_FUR*2 + SKILL_1
 
 /obj/item/clothing/gloves/angle/atgervi
 	name = "fur-lined leather gloves"
 	desc = "Thick, padded gloves made for the harshest of climates, and wildest of beasts encountered in the untamed lands."
 	icon_state = "atgervi_raider_gloves"
 	item_state = "atgervi_raider_gloves"
+	sellprice = VALUE_SMALL_LEATHER + M_FUR + SKILL_1
 
 /obj/item/clothing/gloves/plate/atgervi
 	name = "beast claws"
@@ -56,12 +59,14 @@
 	worn_y_dimension = 48
 	experimental_inhand = TRUE
 	experimental_onhip = FALSE
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC*2 + SKILL_3
 
 /obj/item/clothing/shoes/boots/leather/atgervi
 	name = "atgervi leather boots"
 	desc = "A pair of strong leather boots, designed to endure battle and the chill of the frozen north both."
 	icon_state = "atgervi_boots"
 	item_state = "atgervi_boots"
+	sellprice = VALUE_SMALL_LEATHER + SKILL_1
 
 /obj/item/weapon/shield/atgervi
 	name = "kite shield"

@@ -107,6 +107,7 @@
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST) //We're getting chop here
 	max_integrity = INTEGRITY_STANDARD + 100
+	sellprice = M_ESSENCE + M_MISC + SKILL_5 + VALUE_SMALL_LEATHER + M_MISC*2
 
 /obj/item/clothing/wrists/bracers/leather/masterwork/Initialize()
 	. = ..()

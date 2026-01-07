@@ -133,6 +133,7 @@
 	max_integrity = INTEGRITY_STANDARD + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
+	sellprice = M_MISC + M_ESSENCE + SKILL_5 + VALUE_MEDIUM_LEATHER + M_MISC*2 //the newly added items + the original boots value
 
 /obj/item/clothing/shoes/boots/leather/masterwork/Initialize()
 	. = ..()

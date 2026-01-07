@@ -7,6 +7,7 @@
 	icon_state = "foresthide"
 	prevent_crits = ALL_EXCEPT_STAB
 	sewrepair = TRUE
+	sellprice = VALUE_BIG_LEATHER + M_MISC + SKILL_5
 
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester's cloak"

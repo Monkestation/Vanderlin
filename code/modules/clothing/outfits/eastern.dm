@@ -153,6 +153,7 @@
 	item_state = "eastsandals"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	armor = ARMOR_BOOTS
+	sellprice = SKILL_1 + M_WOOD + VALUE_SMALL_LEATHER
 
 /obj/item/clothing/gloves/eastgloves1
 	name = "black gloves"

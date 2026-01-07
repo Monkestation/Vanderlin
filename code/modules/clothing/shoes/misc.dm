@@ -182,3 +182,4 @@
 	color = "#d5c2aa"
 	icon_state = "psydonboots"
 	item_state = "psydonboots"
+	sellprice = VALUE_MEDIUM_LEATHER + M_MISC + SKILL_3
