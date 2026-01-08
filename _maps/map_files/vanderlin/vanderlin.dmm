@@ -12105,6 +12105,12 @@
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/town/basement)
+"fNc" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/dirt,
+/area/under/cave)
 "fNg" = (
 /obj/structure/chair/stool,
 /obj/effect/landmark/start/villager,
@@ -22063,6 +22069,12 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/mountains)
+"kIM" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/grass/red,
+/area/outdoors/woods_safe)
 "kIW" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/toy/cards/deck/syndicate,
@@ -44398,6 +44410,10 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/tile,
 /area/indoors/town/manor/halls/s)
+"vvx" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/grass/yel,
+/area/under/cave)
 "vvJ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/ammo_casing/caseless/arrow,
@@ -121574,9 +121590,9 @@ ibm
 kdt
 wDX
 hzx
-hzx
+fNc
 rAY
-yjU
+vvx
 hzx
 qFx
 wmF
@@ -161346,7 +161362,7 @@ szR
 ggA
 gPM
 fVF
-uoh
+sMC
 ckU
 szR
 wDX
@@ -161750,7 +161766,7 @@ mub
 luz
 fWd
 uoh
-sMC
+kIM
 vwq
 uMx
 wDX
@@ -201747,7 +201763,7 @@ htI
 htI
 htI
 htI
-htI
+sCd
 sCd
 sCd
 glm
@@ -201948,8 +201964,8 @@ htI
 htI
 htI
 htI
-htI
-htI
+sCd
+sCd
 sCd
 sCd
 hzx
@@ -202151,7 +202167,7 @@ htI
 htI
 htI
 htI
-htI
+sCd
 sCd
 sCd
 rZq
@@ -202353,7 +202369,7 @@ htI
 htI
 htI
 htI
-htI
+sCd
 sCd
 sCd
 cyp
