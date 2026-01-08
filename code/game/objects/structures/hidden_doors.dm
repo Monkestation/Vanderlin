@@ -249,6 +249,10 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	if(close_delay > 0)
 		addtimer(CALLBACK(src, PROC_REF(Close)), close_delay)
 
+/obj/structure/door/secret/on_magic_unlock(datum/source, datum/action/cooldown/spell/aoe/knock, mob/living/caster)
+	if(!(knock.antimagic_flags & MAGIC_RESISTANCE))
+		return ..()
+
 /obj/structure/door/secret/Close(silent = FALSE)
 	if(switching_states || !door_opened)
 		return
