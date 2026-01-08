@@ -133,7 +133,7 @@
 	switch(zone)
 		if(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 			return "snout"
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck
 	icon = 'icons/roguetown/mob/monster/saiga.dmi'
@@ -261,7 +261,7 @@
 	switch(zone)
 		if(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 			return "snout"
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 
 /mob/living/simple_animal/hostile/retaliate/saiga/saigakid

@@ -123,4 +123,4 @@
 	return
 
 /mob/living/simple_animal/hostile/retaliate/wolf/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()

@@ -85,7 +85,7 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/minotaur/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /datum/intent/simple/minotaur_unarmed
 	name = "minotaur unarmed"

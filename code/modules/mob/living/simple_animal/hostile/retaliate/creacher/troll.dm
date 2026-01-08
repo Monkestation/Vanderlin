@@ -111,7 +111,7 @@
 		adjustHealth(-rand(20,35))
 
 /mob/living/simple_animal/hostile/retaliate/troll/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/troll/proc/hide()
 	flick("troll_hiding", src)
