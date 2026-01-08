@@ -60,7 +60,7 @@
 	if(user.pulling != L)
 		return FALSE
 
-	playsound(get_turf(src), 'sound/foley/butcher.ogg', 25, TRUE)
+	playsound(src, 'sound/foley/butcher.ogg', 25, TRUE)
 	L.visible_message(span_danger("[user] hangs [L] on [src]!"), span_danger("[user] hangs you on [src]]!"))
 	L.forceMove(drop_location())
 	L.emote("scream")
@@ -115,7 +115,7 @@
 	L.blood_drained++
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in get_turf(src)
-	playsound(get_turf(src), 'sound/misc/bleed (3).ogg', 100, FALSE)
+	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
 		var/datum/blood_type/type = L.get_blood_type()
 		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(L))

@@ -30,7 +30,7 @@
 							/obj/structure/flora/grass/herb/random = 1,
 							/obj/structure/flora/grass/maneater = 1,
 							/obj/structure/flora/grass/pyroclasticflowers = 1,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 1,
 							/obj/item/natural/stone = 2,
 							/obj/item/natural/rock = 4,
 							/obj/item/grown/log/tree/stick = 6)
@@ -70,7 +70,7 @@
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 4,
 							/obj/item/grown/log/tree/stick = 8,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 1,
 							/obj/structure/closet/dirthole/closed/loot=0.75,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0.5)
 	spawnableTurfs = list(/turf/open/floor/dirt/road=5)

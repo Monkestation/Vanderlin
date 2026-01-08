@@ -66,7 +66,7 @@
 	user.visible_message( \
 		span_warning("[user] [latched ? "latches" : "unlatches"] \the [src]."), \
 		span_notice("I [latched ? "latch" : "unlatch"] \the [src]."))
-	playsound(get_turf(src), 'sound/foley/lock.ogg', 100)
+	playsound(src, 'sound/foley/lock.ogg', 100)
 
 /obj/structure/pillory/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
 	if (!anchored)

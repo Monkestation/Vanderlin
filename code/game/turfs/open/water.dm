@@ -822,7 +822,7 @@
 	color = "#3e7459"
 
 /datum/reagent/water/salty/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method == INGEST) // Make sure you DRANK the salty water before losing hydration
+	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
 		..()
 
 /datum/reagent/water/salty/on_mob_life(mob/living/carbon/M)

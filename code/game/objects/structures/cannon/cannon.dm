@@ -55,8 +55,8 @@
 	if(!isopenturf(turf_to_shoot_from))
 		turf_to_shoot_from = get_turf(src)
 
-	playsound(get_turf(src), 'sound/foley/tinnitus.ogg', 60, FALSE, -6)
-	playsound(get_turf(src), 'sound/combat/Ranged/muskshoot.ogg', 60, FALSE, SOUND_EXTRA_RANGE_CANNON)
+	playsound(src, 'sound/foley/tinnitus.ogg', 60, FALSE, -6)
+	playsound(src, 'sound/combat/Ranged/muskshoot.ogg', 60, FALSE, SOUND_EXTRA_RANGE_CANNON)
 	new /obj/effect/particle_effect/smoke/chem/transparent(get_turf(src))
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage) // don't @ me
 
@@ -255,7 +255,7 @@
 	lit = TRUE
 	cannon?.balloon_alert_to_viewers("Lit!")
 	addtimer(CALLBACK(src, PROC_REF(reached_end)), 5 SECONDS)
-	playsound(cannon.loc, 'sound/items/fuse.ogg', 100)
+	playsound(cannon, 'sound/items/fuse.ogg', 100)
 	SEND_SIGNAL(src, COMSIG_FUSE_LIT)
 
 /obj/item/fuse/proc/extinguished()

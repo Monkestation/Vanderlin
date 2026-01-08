@@ -20,12 +20,13 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_nutrition(nutriment_factor * metabolization_rate)
-			H.adjust_hydration(hydration_factor * metabolization_rate)
+			var/actual_metabolized = min(volume, metabolization_rate)
+			H.adjust_nutrition(nutriment_factor * actual_metabolized)
+			H.adjust_hydration(hydration_factor * actual_metabolized)
 	return ..()
 
 /datum/reagent/consumable/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if (method == INGEST && ishuman(M))
+	if ((method & INGEST) && ishuman(M))
 		var/mob/living/carbon/human/HM = M
 
 		if(HM.culinary_preferences)

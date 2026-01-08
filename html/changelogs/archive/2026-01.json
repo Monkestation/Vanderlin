@@ -85,5 +85,23 @@
                 "bugfix": "gave abyssal guard their weapon skill and removed their swordfish"
             }
         ]
+    },
+    "2026-01-06": {
+        "Draggeru": [
+            {
+                "map": "Updated Vanderlins map"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscdel": "Removed Royal Knight brawling subclasses"
+            },
+            {
+                "bugfix": "Removed the ability for pacifists to wrestle"
+            },
+            {
+                "bugfix": "Dungeoneer receiving two pouches"
+            }
+        ]
     }
 }

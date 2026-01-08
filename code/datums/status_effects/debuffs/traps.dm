@@ -29,7 +29,7 @@
 	REMOVE_TRAIT(owner, TRAIT_IMMOBILIZED, TRAIT_STATUS_EFFECT(id))
 	owner.cut_overlay(cube)
 	UnregisterSignal(owner,COMSIG_MOB_APPLY_DAMGE)
-	playsound(owner.loc, 'sound/magic/icicle.ogg', 100, TRUE)
+	playsound(owner, 'sound/magic/icicle.ogg', 100, TRUE)
 	var/mob/living/M = owner
 	if (M)
 		M.Jitter(5)

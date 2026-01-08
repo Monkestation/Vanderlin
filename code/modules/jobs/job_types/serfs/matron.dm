@@ -68,6 +68,7 @@
 
 /datum/job/matron/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)

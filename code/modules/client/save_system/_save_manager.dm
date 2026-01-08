@@ -216,6 +216,7 @@
 /datum/save_file/proc/save_to_file()
 	if(!file_path || !save_data)
 		return FALSE
+	log_game("SAVE: [file_path] save started.")
 	var/savefile/S = new /savefile(file_path)
 	if(!S)
 		return FALSE

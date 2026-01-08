@@ -167,6 +167,7 @@
 		skill_level = user.get_skill_level(recipe.appro_skill)
 
 	recipe.handle_creation(I, quality_score, skill_level)
+	SEND_SIGNAL(user, COMSIG_ITEM_FORGED)
 
 	record_featured_stat(FEATURED_STATS_SMITHS, user)
 	record_featured_object_stat(FEATURED_STATS_FORGED_ITEMS, I.name)

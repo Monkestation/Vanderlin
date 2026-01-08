@@ -53,6 +53,7 @@
 	if(!spawn_instrument)
 		spawn_instrument = /obj/item/instrument/lute
 	spawned.equip_to_slot_or_del(new spawn_instrument(spawned), ITEM_SLOT_BACK_R, TRUE)
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /mob/living/carbon/human/proc/townannouncement()
 	set name = "Announcement"

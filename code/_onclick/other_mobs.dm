@@ -38,7 +38,7 @@
 	if(isliving(A))
 		var/mob/living/L = A
 		if(!used_intent.noaa)
-			playsound(get_turf(src), pick(GLOB.unarmed_swingmiss), 100, FALSE)
+			playsound(src, pick(GLOB.unarmed_swingmiss), 100, FALSE)
 //			src.emote("attackgrunt")
 		var/intent_drain = used_intent.get_releasedrain()
 		adjust_stamina(ceil(intent_drain * rmb_stam_penalty))
@@ -375,7 +375,7 @@
 	if(!used_intent.noaa && ismob(A))
 		do_attack_animation(A, visual_effect_icon = used_intent.animname, used_item = FALSE, used_intent = used_intent)
 		changeNext_move(used_intent.clickcd)
-		playsound(get_turf(src), used_intent.miss_sound, 100, FALSE)
+		playsound(src, used_intent.miss_sound, 100, FALSE)
 		if(used_intent.miss_text)
 			visible_message(span_warning("[src] [used_intent.miss_text]!"), \
 							span_warning("I [used_intent.miss_text]!"))
@@ -457,8 +457,9 @@
 						record_featured_stat(FEATURED_STATS_THIEVES, U)
 						record_featured_stat(FEATURED_STATS_CRIMINALS, U)
 						record_round_statistic(STATS_ITEMS_PICKPOCKETED)
-					if(has_flaw(/datum/charflaw/addiction/kleptomaniac))
-						sate_addiction()
+						SEND_SIGNAL(src, COMSIG_PICKPOCKET_SUCCESS)
+					if(has_quirk(/datum/quirk/vice/kleptomaniac))
+						sate_addiction(/datum/quirk/vice/kleptomaniac)
 				else
 					exp_to_gain /= 2
 					to_chat(U, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))

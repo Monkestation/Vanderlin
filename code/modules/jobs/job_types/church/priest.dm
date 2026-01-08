@@ -65,6 +65,7 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
 	spawned.verbs |= /mob/living/carbon/human/proc/churchcurse
 	spawned.verbs |= /mob/living/carbon/human/proc/churchannouncement
+	spawned.verbs += list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb)
 
 	spawned.virginity = TRUE
 

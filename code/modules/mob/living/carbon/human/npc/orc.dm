@@ -157,8 +157,8 @@
 	eyes = new /obj/item/organ/eyes/night_vision/nightmare
 	eyes.Insert(src)
 	src.underwear = "Nude"
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
+	if(length(quirks))
+		clear_quirks()
 	update_body()
 	faction = list(FACTION_ORCS)
 	var/turf/turf = get_turf(src)

@@ -193,7 +193,7 @@
 			add_drip_floor(get_turf(src), amt)
 
 		if(body_position != LYING_DOWN && !stat)
-			playsound(get_turf(src), pick('sound/misc/bleed (1).ogg', 'sound/misc/bleed (2).ogg', 'sound/misc/bleed (3).ogg'), 100, FALSE)
+			playsound(src, pick('sound/misc/bleed (1).ogg', 'sound/misc/bleed (2).ogg', 'sound/misc/bleed (3).ogg'), 100, FALSE)
 
 	updatehealth()
 
@@ -252,6 +252,8 @@
 	return blood.contains_lux
 
 /mob/living/proc/get_lux_tainted_status()
+	if(HAS_TRAIT(src, TRAIT_TAINTED_LUX))
+		return TRUE
 	var/datum/blood_type/blood = get_blood_type()
 	return blood.tainted_lux
 
@@ -330,7 +332,7 @@
 			W.water_volume = 10
 			return
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
-	playsound(get_turf(src), 'sound/misc/bleed (3).ogg', 100, FALSE)
+	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
 		var/datum/blood_type/type = get_blood_type()
 		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(src))

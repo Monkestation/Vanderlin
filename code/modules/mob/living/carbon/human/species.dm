@@ -791,7 +791,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 		C.setToxLoss(0, TRUE, TRUE)
 
 	if(TRAIT_NOMETABOLISM in inherent_traits)
-		C.reagents.end_metabolization(C, keep_liverless = TRUE)
+		C.reagents.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)
@@ -1252,7 +1252,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 			if(CONFIG_GET(flag/starvation_death))
 				H.apply_status_effect(/datum/status_effect/debuff/hungryt4)
 			if(prob(3))
-				playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
+				playsound(H, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	switch(H.hydration)
 		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
@@ -1500,7 +1500,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 		if(target.body_position == LYING_DOWN)
 			target.forcesay(GLOB.hit_appends)
 		if(!nodmg)
-			playsound(target.loc, user.used_intent.hitsound, 100, FALSE)
+			playsound(target, user.used_intent.hitsound, 100, FALSE)
 
 
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -1881,7 +1881,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 					affecting.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
 					user.put_in_hands(I)
 					H.emote("pain", TRUE)
-					playsound(H.loc, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
+					playsound(H, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
 			I.do_special_attack_effect(user, affecting, intent, H, selzone)
 			if(istype(user.used_intent, /datum/intent/effect) && selzone)
 				var/datum/intent/effect/effect_intent = user.used_intent

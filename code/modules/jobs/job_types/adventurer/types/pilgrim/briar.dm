@@ -141,8 +141,8 @@
 	return TRUE
 
 /obj/item/dendor_blessing/proc/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
-	playsound(get_turf(user), 'sound/misc/wind.ogg', 100, TRUE, -1)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, 'sound/misc/wind.ogg', 100, TRUE, -1)
 	user.emote("smile")
 	user.apply_status_effect(/datum/status_effect/buff/calm)
 
@@ -155,8 +155,8 @@
 	unlocks_recipe = /datum/repeatable_crafting_recipe/dendor/sacrifice_tending
 
 /obj/item/dendor_blessing/growing/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
-	playsound(get_turf(user), 'sound/misc/wind.ogg', 100, TRUE, -1)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, 'sound/misc/wind.ogg', 100, TRUE, -1)
 	to_chat(user, span_good("Plants grow rampant as the brush twists to ease your every step..."))
 	user.emote("smile")
 	ADD_TRAIT(user, TRAIT_BRUSHWALK, TRAIT_GENERIC)
@@ -173,8 +173,8 @@
 	gives_tier2 = TRUE
 
 /obj/item/dendor_blessing/tending/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
-	playsound(get_turf(user), 'sound/misc/wind.ogg', 100, TRUE, -1)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, 'sound/misc/wind.ogg', 100, TRUE, -1)
 	to_chat(user, span_good("You find seeds more easily."))
 	user.emote("smile")
 	ADD_TRAIT(user, TRAIT_SEED_FINDER, TRAIT_GENERIC)
@@ -190,8 +190,8 @@
 	unlocks_recipe = /datum/repeatable_crafting_recipe/dendor/sacrifice_hiding
 
 /obj/item/dendor_blessing/stinging/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
-	playsound(get_turf(user), 'sound/misc/wind.ogg', 100, TRUE, -1)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, 'sound/misc/wind.ogg', 100, TRUE, -1)
 	to_chat(user, span_good("You feel as if light follows your every step... your foraging will be easier from now on, surely."))
 	user.emote("smile")
 	ADD_TRAIT(user, TRAIT_FORAGER, TRAIT_GENERIC)
@@ -209,8 +209,8 @@
 	gives_tier2 = TRUE
 
 /obj/item/dendor_blessing/hiding/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
-	playsound(get_turf(user), 'sound/magic/fleshtostone.ogg', 100, TRUE, -1)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, 'sound/magic/fleshtostone.ogg', 100, TRUE, -1)
 	to_chat(user, span_good("You stride the forests with ease and blend into the undergrowth."))
 	user.emote("smile")
 	user.add_spell(/datum/action/cooldown/spell/undirected/jaunt/bush_jaunt, source = user.cleric)
@@ -231,18 +231,18 @@
 	return ..()
 
 /obj/item/dendor_blessing/devouring/give_blessing(mob/living/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
 	to_chat(user, span_danger("A volf howls far away... and your teeth begin to sear with pain!"))
-	playsound(get_turf(user), 'sound/vo/mobs/wwolf/idle (1).ogg', 50, TRUE)
+	playsound(user, 'sound/vo/mobs/wwolf/idle (1).ogg', 50, TRUE)
 	user.Immobilize(2 SECONDS)
 	sleep(2 SECONDS)
 	user.emote("pain")
 	sleep(0.5 SECONDS)
-	playsound(get_turf(user), 'sound/combat/fracture/fracturewet (1).ogg', 70, TRUE, -1)
+	playsound(user, 'sound/combat/fracture/fracturewet (1).ogg', 70, TRUE, -1)
 	user.Immobilize(30)
 	sleep(3.5 SECONDS)
 	to_chat(user, span_warning("My incisors transform to predatory fangs!"))
-	playsound(get_turf(user), 'sound/combat/fracture/fracturewet (1).ogg', 70, TRUE, -1)
+	playsound(user, 'sound/combat/fracture/fracturewet (1).ogg', 70, TRUE, -1)
 	user.emote("rage", forced = TRUE)
 	ADD_TRAIT(user, TRAIT_STRONGBITE, TRAIT_GENERIC)
 	ADD_TRAIT(user, TRAIT_BESTIALSENSE, TRAIT_GENERIC)
@@ -263,8 +263,8 @@
 	gives_tier2 = TRUE
 
 /obj/item/dendor_blessing/falconing/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE)
-	playsound(get_turf(user), 'sound/misc/wind.ogg', 100, TRUE, -1)
+	playsound(user, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE)
+	playsound(user, 'sound/misc/wind.ogg', 100, TRUE, -1)
 	to_chat(user, span_good("You feel winged beings guide you from above."))
 	user.emote("smile")
 	user.add_spell(/datum/action/cooldown/spell/projectile/falcon_disrupt, source = user.cleric)
@@ -285,8 +285,8 @@
 	return ..()
 
 /obj/item/dendor_blessing/lording/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
-	playsound(get_turf(user), pick('sound/vo/mobs/troll/idle1.ogg','sound/vo/mobs/troll/idle2.ogg'), 50, TRUE)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, pick('sound/vo/mobs/troll/idle1.ogg','sound/vo/mobs/troll/idle2.ogg'), 50, TRUE)
 	to_chat(user, span_good("The rumblings of a troll echo through the trees, your offering was acknowledged by the ancient dwellers of the forest."))
 	user.emote("rage", forced = TRUE)
 	ADD_TRAIT(user, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
@@ -305,8 +305,8 @@
 	gives_tier2 = TRUE
 
 /obj/item/dendor_blessing/shaping/give_blessing(mob/living/carbon/human/user)
-	playsound(get_turf(user), 'sound/vo/smokedrag.ogg', 100, TRUE)
-	playsound(get_turf(user), pick('sound/vo/mobs/troll/idle1.ogg','sound/vo/mobs/troll/idle2.ogg'), 50, TRUE)
+	playsound(user, 'sound/vo/smokedrag.ogg', 100, TRUE)
+	playsound(user, pick('sound/vo/mobs/troll/idle1.ogg','sound/vo/mobs/troll/idle2.ogg'), 50, TRUE)
 	to_chat(user, span_good("You grow taller and stronger, the might of Dendor surges through you."))
 	user.emote("smile")
 	user.add_spell(/datum/action/cooldown/spell/undirected/troll_shape, source = user.cleric)

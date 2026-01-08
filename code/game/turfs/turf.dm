@@ -630,13 +630,18 @@
 		if(C.reagents)
 			clear_reagents_to_vomit_pool(C,V)
 
-/proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V)
-	M.reagents.trans_to(V, M.reagents.total_volume / 10, transfered_by = M)
-	for(var/datum/reagent/R in M.reagents.reagent_list)                //clears the stomach of anything that might be digested as food
-		if(istype(R, /datum/reagent/consumable))
-			var/datum/reagent/consumable/nutri_check = R
-			if(nutri_check.nutriment_factor >0)
-				M.reagents.remove_reagent(R.type, min(R.volume, 10))
+/proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V, purge = FALSE)
+	var/obj/item/organ/stomach/belly = M.getorganslot(ORGAN_SLOT_STOMACH)
+	if(!belly)
+		return
+	var/chemicals_lost = belly.reagents.total_volume * 0.1
+	if(purge)
+		chemicals_lost = belly.reagents.total_volume * 0.67 //For detoxification surgery, we're manually pumping the stomach out of chemcials, so it's far more efficient.
+	belly.reagents.trans_to(V, chemicals_lost, transfered_by = M)
+	//clear the stomach of anything even not food
+	for(var/bile in belly.reagents.reagent_list)
+		var/datum/reagent/reagent = bile
+		belly.reagents.remove_reagent(reagent.type, min(reagent.volume, 10))
 
 //Whatever happens after high temperature fire dies out or thermite reaction works.
 //Should return new turf
