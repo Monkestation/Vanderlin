@@ -1066,6 +1066,8 @@
 
 	if(m_intent == MOVE_INTENT_RUN)
 		sprinted_tiles++
+		var/boon = get_learning_boon(/datum/skill/misc/athletics)
+		adjust_experience(/datum/skill/misc/athletics, (STAEND*0.01) * boon)
 
 	if(wallpressed)
 		update_wallpress(T, newloc, direct)
