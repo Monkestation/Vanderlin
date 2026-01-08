@@ -2,17 +2,16 @@
 	title = "Vaquero"
 	tutorial = "You have been taming beasts of burden all your life, and riding since you were old enough to walk. Perhaps these lands will have use for your skills?"
 	allowed_races = list(SPEC_ID_TIEFLING)
-	outfit = /datum/outfit/adventurer/vaquero
+	outfit = /datum/outfit/folkhero/vaquero
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
-	category_tags = list(CTAG_ADVENTURER)
-	roll_chance = 30
+	category_tags = list(CTAG_FOLKHEROES)
 	total_positions = 1
 
 	skills = list(
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/whipsflails = 2, // Makes sense enough for an animal tamer
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
@@ -28,6 +27,7 @@
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_SPD = 2,
+		STATKEY_END = 2,
 	)
 
 	traits = list(
@@ -39,8 +39,8 @@
 	new /mob/living/simple_animal/hostile/retaliate/saiga/tame/saddled(get_turf(spawned))
 	spawned.adjust_skillrank(/datum/skill/misc/music, rand(1, 2), TRUE)
 
-/datum/outfit/adventurer/vaquero
-	name = "Vaquero (Adventurer)"
+/datum/outfit/folkhero/vaquero
+	name = "Vaquero (Folkhero)"
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random

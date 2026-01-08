@@ -164,7 +164,7 @@
 	skills = list(
 		/datum/skill/misc/reading = 1,
 		/datum/skill/labor/mathematics = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/unarmed = 1,
@@ -246,9 +246,9 @@
 	skills = list(
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/magic/holy = 3,
 		/datum/skill/misc/music = 4
@@ -321,8 +321,8 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/ravox)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			var/sword_skill = rand(1,3)
-			var/whip_skill = rand(1,3)
+			var/sword_skill = rand(1,2)
+			var/whip_skill = rand(1,2)
 			var/axe_skill = rand(0,1)
 			spawned.adjust_skillrank(/datum/skill/combat/swords, sword_skill, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, whip_skill, TRUE)
@@ -404,23 +404,23 @@
 
 	jobstats = list(
 		STATKEY_INT = 2,
-		STATKEY_SPD = 2,
+		STATKEY_SPD = 1,
 		STATKEY_STR = 1
 	)
 
 	skills = list(
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/swords = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/sewing = 1,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/music = 6,
-		/datum/skill/misc/athletics = 4
+		/datum/skill/misc/athletics = 2
 	)
 
 	traits = list(

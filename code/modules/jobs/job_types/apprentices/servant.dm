@@ -47,6 +47,9 @@
 	. = ..()
 	spawned.adjust_skillrank(/datum/skill/craft/crafting, pick(0,0,1), TRUE)
 	spawned.adjust_skillrank(/datum/skill/misc/music, pick(0,1,1), TRUE)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 
 /datum/outfit/servant
 	name = "Servant"

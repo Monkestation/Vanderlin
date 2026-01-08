@@ -48,13 +48,13 @@
 	user.playsound_local(get_turf(user), 'sound/foley/tinnitus.ogg', 60, FALSE) // muh realism or something
 	new /obj/effect/particle_effect/smoke(get_turf(user))
 
-	for(var/mob/M in GLOB.player_list)
-		if(!is_in_zweb(M.z, src.z))
-			continue
-		var/turf/M_turf = get_turf(M)
-		var/shot_sound = sound('sound/combat/Ranged/muskshoot.ogg')
-		if(M_turf)
-			M.playsound_local(M_turf, null, 100, 1, get_rand_frequency(), S = shot_sound)
+	// for(var/mob/M as anything in GLOB.player_list)
+	// 	if(!is_in_zweb(M.z, src.z))
+	// 		continue
+	// 	var/turf/M_turf = get_turf(M)
+	// 	var/shot_sound = sound('sound/combat/Ranged/muskshoot.ogg')
+	// 	if(M_turf)
+	// 		M.playsound_local(M_turf, null, 100, 1, get_rand_frequency(), S = shot_sound)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/shoot_with_empty_chamber(mob/living/user)
 	if(!cocked)

@@ -3,16 +3,15 @@
 	tutorial = "Your vigil over the elven cities has long since ended. Though dutiful, the inevitable happened and now you hope these lands have use for your talents."
 	allowed_races = list(SPEC_ID_ELF)
 	total_positions = 1
-	roll_chance = 15
-	outfit = /datum/outfit/adventurer/bladesinger
-	category_tags = list(CTAG_ADVENTURER)
+	outfit = /datum/outfit/folkhero/bladesinger
+	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 
 	skills = list(
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
@@ -21,7 +20,8 @@
 	)
 
 	jobstats = list(
-		STATKEY_STR = 1,// Weaker than lancer/swordsman because..?
+		STATKEY_STR = 2,
+		STATKEY_CON = 1,
 		STATKEY_END = 1,
 		STATKEY_SPD = 1,
 	)
@@ -38,8 +38,8 @@
 		spawned.underwear_color = CLOTHING_SOOT_BLACK
 		spawned.update_body()
 
-/datum/outfit/adventurer/bladesinger
-	name = "Bladesinger (Adventurer)"
+/datum/outfit/folkhero/bladesinger
+	name = "Bladesinger (Folkhero)"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr = /obj/item/weapon/sword/long/greatsword/elfgsword
 	beltl = /obj/item/storage/belt/pouch/coins/mid

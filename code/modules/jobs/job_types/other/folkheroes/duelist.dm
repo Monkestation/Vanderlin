@@ -11,9 +11,9 @@
 		SPEC_ID_HALF_ORC,\
 	) //Yes, Horcs get to be Duelists, Not Drows though.
 	outfit = /datum/outfit/mercenary/duelist
-	category_tags = list(CTAG_MERCENARY)
+	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Placeholder music since apparently i can't use one from the internet...
-	total_positions = 5
+	total_positions = 2
 
 	jobstats = list(
 		STATKEY_END = 2,
@@ -25,11 +25,11 @@
 	skills = list(
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/craft/crafting = 1,

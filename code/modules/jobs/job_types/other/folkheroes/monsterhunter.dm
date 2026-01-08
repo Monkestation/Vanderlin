@@ -2,10 +2,9 @@
 	title = "Monster Hunter"
 	tutorial = "Monster Hunters dedicate their lives to the eradication of the varied evils infesting Psydonia. They know the vile sorcery of the necromancer, the insidious nature of the cultist and monstrousness of vampires and werevolfs. They also know how best to end them."
 	allowed_races = RACES_PLAYER_NONEXOTIC
-	outfit = /datum/outfit/adventurer/puritan
-	total_positions = 1
-	roll_chance = 15
-	category_tags = list(CTAG_ADVENTURER)
+	outfit = /datum/outfit/folkhero/puritan
+	total_positions = 2
+	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	is_recognized = TRUE
 
@@ -13,7 +12,7 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/axesmaces = 2,
@@ -42,8 +41,8 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
 
 
-/datum/outfit/adventurer/puritan
-	name = "Monster Hunter (Adventurer)"
+/datum/outfit/folkhero/puritan
+	name = "Monster Hunter (Folkhero)"
 	shirt = /obj/item/clothing/shirt/undershirt/puritan
 	belt = /obj/item/storage/belt/leather
 	shoes = /obj/item/clothing/shoes/boots
@@ -59,7 +58,7 @@
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/mid = 1)
 
-/datum/outfit/adventurer/puritan/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/folkhero/puritan/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	if(H.patron)
 		switch(H.patron.type)

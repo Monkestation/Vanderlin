@@ -103,5 +103,17 @@
                 "bugfix": "Dungeoneer receiving two pouches"
             }
         ]
+    },
+    "2026-01-08": {
+        "Gigigger": [
+            {
+                "bugfix": "now Blood Pact provides DARK attunement, instead of DEATH attunement, as intended"
+            }
+        ],
+        "dwasint": [
+            {
+                "rscadd": "lotto machines"
+            }
+        ]
     }
 }

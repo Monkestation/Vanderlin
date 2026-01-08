@@ -11,23 +11,22 @@
 		SPEC_ID_RAKSHARI,\
 	)
 	allowed_patrons = list(/datum/patron/divine/abyssor)
-	outfit = /datum/outfit/adventurer/swashbuckler
+	outfit = /datum/outfit/folkhero/swashbuckler
 	total_positions = 1
-	roll_chance = 30
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_FOLKHEROES)
 
 	skills = list(
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/labor/fishing = 3,
 		/datum/skill/misc/swimming = 4,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/stealing = 3,
 		/datum/skill/misc/sewing = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/craft/traps = 2,
 	)
@@ -44,8 +43,8 @@
 		TRAIT_DODGEEXPERT,
 	)
 
-/datum/outfit/adventurer/swashbuckler
-	name = "Swashbuckler (Adventurer)"
+/datum/outfit/folkhero/swashbuckler
+	name = "Swashbuckler (Folkhero)"
 	head = /obj/item/clothing/head/helmet/leather/headscarf
 	pants = /obj/item/clothing/pants/tights/sailor
 	belt = /obj/item/storage/belt/leather
@@ -61,6 +60,6 @@
 	shoes = /obj/item/clothing/shoes/boots
 	neck = /obj/item/clothing/neck/psycross/silver/abyssor
 
-/datum/outfit/adventurer/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/folkhero/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/sailor, /obj/item/clothing/shirt/undershirt/sailor/red)
