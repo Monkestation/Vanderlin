@@ -11,7 +11,7 @@
 	is_recognized = TRUE
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/polearms = 4,
 		/datum/skill/misc/climbing = 1,

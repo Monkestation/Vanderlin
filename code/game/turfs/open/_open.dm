@@ -100,7 +100,7 @@
 			return 0
 	if(!(lube&SLIDE_ICE))
 		to_chat(C, "<span class='notice'>I slipped[ O ? " on the [O.name]" : ""]!</span>")
-		playsound(C.loc, 'sound/blank.ogg', 50, TRUE, -3)
+		playsound(C, 'sound/blank.ogg', 50, TRUE, -3)
 
 	C.add_stress(/datum/stress_event/slipped)
 	if(force_drop)

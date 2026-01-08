@@ -202,7 +202,7 @@
 	if(!target)
 		return
 
-	playsound(loc, 'sound/vo/mobs/vdragon/drgnroar.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/vo/mobs/vdragon/drgnroar.ogg', 50, TRUE, -1)
 	controller.blackboard[BB_DRAGON_SWOOPING] |= SWOOP_DAMAGEABLE
 	ADD_TRAIT(src, TRAIT_MOVE_FLYING, AI_ATTACK_TRAIT)
 	density = FALSE
@@ -258,7 +258,7 @@
 	controller.blackboard[BB_DRAGON_SWOOPING] &= ~SWOOP_INVULNERABLE
 	mouse_opacity = initial(mouse_opacity)
 	icon_state = "[initial(icon_state)]"
-	playsound(loc, 'sound/misc/meteorimpact.ogg', 200, TRUE)
+	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
 	for(var/mob/living/L in orange(1, src))
 		if(L.stat)
 			visible_message(span_warning("[src] slams down on [L], crushing [L.p_them()]!"))
@@ -470,7 +470,7 @@
 
 	new /obj/effect/temp_visual/dragon_explosion_target(T)
 
-	playsound(get_turf(src), 'sound/magic/charging_lightning.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/charging_lightning.ogg', 100, TRUE)
 
 	addtimer(CALLBACK(src, PROC_REF(void_explosion_detonate), T), 3 SECONDS)
 
@@ -497,7 +497,7 @@
 
 	incorporeal_move = INCORPOREAL_MOVE_JAUNT
 	status_flags |= GODMODE
-	playsound(get_turf(src), 'sound/magic/ethereal_enter.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/ethereal_enter.ogg', 100, TRUE)
 	alpha = 128
 
 	var/phase_attacks = rand(3, 5)
@@ -535,7 +535,7 @@
 	status_flags &= ~GODMODE
 	alpha = initial(alpha)
 
-	playsound(get_turf(src), 'sound/magic/ethereal_exit.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/ethereal_exit.ogg', 100, TRUE)
 	visible_message(span_colossus("[src] phases back into reality!"))
 
 	Stun(1 SECONDS)

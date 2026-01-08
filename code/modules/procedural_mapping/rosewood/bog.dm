@@ -21,7 +21,7 @@
 							/obj/structure/chair/bench/ancientlog = 20,
 							/obj/item/natural/artifact = 4,
 							/obj/structure/leyline = 3,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 2,
 							/obj/structure/voidstoneobelisk = 3,
 							/obj/structure/wild_plant/manabloom = 2,
 							/obj/item/mana_battery/mana_crystal/small = 3,

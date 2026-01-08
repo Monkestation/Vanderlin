@@ -34,7 +34,7 @@
 				return
 			qdel(W)
 			to_chat(user, span_info("The reliquary lock takes my key as it opens, I take a moment to ponder what power was delivered to us..."))
-			playsound(loc, 'sound/foley/doors/woodlock.ogg', 60)
+			playsound(src, 'sound/foley/doors/woodlock.ogg', 60)
 			to_chat(user,)
 			var/relics = list("Melancholic Crankbox - Antimagic", "Daybreak - Silver Whip", "Sanctum - Silver Halberd", "Crusade - Silver Greatsword", "Censer of Penitence")
 			var/relicchoice = input(user, "Choose your tool", "RELICS") as anything in relics
@@ -827,7 +827,7 @@
 		if(ismob(loc))
 			twohanded.unwield(loc)
 		active = FALSE
-		playsound(loc, 'sound/items/garroteshut.ogg', 65, TRUE)
+		playsound(src, 'sound/items/garroteshut.ogg', 65, TRUE)
 
 /obj/item/inqarticles/garrote/attack_self(mob/user)
 	if(obj_broken)
@@ -841,7 +841,7 @@
 		active = FALSE
 		if(user.pulling)
 			user.stop_pulling()
-		playsound(loc, 'sound/items/garroteshut.ogg', 65, TRUE)
+		playsound(src, 'sound/items/garroteshut.ogg', 65, TRUE)
 		wipeslate(user)
 		return
 	if(gripped_intents)
@@ -850,7 +850,7 @@
 			twohanded.wield(loc)
 		active = TRUE
 		if(HAS_TRAIT(src, TRAIT_WIELDED))
-			playsound(loc, pick('sound/items/garrote.ogg', 'sound/items/garrote2.ogg'), 65, TRUE)
+			playsound(src, pick('sound/items/garrote.ogg', 'sound/items/garrote2.ogg'), 65, TRUE)
 			return
 
 /obj/item/inqarticles/garrote/equipped(mob/living/carbon/human/user, slot)
@@ -908,7 +908,7 @@
 			user.stop_pulling(FALSE)
 		/*
 		if(HAS_TRAIT(target, TRAIT_GRABIMMUNE))
-			playsound(loc, pick('sound/items/garrote.ogg', 'sound/items/garrote2.ogg'), 65, TRUE)
+			playsound(src, pick('sound/items/garrote.ogg', 'sound/items/garrote2.ogg'), 65, TRUE)
 			user.visible_message(span_danger("[target] slips past [user]'s attempt to [src] them!"))
 			return
 		*/
@@ -917,7 +917,7 @@
 			to_chat(user, span_warning("I need to wrap it around their throat."))
 			return
 		victim = target
-		playsound(loc, 'sound/items/garrotegrab.ogg', 100, TRUE)
+		playsound(src, 'sound/items/garrotegrab.ogg', 100, TRUE)
 		ADD_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE, TRAIT_GENERIC)
 		ADD_TRAIT(user, TRAIT_NOSTRUGGLE, TRAIT_GENERIC)
 		ADD_TRAIT(target, TRAIT_GARROTED, TRAIT_GENERIC)
@@ -946,7 +946,7 @@
 		user.adjust_stamina(rand(4, 8))
 		var/mob/living/carbon/C = victim
 		// if(get_location_accessible(C, BODY_ZONE_PRECISE_NECK))
-		playsound(loc, pick('sound/items/garrotechoke1.ogg', 'sound/items/garrotechoke2.ogg', 'sound/items/garrotechoke3.ogg', 'sound/items/garrotechoke4.ogg', 'sound/items/garrotechoke5.ogg'), 100, TRUE)
+		playsound(src, pick('sound/items/garrotechoke1.ogg', 'sound/items/garrotechoke2.ogg', 'sound/items/garrotechoke3.ogg', 'sound/items/garrotechoke4.ogg', 'sound/items/garrotechoke5.ogg'), 100, TRUE)
 		if(prob(40))
 			C.emote("choke")
 		C.adjustOxyLoss(choke_damage)

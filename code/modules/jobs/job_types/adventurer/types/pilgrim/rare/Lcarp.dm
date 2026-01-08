@@ -22,7 +22,7 @@
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/misc/athletics = 4,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 1,
 		/datum/skill/misc/swimming = 3,
