@@ -76,6 +76,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/inhumen/graggar)
 			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+			ADD_TRAIT(H, TRAIT_STRONGBITE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 		if(/datum/patron/inhumen/graggar_zizo)
 			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
@@ -200,9 +201,6 @@
 			shoes = /obj/item/clothing/shoes/boots/armor/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			backr = /obj/item/weapon/greataxe/steel/doublehead/graggar
-			H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-			ADD_TRAIT(H, TRAIT_STRONGBITE, TRAIT_GENERIC)
-			H.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 		if(/datum/patron/inhumen/graggar_zizo)
 			head = /obj/item/clothing/head/helmet/heavy/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
