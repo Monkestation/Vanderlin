@@ -28,6 +28,10 @@
 		EXP_TYPE_LIVING = 600
 	)
 
+/datum/job/folkhero/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
+
 /datum/job/advclass/folkhero
 	abstract_type = /datum/job/advclass/folkhero
 	category_tags = list(CTAG_FOLKHEROES)
