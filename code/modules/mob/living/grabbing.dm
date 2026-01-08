@@ -259,7 +259,6 @@
 		/datum/intent/grab/choke,
 		/datum/intent/grab/twist,
 		/datum/intent/grab/twistitem,
-		/datum/intent/grab/hostage,
 		/datum/intent/grab/shove
 	)
 

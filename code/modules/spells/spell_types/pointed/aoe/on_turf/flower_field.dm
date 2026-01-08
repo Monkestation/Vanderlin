@@ -459,7 +459,7 @@
 	var/mob/living/M = owner
 	if (!M || M.stat != CONSCIOUS) return
 	check_field_presence()
-	M.confused = max(M.confused, 5)
+	M.set_confusion_if_lower(0.5 SECONDS)
 	if (prob(15) && !M.has_status_effect(/datum/status_effect/frost_trap))
 		M.apply_status_effect(/datum/status_effect/frost_trap)
 		M.adjustFireLoss(-8)

@@ -651,13 +651,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			slurring += 1.2
 		if(drunkenness >= 41)
 			if(prob(25))
-				confused += 2
+				adjust_confusion(0.2 SECONDS)
 			Dizzy(10)
 
 		if(drunkenness >= 51)
 			adjustToxLoss(1)
 			if(prob(3))
-				confused += 15
+				adjust_confusion(1.5 SECONDS)
 				vomit() // vomiting clears toxloss, consider this a blessing
 			Dizzy(25)
 

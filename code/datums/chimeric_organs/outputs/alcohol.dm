@@ -38,7 +38,7 @@
 	var/obj/item/organ/liver/L = M.getorganslot(ORGAN_SLOT_LIVER)
 	if(L.damage > 0)
 		L.damage = max(L.damage - 4 * repair_strength, 0)
-		M.confused = (2)
+		M.set_confusion_if_lower(2 SECONDS)
 	M.reagents.remove_all_type(/datum/reagent/medicine, 3*REM, 0, 1)
 	M.adjustToxLoss(-6)
 	. = ..()

@@ -709,14 +709,16 @@
  * * IGNORE_GRAB - mob that is agressively grabbed is not considered incapacitated
 **/
 /mob/living/incapacitated(flags)
-	if(HAS_TRAIT(src, TRAIT_INCAPACITATED))
-		return TRUE
 	if(!(flags & IGNORE_RESTRAINTS) && HAS_TRAIT(src, TRAIT_RESTRAINED))
 		return TRUE
 	if(!(flags & IGNORE_GRAB) && pulledby && (pulledby != src) && pulledby.grab_state >= GRAB_AGGRESSIVE)
 		return TRUE
 	if(!(flags & IGNORE_STASIS) && HAS_TRAIT(src, TRAIT_STASIS))
 		return TRUE
+
+	if(HAS_TRAIT(src, TRAIT_INCAPACITATED))
+		return TRUE
+
 	return FALSE
 
 /mob/living/canUseStorage()
@@ -1002,13 +1004,13 @@
 	ExtinguishMob()
 	fire_stacks = 0
 	divine_fire_stacks = 0
-	confused = 0
 	dizziness = 0
 	stuttering = 0
 	slurring = 0
 	jitteriness = 0
 	slowdown = 0
 	stop_sound_channel(CHANNEL_HEARTBEAT)
+	SEND_SIGNAL(src, COMSIG_LIVING_POST_FULLY_HEAL, admin_revive)
 
 //proc called by revive(), to check if we can actually ressuscitate the mob (we don't want to revive him and have him instantly die again)
 /mob/living/proc/can_be_revived()
@@ -1301,8 +1303,13 @@
 
 	return FALSE
 
+/datum/status_effect/grab_counter_cd
+	id = "grab_counter_cd"
+	alert_type = null
+	duration = 6 SECONDS
+
 /mob/living/proc/grab_counter_attack(mob/living/carbon/attacker)
-	if(!cmode || stat >= UNCONSCIOUS || body_position == LYING_DOWN)
+	if(!cmode || stat >= UNCONSCIOUS)
 		return FALSE
 
 	// Can't counter if we're already heavily grabbed
@@ -1310,21 +1317,26 @@
 	if(grab_count > 1)
 		return FALSE
 
-	// Check if we're in a position to counter
-	if(pulledby && pulledby != attacker) // Already grabbed by someone else
+	// // Check if we're in a position to counter
+	// if(pulledby && pulledby != attacker) // Already grabbed by someone else
+	// 	return FALSE
+
+	if(has_status_effect(/datum/status_effect/grab_counter_cd))
 		return FALSE
 
-	var/counter_chance = 15 // Base chance
-	if(mind)
-		counter_chance += get_skill_level(/datum/skill/combat/wrestling) * 8
+	var/counter_chance = 20 // Base chance
+
+	counter_chance += get_skill_level(/datum/skill/combat/wrestling) * 4
+	counter_chance += get_skill_level(/datum/skill/combat/unarmed) * 4
 
 	// Stat differences
 	counter_chance += (STASTR - attacker.STASTR) * 2
 	counter_chance += (STASPD - attacker.STASPD) * 1.5
 
 	// Positioning bonuses
-	if(attacker.body_position == LYING_DOWN && body_position != LYING_DOWN)
-		counter_chance += 20
+	// if(attacker.body_position == LYING_DOWN && body_position != LYING_DOWN)
+	// 	counter_chance += 20
+	counter_chance *= (1/attacker.get_positioning_modifier(src))
 
 	// Fatigue penalties for attacker
 	if(iscarbon(attacker))
@@ -1343,43 +1355,43 @@
 		if(their_weapon.wlength > WLENGTH_SHORT)
 			counter_chance -= 10 // Harder to counter armed grabs
 
-	counter_chance = clamp(counter_chance, 5, 60)
+	counter_chance = clamp(counter_chance, 5, 95)
 	changeNext_move(CLICK_CD_MELEE)
 
 	if(prob(counter_chance))
-		var/fist_skill = get_skill_level(/datum/skill/combat/unarmed)
+		apply_status_effect(/datum/status_effect/grab_counter_cd)
+
 		var/counter_type
-		if(fist_skill >= 4)
-			counter_type = pick(list("knee" = 45, "elbow" = 45,  "stomp" = 10))
+		if(get_skill_level(/datum/skill/combat/unarmed) >= 4)
+			counter_type = pickweight(list("knee" = 30, "elbow" = 70))
 		else
-			counter_type = pick(list("knee" = 50, "elbow" = 50))
+			counter_type = pickweight(list("knee" = 60, "elbow" = 40))
 		switch(counter_type)
 			if("knee")
-				visible_message("<span class='danger'>[src] drives a knee into [attacker]'s midsection!</span>", \
-							   "<span class='notice'>I drive my knee into [attacker]'s gut!</span>")
+				visible_message(span_danger("[src] drives a knee into [attacker]'s midsection!"), \
+							   span_notice("I drive my knee into [attacker]'s gut!"))
 				var/damage = get_punch_dmg() * 0.9
 				attacker.apply_damage(damage, BRUTE, BODY_ZONE_CHEST)
-				attacker.OffBalance(15)
+				attacker.OffBalance(1.5 SECONDS)
 
 			if("elbow")
-				visible_message("<span class='danger'>[src] throws a sharp elbow at [attacker]!</span>", \
-							   "<span class='notice'>I throw a sharp elbow at [attacker]!</span>")
+				visible_message(span_danger("[src] throws a sharp elbow at [attacker]!"), \
+							   span_notice("I throw a sharp elbow at [attacker]!"))
 				var/damage = get_punch_dmg() * 1.1
 				var/target_zone = pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
 				attacker.apply_damage(damage, BRUTE, target_zone)
-				if(target_zone == BODY_ZONE_HEAD)
-					attacker.confused += 2 SECONDS
+				attacker.OffBalance(1.5 SECONDS)
+				attacker.adjust_confusion(2 SECONDS)
 
-			if("stomp")
-				if(attacker.body_position != LYING_DOWN && body_position != LYING_DOWN)
-					visible_message("<span class='danger'>[src] stomps on [attacker]'s foot!</span>", \
-								   "<span class='notice'>I stomp on [attacker]'s foot!</span>")
-					var/damage = get_punch_dmg() * 0.6
-					attacker.apply_damage(damage, BRUTE, pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
-					attacker.Knockdown(1)
+			// if("stomp")
+			// 	if(attacker.body_position != LYING_DOWN && body_position != LYING_DOWN)
+			// 		visible_message("<span class='danger'>[src] stomps on [attacker]'s foot!</span>", "<span class='notice'>I stomp on [attacker]'s foot!</span>")
+			// 		var/damage = get_punch_dmg() * 0.6
+			// 		attacker.apply_damage(damage, BRUTE, pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+			// 		attacker.Knockdown(1)
 
-		attacker.Immobilize(rand(5,10))
-		adjust_stamina(rand(3,6))
+		attacker.Immobilize(rand(5, 10))
+		// adjust_stamina(rand(3,6))
 		attacker.adjust_stamina(rand(5,10))
 
 		log_combat(src, attacker, "counter-attacked grab attempt")
@@ -1392,7 +1404,7 @@
 
 		return TRUE
 
-	to_chat(src, span_warning("I fail to do a counterattack!"))
+	// to_chat(src, span_warning("I fail to do a counterattack!"))
 	return FALSE
 
 /mob/living/proc/get_positioning_modifier(mob/living/target)
@@ -1476,10 +1488,8 @@
 	// Modifier of pulledby against the resisting src
 	var/positioning_modifier = L.get_positioning_modifier(src)
 
-	if(mind)
-		wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling))
-	if(L.mind)
-		wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling))
+	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling))
+	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling))
 
 	if(has_status_effect(/datum/status_effect/buff/oiled))
 		var/obj/item/grabbing/grabbed = L.get_active_held_item()
@@ -1536,12 +1546,7 @@
 	var/pain_factor = 1
 	if(istype(pulledby, /mob/living/carbon))
 		var/mob/living/carbon/C = pulledby
-		var/pain = C.get_pain_factor()
-		if(pain)
-			if(resist_chance <= 20)
-				pain_factor += (pain * 1.5)
-			else
-				pain_factor += (pain * 1.2)
+		pain_factor += C.get_pain_factor()
 
 	resist_chance *= pain_factor
 
@@ -1549,6 +1554,7 @@
 	pulledby.adjust_stamina(rand(2,5))
 	if(iscarbon(pulledby))
 		var/mob/living/carbon/carbon_pulledby = pulledby
+		grab_counter_attack(carbon_pulledby)
 		carbon_pulledby.add_grab_fatigue(0.5)
 
 	MOBTIMER_SET(pulledby, MT_RESIST_GRAB)
@@ -1568,6 +1574,7 @@
 		visible_message(span_warning("[src] struggles to break free from [L]'s grasp!"), \
 						span_warning("I struggle against [L]'s grasp![shitte]"), null, null)
 		playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
+		pulledby.Immobilize(rand(1, 3))
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST_GRAB, src, pulledby, moving_resist, .)
 
