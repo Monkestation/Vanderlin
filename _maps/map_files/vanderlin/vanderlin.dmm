@@ -16003,7 +16003,9 @@
 "hLE" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/effect/mapping_helpers/secret_door_creator/inquisition{
-	redstone_id = "INQ2"
+	redstone_id = "INQ2";
+	override_floor = 1;
+	floor_turf = /turf/open/floor/cobblerock
 	},
 /turf/closed/mineral,
 /area/under/cave)
