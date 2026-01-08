@@ -390,11 +390,6 @@
 	stress_change = -5
 	timer = 10 MINUTES
 
-/datum/stress_event/cozy_sleep
-	stress_change = -2
-	desc = span_green("Sleeping on a tidy bed is so much better!")
-	timer = 5 MINUTES
-
 /datum/stress_event/washed_cloth
 	stress_change = -2
 	desc = span_green("This cloth was washed and dried, it smells better.")
