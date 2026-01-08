@@ -13033,7 +13033,7 @@
 	pixel_y = 21
 	},
 /obj/structure/bed/wool,
-/obj/effect/landmark/start/armorsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/alt,
@@ -16268,7 +16268,7 @@
 /turf/open/floor/grass,
 /area/outdoors/town)
 "hOI" = (
-/obj/effect/landmark/start/armorsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 4
 	},
 /turf/open/floor/herringbone,
@@ -17689,7 +17689,7 @@
 	pixel_y = 24
 	},
 /obj/structure/bed/wool,
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/alt,
@@ -38056,7 +38056,7 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/manor)
 "spy" = (
-/obj/effect/landmark/start/weaponsmith,
+/obj/effect/landmark/start/blacksmith,
 /turf/open/floor/cobble,
 /area/indoors/town/smithy)
 "spJ" = (

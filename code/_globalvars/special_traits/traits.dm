@@ -355,7 +355,7 @@
 	weight = 10
 	allowed_patrons = list(/datum/patron/divine/malum)
 	req_text = "Worship Malum, must be a carpenter, elder, smith, artificer or miner."
-	allowed_jobs = list(/datum/job/carpenter, /datum/job/armorsmith, /datum/job/weaponsmith, /datum/job/artificer, /datum/job/bapprentice, /datum/job/miner, /datum/job/town_elder) // no combat roles
+	allowed_jobs = list(/datum/job/carpenter, /datum/job/blacksmith, /datum/job/artificer, /datum/job/bapprentice, /datum/job/miner, /datum/job/town_elder) // no combat roles
 
 /datum/special_trait/burdened/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_MALUMFIRE, "[type]")
