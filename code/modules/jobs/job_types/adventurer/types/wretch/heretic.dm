@@ -76,7 +76,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/inhumen/graggar)
 			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-			ADD_TRAIT(H, TRAIT_STRONGBITE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 		if(/datum/patron/inhumen/graggar_zizo)
