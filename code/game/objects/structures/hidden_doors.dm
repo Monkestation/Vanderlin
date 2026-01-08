@@ -203,6 +203,9 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 
 /obj/structure/door/secret/examine(mob/user)
 	. = ..()
+	if(isobserver(user))
+		. += span_purple("There's a hidden door here...")
+		return
 	if(isliving(user))
 		var/mob/living/L = user
 		if(HAS_MIND_TRAIT(user, accessor_trait))
