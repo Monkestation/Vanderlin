@@ -416,7 +416,7 @@
 			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
 			if(looty.len)
 				attack_hand(user)
-			if(!looty.len)
+			else
 				to_chat(user, "<span class='warning'>Picked clean.</span>")
 
 // bush crossing
@@ -543,7 +543,7 @@
 			user.visible_message(span_warning("[user] searches through [src]."))
 			if(looty2.len)
 				attack_hand(user)
-			if(!looty2.len)
+			else
 				to_chat(user, span_warning("Picked clean."))
 
 // swarmpweed bush
@@ -590,7 +590,7 @@
 			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
 			if(looty3.len)
 				attack_hand(user)
-			if(!looty3.len)
+			else
 				to_chat(user, "<span class='warning'>Picked clean.</span>")
 
 /obj/structure/flora/shroom_tree
