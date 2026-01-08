@@ -118,11 +118,11 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	if(say_string)
 		source.send_speech(span_purple(say_string), source.speaking_distance, source, message_language = hearing_args[HEARING_LANGUAGE], message_mods = list(WHISPER_MODE = MODE_WHISPER))
 
-/datum/secret_door_manager/proc/open_word()
+/proc/open_word()
 	return pick("open", "pass", "part", "break", "reveal", "unbar", "extend", "widen", "unfold", "rise",
 		"remember", "end the", "bring", "forget", "endless", "forgotten")
 
-/datum/secret_door_manager/proc/magic_word()
+/proc/magic_word()
 	return pick("abyss", "fire", "wind", "shadow", "nite", "oblivion", "void", "time", "dead", "decay", "endless",
 		"gods", "ancient", "twisted", "corrupt", "secrets", "lore", "text", "sacrifice", "deal", "pact", "bargain", "dreams",
 		"nitemare", "vision", "hunger",	"lust")

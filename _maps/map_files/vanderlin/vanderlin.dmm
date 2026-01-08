@@ -16298,8 +16298,9 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "hSU" = (
-/obj/structure/lever/hidden/keep{
-	redstone_id = "CuckC"
+/obj/structure/lever/hidden{
+	redstone_id = "CuckC";
+	hidden_dc = 12
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/church/chapel)
@@ -40384,13 +40385,6 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town/shop)
-"tzf" = (
-/obj/structure/door/fancy{
-	name = "Keep Entrance"
-	},
-/obj/effect/mapping_helpers/access/keyset/manor/general,
-/turf/open/floor/cobblerock,
-/area/indoors/town/manor/halls/s)
 "tzh" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/storage/belt/pouch/coins/mid,
@@ -48316,7 +48310,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/manor/jester)
 "xmF" = (
-/obj/effect/mapping_helpers/secret_door_creator/keep{
+/obj/effect/mapping_helpers/secret_door_creator{
 	floor_turf = /turf/open/floor/ruinedwood/spiral;
 	override_floor = 1;
 	redstone_id = "CuckC"
@@ -112969,7 +112963,7 @@ fZM
 fZM
 fZM
 mVL
-tzf
+xZD
 mFi
 mFi
 hZn
