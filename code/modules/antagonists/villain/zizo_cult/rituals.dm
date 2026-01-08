@@ -335,7 +335,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/rope/chain(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/transmutation/summonneant
 	name = "Summon Neant"
@@ -356,7 +356,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/weapon/polearm/neant(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/transmutation/summonarmor
 	name = "Summon Darksteel Armor"
@@ -386,7 +386,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/clothing/gloves/plate/zizo(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/transmutation/summonweapon
 	name = "Summon Weapons"
@@ -405,7 +405,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/weapon/mace/steel(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 // FLESH CRAFTING
 /datum/ritual/fleshcrafting

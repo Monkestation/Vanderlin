@@ -39,7 +39,7 @@
 	return list("shrink" = 0.10, "sx" = -6, "sy" = 6, "nx" = 6, "ny" = 7, "wx" = 0, "wy" = 5, "ex" = -1, "ey" = 7, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0, "nturn" = -50, "sturn" = 40, "wturn" = 50, "eturn" = -50, "nflip" = 0, "sflip" = 8, "wflip" = 8, "eflip" = 0)
 
 /obj/item/coin/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	playsound(loc, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 	scatter(get_turf(src))
 	..()
 
@@ -174,7 +174,7 @@
 		set_quantity(quantity - intended)
 
 		user.put_in_hands(new_coins)
-		playsound(loc, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+		playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 		return
 	. = ..()
 
@@ -263,7 +263,7 @@
 	G.rigged_outcome = 0
 	if(G.quantity <= 0)
 		qdel(G)
-	playsound(loc, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
 /obj/item/coin/proc/rig_coin(mob/user)
 	var/outcome = alert(user, "What will you rig the next coin flip to?","XYLIX","Heads","Tails","Play fair")

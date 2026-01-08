@@ -47,8 +47,8 @@
 	var/turf/turf = get_turf(src)
 	if(SSterrain_generation.get_island_at_location(turf))
 		faction |= "islander"
-	if(charflaw)
-		QDEL_NULL(charflaw)
+	if(length(quirks))
+		clear_quirks()
 	if(dna?.species)
 		dna.species.species_traits |= NOBLOOD
 		dna.species.soundpack_m = new /datum/voicepack/skeleton()

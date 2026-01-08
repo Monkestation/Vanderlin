@@ -92,7 +92,7 @@
 			return
 		// Process alchemical recipe
 		user.visible_message(span_info("[user] begins grinding up [I]."))
-		playsound(loc, 'sound/foley/mortarpestle.ogg', 100, FALSE)
+		playsound(src, 'sound/foley/mortarpestle.ogg', 100, FALSE)
 		if(do_after(user, 1 SECONDS, src))
 			for(var/output in foundrecipe.valid_outputs)
 				for(var/i in 1 to foundrecipe.valid_outputs[output])

@@ -85,8 +85,11 @@
 
 	//heart attack stuff
 	handle_curses()
-	if(charflaw && !charflaw.ephemeral)
-		charflaw.flaw_on_life(src)
+
+	if(quirks && quirks.len)
+		for(var/datum/quirk/Q in quirks)
+			Q.on_life(src)
+
 	if(!client && !HAS_TRAIT(src, TRAIT_NOSLEEP) && !ai_controller)
 		if(MOBTIMER_EXISTS(src, MT_SLO))
 			if(MOBTIMER_FINISHED(src, MT_SLO, 90 SECONDS)) //?????

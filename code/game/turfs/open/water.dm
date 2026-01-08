@@ -19,7 +19,6 @@
 	icon_state = "together"
 	baseturfs = /turf/open/water
 	slowdown = 20
-	turf_flags = TURF_WEATHER_PROOF
 	var/obj/effect/overlay/water/water_overlay
 	var/obj/effect/overlay/water/top/water_top_overlay
 	bullet_sizzle = TRUE
@@ -823,7 +822,7 @@
 	color = "#3e7459"
 
 /datum/reagent/water/salty/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method == INGEST) // Make sure you DRANK the salty water before losing hydration
+	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
 		..()
 
 /datum/reagent/water/salty/on_mob_life(mob/living/carbon/M)

@@ -162,7 +162,7 @@
 			if(isturf(loc))
 				var/movefrom = get_dir(M.loc, loc)
 				if(movefrom == dir && item_chair != null)
-					playsound(loc, 'sound/foley/chairfall.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 					var/obj/item/I = new item_chair(loc)
 					item_chair = null
 					I.dir = dir
@@ -173,7 +173,7 @@
 	if(!user)
 		return
 	if(isturf(loc))
-		playsound(loc, 'sound/foley/chairfall.ogg', 100, FALSE)
+		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null
 		I.dir = dir
@@ -188,7 +188,7 @@
 	if(M.body_position == LYING_DOWN)
 		return
 	if(get_dir(leaving.loc, new_location) == REVERSE_DIR(dir))
-		playsound(loc, 'sound/foley/chairfall.ogg', 100, FALSE)
+		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null
 		I.dir = dir
@@ -197,7 +197,7 @@
 
 /obj/structure/chair/wood/alt/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1)
 	if(damage_amount > 5 && item_chair != null)
-		playsound(loc, 'sound/foley/chairfall.ogg', 100, FALSE)
+		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null
 		I.dir = dir

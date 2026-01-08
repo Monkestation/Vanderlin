@@ -198,16 +198,20 @@
 
 /// Proc that finds the client associated with a given corpse and either 1. Lets ghosts skip Underworld and return to lobby 2. Gives spirits a toll
 /proc/pacify_corpse(mob/living/corpse, mob/user)
-	if(QDELETED(corpse) || QDELETED(corpse.mind) || (corpse.stat != DEAD))
+	if(QDELETED(corpse) || (corpse.stat != DEAD))
+		return FALSE
+	if(QDELETED(corpse.mind) && !corpse.has_quirk(/datum/quirk/vice/hardcore))
 		return FALSE
 	// funeral + buried will make Journey to Underworld function as return to lobby
 	if(ishuman(corpse))
 		var/mob/living/carbon/human/human_corpse = corpse
 		human_corpse.funeral = TRUE
 	corpse.mind.remove_antag_datum(/datum/antagonist/zombie)
+	if(corpse.has_quirk(/datum/quirk/vice/hardcore))
+		return TRUE
 	var/mob/dead/observer/ghost
 	//Try to find a lost ghost if there is no client
-	if(!corpse.client)
+	if(!corpse.client && !corpse.has_quirk(/datum/quirk/vice/hardcore))
 		ghost = corpse.get_ghost()
 		//Try to find underworld spirit, if there is no observer ghost
 		if(!ghost)

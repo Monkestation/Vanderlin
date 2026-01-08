@@ -309,7 +309,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		if(sewing?.stringamt < 1 || QDELETED(src) || QDELETED(owner) || QDELETED(doctor) || QDELETED(sewing))
 			return FALSE
 
-		playsound(owner.loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
+		playsound(owner, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 
 		if(!do_after(doctor, 5 SECONDS, owner))
 			return FALSE

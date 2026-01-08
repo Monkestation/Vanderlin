@@ -35,6 +35,7 @@
 						var/amt2raise = L.STAINT*2 // Smelting is already a timesink, this is justified to accelerate levelling
 						if(amt2raise > 0)
 							user.adjust_experience(/datum/skill/craft/smelting, amt2raise * boon, FALSE)
+							SEND_SIGNAL(user, COMSIG_ITEM_SMELTED)
 				user.visible_message("<span class='info'>[user] retrieves [I] from [src].</span>")
 				if(on)
 					var/tyme = world.time
@@ -134,7 +135,7 @@
 		if(ore.len)
 			if(cooking < 20)
 				cooking++
-				playsound(src.loc,'sound/misc/smelter_sound.ogg', 50, FALSE)
+				playsound(src,'sound/misc/smelter_sound.ogg', 50, FALSE)
 				actively_smelting = TRUE
 			else
 				if(cooking == 20)
@@ -173,7 +174,7 @@
 		if(ore.len)
 			if(cooking < 30)
 				cooking++
-				playsound(src.loc,'sound/misc/smelter_sound.ogg', 50, FALSE)
+				playsound(src,'sound/misc/smelter_sound.ogg', 50, FALSE)
 				actively_smelting = TRUE
 			else
 				if(cooking == 30)

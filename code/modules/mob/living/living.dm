@@ -102,6 +102,9 @@
 	add_overlay(reflective_icon)
 
 /mob/living/onZImpact(turf/T, levels)
+	if(SEND_SIGNAL(src, COMSIG_MOB_FALL_IMPACT, levels))
+		return
+
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2))
 		return
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
@@ -114,7 +117,7 @@
 			to_chat(src, "<span class='info'>My dexterity allowed me to land on my feet unscathed!</span>")
 			if(src.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				sneak_fall = TRUE
-				playsound(src.loc, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
+				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
 			return
 	var/points
 	for(var/i in 2 to levels)
@@ -123,7 +126,7 @@
 	if(!sneak_fall)
 		visible_message("<span class='danger'>[src] falls down[points]</span>", \
 						"<span class='danger'>I fall down[points]</span>")
-		playsound(src.loc, 'sound/foley/zfall.ogg', 100, FALSE)
+		playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!isgroundlessturf(T))
 		ZImpactDamage(T, levels)
 		record_round_statistic(STATS_MOAT_FALLERS)
@@ -486,7 +489,7 @@
 			stop_pulling()
 			return
 		log_combat(src, M, "grabbed", addition="passive grab")
-		playsound(src.loc, 'sound/combat/shove.ogg', 50, TRUE, -1)
+		playsound(src, 'sound/combat/shove.ogg', 50, TRUE, -1)
 		if(iscarbon(M))
 			var/mob/living/carbon/C = M
 			var/obj/item/grabbing/O = new()
@@ -531,7 +534,7 @@
 	else
 		if(!suppress_message)
 			var/sound_to_play = 'sound/combat/shove.ogg'
-			playsound(src.loc, sound_to_play, 50, TRUE, -1)
+			playsound(src, sound_to_play, 50, TRUE, -1)
 		var/obj/item/grabbing/O = new(src)
 		O.name = "[AM.name]"
 		O.grabbed = AM
@@ -1260,7 +1263,7 @@
 		adjust_stamina(rand(3,5))
 		pulledby?.adjust_stamina(rand(3,5))
 
-		playsound(loc, 'sound/combat/grabbreak.ogg', 75, TRUE, -1)
+		playsound(src, 'sound/combat/grabbreak.ogg', 75, TRUE, -1)
 		return TRUE
 	else
 		// visible_message(span_warning("[src] and [pulledby] struggle against each other's grips!"))
@@ -1351,7 +1354,7 @@
 		attacker.adjust_stamina(rand(5,10))
 
 		log_combat(src, attacker, "counter-attacked grab attempt")
-		playsound(loc, "genblunt", 80, TRUE, -1)
+		playsound(src, "genblunt", 80, TRUE, -1)
 
 		// Add grab fatigue to the attacker
 		if(iscarbon(attacker))
@@ -1550,7 +1553,7 @@
 		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
 			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling)
 		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
-		playsound(src.loc, 'sound/combat/grabbreak.ogg', 50, TRUE, -1)
+		playsound(src, 'sound/combat/grabbreak.ogg', 50, TRUE, -1)
 		return FALSE
 	else
 		if(!HAS_TRAIT(src, TRAIT_GARROTED))
@@ -1562,7 +1565,7 @@
 				gcord = L.get_inactive_held_item()
 			visible_message(span_warning("[src] struggles to break free from [L]'s [gcord]!"), \
 						span_warning("I struggle against [L]'s [gcord]![resist_chance]"), null, null, L)
-		playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
+		playsound(src, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
 		return TRUE
 
 /mob/living/carbon/human/resist_grab(moving_resist)
@@ -1578,14 +1581,14 @@
 							visible_message("<span class='warning'>[src] struggles to break free from [pulledby]'s grip!</span>", \
 											"<span class='warning'>I struggle against [pulledby]'s grip!</span>", null, null, pulledby)
 							to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
-							playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
+							playsound(src, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
 							client?.move_delay = world.time + 20
 							return TRUE
 						if(HAS_TRAIT(H, TRAIT_EARGRAB) && G.sublimb_grabbed == BODY_ZONE_PRECISE_EARS)
 							visible_message("<span class='warning'>[src] struggles to break free from [pulledby]'s grip!</span>", \
 												"<span class='warning'>I struggle against [pulledby]'s grip!</span>", null, null, pulledby)
 							to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
-							playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
+							playsound(src, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
 							client?.move_delay = world.time + 20
 							return TRUE
 	return ..()
@@ -2431,6 +2434,8 @@
 	if(m_intent != MOVE_INTENT_SNEAK)
 		visible_message(span_info("[src] looks around."), span_info("I look around."))
 	var/looktime = 5 SECONDS - (STAPER * 2)
+	if(has_quirk(/datum/quirk/boon/keen_eye))
+		looktime *= 0.25
 	if(do_after(src, looktime))
 		// var/huhsneak
 		SEND_GLOBAL_SIGNAL(COMSIG_MOB_ACTIVE_PERCEPTION, src)

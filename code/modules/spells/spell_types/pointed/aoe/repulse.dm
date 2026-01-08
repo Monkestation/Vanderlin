@@ -86,5 +86,5 @@
 
 /datum/action/cooldown/spell/aoe/repulse/dragon/cast(atom/target)
 	. = ..()
-	playsound(get_turf(owner), 'sound/combat/hits/punch/punch_hard (3).ogg', 80, TRUE, TRUE)
+	playsound(owner, 'sound/combat/hits/punch/punch_hard (3).ogg', 80, TRUE, TRUE)
 	owner.spin(6, 1)

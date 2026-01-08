@@ -422,14 +422,14 @@
 	// Check for pain medications in bloodstream
 	if(reagents)
 		// Ozium
-		if(reagents.has_reagent(/datum/reagent/ozium))
+		if(has_reagent(/datum/reagent/ozium))
 			multiplier *= 0.6 // 40% pain reduction
 
-		if(reagents.has_reagent(/datum/reagent/buff/herbal/battle_stim))
+		if(has_reagent(/datum/reagent/buff/herbal/battle_stim))
 			multiplier *= 0.8 // 20% pain reduction
 
 		// Alcohol (mild pain relief)
-		if(reagents.has_reagent(/datum/reagent/consumable/ethanol))
+		if(has_reagent(/datum/reagent/consumable/ethanol))
 			var/alcohol_amount = reagents.get_reagent_amount(/datum/reagent/consumable/ethanol)
 			multiplier *= max(0.8, 1.0 - (alcohol_amount * 0.01)) // Diminishing returns
 
@@ -637,8 +637,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(drunkenness)
 		drunkenness = max(drunkenness - (drunkenness * 0.04) - 0.01, 0)
 		if(drunkenness >= 1)
-			if(has_flaw(/datum/charflaw/addiction/alcoholic))
-				sate_addiction()
+			SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+			if(has_quirk(/datum/quirk/vice/alcoholic))
+				sate_addiction(/datum/quirk/vice/alcoholic)
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
@@ -742,6 +743,27 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
 			return min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
 
+///////////
+//Stomach//
+///////////
+
+/mob/living/carbon/get_fullness()
+	var/fullness = nutrition
+
+	var/obj/item/organ/stomach/belly = getorganslot(ORGAN_SLOT_STOMACH)
+	if(!belly) //nothing to see here if we do not have a stomach
+		return fullness
+
+	for(var/bile in belly.reagents.reagent_list)
+		var/datum/reagent/bits = bile
+		if(istype(bits, /datum/reagent/consumable))
+			var/datum/reagent/consumable/goodbit = bile
+			fullness += goodbit.nutriment_factor * goodbit.volume / goodbit.metabolization_rate
+			continue
+		fullness += 0.6 * bits.volume / bits.metabolization_rate //not food takes up space
+
+	return fullness
+
 /////////
 //LIVER//
 /////////
@@ -765,8 +787,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(HAS_TRAIT(src, TRAIT_NOMETABOLISM))
 		return
 	adjustToxLoss(4, TRUE,  TRUE)
-//	if(prob(30))
-//		to_chat(src, "<span class='warning'>I feel a stabbing pain in your abdomen!</span>")
+
 
 /////////////
 //CREMATION//

@@ -154,7 +154,7 @@
 		if(do_after(user, 5 SECONDS, src))
 			user.visible_message("<span class='warning'>[user] consumes [src]!</span>",\
 							"<span class='notice'>I consume [src]!</span>")
-			playsound(get_turf(user), pick(dismemsound), 100, FALSE, -1)
+			playsound(user, pick(dismemsound), 100, FALSE, -1)
 			new /obj/effect/gibspawner/generic(get_turf(src), user)
 			user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
 			qdel(src)
@@ -228,7 +228,7 @@
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
 	if(length(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
-		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
+		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
 		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 5 SECONDS, src))
@@ -241,7 +241,7 @@
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
 	if(status != BODYPART_ROBOTIC)
-		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, -1)
+		playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	pixel_x = base_pixel_x + rand(-3, 3)
 	pixel_y = base_pixel_y + rand(-3, 3)
 	if(!skeletonized)
