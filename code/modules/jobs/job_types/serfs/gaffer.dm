@@ -69,6 +69,7 @@
 
 /datum/job/gaffer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 	spawned.adjust_skillrank(/datum/skill/combat/swords, pick(0,1), TRUE)
 
 	if(spawned.age == AGE_OLD)

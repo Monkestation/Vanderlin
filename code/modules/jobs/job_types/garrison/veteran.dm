@@ -45,6 +45,7 @@
 		S.name = "veteran cloak ([index])"
 
 	spawned.verbs |= /mob/proc/haltyell
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/job/advclass/veteran
 	inherit_parent_title = TRUE

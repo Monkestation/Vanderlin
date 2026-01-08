@@ -283,7 +283,7 @@
 		return FALSE
 	if(user.used_intent)
 		if(!user.used_intent.noaa)
-			playsound(get_turf(src), pick(swingsound), 100, FALSE, -1)
+			playsound(src, pick(swingsound), 100, FALSE, -1)
 		if(user.used_intent.no_attack) //BYE!!!
 			return TRUE
 
@@ -319,9 +319,9 @@
 					if(user.used_intent == cached_intent)
 						var/tempsound = user.used_intent.hitsound
 						if(tempsound)
-							playsound(M.loc, tempsound, get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
+							playsound(M, tempsound, get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
 						else
-							playsound(M.loc, "nodmg", get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
+							playsound(M, "nodmg", get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
 				log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.used_intent.name)]) (DAMTYPE: [uppertext(damtype)])")
 				add_fingerprint(user)
 		if(M.d_intent == INTENT_DODGE)
@@ -364,9 +364,9 @@
 		if(user.used_intent == cached_intent)
 			var/tempsound = user.used_intent.hitsound
 			if(tempsound)
-				playsound(M.loc,  tempsound, 100, FALSE, -1)
+				playsound(M,  tempsound, 100, FALSE, -1)
 			else
-				playsound(M.loc,  "nodmg", 100, FALSE, -1)
+				playsound(M,  "nodmg", 100, FALSE, -1)
 
 	log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.used_intent.name)]) (DAMTYPE: [uppertext(damtype)])")
 	add_fingerprint(user)
@@ -637,7 +637,7 @@
 
 /mob/living/simple_animal/attacked_by(obj/item/I, mob/living/user)
 	if(I.force < force_threshold || I.damtype == STAMINA)
-		playsound(loc, 'sound/blank.ogg', I.get_clamped_volume(), TRUE, -1)
+		playsound(src, 'sound/blank.ogg', I.get_clamped_volume(), TRUE, -1)
 	else
 		. = ..()
 		I.do_special_attack_effect(user, null, null, src, null)
@@ -667,10 +667,10 @@
 				user.do_attack_animation(target, visual_effect_icon = user.used_intent.animname, used_item = src, used_intent = user.used_intent)
 			else
 				user.do_attack_animation(get_ranged_target_turf(user, get_dir(user, target), 1), visual_effect_icon = user.used_intent.animname, used_item = src, used_intent = user.used_intent)
-			playsound(get_turf(src), pick(swingsound), 100, FALSE, -1)
+			playsound(src, pick(swingsound), 100, FALSE, -1)
 			user.aftermiss()
 		if(!proximity_flag && ismob(target) && !user.used_intent?.noaa) //this block invokes miss cost clicking on seomone who isn't adjacent to you
-			playsound(get_turf(src), pick(swingsound), 100, FALSE, -1)
+			playsound(src, pick(swingsound), 100, FALSE, -1)
 			user.aftermiss()
 
 /**

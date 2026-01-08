@@ -1,0 +1,416 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/closet/crate/crafted_closet,
+/turf/open/floor/wood,
+/area/indoors/town)
+"d" = (
+/turf/closed/wall/mineral/wood,
+/area/indoors/town)
+"e" = (
+/obj/effect/abstract/property_noop{
+	property_id = "house_two"
+	},
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"g" = (
+/obj/structure/ladder,
+/turf/open/floor/wood,
+/area/indoors/town)
+"h" = (
+/obj/structure/table/wood{
+	dir = 5;
+	icon_state = "largetable"
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"i" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/effect/abstract/property_noop{
+	property_id = "house_two"
+	},
+/turf/template_noop,
+/area/template_noop)
+"l" = (
+/obj/structure/table/wood{
+	dir = 6;
+	icon_state = "largetable"
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"p" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wood,
+/area/indoors/town)
+"r" = (
+/obj/machinery/light/fueled/oven/east,
+/obj/effect/landmark/start/villager{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"t" = (
+/obj/structure/door{
+	lockid = "house2";
+	name = "House II"
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"u" = (
+/obj/structure/window/openclose{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"v" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/abstract/property_noop{
+	property_id = "house_two"
+	},
+/turf/template_noop,
+/area/template_noop)
+"w" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"x" = (
+/obj/item/key/houses/house2,
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/broom,
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"y" = (
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"z" = (
+/obj/structure/chair/wood/alt/chair3{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"D" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/closet/crate/crafted_closet,
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"I" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood,
+/area/indoors/town)
+"K" = (
+/obj/structure/table/wood/plain_alt,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"L" = (
+/obj/structure/window/openclose{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"M" = (
+/obj/structure/closet/crate/drawer,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"N" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"P" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"Q" = (
+/obj/structure/window/solid,
+/turf/open/floor/wood,
+/area/indoors/town)
+"R" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+"S" = (
+/obj/structure/door{
+	lockid = "house2";
+	name = "House II"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/wood,
+/area/indoors/town)
+"T" = (
+/turf/open/floor/wood,
+/area/indoors/town)
+"V" = (
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/double_pelt,
+/turf/open/floor/wood,
+/area/indoors/town)
+"Z" = (
+/obj/structure/window/openclose{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
+
+(1,1,1) = {"
+e
+e
+v
+e
+v
+e
+v
+v
+e
+v
+e
+d
+u
+d
+d
+"}
+(2,1,1) = {"
+e
+e
+i
+v
+e
+e
+e
+e
+e
+e
+e
+M
+T
+a
+d
+"}
+(3,1,1) = {"
+e
+e
+e
+e
+e
+e
+N
+y
+f
+y
+d
+I
+T
+I
+d
+"}
+(4,1,1) = {"
+d
+x
+h
+l
+r
+y
+y
+w
+w
+y
+d
+g
+T
+I
+d
+"}
+(5,1,1) = {"
+t
+y
+y
+y
+y
+w
+y
+w
+w
+y
+S
+I
+T
+z
+d
+"}
+(6,1,1) = {"
+p
+D
+P
+w
+y
+y
+y
+R
+y
+D
+d
+I
+V
+K
+d
+"}
+(7,1,1) = {"
+d
+d
+d
+Z
+d
+d
+d
+d
+L
+d
+d
+d
+d
+d
+d
+"}
+
+(1,1,2) = {"
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+"}
+(2,1,2) = {"
+e
+e
+e
+e
+e
+e
+e
+e
+e
+d
+d
+Q
+d
+d
+e
+"}
+(3,1,2) = {"
+e
+e
+e
+e
+e
+e
+e
+e
+e
+d
+T
+T
+I
+d
+e
+"}
+(4,1,2) = {"
+e
+e
+e
+e
+e
+e
+e
+e
+e
+d
+I
+g
+T
+Q
+e
+"}
+(5,1,2) = {"
+e
+e
+e
+e
+e
+e
+e
+e
+e
+d
+I
+T
+I
+d
+e
+"}
+(6,1,2) = {"
+e
+e
+e
+e
+e
+e
+e
+e
+e
+d
+d
+Q
+d
+d
+e
+"}
+(7,1,2) = {"
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+e
+"}

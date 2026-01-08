@@ -52,7 +52,7 @@
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		to_chat(user, span_notice("You thumb off the cork from [src]."))
-		playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		spillable = TRUE
 		desc += "The cork appears to be off."
 	update_appearance(UPDATE_OVERLAYS)

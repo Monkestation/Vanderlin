@@ -207,14 +207,14 @@
 	transform = matrix() * 0.5 // Start small
 	animate(src, alpha = 200, color = "#ff5500", transform = matrix(), time = 1 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(activate)), 1.5 SECONDS)
-	playsound(get_turf(src), 'sound/misc/bamf.ogg', 25, TRUE)
+	playsound(src, 'sound/misc/bamf.ogg', 25, TRUE)
 
 /obj/effect/temp_visual/minotaur_fury_zone/proc/activate()
 	active = TRUE
 	color = "#ff0000" // Red active color
 	alpha = 230
 	icon_state = "fire"
-	playsound(get_turf(src), 'sound/misc/bamf.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/bamf.ogg', 50, TRUE)
 
 	START_PROCESSING(SSobj, src)
 

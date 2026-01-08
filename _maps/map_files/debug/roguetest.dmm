@@ -2093,11 +2093,12 @@
 /area/outdoors/mountains/decap)
 "tk" = (
 /obj/effect/landmark/house_spot{
-	house_id = "9x9_1";
 	template_y = 9;
 	template_x = 9;
 	template_z = 2;
-	default_template = /datum/map_template/basic_nine
+	default_template = /datum/map_template/basic_nine;
+	save_id = "9x9_2";
+	property_id = "9x9_1"
 	},
 /turf/closed,
 /area/outdoors)
@@ -3402,11 +3403,12 @@
 /area/under/town/basement)
 "TN" = (
 /obj/effect/landmark/house_spot{
-	house_id = "9x9_2";
 	default_template = /datum/map_template/basic_nine;
 	template_x = 9;
 	template_y = 9;
-	template_z = 2
+	template_z = 2;
+	save_id = "9x9_2";
+	property_id = "9x9_2"
 	},
 /turf/closed,
 /area/outdoors)

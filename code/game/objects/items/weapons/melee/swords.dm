@@ -1765,7 +1765,7 @@
 				M.visible_message(span_danger("[user] takes [I] from [M]'s hand!"), \
 				span_userdanger("[user] takes [I] from my hand!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
 				user.changeNext_move(12)//avoids instantly attacking with the new weapon
-				playsound(src.loc, 'sound/combat/weaponr1.ogg', 100, FALSE, -1) //sound queue to let them know that they got disarmed
+				playsound(src, 'sound/combat/weaponr1.ogg', 100, FALSE, -1) //sound queue to let them know that they got disarmed
 				if(!M.mind)	//If you hit an NPC - they pick up weapons instantly. So, we do more stuff.
 					M.Stun(10)
 			else
@@ -1782,7 +1782,7 @@
 					user.Immobilize(10)
 					M.Immobilize(10)
 					M.visible_message(span_notice("[user.name] struggles to disarm [M.name]!"))
-					playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
+					playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
 		if(!isliving(M))
 			to_chat(user, span_warning("You cannot disarm this enemy!"))
 			return
