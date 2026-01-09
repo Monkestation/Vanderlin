@@ -111,38 +111,38 @@
 	var/intelligence = user.mind?.current.STAINT
 	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
+		return
 
+	var/list/skill_data = coin_skill(user, quantity)
+	var/fuzzy_quantity = CLAMP(quantity + skill_data["error"], 1,  (quantity > 20) ? INFINITY : 20) // Cap at 20 only for small stacks)
+	var/uncertainty_phrases = list("maybe","you think","roughly","perhaps","around","probably")
+
+	switch(intelligence)						// Intelligence-based messaging
+		if(0 to 6)
+			user.visible_message(span_small(span_notice("[user] clumsily starts to count [src].")),span_small(span_notice("I clumsily start counting [src]...")), vision_distance = 2)
+		if(7 to 9)
+			user.visible_message(span_small(span_notice("[user] begins counting [src].")),span_small(span_notice("I begin counting [src].")), vision_distance = 2)
+		if(10 to 13)
+			user.visible_message(span_small(span_notice("[user] counts [src].")),span_small(span_notice("I count [src].")), vision_distance = 2)
+		if(14 to INFINITY)
+			user.visible_message(span_small(span_info("[user] effortlessly tallies [src].")),span_small(span_notice("I effortlessly tally [src].")), vision_distance = 2)
+
+	if(!do_after(user, skill_data["delay"]))
+		return
+
+	var/estimated_value = fuzzy_quantity * sellprice
+	estimated_value = CLAMP(estimated_value, sellprice, INFINITY)
+	var/description = "[quantity_to_words(fuzzy_quantity)] [denomination]"
+	var/value_text
+	if(intelligence >= 10)
+		value_text = "[estimated_value] mammon"
 	else
-		var/list/skill_data = coin_skill(user, quantity)
-		var/fuzzy_quantity = CLAMP(quantity + skill_data["error"], 1,  (quantity > 20) ? INFINITY : 20) // Cap at 20 only for small stacks)
-		var/uncertainty_phrases = list("maybe","you think","roughly","perhaps","around","probably")
-
-		switch(intelligence)						// Intelligence-based messaging
-			if(0 to 6)
-				user.visible_message(span_small(span_notice("[user] clumsily starts to count [src].")),span_small(span_notice("I clumsily start counting [src]...")), vision_distance = 2)
-			if(7 to 9)
-				user.visible_message(span_small(span_notice("[user] begins counting [src].")),span_small(span_notice("I begin counting [src].")), vision_distance = 2)
-			if(10 to 13)
-				user.visible_message(span_small(span_notice("[user] counts [src].")),span_small(span_notice("I count [src].")), vision_distance = 2)
-			if(14 to INFINITY)
-				user.visible_message(span_small(span_info("[user] effortlessly tallies [src].")),span_small(span_notice("I effortlessly tally [src].")), vision_distance = 2)
-
-		if(!do_after(user, skill_data["delay"]))
-			return
-
-		var/estimated_value = fuzzy_quantity * sellprice
-		estimated_value = CLAMP(estimated_value, sellprice, INFINITY)
-		var/description = "[quantity_to_words(fuzzy_quantity)] [denomination]"
-		var/value_text
-		if(intelligence >= 10)
-			value_text = "[estimated_value] mammon"
-		else
-			value_text = "~[estimated_value] mammon"
-			if(intelligence <= 7)
-				value_text = "[pick(uncertainty_phrases)] [value_text]"
-				if(prob(30))
-					value_text += "?"
-		. += span_info("[description] ([value_text])")
+		value_text = "~[estimated_value] mammon"
+		if(intelligence <= 7)
+			value_text = "[pick(uncertainty_phrases)] [value_text]"
+			if(prob(30))
+				value_text += "?"
+	. += span_info("[description] ([value_text])")
 
 /obj/item/coin/attack_hand(mob/user)
 	if(user.get_inactive_held_item() == src && quantity > 1)
