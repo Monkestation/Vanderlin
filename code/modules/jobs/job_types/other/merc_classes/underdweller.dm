@@ -20,8 +20,8 @@
 
 	skills = list(
 		/datum/skill/labor/mining = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/engineering = 1,
@@ -47,12 +47,12 @@
 		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
 		// Dwarf-specific skill adjustments
-		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4)
+		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 3)
 		spawned.adjust_skillrank(/datum/skill/combat/shields, 2)
 		spawned.adjust_skillrank(/datum/skill/craft/bombs, 4) // Dwarves get to make bombs.
 	else
 		// Non-dwarf skill adjustment
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 4)
+		spawned.adjust_skillrank(/datum/skill/combat/swords, 3)
 
 /datum/outfit/mercenary/underdweller
 	name = "Underdweller (Mercenary)"

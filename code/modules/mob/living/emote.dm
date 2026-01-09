@@ -19,6 +19,7 @@
 	set category = "Emotes"
 
 	emote("pray", intentional = TRUE)
+	SEND_SIGNAL(src, COMSIG_PRAYER_COMPLETED)
 
 /datum/emote/living/pray/run_emote(mob/user, params, type_override, intentional)
 	if(HAS_TRAIT(user, TRAIT_ATHEISM_CURSE))
@@ -50,8 +51,8 @@
 		return
 
 	if(patron.hear_prayer(follower, prayer))
-		if(follower.has_flaw(/datum/charflaw/addiction/godfearing)) //make this a fucking signal!!!!
-			follower.sate_addiction() //why is this being handled by the mob!!!! and why does this cover every addiction??
+		if(follower.has_quirk(/datum/quirk/vice/godfearing)) //make this a fucking signal!!!!
+			follower.sate_addiction(/datum/quirk/vice/godfearing) //why is this being handled by the mob!!!! and why does this cover every addiction??
 
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
@@ -589,7 +590,7 @@
 	if(ishuman(target))
 		var/mob/living/carbon/H = target
 		H.add_stress(/datum/stress_event/hug)
-		playsound(target.loc, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
+		playsound(target, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
 
 		if(user.mind)
 			SEND_SIGNAL(user, COMSIG_MOB_HUGGED, H)
@@ -614,7 +615,7 @@
 		return
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		playsound(target.loc, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
+		playsound(target, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
 		if(israkshari(H))
 			if(prob(10))
 				H.emote("purr")
@@ -701,7 +702,7 @@
 				message_param = "kisses %t on the brow."
 			else
 				message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
-	playsound(target.loc, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
+	playsound(target, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
 	if(user.mind)
 		record_round_statistic(STATS_KISSES_MADE)
 
@@ -978,9 +979,9 @@
 		return
 	if(isliving(target))
 		if(user.gender == MALE)
-			playsound(target.loc, pick('sound/vo/male/gen/spit.ogg','sound/vo/male/gen/spit_floor.ogg'), 100, FALSE, -1)
+			playsound(target, pick('sound/vo/male/gen/spit.ogg','sound/vo/male/gen/spit_floor.ogg'), 100, FALSE, -1)
 		else
-			playsound(target.loc, pick('sound/vo/female/gen/spit.ogg', 'sound/vo/female/gen/spit_floor.ogg'), 100, FALSE, -1)
+			playsound(target, pick('sound/vo/female/gen/spit.ogg', 'sound/vo/female/gen/spit_floor.ogg'), 100, FALSE, -1)
 		SEND_SIGNAL(user, COMSIG_SPAT_ON, target)
 
 /datum/emote/living/slap
@@ -1030,7 +1031,7 @@
 		var/mob/living/carbon/human/H = target
 		H.flash_fullscreen("redflash3")
 		H.AdjustSleeping(-50)
-		playsound(target.loc, pick('sound/foley/slap (1).ogg','sound/foley/slap (2).ogg'), 50, FALSE, -1)
+		playsound(target, pick('sound/foley/slap (1).ogg','sound/foley/slap (2).ogg'), 50, FALSE, -1)
 
 /datum/emote/living/scream
 	key = "scream"
@@ -1251,9 +1252,9 @@
 /datum/emote/living/zombiemoan/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
 	if(user.gender == MALE)
-		playsound(user.loc, pick('sound/vo/mobs/zombie/idle (1).ogg','sound/vo/mobs/zombie/idle (2).ogg','sound/vo/mobs/zombie/idle (3).ogg'), 80, FALSE, -1)
+		playsound(user, pick('sound/vo/mobs/zombie/idle (1).ogg','sound/vo/mobs/zombie/idle (2).ogg','sound/vo/mobs/zombie/idle (3).ogg'), 80, FALSE, -1)
 	else
-		playsound(user.loc, pick('sound/vo/mobs/zombie/f/idle (1).ogg','sound/vo/mobs/zombie/f/idle (2).ogg','sound/vo/mobs/zombie/f/idle (3).ogg'), 80, FALSE, -1)
+		playsound(user, pick('sound/vo/mobs/zombie/f/idle (1).ogg','sound/vo/mobs/zombie/f/idle (2).ogg','sound/vo/mobs/zombie/f/idle (3).ogg'), 80, FALSE, -1)
 
 
 // ............... Y ..................

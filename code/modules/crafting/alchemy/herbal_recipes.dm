@@ -245,8 +245,9 @@
 
 /datum/reagent/medicine/herbal/valeriana_draught/on_mob_life(mob/living/carbon/M)
 	var/datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
-	if(drowsiness?.duration < sleep_power)
-		M.adjust_drowsiness_up_to(10 SECONDS, 60 SECONDS)
+	if(istype(drowsiness))
+		if(drowsiness?.duration < sleep_power)
+			M.adjust_drowsiness_up_to(10 SECONDS, 60 SECONDS)
 	M.adjust_stamina(2)
 	. = ..()
 

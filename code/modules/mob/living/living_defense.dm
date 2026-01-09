@@ -73,7 +73,7 @@
 		organ_hit_text = " in \the [parse_zone(limb_hit)]"
 	if(P.hitsound && !nodmg)
 		var/volume = P.vol_by_damage()
-		playsound(loc, pick(P.hitsound), volume, TRUE, -1)
+		playsound(src, pick(P.hitsound), volume, TRUE, -1)
 	visible_message("<span class='danger'>[src] is hit by \a [P][organ_hit_text]![next_attack_msg.Join()]</span>", \
 			"<span class='danger'>I'm hit by \a [P][organ_hit_text]![next_attack_msg.Join()]</span>", null, COMBAT_MESSAGE_RANGE)
 	next_attack_msg.Cut()
@@ -142,7 +142,7 @@
 		else
 			return 1
 	else
-		playsound(loc, 'sound/blank.ogg', 50, TRUE, -1) //Item sounds are handled in the item itself
+		playsound(src, 'sound/blank.ogg', 50, TRUE, -1) //Item sounds are handled in the item itself
 	..()
 
 /mob/living/fire_act(added, maxstacks)
@@ -214,7 +214,7 @@
 		else
 			self_message = span_warning("I struggle with [user]!")
 		visible_message(span_warning("[user] struggles with [src]!"), self_message, span_hear("I hear aggressive shuffling!"))
-		playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
 		user.Immobilize(1 SECONDS)
 		user.changeNext_move(1 SECONDS)
 		user.adjust_stamina(rand(2,6))
@@ -224,7 +224,7 @@
 
 	if(!instant)
 		var/sound_to_play = 'sound/foley/grab.ogg'
-		playsound(src.loc, sound_to_play, 100, FALSE, -1)
+		playsound(src, sound_to_play, 100, FALSE, -1)
 
 	user.setGrabState(GRAB_AGGRESSIVE)
 	if(user.active_hand_index == 1)
@@ -288,7 +288,7 @@
 
 	M.do_attack_animation(src, visual_effect_icon = M.a_intent.animname)
 	if(M.attack_sound)
-		playsound(get_turf(M), pick(M.attack_sound), 100, FALSE)
+		playsound(M, pick(M.attack_sound), 100, FALSE)
 
 	var/cached_intent = M.used_intent
 
@@ -310,7 +310,7 @@
 		return FALSE
 
 	if(M.attack_sound)
-		playsound(loc, M.a_intent.hitsound, 100, FALSE)
+		playsound(src, M.a_intent.hitsound, 100, FALSE)
 
 	log_combat(M, src, "attacked")
 
@@ -333,7 +333,7 @@
 		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
 		if (prob(75))
 			log_combat(M, src, "attacked")
-			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+			playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 			visible_message("<span class='danger'>[M.name] bites [src]!</span>", \
 							"<span class='danger'>[M.name] bites you!</span>", "<span class='hear'>I hear a chomp!</span>", COMBAT_MESSAGE_RANGE, M)
 			to_chat(M, "<span class='danger'>I bite [src]!</span>")
@@ -363,7 +363,7 @@
 		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
 		if (prob(75))
 			log_combat(M, src, "attacked")
-			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+			playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 			visible_message("<span class='danger'>[M.name] bites [src]!</span>", \
 							"<span class='danger'>[M.name] bites you!</span>", "<span class='hear'>I hear a chomp!</span>", COMBAT_MESSAGE_RANGE, M)
 			to_chat(M, "<span class='danger'>I bite [src]!</span>")
@@ -395,7 +395,7 @@
 		"<span class='danger'>I feel a powerful shock coursing through my body!</span>", \
 		"<span class='hear'>I hear a heavy electrical crack.</span>" \
 	)
-	playsound(get_turf(src), pick('sound/misc/elec (1).ogg', 'sound/misc/elec (2).ogg', 'sound/misc/elec (3).ogg'), 100, FALSE)
+	playsound(src, pick('sound/misc/elec (1).ogg', 'sound/misc/elec (2).ogg', 'sound/misc/elec (3).ogg'), 100, FALSE)
 	return shock_damage
 
 //called when the mob receives a bright flash

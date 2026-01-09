@@ -99,7 +99,7 @@
 
 		to_chat(cast_on, span_notice("Your disguise fades away."))
 		new /obj/effect/temp_visual/emp/bush(get_turf(cast_on))
-		playsound(get_turf(cast_on), 'sound/misc/woodhit.ogg', 80, TRUE)
+		playsound(cast_on, 'sound/misc/woodhit.ogg', 80, TRUE)
 
 /datum/action/cooldown/spell/undirected/jaunt/bush_jaunt/on_jaunt_exited(obj/effect/dummy/phased_mob/jaunt, mob/living/unjaunter)
 	..()

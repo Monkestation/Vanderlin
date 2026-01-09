@@ -38,7 +38,7 @@
 		return 0
 
 	if(prob(5))
-		playsound(loc, 'sound/blank.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 	for(var/obj/O in target)
 		if(prob(20) && !(resistance_flags & UNACIDABLE))

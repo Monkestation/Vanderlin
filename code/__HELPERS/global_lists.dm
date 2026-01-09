@@ -3,6 +3,7 @@
 //////////////////////////
 
 /proc/make_datum_references_lists()
+	init_quirk_registry()
 	//underwear
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
 	//undershirt

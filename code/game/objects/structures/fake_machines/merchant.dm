@@ -84,7 +84,7 @@
 				E.budget2change(budgie)
 				budgie = 0
 		if(play_sound)
-			playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+			playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@
 		budget += money
 		qdel(I)
 		to_chat(user, span_info("I put [money] mammon in [src]."))
-		playsound(get_turf(src), 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
 		return attack_hand(user)
 	return ..()
 
@@ -209,10 +209,10 @@
 		switch(select)
 			if("Enable Paying Taxes")
 				upgrade_flags &= ~UPGRADE_NOTAX
-				playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 			if("Stop Paying Taxes")
 				upgrade_flags |= UPGRADE_NOTAX
-				playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	return attack_hand(usr)
 
 /obj/structure/fake_machine/merchantvend/attack_hand(mob/living/user)
@@ -225,7 +225,7 @@
 		to_chat(user, "<span class='warning'>It's locked. Of course.</span>")
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	var/contents
 	contents = "<center>GOLDFACE - In the name of greed.<BR>"

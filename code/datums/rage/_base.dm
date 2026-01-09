@@ -133,6 +133,10 @@
 /datum/rage/proc/update_rage(amount)
 	var/old_rage = rage
 	if(holder_mob.stat == DEAD) return
+	if(amount > 0 && holder_mob?.mind?.has_antag_datum(/datum/antagonist/werewolf))
+		if(secondary_mob?.has_status_effect(/datum/status_effect/debuff/silver_bane) || holder_mob?.has_status_effect(/datum/status_effect/debuff/silver_bane))
+			amount *= 0.1
+
 	rage = clamp(rage + amount, 0, max_rage)
 
 	update_hud()

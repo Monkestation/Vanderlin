@@ -182,7 +182,7 @@
 				visible_message("<span class='notice'>\The [src] hisses at [M] and recoils in disgust.</span>")
 				icon_state = "[icon_living]"
 				set_resting(FALSE)
-				playsound(get_turf(src), 'sound/vo/mobs/cat/cathiss.ogg', 80, TRUE, -1)
+				playsound(src, 'sound/vo/mobs/cat/cathiss.ogg', 80, TRUE, -1)
 				dir = pick(GLOB.alldirs)
 				step(src, dir)
 				personal_space()

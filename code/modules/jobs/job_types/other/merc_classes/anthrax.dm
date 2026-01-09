@@ -31,7 +31,7 @@
 	if(spawned.gender == FEMALE)
 		// Female: melee defense-oriented brute
 		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
 
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2)
@@ -47,7 +47,7 @@
 		spawned.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/lockpicking, 3, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
@@ -60,9 +60,6 @@
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 2)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, 2)
 
-		spawned.change_stat(STATKEY_SPD, 2)
-		spawned.change_stat(STATKEY_END, 1)
-		spawned.change_stat(STATKEY_PER, 2)
 		ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 
 	spawned.merctype = 7

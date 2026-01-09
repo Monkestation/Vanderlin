@@ -34,7 +34,7 @@
 		return
 
 	visible_message(span_notice("[user] starts ringing the dock bell."))
-	playsound(get_turf(src), 'sound/misc/handbell.ogg', 50, 1)
+	playsound(src, 'sound/misc/handbell.ogg', 50, 1)
 
 	// Handle trader return
 	if(!SSmerchant.cargo_docked && SSmerchant.cargo_boat.check_living())
@@ -48,7 +48,7 @@
 
 /obj/structure/dock_bell/proc/recall_faction_traders()
 	for(var/mob/living/simple_animal/hostile/retaliate/trader/faction_trader/trader in SSmerchant.active_faction_traders)
-		playsound(trader.loc, 'sound/items/smokebomb.ogg' , 50)
+		playsound(trader, 'sound/items/smokebomb.ogg' , 50)
 		var/datum/effect_system/smoke_spread/S = new /datum/effect_system/smoke_spread
 		S.set_up(3, get_turf(trader))
 		S.start()

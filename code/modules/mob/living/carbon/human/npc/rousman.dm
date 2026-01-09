@@ -221,8 +221,8 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	eyes = new /obj/item/organ/eyes/night_vision/nightmare
 	eyes.Insert(src)
 	src.underwear = "Nude"
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
+	if(length(quirks))
+		clear_quirks()
 	update_body()
 	faction = list(FACTION_RATS)
 	var/turf/turf = get_turf(src)
