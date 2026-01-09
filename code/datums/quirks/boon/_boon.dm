@@ -186,7 +186,7 @@
 /datum/quirk/boon/folk_hero
 	name = "Folk Hero"
 	desc = "You're a local legend who saved your community from great danger. People recognize you, even as a foreigner."
-	point_value = -5
+	point_value = -10
 	blocked_ages = list(
 		AGE_CHILD,
 	)

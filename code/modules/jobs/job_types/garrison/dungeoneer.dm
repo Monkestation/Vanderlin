@@ -39,7 +39,7 @@
 
 	skills = list(
 		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 1,
 		/datum/skill/misc/swimming = 1,

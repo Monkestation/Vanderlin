@@ -485,7 +485,7 @@
 	swingsound = BLADEWOOSH_MED
 	max_blade_int = 250
 	max_integrity = INTEGRITY_STRONG
-	minstr = 11
+	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
 	axe_cut = 10
 	sellprice = 100
 

@@ -87,14 +87,14 @@
 	. = ..()
 	switch(H.patron?.type)
 		if(/datum/patron/inhumen/graggar)
-			head = /obj/item/clothing/head/helmet/graggar
+			head = /obj/item/clothing/head/helmet/heavy/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
 			gloves = /obj/item/clothing/gloves/plate/graggar
 			pants = /obj/item/clothing/pants/platelegs/graggar
 			shoes = /obj/item/clothing/shoes/boots/armor/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 		if(/datum/patron/inhumen/graggar_zizo)
-			head = /obj/item/clothing/head/helmet/graggar
+			head = /obj/item/clothing/head/helmet/heavy/graggar
 			armor = /obj/item/clothing/armor/plate/full/graggar
 			gloves = /obj/item/clothing/gloves/plate/graggar
 			pants = /obj/item/clothing/pants/platelegs/graggar

@@ -18,43 +18,18 @@
 	outfit = /datum/outfit/magician
 	give_bank_account = 120
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
+	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	magic_user = TRUE
-	spells = list(
-		/datum/action/cooldown/spell/aoe/knock,
-		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
-		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
-	)
-	skills = list(
-	/datum/skill/misc/reading = 6,
-	/datum/skill/misc/riding = 2 ,
-	/datum/skill/magic/arcane = 5,
-	/datum/skill/combat/wrestling = 2,
-	/datum/skill/combat/unarmed = 2,
-	/datum/skill/misc/athletics = 2, //old party member, he was an adventurer who saved the city, also buff wizard
-	/datum/skill/combat/polearms = 3,
-	/datum/skill/craft/alchemy = 3,
-	/datum/skill/labor/mathematics = 4,
-	)
-
-	jobstats = list(
-		STATKEY_STR =-2,
-		STATKEY_INT = 5,
-		STATKEY_CON =-2,
-		STATKEY_SPD =-2,
-	)
-
-	traits = list(
-	TRAIT_SEEPRICES,
-	TRAIT_NOBLE,
-	TRAIT_OLDPARTY,
-	)
-
 	spell_points = 17
 	attunements_max = 6
 	attunements_min = 4
 	job_bitflag = BITFLAG_ROYALTY
 
-	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo) //intentional. This means it's a gamble between Noc or Zizo if neither is your patron. Don't change this.
+	spells = list(
+		/datum/action/cooldown/spell/aoe/knock,
+		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
+		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
+	)
 
 	exp_type = list(EXP_TYPE_ADVENTURER, EXP_TYPE_LIVING, EXP_TYPE_MAGICK)
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_MAGICK, EXP_TYPE_ADVENTURER)
@@ -75,8 +50,8 @@
 		/datum/skill/misc/reading = 6,
 		/datum/skill/misc/riding = 2,
 		/datum/skill/magic/arcane = 5,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 1,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/craft/alchemy = 3,

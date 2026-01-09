@@ -13,10 +13,10 @@
 		STATKEY_SPD = -1
 	)
 	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
@@ -57,9 +57,8 @@
 	var/obj/item/clothing/gloves/gloves_to_wear = /obj/item/clothing/gloves/bandages/weighted
 	switch(weapon_choice)
 		if("Discipline - Unarmed")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 5, 5)
-			spawned.clamped_adjust_skillrank(/datum/skill/misc/athletics, 5, 5)
 			gloves_to_wear = /obj/item/clothing/gloves/bandages/pugilist
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
 		if("Katar")
