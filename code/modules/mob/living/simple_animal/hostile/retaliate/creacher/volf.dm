@@ -166,7 +166,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/wolf/cave
 	name = "marrov"
-	desc = "Also known as 'Loup d'os,' a subspecies of volves who delved too deep, twisted by the corrupting forces of the hells into fearsome, merciless monsters."
+	desc = "Also known as 'Gueules-funestes,' a subspecies of volves who delved too deep, twisted by the corrupting forces of the hells into fearsome, merciless monsters."
 	icon_state = "marrov"
 	icon_living = "marrov"
 	icon_dead = "marrovd"
