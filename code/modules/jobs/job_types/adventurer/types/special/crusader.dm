@@ -20,7 +20,7 @@
 
 	skills = list(
 		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 2,
 		/datum/skill/combat/knives = 2,
@@ -52,10 +52,10 @@
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
 	if(spawned.gender == FEMALE)
-		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 	else
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)

@@ -18,6 +18,7 @@
 	var/small_item = FALSE //Small items can be grouped into a single crate.
 	var/static_cost = FALSE
 	var/randomprice_factor = 0.07
+	var/unlocked = TRUE
 	abstract_type = /datum/supply_pack
 
 /datum/supply_pack/New()
@@ -58,3 +59,9 @@
 	else
 		for(var/item in contains)
 			new item(C)
+
+/datum/supply_pack/proc/get_realized_price()
+	var/actual_price = 0
+	for(var/atom in contains)
+		actual_price += SSmerchant.get_item_base_value(atom)
+	return actual_price

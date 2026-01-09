@@ -21,7 +21,7 @@
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_END = 1,
-		STATKEY_CON = 1,
+		STATKEY_CON = 2,
 		STATKEY_SPD = -1,
 	)
 
@@ -37,7 +37,7 @@
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/swimming = 4,
 		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/labor/mathematics = 1
 	)
 

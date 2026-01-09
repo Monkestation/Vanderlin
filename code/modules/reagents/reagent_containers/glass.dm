@@ -110,7 +110,7 @@
 		SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, M, reagents.reagent_list)
 		reagents.reaction(M, TOUCH)
 		chem_splash(M.loc, 2, list(reagents))
-		playsound(M.loc, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
+		playsound(M, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
 		log_combat(user, M, "splashed", R)
 		return
 	if(user.used_intent.type == INTENT_POUR)
@@ -150,7 +150,7 @@
 						to_chat(human_user, span_red("I've got better manners than this..."))
 			to_chat(user, span_notice("I swallow a gulp of [src]."))
 		addtimer(CALLBACK(reagents, TYPE_PROC_REF(/datum/reagents, trans_to), M, min(amount_per_transfer_from_this,5), TRUE, TRUE, FALSE, user, FALSE, INGEST), 5)
-		playsound(M.loc, pick(drinksounds), 100, TRUE)
+		playsound(M, pick(drinksounds), 100, TRUE)
 
 /obj/item/reagent_containers/glass/attack_atom(atom/attacked_atom, mob/living/user)
 	if(user.used_intent.type == INTENT_GENERIC)

@@ -52,8 +52,8 @@
 	spawned.grant_undead_eyes()
 	spawned.ambushable = FALSE
 	spawned.underwear = "Nude"
-	if(spawned.charflaw)
-		QDEL_NULL(spawned.charflaw)
+	if(length(spawned.quirks))
+		spawned.clear_quirks()
 	spawned.update_body()
 	spawned.mob_biotypes = MOB_UNDEAD
 	spawned.faction = list(FACTION_UNDEAD)

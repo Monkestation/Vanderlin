@@ -46,8 +46,8 @@
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/combat/knives = 5,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 2,
 	)
 
 	jobstats = list(
@@ -68,6 +68,7 @@
 
 /datum/job/matron/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)

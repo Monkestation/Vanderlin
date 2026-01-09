@@ -60,7 +60,7 @@
 		to_chat(carbon_victim, span_userdanger("The [dragger_pawn.name] grabs you and drags you into darkness!"))
 
 		new /obj/effect/temp_visual/dir_setting/wraith_grab(get_turf(carbon_victim), dragger_pawn.dir)
-		playsound(get_turf(carbon_victim), 'sound/magic/enter_blood.ogg', 50, TRUE)
+		playsound(carbon_victim, 'sound/magic/enter_blood.ogg', 50, TRUE)
 
 		var/list/wilderness_turfs = list()
 		if(!controller.blackboard[BB_DRAGGER_DUNGEONEER])
@@ -89,14 +89,14 @@
 			var/turf/destination = pick(wilderness_turfs)
 
 			new /obj/effect/temp_visual/dir_setting/wraith_phase_out(get_turf(dragger_pawn), dragger_pawn.dir)
-			playsound(get_turf(dragger_pawn), 'sound/magic/ethereal_exit.ogg', 50, TRUE)
+			playsound(dragger_pawn, 'sound/magic/ethereal_exit.ogg', 50, TRUE)
 
 			// Teleport both the dragger and victim
 			dragger_pawn.forceMove(destination)
 			carbon_victim.forceMove(destination)
 
 			new /obj/effect/temp_visual/dir_setting/wraith_phase_in(get_turf(dragger_pawn), dragger_pawn.dir)
-			playsound(get_turf(dragger_pawn), 'sound/magic/ethereal_enter.ogg', 50, TRUE)
+			playsound(dragger_pawn, 'sound/magic/ethereal_enter.ogg', 50, TRUE)
 			carbon_victim.apply_damage(15, BRUTE, spread_damage = TRUE)
 
 			controller.blackboard[BB_DRAGGER_HUNTING_COOLDOWN] = world.time + 20 SECONDS

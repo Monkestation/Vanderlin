@@ -192,7 +192,7 @@
 		turn_off()
 
 /obj/item/flashlight/flare/torch/turn_off()
-	playsound(src.loc, 'sound/items/firesnuff.ogg', 50)
+	playsound(src, 'sound/items/firesnuff.ogg', 50)
 	STOP_PROCESSING(SSobj, src)
 	..()
 	if(ismob(loc))
@@ -205,7 +205,7 @@
 	. = ..()
 	if(fuel)
 		if(!on)
-			playsound(src.loc, 'sound/items/firelight.ogg', 100)
+			playsound(src, 'sound/items/firelight.ogg', 100)
 			on = TRUE
 			damtype = BURN
 			update_brightness()

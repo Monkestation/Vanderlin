@@ -9,7 +9,7 @@
 	var/datum/language_holder/stored_language
 	var/list/stored_skills
 	var/list/stored_experience
-
+	cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 /mob/living/carbon/human/species/werewolf/death(gibbed, nocutscene)
 	. = ..()
 	if(stored_mob)
@@ -50,6 +50,7 @@
 		TRAIT_IGNORESLOWDOWN,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_UNDODGING,
+		TRAIT_UNPARRYING,
 		TRAIT_LONGSTRIDER
 	)
 
@@ -82,11 +83,11 @@
 	)
 
 	changesource_flags = WABBAJACK
-	bleed_mod = 0.3
+	bleed_mod = 0.6
 	pain_mod = 0.2
 
 /datum/species/werewolf/send_voice(mob/living/carbon/human/H)
-	playsound(get_turf(H), pick('sound/vo/mobs/wwolf/wolftalk1.ogg', 'sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
+	playsound(H, pick('sound/vo/mobs/wwolf/wolftalk1.ogg', 'sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
 
 /datum/species/werewolf/regenerate_icons(mob/living/carbon/human/H)
 	H.icon = 'icons/roguetown/mob/monster/werewolf.dmi'
