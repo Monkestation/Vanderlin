@@ -124,4 +124,4 @@
 	wash_precent += min(25, severity / 2)
 	alpha = 255 *((100 - wash_precent) * 0.01)
 	if(wash_precent >= 100)
-		qdel(src)
+		wash(CLEAN_WASH)
