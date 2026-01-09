@@ -953,9 +953,9 @@
 			take_damage(max_integrity * 0.025) // 400 max = 10 damage
 	else
 		if(!resistor.mind)
-			take_damage(max_integrity * 0.1)
+			take_damage(max_integrity * 0.05)
 		else
-			take_damage(max_integrity * 0.2)
+			take_damage(max_integrity * 0.1)
 
 /obj/item/inqarticles/garrote/razor // To yische, who said not to give this out constantly, I respectfully disagree when it comes to assassin
 	name = "profane razor" // It's very not non lethal now.  Strangle your prey with glee
