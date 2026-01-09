@@ -352,8 +352,10 @@
 	. = ..()
 	if(quantity == 1)
 		name = initial(name)
+		gender = NEUTER
 	else
 		name = plural_name
+		gender = PLURAL
 
 /obj/item/coin/update_desc()
 	. = ..()
