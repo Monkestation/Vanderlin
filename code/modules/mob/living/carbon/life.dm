@@ -508,7 +508,7 @@
 	if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT - 3)
 		breath_effect_prob = min(breath_effect_prob + 50, 100)
 		if(prob(15) && !is_mouth_covered())
-			visible_message(span_notice("[src]'s breath comes out in heavy puffs of vapor."))
+			to_chat(src, span_warning("Your breath comes out in heavy puffs of vapor."))
 
 	if(prob(breath_effect_prob) && !is_mouth_covered())
 		emit_breath_particle(/particles/fog/breath)
