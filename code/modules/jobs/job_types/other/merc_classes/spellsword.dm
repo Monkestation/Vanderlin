@@ -13,7 +13,6 @@
 	spell_points = 5
 
 	jobstats = list(
-		STATKEY_STR = 1,
 		STATKEY_INT = 1,
 		STATKEY_SPD = -1
 	)
