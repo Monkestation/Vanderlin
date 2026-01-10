@@ -64,12 +64,16 @@
 		deconstruct(TRUE)
 	else if(istype(W, /obj/item/bedsheet))
 		var/obj/item/bedsheet/sheet = W
-		to_chat(user, span_notice("You start tucking the [sheet] into the [src]."))
+		to_chat(user, span_notice("You start tucking \the [sheet] into \the [src]."))
 		if(do_after(user, 2 SECONDS, src))
 			sheet_tucked = TRUE
 			sheet_on = TRUE
 			user.dropItemToGround(sheet)
 			sheet.forceMove(get_turf(src))
+			sheet.layer = ABOVE_MOB_LAYER
+			sheet.plane = GAME_PLANE_UPPER
+			sheet.pixel_x = base_pixel_x
+			sheet.pixel_y = base_pixel_y
 			sheet.bed_tucked = TRUE
 			user.nobles_seen_servant_work()
 	else
