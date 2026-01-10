@@ -17,6 +17,7 @@
 	grid_width = 32
 	grid_height = 64
 	var/time_multiplier = 1
+	var/no_spark = FALSE	//for hammers that shouldn't make sparks on impact
 
 /obj/proc/unbreak()
 	return
@@ -163,6 +164,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	max_integrity = INTEGRITY_WORST
 	time_multiplier = 1.2
+	no_spark = TRUE
 
 /obj/item/weapon/hammer/wood/getonmobprop(tag)
 	. = ..()
@@ -187,6 +189,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/ingot/copper
 	time_multiplier = 1.1
+	no_spark = TRUE
 
 /obj/item/weapon/hammer/sledgehammer
 	name = "sledgehammer"

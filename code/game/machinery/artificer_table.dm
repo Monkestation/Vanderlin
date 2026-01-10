@@ -21,6 +21,7 @@
 			update_appearance(UPDATE_OVERLAYS)
 			return
 	if(istype(I, /obj/item/weapon/hammer))
+		var/obj/item/weapon/hammer/H = I
 		user.changeNext_move(CLICK_CD_RAPID)
 		if(!material)
 			return
@@ -30,7 +31,7 @@
 		if(material.artrecipe.hammered || material.artrecipe.progress == 100)
 			playsound(src,'sound/combat/hits/onmetal/sheet (2).ogg', 100, TRUE)
 			shake_camera(user, 1, 1)
-		if(!istype(I, /obj/item/weapon/hammer/wood) && !istype(I, /obj/item/weapon/hammer/copper)) //wood and copper tools don't spark
+		if(H.no_spark == FALSE)	//wood and copper hammers don't spark
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_turf(src)
 			S.set_up(1, 1, front)
