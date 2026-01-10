@@ -624,14 +624,3 @@
 	name = "Cursed"
 	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
 	icon_state = "debuff"
-
-/datum/status_effect/debuff/majorcurse
-	id = "majorcurse"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/majorcurse
-	effectedstats = list(STATKEY_LCK = -5) // Last 2 whole daes and stacks with the normal curse.
-	duration = 60 MINUTES
-
-/atom/movable/screen/alert/status_effect/debuff/majorcurse
-	name = "Great Hex of Necra"
-	desc = "I have brought Necra's ire upon myself! Fortune conspires against me!"
-	icon_state = "debuff"

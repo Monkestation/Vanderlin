@@ -221,48 +221,21 @@
 					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
 						qdel(G)
 
-				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or I explode your lux.
+				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
 					if(ishuman(user))
 						var/mob/living/carbon/human/L = user
-						var/list/limb_list = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM) // used to pick which arm to skeletonize
-
-						if(L.patron?.type != /datum/patron/divine/necra) // non-necran get IN BIG TROUBLE, ACTUALLY.
+						var/robbery_location = get_area_name(src)
+						if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
 							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 							record_round_statistic(STATS_GRAVES_ROBBED)
-							var/lux_state = L.get_lux_status()
-							var/picked_limb = L.get_bodypart_complex(limb_list) // pick one arm to bonify, not necessarily used.
-							var/obj/item/bodypart/part_to_bonify = picked_limb // skeletonize proc requires static type, hence why we do this.
-							/* Necra doesn't strip you of lux if you're a normal child. Maniacs, werewolves, etc.. count as "normal".
-							Instead, your arm becomes skeletonized, which outs you to any onlooker. */
-							if(L.age == AGE_CHILD && !L.mind.has_antag_datum(/datum/antagonist/vampire/) && !L.mind.has_antag_datum(/datum/antagonist/lich) && !HAS_TRAIT(L, TRAIT_GRAVEROBBER))
-								to_chat(user, span_crit("Necra's mercy saves me from a grim future, but I nevertheless have to pay for my blasphemy."))
-
-								if (picked_limb)
-									to_chat(user, span_crit("I watch in horror as the skin on [picked_limb] turns to bones before my eyes! "))
-									part_to_bonify.skeletonize(FALSE)
-								else // How did you manage that?
-									to_chat(user, span_crit("Somehow, I have no arms with which to pay the toll, how did I dig this grave up, again?"))
-									L.apply_status_effect(/datum/status_effect/debuff/cursed) // not the full 10 minute version, as I expect this would only be called when bugs happen.
-
-							if(HAS_TRAIT(L, TRAIT_GRAVEROBBER)) // if you're a graverobber but not a Necran, you "just" get -5 LCK for a whole hour
-								to_chat(user, span_crit("Even my pacts cannot protect me from Necra's wrath, I am cursed !"))
-								L.apply_status_effect(/datum/status_effect/debuff/majorcurse)
-							else
-								if(lux_state == LUX_HAS_LUX) // if you have lux, Necra takes it
-									if(L.mind.has_antag_datum(/datum/antagonist/lich)) // if you're a lich, we debuff you for -5 LCK. This lasts an hour, dangerous enough to be avoided but not too crippling.
-										to_chat(user, span_crit("Even my necromantic mastery cannot protect me from Necra's undivided attention, I am cursed!"))
-										L.apply_status_effect(/datum/status_effect/debuff/majorcurse)
-									else
-										to_chat(user, span_userdanger("As I open the grave, a flow of ghostly energy washes over me! My entire body feels freezing.."))
-										L.apply_status_effect(/datum/status_effect/debuff/lux_drained)
-								else // No lux? We skeletonize your arm.
-									to_chat(user, span_userdanger("Without lux in my body, I must pay a more physical toll."))
-									if (picked_limb)
-										to_chat(user, span_crit("I watch in horror as the skin on [picked_limb] turns to bones before my eyes! "))
-										part_to_bonify.skeletonize(FALSE)
-									else // How did you manage that?
-										to_chat(user, span_crit("Somehow, I have no arms with which to pay the toll, how did I dig this grave up, again?"))
-									L.apply_status_effect(/datum/status_effect/debuff/cursed)
+							to_chat(user, span_warningbig("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
+							L.apply_status_effect(/datum/status_effect/debuff/cursed)
+							for (var/mob/living/player in GLOB.player_list)
+								if (player.stat == DEAD || isbrain(player))
+									continue
+								// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
+								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/undertaker))
+									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a twice-consecrated grave is being robbed in [robbery_location], this cannot go unpunished!"))
 						else
 							if(HAS_TRAIT(L, TRAIT_GRAVEROBBER)) // this typically means you're a gravetender or cleric
 								to_chat(user, span_info("I speak the hallowed words of Necra, and she releases her grip over my soul.."))
