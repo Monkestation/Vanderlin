@@ -219,9 +219,6 @@
 	SPEC_ID_HALF_ELF,\
 	SPEC_ID_HALFLING,\
 	SPEC_ID_DWARF,\
-	SPEC_ID_DROW,\
-	SPEC_ID_HALF_DROW,\
-	SPEC_ID_TIEFLING,\
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_HARPY,\
 	SPEC_ID_MEDICATOR,\
@@ -291,4 +288,24 @@
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
 	SPEC_ID_ZIZOMBIE,\
+)
+/* Every single species except kobolds.
+Typically for serfs/yeomen role which, despite their low importance,
+would still NOT allow a rock-dog to work their craft. */
+#define RACES_PLAYER_NONKOBOLD list(\
+	SPEC_ID_HUMEN,\
+	SPEC_ID_DWARF,\
+	SPEC_ID_AASIMAR,\
+	SPEC_ID_ELF,\
+	SPEC_ID_HALF_ELF,\
+	SPEC_ID_HALFLING,\
+	SPEC_ID_DROW,\
+	SPEC_ID_HALF_DROW,\
+	SPEC_ID_TIEFLING,\
+	SPEC_ID_HARPY,\
+	SPEC_ID_RAKSHARI,\
+	SPEC_ID_TRITON,\
+	SPEC_ID_MEDICATOR,\
+	SPEC_ID_HOLLOWKIN,\
+	SPEC_ID_HALF_ORC,\
 )
