@@ -91,6 +91,9 @@
 		if(ignited)
 			user.visible_message(span_notice("[user] begins defusing [src]..."), \
 				span_notice("I begin defusing [src]..."))
+			if(do_after(user, defuse_time, target = src))
+				defuse(user)
+				return
 		else
 			user.visible_message(span_notice("[user] begins picking up [src]..."), \
 				span_notice("I begin picking up [src]..."))
@@ -99,20 +102,26 @@
 			user.visible_message(span_notice("[user] picks up [src]."), \
 				span_notice("I pick up [src]."))
 
-			if(fuse_timer)
-				deltimer(fuse_timer)
-				fuse_timer = null
-			ignited = FALSE
 			deployed = FALSE
 			icon_state = initial(icon_state)
 			..()
 	else
 		..()
 
+/obj/item/breach_charge/proc/defuse(mob/defuser)
+	playsound(src, 'sound/items/firesnuff.ogg', 100, FALSE)
+	ignited = FALSE
+	deltimer(fuse_timer)
+	fuse_timer = null
+	icon_state = "[initial(icon_state)]_deployed"
+	defuser.visible_message(span_notice("[defuser] defuses [src]..."), \
+				span_notice("I successfully defuse [src]..."))
+
 /obj/item/breach_charge/proc/detonate(detonator)
 	var/turf/target_turf = get_step(get_turf(src), aim_dir) // The turf we are exploding.
 	fuse_timer = null // too late bro
 	if(isindestructiblewall(target_turf))
+		defuse()
 		return
 	visible_message(span_danger("[src] detonates!"))
 	if(iswallturf(target_turf) && !ismineralturf(target_turf))
