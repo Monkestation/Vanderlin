@@ -20,7 +20,7 @@
 	can_parry = FALSE
 	swingsound = WHIPWOOSH
 	throwforce = 5
-	wdefense = 0
+	wdefense = BAD_PARRY
 	minstr = 4
 	sellprice = 30
 	grid_width = 32
@@ -230,7 +230,7 @@
 	name = "nagaika whip"
 	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
 	icon_state = "nagaika"
-	force = 25		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
+	force = DAMAGE_WHIP+5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
 	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/sword/strike)
 	wdefense = BAD_PARRY	//Akin to a cudgel, still terrible at parrying though. Better than nothing I guess; thing is used irl as a counter-weapon to knives.
 
@@ -243,7 +243,7 @@
 	force = DAMAGE_WHIP+3
 	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/whip/cut,)
 	anvilrepair = /datum/skill/craft/weaponsmithing
-	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/steel
 	resistance_flags = FIRE_PROOF
 	minstr = 5
 	sharpness = IS_SHARP
@@ -257,28 +257,22 @@
 	name = "iron urumi"
 	icon_state = "urumi_iron"
 	force = DAMAGE_WHIP+2
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	max_blade_int = 150
-	wdefense = BAD_PARRY
-	can_parry = TRUE
 
 /obj/item/weapon/whip/urumi/bronze
 	name = "bronze urumi"
 	icon_state = "urumi_bronze"
 	force = DAMAGE_WHIP
-	smeltresult = /obj/item/ingot/bronze
+	melting_material =  = /datum/material/bronze
 	max_blade_int = 100
-	wdefense = BAD_PARRY
-	can_parry = TRUE
 
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
 	icon_state = "urumi_silver"
 	force = DAMAGE_WHIP+2
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	max_blade_int= 130
-	wdefense = BAD_PARRY
-	can_parry = TRUE
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()

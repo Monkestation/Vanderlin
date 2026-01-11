@@ -78,7 +78,7 @@
 /datum/supply_pack/weapons/iron/iida
 	name = "Iron Ida"
 	cost = 25
-	contains = /obj/item/weapon/sword/ida/iron
+	contains = /obj/item/weapon/sword/short/iron/ida
 
 /datum/supply_pack/weapons/iron/iaruval
 	name = "Iron Aruval"
@@ -88,32 +88,32 @@
 /datum/supply_pack/weapons/iron/injora
 	name = "Iron Seme"
 	cost = 15
-	contains = /obj/item/weapon/knife/njora/iron
+	contains = /obj/item/weapon/knife/dagger/njora
 
 /datum/supply_pack/weapons/iron/irungu
 	name = "Iron Rungu"
 	cost = 25
-	contains = /obj/item/weapon/mace/rungu/iron
+	contains = /obj/item/weapon/mace/rungu
 
 /datum/supply_pack/weapons/iron/insapo
 	name = "Iron Kasuyu"
 	cost = 25
-	contains = /obj/item/weapon/axe/nsapo/iron
+	contains = /obj/item/weapon/axe/iron/nsapo
 
 /datum/supply_pack/weapons/iron/ijile
 	name = "Iron Jile"
 	cost = 12
-	contains = /obj/item/weapon/knife/jile/iron
+	contains = /obj/item/weapon/knife/dagger/jile
 
 /datum/supply_pack/weapons/iron/ikukri
 	name = "Iron Kukri"
 	cost = 15
-	contains = /obj/item/weapon/knife/dagger/kukri/iron
+	contains = /obj/item/weapon/knife/dagger/kukri
 
 /datum/supply_pack/weapons/iron/ishishpar
 	name = "Iron Shishpar"
 	cost = 45
-	contains = /obj/item/weapon/mace/shishpar/iron
+	contains = /obj/item/weapon/mace/shishpar
 
 /datum/supply_pack/weapons/iron/iassegai
 	name = "Iron Assegai"
@@ -183,7 +183,7 @@
 /datum/supply_pack/weapons/steel/ida
 	name = "Steel Ida"
 	cost = 50
-	contains = /obj/item/weapon/sword/ida
+	contains = /obj/item/weapon/sword/short/ida
 
 /datum/supply_pack/weapons/steel/aruval
 	name = "Steel Aruval"
@@ -193,7 +193,7 @@
 /datum/supply_pack/weapons/steel/njora
 	name = "Steel Seme"
 	cost = 25
-	contains = /obj/item/weapon/knife/njora/steel
+	contains = /obj/item/weapon/knife/dagger/steel/njora
 
 /datum/supply_pack/weapons/steel/rungu
 	name = "Steel Rungu"
@@ -203,12 +203,12 @@
 /datum/supply_pack/weapons/steel/jile
 	name = "Steel Jile"
 	cost = 25
-	contains = /obj/item/weapon/knife/jile/steel
+	contains = /obj/item/weapon/knife/dagger/steel/jile
 
 /datum/supply_pack/weapons/steel/kukri
 	name = "Steel Kukri"
 	cost = 45
-	contains = /obj/item/weapon/knife/dagger/kukri/steel
+	contains = /obj/item/weapon/knife/dagger/steel/kukri
 
 /datum/supply_pack/weapons/steel/shishpar
 	name = "Steel Shishpar"

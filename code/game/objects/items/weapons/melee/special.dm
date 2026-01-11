@@ -1,6 +1,6 @@
 /obj/item/weapon/lordscepter
-	force = 20
-	force_wielded = 20
+	force = DAMAGE_MACE
+	force_wielded = DAMAGE_MACE
 	possible_item_intents = list(/datum/intent/lordbash, /datum/intent/lord_electrocute, /datum/intent/lord_silence)
 	gripped_intents = list(/datum/intent/lordbash)
 	name = "master's rod"
@@ -117,8 +117,8 @@
 				return
 
 /obj/item/weapon/mace/stunmace
-	force = 15
-	force_wielded = 15
+	force = DAMAGE_CLUB
+	force_wielded = DAMAGE_CLUB
 	name = "stunmace"
 	icon = 'icons/roguetown/weapons/32/special.dmi'
 	icon_state = "stunmace0"
@@ -126,9 +126,9 @@
 	gripped_intents = null
 	w_class = WEIGHT_CLASS_NORMAL
 	possible_item_intents = list(/datum/intent/mace/strike/stunner, /datum/intent/mace/smash/stunner)
-	wbalance = 0
+	wbalance = DODGE_CHANCE_NORMAL
 	minstr = 5
-	wdefense = 0
+	wdefense = BAD_PARRY
 	var/charge = 100
 	var/on = FALSE
 
@@ -249,7 +249,7 @@
 
 /obj/item/weapon/katar
 	slot_flags = ITEM_SLOT_HIP
-	force = 15
+	force = DAMAGE_KATAR
 	possible_item_intents = list(/datum/intent/katar/cut, /datum/intent/katar/thrust)
 	name = "katar"
 	desc = "A blade that sits above the users fist. Commonly used by those proficient at unarmed fighting"
@@ -265,7 +265,7 @@
 	associated_skill = /datum/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	throwforce = 12
-	wdefense = 2
+	wdefense = AVERAGE_PARRY
 	thrown_bclass = BCLASS_CUT
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel
@@ -319,7 +319,7 @@
 	desc = "A mean looking pair of steel knuckles."
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "steelknuckle"
-	force = 22
+	force = DAMAGE_KNUCKLES
 	possible_item_intents = list(/datum/intent/knuckles/strike,/datum/intent/knuckles/smash)
 	gripsprite = FALSE
 	wlength = WLENGTH_SHORT
@@ -330,7 +330,7 @@
 	max_integrity = 300
 	swingsound = list('sound/combat/wooshes/punch/punchwoosh (1).ogg','sound/combat/wooshes/punch/punchwoosh (2).ogg','sound/combat/wooshes/punch/punchwoosh (3).ogg')
 	associated_skill = /datum/skill/combat/unarmed
-	throwforce = 12
+	throwforce = DAMAGE_KNUCKLES-10
 	wdefense = MEDIOCRE_PARRY
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel

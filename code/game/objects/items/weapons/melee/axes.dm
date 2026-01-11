@@ -219,28 +219,14 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
-/obj/item/weapon/axe/nsapo/iron
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+/obj/item/weapon/axe/iron/nsapo
 	name = "iron kasuyu"
 	desc = "An iron axe hailing from the nation of Lakkari. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_iron"
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
 	melt_amount = 75
-	parrysound = "sword"
-	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
-	wdefense = MEDIOCRE_PARRY
-	minstr = 6
-
-	sellprice = 20
-
-/obj/item/weapon/axe/nsapo/getonmobprop(tag)
+/obj/item/weapon/axe/iron/nsapo/getonmobprop(tag)
 
 	if(tag)
 		switch(tag)
@@ -414,28 +400,18 @@
 				return list("shrink" = 0.6,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 180,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 1,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 
-/obj/item/weapon/axe/nsapo
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+/obj/item/weapon/axe/steel/nsapo
 	name = "steel kasuyu"
 	desc = "A steel axe hailing from the nation of Lakkari. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
-	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
-	melting_material = /datum/material/steel
 	melt_amount = 75
-	parrysound = "sword"
-	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
 	wdefense = GOOD_PARRY
 	minstr = 8
 	sellprice = 45
-	axe_cut = 15
 
-/obj/item/weapon/axe/nsapo/getonmobprop(tag)
+/obj/item/weapon/axe/steel/nsapo/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -480,8 +456,8 @@
 	name = "bone axe"
 	desc = "A rough axe made of bones"
 	icon_state = "boneaxe"
-	force = DAMAGE_AXE - 2
-	force_wielded =	DAMAGE_AXE_WIELD - 3
+	force = DAMAGE_AXE-2
+	force_wielded =	DAMAGE_AXE_WIELD-3
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
 	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
 	smeltresult = /obj/item/fertilizer/ash
@@ -548,8 +524,7 @@
 
 
 /obj/item/weapon/greataxe/psy
-	force = 15
-	force_wielded = 25
+	force = DAMAGE_AXE-5
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/mace/strike) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
 	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe, /datum/intent/mace/strike) //Axe-equivalent to the Godendag or Grand Mace.
 	name = "psydonic poleaxe"
@@ -585,7 +560,6 @@
 	minstr = 12
 	melt_amount = 180
 	wbalance = VERY_EASY_TO_DODGE
-	wdefense = AVERAGE_PARRY
 	sellprice = 100
 
 /obj/item/weapon/greataxe/steel/doublehead/graggar
@@ -599,8 +573,8 @@
 	sellprice = 0 // Graggarite axe, nobody wants this
 
 /obj/item/weapon/greataxe/dreamscape
-	force = 10
-	force_wielded = 35
+	force = DAMAGE_AXE-10
+	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
 	name = "otherworldly axe"
 	desc = "A strange axe, who knows where it came from. It feels cold and unusually heavy."
 	icon_state = "dreamaxe"
@@ -610,13 +584,13 @@
 	smeltresult = /obj/item/ingot/gold
 	associated_skill = /datum/skill/combat/axesmaces
 	blade_dulling = DULLING_BASHCHOP
-	wdefense = 5
+	wdefense = ULTMATE_PARRY
 	sellprice = 0
 
 /obj/item/weapon/greataxe/dreamscape/active
 	// to do, make this burn you if you don't regularly soak it.
-	force = 15
-	force_wielded = 40
+	force = DAMAGE_AXE-5
+	force_wielded = DAMAGE_HEAVYAXE_WIELD+10
 	desc = "A strange axe, who knows where it came from. It is searing hot to the blade, the hilt is barely able to be held."
 	icon_state = "dreamaxeactive"
 	max_blade_int = 500

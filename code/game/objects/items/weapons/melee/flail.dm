@@ -113,7 +113,6 @@
 	sellprice = 35
 
 /obj/item/weapon/flail/sflail/ancient
-	force = DAMAGE_GOOD_FLAIL
 	name = "ancient flail"
 	desc = "An ancient knightly flail made of worked steel, with a flanged head. An effective and brutal design."
 	icon_state = "aflail"
@@ -214,7 +213,7 @@
 	icon = 'icons/roguetown/weapons/64/flails.dmi'
 	icon_state = "peasantwarflail"
 	force = 10
-	force_wielded = 35
+	force_wielded = DAMAGE_GOOD_FLAIL+7
 	possible_item_intents = list(/datum/intent/flail/strike)
 	gripped_intents = list(/datum/intent/flail/strikerange, /datum/intent/flail/strike/smashrange)
 	pixel_y = -16
@@ -228,12 +227,11 @@
 	slot_flags = null
 	minstr = 9
 	wbalance = VERY_HARD_TO_DODGE
-	smeltresult = /obj/item/ingot/iron
-	associated_skill = /datum/skill/combat/polearms
+	melting_material = /datum/material/iron
 	anvilrepair = /datum/skill/craft/carpentry
 	dropshrink = 0.9
 	blade_dulling = DULLING_BASH
-	wdefense = 4
+	wdefense = GREAT_PARRY //Why?
 	resistance_flags = FLAMMABLE
 
 /obj/item/weapon/flail/peasantwarflail/getonmobprop(tag)

@@ -238,9 +238,6 @@
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_iron"
 	gripsprite = FALSE
-	possible_item_intents = list(SPEAR_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_BASH)
-	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR_WIELD
 
 /obj/item/weapon/polearm/spear/steel/assegai
@@ -255,11 +252,10 @@
 	desc = "A polearm with a twisting trident head perfect for mangling the bodies of the impure."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyspear"
-	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_SPEAR_WIELD
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_STRONG
+	resistance_flags = FIRE_PROOF
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
 	sellprice = 60
@@ -474,8 +470,6 @@
 
 //................ Psydonian Halberd ............... //
 /obj/item/weapon/polearm/halberd/psydon
-	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_HALBERD_WIELD
 	name = "psydonian halberd"
 	desc = "A mighty halberd capable of cutting down the heretical with remarkable ease, be it effigy, man, or beast."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
@@ -532,8 +526,6 @@
 	sellprice = 30
 
 /obj/item/weapon/polearm/halberd/bardiche/ancient
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
 	name = "bardiche"
 	desc = "A grand axe of northern design, renowned for easily chopping off limbs clean with brutal strength."
 	icon_state = "ancient_bardiche"
@@ -632,8 +624,8 @@
 	desc = "A humble farming tool with long reach, traditionally used to cut grass or wheat."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "scythe"
-	force = 10
-	force_wielded = 20
+	force = DAMAGE_STAFF
+	force_wielded = DAMAGE_SPEARPLUS+2
 	possible_item_intents = list(SPEAR_CUT) //truly just a long knife
 	gripped_intents = list(SPEAR_CUT)
 	SET_BASE_PIXEL(-16, -16)
@@ -654,7 +646,7 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	dropshrink = 0.75
 	blade_dulling = DULLING_BASHCHOP
-	wdefense = 2
+	wdefense = AVERAGE_PARRY
 	thrown_bclass = BCLASS_CUT
 	throwforce = 25
 	sellprice = 10
@@ -664,8 +656,8 @@
 	AddComponent(/datum/component/walking_stick)
 
 /obj/item/weapon/polearm/spear/bonespear
-	force = 18
-	force_wielded = 22
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_SPEAR_WIELD-3
 	name = "bone spear"
 	desc = "A spear made of bones."
 	// icon_state = "bonespear"
@@ -675,14 +667,11 @@
 	inhand_y_dimension = 64
 	bigboy = TRUE
 	gripsprite = TRUE
-	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
 	minstr = 6
 	max_blade_int = 70
 	melting_material = null
-	associated_skill = /datum/skill/combat/polearms
 	blade_dulling = DULLING_BASHCHOP
-	wdefense = 4
 	max_integrity = 60
 	throwforce = 20
 
@@ -716,13 +705,13 @@
 	desc = "A traditional Kazengunese polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of Kazengunese bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "naginata"
-	force = 16
-	force_wielded = 30
+	force = DAMAGE_SPEAR+1
+	force_wielded = DAMAGE_SPEAR_WIELD+5
 	possible_item_intents = list(/datum/intent/spear/cut/naginata, /datum/intent/spear/bash) // no stab for you little chuddy, it's a slashing weapon
 	gripped_intents = list(/datum/intent/rend/reach, /datum/intent/spear/cut/naginata, /datum/intent/spear/bash)
 	minstr = 7
 	max_blade_int = 50 //Nippon suteeru (dogshit)
-	wdefense = 5
+	wdefense = ULTMATE_PARRY
 	throwforce = 12	//Not a throwing weapon.
 	blade_dulling = DULLING_BASHCHOP
 
@@ -747,8 +736,8 @@
 	icon_state = "naledistaff"
 	possible_item_intents = list(/datum/intent/spear/bash)
 	gripped_intents = list(/datum/intent/spear/bash/ranged,/datum/intent/mace/smash/wood/ranged)
-	force = 18
-	force_wielded = 22
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_SPEAR_WIELD-3
 	max_integrity = 250
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)

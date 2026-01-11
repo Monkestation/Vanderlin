@@ -59,7 +59,7 @@
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltr = /obj/item/weapon/mace/rungu/iron
+	beltr = /obj/item/weapon/mace/rungu
 	beltl = /obj/item/storage/belt/pouch //broke as hell!
 	wrists = /obj/item/clothing/wrists/gem/shellbracelet
 

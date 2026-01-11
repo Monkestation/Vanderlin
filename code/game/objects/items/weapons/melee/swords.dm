@@ -55,48 +55,38 @@
 	icon_state = "swordshort"
 	force = DAMAGE_SHORTSWORD
 	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
-	force_wielded = 0
 	gripped_intents = null
 	max_integrity = INTEGRITY_STRONG
+	wlength = WLENGTH_SHORT
+	w_class = WEIGHT_CLASS_NORMAL
 	minstr = 4
-	wdefense = GREAT_PARRY
 	wbalance = HARD_TO_DODGE
 	sellprice = 30
 
 /obj/item/weapon/sword/short/iron
 	desc = "An iron sword of shortened design and a reduced grip for single hand use."
 	icon_state = "iswordshort"
-	force = DAMAGE_SHORTSWORD
 	max_integrity = INTEGRITY_STANDARD
 	wdefense = GOOD_PARRY
-	wbalance = HARD_TO_DODGE
 	sellprice = 15
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/short/bronze
 	name = "bronze short sword"
 	desc = "A bronze sword of shortened design and a reduced grip for single hand use."
 	icon_state = "shortsword_bronze"
-	force = DAMAGE_SHORTSWORD
 	max_integrity = INTEGRITY_STANDARD
 	max_blade_int = 85
 	wdefense = GOOD_PARRY
-	wbalance = HARD_TO_DODGE
 	sellprice = 10
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
 	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyswordshort"
-	force = 19
-	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
-	gripped_intents = null
-	minstr = 4
-	wdefense = 4
-	wlength = WLENGTH_SHORT
-	w_class = WEIGHT_CLASS_NORMAL
+	force = DAMAGE_SHORTSWORD+3
 	grid_width = 32
 	grid_height = 96
 
@@ -110,8 +100,6 @@
 	name = "arming sword"
 	desc = "A trustworthy blade design, the first dedicated tool of war since before the age of history."
 	icon_state = "sword1"
-	melt_amount = 75
-	melting_material = /datum/material/steel
 	sellprice = 30
 
 /obj/item/weapon/sword/arming/Initialize()
@@ -135,7 +123,7 @@
 	icon_state = "silversword"
 	force = DAMAGE_SWORD-1
 	force_wielded = DAMAGE_SWORD_WIELD-1
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_STRONG
 	sellprice = 45
 	last_used = 0
@@ -152,7 +140,7 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	wdefense = GOOD_PARRY
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/bronze
 	name = "bronze sword"
@@ -163,7 +151,7 @@
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	wdefense = AVERAGE_PARRY
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/weapon/sword/kaskara
 	name = "steel kaskara"
@@ -182,31 +170,23 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	wdefense = GOOD_PARRY
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
-/obj/item/weapon/sword/ida
+/obj/item/weapon/sword/short/ida
 	name = "steel ida"
 	desc = "A Lakkarian short sword with a tapered leaf-shaped blade. It's popular amongst the lower class of Ei Onkara."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_steel"
-	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
-	gripped_intents = null
-	force = DAMAGE_SHORTSWORD
 	minstr = 5
 	wdefense = GOOD_PARRY
-	wbalance = HARD_TO_DODGE
 	sellprice = 50
 
-/obj/item/weapon/sword/ida/iron
+/obj/item/weapon/sword/short/iron/ida
 	name = "iron ida"
 	desc = "A Lakkarian short sword with a tapered leaf-shaped blade. It's popular amongst the lower class of Ei Onkara."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_iron"
-	minstr = 4
-	wdefense = GOOD_PARRY
-	wbalance = HARD_TO_DODGE
 	sellprice = 20
-	smeltresult = /obj/item/ingot/iron
 
 /obj/item/weapon/sword/rapier/caneblade
 	name = "cane blade"
@@ -214,15 +194,6 @@
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "caneblade"
 	sellprice = 100 //Gold handle
-	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier)
-	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
-	force_wielded = 0
-	gripped_intents = null
-	alt_intents = null
-	parrysound = "rapier"
-	swingsound = BLADEWOOSH_SMALL
-	minstr = 6
-	wbalance = VERY_HARD_TO_DODGE
 	bigboy = FALSE
 	SET_BASE_PIXEL(0, 0)
 
@@ -234,7 +205,6 @@
 	desc = "A swift sabre, favored by duelists and cut-throats alike."
 	icon_state = "saber"
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/curved)
-	force_wielded = 0
 	gripped_intents = null
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	swingsound = BLADEWOOSH_SMALL
@@ -253,12 +223,12 @@
 	wdefense = GREAT_PARRY
 	swingsound = BLADEWOOSH_LARGE
 
-/obj/item/weapon/sword/sabre/hwi/iron
+/obj/item/weapon/sword/sabre/hwi/iron //Reminder to fix this shit, it has the exact same stats as the steel hwi
 	name = "iron hwi"
 	desc = "A hefty iron sabre of Lakkarian origin. It's defensive design is great for stopping lethal blows."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "hwi_iron"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/sabre/dec
 	name = "decorated sabre"
@@ -298,22 +268,21 @@
 	icon_state = "dadao_steel"
 	desc = "Sometimes also referred to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
 	force = DAMAGE_SWORD+1
-	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/curved)
+	force_wielded = DAMAGE_SWORD_WIELD+1
 	gripped_intents = list(/datum/intent/axe/chop, /datum/intent/sword/thrust/curved)
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
 	swingsound = BLADEWOOSH_MED
-	smeltresult = /obj/item/ingot/steel
 
-/obj/item/weapon/sword/sabre/dadao/iron
+/obj/item/weapon/sword/sabre/dadao/iron //Fix this
 	name = "iron dadao"
 	icon_state = "dadao_iron"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/sabre/dadao/bronze
 	name = "bronze dadao"
 	icon_state = "dadao_bronze"
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	max_blade_int = 95
 	max_integrity = INTEGRITY_STANDARD
 
@@ -401,7 +370,7 @@
 	minstr = 8 // Heavy blade used by orcs
 	wbalance = EASY_TO_DODGE
 	sellprice = 20
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/axe/chop)

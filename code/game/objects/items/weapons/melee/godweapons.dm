@@ -29,12 +29,12 @@
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	max_blade_int = 200
-	max_integrity = 720
+	max_integrity = INTEGRITY_STRONGEST+220
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
 	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop/great, /datum/intent/sword/strike)
 	wdefense = GOOD_PARRY
 	force = DAMAGE_HEAVYAXE_WIELD
-	force_wielded = 35
+	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
 	minstr = 12
 	sellprice = 550
 
@@ -102,15 +102,13 @@
 	resistance_flags = FIRE_PROOF
 	dropshrink = 0.75
 	max_blade_int = 200
-	max_integrity = 720
+	max_integrity = INTEGRITY_STRONGEST+220
 	possible_item_intents = list(/datum/intent/polearm/cut)
 	gripped_intents = list(/datum/intent/polearm/chop, /datum/intent/whip, /datum/intent/shoot/neant)
 	thrown_bclass = BCLASS_CUT
-	blade_dulling = DULLING_BASHCHOP
-	wdefense = GREAT_PARRY
-	force = 20
-	force_wielded = 25
-	throwforce = 25
+	force = DAMAGE_SPEARPLUS+2
+	force_wielded = DAMAGE_SPEAR_WIELD
+	throwforce = DAMAGE_SPEAR_WIELD
 	minstr = 10
 	sellprice = 550
 
@@ -373,6 +371,7 @@
 	swingsound = BLADEWOOSH_LARGE
 	parrysound = "largeblade"
 	pickup_sound = "brandish_blade"
+	max_integrity = INTEGRITY_STRONGEST+220
 	possible_item_intents = list(/datum/intent/sword/strike, /datum/intent/sword/cut)
 	gripped_intents = list(/datum/intent/sword/strike, /datum/intent/sword/chop, /datum/intent/sword/thrust,  /datum/intent/plex_dash)
 	sellprice = 550

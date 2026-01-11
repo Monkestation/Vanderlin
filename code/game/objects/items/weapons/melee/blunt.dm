@@ -43,37 +43,13 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -6,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 	return ..()
 
-/obj/item/weapon/mace/rungu/iron
-	force = DAMAGE_MACE
-	force_wielded = DAMAGE_MACE_WIELD
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
+/obj/item/weapon/mace/rungu
 	name = "iron rungu"
 	desc = "An iron Lakkarian mace favored by the Shinobi's of Sekket. It is the bane of Zalad slavers."
 	icon_state = "rungu_iron"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
-	equip_sound = "rustle"
-	sharpness = IS_BLUNT
-	wlength = WLENGTH_NORMAL
-	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_HIP
-	associated_skill = /datum/skill/combat/axesmaces
-	melting_material = /datum/material/iron
-	melt_amount = 75
-	parrysound = list('sound/combat/parry/parrygen.ogg')
-	swingsound = BLUNTWOOSH_MED
-	max_integrity = INTEGRITY_STRONG
-	minstr = 7
-	wdefense = AVERAGE_PARRY
-	wbalance = EASY_TO_DODGE
-	sellprice = 20
-	blade_dulling = DULLING_BASHCHOP
-	grid_height = 64
-	grid_width = 32
 
-/obj/item/weapon/mace/rungu/iron/getonmobprop(tag)
+/obj/item/weapon/mace/rungu/getonmobprop(tag)
 	if(tag)
 		switch(tag)
 			if("gen")
@@ -84,13 +60,12 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -6,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 	return ..()
 
-/obj/item/weapon/mace/shishpar/iron
+/obj/item/weapon/mace/shishpar
 	name = "iron shishpar"
 	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
 	force = DAMAGE_MACE+1
 	force_wielded = DAMAGE_MACE_WIELD+2
 	icon_state = "shishpar_iron"
-	wbalance = EASY_TO_DODGE
 	wdefense = GOOD_PARRY
 	sellprice = 35
 
@@ -173,12 +148,10 @@
 	desc = "A simple wooden cane, whittled from wood. Good for supporting your weight."
 	icon = 'icons/roguetown/weapons/32/canes.dmi'
 	icon_state = "simple_cane"
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	sellprice = 5
-	minstr = 5
-	force = DAMAGE_MACE - 4
-	force_wielded = DAMAGE_MACE - 2
+	minstr = 4
+	force = DAMAGE_MACE-4
+	force_wielded = DAMAGE_MACE-2
 	wdefense = MEDIOCRE_PARRY
 
 
@@ -186,12 +159,9 @@
 	name = "fancy cane"
 	desc = "A polished, dark wooden cane, decorated with gold and silver. Often carried by nobility, even those without a limp, simply to flaunt their wealth to the peasantry."
 	icon_state = "noble_cane"
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	sellprice = 200
-	minstr = 5
-	force = DAMAGE_MACE - 3
-	force_wielded = DAMAGE_MACE - 1
+	force = DAMAGE_MACE-3
+	force_wielded = DAMAGE_MACE-1
 
 
 /obj/item/weapon/mace/cane/courtphysician
@@ -199,11 +169,9 @@
 	desc = "A prized cane. Embellished with a golden serpent, representing the Kingsfield university. The pointy end is quite sharp."
 	icon_state = "physician_cane"
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/thrust)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	sellprice = 30
-	minstr = 5
-	force = DAMAGE_MACE - 3
-	force_wielded = DAMAGE_MACE - 1
+	force = DAMAGE_MACE-3
+	force_wielded = DAMAGE_MACE-1
 
 /obj/item/weapon/mace/cane/merchant
 	name = "merchant's cane"
@@ -216,29 +184,24 @@
 	desc = "A primitive cane, crudely carved from a thick tree branch. It still has a leaf on it."
 	icon_state = "natural_cane"
 	sellprice = 3
-	minstr = 4
-	force = DAMAGE_MACE - 5
-	force_wielded = DAMAGE_MACE - 3
+	force = DAMAGE_MACE-5
+	force_wielded = DAMAGE_MACE-3
 
 /obj/item/weapon/mace/cane/bronze
 	name = "bronze cane"
 	desc = "A walking stick made from bronze and copper. The light on the top is entirely contained within, serving no functional purpose."
 	icon_state = "artificer_cane"
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	sellprice = 35
-	minstr = 4
-	force = DAMAGE_MACE - 3
-	force_wielded = DAMAGE_MACE - 1
+	force = DAMAGE_MACE-3
+	force_wielded = DAMAGE_MACE-1
 
 /obj/item/weapon/mace/cane/necran
 	name = "necran rod"
 	desc = "Carved from dark stone, engraved with gold. Often carried by elderly Necrans."
 	icon_state = "necran_cane"
 	sellprice = 40
-	minstr = 4
-	force = DAMAGE_MACE - 3
-	force_wielded = DAMAGE_MACE - 1
+	force = DAMAGE_MACE-3
+	force_wielded = DAMAGE_MACE-1
 
 /obj/item/weapon/mace/cane/Initialize()
 	. = ..()
@@ -331,12 +294,6 @@
 	desc = "A steel Lakkarian mace favored by the Shinobi's of Sekket. It is the bane of Zalad slavers."
 	icon_state = "rungu_steel"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	blade_dulling = DULLING_BASH
-	melting_material = /datum/material/steel
-	melt_amount = 150
-	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 60
-	wdefense = GOOD_PARRY
 
 /obj/item/weapon/mace/steel/shishpar
 	name = "steel shishpar"
@@ -355,7 +312,6 @@
 	name = "spiked mace"
 	icon_state = "spikedmace"
 	max_integrity = 200
-	melting_material = /datum/material/iron
 	melt_amount = 150
 
 //................ Morningstar ............... //
@@ -400,7 +356,6 @@
 	max_integrity = INTEGRITY_POOR-20
 	minstr = 5
 	melting_material = /datum/material/copper
-	melt_amount = 75
 	sellprice = 10
 	wdefense = MEDIOCRE_PARRY
 
@@ -462,7 +417,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflangedmace"
 	resistance_flags = FIRE_PROOF
-	wdefense = 2
+	wdefense = AVERAGE_PARRY
 
 /obj/item/weapon/mace/cudgel/psy/Initialize(mapload)
 	. = ..()
@@ -490,8 +445,8 @@
 	desc = "Crude wood assembled into the shape of a sword, a terrible weapon to be on the receiving end of during a training spat."
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "wsword"
-	force = 5
-	force_wielded = 8
+	force = DAMAGE_CLUB-10
+	force_wielded = DAMAGE_CLUB-7
 	wbalance = DODGE_CHANCE_NORMAL
 	associated_skill = /datum/skill/combat/swords
 	wdefense = ULTMATE_PARRY
@@ -683,14 +638,11 @@
 
 //................ Warhammers ............... //
 /obj/item/weapon/mace/warhammer
-	force = DAMAGE_MACE
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/warhammer/impale)
 	gripped_intents = null
 	name = "iron warhammer"
 	desc = "Made to punch through armor and skull alike."
 	icon_state = "iwarhammer"
-	wbalance = EASY_TO_DODGE
-	melting_material = /datum/material/iron
 	melt_amount = 75
 	blade_dulling = DULLING_BASH
 	wdefense = GOOD_PARRY
@@ -707,7 +659,7 @@
 	return ..()
 
 /obj/item/weapon/mace/warhammer/steel
-	force = 25
+	force = DAMAGE_MACE_WIELD
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/warhammer/impale, /datum/intent/mace/warhammer/stab)
 	name = "steel warhammer"
 	desc = "A fine steel warhammer, makes a satisfying sound when paired with a knight's helm."
@@ -772,9 +724,6 @@
 	name = "bronze elven war club"
 	desc = "A bronze one-handed war club with a sharp end. It's been long favoured by the Elves of Heartfelt, despite its foreign origins."
 	icon_state = "elvenclub_bronze"
-	force = DAMAGE_MACE - 1
-	force_wielded = DAMAGE_MACE_WIELD - 1
-	minstr = 5
 	melting_material = /datum/material/bronze
 	melt_amount = 100
 
@@ -782,8 +731,6 @@
 	name = "regal elven war club"
 	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree. It's commonly wielded by the Fingers of Necra, an organization of shamanist exorcists."
 	icon_state = "regalelvenclub"
-	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/axe/cut)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/axe/cut, /datum/intent/axe/chop)
 	force = DAMAGE_MACE+1
 	force_wielded = DAMAGE_MACE_WIELD
 	blade_dulling = DULLING_BASH
@@ -799,7 +746,7 @@
 
 //................ Silver ............... //
 
-/obj/item/weapon/mace/silver/rungu
+/obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"
 	desc = "A silver mace favored by Lakkarian clerics. The weapon of choice for the monster-slayers of Sakhumeti."
 	icon_state = "rungu_silver"
@@ -811,18 +758,17 @@
 	sellprice = 45
 	wdefense = GOOD_PARRY
 
-/obj/item/weapon/mace/silver/rungu/Initialize(mapload)
+/obj/item/weapon/mace/rungu/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/mace/silver/gada
+/obj/item/weapon/mace/gada
 	name = "regal gada"
 	icon_state = "gada"
 	desc = "A luxurious silver mace of Savannah Elf origin that's been reinforced and embellished with gold. It's considerably heavier compared to other maces."
 	minstr = 8
 	force = DAMAGE_MACE+2
 	wbalance = DODGE_CHANCE_NORMAL
-	wdefense = AVERAGE_PARRY
 	sellprice = 150 // It's silver and gold.
 
 /obj/item/weapon/mace/silver/gada/Initialize(mapload)
@@ -837,14 +783,11 @@
 	desc = "A spiked bronze mace. A weapon thats seen a revival in use amidst the cataclysm in Heartfelt."
 	minstr = 6
 	wbalance = DODGE_CHANCE_NORMAL
-	wdefense = AVERAGE_PARRY
 	sellprice = 25
 
-/obj/item/weapon/mace/shishpar/bronze
+/obj/item/weapon/mace/bronze/shishpar
 	name = "bronze shishpar"
 	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
-	force = DAMAGE_MACE+1
-	force_wielded = DAMAGE_MACE_WIELD+2
 	icon_state = "shishpar_bronze"
 	wbalance = EASY_TO_DODGE
 	wdefense = GOOD_PARRY

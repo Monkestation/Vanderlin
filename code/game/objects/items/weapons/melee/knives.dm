@@ -24,7 +24,7 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	wdefense = MEDIOCRE_PARRY
 	wbalance = HARD_TO_DODGE
-	melting_material = /datum/material/steel
+	melting_material = /datum/material/iron
 	melt_amount = 50
 	sharpness = IS_SHARP
 	sellprice = 30
@@ -124,22 +124,18 @@
 //................ Hunting Knife ............... //
 /obj/item/weapon/knife/hunting
 	force = DAMAGE_DAGGER
-	throwforce = DAMAGE_KNIFE
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
 	name = "hunting knife"
 	desc = "Loyal companion to hunters and poachers, from humble bone to truest steel, disembowel your prey with glee."
 	icon_state = "huntingknife"
 	max_blade_int = 140
-	max_integrity = INTEGRITY_STRONG
-	wdefense = MEDIOCRE_PARRY
-	wbalance = HARD_TO_DODGE
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 6
 
 
 /obj/item/weapon/knife/dagger/navaja
-	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut,  /datum/intent/dagger/thrust)
+	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut)
 	name = "navaja"
 	desc = "A folding Etruscan knife valued by merchants, mercenaries and peasants for its convenience. It possesses a long hilt, allowing for a sizable blade with good reach."
 	force = 5
@@ -176,7 +172,6 @@
 	icon_state = "iscissors"
 	possible_item_intents = list(/datum/intent/dagger/thrust, /datum/intent/dagger/cut, /datum/intent/snip)
 	max_integrity = INTEGRITY_WORST
-	melting_material = /datum/material/iron
 	melt_amount = 75
 
 /datum/intent/snip // The salvaging intent! Used only for the scissors for now!
@@ -230,10 +225,10 @@
 	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
 	melting_material = /datum/material/steel
-	melt_amount = 75
 
 //................ Cleaver ............... //
 /obj/item/weapon/knife/cleaver
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
 	name = "cleaver"
 	desc = "A chef's tool turned armament, cleave off cumbersome flesh with rudimentary ease."
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
@@ -243,33 +238,29 @@
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
-	throwforce = 15
+	throwforce = DAMAGE_KNIFE+5
 	max_integrity = INTEGRITY_POOR
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	wbalance = 0 // Except this one, too huge and used to chop
+	wbalance = DODGE_CHANCE_NORMAL // Except this one, too huge and used to chop
 	dropshrink = 0.9
 
 //................ Hack-Knife ............... //
 /obj/item/weapon/knife/cleaver/combat
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop)
 	name = "hack-knife"
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	force = DAMAGE_KNIFE
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop)
 	icon_state = "combatknife"
-	throwforce = 16
+	throwforce = DAMAGE_KNIFE+6
 	max_integrity = INTEGRITY_STANDARD - 20
-	slot_flags = ITEM_SLOT_HIP
-	w_class = WEIGHT_CLASS_NORMAL
 	melting_material = /datum/material/iron
-	melt_amount = 75
-	wbalance = 1
+	wbalance = MEDIOCRE_PARRY
 	sellprice = 15
 
 /obj/item/weapon/knife/cleaver/combat/getonmobprop(tag)
@@ -287,21 +278,21 @@
 	desc = "A dagger made out of bronze."
 	icon_state = "dagger_bronze"
 	melting_material = /datum/material/bronze
-	melt_amount = 75
+	melt_amount = 50
 	sellprice = 10
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
+	force = DAMAGE_DAGGER
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
 	name = "iron dagger"
 	desc = "Thin, sharp, pointed death."
 	icon_state = "idagger"
 	melting_material = /datum/material/iron
-	melt_amount = 75
+	melt_amount = 50
 	sellprice = 12
 
-/obj/item/weapon/knife/jile/iron
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+/obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
 	desc = "A curved iron dagger of Lakkarian origin. Nobles of Sakhumeti were often buried with these daggers, but this practice has become less common ever since Zizo's ascension."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
@@ -310,15 +301,14 @@
 	sellprice = 12
 	dropshrink = 1.0
 
-/obj/item/weapon/knife/dagger/kukri/iron
+/obj/item/weapon/knife/dagger/kukri
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
 	name = "iron kukri"
 	icon_state = "kukri_iron"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER+1
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
 
-/obj/item/weapon/knife/njora/iron
-
+/obj/item/weapon/knife/dagger/njora
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
 	name = "iron seme"
 	desc = "A broad iron dagger of ancient Lakkarian design. Popular amongst the indigenous jungle elf tribes of the Lakkarian Rainforests."
@@ -333,31 +323,26 @@
 	name = "steel dagger"
 	desc = "A dagger made of refined steel."
 	icon_state = "sdagger"
+	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
-	melt_amount = 75
+	melt_amount = 50
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
 
-/obj/item/weapon/knife/jile/steel
+/obj/item/weapon/knife/dagger/steel/jile
 	name = "steel jile"
 	desc = "A curved steel dagger of Lakkarian origin. Nobles of Sakhumeti were often buried with these daggers, but this practice has become less common ever since Zizo's ascension."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_steel"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
-	melting_material = null
-	wdefense = AVERAGE_PARRY
-	wbalance = VERY_HARD_TO_DODGE
 	sellprice = 20
 	dropshrink = 1.0
 
-/obj/item/weapon/knife/njora/steel
+/obj/item/weapon/knife/dagger/steel/njora
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
 	name = "steel seme"
 	desc = "A broad steel dagger of ancient Lakkarian design. Popular amongst the indigenous jungle elf tribes of the Lakkarian Rainforests."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_steel"
-	melting_material = null
-	wdefense = AVERAGE_PARRY
 	wbalance = HARD_TO_DODGE
 	sellprice = 20
 	dropshrink = 1.0
@@ -366,19 +351,19 @@
 	icon_state = "sdaggeralt"
 	desc = "A dagger of refined steel, and even more refined appearance."
 
-/obj/item/weapon/knife/dagger/kukri/steel
+/obj/item/weapon/knife/dagger/steel/kukri
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
 	name = "steel kukri"
 	icon_state = "kukri_steel"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER+1
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
+	melt_amount = 75
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
 	name ="plaguebringer sickle"
 	desc = "A wicked edge brings feculent delights."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "pestrasickle"
-	max_integrity = INTEGRITY_STRONG
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 
 //................ Fanged dagger ............... //
@@ -387,14 +372,11 @@
 	desc = "A dagger modeled after the fang of an anthrax spider."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderdagger"
-	melting_material = null
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha //this is a placeholder weapon until they actually receive a proper baothan weapon
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
-	melting_material = null
 	color = "#f78ccc"
-	max_integrity = 200
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
@@ -608,8 +590,6 @@
 
 //................ Stone Knife ............... //
 /obj/item/weapon/knife/stone
-	force = DAMAGE_KNIFE
-	throwforce = DAMAGE_KNIFE
 	possible_item_intents = list(/datum/intent/dagger/cut,/datum/intent/dagger/chop)
 	name = "stone knife"
 	desc = "A tool favored by the wood-elves, easy to make, useful for skinning the flesh of beast and man alike."
@@ -649,7 +629,6 @@
 	name = "villager knife"
 	desc = "The loyal companion of simple peasants, able to cut hard bread and carve wood. A versatile kitchen utensil and tool."
 	icon_state = "villagernife"
-	melting_material = /datum/material/iron
 	melt_amount = 25
 
 /obj/item/weapon/knife/copper
@@ -660,7 +639,6 @@
 	max_blade_int = 75
 	max_integrity = INTEGRITY_WORST - 25
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
-	associated_skill = /datum/skill/combat/knives
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	melting_material = /datum/material/copper
 	melt_amount = 50
@@ -672,13 +650,12 @@
 	desc = ""
 	item_state = "bone_dagger"
 	force = DAMAGE_DAGGER
-	throwforce = DAMAGE_DAGGER + 13
+	throwforce = DAMAGE_DAGGER+13
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST - 50
-	wdefense = 1
+	wdefense = MEDIOCRE_PARRY
 	icon_state = "throw_knifei"
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 25, "embedded_fall_chance" = 20)
-	melting_material = /datum/material/iron
 	melt_amount = 50
 	sellprice = 3
 
@@ -686,15 +663,12 @@
 	name = "bronze tossblade"
 	desc = "A tossblade forged from bronze. It's not as reliable compared to other tossblades, but it's much cheaper to make."
 	item_state = "bone_dagger"
-	force = DAMAGE_DAGGER
-	throwforce = DAMAGE_DAGGER + 10
+	throwforce = DAMAGE_DAGGER+10
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST - 30
-	wdefense = 1
 	icon_state = "throwing_bronze"
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 20, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
-	melt_amount = 50
 	sellprice = 2
 
 /obj/item/weapon/knife/throwingknife/steel
@@ -704,9 +678,8 @@
 	item_state = "bone_dagger"
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST
-	wdefense = 1
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 15)
-	melt_amount = 50
+	melting_material = /datum/material/steel
 	sellprice = 4
 
 /obj/item/weapon/knife/throwingknife/psydon
@@ -716,11 +689,10 @@
 	item_state = "bone_dagger"
 	throw_speed = 4
 	max_integrity = INTEGRITY_POOR
-	wdefense = 3
+	wdefense = GOOD_PARRY
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
-	melt_amount = 50
 
 /obj/item/weapon/knife/throwingknife/psydon/Initialize(mapload)
 	. = ..()
@@ -731,11 +703,10 @@
 	desc = "A typical knife used by rous assassins. Quite effective when thrown."
 	icon_state = "rouskunai"
 	throw_speed = 4
-	wdefense = 3
+	wdefense = GOOD_PARRY
 	max_integrity = INTEGRITY_POOR
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 15)
 	sellprice = 5
-	melt_amount = 50
 
 /obj/item/weapon/knife/throwingknife/throwcard
 	name = "Calling Card"
