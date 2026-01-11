@@ -9,7 +9,7 @@
 	// Base stats
 	jobstats = list(
 		STATKEY_STR = 1,
-		STATKEY_END = 3,
+		STATKEY_END = 2,
 		STATKEY_SPD = 1
 	)
 
@@ -46,9 +46,9 @@
 		return
 	switch(choice)
 		if("Spear")
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+			spawned.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 		if("Regal Elven Club")
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 	spawned.merctype = 4
 
 

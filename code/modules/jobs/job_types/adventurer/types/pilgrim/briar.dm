@@ -20,7 +20,7 @@
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/knives = 1,
 		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/magic/holy = 3,
 		/datum/skill/labor/taming = 4,

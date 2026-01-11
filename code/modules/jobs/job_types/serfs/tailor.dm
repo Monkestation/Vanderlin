@@ -23,7 +23,7 @@
 
 	jobstats = list(
 		STATKEY_INT = 2,
-		STATKEY_SPD = 2,
+		STATKEY_SPD = 1,
 		STATKEY_PER = 1,
 		STATKEY_STR = -1
 	)
@@ -32,7 +32,7 @@
 		/datum/skill/misc/sewing = 3,
 		/datum/skill/craft/tanning = 2,
 		/datum/skill/craft/crafting = 3,
-		/datum/skill/combat/knives = 3,
+		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/labor/taming = 3,
 		/datum/skill/misc/medicine = 2,

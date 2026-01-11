@@ -133,7 +133,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 3,
@@ -185,7 +185,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/polearms = 2,
 		/datum/skill/misc/sewing = 3,
@@ -237,7 +237,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 3,
