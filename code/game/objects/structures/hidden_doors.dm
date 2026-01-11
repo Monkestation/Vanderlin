@@ -80,7 +80,8 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 		return
 	if(get_dist(speaker, source) > source.speaking_distance)
 		return
-	if(!is_type_in_list(hearing_args[HEARING_LANGUAGE], source.lang))
+	var/language = hearing_args[HEARING_LANGUAGE]
+	if(!(language in source.lang))
 		return
 
 	var/message2recognize = SANITIZE_HEAR_MESSAGE(hearing_args[HEARING_RAW_MESSAGE])
@@ -88,7 +89,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 		if(source.door_opened)
 			source.force_closed()
 		else
-			source.force_closed()
+			source.force_open()
 		return
 
 	if(length(vips) > 0) // VIP check
@@ -116,7 +117,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 		else
 			say_string = "A poor choice."
 	if(say_string)
-		source.send_speech(span_purple(say_string), source.speaking_distance, source, message_language = hearing_args[HEARING_LANGUAGE], message_mods = list(WHISPER_MODE = MODE_WHISPER))
+		source.send_speech(span_purple(say_string), source.speaking_distance, source, message_language = language, message_mods = list(WHISPER_MODE = MODE_WHISPER))
 
 /proc/open_word()
 	return pick("open", "pass", "part", "break", "reveal", "unbar", "extend", "widen", "unfold", "rise",
@@ -167,6 +168,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 /obj/structure/door/secret/Initialize(mapload, ...)
 	AddElement(/datum/element/update_icon_blocker)
 	. = ..()
+	become_hearing_sensitive()
 
 /obj/structure/door/secret/Destroy(force)
 	lose_hearing_sensitivity()
