@@ -82,7 +82,7 @@
 	icon_state = "volf_silv"
 	dropshrink = 0.7
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 120
+	sellprice = 45
 
 /obj/item/statue/silver/volf/Initialize()
 	. = ..()
@@ -106,7 +106,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "urn_silv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 120
+	sellprice = 50
 
 /obj/item/statue/silver/urn/Initialize()
 	. = ..()
@@ -118,7 +118,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "vase_silv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 60
+	sellprice = 25
 
 /obj/item/statue/silver/vase/Initialize()
 	. = ..()
@@ -130,7 +130,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "fancyvase_silv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 120
+	sellprice = 45
 
 /obj/item/statue/silver/vasefancy/Initialize()
 	. = ..()
@@ -142,7 +142,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "bust_silv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 60
+	sellprice = 30
 
 /obj/item/statue/silver/bust/Initialize()
 	. = ..()
@@ -153,7 +153,7 @@
 	desc = "A figurine made out of silver. Popular among adults as a decoration, popular among children as a toy."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "figurine_silv"
-	sellprice = 30
+	sellprice = 15
 
 /obj/item/statue/silver/figurine/Initialize()
 	. = ..()
@@ -165,7 +165,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "obelisk_silv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 60
+	sellprice = 30
 
 /obj/item/statue/silver/obelisk/Initialize()
 	. = ..()
@@ -176,7 +176,7 @@
 	desc = "A fish figurine made out of silver."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "fish_silv"
-	sellprice = 30
+	sellprice = 15
 
 /obj/item/statue/silver/fish/Initialize()
 	. = ..()
@@ -188,7 +188,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "tablet_silv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 30
+	sellprice = 25
 
 /obj/item/statue/silver/tablet/Initialize()
 	. = ..()
@@ -199,7 +199,7 @@
 	desc = "A cameo made out of silver depicting...someone? Use your imagination for who it could be."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "cameo_silv"
-	sellprice = 30
+	sellprice = 15S
 
 /obj/item/statue/silver/cameo/Initialize()
 	. = ..()
@@ -210,7 +210,7 @@
 	desc = "A silver comb, great for combing your hair or lack thereof."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "combs_silv"
-	sellprice = 30
+	sellprice = 15
 
 /obj/item/statue/silver/comb/Initialize()
 	. = ..()
@@ -222,7 +222,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "elven_silv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 60
+	sellprice = 35
 
 /obj/item/statue/silver/totem/Initialize()
 	. = ..()
@@ -236,7 +236,7 @@
 	icon_state = "volf_gold"
 	dropshrink = 0.7
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 150
+	sellprice = 85
 
 /obj/item/statue/gold/volf/Initialize()
 	. = ..()
@@ -260,7 +260,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "urn_gold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 150
+	sellprice = 100
 
 /obj/item/statue/gold/urn/Initialize()
 	. = ..()
@@ -272,7 +272,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "vase_gold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 100
+	sellprice = 45
 
 /obj/item/statue/gold/vase/Initialize()
 	. = ..()
@@ -284,7 +284,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "fancyvase_gold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 150
+	sellprice = 80
 
 /obj/item/statue/gold/vasefancy/Initialize()
 	. = ..()
@@ -296,7 +296,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "bust_gold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 100
+	sellprice = 60
 
 /obj/item/statue/gold/bust/Initialize()
 	. = ..()
@@ -307,7 +307,7 @@
 	desc = "A figurine made out of gold. Popular among adults as a decoration, popular among children as a toy."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "figurine_gold"
-	sellprice = 50
+	sellprice = 30
 
 /obj/item/statue/gold/figurine/Initialize()
 	. = ..()
@@ -318,7 +318,7 @@
 	desc =  "A cameo made out of gold depicting...someone? Use your imagination for who it could be."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "cameo_gold"
-	sellprice = 50
+	sellprice = 30
 
 /obj/item/statue/gold/cameo/Initialize()
 	. = ..()
@@ -330,7 +330,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "obelisk_gold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 100
+	sellprice = 60
 
 /obj/item/statue/gold/obelisk/Initialize()
 	. = ..()
@@ -342,7 +342,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "tablet_gold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 100
+	sellprice = 45
 
 /obj/item/statue/gold/tablet/Initialize()
 	. = ..()
@@ -353,7 +353,7 @@
 	desc =  "A fish figurine made out of gold."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "fish_gold"
-	sellprice = 50
+	sellprice = 30
 
 /obj/item/statue/gold/fish/Initialize()
 	. = ..()
@@ -365,7 +365,7 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "elven_gold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 100
+	sellprice = 65
 
 /obj/item/statue/gold/totem/Initialize()
 	. = ..()
@@ -376,7 +376,7 @@
 	desc =  "A golden comb, great for combing your hair or lack thereof."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "comb_gold"
-	sellprice = 50
+	sellprice = 30
 
 /obj/item/statue/gold/comb/Initialize()
 	. = ..()
