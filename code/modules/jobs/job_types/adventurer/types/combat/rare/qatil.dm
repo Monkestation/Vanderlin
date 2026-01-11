@@ -21,7 +21,7 @@
 		/datum/skill/combat/swords = 2,
 		/datum/skill/combat/crossbows = 2,
 		/datum/skill/combat/bows = 2,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/climbing = 4,

@@ -18,6 +18,7 @@
 	skills = list(
 		/datum/skill/misc/reading = 4,
 		/datum/skill/magic/arcane = 3,
+		/datum/skill/combat/polearms = 2,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/craft/alchemy = 2,
@@ -26,7 +27,7 @@
 	jobstats = list(
 		STATKEY_STR = -2,
 		STATKEY_INT = 3,
-		STATKEY_CON = -2,
+		STATKEY_CON = -1,
 		STATKEY_END = -1,
 		STATKEY_SPD = -2,
 	)

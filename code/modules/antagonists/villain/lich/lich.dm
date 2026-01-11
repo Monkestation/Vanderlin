@@ -102,8 +102,8 @@
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 	L.faction = list(FACTION_UNDEAD)
-	if(L.charflaw)
-		QDEL_NULL(L.charflaw)
+	if(length(L.quirks))
+		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
 	L.dna.species.species_traits |= NOBLOOD
 	L.grant_undead_eyes()
@@ -228,8 +228,8 @@
 	lich_mob.skeletonize(FALSE)
 
 	lich_mob.faction = list(FACTION_UNDEAD)
-	if(lich_mob.charflaw)
-		QDEL_NULL(lich_mob.charflaw)
+	if(length(lich_mob.quirks))
+		lich_mob.clear_quirks()
 	lich_mob.mob_biotypes |= MOB_UNDEAD
 	lich_mob.grant_undead_eyes()
 	return TRUE

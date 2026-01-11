@@ -164,7 +164,10 @@
 	flash_fullscreen("stressflash")
 	changeNext_move(CLICK_CD_EXHAUSTED)
 	add_stress(/datum/stress_event/freakout)
-	if(stress >= 30)
+	var/heart_value = 30
+	if(HAS_TRAIT(src, TRAIT_WEAK_HEART))
+		heart_value *= 0.5
+	if(stress >= heart_value)
 		heart_attack()
 	else
 		emote("fatigue", forced = TRUE)

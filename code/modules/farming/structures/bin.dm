@@ -64,7 +64,7 @@
 			user.visible_message("<span class='warning'>[user] kicks over [src]!</span>", \
 				"<span class='warning'>I kick over [src]!</span>")
 			kover = TRUE
-			playsound(loc, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
+			playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
 			chem_splash(loc, 2, list(reagents), adminlog = TRUE)
 			var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 			if(STR)

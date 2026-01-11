@@ -217,7 +217,7 @@
 		sound_to_play = pick(sound_to_play)
 
 	if(isfile(sound_to_play))
-		playsound(parent_item.loc, sound_to_play, 50, TRUE)
+		playsound(parent_item, sound_to_play, 50, TRUE)
 
 	// Let's reserve the other hand
 	if(should_block_offhand)
@@ -285,7 +285,7 @@
 
 	// Play sound if set
 	if(unwieldsound)
-		playsound(parent_item.loc, unwieldsound, 50, TRUE)
+		playsound(parent_item, unwieldsound, 50, TRUE)
 
 	// Remove the object in the offhand
 	if(offhand_item)
@@ -301,7 +301,7 @@
 	SIGNAL_HANDLER
 	if(wielded && attacksound)
 		var/obj/item/parent_item = parent
-		playsound(parent_item.loc, attacksound, 50, TRUE)
+		playsound(parent_item, attacksound, 50, TRUE)
 
 /**
  * on_update_icon triggers on call to update parent items icon

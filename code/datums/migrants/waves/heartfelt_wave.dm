@@ -24,7 +24,7 @@
 		/datum/skill/craft/engineering = 2,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/knives = 3,
@@ -283,145 +283,6 @@
 	else
 		r_hand = /obj/item/weapon/mace/goden/steel
 
-/datum/migrant_role/heartfelt_magos
-	name = "Magos of Heartfelt"
-	greet_text = "You are the Magos of Heartfelt, renowned for your arcane knowledge yet unable to foresee the tragedy that befell your home. Drawn by a guiding star to Vanderlin, you seek answers and perhaps a new purpose in the wake of destruction."
-	migrant_job = /datum/job/migrant/heartfelt_magos
-
-/datum/job/migrant/heartfelt_magos
-	title = "Magos of Heartfelt"
-	tutorial = "You are the Magos of Heartfelt, renowned for your arcane knowledge yet unable to foresee the tragedy that befell your home. Drawn by a guiding star to Vanderlin, you seek answers and perhaps a new purpose in the wake of destruction."
-	outfit = /datum/outfit/heartfelt_magos
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
-	allowed_patrons = list(/datum/patron/divine/noc)
-	is_recognized = TRUE
-	exp_types_granted  = list(EXP_TYPE_MAGICK)
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_CON = -1,
-		STATKEY_INT = 4,
-	)
-
-	skills = list(
-		/datum/skill/craft/engineering = 3,
-		/datum/skill/misc/reading = 6,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/magic/arcane = 5,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/combat/polearms = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/medicine = 3,
-	)
-
-	spells = list(
-		/datum/action/cooldown/spell/projectile/fireball/greater,
-		/datum/action/cooldown/spell/projectile/lightning,
-		/datum/action/cooldown/spell/projectile/fetch,
-	)
-
-	traits = list(TRAIT_SEEPRICES)
-	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
-	voicepack_m = /datum/voicepack/male/wizard
-
-/datum/job/migrant/heartfelt_magos/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		var/list/old_stats = list(
-			STATKEY_PER = 1,
-			STATKEY_SPD = -1,
-		)
-		spawned.adjust_stat_modifier_list(STATMOD_JOB, old_stats)
-	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
-
-/datum/outfit/heartfelt_magos
-	name = "Magos of Heartfelt (Migrant Wave)"
-	neck = /obj/item/clothing/neck/talkstone
-	cloak = /obj/item/clothing/cloak/black_cloak
-	armor = /obj/item/clothing/shirt/robe/colored/black
-	pants = /obj/item/clothing/pants/tights/colored/random
-	shoes = /obj/item/clothing/shoes/shortboots
-	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/flashlight/flare/torch/lantern
-	beltr = /obj/item/book/granter/spellbook/expert
-	ring = /obj/item/clothing/ring/gold
-	r_hand = /obj/item/weapon/polearm/woodstaff
-	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/reagent_containers/glass/bottle/poison,
-		/obj/item/reagent_containers/glass/bottle/healthpot,
-	)
-
-/datum/migrant_role/heartfelt_prior
-	name = "Heartfelt Prior"
-	greet_text = "You are a Prior of Heartfelt, a spiritual leader whose faith was tested when your home fell into ruin. Now journeying to Vanderlin, you seek to rebuild not just structures, but the souls of those who follow you."
-	migrant_job = /datum/job/migrant/heartfelt_prior
-
-/datum/job/migrant/heartfelt_prior
-	title = "Heartfelt Prior"
-	tutorial = "You are a Prior of Heartfelt, a spiritual leader whose faith was tested when your home fell into ruin. Now journeying to Vanderlin, you seek to rebuild not just structures, but the souls of those who follow you."
-	outfit = /datum/outfit/heartfelt_prior
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	allowed_patrons = list(/datum/patron/divine/astrata)
-	exp_types_granted  = list(EXP_TYPE_CLERIC)
-
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 3,
-		STATKEY_CON = -1,
-		STATKEY_END = 1,
-		STATKEY_SPD = -1,
-	)
-
-	skills = list(
-		/datum/skill/craft/engineering = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/misc/reading = 6,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/misc/medicine = 4,
-		/datum/skill/magic/holy = 4,
-	)
-
-	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
-
-/datum/job/migrant/heartfelt_prior/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.virginity = TRUE
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-
-	var/holder = spawned.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_priest()
-		devotion.grant_to(spawned)
-
-/datum/outfit/heartfelt_prior
-	name = "Heartfelt Prior (Migrant Wave)"
-	neck = /obj/item/clothing/neck/psycross/silver
-	shirt = /obj/item/clothing/shirt/undershirt/priest
-	pants = /obj/item/clothing/pants/tights/colored/black
-	shoes = /obj/item/clothing/shoes/shortboots
-	belt = /obj/item/storage/belt/leather/rope
-	beltl = /obj/item/flashlight/flare/torch/lantern
-	beltr = /obj/item/storage/belt/pouch/coins/mid
-	armor = /obj/item/clothing/shirt/robe/priest
-	cloak = /obj/item/clothing/cloak/chasuble
-	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/needle/blessed = 1,
-	)
-
 /datum/migrant_role/heartfelt_artificer
 	name = "Supreme Artificer"
 	greet_text = "You are the Supreme Artificer, the foremost expert on anything brass and steam. Your knowledge helped advance your kingdom, before ultimately leading it to ruin..."
@@ -444,8 +305,8 @@
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 1,
 		/datum/skill/labor/lumberjacking = 2,
 		/datum/skill/craft/masonry = 3,
 		/datum/skill/craft/crafting = 4,
@@ -493,7 +354,6 @@
 		/datum/migrant_role/heartfelt_lady = 1,
 		/datum/migrant_role/heartfelt_hand = 1,
 		/datum/migrant_role/heartfelt_knight = 1,
-		/datum/migrant_role/heartfelt_magos = 1,
 		/datum/migrant_role/heartfelt_artificer = 1,
 	)
 	greet_text = "Fleeing disaster, you have come together as a court, united in a final effort to restore the former glory and promise of Heartfelt. Stay close and watch out for each other, for all of your sakes!"

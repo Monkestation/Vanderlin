@@ -164,6 +164,7 @@
 		dat += "</body></html>"
 		user << browse(dat, "window=reading;size=1000x700;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
 		onclose(user, "reading", src)
+		SEND_SIGNAL(user, COMSIG_BOOK_READ)
 	else
 		return "<span class='warning'>You're too far away to read it.</span>"
 
@@ -192,7 +193,7 @@
 			curpage += 2
 		else
 			curpage = 1
-		playsound(loc, 'sound/items/book_page.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/items/book_page.ogg', 100, TRUE, -1)
 		read(usr)
 
 /obj/item/book/attack_hand_secondary(mob/user, params)
@@ -202,11 +203,11 @@
 	if(!open)
 		slot_flags &= ~ITEM_SLOT_HIP
 		open = TRUE
-		playsound(loc, 'sound/items/book_open.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/items/book_open.ogg', 100, FALSE, -1)
 	else
 		slot_flags |= ITEM_SLOT_HIP
 		open = FALSE
-		playsound(loc, 'sound/items/book_close.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/items/book_close.ogg', 100, FALSE, -1)
 	curpage = 1
 	update_appearance(UPDATE_ICON_STATE)
 	user.update_inv_hands()
@@ -918,13 +919,14 @@
 			var/obj/temp = new bounty_type()
 			var/bounty_name = temp.name
 			var/multiplier = faction.bounty_items[bounty_type]
+			var/base_value = SSmerchant.get_item_base_value(bounty_type)
+			var/total_value = round(base_value * multiplier)
 			var/expiration_time = faction.bounty_refresh_times[bounty_type]
 			var/time_remaining = expiration_time - world.time
 			qdel(temp)
-			html += "<li class='bounty-item'>[bounty_name] ([multiplier]x price) - <small>[time_to_text(time_remaining)]</small></li>"
+			html += "<li class='bounty-item'>[bounty_name] ([multiplier]x - [total_value] mammon) - <small>[time_to_text(time_remaining)]</small></li>"
 	else
 		html += "<li>No active bounties</li>"
-
 	html += {"
 						</ul>
 						<p style="font-size: 0.8em; color: [faction.faction_color]; margin-top: 10px;">
@@ -938,7 +940,6 @@
 						<p>Next rotation: <strong>[time_to_text(faction.next_supply_rotation - world.time)]</strong></p>
 						<h3 style="color: [faction.faction_color]; margin: 15px 0 10px 0;">Next Boat Traders:</h3>
 	"}
-
 	// Display trader information
 	if(faction.next_boat_trader_count > 0)
 		html += "<p><strong>[faction.next_boat_trader_count]</strong> traders scheduled</p>"
@@ -949,7 +950,6 @@
 		html += "</ul>"
 	else
 		html += "<p><em>No traders scheduled</em></p>"
-
 	html += {"
 					</div>
 				</div>
@@ -1559,6 +1559,7 @@
 			icon_state = "paperwrite"
 			to_chat(user, "<span class='notice'>You have successfully authored and titled the manuscript.</span>")
 			var/complete = browser_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
+			SEND_SIGNAL(user, COMSIG_BOOK_WRITTEN)
 			if(complete == CHOICE_YES && compiled_pages)
 				written = TRUE
 		else

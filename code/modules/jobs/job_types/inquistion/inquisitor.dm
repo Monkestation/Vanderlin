@@ -236,6 +236,10 @@
 		false_confession_chance = 100 - (STAINT + STAEND) // Low willpower = higher chance to falsely confess
 		false_confession_chance = CLAMP(false_confession_chance, 20, 80) // Between 20-80%
 
+	if(HAS_TRAIT(src, TRAIT_TORTURED))
+		false_confession_chance = 0
+		resist_chance = 0
+
 	if(!prob(resist_chance))
 		var/list/confessions = list()
 		var/datum/antag_type = null

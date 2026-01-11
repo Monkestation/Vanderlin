@@ -37,14 +37,14 @@
 	if(dist_from_caster == 0)
 		if(isliving(victim))
 			var/mob/living/victim_living = victim
-			victim_living.Paralyze(2.5 SECONDS)
+			victim_living.Immobilize(2.5 SECONDS)
 			victim_living.adjustBruteLoss(5)
 			to_chat(victim, span_userdanger("You're slammed into the floor by [caster]!"))
 		return
 
 	if(isliving(victim))
 		var/mob/living/victim_living = victim
-		victim_living.Paralyze(1.5 SECONDS)
+		victim_living.Immobilize(1.5 SECONDS)
 		to_chat(victim, span_userdanger("You're thrown back by [caster]!"))
 
 	// So stuff gets tossed around at the same time.
@@ -57,4 +57,4 @@
 	)
 
 	ADD_TRAIT(victim, TRAIT_RECENTLY_STAGGERED, "howl")
-	addtimer(TRAIT_CALLBACK_REMOVE(victim, TRAIT_RECENTLY_STAGGERED, "howl"), 20 SECONDS)
+	addtimer(TRAIT_CALLBACK_REMOVE(victim, TRAIT_RECENTLY_STAGGERED, "howl"), 2 MINUTES)

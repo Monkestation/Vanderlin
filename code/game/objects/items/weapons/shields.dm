@@ -38,7 +38,7 @@
 		if(!COOLDOWN_FINISHED(src, shield_bang))
 			return
 		user.visible_message("<span class='danger'>[user] bangs [src] with [attackby_item]!</span>")
-		playsound(user.loc, 'sound/combat/shieldbang.ogg', 50, TRUE)
+		playsound(user, 'sound/combat/shieldbang.ogg', 50, TRUE)
 		COOLDOWN_START(src, shield_bang, SHIELD_BANG_COOLDOWN)
 		return
 

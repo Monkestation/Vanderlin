@@ -32,8 +32,8 @@
 	// Occasional roar or stomp when patrolling
 	if(prob(3))
 		boss.visible_message("<span class='warning'>[boss] lets out a deep bellow!</span>")
-		playsound(get_turf(boss), 'sound/misc/explode/explosion.ogg', 30, TRUE)
+		playsound(boss, 'sound/misc/explode/explosion.ogg', 30, TRUE)
 
 	if(prob(5))
 		boss.visible_message("<span class='warning'>[boss] stomps the ground!</span>")
-		playsound(get_turf(boss), 'sound/combat/hits/kick/stomp.ogg', 30, TRUE)
+		playsound(boss, 'sound/combat/hits/kick/stomp.ogg', 30, TRUE)

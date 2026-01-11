@@ -23,7 +23,7 @@
 		/datum/skill/combat/bows = 3,
 		/datum/skill/craft/tanning = 2,
 		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/misc/climbing = 4,

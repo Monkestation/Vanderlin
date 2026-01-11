@@ -13,8 +13,8 @@
 	jobstats = list(
 		STATKEY_STR = 3,
 		STATKEY_PER = 2,
-		STATKEY_INT = 3,
-		STATKEY_CON = 4,
+		STATKEY_INT = 1,
+		STATKEY_CON = 2,
 		STATKEY_END = 3,
 		STATKEY_SPD = -2,
 	)
@@ -24,7 +24,7 @@
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/whipsflails = 4,
 		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 4,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/bows = 3,

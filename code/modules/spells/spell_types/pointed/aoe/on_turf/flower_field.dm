@@ -97,7 +97,7 @@
 			return
 		if (L.m_intent == MOVE_INTENT_SNEAK)
 			return
-		playsound(src.loc, "plantcross", 90, FALSE, -1)
+		playsound(src, "plantcross", 90, FALSE, -1)
 		var/oldx = pixel_x
 		animate(src, pixel_x = oldx + 1, time = 0.5)
 		animate(pixel_x = oldx - 1, time = 0.5)

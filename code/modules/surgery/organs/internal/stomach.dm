@@ -1,3 +1,6 @@
+//The contant in the rate of reagent transfer on life ticks
+#define STOMACH_METABOLISM_CONSTANT 0.5
+
 /obj/item/organ/stomach
 	name = "stomach"
 	icon_state = "stomach"
@@ -16,31 +19,75 @@
 	low_threshold_cleared = "<span class='info'>The last bouts of pain in my stomach have died out.</span>"
 
 	var/disgust_metabolism = 1
+	var/metabolism_efficiency = 0.1 // the lowest we should go is 0.05
+
+/obj/item/organ/stomach/Initialize()
+	. = ..()
+	create_reagents(1000)
+
+
 
 /obj/item/organ/stomach/on_life()
-	var/mob/living/carbon/human/H = owner
-	var/datum/reagent/Nutri
+	. = ..()
 
-	..()
-	if(istype(H))
+	//Manage species digestion
+	if(istype(owner, /mob/living/carbon/human))
+		var/mob/living/carbon/human/humi = owner
 		if(!(organ_flags & ORGAN_FAILING))
-			H.dna.species.handle_digestion(H)
-		handle_disgust(H)
+			humi.dna.species.handle_digestion(humi)
 
+	var/mob/living/carbon/body = owner
+
+	// digest food, sent all reagents that can metabolize to the body
+	for(var/chunk in reagents.reagent_list)
+		var/datum/reagent/bit = chunk
+
+		// If the reagent does not metabolize then it will sit in the stomach
+		// This has an effect on items like plastic causing them to take up space in the stomach
+		if(!(bit.metabolization_rate > 0))
+			continue
+
+		//Ensure that the the minimum is equal to the metabolization_rate of the reagent if it is higher then the STOMACH_METABOLISM_CONSTANT
+		var/amount_min = max(bit.metabolization_rate, STOMACH_METABOLISM_CONSTANT)
+		//Do not transfer over more then we have
+		var/amount_max = bit.volume
+
+
+		// Transfer the amount of reagents based on volume with a min amount of 1u
+		var/amount = min(round(metabolism_efficiency * bit.volume, 0.1) + amount_min, amount_max)
+
+		if(!(amount > 0))
+			continue
+
+		// transfer the reagents over to the body at the rate of the stomach metabolim
+		// this way the body is where all reagents that are processed and react
+		// the stomach manages how fast they are feed in a drip style
+		reagents.trans_id_to(body, bit.type, amount=amount)
+
+	//Handle disgust
+	if(body)
+		handle_disgust(body)
+
+	//If the stomach is not damage exit out
 	if(damage < low_threshold)
 		return
 
-	Nutri = locate(/datum/reagent/consumable/nutriment) in H.reagents.reagent_list
+	//We are checking if we have nutriment in a damaged stomach.
+	var/datum/reagent/nutri = locate(/datum/reagent/consumable/nutriment) in reagents.reagent_list
+	//No nutriment found lets exit out
+	if(!nutri)
+		return
 
-	if(Nutri)
-		if(prob((damage/40) * Nutri.volume * Nutri.volume))
-			H.vomit(damage)
-			to_chat(H, "<span class='warning'>My stomach reels in pain as I'm incapable of holding down all that food!</span>")
+	//The stomach is damage has nutriment but low on theshhold, lo prob of vomit
+	if(prob(damage * 0.025 * nutri.volume * nutri.volume))
+		body.vomit(damage)
+		to_chat(body, "<span class='warning'>Your stomach reels in pain as you're incapable of holding down all that food!</span>")
+		return
 
-	else if(Nutri && damage > high_threshold)
-		if(prob((damage/10) * Nutri.volume * Nutri.volume))
-			H.vomit(damage)
-			to_chat(H, "<span class='warning'>My stomach reels in pain as I'm incapable of holding down all that food!</span>")
+	// the change of vomit is now high
+	if(damage > high_threshold && prob(damage * 0.1 * nutri.volume * nutri.volume))
+		body.vomit(damage)
+		to_chat(body, "<span class='warning'>Your stomach reels in pain as you're incapable of holding down all that food!</span>")
 
 /obj/item/organ/stomach/proc/handle_disgust(mob/living/carbon/human/H)
 	if(H.disgust)
@@ -142,3 +189,6 @@
 	high_threshold_passed = "<span class='warning'>My guts flares up with constant pain.</span>"
 	high_threshold_cleared = "<span class='info'>The pain in my guts die down for now.</span>"
 	low_threshold_cleared = "<span class='info'>The last bouts of pain in my guts have died out.</span>"
+
+
+#undef STOMACH_METABOLISM_CONSTANT

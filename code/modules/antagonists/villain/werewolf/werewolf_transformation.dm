@@ -78,7 +78,7 @@
 	W.limb_destroyer = TRUE
 	W.ambushable = FALSE
 	W.skin_armor = new /obj/item/clothing/armor/regenerating/skin/werewolf_skin(W)
-	playsound(W.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	playsound(W, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	W.spawn_gibs(FALSE)
 	src.forceMove(W)
 
@@ -177,7 +177,7 @@
 	W.rage_datum.rage_decay_rate -= 5
 
 	to_chat(W, span_userdanger("I return to my facade."))
-	playsound(W.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	playsound(W, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	W.spawn_gibs(FALSE)
 	W.Knockdown(30)
 	W.Stun(30)

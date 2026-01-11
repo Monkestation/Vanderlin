@@ -112,6 +112,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_GARGLE_SPEECH		"gargle_speech"
 #define TRAIT_EMOTEMUTE			"emotemute"
 #define TRAIT_DEAF				"deaf"
+#define TRAIT_TREMORS			"tremors"
+#define TRAIT_PARTIAL_DEAF		"partial_deaf"
 #define TRAIT_NEARSIGHT			"nearsighted"
 #define TRAIT_HUSK				"husk"
 #define TRAIT_CHUNKYFINGERS		"chunkyfingers" //means that you can't use weapons with normal trigger guards.
@@ -128,7 +130,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_FAKEDEATH			"fakedeath" //Makes the owner appear as dead to most forms of medical examination
 /// "Magic" trait that blocks the mob from moving or interacting with anything. Used for transient stuff like mob transformations or incorporality in special cases.
 /// Will block movement, `Life()` (!!!), and other stuff based on the mob.
+#define TRAIT_HARDCORE_PROFANE	"hardcore_profane"
 #define TRAIT_NO_TRANSFORM "block_transformations"
+#define TRAIT_TORTURED			"tortured"
+#define TRAIT_WEAK_HEART		"weak_heart"
+#define TRAIT_TAINTED_LUX		"tainted_lux"
+#define TRAIT_QUICK_HANDS		"quick_hands"
 #define TRAIT_STUNIMMUNE		"stun_immunity"
 #define TRAIT_STUNRESISTANCE    "stun_resistance"
 #define TRAIT_SLEEPIMMUNE		"sleep_immunity"
@@ -369,6 +376,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HEAVYARMOR				"Plate Training"
 #define TRAIT_DODGEEXPERT              "Fast Reflexes"
 #define TRAIT_UNDODGING					"Unyielding"
+#define TRAIT_UNPARRYING				"Graceless"
 #define TRAIT_DECEIVING_MEEKNESS 		"Deceiving Meekness"
 #define TRAIT_VILLAIN					"Villain"
 #define TRAIT_CRITICAL_RESISTANCE		"Critical Resistance"

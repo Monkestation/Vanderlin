@@ -19,7 +19,7 @@
 		/datum/skill/misc/climbing = 5,
 		/datum/skill/misc/sewing = 1,
 		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 1,
 	)
 

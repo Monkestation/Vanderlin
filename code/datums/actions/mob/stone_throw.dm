@@ -39,7 +39,7 @@
 		return
 
 	owner.visible_message(span_boldwarning("[owner] chucks a huge stone rock!"))
-	playsound(owner.loc, 'sound/combat/shieldraise.ogg', 100)
+	playsound(owner, 'sound/combat/shieldraise.ogg', 100)
 	var/turf/target_turf = get_turf(target)
 	new /obj/effect/temp_visual/target/orcthrow(target_turf)
 

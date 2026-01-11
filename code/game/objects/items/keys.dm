@@ -1,7 +1,7 @@
 /obj/item/key
 	name = "old key"
 	desc = "A simple key of simple uses."
-	icon_state = "iron"
+	icon_state = "brownkey"
 	icon = 'icons/roguetown/items/keys.dmi'
 	w_class = WEIGHT_CLASS_TINY
 	dropshrink = 0.75

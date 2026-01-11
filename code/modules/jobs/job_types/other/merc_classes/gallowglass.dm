@@ -14,14 +14,15 @@
 
 	jobstats = list(
 		STATKEY_STR = 2,
-		STATKEY_END = 1,
+		STATKEY_END = 2,
+		STATKEY_CON = 2,
 		STATKEY_SPD = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/climbing = 3,
@@ -38,13 +39,13 @@
 	head = /obj/item/clothing/head/helmet/gallowglass
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary/black
-	armor = /obj/item/clothing/armor/chainmail/hauberk/iron
-	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/green
+	armor = /obj/item/clothing/armor/chainmail/iron
+	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/mageblue
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/weapon/mace/cudgel
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
-	pants = /obj/item/clothing/pants/skirt/patkilt/colored/blue
+	pants = /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
 	backl = /obj/item/weapon/sword/long/greatsword/steelclaymore
 	backr = /obj/item/storage/backpack/satchel

@@ -11,7 +11,7 @@
 /datum/action/cooldown/spell/essence/haste/cast(atom/cast_on)
 	. = ..()
 	owner.visible_message(span_notice("[owner] moves with enhanced speed."))
-	//playsound(get_turf(owner), 'sound/magic/whiff.ogg', 50, TRUE)
+	//playsound(owner, 'sound/magic/whiff.ogg', 50, TRUE)
 
 	var/mob/living/L = owner
 	L.apply_status_effect(/datum/status_effect/buff/haste, 10 SECONDS)

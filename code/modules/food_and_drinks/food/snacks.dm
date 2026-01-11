@@ -61,6 +61,7 @@ All foods are distributed among various categories. Use common sense.
 	var/list/bonus_reagents //the amount of reagents (usually nutriment and vitamin) added to crafted/cooked snacks, on top of the ingredients reagents.
 	var/customfoodfilling = 1 // whether it can be used as filling in custom food
 	var/list/tastes  // for example list("crisps" = 2, "salt" = 1)
+	var/naturalist = FALSE
 
 	var/cooking = 0
 	var/cooktime = 25 SECONDS
@@ -394,27 +395,7 @@ All foods are distributed among various categories. Use common sense.
 						qdel(particle_spewer)
 					plate_check.update_appearance(UPDATE_OVERLAYS)
 
-		var/fullness = M.nutrition + 10
-		for(var/datum/reagent/consumable/C in M.reagents.reagent_list) //we add the nutrition value of what we're currently digesting
-			fullness += C.nutriment_factor * C.volume / C.metabolization_rate
-
 		if(M == user)								//If you're eating it myself.
-/*			if(junkiness && M.satiety < -150 && M.nutrition > NUTRITION_LEVEL_STARVING + 50 && !HAS_TRAIT(user, TRAIT_VORACIOUS))
-				to_chat(M, "<span class='warning'>I don't feel like eating any more junk food at the moment!</span>")
-				return FALSE
-			else if(fullness <= 50)
-				user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
-			else if(fullness > 50 && fullness < 150)
-				user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src].</span>", "<span class='notice'>I hungrily [eatverb] \the [src].</span>")
-			else if(fullness > 150 && fullness < 500)
-				user.visible_message("<span class='notice'>[user] [eatverb]s \the [src].</span>", "<span class='notice'>I [eatverb] \the [src].</span>")
-			else if(fullness > 500 && fullness < 600)
-				user.visible_message("<span class='notice'>[user] unwillingly [eatverb]s a bit of \the [src].</span>", "<span class='notice'>I unwillingly [eatverb] a bit of \the [src].</span>")
-			else if(fullness > (600 * (1 + M.overeatduration / 2000)))	// The more you eat - the more you can eat
-				user.visible_message("<span class='warning'>[user] cannot force any more of \the [src] to go down [user.p_their()] throat!</span>", "<span class='warning'>I cannot force any more of \the [src] to go down your throat!</span>")
-				return FALSE
-			if(HAS_TRAIT(M, TRAIT_VORACIOUS))
-				M.changeNext_move(CLICK_CD_MELEE * 0.5)*/
 			switch(M.nutrition)
 				if(NUTRITION_LEVEL_FAT to INFINITY)
 					user.visible_message("<span class='notice'>[user] forces [M.p_them()]self to eat \the [src].</span>", "<span class='notice'>I force myself to eat \the [src].</span>")
@@ -423,17 +404,8 @@ All foods are distributed among various categories. Use common sense.
 				if(0 to NUTRITION_LEVEL_STARVING)
 					user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
 					M.changeNext_move(CLICK_CD_MELEE * 0.5)
-/*			if(M.energy <= 50)
-				user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
-			else if(M.energy > 50 && M.energy < 500)
-				user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src].</span>", "<span class='notice'>I hungrily [eatverb] \the [src].</span>")
-			else if(M.energy > 500 && M.energy < 1000)
-				user.visible_message("<span class='notice'>[user] [eatverb]s \the [src].</span>", "<span class='notice'>I [eatverb] \the [src].</span>")
-			if(HAS_TRAIT(M, TRAIT_VORACIOUS))
-			M.changeNext_move(CLICK_CD_MELEE * 0.5) nom nom nom*/
 		else
 			if(!isbrain(M))		//If you're feeding it to someone else.
-//				if(fullness <= (600 * (1 + M.overeatduration / 1000)))
 				if(M.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
 					M.visible_message("<span class='warning'>[user] cannot force any more of [src] down [M]'s throat!</span>", \
 										"<span class='warning'>[user] cannot force any more of [src] down your throat!</span>")
@@ -451,7 +423,6 @@ All foods are distributed among various categories. Use common sense.
 				if(!do_after(user, 3 SECONDS, M))
 					return
 				log_combat(user, M, "fed", reagents.log_list())
-//				M.visible_message("<span class='danger'>[user] forces [M] to eat [src]!</span>", "<span class='danger'>[user] forces you to eat [src]!</span>")
 			else
 				to_chat(user, "<span class='warning'>[M] doesn't seem to have a mouth!</span>")
 				return
@@ -459,7 +430,7 @@ All foods are distributed among various categories. Use common sense.
 		if(reagents)								//Handle ingestion of the reagent.
 			if(M.satiety > -200)
 				M.satiety -= junkiness
-			playsound(M.loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+			playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
 			if(reagents.total_volume)
 				SEND_SIGNAL(src, COMSIG_FOOD_EATEN, M, user)
 				SEND_SIGNAL(M, COMSIG_MOB_FOOD_EAT, src)
@@ -467,14 +438,21 @@ All foods are distributed among various categories. Use common sense.
 				var/amt2take = reagents.total_volume / (bitesize - bitecount)
 				if((bitecount >= bitesize) || (bitesize == 1))
 					amt2take = reagents.total_volume
+
 				reagents.trans_to(M, amt2take, transfered_by = user, method = INGEST)
+
+				if(M.has_quirk(/datum/quirk/boon/naturalist) && naturalist)
+					for(var/datum/reagent/R in reagents.reagent_list)
+						var/bonus_amount = (R.volume / reagents.total_volume) * amt2take * 0.5
+						M.reagents.add_reagent(R.type, bonus_amount)
+
 				bitecount++
 				on_consume(M)
 				checkLiked(fraction, M)
 				if(bitecount >= bitesize && !QDELETED(src))
 					qdel(src)
 				return TRUE
-		playsound(M.loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+		playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		qdel(src)
 		return FALSE
 	else if(isanimal(M))
@@ -536,9 +514,9 @@ All foods are distributed among various categories. Use common sense.
 		return FALSE
 
 	if(slice_sound)
-		playsound(get_turf(user), 'sound/foley/slicing.ogg', 60, TRUE, -1) // added some choppy sound
+		playsound(user, 'sound/foley/slicing.ogg', 60, TRUE, -1) // added some choppy sound
 	if(chopping_sound)
-		playsound(get_turf(user), 'sound/foley/chopping_block.ogg', 60, TRUE, -1) // added some choppy sound
+		playsound(user, 'sound/foley/chopping_block.ogg', 60, TRUE, -1) // added some choppy sound
 	if(slice_batch)
 		if(!do_after(user, 3 SECONDS, src))
 			return FALSE
@@ -627,7 +605,7 @@ All foods are distributed among various categories. Use common sense.
 				M.emote("me", 1, "nibbles away at \the [src]")
 			bitecount++
 			SEND_SIGNAL(L, COMSIG_MOB_FEED, src, 30)
-			playsound(L.loc, 'sound/misc/eat.ogg', 25, TRUE)
+			playsound(L, 'sound/misc/eat.ogg', 25, TRUE)
 			L.taste(reagents) // why should carbons get all the fun?
 			if(bitecount >= 5)
 				var/sattisfaction_text = pick("burps from enjoyment", "meows for more", "looks at the area where \the [src] was")

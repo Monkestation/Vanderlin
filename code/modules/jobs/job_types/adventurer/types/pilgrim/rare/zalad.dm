@@ -22,7 +22,7 @@
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/craft/cooking = 2,
 		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
