@@ -1412,6 +1412,9 @@
 /mob/living/proc/get_positioning_modifier(mob/living/target)
 	var/modifier = 1.0
 
+	if(src == target)
+		return modifier
+
 	// Check relative positions
 	var/their_dir = target.dir
 	var/approach_dir = get_dir(src, target)
