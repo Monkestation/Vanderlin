@@ -827,7 +827,8 @@
 
 	copy_bodyparts(target)
 
-	target.dna.transfer_identity(src, TRUE)
+	target.dna.transfer_identity(src)
+	reset_limb_fingerprints()
 
 	updateappearance(mutcolor_update = TRUE)
 

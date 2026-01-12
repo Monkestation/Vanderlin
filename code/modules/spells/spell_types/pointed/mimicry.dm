@@ -69,7 +69,7 @@
 	)
 	if(!do_after(user, 10 SECONDS, user))
 		return
-	cast_on.dna.transfer_identity(user, FALSE) // don't take prints
+	cast_on.dna.transfer_identity(user) // don't take prints
 	user.updateappearance(mutcolor_update = TRUE)
 	user.real_name = cast_on.dna.real_name
 	user.name = cast_on.get_visible_name()
@@ -122,7 +122,7 @@
 		return
 	var/datum/dna/old_dna = old_dna_ref.resolve()
 	if(old_dna)
-		old_dna.transfer_identity(user, FALSE)
+		old_dna.transfer_identity(user)
 		user.real_name = old_dna.real_name
 	user.name = user.get_visible_name()
 	user.gender = old_gender

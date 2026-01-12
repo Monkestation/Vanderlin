@@ -37,7 +37,8 @@
 		O.real_name = "monkey ([copytext(md5(real_name), 2, 6)])"
 
 	//handle DNA and other attributes
-	dna.transfer_identity(O, TRUE)
+	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(icon_update=0)
 
 	if(suiciding)
@@ -164,7 +165,8 @@
 			continue
 		O.equip_to_appropriate_slot(C)
 
-	dna.transfer_identity(O, TRUE)
+	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(mutcolor_update=1)
 
 	if(cmptext("monkey",copytext(O.dna.real_name,1,7)))
