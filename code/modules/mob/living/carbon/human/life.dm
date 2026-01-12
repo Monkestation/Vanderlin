@@ -23,12 +23,12 @@
 
 /mob/living/carbon/human/Life()
 //	set invisibility = 0
+	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE)
+
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
 	. = ..()
-
-	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE)
 
 	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
 		adjust_bloodpool(3)

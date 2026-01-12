@@ -7,6 +7,7 @@
 	charge_required = FALSE
 	cooldown_time = 45 SECONDS
 	spell_cost = 30
+	self_cast_possible = FALSE
 	var/target_range = 6
 
 /datum/action/cooldown/spell/lunge/can_cast_spell(feedback)
@@ -27,16 +28,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-
-	if(isliving(target_atom))
-		var/mob/living/turf_target = target_atom
-		if(!isturf(turf_target.loc))
-			return FALSE
-		var/mob/living/user = owner
-		if(user.body_position == LYING_DOWN || HAS_TRAIT(owner, TRAIT_IMMOBILIZED))
-			return FALSE
-		return TRUE
-
+	return isliving(target_atom)
 
 /datum/action/cooldown/spell/lunge/cast(atom/target_atom)
 	. = ..()

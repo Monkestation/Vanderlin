@@ -128,7 +128,7 @@
 		return zombie
 	if(mind.has_antag_datum(/datum/antagonist/vampire))
 		return
-	if(mind.has_antag_datum(/datum/antagonist/werewolf))
+	if(IS_WEREWOLF(src))
 		return
 	if(mind.has_antag_datum(/datum/antagonist/skeleton))
 		return

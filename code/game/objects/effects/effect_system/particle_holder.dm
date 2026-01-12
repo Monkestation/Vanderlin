@@ -11,10 +11,11 @@
 	/// Holds info about how this particle emitter works
 	/// See \code\__DEFINES\particles.dm
 	var/particle_flags = NONE
-
+	var/qdel_timer
+	/// We need reference to parent due to particles now existing in nullspace
 	var/atom/parent
 
-/obj/effect/abstract/particle_holder/Initialize(mapload, particle_path = /particles/fog, particle_flags = NONE)
+/obj/effect/abstract/particle_holder/Initialize(mapload, particle_path = /particles/fog, particle_flags = NONE, time)
 	. = ..()
 	if(!loc)
 		stack_trace("particle holder was created with no loc!")
@@ -34,6 +35,10 @@
 
 	if(particle_flags & PARTICLE_ATTACH_MOB)
 		RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_move))
+
+	if(time > 0)
+		qdel_timer = QDEL_IN_STOPPABLE(src, time)
+
 	on_move(parent, null, NORTH)
 
 /obj/effect/abstract/particle_holder/proc/get_particle_effect(particle_path)
@@ -44,6 +49,7 @@
 	lie_about_areas.vis_contents -= src
 	QDEL_NULL(particles)
 	parent = null
+	deltimer(qdel_timer)
 	return ..()
 
 /// Non movables don't delete contents on destroy, so we gotta do this

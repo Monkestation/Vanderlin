@@ -20,8 +20,6 @@
 	spell_flags = SPELL_RITUOS
 	aoe_radius = 3
 	ignore_openspace = TRUE
-	staggered = TRUE
-	stagger_delay = 0.5 SECONDS
 
 	var/obj/structure/flora/field/flowers
 

@@ -14,7 +14,7 @@
 	var/already_restored = FALSE
 	/// Do we keep the caster's skill levels and experience for the mob?
 	var/keep_skills = TRUE
-	var/datum/skill_holder/stored_skills
+	var/datum/skill_holder/stored_skill_holder
 
 /datum/status_effect/shapechange_mob/on_creation(mob/living/new_owner, mob/living/caster, keep_skills = TRUE)
 	// If any type or subtype of shapeshift mob is on the new_owner already throw an error and self-delete
@@ -36,11 +36,15 @@
 /datum/status_effect/shapechange_mob/on_apply()
 	. = ..()
 	owner.gender = caster_mob.gender
+	if(!keep_skills)
+		stored_skill_holder = caster_mob.ensure_skills()
+		stored_skill_holder.current = null
+		caster_mob.skills = null
 	owner.regenerate_icons()
 	caster_mob.mind?.transfer_to(owner)
 	caster_mob.forceMove(owner)
 	ADD_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
-	owner.flags_1 |= PREVENT_CONTENTS_EXPLOSION_1
+	ADD_TRAIT(caster_mob, TRAIT_BOMBIMMUNE, id)
 	caster_mob.apply_status_effect(/datum/status_effect/grouped/stasis, STASIS_SHAPECHANGE_EFFECT)
 
 	RegisterSignal(owner, COMSIG_LIVING_PRE_WABBAJACKED, PROC_REF(on_pre_wabbajack))
@@ -48,12 +52,6 @@
 	RegisterSignal(owner, COMSIG_LIVING_DEATH, PROC_REF(on_shape_death))
 	RegisterSignal(caster_mob, COMSIG_LIVING_DEATH, PROC_REF(on_caster_death))
 	RegisterSignal(caster_mob, COMSIG_PARENT_QDELETING, PROC_REF(on_caster_deleted))
-
-	if(!keep_skills)
-		stored_skills = owner.ensure_skills()
-		stored_skills.current = null
-		owner.skills = null
-		owner.ensure_skills() // reset owner's skill holder
 
 	SEND_SIGNAL(caster_mob, COMSIG_LIVING_SHAPESHIFTED, owner)
 	return TRUE
@@ -103,12 +101,13 @@
 
 	caster_mob.forceMove(owner.loc)
 	REMOVE_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
+	REMOVE_TRAIT(caster_mob, TRAIT_BOMBIMMUNE, id)
 	caster_mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_SHAPECHANGE_EFFECT)
 	owner.mind?.transfer_to(caster_mob)
 
 	if(!keep_skills)
-		stored_skills.set_current(caster_mob)
-		stored_skills = null
+		stored_skill_holder.set_current(caster_mob)
+		stored_skill_holder = null
 
 	if(kill_caster_after)
 		caster_mob.death()
@@ -273,3 +272,9 @@
 
 	restore_caster(TRUE)
 
+/datum/status_effect/shapechange_mob/die_with_form/werewolf
+	id = "werewolf_shapeshift_die_with_form"
+
+/datum/status_effect/shapechange_mob/die_with_form/werewolf/after_unchange()
+	owner.emote("rage", forced = TRUE)
+	. = ..()

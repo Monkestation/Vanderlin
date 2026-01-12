@@ -138,3 +138,21 @@
 	gravity = list(1, 1)
 	color = COLOR_WHITE
 	transform = list(1,0,0,0, 0,1,0,0, 0,0,1,1/5, 0,0,0,1)
+
+// PARTICLE PORTED FROM LC13, BY @TaculoTaculo
+/particles/particle_song
+	name = "song"
+	icon = 'icons/effects/particles/song.dmi'
+	icon_state = list("song_small" = 1,"song_medium" = 1,"song_large" = 1)
+	width = 128
+	height = 128
+	count = 30
+	spawning = 2
+	lifespan = 12
+	fadein = 6
+	fade = 6
+	velocity = generator("circle", -5, 5, NORMAL_RAND)
+	rotation = generator("num", -120, 120)
+	spin = generator("num", -20, 20)
+	grow = list(0.2,0.2)
+	friction = 0.6

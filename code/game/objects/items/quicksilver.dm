@@ -113,7 +113,6 @@
 		if(Were.transformed == TRUE)
 			var/mob/living/carbon/human/I = M.stored_mob
 			to_chat(M, span_userdanger("THE FOUL SILVER! MY BODY RENDS ITSELF ASUNDER!"))
-			//M.werewolf_untransform()
 			Were.on_removal()
 			ADD_TRAIT(I, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 			I.emote("agony", forced = TRUE)

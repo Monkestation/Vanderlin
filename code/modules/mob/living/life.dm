@@ -1,6 +1,11 @@
 /mob/living/proc/Life(seconds, times_fired)
 	set waitfor = FALSE
 
+	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds, times_fired)
+
+	if(signal_result & COMPONENT_LIVING_CANCEL_LIFE_PROCESSING) // mmm less work
+		return
+
 	if (client)
 		var/turf/T = get_turf(src)
 		if(!T)
@@ -47,14 +52,6 @@
 			if(blood_volume > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in get_wounds())
 					wound.heal_wound(wound.passive_healing * 0.25)
-
-		if(!stat && HAS_TRAIT(src, TRAIT_LYCANRESILENCE) && !HAS_TRAIT(src, TRAIT_PARALYSIS))
-			var/mob/living/carbon/human/human = src
-			if(human.rage_datum.check_rage(50))
-				handle_wounds()
-				if(blood_volume > BLOOD_VOLUME_SURVIVE)
-					for(var/datum/wound/wound as anything in get_wounds())
-						wound.heal_wound(1.2)
 
 		if (QDELETED(src)) // diseases can qdel the mob via transformations
 			return
