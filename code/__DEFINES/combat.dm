@@ -136,30 +136,40 @@
 #define SWORD_CHOP		 /datum/intent/sword/chop //2h swords only
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
 
-#define ELFSWORD_CUT		/datum/intent/sword/cut/elf
-#define ELFSWORD_THRUST		/datum/intent/sword/thrust/elf
-
 #define AXE_CUT				/datum/intent/axe/cut
+#define AXE_THRUST			/datum/intent/axe/thrust
 #define AXE_CHOP			/datum/intent/axe/chop
+#define AXE_GRTCHOP			/datum/intent/axe/chop/great
+#define GREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe
+#define DBLGREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe/doublehead
+#define GREATAXE_CHOP		/datum/intent/axe/chop/battle/greataxe
+#define DBLGREATAXE_CHOP	/datum/intent/axe/chop/battle/greataxe/doublehead
 
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
-#define POLEARM_BASH			/datum/intent/polearm/bash
+#define SPEAR_BASHRNG		/datum/intent/spear/bash/ranged
+#define POLEARM_BASH		/datum/intent/polearm/bash
+#define POLEARM_CHOP		/datum/intent/polearm/chop
 #define SPEAR_CUT			/datum/intent/polearm/cut
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
+#define SCYTHE_CHOP			/datum/intent/axe/chop/scythe
+#define SCYTHE_CUT			/datum/intent/spear/cut/bardiche/scythe
 
 #define MESSER_CHOP			/datum/intent/sword/chop/messer
-
-#define OHAXE_STRIKE		/datum/intent/axe/cut/dwarf
-#define OHAXE_THRUST		/datum/intent/axe/thrust/dwarf
-#define OHAXE_SMASH			/datum/intent/axe/smash/dwarf
-#define OHAXE_CHOP			/datum/intent/axe/chop/dwarf
 
 #define BIGSWORD_CHOP		/datum/intent/sword/chop/bigsword
 #define BIGSWORD_CUT		/datum/intent/sword/cut/bigsword
 
 #define MACE_SMASH			/datum/intent/mace/smash
+#define MACE_HVYSMASH		/datum/intent/mace/smash/heavy
+#define MACE_WOODSMASH		/datum/intent/mace/smash/wood
 #define MACE_STRIKE			/datum/intent/mace/strike
+#define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
+#define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
+#define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
+
+#define WARHM_THRUST		/datum/intent/mace/warhammer/stab
+#define WARHM_IMPALE		/datum/intent/mace/warhammer/impale
 
 #define DAGGER_CUT			/datum/intent/dagger/cut
 #define DAGGER_THRUST		/datum/intent/dagger/thrust

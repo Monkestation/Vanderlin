@@ -7,8 +7,8 @@
 	parrysound = "parrywood"
 	swingsound = BLADEWOOSH_MED
 	associated_skill = /datum/skill/combat/axesmaces
-	possible_item_intents = list(/datum/intent/axe/cut)
-	gripped_intents = list(/datum/intent/axe/chop)
+	possible_item_intents = list(AXE_CUT)
+	gripped_intents = list(AXE_CHOP)
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	wlength = WLENGTH_NORMAL
@@ -165,7 +165,7 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	wdefense = AVERAGE_PARRY
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONG
 	minstr = 10 //meant to be a orc weapon or barbarian weapon
@@ -196,8 +196,8 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 6
@@ -256,8 +256,8 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 6
@@ -289,8 +289,8 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 6
@@ -329,8 +329,8 @@
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/pick)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	possible_item_intents = list(AXE_CUT, /datum/intent/pick)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 6
@@ -356,8 +356,8 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = AVERAGE_PARRY
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 6
@@ -462,8 +462,8 @@
 	force_wielded =	DAMAGE_AXE_WIELD-3
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 100
 	minstr = 8
 
@@ -493,8 +493,8 @@
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_GREAT
 	slowdown = 1
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/spear/bash) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe,  /datum/intent/spear/bash)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
+	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP,  POLEARM_BASH)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 11
@@ -532,8 +532,8 @@
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverpolearm"
 	force = DAMAGE_AXE-5
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/mace/strike) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
-	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe, /datum/intent/mace/strike) //Axe-equivalent to the Godendag or Grand Mace.
+	possible_item_intents = list(AXE_CUT, AXE_CHOP, MACE_STRIKE) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
+	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP, MACE_STRIKE) //Axe-equivalent to the Godendag or Grand Mace.
 	max_blade_int = 350
 	minstr = 12
 	melting_material = /datum/material/silver
@@ -558,8 +558,8 @@
 	desc = "A steel great axe with a wicked double-bladed head. Perfect for cutting either men or trees into stumps."
 	icon_state = "doublegreataxe"
 	wbalance = VERY_EASY_TO_DODGE
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/spear/bash) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe/doublehead, /datum/intent/axe/chop/battle/greataxe/doublehead,  /datum/intent/spear/bash)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
+	gripped_intents = list(DBLGREATAXE_CUT, DBLGREATAXE_CHOP,  POLEARM_BASH)
 	max_blade_int = 400
 	minstr = 12
 
@@ -571,7 +571,7 @@
 	desc = "A greataxe who's edge thrums with the motive force, violence, oh, sweet violence!"
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "graggargaxe"
-	alt_intents = list(/datum/intent/axe/cut,/datum/intent/sword/chop)
+	alt_intents = list(AXE_CUT, AXE_CHOP)
 	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
 	blade_dulling = DULLING_BASHCHOP
 	sellprice = 0 // Graggarite axe, nobody wants this

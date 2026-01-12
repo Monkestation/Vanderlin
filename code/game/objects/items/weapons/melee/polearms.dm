@@ -75,16 +75,6 @@
 	misscost = 5
 	item_damage_type = "blunt"
 
-/*-------------\
-| Swing intent |
-\-------------*/
-/datum/intent/polearm/bash/swing//AYAYAYAYA BONK BONK BONK
-	name = "swing"
-	attack_verb = list("bashes", "strikes", "swings")
-	reach = 2
-	chargetime = 1
-	item_damage_type = "slash"
-
 /*-----------\
 | Cut intent |
 \-----------*/
@@ -133,7 +123,7 @@
 	wdefense = ULTMATE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
-	gripped_intents = list(POLEARM_BASH,/datum/intent/mace/smash/wood)
+	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
 
@@ -166,7 +156,7 @@
 	name = "iron quarterstaff"
 	desc = "A perfect tool for bounty hunters who prefer their prisoners broken and bruised but not slain. This reinforced staff is capable of clubbing even an armed opponent into submission with some carefully placed strikes."
 	icon_state = "quarterstaff_iron"
-	gripped_intents = list(POLEARM_BASH,/datum/intent/mace/smash)
+	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 7
 
@@ -175,7 +165,7 @@
 	desc = "An unusual sight, a knightly combat staff made out of worked steel and reinforced wood. It is a heavy and powerful weapon, more than capable of beating the living daylights out of any brigand."
 	icon_state = "quarterstaff_steel"
 	force_wielded =  DAMAGE_STAFF_WIELD+1
-	gripped_intents = list(POLEARM_BASH,/datum/intent/mace/smash)
+	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 7
 
@@ -283,7 +273,7 @@
 	wdefense = ULTMATE_PARRY
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, /datum/intent/polearm/chop, POLEARM_BASH)
+	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STRONG
 	resistance_flags = FIRE_PROOF
@@ -370,7 +360,7 @@
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, /datum/intent/polearm/chop, POLEARM_BASH)
+	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 
@@ -401,7 +391,7 @@
 	icon_state = "woodcutter"
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop/great)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP)
 	minstr = 8
 
 	bigboy = TRUE
@@ -437,7 +427,7 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = GOOD_PARRY
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop/great, /datum/intent/axe/thrust, /datum/intent/pick)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST, /datum/intent/pick)
 	minstr = 10
 
 	bigboy = TRUE
@@ -507,8 +497,8 @@
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_EASY_TO_DODGE
-	possible_item_intents = list(/datum/intent/axe/cut)
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop/great, /datum/intent/axe/thrust)
+	possible_item_intents = list(AXE_CUT)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 11
@@ -530,7 +520,7 @@
 	desc = "Summer's verdancy runs through the head of this scythe. All the more to sow."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "dendorscythe"
-	gripped_intents = list(POLEARM_THRUST, /datum/intent/spear/cut/bardiche/scythe, /datum/intent/axe/chop/scythe, POLEARM_BASH)
+	gripped_intents = list(POLEARM_THRUST, SCYTHE_CUT, SCYTHE_CHOP, POLEARM_BASH)
 
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak
@@ -541,8 +531,8 @@
 	force_wielded = DAMAGE_SPEAR_WIELD
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
-	possible_item_intents = list(POLEARM_BASH, /datum/intent/polearm/chop) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(POLEARM_BASH, POLEARM_THRUST, /datum/intent/mace/smash/heavy, /datum/intent/mace/warhammer/impale)
+	possible_item_intents = list(POLEARM_BASH, POLEARM_CHOP) //bash is for nonlethal takedowns, only targets limbs
+	gripped_intents = list(POLEARM_BASH, POLEARM_THRUST, MACE_HVYSMASH, WARHM_IMPALE)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 11
