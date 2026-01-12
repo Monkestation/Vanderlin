@@ -219,7 +219,6 @@
 	force = DAMAGE_HAMMER+5
 	force_wielded = DAMAGE_HAMMER_WIELD+10
 	max_integrity = INTEGRITY_STRONGEST
-	melt_amount = 50
 	melting_material = /datum/material/steel
 	time_multiplier = 1.5 //it's for crushing skulls not nails
 

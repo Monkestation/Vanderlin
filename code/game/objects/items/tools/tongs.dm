@@ -4,7 +4,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "tongs"
 	force = DAMAGE_CLUB/3
-	possible_item_intents = list(/datum/intent/mace/strike)
+	possible_item_intents = list(MACE_STRIKE)
 	sharpness = IS_BLUNT
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP

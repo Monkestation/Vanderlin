@@ -195,6 +195,7 @@
 #define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
 #define MACE_THRUST			/datum/intent/mace/thrust
+#define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
 
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
 #define WARHM_IMPALE		/datum/intent/mace/warhammer/impale
@@ -236,6 +237,8 @@
 #define TILL_INTENT			/datum/intent/till
 #define PICK_INTENT			/datum/intent/pick
 #define FLAIL_THRESH		/datum/intent/flailthresh
+#define SHOVEL_IRRIGATE		/datum/intent/irrigate
+#define SHOVEL_SCOOP		/datum/intent/shovelscoop
 
 #define ROD_CAST			/datum/intent/cast
 #define ROD_AUTO			/datum/intent/auto

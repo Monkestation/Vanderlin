@@ -22,6 +22,11 @@
 	icon_state = "instrike"
 	misscost = 12
 
+/datum/intent/mace/strike/shovel
+	hitsound = list('sound/combat/hits/blunt/shovel_hit.ogg', 'sound/combat/hits/blunt/shovel_hit2.ogg', 'sound/combat/hits/blunt/shovel_hit3.ogg')
+	penfactor = 10
+	icon_state = "instrike"
+
 // MACE SMASH INTENTS //
 /datum/intent/mace/smash
 	name = "smash"

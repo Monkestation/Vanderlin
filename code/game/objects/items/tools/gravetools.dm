@@ -12,8 +12,8 @@
 	force_wielded = DAMAGE_STAFF_WIELD-3
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG
-	possible_item_intents = list(/datum/intent/mace/strike/shovel)
-	gripped_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel, /datum/intent/axe/chop)
+	possible_item_intents = list(SHOVEL_STRIKE)
+	gripped_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE, AXE_CHOP)
 
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
@@ -63,18 +63,6 @@
 /obj/item/weapon/shovel/update_icon_state()
 	. = ..()
 	icon_state = "[heldclod ? "dirt" : ""][initial(icon_state)]"
-
-/datum/intent/mace/strike/shovel
-	name = "strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("strikes", "hits")
-	hitsound = list('sound/combat/hits/blunt/shovel_hit.ogg', 'sound/combat/hits/blunt/shovel_hit2.ogg', 'sound/combat/hits/blunt/shovel_hit3.ogg')
-	chargetime = 0
-	penfactor = 10
-	swingdelay = 0
-	icon_state = "instrike"
-	misscost = 5
-	item_damage_type = "blunt"
 
 /datum/intent/shovelscoop
 	name = "scoop"
@@ -229,7 +217,7 @@
 	force_wielded = DAMAGE_STAFF_WIELD-10
 	wdefense = BAD_PARRY
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel)
+	possible_item_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE)
 	max_blade_int = 0
 
 	dropshrink = 1
