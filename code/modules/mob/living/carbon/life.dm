@@ -68,32 +68,20 @@
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	if(HAS_TRAIT(src, TRAIT_NOPAIN))
 		return
+
+	// Pain tolerance system - builds up to prevent infinite stunning
+	// High endurance characters build tolerance faster and lose it slower
+	var/tolerance_gain_rate = 1 + (STAEND * 0.25) // More endurance = faster adaptation
+	var/tolerance_decay_rate = max(1, 3 - (STAEND * 0.1)) // More endurance = slower decay
+
+	if(world.time - last_major_pain_time < 30 SECONDS)
+		pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (STAEND * 1)) // Higher max tolerance with endurance
+	else
+		pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
+
 	if(stat < UNCONSCIOUS)
-		// Calculate current shock level
 		var/current_shock = calculate_shock_stage()
-		var/raw_pain = get_complex_pain()
-
-		// Shock reduces pain perception (adrenaline effect)
-		if(current_shock >= 60)
-			var/shock_reduction = min(0.3, current_shock * 0.001) // Max 30% reduction
-			raw_pain *= (1.0 - shock_reduction)
-
-		// Base pain calculation - endurance affects how much pain you feel from damage
-		var/painpercent = raw_pain / (STAEND * 13)
-		painpercent = painpercent * 100
-
-		// Pain tolerance system - builds up to prevent infinite stunning
-		// High endurance characters build tolerance faster and lose it slower
-		var/tolerance_gain_rate = 1 + (STAEND * 0.25) // More endurance = faster adaptation
-		var/tolerance_decay_rate = max(1, 3 - (STAEND * 0.1)) // More endurance = slower decay
-
-		if(world.time - last_major_pain_time < 30 SECONDS)
-			pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (STAEND * 1)) // Higher max tolerance with endurance
-		else
-			pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
-
-		// Apply pain tolerance to reduce effective pain
-		var/effective_pain = painpercent * (1.0 - (pain_tolerance * 0.01))
+		var/effective_pain = get_pain_percent() * 100
 
 		// Endurance-based pain threshold - higher endurance means higher pain threshold
 		var/pain_threshold = 55 + (STAEND * 1) // 1% higher threshold per endurance point
@@ -161,6 +149,29 @@
 				// High endurance characters are less stressed by pain
 				if(prob(max(20, 100 - (STAEND * 2)))) // 2% less likely per endurance point (40% at 20 )
 					add_stress(/datum/stress_event/painmax)
+
+/// Returns the pain percent between 0 and 1.
+/mob/living/carbon/proc/get_pain_percent()
+	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+		return 0
+
+	// Calculate current shock level
+	var/raw_pain = get_complex_pain()
+	var/current_shock = calculate_shock_stage()
+
+	// Shock reduces pain perception (adrenaline effect)
+	if(current_shock >= 60)
+		var/shock_reduction = min(0.3, current_shock * 0.001) // Max 30% reduction
+		raw_pain *= (1.0 - shock_reduction)
+
+	// Max pain scales on endurance
+	var/painpercent = (raw_pain / (STAEND * 13)) * 100
+
+	// Apply pain tolerance to reduce effective pain
+	painpercent *= (1 - (pain_tolerance * 0.01))
+
+	// Return normalized value between 0 and 1
+	return clamp(painpercent/100, 0, 1)
 
 /mob/living/carbon/proc/handle_roguebreath()
 	return

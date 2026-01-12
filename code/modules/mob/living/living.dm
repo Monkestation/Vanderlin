@@ -1308,7 +1308,7 @@
 /datum/status_effect/grab_counter_cd
 	id = "grab_counter_cd"
 	alert_type = null
-	duration = 6 SECONDS
+	duration = 10 SECONDS
 
 /mob/living/proc/grab_counter_attack(mob/living/carbon/attacker)
 	if(!cmode || stat >= UNCONSCIOUS)
@@ -1551,7 +1551,7 @@
 	var/pain_factor = 1
 	if(istype(pulledby, /mob/living/carbon))
 		var/mob/living/carbon/C = pulledby
-		pain_factor += C.get_pain_factor()
+		pain_factor += C.get_pain_percent() * 0.5
 
 	resist_chance *= pain_factor
 
