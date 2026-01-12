@@ -11,8 +11,8 @@
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
+	possible_item_intents = list(MACE_STRIKE)
+	gripped_intents = list(MACE_STRIKE, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 7
 
@@ -170,7 +170,7 @@
 	icon_state = "physician_cane"
 	force = DAMAGE_MACE-3
 	force_wielded = DAMAGE_MACE-1
-	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/thrust)
+	possible_item_intents = list(MACE_STRIKE, MACE_THRUST)
 	sellprice = 30
 
 /obj/item/weapon/mace/cane/merchant
@@ -368,8 +368,8 @@
 	force = DAMAGE_CLUB
 	force_wielded = DAMAGE_CLUB_WIELD
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
-	gripped_intents = list(/datum/intent/mace/strike/wood, /datum/intent/mace/smash/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
+	gripped_intents = list(MACE_WDSTRIKE, MACE_WOODSMASH)
 	max_integrity = INTEGRITY_WORST
 	minstr = 2
 
@@ -479,8 +479,8 @@
 	wdefense = GOOD_PARRY
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_LONG
-	possible_item_intents = list(/datum/intent/mace/strike/heavy)
-	gripped_intents = list(/datum/intent/mace/smash/heavy, /datum/intent/mace/thrust)
+	possible_item_intents = list(MACE_HVYSTRIKE)
+	gripped_intents = list(MACE_HVYSMASH, MACE_THRUST)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 10
 
@@ -580,7 +580,7 @@
 	desc = "Big old oak branch, carved to a deadly weapon."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "shillelagh"
-	gripped_intents = list(/datum/intent/mace/smash/wood)
+	gripped_intents = list(MACE_WOODSMASH)
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 8
 
@@ -648,7 +648,7 @@
 	desc = "Made to punch through armor and skull alike."
 	icon_state = "iwarhammer"
 	wdefense = GOOD_PARRY
-	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/warhammer/impale)
+	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE)
 	gripped_intents = null
 	blade_dulling = DULLING_BASH
 
@@ -669,7 +669,7 @@
 	icon_state = "swarhammer"
 	force = DAMAGE_MACE_WIELD
 	wdefense = GREAT_PARRY
-	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/warhammer/impale, /datum/intent/mace/warhammer/stab)
+	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	melting_material = /datum/material/steel
 	melt_amount = 150
 
@@ -707,8 +707,8 @@
 	icon_state = "elvenclub"
 	force = DAMAGE_MACE-1
 	force_wielded = DAMAGE_MACE_WIELD-1
-	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/axe/cut)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/axe/cut, /datum/intent/axe/chop) //can't smash with this weapon.
+	possible_item_intents = list(MACE_STRIKE, AXE_CUT)
+	gripped_intents = list(MACE_STRIKE, AXE_CUT, AXE_CHOP) //can't smash with this weapon.
 	minstr = 5
 	sharpness = IS_SHARP
 

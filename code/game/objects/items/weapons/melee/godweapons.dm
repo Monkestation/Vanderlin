@@ -31,8 +31,8 @@
 	force = DAMAGE_HEAVYAXE_WIELD
 	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
 	wdefense = GOOD_PARRY
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop/great, /datum/intent/sword/strike)
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SWORD_STRIKE)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONGEST+220
 	minstr = 12
@@ -101,8 +101,8 @@
 	force = DAMAGE_SPEARPLUS+2
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR_WIELD
-	possible_item_intents = list(/datum/intent/polearm/cut)
-	gripped_intents = list(/datum/intent/polearm/chop, /datum/intent/whip, /datum/intent/shoot/neant)
+	possible_item_intents = list(SPEAR_CUT)
+	gripped_intents = list(POLEARM_CHOP, WHIP_STRIKE, NEANT_SHOOT)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONGEST+220
 	minstr = 10
@@ -368,8 +368,8 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	name = "pleonexia"
 	desc = "A sword of legend. If they are true, then this is the blade of Matthios himself. Rumor has it, it steals space and time."
-	possible_item_intents = list(/datum/intent/sword/strike, /datum/intent/sword/cut)
-	gripped_intents = list(/datum/intent/sword/strike, /datum/intent/sword/chop, /datum/intent/sword/thrust,  /datum/intent/plex_dash)
+	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
+	gripped_intents = list(SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST, PLEX_BLINK)
 	max_integrity = INTEGRITY_STRONGEST+220
 	sellprice = 550
 

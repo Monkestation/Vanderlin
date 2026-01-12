@@ -10,7 +10,7 @@
 	wdefense = MEDIOCRE_PARRY
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, DAGGER_CHOP)
 	max_blade_int = 140
 	max_integrity = INTEGRITY_STRONG
 
@@ -128,7 +128,6 @@
 	desc = "Loyal companion to hunters and poachers, from humble bone to truest steel, disembowel your prey with glee."
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
 	max_blade_int = 140
 	melting_material = /datum/material/steel
 	melt_amount = 75
@@ -136,12 +135,12 @@
 
 
 /obj/item/weapon/knife/dagger/navaja
-	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut)
 	name = "navaja"
 	desc = "A folding Etruscan knife valued by merchants, mercenaries and peasants for its convenience. It possesses a long hilt, allowing for a sizable blade with good reach."
-	force = DAMAGE_KNIFE/2
 	icon_state = "navaja_c"
 	item_state = "elfdag"
+	force = DAMAGE_KNIFE/2
+	possible_item_intents = list(DAGGER_THRUST,DAGGER_CUT)
 	var/extended = 0
 	wdefense = TERRIBLE_PARRY
 	sellprice = 30 //shiny :o
@@ -171,7 +170,7 @@
 	desc = "Scissors made of iron that may be used to salvage usable materials from clothing."
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "iscissors"
-	possible_item_intents = list(/datum/intent/dagger/thrust, /datum/intent/dagger/cut, /datum/intent/snip)
+	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, /datum/intent/snip)
 	max_integrity = INTEGRITY_WORST
 	melt_amount = 75
 
@@ -235,7 +234,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "cleav"
 	item_state = "cleav"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
+	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
 	throwforce = DAMAGE_KNIFE+5
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
@@ -258,7 +257,7 @@
 	icon_state = "combatknife"
 	force = DAMAGE_KNIFE
 	throwforce = DAMAGE_KNIFE+6
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	max_integrity = INTEGRITY_STANDARD - 20
 	melting_material = /datum/material/iron
 	wbalance = HARD_TO_DODGE
@@ -288,7 +287,7 @@
 	desc = "Thin, sharp, pointed death."
 	icon_state = "idagger"
 	force = DAMAGE_DAGGER
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	sellprice = 12
 
 /obj/item/weapon/knife/dagger/jile
@@ -304,14 +303,14 @@
 	icon_state = "kukri_iron"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER+1
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
 	desc = "A broad iron dagger of ancient Lakkarian design. Popular amongst the indigenous jungle elf tribes of the Lakkarian Rainforests."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_iron"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	melting_material = null
 	sellprice = 12
 	dropshrink = 1.0
@@ -340,7 +339,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_steel"
 	wbalance = HARD_TO_DODGE
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 20
 	dropshrink = 1.0
 
@@ -353,7 +352,7 @@
 	icon_state = "kukri_steel"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER+1
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	melt_amount = 75
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
@@ -408,7 +407,7 @@
 /obj/item/weapon/knife/dagger/steel/profane
 	// name = "profane dagger"
 	// desc = "A profane dagger made of cursed black steel. Whispers emanate from the gem on its hilt."
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/peculate)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, /datum/intent/peculate)
 	sellprice = 250
 	icon_state = "pdagger"
 	melting_material = null
@@ -591,7 +590,7 @@
 	desc = "A tool favored by the wood-elves, easy to make, useful for skinning the flesh of beast and man alike."
 	icon_state = "stone_knife"
 	wdefense = TERRIBLE_PARRY
-	possible_item_intents = list(/datum/intent/dagger/cut,/datum/intent/dagger/chop)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	max_integrity = INTEGRITY_WORST - 70
 	max_blade_int = 30
@@ -625,14 +624,13 @@
 	name = "villager knife"
 	desc = "The loyal companion of simple peasants, able to cut hard bread and carve wood. A versatile kitchen utensil and tool."
 	icon_state = "villagernife"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
 	melt_amount = 25
 
 /obj/item/weapon/knife/copper
 	name = "copper knife"
 	desc = "A knife of an older design, the copper serves decent enough."
 	icon_state = "cdagger"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	max_blade_int = 75
 	max_integrity = INTEGRITY_WORST - 25
 	melting_material = /datum/material/copper

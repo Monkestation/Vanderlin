@@ -10,7 +10,7 @@
 	can_parry = FALSE // You can't parry with this, it'd be awkward to tangle chains, use a shield
 	wdefense = TERRIBLE_PARRY
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
+	possible_item_intents = list(FLAIL_STRIKE, FLAIL_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 6
 
@@ -93,8 +93,8 @@
 	desc = "During peacetime these flails are used to thresh wheat. During wartime - to chase off marauders."
 	icon_state = "peasantflail"
 	force = DAMAGE_WEAK_FLAIL
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
-	gripped_intents = list(/datum/intent/flailthresh, /datum/intent/mace/strike/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
+	gripped_intents = list(/datum/intent/flailthresh, MACE_WDSTRIKE)
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
 	smeltresult = /obj/item/fertilizer/ash
@@ -159,8 +159,8 @@
 	force_wielded = DAMAGE_GOOD_FLAIL
 	wbalance = DODGE_CHANCE_NORMAL
 	wlength = WLENGTH_LONG
-	possible_item_intents = list(/datum/intent/flail/strike/long)
-	gripped_intents = list(/datum/intent/flail/strike/long, /datum/intent/flail/strike/smash/long)
+	possible_item_intents = list(FLAIL_LNGSTRIKE)
+	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
 	max_integrity = INTEGRITY_STRONG + 50
 	minstr = 8
 
@@ -220,8 +220,8 @@
 	wdefense = GREAT_PARRY //Why?
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
-	possible_item_intents = list(/datum/intent/flail/strike)
-	gripped_intents = list(/datum/intent/flail/strikerange, /datum/intent/flail/strike/smashrange)
+	possible_item_intents = list(FLAIL_STRIKE)
+	gripped_intents = list(PEASANT_STRIKE, PEASANT_SMASH)
 	minstr = 9
 
 	pixel_y = -16
@@ -258,8 +258,8 @@
 	desc = "Weight of wealth in a deadly striking end."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "matthiosflail"
-	possible_item_intents = list(/datum/intent/flail/strike/matthiosflail)
-	gripped_intents = list(/datum/intent/flail/strike/matthiosflail, /datum/intent/flail/strike/smash/matthiosflail)
+	possible_item_intents = list(MATTHIOS_STRIKE)
+	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
 	slot_flags = ITEM_SLOT_BACK
 	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/weaponsmithing

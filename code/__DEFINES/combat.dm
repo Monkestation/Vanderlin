@@ -167,16 +167,39 @@
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
 #define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
+#define MACE_THRUST			/datum/intent/mace/thrust
 
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
 #define WARHM_IMPALE		/datum/intent/mace/warhammer/impale
 
+#define FLAIL_STRIKE		/datum/intent/flail/strike
+#define FLAIL_LNGSTRIKE		/datum/intent/flail/strike/long
+#define FLAIL_SMASH			/datum/intent/flail/strike/smash
+#define FLAIL_LNGSMASH		/datum/intent/flail/strike/smash/long
+#define PEASANT_STRIKE		/datum/intent/flail/strikerange
+#define PEASANT_SMASH		/datum/intent/flail/strike/smashrange
+#define MATTHIOS_STRIKE		/datum/intent/flail/strike/matthiosflail
+#define MATTHIOS_SMASH		/datum/intent/flail/strike/smash/matthiosflail
+
+#define WHIP_CRACK			/datum/intent/whip/crack
+#define WHIP_STRIKE			/datum/intent/whip
+#define WHIP_MTLCRACK		/datum/intent/whip/crack/metal
+#define WHIP_CUT			/datum/intent/whip/cut
+#define WHIP_LASH			/datum/intent/whip/lash
+#define WHIP_MTLLASH		/datum/intent/whip/lash/metal
+
 #define DAGGER_CUT			/datum/intent/dagger/cut
 #define DAGGER_THRUST		/datum/intent/dagger/thrust
-#define ICEPICK_STAB		/datum/intent/dagger/icepick
+#define DAGGER_CHOP			/datum/intent/dagger/chop
+#define CLEAVER_CHOP		/datum/intent/dagger/chop/cleaver
 
-#define MAUL_SMASH			/datum/intent/maul/smash
-#define MAUL_STRIKE			/datum/intent/maul/strike
+#define KNUCKLE_STRIKE		/datum/intent/knuckles/strike
+#define KNUCKLE_SMASH		/datum/intent/knuckles/smash
+#define KATAR_CUT			/datum/intent/katar/cut
+#define KATAR_THRUST		/datum/intent/katar/thrust
+
+#define NEANT_SHOOT			/datum/intent/shoot/neant
+#define PLEX_BLINK			/datum/intent/plex_dash
 
 #define INTENT_FEED			/datum/intent/food
 

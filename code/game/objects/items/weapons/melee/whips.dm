@@ -11,7 +11,7 @@
 	wdefense = BAD_PARRY
 	wlength = WLENGTH_GREAT
 	can_parry = FALSE
-	possible_item_intents = list(/datum/intent/whip/crack, /datum/intent/whip/lash)
+	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
 	minstr = 4
 
 	sharpness = IS_BLUNT
@@ -203,7 +203,7 @@
 	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more than anyone else with this."
 	icon_state = "whip_chain"
 	force = DAMAGE_WHIP+3
-	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash/metal)
+	possible_item_intents = list(WHIP_MTLCRACK, WHIP_MTLLASH)
 	minstr = 9
 
 	w_class = WEIGHT_CLASS_BULKY
@@ -235,7 +235,7 @@
 	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
 	icon_state = "nagaika"
 	force = DAMAGE_WHIP+5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
-	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/sword/strike)
+	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, SWORD_STRIKE)
 
 //................ Urumi ............... //
 
@@ -246,7 +246,7 @@
 	force = DAMAGE_WHIP+3
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
 	can_parry = TRUE
-	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/whip/cut,)
+	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT,)
 	max_blade_int = 175
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5

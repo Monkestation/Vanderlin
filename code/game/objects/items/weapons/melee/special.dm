@@ -257,7 +257,7 @@
 	throwforce = DAMAGE_KATAR-3
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(/datum/intent/katar/cut, /datum/intent/katar/thrust)
+	possible_item_intents = list(/KATAR_CUT, KATAR_THRUST)
 	max_blade_int = 150
 	max_integrity = INTEGRITY_WORST-20
 
@@ -324,7 +324,7 @@
 	throwforce = DAMAGE_KNUCKLES-10
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(/datum/intent/knuckles/strike,/datum/intent/knuckles/smash)
+	possible_item_intents = list(KNUCKLE_STRIKE, KNUCKLE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 
 	gripsprite = FALSE
