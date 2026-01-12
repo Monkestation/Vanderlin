@@ -36,6 +36,7 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONGEST+220
 	minstr = 12
+	resistance_flags = FIRE_PROOF
 	sellprice = 550
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)

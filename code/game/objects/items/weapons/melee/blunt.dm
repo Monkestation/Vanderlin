@@ -348,7 +348,6 @@
 	icon_state = "psyflangedmace"
 	wdefense = AVERAGE_PARRY
 	resistance_flags = FIRE_PROOF
-	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
 
 /obj/item/weapon/mace/cudgel/psy/Initialize(mapload)

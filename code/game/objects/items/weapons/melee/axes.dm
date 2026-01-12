@@ -186,6 +186,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 6
 
+	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
 	melting_material = /datum/material/silver
 	melt_amount = 75
 	parrysound = "sword"

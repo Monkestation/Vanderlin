@@ -230,7 +230,7 @@
 	throw_speed = 1
 	throw_range = 3
 	wlength = WLENGTH_NORMAL
-	resistance_flags = null
+	resistance_flags = FIRE_PROOF
 	flags_1 = CONDUCT_1
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')

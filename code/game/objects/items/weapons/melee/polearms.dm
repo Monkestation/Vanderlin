@@ -391,6 +391,7 @@
 	max_integrity = INTEGRITY_STRONG
 	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
 	axe_cut = 10
+	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 100

@@ -135,6 +135,7 @@
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	force = DAMAGE_KNIFE
 	possible_item_intents = list(DAGGER_CUT)
+	wdefense = BAD_PARRY
 
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
@@ -143,7 +144,6 @@
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CUT
-	wdefense = BAD_PARRY
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	max_blade_int = 50
 	melting_material = /datum/material/iron

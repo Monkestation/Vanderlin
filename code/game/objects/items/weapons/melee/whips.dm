@@ -178,7 +178,7 @@
 	force = DAMAGE_WHIP+3
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
 	can_parry = TRUE
-	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT,)
+	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
 	max_blade_int = 175
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
