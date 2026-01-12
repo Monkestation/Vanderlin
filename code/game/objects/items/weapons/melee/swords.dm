@@ -1265,7 +1265,7 @@
 	force_wielded = DAMAGE_GREATSWORD_WIELD+2
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT/guts, SWORD_THRUST/guts, SWORD_STRIKE/guts, SWORD_CHOP/long/guts)
+	gripped_intents = list(GUTS_CUT, GUTS_THRUST, GUTS_STRIKE, GUTS_CHOP)
 	max_blade_int = INTEGRITY_STRONG+50
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 15
@@ -1411,7 +1411,7 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(SWORD_CHOP,SWORD_STRIKE,)
-	gripped_intents = list(SWORD_THRUST/estoc, ESTOC_LUNGE, SWORD_CHOP, SWORD_STRIKE,)
+	gripped_intents = list(ESTOC_THRUST, ESTOC_LUNGE, SWORD_CHOP, SWORD_STRIKE)
 	max_integrity = INTEGRITY_STRONG
 	max_blade_int = 300
 	minstr = 8
@@ -1561,7 +1561,7 @@
 	desc = "A steel sword with a hooked design at the tip of it; perfect for disarming enemies. Its back edge is sharpened and the hilt appears to have a sharpened tip."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "hook_sword"
-	possible_item_intents = list(SWORD_CUT, SWORD_THRUST/hook, SWORD_STRIKE, SWORD_DISARM)
+	possible_item_intents = list(SWORD_CUT, /datum/intent/sword/thrust/hook, SWORD_STRIKE, SWORD_DISARM)
 	max_integrity = INTEGRITY_STANDARD-20
 
 /obj/item/weapon/sword/sabre/hook/getonmobprop(tag)
@@ -1638,8 +1638,6 @@
 				"westabove" = 0,
 				)
 
-SWORD_THRUST/hook
-	damfactor = 0.9
 
 //Snowflake version of hand-targeting disarm intent.
 /datum/intent/sword/disarm
@@ -1736,16 +1734,16 @@ SWORD_THRUST/hook
 	dropshrink = 1
 	melting_material = /datum/material/gold
 
-SWORD_CUT/martyr
+/datum/intent/sword/cut/martyr
 		item_damage_type = "fire"
 		blade_class = BCLASS_CUT
-SWORD_THRUST/martyr
+/datum/intent/sword/thrust/martyr
 		item_damage_type = "fire"
 		blade_class = BCLASS_PICK // so our armor-piercing attacks in ult mode can do crits(against most armors, not having crit)
-SWORD_STRIKE/martyr
+/datum/intent/sword/strike/martyr
 		item_damage_type = "fire"
 		blade_class = BCLASS_SMASH
-SWORD_CHOP/martyr
+/datum/intent/sword/chop/martyr
 		item_damage_type = "fire"
 		blade_class = BCLASS_CHOP
 

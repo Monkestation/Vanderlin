@@ -155,6 +155,8 @@
 #define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
 #define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 #define ESTOC_LUNGE 	 /datum/intent/sword/lunge
+#define ESTOC_THRUST	 /datum/intent/sword/thrust/estoc
+
 
 #define AXE_CUT				/datum/intent/axe/cut
 #define AXE_THRUST			/datum/intent/axe/thrust
@@ -177,8 +179,10 @@
 
 #define MESSER_CHOP			/datum/intent/sword/chop/messer
 
-#define BIGSWORD_CHOP		/datum/intent/sword/chop/bigsword
-#define BIGSWORD_CUT		/datum/intent/sword/cut/bigsword
+#define GUTS_CUT			/datum/intent/sword/cut/guts
+#define GUTS_THRUST			/datum/intent/sword/thrust/guts
+#define GUTS_STRIKE			/datum/intent/sword/strike/guts
+#define GUTS_CHOP			/datum/intent/sword/chop/long/guts
 
 #define MACE_SMASH			/datum/intent/mace/smash
 #define MACE_HVYSMASH		/datum/intent/mace/smash/heavy
