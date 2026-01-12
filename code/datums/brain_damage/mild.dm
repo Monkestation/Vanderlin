@@ -73,7 +73,7 @@
 			if(2,3)
 				owner.dizziness += 10
 			if(4,5)
-				owner.confused += 10
+				owner.adjust_confusion(1 SECONDS)
 				owner.set_eye_blur_if_lower(20 SECONDS)
 			if(6 to 9)
 				owner.slurring += 30

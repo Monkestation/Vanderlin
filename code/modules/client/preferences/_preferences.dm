@@ -389,7 +389,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			border: none;
 			outline: none;
 			font-size: 8px;
-			color: #2b1d14;
+			color: #161418;
 			text-align: left;
 			cursor: pointer;
 			display: flex;

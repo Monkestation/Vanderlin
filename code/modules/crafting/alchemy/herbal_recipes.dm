@@ -426,7 +426,7 @@
 	M.adjustToxLoss(3)
 	if(prob(20))
 		M.set_eye_blur_if_lower(10 SECONDS)
-		M.confused = max(M.confused, 5)
+		M.set_confusion_if_lower(0.5 SECONDS)
 	. = ..()
 
 /datum/reagent/poison/herbal/atropa_concentrate/overdose_process(mob/living/carbon/M)

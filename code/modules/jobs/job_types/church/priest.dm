@@ -54,6 +54,7 @@
 	)
 
 	languages = list(/datum/language/celestial)
+	can_have_apprentices = FALSE
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

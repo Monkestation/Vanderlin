@@ -368,6 +368,7 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	dropshrink = 0.8
 	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel
 	melt_amount = 150
 	sellprice = 90
 

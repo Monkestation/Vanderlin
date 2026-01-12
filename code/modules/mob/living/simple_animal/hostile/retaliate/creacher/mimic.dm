@@ -67,7 +67,7 @@
 			return pick('sound/vo/mobs/mimic/mimic_death.ogg')
 
 /mob/living/simple_animal/hostile/retaliate/mimic/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 //////
 // Landmark

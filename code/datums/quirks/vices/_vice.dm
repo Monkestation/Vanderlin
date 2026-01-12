@@ -112,6 +112,21 @@
 	debuff = /datum/status_effect/debuff/addiction/godfearing
 	needsate_text = "Time to pray."
 
+/datum/quirk/vice/godfearing/on_spawn()
+	. = ..()
+	RegisterSignal(owner, COMSIG_CARBON_PRAY, PROC_REF(on_owner_pray))
+
+/datum/quirk/vice/godfearing/on_remove()
+	. = ..()
+	UnregisterSignal(owner, COMSIG_CARBON_PRAY)
+
+/datum/quirk/vice/godfearing/proc/on_owner_pray(datum/source, prayer)
+	SIGNAL_HANDLER
+	var/datum/patron/owner_patron = owner.patron
+
+	if(owner_patron.hear_prayer(owner, prayer))
+		owner.sate_addiction(src.type)
+
 /datum/quirk/vice/maniac
 	name = "Maniac"
 	desc = "The worms call me the maniac... I just like seeing limbs fly and blood drip, is there something so BAD about that?"
