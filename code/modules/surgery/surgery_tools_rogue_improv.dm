@@ -2,8 +2,7 @@
 	name = "improvised saw"
 	desc = "A tool used to carve through bone crudely, but better than nothing."
 	icon_state = "bonesaw_wood"
-	force = DAMAGE_DAGGER
-	throwforce = DAMAGE_DAGGER
+	throwforce = DAMAGE_KNIFE-4
 	tool_behaviour = TOOL_IMPROVISED_SAW
 	sharpness = IS_BLUNT
 	smeltresult = /obj/item/fertilizer/ash
