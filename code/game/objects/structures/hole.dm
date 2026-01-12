@@ -21,7 +21,7 @@
 	alternative_icon_handling = TRUE
 	var/stage = 1
 	var/faildirt = 0
-	var/is_consecrated = NOT_CONSECRATED // Has the "burial rites" miracle been used on this grave. 0 = No consecration. 1 = Simple consecration (you get cursed by Necra) 2 and above = Double consecration (your lux gets ripped out, or a limb gets skeletonized.)
+	var/is_consecrated = NOT_CONSECRATED // Has the "burial rites" miracle been used on this grave. 0 = No consecration. 1 = Simple consecration (you get cursed by Necra) 2 and above = Double consecration (you get cursed, and the clergy is alerted.)
 
 
 /obj/structure/closet/dirthole/Initialize()
