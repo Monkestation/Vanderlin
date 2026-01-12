@@ -76,7 +76,7 @@
 
 /obj/item/weapon/tongs/pre_attack(obj/item/A, mob/living/user, params)
 	if(held_item?.tong_interaction(A, user))
-		return
+		return TRUE
 
 	if(!istype(A))
 		return ..()
@@ -87,7 +87,7 @@
 			held_item = A
 			A.forceMove(src)
 			update_appearance(UPDATE_ICON_STATE)
-			return
+			return TRUE
 	return ..()
 
 /obj/item/weapon/tongs/getonmobprop(tag)

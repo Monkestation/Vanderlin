@@ -562,8 +562,10 @@
 	desc = "Paper etched with the floor plans for the entire keep."
 
 /obj/item/paper/scroll/keep_plans/read(mob/user)
+	if(!user.mind)
+		return
 	to_chat(user, span_purple("<b>These look like secret passages...</b>"))
-	ADD_TRAIT(user, TRAIT_KNOWKEEPPLANS, TRAIT_GENERIC)
+	ADD_TRAIT(user.mind, TRAIT_KNOW_KEEP_DOORS, "[type]")
 	user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 
 

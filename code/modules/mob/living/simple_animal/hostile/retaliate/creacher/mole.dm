@@ -121,7 +121,7 @@
 	emote("aggro")
 
 /mob/living/simple_animal/hostile/retaliate/mole/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/mole/briars
 	name = "Moss Crawler Mole"

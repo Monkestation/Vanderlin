@@ -26,6 +26,10 @@
 	var/alert_type = /atom/movable/screen/alert/status_effect
 	/// The alert itself, if it exists
 	var/atom/movable/screen/alert/status_effect/linked_alert = null
+	/// Do we self-terminate when a fullheal is called?
+	var/remove_on_fullheal = FALSE
+	// /// If remove_on_fullheal is TRUE, what flag do we need to be removed?
+	// var/heal_flag_necessary = HEAL_STATUS
 	/// Assoc list of statkey to value
 	var/list/effectedstats = list()
 
@@ -37,6 +41,8 @@
 		owner = new_owner
 	if(owner)
 		LAZYADD(owner.status_effects, src)
+		RegisterSignal(owner, COMSIG_LIVING_POST_FULLY_HEAL, PROC_REF(remove_effect_on_heal))
+
 	if(!owner || !on_apply())
 		qdel(src)
 		return
@@ -61,6 +67,7 @@
 		owner.clear_alert(id)
 		LAZYREMOVE(owner.status_effects, src)
 		on_remove()
+		UnregisterSignal(owner, COMSIG_LIVING_POST_FULLY_HEAL)
 		owner = null
 	return ..()
 
@@ -115,6 +122,16 @@
 
 /datum/status_effect/proc/nextmove_adjust()
 	return 0
+
+/// Signal proc for [COMSIG_LIVING_POST_FULLY_HEAL] to remove us on fullheal
+/datum/status_effect/proc/remove_effect_on_heal(datum/source, heal_flags)
+	SIGNAL_HANDLER
+
+	if(!remove_on_fullheal)
+		return
+
+	// if(!heal_flag_necessary || (heal_flags & heal_flag_necessary))
+	qdel(src)
 
 /// Remove [seconds] of duration from the status effect, qdeling / ending if we eclipse the current world time.
 /datum/status_effect/proc/remove_duration(seconds)

@@ -177,7 +177,7 @@
 		extra.OnCrafted(user.dir, user)
 		recipe.handle_creation(extra, quality_score, skill_level)
 
-	user?.visible_message("<span class='info'>[user] finishes crafting [I]!</span>")
+	user?.visible_message(span_info("[user] finishes crafting [I]!"))
 
 	qdel(hingot)
 	hingot = null

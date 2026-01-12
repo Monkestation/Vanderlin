@@ -134,7 +134,7 @@
 	return
 
 /mob/living/simple_animal/hostile/orc/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /obj/projectile/bullet/reusable/arrow/orc
 	damage = 20

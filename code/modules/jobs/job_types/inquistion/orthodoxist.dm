@@ -25,6 +25,9 @@
 	same_job_respawn_delay = 30 MINUTES
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
