@@ -232,7 +232,6 @@
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = null
-	melting_material = /datum/material/iron
 	anvilrepair = /datum/skill/craft/carpentry
 	dropshrink = 0.9
 	blade_dulling = DULLING_BASH

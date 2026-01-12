@@ -289,8 +289,6 @@
 	icon_state = "idagger"
 	force = DAMAGE_DAGGER
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
-	melting_material = /datum/material/iron
-	melt_amount = 50
 	sellprice = 12
 
 /obj/item/weapon/knife/dagger/jile
@@ -298,7 +296,6 @@
 	desc = "A curved iron dagger of Lakkarian origin. Nobles of Sakhumeti were often buried with these daggers, but this practice has become less common ever since Zizo's ascension."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
-	melting_material = null
 	sellprice = 12
 	dropshrink = 1.0
 
@@ -328,7 +325,6 @@
 	wbalance = VERY_HARD_TO_DODGE
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
-	melt_amount = 50
 
 /obj/item/weapon/knife/dagger/steel/jile
 	name = "steel jile"

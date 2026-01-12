@@ -29,7 +29,7 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	flags_1 = CONDUCT_1
 	thrown_bclass = BCLASS_CUT
-	melting_material = /datum/material/
+	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 30
 

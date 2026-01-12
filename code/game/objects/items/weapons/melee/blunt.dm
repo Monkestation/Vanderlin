@@ -420,6 +420,8 @@
 	icon_state = "psyflangedmace"
 	wdefense = AVERAGE_PARRY
 	resistance_flags = FIRE_PROOF
+	resistance_flags = FIRE_PROOF
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/mace/cudgel/psy/Initialize(mapload)
 	. = ..()
@@ -637,7 +639,6 @@
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	melting_material = /datum/material/copper
-	melt_amount = 75
 	parrysound = "parrywood"
 	sellprice = 35
 
@@ -649,7 +650,6 @@
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/warhammer/impale)
 	gripped_intents = null
-	melt_amount = 75
 	blade_dulling = DULLING_BASH
 
 /obj/item/weapon/mace/warhammer/getonmobprop(tag)

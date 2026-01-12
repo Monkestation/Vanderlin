@@ -256,6 +256,7 @@
 	sharpness = IS_SHARP
 	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/steel
+	melt_amount = 100
 
 /obj/item/weapon/whip/urumi/iron
 	name = "iron urumi"
