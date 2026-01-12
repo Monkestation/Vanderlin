@@ -140,13 +140,13 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 
-/obj/item/weapon/flail/peasantwarflail
+/obj/item/weapon/flail/peasantwarflail //Unattainable
 	name = "militia thresher"
 	desc = "Just like how a sling's bullet can fell a giant, so too does this great flail follow the principle of converting 'momentum' into 'plate-rupturing force'."
 	icon = 'icons/roguetown/weapons/64/flails.dmi'
 	icon_state = "peasantwarflail"
 	force = DAMAGE_WEAK_FLAIL-7
-	force_wielded = DAMAGE_GOOD_FLAIL+7
+	force_wielded = DAMAGE_GOOD_FLAIL+2
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(FLAIL_STRIKE)
@@ -181,6 +181,7 @@
 	desc = "Weight of wealth in a deadly striking end."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "matthiosflail"
+	force_wielded = DAMAGE_GOOD_FLAIL+7
 	possible_item_intents = list(MATTHIOS_STRIKE)
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
 	slot_flags = ITEM_SLOT_BACK
