@@ -82,7 +82,7 @@
 		playsound(src.loc, 'sound/items/fuse.ogg', 100)
 		ignited = TRUE
 		icon_state = "[initial(icon_state)]_ignited"
-		fuse_timer = addtimer(CALLBACK(src, PROC_REF(detonate)), fuse_duration)
+		fuse_timer = addtimer(CALLBACK(src, PROC_REF(detonate)), fuse_duration, TIMER_STOPPABLE)
 		return TRUE
 	..()
 
