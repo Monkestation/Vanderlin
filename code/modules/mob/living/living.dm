@@ -537,7 +537,7 @@
 				O.sublimb_grabbed = M.simple_limb_hit(zone_selected)
 			put_in_hands(O)
 			O.update_hands(src)
-			if((HAS_TRAIT(src, TRAIT_STRONG_GRABBER) && cmode) || item_override)
+			if(state > GRAB_PASSIVE || (HAS_TRAIT(src, TRAIT_STRONG_GRABBER) && cmode) || item_override)
 				suppress_message = TRUE
 				M.grippedby(src)
 			if(!suppress_message)
