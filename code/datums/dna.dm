@@ -30,7 +30,7 @@
 
 	return ..()
 
-/datum/dna/proc/transfer_identity(mob/living/carbon/destination, transfer_SE = 0)
+/datum/dna/proc/transfer_identity(mob/living/carbon/destination, update_prints)
 	if(!istype(destination))
 		return
 	destination.dna.unique_enzymes = unique_enzymes
@@ -41,6 +41,8 @@
 	destination.dna.body_markings = deepCopyList(body_markings)
 	destination.dna.features = features.Copy()
 	destination.dna.real_name = real_name
+	if(update_prints)
+		destination.reset_limb_fingerprints()
 
 /datum/dna/proc/copy_dna(datum/dna/new_dna)
 	new_dna.unique_enzymes = unique_enzymes

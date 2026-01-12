@@ -216,7 +216,7 @@
 
 /datum/coven_power/obfuscate/mask_of_a_thousand_faces/proc/transform_into_target(mob/living/carbon/human/target, mob/living/carbon/human/user)
 	// Complete transformation
-	target.dna.transfer_identity(user)
+	target.dna.transfer_identity(user, FALSE) //no print stealing
 	user.updateappearance(mutcolor_update = TRUE)
 	user.real_name = target.dna.real_name
 	user.name = target.get_visible_name()
@@ -251,7 +251,7 @@
 	owner.visible_message(span_notice("[owner]'s form begins to revert to its original state."))
 	user.Immobilize(1.5 SECONDS)
 
-	old_dna.transfer_identity(user)
+	old_dna.transfer_identity(user, FALSE)
 	user.real_name = old_dna.real_name
 	user.name = user.get_visible_name()
 	user.gender = old_gender

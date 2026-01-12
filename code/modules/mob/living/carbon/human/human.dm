@@ -827,7 +827,7 @@
 
 	copy_bodyparts(target)
 
-	target.dna.transfer_identity(src)
+	target.dna.transfer_identity(src, TRUE)
 
 	updateappearance(mutcolor_update = TRUE)
 

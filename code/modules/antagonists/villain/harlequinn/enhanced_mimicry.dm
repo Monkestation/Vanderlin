@@ -73,7 +73,7 @@
 		return
 
 	// Complete transformation
-	target.dna.transfer_identity(transformer)
+	target.dna.transfer_identity(transformer, TRUE) //transfers prints
 	transformer.updateappearance(mutcolor_update = TRUE)
 	transformer.real_name = target.dna.real_name
 	transformer.name = target.get_visible_name()
@@ -129,7 +129,7 @@
 		return
 
 	var/datum/dna/old_dna = dna_ref.resolve()
-	old_dna.transfer_identity(transformer)
+	old_dna.transfer_identity(transformer, TRUE)
 	transformer.real_name = old_dna.real_name
 	transformer.name = transformer.get_visible_name()
 	transformer.gender = old_gender

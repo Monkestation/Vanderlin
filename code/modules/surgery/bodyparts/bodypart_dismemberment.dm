@@ -434,3 +434,11 @@
 
 		L.attach_limb(src, 1)
 		return 1
+
+/mob/living/proc/reset_limb_fingerprints()
+	return
+
+/mob/living/carbon/reset_limb_fingerprints()
+	for(var/obj/item/bodypart/L in bodyparts)
+		L.reset_fingerprint()
+
