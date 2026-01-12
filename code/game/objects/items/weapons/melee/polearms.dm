@@ -39,79 +39,6 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-/*--------------\
-| Thrust intent |
-\--------------*/
-/datum/intent/polearm/thrust
-	name = "thrust"
-	blade_class = BCLASS_STAB
-	attack_verb = list("stabs")
-	animname = "stab"
-	icon_state = "instab"
-	reach = 2
-	chargetime = 1
-	warnie = "mobwarning"
-	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = AP_POLEARM_THRUST
-	swingdelay = 1
-	misscost = 10
-	item_damage_type = "stab"
-
-/datum/intent/polearm/thrust/spear
-	penfactor = AP_SPEAR_THRUST
-
-/*------------\
-| Bash intent |
-\------------*/
-/datum/intent/polearm/bash
-	name = "bash"
-	blade_class = BCLASS_BLUNT
-	icon_state = "inbash"
-	attack_verb = list("bashes", "strikes")
-	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
-	penfactor = AP_POLEARM_BASH
-	damfactor = 0.8
-	swingdelay = 1
-	misscost = 5
-	item_damage_type = "blunt"
-
-/*-----------\
-| Cut intent |
-\-----------*/
-/datum/intent/polearm/cut
-	name = "cut"
-	blade_class = BCLASS_CUT
-	attack_verb = list("cuts", "slashes")
-	icon_state = "incut"
-	animname = "cut"
-	damfactor = 0.8
-	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
-	reach = 2
-	swingdelay = 1
-	misscost = 10
-	item_damage_type = "slash"
-
-/datum/intent/spear/cut/bardiche/scythe //Unique intent for Dendorite Templar
-	reach = 2
-
-/*------------\
-| Chop intent |
-\------------*/
-/datum/intent/polearm/chop
-	name = "chop"
-	icon_state = "inchop"
-	attack_verb = list("chops", "hacks")
-	animname = "chop"
-	blade_class = BCLASS_CHOP
-	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
-	penfactor = AP_POLEARM_CHOP
-	chargetime = 1.5
-	damfactor = 1.2
-	swingdelay = 2
-	misscost = 20
-	warnie = "mobwarning"
-	item_damage_type = "slash"
-
 
 //................ Wooden Staff ............... //
 /obj/item/weapon/polearm/woodstaff
@@ -427,7 +354,7 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = GOOD_PARRY
-	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST, /datum/intent/pick)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST, PICK_INTENT)
 	minstr = 10
 
 	bigboy = TRUE
@@ -661,31 +588,6 @@
 	melting_material = null
 	blade_dulling = DULLING_BASHCHOP
 
-/datum/intent/spear/cut/naginata
-	damfactor = 1.2
-	chargetime = 0
-
-/datum/intent/rend
-	name = "rend"
-	icon_state = "inrend"
-	attack_verb = list("rends")
-	animname = "cut"
-	blade_class = BCLASS_CHOP
-	reach = 1
-	damfactor = 1.2
-	chargetime = 10
-	no_early_release = TRUE
-	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
-	item_damage_type = "slash"
-	misscost = 10
-
-/datum/intent/rend/reach
-	name = "long rend"
-	penfactor = -100
-	misscost = 5
-	chargetime = 5
-	reach = 2
-
 /obj/item/weapon/spear/naginata
 	name = "Naginata"
 	desc = "A traditional Kazengunese polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of Kazengunese bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
@@ -710,11 +612,6 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 4,"sy" = -2,"nx" = -3,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-/datum/intent/spear/bash/ranged
-	reach = 2
-
-/datum/intent/mace/smash/wood/ranged
-	reach = 2
 
 /obj/item/weapon/polearm/woodstaff/naledi
 	name = "psydonian warstaff"

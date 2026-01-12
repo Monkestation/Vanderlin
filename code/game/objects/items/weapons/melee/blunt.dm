@@ -71,78 +71,6 @@
 	wdefense = GOOD_PARRY
 	sellprice = 35
 
-/*--------------\
-| Strike intent |	moderate AP
-\--------------*/
-/datum/intent/mace/strike
-	name = "strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("strikes", "hits")
-	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	chargetime = 0
-	penfactor = AP_CLUB_STRIKE
-	swingdelay = 0
-	icon_state = "instrike"
-	misscost = 5
-	item_damage_type = "blunt"
-
-/datum/intent/mace/strike/wood
-	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
-
-/datum/intent/mace/strike/heavy
-	penfactor = AP_CLUB_HEAVY_STRIKE
-	swingdelay = 2
-	icon_state = "instrike"
-	misscost = 12
-
-
-/*--------------\
-| Smash intent |	10% force increase and moderate+ AP, has slightly higher penalties
-\--------------*/
-/datum/intent/mace/smash
-	name = "smash"
-	blade_class = BCLASS_SMASH
-	attack_verb = list("smashes")
-	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	penfactor = AP_CLUB_SMASH
-	damfactor = 1.1
-	chargetime = 3
-	swingdelay = 3
-	charging_slowdown = 0.8
-	icon_state = "insmash"
-	misscost = 10
-	item_damage_type = "blunt"
-
-/datum/intent/mace/smash/wood
-	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
-
-/datum/intent/mace/smash/heavy
-	penfactor = AP_HEAVY_SMASH
-	damfactor = 1.2
-	chargetime = 3
-	swingdelay = 3
-	misscost = 22
-	warnie = "mobwarning"
-
-
-/*--------------\
-| Thrust intent |	Godendag stab
-\--------------*/
-/datum/intent/mace/thrust
-	name = "thrust"
-	blade_class = BCLASS_STAB
-	attack_verb = list("stabs")
-	animname = "stab"
-	icon_state = "instab"
-	reach = 2
-	chargetime = 1
-	warnie = "mobwarning"
-	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 40
-	swingdelay = 1
-	misscost = 15
-	item_damage_type = "blunt"
-
 //................  Canes, my beloved. ............... //
 
 /obj/item/weapon/mace/cane
@@ -672,32 +600,6 @@
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	melting_material = /datum/material/steel
 	melt_amount = 150
-
-/datum/intent/mace/warhammer/stab
-	name = "thrust"
-	icon_state = "instab"
-	blade_class = BCLASS_STAB
-	attack_verb = list("thrusts", "stabs")
-	animname = "stab"
-	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 20
-	damfactor = 0.8
-	item_damage_type = "stab"
-
-/datum/intent/mace/warhammer/impale
-	name = "impale"
-	icon_state = "inimpale"
-	blade_class = BCLASS_PICK
-	attack_verb = list("picks", "impales")
-	animname = "stab"
-	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	chargetime = 14
-	chargedrain = 1
-	misscost = 1
-	no_early_release = TRUE
-	penfactor = 80
-	damfactor = 0.9
-	item_damage_type = "stab"
 
 //................ Elven Club  ............... //
 

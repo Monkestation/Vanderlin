@@ -37,7 +37,7 @@
 	name = "scalpel"
 	desc = "A tool used to carve precisely into the flesh of the sickly."
 	icon_state = "scalpel"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
@@ -66,7 +66,7 @@
 	name = "forceps"
 	desc = "A tool used to clamp down on soft tissue."
 	icon_state = "forceps"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
@@ -78,7 +78,7 @@
 	name = "speculum"
 	desc = "A tool used to spread tissue open for surgical access."
 	icon_state = "speculum"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
@@ -92,7 +92,7 @@
 	name = "bone-setter"
 	desc = "A tool used to manipulate joints and bones."
 	icon_state = "bonesetter"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
@@ -107,7 +107,7 @@
 	force = DAMAGE_MACE-2
 	throwforce = DAMAGE_MACE-2
 	wbalance = EASY_TO_DODGE
-	possible_item_intents = list(/datum/intent/use, /datum/intent/mace/strike, /datum/intent/mace/smash)
+	possible_item_intents = list(INTENT_USE, MACE_STRIKE, MACE_SMASH)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
@@ -131,7 +131,7 @@
 	icon_state = "[initial(icon_state)][heated ? "_hot" : ""]"
 
 /obj/item/weapon/surgery/cautery/pre_attack(atom/A, mob/living/user, params)
-	if(!istype(user.a_intent, /datum/intent/use))
+	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
 	var/heating = 0
 	if(istype(A, /obj/machinery/light/fueled))
@@ -173,7 +173,7 @@
 	force = DAMAGE_CLUB-5
 	throwforce = DAMAGE_CLUB-7
 	wbalance = EASY_TO_DODGE
-	possible_item_intents = list(/datum/intent/use, /datum/intent/mace/strike, /datum/intent/mace/smash)
+	possible_item_intents = list(INTENT_USE, MACE_STRIKE, MACE_SMASH)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
@@ -184,7 +184,7 @@
 
 
 /obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, params)
-	if(!istype(user.a_intent, /datum/intent/use))
+	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
 	if(user.get_skill_level(/datum/skill/misc/medicine) < 1)
 		return ..()

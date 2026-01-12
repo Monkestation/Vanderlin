@@ -7,7 +7,7 @@
 	icon_state = "choe"
 	force = DAMAGE_STAFF
 	force_wielded = DAMAGE_STAFF_WIELD
-	possible_item_intents = list(/datum/intent/pick)
+	possible_item_intents = list(INTENT_USE)
 	experimental_inhand = TRUE
 	experimental_onback = TRUE
 	experimental_onhip = TRUE

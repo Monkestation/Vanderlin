@@ -183,7 +183,7 @@
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
-	gripped_intents = list(TILL_INTENT,/datum/intent/pick,POLEARM_BASH)
+	gripped_intents = list(TILL_INTENT, PICK_INTENT, POLEARM_BASH)
 	experimental_inhand = FALSE
 	experimental_onback = FALSE
 	experimental_onhip = FALSE

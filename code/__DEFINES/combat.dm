@@ -132,9 +132,29 @@
 
 //Weapon intents
 #define SWORD_CUT		 /datum/intent/sword/cut
+#define SHORT_CUT		 /datum/intent/sword/cut/short
+#define SWDLONG_CUT		 /datum/intent/sword/cut/long
 #define SWORD_THRUST	 /datum/intent/sword/thrust
+#define SHORT_THRUST	 /datum/intent/sword/thrust/short
+#define SWDLONG_THRUST	 /datum/intent/sword/thrust/long
+#define CURVED_THRUST	 /datum/intent/sword/thrust/curved
 #define SWORD_CHOP		 /datum/intent/sword/chop //2h swords only
+#define SWDLONG_CHOP	 /datum/intent/sword/chop/long
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
+#define SWORD_DISARM	 /datum/intent/sword/disarm
+#define POMMEL_BASH		 /datum/intent/sword/bash
+
+#define PRECISION_CUT	 /datum/intent/katana/precision_cut
+#define KATANA_CUT		 /datum/intent/katana/cut
+#define KATANA_ARC		 /datum/intent/katana/arc
+#define KATANA_ONEHAND	 /datum/intent/katana/cut/one_hand_cut
+
+#define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
+#define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define ZWEI_THRUST		 /datum/intent/sword/thrust/zwei
+#define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
+#define RAPIER_CUT		 /datum/intent/sword/cut/rapier
+#define ESTOC_LUNGE 	 /datum/intent/sword/lunge
 
 #define AXE_CUT				/datum/intent/axe/cut
 #define AXE_THRUST			/datum/intent/axe/thrust
@@ -200,11 +220,13 @@
 
 #define NEANT_SHOOT			/datum/intent/shoot/neant
 #define PLEX_BLINK			/datum/intent/plex_dash
+#define DAZE_BASH			/datum/intent/effect/daze
 
 #define INTENT_FEED			/datum/intent/food
 
 #define DUMP_INTENT			/datum/intent/pforkdump
 #define TILL_INTENT			/datum/intent/till
+#define PICK_INTENT			/datum/intent/pick
 
 #define ROD_CAST			/datum/intent/cast
 #define ROD_AUTO			/datum/intent/auto

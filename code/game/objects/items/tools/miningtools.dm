@@ -1,6 +1,6 @@
 /obj/item/weapon/pick
 	force = 16
-	possible_item_intents = list(/datum/intent/pick)
+	possible_item_intents = list(PICK_INTENT)
 	name = "pick"
 	desc = ""
 	icon_state = "pick"
@@ -43,7 +43,7 @@
 	desc = "With a reinforced handle and sturdy shaft, this is a superior tool for delving in the darkness."
 	icon_state = "steelpick"
 	force = 19
-	gripped_intents = list(/datum/intent/pick)
+	gripped_intents = list(PICK_INTENT)
 	max_integrity = INTEGRITY_STRONGEST+100
 	melting_material = /datum/material/steel
 	melt_amount = 75
@@ -54,7 +54,7 @@
 	desc = "Stone versus sharp stone, who wins?"
 	icon_state = "stonepick"
 	force = 10
-	gripped_intents = list(/datum/intent/pick)
+	gripped_intents = list(PICK_INTENT)
 	max_integrity = INTEGRITY_STANDARD+50
 	anvilrepair = null
 	melting_material = null
@@ -68,7 +68,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/hammers_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/hammers_righthand.dmi'
 	item_state = "drill"
-	possible_item_intents = list(/datum/intent/mace/smash)
+	possible_item_intents = list(MACE_SMASH)
 	gripped_intents = list(/datum/intent/drill)
 	experimental_inhand = FALSE
 	experimental_onback = FALSE

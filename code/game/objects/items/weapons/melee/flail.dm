@@ -38,48 +38,6 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/*--------------\
-| Strike intent |	small AP
-\--------------*/
-/datum/intent/flail/strike
-	name = "strike"
-	icon_state = "instrike"
-	blade_class = BCLASS_BLUNT
-	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	swingdelay = 5
-	misscost = 5
-	attack_verb = list("strikes", "hits")
-	penfactor = AP_FLAIL_STRIKE
-	item_damage_type = "slash"
-
-/datum/intent/flail/strike/long
-	reach = 2
-	misscost = 8
-
-
-/*--------------\
-| Smash intent |	20% force increase and huge AP, requires charging and has higher penalties
-\--------------*/
-/datum/intent/flail/strike/smash
-	name = "smash"
-	icon_state = "insmash"
-	blade_class = BCLASS_SMASH
-	no_early_release = TRUE
-	chargetime = 5
-	chargedloop = /datum/looping_sound/flailswing
-	keep_looping = TRUE
-	recovery = 10
-	misscost = 10
-	attack_verb = list("smashes")
-	damfactor = 1.2
-	penfactor = AP_FLAIL_SMASH
-	item_damage_type = "slash"
-
-/datum/intent/flail/strike/smash/long
-	reach = 2
-	recovery = 12
-	misscost = 12
-
 
 //................ Militia Flail ............... //
 /obj/item/weapon/flail/militia
@@ -181,34 +139,6 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/datum/intent/flail/strike/smashrange
-	name = "ranged smash"
-	chargetime = 10
-	chargedrain = 2
-	no_early_release = TRUE
-	recovery = 30
-	damfactor = 1.5
-	penfactor = -100
-	reach = 2
-	chargedloop = /datum/looping_sound/flailswing
-	keep_looping = TRUE
-	icon_state = "insmash"
-	blade_class = BCLASS_SMASH
-	attack_verb = list("smashes")
-	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	item_damage_type = "blunt"
-
-/datum/intent/flail/strikerange
-	name = "ranged strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("strikes", "hits")
-	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	chargetime = 0
-	recovery = 15
-	penfactor = -100
-	reach = 2
-	icon_state = "instrike"
-	item_damage_type = "blunt"
 
 /obj/item/weapon/flail/peasantwarflail
 	name = "militia thresher"
@@ -246,12 +176,6 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-
-/datum/intent/flail/strike/matthiosflail
-	reach = 2
-
-/datum/intent/flail/strike/smash/matthiosflail
-	reach = 2
 
 /obj/item/weapon/flail/peasantwarflail/matthios
 	name = "Gilded Flail"
