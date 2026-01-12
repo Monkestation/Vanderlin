@@ -129,35 +129,6 @@
 	recovery = 12
 	misscost = 12
 
-/datum/intent/flail/strike/smashrange
-	name = "ranged smash"
-	chargetime = 10
-	chargedrain = 2
-	no_early_release = TRUE
-	recovery = 30
-	damfactor = 1.5
-	penfactor = -100
-	reach = 2
-	chargedloop = /datum/looping_sound/flailswing
-	keep_looping = TRUE
-	icon_state = "insmash"
-	blade_class = BCLASS_SMASH
-	attack_verb = list("smashes")
-	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	item_damage_type = "blunt"
-
-/datum/intent/flail/strikerange
-	name = "ranged strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("strikes", "hits")
-	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	chargetime = 0
-	recovery = 15
-	penfactor = -100
-	reach = 2
-	icon_state = "instrike"
-	item_damage_type = "blunt"
-
 /datum/intent/flail/strike/matthiosflail
 	reach = 2
 

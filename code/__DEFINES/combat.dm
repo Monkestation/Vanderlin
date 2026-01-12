@@ -203,8 +203,6 @@
 #define FLAIL_LNGSTRIKE		/datum/intent/flail/strike/long
 #define FLAIL_SMASH			/datum/intent/flail/strike/smash
 #define FLAIL_LNGSMASH		/datum/intent/flail/strike/smash/long
-#define PEASANT_STRIKE		/datum/intent/flail/strikerange
-#define PEASANT_SMASH		/datum/intent/flail/strike/smashrange
 #define MATTHIOS_STRIKE		/datum/intent/flail/strike/matthiosflail
 #define MATTHIOS_SMASH		/datum/intent/flail/strike/smash/matthiosflail
 

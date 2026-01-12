@@ -147,11 +147,10 @@
 	icon_state = "peasantwarflail"
 	force = DAMAGE_WEAK_FLAIL-7
 	force_wielded = DAMAGE_GOOD_FLAIL+7
-	wdefense = GREAT_PARRY //Why?
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(FLAIL_STRIKE)
-	gripped_intents = list(PEASANT_STRIKE, PEASANT_SMASH)
+	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
 	minstr = 9
 
 	pixel_y = -16
