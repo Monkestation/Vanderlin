@@ -5,7 +5,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	force = DAMAGE_HAMMER
-	possible_item_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
+	possible_item_intents = list(MACE_STRIKE, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	sharpness = IS_BLUNT
 	wlength = 10
@@ -180,12 +180,7 @@
 	icon_state = "chammer"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	force = DAMAGE_HAMMER-2
-	possible_item_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
-	sharpness = IS_BLUNT
-	//dropshrink = 0.8
 	max_integrity = INTEGRITY_POOR
-	slot_flags = ITEM_SLOT_HIP
-	w_class = WEIGHT_CLASS_NORMAL
 	melting_material = /datum/material/copper
 	time_multiplier = 1.1
 
@@ -194,14 +189,13 @@
 	desc = "It's almost asking to be put to work."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "sledgehammer"
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
+	possible_item_intents = list(MACE_STRIKE)
+	gripped_intents = list(MACE_HVYSTRIKE, MACE_HVYSMASH)
 	wbalance = EASY_TO_DODGE // Heavy
 	minstr = 8
 
 	gripsprite = TRUE
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
-	w_class = WEIGHT_CLASS_NORMAL
 	melt_amount = 100
 	grid_width = null
 	grid_height = null
@@ -224,8 +218,6 @@
 	icon_state = "warbonker"
 	force = DAMAGE_HAMMER+5
 	force_wielded = DAMAGE_HAMMER_WIELD+10
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
 	max_integrity = INTEGRITY_STRONGEST
 	melt_amount = 50
 	melting_material = /datum/material/steel
@@ -240,12 +232,9 @@
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	possible_item_intents = list(/datum/intent/mace/strike/heavy)
-	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
 	max_integrity = INTEGRITY_STRONGEST * 1.2
 	minstr = 10
 
-	parrysound = list('sound/combat/parry/parrygen.ogg')
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
@@ -256,8 +245,6 @@
 	w_class = WEIGHT_CLASS_HUGE
 	slot_flags = ITEM_SLOT_BACK
 	melt_amount = 150
-	melting_material = /datum/material/steel
-	resistance_flags = FIRE_PROOF
 	sellprice = 1	//breaking bad cash pallet dot jpg
 
 /obj/item/weapon/hammer/sledgehammer/war/malum/getonmobprop(tag)
