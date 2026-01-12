@@ -581,7 +581,6 @@
 	max_integrity = INTEGRITY_WORST-40
 	minstr = 6
 
-	//SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	bigboy = TRUE

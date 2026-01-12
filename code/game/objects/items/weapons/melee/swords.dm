@@ -697,8 +697,6 @@
 	gripped_intents = list(SWDLONG_CUT, SHOTEL_CHOP)
 
 	gripsprite = FALSE
-	pixel_y = -16
-	pixel_x = -16
 	dropshrink = 0.8
 	sellprice = 80
 	max_integrity = INTEGRITY_STRONG - 50 //this thing is long as hell, it would be more likely to break over time
@@ -718,7 +716,7 @@
 			if("onbelt")
 				return list("shrink" = 0.4,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/sword/long/shotel/iron
+/obj/item/weapon/sword/long/shotel/iron //Balance-patch
 	name = "iron shotel"
 	icon_state = "shotel_iron"
 	max_integrity = INTEGRITY_STANDARD - 50
@@ -769,7 +767,7 @@
 			if("onbelt")
 				return list("shrink" = 0.4,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/sword/long/aruval/iron
+/obj/item/weapon/sword/long/aruval/iron //Balance-patch
 	name = "iron aruval"
 	icon_state = "aruval_iron"
 	max_integrity = INTEGRITY_POOR-25
@@ -928,9 +926,9 @@
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-
 	max_blade_int = INTEGRITY_STRONG * 0.8 // Integrity and blade retention is .8 of a steel sword
 	max_integrity = INTEGRITY_STRONGEST * 0.8
+
 	last_used = 0
 	melting_material = /datum/material/silver
 	melt_amount = 75
@@ -957,9 +955,9 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 
-	sellprice = 100
 	last_used = 0
 	melting_material = /datum/material/silver
+	sellprice = 100
 
 /obj/item/weapon/sword/long/psydon/Initialize(mapload)
 	. = ..()
@@ -974,9 +972,9 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD+2
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
+
 	last_used = 0
 	melting_material = /datum/material/silver
 	sellprice = 160
@@ -1390,12 +1388,7 @@
 
 	parrysound = "sword"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
-	gripsprite = TRUE
-	SET_BASE_PIXEL(-16, -16)
-	inhand_x_dimension = 64
-	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK//how the fuck you could put this thing on your hip?
-	dropshrink = 0.75
 	melting_material = /datum/material/copper
 	sellprice = 25//lets make the two bars worth it
 
@@ -1727,10 +1720,6 @@
 
 	parrysound = "bladedmedium"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
-	pixel_y = -16
-	pixel_x = -16
-	inhand_x_dimension = 64
-	inhand_y_dimension = 64
 	dropshrink = 1
 	melting_material = /datum/material/gold
 
