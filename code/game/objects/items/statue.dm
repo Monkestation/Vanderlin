@@ -199,7 +199,7 @@
 	desc = "A cameo made out of silver depicting...someone? Use your imagination for who it could be."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "cameo_silv"
-	sellprice = 15S
+	sellprice = 15
 
 /obj/item/statue/silver/cameo/Initialize()
 	. = ..()
@@ -210,7 +210,7 @@
 	desc = "A silver comb, great for combing your hair or lack thereof."
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "combs_silv"
-	sellprice = 15
+	sellprice = 10
 
 /obj/item/statue/silver/comb/Initialize()
 	. = ..()
