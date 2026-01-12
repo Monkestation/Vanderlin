@@ -14,15 +14,19 @@
 
 /obj/item/reagent_containers/food/snacks/produce/fruit
 	name = "fruit"
+	naturalist = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/vegetable
 	name = "vegetable"
+	naturalist = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/grain
 	name = "grain"
+	naturalist = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom
 	name = "mushroom"
+	naturalist = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/Initialize(mapload)
 	. = ..()

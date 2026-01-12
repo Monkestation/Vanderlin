@@ -273,7 +273,7 @@
 			if(!target.has_buckled_mobs())
 				user.visible_message("<span class='warning'>[user] tries to saddle [target]...</span>")
 				if(do_after(user, 4 SECONDS, target))
-					playsound(loc, 'sound/foley/saddledismount.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/saddledismount.ogg', 100, FALSE)
 					user.dropItemToGround(src)
 					S.ssaddle = src
 					src.forceMove(S)
@@ -286,7 +286,7 @@
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	user.do_attack_animation(src, ATTACK_EFFECT_BITE)
-	playsound(user.loc, "smallslash", 100, FALSE, -1)
+	playsound(user, "smallslash", 100, FALSE, -1)
 	user.next_attack_msg.Cut()
 	if(stat == DEAD)
 		if(user.has_status_effect(/datum/status_effect/debuff/silver_curse))

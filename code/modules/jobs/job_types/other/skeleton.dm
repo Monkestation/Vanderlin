@@ -52,8 +52,8 @@
 	spawned.grant_undead_eyes()
 	spawned.ambushable = FALSE
 	spawned.underwear = "Nude"
-	if(spawned.charflaw)
-		QDEL_NULL(spawned.charflaw)
+	if(length(spawned.quirks))
+		spawned.clear_quirks()
 	spawned.update_body()
 	spawned.mob_biotypes = MOB_UNDEAD
 	spawned.faction = list(FACTION_UNDEAD)
@@ -148,7 +148,7 @@
 		armor = /obj/item/clothing/armor/cuirass/iron/rust
 
 	// Randomized headgear
-	switch(pick(1,9))
+	switch(rand(1,9))
 		if (1) head = /obj/item/clothing/head/helmet/kettle
 		if (2) head = /obj/item/clothing/head/helmet/winged
 		if (3) head = /obj/item/clothing/head/helmet/leather/conical
@@ -164,7 +164,7 @@
 		backr = /obj/item/weapon/shield/wood
 
 	// Randomized weapons
-	switch(pick(1,6))
+	switch(rand(1,6))
 		if (1)
 			var/obj/item/weapon/sword/short/iron/P = new()
 			equipped_human.put_in_hands(P, forced = TRUE)

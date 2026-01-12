@@ -203,6 +203,10 @@
 	if(!owner)
 		return PROCESS_KILL
 
+	if(!can_cast_spell(TRUE))
+		cancel_casting()
+		return PROCESS_KILL
+
 	if(charge_drain)
 		if(!check_cost(charge_drain))
 			owner.balloon_alert(owner, "I cannot uphold the channeling!")
@@ -684,7 +688,7 @@
 	invocation(invoker)
 
 	if(sound)
-		playsound(get_turf(owner), sound, 50, TRUE)
+		playsound(owner, sound, 50, TRUE)
 
 /// The invocation that accompanies the spell, called from spell_feedback() before cast().
 /datum/action/cooldown/spell/proc/invocation(mob/living/invoker)

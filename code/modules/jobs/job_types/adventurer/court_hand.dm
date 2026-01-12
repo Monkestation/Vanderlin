@@ -8,6 +8,7 @@
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 0
 	spawn_positions = 2
+	department_flag = NOBLEMEN
 
 	outfit = null
 	outfit_female = null

@@ -207,9 +207,9 @@
 					if(!throwable_mob.buckled)
 						var/obj/item/grabbing/other_grab = offhand ? get_active_held_item() : get_inactive_held_item()
 						if(grab_state < GRAB_AGGRESSIVE)
-							stop_pulling()
+							stop_pulling(pulling_broke_free = TRUE)
 							return
-						stop_pulling()
+						stop_pulling(pulling_broke_free = TRUE)
 						if(HAS_TRAIT(src, TRAIT_PACIFISM))
 							to_chat(src, span_notice("I gently let go of [throwable_mob]."))
 							return
@@ -257,15 +257,7 @@
 		thrown_thing.safe_throw_at(end_T, thrown_range, thrown_speed, src, null, null, null, move_force)
 		if(!used_sound)
 			used_sound = pick(PUNCHWOOSH)
-		playsound(get_turf(src), used_sound, 60, FALSE)
-
-// /mob/living/carbon/restrained(IGNORE_GRAB)
-// //	. = (handcuffed || (!ignore_grab && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE))
-// 	if(handcuffed)
-// 		return TRUE
-// 	if(pulledby && !ignore_grab)
-// 		if(pulledby != src)
-// 			return TRUE
+		playsound(src, used_sound, 60, FALSE)
 
 /mob/living/carbon/proc/canBeHandcuffed()
 	return 0
@@ -316,6 +308,9 @@
 	loc?.handle_fall(src)//it's loc so it doesn't call the mob's handle_fall which does nothing
 
 /mob/living/carbon/is_muzzled()
+	for(var/obj/item/clothing/clothing in get_equipped_items())
+		if(clothing.clothing_flags & BLOCKS_SPEECH)
+			return TRUE
 	return FALSE
 
 /obj/structure
@@ -602,7 +597,7 @@
 		Immobilize(59)
 
 	if(!blood)
-		playsound(get_turf(src), pick('sound/vo/vomit.ogg','sound/vo/vomit_2.ogg'), 100, TRUE)
+		playsound(src, pick('sound/vo/vomit.ogg','sound/vo/vomit_2.ogg'), 100, TRUE)
 	else
 		if(stat != DEAD)
 			playsound(src, pick('sound/vo/throat.ogg','sound/vo/throat2.ogg','sound/vo/throat3.ogg'), 100, FALSE)
@@ -616,6 +611,7 @@
 			adjust_hydration(-lost_nutrition)
 	if(harm)
 		adjustBruteLoss(3)
+
 	for(var/i=0 to distance)
 		if(blood)
 			if(T)
@@ -627,6 +623,24 @@
 		if (is_blocked_turf(T))
 			break
 	return TRUE
+
+/**
+ * Expel the reagents you just tried to ingest
+ *
+ * When you try to ingest reagents but you do not have a stomach
+ * you will spew the reagents on the floor.
+ *
+ * Vars:
+ * * bite: /atom the reagents to expel
+ * * amount: int The amount of reagent
+ */
+/mob/living/carbon/proc/expel_ingested(atom/bite, amount)
+	visible_message("<span class='danger'>[src] throws up all over [p_them()]self!</span>", \
+					"<span class='userdanger'>You are unable to keep the [bite] down without a stomach!</span>")
+
+	var/turf/floor = get_turf(src)
+	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
+	bite.reagents.trans_to(spew, amount, transfered_by = src)
 
 /mob/living/carbon/proc/spew_organ(power = 5, amt = 1)
 	for(var/i in 1 to amt)
@@ -1422,24 +1436,3 @@
 	if(!dna?.species)
 		return
 	return dna?.species.id == species
-
-/mob/living/carbon/proc/get_pain_factor()
-	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-		return FALSE
-
-	var/raw = get_complex_pain()
-	var/shock = calculate_shock_stage()
-
-	// Shock reduces pain perception
-	if(shock >= 60)
-		var/shock_reduction = min(0.3, shock * 0.001)
-		raw *= (1 - shock_reduction)
-
-	// Endurance scaling
-	var/painpercent = (raw/(STAEND * 13)) * 100
-
-	// Apply tolerance
-	painpercent *= (1 - (pain_tolerance * 0.01))
-
-	// Return normalized value between 0 and 1
-	return clamp(painpercent/100, 0, 1)

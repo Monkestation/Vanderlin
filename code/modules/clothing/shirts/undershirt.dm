@@ -121,6 +121,9 @@
 /obj/item/clothing/shirt/undershirt/sash/colored/blue
 	color = CLOTHING_BERRY_BLUE
 
+/obj/item/clothing/shirt/undershirt/sash/colored/mageblue
+	color = CLOTHING_MAGE_BLUE
+
 /obj/item/clothing/shirt/undershirt/sash/colored/green
 	color = CLOTHING_SPRING_GREEN
 

@@ -30,7 +30,7 @@
 /turf/open/floor/rooftop/green,
 /area/template_noop)
 "E" = (
-/obj/structure/sign/property_for_sale,
+/obj/structure/sign/property_sign/claim,
 /turf/closed/wall/mineral/underbrick,
 /area/indoors)
 "N" = (
@@ -76,7 +76,7 @@ P
 P
 p
 p
-W
+E
 "}
 (3,1,1) = {"
 W
@@ -98,7 +98,7 @@ P
 P
 p
 p
-E
+W
 "}
 (5,1,1) = {"
 W

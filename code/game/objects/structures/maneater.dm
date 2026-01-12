@@ -143,7 +143,7 @@
 		if(!HAS_TRAIT(L, TRAIT_NOPAIN))
 			L.emote("painscream", forced = TRUE)
 		visible_message(span_danger("[src] snatches [L]!"))
-		playsound(loc, pick(attack_sounds), 100, FALSE, -1)
+		playsound(src, pick(attack_sounds), 100, FALSE, -1)
 		COOLDOWN_START(src, activity_cooldown, sleep_time)
 		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 		return

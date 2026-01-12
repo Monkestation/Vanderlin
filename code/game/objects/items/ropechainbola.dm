@@ -178,7 +178,7 @@
 /obj/item/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
 	if(!..())
 		return
-	playsound(src.loc,'sound/blank.ogg', 75, TRUE)
+	playsound(src,'sound/blank.ogg', 75, TRUE)
 
 /obj/item/net/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(..() || !iscarbon(hit_atom))//if it gets caught or the target can't be cuffed,
@@ -288,7 +288,7 @@
 				to_chat(M, "<span class='userdanger'>I tie \the [src] over my neck...</span>")
 			else
 				to_chat(M, "<span class='userdanger'>[user] ties \the [src] over my neck!</span>")
-			playsound(user.loc, 'sound/foley/noosed.ogg', 50, 1, -1)
+			playsound(user, 'sound/foley/noosed.ogg', 50, 1, -1)
 			return TRUE
 	user.visible_message("<span class='warning'>[user] fails to tie \the [src] over [M]'s neck!</span>")
 	to_chat(user, "<span class='warning'>I fail to tie \the [src] over [M]'s neck.</span>")
@@ -327,7 +327,7 @@
 											"<span class='danger'>[buckled_mob]'s hands are desperately clutching the noose.</span>",\
 											"<span class='danger'>[buckled_mob]'s limbs sway back and forth with diminishing strength.</span>")
 					buckled_mob.visible_message(pick(flavor_text))
-				playsound(buckled_mob.loc, 'sound/foley/noose_idle.ogg', 30, 1, -3)
+				playsound(buckled_mob, 'sound/foley/noose_idle.ogg', 30, 1, -3)
 			else
 				if(prob(1))
 					var/obj/item/bodypart/head/head = buckled_mob.get_bodypart("head")

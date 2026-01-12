@@ -48,3 +48,6 @@
 
 /obj/item/clothing/pants/skirt/patkilt/colored/red
 	color = CLOTHING_RED_OCHRE
+
+/obj/item/clothing/pants/skirt/patkilt/colored/mageblue
+	color = CLOTHING_MAGE_BLUE
