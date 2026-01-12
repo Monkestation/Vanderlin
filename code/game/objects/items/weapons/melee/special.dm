@@ -257,7 +257,7 @@
 	throwforce = DAMAGE_KATAR-3
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(/KATAR_CUT, KATAR_THRUST)
+	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
 	max_blade_int = 150
 	max_integrity = INTEGRITY_WORST-20
 
