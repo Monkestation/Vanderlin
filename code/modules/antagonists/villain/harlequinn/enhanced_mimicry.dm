@@ -74,7 +74,7 @@
 
 	// Complete transformation
 	target.dna.transfer_identity(transformer)
-	reset_limb_fingerprints()
+	transformer.reset_limb_fingerprints()
 	transformer.updateappearance(mutcolor_update = TRUE)
 	transformer.real_name = target.dna.real_name
 	transformer.name = target.get_visible_name()
@@ -131,7 +131,7 @@
 
 	var/datum/dna/old_dna = dna_ref.resolve()
 	old_dna.transfer_identity(transformer)
-	reset_limb_fingerprints()
+	transformer.reset_limb_fingerprints()
 	transformer.real_name = old_dna.real_name
 	transformer.name = transformer.get_visible_name()
 	transformer.gender = old_gender
