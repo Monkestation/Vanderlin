@@ -227,7 +227,7 @@
 	minstr = 7
 	swingsound = BLADEWOOSH_LARGE
 
-/obj/item/weapon/sword/sabre/hwi/iron //Reminder to fix this shit, it has the exact same stats as the steel hwi
+/obj/item/weapon/sword/sabre/hwi/iron //Fix this in a balance PR
 	name = "iron hwi"
 	desc = "A hefty iron sabre of Lakkarian origin. It's defensive design is great for stopping lethal blows."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
@@ -1722,9 +1722,9 @@
 	throwforce = DAMAGE_SWORD-5
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWORD_CHOP)
-
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
+
 	parrysound = "bladedmedium"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
 	pixel_y = -16
