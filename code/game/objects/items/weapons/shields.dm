@@ -195,7 +195,7 @@
 	wdefense = ULTMATE_PARRY+3
 	wbalance = EASY_TO_DODGE // Heavy, big shield
 	coverage = 75 // Rare shield from unique job, gets a tiny bit of additional coverage
-	possible_item_intents = list(/datum/intent/shield/bash/metal, /datum/intent/shield/block/metal)
+	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
 	throw_speed = 1
 	throw_range = 3
 	wlength = WLENGTH_NORMAL
@@ -226,7 +226,7 @@
 	throwforce = DAMAGE_SHIELD
 	wdefense = ULTMATE_PARRY+2
 	coverage = 70
-	possible_item_intents = list(/datum/intent/shield/bash/metal, /datum/intent/shield/block/metal)
+	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
 	throw_speed = 1
 	throw_range = 3
 	wlength = WLENGTH_NORMAL

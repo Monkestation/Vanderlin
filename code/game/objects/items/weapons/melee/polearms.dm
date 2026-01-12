@@ -598,8 +598,8 @@
 	force_wielded = DAMAGE_SPEAR_WIELD+5
 	throwforce = DAMAGE_SPEAR-3
 	wdefense = ULTMATE_PARRY
-	possible_item_intents = list(/datum/intent/spear/cut/naginata, /datum/intent/spear/bash) // no stab for you little chuddy, it's a slashing weapon
-	gripped_intents = list(/datum/intent/rend/reach, /datum/intent/spear/cut/naginata, /datum/intent/spear/bash)
+	possible_item_intents = list(NAGI_CUT, POLEARM_BASH) // no stab for you little chuddy, it's a slashing weapon
+	gripped_intents = list(NAGI_REND, NAGI_CUT, POLEARM_BASH)
 	max_blade_int = 50 //Nippon suteeru (dogshit)
 	minstr = 7
 	blade_dulling = DULLING_BASHCHOP
@@ -620,8 +620,8 @@
 	icon_state = "naledistaff"
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD-3
-	possible_item_intents = list(/datum/intent/spear/bash)
-	gripped_intents = list(/datum/intent/spear/bash/ranged,/datum/intent/mace/smash/wood/ranged)
+	possible_item_intents = list(POLEARM_BASH)
+	gripped_intents = list(POLEARM_BASHRNG, MACE_WDRANGE)
 	max_integrity = INTEGRITY_STANDARD+50
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)

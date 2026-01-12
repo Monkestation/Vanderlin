@@ -153,6 +153,7 @@
 #define ZWEI_CUT		 /datum/intent/sword/cut/zwei
 #define ZWEI_THRUST		 /datum/intent/sword/thrust/zwei
 #define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
+#define HOOK_THRUST		 /datum/intent/sword/thrust/hook
 #define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 #define ESTOC_LUNGE 	 /datum/intent/sword/lunge
 #define ESTOC_THRUST	 /datum/intent/sword/thrust/estoc
@@ -168,7 +169,7 @@
 #define DBLGREATAXE_CHOP	/datum/intent/axe/chop/battle/greataxe/doublehead
 
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
-#define SPEAR_BASHRNG		/datum/intent/spear/bash/ranged
+#define POLEARM_BASHRNG		/datum/intent/polearm/bash/ranged
 #define POLEARM_BASH		/datum/intent/polearm/bash
 #define POLEARM_CHOP		/datum/intent/polearm/chop
 #define SPEAR_CUT			/datum/intent/polearm/cut
@@ -176,6 +177,8 @@
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SCYTHE_CHOP			/datum/intent/axe/chop/scythe
 #define SCYTHE_CUT			/datum/intent/spear/cut/bardiche/scythe
+#define NAGI_CUT			/datum/intent/spear/cut/naginata
+#define NAGI_REND			/datum/intent/rend/reach
 
 #define MESSER_CHOP			/datum/intent/sword/chop/messer
 
@@ -211,11 +214,14 @@
 #define WHIP_CUT			/datum/intent/whip/cut
 #define WHIP_LASH			/datum/intent/whip/lash
 #define WHIP_MTLLASH		/datum/intent/whip/lash/metal
+#define CANE_LASH			/datum/intent/whip/lash/cane
 
 #define DAGGER_CUT			/datum/intent/dagger/cut
 #define DAGGER_THRUST		/datum/intent/dagger/thrust
 #define DAGGER_CHOP			/datum/intent/dagger/chop
 #define CLEAVER_CHOP		/datum/intent/dagger/chop/cleaver
+#define SCISSOR_SNIP		/datum/intent/snip
+#define FACE_STEAL			/datum/intent/peculate
 
 #define KNUCKLE_STRIKE		/datum/intent/knuckles/strike
 #define KNUCKLE_SMASH		/datum/intent/knuckles/smash
@@ -231,6 +237,7 @@
 #define DUMP_INTENT			/datum/intent/pforkdump
 #define TILL_INTENT			/datum/intent/till
 #define PICK_INTENT			/datum/intent/pick
+#define FLAIL_THRESH		/datum/intent/flailthresh
 
 #define ROD_CAST			/datum/intent/cast
 #define ROD_AUTO			/datum/intent/auto
@@ -246,7 +253,9 @@
 #define INTENT_USE			/datum/intent/use
 
 #define SHIELD_BASH		/datum/intent/shield/bash
+#define METAL_BASH		/datum/intent/shield/bash/metal
 #define SHIELD_BLOCK		/datum/intent/shield/block
+#define METAL_BLOCK			/datum/intent/shield/block/metal
 
 // animation types
 #define ATTACK_ANIMATION_BONK "bonk"

@@ -94,7 +94,7 @@
 	icon_state = "canestick"
 	force = DAMAGE_WHIP / 2
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(/datum/intent/whip/lash/cane)
+	possible_item_intents = list(CANE_LASH)
 	max_integrity = 4 // Striking unarmoured parts doesn't take integrity, four hits to anything with an armor value will break it.
 	sellprice = 0
 

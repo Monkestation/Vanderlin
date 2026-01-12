@@ -95,7 +95,7 @@
 	desc = "Scissors made of iron that may be used to salvage usable materials from clothing."
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "iscissors"
-	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, /datum/intent/snip)
+	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, SCISSOR_SNIP)
 	max_integrity = INTEGRITY_WORST
 	melt_amount = 75
 
@@ -320,7 +320,7 @@
 /obj/item/weapon/knife/dagger/steel/profane
 	// name = "profane dagger"
 	// desc = "A profane dagger made of cursed black steel. Whispers emanate from the gem on its hilt."
-	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, /datum/intent/peculate)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, FACE_STEAL)
 	sellprice = 250
 	icon_state = "pdagger"
 	melting_material = null

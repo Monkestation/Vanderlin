@@ -9,7 +9,7 @@
 	wdefense = BAD_PARRY
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_LONG
-	possible_item_intents = list(/datum/intent/mace/smash)
+	possible_item_intents = list(MACE_SMASH)
 	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/airgun
 

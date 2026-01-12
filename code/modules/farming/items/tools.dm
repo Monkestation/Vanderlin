@@ -11,7 +11,7 @@
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(MACE_STRIKE)
-	gripped_intents = list(/datum/intent/flailthresh, MACE_STRIKE)
+	gripped_intents = list(FLAIL_THRESH, MACE_STRIKE)
 	max_integrity = INTEGRITY_POOR
 	minstr = 6
 
@@ -38,7 +38,7 @@
 	force = DAMAGE_WEAK_FLAIL-5
 	force_wielded = DAMAGE_NORMAL_FLAIL+2
 	possible_item_intents = list(MACE_STRIKE)
-	gripped_intents = list(/datum/intent/flail/strike/long, /datum/intent/flail/strike/smash/long, /datum/intent/flailthresh,)
+	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_THRESH,)
 
 	minstr = 7
 	melting_material = /datum/material/iron

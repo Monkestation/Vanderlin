@@ -1385,11 +1385,11 @@
 	force_wielded = DAMAGE_SWORD_WIELD-5
 	throwforce = DAMAGE_SWORD-5
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE)
+	max_blade_int = 150 // Shitty Weapon
+	max_integrity = INTEGRITY_POOR + 80
 
 	parrysound = "sword"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
-	max_blade_int = 150 // Shitty Weapon
-	max_integrity = INTEGRITY_POOR + 80
 	gripsprite = TRUE
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
@@ -1412,8 +1412,8 @@
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(SWORD_CHOP,SWORD_STRIKE,)
 	gripped_intents = list(ESTOC_THRUST, ESTOC_LUNGE, SWORD_CHOP, SWORD_STRIKE)
-	max_integrity = INTEGRITY_STRONG
 	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONG
 	minstr = 8
 
 	inhand_x_dimension = 64
@@ -1483,10 +1483,10 @@
 	force_wielded = 0
 	wdefense = AVERAGE_PARRY
 	gripped_intents = null
-
-	melting_material = /datum/material/bronze
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD
+
+	melting_material = /datum/material/bronze
 	dropshrink = 0.80
 
 //................ Gaffer's vanity sword ............... //
@@ -1561,7 +1561,7 @@
 	desc = "A steel sword with a hooked design at the tip of it; perfect for disarming enemies. Its back edge is sharpened and the hilt appears to have a sharpened tip."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "hook_sword"
-	possible_item_intents = list(SWORD_CUT, /datum/intent/sword/thrust/hook, SWORD_STRIKE, SWORD_DISARM)
+	possible_item_intents = list(SWORD_CUT, HOOK_THRUST, SWORD_STRIKE, SWORD_DISARM)
 	max_integrity = INTEGRITY_STANDARD-20
 
 /obj/item/weapon/sword/sabre/hook/getonmobprop(tag)

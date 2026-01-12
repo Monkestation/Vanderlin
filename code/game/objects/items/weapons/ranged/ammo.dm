@@ -23,7 +23,7 @@
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "bolt"
 	projectile_type = /obj/projectile/bullet/reusable/bolt
-	possible_item_intents = list(/datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_THRUST)
 	caliber = "regbolt"
 	dropshrink = 0.8
 	max_integrity = 10
@@ -231,7 +231,7 @@
 	name = "sunderbolt"
 	desc = "A silver-tipped bolt, containing a small vial of holy water. Though it inflicts lesser wounds on living flesh, it exceeds when employed against the unholy; a snap and a crack, followed by a fiery surprise. </br>'One baptism for the remission of sins.'"
 	projectile_type = /obj/projectile/bullet/reusable/bolt/holy
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	caliber = "regbolt"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "bolt_holywater"
@@ -272,7 +272,7 @@
 	icon_state = "arrow"
 	force = DAMAGE_KNIFE-2
 	dropshrink = 0.8
-	possible_item_intents = list(/datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_THRUST)
 	max_integrity = 20
 	embedding = list("embedded_pain_multiplier" = 3, "embedded_fall_chance" = 0)
 	firing_effect_type = null
@@ -548,7 +548,7 @@
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "musketball"
 	dropshrink = 0.5
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	force = DAMAGE_KNIFE-7
 
 //................ Cannon Ball ............... //
@@ -593,7 +593,7 @@
 	icon_state = "cannonball"
 	projectile_type = /obj/projectile/bullet/reusable/cannonball
 	caliber = "cannoball"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	max_integrity = 1
 	randomspread = 0
 	variance = 0

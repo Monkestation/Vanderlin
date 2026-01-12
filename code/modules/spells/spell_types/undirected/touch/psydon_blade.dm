@@ -33,7 +33,7 @@
 	force = DAMAGE_KATAR+9
 	wdefense = GREAT_PARRY
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(/datum/intent/katar/cut, /datum/intent/katar/thrust)
+	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
 	max_blade_int = 999
 	max_integrity = INTEGRITY_WORST/2
 

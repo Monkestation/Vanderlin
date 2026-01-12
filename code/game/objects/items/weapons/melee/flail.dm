@@ -52,7 +52,7 @@
 	icon_state = "peasantflail"
 	force = DAMAGE_WEAK_FLAIL
 	possible_item_intents = list(MACE_WDSTRIKE)
-	gripped_intents = list(/datum/intent/flailthresh, MACE_WDSTRIKE)
+	gripped_intents = list(FLAIL_THRESH, MACE_WDSTRIKE)
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
 	smeltresult = /obj/item/fertilizer/ash

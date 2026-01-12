@@ -8,7 +8,7 @@
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	experimental_inhand = FALSE
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
 	can_parry = FALSE
 	force = 0
@@ -259,7 +259,7 @@
 /obj/item/instrument/lute
 	name = "lute"
 	desc = "The favored instrument of Eora, made of wood and simple string."
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
 	force = 5
 	icon_state = "lute"
 	item_state = "lute"
@@ -294,7 +294,7 @@
 /obj/item/instrument/guitar
 	name = "guitar"
 	desc = "A corrupted lute, a heritage instrument of Tiefling pedigree."
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
 	icon_state = "guitar"
 	item_state = "guitar"
 	song_list = list(
