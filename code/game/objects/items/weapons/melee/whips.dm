@@ -2,26 +2,26 @@
 ==========================================================*/
 
 /obj/item/weapon/whip
-	force = DAMAGE_WHIP
-	possible_item_intents = list(/datum/intent/whip/crack, /datum/intent/whip/lash)
 	name = "whip"
 	desc = "A leather whip, intertwining rope, leather and a fanged tip to inflict enormous pain. Favored by slavers and beast-tamers."
 	icon_state = "whip"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
+	force = DAMAGE_WHIP
+	throwforce = DAMAGE_WHIP-15
+	wdefense = BAD_PARRY
+	wlength = WLENGTH_GREAT
+	can_parry = FALSE
+	possible_item_intents = list(/datum/intent/whip/crack, /datum/intent/whip/lash)
+	minstr = 4
+
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
-	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/skill/combat/whipsflails
 	anvilrepair = /datum/skill/craft/tanning
 	resistance_flags = FLAMMABLE // Fully made of leather
-	smeltresult = /obj/item/fertilizer/ash
-	can_parry = FALSE
 	swingsound = WHIPWOOSH
-	throwforce = 5
-	wdefense = BAD_PARRY
-	minstr = 4
 	sellprice = 30
 	grid_width = 32
 	grid_height = 64
@@ -85,14 +85,14 @@
 
 //................ Repenta En ............... //
 /obj/item/weapon/whip/antique
-	force = DAMAGE_WHIP+4
 	name = "Repenta En"
 	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
-	minstr = 7
 	icon_state = "gwhip"
+	force = DAMAGE_WHIP+4
+	minstr = 7
 	resistance_flags = FIRE_PROOF
-	melt_amount = 75
 	melting_material = /datum/material/steel
+	melt_amount = 75
 	sellprice = 50
 
 //................ Silver Whip ............... //
@@ -102,7 +102,8 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psywhip_lesser"
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 100
 	last_used = 0
 
 /obj/item/weapon/whip/silver/Initialize(mapload)
@@ -117,7 +118,8 @@
 	icon_state = "psywhip"
 	force = DAMAGE_WHIP+2
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 100
 	last_used = 0
 
 /obj/item/weapon/whip/psydon/Initialize(mapload)
@@ -138,9 +140,9 @@
 	desc = "A thin cane meant for striking others as punishment."
 	icon = 'icons/roguetown/weapons/32/special.dmi'
 	icon_state = "canestick"
-	possible_item_intents = list(/datum/intent/whip/lash/cane)
 	force = DAMAGE_WHIP / 2
 	wlength = WLENGTH_NORMAL
+	possible_item_intents = list(/datum/intent/whip/lash/cane)
 	max_integrity = 4 // Striking unarmoured parts doesn't take integrity, four hits to anything with an armor value will break it.
 	sellprice = 0
 
@@ -188,26 +190,27 @@
 
 //................ Lashkiss Whip ............... //
 /obj/item/weapon/whip/spiderwhip
-	force = DAMAGE_WHIP+3
 	name = "lashkiss whip"
 	desc = "A dark whip with segmented, ashen spines for a base. Claimed to be hewn from dendrified prisoners of terror."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderwhip"
+	force = DAMAGE_WHIP+3
 	minstr = 6
 
 //................ Chain Whip ............... //
 /obj/item/weapon/whip/chain
-	force = DAMAGE_WHIP+3
-	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash/metal)
 	name = "chain whip"
 	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more than anyone else with this."
 	icon_state = "whip_chain"
+	force = DAMAGE_WHIP+3
+	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash/metal)
+	minstr = 9
+
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/iron
 	anvilrepair = /datum/skill/craft/weaponsmithing
-	minstr = 9
-	melt_amount = 75
+	melting_material = /datum/material/iron
+	melt_amount = 100
 
 /datum/intent/whip/lash/metal
 	chargetime = 10
@@ -221,18 +224,18 @@
 //................ Xylix Whip ............... //
 /obj/item/weapon/whip/xylix
 	name = "cackle lash"
-	force = DAMAGE_WHIP+4
 	desc = "The chimes of this whip are said to sound as the trickster's laughter itself."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "xylixwhip"
+	force = DAMAGE_WHIP+4
 	anvilrepair = /datum/skill/craft/weaponsmithing
+
 /obj/item/weapon/whip/nagaika
 	name = "nagaika whip"
 	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
 	icon_state = "nagaika"
 	force = DAMAGE_WHIP+5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
 	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/sword/strike)
-	wdefense = BAD_PARRY	//Akin to a cudgel, still terrible at parrying though. Better than nothing I guess; thing is used irl as a counter-weapon to knives.
 
 //................ Urumi ............... //
 
@@ -241,17 +244,18 @@
 	desc = "A long, flexible whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
 	icon_state = "urumi_steel"
 	force = DAMAGE_WHIP+3
-	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/whip/cut,)
-	anvilrepair = /datum/skill/craft/weaponsmithing
-	melting_material = /datum/material/steel
-	resistance_flags = FIRE_PROOF
-	minstr = 5
-	sharpness = IS_SHARP
-	max_blade_int = 175
-	max_integrity = INTEGRITY_STANDARD
-	blade_dulling = DULLING_BASH
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
 	can_parry = TRUE
+	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash, /datum/intent/whip/cut,)
+	max_blade_int = 175
+	max_integrity = INTEGRITY_STANDARD
+	minstr = 5
+
+	anvilrepair = /datum/skill/craft/weaponsmithing
+	resistance_flags = FIRE_PROOF
+	sharpness = IS_SHARP
+	blade_dulling = DULLING_BASH
+	melting_material = /datum/material/steel
 
 /obj/item/weapon/whip/urumi/iron
 	name = "iron urumi"
@@ -264,7 +268,7 @@
 	name = "bronze urumi"
 	icon_state = "urumi_bronze"
 	force = DAMAGE_WHIP
-	melting_material =  = /datum/material/bronze
+	melting_material = /datum/material/bronze
 	max_blade_int = 100
 
 /obj/item/weapon/whip/urumi/silver

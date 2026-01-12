@@ -1,14 +1,20 @@
 /* FLAILS - Zero wdefense, can´t parry, best AP
 ==========================================================*/
 /obj/item/weapon/flail
-	force = DAMAGE_NORMAL_FLAIL
-	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
 	name = "military flail"
 	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
-	sharpness = IS_BLUNT
+	force = DAMAGE_NORMAL_FLAIL
+	throwforce = DAMAGE_WEAK_FLAIL-12
+	can_parry = FALSE // You can't parry with this, it'd be awkward to tangle chains, use a shield
+	wdefense = TERRIBLE_PARRY
 	wlength = WLENGTH_NORMAL
+	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
+	max_integrity = INTEGRITY_STRONG
+	minstr = 6
+
+	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/skill/combat/whipsflails
@@ -18,12 +24,8 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	swingsound = BLUNTWOOSH_MED
-	can_parry = FALSE // You can't parry with this, it'd be awkward to tangle chains, use a shield
-	wdefense = TERRIBLE_PARRY
-	max_integrity = INTEGRITY_STRONG
-	throwforce = 5
-	minstr = 6
 	sellprice = 20
+
 	grid_width = 32
 	grid_height = 96
 
@@ -87,29 +89,29 @@
 
 //................ Wooden Flail ............... // Obsolete by the thresher? No smash so its bad
 /obj/item/weapon/flail/towner
-	force = DAMAGE_WEAK_FLAIL
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
-	gripped_intents = list(/datum/intent/flailthresh, /datum/intent/mace/strike/wood)
 	name = "wooden flail"
 	desc = "During peacetime these flails are used to thresh wheat. During wartime - to chase off marauders."
 	icon_state = "peasantflail"
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = null
+	force = DAMAGE_WEAK_FLAIL
+	possible_item_intents = list(/datum/intent/mace/strike/wood)
+	gripped_intents = list(/datum/intent/flailthresh, /datum/intent/mace/strike/wood)
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = null
 	sellprice = 10
 
 
 //................ Steel Flail ............... //
 /obj/item/weapon/flail/sflail
-	force = DAMAGE_GOOD_FLAIL
 	name = "steel flail"
 	desc = "A knightly flail made of worked steel, with a flanged head. An effective and brutal design."
 	icon_state = "flail"
+	force = DAMAGE_GOOD_FLAIL
+	max_integrity = INTEGRITY_STRONGEST
+	minstr = 4
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	minstr = 4
-	max_integrity = INTEGRITY_STRONGEST
 	sellprice = 35
 
 /obj/item/weapon/flail/sflail/ancient
@@ -125,15 +127,15 @@
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
-	force = DAMAGE_GOOD_FLAIL
 	name = "psydonian flail"
 	desc = "A flail fashioned with the iconography of Psydon, and crafted entirely out of silver."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflail"
+	force = DAMAGE_GOOD_FLAIL
+	max_integrity = INTEGRITY_STRONGEST
+	minstr = 4
 	melting_material = /datum/material/silver
 	melt_amount = 75
-	minstr = 4
-	max_integrity = INTEGRITY_STRONGEST
 	sellprice = 50
 	last_used = 0
 
@@ -155,17 +157,18 @@
 	icon_state = "bigflail"
 	force = DAMAGE_NORMAL_FLAIL
 	force_wielded = DAMAGE_GOOD_FLAIL
+	wbalance = DODGE_CHANCE_NORMAL
+	wlength = WLENGTH_LONG
 	possible_item_intents = list(/datum/intent/flail/strike/long)
 	gripped_intents = list(/datum/intent/flail/strike/long, /datum/intent/flail/strike/smash/long)
+	max_integrity = INTEGRITY_STRONG + 50
+	minstr = 8
+
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	wbalance = 0
-	wlength = WLENGTH_LONG
 	slot_flags = ITEM_SLOT_BACK
-	max_integrity = INTEGRITY_STRONG + 50
 	sellprice = 20
-	minstr = 8
 
 /obj/item/weapon/flail/peasant/getonmobprop(tag)
 	. = ..()
@@ -212,26 +215,27 @@
 	desc = "Just like how a sling's bullet can fell a giant, so too does this great flail follow the principle of converting 'momentum' into 'plate-rupturing force'."
 	icon = 'icons/roguetown/weapons/64/flails.dmi'
 	icon_state = "peasantwarflail"
-	force = 10
+	force = DAMAGE_WEAK_FLAIL-7
 	force_wielded = DAMAGE_GOOD_FLAIL+7
+	wdefense = GREAT_PARRY //Why?
+	wbalance = VERY_HARD_TO_DODGE
+	wlength = WLENGTH_GREAT
 	possible_item_intents = list(/datum/intent/flail/strike)
 	gripped_intents = list(/datum/intent/flail/strikerange, /datum/intent/flail/strike/smashrange)
+	minstr = 9
+
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	bigboy = TRUE
 	gripsprite = TRUE
-	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = null
-	minstr = 9
-	wbalance = VERY_HARD_TO_DODGE
 	melting_material = /datum/material/iron
 	anvilrepair = /datum/skill/craft/carpentry
 	dropshrink = 0.9
 	blade_dulling = DULLING_BASH
-	wdefense = GREAT_PARRY //Why?
 	resistance_flags = FLAMMABLE
 
 /obj/item/weapon/flail/peasantwarflail/getonmobprop(tag)
@@ -255,12 +259,11 @@
 	desc = "Weight of wealth in a deadly striking end."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "matthiosflail"
-	sellprice = 250
-	melt_amount = 150
-	melting_material = /datum/material/steel
 	possible_item_intents = list(/datum/intent/flail/strike/matthiosflail)
 	gripped_intents = list(/datum/intent/flail/strike/matthiosflail, /datum/intent/flail/strike/smash/matthiosflail)
-	associated_skill = /datum/skill/combat/whipsflails
 	slot_flags = ITEM_SLOT_BACK
 	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/weaponsmithing
+	melting_material = /datum/material/steel
+	melt_amount = 150
+	sellprice = 250

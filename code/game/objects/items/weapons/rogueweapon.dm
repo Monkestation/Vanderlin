@@ -19,8 +19,8 @@
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = 200
-	wdefense = 3
+	max_integrity = INTEGRITY_STANDARD
+	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
 	embedding = list(

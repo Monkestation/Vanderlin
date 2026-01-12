@@ -28,13 +28,13 @@
 	icon_state = "gorefeast"
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST+220
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop/great, /datum/intent/sword/strike)
-	wdefense = GOOD_PARRY
 	force = DAMAGE_HEAVYAXE_WIELD
 	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
+	wdefense = GOOD_PARRY
+	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop/great, /datum/intent/sword/strike)
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST+220
 	minstr = 12
 	sellprice = 550
 
@@ -98,18 +98,18 @@
 	icon_state = "neant"
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	slot_flags = ITEM_SLOT_BACK
-	resistance_flags = FIRE_PROOF
-	dropshrink = 0.75
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST+220
-	possible_item_intents = list(/datum/intent/polearm/cut)
-	gripped_intents = list(/datum/intent/polearm/chop, /datum/intent/whip, /datum/intent/shoot/neant)
-	thrown_bclass = BCLASS_CUT
 	force = DAMAGE_SPEARPLUS+2
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR_WIELD
+	possible_item_intents = list(/datum/intent/polearm/cut)
+	gripped_intents = list(/datum/intent/polearm/chop, /datum/intent/whip, /datum/intent/shoot/neant)
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST+220
 	minstr = 10
+	slot_flags = ITEM_SLOT_BACK
+	resistance_flags = FIRE_PROOF
+	dropshrink = 0.75
+	thrown_bclass = BCLASS_CUT
 	sellprice = 550
 
 	COOLDOWN_DECLARE(fire_projectile)
@@ -368,12 +368,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	name = "pleonexia"
 	desc = "A sword of legend. If they are true, then this is the blade of Matthios himself. Rumor has it, it steals space and time."
-	swingsound = BLADEWOOSH_LARGE
-	parrysound = "largeblade"
-	pickup_sound = "brandish_blade"
-	max_integrity = INTEGRITY_STRONGEST+220
 	possible_item_intents = list(/datum/intent/sword/strike, /datum/intent/sword/cut)
 	gripped_intents = list(/datum/intent/sword/strike, /datum/intent/sword/chop, /datum/intent/sword/thrust,  /datum/intent/plex_dash)
+	max_integrity = INTEGRITY_STRONGEST+220
 	sellprice = 550
 
 	COOLDOWN_DECLARE(pleonexia_blink)

@@ -14,7 +14,6 @@
 	force = 0
 	minstr = 0
 	wbalance = 0
-	wdefense = 0
 	throwforce = 0
 	throw_range = 4
 	blade_dulling = DULLING_BASH

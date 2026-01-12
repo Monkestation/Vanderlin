@@ -1,18 +1,19 @@
 /obj/item/weapon/hammer
-	force = DAMAGE_HAMMER
-	possible_item_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
 	name = "hammer"
 	desc = ""
 	icon_state = "hammer"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
-	sharpness = IS_BLUNT
+	force = DAMAGE_HAMMER
+	possible_item_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
 	max_integrity = INTEGRITY_STRONG
+	sharpness = IS_BLUNT
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
 	associated_skill = /datum/skill/combat/axesmaces
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 75
 
 	grid_width = 32
 	grid_height = 64
@@ -156,10 +157,10 @@
 	name = "wooden mallet"
 	desc = "A wooden mallet is an artificer's second-best friend! But it may also come in handy to a smith..."
 	icon_state = "hammer_w"
+	force = DAMAGE_HAMMER-5
 	dropshrink = 0.9
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	force = DAMAGE_HAMMER - 5
 	smeltresult = /obj/item/fertilizer/ash
 	max_integrity = INTEGRITY_WORST
 	time_multiplier = 1.2
@@ -174,18 +175,18 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/weapon/hammer/copper
-	force = DAMAGE_HAMMER - 2
-	possible_item_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
 	name = "copper hammer"
 	desc = "A simple and rough copper hammer."
 	icon_state = "chammer"
 	icon = 'icons/roguetown/weapons/tools.dmi'
+	force = DAMAGE_HAMMER-2
+	possible_item_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
 	sharpness = IS_BLUNT
 	//dropshrink = 0.8
 	max_integrity = INTEGRITY_POOR
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 	time_multiplier = 1.1
 
 /obj/item/weapon/hammer/sledgehammer
@@ -193,17 +194,15 @@
 	desc = "It's almost asking to be put to work."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "sledgehammer"
-	force = DAMAGE_HAMMER + 5
-	force_wielded = DAMAGE_HAMMER_WIELD + 5
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
-	sharpness = IS_BLUNT
-	wbalance = -1 // Heavy
+	wbalance = EASY_TO_DODGE // Heavy
 	minstr = 8
+
 	gripsprite = TRUE
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_NORMAL
-	smeltresult = /obj/item/ingot/iron
+	melt_amount = 100
 	grid_width = null
 	grid_height = null
 
@@ -223,8 +222,8 @@
 	desc = "A heavy steel sledgehammer, a weapon designed to make knights run in fear, the best option for a common soldier against a knight."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "warbonker"
-	force = DAMAGE_HAMMER + 5
-	force_wielded = DAMAGE_HAMMER_WIELD + 10
+	force = DAMAGE_HAMMER+5
+	force_wielded = DAMAGE_HAMMER_WIELD+10
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
 	max_integrity = INTEGRITY_STRONGEST
@@ -239,8 +238,13 @@
 	icon_state = "malumhammer"
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD
+	wdefense = GOOD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
 	possible_item_intents = list(/datum/intent/mace/strike/heavy)
 	gripped_intents = list(/datum/intent/mace/strike/heavy, /datum/intent/mace/smash/heavy)
+	max_integrity = INTEGRITY_STRONGEST * 1.2
+	minstr = 10
+
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	pixel_y = -16
 	pixel_x = -16
@@ -251,15 +255,10 @@
 	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_HUGE
 	slot_flags = ITEM_SLOT_BACK
-	max_integrity = INTEGRITY_STRONGEST * 1.2
-	melt_amount = 50
-	melting_material = /datum/material/steel
+	melt_amount = 150
 	melting_material = /datum/material/steel
 	resistance_flags = FIRE_PROOF
-	minstr = 10
-	wbalance = DODGE_CHANCE_NORMAL
 	sellprice = 1	//breaking bad cash pallet dot jpg
-	wdefense = GOOD_PARRY
 
 /obj/item/weapon/hammer/sledgehammer/war/malum/getonmobprop(tag)
 	. = ..()

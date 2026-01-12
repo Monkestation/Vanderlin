@@ -3,7 +3,7 @@
 	desc = ""
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "tongs"
-	force = 5
+	force = DAMAGE_CLUB/3
 	possible_item_intents = list(/datum/intent/mace/strike)
 	sharpness = IS_BLUNT
 	wlength = 10
@@ -105,7 +105,7 @@
 	force = 3
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = 20
+	max_integrity = INTEGRITY_WORST/5
 
 /atom/proc/tong_interaction(atom/target, mob/user)
 	return FALSE

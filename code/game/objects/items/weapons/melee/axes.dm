@@ -12,6 +12,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	wlength = WLENGTH_NORMAL
+
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	axe_cut = 10	// bonus damage to trees
 	grid_height = 64
@@ -129,17 +130,17 @@
 
 //................ Stone Axe ............... //
 /obj/item/weapon/axe/stone
-	force = DAMAGE_BAD_AXE
-	force_wielded = DAMAGE_BAD_AXE_WIELD
 	name = "stone axe"
 	desc = "Hewn wood, steadfast thread, a chipped stone. A recipe to bend nature to your will."
 	icon_state = "stoneaxe"
-	max_blade_int = 50
-	max_integrity = 50
+	force = DAMAGE_BAD_AXE
+	force_wielded = DAMAGE_BAD_AXE_WIELD
 	wdefense = BAD_PARRY
-
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_SHORT
+	max_blade_int = 50
+	max_integrity = INTEGRITY_WORST/2
+
 	smeltresult = /obj/item/fertilizer/ash //is a wooden log and a stone hammered in the top
 	melting_material = null
 	sellprice = 10
@@ -158,22 +159,22 @@
 
 //................ Battle Axe ............... //
 /obj/item/weapon/axe/battle
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	name = "battle axe"
 	desc = "A masterfully constructed ax, with additional weights in the form of ornate spikes and practical edges."
 	icon_state = "battleaxe"
-	max_blade_int = 500
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_HEAVYAXE_WIELD
+	wdefense = AVERAGE_PARRY
 	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONG
+	minstr = 10 //meant to be a orc weapon or barbarian weapon
+
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	minstr = 10 //meant to be a orc weapon or barbarian weapon
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	wdefense = AVERAGE_PARRY
-	sellprice = 60
 	melting_material = /datum/material/steel
 	melt_amount = 150
+	sellprice = 60
 
 /obj/item/weapon/axe/battle/getonmobprop(tag)
 	if(tag)
@@ -189,22 +190,22 @@
 
 //................ Iron Axe ............... //
 /obj/item/weapon/axe/iron
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "iron axe"
 	desc = "Tool, weapon, loyal iron companion."
 	icon_state = "axe"
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	wdefense = MEDIOCRE_PARRY
+	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
+	minstr = 6
+
 	melting_material = /datum/material/iron
 	melt_amount = 100
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-
-	wdefense = MEDIOCRE_PARRY
-	minstr = 6
 
 	sellprice = 20
 
@@ -241,30 +242,30 @@
 	name = "splitter axe"
 	desc = "A crudely made axe, more reminiscent to one used for splitting logs if it was made with tree trunk and a shiny sharpened rock; which does make you think, what use does a troll have for wood?"
 	icon_state = "troll_axe"
-	max_blade_int = 150
 	force = DAMAGE_AXE+3
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
-	minstr = 10
 	wdefense = AVERAGE_PARRY
+	max_blade_int = 150
+	minstr = 10
 
 //................ Bronze ............... //
 /obj/item/weapon/axe/bronze
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "bronze axe"
 	desc = "Tool, weapon, loyal bronze companion."
 	icon_state = "axe_bronze"
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	wdefense = MEDIOCRE_PARRY
+	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
+	minstr = 6
+
 	melting_material = /datum/material/bronze
 	melt_amount = 100
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-
-	wdefense = MEDIOCRE_PARRY
-	minstr = 6
 
 	sellprice = 20
 
@@ -281,22 +282,23 @@
 
 //................ Psydonian Axe ............... //
 /obj/item/weapon/axe/psydon
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "psydonian axe"
 	desc = "An axe forged of silver with a small psycross attached, Dendor and his foul beastmen be damned."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyaxe"
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	wdefense = MEDIOCRE_PARRY
+	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STANDARD
+	minstr = 6
+
 	melting_material = /datum/material/silver
 	melt_amount = 75
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	wdefense = MEDIOCRE_PARRY
-	minstr = 6
 	sellprice = 60
 
 /obj/item/weapon/axe/psydon/Initialize(mapload)
@@ -319,27 +321,27 @@
 // Pickaxe-axe ; Technically both a tool and weapon, but it goes here due to weapon function.
 // Same stats as steel axe, but refactored for pickaxe quality purposes.
 /obj/item/weapon/pick/paxe
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
 	name = "pickaxe"
 	desc = "An odd mix of a pickaxe front and a hatchet blade back, capable of being switched between."
 	icon = 'icons/roguetown/weapons/32/axes_picks.dmi'
 	icon_state = "paxe"
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/pick)
 	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	wlength = WLENGTH_NORMAL
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
+	minstr = 6
+
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	associated_skill = /datum/skill/combat/axesmaces
-	anvilrepair = /datum/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel
 	melt_amount = 175
 	resistance_flags = FIRE_PROOF
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	swingsound = BLADEWOOSH_MED
-	wdefense = MEDIOCRE_PARRY
-	minstr = 6
 	sellprice = 50
 	pickmult = 1.2 // It's a pick...
 	axe_cut = 15 // ...and an Axe!
@@ -353,15 +355,16 @@
 	icon_state = "saxe"
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
+	wdefense = AVERAGE_PARRY
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
+	minstr = 6
+
 	melting_material = /datum/material/steel
 	melt_amount = 100
 	resistance_flags = FIRE_PROOF
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
-	wdefense = AVERAGE_PARRY
-	minstr = 6
 	sellprice = 35
 	axe_cut = 15 // Better than iron
 
@@ -386,7 +389,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	wlength = WLENGTH_LONG
 	experimental_onhip = TRUE
-	max_blade_int = 250 //Trades some durability for weapon length
+	max_integrity = INTEGRITY_STRONGEST*0.8
 
 /obj/item/weapon/axe/steel/atgervi/getonmobprop(tag)
 	. = ..()
@@ -405,10 +408,9 @@
 	desc = "A steel axe hailing from the nation of Lakkari. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
-	melt_amount = 75
-
 	wdefense = GOOD_PARRY
 	minstr = 8
+	melt_amount = 75
 	sellprice = 45
 
 /obj/item/weapon/axe/steel/nsapo/getonmobprop(tag)
@@ -425,21 +427,21 @@
 
 //................ Copper Hatchet ............... //
 /obj/item/weapon/axe/copper
-	force = DAMAGE_BAD_AXE
-	force_wielded = DAMAGE_BAD_AXE_WIELD
-
 	name = "copper hatchet"
 	desc = "A simple designed handaxe, an outdated weaponry from simpler times."
 	icon_state = "chatchet"
-
+	force = DAMAGE_BAD_AXE
+	force_wielded = DAMAGE_BAD_AXE_WIELD
+	wlength = WLENGTH_SHORT
 	max_blade_int = 120
 	max_integrity = INTEGRITY_WORST
 	minstr = 6
+
 	melting_material = /datum/material/copper
 	melt_amount = 150
-	wlength = WLENGTH_SHORT
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	sellprice = 15
+
 /obj/item/weapon/axe/copper/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -458,13 +460,14 @@
 	icon_state = "boneaxe"
 	force = DAMAGE_AXE-2
 	force_wielded =	DAMAGE_AXE_WIELD-3
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
-	smeltresult = /obj/item/fertilizer/ash
-	max_blade_int = 100
-	minstr = 8
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
+	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
+	max_blade_int = 100
+	minstr = 8
+
+	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 
 /obj/item/weapon/axe/boneaxe/getonmobprop(tag)
@@ -486,26 +489,26 @@
 	icon_state = "igreataxe"
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD - 5
+	wdefense = AVERAGE_PARRY
+	wbalance = EASY_TO_DODGE
+	wlength = WLENGTH_GREAT
+	slowdown = 1
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/spear/bash) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe,  /datum/intent/spear/bash)
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONG
+	minstr = 11
+
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	bigboy = TRUE
 	gripsprite = TRUE
-	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
-	minstr = 11
-	max_blade_int = 200
 	anvilrepair = /datum/skill/craft/weaponsmithing
-	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/skill/combat/axesmaces
 	blade_dulling = DULLING_BASHCHOP
-	wdefense = AVERAGE_PARRY
-	wbalance = EASY_TO_DODGE
-	max_integrity = INTEGRITY_STRONG
-	slowdown = 1
 	slot_flags = ITEM_SLOT_BACK
 	melting_material = /datum/material/iron
 	melt_amount = 150
@@ -524,16 +527,16 @@
 
 
 /obj/item/weapon/greataxe/psy
-	force = DAMAGE_AXE-5
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/mace/strike) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
-	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe, /datum/intent/mace/strike) //Axe-equivalent to the Godendag or Grand Mace.
 	name = "psydonic poleaxe"
 	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders - following the disastrous Massacre of Blastenghyll - have shifted their focus towards arming their paladins with longer-lasting greatweapons."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverpolearm"
-	minstr = 12
+	force = DAMAGE_AXE-5
+	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/mace/strike) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
+	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe, /datum/intent/mace/strike) //Axe-equivalent to the Godendag or Grand Mace.
 	max_blade_int = 350
-	smeltresult = /obj/item/ingot/silverblessed
+	minstr = 12
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/greataxe/psy/Initialize(mapload)
 	. = ..()
@@ -554,12 +557,13 @@
 	name = "double-headed steel greataxe"
 	desc = "A steel great axe with a wicked double-bladed head. Perfect for cutting either men or trees into stumps."
 	icon_state = "doublegreataxe"
+	wbalance = VERY_EASY_TO_DODGE
 	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop, /datum/intent/spear/bash) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(/datum/intent/axe/cut/battle/greataxe/doublehead, /datum/intent/axe/chop/battle/greataxe/doublehead,  /datum/intent/spear/bash)
 	max_blade_int = 400
 	minstr = 12
+
 	melt_amount = 180
-	wbalance = VERY_EASY_TO_DODGE
 	sellprice = 100
 
 /obj/item/weapon/greataxe/steel/doublehead/graggar
@@ -567,33 +571,31 @@
 	desc = "A greataxe who's edge thrums with the motive force, violence, oh, sweet violence!"
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "graggargaxe"
-	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
 	alt_intents = list(/datum/intent/axe/cut,/datum/intent/sword/chop)
+	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
 	blade_dulling = DULLING_BASHCHOP
 	sellprice = 0 // Graggarite axe, nobody wants this
 
 /obj/item/weapon/greataxe/dreamscape
-	force = DAMAGE_AXE-10
-	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
 	name = "otherworldly axe"
 	desc = "A strange axe, who knows where it came from. It feels cold and unusually heavy."
 	icon_state = "dreamaxe"
-	minstr = 13
-	max_blade_int = 250
-	anvilrepair = /datum/skill/craft/weaponsmithing
-	smeltresult = /obj/item/ingot/gold
-	associated_skill = /datum/skill/combat/axesmaces
-	blade_dulling = DULLING_BASHCHOP
+	force = DAMAGE_AXE-10
+	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
 	wdefense = ULTMATE_PARRY
+	max_blade_int = 250
+	minstr = 13
+
+	melting_material = /datum/material/gold
 	sellprice = 0
 
 /obj/item/weapon/greataxe/dreamscape/active
 	// to do, make this burn you if you don't regularly soak it.
-	force = DAMAGE_AXE-5
-	force_wielded = DAMAGE_HEAVYAXE_WIELD+10
 	desc = "A strange axe, who knows where it came from. It is searing hot to the blade, the hilt is barely able to be held."
 	icon_state = "dreamaxeactive"
+	force = DAMAGE_AXE-5
+	force_wielded = DAMAGE_HEAVYAXE_WIELD+10
+	wdefense = ULTMATE_PARRY+1
 	max_blade_int = 500
-	wdefense = 6
 	sellprice = 0
 

@@ -237,7 +237,7 @@
 	icon_state = "bolt_holywater"
 	dropshrink = 0.6
 	max_integrity = 10
-	force = 10
+	force = DAMAGE_KNIFE
 /obj/item/ammo_casing/caseless/bolt/holy/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/water/blessed, 5)
@@ -549,7 +549,7 @@
 	icon_state = "musketball"
 	dropshrink = 0.5
 	possible_item_intents = list(/datum/intent/use)
-	force = 3
+	force = DAMAGE_KNIFE-7
 
 //................ Cannon Ball ............... //
 /obj/projectile/bullet/reusable/cannonball
@@ -597,7 +597,7 @@
 	max_integrity = 1
 	randomspread = 0
 	variance = 0
-	force = 10
+	force = DAMAGE_KNIFE
 	item_weight = 70
 	grid_width = 96
 	grid_height = 96

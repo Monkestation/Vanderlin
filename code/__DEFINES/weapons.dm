@@ -20,6 +20,8 @@
 #define DAMAGE_KNIFE 10
 #define DAMAGE_DAGGER 12
 
+#define DAMAGE_SHIELD 10
+
 #define DAMAGE_KATAR 15
 #define DAMAGE_KNUCKLES 22
 

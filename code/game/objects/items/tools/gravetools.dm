@@ -3,27 +3,29 @@
 \---------*/
 
 /obj/item/weapon/shovel
-	force = DAMAGE_STAFF - 5
-	force_wielded = DAMAGE_STAFF_WIELD - 3
-	possible_item_intents = list(/datum/intent/mace/strike/shovel)
-	gripped_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel, /datum/intent/axe/chop)
 	name = "shovel"
 	desc = ""
 	icon_state = "shovel"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
+	force = DAMAGE_STAFF-5
+	force_wielded = DAMAGE_STAFF_WIELD-3
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(/datum/intent/mace/strike/shovel)
+	gripped_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel, /datum/intent/axe/chop)
+
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	max_integrity = INTEGRITY_STRONG
 	sharpness = IS_BLUNT
-	wdefense = MEDIOCRE_PARRY
-	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
 	var/obj/item/natural/dirtclod/heldclod
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 75
 	associated_skill = /datum/skill/combat/polearms
 	max_blade_int = 50
 	grid_width = 32
@@ -220,19 +222,20 @@
 // --------- SPADE -----------
 
 /obj/item/weapon/shovel/small
-	force = DAMAGE_STAFF - 8
-	force_wielded = DAMAGE_STAFF_WIELD - 10
-	possible_item_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel)
 	name = "spade"
 	icon_state = "spade"
 	item_state = "spade"
+	force = DAMAGE_STAFF-8
+	force_wielded = DAMAGE_STAFF_WIELD-10
+	wdefense = BAD_PARRY
+	wlength = WLENGTH_SHORT
+	possible_item_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel)
+	max_blade_int = 0
+
 	dropshrink = 1
 	gripped_intents = null
-	wlength = WLENGTH_SHORT
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
-	wdefense = BAD_PARRY
-	max_blade_int = 0
 	grid_height = 64
 	time_multiplier = 2
 	smeltresult = null
