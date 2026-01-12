@@ -27,7 +27,6 @@
 
 /datum/action/cooldown/spell/undirected/howl/cast(atom/cast_on)
 	. = ..()
-	var/datum/antagonist/werewolf/werewolf_player = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
 
 	// sound played for owner
 	playsound(owner, pick('sound/vo/mobs/wwolf/howl (1).ogg', 'sound/vo/mobs/wwolf/howl (2).ogg'), 75, TRUE)

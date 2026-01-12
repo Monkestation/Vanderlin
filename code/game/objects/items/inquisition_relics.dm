@@ -308,7 +308,7 @@
 /obj/item/flashlight/flare/torch/lantern/psycenser/afterattack(atom/movable/A, mob/user, proximity)
 	. = ..()	//We smashed a guy with it turned on. Bad idea!
 	if(ismob(A) && on && (user.used_intent.type == /datum/intent/flail/strike/smash/golgotha) && user.cmode)
-		user.visible_message(span_warningbig("You see an oddly bright spark before it detonates!"))
+		user.visible_message(span_danger("You see an oddly bright spark before it detonates!"))
 		cell_explosion(get_turf(A), 40, 2)
 		explosion(get_turf(A),devastation_range = -1, heavy_impact_range = -1, light_impact_range = -1, flame_range = 2, flash_range = 4, smoke = FALSE)
 		fuel = 0
@@ -745,8 +745,6 @@
 	desc = "A macabre instrument favored by the more clandestine of the Psydonian Silver Order; A length of thick leather inquiry cordage that has been dipped in both holy water and dye before being consecrated and spell-laced, held and threaded between two iron links. Perfect for apprehension."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "garrote"
-	item_state = "garrote"
-	gripsprite = TRUE
 	throw_speed = 3
 	throw_range = 7
 	grid_height = 32
@@ -757,41 +755,20 @@
 	obj_flags = CAN_BE_HIT
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	experimental_inhand = TRUE
-	wieldsound = TRUE
 	max_integrity = 400
 	w_class = WEIGHT_CLASS_SMALL
 	can_parry = FALSE
 	break_sound = 'sound/items/garrotebreak.ogg'
 	gripped_intents = list(/datum/intent/garrote/grab, /datum/intent/garrote/choke)
-	var/mob/living/victim
+	var/datum/weakref/victim
+	var/datum/weakref/lastuser
 	var/obj/item/grabbing/currentgrab
-	var/mob/living/lastcarrier
 	var/active = FALSE
 	var/choke_damage = 8
 	integrity_failure = 0.01
-	embedding = null
 	sellprice = 0
 	wield_block = FALSE
-
-/obj/item/inqarticles/garrote/atom_break(damage_flag, silent)
-	. = ..()
-	obj_broken = TRUE
-	if(!ismob(loc))
-		return
-	var/mob/M = loc
-	active = FALSE
-	if(altgripped || HAS_TRAIT(src, TRAIT_WIELDED))
-		var/datum/component/two_handed/twohanded = GetComponent(/datum/component/two_handed)
-		if(ismob(loc))
-			twohanded.unwield(loc)
-		wipeslate(lastcarrier)
-		if(lastcarrier.pulling)
-			lastcarrier.stop_pulling()
-	if(break_sound)
-		playsound(get_turf(src), break_sound, 80, TRUE)
-	update_icon()
-	to_chat(M, "The [src] SNAPS...!")
-	name = "\proper snapped seizing garrote"
+	var/static/list/wield_sounds = list('sound/items/garrote.ogg', 'sound/items/garrote2.ogg')
 
 /obj/item/inqarticles/garrote/getonmobprop(tag)
 	. = ..()
@@ -816,96 +793,99 @@
 	desc = "Used to wrap around the target."
 	no_attack = TRUE
 
-/obj/item/inqarticles/garrote/proc/wipeslate(mob/user)
-	if(victim)
-		REMOVE_TRAIT(victim, TRAIT_MUTE, "garroteCordage")
-		REMOVE_TRAIT(victim, TRAIT_GARROTED, TRAIT_GENERIC)
-		victim = null
-		currentgrab = null
+/obj/item/inqarticles/garrote/atom_break(damage_flag, silent)
+	. = ..()
+	if(!ismob(loc))
+		return
 	if(HAS_TRAIT(src, TRAIT_WIELDED))
 		var/datum/component/two_handed/twohanded = GetComponent(/datum/component/two_handed)
 		if(ismob(loc))
-			twohanded.unwield(loc)
-		active = FALSE
-		playsound(src, 'sound/items/garroteshut.ogg', 65, TRUE)
+			var/mob/M = loc
+			twohanded.unwield(M)
+			to_chat(M, span_warning("The [src] SNAPS and breaks!"))
+	update_appearance()
+
+/obj/item/inqarticles/garrote/atom_fix()
+	. = ..()
+	update_appearance()
+
+/obj/item/inqarticles/garrote/deconstruct(disassembled)
+	return
+
+/obj/item/inqarticles/garrote/update_name(updates)
+	. = ..()
+	if(obj_broken)
+		name = "\proper snapped seizing garrote"
+	else
+		name = initial(name)
+
+/obj/item/inqarticles/garrote/update_icon_state()
+	icon_state = initial(icon_state)
+	. = ..()
+	if(obj_broken)
+		icon_state = "garrote_snap"
+
+/obj/item/inqarticles/garrote/apply_components()
+	AddComponent(/datum/component/two_handed, \
+		wieldsound = wield_sounds, \
+		unwieldsound = 'sound/items/garroteshut.ogg', \
+		force_unwielded = force, \
+		force_wielded = force_wielded, \
+		icon_wielded = "garrote1", \
+		wield_callback = CALLBACK(src, PROC_REF(on_wield)), \
+		unwield_callback = CALLBACK(src, PROC_REF(on_unwield)), \
+		wield_block_offhand = wield_block)
+
+/obj/item/inqarticles/garrote/proc/reset_garrote()
+	SIGNAL_HANDLER
+
+	var/mob/living/garrote_victim = victim?.resolve()
+	if(garrote_victim)
+		REMOVE_TRAIT(garrote_victim, TRAIT_MUTE, "garroteCordage")
+	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_PARENT_QDELETING))
+	victim = null
+
+	var/mob/living/last_garrote_user = lastuser?.resolve()
+	UnregisterSignal(last_garrote_user, COMSIG_ATOM_NO_LONGER_PULLING)
+	lastuser = null
+
+	// If stop_pulling() is called, this will be qdeleted already. If reset_garrote is called first, this qdel should call stop_pulling().
+	if(!QDELETED(currentgrab))
+		QDEL_NULL(currentgrab)
+
+	active = FALSE
+
+/obj/item/inqarticles/garrote/on_unwield(obj/item/source, mob/living/carbon/user)
+	. = ..()
+	reset_garrote()
 
 /obj/item/inqarticles/garrote/attack_self(mob/user)
 	if(obj_broken)
-		to_chat(user, span_warning("It's useless now, although.."))
-		to_chat(user, span_notice("I could rethread it with more cordage."))
-		return
-	if(HAS_TRAIT(src, TRAIT_WIELDED))
-		var/datum/component/two_handed/twohanded = GetComponent(/datum/component/two_handed)
-		if(ismob(loc))
-			twohanded.unwield(loc)
-		active = FALSE
-		if(user.pulling)
-			user.stop_pulling()
-		playsound(src, 'sound/items/garroteshut.ogg', 65, TRUE)
-		wipeslate(user)
-		return
-	if(gripped_intents)
-		var/datum/component/two_handed/twohanded = GetComponent(/datum/component/two_handed)
-		if(ismob(loc))
-			twohanded.wield(loc)
-		active = TRUE
-		if(HAS_TRAIT(src, TRAIT_WIELDED))
-			playsound(src, pick('sound/items/garrote.ogg', 'sound/items/garrote2.ogg'), 65, TRUE)
-			return
-
-/obj/item/inqarticles/garrote/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	lastcarrier = user
-	wipeslate(lastcarrier)
-	if(active)
-		if(lastcarrier.pulling)
-			lastcarrier.stop_pulling()
-		playsound(user, 'sound/items/garroteshut.ogg', 65, TRUE)
-		active = FALSE
-	if(!obj_broken)
-		if(icon_state != initial(icon_state))
-			icon_state = initial(icon_state)
-			icon_angle = initial(icon_angle)
-
-/obj/item/inqarticles/garrote/dropped(mob/user, silent)
-	. = ..()
-	wipeslate(lastcarrier)
-	if(active)
-		if(lastcarrier.pulling)
-			lastcarrier.stop_pulling()
-		playsound(user, 'sound/items/garroteshut.ogg', 65, TRUE)
-		active = FALSE
-	if(!obj_broken)
-		if(icon_state != initial(icon_state))
-			icon_state = initial(icon_state)
-			icon_angle = initial(icon_angle)
+		to_chat(user, span_warning("It's useless right now, but I can rethread it with cordage."))
+		return TRUE
+	return ..()
 
 /obj/item/inqarticles/garrote/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
 	if(istype(I, /obj/item/rope/inqarticles/inquirycord))
-		user.visible_message(span_warning("[user] starts to rethread the [src] using \the [I]."))
+		user.visible_message(span_notice("[user] starts to rethread the [src] using \the [I]."))
 		if(do_after(user, 12 SECONDS, user))
 			qdel(I)
-			obj_broken = FALSE
 			update_integrity(max_integrity)
-			icon_state = initial(icon_state)
-			icon_angle = initial(icon_angle)
-			name = initial(name)
 		else
 			user.visible_message(span_warning("[user] stops rethreading the [src]."))
-		return
+		return TRUE
 
 /obj/item/inqarticles/garrote/afterattack(mob/living/target, mob/living/user, proximity_flag, click_parameters)
 	. = ..()
+	var/mob/living/garrote_victim = victim?.resolve()
 	if(istype(user.used_intent, /datum/intent/garrote/grab))	// Grab your target first.
 		if(!iscarbon(target))
 			return
 		if(!proximity_flag)
 			return
-		if(victim == target)
+		if(garrote_victim == target)
 			return
-		if(user.pulling)
-			user.stop_pulling(FALSE)
 		/*
 		if(HAS_TRAIT(target, TRAIT_GRABIMMUNE))
 			playsound(src, pick('sound/items/garrote.ogg', 'sound/items/garrote2.ogg'), 65, TRUE)
@@ -916,26 +896,26 @@
 		if(user.zone_selected != "neck")
 			to_chat(user, span_warning("I need to wrap it around their throat."))
 			return
-		victim = target
-		playsound(src, 'sound/items/garrotegrab.ogg', 100, TRUE)
-		ADD_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE, TRAIT_GENERIC)
+		if(user.pulling)
+			user.stop_pulling()
+		reset_garrote()
 		ADD_TRAIT(user, TRAIT_NOSTRUGGLE, TRAIT_GENERIC)
-		ADD_TRAIT(target, TRAIT_GARROTED, TRAIT_GENERIC)
-		ADD_TRAIT(target, TRAIT_MUTE, "garroteCordage")
-		if(target != user)
-			user.start_pulling(target, state = 1, item_override = src)
+		if(!user.start_pulling(target, state = GRAB_AGGRESSIVE, suppress_message = TRUE, accurate = TRUE))
+			REMOVE_TRAIT(user, TRAIT_NOSTRUGGLE, TRAIT_GENERIC)
+			return
+		REMOVE_TRAIT(user, TRAIT_NOSTRUGGLE, TRAIT_GENERIC)
+		begin_garrote(target, user)
+		var/obj/item/grabbing/I = user.get_inactive_held_item()
+		if(istype(I, /obj/item/grabbing)) // generate an invisible grabbing item to simulate grabbing behavior
+			I.icon_state = null
+			currentgrab = I
+		playsound(loc, 'sound/items/garrotegrab.ogg', 100, TRUE)
 		user.visible_message(span_danger("[user] wraps the [src] around [target]'s throat!"))
 		user.adjust_stamina(25)
 		user.changeNext_move(CLICK_CD_MELEE)
-		REMOVE_TRAIT(user, TRAIT_NOSTRUGGLE, TRAIT_GENERIC)
-		REMOVE_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE, TRAIT_GENERIC)
-		var/obj/item/grabbing/I = user.get_inactive_held_item()
-		if(istype(I, /obj/item/grabbing/))
-			I.icon_state = null
-			currentgrab = I
 
 	if(istype(user.used_intent, /datum/intent/garrote/choke))	// Get started.
-		if(!victim)
+		if(!garrote_victim)
 			to_chat(user, span_warning("Who am I choking? What?"))
 			return
 		if(!proximity_flag)
@@ -944,7 +924,7 @@
 			to_chat(user, span_warning("I need to constrict the throat."))
 			return
 		user.adjust_stamina(rand(4, 8))
-		var/mob/living/carbon/C = victim
+		var/mob/living/carbon/C = garrote_victim
 		// if(get_location_accessible(C, BODY_ZONE_PRECISE_NECK))
 		playsound(src, pick('sound/items/garrotechoke1.ogg', 'sound/items/garrotechoke2.ogg', 'sound/items/garrotechoke3.ogg', 'sound/items/garrotechoke4.ogg', 'sound/items/garrotechoke5.ogg'), 100, TRUE)
 		if(prob(40))
@@ -955,14 +935,36 @@
 		to_chat(user, span_danger("I [pick("garrote", "asphyxiate")] [C]!"))
 		user.changeNext_move(CLICK_CD_RESIST)	//Stops spam for choking.
 
+/obj/item/inqarticles/garrote/proc/begin_garrote(mob/living/target, mob/living/user)
+	active = TRUE
+	ADD_TRAIT(target, TRAIT_MUTE, "garroteCordage")
+	RegisterSignal(target, COMSIG_LIVING_RESIST_GRAB, PROC_REF(on_victim_resist))
+	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(reset_garrote))
+	RegisterSignal(user, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(reset_garrote))
+	victim = WEAKREF(target)
+	lastuser = WEAKREF(user)
+
+/obj/item/inqarticles/garrote/proc/on_victim_resist(datum/source, mob/living/resistor, mob/living/pulledby, moving_resist, resist_outcome)
+	SIGNAL_HANDLER
+	if(resist_outcome) // true means resist_grab() failed
+		if(!resistor.mind) // NPCs do less damage to the garrote
+			take_damage(max_integrity * 0.0125) // 400 max = 5 damage
+		else
+			take_damage(max_integrity * 0.025) // 400 max = 10 damage
+	else
+		if(!resistor.mind)
+			take_damage(max_integrity * 0.05)
+		else
+			take_damage(max_integrity * 0.1)
+
 /obj/item/inqarticles/garrote/razor // To yische, who said not to give this out constantly, I respectfully disagree when it comes to assassin
-	name = "Profane Razor" // It's very not non lethal now.  Strangle your prey with glee
-	desc = "A thin strand of phantom black wire strung between steel grasps. The grasps are cold to the touch, even through gloves, and the strand of wire, while appearing fragile, is seemingly unbreakable"
+	name = "profane razor" // It's very not non lethal now.  Strangle your prey with glee
+	desc = "A thin strand of phantom black wire strung between steel grasps. Cold to the touch even through gloves. The strand of wire, while appearing fragile, is seemingly unbreakable."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "garrote"
 	item_state = "garrote"
 	resistance_flags = INDESTRUCTIBLE
-	choke_damage = 20
+	choke_damage = 16
 	sellprice = 100
 
 /obj/item/clothing/head/inqarticles/blackbag

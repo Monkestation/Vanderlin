@@ -377,6 +377,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel
 	melt_amount = 150
 	dropshrink = 0.8
 	wdefense = ULTMATE_PARRY

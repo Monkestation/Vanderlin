@@ -159,3 +159,8 @@
 #define adjust_eye_blur_up_to(duration, up_to) adjust_timed_status_effect(duration, /datum/status_effect/eye_blur, up_to)
 #define set_eye_blur(duration) set_timed_status_effect(duration, /datum/status_effect/eye_blur)
 #define set_eye_blur_if_lower(duration) set_timed_status_effect(duration, /datum/status_effect/eye_blur, TRUE)
+
+#define adjust_confusion(duration) adjust_timed_status_effect(duration, /datum/status_effect/confusion)
+#define adjust_confusion_up_to(duration, up_to) adjust_timed_status_effect(duration, /datum/status_effect/confusion, up_to)
+#define set_confusion(duration) set_timed_status_effect(duration, /datum/status_effect/confusion)
+#define set_confusion_if_lower(duration) set_timed_status_effect(duration, /datum/status_effect/confusion, TRUE)

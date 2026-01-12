@@ -24,6 +24,9 @@
 	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/inquisitor

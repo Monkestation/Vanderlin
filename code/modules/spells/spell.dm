@@ -203,6 +203,10 @@
 	if(!owner)
 		return PROCESS_KILL
 
+	if(!can_cast_spell(TRUE))
+		cancel_casting()
+		return PROCESS_KILL
+
 	if(charge_drain)
 		if(!check_cost(charge_drain))
 			owner.balloon_alert(owner, "I cannot uphold the channeling!")

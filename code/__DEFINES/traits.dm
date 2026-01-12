@@ -150,7 +150,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RADIMMUNE			"rad_immunity"
 #define TRAIT_PIERCEIMMUNE		"pierce_immunity"
 #define TRAIT_NODISMEMBER		"dismember_immunity"
-#define TRAIT_NOFIRE			"nonflammable"
+#define TRAIT_NOFIRE			"Nonflammable"
 #define TRAIT_NOGUNS			"no_guns"
 #define TRAIT_NOHUNGER			"no_hunger"
 #define TRAIT_NOHYGIENE			"no_hygiene"
@@ -294,10 +294,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// trait associated to a stat value or range of
 #define STAT_TRAIT "stat"
 
-#define TRAIT_NOTIGHTGRABMESSAGE "notightgrabmessage" // Hides grab tightening messages.
 #define TRAIT_NOSSDINDICATOR "nossdindicator" // Hides the SSD indicator. Used with scrying.
 #define TRAIT_NOSTRUGGLE "nostruggle" // Instant grabs on someone else.
-#define TRAIT_GARROTED "garroted" // Garrote-wired. Used for a snowflaked grab with item relevant tracking.
 #define TRAIT_BAGGED "bagged" // Black-bagged. More snowflaking.
 
 // unique trait sources, still defines
@@ -466,7 +464,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PUNISHMENT_CURSE "PunishmentCurse"
 #define TRAIT_BANDITCAMP "banditcamp"
 #define TRAIT_KNOWBANDITS "knowbandits"
-#define TRAIT_KNOWKEEPPLANS "knowkeepplans"
 #define TRAIT_VAMPMANSION "vampiremansion"
 #define TRAIT_VAMP_DREAMS "vamp_dreams"
 #define TRAIT_INHUMENCAMP "inhumencamp"
@@ -486,6 +483,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_TORPOR					"Endless Slumber"
 #define TRAIT_SATE "SATE"
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
+
+// HIDDEN DOOR TRAITS
+#define TRAIT_KNOW_KEEP_DOORS "know_keep_doors"
+#define TRAIT_KNOW_INQUISITION_DOORS "know_inquisition_doors"
+#define TRAIT_KNOW_THIEF_DOORS "know_thief_doors"
 
 // JOB RELATED TRAITS
 
