@@ -40,14 +40,14 @@
 		user.add_stress(/datum/stress_event/saw_old_party)
 
 /mob/living/carbon/human/examine(mob/user)
-	var/ignore_pronouns = FALSE
-	if(user != src && !user.mind?.do_i_know(null, real_name))
-		ignore_pronouns = TRUE
+	var/person_known = FALSE
+	if(user == src || user.mind?.do_i_know(null, real_name))
+		person_known = TRUE
 	//this is very slightly better than it was because you can use it more places. still can't do \his[src] though.
-	var/t_He = p_they(TRUE, ignore_pronouns = ignore_pronouns)
-	var/t_his = p_their(ignore_pronouns = ignore_pronouns)
-	var/t_has = p_have(ignore_pronouns = ignore_pronouns)
-	var/t_is = p_are(ignore_pronouns = ignore_pronouns)
+	var/t_He = p_they(TRUE, ignore_pronouns = !person_known)
+	var/t_his = p_their(ignore_pronouns = !person_known)
+	var/t_has = p_have(ignore_pronouns = !person_known)
+	var/t_is = p_are(ignore_pronouns = !person_known)
 	var/obscure_name
 	var/race_name = dna?.species.name
 	var/self_inspect = FALSE
@@ -107,7 +107,9 @@
 		if(GLOB.lord_titles[real_name]) //should be tied to known persons but can't do that until there is a way to recognise new people
 			. += span_notice("[m3] been granted the title of \"[GLOB.lord_titles[name]]\".")
 
-		if(dna.species.use_skintones)
+		var/use_skintone = !person_known && dna.species.use_skintones
+
+		if(use_skintone)
 			var/skin_tone_wording = dna.species.skin_tone_wording ? lowertext(dna.species.skin_tone_wording) : "skin tone"
 			var/list/skin_tones = dna.species.get_skin_list()
 			var/skin_tone_seen = "incomprehensible"
@@ -117,16 +119,17 @@
 					if(src.skin_tone == skin_tones[tone])
 						skin_tone_seen = lowertext(tone)
 						break
-			var/slop_lore_string = "."
-			if(ishumannorthern(user))
-				var/mob/living/carbon/human/racist = user
-				var/list/user_skin_tones = racist.dna.species.get_skin_list()
-//				var/user_skin_tone_seen = "incomprehensible"	gives unused warning now, sick of seeing it
-				for(var/tone in user_skin_tones)
-					if(racist.skin_tone == user_skin_tones[tone])
-//						user_skin_tone_seen = lowertext(tone)	gives unused warning now, sick of seeing it
-						break
-			. += "<span class='info'>[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen][slop_lore_string]</span>"
+
+			. += span_info("[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].")
+		else if(culture)
+			if(istype(culture, /datum/culture/universal/ambiguous))
+				. += span_info("[capitalize(m1)] could be from anywhere.")
+			else
+				var/pre_string = "[capitalize(m1)]"
+				if(user != src)
+					pre_string = "I believe [m1]"
+
+				. += span_info("[pre_string] from [culture.examined_string()].")
 
 		if(ishuman(user))
 			var/mob/living/carbon/human/stranger = user

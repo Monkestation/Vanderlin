@@ -24,7 +24,6 @@
 
 	skin_tone_wording = "Clan"
 
-
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_STINKY)
 
@@ -146,14 +145,14 @@
 
 /datum/species/halforc/get_hairc_list()
 	return sortList(list(
-	"brown - minotaur" = "58433b",
-	"brown - volf" = "48322a",
-	"brown - bark" = "2d1300",
+		"brown - minotaur" = "58433b",
+		"brown - volf" = "48322a",
+		"brown - bark" = "2d1300",
 
-	"green - maneater" = "458745",
-	"green - swampgrass" = "2A3B2B",
+		"green - maneater" = "458745",
+		"green - swampgrass" = "2A3B2B",
 
-	"black - charcoal" = "201616"
+		"black - charcoal" = "201616"
 	))
 
 /datum/species/halforc/get_possible_names(gender = MALE)

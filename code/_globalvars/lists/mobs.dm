@@ -81,3 +81,13 @@ GLOBAL_LIST_INIT(dangerous_turfs, typecacheof(list(
 			.[E.key_third_person] = list(E)
 		else
 			.[E.key_third_person] |= E
+
+GLOBAL_LIST_INIT(culture_prototypes, init_culture_prototypes())
+
+/proc/init_culture_prototypes()
+	var/list/culture_list = list()
+	for(var/datum/culture/culture as anything in subtypesof(/datum/culture))
+		if(is_abstract(culture))
+			continue
+		culture_list[culture] = new culture()
+	return culture_list

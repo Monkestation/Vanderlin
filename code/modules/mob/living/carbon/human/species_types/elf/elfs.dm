@@ -27,8 +27,6 @@
 	and pillaging of natural resources within the former snow-elf territory. \n\
 	To elves, it was the greatest disrespect to those lost. "
 
-	skin_tone_wording = "Tribal Identity"
-
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
@@ -117,65 +115,37 @@
 /datum/species/elf/snow/check_roundstart_eligible()
 	return TRUE
 
-/datum/species/elf/snow/get_span_language(datum/language/message_language)
-	if(!message_language)
-		return
-//	if(message_language.type == /datum/language/elvish)
-//		return list(SPAN_SELF)
-//	if(message_language.type == /datum/language/common)
-//		return list(SPAN_SELF)
-	return message_language.spans
-
-/datum/species/elf/snow/get_skin_list()
-	return sortList(list(
-		"Plain Elf" = SKIN_COLOR_PLAIN_ELF, // - (White 2)
-		"Mountain Elf" = SKIN_COLOR_MOUNTAIN_ELF, // - (White 3)
-		"Coastal Elf" = SKIN_COLOR_COASTAL_ELF, // - (White 4)
-		"Wood Elf" = SKIN_COLOR_WOOD_ELF, // - (Mediterranean 1)
-		"Sea Elf" = SKIN_COLOR_SEA_ELF, // - (Mediterranean 2)
-		"Jungle Elf" = SKIN_COLOR_JUNGLE_ELF, // - (Latin)
-		"Savannah Elf" = SKIN_COLOR_SAVANNAH_ELF, // - (Middle-Eastern 1)
-		"Desert Elf" = SKIN_COLOR_DESERT_ELF, // - (Middle-Eastern 2)
-		"Sand Elf" = SKIN_COLOR_SAND_ELF, // - (Black 1)
-		"Crimson Elf" = SKIN_COLOR_CRIMSON_ELF, // - (Black2)
-		"Bayou Elf" = SKIN_COLOR_BAYOU_ELF, // - (Native American 1)
-		"Taiga Elf" = SKIN_COLOR_TAIGA_ELF, // - (Native American 2)
-		"Archipelago Elf" = SKIN_COLOR_ARCHIPELAGO_ELF, // - (Polynesian)
-		"Volcano Elf" = SKIN_COLOR_VOLCANO_ELF, // (Melanesian)
-	))
-
 /datum/species/elf/snow/get_hairc_list()
 	return sortList(list(
-	"black - oil" = "181a1d",
-	"black - cave" = "201616",
-	"black - rogue" = "2b201b",
-	"black - midnight" = "1d1b2b",
+		"black - oil" = "181a1d",
+		"black - cave" = "201616",
+		"black - rogue" = "2b201b",
+		"black - midnight" = "1d1b2b",
 
-	"blond - pale" = "9d8d6e",
-	"blond - dirty" = "88754f",
-	"blond - drywheat" = "d5ba7b",
-	"blond - strawberry" = "c69b71",
+		"blond - pale" = "9d8d6e",
+		"blond - dirty" = "88754f",
+		"blond - drywheat" = "d5ba7b",
+		"blond - strawberry" = "c69b71",
 
-	"white - snow" = "dee9ed",
-	"white - ice" = "f4f4f4",
+		"white - snow" = "dee9ed",
+		"white - ice" = "f4f4f4",
 
-	"brown - mud" = "362e25",
-	"brown - oats" = "584a3b",
-	"brown - grain" = "58433b",
-	"brown - soil" = "48322a",
-	"brown - bark" = "2d1300",
+		"brown - mud" = "362e25",
+		"brown - oats" = "584a3b",
+		"brown - grain" = "58433b",
+		"brown - soil" = "48322a",
+		"brown - bark" = "2d1300",
 
-	"red - berry" = "b23434",
-	"red - wine" = "82534c",
-	"red - sunset" = "82462b",
-	"red - blood" = "822b2b",
-	"red - maroon" = "612929",
+		"red - berry" = "b23434",
+		"red - wine" = "82534c",
+		"red - sunset" = "82462b",
+		"red - blood" = "822b2b",
+		"red - maroon" = "612929",
 
-	"green - grass" = "2a482c",
-	"green - swamp" = "3b482a",
-	"green - leaf" = "2f3c2e",
-	"green - moss" = "3b3c2a"
-
+		"green - grass" = "2a482c",
+		"green - swamp" = "3b482a",
+		"green - leaf" = "2f3c2e",
+		"green - moss" = "3b3c2a"
 	))
 
 /datum/species/elf/snow/get_possible_names(gender = MALE)

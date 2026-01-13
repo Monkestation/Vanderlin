@@ -251,6 +251,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		"parchment",
 	)
 
+	// I beg for datumised prefs
+	/// culture datum type
+	var/datum/culture/culture = /datum/culture/universal/ambiguous
+
 /datum/preferences/New(client/C)
 	parent = C
 
@@ -1830,7 +1834,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						to_chat(user, span_notice("Successfully updated OOC Extra with [info]"))
 						log_game("[user] has set their OOC Extra to '[ooc_extra_link]'.")
 				if("s_tone")
-					var/listy = pref_species.get_skin_list()
+					var/list/listy = pref_species.get_skin_list()
 					var/new_s_tone = browser_input_list(user, "CHOOSE YOUR HERO'S [uppertext(pref_species.skin_tone_wording)]", "THE SUN", listy)
 					if(new_s_tone)
 						skin_tone = listy[new_s_tone]
@@ -2227,6 +2231,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		organ_eyes.old_eye_color = eye_color
 
 	character.skin_tone = skin_tone
+	if(character.culture)
+		qdel(character.culture)
+	character.culture = GLOB.culture_prototypes[culture]
 	character.underwear = underwear
 	character.undershirt = undershirt
 	character.detail = detail
