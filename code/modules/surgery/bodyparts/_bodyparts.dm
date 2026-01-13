@@ -433,8 +433,8 @@
 		owner.update_body()
 
 /obj/item/bodypart/proc/reset_fingerprint()
-	if(status == BODYPART_ORGANIC)
-		fingerprint = owner?.dna?.unique_identity
+	if(status == BODYPART_ORGANIC && owner?.dna?.unique_identity)
+		fingerprint = md5(owner.dna.unique_identity)
 	else
 		fingerprint = null
 
@@ -446,8 +446,6 @@
 		return FALSE //`null` is a valid option, so we need to use a num var to make it clear no change was made.
 	var/mob/living/carbon/old_owner = owner
 	owner = new_owner
-	if(!fingerprint)
-		reset_fingerprint()
 	var/needs_update_disabled = FALSE //Only really relevant if there's an owner
 	if(old_owner)
 		if(initial(can_be_disabled))

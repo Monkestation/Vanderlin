@@ -124,9 +124,9 @@
 				human_suspect.gloves.add_fingerprint(human_suspect, ignoregloves = TRUE) //ignoregloves = TRUE to avoid infinite loop.
 				return
 		var/obj/item/bodypart/hand = human_suspect.hand_bodyparts[human_suspect.active_hand_index]
-		if(hand && hand.status != BODYPART_ORGANIC)
+		var/full_print = hand ? hand.fingerprint : md5(human_suspect.dna.unique_identity)
+		if(!full_print) // including inorganic hands
 			return
-		var/full_print = md5(hand?.fingerprint || human_suspect.dna.unique_identity)
 		LAZYSET(fingerprints, full_print, full_print)
 	return TRUE
 

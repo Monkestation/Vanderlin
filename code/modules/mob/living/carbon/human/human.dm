@@ -168,6 +168,7 @@
 	create_dna(src)
 	randomize_human(src)
 	dna.initialize_dna()
+	reset_limb_fingerprints()
 
 /mob/living/carbon/human/Stat()
 	..()
