@@ -19,7 +19,6 @@
 	icon_state = "together"
 	baseturfs = /turf/open/water
 	slowdown = 20
-	turf_flags = TURF_WEATHER_PROOF
 	var/obj/effect/overlay/water/water_overlay
 	var/obj/effect/overlay/water/top/water_top_overlay
 	bullet_sizzle = TRUE
@@ -482,10 +481,6 @@
 		var/mob/living/L = user
 		if(L.stat != CONSCIOUS)
 			return
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			if(C.is_mouth_covered())
-				return
 		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
 		user.visible_message("<span class='info'>[user] starts to drink from [src].</span>")
 		if(do_after(L, 2.5 SECONDS, src))
@@ -823,7 +818,7 @@
 	color = "#3e7459"
 
 /datum/reagent/water/salty/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method == INGEST) // Make sure you DRANK the salty water before losing hydration
+	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
 		..()
 
 /datum/reagent/water/salty/on_mob_life(mob/living/carbon/M)

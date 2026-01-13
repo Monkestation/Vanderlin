@@ -378,7 +378,7 @@
 	if(iscarbon(owner))
 		var/mob/living/carbon/human/C = owner
 		C.emote("pain", forced = TRUE)
-		playsound(get_turf(C), 'sound/gore/flesh_eat_03.ogg', 100, TRUE)
+		playsound(C, 'sound/gore/flesh_eat_03.ogg', 100, TRUE)
 		to_chat(C, span_warning("Dendor's transformation fades, flesh shrinking back. My body aches..."))
 		C.adjustBruteLoss(10)
 		C.apply_status_effect(/datum/status_effect/debuff/barbfalter)

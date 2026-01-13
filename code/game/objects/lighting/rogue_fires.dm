@@ -264,7 +264,7 @@
 		if(!on)
 			if(torchy.fuel > 0)
 				torchy.spark_act()
-				playsound(src.loc, 'sound/items/firelight.ogg', 100)
+				playsound(src, 'sound/items/firelight.ogg', 100)
 				on = TRUE
 				update()
 				update_appearance(UPDATE_ICON_STATE)
@@ -310,7 +310,7 @@
 		on = FALSE
 		update()
 		update_appearance(UPDATE_ICON_STATE)
-		playsound(src.loc, 'sound/foley/torchfixturetake.ogg', 70)
+		playsound(src, 'sound/foley/torchfixturetake.ogg', 70)
 
 /obj/machinery/light/fueled/torchholder/burn_out()
 	if(torchy && torchy.on)
@@ -328,7 +328,7 @@
 				else
 					torchy.spark_act()
 					user.visible_message("<span class='info'>[user] lights [src].</span>")
-					playsound(src.loc, 'sound/items/firelight.ogg', 100)
+					playsound(src, 'sound/items/firelight.ogg', 100)
 					on = TRUE
 					update()
 					update_appearance(UPDATE_ICON_STATE)
@@ -351,7 +351,7 @@
 					return
 				torchy = LR
 				update_appearance(UPDATE_ICON_STATE)
-			playsound(src.loc, 'sound/foley/torchfixtureput.ogg', 70)
+			playsound(src, 'sound/foley/torchfixtureput.ogg', 70)
 		return
 	. = ..()
 
@@ -418,7 +418,7 @@
 /obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, params)
 	if(!attachment)
 		if(istype(W, /obj/item/cooking/pan) || istype(W, /obj/item/reagent_containers/glass/bucket/pot) || istype(W, /obj/item/reagent_containers/glass/carafe/teapot))
-			playsound(get_turf(user), 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
+			playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
 
 			if(user.transferItemToLoc(W, src, silent = TRUE))
 				attachment = W
@@ -446,7 +446,7 @@
 /obj/machinery/light/fueled/hearth/fire_act(added, maxstacks)
 	. = ..()
 	if(food)
-		playsound(src.loc, 'sound/misc/frying.ogg', 80, FALSE, extrarange = 2)
+		playsound(src, 'sound/misc/frying.ogg', 80, FALSE, extrarange = 2)
 
 /obj/machinery/light/fueled/hearth/update_overlays()
 	. = ..()

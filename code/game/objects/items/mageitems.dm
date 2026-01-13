@@ -117,7 +117,7 @@
 
 	user.visible_message(span_warning("[user] begins to scribe something [user.p_their()] [src]!"), \
 		span_notice("I start to drag the [src] in the shape of symbols and sigils"))
-	playsound(loc, 'sound/magic/chalkdraw.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/chalkdraw.ogg', 100, TRUE)
 	if(do_after(user, crafttime, target = src))
 		if(QDELETED(src) || !pickrune)
 			return
@@ -156,7 +156,7 @@
 	if(istype(M,/obj/item/ore/cinnabar))
 		var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
 		if(do_after(user, crafttime, target = src))
-			playsound(loc, 'sound/magic/scrapeblade.ogg', 100, TRUE)
+			playsound(src, 'sound/magic/scrapeblade.ogg', 100, TRUE)
 			to_chat(user, span_notice("I press arcyne magic into the blade and it throbs in a deep purple..."))
 			var/obj/arcyne_knife = new /obj/item/weapon/knife/dagger/silver/arcyne
 			qdel(M)
@@ -187,7 +187,7 @@
 		if(!chosen_keyword)
 			return FALSE
 	if(!is_bled)
-		playsound(loc, get_sfx("genslash"), 100, TRUE)
+		playsound(src, get_sfx("genslash"), 100, TRUE)
 		user.visible_message(span_warning("[user] cuts open [user.p_their()] palm!"), \
 			span_cult("I slice open my palm!"))
 		if(user.blood_volume)
@@ -197,7 +197,7 @@
 
 	user.visible_message(span_warning("[user] begins to carve something with [user.p_their()] blade!"), \
 		span_notice("I start to drag the blade in the shape of symbols and sigils."))
-	playsound(loc, 'sound/magic/bladescrape.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/bladescrape.ogg', 100, TRUE)
 	if(do_after(user, crafttime, target = src))
 		if(QDELETED(src) || !pickrune)
 			return
@@ -437,7 +437,7 @@
 		if(isturf(loc)&& (found_table))
 			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
-				playsound(loc, 'sound/items/book_close.ogg', 100, TRUE)
+				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
 				new /obj/item/rope/chain/bindingshackles/t2(loc)
 				qdel(P)
@@ -456,7 +456,7 @@
 		if(isturf(loc)&& (found_table))
 			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
-				playsound(loc, 'sound/items/book_close.ogg', 100, TRUE)
+				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
 				new /obj/item/rope/chain/bindingshackles/t3(loc)
 				qdel(P)
@@ -475,7 +475,7 @@
 		if(isturf(loc)&& (found_table))
 			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
-				playsound(loc, 'sound/items/book_close.ogg', 100, TRUE)
+				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
 				new /obj/item/rope/chain/bindingshackles/t4(loc)
 				qdel(P)
@@ -494,7 +494,7 @@
 		if(isturf(loc)&& (found_table))
 			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
-				playsound(loc, 'sound/items/book_close.ogg', 100, TRUE)
+				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
 				new /obj/item/rope/chain/bindingshackles/t5(loc)
 				qdel(P)

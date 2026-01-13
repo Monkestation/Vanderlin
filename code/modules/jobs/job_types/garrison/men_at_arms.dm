@@ -65,17 +65,17 @@
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_PER = -1,
-		STATKEY_END = -1,
+		STATKEY_END = 1,
 		STATKEY_CON = 1,
 		STATKEY_SPD = 1
 	)
 
 	skills = list(
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/polearms = 3,
+		/datum/skill/combat/swords = 2,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 1,
@@ -104,48 +104,50 @@
 		/obj/item/weapon/knife/dagger/steel/special = 1
 	)
 
-/datum/job/advclass/menatarms/watchman_swordsmen
-	title = "Fencer Men-At-Arms"
+/datum/job/advclass/menatarms/watchman_axeman
+	title = "Axeman Men-At-Arms"
 	tutorial = "You once warded the town, beating the poor and killing the senseless. \
-	You were quite a good dancer, you've blended that skill with your blade- \
+	Now you charge straight ahead, those infront cannot stop the weight of your axe- \
 	exanguinated personally by one of the Monarch's best. \
 	You are poor, and your belly is yet full."
-	outfit = /datum/outfit/watchman/swordsmen
+	outfit = /datum/outfit/watchman/axeman
 	category_tags = list(CTAG_MENATARMS)
 
 	jobstats = list(
 		STATKEY_END = 2,
-		STATKEY_SPD = 2
+		STATKEY_STR = 2,
+		STATKEY_CON = 1,
+		STATKEY_SPD = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/knives = 3,
+		/datum/skill/combat/swords = 2,
+		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1
+		/datum/skill/craft/crafting = 1,
+		/datum/skill/labor/lumberjacking = 1
 	)
 
 	traits = list(
-		TRAIT_MEDIUMARMOR,
-		TRAIT_DODGEEXPERT,
+		TRAIT_HEAVYARMOR,
 		TRAIT_KNOWBANDITS
 	)
 
-/datum/outfit/watchman/swordsmen
-	name = "Fencer Men-At-Arms"
+/datum/outfit/watchman/axeman
+	name = "Axeman Men-At-Arms"
 	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
-	armor = /obj/item/clothing/armor/leather/splint
-	shirt = /obj/item/clothing/armor/gambeson/arming
+	armor = /obj/item/clothing/armor/brigandine
+	shirt = /obj/item/clothing/armor/gambeson/heavy
 	neck = /obj/item/clothing/neck/bevor
 	gloves = /obj/item/clothing/gloves/chain
-	beltr = /obj/item/weapon/sword/rapier
 	backl = /obj/item/storage/backpack/satchel
+	backr = /obj/item/weapon/greataxe/steel
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel/special = 1
 	)
@@ -161,17 +163,16 @@
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_PER = 2,
-		STATKEY_END = -2,
 		STATKEY_SPD = 1
 	)
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 4,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/bows = 3,
+		/datum/skill/combat/crossbows = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/athletics = 2,

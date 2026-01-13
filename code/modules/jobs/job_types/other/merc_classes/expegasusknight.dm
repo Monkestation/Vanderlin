@@ -19,9 +19,9 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/misc/sneaking = 1,
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/medicine = 1,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/shields = 3,
 		/datum/skill/misc/reading = 2,
 		/datum/skill/misc/riding = 3

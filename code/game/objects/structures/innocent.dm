@@ -20,13 +20,13 @@
 	qdel(src)
 
 /obj/structure/innocent_bush/Bumped(atom/movable/AM)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
 	new /mob/living/simple_animal/hostile/retaliate/troll/bog (get_turf(src))
 	qdel(src)
 
 /obj/structure/innocent_bush/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	sleep(4)
 	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
 	new /mob/living/simple_animal/hostile/retaliate/troll/bog (get_turf(src))

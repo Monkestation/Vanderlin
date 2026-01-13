@@ -57,7 +57,7 @@
 	spawned.adjust_skillrank(/datum/skill/misc/stealing, pick(1,2,3,4), TRUE)
 	spawned.adjust_skillrank(/datum/skill/misc/lockpicking, pick(1,2,3,4), TRUE)
 	spawned.adjust_skillrank(/datum/skill/misc/climbing, pick(1,2,3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(0,0,1), TRUE)
 	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2), TRUE)
 	spawned.adjust_skillrank(/datum/skill/craft/alchemy, pick(1,2), TRUE)
 

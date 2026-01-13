@@ -135,7 +135,7 @@
 
 	var/fishchance = 25 + (fisher.STALUC * 3)
 	if(prob(fishchance))
-		playsound(fisher.loc, 'sound/items/Fish_out.ogg', 100, TRUE)
+		playsound(fisher, 'sound/items/Fish_out.ogg', 100, TRUE)
 		var/obj/item/reagent_containers/food/snacks/fish/caughtfish = new fishtype(get_turf(fisher))
 		var/raritydesc
 		var/sizedesc

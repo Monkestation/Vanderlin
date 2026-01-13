@@ -117,6 +117,26 @@
 /mob/proc/purge_all_skills(silent=TRUE)
 	return ensure_skills().purge_all_skills(silent)
 
+/// Get the experience multiplier for a specific skill
+/mob/proc/get_skill_exp_multiplier(skill)
+	return ensure_skills().get_skill_exp_multiplier(skill)
+
+/// Set the experience multiplier for a specific skill
+/mob/proc/set_skill_exp_multiplier(skill, multiplier)
+	return ensure_skills().set_skill_exp_multiplier(skill, multiplier)
+
+/// Adjust the experience multiplier for a specific skill
+/mob/proc/adjust_skill_exp_multiplier(skill, amount)
+	return ensure_skills().adjust_skill_exp_multiplier(skill, amount)
+
+/// Remove the experience multiplier for a specific skill (reset to default)
+/mob/proc/remove_skill_exp_multiplier(skill)
+	return ensure_skills().remove_skill_exp_multiplier(skill)
+
+/// Get all skills that have custom multipliers
+/mob/proc/get_all_skill_multipliers()
+	return ensure_skills().get_all_skill_multipliers()
+
 /datum/skill_holder
 	///our current host
 	var/mob/living/current
@@ -124,6 +144,8 @@
 	var/list/known_skills = list()
 	///Assoc list of skills - exp
 	var/list/skill_experience = list()
+	///assoc list of skill - multiplier
+	var/list/exp_multiplier = list()
 	/// is this mind an apprentice of someone?
 	var/apprentice = FALSE
 	/// the maximum amount of apprentices this mind can have
@@ -269,8 +291,14 @@
 */
 /datum/skill_holder/proc/adjust_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
 	amt *= GLOB.adjust_experience_modifier
+
+	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+		amt *= 1.2
+
+	amt *= current.get_skill_exp_multiplier(skill)
+
 	var/datum/skill/skill_ref = GetSkillRef(skill)
-	skill_experience[skill_ref] = max(0, skill_experience[skill_ref] + amt) //Prevent going below 0
+	skill_experience[skill_ref] = max(0, skill_experience[skill_ref] + amt)
 	var/old_level = get_skill_level(skill)
 	switch(skill_experience[skill_ref])
 		if(SKILL_EXP_LEGENDARY to INFINITY)
@@ -434,13 +462,10 @@
  ** max - maximum amount up to which the skill will be changed
 */
 /datum/skill_holder/proc/clamped_adjust_skillrank(skill, amt, max, silent)
-	var/skill_difference =  max - get_skill_level(skill)
-
+	var/skill_difference = max - get_skill_level(skill)
 	if(skill_difference <= 0)
 		return
-
-	var/amount_to_adjust_by = min(skill_difference, max)
-
+	var/amount_to_adjust_by = min(skill_difference, amt)  // Changed max to amt
 	adjust_skillrank(skill, amount_to_adjust_by, silent)
 
 /**
@@ -494,3 +519,66 @@
 			var/apprentice_amt = amt * 0.1 + multiplier
 			if(apprentice.mind.add_sleep_experience(skill, apprentice_amt, FALSE, FALSE))
 				current.add_stress(/datum/stress_event/apprentice_making_me_proud)
+				SEND_SIGNAL(current, COMSIG_TAUGHT_APPRENTICE)
+
+/**
+ * Get the experience multiplier for a specific skill
+ * Vars:
+ ** skill - the skill to check
+ * Returns: The multiplier (default 1.0 if none set)
+ */
+/datum/skill_holder/proc/get_skill_exp_multiplier(skill)
+	var/datum/skill/skill_ref = GetSkillRef(skill)
+	if(skill_ref in exp_multiplier)
+		return exp_multiplier[skill_ref]
+	return 1.0
+
+/**
+ * Set the experience multiplier for a specific skill
+ * Vars:
+ ** skill - the skill to modify
+ ** multiplier - the multiplier value (1.0 = normal, 2.0 = double xp, 0.5 = half xp)
+ */
+/datum/skill_holder/proc/set_skill_exp_multiplier(skill, multiplier)
+	if(!skill)
+		CRASH("set_skill_exp_multiplier was called without a skill argument!")
+
+	var/datum/skill/skill_ref = GetSkillRef(skill)
+	exp_multiplier[skill_ref] = max(0, multiplier) // Prevent negative multipliers
+	return multiplier
+
+/**
+ * Adjust the experience multiplier for a specific skill by an amount
+ * Vars:
+ ** skill - the skill to modify
+ ** amount - how much to adjust the multiplier by (can be negative)
+ */
+/datum/skill_holder/proc/adjust_skill_exp_multiplier(skill, amount)
+	if(!skill)
+		CRASH("adjust_skill_exp_multiplier was called without a skill argument!")
+
+	var/datum/skill/skill_ref = GetSkillRef(skill)
+	var/current_multiplier = get_skill_exp_multiplier(skill_ref)
+	var/new_multiplier = max(0, current_multiplier + amount) // Prevent negative multipliers
+	exp_multiplier[skill_ref] = new_multiplier
+	return new_multiplier
+
+/**
+ * Remove the experience multiplier for a specific skill (resets to default 1.0)
+ * Vars:
+ ** skill - the skill to reset
+ */
+/datum/skill_holder/proc/remove_skill_exp_multiplier(skill)
+	if(!skill)
+		CRASH("remove_skill_exp_multiplier was called without a skill argument!")
+
+	var/datum/skill/skill_ref = GetSkillRef(skill)
+	exp_multiplier -= skill_ref
+	return TRUE
+
+/**
+ * Get all skills that have custom multipliers set
+ * Returns: Associative list of skill_ref = multiplier
+ */
+/datum/skill_holder/proc/get_all_skill_multipliers()
+	return exp_multiplier.Copy()

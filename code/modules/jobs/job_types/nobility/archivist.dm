@@ -60,16 +60,15 @@
 		/datum/language/deepspeak
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_KEEP_DOORS
+	)
 	traits = list(
-		TRAIT_NOBLE,
-		TRAIT_KNOWKEEPPLANS
+		TRAIT_NOBLE
 	)
 
 /datum/job/archivist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
-	if(GLOB.keep_doors.len > 0)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), spawned), 5 SECONDS)
 
 	spawned.virginity = TRUE
 

@@ -527,7 +527,7 @@
 
 //For knocking the mannequin over whenever it is hit by a hostile.
 /obj/structure/mannequin/proc/TipOver()
-	playsound(get_turf(src), 'sound/foley/dropsound/wooden_drop.ogg', 50, TRUE)
+	playsound(src, 'sound/foley/dropsound/wooden_drop.ogg', 50, TRUE)
 	density = FALSE
 	tipped_over = TRUE
 	DropAll()
@@ -540,7 +540,7 @@
 	for(var/obj/structure/mannequin/O in get_turf(src))
 		if(O.density && !O.tipped_over)
 			return
-	playsound(get_turf(src), 'sound/foley/woodclimb.ogg', 50, TRUE)
+	playsound(src, 'sound/foley/woodclimb.ogg', 50, TRUE)
 	density = TRUE
 	tipped_over = FALSE
 	var/matrix/mat = transform

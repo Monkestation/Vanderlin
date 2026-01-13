@@ -79,7 +79,7 @@
 				return
 
 /obj/item/flashlight/flare/light/turn_off()
-	playsound(src.loc, 'sound/items/firesnuff.ogg', 100)
+	playsound(src, 'sound/items/firesnuff.ogg', 100)
 	STOP_PROCESSING(SSobj, src)
 	..()
 	if(ismob(loc))
@@ -92,7 +92,7 @@
 /obj/item/flashlight/flare/light/fire_act(added, maxstacks)
 	if(fuel)
 		if(!on)
-			playsound(src.loc, 'sound/items/firelight.ogg', 100)
+			playsound(src, 'sound/items/firelight.ogg', 100)
 			on = TRUE
 			damtype = BURN
 			update_brightness()

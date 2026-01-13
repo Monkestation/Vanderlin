@@ -214,7 +214,7 @@
 
 /obj/effect/decal/cleanable/debris/glass/Crossed(mob/living/L)
 	. = ..()
-	playsound(loc,'sound/foley/glass_step.ogg', 50, FALSE)
+	playsound(src,'sound/foley/glass_step.ogg', 50, FALSE)
 
 /obj/effect/decal/cleanable/debris/stone
 	name = "stone chippings"

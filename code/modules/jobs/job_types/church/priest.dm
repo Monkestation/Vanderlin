@@ -42,8 +42,8 @@
 	skills = list(
 		/datum/skill/misc/reading = 5,
 		/datum/skill/magic/holy = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/misc/athletics = 3,
@@ -54,6 +54,7 @@
 	)
 
 	languages = list(/datum/language/celestial)
+	can_have_apprentices = FALSE
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -65,6 +66,7 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
 	spawned.verbs |= /mob/living/carbon/human/proc/churchcurse
 	spawned.verbs |= /mob/living/carbon/human/proc/churchannouncement
+	spawned.verbs += list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb)
 
 	spawned.virginity = TRUE
 
