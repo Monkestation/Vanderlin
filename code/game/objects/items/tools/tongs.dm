@@ -3,7 +3,7 @@
 	desc = ""
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "tongs"
-	force = DAMAGE_CLUB/3
+	force = DAMAGE_CLUB / 3
 	possible_item_intents = list(MACE_STRIKE)
 	sharpness = IS_BLUNT
 	wlength = 10

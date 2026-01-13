@@ -39,8 +39,8 @@
 	name = "knife sheath"
 	desc = "A slingable sheath made of leather, meant to host surprises of smaller sizes."
 	icon_state = "sheath"
-	force = DAMAGE_KNIFE-7
-	throwforce = DAMAGE_KNIFE-7
+	force = DAMAGE_KNIFE - 7
+	throwforce = DAMAGE_KNIFE - 7
 	wdefense = MEDIOCRE_PARRY
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
@@ -86,8 +86,8 @@
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."
 	icon_state = "scabbard"
-	force = DAMAGE_SWORD-15
-	force_wielded = DAMAGE_SWORD-15
+	force = DAMAGE_SWORD - 15
+	force_wielded = DAMAGE_SWORD - 15
 	wdefense = GREAT_PARRY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
@@ -128,8 +128,8 @@
 	name = "fancy cane"
 	desc = "A polished, dark wooden cane, decorated with gold and silver. Often carried by nobility, even those without a limp, simply to flaunt their wealth to the peasantry. This one contains a concealed blade!"
 	icon_state = "canesheath"
-	force = DAMAGE_MACE-4
-	force_wielded = DAMAGE_MACE-2
+	force = DAMAGE_MACE - 4
+	force_wielded = DAMAGE_MACE - 2
 	wdefense = MEDIOCRE_PARRY
 	sellprice = 45
 
@@ -205,8 +205,8 @@
 	desc = "A piece of steel lined with wood. Great for batting away blows."
 	icon_state = "kazscab"
 	item_state = "kazscab"
-	force = DAMAGE_SWORD-15
-	force_wielded = DAMAGE_SWORD-15
+	force = DAMAGE_SWORD - 15
+	force_wielded = DAMAGE_SWORD - 15
 	wdefense = GREAT_PARRY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY

@@ -2,7 +2,7 @@
 	name = "frypan"
 	icon_state = "pan"
 	force = DAMAGE_MACE
-	throwforce = DAMAGE_MACE-5
+	throwforce = DAMAGE_MACE - 5
 	wdefense = ULTMATE_PARRY
 	can_parry = TRUE
 	possible_item_intents = list(SHOVEL_STRIKE)

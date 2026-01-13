@@ -6,8 +6,8 @@
 	name = "thresher"
 	desc = "Crushes grain, or skulls."
 	icon_state = "thresher"
-	force = DAMAGE_WEAK_FLAIL-7
-	force_wielded = DAMAGE_WEAK_FLAIL-3
+	force = DAMAGE_WEAK_FLAIL - 7
+	force_wielded = DAMAGE_WEAK_FLAIL - 3
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(MACE_STRIKE)
@@ -35,8 +35,8 @@
 	name = "military flail"
 	desc = "Crushes skulls, or grain."
 	icon_state = "military"
-	force = DAMAGE_WEAK_FLAIL-5
-	force_wielded = DAMAGE_NORMAL_FLAIL+2
+	force = DAMAGE_WEAK_FLAIL - 5
+	force_wielded = DAMAGE_NORMAL_FLAIL + 2
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_THRESH,)
 
@@ -178,8 +178,8 @@
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
-	force = DAMAGE_STAFF-5
-	force_wielded = DAMAGE_STAFF_WIELD-8
+	force = DAMAGE_STAFF - 5
+	force_wielded = DAMAGE_STAFF_WIELD - 8
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
@@ -301,8 +301,8 @@
 	name = "stone hoe"
 	desc = "A makeshift hoe made out of stone."
 	icon_state = "stonehoe"
-	force = DAMAGE_STAFF-7
-	force_wielded = DAMAGE_STAFF_WIELD-10
+	force = DAMAGE_STAFF - 7
+	force_wielded = DAMAGE_STAFF_WIELD - 10
 	smeltresult = null
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST
@@ -318,7 +318,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "pitchfork"
 	force = DAMAGE_STAFF
-	force_wielded = DAMAGE_SPEAR_WIELD-3
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	throwforce = DAMAGE_SPEAR
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG

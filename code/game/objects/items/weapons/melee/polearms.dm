@@ -46,7 +46,7 @@
 	desc = "The ultimate tool of travel for weary wanderers, support your weight or crack the heads that don't support you."
 	icon_state = "woodstaff"
 	force =  DAMAGE_STAFF
-	force_wielded =  DAMAGE_STAFF_WIELD-1
+	force_wielded =  DAMAGE_STAFF_WIELD - 1
 	wdefense = ULTMATE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
@@ -91,7 +91,7 @@
 	name = "steel quarterstaff"
 	desc = "An unusual sight, a knightly combat staff made out of worked steel and reinforced wood. It is a heavy and powerful weapon, more than capable of beating the living daylights out of any brigand."
 	icon_state = "quarterstaff_steel"
-	force_wielded =  DAMAGE_STAFF_WIELD+1
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 7
@@ -101,7 +101,7 @@
 	name = "staff of the testimonium"
 	desc = "A symbolic staff, granted to enlightened acolytes who have achieved and bear witnessed to the miracles of the Gods."
 	icon_state = "aries"
-	force_wielded =  DAMAGE_STAFF_WIELD+1
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
 	resistance_flags = FIRE_PROOF // Leniency for unique items
 	dropshrink = 0.6
 	sellprice = 100
@@ -110,7 +110,7 @@
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
 	icon_state = "seerstaff"
-	force_wielded =  DAMAGE_STAFF_WIELD+1
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
 	sellprice = 100
 
 //................ Spear ............... //
@@ -147,7 +147,7 @@
 	desc = "An instrument of Abyssor's wrath to punish the ignorant."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "gsspear"
-	force_wielded = DAMAGE_SPEAR_WIELD+2
+	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	throwforce = DAMAGE_SPEAR_WIELD
 
 /obj/item/weapon/polearm/spear/assegai
@@ -162,7 +162,7 @@
 	name = "steel assegai"
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_steel"
-	force_wielded = DAMAGE_SPEAR_WIELD+2
+	force_wielded = DAMAGE_SPEAR_WIELD + 2
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -237,7 +237,7 @@
 	desc = "With this weapon, the tribes of humenity became the chosen people of Psydon."
 	icon_state = "stonespear"
 	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_SPEAR+2
+	force_wielded = DAMAGE_SPEAR + 2
 	throwforce = DAMAGE_SPEAR
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
@@ -526,7 +526,7 @@
 	name = "Bronze Spear"
 	desc = "A spear forged of bronze. Expensive but more durable than a regular iron one."
 	icon_state = "bronzespear"
-	force = DAMAGE_SPEARPLUS+2
+	force = DAMAGE_SPEARPLUS + 2
 	max_blade_int = 200
 	melting_material = /datum/material/bronze
 	melt_amount = 75
@@ -539,7 +539,7 @@
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "scythe"
 	force = DAMAGE_STAFF
-	force_wielded = DAMAGE_SPEARPLUS+2
+	force_wielded = DAMAGE_SPEARPLUS + 2
 	throwforce = DAMAGE_SPEAR_WIELD
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_GREAT
@@ -575,10 +575,10 @@
 	// icon_state = "bonespear"
 	icon_state = "stonespear_sk"
 	force = DAMAGE_SPEARPLUS
-	force_wielded = DAMAGE_SPEAR_WIELD-3
-	throwforce = DAMAGE_SPEARPLUS+2
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	throwforce = DAMAGE_SPEARPLUS + 2
 	max_blade_int = 70
-	max_integrity = INTEGRITY_WORST-40
+	max_integrity = INTEGRITY_WORST - 40
 	minstr = 6
 
 	inhand_x_dimension = 64
@@ -594,9 +594,9 @@
 	desc = "A traditional Kazengunese polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of Kazengunese bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "naginata"
-	force = DAMAGE_SPEAR+1
-	force_wielded = DAMAGE_SPEAR_WIELD+5
-	throwforce = DAMAGE_SPEAR-3
+	force = DAMAGE_SPEAR + 1
+	force_wielded = DAMAGE_SPEAR_WIELD + 5
+	throwforce = DAMAGE_SPEAR - 3
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(NAGI_CUT, POLEARM_BASH) // no stab for you little chuddy, it's a slashing weapon
 	gripped_intents = list(NAGI_REND, NAGI_CUT, POLEARM_BASH)
@@ -619,10 +619,10 @@
 	desc = "A staff carrying the black and gold insignia of the war scholars."
 	icon_state = "naledistaff"
 	force = DAMAGE_SPEARPLUS
-	force_wielded = DAMAGE_SPEAR_WIELD-3
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASHRNG, MACE_WDRANGE)
-	max_integrity = INTEGRITY_STANDARD+50
+	max_integrity = INTEGRITY_STANDARD + 50
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
 	. = ..()

@@ -30,7 +30,7 @@
 	desc = "This blade throbs, translucent and iridescent, blueish arcyne energies running through its translucent surface..."
 	icon = 'icons/mob/actions/roguespells.dmi'
 	icon_state = "katar_bound"
-	force = DAMAGE_KATAR+9
+	force = DAMAGE_KATAR + 9
 	wdefense = GREAT_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)

@@ -8,7 +8,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	flags_1 = null
 	force = DAMAGE_SHIELD
-	throwforce = DAMAGE_SHIELD/2
+	throwforce = DAMAGE_SHIELD / 2
 	wdefense = ULTMATE_PARRY
 	throw_speed = 1
 	throw_range = 3
@@ -157,9 +157,9 @@
 	name = "tower shield"
 	desc = "A gigantic, iron reinforced shield that covers the entire body, a design-copy of the Aasimar shields of an era gone by."
 	icon_state = "shield_tower"
-	force = DAMAGE_SHIELD+5
+	force = DAMAGE_SHIELD + 5
 	throwforce = DAMAGE_SHIELD
-	wdefense = ULTMATE_PARRY+1
+	wdefense = ULTMATE_PARRY + 1
 	wbalance = EASY_TO_DODGE // Heavy, big shield
 	coverage = 65
 	wlength = WLENGTH_NORMAL
@@ -187,8 +187,8 @@
 	name = "ancient shield"
 	desc = "A gigantic, bronze reinforced shield that covers the entire body. An Aasimar relic from an era long past."
 	icon_state = "boeotian"
-	force = DAMAGE_SHIELD+5
-	wdefense = ULTMATE_PARRY+3
+	force = DAMAGE_SHIELD + 5
+	wdefense = ULTMATE_PARRY + 3
 	coverage = 75 // Rare shield from unique job, gets a tiny bit of additional coverage
 	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
 	resistance_flags = FIRE_PROOF
@@ -213,8 +213,8 @@
 	name = "kite shield"
 	desc = "A knightly, kite shaped steel shield, emblazoned with heraldry. \nBoasts superior coverage and durability, owed to its exquisite craftsmanship."
 	icon_state = "ironsh"
-	force = DAMAGE_SHIELD*2
-	wdefense = ULTMATE_PARRY+2
+	force = DAMAGE_SHIELD * 2
+	wdefense = ULTMATE_PARRY + 2
 	coverage = 70
 	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
 	resistance_flags = FIRE_PROOF
@@ -275,7 +275,7 @@
 	desc = "The Ordo Benetarus holds a mantra: A Psydonian endures. A Psydonian preserves themselves. A Psydonian preserves His flock. Protect them."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyshield"
-	wdefense = ULTMATE_PARRY+3
+	wdefense = ULTMATE_PARRY + 3
 	coverage = 50
 	max_integrity = INTEGRITY_STRONG
 
@@ -314,7 +314,7 @@
 	name = "heater shield"
 	desc = "A sturdy wood and leather shield. Made to not be too encumbering while still providing good protection."
 	icon_state = "heatershield"
-	force = DAMAGE_SHIELD+5
+	force = DAMAGE_SHIELD + 5
 	throwforce = DAMAGE_SHIELD
 	coverage = 60
 	dropshrink = 0.8

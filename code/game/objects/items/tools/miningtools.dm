@@ -31,7 +31,7 @@
 	desc = ""
 	icon_state = "cpick"
 	icon = 'icons/roguetown/weapons/tools.dmi'
-	force = DAMAGE_PICK-3
+	force = DAMAGE_PICK - 3
 	toolspeed = 3
 	pickmult = 0.8 // Worse pick
 	associated_skill = /datum/skill/combat/axesmaces
@@ -42,9 +42,9 @@
 	name = "steel pick"
 	desc = "With a reinforced handle and sturdy shaft, this is a superior tool for delving in the darkness."
 	icon_state = "steelpick"
-	force = DAMAGE_PICK+3
+	force = DAMAGE_PICK + 3
 	gripped_intents = list(PICK_INTENT)
-	max_integrity = INTEGRITY_STRONGEST+100
+	max_integrity = INTEGRITY_STRONGEST + 100
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	pickmult = 1.2
@@ -53,7 +53,7 @@
 	name = "stone pick"
 	desc = "Stone versus sharp stone, who wins?"
 	icon_state = "stonepick"
-	force = DAMAGE_PICK-6
+	force = DAMAGE_PICK - 6
 	gripped_intents = list(PICK_INTENT)
 	max_integrity = INTEGRITY_STANDARD+50
 	anvilrepair = null

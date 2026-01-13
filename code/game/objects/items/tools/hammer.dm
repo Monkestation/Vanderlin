@@ -157,7 +157,7 @@
 	name = "wooden mallet"
 	desc = "A wooden mallet is an artificer's second-best friend! But it may also come in handy to a smith..."
 	icon_state = "hammer_w"
-	force = DAMAGE_HAMMER-5
+	force = DAMAGE_HAMMER - 5
 	dropshrink = 0.9
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
@@ -179,7 +179,7 @@
 	desc = "A simple and rough copper hammer."
 	icon_state = "chammer"
 	icon = 'icons/roguetown/weapons/tools.dmi'
-	force = DAMAGE_HAMMER-2
+	force = DAMAGE_HAMMER - 2
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/copper
 	time_multiplier = 1.1
@@ -216,8 +216,8 @@
 	desc = "A heavy steel sledgehammer, a weapon designed to make knights run in fear, the best option for a common soldier against a knight."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "warbonker"
-	force = DAMAGE_HAMMER+5
-	force_wielded = DAMAGE_HAMMER_WIELD+10
+	force = DAMAGE_HAMMER + 5
+	force_wielded = DAMAGE_HAMMER_WIELD + 10
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
 	time_multiplier = 1.5 //it's for crushing skulls not nails

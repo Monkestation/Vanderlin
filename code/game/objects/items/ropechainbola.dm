@@ -136,8 +136,8 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "chain"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
-	force = DAMAGE_WHIP-10
-	throwforce = DAMAGE_WHIP-15
+	force = DAMAGE_WHIP - 10
+	throwforce = DAMAGE_WHIP - 15
 	wdefense = MEDIOCRE_PARRY
 	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
 	blade_dulling = DULLING_BASHCHOP

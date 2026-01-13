@@ -48,8 +48,8 @@
 	name = "saw"
 	desc = "A tool used to carve through bone."
 	icon_state = "bonesaw"
-	force = DAMAGE_DAGGER+2
-	throwforce = DAMAGE_KNIFE-3
+	force = DAMAGE_DAGGER + 2
+	throwforce = DAMAGE_KNIFE - 3
 	wdefense = BAD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	armor_penetration = 0
@@ -104,8 +104,8 @@
 	name = "cautery iron"
 	desc = "A tool used to cauterize wounds. Heat it up before use."
 	icon_state = "cauteryiron"
-	force = DAMAGE_MACE-2
-	throwforce = DAMAGE_MACE-2
+	force = DAMAGE_MACE - 2
+	throwforce = DAMAGE_MACE - 2
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(INTENT_USE, MACE_STRIKE, MACE_SMASH)
 	slot_flags = ITEM_SLOT_HIP
@@ -170,8 +170,8 @@
 	name = "examination hammer"
 	desc = "A small hammer used to check a patient's reactions and diagnose their condition."
 	icon_state = "kneehammer"
-	force = DAMAGE_CLUB-5
-	throwforce = DAMAGE_CLUB-7
+	force = DAMAGE_CLUB - 5
+	throwforce = DAMAGE_CLUB - 7
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(INTENT_USE, MACE_STRIKE, MACE_SMASH)
 	slot_flags = ITEM_SLOT_HIP

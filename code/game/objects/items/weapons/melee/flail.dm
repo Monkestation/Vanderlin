@@ -6,7 +6,7 @@
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	force = DAMAGE_NORMAL_FLAIL
-	throwforce = DAMAGE_WEAK_FLAIL-12
+	throwforce = DAMAGE_WEAK_FLAIL - 12
 	can_parry = FALSE // You can't parry with this, it'd be awkward to tangle chains, use a shield
 	wdefense = TERRIBLE_PARRY
 	wlength = WLENGTH_NORMAL
@@ -145,8 +145,8 @@
 	desc = "Just like how a sling's bullet can fell a giant, so too does this great flail follow the principle of converting 'momentum' into 'plate-rupturing force'."
 	icon = 'icons/roguetown/weapons/64/flails.dmi'
 	icon_state = "peasantwarflail"
-	force = DAMAGE_WEAK_FLAIL-7
-	force_wielded = DAMAGE_GOOD_FLAIL+2
+	force = DAMAGE_WEAK_FLAIL - 7
+	force_wielded = DAMAGE_GOOD_FLAIL + 2
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(FLAIL_STRIKE)
@@ -181,7 +181,7 @@
 	desc = "Weight of wealth in a deadly striking end."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "matthiosflail"
-	force_wielded = DAMAGE_GOOD_FLAIL+7
+	force_wielded = DAMAGE_GOOD_FLAIL + 7
 	possible_item_intents = list(MATTHIOS_STRIKE)
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
 	slot_flags = ITEM_SLOT_BACK

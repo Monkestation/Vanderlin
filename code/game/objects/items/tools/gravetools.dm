@@ -8,8 +8,8 @@
 	icon_state = "shovel"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
-	force = DAMAGE_STAFF-5
-	force_wielded = DAMAGE_STAFF_WIELD-3
+	force = DAMAGE_STAFF - 5
+	force_wielded = DAMAGE_STAFF_WIELD - 3
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SHOVEL_STRIKE)
@@ -213,8 +213,8 @@
 	name = "spade"
 	icon_state = "spade"
 	item_state = "spade"
-	force = DAMAGE_STAFF-8
-	force_wielded = DAMAGE_STAFF_WIELD-10
+	force = DAMAGE_STAFF - 8
+	force_wielded = DAMAGE_STAFF_WIELD - 10
 	wdefense = BAD_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE)

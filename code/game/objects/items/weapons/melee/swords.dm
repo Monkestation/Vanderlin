@@ -10,7 +10,7 @@
 	parrysound = "sword"
 	force = DAMAGE_SWORD
 	force_wielded = DAMAGE_SWORD_WIELD
-	throwforce = DAMAGE_SWORD-10
+	throwforce = DAMAGE_SWORD - 10
 	wdefense = GREAT_PARRY
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST)
@@ -88,7 +88,7 @@
 	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyswordshort"
-	force = DAMAGE_SHORTSWORD+3
+	force = DAMAGE_SHORTSWORD + 3
 	grid_width = 32
 	grid_height = 96
 
@@ -123,8 +123,8 @@
 	name = "silver sword"
 	desc = "A simple silver sword with an edge that gleams in moonlight."
 	icon_state = "silversword"
-	force = DAMAGE_SWORD-1
-	force_wielded = DAMAGE_SWORD_WIELD-1
+	force = DAMAGE_SWORD - 1
+	force_wielded = DAMAGE_SWORD_WIELD - 1
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/silver
 	sellprice = 45
@@ -137,8 +137,8 @@
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
 	icon_state = "isword"
-	force = DAMAGE_SWORD-1
-	force_wielded = DAMAGE_SWORD_WIELD-1
+	force = DAMAGE_SWORD - 1
+	force_wielded = DAMAGE_SWORD_WIELD - 1
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
@@ -148,8 +148,8 @@
 	name = "bronze sword"
 	desc = "A simple and reliable bronze sword."
 	icon_state = "sword_bronze"
-	force = DAMAGE_SWORD-1
-	force_wielded = DAMAGE_SWORD_WIELD-1
+	force = DAMAGE_SWORD - 1
+	force_wielded = DAMAGE_SWORD_WIELD - 1
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
@@ -167,8 +167,8 @@
 	name = "iron kaskara"
 	desc = "A sword of ancient Lakkarian design, predating the standard equipment of pegasus riders."
 	icon_state = "kaskara_iron"
-	force = DAMAGE_SWORD-1
-	force_wielded = DAMAGE_SWORD_WIELD-1
+	force = DAMAGE_SWORD - 1
+	force_wielded = DAMAGE_SWORD_WIELD - 1
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
@@ -220,8 +220,8 @@
 	desc = "A hefty steel sabre of Lakkarian origin. It's defensive design is great for stopping lethal blows"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "hwi_steel"
-	force = DAMAGE_SWORD-1
-	force_wielded = DAMAGE_SWORD_WIELD-1
+	force = DAMAGE_SWORD - 1
+	force_wielded = DAMAGE_SWORD_WIELD - 1
 	wdefense = GREAT_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
 	minstr = 7
@@ -271,8 +271,8 @@
 	name = "steel dadao"
 	icon_state = "dadao_steel"
 	desc = "Sometimes also referred to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
-	force = DAMAGE_SWORD+1
-	force_wielded = DAMAGE_SWORD_WIELD+1
+	force = DAMAGE_SWORD + 1
+	force_wielded = DAMAGE_SWORD_WIELD + 1
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
 	gripped_intents = list(AXE_CHOP, CURVED_THRUST)
@@ -330,7 +330,7 @@
 	name = "scythe sword"
 	desc = "A farming tool blade has been fastened to a shorter wooden handle to create an improvised weapon."
 	icon_state = "scytheblade"
-	force = DAMAGE_SWORD-2
+	force = DAMAGE_SWORD - 2
 	wdefense = AVERAGE_PARRY
 
 
@@ -358,7 +358,7 @@
 	desc = "A heavy executioner's sword originating from the Queendom of Lakkari. It was used by Astratans to behead Psydonite settlers responsible for the Red Dune Massacre."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ngombe"
-	force = DAMAGE_SWORD+1
+	force = DAMAGE_SWORD + 1
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
 	gripped_intents = list(SWORD_CUT, AXE_CHOP,)
@@ -610,7 +610,7 @@
 	name = "silver rapier"
 	desc = "An elegant silver rapier. Popular with lords and ladies in Valoria."
 	icon_state = "rapier_s"
-	force = DAMAGE_SWORD-2
+	force = DAMAGE_SWORD - 2
 	melt_amount = 100
 	max_blade_int = 240 // .8 of base steel
 	max_integrity = INTEGRITY_STRONGEST * 0.8
@@ -636,7 +636,7 @@
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "khopesh"
 	item_state = "khopesh"
-	force = DAMAGE_SWORD+2 // Unique weapon from rare job, slightly more force than most one-handers
+	force = DAMAGE_SWORD + 2 // Unique weapon from rare job, slightly more force than most one-handers
 	force_wielded = 0
 	wdefense = GOOD_PARRY // Lower than average sword defense (meant to pair with a shield)
 	wbalance = EASY_TO_DODGE // Likely weighted towards the blade, for deep cuts and chops
@@ -748,7 +748,7 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CUT, SWORD_DISARM)
 	gripsprite = FALSE
-	max_integrity = INTEGRITY_POOR+25
+	max_integrity = INTEGRITY_POOR + 25
 	dropshrink = 0.9
 	sellprice = 60
 
@@ -770,7 +770,7 @@
 /obj/item/weapon/sword/long/aruval/iron //Balance-patch
 	name = "iron aruval"
 	icon_state = "aruval_iron"
-	max_integrity = INTEGRITY_POOR-25
+	max_integrity = INTEGRITY_POOR - 25
 	melting_material = /datum/material/iron
 	sellprice = 35
 
@@ -812,8 +812,8 @@
 	icon_state = "heirloom"
 	name = "old sword"
 	desc = "An old steel sword with a heraldic green leather grip, mouldered by years of neglect."
-	force = DAMAGE_SWORD-2
-	force_wielded = DAMAGE_SWORD_WIELD-2
+	force = DAMAGE_SWORD - 2
+	force_wielded = DAMAGE_SWORD_WIELD - 2
 	max_blade_int = 180 // Neglected, unused
 	max_integrity = INTEGRITY_STRONG
 	static_price = TRUE
@@ -825,7 +825,7 @@
 	icon_state = "judgement"
 	name = "judgement"
 	desc = "A sword with a silvered grip, a jeweled hilt and a honed blade; a design fit for nobility."
-	force = DAMAGE_SWORD-5
+	force = DAMAGE_SWORD - 5
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
@@ -862,7 +862,7 @@
 	icon_state = "vlord"
 	name = "Jaded Fang"
 	desc = "An ancestral long blade with an ominous glow, serrated with barbs along its edges. Stained with a strange green tint."
-	force = DAMAGE_SWORD-2
+	force = DAMAGE_SWORD - 2
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	sellprice = 363
 	static_price = TRUE
@@ -943,7 +943,7 @@
 	desc = "The tenets of Ravoxian duels are inscribed upon the blade of this sword."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "ravoxflamberge"
-	force = DAMAGE_SWORD+2
+	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 
 //................ Psydonian Longsword ............... //
@@ -968,8 +968,8 @@
 	desc = "A finely crafted silver longsword with a decorated golden hilt."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "declongsword"
-	force = DAMAGE_SWORD-5
-	force_wielded = DAMAGE_LONGSWORD_WIELD+2
+	force = DAMAGE_SWORD - 5
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = 200
@@ -1211,7 +1211,7 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = INTEGRITY_STRONG
-	max_integrity = INTEGRITY_STRONGEST-50
+	max_integrity = INTEGRITY_STRONGEST - 50
 	minstr = 10
 	sellprice = 110
 
@@ -1237,7 +1237,7 @@
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	max_blade_int = INTEGRITY_STRONG+50
+	max_blade_int = INTEGRITY_STRONG + 50
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 10
 	sellprice = 160
@@ -1260,11 +1260,11 @@
 	name = "berserker sword"
 	desc = "A huge sword constructed out of a slab of Iron, famously wielded by the first settlers of Dachiagh Benne."
 	icon_state = "gutsclaymore"
-	force_wielded = DAMAGE_GREATSWORD_WIELD+2
+	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(GUTS_CUT, GUTS_THRUST, GUTS_STRIKE, GUTS_CHOP)
-	max_blade_int = INTEGRITY_STRONG+50
+	max_blade_int = INTEGRITY_STRONG + 50
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 15
 	sellprice = 240
@@ -1337,9 +1337,9 @@
 	desc = "A weapon of war from simpler times, its copper material is unideal but still efficient for the price."
 	icon_state = "cmesser"
 	item_state = "cmesser"
-	force = DAMAGE_SWORD-5 // Messers are heavy weapons, crude and STR based.
-	force_wielded = DAMAGE_SWORD_WIELD-5
-	throwforce = DAMAGE_SWORD-5
+	force = DAMAGE_SWORD - 5 // Messers are heavy weapons, crude and STR based.
+	force_wielded = DAMAGE_SWORD_WIELD - 5
+	throwforce = DAMAGE_SWORD - 5
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
@@ -1379,9 +1379,9 @@
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "copperfalx"
 	item_state = "copperfalx"
-	force = DAMAGE_SWORD-10
-	force_wielded = DAMAGE_SWORD_WIELD-5
-	throwforce = DAMAGE_SWORD-5
+	force = DAMAGE_SWORD - 10
+	force_wielded = DAMAGE_SWORD_WIELD - 5
+	throwforce = DAMAGE_SWORD - 5
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE)
 	max_blade_int = 150 // Shitty Weapon
 	max_integrity = INTEGRITY_POOR + 80
@@ -1398,7 +1398,7 @@
 	gaps in an opponent's armor. The hilt is wrapped tight in black leather."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "estoc"
-	force = DAMAGE_SWORD-8
+	force = DAMAGE_SWORD - 8
 	force_wielded = DAMAGE_SWORD_WIELD
 	wdefense = GREAT_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
@@ -1472,7 +1472,7 @@
 	name = "gladius"
 	desc = "A bronze short sword with a slightly wider end, and no guard. Compliments a shield."
 	icon_state = "gladius"
-	force = DAMAGE_SWORD+2
+	force = DAMAGE_SWORD + 2
 	force_wielded = 0
 	wdefense = AVERAGE_PARRY
 	gripped_intents = null
@@ -1487,9 +1487,9 @@
 /obj/item/weapon/sword/long/replica
 	name = "guild master's longsword"
 	desc = ""
-	force = DAMAGE_SWORD-18
-	force_wielded = DAMAGE_SWORD_WIELD-20
-	throwforce = DAMAGE_SWORD-18
+	force = DAMAGE_SWORD - 18
+	force_wielded = DAMAGE_SWORD_WIELD - 20
+	throwforce = DAMAGE_SWORD - 18
 	max_integrity = INTEGRITY_STANDARD + 40
 	sellprice = 1
 	melting_material = /datum/material/tin
@@ -1520,7 +1520,7 @@
 	name = "katana"
 	desc = "A foreign sword."
 	icon_state = "eastsword1"
-	force_wielded = DAMAGE_SWORD_WIELD+3
+	force_wielded = DAMAGE_SWORD_WIELD + 3
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(KATANA_ONEHAND, SWORD_STRIKE)
 	gripped_intents = list(KATANA_CUT, KATANA_ARC, SWORD_STRIKE, PRECISION_CUT)
@@ -1545,8 +1545,8 @@
 	name = "samjeongdo"
 	desc = "A gold-stained with cloud patterns on the groove. One of a kind."
 	icon_state = "eastsword3"
-	force = DAMAGE_SWORD+5
-	force_wielded = DAMAGE_SWORD_WIELD+5
+	force = DAMAGE_SWORD + 5
+	force_wielded = DAMAGE_SWORD_WIELD + 5
 	wdefense = GREAT_PARRY
 
 /obj/item/weapon/sword/sabre/hook
@@ -1555,7 +1555,7 @@
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "hook_sword"
 	possible_item_intents = list(SWORD_CUT, HOOK_THRUST, SWORD_STRIKE, SWORD_DISARM)
-	max_integrity = INTEGRITY_STANDARD-20
+	max_integrity = INTEGRITY_STANDARD - 20
 
 /obj/item/weapon/sword/sabre/hook/getonmobprop(tag)
 	. = ..()
@@ -1711,8 +1711,8 @@
 	icon_state = "martyrsword"
 	item_state = "martyrsword"
 	force = DAMAGE_GREATSWORD_WIELD
-	force_wielded = DAMAGE_GREATSWORD_WIELD+6
-	throwforce = DAMAGE_SWORD-5
+	force_wielded = DAMAGE_GREATSWORD_WIELD + 6
+	throwforce = DAMAGE_SWORD - 5
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWORD_CHOP)
 	max_blade_int = 200

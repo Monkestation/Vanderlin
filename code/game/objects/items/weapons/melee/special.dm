@@ -254,12 +254,12 @@
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "katar"
 	force = DAMAGE_KATAR
-	throwforce = DAMAGE_KATAR-3
+	throwforce = DAMAGE_KATAR - 3
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
 	max_blade_int = 150
-	max_integrity = INTEGRITY_WORST-20
+	max_integrity = INTEGRITY_WORST - 20
 
 	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_SMALL
@@ -287,7 +287,7 @@
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
-	max_integrity = INTEGRITY_STRONG-50
+	max_integrity = INTEGRITY_STRONG - 50
 
 /datum/intent/knuckles/strike
 	name = "punch"
@@ -321,7 +321,7 @@
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "steelknuckle"
 	force = DAMAGE_KNUCKLES
-	throwforce = DAMAGE_KNUCKLES-10
+	throwforce = DAMAGE_KNUCKLES - 10
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KNUCKLE_STRIKE, KNUCKLE_SMASH)
@@ -364,4 +364,4 @@
 	desc = "Some times call for a more intimate approach."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eoraknuckle"
-	force = DAMAGE_KNUCKLES+2
+	force = DAMAGE_KNUCKLES + 2

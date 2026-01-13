@@ -29,12 +29,12 @@
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	force = DAMAGE_HEAVYAXE_WIELD
-	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 5
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(AXE_CUT, AXE_CHOP)
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SWORD_STRIKE)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST+220
+	max_integrity = INTEGRITY_STRONGEST + 220
 	minstr = 12
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
@@ -99,13 +99,13 @@
 	icon_state = "neant"
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	force = DAMAGE_SPEARPLUS+2
+	force = DAMAGE_SPEARPLUS + 2
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR_WIELD
 	possible_item_intents = list(SPEAR_CUT)
 	gripped_intents = list(POLEARM_CHOP, WHIP_STRIKE, NEANT_SHOOT)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST+220
+	max_integrity = INTEGRITY_STRONGEST + 220
 	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FIRE_PROOF
@@ -371,7 +371,7 @@
 	desc = "A sword of legend. If they are true, then this is the blade of Matthios himself. Rumor has it, it steals space and time."
 	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
 	gripped_intents = list(SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST, PLEX_BLINK)
-	max_integrity = INTEGRITY_STRONGEST+220
+	max_integrity = INTEGRITY_STRONGEST + 220
 	sellprice = 550
 
 	COOLDOWN_DECLARE(pleonexia_blink)

@@ -6,7 +6,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	force = DAMAGE_KNIFE
 	wdefense = BAD_PARRY
-	throwforce = DAMAGE_KNIFE-8
+	throwforce = DAMAGE_KNIFE - 8
 	possible_item_intents = list(/datum/intent/chisel, /datum/intent/stab)
 	max_blade_int = 50
 	max_integrity = INTEGRITY_POOR-10

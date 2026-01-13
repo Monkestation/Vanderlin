@@ -27,7 +27,7 @@
 	caliber = "regbolt"
 	dropshrink = 0.8
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	embedding = list("embedded_pain_multiplier" = 3, "embedded_fall_chance" = 0)
 	firing_effect_type = null
 
@@ -138,7 +138,7 @@
 	abstract_type = /obj/item/ammo_casing/caseless/bolt/vial
 	max_integrity = 10
 	possible_item_intents = list(/datum/intent/hit)
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	var/datum/reagent/reagent
 
 /obj/item/ammo_casing/caseless/bolt/vial/Initialize(mapload, ...)
@@ -198,7 +198,7 @@
 	icon_state = "bolt_water"
 	projectile_type = /obj/projectile/bullet/reusable/bolt/water
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 
 /obj/item/ammo_casing/caseless/bolt/water/Initialize(mapload, ...)
 	. = ..()
@@ -270,7 +270,7 @@
 	caliber = "arrow"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow"
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	dropshrink = 0.8
 	possible_item_intents = list(DAGGER_THRUST)
 	max_integrity = 20
@@ -363,7 +363,7 @@
 	projectile_type = /obj/projectile/bullet/reusable/arrow/pyro
 	icon_state = "arrow_pyroclastic"
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 
 /obj/item/ammo_casing/caseless/arrow/pyro/Initialize(mapload, ...)
 	. = ..()
@@ -399,7 +399,7 @@
 	abstract_type = /obj/item/ammo_casing/caseless/arrow/vial
 	max_integrity = 10
 	possible_item_intents = list(/datum/intent/hit)
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	var/datum/reagent/reagent
 
 /obj/item/ammo_casing/caseless/arrow/vial/Initialize(mapload, ...)
@@ -459,7 +459,7 @@
 	icon_state = "arrow_water"
 	projectile_type = /obj/projectile/bullet/reusable/arrow/water
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 
 /obj/item/ammo_casing/caseless/arrow/water/Initialize(mapload, ...)
 	. = ..()
@@ -549,7 +549,7 @@
 	icon_state = "musketball"
 	dropshrink = 0.5
 	possible_item_intents = list(INTENT_USE)
-	force = DAMAGE_KNIFE-7
+	force = DAMAGE_KNIFE - 7
 
 //................ Cannon Ball ............... //
 /obj/projectile/bullet/reusable/cannonball
@@ -625,7 +625,7 @@
 	caliber = "dart"
 	dropshrink = 0.9
 	max_integrity = 10
-	force = DAMAGE_KNIFE/2
+	force = DAMAGE_KNIFE / 2
 	firing_effect_type = null
 
 /obj/item/ammo_casing/caseless/dart/Initialize(mapload, ...)

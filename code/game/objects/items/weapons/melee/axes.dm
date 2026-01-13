@@ -133,7 +133,7 @@
 	name = "splitter axe"
 	desc = "A crudely made axe, more reminiscent to one used for splitting logs if it was made with tree trunk and a shiny sharpened rock; which does make you think, what use does a troll have for wood?"
 	icon_state = "troll_axe"
-	force = DAMAGE_AXE+3
+	force = DAMAGE_AXE + 3
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 150
@@ -281,7 +281,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	wlength = WLENGTH_LONG
 	experimental_onhip = TRUE
-	max_integrity = INTEGRITY_STRONGEST*0.8
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 /obj/item/weapon/axe/steel/atgervi/getonmobprop(tag)
 	. = ..()
@@ -350,8 +350,8 @@
 	name = "bone axe"
 	desc = "A rough axe made of bones"
 	icon_state = "boneaxe"
-	force = DAMAGE_AXE-2
-	force_wielded =	DAMAGE_AXE_WIELD-3
+	force = DAMAGE_AXE - 2
+	force_wielded =	DAMAGE_AXE_WIELD - 3
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(AXE_CUT, AXE_CHOP)
@@ -423,7 +423,7 @@
 	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders - following the disastrous Massacre of Blastenghyll - have shifted their focus towards arming their paladins with longer-lasting greatweapons."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverpolearm"
-	force = DAMAGE_AXE-5
+	force = DAMAGE_AXE - 5
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, MACE_STRIKE) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
 	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP, MACE_STRIKE) //Axe-equivalent to the Godendag or Grand Mace.
 	max_blade_int = 350
@@ -472,8 +472,8 @@
 	name = "otherworldly axe"
 	desc = "A strange axe, who knows where it came from. It feels cold and unusually heavy."
 	icon_state = "dreamaxe"
-	force = DAMAGE_AXE-10
-	force_wielded = DAMAGE_HEAVYAXE_WIELD+5
+	force = DAMAGE_AXE - 10
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 5
 	wdefense = ULTMATE_PARRY
 	max_blade_int = 250
 	minstr = 13
@@ -485,9 +485,9 @@
 	// to do, make this burn you if you don't regularly soak it.
 	desc = "A strange axe, who knows where it came from. It is searing hot to the blade, the hilt is barely able to be held."
 	icon_state = "dreamaxeactive"
-	force = DAMAGE_AXE-5
-	force_wielded = DAMAGE_HEAVYAXE_WIELD+10
-	wdefense = ULTMATE_PARRY+1
+	force = DAMAGE_AXE - 5
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 10
+	wdefense = ULTMATE_PARRY + 1
 	max_blade_int = 500
 	sellprice = 0
 

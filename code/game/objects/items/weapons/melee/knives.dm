@@ -64,7 +64,7 @@
 	desc = "A folding Etruscan knife valued by merchants, mercenaries and peasants for its convenience. It possesses a long hilt, allowing for a sizable blade with good reach."
 	icon_state = "navaja_c"
 	item_state = "elfdag"
-	force = DAMAGE_KNIFE/2
+	force = DAMAGE_KNIFE / 2
 	possible_item_intents = list(DAGGER_THRUST,DAGGER_CUT)
 	var/extended = 0
 	wdefense = TERRIBLE_PARRY
@@ -74,7 +74,7 @@
 	extended = !extended
 	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(extended)
-		force = DAMAGE_KNIFE*2
+		force = DAMAGE_KNIFE * 2
 		wdefense = MEDIOCRE_PARRY
 		w_class = WEIGHT_CLASS_NORMAL
 		throwforce = 23
@@ -82,9 +82,9 @@
 		attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 		sharpness = IS_SHARP
 	else
-		force = DAMAGE_KNIFE/2
+		force = DAMAGE_KNIFE / 2
 		w_class = WEIGHT_CLASS_SMALL
-		throwforce = DAMAGE_KNIFE/2
+		throwforce = DAMAGE_KNIFE / 2
 		icon_state = "navaja_c"
 		attack_verb = list("stubbed", "poked")
 		sharpness = IS_BLUNT
@@ -135,7 +135,7 @@
 	name = "steel scissors"
 	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
-	force = DAMAGE_DAGGER+2
+	force = DAMAGE_DAGGER + 2
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/steel
 
@@ -148,7 +148,7 @@
 	icon_state = "cleav"
 	item_state = "cleav"
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
-	throwforce = DAMAGE_KNIFE+5
+	throwforce = DAMAGE_KNIFE + 5
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
@@ -169,7 +169,7 @@
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
 	force = DAMAGE_KNIFE
-	throwforce = DAMAGE_KNIFE+6
+	throwforce = DAMAGE_KNIFE + 6
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	max_integrity = INTEGRITY_STANDARD - 20
 	melting_material = /datum/material/iron
@@ -215,7 +215,7 @@
 	name = "iron kukri"
 	icon_state = "kukri_iron"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
-	force = DAMAGE_DAGGER+1
+	force = DAMAGE_DAGGER + 1
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 
 /obj/item/weapon/knife/dagger/njora
@@ -264,7 +264,7 @@
 	name = "steel kukri"
 	icon_state = "kukri_steel"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
-	force = DAMAGE_DAGGER+1
+	force = DAMAGE_DAGGER + 1
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	melt_amount = 75
 
@@ -517,7 +517,7 @@
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "kukri_jade"
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_WORST/2
+	max_integrity = INTEGRITY_WORST / 2
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 75
@@ -528,7 +528,7 @@
 	icon = 'icons/roguetown/gems/gem_opal.dmi'
 	icon_state = "knife_opal"
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_WORST/2
+	max_integrity = INTEGRITY_WORST / 2
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 105
@@ -556,7 +556,7 @@
 	desc = ""
 	item_state = "bone_dagger"
 	force = DAMAGE_DAGGER
-	throwforce = DAMAGE_DAGGER+13
+	throwforce = DAMAGE_DAGGER + 13
 	wdefense = MEDIOCRE_PARRY
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST - 50
@@ -569,7 +569,7 @@
 	name = "bronze tossblade"
 	desc = "A tossblade forged from bronze. It's not as reliable compared to other tossblades, but it's much cheaper to make."
 	item_state = "bone_dagger"
-	throwforce = DAMAGE_DAGGER+10
+	throwforce = DAMAGE_DAGGER + 10
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST - 30
 	icon_state = "throwing_bronze"

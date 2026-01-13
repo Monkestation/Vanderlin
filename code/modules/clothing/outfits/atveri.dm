@@ -70,7 +70,7 @@
 	item_state = "atgervi_shield"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
-	force = DAMAGE_SHIELD+5
+	force = DAMAGE_SHIELD + 5
 	throwforce = DAMAGE_SHIELD
 	dropshrink = 0.8
 	coverage = 80

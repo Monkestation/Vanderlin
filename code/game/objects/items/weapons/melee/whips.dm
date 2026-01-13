@@ -7,7 +7,7 @@
 	icon_state = "whip"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	force = DAMAGE_WHIP
-	throwforce = DAMAGE_WHIP-15
+	throwforce = DAMAGE_WHIP - 15
 	wdefense = BAD_PARRY
 	wlength = WLENGTH_GREAT
 	can_parry = FALSE
@@ -40,7 +40,7 @@
 	name = "Repenta En"
 	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
 	icon_state = "gwhip"
-	force = DAMAGE_WHIP+4
+	force = DAMAGE_WHIP + 4
 	minstr = 7
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/steel
@@ -68,7 +68,7 @@
 	desc = "A whip fashioned with the iconography of Psydon, and crafted entirely out of silver."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psywhip"
-	force = DAMAGE_WHIP+2
+	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
 	melt_amount = 100
@@ -135,7 +135,7 @@
 	desc = "A dark whip with segmented, ashen spines for a base. Claimed to be hewn from dendrified prisoners of terror."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderwhip"
-	force = DAMAGE_WHIP+3
+	force = DAMAGE_WHIP + 3
 	minstr = 6
 
 //................ Chain Whip ............... //
@@ -143,7 +143,7 @@
 	name = "chain whip"
 	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more than anyone else with this."
 	icon_state = "whip_chain"
-	force = DAMAGE_WHIP+3
+	force = DAMAGE_WHIP + 3
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_MTLLASH)
 	minstr = 9
 
@@ -159,14 +159,14 @@
 	desc = "The chimes of this whip are said to sound as the trickster's laughter itself."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "xylixwhip"
-	force = DAMAGE_WHIP+4
+	force = DAMAGE_WHIP + 4
 	anvilrepair = /datum/skill/craft/weaponsmithing
 
 /obj/item/weapon/whip/nagaika
 	name = "nagaika whip"
 	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
 	icon_state = "nagaika"
-	force = DAMAGE_WHIP+5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
+	force = DAMAGE_WHIP + 5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, SWORD_STRIKE)
 
 //................ Urumi ............... //
@@ -175,7 +175,7 @@
 	name = "steel urumi"
 	desc = "A long, flexible whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
 	icon_state = "urumi_steel"
-	force = DAMAGE_WHIP+3
+	force = DAMAGE_WHIP + 3
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
 	can_parry = TRUE
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
@@ -193,7 +193,7 @@
 /obj/item/weapon/whip/urumi/iron
 	name = "iron urumi"
 	icon_state = "urumi_iron"
-	force = DAMAGE_WHIP+2
+	force = DAMAGE_WHIP + 2
 	melting_material = /datum/material/iron
 	max_blade_int = 150
 
@@ -207,7 +207,7 @@
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
 	icon_state = "urumi_silver"
-	force = DAMAGE_WHIP+2
+	force = DAMAGE_WHIP + 2
 	melting_material = /datum/material/silver
 	max_blade_int= 130
 

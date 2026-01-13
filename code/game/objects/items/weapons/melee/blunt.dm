@@ -66,8 +66,8 @@
 	name = "iron shishpar"
 	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
 	icon_state = "shishpar_iron"
-	force = DAMAGE_MACE+1
-	force_wielded = DAMAGE_MACE_WIELD+2
+	force = DAMAGE_MACE + 1
+	force_wielded = DAMAGE_MACE_WIELD + 2
 	wdefense = GOOD_PARRY
 	sellprice = 35
 
@@ -78,8 +78,8 @@
 	desc = "A simple wooden cane, whittled from wood. Good for supporting your weight."
 	icon = 'icons/roguetown/weapons/32/canes.dmi'
 	icon_state = "simple_cane"
-	force = DAMAGE_MACE-4
-	force_wielded = DAMAGE_MACE-2
+	force = DAMAGE_MACE - 4
+	force_wielded = DAMAGE_MACE - 2
 	wdefense = MEDIOCRE_PARRY
 	minstr = 4
 	sellprice = 5
@@ -88,16 +88,16 @@
 	name = "fancy cane"
 	desc = "A polished, dark wooden cane, decorated with gold and silver. Often carried by nobility, even those without a limp, simply to flaunt their wealth to the peasantry."
 	icon_state = "noble_cane"
-	force = DAMAGE_MACE-3
-	force_wielded = DAMAGE_MACE-1
+	force = DAMAGE_MACE - 3
+	force_wielded = DAMAGE_MACE - 1
 	sellprice = 200
 
 /obj/item/weapon/mace/cane/courtphysician
 	name = "physician's cane"
 	desc = "A prized cane. Embellished with a golden serpent, representing the Kingsfield university. The pointy end is quite sharp."
 	icon_state = "physician_cane"
-	force = DAMAGE_MACE-3
-	force_wielded = DAMAGE_MACE-1
+	force = DAMAGE_MACE - 3
+	force_wielded = DAMAGE_MACE - 1
 	possible_item_intents = list(MACE_STRIKE, MACE_THRUST)
 	sellprice = 30
 
@@ -111,24 +111,24 @@
 	name = "natural wooden cane"
 	desc = "A primitive cane, crudely carved from a thick tree branch. It still has a leaf on it."
 	icon_state = "natural_cane"
-	force = DAMAGE_MACE-5
-	force_wielded = DAMAGE_MACE-3
+	force = DAMAGE_MACE - 5
+	force_wielded = DAMAGE_MACE - 3
 	sellprice = 3
 
 /obj/item/weapon/mace/cane/bronze
 	name = "bronze cane"
 	desc = "A walking stick made from bronze and copper. The light on the top is entirely contained within, serving no functional purpose."
 	icon_state = "artificer_cane"
-	force = DAMAGE_MACE-3
-	force_wielded = DAMAGE_MACE-1
+	force = DAMAGE_MACE - 3
+	force_wielded = DAMAGE_MACE - 1
 	sellprice = 35
 
 /obj/item/weapon/mace/cane/necran
 	name = "necran rod"
 	desc = "Carved from dark stone, engraved with gold. Often carried by elderly Necrans."
 	icon_state = "necran_cane"
-	force = DAMAGE_MACE-3
-	force_wielded = DAMAGE_MACE-1
+	force = DAMAGE_MACE - 3
+	force_wielded = DAMAGE_MACE - 1
 	sellprice = 40
 
 /obj/item/weapon/mace/cane/Initialize()
@@ -196,8 +196,8 @@
 	name = "bell ringer"
 	desc = "Faith is sometimes best administered with steel and blood."
 	icon_state = "churchmace"
-	force = DAMAGE_MACE+3
-	force_wielded = DAMAGE_MACE_WIELD+3
+	force = DAMAGE_MACE + 3
+	force_wielded = DAMAGE_MACE_WIELD + 3
 	wdefense = GOOD_PARRY
 	melting_material = /datum/material/steel
 	melt_amount = 75
@@ -226,8 +226,8 @@
 	name = "steel shishpar"
 	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but it's capable of delivering devastating blows."
 	icon_state = "shishpar_steel"
-	force = DAMAGE_MACE+2
-	force_wielded = DAMAGE_MACE_WIELD+3
+	force = DAMAGE_MACE + 2
+	force_wielded = DAMAGE_MACE_WIELD + 3
 	wbalance = EASY_TO_DODGE
 	wdefense = GREAT_PARRY
 	sellprice = 75
@@ -236,8 +236,8 @@
 /obj/item/weapon/mace/spiked
 	name = "spiked mace"
 	icon_state = "spikedmace"
-	force = DAMAGE_MACE+2
-	force_wielded = DAMAGE_MACE_WIELD+3
+	force = DAMAGE_MACE + 2
+	force_wielded = DAMAGE_MACE_WIELD + 3
 	max_integrity = INTEGRITY_STANDARD
 	melt_amount = 150
 
@@ -245,8 +245,8 @@
 /obj/item/weapon/mace/steel/morningstar
 	name = "morningstar"
 	icon_state = "spiked_club_old"
-	force = DAMAGE_MACE+2
-	force_wielded = DAMAGE_MACE_WIELD+3
+	force = DAMAGE_MACE + 2
+	force_wielded = DAMAGE_MACE_WIELD + 3
 	max_integrity = INTEGRITY_STRONG
 
 
@@ -255,11 +255,11 @@
 	name = "iron bludgeon"
 	desc = "An iron headed club, useful for beating the dregs back into their gutters."
 	icon_state = "ibludgeon"
-	force = DAMAGE_CLUB+3
-	force_wielded = DAMAGE_CLUB_WIELD+2
+	force = DAMAGE_CLUB + 3
+	force_wielded = DAMAGE_CLUB_WIELD + 2
 	wbalance = HARD_TO_DODGE
 	wdefense = MEDIOCRE_PARRY
-	max_integrity = INTEGRITY_STRONG-50
+	max_integrity = INTEGRITY_STRONG - 50
 
 /obj/item/weapon/mace/bludgeon/getonmobprop(tag)
 	. = ..()
@@ -278,10 +278,10 @@
 	name = "copper bludgeon"
 	desc = "An extremely crude weapon for cruder bastards."
 	icon_state = "cbludgeon"
-	force = DAMAGE_CLUB+1
-	force_wielded = DAMAGE_CLUB_WIELD+1
+	force = DAMAGE_CLUB + 1
+	force_wielded = DAMAGE_CLUB_WIELD + 1
 	wdefense = MEDIOCRE_PARRY
-	max_integrity = INTEGRITY_POOR-20
+	max_integrity = INTEGRITY_POOR - 20
 	minstr = 5
 
 	melting_material = /datum/material/copper
@@ -375,8 +375,8 @@
 	desc = "Crude wood assembled into the shape of a sword, a terrible weapon to be on the receiving end of during a training spat."
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "wsword"
-	force = DAMAGE_CLUB-10
-	force_wielded = DAMAGE_CLUB-7
+	force = DAMAGE_CLUB - 10
+	force_wielded = DAMAGE_CLUB - 7
 	wdefense = ULTMATE_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STANDARD
@@ -440,8 +440,8 @@
 	desc = "A staff made of seaglass and sturdy but unusual metal, holding no power after its misled owner's death. More useful as a bashing tool than a magic focus."
 	icon = 'icons/roguetown/mob/monster/pufferboss.dmi'
 	icon_state = "pufferprod"
-	force = DAMAGE_MACE-5
-	force_wielded = DAMAGE_HEAVYCLUB_WIELD+5
+	force = DAMAGE_MACE - 5
+	force_wielded = DAMAGE_HEAVYCLUB_WIELD + 5
 	max_integrity = INTEGRITY_STRONGEST * 1.2
 	minstr = 11
 
@@ -558,7 +558,7 @@
 	name = "copper warclub"
 	desc = "A two-handed club, decorated with a crown of spikes. A barbaric design, good enough to be used as a weapon."
 	icon_state = "cwarclub"
-	force = DAMAGE_CLUB-5
+	force = DAMAGE_CLUB - 5
 	force_wielded = DAMAGE_CLUB_WIELD
 	slowdown = 1
 	max_integrity = INTEGRITY_POOR
@@ -606,8 +606,8 @@
 	name = "elven war club"
 	desc = "A one-handed war club with a sharp end."
 	icon_state = "elvenclub"
-	force = DAMAGE_MACE-1
-	force_wielded = DAMAGE_MACE_WIELD-1
+	force = DAMAGE_MACE - 1
+	force_wielded = DAMAGE_MACE_WIELD - 1
 	possible_item_intents = list(MACE_STRIKE, AXE_CUT)
 	gripped_intents = list(MACE_STRIKE, AXE_CUT, AXE_CHOP) //can't smash with this weapon.
 	minstr = 5
@@ -637,7 +637,7 @@
 	name = "regal elven war club"
 	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree. It's commonly wielded by the Fingers of Necra, an organization of shamanist exorcists."
 	icon_state = "regalelvenclub"
-	force = DAMAGE_MACE+1
+	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
@@ -672,7 +672,7 @@
 	name = "regal gada"
 	icon_state = "gada"
 	desc = "A luxurious silver mace of Savannah Elf origin that's been reinforced and embellished with gold. It's considerably heavier compared to other maces."
-	force = DAMAGE_MACE+2
+	force = DAMAGE_MACE + 2
 	wbalance = DODGE_CHANCE_NORMAL
 	minstr = 8
 	sellprice = 150 // It's silver and gold.
