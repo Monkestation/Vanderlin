@@ -7955,12 +7955,6 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/indoors/town)
-"gXH" = (
-/obj/structure/bridge{
-	dir = 4
-	},
-/turf/open/transparent/openspace,
-/area/outdoors/town)
 "gYo" = (
 /obj/structure/fluff/globe,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -10641,9 +10635,6 @@
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /turf/open/floor/wood/nosmooth,
 /area/outdoors/town)
-"jgY" = (
-/turf/open/transparent/openspace,
-/area/indoors/town/merc_guild)
 "jhd" = (
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -14624,9 +14615,6 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/manor)
-"mAR" = (
-/turf/open/transparent/openspace,
-/area/outdoors/town/roofs)
 "mAU" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -123832,7 +123820,7 @@ sQG
 pin
 ayu
 iyJ
-jgY
+fyP
 hzj
 hzj
 gSx
@@ -134341,7 +134329,7 @@ nZv
 pin
 pin
 pin
-gXH
+uDj
 pin
 pin
 pin
@@ -134543,7 +134531,7 @@ pin
 pin
 pin
 pin
-gXH
+uDj
 pin
 pin
 lCA
@@ -159169,7 +159157,7 @@ wLw
 wLw
 nKP
 tap
-mAR
+tap
 tap
 tap
 tap

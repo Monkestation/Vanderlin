@@ -61,7 +61,7 @@
 	pixel_y = 4;
 	layer = 2.6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/beach)
 "az" = (
 /obj/structure/roguetent/preopen{
@@ -87,12 +87,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
-"aN" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/turf/open/transparent/openspace,
-/area/ship/topdeck)
 "aO" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/middeck)
@@ -1000,7 +994,7 @@
 /obj/structure/fluff/railing/border{
 	layer = 2.65
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/beach)
 "gk" = (
 /obj/structure/fluff/railing/border{
@@ -1391,7 +1385,7 @@
 	layer = 2.6;
 	color = "#ff9a55"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/beach)
 "iA" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -1439,10 +1433,6 @@
 "iR" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/ship/middeck)
-"iU" = (
-/obj/structure/bars/grille,
-/turf/open/transparent/openspace,
-/area/ship/topdeck)
 "iY" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -1736,9 +1726,6 @@
 /obj/structure/bed/mediocre,
 /turf/open/floor/hay,
 /area/ship/middeck)
-"lj" = (
-/turf/open/transparent/openspace,
-/area/ship/topdeck)
 "lk" = (
 /obj/structure/mirror{
 	pixel_x = -28;
@@ -2384,12 +2371,6 @@
 	},
 /turf/open/floor/hexstone,
 /area/ship/middeck)
-"pY" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
-	},
-/turf/open/transparent/openspace,
-/area/ship/topdeck)
 "qb" = (
 /obj/structure/door/viewport{
 	name = "Priest's Quarters"
@@ -2671,9 +2652,6 @@
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/middeck)
-"rJ" = (
-/turf/open/transparent/openspace,
-/area/outdoors/beach)
 "rK" = (
 /obj/structure/door{
 	name = "Broom Closet"
@@ -3953,12 +3931,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/hay,
 /area/ship/topdeck)
-"zU" = (
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/turf/open/transparent/openspace,
-/area/outdoors/beach)
 "zW" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -4174,7 +4146,7 @@
 	layer = 2.6;
 	color = "#ff9a55"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/beach)
 "BE" = (
 /obj/structure/bed/inn/double,
@@ -4424,10 +4396,6 @@
 	},
 /turf/open/floor/carpet/lord/left,
 /area/ship/nobledeck)
-"Dc" = (
-/obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
-/area/outdoors/beach)
 "Dd" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -4687,7 +4655,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/beach)
 "EL" = (
 /obj/machinery/tanningrack,
@@ -5745,12 +5713,6 @@
 "ML" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/vault)
-"MN" = (
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/turf/open/transparent/openspace,
-/area/ship/topdeck)
 "MO" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -5882,7 +5844,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/beach)
 "Nn" = (
 /obj/effect/landmark/start/villager{
@@ -5919,12 +5881,6 @@
 	},
 /obj/structure/industrial_lift/tram,
 /turf/open/openspace,
-/area/outdoors/beach)
-"Nw" = (
-/obj/structure/fluff/railing/border{
-	dir = 10
-	},
-/turf/open/transparent/openspace,
 /area/outdoors/beach)
 "Ny" = (
 /obj/structure/fake_machine/atm,
@@ -6253,10 +6209,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/beach)
-"PB" = (
-/obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
-/area/ship/topdeck)
 "PH" = (
 /obj/structure/fluff/globe,
 /turf/open/floor/ruinedwood/spiral,
@@ -6345,12 +6297,6 @@
 "Qd" = (
 /obj/effect/landmark/observer_start,
 /turf/open/floor/ruinedwood/spiral,
-/area/ship/topdeck)
-"Qf" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/turf/open/transparent/openspace,
 /area/ship/topdeck)
 "Qk" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -6832,12 +6778,6 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town/church/chapel)
-"SL" = (
-/obj/structure/fluff/railing/border{
-	layer = 2.6
-	},
-/turf/open/transparent/openspace,
-/area/outdoors/beach)
 "SM" = (
 /obj/structure/fake_machine/atm{
 	pixel_y = -32
@@ -54852,7 +54792,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 kM
 ES
@@ -55054,7 +54994,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 ES
@@ -55256,7 +55196,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 CO
 kM
@@ -56063,7 +56003,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 pq
 iR
@@ -56265,7 +56205,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 iR
@@ -56467,7 +56407,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 vm
 iR
@@ -56871,7 +56811,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 iR
@@ -57072,8 +57012,8 @@ BC
 BC
 BC
 BC
-rJ
-rJ
+BC
+BC
 tL
 ES
 aR
@@ -57275,7 +57215,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 SO
 Ke
@@ -57477,7 +57417,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 WZ
 tL
@@ -57679,7 +57619,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 iR
@@ -57881,7 +57821,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 xM
 iR
@@ -58081,9 +58021,9 @@ BC
 BC
 BC
 BC
-rJ
 BC
-rJ
+BC
+BC
 tL
 ES
 iR
@@ -58283,9 +58223,9 @@ BC
 BC
 BC
 BC
-rJ
 BC
-rJ
+BC
+BC
 tL
 ES
 iR
@@ -58487,7 +58427,7 @@ BC
 BC
 Tb
 tf
-zU
+wp
 tL
 ES
 tL
@@ -58686,7 +58626,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 av
 tf
 BD
@@ -59090,7 +59030,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tZ
 tf
 ED
@@ -60103,7 +60043,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 iR
@@ -60305,7 +60245,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 iR
@@ -60507,7 +60447,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 tL
@@ -60709,7 +60649,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 tL
 ES
 iR
@@ -95051,7 +94991,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 GG
 Cr
 Cr
@@ -95253,7 +95193,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 Ap
 Cr
 ox
@@ -95454,8 +95394,8 @@ BC
 BC
 BC
 BC
-rJ
-Dc
+BC
+bP
 LO
 CE
 OB
@@ -95656,8 +95596,8 @@ BC
 BC
 BC
 BC
-rJ
-Dc
+BC
+bP
 hI
 uu
 vk
@@ -95858,7 +95798,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 LO
 LO
 rb
@@ -96464,7 +96404,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 LO
 nT
 BE
@@ -96868,7 +96808,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 fv
 OT
@@ -97272,7 +97212,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 cF
 Uz
 Uz
@@ -97473,8 +97413,8 @@ BC
 BC
 BC
 BC
-rJ
-SL
+BC
+gA
 Ft
 FK
 Uz
@@ -97676,7 +97616,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 Uz
 Uz
@@ -97688,7 +97628,7 @@ Uz
 cr
 FR
 FR
-iU
+FR
 wY
 Uz
 Uz
@@ -97878,7 +97818,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 Uz
 Uz
@@ -97890,7 +97830,7 @@ Uz
 cr
 FR
 FR
-iU
+FR
 wY
 Uz
 YM
@@ -98080,7 +98020,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 cF
 Uz
 Uz
@@ -98090,9 +98030,9 @@ os
 Uz
 Uz
 qq
-iU
-iU
-iU
+FR
+FR
+FR
 wY
 zu
 cv
@@ -98282,7 +98222,7 @@ BC
 BC
 BC
 BC
-SL
+gA
 Ft
 FK
 Uz
@@ -98292,9 +98232,9 @@ Uz
 Uz
 Uz
 jt
-lj
-lj
-lj
+ir
+ir
+ir
 wY
 zu
 zu
@@ -98484,7 +98424,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 kh
 Uz
 Uz
@@ -98686,7 +98626,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 Uz
 Uz
@@ -98888,7 +98828,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 Uz
 Uz
@@ -99090,7 +99030,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 Uz
 Uz
@@ -99291,7 +99231,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 gi
 Ft
 FK
@@ -99706,9 +99646,9 @@ qM
 Uz
 Uz
 Tu
-iU
-iU
-iU
+FR
+FR
+FR
 Nj
 Uz
 Uz
@@ -99908,9 +99848,9 @@ Uz
 Uz
 Uz
 Dx
-iU
-iU
-iU
+FR
+FR
+FR
 Hl
 Uz
 Uz
@@ -100100,7 +100040,7 @@ BC
 BC
 BC
 BC
-SL
+gA
 Ft
 FK
 Uz
@@ -100110,9 +100050,9 @@ Uz
 Uz
 Uz
 lD
-iU
+FR
 VI
-iU
+FR
 Hl
 Uz
 Uz
@@ -100302,7 +100242,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 cF
 Uz
 Uz
@@ -100706,7 +100646,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 zu
 nP
@@ -100908,7 +100848,7 @@ BC
 BC
 BC
 BC
-Nw
+sy
 LO
 oT
 nK
@@ -101110,7 +101050,7 @@ BC
 BC
 BC
 BC
-rJ
+BC
 vk
 oV
 Le
@@ -134247,7 +134187,7 @@ BC
 BC
 ir
 ir
-lj
+ir
 ju
 Bf
 ph
@@ -134449,7 +134389,7 @@ BC
 ir
 ir
 Ep
-aN
+Ux
 eU
 LT
 Uz
@@ -135252,8 +135192,8 @@ BC
 BC
 BC
 BC
-lj
-PB
+ir
+ju
 Bf
 Uz
 Uz
@@ -135452,10 +135392,10 @@ BC
 BC
 BC
 BC
-rJ
-lj
-lj
-PB
+BC
+ir
+ir
+ju
 LT
 Uz
 Uz
@@ -135655,8 +135595,8 @@ BC
 BC
 BC
 Tb
-aN
-aN
+Ux
+Ux
 eU
 LT
 Uz
@@ -135856,7 +135796,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 Bf
 NX
 NX
@@ -135865,9 +135805,9 @@ Uz
 Uz
 Uz
 NW
-iU
-iU
-iU
+FR
+FR
+FR
 ZJ
 Uz
 Uz
@@ -136067,9 +136007,9 @@ zP
 Uz
 Uz
 NW
-iU
-iU
-iU
+FR
+FR
+FR
 ZJ
 Uz
 Uz
@@ -136865,7 +136805,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 Uz
 Uz
@@ -137067,7 +137007,7 @@ BC
 BC
 BC
 BC
-Dc
+bP
 Ot
 Vp
 Vp
@@ -137076,9 +137016,9 @@ Vp
 Vp
 Vp
 MO
-Qf
-lj
-lj
+zA
+ir
+ir
 ir
 ju
 zW
@@ -138286,9 +138226,9 @@ ir
 ir
 ir
 ir
-lj
-lj
-lj
+ir
+ir
+ir
 ir
 ir
 ir
@@ -138486,13 +138426,13 @@ ir
 ir
 ir
 ir
-lj
-lj
-lj
-lj
-lj
-lj
-lj
+ir
+ir
+ir
+ir
+ir
+ir
+ir
 ir
 ir
 ir
@@ -139902,9 +139842,9 @@ ir
 ir
 ir
 ir
-lj
-lj
-lj
+ir
+ir
+ir
 ir
 ir
 ir
@@ -140101,15 +140041,15 @@ BC
 ir
 ir
 ir
-lj
-lj
-lj
-lj
-lj
-lj
-lj
-lj
-lj
+ir
+ir
+ir
+ir
+ir
+ir
+ir
+ir
+ir
 ir
 ir
 ir
@@ -141112,18 +141052,18 @@ Ux
 Ux
 Ux
 Ux
-aN
-aN
-MN
-lj
-lj
-lj
-lj
+Ux
+Ux
+wy
+ir
+ir
+ir
+ir
 ir
 ir
 ir
 Ep
-aN
+Ux
 Ux
 Ux
 Ux
@@ -141309,22 +141249,22 @@ BC
 BC
 BC
 BC
-Dc
+bP
 fr
 NX
 NX
 NX
 NX
 hp
-Qf
-lj
-lj
-lj
-lj
-lj
-lj
-lj
-PB
+zA
+ir
+ir
+ir
+ir
+ir
+ir
+ir
+ju
 Bf
 NX
 NX
@@ -141511,22 +141451,22 @@ BC
 BC
 BC
 BC
-Dc
+bP
 wX
 Uz
 Uz
 Uz
 Uz
 dh
-Qf
-pY
-aN
-aN
-aN
-aN
-aN
-MN
-PB
+zA
+Ep
+Ux
+Ux
+Ux
+Ux
+Ux
+wy
+ju
 LT
 Uz
 Uz
@@ -141720,15 +141660,15 @@ Uz
 Uz
 Uz
 dh
-Qf
+zA
 ju
 Gh
 kg
 Zb
 kg
 OR
-Qf
-PB
+zA
+ju
 LT
 Uz
 Uz
@@ -142733,9 +142673,9 @@ Uz
 Uz
 Uz
 NW
-iU
-iU
-iU
+FR
+FR
+FR
 wY
 qH
 Uz
