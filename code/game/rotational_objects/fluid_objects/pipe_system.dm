@@ -206,11 +206,12 @@
 			return
 
 	var/obj/effect/abstract/shared_particle_holder/steam_holder = locate(/obj/effect/abstract/shared_particle_holder) in vis_contents
-	if(!steam_holder && prob(25))
-		steam_holder = add_shared_particles(/particles/smoke/cig/big, "water_pipe_steam_[particle_pool]", pool_size = 8)
-		switch(particle_pool)
-			if(1)
-				steam_holder.particles.position = generator(GEN_BOX, list(-8, 3), list(-6, 6))
-			if(2)
-				steam_holder.particles.position = generator(GEN_BOX, list(3, 14), list(9, 16))
-		steam_holder.particles.spawning = 0.03
+	if(!steam_holder && prob(25)) // probability delays steam emission
+		steam_holder = add_shared_particles(/particles/smoke/cig/big, "water_pipe_steam_[particle_pool]", pool_size = 6)
+		if(islist(steam_holder.particles.position)) // particle hasn't been randomized yet
+			switch(particle_pool)
+				if(1)
+					steam_holder.particles.position = generator(GEN_BOX, list(-8, 3), list(-6, 6))
+				if(2)
+					steam_holder.particles.position = generator(GEN_BOX, list(3, 14), list(9, 16))
+			steam_holder.particles.spawning = 0.03
