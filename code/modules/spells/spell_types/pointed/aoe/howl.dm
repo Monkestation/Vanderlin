@@ -6,14 +6,15 @@
 	button_icon_state = "howl"
 
 	spell_type = SPELL_RAGE
+	associated_skill = null
 
 	invocation_type = INVOCATION_NONE
-	aoe_radius = 6
+	aoe_radius = 5
 
 	has_visual_effects = FALSE
 	click_to_activate = FALSE
 	cooldown_time = 50 SECONDS
-	spell_cost = 40
+	spell_cost = 45
 	charge_required = FALSE
 	sound = 'sound/vo/mobs/wwolf/roar.ogg'
 	sparkle_path = null
@@ -21,7 +22,7 @@
 	min_throw = 1
 	max_throw = 1
 	/// The maximum immobilize for adjacent targets, falls off based on aoe_radius
-	var/maximum_immobilize = 1.5 SECONDS
+	var/maximum_immobilize = 1 SECONDS
 
 /datum/action/cooldown/spell/aoe/repulse/howl/Destroy()
 	if(howl_effect)
@@ -54,7 +55,7 @@
 		var/mob/living/victim_living = victim
 		if(dist_from_caster <= 1)
 			victim_living.Immobilize(maximum_immobilize)
-			victim_living.adjust_eye_blur(0.5 SECONDS)
+			victim_living.adjust_eye_blur(maximum_immobilize / 2 SECONDS)
 			to_chat(victim, span_userdanger("You're disoriented by [caster]'s roar!"))
 			if(dist_from_caster != 0) //we can't throw someone on the same turf as us
 				throw_victim(victim, caster)

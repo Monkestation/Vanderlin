@@ -6,7 +6,6 @@
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 
 	/// Feedback messages
-	var/repairmsg_begin = "My armour begins to slowly mend its abuse.."
 	var/repairmsg_continue = "My armour mends some of its abuse.."
 	var/repairmsg_stop = "My armour stops mending from the onslaught!"
 	var/repairmsg_end = "My armour has become taut with newfound vigor!"
@@ -32,7 +31,6 @@
 		to_chat(loc, span_notice(repairmsg_stop))
 		deltimer(reptimer)
 
-	to_chat(loc, span_notice(repairmsg_begin))
 	reptimer = addtimer(CALLBACK(src, PROC_REF(armour_regen)), repair_time, TIMER_OVERRIDE|TIMER_UNIQUE|TIMER_STOPPABLE)
 
 /obj/item/clothing/armor/regenerating/proc/armour_regen(repair_percent = repair_percentage * max_integrity)
@@ -77,7 +75,6 @@
 	surgery_cover = FALSE
 	clothing_flags = NONE
 
-	repairmsg_begin = "My skin begins to slowly mend its abuse.."
 	repairmsg_continue = "My skin mends some of its abuse.."
 	repairmsg_stop = "My skin stops mending from the onslaught!"
 	repairmsg_end = "My skin has become taut with newfound vigor!"

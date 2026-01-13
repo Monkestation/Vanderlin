@@ -53,6 +53,7 @@
 	has_visual_effects = FALSE
 	antimagic_flags = NONE
 	spell_flags = SPELL_IGNORE_SPELLBLOCK
+	associated_skill = null
 
 	charge_required = FALSE
 	cooldown_time = 5 SECONDS
@@ -92,6 +93,7 @@
 
 	spell_cost = 0
 	charge_required = FALSE
+	associated_skill = null
 
 /datum/action/cooldown/spell/woundlick/cast(mob/living/carbon/human/cast_on)
 	. = ..()

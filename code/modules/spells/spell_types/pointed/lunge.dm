@@ -3,6 +3,7 @@
 	desc = "Spring at your target to grapple them without warning, or tear the dead's heart out. Attacks from concealment or the rear may even knock them down if strong enough."
 
 	spell_type = SPELL_RAGE
+	associated_skill = null
 	has_visual_effects = FALSE
 	charge_required = FALSE
 	cooldown_time = 45 SECONDS
@@ -16,12 +17,20 @@
 		return FALSE
 	// Are we being grabbed?
 	if(!QDELETED(owner.pulledby) && owner.pulledby.grab_state >= GRAB_AGGRESSIVE)
+		return FALSE
+	if(!QDELETED(owner.pulling))
+		return FALSE
+	return TRUE
+
+// Called when the on-screen button is clicked
+/datum/action/cooldown/spell/lunge/PreActivate(atom/target)
+	if(!QDELETED(owner.pulledby) && owner.pulledby.grab_state >= GRAB_AGGRESSIVE)
 		owner.balloon_alert(owner, "grabbed!")
 		return FALSE
 	if(!QDELETED(owner.pulling))
 		owner.balloon_alert(owner, "grabbing someone!")
 		return FALSE
-	return TRUE
+	. = ..()
 
 /// Check: Are we lunging at a person?
 /datum/action/cooldown/spell/lunge/is_valid_target(atom/target_atom)

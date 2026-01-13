@@ -39,6 +39,7 @@
 	if(!try_transform_checks()) return
 
 	var/mob/living/carbon/human/human_user = owner.current
+	ADD_TRAIT(human_user, TRAIT_NO_TRANSFORM, TEMPORARY_TRANSFORMATION_TRAIT)
 	human_user.flash_fullscreen("redflash3")
 	human_user.emote("agony", forced = TRUE)
 	to_chat(human_user, span_userdanger("UNIMAGINABLE PAIN!"))
@@ -47,6 +48,7 @@
 	sleep(2.5 SECONDS)
 	human_user.emote("agony", forced = TRUE)
 	sleep(2.5 SECONDS)
+	REMOVE_TRAIT(human_user, TRAIT_NO_TRANSFORM, TEMPORARY_TRANSFORMATION_TRAIT)
 
 	if(!try_transform_checks()) return
 

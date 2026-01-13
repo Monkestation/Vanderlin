@@ -54,7 +54,7 @@
 			if(WW_RAGE_LOW)
 				to_chat(active_mob, span_notice("My rage begins to build..."))
 			if(WW_RAGE_MEDIUM)
-				to_chat(active_mob, span_notice("<span class='red'My rage intensifies!</span>"))
+				to_chat(active_mob, span_notice("<span class='red'>My rage intensifies!</span>"))
 			if(WW_RAGE_HIGH)
 				to_chat(active_mob, span_notice("<span class='red'>My rage reaches dangerous levels!</span>"))
 			if(WW_RAGE_CRITICAL)
