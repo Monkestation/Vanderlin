@@ -33,12 +33,14 @@
 	desc = "A barbute styled with Psydonian Imagery."
 	icon_state = "psydonbarbute"
 	item_state = "psydonbarbute"
+	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/helmet/heavy/psydonhelm
 	name ="grenzelhoftian armet"
 	desc = "Headwear commonly worn by Templars in service to the Oratorium Throni Vacui. PSYDON Endures."
 	icon_state = "psydonarmet"
 	item_state = "psydonarmet"
+	block2add = FOV_BEHIND
 
 //................ Iron Plate Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/ironplate
@@ -491,6 +493,7 @@
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 350
 	var/plumed = FALSE
 
@@ -540,6 +543,7 @@
 	item_state = "psybucket"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 400
 
 /obj/item/clothing/head/helmet/heavy/psysallet
@@ -549,4 +553,5 @@
 	item_state = "psysallet"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 400

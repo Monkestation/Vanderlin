@@ -380,7 +380,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	var/datum/buildmode/parent_buildmode
 	var/skip = FALSE
 
-/atom/movable/buildmode_pixel_dummy/New(loc, datum/buildmode/bm)
+/atom/movable/buildmode_pixel_dummy/Initialize(mapload, datum/buildmode/bm)
 	. = ..()
 	parent_buildmode = bm
 

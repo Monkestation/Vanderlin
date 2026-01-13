@@ -199,6 +199,23 @@
 		/datum/attunement/death = 0.2,
 	)
 
+/datum/action/cooldown/spell/undirected/summon_worker/before_cast(atom/cast_on)
+	. = ..()
+	if(. & SPELL_CANCEL_CAST)
+		return
+
+	var/datum/antagonist/overlord/overlord_datum = owner.mind.has_antag_datum(/datum/antagonist/overlord)
+
+	if(!overlord_datum)
+		return . | SPELL_CANCEL_CAST
+
+	if(!overlord_datum.overlord_controller)
+		to_chat(owner, span_warning("You have not established a lair yet."))
+		return . | SPELL_CANCEL_CAST
+
+	if(length(overlord_datum.overlord_controller.worker_mobs))
+		return . | SPELL_CANCEL_CAST
+
 /datum/action/cooldown/spell/undirected/summon_worker/can_cast_spell(feedback)
 	. = ..()
 	if(!.)
@@ -210,12 +227,4 @@
 	var/datum/antagonist/overlord/overlord_datum = owner.mind?.has_antag_datum(/datum/antagonist/overlord)
 	if(!overlord_datum)
 		return
-
-	if(!overlord_datum.overlord_controller)
-		to_chat(owner, span_warning("You have not established a lair yet."))
-		return
-
-	if(length(overlord_datum.overlord_controller.worker_mobs))
-		return
-
 	overlord_datum.overlord_controller.create_new_worker_mob(get_turf(GLOB.lair_portal))
