@@ -105,7 +105,7 @@
 	force = 3
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = INTEGRITY_WORST/5
+	max_integrity = INTEGRITY_WORST / 5
 
 /atom/proc/tong_interaction(atom/target, mob/user)
 	return FALSE

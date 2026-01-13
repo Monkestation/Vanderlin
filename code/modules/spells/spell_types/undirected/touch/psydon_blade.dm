@@ -35,7 +35,7 @@
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
 	max_blade_int = 999
-	max_integrity = INTEGRITY_WORST/2
+	max_integrity = INTEGRITY_WORST / 2
 
 	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_HUGE

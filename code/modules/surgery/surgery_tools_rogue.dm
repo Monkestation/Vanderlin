@@ -14,7 +14,7 @@
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_SMALL
 	max_blade_int = 100
-	max_integrity = INTEGRITY_POOR+25
+	max_integrity = INTEGRITY_POOR + 25
 	thrown_bclass = BCLASS_CUT
 	associated_skill = /datum/skill/combat/knives
 	anvilrepair = /datum/skill/craft/blacksmithing

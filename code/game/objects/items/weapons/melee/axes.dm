@@ -30,7 +30,7 @@
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_SHORT
 	max_blade_int = 50
-	max_integrity = INTEGRITY_WORST/2
+	max_integrity = INTEGRITY_WORST / 2
 
 	smeltresult = /obj/item/fertilizer/ash //is a wooden log and a stone hammered in the top
 	melting_material = null

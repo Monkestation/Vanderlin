@@ -48,7 +48,7 @@
 	armor_penetration = 30 // From iron tossblade
 	wdefense = BAD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_WORST/2 //Not for parrying
+	max_integrity = INTEGRITY_WORST / 2 //Not for parrying
 	slot_flags = ITEM_SLOT_MOUTH
 	obj_flags = null
 	w_class = WEIGHT_CLASS_TINY
