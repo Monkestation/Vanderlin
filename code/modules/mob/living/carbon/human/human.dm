@@ -95,6 +95,18 @@
 					return
 				if(istype(held_item, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 2)
 					to_chat(user, ("You can't possibily make it shine more."))
+		else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
+			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+				var/datum/bodypart_feature/hair = get_bodypart_feature_of_slot(BODYPART_FEATURE_HAIR)
+				if(hair?.accessory_type != /datum/sprite_accessory/hair/head/bald)
+					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+					if(user == src)
+						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] hair with [held_item].</span>")
+					else
+						user.visible_message("<span class='danger'>[user] starts to shave [src]'s hair with [held_item].</span>")
+					if(do_after(user, 5 SECONDS, src))
+						set_hair_style(/datum/sprite_accessory/hair/head/bald)
+						update_body()
 
 /mob/living/carbon/human/Initialize()
 	// verbs += /mob/living/proc/mob_sleep
