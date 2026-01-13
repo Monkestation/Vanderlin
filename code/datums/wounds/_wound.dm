@@ -346,7 +346,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/extra_text
 
 	if(was_completed)
-		extra_text = " Closing it."
+		extra_text = " The wound closes."
 
 	if(patient == doctor)
 		doctor.visible_message(span_notice("[doctor] sews \a [name] on [doctor.p_them()]self.[extra_text]"), span_notice("I stitch \a [name] on [affecting ? "my [affecting]" : "myself"].[extra_text]"))

@@ -1399,6 +1399,7 @@
 #include "code\datums\status_effects\neutral.dm"
 #include "code\datums\status_effects\status_effect.dm"
 #include "code\datums\status_effects\buffs\invisibility.dm"
+#include "code\datums\status_effects\debuffs\confusion.dm"
 #include "code\datums\status_effects\debuffs\drowsiness.dm"
 #include "code\datums\status_effects\debuffs\eye_blur.dm"
 #include "code\datums\status_effects\debuffs\phobia.dm"

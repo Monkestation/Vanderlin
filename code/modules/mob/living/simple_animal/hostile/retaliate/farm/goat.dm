@@ -129,7 +129,7 @@
 	switch(zone)
 		if(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 			return "snout"
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/goatmale
 	icon = 'icons/roguetown/mob/monster/gote.dmi'
@@ -265,7 +265,7 @@
 	switch(zone)
 		if(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 			return "snout"
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/goat/goatlet
 	icon = 'icons/roguetown/mob/monster/gote.dmi'

@@ -50,10 +50,6 @@
 	if(SEND_SIGNAL(follower, COMSIG_CARBON_PRAY, prayer) & CARBON_PRAY_CANCEL)
 		return
 
-	if(patron.hear_prayer(follower, prayer))
-		if(follower.has_quirk(/datum/quirk/vice/godfearing)) //make this a fucking signal!!!!
-			follower.sate_addiction(/datum/quirk/vice/godfearing) //why is this being handled by the mob!!!! and why does this cover every addiction??
-
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
 

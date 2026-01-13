@@ -106,7 +106,7 @@
 	var/datum/blueprint_system/parent_blueprint
 	var/skip = FALSE
 
-/atom/movable/blueprint_pixel_dummy/New(loc, datum/blueprint_system/bs)
+/atom/movable/blueprint_pixel_dummy/Initialize(mapload, datum/blueprint_system/bs)
 	. = ..()
 	parent_blueprint = bs
 

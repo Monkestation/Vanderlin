@@ -48,14 +48,13 @@
 
 /mob/camera/strategy_controller/Initialize()
 	. = ..()
-	displayed_base_ui = new
-	building_icon = new
+	displayed_base_ui = new(null, hud_used)
+	building_icon = new(null, hud_used)
 	START_PROCESSING(SSstrategy_master, src)
-
 
 /mob/camera/strategy_controller/proc/open_gear_ui(obj/effect/building_node/node)
 	if(!gear_ui)
-		gear_ui = new
+		gear_ui = new(null, hud_used)
 	gear_ui.open_ui(src, node)
 
 /mob/camera/strategy_controller/proc/close_gear_ui()
@@ -64,7 +63,7 @@
 
 /mob/camera/strategy_controller/proc/open_inventory_ui(datum/worker_mind/worker)
 	if(!inventory_ui)
-		inventory_ui = new
+		inventory_ui = new(null, hud_used)
 	inventory_ui.open_ui(src, worker)
 	RegisterSignal(displayed_mob_ui.worker_mind, COMSIG_WORKER_GEAR_CHANGED, PROC_REF(update_inventory))
 
@@ -149,7 +148,7 @@
 				if(displayed_mob_ui)
 					displayed_mob_ui.remove_ui(client)
 					close_inventory_ui()
-				displayed_mob_ui  = living.controller_mind.stats
+				displayed_mob_ui = living.controller_mind.stats
 				open_inventory_ui(living.controller_mind)
 			displayed_mob_ui.add_ui(client)
 	. = ..()

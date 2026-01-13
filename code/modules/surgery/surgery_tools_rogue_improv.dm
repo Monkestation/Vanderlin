@@ -8,9 +8,10 @@
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	force = 12
-	throwforce = 12
-	wdefense = 3
-	wbalance = 1
+	throwforce = 6
+	armor_penetration = 0
+	wdefense = BAD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_CHOP
 	tool_behaviour = TOOL_IMPROVISED_SAW

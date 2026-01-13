@@ -99,8 +99,7 @@
 			if(!world.time%5)
 				to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
 		return FALSE
-	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_LIVING_MOVE, n, direct) & COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE)
-		return FALSE
+
 	if(mob.force_moving)
 		return FALSE
 
@@ -125,6 +124,9 @@
 		var/atom/O = mob.loc
 		return O.relaymove(mob, direct)
 
+	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_MOVE, args) & COMSIG_MOB_CLIENT_BLOCK_PRE_MOVE)
+		return FALSE
+
 	//We are now going to move
 	var/add_delay = mob.cached_multiplicative_slowdown
 	//If the move was recent, count using old_move_delay
@@ -134,18 +136,6 @@
 		move_delay = old_move_delay
 	else
 		move_delay = world.time
-
-	if(L.confused)
-		var/newdir = 0
-		if(L.confused > 40)
-			newdir = pick(GLOB.alldirs)
-		else if(prob(L.confused * 1.5))
-			newdir = angle2dir(dir2angle(direct) + pick(90, -90))
-		else if(prob(L.confused * 3))
-			newdir = angle2dir(dir2angle(direct) + pick(45, -45))
-		if(newdir)
-			direct = newdir
-			n = get_step(L, direct)
 
 	var/target_dir = get_dir(L, n)
 
