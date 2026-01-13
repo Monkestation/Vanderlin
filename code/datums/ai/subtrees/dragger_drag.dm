@@ -56,7 +56,7 @@
 	if(iscarbon(victim))
 		var/mob/living/carbon/carbon_victim = victim
 		carbon_victim.set_eye_blur_if_lower(20 SECONDS)
-		carbon_victim.confused += 5
+		carbon_victim.adjust_confusion(0.5 SECONDS)
 		to_chat(carbon_victim, span_userdanger("The [dragger_pawn.name] grabs you and drags you into darkness!"))
 
 		new /obj/effect/temp_visual/dir_setting/wraith_grab(get_turf(carbon_victim), dragger_pawn.dir)

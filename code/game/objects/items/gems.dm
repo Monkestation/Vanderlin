@@ -79,7 +79,7 @@
 
 	var/quality_name = GLOB.gem_quality_names[quality]
 	if(quality_name)
-		name = "[quality_name] [name]"
+		name = lowertext("[quality_name] [name]")
 
 /obj/item/gem/proc/create_gem_effect()
 	if(ispath(effect_template))

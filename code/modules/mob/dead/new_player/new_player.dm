@@ -581,24 +581,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 /mob/dead/new_player/Move()
 	return 0
 
-
-/mob/dead/new_player/proc/close_spawn_windows()
-
-	src << browse(null, "window=latechoices") //closes late choices window
-	src << browse(null, "window=playersetup") //closes the player setup window
-	src << browse(null, "window=preferences") //closes job selection
-	src << browse(null, "window=mob_occupation")
-	src << browse(null, "window=latechoices") //closes late job selection
-	src << browse(null, "window=culinary_customization")
-	src << browse(null, "window=food_selection")
-	src << browse(null, "window=drink_selection")
-
-	SStriumphs.remove_triumph_buy_menu(client)
-
-	winshow(src, "stonekeep_prefwin", FALSE)
-	src << browse(null, "window=preferences_browser")
-	src << browse(null, "window=lobby_window")
-
 // Used to make sure that a player has a valid job preference setup, used to knock players out of eligibility for anything if their prefs don't make sense.
 // A "valid job preference setup" in this situation means at least having one job set to low, or not having "return to lobby" enabled
 // Prevents "antag rolling" by setting antag prefs on, all jobs to never, and "return to lobby if preferences not availible"

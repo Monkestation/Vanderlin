@@ -105,7 +105,7 @@
 	switch(zone)
 		if(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 			return "snout"
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /*
  * Proc called via callback after the cow is tipped by the tippable component.
@@ -207,7 +207,7 @@
 	switch(zone)
 		if(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 			return "snout"
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/cow/cowlet
 	name = "calf"

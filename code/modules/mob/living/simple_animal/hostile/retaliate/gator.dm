@@ -113,4 +113,4 @@
 	switch(zone)
 		if(BODY_ZONE_PRECISE_NOSE)
 			return "snout"
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
