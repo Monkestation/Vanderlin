@@ -235,7 +235,7 @@
 
 /obj/item/weapon/werewolf_claw/Initialize()
 	. = ..()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/werewolf_claw/right
 	icon_state = "claw_r"

@@ -62,7 +62,7 @@
 	spawning = 2
 	velocity = list(0, 0.25, 0)
 
-/particles/smoke/steam/water_pipe
+/particles/smoke/steam/water_vent
 	name = "water_pipe"
 	icon_state = list("steam_1" = 1, "smoke_1" = 1, "smoke_2" = 1, "smoke_3" = 1)
 	spawning = 2
@@ -151,8 +151,8 @@
 	lifespan = 12
 	fadein = 6
 	fade = 6
-	velocity = generator("circle", -5, 5, NORMAL_RAND)
-	rotation = generator("num", -120, 120)
-	spin = generator("num", -20, 20)
-	grow = list(0.2,0.2)
+	velocity = generator(GEN_CIRCLE, -5, 5, NORMAL_RAND)
+	rotation = generator(GEN_NUM, -120, 120)
+	spin = generator(GEN_NUM, -20, 20)
+	grow = list(0.2, 0.2)
 	friction = 0.6

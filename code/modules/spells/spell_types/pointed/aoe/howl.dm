@@ -24,9 +24,9 @@
 	var/maximum_immobilize = 1.5 SECONDS
 
 /datum/action/cooldown/spell/aoe/repulse/howl/Destroy()
-	. = ..()
-	if(!QDELETED(howl_effect))
+	if(howl_effect)
 		QDEL_NULL(howl_effect)
+	. = ..()
 
 /datum/action/cooldown/spell/aoe/repulse/howl/is_valid_target(atom/cast_on)
 	if(HAS_TRAIT(cast_on, TRAIT_RECENTLY_STAGGERED))

@@ -3,6 +3,12 @@
 // Assoc list of particle type/key -> list(list of particle holders, number of particle users)
 GLOBAL_LIST_EMPTY(shared_particles)
 
+/**
+ * A particle holder that reuses the same particles to reduce client lag
+ * when rendering certain atoms, usually found in large quantities and close together.
+ * Since it reuses the same instances, modifying an instance of particles will affect all atoms
+ * that show it, therefore procs like set_particle_position() shouldn't be used here.
+ */
 //A more abstract version of particle holder not bound to a specific object
 /obj/effect/abstract/shared_particle_holder
 	name = "shared particle holder"
@@ -24,7 +30,7 @@ GLOBAL_LIST_EMPTY(shared_particles)
 	particles = new particle_path()
 
 /obj/effect/abstract/shared_particle_holder/Destroy(force)
-	QDEL_NULL(particles)
+	particles = null
 	return ..()
 
 /* Adds (or creates and adds) a shared particle holder
@@ -35,7 +41,7 @@ GLOBAL_LIST_EMPTY(shared_particles)
  * custom_key can be used to create a new pool of already existing particle type in case you're planning to edit holder's color or properties
  * pool_size controls how many particle holders per type are created. Any objects over this cap will pick an existing holder from the pool
  */
-/atom/movable/proc/add_shared_particles(particle_type, custom_key = null, particle_flags = NONE, pool_size = 3)
+/atom/movable/proc/add_shared_particles(particle_type, custom_key = null, particle_flags = NONE, pool_size = 3, time)
 	var/particle_key = custom_key || "[particle_type]"
 	if (!GLOB.shared_particles[particle_key])
 		GLOB.shared_particles[particle_key] = list(list(new /obj/effect/abstract/shared_particle_holder(null, particle_type, particle_flags)), 1)
@@ -57,12 +63,17 @@ GLOBAL_LIST_EMPTY(shared_particles)
 	var/obj/effect/abstract/shared_particle_holder/particle_holder = pick(type_holders)
 	vis_contents += particle_holder
 	GLOB.shared_particles[particle_key][SHARED_PARTICLE_USER_NUM_INDEX] += 1
+	if(time > 0)
+		addtimer(CALLBACK(src, PROC_REF(remove_shared_particles), particle_key), time)
 	return particle_holder
 
 /* Removes shared particles from object's vis_contents and disposes of it if nothing uses that type/key of particle
  * particle_key can be either a type (if no custom_key was passed) or said custom_key
  */
 /atom/movable/proc/remove_shared_particles(particle_key, delete_on_empty = TRUE)
+	if(QDELETED(src))
+		return
+
 	if (!particle_key)
 		return
 
