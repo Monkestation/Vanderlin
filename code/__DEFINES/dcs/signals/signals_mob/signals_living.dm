@@ -86,13 +86,6 @@
 	/// Can't pick up
 	#define COMPONENT_LIVING_CANT_PUT_IN_HAND (1<<0)
 
-/// From mob/living/try_speak(): (message, ignore_spam, forced)
-#define COMSIG_LIVING_TRY_SPEECH "living_vocal_speech"
-	/// Return if the mob can speak the message, regardless of any other signal returns or checks.
-	#define COMPONENT_CAN_ALWAYS_SPEAK (1<<0)
-	/// Return if the mob cannot speak.
-	#define COMPONENT_CANNOT_SPEAK (1<<1)
-
 ///From mob/living/proc/wabbajack(): (randomize_type)
 #define COMSIG_LIVING_PRE_WABBAJACKED "living_mob_wabbajacked"
 	/// Return to stop the rest of the wabbajack from triggering.
