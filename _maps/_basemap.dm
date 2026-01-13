@@ -7,6 +7,10 @@
 #ifndef LOWMEMORYMODE
 	#ifdef ALL_MAPS
 		#include "map_files\debug\roguetest.dmm"
+		#include "map_files\vanderlin\vanderlin.dmm"
+		#include "map_files\rosewood\rosewood.dmm"
+		#include "map_files\whiteplacepass\WhitePalacePass.dmm"
+		#include "map_files\daftmarsh\daftmarsh.dmm"
 
 		#ifdef CIBUILDING
 			#include "templates.dm"
