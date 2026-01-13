@@ -433,10 +433,11 @@
 		owner.update_body()
 
 /obj/item/bodypart/proc/reset_fingerprint()
-	if(status == BODYPART_ORGANIC && owner?.dna?.unique_identity)
-		fingerprint = md5(owner.dna.unique_identity)
-	else
+	if(status != BODYPART_ORGANIC)
 		fingerprint = null
+		return
+	if(owner?.dna?.unique_identity)
+		fingerprint = md5(owner.dna.unique_identity)
 
 ///Proc to change the value of the `owner` variable and react to the event of its change.
 /obj/item/bodypart/proc/set_owner(mob/living/carbon/new_owner)
