@@ -55,7 +55,7 @@
 	icon_state = "stonepick"
 	force = DAMAGE_PICK - 6
 	gripped_intents = list(PICK_INTENT)
-	max_integrity = INTEGRITY_STANDARD+50
+	max_integrity = INTEGRITY_STANDARD + 50
 	anvilrepair = null
 	melting_material = null
 	pickmult = 0.7 // Worse pick
