@@ -130,6 +130,7 @@
 	var/mob/living/carbon/human/H = owner
 
 	ADD_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
+    ADD_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
 
 	// Equip iron mask - remove existing mask if present
 	if(H.wear_mask)
@@ -147,6 +148,7 @@
 
 	// Remove traits when quirk is removed
 	REMOVE_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
+    REMOVE_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
 
 /datum/quirk/vice/crippled_arm
 	name = "Missing Arm"
