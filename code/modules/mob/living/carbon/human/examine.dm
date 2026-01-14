@@ -107,9 +107,7 @@
 		if(GLOB.lord_titles[real_name]) //should be tied to known persons but can't do that until there is a way to recognise new people
 			. += span_notice("[m3] been granted the title of \"[GLOB.lord_titles[name]]\".")
 
-		var/use_skintone = !person_known && dna.species.use_skintones
-
-		if(use_skintone)
+		if(dna.species.use_skintones)
 			var/skin_tone_wording = dna.species.skin_tone_wording ? lowertext(dna.species.skin_tone_wording) : "skin tone"
 			var/list/skin_tones = dna.species.get_skin_list()
 			var/skin_tone_seen = "incomprehensible"
@@ -121,7 +119,8 @@
 						break
 
 			. += span_info("[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].")
-		else if(culture)
+
+		if(person_known && culture)
 			if(istype(culture, /datum/culture/universal/ambiguous))
 				. += span_info("[capitalize(m1)] could be from anywhere.")
 			else
