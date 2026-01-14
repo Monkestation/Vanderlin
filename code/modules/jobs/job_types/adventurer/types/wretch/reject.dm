@@ -47,8 +47,10 @@
 		/datum/skill/labor/mathematics = 3
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_KEEP_DOORS
+	)
 	traits = list(
-		TRAIT_KNOWKEEPPLANS,
 		TRAIT_BEAUTIFUL,
 		TRAIT_DODGEEXPERT,
 		TRAIT_LIGHT_STEP,
@@ -57,9 +59,6 @@
 /datum/job/advclass/wretch/reject/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_PROGENY), 10 SECONDS)
-
-	if(GLOB.keep_doors.len > 0)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), spawned), 5 SECONDS)
 
 	if(spawned.dna.species.id != SPEC_ID_TIEFLING)
 		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)

@@ -57,6 +57,9 @@
 		STATKEY_SPD =  2
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_THIEF_DOORS
+	)
 	traits = list(
 		TRAIT_THIEVESGUILD,
 		TRAIT_OLDPARTY,

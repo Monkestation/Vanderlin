@@ -483,13 +483,3 @@
 		to_chat(owner, fake_msg)
 
 	msg_stage++
-
-/atom/movable/screen/alert/status_effect/grab_counter_cd
-	name = "Grab counter"
-	desc = span_boldwarning("I have tried to counter the grab of someone!")
-	icon_state = "muscles"
-
-/datum/status_effect/grab_counter_cd
-	id = "grab_counter_cd"
-	alert_type = /atom/movable/screen/alert/status_effect/grab_counter_cd
-	duration = 60
