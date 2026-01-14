@@ -1348,10 +1348,12 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(!choice)
 		choice = pick(selection_list)
 
-	var/list/spawn_items = LAZYACCESS(selection_list, choice)
+	var/spawn_items = LAZYACCESS(selection_list, choice)
+	if(isnull(spawn_items))
+		return
+
 	if(!islist(spawn_items))
 		spawn_items = list(spawn_items)
-
 	if(!length(spawn_items))
 		return choice
 

@@ -91,9 +91,11 @@
 
 	cast_range = 1
 
-	spell_cost = 0
+	spell_cost = 5
+	cooldown_time = 5 SECONDS
 	charge_required = FALSE
 	associated_skill = null
+	has_visual_effects = FALSE
 
 /datum/action/cooldown/spell/woundlick/cast(mob/living/carbon/human/cast_on)
 	. = ..()
@@ -101,10 +103,8 @@
 		return
 
 	if(do_after(owner, 7 SECONDS, cast_on))
-		var/ramount = 20
+		var/ramount = 5
 		var/rid = /datum/reagent/medicine/healthpot
-		cast_on.reagents.add_reagent(rid, ramount)
-		rid = /datum/reagent/water
 		cast_on.reagents.add_reagent(rid, ramount)
 
 		if(cast_on.mind?.has_antag_datum(/datum/antagonist/werewolf))

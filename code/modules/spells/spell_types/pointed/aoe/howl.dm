@@ -22,7 +22,7 @@
 	min_throw = 1
 	max_throw = 1
 	/// The maximum immobilize for adjacent targets, falls off based on aoe_radius
-	var/maximum_immobilize = 1 SECONDS
+	var/maximum_immobilize = 1.5 SECONDS
 
 /datum/action/cooldown/spell/aoe/repulse/howl/Destroy()
 	if(howl_effect)

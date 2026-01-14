@@ -1106,7 +1106,7 @@
 	if(active_storage)
 		active_storage.close(src)
 
-	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss()*200/maxHealth))
+	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss() * (200/max(maxHealth, 1))))
 		makeTrail(newloc, T, old_direction)
 
 /mob/living/setDir(newdir)
