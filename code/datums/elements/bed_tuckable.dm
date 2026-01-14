@@ -42,11 +42,10 @@
 	if(istype(tucked, /obj/item/bedsheet))
 		var/obj/item/bedsheet/sheet = tucked
 		to_chat(tucker, span_notice("You tuck \the [sheet] into \the [src]."))
-		if(do_after(tucker, 2 SECONDS, src))
-			target_bed.sheet_tucked = TRUE
-			target_bed.sheet_on = TRUE
-			sheet.bed_tucked = TRUE
-			tucker.nobles_seen_servant_work()
+		target_bed.sheet_tucked = TRUE
+		target_bed.sheet_on = TRUE
+		sheet.bed_tucked = TRUE
+		tucker.nobles_seen_servant_work()
 	else
 		to_chat(tucker, span_notice("You lay [tucked] out on [target_bed]."))
 	tucked.dir = target_bed.dir
