@@ -41,7 +41,7 @@
 
 	if(istype(tucked, /obj/item/bedsheet))
 		var/obj/item/bedsheet/sheet = tucked
-		to_chat(tucker, span_notice("You tuck \the [sheet] into \the [src]."))
+		to_chat(tucker, span_notice("You tuck \the [sheet] into \the [target_bed]."))
 		target_bed.sheet_tucked = TRUE
 		target_bed.sheet_on = TRUE
 		sheet.bed_tucked = TRUE
