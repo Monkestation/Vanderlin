@@ -80,7 +80,6 @@ GLOBAL_LIST_EMPTY(last_words)
 	else
 		src.playsound_local(src, 'sound/misc/deth.ogg', 100)
 
-	set_drugginess(0)
 	set_disgust(0)
 	SetSleeping(0)
 	reset_perspective(null)

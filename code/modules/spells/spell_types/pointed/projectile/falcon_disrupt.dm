@@ -178,7 +178,7 @@
 	if(QDELETED(owner_mob))
 		owner_mob.adjustBruteLoss(10)
 		owner_mob.adjust_blindness(0.2)
-		owner_mob.Jitter(1)
+		owner_mob.adjust_jitter(1)
 		to_chat(owner_mob, span_danger("the falcon scratches your face!"))
 		playsound(src, 'sound/vo/mobs/bird/CROW_02.ogg', 70, TRUE)
 

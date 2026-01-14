@@ -82,13 +82,13 @@
 		user.spin(4, 1)
 		user.Immobilize(5)
 
-		if(user.dizziness > BEYBLADE_PUKE_THRESHOLD)
+		if(user.get_timed_status_effect_duration(/datum/status_effect/confusion) > BEYBLADE_PUKE_THRESHOLD)
 			user.vomit(BEYBLADE_PUKE_NUTRIENT_LOSS, distance = 0)
 			return
 
 		if(prob(BEYBLADE_DIZZINESS_PROBABILITY))
 			to_chat(user, span_warning("You feel woozy from spinning."))
-			user.Dizzy(BEYBLADE_DIZZINESS_DURATION)
+			user.adjust_dizzy(BEYBLADE_DIZZINESS_DURATION)
 
 		// if(iscyborg(user) && user.has_buckled_mobs())
 		// 	var/mob/living/silicon/robot/R = user

@@ -80,7 +80,6 @@
 	spawned.real_name = "skeleton"
 	spawned.remove_all_languages()
 	spawned.grant_language(/datum/language/hellspeak)
-	spawned.silent = TRUE
 
 	// Randomized stats
 	spawned.base_strength = rand(8,12)

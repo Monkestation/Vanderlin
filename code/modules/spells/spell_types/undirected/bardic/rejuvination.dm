@@ -25,7 +25,6 @@
 	id = "healing"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/healing
 	duration = 10 SECONDS
-	examine_text = "SUBJECTPRONOUN is bathed in a restorative aura!"
 	var/healing_on_tick = 1
 	var/outline_colour = "#c42424"
 
@@ -39,6 +38,9 @@
 	if (!filter)
 		owner.add_filter(MIRACLE_HEALING_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 60, "size" = 1))
 	return TRUE
+
+/datum/status_effect/buff/healing/get_examine_text()
+	return "SUBJECTPRONOUN is bathed in a restorative aura!"
 
 /datum/status_effect/buff/healing/tick()
 	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/heal_rogue(get_turf(owner))

@@ -187,7 +187,7 @@
 
 	var/rogue_sneaking = FALSE
 
-	var/rogue_sneaking_light_threshhold = 0.15
+	var/rogue_sneaking_light_threshold = 0.15
 
 	var/voice_pitch = 1
 

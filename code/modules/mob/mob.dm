@@ -895,7 +895,12 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return mind.get_ghost(even_if_they_cant_reenter, ghosts_with_clients)
 
 ///Force get the ghost from the mind
-/mob/proc/grab_ghost(force)
+/mob/proc/grab_ghost(force, grab_spirit)
+	if(grab_spirit)
+		var/mob/living/carbon/spirit/underworld_spirit = get_spirit()
+		if(underworld_spirit)
+			underworld_spirit.mind?.transfer_to(src, TRUE)
+			qdel(underworld_spirit)
 	if(mind)
 		return mind.grab_ghost(force = force)
 

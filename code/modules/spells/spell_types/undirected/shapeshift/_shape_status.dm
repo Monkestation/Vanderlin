@@ -214,12 +214,15 @@
 	if(QDELETED(source_spell) || !source_spell.convert_damage)
 		return
 
-	// if(caster_mob.stat != DEAD)
-	// 	caster_mob.revive(full_heal = TRUE)
+	if(caster_mob.stat != DEAD)
+		caster_mob.revive(HEAL_DAMAGE|HEAL_BLOOD)
 
-	// var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
-	var/damage_to_apply = (owner.maxHealth - owner.health)
-	caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE)
+		// var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
+		var/damage_to_apply = owner.getBruteLoss()
+		caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE, spread_damage = TRUE)
+
+	if(iscarbon(owner))
+		caster_mob.blood_volume = owner.blood_volume
 
 /datum/status_effect/shapechange_mob/from_spell/on_shape_death(datum/source, gibbed)
 	var/datum/action/cooldown/spell/undirected/shapeshift/source_spell = source_weakref.resolve()
@@ -274,7 +277,3 @@
 
 /datum/status_effect/shapechange_mob/die_with_form/werewolf
 	id = "werewolf_shapeshift_die_with_form"
-
-/datum/status_effect/shapechange_mob/die_with_form/werewolf/after_unchange()
-	owner.emote("rage", forced = TRUE)
-	. = ..()

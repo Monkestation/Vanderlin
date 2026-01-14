@@ -7,22 +7,6 @@
 /mob/proc/Slowdown(amount)
 	return
 
-///Set the jitter of a mob
-/mob/proc/Jitter(amount)
-	jitteriness = max(jitteriness,amount,0)
-
-/**
- * Set the dizzyness of a mob to a passed in amount
- *
- * Except if dizziness is already higher in which case it does nothing
- */
-/mob/proc/Dizzy(amount)
-	dizziness = max(dizziness,amount,0)
-
-///FOrce set the dizzyness of a mob
-/mob/proc/set_dizziness(amount)
-	dizziness = max(amount, 0)
-
 ///Blind a mobs eyes by amount
 /mob/proc/blind_eyes(amount)
 	adjust_blindness(amount)
@@ -76,14 +60,6 @@
 		game_plane_master_controller.add_filter("eye_blur", 1, gauss_blur_filter(clamp(eye_blurry * 0.1, 0.6, 3)))
 	else
 		game_plane_master_controller.remove_filter("eye_blur")
-
-///Adjust the drugginess of a mob
-/mob/proc/adjust_drugginess(amount)
-	return
-
-///Set the drugginess of a mob
-/mob/proc/set_drugginess(amount)
-	return
 
 ///Adjust the disgust level of a mob
 /mob/proc/adjust_disgust(amount)

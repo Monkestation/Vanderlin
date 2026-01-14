@@ -64,13 +64,6 @@
 
 	pre_transformation()
 
-	var/brute_transfer = human_user.getBruteLoss()
-	var/burn_transfer = human_user.getFireLoss()
-	var/tox_transfer = human_user.getToxLoss()
-	var/oxy_transfer = human_user.getOxyLoss()
-	var/clone_transfer = human_user.getCloneLoss()
-	human_user.fully_heal(FALSE)
-
 	// Actual transformation step
 	var/mob/living/carbon/human/species/werewolf/new_werewolf = generate_werewolf(human_user)
 	new_werewolf.apply_status_effect(/datum/status_effect/shapechange_mob/die_with_form/werewolf, human_user, FALSE)
@@ -79,11 +72,13 @@
 	human_user.rage_datum.grant_to_secondary(new_werewolf)
 	human_user.rage_datum.rage_change_on_life -= transformed_rage_decay
 
-	new_werewolf.adjustBruteLoss(brute_transfer)
-	new_werewolf.adjustFireLoss(burn_transfer)
-	new_werewolf.adjustToxLoss(tox_transfer)
-	new_werewolf.adjustOxyLoss(oxy_transfer)
-	new_werewolf.adjustCloneLoss(clone_transfer)
+	new_werewolf.adjustBruteLoss(human_user.getBruteLoss())
+	new_werewolf.adjustFireLoss(human_user.getFireLoss())
+	new_werewolf.adjustToxLoss(human_user.getToxLoss())
+	new_werewolf.adjustOxyLoss(human_user.getOxyLoss())
+	new_werewolf.adjustCloneLoss(human_user.getCloneLoss())
+	new_werewolf.blood_volume = human_user.blood_volume
+	human_user.fully_heal(HEAL_DAMAGE|HEAL_BLOOD|HEAL_WOUNDS)
 
 	playsound(new_werewolf, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	new_werewolf.playsound_local(get_turf(new_werewolf), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
@@ -134,14 +129,9 @@
 
 	var/mob/living/carbon/human/werewolf_user = status_owner
 
-	var/brute_transfer = werewolf_user.getBruteLoss()
-	var/burn_transfer = werewolf_user.getFireLoss()
-	var/tox_transfer = werewolf_user.getToxLoss()
-	var/oxy_transfer = werewolf_user.getOxyLoss()
-	var/clone_transfer = werewolf_user.getCloneLoss()
-
 	var/mob/living/carbon/human/caster_mob = status_caster_mob
 	werewolf_user.spawn_gibs(FALSE)
+	INVOKE_ASYNC(werewolf_user, TYPE_PROC_REF(/mob, emote), "scream")
 
 	to_chat(caster_mob, span_userdanger("The beast within returns to slumber."))
 	playsound(caster_mob, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
@@ -150,11 +140,12 @@
 	caster_mob.rage_datum.remove_secondary()
 	caster_mob.rage_datum.rage_change_on_life += transformed_rage_decay
 
-	caster_mob.adjustBruteLoss(brute_transfer)
-	caster_mob.adjustFireLoss(burn_transfer)
-	caster_mob.adjustToxLoss(tox_transfer)
-	caster_mob.adjustOxyLoss(oxy_transfer)
-	caster_mob.adjustCloneLoss(clone_transfer)
+	caster_mob.adjustBruteLoss(werewolf_user.getBruteLoss())
+	caster_mob.adjustFireLoss(werewolf_user.getFireLoss())
+	caster_mob.adjustToxLoss(werewolf_user.getToxLoss())
+	caster_mob.adjustOxyLoss(werewolf_user.getOxyLoss())
+	caster_mob.adjustCloneLoss(werewolf_user.getCloneLoss())
+	caster_mob.blood_volume = werewolf_user.blood_volume
 
 	UnregisterSignal(werewolf_user, COMSIG_LIVING_UNSHAPESHIFTED)
 	transformed = FALSE

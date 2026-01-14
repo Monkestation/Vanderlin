@@ -113,9 +113,6 @@
 
 	. = ..()
 
-	dizziness = 0
-	jitteriness = 0
-
 	if(SSticker.HasRoundStarted())
 		SSblackbox.ReportDeath(src)
 		log_message("has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.getCloneLoss()])", LOG_ATTACK)
@@ -150,7 +147,7 @@
 			V.add_stress(/datum/stress_event/viewgib)
 	. = ..()
 
-/mob/living/carbon/human/revive(full_heal, admin_revive)
+/mob/living/carbon/human/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
 	if(!.)
 		return

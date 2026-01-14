@@ -352,16 +352,15 @@
 		if(should_stun && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/shock_recovery))
 			Paralyze(3 SECONDS)
 		//Jitter and other fluff.
-		jitteriness += 1000
-		do_jitter_animation(jitteriness)
+		do_jitter_animation(300)
+		adjust_jitter(20 SECONDS)
 		stuttering += 2
 		emote("painscream")
 	addtimer(CALLBACK(src, PROC_REF(secondary_shock), should_stun), 20)
 	return shock_damage
 
-///Called slightly after electrocute act to reduce jittering and apply a secondary stun.
+///Called slightly after electrocute act to apply a secondary stun.
 /mob/living/carbon/proc/secondary_shock(should_stun)
-	jitteriness = max(jitteriness - 990, 10)
 	if(should_stun && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/shock_recovery))
 		Paralyze(6 SECONDS)
 		apply_shock_paralyze_immunity(12 SECONDS)

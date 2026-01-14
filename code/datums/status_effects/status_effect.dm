@@ -28,8 +28,8 @@
 	var/atom/movable/screen/alert/status_effect/linked_alert = null
 	/// Do we self-terminate when a fullheal is called?
 	var/remove_on_fullheal = FALSE
-	// /// If remove_on_fullheal is TRUE, what flag do we need to be removed?
-	// var/heal_flag_necessary = HEAL_STATUS
+	/// If remove_on_fullheal is TRUE, what flag do we need to be removed?
+	var/heal_flag_necessary = HEAL_STATUS
 	/// Assoc list of statkey to value
 	var/list/effectedstats = list()
 
@@ -106,6 +106,12 @@
 /datum/status_effect/proc/be_replaced()
 	qdel(src)
 
+/// Gets and formats examine text associated with our status effect.
+/// Return 'null' to have no examine text appear (default behavior).
+/// Use "SUBJECTPRONOUN is" to autoreplace with correct pronouns + linking verb in the examines themselves
+/datum/status_effect/proc/get_examine_text()
+	return null
+
 /// Called every tick.
 /datum/status_effect/proc/tick()
 	return
@@ -129,9 +135,8 @@
 	if(!remove_on_fullheal)
 		return
 
-	// if(!heal_flag_necessary || (heal_flags & heal_flag_necessary))
-	// 	qdel(src)
-	qdel(src)
+	if(!heal_flag_necessary || (heal_flags & heal_flag_necessary))
+		qdel(src)
 
 /// Remove [seconds] of duration from the status effect, qdeling / ending if we eclipse the current world time.
 /datum/status_effect/proc/remove_duration(seconds)
