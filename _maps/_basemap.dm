@@ -5,7 +5,7 @@
 #endif
 
 #ifndef LOWMEMORYMODE
-	#ifdef CIBUILDING
+	#if defined(CIBUILDING) && defined(ALL_MAPS)
 		#include "templates.dm"
 	#endif
 #endif

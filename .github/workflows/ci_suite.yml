@@ -125,7 +125,7 @@ jobs:
         run: |
           source $HOME/BYOND/byond/bin/byondsetup
           python3 tools/ci/compile_all_maps.py
-          DreamMaker -DCIBUILDING -DCITESTING vanderlin.dme
+          DreamMaker -DCIBUILDING -DCITESTING -DALL_MAPS vanderlin.dme
       - name: Check client Compatibility
         uses: tgstation/byond-client-compatibility-check@v3
         with:
