@@ -191,10 +191,10 @@
 "IA" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/sandals,
-/obj/item/clothing/pants/skirt/random,
+/obj/item/clothing/pants/skirt/colored/random,
 /obj/item/clothing/armor/corset,
 /obj/item/clothing/shirt/undershirt/lowcut,
-/obj/item/clothing/pants/tights/random,
+/obj/item/clothing/pants/tights/colored/random,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood,
 /area/template_noop)
@@ -212,9 +212,9 @@
 "LK" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/sandals,
-/obj/item/clothing/pants/skirt/random,
+/obj/item/clothing/pants/skirt/colored/random,
 /obj/item/clothing/shirt/undershirt/lowcut,
-/obj/item/clothing/pants/tights/random,
+/obj/item/clothing/pants/tights/colored/random,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood,
 /area/template_noop)
