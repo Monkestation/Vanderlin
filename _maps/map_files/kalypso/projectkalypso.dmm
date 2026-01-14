@@ -2132,7 +2132,7 @@
 /area/outdoors)
 "kH" = (
 /obj/structure/table/stone_small,
-/obj/item/plate/tray/psy,
+/obj/item/tray/psy,
 /obj/effect/spawner/map_spawner/loot/coin/low,
 /turf/open/floor/church,
 /area/under/cave)
@@ -3542,7 +3542,7 @@
 /area/outdoors)
 "rY" = (
 /obj/effect/decal/cleanable/debris/stone,
-/obj/item/plate/tray/psy,
+/obj/item/tray/psy,
 /turf/open/floor/dirt,
 /area/under/cave)
 "sd" = (
@@ -6002,7 +6002,7 @@
 /area/outdoors)
 "ET" = (
 /obj/structure/table/stone_small,
-/obj/item/plate/tray/psy,
+/obj/item/tray/psy,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/outdoors)
@@ -8777,7 +8777,7 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "Tr" = (
-/obj/item/plate/tray/psy,
+/obj/item/tray/psy,
 /turf/open/floor/dirt,
 /area/under/cave)
 "Ts" = (
