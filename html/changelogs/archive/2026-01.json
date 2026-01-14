@@ -244,5 +244,17 @@
                 "refactor": "Hidden door code"
             }
         ]
+    },
+    "2026-01-14": {
+        "KevinfromHP": [
+            {
+                "code_imp": "MC Runtime fix"
+            }
+        ],
+        "Somniworld": [
+            {
+                "balance": "Psydonian helmets have a 180\u00b0 Field Of View"
+            }
+        ]
     }
 }
