@@ -1242,6 +1242,7 @@
 
 	var/mob/living/target = lookat?.resolve()
 	if(!target)
+		to_chat(user, span_notice("The mirror remains clear..."))
 		return
 	var/mob/dead/observer/screye/blackmirror/S = user.scry_ghost()
 	if(!S)
