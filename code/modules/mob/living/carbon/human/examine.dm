@@ -3,25 +3,24 @@
 		return
 
 	// Intolerant
-	if(!HAS_TRAIT(user, TRAIT_TOLERANT))
-		if(!self_inspect)
-			if(!isdarkelf(user) && isdarkelf(src))
-				user.add_stress(/datum/stress_event/delf)
+	if(!self_inspect && !HAS_TRAIT(user, TRAIT_TOLERANT))
+		if(!isdarkelf(user) && isdarkelf(src))
+			user.add_stress(/datum/stress_event/delf)
 
-			if(!istiefling(user) && istiefling(src))
-				user.add_stress(/datum/stress_event/tieb)
+		if(!istiefling(user) && istiefling(src))
+			user.add_stress(/datum/stress_event/tieb)
 
-			if(!ishalforc(user) && ishalforc(src))
-				user.add_stress(/datum/stress_event/horc)
+		if(!ishalforc(user) && ishalforc(src))
+			user.add_stress(/datum/stress_event/horc)
 
-			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-				if(user.has_quirk(/datum/quirk/vice/paranoid))
-					user.add_stress(/datum/stress_event/paraforeigner)
-				else
-					user.add_stress(/datum/stress_event/foreigner)
+		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
+			if(user.has_quirk(/datum/quirk/vice/paranoid))
+				user.add_stress(/datum/stress_event/paraforeigner)
+			else
+				user.add_stress(/datum/stress_event/foreigner)
 
-			if(HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
-				user.add_stress(/datum/stress_event/fishface)
+		if(HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
+			user.add_stress(/datum/stress_event/fishface)
 
 	if(HAS_TRAIT(src, TRAIT_FISHFACE))
 		if(!self_inspect && HAS_TRAIT(user, TRAIT_FISHFACE))
