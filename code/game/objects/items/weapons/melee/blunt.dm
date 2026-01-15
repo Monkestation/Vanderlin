@@ -652,7 +652,6 @@
 	icon_state = "warhammer"
 	wlength = WLENGTH_GREAT
 	swingsound = BLUNTWOOSH_HUGE
-	sellprice = 100
 
 /obj/item/weapon/mace/goden/steel/warhammer/getonmobprop(tag)
 	. = ..()
@@ -757,9 +756,9 @@
 	sharpness = IS_SHARP
 
 /obj/item/weapon/mace/elvenclub/steel
-	name = "regal elven war club"
-	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant design channels elven grace, It is capable of delivering swift, painful blows"
-	icon_state = "regalelvenclub"
+	name = "steel elven war club"
+	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant bead designs channel elven grace, It is capable of delivering swift, painful blows"
+	icon_state = "elvenclubsteel"
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_MACE_WIELD
 	blade_dulling = DULLING_BASH
@@ -768,6 +767,35 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	sellprice = 60
 	wdefense = GOOD_PARRY
+
+/obj/item/weapon/mace/elvenclub/bronze
+	name = "bronze elven war club"
+	desc = "A bronze one-handed war club with a sharp end. It's been long favoured by the Elves of Heartfelt, despite its foreign origins."
+	icon_state = "elvenclub_bronze"
+	force = DAMAGE_MACE - 1
+	force_wielded = DAMAGE_MACE_WIELD - 1
+	minstr = 5
+	melting_material = /datum/material/bronze
+	melt_amount = 100
+
+/obj/item/weapon/mace/elvenclub/silver
+	name = "regal elven war club"
+	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree. It's commonly wielded by the Fingers of Necra, an organization of shamanist exorcists."
+	icon_state = "regalelvenclub"
+	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/axe/cut)
+	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/axe/cut, /datum/intent/axe/chop)
+	force = DAMAGE_MACE+1
+	force_wielded = DAMAGE_MACE_WIELD
+	blade_dulling = DULLING_BASH
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	wbalance = DODGE_CHANCE_NORMAL
+	sellprice = 150
+	wdefense = GOOD_PARRY
+
+/obj/item/weapon/mace/elvenclub/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 //................ Silver ............... //
 
@@ -800,3 +828,26 @@
 /obj/item/weapon/mace/silver/gada/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+//................ BRONZE ............... //
+
+/obj/item/weapon/mace/bronze
+	name = "bronze mace"
+	icon_state = "mace_bronze"
+	desc = "A spiked bronze mace. A weapon thats seen a revival in use amidst the cataclysm in Heartfelt."
+	minstr = 6
+	wbalance = DODGE_CHANCE_NORMAL
+	wdefense = AVERAGE_PARRY
+	sellprice = 25
+
+/obj/item/weapon/mace/shishpar/bronze
+	name = "bronze shishpar"
+	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	force = DAMAGE_MACE+1
+	force_wielded = DAMAGE_MACE_WIELD+2
+	icon_state = "shishpar_bronze"
+	wbalance = EASY_TO_DODGE
+	wdefense = GOOD_PARRY
+	sellprice = 25
+	max_blade_int = 105
+	max_integrity = INTEGRITY_STANDARD

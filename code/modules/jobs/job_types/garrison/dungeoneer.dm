@@ -39,7 +39,7 @@
 
 	skills = list(
 		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 1,
 		/datum/skill/misc/swimming = 1,
@@ -65,15 +65,16 @@
 /datum/outfit/dungeoneer
 	name = "Dungeoneer"
 	head = /obj/item/clothing/head/dungeoneer
-	neck = /obj/item/storage/belt/pouch/coins/poor
-	pants = /obj/item/clothing/pants/trou
-	shoes = /obj/item/clothing/shoes/simpleshoes
+	neck = /obj/item/clothing/neck/coif
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/stabard/colored/dungeon
+	armor = /obj/item/clothing/armor/cuirass/iron/rust
+	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
+	wrists = /obj/item/clothing/wrists/bracers/leather
+	pants = /obj/item/clothing/pants/trou
+	shoes = /obj/item/clothing/shoes/boots/leather
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/whip/antique
-	beltl = /obj/item/storage/keyring/dungeoneer
-	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/clothing/head/menacing = 1
-	)
+	beltl = /obj/item/storage/belt/pouch/coins/poor
+	backr = /obj/item/storage/backpack/satchel	// lack of satchel requires dealing with the merchant to correct, which requires entering town; not ideal. N.
+	backpack_contents = list(/obj/item/clothing/head/menacing, /obj/item/storage/keyring/dungeoneer, /obj/item/weapon/knuckles)

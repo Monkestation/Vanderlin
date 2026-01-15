@@ -12,7 +12,7 @@
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/athletics = 1,
 		/datum/skill/combat/axesmaces = 2,

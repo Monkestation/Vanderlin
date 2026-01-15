@@ -15,7 +15,7 @@
 
 	skills = list(
 		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/misc/sewing = 2,
@@ -29,7 +29,6 @@
 	)
 
 	traits = list(
-		TRAIT_DODGEEXPERT,
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED
 	)

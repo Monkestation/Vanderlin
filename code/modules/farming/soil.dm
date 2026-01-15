@@ -122,6 +122,7 @@
 		record_round_statistic(STATS_PLANTS_HARVESTED)
 	to_chat(user, span_notice(feedback))
 	yield_produce(modifier)
+	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
 /obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
@@ -246,12 +247,14 @@
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
 			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
 		add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
 

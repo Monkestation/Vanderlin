@@ -97,7 +97,7 @@
 			return
 		if (L.m_intent == MOVE_INTENT_SNEAK)
 			return
-		playsound(src.loc, "plantcross", 90, FALSE, -1)
+		playsound(src, "plantcross", 90, FALSE, -1)
 		var/oldx = pixel_x
 		animate(src, pixel_x = oldx + 1, time = 0.5)
 		animate(pixel_x = oldx - 1, time = 0.5)
@@ -459,7 +459,7 @@
 	var/mob/living/M = owner
 	if (!M || M.stat != CONSCIOUS) return
 	check_field_presence()
-	M.confused = max(M.confused, 5)
+	M.set_confusion_if_lower(0.5 SECONDS)
 	if (prob(15) && !M.has_status_effect(/datum/status_effect/frost_trap))
 		M.apply_status_effect(/datum/status_effect/frost_trap)
 		M.adjustFireLoss(-8)

@@ -54,18 +54,20 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/riding = 3,
 		/datum/skill/labor/mathematics = 3
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_KEEP_DOORS
+	)
 	traits = list(
 		TRAIT_NOBLE,
 		TRAIT_NOSEGRAB,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWKEEPPLANS
 	)
 
 	voicepack_m = /datum/voicepack/male/evil
@@ -95,9 +97,6 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 	to_chat(world, "<b>[span_notice(span_big("[spawned.real_name] is [ruler_title] of [SSmapping.config.map_name]."))]</b>")
 	to_chat(world, "<br>")
-
-	if(GLOB.keep_doors.len > 0)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), spawned), 7 SECONDS)
 
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)

@@ -44,6 +44,7 @@
 	if(isopenturf(my_turf))
 		if(my_turf?.pollution == src)
 			my_turf.pollution = null
+	my_turf = null // avoid invalid references to a turf that doesn't want us
 	return ..()
 
 /datum/pollution/proc/touch_act(mob/living/carbon/victim)

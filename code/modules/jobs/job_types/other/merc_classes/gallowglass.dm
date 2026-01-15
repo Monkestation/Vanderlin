@@ -14,14 +14,15 @@
 
 	jobstats = list(
 		STATKEY_STR = 2,
-		STATKEY_END = 1,
+		STATKEY_END = 2,
+		STATKEY_CON = 2,
 		STATKEY_SPD = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/climbing = 3,
@@ -35,15 +36,16 @@
 /datum/outfit/mercenary/gallowglass
 	name = "Gallowglass (Mercenary)"
 	shoes = /obj/item/clothing/shoes/boots/leather
-	head = /obj/item/clothing/head/helmet/nasal
-	gloves = /obj/item/clothing/gloves/chain/iron
+	head = /obj/item/clothing/head/helmet/gallowglass
+	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary/black
-	armor = /obj/item/clothing/armor/cuirass
-	cloak = /obj/item/clothing/cloak/stabard/kaledon
-	neck = /obj/item/clothing/neck/gorget
+	armor = /obj/item/clothing/armor/chainmail/iron
+	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/mageblue
+	neck = /obj/item/clothing/neck/chaincoif/iron
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/weapon/mace/cudgel
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
-	pants = /obj/item/clothing/pants/chainlegs/kilt
+	pants = /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
 	backl = /obj/item/weapon/sword/long/greatsword/steelclaymore
+	backr = /obj/item/storage/backpack/satchel

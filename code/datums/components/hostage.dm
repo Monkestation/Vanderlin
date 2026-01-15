@@ -92,16 +92,18 @@
 	RegisterSignal(parent, COMSIG_MOB_ATTACK_HAND, PROC_REF(check_shove))
 	RegisterSignal(parent, COMSIG_MOB_UPDATE_SIGHT, PROC_REF(check_deescalate))
 	RegisterSignal(parent, list(COMSIG_LIVING_START_PULL, COMSIG_MOVABLE_BUMP), PROC_REF(check_bump))
-	RegisterSignal(parent, COMSIG_MOB_SWAPPING_HANDS, PROC_REF(cancel))
+	RegisterSignal(parent, list(COMSIG_MOB_SWAPPING_HANDS, COMSIG_ATOM_NO_LONGER_PULLING), PROC_REF(cancel))
 
 /datum/component/hostage/UnregisterFromParent()
 	UnregisterSignal(parent, \
 		list(COMSIG_MOVABLE_MOVED, \
 		COMSIG_MOB_APPLY_DAMGE, \
-		COMSIG_MOB_UPDATE_SIGHT, \
 		COMSIG_MOB_ATTACK_HAND,
+		COMSIG_MOB_UPDATE_SIGHT, \
 		COMSIG_LIVING_START_PULL, \
-		COMSIG_MOVABLE_BUMP))
+		COMSIG_MOVABLE_BUMP, \
+		COMSIG_MOB_SWAPPING_HANDS, \
+		COMSIG_ATOM_NO_LONGER_PULLING))
 
 ///If the captor bumps anything but the target, flinch
 /datum/component/hostage/proc/check_bump(atom/B, atom/A)
@@ -129,8 +131,8 @@
 	if(check_deescalate())
 		return
 	if(stage > 1)
-		to_chat(parent, span_danger("You lose focus steadying [weapon] towards [target]!"))
-		to_chat(target, span_userdanger("[parent] loses their focus steadying [weapon] towards you!"))
+		to_chat(parent, span_warning("You lose focus steadying [weapon] towards [target]!"))
+		// to_chat(target, span_userdanger("[parent] loses their focus steadying [weapon] towards you!"))
 		update_stage(1)
 
 ///Update the damage multiplier for whatever stage we're entering into
@@ -143,12 +145,12 @@
 			stage_timer = addtimer(CALLBACK(src, PROC_REF(update_stage), 2), DELAY_STAGE_2, TIMER_STOPPABLE)
 		if(2)
 			to_chat(parent, span_warning("You steady [weapon] towards [target]."))
-			to_chat(target, span_userdanger("[parent] has steadied [weapon] towards you!"))
+			// to_chat(target, span_userdanger("[parent] has steadied [weapon] towards you!"))
 			damage_mult = MULT_STAGE_2
 			stage_timer = addtimer(CALLBACK(src, PROC_REF(update_stage), 3), DELAY_STAGE_3, TIMER_STOPPABLE)
 		if(3)
 			to_chat(parent, span_warning("You have fully steadied [weapon] towards [target]."))
-			to_chat(target, span_userdanger("[parent] has fully steadied [weapon] towards you!"))
+			// to_chat(target, span_userdanger("[parent] has fully steadied [weapon] towards you!"))
 			damage_mult = MULT_STAGE_3
 
 ///Cancel the holdup if the captor moves out of sight or out of range of the target

@@ -5,7 +5,7 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 1 // THE ONE.
 	spawn_positions = 1
-	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
+	allowed_races = list(SPEC_ID_HUMEN)
 	//You MUST have a Psydonite character to start. Just so people don't get japed into Oops Suddenly Psydon!
 	allowed_patrons = list(/datum/patron/psydon) // no e. psydon, according to ook
 	tutorial = "The Oratorium claims you are naught more than a 'cleric', but you know the truth; you are a sacrificial lamb. Your hands, unmarred through prayer and pacifism, have been gifted with the power to manipulate blood - to siphon away the wounds of others, so that you may endure in their stead. Let your censer's light shepherd the Inquisitor's retinue forth, lest they're led astray by wrath and temptation."
@@ -17,6 +17,9 @@
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	traits = list(
 		TRAIT_NOPAINSTUN,
 		TRAIT_PACIFISM,

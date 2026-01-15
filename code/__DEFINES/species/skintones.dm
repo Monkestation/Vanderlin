@@ -129,6 +129,7 @@
 #define SKIN_COLOR_SUNSTREAK "b77614" //White - Tan
 #define SKIN_COLOR_MOONSHADE "C0C0C0" //Middle-eastern
 #define SKIN_COLOR_SANDSWEPT "fcccb3" //White - Tan
+#define SKIN_COLOR_ICEPACK "3d496d" //Blurple
 
 // TRITON SKIN TONES
 /// Very Light Blue "#9cc2e2"

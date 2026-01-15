@@ -29,7 +29,7 @@
 
 /obj/structure/well/fountain
 	name = "water fountain"
-	desc = "An elegant fountain fit for royalty."
+	desc = "An elegant fountain fit for royalty. Not suitable for drinking from."
 	icon = 'icons/roguetown/misc/64x64.dmi'
 	icon_state = "fountain"
 	layer = BELOW_MOB_LAYER
@@ -40,15 +40,11 @@
 		var/mob/living/L = user
 		if(L.stat != CONSCIOUS)
 			return
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			if(C.is_mouth_covered())
-				return
 		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
 		user.visible_message(span_info("[user] starts to drink from [src]."))
 		if(do_after(L, 2.5 SECONDS, src))
 			var/datum/reagents/reagents = new()
-			reagents.add_reagent_list(list(/datum/reagent/water = 2))
+			reagents.add_reagent_list(list(/datum/reagent/water/gross = 2))
 			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = INGEST)
 			playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
 		return

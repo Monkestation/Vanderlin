@@ -115,7 +115,7 @@
 		return
 
 	victim.apply_damage(10 * (rotations_per_minute / 8), BRUTE, BODY_ZONE_HEAD)
-	playsound(src.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	bloodied = TRUE
 	update_animation_effect()
 
@@ -262,7 +262,7 @@
 		body_zone = BODY_ZONE_L_ARM
 	if(working)
 		user.apply_damage(15 * (rotations_per_minute / 8), BRUTE, body_zone)
-		playsound(src.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+		playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 		user.visible_message(span_danger("[user] gets their arm crushed by [src]!"), span_danger("You get your arm crushed by [src]!"))
 		bloodied = TRUE
 		update_animation_effect()
@@ -272,13 +272,13 @@
 	switch(step_on)
 		if(STEP_FIDDLE)
 			user.apply_damage(5 * (rotations_per_minute / 8), BRUTE, body_zone)
-			playsound(src.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+			playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 			user.visible_message(span_danger("[user] get their hand caught in [src]'s cogs!"), span_danger("You get your hand caught in [src]'s cogs!"))
 		if(STEP_LEVER)
 			return
 		if(STEP_BUTTON)
 			user.apply_damage(8 * (rotations_per_minute / 8), BRUTE, body_zone)
-			playsound(src.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+			playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 			user.visible_message(span_danger("[user] gets their hand flattened by [src]!"), span_danger("You get your hand flattened by[src]!"))
 
 /obj/structure/orphan_smasher/proc/try_step(step_type, mob/living/user)
@@ -296,7 +296,7 @@
 		if(user.active_hand_index == 1)
 			body_zone = BODY_ZONE_L_ARM
 		user.apply_damage(4 * max(1, (rotations_per_minute / 8)), BRUTE, body_zone)
-		playsound(src.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+		playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 		return
 
 	if(!do_after(user, 1.2 SECONDS, src))

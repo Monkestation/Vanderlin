@@ -3,7 +3,7 @@
 	biome_weight = 20
 	terrain_weights = list(
 		/turf/open/floor/cracked_earth = 70,
-		/turf/open/floor/sand = 20,
+		/turf/open/floor/sand/sandstone = 20,
 		/turf/open/floor/dirt = 10
 	)
 	flora_weights = list(
@@ -63,14 +63,14 @@
 /datum/island_biome/desert/select_terrain(temperature, moisture, height)
 	if(temperature > 0.7 && moisture < 0.3)
 		if(height > 0.5)
-			return /turf/open/floor/sand
+			return /turf/open/floor/sand/sandstone
 		return /turf/open/floor/cracked_earth
 
 	if(temperature > 0.6)
 		if(moisture < 0.4)
-			return prob(70) ? /turf/open/floor/dirt : /turf/open/floor/sand
+			return prob(70) ? /turf/open/floor/dirt : /turf/open/floor/sand/sandstone
 		else if(moisture < 0.6)
-			return prob(60) ? /turf/open/floor/sand : /turf/open/floor/cracked_earth
+			return prob(60) ? /turf/open/floor/sand/sandstone : /turf/open/floor/cracked_earth
 		else
 			return /turf/open/floor/cracked_earth
 
@@ -78,11 +78,11 @@
 		if(moisture > 0.6)
 			return /turf/open/floor/cracked_earth
 		else if(moisture > 0.4)
-			return prob(50) ? /turf/open/floor/cracked_earth : /turf/open/floor/sand
+			return prob(50) ? /turf/open/floor/cracked_earth : /turf/open/floor/sand/sandstone
 		else
 			var/terrain_roll = rand(1, 100)
 			if(terrain_roll <= 50)
-				return /turf/open/floor/sand
+				return /turf/open/floor/sand/sandstone
 			else if(terrain_roll <= 80)
 				return /turf/open/floor/dirt
 			else
@@ -92,12 +92,12 @@
 		if(moisture > 0.5)
 			return /turf/open/floor/cracked_earth
 		else
-			return prob(60) ? /turf/open/floor/sand : /turf/open/floor/cracked_earth
+			return prob(60) ? /turf/open/floor/sand/sandstone : /turf/open/floor/cracked_earth
 
 	if(moisture > 0.5)
 		return /turf/open/floor/cracked_earth
 	else
-		return prob(70) ? /turf/open/floor/cracked_earth : /turf/open/floor/sand
+		return prob(70) ? /turf/open/floor/cracked_earth : /turf/open/floor/sand/sandstone
 
 /datum/island_biome/desert/select_flora(temperature, moisture, height)
 	if(prob(10))

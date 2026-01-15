@@ -108,6 +108,11 @@
 	abstract_type = /datum/anvil_recipe/tools/iron
 ///////////////////////////////////////////////
 
+/datum/anvil_recipe/tools/iron/syringe
+	name = "Infusion Syringe"
+	recipe_name = "infusion syringe"
+	created_item = /obj/item/reagent_containers/syringe
+
 /datum/anvil_recipe/tools/iron/keyring
 	name = "3x Keyrings"
 	recipe_name = "three Keyrings"

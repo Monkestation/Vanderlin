@@ -67,14 +67,16 @@
 
 	jobstats = list(
 		STATKEY_STR = 1,
+		STATKEY_CON = 2,
 		STATKEY_END = 2,
 		STATKEY_PER = -1
 	)
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/whipsflails = 4,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/whipsflails = 3,
+		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/swimming = 2,
@@ -96,6 +98,7 @@
 	armor = /obj/item/clothing/armor/leather/jacket/gatemaster_jacket/armored
 	beltr = /obj/item/weapon/mace/cudgel
 	beltl = /obj/item/weapon/whip/chain
+	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/keyring/manorguard = 1,
@@ -113,15 +116,17 @@
 	category_tags = list(CTAG_GATEMASTER)
 
 	jobstats = list(
-		STATKEY_STR = 1,
+		STATKEY_STR = 2,
+		STATKEY_END = 1,
 		STATKEY_CON = 2,
 		STATKEY_SPD = -1
 	)
 
 	skills = list(
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/axesmaces = 3,
+		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 1,
@@ -159,15 +164,15 @@
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_PER = 2,
-		STATKEY_END = -1
+		STATKEY_END = 1
 	)
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 4,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/bows = 3,
+		/datum/skill/combat/crossbows = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
