@@ -236,9 +236,6 @@
 			if(HAS_TRAIT(src, TRAIT_LEPROSY))
 				. += span_necrosis("A LEPER...")
 
-			if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
-				. += span_userdanger("MANIAC!")
-
 			if(HAS_TRAIT(src, TRAIT_FACELESS))
 				. += span_userdanger("FACELESS?! AN ASSASSIN!")
 
@@ -295,6 +292,9 @@
 			var/atom/item = get_most_expensive()
 			if(item)
 				. += span_notice("You get the feeling [m2] most valuable possession is \a [item.name].")
+
+		if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
+			. += span_userdanger("THE WORLD TWISTS! MANIAC!")
 
 	var/obscured = check_obscured_slots()
 
