@@ -71,6 +71,9 @@
 		/datum/job/carpenter = list(
 			"title" = "Capcarver"
 		),
+		/datum/job/forestwarden = list(
+			"title" = "Gloomwarden"
+		),
 	)
 
 #undef DARK_ELF
@@ -95,9 +98,9 @@
 		/datum/job/monk,
 		/datum/job/templar,
 		/datum/job/churchling,
+		/datum/job/undertaker,
 		// Unwanted roles
 		/datum/job/minor_noble,
-		/datum/job/forestguard,
 		/datum/job/mercenary,
 		/datum/job/gaffer,
 		/datum/job/gaffer_assistant,
@@ -117,6 +120,7 @@
 		/datum/job/feldsher,
 		/datum/job/archivist, // Court Mage + archivist = Sanguine Scholar
 		/datum/job/guardsman, // Redcap
+		/datum/job/men_at_arms
 		/datum/job/merchant, // Marchand-mercier.
 		/datum/job/shophand,
 		/datum/job/grabber,
@@ -128,6 +132,7 @@
 		/datum/job/armorsmith, // Armorsmith + Weaponsmith = Blacksmith
 		/datum/job/weaponsmith,
 		/datum/job/forestguard, // Gloomwarden
+		/datum/job/forestwarden,
 
 	)
 
