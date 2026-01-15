@@ -76,6 +76,10 @@
 	desc = "A stained-glass window filigreed in deep crimson."
 	icon_state = "stained-zizo"
 
+/obj/structure/window/stained/zizo/green
+	desc = "A stained-glass window filigreed in deep verdant."
+	icon_state = "stained-zizo-green"
+
 /obj/structure/window/stained/yellow
 	desc = "A stained-glass window filigreed in gold."
 	icon_state = "stained-yellow"
