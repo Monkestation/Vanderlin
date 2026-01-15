@@ -155,7 +155,7 @@
 	if(owner.can_hear())
 		owner.dizziness = max(0, owner.dizziness - 2)
 		owner.jitteriness = max(0, owner.jitteriness - 2)
-		owner.confused = max(0, owner.confused - 1)
+		owner.adjust_confusion(-0.1 SECONDS)
 		owner.add_stress(/datum/stress_event/goodmusic)
 
 /atom/movable/screen/alert/status_effect/regenerative_core

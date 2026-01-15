@@ -33,7 +33,7 @@
 			user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [source], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [source], gobbling it down!</span>")
 			M.changeNext_move(CLICK_CD_MELEE * 0.5)
 
-	playsound(M.loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+	playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
 	SEND_SIGNAL(source, COMSIG_FOOD_EATEN, M, user)
 	source.on_consume(user)
 	qdel(source)

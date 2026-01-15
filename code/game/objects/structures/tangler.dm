@@ -129,7 +129,7 @@
 		if(!HAS_TRAIT(L, TRAIT_NOPAIN))
 			L.emote("painscream", forced = FALSE)
 		src.visible_message("<span class='danger'>[src] snatches [L]!</span>")
-		playsound(src.loc, "plantcross", 100, FALSE, -1)
+		playsound(src, "plantcross", 100, FALSE, -1)
 	else if(istype(AM, /obj/item))
 		if(is_type_in_list(AM, eatablez))
 			aggroed = world.time

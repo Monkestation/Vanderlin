@@ -63,7 +63,7 @@
 			if(!do_after(user, 2 SECONDS, src))
 				return FALSE
 			if(put_in(user, AM))
-				playsound(loc, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 			return TRUE
 		return ..()
 
@@ -76,7 +76,7 @@
 			return FALSE
 
 	if(put_in(user, AM))
-		playsound(loc, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 	return TRUE
 
 /obj/structure/handcart/attackby(obj/item/I, mob/user, params)
@@ -95,7 +95,7 @@
 		return
 	if(!user.cmode)
 		if(put_in(user, I))
-			playsound(loc, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
+			playsound(src, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 		return
 	..()
 
@@ -170,7 +170,7 @@
 	if(!put_in(user, AM))
 		return FALSE
 	if(prob(30))
-		playsound(loc, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 	return TRUE
 
 //Handles any object that's an ore or a gem (in the future, should change to raw gems if you add refinement steps)
@@ -236,7 +236,7 @@
 	if(length(stuff_shit))
 		dump_contents()
 		visible_message(span_info("[user] dumps out [src]!"))
-		playsound(loc, 'sound/foley/cartdump.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/foley/cartdump.ogg', 100, FALSE, -1)
 		update_appearance(UPDATE_ICON)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 

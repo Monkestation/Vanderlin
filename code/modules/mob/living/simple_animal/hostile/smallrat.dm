@@ -21,7 +21,7 @@
 			if(do_after(user, 3 DECISECONDS, src))
 				user.visible_message("<span class='warning'>[user] drinks from [src]!</span>",\
 				"<span class='warning'>I drink from [src].</span>")
-				playsound(user.loc, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
+				playsound(user, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
 
 				user.adjust_bloodpool(50)
 				var/blood_handle = BLOOD_PREFERENCE_RATS
@@ -30,7 +30,7 @@
 				else
 					blood_handle |= BLOOD_PREFERENCE_LIVING
 				user.clan.handle_bloodsuck(user, blood_handle)
-				playsound(get_turf(user), 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
+				playsound(user, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
 				if(dead)
 					qdel(src)
 					return

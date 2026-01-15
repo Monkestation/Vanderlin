@@ -59,8 +59,8 @@
 		user.visible_message(span_notice("[user] threshes the stalks!"), \
 							span_notice("I thresh the stalks."))
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(loc,"plantcross", 100, FALSE)
-		playsound(loc,"smashlimb", 50, FALSE)
+		playsound(src,"plantcross", 100, FALSE)
+		playsound(src,"smashlimb", 50, FALSE)
 		src.thresh()
 		return
 	..()

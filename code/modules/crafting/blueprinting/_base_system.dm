@@ -376,7 +376,7 @@
 			var content = "<div class='tooltip-name'>" + name + "</div>";
 			content += "<div class='tooltip-desc'>" + desc + "</div>";
 			content += "<div class='tooltip-materials'>Build with: " + initiateItem + "<br>";
-			if (materialsJson && materialsJson !== '[]') {
+			if (materialsJson && materialsJson !== '\[]') {
 				try {
 					var materials = JSON.parse(materialsJson);
 					content += "<div class='tooltip-materials'>Materials:<br>";
@@ -389,7 +389,7 @@
 				}
 			}
 
-			if (featuresJson && featuresJson !== '[]') {
+			if (featuresJson && featuresJson !== '\[]') {
 				try {
 					var features = JSON.parse(featuresJson);
 					content += "<div class='tooltip-features'>Features: " + features.join(', ') + "</div>";

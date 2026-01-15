@@ -13,7 +13,7 @@
 	if(!istype(target))
 		target = owner
 	owner.visible_message(span_notice("[target] appears refreshed."))
-	//playsound(get_turf(owner), 'sound/magic/staff_healing.ogg', 50, TRUE)
+	//playsound(owner, 'sound/magic/staff_healing.ogg', 50, TRUE)
 
 	target.adjust_stamina(20)
 	target.adjust_energy(20)

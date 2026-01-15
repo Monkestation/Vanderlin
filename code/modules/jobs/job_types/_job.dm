@@ -166,7 +166,7 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/datum/charflaw/forced_flaw
+	var/datum/quirk/forced_flaw
 
 	var/shows_in_list = TRUE
 
@@ -262,7 +262,8 @@
 		ADD_TRAIT(spawned, trait, JOB_TRAIT)
 
 	for(var/datum/language/to_learn as anything in languages)
-		spawned.grant_language(to_learn)
+		if(!spawned.has_language(to_learn))
+			spawned.grant_language(to_learn)
 
 	if(is_foreigner)
 		ADD_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
@@ -279,7 +280,8 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
-	spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
+	if(!parent_job) // Prevent the advclass job from removing the parent job stats.
+		spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
 	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
 
 	for(var/datum/skill/skill as anything in skills)
@@ -332,10 +334,7 @@
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
-		spawned.set_flaw(forced_flaw)
-
-	if(spawned.charflaw)
-		spawned.charflaw.after_spawn(spawned, player_client)
+		spawned.add_quirk(forced_flaw)
 
 	if(antag_role && spawned.mind)
 		spawned.mind.add_antag_datum(antag_role)
@@ -450,7 +449,8 @@
 			if(QDELETED(src))
 				return
 
-		previous_picked_types |= picked_pack.type
+		if(picked_pack.type)
+			previous_picked_types |= picked_pack.type
 
 		picked_pack.pick_pack(src)
 

@@ -5,6 +5,9 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/healing/greater,
 		CLERIC_T3 = /datum/action/cooldown/spell/revive,
 	)
+	viable_tasks = list(
+		/datum/devotion_task/astrata_purge,
+	)
 
 /datum/devotion/divine/noc
 	miracles = list(
@@ -12,6 +15,11 @@
 		CLERIC_T1 = /datum/action/cooldown/spell/status/invisibility,
 		CLERIC_T2 = /datum/action/cooldown/spell/blindness/miracle,
 		CLERIC_T3 = /datum/action/cooldown/spell/projectile/moonlit_dagger,
+	)
+	viable_tasks = list(
+		/datum/devotion_task/noc_teach,
+		/datum/devotion_task/noc_write,
+		/datum/devotion_task/noc_read,
 	)
 
 /datum/devotion/divine/dendor
@@ -21,6 +29,11 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/undirected/beast_sense,
 		CLERIC_T3 = /datum/action/cooldown/spell/beast_tame,
 	)
+	viable_tasks = list(
+		/datum/devotion_task/dendor_tend,
+		/datum/devotion_task/dendor_harvest,
+		/datum/devotion_task/dendor_bless,
+	)
 
 /datum/devotion/divine/abyssor
 	miracles = list(
@@ -29,6 +42,10 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/undirected/conjure_item/summon_trident/miracle,
 		CLERIC_T3 = /datum/action/cooldown/spell/ocean_embrace,
 	)
+	viable_tasks = list(
+		/datum/devotion_task/abyssor_sail,
+		/datum/devotion_task/abyssor_fish,
+	)
 
 /datum/devotion/divine/necra
 	miracles = list(
@@ -36,6 +53,10 @@
 		CLERIC_T1 = /datum/action/cooldown/spell/burial_rites,
 		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/locate_dead, /datum/action/cooldown/spell/aoe/abrogation, /datum/action/cooldown/spell/undirected/soul_speak, ),
 		CLERIC_T3 = /datum/action/cooldown/spell/aoe/churn_undead,
+	)
+	viable_tasks = list(
+		/datum/devotion_task/necra_bury,
+		/datum/devotion_task/astrata_purge,
 	)
 	traits = list(TRAIT_DEATHSIGHT)
 
@@ -54,6 +75,10 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/status/wheel,
 		CLERIC_T3 = /datum/action/cooldown/spell/undirected/jaunt/illusory_prop,
 	)
+	viable_tasks = list(
+		/datum/devotion_task/xylix_gamble,
+		/datum/devotion_task/xylix_trick,
+	)
 
 /datum/devotion/divine/pestra
 	miracles = list(
@@ -62,6 +87,10 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/attach_bodypart,
 		CLERIC_T3 = /datum/action/cooldown/spell/cure_rot,
 	)
+	viable_tasks = list(
+		/datum/devotion_task/pestra_heal,
+		/datum/devotion_task/pestra_medicine,
+	)
 
 /datum/devotion/divine/malum
 	miracles = list(
@@ -69,6 +98,11 @@
 		CLERIC_T1 = /datum/action/cooldown/spell/status/vigorous_craft,
 		CLERIC_T2 = /datum/action/cooldown/spell/hammer_fall,
 		CLERIC_T3 = /datum/action/cooldown/spell/heat_metal,
+	)
+	viable_tasks = list(
+		/datum/devotion_task/malum_craft,
+		/datum/devotion_task/malum_smelt,
+		/datum/devotion_task/malum_forge,
 	)
 
 /datum/devotion/divine/eora
@@ -81,6 +115,10 @@
 	favored_species = list(SPEC_ID_HARPY)
 	favored_miracles = list(
 		CLERIC_T3 = /datum/action/cooldown/spell/charm/eoran
+	)
+	viable_tasks = list(
+		/datum/devotion_task/eora_create,
+		/datum/devotion_task/eora_hug,
 	)
 
 // Inhumen
@@ -124,6 +162,9 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/projectile/blood_net,
 		CLERIC_T3 = /datum/action/cooldown/spell/revel_in_slaughter,
 	)
+	viable_tasks = list(
+		/datum/devotion_task/graggar_consume,
+	)
 
 /datum/devotion/inhumen/matthios
 	miracles = list(
@@ -132,6 +173,9 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/beam/equalize,
 		CLERIC_T3 = /datum/action/cooldown/spell/churn_wealthy,
 	)
+	viable_tasks = list(
+		/datum/devotion_task/matthios_steal,
+	)
 
 /datum/devotion/inhumen/baotha
 	miracles = list(
@@ -139,4 +183,7 @@
 		CLERIC_T1 = /datum/action/cooldown/spell/baothablessings,
 		CLERIC_T2 = /datum/action/cooldown/spell/projectile/blowingdust,
 		CLERIC_T3 = /datum/action/cooldown/spell/painkiller,
+	)
+	viable_tasks = list(
+		/datum/devotion_task/baotha_indulge,
 	)

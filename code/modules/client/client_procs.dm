@@ -1306,13 +1306,13 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		O.dir = D
 		switch(pos)
 			if(1)
-				O.screen_loc = "character_preview_map:1:2,2:-18"
+				O.screen_loc = "character_preview_map:2:4,4:-36"
 			if(2)
-				O.screen_loc = "character_preview_map:0:2,2:-18"
+				O.screen_loc = "character_preview_map:0:4,4:-36"
 			if(3)
-				O.screen_loc = "character_preview_map:1:2,0:10"
+				O.screen_loc = "character_preview_map:2:4,0:26"
 			if(4)
-				O.screen_loc = "character_preview_map:0:2,0:10"
+				O.screen_loc = "character_preview_map:0:4,0:26"
 
 /client/proc/clear_character_previews()
 	for(var/atom/movable/screen/S in char_render_holders)

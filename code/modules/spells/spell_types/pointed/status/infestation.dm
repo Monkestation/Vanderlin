@@ -72,7 +72,7 @@
 
 	if(prob(33) && iscarbon(L))
 		var/mob/living/carbon/C = L
-		C.add_nausea(pick(10,20))
+		C.add_nausea(rand(10,20))
 		to_chat(C, span_warning(pick(messages)))
 
 /atom/movable/screen/alert/status_effect/debuff/infestation
