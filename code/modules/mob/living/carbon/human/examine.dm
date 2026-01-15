@@ -2,37 +2,34 @@
 	if(!istype(user))
 		return
 
-	// Intolerant (normal for most I guess?)
-	if(!HAS_TRAIT(src, TRAIT_TOLERANT))
-		if(!isdarkelf(user) && isdarkelf(src))
-			user.add_stress(/datum/stress_event/delf)
+	// Intolerant
+	if(!HAS_TRAIT(user, TRAIT_TOLERANT))
+		if(!self_inspect)
+			if(!isdarkelf(user) && isdarkelf(src))
+				user.add_stress(/datum/stress_event/delf)
 
-		if(!istiefling(user) && istiefling(src))
-			user.add_stress(/datum/stress_event/tieb)
+			if(!istiefling(user) && istiefling(src))
+				user.add_stress(/datum/stress_event/tieb)
 
-		if(!ishalforc(user) && ishalforc(src))
-			user.add_stress(/datum/stress_event/horc)
+			if(!ishalforc(user) && ishalforc(src))
+				user.add_stress(/datum/stress_event/horc)
 
-		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-			if(user.has_quirk(/datum/quirk/vice/paranoid))
-				user.add_stress(/datum/stress_event/paraforeigner)
-			else
-				user.add_stress(/datum/stress_event/foreigner)
-
-		if(HAS_TRAIT(src, TRAIT_FISHFACE))
-			if(HAS_TRAIT(user, TRAIT_FISHFACE))
-				if(self_inspect)
-					user.add_stress(/datum/stress_event/self_fishface)
+			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
+				if(user.has_quirk(/datum/quirk/vice/paranoid))
+					user.add_stress(/datum/stress_event/paraforeigner)
 				else
-					user.add_stress(/datum/stress_event/fellow_fishface)
-			else
-				if(user.age == AGE_CHILD)
-					user.add_stress(/datum/stress_event/fish_monster)
-				else
-					user.add_stress(/datum/stress_event/fishface)
+					user.add_stress(/datum/stress_event/foreigner)
 
-	if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
-		user.add_stress(/datum/stress_event/parastr)
+			if(HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
+				user.add_stress(/datum/stress_event/fishface)
+
+	if(HAS_TRAIT(src, TRAIT_FISHFACE))
+		if(!self_inspect && HAS_TRAIT(user, TRAIT_FISHFACE))
+			user.add_stress(/datum/stress_event/fellow_fishface)
+		else
+			user.add_stress(/datum/stress_event/self_fishface)
+	else if(!self_inspect && user.age == AGE_CHILD)
+		user.add_stress(/datum/stress_event/fish_monster)
 
 	if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
 		if(self_inspect)
@@ -46,13 +43,15 @@
 		else
 			user.add_stress(/datum/stress_event/ugly)
 
-	if(!self_inspect && HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
-		user.add_stress(/datum/stress_event/saw_old_party)
+	if(!self_inspect)
+		if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
+			user.add_stress(/datum/stress_event/parastr)
+
+		if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
+			user.add_stress(/datum/stress_event/saw_old_party)
 
 /mob/living/carbon/human/examine(mob/user)
-	var/self_inspect = FALSE
-	if(user == src)
-		self_inspect = TRUE
+	var/self_inspect = (user == src)
 
 	var/is_family_member = FALSE
 	if(ishuman(user))
@@ -62,23 +61,23 @@
 
 	var/temp_gender = null
 	var/obscure_name = FALSE
-	var/ignore_pronouns = FALSE
+	var/person_known = FALSE
 	if(!self_inspect && !isobserver(user))
 		if(name in list("Unknown", "Unknown Man", "Unknown Woman"))
 			obscure_name = TRUE
 			temp_gender = PLURAL
-			ignore_pronouns = TRUE // Required to use PLURAL override
-		else if(!is_family_member && !user.mind?.do_i_know(name = real_name)) // If you don't know someone use their bodytype
-			ignore_pronouns = TRUE
+		else if(is_family_member || user.mind?.do_i_know(name = real_name)) // If you don't know someone use their bodytype
+			person_known = TRUE
 
 	if(!obscure_name && src == SSticker.rulermob)
-		ignore_pronouns = FALSE // Monarch is known to everyone
+		person_known = TRUE // Monarch is known to everyone
 
 	var/race_name = dna?.species.name
 	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
 	if(!self_inspect && maniac)
 		race_name = "disgusting pig"
 
+	var/ignore_pronouns = (obscure_name || !person_known)
 	var/t_He = p_they(TRUE, temp_gender, ignore_pronouns)
 	var/t_his = p_their(FALSE, temp_gender, ignore_pronouns)
 	var/t_has = p_have(temp_gender, ignore_pronouns)
@@ -108,11 +107,12 @@
 		. += statement_of_identity
 	else
 		on_examine_face(user, self_inspect)
+
 		var/used_name = name
 		if(isobserver(user))
 			used_name = real_name
 
-		var/used_title = get_role_title(ignore_pronouns)
+		var/used_title = get_role_title(person_known)
 
 		// building the examine identity
 		statement_of_identity += "<EM>[used_name]</EM>"

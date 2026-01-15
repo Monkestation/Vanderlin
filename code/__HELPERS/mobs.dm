@@ -287,12 +287,12 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 
 /* :V */
 
-/proc/is_species(A, species_datum)
+/proc/is_species(mob/living/carbon/human/checked, species_datum)
 	. = FALSE
-	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
-		if(H.dna && istype(H.dna.species, species_datum))
-			. = TRUE
+	if(!istype(checked))
+		return
+	if(istype(checked.dna?.species, species_datum))
+		. = TRUE
 
 /proc/spawn_atom_to_turf(spawn_type, target, amount, admin_spawn=FALSE, list/extra_args)
 	var/turf/T = get_turf(target)
