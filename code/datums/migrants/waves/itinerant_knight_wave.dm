@@ -9,12 +9,12 @@
 	outfit = /datum/outfit/itinerant_knight
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 3,
 		STATKEY_PER = 2,
-		STATKEY_INT = 3,
-		STATKEY_CON = 4,
+		STATKEY_INT = 1,
+		STATKEY_CON = 2,
 		STATKEY_END = 3,
 		STATKEY_SPD = -2,
 	)
@@ -24,7 +24,7 @@
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/whipsflails = 4,
 		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 4,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/bows = 3,
@@ -53,7 +53,7 @@
 	spawned.name = "[honorary] [prev_name]"
 
 /datum/outfit/itinerant_knight
-	name = "Itinerant Knight"
+	name = "Itinerant Knight (Migrant Wave)"
 	head = /obj/item/clothing/head/helmet/visored/sallet
 	wrists = /obj/item/clothing/wrists/bracers
 	gloves = /obj/item/clothing/gloves/plate
@@ -83,7 +83,7 @@
 	outfit = /datum/outfit/itinerant_squire
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_PER = 1,
 		STATKEY_CON = 1,
@@ -112,7 +112,7 @@
 	voicepack_m = /datum/voicepack/male/squire
 
 /datum/outfit/itinerant_squire
-	name = "Itinerant Squire"
+	name = "Itinerant Squire (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/dress/gen/colored/black
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots

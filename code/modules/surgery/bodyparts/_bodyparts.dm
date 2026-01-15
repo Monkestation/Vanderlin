@@ -124,27 +124,37 @@
 	original_owner = null
 	return ..()
 
-/obj/item/bodypart/grabbedintents(mob/living/user, precise)
+/obj/item/bodypart/grabbedintents(mob/living/user, atom/grabbed, precise)
 	return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 
-/obj/item/bodypart/l_arm/grabbedintents(mob/living/user, precise)
+/obj/item/bodypart/l_arm/grabbedintents(mob/living/user, atom/grabbed, precise)
 	var/used_limb = precise
+	if(user == grabbed)
+		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 	if(used_limb == BODY_ZONE_PRECISE_L_HAND)
 		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/disarm)
 	else
 		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/armdrag)
 
-/obj/item/bodypart/r_arm/grabbedintents(mob/living/user, precise)
+/obj/item/bodypart/r_arm/grabbedintents(mob/living/user, atom/grabbed, precise)
 	var/used_limb = precise
+	if(user == grabbed)
+		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 	if(used_limb == BODY_ZONE_PRECISE_R_HAND)
 		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/disarm)
 	else
 		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/armdrag)
 
-/obj/item/bodypart/chest/grabbedintents(mob/living/user, precise)
+/obj/item/bodypart/chest/grabbedintents(mob/living/user, atom/grabbed, precise)
 	if(precise == BODY_ZONE_PRECISE_GROIN)
-		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/shove)
-	return list(/datum/intent/grab/move, /datum/intent/grab/shove)
+		if(user == grabbed)
+			return list(/datum/intent/grab/move, /datum/intent/grab/twist)
+		else
+			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/shove)
+	if(user == grabbed)
+		return list(/datum/intent/grab/move)
+	else
+		return list(/datum/intent/grab/move, /datum/intent/grab/shove)
 
 /obj/item/bodypart/onbite(mob/living/carbon/human/user)
 	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || istype(user.dna.species, /datum/species/werewolf))
@@ -154,7 +164,7 @@
 		if(do_after(user, 5 SECONDS, src))
 			user.visible_message("<span class='warning'>[user] consumes [src]!</span>",\
 							"<span class='notice'>I consume [src]!</span>")
-			playsound(get_turf(user), pick(dismemsound), 100, FALSE, -1)
+			playsound(user, pick(dismemsound), 100, FALSE, -1)
 			new /obj/effect/gibspawner/generic(get_turf(src), user)
 			user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
 			qdel(src)
@@ -228,7 +238,7 @@
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
 	if(length(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
-		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
+		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
 		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 5 SECONDS, src))
@@ -241,7 +251,7 @@
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
 	if(status != BODYPART_ROBOTIC)
-		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, -1)
+		playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	pixel_x = base_pixel_x + rand(-3, 3)
 	pixel_y = base_pixel_y + rand(-3, 3)
 	if(!skeletonized)

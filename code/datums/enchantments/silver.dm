@@ -14,8 +14,8 @@
 
 /datum/enchantment/silver/register_triggers(atom/item)
 	. = ..()
-	registered_signals += COMSIG_ITEM_AFTERATTACK
-	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+	registered_signals += COMSIG_ITEM_ATTACK
+	RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
 	registered_signals += COMSIG_ITEM_PICKUP
 	RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
@@ -36,7 +36,7 @@
 	return UNAFFECTED
 
 /datum/enchantment/silver/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
-	if(!proximity_flag)
+	if(!user.CanReach(target))
 		return
 	if(!ishuman(target))
 		return
@@ -112,7 +112,7 @@
 	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
 	if(wolf_datum)
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 	return TRUE
 
 /datum/status_effect/debuff/silver_bane/on_remove()
@@ -137,7 +137,7 @@
 	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
 	if(wolf_datum)
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 
 /datum/status_effect/debuff/silver_bane/proc/trigger_stun()
 	if(!owner || is_stunned)

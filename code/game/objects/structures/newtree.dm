@@ -57,7 +57,7 @@
 		var/mob/living/L = user
 		if(L.stat != CONSCIOUS)
 			return
-		var/turf/target = get_step_multiz(user, UP)
+		var/turf/target = GET_TURF_ABOVE(get_turf(user))
 		if(!istype(target, /turf/open/transparent/openspace))
 			to_chat(user, "<span class='warning'>I can't climb here.</span>")
 			return
@@ -120,7 +120,7 @@
 
 /obj/structure/flora/newtree/proc/FellTree(transformation = FALSE)
 	var/turf/NT = get_turf(src)
-	var/turf/UPNT = get_step_multiz(src, UP)
+	var/turf/UPNT = GET_TURF_ABOVE(NT)
 	src.obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP //so the logs actually fall when pulled by zfall
 
 	for(var/obj/structure/flora/newtree/D in UPNT) //theoretically you'd be able to break trees through a floor but no one is building floors under a tree so this is probably fine
@@ -175,7 +175,7 @@
 		playsound(src, 'sound/misc/treefall.ogg', 100, FALSE)
 
 /obj/structure/flora/newtree/proc/build_trees()
-	var/turf/target = get_step_multiz(src, UP)
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
 	if(istype(target, /turf/open/transparent/openspace))
 		var/obj/structure/flora/newtree/T = new(target)
 		T.icon_state = icon_state
@@ -232,7 +232,7 @@
 	num_underlay_icons = 1
 
 /obj/structure/flora/newtree/snow/build_trees()
-	var/turf/target = get_step_multiz(src, UP)
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
 	if(istype(target, /turf/open/transparent/openspace))
 		var/obj/structure/flora/newtree/snow/T = new(target)
 		T.icon_state = icon_state
@@ -278,7 +278,7 @@
 	num_underlay_icons = 1
 
 /obj/structure/flora/newtree/palm/build_trees()
-	var/turf/target = get_step_multiz(src, UP)
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
 	if(istype(target, /turf/open/transparent/openspace))
 		var/obj/structure/flora/newtree/palm/T = new(target)
 		T.icon_state = icon_state
@@ -330,7 +330,7 @@
 	underlay_base = null
 
 /obj/structure/flora/newtree/scorched/build_trees()
-	var/turf/target = get_step_multiz(src, UP)
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
 	if(istype(target, /turf/open/transparent/openspace))
 		new /obj/structure/flora/newtree/scorched(target)
 

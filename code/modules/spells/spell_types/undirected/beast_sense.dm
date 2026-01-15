@@ -39,5 +39,5 @@
 /datum/action/cooldown/spell/undirected/beast_sense/proc/grant_status()
 	var/mob/living/carbon/C = owner
 	to_chat(C, span_greentext("A raven passes overhead... your prayer was heard!"))
-	playsound(get_turf(C), 'sound/vo/mobs/bird/CROW_01.ogg', 60, TRUE, -1)
+	playsound(C, 'sound/vo/mobs/bird/CROW_01.ogg', 60, TRUE, -1)
 	C.apply_status_effect(/datum/status_effect/buff/beastsense)

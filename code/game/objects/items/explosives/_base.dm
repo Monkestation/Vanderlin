@@ -124,7 +124,7 @@
  */
 /obj/item/explosive/proc/arm_grenade(mob/user, delayoverride, msg = TRUE, volume = 60)
 	log_grenade(user) //Inbuilt admin procs already handle null users
-	playsound(src.loc, 'sound/items/fuse.ogg', 100)
+	playsound(src, 'sound/items/fuse.ogg', 100)
 	if(user)
 		add_fingerprint(user)
 		if(msg)

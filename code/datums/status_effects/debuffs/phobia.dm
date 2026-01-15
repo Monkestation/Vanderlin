@@ -67,7 +67,7 @@
 		if(4)
 			to_chat(owner, span_warning("You feel faint with fright!"))
 			owner.Dizzy(2 * stacks)
-			owner.blur_eyes(1.5 * stacks)
+			owner.set_eye_blur_if_lower(3 * stacks SECONDS)
 
 /datum/status_effect/stacking/phobia_reaction/fadeout_effect()
 	to_chat(owner, span_notice("You calm down."))

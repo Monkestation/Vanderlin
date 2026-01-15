@@ -33,12 +33,14 @@
 	desc = "A barbute styled with Psydonian Imagery."
 	icon_state = "psydonbarbute"
 	item_state = "psydonbarbute"
+	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/helmet/heavy/psydonhelm
 	name ="grenzelhoftian armet"
 	desc = "Headwear commonly worn by Templars in service to the Oratorium Throni Vacui. PSYDON Endures."
 	icon_state = "psydonarmet"
 	item_state = "psydonarmet"
+	block2add = FOV_BEHIND
 
 //................ Iron Plate Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/ironplate
@@ -94,6 +96,13 @@
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
 	max_integrity = INTEGRITY_STRONGEST // steel
 	body_parts_covered = HEAD_NECK
+	block2add = FOV_BEHIND
+
+/obj/item/clothing/head/helmet/heavy/ancient
+	name = "ancient savoyard"
+	desc = "A terrifying old savoyard."
+	icon_state = "ancientsavoyard"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_BEHIND
 
 //............... Frog Helmet ............... //
@@ -159,13 +168,14 @@
 
 //............... Graggar Helmet ............... //
 
-/obj/item/clothing/head/helmet/graggar
+/obj/item/clothing/head/helmet/heavy/graggar
 	name = "vicious helmet"
 	desc = "A rugged and horrifying helmet. A violent aura emanates from it."
 	icon_state = "graggarplatehelm"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	armor = ARMOR_PLATE
+	flags_cover = HEADCOVERSEYES
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 5 * STEEL_MULTIPLIER
 	block2add = FOV_BEHIND
@@ -483,6 +493,7 @@
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 350
 	var/plumed = FALSE
 
@@ -532,6 +543,7 @@
 	item_state = "psybucket"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 400
 
 /obj/item/clothing/head/helmet/heavy/psysallet
@@ -541,4 +553,5 @@
 	item_state = "psysallet"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 400

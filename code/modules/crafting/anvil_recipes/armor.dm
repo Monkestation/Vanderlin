@@ -663,6 +663,13 @@
 	craftdiff = 1
 	createditem_extra = 1
 
+
+/datum/anvil_recipe/armor/steel/gallowglass
+	name = "Gallowglass Helmet"
+	recipe_name = "Gallowglass Helm"
+	created_item = /obj/item/clothing/head/helmet/gallowglass
+	craftdiff = 1
+
 /datum/anvil_recipe/armor/steel/coppergate
 	name = "Coppergate helmet"
 	recipe_name = "coppergate helmet"
@@ -1196,7 +1203,7 @@
 /datum/anvil_recipe/armor/blacksteel/graggar_helm
 	name = "Vicious Helmet (+Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/graggar
+	created_item = /obj/item/clothing/head/helmet/heavy/graggar
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/elven_helm

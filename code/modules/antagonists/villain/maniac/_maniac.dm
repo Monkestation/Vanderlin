@@ -67,12 +67,6 @@
 	var/list/wonders_made = list()
 	/// Hallucinations screen object
 	var/atom/movable/screen/fullscreen/maniac/hallucinations
-	/// Whether the combat music is enabled
-	var/music_enabled = FALSE
-	var/custom_music_track = null
-	var/last_music_change = 0
-	var/datum/looping_sound/maniac_theme_song/combat_music_loop
-	var/curthemefile = 'sound/music/cmode/antag/combat_maniac.ogg'
 	var/old_cm = null //Cheffie's Req, Cache the old combat music and given back upon removal.
 
 GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!

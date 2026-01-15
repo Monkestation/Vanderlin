@@ -82,8 +82,7 @@
 		ADD_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, "quietus")
 	if(!HAS_TRAIT(target, TRAIT_DEAF))
 		ADD_TRAIT(target, TRAIT_DEAF, "quietus")
-		if(target.confused < 25)
-			target.confused += 25
+		target.adjust_confusion_up_to(2.5 SECONDS, 5 SECONDS)
 
 /datum/coven_power/quietus/silence_of_death/proc/remove_silence(mob/living/carbon/human/target)
 	if(HAS_TRAIT_FROM(target, TRAIT_DEAF, "quietus"))
@@ -214,14 +213,6 @@
 /datum/coven_power/quietus/taste_of_death/post_gain()
 	. = ..()
 	owner.add_spell(/datum/action/cooldown/spell/projectile/acid_splash/quietus, TRUE)
-
-/datum/action/cooldown/spell/projectile/acid_splash/quietus
-	projectile_type = /obj/projectile/magic/acidsplash/quietus
-
-/obj/projectile/magic/acidsplash/quietus
-	damage = 80
-	flag = "magic"
-	speed = 2
 
 //DAGON'S CALL
 /datum/coven_power/quietus/dagons_call

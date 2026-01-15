@@ -13,10 +13,10 @@
 		STATKEY_SPD = -1
 	)
 	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
@@ -57,9 +57,8 @@
 	var/obj/item/clothing/gloves/gloves_to_wear = /obj/item/clothing/gloves/bandages/weighted
 	switch(weapon_choice)
 		if("Discipline - Unarmed")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 5, 5)
-			spawned.clamped_adjust_skillrank(/datum/skill/misc/athletics, 5, 5)
 			gloves_to_wear = /obj/item/clothing/gloves/bandages/pugilist
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
 		if("Katar")
@@ -68,12 +67,12 @@
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 		if("Quarterstaff")
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 3, 3)
-			spawned.adjust_stat_modifier("job_stats", STATKEY_PER, 1)
-			spawned.adjust_stat_modifier("job_stats", STATKEY_INT, 1)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
 	spawned.equip_to_slot_or_del(new gloves_to_wear, ITEM_SLOT_GLOVES, TRUE)
 
 /datum/outfit/disciple
-	name = "Disciple"
+	name = "Disciple (Sacrestants)"
 	shoes = /obj/item/clothing/shoes/psydonboots
 	armor = /obj/item/clothing/armor/regenerating/skin/disciple
 	backl = /obj/item/storage/backpack/satchel/otavan

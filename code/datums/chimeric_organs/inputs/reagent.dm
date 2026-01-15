@@ -43,5 +43,14 @@
 
 /datum/chimeric_node/input/reagent/blood
 	name = "sanguine"
+	desc = "Triggered when you consume a blood, also increases blood transfusion."
 	trigger_reagents = list(/datum/reagent/blood)
 	minimum_amount = 5
+
+/datum/chimeric_node/input/reagent/blood/register_triggers(mob/living/carbon/target)
+	. = ..()
+	ADD_TRAIT(target, TRAIT_SANGUINE, "[REF(src)]")
+
+/datum/chimeric_node/input/reagent/blood/unregister_triggers()
+	. = ..()
+	REMOVE_TRAIT(hosted_carbon, TRAIT_SANGUINE, "[REF(src)]")

@@ -17,6 +17,9 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/hearallasghost,
 	/client/proc/toggle_aghost_invis,
 	/client/proc/admin_ghost,
+	/client/proc/generate_bulk_codes,
+	/client/proc/generate_custom_code,
+	/client/proc/generate_codes,
 	/client/proc/ghost_up,
 	/datum/admins/proc/start_vote,
 	/datum/admins/proc/show_player_panel,
@@ -104,6 +107,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
 	/client/proc/jumptoturf,			/*allows us to jump to a specific turf*/
 	/client/proc/spawn_in_test_area,
+	/client/proc/jump_to_test_area,
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/cmd_admin_local_narrate,	/*sends text to all mobs within view of atom*/
@@ -840,6 +844,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	var/dat = "<table style='border-collapse: separate; border-spacing: 0 10px; width: 100%;'>"
 	dat += "<tr>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Title</th>"
+	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Player Author</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Author</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Category</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Actions</th>"
@@ -853,11 +858,12 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 		dat += "<tr>"
 		dat += "<td style='padding: 12px 15px;'>[book["book_title"]]</td>"
+		dat += "<td style='padding: 12px 15px;'>[book["author_ckey"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["author"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["category"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>"
 		dat += "<a href='?src=[REF(src)];show_book=1;id=[url_encode(encoded_title)]' style='margin-right: 10px;'>View</a>"
-		dat += "<a href='?src=[REF(src)];delete_book=1;id=[url_encode(encoded_title)]'>Delete</a>"
+		dat += "<a href='?src=[REF(src)];delete_book=1;author_ckey=[book["author_ckey"]];id=[url_encode(encoded_title)]'>Delete</a>"
 		dat += "</td>"
 		dat += "</tr>"
 

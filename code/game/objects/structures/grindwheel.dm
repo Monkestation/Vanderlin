@@ -10,7 +10,7 @@
 
 /obj/structure/grindwheel/attackby(obj/item/I, mob/living/user, params)
 	if(I.max_blade_int)
-		playsound(loc,'sound/foley/grindblade.ogg', 100, FALSE)
+		playsound(src,'sound/foley/grindblade.ogg', 100, FALSE)
 		if(do_after(user, 4.1 SECONDS, src)) //oddly specific time
 			if(has_world_trait(/datum/world_trait/delver))
 				handle_profession_sharpen(I, user)

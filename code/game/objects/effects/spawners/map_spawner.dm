@@ -55,7 +55,7 @@
 
 /obj/effect/spawner/map_spawner/pit/do_spawn()
 	var/turf/T = get_turf(src)
-	var/turf/below = get_step_multiz(src, DOWN)
+	var/turf/below = GET_TURF_BELOW(T)
 	if(below)
 		T.ChangeTurf(/turf/open/transparent/openspace)
 		below.ChangeTurf(/turf/open/floor/dirt/road)

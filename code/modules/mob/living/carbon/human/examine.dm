@@ -8,10 +8,10 @@
 			user.add_stress(/datum/stress_event/tieb)
 		if(!ishalforc(user) && ishalforc(src))
 			user.add_stress(/datum/stress_event/horc)
-		if(user.has_flaw(/datum/charflaw/paranoid) && (STASTR - user.STASTR) > 1)
+		if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
 			user.add_stress(/datum/stress_event/parastr)
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-			if(user.has_flaw(/datum/charflaw/paranoid))
+			if(user.has_quirk(/datum/quirk/vice/paranoid))
 				user.add_stress(/datum/stress_event/paraforeigner)
 			else
 				user.add_stress(/datum/stress_event/foreigner)
@@ -157,10 +157,10 @@
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
 			. += span_phobia("A foreigner...")
 
-		if(has_flaw(/datum/charflaw/addiction/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		if(has_quirk(/datum/quirk/vice/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 			. += span_userdanger("ALCOHOLIC!")
 
-		if(has_flaw(/datum/charflaw/addiction/junkie) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		if(has_quirk(/datum/quirk/vice/junkie) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 			. += span_userdanger("JUNKIE!")
 
 		if(HAS_TRAIT(src, TRAIT_FISHFACE) && HAS_TRAIT(user, TRAIT_FISHFACE))
@@ -204,7 +204,10 @@
 
 		var/list/known_frumentarii = user.mind?.cached_frumentarii
 		if(name in known_frumentarii)
-			. += span_greentext("<b>[m1] an agent of the court!</b>")
+			if(known_frumentarii[name])
+				. += span_greentext("<b>[m1] an agent of the court!</b>")
+			else
+				. += span_redtext("[m1] an ex-agent of the court.")
 
 		if(user != src)
 			if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
@@ -249,6 +252,9 @@
 
 	if(HAS_TRAIT(src, TRAIT_FACELESS))
 		. += span_userdanger("FACELESS?! AN ASSASSIN!")
+
+	if(HAS_TRAIT(src, TRAIT_ABOMINATION))
+		. += span_userdanger("WHAT IS THAT ABOMINATION!")
 
 	if(user != src)
 		var/datum/mind/user_mind = user.mind
@@ -487,9 +493,11 @@
 	//Fire/water stacks
 	if(on_fire)
 		var/fire_text = "[m1] on fire!"
-		if(user.has_flaw(/datum/charflaw/addiction/pyromaniac))
-			fire_text += span_boldred(" IT'S BEAUTIFUL!")
-			user.sate_addiction()
+		if(isliving(user))
+			var/mob/living/liver = user
+			if(liver.has_quirk(/datum/quirk/vice/pyromaniac))
+				fire_text += span_boldred(" IT'S BEAUTIFUL!")
+				liver.sate_addiction(/datum/quirk/vice/pyromaniac)
 		msg += fire_text
 	else if(fire_stacks + divine_fire_stacks > 0)
 		msg += "[m1] covered in something flammable."
@@ -645,7 +653,7 @@
 				. += span_notice("Inscryption[N ? " by [N]'s " : ""][W ? "Wonder #[W]" : ""]: [K ? K : ""]")
 
 	if(!obscure_name) // Miniature headshot on examine
-		if(headshot_link && client?.patreon?.has_access(ACCESS_ASSISTANT_RANK))
+		if(headshot_link && client?.is_donator())
 			. += "<img src=[headshot_link] width=100 height=100/>"
 
 	if(Adjacent(user))
@@ -675,10 +683,12 @@
 
 	// Characters with the hunted flaw will freak out if they can't see someone's face.
 	if(!appears_dead)
-		if(skipface && user.has_flaw(/datum/charflaw/hunted) && user != src)
-			user.add_stress(/datum/stress_event/hunted)
+		if(isliving(user))
+			var/mob/living/liver = user
+			if(skipface && liver.has_quirk(/datum/quirk/vice/hunted) && user != src)
+				user.add_stress(/datum/stress_event/hunted)
 
-	if(!obscure_name && (flavortext || ((headshot_link || ooc_extra_link) && client?.patreon?.has_access(ACCESS_ASSISTANT_RANK)))) // only show flavor text if there is a flavor text and we show headshot
+	if(!obscure_name && (flavortext || ((headshot_link || ooc_extra_link) && client?.is_donator()))) // only show flavor text if there is a flavor text and we show headshot
 		. += "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>"
 
 	var/trait_exam = common_trait_examine()
@@ -686,7 +696,7 @@
 		. += trait_exam
 
 	// The Assassin's profane dagger can sniff out their targets, even masked.
-	if(HAS_TRAIT(user, TRAIT_ASSASSIN) && ((has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))))
+	if(HAS_TRAIT(user, TRAIT_ASSASSIN) && ((has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))))
 		//TODO: move this to an examinate signal call
 		if ((src != user) && iscarbon(user))
 			var/mob/living/carbon/assassin = user

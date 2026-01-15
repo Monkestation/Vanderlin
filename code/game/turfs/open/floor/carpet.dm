@@ -1,6 +1,6 @@
 /turf/open/floor/carpet
 	name = "carpet"
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/carpet.dmi'
 	icon_state = "carpet"
 	flags_1 = NONE
 	landsound = 'sound/foley/jumpland/carpetland.ogg'

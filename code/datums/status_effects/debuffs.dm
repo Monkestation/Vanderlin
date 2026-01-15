@@ -483,4 +483,3 @@
 		to_chat(owner, fake_msg)
 
 	msg_stage++
-

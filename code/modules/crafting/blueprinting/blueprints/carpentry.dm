@@ -175,8 +175,7 @@
 	craftdiff = 1
 
 /datum/blueprint_recipe/carpentry/wooden_stairs_down/check_craft_requirements(mob/user, turf/T, obj/structure/blueprint/blueprint)
-	var/turf/partner = get_step_multiz(get_turf(blueprint), DOWN)
-	partner = get_step(partner, turn(blueprint.blueprint_dir, 180))
+	var/turf/partner = get_step_multiz(get_turf(blueprint), turn(blueprint.blueprint_dir, 180)|DOWN)
 	if(!isopenturf(partner))
 		to_chat(user, span_warning("Need an openspace at the turf below!"))
 		return FALSE
@@ -467,16 +466,6 @@
 		/obj/item/rope = 1
 	)
 	craftdiff = 1
-
-/datum/blueprint_recipe/carpentry/noose
-	name = "noose"
-	desc = "hangs from the ceiling."
-	result_type = /obj/structure/noose
-	required_materials = list(
-		/obj/item/rope = 1
-	)
-	build_time = 4 SECONDS
-	requires_ceiling = TRUE
 
 /datum/blueprint_recipe/carpentry/apiary
 	name = "Apiary"

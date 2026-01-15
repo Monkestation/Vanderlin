@@ -241,7 +241,7 @@
 /obj/structure/table/wood/treestump/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/weapon/shovel))
 		to_chat(user, "I start unearthing the stump...")
-		playsound(loc,'sound/items/dig_shovel.ogg', 100, TRUE)
+		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 		if(do_after(user, 5 SECONDS))
 			user.visible_message("<span class='notice'>[user] unearths \the [src].</span>", \
 								"<span class='notice'>I unearth \the [src].</span>")
@@ -355,7 +355,7 @@
 		if(L.m_intent == MOVE_INTENT_SNEAK)
 			return
 		else
-			playsound(A.loc, "plantcross", 90, FALSE, -1)
+			playsound(A, "plantcross", 90, FALSE, -1)
 			var/oldx = A.pixel_x
 			animate(A, pixel_x = oldx+1, time = 0.5)
 			animate(pixel_x = oldx-1, time = 0.5)
@@ -400,7 +400,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src.loc, "plantcross", 80, FALSE, -1)
+		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
 			if(prob(50) && looty.len)
 				if(looty.len == 1)
@@ -523,7 +523,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src.loc, "plantcross", 80, FALSE, -1)
+		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
 			if(prob(50) && looty2.len)
 				if(looty2.len == 1)
@@ -566,7 +566,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src.loc, "plantcross", 80, FALSE, -1)
+		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
 			if(prob(50) && looty3.len)
 				if(looty3.len == 1)
@@ -690,7 +690,7 @@
 /obj/structure/flora/grass/thorn_bush/attack_hand(mob/living/user)
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
 	user.visible_message(span_noticesmall("[user] searches through [src]."))
 
@@ -829,7 +829,7 @@
 /obj/structure/flora/grass/bush_meagre/attack_hand(mob/living/user)
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
 	prob2findgoodie = prob2findgoodie + ( user.STALUC * 2 ) + ( user.STAPER * 2 )
 	luckydouble = ( user.STALUC * 2 )

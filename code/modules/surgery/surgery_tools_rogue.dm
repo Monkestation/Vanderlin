@@ -53,10 +53,11 @@
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	force = 16
-	throwforce = 16
-	wdefense = 3
-	wbalance = 1
+	force = 14
+	throwforce = 7
+	armor_penetration = 0
+	wdefense = BAD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_CHOP
 	tool_behaviour = TOOL_SAW

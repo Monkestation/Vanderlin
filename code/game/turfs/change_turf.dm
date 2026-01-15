@@ -119,7 +119,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(SSlighting.initialized)
 		if(SSoutdoor_effects.initialized)
 			outdoor_effect = old_outdoor_effect
-			get_sky_and_weather_states()
+			update_sky_and_weather_states()
 
 		recalc_atom_opacity()
 		lighting_object = old_lighting_object
@@ -133,6 +133,11 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 				lighting_build_overlay()
 			else
 				lighting_clear_overlay()
+
+	// only queue for smoothing if SSatom initialized us, and we'd be changing smoothing state
+	if(flags_1 & INITIALIZED_1)
+		QUEUE_SMOOTH_NEIGHBORS(src)
+		QUEUE_SMOOTH(src)
 
 	return W
 
@@ -163,7 +168,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 			new_baseturfs = new_baseturfs[1]
 
 		if(turf_type == /turf/open/transparent/openspace)
-			var/turf/below = get_step_multiz(src, DOWN)
+			var/turf/below = GET_TURF_BELOW(src)
 			if(!below) //We are at the LOWEST z-level.
 				turf_type = /turf/open/floor/naturalstone
 			else
@@ -181,7 +186,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 //		else
 //			if(istype(turf_type, /turf/open) && istype(src, /turf/closed))
 //				var/turf/closed/CL = src
-//				var/turf/above = get_step_multiz(src, UP)
+//				var/turf/above = GET_TURF_ABOVE(src)
 //				if(above)
 //					if(istype(above, CL.above_floor))
 //						above.ChangeTurf(/turf/open/transparent/openspace, list(/turf/open/transparent/openspace), flags)
@@ -190,7 +195,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	var/used_type = baseturfs
 
 	if(baseturfs == /turf/open/transparent/openspace)
-		var/turf/below = get_step_multiz(src, DOWN)
+		var/turf/below = GET_TURF_BELOW(src)
 		if(!below) //We are at the LOWEST z-level.
 			used_type = /turf/open/floor/naturalstone
 		else
@@ -322,8 +327,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		ImmediateCalculateAdjacentTurfs()
 	else
 		CALCULATE_ADJACENT_TURFS(src)
-
-	QUEUE_SMOOTH_NEIGHBORS(src)
 
 	HandleTurfChange(src)
 

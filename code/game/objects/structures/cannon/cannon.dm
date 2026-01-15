@@ -55,19 +55,19 @@
 	if(!isopenturf(turf_to_shoot_from))
 		turf_to_shoot_from = get_turf(src)
 
-	playsound(get_turf(src), 'sound/foley/tinnitus.ogg', 60, FALSE, -6)
-	playsound(get_turf(src), 'sound/combat/Ranged/muskshoot.ogg', 60, FALSE, SOUND_EXTRA_RANGE_CANNON)
+	playsound(src, 'sound/foley/tinnitus.ogg', 60, FALSE, -6)
+	playsound(src, 'sound/combat/Ranged/muskshoot.ogg', 60, FALSE, SOUND_EXTRA_RANGE_CANNON)
 	new /obj/effect/particle_effect/smoke/chem/transparent(get_turf(src))
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage) // don't @ me
 
 	for(var/mob/living/seer in view(7, src))
 		shake_camera(seer, max(1, round(blastpowder_amount / 20), max(1, round(blastpowder_amount / 10))))
-		seer.apply_effect(max(5, round(blastpowder_amount / 3)), EFFECT_EYE_BLUR)
+		seer.adjust_eye_blur_up_to((blastpowder_amount / 1.5) SECONDS, 10 SECONDS)
 	for(var/mob/living/seer in view(1, src))
 		seer.apply_effect(15, EFFECT_KNOCKDOWN)
 		var/target_turf = get_turf(seer)
 		if(get_turf(seer) == get_turf(src))
-			for(var/i in 1 to pick(3, 7))
+			for(var/i in 1 to rand(3, 7))
 				target_turf = get_step(target_turf, pick(ALL_CARDINALS))
 		else
 			for(var/i in 1 to pick(1, 2))
@@ -255,7 +255,7 @@
 	lit = TRUE
 	cannon?.balloon_alert_to_viewers("Lit!")
 	addtimer(CALLBACK(src, PROC_REF(reached_end)), 5 SECONDS)
-	playsound(cannon.loc, 'sound/items/fuse.ogg', 100)
+	playsound(cannon, 'sound/items/fuse.ogg', 100)
 	SEND_SIGNAL(src, COMSIG_FUSE_LIT)
 
 /obj/item/fuse/proc/extinguished()

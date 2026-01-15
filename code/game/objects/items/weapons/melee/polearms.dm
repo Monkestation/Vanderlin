@@ -310,6 +310,14 @@
 	melt_amount = 75
 	max_integrity = INTEGRITY_STANDARD
 
+/obj/item/weapon/polearm/spear/billhook/ji/bronze
+	name = "bronze dagger-ax"
+	icon_state = "ji_bronze"
+	melting_material = /datum/material/bronze
+	melt_amount = 75
+	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 95
+
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
 	force = DAMAGE_SPEAR
@@ -369,6 +377,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel
 	melt_amount = 150
 	dropshrink = 0.8
 	wdefense = ULTMATE_PARRY
@@ -477,7 +486,7 @@
 	swingsound = BLADEWOOSH_MED
 	max_blade_int = 250
 	max_integrity = INTEGRITY_STRONG
-	minstr = 11
+	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
 	axe_cut = 10
 	sellprice = 100
 
@@ -522,6 +531,13 @@
 	wdefense = AVERAGE_PARRY
 	axe_cut = 10
 	sellprice = 30
+
+/obj/item/weapon/polearm/halberd/bardiche/ancient
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	name = "bardiche"
+	desc = "A grand axe of northern design, renowned for easily chopping off limbs clean with brutal strength."
+	icon_state = "ancient_bardiche"
 
 /obj/item/weapon/polearm/halberd/bardiche/dendor
 	name = "summer scythe"

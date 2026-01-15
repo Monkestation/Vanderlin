@@ -118,6 +118,15 @@
 /area/outdoors/rtfield/safe
 	ambush_mobs = null
 
+/area/rogue/outdoors/farm
+	name = "soilery"
+	icon_state = "rtfield"
+	soundenv = 19
+	background_track = 'sound/music/area/field.ogg'
+	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_night = 'sound/music/area/sleeping.ogg'
+	converted_type = /area/indoors/shelter/rtfield
+
 /area/indoors/shelter/rtfield
 	icon_state = "rtfield"
 	background_track = 'sound/music/area/field.ogg'
@@ -437,6 +446,10 @@
 	name = "Keep Kitchen"
 	icon_state = "kitchen"
 
+/area/indoors/town/manor/kitchen/cellar
+	name = "Keep Kitchen Cellar"
+	icon_state = "kitchen"
+
 /area/indoors/town/manor/servant
 	name = "Servants' Quarters"
 	icon_state = "servant"
@@ -518,6 +531,12 @@
 	background_track_dusk = null
 	background_track_night = null
 
+/area/outdoors/exposed/cell
+	icon_state = "cell"
+	background_track = 'sound/music/area/manorgarri.ogg'
+	background_track_dusk = null
+	background_track_night = null
+
 /area/indoors/town/magician
 	name = "Wizard's Tower"
 	icon_state = "magician"
@@ -595,12 +614,7 @@
 	background_track = 'sound/music/area/manorgarri.ogg'
 	background_track_dusk = null
 	background_track_night = null
-	converted_type = /area/outdoors/exposed/manorgarri
-
-//Should only be used for dungeon farms with a view to the sky above
-/area/indoors/town/cell/exposed
-	name = "exposed dungeon cell"
-	outdoors = TRUE
+	converted_type = /area/outdoors/exposed/cell
 
 /area/indoors/town/tavern
 	name = "tavern"
@@ -669,7 +683,7 @@
 /area/indoors/town/clocktower
 	first_time_text = "Clocktower"
 	icon_state = "clocktower"
-	background_track = "sound/music/area/clocktower_ambience.ogg"
+	background_track = 'sound/music/area/clocktower_ambience.ogg'
 
 /area/indoors/town/orphanage
 	first_time_text = "The Orphanage"

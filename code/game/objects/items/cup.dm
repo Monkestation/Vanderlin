@@ -69,7 +69,7 @@
 	name = "teacup"
 	desc = "A fancy tea cup made out of ceramic. Used to serve tea."
 	icon_state = "teacup"
-	volume = 30
+	volume = 25
 	dropshrink = 0.7
 	fill_icon_state = "teacup"
 	sellprice = 10
@@ -253,7 +253,7 @@
 	sellprice = VALUE_COMMON_GOODS * 2
 	dropshrink = 1
 	max_integrity = 5
-	volume = 24
+	volume = 25
 	fill_icon_thresholds = list(0, 10, 50, 100)
 	grid_width = 32
 	grid_height = 64
@@ -282,7 +282,7 @@
 	desc = "A fancy shot glass; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon_state = "clear_shotglass1"
 	sellprice = VALUE_COMMON_GOODS * 1.5
-	volume = 9
+	volume = 5 //You drink 5 units at a time, now its an ACTUAL shot.
 	grid_height = 32
 
 /obj/item/reagent_containers/glass/cup/glassware/wineglass

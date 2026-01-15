@@ -677,6 +677,7 @@
 
 	if(!controlled_ship)
 		return
+	SEND_SIGNAL(usr, COMSIG_SHIP_SAILED)
 
 	if(href_list["set_direction"])
 		if(controlled_ship.docked_island)

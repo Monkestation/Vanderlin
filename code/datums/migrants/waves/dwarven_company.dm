@@ -10,7 +10,7 @@
 	title = "Dwarven Captain"
 	tutorial = "You are the captain of a dwarven's expedition, following the tracks of Matthios's influence you shall lead your party in Malum's name."
 	outfit = /datum/outfit/dwarven_company/captain
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 3,
 		STATKEY_PER = 2,
@@ -25,10 +25,10 @@
 		/datum/skill/combat/axesmaces = 4,
 		/datum/skill/combat/swords = 2,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/blacksmithing = 2,
@@ -47,7 +47,7 @@
 	)
 
 /datum/outfit/dwarven_company/captain
-	name = "Dwarven Captain"
+	name = "Dwarven Captain (Migrant Wave)"
 	armor = /obj/item/clothing/armor/cuirass
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	shirt = /obj/item/clothing/armor/chainmail
@@ -101,11 +101,11 @@
 /datum/job/migrant/dwarven_company/weaponsmith/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1, 2))
-		spawned.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1, 2))
+		spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1, 2), TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1, 2), TRUE)
 
 /datum/outfit/dwarven_company/weaponsmith
-	name = "Dwarven Weaponsmith"
+	name = "Dwarven Weaponsmith (Migrant Wave)"
 	ring = /obj/item/clothing/ring/silver/makers_guild
 	head = /obj/item/clothing/head/hatfur
 	cloak = /obj/item/clothing/cloak/apron/brown

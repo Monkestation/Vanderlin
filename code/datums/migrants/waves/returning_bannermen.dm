@@ -10,7 +10,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_foreigner = FALSE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_INT = 2,
@@ -18,16 +18,16 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/axesmaces = 4,
+		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/whipsflails = 3,
 		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/shields = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/athletics = 3,
@@ -57,7 +57,7 @@
 	spawned.verbs |= /mob/proc/haltyell
 
 /datum/outfit/serjeant_at_arms
-	name = "Serjeant-at-Arms"
+	name = "Serjeant-at-Arms (Migrant Wave)"
 	head = /obj/item/clothing/head/helmet/sargebarbute
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/half/vet
@@ -86,7 +86,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_foreigner = FALSE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_INT = 1,
 		STATKEY_PER = 2,
@@ -96,7 +96,7 @@
 
 	skills = list(
 		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/bows = 4,
+		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
@@ -118,7 +118,7 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
 /datum/outfit/archer_bannerman
-	name = "Bannermen Archer"
+	name = "Bannermen Archer (Migrant Wave)"
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/leather/hide
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
@@ -151,7 +151,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_foreigner = FALSE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_INT = 1,
 		STATKEY_PER = 2,
@@ -162,7 +162,7 @@
 	skills = list(
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 4,
+		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 3,
@@ -183,7 +183,7 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
 /datum/outfit/crossbow_bannerman
-	name = "Bannermen Crossbowman"
+	name = "Bannermen Crossbowman (Migrant Wave)"
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/leather/hide
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
@@ -216,7 +216,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_foreigner = FALSE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_END = 2,
@@ -228,7 +228,7 @@
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
@@ -247,7 +247,7 @@
 	spawned.verbs |= /mob/proc/haltyell
 
 /datum/outfit/footman_bannerman
-	name = "Bannermen Footman"
+	name = "Bannermen Footman (Migrant Wave)"
 	armor = /obj/item/clothing/armor/cuirass/iron
 	shirt = /obj/item/clothing/armor/chainmail/iron
 	neck = /obj/item/clothing/neck/gorget
@@ -272,7 +272,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_foreigner = FALSE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_END = 1,
@@ -284,7 +284,7 @@
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
@@ -302,7 +302,7 @@
 	spawned.verbs |= /mob/proc/haltyell
 
 /datum/outfit/pikeman_bannerman
-	name = "Bannermen Pikeman"
+	name = "Bannermen Pikeman (Migrant Wave)"
 	armor = /obj/item/clothing/armor/chainmail/hauberk/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	neck = /obj/item/clothing/neck/gorget

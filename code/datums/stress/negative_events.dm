@@ -90,7 +90,7 @@
 	desc = list("<span class='red'>I think I'm bleeding.</span>","<span class='red'>I'm bleeding.</span>")
 
 /datum/stress_event/bleeding/can_apply(mob/living/user)
-	if(user.has_flaw(/datum/charflaw/masochist))
+	if(user.has_quirk(/datum/quirk/vice/masochist))
 		return FALSE
 	return TRUE
 
@@ -100,7 +100,7 @@
 	desc = "<span class='red'>THE PAIN!</span>"
 
 /datum/stress_event/painmax/can_apply(mob/living/user)
-	if(user.has_flaw(/datum/charflaw/masochist))
+	if(user.has_quirk(/datum/quirk/vice/masochist))
 		return FALSE
 	return TRUE
 

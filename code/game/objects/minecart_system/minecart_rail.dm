@@ -43,6 +43,7 @@
 	set_minecart_dirs()
 
 /obj/structure/minecart_rail/proc/set_minecart_dirs(initial)
+	var/turf/our_turf = get_turf(src)
 	switch(dir)
 		if(NORTH, SOUTH)
 			minecart_dirs = NORTH | SOUTH
@@ -63,10 +64,10 @@
 	for(var/direction in GLOB.cardinals)
 		if(!(direction & minecart_dirs))
 			continue
-		var/turf/step_up = GET_TURF_ABOVE(get_step(src, direction))
-		var/turf/above_turf = GET_TURF_ABOVE(get_turf(src))
-		var/turf/step_down = GET_TURF_BELOW(get_step(src, direction))
+		var/turf/above_turf = GET_TURF_ABOVE(our_turf)
+		var/turf/step_up = get_step(above_turf, direction)
 		var/turf/step_side = get_step(src, direction)
+		var/turf/step_down = GET_TURF_BELOW(step_side)
 		var/found = FALSE
 
 		if(step_up && istype(above_turf, /turf/open/transparent/openspace))
