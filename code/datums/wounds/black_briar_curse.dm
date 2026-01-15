@@ -62,7 +62,7 @@
 		if(!(src in GLOB.primordial_wounds)) //idk why someone would be using these this way but i'd prefer not to build up its infection
 			var/datum/wound/black_briar_curse/O = other
 			O.infection = min(O.infection + O.max_infection * 0.05, O.max_infection)
-			remove_immunity(owner)
+			remove_immunity(O.owner)
 		return FALSE
 	return TRUE
 
@@ -84,7 +84,6 @@
 			qdel(src)
 			return
 		remove_immunity(affected) // if we're just a new wound, delete that shit
-
 	can_rebuild = TRUE
 	rebuild_root_network(affected)
 
@@ -219,6 +218,7 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
 	if(infection_percent >= BBC_STAGE_LATE ^ !insane)
 		owner.refresh_looping_ambience()
+		insane = !insane
 	if(infection_percent >= BBC_STAGE_MID)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
 		if(!HAS_TRAIT(owner, TRAIT_BLACK_BRIAR) && world.time > next_limb_infection && prob(4))
@@ -237,8 +237,15 @@
 			owner.emote(_emote, forced = TRUE)
 
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected, gibbed)
-	if(gibbed)
+	if(gibbed || !affected)
 		return
+	var/turf/z_T = get_turf(affected)
+	if(affected.loc != z_T) // we were in someones pocket or something
+		affected.forceMove(z_T)
+	affected.movement_type &= ~(FLOATING|FLYING)
+	if(affected.can_zTravel(direction = DOWN)) // You are grounded
+		z_T.zFall(affected)
+	playsound(affected, 'sound/vo/throat.ogg', 100, FALSE) // we can't do an emote, dead people can't emote
 	if(infection_percent >= BBC_STAGE_MID)
 		var/turf/center = get_turf(affected)
 		if(!center)
@@ -252,9 +259,7 @@
 		if(BB)
 			BB.permanent_buckle = TRUE
 			BB.dir = affected.dir
-			REMOVE_TRAIT(affected, TRAIT_FLOORED, STAT_TRAIT)
 			BB.buckle_mob(affected, TRUE)
-	playsound(affected, 'sound/vo/throat.ogg', 100, FALSE)
 
 /proc/spawn_briar(turf/T)
 	for(var/atom/movable/A in T.contents)

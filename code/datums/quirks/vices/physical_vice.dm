@@ -148,6 +148,29 @@
 	// Remove traits when quirk is removed
 	REMOVE_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
 
+/datum/quirk/vice/black_briar
+	name = "Host of the Black Briar"
+	desc = "Thorns dig into your lungs with every breath. Every exhale is painful, yet sweet. \
+	You have tasted the <span class='briar'>Black Rosa</span> of Wintermare. Sleep knowing that this will kill you one dae. \
+	Alas, that dae has not come. Not yet.\
+	\n(This quirk is only available to elves)"
+	point_value = 8
+	random_exempt = TRUE
+	allowed_species = list(/datum/species/elf, /datum/species/human/halfelf, /datum/species/human/halfdrow)
+
+/datum/quirk/vice/black_briar/on_spawn()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+	var/obj/item/bodypart/chest/chest = H.get_bodypart()
+	if(chest && !chest.has_wound(/datum/wound/black_briar_curse/chest))
+		var/datum/wound/black_briar_curse/chest/master_wound = LAZYACCESS(GLOB.primordial_wounds, /datum/wound/black_briar_curse/chest)
+		if(master_wound?.can_apply_to_bodypart(chest))
+			ADD_TRAIT(owner, TRAIT_BLACK_BRIAR, "[type]")
+			return
+	//H.get_random_flaw()
+
+
 /datum/quirk/vice/crippled_arm
 	name = "Missing Arm"
 	desc = "You're missing an arm. It was lost in an accident or battle, and the stump is too damaged for anything but prosthetics."

@@ -1,33 +1,48 @@
 
 /datum/component/cursedrosa
+	var/cross_trigger
+	var/hand_trigger
 
-/datum/component/cursedrosa/Initialize(...)
+/datum/component/cursedrosa/Initialize(cross_trigger=FALSE, hand_trigger=TRUE)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
+	src.cross_trigger = cross_trigger
+	src.hand_trigger = hand_trigger
 
 /datum/component/cursedrosa/RegisterWithParent()
-	RegisterSignals(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(atom_crossed))
+	if(cross_trigger)
+		RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(atom_crossed))
+	if(hand_trigger)
+		RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(attack_hand))
 
 /datum/component/cursedrosa/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_MOVABLE_CROSSED))
+	UnregisterSignal(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_ATTACK_HAND))
 
-/datum/component/cursedrosa/proc/atom_crossed(source, atom/movable/AM)
-	if(!iscarbon(AM))
+/datum/component/cursedrosa/proc/attempt_infection(mob/living/carbon/target, def_zone)
+	var/obj/item/bodypart/affecting = target.get_bodypart(def_zone)
+	if(!affecting || affecting.status != BODYPART_ORGANIC)
 		return
-	if(HAS_TRAIT(AM, TRAIT_KNEESTINGER_IMMUNITY) || HAS_TRAIT(AM, TRAIT_PIERCEIMMUNE))
-		return
+	if(target.getarmor(def_zone, "stab", 0, simulate=TRUE) - rand(ARMOR_GLOVES_LEATHER_GOOD["stab"], ARMOR_GLOVES_CHAIN["stab"] + 5) > 0)
+		return //we blocked it
+	playsound(parent, 'sound/combat/hits/hi_arrow.ogg', 20, TRUE, -4)
+	var/wound_type = get_black_briar_wound_type(def_zone)
+	if(wound_type && (!affecting.has_wound(wound_type) || prob(30)))
+		affecting.add_wound(wound_type, TRUE)
 
-	var/mob/living/carbon/target = AM
+/datum/component/cursedrosa/proc/atom_crossed(source, mob/living/carbon/target)
+	if(!istype(target))
+		return
+	if(HAS_TRAIT(target, TRAIT_KNEESTINGER_IMMUNITY) || HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
+		return
 	var/potential_zones = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	if(target.body_position == LYING_DOWN)
 		potential_zones |= list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	var/obj/item/bodypart/affecting = target.get_bodypart_complex(potential_zones)
-	if(!affecting)
+	attempt_infection(target, pick(potential_zones))
+
+/datum/component/cursedrosa/proc/attack_hand(source, mob/living/carbon/target)
+	if(!istype(target))
 		return
-	var/def_zone = pick(affecting.grabtargets)
-	if(target.getarmor(def_zone, "stab", 0, simulate=TRUE) - rand(ARMOR_GLOVES_LEATHER_GOOD["stab"], ARMOR_GLOVES_CHAIN["stab"] + 5) > 0)
-		return //we blocked it
-	playsound(parent, 'sound/combat/hits/hi_arrow.ogg', 15, TRUE, -4)
-	var/wound_type = get_black_briar_wound_type(affecting.body_zone)
-	if(wound_type && (!affecting.has_wound(wound_type) || prob(30)))
-		affecting.add_wound(wound_type, TRUE)
+	if(HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
+		return
+	var/def_zone = (target.active_hand_index == 1 ? BODY_ZONE_L_ARM : BODY_ZONE_R_ARM)
+	attempt_infection(target, def_zone)

@@ -172,7 +172,7 @@
 		icon_state = "rosa"
 
 /obj/item/alch/herb/cursedrosa
-	name = "Black Briar rosa"
+	name = "black briar rosa"
 	icon_state = "cursedrosa"
 
 /obj/item/alch/herb/cursedrosa/equipped(mob/living/carbon/human/user, slot)
@@ -182,9 +182,9 @@
 	else
 		icon_state = "cursedrosa"
 
-/obj/item/alch/herb/cursedrosa/New()
+/obj/item/alch/herb/cursedrosa/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/cursedrosa)
+	AddComponent(/datum/component/cursedrosa, FALSE, TRUE)
 
 /obj/item/alch/herb/euphorbia
 	name = "euphorbia"

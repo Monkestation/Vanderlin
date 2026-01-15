@@ -53,7 +53,7 @@
 	icon_state = "rosa_crown"
 
 /obj/item/clothing/head/flowercrown/cursedrosa
-	name = "blacksteel rosa crown"
+	name = "black briar rosa crown"
 	desc = ""
 	item_state = "cursedrosa_crown"
 	icon_state = "cursedrosa_crown"

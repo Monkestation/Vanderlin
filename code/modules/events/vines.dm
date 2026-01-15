@@ -478,11 +478,12 @@
 	damage_deflection = 25
 	buckle_prevents_pull = TRUE
 	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+	buckle_lying = STANDING_UP
 	var/permanent_buckle = FALSE
 
 /obj/structure/vine/black_briar/Initialize()
 	. = ..()
-	AddComponent(/datum/component/cursedrosa)
+	AddComponent(/datum/component/cursedrosa, TRUE, TRUE)
 
 /obj/structure/vine/black_briar/unbuckle_mob(mob/living/buckled_mob, force)
 	if(!permanent_buckle || force)
