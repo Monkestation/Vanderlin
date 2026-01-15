@@ -49,6 +49,11 @@
 
 	. = ..()
 
+/// Do not actually use this... it's used to prevent a compile error in orthogonal_range_search,
+/// if you actually try to use these as a list I will be disappointed in you.
+/datum/spatial_grid_cell/proc/operator[](idx)
+	return
+
 /**
  * # Spatial Grid
  *
