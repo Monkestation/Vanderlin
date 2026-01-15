@@ -128,9 +128,10 @@
 	var/full_icon = "full_heart"
 	var/empty_icon = "empty_heart"
 
-/obj/effect/overlay/happiness_overlay/New(loc, mob/living/clicker)
+/obj/effect/overlay/happiness_overlay/Initialize(mapload, mob/living/clicker)
 	. = ..()
-	if(!clicker)
+
+	if(!istype(clicker))
 		return
 
 	RegisterSignal(clicker.client, COMSIG_CLIENT_HOVER_NEW, PROC_REF(clear_view))
