@@ -1,41 +1,51 @@
 /mob/living/carbon/human/proc/on_examine_face(mob/living/carbon/human/user, self_inspect = FALSE)
 	if(!istype(user))
 		return
+
+	// Intolerant (normal for most I guess?)
 	if(!HAS_TRAIT(src, TRAIT_TOLERANT))
 		if(!isdarkelf(user) && isdarkelf(src))
 			user.add_stress(/datum/stress_event/delf)
+
 		if(!istiefling(user) && istiefling(src))
 			user.add_stress(/datum/stress_event/tieb)
+
 		if(!ishalforc(user) && ishalforc(src))
 			user.add_stress(/datum/stress_event/horc)
-		if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
-			user.add_stress(/datum/stress_event/parastr)
+
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
 			if(user.has_quirk(/datum/quirk/vice/paranoid))
 				user.add_stress(/datum/stress_event/paraforeigner)
 			else
 				user.add_stress(/datum/stress_event/foreigner)
+
+		if(HAS_TRAIT(src, TRAIT_FISHFACE))
+			if(HAS_TRAIT(user, TRAIT_FISHFACE))
+				if(self_inspect)
+					user.add_stress(/datum/stress_event/self_fishface)
+				else
+					user.add_stress(/datum/stress_event/fellow_fishface)
+			else
+				if(user.age == AGE_CHILD)
+					user.add_stress(/datum/stress_event/fish_monster)
+				else
+					user.add_stress(/datum/stress_event/fishface)
+
+	if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
+		user.add_stress(/datum/stress_event/parastr)
+
 	if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
 		if(self_inspect)
 			user.add_stress(/datum/stress_event/beautiful_self)
 		else
 			user.add_stress(/datum/stress_event/beautiful)
+
 	if(HAS_TRAIT(src, TRAIT_UGLY))
 		if(self_inspect)
 			user.add_stress(/datum/stress_event/ugly_self)
 		else
 			user.add_stress(/datum/stress_event/ugly)
-	if(HAS_TRAIT(src, TRAIT_FISHFACE))
-		if(HAS_TRAIT(user, TRAIT_FISHFACE))
-			if(self_inspect)
-				user.add_stress(/datum/stress_event/self_fishface)
-			else
-				user.add_stress(/datum/stress_event/fellow_fishface)
-		else
-			if(user.age == AGE_CHILD)
-				user.add_stress(/datum/stress_event/fish_monster)
-			else
-				user.add_stress(/datum/stress_event/fishface)
+
 	if(!self_inspect && HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
 		user.add_stress(/datum/stress_event/saw_old_party)
 
