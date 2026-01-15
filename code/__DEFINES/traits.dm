@@ -106,7 +106,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Abstract condition that prevents movement if being pulled and might be resisted against. Handcuffs and straight jackets, basically.
 #define TRAIT_RESTRAINED		"restrained"
 #define TRAIT_INCAPACITATED		"incapacitated"
-#define TRAIT_BLIND 			"blind"
 #define TRAIT_MUTE				"mute"
 #define TRAIT_ZOMBIE_SPEECH 	"zombie_speech"
 #define TRAIT_GARGLE_SPEECH		"gargle_speech"
@@ -114,7 +113,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEAF				"deaf"
 #define TRAIT_TREMORS			"tremors"
 #define TRAIT_PARTIAL_DEAF		"partial_deaf"
-#define TRAIT_NEARSIGHT			"nearsighted"
 #define TRAIT_HUSK				"husk"
 #define TRAIT_CHUNKYFINGERS		"chunkyfingers" //means that you can't use weapons with normal trigger guards.
 #define TRAIT_DUMB				"dumb"
@@ -193,6 +191,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BOOZE_SLIDER      "booze-slider"
 #define TRAIT_QUICK_CARRY		"quick-carry"
 #define TRAIT_QUICKER_CARRY		"quicker-carry"
+/// Prevents the overlay from nearsighted
+#define TRAIT_NEARSIGHTED_CORRECTED "fixes_nearsighted"
 #define TRAIT_UNINTELLIGIBLE_SPEECH "unintelligible-speech"
 #define TRAIT_LANGUAGE_BARRIER	"language-barrier"
 #define TRAIT_PASSTABLE			"passtable"

@@ -994,7 +994,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		M.adjust_eye_blur(30 SECONDS)
 		if(M.stat != DEAD)
 			to_chat(M, "<span class='danger'>My eyes start to bleed profusely!</span>")
-		if(!(HAS_TRAIT(M, TRAIT_BLIND) || HAS_TRAIT(M, TRAIT_NEARSIGHT)))
+		if(!M.is_nearsighted_from(EYE_DAMAGE))
 			to_chat(M, "<span class='danger'>I become nearsighted!</span>")
 		M.become_nearsighted(EYE_DAMAGE)
 		if(prob(50))

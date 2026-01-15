@@ -133,7 +133,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
 	if(type)
-		if(type & MSG_VISUAL && eye_blind )//Vision related
+		if(type & MSG_VISUAL && is_blind() )//Vision related
 			if(!alt_msg)
 				return
 			else
@@ -146,7 +146,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			else
 				msg = alt_msg
 				type = alt_type
-				if(type & MSG_VISUAL && eye_blind)
+				if(type & MSG_VISUAL && is_blind())
 					return
 	to_chat(src, msg)
 
@@ -186,7 +186,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			msg = blind_message
 		if(!msg)
 			continue
-		if(M != src && !M.eye_blind)
+		if(M != src && !M.is_blind())
 			M.log_message("saw [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(msg, MSG_VISUAL, blind_message, MSG_AUDIBLE)
 		if(runechat_message && M.can_hear())
@@ -1168,7 +1168,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/proc/can_read(obj/O, silent = FALSE)
 	if(isobserver(src))
 		return TRUE
-	if(is_blind() || eye_blurry)
+	if(is_blind() || has_status_effect(/datum/status_effect/eye_blur))
 		if(!silent)
 			to_chat(src, span_warning("I'm too blind to read."))
 		return

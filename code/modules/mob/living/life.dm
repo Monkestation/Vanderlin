@@ -59,7 +59,6 @@
 		//Random events (vomiting etc)
 		handle_random_events()
 
-		handle_traits() // eye, ear, brain damages
 		handle_status_effects() //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
 
 	update_sneak_invis()
@@ -245,16 +244,6 @@
 		slowdown = max(slowdown - 1, 0)
 	if(slowdown <= 0)
 		remove_movespeed_modifier(MOVESPEED_ID_LIVING_SLOWDOWN_STATUS)
-
-/mob/living/proc/handle_traits()
-	//Eyes
-	if(eye_blind)	//blindness, heals slowly over time
-		if(HAS_TRAIT_FROM(src, TRAIT_BLIND, EYES_COVERED)) //covering your eyes heals blurry eyes faster
-			adjust_blindness(-3)
-		else if(!stat && !(HAS_TRAIT(src, TRAIT_BLIND)))
-			adjust_blindness(-1)
-	else if(eye_blurry)			//blurry eyes heal slowly
-		adjust_eye_blur(-2 SECONDS)
 
 /mob/living/proc/update_damage_hud()
 	return

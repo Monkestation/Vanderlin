@@ -170,12 +170,13 @@
 		stress = max(stress - 4, 0)
 
 /datum/brain_trauma/severe/monophobia/proc/check_alone()
-	if(HAS_TRAIT(owner, TRAIT_BLIND))
-		return TRUE
-	for(var/mob/M in oview(owner, 7))
-		if(!isliving(M)) //ghosts ain't people
+	var/check_radius = 7
+	if(owner.is_blind())
+		check_radius = 1
+	for(var/mob/mob in oview(owner, check_radius))
+		if(!isliving(mob)) //ghosts ain't people
 			continue
-		if((istype(M, /mob/living/simple_animal/pet)) || M.ckey)
+		if(istype(mob, /mob/living/simple_animal/pet) || mob.ckey)
 			return FALSE
 	return TRUE
 

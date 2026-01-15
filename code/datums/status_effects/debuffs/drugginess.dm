@@ -1,7 +1,7 @@
 /// Drugginess / "high" effect, makes your screen rainbow
 /datum/status_effect/drugginess
 	id = "drugged"
-	alert_type = null
+	alert_type = /atom/movable/screen/alert/status_effect/high
 	remove_on_fullheal = TRUE
 
 /datum/status_effect/drugginess/on_creation(mob/living/new_owner, duration = 10 SECONDS)
@@ -33,8 +33,8 @@
 
 	qdel(src)
 
-/// The status effect for "drugginess"
-// /atom/movable/screen/alert/status_effect/high
-// 	name = "High"
-// 	desc = "Whoa man, you're tripping balls! Careful you don't get addicted... if you aren't already."
-// 	icon_state = "high"
+// The status effect for "drugginess"
+/atom/movable/screen/alert/status_effect/high
+	name = "High"
+	// desc = "Whoa man, you're tripping balls! Careful you don't get addicted... if you aren't already."
+	icon_state = "high"

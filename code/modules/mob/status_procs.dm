@@ -7,59 +7,11 @@
 /mob/proc/Slowdown(amount)
 	return
 
-///Blind a mobs eyes by amount
-/mob/proc/blind_eyes(amount)
-	adjust_blindness(amount)
-
-/**
- * Adjust a mobs blindness by an amount
- *
- * Will apply the blind alerts if needed
- */
-/mob/proc/adjust_blindness(amount)
-	var/old_eye_blind = eye_blind
-	eye_blind = max(0, eye_blind + amount)
-	if(!old_eye_blind || !eye_blind && !HAS_TRAIT(src, TRAIT_BLIND))
-		update_blindness()
-/**
- * Force set the blindness of a mob to some level
- */
-/mob/proc/set_blindness(amount)
-	var/old_eye_blind = eye_blind
-	eye_blind = max(amount, 0)
-	if(!old_eye_blind || !eye_blind && !HAS_TRAIT(src, TRAIT_BLIND))
-		update_blindness()
-
-/// proc that adds and removes blindness overlays when necessary
-/mob/proc/update_blindness()
-	if(stat == UNCONSCIOUS || HAS_TRAIT(src, TRAIT_BLIND) || eye_blind) // UNCONSCIOUS or has blind trait, or has temporary blindness
-		if(stat == CONSCIOUS)
-//			throw_alert("blind", /atom/movable/screen/alert/blind)
-			overlay_fullscreen("blind", /atom/movable/screen/fullscreen/blind)
-		else
-			overlay_fullscreen("blind", /atom/movable/screen/fullscreen/blackimageoverlay)
-		// You are blind why should you be able to make out details like color, only shapes near you
-//		add_client_colour(/datum/client_colour/monochrome/blind)
-	else // CONSCIOUS no blind trait, no blindness
-//		clear_alert("blind")
-		clear_fullscreen("blind")
-//		remove_client_colour(/datum/client_colour/monochrome/blind)
-
 /mob/proc/psydo_nyte()
 	sleep(2)
 	overlay_fullscreen("LIVES", /atom/movable/screen/fullscreen/zezuspsyst)
 	sleep(2)
 	clear_fullscreen("LIVES")
-
-///Apply the blurry overlays to a mobs clients screen
-/mob/proc/update_eye_blur()
-	if(!client)
-		return
-	var/atom/movable/plane_master_controller/game_plane_master_controller = hud_used.plane_master_controllers[PLANE_MASTERS_GAME]
-	if(eye_blurry)
-		game_plane_master_controller.add_filter("eye_blur", 1, gauss_blur_filter(clamp(eye_blurry * 0.1, 0.6, 3)))
-	else
-		game_plane_master_controller.remove_filter("eye_blur")
 
 ///Adjust the disgust level of a mob
 /mob/proc/adjust_disgust(amount)

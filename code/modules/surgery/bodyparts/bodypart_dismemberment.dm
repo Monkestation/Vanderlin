@@ -70,7 +70,7 @@
 				stress2give = null
 	if(stress2give)
 		for(var/mob/living/carbon/CA in hearers(world.view, C))
-			if(CA != C && !HAS_TRAIT(CA, TRAIT_BLIND))
+			if(CA != C && !CA.is_blind())
 				if(stress2give == /datum/stress_event/viewdismember)
 					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 						continue

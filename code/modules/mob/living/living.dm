@@ -1025,10 +1025,6 @@
 		set_nutrition(NUTRITION_LEVEL_FED + 50)
 		set_hydration(HYDRATION_LEVEL_HYDRATED + 50)
 
-	set_blindness(0)
-	cure_nearsighted()
-	cure_blind()
-
 	set_disgust(0)
 	cure_husk()
 
@@ -2288,7 +2284,7 @@
 		if("sleeping")
 			SetSleeping(var_value)
 		if("eye_blind")
-			set_blindness(var_value)
+			adjust_temp_blindness(var_value)
 		if("eye_damage")
 			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
 			if(E)

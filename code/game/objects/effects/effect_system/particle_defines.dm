@@ -139,7 +139,7 @@
 	color = COLOR_WHITE
 	transform = list(1,0,0,0, 0,1,0,0, 0,0,1,1/5, 0,0,0,1)
 
-// PARTICLE PORTED FROM LC13, BY @TaculoTaculo
+// PARTICLE PORTED FROM LC13, BY TaculoTaculo
 /particles/particle_song
 	name = "song"
 	icon = 'icons/effects/particles/song.dmi'
