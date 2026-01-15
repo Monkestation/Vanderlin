@@ -171,21 +171,6 @@
 	else
 		icon_state = "rosa"
 
-/obj/item/alch/herb/cursedrosa
-	name = "black briar rosa"
-	icon_state = "cursedrosa"
-
-/obj/item/alch/herb/cursedrosa/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	if(slot & ITEM_SLOT_MOUTH)
-		icon_state = "cursedrosa_mouth"
-	else
-		icon_state = "cursedrosa"
-
-/obj/item/alch/herb/cursedrosa/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/cursedrosa, FALSE, TRUE)
-
 /obj/item/alch/herb/euphorbia
 	name = "euphorbia"
 	icon_state = "euphorbia"
@@ -217,3 +202,40 @@
 	desc = "An odd, sticky clump of various alchemical ingredients. Smelt this down to create an ingot of thaumic iron."
 	smeltresult = /obj/item/ingot/thaumic
 	melting_material = /datum/material/thaumic_iron
+
+
+/* ........Black Briar........ */
+
+/obj/item/alch/herb/cursedrosa
+	name = "black briar rosa"
+	icon_state = "cursedrosa"
+
+/obj/item/alch/herb/cursedrosa/equipped(mob/living/carbon/human/user, slot)
+	. = ..()
+	if(slot & ITEM_SLOT_MOUTH)
+		icon_state = "cursedrosa_mouth"
+	else
+		icon_state = "cursedrosa"
+
+/obj/item/alch/herb/cursedrosa/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/cursedrosa, FALSE, TRUE)
+
+/obj/item/alch/herb/cursedrosa/examine(mob/user)
+	. = ..()
+	if(GetComponent(/datum/component/cursedrosa))
+		. += span_briar("Its thorns have not been trimmed.")
+	else
+		. += span_info("Its thorns have been trimmed.")
+
+/obj/item/alch/herb/cursedrosa/attackby(obj/item/I, mob/living/user, params)
+	if(!user.cmode && istype(I, /obj/item/weapon/knife))
+		var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
+		if(QDELETED(thorns))
+			to_chat(user, span_warning("It has no thorns to trim."))
+		else
+			user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
+			playsound(I, 'sound/items/flint.ogg', 100, TRUE)
+			qdel(thorns)
+		return
+	return ..()
