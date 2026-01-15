@@ -566,7 +566,7 @@
 
 /datum/reagent/flour/on_mob_life(mob/living/carbon/M)
 	if(prob(30))
-		M.confused = max(M.confused + 3, 0)
+		M.adjust_confusion(0.3 SECONDS)
 	M.emote(pick("cough"))
 	..()
 

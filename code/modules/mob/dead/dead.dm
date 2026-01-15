@@ -208,6 +208,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	if(!mind?.assigned_role)
 		return
 	mind.active = FALSE
+	close_spawn_windows()
 	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination, islatejoin)
 	mind.transfer_to(spawning_mob)
 	spawning_mob.after_creation()
@@ -231,3 +232,20 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	new_character = null
 	qdel(src)
 
+// This is pretty awful, we should be having specific windows close themselves upon spawning in
+/mob/dead/proc/close_spawn_windows()
+
+	src << browse(null, "window=latechoices") //closes late choices window
+	src << browse(null, "window=playersetup") //closes the player setup window
+	src << browse(null, "window=preferences") //closes job selection
+	src << browse(null, "window=mob_occupation")
+	src << browse(null, "window=latechoices") //closes late job selection
+	src << browse(null, "window=culinary_customization")
+	src << browse(null, "window=food_selection")
+	src << browse(null, "window=drink_selection")
+
+	SStriumphs.remove_triumph_buy_menu(client)
+
+	winshow(src, "stonekeep_prefwin", FALSE)
+	src << browse(null, "window=preferences_browser")
+	src << browse(null, "window=lobby_window")

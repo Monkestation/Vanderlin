@@ -1342,8 +1342,7 @@
 	if(generic_message && M != user)
 		to_chat(M, span_danger("[src] emits a blinding light!"))
 	if(M.flash_act())
-		var/diff = power - M.confused
-		M.confused += min(power, diff)
+		M.set_confusion_if_lower(power SECONDS)
 
 /obj/structure/fluff/psycross/psydon
 	name = "psydonian cross"
