@@ -277,7 +277,7 @@
 	if(infection_percent >= BBC_STAGE_LATE && prob(0.5))
 		owner.playsound_local()
 	if(infection_percent >= BBC_STAGE_DETECTABLE && prob(3 * infection_percent))
-		owner.blur_eyes(rand(4, 6))
+		owner.set_eye_blur_if_lower(rand(3, 6) SECONDS)
 		owner.stuttering = max(owner.stuttering, 10)
 
 /datum/wound/black_briar_curse/arm
