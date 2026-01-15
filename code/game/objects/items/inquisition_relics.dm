@@ -760,6 +760,7 @@
 	integrity_failure = 0.01
 	sellprice = 0
 	wield_block = FALSE
+
 	var/static/list/wield_sounds = list('sound/items/garrote.ogg', 'sound/items/garrote2.ogg')
 
 /obj/item/inqarticles/garrote/getonmobprop(tag)
@@ -1208,7 +1209,7 @@
 		to_chat(user, span_warning("It looks like it needs blood to work properly."))
 		return
 	if(!active)
-		var/input = browser_input_list(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID")
+		var/input = browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID")
 		if(!input || QDELETED(user) || QDELETED(src))
 			return
 		for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
