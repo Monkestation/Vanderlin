@@ -113,7 +113,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return FALSE
 	if(!isnull(special.allowed_patrons) && !(character.patron.type in special.allowed_patrons))
 		return FALSE
-	if(!isnull(special.allowed_flaw) && !character.has_flaw(special.allowed_flaw))
+	if(!isnull(special.allowed_flaw) && !character.has_quirk(special.allowed_flaw))
 		return FALSE
 	if(!isnull(special.restricted_traits))
 		var/has_trait

@@ -59,7 +59,7 @@
 	var/turf/my_turf = get_turf(user)
 	my_turf.pollute_turf(fragrance_type, 20)
 	user.changeNext_move(CLICK_CD_RANGE * 2)
-	playsound(user.loc, 'sound/items/perfume.ogg', 100, TRUE)
+	playsound(user, 'sound/items/perfume.ogg', 100, TRUE)
 	if(ismob(target))
 		var/mob/living/hygiene_target = target
 		hygiene_target.adjust_hygiene(10)

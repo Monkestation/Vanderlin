@@ -85,6 +85,7 @@
 		umsg += " as best as you can while they have clothing on"
 		tmsg += " as best as they can while [target] has clothing on"
 	target.heal_bodypart_damage(urhealedamt_brute,urhealedamt_burn, required_status = BODYPART_ORGANIC)
+	SEND_SIGNAL(user, COMSIG_LIVING_HEALED_OTHER, urhealedamt_brute + urhealedamt_burn)
 	display_results(user, target, "<span class='notice'>[umsg].</span>",
 		"[tmsg].",
 		"[tmsg].")

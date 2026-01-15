@@ -148,11 +148,11 @@
 		var/obj/item/bodypart/chest/C = H.get_bodypart(BODY_ZONE_CHEST)
 		if(!C)
 			return
-		playsound(get_turf(user), 'sound/surgery/scalpel2.ogg', 70)
+		playsound(user, 'sound/surgery/scalpel2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
 			C.add_wound(/datum/wound/slash/incision)
 
-		playsound(get_turf(user), 'sound/surgery/organ2.ogg', 70)
+		playsound(user, 'sound/surgery/organ2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
 			C.add_wound(/datum/wound/fracture/chest)
 
@@ -180,7 +180,7 @@
 	PJ.firer = user
 	PJ.fired_from = src
 	PJ.original = target
-	playsound(get_turf(user),'sound/effects/neantspecial.ogg', 70)
+	playsound(user,'sound/effects/neantspecial.ogg', 70)
 
 	if(user.STAPER > 8)
 		PJ.accuracy += (user.STAPER - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.

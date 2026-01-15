@@ -19,8 +19,8 @@
 	skills = list(
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 1,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/craft/carpentry = 5,

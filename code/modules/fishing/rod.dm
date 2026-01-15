@@ -116,7 +116,7 @@
 				I.forceMove(src)
 				baited = I
 				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [I] to [src].</span>")
-				playsound(src.loc, 'sound/foley/pierce.ogg', 50, FALSE)
+				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
 		else if(istype(I, /obj/item/natural/bundle/worms))
 			if(!baited)
 				var/obj/item/natural/bundle/worms/W = I
@@ -126,13 +126,13 @@
 					new W.stacktype(get_turf(user))
 					qdel(W)
 				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [W.stacktype] to [src].</span>")
-				playsound(src.loc, 'sound/foley/pierce.ogg', 50, FALSE)
+				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
 		else
 			if(!baited)
 				I.forceMove(src)
 				baited = I
 				user.visible_message("<span class='notice'>[user] hooks something to the line.</span>", "<span class='notice'>I hook [I] to my line.</span>")
-				playsound(src.loc, 'sound/foley/pierce.ogg', 50, FALSE)
+				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
 
 	else if(istype(I, /obj/item/fishing)) //bait has a null attachtype and is accounted for in the previous check so i don't have to worry about it
 		var/obj/item/fishing/T = I
@@ -238,6 +238,7 @@
 	else
 		if(!isfish)
 			return
+		SEND_SIGNAL(user, COMSIG_FISH_CAUGHT)
 		record_featured_stat(STATS_FISH_CAUGHT, user)
 		var/obj/item/reagent_containers/food/snacks/fish/fish = reward
 		if(HAS_TRAIT(baited, TRAIT_POISONOUS_BAIT) && !HAS_TRAIT(fish, TRAIT_FISH_TOXIN_IMMUNE))

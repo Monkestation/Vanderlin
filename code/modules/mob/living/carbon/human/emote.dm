@@ -75,6 +75,12 @@
 	message = "mumbles."
 	emote_type = EMOTE_AUDIBLE
 
+/mob/living/carbon/human/verb/emote_mumble()
+	set name = "Mumble"
+	set category = "Noises"
+
+	emote("mumble", intentional = TRUE)
+
 /datum/emote/living/carbon/human/pale
 	key = "pale"
 	message = "goes pale for a second."

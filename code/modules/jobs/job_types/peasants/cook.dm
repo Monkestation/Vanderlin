@@ -20,7 +20,9 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	jobstats = list(
-		STATKEY_CON = 2
+		STATKEY_END = 1,
+		STATKEY_INT = 1,
+		STATKEY_CON = 1,
 	)
 
 	skills = list(

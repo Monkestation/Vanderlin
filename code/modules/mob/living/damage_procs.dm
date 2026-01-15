@@ -291,8 +291,12 @@
 	// Handle defense based on intent
 	switch(d_intent)
 		if(INTENT_PARRY)
+			if(HAS_TRAIT(src, TRAIT_UNPARRYING))
+				return FALSE
 			return attempt_parry(intenty, user, prob2defend)
 		if(INTENT_DODGE)
+			if(HAS_TRAIT(src, TRAIT_UNDODGING))
+				return FALSE
 			return attempt_dodge(intenty, user, can_dodge_see)
 
 	return FALSE

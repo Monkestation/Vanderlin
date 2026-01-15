@@ -377,6 +377,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel
 	melt_amount = 150
 	dropshrink = 0.8
 	wdefense = ULTMATE_PARRY
@@ -485,7 +486,7 @@
 	swingsound = BLADEWOOSH_MED
 	max_blade_int = 250
 	max_integrity = INTEGRITY_STRONG
-	minstr = 11
+	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
 	axe_cut = 10
 	sellprice = 100
 

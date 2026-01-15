@@ -1,6 +1,7 @@
 GLOBAL_LIST_INIT(breakable_types, list(
 	/obj/structure/flora,
 ))
+// Creates a single atom rather than loading a map template.
 /datum/building_datum/simple
 	stockpile_needed = FALSE
 	var/atom/created_atom
@@ -15,19 +16,9 @@ GLOBAL_LIST_INIT(breakable_types, list(
 	generated_MA.color = COLOR_CYAN
 
 /datum/building_datum/simple/try_place_building(mob/camera/strategy_controller/user, turf/placed_turf)
-	var/has_cost = FALSE
-	for(var/resource in resource_cost)
-		if(resource_cost[resource])
-			has_cost = TRUE
-			break
-
-	if(has_cost && !user.resource_stockpile)
-		return FALSE
-	if(has_cost)
-		if(!user.resource_stockpile?.has_resources(resource_cost))
-			return
-
-		user.resource_stockpile.remove_resources(resource_cost)
+	if(!resource_check(user))
+		return
+	user.resource_stockpile?.remove_resources(resource_cost)
 
 	var/list/turfs = list(placed_turf)
 

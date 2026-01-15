@@ -18,16 +18,15 @@
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		var/datum/blood_type/blood = L.get_blood_type()
-		if(blood?.reagent_type == type && (method == INJECT || (method == INGEST && C.dna && C.dna.species && (DRINKSBLOOD in C.dna.species.species_traits))))
+		if(blood?.reagent_type == type && ((method & INJECT) || ((method & INGEST) && C.dna && C.dna.species && (DRINKSBLOOD in C.dna.species.species_traits))))
 			if((data["blood_type"] in blood.compatible_types))
 				C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 
-	if((method == INGEST) && L.clan)
+	if((method & INGEST) && L.clan)
 		L.adjust_bloodpool(reac_volume)
 		L.clan.handle_bloodsuck(BLOOD_PREFERENCE_FANCY)
-	if(method == INJECT || (HAS_TRAIT(L, TRAIT_SANGUINE) && (method == INGEST)))
+	if((method & INJECT) || (HAS_TRAIT(L, TRAIT_SANGUINE) && (method & INGEST)))
 		SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
-
 
 /datum/reagent/blood/on_merge(list/mix_data)
 	. = ..()
@@ -178,7 +177,7 @@
 /datum/reagent/water/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with water can help put them out!
 	if(!istype(M))
 		return
-	if(method == TOUCH)
+	if(method & TOUCH)
 		var/turf/turf_check = get_turf(M)
 		if(!istype(turf_check, /turf/open/water))
 			M.adjust_fire_stacks(-(reac_volume / 10))
@@ -243,7 +242,7 @@
 	return ..()
 
 /datum/reagent/yuck/on_transfer(atom/A, method=TOUCH, trans_volume)
-	if(method == INGEST || !iscarbon(A))
+	if((method & INGEST) || !iscarbon(A))
 		return ..()
 
 	A.reagents.remove_reagent(type, trans_volume)
@@ -263,7 +262,7 @@
 	glass_desc = ""
 
 /datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
-	if(method == TOUCH || method == VAPOR)
+	if((method & TOUCH) || (method & VAPOR))
 		M.adjust_fire_stacks(reac_volume / 10)
 		return
 	..()
