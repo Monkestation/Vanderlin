@@ -1,4 +1,4 @@
-// /obj/effect/abstract/particle_emitter/var/particle_flags
+// /obj/effect/abstract/particle_holder/var/particle_flags
 // Flags that effect how a particle holder displays something
 
 /// If we're inside something inside a mob, display off that mob too

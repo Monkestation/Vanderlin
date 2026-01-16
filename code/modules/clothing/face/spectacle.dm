@@ -14,7 +14,7 @@
 	. = ..()
 	detach_clothing_traits(TRAIT_NEARSIGHTED_CORRECTED)
 
-/obj/item/clothing/glasses/regular/atom_fix()
+/obj/item/clothing/face/spectacles/atom_fix()
 	. = ..()
 	attach_clothing_traits(TRAIT_NEARSIGHTED_CORRECTED)
 
