@@ -13,6 +13,6 @@
 		return FALSE
 
 	owner.visible_message(span_notice("[owner] gestures, creating a cleansing mist around [target]."))
-	//playsound(get_turf(target), 'sound/magic/splash.ogg', 50, TRUE)
+	//playsound(target, 'sound/magic/splash.ogg', 50, TRUE)
 
 	target.wash(CLEAN_WASH)

@@ -11,7 +11,7 @@
 
 	skills = list(
 		/datum/skill/combat/swords = 3, // In line with basic combat classes
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/swimming = 1,

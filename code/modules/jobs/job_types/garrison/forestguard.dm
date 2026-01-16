@@ -84,10 +84,10 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/whipsflails = 4,
+		/datum/skill/combat/whipsflails = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/shields = 3,
 		/datum/skill/combat/bows = 1,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3
@@ -139,7 +139,7 @@
 		/datum/skill/craft/carpentry = 1,
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/bows = 4,
+		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/axesmaces = 1,
@@ -195,7 +195,7 @@
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 4
+		/datum/skill/combat/axesmaces = 3
 	)
 
 	traits = list(

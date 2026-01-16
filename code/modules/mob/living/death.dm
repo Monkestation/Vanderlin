@@ -5,7 +5,7 @@ GLOBAL_LIST_EMPTY(last_words)
 	if(stat != DEAD)
 		death(TRUE)
 
-	playsound(src.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 
 	if(!prev_lying)
 		gib_animation()
@@ -107,6 +107,10 @@ GLOBAL_LIST_EMPTY(last_words)
 		client?.verbs |= /client/proc/descend
 		if(last_words)
 			GLOB.last_words |= last_words
+
+	if(lastattacker_weakref)
+		var/mob/attacker = lastattacker_weakref.resolve()
+		SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
 
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(gibbed)

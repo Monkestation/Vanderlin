@@ -80,10 +80,10 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
 "adP" = (
-/obj/effect/mapping_helpers/secret_door_creator{
-	redstone_id = "INQ2"
-	},
 /obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/effect/mapping_helpers/secret_door_creator/inquisition{
+	redstone_id = "INQ5"
+	},
 /turf/closed/wall/mineral/stonebrick{
 	wallclimb = 1;
 	climbdiff = 1
@@ -5965,8 +5965,8 @@
 /area/indoors/town/orphanage)
 "fMM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/obj/effect/mapping_helpers/secret_door_creator{
-	redstone_id = "INQUIS"
+/obj/effect/mapping_helpers/secret_door_creator/inquisition{
+	redstone_id = "INQ1"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -7566,8 +7566,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/dwarfin)
 "hcq" = (
-/obj/structure/lever/hidden{
-	redstone_id = "INQUIS"
+/obj/structure/lever/hidden/inquisition{
+	redstone_id = "INQ1"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -7602,8 +7602,8 @@
 /area/indoors/town)
 "heJ" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/effect/mapping_helpers/secret_door_creator{
-	redstone_id = "INQUIS3"
+/obj/effect/mapping_helpers/secret_door_creator/inquisition{
+	redstone_id = "INQ2"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -8358,8 +8358,8 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
 "hMy" = (
-/obj/structure/lever/hidden{
-	redstone_id = "INQUIS3"
+/obj/structure/lever/hidden/inquisition{
+	redstone_id = "INQ2"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -10098,8 +10098,8 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor)
 "jAg" = (
-/obj/structure/lever/hidden{
-	redstone_id = "INQUIS1"
+/obj/structure/lever/hidden/inquisition{
+	redstone_id = "INQ4"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -12363,8 +12363,8 @@
 /area/indoors/town/garrison)
 "lBq" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/obj/effect/mapping_helpers/secret_door_creator{
-	redstone_id = "INQUIS2"
+/obj/effect/mapping_helpers/secret_door_creator/inquisition{
+	redstone_id = "INQ3"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -12773,8 +12773,8 @@
 /area/indoors/lich)
 "lXB" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
-/obj/effect/mapping_helpers/secret_door_creator{
-	redstone_id = "INQUIS1"
+/obj/effect/mapping_helpers/secret_door_creator/inquisition{
+	redstone_id = "INQ4"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -14662,8 +14662,8 @@
 	},
 /area/indoors/town/manor)
 "nMJ" = (
-/obj/structure/lever/hidden{
-	redstone_id = "INQUIS2"
+/obj/structure/lever/hidden/inquisition{
+	redstone_id = "INQ3"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cavewet)
@@ -15381,8 +15381,8 @@
 /turf/open/floor/tile,
 /area/indoors/town/shop)
 "osQ" = (
-/obj/structure/lever/hidden{
-	redstone_id = "INQ2"
+/obj/structure/lever/hidden/inquisition{
+	redstone_id = "INQ5"
 	},
 /turf/closed/wall/mineral/stonebrick{
 	wallclimb = 1;
@@ -17455,8 +17455,8 @@
 /turf/open/floor/snow,
 /area/outdoors/rtfield/safe)
 "qlF" = (
-/obj/structure/lever/hidden{
-	redstone_id = "INQ1"
+/obj/structure/lever/hidden/inquisition{
+	redstone_id = "INQ6"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cave)
@@ -19089,8 +19089,8 @@
 /turf/open/floor/tile/masonic/single,
 /area/indoors/town/manor)
 "rNr" = (
-/obj/effect/mapping_helpers/secret_door_creator{
-	redstone_id = "O1"
+/obj/effect/mapping_helpers/secret_door_creator/thieves_guild{
+	redstone_id = "orphanage"
 	},
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/town/orphanage)
@@ -19570,8 +19570,8 @@
 /area/outdoors/rtfield)
 "skk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/obj/effect/mapping_helpers/secret_door_creator{
-	redstone_id = "INQ1"
+/obj/effect/mapping_helpers/secret_door_creator/inquisition{
+	redstone_id = "INQ6"
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cave)
@@ -24217,8 +24217,8 @@
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = 4
 	},
-/obj/structure/lever/hidden{
-	redstone_id = "O1"
+/obj/structure/lever/hidden/thieves_guild{
+	redstone_id = "orphanage"
 	},
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/orphanage)

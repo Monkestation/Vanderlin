@@ -1,0 +1,454 @@
+/* Quirk Menu Styles */
+
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: Verdana, sans-serif;
+}
+
+.quirk-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 16px;
+	background: #1a1a1a;
+	border-bottom: 2px solid #333;
+}
+
+.quirk-stats {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	font-size: 14px;
+}
+
+.stat-label {
+	color: #aaa;
+	font-weight: bold;
+}
+
+.stat-value {
+	color: #fff;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.stat-value.negative {
+	color: #f44336;
+}
+
+.stat-value.at-limit {
+	color: #ff9800;
+}
+
+.stat-separator {
+	color: #555;
+}
+
+.quirk-actions {
+	display: flex;
+	gap: 8px;
+}
+
+.action-button {
+	padding: 6px 12px;
+	background: #2a2a2a;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 4px;
+	border: 1px solid #444;
+	cursor: pointer;
+	font-size: 12px;
+	transition: all 0.2s;
+}
+
+.action-button:hover {
+	background: #333;
+	border-color: #555;
+}
+
+.clear-button {
+	background: #d32f2f;
+	border-color: #b71c1c;
+}
+
+.clear-button:hover {
+	background: #e53935;
+}
+
+/* CRITICAL: Main container - MUST be side by side */
+.quirk-container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: calc(100vh - 65px);
+	background: #0a0a0a;
+}
+
+/* Left side - Available quirks - EXACTLY 50% */
+.quirk-left {
+	width: 50%;
+	min-width: 50%;
+	max-width: 50%;
+	display: flex;
+	flex-direction: column;
+	border-right: 2px solid #333;
+	background: #0a0a0a;
+}
+
+/* Right side - Selected quirks - EXACTLY 50% */
+.quirk-right {
+	width: 50%;
+	min-width: 50%;
+	max-width: 50%;
+	display: flex;
+	flex-direction: column;
+	background: #0a0a0a;
+}
+
+.panel-header {
+	padding: 12px 16px;
+	background: #1a1a1a;
+	border-bottom: 1px solid #333;
+	font-weight: bold;
+	font-size: 14px;
+	color: #fff;
+	flex-shrink: 0;
+}
+
+/* Tabs (left side only) */
+.quirk-tabs {
+	display: flex;
+	background: #151515;
+	border-bottom: 1px solid #333;
+	flex-shrink: 0;
+}
+
+.tab-button {
+	flex: 1;
+	padding: 10px 16px;
+	background: #151515;
+	color: #aaa;
+	border: none;
+	border-bottom: 3px solid transparent;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: bold;
+	transition: all 0.2s;
+}
+
+.tab-button:hover {
+	background: #1a1a1a;
+	color: #fff;
+}
+
+.tab-button.active {
+	color: #fff;
+	background: #1a1a1a;
+	border-bottom-color: #4CAF50;
+}
+
+/* Tab panels container */
+.tab-panels {
+	flex: 1;
+	position: relative;
+	overflow: hidden;
+	min-height: 0;
+}
+
+.tab-panel {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.tab-panel.active {
+	display: block;
+}
+
+/* Selected panel */
+.selected-panel {
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
+	min-height: 0;
+}
+
+/* Quirk list */
+.quirk-list {
+	padding: 12px;
+}
+
+/* Quirk cards */
+.quirk-card {
+	background: #1a1a1a;
+	border-radius: 6px;
+	padding: 12px;
+	border-left: 4px solid #555;
+	cursor: pointer;
+	transition: all 0.2s;
+	margin-bottom: 8px;
+}
+
+.quirk-card:hover {
+	background: #222;
+	transform: translateX(4px);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.quirk-card.boon {
+	border-left-color: #4CAF50;
+}
+
+.quirk-card.vice {
+	border-left-color: #f44336;
+}
+
+.quirk-card.peculiarity {
+	border-left-color: #FFC107;
+}
+
+.quirk-card.selected {
+	background: #2a2a2a;
+	border-left-width: 6px;
+}
+
+.quirk-left .quirk-card.selected {
+	opacity: 0.6;
+}
+
+.quirk-left .quirk-card.selected:hover {
+	opacity: 0.5;
+}
+
+.quirk-card.disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+.quirk-card.disabled:hover {
+	transform: none;
+	background: #1a1a1a;
+	box-shadow: none;
+}
+
+.quirk-card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.quirk-name {
+	font-weight: bold;
+	font-size: 14px;
+	color: #fff;
+}
+
+.quirk-card.boon .quirk-name {
+	color: #4CAF50;
+}
+
+.quirk-card.vice .quirk-name {
+	color: #f44336;
+}
+
+.quirk-card.peculiarity .quirk-name {
+	color: #FFC107;
+}
+
+.quirk-points {
+	background: #333;
+	padding: 2px 8px;
+	border-radius: 12px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+}
+
+.quirk-desc {
+	color: #aaa;
+	font-size: 12px;
+	line-height: 1.4;
+	margin-bottom: 8px;
+}
+
+.quirk-status {
+	font-size: 11px;
+	color: #4CAF50;
+	font-weight: bold;
+	text-align: right;
+}
+
+.quirk-status.disabled-text {
+	color: #888;
+}
+
+/* Empty state */
+.empty-state {
+	text-align: center;
+	color: #666;
+	font-size: 13px;
+	padding: 60px 20px;
+	font-style: italic;
+	line-height: 1.6;
+}
+
+/* Scrollbar styling */
+.tab-panel::-webkit-scrollbar,
+.selected-panel::-webkit-scrollbar {
+	width: 10px;
+}
+
+.tab-panel::-webkit-scrollbar-track,
+.selected-panel::-webkit-scrollbar-track {
+	background: #0a0a0a;
+}
+
+.tab-panel::-webkit-scrollbar-thumb,
+.selected-panel::-webkit-scrollbar-thumb {
+	background: #333;
+	border-radius: 5px;
+}
+
+.tab-panel::-webkit-scrollbar-thumb:hover,
+.selected-panel::-webkit-scrollbar-thumb:hover {
+	background: #444;
+}
+
+.quirk-customization {
+    margin-top: 8px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.quirk-customization label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.quirk-select {
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quirk-select:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.quirk-select:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+}
+
+.quirk-select option {
+    background: #2a2a2a;
+    color: #fff;
+}
+
+/* Style for selected quirks showing their customization */
+.quirk-customization-display {
+    margin-top: 8px;
+    padding: 6px 8px;
+    background: rgba(74, 158, 255, 0.1);
+    border-left: 3px solid #4a9eff;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+.quirk-customization-display strong {
+    color: #4a9eff;
+    font-weight: 600;
+}
+
+/* Prevent text selection on card clicks but allow on select */
+.quirk-card {
+    user-select: none;
+}
+
+.quirk-select,
+.quirk-customization label {
+    user-select: auto;
+}
+
+/* Make sure disabled cards can't have their select interacted with */
+.quirk-card.disabled .quirk-select {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.quirk-text-input {
+    width: 100%;
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    font-family: Verdana, sans-serif;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.quirk-text-input:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.quirk-text-input:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.quirk-text-input::placeholder {
+    color: #666;
+    font-style: italic;
+}
+
+/* Prevent text input interaction in disabled cards */
+.quirk-card.disabled .quirk-text-input {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Make sure text inputs don't trigger card selection */
+.quirk-text-input {
+    cursor: text;
+}
+
+/* Style for when text input has content */
+.quirk-text-input:not(:placeholder-shown) {
+    border-color: rgba(76, 175, 80, 0.4);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.quirk-text-input:not(:placeholder-shown):focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}

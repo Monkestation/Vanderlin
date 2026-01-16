@@ -13,6 +13,7 @@
 		STATKEY_STR = 1,
 		STATKEY_CON = 3,
 		STATKEY_SPD = 1,
+		STATKEY_END = 2,
 		STATKEY_INT = -2
 	)
 
@@ -20,12 +21,12 @@
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/axesmaces = 4,
+		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/labor/butchering = 2,

@@ -131,7 +131,7 @@
 			num_unloaded++
 		if(num_unloaded)
 			to_chat(user, span_notice("I remove [(num_unloaded == 1) ? "the" : "[num_unloaded]"] [cartridge_wording]\s from [src]."))
-			playsound(src.loc, 'sound/foley/industrial/loadout.ogg', 100, FALSE)
+			playsound(src, 'sound/foley/industrial/loadout.ogg', 100, FALSE)
 			update_appearance(UPDATE_ICON)
 		else
 			to_chat(user, span_warning("[src] is empty!"))
@@ -160,7 +160,7 @@
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the knob clockwise, increasing the pressure for the airgun to use."))
 					pressure_to_use++
-					playsound(src.loc, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
 			else
 				to_chat(user, span_warning("I try to turn the knob clockwise, but that's as far as it will go."))
 		if("Decrease Pressure")
@@ -169,7 +169,7 @@
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the knob counter-clockwise, decreasing the pressure for the airgun to use."))
 					pressure_to_use--
-					playsound(src.loc, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
 			else
 				to_chat(user, span_warning("I try to turn the knob counter-clockwise, but that's as far as it will go."))
 		if("Loading Chamber")
@@ -177,39 +177,39 @@
 				to_chat(user, span_info("I begin to close the loading chamber..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I close the loading chamber."))
-					playsound(src.loc, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
 					loading_chamber = FALSE
 			else
 				to_chat(user, span_info("I begin to open the loading chamber..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I open the loading chamber."))
-					playsound(src.loc, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
 					loading_chamber = TRUE
 		if("Hand Crank")
 			if(cranked)
 				to_chat(user, span_info("I begin to turn the crank counter-clockwise..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the crank counter-clockwise, decompressing the spring."))
-					playsound(src.loc, 'sound/foley/winding.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/winding.ogg', 100, FALSE)
 					cranked = FALSE
 			else
 				to_chat(user, span_info("I begin to turn the crank clockwise..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the crank clockwise, compressing the spring."))
-					playsound(src.loc, 'sound/foley/winding.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/winding.ogg', 100, FALSE)
 					cranked = TRUE
 		if("Steam Lever")
 			if(steam_lever)
 				to_chat(user, span_info("I begin to pull the steam lever down..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I pull the steam lever down, disabling the flow of steam."))
-					playsound(src.loc, 'sound/foley/lock.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/lock.ogg', 100, FALSE)
 					steam_lever = FALSE
 			else
 				to_chat(user, span_info("I begin to pull the steam lever up..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I pull the steam lever up, enabling the flow of steam."))
-					playsound(src.loc, 'sound/foley/lock.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/lock.ogg', 100, FALSE)
 					steam_lever = TRUE
 	update_appearance(UPDATE_ICON_STATE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -227,7 +227,7 @@
 		spread = 0
 	if(!(cranked) || !(steam_lever) || (loading_chamber))
 		to_chat(user, span_warning("[src] refuses to fire!"))
-		playsound(src.loc, 'sound/foley/industrial/pneumatichiss.ogg', 100, FALSE)
+		playsound(src, 'sound/foley/industrial/pneumatichiss.ogg', 100, FALSE)
 		return FALSE
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
 		var/obj/projectile/BB = CB.BB

@@ -593,6 +593,8 @@
 	desc = "A greataxe who's edge thrums with the motive force, violence, oh, sweet violence!"
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "graggargaxe"
+	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
+	alt_intents = list(/datum/intent/axe/cut,/datum/intent/sword/chop)
 	blade_dulling = DULLING_BASHCHOP
 	sellprice = 0 // Graggarite axe, nobody wants this
 

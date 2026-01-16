@@ -112,7 +112,7 @@
 	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
 	if(wolf_datum)
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 	return TRUE
 
 /datum/status_effect/debuff/silver_bane/on_remove()
@@ -137,7 +137,7 @@
 	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
 	if(wolf_datum)
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 
 /datum/status_effect/debuff/silver_bane/proc/trigger_stun()
 	if(!owner || is_stunned)

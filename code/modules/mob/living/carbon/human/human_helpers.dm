@@ -2,9 +2,6 @@
 /mob/living/carbon/human/proc/change_name(new_name)
 	real_name = new_name
 
-// /mob/living/carbon/human/restrained(ignore_grab)
-// 	. = ((wear_armor && wear_armor.breakouttime) || ..())
-
 /mob/living/carbon/human/check_language_hear(language)
 	var/mob/living/carbon/V = src
 	if(!language)
@@ -13,7 +10,7 @@
 		if(istype(wear_neck, /obj/item/clothing/neck/talkstone))
 			return TRUE
 	if(!has_language(language))
-		if(has_flaw(/datum/charflaw/paranoid))
+		if(has_quirk(/datum/quirk/vice/paranoid))
 			V.add_stress(/datum/stress_event/paratalk)
 
 /mob/living/carbon/human/canBeHandcuffed()

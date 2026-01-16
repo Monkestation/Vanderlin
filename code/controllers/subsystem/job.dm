@@ -656,7 +656,7 @@ SUBSYSTEM_DEF(job)
 			RejectPlayer(player)
 
 /// Gives the player the stuff they should have with their rank
-/datum/controller/subsystem/job/proc/EquipRank(mob/living/equipping, datum/job/job, client/player_client)
+/datum/controller/subsystem/job/proc/EquipRank(mob/living/carbon/human/equipping, datum/job/job, client/player_client)
 	equipping.job = job.title
 
 	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
@@ -681,6 +681,11 @@ SUBSYSTEM_DEF(job)
 			to_chat(player_client, related_policy)
 
 	job.after_spawn(equipping, player_client)
+	if(length(job.advclass_cat_rolls))
+		// Dont apply the stuff, let adv class handler do it later
+		return
+	for(var/datum/quirk/quirk in equipping.quirks)
+		quirk.after_job_spawn(job)
 
 /datum/job/proc/greet(mob/player)
 	//! TODO: Refactor this out... Look at how TG handles job greetings or implement our own method
