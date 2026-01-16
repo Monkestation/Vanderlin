@@ -108,6 +108,6 @@
 		cast_on.reagents.add_reagent(rid, ramount)
 
 		if(cast_on.mind?.has_antag_datum(/datum/antagonist/werewolf))
-			cast_on.visible_message(span_green("[owner] is licking [cast_on]'s wounds with its tongue!"), span_notice("My kin has covered my wounds..."))
+			cast_on.visible_message(span_green("[owner] is licking [cast_on]'s wounds with its tongue!"), span_notice("My kin has covered my wounds..."), vision_distance = COMBAT_MESSAGE_RANGE)
 		else
-			cast_on.visible_message(span_green("[owner] is licking [cast_on]'s wounds with its tongue!"), span_notice("That thing... Did it lick my wounds?"))
+			cast_on.visible_message(span_green("[owner] is licking [cast_on]'s wounds with its tongue!"), span_notice("That thing... Did it lick my wounds?"), vision_distance = COMBAT_MESSAGE_RANGE)

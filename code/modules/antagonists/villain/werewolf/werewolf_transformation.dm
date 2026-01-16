@@ -145,7 +145,7 @@
 	caster_mob.adjustToxLoss(werewolf_user.getToxLoss())
 	caster_mob.adjustOxyLoss(werewolf_user.getOxyLoss())
 	caster_mob.adjustCloneLoss(werewolf_user.getCloneLoss())
-	caster_mob.blood_volume = werewolf_user.blood_volume
+	// caster_mob.blood_volume = werewolf_user.blood_volume
 
 	UnregisterSignal(werewolf_user, COMSIG_LIVING_UNSHAPESHIFTED)
 	transformed = FALSE
