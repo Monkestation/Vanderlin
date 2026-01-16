@@ -1,17 +1,17 @@
 /datum/inqports/reliquary
-	category = 1 // Category for the HERMES. They are - "✤ SUPPLIES ✤", "✤ ARTICLES ✤", ✤ RELIQUARY ✤, "✤ WARDROBE ✤", "✤ EQUIPMENT ✤".
+	category = 1 // Category for the HERMES. They are - " SUPPLIES ", " ARTICLES ",  RELIQUARY , " WARDROBE ", " EQUIPMENT ".
 
 /datum/inqports/supplies
-	category = 2  // Category for the HERMES. They are - "✤ SUPPLIES ✤", "✤ ARTICLES ✤", ✤ RELIQUARY ✤, "✤ WARDROBE ✤", "✤ EQUIPMENT ✤".
+	category = 2  // Category for the HERMES. They are - " SUPPLIES ", " ARTICLES ",  RELIQUARY , " WARDROBE ", " EQUIPMENT ".
 
 /datum/inqports/articles
-	category = 3  // Category for the HERMES. They are - "✤ SUPPLIES ✤", "✤ ARTICLES ✤", ✤ RELIQUARY ✤, "✤ WARDROBE ✤", "✤ EQUIPMENT ✤".
+	category = 3  // Category for the HERMES. They are - " SUPPLIES ", " ARTICLES ",  RELIQUARY , " WARDROBE ", " EQUIPMENT ".
 
 /datum/inqports/equipment
-	category = 4 // Category for the HERMES. They are - "✤ SUPPLIES ✤", "✤ ARTICLES ✤", ✤ RELIQUARY ✤, "✤ WARDROBE ✤", "✤ EQUIPMENT ✤".
+	category = 4 // Category for the HERMES. They are - " SUPPLIES ", " ARTICLES ",  RELIQUARY , " WARDROBE ", " EQUIPMENT ".
 
 /datum/inqports/wardrobe
-	category = 5 // Category for the HERMES. They are - "✤ SUPPLIES ✤", "✤ ARTICLES ✤", ✤ RELIQUARY ✤, "✤ WARDROBE ✤", "✤ EQUIPMENT ✤".
+	category = 5 // Category for the HERMES. They are - " SUPPLIES ", " ARTICLES ",  RELIQUARY , " WARDROBE ", " EQUIPMENT ".
 
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/
@@ -28,7 +28,7 @@
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/
 	name = "grenzelhoft's finest wardrobe crate"
 
-/// ✤ SUPPLIES ✤ START HERE! WOW!
+///  SUPPLIES  START HERE! WOW!
 
 /datum/inqports/supplies/extrafunding
 	name = "(80 Silvers) Extra Funding"
@@ -175,7 +175,7 @@
 	for(var/i in 1 to 6)
 		new /obj/item/ingot/silverblessed/bullion(src)
 
-// ✤ ARTICLES ✤ RIGHT HERE! THAT'S RIGHT!
+//  ARTICLES  RIGHT HERE! THAT'S RIGHT!
 
 /datum/inqports/articles/psycrosssilver
 	name = "1 Silver Psycross"
@@ -245,7 +245,7 @@
 	marquescost = 8
 
 
-// ✤ EQUIPMENT ✤ BELONGS HERE! JUST BELOW!
+//  EQUIPMENT  BELONGS HERE! JUST BELOW!
 /datum/inqports/equipment/puffer
 	name = "1 Puffer, 4 lead bullets and powder flask"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/puffer
@@ -356,7 +356,7 @@
 	item_type = /obj/item/clothing/face/spectacles/inq
 	marquescost = 16
 
-// ✤ WARDROBE ✤ STARTS HERE! YEP!
+//  WARDROBE  STARTS HERE! YEP!
 
 /obj/item/clothing/neck/fencerguard/inq
 	icon_state = "fencercollar"
