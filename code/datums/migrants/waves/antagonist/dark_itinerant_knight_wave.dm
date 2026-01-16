@@ -7,7 +7,6 @@
 	title = "Drow Knight"
 	tutorial = "You are an evil itinerant Knight, you have embarked alongside your squire on a voyage to engulf chaos within these lands."
 	outfit = /datum/outfit/dark_itinerant_knight
-	antag_role = /datum/antagonist/zizocultist/zizo_knight
 	allowed_sexes = list(FEMALE)
 	allowed_races = list(SPEC_ID_DROW)
 
@@ -64,7 +63,6 @@
 	title = "Underling Squire"
 	tutorial = "You are the squire of an evil knight, they have taken you under their custody as you were the only one who didn't object to their dubious ethics."
 	outfit = /datum/outfit/dark_itinerant_squire
-	antag_role = /datum/antagonist/zizocultist/zizo_knight
 	allowed_sexes = list(FEMALE)
 	allowed_races = list(SPEC_ID_DROW, SPEC_ID_HALF_DROW)
 
@@ -137,3 +135,4 @@
 		/datum/migrant_role/dark_itinerant_knight = 1,
 	)
 	greet_text = "These lands have insulted once more Zizo, you are here to remind them of her prowess."
+
