@@ -18045,12 +18045,12 @@
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/neuFarm/seed/spore/capillus,
 /obj/item/neuFarm/seed/spore/capillus,
-/obj/item/neuFarm/seed/spore/borowiki,
-/obj/item/neuFarm/seed/spore/borowiki,
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
 	pixel_y = 0
 	},
+/obj/item/neuFarm/seed/spore/kirunabal,
+/obj/item/neuFarm/seed/spore/kirunabal,
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
 "iMG" = (
