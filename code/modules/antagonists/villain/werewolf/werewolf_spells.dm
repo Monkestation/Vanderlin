@@ -97,6 +97,12 @@
 	associated_skill = null
 	has_visual_effects = FALSE
 
+/datum/action/cooldown/spell/woundlick/is_valid_target(atom/target_atom)
+	. = ..()
+	if(!.)
+		return FALSE
+	return ismob(target_atom)
+
 /datum/action/cooldown/spell/woundlick/cast(mob/living/carbon/human/cast_on)
 	. = ..()
 	if(!istype(cast_on))

@@ -72,11 +72,11 @@
 	human_user.rage_datum.grant_to_secondary(new_werewolf)
 	human_user.rage_datum.rage_change_on_life -= transformed_rage_decay
 
-	new_werewolf.adjustBruteLoss(human_user.getBruteLoss())
-	new_werewolf.adjustFireLoss(human_user.getFireLoss())
-	new_werewolf.adjustToxLoss(human_user.getToxLoss())
-	new_werewolf.adjustOxyLoss(human_user.getOxyLoss())
-	new_werewolf.adjustCloneLoss(human_user.getCloneLoss())
+	new_werewolf.adjustBruteLoss(human_user.getBruteLoss() / 2)
+	new_werewolf.adjustFireLoss(human_user.getFireLoss() / 2)
+	new_werewolf.adjustToxLoss(human_user.getToxLoss() / 2)
+	new_werewolf.adjustOxyLoss(human_user.getOxyLoss() / 2)
+	new_werewolf.adjustCloneLoss(human_user.getCloneLoss() / 2)
 	new_werewolf.blood_volume = human_user.blood_volume
 	human_user.fully_heal(HEAL_DAMAGE|HEAL_BLOOD|HEAL_WOUNDS)
 
@@ -128,7 +128,8 @@
 	SIGNAL_HANDLER
 
 	var/mob/living/carbon/human/werewolf_user = status_owner
-
+	for(var/obj/item/dropped_item in werewolf_user)
+		werewolf_user.dropItemToGround(dropped_item, silent = TRUE)
 	var/mob/living/carbon/human/caster_mob = status_caster_mob
 	werewolf_user.spawn_gibs(FALSE)
 	INVOKE_ASYNC(werewolf_user, TYPE_PROC_REF(/mob, emote), "scream")
@@ -140,11 +141,11 @@
 	caster_mob.rage_datum.remove_secondary()
 	caster_mob.rage_datum.rage_change_on_life += transformed_rage_decay
 
-	caster_mob.adjustBruteLoss(werewolf_user.getBruteLoss())
-	caster_mob.adjustFireLoss(werewolf_user.getFireLoss())
-	caster_mob.adjustToxLoss(werewolf_user.getToxLoss())
-	caster_mob.adjustOxyLoss(werewolf_user.getOxyLoss())
-	caster_mob.adjustCloneLoss(werewolf_user.getCloneLoss())
+	caster_mob.adjustBruteLoss(werewolf_user.getBruteLoss() / 2)
+	caster_mob.adjustFireLoss(werewolf_user.getFireLoss() / 2)
+	caster_mob.adjustToxLoss(werewolf_user.getToxLoss() / 2)
+	caster_mob.adjustOxyLoss(werewolf_user.getOxyLoss() / 2)
+	caster_mob.adjustCloneLoss(werewolf_user.getCloneLoss() / 2)
 	// caster_mob.blood_volume = werewolf_user.blood_volume
 
 	UnregisterSignal(werewolf_user, COMSIG_LIVING_UNSHAPESHIFTED)
