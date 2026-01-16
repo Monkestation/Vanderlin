@@ -228,7 +228,7 @@
 						if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
 							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 							record_round_statistic(STATS_GRAVES_ROBBED)
-							to_chat(user, span_warningbig("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
+							to_chat(user, span_warning("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
 							L.apply_status_effect(/datum/status_effect/debuff/cursed)
 							for (var/mob/living/player in GLOB.player_list)
 								if (player.stat == DEAD || isbrain(player))
