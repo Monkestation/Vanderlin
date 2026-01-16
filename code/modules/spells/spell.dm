@@ -170,6 +170,9 @@
 	/// If set we are sleep experience after this threshold and normal before.
 	var/experience_sleep_threshold = SKILL_LEVEL_APPRENTICE
 
+	/// Timer ID for the auto cancel, so we can cancel it
+	var/auto_cancel_timer = null
+
 /datum/action/cooldown/spell/New(Target)
 	. = ..()
 	if(!active_msg)
@@ -750,7 +753,7 @@
 /// End the charging cycle
 /datum/action/cooldown/spell/proc/end_charging()
 	UnregisterSignal(owner.client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
-	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_MOVABLE_MOVED))
+	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_MOB_DEATH, COMSIG_MOVABLE_MOVED))
 	currently_charging = FALSE
 	charge_started_at = null
 	charge_target_time = null
@@ -774,6 +777,8 @@
 
 /// Cancel casting and all its effects.
 /datum/action/cooldown/spell/proc/cancel_casting()
+	if(QDELETED(src)) // Timer
+		return
 	charged = FALSE
 	end_charging()
 
@@ -981,19 +986,19 @@
 
 		if(SPELL_MIRACLE)
 			var/mob/living/carbon/human/H = owner
-			if(!istype(H) || !H.cleric)
+			if(!istype(H))
 				return
-			H.cleric.update_devotion(-used_cost)
+			H.cleric?.update_devotion(-used_cost)
 
 		if(SPELL_RAGE)
 			var/mob/living/carbon/human/H = owner
-			if(!istype(H) || !H.rage_datum)
+			if(!istype(H))
 				return
-			H.rage_datum.update_rage(-used_cost)
+			H.rage_datum?.update_rage(-used_cost)
 
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
-			if(!gaunt.check_gauntlet_validity(owner))
+			if(!gaunt?.check_gauntlet_validity(owner))
 				return
 
 			gaunt.consume_essence(used_cost, attunements)
@@ -1051,25 +1056,28 @@
 		return
 
 	if(isnull(location) || istype(_target, /atom/movable/screen)) //Clicking on a screen object.
-		if(_target.plane != CLICKCATCHER_PLANE) //The clickcatcher is a special case. We want the click to trigger then, under it.
-			return //If we click and drag on our worn backpack, for example, we want it to open instead.
+		if(_target.plane != CLICKCATCHER_PLANE)
+			return
 
-	// We don't actually care about the target or params, we only care about the target on mouse up
+	// We don't actually care about the target or params now, we only care about the target on mouse up
 
 	// Register here because the mouse up can get triggered before the mouse down otherwise
-	RegisterSignal(owner.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
-	RegisterSignal(owner, COMSIG_MOB_LOGOUT, PROC_REF(signal_cancel))
-
-	on_start_charge()
-
+	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
+	RegisterSignal(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 
-	// Cancel the next click with no timeout
-	source?.click_intercept_time = INFINITY
+	var/spell_timeout = 3 MINUTES
+
+	// Cancel the next click with 3 minutes timeout
+	source?.click_intercept_time = world.time + spell_timeout
+	// This is a failsafe to cancel casting in extreme circimstances that aren't covered here
+	// We need to call cancel_casting
+	auto_cancel_timer = addtimer(CALLBACK(src, PROC_REF(cancel_casting)), spell_timeout, TIMER_STOPPABLE)
 	source?.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charging.dmi'
 	owner.update_mouse_pointer()
 
+	on_start_charge()
 	charge_started_at = world.time
 	charge_target_time = get_adjusted_charge_time()
 
@@ -1077,17 +1085,18 @@
 /datum/action/cooldown/spell/proc/try_casting(client/source, atom/_target, turf/location, control, params)
 	SIGNAL_HANDLER
 
+	// Stop the failsafe timer
+	if(auto_cancel_timer)
+		deltimer(auto_cancel_timer)
+
 	// This can happen
-	if(!charge_started_at)
+	if(!source || !charge_started_at || !can_cast_spell(TRUE))
 		cancel_casting()
 		return
 
 	var/success = world.time >= (charge_started_at + charge_target_time)
-	if(!on_end_charge(success))
-		RegisterSignal(owner.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(start_casting))
-		return
-
-	if(!can_cast_spell(TRUE))
+	if(!on_end_charge(success)) // Give them another try if they mess up the timing
+		RegisterSignal(source, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(start_casting))
 		return
 
 	var/list/modifiers = params2list(params)
@@ -1101,7 +1110,7 @@
 
 	// Call this directly to do all the relevant checks and aim assist
 	InterceptClickOn(owner, params, _target)
-	owner.client?.click_intercept_time = 0
+	source.click_intercept_time = 0
 
 /datum/action/cooldown/spell/proc/signal_cancel()
 	SIGNAL_HANDLER
