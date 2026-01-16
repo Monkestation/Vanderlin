@@ -83,3 +83,13 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/cheese_wedge
 	output = /obj/item/reagent_containers/food/snacks/foodbase/handpieraw/cheese
 	crafting_message = "add cheddar to the handpie"
+
+/datum/repeatable_crafting_recipe/cooking/handpie/kirunabal
+	name = "Raw Kirunabal Handpie"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal = 1,
+		/obj/item/reagent_containers/food/snacks/piedough = 1,
+	)
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal
+	output = /obj/item/reagent_containers/food/snacks/foodbase/handpieraw/kirunabal
+	crafting_message = "add kirunabal to the handpie"

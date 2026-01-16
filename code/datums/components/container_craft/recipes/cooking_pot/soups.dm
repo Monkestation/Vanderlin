@@ -4,7 +4,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/egg = 1)
 	max_optionals = 2
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 2
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 2,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 2,
 	)
 	finished_smell = /datum/pollutant/food/egg_soup
 	crafting_time = 40 SECONDS
@@ -15,7 +16,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/cheese = 1)
 	max_optionals = 2
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 2
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 2,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 2,
 	)
 	finished_smell = /datum/pollutant/food/cheese_soup
 	crafting_time = 40 SECONDS

@@ -31,6 +31,7 @@
 	"Pineapples", \
 	"Breakfast food", \
 	"Clothing", \
+	"Mushroom", \
 )
 
 #define DRINK_NICE	1

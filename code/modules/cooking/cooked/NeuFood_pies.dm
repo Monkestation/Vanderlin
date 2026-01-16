@@ -324,6 +324,10 @@
 	foodtype = GRAIN | DAIRY
 	tastes = list("hot cheese" = 1)
 
+/obj/item/reagent_containers/food/snacks/foodbase/handpieraw/kirunabal
+	foodtype = GRAIN | MUSHROOM
+	tastes = list("hearty mushroom" = 1)
+
 /obj/item/reagent_containers/food/snacks/foodbase/handpieraw/apple
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	w_class = WEIGHT_CLASS_NORMAL

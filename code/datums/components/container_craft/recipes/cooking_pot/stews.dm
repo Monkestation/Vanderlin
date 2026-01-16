@@ -4,7 +4,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/veg/potato_sliced = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/potato_stew
 	crafting_time = 40 SECONDS
@@ -15,7 +16,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/veg/onion_sliced = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/onion_stew
 	crafting_time = 30 SECONDS
@@ -26,7 +28,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/veg/cabbage_sliced = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/cabbage_stew
 	crafting_time = 35 SECONDS
@@ -37,7 +40,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/veg/turnip_sliced = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/turnip_stew
 	crafting_time = 35 SECONDS
@@ -48,7 +52,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/meat/mince/fish = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/fish_stew
 	crafting_time = 40 SECONDS
@@ -59,7 +64,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/meat/mince/poultry = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/chicken_stew
 	crafting_time = 45 SECONDS
@@ -73,7 +79,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/meat/strange = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/potato_stew
 	crafting_time = 45 SECONDS
@@ -84,7 +91,8 @@
 	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/meat_stew
 	crafting_time = 45 SECONDS
@@ -107,7 +115,8 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/produce/mushroom/kirunabal = 1)
 	max_optionals = 3
 	optional_wildcard_requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 3,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom = 3,
 	)
 	finished_smell = /datum/pollutant/food/kirunabal_stew
 	crafting_time = 40 SECONDS
