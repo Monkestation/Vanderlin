@@ -38,6 +38,7 @@
 
 	//handle DNA and other attributes
 	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(icon_update=0)
 
 	if(suiciding)
@@ -165,6 +166,7 @@
 		O.equip_to_appropriate_slot(C)
 
 	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(mutcolor_update=1)
 
 	if(cmptext("monkey",copytext(O.dna.real_name,1,7)))

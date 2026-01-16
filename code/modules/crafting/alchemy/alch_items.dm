@@ -5,7 +5,7 @@
 	icon_state = "vial_bottle"
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(10)
-	volume = 30
+	volume = 25
 	fill_icon_thresholds = list(0, 33, 66, 100)
 	dropshrink = 0.8
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
@@ -52,7 +52,7 @@
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		to_chat(user, span_notice("You thumb off the cork from [src]."))
-		playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		spillable = TRUE
 		desc += "The cork appears to be off."
 	update_appearance(UPDATE_OVERLAYS)

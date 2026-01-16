@@ -31,7 +31,7 @@
 	for(var/mob/living/L in victim)
 		if(L.can_block_magic(MAGIC_RESISTANCE))
 			L.visible_message(span_warning("The ice fades away around [L]."))
-			playsound(get_turf(L), 'sound/magic/magic_nulled.ogg', 100)
+			playsound(L, 'sound/magic/magic_nulled.ogg', 100)
 			continue
 		L.adjustFireLoss(35)
 		L.apply_status_effect(/datum/status_effect/debuff/frostbite, null, attuned_strength)

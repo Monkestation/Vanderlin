@@ -13,21 +13,18 @@
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/riding = 3,
 		/datum/skill/craft/cooking = 1,
 	)
-	traits = list(
-		TRAIT_NOBLE,
-		TRAIT_HEAVYARMOR,
-	)
+
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_INT = 3,
@@ -37,19 +34,26 @@
 		STATKEY_LCK = 5,
 	)
 
+	traits = list(
+		TRAIT_NOBLE,
+		TRAIT_HEAVYARMOR,
+	)
+
 /datum/outfit/adventurer/heartfeltlord
-	name = "Lord of Heartfelt"
+	name = "Lord of Heartfelt (Adventurer)"
+
 	shirt = /obj/item/clothing/shirt/undershirt
 	belt = /obj/item/storage/belt/leather/black
-	neck = /obj/item/clothing/neck/gorget
 	head = /obj/item/clothing/head/helmet
 	shoes = /obj/item/clothing/shoes/nobleboot
 	pants = /obj/item/clothing/pants/tights/colored/black
 	cloak = /obj/item/clothing/cloak/heartfelt
 	armor = /obj/item/clothing/armor/medium/surcoat/heartfelt
 	beltr = /obj/item/storage/belt/pouch/coins/rich
-	beltl = /obj/item/scomstone
+	beltl = /obj/item/weapon/sword/long
 	gloves = /obj/item/clothing/gloves/leather/black
 	neck = /obj/item/clothing/neck/chaincoif
-	beltl = /obj/item/weapon/sword/long
+	backpack_contents = list(/obj/item/scomstone = 1)
+
+
 

@@ -73,6 +73,18 @@
 	sellprice = 15
 	smeltresult = /obj/item/ingot/iron
 
+/obj/item/weapon/sword/short/bronze
+	name = "bronze short sword"
+	desc = "A bronze sword of shortened design and a reduced grip for single hand use."
+	icon_state = "shortsword_bronze"
+	force = DAMAGE_SHORTSWORD
+	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 85
+	wdefense = GOOD_PARRY
+	wbalance = HARD_TO_DODGE
+	sellprice = 10
+	smeltresult = /obj/item/ingot/bronze
+
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
 	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
@@ -141,6 +153,17 @@
 	max_integrity = INTEGRITY_STRONG
 	wdefense = GOOD_PARRY
 	smeltresult = /obj/item/ingot/iron
+
+/obj/item/weapon/sword/bronze
+	name = "bronze sword"
+	desc = "A simple and reliable bronze sword."
+	icon_state = "sword_bronze"
+	force = DAMAGE_SWORD-1
+	force_wielded = DAMAGE_SWORD_WIELD-1
+	max_blade_int = 150
+	max_integrity = INTEGRITY_STANDARD
+	wdefense = AVERAGE_PARRY
+	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/weapon/sword/kaskara
 	name = "steel kaskara"
@@ -279,12 +302,20 @@
 	gripped_intents = list(/datum/intent/axe/chop, /datum/intent/sword/thrust/curved)
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
+	swingsound = BLADEWOOSH_MED
 	smeltresult = /obj/item/ingot/steel
 
 /obj/item/weapon/sword/sabre/dadao/iron
 	name = "iron dadao"
 	icon_state = "dadao_iron"
 	smeltresult = /obj/item/ingot/iron
+
+/obj/item/weapon/sword/sabre/dadao/bronze
+	name = "bronze dadao"
+	icon_state = "dadao_bronze"
+	smeltresult = /obj/item/ingot/bronze
+	max_blade_int = 95
+	max_integrity = INTEGRITY_STANDARD
 
 //................ Shalal Sabre ............... //
 /obj/item/weapon/sword/sabre/shalal
@@ -348,7 +379,6 @@
 	icon_state = "falchion"
 	swingsound = BLADEWOOSH_HUGE
 	wbalance = EASY_TO_DODGE
-	sellprice = 100
 
 /obj/item/weapon/sword/scimitar/ngombe
 	name = "ngombe ngulu"
@@ -444,7 +474,13 @@
 	minstr = 6
 	sellprice = 45
 
-/obj/item/weapon/sword/scimitar/sengese/silver
+/obj/item/weapon/sword/scimitar/sengese/bronze
+	name = "bronze sengese"
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
+	icon_state = "sengese_bronze"
+	sellprice = 15
+	smeltresult = /obj/item/ingot/bronze
+
 /obj/item/weapon/sword/scimitar/sengese/silver
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/chop, /datum/intent/sword/thrust/curved)
@@ -1071,9 +1107,10 @@
 
 /obj/item/weapon/sword/long/greatsword/psydon/relic
 	name = "Crusade"
-	desc = "The heaviest blade of the Ordo Benetarus. Its unparalleled strength commands even the greatest of foes to fall. Wade through the unholy in Psydon’s name. Let none survive."
+	desc = "The grandest blade of the Ordo Benetarus. Its unparalleled strength commands even the greatest of foes to fall. Wade through the unholy in Psydon’s name. Let none survive."
 	icon_state = "psygsword"
 	force = 25
+	minstr = 9 //So the ordinator can use his sword as old.
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/axe/chop)
 
@@ -1729,7 +1766,7 @@
 				M.visible_message(span_danger("[user] takes [I] from [M]'s hand!"), \
 				span_userdanger("[user] takes [I] from my hand!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
 				user.changeNext_move(12)//avoids instantly attacking with the new weapon
-				playsound(src.loc, 'sound/combat/weaponr1.ogg', 100, FALSE, -1) //sound queue to let them know that they got disarmed
+				playsound(src, 'sound/combat/weaponr1.ogg', 100, FALSE, -1) //sound queue to let them know that they got disarmed
 				if(!M.mind)	//If you hit an NPC - they pick up weapons instantly. So, we do more stuff.
 					M.Stun(10)
 			else
@@ -1746,7 +1783,7 @@
 					user.Immobilize(10)
 					M.Immobilize(10)
 					M.visible_message(span_notice("[user.name] struggles to disarm [M.name]!"))
-					playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
+					playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
 		if(!isliving(M))
 			to_chat(user, span_warning("You cannot disarm this enemy!"))
 			return

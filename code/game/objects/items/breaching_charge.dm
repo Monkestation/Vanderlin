@@ -73,7 +73,7 @@
 /obj/item/breach_charge/fire_act(added, maxstacks)
 	if(deployed && !ignited)
 		visible_message(span_warning("[src] ignites!"))
-		playsound(src.loc, 'sound/items/fuse.ogg', 100)
+		playsound(src, 'sound/items/fuse.ogg', 100)
 		ignited = TRUE
 		detonation_time = world.time + fuse_duration
 		icon_state = "[initial(icon_state)]_ignited"
