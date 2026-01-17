@@ -6,11 +6,16 @@
 
 	accepts_water_input = TRUE
 
-	var/obj/particle_emitter/emitter
+	var/obj/effect/abstract/particle_holder/water_spewer
 
 /obj/structure/water_vent/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
+
+/obj/structure/water_vent/Destroy()
+	if(water_spewer)
+		QDEL_NULL(water_spewer)
+	. = ..()
 
 /obj/structure/water_vent/valid_water_connection(direction, obj/structure/water_pipe/pipe)
 	if(direction == dir)
@@ -22,11 +27,10 @@
 		spew_water()
 
 /obj/structure/water_vent/proc/spew_water()
-	emitter = locate(/obj/particle_emitter) in particle_emitters
-	if(!emitter)
-		emitter = MakeParticleEmitter(/particles/smoke/steam/water_pipe)
+	if(!water_spewer)
+		water_spewer = new(src, /particles/smoke/steam/water_vent)
 	var/datum/reagent/reagent = input.carrying_reagent
-	emitter.color = initial(reagent.color)
+	water_spewer.color = initial(reagent.color)
 
 	var/matrix/matrix = matrix()
 	switch(dir)
@@ -36,13 +40,13 @@
 			matrix.Turn(90)
 		if(WEST)
 			matrix.Turn(270)
-	emitter.transform = matrix
+	water_spewer.transform = matrix
 
 	var/range = max(1, FLOOR(input.water_pressure * 0.1, 1))
 	range = min(3, range)
 
 	var/list/emitter_velocity = list(0, 0.25 * range, 0)
-	emitter.particles.velocity = emitter_velocity
+	water_spewer.particles.velocity = emitter_velocity
 	if(reagent)
 		var/datum/reagent/faux_reagent = new reagent
 		faux_reagent.on_aeration(input.water_pressure, get_turf(src))

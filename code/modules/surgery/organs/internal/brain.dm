@@ -328,5 +328,14 @@
 	for(var/X in traumas)
 		qdel(X)
 
+/obj/item/organ/brain/applyOrganDamage(d, maximum)
+	. = ..()
+	if(!owner)
+		return
+	if(damage >= 60)
+		owner.add_stress(/datum/stress_event/brain_damage)
+	else
+		owner.remove_stress(/datum/stress_event/brain_damage)
+
 /obj/item/organ/brain/smooth
 	icon_state = "brain-smooth"

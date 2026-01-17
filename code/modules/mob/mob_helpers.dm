@@ -777,11 +777,6 @@
 		if(BODY_ZONE_PRECISE_L_FOOT)
 			aimheight = 1
 
-/mob/proc/is_blind()
-	if(HAS_TRAIT(src, TRAIT_BLIND))
-		return TRUE
-	return eye_blind
-
 // moved out of admins.dm because things other than admin procs were calling this.
 /**
  * Is this mob special to the gamemode?
