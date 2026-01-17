@@ -108,7 +108,7 @@
 /datum/supply_pack/weapons/iron/ikukri
 	name = "Iron Kukri"
 	cost = 15
-	contains = /obj/item/weapon/knife/dagger/kukri
+	contains = /obj/item/weapon/knife/hunting/kukri/iron
 
 /datum/supply_pack/weapons/iron/ishishpar
 	name = "Iron Shishpar"
@@ -208,7 +208,7 @@
 /datum/supply_pack/weapons/steel/kukri
 	name = "Steel Kukri"
 	cost = 45
-	contains = /obj/item/weapon/knife/dagger/steel/kukri
+	contains = /obj/item/weapon/knife/hunting/kukri
 
 /datum/supply_pack/weapons/steel/shishpar
 	name = "Steel Shishpar"

@@ -263,7 +263,7 @@
 	name = "Iron Kukri"
 	recipe_name = "a Iron Kukri"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	created_item = /obj/item/weapon/knife/dagger/kukri
+	created_item = /obj/item/weapon/knife/hunting/kukri/iron
 
 /datum/anvil_recipe/weapons/iron/ada
 	name = "Iron Ada"
@@ -696,7 +696,7 @@
 	name = "Steel Kukri"
 	recipe_name = "a Steel Kukri"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	created_item = /obj/item/weapon/knife/dagger/steel/kukri
+	created_item = /obj/item/weapon/knife/hunting/kukri
 
 /datum/anvil_recipe/weapons/steel/knuckles
 	name = "Knuckles"

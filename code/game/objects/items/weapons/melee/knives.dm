@@ -53,7 +53,6 @@
 	desc = "Loyal companion to hunters and poachers, from humble bone to truest steel, disembowel your prey with glee."
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
-	max_blade_int = 140
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 6
@@ -211,12 +210,13 @@
 	sellprice = 12
 	dropshrink = 1.0
 
-/obj/item/weapon/knife/dagger/kukri
+/obj/item/weapon/knife/hunting/kukri/iron
 	name = "iron kukri"
 	icon_state = "kukri_iron"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
-	force = DAMAGE_DAGGER + 1
+	force = DAMAGE_DAGGER
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
@@ -260,12 +260,12 @@
 	icon_state = "sdaggeralt"
 	desc = "A dagger of refined steel, and even more refined appearance."
 
-/obj/item/weapon/knife/dagger/steel/kukri
+/obj/item/weapon/knife/hunting/kukri
 	name = "steel kukri"
 	icon_state = "kukri_steel"
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER + 1
-	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
+	wdefense = AVERAGE_PARRY
 	melt_amount = 75
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
