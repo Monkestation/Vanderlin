@@ -16,7 +16,7 @@
 		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/knives = 4,
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/climbing = 4,
 		/datum/skill/craft/crafting = 3,

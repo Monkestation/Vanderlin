@@ -27,8 +27,7 @@
 		STATKEY_STR = 1,
 		STATKEY_INT = 2,
 		STATKEY_END = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1,
+		STATKEY_SPD = -1
 	)
 
 	skills = list(
@@ -38,7 +37,7 @@
 		/datum/skill/craft/engineering = 4,
 		/datum/skill/misc/lockpicking = 3,
 		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/labor/mining = 2,
 		/datum/skill/craft/smelting = 4,
@@ -48,9 +47,9 @@
 
 /datum/job/artificer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, rand(1,3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, pick(1,2), TRUE)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
 
 /datum/outfit/artificer
 	name = "Artificer"

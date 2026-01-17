@@ -87,6 +87,7 @@
 	if(SSticker.current_state != GAME_STATE_FINISHED)
 		return
 	status_flags |= GODMODE
+	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, ROUNDSTART_TRAIT)
 	ai_controller?.set_ai_status(AI_STATUS_OFF)
 	if(client)
 		client.verbs |= /client/proc/lobbyooc

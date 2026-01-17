@@ -65,7 +65,7 @@
 	if(!master)
 		return FALSE
 
-	revive(TRUE, TRUE)
+	revive(ADMIN_HEAL_ALL)
 
 	if(ckey) //player
 		ckey = ckey
@@ -106,8 +106,8 @@
 	skele_look()
 	grant_undead_eyes()
 
-	if(charflaw)
-		QDEL_NULL(charflaw)
+	if(length(quirks))
+		clear_quirks()
 
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)

@@ -116,16 +116,17 @@
 			anvil_presses -= anvil_presses[choice]
 			user.balloon_alert(user, "Great Hit!")
 			playsound(host_anvil, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
-			for(var/mob/M in GLOB.player_list)
-				if(!is_in_zweb(M.z,host_anvil.z))
-					continue
-				var/turf/M_turf = get_turf(M)
-				var/far_smith_sound = sound(pick('sound/items/smithdist1.ogg','sound/items/smithdist2.ogg','sound/items/smithdist3.ogg'))
-				if(M_turf)
-					var/dist = get_dist(M_turf, host_anvil.loc)
-					if(dist < 7)
-						continue
-					M.playsound_local(M_turf, null, 100, 1, get_rand_frequency(), falloff_exponent = 5, S = far_smith_sound)
+
+			// for(var/mob/player as anything in GLOB.player_list)
+			// 	if(!is_in_zweb(player.z, host_anvil.z))
+			// 		continue
+			// 	var/turf/player_turf = get_turf(player)
+			// 	var/far_smith_sound = sound(pick('sound/items/smithdist1.ogg','sound/items/smithdist2.ogg','sound/items/smithdist3.ogg'))
+			// 	if(player_turf)
+			// 		var/dist = get_dist(player_turf, host_anvil.loc)
+			// 		if(dist < 7)
+			// 			continue
+			// 		player.playsound_local(player_turf, null, 100, 1, get_rand_frequency(), falloff_exponent = 5, S = far_smith_sound)
 
 
 		else

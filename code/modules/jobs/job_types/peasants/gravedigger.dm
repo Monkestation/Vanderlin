@@ -36,8 +36,8 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 2, //Wrestling the deadites
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 3,

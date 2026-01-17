@@ -12,14 +12,21 @@
 	skills = list(
 		/datum/skill/misc/music = SKILL_LEVEL_MASTER,
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE
+	)
+
+	languages = list(
+		/datum/language/elvish,
+		/datum/language/celestial,
+		/datum/language/hellspeak,
+		/datum/language/orcish
 	)
 
 	traits = list(	TRAIT_DODGEEXPERT,

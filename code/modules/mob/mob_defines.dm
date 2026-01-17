@@ -64,10 +64,6 @@
 	var/next_lmove = null
 	var/used_hand = 1
 
-	/// Is the mob blind
-	var/eye_blind = 0		//Carbon
-	/// Does the mob have blurry sight
-	var/eye_blurry = 0		//Carbon
 	/// What is the mobs real name (name is overridden for disguises etc)
 	var/real_name = null
 
@@ -85,10 +81,6 @@
 
 	/// Default body temperature
 	var/bodytemperature = BODYTEMP_NORMAL	//310.15K / 98.6F
-	/// Dizziness level of the mob
-	var/dizziness = 0//Carbon
-	/// Jitteryness level of the mob
-	var/jitteriness = 0//Carbon
 	/// Hunger level of the mob
 	var/nutrition = NUTRITION_LEVEL_START_MIN // randomised in Initialize
 	var/hydration = HYDRATION_LEVEL_START_MIN

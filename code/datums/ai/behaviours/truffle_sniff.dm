@@ -24,7 +24,7 @@
 		return
 
 	controller.PauseAi(5 SECONDS)
-	playsound(get_turf(pawn), pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
+	playsound(pawn, pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
 	pawn.dir = pick(GLOB.cardinals)
 	step(pawn, pawn.dir)
 	playsound(pawn, 'sound/items/sniff.ogg', 60, FALSE)
@@ -34,7 +34,7 @@
 	playsound(pawn, 'sound/items/sniff.ogg', 60, FALSE)
 	sleep(10)
 	pawn.dir = pick(GLOB.cardinals)
-	playsound(get_turf(pawn), pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
+	playsound(pawn, pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
 	var/turf/t = get_turf(pawn)
 	trufflesearch(t, 5)
 

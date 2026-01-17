@@ -35,10 +35,9 @@
 	height = 800
 
 /obj/effect/falling_sakura
-	var/obj/effect/abstract/particle_holder/cached/particle_effect
 
 /obj/effect/falling_sakura/Initialize(mapload, ...)
 	. = ..()
-	particle_effect = new(src, /particles/sakura, 6)
-	//render the steam over mobs and objects on the game plane
-	particle_effect.vis_flags &= ~VIS_INHERIT_PLANE
+	var/obj/effect/abstract/shared_particle_holder/sakura_particles = add_shared_particles(/particles/sakura, "falling_sakura", pool_size = 4)
+	//render the petals over mobs and objects on the game plane
+	sakura_particles.vis_flags &= ~VIS_INHERIT_PLANE

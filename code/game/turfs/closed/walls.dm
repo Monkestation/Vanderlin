@@ -94,7 +94,6 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	feel_turf(user)
 	add_fingerprint(user)
 
 /turf/closed/wall/attackby(obj/item/W, mob/user, params)

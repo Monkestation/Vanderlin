@@ -85,7 +85,7 @@
 		budget += money
 		qdel(I)
 		to_chat(user, span_info("I put [money] mammon in \the [src]."))
-		playsound(get_turf(src), 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
 		attack_hand(user)
 		return
 	return ..()
@@ -118,7 +118,7 @@
 	held_items[I]["NAME"] = I.name
 	held_items[I]["PRICE"] = 0
 	I.forceMove(src)
-	playsound(get_turf(src), 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+	playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
 	update_appearance(UPDATE_ICON)
 
 /obj/structure/fake_machine/vendor/Topic(href, href_list)
@@ -202,7 +202,7 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	var/contents
 	if(canread)
@@ -357,7 +357,7 @@
 			cachey[user] = list()
 		cachey[user]["moneydonate"] += P.get_real_price()
 		qdel(P)
-		playsound(loc, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
 
 		if(cachey[user]["moneydonate"] > 99)
 			if(!cachey[user]["trisawarded"])

@@ -45,13 +45,13 @@
 	skills = list(
 		/datum/skill/combat/swords = 1,
 		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/crossbows = 4,
 		/datum/skill/combat/bows = 5,
 		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/misc/reading = 5,
 		/datum/skill/craft/cooking = 3,
@@ -69,6 +69,7 @@
 
 /datum/job/gaffer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 	spawned.adjust_skillrank(/datum/skill/combat/swords, pick(0,1), TRUE)
 
 	if(spawned.age == AGE_OLD)

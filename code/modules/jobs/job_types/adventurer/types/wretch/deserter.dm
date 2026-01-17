@@ -22,7 +22,7 @@
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/shields = 4,
 		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/misc/swimming = 4,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/athletics = 4,

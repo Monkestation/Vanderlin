@@ -68,7 +68,7 @@
 			return TRUE
 		mill.icon_state = "peppermill_grind"
 		to_chat(user, "You start rubbing the steak with black pepper.")
-		playsound(get_turf(user), 'sound/foley/peppermill.ogg', 100, TRUE, -1)
+		playsound(user, 'sound/foley/peppermill.ogg', 100, TRUE, -1)
 		if(do_after(user, 3 SECONDS, src))
 			if(!mill.reagents.has_reagent(/datum/reagent/consumable/blackpepper, 1))
 				to_chat(user, "There's not enough black pepper to make anything with.")
@@ -421,7 +421,7 @@
 			return TRUE
 		mill.icon_state = "peppermill_grind"
 		to_chat(user, "You start rubbing the bird roast with black pepper.")
-		playsound(get_turf(user), 'sound/foley/peppermill.ogg', 100, TRUE, -1)
+		playsound(user, 'sound/foley/peppermill.ogg', 100, TRUE, -1)
 		if(do_after(user,3 SECONDS, src))
 			if(!mill.reagents.has_reagent(/datum/reagent/consumable/blackpepper, 1))
 				to_chat(user, "There's not enough black pepper to make anything with.")

@@ -1,1 +1,0 @@
-{"author":"Somniworld","delete-after":true,"changes":[{"balance":"Made all mage summons give the same amount of resources for their tier. For instance a sprite now drops 6 fairy dust, the same way an imp drops 6 Infernal ashes."},{"bugfix":"Noc's Eye warded summoning matrices no longer get bricked if you try to summon something alone."}]}

@@ -13,7 +13,7 @@
 /obj/machinery/essence/research_matrix/Initialize()
 	. = ..()
 	storage = new /datum/essence_storage(src)
-	storage.max_total_capacity = 800
+	storage.max_total_capacity = INFINITY
 	storage.max_essence_types = 10
 
 /obj/machinery/essence/research_matrix/Destroy()
@@ -38,7 +38,7 @@
 	if(!selected_research)
 		return FALSE
 	if(!(essence_type in selected_research.required_essences))
-		return
+		return FALSE
 
 	var/needed = selected_research.required_essences[essence_type]
 	var/current = storage.get_essence_amount(essence_type)
@@ -65,6 +65,7 @@
 
 		var/essence_type = vial.contained_essence.type
 		if(!is_essence_allowed(essence_type))
+			to_chat(user, span_warning("This essence is not needed for the current research."))
 			return
 
 		var/needed = selected_research.required_essences[essence_type]
@@ -90,9 +91,8 @@
 
 /obj/machinery/essence/research_matrix/on_transfer_in(essence_type, amount, datum/essence_storage/source)
 	var/mob/user = current_user.resolve()
-	if(!user)
-		return
-	check_research_completion(user)
+	if(user)
+		check_research_completion(user)
 
 /obj/machinery/essence/research_matrix/proc/check_research_completion(mob/user)
 	if(!selected_research)
@@ -131,8 +131,9 @@
 
 	visible_message(span_notice("The engine hums and grumbles with alchemic energy as it's fueled!"))
 
-	var/boon = user.get_learning_boon(/datum/skill/craft/alchemy)
-	user.adjust_experience(/datum/skill/craft/alchemy, selected_research.experience_reward * boon, FALSE)
+	if(user)
+		var/boon = user.get_learning_boon(/datum/skill/craft/alchemy)
+		user.adjust_experience(/datum/skill/craft/alchemy, selected_research.experience_reward * boon, FALSE)
 
 	selected_research = null
 
@@ -140,7 +141,7 @@
 
 /obj/machinery/essence/research_matrix/examine(mob/user)
 	. = ..()
-	. += span_notice("Storage: [storage.get_total_stored()]/[storage.max_total_capacity] units")
+	. += span_notice("Storage: [storage.get_total_stored()] units")
 	. += span_notice("Unlocked research nodes: [GLOB.thaumic_research.unlocked_research.len]")
 
 	if(selected_research)

@@ -131,8 +131,6 @@
 /area/under/tomb/indoors)
 "eg" = (
 /obj/effect/mapping_helpers/secret_door_creator{
-	vip_message = "Miner";
-	vips = list("Miner");
 	name = "DF Secret Door";
 	redstone_id = "hctomb03sdA";
 	floor_turf = /turf/open/floor/blocks/stonered/tiny
@@ -1021,8 +1019,6 @@
 /area/under/tomb/indoors)
 "Ka" = (
 /obj/effect/mapping_helpers/secret_door_creator{
-	vip_message = "Miner";
-	vips = list("Miner");
 	name = "DF Secret Door";
 	redstone_id = "hctomb03sdB";
 	floor_turf = /turf/open/floor/blocks/stonered/tiny
@@ -1314,8 +1310,6 @@
 /area/under/tomb)
 "Rq" = (
 /obj/effect/mapping_helpers/secret_door_creator{
-	vip_message = "Miner";
-	vips = list("Miner");
 	name = "DF Secret Door";
 	redstone_id = "hctomb03sdD";
 	floor_turf = /turf/open/floor/blocks/stonered/tiny
@@ -1401,8 +1395,6 @@
 /area/under/tomb/indoors)
 "Vd" = (
 /obj/effect/mapping_helpers/secret_door_creator{
-	vip_message = "Miner";
-	vips = list("Miner");
 	name = "DF Secret Door";
 	redstone_id = "hctomb03sdC";
 	floor_turf = /turf/open/floor/churchrough

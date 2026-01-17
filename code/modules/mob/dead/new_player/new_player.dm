@@ -74,7 +74,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 			"selected_patron" = client.prefs.selected_patron,
 			"job_preferences" = client.prefs.job_preferences?.Copy(),
 			"features" = client.prefs.features?.Copy(),
-			"charflaw" = client.prefs.charflaw,
+			"quirks" = client.prefs.quirks?.Copy(),
+			"quirk_customizations" = client.prefs.quirk_customizations?.Copy(),
 			"skin_tone" = client.prefs.skin_tone,
 			"eye_color" = client.prefs.eye_color,
 			"underwear" = client.prefs.underwear,
@@ -108,7 +109,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	P.selected_patron = char_data["selected_patron"]
 	P.job_preferences = char_data["job_preferences"]
 	P.features = char_data["features"]
-	P.charflaw = char_data["charflaw"]
+	P.quirks = char_data["quirks"]
+	P.quirk_customizations = char_data["quirk_customizations"]
 	P.skin_tone = char_data["skin_tone"]
 	P.eye_color = char_data["eye_color"]
 	P.underwear = char_data["underwear"]
@@ -578,24 +580,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player/Move()
 	return 0
-
-
-/mob/dead/new_player/proc/close_spawn_windows()
-
-	src << browse(null, "window=latechoices") //closes late choices window
-	src << browse(null, "window=playersetup") //closes the player setup window
-	src << browse(null, "window=preferences") //closes job selection
-	src << browse(null, "window=mob_occupation")
-	src << browse(null, "window=latechoices") //closes late job selection
-	src << browse(null, "window=culinary_customization")
-	src << browse(null, "window=food_selection")
-	src << browse(null, "window=drink_selection")
-
-	SStriumphs.remove_triumph_buy_menu(client)
-
-	winshow(src, "stonekeep_prefwin", FALSE)
-	src << browse(null, "window=preferences_browser")
-	src << browse(null, "window=lobby_window")
 
 // Used to make sure that a player has a valid job preference setup, used to knock players out of eligibility for anything if their prefs don't make sense.
 // A "valid job preference setup" in this situation means at least having one job set to low, or not having "return to lobby" enabled

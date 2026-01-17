@@ -45,6 +45,8 @@
 			continue
 		if(CTAG_PURITAN in CHECKS.category_tags)
 			continue
+		if(CTAG_ARCHIVIST in CHECKS.category_tags)
+			continue
 		possible_classes += CHECKS
 
 	var/list/class_titles = list()
