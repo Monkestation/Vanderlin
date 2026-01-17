@@ -20,8 +20,8 @@
 
 	var/head_chance = 80
 	var/body_chance = 100
-	var/hands_chance = 35/2
-	var/feet_chance = 15/2
+	var/hands_chance = 35 / 2
+	var/feet_chance = 15 / 2
 
 	if(prob(15 / disease.spreading_modifier))
 		return
@@ -88,10 +88,13 @@
 /mob/living/proc/contract_airborne_disease(datum/disease/disease)
 	if(!can_be_spread_airborne_disease())
 		return FALSE
+
 	if(!prob(min((50 * disease.spreading_modifier - 1), 50)))
 		return FALSE
+
 	if(!disease.has_required_infectious_organ(src, ORGAN_SLOT_LUNGS))
 		return FALSE
+
 	return contract_disease(disease)
 
 /// Checks if this mob can currently spread air based diseases.
@@ -112,6 +115,7 @@
 	var/base_protection = 0
 	if(is_mouth_covered(ITEM_SLOT_HEAD))
 		base_protection += 40
+
 	if(is_mouth_covered(ITEM_SLOT_MASK))
 		base_protection += 40
 
@@ -144,7 +148,10 @@
 	return TRUE
 
 /// Proc to use when you 100% want to try to infect someone (ignoreing protective clothing and such), as long as they aren't immune
-/mob/living/proc/contract_disease(datum/disease/disease, del_on_fail = FALSE)
+/mob/living/proc/contract_disease(datum/disease/disease, del_on_fail = TRUE)
+	if(!istype(disease))
+		disease = new
+
 	if(!disease.can_infect(src))
 		if(del_on_fail)
 			qdel(disease)
@@ -153,10 +160,3 @@
 	disease.infect(src)
 
 	return TRUE
-
-/mob/living/proc/get_disease(datum/disease/disease)
-	if(!ispath(disease))
-		return
-	var/datum/disease/infection = new disease
-
-	contract_disease(infection, TRUE)

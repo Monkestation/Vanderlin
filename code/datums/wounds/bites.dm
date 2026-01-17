@@ -11,7 +11,6 @@
 	can_sew = FALSE
 	can_cauterize = FALSE
 	passive_healing = 0.5
-	werewolf_infection_probability = 15
 	associated_bclasses = list(BCLASS_BITE)
 
 /datum/wound/bite/can_apply_to_bodypart(obj/item/bodypart/affected)
@@ -23,7 +22,6 @@
 	name = "nip"
 	whp = 15
 	woundpain = 3
-	werewolf_infection_probability = 10
 
 /datum/wound/bite/large
 	name = "gnarly bite"
@@ -40,7 +38,6 @@
 	can_sew = TRUE
 	can_cauterize = TRUE
 	passive_healing = 0
-	werewolf_infection_probability = 20
 
 // Bite dynamic wounds
 // Vaguely: Hella painful. Hella bleedy. Armor is very effective. Similar to lashing in this way.
@@ -57,7 +54,6 @@
 	can_sew = TRUE
 	can_cauterize = TRUE
 	passive_healing = 0.5
-	werewolf_infection_probability = 10
 	associated_bclasses = list(BCLASS_BITE)
 
 	severity_names = list(
@@ -76,13 +72,3 @@
 	protected_bleed_clamp = 5
 
 	var/upgrade_infection = 0.05
-
-/datum/wound/dynamic/bite/upgrade(bclass, damage)
-	. = ..()
-	if(!.)
-		return
-	werewolf_infection_probability += damage * upgrade_infection
-
-/datum/wound/dynamic/bite/downgrade(multiplier)
-	. = ..()
-	werewolf_infection_probability = max(werewolf_infection_probability - (werewolf_infection_probability * multiplier), initial(werewolf_infection_probability))

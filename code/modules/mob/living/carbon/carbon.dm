@@ -1441,8 +1441,3 @@
 		to_dismember.dismember()
 		return TRUE
 	return FALSE
-
-/mob/living/carbon/proc/is_species(species)
-	if(!dna?.species)
-		return
-	return dna?.species.id == species

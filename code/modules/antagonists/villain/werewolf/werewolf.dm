@@ -143,21 +143,6 @@
 		return
 	return mind.add_antag_datum(werewolf_type)
 
-/mob/living/carbon/human/proc/werewolf_infect_attempt()
-	var/datum/antagonist/werewolf/wolfy = werewolf_check()
-	var/mob/living/carbon/human/H = src
-	if(istype(H.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(H.wear_wrists, /obj/item/clothing/neck/psycross/silver) )
-		if(prob(50))
-			return
-	if(!wolfy)
-		return
-	if(stat >= DEAD) //do shit the natural way i guess
-		return
-	to_chat(src, span_danger("I feel horrible... REALLY horrible..."))
-	MOBTIMER_SET(src, MT_PUKE)
-	vomit(1, blood = TRUE, stun = FALSE)
-	return wolfy
-
 /mob/living/carbon/human/proc/werewolf_feed(mob/living/carbon/human/target, healing_amount = 10)
 	if(!istype(target))
 		return

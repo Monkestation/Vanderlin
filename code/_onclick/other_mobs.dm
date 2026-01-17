@@ -188,18 +188,20 @@
 
 	if(!nodmg)
 		playsound(src, "smallslash", 100, TRUE, -1)
-		if(istype(src, /mob/living/carbon/human))
+		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
 			if(user?.mind && mind)
-				if(user.dna?.species && istype(user.dna.species, /datum/species/werewolf))
+				if(is_species(user, /datum/species/werewolf))
 					if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
 						to_chat(user, span_warning("BLEH! [src] tastes of SILVER! My gift cannot take hold."))
-					else
-						if(caused_wound)
-							caused_wound.werewolf_infect_attempt()
-						if(prob(30))
-							user.werewolf_feed(src)
-				if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
+					else if(caused_wound && !has_disease(/datum/disease/lycanthropy) && !is_species(src, /datum/species/werewolf))
+						// Accounts for arteries and scaling dynamic wounds
+						var/infection_probability = (caused_wound.whp / 4) + (caused_wound.bleed_rate / 2)
+						if(prob(infection_probability))
+							contract_disease(/datum/disease/lycanthropy)
+					if(prob(30))
+						user.werewolf_feed(src)
+				if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !mind.has_antag_datum(/datum/antagonist/zombie))
 					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
 
 	var/obj/item/grabbing/bite/B = new()

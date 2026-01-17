@@ -83,13 +83,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Some wounds make no sense on a dismembered limb and need to go
 	var/qdel_on_droplimb = FALSE
 
-	/// Werewolf infection probability for bites on this wound
-	var/werewolf_infection_probability = 0
-	/// Time taken until werewolf infection comes in
-	var/werewolf_infection_time = 2 MINUTES
-	/// Actual infection timer
-	var/werewolf_infection_timer = null
-
 	/// Ingores "bloody wound" checks for wound applications
 	var/ignore_bloody = FALSE
 
@@ -103,9 +96,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		remove_from_bodypart()
 	else if(owner)
 		remove_from_mob()
-	if(werewolf_infection_timer)
-		deltimer(werewolf_infection_timer)
-		werewolf_infection_timer = null
 	bodypart_owner = null
 	owner = null
 
@@ -248,10 +238,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/on_mob_gain(mob/living/affected)
 	if(mob_overlay)
 		affected.update_damage_overlays()
-	if(werewolf_infection_timer)
-		deltimer(werewolf_infection_timer)
-		werewolf_infection_timer = null
-		werewolf_infect_attempt()
 	if(mortal && HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
@@ -289,13 +275,12 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/amount_healed = min(whp, round(heal_amount, DAMAGE_PRECISION))
 	whp -= amount_healed
 	if(whp <= 0)
-		if(!should_persist())
-			if(bodypart_owner)
-				remove_from_bodypart(src)
-			else if(owner)
-				remove_from_mob(src)
-			else
-				qdel(src)
+		if(bodypart_owner)
+			remove_from_bodypart(src)
+		else if(owner)
+			remove_from_mob(src)
+		else
+			qdel(src)
 
 	return amount_healed
 
@@ -378,16 +363,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	record_round_statistic(STATS_WOUNDS_SEWED)
 	return TRUE
 
-/// Checks if this wound has a special infection (zombie or werewolf)
-/datum/wound/proc/has_special_infection()
-	return (werewolf_infection_timer)
-
-/// Some wounds cannot go away naturally
-/datum/wound/proc/should_persist()
-	if(has_special_infection())
-		return TRUE
-	return FALSE
-
 /// Cauterizes the wound
 /datum/wound/proc/cauterize_wound()
 	if(!can_cauterize)
@@ -405,32 +380,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/is_clotted()
 	return !isnull(clotting_threshold) && (bleed_rate <= clotting_threshold)
 
-/datum/wound/proc/werewolf_infect_attempt()
-	if(QDELETED(src) || QDELETED(owner) || QDELETED(bodypart_owner))
-		return FALSE
-	if(werewolf_infection_timer || !ishuman(owner) || !prob(werewolf_infection_probability))
-		return
-	var/mob/living/carbon/human/human_owner = owner
-	if(!human_owner.can_werewolf())
-		return
-	if(human_owner.stat >= DEAD) //forget it
-		return
-	var/static/list/silver_items = list(
-		/obj/item/clothing/neck/psycross/silver,
-		/obj/item/clothing/neck/silveramulet
-	)
-	if(is_type_in_list(human_owner.wear_wrists, silver_items) || is_type_in_list(human_owner.wear_neck, silver_items))
-		if(prob(50))
-			return
-	to_chat(human_owner, span_danger("I feel horrible... REALLY horrible..."))
-	MOBTIMER_SET(human_owner, MT_PUKE)
-	human_owner.vomit(1, blood = TRUE, stun = FALSE)
-	werewolf_infection_timer = addtimer(CALLBACK(src, PROC_REF(wake_werewolf)), werewolf_infection_time, TIMER_STOPPABLE)
-	severity = WOUND_SEVERITY_BIOHAZARD
-	if(bodypart_owner)
-		sortTim(bodypart_owner.wounds, GLOBAL_PROC_REF(cmp_wound_severity_dsc))
-	return TRUE
-
 /datum/wound/proc/wake_werewolf()
 	if(QDELETED(src) || QDELETED(owner) || QDELETED(bodypart_owner))
 		return FALSE
@@ -440,7 +389,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/datum/antagonist/werewolf/wolfy = human_owner.werewolf_check()
 	if(!wolfy)
 		return FALSE
-	werewolf_infection_timer = null
 	owner.flash_fullscreen("redflash3")
 	to_chat(owner, span_danger("It hurts... Is this really the end for me?"))
 	owner.emote("scream") // heres your warning to others bro
@@ -554,8 +502,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/list/special_props = list()
 	if(embed_chance)
 		special_props += "Can embed weapons ([embed_chance]% chance)"
-	if(werewolf_infection_probability)
-		special_props += "Can cause werewolf infection ([werewolf_infection_probability]% chance)"
 	if(qdel_on_droplimb)
 		special_props += "Removed when limb is severed"
 
@@ -581,6 +527,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /datum/wound/proc/show_menu(mob/user)
 	user << browse(generate_html(user), "window=wound;size=600x900")
+
+/// Cutoff value to just delete a wound when WHP is equal or below
+/// Prevention for incredibly long lasting small wounds
+#define DYNAMIC_WOUND_WHP_CUTOFF 0.1
 
 /// Basis for dynamic wounds that increase in severity with damage
 /datum/wound/dynamic
@@ -615,32 +565,39 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	. = ..()
 	if(!. || QDELETED(src))
 		return
+
+	if(whp <= DYNAMIC_WOUND_WHP_CUTOFF)
+		qdel(src)
+		return
+
 	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
-	var/healing_amount = round(heal_amount, DAMAGE_PRECISION) * 0.01 * healing_multiplier
+	var/healing_amount = round(heal_amount * 0.01 * healing_multiplier, DAMAGE_PRECISION)
 
 	downgrade(healing_amount)
 
 /datum/wound/dynamic/sew_wound()
 	if(!can_sew)
 		return FALSE
+
 	sewn_bleed_rate = round(bleed_rate * 0.05, DAMAGE_PRECISION)
 	sewn_whp = round(whp * 0.45, DAMAGE_PRECISION)
 	sewn_clotting_rate = round(clotting_rate * 1.2, DAMAGE_PRECISION)
 	sewn_clotting_threshold = round(clotting_threshold * 0.45, DAMAGE_PRECISION)
 	sewn_woundpain = round(woundpain * 0.4, DAMAGE_PRECISION)
+
 	return ..()
 
 /datum/wound/dynamic/sewing_step_complete(mob/living/doctor)
-	if(!doctor)
-		return
+	var/healing_level = 1 + doctor?.get_skill_level(/datum/skill/misc/medicine)
 
 	// Inverse, bigger wound = less heal
 	// BUT only effects value reduction not sewing progress
 	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
-	// Reduces the upgrade values by this percentage, can never fully deplete the said values
-	var/healing_power = 0.03 * healing_multiplier * ((doctor.get_skill_level(/datum/skill/misc/medicine) + 1) * 1.4) // Vibe numbers...
 
-	downgrade(healing_power)
+	// Reduces the upgrade values by this percentage, can never fully deplete the said values
+	var/healing_power = 0.03 * healing_multiplier * (healing_level * 1.4) // Vibe numbers...
+
+	downgrade(round(healing_power, DAMAGE_PRECISION))
 
 	return ..()
 
@@ -648,6 +605,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/dynamic/proc/get_relevant_increase()
 	if(!bleed_rate || !initial(bleed_rate))
 		return 1
+
 	return bleed_rate / initial(bleed_rate)
 
 /// Update name based on severity
@@ -656,6 +614,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	for(var/sevname in severity_names)
 		if(severity_names[sevname] <= bleed_rate)
 			prefix = sevname
+
 	name = "[prefix ? "[prefix] " : ""][initial(name)]"	//[adjective] [name], aka, "gnarly slash" or "slash"
 
 #define CLOT_THRESHOLD_INCREASE_PER_HIT 0.1	//This raises the MINIMUM bleed the wound can clot to.
@@ -672,12 +631,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		armor = human_owner.check_crit_armor(src, bclass)
-
-	// Ass code we need diseases
-	if(!armor && werewolf_infection_timer)
-		deltimer(werewolf_infection_timer)
-		werewolf_infection_timer = null
-		werewolf_infect_attempt()
 
 	var/upper_clamp = ARTERY_LIMB_BLEEDRATE
 	if(armor && upgrade_bleed_clamp_armor)
@@ -717,8 +670,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 	if(sew_threshold > 0)
 		sew_threshold = max(sew_threshold - (sew_threshold * multiplier), initial(sew_threshold))
+
 	if(woundpain > 0)
 		woundpain = max(woundpain - (woundpain * multiplier), initial(woundpain))
+
 	if(bleed_rate > 0)
 		var/clamp = initial(bleed_rate)
 		if(!isnull(clotting_threshold) && clotting_threshold < clamp)
@@ -765,3 +720,5 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	is_armor_maxed = TRUE
 	update_name()
 	return TRUE
+
+#undef DYNAMIC_WOUND_WHP_CUTOFF

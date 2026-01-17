@@ -125,4 +125,4 @@ DEFINE_BITFIELD(spread_flags, list(
 #define HUMOR_DRY "Dry"
 #define HUMOR_WARM "Warm"
 #define HUMOR_WET "Wet"
-#define HUMOR_COLD "COLD"
+#define HUMOR_COLD "Cold"
