@@ -11,17 +11,16 @@
 	. = ..()
 
 	if(!ismob(loc))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
-	victim = loc
 	current_dots = clamp(round(victim.AmountKnockdown() / 10), 0, 5)
 
 	if(!current_dots)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
-	current_dots++//so we get integers from 1 to 6
+	victim = loc
+
+	current_dots++ //so we get integers from 1 to 6
 
 	for(var/mob/living/M in GLOB.player_list)
 		if(M.clan && M.client)

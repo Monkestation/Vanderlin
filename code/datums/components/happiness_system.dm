@@ -132,7 +132,7 @@
 	. = ..()
 
 	if(!istype(clicker))
-		return
+		return INITIALIZE_HINT_QDEL
 
 	RegisterSignal(clicker.client, COMSIG_CLIENT_HOVER_NEW, PROC_REF(clear_view))
 	stored_client = clicker.client
