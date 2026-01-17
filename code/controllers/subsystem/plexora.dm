@@ -609,6 +609,34 @@ SUBSYSTEM_DEF(plexora)
 
 	client_mob.say(message, forced = TRUE)
 
+/datum/world_topic/plx_kick
+	keyword = "PLX_kick"
+	require_comms_key = TRUE
+/datum/world_topic/plx_kick/Run(list/input)
+	var/ckey = input["ckey"]
+	var/reason = input["reason"]
+	var/kicker = input["admin_ckey"]
+
+	if(!ckey || !kicker)
+		return list("error" = PLEXORA_ERROR_BAD_PARAM, "param" = "ckey/admin_ckey", "reason" = "missing required parameter")
+
+	var/client/client = disambiguate_client(ckey)
+
+	if (QDELETED(client))
+		return list("error" = PLEXORA_ERROR_CLIENTNOTEXIST)
+
+	// Mock admin
+	var/datum/client_interface/mockadmin = new(
+		key = kicker,
+	)
+
+	usr = mockadmin
+
+	qdel(client)
+
+	log_admin("Discord: [key_name(usr)] has kicked [key_name(client)] from the server! Reason: [reason]")
+	message_admins("Discord: [key_name_admin(usr)] has kicked [key_name_admin(client)] from the server! Reason: [reason]")
+
 /datum/world_topic/plx_ticketaction
 	keyword = "PLX_ticketaction"
 	require_comms_key = TRUE
