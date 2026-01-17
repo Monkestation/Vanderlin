@@ -280,9 +280,7 @@
 	if(!T)
 		return
 
-	var/mob/living/simple_animal/hostile/retaliate/bigrat/new_rat = new(T)
-	new_rat.name = "[H.real_name] (rat)"
-	new_rat.real_name = new_rat.name
+	var/mob/living/simple_animal/hostile/retaliate/smallrat/new_rat = new(T)
 
 	if(H.mind)
 		H.mind.transfer_to(new_rat)
@@ -291,6 +289,7 @@
 
 	// Make the rat unable to do much
 	ADD_TRAIT(new_rat, TRAIT_PACIFISM, TRAIT_GENERIC)
+	ADD_TRAIT(new_rat, TRAIT_MUTE, TRAIT_GENERIC)
 	new_rat.melee_damage_lower = 0
 	new_rat.melee_damage_upper = 0
 	new_rat.obj_damage = 0

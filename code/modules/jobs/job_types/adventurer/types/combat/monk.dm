@@ -13,10 +13,9 @@
 
 	skills = list(
 		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/unarmed = 5,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/unarmed = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/misc/sewing = 2,
-		/datum/skill/magic/holy = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/misc/climbing = 4,
 	)
@@ -42,12 +41,6 @@
 	if(spawned.dna?.species.id == "kobold")
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // Go, my child. Destroy their ankles.
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, -1)
-
-	var/holder = spawned.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_churching()
-		devotion.grant_to(spawned)
 
 /datum/outfit/adventurer/monk
 	name = "Monk (Adventurer)"

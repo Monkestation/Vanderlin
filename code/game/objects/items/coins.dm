@@ -111,6 +111,7 @@
 	var/intelligence = user.mind?.current.STAINT
 	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
+		return
 
 	var/list/skill_data = coin_skill(user, quantity)
 	var/fuzzy_quantity = CLAMP(quantity + skill_data["error"], 1,  (quantity > 20) ? INFINITY : 20) // Cap at 20 only for small stacks)
@@ -351,8 +352,10 @@
 	. = ..()
 	if(quantity == 1)
 		name = initial(name)
+		gender = NEUTER
 	else
 		name = plural_name
+		gender = PLURAL
 
 /obj/item/coin/update_desc()
 	. = ..()

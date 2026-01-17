@@ -182,18 +182,18 @@
 // Helper mood events (these would need to be defined in your mood system)
 /datum/stress_event/artistic_inspiration
 	desc = "I feel divinely inspired to create something beautiful!"
-	stress_change = 3
+	stress_change = -3
 	timer = 5 MINUTES
 	quality_modifier = 4
 
 /datum/stress_event/beautiful
 	desc = "I feel beautiful and radiant!"
-	stress_change = 2
+	stress_change = -2
 	timer = 10 MINUTES
 
 /datum/stress_event/divine_love
 	desc = "I felt touched by divine love and compassion."
-	stress_change = 4
+	stress_change = -4
 	timer = 15 MINUTES
 
 /datum/component/familial_bond
@@ -391,12 +391,12 @@
 
 /datum/stress_event/bond_death
 	desc = "Someone I was bonded with has died. I feel empty inside."
-	stress_change = -6
+	stress_change = 6
 	timer = 30 MINUTES
 
 /datum/stress_event/bond_ended
 	desc = "A familial bond has ended, but I feel grateful for the connection we shared."
-	stress_change = 1
+	stress_change = -1
 	timer = 10 MINUTES
 
 /datum/component/empathic_obsession
@@ -627,50 +627,50 @@
 
 /datum/stress_event/empathic_bond_formed
 	desc = "I feel a deep emotional connection with someone special."
-	stress_change = 3
+	stress_change = -3
 	timer = 30 MINUTES
 
 /datum/stress_event/obsession_target_hurt
 	desc = "Someone I care deeply about is hurt! I feel their pain."
-	stress_change = -4
+	stress_change = 4
 	timer = 10 MINUTES
 
 /datum/stress_event/obsession_target_healed
 	desc = "I feel relief knowing someone important to me is recovering."
-	stress_change = 2
+	stress_change = -2
 	timer = 5 MINUTES
 
 /datum/stress_event/separation_anxiety
 	desc = "I feel anxious being away from someone I'm emotionally connected to."
-	stress_change = -3
+	stress_change = 3
 	timer = 0 // Persistent while active
 
 /datum/stress_event/proximity_comfort
 	desc = "I feel calm and comfortable being near someone I care about."
-	stress_change = 2
+	stress_change = -2
 	timer = 5 MINUTES
 
 /datum/stress_event/obsession_panic
 	desc = "I'm overwhelmed with panic about someone's safety!"
-	stress_change = -6
+	stress_change = 6
 	timer = 0 // Persistent while active
 
 /datum/stress_event/crisis_relief
 	desc = "I feel intense relief that a crisis has passed."
-	stress_change = 4
+	stress_change = -4
 	timer = 15 MINUTES
 
 /datum/stress_event/obsession_death
 	desc = "Someone I was deeply connected to has died. I feel devastated."
-	stress_change = -8
+	stress_change = 8
 	timer = 60 MINUTES
 
 /datum/stress_event/obsession_revival
 	desc = "Someone precious to me has returned to life! I feel overwhelming joy!"
-	stress_change = 6
+	stress_change = -6
 	timer = 30 MINUTES
 
 /datum/stress_event/obsession_ended
 	desc = "An intense emotional connection has faded, but I remember it fondly."
-	stress_change = 1
+	stress_change = -1
 	timer = 10 MINUTES

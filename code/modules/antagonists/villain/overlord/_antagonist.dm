@@ -172,7 +172,7 @@
 		if(ishuman(owner.current))
 			overlord_mob = owner.current
 
-	overlord_mob.revive(TRUE, TRUE)
+	overlord_mob.revive(ADMIN_HEAL_ALL)
 	owner.transfer_to(overlord_mob, TRUE)
 
 	overlord_mob.skeletonize(FALSE)

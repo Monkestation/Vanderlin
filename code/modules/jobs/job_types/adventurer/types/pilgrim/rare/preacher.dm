@@ -13,8 +13,8 @@
 	skills = list(
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/music = 1,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 4
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2
 	)
 
 	traits = list(

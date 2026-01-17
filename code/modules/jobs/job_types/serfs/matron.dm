@@ -46,8 +46,8 @@
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/combat/knives = 5,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 2,
 	)
 
 	jobstats = list(
@@ -57,6 +57,9 @@
 		STATKEY_SPD =  2
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_THIEF_DOORS
+	)
 	traits = list(
 		TRAIT_THIEVESGUILD,
 		TRAIT_OLDPARTY,

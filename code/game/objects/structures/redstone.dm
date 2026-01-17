@@ -113,31 +113,6 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/wall
 	icon_state = "leverwall0"
 
-/obj/structure/lever/hidden
-	icon = null
-
-	//the perception DC to use this
-	var/hidden_dc = 10
-
-/obj/structure/lever/hidden/proc/feel_button(mob/living/user, ignore_dc = FALSE)
-	if(!isliving(user))
-		return
-	var/mob/living/L = user
-	// they're trained at this
-	var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
-	if(L.STAPER + bonuses >= hidden_dc || ignore_dc)
-		L.changeNext_move(CLICK_CD_MELEE)
-		user.visible_message(span_danger("[user] presses a hidden button."), span_notice("I push a hidden button."))
-		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
-		for(var/obj/structure/structure in redstone_attached)
-			INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
-		trigger_wire_network(user)
-		toggled = !toggled
-		playsound(src, 'sound/foley/lever.ogg', 100, extrarange = 3)
-
-/obj/structure/lever/hidden/onkick(mob/user) // nice try
-	return FALSE
-
 /obj/structure/lever/wall/attack_hand(mob/user)
 	. = ..()
 	icon_state = "leverwall[toggled]"
@@ -145,6 +120,52 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/wall/onkick(mob/user)
 	. = ..()
 	icon_state = "leverwall[toggled]"
+
+/obj/structure/lever/hidden
+	name = "hidden lever"
+	desc = "If you can see this... how?"
+	icon = null
+	//the perception DC to use this
+	var/hidden_dc = 10
+	//ignore the DC's with a trait
+	var/accessor_trait
+
+/obj/structure/lever/hidden/proc/feel_button(mob/living/user, ignore_dc = FALSE)
+	if(!isliving(user))
+		return
+	var/mob/living/L = user
+	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
+		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
+		if(L.STAPER + bonuses < hidden_dc)
+			return // nothing here!
+	L.changeNext_move(CLICK_CD_MELEE)
+	user.visible_message(span_danger("[user] presses a hidden button."), span_notice("I push a hidden button."))
+	user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
+	for(var/obj/structure/structure in redstone_attached)
+		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
+	trigger_wire_network(user)
+	toggled = !toggled
+	playsound(src, 'sound/foley/lever.ogg', 50)
+
+/obj/structure/lever/hidden/onkick(mob/user) // nice try
+	return FALSE
+
+/obj/structure/lever/hidden/IsObscured()
+	. = ..()
+	if(!icon)
+		return TRUE
+
+/obj/structure/lever/hidden/keep
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_KEEP_DOORS
+
+/obj/structure/lever/hidden/inquisition
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_INQUISITION_DOORS
+
+/obj/structure/lever/hidden/thieves_guild
+	hidden_dc = 13
+	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 
 /obj/structure/repeater
 	name = "repeater"

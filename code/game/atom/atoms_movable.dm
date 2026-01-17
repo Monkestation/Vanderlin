@@ -392,14 +392,15 @@
 	. = pulledby
 	pulledby = new_pulledby
 
-/atom/movable/proc/stop_pulling(forced = TRUE)
-	if(pulling)
-		if(pulling != src)
-			pulling.set_pulledby(null)
-			var/atom/movable/old_pulling = pulling
-			pulling = null
-			SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
+/atom/movable/proc/stop_pulling(pulling_broke_free = FALSE)
 	setGrabState(GRAB_PASSIVE)
+	if(!pulling)
+		return
+	pulling.set_pulledby(null)
+	var/atom/movable/old_pulling = pulling
+	pulling = null
+	SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
+	SEND_SIGNAL(src, COMSIG_ATOM_NO_LONGER_PULLING, old_pulling)
 
 /atom/movable/proc/Move_Pulled(atom/movable/A)
 	if(!pulling)

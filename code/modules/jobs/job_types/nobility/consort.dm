@@ -29,8 +29,10 @@
 		EXP_TYPE_NOBLE = 300
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_KEEP_DOORS
+	)
 	traits = list(
-		TRAIT_KNOWKEEPPLANS,
 		TRAIT_NOBLE,
 		TRAIT_NUTCRACKER
 	)
@@ -39,8 +41,6 @@
 /datum/job/consort/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, (spawned.gender == FEMALE) ? FAMILY_MOTHER : FAMILY_FATHER), 7 SECONDS)
-	if(GLOB.keep_doors.len > 0)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), spawned), 5 SECONDS)
 	if(istype(spawned.patron, /datum/patron/inhumen/baotha))
 		spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
@@ -133,7 +133,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 3,
@@ -185,7 +185,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/polearms = 2,
 		/datum/skill/misc/sewing = 3,
@@ -237,7 +237,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/misc/swimming = 3,

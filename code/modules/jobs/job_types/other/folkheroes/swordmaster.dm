@@ -3,15 +3,13 @@
 	tutorial = "You spent years serving the eastern Grenzelhoftian lords, and now you spend your days as a travelling hedge knight. Upon this island, you like to increase the fame of your sword skills, as well as your honor."
 	allowed_sexes = list(MALE)
 	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR) // not RACES_PLAYER_GRENZ because dwarves don't have a sprite for this armor
-	outfit = /datum/outfit/adventurer/swordmaster
+	outfit = /datum/outfit/folkhero/swordmaster
 	total_positions = 1
-	roll_chance = 15
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
-	is_recognized = TRUE
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/misc/climbing = 1,
@@ -48,8 +46,8 @@
 		species.accent_language = species.get_accent(species.native_language)
 		species.soundpack_m = new /datum/voicepack/male/knight()
 
-/datum/outfit/adventurer/swordmaster
-	name = "Hedge Knight (Adventurer)"
+/datum/outfit/folkhero/swordmaster
+	name = "Hedge Knight (Folkhero)"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr = /obj/item/weapon/sword/long/greatsword/flamberge
 	beltl = /obj/item/storage/belt/pouch/coins/mid

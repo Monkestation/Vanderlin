@@ -1,6 +1,6 @@
 /datum/quirk/boon/backstory
 	name = "Experienced Background"
-	desc = "You had a previous career before becoming an adventurer. You've retained skills from that time, but it left its mark on you."
+	desc = "You had a previous career before becoming an adventurer. You've retained skills from that time, but it left its mark on you. (OOC NOTE; COMBAT SKILLS ARE CLAMPED AT AVERAGE FROM THIS, THIS IS YOUR PAST.)"
 	point_value = -2
 	customization_label = "Choose Background"
 	customization_options = list()

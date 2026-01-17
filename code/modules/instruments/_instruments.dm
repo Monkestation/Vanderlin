@@ -38,16 +38,8 @@
 	volume = 100
 	falloff_exponent = 2
 	extra_range = 5
-	var/stress2give = /datum/stress_event/music
 	persistent_loop = TRUE
 	sound_group = /datum/sound_group/instruments
-
-/datum/looping_sound/instrument/on_hear_sound(mob/M)
-	. = ..()
-	if(stress2give)
-		if(isliving(M))
-			var/mob/living/carbon/L = M
-			L.add_stress(stress2give)
 
 /datum/looping_sound/instrument/on_stop(mob/M)
 	. = ..()
@@ -136,7 +128,6 @@
 	instrument_buff = null
 	if(soundloop)
 		soundloop.stop()
-		soundloop.stress2give = initial(soundloop.stress2give)
 	if(dynamic_icon)
 		lower_from_mouth()
 	// Prevents an exploit
@@ -250,7 +241,6 @@
 	playing = TRUE
 	soundloop.mid_sounds = list(curfile)
 	soundloop.cursound = null
-	soundloop.stress2give = stress_event
 	soundloop.set_parent(user)
 	soundloop.start()
 	user.apply_status_effect(/datum/status_effect/buff/playing_music, stress_event, note_color)
