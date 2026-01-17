@@ -4,6 +4,7 @@
 	icon_state = "sand1"
 	pile = /obj/structure/fluff/clodpile/sand
 	clod_type = "sand"
+	smeltresult = /obj/item/natural/glass
 
 /obj/item/natural/clod/sand/Initialize()
 	. = ..()
