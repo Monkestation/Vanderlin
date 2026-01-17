@@ -686,8 +686,6 @@ SUBSYSTEM_DEF(job)
 		return
 
 	var/mob/living/carbon/human/equipping_human = equipping
-
-
 	for(var/datum/quirk/quirk in equipping_human.quirks)
 		quirk.after_job_spawn(job)
 
