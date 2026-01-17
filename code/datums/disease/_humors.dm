@@ -121,9 +121,9 @@
 	switch(effecting.blood_volume)
 		if(BLOOD_VOLUME_NORMAL to INFINITY)
 			base_mod *= 0.9 // No bloodletting? No blessings of pestra
-		if(BLOOD_VOLUME_NORMAL to BLOOD_VOLUME_SAFE)
+		if(BLOOD_VOLUME_SAFE to BLOOD_VOLUME_NORMAL)
 			base_mod *= 1.1
-		if(BLOOD_VOLUME_SAFE to BLOOD_VOLUME_OKAY)
+		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			base_mod *= 1.5
 		else
 			base_mod *= max(0.1, (effecting.blood_volume / effecting::blood_volume))
