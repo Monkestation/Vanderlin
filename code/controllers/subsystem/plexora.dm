@@ -632,6 +632,8 @@ SUBSYSTEM_DEF(plexora)
 
 	usr = mockadmin
 
+	to_chat(client, span_boldannounce("You have been kicked from the server by [key_name_admin(usr)]. Reason: [reason]"))
+
 	qdel(client)
 
 	log_admin("Discord: [key_name(usr)] has kicked [key_name(client)] from the server! Reason: [reason]")
