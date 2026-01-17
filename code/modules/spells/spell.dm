@@ -78,6 +78,8 @@
 	/// What type of invocation the spell is.
 	/// Can be "none", "whisper", "shout", "emote".
 	var/invocation_type = INVOCATION_NONE
+	/// If invocation is set, do we ignore whether the user can actually speak?
+	var/ignore_can_speak = FALSE
 
 	/// Generic spell flags that may or may not be related to casting.
 	var/spell_flags = NONE
@@ -255,7 +257,7 @@
 	if(spell_type == SPELL_MIRACLE)
 		RegisterSignal(owner, COMSIG_LIVING_DEVOTION_CHANGED, PROC_REF(update_status_on_signal))
 	if(spell_type == SPELL_RAGE)
-		RegisterSignal(owner, COMSIG_LIVING_RAGE_CHANGED, PROC_REF(update_status_on_signal))
+		RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
 	RegisterSignal(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
@@ -796,7 +798,7 @@
 			owner.balloon_alert(owner, "Can't position your hands correctly to invoke!")
 		return FALSE
 
-	if((invocation_type == INVOCATION_WHISPER || invocation_type == INVOCATION_SHOUT) && !living_owner.can_speak_vocal())
+	if((invocation_type == INVOCATION_WHISPER || invocation_type == INVOCATION_SHOUT) && !ignore_can_speak && !living_owner.can_speak_vocal())
 		if(feedback)
 			owner.balloon_alert(owner, "Can't get the words out to invoke!")
 		return FALSE

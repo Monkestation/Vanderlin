@@ -101,7 +101,7 @@
 				stuttering = max(stuttering,(effect * hit_percent))
 		if(EFFECT_JITTER)
 			if((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE))
-				jitteriness = max(jitteriness,(effect * hit_percent))
+				set_jitter_if_lower(effect * hit_percent)
 	return 1
 
 
@@ -140,6 +140,14 @@
 	if(updating_health)
 		updatehealth(amount)
 	return amount
+
+/mob/living/proc/setBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+	if(!forced && (status_flags & GODMODE))
+		return
+	. = bruteloss
+	bruteloss = amount
+	if(updating_health)
+		updatehealth(amount)
 
 /mob/living/proc/getOxyLoss()
 	return oxyloss
@@ -192,6 +200,14 @@
 	if(updating_health)
 		updatehealth(amount)
 	return amount
+
+/mob/living/proc/setFireLoss(amount, updating_health = TRUE, forced = FALSE)
+	if(!forced && (status_flags & GODMODE))
+		return
+	. = fireloss
+	fireloss = amount
+	if(updating_health)
+		updatehealth(amount)
 
 /mob/living/proc/getCloneLoss()
 	return cloneloss

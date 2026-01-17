@@ -155,6 +155,7 @@
 #define span_userdanger(str) ("<span class='userdanger'>" + str + "</span>")
 #define span_warn(str) ("<span class='warn'>" + str + "</span>")
 #define span_warning(str) ("<span class='warning'>" + str + "</span>")
+#define span_warningbig(str) ("<span class='warningbig'>" + str + "</span>")
 #define span_yell(str) ("<span class='yell'>" + str + "</span>")
 #define span_yellowteamradio(str) ("<span class='yellowteamradio'>" + str + "</span>")
 #define span_silver(str) ("<span class='silver'>" + str + "</span>")

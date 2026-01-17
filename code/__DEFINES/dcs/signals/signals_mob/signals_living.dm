@@ -77,9 +77,6 @@
 #define COMSIG_LIVING_MANA_CHANGED "living_mana_changed"
 /// from base of [datum/devotion/cleric_holder/update_devotion()]
 #define COMSIG_LIVING_DEVOTION_CHANGED "living_devotion_changed"
-#define COMSIG_LIVING_RAGE_CHANGED "living_devotion_changed"
-#define COMSIG_RAGE_BOTTOMED "living_rage_bottomed"
-#define COMSIG_RAGE_OVERRAGE "living_rage_over"
 
 ///from base of
 #define COMSIG_LIVING_DREAM_END  "living_sleep_advancement_end"
@@ -107,5 +104,9 @@
 
 /// Updating a mob's movespeed when lacking limbs. (list/modifiers)
 #define COMSIG_LIVING_LIMBLESS_MOVESPEED_UPDATE "living_get_movespeed_modifiers"
+///From living/Life(). (deltatime, times_fired)
+#define COMSIG_LIVING_LIFE "living_life"
+	/// Block the Life() proc from proceeding... this should really only be done in some really wacky situations.
+	#define COMPONENT_LIVING_CANCEL_LIFE_PROCESSING (1<<0)
 
 #define COMSIG_LIVING_ADJUSTED "living_damage_adjusted"

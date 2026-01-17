@@ -80,7 +80,6 @@ GLOBAL_LIST_EMPTY(last_words)
 	else
 		src.playsound_local(src, 'sound/misc/deth.ogg', 100)
 
-	set_drugginess(0)
 	set_disgust(0)
 	SetSleeping(0)
 	reset_perspective(null)
@@ -103,6 +102,7 @@ GLOBAL_LIST_EMPTY(last_words)
 		H.Fade()
 		MOBTIMER_SET(src, MT_LASTDIED)
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom/movable/screen/gameover, Fade), TRUE), 100)
+		remove_client_colour(/datum/client_colour/monochrome/death)
 		add_client_colour(/datum/client_colour/monochrome/death)
 		client?.verbs |= /client/proc/descend
 		if(last_words)
