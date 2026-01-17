@@ -92,33 +92,35 @@
 			return PROCESS_KILL
 	user.apply_status_effect(/datum/status_effect/buff/playing_music) // Handles regular stress event in tick()
 	var/boon = user?.get_learning_boon(/datum/skill/misc/music)
-	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.2) // And gain exp
+	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.3) // And gain exp
 
 	if(!HAS_TRAIT(user, TRAIT_BARDIC_TRAINING))
 		return
 
-	for(var/obj/structure/soil/soil in view(7, source))
+	for(var/obj/structure/soil/soil in view(5, source))
 		var/distance = max(1, get_dist(source, soil))
 		soil.process_npk_growth(round(2 / distance, 0.1))
-
-	for(var/mob/living/carbon/L in hearers(7, source))
-		if(!L.client)
-			continue
-		if(!L.can_hear()) // Only good people who can hear music will get buffed
-			continue
-		if((L.mob_biotypes & MOB_UNDEAD) && !(user.mob_biotypes & MOB_UNDEAD))
-			continue
-		L.add_stress(/datum/stress_event/bardicbuff)
-		if(!instrument_buff)
-			continue
-		if(L.mind?.has_antag_datum(/datum/antagonist))
-			if(!L.mind?.isactuallygood())
-				continue
-		L.apply_status_effect(instrument_buff)
 
 	for(var/obj/item/reagent_containers/food/snacks/smallrat/I in view(4, user))
 		if(I.loc != user)
 			step_towards(I, user)
+
+	if(!instrument_buff)
+		return
+
+	for(var/mob/living/carbon/listener in hearers(5, source))
+		if(!listener.client)
+			continue
+		if(!listener.can_hear()) // Only good people who can hear music will get buffed
+			continue
+		var/bypass_checks = FALSE
+		if(user == listener)
+			bypass_checks = TRUE
+		if(user.inspiration && user.inspiration.check_in_audience(listener))
+			bypass_checks = TRUE
+		if(!bypass_checks && !user.faction_check_mob(listener))
+			continue
+		listener.apply_status_effect(instrument_buff)
 
 /obj/item/instrument/proc/terminate_playing(mob/living/user)
 	playing = FALSE

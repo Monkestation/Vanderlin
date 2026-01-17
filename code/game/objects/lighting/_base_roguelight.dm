@@ -183,16 +183,16 @@
 							else if(chosen_recipe.output)
 								result = new chosen_recipe.output(get_turf(user))
 
-								if(istype(result, /obj/item/reagent_containers/food/snacks))
-									var/obj/item/reagent_containers/food/snacks/food_result = result
-									var/skill_modifier = 1.0
-									var/skill_level = user.get_skill_level(chosen_recipe.used_skill)
+								// if(istype(result, /obj/item/reagent_containers/food/snacks))
+								// 	var/obj/item/reagent_containers/food/snacks/food_result = result
+								// 	var/skill_modifier = 1.0
+								// 	var/skill_level = user.get_skill_level(chosen_recipe.used_skill)
 
-									if(skill_level)
-										skill_modifier += (skill_level * 0.2) // Increase quality by 20% per skill level
+								// 	if(skill_level)
+								// 		skill_modifier += (skill_level * 0.2) // Increase quality by 20% per skill level
 
-									// Apply the recipe's quality modifier alongside skill
-									food_result.quality = food_result.quality * skill_modifier * chosen_recipe.quality_modifier
+								// 	// Apply the recipe's quality modifier alongside skill
+								// 	food_result.quality = food_result.quality * skill_modifier * chosen_recipe.quality_modifier
 
 								user.dropItemToGround(W, TRUE)
 								qdel(W)

@@ -975,8 +975,8 @@
 		used_type = type_override
 
 	if(!re_run)
-		var/not_stamina_spell = (used_type != SPELL_STAMINA)
-		owner.adjust_stamina(-(used_cost / (1 + not_stamina_spell)))
+		if(used_type == SPELL_STAMINA)
+			owner.adjust_stamina(used_cost)
 
 	if(spell_type == NONE)
 		return // No return value == No exp
