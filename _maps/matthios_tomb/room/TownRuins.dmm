@@ -495,7 +495,7 @@
 /turf/open/floor/wood/nosmooth,
 /area/under/tomb/indoors)
 "ky" = (
-/obj/item/natural/dirtclod,
+/obj/item/natural/clod/dirt,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "kD" = (
@@ -1364,13 +1364,6 @@
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/stonered,
-/area/under/tomb/indoors)
-"CG" = (
-/obj/item/natural/dirtclod{
-	pixel_y = 7;
-	pixel_x = -12
-	},
-/turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "CJ" = (
 /turf/closed/wall/mineral/decostone/long,
@@ -3709,7 +3702,7 @@ qp
 qp
 zx
 JL
-CG
+ky
 rk
 rV
 "}

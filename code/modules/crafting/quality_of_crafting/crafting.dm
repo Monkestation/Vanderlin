@@ -56,11 +56,11 @@
 /datum/repeatable_crafting_recipe/crafting/wickercloak
 	name = "wicker cloak"
 	requirements = list(
-		/obj/item/natural/dirtclod = 2,
+		/obj/item/natural/clod/dirt = 2,
 		/obj/item/grown/log/tree/stick= 4,
 		/obj/item/natural/fibers = 3,
 	)
-	attacked_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
 	starting_atom = /obj/item/grown/log/tree/stick
 	output = /obj/item/clothing/cloak/wickercloak
 	craftdiff = 0
@@ -68,11 +68,11 @@
 /datum/repeatable_crafting_recipe/crafting/bog_cowl
 	name = "bog cowl"
 	requirements = list(
-		/obj/item/natural/dirtclod= 1,
+		/obj/item/natural/clod/dirt= 1,
 		/obj/item/grown/log/tree/stick= 3,
 		/obj/item/natural/fibers = 2,
 	)
-	attacked_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
 	starting_atom = /obj/item/grown/log/tree/stick
 	output = /obj/item/clothing/neck/bogcowl
 	craftdiff = 0

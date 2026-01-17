@@ -207,7 +207,7 @@
 						L.apply_status_effect(/datum/status_effect/debuff/cursed)
 				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 		stage_update()
-		attacking_shovel.heldclod = new(attacking_shovel)
+		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 
 /datum/status_effect/debuff/cursed

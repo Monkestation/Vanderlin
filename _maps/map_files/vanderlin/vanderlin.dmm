@@ -10408,7 +10408,7 @@
 /turf/open/floor/wood,
 /area/indoors/town/manor/throne)
 "eXD" = (
-/obj/structure/fluff/clodpile,
+/obj/structure/fluff/clodpile/dirt,
 /turf/open/floor/grass/yel,
 /area/outdoors/exposed/church)
 "eXI" = (
@@ -36210,7 +36210,7 @@
 /area/indoors/town/shop)
 "rBJ" = (
 /obj/structure/table/wood/plain,
-/obj/item/natural/dirtclod,
+/obj/item/natural/clod/dirt,
 /turf/open/floor/cobble,
 /area/under/dungeon)
 "rBO" = (
@@ -49830,7 +49830,7 @@
 	pixel_x = -11;
 	pixel_y = 1
 	},
-/obj/item/natural/dirtclod,
+/obj/item/natural/clod/dirt,
 /obj/item/plate{
 	pixel_x = 4;
 	pixel_y = 6

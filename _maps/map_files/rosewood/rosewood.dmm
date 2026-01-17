@@ -13035,7 +13035,7 @@
 /area/outdoors/exposed/church)
 "gsQ" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/natural/dirtclod,
+/obj/item/natural/clod/dirt,
 /obj/machinery/light/fueled/wallfire/candle/l{
 	pixel_x = 32
 	},
@@ -25384,10 +25384,7 @@
 /area/indoors/town/clocktower)
 "mDJ" = (
 /obj/structure/toilet,
-/obj/structure/fluff/clodpile{
-	pixel_y = 7;
-	name = "nitesoil pile"
-	},
+/obj/structure/fluff/clodpile/dirt,
 /turf/open/floor/greenstone,
 /area/under/town/basement)
 "mDK" = (

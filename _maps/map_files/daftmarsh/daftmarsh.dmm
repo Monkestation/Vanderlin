@@ -17119,7 +17119,7 @@
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "oUe" = (
-/obj/structure/fluff/clodpile,
+/obj/structure/fluff/clodpile/dirt,
 /turf/open/floor/dirt,
 /area/outdoors/town)
 "oUl" = (
@@ -24063,7 +24063,7 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "vst" = (
-/obj/structure/fluff/clodpile,
+/obj/structure/fluff/clodpile/dirt,
 /turf/open/floor/grass/yel,
 /area/outdoors/town)
 "vsx" = (

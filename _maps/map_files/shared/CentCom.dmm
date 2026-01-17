@@ -5354,7 +5354,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "GS" = (
-/obj/structure/fluff/clodpile,
+/obj/structure/fluff/clodpile/dirt,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
 "GV" = (

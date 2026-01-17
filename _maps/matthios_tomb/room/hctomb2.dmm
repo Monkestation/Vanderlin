@@ -197,7 +197,7 @@
 /turf/open/floor/herringbone,
 /area/under/tomb/cave)
 "qA" = (
-/obj/structure/fluff/clodpile,
+/obj/structure/fluff/clodpile/dirt,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "rp" = (
@@ -405,7 +405,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "EE" = (
-/obj/item/natural/dirtclod,
+/obj/item/natural/clod/dirt,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "EP" = (
@@ -562,7 +562,7 @@
 /turf/open/water/swamp,
 /area/under/tomb/cave)
 "XV" = (
-/obj/item/natural/dirtclod,
+/obj/item/natural/clod/dirt,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "XW" = (

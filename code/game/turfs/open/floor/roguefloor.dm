@@ -262,7 +262,7 @@
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		var/obj/item/I = new /obj/item/natural/dirtclod(src)
+		var/obj/item/I = new /obj/item/natural/clod/dirt(src)
 		if(L.put_in_active_hand(I))
 			L.visible_message("<span class='warning'>[L] picks up some dirt.</span>")
 			dirt_amt--
@@ -1103,6 +1103,19 @@
 /turf/open/floor/sand/Initialize()
 	. = ..()
 	dir = pick(GLOB.cardinals)
+
+/turf/open/floor/sand/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	if(isliving(user))
+		var/mob/living/L = user
+		var/obj/item/I = new /obj/item/natural/clod/sand(src)
+		if(L.put_in_active_hand(I))
+			L.visible_message("<span class='warning'>[L] picks up some sand.</span>")
+		else
+			qdel(I)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/open/floor/sand/sandstone
 	name = "sandstone gravel"
