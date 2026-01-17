@@ -155,12 +155,14 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_VETERAN		"CAT_VETERAN"		// Veteran class - Handles Veteran class selector
 #define CTAG_TOWN_ELDER		"CAT_TOWN_ELDER"		// Town Elder class - Handles Town Elder class selector
 #define CTAG_ROYALKNIGHT	"CAT_ROYAL_KNIGHT"
+#define CTAG_ARCHIVIST		"CAT_ARCHIVIST"
 #define CTAG_MENATARMS		"CAT_MENATARMS"
 #define CTAG_SERVANT		"CAT_SERVANT" 		// Servant class - 4 type of servant to fill in someplace.
 #define CTAG_GATEMASTER		"CAT_GATEMASTER"
 #define CTAG_WRETCH			"CAT_WRETCH"
 #define CTAG_INQUISITION	"CAT_INQUISITION"	// For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
+#define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
 
 // Character category and its buys
 #define TRIUMPH_CAT_CHARACTER "CHARACTER"
@@ -373,6 +375,7 @@ Thing can move up or down an armor class by significant changes to coverage & cr
 \--------------------*/
 
 // Light AC
+#define ARMOR_NONE			list("blunt" = 0, "slash" = 0, "stab" = 0, "piercing" = 0, "fire" = 0, "acid" = 0)
 #define ARMOR_MINIMAL		list("blunt" = 5, "slash" = 5, "stab" = 5, "piercing" = 0, "fire" = 0, "acid" = 0)
 #define ARMOR_WEAK			list("blunt" = 10, "slash" = 10, "stab" = 10, "piercing" = 5, "fire" = 0, "acid" = 0)
 

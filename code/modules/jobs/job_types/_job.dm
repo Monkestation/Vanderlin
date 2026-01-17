@@ -166,7 +166,7 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/datum/charflaw/forced_flaw
+	var/datum/quirk/forced_flaw
 
 	var/shows_in_list = TRUE
 
@@ -334,10 +334,7 @@
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
-		spawned.set_flaw(forced_flaw)
-
-	if(spawned.charflaw)
-		spawned.charflaw.after_spawn(spawned, player_client)
+		spawned.add_quirk(forced_flaw)
 
 	if(antag_role && spawned.mind)
 		spawned.mind.add_antag_datum(antag_role)

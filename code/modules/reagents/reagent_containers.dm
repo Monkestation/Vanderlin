@@ -179,7 +179,7 @@
 			to_chat(user, span_warning("\The [src] is already labelled."))
 		return
 	if(user)
-		playsound(get_turf(src), 'sound/foley/dropsound/paper_drop.ogg', 70)
+		playsound(src, 'sound/foley/dropsound/paper_drop.ogg', 70)
 		user.visible_message(span_notice("[user] applies a label to \the [src]."), span_notice("I label \the [src]."), vision_distance = 3)
 	name = label_prefix ? "[label_prefix][label_name]" : label_name
 	if(label_desc)

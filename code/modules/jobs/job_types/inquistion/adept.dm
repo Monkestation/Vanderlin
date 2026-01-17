@@ -21,9 +21,13 @@
 	can_have_apprentices = FALSE
 	is_foreigner = TRUE
 
+
 	job_bitflag = BITFLAG_CHURCH
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
 	antag_role = /datum/antagonist/purishep
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 
 /datum/outfit/adept // Base outfit for Adepts, before loadouts

@@ -28,9 +28,10 @@
 	)
 	var/amount_blessed = 0
 	for(var/obj/structure/soil/soil in view(4, owner))
-		playsound(get_turf(soil), 'sound/vo/smokedrag.ogg', 100, TRUE)
+		playsound(soil, 'sound/vo/smokedrag.ogg', 100, TRUE)
 		soil.bless_soil()
 		amount_blessed++
 		new /obj/effect/temp_visual/bless_swirl(get_turf(soil))
 		if(amount_blessed >= 5)
 			break
+		SEND_SIGNAL(owner, COMSIG_SOIL_BLESSED)

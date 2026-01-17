@@ -28,9 +28,9 @@
 
 /datum/job/alchemist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/craft/alchemy,pick(0,3), TRUE)
+	spawned.adjust_skillrank(/datum/skill/craft/alchemy, rand(0,3), TRUE)
 	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/alchemy, pick(4,6), TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/alchemy, rand(4,6), TRUE)
 
 /datum/outfit/alchemist
 	name = "Alchemist"

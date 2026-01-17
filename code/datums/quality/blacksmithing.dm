@@ -5,31 +5,23 @@
 /datum/quality_calculator/blacksmithing/calculate_final_quality()
 	var/avg_material = floor(material_quality / num_components)
 
-	// skill_quality = player's blacksmithing skill level (0-6)
-	// performance_quality = number of hits taken
-	// minigame_success = minigame score (0-100+)
-
-	// Skill factor for quality contribution (0 to 1)
+	// Skill factor (0 to 1)
 	var/skill_factor = skill_quality / 6
-
-	// Performance factor from minigame (0 to 1.2)
 	var/performance_factor = min(1.2, minigame_success / 100)
 
-	// Quality components
-	var/skill_component = skill_factor * 2.5 // Max +2.5 at skill 6
-	var/material_component = avg_material * 0.8
-	var/performance_component = performance_factor * 2.0 // Max +2.4 for perfect minigame
+	// --- FORGIVING WEIGHTS ---
+	var/skill_component = skill_factor * 3.0      // Max +3.0
+	var/material_component = avg_material * 1.5   // Max +6.0
+	var/performance_component = performance_factor * 3.0 // Max +3.6 (120 score)
 
-	// Penalties
-	var/hit_penalty = floor(performance_quality * 0.4) // More hits = worse
-	var/difficulty_penalty = floor(difficulty_modifier * 0.6) // Harder recipes = harder to perfect
+	var/hit_penalty = floor(performance_quality * 0.5)
+	var/difficulty_penalty = floor(difficulty_modifier * 0.3)
 
-	var/final_quality = skill_component + material_component + performance_component - hit_penalty - difficulty_penalty
+	var/raw_quality = skill_component + material_component + performance_component - hit_penalty - difficulty_penalty
 
-	// Soft cap: quality above skill level is penalized
-	// This allows masterworks with good materials, but makes them harder at low skill
-	if(final_quality > skill_quality)
-		var/excess = final_quality - skill_quality
-		final_quality = skill_quality + (excess * 0.5) // 50% of excess quality counts
+	var/final_quality = raw_quality
+	if(raw_quality > skill_quality)
+		var/excess = raw_quality - skill_quality
+		final_quality = skill_quality + (excess * 0.8) // High retention (80%)
 
 	return clamp(round(final_quality), -10, 8)

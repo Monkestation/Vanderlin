@@ -246,7 +246,7 @@
 			else
 				head = /obj/item/clothing/head/helmet/heavy/frog
 		if(2)
-			head = /obj/item/clothing/head/helmet/graggar
+			head = /obj/item/clothing/head/helmet/heavy/graggar
 		if(3)
 			head = /obj/item/clothing/head/helmet/heavy/frog
 		if(4)

@@ -155,6 +155,7 @@ GLOBAL_LIST(teleport_runes)
 	color = rgb(255, 0, 0)
 	animate(src, color = oldcolor, time = 5)
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 0.5 SECONDS)
+	rune_in_use = FALSE
 
 /obj/effect/decal/cleanable/roguerune/attack_hand(mob/living/user)
 	if(rune_in_use)

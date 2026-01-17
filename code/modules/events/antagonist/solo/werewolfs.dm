@@ -19,7 +19,7 @@
 	weight = 12
 
 	earliest_start = 0 SECONDS
-	min_players = 45
+	min_players = 35
 
 	typepath = /datum/round_event/antagonist/solo/werewolf
 	antag_datum = /datum/antagonist/werewolf
