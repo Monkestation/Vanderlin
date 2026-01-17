@@ -8,10 +8,10 @@
 			user.add_stress(/datum/stress_event/tieb)
 		if(!ishalforc(user) && ishalforc(src))
 			user.add_stress(/datum/stress_event/horc)
-		if(user.has_flaw(/datum/charflaw/paranoid) && (STASTR - user.STASTR) > 1)
+		if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
 			user.add_stress(/datum/stress_event/parastr)
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-			if(user.has_flaw(/datum/charflaw/paranoid))
+			if(user.has_quirk(/datum/quirk/vice/paranoid))
 				user.add_stress(/datum/stress_event/paraforeigner)
 			else
 				user.add_stress(/datum/stress_event/foreigner)
@@ -157,10 +157,10 @@
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
 			. += span_phobia("A foreigner...")
 
-		if(has_flaw(/datum/charflaw/addiction/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		if(has_quirk(/datum/quirk/vice/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 			. += span_userdanger("ALCOHOLIC!")
 
-		if(has_flaw(/datum/charflaw/addiction/junkie) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		if(has_quirk(/datum/quirk/vice/junkie) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 			. += span_userdanger("JUNKIE!")
 
 		if(HAS_TRAIT(src, TRAIT_FISHFACE) && HAS_TRAIT(user, TRAIT_FISHFACE))
@@ -493,9 +493,11 @@
 	//Fire/water stacks
 	if(on_fire)
 		var/fire_text = "[m1] on fire!"
-		if(user.has_flaw(/datum/charflaw/addiction/pyromaniac))
-			fire_text += span_boldred(" IT'S BEAUTIFUL!")
-			user.sate_addiction()
+		if(isliving(user))
+			var/mob/living/liver = user
+			if(liver.has_quirk(/datum/quirk/vice/pyromaniac))
+				fire_text += span_boldred(" IT'S BEAUTIFUL!")
+				liver.sate_addiction(/datum/quirk/vice/pyromaniac)
 		msg += fire_text
 	else if(fire_stacks + divine_fire_stacks > 0)
 		msg += "[m1] covered in something flammable."
@@ -558,15 +560,6 @@
 						msg += "[m1] at peace inside."
 			else if(stress > 10)
 				msg += "[m3] stress all over [m2] face."
-
-		//Jitters
-		switch(jitteriness)
-			if(300 to INFINITY)
-				msg += "<B>[m1] convulsing violently!</B>"
-			if(200 to 300)
-				msg += "[m1] extremely jittery."
-			if(100 to 200)
-				msg += "[m1] twitching ever so slightly."
 
 		if(InCritical())
 			msg += span_warning("[m1] barely conscious.")
@@ -681,8 +674,10 @@
 
 	// Characters with the hunted flaw will freak out if they can't see someone's face.
 	if(!appears_dead)
-		if(skipface && user.has_flaw(/datum/charflaw/hunted) && user != src)
-			user.add_stress(/datum/stress_event/hunted)
+		if(isliving(user))
+			var/mob/living/liver = user
+			if(skipface && liver.has_quirk(/datum/quirk/vice/hunted) && user != src)
+				user.add_stress(/datum/stress_event/hunted)
 
 	if(!obscure_name && (flavortext || ((headshot_link || ooc_extra_link) && client?.is_donator()))) // only show flavor text if there is a flavor text and we show headshot
 		. += "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>"
@@ -692,7 +687,7 @@
 		. += trait_exam
 
 	// The Assassin's profane dagger can sniff out their targets, even masked.
-	if(HAS_TRAIT(user, TRAIT_ASSASSIN) && ((has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))))
+	if(HAS_TRAIT(user, TRAIT_ASSASSIN) && ((has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))))
 		//TODO: move this to an examinate signal call
 		if ((src != user) && iscarbon(user))
 			var/mob/living/carbon/assassin = user
@@ -713,17 +708,23 @@
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 
 /mob/living/proc/status_effect_examines(pronoun_replacement) //You can include this in any mob's examine() to show the examine texts of status effects!
-	var/list/dat = list()
+	var/list/examine_list = list()
 	if(!pronoun_replacement)
 		pronoun_replacement = p_they(TRUE)
-	for(var/V in status_effects)
-		var/datum/status_effect/E = V
-		if(E.examine_text)
-			var/new_text = replacetext(E.examine_text, "SUBJECTPRONOUN", pronoun_replacement)
-			new_text = replacetext(new_text, "[pronoun_replacement] is", "[pronoun_replacement] [p_are()]") //To make sure something become "They are" or "She is", not "They are" and "She are"
-			dat += "[new_text]" //dat.Join("\n") doesn't work here, for some reason
-	if(dat.len)
-		return dat.Join("\n")
+
+	for(var/datum/status_effect/effect as anything in status_effects)
+		var/effect_text = effect.get_examine_text()
+		if(!effect_text)
+			continue
+
+		var/new_text = replacetext(effect_text, "SUBJECTPRONOUN", pronoun_replacement)
+		new_text = replacetext(new_text, "[pronoun_replacement] is", "[pronoun_replacement] [p_are()]") //To make sure something become "They are" or "She is", not "They are" and "She are"
+		examine_list += new_text
+
+	if(!length(examine_list))
+		return
+
+	return examine_list.Join("\n")
 
 /mob/living/proc/get_inquisition_text(mob/examiner)
 	var/inquisition_text

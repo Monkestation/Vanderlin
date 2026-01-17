@@ -6,20 +6,6 @@
 /mob/living/carbon/IsParalyzed()
 	return ..()
 
-/mob/living/carbon/adjust_drugginess(amount)
-	druggy = max(druggy+amount, 0)
-	if(druggy)
-		overlay_fullscreen("high", /atom/movable/screen/fullscreen/high)
-	else
-		clear_fullscreen("high")
-
-/mob/living/carbon/set_drugginess(amount)
-	druggy = max(amount, 0)
-	if(druggy)
-		overlay_fullscreen("high", /atom/movable/screen/fullscreen/high)
-	else
-		clear_fullscreen("high")
-
 /mob/living/carbon/adjust_disgust(amount)
 	disgust = CLAMP(disgust+amount, 0, DISGUST_LEVEL_MAXEDOUT)
 

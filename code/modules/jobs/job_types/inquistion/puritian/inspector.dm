@@ -21,10 +21,10 @@
 	)
 
 	jobstats = list(
-		STATKEY_PER = 3,
-		STATKEY_SPD = 3,
+		STATKEY_PER = 4,
+		STATKEY_SPD = 4,
 		STATKEY_INT = 2,
-	) //8 Statline
+	) //10 Statline
 
 	skills = list(
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER,
@@ -57,15 +57,24 @@
 			spawned.put_in_hands(new /obj/item/weapon/sword/rapier/psy/relic(spawned), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BELT_L, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		if("Daybreak (Whip)")
 			spawned.put_in_hands(new /obj/item/weapon/whip/psydon/relic(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 		if("Sanctum (Halberd)")
 			spawned.put_in_hands(new /obj/item/weapon/polearm/halberd/psydon/relic(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+				spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1) //So they don't have a 33% chance if being unable to wield their weapon.
 		if("The Forgotten Blade")
 			spawned.put_in_hands(new /obj/item/weapon/sword/long/forgotten(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 
 
 /datum/outfit/inquisitor/inspector

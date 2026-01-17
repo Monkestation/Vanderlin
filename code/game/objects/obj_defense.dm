@@ -43,7 +43,7 @@
 
 /obj/bullet_act(obj/projectile/P, def_zone, piercing_hit = FALSE)
 	. = ..()
-	playsound(src.loc, P.hitsound, 50, TRUE)
+	playsound(src, P.hitsound, 50, TRUE)
 	visible_message("<span class='danger'>[src] is hit by \a [P]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 	if(!QDELETED(src)) //Bullet on_hit effect might have already destroyed this object
 		take_damage(P.damage, P.damage_type, P.flag, 0, turn(P.dir, 180), P.armor_penetration)
@@ -95,7 +95,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = TRUE
 	if(!(resistance_flags & ACID_PROOF))
 		if(prob(33))
-			playsound(loc, 'sound/blank.ogg', 150, TRUE)
+			playsound(src, 'sound/blank.ogg', 150, TRUE)
 		take_damage(min(1 + round(sqrt(acid_level)*0.3), 300), BURN, "acid", 0)
 
 	acid_level = max(acid_level - (5 + 3*round(sqrt(acid_level))), 0)
@@ -143,8 +143,8 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(resistance_flags & ON_FIRE)
 		SSfire_burning.processing -= src
 	for(var/mob/living/carbon/human/H in view(2, src))
-		if(H.has_flaw(/datum/charflaw/addiction/pyromaniac))
-			H.sate_addiction()
+		if(H.has_quirk(/datum/quirk/vice/pyromaniac))
+			H.sate_addiction(/datum/quirk/vice/pyromaniac)
 	deconstruct(FALSE)
 
 ///Called when the obj is no longer on fire.

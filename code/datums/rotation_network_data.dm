@@ -37,7 +37,7 @@
 	for(var/obj/structure/child as anything in connected)
 		if(QDELETED(child))
 			continue
-		child.MakeParticleEmitter(/particles/sparks, FALSE, 1 SECONDS)
+		child.add_shared_particles(/particles/sparks, time = 1 SECONDS)
 	update_animation_effect()
 
 /datum/rotation_network/proc/restore()

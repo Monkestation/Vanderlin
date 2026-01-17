@@ -158,9 +158,6 @@
 		"Halberd" = /obj/item/weapon/polearm/halberd,
 		"Longsword" = /obj/item/weapon/sword/long,
 		"Sabre" = /obj/item/weapon/sword/sabre/dec,
-		"Unarmed" = /obj/item/weapon/knife/dagger/steel,
-		"Knuckles" = /obj/item/weapon/knuckles,
-		"Katar" = /obj/item/weapon/katar
 	)
 
 	var/choice = H.select_equippable(H, selectable, message = "Choose Your Specialisation", title = "KNIGHT")
@@ -180,16 +177,6 @@
 			grant_shield = FALSE
 		if("Sabre")
 			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
-		if("Unarmed")
-			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 3, 5, TRUE)
-			H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, 4, TRUE)
-			grant_shield = FALSE
-		if("Knuckles")
-			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4, TRUE)
-			grant_shield = FALSE
-		if("Katar")
-			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4, TRUE)
-			grant_shield = FALSE
 
 	if(grant_shield)
 		H.adjust_skillrank(/datum/skill/combat/shields, 1)

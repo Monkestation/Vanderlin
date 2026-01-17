@@ -20,8 +20,8 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/athletics = 3,
@@ -96,7 +96,7 @@
 		"Great axe" = /obj/item/weapon/polearm/halberd/bardiche/woodcutter,
 	)
 
-	var/weaponchoice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Specialisation", title = "Warrior of the ten!")
+	var/weaponchoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "Warrior of the ten!")
 	if(!weaponchoice)
 		return
 

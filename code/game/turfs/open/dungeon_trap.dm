@@ -69,18 +69,21 @@
 	var/list/dungeon_turfs = Z_TURFS(SSdungeon_generator.dungeon_z + 1)
 	var/turf/open/chosen_turf
 	while(!chosen_turf && length(dungeon_turfs))
-		var/turf/T = pick(dungeon_turfs)
+		var/turf/T = pick_n_take(dungeon_turfs)
 		if(istype(T, /turf/open))
 			chosen_turf = T
 		else if(istype(T, /turf/closed/dungeon_void)) // lets you fall through to the bottom level in some places
-			var/turf/dT = get_open_turf_in_dir(T, DOWN)
-			chosen_turf = dT
-
-		for(var/obj/O in chosen_turf?.contents)
-			if(istype(O, /obj/structure))
-				var/obj/structure/S = O
-				if(S.density > 0 && !S.climbable) // keeps you from landing inside bars or something
-					dungeon_turfs = null
-					break
-		dungeon_turfs -= T
+			chosen_turf = GET_TURF_BELOW(T)
+		// no chosen_turf this step so don't bother with the parts after this
+		if(isclosedturf(chosen_turf) || isopenspace(chosen_turf)) // don't put us in walls or falls
+			continue
+		if(islava(chosen_turf)) // please someone centralize these safety checks, i'm only adding this here bc a maintainer asked and i'm lazy
+			var/turf/open/lava/lava_turf = chosen_turf
+			if(!lava_turf.is_safe())
+				continue // don't drop someone into lava or acid
+		// check if our chosen_turf actually works
+		for(var/obj/structure/struct in chosen_turf)
+			if(struct.density && !struct.climbable) // keeps you from landing inside bars or something
+				chosen_turf = null // ineligible
+				break
 	return chosen_turf

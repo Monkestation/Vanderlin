@@ -24,6 +24,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/gold/burden, // uncraftable
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
+		/obj/item/clothing/ring/apothecary_ring, // uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
@@ -40,7 +41,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/cloak/psydontabard, ///they'd kill you for this
 		/obj/item/clothing/cloak/psydontabard/alt, ///same here
 		/obj/item/clothing/face/spectacles/inq, //these are powerful
-		/obj/item/clothing/shirt/undershirt/easttats, ///no
 		/obj/item/clothing/armor/leather/heavy, ///abstract type
 		/obj/item/clothing/head/helmet/heavy/psydonbarbute, //buyable
 		/obj/item/clothing/head/helmet/heavy/psysallet, //buyable

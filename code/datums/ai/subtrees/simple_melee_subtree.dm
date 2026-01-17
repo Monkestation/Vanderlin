@@ -75,7 +75,7 @@
 		sleep(1)
 	animate(gator_pawn, transform = M, time = 1)
 
-	playsound(get_turf(gator_pawn), 'sound/vo/mobs/gator/gatordeath.ogg', 70, TRUE)
+	playsound(gator_pawn, 'sound/vo/mobs/gator/gatordeath.ogg', 70, TRUE)
 
 	// Set cooldown
 	controller.set_blackboard_key(BB_GATOR_DEATH_ROLL_COOLDOWN, world.time + death_roll_cooldown)

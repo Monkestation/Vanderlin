@@ -69,10 +69,36 @@
 	var/next_boat_trader_count = 0 // How many traders will come on next boat
 	var/trader_schedule_generated = FALSE // Whether we've prepared for next boat
 
+	///faction specific weightings for bounties
+	// Format: list(path = weight)
+	// Example: list(/obj/item/clothing = 300, /obj/item/weapon = 200)
+	// Higher weight = more likely to appear as bounty
+	///we use base 100 so we have fine control over it
+	var/list/bounty_path_weights = list()
+	var/default_bounty_weight = 100 // Weight for items not in bounty_path_weights
+
+
 /datum/world_faction/New()
 	..()
 	initialize_faction_stock()
 	generate_initial_bounties()
+
+/**
+ * Gets the weight for a specific item type based on bounty_path_weights
+ * Checks the item and all its parent types for matching weights
+ */
+/datum/world_faction/proc/get_bounty_weight(obj/item_type)
+	var/highest_weight = default_bounty_weight
+
+	// Check each weighted path to see if item_type is a subtype
+	for(var/weighted_path in bounty_path_weights)
+		if(ispath(item_type, weighted_path))
+			var/weight = bounty_path_weights[weighted_path]
+			// Use the most specific (highest) weight found
+			if(weight > highest_weight)
+				highest_weight = weight
+
+	return highest_weight
 
 // Get current reputation tier (0-6)
 /datum/world_faction/proc/get_reputation_tier()
@@ -208,30 +234,78 @@
 		if(pack.contains)
 			faction_supply_packs[selected_pack] = pack
 
+/**
+ * Generates initial bounties using the weighted system
+ */
 /datum/world_faction/proc/generate_initial_bounties()
-	// Generate initial bounties from items with sell values
-	var/list/potential_bounties = list()
-	for(var/obj_type in SSmerchant.staticly_setup_types)
-		potential_bounties += obj_type
+	if(!length(SSmerchant.valid_bounty_items))
+		log_game("WARNING: [faction_name] has no valid bounty items!")
+		return
 
 	var/max_bounties = get_max_bounties()
+
+	// Build weighted list of all valid bounty items
+	var/list/weighted_bounties = list()
+	for(var/bounty_type in SSmerchant.valid_bounty_items)
+		weighted_bounties[bounty_type] = get_bounty_weight(bounty_type)
+
+	// Pick bounties using weights
 	for(var/i = 1 to max_bounties)
-		if(!length(potential_bounties))
+		if(!length(weighted_bounties))
 			break
-		var/bounty_type = pick(potential_bounties)
-		potential_bounties -= bounty_type
+
+		var/bounty_type = pickweight(weighted_bounties)
+		weighted_bounties -= bounty_type
 		add_bounty(bounty_type)
 
+
+/**
+ * Generates a bounty multiplier based on item value and reputation
+ * Higher value items get lower multipliers to balance rewards
+ */
+/datum/world_faction/proc/generate_bounty_multiplier(atom/bounty_type)
+	var/base_value = SSmerchant.get_item_base_value(bounty_type)
+	var/tier = get_reputation_tier()
+
+	// Scale multiplier inversely with item value
+	var/value_modifier = 1.0
+	if(base_value > 0)
+		// Expensive items (100+) get lower multipliers
+		// Cheap items (1-20) get higher multipliers
+		if(base_value >= 100)
+			value_modifier = 0.6
+		else if(base_value >= 50)
+			value_modifier = 0.8
+		else if(base_value >= 20)
+			value_modifier = 1.0
+		else
+			value_modifier = 1.2
+
+	// Reputation provides bonus to multipliers
+	var/base_min = (12 + (tier * 2)) / 10.0
+	var/base_max = (25 + (tier * 3)) / 10.0
+
+	var/multiplier = rand(base_min * 10, base_max * 10) / 10.0
+	multiplier *= value_modifier
+
+	return max(1.1, multiplier) // Minimum 1.1x multiplier
+
+/**
+ * adds a bounty taking into account calculated multipliers for items
+ */
 /datum/world_faction/proc/add_bounty(atom/bounty_type, multiplier)
+	// Validate that this is an obtainable item
+	if(!(bounty_type in SSmerchant.valid_bounty_items))
+		log_game("WARNING: Attempted to add invalid bounty [bounty_type] to [faction_name]")
+		return FALSE
+
 	if(!multiplier)
-		// Generate random multiplier based on faction needs and reputation
-		var/tier = get_reputation_tier()
-		var/base_min = 12 + (tier * 2) // Higher rep = better base multipliers
-		var/base_max = 25 + (tier * 3)
-		multiplier = rand(base_min, base_max) / 10
+		multiplier = generate_bounty_multiplier(bounty_type)
 
 	bounty_items[bounty_type] = multiplier
 	bounty_refresh_times[bounty_type] = world.time + bounty_rotation_interval
+
+	return TRUE
 
 /datum/world_faction/proc/remove_bounty(atom/bounty_type)
 	bounty_items -= bounty_type
@@ -276,6 +350,10 @@
 
 	next_supply_rotation = world.time + supply_rotation_interval
 
+
+/**
+ * Rotates bounties using weighted selection
+ */
 /datum/world_faction/proc/rotate_bounties()
 	var/list/expired_bounties = list()
 
@@ -288,18 +366,18 @@
 	for(var/expired_bounty in expired_bounties)
 		remove_bounty(expired_bounty)
 
-		// Higher reputation = higher chance for replacement bounties
 		var/tier = get_reputation_tier()
-		var/replacement_chance = 70 + (tier * 5) // 5% more chance per tier
+		var/replacement_chance = 70 + (tier * 5)
 
 		if(prob(replacement_chance))
-			var/list/potential_bounties = list()
-			for(var/obj_type in SSmerchant.staticly_setup_types)
+			// Build weighted list of available bounties
+			var/list/weighted_available = list()
+			for(var/obj_type in SSmerchant.valid_bounty_items)
 				if(!(obj_type in bounty_items))
-					potential_bounties += obj_type
+					weighted_available[obj_type] = get_bounty_weight(obj_type)
 
-			if(length(potential_bounties))
-				var/new_bounty = pick(potential_bounties)
+			if(length(weighted_available))
+				var/new_bounty = pickweight(weighted_available)
 				add_bounty(new_bounty)
 
 	// If we have fewer bounties than our max, try to add more
@@ -307,17 +385,17 @@
 	var/current_bounties = length(bounty_items)
 
 	if(current_bounties < max_bounties)
-		var/list/potential_bounties = list()
-		for(var/obj_type in SSmerchant.staticly_setup_types)
+		var/list/weighted_available = list()
+		for(var/obj_type in SSmerchant.valid_bounty_items)
 			if(!(obj_type in bounty_items))
-				potential_bounties += obj_type
+				weighted_available[obj_type] = get_bounty_weight(obj_type)
 
 		var/bounties_to_add = max_bounties - current_bounties
 		for(var/i = 1 to bounties_to_add)
-			if(!length(potential_bounties))
+			if(!length(weighted_available))
 				break
-			var/new_bounty = pick(potential_bounties)
-			potential_bounties -= new_bounty
+			var/new_bounty = pickweight(weighted_available)
+			weighted_available -= new_bounty
 			add_bounty(new_bounty)
 
 // Award reputation for completing bounties
@@ -365,6 +443,40 @@
 	if(!trader_schedule_generated)
 		schedule_next_boat_traders()
 
+/datum/world_faction/proc/get_actual_sell_price(atom/sell_type, sell_modifier = 1)
+	var/base_price = 0
+
+	// If this item has an active bounty, use the bounty's base value
+	if(sell_type in bounty_items)
+		base_price = SSmerchant.get_item_base_value(sell_type)
+		var/bounty_multiplier = bounty_items[sell_type]
+		return FLOOR(base_price * bounty_multiplier * sell_modifier, 1)
+
+	// Otherwise use normal sellprice with modifiers
+	var/obj/item/temp = sell_type
+	base_price = initial(temp.sellprice)
+
+	if(!base_price || base_price <= 0)
+		return 0
+
+	var/static_modifier = 1
+	if(sell_type in hard_value_multipliers)
+		static_modifier = hard_value_multipliers[sell_type]
+
+	var/dynamic_modifier = 1
+	if(sell_type in sell_value_modifiers)
+		dynamic_modifier = sell_value_modifiers[sell_type]
+
+	return FLOOR(base_price * static_modifier * dynamic_modifier * sell_modifier, 1)
+
+/datum/world_faction/proc/setup_sell_data(atom/sell_type)
+	sell_value_modifiers |= sell_type
+	sell_value_modifiers[sell_type] = 1
+
+	if(sell_type in SSmerchant.obtainable_items)
+		SSmerchant.obtainable_items -= sell_type
+		SSmerchant.valid_bounty_items |= sell_type
+
 /datum/world_faction/proc/return_sell_modifier(atom/sell_type)
 	var/static_modifer = 1
 	if(sell_type in hard_value_multipliers)
@@ -387,26 +499,29 @@
 /datum/world_faction/proc/has_supply_pack(datum/supply_pack/pack_type)
 	return (pack_type in faction_supply_packs)
 
+/**
+ * Handles selling an item, including bounty completion with weighted replacement
+ */
 /datum/world_faction/proc/handle_selling(obj/selling_type)
 	sold_count |= selling_type
 	sold_count[selling_type]++
 
 	if(selling_type in bounty_items)
-		award_bounty_reputation(selling_type) // Award reputation for completing bounty
+		award_bounty_reputation(selling_type)
 		remove_bounty(selling_type)
 
-		// Higher reputation = better chance for new bounties
 		var/tier = get_reputation_tier()
 		var/new_bounty_chance = 60 + (tier * 5)
 
 		if(prob(new_bounty_chance))
-			var/list/potential_bounties = list()
-			for(var/obj_type in SSmerchant.staticly_setup_types)
+			// Build weighted list of available bounties
+			var/list/weighted_available = list()
+			for(var/obj_type in SSmerchant.valid_bounty_items)
 				if(!(obj_type in bounty_items))
-					potential_bounties += obj_type
+					weighted_available[obj_type] = get_bounty_weight(obj_type)
 
-			if(length(potential_bounties))
-				var/new_bounty = pick(potential_bounties)
+			if(length(weighted_available))
+				var/new_bounty = pickweight(weighted_available)
 				add_bounty(new_bounty)
 
 	if(!prob(sold_count[selling_type] * 10))
@@ -449,10 +564,6 @@
 
 	if(length(sell_data))
 		SSmerchant.sending_stuff |= new /obj/item/paper/scroll/sell_price_changes(null, sell_data, faction_name)
-
-/datum/world_faction/proc/setup_sell_data(atom/sell_type)
-	sell_value_modifiers |= sell_type
-	sell_value_modifiers[sell_type] = 1
 
 /datum/world_faction/proc/should_send_trader()
 	if(!length(trader_type_weights))
@@ -647,6 +758,7 @@
 		next_threshold = reputation_thresholds[tier + 2]
 
 	return "[tier_name] ([faction_reputation]/[next_threshold])"
+
 
 /datum/world_faction/proc/debug_spawn_trader(mob/spawner)
 	if(!spawner)

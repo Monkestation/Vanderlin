@@ -7,7 +7,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/swords = 2,

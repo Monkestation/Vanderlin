@@ -268,7 +268,7 @@
 			to_chat(src, span_warning("I'm too tired to parry!"))
 			return FALSE
 		if(W)
-			playsound(get_turf(src), pick(W.parrysound), 100, FALSE)
+			playsound(src, pick(W.parrysound), 100, FALSE)
 
 		if(istype(rmb_intent, /datum/rmb_intent/riposte))
 			src.visible_message("<span class='boldwarning'><b>[src]</b> ripostes [user] with [W]!</span>")
@@ -284,7 +284,7 @@
 	else
 		// Non-human parry (simpler)
 		if(W)
-			playsound(get_turf(src), pick(W.parrysound), 100, FALSE)
+			playsound(src, pick(W.parrysound), 100, FALSE)
 
 	if(!(!src.mind || !user.mind))
 		log_defense(src, user, "parried", defending_item, attacking_item, "INTENT:[uppertext(user.used_intent.name)]")
@@ -308,11 +308,11 @@
 		if(!H.adjust_stamina(parrydrain))
 			to_chat(src, "<span class='boldwarning'>I'm too tired to parry!</span>")
 			return FALSE
-		playsound(get_turf(src), pick(parry_sound), 100, FALSE)
+		playsound(src, pick(parry_sound), 100, FALSE)
 		src.visible_message("<span class='warning'><b>[src]</b> parries [user] with their hands!</span>")
 	else
 		// Non-human parry (simpler)
-		playsound(get_turf(src), pick(parry_sound), 100, FALSE)
+		playsound(src, pick(parry_sound), 100, FALSE)
 
 	if(!(!src.mind || !user.mind))
 		log_defense(src, user, user.get_active_held_item() ? "parried" : "unarmed parried",
