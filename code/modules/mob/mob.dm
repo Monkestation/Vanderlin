@@ -133,7 +133,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
 	if(type)
-		if(type & MSG_VISUAL && eye_blind )//Vision related
+		if(type & MSG_VISUAL && is_blind() )//Vision related
 			if(!alt_msg)
 				return
 			else
@@ -146,7 +146,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			else
 				msg = alt_msg
 				type = alt_type
-				if(type & MSG_VISUAL && eye_blind)
+				if(type & MSG_VISUAL && is_blind())
 					return
 	to_chat(src, msg)
 
@@ -186,7 +186,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			msg = blind_message
 		if(!msg)
 			continue
-		if(M != src && !M.eye_blind)
+		if(M != src && !M.is_blind())
 			M.log_message("saw [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(msg, MSG_VISUAL, blind_message, MSG_AUDIBLE)
 		if(runechat_message && M.can_hear())
@@ -895,7 +895,12 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return mind.get_ghost(even_if_they_cant_reenter, ghosts_with_clients)
 
 ///Force get the ghost from the mind
-/mob/proc/grab_ghost(force)
+/mob/proc/grab_ghost(force, grab_spirit)
+	if(grab_spirit)
+		var/mob/living/carbon/spirit/underworld_spirit = get_spirit()
+		if(underworld_spirit)
+			underworld_spirit.mind?.transfer_to(src, TRUE)
+			qdel(underworld_spirit)
 	if(mind)
 		return mind.grab_ghost(force = force)
 
@@ -1163,7 +1168,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/proc/can_read(obj/O, silent = FALSE)
 	if(isobserver(src))
 		return TRUE
-	if(is_blind() || eye_blurry)
+	if(is_blind() || has_status_effect(/datum/status_effect/eye_blur))
 		if(!silent)
 			to_chat(src, span_warning("I'm too blind to read."))
 		return
@@ -1348,10 +1353,12 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(!choice)
 		choice = pick(selection_list)
 
-	var/list/spawn_items = LAZYACCESS(selection_list, choice)
+	var/spawn_items = LAZYACCESS(selection_list, choice)
+	if(isnull(spawn_items))
+		return
+
 	if(!islist(spawn_items))
 		spawn_items = list(spawn_items)
-
 	if(!length(spawn_items))
 		return choice
 

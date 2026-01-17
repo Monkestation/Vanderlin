@@ -256,5 +256,95 @@
                 "balance": "Psydonian helmets have a 180\u00b0 Field Of View"
             }
         ]
+    },
+    "2026-01-15": {
+        "YellowHarlequin": [
+            {
+                "image": "added streaks to hair_gradients.dmi"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed potential issues with spell channelling and death"
+            }
+        ]
+    },
+    "2026-01-16": {
+        "Rockslp": [
+            {
+                "rscdel": "Removed medium armor trait from spellmage."
+            },
+            {
+                "balance": "Reduce spell mage wrestling and strength"
+            },
+            {
+                "rscadd": "Added dreamwatcher to town elder"
+            },
+            {
+                "rscdel": "Removed dreamwatcher from town elder"
+            },
+            {
+                "rscdel": "Removes zizo from archivist options, he's one of noc's closely watched"
+            },
+            {
+                "balance": "Changes dreamwatcher stats to more alike the other archivist advclass."
+            },
+            {
+                "bugfix": "Fixed archivist dwarves running around with their belly flopping about"
+            },
+            {
+                "code_imp": "Made Archivist into an advclass"
+            },
+            {
+                "rscadd": "Gives clinic apprentice farming skill"
+            },
+            {
+                "balance": "Raises priest fist-fighting (NOT THEIR WRESTLING THOUGH!!!!)"
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "bugfix": "Values for a few stress events are now applied correctly."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "code_imp": "Moved fingerprint tracking onto bodyparts"
+            },
+            {
+                "code_imp": "Breaks the entire codebase"
+            }
+        ]
+    },
+    "2026-01-17": {
+        "TerraGS": [
+            {
+                "bugfix": "You will no longer count single coin values multiple times."
+            }
+        ],
+        "Raptorian1": [
+            {
+                "bugfix": "made mobs stop attacking each other."
+            }
+        ],
+        "Ediblebomb": [
+            {
+                "spellcheck": "Fixed two cases of \\\"the the\\\" and \\\"the 1.\\\" in bedsheet application/removal code."
+            },
+            {
+                "bugfix": "Fixed bedsheet offsets and layering."
+            },
+            {
+                "bugfix": "Fixed bedsheets having a permanent pickup delay after being applied to and removed from a bed."
+            },
+            {
+                "bugfix": "Fixed wool double beds only allowing one buckled mob."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "hardcore rat is now a small rat and can't speak"
+            }
+        ]
     }
 }

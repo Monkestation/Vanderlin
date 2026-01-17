@@ -96,6 +96,10 @@
 	dir = 1
 	},
 /area/indoors/town/tavern)
+"acP" = (
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/grass/yel,
+/area/outdoors/exposed/church)
 "acX" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/greenstone,
@@ -10407,10 +10411,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/manor/throne)
-"eXD" = (
-/obj/structure/fluff/clodpile/dirt,
-/turf/open/floor/grass/yel,
-/area/outdoors/exposed/church)
 "eXI" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/bin/water/gross,
@@ -23504,6 +23504,23 @@
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/dwarfin)
+"ltj" = (
+/obj/structure/table/wood/plain,
+/obj/item/kitchen/fork/iron{
+	pixel_x = -11;
+	pixel_y = 1
+	},
+/obj/item/natural/clod/dirt,
+/obj/item/plate{
+	pixel_x = 4;
+	pixel_y = 6
+	},
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison{
+	pixel_x = 5;
+	pixel_y = 13
+	},
+/turf/open/floor/cobble,
+/area/indoors/dungeon)
 "ltm" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/greenstone,
@@ -25461,6 +25478,11 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
+"mmw" = (
+/obj/structure/table/wood/plain,
+/obj/item/natural/clod/dirt,
+/turf/open/floor/cobble,
+/area/under/dungeon)
 "mmC" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/flashlight/flare/torch/metal,
@@ -36208,11 +36230,6 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town/shop)
-"rBJ" = (
-/obj/structure/table/wood/plain,
-/obj/item/natural/clod/dirt,
-/turf/open/floor/cobble,
-/area/under/dungeon)
 "rBO" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 4
@@ -49824,23 +49841,6 @@
 "yaw" = (
 /turf/closed/wall/mineral/wooddark,
 /area/under/cavewet)
-"yaB" = (
-/obj/structure/table/wood/plain,
-/obj/item/kitchen/fork/iron{
-	pixel_x = -11;
-	pixel_y = 1
-	},
-/obj/item/natural/clod/dirt,
-/obj/item/plate{
-	pixel_x = 4;
-	pixel_y = 6
-	},
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison{
-	pixel_x = 5;
-	pixel_y = 13
-	},
-/turf/open/floor/cobble,
-/area/indoors/dungeon)
 "yaX" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cave)
@@ -72798,7 +72798,7 @@ fGZ
 fGZ
 czw
 jLW
-tVX
+jLW
 jLW
 cLd
 ozq
@@ -102410,7 +102410,7 @@ dID
 hPy
 cTy
 uGo
-rBJ
+mmw
 oRE
 qzA
 alT
@@ -123151,7 +123151,7 @@ oSl
 oSl
 iKJ
 qVo
-eXD
+acP
 oUP
 oUP
 oUP
@@ -143219,7 +143219,7 @@ iNw
 lKh
 bAc
 gHa
-yaB
+ltj
 fWu
 fdD
 bAc

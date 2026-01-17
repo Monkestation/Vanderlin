@@ -65,7 +65,7 @@
 		"Spear" = /obj/item/weapon/polearm/spear, \
 		"Sword" = /obj/item/weapon/sword/iron, \
 	)
-	var/choice = spawned.select_equippable(spawned, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
 		return
 	switch(choice)

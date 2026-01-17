@@ -234,7 +234,7 @@
 			to_chat(owner, span_warning("You cannot cast [src] while lying on the floor!"))
 		return FALSE
 
-	if ((check_flags & COVEN_CHECK_SEE) && HAS_TRAIT(owner, TRAIT_BLIND))
+	if ((check_flags & COVEN_CHECK_SEE) && owner.is_blind())
 		if (alert)
 			to_chat(owner, span_warning("You cannot cast [src] without your sight!"))
 		return FALSE

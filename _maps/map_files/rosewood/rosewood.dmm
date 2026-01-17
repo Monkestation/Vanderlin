@@ -13033,14 +13033,6 @@
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
-"gsQ" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/natural/clod/dirt,
-/obj/machinery/light/fueled/wallfire/candle/l{
-	pixel_x = 32
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town/orphanage)
 "gsU" = (
 /obj/item/paint_palette{
 	pixel_x = -8;
@@ -24453,6 +24445,11 @@
 "mfO" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
+"mfQ" = (
+/obj/structure/toilet,
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "mfR" = (
 /turf/closed/wall/mineral/pipe,
 /area/indoors/town/tavern)
@@ -25382,11 +25379,6 @@
 /obj/structure/window/stained/yellow,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
-"mDJ" = (
-/obj/structure/toilet,
-/obj/structure/fluff/clodpile/dirt,
-/turf/open/floor/greenstone,
-/area/under/town/basement)
 "mDK" = (
 /obj/structure/door/fancy{
 	name = "Hand's Chambers"
@@ -47137,6 +47129,14 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/cobble,
 /area/under/cave)
+"xeO" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/natural/clod/dirt,
+/obj/machinery/light/fueled/wallfire/candle/l{
+	pixel_x = 32
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/orphanage)
 "xeQ" = (
 /turf/open/floor/churchbrick,
 /area/outdoors/mountains)
@@ -62673,7 +62673,7 @@ qJl
 qJl
 dkb
 stl
-mDJ
+mfQ
 aNm
 dkb
 jyq
@@ -63216,7 +63216,7 @@ xmk
 xmk
 xmk
 jnV
-gsQ
+xeO
 jnV
 eFH
 jnV
@@ -66951,7 +66951,7 @@ gFQ
 wLJ
 pBA
 eLB
-aZj
+eMY
 eMY
 eMY
 xuC
@@ -67155,7 +67155,7 @@ pBA
 riN
 eMY
 eMY
-aZj
+eMY
 uqd
 hhK
 hhK

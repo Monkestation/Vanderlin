@@ -91,7 +91,7 @@
 		ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 		ADD_TRAIT(affected, TRAIT_DEAF, "[type]")
 		ADD_TRAIT(affected, TRAIT_NOPAIN, "[type]")
-		affected.become_nearsighted()
+		affected.become_nearsighted("[type]")
 
 /datum/wound/fracture/head/on_mob_loss(mob/living/affected)
 	. = ..()
@@ -102,7 +102,7 @@
 		REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 		REMOVE_TRAIT(affected, TRAIT_DEAF, "[type]")
 		REMOVE_TRAIT(affected, TRAIT_NOPAIN, "[type]")
-		affected.cure_nearsighted()
+		affected.cure_nearsighted("[type]")
 
 /datum/wound/fracture/head/on_life()
 	. = ..()
@@ -137,8 +137,7 @@
 
 /datum/wound/fracture/head/eyes/on_mob_gain(mob/living/affected)
 	. = ..()
-	affected.become_blind("[type]")
-	addtimer(CALLBACK(affected, TYPE_PROC_REF(/mob/living, cure_blind), "[type]"), 30 SECONDS)
+	affected.adjust_temp_blindness(15 SECONDS)
 	affected.become_nearsighted("[type]")
 
 /datum/wound/fracture/head/eyes/on_mob_loss(mob/living/affected)

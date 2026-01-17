@@ -629,7 +629,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(fire_stacks + divine_fire_stacks > 5)
 			apply_damage(10, BURN)
 
-/mob/living/simple_animal/revive(full_heal = FALSE, admin_revive = FALSE)
+/mob/living/simple_animal/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
 	if(!.)
 		return

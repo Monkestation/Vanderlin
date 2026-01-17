@@ -667,6 +667,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/grain/wheat
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/oatbait
 	name = "bait (oat)"
@@ -677,6 +678,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/grain/oat
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/sweetbait
 	name = "sweet bait (apple)"
@@ -687,6 +689,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/apple
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/berrybait
 	name = "sweet bait (berry)"
@@ -697,6 +700,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/bloodbait
 	name = "blood bait"
@@ -707,6 +711,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/meat
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 //carveable glass? Sure why not
 /datum/repeatable_crafting_recipe/crafting/alchemical_vial

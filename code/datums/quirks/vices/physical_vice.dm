@@ -1,8 +1,8 @@
 /datum/status_effect/debuff/badvision
 	id = "badvision"
 	alert_type = null
-	effectedstats = list(STATKEY_PER = -20, STATKEY_SPD = -5, STATKEY_LCK = -20)
-	duration = 100
+	effectedstats = list(STATKEY_PER = -10, STATKEY_SPD = -2, STATKEY_LCK = -5)
+	duration = 5 SECONDS
 
 /datum/quirk/vice/bad_sight
 	name = "Poor Vision"
@@ -17,20 +17,22 @@
 
 	if(H.wear_mask)
 		var/type = H.wear_mask.type
-		QDEL_NULL(H.wear_mask)
-		H.put_in_hands(new type(get_turf(H)))
+		qdel(H.wear_mask)
+		H.put_in_hands(new type())
 	H.equip_to_slot_or_del(new /obj/item/clothing/face/spectacles(H), ITEM_SLOT_MASK)
+	H.become_nearsighted(type)
+
+/datum/quirk/vice/bad_sight/on_remove()
+	if(owner)
+		owner.cure_nearsighted(type)
+		owner.remove_status_effect(/datum/status_effect/debuff/badvision)
+	. = ..()
 
 /datum/quirk/vice/bad_sight/on_life(mob/living/user)
 	if(!ishuman(user))
 		return
-	var/mob/living/carbon/human/H = user
-	if(H.wear_mask && istype(H.wear_mask, /obj/item/clothing/face/spectacles))
-		var/obj/item/I = H.wear_mask
-		if(!I.obj_broken)
-			return
-	H.set_eye_blur_if_lower(4 SECONDS)
-	H.apply_status_effect(/datum/status_effect/debuff/badvision)
+	if(user.is_nearsighted_currently())
+		user.apply_status_effect(/datum/status_effect/debuff/badvision)
 
 /datum/quirk/vice/cyclops_right
 	name = "Cyclops (R)"
