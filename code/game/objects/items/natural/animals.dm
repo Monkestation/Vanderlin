@@ -292,15 +292,14 @@
 		if(user.has_status_effect(/datum/status_effect/debuff/silver_curse))
 			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
 			return
-		if(user.mind && istype(user, /mob/living/carbon/human/species/werewolf))
-			visible_message(span_danger("The werewolf ravenously consumes the [src]!"))
-			to_chat(src, span_warning("I feed on succulent flesh. I feel reinvigorated."))
-			user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
+		if(is_species(user, /datum/species/werewolf))
+			visible_message(span_danger("[user] ravenously consumes [src]!"), span_warning("I feed on succulent flesh. I feel reinvigorated."))
+			user.rage_datum?.update_rage(text2num(WW_RAGE_HIGH))
 			gib()
 		return
 	if(src.apply_damage(damage, BRUTE))
-		if(istype(user, /mob/living/carbon/human/species/werewolf))
-			visible_message(span_danger("The werewolf bites into [src] and thrashes!"))
+		if(is_species(user, /datum/species/werewolf))
+			visible_message(span_danger("[user] bites into [src] and thrashes!"))
 		else
 			visible_message(span_danger("[user] bites [src]!"))
 		if(HAS_TRAIT(user, TRAIT_POISONBITE))

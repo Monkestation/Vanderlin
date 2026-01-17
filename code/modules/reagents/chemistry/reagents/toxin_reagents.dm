@@ -67,7 +67,7 @@
 
 /datum/reagent/medicine/soporpot/on_mob_life(mob/living/carbon/M)
 	M.adjust_confusion(0.1 SECONDS)
-	M.dizziness += 1
+	M.adjust_dizzy(1)
 	M.adjust_energy(-25)
 	if(M.stamina > 75)
 		M.adjust_drowsiness(4 SECONDS)
