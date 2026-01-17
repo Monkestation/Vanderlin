@@ -167,7 +167,6 @@
 	name = "hack-knife"
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
-	force = DAMAGE_KNIFE
 	throwforce = DAMAGE_KNIFE + 6
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	max_integrity = INTEGRITY_STANDARD - 20
