@@ -19,7 +19,7 @@
 		if(C.is_eyes_covered())
 			return
 		if(C.get_bodypart(targeted_zone))
-			C.blind_eyes(2)
+			C.adjust_temp_blindness(2 SECONDS)
 			C.set_eye_blur_if_lower(20 SECONDS)
 			to_chat(C, span_userdanger("Sand hits my eyes. I can't see!"))
 			C.emote("painscream")
