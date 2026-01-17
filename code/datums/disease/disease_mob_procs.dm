@@ -150,7 +150,7 @@
 /// Proc to use when you 100% want to try to infect someone (ignoreing protective clothing and such), as long as they aren't immune
 /mob/living/proc/contract_disease(datum/disease/disease, del_on_fail = TRUE)
 	if(!istype(disease))
-		disease = new
+		disease = new disease()
 
 	if(!disease.can_infect(src))
 		if(del_on_fail)
