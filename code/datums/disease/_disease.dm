@@ -163,7 +163,7 @@
 
 ///Proc to process the disease and decide on whether to advance, cure or make the symptoms appear. Returns a boolean on whether to continue acting on the symptoms or not.
 /datum/disease/proc/stage_act()
-	var/slowdown = HAS_TRAIT(affected_mob, TRAIT_HALE) ? 0.5 : 1 // spaceacillin slows stage speed by 50%
+	var/slowdown = HAS_TRAIT(affected_mob, TRAIT_HALE) ? 0.5 : 1
 	var/recovery_prob = 0
 	var/cure_mod
 	var/bad_immune = HAS_TRAIT(affected_mob, TRAIT_WASTING_SICKNESS) ? 2 : 1
@@ -185,8 +185,7 @@
 			cure()
 			return FALSE
 
-	if(stage == max_stages && stage_peaked != TRUE) //mostly a sanity check in case we manually set a disease to max stages
-		stage_peaked = TRUE
+	stage_peaked = (stage == max_stages)
 
 	if(prob(stage_prob * slowdown * bad_immune))
 		update_stage(min(stage + 1, max_stages))
@@ -240,28 +239,25 @@
 				recovery_prob += -0.2
 			if(STRESS_VBAD to INFINITY)
 				recovery_prob += -0.4
-			else
-				recovery_prob += 0
 
 		if((HAS_TRAIT(affected_mob, TRAIT_NOHUNGER) || !(affected_mob.satiety < 0 || affected_mob.nutrition < NUTRITION_LEVEL_STARVING)) && HAS_TRAIT(affected_mob, TRAIT_KNOCKEDOUT)) //resting starved won't help, but resting helps
 			var/turf/rest_turf = get_turf(affected_mob)
-			var/is_sleeping_in_darkness = rest_turf.get_lumcount() <= LIGHTING_TILE_IS_DARK
 
-			if(is_sleeping_in_darkness)
+			if(rest_turf.get_lumcount() <= LIGHTING_TILE_IS_DARK)
 				recovery_prob += DISEASE_GOOD_SLEEPING_RECOVERY_BONUS
 
 			// sleeping in silence is always better
 			if(HAS_TRAIT(affected_mob, TRAIT_DEAF))
 				recovery_prob += DISEASE_GOOD_SLEEPING_RECOVERY_BONUS
 
-			// check for beds
-			if((locate(/obj/structure/bed) in affected_mob.loc))
-				recovery_prob += DISEASE_GOOD_SLEEPING_RECOVERY_BONUS
-			else if((locate(/obj/structure/table) in affected_mob.loc))
+			var/atom/movable/buckled = affected_mob.buckled
+			if(buckled)
+				recovery_prob += DISEASE_GOOD_SLEEPING_RECOVERY_BONUS * (1 + buckled.sleepy)
+			else if(locate(/obj/structure/table) in rest_turf)
 				recovery_prob += (DISEASE_GOOD_SLEEPING_RECOVERY_BONUS / 2)
 
 			// don't forget the bedsheet
-			if(locate(/obj/item/bedsheet) in affected_mob.loc)
+			if(locate(/obj/item/bedsheet) in rest_turf)
 				recovery_prob += DISEASE_GOOD_SLEEPING_RECOVERY_BONUS
 
 			recovery_prob *= DISEASE_SLEEPING_RECOVERY_MULTIPLIER //any form of sleeping magnifies all effects a little bit
@@ -289,14 +285,17 @@
 
 	return !carrier
 
+/// Update stage, returns current stage or STAGE_CURED if cured
 /datum/disease/proc/update_stage(new_stage)
 	stage = new_stage
-	if(new_stage == max_stages && !(stage_peaked)) //once a disease has hit its peak, set it to have done so
-		stage_peaked = TRUE
+
+	stage_peaked = (new_stage == max_stages)
+
 	if(stage <= 0)
 		cure()
-		return FALSE
-	return TRUE
+		return DISEASE_STAGE_CURED
+
+	return stage
 
 /datum/disease/proc/has_cure()
 	if(!(disease_flags & (CURABLE | CHRONIC)))

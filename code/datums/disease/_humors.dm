@@ -107,6 +107,27 @@
 	temperaments = list(HUMOR_WARM, HUMOR_WET)
 	associated_organ = /obj/item/organ/liver
 
+// Bloodletting can help cure these diseases, or make them significantly worse.
+/datum/humor/blood/get_humor_modifier(datum/disease/disease, mob/living/effecting)
+	. = ..()
+
+	if(iscarbon(effecting))
+		var/mob/living/carbon/C = effecting
+		if(NOBLOOD in C.dna?.species?.species_traits)
+			return
+
+	var/base_mod = .
+
+	switch(effecting.blood_volume)
+		if(BLOOD_VOLUME_NORMAL to INFINITY)
+			base_mod *= 0.9 // No bloodletting? No blessings of pestra
+		if(BLOOD_VOLUME_NORMAL to BLOOD_VOLUME_SAFE)
+			base_mod *= 1.1
+		if(BLOOD_VOLUME_SAFE to BLOOD_VOLUME_OKAY)
+			base_mod *= 1.5
+		else
+			base_mod *= max(0.1, (effecting.blood_volume / effecting::blood_volume))
+
 /datum/humor/yellow_bile
 	name = HUMOR_YELLOW_BILE
 	special_name = "Yellow Bile"

@@ -116,6 +116,9 @@ DEFINE_BITFIELD(spread_flags, list(
 //// Minimum per-cycle chance we want of being able to cure an advanced disease with the chemicals present.
 #define DISEASE_MINIMUM_CHEMICAL_CURE_CHANCE 5
 
+/// Disease was cured during update_stage()
+#define DISEASE_STAGE_CURED -1
+
 // Humors
 #define HUMOR_BLOOD "Sanguine" // warm and moist
 #define HUMOR_YELLOW_BILE "Choleric" // warm and dry
