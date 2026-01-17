@@ -36,8 +36,11 @@
 		/datum/job/adventurer/courtagent,
 		/datum/job/archivist,
 		/datum/job/templar,
-		/datum/job/adept,
 		/datum/job/wretch,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/adept,
+		/datum/job/orthodoxist,
 	)
 	slot_adjust = list(
 		/datum/job/farmer = 1000,

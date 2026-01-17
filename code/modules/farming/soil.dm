@@ -662,7 +662,7 @@
 	var/diminishing_returns = 1 - (progress_ratio * 0.8)  // Slightly reduced diminishing returns
 
 	// Accumulate quality points
-	quality_points += dt * quality_rate * 0.26 * phase_multiplier * diminishing_returns
+	quality_points += (dt / 10) * quality_rate * 0.26 * phase_multiplier * diminishing_returns
 	quality_points = min(quality_points, max_quality_points)
 
 	// Quality tier thresholds

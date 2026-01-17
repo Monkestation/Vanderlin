@@ -14,9 +14,9 @@
 	if(isopenspace(open))
 		return
 	color = initial(water_reagent.color)
-	var/obj/particle_emitter/effect = MakeParticleEmitter(/particles/mist/waterfall)
-	effect.layer = 5
-	effect.alpha = 175
+	var/obj/effect/abstract/shared_particle_holder/waterfall_mist = add_shared_particles(/particles/mist/waterfall, "waterfall_mist")
+	waterfall_mist.layer = 5
+	waterfall_mist.alpha = 175
 
 /obj/effect/waterfall/acid
 	water_reagent = /datum/reagent/rogueacid

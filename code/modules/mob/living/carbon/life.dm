@@ -68,32 +68,20 @@
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	if(HAS_TRAIT(src, TRAIT_NOPAIN))
 		return
+
+	// Pain tolerance system - builds up to prevent infinite stunning
+	// High endurance characters build tolerance faster and lose it slower
+	var/tolerance_gain_rate = 1 + (STAEND * 0.25) // More endurance = faster adaptation
+	var/tolerance_decay_rate = max(1, 3 - (STAEND * 0.1)) // More endurance = slower decay
+
+	if(world.time - last_major_pain_time < 30 SECONDS)
+		pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (STAEND * 1)) // Higher max tolerance with endurance
+	else
+		pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
+
 	if(stat < UNCONSCIOUS)
-		// Calculate current shock level
 		var/current_shock = calculate_shock_stage()
-		var/raw_pain = get_complex_pain()
-
-		// Shock reduces pain perception (adrenaline effect)
-		if(current_shock >= 60)
-			var/shock_reduction = min(0.3, current_shock * 0.001) // Max 30% reduction
-			raw_pain *= (1.0 - shock_reduction)
-
-		// Base pain calculation - endurance affects how much pain you feel from damage
-		var/painpercent = raw_pain / (STAEND * 13)
-		painpercent = painpercent * 100
-
-		// Pain tolerance system - builds up to prevent infinite stunning
-		// High endurance characters build tolerance faster and lose it slower
-		var/tolerance_gain_rate = 1 + (STAEND * 0.25) // More endurance = faster adaptation
-		var/tolerance_decay_rate = max(1, 3 - (STAEND * 0.1)) // More endurance = slower decay
-
-		if(world.time - last_major_pain_time < 30 SECONDS)
-			pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (STAEND * 1)) // Higher max tolerance with endurance
-		else
-			pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
-
-		// Apply pain tolerance to reduce effective pain
-		var/effective_pain = painpercent * (1.0 - (pain_tolerance * 0.01))
+		var/effective_pain = get_pain_percent() * 100
 
 		// Endurance-based pain threshold - higher endurance means higher pain threshold
 		var/pain_threshold = 55 + (STAEND * 1) // 1% higher threshold per endurance point
@@ -161,6 +149,29 @@
 				// High endurance characters are less stressed by pain
 				if(prob(max(20, 100 - (STAEND * 2)))) // 2% less likely per endurance point (40% at 20 )
 					add_stress(/datum/stress_event/painmax)
+
+/// Returns the pain percent between 0 and 1.
+/mob/living/carbon/proc/get_pain_percent()
+	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+		return 0
+
+	// Calculate current shock level
+	var/raw_pain = get_complex_pain()
+	var/current_shock = calculate_shock_stage()
+
+	// Shock reduces pain perception (adrenaline effect)
+	if(current_shock >= 60)
+		var/shock_reduction = min(0.3, current_shock * 0.001) // Max 30% reduction
+		raw_pain *= (1.0 - shock_reduction)
+
+	// Max pain scales on endurance
+	var/painpercent = (raw_pain / (STAEND * 13)) * 100
+
+	// Apply pain tolerance to reduce effective pain
+	painpercent *= (1 - (pain_tolerance * 0.01))
+
+	// Return normalized value between 0 and 1
+	return clamp(painpercent/100, 0, 1)
 
 /mob/living/carbon/proc/handle_roguebreath()
 	return
@@ -508,7 +519,7 @@
 	if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT - 3)
 		breath_effect_prob = min(breath_effect_prob + 50, 100)
 		if(prob(15) && !is_mouth_covered())
-			visible_message(span_notice("[src]'s breath comes out in heavy puffs of vapor."))
+			to_chat(src, span_warning("Your breath comes out in heavy puffs of vapor."))
 
 	if(prob(breath_effect_prob) && !is_mouth_covered())
 		emit_breath_particle(/particles/fog/breath)
@@ -601,23 +612,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /mob/living/carbon/handle_status_effects()
 	..()
 
-	var/restingpwr = 1 + 4 * resting
-
 	// These should all be real status effects :)))))))))
-
-	//Dizziness
-	if(dizziness)
-		dizziness = max(dizziness - restingpwr, 0)
-		if(client)
-			handle_dizziness()
-
-	//Jitteriness
-	if(jitteriness)
-		do_jitter_animation(jitteriness)
-		jitteriness = max(jitteriness - restingpwr, 0)
-		add_stress(/datum/stress_event/jittery)
-	else
-		remove_stress(/datum/stress_event/jittery)
 
 	if(stuttering)
 		stuttering = max(stuttering-1, 0)
@@ -628,12 +623,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(cultslurring)
 		cultslurring = max(cultslurring-1, 0)
 
-	if(silent)
-		silent = max(silent-1, 0)
-
-	if(druggy)
-		adjust_drugginess(-1)
-
 	if(drunkenness)
 		drunkenness = max(drunkenness - (drunkenness * 0.04) - 0.01, 0)
 		if(drunkenness >= 1)
@@ -643,7 +632,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
-			jitteriness = max(jitteriness - 3, 0)
+			adjust_jitter(-3)
 			apply_status_effect(/datum/status_effect/buff/drunk)
 		else
 			remove_stress(/datum/stress_event/drunk)
@@ -651,15 +640,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			slurring += 1.2
 		if(drunkenness >= 41)
 			if(prob(25))
-				confused += 2
-			Dizzy(10)
+				adjust_confusion(0.2 SECONDS)
+			set_dizzy(10)
 
 		if(drunkenness >= 51)
 			adjustToxLoss(1)
 			if(prob(3))
-				confused += 15
+				adjust_confusion(1.5 SECONDS)
 				vomit() // vomiting clears toxloss, consider this a blessing
-			Dizzy(25)
+			set_dizzy(25)
 
 		if(drunkenness >= 61)
 			adjustToxLoss(1)
@@ -684,51 +673,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 		if(drunkenness >= 101)
 			adjustToxLoss(5) //Let's be honest you shouldn't be alive by now
-
-/mob/living/carbon/proc/handle_dizziness()
-	// How strong the dizziness effect is on us.
-	// If we're resting, the effect is 5x as strong, but also decays 5x fast.
-	// Meaning effectively, 1 tick is actually dizziness_strength ticks of duration
-	var/dizziness_strength = resting ? 5 : 1
-
-	// How much time will be left, in seconds, next tick
-	var/next_amount = max((dizziness - (dizziness_strength * 0.1)), 0)
-
-	// Now we can do the actual dizzy effects.
-	// Don't bother animating if they're clientless.
-	if(!client)
-		return
-
-	// Want to be able to offset things by the time the animation should be "playing" at
-	var/time = world.time
-	var/delay = 0
-	var/pixel_x_diff = 0
-	var/pixel_y_diff = 0
-
-	// This shit is annoying at high strengthvar/pixel_x_diff = 0
-	var/list/view_range_list = getviewsize(client.view)
-	var/view_range = view_range_list[1]
-	var/amplitude = dizziness * (sin(dizziness * (time)) + 1)
-	var/x_diff = clamp(amplitude * sin(dizziness * time), -view_range, view_range)
-	var/y_diff = clamp(amplitude * cos(dizziness * time), -view_range, view_range)
-	pixel_x_diff += x_diff
-	pixel_y_diff += y_diff
-	// Brief explanation. We're basically snapping between different pixel_x/ys instantly, with delays between
-	// Doing this with relative changes. This way we don't override any existing pixel_x/y values
-	// We use EASE_OUT here for similar reasons, we want to act at the end of the delay, not at its start
-	// Relative animations are weird, so we do actually need this
-	animate(client, pixel_x = x_diff, pixel_y = y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-	delay += 0.3 SECONDS // This counts as a 0.3 second wait, so we need to shift the sine wave by that much
-
-	x_diff = amplitude * sin(next_amount * (time + delay))
-	y_diff = amplitude * cos(next_amount * (time + delay))
-	pixel_x_diff += x_diff
-	pixel_y_diff += y_diff
-	animate(pixel_x = x_diff, pixel_y = y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-
-	// Now we reset back to our old pixel_x/y, since these animates are relative
-	animate(pixel_x = -pixel_x_diff, pixel_y = -pixel_y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-
 
 //used in human and monkey handle_environment()
 /mob/living/carbon/proc/natural_bodytemperature_stabilization()

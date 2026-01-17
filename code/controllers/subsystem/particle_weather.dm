@@ -120,7 +120,7 @@ SUBSYSTEM_DEF(ParticleWeather)
 		act_on.weather = FALSE
 	weatherEffect.particles = null
 	QDEL_NULL(runningWeather)
-	QDEL_NULL(particleEffect)
+	particleEffect = null
 	QDEL_NULL(weather_special_effect)
 
 /datum/controller/subsystem/ParticleWeather/proc/check_forecast(time_of_day)

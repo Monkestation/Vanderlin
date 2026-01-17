@@ -62,7 +62,7 @@
 			to_chat(user, "<span class='warning'>\The [src] is currently smelting. Wait for it to finish, or douse it with water to retrieve items from it.</span>")
 			return
 
-	if(istype(W, /obj/item/ore/coal))
+	if(W.firefuel)
 		if(alert(usr, "Fuel \the [src] with [W]?", "VANDERLIN", "Fuel", "Smelt") == "Fuel")
 			return ..()
 
