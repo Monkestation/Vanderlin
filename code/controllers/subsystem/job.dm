@@ -682,6 +682,15 @@ SUBSYSTEM_DEF(job)
 
 	job.after_spawn(equipping, player_client, reset_job_stats)
 
+	if(length(job.advclass_cat_rolls) || !ishuman(equipping))
+		return
+
+	var/mob/living/carbon/human/equipping_human = equipping
+
+
+	for(var/datum/quirk/quirk in equipping_human.quirks)
+		quirk.after_job_spawn(job)
+
 /datum/job/proc/greet(mob/player)
 	//! TODO: Refactor this out... Look at how TG handles job greetings or implement our own method
 	if(player.mind?.assigned_role.title != title)

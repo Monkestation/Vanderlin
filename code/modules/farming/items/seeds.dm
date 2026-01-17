@@ -37,7 +37,7 @@
 	. = ..()
 	// Chance to destroy the seed as it's being stepped on
 	if(prob(10) && istype(L))
-		playsound(loc,"plantcross", 40, FALSE)
+		playsound(src,"plantcross", 40, FALSE)
 		visible_message(span_warning("[L] crushes [src] underfoot."))
 		qdel(src)
 

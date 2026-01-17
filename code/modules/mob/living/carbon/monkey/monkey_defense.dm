@@ -33,7 +33,7 @@
 								"<span class='danger'>[M] punches you!</span>", "<span class='hear'>I hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
 				to_chat(M, "<span class='danger'>I punch [name]!</span>")
 
-				playsound(loc, "punch", 25, TRUE, -1)
+				playsound(src, "punch", 25, TRUE, -1)
 				var/damage = rand(5, 10)
 				if(prob(40))
 					damage = rand(10, 15)
@@ -49,7 +49,7 @@
 				log_combat(M, src, "attacked")
 
 			else
-				playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
+				playsound(src, 'sound/blank.ogg', 25, TRUE, -1)
 				visible_message("<span class='danger'>[M]'s punch misses [name]!</span>", \
 								"<span class='danger'>I avoid [M]'s punch!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
 				to_chat(M, "<span class='warning'>My punch misses [name]!</span>")
@@ -58,7 +58,7 @@
 				M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 				if (prob(25))
 					Paralyze(40)
-					playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+					playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 					log_combat(M, src, "pushed")
 					visible_message("<span class='danger'>[M] pushes [src] down!</span>", \
 									"<span class='danger'>[M] pushes you down!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", null, M)

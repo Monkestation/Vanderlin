@@ -45,6 +45,7 @@
 		S.name = "veteran cloak ([index])"
 
 	spawned.verbs |= /mob/proc/haltyell
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/job/advclass/veteran
 	inherit_parent_title = TRUE
@@ -141,7 +142,7 @@
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/medicine = 2
 	)
@@ -367,9 +368,9 @@
 	skills = list(
 		/datum/skill/combat/wrestling = 5,
 		/datum/skill/combat/unarmed = 5,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/misc/swimming = 3,
 	)

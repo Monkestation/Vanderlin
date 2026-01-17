@@ -23,11 +23,12 @@
 	jobstats = list(
 		STATKEY_STR = -1,
 		STATKEY_INT = 4,
-		STATKEY_CON = - 1,
+		STATKEY_PER = 1,
+		STATKEY_CON = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/reading = 5,

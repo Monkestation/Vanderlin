@@ -7,7 +7,7 @@
 
 /datum/reagent/molten_metal/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
 	. = ..()
-	if(method == INGEST)
+	if(method & INGEST)
 		for(var/datum/material_trait/trait as anything in initial(largest_metal.traits))
 			var/datum/material_trait/new_trait = GLOB.material_traits[trait]
 			new_trait.on_consume(M, reac_volume)

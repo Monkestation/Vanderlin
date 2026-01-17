@@ -24,6 +24,9 @@
 	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/inquisitor
@@ -235,6 +238,10 @@
 	if(is_innocent && !resist)
 		false_confession_chance = 100 - (STAINT + STAEND) // Low willpower = higher chance to falsely confess
 		false_confession_chance = CLAMP(false_confession_chance, 20, 80) // Between 20-80%
+
+	if(HAS_TRAIT(src, TRAIT_TORTURED))
+		false_confession_chance = 0
+		resist_chance = 0
 
 	if(!prob(resist_chance))
 		var/list/confessions = list()

@@ -63,8 +63,32 @@
 
 	master.add_new_worker(worker)
 	worker.made_into_controller_mob()
-	stats = new /atom/movable/screen/controller_ui/controller_ui(worker, src)
+	stats = new /atom/movable/screen/controller_ui/controller_ui(null, null, worker, src)
 	START_PROCESSING(SSstrategy_master, src)
+
+/datum/worker_mind/Destroy(force)
+	STOP_PROCESSING(SSstrategy_master, src)
+	for(var/slot in worker_gear)
+		var/obj/gear = worker_gear?[slot]
+		if(gear)
+			qdel(gear)
+	worker_gear = null
+	worker = null
+	master = null
+	patrol_points = null
+	assigned_work = null
+	movement_target = null
+	move_back_after = null
+	if(paused_task)
+		QDEL_NULL(paused_task)
+	if(current_task)
+		QDEL_NULL(current_task)
+	if(attack_mode)
+		QDEL_NULL(attack_mode)
+	QDEL_NULL(idle)
+	QDEL_NULL(stats)
+	QDEL_LIST(patrol_visual_images)
+	return ..()
 
 /datum/worker_mind/proc/get_slot_layer(slot)
 	switch(slot)
