@@ -315,5 +315,36 @@
                 "code_imp": "Breaks the entire codebase"
             }
         ]
+    },
+    "2026-01-17": {
+        "TerraGS": [
+            {
+                "bugfix": "You will no longer count single coin values multiple times."
+            }
+        ],
+        "Raptorian1": [
+            {
+                "bugfix": "made mobs stop attacking each other."
+            }
+        ],
+        "Ediblebomb": [
+            {
+                "spellcheck": "Fixed two cases of \\\"the the\\\" and \\\"the 1.\\\" in bedsheet application/removal code."
+            },
+            {
+                "bugfix": "Fixed bedsheet offsets and layering."
+            },
+            {
+                "bugfix": "Fixed bedsheets having a permanent pickup delay after being applied to and removed from a bed."
+            },
+            {
+                "bugfix": "Fixed wool double beds only allowing one buckled mob."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "hardcore rat is now a small rat and can't speak"
+            }
+        ]
     }
 }

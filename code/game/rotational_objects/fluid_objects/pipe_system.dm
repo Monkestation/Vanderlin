@@ -137,6 +137,7 @@
 		providers |= added_provider
 	if(removed_provider)
 		providers -= removed_provider
+	manipulate_possible_steam_creaks()
 
 	for(var/direction in GLOB.cardinals_multiz)
 		var/turf/cardinal_turf = get_step_multiz(src, direction)
@@ -164,6 +165,7 @@
 			continue
 		if(connected[i])
 			new_overlay += i
+	remove_all_steam_creaks()
 	icon_state = "[new_overlay]"
 	if(!new_overlay)
 		icon_state = "base"
@@ -178,28 +180,38 @@
 
 	manipulate_possible_steam_creaks()
 
-/obj/structure/water_pipe/proc/manipulate_possible_steam_creaks()
-	if(!ispath(carrying_reagent, /datum/reagent/steam))
-		for(var/obj/particle_emitter/stored in particle_emitters)
-			RemoveEmitter(stored)
+/obj/structure/water_pipe/proc/remove_all_steam_creaks()
+	if(!(locate(/obj/effect/abstract/shared_particle_holder) in vis_contents))
 		return
-	var/obj/particle_emitter/emitter
-	if(prob(25))
-		emitter = locate(/obj/particle_emitter) in particle_emitters
-		if(!emitter)
-			emitter = MakeParticleEmitter(/particles/smoke/cig/big)
-	else
-		for(var/obj/particle_emitter/stored in particle_emitters)
-			RemoveEmitter(stored)
-		return
-
 	switch(icon_state)
 		if("base", "84", "4", "8", "18", "28")
-			emitter.pixel_x = emitter.base_pixel_x + rand(-8, -6)
-			emitter.pixel_y = emitter.base_pixel_y + rand(3, 6)
+			remove_shared_particles("water_pipe_steam_1")
 		if("14", "18", "21", "2", "1")
-			emitter.pixel_y = emitter.base_pixel_y + rand(14, 16)
-			emitter.pixel_x = emitter.base_pixel_x + rand(3, 9)
+			remove_shared_particles("water_pipe_steam_2")
+		else
+			remove_shared_particles("water_pipe_steam_0")
+
+/obj/structure/water_pipe/proc/manipulate_possible_steam_creaks()
+	if(!water_pressure || !ispath(carrying_reagent, /datum/reagent/steam))
+		remove_all_steam_creaks()
+		return
+
+	var/particle_pool = 0
+	switch(icon_state)
+		if("base", "84", "4", "8", "18", "28")
+			particle_pool = 1
+		if("14", "18", "21", "2", "1")
+			particle_pool = 2
 		if("24")
-			for(var/obj/particle_emitter/stored in particle_emitters)
-				RemoveEmitter(stored)
+			return
+
+	var/obj/effect/abstract/shared_particle_holder/steam_holder = locate(/obj/effect/abstract/shared_particle_holder) in vis_contents
+	if(!steam_holder && prob(25)) // probability delays steam emission
+		steam_holder = add_shared_particles(/particles/smoke/cig/big, "water_pipe_steam_[particle_pool]", pool_size = 6)
+		if(islist(steam_holder.particles.position)) // particle hasn't been randomized yet
+			switch(particle_pool)
+				if(1)
+					steam_holder.particles.position = generator(GEN_BOX, list(-8, 3), list(-6, 6))
+				if(2)
+					steam_holder.particles.position = generator(GEN_BOX, list(3, 14), list(9, 16))
+			steam_holder.particles.spawning = 0.03

@@ -612,23 +612,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /mob/living/carbon/handle_status_effects()
 	..()
 
-	var/restingpwr = 1 + 4 * resting
-
 	// These should all be real status effects :)))))))))
-
-	//Dizziness
-	if(dizziness)
-		dizziness = max(dizziness - restingpwr, 0)
-		if(client)
-			handle_dizziness()
-
-	//Jitteriness
-	if(jitteriness)
-		do_jitter_animation(jitteriness)
-		jitteriness = max(jitteriness - restingpwr, 0)
-		add_stress(/datum/stress_event/jittery)
-	else
-		remove_stress(/datum/stress_event/jittery)
 
 	if(stuttering)
 		stuttering = max(stuttering-1, 0)
@@ -639,12 +623,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(cultslurring)
 		cultslurring = max(cultslurring-1, 0)
 
-	if(silent)
-		silent = max(silent-1, 0)
-
-	if(druggy)
-		adjust_drugginess(-1)
-
 	if(drunkenness)
 		drunkenness = max(drunkenness - (drunkenness * 0.04) - 0.01, 0)
 		if(drunkenness >= 1)
@@ -654,7 +632,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
-			jitteriness = max(jitteriness - 3, 0)
+			adjust_jitter(-3)
 			apply_status_effect(/datum/status_effect/buff/drunk)
 		else
 			remove_stress(/datum/stress_event/drunk)
@@ -663,14 +641,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 41)
 			if(prob(25))
 				adjust_confusion(0.2 SECONDS)
-			Dizzy(10)
+			set_dizzy(10)
 
 		if(drunkenness >= 51)
 			adjustToxLoss(1)
 			if(prob(3))
 				adjust_confusion(1.5 SECONDS)
 				vomit() // vomiting clears toxloss, consider this a blessing
-			Dizzy(25)
+			set_dizzy(25)
 
 		if(drunkenness >= 61)
 			adjustToxLoss(1)
@@ -695,51 +673,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 		if(drunkenness >= 101)
 			adjustToxLoss(5) //Let's be honest you shouldn't be alive by now
-
-/mob/living/carbon/proc/handle_dizziness()
-	// How strong the dizziness effect is on us.
-	// If we're resting, the effect is 5x as strong, but also decays 5x fast.
-	// Meaning effectively, 1 tick is actually dizziness_strength ticks of duration
-	var/dizziness_strength = resting ? 5 : 1
-
-	// How much time will be left, in seconds, next tick
-	var/next_amount = max((dizziness - (dizziness_strength * 0.1)), 0)
-
-	// Now we can do the actual dizzy effects.
-	// Don't bother animating if they're clientless.
-	if(!client)
-		return
-
-	// Want to be able to offset things by the time the animation should be "playing" at
-	var/time = world.time
-	var/delay = 0
-	var/pixel_x_diff = 0
-	var/pixel_y_diff = 0
-
-	// This shit is annoying at high strengthvar/pixel_x_diff = 0
-	var/list/view_range_list = getviewsize(client.view)
-	var/view_range = view_range_list[1]
-	var/amplitude = dizziness * (sin(dizziness * (time)) + 1)
-	var/x_diff = clamp(amplitude * sin(dizziness * time), -view_range, view_range)
-	var/y_diff = clamp(amplitude * cos(dizziness * time), -view_range, view_range)
-	pixel_x_diff += x_diff
-	pixel_y_diff += y_diff
-	// Brief explanation. We're basically snapping between different pixel_x/ys instantly, with delays between
-	// Doing this with relative changes. This way we don't override any existing pixel_x/y values
-	// We use EASE_OUT here for similar reasons, we want to act at the end of the delay, not at its start
-	// Relative animations are weird, so we do actually need this
-	animate(client, pixel_x = x_diff, pixel_y = y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-	delay += 0.3 SECONDS // This counts as a 0.3 second wait, so we need to shift the sine wave by that much
-
-	x_diff = amplitude * sin(next_amount * (time + delay))
-	y_diff = amplitude * cos(next_amount * (time + delay))
-	pixel_x_diff += x_diff
-	pixel_y_diff += y_diff
-	animate(pixel_x = x_diff, pixel_y = y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-
-	// Now we reset back to our old pixel_x/y, since these animates are relative
-	animate(pixel_x = -pixel_x_diff, pixel_y = -pixel_y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-
 
 //used in human and monkey handle_environment()
 /mob/living/carbon/proc/natural_bodytemperature_stabilization()

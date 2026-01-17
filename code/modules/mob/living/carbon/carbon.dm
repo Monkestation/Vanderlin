@@ -1013,44 +1013,56 @@
 	update_inv_handcuffed()
 	update_hud_handcuffed()
 
-/mob/living/carbon/fully_heal(admin_revive = FALSE)
-	if(reagents)
-		reagents.clear_reagents()
-		for(var/addi in reagents.addiction_list)
-			reagents.remove_addiction(addi)
-	for(var/obj/item/organ/organ as anything in internal_organs)
-		organ.setOrganDamage(0)
-	var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
-	if(B)
-		B.brain_death = FALSE
-	var/datum/component/rot/corpse/CR = GetComponent(/datum/component/rot/corpse)
-	if(CR)
-		CR.amount = 0
-	if(admin_revive) //reset rot on admin revives
-		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-			bodypart.rotted = FALSE
-			bodypart.skeletonized = FALSE
-	if(admin_revive)
-		suiciding = FALSE
+/mob/living/carbon/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
+	if(excess_healing)
+		if(dna && !(NOBLOOD in dna.species.species_traits))
+			blood_volume += (excess_healing * 2) //1 excess = 10 blood
+
+		for(var/obj/item/organ/organ as anything in internal_organs)
+			organ.applyOrganDamage(excess_healing * -1) //1 excess = 5 organ damage healed
+
+	return ..()
+
+/mob/living/carbon/fully_heal(heal_flags = HEAL_ALL)
+
+	spill_embedded_objects()
+
+	if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
+		var/datum/component/rot/corpse/CR = GetComponent(/datum/component/rot/corpse)
+		if(CR)
+			CR.amount = 0
+
+	if(heal_flags & HEAL_LIMBS)
 		regenerate_limbs()
+		if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
+			for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+				bodypart.rotted = FALSE
+				bodypart.skeletonized = FALSE
+
+	if(heal_flags & (HEAL_REFRESH_ORGANS|HEAL_ORGANS))
+		// regenerate_organs(regenerate_existing = (heal_flags & HEAL_REFRESH_ORGANS))
 		regenerate_organs()
+		var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
+		if(B)
+			B.brain_death = FALSE
+
+	if(heal_flags & HEAL_TRAUMAS)
+		cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
+
+	if(heal_flags & HEAL_RESTRAINTS)
+		QDEL_NULL(handcuffed)
+		QDEL_NULL(legcuffed)
 		set_handcuffed(null)
-		for(var/obj/item/restraints/R in contents) //actually remove cuffs from inventory
-			qdel(R)
 		update_handcuffed()
-		if(reagents)
-			reagents.addiction_list = list()
-	cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
-	..()
-	// heal ears after healing traits, since ears check TRAIT_DEAF trait
-	// when healing.
-	restoreEars()
-	// update_disabled_bodyparts()
+
+	drunkenness = 0
+
+	return ..()
 
 /mob/living/carbon/can_be_revived()
-	. = ..()
 	if(!getorgan(/obj/item/organ/brain) && (!mind))
-		return 0
+		return FALSE
+	return ..()
 
 /mob/living/carbon/harvest(mob/living/user)
 	if(QDELETED(src))
@@ -1275,8 +1287,6 @@
 	. = ..()
 	if(!.)
 		return
-	if(silent)
-		return FALSE
 	if(mouth?.muteinmouth)
 		return FALSE
 	for(var/obj/item/grabbing/grab in grabbedby)

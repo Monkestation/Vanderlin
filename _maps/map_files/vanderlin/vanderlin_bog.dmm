@@ -288,7 +288,9 @@
 	},
 /area/under/tomb/indoors/magic)
 "ahc" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
@@ -668,7 +670,9 @@
 /area/under/tomb/indoors/magic)
 "arE" = (
 /obj/structure/flora/ocean_plants,
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_sand/path,
 /area/under/cavewet)
 "arK" = (
@@ -751,7 +755,9 @@
 /area/under/cavewet)
 "atx" = (
 /obj/structure/flora/shells,
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_sand/path,
 /area/under/cavewet)
 "atz" = (
@@ -1203,7 +1209,9 @@
 /turf/open/water/ocean,
 /area/under/cavewet)
 "aDr" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/water/ocean,
 /area/under/cavewet)
 "aDU" = (
@@ -1754,7 +1762,9 @@
 /area/under/cavewet)
 "aSm" = (
 /obj/structure/flora/ocean_plants,
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/water/ocean,
 /area/under/cavewet)
 "aSn" = (
@@ -1817,7 +1827,9 @@
 	},
 /area/under/cavewet)
 "aUx" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
@@ -1971,7 +1983,9 @@
 /area/under/cavewet)
 "aWB" = (
 /obj/structure/flora/grass/water,
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/water/ocean,
 /area/under/cavewet)
 "aWK" = (
@@ -2646,7 +2660,9 @@
 /area/indoors/town/clocktower)
 "bIn" = (
 /obj/structure/flora/kelp,
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/water/ocean,
 /area/under/cavewet)
 "bIC" = (
@@ -3025,7 +3041,9 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/retaliate/spider/robotic,
+/mob/living/simple_animal/hostile/retaliate/spider/robotic{
+	faction = list("Undead")
+	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clocktower)
 "cps" = (
@@ -3878,7 +3896,9 @@
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "dtU" = (
-/mob/living/simple_animal/hostile/retaliate/blood/weird,
+/mob/living/simple_animal/hostile/retaliate/blood/weird{
+	faction = list("Hostile")
+	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/clocktower)
 "duy" = (
@@ -4254,7 +4274,9 @@
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "dSQ" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/water/blood,
 /area/under/cavewet)
 "dSY" = (
@@ -4326,7 +4348,9 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
@@ -5126,7 +5150,9 @@
 /obj/effect/decal/shadow_floor{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/retaliate/snapper,
+/mob/living/simple_animal/hostile/retaliate/snapper{
+	faction = list("Undead")
+	},
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "fhr" = (
@@ -5809,7 +5835,9 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
@@ -5822,7 +5850,9 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/retaliate/spider/robotic,
+/mob/living/simple_animal/hostile/retaliate/spider/robotic{
+	faction = list("Undead")
+	},
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "gaP" = (
@@ -6028,7 +6058,9 @@
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 6
 	},
-/mob/living/simple_animal/hostile/retaliate/spider/robotic,
+/mob/living/simple_animal/hostile/retaliate/spider/robotic{
+	faction = list("Undead")
+	},
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
 "gkz" = (
@@ -6388,7 +6420,9 @@
 	},
 /area/under/tomb/indoors/magic)
 "gJV" = (
-/mob/living/simple_animal/hostile/retaliate/spider/robotic,
+/mob/living/simple_animal/hostile/retaliate/spider/robotic{
+	faction = list("Undead")
+	},
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
 "gKC" = (
@@ -6865,7 +6899,9 @@
 	pixel_x = -17;
 	pixel_y = -18
 	},
-/mob/living/simple_animal/hostile/retaliate/blood/weird,
+/mob/living/simple_animal/hostile/retaliate/blood/weird{
+	faction = list("Hostile")
+	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/clocktower)
 "hym" = (
@@ -8138,7 +8174,9 @@
 /area/under/cavewet)
 "jgG" = (
 /obj/effect/decal/shadow_floor,
-/mob/living/simple_animal/hostile/retaliate/spider/robotic,
+/mob/living/simple_animal/hostile/retaliate/spider/robotic{
+	faction = list("Undead")
+	},
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "jgI" = (
@@ -8152,7 +8190,9 @@
 	},
 /area/indoors/town/magician)
 "jhf" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
@@ -8228,7 +8268,9 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/retaliate/snapper,
+/mob/living/simple_animal/hostile/retaliate/snapper{
+	faction = list("Undead")
+	},
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/town/clocktower)
 "joe" = (
@@ -8327,7 +8369,9 @@
 	},
 /area/under/cavewet)
 "jsw" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
 "jtp" = (
@@ -9515,7 +9559,9 @@
 /turf/open/floor/woodturned,
 /area/indoors/ship)
 "kRy" = (
-/mob/living/simple_animal/hostile/retaliate/snapper,
+/mob/living/simple_animal/hostile/retaliate/snapper{
+	faction = list("Undead")
+	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clocktower)
 "kSZ" = (
@@ -9986,7 +10032,9 @@
 /turf/open/floor/twig,
 /area/indoors/shelter/bog)
 "lvO" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /obj/structure/fluff/walldeco/bath/wallrope{
 	pixel_x = 0;
 	pixel_y = 32
@@ -11875,7 +11923,9 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
@@ -12138,7 +12188,9 @@
 	},
 /area/indoors/town/magician)
 "oxK" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/water/ocean/deep,
 /area/under/cavewet)
 "oyS" = (
@@ -14191,7 +14243,9 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/retaliate/snapper,
+/mob/living/simple_animal/hostile/retaliate/snapper{
+	faction = list("Undead")
+	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clocktower)
 "rHk" = (
@@ -14464,7 +14518,9 @@
 	pixel_y = 15;
 	pixel_x = -17
 	},
-/mob/living/simple_animal/hostile/retaliate/spider/robotic,
+/mob/living/simple_animal/hostile/retaliate/spider/robotic{
+	faction = list("Undead")
+	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clocktower)
 "sdC" = (
@@ -16048,7 +16104,9 @@
 /area/under/cavewet)
 "usr" = (
 /obj/structure/fluff/steamvent,
-/mob/living/simple_animal/hostile/retaliate/snapper,
+/mob/living/simple_animal/hostile/retaliate/snapper{
+	faction = list("Undead")
+	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
 "usI" = (
@@ -16115,7 +16173,9 @@
 /turf/open/floor/grass,
 /area/outdoors/bog/inhumen_camp)
 "uzv" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
@@ -16369,7 +16429,9 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile{
 	color = "#314C5D"
 	},
@@ -17245,7 +17307,9 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
 "wcT" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
 	},
@@ -18534,7 +18598,9 @@
 	},
 /area/under/cavewet)
 "xPm" = (
-/mob/living/simple_animal/hostile/retaliate/shark,
+/mob/living/simple_animal/hostile/retaliate/shark{
+	faction = list("Hostile")
+	},
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/abyss_tile/three{
 	color = "#29404E"

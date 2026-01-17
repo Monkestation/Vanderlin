@@ -28,8 +28,8 @@
 	var/atom/movable/screen/alert/status_effect/linked_alert = null
 	/// Do we self-terminate when a fullheal is called?
 	var/remove_on_fullheal = FALSE
-	// /// If remove_on_fullheal is TRUE, what flag do we need to be removed?
-	// var/heal_flag_necessary = HEAL_STATUS
+	/// If remove_on_fullheal is TRUE, what flag do we need to be removed?
+	var/heal_flag_necessary = HEAL_STATUS
 	/// Assoc list of statkey to value
 	var/list/effectedstats = list()
 
@@ -42,7 +42,6 @@
 	if(owner)
 		LAZYADD(owner.status_effects, src)
 		RegisterSignal(owner, COMSIG_LIVING_POST_FULLY_HEAL, PROC_REF(remove_effect_on_heal))
-
 	if(!owner || !on_apply())
 		qdel(src)
 		return
@@ -107,6 +106,12 @@
 /datum/status_effect/proc/be_replaced()
 	qdel(src)
 
+/// Gets and formats examine text associated with our status effect.
+/// Return 'null' to have no examine text appear (default behavior).
+/// Use "SUBJECTPRONOUN is" to autoreplace with correct pronouns + linking verb in the examines themselves
+/datum/status_effect/proc/get_examine_text()
+	return null
+
 /// Called every tick.
 /datum/status_effect/proc/tick()
 	return
@@ -130,8 +135,8 @@
 	if(!remove_on_fullheal)
 		return
 
-	// if(!heal_flag_necessary || (heal_flags & heal_flag_necessary))
-	qdel(src)
+	if(!heal_flag_necessary || (heal_flags & heal_flag_necessary))
+		qdel(src)
 
 /// Remove [seconds] of duration from the status effect, qdeling / ending if we eclipse the current world time.
 /datum/status_effect/proc/remove_duration(seconds)
@@ -173,83 +178,6 @@
 /atom/movable/screen/alert/status_effect/Destroy()
 	attached_effect = null
 	return ..()
-
-//////////////////
-// HELPER PROCS //
-//////////////////
-
-/// Applies a given status effect to this mob, returning the effect if it was successful
-/mob/living/proc/apply_status_effect(datum/status_effect/new_effect, duration_override, ...)
-	RETURN_TYPE(/datum/status_effect)
-
-	// The arguments we pass to the start effect. The 1st argument is this mob.
-	var/list/arguments = args.Copy()
-	arguments[1] = src
-
-	// If the status effect we're applying doesn't allow multiple effects, we need to handle it
-	if(initial(new_effect.status_type) != STATUS_EFFECT_MULTIPLE)
-		for(var/datum/status_effect/existing_effect as anything in status_effects)
-			if(existing_effect.id != initial(new_effect.id))
-				continue
-
-			switch(existing_effect.status_type)
-				// Multiple are allowed, continue as normal. (Not normally reachable)
-				if(STATUS_EFFECT_MULTIPLE)
-					break
-				// Only one is allowed of this type - early return
-				if(STATUS_EFFECT_UNIQUE)
-					return
-				// Replace the existing instance (deletes it).
-				if(STATUS_EFFECT_REPLACE)
-					existing_effect.be_replaced()
-				// Refresh the existing type, then early return
-				if(STATUS_EFFECT_REFRESH)
-					existing_effect.refresh(arglist(arguments))
-					SEND_SIGNAL(src, COMSIG_MOB_APPLIED_STATUS_EFFECT, existing_effect)
-					return
-
-	// Create the status effect with our mob + our arguments
-	var/datum/status_effect/new_instance = new new_effect(arguments)
-	if(!QDELETED(new_instance))
-		SEND_SIGNAL(src, COMSIG_MOB_APPLIED_STATUS_EFFECT, new_instance)
-		return new_instance
-
-/**
- * Removes all instances of a given status effect from this mob
- *
- * removed_effect - TYPEPATH of a status effect to remove.
- * Additional status effect arguments can be passed - these are passed into before_remove.
- *
- * Returns TRUE if at least one was removed.
- */
-/mob/living/proc/remove_status_effect(datum/status_effect/removed_effect, ...)
-	var/list/arguments = args.Copy(2)
-
-	. = FALSE
-	for(var/datum/status_effect/existing_effect as anything in status_effects)
-		if(existing_effect.id == initial(removed_effect.id) && existing_effect.before_remove(arglist(arguments)))
-			qdel(existing_effect)
-			. = TRUE
-
-	return .
-
-/// Returns the effect if the mob calling the proc owns the given status effect
-/mob/living/proc/has_status_effect(effect)
-	. = FALSE
-	if(status_effects)
-		var/datum/status_effect/S1 = effect
-		for(var/datum/status_effect/S in status_effects)
-			if(initial(S1.id) == S.id)
-				return S
-
-/// Returns a list of effects with matching IDs that the mod owns; use for effects there can be multiple of
-/mob/living/proc/has_status_effect_list(effect)
-	. = list()
-	if(status_effects)
-		var/datum/status_effect/S1 = effect
-		for(var/datum/status_effect/S in status_effects)
-			if(initial(S1.id) == S.id)
-				. += S
 
 //////////////////////
 // STACKING EFFECTS //
