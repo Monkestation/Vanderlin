@@ -346,5 +346,31 @@
                 "rscadd": "hardcore rat is now a small rat and can't speak"
             }
         ]
+    },
+    "2026-01-18": {
+        "ModDownloading": [
+            {
+                "bugfix": "Leprosy quirk stops pain just like the triumph buy one now."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fix royal knights clearing stats"
+            },
+            {
+                "bugfix": "Various fixes to human examine code."
+            },
+            {
+                "balance": "Faceless assassins can no longer be seen if they are unknown."
+            },
+            {
+                "bugfix": "Fixed jobs selectable items not always having options roundstart"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "bandage bloodloss"
+            }
+        ]
     }
 }

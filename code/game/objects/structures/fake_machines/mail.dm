@@ -385,14 +385,16 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 
 /obj/structure/fake_machine/mail/proc/handle_indexer(obj/item/inqarticles/indexer/indexer, mob/living/carbon/human/user)
+	var/mob/living/subject = indexer.subject?.resolve()
 	// Handle cursed blood samples
 	if(indexer.cursedblood)
 		var/is_duplicate = FALSE
 
 		if(GLOB.cursedsamples)
-			is_duplicate = check_global_list(GLOB.cursedsamples, indexer.subject.mind)
-			if(!is_duplicate)
-				add_to_global_list(GLOB.cursedsamples, indexer.subject.mind)
+			if(subject)
+				is_duplicate = check_global_list(GLOB.cursedsamples, subject.mind)
+				if(!is_duplicate)
+					add_to_global_list(GLOB.cursedsamples, subject.mind)
 
 		if(is_duplicate)
 			qdel(indexer)
@@ -400,7 +402,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			playsound(src, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 			visible_message(span_warning("[user] receives something."))
 			to_chat(user, span_notice("We've already collected a sample of their accursed blood."))
-			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
+			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer(get_turf(user))
 			user.put_in_hands(replacement)
 		else
 			var/marque_value = indexer.cursedblood * 2 + 2
@@ -413,17 +415,17 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		return
 
 	// Handle regular indexing
-	if(indexer.subject && indexer.full)
+	if(subject && indexer.full)
 		var/is_duplicate = FALSE
 		var/is_selfreport = FALSE
 
-		if(HAS_TRAIT(indexer.subject, TRAIT_INQUISITION))
+		if(HAS_TRAIT(subject, TRAIT_INQUISITION))
 			is_selfreport = TRUE
 
 		if(GLOB.indexed && !is_selfreport)
-			is_duplicate = check_global_list(GLOB.indexed, indexer.subject)
+			is_duplicate = check_global_list(GLOB.indexed, subject)
 			if(!is_duplicate)
-				add_to_global_list(GLOB.indexed, indexer.subject)
+				add_to_global_list(GLOB.indexed, subject)
 
 		if(is_duplicate || is_selfreport)
 			qdel(indexer)
@@ -436,7 +438,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			else
 				to_chat(user, span_notice("It appears we already had them INDEXED. I've been issued a replacement."))
 
-			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
+			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer(get_turf(user))
 			user.put_in_hands(replacement)
 		else
 			budget2change(2, user, "MARQUE")
@@ -488,8 +490,10 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	if(HAS_TRAIT(accusation.paired.subject, TRAIT_CABAL))
 		is_correct = TRUE
 
+	var/mob/living/subject = accusation.paired.subject?.resolve()
+
 	// Check antagonist types
-	for(var/datum/antagonist/antag in accusation.paired.subject.mind?.antag_datums)
+	for(var/datum/antagonist/antag in subject?.mind?.antag_datums)
 		switch(antag.type)
 			if(/datum/antagonist/bandit, /datum/antagonist/maniac, /datum/antagonist/assassin,
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
@@ -499,8 +503,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 				break
 
 	// Check patron types
-	if(accusation.paired.subject.patron)
-		switch(accusation.paired.subject.patron.type)
+	if(subject?.patron)
+		switch(subject?.patron.type)
 			if(/datum/patron/inhumen/matthios, /datum/patron/inhumen/zizo, /datum/patron/inhumen/graggar,
 			   /datum/patron/inhumen/baotha, /datum/patron/godless/godless, /datum/patron/godless/autotheist,
 			   /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/rashan,
@@ -508,7 +512,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 				is_correct = TRUE
 
 	// Check excommunication
-	if(accusation.paired.subject.name in GLOB.excommunicated_players)
+	if(subject?.name in GLOB.excommunicated_players)
 		is_correct = TRUE
 
 	// Check if already indexed
@@ -540,8 +544,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			to_chat(user, span_notice("They've confessed."))
 		else if(is_selfreport)
 			to_chat(user, span_notice("Why are we accusing our own? What have we come to?"))
-			visible_message(span_warning("[user] receives something."))
-			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
+			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer(get_turf(user))
 			user.put_in_hands(replacement)
 		else
 			to_chat(user, span_notice("They've already been accused."))

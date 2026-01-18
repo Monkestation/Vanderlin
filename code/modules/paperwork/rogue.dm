@@ -594,7 +594,7 @@
 	var/writers_name
 	var/faction
 
-/obj/item/paper/scroll/sell_price_changes/New(loc, list/prices, faction_name)
+/obj/item/paper/scroll/sell_price_changes/Initialize(mapload, list/prices, faction_name)
 	. = ..()
 
 	faction = faction_name

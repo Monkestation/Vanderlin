@@ -85,6 +85,8 @@
 	. = ..()
 	select_knight_specialization(spawned)
 
+	should_reset_stats = FALSE
+
 /datum/outfit/royalknight
 	name = "Royal Knight Base"
 	neck = /obj/item/clothing/neck/chaincoif
@@ -124,6 +126,8 @@
 	you could have spent learning to use other weapons."
 	outfit = /datum/outfit/royalknight/steam
 	category_tags = list(CTAG_ROYALKNIGHT)
+
+	should_reset_stats = FALSE
 
 /datum/job/advclass/royalknight/steam/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
