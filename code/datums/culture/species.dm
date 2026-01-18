@@ -44,3 +44,9 @@
 		SPEC_ID_ELF,
 		SPEC_ID_AASIMAR,
 	)
+
+/datum/culture/species/half_orc
+	abstract_type = /datum/culture/species/half_orc
+	species = list(
+		SPEC_ID_HALF_ORC,
+	)
