@@ -12,7 +12,8 @@
 	. = ..()
 	var/list/possible_fish = list()
 	for(var/obj/item/reagent_containers/food/snacks/fish/F as anything in subtypesof(/obj/item/reagent_containers/food/snacks/fish))
-		possible_fish += F
+		if(F.status != FISH_DEAD)
+			possible_fish += F
 
 	if(length(possible_fish))
 		target_fish_type = pick(possible_fish)
