@@ -41,13 +41,15 @@
 	. = ..()
 	if(!(affected.body_zone in body_zones))
 		return FALSE
+	if(affected.status != BODYPART_ORGANIC)
+		return FALSE
 
 /datum/wound/black_briar_curse/can_apply_to_mob(mob/living/affected)
 	. = ..()
 	if(!. || !iscarbon(affected))
 		return FALSE
 	var/mob/living/carbon/C = affected
-	if(C.dna?.species && (NOBLOOD in C.dna.species.species_traits))
+	if(NOBLOOD in C.dna?.species?.species_traits)
 		return FALSE
 	if(is_species(C, /datum/species/werewolf) || C.mind?.has_antag_datum(/datum/antagonist/werewolf)) // Dendor protects
 		return FALSE
