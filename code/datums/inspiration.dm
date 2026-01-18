@@ -19,10 +19,10 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	/// List of weakrefs to name (not real name)
 	var/list/audience_weakrefs
 	var/list/available_song_tiers
-	var/static/list/inspiration_verbs = list(/mob/living/carbon/human/verb/setaudience, \
-		/mob/living/carbon/human/verb/clearaudience, \
-		/mob/living/carbon/human/verb/checkaudience, \
-		/mob/living/carbon/human/verb/picksongs)
+	var/static/list/inspiration_verbs = list(/mob/living/carbon/human/proc/setaudience, \
+		/mob/living/carbon/human/proc/clearaudience, \
+		/mob/living/carbon/human/proc/checkaudience, \
+		/mob/living/carbon/human/proc/picksongs)
 
 /datum/inspiration/New(mob/living/carbon/human/holder, bard_tier_override)
 	. = ..()
@@ -92,13 +92,13 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	current_tier = target_tier
 	maxaudience = 2 * current_tier
 	if(length(available_song_tiers))
-		holder.verbs |= /mob/living/carbon/human/verb/picksongs
+		holder.verbs |= /mob/living/carbon/human/proc/picksongs
 
 /**
  * MOB VERBS FOR INSPIRATION
  */
 
-/mob/living/carbon/human/verb/setaudience()
+/mob/living/carbon/human/proc/setaudience()
 	set name = "Audience Choice"
 	set category = "Inspiration"
 
@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	inspiration.audience_weakrefs[WEAKREF(target)] = target.name
 	to_chat(src, "You add [target] to your audience.")
 
-/mob/living/carbon/human/verb/clearaudience()
+/mob/living/carbon/human/proc/clearaudience()
 	set name = "Clear Audience"
 	set category = "Inspiration"
 	if(!inspiration)
@@ -132,7 +132,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	inspiration.audience_weakrefs = list()
 	to_chat(src, "You clear your audience list.")
 
-/mob/living/carbon/human/verb/checkaudience()
+/mob/living/carbon/human/proc/checkaudience()
 	set name = "Check Audience"
 	set category = "Inspiration"
 
@@ -146,7 +146,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 		return
 	to_chat(src, "My audience members are: [text.Join(" ,")].")
 
-/mob/living/carbon/human/verb/picksongs()
+/mob/living/carbon/human/proc/picksongs()
 	set name = "Fill Songbook"
 	set category = "Inspiration"
 
@@ -183,4 +183,4 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	add_spell(item, source = inspiration)
 	inspiration.available_song_tiers -= chosensongtier
 	if(!length(inspiration.available_song_tiers))
-		verbs -= /mob/living/carbon/human/verb/picksongs
+		verbs -= /mob/living/carbon/human/proc/picksongs

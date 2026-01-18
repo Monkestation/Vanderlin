@@ -196,7 +196,7 @@
 
 /datum/stress_event/fish_monster
 	timer = 30 SECONDS
-	stress_change = 3
+	stress_change = 1
 	desc = span_boldred("<B>IT'S A HIDEOUS MONSTER!!!</B>")
 
 /datum/stress_event/fishfaceaintthatugly
