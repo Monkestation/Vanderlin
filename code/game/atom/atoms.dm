@@ -43,7 +43,7 @@
 
 /// Last name used to calculate a color for the chatmessage overlays
 	var/chat_color_name
-	/// Last color calculated for the the chatmessage overlays
+	/// Last color calculated for the chatmessage overlays
 	var/chat_color
 	/// A luminescence-shifted value of the last color calculated for chatmessage overlays
 	var/chat_color_darkened
@@ -296,8 +296,12 @@
 	QDEL_NULL(light)
 	QDEL_NULL(ai_controller)
 
+	// We used to remove stuff from the smoothing queue here,
+	// but list removals can be REALLY costly.
+	// If this is qdeleted and the flag is unset, it'll just get skipped
+	// which is way faster.
 	if(smoothing_flags & SMOOTH_QUEUED)
-		SSicon_smooth.remove_from_queues(src)
+		smoothing_flags &= ~SMOOTH_QUEUED
 
 	return ..()
 
@@ -325,31 +329,9 @@
 	if(mover.pass_flags & pass_flags_self)
 		return TRUE
 	if(mover.throwing && (pass_flags_self & LETPASSTHROW))
-		return TRUE
+		if(!(ismob(mover) || ismobholder(mover)) || !(pass_flags_self & NOTLETPASSTHROWNMOB))
+			return TRUE
 	return !density
-
-/**
- * Is this atom currently located on centcom
- *
- * Specifically, is it on the z level and within the centcom areas
- *
- * You can also be in a shuttleshuttle during endgame transit
- *
- * Used in gamemode to identify mobs who have escaped and for some other areas of the code
- * who don't want atoms where they shouldn't be
- */
-/atom/proc/onCentCom()
-	var/turf/T = get_turf(src)
-	if(!T)
-		return FALSE
-
-	if(!is_centcom_level(T.z))//if not, don't bother
-		return FALSE
-
-	//Check for centcom itself
-	if(istype(T.loc, /area/centcom))
-		return TRUE
-
 
 /atom/proc/make_shiny(_shine = SHINE_REFLECTIVE)
 	if(total_reflection_mask)

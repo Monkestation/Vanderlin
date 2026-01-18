@@ -42,7 +42,7 @@
 
 /// Use in fish tables to denote miss chance.
 #define FISHING_DUD "dud"
-///Used in the the hydro tray fishing spot to define a random seed reward
+///Used in the hydro tray fishing spot to define a random seed reward
 #define FISHING_RANDOM_SEED "Random seed"
 ///Used in the surgery fishing spot to define a random organ reward
 #define FISHING_RANDOM_ORGAN "Random organ"

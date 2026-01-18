@@ -1,7 +1,7 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
 	name = "blowgun"
-	desc = "A primitive tool used for hunting. To use most accuratly, hold your breath for a moment before releasing."
+	desc = "A primitive tool used for hunting. To use most accurately, hold your breath for a moment before releasing."
 	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "blowgun"
 	possible_item_intents = list(/datum/intent/shoot/blowgun, /datum/intent/arc/blowgun, INTENT_GENERIC)

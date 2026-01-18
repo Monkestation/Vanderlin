@@ -253,6 +253,9 @@
 
 		var/datum/triumph_buy/communal/communal_buy = locate(href_list["contribute"])
 		if(communal_buy && istype(communal_buy))
+			if(communal_buy.disabled)
+				to_chat(linked_client, span_warning("This Triumph Buy has been disabled by administrators!"))
+				return
 			if(communal_buy.activated)
 				to_chat(linked_client, span_warning("The item is already active!"))
 				return

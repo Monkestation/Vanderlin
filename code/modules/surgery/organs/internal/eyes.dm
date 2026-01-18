@@ -19,7 +19,7 @@
 
 	low_threshold_passed = "<span class='info'>Distant objects become somewhat less tangible.</span>"
 	high_threshold_passed = "<span class='info'>Everything starts to look a lot less clear.</span>"
-	now_failing = "<span class='warning'>Darkness envelopes you, as my eyes go blind!</span>"
+	now_failing = "<span class='warning'>Darkness envelops me, as my eyes go blind!</span>"
 	now_fixed = "<span class='info'>Color and shapes are once again perceivable.</span>"
 	high_threshold_cleared = "<span class='info'>My vision functions passably once more.</span>"
 	low_threshold_cleared = "<span class='info'>My vision is cleared of any ailment.</span>"
@@ -52,7 +52,8 @@
 		if(prob(5))
 			heterochromia = TRUE
 			second_color = random_eye_color()
-	update_icon()
+
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/organ/eyes/update_overlays()
 	. = ..()
@@ -106,10 +107,13 @@
 	if(ishuman(M) && eye_color)
 		var/mob/living/carbon/human/HMN = M
 		HMN.regenerate_icons()
+	// Cure blindness from eye damage
 	M.cure_blind(EYE_DAMAGE)
 	M.cure_nearsighted(EYE_DAMAGE)
-	M.set_blindness(0)
-	M.set_blurriness(0)
+	// Eye blind and temp blind go to, even if this is a bit of cheesy way to clear blindness
+	M.remove_status_effect(/datum/status_effect/eye_blur)
+	M.remove_status_effect(/datum/status_effect/temporary_blindness)
+	M.set_eye_blur(0)
 	M.update_sight()
 
 /obj/item/organ/eyes/on_life()

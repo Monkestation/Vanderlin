@@ -77,14 +77,73 @@
 	if(accessory)
 		var/accessory_link
 		var/arrows_string
+		var/dropdown_button
+
 		if(length(sprite_accessories) > 1)
 			accessory_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=choose_acc'"
-			arrows_string = "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=prev''><</a><a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=next''>></a>"
+			arrows_string = "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=prev' style='font-size:16px; padding:0 5px;'><</a><a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=next' style='font-size:16px; padding:0 5px;'>></a>"
+			dropdown_button = "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_dropdown' style='font-size:12px; padding:0 5px;'>View All</a>"
 		else
 			accessory_link = "class='linkOff'"
-			arrows_string = "<a class='linkOff'><</a><a class='linkOff'>></a>"
-		if(length(sprite_accessories) > 1)
-			dat += "<br>[arrows_string]<a [accessory_link]>[accessory.name]</a>"
+			arrows_string = "<a class='linkOff' style='font-size:16px; padding:0 5px;'><</a><a class='linkOff' style='font-size:16px; padding:0 5px;'>></a>"
+			dropdown_button = ""
+
+		dat += "<div style='text-align:center; margin:10px 0;'>"
+		dat += "<div style='background-color:#0a0a0a; padding:10px; border-radius:5px; display:inline-block;'>"
+
+		dat += "<div style='margin-bottom:5px;'>"
+		dat += "<img id='accessory_preview' src='\ref[initial(accessory.icon)]?state=[initial(accessory.icon_state)]'/>"
+		dat += "</div>"
+
+		dat += "<div style='margin:5px 0;'>"
+		dat += "[arrows_string] <a [accessory_link]>[accessory.name]</a> [dropdown_button]"
+		dat += "</div>"
+
+		dat += "</div>"
+		dat += "</div>"
+
+		// Dropdown grid (hidden by default, toggled via href)
+		if(entry.show_dropdown && length(sprite_accessories) > 1)
+			dat += "<div style='background-color:#1a1a1a; padding:10px; border-radius:5px; margin:10px 0;'>"
+			dat += "<div style='display:grid; grid-template-columns:repeat(auto-fill, minmax(80px, 1fr)); gap:8px; max-height:300px; overflow-y:auto;'>"
+
+			var/grid_index = 0
+			for(var/acc_type in sprite_accessories)
+				var/datum/sprite_accessory/acc = SPRITE_ACCESSORY(acc_type)
+				var/is_selected = (acc_type == entry.accessory_type)
+				var/border_style = is_selected ? "border:2px solid #4a9eff;" : "border:1px solid #333;"
+				grid_index++
+
+				dat += "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=select_acc;acc_type=[acc_type]' style='text-decoration:none;'>"
+				dat += "<div id='grid_container_[grid_index]' style='background-color:#0a0a0a; padding:5px; border-radius:3px; [border_style] text-align:center; cursor:pointer;'>"
+				dat += "<img id='grid_preview_[grid_index]' src='\ref[initial(acc.icon)]?state=[initial(acc.icon_state)]' style='display:block; margin:0 auto;'/>"
+				dat += "<div style='font-size:10px; margin-top:3px; color:[is_selected ? "#4a9eff" : "#ffffff"];'>[acc.name]</div>"
+				dat += "<script>"
+				dat += "(function() {"
+				dat += "  var container = document.getElementById('grid_container_[grid_index]');"
+				dat += "  var img = document.getElementById('grid_preview_[grid_index]');"
+				dat += "  var baseUrl = '\ref[initial(acc.icon)]';"
+				dat += "  var directions = \['', '&dir=4', '&dir=8', '&dir=1'\];"
+				dat += "  var currentDir = 0;"
+				dat += "  var animInterval;"
+				dat += "  container.addEventListener('mouseenter', function() {"
+				dat += "    animInterval = setInterval(function() {"
+				dat += "      currentDir = (currentDir + 1) % directions.length;"
+				dat += "      img.src = baseUrl + '?state=[initial(acc.icon_state)]' + directions\[currentDir\];"
+				dat += "    }, 200);"
+				dat += "  });"
+				dat += "  container.addEventListener('mouseleave', function() {"
+				dat += "    clearInterval(animInterval);"
+				dat += "    currentDir = 0;"
+				dat += "    img.src = baseUrl + '?state=[initial(acc.icon_state)]';"
+				dat += "  });"
+				dat += "})();"
+				dat += "</script>"
+				dat += "</div>"
+				dat += "</a>"
+
+			dat += "</div>"
+			dat += "</div>"
 
 		if(allows_accessory_color_customization)
 			dat += "<br><a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=reset_colors'>Reset colors</a>"
@@ -95,6 +154,20 @@
 
 /datum/customizer_choice/proc/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	switch(href_list["customizer_task"])
+		if("toggle_dropdown")
+			if(!sprite_accessories)
+				return
+			entry.show_dropdown = !entry.show_dropdown
+
+		if("select_acc")
+			if(!sprite_accessories)
+				return
+			var/acc_type = text2path(href_list["acc_type"])
+			if(!(acc_type in sprite_accessories))
+				return
+			set_accessory_type(prefs, acc_type, entry)
+			entry.show_dropdown = FALSE // Close dropdown after selection
+
 		if("choose_acc")
 			if(!sprite_accessories)
 				return

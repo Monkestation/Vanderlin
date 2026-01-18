@@ -242,14 +242,14 @@
 	animname = "stab"
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 40
+	penfactor = 30
 	chargetime = 0
 	clickcd = 14
 	item_damage_type = "stab"
 
 /obj/item/weapon/katar
 	slot_flags = ITEM_SLOT_HIP
-	force = 20
+	force = 15
 	possible_item_intents = list(/datum/intent/katar/cut, /datum/intent/katar/thrust)
 	name = "katar"
 	desc = "A blade that sits above the users fist. Commonly used by those proficient at unarmed fighting"
@@ -265,7 +265,7 @@
 	associated_skill = /datum/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	throwforce = 12
-	wdefense = 4
+	wdefense = 2
 	thrown_bclass = BCLASS_CUT
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel
@@ -286,7 +286,6 @@
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
-	force = 24 //Less damage, Original was 27, But more integrity in exchange.
 	max_integrity = 250
 
 /datum/intent/knuckles/strike

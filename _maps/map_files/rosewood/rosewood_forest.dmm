@@ -1,281 +1,289 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ab" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/cave)
+/area/under/cave)
 "ac" = (
 /obj/structure/flora/hotspring_rocks/small/four,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ag" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "ah" = (
 /obj/structure/hotspring,
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "au" = (
 /obj/item/natural/rock{
 	pixel_x = 3;
 	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "aw" = (
 /obj/structure/fluff/traveltile/exit_inhumen{
 	aportalgoesto = "inhumenin";
 	aportalid = "inhumenexit"
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "ax" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "aH" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/indoors)
+/area/indoors)
 "aM" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sylph,
 /obj/effect/spawner/map_spawner/loot/common,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "aQ" = (
 /obj/effect/falling_sakura,
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"ba" = (
+/obj/item/fertilizer/ash{
+	pixel_x = -5;
+	pixel_y = -5
+	},
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/floor/wood/nosmooth/saiga,
+/area/indoors)
 "bb" = (
 /obj/effect/falling_sakura,
 /obj/item/clothing/head/flowercrown/salvia,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bd" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "be" = (
 /turf/open/water/river{
 	dir = 8
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "bo" = (
 /obj/structure/hotspring/border/eleven,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bt" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
-"bC" = (
-/obj/structure/window/openclose/reinforced{
-	dir = 8
-	},
-/turf/open/floor/blocks,
-/area/rogue/indoors)
+/area/indoors)
 "bE" = (
 /turf/open/floor/blocks,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bH" = (
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "bM" = (
 /obj/structure/stairs/stone{
 	dir = 1;
 	icon_state = "stonestairs"
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bP" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bQ" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/cave)
+/area/under/cave)
 "bR" = (
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bU" = (
 /turf/open/water/river,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bV" = (
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bW" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 30
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors)
+/area/indoors)
 "bX" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "bZ" = (
 /obj/item/book/tales1,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "cd" = (
 /obj/item/book/abyssor,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ce" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"ch" = (
+/obj/effect/decal/cleanable/debris/glass,
+/turf/open/floor/wood/nosmooth/saiga,
+/area/indoors)
 "cu" = (
 /mob/living/simple_animal/hostile/retaliate/fae/glimmerwing,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "cw" = (
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
-"cy" = (
-/obj/machinery/light/fueled/torchholder/l,
-/obj/structure/closet/crate/chest/neu,
-/turf/open/floor/wood/nosmooth/saiga,
-/area/rogue/indoors)
+/area/outdoors/woods)
 "cz" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
 "cN" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "cO" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "cR" = (
 /obj/item/natural/rock{
 	pixel_x = -6;
 	pixel_y = -8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "cS" = (
 /obj/structure/hotspring/border/twelve,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "cT" = (
 /obj/effect/lily_petal/two,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dj" = (
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dm" = (
 /turf/closed/basic,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "dz" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dA" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dD" = (
 /obj/structure/hotspring,
 /obj/effect/lily_petal,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"dE" = (
+/obj/effect/decal/cleanable/blood/splatter{
+	icon_state = "gibbl3"
+	},
+/turf/open/floor/woodturned/nosmooth/saiga,
+/area/indoors)
 "dG" = (
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dI" = (
 /turf/closed/basic,
-/area/rogue/under/cave)
+/area/under/cave)
 "dJ" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dP" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dR" = (
 /turf/closed/wall/mineral/decowood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "dW" = (
 /turf/open/floor/cobblerock/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "eb" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "ee" = (
 /obj/item/natural/rock{
 	pixel_x = 2;
 	pixel_y = 6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "eh" = (
 /obj/effect/landmark/mapGenerator/rosewood/forest,
 /turf/closed/basic,
-/area/rogue/under/cave)
-"ej" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 8
-	},
-/turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/under/cave)
 "ek" = (
 /obj/structure/flora/hotspring_rocks/small,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "el" = (
 /obj/structure/hotspring/border/five,
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"ey" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/herringbone,
+/area/indoors)
 "ez" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "eA" = (
 /turf/closed/mineral,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "eB" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -284,21 +292,21 @@
 	dir = 8
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "eC" = (
 /obj/structure/flora/newtree/snow,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "eK" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "fi" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/indoors)
+/area/indoors)
 "fk" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -307,205 +315,224 @@
 	dir = 4
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "fp" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/indoors)
+/area/indoors)
 "fq" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"fs" = (
+/obj/effect/decal/cleanable/blood/splatter{
+	icon_state = "gibbl2"
+	},
+/turf/open/floor/dirt,
+/area/indoors)
 "fw" = (
 /obj/structure/hotspring/border/ten,
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "fF" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "fI" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Rosewood - west"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "fN" = (
 /obj/structure/flora/tree,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "fU" = (
 /obj/structure/stairs,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"fX" = (
+/obj/machinery/light/fueled/campfire/longlived,
+/turf/open/floor/naturalstone,
+/area/under/cave)
+"fZ" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/naturalstone,
+/area/under/cave)
+"gc" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/transparent/openspace,
+/area/indoors)
 "gk" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
 "gp" = (
 /obj/structure/flora/hotspring_rocks/grassy,
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "gD" = (
 /obj/effect/falling_sakura,
 /obj/structure/hotspring/border,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "gE" = (
 /obj/structure/flora/sakura{
 	name = "manabloom tree";
-	desc = "This totally isnt pink...";
+	desc = "This totally isn't pink...";
 	icon_state = "manabloomtree";
 	icon = 'icons/obj/structures/manabloomtree.dmi';
 	pixel_x = -39;
 	pixel_y = 0
 	},
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
-"gK" = (
-/obj/effect/landmark/start/adventurerlate,
-/turf/open/floor/snow,
-/area/rogue/outdoors/woods)
-"gT" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
+/area/outdoors/woods)
+"gU" = (
+/obj/item/fertilizer/ash{
+	pixel_x = -12;
+	pixel_y = 8
 	},
-/turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "ha" = (
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "hn" = (
 /obj/structure/hotspring/border,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"hr" = (
+/obj/effect/decal/cleanable/ash,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "ht" = (
 /obj/structure/wild_plant/nospread/poppy,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"hJ" = (
+/obj/item/fertilizer/ash,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
+"hV" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/blocks,
+/area/indoors)
 "ic" = (
 /turf/closed/wall/mineral/decostone/cand,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "id" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/cave)
+/area/under/cave)
 "is" = (
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "iy" = (
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "iG" = (
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "iM" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "iO" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
-"iQ" = (
-/obj/structure/door/weak/bolt{
-	dir = 8
-	},
-/turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/outdoors/woods)
 "iS" = (
 /obj/structure/hotspring/border/ten,
 /obj/structure/flora/hotspring_rocks/small,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "iW" = (
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "jd" = (
 /obj/structure/roguerock,
 /turf/open/water,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "jh" = (
 /turf/open/floor/rooftop{
 	dir = 1
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "jy" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "jE" = (
 /turf/open/floor/dirt,
-/area/rogue/under/cave)
+/area/under/cave)
 "jH" = (
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "jI" = (
 /obj/structure/window/openclose/reinforced,
 /turf/open/floor/blocks,
-/area/rogue/indoors)
+/area/indoors)
 "jO" = (
 /turf/open/water/blood,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "jV" = (
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "kd" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "kj" = (
 /turf/open/floor/cobble,
-/area/rogue/indoors)
-"ko" = (
-/obj/structure/fluff/railing/border,
-/turf/open/floor/woodturned/nosmooth/saiga,
-/area/rogue/indoors)
+/area/indoors)
 "kq" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ku" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "kw" = (
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ky" = (
 /obj/structure/hotspring/border/three,
 /obj/machinery/light/fueled/torchholder/hotspring/standing,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "kT" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "kV" = (
 /obj/structure/flora/tree/wise,
 /turf/open/water/swamp,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "kZ" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
 "lk" = (
 /obj/effect/waterfall{
 	pixel_y = 0
@@ -513,209 +540,240 @@
 /turf/open/water/river{
 	dir = 1
 	},
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ln" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
-"lo" = (
-/obj/machinery/light/fueled/torchholder/r,
-/turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/outdoors/mountains)
 "lt" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "lx" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "lz" = (
 /obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/five,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"lF" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/adventurerlate{
+	dir = 1
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "lG" = (
 /obj/structure/chair/stool,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "lK" = (
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"lO" = (
+/turf/open/floor/grass/cold,
+/area/indoors)
 "lP" = (
 /obj/structure/bed/wool,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
+"lU" = (
+/obj/item/fertilizer/ash{
+	pixel_x = 6;
+	pixel_y = -1
+	},
+/turf/open/floor/wood/nosmooth/saiga,
+/area/indoors)
 "mc" = (
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "ml" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "mp" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "mu" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue/indoors)
+/area/indoors)
 "mz" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "mA" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "mB" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "mG" = (
 /turf/open/floor/dirt/road,
-/area/rogue/indoors)
-"mW" = (
-/obj/machinery/light/fueled/torchholder/l,
+/area/indoors)
+"mL" = (
+/obj/effect/decal/cleanable/ash,
+/turf/open/floor/dirt,
+/area/outdoors/woods)
+"mS" = (
+/obj/item/natural/wood/plank{
+	pixel_x = -9;
+	pixel_y = 8
+	},
+/turf/open/floor/woodturned/nosmooth/saiga,
+/area/indoors)
+"mT" = (
+/mob/living/simple_animal/hostile/retaliate/raccoon,
 /turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/indoors)
+"nc" = (
+/obj/effect/decal/cleanable/blood/splatter{
+	icon_state = "gibbl2"
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "ng" = (
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "no" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/indoors)
+/area/indoors)
 "nw" = (
 /obj/structure/flora/tree,
 /turf/open/water/swamp,
-/area/rogue/under/cave)
+/area/under/cave)
 "nx" = (
 /obj/effect/falling_sakura,
 /obj/structure/hotspring/border/seven,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "nz" = (
 /obj/item/book/tales3,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "nP" = (
 /obj/structure/bars,
 /turf/open/water/swamp,
-/area/rogue/indoors)
+/area/indoors)
 "nQ" = (
 /obj/effect/lily_petal,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "nT" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/east,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "nV" = (
 /obj/structure/flora/tree/wise,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "nX" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ob" = (
 /obj/structure/stairs,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "oc" = (
 /turf/open/floor/metal,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "oo" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "op" = (
 /obj/effect/falling_sakura,
 /obj/structure/hotspring/border/four,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "os" = (
 /obj/structure/fluff/signage{
 	name = "Rosewood - North";
 	dir = 8
 	},
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ou" = (
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
-"oB" = (
-/obj/machinery/light/fueled/campfire/longlived,
-/turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "oE" = (
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "oF" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "oG" = (
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
-"oN" = (
-/obj/structure/door/weak/bolt{
-	dir = 4
-	},
-/turf/open/floor/woodturned/nosmooth/saiga,
-/area/rogue/indoors)
+/area/outdoors/woods)
 "oQ" = (
 /obj/effect/falling_sakura,
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "oS" = (
 /obj/structure/roguerock,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "pe" = (
 /obj/effect/falling_sakura,
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "pf" = (
 /obj/structure/hotspring/border/five,
 /obj/structure/flora/hotspring_rocks/small/three,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "pk" = (
 /obj/structure/bed/hay,
 /turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/indoors)
+"pl" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/debris/glass,
+/turf/open/floor/dirt/road,
+/area/indoors)
 "pq" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "pu" = (
 /obj/structure/hotspring/border/three,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"py" = (
+/obj/effect/landmark/start/adventurerlate{
+	dir = 4
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "pB" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/cooking/pan{
@@ -731,7 +789,7 @@
 	pixel_x = 4
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/indoors)
+/area/indoors)
 "pD" = (
 /obj/structure/hotspring/border/five,
 /obj/machinery/light/fueled/torchholder/hotspring{
@@ -739,10 +797,10 @@
 	pixel_y = 15
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "pJ" = (
 /turf/open/floor/snow,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "pS" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -750,482 +808,500 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "pU" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 1
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "pX" = (
 /obj/effect/lily_petal/three,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "pY" = (
 /turf/open/floor/snow,
-/area/rogue/under/cave)
+/area/under/cave)
 "qb" = (
 /obj/structure/hotspring/border/fourteen,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "qe" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "qh" = (
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "qk" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ql" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "qm" = (
 /obj/structure/flora/tree,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "qn" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "qu" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "qG" = (
 /turf/closed/mineral/random,
-/area/rogue/under/cave)
+/area/under/cave)
 "qH" = (
 /turf/closed/mineral,
-/area/rogue/under/cave)
-"qO" = (
-/obj/structure/door/weak/bolt,
+/area/under/cave)
+"qM" = (
+/obj/structure/closet/crate/chest/neu,
 /turf/open/floor/wood/nosmooth/saiga,
-/area/rogue/indoors)
+/area/indoors)
 "qR" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "rz" = (
 /turf/open/water/swamp,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "rA" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Bog - west"
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"rJ" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/herringbone,
+/area/indoors)
 "rU" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "rX" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "si" = (
 /obj/structure/hotspring/border/twelve,
 /obj/effect/lily_petal/three,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "sn" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/turned,
-/area/rogue/indoors)
+/area/indoors)
 "sB" = (
 /obj/structure/hotspring/border/eleven,
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"sD" = (
+/obj/item/fertilizer/ash{
+	pixel_x = -5;
+	pixel_y = -5
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/woods)
 "sF" = (
 /obj/structure/hotspring/border/four,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "sL" = (
 /obj/structure/table/wood/treestump,
 /obj/item/candle/skull/lit{
 	pixel_y = 6
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"sM" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "sO" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "sT" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "sY" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Bog - south"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "tk" = (
 /turf/open/floor/wood/nosmooth/saiga,
-/area/rogue/indoors)
+/area/indoors)
 "tm" = (
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "to" = (
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/lily_petal/three,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
-"tu" = (
-/obj/structure/door/weak/bolt{
-	dir = 1
-	},
-/turf/open/floor/wood/nosmooth/saiga,
-/area/rogue/indoors)
+/area/outdoors/woods)
 "ty" = (
 /obj/structure/flora/grass/herb/urtica,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"tB" = (
+/obj/machinery/light/fueled/campfire/longlived,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "tF" = (
 /mob/living/simple_animal/hostile/retaliate/fae/dryad,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "tU" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "tW" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "tZ" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"ub" = (
+/obj/effect/landmark/start/adventurerlate,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "uc" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ud" = (
 /obj/structure/fluff/sellsign{
 	name = "STAY OUT"
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "uh" = (
 /obj/structure/flora/grass/bush/tundra,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "uy" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "uK" = (
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
 "uM" = (
 /obj/structure/flora/tree,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "uO" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "uP" = (
 /obj/structure/flora/hotspring_rocks,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "uY" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"vg" = (
+/obj/effect/decal/cleanable/debris/glass,
+/turf/open/floor/blocks,
+/area/indoors)
 "vn" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "vu" = (
 /obj/structure/hotspring/border/nine,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "vz" = (
 /turf/open/transparent/openspace,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "vE" = (
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "vY" = (
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "wa" = (
 /turf/open/transparent/openspace,
-/area/rogue/indoors)
+/area/indoors)
+"wg" = (
+/obj/effect/decal/cleanable/blood/splatter{
+	icon_state = "gibbl3"
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "wq" = (
 /turf/open/floor/dirt,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
 "wu" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Rosewood - west"
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "wv" = (
 /obj/structure/table/wood/plain,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/turned,
-/area/rogue/indoors)
+/area/indoors)
 "wH" = (
 /obj/structure/hotspring,
 /obj/effect/falling_sakura,
 /obj/effect/lily_petal,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "wX" = (
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "xe" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "xl" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "xn" = (
 /obj/item/natural/rock{
 	pixel_x = -14;
 	pixel_y = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "xp" = (
 /obj/structure/fluff/traveltile/bandit,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "xr" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "xx" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
-"xy" = (
-/obj/machinery/light/fueled/torchholder/r,
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/turf/open/floor/woodturned/nosmooth/saiga,
-/area/rogue/indoors)
+/area/outdoors/woods)
 "xF" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
-"xW" = (
-/obj/machinery/light/fueled/torchholder/r,
-/obj/structure/fluff/railing/border{
-	dir = 10
-	},
-/turf/open/floor/woodturned/nosmooth/saiga,
-/area/rogue/indoors)
+/area/outdoors/woods)
 "yb" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "yc" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "yf" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
-"yg" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
-	},
-/obj/structure/chair/stool,
-/turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "yp" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "yr" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "rosewood-forest-bog_cave";
 	aportalid = "rosewood-bog_cave-forest"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/under/cave)
+/area/under/cave)
 "yz" = (
 /turf/open/floor/woodturned/nosmooth/saiga,
-/area/rogue/indoors)
+/area/indoors)
 "yQ" = (
 /turf/open/floor/rooftop{
 	dir = 4
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "yT" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "yU" = (
 /obj/item/natural/rock{
 	pixel_x = 6;
 	pixel_y = -6
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "yY" = (
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zd" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zg" = (
 /obj/structure/hotspring/border/eleven,
 /obj/effect/lily_petal/two,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zh" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
 "zj" = (
 /obj/effect/falling_sakura,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zk" = (
 /obj/structure/flora/hotspring_rocks/grassy,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zt" = (
 /turf/open/water/river{
 	dir = 1
 	},
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zv" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zw" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zx" = (
 /turf/open/water,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zA" = (
 /turf/closed/basic,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zE" = (
 /obj/structure/wild_plant/nospread/poppy,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zL" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zO" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zQ" = (
 /obj/structure/fluff/signage{
 	name = "Rosewood - North";
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zS" = (
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zT" = (
 /turf/open/water/river{
 	dir = 8
 	},
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "zZ" = (
 /obj/structure/flora/grass/herb/urtica,
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ac" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/woodturned/nosmooth/saiga,
-/area/rogue/indoors)
-"Ag" = (
-/obj/effect/landmark/start/adventurerlate,
-/turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/indoors)
+"Aj" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 6
+	},
+/turf/open/floor/woodturned/nosmooth/saiga,
+/area/indoors)
 "Am" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"Ax" = (
+/obj/structure/chair/stool,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "Ay" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/fishingrod,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"AF" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/transparent/openspace,
+/area/indoors)
 "AN" = (
 /obj/structure/flora/hotspring_rocks/small/five,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "AO" = (
 /obj/structure/flora/newtree/snow,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "AS" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/knife/villager{
@@ -1240,153 +1316,174 @@
 	pixel_y = -4
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
+"Bl" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 8
+	},
+/turf/open/floor/grass/cold,
+/area/indoors)
 "Bp" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Bq" = (
 /obj/structure/roguerock,
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "Bv" = (
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
-"BC" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "BD" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/rogue/indoors)
+/area/indoors)
 "BE" = (
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
-"BI" = (
-/obj/effect/landmark/start/adventurerlate,
-/turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "BO" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
+"BU" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/herringbone,
+/area/indoors)
 "Ci" = (
 /obj/structure/flora/hotspring_rocks/small/five,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"Ck" = (
+/obj/effect/mob_spawn/human/corpse,
+/turf/open/floor/snow,
+/area/outdoors/woods)
 "Cp" = (
 /obj/structure/hotspring/border/two,
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Cv" = (
 /turf/closed/wall/mineral/stone/window,
-/area/rogue/indoors)
+/area/indoors)
 "CK" = (
 /obj/structure/hotspring/border/eight,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "CN" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "CV" = (
 /turf/open/floor/cobblerock,
-/area/rogue/under/cave)
+/area/under/cave)
 "Db" = (
 /obj/structure/flora/hotspring_rocks/small,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Do" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Rosewood - West"
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Du" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/wood/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
+"Dw" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/floor/woodturned/nosmooth/saiga,
+/area/indoors)
 "DF" = (
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "DG" = (
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"DN" = (
+/obj/effect/decal/cleanable/ash,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods)
 "DT" = (
 /obj/structure/flora/hotspring_rocks/small,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "DU" = (
 /obj/structure/flora/grass/herb/urtica,
 /mob/living/simple_animal/hostile/retaliate/fae/glimmerwing,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ei" = (
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Rosewood - west"
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "En" = (
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ev" = (
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/lily_petal/three,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ez" = (
 /obj/structure/flora/grass/herb/urtica,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "EA" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/metal,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "ED" = (
 /turf/open/floor/snow,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "EL" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "rosewood-town-forest";
 	aportalid = "rosewood-forest-town"
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ER" = (
 /obj/effect/falling_sakura,
 /obj/effect/falling_sakura,
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
+"Fm" = (
+/obj/effect/landmark/start/adventurerlate{
+	dir = 8
+	},
+/obj/structure/table/wood/treestump,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "Fp" = (
 /turf/open/floor/blocks,
-/area/rogue/indoors)
+/area/indoors)
 "FG" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "FH" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -1395,22 +1492,22 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "FK" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
 "FL" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "FM" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "FT" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "FW" = (
 /obj/structure/fluff/statue/astrata/bling{
 	pixel_x = -17;
@@ -1419,39 +1516,59 @@
 	desc = "Blinged out Noc Here"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"Gh" = (
+/obj/effect/decal/cleanable/debris/glass,
+/turf/open/floor/grass/cold,
+/area/indoors)
 "Gj" = (
 /turf/open/floor/rooftop{
 	dir = 8
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Gk" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"GC" = (
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/woodturned/nosmooth/saiga,
+/area/indoors)
 "GK" = (
 /obj/item/natural/rock{
 	pixel_x = -9;
 	pixel_y = 15
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "GL" = (
 /obj/effect/spawner/map_spawner/loot/common,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "GO" = (
 /turf/closed/mineral,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"GP" = (
+/obj/item/natural/stoneblock{
+	pixel_x = 11;
+	pixel_y = 20
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "GQ" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "GU" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
+"Hi" = (
+/obj/item/natural/stoneblock,
+/turf/open/floor/grass/cold,
+/area/indoors)
 "Hk" = (
 /obj/structure/hotspring/border/eight,
 /obj/machinery/light/fueled/torchholder/hotspring{
@@ -1459,182 +1576,182 @@
 	pixel_y = 8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Hq" = (
 /obj/structure/flora/hotspring_rocks,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Hr" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Hs" = (
 /turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/indoors)
+"Hu" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 5
+	},
+/turf/open/floor/woodturned/nosmooth/saiga,
+/area/indoors)
 "Hy" = (
 /mob/living/simple_animal/hostile/retaliate/fae/glimmerwing,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Hz" = (
 /obj/effect/falling_sakura,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "HH" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "In" = (
 /obj/structure/hotspring/border/seven,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "IE" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/turned,
-/area/rogue/indoors)
+/area/indoors)
 "IQ" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "IU" = (
 /obj/effect/spawner/map_spawner/loot/common,
 /obj/item/clothing/neck/mana_star,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "IW" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 1
 	},
 /turf/open/floor/blocks,
-/area/rogue/indoors)
+/area/indoors)
 "IX" = (
 /turf/open/floor/rooftop,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "IZ" = (
 /turf/open/water/cleanshallow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ji" = (
 /turf/open/floor/cobble,
-/area/rogue/under/cave)
+/area/under/cave)
 "Jp" = (
 /mob/living/simple_animal/hostile/retaliate/fae/glimmerwing,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Jr" = (
 /turf/open/water/river{
 	dir = 4
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Jx" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/indoors)
+/area/indoors)
 "Jy" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
 "JI" = (
 /turf/open/floor/hexstone,
-/area/rogue/indoors)
+/area/indoors)
 "JK" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "JU" = (
 /turf/closed/mineral/random/med,
-/area/rogue/under/cave)
+/area/under/cave)
 "JY" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/metal,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Ka" = (
 /turf/open/floor/grass/cold,
-/area/rogue/under/cave)
+/area/under/cave)
 "Kc" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "Ko" = (
 /turf/closed/mineral,
-/area/rogue/indoors/cave)
-"Ku" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/turf/open/floor/woodturned/nosmooth/saiga,
-/area/rogue/indoors)
+/area/indoors/cave)
 "Kv" = (
 /obj/effect/falling_sakura,
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "KC" = (
 /turf/open/water/river{
 	dir = 4
 	},
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "KJ" = (
 /obj/structure/hotspring/border/six,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "KK" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "KV" = (
 /obj/effect/falling_sakura,
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "KX" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Le" = (
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Lg" = (
 /obj/structure/fluff/signage{
 	name = "Rosewood - North West";
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "LJ" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "LP" = (
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "LS" = (
 /obj/structure/hotspring/border,
 /obj/item/clothing/head/crown/circlet/sleepless,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "LT" = (
 /turf/open/water/swamp,
-/area/rogue/under/cave)
+/area/under/cave)
 "LX" = (
 /obj/structure/bed,
 /obj/item/weapon/shovel/small,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Mb" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -1643,57 +1760,63 @@
 	dir = 4
 	},
 /turf/open/floor/metal,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Mk" = (
 /obj/structure/stairs/stone{
 	dir = 4;
 	icon_state = "stonestairs"
 	},
 /turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/indoors)
 "Mo" = (
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Mu" = (
 /obj/item/candle/yellow/lit/infinite/strong/skull,
 /turf/open/water/blood,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "Mv" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "MD" = (
 /obj/structure/rack,
 /turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/indoors)
 "MI" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"MK" = (
+/obj/effect/landmark/start/adventurerlate{
+	dir = 4
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "MN" = (
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "MT" = (
 /obj/structure/flora/grass/herb/urtica,
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Na" = (
 /obj/structure/hotspring/border/eleven,
 /obj/structure/flora/hotspring_rocks/small/two,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Nc" = (
 /obj/structure/closet/dirthole/closed,
 /obj/structure/gravemarker,
 /turf/open/floor/dirt/road,
-/area/rogue/under/cave)
+/area/under/cave)
 "Ng" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = 0;
@@ -1716,22 +1839,28 @@
 	pixel_y = -7
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Nh" = (
 /obj/item/candle/yellow/lit/infinite/strong/skull,
 /turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
+"NC" = (
+/obj/effect/decal/cleanable/blood/splatter{
+	icon_state = "gibbl3"
+	},
+/turf/open/floor/grass/cold,
+/area/indoors)
 "NH" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "NJ" = (
 /obj/structure/rack/shelf/big,
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
 "NL" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "NO" = (
 /obj/effect/waterfall{
 	pixel_y = 0
@@ -1739,62 +1868,70 @@
 /turf/open/water/river{
 	dir = 1
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "NU" = (
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "NW" = (
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Od" = (
 /turf/closed/wall/mineral/decostone/cand,
-/area/rogue/under/cave)
+/area/under/cave)
+"Oi" = (
+/obj/structure/bed/sleepingbag,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "Oo" = (
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Os" = (
 /obj/structure/rack,
 /obj/item/grown/log/tree/stick,
 /obj/item/grown/log/tree/stick,
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
+"Ow" = (
+/obj/effect/decal/cleanable/debris/glass,
+/turf/open/floor/herringbone,
+/area/indoors)
 "OH" = (
 /obj/structure/flora/sakura{
 	name = "manabloom tree";
-	desc = "This totally isnt pink...";
+	desc = "This totally isn't pink...";
 	icon_state = "manabloomtree";
 	icon = 'icons/obj/structures/manabloomtree.dmi';
 	pixel_x = -39;
 	pixel_y = 0
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "OI" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "OT" = (
 /turf/closed/mineral/random/high,
-/area/rogue/under/cave)
+/area/under/cave)
 "OY" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
 "Pd" = (
 /obj/structure/fluff/signage{
 	name = "Rosewood - North West";
 	dir = 4
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Pf" = (
 /obj/structure/hotspring/border/five,
 /obj/structure/flora/hotspring_rocks/small/four,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ph" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = -1;
@@ -1817,181 +1954,195 @@
 	pixel_y = 6
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Pn" = (
 /obj/structure/hotspring/border/nine,
 /obj/structure/flora/hotspring_rocks/small/two,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Pp" = (
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "PG" = (
 /obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "PJ" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "PS" = (
 /obj/structure/stairs/stone{
 	dir = 1;
 	icon_state = "stonestairs"
 	},
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Qb" = (
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Qe" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Qk" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/cave)
+/area/under/cave)
 "Qo" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Qt" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Qy" = (
 /obj/structure/table/wood/treestump,
 /obj/item/candle/skull/lit{
 	pixel_y = 6
 	},
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"Qz" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 10
+	},
+/turf/open/floor/herringbone,
+/area/indoors)
 "QF" = (
 /obj/structure/hotspring,
 /obj/effect/falling_sakura,
 /obj/structure/flora/hotspring_rocks/grassy,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "QJ" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "QO" = (
 /obj/item/natural/rock/random,
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
+"QP" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/wood/nosmooth/saiga,
+/area/indoors)
 "QT" = (
 /turf/open/water/river{
 	dir = 1
 	},
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "QU" = (
 /turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "Rc" = (
 /obj/structure/flora/newtree/snow,
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Rd" = (
 /obj/structure/flora/tree,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ri" = (
 /obj/structure/rack,
 /obj/item/weapon/shovel/small,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
 "Rj" = (
 /obj/item/reagent_containers/glass/bucket/wooden/alter{
 	pixel_x = 5;
 	pixel_y = -5
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Rv" = (
 /obj/structure/door/weak/bolt{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors)
+/area/indoors)
 "Rz" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "RB" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/metal,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "RE" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"RG" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/herringbone,
+/area/indoors)
 "RH" = (
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "RL" = (
 /obj/structure/toilet,
 /turf/open/floor/dirt/road,
-/area/rogue/indoors)
+/area/indoors)
 "Sb" = (
 /turf/open/floor/grass,
-/area/rogue/under/cave)
+/area/under/cave)
 "Sm" = (
 /obj/structure/hotspring/border/three,
 /obj/item/recipe_book/carpentry,
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Sr" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/cave)
+/area/under/cave)
 "Sw" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/herringbone,
-/area/rogue/indoors)
+/area/indoors)
 "SB" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "SC" = (
 /obj/structure/fluff/traveltile/vampire,
 /turf/open/floor/naturalstone,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "SG" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "SK" = (
 /turf/open/floor/cobble/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "SM" = (
 /obj/structure/window/openclose{
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors)
+/area/indoors)
 "ST" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /turf/open/floor/dirt/road,
-/area/rogue/indoors)
+/area/indoors)
 "SV" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/kitchen/spoon,
@@ -1999,33 +2150,37 @@
 	pixel_x = -6
 	},
 /turf/open/floor/cobble,
-/area/rogue/indoors)
+/area/indoors)
 "SX" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"Ta" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/herringbone,
+/area/indoors)
 "Tb" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/indoors/cave)
+/area/indoors/cave)
 "Tr" = (
 /obj/structure/hotspring/border,
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Tz" = (
 /obj/item/book/fishing,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
-"TP" = (
-/obj/structure/chair/stool,
-/turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"TY" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/woodturned/nosmooth/saiga,
+/area/indoors)
 "Ud" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Uq" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -2033,76 +2188,86 @@
 	},
 /obj/item/natural/worms{
 	name = "A Fishy Worm";
-	desc = "Something about this worm seems... fishy? perhaps its not what it seems."
+	desc = "Something about this worm seems... fishy? Perhaps it's not what it seems."
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ur" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Us" = (
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "UJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "UO" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "UQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"UZ" = (
+/turf/open/floor/cobble/alt,
+/area/outdoors/woods)
 "Vf" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Vj" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/rogue/outdoors/mountains)
+/area/outdoors/mountains)
 "Vu" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/ruinedwood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
+"Vy" = (
+/obj/item/fertilizer/ash{
+	pixel_x = 6;
+	pixel_y = -1
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "VA" = (
 /turf/closed/wall/mineral/craftstone,
-/area/rogue/indoors)
+/area/indoors)
 "VF" = (
 /turf/open/transparent/openspace,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"VI" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 5
+	},
+/turf/open/floor/herringbone,
+/area/indoors)
 "VL" = (
 /turf/open/floor/snow/patchy,
-/area/rogue/under/cave)
+/area/under/cave)
 "VR" = (
 /turf/open/floor/blocks,
-/area/rogue/outdoors/mountains)
-"Wc" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
-	},
-/turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/mountains)
 "Wq" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Wr" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/cave)
+/area/under/cave)
 "Wv" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -2111,83 +2276,85 @@
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "WJ" = (
 /obj/effect/falling_sakura,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "WQ" = (
 /obj/structure/flora/hotspring_rocks,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "WT" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Xb" = (
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
-"Xd" = (
-/obj/structure/fluff/railing/tall/palisade,
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 8
-	},
-/turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Xg" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Xr" = (
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Xw" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/indoors)
+/area/indoors)
+"XG" = (
+/obj/structure/rack/shelf{
+	pixel_y = 0;
+	pixel_x = 32
+	},
+/obj/item/reagent_containers/food/snacks/tallow/red{
+	pixel_x = 24;
+	pixel_y = 9
+	},
+/obj/item/natural/stoneblock{
+	pixel_x = -8;
+	pixel_y = 11
+	},
+/turf/open/floor/herringbone,
+/area/indoors)
 "XH" = (
 /obj/structure/fluff/signage{
 	name = "Rosewood - north"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "XI" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "XL" = (
 /obj/structure/flora/grass/herb/urtica,
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "XZ" = (
 /obj/structure/hotspring/border/six,
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Yd" = (
 /turf/closed/wall/mineral/decostone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ys" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/outdoors/mountains)
-"Yy" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/mountains)
 "YF" = (
 /obj/structure/hotspring/border/ten,
 /obj/machinery/light/fueled/torchholder/hotspring{
@@ -2195,83 +2362,96 @@
 	pixel_y = -13
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "YK" = (
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "YO" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
+"YQ" = (
+/obj/structure/fermentation_keg/water{
+	pixel_y = 8;
+	pixel_x = -7
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/grass/cold,
+/area/indoors)
 "YW" = (
 /obj/structure/stairs/stone{
 	dir = 4;
 	icon_state = "stonestairs"
 	},
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "YX" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "YZ" = (
 /obj/effect/falling_sakura,
 /turf/closed/wall/mineral/decowood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
 "Za" = (
 /mob/living/simple_animal/hostile/retaliate/fae/dryad,
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/snow/patchy,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Zb" = (
 /turf/open/floor/cobble,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Zc" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing,
 /turf/open/floor/snow/rough,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Ze" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Zj" = (
 /obj/structure/door/weak/bolt,
 /turf/open/floor/wood/nosmooth,
-/area/rogue/indoors)
+/area/indoors)
+"Zm" = (
+/obj/effect/landmark/start/adventurerlate,
+/obj/structure/chair/stool,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods)
 "Zp" = (
 /obj/effect/lily_petal,
 /obj/effect/falling_sakura,
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "Zv" = (
 /turf/closed/wall/mineral/decowood,
-/area/rogue/indoors/shelter/woods)
+/area/indoors/shelter/woods)
 "Zw" = (
 /obj/structure/fluff/signage{
 	name = "Rosewood - north"
 	},
 /turf/open/floor/snow,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ZC" = (
 /turf/closed/wall/mineral/decostone,
-/area/rogue/under/cave)
+/area/under/cave)
 "ZH" = (
 /obj/structure/hotspring/border/twelve,
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ZS" = (
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 "ZY" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/cold,
-/area/rogue/outdoors/woods)
+/area/outdoors/woods)
 
 (1,1,1) = {"
 zA
@@ -29887,7 +30067,7 @@ DG
 oS
 qH
 qH
-yg
+lG
 DG
 DG
 DG
@@ -32084,7 +32264,7 @@ DG
 DG
 DG
 DG
-zL
+GQ
 DG
 DG
 zL
@@ -33289,12 +33469,12 @@ Le
 DG
 GQ
 DG
-GQ
-GQ
-XI
-XI
-XI
-XI
+DG
+DG
+jV
+jV
+jV
+jV
 DG
 GQ
 GQ
@@ -33486,17 +33666,17 @@ Zb
 dA
 DG
 jV
-jV
+Ck
 Le
 DG
 DG
 DG
 DG
 DG
-GQ
-GQ
 DG
-GQ
+DG
+DG
+DG
 DG
 DG
 DG
@@ -33696,16 +33876,16 @@ DG
 DG
 DG
 DG
-DG
-DG
-DG
+NH
+NH
+NH
 DG
 DG
 DG
 DG
 NH
-GQ
-GQ
+DG
+DG
 GQ
 DG
 DG
@@ -33895,19 +34075,19 @@ jV
 jV
 jV
 DG
-GQ
+dA
+NH
 DG
+NH
+Qb
 DG
-DG
-DG
-uO
 Le
 Le
 DG
 DG
 DG
-GQ
-GQ
+DG
+DG
 DG
 GQ
 DG
@@ -34098,17 +34278,17 @@ jV
 jV
 jV
 DG
+NH
+NH
+Qb
 DG
-DG
-DG
-uO
-Le
-DG
-Le
-DG
-uO
-jV
-jV
+NH
+dA
+NH
+NH
+dA
+dA
+NH
 jV
 jV
 Le
@@ -34298,19 +34478,19 @@ dW
 CN
 DG
 CN
-jV
-jV
-Le
+NH
 DG
-Le
-Le
-Le
-uO
-Le
-Le
-Le
-jV
-jV
+hr
+NH
+dA
+Qb
+kw
+NH
+DG
+DG
+DN
+hr
+Qb
 jV
 jV
 jV
@@ -34500,19 +34680,19 @@ DG
 DG
 DG
 DG
+NH
 DG
-jV
-Le
-Le
-Le
-jV
-Le
-Le
-Le
-Le
-jV
-jV
-jV
+dA
+DG
+sD
+DG
+NH
+CN
+DG
+DG
+DG
+DG
+Qb
 jV
 jV
 jV
@@ -34703,20 +34883,20 @@ jV
 DG
 DG
 DG
-dW
-jV
+CN
+hJ
+DG
+DG
+DG
+DG
+dA
+Qb
 jV
 DG
-jV
-jV
-jV
-jV
-jV
-jV
 DG
+NH
 jV
 jV
-XI
 jV
 XI
 jV
@@ -34901,22 +35081,22 @@ FL
 jV
 jV
 Le
-jV
-jV
-jV
-jV
 DG
-dW
 DG
-CN
-CN
+NH
+DG
 DG
 DG
 DG
 CN
+CN
 DG
 DG
+NH
+Qb
 DG
+mL
+Qb
 DG
 jV
 jV
@@ -35102,19 +35282,19 @@ DG
 DG
 jV
 jV
+DG
+DG
 Le
-Le
-Le
-Le
-jV
-jV
-jV
+DG
+NH
+DG
 jV
 DG
 DG
-SK
-SK
-dW
+DG
+UZ
+NH
+NH
 dW
 DG
 CN
@@ -35303,22 +35483,22 @@ DG
 dA
 jV
 jV
-jV
+DG
 Le
 Le
 Le
-Le
-jV
-jV
-jV
-jV
-jV
-jV
+NH
+NH
+NH
+Vy
+dA
+dA
 DG
-SK
+NH
 DG
-DG
-DG
+CN
+CN
+dA
 SK
 SK
 DG
@@ -35507,20 +35687,20 @@ jV
 jV
 Le
 Le
-DG
+Le
 DG
 Le
-Le
-jV
+NH
+NH
 DG
-jV
-jV
+dA
+dA
+dA
 DG
-jV
-jV
-jV
-jV
-jV
+DG
+UZ
+dA
+dA
 jV
 jV
 jV
@@ -35713,16 +35893,16 @@ DG
 DG
 DG
 DG
-Le
+gU
 jV
-jV
-DG
-jV
-jV
-Le
-Le
+dA
 jV
 DG
+dA
+dA
+DG
+NH
+NH
 DG
 jV
 jV
@@ -35912,17 +36092,17 @@ Wv
 Qo
 Qo
 DG
-DG
-DG
-DG
-DG
-DG
-DG
-jV
-ej
-ej
-Xd
 Le
+DG
+DG
+DG
+DG
+DG
+DG
+DG
+DG
+DG
+dA
 Le
 Le
 jV
@@ -36121,10 +36301,10 @@ DG
 DG
 DG
 DG
-DG
-DG
-rX
-DG
+jV
+jV
+jV
+dA
 Le
 Le
 Le
@@ -36318,14 +36498,14 @@ DG
 DG
 Fp
 BD
-oN
-oN
+yz
+dE
 BD
 BD
 DG
 DG
 DG
-rX
+DG
 DG
 DG
 Le
@@ -36521,10 +36701,10 @@ DG
 Fp
 yz
 yz
+Hi
 yz
-yz
-Fp
-DG
+hV
+GP
 DG
 DG
 DG
@@ -36721,11 +36901,11 @@ DG
 BD
 BD
 BD
-yz
-yz
-yz
-yz
-Fp
+mS
+Gh
+NC
+lO
+fs
 Fp
 BD
 DG
@@ -36921,14 +37101,14 @@ QJ
 DG
 DG
 BD
+lO
 tk
+Ow
+pl
+BU
+XG
 tk
-lo
-Hs
-Hs
-lo
-tk
-tk
+mG
 BD
 DG
 DG
@@ -37124,13 +37304,13 @@ DG
 DG
 Cv
 tk
-tk
+lU
 BD
 BD
 BD
 BD
-tk
-tk
+QP
+lO
 Cv
 DG
 DG
@@ -37327,12 +37507,12 @@ DG
 Fp
 tk
 tk
-mW
+Hs
 BD
 BD
-mW
-tk
-tk
+YQ
+lU
+ch
 BD
 DG
 DG
@@ -37532,7 +37712,7 @@ BD
 yz
 Sw
 Sw
-yz
+Bl
 BD
 BD
 BD
@@ -37732,9 +37912,9 @@ DG
 DG
 BD
 yz
-yz
-yz
-yz
+lO
+Hu
+Aj
 Fp
 DG
 DG
@@ -37939,11 +38119,11 @@ Cv
 BD
 BD
 DG
-DG
+wg
 DG
 rX
 DG
-DG
+wg
 DG
 jV
 DG
@@ -38750,7 +38930,7 @@ DG
 DG
 DG
 DG
-DG
+nc
 DG
 GQ
 XI
@@ -38951,7 +39131,7 @@ DG
 GQ
 DG
 DG
-DG
+wg
 GQ
 GQ
 DG
@@ -39559,7 +39739,7 @@ DG
 DG
 DG
 DG
-DG
+nc
 GQ
 DG
 GQ
@@ -40129,7 +40309,7 @@ Le
 jV
 jV
 jV
-Wc
+dA
 NH
 dA
 dA
@@ -40530,9 +40710,9 @@ DG
 XI
 XI
 XI
-Ag
 dA
-oB
+dA
+dA
 NH
 NH
 NH
@@ -40570,7 +40750,7 @@ DG
 NH
 NH
 NH
-DG
+wg
 DG
 DG
 DG
@@ -40603,7 +40783,7 @@ DG
 dA
 dA
 DG
-gT
+Le
 uO
 jV
 DG
@@ -40737,7 +40917,7 @@ NH
 NH
 NH
 NH
-pU
+DG
 GQ
 XI
 jV
@@ -40801,9 +40981,9 @@ Le
 jV
 XI
 DG
-BI
 DG
-TP
+DG
+dA
 dA
 DG
 Le
@@ -40933,7 +41113,7 @@ DG
 DG
 XI
 jV
-gK
+jV
 NH
 NH
 NH
@@ -41006,10 +41186,10 @@ dA
 DG
 dA
 dA
-oB
-TP
+dA
+dA
 jV
-Yy
+jV
 jV
 DG
 DG
@@ -41138,8 +41318,8 @@ jV
 Le
 Le
 zL
-ez
-cO
+DG
+DG
 jV
 XI
 jV
@@ -41206,9 +41386,9 @@ uO
 jV
 GQ
 dA
-BC
 dA
-lG
+dA
+DG
 jV
 jV
 XI
@@ -41376,7 +41556,7 @@ Ko
 Ko
 Ko
 DG
-DG
+sM
 NH
 NH
 DG
@@ -41575,8 +41755,8 @@ Ko
 Ko
 Ko
 Ko
-Ko
-Ko
+Wr
+Wr
 DG
 DG
 DG
@@ -41777,9 +41957,9 @@ Ko
 Ko
 Ko
 Ko
-Ko
-Ko
-Ko
+Wr
+fZ
+Wr
 DG
 DG
 DG
@@ -41979,8 +42159,8 @@ Ko
 Ko
 Ko
 Ko
-Ko
-Ko
+Oi
+Wr
 Ko
 Ko
 Ko
@@ -58210,7 +58390,7 @@ Sr
 Sr
 Sr
 Wr
-Wr
+MK
 Wr
 jE
 jE
@@ -58613,9 +58793,9 @@ Sr
 Wr
 Wr
 Wr
+fX
 Wr
-Wr
-Wr
+lF
 Sr
 Sr
 Sr
@@ -58813,7 +58993,7 @@ Wr
 Wr
 Wr
 Wr
-Wr
+ub
 Wr
 Wr
 Wr
@@ -59015,8 +59195,8 @@ Wr
 Wr
 Wr
 Wr
-Wr
-DG
+Ax
+cO
 DG
 DG
 Wr
@@ -63041,7 +63221,7 @@ DG
 DG
 DG
 DG
-DG
+py
 DG
 jV
 jV
@@ -63245,7 +63425,7 @@ DG
 DG
 DG
 DG
-DG
+ez
 DG
 jV
 jV
@@ -63441,10 +63621,10 @@ jV
 jV
 DG
 DG
+ez
 DG
 DG
-DG
-DG
+lG
 DG
 DG
 DG
@@ -63643,7 +63823,7 @@ jV
 jV
 jV
 DG
-DG
+Zm
 DG
 DG
 DG
@@ -63849,11 +64029,11 @@ DG
 DG
 DG
 DG
+tB
 DG
 DG
 DG
-DG
-DG
+pU
 DG
 qH
 qH
@@ -64053,7 +64233,7 @@ DG
 DG
 DG
 DG
-DG
+lG
 DG
 DG
 DG
@@ -64455,7 +64635,7 @@ jV
 jV
 jV
 DG
-DG
+Fm
 DG
 DG
 DG
@@ -76921,7 +77101,7 @@ pq
 oc
 Fp
 yz
-yz
+TY
 yz
 yz
 Fp
@@ -77124,8 +77304,8 @@ Fp
 Fp
 yz
 Mk
-Mk
 yz
+wa
 BD
 BD
 BD
@@ -77322,14 +77502,14 @@ ng
 ng
 EA
 BD
-cy
+qM
 BD
-iQ
+ey
 BD
 BD
-iQ
+wa
 BD
-cy
+tk
 BD
 RB
 ng
@@ -77523,16 +77703,16 @@ ng
 ng
 ng
 EA
-qO
 tk
 tk
-Hs
-Hs
-Hs
-Hs
+wa
+VI
+Ta
+Qz
+Ow
+ba
 tk
 tk
-tu
 RB
 ng
 ng
@@ -77930,7 +78110,7 @@ ng
 BD
 BD
 BD
-ko
+GC
 wa
 wa
 Ac
@@ -78132,10 +78312,10 @@ ng
 ng
 oc
 Fp
-xW
-Ku
-Ku
-xy
+gc
+wa
+AF
+Dw
 BD
 ng
 PJ
@@ -117725,10 +117905,10 @@ ng
 VR
 BD
 BD
-mW
+Ow
 Mk
 Mk
-mW
+rJ
 BD
 BD
 VR
@@ -117927,10 +118107,10 @@ ng
 VR
 jI
 pk
-Hs
-Hs
-Hs
-Hs
+RG
+mT
+RG
+RG
 pk
 IW
 VR
@@ -118130,7 +118310,7 @@ VR
 BD
 BD
 MD
-Hs
+rJ
 Hs
 MD
 BD
@@ -118332,7 +118512,7 @@ VR
 VR
 BD
 BD
-pk
+Hs
 pk
 BD
 BD
@@ -118535,7 +118715,7 @@ ng
 VR
 BD
 wa
-bC
+vg
 BD
 VR
 ng

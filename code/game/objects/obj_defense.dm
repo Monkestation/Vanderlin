@@ -43,7 +43,7 @@
 
 /obj/bullet_act(obj/projectile/P, def_zone, piercing_hit = FALSE)
 	. = ..()
-	playsound(src.loc, P.hitsound, 50, TRUE)
+	playsound(src, P.hitsound, 50, TRUE)
 	visible_message("<span class='danger'>[src] is hit by \a [P]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 	if(!QDELETED(src)) //Bullet on_hit effect might have already destroyed this object
 		take_damage(P.damage, P.damage_type, P.flag, 0, turn(P.dir, 180), P.armor_penetration)
@@ -95,7 +95,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = TRUE
 	if(!(resistance_flags & ACID_PROOF))
 		if(prob(33))
-			playsound(loc, 'sound/blank.ogg', 150, TRUE)
+			playsound(src, 'sound/blank.ogg', 150, TRUE)
 		take_damage(min(1 + round(sqrt(acid_level)*0.3), 300), BURN, "acid", 0)
 
 	acid_level = max(acid_level - (5 + 3*round(sqrt(acid_level))), 0)
@@ -117,8 +117,20 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/turf/T = loc
 		if(T.intact && level == 1) //fire can't damage things hidden below the floor.
 			return
-	if(added && !(resistance_flags & FIRE_PROOF))
+
+	var/is_wet = FALSE
+
+	if(istype(src, /obj/item/clothing))
+		var/obj/item/clothing/cloth = src
+		if(cloth.wet)
+			var/dry_amount = round(added / 5)
+			cloth.wet.use_water(dry_amount)
+
+			if(cloth.wet.water_stacks < 0)
+				is_wet = TRUE   // supress the damage while it still wet
+	if(!is_wet && added && !(resistance_flags & FIRE_PROOF))
 		take_damage(CLAMP(0.02 * added, 0, 20), BURN, "fire", 0)
+
 	if(!(resistance_flags & ON_FIRE) && (resistance_flags & FLAMMABLE) && !(resistance_flags & FIRE_PROOF))
 		resistance_flags |= ON_FIRE
 		SSfire_burning.processing[src] = src
@@ -131,8 +143,8 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(resistance_flags & ON_FIRE)
 		SSfire_burning.processing -= src
 	for(var/mob/living/carbon/human/H in view(2, src))
-		if(H.has_flaw(/datum/charflaw/addiction/pyromaniac))
-			H.sate_addiction()
+		if(H.has_quirk(/datum/quirk/vice/pyromaniac))
+			H.sate_addiction(/datum/quirk/vice/pyromaniac)
 	deconstruct(FALSE)
 
 ///Called when the obj is no longer on fire.

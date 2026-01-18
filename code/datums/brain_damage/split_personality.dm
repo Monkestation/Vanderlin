@@ -161,7 +161,7 @@
 	desc = ""
 	scan_desc = ""
 	gain_text = ""
-	lose_text = "<span class='notice'>I are free of my brainwashing.</span>"
+	lose_text = "<span class='notice'>I am free of my brainwashing.</span>"
 	can_gain = FALSE
 	var/codeword
 	var/objective

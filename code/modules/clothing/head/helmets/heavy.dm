@@ -33,12 +33,14 @@
 	desc = "A barbute styled with Psydonian Imagery."
 	icon_state = "psydonbarbute"
 	item_state = "psydonbarbute"
+	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/helmet/heavy/psydonhelm
 	name ="grenzelhoftian armet"
 	desc = "Headwear commonly worn by Templars in service to the Oratorium Throni Vacui. PSYDON Endures."
 	icon_state = "psydonarmet"
 	item_state = "psydonarmet"
+	block2add = FOV_BEHIND
 
 //................ Iron Plate Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/ironplate
@@ -72,7 +74,7 @@
 //............... Great Helm ............... //
 /obj/item/clothing/head/helmet/heavy/bucket
 	name = "great helm"
-	desc = "An immovable bulkwark of protection for the head of the faithful. Antiquated and impractical, but offering incredible defense."
+	desc = "An immovable bulwark of protection for the head of the faithful. Antiquated and impractical, but offering incredible defense."
 	icon_state = "topfhelm"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 
@@ -94,6 +96,13 @@
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
 	max_integrity = INTEGRITY_STRONGEST // steel
 	body_parts_covered = HEAD_NECK
+	block2add = FOV_BEHIND
+
+/obj/item/clothing/head/helmet/heavy/ancient
+	name = "ancient savoyard"
+	desc = "A terrifying old savoyard."
+	icon_state = "ancientsavoyard"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_BEHIND
 
 //............... Frog Helmet ............... //
@@ -159,13 +168,14 @@
 
 //............... Graggar Helmet ............... //
 
-/obj/item/clothing/head/helmet/graggar
+/obj/item/clothing/head/helmet/heavy/graggar
 	name = "vicious helmet"
 	desc = "A rugged and horrifying helmet. A violent aura emanates from it."
 	icon_state = "graggarplatehelm"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	armor = ARMOR_PLATE
+	flags_cover = HEADCOVERSEYES
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 5 * STEEL_MULTIPLIER
 	block2add = FOV_BEHIND
@@ -196,7 +206,7 @@
 //............... Spangenhelm ............... //
 /obj/item/clothing/head/helmet/heavy/viking
 	name = "spangenhelm"
-	desc = "A steel helmet with built in eye and nose protection, commonly used by warriors of the north."
+	desc = "A steel helmet with built-in eye and nose protection, commonly used by warriors of the north."
 	icon_state = "Spangenhelm_item"
 	item_state = "Spangenhelm_worn"
 	icon = 'icons/roguetown/clothing/special/spangenhelm_item.dmi'
@@ -275,7 +285,7 @@
 
 /obj/item/clothing/head/helmet/heavy/necked/ravox
 	name = "ravoxian helmet"
-	desc = "Headwear commonly worn by Templars in service to Ravox. It resembles an heavily adorned visored sallet."
+	desc = "Headwear commonly worn by Templars in service to Ravox. It resembles a heavily-adorned visored sallet."
 	icon_state = "ravoxhelm"
 	item_state = "ravoxhelm"
 	item_weight = 6 * IRON_MULTIPLIER
@@ -483,6 +493,7 @@
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 350
 	var/plumed = FALSE
 
@@ -515,8 +526,8 @@
 	icon_state = "absolutionisthelm"
 	item_state = "absolutionisthelm"
 	emote_environment = 3
+	block2add = null
 	body_parts_covered = FULL_HEAD|NECK
-	block2add = FOV_RIGHT|FOV_LEFT
 	max_integrity = 450 // Worst vision. Yes.
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -532,6 +543,7 @@
 	item_state = "psybucket"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 400
 
 /obj/item/clothing/head/helmet/heavy/psysallet
@@ -541,4 +553,5 @@
 	item_state = "psysallet"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
 	max_integrity = 400

@@ -2,86 +2,86 @@
 "a" = (
 /obj/structure/stairs,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "c" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "d" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "g" = (
 /obj/structure/roguetent/preopen,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "h" = (
 /obj/structure/island_ascent,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "i" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "k" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "l" = (
 /mob/living/carbon/human/species/skeleton/npc,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "m" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "p" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "r" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "u" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "w" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "z" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "B" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/reagent_containers/glass/bottle/waterskin,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "H" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "I" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "M" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "N" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "R" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "T" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -96,14 +96,14 @@
 	pixel_y = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "W" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "X" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 u

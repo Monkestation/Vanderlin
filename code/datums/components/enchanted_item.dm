@@ -89,7 +89,7 @@
 
 	refresh_count--
 
-	to_chat(holder, span_nicegreen("A faint glow eminates from \the [parent], its enchantment is renewed!"))
+	to_chat(holder, span_nicegreen("A faint glow emanates from \the [parent], its enchantment is renewed!"))
 
 	decay_timer = addtimer(CALLBACK(src, PROC_REF(try_decay)), duration, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_OVERRIDE)
 

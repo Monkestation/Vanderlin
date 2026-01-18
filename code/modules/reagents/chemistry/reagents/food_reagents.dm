@@ -20,12 +20,13 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_nutrition(nutriment_factor * metabolization_rate)
-			H.adjust_hydration(hydration_factor * metabolization_rate)
+			var/actual_metabolized = min(volume, metabolization_rate)
+			H.adjust_nutrition(nutriment_factor * actual_metabolized)
+			H.adjust_hydration(hydration_factor * actual_metabolized)
 	return ..()
 
 /datum/reagent/consumable/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if (method == INGEST && ishuman(M))
+	if ((method & INGEST) && ishuman(M))
 		var/mob/living/carbon/human/HM = M
 
 		if(HM.culinary_preferences)
@@ -199,19 +200,19 @@
 		M.slurring = 1
 	switch(current_cycle)
 		if(1 to 5)
-			M.Dizzy(5)
+			M.set_dizzy(5)
 			M.set_drugginess(30)
 			if(prob(10))
 				M.emote(pick("twitch","giggle"))
 		if(5 to 10)
-			M.Jitter(10)
-			M.Dizzy(10)
+			M.adjust_jitter(10)
+			M.set_dizzy(10)
 			M.set_drugginess(35)
 			if(prob(20))
 				M.emote(pick("twitch","giggle"))
 		if (10 to INFINITY)
-			M.Jitter(20)
-			M.Dizzy(20)
+			M.adjust_jitter(20)
+			M.set_dizzy(20)
 			M.set_drugginess(40)
 			if(prob(30))
 				M.emote(pick("twitch","giggle"))
@@ -226,7 +227,7 @@
 
 /datum/reagent/consumable/honey
 	name = "Honey"
-	description = "Sweet sweet honey that decays into sugar. Has antibacterial and natural healing properties."
+	description = "Sweet, sweet honey that decays into sugar. Has antibacterial and natural healing properties."
 	color = "#d3a308"
 	nutriment_factor = 15 * REAGENTS_METABOLISM
 	metabolization_rate = 1 * REAGENTS_METABOLISM

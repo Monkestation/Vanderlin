@@ -91,15 +91,22 @@
 /atom/movable/screen/skills/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 
+	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
+		if(ishuman(usr))
+			var/mob/living/L = usr
+			var/datum/language_holder/H = L.get_language_holder()
+			H.open_language_menu(usr)
+			return
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		var/ht
 		var/mob/living/L = usr
 		to_chat(L, "*----*")
 		if(ishuman(usr))
 			var/mob/living/carbon/human/M = usr
-			if(M.charflaw)
-				to_chat(M, "<span class='info'>[M.charflaw.desc]</span>")
-				to_chat(M, "*----*")
+			for(var/datum/quirk/vice/vices in M.quirks)
+				to_chat(M, "<span class='info'>[vices.get_desc()]</span>")
+			to_chat(M, "*----*")
 			if(M.mind)
 				if(M.mind.language_holder)
 					if(!length(M.mind.language_holder.languages))
@@ -703,17 +710,14 @@
 	if(isliving(hud?.mymob))
 		var/mob/living/L = hud.mymob
 		if(L.eyesclosed)
-			L.eyesclosed = 0
-			L.cure_blind("eyelids")
-			update_appearance(UPDATE_ICON)
+			L.set_eyes_closed(FALSE)
 			return
 
 	if(LAZYACCESS(modifiers, LEFT_CLICK))
 		if(_y>=29 || _y<=4)
 			if(isliving(hud.mymob))
 				var/mob/living/L = hud.mymob
-				L.eyesclosed = 1
-				L.become_blind("eyelids")
+				L.set_eyes_closed(TRUE)
 		else
 			toggle(usr)
 
@@ -1535,9 +1539,9 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/M = usr
 		if(LAZYACCESS(modifiers, LEFT_CLICK))
-			if(M.charflaw)
-				to_chat(M, "*----*")
-				to_chat(M, span_info("[M.charflaw.desc]"))
+			to_chat(M, "*----*")
+			for(var/datum/quirk/vice/vices in M.quirks)
+				to_chat(M, span_info("[vices.get_desc()]"))
 			to_chat(M, "*--------*")
 			if(!length(M.stressors))
 				to_chat(M, span_info("I'm not feeling much of anything right now."))

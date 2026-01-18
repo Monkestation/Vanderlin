@@ -1,0 +1,1340 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bj" = (
+/turf/closed/wall/mineral/wooddark/window,
+/area/under/tomb/wilds)
+"bA" = (
+/obj/structure/table/wood/plain,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"bH" = (
+/turf/closed/wall/mineral/decostone/moss,
+/area/under/tomb/indoors/royal)
+"cK" = (
+/obj/structure/fluff/statue/pillar,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"df" = (
+/obj/structure/fermentation_keg/water,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"dl" = (
+/obj/structure/flora/grass,
+/obj/item/natural/stone,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"dw" = (
+/obj/effect/dungeon_directional_helper/south,
+/turf/open/floor/naturalstone,
+/area/under/tomb/wilds)
+"dO" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"dT" = (
+/turf/closed/wall/mineral/stone/moss,
+/area/under/tomb/indoors/royal)
+"fI" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/shirt/undershirt/fancy,
+/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/item/clothing/head/fancyhat,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"fT" = (
+/obj/structure/flora/grass/bush,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"fY" = (
+/obj/structure/window/stained,
+/turf/open/floor/cobble,
+/area/under/tomb/wilds)
+"gw" = (
+/mob/living/carbon/human/species/skeleton/npc/warrior,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors/royal)
+"gx" = (
+/obj/item/natural/rock,
+/obj/item/natural/bundle/stoneblock,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"gM" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/closet/crate/chest/crafted,
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/obj/item/paper,
+/obj/item/paper,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"hn" = (
+/obj/structure/stairs,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"ho" = (
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"hB" = (
+/turf/closed/mineral/bedrock,
+/area/under/tomb/wilds)
+"ji" = (
+/obj/structure/flora/grass/bush,
+/obj/structure/flora/grass/bush/wall,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"jr" = (
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"jI" = (
+/turf/closed/wall/mineral/decowood,
+/area/under/tomb/wilds)
+"kf" = (
+/turf/open/floor/blocks,
+/area/under/tomb/indoors/royal)
+"kr" = (
+/mob/living/carbon/human/species/skeleton/npc/warrior,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"lh" = (
+/turf/open/floor/church,
+/area/under/tomb/indoors/royal)
+"lw" = (
+/obj/structure/chair/bench/throne,
+/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/weapon/axe/boneaxe,
+/obj/item/clothing/head/helmet/heavy/rust,
+/obj/item/clothing/armor/plate/rust,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"mo" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/winch,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors/royal)
+"om" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/glass/bottle/vial/strongpoison,
+/obj/item/book/random_book,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"oK" = (
+/obj/structure/closet/crate/chest/crafted,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/effect/spawner/map_spawner/loot/potion_stats,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"pd" = (
+/obj/item/candle/skull,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"pI" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"pJ" = (
+/turf/closed/wall/mineral/stone/moss,
+/area/under/tomb/wilds)
+"ro" = (
+/obj/structure/door/iron,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors/royal)
+"rw" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cobblerock,
+/area/under/tomb/indoors/royal)
+"rR" = (
+/obj/structure/stairs,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"sz" = (
+/obj/item/natural/rock,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"sT" = (
+/obj/structure/gate,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"tf" = (
+/turf/closed/wall/mineral/decostone/moss/cand,
+/area/under/tomb/indoors/royal)
+"tt" = (
+/mob/living/carbon/human/species/skeleton/npc,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"tC" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/church,
+/area/under/tomb/indoors/royal)
+"un" = (
+/obj/structure/door/red,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"uJ" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors/royal)
+"vX" = (
+/obj/structure/inert_bonepile,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors/royal)
+"vY" = (
+/obj/structure/flora/grass,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"wl" = (
+/obj/structure/spider/cocoon,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors/royal)
+"ww" = (
+/obj/structure/bed/shit,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"wG" = (
+/obj/item/natural/bundle/stoneblock,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"xh" = (
+/turf/closed/wall/mineral/decostone,
+/area/under/tomb/indoors/royal)
+"xk" = (
+/obj/structure/door/weak,
+/turf/open/floor/cobblerock,
+/area/under/tomb/indoors/royal)
+"xn" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/spider/cocoon,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"ya" = (
+/obj/structure/spider/cocoon,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"yd" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"yf" = (
+/obj/structure/table/wood/plain,
+/obj/item/paper/scroll,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"yu" = (
+/obj/effect/dungeon_directional_helper/north,
+/turf/open/floor/naturalstone,
+/area/under/tomb/wilds)
+"yD" = (
+/obj/machinery/light/fueled/hearth,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"zB" = (
+/obj/item/chair/fancy,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"Ay" = (
+/obj/structure/bed/shit,
+/obj/effect/spawner/map_spawner/loot/weapon,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"AS" = (
+/obj/structure/bed/shit,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"BP" = (
+/obj/item/book/advice_soup,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"Ch" = (
+/obj/structure/bed/shit,
+/obj/effect/spawner/map_spawner/loot/armor,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"Cz" = (
+/turf/open/floor/naturalstone,
+/area/under/tomb/wilds)
+"De" = (
+/obj/item/bedsheet/pelt,
+/obj/structure/bed/wool,
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"DC" = (
+/mob/living/simple_animal/hostile/retaliate/spider,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"DM" = (
+/turf/open/transparent/openspace,
+/area/under/tomb/wilds)
+"Ev" = (
+/obj/structure/spider/cocoon,
+/turf/open/floor/cobblerock,
+/area/under/tomb/indoors/royal)
+"ET" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"FU" = (
+/obj/structure/chair/wood,
+/mob/living/carbon/human/species/rousman/npc,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"Gb" = (
+/obj/structure/table/wood/plain,
+/obj/item/paper/scroll,
+/obj/item/book/random_book,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"Gn" = (
+/obj/item/natural/wood/plank,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/wilds)
+"Gz" = (
+/obj/structure/fluff/statue/knight,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"Hp" = (
+/turf/open/floor/grass,
+/area/under/tomb/wilds)
+"Hu" = (
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"HL" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/kitchen/spoon,
+/obj/item/reagent_containers/glass/cup/wooden,
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"HY" = (
+/obj/structure/table/wood/plain,
+/obj/structure/fluff/millstone,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"IB" = (
+/obj/effect/dungeon_directional_helper/east,
+/turf/open/floor/naturalstone,
+/area/under/tomb/wilds)
+"JD" = (
+/obj/structure/inert_bonepile,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+"JH" = (
+/obj/effect/decal/cleanable/dirt/cobweb,
+/turf/open/transparent/openspace,
+/area/under/tomb/indoors/royal)
+"JY" = (
+/obj/structure/inert_bonepile,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"Kj" = (
+/obj/structure/table/wood/fancy/black,
+/obj/item/reagent_containers/glass/cup/fancy_clay,
+/obj/item/reagent_containers/glass/bottle/redwine,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"Kr" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/closed/wall/mineral/decostone/moss,
+/area/under/tomb/indoors/royal)
+"LA" = (
+/obj/item/natural/wood/plank,
+/obj/item/natural/wood/plank,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/wilds)
+"MF" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/naturalstone,
+/area/under/tomb/wilds)
+"MO" = (
+/obj/effect/mapping_helpers/secret_door_creator{
+	redstone_id = "mlk1"
+	},
+/turf/closed/wall/mineral/decostone/moss,
+/area/under/tomb/indoors/royal)
+"NH" = (
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"Oj" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/item/carvedgem/coral/fish,
+/obj/item/carvedgem/amber/figurine,
+/obj/item/carvedgem/amber/figurine,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"Pu" = (
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"PC" = (
+/obj/item/clothing/cloak/apron/brown,
+/obj/item/chair/stool/bar,
+/turf/open/floor/cobblerock,
+/area/under/tomb/indoors/royal)
+"PM" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = -3
+	},
+/turf/closed/wall/mineral/decowood,
+/area/under/tomb/wilds)
+"Qv" = (
+/obj/structure/table/stone_small,
+/obj/item/carvedgem/turq/fancyvase,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"QJ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"QQ" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/royal)
+"Rc" = (
+/turf/open/floor/cobblerock,
+/area/under/tomb/indoors/royal)
+"Rq" = (
+/obj/item/trash/candle,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"RN" = (
+/obj/structure/door/weak,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"RY" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"SP" = (
+/turf/open/floor/dirt/road,
+/area/under/tomb/wilds)
+"TH" = (
+/obj/item/natural/stone,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"Um" = (
+/obj/structure/fluff/walldeco/stone,
+/obj/structure/lever/hidden{
+	redstone_id = "mlk1";
+	pixel_x = null
+	},
+/turf/closed/wall/mineral/decostone/moss,
+/area/under/tomb/indoors/royal)
+"UC" = (
+/turf/open/transparent/openspace,
+/area/under/tomb/indoors/royal)
+"UI" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors/royal)
+"Vw" = (
+/obj/effect/decal/remains/wolf,
+/turf/open/floor/grass,
+/area/under/tomb/wilds)
+"VB" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/wilds)
+"VG" = (
+/obj/structure/flora/grass,
+/turf/open/floor/dirt/road,
+/area/under/tomb/wilds)
+"VQ" = (
+/obj/structure/table/wood,
+/obj/item/paper/scroll,
+/obj/item/natural/feather,
+/turf/open/floor/cobble/alt,
+/area/under/tomb/indoors/royal)
+
+(1,1,1) = {"
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+Cz
+MF
+Cz
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+"}
+(2,1,1) = {"
+hB
+NH
+Hp
+NH
+NH
+vY
+NH
+NH
+NH
+NH
+NH
+NH
+vY
+VG
+ji
+fT
+NH
+NH
+NH
+hB
+"}
+(3,1,1) = {"
+hB
+SP
+NH
+TH
+VG
+NH
+fT
+NH
+vY
+vY
+vY
+pJ
+pJ
+pJ
+pJ
+pJ
+NH
+VG
+NH
+hB
+"}
+(4,1,1) = {"
+hB
+fT
+fT
+dl
+SP
+pJ
+pJ
+fY
+pJ
+pJ
+NH
+pJ
+De
+Pu
+fI
+pJ
+Hp
+vY
+NH
+hB
+"}
+(5,1,1) = {"
+hB
+fT
+fT
+NH
+Hp
+pJ
+AS
+Hu
+Ay
+pJ
+Hp
+pJ
+Pu
+FU
+Kj
+pJ
+Hp
+ET
+SP
+hB
+"}
+(6,1,1) = {"
+hB
+vY
+SP
+Hp
+Hp
+pJ
+Ch
+tt
+ww
+pJ
+Hp
+pJ
+Oj
+Pu
+Pu
+pJ
+Hp
+NH
+SP
+hB
+"}
+(7,1,1) = {"
+hB
+NH
+NH
+pJ
+pJ
+pJ
+bH
+RN
+bH
+pJ
+pJ
+pJ
+tf
+Kr
+un
+pJ
+pJ
+NH
+SP
+hB
+"}
+(8,1,1) = {"
+hB
+NH
+NH
+pJ
+gw
+uJ
+uJ
+kf
+kf
+xh
+xn
+cK
+Pu
+Gz
+QQ
+cK
+pJ
+pJ
+NH
+hB
+"}
+(9,1,1) = {"
+Cz
+SP
+NH
+sT
+kf
+Rc
+rw
+vX
+Rc
+xh
+kr
+QQ
+kr
+lh
+lh
+QQ
+Qv
+pJ
+NH
+Cz
+"}
+(10,1,1) = {"
+yu
+SP
+NH
+NH
+kf
+kf
+kf
+kf
+kf
+ro
+Pu
+Pu
+Pu
+Pu
+Pu
+QQ
+lw
+pJ
+NH
+dw
+"}
+(11,1,1) = {"
+Cz
+NH
+SP
+NH
+dO
+uJ
+gw
+kf
+kf
+xh
+JY
+tC
+tC
+QQ
+QQ
+Pu
+wG
+pJ
+NH
+Cz
+"}
+(12,1,1) = {"
+hB
+NH
+vY
+pJ
+mo
+wl
+kf
+Rc
+rR
+tf
+Pu
+cK
+ya
+gx
+pd
+cK
+pJ
+pJ
+NH
+hB
+"}
+(13,1,1) = {"
+hB
+Hp
+NH
+pJ
+pJ
+pJ
+xh
+xk
+xh
+dT
+xh
+xh
+Um
+MO
+pJ
+pJ
+pJ
+NH
+NH
+hB
+"}
+(14,1,1) = {"
+hB
+Hp
+SP
+NH
+fT
+pJ
+df
+jr
+HL
+dT
+VQ
+om
+jr
+jr
+pJ
+NH
+Hp
+vY
+vY
+hB
+"}
+(15,1,1) = {"
+hB
+SP
+vY
+NH
+ET
+pJ
+Ev
+PC
+HY
+dT
+zB
+JD
+jr
+jr
+pJ
+Hp
+Hp
+ET
+TH
+hB
+"}
+(16,1,1) = {"
+hB
+NH
+NH
+NH
+NH
+pJ
+rw
+yD
+jr
+pJ
+pJ
+pJ
+pJ
+pJ
+pJ
+NH
+Hp
+NH
+NH
+hB
+"}
+(17,1,1) = {"
+hB
+NH
+NH
+fT
+NH
+pJ
+sz
+pJ
+pJ
+pJ
+Hp
+NH
+NH
+SP
+NH
+NH
+vY
+fT
+Hp
+hB
+"}
+(18,1,1) = {"
+hB
+Hp
+NH
+NH
+SP
+vY
+VG
+NH
+vY
+NH
+NH
+SP
+dl
+NH
+NH
+NH
+NH
+fT
+Hp
+hB
+"}
+(19,1,1) = {"
+hB
+Hp
+NH
+NH
+Hp
+NH
+NH
+NH
+NH
+NH
+NH
+SP
+NH
+NH
+vY
+NH
+NH
+fT
+Vw
+hB
+"}
+(20,1,1) = {"
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+Cz
+IB
+Cz
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+"}
+
+(1,1,2) = {"
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+DM
+DM
+DM
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+"}
+(2,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+hB
+"}
+(3,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+jI
+jI
+jI
+jI
+jI
+DM
+DM
+DM
+hB
+"}
+(4,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+jI
+jI
+jI
+Gn
+jI
+DM
+jI
+yd
+UC
+RY
+jI
+DM
+DM
+DM
+hB
+"}
+(5,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+jI
+JH
+UC
+BP
+Gn
+DM
+jI
+pI
+ho
+ho
+jI
+DM
+DM
+DM
+hB
+"}
+(6,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+jI
+UC
+RY
+yf
+bj
+DM
+jI
+pI
+ho
+DC
+jI
+DM
+DM
+DM
+hB
+"}
+(7,1,2) = {"
+hB
+DM
+DM
+jI
+jI
+jI
+Rq
+QJ
+Gb
+jI
+LA
+jI
+ho
+UI
+ho
+jI
+jI
+DM
+DM
+hB
+"}
+(8,1,2) = {"
+hB
+DM
+DM
+bj
+JH
+UC
+ho
+ho
+ho
+ho
+DC
+RY
+ho
+ho
+UC
+ho
+jI
+jI
+DM
+hB
+"}
+(9,1,2) = {"
+DM
+DM
+DM
+jI
+gM
+ho
+ho
+DC
+ho
+ho
+ho
+UC
+ho
+ho
+UC
+ho
+oK
+jI
+DM
+DM
+"}
+(10,1,2) = {"
+DM
+DM
+DM
+jI
+pI
+UC
+UC
+ho
+UC
+UI
+RY
+ho
+ho
+ho
+UC
+ho
+ho
+bj
+DM
+DM
+"}
+(11,1,2) = {"
+DM
+DM
+DM
+jI
+pI
+ho
+ho
+ho
+ho
+RY
+UC
+ho
+ho
+UI
+ho
+UC
+UC
+jI
+DM
+DM
+"}
+(12,1,2) = {"
+hB
+DM
+DM
+jI
+pI
+RY
+UC
+UC
+UC
+hn
+ho
+UC
+UC
+ho
+ho
+ho
+jI
+jI
+DM
+hB
+"}
+(13,1,2) = {"
+hB
+DM
+DM
+jI
+jI
+jI
+ho
+ho
+ho
+ho
+ho
+ho
+ho
+ho
+jI
+jI
+jI
+DM
+DM
+hB
+"}
+(14,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+jI
+Rq
+ho
+ho
+UI
+ho
+RY
+ho
+bA
+jI
+DM
+DM
+DM
+DM
+hB
+"}
+(15,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+jI
+UC
+UC
+RY
+DC
+ho
+ho
+RY
+RY
+jI
+DM
+DM
+DM
+DM
+hB
+"}
+(16,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+jI
+ho
+UC
+RY
+jI
+jI
+jI
+jI
+PM
+jI
+DM
+DM
+DM
+DM
+hB
+"}
+(17,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+VB
+VB
+jI
+jI
+jI
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+hB
+"}
+(18,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+hB
+"}
+(19,1,2) = {"
+hB
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+DM
+hB
+"}
+(20,1,2) = {"
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+DM
+DM
+DM
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+hB
+"}

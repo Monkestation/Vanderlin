@@ -452,10 +452,12 @@
 					bottle.attack_self_secondary(user)
 
 			var/reagent_use_time_real = max(reagent_use_time * 0.1, reagent_use_time / max(1, user.get_skill_level(skillcraft)))
+			if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
+				reagent_use_time_real *= 0.9
 			if(!do_after(user, reagent_use_time_real, container, extra_checks = CALLBACK(user, TYPE_PROC_REF(/atom/movable, CanReach), container)))
 				return FALSE
 
-			playsound(get_turf(user), pick(container.poursounds), 100, TRUE)
+			playsound(user, pick(container.poursounds), 100, TRUE)
 
 			// We transfer reagents to the copied container instead of deletion, so we can control reagent removal AFTER a successful crafting attempt
 			if(reagent_value < copied_reagent_requirements[required_path])
@@ -536,8 +538,10 @@
 	user.visible_message(span_info("[user] [tool_path_extra[1]]."), span_info("You [tool_path_extra[2]]."))
 
 	if(length(tool_path_extra) >= 3)
-		playsound(get_turf(user), tool_path_extra[3], 100, FALSE)
+		playsound(user, tool_path_extra[3], 100, FALSE)
 	var/tool_use_time_real = max(tool_use_time * 0.1, tool_use_time / max(1, user.get_skill_level(skillcraft)))
+	if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
+		tool_use_time_real *= 0.9
 	if(!do_after(user, tool_use_time_real, potential_tool, extra_checks = CALLBACK(user, TYPE_PROC_REF(/atom/movable, CanReach), potential_tool)))
 		return FALSE
 
@@ -834,6 +838,8 @@
 		playsound(user, crafting_sound, sound_volume, TRUE, -1)
 
 	var/crafting_time = max(craft_time * 0.1, craft_time / max(1, user.get_skill_level(skillcraft)))
+	if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
+		crafting_time *= 0.9
 	if(!do_after(user, crafting_time))
 		return FAIL_END_CRAFT
 

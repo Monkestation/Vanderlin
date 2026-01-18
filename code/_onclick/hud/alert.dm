@@ -203,16 +203,6 @@
 	desc = ""
 	icon_state = "highpressure"
 
-/atom/movable/screen/alert/blind
-	name = "Blind"
-	desc = ""
-	icon_state = "blind"
-
-/atom/movable/screen/alert/high
-	name = "High"
-	desc = ""
-	icon_state = "high"
-
 /atom/movable/screen/alert/hypnosis
 	name = "Hypnosis"
 	desc = ""

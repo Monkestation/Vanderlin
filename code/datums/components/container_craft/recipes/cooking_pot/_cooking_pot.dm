@@ -56,6 +56,7 @@
 			after_craft(null, crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, removing_items)
 			if(finished_smell)
 				pot_turf.pollute_turf(finished_smell, pollute_amount)
+			initiator.nobles_seen_servant_work()
 		playsound(pot_turf, "bubbles", 30, TRUE)
 	else
 		..()

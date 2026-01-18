@@ -5,11 +5,7 @@
 #endif
 
 #ifndef LOWMEMORYMODE
-	#ifdef ALL_MAPS
-		#include "map_files\debug\roguetest.dmm"
-
-		#ifdef CIBUILDING
-			#include "templates.dm"
-		#endif
+	#if defined(CIBUILDING) && defined(ALL_MAPS)
+		#include "templates.dm"
 	#endif
 #endif

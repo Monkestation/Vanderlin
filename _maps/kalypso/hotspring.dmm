@@ -2,102 +2,102 @@
 "a" = (
 /obj/structure/hotspring/border/five,
 /turf/template_noop,
-/area/rogue)
+/area)
 "b" = (
 /obj/structure/hotspring/border/six,
 /turf/template_noop,
-/area/rogue)
+/area)
 "e" = (
 /obj/structure/hotspring/border/twelve,
 /turf/template_noop,
-/area/rogue)
+/area)
 "f" = (
 /obj/structure/hotspring/border/fourteen,
 /turf/template_noop,
-/area/rogue)
+/area)
 "j" = (
 /obj/structure/hotspring,
 /obj/effect/lily_petal,
 /turf/template_noop,
-/area/rogue)
+/area)
 "l" = (
 /obj/structure/flora/hotspring_rocks/small/four,
 /turf/template_noop,
-/area/rogue)
+/area)
 "n" = (
 /obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /turf/template_noop,
-/area/rogue)
+/area)
 "o" = (
 /obj/structure/hotspring,
 /turf/template_noop,
-/area/rogue)
+/area)
 "r" = (
 /obj/structure/hotspring/border,
 /turf/template_noop,
-/area/rogue)
+/area)
 "s" = (
 /obj/structure/hotspring/border/twelve,
 /obj/effect/lily_petal,
 /turf/template_noop,
-/area/rogue)
+/area)
 "x" = (
 /obj/structure/hotspring/border/eight,
 /turf/template_noop,
-/area/rogue)
+/area)
 "z" = (
 /obj/structure/hotspring/border,
 /obj/structure/flora/hotspring_rocks/grassy,
 /turf/template_noop,
-/area/rogue)
+/area)
 "A" = (
 /obj/structure/hotspring/border/seven,
 /turf/template_noop,
-/area/rogue)
+/area)
 "D" = (
 /obj/structure/hotspring/border/nine,
 /turf/template_noop,
-/area/rogue)
+/area)
 "E" = (
 /obj/structure/flora/hotspring_rocks/small/three{
 	pixel_y = -5;
 	pixel_x = 9
 	},
 /turf/template_noop,
-/area/rogue)
+/area)
 "F" = (
 /obj/structure/hotspring/border/two,
 /turf/template_noop,
-/area/rogue)
+/area)
 "H" = (
 /obj/structure/flora/hotspring_rocks/grassy,
 /turf/template_noop,
-/area/rogue)
+/area)
 "L" = (
 /obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /turf/template_noop,
-/area/rogue)
+/area)
 "M" = (
 /turf/template_noop,
-/area/rogue)
+/area)
 "R" = (
 /obj/structure/hotspring/border/eleven,
 /turf/template_noop,
-/area/rogue)
+/area)
 "S" = (
 /obj/structure/hotspring/border/three,
 /turf/template_noop,
-/area/rogue)
+/area)
 "X" = (
 /obj/structure/hotspring/border/thirteen,
 /turf/template_noop,
-/area/rogue)
+/area)
 "Y" = (
 /obj/structure/hotspring/border/ten,
 /turf/template_noop,
-/area/rogue)
+/area)
 
 (1,1,1) = {"
 M

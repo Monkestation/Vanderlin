@@ -15,7 +15,7 @@
 		to_chat(user, "<span class='notice'>The salt circle has been damaged...</span>")
 		return
 	if(H.virginity)
-		playsound(get_turf(user), 'sound/magic/timestop.ogg', 100, TRUE, -1)
+		playsound(user, 'sound/magic/timestop.ogg', 100, TRUE, -1)
 		new wall_type(get_step(src, EAST),user)
 		new wall_type(get_step(src, WEST),user)
 		new wall_type(get_step(src, NORTH),user)

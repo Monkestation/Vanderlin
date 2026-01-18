@@ -2,73 +2,73 @@
 "ah" = (
 /obj/structure/rack/shelf/big,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "aB" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "bh" = (
 /obj/structure/window,
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "bp" = (
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
-/area/rogue/under/tomb)
+/area/under/tomb)
 "dU" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
 	},
 /obj/item/soap,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "er" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "eZ" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "fO" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "gz" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "gS" = (
 /obj/structure/chair/wood{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ha" = (
 /obj/structure/table/wood/large/corner_alt,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hi" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "hm" = (
 /obj/structure/table/wood/plain,
 /obj/item/weapon/knife/cleaver,
 /obj/structure/fluff/walldeco/bigpainting/lake,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ih" = (
 /obj/structure/fluff/walldeco/sign/saiga,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "is" = (
 /obj/structure/table/wood/large_alt,
 /obj/item/reagent_containers/glass/cup/wooden/crafted{
@@ -76,11 +76,11 @@
 	pixel_x = 13
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "iD" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "jH" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/bottle/wine/sourwine{
@@ -95,106 +95,106 @@
 	pixel_x = 8
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "kl" = (
 /obj/structure/table/wood/large/corner_alt,
 /obj/item/reagent_containers/food/snacks/rotten/sausage{
 	pixel_y = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "kA" = (
 /turf/open/floor/rooftop/green,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "lU" = (
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "mI" = (
 /obj/effect/mapping_helpers/outfit_handler{
 	outfit_to_equip = /datum/outfit/adventurer/barbarian
 	},
 /mob/living/carbon/human/species/orc/npc,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nC" = (
 /obj/structure/fluff/walldeco/vinez/offset,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nK" = (
 /obj/structure/door/window,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nW" = (
 /obj/structure/table/wood/large_alt,
 /obj/item/reagent_containers/glass/cup/wooden/crafted{
 	pixel_x = 9
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oa" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oq" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "qO" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "rA" = (
 /obj/structure/well,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "rI" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "rK" = (
 /obj/structure/window/openclose{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "sd" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decowood/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "sh" = (
 /obj/structure/window/openclose{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "st" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "sC" = (
 /obj/structure/chair/stool{
 	pixel_x = 3;
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tu" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "tA" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tN" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tP" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "ur" = (
 /obj/structure/table/wood/large/corner_alt,
 /obj/item/reagent_containers/glass/cup/wooden/crafted{
@@ -202,141 +202,141 @@
 	pixel_y = 16
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "uG" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "vh" = (
 /obj/structure/chair/stool{
 	pixel_x = -5
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "xJ" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "yc" = (
 /obj/machinery/light/fueled/chand,
 /obj/item/clothing/ring/silver,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ye" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "yH" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "AX" = (
 /turf/closed/wall/mineral/decowood/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Bz" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "BZ" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/fluff/walldeco/vinez/l,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Cb" = (
 /obj/structure/floordoor/gatehatch/inner,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "CW" = (
 /obj/structure/window/openclose,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Dk" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Do" = (
 /obj/structure/bars/pipe/left,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Du" = (
 /obj/structure/table/wood/counter{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Dx" = (
 /obj/structure/bed/inn/double,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "EK" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Fa" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
 	},
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Fi" = (
 /turf/open/floor/rooftop/green{
 	dir = 8
 	},
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ft" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "GU" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ha" = (
 /obj/structure/bed/bear{
 	pixel_x = 0;
 	pixel_y = -6
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Im" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "It" = (
 /obj/structure/door,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "KB" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ly" = (
 /obj/structure/stairs/d{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "LC" = (
 /obj/structure/chair/wood,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ml" = (
 /obj/structure/fluff/walldeco/painting/queen,
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Mr" = (
 /obj/structure/fluff/walldeco/bath/wallpipes,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "MK" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = 16
 	},
 /turf/closed/wall/mineral/decowood/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Nc" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/meat/salami{
@@ -348,31 +348,31 @@
 	pixel_y = 10
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Nd" = (
 /obj/structure/window/openclose{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "NF" = (
 /obj/structure/bed/inn,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Oj" = (
 /turf/closed/wall/mineral/decowood,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ov" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "OP" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Qe" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Rh" = (
 /obj/structure/toilet,
 /mob/living/carbon/human/species/orc/npc,
@@ -380,7 +380,7 @@
 	outfit_to_equip = /datum/outfit/adventurer/barbarian
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "RA" = (
 /obj/item/reagent_containers/powder/moondust{
 	pixel_x = 5
@@ -399,53 +399,53 @@
 	pixel_x = -14
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "SM" = (
 /obj/structure/door,
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "TE" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ue" = (
 /obj/item/soap/bath,
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ug" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "UC" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Vf" = (
 /turf/open/water/bath,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "VQ" = (
 /obj/structure/fluff/walldeco/sign/trophy,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Wx" = (
 /obj/structure/chair/bench/coucha/redright,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "WD" = (
 /obj/structure/chair/bench/coucha/redleft,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Xl" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Xn" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/structure/window,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Yh" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -454,15 +454,15 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Yz" = (
 /obj/structure/closet/crate/drawer/inn,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "YI" = (
 /obj/machinery/light/fueled/oven/west,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Zg" = (
 /obj/structure/table/wood/counter{
 	dir = 4
@@ -479,18 +479,18 @@
 	pixel_y = 14
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Zt" = (
 /obj/machinery/light/fueled/chand,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Zv" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "ZT" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 tP

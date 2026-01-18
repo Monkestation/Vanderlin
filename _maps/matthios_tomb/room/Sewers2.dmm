@@ -1,110 +1,110 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ad" = (
 /turf/open/floor/plank,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "ai" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/concrete,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "am" = (
 /turf/closed/wall/mineral/pipe,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "ar" = (
 /obj/structure/ladder,
 /turf/open/water/swamp,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "au" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /turf/open/water/swamp,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "av" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/concrete,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "az" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/concrete,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aC" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/concrete,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aD" = (
 /obj/structure/fluff/walldeco/bath/wallpipes{
 	pixel_x = 22;
 	pixel_y = 26
 	},
 /turf/open/water/swamp,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aG" = (
 /obj/item/natural/worms/leech/propaganda,
 /turf/open/floor/concrete,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aJ" = (
 /turf/open/water/swamp,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aM" = (
 /turf/open/floor/tile,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aN" = (
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aR" = (
 /turf/open/floor/concrete,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aV" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aW" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "aZ" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "es" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/structure/bars/pipe,
 /obj/structure/bars/pipe,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "kX" = (
 /obj/structure/bars/pipe,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "DS" = (
 /obj/item/natural/worms/leech/propaganda,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "Hg" = (
 /obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "JG" = (
 /obj/structure/bars/pipe/left{
 	pixel_x = 1;
 	pixel_y = 14
 	},
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "Qw" = (
 /obj/structure/ladder,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "QM" = (
 /obj/structure/guillotine,
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "Wy" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 "Yf" = (
 /obj/structure/bars/pipe,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/sewer)
+/area/under/tomb/sewer)
 
 (1,1,1) = {"
 aW

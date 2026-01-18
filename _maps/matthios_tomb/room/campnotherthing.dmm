@@ -1,129 +1,129 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aj" = (
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aG" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aO" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aV" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "aZ" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "bi" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/remains/bigrat,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "bT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/remains/bigrat,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "dZ" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "eB" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "gQ" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "hV" = (
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "it" = (
 /obj/structure/roguetent,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "jC" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "ko" = (
 /mob/living/simple_animal/hostile/retaliate/troll/axe,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "kH" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "nf" = (
 /obj/structure/roguetent,
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "pw" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "pG" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "qf" = (
 /obj/structure/bars,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "qQ" = (
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "rx" = (
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "ss" = (
 /obj/effect/decal/remains/bigrat,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "sI" = (
 /mob/living/carbon/human/species/goblin/npc/cave,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "wV" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "yq" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "ys" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "yV" = (
 /obj/structure/door,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "zd" = (
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Af" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Bt" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Ck" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "CW" = (
 /obj/item/skull,
 /obj/item/skull,
@@ -143,71 +143,71 @@
 	pixel_y = 10
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "DM" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/metal,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Fq" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "FU" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Gc" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "HK" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "NV" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 6
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "OX" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Tm" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Uw" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Vy" = (
 /mob/living/carbon/human/species/goblin/npc/cave,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Vz" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Wd" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "XA" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Yp" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = -32
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "YV" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/reagent_containers/glass/bottle/healthpot,
@@ -216,7 +216,7 @@
 /obj/item/reagent_containers/food/snacks/meat/sausage,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 aV

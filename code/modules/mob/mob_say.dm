@@ -1,12 +1,13 @@
 //Speech verbs.
 
 
-/mob/verb/say_verb()
+/mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
 	set hidden = 1
 
-	var/message = input(usr, "", "say") as text|null
+	if(!message)
+		message = input(usr, "", "say") as text|null
 	// If they don't type anything just drop the message.
 	set_typing_indicator(FALSE)
 	if(!length(message))
@@ -34,7 +35,7 @@
 	say(message, bubble_type, spans, sanitize, language, ignore_spam, forced) //only living mobs actually whisper, everything else just talks
 
 ///The me emote verb
-/mob/verb/me_verb()
+/mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
 	set hidden = 1
@@ -45,7 +46,8 @@
 			to_chat(usr, "<span class='warning'>I can't use custom emotes. (LOW PQ)</span>")
 			return
 		#endif
-	var/message = input(usr, "", "me") as text|null
+	if(!message)
+		message = input(usr, "", "me") as text|null
 	// If they don't type anything just drop the message.
 	set_typing_indicator(FALSE)
 	if(!length(message))
@@ -187,7 +189,7 @@
 			chop_to = length(key) + 2
 		else if(key == "," && !mods[LANGUAGE_EXTENSION])
 			for(var/datum/language/LD as anything in GLOB.all_languages)
-				if(initial(LD.key) == message[1 + length(message[1])])
+				if(initial(LD.key) == lowertext(message[1 + length(message[1])]))
 					if(!can_speak_in_language(LD))
 						return message
 					mods[LANGUAGE_EXTENSION] = LD

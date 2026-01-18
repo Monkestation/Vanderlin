@@ -106,8 +106,6 @@
 	if (opacity)
 		has_opaque_atom = TRUE
 
-	QUEUE_SMOOTH_NEIGHBORS(src)
-
 	if(shine)
 		make_shiny(shine)
 
@@ -318,7 +316,7 @@
 	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
 
 /turf/proc/zFall(atom/movable/A, levels = 1, force = FALSE)
-	var/turf/target = get_step_multiz(src, DOWN)
+	var/turf/target = GET_TURF_BELOW(src)
 	if(!target || (!isobj(A) && !ismob(A)))
 		return FALSE
 	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))
@@ -403,7 +401,7 @@
 	var/turf/current_target
 	if(fake_baseturf_type)
 		if(length(fake_baseturf_type)) // We were given a list, just apply it and move on
-			baseturfs = fake_baseturf_type
+			baseturfs = baseturfs_string_list(fake_baseturf_type, src)
 			return
 		current_target = fake_baseturf_type
 	else
@@ -419,9 +417,9 @@
 	if(created_baseturf_lists[current_target])
 		var/list/premade_baseturfs = created_baseturf_lists[current_target]
 		if(length(premade_baseturfs))
-			baseturfs = premade_baseturfs.Copy()
+			baseturfs = baseturfs_string_list(premade_baseturfs.Copy(), src)
 		else
-			baseturfs = premade_baseturfs
+			baseturfs = baseturfs_string_list(premade_baseturfs, src)
 		return baseturfs
 
 	var/turf/next_target = initial(current_target.baseturfs)
@@ -442,7 +440,7 @@
 		current_target = next_target
 		next_target = initial(current_target.baseturfs)
 
-	baseturfs = new_baseturfs
+	baseturfs = baseturfs_string_list(new_baseturfs, src)
 	created_baseturf_lists[new_baseturfs[new_baseturfs.len]] = new_baseturfs.Copy()
 	return new_baseturfs
 
@@ -624,21 +622,26 @@
 		return
 	// Make toxins and blazaam vomit look different
 	if(toxvomit == VOMIT_PURPLE)
-		V.icon_state = "vomitpurp_[pick(1,4)]"
+		V.icon_state = "vomitpurp_[rand(1,4)]"
 	else if (toxvomit == VOMIT_TOXIC)
-		V.icon_state = "vomittox_[pick(1,4)]"
+		V.icon_state = "vomittox_[rand(1,4)]"
 	if (iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(C.reagents)
 			clear_reagents_to_vomit_pool(C,V)
 
-/proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V)
-	M.reagents.trans_to(V, M.reagents.total_volume / 10, transfered_by = M)
-	for(var/datum/reagent/R in M.reagents.reagent_list)                //clears the stomach of anything that might be digested as food
-		if(istype(R, /datum/reagent/consumable))
-			var/datum/reagent/consumable/nutri_check = R
-			if(nutri_check.nutriment_factor >0)
-				M.reagents.remove_reagent(R.type, min(R.volume, 10))
+/proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V, purge = FALSE)
+	var/obj/item/organ/stomach/belly = M.getorganslot(ORGAN_SLOT_STOMACH)
+	if(!belly)
+		return
+	var/chemicals_lost = belly.reagents.total_volume * 0.1
+	if(purge)
+		chemicals_lost = belly.reagents.total_volume * 0.67 //For detoxification surgery, we're manually pumping the stomach out of chemcials, so it's far more efficient.
+	belly.reagents.trans_to(V, chemicals_lost, transfered_by = M)
+	//clear the stomach of anything even not food
+	for(var/bile in belly.reagents.reagent_list)
+		var/datum/reagent/reagent = bile
+		belly.reagents.remove_reagent(reagent.type, min(reagent.volume, 10))
 
 //Whatever happens after high temperature fire dies out or thermite reaction works.
 //Should return new turf

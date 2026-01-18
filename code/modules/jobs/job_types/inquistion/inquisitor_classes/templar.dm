@@ -1,4 +1,4 @@
-/datum/job/advclass/psydoniantemplar // A templar, but for the Inquisition
+/datum/job/advclass/sacrestant/psydoniantemplar // A templar, but for the Inquisition
 	title = "Psydonian Templar"
 	tutorial = "You are among the strongest students of the Ordo Benetarus. Top of your classes in both physical skill and intellectual matters, you’re here to prove you’re worthy of becoming an inquisitor. One simple step, before your skill is recognized."
 	allowed_sexes = list(MALE, FEMALE)
@@ -9,8 +9,9 @@
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_CON = 2,
-		STATKEY_END = 3,
-	)
+		STATKEY_END = 2,
+		STATKEY_SPD = -2,
+	) //4 Statline
 
 	skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
@@ -34,11 +35,12 @@
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
 	)
 
 	voicepack_m = /datum/voicepack/male/knight
 
-/datum/job/advclass/psydoniantemplar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/sacrestant/psydoniantemplar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Templar")
 
@@ -70,16 +72,16 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "TAKE UP PSYDON'S ARMS.")
 	switch(weapon_choice)
 		if("Psydonic Longsword")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 3, 3, TRUE)
 		if("Psydonic War Axe", "Psydonic Mace", "Psydonic Poleaxe + Shortsword")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 3, 3, TRUE)
 		if("Psydonic Whip", "Psydonic Flail")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 3, 3, TRUE)
 		if("Psydonic Spear + Handmace")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 3, 3, TRUE)
 
 /datum/outfit/psydoniantemplar
-	name = "Psydonian Templar"
+	name = "Psydonian Templar (Sacrestants)"
 	wrists = /obj/item/clothing/neck/psycross/silver
 	cloak = /obj/item/clothing/cloak/psydontabard
 	backr = /obj/item/weapon/shield/tower/metal

@@ -10,7 +10,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 
 	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR
 
@@ -31,6 +30,10 @@
 		broken_states = typelist("broken_states", list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
 	else
 		broken_states = typelist("broken_states", broken_states)
+	if (!attacked_sound)
+		attacked_sound = typelist("attacked_sound", list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg'))
+	else
+		attacked_sound = typelist("attacked_sound", attacked_sound)
 	burnt_states = typelist("burnt_states", burnt_states)
 	if(!broken && broken_states && (icon_state in broken_states))
 		broken = TRUE

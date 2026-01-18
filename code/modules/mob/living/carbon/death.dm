@@ -3,7 +3,6 @@
 		return
 	stop_looking()
 
-	silent = FALSE
 	losebreath = 0
 	adjust_bloodpool(-(bloodpool * 0.2))
 

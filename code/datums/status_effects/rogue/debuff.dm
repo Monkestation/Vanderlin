@@ -345,7 +345,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/netted
 	name = "Net"
-	desc = "<span class='boldwarning'>A net was thrown on me.. how can I move?</span>\n"
+	desc = "<span class='boldwarning'>A net was thrown on me... how can I move?</span>\n"
 	icon_state = "muscles"
 
 /datum/status_effect/debuff/netted
@@ -405,7 +405,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/revive
 	name = "Revival Sickness"
-	desc = "<span class='warning'>I have returned from oblivion.. but the fatigue of death still affects me.</span>\n"
+	desc = "<span class='warning'>I have returned from oblivion... but the fatigue of death still affects me.</span>\n"
 	icon_state = "muscles"
 
 /datum/status_effect/debuff/viciousmockery
@@ -462,7 +462,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/drunk
 	name = "Eoran Wine"
-	desc = span_warning("I am intoxicated from ambromsia not meant for mortal mouths.\n")
+	desc = span_warning("I am intoxicated from ambrosia not meant for mortal mouths.\n")
 	icon_state = "drunk"
 
 /datum/status_effect/debuff/mesmerised
@@ -473,7 +473,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/mesmerised
 	name = "Mesmerised"
-	desc = span_warning("Their beauty is otherwordly..")
+	desc = span_warning("Their beauty is otherworldly...")
 	icon_state = "acid"
 
 
@@ -485,7 +485,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/call_to_slaughter
 	name = "Call to Slaughter"
-	desc = "A putrid rotting scent fills your nose as Graggar's call for slaughter rattles you to your core.."
+	desc = "A putrid rotting scent fills your nose as Graggar's call for slaughter rattles you to your core..."
 	icon_state = "call_to_slaughter"
 
 /datum/status_effect/debuff/baothadruqks
@@ -496,7 +496,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/baothadruqks
 	name = "Baothan Dust"
-	desc = span_warning("Someone blew some powders at me..\n")
+	desc = span_warning("Someone blew some powders at me...\n")
 	icon_state = "drunk"
 
 /datum/status_effect/debuff/lux_drained

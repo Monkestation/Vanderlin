@@ -25,7 +25,7 @@
 		L.apply_status_effect(status, initial(status.duration) + duration_increase)
 		L.visible_message(
 			span_info("[L] traces a warding sigil in the air."),
-			span_notice("I trace a a sigil of warding in the air."),
+			span_notice("I trace a sigil of warding in the air."),
 		)
 
 	if(attuned_strength < 1.5)

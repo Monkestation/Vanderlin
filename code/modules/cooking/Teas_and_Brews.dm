@@ -112,7 +112,7 @@
 		M.add_nausea(1)
 		to_chat(M, "<span class='danger'>It feels as if someone just conjured fireball in my stomach!</span>")
 	if(volume > 0.99)
-		M.mana_pool.adjust_mana(0.25) //its very weak, but works longer (0.25 mana per metab, 1.25 mana per 1 unit of tea, 24 mana per 20 units drank, 320% weaker than standart manapot)
+		M.mana_pool.adjust_mana(0.25) //it's very weak, but works longer (0.25 mana per metab, 1.25 mana per 1 unit of tea, 24 mana per 20 units drank, 320% weaker than standart manapot)
 	..()
 
 /datum/reagent/consumable/tea/compot
@@ -120,7 +120,7 @@
 	description = "If you see this, stop using moondust"
 	color = "#b38838"
 	metabolization_rate = 0.2 // 20% of normal metab
-	taste_description = "strong berry taste, its very sweet"
+	taste_description = "strong berry taste, it's very sweet"
 	taste_mult = 4
 	hydration_factor = 6 //a hydrating, nutritious and convinient drink made of raisins
 	nutriment_factor = 4

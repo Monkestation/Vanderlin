@@ -8,7 +8,7 @@
 
 /obj/item/clothing/armor/leather/heavy/atgervi
 	name = "shamanic coat"
-	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is too desire for more."
+	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is to desire for more."
 	icon_state = "atgervi_shaman_coat"
 	item_state = "atgervi_shaman_coat"
 
@@ -45,7 +45,7 @@
 
 /obj/item/clothing/head/helmet/leather/saiga/atgervi
 	name = "moose hood"
-	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans, To slay a Grinning moose in the final hunt alone and fashion a hood from it's head."
+	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans, To slay a Grinning moose in the final hunt alone and fashion a hood from its head."
 	icon_state = "atgervi_shaman"
 	item_state = "atgervi_shaman"
 	flags_inv = HIDEEARS|HIDEFACE
@@ -85,28 +85,3 @@
 		switch(tag)
 			if("onback")
 				return list("shrink" = 0.7,"sx" = -17,"sy" = -15,"nx" = -15,"ny" = -15,"wx" = -12,"wy" = -15,"ex" = -18,"ey" = -15,"nturn" = 0,"sturn" = 0,"wturn" = 180,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 1,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
-
-/obj/item/weapon/axe/steel/atgervi
-	name = "Bearded Axe"
-	desc = "A large axe easily wielded in one hand or two, With a large hooked axehead to tearing into flesh and armor and ripping it away brutally."
-	icon_state = "atgervi_axe"
-	item_state = "atgervi_axe"
-	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
-	wlength = WLENGTH_LONG
-	experimental_onhip = TRUE
-	wdefense = 5
-	max_blade_int = 250
-	force = 26
-	force_wielded = 33
-
-/obj/item/weapon/axe/steel/atgervi/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.6,"sx" = -9,"sy" = -8,"nx" = 9,"ny" = -7,"wx" = -7,"wy" = -8,"ex" = 3,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("wielded")
-				return list("shrink" = 0.8,"sx" = 2,"sy" = -8,"nx" = -6,"ny" = -3,"wx" = 3,"wy" = -4,"ex" = 4,"ey" = -3,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -44,"sturn" = 45,"wturn" = 47,"eturn" = 33,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0)
-			if("onbelt")
-				return list("shrink" = 0.6,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 180,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 1,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)

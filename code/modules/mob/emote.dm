@@ -5,7 +5,11 @@
 ///How often a carbon becomes penalized
 #define BEYBLADE_DIZZINESS_PROBABILITY 20
 ///How long the screenshake lasts
-#define BEYBLADE_DIZZINESS_DURATION (1 SECONDS)
+#define BEYBLADE_DIZZINESS_DURATION (10 SECONDS)
+///How much confusion a carbon gets every time they are penalized
+#define BEYBLADE_CONFUSION_INCREMENT (5 SECONDS)
+///A max for how much confusion a carbon will be for beyblading
+#define BEYBLADE_CONFUSION_LIMIT (20 SECONDS)
 
 //The code execution of the emote datum is located at code/datums/emotes.dm
 /mob/proc/emote(act, m_type = null, message = null, intentional = FALSE, forced = FALSE, targetted = FALSE, custom_me = FALSE)
@@ -82,13 +86,14 @@
 		user.spin(4, 1)
 		user.Immobilize(5)
 
-		if(user.dizziness > BEYBLADE_PUKE_THRESHOLD)
+		if(user.get_timed_status_effect_duration(/datum/status_effect/confusion) > BEYBLADE_PUKE_THRESHOLD)
 			user.vomit(BEYBLADE_PUKE_NUTRIENT_LOSS, distance = 0)
 			return
 
 		if(prob(BEYBLADE_DIZZINESS_PROBABILITY))
 			to_chat(user, span_warning("You feel woozy from spinning."))
-			user.Dizzy(BEYBLADE_DIZZINESS_DURATION)
+			user.set_dizzy_if_lower(BEYBLADE_DIZZINESS_DURATION)
+			user.adjust_confusion_up_to(BEYBLADE_CONFUSION_INCREMENT, BEYBLADE_CONFUSION_LIMIT)
 
 		// if(iscyborg(user) && user.has_buckled_mobs())
 		// 	var/mob/living/silicon/robot/R = user
@@ -103,3 +108,5 @@
 #undef BEYBLADE_PUKE_NUTRIENT_LOSS
 #undef BEYBLADE_DIZZINESS_PROBABILITY
 #undef BEYBLADE_DIZZINESS_DURATION
+#undef BEYBLADE_CONFUSION_INCREMENT
+#undef BEYBLADE_CONFUSION_LIMIT

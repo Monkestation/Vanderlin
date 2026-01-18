@@ -264,28 +264,18 @@ GLOBAL_LIST_EMPTY(teleportlocs)
  * Register this area as belonging to a z level
  *
  * Ensures the item is added to the SSmapping.areas_in_z list for this z
- *
- * It also goes through every item in this areas contents and sets the area level z to it
- * breaking the exat first time it does this, this seems crazy but what would I know, maybe
- * areas don't have a valid z themself or something
  */
 /area/proc/reg_in_areas_in_z()
 	if(!has_contained_turfs())
-		var/list/areas_in_z = SSmapping.areas_in_z
-		var/z
-		update_areasize()
-		for(var/i in 1 to contents.len)
-			var/atom/thing = contents[i]
-			if(!thing)
-				continue
-			z = thing.z
-			break
-		if(!z)
-			WARNING("No z found for [src]")
-			return
-		if(!areas_in_z["[z]"])
-			areas_in_z["[z]"] = list()
-		areas_in_z["[z]"] += src
+		return
+	var/list/areas_in_z = SSmapping.areas_in_z
+	update_areasize()
+	if(!z)
+		WARNING("No z found for [src]")
+		return
+	if(!areas_in_z["[z]"])
+		areas_in_z["[z]"] = list()
+	areas_in_z["[z]"] += src
 
 /// Setup all ambience tracks
 /area/proc/setup_ambience()
@@ -336,13 +326,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	return ..()
 
 /**
- * Update the icon of the area (overridden to always be null for space
- */
-/area/space/update_icon_state()
-	icon_state = null
-	return ..()
-
-/**
  * Call back when an atom enters an area
  *
  * Sends signals COMSIG_AREA_ENTERED and COMSIG_ENTER_AREA (to the atom)
@@ -382,7 +365,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	client.screen += T
 	T.maptext = MAPTEXT_BLACKMOOR("<span class='center' style='vertical-align:top; color: #820000;\
 		text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;'>[A.first_time_text]</span>")
-	T.maptext_width = 205
+	T.maptext_width = 220
 	T.maptext_height = 209
 	T.maptext_x = 12
 	T.maptext_y = 64

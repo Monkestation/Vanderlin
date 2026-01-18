@@ -117,7 +117,7 @@
 		var/mob/living/L = hit_atom
 		if(stunning)
 			L.Paralyze(20) //splat!
-		L.adjust_blurriness(1)
+		L.adjust_eye_blur(2 SECONDS)
 		L.visible_message("<span class='warning'>[L] is hit by [src]!</span>", "<span class='danger'>I'm hit by [src]!</span>")
 	qdel(src)
 
@@ -182,11 +182,13 @@
 	icon_state = "meatpie"
 	tastes = list("meat and butterdough" = 1)
 	filling_color = "#b44f44"
+
 /obj/item/reagent_containers/food/snacks/pie/cooked/meat/meat/good
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/meat
 	tastes = list("succulent meat and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/meat/meat/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/meat/meat/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -201,7 +203,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/fish
 	tastes = list("baked fish and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/meat/fish/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/meat/fish/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -219,14 +222,15 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/pot
 	tastes = list("succulent filling and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/meat/pot/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/meat/pot/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
 // -------------- BERRY PIE -----------------
 /obj/item/reagent_containers/food/snacks/pie/cooked/berry
 	name = "berry pie"
-	desc = "A sweet pie made from jackberries. A popular choice for banquets among peasants, and enjoyed by all."
+	desc = "A sweet pie made from jacksberries. A popular choice for banquets among peasants, and enjoyed by all."
 	list_reagents = list(/datum/reagent/consumable/nutriment = FRUITPIE_NUTRITION)
 	slices_num = 4
 	tastes = list("butterdough" = 1, "berries" = 1)
@@ -236,7 +240,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/berry
 	tastes = list("crispy butterdough" = 1, "sweet berries" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/berry/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/berry/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -259,7 +264,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/apple
 	tastes = list("baked apples and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/apple/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/apple/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -270,11 +276,13 @@
 	slices_num = 4
 	list_reagents = list(/datum/reagent/consumable/nutriment = FRUITPIE_NUTRITION)
 	tastes = list("pears and butterdough" = 1)
+
 /obj/item/reagent_containers/food/snacks/pie/cooked/pear/good
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/pear
 	tastes = list("baked pears and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/pear/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/pear/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -291,7 +299,7 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
 	tastes = list("savory borowiki and crispy butterdough" = 1)
 
-/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good/New()
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -301,7 +309,7 @@
 
 /obj/item/reagent_containers/food/snacks/foodbase/handpieraw
 	name = "raw handpie"
-	desc = "The dwarven take on pies, called pierogi in their dialect. A fistfull of food to stand the test of time."
+	desc = "The dwarven take on pies, called pierogi in their dialect. A fistful of food to stand the test of time."
 	icon_state = "handpie_raw"
 	cooked_smell = /datum/pollutant/food/pie_base
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
@@ -344,7 +352,7 @@
 
 /obj/item/reagent_containers/food/snacks/handpie
 	name = "handpie"
-	desc = "The dwarven take on pies, called pierogi in their dialect. A fistfull of food to stand the test of time. This is pretty dry."
+	desc = "The dwarven take on pies, called pierogi in their dialect. A fistful of food to stand the test of time. This is pretty dry."
 	icon_state = "handpie"
 	bitesize = 4
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = BUTTERDOUGHSLICE_NUTRITION)
@@ -353,11 +361,12 @@
 	faretype = FARE_FINE
 
 /obj/item/reagent_containers/food/snacks/handpie/good
-	desc = "The dwarven take on pies, called pierogi in their dialect. A fistfull of food to stand the test of time."
+	desc = "The dwarven take on pies, called pierogi in their dialect. A fistful of food to stand the test of time."
 	eat_effect = /datum/status_effect/buff/foodbuff
 	bitesize = 4
 	tastes = list("crispy dough" = 1)
-/obj/item/reagent_containers/food/snacks/handpie/good/New()
+
+/obj/item/reagent_containers/food/snacks/handpie/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 

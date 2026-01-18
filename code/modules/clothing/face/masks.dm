@@ -47,7 +47,7 @@
 /obj/item/clothing/face/facemask/goldnosechain
 	name = "gold nosechain"
 	icon_state = "nosechain_g"
-	desc = "A fashionable nose chain with two rings, It's design originated from the Savannah Elf tribes."
+	desc = "A fashionable nose chain with two rings. Its design originated from the Savannah Elf tribes."
 	max_integrity = 100
 	blocksound = FALSE
 	armor = FALSE
@@ -64,7 +64,7 @@
 /obj/item/clothing/face/facemask/silvernosechain
 	name = "silver nosechain"
 	icon_state = "nosechain_s"
-	desc = "A fashionable nose chain with two rings, It's design originated from the Savannah Elf tribes."
+	desc = "A fashionable nose chain with two rings. Its design originated from the Savannah Elf tribes."
 	max_integrity = 100
 	blocksound = FALSE
 	armor = FALSE
@@ -334,15 +334,34 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/adept.dmi'
 	icon_state = "silvermask"
 	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 85, "fire" = 0, "acid" = 0)
-	desc = "A custom made silver penance mask, created especially for the Adepts of the Inquisitorial Lodge."
+	desc = "A custom-made silver penance mask, created especially for the Adepts of the Inquisitorial Lodge."
 	max_integrity = 300
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 100
+	var/cross_retracted = 0 // Does the silver mask has it's 3 little spuds retracted or not. Used for toggling.
 
 /obj/item/clothing/face/facemask/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/face/facemask/silver/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	if(!cross_retracted)
+		icon_state = "silvermask_rimless"
+		cross_retracted = 1
+		playsound(user, 'sound/items/indexer_shut.ogg', 65, TRUE)
+	else
+		icon_state = "silvermask"
+		cross_retracted = 0
+		playsound(user, 'sound/items/indexer_open.ogg', 65, TRUE)
+	update_appearance(UPDATE_ICON)
+	if(loc == user && ishuman(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_head()
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/clothing/face/facemask/shadowfacemask
 	name = "anthraxi war mask"
@@ -458,7 +477,7 @@
 //................ Druids Mask ............... //
 /obj/item/clothing/face/druid
 	name = "druids mask"
-	desc = "Roots from a old oak-tree, shaped according to the wishes of Tree-father."
+	desc = "Roots from an old oak-tree, shaped according to the wishes of Tree-father."
 	icon = 'icons/roguetown/clothing/head.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
 	icon_state = "dendormask"

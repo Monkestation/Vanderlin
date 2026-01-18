@@ -49,6 +49,8 @@
 	var/seed_identity = "some seeds"
 	///this is if we become seethrough or not
 	var/see_through = FALSE
+	///the honey type we build towards
+	var/obj/item/reagent_containers/food/snacks/spiderhoney/honey_type
 
 /datum/plant_def/New()
 	. = ..()

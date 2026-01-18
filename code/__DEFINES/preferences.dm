@@ -72,14 +72,26 @@
 #define EXP_TYPE_LIVING			"Living"
 #define EXP_TYPE_GHOST			"Ghost"
 #define EXP_TYPE_ADMIN			"Admin"
-
 #define EXP_TYPE_ANTAG			"Antag"
 
-#define EXP_TYPE_TOWNER			"Towner"
-#define EXP_TYPE_NOBLE			"Noble"
-#define EXP_TYPE_ADVENTURER		"Adventurer"
-#define EXP_TYPE_CHURCH			"Church"
-#define EXP_TYPE_GUARDS			"Guards"
+#define EXP_TYPE_TOWNER			"Towner Roles"
+#define EXP_TYPE_NOBLE			"Noble Roles"
+#define EXP_TYPE_ADVENTURER		"Adventurer Roles"
+#define EXP_TYPE_CHURCH			"Church Roles"
+#define EXP_TYPE_GARRISON		"Garrison Roles"
+#define EXP_TYPE_MERCHANT_COMPANY	"Merchant Roles"
+#define EXP_TYPE_INQUISITION	"Inquisition Roles"
+#define EXP_TYPE_MEDICAL	"Medical Roles"
+#define EXP_TYPE_LEADERSHIP	"Leadership Roles"
+#define EXP_TYPE_MERCENARY	"Mercenary Roles"
+
+#define EXP_TYPE_CLERIC	"Cleric Roles"
+#define EXP_TYPE_RANGER	"Ranger Roles"
+#define EXP_TYPE_BARD	"Bard Roles"
+#define EXP_TYPE_THIEF	"Thief Roles"
+#define EXP_TYPE_MAGICK	"Magick Roles"
+#define EXP_TYPE_COMBAT	"Combat Roles"
+
 
 //Flags in the players table in the db
 #define DB_FLAG_EXEMPT 1

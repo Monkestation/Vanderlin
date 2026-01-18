@@ -1,53 +1,53 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/churchbrick,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "b" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "g" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "k" = (
 /turf/closed/wall/mineral/decostone/fluffstone/reddish,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "o" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "p" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "s" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "t" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "v" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "y" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/churchbrick,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "O" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/structure/bonepile,
 /turf/open/floor/churchbrick,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "S" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/churchbrick,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "U" = (
 /turf/closed/mineral,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 U

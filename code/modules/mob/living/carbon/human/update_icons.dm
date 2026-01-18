@@ -47,6 +47,8 @@ There are several things that need to be remembered:
 
 
 */
+GLOBAL_LIST_INIT(no_child_icons, list(/obj/item/clothing/head, /obj/item/clothing/face, /obj/item/clothing/cloak, /obj/item/clothing/gloves, /obj/item/clothing/neck))
+GLOBAL_PROTECT(no_child_icons)
 
 /mob/living/carbon/proc/get_limbloss_index(limbr, limbl)
 	var/jazz = 1
@@ -759,8 +761,8 @@ There are several things that need to be remembered:
 		return
 
 	if(client && hud_used)
-		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_GLOVES) + 1]
-		inv?.update_icon()
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_MASK) + 1]
+		inv?.update_appearance(UPDATE_ICON)
 
 	if(wear_mask)
 		update_hud_wear_mask(wear_mask)
@@ -1017,6 +1019,8 @@ There are several things that need to be remembered:
 			hideboob = TRUE
 		if(cloak?.flags_inv & HIDEBOOB)
 			hideboob = TRUE
+		if(species?.no_boobs)
+			hideboob = TRUE
 		var/use_female_sprites = FALSE
 		if(species?.sexes)
 			if(gender == FEMALE && !species.swap_female_clothes)
@@ -1078,6 +1082,8 @@ There are several things that need to be remembered:
 		var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
 		var/hideboob = FALSE
 		if(cloak?.flags_inv & HIDEBOOB)
+			hideboob = TRUE
+		if(species?.no_boobs)
 			hideboob = TRUE
 		var/use_female_sprites = FALSE
 		if(species?.sexes)
@@ -1346,9 +1352,8 @@ generate/load female uniform sprites matching all previously decided variables
 		if(sleevejazz)
 			sleevejazz += "_[customi]"
 	var/t_icon = mob_overlay_icon
-	if(age == AGE_CHILD)
-		if(!istype(src, /obj/item/clothing/head) && !istype(src, /obj/item/clothing/face) && !istype(src, /obj/item/clothing/cloak) && !istype(src, /obj/item/clothing/gloves) && !istype(src, /obj/item/clothing/neck))
-			t_state += "_child"
+	if(age == AGE_CHILD && !is_type_in_list(src, GLOB.no_child_icons))
+		t_state += "_child"
 	if(!t_icon)
 		t_icon = default_icon_file
 
@@ -1454,13 +1459,15 @@ generate/load female uniform sprites matching all previously decided variables
 		if(sleeveindex == 4 || sleeveindex == 3)
 			sleeveindex -= 2
 
-	var/racecustom
+	var/index = I.icon_state
+	var/mob/living/carbon/human/HM = src
+	if(istype(HM) && HM.age == AGE_CHILD && !is_type_in_list(I, GLOB.no_child_icons))
+		index += "_child"
+	else if(gender == FEMALE ^ dna.species.swap_female_clothes)
+		index += "_f"
 	if(dna.species.custom_clothes)
-		if(dna.species.custom_id)
-			racecustom = dna.species.custom_id
-		else
-			racecustom = dna.species.id
-	var/index = "[I.icon_state][((gender == FEMALE && !dna.species.swap_female_clothes) || dna.species.swap_male_clothes) ? "_f" : ""][racecustom ? "_[racecustom]" : ""]"
+		index += "_[dna.species.custom_id ? dna.species.custom_id : dna.species.id]"
+
 	var/static/list/bloody_r = list()
 	var/static/list/bloody_l = list()
 	if(I.nodismemsleeves && sleeveindex) //armor pauldrons that show up above arms but don't get dismembered
@@ -1554,34 +1561,36 @@ generate/load female uniform sprites matching all previously decided variables
 
 //produces a key based on the human's limbs
 /mob/living/carbon/human/generate_icon_render_key()
-	. = "[dna.species.limbs_id]"
-
+	. = list(dna.species.limbs_id)
 	if(dna.species.use_skintones)
-		. += "-coloured-[skin_tone]"
+		. += "coloured"
+		. += skin_tone
 	else
-		. += "-not_coloured"
+		. += "not_coloured"
 
-	. += "-[gender]"
-	. += "-[age]"
+	. += gender
+	. += age
 
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		. += "-[BP.body_zone]"
+		. += BP.body_zone
 		if(BP.status == BODYPART_ORGANIC)
-			. += "-organic"
+			. += "organic"
 		else
-			. += "-robotic"
+			. += "robotic"
 		if(BP.rotted)
-			. += "-rotted"
+			. += "rotted"
 		if(BP.skeletonized)
-			. += "-skeletonized"
+			. += "skeletonized"
 		if(BP.dmg_overlay_type)
-			. += "-[BP.dmg_overlay_type]"
+			. += BP.dmg_overlay_type
 
 		for(var/datum/bodypart_feature/feature as anything in BP.bodypart_features)
-			. += "-[feature.accessory_type]-[feature.accessory_colors]"
+			. += feature.accessory_type
+			. += feature.accessory_colors
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
-		. += "-husk"
+		. += "husk"
+	return jointext(., "-")
 
 /mob/living/carbon/human/load_limb_from_cache()
 	..()

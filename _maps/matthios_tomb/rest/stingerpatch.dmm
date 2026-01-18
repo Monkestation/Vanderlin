@@ -1,42 +1,42 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "o" = (
 /obj/structure/kneestingers,
 /obj/structure/kneestingers,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "u" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "y" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "C" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "I" = (
 /obj/structure/ladder/earth,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "J" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "N" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "O" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Y" = (
 /obj/structure/kneestingers,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 
 (1,1,1) = {"
 a

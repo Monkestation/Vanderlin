@@ -2,39 +2,39 @@
 "a" = (
 /obj/structure/bars/grille,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "b" = (
 /turf/open/floor/concrete,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "c" = (
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "l" = (
 /obj/structure/bars,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "n" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "s" = (
 /turf/closed/wall/mineral/decostone/end{
 	dir = 4
 	},
-/area/rogue/under/tomb)
+/area/under/tomb)
 "v" = (
 /obj/structure/floordoor{
 	redstone_id = "bladedancer"
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "w" = (
 /obj/structure/floordoor{
 	redstone_id = "blades"
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "x" = (
 /obj/structure/bars/grille,
 /obj/structure/lever/wall{
@@ -42,14 +42,14 @@
 	redstone_id = "blades"
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "A" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "G" = (
 /turf/closed/wall/mineral/decostone/long,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "H" = (
 /obj/structure/bars/grille,
 /obj/structure/lever/wall{
@@ -57,45 +57,45 @@
 	redstone_id = "bladedancer"
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "J" = (
 /obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "L" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "M" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "P" = (
 /turf/closed/wall/mineral/decostone/end{
 	dir = 8
 	},
-/area/rogue/under/tomb)
+/area/under/tomb)
 "S" = (
 /obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "V" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "X" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Y" = (
 /turf/closed/wall/mineral/decostone,
-/area/rogue/under/tomb)
+/area/under/tomb)
 "Z" = (
 /obj/structure/bars/grille,
 /obj/structure/bars/grille,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb)
+/area/under/tomb)
 
 (1,1,1) = {"
 Y

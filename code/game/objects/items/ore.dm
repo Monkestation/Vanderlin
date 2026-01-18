@@ -267,7 +267,7 @@
 
 /obj/item/ingot/silverblessed/bullion
 	name = "blessed silver bullion"
-	desc = "This bar radiates a divine purity. The Psycross and the words casted into the surface denotes the Oratorium Throni Vacui as the point of it's origin."
+	desc = "This bar radiates a divine purity. The Psycross and the words cast into the surface denotes the Oratorium Throni Vacui as the point of its origin."
 	icon_state = "ingotsilvblessed_psy"
 	melting_material = /datum/material/silver
 	sellprice = 100
@@ -275,7 +275,7 @@
 
 /obj/item/ingot/blacksteel
 	name = "blacksteel bar"
-	desc = "Sacrificing the holy elements of silver for raw strength, this strange and powerful ingot's origin carries dark rumors.."
+	desc = "Sacrificing the holy elements of silver for raw strength, this strange and powerful ingot's origin carries dark rumors..."
 	icon_state = "ingotblacksteel"
 	smeltresult = /obj/item/ingot/blacksteel
 	sellprice = 90

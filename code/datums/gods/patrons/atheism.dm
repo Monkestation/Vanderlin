@@ -15,7 +15,7 @@
 /datum/patron/godless/godless //lol lmao
 	name = "Godless"
 	domain = "Abandonment of the Gods"
-	desc = "Worship of the gods is foolish! Gods exist but you refuse to worship them due to your own hubris."
+	desc = "Worship of the gods is foolish! Gods exist, but you refuse to worship them due to your own hubris."
 	flaws = "Stubborn, Unrelenting, Misguided"
 	worshippers = "Egomaniacs, Heretics, the Ignorant"
 	sins = "Idolatry, Worship, Blind Faith"
@@ -45,7 +45,7 @@
 /datum/patron/godless/defiant
 	name = "Defiant"
 	domain = "Rejection of Gods"
-	desc = "You have a grave distaste for authority, so much so to the point where you decided that you refuse to worship the gods! They are merely another form of authority, and you will never bow down to them"
+	desc = "You have a grave distaste for authority, so much so to the point where you decided that you refuse to worship the gods! They are merely another form of authority, and you will never bow down to them."
 	flaws = "Defiant, Rebellious, Unrelenting"
 	worshippers = "Anarchists, Rebels" //fuck the system, og
 	sins = "Obedience, Submission"
@@ -75,7 +75,7 @@
 /datum/patron/godless/naivety
 	name = "Naivety"
 	domain = "Indifference"
-	desc = "Either due to never being informed, memory issue, or perhaps a brain injury- you have no clue what gods are!"
+	desc = "Either due to never being informed, a memory issue, or perhaps a brain injury, you have no clue what gods are!"
 	flaws = "Ignorant, Naive, Stupid"
 	worshippers = "Younglings, Ignorant, Fools"
 	sins = "..What's that?"
@@ -89,7 +89,7 @@
 /datum/patron/godless/rashan
 	name = "Rashan-Kahl"
 	domain = "Twin-faced god of ambition and chains"
-	desc = "Rashan represents both creation and destruction, freedom and bondage- a duality that mirrors the rakshari's complex relationship with power. Temples to Rashan-Kahl often double as marketplaces, symbolizing the transactional nature of life."
+	desc = "Rashan represents both creation and destruction, freedom and bondage: a duality that mirrors the rakshari's complex relationship with power. Temples to Rashan-Kahl often double as marketplaces, symbolizing the transactional nature of life."
 	flaws = "Flaws of their followers"
 	worshippers = "Rakshari, Slavers, His Majesty"
 	sins = "Sins of their Followers"
@@ -102,3 +102,20 @@
 		"RASHAN-KAHL WILL ENSLAVE YOU!"
 	)
 	allowed_races = list(SPEC_ID_RAKSHARI)
+
+/datum/patron/godless/galadros
+	name = "Galadros"
+	domain = "The Great Wyrm in the heart of Kruskros, Krusnakell"
+	desc = "Galadros has brought himself to reverential status among Kobolds through generational servitude. They feed him the lux of the mountain. He gives their short lives purpose. For them, this is everything."
+	flaws = "Ignorance, Co-dependency, Stubbornness"
+	worshippers = "Kobolds, His Offspring"
+	sins = "Self-dependency, Failing your sire, Discouraging servantry"
+	boons = "A sense of purpose and accomplishment!"
+	confess_lines = list(
+		"I'LL NEVER LET YOU DOWN AGAIN!!",
+		"I HAVE FAILED YOU, MASTER!",
+		"HE IS HUNGRY! I MUST TO FEED HIM!!",
+		"I FIND PURPOSE THROUGH SERVITUDE!",
+		"THE GREAT WYRM WILL DEVOUR YOU!!",
+	)
+	allowed_races = list(SPEC_ID_KOBOLD)

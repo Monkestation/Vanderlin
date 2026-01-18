@@ -606,7 +606,7 @@ GLOBAL_LIST_EMPTY(chronicle_stats)
 
 		if(M)
 			if(M.assigned_role.title != "Unassigned" && !is_unassigned_job(M.assigned_role))
-				if(user.gender == FEMALE && M.assigned_role.f_title)
+				if(user.pronouns == SHE_HER && M.assigned_role.f_title)
 					job_title = " ([M.assigned_role.f_title])"
 				else
 					job_title = " ([M.assigned_role.title])"

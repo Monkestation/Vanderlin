@@ -38,6 +38,9 @@
 /datum/ai_planning_subtree/basic_melee_attack_subtree/gator_attack
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/gator_attack
 
+/datum/ai_planning_subtree/basic_melee_attack_subtree/meatvine
+	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/meatvine
+
 /datum/ai_behavior/basic_melee_attack/gator_attack
 	action_cooldown = 0.5 SECONDS
 	var/death_roll_chance = 15 // Chance to perform a death roll on attack
@@ -72,7 +75,7 @@
 		sleep(1)
 	animate(gator_pawn, transform = M, time = 1)
 
-	playsound(get_turf(gator_pawn), 'sound/vo/mobs/gator/gatordeath.ogg', 70, TRUE)
+	playsound(gator_pawn, 'sound/vo/mobs/gator/gatordeath.ogg', 70, TRUE)
 
 	// Set cooldown
 	controller.set_blackboard_key(BB_GATOR_DEATH_ROLL_COOLDOWN, world.time + death_roll_cooldown)

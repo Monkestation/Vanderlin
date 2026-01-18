@@ -14,7 +14,7 @@
 	craftdiff = 0
 ////////////////////////////////////
 
-/datum/anvil_recipe/weapons/tin/lead_bullet
+/datum/anvil_recipe/weapons/tin/lead_bullet //guys how are you making LEAD bullets out of TIN?
 	name = "4x Lead Bullets"
 	recipe_name = "a handful of lead bullets."
 	created_item = /obj/item/ammo_casing/caseless/bullet
@@ -103,6 +103,67 @@
 	name = "Bronze Spear (+Bar, +Small Log)"
 	additional_items = list(/obj/item/ingot/bronze, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/bronze
+
+/datum/anvil_recipe/weapons/bronze/cane
+	name = "Artificer Cane (+ Copper)"
+	additional_items = list(/obj/item/ingot/copper)
+	created_item = /obj/item/weapon/mace/cane/bronze
+
+/datum/anvil_recipe/weapons/bronze/shortsword
+	name = "Bronze Shortsword"
+	created_item = /obj/item/weapon/sword/short/bronze
+
+/datum/anvil_recipe/weapons/bronze/sword
+	name = "Bronze Sword"
+	created_item = /obj/item/weapon/sword/bronze
+
+/datum/anvil_recipe/weapons/bronze/sengese
+	name = "Bronze Sengese"
+	created_item = /obj/item/weapon/sword/scimitar/sengese/bronze
+
+/datum/anvil_recipe/weapons/bronze/dadao
+	name = "Bronze Dadao (+1 Bronze Bar)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/weapon/sword/sabre/dadao/bronze
+
+/datum/anvil_recipe/weapons/bronze/dadao
+	name = "Bronze Shishpar (+1 Bronze Bar)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/weapon/mace/shishpar/bronze
+
+/datum/anvil_recipe/weapons/bronze/urumi
+	name = "Bronze Urumi (+1 Bronze Bar)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/weapon/whip/urumi/bronze
+
+/datum/anvil_recipe/weapons/bronze/mace
+	name = "Bronze Mace (+ Stick)"
+	additional_items = list(/obj/item/grown/log/tree/stick)
+	created_item = /obj/item/weapon/mace/bronze
+
+/datum/anvil_recipe/weapons/bronze/axe
+	name = "Bronze Axe (+ Stick)"
+	additional_items = list(/obj/item/grown/log/tree/stick)
+	created_item = /obj/item/weapon/axe/bronze
+
+/datum/anvil_recipe/weapons/bronze/elvenclub
+	name = "Bronze Elven Warclub"
+	created_item = /obj/item/weapon/mace/elvenclub/bronze
+
+/datum/anvil_recipe/weapons/bronze/dagger
+	name = "2x Bronze Daggers"
+	created_item = /obj/item/weapon/knife/dagger/bronze
+	createditem_extra = 1
+
+/datum/anvil_recipe/weapons/bronze/throwingdagger
+	name = "3x Bronze Throwing Daggers"
+	created_item = /obj/item/weapon/knife/throwingknife/bronze
+	createditem_extra = 2
+
+/datum/anvil_recipe/weapons/bronze/ji
+	name = "Bronze Dagger-Ax (+ Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/billhook/ji/bronze
 
 // --------- IRON ------------ Middle Tier, what most disgusting Men at Arms have
 /datum/anvil_recipe/weapons/iron
@@ -421,6 +482,14 @@
 	created_item = /obj/item/weapon/sword/long/greatsword/zwei
 	craftdiff = 3
 
+/datum/anvil_recipe/weapons/iron/claymore
+	name = "Iron Claymore (+Bar x2)"
+	recipe_name = "a Iron Claymore"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/iron)
+	created_item = /obj/item/weapon/sword/long/greatsword/ironclaymore
+	craftdiff = 3
+
 /datum/anvil_recipe/weapons/iron/elvenclub
 	name = "Elven Warclub"
 	recipe_name = "a Warclub"
@@ -623,12 +692,18 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/kaskara
 
-/datum/anvil_recipe/weapons/steel/
+/datum/anvil_recipe/weapons/steel/kukri
 	name = "Steel Kukri"
 	recipe_name = "a Steel Kukri"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/knife/dagger/kukri/steel
-
+	
+/datum/anvil_recipe/weapons/steel/knuckles	
+	name = "Knuckles"
+	recipe_name = "a Steel Knuckles"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/knuckles
+	
 /datum/anvil_recipe/weapons/steel/dagger_steel
 	name = "2x Steel Daggers"
 	recipe_name = "a couple Daggers"
@@ -697,6 +772,22 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/weapon/sword/long/greatsword
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/steel/flamberge
+	name = "Flamberge (+Bar x3)"
+	recipe_name = "a Flamberge"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/sword/long/greatsword/flamberge
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/steel/claymore
+	name = "Steel Claymore (+Bar x2)"
+	recipe_name = "a Steel Claymore"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/sword/long/greatsword/steelclaymore
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/silver/noble_sword_scabbard
@@ -826,10 +917,9 @@
 	created_item = /obj/item/weapon/sword/scimitar/falchion
 
 /datum/anvil_recipe/weapons/steel/elvenclub
-	name = "Regal Elven Warclub (+Gold bar)"
-	recipe_name = "a Elven Warclub"
+	name = "Steel Elven Warclub"
+	recipe_name = "a Steel Elven Warclub"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/ingot/gold)
 	created_item = /obj/item/weapon/mace/elvenclub/steel
 
 // --------- SILVER ------------  Harder to craft, does less damage and has less durability than steel, but banes undead.
@@ -902,9 +992,17 @@
 
 /datum/anvil_recipe/weapons/silver/gada
 	name = "Regal Gada (+1 Gold bar)"
+	recipe_name = "a Regal Gada"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/gold)
 	created_item = /obj/item/weapon/mace/silver/gada
+
+/datum/anvil_recipe/weapons/silver/elvenclub
+	name = "Regal Elven Club (+1 Gold bar)"
+	recipe_name = "a Silver Elven Warclub"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/weapon/mace/elvenclub/silver
 
 /datum/anvil_recipe/weapons/psy/axe
 	name = "Psydonian War Axe (+1 B. Silver, +1 Stick)"
@@ -1002,9 +1100,16 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/atgervi_axe
-	name = "bearded axe"
+	name = "Bearded axe"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/axe/steel/atgervi
 	i_type = "Weapons"
 	craftdiff = 3
+
+/datum/anvil_recipe/weapons/mace/cane/noble
+	name = "Decorated Cane (+ Gold Ingot + Large Log)"
+	craftdiff = 3
+	additional_items = list(/obj/item/ingot/gold, /obj/item/grown/log/tree)
+	created_item = /obj/item/weapon/mace/cane/noble
+	i_type = "Weapons"

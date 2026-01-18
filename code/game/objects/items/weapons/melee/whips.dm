@@ -200,7 +200,7 @@
 	force = DAMAGE_WHIP+3
 	possible_item_intents = list(/datum/intent/whip/crack/metal, /datum/intent/whip/lash/metal)
 	name = "chain whip"
-	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more then anyone else with this."
+	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more than anyone else with this."
 	icon_state = "whip_chain"
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
@@ -259,6 +259,15 @@
 	force = DAMAGE_WHIP+2
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 150
+	wdefense = BAD_PARRY
+	can_parry = TRUE
+
+/obj/item/weapon/whip/urumi/bronze
+	name = "bronze urumi"
+	icon_state = "urumi_bronze"
+	force = DAMAGE_WHIP
+	smeltresult = /obj/item/ingot/bronze
+	max_blade_int = 100
 	wdefense = BAD_PARRY
 	can_parry = TRUE
 

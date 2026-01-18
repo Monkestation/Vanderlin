@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "b" = (
 /obj/item/clothing/shirt/dress/gen/colored/black,
 /obj/item/clothing/cloak/apron/waist{
@@ -9,69 +9,69 @@
 	pixel_y = -8
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "e" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "g" = (
 /obj/item/coin/copper/pile,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "h" = (
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "i" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "j" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /obj/effect/decal/remains/human,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "m" = (
 /obj/item/clothing/pants/tights,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "n" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "p" = (
 /obj/item/clothing/armor/cuirass/iron,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "q" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "t" = (
 /obj/item/clothing/pants/chainlegs/iron,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "u" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "v" = (
 /obj/item/storage/belt/leather/cloth,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "y" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "z" = (
 /obj/item/reagent_containers/food/snacks/cooked/sausage{
 	pixel_x = 14;
 	pixel_y = 4
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "A" = (
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -80,41 +80,41 @@
 	pixel_x = 14
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "B" = (
 /obj/effect/decal/remains/human,
 /turf/closed/mineral,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "D" = (
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "G" = (
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /obj/item/clothing/head/helmet/skullcap/grenzelhoft{
 	pixel_y = -15
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "H" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "I" = (
 /obj/effect/landmark/ambush,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "J" = (
 /obj/structure/spider/stickyweb,
 /turf/closed/mineral,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "K" = (
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "L" = (
 /obj/item/ingot/iron,
 /obj/item/ingot/iron,
@@ -127,26 +127,26 @@
 	pixel_x = 7
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "M" = (
 /turf/closed/mineral,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "N" = (
 /obj/item/clothing/shirt,
 /obj/item/clothing/shirt,
 /obj/item/clothing/shirt,
 /obj/item/clothing/shirt/rags,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "O" = (
 /obj/effect/decal/remains/human,
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "R" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "U" = (
 /obj/item/clothing/shirt/grenzelhoft{
 	pixel_x = -4;
@@ -160,28 +160,28 @@
 	pixel_y = -13
 	},
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "V" = (
 /obj/item/statue/iron,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "W" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "X" = (
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "Y" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 "Z" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/item/storage/belt/pouch/coins/mid,
 /turf/open/floor/naturalstone,
-/area/rogue/under/tomb/cave/spider)
+/area/under/tomb/cave/spider)
 
 (1,1,1) = {"
 i

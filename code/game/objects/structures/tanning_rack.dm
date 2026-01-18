@@ -17,7 +17,7 @@
 	if(hide)
 		. += span_warning("There is a piece of hide ready to be worked. I might need a knife for this.")
 	if(!anchored)
-		. += span_warning("It is un-anchored and able to be moved.")
+		. += span_warning("It is unanchored and able to be moved.")
 
 /obj/machinery/tanningrack/attack_hand(mob/user, params)
 	if(hide)

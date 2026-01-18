@@ -52,6 +52,8 @@
 	var/datum/clan_menu_interface/clan_menu_interface
 	var/datum/clan_hierarchy_node/clan_position
 
+	var/list/stored_enchantments
+
 
 /mob/living/proc/has_bloodpool_cost(cost)
 	if(cost > bloodpool)
@@ -324,7 +326,7 @@
 			remove_status_effect(/datum/status_effect/debuff/thirstyt1)
 			remove_status_effect(/datum/status_effect/debuff/thirstyt2)
 			if(prob(3))
-				playsound(get_turf(src), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
+				playsound(src, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	if(bloodpool < 100 && prob(9))
 		if(last_frenzy_check + 5 MINUTES < world.time)

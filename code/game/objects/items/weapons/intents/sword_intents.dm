@@ -143,6 +143,24 @@
 	swingdelay = 2
 	misscost = 90
 
+/datum/intent/katana/cut
+	name = "cut"
+	icon_state = "incut"
+	attack_verb = list("cuts", "slashes")
+	animname = "cut"
+	blade_class = BCLASS_CUT
+	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
+	item_damage_type = "slash"
+	damfactor = 1.1
+	misscost = 10
+	swingdelay = 0.5
+
+/datum/intent/katana/cut/one_hand_cut
+	damfactor = 1
+	misscost = 4
+	swingdelay = 0
+
+
 /*-----------\
 |   Special  |
 \-----------*/
@@ -165,3 +183,35 @@
 	no_early_release = TRUE
 	recovery = 20
 	clickcd = 10
+
+/datum/intent/katana/arc
+	name = "arc slash"
+	icon_state = "inarc"
+	attack_verb = list("sweeps", "arcs")
+	animname = "cut"
+	blade_class = BCLASS_CUT
+	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
+	item_damage_type = "slash"
+	reach = 2
+	swingdelay = 1.5
+	chargetime = 1.2
+	misscost = 20
+
+/datum/intent/katana/precision_cut
+	name = "precision cut"
+	icon_state = "incut"
+	attack_verb = list("precision-cuts", "clean-slashes")
+	animname = "cut"
+	blade_class = BCLASS_CUT
+	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
+	item_damage_type = "slash"
+	damfactor = 1.2
+	penfactor = AP_SWORD_THRUST+5
+	no_early_release = TRUE
+	swingdelay = 3
+	chargetime = 3
+	chargedrain = 1
+	misscost = 25
+	recovery = 15
+	charging_slowdown = 1
+	clickcd = 15

@@ -1,7 +1,7 @@
 // Orginially /poisonspray
 /datum/action/cooldown/spell/undirected/create_cloud
 	name = "Create Cloud"
-	desc = "Hold a container in your hand, it's contents turn into a 3-radius smoke"
+	desc = "Hold a container in your hand, its contents turn into a 3-radius smoke."
 	button_icon_state = "aerosolize"
 	sound = 'sound/magic/whiteflame.ogg'
 

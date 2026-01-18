@@ -8,53 +8,53 @@
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/fluff/telescope,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "aI" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "be" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "bs" = (
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "ca" = (
 /obj/structure/door/stone,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "cx" = (
 /turf/closed/wall/mineral/stone/window,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "cF" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "cQ" = (
 /obj/structure/fluff/railing/border,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "dD" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "dQ" = (
 /obj/structure/fluff/railing/border,
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "dS" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "er" = (
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ez" = (
 /obj/structure/fluff/railing/border,
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "eR" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/glass/bottle/vial,
@@ -64,33 +64,33 @@
 /obj/item/reagent_containers/glass/bottle,
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "ge" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "gl" = (
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "gE" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "gL" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "gO" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ho" = (
 /turf/closed/wall/mineral/stone/window,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "id" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
@@ -98,57 +98,57 @@
 	},
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "io" = (
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "jt" = (
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "kb" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "kc" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "km" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "kK" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "kM" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "kP" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/alch/swampdust,
 /obj/item/alch/runedust,
 /obj/item/alch/tobaccodust,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "kV" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "lf" = (
 /obj/structure/flora/grass,
 /obj/item/alch/waterdust,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "lv" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
@@ -156,18 +156,18 @@
 	},
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "lx" = (
 /obj/item/alch/magicdust,
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "md" = (
 /mob/living/simple_animal/hostile/skeleton/bow,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "mm" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/alch/swampdust,
@@ -177,30 +177,30 @@
 	dir = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "mp" = (
 /obj/structure/composter/halffull,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "mE" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "mJ" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "nt" = (
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "nw" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "nD" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -212,26 +212,26 @@
 	dir = 6
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "nK" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "nR" = (
 /obj/structure/circle_protection,
 /obj/item/alch/firedust,
 /obj/item/weapon/sword/silver,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "of" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
 /obj/item/soap/bath,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "oC" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -240,62 +240,62 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "oT" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "oU" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "ph" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "pA" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "pQ" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "qt" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "qE" = (
 /mob/living/simple_animal/hostile/skeleton/bow,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "qN" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "qO" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "qR" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "sb" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "sj" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/open/floor/blocks,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "sl" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/neuFarm/seed/poison_berries,
@@ -303,29 +303,29 @@
 /obj/item/neuFarm/seed/westleach,
 /obj/item/neuFarm/seed/wheat,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "sD" = (
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "sY" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "tJ" = (
 /obj/effect/decal/cleanable/sigil/NE,
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "tT" = (
 /obj/structure/well,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ui" = (
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "us" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -333,38 +333,38 @@
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "uG" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "uL" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "uU" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "vF" = (
 /obj/effect/decal/cleanable/sigil,
 /obj/item/weapon/knife/dagger/silver,
 /obj/item/reagent_containers/powder/moondust_purest,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "ws" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/clothing/face/spectacles/golden,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "wA" = (
 /obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "xk" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/weapon/sickle,
@@ -374,164 +374,164 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /obj/item/weapon/shovel,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "xS" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
 /obj/item/broom,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "yv" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "yN" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "zk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "zm" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "zB" = (
 /obj/structure/fluff/railing/border,
 /obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "zU" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "zV" = (
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Af" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "An" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "At" = (
 /turf/open/lava,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "AH" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "AN" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "AO" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Bq" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Bw" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "BF" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Ca" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Dx" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "DC" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "DJ" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Eb" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ed" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Fu" = (
 /obj/machinery/light/fueled/cauldron,
 /obj/effect/decal/cleanable/sigil/N,
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Gl" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "GA" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "GH" = (
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Hu" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "HD" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
 /obj/item/soap,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "HH" = (
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ib" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -540,171 +540,171 @@
 	dir = 4
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "IG" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/book/magicaltheory,
 /obj/item/book/granter/spell/magick/fireball,
 /obj/item/scomstone/bad,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "IK" = (
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Jj" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Jr" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Kc" = (
 /obj/effect/decal/cleanable/sigil/NW,
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Ke" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "KC" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Lg" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Lo" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = -32;
 	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Lr" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/mortar,
 /obj/item/pestle,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Lw" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "LQ" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ML" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Nd" = (
 /obj/item/bin/water,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "OE" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
 	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "OJ" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "OM" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "OX" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Pc" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Pq" = (
 /obj/structure/fluff/buysign{
 	name = "If you are reading this, the Ten says you are a nerd."
 	},
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Qg" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Qo" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "QM" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Sd" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "So" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "SM" = (
 /obj/structure/door/stone,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "SP" = (
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "SV" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "To" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Tr" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "TC" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 4
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "TE" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/metal/alt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "TU" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Uu" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/brflowers,
@@ -712,14 +712,14 @@
 /obj/structure/flora/grass,
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/red,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Uv" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "UI" = (
 /obj/machinery/light/fueled/oven/west,
 /obj/structure/closet/crate/chest,
@@ -731,50 +731,50 @@
 /obj/item/reagent_containers/food/snacks/meat/poultry,
 /obj/item/reagent_containers/food/snacks/meat/poultry,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "UL" = (
 /obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors/magic)
+/area/under/tomb/indoors/magic)
 "Vq" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "VW" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Wz" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/metal,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "WS" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "Yd" = (
 /obj/structure/circle_protection,
 /obj/item/alch/firedust,
 /obj/item/weapon/sword/rapier/silver,
 /turf/open/floor/hexstone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Ye" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ZH" = (
 /turf/open/floor/metal/alt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "ZN" = (
 /obj/structure/chair/wood/alt/chair_noble,
 /turf/open/floor/carpet/royalblack,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 
 (1,1,1) = {"
 be

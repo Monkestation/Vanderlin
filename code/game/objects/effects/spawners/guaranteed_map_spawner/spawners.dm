@@ -14,6 +14,10 @@
 		/obj/item/key/steward = 1,
 		/obj/item/key/steward = 1,
 		/obj/item/key/walls = 1,
+		/obj/item/key/mnoble1 = 1,
+		/obj/item/key/mnoble2 = 1,
+		/obj/item/key/mnoble3 = 1,
+		/obj/item/key/miner = 1,
 	)
 
 /obj/effect/spawner/guaranteed_map_spawner/listed/cutlery

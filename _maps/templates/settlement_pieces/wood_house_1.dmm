@@ -1,49 +1,49 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/wall/mineral/decostone,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "b" = (
 /obj/structure/chair/wood{
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "d" = (
 /turf/open/transparent/openspace,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "f" = (
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "h" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/carpet/red,
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "j" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "k" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "l" = (
 /turf/closed/wall/mineral/decowood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "m" = (
 /obj/structure/stairs{
 	dir = 4
 	},
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "n" = (
 /obj/structure/window/openclose{
 	dir = 8
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "t" = (
 /obj/effect/landmark/settlement_road_node,
 /turf/template_noop,
@@ -55,21 +55,21 @@
 	},
 /obj/structure/carpet/red,
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "x" = (
 /obj/structure/window/openclose,
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "y" = (
 /obj/structure/window/openclose{
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "z" = (
 /obj/structure/carpet/red,
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "B" = (
 /turf/open/floor/dirt,
 /area/template_noop)
@@ -78,63 +78,63 @@
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "E" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "F" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "I" = (
 /obj/structure/bed/mediocre,
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "J" = (
 /turf/template_noop,
 /area/template_noop)
 "O" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "P" = (
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Q" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "R" = (
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "S" = (
 /obj/effect/landmark/settlement_mob_spawn,
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "U" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/chair/wood,
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "V" = (
 /obj/structure/window/openclose{
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "W" = (
 /turf/closed/wall/mineral/wooddark/slitted,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "X" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/cobble/alt,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 "Z" = (
 /turf/closed/wall/mineral/decostone/moss,
-/area/rogue/indoors/shelter)
+/area/indoors/shelter)
 
 (1,1,1) = {"
 a

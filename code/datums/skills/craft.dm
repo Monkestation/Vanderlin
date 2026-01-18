@@ -88,7 +88,7 @@
 
 /datum/skill/craft/engineering
 	name = "Engineering"
-	desc = "Engineering is a skill that represents your character's ability to craft mechanical items. The higher your skill in Engineering, the more complex items you can create without failure.."
+	desc = "Engineering is a skill that represents your character's ability to craft mechanical items. The higher your skill in Engineering, the more complex items you can create without failure..."
 	dreams = list(
 		"...visions plague your mind. you toss and turn this nite. you see mechanical beasts gutting their masters with bare hands, fire raging acrost unknown streets... you grab a brick off the road and peer below into an infinite void... you inhale, and feel the steam burn your lungs..."
 	)

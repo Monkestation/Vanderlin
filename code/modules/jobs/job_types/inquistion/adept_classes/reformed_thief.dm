@@ -3,7 +3,6 @@
 	title = "Reformed Thief"
 	tutorial = "You are a former thief who has been given a chance to redeem yourself by the Inquisitor. You serve him and Psydon with your stealth and cunning."
 	outfit = /datum/outfit/adept/rthief
-
 	category_tags = list(CTAG_ADEPT)
 	cmode_music = 'sound/music/cmode/adventurer/CombatRogue.ogg'
 
@@ -34,6 +33,7 @@
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 	)
+
 	jobstats = list(
 		STATKEY_STR = -1,
 		STATKEY_END = 1,
@@ -41,10 +41,14 @@
 		STATKEY_SPD = 2,
 	)
 
+	languages = list(/datum/language/thievescant)
 
-/datum/outfit/adept/rthief/pre_equip(mob/living/carbon/human/H)
-	..()
-	//Armor for class
+/datum/job/advclass/adept/rthief/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", -10, "Reformed Thief")
+
+/datum/outfit/adept/rthief
+	name = "Reformed Thief (Adept)"
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/splint
 	head = /obj/item/clothing/head/adeptcowl
@@ -54,10 +58,10 @@
 	beltl = /obj/item/weapon/mace/cudgel
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/shredded
-	backpack_contents = list(/obj/item/lockpick = 1, /obj/item/storage/keyring/adept = 1, /obj/item/weapon/knife/dagger/silver/psydon = 1, 	/obj/item/clothing/head/inqarticles/blackbag = 1,	/obj/item/inqarticles/garrote = 1,)
-	H.grant_language(/datum/language/thievescant)
-	to_chat(H, span_info("I can gesture in thieves' cant with ,t before my speech."))
-
-/datum/outfit/adept/rthief/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	GLOB.inquisition.add_member_to_school(H, "Order of the Venatari", -10, "Reformed Thief")
+	backpack_contents = list(
+		/obj/item/lockpick = 1,
+		/obj/item/storage/keyring/adept = 1,
+		/obj/item/weapon/knife/dagger/silver/psydon = 1,
+		/obj/item/clothing/head/inqarticles/blackbag = 1,
+		/obj/item/inqarticles/garrote = 1,
+	)

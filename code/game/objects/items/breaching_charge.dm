@@ -24,7 +24,7 @@
 
 	// Only works on destructable wall turfs.
 	if((!iswallturf(bomb_target)  && !ismineralturf(bomb_target)) || isindestructiblewall(bomb_target))
-		to_chat(user, span_warning("I can only use this on destructable walls!"))
+		to_chat(user, span_warning("I can only use this on destructible walls!"))
 		return
 
 	user.visible_message(span_warning("[user] begins deploying [src]..."), \
@@ -73,7 +73,7 @@
 /obj/item/breach_charge/fire_act(added, maxstacks)
 	if(deployed && !ignited)
 		visible_message(span_warning("[src] ignites!"))
-		playsound(src.loc, 'sound/items/fuse.ogg', 100)
+		playsound(src, 'sound/items/fuse.ogg', 100)
 		ignited = TRUE
 		detonation_time = world.time + fuse_duration
 		icon_state = "[initial(icon_state)]_ignited"

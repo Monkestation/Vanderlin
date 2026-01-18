@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/aoe/on_turf/arcyne_storm
 	name = "Arcyne storm"
-	desc = "Conjure ripples of force into existance over a large area, injuring any who enter."
+	desc = "Conjure ripples of force into existence over a large area, injuring any who enter."
 	button_icon_state = "hierophant"
 
 	point_cost = 8

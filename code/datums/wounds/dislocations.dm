@@ -5,7 +5,7 @@
 	crit_message = list(
 		"The %BODYPART jolts painfully!",
 		"The %BODYPART is twisted out of place!",
-		"The %BODYPART is wrenched out of it's socket!",
+		"The %BODYPART is wrenched out of its socket!",
 		"The %BODYPART is dislocated!",
 	)
 	sound_effect = "fracturedry"
@@ -69,7 +69,7 @@
 	crit_message = list(
 		"The spine slips!",
 		"The spine twists!",
-		"The %BODYPART is wrenched out of it's socket!",
+		"The %BODYPART is wrenched out of its socket!",
 	)
 	whp = 80
 	woundpain = 100

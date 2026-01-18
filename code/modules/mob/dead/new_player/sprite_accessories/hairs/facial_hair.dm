@@ -147,6 +147,12 @@
 	gender = MALE
 	specuse = list(SPEC_ID_RAKSHARI)
 
+/datum/sprite_accessory/hair/facial/rakshari/jinni
+	name = "Jinni"
+	icon_state = "jinni"
+	gender = MALE
+	specuse = list(SPEC_ID_RAKSHARI)
+
 /datum/sprite_accessory/hair/facial/triton/seaqueen
 	name = "Seaqueen"
 	icon_state = "seaqueen"

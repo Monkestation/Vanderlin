@@ -1,20 +1,19 @@
-/datum/job/advclass/psyaltrist
+/datum/job/advclass/sacrestant/psyaltrist
 	title = "Psyaltrist"
 	tutorial = "Every inquisitor has their second. You aim to keep spirits and faith high, while handling the needs of the inquisitor. Not a glamorous role, but a vital one. “Maybe his lordship would prefer the lute, today, over the viola?”"
 	category_tags = list(CTAG_INQUISITION)
 	outfit = /datum/outfit/psyaltrist
 
 	jobstats = list(
-		STATKEY_STR = 1,
 		STATKEY_END = 1,
 		STATKEY_SPD = 3,
-	)
+	) //4 Statline
 
 	skills = list(
 		/datum/skill/misc/music = SKILL_LEVEL_MASTER,
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
@@ -23,13 +22,27 @@
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE
 	)
 
-	traits = list(TRAIT_DODGEEXPERT, TRAIT_EMPATH)
+	languages = list(
+		/datum/language/elvish,
+		/datum/language/celestial,
+		/datum/language/hellspeak,
+		/datum/language/orcish
+	)
+
+	traits = list(	TRAIT_DODGEEXPERT,
+		TRAIT_EMPATH,
+		TRAIT_INQUISITION,
+		TRAIT_SILVER_BLESSED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
+		TRAIT_FOREIGNER,
+		)
 
 	spells = list(/datum/action/cooldown/spell/vicious_mockery)
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
-/datum/job/advclass/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/sacrestant/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Psyaltrist")
 
@@ -51,7 +64,7 @@
 	spawned.select_equippable(player_client, instruments)
 
 /datum/outfit/psyaltrist
-	name = "Psyaltrist"
+	name = "Psyaltrist (Sacrestants)"
 	armor = /obj/item/clothing/armor/leather/studded/psyaltrist
 	backl = /obj/item/storage/backpack/satchel/otavan
 	cloak = /obj/item/clothing/cloak/psyaltrist

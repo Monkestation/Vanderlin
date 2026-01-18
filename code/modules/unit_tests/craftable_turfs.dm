@@ -47,6 +47,23 @@
 		/turf/open/floor/cracked_earth,
 		/turf/open/floor/flesh,
 		/turf/open/dungeon_trap,
+		/turf/open/floor/blocks/carved,
+		/turf/open/floor/churchmarble/purple,
+		/turf/open/floor/churchmarble/violet,
+		/turf/open/floor/churchmarble/rust,
+		/turf/open/floor/churchmarble/pale,
+		/turf/open/floor/churchmarble/gold,
+		/turf/open/floor/churchmarble/green,
+		/turf/open/floor/church/violet,
+		/turf/open/floor/church/rust,
+		/turf/open/floor/church/pale,
+		/turf/open/floor/church/gold,
+		/turf/open/floor/church/green,
+		/turf/open/floor/churchrough/violet,
+		/turf/open/floor/churchrough/rust,
+		/turf/open/floor/churchrough/pale,
+		/turf/open/floor/churchrough/gold,
+		/turf/open/floor/churchrough/green,
 	) \
 	+ typesof(/turf/open/floor/mushroom) \
 	+ typesof(/turf/open/floor/sandstone_tile) \

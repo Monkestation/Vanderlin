@@ -3,103 +3,103 @@
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "aN" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "bG" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/herb/atropa,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "cu" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "cL" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "eq" = (
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "fc" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "fm" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "fT" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "fV" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "gc" = (
 /obj/structure/flora/grass/herb/euphrasia,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "ic" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "iP" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "mU" = (
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "nQ" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "or" = (
 /obj/structure/flora/grass/herb/valeriana,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "oL" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/grassybush,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "px" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "pD" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "pI" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "pS" = (
 /obj/structure/flora/grass,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "qD" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
@@ -107,65 +107,65 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "qY" = (
 /obj/structure/flora/ausbushes/grassybush,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "sa" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "sh" = (
 /obj/structure/flora/ausbushes/grassybush,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "sB" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "sO" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "tZ" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "uc" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "ux" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "uY" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/grassybush,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "wg" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "wr" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "wI" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "xV" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/flora/grass,
@@ -173,252 +173,252 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "zp" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "zL" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "zY" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Au" = (
 /obj/structure/fluff/statue/gargoyle/moss/candles,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "AB" = (
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "AR" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/grass/herb/matricaria,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "BL" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/grass/herb/atropa,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Cm" = (
 /obj/structure/flora/grass/herb/taraxacum,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "CU" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ev" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Fj" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/grassybush,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "FD" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "FJ" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Gd" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/herb/calendula,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Gk" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "GQ" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Hx" = (
 /obj/structure/bed/hay,
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "HZ" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ib" = (
 /obj/structure/flora/grass/herb/artemisia,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ie" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Je" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Jw" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/grass/herb/artemisia,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ko" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Lm" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "ME" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "MO" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Nx" = (
 /obj/effect/landmark/chest_or_mimic,
 /obj/effect/spawner/map_spawner/loot/medium,
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "NE" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/grass/herb/mentha,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Oi" = (
 /obj/structure/flora/grass,
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "PC" = (
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /obj/effect/decal/cleanable/blood,
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Rf" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ry" = (
 /obj/structure/bed/hay,
 /obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "RP" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "RR" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Sq" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "SK" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "SN" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Tg" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "TA" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Ub" = (
 /obj/effect/decal/cleanable/blood,
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "US" = (
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Wc" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/grass/herb/benedictus,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Wd" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "WV" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/grass/herb/valeriana,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Xw" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Yg" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "YT" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "Zj" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/grass/herb/mentha,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "ZJ" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/grass/herb/euphrasia,
 /turf/open/floor/grass/mixyel,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 "ZL" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/wilds)
+/area/under/tomb/wilds)
 
 (1,1,1) = {"
 zL

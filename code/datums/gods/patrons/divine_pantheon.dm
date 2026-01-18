@@ -22,7 +22,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 
 /datum/patron/divine/can_pray(mob/living/carbon/human/follower)
 	//you can pray anywhere inside a church
-	if(istype(get_area(follower), /area/rogue/indoors/town/church))
+	if(istype(get_area(follower), /area/indoors/town/church))
 		return TRUE
 
 	for(var/obj/structure/fluff/psycross/cross in view(4, get_turf(follower)))
@@ -131,7 +131,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 /datum/patron/divine/ravox
 	name = RAVOX
 	domain = "God of Warfare, Justice, and Bravery"
-	desc = "Crafted from the the blade of Psydon, a champion of all who seek righteousness for themselves and others."
+	desc = "Crafted from the blade of Psydon, a champion of all who seek righteousness for themselves and others."
 	flaws = "Carelessness, Aggression, Pride"
 	worshippers = "Warriors, Sellswords, Guardsmen"
 	sins = "Cowardice, Cruelty, Stagnation"
@@ -148,7 +148,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 
 /datum/patron/divine/xylix
 	name = XYLIX
-	domain = "Diety of Trickery, Freedom, and Inspiration"
+	domain = "Deity of Trickery, Freedom, and Inspiration"
 	desc = "Crafted from the silver tongue of Psydon. Xylix is a force of change and deceit, yet allows little known of their gender let alone presence."
 	flaws = "Petulance, Deception, Gambling-Prone"
 	worshippers = "Cheats, Performers, The Hopeless"
@@ -192,7 +192,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 /datum/patron/divine/malum
 	name = MALUM
 	domain = "God of Toil, Innovation, and Creation"
-	desc = "Crafted from the hands of Psydon. He would later use his own to construct wonderous inventions."
+	desc = "Crafted from the hands of Psydon. He would later use his own to construct wondrous inventions."
 	flaws = "Obsessive, Exacting, Overbearing"
 	worshippers = "Smiths, Miners, Sculptors"
 	sins = "Cheating, Shoddy Work, Suicide"

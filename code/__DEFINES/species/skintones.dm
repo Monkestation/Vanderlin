@@ -129,6 +129,7 @@
 #define SKIN_COLOR_SUNSTREAK "b77614" //White - Tan
 #define SKIN_COLOR_MOONSHADE "C0C0C0" //Middle-eastern
 #define SKIN_COLOR_SANDSWEPT "fcccb3" //White - Tan
+#define SKIN_COLOR_ICEPACK "3d496d" //Blurple
 
 // TRITON SKIN TONES
 /// Very Light Blue "#9cc2e2"
@@ -159,6 +160,12 @@
 #define SKIN_COLOR_WASTE "4f2d61"
 /// Pale Orange "#d69558"
 #define SKIN_COLOR_TOXIN "d69558"
+
+// RAKSHARI SKIN TONES
+/// Black "#41414e"
+#define SKIN_COLOR_NIGHTSHADE "41414e"
+/// Orange "#cc9552"
+#define SKIN_COLOR_QUICKSAND "cc9552" //Apparently sphynx cats can be orange, who knew!
 
 // SPECIAL SKIN TONES
 /// Sickly green

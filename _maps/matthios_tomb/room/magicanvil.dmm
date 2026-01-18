@@ -1,18 +1,18 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "b" = (
 /turf/closed/wall/mineral/stone,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "c" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "d" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/transparent/openspace,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "f" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -20,30 +20,30 @@
 /obj/item/clothing/wrists/bracers/leather,
 /obj/item/weapon/pick/paxe,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "g" = (
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "j" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "k" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/hell,
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "l" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/hell,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "m" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "n" = (
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "o" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -55,14 +55,14 @@
 	pixel_y = 7
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "p" = (
 /turf/open/lava,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "q" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "r" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -70,11 +70,11 @@
 	},
 /mob/living/carbon/human/species/goblin/npc/ambush/hell,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "u" = (
 /obj/structure/grindwheel,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "v" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -82,7 +82,7 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "w" = (
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -90,10 +90,10 @@
 /obj/item/clothing/wrists/bracers/leather,
 /obj/item/weapon/axe/iron,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "x" = (
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "y" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -102,51 +102,51 @@
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "z" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "A" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "C" = (
 /obj/structure/fluff/railing/wood,
 /mob/living/carbon/human/species/goblin/npc/ambush/hell,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "E" = (
 /mob/living/carbon/human/species/orc/warrior,
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "F" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/hell,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "G" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "H" = (
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "I" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "J" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -156,15 +156,15 @@
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "K" = (
 /obj/item/bin/water,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "L" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "M" = (
 /obj/machinery/anvil,
 /obj/item/riddleofsteel,
@@ -173,10 +173,10 @@
 	pixel_y = 5
 	},
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "N" = (
 /turf/open/floor/dirt,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "P" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -185,17 +185,17 @@
 	pixel_y = 7
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "R" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobblerock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "S" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "T" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -208,18 +208,18 @@
 	pixel_y = 7
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "U" = (
 /mob/living/carbon/human/species/orc/warlord/skilled,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "V" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "W" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -231,15 +231,15 @@
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Y" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 "Z" = (
 /obj/structure/fluff/railing/wood,
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/cobble,
-/area/rogue/under/tomb/cave/lava)
+/area/under/tomb/cave/lava)
 
 (1,1,1) = {"
 Y

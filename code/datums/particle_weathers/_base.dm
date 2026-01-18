@@ -207,7 +207,11 @@
 		SSParticleWeather.particleEffect.animateSeverity(severityMod())
 
 		//Wait for the last particle to fade, then qdel yourself
-		addtimer(CALLBACK(src, PROC_REF(end)), SSParticleWeather.particleEffect.lifespan + SSParticleWeather.particleEffect.fade)
+		var/wait_time = (SSParticleWeather.particleEffect.lifespan + SSParticleWeather.particleEffect.fade)
+		if(istype(wait_time, /generator)) // because this can happen
+			var/generator/wait_generator = wait_time
+			wait_time = wait_generator.Rand()
+		addtimer(CALLBACK(src, PROC_REF(end)), (SSParticleWeather.particleEffect.lifespan + SSParticleWeather.particleEffect.fade))
 
 
 

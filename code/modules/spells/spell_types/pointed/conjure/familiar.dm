@@ -8,6 +8,9 @@
 
 	sound = 'sound/magic/whiteflame.ogg'
 
+	invocation = "B'ST FR'ND!"
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 2 SECONDS
 	charge_drain = 1
 	charge_slowdown = 1.3

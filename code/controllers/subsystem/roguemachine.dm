@@ -50,9 +50,9 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 	if(!T)
 		return
 	var/area/AR = get_area(T)
-	var/list/L = list(/area/rogue/outdoors/town,\
-/area/rogue/indoors/town,\
-/area/rogue/under/town)
+	var/list/L = list(/area/outdoors/town,\
+/area/indoors/town,\
+/area/under/town)
 	for(var/X in L)
 		if(istype(AR, X))
 			return TRUE

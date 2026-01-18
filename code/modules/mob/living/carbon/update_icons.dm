@@ -444,17 +444,19 @@
 //produces a key based on the mob's limbs
 
 /mob/living/carbon/proc/generate_icon_render_key()
+	. = list()
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		. += "-[BP.body_zone]"
+		. += BP.body_zone
 		if(BP.animal_origin)
-			. += "-[BP.animal_origin]"
+			. += BP.animal_origin
 		if(BP.status == BODYPART_ORGANIC)
-			. += "-organic"
+			. += "organic"
 		else
-			. += "-robotic"
+			. += "robotic"
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
-		. += "-husk"
+		. += "husk"
+	return jointext(., "-")
 
 
 //change the mob's icon to the one matching its key
