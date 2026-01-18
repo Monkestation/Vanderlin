@@ -14,6 +14,7 @@
 	. = ..()
 	update_observing_turf()
 	register_observation_signals()
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/redstone/observer/Destroy()
 	unregister_observation_signals()
@@ -80,16 +81,17 @@
 	pulsing = TRUE
 	power_level = 15
 	schedule_network_update()
-	update_appearance(UPDATE_OVERLAYS)
+	update_appearance(UPDATE_ICON_STATE)
+
 	spawn(pulse_length * 10)
 		pulsing = FALSE
 		power_level = 0
 		schedule_network_update()
-		update_appearance(UPDATE_OVERLAYS)
+		update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/redstone/observer/update_icon()
+/obj/structure/redstone/observer/update_icon_state()
 	. = ..()
-	icon_state = pulsing ? "comparator" : "comparator"
+	icon_state = pulsing ? "comparator_pulse" : "comparator"
 
 /obj/structure/redstone/observer/AltClick(mob/user)
 	if(!Adjacent(user))
@@ -97,5 +99,5 @@
 	dir = turn(dir, 90)
 	update_observing_turf()
 	register_observation_signals()
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 	to_chat(user, "<span class='notice'>You rotate the [name].</span>")

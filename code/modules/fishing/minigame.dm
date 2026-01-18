@@ -815,14 +815,14 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 /atom/movable/screen/hud_bait/Initialize(mapload, datum/hud/hud_owner, datum/fishing_challenge/challenge)
 	. = ..()
 	if(!challenge || challenge.bait_pixel_height == MINIGAME_BAIT_HEIGHT)
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 		return
 
 	adjust_to_difficulty(challenge)
 
 /atom/movable/screen/hud_bait/proc/adjust_to_difficulty(datum/fishing_challenge/challenge)
 	cur_height = challenge.bait_pixel_height
-	update_icon()
+	update_appearance(UPDATE_OVERLAYS)
 
 /atom/movable/screen/hud_bait/update_overlays()
 	. = ..()

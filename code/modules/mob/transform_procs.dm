@@ -1,3 +1,9 @@
+#define TRANSFORMATION_DURATION 22
+/// Will be removed once the transformation is complete.
+#define TEMPORARY_TRANSFORMATION_TRAIT "temporary_transformation"
+/// Considered "permanent" since we'll be deleting the old mob and the client will be inserted into a new one (without this trait)
+#define PERMANENT_TRANSFORMATION_TRAIT "permanent_transformation"
+
 /mob/living/carbon/proc/monkeyize(tr_flags = (TR_KEEPITEMS | TR_KEEPVIRUS | TR_KEEPSTUNS | TR_KEEPREAGENTS | TR_DEFAULTMSG))
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
@@ -38,6 +44,7 @@
 
 	//handle DNA and other attributes
 	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(icon_update=0)
 
 	if(suiciding)
@@ -165,6 +172,7 @@
 		O.equip_to_appropriate_slot(C)
 
 	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(mutcolor_update=1)
 
 	if(cmptext("monkey",copytext(O.dna.real_name,1,7)))
@@ -318,3 +326,7 @@
 
 	//Not in here? Must be untested!
 	return 0
+
+#undef PERMANENT_TRANSFORMATION_TRAIT
+#undef TEMPORARY_TRANSFORMATION_TRAIT
+#undef TRANSFORMATION_DURATION

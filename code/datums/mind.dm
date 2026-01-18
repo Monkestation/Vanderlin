@@ -540,6 +540,13 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 			return
 		antag_datum_ref.admin_remove(usr)
 
+	else if(href_list["vv_antag"])
+		var/datum/antagonist/antag_datum_ref = locate(href_list["vv_antag"]) in antag_datums
+		if(!istype(antag_datum_ref))
+			to_chat(usr, span_warning("Invalid antagonist ref to view variables."))
+			return
+		usr.client.debug_variables(antag_datum_ref)
+
 	else if (href_list["memory_edit"])
 		var/new_memo = copytext(sanitize(input("Write new memory", "Memory", memory) as null|message),1,MAX_MESSAGE_LEN)
 		if (isnull(new_memo))

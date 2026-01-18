@@ -62,16 +62,6 @@
 	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1))
 		W.play_tool_sound(src)
 		deconstruct(TRUE)
-	else if(istype(W, /obj/item/bedsheet))
-		var/obj/item/bedsheet/sheet = W
-		to_chat(user, span_notice("You start tucking the [sheet] into the [src]."))
-		if(do_after(user, 2 SECONDS, src))
-			sheet_tucked = TRUE
-			sheet_on = TRUE
-			user.dropItemToGround(sheet)
-			sheet.forceMove(get_turf(src))
-			sheet.bed_tucked = TRUE
-			user.nobles_seen_servant_work()
 	else
 		return ..()
 
