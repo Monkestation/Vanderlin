@@ -118,7 +118,7 @@
 			I.emote("agony", forced = TRUE)
 			I.Stun(30)
 			I.Knockdown(30)
-			I.adjust_jitter(30)
+			I.adjust_jitter(6 SECONDS)
 			return
 		else
 			M.flash_fullscreen("redflash3")
@@ -128,7 +128,7 @@
 			ADD_TRAIT(M, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 			M.Stun(30)
 			M.Knockdown(30)
-			M.adjust_jitter(30)
+			M.adjust_jitter(6 SECONDS)
 			return
 
 	else if(Vamp) //We're the vampire, we can't be saved.

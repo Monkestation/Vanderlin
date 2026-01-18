@@ -144,7 +144,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 			text += inspiration.audience_weakrefs[mob_ref]
 	if(!length(text))
 		return
-	to_chat(src, "My audience members are: [text.Join(" ,")].")
+	to_chat(src, "My audience members are: [text.Join(", ")].")
 
 /mob/living/carbon/human/proc/picksongs()
 	set name = "Fill Songbook"

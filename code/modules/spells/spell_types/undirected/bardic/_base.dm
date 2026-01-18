@@ -4,12 +4,13 @@
 	background_icon = 'icons/mob/actions/bardsongs.dmi'
 	has_visual_effects = FALSE
 	associated_skill = /datum/skill/misc/music
+	experience_modifier = 0.1
 
 	charge_required = FALSE
 	invocation = ""
 	invocation_type = INVOCATION_SHOUT
 	sound = 'sound/magic/buffrollaccent.ogg'
-	cooldown_time = 2 MINUTES
+	cooldown_time = 100 SECONDS
 	var/datum/status_effect/stacking/playing_inspiration/song_stack_effect = /datum/status_effect/stacking/playing_inspiration
 	var/datum/status_effect/inspiration_effect
 
