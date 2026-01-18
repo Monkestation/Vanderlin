@@ -114,15 +114,24 @@
 /obj/item/clothing/get_inspect_entries(list/inspect_list)
 	. = ..()
 
+	if(armor)
+		. += "\n<u><b>DEFENSE:</b></u>\n"
+		var/list/defense_strings = list()
+		for(var/damage_key in ARMOR_LIST_DAMAGE())
+			var/rating = armor.get_rating(damage_key)
+			defense_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [armor_to_protection_class(rating)]</font>"
+		. += defense_strings.Join(" | ")
+
 	if(length(prevent_crits))
-		. += "\n<b>DEFENSE:</b>"
-		for(var/X in prevent_crits)
-			. += "\n<b>[X] damage</b>"
+		. += "\n<u><b>PREVENT CRITS:</b></u>\n"
+		. += prevent_crits.Join(" | ")
 
 	if(body_parts_covered)
-		. += "\n<b>COVERAGE:</b>"
+		. += "\n<u><b>COVERAGE:</b></u>\n"
+		var/list/parsed_zones = list()
 		for(var/zone in body_parts_covered2organ_names(body_parts_covered))
-			. += "\n<b>[parse_zone(zone)]</b>"
+			parsed_zones += "[parse_zone(zone)]"
+		. += parsed_zones.Join(" | ")
 
 	switch(armor_class)
 		if(AC_HEAVY)
@@ -572,4 +581,3 @@ BLIND     // can't see anything
 		if(COOLDOWN_FINISHED(src, wet_stress_cd))
 			COOLDOWN_START(src, wet_stress_cd, 60 SECONDS)
 			C.add_stress(/datum/stress_event/wet_cloth)
-
