@@ -70,7 +70,7 @@
 		"Mace" = /obj/item/weapon/mace/goden/steel,
 	)
 
-	var/weaponchoice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Specialisation", title = "DISGRACED KNIGHT")
+	var/weaponchoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "DISGRACED KNIGHT")
 	if(!weaponchoice)
 		return
 
@@ -113,7 +113,7 @@
 		"None" = /obj/item/clothing/head/roguehood/colored/uncolored,
 	)
 
-	var/helmetchoice = spawned.select_equippable(spawned, selectablehelmets, message = "Choose Your Helmet", title = "DISGRACED KNIGHT")
+	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "DISGRACED KNIGHT")
 	if(!helmetchoice)
 		return
 

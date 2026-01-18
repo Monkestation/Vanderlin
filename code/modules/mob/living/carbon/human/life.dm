@@ -23,12 +23,12 @@
 
 /mob/living/carbon/human/Life()
 //	set invisibility = 0
+	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE)
+
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
 	. = ..()
-
-	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE)
 
 	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
 		adjust_bloodpool(3)
@@ -78,8 +78,6 @@
 		update_energy()
 		handle_environment()
 		handle_hygiene()
-		if(health <= 0)
-			apply_damage(1, OXY)
 		if(dna?.species)
 			dna.species.spec_life(src) // for mutantraces
 
@@ -150,14 +148,6 @@
 					if(prob(50))
 						has_stubble = TRUE
 						update_body()
-
-
-/mob/living/carbon/human/handle_traits()
-	if (getOrganLoss(ORGAN_SLOT_BRAIN) >= 60)
-		add_stress(/datum/stress_event/brain_damage)
-	else
-		remove_stress(/datum/stress_event/brain_damage)
-	return ..()
 
 /mob/living/proc/handle_environment()
 	return

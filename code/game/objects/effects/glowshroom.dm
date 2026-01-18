@@ -54,9 +54,11 @@
 				return FALSE
 	..()
 
-/obj/structure/kneestingers/New(loc, obj/item/neuFarm/seed/newseed, mutate_stats)
-	..()
+/obj/structure/kneestingers/Initialize(mapload, obj/item/neuFarm/seed/newseed, mutate_stats)
+	. = ..()
+
 	set_light(1.5, 1.5, 1.5, l_color ="#d4fcac")
+
 	if(icon_state == "glowshroom1" )
 		icon_state = "glowshroom[rand(1,3)]"
 		pixel_x = base_pixel_x + rand(-4, 4)

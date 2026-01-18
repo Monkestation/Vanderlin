@@ -12,7 +12,7 @@
 	cooktime = 20 SECONDS
 	var/fertile = FALSE
 
-/obj/item/reagent_containers/food/snacks/egg/New()
+/obj/item/reagent_containers/food/snacks/egg/Initialize(mapload)
 	. = ..()
 	icon_state = pick("egg","eggB")
 

@@ -20,8 +20,6 @@
 	spell_flags = SPELL_RITUOS
 	aoe_radius = 3
 	ignore_openspace = TRUE
-	staggered = TRUE
-	stagger_delay = 0.5 SECONDS
 
 	var/obj/structure/flora/field/flowers
 
@@ -317,7 +315,7 @@
 	check_field_presence()
 	tick_counter++
 	L.Stun(3)
-	L.Jitter(2)
+	L.adjust_jitter(2)
 	L.emote(pick("spin", "dance"), forced=TRUE)
 	L.emote(pick("laugh", "giggle"), forced=TRUE)
 	if (tick_counter >= 4)
