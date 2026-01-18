@@ -6,6 +6,7 @@
 	associated_skill = /datum/skill/misc/music
 
 	charge_required = FALSE
+	invocation = ""
 	invocation_type = INVOCATION_SHOUT
 	sound = 'sound/magic/buffrollaccent.ogg'
 	cooldown_time = 2 MINUTES
@@ -50,7 +51,6 @@
 	stack_decay = 2 // decay at twice the speed of buildup (5 seconds max)
 	stack_threshold = 20 // by default after 10 seconds
 	max_stacks = 20
-	invocation = ""
 
 	var/visual_icon_state
 	var/datum/status_effect/inspiration/effect_to_apply
