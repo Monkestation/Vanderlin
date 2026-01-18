@@ -622,7 +622,7 @@ SUBSYSTEM_DEF(plexora)
 
 	var/client/client = disambiguate_client(ckey)
 
-	if (QDELETED(client))
+	if(QDELETED(client))
 		return list("error" = PLEXORA_ERROR_CLIENTNOTEXIST)
 
 	// Mock admin
