@@ -69,7 +69,7 @@
 
 /datum/status_effect/wish_granters_gift/on_remove()
 	. = ..()
-	owner.revive(full_heal = TRUE, admin_revive = TRUE)
+	owner.revive(ADMIN_HEAL_ALL)
 	owner.visible_message("<span class='warning'>[owner] appears to wake from the dead, having healed all wounds!</span>", "<span class='notice'>I have regenerated.</span>")
 
 /atom/movable/screen/alert/status_effect/wish_granters_gift
@@ -153,8 +153,8 @@
 
 /datum/status_effect/good_music/tick()
 	if(owner.can_hear())
-		owner.dizziness = max(0, owner.dizziness - 2)
-		owner.jitteriness = max(0, owner.jitteriness - 2)
+		owner.adjust_dizzy(-2)
+		owner.adjust_jitter(-2)
 		owner.adjust_confusion(-0.1 SECONDS)
 		owner.add_stress(/datum/stress_event/goodmusic)
 
@@ -174,7 +174,7 @@
 	ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, id)
 	owner.adjustBruteLoss(-25)
 	owner.adjustFireLoss(-25)
-	owner.remove_CC()
+	owner.fully_heal(HEAL_CC_STATUS|HEAL_TEMP)
 	owner.bodytemperature = BODYTEMP_NORMAL
 	return TRUE
 
@@ -185,7 +185,6 @@
 /datum/status_effect/antimagic
 	id = "antimagic"
 	duration = 10 SECONDS
-	examine_text = "<span class='notice'>They seem to be covered in a dull, grey aura.</span>"
 
 /datum/status_effect/antimagic/on_apply()
 	owner.visible_message("<span class='notice'>[owner] is coated with a dull aura!</span>")
@@ -193,6 +192,9 @@
 	//glowing wings overlay
 	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	return ..()
+
+/datum/status_effect/antimagic/get_examine_text()
+	return span_notice("They seem to be covered in a dull, grey aura.")
 
 /datum/status_effect/antimagic/on_remove()
 	. = ..()

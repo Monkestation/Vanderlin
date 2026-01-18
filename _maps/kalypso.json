@@ -15,5 +15,6 @@
 	],
 	"minetype": null,
 	"space_empty_levels": 0,
-	"space_ruin_levels": 0
+	"space_ruin_levels": 0,
+	"exclude_from_ci": true
 }

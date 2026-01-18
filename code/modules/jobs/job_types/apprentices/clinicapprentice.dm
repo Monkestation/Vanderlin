@@ -36,6 +36,7 @@
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/misc/athletics = 1,
 		/datum/skill/craft/crafting = 2,
+		/datum/skill/labor/farming = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/alchemy = 2,
 		/datum/skill/misc/medicine = 2

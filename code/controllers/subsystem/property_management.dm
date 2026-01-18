@@ -16,9 +16,13 @@
 	var/datum/map_template/default_template
 	var/temporary_claim = FALSE // TRUE if claimed only for this round
 
-/obj/effect/landmark/house_spot/New(loc, ...)
+/obj/effect/landmark/house_spot/Initialize(mapload)
 	. = ..()
 	SShousing.register_property(src)
+
+/obj/effect/landmark/house_spot/Destroy(force)
+	default_template = null
+	return ..()
 
 SUBSYSTEM_DEF(housing)
 	name = "Housing"

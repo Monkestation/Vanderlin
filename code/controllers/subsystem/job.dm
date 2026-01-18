@@ -656,7 +656,7 @@ SUBSYSTEM_DEF(job)
 			RejectPlayer(player)
 
 /// Gives the player the stuff they should have with their rank
-/datum/controller/subsystem/job/proc/EquipRank(mob/living/carbon/human/equipping, datum/job/job, client/player_client)
+/datum/controller/subsystem/job/proc/EquipRank(mob/living/equipping, datum/job/job, client/player_client, reset_job_stats = TRUE)
 	equipping.job = job.title
 
 	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
@@ -680,11 +680,13 @@ SUBSYSTEM_DEF(job)
 		if(related_policy)
 			to_chat(player_client, related_policy)
 
-	job.after_spawn(equipping, player_client)
-	if(length(job.advclass_cat_rolls))
-		// Dont apply the stuff, let adv class handler do it later
+	job.after_spawn(equipping, player_client, reset_job_stats)
+
+	if(length(job.advclass_cat_rolls) || !ishuman(equipping))
 		return
-	for(var/datum/quirk/quirk in equipping.quirks)
+
+	var/mob/living/carbon/human/equipping_human = equipping
+	for(var/datum/quirk/quirk in equipping_human.quirks)
 		quirk.after_job_spawn(job)
 
 /datum/job/proc/greet(mob/player)

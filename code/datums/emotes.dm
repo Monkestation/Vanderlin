@@ -157,7 +157,7 @@
 			var/modifier
 			if(H.age == AGE_OLD)
 				modifier = "old"
-			if(!ignore_silent && (H.silent || !H.can_speak())|| (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
+			if(!ignore_silent && !H.can_speak() || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
 				modifier = "silenced"
 			if(user.gender == FEMALE && H.dna.species.soundpack_f)
 				possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
@@ -204,7 +204,7 @@
 	. = message
 	if(message_muffled && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			. = message_muffled
 		if(!muzzle_ignore && C.mouth?.muteinmouth && emote_type == EMOTE_AUDIBLE)
 			. = message_muffled

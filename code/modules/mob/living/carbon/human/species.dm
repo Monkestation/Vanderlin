@@ -955,13 +955,14 @@ GLOBAL_LIST_EMPTY(donator_races)
 
 /datum/species/proc/spec_life(mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)
+	if(H.stat == DEAD)
+		return
 
 	if(HAS_TRAIT(H, TRAIT_NOBREATH))
 		H.setOxyLoss(0)
 		H.losebreath = 0
-
-	if((H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
-		H.adjustBruteLoss(1)
+	else if((H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
+		H.adjustOxyLoss(1)
 
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
 	return
@@ -1334,9 +1335,6 @@ GLOBAL_LIST_EMPTY(donator_races)
 //////////////////
 
 /datum/species/proc/spec_updatehealth(mob/living/carbon/human/H)
-	return
-
-/datum/species/proc/spec_fully_heal(mob/living/carbon/human/H)
 	return
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
