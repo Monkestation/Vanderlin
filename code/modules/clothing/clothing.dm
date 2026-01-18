@@ -152,8 +152,11 @@
 
 /obj/item/clothing/MiddleClick(mob/living/user, params)
 	. = ..()
-	
-	if(!istype(user) || nodismemsleeves)
+
+	if(!istype(user))
+		return
+
+	if(!sleeved || nodismemsleeves)
 		return
 
 	var/time_to_tear = 6 SECONDS
