@@ -182,6 +182,10 @@
 	for(var/mob/living/corpse in coffin)
 		if(pacify_corpse(corpse, user))
 			success = TRUE
+	for(var/mob/living/carbon/human/human_corpse in coffin)
+		if(human_corpse.funeral) /* The proc succeeds even if the corpse already received a funeral before.
+	    Coffins and graves have checks to prevent giving too much influence / devotion to Necra. */
+			success = TRUE
 	for(var/obj/item/bodypart/head/head in coffin)
 		if(!head.brainmob)
 			continue
