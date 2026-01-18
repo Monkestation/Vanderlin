@@ -630,14 +630,12 @@ SUBSYSTEM_DEF(plexora)
 		key = kicker,
 	)
 
-	usr = mockadmin
-
-	to_chat(client, span_boldannounce("You have been kicked from the server by [key_name_admin(usr)]. Reason: [reason]"))
+	to_chat(client, span_boldannounce("You have been kicked from the server by [key_name_admin(mockadmin)]. Reason: [reason]"))
 
 	qdel(client)
 
-	log_admin("Discord: [key_name(usr)] has kicked [key_name(client)] from the server! Reason: [reason]")
-	message_admins("Discord: [key_name_admin(usr)] has kicked [key_name_admin(client)] from the server! Reason: [reason]")
+	log_admin("Discord: [key_name(mockadmin)] has kicked [key_name(client)] from the server! Reason: [reason]")
+	message_admins("Discord: [key_name_admin(mockadmin)] has kicked [key_name_admin(client)] from the server! Reason: [reason]")
 
 /datum/world_topic/plx_ticketaction
 	keyword = "PLX_ticketaction"
