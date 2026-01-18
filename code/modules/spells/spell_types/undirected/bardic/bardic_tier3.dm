@@ -30,7 +30,7 @@
 /datum/status_effect/inspiration/accelakathist/on_apply()
 	. = ..()
 	owner.add_filter(ACCELAKATHIST_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 25, "size" = 1))
-	to_chat(owner, span_warning("My limbs move with uncanny swiftness!"))
+	to_chat(owner, span_notice("My limbs move with uncanny swiftness!"))
 
 /datum/status_effect/inspiration/accelakathist/on_remove()
 	. = ..()
