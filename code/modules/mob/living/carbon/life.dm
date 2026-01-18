@@ -697,10 +697,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(!belly) //nothing to see here if we do not have a stomach
 		return fullness
 
-	for(var/bile in belly.reagents.reagent_list)
-		var/datum/reagent/bits = bile
+	for(var/datum/reagent/bits as anything in belly.reagents.reagent_list)
 		if(istype(bits, /datum/reagent/consumable))
-			var/datum/reagent/consumable/goodbit = bile
+			var/datum/reagent/consumable/goodbit = bits
 			fullness += goodbit.nutriment_factor * goodbit.volume / goodbit.metabolization_rate
 			continue
 		fullness += 0.6 * bits.volume / bits.metabolization_rate //not food takes up space
