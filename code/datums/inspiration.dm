@@ -19,23 +19,24 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	/// List of weakrefs to name (not real name)
 	var/list/audience_weakrefs
 	var/list/available_song_tiers
-	var/static/list/inspiration_verbs = list(/mob/living/carbon/human/proc/setaudience, \
-		/mob/living/carbon/human/proc/clearaudience, \
-		/mob/living/carbon/human/proc/checkaudience, \
-		/mob/living/carbon/human/proc/picksongs)
 
 /datum/inspiration/New(mob/living/carbon/human/holder, bard_tier_override)
 	. = ..()
 	src.holder = holder
 	RegisterSignal(holder, COMSIG_PARENT_QDELETING, PROC_REF(on_holder_qdel))
 	RegisterSignal(holder, COMSIG_SKILL_RANK_INCREASED, PROC_REF(on_skill_improved))
-	holder.verbs += inspiration_verbs
+	holder.verbs += list(/mob/living/carbon/human/proc/setaudience, \
+		/mob/living/carbon/human/proc/clearaudience, \
+		/mob/living/carbon/human/proc/checkaudience)
 	set_inspiration_tier(bard_tier_override)
 
 /datum/inspiration/Destroy(force)
 	if(ishuman(holder))
 		holder.inspiration = null
-	holder.verbs -= inspiration_verbs
+	holder.verbs -= list(/mob/living/carbon/human/proc/setaudience, \
+		/mob/living/carbon/human/proc/clearaudience, \
+		/mob/living/carbon/human/proc/checkaudience, \
+		/mob/living/carbon/human/proc/picksongs)
 	holder.remove_spells(source = src)
 	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_INCREASED))
 	holder = null

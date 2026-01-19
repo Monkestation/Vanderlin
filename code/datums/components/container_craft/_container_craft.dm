@@ -57,6 +57,9 @@
 	if(!length(host.contents))
 		return
 
+	if(!istype(user))
+		user = get_mob_by_ckey(host.fingerprintslast)
+
 	// Build list of all items in container by type
 	for(var/obj/item/item in host.contents)
 		stored_items |= item.type

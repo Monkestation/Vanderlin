@@ -11,7 +11,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 
