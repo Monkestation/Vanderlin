@@ -1237,11 +1237,7 @@
 				to_chat(user, span_warning("[src] makes a grating sound."))
 				return
 		else if(input == "BLOOD")
-			var/mob/living/feeder_mob = feeder.resolve()
-			if(feeder_mob == user)
-				to_chat(user, span_notice("What good is there in tracking myself?"))
-				return
-			target = feeder_mob
+			target = feeder?.resolve()
 
 		if(!target)
 			return
