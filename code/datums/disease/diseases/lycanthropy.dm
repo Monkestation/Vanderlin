@@ -2,7 +2,7 @@
 	name = "Lycanthropy"
 
 	max_stages = 3
-	stage_prob = 5
+	stage_prob = 3
 
 	disease_flags = UNCURABLE
 	severity = DISEASE_SEVERITY_BIOHAZARD
@@ -14,14 +14,19 @@
 	if(!.)
 		return FALSE
 
+	if(is_species(human_infectee, /datum/species/werewolf))
+		return FALSE
+
+	if(IS_WEREWOLF(human_infectee))
+		return FALSE
+
 	var/static/list/silver_items = list(
 		/obj/item/clothing/neck/psycross/silver,
 		/obj/item/clothing/neck/silveramulet
 	)
 
 	if(is_type_in_list(human_infectee.wear_wrists, silver_items) || is_type_in_list(human_infectee.wear_neck, silver_items))
-		if(prob(50))
-			return FALSE
+		return prob(50)
 
 /datum/disease/lycanthropy/after_add()
 	to_chat(affected_mob, span_userdanger("I feel horrible... REALLY horrible."))
@@ -65,4 +70,4 @@
 			if(!wolfy)
 				to_chat(infected, span_danger("Not today."))
 
-			qdel(src) // Our work is done regardless
+			cure(force = TRUE) // Our work is done regardless

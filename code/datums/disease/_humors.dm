@@ -37,6 +37,12 @@
 			if(wet_datum.water_stacks > 0)
 				number_wet_items++
 
+	var/is_raining = FALSE
+	var/datum/particle_weather/running = SSParticleWeather.runningWeather
+	if(running && istype(running, /datum/particle_weather/rain))
+		if(running.can_weather(effecting))
+			is_raining = TRUE
+
 	for(var/temperament in temperaments)
 		switch(temperament)
 			if(HUMOR_WARM)
@@ -70,21 +76,18 @@
 					wetness_mod *= 1.4
 				else
 					wetness_mod *= (1 / number_wet_items)
+				if(is_raining)
+					wetness_mod *= 0.7
 
 			if(HUMOR_WET)
 				if(number_wet_items <= 0)
 					wetness_mod *= 0.6
 				else
 					wetness_mod *= 1 + (1 / number_wet_items)
+				if(is_raining)
+					wetness_mod *= 1.3
 
-	var/datum/particle_weather/running = SSParticleWeather.runningWeather
-	if(running && istype(running, /datum/particle_weather/rain))
-		if(running.can_weather(effecting))
-			wetness_mod *= 1.5
-
-	var/final_mod = 1 * temperature_mod * (wetness_mod * 0.7)
-
-	return final_mod
+	return clamp(temperature_mod * (wetness_mod * 0.7), 0.3, 3)
 
 /datum/humor/proc/get_humor_modifier(datum/disease/disease, mob/living/effecting)
 	// Organs blow right now, no healing, barely any damage/loss effects

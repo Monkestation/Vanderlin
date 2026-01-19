@@ -119,8 +119,8 @@
 /datum/disease/proc/after_add()
 	return
 
-/datum/disease/proc/cure(add_resistance = TRUE)
-	if(disease_flags & UNCURABLE) //aw man :(
+/datum/disease/proc/cure(add_resistance = TRUE, force = FALSE)
+	if(!force && disease_flags & UNCURABLE) //aw man :(
 		return
 
 	if(affected_mob)
