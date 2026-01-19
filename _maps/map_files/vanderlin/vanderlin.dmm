@@ -3449,6 +3449,18 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
+"bEh" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/neuFarm/seed/spore/capillus,
+/obj/item/neuFarm/seed/spore/capillus,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/item/neuFarm/seed/spore/kirunabal,
+/obj/item/neuFarm/seed/spore/kirunabal,
+/turf/open/floor/blocks,
+/area/indoors/town/cell)
 "bEr" = (
 /obj/effect/decal/carpet/kover_darkred{
 	pixel_x = 18;
@@ -18041,18 +18053,6 @@
 "iMC" = (
 /turf/open/floor/cobble,
 /area/indoors/town/manor/kitchen/cellar)
-"iME" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/neuFarm/seed/spore/capillus,
-/obj/item/neuFarm/seed/spore/capillus,
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = 32;
-	pixel_y = 0
-	},
-/obj/item/neuFarm/seed/spore/kirunabal,
-/obj/item/neuFarm/seed/spore/kirunabal,
-/turf/open/floor/blocks,
-/area/indoors/town/cell)
 "iMG" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/church/purple,
@@ -69925,7 +69925,7 @@ frp
 kJp
 xTs
 kJU
-iME
+bEh
 kxM
 kxM
 qFx
@@ -72798,7 +72798,7 @@ fGZ
 fGZ
 czw
 jLW
-tVX
+jLW
 jLW
 cLd
 ozq

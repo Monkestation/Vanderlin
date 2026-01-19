@@ -521,7 +521,6 @@
 	id = "healing"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/matthioshealing
 	duration = 10 SECONDS
-	examine_text = "SUBJECTPRONOUN is bathed in a restorative aura!"
 	var/healing_on_tick = 1
 	var/outline_colour = "#c42424"
 
@@ -539,6 +538,8 @@
 	owner.remove_filter(MIRACLE_HEALING_FILTER)
 	return TRUE
 
+/datum/status_effect/buff/matthioshealing/get_examine_text()
+	return "SUBJECTPRONOUN is bathed in a restorative aura!"
 
 /datum/status_effect/buff/matthioshealing/tick()
 	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)

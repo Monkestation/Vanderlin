@@ -613,3 +613,14 @@
 	name = "Electrified"
 	desc = "Your body is charged with unstable electricity!"
 	icon_state = "dazed"
+
+/datum/status_effect/debuff/cursed
+	id = "cursed"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/cursed
+	effectedstats = list(STATKEY_LCK = -5) // More severe so that the permanent debuff from having the perk makes it actually worth it.
+	duration = 10 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/cursed
+	name = "Cursed"
+	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
+	icon_state = "debuff"

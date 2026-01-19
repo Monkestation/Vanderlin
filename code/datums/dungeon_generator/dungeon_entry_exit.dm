@@ -37,7 +37,6 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		GLOB.unlinked_dungeon_entries |= src
 	return ..()
 
-
 /obj/structure/dungeon_entry/Initialize()
 	. = ..()
 	if(dungeon_id)

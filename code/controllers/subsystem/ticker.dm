@@ -82,7 +82,6 @@ SUBSYSTEM_DEF(ticker)
 	var/end_party = FALSE
 	var/last_lobby = 0
 	var/reboot_anyway
-	var/round_end = FALSE
 
 	var/next_lord_check = 0
 	var/missing_lord_time = 0
@@ -100,7 +99,10 @@ SUBSYSTEM_DEF(ticker)
 		"I'm going to lose my mind if we don't get a Ruler readied up.",
 		"No. The game will not start because there is no Ruler.",
 		"What's the point of Vanderlin without a Ruler?"
-		)
+	)
+
+	/// ID of round reboot timer, if it exists
+	var/reboot_timer = null
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()
@@ -637,23 +639,24 @@ SUBSYSTEM_DEF(ticker)
 
 	var/skip_delay = check_rights()
 	if(delay_end && !skip_delay)
-		to_chat(world, span_boldannounce("A game master has delayed the round end."))
+		to_chat(world, span_boldannounce("An admin has delayed the round end."))
 		return
 
-	SStriumphs.end_triumph_saving_time()
 	to_chat(world, span_boldannounce("Rebooting World in [DisplayTimeText(delay)]. [reason]"))
-
-	round_end = TRUE
-	var/start_wait = world.time
-	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2))	//don't wait forever
-	sleep(delay - (world.time - start_wait))
 
 	if(delay_end && !skip_delay)
 		to_chat(world, span_boldannounce("Reboot was cancelled by an admin."))
-		round_end = FALSE
 		return
+
+	var/start_wait = world.time
+	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2)) //don't wait forever
+	reboot_timer = addtimer(CALLBACK(src, PROC_REF(reboot_callback), reason, end_string), delay - (world.time - start_wait), TIMER_STOPPABLE)
+
+/datum/controller/subsystem/ticker/proc/reboot_callback(reason, end_string)
 	if(end_string)
 		end_state = end_string
+
+	SStriumphs.end_triumph_saving_time()
 
 	var/statspage = CONFIG_GET(string/roundstatsurl)
 	var/gamelogloc = CONFIG_GET(string/gamelogurl)
@@ -662,13 +665,24 @@ SUBSYSTEM_DEF(ticker)
 	else if(gamelogloc)
 		to_chat(world, span_info("Round logs can be located <a href=\"[gamelogloc]\">at this website!</a>"))
 
-	log_game("Rebooting World. [reason]")
+	log_game(span_boldannounce("Rebooting World. [reason]"))
 
-	if(end_party)
-		to_chat(world, span_boldannounce("It's over!"))
-		world.Del()
-	else
-		world.Reboot()
+	world.Reboot()
+
+/**
+ * Deletes the current reboot timer and nulls the var
+ *
+ * Arguments:
+ * * user - the user that cancelled the reboot, may be null
+ */
+/datum/controller/subsystem/ticker/proc/cancel_reboot(mob/user)
+	if(!reboot_timer)
+		to_chat(user, span_warning("There is no pending reboot!"))
+		return FALSE
+	to_chat(world, span_boldannounce("An admin has delayed the round end."))
+	deltimer(reboot_timer)
+	reboot_timer = null
+	return TRUE
 
 /datum/controller/subsystem/ticker/Shutdown()
 	save_admin_data()

@@ -1,1 +1,0 @@
-{"author":"KevinfromHP","delete-after":true,"changes":[{"rscadd":"Inquisition hidden doors"},{"bugfix":"not being able to close hidden doors very easily."},{"map":"Inquisition gets their own door set."},{"code_imp":"Cleaned up hidden door/levers"},{"refactor":"Hidden door code"}]}

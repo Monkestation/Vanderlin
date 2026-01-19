@@ -61,5 +61,4 @@
 	if(!Adjacent(user))
 		return
 	dir = turn(dir, 90)
-	update_icon()
 	to_chat(user, "<span class='notice'>You rotate the [name].</span>")
