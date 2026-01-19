@@ -20,7 +20,7 @@
 /datum/status_effect/inspiration/furtive_fortissimo
 	id = "furtivefortissimo"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/song/furtive_fortissimo
-	duration = 30 SECONDS
+	duration = 60 SECONDS
 
 /datum/status_effect/inspiration/furtive_fortissimo/on_apply()
 	. = ..()
@@ -56,7 +56,7 @@
 /datum/status_effect/inspiration/intellectual_interval
 	id = "intellectualinterval"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/song/intellectual_interval
-	duration = 30 SECONDS
+	duration = 60 SECONDS
 	effectedstats = list(STATKEY_INT = 3)
 
 /atom/movable/screen/alert/status_effect/buff/song/intellectual_interval

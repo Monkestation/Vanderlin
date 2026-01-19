@@ -127,8 +127,8 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	set category = "Inspiration"
 	if(!inspiration)
 		return
-	if(has_status_effect(/datum/status_effect/buff/playing_music)) // cant clear while playing
-		to_chat(src, span_warning("You can't clear your audience while playing!"))
+	if(has_status_effect(/datum/status_effect/stacking/playing_inspiration)) // cant clear while playing
+		to_chat(src, span_warning("You can't clear your audience while preparing a tune!"))
 		return
 	inspiration.audience_weakrefs = list()
 	to_chat(src, "You clear your audience list.")

@@ -64,7 +64,7 @@
 	for (var/mob/living/carbon/human/listener in hearers(range, human_owner))
 		if(human_owner.inspiration.check_in_audience(listener))
 			listener.adjust_stamina(-listener.maximum_stamina / 2, internal_regen = FALSE)
-			to_chat(listener, span_notice("I am refreshed by the calming melody of the song!"))
+			to_chat(listener, span_biginfo("I am refreshed by the calming melody of the song!"))
 
 // /datum/action/cooldown/spell/undirected/song/recovery_song/modify_applied_effect(datum/status_effect/stacking/playing_inspiration/applied_effect)
 // 	. = ..()

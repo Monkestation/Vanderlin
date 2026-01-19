@@ -28,10 +28,11 @@
 	var/list/song_list = list()
 	var/playing = FALSE
 	var/instrument_buff
-	var/dynamic_icon
 	var/icon_prefix
 	/// Instrument is in some other holder such as an organ or item.
 	var/not_held
+	/// Should the instrument only buff the owner's inspiration audience?
+	var/target_audience_only = FALSE
 
 /datum/looping_sound/instrument
 	mid_length = 2400
@@ -116,8 +117,13 @@
 		var/bypass_checks = FALSE
 		if(user == listener)
 			bypass_checks = TRUE
-		if(user.inspiration && user.inspiration.check_in_audience(listener))
-			bypass_checks = TRUE
+		if(user.inspiration)
+			if(target_audience_only)
+				if(user.inspiration.check_in_audience(listener))
+					listener.apply_status_effect(instrument_buff)
+				continue
+			else if(user.inspiration.check_in_audience(listener))
+				bypass_checks = TRUE
 		if(!bypass_checks && !user.faction_check_mob(listener))
 			continue
 		listener.apply_status_effect(instrument_buff)
@@ -128,9 +134,10 @@
 	if(istype(user))
 		user.remove_status_effect(/datum/status_effect/buff/playing_music)
 	instrument_buff = null
+	target_audience_only = initial(target_audience_only)
 	if(soundloop)
 		soundloop.stop()
-	if(dynamic_icon)
+	if(icon_prefix)
 		lower_from_mouth()
 	// Prevents an exploit
 	for(var/mob/living/L in hearers(7, loc))
@@ -247,9 +254,19 @@
 	soundloop.start()
 	user.apply_status_effect(/datum/status_effect/buff/playing_music, stress_event, note_color)
 	record_round_statistic(STATS_SONGS_PLAYED)
-	if(dynamic_icon)
+	if(icon_prefix)
 		lift_to_mouth()
 	START_PROCESSING(SSprocessing, src)
+
+/obj/item/instrument/attack_self_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/human_user = user
+	if(!human_user.inspiration)
+		return
+	target_audience_only = !target_audience_only
+	to_chat(user, span_notice("[target_audience_only ? "You will now play only for your audience." : "You will now play for everyone nearby."]"))
 
 /obj/item/instrument/proc/lift_to_mouth()
 	icon_state = "[icon_prefix]_play"
@@ -350,7 +367,6 @@
 	desc = "A cacophonous wind-instrument, played primarily by humens all around Psydonia."
 	icon_state = "flute"
 	icon_prefix = "flute" // used for inhands switch
-	dynamic_icon = TRUE // used for inhands switch
 	dropshrink = 0.6
 	w_class = WEIGHT_CLASS_SMALL
 	song_list = list(
