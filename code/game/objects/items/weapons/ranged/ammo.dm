@@ -144,7 +144,7 @@
 /obj/item/ammo_casing/caseless/bolt/vial/Initialize(mapload, ...)
 	. = ..()
 	RemoveElement(/datum/element/tipped_item)
-	update_icon()
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/ammo_casing/caseless/bolt/vial/update_overlays()
 	. = ..()
@@ -405,7 +405,7 @@
 /obj/item/ammo_casing/caseless/arrow/vial/Initialize(mapload, ...)
 	. = ..()
 	RemoveElement(/datum/element/tipped_item)
-	update_icon()
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/ammo_casing/caseless/arrow/vial/update_overlays()
 	. = ..()

@@ -61,6 +61,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/necra)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
+			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/ravox)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/xylix)

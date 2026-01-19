@@ -133,7 +133,7 @@
 
 /obj/item/weapon/mace/cane/Initialize()
 	. = ..()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/mace/cane/getonmobprop(tag)
 	. = ..()
@@ -519,7 +519,7 @@
 
 /obj/item/weapon/mace/goden/shillelagh/Initialize()
 	. = ..()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/mace/goden/shillelagh/getonmobprop(tag)
 	. = ..()

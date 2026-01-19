@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	target.Stun(10 SECONDS)
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
-		carbon_target.silent += 30
+		carbon_target.adjust_silence(30)
 	qdel(src)
 
 /datum/ritual/servantry/darksunmark

@@ -1,6 +1,11 @@
 /mob/living/proc/Life(seconds, times_fired)
 	set waitfor = FALSE
 
+	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds, times_fired)
+
+	if(signal_result & COMPONENT_LIVING_CANCEL_LIFE_PROCESSING) // mmm less work
+		return
+
 	if (client)
 		var/turf/T = get_turf(src)
 		if(!T)
@@ -48,21 +53,12 @@
 				for(var/datum/wound/wound as anything in get_wounds())
 					wound.heal_wound(wound.passive_healing * 0.25)
 
-		if(!stat && HAS_TRAIT(src, TRAIT_LYCANRESILENCE) && !HAS_TRAIT(src, TRAIT_PARALYSIS))
-			var/mob/living/carbon/human/human = src
-			if(human.rage_datum.check_rage(50))
-				handle_wounds()
-				if(blood_volume > BLOOD_VOLUME_SURVIVE)
-					for(var/datum/wound/wound as anything in get_wounds())
-						wound.heal_wound(1.2)
-
 		if (QDELETED(src)) // diseases can qdel the mob via transformations
 			return
 
 		//Random events (vomiting etc)
 		handle_random_events()
 
-		handle_traits() // eye, ear, brain damages
 		handle_status_effects() //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
 
 	update_sneak_invis()
@@ -248,16 +244,6 @@
 		slowdown = max(slowdown - 1, 0)
 	if(slowdown <= 0)
 		remove_movespeed_modifier(MOVESPEED_ID_LIVING_SLOWDOWN_STATUS)
-
-/mob/living/proc/handle_traits()
-	//Eyes
-	if(eye_blind)	//blindness, heals slowly over time
-		if(HAS_TRAIT_FROM(src, TRAIT_BLIND, EYES_COVERED)) //covering your eyes heals blurry eyes faster
-			adjust_blindness(-3)
-		else if(!stat && !(HAS_TRAIT(src, TRAIT_BLIND)))
-			adjust_blindness(-1)
-	else if(eye_blurry)			//blurry eyes heal slowly
-		adjust_eye_blur(-2 SECONDS)
 
 /mob/living/proc/update_damage_hud()
 	return
