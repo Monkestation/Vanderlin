@@ -168,18 +168,21 @@
 		if(check_dir == REVERSE_DIR(direction))
 			continue
 		var/turf/T = get_step(wall_turf, check_dir)
-		if(T) turfs_to_check += T
+		if(T)
+			turfs_to_check += T
 
 	// 2. Check Vertical (Multi-Z wall power)
 	// A repeater powering a wall should trigger machines sitting ON TOP of the wall or BELOW it
 	var/turf/above = GET_TURF_ABOVE(wall_turf)
-	if(above) turfs_to_check += above
+	if(above)
+		turfs_to_check += above
 
 	var/turf/below = GET_TURF_BELOW(wall_turf)
-	if(below) turfs_to_check += below
+	if(below)
+		turfs_to_check += below
 
 	// Process all identified turfs
-	for(var/turf/T in turfs_to_check)
+	for(var/turf/T as anything in turfs_to_check)
 		for(var/obj/structure/S in T)
 			if(S.redstone_structure && !istype(S, /obj/structure/redstone))
 				var/was_powered = (S.last_redstone_power > 0)

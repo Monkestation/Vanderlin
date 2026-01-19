@@ -438,9 +438,9 @@
 	if(tallowed)
 		if(alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", "YES", "NO") != "NO")
 			tallowed = FALSE
-			update_icon()
+			update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/clothing/ring/signet/update_icon()
+/obj/item/clothing/ring/signet/update_icon_state()
 	. = ..()
 	if(tallowed)
 		icon_state = "[icon_state]_stamp"

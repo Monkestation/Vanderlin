@@ -150,7 +150,7 @@
 	melt_amount = 50
 	associated_skill = /datum/skill/combat/knives
 
-/obj/item/weapon/sickle/New()
+/obj/item/weapon/sickle/Initialize(mapload)
 	. = ..()
 	if(icon_state == "sickle1")
 		icon_state = "sickle[rand(1,3)]"
@@ -204,7 +204,7 @@
 
 /obj/item/weapon/hoe/Initialize()
 	. = ..()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/hoe/getonmobprop(tag)
 	. = ..()
@@ -347,7 +347,7 @@
 
 /obj/item/weapon/pitchfork/Initialize()
 	. = ..()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/pitchfork/getonmobprop(tag)
 	. = ..()

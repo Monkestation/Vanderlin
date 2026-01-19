@@ -66,8 +66,8 @@
 "as" = (
 /obj/item/trash/candle,
 /obj/item/candle/eora{
-	pixel_y = 5;
-	pixel_x = 9
+	pixel_x = 9;
+	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -79,9 +79,9 @@
 /area/outdoors)
 "au" = (
 /obj/item/natural/wood/plank{
-	pixel_y = 1;
+	name = "Old Plank";
 	pixel_x = 4;
-	name = "Old Plank"
+	pixel_y = 1
 	},
 /obj/effect/decal/cleanable/debris/wood{
 	dir = 1
@@ -171,8 +171,8 @@
 	dir = 6
 	},
 /obj/item/reagent_containers/glass/cup/teacup/fancy{
-	pixel_y = 11;
-	pixel_x = -9
+	pixel_x = -9;
+	pixel_y = 11
 	},
 /turf/open/floor/blocks/platform,
 /area/outdoors)
@@ -558,10 +558,10 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "cO" = (
+/mob/living/simple_animal/hostile/retaliate/saiga,
 /obj/structure/flora/newbranch/leafless{
 	dir = 4
 	},
-/mob/living/simple_animal/hostile/retaliate/saiga,
 /turf/open/floor/grass,
 /area/outdoors)
 "cQ" = (
@@ -592,8 +592,8 @@
 /area/outdoors)
 "cW" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 8;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 8
 	},
 /turf/open/floor/woodturned,
 /area/outdoors)
@@ -636,8 +636,8 @@
 /obj/effect/decal/cleanable/food/mess/rotting{
 	name = "wine stain";
 	desc = "Sticky and horrid smelling, one can only imagine how it managed to endure the passing of time.";
-	pixel_y = 8;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = 8
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -657,10 +657,6 @@
 	icon_state = "grass2"
 	},
 /turf/open/floor/dirt,
-/area/outdoors)
-"dx" = (
-/obj/particle_emitter,
-/turf/open/water/river,
 /area/outdoors)
 "dA" = (
 /obj/effect/lily_petal/three,
@@ -774,8 +770,8 @@
 /area/outdoors)
 "ec" = (
 /obj/item/book/random_book/eoratica{
-	pixel_y = -11;
-	pixel_x = 11
+	pixel_x = 11;
+	pixel_y = -11
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -793,8 +789,8 @@
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "ej" = (
-/obj/effect/falling_sakura,
 /mob/living/simple_animal/hostile/retaliate/wolf,
+/obj/effect/falling_sakura,
 /turf/open/floor/dirt,
 /area/outdoors)
 "ek" = (
@@ -884,10 +880,10 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "eF" = (
+/mob/living/simple_animal/hostile/retaliate/wolf,
 /obj/structure/flora/newtree{
 	icon_state = "tree2"
 	},
-/mob/living/simple_animal/hostile/retaliate/wolf,
 /turf/open/floor/dirt,
 /area/outdoors)
 "eG" = (
@@ -1026,11 +1022,11 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "fp" = (
-/obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree2"
-	},
 /mob/living/simple_animal/hostile/retaliate/wolf,
+/obj/structure/flora/newtree{
+	icon_state = "tree2";
+	dir = 8
+	},
 /turf/open/floor/dirt,
 /area/outdoors)
 "fr" = (
@@ -1048,8 +1044,8 @@
 "ft" = (
 /obj/item/clothing/face/cigarette/rollie/cannabis,
 /obj/item/reagent_containers/glass/bottle{
-	pixel_y = -7;
-	pixel_x = -13
+	pixel_x = -13;
+	pixel_y = -7
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -1087,8 +1083,8 @@
 /area/outdoors)
 "fD" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 8;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 8
 	},
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
@@ -1096,12 +1092,12 @@
 "fE" = (
 /obj/structure/table/wood/crafted,
 /obj/item/trash/candle{
-	pixel_y = 12;
-	pixel_x = 8
+	pixel_x = 8;
+	pixel_y = 12
 	},
 /obj/item/natural/feather{
-	pixel_y = 3;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = 3
 	},
 /turf/open/floor/cobble/alt,
 /area/under/cave)
@@ -1240,12 +1236,12 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "gq" = (
-/obj/structure/flora/grass/tundra{
-	icon_state = "tundragrass2"
-	},
 /mob/living/simple_animal/hostile/retaliate/chicken{
 	pixel_x = -3;
 	pixel_y = 1
+	},
+/obj/structure/flora/grass/tundra{
+	icon_state = "tundragrass2"
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -1521,9 +1517,9 @@
 /area/outdoors)
 "hG" = (
 /obj/structure/chair/bench/church/smallbench{
-	pixel_y = 23;
 	dir = 8;
-	pixel_x = 3
+	pixel_x = 3;
+	pixel_y = 23
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/carpet/stellar,
@@ -1560,8 +1556,8 @@
 /area/under/cave)
 "hO" = (
 /obj/structure/wild_plant/random{
-	icon_state = "blackberry2";
 	name = "wild blackberry bush";
+	icon_state = "blackberry2";
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -1662,8 +1658,8 @@
 /obj/effect/decal/cleanable/food/mess/rotting{
 	name = "wine stain";
 	desc = "Sticky and horrid smelling, one can only imagine how it managed to endure the passing of time.";
-	pixel_y = 8;
-	pixel_x = 4
+	pixel_x = 4;
+	pixel_y = 8
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -1682,8 +1678,8 @@
 "is" = (
 /obj/structure/closet/dirthole,
 /obj/item/natural/stone{
-	icon_state = "stone4";
 	name = "blunt stone";
+	icon_state = "stone4";
 	pixel_x = -2;
 	pixel_y = -2
 	},
@@ -1826,8 +1822,8 @@
 /area/indoors/town)
 "je" = (
 /obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 8
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -1898,8 +1894,8 @@
 "jy" = (
 /obj/structure/closet/dirthole,
 /obj/item/natural/stone{
-	icon_state = "stone4";
 	name = "blunt stone";
+	icon_state = "stone4";
 	pixel_x = -2;
 	pixel_y = -2
 	},
@@ -1917,8 +1913,8 @@
 "jB" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -1939,8 +1935,8 @@
 "jG" = (
 /obj/structure/table/wood/crafted,
 /obj/item/candle/yellow{
-	pixel_y = -2;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = -2
 	},
 /turf/open/floor/cobble/alt,
 /area/under/cave)
@@ -2069,8 +2065,8 @@
 /area/outdoors)
 "kn" = (
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 4
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -2115,13 +2111,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/platform,
 /area/outdoors)
-"ky" = (
-/obj/structure/closet/crate/coffin,
-/obj/structure/rack/shelf/notdense,
-/obj/effect/decal/cleanable/dirt/dust,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
-/turf/open/floor/twig,
-/area/under/cave)
 "kz" = (
 /obj/projectile/bullet/reusable/arrow/stone,
 /turf/open/floor/dirt,
@@ -2189,8 +2178,8 @@
 /area/under/cave)
 "kU" = (
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 4
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -2242,9 +2231,9 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "lg" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/structure/closet/crate/coffin,
 /obj/structure/rack/shelf/notdense,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/spider/stickyweb{
 	dir = 4
@@ -2480,9 +2469,9 @@
 /obj/structure/table/wood/plain,
 /obj/item/soap,
 /obj/item/natural/bundle/cloth{
-	amount = 10;
 	pixel_x = 4;
-	pixel_y = -2
+	pixel_y = -2;
+	amount = 10
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -2554,8 +2543,8 @@
 /area/under/cave)
 "mF" = (
 /obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 8
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -2593,12 +2582,12 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "mW" = (
+/mob/living/simple_animal/hostile/retaliate/wolf,
 /obj/structure/wild_plant/nospread/strawberry{
 	name = "wild strawberry bush";
 	pixel_x = -4;
 	pixel_y = 3
 	},
-/mob/living/simple_animal/hostile/retaliate/wolf,
 /turf/open/floor/grass,
 /area/outdoors)
 "mY" = (
@@ -2660,8 +2649,8 @@
 	},
 /obj/structure/table/wood/crafted,
 /obj/item/paint_brush{
-	pixel_y = 9;
-	pixel_x = -4
+	pixel_x = -4;
+	pixel_y = 9
 	},
 /obj/item/paint_palette,
 /turf/open/floor/blocks/platform,
@@ -2672,8 +2661,8 @@
 /area/outdoors)
 "np" = (
 /obj/item/reagent_containers/glass/bottle{
-	pixel_y = 5;
-	pixel_x = -13
+	pixel_x = -13;
+	pixel_y = 5
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -2709,8 +2698,8 @@
 /area/outdoors)
 "nA" = (
 /obj/item/natural/poo{
-	pixel_y = 6;
-	pixel_x = 4
+	pixel_x = 4;
+	pixel_y = 6
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -2734,16 +2723,16 @@
 	dir = 1
 	},
 /obj/item/reagent_containers/glass/carafe/teapot{
-	pixel_y = -3;
-	pixel_x = -3
+	pixel_x = -3;
+	pixel_y = -3
 	},
 /turf/open/floor/blocks/platform,
 /area/outdoors)
 "nH" = (
 /obj/item/book/random_book/eoratica,
 /obj/item/reagent_containers/glass/bottle{
-	pixel_y = -7;
-	pixel_x = -13
+	pixel_x = -13;
+	pixel_y = -7
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -2975,8 +2964,8 @@
 /area/under/cave)
 "oI" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/floor/woodturned,
 /area/outdoors)
@@ -3040,8 +3029,8 @@
 /area/outdoors)
 "oV" = (
 /obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 8
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -3061,8 +3050,8 @@
 /area/outdoors)
 "pc" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 1;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 1
 	},
 /turf/open/water/river,
 /area/outdoors)
@@ -3075,8 +3064,8 @@
 /area/under/cave)
 "ph" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -3097,16 +3086,16 @@
 /obj/effect/decal/cleanable/food/mess/rotting{
 	name = "wine stain";
 	desc = "Sticky and horrid smelling, one can only imagine how it managed to endure the passing of time.";
-	pixel_y = 6;
-	pixel_x = -11
+	pixel_x = -11;
+	pixel_y = 6
 	},
 /obj/item/clothing/head/corruptflower{
-	pixel_y = 3;
-	pixel_x = -16
+	pixel_x = -16;
+	pixel_y = 3
 	},
 /obj/item/clothing/head/corruptflower{
-	pixel_y = 12;
-	pixel_x = 8
+	pixel_x = 8;
+	pixel_y = 12
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -3356,8 +3345,8 @@
 /area/outdoors)
 "qV" = (
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 4
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -3443,18 +3432,18 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "rr" = (
-/obj/structure/fluff/nest,
 /mob/living/carbon/human/species/rousman,
+/obj/structure/fluff/nest,
 /obj/item/paper{
 	pixel_y = 1
 	},
 /obj/item/paper{
-	pixel_y = -4;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = -4
 	},
 /obj/item/paper{
-	pixel_y = -6;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = -6
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -3519,8 +3508,8 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "rR" = (
-/obj/structure/flora/newbranch/leafless,
 /mob/living/simple_animal/hostile/retaliate/wolf,
+/obj/structure/flora/newbranch/leafless,
 /turf/open/floor/dirt,
 /area/outdoors)
 "rT" = (
@@ -3564,8 +3553,8 @@
 "sg" = (
 /obj/structure/flora/grass/herb/salvia,
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 1
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -3718,8 +3707,8 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "sX" = (
-/obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
+/obj/structure/spider/stickyweb,
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "ta" = (
@@ -3779,8 +3768,8 @@
 	icon_state = "grass4"
 	},
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 4
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -3862,10 +3851,10 @@
 /turf/open/floor/grass,
 /area/under/cave)
 "tO" = (
+/mob/living/simple_animal/hostile/retaliate/cow/cowlet,
 /obj/structure/flora/grass{
 	icon_state = "grass5"
 	},
-/mob/living/simple_animal/hostile/retaliate/cow/cowlet,
 /turf/open/floor/grass,
 /area/outdoors)
 "tP" = (
@@ -3884,16 +3873,16 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "tT" = (
-/obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
+/obj/structure/spider/stickyweb,
 /obj/structure/minecart_rail,
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "tU" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/item/restraints/legcuffs/beartrap{
-	pixel_y = 5;
-	pixel_x = 5
+	pixel_x = 5;
+	pixel_y = 5
 	},
 /turf/open/floor/greenstone,
 /area/under/cave)
@@ -4014,10 +4003,10 @@
 /area/under/cave)
 "uy" = (
 /obj/item/candle/eora/lit{
-	color = "#f858b5";
 	icon_state = "candle_lit";
 	pixel_x = 1;
-	pixel_y = 5
+	pixel_y = 5;
+	color = "#f858b5"
 	},
 /turf/open/floor/grass/eora,
 /area/outdoors)
@@ -4136,18 +4125,18 @@
 /turf/open/floor/cobble/alt,
 /area/under/cave)
 "ve" = (
-/obj/structure/fluff/nest,
 /mob/living/carbon/human/species/rousman,
+/obj/structure/fluff/nest,
 /obj/item/paper{
-	pixel_y = -4;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = -4
 	},
 /obj/item/paper{
 	pixel_y = 1
 	},
 /obj/item/paper{
-	pixel_y = -6;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = -6
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -4172,8 +4161,8 @@
 /area/outdoors)
 "vi" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 1;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 1
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -4261,8 +4250,8 @@
 	dir = 4
 	},
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 4
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -4289,8 +4278,8 @@
 	pixel_y = 3
 	},
 /obj/structure/flora/newbranch/leafless{
-	dir = 8;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 8
 	},
 /turf/open/floor/woodturned,
 /area/outdoors)
@@ -4304,9 +4293,9 @@
 /area/under/cave)
 "vN" = (
 /obj/structure/chair/bench/church/smallbench{
-	pixel_y = 4;
 	dir = 1;
-	pixel_x = -21
+	pixel_x = -21;
+	pixel_y = 4
 	},
 /turf/open/floor/dirt,
 /area/under/cave)
@@ -4457,8 +4446,8 @@
 /area/outdoors)
 "wE" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 8;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 8
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -4471,12 +4460,12 @@
 "wG" = (
 /obj/structure/table/wood/large/corner_alt,
 /obj/item/clothing/head/corruptflower{
-	pixel_y = 15;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = 15
 	},
 /obj/item/clothing/head/corruptflower{
-	pixel_y = 5;
-	pixel_x = -9
+	pixel_x = -9;
+	pixel_y = 5
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -4769,11 +4758,11 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "yf" = (
-/obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree1"
-	},
 /mob/living/simple_animal/hostile/retaliate/wolf,
+/obj/structure/flora/newtree{
+	icon_state = "tree1";
+	dir = 8
+	},
 /turf/open/floor/grass,
 /area/outdoors)
 "yi" = (
@@ -4802,8 +4791,8 @@
 /turf/open/floor/cobblerock,
 /area/under/cave)
 "yn" = (
-/obj/structure/flora/grass/herb/rosa,
 /mob/living/simple_animal/hostile/retaliate/goat,
+/obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/dirt,
 /area/outdoors)
 "yo" = (
@@ -4920,9 +4909,9 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "ze" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/structure/closet/crate/coffin,
 /obj/structure/rack/shelf/notdense,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
 /area/under/cave)
@@ -5023,8 +5012,8 @@
 "zF" = (
 /obj/structure/closet/dirthole,
 /obj/item/natural/stone{
-	icon_state = "stone4";
 	name = "blunt stone";
+	icon_state = "stone4";
 	pixel_x = -2;
 	pixel_y = -2
 	},
@@ -5055,8 +5044,8 @@
 	icon_state = "grass3"
 	},
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 4
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -5218,9 +5207,9 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "AE" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/structure/closet/crate/coffin,
 /obj/structure/rack/shelf/notdense,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/twig,
@@ -5379,11 +5368,11 @@
 /turf/open/floor/dirt,
 /area/under/cave)
 "Bz" = (
+/mob/living/simple_animal/hostile/retaliate/trufflepig/male,
 /obj/structure/wild_plant/nospread/turnip{
 	name = "wild turnip patch";
 	pixel_y = -3
 	},
-/mob/living/simple_animal/hostile/retaliate/trufflepig/male,
 /turf/open/floor/grass,
 /area/outdoors)
 "BA" = (
@@ -5428,8 +5417,8 @@
 /area/under/cave)
 "BK" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 1;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 1
 	},
 /obj/structure/flora/grass{
 	icon_state = "grass3"
@@ -5483,8 +5472,8 @@
 /area/under/cave)
 "BY" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 4;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 4
 	},
 /obj/structure/flora/grass{
 	icon_state = "grass3"
@@ -5546,8 +5535,8 @@
 /area/under/cave)
 "Cs" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 1
 	},
 /turf/open/water/river,
 /area/outdoors)
@@ -5560,9 +5549,9 @@
 /area/outdoors)
 "Cu" = (
 /obj/item/candle/eora/lit{
-	color = "#f858b5";
 	icon_state = "candle_lit";
-	pixel_y = -13
+	pixel_y = -13;
+	color = "#f858b5"
 	},
 /turf/open/floor/grass/eora,
 /area/outdoors)
@@ -5589,10 +5578,9 @@
 /area/outdoors)
 "CJ" = (
 /obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 8
 	},
-/obj/particle_emitter,
 /turf/open/water/river,
 /area/outdoors)
 "CL" = (
@@ -5700,8 +5688,8 @@
 /area/outdoors)
 "Dp" = (
 /obj/item/reagent_containers/glass/bottle{
-	pixel_y = 16;
-	pixel_x = -5
+	pixel_x = -5;
+	pixel_y = 16
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -5710,8 +5698,8 @@
 	dir = 8
 	},
 /obj/structure/chair/bench/church/smallbench{
-	pixel_y = 18;
-	dir = 4
+	dir = 4;
+	pixel_y = 18
 	},
 /turf/open/floor/dirt,
 /area/under/cave)
@@ -5720,11 +5708,11 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "Ds" = (
+/mob/living/simple_animal/hostile/retaliate/saiga,
 /obj/structure/flora/grass/bush_meagre{
 	icon_state = "bush3";
 	pixel_x = 3
 	},
-/mob/living/simple_animal/hostile/retaliate/saiga,
 /turf/open/floor/grass,
 /area/outdoors)
 "Dt" = (
@@ -5821,8 +5809,8 @@
 /area/outdoors)
 "DR" = (
 /obj/structure/chair/bench/church/smallbench{
-	pixel_y = 2;
-	pixel_x = 13
+	pixel_x = 13;
+	pixel_y = 2
 	},
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/dirt,
@@ -5888,8 +5876,8 @@
 /obj/effect/decal/cleanable/food/mess/rotting{
 	name = "wine stain";
 	desc = "Sticky and horrid smelling, one can only imagine how it managed to endure the passing of time.";
-	pixel_y = 6;
-	pixel_x = -11
+	pixel_x = -11;
+	pixel_y = 6
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -6081,15 +6069,15 @@
 /turf/open/floor/blocks/platform,
 /area/outdoors)
 "Fr" = (
-/obj/structure/fluff/nest,
 /mob/living/carbon/human/species/rousman,
+/obj/structure/fluff/nest,
 /obj/item/paper{
-	pixel_y = -7;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = -7
 	},
 /obj/item/paper{
-	pixel_y = -6;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = -6
 	},
 /obj/item/paper{
 	pixel_y = 1
@@ -6106,17 +6094,17 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "Fv" = (
-/obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree2"
-	},
 /mob/living/simple_animal/hostile/retaliate/wolf,
+/obj/structure/flora/newtree{
+	icon_state = "tree2";
+	dir = 8
+	},
 /turf/open/floor/grass,
 /area/outdoors)
 "Fw" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 1;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 1
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -6134,9 +6122,9 @@
 /area/outdoors)
 "FB" = (
 /obj/structure/chair/bench/couch{
-	greyscale_colors = "#583759";
+	name = "noble couch";
 	color = "#583759";
-	name = "noble couch"
+	greyscale_colors = "#583759"
 	},
 /obj/structure/fake_machine/titan{
 	pixel_y = 32
@@ -6287,8 +6275,8 @@
 	pixel_y = 2
 	},
 /obj/structure/flora/newbranch/leafless{
-	dir = 1;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -6404,10 +6392,10 @@
 /area/under/cave)
 "Hf" = (
 /obj/item/natural/wood/plank{
-	pixel_y = 3;
-	pixel_x = -24;
 	name = "Old Plank";
-	desc = "A wooden plank, soggy and rotten in some parts, you're not sure it'll be very useful."
+	desc = "A wooden plank, soggy and rotten in some parts, you're not sure it'll be very useful.";
+	pixel_x = -24;
+	pixel_y = 3
 	},
 /obj/effect/decal/cleanable/debris/wood{
 	dir = 4
@@ -6416,9 +6404,9 @@
 /area/under/cave)
 "Hh" = (
 /obj/item/natural/wood/plank{
-	pixel_y = 1;
+	name = "Old Plank";
 	pixel_x = 4;
-	name = "Old Plank"
+	pixel_y = 1
 	},
 /obj/effect/decal/cleanable/debris/wood{
 	dir = 4
@@ -6447,8 +6435,8 @@
 /area/under/cave)
 "Hm" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 1;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -6508,8 +6496,8 @@
 /area/outdoors)
 "HA" = (
 /obj/structure/wild_plant/random{
-	icon_state = "valeriana2";
 	name = "wild valeriana";
+	icon_state = "valeriana2";
 	pixel_x = -5;
 	pixel_y = 6
 	},
@@ -6548,18 +6536,18 @@
 	dir = 10
 	},
 /obj/item/clothing/head/corruptflower{
-	pixel_y = 19;
-	pixel_x = 9
+	pixel_x = 9;
+	pixel_y = 19
 	},
 /obj/effect/decal/cleanable/food/mess/rotting{
 	name = "wine stain";
 	desc = "Sticky and horrid smelling, one can only imagine how it managed to endure the passing of time.";
-	pixel_y = 6;
-	pixel_x = -11
+	pixel_x = -11;
+	pixel_y = 6
 	},
 /obj/item/clothing/head/corruptflower{
-	pixel_y = 10;
-	pixel_x = -4
+	pixel_x = -4;
+	pixel_y = 10
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -6668,8 +6656,8 @@
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 4;
-	pixel_y = 10;
-	pixel_x = 4
+	pixel_x = 4;
+	pixel_y = 10
 	},
 /turf/open/transparent/openspace,
 /area/outdoors)
@@ -6735,8 +6723,8 @@
 /area/outdoors)
 "IH" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 4;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 4
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -6787,10 +6775,10 @@
 	pixel_y = -4
 	},
 /obj/item/candle/eora/lit{
-	color = "#f858b5";
 	icon_state = "candle_lit";
 	pixel_x = -1;
-	pixel_y = 22
+	pixel_y = 22;
+	color = "#f858b5"
 	},
 /turf/open/floor/grass/eora,
 /area/outdoors)
@@ -6802,8 +6790,8 @@
 /obj/structure/flora/sakura{
 	name = "wishing tree";
 	desc = "This totally isn't pink...";
-	icon_state = "manabloomtree";
-	icon = 'icons/obj/structures/manabloomtree.dmi'
+	icon = 'icons/obj/structures/manabloomtree.dmi';
+	icon_state = "manabloomtree"
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -6831,8 +6819,8 @@
 /area/outdoors)
 "Jg" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 8;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 8
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -6964,8 +6952,8 @@
 /area/under/cave)
 "JU" = (
 /obj/structure/chair/bench/church/smallbench{
-	pixel_y = 13;
-	pixel_x = -10
+	pixel_x = -10;
+	pixel_y = 13
 	},
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/dirt,
@@ -7120,8 +7108,8 @@
 /area/outdoors)
 "KM" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 4;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 4
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -7168,9 +7156,9 @@
 /area/indoors/town)
 "KS" = (
 /obj/structure/chair/bench/church/smallbench{
-	pixel_y = 1;
 	dir = 1;
-	pixel_x = 11
+	pixel_x = 11;
+	pixel_y = 1
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/carpet/stellar,
@@ -7300,8 +7288,8 @@
 	},
 /obj/effect/decal/cleanable/debris/stone,
 /obj/item/natural/poo{
-	pixel_y = -5;
-	pixel_x = -1
+	pixel_x = -1;
+	pixel_y = -5
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -7310,17 +7298,17 @@
 /turf/closed/wall/mineral/decostone/moss/blue/cand,
 /area/under/cave)
 "LL" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/structure/closet/crate/coffin,
 /obj/structure/rack/shelf/notdense,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/twig,
 /area/under/cave)
 "LM" = (
 /obj/structure/fluff/railing/tall,
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -7415,8 +7403,8 @@
 "Ms" = (
 /obj/structure/flora/grass/herb/salvia,
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -7505,8 +7493,8 @@
 /area/outdoors)
 "MI" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 8;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 8
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -7702,8 +7690,8 @@
 /obj/effect/decal/cleanable/food/mess/rotting{
 	name = "wine stain";
 	desc = "Sticky and horrid smelling, one can only imagine how it managed to endure the passing of time.";
-	pixel_y = -1;
-	pixel_x = -11
+	pixel_x = -11;
+	pixel_y = -1
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -7788,8 +7776,8 @@
 /area/outdoors)
 "Ob" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -7860,8 +7848,8 @@
 /area/outdoors)
 "OB" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 1
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -7872,8 +7860,8 @@
 /area/outdoors)
 "OK" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
@@ -7887,8 +7875,8 @@
 /area/outdoors)
 "ON" = (
 /obj/effect/decal/carpet/kover_black{
-	pixel_y = 12;
-	pixel_x = 16
+	pixel_x = 16;
+	pixel_y = 12
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/town)
@@ -8106,13 +8094,13 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "PW" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/structure/closet/crate/coffin,
 /obj/structure/rack/shelf/notdense,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
 	},
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/twig,
 /area/under/cave)
 "PX" = (
@@ -8161,9 +8149,9 @@
 /area/outdoors)
 "Qh" = (
 /obj/item/natural/wood/plank{
-	pixel_y = 1;
+	name = "Old Plank";
 	pixel_x = 4;
-	name = "Old Plank"
+	pixel_y = 1
 	},
 /turf/open/floor/dirt,
 /area/under/cave)
@@ -8480,24 +8468,24 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "RU" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/structure/closet/crate/coffin,
 /obj/structure/rack/shelf/notdense,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/twig,
 /area/under/cave)
 "RV" = (
+/mob/living/simple_animal/hostile/retaliate/saiga,
 /obj/structure/flora/grass/pyroclasticflowers{
 	icon_state = "pyroflower2";
 	pixel_x = -1
 	},
-/mob/living/simple_animal/hostile/retaliate/saiga,
 /turf/open/floor/grass,
 /area/outdoors)
 "RX" = (
 /obj/item/natural/wood/plank{
-	pixel_y = -11;
+	name = "Old Plank";
 	pixel_x = 4;
-	name = "Old Plank"
+	pixel_y = -11
 	},
 /turf/open/floor/dirt,
 /area/under/cave)
@@ -8532,8 +8520,8 @@
 	icon_state = "grass4"
 	},
 /obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 8
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -8620,8 +8608,8 @@
 /area/outdoors)
 "Sy" = (
 /obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 8
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -8683,8 +8671,8 @@
 /turf/open/floor/ruinedwood/turned,
 /area/under/cave)
 "SS" = (
-/obj/structure/flora/grass/herb/urtica,
 /mob/living/simple_animal/hostile/retaliate/wolf,
+/obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/dirt,
 /area/outdoors)
 "ST" = (
@@ -8757,11 +8745,11 @@
 /turf/open/floor/twig,
 /area/under/cave)
 "Tl" = (
-/obj/structure/flora/newbranch/leafless{
-	dir = 4;
-	icon_state = "branch-end2"
-	},
 /mob/living/simple_animal/hostile/retaliate/saiga,
+/obj/structure/flora/newbranch/leafless{
+	icon_state = "branch-end2";
+	dir = 4
+	},
 /turf/open/floor/grass,
 /area/outdoors)
 "Tm" = (
@@ -8783,8 +8771,8 @@
 "Ts" = (
 /obj/item/book/random_book/eoratica,
 /obj/item/reagent_containers/glass/bottle/beer/fireleaf{
-	pixel_y = -12;
-	pixel_x = 10
+	pixel_x = 10;
+	pixel_y = -12
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -8957,8 +8945,8 @@
 /area/outdoors)
 "Uv" = (
 /obj/structure/door/weak/bolt{
-	dir = 1;
-	name = "outhouse"
+	name = "outhouse";
+	dir = 1
 	},
 /turf/open/floor/hay,
 /area/indoors/town)
@@ -8985,8 +8973,8 @@
 /area/under/cave)
 "UB" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -9050,16 +9038,16 @@
 /turf/open/floor/grass/eora,
 /area/outdoors)
 "US" = (
+/mob/living/simple_animal/hostile/retaliate/cow/cowlet/bullet,
 /obj/structure/flora/grass{
 	icon_state = "grass3"
 	},
-/mob/living/simple_animal/hostile/retaliate/cow/cowlet/bullet,
 /turf/open/floor/grass,
 /area/outdoors)
 "UW" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 4;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 4
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -9227,9 +9215,9 @@
 /area/outdoors)
 "VV" = (
 /obj/item/natural/wood/plank{
-	pixel_y = 3;
+	name = "Old Plank";
 	pixel_x = -24;
-	name = "Old Plank"
+	pixel_y = 3
 	},
 /turf/open/floor/dirt/road,
 /area/under/cave)
@@ -9273,7 +9261,6 @@
 	pixel_x = -10;
 	pixel_y = 2
 	},
-/obj/particle_emitter,
 /turf/open/water/river,
 /area/outdoors)
 "Wj" = (
@@ -9510,8 +9497,8 @@
 /area/under/cave)
 "XA" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 4;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 4
 	},
 /turf/open/floor/woodturned,
 /area/outdoors)
@@ -9541,15 +9528,15 @@
 /area/outdoors)
 "XK" = (
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree1"
+	icon_state = "tree1";
+	dir = 4
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
 "XO" = (
 /obj/structure/flora/newtree{
-	dir = 8;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 8
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -9573,8 +9560,8 @@
 /area/outdoors)
 "XU" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/outdoors)
@@ -9694,8 +9681,8 @@
 /area/outdoors)
 "Yz" = (
 /obj/structure/flora/newtree{
-	dir = 4;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 4
 	},
 /turf/open/water/cleanshallow,
 /area/outdoors)
@@ -9785,10 +9772,10 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "Zg" = (
+/mob/living/simple_animal/hostile/retaliate/wolf,
 /obj/structure/flora/newbranch/leafless{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/retaliate/wolf,
 /turf/open/floor/dirt,
 /area/outdoors)
 "Zh" = (
@@ -9843,8 +9830,8 @@
 /area/outdoors)
 "Zt" = (
 /obj/structure/flora/newbranch/leafless{
-	dir = 4;
-	icon_state = "branch-end2"
+	icon_state = "branch-end2";
+	dir = 4
 	},
 /turf/open/water/river,
 /area/outdoors)
@@ -9877,8 +9864,8 @@
 /area/under/cave)
 "ZB" = (
 /obj/structure/flora/newtree{
-	dir = 1;
-	icon_state = "tree2"
+	icon_state = "tree2";
+	dir = 1
 	},
 /turf/open/water/river,
 /area/outdoors)
@@ -9932,9 +9919,9 @@
 /area/outdoors)
 "ZU" = (
 /obj/item/natural/wood/plank{
-	pixel_y = 3;
+	name = "Old Plank";
 	pixel_x = 22;
-	name = "Old Plank"
+	pixel_y = 3
 	},
 /obj/effect/decal/cleanable/debris/wood{
 	dir = 4
@@ -89900,7 +89887,7 @@ DF
 DF
 RK
 RK
-ky
+LL
 xM
 NG
 HL
@@ -572028,7 +572015,7 @@ Ab
 Ab
 bu
 bu
-dx
+MF
 PS
 Gs
 Sy
@@ -572831,7 +572818,7 @@ qp
 bu
 bu
 bu
-dx
+MF
 cE
 eJ
 pc

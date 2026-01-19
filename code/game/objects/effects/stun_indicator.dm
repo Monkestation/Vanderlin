@@ -7,27 +7,34 @@
 	var/current_dots = 6
 	var/mob/living/victim = null
 
-/obj/effect/stun_indicator/New()
-	..()
-	if (!ismob(loc))
-		qdel(src)
-		return
+/obj/effect/stun_indicator/Initialize(mapload, ...)
+	. = ..()
 
-	victim = loc
+	if(!ismob(loc))
+		return INITIALIZE_HINT_QDEL
+
 	current_dots = clamp(round(victim.AmountKnockdown() / 10), 0, 5)
 
-	if (!current_dots)
-		qdel(src)
-		return
+	if(!current_dots)
+		return INITIALIZE_HINT_QDEL
 
-	current_dots++//so we get integers from 1 to 6
+	victim = loc
 
-	for (var/mob/living/M in GLOB.player_list)
-		if (M.clan && M.client)
+	current_dots++ //so we get integers from 1 to 6
+
+	for(var/mob/living/M in GLOB.player_list)
+		if(M.clan && M.client)
 			viewers += M.client
 
 	indicator = image(icon = 'icons/obj/vampire.dmi', loc = victim, icon_state = "")
 	update_indicator()
+
+/obj/effect/stun_indicator/Destroy(force)
+	viewers = null
+	victim = null
+	if(indicator)
+		QDEL_NULL(indicator)
+	return ..()
 
 /obj/effect/stun_indicator/proc/update_indicator()
 	set waitfor = FALSE

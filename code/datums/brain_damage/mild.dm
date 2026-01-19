@@ -71,7 +71,7 @@
 			if(1)
 				owner.vomit()
 			if(2,3)
-				owner.dizziness += 10
+				owner.adjust_dizzy(10)
 			if(4,5)
 				owner.adjust_confusion(1 SECONDS)
 				owner.set_eye_blur_if_lower(20 SECONDS)

@@ -70,7 +70,7 @@
 				stress2give = null
 	if(stress2give)
 		for(var/mob/living/carbon/CA in hearers(world.view, C))
-			if(CA != C && !HAS_TRAIT(CA, TRAIT_BLIND))
+			if(CA != C && !CA.is_blind())
 				if(stress2give == /datum/stress_event/viewdismember)
 					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 						continue
@@ -405,32 +405,20 @@
 
 	return ..()
 
-
-//Regenerates all limbs. Returns amount of limbs regenerated
-/mob/living/proc/regenerate_limbs(noheal, excluded_limbs)
-	return 0
-
-/mob/living/carbon/regenerate_limbs(noheal, list/excluded_limbs)
+/// Restores lost limbs. Does not heal existing limbs.
+/mob/living/carbon/proc/regenerate_limbs(list/excluded_zones = list())
+	SEND_SIGNAL(src, COMSIG_CARBON_REGENERATE_LIMBS, excluded_zones)
 	var/list/limb_list = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
-	if(excluded_limbs)
-		limb_list -= excluded_limbs
-	for(var/Z in limb_list)
-		. += regenerate_limb(Z, noheal)
+	if(excluded_zones)
+		limb_list -= excluded_zones
+	for(var/limb_zone in limb_list)
+		. += regenerate_limb(limb_zone)
 
-/mob/living/proc/regenerate_limb(limb_zone, noheal)
-	return
-
-/mob/living/carbon/regenerate_limb(limb_zone, noheal)
-	var/obj/item/bodypart/L
+/mob/living/carbon/proc/regenerate_limb(limb_zone)
+	var/obj/item/bodypart/limb
 	if(get_bodypart(limb_zone))
-		return 0
-	L = newBodyPart(limb_zone, 0, 0)
-	if(L)
-		if(!noheal)
-			L.brute_dam = 0
-			L.burn_dam = 0
-			L.brutestate = 0
-			L.burnstate = 0
-
-		L.attach_limb(src, 1)
-		return 1
+		return FALSE
+	limb = newBodyPart(limb_zone, 0, 0)
+	if(limb)
+		limb.attach_limb(src, TRUE)
+		return TRUE

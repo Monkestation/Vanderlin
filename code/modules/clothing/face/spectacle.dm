@@ -7,7 +7,16 @@
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
+	clothing_traits = list(TRAIT_NEARSIGHTED_CORRECTED)
 //	block2add = FOV_BEHIND
+
+/obj/item/clothing/face/spectacles/atom_break(damage_flag)
+	. = ..()
+	detach_clothing_traits(TRAIT_NEARSIGHTED_CORRECTED)
+
+/obj/item/clothing/face/spectacles/atom_fix()
+	. = ..()
+	attach_clothing_traits(TRAIT_NEARSIGHTED_CORRECTED)
 
 /obj/item/clothing/face/spectacles/golden
 	name = "golden spectacles"

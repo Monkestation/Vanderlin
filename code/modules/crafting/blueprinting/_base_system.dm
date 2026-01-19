@@ -621,7 +621,7 @@
 	selected_recipe = GLOB.blueprint_recipes[recipe_id]
 	build_dir = selected_recipe.default_dir
 	create_preview_appearance(selected_recipe)
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Selected blueprint: [selected_recipe.name]</span>")
 	if(selected_recipe.supports_directions)
@@ -761,6 +761,6 @@
 /datum/blueprint_system/proc/clear_selection()
 	selected_recipe = null
 	clear_preview()
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Blueprint selection cleared.</span>")

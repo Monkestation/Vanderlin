@@ -42,7 +42,7 @@
 	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/attack_hand(mob/user)
-	if(istype(user, /mob/living/carbon/human/species/werewolf)) //slop fix
+	if(is_species(user, /datum/species/werewolf)) //slop fix
 		return TRUE
 	. = ..()
 
