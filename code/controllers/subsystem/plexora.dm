@@ -612,6 +612,7 @@ SUBSYSTEM_DEF(plexora)
 /datum/world_topic/plx_kick
 	keyword = "PLX_kick"
 	require_comms_key = TRUE
+
 /datum/world_topic/plx_kick/Run(list/input)
 	var/ckey = input["ckey"]
 	var/reason = input["reason"]
