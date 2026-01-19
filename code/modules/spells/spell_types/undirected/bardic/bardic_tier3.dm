@@ -153,11 +153,12 @@
  */
 /datum/action/cooldown/spell/undirected/song/suffocating_seliloquy
 	name = "Suffocating Seliloquy"
-	desc = "Continually play a heavy tune that drowns non-audience members in Abyssor's rage."
+	desc = "Continuously play a heavy tune that drowns non-audience members with Abyssor's rage."
 	button_icon_state = "dirge_t3_base"
 	background_icon_state = "dirge_t3_base"
 	sound = 'sound/magic/debuffroll.ogg'
 	invocation = "%DOWN TOO LONG IN HIS MIDNIGHT SEA!"
+	cooldown_time = 120 SECONDS
 	spell_cost = 60
 	song_stack_effect = /datum/status_effect/stacking/playing_inspiration/target_nonaudience/suffocating_seliloquy
 	inspiration_effect = /datum/status_effect/debuff/song/suffocationsong
@@ -180,7 +181,7 @@
 	duration = 15 SECONDS
 
 /datum/status_effect/debuff/song/suffocationsong/tick()
-	owner.adjustOxyLoss(1.3)
+	owner.adjustOxyLoss(1.6)
 
 /atom/movable/screen/alert/status_effect/debuff/song/suffocationsong
 	name = "Musical Suffocation!"

@@ -15,7 +15,6 @@
 	if(!.)
 		return
 	applied_effect.visual_icon_state = "bardsong_t1_base"
-	applied_effect.max_stacks = 10
 	applied_effect.stack_threshold = 10
 
 /datum/status_effect/inspiration/furtive_fortissimo

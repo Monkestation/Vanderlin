@@ -47,32 +47,43 @@
  */
 /datum/action/cooldown/spell/undirected/song/recovery_song
 	name = "Resting Rhapsody"
-	desc = "Recuperate your allies spirit's with your song! Refills stamina over time."
+	desc = "Recuperate your allies spirit's with your song! Refills half of your audience's stamina instantly."
 	invocation = "%After a long dae, may thy body rest..."
 	invocation_type = "shout"
 	button_icon_state = "melody_t2_base"
 	background_icon_state = "melody_t2_base"
 	spell_cost = 50
-	inspiration_effect = /datum/status_effect/inspiration/recovery
+	song_stack_effect = /datum/status_effect/stacking/playing_inspiration/recovery_song
+	inspiration_effect = null
 
-/datum/action/cooldown/spell/undirected/song/recovery_song/modify_applied_effect(datum/status_effect/stacking/playing_inspiration/applied_effect)
-	. = ..()
-	if(!.)
-		return
-	applied_effect.visual_icon_state = "melody_t2_base"
+/datum/status_effect/stacking/playing_inspiration/recovery_song
+	stack_threshold = 10
 
-/datum/status_effect/inspiration/recovery
-	id = "recoverysong"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/song/recovery
-	duration = 30 SECONDS
+/datum/status_effect/stacking/playing_inspiration/recovery_song/find_audience()
+	var/mob/living/carbon/human/human_owner = owner
+	for (var/mob/living/carbon/human/listener in hearers(range, human_owner))
+		if(human_owner.inspiration.check_in_audience(listener))
+			listener.adjust_stamina(-listener.maximum_stamina / 2, internal_regen = FALSE)
+			to_chat(listener, span_notice("I am refreshed by the calming melody of the song!"))
 
-/datum/status_effect/inspiration/recovery/tick()
-	owner.adjust_stamina(-2, internal_regen = FALSE)
+// /datum/action/cooldown/spell/undirected/song/recovery_song/modify_applied_effect(datum/status_effect/stacking/playing_inspiration/applied_effect)
+// 	. = ..()
+// 	if(!.)
+// 		return
+// 	applied_effect.visual_icon_state = "melody_t2_base"
 
-/atom/movable/screen/alert/status_effect/buff/song/recovery
-	name = "Musical Recovery"
-	desc = "I am refreshed by the calming melody of the song."
-	icon_state = "buff"
+// /datum/status_effect/inspiration/recovery
+// 	id = "recoverysong"
+// 	alert_type = /atom/movable/screen/alert/status_effect/buff/song/recovery
+// 	duration = 30 SECONDS
+
+// /datum/status_effect/inspiration/recovery/tick()
+// 	owner.adjust_stamina(-2, internal_regen = FALSE)
+
+// /atom/movable/screen/alert/status_effect/buff/song/recovery
+// 	name = "Musical Recovery"
+// 	desc = "I am refreshed by the calming melody of the song."
+// 	icon_state = "buff"
 
 /**
  * Pestilent Pied Piper
