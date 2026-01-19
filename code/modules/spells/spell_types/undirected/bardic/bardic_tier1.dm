@@ -21,7 +21,7 @@
 /datum/status_effect/inspiration/furtive_fortissimo
 	id = "furtivefortissimo"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/song/furtive_fortissimo
-	duration = 15 SECONDS
+	duration = 30 SECONDS
 
 /datum/status_effect/inspiration/furtive_fortissimo/on_apply()
 	. = ..()
@@ -82,13 +82,13 @@
 	if(!.)
 		return
 	applied_effect.visual_icon_state = "dirge_t1_base"
-	applied_effect.range = 4
+	applied_effect.range = 5
 
 /datum/status_effect/inspiration/dirge_misfortune
 	id = "dirge_misfortune"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/song/dirge_misfortune
 	effectedstats = list(STATKEY_LCK = -2)
-	duration = 15 SECONDS
+	duration = 30 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/song/dirge_misfortune
 	name = "Dirge of Misfortune"

@@ -60,8 +60,6 @@
 	var/range = 7
 
 /datum/status_effect/stacking/playing_inspiration/on_creation(mob/living/new_owner, duration_override, stacks_to_apply, inspiration_effect)
-	if(!ispath(inspiration_effect, /datum/status_effect))
-		return
 	. = ..()
 	effect_to_apply = inspiration_effect
 

@@ -25,7 +25,7 @@
 	id = "haste"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/song/accelakathist
 	effectedstats = list(STATKEY_SPD = 2)
-	duration = 15 SECONDS
+	duration = 30 SECONDS
 
 /datum/status_effect/inspiration/accelakathist/on_apply()
 	. = ..()
@@ -153,30 +153,34 @@
  */
 /datum/action/cooldown/spell/undirected/song/suffocating_seliloquy
 	name = "Suffocating Seliloquy"
-	desc = "Play a heavy tune to drown non-audience members in Abyssor's rage."
+	desc = "Continually play a heavy tune that drowns non-audience members in Abyssor's rage."
 	button_icon_state = "dirge_t3_base"
 	background_icon_state = "dirge_t3_base"
 	sound = 'sound/magic/debuffroll.ogg'
 	invocation = "%DOWN TOO LONG IN HIS MIDNIGHT SEA!"
 	spell_cost = 60
-	song_stack_effect = /datum/status_effect/stacking/playing_inspiration/target_nonaudience
+	song_stack_effect = /datum/status_effect/stacking/playing_inspiration/target_nonaudience/suffocating_seliloquy
 	inspiration_effect = /datum/status_effect/debuff/song/suffocationsong
 
-/datum/action/cooldown/spell/undirected/song/suffocating_seliloquy/modify_applied_effect(datum/status_effect/stacking/playing_inspiration/applied_effect)
+/datum/status_effect/stacking/playing_inspiration/target_nonaudience/suffocating_seliloquy
+	visual_icon_state = "dirge_t3_base"
+	consumed_on_threshold = FALSE
+	finishing_energy_cost = 5
+	finishing_sound = 'sound/magic/debuffroll.ogg'
+	range = 6
+
+/datum/status_effect/stacking/playing_inspiration/target_nonaudience/suffocating_seliloquy/threshold_cross_effect()
 	. = ..()
-	if(!.)
-		return
-	applied_effect.visual_icon_state = "dirge_t3_base"
-	applied_effect.max_stacks = 30
-	applied_effect.stack_threshold = 30
+	stacks_consumed_effect()
+	INVOKE_ASYNC(src, PROC_REF(add_stacks), -stacks + 1)
 
 /datum/status_effect/debuff/song/suffocationsong
 	id = "suffocationsong"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/song/suffocationsong
-	duration = 20 SECONDS
+	duration = 15 SECONDS
 
 /datum/status_effect/debuff/song/suffocationsong/tick()
-	owner.adjustOxyLoss(1.6) // counters oxy restore in /mob/living/carbon/Life()
+	owner.adjustOxyLoss(1.3)
 
 /atom/movable/screen/alert/status_effect/debuff/song/suffocationsong
 	name = "Musical Suffocation!"
