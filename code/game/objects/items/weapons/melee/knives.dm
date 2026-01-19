@@ -60,7 +60,7 @@
 
 /obj/item/weapon/knife/dagger/navaja
 	name = "navaja"
-	desc = "A folding Etruscan knife valued by merchants, mercenaries and peasants for its convenience. It possesses a long hilt, allowing for a sizable blade with good reach."
+	desc = "A folding knife used by the Mercator's guild. It possesses a long hilt, allowing for a sizable blade with good reach."
 	icon_state = "navaja_c"
 	item_state = "elfdag"
 	force = DAMAGE_KNIFE / 2
