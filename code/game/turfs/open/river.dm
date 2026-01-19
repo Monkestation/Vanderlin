@@ -71,7 +71,7 @@
 	var/list/cardinal_turfs = list()
 	var/list/diagonal_turfs = list()
 	var/logged_turf_type
-	for(var/turf/T as anything in RANGE_TURFS(1, src) - src)
+	for(var/turf/T in orange(1, src))
 		var/area/new_area = get_area(T)
 		if(!T || (T.density && !ismineralturf(T)) || (whitelisted_area && !istype(new_area, whitelisted_area)) || (T.flags_1 & NO_LAVA_GEN_1) )
 			continue
