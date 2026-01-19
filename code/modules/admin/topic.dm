@@ -115,14 +115,17 @@
 
 		SSticker.delay_end = !SSticker.delay_end
 
-		if(SSticker.delay_end && SSticker.reboot_timer)
-			SSticker.cancel_reboot(usr)
-
 		var/reason = SSticker.delay_end ? "for reason: [SSticker.admin_delay_notice]" : "."//laziness
 		var/msg = "[SSticker.delay_end ? "delayed" : "undelayed"] the round end [reason]"
 
 		log_admin("[key_name(usr)] [msg]")
 		message_admins("[key_name_admin(usr)] [msg]")
+
+		if(SSticker.delay_end)
+			if(SSticker.reboot_timer)
+				SSticker.cancel_reboot(usr)
+		else if(SSticker.ready_for_reboot)
+			SSticker.standard_reboot()
 
 	else if(href_list["end_round"])
 		if(!check_rights(R_ADMIN))
