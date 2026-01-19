@@ -11,7 +11,6 @@
 		SPEC_ID_RAKSHARI,\
 		SPEC_ID_TRITON,\
 	)
-
 	allowed_patrons = list(/datum/patron/divine/abyssor)
 	outfit = /datum/outfit/folkhero/swashbuckler
 	total_positions = 1
