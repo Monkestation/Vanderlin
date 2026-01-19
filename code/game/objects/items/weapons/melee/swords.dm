@@ -1083,7 +1083,7 @@
 
 /obj/item/weapon/sword/long/greatsword/psydon/unforgotten
 	name = "unforgotten blade"
-	desc = "High Inquisitor Archibald once recorded an expedition of seven brave Adjudicators into Gronnian snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
+	desc = "High Inquisitor Archibald once recorded an expedition of seven brave Adjudicators into eastern snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
 	icon_state = "forgottenblade"
 
 /obj/item/weapon/sword/long/greatsword/psydon/unforgotten/Initialize()
@@ -1179,7 +1179,7 @@
 
 /obj/item/weapon/sword/long/greatsword/ironclaymore
 	name = "iron claymore"
-	desc = "A large sword originating from the northern land of Caledon, a proud warrior nation beholden to Ravox."
+	desc = "A large sword originating from the northern land of Kaledon, a proud warrior nation beholden to Ravox."
 	icon_state = "ironclaymore"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
@@ -1258,7 +1258,7 @@
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore
 	name = "berserker sword"
-	desc = "A huge sword constructed out of a slab of Iron, famously wielded by the first settlers of Dachiagh Benne."
+	desc = "A huge sword constructed out of a slab of Iron."
 	icon_state = "gutsclaymore"
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
 	wdefense = ULTMATE_PARRY

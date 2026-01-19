@@ -635,7 +635,7 @@
 
 /obj/item/weapon/mace/elvenclub/silver
 	name = "regal elven war club"
-	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree. It's commonly wielded by the Fingers of Necra, an organization of shamanist exorcists."
+	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree. It's commonly wielded by groups of shamanist exorcists."
 	icon_state = "regalelvenclub"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD

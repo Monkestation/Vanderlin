@@ -203,7 +203,7 @@
 
 
 /obj/item/weapon/scabbard/kazengun
-	name = "simple kazengun scabbard"
+	name = "simple eastern scabbard"
 	desc = "A piece of steel lined with wood. Great for batting away blows."
 	icon_state = "kazscab"
 	item_state = "kazscab"
