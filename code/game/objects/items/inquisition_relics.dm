@@ -1226,8 +1226,11 @@
 		var/mob/living/carbon/human/target
 
 		if(input == "FIXATION")
+			var/name = browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID")
+			if(!name)
+				return
 			for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
-				if(HL.real_name == input)
+				if(HL.real_name == name)
 					fixation = WEAKREF(HL)
 					target = HL
 				playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
