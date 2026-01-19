@@ -372,5 +372,12 @@
                 "bugfix": "bandage bloodloss"
             }
         ]
+    },
+    "2026-01-19": {
+        "tired-wired": [
+            {
+                "rscadd": "Added some candle sprites from Azure."
+            }
+        ]
     }
 }
