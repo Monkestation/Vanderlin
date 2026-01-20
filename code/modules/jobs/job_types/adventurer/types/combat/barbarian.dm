@@ -28,7 +28,7 @@
 		/datum/skill/combat/swords = 1,
 		/datum/skill/combat/bows = 2,
 		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/tanning = 1,
+		/datum/skill/craft/tanning = 2,
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/riding = 2,
