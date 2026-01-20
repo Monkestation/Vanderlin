@@ -218,8 +218,7 @@
 		if(R.i_type == i_type_choice && istype(hingot, R.req_bar))
 			appro_recipe += R
 
-	for(var/I in appro_recipe)
-		var/datum/anvil_recipe/R = I
+	for(var/datum/anvil_recipe/R as anything in appro_recipe)
 		if(!R.req_bar)
 			appro_recipe -= R
 		if(!istype(hingot, R.req_bar))

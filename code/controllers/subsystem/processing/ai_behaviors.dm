@@ -8,9 +8,11 @@ PROCESSING_SUBSYSTEM_DEF(ai_behaviors)
 	wait = 1
 	///List of all ai_behavior singletons, key is the typepath while assigned value is a newly created instance of the typepath. See SetupAIBehaviors()
 	var/list/ai_behaviors
+
 /datum/controller/subsystem/processing/ai_behaviors/Initialize(timeofday)
 	SetupAIBehaviors()
 	return ..()
+
 /datum/controller/subsystem/processing/ai_behaviors/proc/SetupAIBehaviors()
 	ai_behaviors = list()
 	for(var/behavior_type in subtypesof(/datum/ai_behavior))

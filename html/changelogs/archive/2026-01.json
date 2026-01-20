@@ -379,5 +379,37 @@
                 "rscadd": "Added some candle sprites from Azure."
             }
         ]
+    },
+    "2026-01-20": {
+        "snowyseshi": [
+            {
+                "code_imp": "athletics and climbing are now clamped to average."
+            },
+            {
+                "rscdel": "Woodland hermit background removed."
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "balance": "Daywalker migrant job rebalanced and changed (No longer a worse witch hunter)"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Coffins may now be sealed with tallow. This can consecrate them like a grave."
+            },
+            {
+                "rscadd": "Sealed coffins can be opened with daggers and knives on cut intent."
+            },
+            {
+                "rscadd": "A grave may now be double-consecrated by burying a consecrated coffin and using burial rites on the resulting grave. This makes graverobbing trigger an alarm that alerts the temple."
+            },
+            {
+                "rscadd": "Red Tallow may now be made by using viscera on normal tallow. Viscera is created by grinding sinew.\\nadd : New sprites for consecrated coffins, double-consecrated graves."
+            },
+            {
+                "code_imp": "fixes a typo in the bobcat's description."
+            }
+        ]
     }
 }
