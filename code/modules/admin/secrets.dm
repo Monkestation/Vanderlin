@@ -181,8 +181,7 @@
 				return
 			var/dat = "<B>Showing DNA from blood.</B><HR>"
 			dat += "<table cellspacing=5><tr><th>Name</th><th>DNA</th><th>Blood Type</th></tr>"
-			for(var/i in GLOB.human_list)
-				var/mob/living/carbon/human/H = i
+			for(var/mob/living/carbon/human/H as anything in GLOB.human_list)
 				if(H.ckey)
 					dat += "<tr><td>[H]</td><td>[H.dna.unique_enzymes]</td><td>[H.dna.human_blood_type]</td></tr>"
 			dat += "</table>"
@@ -192,8 +191,7 @@
 				return
 			var/dat = "<B>Showing Fingerprints.</B><HR>"
 			dat += "<table cellspacing=5><tr><th>Name</th><th>Fingerprints</th></tr>"
-			for(var/i in GLOB.human_list)
-				var/mob/living/carbon/human/H = i
+			for(var/mob/living/carbon/human/H as anything in GLOB.human_list)
 				if(H.ckey)
 					dat += "<tr><td>[H]</td><td>[md5(H.dna.unique_identity)]</td></tr>"
 			dat += "</table>"
@@ -203,8 +201,7 @@
 			if(!check_rights(R_FUN))
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Monkeyize All Humans"))
-			for(var/i in GLOB.human_list)
-				var/mob/living/carbon/human/H = i
+			for(var/mob/living/carbon/human/H as anything in GLOB.human_list)
 				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon, monkeyize))
 			ok = 1
 
@@ -217,8 +214,7 @@
 				log_admin("[key_name(usr)] turned all humans into [result]", 1)
 				message_admins("\blue [key_name_admin(usr)] turned all humans into [result]")
 				var/newtype = GLOB.species_list[result]
-				for(var/i in GLOB.human_list)
-					var/mob/living/carbon/human/H = i
+				for(var/mob/living/carbon/human/H as anything in GLOB.human_list)
 					H.set_species(newtype)
 		if("changebombcap")
 			if(!check_rights(R_FUN))
@@ -245,8 +241,7 @@
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Pawsitively Purrfect"))
 			message_admins("[key_name_admin(usr)] made everyone purrfect.")
-			for(var/i in GLOB.human_list)
-				var/mob/living/carbon/human/H = i
+			for(var/mob/living/carbon/human/H as anything in GLOB.human_list)
 				SEND_SOUND(H, sound('sound/blank.ogg'))
 
 				if(H.dna.species.id == SPEC_ID_HUMEN)

@@ -118,6 +118,15 @@
 /area/outdoors/rtfield/safe
 	ambush_mobs = null
 
+/area/rogue/outdoors/farm
+	name = "soilery"
+	icon_state = "rtfield"
+	soundenv = 19
+	background_track = 'sound/music/area/field.ogg'
+	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_night = 'sound/music/area/sleeping.ogg'
+	converted_type = /area/indoors/shelter/rtfield
+
 /area/indoors/shelter/rtfield
 	icon_state = "rtfield"
 	background_track = 'sound/music/area/field.ogg'
@@ -674,7 +683,7 @@
 /area/indoors/town/clocktower
 	first_time_text = "Clocktower"
 	icon_state = "clocktower"
-	background_track = "sound/music/area/clocktower_ambience.ogg"
+	background_track = 'sound/music/area/clocktower_ambience.ogg'
 
 /area/indoors/town/orphanage
 	first_time_text = "The Orphanage"

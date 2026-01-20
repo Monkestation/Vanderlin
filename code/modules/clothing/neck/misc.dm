@@ -17,7 +17,7 @@
 /obj/item/clothing/neck/silveramulet
 	name = "silver amulet"
 	icon_state = "amulets"
-	slot_flags = ITEM_SLOT_NECK
+	slot_flags = ITEM_SLOT_NECK | ITEM_SLOT_WRISTS // It needs this or else it is less useful than a psycross
 	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'

@@ -197,6 +197,7 @@
 		to_chat(owner, span_greentext("Channeling my patron's power is easier in these conditions!"))
 		amount_healed += situational_bonus
 
+	SEND_SIGNAL(owner, COMSIG_LIVING_HEALED_OTHER, amount_healed)
 	cast_on.adjustToxLoss(-amount_healed)
 	cast_on.adjustOxyLoss(-amount_healed)
 	cast_on.blood_volume += blood_restoration

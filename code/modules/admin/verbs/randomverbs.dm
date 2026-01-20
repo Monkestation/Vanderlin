@@ -433,7 +433,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!istype(M))
 		alert("Cannot revive a ghost")
 		return
-	M.revive(full_heal = TRUE, admin_revive = TRUE)
+	M.revive(ADMIN_HEAL_ALL)
 
 	log_admin("[key_name(usr)] healed / revived [key_name(M)]")
 	var/msg = "<span class='danger'>Admin [key_name_admin(usr)] healed / revived [ADMIN_LOOKUPFLW(M)]!</span>"
@@ -856,7 +856,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	target.visible_message(target, span_danger("[target] clutches at [target.p_their()] chest!"))
 	target.emote("breathgasp", forced = TRUE)
 	shake_camera(target, 1, 3)
-	target.blur_eyes(40)
+	target.set_eye_blur_if_lower(80 SECONDS)
 	var/stuffy = list("ZIZO GRABS MY WEARY HEART!","ARGH! MY HEART BEATS NO MORE!","NO... MY HEART HAS BEAT IT'S LAST!","MY HEART HAS GIVEN UP!","MY HEART BETRAYS ME!","THE METRONOME OF MY LIFE STILLS!")
 	if(custom_message)
 		to_chat(target, span_danger("[custom_message]"))

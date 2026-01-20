@@ -14,7 +14,7 @@
 		return FALSE
 
 	owner.visible_message(span_notice("[owner] gestures, mending minor damage to [target]."))
-	//playsound(get_turf(target), 'sound/magic/staff_healing.ogg', 50, TRUE)
+	//playsound(target, 'sound/magic/staff_healing.ogg', 50, TRUE)
 
 	// Restore some durability or repair minor damage
 	if(target.get_integrity() < target.max_integrity)

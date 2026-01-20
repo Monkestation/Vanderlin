@@ -87,6 +87,12 @@
 		amount += BP.burn_dam
 	return amount
 
+/mob/living/carbon/setBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+	var/current = getBruteLoss()
+	var/diff = amount - current
+	if(!diff)
+		return
+	adjustBruteLoss(diff, updating_health, forced, required_bodytype)
 
 /mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status)
 	if(!forced && (status_flags & GODMODE))
@@ -96,6 +102,13 @@
 	else
 		heal_overall_damage(abs(amount), 0, required_status ? required_status : BODYPART_ORGANIC, updating_health)
 	return amount
+
+/mob/living/carbon/setFireLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+	var/current = getFireLoss()
+	var/diff = amount - current
+	if(!diff)
+		return
+	adjustFireLoss(diff, updating_health, forced, required_bodytype)
 
 /mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status)
 	if(!forced && (status_flags & GODMODE))

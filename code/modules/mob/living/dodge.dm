@@ -140,6 +140,8 @@
  */
 /mob/living/proc/calculate_dodge_score(mob/living/user)
 	var/dodge_score = defprob
+	if(HAS_TRAIT(src, TRAIT_EVASIVE))
+		return 200
 	if(HAS_TRAIT(src, TRAIT_UNDODGING))
 		return 0
 

@@ -63,7 +63,7 @@
 	var/sound = 'sound/blank.ogg'
 
 /obj/effect/mine/sound/mineEffect(mob/victim)
-	playsound(loc, sound, 100, TRUE)
+	playsound(src, sound, 100, TRUE)
 
 
 /obj/effect/mine/sound/bwoink
@@ -99,7 +99,7 @@
 	if(!victim.client || !istype(victim))
 		return
 	to_chat(victim, "<span class='notice'>I feel great!</span>")
-	victim.revive(full_heal = TRUE, admin_revive = TRUE)
+	victim.revive(ADMIN_HEAL_ALL)
 
 /obj/effect/mine/pickup/speed
 	name = "Yellow Orb"

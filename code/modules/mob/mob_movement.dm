@@ -99,8 +99,7 @@
 			if(!world.time%5)
 				to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
 		return FALSE
-	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_LIVING_MOVE, n, direct) & COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE)
-		return FALSE
+
 	if(mob.force_moving)
 		return FALSE
 
@@ -125,6 +124,9 @@
 		var/atom/O = mob.loc
 		return O.relaymove(mob, direct)
 
+	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_MOVE, args) & COMSIG_MOB_CLIENT_BLOCK_PRE_MOVE)
+		return FALSE
+
 	//We are now going to move
 	var/add_delay = mob.cached_multiplicative_slowdown
 	//If the move was recent, count using old_move_delay
@@ -134,18 +136,6 @@
 		move_delay = old_move_delay
 	else
 		move_delay = world.time
-
-	if(L.confused)
-		var/newdir = 0
-		if(L.confused > 40)
-			newdir = pick(GLOB.alldirs)
-		else if(prob(L.confused * 1.5))
-			newdir = angle2dir(dir2angle(direct) + pick(90, -90))
-		else if(prob(L.confused * 3))
-			newdir = angle2dir(dir2angle(direct) + pick(45, -45))
-		if(newdir)
-			direct = newdir
-			n = get_step(L, direct)
 
 	var/target_dir = get_dir(L, n)
 
@@ -532,30 +522,6 @@
 		m_intent = MOVE_INTENT_RUN
 
 /mob/proc/update_sneak_invis(reset = FALSE)
-	return
-
-//* Updates a mob's sneaking status, rendering them invisible or visible in accordance to their status. TODO:Fix people bypassing the sneak fade by turning, and add a proc var to have a timer after resetting visibility.
-/mob/living/update_sneak_invis(reset = FALSE) //Why isn't this in mob/living/living_movements.dm? Why, I'm glad you asked!
-	if(!reset && HAS_TRAIT(src, TRAIT_IMPERCEPTIBLE)) // Check if the mob is affected by the invisibility spell
-		rogue_sneaking = TRUE
-		return
-	var/turf/T = get_turf(src)
-	var/light_amount = T?.get_lumcount()
-	var/used_time = 50
-
-	if(rogue_sneaking) //If sneaking, check if they should be revealed
-		if((stat > SOFT_CRIT) || IsSleeping() || !MOBTIMER_FINISHED(src, MT_FOUNDSNEAK, 30 SECONDS) || !T || reset || (m_intent != MOVE_INTENT_SNEAK) || light_amount >= rogue_sneaking_light_threshhold)
-			used_time = round(clamp((50 - (used_time*1.75)), 5, 50),1)
-			animate(src, alpha = initial(alpha), time =	used_time) //sneak skill makes you reveal slower but not as drastic as disappearing speed
-			spawn(used_time) regenerate_icons()
-			rogue_sneaking = FALSE
-			return
-
-	else //not currently sneaking, check if we can sneak
-		if(light_amount < rogue_sneaking_light_threshhold && m_intent == MOVE_INTENT_SNEAK)
-			animate(src, alpha = 0, time = used_time)
-			spawn(used_time + 5) regenerate_icons()
-			rogue_sneaking = TRUE
 	return
 
 /mob/proc/toggle_rogmove_intent(intent, silent = FALSE)

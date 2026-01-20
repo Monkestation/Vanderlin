@@ -58,6 +58,26 @@
 	/// List of storytellers that will pick only their dedicated and general events in some cases, like when they are ascendant
 	var/list/dedicated_storytellers
 
+/datum/round_event_control/New()
+	if(config && !wizardevent) // Magic is unaffected by configs
+		earliest_start = CEILING(earliest_start * CONFIG_GET(number/events_min_time_mul), 1)
+		min_players = CEILING(min_players * CONFIG_GET(number/events_min_players_mul), 1)
+
+/datum/round_event_control/Topic(href, href_list)
+	..()
+
+	if(!check_rights(NONE))
+		return
+
+	if(href_list["cancel"])
+		if(!triggering)
+			to_chat(usr, "<span class='admin'>I am too late to cancel that event</span>")
+			return
+		triggering = FALSE
+		message_admins("[key_name_admin(usr)] cancelled event [name].")
+		log_admin_private("[key_name(usr)] cancelled event [name].")
+		SSblackbox.record_feedback("tally", "event_admin_cancelled", 1, typepath)
+
 /datum/round_event_control/proc/valid_for_map()
 	return TRUE
 
@@ -91,11 +111,6 @@
 				string += ", "
 			string += "Too Many Villians"
 	return string
-
-/datum/round_event_control/New()
-	if(config && !wizardevent) // Magic is unaffected by configs
-		earliest_start = CEILING(earliest_start * CONFIG_GET(number/events_min_time_mul), 1)
-		min_players = CEILING(min_players * CONFIG_GET(number/events_min_players_mul), 1)
 
 /datum/round_event_control/wizard
 	wizardevent = TRUE
@@ -161,21 +176,6 @@
 	triggering = FALSE
 
 	return EVENT_READY
-
-/datum/round_event_control/Topic(href, href_list)
-	..()
-
-	if(!check_rights(NONE))
-		return
-
-	if(href_list["cancel"])
-		if(!triggering)
-			to_chat(usr, "<span class='admin'>I am too late to cancel that event</span>")
-			return
-		triggering = FALSE
-		message_admins("[key_name_admin(usr)] cancelled event [name].")
-		log_admin_private("[key_name(usr)] cancelled event [name].")
-		SSblackbox.record_feedback("tally", "event_admin_cancelled", 1, typepath)
 
 /datum/round_event_control/proc/runEvent(random = FALSE, admin_forced = TRUE)
 	var/datum/round_event/round_event = new typepath(TRUE, src)

@@ -45,7 +45,7 @@
 
 /datum/component/butchering/proc/startButcher(obj/item/source, mob/living/M, mob/living/user)
 	to_chat(user, "<span class='notice'>I begin to butcher [M]...</span>")
-	playsound(M.loc, butcher_sound, 50, TRUE, -1)
+	playsound(M, butcher_sound, 50, TRUE, -1)
 	if(do_after(user, speed, M) && M.Adjacent(source))
 		Butcher(user, M)
 
@@ -57,7 +57,7 @@
 					"<span class = 'danger'>Something is cutting into my neck!</span>", NONE)
 	log_combat(user, H, "starts slicing the throat of")
 
-	playsound(H.loc, butcher_sound, 50, TRUE, -1)
+	playsound(H, butcher_sound, 50, TRUE, -1)
 	if(do_after(user, clamp(50 SECONDS / source.force, 3 SECONDS, 10 SECONDS), H) && H.Adjacent(source))
 		if(H.has_status_effect(/datum/status_effect/neck_slice))
 			user.show_message("<span class='warning'>[H]'s neck has already been cut, you can't make the bleeding any worse!</span>", MSG_VISUAL, \
@@ -75,8 +75,7 @@
 	var/turf/T = meat.drop_location()
 	var/final_effectiveness = effectiveness - meat.butcher_difficulty
 	var/bonus_chance = max(0, (final_effectiveness - 100) + bonus_modifier) //so 125 total effectiveness = 25% extra chance
-	for(var/V in meat.butcher_results)
-		var/obj/bones = V
+	for(var/obj/bones as anything in meat.butcher_results)
 		var/amount = meat.butcher_results[bones]
 		for(var/_i in 1 to amount)
 			if(!prob(final_effectiveness))
@@ -90,8 +89,7 @@
 			else
 				new bones (T)
 		meat.butcher_results.Remove(bones) //in case you want to, say, have it drop its results on gib
-	for(var/V in meat.guaranteed_butcher_results)
-		var/obj/sinew = V
+	for(var/obj/sinew as anything in meat.guaranteed_butcher_results)
 		var/amount = meat.guaranteed_butcher_results[sinew]
 		for(var/i in 1 to amount)
 			new sinew (T)

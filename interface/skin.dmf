@@ -199,7 +199,7 @@ window "stonekeep_prefwin"
 	elem "stonekeep_prefwin"
 		type = MAIN
 		pos = 291,0
-		size = 700x650
+		size = 816x879
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		background-color = none
@@ -217,18 +217,38 @@ window "stonekeep_prefwin"
 	elem "preferences_browser"
 		type = BROWSER
 		pos = 0,0
-		size = 700x650
+		size = 816x879
 		anchor1 = 0,0
 		anchor2 = 75,100
 		background-color = none
 		saved-params = ""
 	elem "character_preview_map"
 		type = MAP
-		pos = 260,235
-		size = 140x192
+		pos = 30,155
+		size = 282x237
 		anchor1 = 75,0
 		anchor2 = 100,100
 		right-click = true
 		saved-params = "zoom;letterbox;zoom-mode"
 		icon-size = 64
 		zoom-mode = distort
+
+
+window "native_say"
+	elem "native_say"
+		type = MAIN
+		pos = 848,500
+		size = 231x35
+		anchor1 = 50,50
+		anchor2 = 50,50
+		is-visible = false
+		saved-params = ""
+		statusbar = false
+		can-minimize = false
+	elem "browser"
+		type = BROWSER
+		pos = 0,0
+		size = 231x35
+		anchor1 = 0,0
+		anchor2 = 0,0
+		saved-params = ""
