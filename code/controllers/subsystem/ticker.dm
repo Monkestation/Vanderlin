@@ -2,7 +2,8 @@
 #define SS_TICKER_TRAIT "SS_Ticker"
 
 /proc/low_memory_force_start()
-	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
 		player.ready = PLAYER_READY_TO_PLAY
 
 	SSticker.start_immediately = TRUE
@@ -188,7 +189,8 @@ SUBSYSTEM_DEF(ticker)
 				timeLeft = max(0,start_at - world.time)
 			totalPlayers = LAZYLEN(GLOB.new_player_list)
 			totalPlayersReady = 0
-			for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
+			for(var/i in GLOB.new_player_list)
+				var/mob/dead/new_player/player = i
 				if(player.ready == PLAYER_READY_TO_PLAY)
 					++totalPlayersReady
 
@@ -425,7 +427,8 @@ SUBSYSTEM_DEF(ticker)
 		cb.InvokeAsync()
 
 /datum/controller/subsystem/ticker/proc/create_characters()
-	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
 		if(!player)
 			stack_trace("There is a null in the player list, report it to the developers!")
 			message_admins("There is a null in the player list, report it to the developers!")
@@ -446,13 +449,15 @@ SUBSYSTEM_DEF(ticker)
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
-	for(var/mob/dead/new_player/P as anything in GLOB.new_player_list)
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/P = i
 		if(P.new_character && P.new_character.mind)
 			SSticker.minds += P.new_character.mind
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/equip_characters()
-	for(var/mob/dead/new_player/new_player_mob as anything in GLOB.new_player_list)
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/new_player_mob = i
 		if(!isliving(new_player_mob.new_character))
 			CHECK_TICK
 			continue
@@ -467,7 +472,8 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
-	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
+	for(var/i in GLOB.new_player_list)
+		var/mob/dead/new_player/player = i
 		var/mob/living = player.transfer_character()
 		if(living)
 			qdel(player)
