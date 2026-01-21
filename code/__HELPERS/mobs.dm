@@ -399,13 +399,12 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 	var/static/list/mob_spawn_nicecritters = list() // and possible friendly mobs
 
 	if(mob_spawn_meancritters.len <= 0 || mob_spawn_nicecritters.len <= 0)
-		for(var/T in typesof(/mob/living/simple_animal))
-			var/mob/living/simple_animal/SA = T
+		for(var/mob/living/simple_animal/SA as anything in typesof(/mob/living/simple_animal))
 			switch(initial(SA.gold_core_spawnable))
 				if(HOSTILE_SPAWN)
-					mob_spawn_meancritters += T
+					mob_spawn_meancritters += SA
 				if(FRIENDLY_SPAWN)
-					mob_spawn_nicecritters += T
+					mob_spawn_nicecritters += SA
 
 	var/chosen
 	if(mob_class == FRIENDLY_SPAWN)

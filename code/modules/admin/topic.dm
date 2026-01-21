@@ -103,6 +103,7 @@
 	else if(href_list["delay_round_end"])
 		if(!check_rights(R_SERVER))
 			return
+
 		if(!SSticker.delay_end)
 			SSticker.admin_delay_notice = input(usr, "Enter a reason for delaying the round end", "Round Delay Reason") as null|text
 			if(isnull(SSticker.admin_delay_notice))
@@ -111,12 +112,19 @@
 			if(alert(usr, "Really cancel current round end delay? The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Undelay round end", "Yes", "No") != "Yes")
 				return
 			SSticker.admin_delay_notice = null
+
 		SSticker.delay_end = !SSticker.delay_end
+
 		var/reason = SSticker.delay_end ? "for reason: [SSticker.admin_delay_notice]" : "."//laziness
 		var/msg = "[SSticker.delay_end ? "delayed" : "undelayed"] the round end [reason]"
+
 		log_admin("[key_name(usr)] [msg]")
 		message_admins("[key_name_admin(usr)] [msg]")
-		if(SSticker.ready_for_reboot && !SSticker.delay_end) //we undelayed after standard reboot would occur
+
+		if(SSticker.delay_end)
+			if(SSticker.reboot_timer)
+				SSticker.cancel_reboot(usr)
+		else if(SSticker.ready_for_reboot)
 			SSticker.standard_reboot()
 
 	else if(href_list["end_round"])
