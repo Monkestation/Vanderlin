@@ -705,24 +705,6 @@ While it's not required reading, leadership roles may find this information usef
 	</details>
 
 	<details>
-		<summary><strong> The Red Dune Massacre - 2401 </strong></summary>
-		<br>
-		A devastating massacre carried out by Psydonite settlers and extremists from The Black Empire at St. Samiyas Convent, a northern Lakkarian convent near the Grenzelhoftian border. The abbess of the convent, alongside a countless number of her churchlings and acolytes, were mercilessly slain for reasons that Lakkarian scholars have long struggled to determine.
-		<br><br>
-		Iteru of the Dunes, Lakkari's Kandake, swiftly denounced this act of aggression and declared war on The Black Empire.
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> The War of the Split Feather - 2401-2412 </strong></summary>
-		<br>
-		The horrific eleven yil long war between the Queendom of Lakkari and the Grenzelhoftian Impirate. The Queendom of Lakkari sustained heavy losses, losing most of its northernmost territories, but ultimately won the war after a series of close and decisive victories in the Lakkarian rainforest following the Battle of Mudridge in 2411.
-		<br><br>
-		Having overstretched their supply lines into the Lakkarian rainforests (which they struggled to navigate) and facing relentless ambushes from both indigenous jungle elf tribes and the Lakkarian military, the Black Empire ultimately decided to pull back out of the rainforest and prioritize establishing control over the rebellious territories they already took in the north.
-		<br><br>
-	</details>
-
-	<details>
 		<summary><strong> Astrata's Comet - 2402 </strong></summary>
 		<br>
 		A strange comet struck the peak of Malum's Anvil. In its center, a rusted capsule remained, containing a divine, crystalline shard of Astrata's light. The first artificer to touch the shard could not handle the pure divinity, falling to ash. It was successfully contained within Vanderlin, now serving to light the way of travelers.
