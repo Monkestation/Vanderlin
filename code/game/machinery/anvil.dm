@@ -19,8 +19,15 @@
 
 /obj/machinery/anvil/examine(mob/user)
 	. = ..()
-	if(hingot && hott)
-		. += "<span class='warning'>[hingot] is too hot to touch.</span>"
+	if(hingot)
+		. += hingot.examine()
+		if(hott)
+			. += "<span class='warning'>[hingot] is too hot to touch.</span>"
+
+/obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
+	if(hingot)
+		return hingot.attack_hand_secondary(user, modifiers)
+	. = ..()
 
 /obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/weapon/tongs))
@@ -226,10 +233,7 @@
 
 	if(length(appro_recipe))
 		var/datum/chosen_recipe
-		if(length(appro_recipe) == 1)
-			chosen_recipe = appro_recipe[1]
-		else
-			chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
+		chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
 		if(!hingot.currecipe && chosen_recipe)
 			hingot.currecipe = new chosen_recipe.type(hingot)
 			hingot.currecipe.material_quality += hingot.recipe_quality

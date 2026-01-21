@@ -11,7 +11,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 
@@ -59,8 +59,7 @@
 		title = "XYLIX"
 	)
 
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 
 /datum/outfit/mercenary/sworddancer
 	name = "Sword Dancer (Mercenary)"

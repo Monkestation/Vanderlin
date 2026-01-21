@@ -163,7 +163,7 @@
 	// Experience gain is dependant on spell cost and the associated skill
 	/// Experience gain modifier, cost is multipled by this to get experience gain.
 	/// Set to 0 to stop experience gain.
-	var/experience_modifer = 0.4
+	var/experience_modifier = 0.4
 	/// Max skill level this spell can raise to.
 	var/experience_max_skill = SKILL_LEVEL_EXPERT
 	// Sleep exp variables are reliant on the caster having a mind
@@ -975,8 +975,8 @@
 		used_type = type_override
 
 	if(!re_run)
-		var/not_stamina_spell = (used_type != SPELL_STAMINA)
-		owner.adjust_stamina(-(used_cost / (1 + not_stamina_spell)))
+		if(used_type == SPELL_STAMINA)
+			owner.adjust_stamina(used_cost)
 
 	if(spell_type == NONE)
 		return // No return value == No exp
@@ -1016,7 +1016,7 @@
 	return used_cost
 
 /datum/action/cooldown/spell/proc/handle_exp(cost_in)
-	if(experience_modifer <= 0 || !associated_skill)
+	if(experience_modifier <= 0 || !associated_skill)
 		return
 
 	if(!experience_max_skill)
@@ -1027,7 +1027,7 @@
 		return
 
 	var/mob/living/caster = owner
-	var/exp_to_gain = caster.get_stat(associated_stat) + (cost_in * experience_modifer) / 2
+	var/exp_to_gain = caster.get_stat(associated_stat) + (cost_in * experience_modifier) / 2
 
 	var/datum/mind/owner_mind = owner.mind
 	if(owner_mind && experience_sleep || (experience_sleep_threshold && (skill_level >= experience_sleep_threshold)))

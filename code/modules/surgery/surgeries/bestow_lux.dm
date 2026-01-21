@@ -67,7 +67,7 @@
 		"[user] works the [tool.name] into [target]'s innards.")
 
 	target.emote("breathgasp")
-	target.adjust_jitter(100)
+	target.adjust_jitter(100 SECONDS)
 	target.update_body()
 	qdel(tool)
 	if(target.get_lux_status() == LUX_NO_LUX)

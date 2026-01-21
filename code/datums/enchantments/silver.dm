@@ -174,7 +174,8 @@
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane
 	name = "Silver's Bane"
-	desc = ""
+	desc = "My BANE!"
+	icon_state = "hunger4"
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane/proc/update_info(stacks, is_stunned)
 	if(is_stunned)

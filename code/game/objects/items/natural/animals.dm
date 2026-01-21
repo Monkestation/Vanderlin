@@ -293,7 +293,7 @@
 	user.next_attack_msg.Cut()
 	if(stat == DEAD && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(user.has_status_effect(/datum/status_effect/debuff/silver_curse))
+		if(user.has_status_effect(/datum/status_effect/debuff/silver_bane))
 			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
 			return TRUE
 		if(is_species(user, /datum/species/werewolf))

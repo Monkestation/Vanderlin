@@ -1428,7 +1428,7 @@
 				var/target_zone = pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
 				attacker.apply_damage(damage, BRUTE, target_zone)
 				attacker.OffBalance(1.5 SECONDS)
-				attacker.adjust_confusion(2 SECONDS)
+				attacker.adjust_confusion(4 SECONDS)
 
 			// if("stomp")
 			// 	if(attacker.body_position != LYING_DOWN && body_position != LYING_DOWN)
