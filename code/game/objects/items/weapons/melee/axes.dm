@@ -113,7 +113,7 @@
 
 /obj/item/weapon/axe/iron/nsapo
 	name = "iron kasuyu"
-	desc = "An iron axe hailing from the nation of Lakkari. Great for felling trees and foes alike."
+	desc = "An iron axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_iron"
 	melt_amount = 75
@@ -297,7 +297,7 @@
 
 /obj/item/weapon/axe/steel/nsapo
 	name = "steel kasuyu"
-	desc = "A steel axe hailing from the nation of Lakkari. Great for felling trees and foes alike."
+	desc = "A steel axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
 	wdefense = GOOD_PARRY

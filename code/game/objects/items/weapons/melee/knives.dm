@@ -203,10 +203,9 @@
 
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
-	desc = "A curved iron dagger of Lakkarian origin. Nobles of Sakhumeti were often buried with these daggers, but this practice has become less common ever since Zizo's ascension."
+	desc = "A curved iron dagger from the fallen east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
-	sellprice = 12
 	dropshrink = 1.0
 
 /obj/item/weapon/knife/hunting/kukri/iron
@@ -219,7 +218,7 @@
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
-	desc = "A broad iron dagger of ancient Lakkarian design. Popular amongst the indigenous jungle elf tribes of the Lakkarian Rainforests."
+	desc = "A broad iron dagger from the fallen east. Popular amongst the elves."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_iron"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
@@ -239,7 +238,7 @@
 
 /obj/item/weapon/knife/dagger/steel/jile
 	name = "steel jile"
-	desc = "A curved steel dagger of Lakkarian origin. Nobles of Sakhumeti were often buried with these daggers, but this practice has become less common ever since Zizo's ascension."
+	desc = "A curved steel dagger from the fallen east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_steel"
 	sellprice = 20
@@ -247,7 +246,7 @@
 
 /obj/item/weapon/knife/dagger/steel/njora
 	name = "steel seme"
-	desc = "A broad steel dagger of ancient Lakkarian design. Popular amongst the indigenous jungle elf tribes of the Lakkarian Rainforests."
+	desc = "A broad steel dagger from the fallen east. Popular amongst elves."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_steel"
 	wbalance = HARD_TO_DODGE

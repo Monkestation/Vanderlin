@@ -157,7 +157,7 @@
 
 /obj/item/weapon/sword/kaskara
 	name = "steel kaskara"
-	desc = "A steel sword of ancient Lakkarian design, predating the standard equipment of pegasus riders."
+	desc = "A steel sword with a small crossguard."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "kaskara_steel"
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_CHOP)
@@ -165,7 +165,7 @@
 
 /obj/item/weapon/sword/kaskara/iron
 	name = "iron kaskara"
-	desc = "A sword of ancient Lakkarian design, predating the standard equipment of pegasus riders."
+	desc = "A sword of with a small crossguard."
 	icon_state = "kaskara_iron"
 	force = DAMAGE_SWORD - 1
 	force_wielded = DAMAGE_SWORD_WIELD - 1
@@ -176,7 +176,7 @@
 
 /obj/item/weapon/sword/short/ida
 	name = "steel ida"
-	desc = "A Lakkarian short sword with a tapered leaf-shaped blade. It's popular amongst the lower class of Ei Onkara."
+	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_steel"
 	wdefense = GOOD_PARRY
@@ -185,7 +185,7 @@
 
 /obj/item/weapon/sword/short/iron/ida
 	name = "iron ida"
-	desc = "A Lakkarian short sword with a tapered leaf-shaped blade. It's popular amongst the lower class of Ei Onkara."
+	desc = "A short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_iron"
 	sellprice = 20
@@ -347,7 +347,7 @@
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
 	name = "iron khopesh"
-	desc = "An iron sword of Lakkarian origin. It's popular among traveling Noccian scholars."
+	desc = "A crescent curved sword. It's popular among traveling Noccian scholars."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "khopesh_iron"
 	melting_material = /datum/material/iron
@@ -355,7 +355,7 @@
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh
 	name = "steel khopesh"
-	desc = "A steel sword of Lakkarian origin. It's popular among traveling Noccian scholars."
+	desc = "A crescent curved sword. It's popular among traveling Noccian scholars."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "khopesh_steel"
 	wbalance = EASY_TO_DODGE
@@ -365,7 +365,6 @@
 
 /obj/item/weapon/sword/scimitar/sengese/iron
 	name = "iron sengese"
-	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_iron"
 	melting_material = /datum/material/iron
@@ -373,7 +372,7 @@
 
 /obj/item/weapon/sword/scimitar/sengese
 	name = "steel sengese"
-	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
+	desc = "A curved sword made for deflecting blows. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_steel"
 	wdefense = GOOD_PARRY
@@ -391,11 +390,10 @@
 
 /obj/item/weapon/sword/scimitar/sengese/silver
 	name = "silver sengese"
-	desc = "A curved sword of Lakkarian origin. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_silver"
 	minstr = 7
-	melting_material = /datum/material/iron
+	melting_material = /datum/material/silver
 	sellprice = 30
 
 /obj/item/weapon/sword/scimitar/sengese/silver/Initialize(mapload)
@@ -1132,7 +1130,7 @@
 
 /obj/item/weapon/sword/long/greatsword/ironclaymore
 	name = "iron claymore"
-	desc = "A large sword originating from the northern land of Kaledon, a proud warrior nation beholden to Ravox."
+	desc = "A large sword originating from the north, commonly used by ravoxians."
 	icon_state = "ironclaymore"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
@@ -1158,7 +1156,7 @@
 
 /obj/item/weapon/sword/long/greatsword/steelclaymoreD
 	name = "steel claymore"
-	desc = "A steel variant of the standard Claymore, the mainstay weapon of the wandering mercenary Gallowglass of Kaledon."
+	desc = "A steel variant of the standard Claymore."
 	icon_state = "steelclaymore"
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
@@ -1184,7 +1182,7 @@
 
 /obj/item/weapon/sword/long/greatsword/gsclaymore
 	name = "ravoxian claymore"
-	desc = "A huge sword constructed out of Steel and Gold, wielded by the Kaledonian Templars of the Ravoxian Order"
+	desc = "A huge sword constructed out of Steel and Gold, wielded by certain Templars of the Ravoxian Order."
 	icon_state = "gsclaymore"
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	wdefense = ULTMATE_PARRY
