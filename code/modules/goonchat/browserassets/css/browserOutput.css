@@ -655,18 +655,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .binarysay a			{color: #00ff00;}
 .binarysay a:active, .binarysay a:visited {color: #88ff88;}
 .radio					{color: #1ecc43;}
-.sciradio				{color: #c68cfa;}
-.comradio				{color: #5177ff;}
-.secradio				{color: #dd3535;}
-.medradio				{color: #57b8f0;}
-.engradio				{color: #f37746;}
-.suppradio				{color: #b88646;}
-.servradio				{color: #6ca729;}
-.syndradio				{color: #8f4a4b;}
-.centcomradio			{color: #2681a5;}
-.aiprivradio			{color: #d65d95;}
-.redteamradio			{color: #ff4444;}
-.blueteamradio			{color: #3434fd;}
 
 
 .yell					{font-weight: bold;}
