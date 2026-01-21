@@ -541,7 +541,7 @@
 
 /obj/item/weapon/sword/rapier/nimcha
 	name = "nimcha"
-	desc = "A swift sword of Lakkarian origin. It's popular with the noblewomen of Ei Onkara."
+	desc = "An embellished swift sword from the east."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "nimcha"
 	wbalance = HARD_TO_DODGE
@@ -643,7 +643,7 @@
 	name = "steel shotel"
 	icon_state = "shotel_steel"
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
-	desc = "A long, curved blade of Lakkarian Design. Shotels are the weapon of choice for pegasus knights."
+	desc = "A long, crescent curved blade."
 	possible_item_intents = list(SWDLONG_CUT, SWDLONG_CHOP)
 	gripped_intents = list(SWDLONG_CUT, SHOTEL_CHOP)
 
