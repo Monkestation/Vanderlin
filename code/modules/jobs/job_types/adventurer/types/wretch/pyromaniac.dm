@@ -41,7 +41,7 @@
 		"Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
 		"Crossbow" = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
 	)
-	var/weaponschoice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")
+	var/weaponschoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")
 	if(!weaponschoice)
 		return
 

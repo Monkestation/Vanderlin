@@ -50,10 +50,6 @@
 	if(SEND_SIGNAL(follower, COMSIG_CARBON_PRAY, prayer) & CARBON_PRAY_CANCEL)
 		return
 
-	if(patron.hear_prayer(follower, prayer))
-		if(follower.has_quirk(/datum/quirk/vice/godfearing)) //make this a fucking signal!!!!
-			follower.sate_addiction(/datum/quirk/vice/godfearing) //why is this being handled by the mob!!!! and why does this cover every addiction??
-
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
 
@@ -162,7 +158,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/scream/agony
@@ -426,7 +422,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/giggle
@@ -443,7 +439,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled laugh."
 
 /datum/emote/living/glare
@@ -523,7 +519,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled hmm."
 
 /datum/emote/living/huh
@@ -716,10 +712,7 @@
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/laugh/can_run_emote(mob/living/user, status_check = TRUE , intentional)
-	. = ..()
-	if(. && iscarbon(user))
-		var/mob/living/carbon/C = user
-		return !C.silent
+	return ..() && user.can_speak()
 
 /datum/emote/living/laugh/run_emote(mob/user, params, type_override, intentional, targetted)
 	. = ..()

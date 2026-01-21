@@ -597,11 +597,6 @@
 /mob/living/simple_animal/simple_limb_hit(zone)
 	if(!zone)
 		return ""
-	return zone
-
-// A reusable proc for base quadruped limb zone resolution.
-// Does not include all zones.
-/proc/base_quadruped_limb_hit(zone)
 	switch(zone)
 		if(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS)
 			return "head"

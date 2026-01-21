@@ -1,3 +1,4 @@
+/// Version used by werewolf antag
 /datum/action/cooldown/spell/undirected/werewolf_form
 	name = "Release your Rage"
 	desc = "Be free from your restraints take your primal form once again."
@@ -5,9 +6,11 @@
 
 	spell_type = SPELL_RAGE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	has_visual_effects = FALSE
 
-	invocation = "DENDOR LEND ME YOUR POWER!!"
+	invocation = "THE BEAST UNLEASHED!"
 	invocation_type = INVOCATION_SHOUT
+	ignore_can_speak = TRUE
 
 	charge_required = FALSE
 	cooldown_time = 3.5 MINUTES
@@ -15,25 +18,28 @@
 
 	sound = 'sound/vo/mobs/wwolf/roar.ogg'
 
+/datum/action/cooldown/spell/undirected/werewolf_form/Grant(mob/grant_to)
+	if(!IS_WEREWOLF(grant_to))
+		return
+	return ..()
+
 /datum/action/cooldown/spell/undirected/werewolf_form/can_cast_spell(feedback)
 	. = ..()
 	if(!.)
 		return FALSE
 	if(!isliving(owner))
 		return FALSE
+	var/datum/antagonist/werewolf/werewolf_antag = IS_WEREWOLF(owner)
+	if(!werewolf_antag)
+		return FALSE
+	if(werewolf_antag.transformed)
+		return FALSE
 	var/mob/living/carbon/human/human = owner
-	if(is_species(human, /datum/species/werewolf))
-		return FALSE
-	if(!human.rage_datum)
-		return FALSE
-	if(!human.rage_datum.check_rage(text2num(RAGE_LEVEL_MEDIUM)))
+	if(!human.rage_datum?.check_rage(text2num(WW_RAGE_MEDIUM)))
 		return FALSE
 	return TRUE
 
 /datum/action/cooldown/spell/undirected/werewolf_form/cast(atom/cast_on)
 	. = ..()
-	transformation()
-
-/datum/action/cooldown/spell/undirected/werewolf_form/proc/transformation()
-	var/mob/living/carbon/human/human = owner
-	human.werewolf_transform()
+	var/datum/antagonist/werewolf/werewolf_antag = IS_WEREWOLF(owner)
+	werewolf_antag?.begin_transform()

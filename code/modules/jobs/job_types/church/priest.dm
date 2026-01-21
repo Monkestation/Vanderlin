@@ -42,7 +42,7 @@
 	skills = list(
 		/datum/skill/misc/reading = 5,
 		/datum/skill/magic/holy = 4,
-		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/unarmed = 3, //Ook's muscle priest
 		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/axesmaces = 2,
@@ -54,6 +54,7 @@
 	)
 
 	languages = list(/datum/language/celestial)
+	can_have_apprentices = FALSE
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

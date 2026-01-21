@@ -27,13 +27,13 @@
 	if(affected_mob.blood_volume < BLOOD_VOLUME_NORMAL)
 		affected_mob.blood_volume += 3 * REM
 	if(prob(10))
-		affected_mob.Dizzy(10 SECONDS)
-		affected_mob.Jitter(10 SECONDS)
+		affected_mob.set_dizzy(10 SECONDS)
+		affected_mob.adjust_jitter(10 SECONDS)
 	..()
 
 /datum/reagent/medicine/atropine/overdose_process(mob/living/affected_mob)
 	affected_mob.adjustToxLoss(0.5 * REM, FALSE)
 	. = TRUE
-	affected_mob.Dizzy(2 SECONDS * REM)
-	affected_mob.Jitter(2 SECONDS * REM)
+	affected_mob.set_dizzy(2 SECONDS * REM)
+	affected_mob.adjust_jitter(2 SECONDS * REM)
 	..()

@@ -108,8 +108,8 @@
 	effect.effect_affect(src)
 
 /obj/structure/snow
-	name = "Snow"
-	desc = "Big pile of snow"
+	name = "snow"
+	desc = "A big pile of snow."
 	icon = 'icons/effects/snow.dmi'
 	icon_state = MAP_SWITCH("blank", "snow_1")
 	var/icon_prefix = "snow"

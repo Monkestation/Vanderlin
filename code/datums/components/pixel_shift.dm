@@ -22,7 +22,7 @@
 	RegisterSignal(parent, COMSIG_KB_LIVING_ITEM_PIXEL_SHIFT_UP, PROC_REF(item_pixel_shift_up))
 	RegisterSignal(parent, COMSIG_KB_LIVING_PIXEL_SHIFT_DOWN, PROC_REF(pixel_shift_down))
 	RegisterSignal(parent, COMSIG_KB_LIVING_PIXEL_SHIFT_UP, PROC_REF(pixel_shift_up))
-	RegisterSignal(parent, COMSIG_MOB_CLIENT_PRE_LIVING_MOVE, PROC_REF(pre_move_check))
+	RegisterSignal(parent, COMSIG_MOB_CLIENT_PRE_MOVE, PROC_REF(pre_move_check))
 
 /datum/component/pixel_shift/UnregisterFromParent()
 	UnregisterSignal(parent, list(
@@ -30,15 +30,15 @@
 		COMSIG_KB_LIVING_ITEM_PIXEL_SHIFT_UP,
 		COMSIG_KB_LIVING_PIXEL_SHIFT_DOWN,
 		COMSIG_KB_LIVING_PIXEL_SHIFT_UP,
-		COMSIG_MOB_CLIENT_PRE_LIVING_MOVE,
+		COMSIG_MOB_CLIENT_PRE_MOVE,
 	))
 
 //locks our movement when holding our keybinds
-/datum/component/pixel_shift/proc/pre_move_check(mob/source, new_loc, direct)
+/datum/component/pixel_shift/proc/pre_move_check(mob/source, list/move_args)
 	SIGNAL_HANDLER
 	if(shifting)
-		pixel_shift(source, direct)
-		return COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE
+		pixel_shift(source, move_args[MOVE_ARG_DIRECTION])
+		return COMSIG_MOB_CLIENT_BLOCK_PRE_MOVE
 
 //Procs for shifting items
 

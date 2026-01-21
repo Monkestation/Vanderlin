@@ -92,8 +92,7 @@
 	// pre-loading all lanugage icons also helps to avoid meta
 	insert_all_icons("language", 'icons/language.dmi')
 	// catch languages which are pulling icons from another file
-	for(var/path in typesof(/datum/language))
-		var/datum/language/L = path
+	for(var/datum/language/L as anything in typesof(/datum/language))
 		var/icon = initial(L.icon)
 		if(icon != 'icons/language.dmi')
 			var/icon_state = initial(L.icon_state)

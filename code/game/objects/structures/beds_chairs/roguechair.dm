@@ -278,6 +278,7 @@
 	name = "big wool bed"
 	desc = "A large soft bed, could fit two people."
 	icon_state = "double_wool"
+	max_buckled_mobs = 2
 	debris = list(/obj/item/grown/log/tree/small = 2)
 	/// The mob who buckled to this bed second, to avoid other mobs getting pixel-shifted before they unbuckle.
 	var/mob/living/goldilocks

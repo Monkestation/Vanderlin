@@ -50,16 +50,15 @@
 		/datum/skill/misc/stealing = 3
 	)
 
+	mind_traits = list(
+		TRAIT_KNOW_KEEP_DOORS
+	)
 	traits = list(
-		TRAIT_KNOWKEEPPLANS,
 		TRAIT_ROYALSERVANT
 	)
 
 /datum/job/butler/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(length(GLOB.keep_doors) > 0)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(know_keep_door_password), spawned), 5 SECONDS)
-
 	spawned.adjust_skillrank(/datum/skill/misc/music, pick(0,0,2,3), TRUE)
 
 /datum/outfit/butler
