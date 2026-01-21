@@ -147,6 +147,7 @@
 
 /obj/structure/flora/ausbushes/sparsegrass
 	icon_state = "sparsegrass_1"
+	max_integrity = 5
 
 /obj/structure/flora/ausbushes/sparsegrass/Initialize()
 	icon_state = "sparsegrass_[rand(1, 3)]"
@@ -154,6 +155,7 @@
 
 /obj/structure/flora/ausbushes/fullgrass
 	icon_state = "fullgrass_1"
+	max_integrity = 5
 
 /obj/structure/flora/ausbushes/fullgrass/Initialize()
 	icon_state = "fullgrass_[rand(1, 3)]"
