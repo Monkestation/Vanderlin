@@ -277,8 +277,7 @@
 
 /atom/movable/proc/onZImpact(turf/T, levels)
 	var/atom/highest = T
-	for(var/i in T.contents)
-		var/atom/A = i
+	for(var/atom/A as anything in T)
 		if(!A.density)
 			continue
 		if(isobj(A) || ismob(A))
@@ -996,8 +995,7 @@
 	TT.tick()
 
 /atom/movable/proc/handle_buckled_mob_movement(newloc, direct, glide_size_override)
-	for(var/m in buckled_mobs)
-		var/mob/living/buckled_mob = m
+	for(var/mob/living/buckled_mob as anything in buckled_mobs)
 		if(!buckled_mob.Move(newloc, direct, glide_size_override))
 			forceMove(buckled_mob.loc)
 			last_move = buckled_mob.last_move
@@ -1415,10 +1413,10 @@
 	var/datum/language/chosen_langtype
 	var/highest_priority
 
-	for(var/lt in H.languages)
-		var/datum/language/langtype = lt
+	for(var/datum/language/langtype as anything in H.languages)
 		if(!ispath(langtype))
 			langtype = text2path(langtype)
+
 		if(!can_speak_in_language(langtype))
 			continue
 

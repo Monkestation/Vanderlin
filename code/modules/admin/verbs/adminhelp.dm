@@ -28,17 +28,15 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 /datum/admin_help_tickets/proc/TicketByID(id)
 	var/list/lists = list(active_tickets, closed_tickets, resolved_tickets)
 	for(var/I in lists)
-		for(var/J in I)
-			var/datum/admin_help/AH = J
+		for(var/datum/admin_help/AH as anything in I)
 			if(AH.id == id)
-				return J
+				return AH
 
 /datum/admin_help_tickets/proc/TicketsByCKey(ckey)
 	. = list()
 	var/list/lists = list(active_tickets, closed_tickets, resolved_tickets)
 	for(var/I in lists)
-		for(var/J in I)
-			var/datum/admin_help/AH = J
+		for(var/datum/admin_help/AH as anything in I)
 			if(AH.initiator_ckey == ckey)
 				. += AH
 
@@ -81,8 +79,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		return
 	var/list/dat = list("<html><head><title>[title]</title></head>")
 	dat += "<A href='?_src_=holder;[HrefToken()];ahelp_tickets=[state]'>Refresh</A><br><br>"
-	for(var/I in l2b)
-		var/datum/admin_help/AH = I
+	for(var/datum/admin_help/AH as anything in l2b)
 		dat += "<span class='adminnotice'><span class='adminhelp'>Ticket #[AH.id]</span>: <A href='?_src_=holder;[HrefToken()];ahelp=[REF(AH)];ahelp_action=ticket'>[AH.initiator_key_name]: [AH.name]</A></span><br>"
 
 	usr << browse(dat.Join(), "window=ahelp_list[state];size=600x480")
@@ -91,8 +88,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 /datum/admin_help_tickets/proc/stat_entry()
 	var/num_disconnected = 0
 	stat("Active Tickets:", astatclick.update("[active_tickets.len]"))
-	for(var/I in active_tickets)
-		var/datum/admin_help/AH = I
+	for(var/datum/admin_help/AH as anything in active_tickets)
 		if(AH.initiator)
 			stat("#[AH.id]. [AH.initiator_key_name]:", AH.statclick.update())
 		else
@@ -120,8 +116,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 //Get a ticket given a ckey
 /datum/admin_help_tickets/proc/CKey2ActiveTicket(ckey)
-	for(var/I in active_tickets)
-		var/datum/admin_help/AH = I
+	for(var/datum/admin_help/AH as anything in active_tickets)
 		if(AH.initiator_ckey == ckey)
 			return AH
 

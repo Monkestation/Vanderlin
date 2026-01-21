@@ -52,8 +52,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		job_preferences = list() //It loaded null from nonexistant savefile field.
 
 		//Can't use SSjob here since this happens right away on login
-		for(var/job in subtypesof(/datum/job))
-			var/datum/job/J = job
+		for(var/datum/job/J as anything in subtypesof(/datum/job))
 			var/new_value
 			if(new_value)
 				job_preferences[initial(J.title)] = new_value
