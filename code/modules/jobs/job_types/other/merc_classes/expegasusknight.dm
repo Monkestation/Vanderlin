@@ -4,7 +4,7 @@
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/mercenary/expegasusknight
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 5
+	total_positions = 0
 
 	jobstats = list(
 		STATKEY_END = 2,
