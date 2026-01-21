@@ -411,5 +411,15 @@
                 "code_imp": "fixes a typo in the bobcat's description."
             }
         ]
+    },
+    "2026-01-21": {
+        "CheffieGithub": [
+            {
+                "balance": "Black mirror can only track it's feeder or a select person for its 2 minute window."
+            },
+            {
+                "bugfix": "Fixed black mirror selection being broken."
+            }
+        ]
     }
 }
