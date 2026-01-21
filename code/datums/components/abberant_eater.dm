@@ -52,14 +52,14 @@
 	if(!finished_attack_chain)
 		return
 	var/count = 0
-	while(do_after(user, rand(2.5, 1.75) SECONDS, T, display_over_user = TRUE, extra_checks = CALLBACK(src, PROC_REF(turf_check), T)))
-		var/damage = user.STASTR * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 20 : 10) * rand(0.8, 1.2)
+	while(do_after(user, rand(2.5, 1.75) SECONDS, T, display_over_user = TRUE, extra_checks = CALLBACK(src, PROC_REF(turf_check), T)) && user.adjust_stamina(7))
+		var/damage = user.STASTR * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 26 : 13) * rand(0.8, 1.2)
 		T.take_damage(damage, BRUTE, "stab", FALSE)
 		playsound(T, 'sound/combat/hits/onstone/stonedeath.ogg', rand(50,75), TRUE)
 		playsound(user, 'sound/misc/eat.ogg', rand(50,75), TRUE)
 		count %= 3
 		if(!count)
-			user.visible_message(span_warning("[user] tunnels into [T]!"), span_warning("I tunnel into [T]!"), span_warning("I hear the sound of crunching terain."))
+			user.visible_message(span_warning("[user] tunnels into [T]!"), span_warning("I tunnel into [T]!"), span_warning("I hear the sound of crunching terrain."))
 		count++
 
 // when a turf gets eaten it just becomes another turf, so we have to make sure it didn't change
