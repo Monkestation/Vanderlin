@@ -8,32 +8,39 @@
 #define span_adminooc(str) ("<span class='adminooc'>" + str + "</span>")
 #define span_adminprefix(str) ("<span class='adminprefix'>" + str + "</span>")
 #define span_adminsay(str) ("<span class='adminsay'>" + str + "</span>")
+
 #define span_alert(str) ("<span class='alert'>" + str + "</span>")
 #define span_alertalien(str) ("<span class='alertalien'>" + str + "</span>")
 #define span_alertsyndie(str) ("<span class='alertsyndie'>" + str + "</span>")
 #define span_alertwarning(str) ("<span class='alertwarning'>" + str + "</span>")
+
 #define span_alien(str) ("<span class='alien'>" + str + "</span>")
 #define span_announce(str) ("<span class='announce'>" + str + "</span>")
 #define span_average(str) ("<span class='average'>" + str + "</span>")
 #define span_bad(str) ("<span class='bad'>" + str + "</span>")
+
 #define span_big(str) ("<span class='big'>" + str + "</span>")
 #define span_bigbold(str) ("<span class='bigbold'>" + str + "</span>")
 #define span_bigicon(str) ("<span class='bigicon'>" + str + "</span>")
 #define span_biginfo(str) ("<span class='biginfo'>" + str + "</span>")
 #define span_bignotice(str) ("<span class='bignotice'>" + str + "</span>")
+
 #define span_binarysay(str) ("<span class='binarysay'>" + str + "</span>")
 #define span_blue(str) ("<span class='blue'>" + str + "</span>")
 #define span_bloody(str) ("<span class='bloody '>" + str + "</span>")
+
 #define span_bold(str) ("<span class='bold'>" + str + "</span>")
 #define span_boldannounce(str) ("<span class='boldannounce'>" + str + "</span>")
 #define span_boldnotice(str) ("<span class='boldnotice'>" + str + "</span>")
 #define span_boldwarning(str) ("<span class='boldwarning'>" + str + "</span>")
+
 #define span_changeling(str) ("<span class='changeling'>" + str + "</span>")
 #define span_changelingbold(str) ("<span class='changelingbold'>" + str + "</span>")
 #define span_clown(str) ("<span class='clown'>" + str + "</span>")
 #define span_colossus(str) ("<span class='colossus'>" + str + "</span>")
 #define span_command_headset(str) ("<span class='command_headset'>" + str + "</span>")
 #define span_crit(str) ("<span class='crit'>" + str + "</span>")
+
 #define span_cult(str) ("<span class='cult'>" + str + "</span>")
 #define span_cultbigbold(str) ("<span class='cultbigbold'>" + str + "</span>")
 #define span_cultbold(str) ("<span class='cultbold'>" + str + "</span>")
@@ -41,10 +48,13 @@
 #define span_cultitalic(str) ("<span class='cultitalic'>" + str + "</span>")
 #define span_cultlarge(str) ("<span class='cultlarge'>" + str + "</span>")
 #define span_cultsmall(str) ("<span class='cultsmall'>" + str + "</span>")
+
 #define span_danger(str) ("<span class='danger'>" + str + "</span>")
+
 #define span_dead(str) ("<span class='dead'>" + str + "</span>")
 #define span_deadsay(str) ("<span class='deadsay'>" + str + "</span>")
 #define span_deadsayitalicsbold(str) ("<span class='deadsayitalicsbold'>" + str + "</span>")
+
 #define span_deconversion_message(str) ("<span class='deconversion_message'>" + str + "</span>")
 #define span_drone(str) ("<span class='drone'>" + str + "</span>")
 #define span_emote(str) ("<span class='emote'>" + str + "</span>")
@@ -52,6 +62,7 @@
 #define span_gamedeadsay(str) ("<span class='gamedeadsay'>" + str + "</span>")
 #define span_ghostalert(str) ("<span class='ghostalert'>" + str + "</span>")
 #define span_good(str) ("<span class='good'>" + str + "</span>")
+
 #define span_green(str) ("<span class='green'>" + str + "</span>")
 #define span_smallgreen(str) ("<span class='smallgreen'>" + str + "</span>")
 #define span_boldgreen(str) ("<span class='boldgreen'>" + str + "</span>")
@@ -60,6 +71,7 @@
 #define span_greenannounce(str) ("<span class='greenannounce'>" + str + "</span>")
 #define span_greentext(str) ("<span class='greentext'>" + str + "</span>")
 #define span_greentextbig(str) ("<span class='greentextbig'>" + str + "</span>")
+
 #define span_hear(str) ("<span class='hear'>" + str + "</span>")
 #define span_header(str) ("<span class='header'>" + str + "</span>")
 #define span_heavy_brass(str) ("<span class='heavy_brass'>" + str + "</span>")
@@ -78,7 +90,6 @@
 #define span_linkon(str) ("<span class='linkon'>" + str + "</span>")
 #define span_looc(str) ("<span class='looc'>" + str + "</span>")
 #define span_marooned(str) ("<span class='marooned'>" + str + "</span>")
-#define span_medal(str) ("<span class='medal'>" + str + "</span>")
 #define span_memo(str) ("<span class='memo'>" + str + "</span>")
 #define span_memoedit(str) ("<span class='memoedit'>" + str + "</span>")
 #define span_mind_control(str) ("<span class='mind_control'>" + str + "</span>")
