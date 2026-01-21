@@ -60,11 +60,6 @@
 	cost = 45
 	contains = /obj/item/weapon/sword/sabre/dadao/iron
 
-/datum/supply_pack/weapons/iron/ihwi
-	name = "Iron Hwi"
-	cost = 45
-	contains = /obj/item/weapon/sword/sabre/hwi/iron
-
 /datum/supply_pack/weapons/iron/ikhopesh
 	name = "Iron Khopesh"
 	cost = 25
@@ -164,11 +159,6 @@
 	name = "Steel Dadao"
 	cost = 90
 	contains = /obj/item/weapon/sword/sabre/dadao
-
-/datum/supply_pack/weapons/steel/hwi
-	name = "Steel Hwi"
-	cost = 90
-	contains = /obj/item/weapon/sword/sabre/hwi
 
 /datum/supply_pack/weapons/steel/khopesh
 	name = "Steel Khopesh"

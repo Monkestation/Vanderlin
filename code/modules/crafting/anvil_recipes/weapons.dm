@@ -265,12 +265,6 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/knife/hunting/kukri/iron
 
-/datum/anvil_recipe/weapons/iron/ada
-	name = "Iron Ada"
-	recipe_name = "a Iron Ada"
-	appro_skill = /datum/skill/craft/weaponsmithing
-	created_item = /obj/item/weapon/sword/scimitar/ada/iron
-
 /datum/anvil_recipe/weapons/iron/aruval
 	name = "Iron Aruval (+2 Iron Bar)"
 	recipe_name = "a Iron Aruval"
@@ -412,13 +406,6 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/short/iron/ida
 
-/datum/anvil_recipe/weapons/iron/hwi
-	name = "Hwi (+Iron Bar)"
-	recipe_name= "an Iron Hwi"
-	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items= list(/obj/item/ingot/iron,)
-	created_item = /obj/item/weapon/sword/sabre/hwi/iron
-
 /datum/anvil_recipe/weapons/iron/shotel
 	name = "Shotel (+Iron Bar)"
 	recipe_name= "an Iron Shotel"
@@ -516,12 +503,6 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/steel/assegai
-
-/datum/anvil_recipe/weapons/steel/ada
-	name = "Steel Ada"
-	recipe_name = "a Steel Ada"
-	appro_skill = /datum/skill/craft/weaponsmithing
-	created_item = /obj/item/weapon/sword/scimitar/ada
 
 /datum/anvil_recipe/weapons/steel/aruval
 	name = "Steel Aruval (+2 Steel Bar)"
@@ -652,13 +633,6 @@
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/sabre/cutlass
 
-/datum/anvil_recipe/weapons/steel/hwi
-	name = "Steel Hwi (+ Steel Bar)"
-	recipe_name = "a Steel Hwi"
-	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/weapon/sword/sabre/hwi
-
 /datum/anvil_recipe/weapons/steel/shotel
 	name = "Steel Shotel (+ Steel Bar)"
 	recipe_name = "a Steel Shotel"
@@ -678,13 +652,6 @@
 	recipe_name = "a Steel Ida"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/short/ida
-
-/datum/anvil_recipe/weapons/steel/ngombe
-	name = "Ngombe Ngulu (+Steel Bar)"
-	recipe_name = "a Ngombe Ngulu"
-	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/weapon/sword/scimitar/ngombe
 
 /datum/anvil_recipe/weapons/steel/kaskara // I FORGOT TO INCLUDE IT
 	name = "Steel Kaskara"

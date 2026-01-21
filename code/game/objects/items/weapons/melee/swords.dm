@@ -215,25 +215,6 @@
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	swingsound = BLADEWOOSH_SMALL
 
-/obj/item/weapon/sword/sabre/hwi
-	name = "steel hwi"
-	desc = "A hefty steel sabre of Lakkarian origin. It's defensive design is great for stopping lethal blows"
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "hwi_steel"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD - 1
-	wdefense = GREAT_PARRY
-	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
-	minstr = 7
-	swingsound = BLADEWOOSH_LARGE
-
-/obj/item/weapon/sword/sabre/hwi/iron //Fix this in a balance PR
-	name = "iron hwi"
-	desc = "A hefty iron sabre of Lakkarian origin. It's defensive design is great for stopping lethal blows."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "hwi_iron"
-	melting_material = /datum/material/iron
-
 /obj/item/weapon/sword/sabre/dec
 	name = "decorated sabre"
 	desc = "A sabre decorated with fashionable gold accents without sacrificing its lethal practicality."
@@ -353,18 +334,6 @@
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
 	swingsound = BLADEWOOSH_HUGE
 
-/obj/item/weapon/sword/scimitar/ngombe
-	name = "ngombe ngulu"
-	desc = "A heavy executioner's sword originating from the Queendom of Lakkari. It was used by Astratans to behead Psydonite settlers responsible for the Red Dune Massacre."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "ngombe"
-	force = DAMAGE_SWORD + 1
-	wbalance = EASY_TO_DODGE
-	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
-	gripped_intents = list(SWORD_CUT, AXE_CHOP,)
-	minstr = 8 //this thing is HEAVY
-	swingsound = BLADEWOOSH_HUGE
-
 /obj/item/weapon/sword/scimitar/messer
 	name = "messer"
 	desc = "Straight iron blade, simple cutting edge, no nonsense and a popular northern blade."
@@ -391,22 +360,6 @@
 	icon_state = "khopesh_steel"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
-	gripped_intents = list(SWORD_CHOP, SWORD_THRUST)
-	sellprice = 45
-
-/obj/item/weapon/sword/scimitar/ada/iron
-	name = "iron ada"
-	desc = "An iron falchion hailing from the eastern dunes of Lakkari. The usual backup weapon of Lakkarian pegasus knights."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "ada_iron"
-	melting_material = /datum/material/iron
-	sellprice = 20
-
-/obj/item/weapon/sword/scimitar/ada
-	name = "steel ada"
-	desc = "A steel falchion hailing from the eastern dunes of Lakkari. The usual backup weapon of Lakkarian pegasus knights."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "ada_steel"
 	gripped_intents = list(SWORD_CHOP, SWORD_THRUST)
 	sellprice = 45
 

@@ -9729,7 +9729,6 @@
 /area/under/cavewet)
 "lge" = (
 /obj/structure/closet/crate/chest/neu_iron,
-/obj/item/weapon/sword/sabre/hwi/iron,
 /obj/item/clothing/armor/chainmail/hauberk/iron,
 /obj/structure/fake_machine/camera/right,
 /turf/open/floor/metal/alt,
