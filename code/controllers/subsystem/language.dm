@@ -4,8 +4,7 @@ SUBSYSTEM_DEF(language)
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/language/Initialize(timeofday)
-	for(var/L in subtypesof(/datum/language))
-		var/datum/language/language = L
+	for(var/datum/language/language as anything in subtypesof(/datum/language))
 		if(!initial(language.key))
 			continue
 

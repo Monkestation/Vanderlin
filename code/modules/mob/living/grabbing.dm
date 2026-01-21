@@ -114,7 +114,6 @@
 
 /obj/item/grabbing/proc/valid_check()
 	if(QDELETED(grabbee) || QDELETED(grabbed))
-		grabbee?.stop_pulling(FALSE)
 		qdel(src)
 		return FALSE
 	// We should be conscious to do this, first of all...
@@ -125,7 +124,6 @@
 		// Other grab requires adjacency and pull status, unless we're grabbing ourselves
 		if(grabbee.Adjacent(grabbed) && (grabbee.pulling == grabbed || grabbee == grabbed))
 			return TRUE
-	grabbee.stop_pulling(FALSE)
 	qdel(src)
 	return FALSE
 
@@ -177,6 +175,8 @@
 				part = null
 				sublimb_grabbed = null
 
+	. = ..()
+
 	if(grabbee)
 		// Dont stop the pull if another hand grabs the person
 		var/stop_pull = TRUE
@@ -188,16 +188,12 @@
 			if(grabbee.r_grab && grabbee.r_grab.grabbed == grabbee.l_grab.grabbed)
 				stop_pull = FALSE
 			grabbee.l_grab = null
-		if(grabbee.mouth == src)
-			grabbee.mouth = null
 
 		if(stop_pull)
-			grabbee.stop_pulling(FALSE)
+			grabbee.stop_pulling()
 			for(var/mob/M as anything in grabbee.buckled_mobs)
 				if(M == grabbed)
 					grabbee.unbuckle_mob(M, force = TRUE)
-
-	. = ..()
 
 /obj/item/grabbing/attack(mob/living/M, mob/living/user)
 	if(!valid_check() || !istype(M))
@@ -263,7 +259,7 @@
 		/datum/intent/grab/choke,
 		/datum/intent/grab/twist,
 		/datum/intent/grab/twistitem,
-		/datum/intent/grab/hostage
+		/datum/intent/grab/shove
 	)
 
 	if(HAS_TRAIT(user, TRAIT_PACIFISM) && is_type_in_list(user.used_intent, mean_grabs))
@@ -310,9 +306,6 @@
 					var/mob/living/carbon/human/U = user
 					if(!U.cmode)
 						to_chat(U, span_warning("You need to be in combat mode first!"))
-						return
-					if(!chokehold)
-						to_chat(U, span_warning("You need to have a chokehold first!"))
 						return
 					if(U.GetComponent(/datum/component/hostage))
 						to_chat(U, span_warning("You already have someone hostage!"))
@@ -599,6 +592,7 @@
 		return
 	grab_state = max(GRAB_PASSIVE, grab_state - 1)
 	grabbee.setGrabState(max(grabbee.r_grab?.grab_state, grabbee.l_grab?.grab_state))
+	grabbee.set_pull_offsets(grabbed, grabbee.grab_state)
 	update_grab_intents()
 	if(!silent)
 		grabbee.visible_message(span_warning("[grabbee] loosens [grabbee.p_their()] grip on [grabbed]'s [limb_grabbed.name]."),\
@@ -613,20 +607,20 @@
 			if(ismob(grabbed))
 				if(isitem(sublimb_grabbed))
 					var/obj/item/I = sublimb_grabbed
-					possible_item_intents = I.grabbedintents(src, sublimb_grabbed)
+					possible_item_intents = I.grabbedintents(grabbee, grabbed, sublimb_grabbed)
 				else
 					if(iscarbon(grabbed) && limb_grabbed)
 						var/obj/item/I = limb_grabbed
-						possible_item_intents = I.grabbedintents(src, sublimb_grabbed)
+						possible_item_intents = I.grabbedintents(grabbee, grabbed, sublimb_grabbed)
 					else
 						var/mob/M = grabbed
-						possible_item_intents = M.grabbedintents(src, sublimb_grabbed)
+						possible_item_intents = M.grabbedintents(grabbee, grabbed, sublimb_grabbed)
 			if(isobj(grabbed))
 				var/obj/I = grabbed
-				possible_item_intents = I.grabbedintents(src, sublimb_grabbed)
+				possible_item_intents = I.grabbedintents(grabbee, grabbed, sublimb_grabbed)
 			if(isturf(grabbed))
 				var/turf/T = grabbed
-				possible_item_intents = T.grabbedintents(src)
+				possible_item_intents = T.grabbedintents(grabbee, grabbed)
 	grabbee.update_a_intents()
 
 /datum/intent/grab

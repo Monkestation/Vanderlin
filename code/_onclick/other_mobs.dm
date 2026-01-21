@@ -19,7 +19,7 @@
 	var/obj/item/grabbing/arm_grab = check_arm_grabbed(active_hand_index)
 	if(arm_grab)
 		// to_chat(src, span_warning("Someone is grabbing my arm!"))
-		grab_counter_attack(arm_grab.grabbee)
+		resist_grab()
 		return TRUE
 
 	// Special glove functions:

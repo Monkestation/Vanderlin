@@ -39,7 +39,15 @@
 	if(!tucker.transferItemToLoc(tucked, target_bed.drop_location()))
 		return
 
-	to_chat(tucker, span_notice("You lay [tucked] out on [target_bed]."))
+	if(istype(tucked, /obj/item/bedsheet))
+		var/obj/item/bedsheet/sheet = tucked
+		to_chat(tucker, span_notice("You tuck \the [sheet] into \the [target_bed]."))
+		target_bed.sheet_tucked = TRUE
+		target_bed.sheet_on = TRUE
+		sheet.bed_tucked = TRUE
+		tucker.nobles_seen_servant_work()
+	else
+		to_chat(tucker, span_notice("You lay [tucked] out on [target_bed]."))
 	tucked.dir = target_bed.dir
 	tucked.pixel_x = tucked.base_pixel_x + (target_bed.dir & EAST ? -x_offset : x_offset)
 	tucked.pixel_y = tucked.base_pixel_y + y_offset + target_bed.pixel_y

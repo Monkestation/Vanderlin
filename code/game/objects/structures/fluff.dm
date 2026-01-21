@@ -1330,8 +1330,7 @@
 	if(generic_message && M != user)
 		to_chat(M, span_danger("[src] emits a blinding light!"))
 	if(M.flash_act())
-		var/diff = power - M.confused
-		M.confused += min(power, diff)
+		M.set_confusion_if_lower(power SECONDS)
 
 /obj/structure/fluff/psycross/psydon
 	name = "psydonian cross"
@@ -1484,4 +1483,5 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	MakeParticleEmitter(/particles/smoke/cig/big)
+	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 6)
+	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))

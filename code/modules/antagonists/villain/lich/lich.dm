@@ -222,7 +222,7 @@
 		if(ishuman(owner.current))
 			lich_mob = owner.current // current body is a human mob.
 
-	lich_mob.revive(TRUE, TRUE) // we live, yay.
+	lich_mob.revive(ADMIN_HEAL_ALL) // we live, yay.
 	owner.transfer_to(lich_mob, TRUE) // move the player back into the lich body.
 
 	lich_mob.skeletonize(FALSE)

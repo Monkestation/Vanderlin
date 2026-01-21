@@ -289,7 +289,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/light_buff
 	duration = 5 MINUTES
 	status_type = STATUS_EFFECT_REFRESH
-	examine_text = "SUBJECTPRONOUN is surrounded by an aura of gentle light."
 	var/potency = 1
 	var/outline_colour = "#f5edda"
 	var/list/mobs_affected
@@ -307,6 +306,9 @@
 
 	add_light(owner)
 	return TRUE
+
+/datum/status_effect/light_buff/get_examine_text()
+	return "SUBJECTPRONOUN is surrounded by an aura of gentle light."
 
 /datum/status_effect/light_buff/proc/add_light(mob/living/source)
 	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = source.mob_light(_power = potency)

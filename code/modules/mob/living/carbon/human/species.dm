@@ -955,13 +955,14 @@ GLOBAL_LIST_EMPTY(donator_races)
 
 /datum/species/proc/spec_life(mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)
+	if(H.stat == DEAD)
+		return
 
 	if(HAS_TRAIT(H, TRAIT_NOBREATH))
 		H.setOxyLoss(0)
 		H.losebreath = 0
-
-	if((H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
-		H.adjustBruteLoss(1)
+	else if((H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
+		H.adjustOxyLoss(1)
 
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
 	return
@@ -1336,9 +1337,6 @@ GLOBAL_LIST_EMPTY(donator_races)
 /datum/species/proc/spec_updatehealth(mob/living/carbon/human/H)
 	return
 
-/datum/species/proc/spec_fully_heal(mob/living/carbon/human/H)
-	return
-
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 //	if(!((target.health < 0 || HAS_TRAIT(target, TRAIT_FAKEDEATH)) && !(target.mobility_flags & MOBILITY_STAND)))
 	if(target.body_position == LYING_DOWN)
@@ -1631,15 +1629,14 @@ GLOBAL_LIST_EMPTY(donator_races)
 		return FALSE
 	if(user == target)
 		return FALSE
-	if(!HAS_TRAIT(user, TRAIT_GARROTED))
-		if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
-			if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
-				to_chat(user, span_notice("I can't move my legs!"))
-				return
-			else															//If only one leg is grabbed
-				to_chat(user, span_notice("I can't move my leg!"))
-				user.resist_grab()
+	if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
+		if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
+			to_chat(user, span_notice("I can't move my legs!"))
 			return
+		else															//If only one leg is grabbed
+			to_chat(user, span_notice("I can't move my leg!"))
+			user.resist_grab()
+		return
 
 	if(user.stamina >= user.maximum_stamina)
 		return FALSE

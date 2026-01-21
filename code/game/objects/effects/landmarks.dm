@@ -31,26 +31,28 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	var/delete_after_roundstart = TRUE
 	var/used = FALSE
 
-/obj/effect/landmark/start/proc/after_round_start()
-	if(delete_after_roundstart)
-		qdel(src)
-
-/obj/effect/landmark/start/New()
+/obj/effect/landmark/start/Initialize(mapload)
+	. = ..()
 	GLOB.start_landmarks_list += src
-	if(jobspawn_override.len)
+
+	if(length(jobspawn_override))
 		for(var/X in jobspawn_override)
 			if(!GLOB.jobspawn_overrides[X])
 				GLOB.jobspawn_overrides[X] = list()
 			GLOB.jobspawn_overrides[X] += src
-	..()
+
 	if(name != "start")
 		tag = "start*[name]"
 
-/obj/effect/landmark/start/Destroy()
+/obj/effect/landmark/start/Destroy(force)
 	GLOB.start_landmarks_list -= src
 	for(var/X in jobspawn_override)
 		GLOB.jobspawn_overrides[X] -= src
 	return ..()
+
+/obj/effect/landmark/start/proc/after_round_start()
+	if(delete_after_roundstart)
+		qdel(src)
 
 /obj/effect/landmark/events/haunts
 	name = "hauntz"
@@ -516,8 +518,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	layer = HIGH_LANDMARK_LAYER
 
 
-/obj/effect/landmark/event_spawn/New()
-	..()
+/obj/effect/landmark/event_spawn/Initialize(mapload)
+	. = ..()
 	GLOB.generic_event_spawns += src
 
 /obj/effect/landmark/event_spawn/Destroy()
@@ -527,9 +529,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 /obj/effect/landmark/ruin
 	var/datum/map_template/ruin/ruin_template
 
-/obj/effect/landmark/ruin/New(loc, my_ruin_template)
-	name = "ruin_[GLOB.ruin_landmarks.len + 1]"
-	..(loc)
+/obj/effect/landmark/ruin/Initialize(mapload, my_ruin_template)
+	. = ..()
+	name = "ruin_[length(GLOB.ruin_landmarks) + 1]"
 	ruin_template = my_ruin_template
 	GLOB.ruin_landmarks |= src
 
