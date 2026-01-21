@@ -109,13 +109,12 @@
 			to_chat(M, "*----*")
 			if(M.mind)
 				if(M.mind.language_holder)
-					var/finn
-					for(var/X in M.mind.language_holder.languages)
-						var/datum/language/LA = new X()
-						finn = TRUE
-						to_chat(M, "<span class='info'>[LA.name] - ,[LA.key]</span>")
-					if(!finn)
+					if(!length(M.mind.language_holder.languages))
 						to_chat(M, "<span class='warning'>I don't know any languages.</span>")
+					else
+						for(var/X in M.mind.language_holder.languages)
+							var/datum/language/LA = GLOB.language_datum_instances[X]
+							to_chat(M, "<span class='info'>[LA.name] - ,[LA.key]</span>")
 					to_chat(M, "*----*")
 		for(var/X in GLOB.roguetraits)
 			if(HAS_TRAIT(L, X))
@@ -1239,8 +1238,7 @@
 
 	if(hud.mymob.stat != DEAD && ishuman(hud.mymob))
 		var/mob/living/carbon/human/H = hud.mymob
-		for(var/X in H.bodyparts)
-			var/obj/item/bodypart/BP = X
+		for(var/obj/item/bodypart/BP as anything in H.bodyparts)
 			if(BP.body_zone in H.get_missing_limbs())
 				continue
 			if(HAS_TRAIT(H, TRAIT_NOPAIN))

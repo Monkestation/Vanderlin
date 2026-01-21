@@ -42,8 +42,7 @@ SUBSYSTEM_DEF(ParticleWeather)
 
 //This has been mangled - currently only supports 1 weather effect serverwide so I can finish this
 /datum/controller/subsystem/ParticleWeather/Initialize(start_timeofday)
-	for(var/V in subtypesof(/datum/particle_weather))
-		var/datum/particle_weather/W = V
+	for(var/datum/particle_weather/W as anything in subtypesof(/datum/particle_weather))
 		var/probability = initial(W.probability)
 		var/target_trait = initial(W.target_trait)
 
