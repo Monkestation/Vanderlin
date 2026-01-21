@@ -89,7 +89,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .hierophant				{color: #660099;	font-weight: bold;	font-style: italic;}
 .hierophant_warning		{color: #660099;	font-style: italic;}
 .purple					{color: #5e2d79;}
-.holoparasite			{color: #35333a;}
 
 .deconversion_message	{color: #5000A0;	font-size: 3;	font-style: italic;}
 
@@ -99,8 +98,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .noticealien			{color: #00c000;}
 .alertalien				{color: #00c000;	font-weight: bold;}
 .changeling				{color: #800080;	font-style: italic;}
-
-.spider					{color: #4d004d;}
 
 .interface				{color: #DA00DA;}
 
@@ -144,11 +141,8 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .memoedit				{text-align: center;	font-size: 2;}
 .abductor				{color: #800080;	font-style: italic;}
 .mind_control			{color: #A00D6F;	font-size: 3;	font-weight: bold;	font-style: italic;}
-.slime					{color: #00CED1;}
 .drone					{color: #848482;}
 .monkey					{color: #975032;}
-.swarmer				{color: #2C75FF;}
-.resonate				{color: #298F85;}
 
 .monkeyhive				{color: #774704;}
 .monkeylead				{color: #774704;	font-size: 2;}
