@@ -28,7 +28,7 @@
 
 /obj/item/clothing/pants/skirt/patkilt
 	name = "patterned kilt"
-	desc = "A thick skirt of Kaledonian origin."
+	desc = "A thick padded skirt."
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/pants.dmi'
 	icon_state = "patkilt"
 	item_state = "patkilt"
