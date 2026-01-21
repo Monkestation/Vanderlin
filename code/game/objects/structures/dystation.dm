@@ -82,7 +82,7 @@
 		if(!allow_mobs)
 			to_chat(user, span_warning("I could not fit [I] into [src]."))
 			return
-		var/obj/item/clothing/head/mob_holder/fellow = I
+		var/obj/item/mob_holder/fellow = I
 		fellow.release() //is this not a bug?
 
 	if(inserted)

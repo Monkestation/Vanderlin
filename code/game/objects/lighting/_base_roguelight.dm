@@ -264,3 +264,10 @@
 	if(!can_damage)
 		return
 	. = ..()
+
+/obj/machinery/light/fueled/process()
+	. = ..()
+	if(on && length(contents)) // burn kobolds in ovens and smelters
+		for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
+			holder.held_mob?.adjust_fire_stacks(5)
+			holder.held_mob?.IgniteMob()
