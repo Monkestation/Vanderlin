@@ -474,25 +474,23 @@
 		playsound(user, pick(wash), 100, FALSE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/turf/open/water/onbite(mob/user)
+/turf/open/water/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
 	if(water_volume < 10)
-		return
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
-			return
-		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		user.visible_message("<span class='info'>[user] starts to drink from [src].</span>")
-		if(do_after(L, 2.5 SECONDS, src))
-			var/datum/reagents/reagents = new()
-			reagents.add_reagent(water_reagent, 2)
-			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = INGEST)
-			if(!mapped)
-				adjust_originate_watervolume(-2)
-
-			playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
-		return
-	..()
+		return TRUE
+	playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+	user.visible_message(span_info("[user] starts to drink from [src]."))
+	if(!do_after(user, 2.5 SECONDS, src))
+		return TRUE
+	var/datum/reagents/reagents = new()
+	reagents.add_reagent(water_reagent, 2)
+	reagents.trans_to(user, reagents.total_volume, transfered_by = user, method = INGEST)
+	if(!mapped)
+		adjust_originate_watervolume(-2)
+	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
+	return TRUE
 
 /turf/open/water/Destroy()
 	. = ..()
