@@ -21,8 +21,7 @@
 						/obj/item/natural/stone = 10,
 						/obj/item/natural/rock = 5,
 						/obj/item/grown/log/tree/stick = 10,
-						/obj/structure/flora/grass/pyroclasticflowers = 20,
-						/obj/structure/wild_plant/nospread/mushroom/merkel = 1,)
+						/obj/structure/flora/grass/pyroclasticflowers = 20,)
 	allowed_areas = list(/area/outdoors/mountains/anvil/snowyforest)
 
 /datum/mapGeneratorModule/undermountain
@@ -32,8 +31,7 @@
 						/obj/item/natural/rock = 10,
 						/obj/item/natural/rock/random_ore = 5,
 						/obj/structure/flora/shroom_tree = 5,
-						/obj/item/restraints/legcuffs/beartrap/armed = 2,
-						/obj/structure/wild_plant/nospread/mushroom/caveweep = 1,)
+						/obj/item/restraints/legcuffs/beartrap/armed = 2,)
 	allowed_areas = list(/area/under/mountains/anvil/lower)
 
 /datum/mapGeneratorModule/grove

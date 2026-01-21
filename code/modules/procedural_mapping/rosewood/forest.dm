@@ -62,8 +62,7 @@
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage = 0.1,
 							/obj/item/natural/stone = 2,
 							/obj/item/natural/rock = 4,
-							/obj/item/grown/log/tree/stick = 6,
-							/obj/structure/wild_plant/nospread/mushroom/merkel = 0.5,)
+							/obj/item/grown/log/tree/stick = 6,)
 	allowed_areas = list(/area/outdoors/woods,
 							/area/outdoors/woods_safe)
 
@@ -93,8 +92,7 @@
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage = 0.1,
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 2,
-							/obj/item/grown/log/tree/stick = 8,
-							/obj/structure/wild_plant/nospread/mushroom/waddle = 1,)
+							/obj/item/grown/log/tree/stick = 8,)
 	allowed_areas = list(/area/outdoors/woods,
 							/area/outdoors/woods_safe)
 
@@ -116,8 +114,7 @@
 							/obj/structure/flora/grass/pyroclasticflowers = 1,
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 2,
-							/obj/item/grown/log/tree/stick = 8,
-							/obj/structure/wild_plant/nospread/mushroom/waddle = 1,)
+							/obj/item/grown/log/tree/stick = 8,)
 	allowed_areas = list(/area/outdoors/woods,
 							/area/outdoors/woods_safe)
 
