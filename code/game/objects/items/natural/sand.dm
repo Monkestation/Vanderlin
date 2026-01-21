@@ -16,14 +16,14 @@
 	if(targeted_zone != (BODY_ZONE_PRECISE_L_EYE || BODY_ZONE_PRECISE_R_EYE))
 		return
 	if(iscarbon(hit_atom))
-		var/mob/living/carbon/C = hit_atom
-		if(C.is_eyes_covered())
+		var/mob/living/carbon/human/H = hit_atom
+		if(H.is_eyes_covered())
 			return
-		if(C.get_bodypart(targeted_zone))
-			C.adjust_temp_blindness(2 SECONDS)
-			C.set_eye_blur_if_lower(20 SECONDS)
-			to_chat(C, span_userdanger("Sand hits my eyes. I can't see!"))
-			C.emote("painscream")
+		if(H.get_bodypart(targeted_zone))
+			H.adjust_temp_blindness(2 SECONDS)
+			H.set_eye_blur_if_lower(20 SECONDS)
+			to_chat(H, span_userdanger("Sand hits my eyes. I can't see!"))
+			H.emote("painscream")
 			qdel(src)
 
 /obj/structure/fluff/clodpile/sand
