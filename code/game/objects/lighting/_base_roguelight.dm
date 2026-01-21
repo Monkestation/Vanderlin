@@ -271,3 +271,4 @@
 		for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
 			holder.held_mob?.adjust_fire_stacks(5)
 			holder.held_mob?.IgniteMob()
+			holder.update_appearance()
