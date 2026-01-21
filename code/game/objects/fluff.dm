@@ -47,6 +47,7 @@
 	desc = ""
 	icon = 'icons/obj/flora/ausflora.dmi'
 	icon_state = "firstbush_1"
+	max_integrity = 25
 
 /obj/structure/flora/ausbushes/Initialize()
 	if(icon_state == "firstbush_1")
