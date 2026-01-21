@@ -333,8 +333,8 @@
 	item_flags = ABSTRACT
 
 /obj/item/clothing/head/helmet/pegasusknight
-	name = "pegasus knight helm"
-	desc = "A helmet typically worn by Lakkarian pegasus knights. Many find the design of this helmet unusual, but it protects the neck well and is easy to see out of."
+	name = "coifed helmet"
+	desc = "Many find the design of this helmet unusual, but it protects the neck well and is easy to see out of."
 	icon_state = "lakkarihelm"
 	armor = ARMOR_PLATE
 	flags_inv = HIDEEARS|HIDEHAIR
