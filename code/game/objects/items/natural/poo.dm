@@ -11,12 +11,12 @@
 	. = ..()
 	if(ishuman(hit_atom))
 		var/mob/living/carbon/human/H = hit_atom
-		H.set_hygiene(HYGIENE_LEVEL_DISGUSTING)
 		playsound(H, 'sound/foley/meatslap.ogg', 100, TRUE)
 		if(HAS_TRAIT(H, TRAIT_STINKY))
 			to_chat(H, span_green("[src] hits you. How wonderful!"))
 		else
 			to_chat(H, span_danger("[src] hits you. Disgusting!"))
+		H.set_hygiene(HYGIENE_LEVEL_DISGUSTING)
 		qdel(src)
 
 /obj/item/natural/poo/examine(mob/user)
