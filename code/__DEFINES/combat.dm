@@ -175,7 +175,6 @@
 #define SPEAR_CUT			/datum/intent/polearm/cut
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
-#define SCYTHE_CHOP			/datum/intent/axe/chop/scythe
 #define NAGI_CUT			/datum/intent/polearm/cut/naginata
 #define NAGI_REND			/datum/intent/rend/reach
 

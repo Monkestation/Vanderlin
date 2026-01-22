@@ -18,9 +18,6 @@
 	chargetime = 1
 	item_damage_type = "slash"
 
-/datum/intent/axe/chop/scythe //Unique intent for Dendorite Templar
-	reach = 2
-
 /datum/intent/axe/chop/battle/greataxe //Essentially a better polearm chop, this weapon is made to chop people limbs off.
 	penfactor = AP_GREATAXE_CHOP  // Same AP as the polearm CHOP
 	reach = 2
