@@ -1,4 +1,3 @@
-#define TRAIT_STATUS_EFFECT(effect_id) "[effect_id]-trait"
 
 #define SIGNAL_ADDTRAIT(trait_ref) ("addtrait " + trait_ref)
 #define SIGNAL_REMOVETRAIT(trait_ref) ("removetrait " + trait_ref)
@@ -106,7 +105,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Abstract condition that prevents movement if being pulled and might be resisted against. Handcuffs and straight jackets, basically.
 #define TRAIT_RESTRAINED		"restrained"
 #define TRAIT_INCAPACITATED		"incapacitated"
-#define TRAIT_BLIND 			"blind"
 #define TRAIT_MUTE				"mute"
 #define TRAIT_ZOMBIE_SPEECH 	"zombie_speech"
 #define TRAIT_GARGLE_SPEECH		"gargle_speech"
@@ -114,7 +112,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEAF				"deaf"
 #define TRAIT_TREMORS			"tremors"
 #define TRAIT_PARTIAL_DEAF		"partial_deaf"
-#define TRAIT_NEARSIGHT			"nearsighted"
 #define TRAIT_HUSK				"husk"
 #define TRAIT_CHUNKYFINGERS		"chunkyfingers" //means that you can't use weapons with normal trigger guards.
 #define TRAIT_DUMB				"dumb"
@@ -130,8 +127,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_FAKEDEATH			"fakedeath" //Makes the owner appear as dead to most forms of medical examination
 /// "Magic" trait that blocks the mob from moving or interacting with anything. Used for transient stuff like mob transformations or incorporality in special cases.
 /// Will block movement, `Life()` (!!!), and other stuff based on the mob.
-#define TRAIT_HARDCORE_PROFANE	"hardcore_profane"
 #define TRAIT_NO_TRANSFORM "block_transformations"
+#define TRAIT_HARDCORE_PROFANE	"hardcore_profane"
 #define TRAIT_TORTURED			"tortured"
 #define TRAIT_WEAK_HEART		"weak_heart"
 #define TRAIT_TAINTED_LUX		"tainted_lux"
@@ -147,6 +144,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RESISTCOLD		"resist_cold"
 #define TRAIT_RESISTHIGHPRESSURE	"resist_high_pressure"
 #define TRAIT_RESISTLOWPRESSURE	"resist_low_pressure"
+/// This human is immune to the effects of being exploded. (ex_act)
+#define TRAIT_BOMBIMMUNE "bomb_immunity"
 #define TRAIT_RADIMMUNE			"rad_immunity"
 #define TRAIT_PIERCEIMMUNE		"pierce_immunity"
 #define TRAIT_NODISMEMBER		"dismember_immunity"
@@ -191,6 +190,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BOOZE_SLIDER      "booze-slider"
 #define TRAIT_QUICK_CARRY		"quick-carry"
 #define TRAIT_QUICKER_CARRY		"quicker-carry"
+/// Prevents the overlay from nearsighted
+#define TRAIT_NEARSIGHTED_CORRECTED "fixes_nearsighted"
 #define TRAIT_UNINTELLIGIBLE_SPEECH "unintelligible-speech"
 #define TRAIT_LANGUAGE_BARRIER	"language-barrier"
 #define TRAIT_PASSTABLE			"passtable"
@@ -207,7 +208,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOAMBUSH "no_ambush" //! mob cannot be ambushed for any reason
 #define TRAIT_CLAN_LEADER "clan_leader"
 #define TRAIT_BLUEPRINT_VISION "blueprint_vision"
-#define TRAIT_WEREWOLF_RAGE "ww_rage"
 #define TRAIT_PUTRID "Putrid"
 /// Receives echolocation images.
 #define TRAIT_ECHOLOCATION_RECEIVER "echolocation_receiver"
@@ -233,12 +233,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HAS_CONFESSED "has_confessed"
 #define TRAIT_CONFESSED_FOR	"confessed_for"
 #define TRAIT_RECENTLY_TORTURED "recently_tortured"
-#define TRAIT_RECENTLY_STAGGERED "recently_staggered"
 
 /// this object has been frozen
 #define TRAIT_FROZEN "frozen"
-/// Trait applied by element
-#define ELEMENT_TRAIT(source) "element_trait_[source]"
 
 // Debug traits
 /// This object has sound debugging tools attached to it
@@ -347,7 +344,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PSYDONIAN_GRIT "Psydonian Grit" // Pain Tolerance. Through faith, ENDURE.
 #define TRAIT_PSYDONITE "Psydonite's Devotion" // Anti-Miracles on a selective basis, anastasis / cure rot still apply. Slow passive wound healing while you have blood.
 #define TRAIT_BLACKBAGGER "Apprehension Techniques" // Capable of using Garrotes and Blackbags. Apprehension techniques.
-#define TRAIT_LYCANRESILENCE "Werewolf Resilence"
 #define TRAIT_WOUNDREGEN "Wound Regeneration"
 #define TRAIT_ABOMINATION "Abomination"
 #define TRAIT_EVASIVE		"Evasive"
@@ -373,7 +369,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MEDIUMARMOR				"Mail Training"
 #define TRAIT_HEAVYARMOR				"Plate Training"
 #define TRAIT_DODGEEXPERT              "Fast Reflexes"
-#define TRAIT_UNDODGING					"Unyielding"
+#define TRAIT_UNDODGING					"Inflexible"
 #define TRAIT_UNPARRYING				"Graceless"
 #define TRAIT_DECEIVING_MEEKNESS 		"Deceiving Meekness"
 #define TRAIT_VILLAIN					"Villain"
@@ -452,7 +448,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CRACKHEAD					"Blessing of Baotha" //No overdose on drugs.
 #define TRAIT_CABAL                     "Of the Cabal" //Zizo cultists recognize each other too
 #define TRAIT_MATTHIOS_EYES				"Eyes of Matthios" //Examine to see the most expensive item someone has
-#define INSPIRING_MUSICIAN 				"Inspiring Musician" // unlocks bardic inspiration stuff
 
 #define TRAIT_BASHDOORS "bashdoors"
 #define TRAIT_NOMOOD "no_mood"

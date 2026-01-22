@@ -78,6 +78,8 @@
 	/// What type of invocation the spell is.
 	/// Can be "none", "whisper", "shout", "emote".
 	var/invocation_type = INVOCATION_NONE
+	/// If invocation is set, do we ignore whether the user can actually speak?
+	var/ignore_can_speak = FALSE
 
 	/// Generic spell flags that may or may not be related to casting.
 	var/spell_flags = NONE
@@ -161,7 +163,7 @@
 	// Experience gain is dependant on spell cost and the associated skill
 	/// Experience gain modifier, cost is multipled by this to get experience gain.
 	/// Set to 0 to stop experience gain.
-	var/experience_modifer = 0.4
+	var/experience_modifier = 0.4
 	/// Max skill level this spell can raise to.
 	var/experience_max_skill = SKILL_LEVEL_EXPERT
 	// Sleep exp variables are reliant on the caster having a mind
@@ -255,7 +257,7 @@
 	if(spell_type == SPELL_MIRACLE)
 		RegisterSignal(owner, COMSIG_LIVING_DEVOTION_CHANGED, PROC_REF(update_status_on_signal))
 	if(spell_type == SPELL_RAGE)
-		RegisterSignal(owner, COMSIG_LIVING_RAGE_CHANGED, PROC_REF(update_status_on_signal))
+		RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
 	RegisterSignal(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
@@ -796,7 +798,7 @@
 			owner.balloon_alert(owner, "Can't position your hands correctly to invoke!")
 		return FALSE
 
-	if((invocation_type == INVOCATION_WHISPER || invocation_type == INVOCATION_SHOUT) && !living_owner.can_speak_vocal())
+	if((invocation_type == INVOCATION_WHISPER || invocation_type == INVOCATION_SHOUT) && !ignore_can_speak && !living_owner.can_speak_vocal())
 		if(feedback)
 			owner.balloon_alert(owner, "Can't get the words out to invoke!")
 		return FALSE
@@ -973,8 +975,8 @@
 		used_type = type_override
 
 	if(!re_run)
-		var/not_stamina_spell = (used_type != SPELL_STAMINA)
-		owner.adjust_stamina(-(used_cost / (1 + not_stamina_spell)))
+		if(used_type == SPELL_STAMINA)
+			owner.adjust_stamina(used_cost)
 
 	if(spell_type == NONE)
 		return // No return value == No exp
@@ -1014,7 +1016,7 @@
 	return used_cost
 
 /datum/action/cooldown/spell/proc/handle_exp(cost_in)
-	if(experience_modifer <= 0 || !associated_skill)
+	if(experience_modifier <= 0 || !associated_skill)
 		return
 
 	if(!experience_max_skill)
@@ -1025,7 +1027,7 @@
 		return
 
 	var/mob/living/caster = owner
-	var/exp_to_gain = caster.get_stat(associated_stat) + (cost_in * experience_modifer) / 2
+	var/exp_to_gain = caster.get_stat(associated_stat) + (cost_in * experience_modifier) / 2
 
 	var/datum/mind/owner_mind = owner.mind
 	if(owner_mind && experience_sleep || (experience_sleep_threshold && (skill_level >= experience_sleep_threshold)))

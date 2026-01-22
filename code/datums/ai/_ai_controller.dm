@@ -521,8 +521,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/proc/CancelActions()
 	if(!LAZYLEN(current_behaviors))
 		return
-	for(var/i in current_behaviors)
-		var/datum/ai_behavior/current_behavior = i
+	for(var/datum/ai_behavior/current_behavior as anything in current_behaviors)
 		var/list/arguments = list(src, FALSE)
 		var/list/stored_arguments = behavior_args[current_behavior.type]
 		if(stored_arguments)

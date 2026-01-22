@@ -13,14 +13,14 @@
 	spell_points = 5
 
 	jobstats = list(
-		STATKEY_STR = 2,
+		STATKEY_STR = 1,
 		STATKEY_INT = 1,
 		STATKEY_SPD = -1
 	)
 
 	skills = list(
 		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/knives = 1,
@@ -33,10 +33,6 @@
 		/datum/skill/craft/alchemy = 1
 	)
 
-	traits = list(
-		TRAIT_MEDIUMARMOR
-	)
-
 	spells = list(
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
@@ -47,7 +43,7 @@
 
 /datum/outfit/mercenary/spellsword
 	name = "Spellsword (Mercenary)"
-	armor = /obj/item/clothing/armor/cuirass/iron
+	armor = /obj/item/clothing/armor/leather
 	neck = /obj/item/clothing/neck/gorget
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	shirt = /obj/item/clothing/shirt/tunic

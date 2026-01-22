@@ -20,17 +20,17 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 	var/list/talismans = list()
 	var/current_page = PAGE_FOREWORD
 
-/obj/item/tome/New()
-	..()
-	GLOB.arcane_tomes.Add(src)
+/obj/item/tome/Initialize(mapload)
+	. = ..()
+	GLOB.arcane_tomes |= src
+
+/obj/item/tome/Destroy()
+	GLOB.arcane_tomes -= src
+	QDEL_LIST(talismans)
+	return ..()
 
 /obj/item/tome/salt_act()
 	fire_act(1000, 200)
-
-/obj/item/tome/Destroy()
-	GLOB.arcane_tomes.Remove(src)
-	QDEL_LIST(talismans)
-	. = ..()
 
 /obj/item/tome/proc/tome_text()
 	var/page_data=null

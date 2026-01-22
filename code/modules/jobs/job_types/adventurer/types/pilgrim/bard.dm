@@ -41,18 +41,29 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 /datum/job/advclass/pilgrim/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.select_equippable(player_client, list(
+		"Harp" = /obj/item/instrument/harp,
+		"Lute" = /obj/item/instrument/lute,
+		"Accordion" = /obj/item/instrument/accord,
+		"Guitar" = /obj/item/instrument/guitar,
+		"Flute" = /obj/item/instrument/flute,
+		"Drum" = /obj/item/instrument/drum,
+		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
+		"Viola" = /obj/item/instrument/viola
+		),
+		message = "Choose your instrument.",
+		title = "XYLIX"
+	)
+	spawned.inspiration = new /datum/inspiration(spawned)
 	spawned.clamped_adjust_skillrank(/datum/skill/misc/music, 4, 4, TRUE)
 
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
-
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
 
 /datum/outfit/pilgrim/bard
 	name = "Bard (Pilgrim)"
@@ -75,20 +86,3 @@
 	cloak = /obj/item/clothing/cloak/raincloak/colored/blue
 	if(prob(50))
 		cloak = /obj/item/clothing/cloak/raincloak/colored/red
-
-	var/instruments = list(
-		"Harp" = /obj/item/instrument/harp,
-		"Lute" = /obj/item/instrument/lute,
-		"Accordion" = /obj/item/instrument/accord,
-		"Guitar" = /obj/item/instrument/guitar,
-		"Flute" = /obj/item/instrument/flute,
-		"Drum" = /obj/item/instrument/drum,
-		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola
-	)
-	var/instrument_choice = input("Choose your instrument.", "XYLIX") as anything in instruments
-	equipped_human.set_blindness(0)
-	if(instrument_choice && instruments[instrument_choice])
-		backr = instruments[instrument_choice]
-	else
-		backr = /obj/item/instrument/lute

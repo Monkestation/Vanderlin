@@ -521,7 +521,6 @@
 	id = "healing"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/matthioshealing
 	duration = 10 SECONDS
-	examine_text = "SUBJECTPRONOUN is bathed in a restorative aura!"
 	var/healing_on_tick = 1
 	var/outline_colour = "#c42424"
 
@@ -539,6 +538,8 @@
 	owner.remove_filter(MIRACLE_HEALING_FILTER)
 	return TRUE
 
+/datum/status_effect/buff/matthioshealing/get_examine_text()
+	return "SUBJECTPRONOUN is bathed in a restorative aura!"
 
 /datum/status_effect/buff/matthioshealing/tick()
 	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
@@ -629,6 +630,14 @@
 	status_type = STATUS_EFFECT_REFRESH
 	alert_type = /atom/movable/screen/alert/status_effect/bardbuff
 	duration = 50 // Sanity, so that people outside the bard buff listening area lose the buff after a few seconds
+
+// /datum/status_effect/bardicbuff/on_apply()
+// 	. = ..()
+// 	owner.add_stress(/datum/stress_event/bardicbuff)
+
+// /datum/status_effect/bardicbuff/on_remove()
+// 	. = ..()
+// 	owner.remove_stress(/datum/stress_event/bardicbuff)
 
 // SKELETON BARD BUFF ALERT
 /atom/movable/screen/alert/status_effect/bardbuff
