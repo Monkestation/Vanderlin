@@ -80,6 +80,7 @@
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 20
 	damfactor = 0.8
+	misscost = 5
 	item_damage_type = "stab"
 
 /datum/intent/mace/warhammer/impale

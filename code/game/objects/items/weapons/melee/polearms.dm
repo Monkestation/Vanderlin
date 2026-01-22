@@ -449,7 +449,7 @@
 	desc = "Summer's verdancy runs through the head of this scythe. All the more to sow."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "dendorscythe"
-	gripped_intents = list(POLEARM_THRUST, SCYTHE_CUT, SCYTHE_CHOP, POLEARM_BASH)
+	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, SCYTHE_CHOP, POLEARM_BASH)
 
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak

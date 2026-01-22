@@ -32,7 +32,7 @@
 	associated_skill = /datum/skill/combat/whipsflails
 
 /obj/item/weapon/thresher/military
-	name = "military flail"
+	name = "studded flail"
 	desc = "Crushes skulls, or grain."
 	icon_state = "military"
 	force = DAMAGE_WEAK_FLAIL - 5

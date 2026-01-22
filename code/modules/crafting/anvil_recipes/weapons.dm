@@ -1066,7 +1066,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/atgervi_axe
-	name = "Bearded axe"
+	name = "Bearded axe (+1 Small log)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/axe/steel/atgervi

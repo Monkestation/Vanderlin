@@ -1,7 +1,7 @@
 /* FLAILS - Zero wdefense, can´t parry, best AP
 ==========================================================*/
 /obj/item/weapon/flail
-	name = "military flail"
+	name = "iron flail"
 	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'

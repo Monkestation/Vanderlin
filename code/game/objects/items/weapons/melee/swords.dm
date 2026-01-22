@@ -873,9 +873,7 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "oldpsybroadsword"
 	force = DAMAGE_SWORD * 0.9 // Damage is .9 of a steel sword
-	force_wielded = DAMAGE_LONGSWORD_WIELD
 	wbalance = EASY_TO_DODGE
-	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = INTEGRITY_STRONG * 0.8 // Integrity and blade retention is .8 of a steel sword
 	max_integrity = INTEGRITY_STRONGEST * 0.8
@@ -895,7 +893,6 @@
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "ravoxflamberge"
 	force = DAMAGE_SWORD + 2
-	force_wielded = DAMAGE_LONGSWORD_WIELD
 
 //................ Psydonian Longsword ............... //
 /obj/item/weapon/sword/long/psydon
@@ -903,7 +900,6 @@
 	desc = "A large silver longsword forged in the shape of a psycross."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psysword"
-	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 
 	last_used = 0
@@ -934,7 +930,7 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/long/oldpsysword
+/obj/item/weapon/sword/long/oldpsysword //Fix
 	name = "old psydonian longsword"
 	desc = "A finely made longsword, plated in a worn-down veneer of grubby silver. It's long seen better daes."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
@@ -1049,13 +1045,6 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	sellprice = 120
 
-/obj/item/weapon/sword/long/greatsword/steelflamberge
-	name = "steel flamberge"
-	desc = "A steel variant of the Flamberge, It's wave-like form distributes force better, and is less likely to break on impact."
-	icon_state = "steelflamberge"
-	wbalance = DODGE_CHANCE_NORMAL
-	sellprice = 120
-
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"
 	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
@@ -1138,6 +1127,7 @@
 	max_blade_int = 150 // Iron tier
 	max_integrity = INTEGRITY_STRONG
 	minstr = 10
+	melting_material = /datum/material/iron
 	sellprice = 90
 
 /obj/item/weapon/sword/long/greatsword/ironclaymore/getonmobprop(tag)
@@ -1665,7 +1655,7 @@
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 6
 	throwforce = DAMAGE_SWORD - 5
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWORD_CHOP)
+	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWORD_CHOP) //Fix this I broke it
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 

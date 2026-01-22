@@ -47,12 +47,8 @@
 	misscost = 10
 	item_damage_type = "slash"
 
-/datum/intent/spear/cut/bardiche/scythe //Unique intent for Dendorite Templar
-	reach = 2
-
-/datum/intent/spear/cut/naginata
+/datum/intent/polearm/cut/naginata
 	damfactor = 1.2
-	chargetime = 0
 
 
 // POLEARM CHOP INTENTS //
