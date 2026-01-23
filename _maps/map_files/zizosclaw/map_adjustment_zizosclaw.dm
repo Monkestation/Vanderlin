@@ -120,7 +120,7 @@
 		/datum/job/feldsher,
 		/datum/job/archivist, // Court Mage + archivist = Sanguine Scholar
 		/datum/job/guardsman, // Redcap
-		/datum/job/men_at_arms
+		/datum/job/men_at_arms,
 		/datum/job/merchant, // Marchand-mercier.
 		/datum/job/shophand,
 		/datum/job/grabber,

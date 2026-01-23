@@ -5,7 +5,7 @@
 	icon_state = "vv"
 	icon_living = "vv"
 	icon_dead = "vvd"
-	icon_eye_emissive = "vve"
+	var/icon_eye_emissive = "vve"
 
 	faction = list(FACTION_ORCS)
 	emote_hear = null
