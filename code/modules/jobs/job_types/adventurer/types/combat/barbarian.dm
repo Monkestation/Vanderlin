@@ -70,7 +70,7 @@
 		if("Mace")
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 3, TRUE)
 		if("Sword")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 2, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
 		if("Bow")
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/bows, 2, 3, TRUE)
 			spawned.equip_to_slot(new /obj/item/ammo_holder/quiver/arrows(spawned), ITEM_SLOT_BELT_L)
