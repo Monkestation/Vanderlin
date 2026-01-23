@@ -46,7 +46,7 @@
 	name = "Infested Skeleton"
 	desc = "Reanimated by a colony of parasitic mushrooms."
 	icon = 'icons/roguetown/mob/monster/skeletons.dmi'
-	base_intents = list(/datum/intent/simple/axe)
+	base_intents = list(/datum/intent/simple/claw/skeleton_unarmed)
 	icon_state = "skeleton_fungus"
 	icon_living = "skeleton_fungus"
 	icon_dead = ""
