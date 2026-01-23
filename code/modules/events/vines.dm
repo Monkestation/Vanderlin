@@ -276,7 +276,7 @@
 
 /obj/structure/vine/Crossed(mob/crosser)
 	. = ..()
-	playsound(src,'sound/items/seedextract.ogg', 80, FALSE, -1)
+	playsound(src,'sound/items/seedextract.ogg', 80, TRUE, -1)
 	if(isliving(crosser))
 		for(var/datum/vine_mutation/SM in mutations)
 			SM.on_cross(src, crosser)
@@ -300,6 +300,7 @@
 	update_integrity(1)
 	destroy_sound = 'sound/foley/breaksound.ogg'
 	update_appearance(UPDATE_ICON_STATE)
+	unbuckle_all_mobs(TRUE)
 
 /obj/structure/vine/proc/grow()
 	if(energy < 0)
@@ -383,10 +384,6 @@
 /obj/structure/vine/black_briar/unbuckle_mob(mob/living/buckled_mob, force)
 	if(!permanent_buckle || force)
 		. = ..()
-
-/obj/structure/vine/black_briar/dieepic()
-	. = ..()
-	unbuckle_all_mobs(TRUE)
 
 /proc/isvineimmune(atom/A)
 	. = FALSE

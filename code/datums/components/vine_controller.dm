@@ -4,7 +4,8 @@
 	var/list/obj/structure/vine/growth_queue = list()
 	var/list/vine_mutations_list = list()
 	var/spread_multiplier = 1
-	var/spread_cap = 20
+	var/spread_cap = 4
+	var/vine_cap = 25
 	/// how many times SSProcessing needs to be called to actually try and grow. This is roughly 1 second.
 	var/grow_speed = 1
 	var/mutativeness = 1
@@ -12,13 +13,15 @@
 	VAR_PRIVATE/processing_calls = 0
 	var/delete_after_growing = FALSE
 
-/datum/component/vine_controller/Initialize(vine_path, list/muts, potency, production, datum/round_event/event = null, max_spread, seconds_to_grow=1, delete_after_growing=FALSE)
+/datum/component/vine_controller/Initialize(vine_path, list/muts, potency, production, datum/round_event/event = null, max_spread, max_vines, seconds_to_grow=1, delete_after_growing=FALSE)
 	. = ..()
 	if(ispath(vine_path, /obj/structure/vine))
 		vine_type = vine_path
 	var/obj/structure/vine/SV = spawn_spacevine_piece(get_turf(parent), null, muts)
 	if(max_spread > 0)
 		spread_cap = max_spread
+	if(max_vines > 0)
+		vine_cap = max_vines
 	src.delete_after_growing = delete_after_growing
 	grow_speed = seconds_to_grow
 	event?.announce_to_ghosts(SV)
@@ -29,7 +32,11 @@
 		mutativeness = potency / 10
 
 /datum/component/vine_controller/RegisterWithParent()
-	RegisterSignal(src, COMSIG_PARENT_QDELETING, PROC_REF(endvines))
+	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(endvines))
+
+/datum/component/vine_controller/UnregisterFromParent(datum/target, sig_type_or_types)
+	. = ..()
+	UnregisterSignal(parent, COMSIG_PARENT_QDELETING)
 
 /datum/component/vine_controller/vv_get_dropdown()
 	. = ..()
@@ -43,10 +50,15 @@
 
 /datum/component/vine_controller/proc/DeleteVines()	//this is kill
 	QDEL_LIST(vines) //this will also qdel us
-	RemoveComponent()
+	qdel(src)
+
 
 /datum/component/vine_controller/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
+	for(var/obj/structure/vine/vine in vines)
+		UnregisterSignal(vine, COMSIG_PARENT_QDELETING)
+	vines = null
+	growth_queue = null
 	return ..()
 
 /datum/component/vine_controller/proc/spawn_spacevine_piece(turf/location, obj/structure/vine/parent, list/datum/vine_mutation/muts)
@@ -72,14 +84,14 @@
 /datum/component/vine_controller/proc/endvines()
 	for(var/obj/structure/vine/V as anything in vines)
 		V.dieepic()
-	RemoveComponent()
+	qdel(src)
 
 /datum/component/vine_controller/proc/on_vine_deleted(obj/structure/vine/deleted_vine)
 	vines -= deleted_vine
 	growth_queue -= deleted_vine
 	UnregisterSignal(deleted_vine, COMSIG_PARENT_QDELETING)
 	if(!length(vines))
-		RemoveComponent()
+		qdel(src)
 
 /datum/component/vine_controller/process()
 	processing_calls++
@@ -107,13 +119,16 @@
 		for(var/datum/vine_mutation/mutation in grow_vine.mutations)
 			mutation.process_mutation(grow_vine)
 		if(grow_vine.energy < 2) //If tile isn't fully grown
-			if(prob(20 * grow_speed))
+			if(prob(20))
 				grow_vine.grow()
 		else
 			grow_vine.entangle_mob()
-		if(length(vines) > spread_cap)
+		if(i > spread_cap)
 			break
 		spawn_spacevine_piece(grow_vine.find_spread(), grow_vine)
-		if(i >= length)
+		if(length(vines) >= vine_cap)
+			if(delete_after_growing)
+				qdel(src)
+				return
 			break
 	growth_queue += queue_end

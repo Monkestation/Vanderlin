@@ -287,7 +287,6 @@
 		var/datum/weakref/wound_ref = root_network[zone]
 		var/datum/wound/black_briar_curse/tumor = wound_ref.resolve()
 		tumor?.update_appearance()
-	playsound(affected, 'sound/gore/briarcursegore.ogg', 100, FALSE, 1)
 	var/turf/z_T = get_turf(affected)
 	if(affected.loc != z_T) // we were in someones pocket or something
 		affected.forceMove(z_T)
@@ -297,7 +296,10 @@
 	var/turf/T = get_turf(affected)
 	if(!T)
 		return
-	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_spread=12, seconds_to_grow=3, delete_after_growing = TRUE)
+	playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
+	affected.visible_message(span_danger("Vines burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
+	affected.spawn_gibs(FALSE)
+	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=12, seconds_to_grow=3, delete_after_growing = TRUE)
 	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")
 	var/obj/structure/vine/black_briar/root_vine = controller.vines[1]
 	if(istype(root_vine))
@@ -313,8 +315,6 @@
 		qdel(lungs)
 	if(brain)
 		qdel(brain)
-	for(var/turf/open/floor/splatter_t in view(1, T))
-		affected.add_splatter_floor(splatter_t)
 
 /* /proc/spawn_briar(turf/T)
 	for(var/atom/movable/A in T.contents)
