@@ -9,7 +9,11 @@
 	var/tri_amt
 	var/contrib
 	antag_flags = FLAG_ANTAG_CAP_IGNORE
-	confess_lines = list("FREEDOM!!!", "I WILL NOT LIVE IN YOUR WALLS!", "I WILL NOT FOLLOW YOUR RULES!")
+	confess_lines = list(
+		"FREEDOM!!!",
+		"I WILL NOT LIVE IN YOUR WALLS!",
+		"I WILL NOT FOLLOW YOUR RULES!",
+	)
 
 	innate_traits = list(
 		TRAIT_BANDITCAMP,

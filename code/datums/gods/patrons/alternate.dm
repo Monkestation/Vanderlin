@@ -8,13 +8,14 @@
 	domain = "\"Mineralogy\", Flesh Searing, Chimeric Enhancement"
 	flaws = "Blind Faith, Self-Harm, Cruelty"
 	worshippers = "The Desperate, The Lost, Fanatics"
-	sins = "Betrayal of Duty, Hesitance, Weakness"
+	sins = "Betrayal of Duty, Hesitance, Trusting Outsiders"
 	boons = "Two \"blessed\" chimeric organs"
 
 	confess_lines = list(
 		"THE CYCLE WILL GO ON!",
 		"THE WURM WILL GUIDE MY PATH!",
 		"MY SCARS ARE MY PROOF!",
+		"THE POOLS WILL ERODE ALL!",
 	)
 
 	allowed_races = list(SPEC_ID_DWARF_SUBTERRAN)
