@@ -626,14 +626,14 @@
 	owner.add_stress(/datum/stress_event/black_briar1)
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.gain_trauma(/datum/brain_trauma/mild/nervous_cough)
+		C.gain_trauma(/datum/brain_trauma/mild/sick_cough)
 
 /datum/status_effect/debuff/black_briar1/on_remove()
 	. = ..()
 	owner.remove_stress(/datum/stress_event/black_briar1)
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.cure_trauma_type(/datum/brain_trauma/mild/nervous_cough)
+		C.cure_trauma_type(/datum/brain_trauma/mild/sick_cough)
 
 //these will both stack with each other
 /datum/status_effect/debuff/black_briar2

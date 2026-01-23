@@ -965,6 +965,7 @@
 #include "code\datums\components\udder.dm"
 #include "code\datums\components\use_mana.dm"
 #include "code\datums\components\vampire_disguise.dm"
+#include "code\datums\components\vine_controller.dm"
 #include "code\datums\components\vis_radius.dm"
 #include "code\datums\components\waddling.dm"
 #include "code\datums\components\wearertargeting.dm"

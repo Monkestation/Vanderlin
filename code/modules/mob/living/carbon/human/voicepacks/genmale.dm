@@ -80,6 +80,8 @@
 					used = 'sound/vo/male/wilhelm_scream.ogg'
 			if("shh")
 				used = 'sound/vo/male/gen/shh.ogg'
+			if("sickcough")
+				used = list('sound/vo/male/gen/sickcough (1).ogg', 'sound/vo/male/gen/sickcough (2).ogg', 'sound/vo/male/gen/sickcough (3).ogg', 'sound/vo/male/gen/sickcough (4).ogg', 'sound/vo/male/gen/sickcough (5).ogg', 'sound/vo/male/gen/sickcough (6).ogg', 'sound/vo/male/gen/sickcough (7).ogg')
 			if("sigh")
 				used = 'sound/vo/male/gen/sigh.ogg'
 			if("snore")

@@ -277,6 +277,13 @@
 	set category = "Noises"
 	emote("cough", intentional = TRUE)
 
+/datum/emote/living/sickcough
+	key = "sickcough"
+	key_third_person = "sickcoughs"
+	message = "coughs."
+	message_muffled = "makes a muffled noise."
+	emote_type = EMOTE_AUDIBLE
+
 /datum/emote/living/clearthroat
 	key = "clearthroat"
 	key_third_person = "clearsthroat"

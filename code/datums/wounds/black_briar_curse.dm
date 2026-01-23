@@ -102,7 +102,10 @@
 	. = ..()
 	// No, this will not correlate to dungeon or island waits. But it's expensive to check, so we're gonna deal with asynced rate.
 	infection = clamp(infection + (rand(20, 25) - owner.STAEND) * (SSmobs.wait * 0.1) , 0, max_infection)
+	if(length(root_network) < 2) // we can't get worse without a limb being infected
+		infection = min(infection, max_infection * BBC_STAGE_LATE - 1)
 	infection_percent = min(infection / max_infection, 1)
+
 	//basically what we're doing is forcing a multiplicative inverse function to actually land where we want it to on the max pain.
 	//so we take the inverse of the function and run our pain against it, which is the second number, and that is our offset from 1
 	//if someone ends up tweaking it for balance this will be very annoying to actually understand
@@ -113,6 +116,7 @@
 	to_chat(owner, "[bodypart_owner.body_zone] - [round(infection / 10)] sec - [round(infection_percent * 100)]%")
 	if(infection_percent >= BBC_STAGE_DETECTABLE)
 		can_examine = TRUE // Once it's been identified, we'll always know if we have it if it goes back below hidden
+	update_appearance()
 
 /datum/wound/black_briar_curse/heal_wound(heal_amount, datum/source, full_heal = FALSE)
 	if(full_heal)
@@ -182,11 +186,18 @@
 		REMOVE_TRAIT(affected, TRAIT_BLACK_BRIAR, was_immune)
 
 /datum/wound/black_briar_curse/proc/update_appearance()
-	if((infection_percent >= BBC_STAGE_LATE) != (mob_overlay == infection_overlay))
-		mob_overlay = (mob_overlay == infection_overlay) ? null : infection_overlay
-		playsound(bodypart_owner, 'sound/foley/dropsound/food_drop.ogg', 100, FALSE, -1)
-		bodypart_owner.lingering_pain += 10
-		owner.update_damage_overlays()
+	if(infection_percent >= BBC_STAGE_LATE)
+		if(mob_overlay != infection_overlay)
+			mob_overlay = infection_overlay
+			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, 1000)
+			playsound(owner, pick('sound/gore/flesh_eat_01.ogg', 'sound/gore/flesh_eat_02.ogg'), 70, FALSE, -1)
+			bodypart_owner.lingering_pain += 20
+			owner.update_damage_overlays()
+	else
+		var/orig = initial(mob_overlay)
+		if(mob_overlay != orig)
+			mob_overlay = orig
+			owner.update_damage_overlays()
 
 /datum/wound/black_briar_curse/chest
 	//show_in_book = FALSE
@@ -216,16 +227,13 @@
 	. = ..()
 	if(!.)
 		return
-	if(length(root_network) < 2) // we can't get worse without a limb being infected
-		infection = min(infection, max_infection * BBC_STAGE_LATE - 1)
-		infection_percent = infection / max_infection
 	owner.adjust_energy((owner.STAEND - 20) * (SSmobs.wait * 0.1) * infection_percent)
 	if(infection_percent >= 1)
 		if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
 			to_chat(owner, span_briar("IT HURTS! IT HURTS!"))
-			if(prob(40))
+			if(prob(80))
 				owner.emote(pick("agony", "firescream"))
-		if(prob(15))
+		if(prob(10))
 			owner.death()
 		owner.Paralyze(3 SECONDS, TRUE)
 		return
@@ -252,15 +260,14 @@
 		var/_emote = pick("yawn", "cough", "clearthroat")
 		if(prob(0.5))
 			owner.emote(_emote, forced = TRUE)
-	update_appearance()
 
 /datum/wound/black_briar_curse/chest/on_death(mob/living/affected, gibbed)
 	. = ..()
 	if(dying || gibbed)
 		return
 	if(infection_percent >= BBC_STAGE_MID)
-		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 3 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
-		playsound(owner, 'sound/gore/briar_death.ogg', 100, FALSE, 1)
+		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
+		playsound(owner, 'sound/misc/briarcursewood.ogg', 100, FALSE, 1)
 	dying = TRUE
 
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
@@ -280,28 +287,36 @@
 		var/datum/weakref/wound_ref = root_network[zone]
 		var/datum/wound/black_briar_curse/tumor = wound_ref.resolve()
 		tumor?.update_appearance()
-
+	playsound(affected, 'sound/gore/briarcursegore.ogg', 100, FALSE, 1)
 	var/turf/z_T = get_turf(affected)
 	if(affected.loc != z_T) // we were in someones pocket or something
 		affected.forceMove(z_T)
 	affected.movement_type &= ~(FLOATING|FLYING)
 	if(affected.can_zTravel(direction = DOWN)) // You are grounded
 		z_T.zFall(affected)
-	var/turf/center = get_turf(affected)
-	if(!center)
+	var/turf/T = get_turf(affected)
+	if(!T)
 		return
-	for(var/turf/open/T in orange(1, center))
-		if(isopenspace(T))
-			continue
-		if(prob(70)) //we can't have a file attached to this because we won't exist pretty soon
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(spawn_briar), T), rand(3, 15) DECISECONDS, file=null, line=null)
-	var/obj/structure/vine/black_briar/BB = spawn_briar(center)
-	if(BB)
-		BB.permanent_buckle = TRUE
-		BB.dir = affected.dir
-		BB.buckle_mob(affected, TRUE)
+	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_spread=12, seconds_to_grow=3, delete_after_growing = TRUE)
+	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")
+	var/obj/structure/vine/black_briar/root_vine = controller.vines[1]
+	if(istype(root_vine))
+		root_vine.permanent_buckle = TRUE
+		root_vine.dir = affected.dir
+		root_vine.buckle_mob(affected, TRUE)
+	var/obj/item/organ/eyes/eyes = affected.getorganslot(ORGAN_SLOT_EYES)
+	var/obj/item/organ/lungs/lungs = affected.getorganslot(ORGAN_SLOT_LUNGS)
+	var/obj/item/organ/brain/brain = affected.getorganslot(ORGAN_SLOT_BRAIN)
+	if(eyes)
+		qdel(eyes)
+	if(lungs)
+		qdel(lungs)
+	if(brain)
+		qdel(brain)
+	for(var/turf/open/floor/splatter_t in view(1, T))
+		affected.add_splatter_floor(splatter_t)
 
-/proc/spawn_briar(turf/T)
+/* /proc/spawn_briar(turf/T)
 	for(var/atom/movable/A in T.contents)
 		if(isstructure(A))
 			var/obj/structure/S = A
@@ -310,6 +325,7 @@
 		if(!ismob(A) && A.density)
 			return
 	return new /obj/structure/vine/black_briar(T)
+ */
 
 /datum/wound/black_briar_curse/head
 	show_in_book = FALSE
