@@ -605,7 +605,7 @@
 /atom/movable/screen/alert/status_effect/debuff/mushroomt1
 	name = "Infested"
 	desc = "Spores have infested my body. It itches."
-	icon_state = "debuff" // TODO: Add unique icon.
+	icon_state = "shroom1"
 
 /datum/status_effect/debuff/mushroomt1/on_apply()
 	. = ..()
@@ -629,7 +629,7 @@
 /atom/movable/screen/alert/status_effect/debuff/mushroomt2
 	name = "Fungitis"
 	desc = "I can feel mycelium growing beneath my skin. My entire body has broken into rashes."
-	icon_state = "debuff"
+	icon_state = "shroom2"
 
 /datum/status_effect/debuff/mushroomt2/on_apply()
 	. = ..()
@@ -651,8 +651,8 @@
 
 /atom/movable/screen/alert/status_effect/debuff/mushroomt3
 	name = "Juffo-Wup"
-	desc = "My body breaks out into spore-filled cysts. I am in misery."
-	icon_state = "debuff"
+	desc = "My body is breaking out into spore-filled cysts. I am in misery."
+	icon_state = "shroom3"
 
 /datum/status_effect/debuff/mushroomt3/on_apply()
 	. = ..()

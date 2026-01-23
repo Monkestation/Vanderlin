@@ -112,10 +112,13 @@
 			M.apply_status_effect(/datum/status_effect/debuff/mushroomt2)
 			M.remove_status_effect(/datum/status_effect/debuff/mushroomt1)
 			M.remove_status_effect(/datum/status_effect/debuff/mushroomt3)
-		if(15 to INFINITY)
+		if(15 to 50)
 			M.apply_status_effect(/datum/status_effect/debuff/mushroomt3)
 			M.remove_status_effect(/datum/status_effect/debuff/mushroomt2)
 			M.remove_status_effect(/datum/status_effect/debuff/mushroomt1)
+		if(50 to INFINITY)
+			// TODO: Spawn mushroom skeleton.
+			M.gib()
 
 /*
  *	Water reaction to turf

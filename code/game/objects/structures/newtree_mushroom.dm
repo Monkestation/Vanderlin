@@ -7,7 +7,7 @@
 	underlay_base = "center-mushroom"
 	num_underlay_icons = 2
 	num_random_icons = 0
-	var/grow_height = 3
+	var/grow_height = 4
 	var/tree_stem = /obj/structure/flora/newtree/mushroom
 	var/tree_branch = /obj/structure/flora/newbranch/mushroom
 	var/tree_branch_connector = /obj/structure/flora/newbranch/connector/mushroom
@@ -17,7 +17,7 @@
 
 /obj/structure/flora/newtree/mushroom/Initialize(mapload)
 	..()
-	grow_height = rand(3,6)
+	grow_height = rand(4,6)
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newtree/mushroom/build_trees()
