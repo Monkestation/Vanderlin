@@ -17,10 +17,10 @@
 
 /obj/structure/flora/newtree/mushroom/Initialize(mapload)
 	..()
-	grow_height = rand(4,6)
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newtree/mushroom/build_trees()
+	grow_height = rand(4,6)
 	var/turf/target = GET_TURF_ABOVE(get_turf(src))
 	if((istype(target, /turf/open/transparent/openspace)) && (target.z < grow_height))
 		var/obj/T = new tree_stem(target)

@@ -1958,6 +1958,10 @@
 "mo" = (
 /turf/open/floor/metal/barograte,
 /area/indoors/town/cell)
+"mr" = (
+/obj/structure/flora/newtree/mushroom/green,
+/turf/open/floor/naturalstone,
+/area/under/cavewet)
 "mw" = (
 /obj/structure/bed/inn,
 /obj/item/bedsheet/fabric,
@@ -3829,6 +3833,10 @@
 "yE" = (
 /obj/effect/landmark/tram/queued_path/cargo_stop,
 /turf/open/transparent/openspace,
+/area/under/cavewet)
+"yF" = (
+/obj/structure/flora/newtree/mushroom/blue,
+/turf/open/floor/naturalstone,
 /area/under/cavewet)
 "yG" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
@@ -8686,7 +8694,7 @@ Xx
 rW
 rW
 rW
-rW
+yF
 rW
 Xl
 Xl
@@ -8886,7 +8894,7 @@ Xx
 Xx
 Xx
 rW
-rW
+yF
 rW
 rW
 Xl
@@ -9492,7 +9500,7 @@ Xx
 Xx
 Xx
 rW
-rW
+yF
 rW
 rW
 Xl
@@ -10705,7 +10713,7 @@ Xx
 Xx
 rW
 rW
-rW
+yF
 rW
 Xl
 Xl
@@ -13129,7 +13137,7 @@ Xx
 Xx
 Xx
 rW
-rW
+yF
 rW
 rW
 Xl
@@ -14748,7 +14756,7 @@ Xx
 Xx
 rW
 rW
-rW
+yF
 rW
 Xl
 Xl
@@ -17175,7 +17183,7 @@ Xx
 Xx
 Xx
 rW
-rW
+yF
 rW
 Xl
 Xl
@@ -18183,7 +18191,7 @@ Xx
 Xx
 Xx
 Xx
-rW
+yF
 rW
 rW
 Xl
@@ -18385,8 +18393,8 @@ Xx
 Xx
 Xx
 Xx
-rW
-rW
+yF
+yF
 rW
 Xl
 Xl
@@ -19396,7 +19404,7 @@ Xx
 Xx
 Xx
 rW
-rW
+yF
 rW
 rW
 Xl
@@ -20207,7 +20215,7 @@ Xx
 Xx
 Xx
 rW
-rW
+yF
 Xl
 Xl
 Xl
@@ -50086,7 +50094,7 @@ rW
 rW
 rW
 rW
-rW
+mr
 rW
 rW
 rW
@@ -50293,7 +50301,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 ik
@@ -51099,7 +51107,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -51298,7 +51306,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -51708,7 +51716,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 ik
@@ -52306,11 +52314,11 @@ rW
 rW
 rW
 rW
+yF
 rW
 rW
 rW
-rW
-rW
+mr
 rW
 rW
 rW
@@ -53321,7 +53329,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -54335,7 +54343,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -54732,7 +54740,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -54938,7 +54946,7 @@ rW
 rW
 rW
 rW
-rW
+mr
 rW
 rW
 rW
@@ -55547,7 +55555,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -56150,11 +56158,11 @@ rW
 rW
 rW
 rW
+yF
 rW
 rW
 rW
-rW
-rW
+yF
 rW
 rW
 rW
@@ -57168,7 +57176,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 ik
@@ -57972,7 +57980,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -58784,7 +58792,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 ik
 ik
@@ -59379,7 +59387,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -59586,11 +59594,11 @@ rW
 rW
 rW
 rW
+mr
 rW
 rW
 rW
-rW
-rW
+yF
 rW
 rW
 rW
@@ -59794,7 +59802,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 ik
 ik
@@ -59996,7 +60004,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -60801,13 +60809,13 @@ rW
 rW
 rW
 rW
+yF
 rW
 rW
 rW
 rW
 rW
-rW
-rW
+yF
 rW
 rW
 ik
@@ -61010,7 +61018,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 ik
 ik
@@ -61210,7 +61218,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -61814,14 +61822,14 @@ rW
 rW
 rW
 rW
+mr
 rW
 rW
 rW
 rW
 rW
 rW
-rW
-rW
+yF
 rW
 rW
 rW
@@ -62222,7 +62230,7 @@ rW
 rW
 rW
 rW
-rW
+yF
 rW
 rW
 rW
@@ -62631,7 +62639,7 @@ rW
 rW
 rW
 rW
-rW
+mr
 rW
 rW
 rW
