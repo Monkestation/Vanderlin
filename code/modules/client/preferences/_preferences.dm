@@ -1613,7 +1613,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					var/list/patrons_named = list()
 					for(var/datum/patron/patron as anything in GLOB.patrons_by_faith[selected_patron.associated_faith || initial(default_patron.associated_faith)])
 						patron = GLOB.patron_list[patron]
-						if(patron.preference_accessible(src))
+						if(!patron.preference_accessible(src))
 							continue
 						var/pref_name = patron.display_name ? patron.display_name : patron.name
 						patrons_named[pref_name] = patron
