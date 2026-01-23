@@ -131,4 +131,6 @@
 				qdel(src)
 				return
 			break
+		if(i > length)
+			break
 	growth_queue += queue_end

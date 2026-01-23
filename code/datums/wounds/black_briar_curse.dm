@@ -287,17 +287,11 @@
 		var/datum/weakref/wound_ref = root_network[zone]
 		var/datum/wound/black_briar_curse/tumor = wound_ref.resolve()
 		tumor?.update_appearance()
-	var/turf/z_T = get_turf(affected)
-	if(affected.loc != z_T) // we were in someones pocket or something
-		affected.forceMove(z_T)
-	affected.movement_type &= ~(FLOATING|FLYING)
-	if(affected.can_zTravel(direction = DOWN)) // You are grounded
-		z_T.zFall(affected)
 	var/turf/T = get_turf(affected)
 	if(!T)
 		return
 	playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
-	affected.visible_message(span_danger("Vines burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
+	affected.visible_message(span_danger("Briar burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
 	affected.spawn_gibs(FALSE)
 	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=12, seconds_to_grow=3, delete_after_growing = TRUE)
 	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")
@@ -316,17 +310,6 @@
 	if(brain)
 		qdel(brain)
 
-/* /proc/spawn_briar(turf/T)
-	for(var/atom/movable/A in T.contents)
-		if(isstructure(A))
-			var/obj/structure/S = A
-			if(istype(S, /obj/structure/vine) || (S.density && !S.climbable))
-				return
-		if(!ismob(A) && A.density)
-			return
-	return new /obj/structure/vine/black_briar(T)
- */
-
 /datum/wound/black_briar_curse/head
 	show_in_book = FALSE
 	body_zones = list(BODY_ZONE_HEAD)
@@ -335,8 +318,6 @@
 	. = ..()
 	if(!.)
 		return
-	if(infection_percent >= BBC_STAGE_LATE && prob(0.5))
-		owner.playsound_local()
 	if(infection_percent >= BBC_STAGE_DETECTABLE && prob(3 * infection_percent))
 		owner.set_eye_blur_if_lower(rand(3, 6) SECONDS)
 		owner.stuttering = max(owner.stuttering, 10)
