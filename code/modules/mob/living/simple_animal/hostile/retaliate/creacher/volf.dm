@@ -5,6 +5,7 @@
 	icon_state = "vv"
 	icon_living = "vv"
 	icon_dead = "vvd"
+	icon_eye_emissive = "vve"
 
 	faction = list(FACTION_ORCS)
 	emote_hear = null
@@ -103,7 +104,7 @@
 	. = ..()
 	if(stat == DEAD)
 		return
-	. += emissive_appearance(icon, "vve")
+	. += emissive_appearance(icon, icon_eye_emissive)
 
 /mob/living/simple_animal/hostile/retaliate/wolf/get_sound(input)
 	switch(input)
@@ -131,24 +132,33 @@
 	icon_state = "marrov"
 	icon_living = "marrov"
 	icon_dead = "marrovd"
+	icon_eye_emissive = "marrove"
 	faction = list(FACTION_UNDEAD)
 
-	botched_butcher_results = list(/obj/item/natural/fur/volf = 1,
-						/obj/item/alch/bone = 1)
-	butcher_results = list(/obj/item/natural/hide = 1,
-						/obj/item/natural/fur/volf = 2,
-						/obj/item/alch/sinew = 2,
-						/obj/item/alch/bone = 1)
-	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1,
-						/obj/item/natural/hide = 2,
-						/obj/item/natural/fur/volf = 3,
-						/obj/item/alch/sinew = 2,
-						/obj/item/alch/bone = 4)
+	botched_butcher_results = list(
+		/obj/item/natural/fur/volf = 1,
+		/obj/item/alch/bone = 1
+	)
+	butcher_results = list(
+		/obj/item/natural/hide = 1,
+		/obj/item/natural/fur/volf = 2,
+		/obj/item/alch/sinew = 2,
+		/obj/item/alch/bone = 1
+	)
+	perfect_butcher_results = list(
+		/obj/item/reagent_containers/food/snacks/meat/steak = 1,
+		/obj/item/natural/hide = 2,
+		/obj/item/natural/fur/volf = 3,
+		/obj/item/alch/sinew = 2,
+		/obj/item/alch/bone = 4
+	)
 	head_butcher = /obj/item/natural/head/volf	// TODO: unique head.
 
 	// You must sacrifice someone/something to tame this. Can't just be an animal.
-	food_type = list(/obj/item/bodypart,
-					/obj/item/organ)
+	food_type = list(
+		/obj/item/bodypart,
+		/obj/item/organ,
+		)
 
 	// These are made to FUCKING KILL YOU.
 	melee_damage_lower = 20
@@ -160,12 +170,6 @@
 	vision_range = 6	// You can sneak around easier.
 	aggro_vision_range = 6
 	remains_type = /obj/effect/decal/remains/wolf/marrov
-
-/mob/living/simple_animal/hostile/retaliate/wolf/cave/update_overlays()
-	. = ..()
-	if(stat == DEAD)
-		return
-	. += emissive_appearance(icon, "marrove")
 
 /obj/effect/decal/remains/wolf/marrov
 

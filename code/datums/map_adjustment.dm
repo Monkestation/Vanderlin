@@ -39,32 +39,48 @@
 
 /// called upon job datum creation. Override this proc to change.
 /datum/map_adjustment/proc/job_change()
+	// Blacklist
 	for(var/job as anything in blacklist)
 		change_job_position(job, 0)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.job_flags &= ~(JOB_NEW_PLAYER_JOINABLE)
+
+	// Whitelist
 	for(var/job as anything in whitelist)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.job_flags &= (JOB_NEW_PLAYER_JOINABLE)
+
+	// Slot adjustment
 	for(var/job as anything in slot_adjust)
 		change_job_position(job, slot_adjust[job])
+
+	// Species adjustment
 	for(var/job as anything in species_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_races = species_adjust[job]
+
+	// Sex adjustment
 	for(var/job as anything in sexes_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_sexes = sexes_adjust[job]
+
+	// Patron adjustment
 	for(var/job as anything in patron_adjust)
 		var/datum/job/J  = SSjob.GetJobType(job)
 		J?.allowed_patrons = patron_adjust[job]
+
+	// Age adjustment
 	for(var/job as anything in ages_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_ages = ages_adjust[job]
+
+	// Custom job names
 	for(var/job as anything in jobname_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.title = jobname_adjust[job]["title"]
 		J?.f_title = jobname_adjust[job]["title_fem"]
-	// Now migrants
+
+	// Migrant blacklist
 	for(var/migrant as anything in migrant_blacklist)
 		var/datum/migrant_wave/W = MIGRANT_WAVE(migrant)
 		W?.can_roll = FALSE

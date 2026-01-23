@@ -7,6 +7,7 @@
 	underlay_base = "center-mushroom"
 	num_underlay_icons = 2
 	num_random_icons = 0
+	var/grow_height = 3
 	var/tree_stem = /obj/structure/flora/newtree/mushroom
 	var/tree_branch = /obj/structure/flora/newbranch/mushroom
 	var/tree_branch_connector = /obj/structure/flora/newbranch/connector/mushroom
@@ -14,13 +15,14 @@
 	var/leaf_full = /obj/structure/flora/newleaf/mushroom
 	var/glowcolour = "#f5ccb9"
 
-/obj/structure/flora/newtree/mushroom/New()
+/obj/structure/flora/newtree/mushroom/Initialize(mapload)
 	..()
+	grow_height = rand(3,6)
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newtree/mushroom/build_trees()
 	var/turf/target = GET_TURF_ABOVE(get_turf(src))
-	if((istype(target, /turf/open/transparent/openspace)) && (target.z < 6) && (prob(50)))
+	if((istype(target, /turf/open/transparent/openspace)) && (target.z < grow_height))
 		var/obj/T = new tree_stem(target)
 		T.icon_state = icon_state
 		T.update_appearance(UPDATE_OVERLAYS)
