@@ -402,12 +402,13 @@ SUBSYSTEM_DEF(triumphs)
 
 	if(!fexists(target_file))
 		reset_or_create_data(target_ckey)
+		return
 
 	var/list/data = json_decode(file2text(target_file))
-	if(LAZYACCESS(data, TRIUMP_KEY_SEASONAL_BUYS))
-		data[TRIUMP_KEY_SEASONAL_BUYS] -= triumph_buy_id
-	else
-		data[TRIUMP_KEY_SEASONAL_BUYS] = list()
+	if(!LAZYACCESS(data, TRIUMP_KEY_SEASONAL_BUYS))
+		return
+
+	data[TRIUMP_KEY_SEASONAL_BUYS] -= triumph_buy_id
 
 	write_save(target_file, data)
 
