@@ -116,7 +116,7 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/blood/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /// Very temporary sprite
 /mob/living/simple_animal/hostile/retaliate/blood/weird

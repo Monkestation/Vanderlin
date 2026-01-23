@@ -324,7 +324,7 @@
 		"Zweihander" = /obj/item/weapon/sword/long/greatsword/zwei, \
 		"Halberd" = /obj/item/weapon/polearm/halberd \
 	)
-	var/weapon_choice = spawned.select_equippable(spawned, weapons, message = "CHOOSE YOUR WEAPON.", title  = "TAKE UP ARMS")
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title  = "TAKE UP ARMS")
 	switch(weapon_choice)
 		if("Zweihander")
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
@@ -404,7 +404,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 
-	spawned.select_equippable(spawned, list( \
+	spawned.select_equippable(player_client, list( \
 		"Knuckles" = /obj/item/weapon/knuckles, \
 		"Katar" = /obj/item/weapon/katar, \
 		),

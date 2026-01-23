@@ -56,7 +56,7 @@
 	return TRUE
 
 /datum/surgery_step/infuse_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	if(!target.revive(full_heal = FALSE))
+	if(!target.revive(excess_healing = 50))
 		to_chat(user, span_warning("Nothing happens."))
 		return FALSE
 	if(tainted_lux && !tainted_mob)
@@ -71,15 +71,10 @@
 		span_notice("[user] works [tool.name] into [target]'s heart."),
 		span_notice("[user] works something into [target]'s innards..."),
 	)
-	target.blood_volume += BLOOD_VOLUME_SURVIVE
+	if(target.health > HALFWAYCRITDEATH)
+		target.adjustOxyLoss(target.health - HALFWAYCRITDEATH)
 	target.reagents.add_reagent(/datum/reagent/medicine/atropine, 3)
-	var/mob/living/carbon/spirit/underworld_spirit = target.get_spirit()
-	if(underworld_spirit)
-		var/mob/dead/observer/ghost = underworld_spirit.ghostize()
-		qdel(underworld_spirit)
-		ghost.mind.transfer_to(target, TRUE)
-	target.grab_ghost(force = TRUE) // even suicides
-	target.emote("breathgasp")
+	target.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 	target.update_body()
 	target.visible_message(span_notice("[target] is dragged back from Necra's hold!"), span_green("I awake from the void."))
 	qdel(tool)

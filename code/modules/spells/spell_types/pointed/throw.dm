@@ -3,6 +3,7 @@
 	desc = "Hurl whoever you're grabbing at a target location with tremendous force. The victim will be sent flying and take damage on impact."
 
 	spell_type = SPELL_RAGE
+	associated_skill = null
 	has_visual_effects = FALSE
 	charge_required = FALSE
 	cooldown_time = 30 SECONDS

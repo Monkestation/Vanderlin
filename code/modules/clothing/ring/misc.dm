@@ -388,7 +388,7 @@
 
 
 /obj/item/clothing/ring/dragon_ring
-	name = "Dragon Ring"
+	name = "dragon ring"
 	icon_state = "ring_g" // supposed to have it's own sprite but I'm lazy asf
 	desc = "Carrying the likeness of a dragon, this glorious ring hums with a subtle energy."
 	sellprice = 666
@@ -438,9 +438,9 @@
 	if(tallowed)
 		if(alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", "YES", "NO") != "NO")
 			tallowed = FALSE
-			update_icon()
+			update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/clothing/ring/signet/update_icon()
+/obj/item/clothing/ring/signet/update_icon_state()
 	. = ..()
 	if(tallowed)
 		icon_state = "[icon_state]_stamp"

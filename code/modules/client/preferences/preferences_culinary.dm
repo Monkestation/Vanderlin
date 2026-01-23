@@ -279,13 +279,12 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += "</style>"
 
 	var/list/food_with_faretypes = list()
-	for(var/food_type in GLOB.selectable_foods)
-		var/obj/item/reagent_containers/food/snacks/food_instance = food_type
+	for(var/obj/item/reagent_containers/food/snacks/food_instance as anything in GLOB.selectable_foods)
 		var/food_faretype = initial(food_instance.faretype)
 		var/food_name = initial(food_instance.name)
-		food_with_faretypes += list(list("type" = food_type, "faretype" = food_faretype, "name" = food_name))
+		food_with_faretypes += list(list("type" = food_instance, "faretype" = food_faretype, "name" = food_name))
 
-	food_with_faretypes = sortTim(food_with_faretypes, /proc/cmp_food_by_faretype_and_name)
+	food_with_faretypes = sortTim(food_with_faretypes, GLOBAL_PROC_REF(cmp_food_by_faretype_and_name))
 
 	for(var/list/food_data in food_with_faretypes)
 		var/food_type = food_data["type"]
@@ -315,11 +314,10 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += "</style>"
 
 	var/list/drink_with_qualities = list()
-	for(var/drink_type in GLOB.selectable_drinks)
-		var/datum/reagent/consumable/drink_instance = drink_type
+	for(var/datum/reagent/consumable/drink_instance as anything in GLOB.selectable_drinks)
 		var/drink_quality = initial(drink_instance.quality)
 		var/drink_name = initial(drink_instance.name)
-		drink_with_qualities += list(list("type" = drink_type, "quality" = drink_quality, "name" = drink_name))
+		drink_with_qualities += list(list("type" = drink_instance, "quality" = drink_quality, "name" = drink_name))
 
 	drink_with_qualities = sortTim(drink_with_qualities, /proc/cmp_drink_by_quality_and_name)
 
@@ -435,8 +433,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	)
 
 	var/list/slice_paths = list()
-	for(var/food_type in subtypesof(/obj/item/reagent_containers/food/snacks))
-		var/obj/item/reagent_containers/food/snacks/F = food_type
+	for(var/obj/item/reagent_containers/food/snacks/F as anything in subtypesof(/obj/item/reagent_containers/food/snacks))
 		var/slice_path = initial(F.slice_path)
 		if(slice_path)
 			slice_paths |= slice_path
@@ -446,19 +443,18 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/list/filtered_food_types = list()
 	var/list/name_to_type = list()
 
-	for(var/food_type in food_types)
-		var/obj/item/reagent_containers/food/snacks/food_instance = food_type
+	for(var/obj/item/reagent_containers/food/snacks/food_instance as anything in food_types)
 		var/food_name = initial(food_instance.name)
 
 		if(!name_to_type[food_name])
-			name_to_type[food_name] = food_type
-			filtered_food_types += food_type
+			name_to_type[food_name] = food_instance
+			filtered_food_types += food_instance
 		else
 			var/existing_type = name_to_type[food_name]
-			if(ispath(existing_type, food_type))
-				name_to_type[food_name] = food_type
+			if(ispath(existing_type, food_instance))
+				name_to_type[food_name] = food_instance
 				filtered_food_types -= existing_type
-				filtered_food_types += food_type
+				filtered_food_types += food_instance
 
 	return filtered_food_types
 
@@ -482,19 +478,18 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/list/filtered_drink_types = list()
 	var/list/name_to_type = list()
 
-	for(var/drink_type in drink_types)
-		var/datum/reagent/consumable/drink_instance = drink_type
+	for(var/datum/reagent/consumable/drink_instance as anything in drink_types)
 		var/drink_name = initial(drink_instance.name)
 
 		if(!name_to_type[drink_name])
-			name_to_type[drink_name] = drink_type
-			filtered_drink_types += drink_type
+			name_to_type[drink_name] = drink_instance
+			filtered_drink_types += drink_instance
 		else
 			var/existing_type = name_to_type[drink_name]
-			if(ispath(existing_type, drink_type))
-				name_to_type[drink_name] = drink_type
+			if(ispath(existing_type, drink_instance))
+				name_to_type[drink_name] = drink_instance
 				filtered_drink_types -= existing_type
-				filtered_drink_types += drink_type
+				filtered_drink_types += drink_instance
 
 	return filtered_drink_types
 

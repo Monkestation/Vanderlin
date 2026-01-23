@@ -52,12 +52,12 @@
 	var/random_roll = rand(1, 3)
 	switch(random_roll)
 		if(1)
-			spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1)
+			spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
 		if(2)
-			spawned.adjust_skillrank(/datum/skill/combat/bows, 1)
+			spawned.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 		if(3)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 1)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1)
+			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
 
 /datum/outfit/shophand

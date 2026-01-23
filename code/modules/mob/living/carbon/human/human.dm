@@ -14,39 +14,18 @@
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/artery/neck)
-		else if(user.pulledby)
-			if(ishuman(user.pulledby) && isliving(user))
-				var/mob/living/carbon/human/grabber = user.pulledby
-				var/mob/living/grabbed = user
-				if(grabbed.has_status_effect(/datum/status_effect/grab_counter_cd))
-					to_chat(user, span_warning("I already tried to counter someone grab recently!"))
-					return
-				var/skill_diff = 0
-				var/modifier = 1
-				if(user.mind)
-					skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling))
-				if(grabber.mind)
-					skill_diff -= (grabber.get_skill_level(/datum/skill/combat/wrestling))
-				skill_diff = max(skill_diff, 1)
-				var/base_chance = 20
-				if(HAS_TRAIT(user, TRAIT_RESTRAINED))
-					modifier -= 0.5
-				var/counter_chance = (base_chance * skill_diff) * modifier
-				counter_chance = CLAMP(counter_chance, 5, 95)
-				if(prob(counter_chance))
-					grabber.Stun(10)
-					grabber.stop_pulling()
-					to_chat(user, span_notice("[grabber] fell for my grab counter!"))
-					to_chat(grabber, span_danger("I fall for [src]'s grab counter!"))
-				else
-					grabbed.Stun(20)
-					var/fail_message = "[grabber] did not fall for my grab counter..."
-					if(user.client?.prefs.showrolls)
-						fail_message += " [counter_chance]%"
-					to_chat(grabber, span_notice("[src] failed to counter my grab!"))
-					to_chat(user, span_warning(fail_message))
-				grabbed.apply_status_effect(/datum/status_effect/grab_counter_cd)
-	else
+
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+			if(user == src)
+				user.visible_message(span_danger("[user] starts to shave [user.p_their()] hair with [held_item].</span>"))
+			else
+				user.visible_message(span_danger("[user] starts to shave [src]'s hair with [held_item].</span>"))
+			if(do_after(user, 10 SECONDS, src))
+				set_hair_style(/datum/sprite_accessory/hair/head/bald)
+				update_body()
+
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
@@ -200,6 +179,7 @@
 	create_dna(src)
 	randomize_human(src)
 	dna.initialize_dna()
+	reset_limb_fingerprints()
 
 /mob/living/carbon/human/Stat()
 	..()
@@ -585,16 +565,11 @@
 	if(hud_used.zone_select && !stamina_only)
 		hud_used.zone_select.update_appearance(UPDATE_OVERLAYS)
 
-/mob/living/carbon/human/fully_heal(admin_revive = FALSE)
-	dna?.species.spec_fully_heal(src)
-	if(admin_revive)
-		regenerate_limbs()
-		regenerate_organs()
-	spill_embedded_objects()
-	set_heartattack(FALSE)
-	drunkenness = 0
-	set_hygiene(HYGIENE_LEVEL_NORMAL)
-	..()
+/mob/living/carbon/human/fully_heal(heal_flags = HEAL_ALL)
+	// set_heartattack(FALSE)
+	if(heal_flags & HEAL_ESSENTIALS)
+		set_hygiene(HYGIENE_LEVEL_NORMAL)
+	return ..()
 
 /mob/living/carbon/human/check_weakness(obj/item/weapon, mob/living/attacker)
 	. = ..()
@@ -674,7 +649,7 @@
 
 		var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 		coronated.mind.set_assigned_role(/datum/job/lord)
-		lord_job?.get_informed_title(coronated, TRUE, new_title)
+		lord_job?.get_informed_title(coronated, FALSE, TRUE, new_title)
 		coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
 		lord_job?.add_spells(coronated)
 		SSticker.rulermob = coronated
@@ -860,6 +835,7 @@
 	copy_bodyparts(target)
 
 	target.dna.transfer_identity(src)
+	reset_limb_fingerprints()
 
 	updateappearance(mutcolor_update = TRUE)
 

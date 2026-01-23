@@ -216,6 +216,13 @@
 	else
 		..()
 
+/turf/closed/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	feel_turf(user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /turf/closed/attack_ghost(mob/dead/observer/user)
 	if(!user.Adjacent(src))
 		return

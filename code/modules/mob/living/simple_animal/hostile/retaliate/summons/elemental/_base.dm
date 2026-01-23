@@ -7,7 +7,7 @@
 	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
 
 /mob/living/simple_animal/hostile/retaliate/elemental/simple_limb_hit(zone)
-	return base_quadruped_limb_hit(zone) || ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/elemental/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)	//no wounding the elementals
 	return

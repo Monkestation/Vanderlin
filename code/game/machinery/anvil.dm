@@ -177,7 +177,7 @@
 		extra.OnCrafted(user.dir, user)
 		recipe.handle_creation(extra, quality_score, skill_level)
 
-	user?.visible_message("<span class='info'>[user] finishes crafting [I]!</span>")
+	user?.visible_message(span_info("[user] finishes crafting [I]!"))
 
 	qdel(hingot)
 	hingot = null
@@ -218,8 +218,7 @@
 		if(R.i_type == i_type_choice && istype(hingot, R.req_bar))
 			appro_recipe += R
 
-	for(var/I in appro_recipe)
-		var/datum/anvil_recipe/R = I
+	for(var/datum/anvil_recipe/R as anything in appro_recipe)
 		if(!R.req_bar)
 			appro_recipe -= R
 		if(!istype(hingot, R.req_bar))
