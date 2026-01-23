@@ -648,20 +648,38 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/mushroomt3
 	effectedstats = list(STATKEY_CON = -2, STATKEY_END = -2)
 	duration = 2 MINUTES
+	var/list/mobs_affected
 
 /atom/movable/screen/alert/status_effect/debuff/mushroomt3
 	name = "Juffo-Wup"
 	desc = "My body is breaking out into spore-filled cysts. I am in misery."
 	icon_state = "shroom3"
 
+/datum/status_effect/debuff/mushroomt3/proc/add_light(mob/living/source)
+	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = source.mob_light(_power = 1)
+	LAZYSET(mobs_affected, source, mob_light_obj)
+	RegisterSignal(source, COMSIG_PARENT_QDELETING, PROC_REF(on_living_holder_deletion))
+
+/datum/status_effect/debuff/mushroomt3/proc/remove_light(mob/living/source)
+	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = LAZYACCESS(mobs_affected, source)
+	LAZYREMOVE(mobs_affected, source)
+	if(mob_light_obj)
+		qdel(mob_light_obj)
+
+/datum/status_effect/debuff/mushroomt3/proc/on_living_holder_deletion(mob/living/M)
+	remove_light(M)
+
 /datum/status_effect/debuff/mushroomt3/on_apply()
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
+		add_light(C)
 		C.add_stress(/datum/stress_event/mushroom_full)
 
 /datum/status_effect/debuff/mushroomt3/on_remove()
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
+		remove_light(C)
 		C.remove_stress(/datum/stress_event/mushroom_full)

@@ -42,6 +42,16 @@
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 
+/mob/living/simple_animal/hostile/skeleton/mushroom
+	name = "Infested Skeleton"
+	desc = "Reanimated by a colony of parasitic mushrooms."
+	icon = 'icons/roguetown/mob/monster/skeletons.dmi'
+	base_intents = list(/datum/intent/simple/axe)
+	icon_state = "skeleton_fungus"
+	icon_living = "skeleton_fungus"
+	icon_dead = ""
+	loot = list(/obj/item/alch/bone, /obj/item/alch/bone, /obj/item/alch/bone, /obj/item/skull) // When we get cordyceps, add that to loot pool.
+
 /mob/living/simple_animal/hostile/skeleton/axe
 	name = "Skeleton"
 	desc = ""

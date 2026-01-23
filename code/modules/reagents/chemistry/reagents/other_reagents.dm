@@ -117,7 +117,8 @@
 			M.remove_status_effect(/datum/status_effect/debuff/mushroomt2)
 			M.remove_status_effect(/datum/status_effect/debuff/mushroomt1)
 		if(50 to INFINITY)
-			// TODO: Spawn mushroom skeleton.
+			var/mob/living/simple_animal/hostile/skeleton/mushroom/S = new(get_turf(M))
+			S.dir = M.dir
 			M.gib()
 
 /*
