@@ -313,10 +313,10 @@
 /obj/structure/kybraxor{
 	pixel_x = -32;
 	pixel_y = -32;
-	redstone_id = "keepgatekybraxor"
+	redstone_id = "townnorthkybraxor"
 	},
 /obj/structure/floordoor/gatehatch/inner{
-	redstone_id = "keepgatekybraxor"
+	redstone_id = "townnorthkybraxor"
 	},
 /turf/open/transparent/openspace,
 /area/under/cave)
@@ -362,6 +362,14 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
+"cp" = (
+/obj/structure/door{
+	name = "Smith"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/smith,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks,
+/area/indoors/town/smithy)
 "ct" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
@@ -460,12 +468,27 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt,
 /area/under/cave)
+"dj" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/floor/concrete,
+/area/indoors/town/dwarfin)
 "dl" = (
 /obj/effect/landmark/tram/queued_path{
 	platform_code = "cargo_return_3";
 	next_path_id = "cargo_map_enter"
 	},
 /turf/open/transparent/openspace,
+/area/under/cavewet)
+"do" = (
+/obj/structure/winch{
+	dir = 1;
+	gid = "southtowngatenorth";
+	name = "winch (south)";
+	redstone_id = "southtowngatenorth"
+	},
+/turf/open/floor/carpet/royalblack,
 /area/under/cavewet)
 "dp" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
@@ -503,6 +526,10 @@
 	dir = 8
 	},
 /area/under/cavewet)
+"dG" = (
+/obj/structure/fermentation_keg/water,
+/turf/open/floor/concrete,
+/area/indoors/town/dwarfin)
 "dJ" = (
 /obj/structure/fake_machine/mail/r,
 /turf/open/floor/wood,
@@ -608,6 +635,14 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/manor/heir/heir2)
+"ed" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = -8;
+	pixel_y = -2
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/dwarfin)
 "ef" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/decorstone,
@@ -698,6 +733,10 @@
 "eB" = (
 /turf/open/floor/carpet/red,
 /area/indoors/town/magician)
+"eD" = (
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/cobble,
+/area/indoors/town/dwarfin)
 "eE" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -710,6 +749,14 @@
 "eF" = (
 /turf/open/floor/cobble,
 /area/indoors/town/manor/heir/heir2)
+"eG" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/item/paper/bsmith,
+/obj/item/paper/bsmith,
+/obj/item/paper/bsmith,
+/obj/item/weapon/pick/steel,
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/dwarfin)
 "eH" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -783,6 +830,10 @@
 /obj/item/recipe_book/blacksmithing,
 /turf/open/floor/blocks/bluestone,
 /area/indoors/town/smithy)
+"fd" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "fe" = (
 /obj/structure/industrial_lift/tram{
 	icon_state = "vertw"
@@ -1239,6 +1290,12 @@
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/hexstone,
 /area/indoors/town/magician)
+"hE" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/dwarfin)
 "hF" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup{
@@ -1296,6 +1353,12 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/church/purple,
 /area/indoors/town/manor/guest/meeting)
+"hO" = (
+/obj/structure/floordoor/gatehatch/outer{
+	redstone_id = "townwestkybraxor"
+	},
+/turf/open/transparent/openspace,
+/area/under/cavewet)
 "hS" = (
 /obj/effect/decal/cleanable/sigil/N,
 /obj/structure/fluff/walldeco/church/line{
@@ -1363,7 +1426,7 @@
 /area/indoors/town/manor/heir/heir1)
 "it" = (
 /obj/structure/floordoor/gatehatch/inner{
-	redstone_id = "keepgatekybraxor"
+	redstone_id = "townnorthkybraxor"
 	},
 /turf/open/transparent/openspace,
 /area/under/cave)
@@ -1406,6 +1469,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/town/garrison)
+"iE" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/ingot/iron,
+/turf/open/floor/concrete,
+/area/indoors/town/dwarfin)
 "iH" = (
 /obj/structure/fermentation_keg/whitewine,
 /turf/open/floor/blocks/stonered,
@@ -1498,6 +1566,13 @@
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"jx" = (
+/obj/structure/gate/bars{
+	gid = "westtowngatenorth";
+	redstone_id = "westtowngatenorth"
+	},
+/turf/open/floor/metal/barograte,
+/area/under/cavewet)
 "jy" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /obj/structure/closet/crate/crafted_closet/inn/chest,
@@ -1774,6 +1849,12 @@
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"lx" = (
+/obj/structure/floordoor/gatehatch/outer{
+	redstone_id = "townsouthkybraxor"
+	},
+/turf/open/transparent/openspace,
+/area/under/cavewet)
 "ly" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /obj/item/ore/copper,
@@ -1898,6 +1979,9 @@
 /obj/item/paper/scroll/keep_plans,
 /turf/open/floor/carpet/red,
 /area/indoors/town/magician)
+"mF" = (
+/turf/open/floor/herringbone,
+/area/under/cavewet)
 "mG" = (
 /obj/structure/table/wood{
 	icon_state = "largetable";
@@ -1996,6 +2080,9 @@
 /obj/item/coin/gold/pile,
 /turf/open/floor/concrete,
 /area/indoors/town/vault)
+"nn" = (
+/turf/open/floor/carpet/royalblack,
+/area/under/cavewet)
 "nr" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/keyset/town/inn,
@@ -2067,6 +2154,14 @@
 "ob" = (
 /turf/open/floor/metal,
 /area/indoors/town/shop)
+"oh" = (
+/obj/structure/lever/wall{
+	dir = 4;
+	name = "Kybraxor's mouth lever";
+	redstone_id = "townnorthkybraxor"
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town/garrison)
 "oi" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 4
@@ -2137,6 +2232,13 @@
 /obj/structure/fake_machine/mail/r,
 /turf/open/floor/cobble,
 /area/indoors/town/manor/servanthead)
+"ox" = (
+/obj/structure/gate/bars/preopen{
+	gid = "westtowngatesouth";
+	redstone_id = "westtowngatesouth"
+	},
+/turf/open/floor/metal/barograte,
+/area/under/cavewet)
 "oy" = (
 /obj/structure/chair/stool,
 /turf/open/floor/greenstone,
@@ -2160,6 +2262,20 @@
 	},
 /turf/open/transparent/openspace,
 /area/under/cavewet)
+"oI" = (
+/obj/structure/gate/bars/preopen{
+	gid = "southtowngatesouth";
+	redstone_id = "southtowngatesouth"
+	},
+/turf/open/floor/metal/barograte,
+/area/under/cavewet)
+"oJ" = (
+/obj/structure/table/wood/reinf_long,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/cobble,
+/area/indoors/town/dwarfin)
 "oK" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -2310,6 +2426,16 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
+"pZ" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/ingot/copper,
+/obj/item/ingot/copper,
+/obj/item/ingot/copper,
+/obj/item/ingot/copper,
+/obj/item/ingot/copper,
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/dwarfin)
 "qa" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/river/blood{
@@ -2401,6 +2527,15 @@
 "qB" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/manor/hand)
+"qJ" = (
+/obj/structure/winch{
+	dir = 1;
+	gid = "westtowngatenorth";
+	name = "winch (north)";
+	redstone_id = "westtowngatenorth"
+	},
+/turf/open/floor/carpet/royalblack,
+/area/under/cavewet)
 "qK" = (
 /obj/structure/kneestingers,
 /turf/open/floor/naturalstone,
@@ -2933,6 +3068,7 @@
 /area/indoors/town/smithy)
 "ua" = (
 /obj/machinery/light/fueled/cauldron,
+/obj/effect/decal/carpet/kover_darkred,
 /turf/open/floor/tile,
 /area/indoors/town/clinic_large/apothecary)
 "ub" = (
@@ -3146,7 +3282,7 @@
 /area/indoors/town/vault)
 "vw" = (
 /mob/living/simple_animal/pet/cat/black{
-	name = "Sacrifice"
+	name = "Her Ladyship"
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/tavern)
@@ -3417,6 +3553,13 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/manor/halls/s)
+"wO" = (
+/obj/structure/gate/bars{
+	gid = "southtowngatenorth";
+	redstone_id = "southtowngatenorth"
+	},
+/turf/open/floor/metal/barograte,
+/area/under/cavewet)
 "wS" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
@@ -3459,6 +3602,11 @@
 	},
 /turf/open/floor/concrete,
 /area/indoors/town/tavern)
+"xi" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/fabric,
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/dwarfin)
 "xk" = (
 /turf/open/water/river/blood{
 	dir = 4
@@ -3544,6 +3692,17 @@
 "xI" = (
 /turf/open/floor/wood,
 /area/under/cave)
+"xJ" = (
+/obj/structure/kybraxor{
+	pixel_x = -32;
+	pixel_y = -32;
+	redstone_id = "townsouthkybraxor"
+	},
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "townsouthkybraxor"
+	},
+/turf/open/transparent/openspace,
+/area/under/cavewet)
 "xM" = (
 /turf/open/floor/tile/masonic{
 	dir = 8
@@ -3975,6 +4134,11 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/cell)
+"AI" = (
+/obj/structure/table/wood/reinforced,
+/obj/structure/bars/bent,
+/turf/open/floor/cobble,
+/area/under/cavewet)
 "AM" = (
 /obj/effect/decal/cleanable/sigil/SE,
 /obj/effect/decal/cleanable/blood/old,
@@ -4298,6 +4462,20 @@
 /area/under/cave)
 "CF" = (
 /turf/closed/wall/mineral/craftstone,
+/area/indoors/town/dwarfin)
+"CH" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 1
+	},
+/obj/item/flint{
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/obj/item/weapon/tongs{
+	pixel_x = 2;
+	pixel_y = -5
+	},
+/turf/open/floor/cobble,
 /area/indoors/town/dwarfin)
 "CJ" = (
 /turf/open/floor/blocks/stonered/tiny,
@@ -4763,6 +4941,14 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/dwarfin)
+"FO" = (
+/obj/structure/door/window{
+	name = "keep gate door"
+	},
+/obj/effect/mapping_helpers/access/keyset/manor/gate,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks,
+/area/under/cavewet)
 "FQ" = (
 /turf/open/floor/rooftop/green,
 /area/under/cave)
@@ -4864,6 +5050,11 @@
 	dir = 4
 	},
 /area/indoors/town/manor/halls/w)
+"Gs" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/weapon/tongs,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "Gw" = (
 /obj/structure/water_pump,
 /turf/open/floor/metal/barograte,
@@ -4908,6 +5099,11 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
+"GM" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/weapon/pick,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "GP" = (
 /obj/structure/fluff/railing/border,
 /turf/open/transparent/openspace,
@@ -5154,6 +5350,9 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/steward)
+"Im" = (
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "Io" = (
 /turf/closed/wall/mineral/pipe,
 /area/under/cave)
@@ -5237,6 +5436,13 @@
 "IK" = (
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/manor/throne)
+"IL" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 1
+	},
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/cobble,
+/area/indoors/town/dwarfin)
 "IN" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -5591,6 +5797,12 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors/town/steward)
+"Ld" = (
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "townwestkybraxor"
+	},
+/turf/open/transparent/openspace,
+/area/under/cavewet)
 "Le" = (
 /obj/structure/fluff/walldeco/psybanner/red{
 	icon_state = "zizobanner"
@@ -5652,6 +5864,13 @@
 /obj/item/storage/sack,
 /turf/open/floor/blocks/carved,
 /area/indoors/town/tavern)
+"LE" = (
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/structure/closet/crate/chest/old_crate,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/dwarfin)
 "LJ" = (
 /obj/structure/table/wood/reinforced_alter,
 /obj/item/mould/ingot{
@@ -5714,6 +5933,9 @@
 	},
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/town/manor/halls/w)
+"Mi" = (
+/turf/open/floor/concrete,
+/area/indoors/town/dwarfin)
 "Ml" = (
 /obj/structure/flora/newtree/mushroom/yellow,
 /turf/open/floor/naturalstone,
@@ -5741,6 +5963,11 @@
 	},
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/town/manor/halls/w)
+"Ms" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/flint,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "Mt" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/tile/bfloorz,
@@ -5760,6 +5987,13 @@
 /obj/machinery/light/fueled/chand,
 /turf/open/transparent/openspace,
 /area/indoors/town/tavern)
+"Mw" = (
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/ore/iron,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/dwarfin)
 "Mz" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -5951,9 +6185,24 @@
 "Nt" = (
 /turf/open/transparent/openspace,
 /area/indoors/town/magician)
+"Nv" = (
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "townsouthkybraxor"
+	},
+/turf/open/transparent/openspace,
+/area/under/cavewet)
 "Ny" = (
 /turf/open/floor/churchrough/rust,
 /area/indoors/town/manor/phys)
+"Nz" = (
+/obj/structure/winch{
+	dir = 1;
+	gid = "southtowngatesouth";
+	name = "winch (north)";
+	redstone_id = "southtowngatesouth"
+	},
+/turf/open/floor/carpet/royalblack,
+/area/under/cavewet)
 "NA" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/shortboots,
@@ -6128,6 +6377,14 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/town/manor/servant)
+"OG" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 1
+	},
+/obj/machinery/light/fueled/wallfire/candle,
+/obj/item/weapon/pick,
+/turf/open/floor/cobble,
+/area/indoors/town/dwarfin)
 "OH" = (
 /obj/structure/door/violet{
 	name = "Kitchen"
@@ -6297,7 +6554,7 @@
 	},
 /area/indoors/town/vault)
 "PH" = (
-/obj/structure/gate/bars/preopen{
+/obj/structure/gate/bars{
 	gid = "towngatenorth";
 	redstone_id = "towngatenorth"
 	},
@@ -6412,6 +6669,10 @@
 "QM" = (
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
+"QO" = (
+/obj/structure/fake_machine/stockpile,
+/turf/open/floor/concrete,
+/area/indoors/town/dwarfin)
 "QR" = (
 /obj/structure/flora/newtree/mushroom,
 /turf/open/floor/naturalstone,
@@ -6448,6 +6709,14 @@
 	},
 /turf/open/floor/church/rust,
 /area/indoors/town/manor/halls)
+"Re" = (
+/obj/structure/door{
+	name = "Miners Quarters"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/artificer,
+/turf/open/floor/cobble,
+/area/indoors/town/dwarfin)
 "Rh" = (
 /obj/effect/decal/cleanable/sigil/W,
 /obj/structure/fluff/walldeco/church/line{
@@ -6466,6 +6735,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/town/garrison)
+"Rm" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 4
+	},
+/turf/open/floor/carpet/royalblack,
+/area/under/cavewet)
 "Rn" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/wine/sourwine,
@@ -6519,6 +6794,10 @@
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/church/purple,
 /area/indoors/town/manor/guest/meeting)
+"RE" = (
+/obj/structure/fake_machine/scomm,
+/turf/open/floor/concrete,
+/area/indoors/town/dwarfin)
 "RH" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -6528,6 +6807,14 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/manor/throne)
+"RJ" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/cup{
+	pixel_x = 9;
+	pixel_y = -4
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/dwarfin)
 "RK" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /turf/open/floor/blocks,
@@ -6695,6 +6982,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Tb" = (
+/obj/structure/lever{
+	redstone_id = "smelter"
+	},
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "Tc" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -7074,6 +7367,11 @@
 /obj/structure/stockpile_storage/metal,
 /turf/open/floor/churchmarble/purple,
 /area/indoors/town/vault)
+"VA" = (
+/obj/structure/bars,
+/obj/structure/window/stained/zizo/green,
+/turf/open/floor/blocks,
+/area/indoors/town/dwarfin)
 "VB" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/tile,
@@ -7095,6 +7393,10 @@
 "VF" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/cell)
+"VH" = (
+/obj/machinery/light/fueled/smelter/great,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "VN" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/metal/barograte,
@@ -7105,7 +7407,7 @@
 /area/indoors/town/clinic_large/apothecary)
 "VQ" = (
 /obj/structure/floordoor/gatehatch/outer{
-	redstone_id = "keepgatekybraxor"
+	redstone_id = "townnorthkybraxor"
 	},
 /turf/open/transparent/openspace,
 /area/under/cave)
@@ -7154,9 +7456,37 @@
 /obj/structure/fake_machine/submission,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/steward)
+"Wa" = (
+/obj/item/storage/crucible/random{
+	pixel_x = -7;
+	pixel_y = 10
+	},
+/obj/item/storage/crucible/random{
+	pixel_x = 8;
+	pixel_y = 10
+	},
+/obj/item/mould/ingot{
+	pixel_y = -7
+	},
+/obj/item/mould/ingot{
+	pixel_y = 1;
+	pixel_x = 0
+	},
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "Wc" = (
 /turf/open/floor/church/rust,
 /area/indoors/town/manor/halls)
+"Wd" = (
+/obj/structure/winch{
+	dir = 1;
+	gid = "westtowngatesouth";
+	name = "winch (south)";
+	redstone_id = "westtowngatesouth"
+	},
+/turf/open/floor/carpet/royalblack,
+/area/under/cavewet)
 "Wf" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/hexstone,
@@ -7207,6 +7537,11 @@
 "Ww" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/shop)
+"Wz" = (
+/obj/structure/table/wood/reinf_long,
+/obj/item/candle/skull/lit,
+/turf/open/floor/cobble,
+/area/indoors/town/dwarfin)
 "WB" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace,
 /turf/closed/wall/mineral/decorstone,
@@ -7433,6 +7768,17 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /turf/open/floor/blocks/carved,
 /area/indoors/town/tavern)
+"XX" = (
+/obj/structure/kybraxor{
+	pixel_x = -32;
+	pixel_y = -32;
+	redstone_id = "townwestkybraxor"
+	},
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "townwestkybraxor"
+	},
+/turf/open/transparent/openspace,
+/area/under/cavewet)
 "XY" = (
 /obj/item/reagent_containers/food/snacks/produce/tea,
 /obj/item/reagent_containers/food/snacks/produce/tea,
@@ -7596,6 +7942,12 @@
 /obj/structure/soil/mushmound,
 /turf/open/floor/dirt,
 /area/under/cave)
+"YV" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/floor/cobble,
+/area/indoors/town/dwarfin)
 "YW" = (
 /turf/open/floor/cobble,
 /area/indoors/town/manor/servant)
@@ -7626,6 +7978,13 @@
 	dir = 8
 	},
 /area/indoors/town/manor/phys)
+"Zg" = (
+/obj/structure/door{
+	name = "Miners Quarters"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/artificer,
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/dwarfin)
 "Zh" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/paper,
@@ -7679,6 +8038,13 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile,
 /area/indoors/town/manor/kitchen)
+"Zt" = (
+/obj/machinery/light/fueled/smelter,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/dwarfin)
 "Zv" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/grass/bush/cave,
@@ -60570,9 +60936,9 @@ rW
 rW
 rW
 GX
-AX
-AX
-AX
+mF
+mF
+mF
 GX
 qV
 rW
@@ -60771,11 +61137,11 @@ rW
 rW
 rW
 GX
-AX
-AX
-AX
-AX
-AX
+mF
+mF
+mF
+mF
+mF
 GX
 qV
 Hs
@@ -60973,12 +61339,12 @@ rW
 rW
 rW
 GX
-AX
-AX
-AX
-AX
-AX
-GX
+mF
+nn
+nn
+nn
+mF
+FO
 rW
 Hs
 Ga
@@ -61175,11 +61541,11 @@ rW
 rW
 rW
 GX
-AX
-AX
-AX
-AX
-AX
+mF
+qJ
+Rm
+Wd
+mF
 GX
 rW
 Hs
@@ -61378,9 +61744,9 @@ Vd
 rW
 rW
 GX
-AX
-AX
-AX
+AI
+AI
+AI
 GX
 qV
 rW
@@ -61579,11 +61945,11 @@ Vd
 Vd
 Vd
 Vd
-Vd
-Vd
-Vd
-Vd
-Vd
+jx
+hO
+Ld
+hO
+ox
 Vd
 Vd
 Vd
@@ -61781,11 +62147,11 @@ Vd
 Vd
 Vd
 Vd
-Vd
-Vd
-Vd
-Vd
-Vd
+vn
+hO
+XX
+hO
+vn
 Vd
 Vd
 Vd
@@ -61983,11 +62349,11 @@ rW
 Vd
 Vd
 Vd
-Vd
-Vd
-Vd
-Vd
-Vd
+vn
+hO
+Ld
+hO
+vn
 Vd
 Vd
 Vd
@@ -62186,9 +62552,9 @@ rW
 rW
 rW
 GX
-AX
-AX
-AX
+GX
+GX
+GX
 GX
 qV
 qV
@@ -64442,9 +64808,9 @@ Hs
 rW
 GX
 GX
-AX
-AX
-AX
+mF
+mF
+mF
 GX
 rW
 rW
@@ -64643,11 +65009,11 @@ Ga
 Hs
 rW
 GX
-AX
-AX
-AX
-AX
-AX
+mF
+mF
+mF
+mF
+mF
 GX
 rW
 rW
@@ -64844,12 +65210,12 @@ Ga
 Ga
 Hs
 qV
-GX
-AX
-AX
-AX
-AX
-AX
+FO
+mF
+nn
+nn
+nn
+mF
 GX
 rW
 rW
@@ -65047,11 +65413,11 @@ Hs
 Hs
 qV
 GX
-AX
-AX
-AX
-AX
-AX
+mF
+Nz
+Rm
+do
+mF
 GX
 rW
 rW
@@ -65250,9 +65616,9 @@ rW
 rW
 rW
 GX
-AX
-AX
-AX
+AI
+AI
+AI
 GX
 rW
 rW
@@ -65451,11 +65817,11 @@ Vd
 Vd
 Vd
 Vd
-Vd
-Vd
-Vd
-Vd
-Vd
+oI
+lx
+Nv
+lx
+wO
 Vd
 Vd
 Vd
@@ -65653,11 +66019,11 @@ Vd
 Vd
 Vd
 Vd
-Vd
-Vd
-Vd
-Vd
-Vd
+vn
+lx
+xJ
+lx
+vn
 Vd
 Vd
 Vd
@@ -65855,11 +66221,11 @@ Vd
 Vd
 Vd
 Vd
-Vd
-Vd
-Vd
-Vd
-Vd
+vn
+lx
+Nv
+lx
+vn
 Vd
 Vd
 Vd
@@ -66058,9 +66424,9 @@ rW
 rW
 rW
 GX
-AX
-AX
-AX
+GX
+GX
+GX
 GX
 rW
 rW
@@ -114519,10 +114885,10 @@ Uh
 ri
 CL
 CF
-CJ
-CJ
-CJ
-CJ
+OG
+Wz
+CH
+oJ
 CF
 ri
 yH
@@ -114720,11 +115086,11 @@ Xe
 Uh
 Uh
 CL
-CF
-CJ
-CJ
-CJ
-CJ
+Re
+UZ
+UZ
+UZ
+iE
 CF
 ri
 yH
@@ -114923,10 +115289,10 @@ VX
 Uh
 CL
 CF
-UZ
-UZ
-UZ
-UZ
+RE
+Mi
+Mi
+ML
 CF
 yH
 yH
@@ -114936,7 +115302,7 @@ yH
 yH
 yH
 yH
-MJ
+yH
 tK
 yH
 tK
@@ -115125,12 +115491,12 @@ LJ
 Uh
 CL
 CF
-UZ
-UZ
-UZ
-UZ
+Gs
+GM
+Mi
+ML
 CF
-yH
+CF
 yH
 yH
 yH
@@ -115327,12 +115693,12 @@ Uh
 Uh
 CL
 CF
+fd
 CJ
+Mi
 CJ
-CJ
-CJ
+Zt
 CF
-yH
 yH
 yH
 yH
@@ -115529,12 +115895,12 @@ Uh
 ri
 CL
 CF
-CJ
-CJ
-CJ
-CJ
+VH
+Tb
+Mi
+Im
+Wa
 CF
-yH
 yH
 yH
 yH
@@ -115698,7 +116064,7 @@ ri
 ri
 ri
 PR
-Ib
+oh
 lD
 oi
 CW
@@ -115731,12 +116097,12 @@ ri
 ri
 CF
 CF
-UZ
-UZ
-UZ
-UZ
+fd
+CJ
+Mi
+CJ
+Zt
 CF
-yH
 yH
 yH
 yH
@@ -115928,17 +116294,17 @@ ON
 xz
 HR
 HR
-Uh
+cp
 ri
 CF
 CF
-UZ
-UZ
-UZ
-UZ
-UZ
+dj
+GM
+Ms
+Mi
+ML
 CF
-yH
+CF
 yH
 yH
 yH
@@ -116133,12 +116499,12 @@ af
 Uh
 CL
 CF
-CJ
-CJ
-CJ
-CJ
-CJ
-CJ
+QO
+UZ
+Mi
+Mi
+Mi
+ML
 CF
 yH
 yH
@@ -116327,20 +116693,20 @@ FU
 ri
 Uh
 Uh
-Uh
+cp
 Uh
 Uh
 Uh
 Uh
 Uh
 CL
-CF
-CJ
-CJ
-CJ
-CJ
-CJ
-CJ
+Re
+UZ
+UZ
+UZ
+UZ
+UZ
+dG
 CF
 yH
 yH
@@ -116537,12 +116903,12 @@ CL
 CL
 CL
 CF
-UZ
-UZ
-UZ
-UZ
-UZ
-UZ
+pZ
+Mw
+hE
+LE
+IL
+oJ
 CF
 yH
 yH
@@ -116733,10 +117099,10 @@ CF
 CF
 CF
 CF
-ri
+ia
 CL
-CL
-ri
+QF
+ia
 ri
 CF
 CF
@@ -116936,8 +117302,8 @@ WD
 JY
 CF
 CL
-CL
-ri
+QF
+QR
 yH
 yH
 yH
@@ -117138,7 +117504,7 @@ qe
 nj
 CF
 CL
-CL
+ia
 yH
 yH
 yH
@@ -154717,12 +155083,12 @@ MJ
 MJ
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
 MJ
 MJ
 MJ
@@ -154919,12 +155285,12 @@ Yc
 Yc
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
 MJ
 MJ
 MJ
@@ -155121,12 +155487,12 @@ Uh
 Uh
 Yc
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+CF
+CF
+CF
+CF
 MJ
 MJ
 MJ
@@ -155322,13 +155688,13 @@ Af
 Ck
 Uh
 Yc
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+CF
+CF
+CF
+CF
+eG
+ed
+CF
 MJ
 MJ
 MJ
@@ -155524,14 +155890,14 @@ Gm
 QS
 Uh
 Yc
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+CF
+eD
+eD
+CF
+CJ
+CJ
+CF
+CF
 MJ
 MJ
 MJ
@@ -155726,14 +156092,14 @@ Gm
 zN
 Uh
 Yc
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+CF
+UZ
+UZ
+Zg
+CJ
+CJ
+xi
+CF
 MJ
 MJ
 MJ
@@ -155928,14 +156294,14 @@ HQ
 Uh
 Uh
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+VA
+UZ
+UZ
+CF
+CF
+CF
+CF
+CF
 MJ
 MJ
 MJ
@@ -156130,14 +156496,14 @@ HR
 Uh
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+CF
+YV
+UZ
+Zg
+CJ
+CJ
+xi
+CF
 MJ
 MJ
 MJ
@@ -156331,15 +156697,15 @@ GL
 zh
 vQ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+CF
+PA
+UZ
+CF
+CJ
+CJ
+CF
+CF
 MJ
 MJ
 MJ
@@ -156533,14 +156899,14 @@ yp
 Uh
 Uh
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+CF
+CF
+CF
+CF
+eG
+RJ
+CF
 MJ
 MJ
 MJ
@@ -156735,14 +157101,14 @@ Uh
 Uh
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
+CF
+CF
+CF
+CF
 MJ
 MJ
 MJ
@@ -156937,14 +157303,14 @@ MJ
 MJ
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
 MJ
 MJ
 MJ
@@ -157139,14 +157505,14 @@ MJ
 MJ
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
+Yc
 MJ
 MJ
 MJ
@@ -195512,7 +195878,6 @@ MJ
 MJ
 MJ
 MJ
-MJ
 Yc
 Yc
 Yc
@@ -195520,14 +195885,15 @@ Yc
 Yc
 Yc
 Yc
+Yc
 MJ
 MJ
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
 MJ
 MJ
 MJ
@@ -195714,22 +196080,22 @@ MJ
 MJ
 MJ
 MJ
-MJ
 Yc
 VU
 VU
 VU
 VU
 VU
+VU
 Yc
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
+VU
+VU
+Yc
 MJ
 MJ
 MJ
@@ -195916,6 +196282,14 @@ MJ
 MJ
 MJ
 MJ
+Yc
+VU
+VU
+VU
+VU
+VU
+VU
+Yc
 MJ
 Yc
 VU
@@ -195924,15 +196298,7 @@ VU
 VU
 VU
 Yc
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
 MJ
 MJ
 MJ
@@ -196118,6 +196484,14 @@ MJ
 MJ
 MJ
 MJ
+Yc
+VU
+VU
+VU
+VU
+VU
+VU
+Yc
 MJ
 Yc
 VU
@@ -196125,16 +196499,8 @@ VU
 VU
 VU
 VU
+VU
 Yc
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
 MJ
 MJ
 MJ
@@ -196321,22 +196687,22 @@ MJ
 MJ
 MJ
 Yc
+VU
+VU
+VU
+VU
+VU
+Yc
+Yc
+MJ
 Yc
 VU
 VU
 VU
 VU
+VU
+VU
 Yc
-Yc
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
 MJ
 MJ
 MJ
@@ -196531,14 +196897,14 @@ VU
 Yc
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+VU
+VU
+VU
+VU
+VU
+VU
+Yc
 MJ
 MJ
 MJ
@@ -196733,14 +197099,14 @@ VU
 Yc
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+VU
+VU
+VU
+VU
+VU
+Yc
+Yc
 MJ
 MJ
 MJ
@@ -196935,13 +197301,13 @@ Yc
 Yc
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
+VU
+VU
+Yc
 MJ
 MJ
 MJ
@@ -197140,10 +197506,10 @@ MJ
 MJ
 MJ
 MJ
-MJ
-MJ
-MJ
-MJ
+Yc
+Yc
+Yc
+Yc
 MJ
 MJ
 MJ
