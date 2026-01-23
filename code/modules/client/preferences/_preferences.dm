@@ -1695,9 +1695,14 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					selected_accent = ACCENT_DEFAULT
 
 					var/list/selectable = list()
-					for(var/species_type in GLOB.roundstart_species)
-						var/datum/species/species = GLOB.species_list[species_type]
-						selectable[species.name] = species
+					for(var/species_id in GLOB.roundstart_species)
+						var/species_type = GLOB.species_list[species_id]
+
+						var/datum/species/species = new species_type()
+						if(!species.preference_accessible(src))
+							continue
+
+						selectable[species.name] = species.type
 
 					var/result = browser_input_list(user, "SELECT YOUR HERO'S PEOPLE:", "VANDERLIN FAUNA", selectable, pref_species)
 

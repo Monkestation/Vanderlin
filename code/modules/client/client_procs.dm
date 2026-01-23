@@ -442,6 +442,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	else if(GLOB.deadmins[ckey])
 		verbs += /client/proc/readmin
 		connecting_admin = TRUE
+
 	if(CONFIG_GET(flag/autoadmin))
 		if(!GLOB.admin_datums[ckey])
 			var/datum/admin_rank/autorank
@@ -453,14 +454,18 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				to_chat(world, "Autoadmin rank not found")
 			else
 				new /datum/admins(autorank, ckey)
+
 	if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin)
 		var/localhost_addresses = list("127.0.0.1", "::1")
 		if(isnull(address) || (address in localhost_addresses))
 			var/datum/admin_rank/localhost_rank = new("!localhost!", R_EVERYTHING, R_DBRANKS, R_EVERYTHING) //+EVERYTHING -DBRANKS *EVERYTHING
 			new /datum/admins(localhost_rank, ckey, 1, 1)
+
 	// Init donator data, used by prefs
 	patreon = new(src)
 	twitch = new(src)
+	native_say = new(src)
+
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
 	prefs = GLOB.preferences_datums[ckey]
 	if(prefs)
@@ -592,17 +597,17 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			to_chat(src, "Required version to remove this message: [cwv] or later")
 			to_chat(src, "Visit <a href=\"https://secure.byond.com/download\">BYOND's website</a> to get the latest version of BYOND.")
 
-	if (connection == "web" && !connecting_admin)
-		if (!CONFIG_GET(flag/allow_webclient))
+	if(connection == "web" && !connecting_admin)
+		if(!CONFIG_GET(flag/allow_webclient))
 			to_chat(src, "Web client is disabled")
 			qdel(src)
 			return 0
-		if (CONFIG_GET(flag/webclient_only_byond_members) && !IsByondMember())
+		if(CONFIG_GET(flag/webclient_only_byond_members) && !IsByondMember())
 			to_chat(src, "Sorry, but the web client is restricted to byond members only.")
 			qdel(src)
 			return 0
 
-	if( (world.address == address || !address) && !GLOB.host )
+	if((world.address == address || !address) && !GLOB.host)
 		GLOB.host = key
 		world.update_status()
 
@@ -610,22 +615,22 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		add_admin_verbs()
 		to_chat(src, get_message_output("memo"))
 		adminGreet()
-	if (mob && reconnecting)
+	if(mob && reconnecting)
 		var/area/joined_area = get_area(mob.loc)
 		if(joined_area)
 			joined_area.reconnect_game(mob)
 
 	add_verbs_from_config()
 	var/cached_player_age = set_client_age_from_db(tdata) //we have to cache this because other shit may change it and we need it's current value now down below.
-	if (isnum(cached_player_age) && cached_player_age == -1) //first connection
+	if(isnum(cached_player_age) && cached_player_age == -1) //first connection
 		player_age = 0
 	var/nnpa = CONFIG_GET(number/notify_new_player_age)
-	if (isnum(cached_player_age) && cached_player_age == -1) //first connection
-		if (nnpa >= 0)
+	if(isnum(cached_player_age) && cached_player_age == -1) //first connection
+		if(nnpa >= 0)
 			message_admins("New user: [key_name_admin(src)] [ADMIN_PP(mob)] is connecting here for the first time.")
-			if (CONFIG_GET(flag/irc_first_connection_alert))
+			if(CONFIG_GET(flag/irc_first_connection_alert))
 				send2irc_adminless_only("New-user", "[key_name(src)] is connecting for the first time!")
-	else if (isnum(cached_player_age) && cached_player_age < nnpa)
+	else if(isnum(cached_player_age) && cached_player_age < nnpa)
 		message_admins("New user: [key_name_admin(src)] just connected with an age of [cached_player_age] day[(player_age==1?"":"s")]")
 	if(CONFIG_GET(flag/use_account_age_for_jobs) && account_age >= 0)
 		player_age = account_age
@@ -664,35 +669,29 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	to_chat(src, get_message_output("message", ckey))
 
-
-
-//	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
-//		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
-
 	update_ambience_pref()
-
 
 	//This is down here because of the browse() calls in tooltip/New()
 	if(!tooltips)
 		tooltips = new /datum/tooltip(src)
 
 	var/list/topmenus = GLOB.menulist[/datum/verbs/menu]
-	for (var/thing in topmenus)
+	for(var/thing in topmenus)
 		var/datum/verbs/menu/topmenu = thing
 		var/topmenuname = "[topmenu]"
-		if (topmenuname == "[topmenu.type]")
+		if(topmenuname == "[topmenu.type]")
 			var/list/tree = splittext(topmenuname, "/")
 			topmenuname = tree[tree.len]
 		winset(src, "[topmenu.type]", "parent=menu;name=[url_encode(topmenuname)]")
 		var/list/entries = topmenu.Generate_list(src)
-		for (var/child in entries)
+		for(var/child in entries)
 			winset(src, "[child]", "[entries[child]]")
-			if (!ispath(child, /datum/verbs/menu))
+			if(!ispath(child, /datum/verbs/menu))
 				var/procpath/verbpath = child
 				if (copytext(verbpath.name,1,2) != "@")
 					new child(src)
 
-	for (var/thing in prefs.menuoptions)
+	for(var/thing in prefs.menuoptions)
 		var/datum/verbs/menu/menuitem = GLOB.menulist[thing]
 		if (menuitem)
 			menuitem.Load_checked(src)
@@ -707,20 +706,14 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	view_size.resetFormat()
 	view_size.setZoomMode()
 	fit_viewport()
-	Master.UpdateTickRate()
 	SSjob.load_player_boosts(ckey)
+	enable_seasonal_buys()
+
+	Master.UpdateTickRate()
 
 //////////////
 //DISCONNECT//
 //////////////
-
-/// This grabs the DPI of the user per their skin
-/client/proc/acquire_dpi()
-	if(prefs && (prefs.toggles & UI_SCALE))
-		window_scaling = prefs.ui_scale
-	else if(isnull(window_scaling))
-		window_scaling = text2num(winget(src, null, "dpi"))
-	debug_admins("scalies: [window_scaling]")
 
 /client/Del()
 	if(!gc_destroyed)
@@ -1400,6 +1393,21 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(twitch?.has_access(ACCESS_TWITCH_SUB_TIER_1))
 		return TRUE
 	return FALSE
+
+/// This grabs the DPI of the user per their skin
+/client/proc/acquire_dpi()
+	if(prefs && (prefs.toggles & UI_SCALE))
+		window_scaling = prefs.ui_scale
+	else if(isnull(window_scaling))
+		window_scaling = text2num(winget(src, null, "dpi"))
+	debug_admins("scalies: [window_scaling]")
+
+/client/proc/enable_seasonal_buys()
+	if(!SStriumphs.initialized)
+		SStriumphs.pending_clients_seasonal += src
+		return
+
+	SStriumphs.activate_seasonal_buys(src)
 
 #undef LIMITER_SIZE
 #undef CURRENT_SECOND

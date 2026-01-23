@@ -28,6 +28,16 @@
 	if(!istype(C.patron, /datum/patron/alternate/wurm))
 		return
 
+/datum/species/dwarf/mountain/subterra/preference_accessible(datum/preferences/prefs)
+	. = ..()
+	if(!.)
+		return
+
+	if(!prefs?.parent)
+		return FALSE
+
+	return prefs.parent.has_triumph_buy(TRIUMPH_BUY_SUBTERRAN_DWARF)
+
 /datum/species/dwarf/mountain/subterra/get_skin_list()
 	return sortList(list(
 		"Jarosite" = "aabf7c"
