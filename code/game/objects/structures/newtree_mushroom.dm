@@ -16,7 +16,7 @@
 	var/glowcolour = "#f5ccb9"
 
 /obj/structure/flora/newtree/mushroom/Initialize(mapload)
-	..()
+	. = ..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newtree/mushroom/build_trees()
