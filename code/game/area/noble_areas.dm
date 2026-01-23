@@ -191,28 +191,36 @@
 // Minor Nobles
 /area/indoors/town/noble_manor
 	icon = 'icons/turf/areas_manor.dmi'
-	icon_state = "manor"
+	icon_state = "noble"
 	background_track = 'sound/music/area/manor.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/manorgarri
 
-/area/outdoors/town/noble_manor/blue
-	first_time_text = "Blue Noble Manor"
+/area/outdoors/town/noble_manor
+	icon = 'icons/turf/areas_manor.dmi'
+	icon_state = "noble_out"
 
 /area/indoors/town/noble_manor/blue
 	name = "Blue Noble Manor"
+	icon_state = "noble1"
+
+/area/outdoors/town/noble_manor/blue
+	first_time_text = "Blue Noble Manor"
+	icon_state = "noble1_out"
+
+/area/indoors/town/noble_manor/yellow
+	name = "Yellow Noble Manor"
+	icon_state = "noble2"
+
+/area/outdoors/town/noble_manor/yellow
+	icon_state = "noble2_out"
+	first_time_text = "Green Noble Manor"
 
 /area/indoors/town/noble_manor/red
 	name = "Red Noble Manor"
+	icon_state = "noble3"
 
 /area/outdoors/town/noble_manor/red
-	icon_state = "woods"
+	icon_state = "noble3_out"
 	first_time_text = "Red Noble Manor"
-
-/area/indoors/town/noble_manor/green
-	name = "Green Noble Manor"
-
-/area/outdoors/town/noble_manor/green
-	icon_state = "beach"
-	first_time_text = "Green Noble Manor"
