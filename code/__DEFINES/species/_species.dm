@@ -1,6 +1,7 @@
 #define SPEC_ID_HUMAN_SPACE "space_human"
 #define SPEC_ID_HUMEN "human"
 #define SPEC_ID_DWARF "dwarf"
+#define SPEC_ID_DWARF_SUBTERRAN "dwarf_subterran"
 #define SPEC_ID_AASIMAR "aasimar"
 #define SPEC_ID_ELF "elf"
 #define SPEC_ID_HALF_ELF "halfelf"

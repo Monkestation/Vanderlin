@@ -1,6 +1,6 @@
 // This code handles different species in the game.
-GLOBAL_LIST_EMPTY(roundstart_races)
-GLOBAL_LIST_EMPTY(donator_races)
+GLOBAL_LIST_EMPTY(roundstart_species)
+
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -8,6 +8,9 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/desc
 	/// Internal ID of this species used for job checks, etc.
 	var/id
+	// Since an unique ID is required, but subspecies probably should have the same restrictions
+	/// Override for jobs to use a different species for restrictions
+	var/job_id
 	/// Override for limbs to use a different species' limbs
 	var/limbs_id
 	/// Limb icon to use to build appearance for males
@@ -440,32 +443,12 @@ GLOBAL_LIST_EMPTY(donator_races)
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	return TRUE
 
-/proc/generate_selectable_species()
-	for(var/I as anything in subtypesof(/datum/species))
-		var/datum/species/S = new I
-		if(!S.check_roundstart_eligible())
-			continue
-		GLOB.roundstart_races += S.name
-		if(S.donator_req)
-			GLOB.donator_races += S.name
-		qdel(S)
-	if(!LAZYLEN(GLOB.roundstart_races))
-		GLOB.roundstart_races += "Humen" // GLOB.species_list uses name and should probably be refactored
-	sortTim(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
-
-/proc/get_selectable_species(donator = TRUE)
-	if(!LAZYLEN(GLOB.roundstart_races))
-		generate_selectable_species()
-	var/list/species = GLOB.roundstart_races.Copy()
-	if(!donator)
-		species -= GLOB.donator_races
-	return species
-
 /datum/species/proc/check_roundstart_eligible()
 	return FALSE
-//	if(id in (CONFIG_GET(keyed_list/roundstart_races)))
-//		return TRUE
-//	return FALSE
+
+// Remove when preference datums
+/datum/species/proc/preference_accessible(datum/preferences/prefs)
+	return TRUE
 
 /datum/species/proc/get_possible_names(gender = MALE) as /list
 	SHOULD_CALL_PARENT(FALSE)

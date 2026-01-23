@@ -1,11 +1,11 @@
 //This is the lowest supported version, anything below this is completely obsolete and the entire savefile will be wiped.
-#define SAVEFILE_VERSION_MIN	18
+#define SAVEFILE_VERSION_MIN 18
 
 //This is the current version, anything below this will attempt to update (if it's not obsolete)
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	30
+#define SAVEFILE_VERSION_MAX 31
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -67,8 +67,19 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			randomise[RANDOM_BODY] = TRUE
 		if(S["species_is_always_random"] == 1)
 			randomise[RANDOM_SPECIES] = TRUE
+
 	if(current_version < 30)
-		S["voice_color"]		>> voice_color
+		S["voice_color"] >> voice_color
+
+	if(current_version < 31)
+		var/species_name = S["species"]
+		for(var/species_id in GLOB.species_list)
+			var/species_type = GLOB.species_list[species_id]
+			var/datum/species/species = new species_type()
+			if(species.name == species_name)
+				pref_species = new species.type()
+				WRITE_FILE(S["species"], species.id)
+				break
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
@@ -85,7 +96,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!S)
 		return FALSE
 	S.cd = "/"
-
 	var/needs_update = savefile_needs_update(S)
 	if(needs_update == -2)		//fatal, can't load any data
 		return FALSE
@@ -258,12 +268,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	return TRUE
 
 /datum/preferences/proc/_load_species(S)
-	var/species_name
-	S["species"] >> species_name
-	if(species_name)
-		var/newtype = GLOB.species_list[species_name]
-		if(newtype)
-			pref_species = new newtype
+	var/species_type = GLOB.species_list[S["species"]]
+	if(!species_type)
+		species_type = /datum/species/human/northern
+	pref_species = new species_type()
 
 /datum/preferences/proc/_load_loadouts(S)
 	for(var/i in 1 to 3)
@@ -350,10 +358,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/patron_typepath
 	S["selected_patron"] >> patron_typepath
 	if(patron_typepath)
-		selected_patron = GLOB.patronlist[patron_typepath]
+		selected_patron = GLOB.patron_list[patron_typepath]
 
 	if(!selected_patron) //failsafe
-		selected_patron = GLOB.patronlist[default_patron]
+		selected_patron = GLOB.patron_list[default_patron]
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -377,10 +385,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Load flavor text
 	S["flavortext"] >> flavortext
 	S["flavortext_display"]	>> flavortext_display
-	S["ooc_notes"]			>> ooc_notes
-	S["ooc_notes_display"]	>> ooc_notes_display
-	S["ooc_extra"]			>> ooc_extra
-	S["ooc_extra_link"]		>> ooc_extra_link
+	S["ooc_notes"] >> ooc_notes
+	S["ooc_notes_display"] >> ooc_notes_display
+	S["ooc_extra"] >> ooc_extra
+	S["ooc_extra_link"] >> ooc_extra_link
 
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
@@ -444,36 +452,34 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		return FALSE
 	S.cd = "/character[default_slot]"
 
-	WRITE_FILE(S["version"]			, SAVEFILE_VERSION_MAX)	//load_character will sanitize any bad data, so assume up-to-date.)
+	WRITE_FILE(S["version"], SAVEFILE_VERSION_MAX)	//load_character will sanitize any bad data, so assume up-to-date.)
 
 	//Character
-	WRITE_FILE(S["real_name"]			, real_name)
-	WRITE_FILE(S["gender"]				, gender)
-	WRITE_FILE(S["domhand"]				, domhand)
-//	WRITE_FILE(S["alignment"]			, alignment)
-	WRITE_FILE(S["age"]					, age)
-	WRITE_FILE(S["eye_color"]			, eye_color)
-	WRITE_FILE(S["voice_color"]			, voice_color)
-	WRITE_FILE(S["skin_tone"]			, skin_tone)
-	WRITE_FILE(S["underwear"]			, underwear)
-	WRITE_FILE(S["underwear_color"]		, underwear_color)
-	WRITE_FILE(S["undershirt"]			, undershirt)
-	WRITE_FILE(S["accessory"]			, accessory)
-	WRITE_FILE(S["detail"]				, detail)
-	WRITE_FILE(S["socks"]				, socks)
-	WRITE_FILE(S["randomise"]		, randomise)
-	WRITE_FILE(S["pronouns"]		, pronouns)
-	WRITE_FILE(S["voice_type"]		, voice_type)
-	WRITE_FILE(S["species"]			, pref_species.name)
-	WRITE_FILE(S["loadout1"]		, loadout1)
-	WRITE_FILE(S["loadout2"]		, loadout2)
-	WRITE_FILE(S["loadout3"]		, loadout3)
+	WRITE_FILE(S["real_name"], real_name)
+	WRITE_FILE(S["gender"], gender)
+	WRITE_FILE(S["domhand"], domhand)
+	WRITE_FILE(S["age"], age)
+	WRITE_FILE(S["eye_color"], eye_color)
+	WRITE_FILE(S["voice_color"], voice_color)
+	WRITE_FILE(S["skin_tone"], skin_tone)
+	WRITE_FILE(S["underwear"], underwear)
+	WRITE_FILE(S["underwear_color"], underwear_color)
+	WRITE_FILE(S["undershirt"], undershirt)
+	WRITE_FILE(S["accessory"], accessory)
+	WRITE_FILE(S["detail"], detail)
+	WRITE_FILE(S["socks"], socks)
+	WRITE_FILE(S["randomise"], randomise)
+	WRITE_FILE(S["pronouns"], pronouns)
+	WRITE_FILE(S["voice_type"], voice_type)
+	WRITE_FILE(S["species"], pref_species.id)
+	WRITE_FILE(S["loadout1"], loadout1)
+	WRITE_FILE(S["loadout2"], loadout2)
+	WRITE_FILE(S["loadout3"], loadout3)
 	WRITE_FILE(S["culinary_preferences"], culinary_preferences)
-	WRITE_FILE(S["family"]			, 	family)
-	WRITE_FILE(S["gender_choice"]			, 	gender_choice)
-	WRITE_FILE(S["setspouse"]			, 	setspouse)
+	WRITE_FILE(S["family"], family)
+	WRITE_FILE(S["gender_choice"], gender_choice)
+	WRITE_FILE(S["setspouse"], setspouse)
 	WRITE_FILE(S["selected_accent"], selected_accent)
-
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -481,33 +487,32 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		WRITE_FILE(S[savefile_slot_name],custom_names[custom_name_id])
 
 	//Jobs
-	WRITE_FILE(S["joblessrole"]		, joblessrole)
+	WRITE_FILE(S["joblessrole"], joblessrole)
 	//Write prefs
-	WRITE_FILE(S["job_preferences"] , job_preferences)
+	WRITE_FILE(S["job_preferences"], job_preferences)
 
 	//Patron
-	WRITE_FILE(S["selected_patron"]		, selected_patron.type)
+	WRITE_FILE(S["selected_patron"], selected_patron.type)
 
 	// Organs
-	WRITE_FILE(S["customizer_entries"] , customizer_entries)
+	WRITE_FILE(S["customizer_entries"], customizer_entries)
 	// Body markings
-	WRITE_FILE(S["body_markings"] , body_markings)
+	WRITE_FILE(S["body_markings"], body_markings)
 	// headshot link
-	WRITE_FILE(S["headshot_link"] , headshot_link)
+	WRITE_FILE(S["headshot_link"], headshot_link)
 	// flavor text
-	WRITE_FILE(S["flavortext"] , html_decode(flavortext))
+	WRITE_FILE(S["flavortext"], html_decode(flavortext))
 	WRITE_FILE(S["flavortext_display"], flavortext_display)
-	WRITE_FILE(S["ooc_notes"] , html_decode(ooc_notes))
+	WRITE_FILE(S["ooc_notes"], html_decode(ooc_notes))
 	WRITE_FILE(S["ooc_notes_display"], ooc_notes_display)
-	WRITE_FILE(S["ooc_extra"],	ooc_extra)
+	WRITE_FILE(S["ooc_extra"], ooc_extra)
 	WRITE_FILE(S["ooc_extra_link"],	ooc_extra_link)
 	// Descriptor entries
-	WRITE_FILE(S["descriptor_entries"] , descriptor_entries)
-	WRITE_FILE(S["custom_descriptors"] , custom_descriptors)
+	WRITE_FILE(S["descriptor_entries"], descriptor_entries)
+	WRITE_FILE(S["custom_descriptors"], custom_descriptors)
 
 	save_quirks(S)
 	return TRUE
-
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN
@@ -520,6 +525,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	set hidden = TRUE
 	var/savefile/S = new /savefile(path)
 	S.ExportText("/",file("[path].txt"))
+
 //path is the savefile path
 /client/verb/savefile_import(path as text)
 	set hidden = TRUE

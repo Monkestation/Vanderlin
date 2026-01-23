@@ -31,7 +31,7 @@
 /mob/living/brain/proc/create_dna()
 	stored_dna = new /datum/dna/stored(src)
 	if(!stored_dna.species)
-		var/rando_race = pick(get_selectable_species())
+		var/rando_race = pick(pick(GLOB.roundstart_species))
 		set_species(rando_race)
 
 /mob/living/brain/ex_act() //you cant blow up brainmobs because it makes transfer_to() freak out when borgs blow up.

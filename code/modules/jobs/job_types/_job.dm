@@ -385,11 +385,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patronlist)
+	for(var/god in GLOB.patron_list)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patronlist[god]
+		var/datum/patron/P = GLOB.patron_list[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -800,5 +800,26 @@
 		else
 			outfit = data["outfit"]
 
+
+	return TRUE
+
+/// Multi check using prefs for reuse, remove when datum/preference is a thing
+/datum/job/proc/prefs_species_check(datum/preferences/prefs)
+	if(!prefs)
+		return FALSE
+
+	var/datum/species/species = prefs.pref_species
+
+	var/job_used_id = species.job_id ? species.job_id : species.id
+	if(length(allowed_races) && !(job_used_id in allowed_races))
+		return FALSE
+
+	if(length(blacklisted_species) && (job_used_id in blacklisted_species))
+		return FALSE
+
+	// Subterran dwarves can only be outsiders if they follow the wurm
+	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(prefs.selected_patron, /datum/patron/alternate/wurm))
+		if(!(department_flag & OUTSIDERS))
+			return FALSE
 
 	return TRUE

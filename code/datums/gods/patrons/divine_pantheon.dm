@@ -16,8 +16,9 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 ))
 
 /datum/patron/divine
-	name = null
+	abstract_type = /datum/patron/divine
 	associated_faith = /datum/faith/divine_pantheon
+	profane_words = list("zizo", "cock", "dick", "fuck", "shit", "pussy", "cuck", "cunt", "asshole")
 	var/associated_psycross = /obj/item/clothing/neck/psycross
 
 /datum/patron/divine/can_pray(mob/living/carbon/human/follower)
@@ -188,6 +189,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 	)
 	storyteller = /datum/storyteller/pestra
 	associated_psycross = /obj/item/clothing/neck/psycross/silver/pestra
+
+/datum/patron/divine/pestra/preference_accessible(datum/preferences/prefs)
+	. = ..()
+	if(!.)
+		return
+
+	// These guys believe in a wurm, not pestra. They won't accept pestra as not being a giant acid wurm.
+	return prefs.pref_species.id != SPEC_ID_DWARF_SUBTERRAN
 
 /datum/patron/divine/malum
 	name = MALUM
