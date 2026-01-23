@@ -39,9 +39,7 @@
 	var/mob/living/carbon/body = owner
 
 	// digest food, sent all reagents that can metabolize to the body
-	for(var/chunk in reagents.reagent_list)
-		var/datum/reagent/bit = chunk
-
+	for(var/datum/reagent/bit as anything in reagents.reagent_list)
 		// If the reagent does not metabolize then it will sit in the stomach
 		// This has an effect on items like plastic causing them to take up space in the stomach
 		if(!(bit.metabolization_rate > 0))
@@ -95,16 +93,16 @@
 		if(H.disgust >= DISGUST_LEVEL_GROSS)
 			if(prob(10))
 				H.stuttering += 1
-				H.adjust_confusion(0.2 SECONDS)
+				H.adjust_confusion(4 SECONDS)
 			if(prob(10) && !H.stat)
 				to_chat(H, "<span class='warning'>I feel kind of iffy...</span>")
-			H.adjust_jitter(-3)
+			H.adjust_jitter(-6 SECONDS)
 		if(H.disgust >= DISGUST_LEVEL_VERYGROSS)
 			if(prob(pukeprob)) //iT hAndLeS mOrE ThaN PukInG
-				H.adjust_confusion(2.5 SECONDS)
+				H.adjust_confusion(5 SECONDS)
 				H.stuttering += 1
 				H.vomit(10, 0, 1, 0, 1, 0)
-			H.set_dizzy(5)
+			H.set_dizzy(10 SECONDS)
 		if(H.disgust >= DISGUST_LEVEL_DISGUSTED)
 			if(prob(25))
 				H.set_eye_blur_if_lower(6 SECONDS)

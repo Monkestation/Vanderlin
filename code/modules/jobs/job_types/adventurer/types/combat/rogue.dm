@@ -21,6 +21,7 @@
 		/datum/skill/misc/stealing = 5,
 		/datum/skill/misc/lockpicking = 4,
 		/datum/skill/craft/traps = 3,
+		/datum/skill/misc/reading = 1,
 	)
 
 	jobstats = list(
@@ -41,7 +42,6 @@
 /datum/job/advclass/combat/rogue/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.adjust_skillrank(/datum/skill/combat/swords, pick(0,0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/reading, pick(0,1,1), TRUE)
 
 /datum/outfit/adventurer/rogue
 	name = "Thief (Adventurer)"

@@ -85,7 +85,7 @@
 			if(istype(food_item, /obj/item/reagent_containers/food/snacks))
 				var/obj/item/reagent_containers/food/snacks/F = food_item
 				total_freshness += max(0, (F.warming + F.rotprocess))
-				highest_food_quality = max(highest_food_quality, F.quality, F.recipe_quality )
+				highest_food_quality = max(highest_food_quality, F.recipe_quality )
 
 			// Also check reagents in the food items
 			if(food_item.reagents && food_item.reagents.reagent_list)

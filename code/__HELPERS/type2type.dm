@@ -282,7 +282,7 @@
 	if(bpc & CHEST)
 		covered_parts |= list(BODY_ZONE_CHEST)
 	if(bpc & GROIN)
-		covered_parts |= list(BODY_ZONE_CHEST)
+		covered_parts |= list(BODY_ZONE_PRECISE_GROIN)
 	if(bpc & VITALS)
 		covered_parts |= list(BODY_ZONE_PRECISE_STOMACH)
 

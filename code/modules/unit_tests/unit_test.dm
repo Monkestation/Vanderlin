@@ -193,8 +193,7 @@ GLOBAL_LIST_EMPTY(required_map_items)
 
 	var/list/tests_to_run = subtypesof(/datum/unit_test)
 	var/list/focused_tests = list()
-	for(var/_test_to_run in tests_to_run)
-		var/datum/unit_test/test_to_run = _test_to_run
+	for(var/datum/unit_test/test_to_run as anything in tests_to_run)
 		if (initial(test_to_run.focus))
 			focused_tests += test_to_run
 	if(length(focused_tests))

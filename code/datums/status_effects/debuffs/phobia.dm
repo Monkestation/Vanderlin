@@ -7,7 +7,7 @@
 /datum/status_effect/minor_phobia_reaction/on_apply()
 	. = ..()
 	owner.emote("scream")
-	owner.adjust_jitter(6)
+	owner.adjust_jitter(12 SECONDS)
 	owner.add_stress(/datum/stress_event/startled)
 
 /// Stacking severity of phobic reaction
@@ -66,7 +66,7 @@
 
 		if(4)
 			to_chat(owner, span_warning("You feel faint with fright!"))
-			owner.set_dizzy(2 * stacks)
+			owner.set_dizzy(2 * stacks SECONDS)
 			owner.set_eye_blur_if_lower(3 * stacks SECONDS)
 
 /datum/status_effect/stacking/phobia_reaction/fadeout_effect()

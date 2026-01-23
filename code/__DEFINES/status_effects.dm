@@ -22,6 +22,12 @@
 /// so don't worry if your abstract status effect doesn't actually set this
 #define STATUS_EFFECT_ID_ABSTRACT "abstract"
 
+///Processing flags - used to define the speed at which the status will work
+///This is fast - 0.2s between ticks (I believe!)
+#define STATUS_EFFECT_FAST_PROCESS 0
+///This is slower and better for more intensive status effects - 1s between ticks
+#define STATUS_EFFECT_NORMAL_PROCESS 1
+
 //Incapacitated status effect flags
 /// If the incapacitated status effect will ignore a mob in restraints (handcuffs)
 #define IGNORE_RESTRAINTS (1<<0)

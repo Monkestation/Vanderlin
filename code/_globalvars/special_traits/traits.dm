@@ -963,8 +963,7 @@
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
-	var/datum/inspiration/I = new /datum/inspiration(character)
-	I.grant_inspiration(character, bard_tier = BARD_T2)
+	character.inspiration = new /datum/inspiration(character)
 	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
 
 /datum/special_trait/baothan

@@ -17,7 +17,7 @@
 /atom/movable/screen/alert/status_effect/buff/playing_music
 	name = "Playing Music"
 	desc = "Let the world hear my craft."
-	icon_state = "buff"
+	icon_state = "play_music"
 
 /datum/status_effect/buff/playing_music
 	id = "play_music"
@@ -49,7 +49,6 @@
 	plane = GAME_PLANE_UPPER
 	layer = ABOVE_ALL_MOB_LAYER
 
-
 /obj/effect/temp_visual/songs/Initialize(mapload)
 	. = ..()
 	alpha = 140
@@ -58,31 +57,3 @@
 	var/matrix/m = matrix()
 	m.Scale(0.75, 0.75)
 	transform = m
-
-
-/obj/effect/temp_visual/songs/inspiration_dirget1
-	icon_state = "dirge_t1_base"
-
-/obj/effect/temp_visual/songs/inspiration_dirget2
-	icon_state = "dirge_t2_base"
-
-/obj/effect/temp_visual/songs/inspiration_dirget3
-	icon_state = "dirge_t3_base"
-
-/obj/effect/temp_visual/songs/inspiration_melodyt1
-	icon_state = "melody_t1_base"
-
-/obj/effect/temp_visual/songs/inspiration_melodyt2
-	icon_state = "melody_t2_base"
-
-/obj/effect/temp_visual/songs/inspiration_melodyt3
-	icon_state = "melody_t3_base"
-
-/obj/effect/temp_visual/songs/inspiration_bardsongt1
-	icon_state = "bardsong_t1_base"
-
-/obj/effect/temp_visual/songs/inspiration_bardsongt2
-	icon_state = "bardsong_t2_base"
-
-/obj/effect/temp_visual/songs/inspiration_bardsongt3
-	icon_state = "bardsong_t3_base"
