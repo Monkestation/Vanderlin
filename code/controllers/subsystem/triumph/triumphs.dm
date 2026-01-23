@@ -350,6 +350,7 @@ SUBSYSTEM_DEF(triumphs)
 
 	if(!fexists(target_file))
 		reset_or_create_data(target_ckey)
+		return
 
 	var/list/data = json_decode(file2text(target_file))
 
