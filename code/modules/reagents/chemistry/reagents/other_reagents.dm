@@ -100,8 +100,22 @@
 
 /datum/reagent/water/tainted/on_mob_life(mob/living/carbon/M)
 	// Nobody is exempt, nobody can drink this without bad effects.
-	M.add_nausea(1)
+	M.add_nausea(2)
 	// Special status eventually, TODO fungal infection.
+	// Spreads faster the sicker you are.
+	switch(M.nausea)
+		if(3 to 9)
+			M.apply_status_effect(/datum/status_effect/debuff/mushroomt1)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt2)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt3)
+		if(9 to 15)
+			M.apply_status_effect(/datum/status_effect/debuff/mushroomt2)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt1)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt3)
+		if(15 to INFINITY)
+			M.apply_status_effect(/datum/status_effect/debuff/mushroomt3)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt2)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt1)
 
 /*
  *	Water reaction to turf

@@ -630,6 +630,18 @@
 	desc = "<span class='warning'>I'm nervous and on edge and I can't stand still!!</span>\n"
 	stress_change = 2
 
+/datum/stress_event/mushroom
+	stress_change = 3
+	desc = "<span class='red'>My skin itches.</span>"
+
+/datum/stress_event/mushroom_grown
+	stress_change = 6
+	desc = "<span class='red'>Mycellium rashes are breaking out all over my skin!</span>"
+
+/datum/stress_event/mushroom_full
+	stress_change = 9
+	desc = "<span class='red'>I CAN'T STOP SCRATCHING! GET IT OUT OF ME!</span>"
+
 /datum/stress_event/vomit
 	desc = "<span class='warning'>I just threw up. Gross.</span>\n"
 	stress_change = 2
