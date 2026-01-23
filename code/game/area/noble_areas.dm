@@ -2,7 +2,7 @@
 
 /area/indoors/town/keep
 	name = "Manor"
-	icon = 'icons/turf/areas_manor.dmi'
+	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor"
 	background_track = 'sound/music/area/manor.ogg'
 	background_track_dusk = null
@@ -13,13 +13,15 @@
 	. = ..()
 	first_time_text = "THE KEEP OF [uppertext(SSmapping.config.map_name)]"
 
+/area/outdoors/town/keep
+	name = "Keep Grounds"
+	icon = 'icons/turf/areas/manor.dmi'
+	icon_state = "manor_out"
+
 /area/outdoors/town/keep/Initialize()
 	. = ..()
 	first_time_text = "[uppertext(SSmapping.config.map_name)] KEEP GROUNDS"
 
-/area/outdoors/town/Initialize()
-	. = ..()
-	first_time_text = "[uppertext(SSmapping.config.map_name)]"
 
 /area/indoors/town/keep/throne
 	name = "Throne Room"
@@ -153,7 +155,7 @@
 	name = "Keep Garrison"
 	icon_state = "manorgarri"
 
-/area/indoors/town/keepgate
+/area/indoors/town/keep/gate
 	name = "Manor Gate"
 	icon_state = "manorgate"
 	background_track = 'sound/music/area/manorgarri.ogg'
@@ -172,9 +174,9 @@
 	background_track_dusk = null
 	background_track_night = null
 
-/area/indoors/town/magician
+/area/indoors/town/keep/magician
 	name = "Wizard's Tower"
-	icon_state = "magician"
+	icon_state = "magiciantower"
 	ambient_index = AMBIENCE_MYSTICAL
 	background_track = 'sound/music/area/magiciantower.ogg'
 	background_track_dusk = null
@@ -190,7 +192,7 @@
 
 // Minor Nobles
 /area/indoors/town/noble_manor
-	icon = 'icons/turf/areas_manor.dmi'
+	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "noble"
 	background_track = 'sound/music/area/manor.ogg'
 	background_track_dusk = null
@@ -198,7 +200,7 @@
 	converted_type = /area/outdoors/exposed/manorgarri
 
 /area/outdoors/town/noble_manor
-	icon = 'icons/turf/areas_manor.dmi'
+	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "noble_out"
 
 /area/indoors/town/noble_manor/blue

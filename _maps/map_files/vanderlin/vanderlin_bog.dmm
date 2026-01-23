@@ -2671,7 +2671,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "bII" = (
 /obj/item/reagent_containers/food/snacks/fish/shrimp,
 /turf/open/floor/abyss_sand,
@@ -2764,7 +2764,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "bQy" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/spider/cocoon,
@@ -3108,7 +3108,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "csu" = (
 /obj/structure/fluff/statue/myth,
 /turf/open/floor/dirt/road,
@@ -3238,7 +3238,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "cAV" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -3399,7 +3399,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "cNT" = (
 /obj/structure/flora/grass/bush{
 	pixel_x = -20;
@@ -3680,7 +3680,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "dhP" = (
 /obj/structure/well/fountain{
 	pixel_x = -16;
@@ -3858,7 +3858,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "dpX" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/ruinedwood/spiral,
@@ -3996,7 +3996,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "dBm" = (
 /obj/structure/stairs/stone/church{
 	dir = 1;
@@ -4227,7 +4227,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "dQe" = (
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
@@ -4314,7 +4314,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "dWX" = (
 /obj/structure/table/church{
 	color = "#7D9BAE"
@@ -4726,7 +4726,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "eDT" = (
 /obj/effect/decal/carpet{
 	pixel_x = 15;
@@ -4995,7 +4995,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "eZv" = (
 /obj/structure/window/stained/zizo,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -5084,7 +5084,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "feY" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line,
@@ -5281,7 +5281,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "fro" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -5768,7 +5768,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "fWB" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -6203,7 +6203,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "guE" = (
 /obj/structure/inert_bonepile,
 /turf/open/floor/abyss_tile/three{
@@ -6381,7 +6381,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "gIG" = (
 /obj/item/clothing/cloak/stabard/templar/abyssor,
 /obj/item/clothing/armor/brigandine/abyssor,
@@ -6458,7 +6458,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "gOT" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE"
@@ -6798,7 +6798,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "hms" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
@@ -6881,7 +6881,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "hxR" = (
 /obj/structure/stairs/stone/church{
 	dir = 1;
@@ -7055,7 +7055,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "hKf" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -7207,7 +7207,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "hVb" = (
 /obj/structure/fluff/walldeco/gear{
 	pixel_x = 0;
@@ -7247,7 +7247,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "hWw" = (
 /obj/structure/table/stone_small{
 	color = "#7D9BAE"
@@ -7739,7 +7739,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "iFK" = (
 /turf/closed/sea_fog,
 /area/outdoors/mountains)
@@ -7762,7 +7762,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "iHn" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -8188,7 +8188,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "jhf" = (
 /mob/living/simple_animal/hostile/retaliate/shark{
 	faction = list("Hostile")
@@ -8296,7 +8296,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "joD" = (
 /obj/effect/decal/shadow_floor{
 	dir = 10
@@ -8409,7 +8409,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "jwd" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/fluff/wallclock/vampire,
@@ -9182,7 +9182,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "kuH" = (
 /obj/structure/bars/pipe{
 	dir = 8
@@ -9384,7 +9384,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "kGM" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -9517,7 +9517,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "kOF" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -9768,7 +9768,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "lhy" = (
 /mob/living/simple_animal/hostile/retaliate/mimic{
 	faction = list("mimic","Undead")
@@ -9795,7 +9795,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "lkx" = (
 /obj/structure/chair/bench/couch/left/alt{
 	dir = 8
@@ -10183,7 +10183,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "lHy" = (
 /obj/item/chair/stool/bar,
 /obj/item/reagent_containers/food/snacks/cooked/frysteak,
@@ -10197,7 +10197,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "lIw" = (
 /obj/structure/stairs/abyss{
 	color = "#7D9BAE"
@@ -10269,7 +10269,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "lMw" = (
 /mob/living/simple_animal/hostile/deepone{
 	faction = list("Hostile");
@@ -10469,7 +10469,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "met" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
@@ -10507,7 +10507,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "mfy" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -10617,7 +10617,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "mpv" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/grass,
@@ -10655,7 +10655,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "mqA" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/gem/onyxa,
@@ -10737,7 +10737,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "mxc" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/ruinedwood/darker,
@@ -10904,7 +10904,7 @@
 	color = "#406379";
 	desc = "A Hard to destroy wall stands before you with the godly might of Abyssor coursing through it."
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "mOI" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -10988,7 +10988,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "mUG" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/cleanable/dirt,
@@ -11147,7 +11147,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "nhj" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -11758,7 +11758,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "nVY" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -11777,7 +11777,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "nXp" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/abyss_tile/three{
@@ -11832,7 +11832,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "oaL" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 4;
@@ -11936,7 +11936,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/water/blood,
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "okx" = (
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
@@ -12186,7 +12186,7 @@
 /turf/closed/wall/window/stained/alt{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "oxK" = (
 /mob/living/simple_animal/hostile/retaliate/shark{
 	faction = list("Hostile")
@@ -12296,7 +12296,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "oGY" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt/road,
@@ -12408,7 +12408,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "oPp" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
@@ -12546,7 +12546,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "pfy" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -12760,7 +12760,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "pww" = (
 /obj/item/reagent_containers/food/snacks/fish/carp,
 /turf/open/transparent/glass,
@@ -12984,13 +12984,13 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "pSl" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "pSL" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/inhumen,
 /turf/open/floor/dirt,
@@ -13219,7 +13219,7 @@
 	color = "#880808"
 	},
 /turf/open/water/blood,
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "qln" = (
 /obj/structure/wild_plant/nospread/wheat,
 /turf/open/floor/dirt,
@@ -13883,7 +13883,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "rks" = (
 /obj/structure/flora/shells,
 /turf/open/floor/dirt,
@@ -14468,7 +14468,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "sbv" = (
 /obj/effect/decal/carpet/kover_black{
 	pixel_x = 1;
@@ -14477,7 +14477,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "sbz" = (
 /obj/structure/table/map/vanderlin{
 	dir = 10
@@ -14693,7 +14693,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "soy" = (
 /obj/structure/trap/shock{
 	invisibility = 1
@@ -14984,7 +14984,7 @@
 /area/under/cavewet)
 "sMR" = (
 /turf/open/water/blood,
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "sNJ" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/outie{
 	dir = 8
@@ -15275,7 +15275,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "tmA" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -15425,7 +15425,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "txO" = (
 /obj/item/natural/stone,
 /turf/open/floor/herringbone,
@@ -15652,7 +15652,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "tSA" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -15737,7 +15737,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "tXH" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/bath,
@@ -15976,7 +15976,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "ulp" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -15991,7 +15991,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "unE" = (
 /turf/open/floor/rooftop/green{
 	dir = 8
@@ -16469,7 +16469,7 @@
 	color = "#880808"
 	},
 /turf/open/water/blood,
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "uXe" = (
 /obj/structure/door/abyss{
 	color = "#406379"
@@ -16591,7 +16591,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "veP" = (
 /turf/open/floor/carpet/red,
 /area/indoors/ship)
@@ -16697,7 +16697,7 @@
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "vkW" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -16889,7 +16889,7 @@
 	pixel_x = 0;
 	pixel_y = 0
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "vAq" = (
 /obj/item/fishing/lure/meat,
 /obj/structure/table/stone_small{
@@ -16922,7 +16922,7 @@
 	name = "abyssal wall";
 	desc = "A Hard to destroy wall stands before you with the godly might of Abyssor coursing through it."
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "vCd" = (
 /obj/structure/handcart,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -16958,7 +16958,7 @@
 "vIn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/water/blood,
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "vIC" = (
 /obj/structure/flora/grass/mushroom,
 /turf/open/floor/grass/red,
@@ -17049,7 +17049,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "vMk" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/closet/crate/chest/wicker,
@@ -17578,7 +17578,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "wDT" = (
 /obj/structure/door/abyss{
 	color = "#406379"
@@ -17896,7 +17896,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "xai" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
@@ -18233,7 +18233,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "xyr" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -18518,7 +18518,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "xOc" = (
 /obj/structure/fluff/nest,
 /obj/item/reagent_containers/food/snacks/cooked/egg{
@@ -18626,7 +18626,7 @@
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "xPU" = (
 /obj/structure/fluff/walldeco/stone{
 	icon_state = "walldec3";
@@ -18695,7 +18695,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#314C5D"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "xUU" = (
 /obj/structure/stairs/stone/church{
 	color = "#7D9BAE"
@@ -18740,7 +18740,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#29404E"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "xWV" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -18861,7 +18861,7 @@
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
-/area/indoors/town/magician)
+/area/indoors/wilderness/magic)
 "yjq" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{

@@ -30,7 +30,7 @@
 "aaD" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aaL" = (
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	redstone_id = "KeepKitchenPassage"
@@ -258,7 +258,7 @@
 	pixel_y = -2
 	},
 /turf/open/floor/hexstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ahJ" = (
 /obj/structure/closet/crate/chest,
 /obj/item/fishing/lure/speckled,
@@ -287,7 +287,7 @@
 "aim" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/transparent/openspace,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aiN" = (
 /obj/structure/minecart_rail,
 /turf/open/floor/naturalstone,
@@ -344,7 +344,7 @@
 	},
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ajw" = (
 /obj/item/bin/water,
 /turf/open/floor/ruinedwood/darker,
@@ -352,7 +352,7 @@
 "ajz" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ajE" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/blocks,
@@ -423,7 +423,7 @@
 /obj/item/paper,
 /obj/item/natural/feather,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "akV" = (
 /obj/structure/table/wood/counter,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -553,7 +553,7 @@
 	dir = 6
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ank" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
@@ -566,7 +566,7 @@
 	pixel_y = 9
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "anA" = (
 /obj/structure/bed/shit,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -585,7 +585,7 @@
 "aob" = (
 /obj/structure/chair/wood/alt,
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aol" = (
 /turf/closed/wall/mineral/decostone/center,
 /area/indoors/town/church)
@@ -604,7 +604,7 @@
 	},
 /obj/structure/table/wood/plain/alt,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aoI" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
@@ -694,7 +694,7 @@
 	pixel_y = -6
 	},
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "apV" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -782,7 +782,7 @@
 /area/indoors/town)
 "ars" = (
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "arN" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -821,7 +821,7 @@
 /area/indoors/town/keep/halls)
 "atb" = (
 /turf/open/floor/cobblerock,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "atp" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/cobble/mossy,
@@ -1019,7 +1019,7 @@
 /obj/structure/nocdevice,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "axi" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/structure/breaker{
@@ -1031,7 +1031,7 @@
 /obj/structure/chair/stool/bar,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "axv" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/dirt,
@@ -1235,7 +1235,7 @@
 /obj/item/clothing/head/roguehood/colored/mage,
 /obj/item/clothing/shirt/robe/colored/mage,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aBt" = (
 /obj/structure/flora/grass,
 /obj/structure/fake_machine/mail{
@@ -1284,7 +1284,7 @@
 "aCq" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "aCC" = (
 /obj/structure/closet/dirthole/closed/loot,
 /obj/structure/gravemarker,
@@ -1337,7 +1337,7 @@
 /area/indoors/town/clocktower)
 "aFS" = (
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aFT" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/river{
@@ -1530,7 +1530,7 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aKC" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/locker,
@@ -1716,7 +1716,7 @@
 "aMY" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aNd" = (
 /obj/structure/fluff/walldeco/med6{
 	pixel_y = 31
@@ -2101,7 +2101,7 @@
 /obj/item/reagent_containers/glass/bucket/pot/stone,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aUa" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -2127,7 +2127,7 @@
 /obj/effect/mapping_helpers/access/keyset/manor/mage,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "aUP" = (
 /turf/open/floor/tile/checkeralt,
 /area/indoors/town/tavern)
@@ -2222,7 +2222,7 @@
 /area/indoors/town/keep/halls/s)
 "aXE" = (
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "aXM" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/water/ocean,
@@ -2352,7 +2352,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door/violet,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "bbb" = (
 /obj/machinery/light/fueled/wallfire/candle/l{
 	pixel_x = 0;
@@ -2430,11 +2430,11 @@
 "bcZ" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "bdc" = (
 /obj/structure/fluff/walldeco/customflag,
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "bdj" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/keyset/church/general,
@@ -2522,7 +2522,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "bfu" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -2548,7 +2548,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/tower,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "bfD" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
@@ -3156,7 +3156,7 @@
 	icon_state = "grass2"
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "bws" = (
 /obj/structure/stairs{
 	dir = 4
@@ -3387,7 +3387,7 @@
 /area/indoors/town/keep/knight)
 "bCv" = (
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "bCB" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 4;
@@ -3523,7 +3523,7 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "bEQ" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -3547,7 +3547,7 @@
 "bFs" = (
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "bFA" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "ServantRoomPassage"
@@ -3587,7 +3587,7 @@
 "bGR" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "bHi" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
@@ -3715,7 +3715,7 @@
 "bKg" = (
 /obj/structure/bars/cemetery,
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "bKi" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass,
@@ -3735,7 +3735,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "bLb" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/tile/masonic{
@@ -3840,7 +3840,7 @@
 "bOb" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "bOe" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/crate,
@@ -4067,7 +4067,7 @@
 "bSp" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "bSA" = (
 /obj/machinery/light/fueled/chand,
 /turf/open/transparent/openspace,
@@ -4351,7 +4351,7 @@
 	pixel_y = 6
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "bYu" = (
 /obj/structure/fluff/statue,
 /obj/machinery/light/fueled/torchholder,
@@ -4418,7 +4418,7 @@
 "cbH" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "cbM" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/closet/crate/drawer,
@@ -4454,7 +4454,7 @@
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "cdL" = (
 /obj/structure/fluff/railing/border,
 /turf/open/transparent/openspace,
@@ -4634,7 +4634,7 @@
 /obj/structure/fluff/railing/border,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "chp" = (
 /obj/structure/flora/tree/dying_bush,
 /obj/structure/flora/ausbushes/ppflowers,
@@ -4743,7 +4743,7 @@
 /area/under/town/basement)
 "cjL" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ckb" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -4900,7 +4900,7 @@
 /area/indoors/town/keep/servant)
 "cnE" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "cnL" = (
 /obj/structure/handcart{
 	dir = 4
@@ -4970,7 +4970,7 @@
 	dir = 5
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "cqi" = (
 /obj/structure/door/iron/bars{
 	name = "Green Noble Manor"
@@ -5024,7 +5024,7 @@
 "cra" = (
 /obj/structure/window/openclose,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "crc" = (
 /obj/item/key/garrison,
 /obj/item/key/garrison,
@@ -5091,7 +5091,7 @@
 "crV" = (
 /obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "csm" = (
 /turf/open/floor/tile/checker,
 /area/indoors/town/vault)
@@ -5282,7 +5282,7 @@
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/keyset/manor/mage,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "cwX" = (
 /obj/structure/door/fancy{
 	name = "Green Noble Manor"
@@ -5509,7 +5509,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door/violet,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "cCo" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
@@ -5739,7 +5739,7 @@
 	},
 /obj/structure/chair/bench/coucha/redright,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "cHy" = (
 /obj/effect/waterfall{
 	pixel_y = 0
@@ -5907,7 +5907,7 @@
 	pixel_y = -11
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "cKJ" = (
 /turf/open/floor/concrete,
 /area/outdoors/town)
@@ -6412,13 +6412,13 @@
 	redstone_id = "WizTowerPass"
 	},
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "cVn" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/mortar,
 /obj/item/pestle,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "cVt" = (
 /obj/structure/fluff/walldeco/painting/seraphina,
 /turf/closed/wall/mineral/decorstone,
@@ -6769,7 +6769,7 @@
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "deq" = (
 /obj/structure/table/wood/plain_alt,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -6935,7 +6935,7 @@
 	dir = 8
 	},
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "djh" = (
 /obj/item/ore/coal,
 /obj/item/ore/coal,
@@ -6953,7 +6953,7 @@
 /area/outdoors/town)
 "djA" = (
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "djC" = (
 /obj/item/fake_machine/drugtrade,
 /turf/open/floor/greenstone,
@@ -7040,7 +7040,7 @@
 "dlr" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "dlG" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/garrison)
@@ -7178,7 +7178,7 @@
 /obj/structure/table/wood,
 /obj/structure/fake_machine/atm,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "dnW" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/dirt,
@@ -7499,7 +7499,7 @@
 	},
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "dvn" = (
 /obj/structure/table/wood/large/corner{
 	dir = 9
@@ -7595,7 +7595,7 @@
 /area/indoors/town)
 "dwK" = (
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "dwX" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -7741,7 +7741,7 @@
 	redstone_id = "keepgatekybraxor"
 	},
 /turf/open/floor/metal/alt,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "dCm" = (
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/woods_safe)
@@ -7871,7 +7871,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "dGr" = (
 /obj/effect/mapping_helpers/structure/breaker{
 	plane = -3
@@ -8016,7 +8016,7 @@
 	},
 /obj/item/recipe_book/alchemy,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "dIb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -8076,7 +8076,7 @@
 /area/indoors/town/keep/knight)
 "dJj" = (
 /turf/closed/wall/mineral/stone/window,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "dJo" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/paint_palette{
@@ -8454,7 +8454,7 @@
 "dTS" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/metal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "dUm" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/woodturned,
@@ -8504,7 +8504,7 @@
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/essence/splitter,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "dVu" = (
 /obj/structure/door/green{
 	name = "forest garrison barracks"
@@ -8670,7 +8670,7 @@
 "dZa" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "dZh" = (
 /obj/structure/window/openclose{
 	dir = 4
@@ -8814,7 +8814,7 @@
 "edj" = (
 /obj/structure/chair/stool,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "edx" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt,
@@ -8913,7 +8913,7 @@
 "ehp" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ehD" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/paper,
@@ -8931,7 +8931,7 @@
 "ehE" = (
 /obj/item/natural/stone,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ehK" = (
 /obj/structure/fluff/big_chain{
 	pixel_y = 12
@@ -8991,7 +8991,7 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "eil" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/reagent_containers/glass/bottle/wine,
@@ -9004,7 +9004,7 @@
 /area/indoors/town/keep/hand)
 "ejd" = (
 /turf/open/floor/hay,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ejl" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -9244,7 +9244,7 @@
 /obj/item/clothing/neck/onyxaamulet,
 /obj/item/clothing/wrists/gem/onyxabracelet,
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "eoy" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -9295,7 +9295,7 @@
 "epr" = (
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "epH" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/sand,
@@ -9447,7 +9447,7 @@
 /area/indoors/town/keep/throne)
 "ess" = (
 /turf/open/water/bath,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "esv" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -9597,7 +9597,7 @@
 /area/indoors/town/vault)
 "ewp" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ewy" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/dungeon,
@@ -9614,7 +9614,7 @@
 	dir = 4
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ewF" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/blocks/stonered,
@@ -9650,7 +9650,7 @@
 "exg" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "exl" = (
 /obj/structure/stairs{
 	dir = 8
@@ -10082,7 +10082,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/bookcase/random,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "eKL" = (
 /obj/structure/table/wood/large/corner{
 	dir = 8
@@ -10184,7 +10184,7 @@
 	dir = 4
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "eMv" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -10251,7 +10251,7 @@
 /area/indoors/town/merc_guild)
 "eOc" = (
 /turf/closed/wall/mineral/decostone/center,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "eOm" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/naturalstone,
@@ -10534,7 +10534,7 @@
 "eWW" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "eXa" = (
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/blocks/newstone/alt,
@@ -10708,7 +10708,7 @@
 /area/outdoors/town)
 "fbG" = (
 /turf/open/floor/grass/yel,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "fbM" = (
 /turf/open/floor/woodturned/nosmooth,
 /area/outdoors/town)
@@ -10753,7 +10753,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fcq" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/halls/e)
@@ -10780,7 +10780,7 @@
 	pixel_y = -2
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fcS" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -10964,7 +10964,7 @@
 "ffF" = (
 /obj/structure/handcart,
 /turf/open/floor/twig,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ffR" = (
 /obj/item/key/vault,
 /obj/effect/mapping_helpers/access/locker,
@@ -11131,7 +11131,7 @@
 /obj/item/clothing/head/roguehood/colored/mage,
 /obj/item/clothing/shirt/robe/colored/mage,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fkK" = (
 /obj/item/ore/coal{
 	pixel_x = -6;
@@ -11264,7 +11264,7 @@
 /area/indoors/town/church)
 "fnq" = (
 /turf/open/floor/metal,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "fnr" = (
 /obj/item/clothing/neck/psycross/silver/eora,
 /obj/item/candle/eora/lit,
@@ -11288,7 +11288,7 @@
 "fnP" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "fnQ" = (
 /obj/structure/chair/wood/alt{
 	dir = 1
@@ -11890,7 +11890,7 @@
 	},
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "fEb" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/bundle/curred_hide{
@@ -12216,7 +12216,7 @@
 /area/outdoors/beach)
 "fKS" = (
 /turf/open/floor/tile/bath,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fKU" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -12234,7 +12234,7 @@
 	icon_state = "grass4"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "fLm" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -12305,18 +12305,18 @@
 "fNt" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fNU" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fOd" = (
 /obj/structure/fluff/walldeco/mageguild{
 	pixel_x = 0;
 	pixel_y = -22
 	},
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fOg" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -12532,7 +12532,7 @@
 "fST" = (
 /obj/structure/fluff/walldeco/mageguild,
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fTa" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/town/smithy)
@@ -12550,7 +12550,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fTC" = (
 /obj/structure/fake_machine/mail{
 	mailtag = "Blue"
@@ -12730,7 +12730,7 @@
 "fXd" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "fXg" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt/road,
@@ -12853,7 +12853,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "gas" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -12928,7 +12928,7 @@
 	redstone_id = "keepgatesouth"
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "gcF" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 32
@@ -12938,7 +12938,7 @@
 "gcG" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gcI" = (
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/bucket/pot/stone,
@@ -12959,7 +12959,7 @@
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/double_pelt,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gds" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -13204,7 +13204,7 @@
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gmF" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -13307,7 +13307,7 @@
 /area/indoors/town/clocktower)
 "gob" = (
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "goh" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/stairs{
@@ -13401,7 +13401,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/mage,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gqN" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/structure/fluff/walldeco/vinez,
@@ -13490,7 +13490,7 @@
 	dir = 8
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "gsT" = (
 /obj/structure/roguerock{
 	icon_state = "rock4"
@@ -13541,7 +13541,7 @@
 "gtE" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/tile/bath,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gtI" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/double_pelt,
@@ -13754,7 +13754,7 @@
 /area/under/town/basement)
 "gyV" = (
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "gzb" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /obj/item/clothing/cloak/apron/waist/colored/bar,
@@ -13781,7 +13781,7 @@
 /obj/item/reagent_containers/glass/bottle/wine,
 /obj/item/reagent_containers/glass/bottle/wine,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gzF" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -13834,7 +13834,7 @@
 /area/under/town/basement)
 "gAC" = (
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gAH" = (
 /obj/item/candle/yellow{
 	pixel_x = 11;
@@ -14005,7 +14005,7 @@
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/keyset/manor/mage,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gEP" = (
 /obj/structure/composter/halffull,
 /turf/open/floor/blocks,
@@ -14184,7 +14184,7 @@
 /obj/structure/chair/bench/couch/right/lord_secondary,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gKr" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood/nosmooth,
@@ -14246,7 +14246,7 @@
 "gMp" = (
 /obj/structure/fluff/railing/border,
 /turf/open/transparent/openspace,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "gMq" = (
 /obj/item/flashlight/flare/torch/lantern/copper,
 /obj/structure/closet/crate/drawer,
@@ -14411,7 +14411,7 @@
 	dir = 9
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "gRs" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/servant)
@@ -14624,7 +14624,7 @@
 "gVB" = (
 /obj/structure/plough,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "gVK" = (
 /turf/open/floor/grass,
 /area/outdoors/basin/safe)
@@ -14658,7 +14658,7 @@
 	},
 /obj/structure/carpet/blue,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "gXR" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -14884,7 +14884,7 @@
 	},
 /obj/machinery/tanningrack,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hdv" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/candle/yellow{
@@ -15014,7 +15014,7 @@
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/spiderhoney/honey,
 /turf/open/floor/twig,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "hgR" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/dirt/road,
@@ -15192,7 +15192,7 @@
 /area/outdoors/town)
 "hkJ" = (
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "hkQ" = (
 /turf/open/floor/carpet,
 /area/under/town/basement)
@@ -15318,7 +15318,7 @@
 	pixel_x = 32
 	},
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hpq" = (
 /obj/structure/door/fancy{
 	name = "Red Noble Manor"
@@ -15383,7 +15383,7 @@
 /area/outdoors/town/roofs)
 "hqP" = (
 /turf/open/floor/tile,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hqT" = (
 /obj/structure/bars/pipe{
 	dir = 4
@@ -15459,7 +15459,7 @@
 "htm" = (
 /obj/structure/fluff/statue/scare,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "htq" = (
 /obj/structure/door/window,
 /turf/open/floor/ruinedwood/darker,
@@ -15482,7 +15482,7 @@
 /obj/item/reagent_containers/food/snacks/meat/mince/fish,
 /obj/item/reagent_containers/food/snacks/meat/mince/fish,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "htX" = (
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/carpet/green,
@@ -15515,12 +15515,12 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "huI" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 4
 	},
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "huW" = (
 /obj/structure/kneestingers,
 /turf/open/floor/greenstone,
@@ -15601,7 +15601,7 @@
 /obj/structure/bookcase/random,
 /obj/item/recipe_book/arcyne,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hwn" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -15866,7 +15866,7 @@
 /obj/structure/bed/shit,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hDp" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -16058,7 +16058,7 @@
 "hGP" = (
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hGV" = (
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/dirt,
@@ -16076,7 +16076,7 @@
 "hHo" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "hHv" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -16155,7 +16155,7 @@
 	dir = 8
 	},
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hJY" = (
 /obj/structure/door{
 	lockid = "luxroomiii";
@@ -16384,7 +16384,7 @@
 /obj/item/recipe_book/arcyne,
 /obj/item/recipe_book/arcyne,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hPi" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -16423,7 +16423,7 @@
 "hQC" = (
 /obj/structure/window/solid,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hQD" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -16676,7 +16676,7 @@
 /area/indoors/town)
 "hWx" = (
 /turf/open/floor/twig,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "hWy" = (
 /obj/structure/bookcase/random,
 /obj/structure/carpet/red,
@@ -16743,7 +16743,7 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "hYK" = (
 /obj/structure/chair/hotspring_bench/left,
 /turf/open/floor/grass/red,
@@ -16838,13 +16838,13 @@
 	dir = 4
 	},
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ibj" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ibm" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/church/inquisition)
@@ -16867,7 +16867,7 @@
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/keyset/town/tower,
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ibX" = (
 /obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
@@ -17001,7 +17001,7 @@
 	},
 /obj/structure/table/wood,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ifP" = (
 /obj/structure/stairs/fancy/r,
 /turf/open/floor/blocks,
@@ -17060,7 +17060,7 @@
 /obj/item/natural/stone,
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "igH" = (
 /obj/structure/fluff/railing/tall{
 	dir = 1
@@ -17226,7 +17226,7 @@
 	pixel_y = 7
 	},
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ilM" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/cobblerock,
@@ -17253,7 +17253,7 @@
 "imw" = (
 /obj/structure/apiary/starter,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "imx" = (
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/ruinedwood/alt,
@@ -17658,7 +17658,7 @@
 "iwp" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "iwu" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -17815,7 +17815,7 @@
 	name = "gatekeeper's bedroom door"
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "iAX" = (
 /obj/effect/decal/cobblerockedge/alt{
 	dir = 6
@@ -17858,7 +17858,7 @@
 "iBR" = (
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "iBX" = (
 /obj/structure/flora/grass/water,
 /turf/open/floor/greenstone,
@@ -17870,7 +17870,7 @@
 "iCh" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "iCn" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/villagegarrison)
@@ -18265,7 +18265,7 @@
 /obj/item/recipe_book/arcyne,
 /obj/item/recipe_book/alchemy,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "iKJ" = (
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
@@ -18334,7 +18334,7 @@
 	layer = 2.81
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "iNg" = (
 /obj/structure/rousman_hole,
 /turf/open/floor/greenstone,
@@ -18440,7 +18440,7 @@
 	},
 /obj/structure/carpet/blue,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "iPa" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass,
@@ -18530,7 +18530,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "iSR" = (
 /obj/structure/fake_machine/hailer,
 /obj/structure/table/wood/counter/end,
@@ -18618,7 +18618,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "iUC" = (
 /obj/structure/table/map{
 	dir = 5
@@ -18653,7 +18653,7 @@
 	dir = 5
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "iVG" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
@@ -18817,7 +18817,7 @@
 "iZP" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "iZU" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/clothing/neck/psycross/silver/necra{
@@ -19171,7 +19171,7 @@
 	},
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "jiA" = (
 /obj/effect/landmark/start/priest,
 /obj/effect/decal/carpet/kover_purple{
@@ -19264,7 +19264,7 @@
 "jkz" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jkR" = (
 /obj/structure/flora/grass/bush_meagre,
 /obj/structure/fluff/railing/wood,
@@ -19328,7 +19328,7 @@
 /obj/structure/stairs,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jnS" = (
 /obj/structure/table/wood/bar,
 /obj/structure/bars/bent,
@@ -19430,7 +19430,7 @@
 "jpF" = (
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jpG" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/blocks,
@@ -19755,7 +19755,7 @@
 "jxk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jxl" = (
 /obj/item/reagent_containers/food/snacks/crow,
 /turf/open/floor/ruinedwood,
@@ -19995,7 +19995,7 @@
 	pixel_y = 0
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "jBN" = (
 /obj/structure/fluff/walldeco/painting,
 /turf/closed/wall/mineral/craftstone,
@@ -20073,7 +20073,7 @@
 "jDI" = (
 /obj/structure/fluff/walldeco/mageguild,
 /turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jDP" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -20172,7 +20172,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/hoe,
 /turf/open/floor/twig,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "jFW" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -20193,14 +20193,14 @@
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jGE" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/effect/decal/borderfall{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jGJ" = (
 /obj/effect/landmark/start/clinicapprentice,
 /turf/open/floor/churchrough,
@@ -20212,7 +20212,7 @@
 "jGY" = (
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/hay,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "jHd" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -20444,7 +20444,7 @@
 	redstone_id = "keepgatenorth"
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "jMu" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 9;
@@ -20596,7 +20596,7 @@
 /obj/item/recipe_book/arcyne,
 /obj/item/recipe_book/alchemy,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jRg" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/recipe_book/engineering,
@@ -20699,7 +20699,7 @@
 /area/under/town/basement)
 "jTP" = (
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "jTQ" = (
 /obj/structure/rack,
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow{
@@ -20956,7 +20956,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/soilson,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "kbo" = (
 /obj/structure/flora/grass/herb/random,
 /turf/open/floor/dirt,
@@ -21130,7 +21130,7 @@
 "kfR" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "kfW" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/blocks/stonered/tiny,
@@ -21226,7 +21226,7 @@
 	dir = 1
 	},
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kin" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -21370,7 +21370,7 @@
 "klT" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "klY" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/turned,
@@ -21743,7 +21743,7 @@
 "ktc" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "kti" = (
 /obj/effect/waterfall,
 /obj/structure/fluff/railing/wood{
@@ -21777,7 +21777,7 @@
 "kub" = (
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "kup" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/shop)
@@ -21915,7 +21915,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kwJ" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
@@ -22038,7 +22038,7 @@
 /obj/item/paper,
 /obj/item/natural/feather,
 /turf/open/floor/metal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kzK" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /obj/structure/closet/crate/chest/wicker,
@@ -22106,7 +22106,7 @@
 "kCm" = (
 /mob/living/simple_animal/hostile/retaliate/goat,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "kCx" = (
 /obj/structure/door/fancy{
 	name = "Keep Entrance"
@@ -22211,7 +22211,7 @@
 	},
 /obj/structure/carpet/blue,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kEH" = (
 /obj/structure/flora/grass,
 /turf/closed/wall/mineral/stone,
@@ -22239,7 +22239,7 @@
 "kFb" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kFd" = (
 /obj/item/bedsheet/cloth,
 /obj/structure/bed/mediocre,
@@ -22392,7 +22392,7 @@
 /area/indoors/town/merc_guild)
 "kIE" = (
 /turf/open/transparent/openspace,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kIL" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -22422,7 +22422,7 @@
 	dir = 1
 	},
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kJd" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "CaptainPassage"
@@ -22708,10 +22708,10 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /obj/structure/bookcase/random/archive,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kRh" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "kRk" = (
 /turf/open/floor/grass,
 /area/under/cavelava)
@@ -22784,7 +22784,7 @@
 	dir = 4
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "kTW" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "ArchiveTunnel3"
@@ -23437,7 +23437,7 @@
 /obj/item/clothing/face/spectacles/golden,
 /obj/item/clothing/face/spectacles,
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ljc" = (
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	redstone_id = "ServantRoomPassage"
@@ -23458,7 +23458,7 @@
 	pixel_y = -33
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ljE" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -23610,7 +23610,7 @@
 	icon_state = "grass4"
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "lmO" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/churchmarble,
@@ -23665,7 +23665,7 @@
 "lnN" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/water/bath,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lnO" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 8
@@ -23718,7 +23718,7 @@
 /obj/structure/bookcase/random_recipes,
 /obj/item/recipe_book/arcyne,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "loU" = (
 /obj/structure/chair/wood/alt,
 /obj/effect/landmark/start/vagrant,
@@ -23859,7 +23859,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/tower,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ltL" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -24310,7 +24310,7 @@
 /area/outdoors/mountains)
 "lEj" = (
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lED" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
@@ -24380,7 +24380,7 @@
 /turf/open/floor/twig{
 	dir = 4
 	},
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "lGh" = (
 /obj/item/fake_machine/mastermail,
 /turf/open/floor/cobblerock,
@@ -24502,7 +24502,7 @@
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/stone,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lJu" = (
 /obj/machinery/light/fueled/firebowl/standing{
 	pixel_x = 10;
@@ -24731,7 +24731,7 @@
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/stone,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "lNH" = (
 /obj/structure/fake_machine/atm,
 /turf/open/floor/carpet/royalblack,
@@ -24831,7 +24831,7 @@
 "lPy" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lPJ" = (
 /obj/structure/stairs{
 	dir = 4
@@ -24872,7 +24872,7 @@
 "lQS" = (
 /obj/effect/turf_decal/magedecal,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lQT" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -24999,7 +24999,7 @@
 /obj/structure/chair/wood/alt/chair_noble/red,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "lUm" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 8
@@ -25011,7 +25011,7 @@
 /obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lUs" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = -32
@@ -25140,7 +25140,7 @@
 "lWM" = (
 /obj/machinery/light/fueled/chand,
 /turf/open/transparent/openspace,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lWT" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -25192,7 +25192,7 @@
 /obj/item/clothing/shirt/robe/newmage/adept,
 /obj/item/clothing/shirt/robe/newmage/adept,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "lXZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table/wood/fancy/red,
@@ -25475,7 +25475,7 @@
 /obj/structure/table/wood/plain_alt,
 /obj/item/recipe_book/alchemy,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mdv" = (
 /obj/item/natural/feather,
 /obj/machinery/light/fueled/firebowl/standing,
@@ -25705,7 +25705,7 @@
 	pixel_y = 3
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mjX" = (
 /obj/structure/fluff/walldeco/bigpainting/lake{
 	pixel_x = -32
@@ -25727,7 +25727,7 @@
 /obj/item/kitchen/spoon,
 /obj/item/kitchen/spoon,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mkt" = (
 /obj/structure/easel,
 /obj/item/canvas{
@@ -25757,7 +25757,7 @@
 "mkZ" = (
 /obj/structure/window/solid,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mld" = (
 /turf/open/floor/woodturned,
 /area/indoors/town/church)
@@ -25899,7 +25899,7 @@
 	dir = 1
 	},
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "moj" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass,
@@ -25935,7 +25935,7 @@
 /obj/structure/rack,
 /obj/item/clothing/cloak/raincloak/colored/blue,
 /turf/open/floor/metal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mpu" = (
 /turf/open/floor/dirt,
 /area/under/cavelava)
@@ -26007,7 +26007,7 @@
 	dir = 8
 	},
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "mrM" = (
 /obj/effect/waterfall,
 /turf/open/water/river,
@@ -26055,7 +26055,7 @@
 /obj/structure/fermentation_keg/water,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "msv" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/tile/masonic,
@@ -26161,19 +26161,19 @@
 /area/outdoors/town)
 "mvs" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mvt" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/soilson,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "mvv" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/keyset/town/tower,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mvB" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/sand,
@@ -26287,7 +26287,7 @@
 "mxn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mxq" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/keep/halls)
@@ -26362,7 +26362,7 @@
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
 	},
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mAz" = (
 /obj/item/clothing/cloak/half/colored/random{
 	pixel_x = -4;
@@ -26476,7 +26476,7 @@
 "mCd" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mCk" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/whitewine,
@@ -26517,7 +26517,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "mDb" = (
 /turf/open/floor/tile/masonic{
 	dir = 8
@@ -26629,7 +26629,7 @@
 	},
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mFM" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/servant_bell,
@@ -26987,7 +26987,7 @@
 	pixel_y = -4
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mNQ" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/outie{
 	dir = 8
@@ -27114,7 +27114,7 @@
 /area/under/cave)
 "mQw" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mQB" = (
 /obj/effect/landmark/start/cook{
 	dir = 8
@@ -27205,7 +27205,7 @@
 /obj/structure/closet/crate/drawer,
 /obj/item/servant_bell/lord,
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mSh" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/clocktower)
@@ -27231,7 +27231,7 @@
 "mTm" = (
 /obj/structure/bars,
 /turf/open/floor/metal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mTv" = (
 /obj/item/reagent_containers/glass/bottle/manapot,
 /obj/item/reagent_containers/glass/bottle/healthpot,
@@ -27251,7 +27251,7 @@
 "mUk" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mUo" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood,
@@ -27398,7 +27398,7 @@
 "mWQ" = (
 /obj/structure/closet/crate/chest/wicker/random_bee_keeping,
 /turf/open/floor/twig,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "mWS" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/fake_machine/scomm/r,
@@ -27434,7 +27434,7 @@
 	pixel_y = -3
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mYr" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -27501,7 +27501,7 @@
 	pixel_y = 6
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "mZm" = (
 /obj/structure/table/wood/plain_alt,
 /turf/closed/basic,
@@ -27539,7 +27539,7 @@
 	dir = 4
 	},
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "mZZ" = (
 /obj/structure/rack/shelf/big,
 /obj/structure/rack/shelf,
@@ -27560,7 +27560,7 @@
 	pixel_y = 14
 	},
 /turf/open/floor/tile/bath,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "naf" = (
 /obj/structure/fake_machine/mail{
 	mailtag = "Feldesher"
@@ -27660,7 +27660,7 @@
 /obj/machinery/essence/research_matrix,
 /obj/effect/decal/carpet/kover_darkred,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ncX" = (
 /obj/structure/stairs{
 	dir = 4
@@ -27735,7 +27735,7 @@
 /obj/structure/fluff/walldeco/mageguild,
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "nfk" = (
 /obj/structure/window/solid,
 /obj/structure/barricade/wooden,
@@ -27787,7 +27787,7 @@
 /obj/effect/mapping_helpers/access/keyset/manor/gate,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/herringbone,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ngf" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/blocks,
@@ -27958,7 +27958,7 @@
 "njZ" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "nkf" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -28009,7 +28009,7 @@
 "nls" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "nlt" = (
 /turf/open/transparent/openspace,
 /area/outdoors/town/roofs)
@@ -28020,7 +28020,7 @@
 /area/indoors/town/keep/feast)
 "nlC" = (
 /turf/closed/wall/mineral/wood/window,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "nlG" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/keep)
@@ -28166,7 +28166,7 @@
 "nqW" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "nqX" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -28286,7 +28286,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/soilson,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "ntY" = (
 /turf/closed/wall/mineral/roofwall/outercorner,
 /area/indoors/town)
@@ -28376,7 +28376,7 @@
 "nvG" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "nvL" = (
 /obj/structure/fluff/nest{
 	name = "patch of straw"
@@ -28504,7 +28504,7 @@
 	pixel_y = 32
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "nAr" = (
 /obj/structure/water_pipe,
 /turf/open/dungeon_trap,
@@ -28655,7 +28655,7 @@
 	pixel_y = -4
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "nFr" = (
 /obj/structure/table/wood/large_new{
 	dir = 10;
@@ -28712,7 +28712,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "nHw" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/dirt,
@@ -28953,7 +28953,7 @@
 /obj/item/paper/scroll,
 /obj/item/natural/feather,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "nMv" = (
 /turf/open/water,
 /area/under/cavewet)
@@ -29072,7 +29072,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/chair/stool/bar,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "nQO" = (
 /obj/structure/well,
 /turf/open/floor/dirt,
@@ -29287,7 +29287,7 @@
 "nWz" = (
 /obj/structure/well,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "nWO" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/dirt,
@@ -29403,7 +29403,7 @@
 "nZA" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "nZP" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -29796,7 +29796,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/structure/fluff/nest,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "omh" = (
 /obj/item/ore/copper,
 /turf/open/floor/naturalstone,
@@ -29900,7 +29900,7 @@
 "oqm" = (
 /obj/structure/bookcase/random/archive,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "oqo" = (
 /obj/structure/fluff/steamvent,
 /turf/open/floor/metal/alt,
@@ -30069,7 +30069,7 @@
 "ouw" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "oux" = (
 /obj/structure/table/wood/plain_alt,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -30209,12 +30209,12 @@
 "oxg" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "oxl" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/chair/stool,
 /turf/open/floor/tile,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "oxr" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -30354,7 +30354,7 @@
 "oAb" = (
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "oAf" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/storage/belt/leather/black,
@@ -30411,7 +30411,7 @@
 "oAW" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "oBi" = (
 /obj/item/weapon/tongs,
 /obj/effect/decal/cleanable/blood,
@@ -30605,7 +30605,7 @@
 "oEo" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/hay,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "oEt" = (
 /obj/structure/water_pipe,
 /turf/open/floor/naturalstone,
@@ -30689,7 +30689,7 @@
 "oGx" = (
 /obj/structure/apiary/starter,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "oGI" = (
 /obj/structure/door/weak/bolt{
 	dir = 8
@@ -31099,7 +31099,7 @@
 "oPR" = (
 /obj/structure/bed/shit,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "oQo" = (
 /obj/structure/chair/stool,
 /obj/structure/fluff/walldeco/painting/seraphina{
@@ -31160,7 +31160,7 @@
 "oSj" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "oSl" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church)
@@ -31441,7 +31441,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "oYS" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/blocks,
@@ -31478,7 +31478,7 @@
 	pixel_y = 10
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pah" = (
 /obj/structure/rack,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -31689,7 +31689,7 @@
 	icon_state = "grass2"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "peJ" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -31736,7 +31736,7 @@
 "pft" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pfE" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/beer/hagwoodbitter,
@@ -31749,7 +31749,7 @@
 /area/under/town/basement)
 "pfK" = (
 /turf/closed/wall/mineral/wooddark,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pfL" = (
 /obj/structure/door/fancy{
 	name = "Lord's Quarters"
@@ -31812,7 +31812,7 @@
 /area/under/town/basement)
 "phE" = (
 /turf/closed/wall/mineral/wooddark/end,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "phI" = (
 /obj/effect/landmark/start/consort{
 	dir = 8
@@ -31861,7 +31861,7 @@
 	pixel_y = -18
 	},
 /turf/open/water/marsh,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "pic" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/plate/onyxa,
@@ -31873,7 +31873,7 @@
 /obj/item/carvedgem/onyxa/fork,
 /obj/item/carvedgem/onyxa/spoon,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pin" = (
 /obj/structure/door/iron,
 /obj/effect/mapping_helpers/access/locker,
@@ -32101,7 +32101,7 @@
 	pixel_y = 6
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "poW" = (
 /obj/structure/flora/grass,
 /turf/open/floor/cobblerock,
@@ -32377,7 +32377,7 @@
 "puQ" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "puZ" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -32435,7 +32435,7 @@
 	dir = 1
 	},
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pwB" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/grass,
@@ -32510,7 +32510,7 @@
 "pyC" = (
 /obj/structure/table/wood/plain/alt,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pyI" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 4
@@ -32694,7 +32694,7 @@
 /obj/item/rope/chain,
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "pBK" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/dirt,
@@ -32790,7 +32790,7 @@
 "pDV" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pDX" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/landmark/start/farmer,
@@ -32936,7 +32936,7 @@
 	dir = 8
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pIb" = (
 /obj/structure/stairs{
 	dir = 4
@@ -33163,7 +33163,7 @@
 /obj/item/clothing/shoes/shortboots,
 /obj/item/clothing/shoes/sandals,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pNO" = (
 /obj/structure/rack,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -33286,7 +33286,7 @@
 "pRy" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pRD" = (
 /turf/open/floor/blocks,
 /area/outdoors/basin)
@@ -33301,7 +33301,7 @@
 /area/outdoors/town)
 "pRJ" = (
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pSc" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/sickle,
@@ -33328,7 +33328,7 @@
 	dir = 1
 	},
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pSW" = (
 /obj/structure/vertical_gearbox,
 /turf/open/floor/blocks/stonered,
@@ -33367,7 +33367,7 @@
 /obj/item/needle/thorn,
 /obj/item/needle/thorn,
 /turf/open/floor/twig,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "pVl" = (
 /obj/effect/mapping_helpers/secret_door_creator/thieves_guild{
 	redstone_id = "orphanage"
@@ -33376,7 +33376,7 @@
 /area/indoors/town)
 "pVx" = (
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "pVE" = (
 /obj/structure/curtain/bounty/dir{
 	dir = 4
@@ -33387,7 +33387,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pVZ" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/churchbrick,
@@ -33420,7 +33420,7 @@
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pXf" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/cobble,
@@ -33442,7 +33442,7 @@
 /area/outdoors/town)
 "pXx" = (
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "pXA" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/rags,
@@ -33682,13 +33682,13 @@
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qeQ" = (
 /obj/structure/flora/grass{
 	icon_state = "grass2"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "qeY" = (
 /obj/structure/table/wood/plain/alt,
 /turf/open/floor/blocks,
@@ -33734,7 +33734,7 @@
 	dir = 8
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qgf" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -33854,7 +33854,7 @@
 /area/under/cave)
 "qiy" = (
 /turf/open/floor/carpet/red,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qiC" = (
 /obj/structure/ladder,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -33894,7 +33894,7 @@
 "qjp" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qju" = (
 /obj/effect/decal/remains/bogbug{
 	desc = "So that's where he went...";
@@ -33971,7 +33971,7 @@
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/item/reagent_containers/food/snacks/butter,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qlk" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -34015,7 +34015,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qmd" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -34043,7 +34043,7 @@
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "qmr" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/paper,
@@ -34258,7 +34258,7 @@
 	pixel_y = -32
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "qtg" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -34297,7 +34297,7 @@
 "qtT" = (
 /mob/living/simple_animal/hostile/retaliate/bull,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "qtY" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -34541,7 +34541,7 @@
 /obj/structure/carpet/blue,
 /obj/item/reagent_containers/glass/bottle/black/nocshine,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qzt" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
@@ -34714,7 +34714,7 @@
 "qDB" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "qDH" = (
 /obj/structure/fluff/walldeco/painting/seraphina{
 	pixel_x = -32
@@ -34795,7 +34795,7 @@
 /area/indoors/town)
 "qFq" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qFr" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -34868,7 +34868,7 @@
 	pixel_y = -3
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qIb" = (
 /turf/open/floor/tile,
 /area/indoors/town/shop)
@@ -34946,7 +34946,7 @@
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/stone,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qJo" = (
 /obj/structure/table/wood/crafted,
 /obj/structure/fluff/millstone,
@@ -34959,7 +34959,7 @@
 "qJv" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qJz" = (
 /obj/structure/table/wood/reinf_long,
 /obj/item/reagent_containers/glass/cup{
@@ -35309,7 +35309,7 @@
 	pixel_y = 11
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "qQP" = (
 /obj/structure/chair/stool,
 /turf/open/floor/dirt,
@@ -35404,7 +35404,7 @@
 	dir = 8
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qSJ" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
@@ -35595,7 +35595,7 @@
 "qXc" = (
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "qXf" = (
 /obj/structure/carpet/red,
 /obj/structure/fluff/statue/psy,
@@ -35613,7 +35613,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "qXA" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -35623,7 +35623,7 @@
 /area/outdoors/town)
 "qXF" = (
 /turf/open/floor/herringbone,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "qXG" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/needle,
@@ -35728,7 +35728,7 @@
 "qZV" = (
 /obj/structure/composter/halffull,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "rat" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/mixyel,
@@ -35778,7 +35778,7 @@
 "rbq" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "rbr" = (
 /turf/open/lava,
 /area/under/cavelava)
@@ -35827,7 +35827,7 @@
 "rcs" = (
 /obj/structure/chair/stool,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rdt" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -36120,7 +36120,7 @@
 	pixel_y = -4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rlk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/church/purple,
@@ -36216,7 +36216,7 @@
 	pixel_y = 3
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rnA" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/tile/masonic/single,
@@ -36236,7 +36236,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "rop" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/fat{
@@ -36370,7 +36370,7 @@
 "rrf" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rrg" = (
 /obj/structure/chair/bench/coucha/r,
 /turf/open/floor/cobble,
@@ -36594,7 +36594,7 @@
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted,
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ryj" = (
 /obj/structure/bed/hay,
 /obj/structure/bed/hay{
@@ -36658,7 +36658,7 @@
 "rAc" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rAf" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/candle/yellow,
@@ -36704,7 +36704,7 @@
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rAT" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/bundle/fibers{
@@ -36809,7 +36809,7 @@
 	pixel_y = 7
 	},
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "rCy" = (
 /obj/machinery/essence/enchantment_altar{
 	pixel_x = -1;
@@ -36861,7 +36861,7 @@
 "rEg" = (
 /obj/structure/window/openclose,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rEp" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8
@@ -36998,7 +36998,7 @@
 "rIw" = (
 /obj/effect/waterfall,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "rIA" = (
 /obj/structure/chair/stool,
 /obj/structure/fluff/walldeco/church/line{
@@ -37030,7 +37030,7 @@
 	pixel_x = 32
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rJW" = (
 /obj/structure/window/openclose,
 /turf/open/floor/ruinedwood,
@@ -37121,7 +37121,7 @@
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "rLT" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
@@ -37150,7 +37150,7 @@
 "rMg" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rMh" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/metal,
@@ -37310,7 +37310,7 @@
 "rQN" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "rRa" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/door/weak/bolt,
@@ -37481,7 +37481,7 @@
 /area/under/town/basement)
 "rUV" = (
 /turf/open/water/marsh,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "rVo" = (
 /turf/open/water/river,
 /area/under/cave)
@@ -38034,7 +38034,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/structure/fluff/nest,
 /turf/open/floor/hay,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "seu" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/natural/cloth,
@@ -38241,7 +38241,7 @@
 "skp" = (
 /mob/living/simple_animal/hostile/retaliate/goat,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "skr" = (
 /obj/structure/table/wood{
 	dir = 5;
@@ -38348,7 +38348,7 @@
 	},
 /obj/item/clothing/shirt/robe/colored/courtmage,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "smp" = (
 /turf/open/floor/hay,
 /area/indoors/town/cell)
@@ -38583,7 +38583,7 @@
 /obj/item/natural/feather,
 /obj/item/natural/feather,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "srG" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -38745,7 +38745,7 @@
 /area/indoors/town/noble_manor/yellow)
 "swe" = (
 /turf/open/floor/woodturned,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "swk" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/spiral,
@@ -38867,7 +38867,7 @@
 /obj/item/recipe_book/arcyne,
 /obj/item/recipe_book/alchemy,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "syS" = (
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
@@ -39115,7 +39115,7 @@
 	icon_state = "grass3"
 	},
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "sHx" = (
 /obj/structure/bookcase/random/eoratica{
 	name = "bookcase (Self Torture Manuscripts)";
@@ -39621,7 +39621,7 @@
 "sSE" = (
 /obj/structure/fluff/walldeco/mageguild,
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "sST" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/torchholder/c,
@@ -39937,7 +39937,7 @@
 "sZA" = (
 /obj/structure/chair/stool,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "sZM" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/cleanshallow,
@@ -40014,7 +40014,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/mage,
 /turf/open/floor/ruinedwood,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tby" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -40153,7 +40153,7 @@
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "teD" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/flint,
@@ -40186,7 +40186,7 @@
 "teZ" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/cobblerock,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "tfg" = (
 /turf/closed/mineral,
 /area/outdoors/town/noble_manor/yellow)
@@ -40366,7 +40366,7 @@
 "tjo" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tjw" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -40517,7 +40517,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/metal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tnB" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -40579,7 +40579,7 @@
 "tov" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig/male,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "tpq" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/woodturned,
@@ -40605,7 +40605,7 @@
 /obj/item/chalk,
 /obj/item/chalk,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tpw" = (
 /turf/closed/wall/mineral/roofwall/outercorner{
 	dir = 4
@@ -40667,7 +40667,7 @@
 "tqP" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "tqS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/toilet,
@@ -40699,7 +40699,7 @@
 "trA" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "trF" = (
 /obj/structure/rack{
 	pixel_y = -1
@@ -40743,7 +40743,7 @@
 	dir = 4
 	},
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tsI" = (
 /obj/effect/mapping_helpers/access/keyset/manor/vault,
 /obj/effect/mapping_helpers/access/locker,
@@ -40759,7 +40759,7 @@
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /obj/structure/fluff/nest,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "tsX" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/keyset/garrison/general,
@@ -40890,7 +40890,7 @@
 /obj/structure/rack,
 /obj/item/clothing/shoes/boots,
 /turf/open/floor/metal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "twE" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -41042,7 +41042,7 @@
 	pixel_x = 11
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tAO" = (
 /obj/structure/closet/crate/chest/crafted,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -41059,7 +41059,7 @@
 "tBw" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tBC" = (
 /obj/effect/landmark/latejoin,
 /obj/structure/chair/bench/church{
@@ -41134,13 +41134,13 @@
 "tDB" = (
 /obj/effect/landmark/start/wapprentice,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tDC" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tDU" = (
 /obj/effect/decal/carpet/square/black{
 	pixel_y = 26;
@@ -41171,7 +41171,7 @@
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 8
 	},
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tEu" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/turned,
@@ -41321,7 +41321,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "tHR" = (
 /obj/structure/door/window{
 	name = "Tailor Shop"
@@ -41347,7 +41347,7 @@
 "tJf" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tJv" = (
 /obj/structure/door{
 	lockid = "apartment19";
@@ -41519,7 +41519,7 @@
 "tMI" = (
 /obj/structure/stairs,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tMJ" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -41660,13 +41660,13 @@
 "tQh" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "tQs" = (
 /turf/open/floor/cobble,
 /area/under/dungeon)
 "tQv" = (
 /turf/open/floor/naturalstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tQz" = (
 /obj/structure/roguerock{
 	icon_state = "rock2"
@@ -41739,7 +41739,7 @@
 "tSJ" = (
 /obj/structure/dryclothes,
 /turf/open/floor/cobble/mossy,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "tSN" = (
 /obj/structure/fluff/walldeco/gear{
 	pixel_x = 1;
@@ -41887,11 +41887,11 @@
 	dir = 4
 	},
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tYn" = (
 /obj/item/soap,
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "tYv" = (
 /turf/open/water/river{
 	dir = 4
@@ -41903,7 +41903,7 @@
 	},
 /obj/structure/carpet/blue,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "tYY" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 4
@@ -42016,7 +42016,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ubN" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/blocks,
@@ -42035,7 +42035,7 @@
 	},
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "uca" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/blocks,
@@ -42202,7 +42202,7 @@
 "ueI" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ueO" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fermentation_keg/random/beer,
@@ -42223,7 +42223,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "ufk" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -42286,7 +42286,7 @@
 "uhh" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/woodturned,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "uhi" = (
 /obj/structure/flora/grass,
 /obj/item/grown/log/tree/stick,
@@ -42329,7 +42329,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "uic" = (
 /turf/open/water/marsh,
 /area/outdoors/town/roofs)
@@ -42372,7 +42372,7 @@
 "uiL" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "uiO" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -42575,7 +42575,7 @@
 "unx" = (
 /mob/living/simple_animal/hostile/retaliate/cow,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "unC" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -42633,7 +42633,7 @@
 /obj/item/clothing/neck/talkstone,
 /obj/item/key/mage,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "upD" = (
 /obj/item/book/manners,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -42759,7 +42759,7 @@
 	dir = 4
 	},
 /turf/open/water/cleanshallow/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "urI" = (
 /obj/item/reagent_containers/glass/bucket/pot/stone{
 	pixel_x = 1
@@ -42839,7 +42839,7 @@
 "usY" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "utb" = (
 /obj/structure/kneestingers,
 /turf/open/floor/naturalstone,
@@ -42898,7 +42898,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/chair/stool,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "uuw" = (
 /obj/structure/floordoor{
 	redstone_id = "Merchant"
@@ -42935,7 +42935,7 @@
 "uvv" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "uvF" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/bouquet/salvia,
@@ -43174,10 +43174,10 @@
 	dir = 8
 	},
 /turf/open/floor/greenstone/runed,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "uAZ" = (
 /turf/closed/wall/mineral/wooddark,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "uBl" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/clothing/face/spectacles/golden{
@@ -43202,7 +43202,7 @@
 	redstone_id = "WizTowerPass"
 	},
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "uBS" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/herringbone,
@@ -43627,7 +43627,7 @@
 "uNY" = (
 /obj/structure/door/swing,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "uOq" = (
 /obj/structure/bars{
 	icon_state = "barsbent";
@@ -43635,7 +43635,7 @@
 	},
 /obj/structure/table/wood,
 /turf/open/floor/dirt/road,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "uOy" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/cleanshallow,
@@ -43896,7 +43896,7 @@
 	icon_state = "imbuement"
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "uUD" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
@@ -43958,7 +43958,7 @@
 "uVY" = (
 /obj/structure/fluff/wallclock,
 /turf/open/floor/metal/alt,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "uWd" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -43977,7 +43977,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "uWz" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -44350,7 +44350,7 @@
 /area/outdoors/town)
 "vcm" = (
 /turf/open/floor/metal/alt,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vcv" = (
 /obj/machinery/light/fueled/oven{
 	pixel_y = 31
@@ -44364,7 +44364,7 @@
 "vcL" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vcN" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/keyset/town/soilson,
@@ -44387,7 +44387,7 @@
 "vdc" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vdk" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
@@ -44444,7 +44444,7 @@
 	},
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vew" = (
 /turf/open/transparent/openspace,
 /area/indoors/town/keep)
@@ -44618,7 +44618,7 @@
 "vjV" = (
 /obj/effect/turf_decal/magedecal,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vke" = (
 /obj/structure/chair/stool,
 /turf/open/floor/tile/bath,
@@ -44694,7 +44694,7 @@
 	pixel_y = 9
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vlh" = (
 /obj/structure/fluff/walldeco/bath/wallpipes{
 	dir = 8;
@@ -44762,7 +44762,7 @@
 "vnj" = (
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vnn" = (
 /obj/structure/fluff/walldeco/bath/wallpipes{
 	dir = 4;
@@ -45457,7 +45457,7 @@
 "vFk" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/hay,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "vFn" = (
 /obj/structure/stairs{
 	dir = 1
@@ -45485,7 +45485,7 @@
 	},
 /obj/item/clothing/face/spectacles/monocle,
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vFN" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32;
@@ -45493,7 +45493,7 @@
 	},
 /obj/machinery/essence/test_tube,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vFU" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -45570,7 +45570,7 @@
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vHi" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -45791,7 +45791,7 @@
 /area/indoors/town)
 "vMr" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vMv" = (
 /obj/structure/rack/shelf/notdense,
 /obj/item/paper/inqslip/confession{
@@ -46130,7 +46130,7 @@
 "vUQ" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vVc" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -46148,7 +46148,7 @@
 /obj/structure/chair/bench/couch/left/lord_secondary,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "vVr" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/powder/salt,
@@ -46560,7 +46560,7 @@
 "wjm" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "wjq" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/noble_manor/red)
@@ -46661,7 +46661,7 @@
 /area/indoors/town/tavern)
 "wkK" = (
 /turf/open/floor/hexstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wkM" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -46719,7 +46719,7 @@
 	dir = 8
 	},
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wlF" = (
 /obj/effect/landmark/start/templar,
 /turf/open/floor/churchmarble,
@@ -46923,7 +46923,7 @@
 	name = "We are sick and tired of repairing these blasted gates everytime you bloody bookworms cast arcyne storm!"
 	},
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wpf" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
@@ -46987,7 +46987,7 @@
 "wqV" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wrg" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -47195,7 +47195,7 @@
 	},
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "wwn" = (
 /obj/structure/fluff/statue/knight/interior{
 	layer = 4.2
@@ -47846,7 +47846,7 @@
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wKy" = (
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood,
@@ -47940,7 +47940,7 @@
 	},
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/blocks,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wMK" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
@@ -47971,7 +47971,7 @@
 	pixel_x = 7
 	},
 /turf/open/floor/metal,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wNG" = (
 /obj/structure/table/wood/fancy/blue,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -48001,7 +48001,7 @@
 "wOa" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wOg" = (
 /obj/structure/rack,
 /obj/item/clothing/shoes/shortboots,
@@ -48262,7 +48262,7 @@
 /obj/structure/fluff/railing/border,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "wTU" = (
 /turf/open/floor/concrete,
 /area/under/town/basement)
@@ -48448,7 +48448,7 @@
 	icon_state = "grass3"
 	},
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "wYW" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -48529,7 +48529,7 @@
 "xaq" = (
 /mob/living/simple_animal/hostile/retaliate/goatmale,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xaF" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -48598,7 +48598,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "xct" = (
 /turf/open/floor/rooftop{
 	dir = 4
@@ -48664,7 +48664,7 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "xdU" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -48737,7 +48737,7 @@
 "xgL" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig/female,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xhm" = (
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/blocks/newstone/alt,
@@ -48874,7 +48874,7 @@
 /obj/structure/bed/wool,
 /obj/item/bedsheet/cloth,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "xjS" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/town/keep)
@@ -49052,7 +49052,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "xne" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/blocks,
@@ -49332,7 +49332,7 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/item/natural/stone,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xtY" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/chair/wood/alt{
@@ -49358,7 +49358,7 @@
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "xum" = (
 /obj/structure/carpet/purple,
 /turf/open/floor/ruinedwood/two,
@@ -49418,7 +49418,7 @@
 /turf/open/floor/twig{
 	dir = 4
 	},
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xvh" = (
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/grass/eora,
@@ -49508,7 +49508,7 @@
 "xxh" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xxo" = (
 /obj/machinery/light/fueled/hearth,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -49580,7 +49580,7 @@
 /obj/structure/bed/wool,
 /obj/item/bedsheet/wool,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/keepgate)
+/area/indoors/town/keep/gate)
 "xza" = (
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -49600,13 +49600,13 @@
 "xzr" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xzL" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/open/floor/greenstone,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "xzM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = -32;
@@ -50242,7 +50242,7 @@
 "xQB" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xQD" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -50359,7 +50359,7 @@
 "xUG" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/farm)
+/area/outdoors/farm)
 "xUS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -50571,7 +50571,7 @@
 	},
 /obj/structure/table/wood/plain/alt,
 /turf/open/floor/carpet/stellar,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "ybv" = (
 /obj/structure/water_pipe,
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -50842,7 +50842,7 @@
 	pixel_x = -12
 	},
 /turf/open/floor/concrete,
-/area/indoors/town/magician)
+/area/indoors/town/keep/magician)
 "yjf" = (
 /obj/item/reagent_containers/glass/carafe/silver/redwine{
 	pixel_x = 7;

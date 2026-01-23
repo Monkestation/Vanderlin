@@ -22,9 +22,15 @@
 	converted_type = /area/indoors/shelter/woods
 
 /area/outdoors/wilderness/outpost
+	icon_state = "outpost"
+
+/area/outdoors/wilderness/outpost/vanderlin
 	name = "abandoned outpost"
 	first_time_text = "ABANDONED OUTPOST"
-	icon_state = "outpost"
+
+/area/outdoors/wilderness/outpost/salem
+	name = "salem outpost"
+	first_time_text = "Salem Outpost"
 
 /area/indoors/wilderness
 	name = "indoors - wilderness"
@@ -58,3 +64,13 @@
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/shop
+
+/area/indoors/wilderness/magic
+	name = "Wizard's Tower"
+	icon = 'icons/turf/areas/manor.dmi'
+	icon_state = "magiciantower"
+	ambient_index = AMBIENCE_MYSTICAL
+	background_track = 'sound/music/area/magiciantower.ogg'
+	background_track_dusk = null
+	background_track_night = null
+	converted_type = /area/outdoors/exposed/magiciantower

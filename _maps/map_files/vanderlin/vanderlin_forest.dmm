@@ -272,7 +272,7 @@
 /area/outdoors/mountains)
 "ed" = (
 /turf/open/floor/cobblerock,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "ef" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobblerock,
@@ -519,7 +519,7 @@
 "gK" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "gM" = (
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/town/garrison)
@@ -690,7 +690,7 @@
 /area/indoors/dungeon)
 "iq" = (
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "iy" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/table/wood/fancy/orange,
@@ -1037,7 +1037,7 @@
 "lT" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/cobblerock,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "lU" = (
 /turf/open/floor/grass,
 /area/indoors/wilderness/tavern)
@@ -1272,7 +1272,7 @@
 "pf" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "ph" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -1324,7 +1324,7 @@
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "pE" = (
 /obj/structure/door/stone,
 /obj/structure/fluff/walldeco/vinez,
@@ -1500,11 +1500,11 @@
 "rw" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "rz" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "rC" = (
 /obj/structure/door/weak,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -1588,7 +1588,7 @@
 "sI" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/cobblerock,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "sJ" = (
 /mob/living/carbon/human/species/human/northern/bum/ambush,
 /turf/open/floor/ruinedwood/turned/alt,
@@ -1955,7 +1955,7 @@
 /area/indoors/dungeon)
 "wN" = (
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "wQ" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -2106,7 +2106,7 @@
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "yM" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -2257,10 +2257,10 @@
 "AR" = (
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "AT" = (
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Bc" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2288,7 +2288,7 @@
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Bl" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
@@ -2428,7 +2428,7 @@
 	},
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "CA" = (
 /obj/structure/door/green,
 /obj/effect/mapping_helpers/access/locker,
@@ -2514,7 +2514,7 @@
 "Dr" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Dt" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = 4;
@@ -2793,7 +2793,7 @@
 "Fz" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "FA" = (
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
@@ -2806,7 +2806,7 @@
 	dir = 4
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "FE" = (
 /obj/effect/spawner/traveltile_spawner/vertical/vampire,
 /turf/open/floor/naturalstone,
@@ -3095,7 +3095,7 @@
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Jf" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -3122,7 +3122,7 @@
 "Jn" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Jo" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
@@ -3153,7 +3153,7 @@
 "JS" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "JT" = (
 /obj/item/weapon/whip/chain,
 /obj/effect/decal/cleanable/dirt,
@@ -3192,7 +3192,7 @@
 "Ko" = (
 /obj/structure/well,
 /turf/open/floor/cobblerock,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Kp" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/weapon/shield/wood,
@@ -3246,7 +3246,7 @@
 	name = "The Fermented Cackleberry Inn"
 	},
 /turf/open/floor/cobblerock,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "KP" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
@@ -3439,7 +3439,7 @@
 "MV" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "MY" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt,
@@ -3663,7 +3663,7 @@
 "OT" = (
 /obj/structure/closet/crate/chest/crafted,
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "OY" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3749,7 +3749,7 @@
 "PT" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "PZ" = (
 /turf/open/floor/twig,
 /area/indoors/wilderness)
@@ -3931,7 +3931,7 @@
 "Sj" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Sk" = (
 /turf/open/floor/carpet/red,
 /area/indoors/dungeon)
@@ -4048,7 +4048,7 @@
 	},
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/cobblerock,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "TK" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
@@ -4066,12 +4066,12 @@
 "TO" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "TP" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "TU" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4306,7 +4306,7 @@
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "WT" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -4427,7 +4427,7 @@
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "XU" = (
 /obj/item/clothing/wrists/goldbracelet,
 /turf/open/floor/cobble,
@@ -4440,7 +4440,7 @@
 	dir = 8
 	},
 /turf/open/floor/grass,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Yd" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/ruinedwood,
@@ -4551,7 +4551,7 @@
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "Za" = (
 /obj/structure/roguerock,
 /turf/open/floor/grass,
@@ -4630,7 +4630,7 @@
 "ZW" = (
 /obj/structure/lootable_structure/mining_cache,
 /turf/open/floor/dirt/road,
-/area/outdoors/wilderness/outpost)
+/area/outdoors/wilderness/outpost/vanderlin)
 "ZY" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/dirt,
