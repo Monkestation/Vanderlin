@@ -365,7 +365,7 @@ SUBSYSTEM_DEF(triumphs)
 		var/current_season = GLOB.triumph_wipe_season
 		var/datum/triumph_buy/seasonal/triumph_type = GLOB.triumph_buys_by_id[id]
 
-		if((current_season - bought_at) >= triumph_type::seasons_max)
+		if(!triumph_type || ((current_season - bought_at) >= triumph_type::seasons_max))
 			remove_seasonal_triumph_buy(target_ckey, id)
 			continue
 
