@@ -24,17 +24,16 @@
 	var/list/partial_languages = language_holder.get_partially_understood_languages()
 
 	var/list/language_data = list()
-	for(var/ld in GLOB.all_languages)
-		var/datum/language/LD = ld
-		var/result = language_holder.has_language(ld)
-		var/partial_understanding = partial_languages[ld] || 0
+	for(var/datum/language/LD as anything in GLOB.all_languages)
+		var/result = language_holder.has_language(LD)
+		var/partial_understanding = partial_languages[LD] || 0
 
 		// Only show if we know it, understand it partially, or we're admin
 		if(!result && !partial_understanding && !is_admin)
 			continue
 
 		var/list/lang_info = list()
-		lang_info["type"] = ld
+		lang_info["type"] = LD
 		lang_info["name"] = initial(LD.name)
 		lang_info["desc"] = initial(LD.desc)
 		lang_info["key"] = initial(LD.key)
@@ -305,9 +304,7 @@
 	var/atom/movable/AM = language_holder.get_atom()
 	var/language_name = href_list["language_name"]
 	var/datum/language/language_datum
-
-	for(var/ld in GLOB.all_languages)
-		var/datum/language/LD = ld
+	for(var/datum/language/LD as anything in GLOB.all_languages)
 		if(language_name == initial(LD.name))
 			language_datum = LD
 			break

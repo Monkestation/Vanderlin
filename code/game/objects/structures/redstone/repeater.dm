@@ -214,7 +214,7 @@
 		trigger_lock_updates()
 		update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/redstone/repeater/update_icon()
+/obj/structure/redstone/repeater/update_icon_state()
 	. = ..()
 	icon_state = "repeater"
 	dir = facing_dir

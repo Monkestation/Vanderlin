@@ -261,13 +261,6 @@
 	clotting_threshold = 1.2
 	clotting_rate = 0.04
 
-/datum/wound/fracture/groin/New()
-	. = ..()
-	if(prob(1))
-		name = "broken buck"
-		check_name = "<span class='bone'>BUCKBROKEN</span>"
-		crit_message = "The buck is broken expertly!"
-
 /datum/wound/fracture/groin/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.Immobilize(15)

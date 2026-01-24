@@ -182,11 +182,13 @@
 	icon_state = "meatpie"
 	tastes = list("meat and butterdough" = 1)
 	filling_color = "#b44f44"
+
 /obj/item/reagent_containers/food/snacks/pie/cooked/meat/meat/good
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/meat
 	tastes = list("succulent meat and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/meat/meat/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/meat/meat/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -201,7 +203,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/fish
 	tastes = list("baked fish and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/meat/fish/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/meat/fish/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -219,7 +222,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/pot
 	tastes = list("succulent filling and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/meat/pot/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/meat/pot/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -236,7 +240,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/berry
 	tastes = list("crispy butterdough" = 1, "sweet berries" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/berry/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/berry/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -259,7 +264,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/apple
 	tastes = list("baked apples and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/apple/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/apple/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -270,11 +276,13 @@
 	slices_num = 4
 	list_reagents = list(/datum/reagent/consumable/nutriment = FRUITPIE_NUTRITION)
 	tastes = list("pears and butterdough" = 1)
+
 /obj/item/reagent_containers/food/snacks/pie/cooked/pear/good
 	eat_effect = /datum/status_effect/buff/foodbuff
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/pear
 	tastes = list("baked pears and crispy butterdough" = 1)
-/obj/item/reagent_containers/food/snacks/pie/cooked/pear/good/New()
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/pear/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -291,7 +299,7 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/borowiki
 	tastes = list("savory borowiki and crispy butterdough" = 1)
 
-/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good/New()
+/obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -357,7 +365,8 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	bitesize = 4
 	tastes = list("crispy dough" = 1)
-/obj/item/reagent_containers/food/snacks/handpie/good/New()
+
+/obj/item/reagent_containers/food/snacks/handpie/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 

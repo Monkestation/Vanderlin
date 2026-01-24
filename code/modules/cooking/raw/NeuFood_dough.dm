@@ -457,7 +457,8 @@
 
 /obj/item/reagent_containers/food/snacks/biscuit/good
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/biscuit/good/New()
+
+/obj/item/reagent_containers/food/snacks/biscuit/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -501,7 +502,8 @@
 /obj/item/reagent_containers/food/snacks/prezzel/good
 	name = "prezzel"
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/prezzel/good/New()
+
+/obj/item/reagent_containers/food/snacks/prezzel/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -528,7 +530,8 @@
 /obj/item/reagent_containers/food/snacks/fritter/good
 	name = "apple fritter"
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/fritter/good/New()
+
+/obj/item/reagent_containers/food/snacks/fritter/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 

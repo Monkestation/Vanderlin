@@ -1078,8 +1078,7 @@
 
 /mob/living/carbon/ExtinguishMob(itemz = TRUE)
 	if(itemz)
-		for(var/X in get_equipped_items())
-			var/obj/item/I = X
+		for(var/obj/item/I as anything in get_equipped_items())
 			I.acid_level = 0 //washes off the acid on our clothes
 			I.extinguish() //extinguishes our clothes
 		var/obj/item/I = get_active_held_item()
@@ -1210,8 +1209,7 @@
 			return
 		var/list/artpaths = subtypesof(/datum/martial_art)
 		var/list/artnames = list()
-		for(var/i in artpaths)
-			var/datum/martial_art/M = i
+		for(var/datum/martial_art/M as anything in artpaths)
 			artnames[initial(M.name)] = M
 		var/result = input(usr, "Choose the martial art to teach","JUDO CHOP") as null|anything in sortNames(artnames)
 		if(!usr)
@@ -1441,8 +1439,3 @@
 		to_dismember.dismember()
 		return TRUE
 	return FALSE
-
-/mob/living/carbon/proc/is_species(species)
-	if(!dna?.species)
-		return
-	return dna?.species.id == species

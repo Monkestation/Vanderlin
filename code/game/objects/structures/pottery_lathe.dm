@@ -3,7 +3,7 @@
 	icon_state = "stone1"
 	main_material = /datum/material/clay
 
-/obj/item/natural/clay/New(loc, ...)
+/obj/item/natural/clay/Initialize(mapload)
 	main_material = pick(typesof(/datum/material/clay))
 	. = ..()
 

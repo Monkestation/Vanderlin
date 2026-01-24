@@ -78,7 +78,7 @@
 	new_werewolf.adjustOxyLoss(human_user.getOxyLoss() / 2)
 	new_werewolf.adjustCloneLoss(human_user.getCloneLoss() / 2)
 	new_werewolf.blood_volume = human_user.blood_volume
-	human_user.fully_heal(HEAL_DAMAGE|HEAL_BLOOD|HEAL_WOUNDS)
+	human_user.fully_heal(HEAL_DAMAGE|HEAL_BLOOD|HEAL_WOUNDS|HEAL_RESTRAINTS)
 
 	playsound(new_werewolf, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	new_werewolf.playsound_local(get_turf(new_werewolf), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
