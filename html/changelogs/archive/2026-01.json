@@ -446,5 +446,12 @@
                 "rscadd": "Added a Swordsman Men-At-Arms subclass. They get the same equipment as Pikeman, but with a heater shield instead of a pike, skilled Swords and Shields, and marginally worse stats."
             }
         ]
+    },
+    "2026-01-23": {
+        "tired-wired": [
+            {
+                "rscdel": "Removed a single kobold slur."
+            }
+        ]
     }
 }
