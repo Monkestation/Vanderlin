@@ -234,3 +234,18 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "mix the salt and seeds"
 	extra_chance = 100
+
+// Redtallow can be crafted using visceras (rendered from animal sinew)
+/datum/repeatable_crafting_recipe/tallow/red
+	name = "red tallow"
+
+	requirements = list(
+		/obj/item/alch/viscera = 1,
+		/obj/item/reagent_containers/food/snacks/tallow = 1,
+	)
+
+	starting_atom = /obj/item/alch/viscera
+	attacked_atom = /obj/item/reagent_containers/food/snacks/tallow
+	output = /obj/item/reagent_containers/food/snacks/tallow/red
+	craft_time = 1 SECONDS
+	subtypes_allowed = TRUE

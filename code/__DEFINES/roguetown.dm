@@ -155,6 +155,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_VETERAN		"CAT_VETERAN"		// Veteran class - Handles Veteran class selector
 #define CTAG_TOWN_ELDER		"CAT_TOWN_ELDER"		// Town Elder class - Handles Town Elder class selector
 #define CTAG_ROYALKNIGHT	"CAT_ROYAL_KNIGHT"
+#define CTAG_ARCHIVIST		"CAT_ARCHIVIST"
 #define CTAG_MENATARMS		"CAT_MENATARMS"
 #define CTAG_SERVANT		"CAT_SERVANT" 		// Servant class - 4 type of servant to fill in someplace.
 #define CTAG_GATEMASTER		"CAT_GATEMASTER"

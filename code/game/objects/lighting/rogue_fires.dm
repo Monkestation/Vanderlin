@@ -403,7 +403,7 @@
 	on = FALSE
 	cookonme = TRUE
 	soundloop = /datum/looping_sound/fireloop
-	temperature_change = 40
+	// temperature_change = 40
 	var/heat_time = 100
 	var/obj/item/attachment = null
 	var/obj/item/reagent_containers/food/snacks/food = null
@@ -426,11 +426,9 @@
 			return
 
 	else
-		if(istype(W, /obj/item/reagent_containers/glass/bowl))
-			to_chat(user, "<span class='notice'>Remove the pot from the hearth first.</span>")
+		. = attachment.attackby(W, user, params)
+		if(.)
 			return
-		else
-			SEND_SIGNAL(attachment, COMSIG_TRY_STORAGE_INSERT, W, user, null, FALSE)
 	. = ..()
 
 /obj/machinery/light/fueled/hearth/MouseDrop(mob/over, src_location, over_location, src_control, over_control, params)

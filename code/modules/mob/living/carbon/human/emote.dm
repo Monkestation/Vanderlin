@@ -17,7 +17,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak())
+		if(!C.can_speak())
 			message = "makes a noise. Tears stream down their face."
 
 /datum/emote/living/carbon/human/cry/run_emote(mob/user, params, type_override, intentional, targetted)

@@ -8,7 +8,7 @@
 
 	has_visual_effects = FALSE
 	charge_required = FALSE
-	experience_modifer = 0
+	experience_modifier = 0
 
 	attunements = list(
 		/datum/attunement/light = 0.3,

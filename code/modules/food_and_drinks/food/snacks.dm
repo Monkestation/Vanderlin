@@ -94,7 +94,6 @@ All foods are distributed among various categories. Use common sense.
 	var/list/raritymod = null
 
 	var/modified = FALSE // for tracking if food has been changed
-	var/quality = 1  // used to track foodbuffs and such. Somewhat basic, could be combined with the foodbuff system directly perhaps
 
 	var/biting // if TRUE changes the icon state to the bitecount, for stuff like handpies. Will break unless you also set a base_icon_state
 	var/rot_away_timer

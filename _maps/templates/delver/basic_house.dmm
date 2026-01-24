@@ -5,9 +5,6 @@
 "c" = (
 /turf/open/floor/grass,
 /area/template_noop)
-"d" = (
-/turf/open/floor/grass,
-/area/template_noop)
 "h" = (
 /obj/structure/fluff/railing/tall{
 	dir = 8
@@ -78,10 +75,10 @@
 /area/template_noop)
 
 (1,1,1) = {"
-d
-d
-d
-d
+c
+c
+c
+c
 c
 a
 Y
@@ -97,11 +94,11 @@ h
 Q
 "}
 (2,1,1) = {"
-d
-d
-d
-d
-d
+c
+c
+c
+c
+c
 a
 X
 X
@@ -109,18 +106,18 @@ X
 X
 X
 E
-d
-d
-d
-d
+c
+c
+c
+c
 u
 "}
 (3,1,1) = {"
-d
-d
-d
-d
-d
+c
+c
+c
+c
+c
 a
 X
 X
@@ -129,9 +126,9 @@ X
 X
 a
 B
-d
-d
-d
+c
+c
+c
 u
 "}
 (4,1,1) = {"

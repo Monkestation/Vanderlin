@@ -9,10 +9,10 @@
 	contents_tag = null
 	component_type = /datum/component/storage/concrete/grid/pilltin
 
-/obj/item/storage/fancy/pilltin/update_icon()
+/obj/item/storage/fancy/pilltin/update_icon_state()
 	. = ..()
 	if(is_open)
-		if(contents.len == 0)
+		if(length(contents) == 0)
 			icon_state = "pilltin_empty"
 		else if(istype(contents[1], /obj/item/reagent_containers/pill/devour))
 			icon_state = "pilltinwake_open"
@@ -25,7 +25,7 @@
 
 /obj/item/storage/fancy/pilltin/MiddleClick(mob/user, params)
 	is_open = !is_open
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 	to_chat(user, span_notice("[src] is now [is_open ? "open" : "closed"]."))
 
 /obj/item/storage/fancy/pilltin/sate

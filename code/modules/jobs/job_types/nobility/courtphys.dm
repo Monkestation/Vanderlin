@@ -10,6 +10,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	allowed_races = RACES_PLAYER_NONHERETICAL
+	blacklisted_species = list(SPEC_ID_TRITON, SPEC_ID_HARPY)
 	outfit = /datum/outfit/courtphys
 	give_bank_account = 100
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
@@ -49,7 +50,7 @@
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
-	if(spawned.dna?.species?.id in RACES_PLAYER_NONDISCRIMINATED)
+	if(spawned.dna?.species?.id != SPEC_ID_MEDICATOR)
 		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
 
 /datum/outfit/courtphys

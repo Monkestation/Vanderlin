@@ -65,7 +65,7 @@
 	if(!master)
 		return FALSE
 
-	revive(TRUE, TRUE)
+	revive(ADMIN_HEAL_ALL)
 
 	if(ckey) //player
 		ckey = ckey

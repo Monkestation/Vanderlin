@@ -9,6 +9,7 @@
 		SPEC_ID_AASIMAR,\
 		SPEC_ID_HALF_ORC,\
 		SPEC_ID_RAKSHARI,\
+		SPEC_ID_TRITON,\
 	)
 	allowed_patrons = list(/datum/patron/divine/abyssor)
 	outfit = /datum/outfit/folkhero/swashbuckler
