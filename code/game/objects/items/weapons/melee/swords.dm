@@ -955,6 +955,7 @@
 
 	swingsound = BLADEWOOSH_HUGE
 	slot_flags = ITEM_SLOT_BACK
+	melt_amount = 225
 	sellprice = 90
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
@@ -1056,6 +1057,7 @@
 	desc = "A steel variant of the Flamberge, It's wave-like form distributes force better, and is less likely to break on impact."
 	icon_state = "steelflamberge"
 	wbalance = DODGE_CHANCE_NORMAL
+	melt_amount = 300
 	sellprice = 120
 
 /obj/item/weapon/sword/long/greatsword/zwei
@@ -1156,7 +1158,7 @@
 				return list("shrink" = 0.67,"sx" = 3,"sy" = 4,"nx" = -1,"ny" = 4,"wx" = -8,"wy" = 3,"ex" = 7,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
 
-/obj/item/weapon/sword/long/greatsword/steelclaymoreD
+/obj/item/weapon/sword/long/greatsword/steelclaymore
 	name = "steel claymore"
 	desc = "A steel variant of the standard Claymore."
 	icon_state = "steelclaymore"
