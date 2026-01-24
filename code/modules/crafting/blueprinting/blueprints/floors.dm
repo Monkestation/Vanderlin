@@ -616,7 +616,8 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 3,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/dirtclod = 2,
+		/obj/item/natural/silk = 1
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
