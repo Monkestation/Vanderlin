@@ -296,15 +296,14 @@
 		root_vine.permanent_buckle = TRUE
 		root_vine.dir = affected.dir
 		root_vine.buckle_mob(affected, TRUE)
+	var/obj/item/organ/brain/brain = affected.getorgan(/obj/item/organ/brain)
 	var/obj/item/organ/eyes/eyes = affected.getorganslot(ORGAN_SLOT_EYES)
 	var/obj/item/organ/lungs/lungs = affected.getorganslot(ORGAN_SLOT_LUNGS)
-	var/obj/item/organ/brain/brain = affected.getorganslot(ORGAN_SLOT_BRAIN)
+	brain?.brain_death = TRUE
 	if(eyes)
 		qdel(eyes)
 	if(lungs)
 		qdel(lungs)
-	if(brain)
-		qdel(brain)
 
 /datum/wound/black_briar_curse/head
 	show_in_book = FALSE

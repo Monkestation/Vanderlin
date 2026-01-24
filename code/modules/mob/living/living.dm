@@ -1068,7 +1068,7 @@
 	. = ..()
 	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
 	if(H)
-		if(H.rotted || H.skeletonized || H.brainkill)
+		if(H.rotted || H.skeletonized)
 			return FALSE
 
 

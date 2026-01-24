@@ -1060,7 +1060,10 @@
 	return ..()
 
 /mob/living/carbon/can_be_revived()
-	if(!getorgan(/obj/item/organ/brain) && (!mind))
+	if(!mind)
+		return FALSE
+	var/obj/item/organ/brain/b = getorgan(/obj/item/organ/brain)
+	if(!istype(b) || b.brain_death)
 		return FALSE
 	return ..()
 
