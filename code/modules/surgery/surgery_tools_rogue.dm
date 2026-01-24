@@ -53,7 +53,7 @@
 	wdefense = BAD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	armor_penetration = 0
-	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
