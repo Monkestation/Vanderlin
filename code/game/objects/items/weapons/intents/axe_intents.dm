@@ -8,11 +8,12 @@
 	animname = "chop"
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
 	penfactor = AP_AXE_CHOP
+	damfactor = 1.1
 	swingdelay = 1
 	misscost = 5
 	item_damage_type = "slash"
 
-/datum/intent/axe/chop/great//unique long attack for axes, basically you swing really really hard, stills worse than a polearm like the bardiche or spear
+/datum/intent/axe/chop/great//Used for the polearm category axes
 	penfactor = AP_HEAVYAXE_CHOP
 	reach = 2
 	chargetime = 1
@@ -21,20 +22,20 @@
 /datum/intent/axe/chop/battle/greataxe //Essentially a better polearm chop, this weapon is made to chop people limbs off.
 	penfactor = AP_GREATAXE_CHOP  // Same AP as the polearm CHOP
 	reach = 2
-	chargetime = 2
+	clickcd = 16
 	swingdelay = 2
 	no_early_release = TRUE // Needs fo fully charge
 	damfactor = 1.2
-	misscost = 20
+	misscost = 15
 
 /datum/intent/axe/chop/battle/greataxe/doublehead //Stronger than the one bladed axe but heavier
 	penfactor = AP_GREATAXE_CHOP
 	reach = 2
-	chargetime = 2.5 // Needs more time to fully charge it
+	clickcd = 18
 	no_early_release = TRUE // Needs fo fully charge
 	swingdelay = 2.5
 	damfactor = 1.3 // Stronger
-	misscost = 25 // Costs more if you miss
+	misscost = 18 // Costs more if you miss
 
 // AXE CUT INTENTS //
 /datum/intent/axe/cut
@@ -46,22 +47,22 @@
 	animname = "cut"
 	penfactor = AP_AXE_CUT
 	swingdelay = 0
-	misscost = 5
+	misscost = 4
 	item_damage_type = "slash"
 
 /datum/intent/axe/cut/battle/greataxe //Decent to cut as well
 	reach = 2
 	damfactor = 1.1
 	swingdelay = 1
-	misscost = 10
+	misscost = 8
 	item_damage_type = "slash"
 
 /datum/intent/axe/cut/battle/greataxe/doublehead //Better to cut as well
 	reach = 2
-	chargetime = 1.5
+	clickcd = 16
 	damfactor = 1.2 // More damage as well
 	swingdelay = 1.5
-	misscost = 15 // Heavier means more stamina loss if you miss
+	misscost = 12 // Heavier means more stamina loss if you miss
 	item_damage_type = "slash"
 
 // AXE THRUST INTENTS //
@@ -77,5 +78,5 @@
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = AP_HEAVYAXE_STAB
 	swingdelay = 1
-	misscost = 10
+	misscost = 8
 	item_damage_type = "stab"

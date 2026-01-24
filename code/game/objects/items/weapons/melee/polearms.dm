@@ -75,7 +75,7 @@
 	desc = "A staff that makes any journey easier. Durable and swift, capable of bludgeoning stray volves and ruffians alike."
 	icon_state = "quarterstaff"
 	force_wielded =  DAMAGE_STAFF_WIELD
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONG * 0.8
 	sellprice = 10
 
 //................ Iron-shod Staff ............... //
@@ -123,7 +123,7 @@
 	throwforce = DAMAGE_SPEAR
 	possible_item_intents = list(SPEAR_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_BASH)
-	max_blade_int = 100
+	max_blade_int = 150
 
 	slot_flags = ITEM_SLOT_BACK
 	melting_material = /datum/material/iron
@@ -171,9 +171,6 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyspear"
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	wdefense = AVERAGE_PARRY
-	wbalance = EASY_TO_DODGE
-	max_integrity = INTEGRITY_STRONG
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
 	sellprice = 60
@@ -201,8 +198,6 @@
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
-	max_blade_int = 100
-	max_integrity = INTEGRITY_STRONG
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/steel
@@ -213,21 +208,23 @@
 	name = "steel dagger-ax"
 	desc = "An eastern polearm of ancient design. It's rarely seen on the battlefield these daes."
 	icon_state = "ji_steel"
-	wdefense = GOOD_PARRY
 	gripsprite = FALSE
 
 /obj/item/weapon/polearm/spear/billhook/ji/iron
 	name = "iron dagger-ax"
 	icon_state = "ji_iron"
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 120
 	melting_material = /datum/material/iron
 	melt_amount = 75
 
 /obj/item/weapon/polearm/spear/billhook/ji/bronze
 	name = "bronze dagger-ax"
 	icon_state = "ji_bronze"
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	max_integrity = INTEGRITY_STANDARD
-	max_blade_int = 95
+	max_blade_int = 120
 	melting_material = /datum/material/bronze
 	melt_amount = 75
 
@@ -236,7 +233,7 @@
 	name = "simple spear"
 	desc = "With this weapon, the tribes of humenity became the chosen people of Psydon."
 	icon_state = "stonespear"
-	force = DAMAGE_SPEAR
+	force = DAMAGE_SPEAR - 2
 	force_wielded = DAMAGE_SPEAR + 2
 	throwforce = DAMAGE_SPEAR
 	wdefense = AVERAGE_PARRY
@@ -283,7 +280,6 @@
 	icon_state = "halberd"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
-	wdefense = ULTMATE_PARRY
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
@@ -295,7 +291,6 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	dropshrink = 0.8
 	melting_material = /datum/material/steel
-	smeltresult = /obj/item/ingot/steel
 	melt_amount = 150
 	sellprice = 90
 
@@ -387,8 +382,8 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyhalberd"
 	swingsound = BLADEWOOSH_MED
-	max_blade_int = 250
-	max_integrity = INTEGRITY_STRONG
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
 	axe_cut = 10
 	resistance_flags = FIRE_PROOF

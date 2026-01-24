@@ -56,9 +56,10 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	wdefense = AVERAGE_PARRY
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
 	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONGEST
 	minstr = 10 //meant to be a orc weapon or barbarian weapon
 
 	parrysound = "sword"
@@ -179,11 +180,11 @@
 	icon_state = "psyaxe"
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
-	wdefense = MEDIOCRE_PARRY
+	wdefense = AVERAGE_PARRY
 	possible_item_intents = list(AXE_CUT, AXE_CHOP)
 	gripped_intents = list(AXE_CUT, AXE_CHOP)
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 6
 
 	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
@@ -281,7 +282,6 @@
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	wlength = WLENGTH_LONG
 	experimental_onhip = TRUE
-	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 /obj/item/weapon/axe/steel/atgervi/getonmobprop(tag)
 	. = ..()
@@ -300,7 +300,6 @@
 	desc = "A steel axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
-	wdefense = GOOD_PARRY
 	minstr = 8
 	melt_amount = 75
 	sellprice = 45
@@ -324,9 +323,11 @@
 	icon_state = "chatchet"
 	force = DAMAGE_BAD_AXE
 	force_wielded = DAMAGE_BAD_AXE_WIELD
+	throwforce = DAMAGE_BAD_AXE_WIELD
 	wlength = WLENGTH_SHORT
-	max_blade_int = 120
-	max_integrity = INTEGRITY_WORST
+	wdefense = AVERAGE_PARRY
+	max_blade_int = 100
+	max_integrity = INTEGRITY_POOR
 	minstr = 6
 
 	melting_material = /datum/material/copper
@@ -350,13 +351,14 @@
 	name = "bone axe"
 	desc = "A rough axe made of bones"
 	icon_state = "boneaxe"
-	force = DAMAGE_AXE - 2
-	force_wielded =	DAMAGE_AXE_WIELD - 3
+	force = DAMAGE_BAD_AXE
+	force_wielded =	DAMAGE_BAD_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(AXE_CUT, AXE_CHOP)
 	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 100
+	max_integrity = INTEGRITY_WORST
 	minstr = 8
 
 	smeltresult = /obj/item/fertilizer/ash
@@ -426,8 +428,9 @@
 	force = DAMAGE_AXE - 5
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, MACE_STRIKE) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
 	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP, MACE_STRIKE) //Axe-equivalent to the Godendag or Grand Mace.
-	max_blade_int = 350
-	minstr = 12
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 11
 	melting_material = /datum/material/silver
 
 /obj/item/weapon/greataxe/psy/Initialize(mapload)

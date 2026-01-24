@@ -11,7 +11,6 @@
 	blade_class = BCLASS_CUT
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
 	penfactor = 10
-	chargetime = 0
 	swingdelay = 1
 	clickcd = 10	// between normal and fast
 	item_damage_type = "slash"
@@ -24,7 +23,6 @@
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 30
-	chargetime = 0
 	clickcd = CLICK_CD_FAST
 	swingdelay = 1
 	item_damage_type = "stab"

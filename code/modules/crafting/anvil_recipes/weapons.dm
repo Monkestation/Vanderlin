@@ -236,8 +236,8 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/iron/greataxe
-	name = "Greataxe (+Bar x2), (+Small log)"
-	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/iron, /obj/item/ingot/iron)
+	name = "Greataxe (+Bar, +Small log)"
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/iron,)
 	recipe_name = "a Greataxe with a single blade."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe
@@ -434,7 +434,8 @@
 	created_item = /obj/item/weapon/sword/rapier/ironestoc
 
 /datum/anvil_recipe/weapons/iron/kaskara
-	name = "Iron Kaskara"
+	name = "Iron Kaskara (+Bar)"
+	additional_items = list(/obj/item/ingot/iron)
 	recipe_name = "a Iron Kaskara"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/kaskara/iron
@@ -558,16 +559,16 @@
 	created_item = /obj/item/weapon/axe/steel
 
 /datum/anvil_recipe/weapons/steel/greataxe
-	name = "Greataxe (+Bar x2), (+Small log)"
-	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel, /obj/item/ingot/steel)
+	name = "Greataxe (+Bar, +Small log)"
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
 	recipe_name = "a Greataxe with a single blade."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe/steel
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/steel/doubleheaded_greataxe
-	name = "Double-headed Greataxe (+Bar x3), (+Small log)"
-	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
+	name = "Double-headed Greataxe (+Bar x2), (+Small log)"
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	recipe_name = "a Greataxe with two blades."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe/steel/doublehead
@@ -612,7 +613,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/weapons/steel/battleaxe
-	name = "Battle Axe (+Bar x2)"
+	name = "Battle Axe (+Bar)"
 	recipe_name = "a Battle Axe"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel)
@@ -628,7 +629,8 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/steel/cutlass_steel
-	name = "Cutlass"
+	name = "Cutlass (+Bar)"
+	additional_items = list(/obj/item/ingot/steel)
 	recipe_name = "a Cutlass"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/sabre/cutlass
@@ -654,7 +656,8 @@
 	created_item = /obj/item/weapon/sword/short/ida
 
 /datum/anvil_recipe/weapons/steel/kaskara // I FORGOT TO INCLUDE IT
-	name = "Steel Kaskara"
+	name = "Steel Kaskara (+Bar)"
+	additional_items = list(/obj/item/ingot/steel)
 	recipe_name = "a Steel Kaskara"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/kaskara

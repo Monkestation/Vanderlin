@@ -139,7 +139,7 @@
 	force = DAMAGE_WHIP - 10
 	throwforce = DAMAGE_WHIP - 15
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
+	possible_item_intents = list(/datum/intent/tie, WHIP_LASH)
 	blade_dulling = DULLING_BASHCHOP
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	parrysound = list('sound/combat/parry/parrygen.ogg')
@@ -154,13 +154,6 @@
 	melt_amount = 40
 	firefuel = null
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
-
-/datum/intent/whip
-	name = "strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("whips", "strikes", "smacks")
-	penfactor = 40
-	chargetime = 5
 
 /obj/item/rope/net
 	name = "rope net"

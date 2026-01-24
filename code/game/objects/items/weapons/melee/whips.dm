@@ -9,13 +9,13 @@
 	force = DAMAGE_WHIP
 	throwforce = DAMAGE_WHIP - 15
 	wdefense = BAD_PARRY
+	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
 	can_parry = FALSE
 	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
 	minstr = 4
 
 	sharpness = IS_BLUNT
-	//dropshrink = 0.75
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/skill/combat/whipsflails
@@ -177,6 +177,7 @@
 	icon_state = "urumi_steel"
 	force = DAMAGE_WHIP + 3
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
+	wbalance = HARD_TO_DODGE
 	can_parry = TRUE
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
 	max_blade_int = 175

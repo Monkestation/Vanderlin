@@ -57,7 +57,6 @@
 	melt_amount = 75
 	sellprice = 6
 
-
 /obj/item/weapon/knife/dagger/navaja
 	name = "navaja"
 	desc = "A folding knife used by the Mercator's guild. It possesses a long hilt, allowing for a sizable blade with good reach."
@@ -95,7 +94,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "iscissors"
 	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, SCISSOR_SNIP)
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_STANDARD
 	melt_amount = 75
 
 /obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, params)
@@ -134,8 +133,8 @@
 	name = "steel scissors"
 	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
-	force = DAMAGE_DAGGER + 2
-	max_integrity = INTEGRITY_POOR
+	force = DAMAGE_DAGGER
+	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/steel
 
 //................ Cleaver ............... //
@@ -169,7 +168,7 @@
 	icon_state = "combatknife"
 	throwforce = DAMAGE_KNIFE + 6
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
-	max_integrity = INTEGRITY_STANDARD - 20
+	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
@@ -188,6 +187,7 @@
 	name = "bronze dagger"
 	desc = "A dagger made out of bronze."
 	icon_state = "dagger_bronze"
+	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/bronze
 	melt_amount = 50
 	sellprice = 10
@@ -296,9 +296,9 @@
 	name = "silver dagger"
 	desc = "A dagger made of fine silver, the bane of the undead."
 	icon_state = "sildagger"
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	melting_material = /datum/material/silver
-	max_blade_int = 120
-	max_integrity = INTEGRITY_STRONG * 0.8
 	sellprice = 45
 	last_used = 0
 
@@ -543,11 +543,10 @@
 	icon_state = "cdagger"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	max_blade_int = 75
-	max_integrity = INTEGRITY_WORST - 25
+	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/copper
 	melt_amount = 50
 	sellprice = 10
-
 
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
@@ -559,7 +558,7 @@
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST - 50
 	icon_state = "throw_knifei"
-	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 25, "embedded_fall_chance" = 20)
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 20)
 	melt_amount = 50
 	sellprice = 3
 
@@ -571,7 +570,7 @@
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST - 30
 	icon_state = "throwing_bronze"
-	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 20, "embedded_fall_chance" = 15)
+	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 25, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
 	sellprice = 2
 
@@ -582,7 +581,7 @@
 	item_state = "bone_dagger"
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST
-	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 15)
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/steel
 	sellprice = 4
 
@@ -591,7 +590,6 @@
 	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
-	wdefense = GOOD_PARRY
 	throw_speed = 4
 	max_integrity = INTEGRITY_POOR
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)

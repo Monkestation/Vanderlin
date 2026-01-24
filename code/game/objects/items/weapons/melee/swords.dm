@@ -60,7 +60,7 @@
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(SHORT_CUT, SHORT_THRUST)
 	gripped_intents = null
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONGEST
 	minstr = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 30
@@ -69,7 +69,7 @@
 	desc = "An iron sword of shortened design and a reduced grip for single hand use."
 	icon_state = "iswordshort"
 	wdefense = GOOD_PARRY
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 	sellprice = 15
 
@@ -123,9 +123,9 @@
 	name = "silver sword"
 	desc = "A simple silver sword with an edge that gleams in moonlight."
 	icon_state = "silversword"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD - 1
-	max_integrity = INTEGRITY_STRONG
+	force = DAMAGE_SWORD - 2
+	force_wielded = DAMAGE_SWORD_WIELD - 2
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
@@ -137,8 +137,8 @@
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
 	icon_state = "isword"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD - 1
+	force = DAMAGE_SWORD - 2
+	force_wielded = DAMAGE_SWORD_WIELD - 2
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
@@ -148,9 +148,9 @@
 	name = "bronze sword"
 	desc = "A simple and reliable bronze sword."
 	icon_state = "sword_bronze"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD - 1
-	wdefense = AVERAGE_PARRY
+	force = DAMAGE_SWORD - 2
+	force_wielded = DAMAGE_SWORD_WIELD - 2
+	wdefense = GOOD_PARRY
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/bronze
@@ -167,8 +167,8 @@
 	name = "iron kaskara"
 	desc = "A sword of with a small crossguard."
 	icon_state = "kaskara_iron"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD - 1
+	force = DAMAGE_SWORD - 2
+	force_wielded = DAMAGE_SWORD_WIELD - 2
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
@@ -179,16 +179,12 @@
 	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_steel"
-	wdefense = GOOD_PARRY
-	minstr = 5
-	sellprice = 50
 
 /obj/item/weapon/sword/short/iron/ida
 	name = "iron ida"
 	desc = "A short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_iron"
-	sellprice = 20
 
 /obj/item/weapon/sword/rapier/caneblade
 	name = "cane blade"
@@ -233,8 +229,8 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "nockhopesh"
 	desc = "Glittering moonlight upon blued steel."
-	possible_item_intents = list(SWORD_CUT, SHORT_THRUST, SWORD_CHOP)
-	max_integrity = INTEGRITY_STANDARD
+	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_CHOP)
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
 	. = ..()
@@ -258,16 +254,20 @@
 	wbalance = EASY_TO_DODGE
 	gripped_intents = list(AXE_CHOP, CURVED_THRUST)
 
-/obj/item/weapon/sword/sabre/dadao/iron //Fix this
+/obj/item/weapon/sword/sabre/dadao/iron
 	name = "iron dadao"
 	icon_state = "dadao_iron"
 	melting_material = /datum/material/iron
+	force = DAMAGE_SWORD - 1
+	force_wielded = DAMAGE_SWORD_WIELD -1
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONG
 
 /obj/item/weapon/sword/sabre/dadao/bronze
 	name = "bronze dadao"
 	icon_state = "dadao_bronze"
 	melting_material = /datum/material/bronze
-	max_blade_int = 95
+	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD
 
 //................ Shalal Sabre ............... //
@@ -281,7 +281,7 @@
 	parrysound = "rapier"
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWDLONG_CHOP, SWDLONG_THRUST)
+	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST)
 	minstr = 6
 
 	bigboy = TRUE
@@ -322,7 +322,7 @@
 	name = "scimitar"
 	desc = "A Zaladin design for swords, these curved blades are a common sight in the lands of the Ziggurat."
 	icon_state = "scimitar"
-	wdefense = AVERAGE_PARRY
+	wdefense = GOOD_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
 	swingsound = BLADEWOOSH_LARGE
 
@@ -544,7 +544,6 @@
 	desc = "An embellished swift sword from the east."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "nimcha"
-	wbalance = HARD_TO_DODGE
 	dropshrink = 0.8
 	sellprice = 140 // its made with gold and steel, thats pretty valuable
 
@@ -623,7 +622,7 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWORD_CHOP)
+	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 
 	swingsound = BLADEWOOSH_LARGE
 	parrysound = "largeblade"
@@ -777,7 +776,6 @@
 	name = "judgement"
 	desc = "A sword with a silvered grip, a jeweled hilt and a honed blade; a design fit for nobility."
 	force = DAMAGE_SWORD - 5
-	force_wielded = DAMAGE_GREATSWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 
@@ -1000,7 +998,7 @@
 	icon_state = "psygsword"
 	force = DAMAGE_SWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_THRUST, AXE_CHOP)
+	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWDLONG_CHOP)
 	minstr = 9 //So the ordinator can use his sword as old.
 
 /obj/item/weapon/sword/long/broadsword/psy
@@ -1052,7 +1050,7 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(ZWEI_CUT, ZWEI_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	max_blade_int = 150 // Iron tier
+	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 	melt_amount = 225
@@ -1076,7 +1074,6 @@
 	name = "elven kriegsmesser"
 	desc = "A huge, curved elven blade. It's metal is of a high quality, yet still light, crafted by the greatest elven bladesmiths."
 	icon_state = "kriegsmesser"
-	wdefense = ULTMATE_PARRY
 	minstr = 10
 	sellprice = 120
 
@@ -1124,7 +1121,7 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	max_blade_int = 150 // Iron tier
+	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 10
 	melting_material = /datum/material/iron
@@ -1144,7 +1141,7 @@
 				return list("shrink" = 0.67,"sx" = 3,"sy" = 4,"nx" = -1,"ny" = 4,"wx" = -8,"wy" = 3,"ex" = 7,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
 
-/obj/item/weapon/sword/long/greatsword/steelclaymoreD
+/obj/item/weapon/sword/long/greatsword/steelclaymore
 	name = "steel claymore"
 	desc = "A steel variant of the standard Claymore."
 	icon_state = "steelclaymore"
@@ -1152,7 +1149,7 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = INTEGRITY_STRONG
-	max_integrity = INTEGRITY_STRONGEST - 50
+	max_integrity = INTEGRITY_STRONGEST
 	minstr = 10
 	sellprice = 110
 
@@ -1252,9 +1249,8 @@
 	desc = "This wicked executioner's blade calls for order."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "astratasword"
-	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWORD_CHOP)
-	max_integrity = INTEGRITY_STRONG
+	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
+	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
 
 //................ Terminus Est ............... //
 /obj/item/weapon/sword/long/exe/cloth
@@ -1340,13 +1336,13 @@
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "estoc"
 	force = DAMAGE_SWORD - 8
-	force_wielded = DAMAGE_SWORD_WIELD
+	force_wielded = DAMAGE_SWORD
 	wdefense = GREAT_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(SWORD_CHOP,SWORD_STRIKE,)
 	gripped_intents = list(ESTOC_THRUST, ESTOC_LUNGE, SWORD_CHOP, SWORD_STRIKE)
-	max_blade_int = 300
+	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 8
 

@@ -6,12 +6,12 @@
 	animname = "stab"
 	icon_state = "instab"
 	reach = 2
-	chargetime = 1
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = AP_POLEARM_THRUST
 	swingdelay = 1
-	misscost = 10
+	clickcd = 14
+	misscost = 8
 	item_damage_type = "stab"
 
 /datum/intent/polearm/thrust/spear
@@ -25,7 +25,7 @@
 	attack_verb = list("bashes", "strikes")
 	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
 	penfactor = AP_POLEARM_BASH
-	damfactor = 0.8
+	damfactor = 0.9
 	swingdelay = 1
 	misscost = 5
 	item_damage_type = "blunt"
@@ -50,7 +50,6 @@
 /datum/intent/polearm/cut/naginata
 	damfactor = 1.2
 
-
 // POLEARM CHOP INTENTS //
 /datum/intent/polearm/chop
 	name = "chop"
@@ -63,7 +62,7 @@
 	chargetime = 1.5
 	damfactor = 1.2
 	swingdelay = 2
-	misscost = 20
+	misscost = 12
 	warnie = "mobwarning"
 	item_damage_type = "slash"
 

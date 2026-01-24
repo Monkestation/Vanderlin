@@ -10,14 +10,13 @@
 	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
 	penfactor = AP_SWORD_CHOP
-	damfactor = 1.1
 	swingdelay = 1
 	misscost = 8
 	item_damage_type = "slash"
 
 /datum/intent/sword/chop/long
 	damfactor = 1.1
-	chargetime = 1.2
+	clickcd = 16
 	swingdelay = 1.5
 	misscost = 12
 	warnie = "mobwarning"
@@ -105,7 +104,6 @@
 	charging_slowdown = 0.8
 	penfactor = AP_CLUB_SMASH
 	swingdelay = 1
-	damfactor = 1.1
 	item_damage_type = "blunt"
 
 /*-----------\
@@ -170,7 +168,6 @@
 /datum/intent/sword/thrust/estoc
 	name = "thrust"
 	penfactor = AP_SWORD_THRUST+10 //30 total
-	recovery = 20
 	clickcd = 10
 
 /datum/intent/sword/lunge
@@ -184,7 +181,6 @@
 	penfactor = AP_SWORD_THRUST+30 //50 total
 	chargetime = 5
 	no_early_release = TRUE
-	recovery = 20
 	clickcd = 10
 
 /datum/intent/katana/arc
@@ -215,6 +211,5 @@
 	chargetime = 3
 	chargedrain = 1
 	misscost = 25
-	recovery = 15
 	charging_slowdown = 1
 	clickcd = 15

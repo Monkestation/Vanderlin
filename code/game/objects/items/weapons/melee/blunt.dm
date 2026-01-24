@@ -319,6 +319,8 @@
 	desc = "A stubby little club favored for thwacking thieves and smart-mouthed peasant folk."
 	force = DAMAGE_CLUB
 	force_wielded = DAMAGE_CLUB_WIELD
+	possible_item_intents = list(MACE_STRIKE, DAZE_BASH)
+	gripped_intents = list(MACE_STRIKE, MACE_SMASH, DAZE_BASH)
 	wdefense = MEDIOCRE_PARRY
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
@@ -347,6 +349,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflangedmace"
 	wdefense = AVERAGE_PARRY
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
 
