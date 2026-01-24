@@ -122,6 +122,7 @@
 		record_round_statistic(STATS_PLANTS_HARVESTED)
 	to_chat(user, span_notice(feedback))
 	yield_produce(modifier)
+	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
 /obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
@@ -246,12 +247,14 @@
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
 			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
 		add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
 
@@ -365,7 +368,7 @@
 	if(plant && plant_dead)
 		plant_dead = FALSE
 		plant_health = 10.0
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 
 	// Dendor provides balanced nutrients if low
 	if(nitrogen < 30)
@@ -382,7 +385,7 @@
 	// And it grows a little!
 	if(plant)
 		if(add_growth(2 MINUTES))
-			update_icon()
+			update_appearance(UPDATE_OVERLAYS)
 
 /// adjust water
 /obj/structure/soil/proc/adjust_water(adjust_amount)
@@ -652,14 +655,14 @@
 
 	// Calculate max quality points based on total potential time
 	// Base time + production time + reasonable harvest window
-	var/total_potential_time = plant.maturation_time + plant.produce_time
+	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
 
 	var/progress_ratio = quality_points / max_quality_points
 	var/diminishing_returns = 1 - (progress_ratio * 0.8)  // Slightly reduced diminishing returns
 
 	// Accumulate quality points
-	quality_points += dt * quality_rate * 0.26 * phase_multiplier * diminishing_returns
+	quality_points += (dt / 10) * quality_rate * 0.26 * phase_multiplier * diminishing_returns
 	quality_points = min(quality_points, max_quality_points)
 
 	// Quality tier thresholds

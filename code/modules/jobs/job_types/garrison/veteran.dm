@@ -45,6 +45,7 @@
 		S.name = "veteran cloak ([index])"
 
 	spawned.verbs |= /mob/proc/haltyell
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/job/advclass/veteran
 	inherit_parent_title = TRUE
@@ -141,7 +142,7 @@
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/medicine = 2
 	)
@@ -323,7 +324,7 @@
 		"Zweihander" = /obj/item/weapon/sword/long/greatsword/zwei, \
 		"Halberd" = /obj/item/weapon/polearm/halberd \
 	)
-	var/weapon_choice = spawned.select_equippable(spawned, weapons, message = "CHOOSE YOUR WEAPON.", title  = "TAKE UP ARMS")
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title  = "TAKE UP ARMS")
 	switch(weapon_choice)
 		if("Zweihander")
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
@@ -367,9 +368,9 @@
 	skills = list(
 		/datum/skill/combat/wrestling = 5,
 		/datum/skill/combat/unarmed = 5,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/misc/swimming = 3,
 	)
@@ -403,7 +404,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 
-	spawned.select_equippable(spawned, list( \
+	spawned.select_equippable(player_client, list( \
 		"Knuckles" = /obj/item/weapon/knuckles, \
 		"Katar" = /obj/item/weapon/katar, \
 		),

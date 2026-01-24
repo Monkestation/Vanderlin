@@ -133,7 +133,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
 	if(type)
-		if(type & MSG_VISUAL && eye_blind )//Vision related
+		if(type & MSG_VISUAL && is_blind() )//Vision related
 			if(!alt_msg)
 				return
 			else
@@ -146,7 +146,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			else
 				msg = alt_msg
 				type = alt_type
-				if(type & MSG_VISUAL && eye_blind)
+				if(type & MSG_VISUAL && is_blind())
 					return
 	to_chat(src, msg)
 
@@ -186,7 +186,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			msg = blind_message
 		if(!msg)
 			continue
-		if(M != src && !M.eye_blind)
+		if(M != src && !M.is_blind())
 			M.log_message("saw [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(msg, MSG_VISUAL, blind_message, MSG_AUDIBLE)
 		if(runechat_message && M.can_hear())
@@ -397,69 +397,77 @@ GLOBAL_VAR_INIT(mobids, 1)
  * [this byond forum post](https://secure.byond.com/forum/?post=1326139&page=2#comment8198716)
  * for why this isn't atom/verb/examine()
  */
-/mob/verb/examinate(atom/A as mob|obj|turf in view()) //It used to be oview(12), but I can't really say why
+/mob/verb/examinate(atom/examinify as mob|obj|turf in view()) //It used to be oview(12), but I can't really say why
 	set name = "Examine"
 	set category = "IC"
-	set hidden = 1
-	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(run_examinate), A))
 
-/mob/proc/run_examinate(atom/A)
-	if(isturf(A) && !(sight & SEE_TURFS) && !(A in view(client ? client.view : world.view, src)))
+	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(run_examinate), examinify))
+
+/mob/proc/run_examinate(atom/examinify)
+	if(QDELETED(examinify)) // since this can run async we might have had the atom get qdeleted already
+		return
+
+	if(isturf(examinify) && !(sight & SEE_TURFS) && !(examinify in view(client ? client.view : world.view, src)))
 		// shift-click catcher may issue examinate() calls for out-of-sight turfs
 		return
 
 	if(is_blind())
-		to_chat(src, "<span class='warning'>Something is there but I can't see it!</span>")
+		to_chat(src, span_warning("Something is there but I can't see it!"))
 		return
 
-	if(isturf(A.loc) && isliving(src))
-		face_atom(A)
-		if(src.m_intent != MOVE_INTENT_SNEAK)
-			visible_message("<span class='emote'>[src] looks at [A].</span>")
-		else
-			if(isliving(A))
-				var/mob/living/observer = src
-				var/mob/living/target = A
-				var/observer_skill = observer.get_skill_level(/datum/skill/misc/sneaking)
-				if(observer_skill <= 0)
-					observer_skill = 1
-				if(observer.rogue_sneaking)
-					observer_skill += 1
+	if(isturf(examinify.loc) && isliving(src) && stat == CONSCIOUS)
+		face_atom(examinify)
+		if(m_intent != MOVE_INTENT_SNEAK)
+			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]"))
+		else if(isliving(examinify))
+			var/mob/living/examaniee = examinify
+			if(examaniee.peek_examine_check(src))
+				to_chat(src, span_info("My peeking went unnoticed.."))
+			else
+				to_chat(src, span_warning("[examaniee] noticed me peeking!"))
 
-				// determine PER multiplier based on the target PER
-				var/multiplier = 5
-				if(target.STAPER < 5)
-					multiplier = 4
-				else if(target.STAPER >= 5 && target.STAPER < 10)
-					multiplier = 5
-				else if(target.STAPER >= 10 && target.STAPER < 15)
-					multiplier = 6
-				else if(target.STAPER >= 15 && target.STAPER <= 20)
-					multiplier = 7
+				if(examaniee.client) // only if they have a client to see it
+					to_chat(examaniee, span_warning("[src] peeks at you!"))
+					found_ping(get_turf(src), examaniee.client, "hidden")
 
-				// calculate probability to fail
-				var/probby = (target.STAPER * multiplier) - (observer_skill * 10)
-
-				// clamp probability
-				probby = max(probby, 5)
-				probby = min(probby, 95)
-
-				if(prob(probby))
-					to_chat(src, span_warning("[A] noticed me peeking!"))
-					to_chat(A, span_warning("[src] peeks at you!"))
-					if(target.client) // only if they have a client to see it
-						found_ping(get_turf(observer), target.client, "hidden")
-				else
-					if(observer.client?.prefs.showrolls)
-						to_chat(src, span_info("[probby]%... my peeking went unnoticed.."))
-					else
-						to_chat(src, span_info("My peeking went unnoticed.."))
-	var/list/result = A.examine(src)
+	var/list/result = examinify.examine(src)
 	if(LAZYLEN(result))
 		for(var/i in 1 to (length(result) - 1))
 			result[i] += "\n"
 		to_chat(src, examine_block("<span class='infoplain'>[result.Join()]</span>"))
-	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, A)
+
+	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, examinify)
+
+// Check if we notice an observer
+/mob/living/proc/peek_examine_check(mob/living/observer)
+	if(!istype(observer))
+		return FALSE
+
+	if(is_blind() || stat < CONSCIOUS)
+		return FALSE
+
+	var/observer_skill = observer.get_skill_level(/datum/skill/misc/sneaking)
+	if(observer_skill <= 0)
+		observer_skill = 1
+	if(observer.rogue_sneaking)
+		observer_skill += 1
+
+	var/multiplier = 5
+
+	var/our_per = STAPER
+	if(our_per < 5)
+		multiplier = 4
+	else if(our_per >= 5 && our_per < 10)
+		multiplier = 5
+	else if(our_per >= 10 && our_per < 15)
+		multiplier = 6
+	else if(our_per >= 15 && our_per <= 20)
+		multiplier = 7
+
+	// calculate probability to fail
+	var/probby = (our_per * multiplier) - (observer_skill * 10)
+
+	return prob(clamp(probby, 5, 95))
 
 ///Can this mob resist (default FALSE)
 /mob/proc/can_resist()
@@ -741,8 +749,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		if(length(GLOB.sdql2_queries))
 			if(statpanel("SDQL2"))
 				stat("Access Global SDQL2 List", GLOB.sdql2_vv_statobj)
-				for(var/i in GLOB.sdql2_queries)
-					var/datum/SDQL2_query/Q = i
+				for(var/datum/SDQL2_query/Q as anything in GLOB.sdql2_queries)
 					Q.generate_stat()
 
 	if(listed_turf && client)
@@ -895,7 +902,12 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return mind.get_ghost(even_if_they_cant_reenter, ghosts_with_clients)
 
 ///Force get the ghost from the mind
-/mob/proc/grab_ghost(force)
+/mob/proc/grab_ghost(force, grab_spirit)
+	if(grab_spirit)
+		var/mob/living/carbon/spirit/underworld_spirit = get_spirit()
+		if(underworld_spirit)
+			underworld_spirit.mind?.transfer_to(src, TRUE)
+			qdel(underworld_spirit)
 	if(mind)
 		return mind.grab_ghost(force = force)
 
@@ -1163,7 +1175,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/proc/can_read(obj/O, silent = FALSE)
 	if(isobserver(src))
 		return TRUE
-	if(is_blind() || eye_blurry)
+	if(is_blind() || has_status_effect(/datum/status_effect/eye_blur))
 		if(!silent)
 			to_chat(src, span_warning("I'm too blind to read."))
 		return
@@ -1348,10 +1360,12 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(!choice)
 		choice = pick(selection_list)
 
-	var/list/spawn_items = LAZYACCESS(selection_list, choice)
+	var/spawn_items = LAZYACCESS(selection_list, choice)
+	if(isnull(spawn_items))
+		return
+
 	if(!islist(spawn_items))
 		spawn_items = list(spawn_items)
-
 	if(!length(spawn_items))
 		return choice
 

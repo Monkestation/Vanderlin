@@ -108,11 +108,7 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 
 	AddElement(/datum/element/connect_loc, loc_connections)
 
-
 	LAZYADD(GLOB.runes, src)
-
-
-
 
 /obj/effect/blood_rune/Destroy()
 
@@ -196,7 +192,6 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 		if (2)
 			if (prob(15))
 				qdel(src)
-
 
 /obj/effect/blood_rune/update_icon(draw_up_to = 3)
 	. = ..()

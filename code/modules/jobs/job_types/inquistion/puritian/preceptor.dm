@@ -7,6 +7,7 @@
 	category_tags = list(CTAG_PURITAN)
 	jobstats = list(
 		STATKEY_STR = 2,
+		STATKEY_PER = 2,
 		STATKEY_END = 2,
 		STATKEY_CON = 2,
 		STATKEY_SPD = 2,
@@ -37,6 +38,8 @@
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 
 	var/static/list/gear = list(
 		"Knuckleduster and Knuckleduster",

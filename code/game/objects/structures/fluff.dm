@@ -913,12 +913,12 @@
 									amt2raise = 0
 						if(amt2raise > 0)
 							user.adjust_experience(W.associated_skill, amt2raise * boon, FALSE)
-						playsound(loc,pick('sound/combat/hits/onwood/education1.ogg','sound/combat/hits/onwood/education2.ogg','sound/combat/hits/onwood/education3.ogg'), rand(50,100), FALSE)
+						playsound(src,pick('sound/combat/hits/onwood/education1.ogg','sound/combat/hits/onwood/education2.ogg','sound/combat/hits/onwood/education3.ogg'), rand(50,100), FALSE)
 					else
 						user.visible_message("<span class='danger'>[user] trains on [src], but [src] ripostes!</span>")
 						L.AdjustKnockdown(1)
 						L.throw_at(get_step(L, get_dir(src,L)), 2, 2, L, spin = FALSE)
-						playsound(loc, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
+						playsound(src, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
 					flick(pick("p_dummy_smashed","p_dummy_smashedalt"),src)
 					return
 			else //sanity
@@ -929,7 +929,7 @@
 			user.visible_message("<span class='danger'>[user] awkwardly tries to hit \the [src] with \the [W], but \the [src] ripostes!</span>")
 			goof.AdjustKnockdown(1)
 			goof.throw_at(get_step(goof, get_dir(src,goof)), 2, 2, goof, spin = FALSE)
-			playsound(loc, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
+			playsound(src, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
 			flick(pick("p_dummy_smashed","p_dummy_smashedalt"),src)
 			return
 	..()
@@ -956,7 +956,7 @@
 	if(istype(W, objective))
 		if(user.mind)
 			if(isdarkelf(user))
-				playsound(loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+				playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 				current += 1
 				SSmapping.retainer.delf_ears += 1
 				if(current >= goal)
@@ -1000,8 +1000,8 @@
 			if(B.contrib >= 80)
 				give_rewards(B, user)
 			else
-				playsound(loc,'sound/items/matidol1.ogg', 50, TRUE)
-			playsound(loc,'sound/misc/eat.ogg', rand(30, 60), TRUE)
+				playsound(src,'sound/items/matidol1.ogg', 50, TRUE)
+			playsound(src,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 			qdel(W)
 			return
 
@@ -1040,7 +1040,7 @@
 	if(offering_bandit.contrib >= 100 && offering_bandit.tri_amt < 8)
 		give_rewards(offering_bandit, user)
 	else
-		playsound(loc,'sound/items/matidol2.ogg', 50, TRUE)
+		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
 
 /obj/structure/fluff/psycross
 	name = "pantheon cross"
@@ -1330,8 +1330,7 @@
 	if(generic_message && M != user)
 		to_chat(M, span_danger("[src] emits a blinding light!"))
 	if(M.flash_act())
-		var/diff = power - M.confused
-		M.confused += min(power, diff)
+		M.set_confusion_if_lower(power SECONDS)
 
 /obj/structure/fluff/psycross/psydon
 	name = "psydonian cross"
@@ -1484,4 +1483,5 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	MakeParticleEmitter(/particles/smoke/cig/big)
+	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
+	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))

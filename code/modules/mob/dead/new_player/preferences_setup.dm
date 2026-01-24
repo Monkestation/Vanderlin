@@ -140,6 +140,10 @@
 
 	// Set up the dummy for its photoshoot
 	var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
+	for(var/datum/quirk/quirk in mannequin.quirks)
+		mannequin.remove_quirk(quirk.type)
+	mannequin.transform = matrix()
+
 	apply_prefs_to(mannequin, TRUE)
 
 	if(previewJob)

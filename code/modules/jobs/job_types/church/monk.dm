@@ -31,8 +31,8 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/axesmaces = 1,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 3,
@@ -54,6 +54,7 @@
 		if(/datum/patron/divine/necra)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
@@ -105,8 +106,8 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/ravox)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			var/sword_skill = rand(1,3)
-			var/whip_skill = rand(1,3)
+			var/sword_skill = rand(1,2)
+			var/whip_skill = rand(1,2)
 			var/axe_skill = rand(0,1)
 			spawned.adjust_skillrank(/datum/skill/combat/swords, sword_skill, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, whip_skill, TRUE)
@@ -159,6 +160,7 @@
 			shoes = /obj/item/clothing/shoes/boots
 			pants = /obj/item/clothing/pants/trou/leather/mourning
 			armor = /obj/item/clothing/shirt/robe/necra
+			backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red) // Needed for coffin sanctification, they get enough for one, the rest they must source themselves.
 			if(equipped_human.age == AGE_OLD)
 				l_hand = /obj/item/weapon/mace/cane/necran
 			else

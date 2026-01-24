@@ -292,7 +292,7 @@
 	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 3))
 	charge_deduction(O, user, 1)
 	flick(on_icon, src)
-	playsound(loc, 'sound/misc/machinevomit.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/machinevomit.ogg', 50, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(smelt_part2), O, user), 5)
 	return
 
@@ -348,15 +348,15 @@
 	var/amputation_speed_mod = 1
 
 	patient.visible_message(span_danger("[user] begins to secure [src] around [patient]'s [limb_snip_candidate.name]."), span_userdanger("[user] begins to secure [src] around your [limb_snip_candidate.name]!"))
-	playsound(get_turf(patient), 'sound/misc/ratchet.ogg', 20, TRUE)
+	playsound(patient, 'sound/misc/ratchet.ogg', 20, TRUE)
 	if(patient.stat >= UNCONSCIOUS || patient.buckled || locate(/obj/structure/table/optable) in get_turf(patient))
 		amputation_speed_mod *= 0.5
-	if(patient.stat != DEAD && (patient.jitteriness || patient.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
+	if(patient.stat != DEAD && (patient.has_status_effect(/datum/status_effect/jitter) || patient.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
 		amputation_speed_mod *= 1.5 //15*0.5*1.5=11.25
 
 	var/skill_modifier = 1.5 - (user.get_skill_level(/datum/skill/craft/engineering) / 6)
 	if(do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = patient))
-		playsound(get_turf(patient), 'sound/misc/guillotine.ogg', 20, TRUE)
+		playsound(patient, 'sound/misc/guillotine.ogg', 20, TRUE)
 		limb_snip_candidate.drop_limb()
 		user.visible_message(span_danger("[src] violently slams shut, amputating [patient]'s [limb_snip_candidate.name]."), span_notice("You amputate [patient]'s [limb_snip_candidate.name] with [src]."))
 		charge_deduction(amputee, user, 1)
@@ -491,7 +491,6 @@
 		if(!user.put_in_active_hand(attachment))
 			attachment.forceMove(user.loc)
 		attachment = null
-		update_icon()
 	if(!on)
 		user.visible_message(span_notice("[user] begins packing up \the [src]."))
 		if(!do_after(user, 2 SECONDS, TRUE, src))
@@ -514,7 +513,6 @@
 	new /obj/item/mobilestove(get_turf(src))
 	burn_out()
 	qdel(src)
-	return
 
 /obj/item/mobilestove
 	name = "packed stove"

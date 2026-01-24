@@ -22,6 +22,6 @@
 	if(!proximity_flag)
 		return
 	if(isliving(target))
-		var/mob/living/carbon/targeted = target
+		var/mob/living/carbon/targeted = user
 		targeted.adjustBruteLoss(10)
 		to_chat(user, span_notice("[source] gouges you with it's sharp edges!"))

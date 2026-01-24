@@ -100,7 +100,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	else
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
-		playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		balloon_alert(user, "I thumb off the cork.")
 		spillable = TRUE
 		GLOB.weather_act_upon_list |= src
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+	playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 	if(!contained)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	var/obj/item/reagent_containers/glass/bottle/btle = new
@@ -233,7 +233,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		balloon_alert(user, "I thumb off the cork.")
-		playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		desc = "An open vial, easy to drink quickly."
 		spillable = TRUE
 	update_appearance(UPDATE_OVERLAYS)

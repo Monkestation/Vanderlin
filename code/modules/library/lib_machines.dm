@@ -132,7 +132,7 @@
 	printing = TRUE
 	src.icon_state = "Ppress_Printing"
 	to_chat(user, span_warning("[src] starts printing..."))
-	playsound(src.loc, 'sound/misc/ppress.ogg', 100, FALSE)
+	playsound(src, 'sound/misc/ppress.ogg', 100, FALSE)
 	// Delete the blank paper as it's consumed during printing
 	if(loaded_paper)
 		qdel(loaded_paper)

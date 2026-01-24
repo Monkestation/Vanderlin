@@ -11,18 +11,18 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 
 	jobstats = list(
-		STATKEY_PER = 2,
+		STATKEY_PER = 1,
 		STATKEY_SPD = 2,
 		STATKEY_END = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/athletics = 3,
@@ -59,8 +59,7 @@
 		title = "XYLIX"
 	)
 
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 
 /datum/outfit/mercenary/sworddancer
 	name = "Sword Dancer (Mercenary)"

@@ -79,11 +79,41 @@
 
 /datum/job/advclass/royalknight
 	inherit_parent_title = TRUE
+	should_reset_stats = FALSE
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	select_knight_specialization(spawned)
+	var/static/list/selectable = list(
+		"Flail" = /obj/item/weapon/flail/sflail,
+		"Halberd" = /obj/item/weapon/polearm/halberd,
+		"Longsword" = /obj/item/weapon/sword/long,
+		"Sabre" = /obj/item/weapon/sword/sabre/dec,
+	)
+
+	var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "KNIGHT")
+	if(!choice)
+		return
+
+	var/grant_shield = TRUE
+
+	switch(choice)
+		if("Flail")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 2, 4, TRUE)
+		if("Halberd")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 4, TRUE)
+			grant_shield = FALSE
+		if("Longsword")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
+			grant_shield = FALSE
+		if("Sabre")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
+
+	if(grant_shield)
+		spawned.adjust_skillrank(/datum/skill/combat/shields, 1)
+		var/obj/item/weapon/shield/tower/metal/shield = new /obj/item/weapon/shield/tower/metal()
+		if(!spawned.equip_to_appropriate_slot(shield))
+			qdel(shield)
 
 /datum/outfit/royalknight
 	name = "Royal Knight Base"
@@ -152,47 +182,3 @@
 		var/obj/item/clothing/cloak/boiler/B = H.backr
 		SEND_SIGNAL(B, COMSIG_ATOM_STEAM_INCREASE, 1000)
 
-/datum/job/advclass/royalknight/proc/select_knight_specialization(mob/living/carbon/human/H)
-	var/static/list/selectable = list(
-		"Flail" = /obj/item/weapon/flail/sflail,
-		"Halberd" = /obj/item/weapon/polearm/halberd,
-		"Longsword" = /obj/item/weapon/sword/long,
-		"Sabre" = /obj/item/weapon/sword/sabre/dec,
-		"Unarmed" = /obj/item/weapon/knife/dagger/steel,
-		"Knuckles" = /obj/item/weapon/knuckles,
-		"Katar" = /obj/item/weapon/katar
-	)
-
-	var/choice = H.select_equippable(H, selectable, message = "Choose Your Specialisation", title = "KNIGHT")
-	if(!choice)
-		return
-
-	var/grant_shield = TRUE
-
-	switch(choice)
-		if("Flail")
-			H.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 2, 4, TRUE)
-		if("Halberd")
-			H.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 4, TRUE)
-			grant_shield = FALSE
-		if("Longsword")
-			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
-			grant_shield = FALSE
-		if("Sabre")
-			H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
-		if("Unarmed")
-			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 3, 5, TRUE)
-			H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, 4, TRUE)
-			grant_shield = FALSE
-		if("Knuckles")
-			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4, TRUE)
-			grant_shield = FALSE
-		if("Katar")
-			H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4, TRUE)
-			grant_shield = FALSE
-
-	if(grant_shield)
-		H.adjust_skillrank(/datum/skill/combat/shields, 1)
-		var/obj/item/weapon/shield/tower/metal/shield = new /obj/item/weapon/shield/tower/metal()
-		if(!H.equip_to_appropriate_slot(shield))
-			qdel(shield)

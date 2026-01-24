@@ -70,6 +70,7 @@
 		if(/datum/patron/divine/necra)
 			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 		if(/datum/patron/divine/pestra)
 			spawned.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
@@ -84,7 +85,7 @@
 				"Heartstring (Rapier)" = /obj/item/weapon/sword/rapier/eora,
 				"Close Caress (Knuckles)" = /obj/item/weapon/knuckles/eora,
 			)
-			var/choice = spawned.select_equippable(spawned, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
+			var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
 			if(!choice)
 				return
 			switch(choice)
@@ -105,7 +106,7 @@
 				"DepthSeeker (Spear)" = /obj/item/weapon/polearm/spear/abyssor,
 				"Barotrauma (Katars)" = /obj/item/weapon/katar/abyssor,
 			)
-			var/choice = spawned.select_equippable(spawned, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
+			var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
 			if(!choice)
 				return
 			switch(choice)

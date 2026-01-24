@@ -117,10 +117,6 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 		var/mob/living/L = user
 		if(L.stat != CONSCIOUS)
 			return
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			if(C.is_mouth_covered())
-				return
 		var/list/waterl
 		if(mana_pool.amount > 50)
 			waterl = list(/datum/reagent/medicine/manapot = 2)

@@ -1,28 +1,14 @@
 /mob/living/carbon/human/species/werewolf
 	race = /datum/species/werewolf
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	flags_1 = PREVENT_CONTENTS_EXPLOSION_1
 	base_strength = 15
 	base_constitution = 15
 	base_endurance = 15
 
-	var/datum/language_holder/stored_language
-	var/list/stored_skills
-	var/list/stored_experience
-
-/mob/living/carbon/human/species/werewolf/death(gibbed, nocutscene)
-	. = ..()
-	if(stored_mob)
-		werewolf_untransform(null, TRUE, gibbed)
-
-/mob/living/carbon/human/species/werewolf/male
-	gender = MALE
-
-/mob/living/carbon/human/species/werewolf/female
-	gender = FEMALE
-
-/mob/living/carbon/human/species/werewolf/child
-	age = AGE_CHILD
+	cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
+	limb_destroyer = TRUE
+	ambushable = FALSE
+	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
 
 /datum/species/werewolf
 	name = "werewolf"
@@ -36,7 +22,6 @@
 		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_RADIMMUNE,
 		TRAIT_NODISMEMBER,
-		TRAIT_LYCANRESILENCE,
 		TRAIT_STRONGBITE,
 		TRAIT_ZJUMP,
 		TRAIT_NOFALLDAMAGE1,
@@ -50,6 +35,7 @@
 		TRAIT_IGNORESLOWDOWN,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_UNDODGING,
+		TRAIT_UNPARRYING,
 		TRAIT_LONGSTRIDER
 	)
 
@@ -82,15 +68,14 @@
 	)
 
 	changesource_flags = WABBAJACK
-	bleed_mod = 0.3
+	bleed_mod = 0.6
 	pain_mod = 0.2
 
 /datum/species/werewolf/send_voice(mob/living/carbon/human/H)
-	playsound(get_turf(H), pick('sound/vo/mobs/wwolf/wolftalk1.ogg', 'sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
+	playsound(H, pick('sound/vo/mobs/wwolf/wolftalk1.ogg', 'sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
 
 /datum/species/werewolf/regenerate_icons(mob/living/carbon/human/H)
 	H.icon = 'icons/roguetown/mob/monster/werewolf.dmi'
-	H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/wereclaw, /datum/intent/simple/werebite)
 	if(H.gender == MALE)
 		H.icon_state = "wwolf_m"
 	if(H.gender == FEMALE)
@@ -141,6 +126,6 @@
 	return "WEREVOLF"
 
 /datum/species/werewolf/check_species_weakness(obj/item, mob/living/attacker, mob/living/parent)
-	if(parent.has_status_effect(/datum/status_effect/debuff/silver_curse))
+	if(parent.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		return 0.75
 	return 0

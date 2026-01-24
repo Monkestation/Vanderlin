@@ -17,8 +17,8 @@
 	spawned.name = "Rousman"
 	spawned.real_name = "Rousman"
 
-	if(spawned.charflaw)
-		QDEL_NULL(spawned.charflaw)
+	if(length(spawned.quirks))
+		spawned.clear_quirks()
 
 	spawned.remove_all_languages()
 	spawned.grant_language(/datum/language/common)

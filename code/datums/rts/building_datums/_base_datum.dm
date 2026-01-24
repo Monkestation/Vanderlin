@@ -166,9 +166,8 @@ GLOBAL_LIST_INIT(cached_building_images, list())
 	template.load(center_turf, TRUE)
 
 	for(var/turf/place_on as anything in template.get_affected_turfs(center_turf ,centered = TRUE))
-		for(var/obj/effect/building_node/effect in place_on.contents)
-			var/obj/effect/building_node/node = effect
-			node.on_construction(master)
+		for(var/obj/effect/building_node/effect in place_on)
+			effect.on_construction(master)
 
 	after_construction()
 	master.building_requests -= src

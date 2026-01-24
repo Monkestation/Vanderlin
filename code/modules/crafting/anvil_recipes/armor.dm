@@ -1203,7 +1203,7 @@
 /datum/anvil_recipe/armor/blacksteel/graggar_helm
 	name = "Vicious Helmet (+Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/graggar
+	created_item = /obj/item/clothing/head/helmet/heavy/graggar
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/elven_helm

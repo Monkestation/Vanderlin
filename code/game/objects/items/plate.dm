@@ -176,7 +176,7 @@
 /obj/item/plate/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	. = ..()
 	new /obj/effect/decal/cleanable/shreds/clay(get_turf(src))
-	playsound(get_turf(src), 'sound/foley/break_clay.ogg', 90, TRUE)
+	playsound(src, 'sound/foley/break_clay.ogg', 90, TRUE)
 	qdel(src)
 
 /obj/item/plate/copper

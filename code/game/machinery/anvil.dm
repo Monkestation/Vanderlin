@@ -19,8 +19,15 @@
 
 /obj/machinery/anvil/examine(mob/user)
 	. = ..()
-	if(hingot && hott)
-		. += "<span class='warning'>[hingot] is too hot to touch.</span>"
+	if(hingot)
+		. += hingot.examine()
+		if(hott)
+			. += "<span class='warning'>[hingot] is too hot to touch.</span>"
+
+/obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
+	if(hingot)
+		return hingot.attack_hand_secondary(user, modifiers)
+	. = ..()
 
 /obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/weapon/tongs))
@@ -104,7 +111,7 @@
 		return
 	..()
 
-/obj/machinery/anvil/proc/start_minigame(mob/user, obj/item/weapon/hammer/hammer)
+/obj/machinery/anvil/proc/start_minigame(mob/living/user, obj/item/weapon/hammer/hammer)
 	if(!hingot || !hingot.currecipe)
 		return
 
@@ -148,7 +155,7 @@
 
 		recipe.skill_quality += skill_boost
 
-	if(recipe.progress >= 100 && !recipe.additional_items.len && !recipe.needed_item)
+	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)
 		complete_recipe(user, quality_score)
 
 	working_material = null
@@ -167,6 +174,7 @@
 		skill_level = user.get_skill_level(recipe.appro_skill)
 
 	recipe.handle_creation(I, quality_score, skill_level)
+	SEND_SIGNAL(user, COMSIG_ITEM_FORGED)
 
 	record_featured_stat(FEATURED_STATS_SMITHS, user)
 	record_featured_object_stat(FEATURED_STATS_FORGED_ITEMS, I.name)
@@ -176,13 +184,13 @@
 		extra.OnCrafted(user.dir, user)
 		recipe.handle_creation(extra, quality_score, skill_level)
 
-	user.visible_message("<span class='info'>[user] finishes crafting [I]!</span>")
+	user?.visible_message(span_info("[user] finishes crafting [I]!"))
 
 	qdel(hingot)
 	hingot = null
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/machinery/anvil/proc/choose_recipe(mob/user)
+/obj/machinery/anvil/proc/choose_recipe(mob/living/user)
 	if(!hingot || !hott)
 		return
 
@@ -199,7 +207,7 @@
 			if(!valid_types.Find(R.i_type))
 				valid_types += R.i_type
 
-	if(!valid_types.len)
+	if(!length(valid_types))
 		return
 
 	var/i_type_choice
@@ -217,19 +225,15 @@
 		if(R.i_type == i_type_choice && istype(hingot, R.req_bar))
 			appro_recipe += R
 
-	for(var/I in appro_recipe)
-		var/datum/anvil_recipe/R = I
+	for(var/datum/anvil_recipe/R as anything in appro_recipe)
 		if(!R.req_bar)
 			appro_recipe -= R
 		if(!istype(hingot, R.req_bar))
 			appro_recipe -= R
 
-	if(appro_recipe.len)
+	if(length(appro_recipe))
 		var/datum/chosen_recipe
-		if(length(appro_recipe) == 1)
-			chosen_recipe = appro_recipe[1]
-		else
-			chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
+		chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
 		if(!hingot.currecipe && chosen_recipe)
 			hingot.currecipe = new chosen_recipe.type(hingot)
 			hingot.currecipe.material_quality += hingot.recipe_quality
@@ -238,7 +242,7 @@
 
 	return FALSE
 
-/obj/machinery/anvil/attack_hand(mob/user, params)
+/obj/machinery/anvil/attack_hand(mob/living/user, params)
 	if(smithing)
 		to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
 		return

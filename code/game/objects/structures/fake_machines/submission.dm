@@ -17,7 +17,7 @@
 					stock_announce("[B.amount] units of [R.name] has been submitted to the stockpile.")
 				qdel(B)
 				if(sound == TRUE)
-					playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+					playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 			continue
 		else if(istype(I, R.item_type))
 			if(!R.check_item(I))
@@ -28,7 +28,7 @@
 				if(message == TRUE)
 					stock_announce("[R.name] has been submitted to the stockpile.")
 				if(sound == TRUE)
-					playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+					playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 			else
 				var/area/A = GLOB.areas_by_type[R.transport_item]
 				if(!A && message == TRUE)
@@ -40,8 +40,8 @@
 				var/turf/T = pick(turfs)
 				I.forceMove(T)
 				if(sound == TRUE)
-					playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
-					playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
+					playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+					playsound(src, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 			return
 
 /obj/structure/fake_machine/submission/attack_hand(mob/living/user)
@@ -49,7 +49,7 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	var/contents = "<center>SUBMISSION HOLE<BR>"
 
@@ -87,8 +87,8 @@
 		for(var/obj/I in get_turf(src))
 			attemptsell(I, user, FALSE, FALSE)
 		say("Bulk submission in progress...")
-		playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
-		playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 		return TRUE
 
 /*				//Var for keeping track of timer
@@ -132,7 +132,7 @@ GLOBAL_VAR(feeding_hole_reset_timer)
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	var/contents = "<center>FEEDING HOLE<BR>"
 

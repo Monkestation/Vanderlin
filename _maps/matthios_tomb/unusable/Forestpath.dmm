@@ -2,7 +2,7 @@
 "a" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "c" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /obj/structure/flora/tree/wise{
@@ -10,59 +10,59 @@
 	name = "Woody"
 	},
 /turf/open/floor/dirt,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "h" = (
 /turf/closed/mineral/bedrock,
-/area/rouge/under/tomb/wilds)
+/area/under/tomb/wilds)
 "m" = (
 /obj/effect/landmark/ambush,
 /turf/open/floor/dirt/road,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "q" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt/ambush,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "w" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /obj/structure/flora/tree/evil,
 /turf/open/floor/dirt,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "y" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/floor/dirt,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "C" = (
 /turf/open/floor/dirt/road,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "E" = (
 /turf/closed/mineral/bedrock,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "F" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/floor/dirt,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "I" = (
 /turf/open/transparent/openspace,
-/area/rouge/under/tomb/wilds)
+/area/under/tomb/wilds)
 "K" = (
 /obj/effect/spawner/map_spawner/treeorbush,
 /turf/open/floor/dirt/ambush,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "L" = (
 /turf/open/floor/naturalstone,
-/area/rouge/under/tomb/wilds)
+/area/under/tomb/wilds)
 "M" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt/road,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "V" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 "Y" = (
 /turf/open/floor/dirt/ambush,
-/area/rouge/under/tomb/wilds/ambush)
+/area/under/tomb/wilds/ambush)
 
 (1,1,1) = {"
 E

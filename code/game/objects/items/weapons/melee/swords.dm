@@ -1107,9 +1107,10 @@
 
 /obj/item/weapon/sword/long/greatsword/psydon/relic
 	name = "Crusade"
-	desc = "The heaviest blade of the Ordo Benetarus. Its unparalleled strength commands even the greatest of foes to fall. Wade through the unholy in Psydon’s name. Let none survive."
+	desc = "The grandest blade of the Ordo Benetarus. Its unparalleled strength commands even the greatest of foes to fall. Wade through the unholy in Psydon’s name. Let none survive."
 	icon_state = "psygsword"
 	force = 25
+	minstr = 9 //So the ordinator can use his sword as old.
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/axe/chop)
 
@@ -1765,7 +1766,7 @@
 				M.visible_message(span_danger("[user] takes [I] from [M]'s hand!"), \
 				span_userdanger("[user] takes [I] from my hand!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
 				user.changeNext_move(12)//avoids instantly attacking with the new weapon
-				playsound(src.loc, 'sound/combat/weaponr1.ogg', 100, FALSE, -1) //sound queue to let them know that they got disarmed
+				playsound(src, 'sound/combat/weaponr1.ogg', 100, FALSE, -1) //sound queue to let them know that they got disarmed
 				if(!M.mind)	//If you hit an NPC - they pick up weapons instantly. So, we do more stuff.
 					M.Stun(10)
 			else
@@ -1782,7 +1783,7 @@
 					user.Immobilize(10)
 					M.Immobilize(10)
 					M.visible_message(span_notice("[user.name] struggles to disarm [M.name]!"))
-					playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
+					playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
 		if(!isliving(M))
 			to_chat(user, span_warning("You cannot disarm this enemy!"))
 			return

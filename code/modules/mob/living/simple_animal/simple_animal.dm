@@ -214,7 +214,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/proc/try_tame(obj/item/O, mob/living/carbon/human/user)
 	if(!stat)
 		user.visible_message("<span class='info'>[user] hand-feeds [O] to [src].</span>", "<span class='notice'>I hand-feed [O] to [src].</span>")
-		playsound(loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
 		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
 		qdel(O)
@@ -629,7 +629,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(fire_stacks + divine_fire_stacks > 5)
 			apply_damage(10, BURN)
 
-/mob/living/simple_animal/revive(full_heal = FALSE, admin_revive = FALSE)
+/mob/living/simple_animal/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
 	if(!.)
 		return
@@ -766,7 +766,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(amt < 3) // Skilled prevents you from fumbling
 			M.Paralyze(50)
 			M.Stun(50)
-			playsound(src.loc, 'sound/foley/zfall.ogg', 100, FALSE)
+			playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 			M.visible_message("<span class='danger'>[M] falls off [src]!</span>")
 		else
 			return
@@ -863,7 +863,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					var/turf/open/T = loc
 					if(!do_footstep && T.footstep)
 						do_footstep = TRUE
-						playsound(loc,pick('sound/foley/footsteps/hoof/horserun (1).ogg','sound/foley/footsteps/hoof/horserun (2).ogg','sound/foley/footsteps/hoof/horserun (3).ogg'), 100, TRUE)
+						playsound(src,pick('sound/foley/footsteps/hoof/horserun (1).ogg','sound/foley/footsteps/hoof/horserun (2).ogg','sound/foley/footsteps/hoof/horserun (3).ogg'), 100, TRUE)
 					else
 						do_footstep = FALSE
 			else
@@ -871,7 +871,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					var/turf/open/T = loc
 					if(!do_footstep && T.footstep)
 						do_footstep = TRUE
-						playsound(loc,pick('sound/foley/footsteps/hoof/horsewalk (1).ogg','sound/foley/footsteps/hoof/horsewalk (2).ogg','sound/foley/footsteps/hoof/horsewalk (3).ogg'), 100, TRUE)
+						playsound(src,pick('sound/foley/footsteps/hoof/horsewalk (1).ogg','sound/foley/footsteps/hoof/horsewalk (2).ogg','sound/foley/footsteps/hoof/horsewalk (3).ogg'), 100, TRUE)
 					else
 						do_footstep = FALSE
 			if(user.mind)
@@ -890,7 +890,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 							unbuckle_mob(L)
 							L.Paralyze(50)
 							L.Stun(50)
-							playsound(L.loc, 'sound/foley/zfall.ogg', 100, FALSE)
+							playsound(L, 'sound/foley/zfall.ogg', 100, FALSE)
 							L.visible_message(span_danger("[L] falls off [src]!"))
 
 /mob/living/simple_animal/buckle_mob(mob/living/buckled_mob, force = 0, check_loc = 1)

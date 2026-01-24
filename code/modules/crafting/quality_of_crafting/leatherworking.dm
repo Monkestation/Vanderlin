@@ -36,7 +36,7 @@
 		/obj/item/natural/fibers = 2,
 	)
 	output = /obj/item/ammo_holder/dartpouch
-	
+
 /datum/repeatable_crafting_recipe/leather/storage/bulletpouch
 	name = "bullet pouch"
 	requirements = list(
@@ -1029,3 +1029,13 @@
 	output = /obj/item/clothing/armor/leather/studded/psyaltrist
 	craftdiff = 3
 	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/leatherhood
+	name = "leather hood"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/clothing/head/roguehood/leather
+	craftdiff = 2
+	category = "Hat"

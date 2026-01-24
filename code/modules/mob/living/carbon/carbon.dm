@@ -207,9 +207,9 @@
 					if(!throwable_mob.buckled)
 						var/obj/item/grabbing/other_grab = offhand ? get_active_held_item() : get_inactive_held_item()
 						if(grab_state < GRAB_AGGRESSIVE)
-							stop_pulling()
+							stop_pulling(pulling_broke_free = TRUE)
 							return
-						stop_pulling()
+						stop_pulling(pulling_broke_free = TRUE)
 						if(HAS_TRAIT(src, TRAIT_PACIFISM))
 							to_chat(src, span_notice("I gently let go of [throwable_mob]."))
 							return
@@ -257,15 +257,7 @@
 		thrown_thing.safe_throw_at(end_T, thrown_range, thrown_speed, src, null, null, null, move_force)
 		if(!used_sound)
 			used_sound = pick(PUNCHWOOSH)
-		playsound(get_turf(src), used_sound, 60, FALSE)
-
-// /mob/living/carbon/restrained(IGNORE_GRAB)
-// //	. = (handcuffed || (!ignore_grab && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE))
-// 	if(handcuffed)
-// 		return TRUE
-// 	if(pulledby && !ignore_grab)
-// 		if(pulledby != src)
-// 			return TRUE
+		playsound(src, used_sound, 60, FALSE)
 
 /mob/living/carbon/proc/canBeHandcuffed()
 	return 0
@@ -316,6 +308,9 @@
 	loc?.handle_fall(src)//it's loc so it doesn't call the mob's handle_fall which does nothing
 
 /mob/living/carbon/is_muzzled()
+	for(var/obj/item/clothing/clothing in get_equipped_items())
+		if(clothing.clothing_flags & BLOCKS_SPEECH)
+			return TRUE
 	return FALSE
 
 /obj/structure
@@ -602,7 +597,7 @@
 		Immobilize(59)
 
 	if(!blood)
-		playsound(get_turf(src), pick('sound/vo/vomit.ogg','sound/vo/vomit_2.ogg'), 100, TRUE)
+		playsound(src, pick('sound/vo/vomit.ogg','sound/vo/vomit_2.ogg'), 100, TRUE)
 	else
 		if(stat != DEAD)
 			playsound(src, pick('sound/vo/throat.ogg','sound/vo/throat2.ogg','sound/vo/throat3.ogg'), 100, FALSE)
@@ -616,6 +611,7 @@
 			adjust_hydration(-lost_nutrition)
 	if(harm)
 		adjustBruteLoss(3)
+
 	for(var/i=0 to distance)
 		if(blood)
 			if(T)
@@ -627,6 +623,24 @@
 		if (is_blocked_turf(T))
 			break
 	return TRUE
+
+/**
+ * Expel the reagents you just tried to ingest
+ *
+ * When you try to ingest reagents but you do not have a stomach
+ * you will spew the reagents on the floor.
+ *
+ * Vars:
+ * * bite: /atom the reagents to expel
+ * * amount: int The amount of reagent
+ */
+/mob/living/carbon/proc/expel_ingested(atom/bite, amount)
+	visible_message("<span class='danger'>[src] throws up all over [p_them()]self!</span>", \
+					"<span class='userdanger'>You are unable to keep the [bite] down without a stomach!</span>")
+
+	var/turf/floor = get_turf(src)
+	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
+	bite.reagents.trans_to(spew, amount, transfered_by = src)
 
 /mob/living/carbon/proc/spew_organ(power = 5, amt = 1)
 	for(var/i in 1 to amt)
@@ -999,44 +1013,56 @@
 	update_inv_handcuffed()
 	update_hud_handcuffed()
 
-/mob/living/carbon/fully_heal(admin_revive = FALSE)
-	if(reagents)
-		reagents.clear_reagents()
-		for(var/addi in reagents.addiction_list)
-			reagents.remove_addiction(addi)
-	for(var/obj/item/organ/organ as anything in internal_organs)
-		organ.setOrganDamage(0)
-	var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
-	if(B)
-		B.brain_death = FALSE
-	var/datum/component/rot/corpse/CR = GetComponent(/datum/component/rot/corpse)
-	if(CR)
-		CR.amount = 0
-	if(admin_revive) //reset rot on admin revives
-		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-			bodypart.rotted = FALSE
-			bodypart.skeletonized = FALSE
-	if(admin_revive)
-		suiciding = FALSE
+/mob/living/carbon/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
+	if(excess_healing)
+		if(dna && !(NOBLOOD in dna.species.species_traits))
+			blood_volume += (excess_healing * 2) //1 excess = 10 blood
+
+		for(var/obj/item/organ/organ as anything in internal_organs)
+			organ.applyOrganDamage(excess_healing * -1) //1 excess = 5 organ damage healed
+
+	return ..()
+
+/mob/living/carbon/fully_heal(heal_flags = HEAL_ALL)
+
+	spill_embedded_objects()
+
+	if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
+		var/datum/component/rot/corpse/CR = GetComponent(/datum/component/rot/corpse)
+		if(CR)
+			CR.amount = 0
+
+	if(heal_flags & HEAL_LIMBS)
 		regenerate_limbs()
+		if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
+			for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+				bodypart.rotted = FALSE
+				bodypart.skeletonized = FALSE
+
+	if(heal_flags & (HEAL_REFRESH_ORGANS|HEAL_ORGANS))
+		// regenerate_organs(regenerate_existing = (heal_flags & HEAL_REFRESH_ORGANS))
 		regenerate_organs()
+		var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
+		if(B)
+			B.brain_death = FALSE
+
+	if(heal_flags & HEAL_TRAUMAS)
+		cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
+
+	if(heal_flags & HEAL_RESTRAINTS)
+		QDEL_NULL(handcuffed)
+		QDEL_NULL(legcuffed)
 		set_handcuffed(null)
-		for(var/obj/item/restraints/R in contents) //actually remove cuffs from inventory
-			qdel(R)
 		update_handcuffed()
-		if(reagents)
-			reagents.addiction_list = list()
-	cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
-	..()
-	// heal ears after healing traits, since ears check TRAIT_DEAF trait
-	// when healing.
-	restoreEars()
-	// update_disabled_bodyparts()
+
+	drunkenness = 0
+
+	return ..()
 
 /mob/living/carbon/can_be_revived()
-	. = ..()
 	if(!getorgan(/obj/item/organ/brain) && (!mind))
-		return 0
+		return FALSE
+	return ..()
 
 /mob/living/carbon/harvest(mob/living/user)
 	if(QDELETED(src))
@@ -1052,8 +1078,7 @@
 
 /mob/living/carbon/ExtinguishMob(itemz = TRUE)
 	if(itemz)
-		for(var/X in get_equipped_items())
-			var/obj/item/I = X
+		for(var/obj/item/I as anything in get_equipped_items())
 			I.acid_level = 0 //washes off the acid on our clothes
 			I.extinguish() //extinguishes our clothes
 		var/obj/item/I = get_active_held_item()
@@ -1184,8 +1209,7 @@
 			return
 		var/list/artpaths = subtypesof(/datum/martial_art)
 		var/list/artnames = list()
-		for(var/i in artpaths)
-			var/datum/martial_art/M = i
+		for(var/datum/martial_art/M as anything in artpaths)
 			artnames[initial(M.name)] = M
 		var/result = input(usr, "Choose the martial art to teach","JUDO CHOP") as null|anything in sortNames(artnames)
 		if(!usr)
@@ -1261,8 +1285,6 @@
 	. = ..()
 	if(!.)
 		return
-	if(silent)
-		return FALSE
 	if(mouth?.muteinmouth)
 		return FALSE
 	for(var/obj/item/grabbing/grab in grabbedby)
@@ -1417,29 +1439,3 @@
 		to_dismember.dismember()
 		return TRUE
 	return FALSE
-
-/mob/living/carbon/proc/is_species(species)
-	if(!dna?.species)
-		return
-	return dna?.species.id == species
-
-/mob/living/carbon/proc/get_pain_factor()
-	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-		return FALSE
-
-	var/raw = get_complex_pain()
-	var/shock = calculate_shock_stage()
-
-	// Shock reduces pain perception
-	if(shock >= 60)
-		var/shock_reduction = min(0.3, shock * 0.001)
-		raw *= (1 - shock_reduction)
-
-	// Endurance scaling
-	var/painpercent = (raw/(STAEND * 13)) * 100
-
-	// Apply tolerance
-	painpercent *= (1 - (pain_tolerance * 0.01))
-
-	// Return normalized value between 0 and 1
-	return clamp(painpercent/100, 0, 1)

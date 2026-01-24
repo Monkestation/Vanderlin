@@ -113,13 +113,12 @@
 		if(Were.transformed == TRUE)
 			var/mob/living/carbon/human/I = M.stored_mob
 			to_chat(M, span_userdanger("THE FOUL SILVER! MY BODY RENDS ITSELF ASUNDER!"))
-			//M.werewolf_untransform()
 			Were.on_removal()
 			ADD_TRAIT(I, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 			I.emote("agony", forced = TRUE)
 			I.Stun(30)
 			I.Knockdown(30)
-			I.Jitter(30)
+			I.adjust_jitter(6 SECONDS)
 			return
 		else
 			M.flash_fullscreen("redflash3")
@@ -129,7 +128,7 @@
 			ADD_TRAIT(M, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 			M.Stun(30)
 			M.Knockdown(30)
-			M.Jitter(30)
+			M.adjust_jitter(6 SECONDS)
 			return
 
 	else if(Vamp) //We're the vampire, we can't be saved.

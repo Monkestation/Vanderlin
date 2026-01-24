@@ -7,7 +7,7 @@
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE
 	associated_skill = /datum/skill/magic/arcane
-	experience_modifer = 0.1
+	experience_modifier = 0.1
 
 	invocation_type = INVOCATION_NONE
 
