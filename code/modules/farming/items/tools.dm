@@ -149,6 +149,8 @@
 	melting_material = /datum/material/iron
 	melt_amount = 50
 	associated_skill = /datum/skill/combat/knives
+	grid_height = 64
+	grid_width = 64
 
 /obj/item/weapon/sickle/Initialize(mapload)
 	. = ..()

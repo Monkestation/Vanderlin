@@ -418,8 +418,7 @@
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = null
+	melting_material = /datum/material/iron
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	parrysound = "parrywood"
 	sellprice = 35
