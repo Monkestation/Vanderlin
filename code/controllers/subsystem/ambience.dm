@@ -114,8 +114,8 @@ SUBSYSTEM_DEF(ambience)
 	var/briar = FALSE
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
-		var/obj/item/bodypart/chest/chest = C.get_bodypart()
-		var/datum/wound/black_briar_curse/chest/wound = chest?.has_wound(/datum/wound/black_briar_curse/chest)
+		var/obj/item/bodypart/head/head = C.get_bodypart(BODY_ZONE_HEAD)
+		var/datum/wound/black_briar_curse/head/wound = head?.has_wound(/datum/wound/black_briar_curse/head)
 		if(wound?.infection_percent >= BBC_STAGE_LATE)
 			briar = TRUE
 

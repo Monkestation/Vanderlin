@@ -205,7 +205,6 @@
 	max_infection = BBC_TIME_MAX
 	// when it can try and infect a limb again, world.time + BBC_SPREAD_COOLDOWN
 	var/next_limb_infection = 0
-	var/insane = FALSE
 	var/dying = FALSE
 
 /datum/wound/black_briar_curse/chest/on_mob_gain(mob/living/affected)
@@ -241,9 +240,6 @@
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar2)
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
-	if(infection_percent >= BBC_STAGE_LATE ^ !insane)
-		owner.refresh_looping_ambience()
-		insane = !insane
 	if(infection_percent >= BBC_STAGE_MID)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
 		if(!HAS_TRAIT(owner, TRAIT_BLACK_BRIAR) && world.time > next_limb_infection && prob(4))
@@ -313,11 +309,15 @@
 /datum/wound/black_briar_curse/head
 	show_in_book = FALSE
 	body_zones = list(BODY_ZONE_HEAD)
+	var/insane = FALSE
 
 /datum/wound/black_briar_curse/head/on_life()
 	. = ..()
 	if(!.)
 		return
+	if(infection_percent >= BBC_STAGE_LATE ^ insane) // this flips if these dont match up
+		owner.refresh_looping_ambience()
+		insane = !insane
 	if(infection_percent >= BBC_STAGE_DETECTABLE && prob(3 * infection_percent))
 		owner.set_eye_blur_if_lower(rand(3, 6) SECONDS)
 		owner.stuttering = max(owner.stuttering, 10)
