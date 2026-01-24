@@ -292,9 +292,7 @@
 	blade_class = BCLASS_BLUNT
 	attack_verb = list("punches", "clocks")
 	hitsound = list('sound/combat/hits/punch/punch_hard (1).ogg', 'sound/combat/hits/punch/punch_hard (2).ogg', 'sound/combat/hits/punch/punch_hard (3).ogg')
-	chargetime = 0
 	penfactor = AP_CLUB_STRIKE
-	swingdelay = 0
 	icon_state = "inpunch"
 	misscost = 5
 	item_damage_type = "blunt"
