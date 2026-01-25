@@ -59,7 +59,7 @@
 		"Club" = /obj/item/weapon/mace/woodclub
 	)
 
-	var/choice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Specialisation", title = "BARBARIAN")
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "BARBARIAN")
 	if(!choice)
 		return
 
