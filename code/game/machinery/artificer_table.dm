@@ -31,7 +31,7 @@
 		if(material.artrecipe.hammered || material.artrecipe.progress == 100)
 			playsound(src,'sound/combat/hits/onmetal/sheet (2).ogg', 100, TRUE)
 			shake_camera(user, 1, 1)
-		if(H.no_spark == FALSE)	//wood and copper hammers don't spark
+		if(!H.no_spark)	//wood and copper hammers don't spark
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_turf(src)
 			S.set_up(1, 1, front)
