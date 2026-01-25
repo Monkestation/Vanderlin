@@ -54,9 +54,10 @@
 	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on Nitebeasts."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psywhip_lesser"
+	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONG * 0.8
 	melt_amount = 100
 	last_used = 0
 

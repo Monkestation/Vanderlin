@@ -194,7 +194,6 @@
 	name = "billhook"
 	desc = "A polearm with a curved krag, a Valorian design for dismounting mounted warriors and to strike down monstrous beasts."
 	icon_state = "billhook"
-	wdefense = ULTMATE_PARRY
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
@@ -504,7 +503,6 @@
 	name = "ancient winged spear"
 	desc = "A spear with a winged bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear_winged"
-	wdefense = ULTMATE_PARRY
 	sellprice = 150 // A noble collector would love to get his/her hands on one of these spears
 
 /obj/item/weapon/polearm/spear/hoplite/abyssal
@@ -512,7 +510,6 @@
 	desc = "A spear with a toothed end, inspired after the teeth of an abyssal monstrosity"
 	icon = 'icons/roguetown/weapons/64/ancient.dmi'
 	icon_state = "ancient_spear"
-	wdefense = ULTMATE_PARRY
 	sellprice = 40
 
 /obj/item/weapon/polearm/spear/bronze
@@ -590,7 +587,6 @@
 	force = DAMAGE_SPEAR + 1
 	force_wielded = DAMAGE_SPEAR_WIELD + 5
 	throwforce = DAMAGE_SPEAR - 3
-	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(NAGI_CUT, POLEARM_BASH) // no stab for you little chuddy, it's a slashing weapon
 	gripped_intents = list(NAGI_REND, NAGI_CUT, POLEARM_BASH)
 	max_blade_int = 50 //Nippon suteeru (dogshit)

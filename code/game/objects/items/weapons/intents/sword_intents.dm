@@ -62,6 +62,7 @@
 	swingdelay = 1
 
 /datum/intent/sword/thrust/long
+	swingdelay = 1
 	reach = 2
 	misscost = 10
 
@@ -83,7 +84,6 @@
 	animname = "strike"
 	blade_class = BCLASS_BLUNT
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	chargetime = 0
 	penfactor = AP_CLUB_STRIKE
 	swingdelay = 1
 	damfactor = 0.8
@@ -100,9 +100,9 @@
 	attack_verb = list("bashes", "strikes")
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
 	blade_class = BCLASS_BLUNT
-	chargetime = 1
+	clickcd = 14
 	charging_slowdown = 0.8
-	penfactor = AP_CLUB_SMASH
+	penfactor = AP_CLUB_STRIKE
 	swingdelay = 1
 	item_damage_type = "blunt"
 

@@ -668,7 +668,7 @@
 	icon_state = "shotel_steel"
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	desc = "A long, crescent curved blade."
-	possible_item_intents = list(SWDLONG_CUT, SWDLONG_CHOP)
+	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
 	gripped_intents = list(SWDLONG_CUT, SHOTEL_CHOP)
 	alt_intents = null
 
@@ -721,10 +721,11 @@
 	name = "steel aruval"
 	icon_state = "aruval_steel"
 	desc = "A long billhook machete of Savannah Elf origin. It was originally designed to cut large branches, but has since evolved into a formidable weapon."
-	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CUT, SWORD_DISARM)
+	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
+	gripped_intents = list(SWDLONG_CUT, SWDLONG_CHOP, SWORD_DISARM)
+	alt_intents = null
 	gripsprite = FALSE
-	max_integrity = INTEGRITY_POOR + 25
+	max_integrity = INTEGRITY_STRONGEST
 	dropshrink = 0.9
 	sellprice = 60
 
@@ -746,7 +747,7 @@
 /obj/item/weapon/sword/long/aruval/iron //Balance-patch
 	name = "iron aruval"
 	icon_state = "aruval_iron"
-	max_integrity = INTEGRITY_POOR - 25
+	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 	sellprice = 35
 
@@ -801,9 +802,9 @@
 	icon_state = "judgement"
 	name = "judgement"
 	desc = "A sword with a silvered grip, a jeweled hilt and a honed blade; a design fit for nobility."
-	force = DAMAGE_SWORD - 5
-	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
+	force = DAMAGE_SWORD - 2
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 	sellprice = 363
 	static_price = TRUE
@@ -897,8 +898,6 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "oldpsybroadsword"
 	force = DAMAGE_SWORD * 0.9 // Damage is .9 of a steel sword
-	wbalance = EASY_TO_DODGE
-	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = INTEGRITY_STRONG * 0.8 // Integrity and blade retention is .8 of a steel sword
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 
@@ -918,14 +917,11 @@
 	icon_state = "ravoxflamberge"
 	force = DAMAGE_SWORD + 2
 
-//................ Psydonian Longsword ............... //
 /obj/item/weapon/sword/long/psydon
 	name = "psydonian longsword"
 	desc = "A large silver longsword forged in the shape of a psycross."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psysword"
-	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-
 	last_used = 0
 	melting_material = /datum/material/silver
 	sellprice = 100
@@ -939,12 +935,10 @@
 	desc = "A finely crafted silver longsword with a decorated golden hilt."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "declongsword"
-	force = DAMAGE_SWORD - 5
-	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
-	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	force = DAMAGE_SWORD - 2
+	force_wielded = DAMAGE_LONGSWORD_WIELD - 2
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 	last_used = 0
 	melting_material = /datum/material/silver
@@ -954,7 +948,7 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/long/oldpsysword //Fix
+/obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"
 	desc = "A finely made longsword, plated in a worn-down veneer of grubby silver. It's long seen better daes."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
