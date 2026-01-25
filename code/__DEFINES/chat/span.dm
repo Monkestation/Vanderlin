@@ -43,23 +43,15 @@
 
 #define span_cult(str) ("<span class='cult'>" + str + "</span>")
 #define span_cultbigbold(str) ("<span class='cultbigbold'>" + str + "</span>")
-#define span_cultbold(str) ("<span class='cultbold'>" + str + "</span>")
-#define span_cultboldtalic(str) ("<span class='cultboldtalic'>" + str + "</span>")
-#define span_cultitalic(str) ("<span class='cultitalic'>" + str + "</span>")
-#define span_cultlarge(str) ("<span class='cultlarge'>" + str + "</span>")
 #define span_cultsmall(str) ("<span class='cultsmall'>" + str + "</span>")
 
 #define span_danger(str) ("<span class='danger'>" + str + "</span>")
 
 #define span_dead(str) ("<span class='dead'>" + str + "</span>")
 #define span_deadsay(str) ("<span class='deadsay'>" + str + "</span>")
-#define span_deadsayitalicsbold(str) ("<span class='deadsayitalicsbold'>" + str + "</span>")
 
-#define span_deconversion_message(str) ("<span class='deconversion_message'>" + str + "</span>")
-#define span_drone(str) ("<span class='drone'>" + str + "</span>")
 #define span_emote(str) ("<span class='emote'>" + str + "</span>")
 #define span_extremelybig(str) ("<span class='extremelybig'>" + str + "</span>")
-#define span_gamedeadsay(str) ("<span class='gamedeadsay'>" + str + "</span>")
 #define span_ghostalert(str) ("<span class='ghostalert'>" + str + "</span>")
 #define span_good(str) ("<span class='good'>" + str + "</span>")
 
