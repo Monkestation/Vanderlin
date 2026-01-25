@@ -209,6 +209,11 @@
 /obj/item/alch/herb/cursedrosa
 	name = "black briar rosa"
 	icon_state = "cursedrosa"
+	embedding = list(
+		"embed_chance" = 1,
+		"embedded_pain_multiplier" = 0,
+		"embedded_fall_chance" = 0,
+	)
 
 /obj/item/alch/herb/cursedrosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()

@@ -269,25 +269,28 @@
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
 	if(!affected)
 		return
+	var/turf/T = get_turf(affected)
+	if(!T)
+		return
+	if(affected.loc != T)
+		affected.forceMove(T)
 	var/list/uninfected_zones = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG) - root_network
 	for(var/zone in uninfected_zones)
 		var/wound_type = get_black_briar_wound_type(zone)
 		var/obj/item/bodypart/BP = affected.get_bodypart(zone)
-		if(!BP)
-			continue
-		var/datum/wound/black_briar_curse/wound = BP.add_wound(wound_type, TRUE)
-		if(wound)
-			wound.infection = wound.max_infection
-			wound.infection_percent = 1
+		BP?.add_wound(wound_type, TRUE)
 	for(var/zone in root_network)
 		var/datum/weakref/wound_ref = root_network[zone]
 		var/datum/wound/black_briar_curse/tumor = wound_ref.resolve()
-		tumor?.update_appearance()
-	var/turf/T = get_turf(affected)
-	if(!T)
-		return
+		if(!tumor)
+			continue
+		tumor.infection = tumor.max_infection
+		tumor.infection_percent = 1
+		tumor.update_appearance()
+		if(prob(25))
+			tumor.bodypart_owner?.add_embedded_object(new /obj/item/alch/herb/cursedrosa(), TRUE)
 	playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
-	affected.visible_message(span_danger("Briar burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
+	affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
 	affected.spawn_gibs(FALSE)
 	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=12, seconds_to_grow=3, delete_after_growing = TRUE)
 	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")

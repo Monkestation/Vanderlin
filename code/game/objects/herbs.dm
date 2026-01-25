@@ -180,6 +180,12 @@
 
 	herbtype = /obj/item/alch/herb/rosa
 
+/obj/structure/flora/grass/herb/euphorbia
+	name = "euphorbia"
+	icon_state = "euphorbia2"
+
+	herbtype = /obj/item/alch/herb/euphorbia
+
 /obj/structure/flora/grass/herb/cursedrosa
 	name = "black briar rosa"
 	icon_state = "cursedrosa2"
@@ -190,9 +196,3 @@
 /obj/structure/flora/grass/herb/cursedrosa/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursedrosa, TRUE, TRUE)
-
-/obj/structure/flora/grass/herb/euphorbia
-	name = "euphorbia"
-	icon_state = "euphorbia2"
-
-	herbtype = /obj/item/alch/herb/euphorbia
