@@ -382,8 +382,6 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyhalberd"
 	swingsound = BLADEWOOSH_MED
-	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
 	axe_cut = 10
 	resistance_flags = FIRE_PROOF

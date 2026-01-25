@@ -434,8 +434,7 @@
 	created_item = /obj/item/weapon/sword/rapier/ironestoc
 
 /datum/anvil_recipe/weapons/iron/kaskara
-	name = "Iron Kaskara (+Bar)"
-	additional_items = list(/obj/item/ingot/iron)
+	name = "Iron Kaskara"
 	recipe_name = "a Iron Kaskara"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/kaskara/iron
@@ -475,7 +474,7 @@
 	recipe_name = "a Iron Claymore"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/iron)
-	created_item = /obj/item/weapon/sword/long/greatsword/ironclaymore
+	created_item = /obj/item/weapon/sword/long/greatsword/claymore/iron
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/iron/elvenclub
@@ -629,8 +628,7 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/steel/cutlass_steel
-	name = "Cutlass (+Bar)"
-	additional_items = list(/obj/item/ingot/steel)
+	name = "Cutlass"
 	recipe_name = "a Cutlass"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/sabre/cutlass
@@ -656,8 +654,7 @@
 	created_item = /obj/item/weapon/sword/short/ida
 
 /datum/anvil_recipe/weapons/steel/kaskara // I FORGOT TO INCLUDE IT
-	name = "Steel Kaskara (+Bar)"
-	additional_items = list(/obj/item/ingot/steel)
+	name = "Steel Kaskara"
 	recipe_name = "a Steel Kaskara"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/kaskara
@@ -757,7 +754,7 @@
 	recipe_name = "a Steel Claymore"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/weapon/sword/long/greatsword/steelclaymore
+	created_item = /obj/item/weapon/sword/long/greatsword/claymore
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/silver/noble_sword_scabbard

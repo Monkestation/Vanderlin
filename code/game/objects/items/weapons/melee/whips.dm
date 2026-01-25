@@ -44,6 +44,7 @@
 	minstr = 7
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/steel
+	max_integrity = INTEGRITY_STRONG
 	melt_amount = 75
 	sellprice = 50
 
@@ -55,6 +56,7 @@
 	icon_state = "psywhip_lesser"
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_STRONG
 	melt_amount = 100
 	last_used = 0
 
@@ -71,6 +73,7 @@
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_STRONG
 	melt_amount = 100
 	last_used = 0
 
@@ -180,8 +183,8 @@
 	wbalance = HARD_TO_DODGE
 	can_parry = TRUE
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
-	max_blade_int = 175
-	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONG
 	minstr = 5
 
 	anvilrepair = /datum/skill/craft/weaponsmithing
@@ -210,7 +213,8 @@
 	icon_state = "urumi_silver"
 	force = DAMAGE_WHIP + 2
 	melting_material = /datum/material/silver
-	max_blade_int= 130
+	max_integrity = INTEGRITY_STRONG * 0.8
+	max_blade_int= 160
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()

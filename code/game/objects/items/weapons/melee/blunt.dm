@@ -664,6 +664,7 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	melt_amount = 150
 	sellprice = 45
 

@@ -47,5 +47,5 @@
 	beltl = /obj/item/weapon/mace/cudgel
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
 	pants = /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
-	backl = /obj/item/weapon/sword/long/greatsword/steelclaymore
+	backl = /obj/item/weapon/sword/long/greatsword/claymore
 	backr = /obj/item/storage/backpack/satchel
