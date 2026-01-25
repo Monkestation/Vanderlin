@@ -4,7 +4,8 @@
 	blade_class = BCLASS_LASHING
 	attack_verb = list("lashes", "whips")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	chargetime = 5
+	swingdelay = 2
+	clickcd = 14
 	penfactor = 5
 	reach = 2
 	misscost = 7
@@ -13,7 +14,7 @@
 	item_damage_type = "slash"
 
 /datum/intent/whip/lash/metal
-	chargetime = 10
+	clickcd = 18
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	penfactor = 15
 
@@ -34,7 +35,8 @@
 	blade_class = BCLASS_CUT
 	attack_verb = list("slashes", "lacerates")
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
-	chargetime = 5
+	clickcd = 18
+	swingdelay = 2
 	penfactor = 5
 	reach = 2
 	misscost = 7

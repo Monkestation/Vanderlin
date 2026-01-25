@@ -30,9 +30,6 @@
 	misscost = 5
 	item_damage_type = "blunt"
 
-/datum/intent/polearm/bash/ranged
-	reach = 2
-
 // POLEARM CUT INTENTS //
 /datum/intent/polearm/cut
 	name = "cut"

@@ -304,8 +304,8 @@
 	hitsound = list('sound/combat/hits/punch/punch_hard (1).ogg', 'sound/combat/hits/punch/punch_hard (2).ogg', 'sound/combat/hits/punch/punch_hard (3).ogg')
 	damfactor = 1.1
 	penfactor = AP_CLUB_STRIKE
-	chargetime = 3
-	swingdelay = 3
+	clickcd = 14
+	swingdelay = 2
 	icon_state = "insmash"
 	misscost = 8
 	item_damage_type = "blunt"

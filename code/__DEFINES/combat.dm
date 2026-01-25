@@ -134,12 +134,20 @@
 #define SWORD_CUT		 /datum/intent/sword/cut
 #define SHORT_CUT		 /datum/intent/sword/cut/short
 #define SWDLONG_CUT		 /datum/intent/sword/cut/long
+#define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define RAPIER_CUT		 /datum/intent/sword/cut/rapier
+
 #define SWORD_THRUST	 /datum/intent/sword/thrust
 #define SHORT_THRUST	 /datum/intent/sword/thrust/short
 #define SWDLONG_THRUST	 /datum/intent/sword/thrust/long
 #define CURVED_THRUST	 /datum/intent/sword/thrust/curved
+#define ZWEI_THRUST		 /datum/intent/sword/thrust/zwei
+#define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
+
 #define SWORD_CHOP		 /datum/intent/sword/chop //2h swords only
 #define SWDLONG_CHOP	 /datum/intent/sword/chop/long
+#define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
+
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
 #define SWORD_DISARM	 /datum/intent/sword/disarm
 #define POMMEL_BASH		 /datum/intent/sword/bash
@@ -149,36 +157,28 @@
 #define KATANA_ARC		 /datum/intent/katana/arc
 #define KATANA_ONEHAND	 /datum/intent/katana/cut/one_hand_cut
 
-#define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
-#define ZWEI_CUT		 /datum/intent/sword/cut/zwei
-#define ZWEI_THRUST		 /datum/intent/sword/thrust/zwei
-#define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
-#define HOOK_THRUST		 /datum/intent/sword/thrust/hook
-#define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 #define ESTOC_LUNGE 	 /datum/intent/sword/lunge
 #define ESTOC_THRUST	 /datum/intent/sword/thrust/estoc
 
-
 #define AXE_CUT				/datum/intent/axe/cut
-#define AXE_THRUST			/datum/intent/axe/thrust
-#define AXE_CHOP			/datum/intent/axe/chop
-#define AXE_GRTCHOP			/datum/intent/axe/chop/great
-#define GREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe
-#define DBLGREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe/doublehead
-#define GREATAXE_CHOP		/datum/intent/axe/chop/battle/greataxe
-#define DBLGREATAXE_CHOP	/datum/intent/axe/chop/battle/greataxe/doublehead
+#define GREATAXE_CUT		/datum/intent/axe/cut/greataxe
+#define DBLGREATAXE_CUT		/datum/intent/axe/cut/greataxe/doublehead
 
+#define AXE_THRUST			/datum/intent/axe/thrust
+
+#define AXE_CHOP			/datum/intent/axe/chop
+#define AXE_GRTCHOP			/datum/intent/axe/chop/great //For polearm axes
+#define GREATAXE_CHOP		/datum/intent/axe/chop/greataxe
+#define DBLGREATAXE_CHOP	/datum/intent/axe/chop/greataxe/doublehead
+
+#define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
-#define POLEARM_BASHRNG		/datum/intent/polearm/bash/ranged
 #define POLEARM_BASH		/datum/intent/polearm/bash
 #define POLEARM_CHOP		/datum/intent/polearm/chop
 #define SPEAR_CUT			/datum/intent/polearm/cut
 
-#define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define NAGI_CUT			/datum/intent/polearm/cut/naginata
 #define NAGI_REND			/datum/intent/rend/reach
-
-#define MESSER_CHOP			/datum/intent/sword/chop/messer
 
 #define GUTS_CUT			/datum/intent/sword/cut/guts
 #define GUTS_THRUST			/datum/intent/sword/thrust/guts
@@ -188,13 +188,14 @@
 #define MACE_SMASH			/datum/intent/mace/smash
 #define MACE_HVYSMASH		/datum/intent/mace/smash/heavy
 #define MACE_WOODSMASH		/datum/intent/mace/smash/wood
+#define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
+
 #define MACE_STRIKE			/datum/intent/mace/strike
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
-#define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
-#define MACE_THRUST			/datum/intent/mace/thrust
 #define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
 
+#define MACE_THRUST			/datum/intent/mace/thrust
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
 #define WARHM_IMPALE		/datum/intent/mace/warhammer/impale
 
@@ -251,8 +252,8 @@
 
 #define INTENT_USE			/datum/intent/use
 
-#define SHIELD_BASH		/datum/intent/shield/bash
-#define METAL_BASH		/datum/intent/shield/bash/metal
+#define SHIELD_BASH			/datum/intent/shield/bash
+#define METAL_BASH			/datum/intent/shield/bash/metal
 #define SHIELD_BLOCK		/datum/intent/shield/block
 #define METAL_BLOCK			/datum/intent/shield/block/metal
 

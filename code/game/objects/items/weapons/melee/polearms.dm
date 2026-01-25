@@ -610,7 +610,7 @@
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	possible_item_intents = list(POLEARM_BASH)
-	gripped_intents = list(POLEARM_BASHRNG, MACE_WDRANGE)
+	gripped_intents = list(POLEARM_BASH, MACE_WDRANGE)
 	max_integrity = INTEGRITY_STANDARD + 50
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
