@@ -442,6 +442,7 @@
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "dendorscythe"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
+	melting_material = /datum/material/steel
 
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak
