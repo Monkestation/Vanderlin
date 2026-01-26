@@ -42,3 +42,6 @@
 	name = "tin dust"
 	desc = "Fine particles of tin ore."
 	melting_material = /datum/material/tin
+
+/obj/item/ore/dust/cursedrosa
+	name = "umbrosal petals"

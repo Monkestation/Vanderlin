@@ -288,7 +288,7 @@
 		tumor.infection_percent = 1
 		tumor.update_appearance()
 		if(prob(25))
-			tumor.bodypart_owner?.add_embedded_object(new /obj/item/alch/herb/cursedrosa(), TRUE)
+			tumor.bodypart_owner?.add_embedded_object(new /obj/item/ore/cursedrosa(), TRUE)
 	playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
 	affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
 	affected.spawn_gibs(FALSE)

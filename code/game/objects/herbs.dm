@@ -189,9 +189,9 @@
 /obj/structure/flora/grass/herb/cursedrosa
 	name = "black briar rosa"
 	icon_state = "cursedrosa2"
-
-	herbtype = /obj/item/alch/herb/cursedrosa
+	herbtype = /obj/item/ore/cursedrosa
 	can_replenish = FALSE
+	resistance_flags = FIRE_PROOF
 
 /obj/structure/flora/grass/herb/cursedrosa/Initialize()
 	. = ..()
