@@ -10,13 +10,15 @@
 	penfactor = AP_AXE_CHOP
 	damfactor = 1.1
 	swingdelay = 1
-	misscost = 5
+	misscost = 6
 	item_damage_type = "slash"
 
 /datum/intent/axe/chop/great//Used for the polearm category axes
 	penfactor = AP_HEAVYAXE_CHOP
 	reach = 2
-	chargetime = 1
+	clickcd = 16
+	swingdelay = 2
+	misscost = 10
 	item_damage_type = "slash"
 
 /datum/intent/axe/chop/greataxe //Essentially a better polearm chop, this weapon is made to chop people limbs off.
@@ -44,8 +46,7 @@
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
 	animname = "cut"
 	penfactor = AP_AXE_CUT
-	swingdelay = 0
-	misscost = 4
+	misscost = 5
 	item_damage_type = "slash"
 
 /datum/intent/axe/cut/greataxe //Decent to cut as well
@@ -71,7 +72,7 @@
 	animname = "stab"
 	icon_state = "instab"
 	reach = 2
-	chargetime = 1
+	clickcd = 14
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = AP_HEAVYAXE_STAB

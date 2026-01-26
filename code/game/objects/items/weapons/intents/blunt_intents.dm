@@ -42,9 +42,6 @@
 /datum/intent/mace/smash/wood
 	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
 
-/datum/intent/mace/smash/wood/ranged
-	reach = 2
-
 /datum/intent/mace/smash/heavy
 	penfactor = AP_HEAVY_SMASH
 	damfactor = 1.2

@@ -419,7 +419,7 @@
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_EASY_TO_DODGE
 	possible_item_intents = list(AXE_CUT)
-	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SPEAR_THRUST)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 11
@@ -608,10 +608,10 @@
 	desc = "A staff carrying the black and gold insignia of the war scholars."
 	icon_state = "naledistaff"
 	force = DAMAGE_SPEARPLUS
-	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	force_wielded = DAMAGE_SPEAR_WIELD
 	possible_item_intents = list(POLEARM_BASH)
-	gripped_intents = list(POLEARM_BASH, MACE_WDRANGE)
-	max_integrity = INTEGRITY_STANDARD + 50
+	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
+	max_integrity = INTEGRITY_STRONG
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
 	. = ..()

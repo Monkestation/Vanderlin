@@ -188,7 +188,6 @@
 #define MACE_SMASH			/datum/intent/mace/smash
 #define MACE_HVYSMASH		/datum/intent/mace/smash/heavy
 #define MACE_WOODSMASH		/datum/intent/mace/smash/wood
-#define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
 
 #define MACE_STRIKE			/datum/intent/mace/strike
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
