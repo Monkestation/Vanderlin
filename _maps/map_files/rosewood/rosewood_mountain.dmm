@@ -1443,7 +1443,7 @@
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon/lower)
 "ln" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavelava)
 "lo" = (
 /turf/open/floor/ruinedwood/spiral,
@@ -2686,7 +2686,7 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon/lower)
 "vM" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/upper)
 "vN" = (
 /turf/closed/mineral/bedrock/cold,
@@ -3532,7 +3532,7 @@
 /turf/closed/mineral/random/cold/med,
 /area/under/cavewet)
 "CD" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "CE" = (
 /obj/item/reagent_containers/glass/bottle/strongmanapot,
@@ -4668,7 +4668,7 @@
 /area/outdoors/mountains/anvil/snowyforest)
 "LH" = (
 /obj/effect/landmark/mapGenerator/howling,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/upper)
 "LJ" = (
 /obj/effect/decal/cleanable/blood,

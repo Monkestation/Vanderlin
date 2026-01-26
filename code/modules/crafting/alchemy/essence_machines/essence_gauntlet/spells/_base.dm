@@ -10,7 +10,7 @@
 	cooldown_time = 30 SECONDS
 	point_cost = 2
 	spell_type = SPELL_ESSENCE
-	experience_modifer = 0
+	experience_modifier = 0
 	associated_skill = /datum/skill/craft/alchemy
 
 /datum/action/cooldown/spell/essence/get_adjusted_charge_time()

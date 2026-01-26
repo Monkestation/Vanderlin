@@ -93,16 +93,16 @@
 		if(H.disgust >= DISGUST_LEVEL_GROSS)
 			if(prob(10))
 				H.stuttering += 1
-				H.adjust_confusion(0.2 SECONDS)
+				H.adjust_confusion(4 SECONDS)
 			if(prob(10) && !H.stat)
 				to_chat(H, "<span class='warning'>I feel kind of iffy...</span>")
-			H.adjust_jitter(-3)
+			H.adjust_jitter(-6 SECONDS)
 		if(H.disgust >= DISGUST_LEVEL_VERYGROSS)
 			if(prob(pukeprob)) //iT hAndLeS mOrE ThaN PukInG
-				H.adjust_confusion(2.5 SECONDS)
+				H.adjust_confusion(5 SECONDS)
 				H.stuttering += 1
 				H.vomit(10, 0, 1, 0, 1, 0)
-			H.set_dizzy(5)
+			H.set_dizzy(10 SECONDS)
 		if(H.disgust >= DISGUST_LEVEL_DISGUSTED)
 			if(prob(25))
 				H.set_eye_blur_if_lower(6 SECONDS)

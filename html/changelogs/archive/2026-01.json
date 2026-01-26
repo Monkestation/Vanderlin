@@ -421,5 +421,49 @@
                 "bugfix": "Fixed black mirror selection being broken."
             }
         ]
+    },
+    "2026-01-22": {
+        "Rockslp": [
+            {
+                "rscadd": "Added Triton to Swashbuckler Folkhero"
+            },
+            {
+                "rscdel": "Removed Harpy and Triton from Court Physician"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added hair shaving"
+            }
+        ],
+        "Bloo4420": [
+            {
+                "bugfix": "Ausbushes fluff structure integrity"
+            }
+        ],
+        "Ediblebomb": [
+            {
+                "rscadd": "Added a Swordsman Men-At-Arms subclass. They get the same equipment as Pikeman, but with a heater shield instead of a pike, skilled Swords and Shields, and marginally worse stats."
+            }
+        ]
+    },
+    "2026-01-23": {
+        "tired-wired": [
+            {
+                "rscdel": "Removed a single kobold slur."
+            }
+        ]
+    },
+    "2026-01-25": {
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new hood made out of leather to the game. The \\\"reformed thief\\\" adept subclass spawns with it by default."
+            }
+        ],
+        "TerraGS": [
+            {
+                "rscadd": "Flinging feces fouls foes."
+            }
+        ]
     }
 }

@@ -184,7 +184,7 @@
 	for(var/mob/living/L in view(cloud_range, owner))
 		if(L == owner || L.faction == owner.faction)
 			continue
-		L.adjust_temp_blindness(3 SECONDS)
+		L.adjust_temp_blindness(6 SECONDS)
 		to_chat(L, span_danger("The ink stings your eyes!"))
 
 	StartCooldown()

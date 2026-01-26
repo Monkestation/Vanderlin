@@ -91,24 +91,6 @@
 	. = ..()
 	to_chat(owner, "<span class='danger'>I am starving to death! I need to eat something before it's too late!</span>")
 
-
-//SILVER DAGGER EFFECT
-
-/datum/status_effect/debuff/silver_curse
-	id = "silver_curse"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_curse
-	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
-	duration = 1 MINUTES
-
-/*	Pointless subtype, code doesnt handle it well, dont use
-/datum/status_effect/debuff/silver_curse/greater
-	duration = 10 SECONDS
-*/
-/atom/movable/screen/alert/status_effect/debuff/silver_curse
-	name = "Silver Curse"
-	desc = "My BANE!"
-	icon_state = "hunger3"
-
 /datum/status_effect/debuff/wiz
 	id = "wiz"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/wiz
@@ -406,17 +388,6 @@
 /atom/movable/screen/alert/status_effect/debuff/revive
 	name = "Revival Sickness"
 	desc = "<span class='warning'>I have returned from oblivion... but the fatigue of death still affects me.</span>\n"
-	icon_state = "muscles"
-
-/datum/status_effect/debuff/viciousmockery
-	id = "viciousmockery"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/viciousmockery
-	duration = 1 MINUTES
-	effectedstats = list(STATKEY_STR = -2, STATKEY_SPD = -2,STATKEY_END = -2)
-
-/atom/movable/screen/alert/status_effect/debuff/viciousmockery
-	name = "Vicious Mockery"
-	desc = "<span class='warning'>THAT SPOONY BARD! ARGH!</span>\n"
 	icon_state = "muscles"
 
 /datum/status_effect/debuff/chilled

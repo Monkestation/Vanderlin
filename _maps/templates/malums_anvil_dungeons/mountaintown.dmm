@@ -70,7 +70,7 @@
 /area/under/mountains/anvil/dungeon)
 "aQ" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "aV" = (
 /obj/structure/stairs/fancy/c{
@@ -598,7 +598,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/mountains/anvil/dungeon)
 "gy" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "gE" = (
 /obj/structure/table/wood/large/corner{
@@ -942,7 +942,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "mn" = (
 /obj/structure/closet/crate/chest/crate,
@@ -3555,7 +3555,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "YH" = (
 /obj/structure/chair/bench/throne,

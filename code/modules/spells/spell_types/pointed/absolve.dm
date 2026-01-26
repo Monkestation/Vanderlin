@@ -51,7 +51,7 @@
 			H.revive(HEAL_ALL)
 			H.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 			H.emote("breathgasp")
-			H.adjust_jitter(100)
+			H.adjust_jitter(100 SECONDS)
 			H.update_body()
 			GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]++
 			ADD_TRAIT(H, TRAIT_IWASREVIVED, "[type]")

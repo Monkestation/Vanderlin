@@ -291,7 +291,6 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_RECOGNIZED = span_notice("These people recognize me, my renown has spread from my homeland to this very place."),
 	TRAIT_EARGRAB = span_info("I can keep a tight grip on the ear of unruly children."),
 	TRAIT_KITTEN_MOM = span_info("Kittens love you, they see you are a parent."),
-	TRAIT_INSPIRING_MUSICIAN = span_info("The flow of battle dances to my song!"),
 	TRAIT_FACELESS = span_danger("I am faceless. I am shunned. The others will recognise me for what I am. If I give them the chance."),
 	TRAIT_FLOWERFIELD_IMMUNITY = span_info("I am immune to the effects of flower fields."),
 	TRAIT_SECRET_OFFICIANT = span_love("I am able to conduct secret wedding ceremonies outside of the church. Love cannot be stopped!"),

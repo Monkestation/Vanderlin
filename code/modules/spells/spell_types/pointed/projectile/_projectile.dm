@@ -13,7 +13,7 @@
  */
 /datum/action/cooldown/spell/projectile
 	self_cast_possible = FALSE
-	experience_modifer = 0.3 // More earned when hitting a target
+	experience_modifier = 0.3 // More earned when hitting a target
 
 	/// What projectile we create when we shoot our spell.
 	var/obj/projectile/magic/projectile_type = /obj/projectile/magic/teleport

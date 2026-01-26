@@ -338,7 +338,7 @@
 /area/under/tomb/indoors/church)
 "kG" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "kM" = (
 /obj/structure/flora/grass,
@@ -501,7 +501,7 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "qE" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "qW" = (
 /obj/effect/decal/cleanable/sigil/E,
@@ -995,7 +995,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb)
 "MD" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "MG" = (
 /obj/structure/barricade/wooden,
@@ -1182,7 +1182,7 @@
 	pixel_x = 3;
 	pixel_y = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Ui" = (
 /obj/structure/closet/crate/drawer,

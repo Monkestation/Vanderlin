@@ -153,9 +153,9 @@
 
 /datum/status_effect/good_music/tick()
 	if(owner.can_hear())
-		owner.adjust_dizzy(-2)
-		owner.adjust_jitter(-2)
-		owner.adjust_confusion(-0.1 SECONDS)
+		owner.adjust_dizzy(-4 SECONDS)
+		owner.adjust_jitter(-4 SECONDS)
+		owner.adjust_confusion(-1 SECONDS)
 		owner.add_stress(/datum/stress_event/goodmusic)
 
 /atom/movable/screen/alert/status_effect/regenerative_core

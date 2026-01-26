@@ -15,6 +15,9 @@
 "k" = (
 /turf/closed/wall/mineral/roofwall/center,
 /area/template_noop)
+"o" = (
+/turf/open/openspace,
+/area/template_noop)
 "p" = (
 /turf/open/floor/rooftop{
 	dir = 4
@@ -55,9 +58,6 @@
 /area/template_noop)
 "R" = (
 /turf/template_noop,
-/area/template_noop)
-"U" = (
-/turf/open/transparent/openspace,
 /area/template_noop)
 "X" = (
 /turf/open/floor/wood,
@@ -361,11 +361,11 @@ R
 "}
 
 (1,1,2) = {"
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 w
 w
 w
@@ -373,18 +373,18 @@ w
 w
 w
 w
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 "}
 (2,1,2) = {"
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 w
 w
 w
@@ -392,18 +392,18 @@ w
 w
 w
 w
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 "}
 (3,1,2) = {"
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 w
 w
 w
@@ -411,11 +411,11 @@ w
 w
 w
 w
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 "}
 (4,1,2) = {"
 w
@@ -551,9 +551,9 @@ p
 p
 "}
 (11,1,2) = {"
-U
-U
-U
+o
+o
+o
 p
 p
 p
@@ -565,14 +565,14 @@ p
 p
 p
 p
-U
-U
-U
+o
+o
+o
 "}
 (12,1,2) = {"
-U
-U
-U
+o
+o
+o
 p
 p
 p
@@ -584,14 +584,14 @@ p
 p
 p
 p
-U
-U
-U
+o
+o
+o
 "}
 (13,1,2) = {"
-U
-U
-U
+o
+o
+o
 p
 p
 p
@@ -603,16 +603,16 @@ p
 p
 p
 p
-U
-U
-U
+o
+o
+o
 "}
 (14,1,2) = {"
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 p
 p
 p
@@ -620,28 +620,28 @@ p
 p
 p
 p
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
 "}
 (15,1,2) = {"
-U
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
+o
 p
 p
 p
 p
 p
-U
-U
-U
-U
-U
-U
+o
+o
+o
+o
+o
+o
 "}

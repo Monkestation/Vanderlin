@@ -1,0 +1,1 @@
+{"author":"TerraGS","delete-after":true,"changes":[{"bugfix":"Looking up into nullspace no longer runtimes"},{"refactor":"replaces the transparent turf subtype with a turf transparency element"}]}

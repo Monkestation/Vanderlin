@@ -14,7 +14,18 @@
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/artery/neck)
-	else
+
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+			if(user == src)
+				user.visible_message(span_danger("[user] starts to shave [user.p_their()] hair with [held_item].</span>"))
+			else
+				user.visible_message(span_danger("[user] starts to shave [src]'s hair with [held_item].</span>"))
+			if(do_after(user, 10 SECONDS, src))
+				set_hair_style(/datum/sprite_accessory/hair/head/bald)
+				update_body()
+
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
