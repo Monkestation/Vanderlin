@@ -340,6 +340,7 @@
 	icon_state = "falchion"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
+	gripped_intents = list(SWORD_CUT, AXE_CHOP)
 	swingsound = BLADEWOOSH_HUGE
 
 /obj/item/weapon/sword/scimitar/messer
