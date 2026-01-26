@@ -349,7 +349,7 @@
 	icon_state = "imesser"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
-	gripped_intents = list(SWORD_CHOP, SWORD_THRUST)
+	gripped_intents = list(SWORD_CUT, AXE_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 8 // Heavy blade used by orcs
