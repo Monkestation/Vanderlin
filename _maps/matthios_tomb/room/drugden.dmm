@@ -56,7 +56,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "io" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "iy" = (
 /obj/structure/closet/crate/crafted_closet/inn,
@@ -110,7 +110,7 @@
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
 "oW" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/wet)
 "px" = (
 /obj/structure/stairs,

@@ -377,10 +377,6 @@
 /obj/item/CheckParts(list/parts_list)
 	..()
 
-///Hook for multiz???
-/atom/proc/update_multiz(prune_on_fail = FALSE)
-	return FALSE
-
 ///Check if this atoms eye is still alive (probably)
 /atom/proc/check_eye(mob/user)
 	return

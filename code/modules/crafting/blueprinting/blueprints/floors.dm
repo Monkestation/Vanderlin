@@ -934,7 +934,7 @@
 	)
 	craftdiff = 2
 	skillcraft = /datum/skill/craft/carpentry
-	result_type = /turf/open/transparent/glass
+	result_type = /turf/open/glass
 
 /datum/blueprint_recipe/floor/concrete
 	name = "Concrete Floor"

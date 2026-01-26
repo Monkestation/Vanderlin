@@ -57,7 +57,7 @@
 	var/turf/T = get_turf(src)
 	var/turf/below = GET_TURF_BELOW(T)
 	if(below)
-		T.ChangeTurf(/turf/open/transparent/openspace)
+		T.ChangeTurf(/turf/open/openspace)
 		below.ChangeTurf(/turf/open/floor/dirt/road)
 
 /obj/effect/spawner/map_spawner/tree

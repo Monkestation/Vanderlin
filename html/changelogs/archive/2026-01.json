@@ -453,5 +453,17 @@
                 "rscdel": "Removed a single kobold slur."
             }
         ]
+    },
+    "2026-01-25": {
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new hood made out of leather to the game. The \\\"reformed thief\\\" adept subclass spawns with it by default."
+            }
+        ],
+        "TerraGS": [
+            {
+                "rscadd": "Flinging feces fouls foes."
+            }
+        ]
     }
 }

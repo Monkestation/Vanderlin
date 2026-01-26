@@ -2575,6 +2575,8 @@
 		visible_message(span_info("[src] looks up."))
 	var/turf/ceiling = get_step_multiz(src, UP)
 	var/turf/T = get_turf(src)
+	if(isnull(ceiling)) //Can't check what isn't there
+		return
 	if(!istransparentturf(ceiling)) //There is no turf we can look through above us
 		to_chat(src, span_warning("A ceiling above my head."))
 		return
