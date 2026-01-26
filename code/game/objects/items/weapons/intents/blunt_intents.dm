@@ -119,7 +119,6 @@
 	chargetime = 5
 	chargedloop = /datum/looping_sound/flailswing
 	keep_looping = TRUE
-	recovery = 10
 	misscost = 10
 	attack_verb = list("smashes")
 	damfactor = 1.2
@@ -128,7 +127,6 @@
 
 /datum/intent/flail/strike/smash/long
 	reach = 2
-	recovery = 12
 	misscost = 12
 
 /datum/intent/flail/strike/matthiosflail

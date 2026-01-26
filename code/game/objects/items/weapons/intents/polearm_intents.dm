@@ -55,9 +55,10 @@
 	animname = "chop"
 	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
+	reach = 2
 	penfactor = AP_POLEARM_CHOP
-	chargetime = 1.5
-	damfactor = 1.2
+	clickcd = 18
+	damfactor = 1.1
 	swingdelay = 2
 	misscost = 12
 	warnie = "mobwarning"
@@ -70,7 +71,6 @@
 	attack_verb = list("rends")
 	animname = "cut"
 	blade_class = BCLASS_CHOP
-	reach = 1
 	damfactor = 1.2
 	chargetime = 10
 	no_early_release = TRUE

@@ -18,6 +18,7 @@
 	alt_intents = list(DAZE_BASH, SWORD_STRIKE, POMMEL_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
+	armor_penetration = 5
 	minstr = 7
 
 	w_class = WEIGHT_CLASS_BULKY

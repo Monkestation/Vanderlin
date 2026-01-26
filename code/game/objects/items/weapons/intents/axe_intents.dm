@@ -21,7 +21,6 @@
 
 /datum/intent/axe/chop/greataxe //Essentially a better polearm chop, this weapon is made to chop people limbs off.
 	penfactor = AP_GREATAXE_CHOP  // Same AP as the polearm CHOP
-	reach = 1
 	clickcd = 16
 	swingdelay = 2
 	no_early_release = TRUE // Needs fo fully charge
@@ -30,7 +29,6 @@
 
 /datum/intent/axe/chop/greataxe/doublehead //Stronger than the one bladed axe but heavier
 	penfactor = AP_GREATAXE_CHOP
-	reach = 1
 	clickcd = 18
 	no_early_release = TRUE // Needs fo fully charge
 	swingdelay = 2.5
