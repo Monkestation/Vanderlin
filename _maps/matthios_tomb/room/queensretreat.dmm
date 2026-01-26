@@ -67,7 +67,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "bB" = (
 /obj/structure/chair/wood/alt/chair_noble{
@@ -569,7 +569,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "zj" = (
 /obj/structure/bed/inn/double,
@@ -1125,7 +1125,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/royal)
 "Yl" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Yz" = (
 /obj/structure/chair/bench/couchablack,

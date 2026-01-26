@@ -1,74 +1,101 @@
-/mob/living/carbon/human/proc/on_examine_face(mob/living/carbon/human/user)
+/mob/living/carbon/human/proc/on_examine_face(mob/living/carbon/human/user, self_inspect = FALSE)
 	if(!istype(user))
 		return
-	if(!HAS_TRAIT(src, TRAIT_TOLERANT))
+
+	// Intolerant
+	if(!self_inspect && !HAS_TRAIT(user, TRAIT_TOLERANT))
 		if(!isdarkelf(user) && isdarkelf(src))
 			user.add_stress(/datum/stress_event/delf)
+
 		if(!istiefling(user) && istiefling(src))
 			user.add_stress(/datum/stress_event/tieb)
+
 		if(!ishalforc(user) && ishalforc(src))
 			user.add_stress(/datum/stress_event/horc)
-		if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
-			user.add_stress(/datum/stress_event/parastr)
+
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
 			if(user.has_quirk(/datum/quirk/vice/paranoid))
 				user.add_stress(/datum/stress_event/paraforeigner)
 			else
 				user.add_stress(/datum/stress_event/foreigner)
+
+		if(HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
+			user.add_stress(/datum/stress_event/fishface)
+
+	if(HAS_TRAIT(src, TRAIT_FISHFACE))
+		if(!self_inspect && HAS_TRAIT(user, TRAIT_FISHFACE))
+			user.add_stress(/datum/stress_event/fellow_fishface)
+		else
+			user.add_stress(/datum/stress_event/self_fishface)
+	else if(!self_inspect && user.age == AGE_CHILD)
+		user.add_stress(/datum/stress_event/fish_monster)
+
 	if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
-		if(user == src)
+		if(self_inspect)
 			user.add_stress(/datum/stress_event/beautiful_self)
 		else
 			user.add_stress(/datum/stress_event/beautiful)
-	if(HAS_TRAIT(src, TRAIT_UGLY) &&  user != src)
-		if(user == src)
+
+	if(HAS_TRAIT(src, TRAIT_UGLY))
+		if(self_inspect)
 			user.add_stress(/datum/stress_event/ugly_self)
 		else
 			user.add_stress(/datum/stress_event/ugly)
-	if(HAS_TRAIT(src, TRAIT_FISHFACE))
-		if(HAS_TRAIT(user, TRAIT_FISHFACE))
-			if(user == src)
-				user.add_stress(/datum/stress_event/self_fishface)
-			else
-				user.add_stress(/datum/stress_event/fellow_fishface)
-		else
-			if(user.age == AGE_CHILD)
-				user.add_stress(/datum/stress_event/fish_monster)
-			else
-				user.add_stress(/datum/stress_event/fishface)
-	if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY) && user != src)
-		user.add_stress(/datum/stress_event/saw_old_party)
+
+	if(!self_inspect)
+		if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
+			user.add_stress(/datum/stress_event/parastr)
+
+		if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
+			user.add_stress(/datum/stress_event/saw_old_party)
 
 /mob/living/carbon/human/examine(mob/user)
-	var/ignore_pronouns = FALSE
-	if(user != src && !user.mind?.do_i_know(null, real_name))
-		ignore_pronouns = TRUE
-	//this is very slightly better than it was because you can use it more places. still can't do \his[src] though.
-	var/t_He = p_they(TRUE, ignore_pronouns = ignore_pronouns)
-	var/t_his = p_their(ignore_pronouns = ignore_pronouns)
-	var/t_has = p_have(ignore_pronouns = ignore_pronouns)
-	var/t_is = p_are(ignore_pronouns = ignore_pronouns)
-	var/obscure_name
+	var/self_inspect = (user == src)
+
+	var/is_family_member = FALSE
+	if(ishuman(user))
+		var/mob/living/carbon/human/stranger = user
+		if(family_datum && family_datum == stranger.family_datum)
+			is_family_member = TRUE
+
+	var/temp_gender = null
+	var/obscure_name = FALSE
+	var/person_known = FALSE
+	if(!self_inspect && !isobserver(user))
+		if(name in list("Unknown", "Unknown Man", "Unknown Woman"))
+			obscure_name = TRUE
+			temp_gender = PLURAL
+		else if(is_family_member || user.mind?.do_i_know(name = real_name)) // If you don't know someone use their bodytype
+			person_known = TRUE
+
+	if(!obscure_name && src == SSticker.rulermob)
+		person_known = TRUE // Monarch is known to everyone
+
 	var/race_name = dna?.species.name
-	var/self_inspect = FALSE
 	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
-	if(maniac && (user != src))
+	if(!self_inspect && maniac)
 		race_name = "disgusting pig"
 
-	var/m1 = "[t_He] [t_is]"
-	var/m2 = "[t_his]"
-	var/m3 = "[t_He] [t_has]"
-	. = list()
-	if(user == src)
+	var/ignore_pronouns = (obscure_name || !person_known)
+	var/t_He = p_they(TRUE, temp_gender, ignore_pronouns)
+	var/t_his = p_their(FALSE, temp_gender, ignore_pronouns)
+	var/t_has = p_have(temp_gender, ignore_pronouns)
+	var/t_is  = p_are(temp_gender, ignore_pronouns)
+
+	var/m1
+	var/m2
+	var/m3
+
+	if(!self_inspect)
+		m1 = "[t_He] [t_is]"
+		m2 = "[t_his]"
+		m3 = "[t_He] [t_has]"
+	else
 		m1 = "I am"
 		m2 = "my"
 		m3 = "I have"
 
-	if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
-		obscure_name = TRUE
-
-	if(isobserver(user))
-		obscure_name = FALSE
+	. = list()
 
 	/// header
 	. += span_info("ø ------------ ø")
@@ -78,13 +105,13 @@
 		statement_of_identity += ("<EM>Unknown</EM>.")
 		. += statement_of_identity
 	else
-		on_examine_face(user)
+		on_examine_face(user, self_inspect)
+
 		var/used_name = name
 		if(isobserver(user))
 			used_name = real_name
-		if(user == src)
-			self_inspect = TRUE
-		var/used_title = get_role_title()
+
+		var/used_title = get_role_title(person_known)
 
 		// building the examine identity
 		statement_of_identity += "<EM>[used_name]</EM>"
@@ -92,8 +119,8 @@
 		var/appendage_to_name
 		if(race_name) // race name
 			appendage_to_name += " [race_name]"
-// job name, don't show job of foreigners.
 
+		// job name, don't show job of foreigners.
 		if(used_title && !HAS_TRAIT(src, TRAIT_FACELESS) && (!HAS_TRAIT(src, TRAIT_FOREIGNER) || HAS_TRAIT(src, TRAIT_RECRUITED) || HAS_TRAIT(src, TRAIT_RECOGNIZED)))
 			appendage_to_name += ", [used_title]"
 
@@ -117,99 +144,64 @@
 					if(src.skin_tone == skin_tones[tone])
 						skin_tone_seen = lowertext(tone)
 						break
-			var/slop_lore_string = "."
-			if(ishumannorthern(user))
-				var/mob/living/carbon/human/racist = user
-				var/list/user_skin_tones = racist.dna.species.get_skin_list()
-//				var/user_skin_tone_seen = "incomprehensible"	gives unused warning now, sick of seeing it
-				for(var/tone in user_skin_tones)
-					if(racist.skin_tone == user_skin_tones[tone])
-//						user_skin_tone_seen = lowertext(tone)	gives unused warning now, sick of seeing it
-						break
-			. += "<span class='info'>[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen][slop_lore_string]</span>"
+			. += "<span class='info'>[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].</span>"
 
 		if(ishuman(user))
 			var/mob/living/carbon/human/stranger = user
 			var/is_male = FALSE
-			if(pronouns != SHE_HER)
+			if(t_He == "He")
 				is_male = TRUE
-			if(family_datum == stranger.family_datum && family_datum)
+
+			if(!self_inspect && family_datum && family_datum == stranger.family_datum)
 				var/family_text = ReturnRelation(user)
 				if(family_text)
 					. += family_text
+
 			if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
 				//Handsome only if male, beautiful in all other pronouns.
 				. += span_love(span_bold("[self_inspect ? "I am" : "[t_He] is"] [is_male ? "handsome" : "beautiful"]!"))
+
 			if(HAS_TRAIT(src, TRAIT_UGLY))
 				. += span_necrosis(span_bold("[self_inspect ? "I am" : "[t_He] is"] hideous."))
+
 			if(HAS_TRAIT(src, TRAIT_FAT))
 				. += span_boldwarning(span_bold("[self_inspect ? "I am" : "[t_He] is"] very obese!"))
-		if(length(GLOB.tennite_schisms))
-			var/datum/tennite_schism/S = GLOB.tennite_schisms[1]
-			var/user_side = (WEAKREF(user) in S.supporters_astrata) ? "astrata" : (WEAKREF(user) in S.supporters_challenger) ? "challenger" : null
-			var/mob_side = (WEAKREF(src) in S.supporters_astrata) ? "astrata" : (WEAKREF(src) in S.supporters_challenger) ? "challenger" : null
-
-			if(user_side && mob_side)
-				var/datum/patron/their_god = (mob_side == "astrata") ? S.astrata_god.resolve() : S.challenger_god.resolve()
-				if(their_god)
-					. += (user_side == mob_side) ? span_notice("Fellow [their_god.name] supporter!") : span_userdanger("Vile [their_god.name] supporter!")
-
-		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-			. += span_phobia("A foreigner...")
-
-		if(has_quirk(/datum/quirk/vice/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
-			. += span_userdanger("ALCOHOLIC!")
-
-		if(has_quirk(/datum/quirk/vice/junkie) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
-			. += span_userdanger("JUNKIE!")
 
 		if(HAS_TRAIT(src, TRAIT_FISHFACE) && HAS_TRAIT(user, TRAIT_FISHFACE))
-			if(user == src)
+			if(self_inspect)
 				. += span_green("I don't look that bad, I just look different to other species.")
 			else
-				. += span_green("A fellow triton")
+				. += span_green("A fellow triton.")
 
-		if(ishuman(user) && HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
-			var/mob/living/carbon/human/H = user
-			if(H.age == AGE_CHILD)
-				. += span_userdanger("IT'S A HORRIBLE MONSTER!!!")
-				user.emote("scream")
-			else
-				. += span_necrosis("That fish is ugly!")
+		// Things that happen when you can see face and its another person you are examining
+		if(!self_inspect)
+			if(length(GLOB.tennite_schisms))
+				var/datum/tennite_schism/S = GLOB.tennite_schisms[1]
+				var/user_side = (WEAKREF(user) in S.supporters_astrata) ? "astrata" : (WEAKREF(user) in S.supporters_challenger) ? "challenger" : null
+				var/mob_side = (WEAKREF(src) in S.supporters_astrata) ? "astrata" : (WEAKREF(src) in S.supporters_challenger) ? "challenger" : null
 
-		if(real_name in GLOB.excommunicated_players)
-			. += span_userdanger("EXCOMMUNICATED!")
+				if(user_side && mob_side)
+					var/datum/patron/their_god = (mob_side == "astrata") ? S.astrata_god.resolve() : S.challenger_god.resolve()
+					if(their_god)
+						. += (user_side == mob_side) ? span_notice("Fellow [their_god.name] supporter!") : span_userdanger("Vile [their_god.name] supporter!")
 
-		if(real_name in GLOB.heretical_players)
-			. += span_userdanger("HERETIC! SHAME!")
+			if(ishuman(user) && HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
+				var/mob/living/carbon/human/H = user
+				if(H.age == AGE_CHILD)
+					. += span_userdanger("IT'S A HORRIBLE MONSTER!!!")
+					user.emote("scream")
+				else
+					. += span_necrosis("That fish is ugly!")
 
-		if(user.mind)
-			if(is_zizocultist(user.mind) || is_zizolackey(user.mind))
-				if(virginity)
-					. += span_userdanger("VIRGIN!")
+			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
+				. += span_phobia("A foreigner...")
 
-		var/is_bandit = FALSE
-		if(mind?.special_role == "Bandit")
-			is_bandit = TRUE
-			if((real_name in GLOB.outlawed_players) && HAS_TRAIT(user, TRAIT_KNOWBANDITS))
-				. += span_userdanger("BANDIT!")
+			if(has_quirk(/datum/quirk/vice/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+				. += span_userdanger("ALCOHOLIC!")
 
-		if(mind && mind?.special_role == "Vampire Lord")
-			var/datum/component/vampire_disguise/disguise_comp = GetComponent(/datum/component/vampire_disguise)
-			if(!disguise_comp.disguised)
-				. += span_userdanger("A MONSTER!")
+			if(has_quirk(/datum/quirk/vice/junkie) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+				. += span_userdanger("JUNKIE!")
 
-		if(!is_bandit && (real_name in GLOB.outlawed_players))
-			. += span_userdanger("OUTLAW!")
-
-		var/list/known_frumentarii = user.mind?.cached_frumentarii
-		if(name in known_frumentarii)
-			if(known_frumentarii[name])
-				. += span_greentext("<b>[m1] an agent of the court!</b>")
-			else
-				. += span_redtext("[m1] an ex-agent of the court.")
-
-		if(user != src)
 			if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
 				. += span_green("Ahh... my old friend!")
 
@@ -219,44 +211,71 @@
 			if((HAS_TRAIT(src, TRAIT_CABAL) && HAS_TRAIT(user, TRAIT_CABAL)) || (src.patron?.type == /datum/patron/inhumen/zizo && HAS_TRAIT(user, TRAIT_CABAL)))
 				. += span_purple("A fellow seeker of Her ascension.")
 
+			if(HAS_TRAIT(user, TRAIT_ROYALSERVANT))
+				if(length(culinary_preferences) && family_datum == SSfamilytree.ruling_family)
+					var/obj/item/reagent_containers/food/snacks/fav_food = src.culinary_preferences[CULINARY_FAVOURITE_FOOD]
+					var/datum/reagent/consumable/fav_drink = src.culinary_preferences[CULINARY_FAVOURITE_DRINK]
+					if(fav_food)
+						if(fav_drink)
+							. += span_notice("Their favourites are [fav_food.name] and [fav_drink.name].")
+						else
+							. += span_notice("Their favourite is [fav_food.name].")
+					else if(fav_drink)
+						. += span_notice("Their favourite is [fav_drink.name].")
+					var/obj/item/reagent_containers/food/snacks/hated_food = src.culinary_preferences[CULINARY_HATED_FOOD]
+					var/datum/reagent/consumable/hated_drink = src.culinary_preferences[CULINARY_HATED_DRINK]
+					if(hated_food)
+						if(hated_drink)
+							. += span_notice("They hate [hated_food.name] and [hated_drink.name].")
+						else
+							. += span_notice("They hate [hated_food.name].")
+					else if(hated_drink)
+						. += span_notice("They hate [hated_drink.name].")
+
+			if(HAS_TRAIT(src, TRAIT_LEPROSY))
+				. += span_necrosis("A LEPER...")
+
+			if(HAS_TRAIT(src, TRAIT_FACELESS))
+				. += span_userdanger("FACELESS?! AN ASSASSIN!")
+
+			var/list/known_frumentarii = user.mind?.cached_frumentarii
+			if(name in known_frumentarii)
+				if(known_frumentarii[name])
+					. += span_greentext("<b>[m1] an agent of the court!</b>")
+				else
+					. += span_redtext("[m1] an ex-agent of the court.")
+
+			if(real_name in GLOB.excommunicated_players)
+				. += span_userdanger("EXCOMMUNICATED!")
+
+			if(real_name in GLOB.heretical_players)
+				. += span_userdanger("HERETIC! SHAME!")
+
+			if(user.mind)
+				if(is_zizocultist(user.mind) || is_zizolackey(user.mind))
+					if(virginity)
+						. += span_userdanger("VIRGIN!")
+
+			var/is_bandit = FALSE
+			if(mind?.special_role == "Bandit")
+				is_bandit = TRUE
+				if((real_name in GLOB.outlawed_players) && HAS_TRAIT(user, TRAIT_KNOWBANDITS))
+					. += span_userdanger("BANDIT!")
+
+			if(!is_bandit && (real_name in GLOB.outlawed_players))
+				. += span_userdanger("OUTLAW!")
+
+			if(mind && mind?.special_role == "Vampire Lord")
+				var/datum/component/vampire_disguise/disguise_comp = GetComponent(/datum/component/vampire_disguise)
+				if(!disguise_comp.disguised)
+					. += span_userdanger("A MONSTER!")
+
 			var/inquisition_text =get_inquisition_text(user)
 			if(inquisition_text)
 				. +=span_notice(inquisition_text)
 
-		if(HAS_TRAIT(src, TRAIT_LEPROSY))
-			. += span_necrosis("A LEPER...")
-
-		if(HAS_TRAIT(user, TRAIT_ROYALSERVANT))
-			if(length(culinary_preferences) && family_datum == SSfamilytree.ruling_family)
-				var/obj/item/reagent_containers/food/snacks/fav_food = src.culinary_preferences[CULINARY_FAVOURITE_FOOD]
-				var/datum/reagent/consumable/fav_drink = src.culinary_preferences[CULINARY_FAVOURITE_DRINK]
-				if(fav_food)
-					if(fav_drink)
-						. += span_notice("Their favourites are [fav_food.name] and [fav_drink.name].")
-					else
-						. += span_notice("Their favourite is [fav_food.name].")
-				else if(fav_drink)
-					. += span_notice("Their favourite is [fav_drink.name].")
-				var/obj/item/reagent_containers/food/snacks/hated_food = src.culinary_preferences[CULINARY_HATED_FOOD]
-				var/datum/reagent/consumable/hated_drink = src.culinary_preferences[CULINARY_HATED_DRINK]
-				if(hated_food)
-					if(hated_drink)
-						. += span_notice("They hate [hated_food.name] and [hated_drink.name].")
-					else
-						. += span_notice("They hate [hated_food.name].")
-				else if(hated_drink)
-					. += span_notice("They hate [hated_drink.name].")
-
-	if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
-		. += span_userdanger("MANIAC!")
-
-	if(HAS_TRAIT(src, TRAIT_FACELESS))
-		. += span_userdanger("FACELESS?! AN ASSASSIN!")
-
-	if(HAS_TRAIT(src, TRAIT_ABOMINATION))
-		. += span_userdanger("WHAT IS THAT ABOMINATION!")
-
-	if(user != src)
+	// Things that happen when you examine someone else
+	if(!self_inspect)
 		var/datum/mind/user_mind = user.mind
 		if(user_mind && mind)
 			for(var/datum/antagonist/examined_antag_datum in mind.antag_datums)
@@ -267,13 +286,16 @@
 
 		if(user.mind?.has_antag_datum(/datum/antagonist/vampire))
 			. += span_userdanger("Blood Volume: [blood_volume]")
+
 		if(HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
 			var/atom/item = get_most_expensive()
 			if(item)
 				. += span_notice("You get the feeling [m2] most valuable possession is \a [item.name].")
 
+		if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
+			. += span_userdanger("THE WORLD TWISTS! MANIAC!")
+
 	var/obscured = check_obscured_slots()
-	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
 
 	if(wear_shirt && !(obscured & ITEM_SLOT_SHIRT))
 		. += "[m3] [wear_shirt.get_examine_string(user)]."
@@ -315,7 +337,7 @@
 		. += "[m3] [gloves.get_examine_string(user)] on [m2] hands."
 	else if(GET_ATOM_BLOOD_DNA_LENGTH(src))
 		if(num_hands)
-			. += span_warning("[t_He] [t_has] [num_hands > 1 ? "" : "a"] blood-stained hand[num_hands > 1 ? "s" : ""]!")
+			. += span_warning("[m3] [num_hands > 1 ? "" : "a"] blood-stained hand[num_hands > 1 ? "s" : ""]!")
 
 	//belt
 	if(belt && !(obscured & ITEM_SLOT_BELT))
@@ -372,14 +394,10 @@
 			msg += "[t_He] appear[p_s()] to have committed suicide... there is no hope of recovery."
 		if(hellbound)
 			msg += "[capitalize(m2)] soul seems to have been ripped out of [m2] body. Revival is impossible."
-//		if(getorgan(/obj/item/organ/brain) && !key && !get_ghost(FALSE, TRUE))
-//			msg += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life and [m2] soul has departed...</span>"
-//		else
-//			msg += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life...</span>"
 
 	var/temp = getBruteLoss() + getFireLoss() //no need to calculate each of these twice
 
-	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
+	if(!(self_inspect && hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
 		// Damage
 		var/max_health = 1 //let's not divide by 0
 		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
@@ -405,6 +423,7 @@
 				msg += "<span class='artery'>[m1] pale.</span>"
 			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 				msg += "<span class='artery'>[m1] a little pale.</span>"
+
 	// Bleeding
 	var/bleed_rate = get_bleed_rate()
 	if(bleed_rate)
@@ -467,11 +486,6 @@
 	var/list/msg_list = list()
 	if(nutrition < (NUTRITION_LEVEL_STARVING - 50))
 		msg_list += "[m1] looking emaciated."
-//	else if(nutrition >= NUTRITION_LEVEL_FAT)
-//		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
-//			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy."
-//		else
-//			msg += "[t_He] [t_is] quite chubby."
 	if(HAS_TRAIT(user, TRAIT_EXTEROCEPTION))
 		switch(nutrition)
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
@@ -516,7 +530,7 @@
 				msg += "[m1][stun_absorption[i]["examine_message"]]"
 
 	if(!appears_dead)
-		if(!skipface)
+		if(!obscure_name)
 			//Disgust
 			switch(disgust)
 				if(DISGUST_LEVEL_SLIGHTLYGROSS to DISGUST_LEVEL_GROSS)
@@ -572,21 +586,11 @@
 				msg += "[m1] looking a little tired."
 	else
 		msg += "[m1] unconscious."
-//		else
-//			if(HAS_TRAIT(src, TRAIT_DUMB))
-//				msg += "[m3] a stupid expression on [m2] face."
-//			if(InCritical())
-//				msg += "[m1] barely conscious."
-//		if(getorgan(/obj/item/organ/brain))
-//			if(!key)
-//				msg += "<span class='deadsay'>[m1] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>"
-//			else if(!client)
-//				msg += "[m3] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon."
 
 	if(length(msg))
 		. += span_warning("[msg.Join("\n")]")
 
-	if(isliving(user) && user != src)
+	if(!self_inspect && isliving(user))
 		var/mob/living/L = user
 		var/final_str = STASTR
 		var/con_check = STACON
@@ -666,7 +670,7 @@
 		else
 			var/checked_zone = check_zone(user.zone_selected)
 			. += "<a href='byond://?src=[REF(src)];inspect_limb=[checked_zone]'>Inspect [parse_zone(checked_zone)]</a>"
-			if(body_position == LYING_DOWN && user != src && (user.zone_selected == BODY_ZONE_CHEST))
+			if(!self_inspect && body_position == LYING_DOWN && (user.zone_selected == BODY_ZONE_CHEST))
 				. += "<a href='byond://?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
 
 	if(!HAS_TRAIT(src, TRAIT_FACELESS))
@@ -674,9 +678,9 @@
 
 	// Characters with the hunted flaw will freak out if they can't see someone's face.
 	if(!appears_dead)
-		if(isliving(user))
+		if(!self_inspect && obscure_name && isliving(user))
 			var/mob/living/liver = user
-			if(skipface && liver.has_quirk(/datum/quirk/vice/hunted) && user != src)
+			if(liver.has_quirk(/datum/quirk/vice/hunted))
 				user.add_stress(/datum/stress_event/hunted)
 
 	if(!obscure_name && (flavortext || ((headshot_link || ooc_extra_link) && client?.is_donator()))) // only show flavor text if there is a flavor text and we show headshot

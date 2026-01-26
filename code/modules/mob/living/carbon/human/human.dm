@@ -14,7 +14,18 @@
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/artery/neck)
-	else
+
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+			if(user == src)
+				user.visible_message(span_danger("[user] starts to shave [user.p_their()] hair with [held_item].</span>"))
+			else
+				user.visible_message(span_danger("[user] starts to shave [src]'s hair with [held_item].</span>"))
+			if(do_after(user, 10 SECONDS, src))
+				set_hair_style(/datum/sprite_accessory/hair/head/bald)
+				update_body()
+
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
@@ -638,7 +649,7 @@
 
 		var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 		coronated.mind.set_assigned_role(/datum/job/lord)
-		lord_job?.get_informed_title(coronated, TRUE, new_title)
+		lord_job?.get_informed_title(coronated, FALSE, TRUE, new_title)
 		coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
 		lord_job?.add_spells(coronated)
 		SSticker.rulermob = coronated

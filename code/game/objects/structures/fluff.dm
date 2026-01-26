@@ -1483,5 +1483,5 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 6)
+	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))

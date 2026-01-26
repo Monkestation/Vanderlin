@@ -1,6 +1,8 @@
 #define CTYPE_GOLD "g"
 #define CTYPE_SILV "s"
 #define CTYPE_COPP "c"
+#define CTYPE_INQU "i"
+#define CTYPE_ANCI "a"
 #define MAX_COIN_STACK_SIZE 20
 
 /obj/item/coin
@@ -15,7 +17,8 @@
 	sellprice = 0
 	static_price = TRUE
 	simpleton_price = TRUE
-	var/flip_cd
+
+	COOLDOWN_DECLARE(flip_cd)
 	var/heads_tails = TRUE
 	var/last_merged_heads_tails = TRUE
 	var/base_type //used for compares
@@ -64,8 +67,14 @@
 						spawned_type = /obj/item/coin/gold
 					if(CTYPE_SILV)
 						spawned_type = /obj/item/coin/silver
-					else
+					if(CTYPE_COPP)
 						spawned_type = /obj/item/coin/copper
+					if(CTYPE_INQU)
+						spawned_type = /obj/item/coin/inqcoin
+					if(CTYPE_ANCI)
+						spawned_type = /obj/item/coin/copper
+					else
+						return // Don't destroy coins into copper
 
 			var/obj/item/coin/new_coin = new spawned_type
 			new_coin.forceMove(T)
@@ -304,9 +313,10 @@
 /obj/item/coin/attack_self(mob/living/user, params)
 	if(quantity > 1 || !base_type)
 		return
-	if(world.time < flip_cd + 30)
+	if(!COOLDOWN_FINISHED(src, flip_cd))
 		return
-	flip_cd = world.time
+	COOLDOWN_START(src, flip_cd, 3 SECONDS)
+
 	playsound(user, 'sound/foley/coinphy (1).ogg', 100, FALSE)
 	var/flip_outcome = rigged_outcome ? rigged_outcome : prob(50)
 	if(rigged_outcome)
@@ -424,17 +434,12 @@
 	. = ..()
 	set_quantity(rand(6,9))
 
-#undef CTYPE_GOLD
-#undef CTYPE_SILV
-#undef CTYPE_COPP
-#undef MAX_COIN_STACK_SIZE
-
 /obj/item/coin/inqcoin
 	name = "oratorium marque"
 	desc = "A blessed silver coin finished with a unique wash of black dye, bearing the post-kingdom Psycross. Kingsfield has denied the existence of such a coin when queried, as such coinage is rumoured to be used internally by the Oratorium Throni Vacui."
 	icon_state = "i1"
 	sellprice = 0
-	base_type = "i"
+	base_type = CTYPE_INQU
 	plural_name = "oratorium marques"
 
 /obj/item/coin/inqcoin/pile/Initialize()
@@ -444,9 +449,9 @@
 /obj/item/coin/inqcoin/attack_self(mob/living/user)
 	if(quantity > 1 || !base_type)
 		return
-	if(world.time < flip_cd + 30)
+	if(!COOLDOWN_FINISHED(src, flip_cd))
 		return
-	flip_cd = world.time
+	COOLDOWN_START(src, flip_cd, 3 SECONDS)
 	playsound(user, 'sound/foley/coinphy (1).ogg', 100, FALSE)
 	if(prob(50))
 		user.visible_message(span_info("[user] flips the coin. ENDURE!"))
@@ -454,4 +459,11 @@
 	else
 		user.visible_message(span_info("[user] flips the coin. LIVE!"))
 		heads_tails = FALSE
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
+
+#undef CTYPE_GOLD
+#undef CTYPE_SILV
+#undef CTYPE_COPP
+#undef CTYPE_INQU
+#undef CTYPE_ANCI
+#undef MAX_COIN_STACK_SIZE

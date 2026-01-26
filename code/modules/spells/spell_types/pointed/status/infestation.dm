@@ -33,7 +33,7 @@
 	. = ..()
 	var/mob/living/target = owner
 	to_chat(owner, span_danger("I am suddenly surrounded by a cloud of bugs!"))
-	target.adjust_jitter(20)
+	target.adjust_jitter(20 SECONDS)
 	target.add_overlay(rotten)
 	RegisterSignal(owner, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(wash_off))
 

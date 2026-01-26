@@ -205,7 +205,7 @@
 			change_firelevel(min(3, firelevel+1))
 
 		if(burn_power)
-			for(var/turf/ranged_floor in range(1, src))
+			for(var/turf/ranged_floor as anything in RANGE_TURFS(1, src))
 				var/falling = FALSE
 				if(isopenspace(ranged_floor))
 					falling = TRUE

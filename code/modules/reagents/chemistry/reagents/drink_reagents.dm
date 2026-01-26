@@ -32,7 +32,7 @@
 	glass_desc = ""
 
 /datum/reagent/consumable/coffee/overdose_process(mob/living/M)
-	M.adjust_jitter(5)
+	M.adjust_jitter(5 SECONDS)
 	..()
 
 /datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M)
@@ -102,7 +102,7 @@
 
 /datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M)
 	. = ..()
-	M.adjust_jitter(2)
+	M.adjust_jitter(4 SECONDS)
 	if(prob(5))
 		M.heart_attack()
 

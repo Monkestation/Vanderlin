@@ -160,7 +160,7 @@
 
 /obj/item/bodypart/onbite(mob/living/carbon/human/user)
 	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || istype(user.dna.species, /datum/species/werewolf))
-		if(user.has_status_effect(/datum/status_effect/debuff/silver_curse))
+		if(user.has_status_effect(/datum/status_effect/debuff/silver_bane))
 			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
 			return
 		if(do_after(user, 5 SECONDS, src))

@@ -491,7 +491,6 @@
 		if(!user.put_in_active_hand(attachment))
 			attachment.forceMove(user.loc)
 		attachment = null
-		update_icon()
 	if(!on)
 		user.visible_message(span_notice("[user] begins packing up \the [src]."))
 		if(!do_after(user, 2 SECONDS, TRUE, src))
@@ -514,7 +513,6 @@
 	new /obj/item/mobilestove(get_turf(src))
 	burn_out()
 	qdel(src)
-	return
 
 /obj/item/mobilestove
 	name = "packed stove"

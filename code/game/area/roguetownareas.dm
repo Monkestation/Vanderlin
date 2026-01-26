@@ -921,7 +921,7 @@
 			//put this idiot SOMEWHERE
 			var/static/list/unsafe_turfs = list(
 				/turf/open/floor/underworld/space,
-				/turf/open/transparent/openspace,
+				/turf/open/openspace,
 			)
 
 			var/static/list/turfs = list()

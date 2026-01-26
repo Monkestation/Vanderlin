@@ -147,7 +147,7 @@
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/skill/combat/knives
 
-/obj/item/weapon/sickle/New()
+/obj/item/weapon/sickle/Initialize(mapload)
 	. = ..()
 	if(icon_state == "sickle1")
 		icon_state = "sickle[rand(1,3)]"

@@ -3,7 +3,7 @@
 /turf/closed/basic,
 /area/outdoors/beach)
 "k" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/beach)
 "B" = (
 /obj/effect/landmark/terrain_generation_marker,
