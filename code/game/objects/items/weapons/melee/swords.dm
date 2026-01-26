@@ -71,6 +71,7 @@
 	desc = "An iron sword of shortened design and a reduced grip for single hand use."
 	icon_state = "iswordshort"
 	wdefense = GOOD_PARRY
+	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 	sellprice = 15
@@ -80,7 +81,7 @@
 	desc = "A bronze sword of shortened design and a reduced grip for single hand use."
 	icon_state = "shortsword_bronze"
 	wdefense = GOOD_PARRY
-	max_blade_int = 85
+	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/bronze
 	sellprice = 10
@@ -177,17 +178,21 @@
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 
-/obj/item/weapon/sword/short/ida
+/obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
 	name = "steel ida"
 	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_steel"
+	force = DAMAGE_SHORTSWORD + 4
+	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
 
 /obj/item/weapon/sword/short/iron/ida
 	name = "iron ida"
 	desc = "A short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_iron"
+	force = DAMAGE_SHORTSWORD + 2
+	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
 
 /obj/item/weapon/sword/rapier/caneblade
 	name = "cane blade"
