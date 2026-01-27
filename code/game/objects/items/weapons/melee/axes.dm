@@ -402,7 +402,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	associated_skill = /datum/skill/combat/axesmaces
-	blade_dulling = DULLING_BASHCHOP
 	slot_flags = ITEM_SLOT_BACK
 	melting_material = /datum/material/iron
 	melt_amount = 150
@@ -454,7 +453,7 @@
 	icon_state = "doublegreataxe"
 	wbalance = VERY_EASY_TO_DODGE
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(DBLGREATAXE_CUT, DBLGREATAXE_CHOP,  POLEARM_BASH)
+	gripped_intents = list(DBLGREATAXE_CUT, DBLGREATAXE_CHOP, POLEARM_BASH)
 	max_blade_int = 400
 	minstr = 12
 
@@ -468,7 +467,6 @@
 	icon_state = "graggargaxe"
 	alt_intents = list(AXE_CUT, AXE_CHOP)
 	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
-	blade_dulling = DULLING_BASHCHOP
 	sellprice = 0 // Graggarite axe, nobody wants this
 
 /obj/item/weapon/greataxe/dreamscape

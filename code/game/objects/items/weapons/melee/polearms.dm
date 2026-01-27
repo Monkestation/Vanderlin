@@ -22,7 +22,6 @@
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	dropshrink = 0.8
-	blade_dulling = DULLING_BASHCHOP
 	thrown_bclass = BCLASS_STAB
 	sellprice = 20
 
@@ -54,6 +53,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
 
+	blade_dulling = DULLING_BASHCHOP
 	slot_flags = ITEM_SLOT_BACK
 	sharpness = IS_BLUNT
 	sellprice = 5
@@ -85,6 +85,7 @@
 	icon_state = "quarterstaff_iron"
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
+	blade_dulling = DULLING_BASH
 	minstr = 7
 
 /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
@@ -94,6 +95,7 @@
 	force_wielded =  DAMAGE_STAFF_WIELD + 1
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
+	blade_dulling = DULLING_BASH
 	minstr = 7
 
 //................ Staff of the Testimonium ............... //
@@ -103,6 +105,7 @@
 	icon_state = "aries"
 	force_wielded =  DAMAGE_STAFF_WIELD + 1
 	resistance_flags = FIRE_PROOF // Leniency for unique items
+	blade_dulling = DULLING_BASH
 	dropshrink = 0.6
 	sellprice = 100
 
@@ -149,6 +152,7 @@
 	icon_state = "gsspear"
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	throwforce = DAMAGE_SPEAR_WIELD
+	blade_dulling = DULLING_BASH
 
 /obj/item/weapon/polearm/spear/assegai
 	name = "iron assegai"
@@ -163,6 +167,7 @@
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_steel"
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
+	blade_dulling = DULLING_BASH
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -173,6 +178,7 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
+	blade_dulling = DULLING_BASH
 	sellprice = 60
 
 /obj/item/weapon/polearm/spear/psydon/Initialize(mapload)
@@ -200,6 +206,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/steel
+	blade_dulling = DULLING_BASH
 	melt_amount = 75
 	sellprice = 60
 
@@ -225,6 +232,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	max_blade_int = 120
 	melting_material = /datum/material/bronze
+	blade_dulling = DULLING_BASHCHOP
 	melt_amount = 75
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
@@ -285,6 +293,7 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
+	blade_dulling = DULLING_BASH
 
 	slot_flags = ITEM_SLOT_BACK
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
@@ -592,7 +601,7 @@
 	gripped_intents = list(NAGI_REND, NAGI_CUT, POLEARM_BASH)
 	max_blade_int = 50 //Nippon suteeru (dogshit)
 	minstr = 7
-	blade_dulling = DULLING_BASHCHOP
+	blade_dulling = DULLING_BASHCHOP //Dogshit
 
 /obj/item/weapon/spear/naginata/getonmobprop(tag)
 	. = ..()
@@ -613,6 +622,7 @@
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
 	max_integrity = INTEGRITY_STRONG
+	blade_dulling = DULLING_BASH
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
 	. = ..()

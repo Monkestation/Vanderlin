@@ -63,7 +63,7 @@
 	penfactor = 40
 	swingdelay = 1
 	misscost = 15
-	item_damage_type = "blunt"
+	item_damage_type = "stab"
 
 /datum/intent/mace/warhammer/stab
 	name = "thrust"

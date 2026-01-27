@@ -12,7 +12,7 @@
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(MACE_STRIKE)
-	gripped_intents = list(MACE_STRIKE, MACE_SMASH)
+	gripped_intents = list(MACE_STRIKE, MACE_SMASH, DAZE_BASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 7
 
@@ -445,6 +445,7 @@
 	icon_state = "pufferprod"
 	force = DAMAGE_MACE - 5
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD + 5
+	gripped_intents = list(MACE_HVYSMASH, MACE_HVYSTRIKE)
 	max_integrity = INTEGRITY_STRONGEST * 1.2
 	minstr = 11
 
