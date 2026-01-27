@@ -152,19 +152,3 @@
 	starting_atom = /obj/item/reagent_containers/powder/blastpowder
 	output = /obj/item/breach_charge
 	craft_time = 5 SECONDS
-
-/datum/repeatable_crafting_recipe/bomb/sticky
-	name = "homemade sticky bomb"
-
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/spiderhoney = 1,
-		/obj/item/reagent_containers/powder/blastpowder = 3,
-		/obj/item/natural/worms/leech = 1,
-	)
-
-	starting_atom = /obj/item/reagent_containers/powder/blastpowder
-	attacked_atom = /obj/item/natural/worms/leech
-	output = /obj/item/explosive/sticky
-	craft_time = 1 SECONDS
-	subtypes_allowed = TRUE
-	reagent_subtypes_allowed = TRUE

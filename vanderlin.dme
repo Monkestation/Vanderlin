@@ -1631,7 +1631,6 @@
 #include "code\game\objects\items\explosives\bottle_bomb.dm"
 #include "code\game\objects\items\explosives\canister.dm"
 #include "code\game\objects\items\explosives\deathshell.dm"
-#include "code\game\objects\items\explosives\sticky.dm"
 #include "code\game\objects\items\explosives\time.dm"
 #include "code\game\objects\items\melee\misc.dm"
 #include "code\game\objects\items\melee\transforming.dm"
