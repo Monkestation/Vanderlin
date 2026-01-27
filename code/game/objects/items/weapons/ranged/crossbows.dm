@@ -164,38 +164,36 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/shoot_with_empty_chamber()
 	if(cocked)
-		playsound(src.loc, 'sound/combat/Ranged/crossbow-small-shot-02.ogg', 100, FALSE)
+		playsound(src, 'sound/combat/Ranged/crossbow-small-shot-02.ogg', 100, FALSE)
 		cocked = FALSE
 		update_appearance(UPDATE_ICON_STATE)
 
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attack_self(mob/living/user)
 	if(chambered)
-		..()
-	else
-		if(!cocked)
-			to_chat(user, span_info("I step on the stirrup and use all my might..."))
-			if(!movingreload)
-				if(do_after(user, reloadtime - user.STASTR, target = user))
-					playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
-					cocked = TRUE
-			else
-				if(do_after(user, reloadtime - user.STASTR, user, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_USER_DIR_CHANGE)))
-					playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
-					cocked = TRUE
+		return ..()
+
+	if(!cocked)
+		to_chat(user, span_info("I step on the stirrup and use all my might..."))
+		if(!movingreload)
+			if(do_after(user, reloadtime - user.STASTR, target = user))
+				playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
+				cocked = TRUE
 		else
-			to_chat(user, span_warning("I carefully de-cock the crossbow."))
-			cocked = FALSE
-	update_icon()
+			if(do_after(user, reloadtime - user.STASTR, user, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_USER_DIR_CHANGE)))
+				playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
+				cocked = TRUE
+	else
+		to_chat(user, span_warning("I carefully de-cock the crossbow."))
+		cocked = FALSE
+
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attackby(obj/item/A, mob/user, params)
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
 		if(cocked)
-			if((loc == user) && (user.get_inactive_held_item() != src))
-				return
-			..()
-		else
-			to_chat(user, span_warning("I need to cock the bow first."))
+			return ..()
+		to_chat(user, span_warning("I need to cock the bow first."))
 
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)

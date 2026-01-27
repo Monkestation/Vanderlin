@@ -13,8 +13,8 @@
 	invocation_type = INVOCATION_WHISPER
 
 	charge_required = FALSE
-	cooldown_time = 60 SECONDS
-	spell_cost = 50
+	cooldown_time = 30 SECONDS
+	spell_cost = 15
 
 /datum/action/cooldown/spell/undirected/locate_dead/cast(atom/cast_on)
 	. = ..()

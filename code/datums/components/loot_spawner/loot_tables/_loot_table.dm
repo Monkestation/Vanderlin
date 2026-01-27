@@ -78,12 +78,15 @@ CONFIGURATION:
 
 	var/turf/spawn_location = looter ? get_turf(looter) : null
 
+	var/list/loot = list()
 	for(var/i = 1 to spawn_count)
 		var/atom/spawn_path = pickweight(weighted_list)
+		var/atom/movable/new_spawn = new spawn_path(spawn_location)
 		if(spawn_location)
-			var/atom/movable/new_spawn = new spawn_path(spawn_location)
 			if(istype(looter))
 				looter.put_in_active_hand(new_spawn)
+		loot += new_spawn
+	return loot
 
 /datum/loot_table/proc/return_list(mob/looter = null, delve_level = 1, item_rarity = 1.0)
 	var/list/weighted_list = list()

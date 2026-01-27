@@ -554,53 +554,59 @@ SUBSYSTEM_DEF(gamemode)
 /// Gets candidates for antagonist roles.
 /datum/controller/subsystem/gamemode/proc/get_candidates(be_special, job_ban, observers, ready_newplayers, living_players, required_time, inherit_required_time = TRUE, midround_antag_pref, no_antags = TRUE, list/restricted_roles, list/required_roles)
 	var/list/candidates = list()
-	var/list/candidate_candidates = list() //lol
 
 	for(var/mob/player as anything in GLOB.player_list)
-		if(QDELETED(player) || player.mind?.picking)
+		if(QDELETED(player) || !player.client || !player.mind || player.mind.picking)
 			continue
+
+		if(job_ban && is_banned_from(player.ckey, list(job_ban)))
+			continue
+
+		var/checked_one_box = FALSE
+
 		if(ready_newplayers && isnewplayer(player))
 			var/mob/dead/new_player/new_player = player
-			if(new_player.ready == PLAYER_READY_TO_PLAY && new_player.mind && new_player.check_preferences())
-				candidate_candidates += player
-		else if(observers && isobserver(player))
-			candidate_candidates += player
-		else if(living_players && isliving(player))
+			if(new_player.ready != PLAYER_READY_TO_PLAY || !new_player.check_preferences())
+				continue
+			checked_one_box = TRUE
+
+		if(observers && isobserver(player))
+			checked_one_box = TRUE
+
+		if(living_players && isliving(player))
 			if(!ishuman(player))
 				continue
-			candidate_candidates += player
 
-	for(var/mob/candidate as anything in candidate_candidates)
-		if(QDELETED(candidate) || !candidate.key || !candidate.client || (!observers && !candidate.mind))
-			continue
-		if(!observers)
-			if(!ready_players && !isliving(candidate))
+			var/datum/job/tested_job = player.mind.assigned_role
+			if(tested_job.parent_job)
+				tested_job = tested_job.parent_job
+
+			if(length(restricted_roles) && is_type_in_typecache(tested_job, restricted_roles))
 				continue
-			if(no_antags && !isnull(candidate.mind.antag_datums))
+
+			if(length(required_roles) && !is_type_in_typecache(tested_job, required_roles))
+				continue
+
+			if(player.mind.special_role)
+				continue
+
+			if(be_special && !(be_special in player.client.prefs?.be_special))
+				continue
+
+			if(no_antags && length(player.mind.antag_datums))
 				var/real = FALSE
-				for(var/datum/antagonist/antag_datum as anything in candidate.mind.antag_datums)
+				for(var/datum/antagonist/antag_datum as anything in player.mind.antag_datums)
 					if(!(antag_datum.antag_flags & FLAG_FAKE_ANTAG))
 						real = TRUE
 						break
 				if(real)
 					continue
-			if(restricted_roles && (candidate.mind.assigned_role.title in restricted_roles))
-				continue
-			if(length(required_roles) && !(candidate.mind.assigned_role.title in required_roles))
-				continue
-			if(candidate.mind.special_role)
-				continue
 
-		if(be_special)
-			if(!(candidate.client.prefs) || !(be_special in candidate.client.prefs.be_special))
-				continue
+			checked_one_box = TRUE
 
-		//if(midround_antag_pref)
-			//continue
+		if(checked_one_box)
+			candidates += player
 
-		if(job_ban && is_banned_from(candidate.ckey, list(job_ban, ROLE_MANIAC)))
-			continue
-		candidates += candidate
 	return candidates
 
 /// Gets the correct popcount, returning READY people if roundstart, and active people if not.
@@ -1579,8 +1585,9 @@ SUBSYSTEM_DEF(gamemode)
 					record_round_statistic(STATS_ELDERLY_POPULATION)
 				if(AGE_IMMORTAL)
 					record_round_statistic(STATS_IMMORTAL_POPULATION)
-			if(human_mob.charflaw)
-				record_featured_object_stat(FEATURED_STATS_FLAWS, human_mob.charflaw.name)
+			if(length(human_mob.quirks))
+				for(var/datum/quirk/vice/charflaw in human_mob.quirks)
+					record_featured_object_stat(FEATURED_STATS_FLAWS, charflaw.name)
 			if(human_mob.is_noble())
 				record_round_statistic(STATS_ALIVE_NOBLES)
 			if(human_mob.mind.assigned_role.title in GLOB.garrison_positions)
@@ -1593,17 +1600,17 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ILLITERATES)
 			if(HAS_TRAIT(human_mob, TRAIT_FOREIGNER))
 				record_round_statistic(STATS_FOREIGNERS)
-			if(human_mob.has_flaw(/datum/charflaw/clingy))
+			if(human_mob.has_quirk(/datum/quirk/vice/clingy))
 				record_round_statistic(STATS_CLINGY_PEOPLE)
-			if(human_mob.has_flaw(/datum/charflaw/addiction/alcoholic))
+			if(human_mob.has_quirk(/datum/quirk/vice/alcoholic))
 				record_round_statistic(STATS_ALCOHOLICS)
-			if(human_mob.has_flaw(/datum/charflaw/addiction/junkie))
+			if(human_mob.has_quirk(/datum/quirk/vice/junkie))
 				record_round_statistic(STATS_JUNKIES)
-			if(human_mob.has_flaw(/datum/charflaw/addiction/kleptomaniac))
+			if(human_mob.has_quirk(/datum/quirk/vice/kleptomaniac))
 				record_round_statistic(STATS_KLEPTOMANIACS)
-			if(human_mob.has_flaw(/datum/charflaw/greedy))
+			if(human_mob.has_quirk(/datum/quirk/vice/greedy))
 				record_round_statistic(STATS_GREEDY_PEOPLE)
-			if(human_mob.has_flaw(/datum/charflaw/hunted))
+			if(human_mob.has_quirk(/datum/quirk/vice/hunted))
 				record_round_statistic(STATS_HUNTED_PEOPLE)
 			if(HAS_TRAIT_NOT_FROM(human_mob, TRAIT_PACIFISM, "hugbox"))
 				record_round_statistic(STATS_PACIFISTS)

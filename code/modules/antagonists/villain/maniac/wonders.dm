@@ -117,7 +117,7 @@
 			LAZYSET(H.maniacs2wonder_ids, dream_master, wonder_id)
 			H.maniacs += dream_master
 			V.emote("scream")
-			V.blur_eyes(2)
+			V.set_eye_blur_if_lower(4 SECONDS)
 			SEND_SOUND(V, 'sound/villain/seen_wonder.ogg')
 			V.Paralyze(5 SECONDS)
 			gazed_at = TRUE

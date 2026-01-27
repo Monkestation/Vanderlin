@@ -273,8 +273,7 @@
 
 /mob/living/carbon/human/equipped_speed_mods()
 	. = ..()
-	for(var/sloties in get_all_slots())
-		var/obj/item/thing = sloties
+	for(var/obj/item/thing in get_all_slots())
 		. += thing?.slowdown
 
 /mob/living/carbon/human/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE)

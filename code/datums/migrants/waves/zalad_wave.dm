@@ -18,14 +18,14 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/music = 1,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/craft/cooking = 2,
 		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
@@ -60,7 +60,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/emir
-	name = "Zalad Emir"
+	name = "Zalad Emir (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	gloves = /obj/item/clothing/gloves/leather
 	head = /obj/item/clothing/head/crown/circlet
@@ -103,14 +103,14 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/misc/music = 1,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/craft/cooking = 2,
 		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
@@ -146,7 +146,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/amirah
-	name = "Zalad Amirah"
+	name = "Zalad Amirah (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	gloves = /obj/item/clothing/gloves/leather
 	head = /obj/item/clothing/head/crown/nyle
@@ -177,7 +177,7 @@
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_ZALADIN
 	is_recognized = TRUE
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 3,
 		STATKEY_PER = 1,
@@ -192,7 +192,7 @@
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/whipsflails = 4,
 		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 4,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/bows = 3,
@@ -225,7 +225,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/furusiyya
-	name = "Furusiyya"
+	name = "Furusiyya (Migrant Wave)"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	shoes = /obj/item/clothing/shoes/boots/rare/zaladplate
@@ -261,7 +261,7 @@
 	outfit = /datum/outfit/zalad_migration/zalad_guard
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_END = 2,
@@ -269,12 +269,12 @@
 
 	skills = list(
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/lockpicking = 1,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/polearms = 1,
@@ -292,7 +292,7 @@
 
 /datum/job/migrant/zalad_migration/zalad_guard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1))
+	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1), TRUE)
 
 	if(spawned.dna?.species)
 		if(spawned.dna.species.id == SPEC_ID_HUMEN)
@@ -303,7 +303,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/zalad_guard
-	name = "Zalad Soldier"
+	name = "Zalad Soldier (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	head = /obj/item/clothing/head/helmet/sallet/zalad
 	gloves = /obj/item/clothing/gloves/angle
@@ -326,6 +326,7 @@
 	title = "Qatil"
 	tutorial = "You are the Amirah's confident and most loyal protector, you shan't let them die in these wretched lands."
 	outfit = /datum/outfit/zalad_migration/qatil
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	allowed_races = list(
 		SPEC_ID_HUMEN,
 		SPEC_ID_ELF,
@@ -347,7 +348,7 @@
 		/datum/skill/combat/swords = 2,
 		/datum/skill/combat/crossbows = 2,
 		/datum/skill/combat/bows = 2,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/climbing = 4,
@@ -378,7 +379,7 @@
 			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/zalad_migration/qatil
-	name = "Qatil"
+	name = "Qatil (Migrant Wave)"
 	pants = /obj/item/clothing/pants/trou/leather
 	beltr = /obj/item/weapon/knife/dagger/steel/special
 	shoes = /obj/item/clothing/shoes/shalal

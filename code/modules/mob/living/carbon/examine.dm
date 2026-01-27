@@ -80,9 +80,11 @@
 
 	if(on_fire)
 		msg += "[t_He] [t_is] on fire!"
-		if(user.has_flaw(/datum/charflaw/addiction/pyromaniac))
-			msg += span_boldred(" IT'S BEAUTIFUL!")
-			user.sate_addiction()
+		if(isliving(user))
+			var/mob/living/liver = user
+			if(liver.has_quirk(/datum/quirk.vice/pyromaniac))
+				msg += span_boldred(" IT'S BEAUTIFUL!")
+				liver.sate_addiction(/datum/quirk.vice/pyromaniac)
 		msg += "\n"
 	else if(fire_stacks + divine_fire_stacks > 0)
 		msg += "[t_He] [t_is] covered in something flammable.\n"

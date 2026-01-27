@@ -32,7 +32,14 @@
 
 /mob/living/carbon/human/get_alt_name()
 	if(name != GetVoice())
-		return "Unknown [(pronouns == SHE_HER) ? "Woman" : "Man"]"
+		// This isn't accurate purposely
+		var/appendage = "Figure"
+		switch(client?.prefs.voice_type)
+			if(VOICE_TYPE_FEM)
+				appendage = "Woman"
+			if(VOICE_TYPE_MASC)
+				appendage = "Man"
+		return "Unknown [appendage]"
 
 /mob/living/carbon/human/proc/forcesay(list/append) //this proc is at the bottom of the file because quote fuckery makes notepad++ cri
 	if(stat == CONSCIOUS)
@@ -77,4 +84,4 @@
 		dna.species.send_voice(src)
 
 /datum/species/proc/send_voice(mob/living/carbon/human/H)
-	playsound(get_turf(H), 'sound/misc/talk.ogg', 100, FALSE, -1)
+	playsound(H, 'sound/misc/talk.ogg', 100, FALSE, -1)

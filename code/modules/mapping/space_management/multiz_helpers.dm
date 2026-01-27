@@ -1,12 +1,22 @@
 /proc/get_step_multiz(ref, dir)
-	var/turf/us = get_turf(ref)
-	if(dir & UP)
-		dir &= ~UP
-		return get_step(GET_TURF_ABOVE(us), dir)
-	if(dir & DOWN)
-		dir &= ~DOWN
-		return get_step(GET_TURF_BELOW(us), dir)
-	return get_step(ref, dir)
+	// this avoids evil expensive bitmath
+	switch(dir)
+		if(UP to DOWN-1)
+			// sadly we have to do get_turf here
+			return GET_TURF_ABOVE_DIAGONAL(get_turf(ref), dir)
+		if(DOWN to INFINITY)
+			return GET_TURF_BELOW_DIAGONAL(get_turf(ref), dir)
+		else
+			return get_step(ref, dir)
+	/* switch(dir)
+		if(0 to SOUTHWEST) // 0 to 10; 11-15 is invalid
+			return get_step(ref, dir)
+		if(UP to UP|SOUTH|WEST) // 16 to 26; 27-31 is invalid (no EASTWEST)
+			return GET_TURF_ABOVE_DIAGONAL(get_turf(ref), dir)
+		if(DOWN to DOWN|NORTH|SOUTH|EAST|WEST) // 32 to 47
+			return GET_TURF_BELOW_DIAGONAL(get_turf(ref), dir)
+		else
+			CRASH("Invalid direction [dir] passed to get_step_multiz!") */
 
 /proc/get_dir_multiz(turf/us, turf/them)
 	us = get_turf(us)

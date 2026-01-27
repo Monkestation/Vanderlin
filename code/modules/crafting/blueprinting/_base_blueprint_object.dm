@@ -190,7 +190,10 @@
 	to_chat(user, span_notice("You begin constructing \the [recipe.name]..."))
 
 	for(var/i = 1 to 100)
-		if(!do_after(user, recipe.build_time, target = src))
+		var/time_to_do = recipe.build_time
+		if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
+			time_to_do *= 0.9
+		if(!do_after(user, time_to_do, target = src))
 			return FALSE
 
 		if(!recipe.check_craft_requirements(user, get_turf(src), src))
@@ -265,7 +268,7 @@
 							span_notice("I [recipe.verbage] \the [recipe.name]!"))
 
 		if(recipe.craftsound)
-			playsound(get_turf(src), recipe.craftsound, 100, TRUE)
+			playsound(src, recipe.craftsound, 100, TRUE)
 
 		if(user.mind && recipe.skillcraft)
 			if(isliving(user))

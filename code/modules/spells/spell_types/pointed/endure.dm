@@ -108,7 +108,6 @@
 	id = "psyhealing"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psyhealing
 	duration = 15 SECONDS
-	examine_text = "SUBJECTPRONOUN stirs with a sense of ENDURING!"
 	var/healing_on_tick = 1
 	var/outline_colour = "#d3d3d3"
 
@@ -122,6 +121,9 @@
 	if (!filter)
 		owner.add_filter(PSYDON_HEALING_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 60, "size" = 1))
 	return TRUE
+
+/datum/status_effect/buff/psyhealing/get_examine_text()
+	return "They stir with a sense of ENDURING!"
 
 /datum/status_effect/buff/psyhealing/tick()
 	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/psyheal_rogue(get_turf(owner))
@@ -151,7 +153,6 @@
 	id = "psyvived"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psyvived
 	duration = 30 SECONDS
-	examine_text = "SUBJECTPRONOUN moves with an air of ABSOLUTION!"
 	var/outline_colour = "#aa1717"
 
 /datum/status_effect/buff/psyvived/on_creation(mob/living/new_owner)
@@ -163,6 +164,9 @@
 	if (!filter)
 		owner.add_filter(PSYDON_REVIVED_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 60, "size" = 1))
 	return TRUE
+
+/datum/status_effect/buff/psyvived/get_examine_text()
+	return "They move with an air of ABSOLUTION!"
 
 /datum/status_effect/buff/psyvived/tick()
 	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/psyheal_rogue(get_turf(owner))

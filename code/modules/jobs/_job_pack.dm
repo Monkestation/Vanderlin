@@ -16,10 +16,14 @@ GLOBAL_LIST_INIT(job_pack_singletons, init_jobpacks())
 	var/list/pack_stats = list()
 	/// Associative list of skill to skill value
 	var/list/pack_skills = list()
+	/// List of Traits
+	var/list/pack_traits = list()
 	/// List of spells
 	var/list/pack_spells = list()
 	/// Associative list of item to slot, set null slot for auto
 	var/list/pack_contents = list()
+	/// Associative list of item paths to number of items for backpack storage
+	var/list/pack_backpack_contents = list()
 
 /datum/job_pack/proc/can_pick_pack(mob/living/carbon/human/picker, list/previous_picked_types)
 	return TRUE
@@ -35,6 +39,9 @@ GLOBAL_LIST_INIT(job_pack_singletons, init_jobpacks())
 		else
 			picker.adjust_skillrank(skill, amount_or_list, TRUE)
 
+	for(var/trait in pack_traits)
+		ADD_TRAIT(picker, trait, JOB_TRAIT)
+
 	for(var/datum/action/cooldown/spell/spell as anything in pack_spells)
 		picker.add_spell(spell, source = src)
 
@@ -46,3 +53,25 @@ GLOBAL_LIST_INIT(job_pack_singletons, init_jobpacks())
 			picker.put_in_hands(new path(picker), TRUE)
 		else
 			picker.equip_to_slot_or_del(new path, slot, TRUE)
+
+	if(length(pack_backpack_contents))
+		var/datum/outfit/inserter = new
+		for(var/path in pack_backpack_contents)
+			var/number = pack_backpack_contents[path]
+			if(!isnum(number)) // Default to 1
+				number = 1
+			for(var/i in 1 to number)
+				var/obj/item/new_item = new path(picker)
+				var/obj/item/item = picker.get_item_by_slot(ITEM_SLOT_BACK_L)
+				if(!item)
+					item = picker.get_item_by_slot(ITEM_SLOT_BACK_R)
+				if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
+					item = picker.get_item_by_slot(ITEM_SLOT_BACK_R)
+					if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
+						item = picker.get_item_by_slot(ITEM_SLOT_BELT)
+						if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
+							item = picker.get_item_by_slot(ITEM_SLOT_NECK)
+							if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
+								new_item.forceMove(get_turf(picker))
+								message_admins("[type] had pack_backpack_contents set but no room to store:[new_item]")
+

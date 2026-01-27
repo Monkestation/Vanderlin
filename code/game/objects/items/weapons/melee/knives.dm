@@ -151,7 +151,7 @@
 
 /obj/item/weapon/knife/dagger/navaja/attack_self(mob/user)
 	extended = !extended
-	playsound(src.loc, 'sound/blank.ogg', 50, TRUE)
+	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	if(extended)
 		force = 20
 		wdefense = MEDIOCRE_PARRY
@@ -280,6 +280,15 @@
 				return list("shrink" = 0.5,"sx" = -10,"sy" = 0,"nx" = 13,"ny" = 2,"wx" = -8,"wy" = 2,"ex" = 5,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 21,"sturn" = -18,"wturn" = -18,"eturn" = 21,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+//................ Bronze Dagger ............... //s
+/obj/item/weapon/knife/dagger/bronze
+	name = "bronze dagger"
+	desc = "A dagger made out of bronze."
+	icon_state = "dagger_bronze"
+	melting_material = /datum/material/bronze
+	melt_amount = 75
+	sellprice = 10
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
@@ -467,7 +476,7 @@
 /obj/item/weapon/knife/dagger/steel/profane/pre_attack(mob/living/carbon/human/target, mob/living/user = usr, params)
 	if(!istype(target))
 		return FALSE
-	if(target.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // Check to see if the dagger will do 20 damage or 14
+	if(target.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // Check to see if the dagger will do 20 damage or 14
 		force = DAMAGE_KNIFE * 2
 	else
 		force = DAMAGE_DAGGER + 2
@@ -524,8 +533,19 @@
 
 			return
 
-		if(target.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // The profane dagger only thirsts for those who are hunted, by flaw or by zizoid curse.
-			if(target.client == null) //See if the target's soul has left their body
+		if(target.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // The profane dagger only thirsts for those who are hunted, by flaw or by zizoid curse.
+			if(target.has_quirk(/datum/quirk/vice/hardcore))
+				if(HAS_TRAIT(target, TRAIT_HARDCORE_PROFANE))
+					return
+				record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+				record_round_statistic(STATS_ASSASSINATIONS)
+				user.adjust_triumphs(1)
+				target.visible_message("<span class='danger'>[target]'s soul is pulled from their body and sucked into the profane dagger!</span>", "<span class='danger'>My soul is trapped within the profane dagger. Damnation!</span>")
+				playsound(src, 'sound/magic/soulsteal.ogg', 100, extrarange = 5)
+				blade_int = max_blade_int // Stealing a soul successfully sharpens the blade.
+				repair_damage(max_integrity) // And fixes the dagger. No blacksmith required!
+				ADD_TRAIT(target, TRAIT_HARDCORE_PROFANE, "[type]")
+			else if(target.client == null) //See if the target's soul has left their body
 				to_chat(user, "<span class='danger'>Your target's soul has already escaped its corpse...you try to call it back!</span>")
 				get_profane_ghost(target,user) //Proc to capture a soul that has left the body.
 			else
@@ -560,7 +580,7 @@
 		return FALSE
 	user.adjust_triumphs(1)
 	init_profane_soul(target, user) // If we got the soul, store them in the dagger.
-	qdel(target) // Get rid of that ghost!
+	qdel(chosen_ghost) // Get rid of that ghost!
 	return TRUE
 
 /obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls(mob/user) // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
@@ -661,6 +681,21 @@
 	melting_material = /datum/material/iron
 	melt_amount = 50
 	sellprice = 3
+
+/obj/item/weapon/knife/throwingknife/bronze
+	name = "bronze tossblade"
+	desc = "A tossblade forged from bronze. It's not as reliable compared to other tossblades, but it's much cheaper to make."
+	item_state = "bone_dagger"
+	force = DAMAGE_DAGGER
+	throwforce = DAMAGE_DAGGER + 10
+	throw_speed = 4
+	max_integrity = INTEGRITY_WORST - 30
+	wdefense = 1
+	icon_state = "throwing_bronze"
+	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 20, "embedded_fall_chance" = 15)
+	melting_material = /datum/material/bronze
+	melt_amount = 50
+	sellprice = 2
 
 /obj/item/weapon/knife/throwingknife/steel
 	name = "steel tossblade"

@@ -97,4 +97,4 @@
 #define WOUND_SEVERITY_BIOHAZARD 6
 
 /// This is used as a reference point for dynamic wounds, so it's better off as a define.
-#define ARTERY_LIMB_BLEEDRATE 20
+#define ARTERY_LIMB_BLEEDRATE 25

@@ -273,7 +273,7 @@
 			if(!target.has_buckled_mobs())
 				user.visible_message("<span class='warning'>[user] tries to saddle [target]...</span>")
 				if(do_after(user, 4 SECONDS, target))
-					playsound(loc, 'sound/foley/saddledismount.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/saddledismount.ogg', 100, FALSE)
 					user.dropItemToGround(src)
 					S.ssaddle = src
 					src.forceMove(S)
@@ -281,31 +281,34 @@
 		return
 	..()
 
-/mob/living/simple_animal/onbite(mob/living/carbon/human/user)
-	var/damage = 10*(user.STASTR/20)
+/mob/living/simple_animal/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
+	var/damage = user.STASTR*0.5
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	user.do_attack_animation(src, ATTACK_EFFECT_BITE)
-	playsound(user.loc, "smallslash", 100, FALSE, -1)
+	playsound(user, "smallslash", 100, FALSE, -1)
 	user.next_attack_msg.Cut()
-	if(stat == DEAD)
-		if(user.has_status_effect(/datum/status_effect/debuff/silver_curse))
+	if(stat == DEAD && ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(user.has_status_effect(/datum/status_effect/debuff/silver_bane))
 			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
-			return
-		if(user.mind && istype(user, /mob/living/carbon/human/species/werewolf))
-			visible_message(span_danger("The werewolf ravenously consumes the [src]!"))
-			to_chat(src, span_warning("I feed on succulent flesh. I feel reinvigorated."))
-			user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
+			return TRUE
+		if(is_species(user, /datum/species/werewolf))
+			visible_message(span_danger("[user] ravenously consumes [src]!"), span_warning("I feed on succulent flesh. I feel reinvigorated."))
+			H.rage_datum?.update_rage(text2num(WW_RAGE_HIGH))
 			gib()
-		return
-	if(src.apply_damage(damage, BRUTE))
-		if(istype(user, /mob/living/carbon/human/species/werewolf))
-			visible_message(span_danger("The werewolf bites into [src] and thrashes!"))
-		else
-			visible_message(span_danger("[user] bites [src]!"))
-		if(HAS_TRAIT(user, TRAIT_POISONBITE))
-			if(src.reagents)
-				var/poison = user.STACON/2
-				src.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
-				src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
-				to_chat(user, span_warning("Your fangs inject venom into [src]!"))
+		return TRUE
+	if(!src.apply_damage(damage, BRUTE))
+		return TRUE
+	if(is_species(user, /datum/species/werewolf))
+		visible_message(span_danger("[user] bites into [src] and thrashes!"))
+	else
+		visible_message(span_danger("[user] bites [src]!"))
+	if(HAS_TRAIT(user, TRAIT_POISONBITE) && src.reagents)
+		var/poison = user.STACON/2
+		src.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
+		src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
+		to_chat(user, span_warning("Your fangs inject venom into [src]!"))

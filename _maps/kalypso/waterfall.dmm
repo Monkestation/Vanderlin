@@ -27,7 +27,7 @@
 /turf/open/water/cleanshallow,
 /area/template_noop)
 "E" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/template_noop)
 "J" = (
 /obj/effect/waterfall,

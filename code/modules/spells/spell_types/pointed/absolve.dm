@@ -48,11 +48,10 @@
 			user.say("MY LIFE FOR YOURS! LIVE, AS DOES HE!", forced = TRUE)
 			user.death()
 			// Revive the target
-			H.revive(full_heal = TRUE, admin_revive = FALSE)
-			H.adjustOxyLoss(-H.getOxyLoss())
-			H.grab_ghost(force = TRUE) // even suicides
+			H.revive(HEAL_ALL)
+			H.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 			H.emote("breathgasp")
-			H.Jitter(100)
+			H.adjust_jitter(100 SECONDS)
 			H.update_body()
 			GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]++
 			ADD_TRAIT(H, TRAIT_IWASREVIVED, "[type]")

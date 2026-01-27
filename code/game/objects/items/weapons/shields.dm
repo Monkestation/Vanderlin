@@ -38,7 +38,7 @@
 		if(!COOLDOWN_FINISHED(src, shield_bang))
 			return
 		user.visible_message("<span class='danger'>[user] bangs [src] with [attackby_item]!</span>")
-		playsound(user.loc, 'sound/combat/shieldbang.ogg', 50, TRUE)
+		playsound(user, 'sound/combat/shieldbang.ogg', 50, TRUE)
 		COOLDOWN_START(src, shield_bang, SHIELD_BANG_COOLDOWN)
 		return
 
@@ -111,9 +111,8 @@
 	if(design_chosen)
 		return
 
-	if(!('icons/roguetown/weapons/wood_heraldry.dmi' in GLOB.IconStates_cache))
-		var/icon/icon_file = new('icons/roguetown/weapons/wood_heraldry.dmi')
-		GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'] = icon_file.IconStates()
+	if(isnull(GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi']))
+		GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'] = icon_states('icons/roguetown/weapons/wood_heraldry.dmi')
 
 	var/picked_name = browser_input_list(user, "Choose a Heraldry", "Heraldry", GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'])
 	if(!picked_name)
@@ -256,9 +255,8 @@
 	if(design_chosen)
 		return
 
-	if(!('icons/roguetown/weapons/shield_heraldry.dmi' in GLOB.IconStates_cache))
-		var/icon/icon_file = new('icons/roguetown/weapons/shield_heraldry.dmi')
-		GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi'] = icon_file.IconStates()
+	if(isnull(GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi']))
+		GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi'] = icon_states('icons/roguetown/weapons/shield_heraldry.dmi')
 
 	var/picked_name = browser_input_list(user, "Choose a Heraldry", "Heraldry", sortList(GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi']))
 	if(!picked_name)
@@ -279,6 +277,11 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 #undef SHIELD_BANG_COOLDOWN
+
+/obj/item/weapon/shield/tower/metal/ancient
+	name = "ancient shield"
+	desc = "An ancient, knightly, kite-shaped steel shield."
+	icon_state = "ancientsh"
 
 /obj/item/weapon/shield/tower/metal/psy
 	name = "Covenant"

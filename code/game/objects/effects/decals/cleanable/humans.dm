@@ -14,9 +14,7 @@
 	clean_type = CLEAN_TYPE_BLOOD
 
 	var/blood_timer
-	var/wash_precent = 0
 	var/glows = FALSE
-	COOLDOWN_DECLARE(wash_cooldown)
 
 
 /obj/effect/decal/cleanable/blood/add_blood_DNA(list/blood_DNA_to_add, no_visuals = FALSE)
@@ -49,15 +47,6 @@
 		to_chat(H, "<span class='notice'>I get my hands bloody.</span>")
 		H.bloody_hands++
 		H.update_inv_gloves()
-
-/obj/effect/decal/cleanable/blood/weather_act_on(weather_trait, severity)
-	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, wash_cooldown))
-		return
-	wash_precent += min(25, severity / 2)
-	alpha = 255 *((100 - wash_precent) * 0.01)
-	if(wash_precent >= 100)
-		qdel(src)
-	COOLDOWN_START(src, wash_cooldown, 7.5 SECONDS)
 
 /obj/effect/decal/cleanable/blood/Initialize(mapload)
 	. = ..()

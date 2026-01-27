@@ -18,7 +18,7 @@
 	item_duration = 0
 
 /datum/action/cooldown/spell/undirected/conjure_item/summon_trident/miracle
-	name = "Summon Trident"
+	name = "Summon Abyssal Trident"
 	desc = "Summon a trident from Abyssor's domain."
 	button_icon_state = "lightning"
 	sound = 'sound/foley/jumpland/waterland.ogg'
@@ -87,7 +87,7 @@
 	hook = new /obj/item/fishing/hook/abytrident(src)
 	line = new /obj/item/fishing/line/no_line(src)
 	baited = new /obj/item/fishing/lure/no_bait(src)
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/fishingrod/abyssor_trident/examine(mob/user)
 	. = ..()

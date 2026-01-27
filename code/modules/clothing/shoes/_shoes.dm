@@ -39,6 +39,7 @@
 	var/is_barefoot = FALSE
 	var/chained = 0
 	abstract_type = /obj/item/clothing/shoes
+	var/polished = 0
 
 /obj/item/clothing/shoes/Initialize(mapload, ...)
 	. = ..()
@@ -61,13 +62,19 @@
 			playsound(user, 'sound/blank.ogg', 50, TRUE)
 		return(BRUTELOSS)
 
-/obj/item/clothing/shoes/equipped(mob/user, slot)
+/obj/item/clothing/shoes/equipped(mob/living/carbon/user, slot)
 	. = ..()
 	if(offset && (slot_flags & slot))
 		user.pixel_y += offset
 		worn_y_dimension -= (offset * 2)
 		user.update_inv_shoes()
 		equipped_before_drop = TRUE
+	if(slot_flags & slot)
+		if(!user.has_stress_type(/datum/stress_event/shiny_shoes) && !user.has_stress_type(/datum/stress_event/extra_shiny_shoes))
+			if(polished == 1)
+				user.add_stress(/datum/stress_event/shiny_shoes)
+			else if(polished == 2)
+				user.add_stress(/datum/stress_event/extra_shiny_shoes)
 
 /obj/item/clothing/shoes/proc/restore_offsets(mob/user)
 	equipped_before_drop = FALSE
@@ -96,3 +103,60 @@
 
 /obj/item/proc/negates_gravity()
 	return FALSE
+
+/obj/item/clothing/shoes/attackby(obj/item/I, mob/living/carbon/user, params)
+	. = ..()
+	var/obj/item/clothing/shoes/shoes_check = locate(/obj/item/clothing/shoes) in list(user.shoes)
+	if(shoes_check)
+		return
+	if(istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && polished == 0)
+		var/obj/item/natural/cloth/cloth_check = I
+		if(cloth_check.reagents.total_volume < 0.1)
+			to_chat(user, span_warning("[cloth_check] is too dry to polish with!"))
+			return
+		var/dirty_water = cloth_check.reagents.get_reagent_amount(/datum/reagent/water/gross)
+		if(dirty_water)
+			to_chat(user, span_warning("[cloth_check] water is too dirty to polish anything with it!"))
+			return
+		to_chat(user, ("You start polishing the [src] with the [cloth_check]"))
+		if(do_after(user, 2 SECONDS, src))
+			cloth_check.reagents.remove_all(1)
+			polished = 1
+			AddComponent(/datum/component/particle_spewer/sparkle)
+			if(HAS_TRAIT(user, TRAIT_NOBLE))
+				user.add_stress(/datum/stress_event/noble_polishing_shoe)
+			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 SECONDS)
+			to_chat(user, ("You polished the [name]."))
+		return
+	else if(istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && polished == 1)
+		to_chat(user, span_notice("The [name] are already polished."))
+		return
+	if(istype(I, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && polished == 1)
+		to_chat(user, ("You start polishing even more the [name] with the animal fat."))
+		if(do_after(user, 2 SECONDS, src))
+			polished = 2
+			if(HAS_TRAIT(user, TRAIT_NOBLE))
+				user.add_stress(/datum/stress_event/noble_polishing_shoe)
+			var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
+			if(particle_spewer)
+				qdel(particle_spewer)
+			AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
+			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 SECONDS)
+			to_chat(user, ("You polished the [name]."))
+		return
+	if(istype(I, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && polished == 2)
+		to_chat(user, ("You can't possibily make it shine more."))
+
+/obj/item/clothing/shoes/examine(mob/user)
+	. = ..()
+	if(polished == 1)
+		desc += ("\nThis shoe was polished, it looks quite nice.")
+	if(polished == 2)
+		desc += span_notice("\nThis shoe was polished to a shine, it looks immaculate!")
+
+/obj/item/clothing/shoes/proc/lose_shine()
+	if(polished == 1 || polished == 2)
+		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
+		if(particle_spewer)
+			qdel(particle_spewer)
+		polished = 0

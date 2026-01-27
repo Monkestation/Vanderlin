@@ -8,6 +8,7 @@
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 0
 	spawn_positions = 2
+	department_flag = NOBLEMEN
 
 	outfit = null
 	outfit_female = null
@@ -18,7 +19,7 @@
 	can_have_apprentices = FALSE
 	scales = FALSE
 
-	exp_types_granted  = list(EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_COMBAT)
 
 //Hooking in here does not mess with their equipment procs
 /datum/job/adventurer/courtagent/after_spawn(mob/living/spawned, client/player_client)

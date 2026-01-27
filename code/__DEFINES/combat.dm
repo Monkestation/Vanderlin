@@ -11,7 +11,30 @@
 #define STAMINA 	"stamina"
 #define BRAIN		"brain"
 
-#define MELEE_TYPES list("blunt", "slash", "stab")
+//Damage flag defines //
+// STRING HERE NEEDS TO EXACTLY MATCH VAR NAME IN /datum/armor
+/// better defined as area pressure melee
+#define BLUNT "blunt"
+/// better defined as line pressure melee
+#define SLASH "slash"
+/// better defined as point pressure melee
+#define STAB "stab"
+/// basically projectiles
+#define PIERCE "piercing"
+/// protection against burning
+#define FIRE "fire"
+/// protection against pools of acid
+#define ACID "acid"
+/// protection against magical attacks (make this adjustable via rune enchantments or something)
+#define MAGIC "magic"
+
+/// Armor values that are used for damage
+#define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
+
+/// All armors, preferable in the order as seen above
+#define ARMOR_LIST_ALL(...) list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC)
+
+#define MELEE_TYPES list(BLUNT, SLASH, STAB)
 
 //bitflag damage defines used for suicide_act
 #define BRUTELOSS 	            	(1<<0)
@@ -30,8 +53,6 @@
 #define EFFECT_IRRADIATE	"irradiate"
 #define EFFECT_STUTTER		"stutter"
 #define EFFECT_SLUR 		"slur"
-#define EFFECT_EYE_BLUR		"eye_blur"
-#define EFFECT_DROWSY		"drowsy"
 #define EFFECT_JITTER		"jitter"
 
 //Bitflags defining which status effects could be or are inflicted on a mob
@@ -78,7 +99,7 @@
 #define GRAB_KILL					3
 
 //Grab breakout odds
-#define BASE_GRAB_RESIST_CHANCE 	33
+#define BASE_GRAB_RESIST_CHANCE 	25
 
 //slowdown when in softcrit. Note that crawling slowdown will also apply at the same time!
 #define SOFTCRIT_ADD_SLOWDOWN 1

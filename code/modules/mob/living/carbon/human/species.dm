@@ -1,6 +1,6 @@
 // This code handles different species in the game.
 GLOBAL_LIST_EMPTY(roundstart_races)
-GLOBAL_LIST_EMPTY(patreon_races)
+GLOBAL_LIST_EMPTY(donator_races)
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -20,8 +20,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 	var/list/possible_ages = ALL_AGES_LIST_CHILD
 	/// Whether or not this species has sexual characteristics
 	var/sexes = TRUE
-	/// Whether this species a requires patreon subscription to access, we removed all patreon restrictions for species, but it's here if we ever want to reenable them or smth.
-	var/patreon_req = FALSE
+	/// Whether this species a requires donator subscription to access, we removed all donator restrictions for species, but it's here if we ever want to reenable them or smth.
+	var/donator_req = FALSE
 
 	/**
 	 * The list of pronouns this species allows in the character sheet.
@@ -307,6 +307,8 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return strings("accents/halforc_replacement.json", "halforc")
 	if(language == "Halfling")
 		return strings("accents/halfling_replacement.json", "halfling")
+	if(language == "Gutter")
+		return strings("accents/kobold_replacement.json", "kobold")
 	if(language == "Deepspeak")
 		return strings("accents/triton_replacement.json", "triton")
 	if(language == "Pirate")
@@ -375,10 +377,11 @@ GLOBAL_LIST_EMPTY(patreon_races)
 				ACCENT_PIRATE,
 				ACCENT_MIDDLE_SPEAK,
 				ACCENT_ZALAD,
-				ACCENT_HALFLING
+				ACCENT_HALFLING,
+				ACCENT_KOBOLD
 			)
 
-			///This will only trigger for patreon users
+			///This will only trigger for donators
 			if(human.accent in accents_list)
 				/// If the human is using a specie with multiple accents
 				if(length(human.dna.species.multiple_accents))
@@ -443,19 +446,19 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		if(!S.check_roundstart_eligible())
 			continue
 		GLOB.roundstart_races += S.name
-		if(S.patreon_req)
-			GLOB.patreon_races += S.name
+		if(S.donator_req)
+			GLOB.donator_races += S.name
 		qdel(S)
 	if(!LAZYLEN(GLOB.roundstart_races))
 		GLOB.roundstart_races += "Humen" // GLOB.species_list uses name and should probably be refactored
 	sortTim(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
 
-/proc/get_selectable_species(patreon = TRUE)
+/proc/get_selectable_species(donator = TRUE)
 	if(!LAZYLEN(GLOB.roundstart_races))
 		generate_selectable_species()
 	var/list/species = GLOB.roundstart_races.Copy()
-	if(!patreon)
-		species -= GLOB.patreon_races
+	if(!donator)
+		species -= GLOB.donator_races
 	return species
 
 /datum/species/proc/check_roundstart_eligible()
@@ -788,7 +791,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		C.setToxLoss(0, TRUE, TRUE)
 
 	if(TRAIT_NOMETABOLISM in inherent_traits)
-		C.reagents.end_metabolization(C, keep_liverless = TRUE)
+		C.reagents.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)
@@ -952,13 +955,14 @@ GLOBAL_LIST_EMPTY(patreon_races)
 
 /datum/species/proc/spec_life(mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)
+	if(H.stat == DEAD)
+		return
 
 	if(HAS_TRAIT(H, TRAIT_NOBREATH))
 		H.setOxyLoss(0)
 		H.losebreath = 0
-
-	if((H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
-		H.adjustBruteLoss(1)
+	else if((H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
+		H.adjustOxyLoss(1)
 
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
 	return
@@ -1249,7 +1253,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 			if(CONFIG_GET(flag/starvation_death))
 				H.apply_status_effect(/datum/status_effect/debuff/hungryt4)
 			if(prob(3))
-				playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
+				playsound(H, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	switch(H.hydration)
 		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
@@ -1331,9 +1335,6 @@ GLOBAL_LIST_EMPTY(patreon_races)
 //////////////////
 
 /datum/species/proc/spec_updatehealth(mob/living/carbon/human/H)
-	return
-
-/datum/species/proc/spec_fully_heal(mob/living/carbon/human/H)
 	return
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
@@ -1497,7 +1498,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		if(target.body_position == LYING_DOWN)
 			target.forcesay(GLOB.hit_appends)
 		if(!nodmg)
-			playsound(target.loc, user.used_intent.hitsound, 100, FALSE)
+			playsound(target, user.used_intent.hitsound, 100, FALSE)
 
 
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -1628,15 +1629,14 @@ GLOBAL_LIST_EMPTY(patreon_races)
 		return FALSE
 	if(user == target)
 		return FALSE
-	if(!HAS_TRAIT(user, TRAIT_GARROTED))
-		if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
-			if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
-				to_chat(user, span_notice("I can't move my legs!"))
-				return
-			else															//If only one leg is grabbed
-				to_chat(user, span_notice("I can't move my leg!"))
-				user.resist_grab()
+	if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
+		if(user.check_leg_grabbed(1) && user.check_leg_grabbed(2))		//If both legs are grabbed
+			to_chat(user, span_notice("I can't move my legs!"))
 			return
+		else															//If only one leg is grabbed
+			to_chat(user, span_notice("I can't move my leg!"))
+			user.resist_grab()
+		return
 
 	if(user.stamina >= user.maximum_stamina)
 		return FALSE
@@ -1878,7 +1878,7 @@ GLOBAL_LIST_EMPTY(patreon_races)
 					affecting.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
 					user.put_in_hands(I)
 					H.emote("pain", TRUE)
-					playsound(H.loc, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
+					playsound(H, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
 			I.do_special_attack_effect(user, affecting, intent, H, selzone)
 			if(istype(user.used_intent, /datum/intent/effect) && selzone)
 				var/datum/intent/effect/effect_intent = user.used_intent
