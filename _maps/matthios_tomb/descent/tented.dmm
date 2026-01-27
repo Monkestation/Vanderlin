@@ -75,7 +75,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
 "D" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "F" = (
 /obj/machinery/light/fueled/firebowl,

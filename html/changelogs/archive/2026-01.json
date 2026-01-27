@@ -446,5 +446,34 @@
                 "rscadd": "Added a Swordsman Men-At-Arms subclass. They get the same equipment as Pikeman, but with a heater shield instead of a pike, skilled Swords and Shields, and marginally worse stats."
             }
         ]
+    },
+    "2026-01-23": {
+        "tired-wired": [
+            {
+                "rscdel": "Removed a single kobold slur."
+            }
+        ]
+    },
+    "2026-01-25": {
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new hood made out of leather to the game. The \\\"reformed thief\\\" adept subclass spawns with it by default."
+            }
+        ],
+        "TerraGS": [
+            {
+                "rscadd": "Flinging feces fouls foes."
+            }
+        ]
+    },
+    "2026-01-26": {
+        "TerraGS": [
+            {
+                "bugfix": "Looking up into nullspace no longer runtimes"
+            },
+            {
+                "refactor": "replaces the transparent turf subtype with a turf transparency element"
+            }
+        ]
     }
 }

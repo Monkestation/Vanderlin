@@ -612,3 +612,5 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DENDOR_DEVOURING "trait_dendor_devouring"
 #define TRAIT_DENDOR_LORDING "trait_dendor_lording"
 
+///Turf trait for when a turf is transparent
+#define TURF_Z_TRANSPARENT_TRAIT "turf_z_transparent"

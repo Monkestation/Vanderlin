@@ -27,7 +27,6 @@
 		/datum/skill/combat/knives = 1,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/misc/riding = 1,
-		/datum/skill/craft/bombs = 1,
 		/datum/skill/labor/fishing = 1,
 		/datum/skill/combat/wrestling = 1,
 		/datum/skill/misc/reading = 1,

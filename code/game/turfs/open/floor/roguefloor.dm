@@ -1057,7 +1057,7 @@
 	attacked_sound = list('sound/combat/hits/onstone/wallhit.ogg', 'sound/combat/hits/onstone/wallhit2.ogg', 'sound/combat/hits/onstone/wallhit3.ogg')
 
 
-/turf/open/transparent/glass
+/turf/open/glass
 	name = "Glass floor"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "woodglass"

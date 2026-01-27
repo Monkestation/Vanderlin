@@ -38,7 +38,7 @@
 	if(!istype(echolocator))
 		return COMPONENT_INCOMPATIBLE
 	if(!danger_turfs)
-		danger_turfs = typecacheof(list(/turf/open/transparent/openspace, /turf/open/lava, /turf/open/water/acid))
+		danger_turfs = typecacheof(list(/turf/open/openspace, /turf/open/lava, /turf/open/water/acid))
 	if(!allowed_paths)
 		allowed_paths = typecacheof(list(/turf/closed, /obj, /mob/living)) + danger_turfs - typecacheof(/obj/effect/decal) - /obj/effect/fog_parter
 	if(!isnull(echo_range))

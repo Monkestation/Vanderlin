@@ -185,7 +185,7 @@
 	},
 /area/outdoors/wilderness)
 "de" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/dungeon)
 "df" = (
 /obj/structure/stone_tile/slab/cracked,
@@ -719,7 +719,7 @@
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
 "iG" = (
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/dungeon)
 "iJ" = (
 /obj/structure/table/wood/fancy/orange,
@@ -1495,7 +1495,7 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
 "rt" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "rw" = (
 /obj/structure/fermentation_keg,
@@ -2162,7 +2162,7 @@
 "zv" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/dungeon)
 "zz" = (
 /mob/living/simple_animal/hostile/retaliate/infernal/hellhound{
@@ -2319,7 +2319,7 @@
 /mob/living/simple_animal/hostile/retaliate/elemental/crawler{
 	color = "#FFC000"
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/dungeon)
 "Bz" = (
 /obj/structure/stairs/stone{
@@ -2463,7 +2463,7 @@
 /area/indoors/town/garrison)
 "CX" = (
 /obj/structure/spider/stickyweb,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/dungeon)
 "Da" = (
 /obj/structure/table/stone_small,
@@ -3366,7 +3366,7 @@
 /turf/open/floor/twig,
 /area/outdoors/wilderness)
 "Mi" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "Mj" = (
 /obj/structure/chair/stool,

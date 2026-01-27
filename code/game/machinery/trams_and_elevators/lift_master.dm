@@ -541,9 +541,9 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			var/turf/T = get_step_multiz(lift_platform, check_dir)
 			if(!T)//the edges of multi-z maps
 				return FALSE
-			if(check_dir == UP && !istype(T, /turf/open/transparent/openspace)) // We don't want to go through the ceiling!
+			if(check_dir == UP && !istype(T, /turf/open/openspace)) // We don't want to go through the ceiling!
 				return FALSE
-			if(check_dir == DOWN && !istype(get_turf(lift_platform), /turf/open/transparent/openspace)) // No going through the floor!
+			if(check_dir == DOWN && !istype(get_turf(lift_platform), /turf/open/openspace)) // No going through the floor!
 				return FALSE
 	return TRUE
 
