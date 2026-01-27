@@ -251,7 +251,7 @@
 /datum/component/storage/concrete/grid/kobold_storage/New(datum/P, ...)
 	. = ..()
 	set_holdable(list(
-		/obj/item/clothing/head/mob_holder,
+		/obj/item/mob_holder,
 		))
 
 /datum/component/storage/concrete/grid/zigbox
@@ -305,6 +305,7 @@
 				/obj/item/reagent_containers/powder,
 				/obj/item/organ,
 				/obj/item/neuFarm/seed,
+				/obj/item/mob_holder,
 				)
 			),
 		)

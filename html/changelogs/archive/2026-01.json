@@ -475,5 +475,37 @@
                 "refactor": "replaces the transparent turf subtype with a turf transparency element"
             }
         ]
+    },
+    "2026-01-27": {
+        "Neuroplasty": [
+            {
+                "bugfix": "Made herbal remedies not stress you out anymore."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "map": "medical guide moved a few tiles to its place"
+            }
+        ],
+        "Diegoflores31": [
+            {
+                "balance": "changes skill requirements of bombcrafting."
+            },
+            {
+                "balance": "removes bombcrafting from: porter , jester and plague doctor."
+            },
+            {
+                "balance": "adds bombcrafting to: artificer"
+            },
+            {
+                "bugfix": "breaching charge now can be used properly to mine."
+            },
+            {
+                "refactor": "breaching charges now use timers instead of process , reworked the logic for cinematic effect."
+            },
+            {
+                "bugfix": "minimun_skill_required now actually means minimun skill required."
+            }
+        ]
     }
 }

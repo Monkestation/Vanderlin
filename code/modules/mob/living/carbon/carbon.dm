@@ -233,8 +233,8 @@
 
 		else if(!CHECK_BITFIELD(I.item_flags, ABSTRACT) && !HAS_TRAIT(I, TRAIT_NODROP))
 			thrown_thing = I
-			if(istype(thrown_thing, /obj/item/clothing/head/mob_holder))
-				var/obj/item/clothing/head/mob_holder/old = thrown_thing
+			if(ismobholder(thrown_thing))
+				var/obj/item/mob_holder/old = thrown_thing
 				thrown_thing = thrown_thing:held_mob
 				old.release()
 				used_sound = pick(I.swingsound)
