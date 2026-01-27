@@ -2456,6 +2456,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/player_species = user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !(player_species in job.allowed_races)
 	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+	if(job.required_playtime_remaining(user.client))
+		var/list/lines = list()
+		for(var/t in job.exp_requirements)
+			var/needed = job.exp_requirements[t]
+			var/have = user.client.calc_exp_type(t)
+			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
+		var/text = jointext(lines, "<br>")
+
+		return make_lock_row(
+			used_name,
+			"\[TIME LOCK\]",
+			"<b>Requirements:</b><br>[text]"
+		)
 	if(fails_allowed || fails_blacklist)
 		if(!user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
 			var/list/allowed_races = job.allowed_races.Copy()
@@ -2493,19 +2506,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			used_name,
 			"\[PATRON LOCK\]",
 			"<b>Patron Needed:</b><br>[patron_text]"
-		)
-	if(job.required_playtime_remaining(user.client))
-		var/list/lines = list()
-		for(var/t in job.exp_requirements)
-			var/needed = job.exp_requirements[t]
-			var/have = user.client.calc_exp_type(t)
-			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
-		var/text = jointext(lines, "<br>")
-
-		return make_lock_row(
-			used_name,
-			"\[TIME LOCK\]",
-			"<b>Requirements:</b><br>[text]"
 		)
 	// No lock
 	return FALSE

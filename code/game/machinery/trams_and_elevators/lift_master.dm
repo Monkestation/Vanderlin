@@ -955,8 +955,8 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 					SSmerchant.changed_sell_prices(inside.type, old_inside_price, new_inside_price)
 				qdel(inside)
 
-			if(istype(listed_atom, /obj/item/clothing/head/mob_holder))
-				var/obj/item/clothing/head/mob_holder/holder = listed_atom
+			if(ismobholder(listed_atom))
+				var/obj/item/mob_holder/holder = listed_atom
 				for(var/obj/item/item in holder.held_mob.get_equipped_items())
 					item.forceMove(get_turf(holder))
 				to_chat(holder.held_mob, span_boldwarning("You have been sold."))

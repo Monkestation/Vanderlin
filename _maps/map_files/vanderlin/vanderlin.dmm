@@ -18905,10 +18905,6 @@
 /obj/item/bin/water,
 /turf/open/floor/tile/bath,
 /area/indoors/town/bath)
-"jiX" = (
-/obj/item/natural/rock,
-/turf/open/floor/dirt/road,
-/area/under/cave)
 "jjb" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/lipstick/jade,
@@ -26730,6 +26726,7 @@
 /obj/effect/mapping_helpers/access/keyset/manor/dungeon,
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door,
+/obj/structure/barricade/wooden/crude,
 /turf/open/floor/greenstone,
 /area/under/town/basement)
 "mQP" = (
@@ -27546,6 +27543,7 @@
 	pixel_x = -8;
 	pixel_y = 5
 	},
+/obj/item/recipe_book/medical,
 /obj/item/recipe_book/medical,
 /turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
@@ -35595,10 +35593,6 @@
 /obj/structure/bars/bent,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"rjV" = (
-/obj/item/recipe_book/medical,
-/turf/open/floor/cobble,
-/area/outdoors/town)
 "rkq" = (
 /obj/structure/window/solid,
 /turf/open/floor/concrete,
@@ -37874,10 +37868,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/church/purple,
 /area/under/cave)
-"sot" = (
-/obj/item/natural/bundle/stoneblock,
-/turf/open/floor/greenstone,
-/area/under/cave)
 "soA" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/storage/keyring,
@@ -38276,10 +38266,6 @@
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
-"swN" = (
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/dirt/road,
-/area/under/cave)
 "swS" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -73158,7 +73144,7 @@ xSz
 gPr
 gPr
 sKq
-lsD
+rTW
 rTW
 qFx
 qFx
@@ -73356,11 +73342,11 @@ qFx
 lsD
 rTW
 rTW
-lsD
+rTW
 dEv
 rTW
 rTW
-lsD
+rTW
 rTW
 qFx
 qFx
@@ -73558,13 +73544,13 @@ qFx
 qFx
 qFx
 qFx
-lsD
+rTW
 ffR
-lsD
+rTW
 qFx
 qFx
-qFx
-qFx
+ibc
+ibc
 qFx
 fYq
 xpt
@@ -73758,16 +73744,16 @@ lat
 dID
 qFx
 qFx
-qFx
-qFx
+ibc
+ibc
 rTW
 rTW
-lsD
+rTW
 qFx
-qFx
-qFx
-eIh
-qEw
+ibc
+ibc
+ibc
+wDX
 fYq
 fBg
 fBg
@@ -73959,16 +73945,16 @@ lat
 lat
 dID
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-sot
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+cPs
 cPs
 mQM
 itS
@@ -74162,14 +74148,14 @@ lat
 dID
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-bGD
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
 bGD
 btJ
 fYq
@@ -74364,14 +74350,14 @@ lat
 dID
 qFx
 qFx
-qFx
-nNY
-nam
-nam
-nNY
-nam
-wDX
-wDX
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
+ibc
 bGD
 bGD
 jEQ
@@ -74566,14 +74552,14 @@ lat
 dID
 qFx
 qFx
-nam
-ssf
 ibc
 ibc
 ibc
-jiX
-nam
-ssf
+ibc
+ibc
+ibc
+ibc
+ibc
 nam
 nam
 cZN
@@ -74774,8 +74760,8 @@ ibc
 ibc
 ibc
 ibc
-nNY
-swN
+ibc
+ibc
 nNY
 nNY
 cZN
@@ -75787,7 +75773,7 @@ aQE
 nNY
 ssf
 qFx
-jEQ
+dHC
 dHC
 nGQ
 dIz
@@ -75989,7 +75975,7 @@ nam
 nam
 qFx
 qFx
-jEQ
+dHC
 vpQ
 dIz
 jTO
@@ -76191,7 +76177,7 @@ qFx
 qFx
 qFx
 qFx
-jEQ
+dHC
 vpQ
 iwh
 gni
@@ -110221,7 +110207,7 @@ hZn
 hZn
 hZn
 hZn
-rjV
+hZn
 hZn
 hZn
 epY
