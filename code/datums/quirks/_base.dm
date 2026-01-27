@@ -10,7 +10,7 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 		QUIRK_PECULIARITY = list()
 	)
 
-	for(var/datum/quirk/quirk_type in subtypesof(/datum/quirk))
+	for(var/datum/quirk/quirk_type as anything in subtypesof(/datum/quirk))
 		if(is_abstract(quirk_type))
 			continue
 
