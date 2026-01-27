@@ -34,8 +34,6 @@
 #define span_boldnotice(str) ("<span class='boldnotice'>" + str + "</span>")
 #define span_boldwarning(str) ("<span class='boldwarning'>" + str + "</span>")
 
-#define span_changeling(str) ("<span class='changeling'>" + str + "</span>")
-#define span_changelingbold(str) ("<span class='changelingbold'>" + str + "</span>")
 #define span_clown(str) ("<span class='clown'>" + str + "</span>")
 #define span_colossus(str) ("<span class='colossus'>" + str + "</span>")
 #define span_command_headset(str) ("<span class='command_headset'>" + str + "</span>")
@@ -84,9 +82,6 @@
 #define span_memoedit(str) ("<span class='memoedit'>" + str + "</span>")
 #define span_mind_control(str) ("<span class='mind_control'>" + str + "</span>")
 #define span_minorannounce(str) ("<span class='minorannounce'>" + str + "</span>")
-#define span_monkey(str) ("<span class='monkey'>" + str + "</span>")
-#define span_monkeyhive(str) ("<span class='monkeyhive'>" + str + "</span>")
-#define span_monkeylead(str) ("<span class='monkeylead'>" + str + "</span>")
 #define span_name(str) ("<span class='name'>" + str + "</span>")
 #define span_narsie(str) ("<span class='narsie'>" + str + "</span>")
 #define span_narsiesmall(str) ("<span class='narsiesmall'>" + str + "</span>")
@@ -129,7 +124,6 @@
 #define span_yell(str) ("<span class='yell'>" + str + "</span>")
 #define span_silver(str) ("<span class='silver'>" + str + "</span>")
 #define span_artery(str) ("<span class='artery'>" + str + "</span>")
-#define span_hellspeak(str) ("<span class='hellspeak'>" + str + "</span>")
 #define span_love(str) ("<span class='love'>" + str + "</span>")
 
 /* Complex Spans */
