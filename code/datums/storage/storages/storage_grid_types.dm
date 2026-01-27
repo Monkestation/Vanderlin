@@ -230,7 +230,7 @@
 
 /datum/storage/kobold_storage/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
 	. = ..()
-	set_holdable(list(/obj/item/clothing/head/mob_holder))
+	set_holdable(list(/obj/item/mob_holder))
 
 /datum/storage/zigbox
 	max_specific_storage = WEIGHT_CLASS_TINY
@@ -280,6 +280,7 @@
 		/obj/item/reagent_containers/powder,
 		/obj/item/organ,
 		/obj/item/neuFarm/seed,
+		/obj/item/mob_holder,
 	))
 
 /datum/storage/food/cooking/pan
