@@ -8,61 +8,39 @@
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = NONE
 	max_integrity = 300
-	component_type = /datum/component/storage/concrete/grid/magebag
+	storage_type = /datum/storage/magebag
+	right_click_remove = TRUE
 
 /obj/item/storage/magebag/examine(mob/user)
 	. = ..()
 	if(contents.len)
 		. += span_notice("[contents.len] thing[contents.len > 1 ? "s" : ""] in the pouch.")
 
-/obj/item/storage/magebag/attack_hand_secondary(mob/user, params)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	user.changeNext_move(CLICK_CD_MELEE)
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	var/list/things = STR.contents()
-	if(length(things))
-		var/obj/item/I = pick(things)
-		STR.remove_from_storage(I, get_turf(user))
-		user.put_in_hands(I)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
 /obj/item/storage/magebag/update_icon_state()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	var/list/things = STR.contents()
-	if(things.len)
+	if(length(contents))
 		icon_state = "summoning"
 		w_class = WEIGHT_CLASS_NORMAL
 	else
 		icon_state = "summoning"
 		w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/storage/magebag/apprentice
-	populate_contents = list(
-		/obj/item/natural/infernalash,
-		/obj/item/natural/fairydust,
-		/obj/item/natural/elementalmote,
-		/obj/item/mana_battery/mana_crystal/standard,
-		/obj/item/mana_battery/mana_crystal/standard,
-		/obj/item/natural/obsidian,
-		/obj/item/natural/obsidian,
-		/obj/item/natural/obsidian,
-		/obj/item/reagent_containers/food/snacks/produce/manabloom,
-		/obj/item/reagent_containers/food/snacks/produce/manabloom,
-		/obj/item/reagent_containers/food/snacks/produce/manabloom,
-	)
+/obj/item/storage/magebag/apprentice/populate_contents()
+	new /obj/item/natural/infernalash(src)
+	new /obj/item/natural/fairydust(src)
+	new /obj/item/natural/elementalmote(src)
+	new /obj/item/mana_battery/mana_crystal/standard(src)
+	new /obj/item/mana_battery/mana_crystal/standard(src)
 
-/obj/item/storage/magebag/poor
-	populate_contents = list(
-		/obj/item/mana_battery/mana_crystal/standard,
-		/obj/item/mana_battery/mana_crystal/standard,
-		/obj/item/mana_battery/mana_crystal/small,
-		/obj/item/mana_battery/mana_crystal/small,
-		/obj/item/reagent_containers/food/snacks/produce/manabloom,
-		/obj/item/reagent_containers/food/snacks/produce/manabloom,
-	)
+	for(var/i in 1 to 3)
+		new /obj/item/natural/obsidian(src)
+		new /obj/item/reagent_containers/food/snacks/produce/manabloom(src)
+
+/obj/item/storage/magebag/poor/populate_contents()
+	for(var/i in 1 to 2)
+		new /obj/item/mana_battery/mana_crystal/standard(src)
+		new /obj/item/mana_battery/mana_crystal/small(src)
+		new /obj/item/reagent_containers/food/snacks/produce/manabloom(src)
 
 /obj/item/chalk
 	name = "stick of chalk"

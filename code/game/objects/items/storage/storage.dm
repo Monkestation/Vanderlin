@@ -1,17 +1,32 @@
 /obj/item/storage
+	abstract_type = /obj/item/storage
 	name = "storage"
 	w_class = WEIGHT_CLASS_NORMAL
 	var/rummage_if_nodrop = TRUE
-	var/component_type = /datum/component/storage/concrete
-	var/list/populate_contents = list()
+	/// Storage datum type to use
+	var/storage_type = null
+	/// If right click takes a random item from the bag
+	var/right_click_remove = FALSE
 
 /obj/item/storage/Initialize(mapload, ...)
 	. = ..()
-	if(component_type)
-		AddComponent(component_type)
+
+	create_storage(type = storage_type)
+
 	populate_contents()
 
-/obj/item/storage/get_dumping_location(obj/item/storage/source,mob/user)
+/obj/item/storage/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	if(!right_click_remove || !length(contents))
+		return
+	var/obj/item/random = pick(contents)
+	atom_storage.remove_single(user, random)
+	user.put_in_hands(random)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/storage/get_dumping_location()
 	return src
 
 /obj/item/storage/AllowDrop()
@@ -29,24 +44,19 @@
 
 /obj/item/storage/doStrip(mob/who)
 	if(HAS_TRAIT(src, TRAIT_NODROP) && rummage_if_nodrop)
-		var/datum/component/storage/CP = GetComponent(/datum/component/storage)
-		CP.do_quick_empty()
+		atom_storage.remove_all()
 		return TRUE
 	return ..()
 
-/obj/item/storage/contents_explosion(severity, target)
 //Cyberboss says: "USE THIS TO FILL IT, NOT INITIALIZE OR NEW"
-
+/**
+ * Populate contents of this storage item.
+ *
+ * Create items with a loc of src (new thing(src)) to have it put inside atom storage.
+ *
+ * We use this so we can control its timing and provide something that doesn't clash with inheritance.
+ *
+ * It also allows for logic like prob().
+ */
 /obj/item/storage/proc/populate_contents()
-	for(var/path in populate_contents)
-		var/obj/item/new_item = new path(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_item, null, TRUE, TRUE))
-			new_item.inventory_flip(null, TRUE)
-			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_item, null, TRUE, TRUE))
-				qdel(new_item)
-	populate_contents.Cut()
-
-/obj/item/storage/proc/emptyStorage()
-	var/datum/component/storage/ST = GetComponent(/datum/component/storage)
-	if(ST)
-		ST.do_quick_empty()
+	return

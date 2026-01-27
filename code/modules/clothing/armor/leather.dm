@@ -140,15 +140,11 @@
 
 	body_parts_covered = COVERAGE_SHIRT
 	item_weight = 2.2
-	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+	pocket_storage_path = /datum/storage/cloak
 
-/obj/item/clothing/armor/leather/jacket/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+/obj/item/clothing/armor/leather/jacket/dropped(mob/user, silent)
+	. = ..()
+	atom_storage?.remove_all(get_turf(src))
 
 /obj/item/clothing/armor/leather/jacket/artijacket
 	name = "artificer jacket"

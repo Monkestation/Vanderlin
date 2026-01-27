@@ -74,6 +74,7 @@
 #define SOUND_MINIMUM_PRESSURE 10
 
 #define SFX_SPARKS "sparks"
+#define SFX_RUSTLE "rustle"
 #define SFX_CHAIN_STEP	"chain_step"
 #define SFX_PLATE_STEP	"plate_step"
 #define SFX_PLATE_COAT_STEP	"plate_coat_step"

@@ -459,23 +459,6 @@
 /turf/proc/Bless()
 	new /obj/effect/blessing(src)
 
-/turf/storage_contents_dump_act(datum/component/storage/src_object, mob/user)
-	. = ..()
-	if(.)
-		return
-	if(length(src_object.contents()))
-		to_chat(usr, "<span class='notice'>I start dumping out the contents...</span>")
-		if(!do_after(usr, 2 SECONDS, src_object.parent))
-			return FALSE
-
-	var/list/things = src_object.contents()
-	var/datum/progressbar/progress = new(user, things.len, src)
-	while (do_after(usr, 1 SECONDS, src, NONE, FALSE, CALLBACK(src_object, TYPE_PROC_REF(/datum/component/storage, mass_remove_from_storage), src, things, progress)))
-		stoplag(1)
-	progress.end_progress()
-
-	return TRUE
-
 /turf/proc/get_cell(type)
 	for(var/datum/automata_cell/C in autocells)
 		if(istype(C, type))

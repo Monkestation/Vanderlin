@@ -21,7 +21,7 @@
 
 /obj/item/cooking/pan/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/food/cooking/pan)
+	create_storage(type = /datum/storage/food/cooking/pan)
 	AddComponent(/datum/component/container_craft, subtypesof(/datum/container_craft/pan))
 	AddComponent(/datum/component/food_burner, 2 MINUTES, TRUE, CALLBACK(src, PROC_REF(can_burn)))
 
@@ -56,10 +56,13 @@
 	. = ..()
 	if(.)
 		return
+
 	var/list/obj/item/oldContents = contents.Copy()
 	if(!length(oldContents))
 		return
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_QUICK_EMPTY)
+
+	atom_storage.remove_all()
+
 	var/generator/scatter_gen = generator(GEN_CIRCLE, 0, 48, NORMAL_RAND)
 	for(var/obj/item/scattered_item as anything in oldContents)
 		var/list/scatter_vector = scatter_gen.Rand()

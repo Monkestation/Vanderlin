@@ -126,9 +126,10 @@ SUBSYSTEM_DEF(treasury)
 
 /datum/controller/subsystem/treasury/proc/add_to_vault(obj/item/item)
 	var/list/objects_to_search = list(item)
-	var/datum/component/storage/storage = item.GetComponent(/datum/component/storage)
-	if(storage)
-		objects_to_search |= storage.contents()
+
+	if(item.atom_storage)
+		objects_to_search |= item.atom_storage.return_inv()
+
 	var/total_value = 0
 	for(var/atom/movable/movable_atom in objects_to_search)
 		if(is_type_in_typecache(movable_atom, GLOB.ITEM_DOES_NOT_GENERATE_VAULT_RENT))
@@ -141,6 +142,7 @@ SUBSYSTEM_DEF(treasury)
 		if(vault_accounting[movable_atom.type] > 1)
 			item_value *= (multiple_item_penalty ** (vault_accounting[movable_atom.type]-1))
 		total_value += item_value
+
 	return total_value
 
 /*

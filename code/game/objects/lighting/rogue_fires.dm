@@ -437,7 +437,7 @@
 		return
 
 	if(attachment && over == usr && over.CanReach(src))
-		SEND_SIGNAL(attachment, COMSIG_TRY_STORAGE_SHOW, over, TRUE)
+		attachment.atom_storage.open_storage(over)
 
 //////////////////////////////////
 

@@ -10,7 +10,7 @@
 
 /obj/structure/redstone/dispenser/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/bin)
+	create_storage(type = /datum/storage/bin)
 
 /obj/structure/redstone/dispenser/on_power_changed()
 	// Trigger on rising edge only
@@ -29,7 +29,7 @@
 	if(istype(dispensed, /obj/item/reagent_containers))
 		handle_reagent_container(dispensed, target_turf)
 	else
-		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, dispensed, get_turf(src), TRUE)
+		atom_storage.attempt_remove(dispensed, get_turf(src), TRUE)
 		var/turf/throw_target = get_step(target_turf, dir)
 		dispensed.throw_at(throw_target, 3, 1)
 

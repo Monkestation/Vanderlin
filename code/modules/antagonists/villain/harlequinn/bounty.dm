@@ -1386,8 +1386,7 @@
 	var/datum/supply_pack/pack = new pack_type()
 
 	for(var/item_type in pack.contains)
-		var/obj/item = new item_type(pouch)
-		SEND_SIGNAL(pouch, COMSIG_TRY_STORAGE_INSERT, item, null, TRUE, TRUE)
+		new item_type(pouch)
 
 	// Mark contract as having contraband spawned
 	contract.contraband_spawned = TRUE

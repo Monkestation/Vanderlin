@@ -13,7 +13,7 @@
 
 /obj/item/clothing/shoes/nobleboot/apply_components()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/boots)
+	create_storage(type = /datum/storage/no_interface/boots)
 
 /obj/item/clothing/shoes/nobleboot/thighboots
 	name = "thigh boots"

@@ -8,7 +8,6 @@
 	w_class = WEIGHT_CLASS_SMALL
 	var/above_suit = FALSE
 	var/minimize_when_attached = TRUE // TRUE if shown as a small icon in corner, FALSE if overlayed
-	var/datum/component/storage/detached_pockets
 	var/attachment_slot = CHEST
 
 /obj/item/clothing/accessory/proc/can_attach_accessory(obj/item/clothing/U, mob/user)
@@ -18,12 +17,6 @@
 		to_chat(user, "<span class='warning'>There doesn't seem to be anywhere to put [src]...</span>")
 
 /obj/item/clothing/accessory/proc/attach(obj/item/clothing/pants/U, user)
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
-	if(storage)
-		if(SEND_SIGNAL(U, COMSIG_CONTAINS_STORAGE))
-			return FALSE
-		U.TakeComponent(storage)
-		detached_pockets = storage
 	U.attached_accessory = src
 	forceMove(U)
 	plane = FLOAT_PLANE
@@ -47,9 +40,6 @@
 	return TRUE
 
 /obj/item/clothing/accessory/proc/detach(obj/item/clothing/pants/U, user)
-	if(detached_pockets && detached_pockets.parent == U)
-		TakeComponent(detached_pockets)
-
 	U.armor = U.armor.detachArmor(armor)
 
 	if(isliving(user))

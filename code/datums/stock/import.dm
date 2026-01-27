@@ -13,7 +13,7 @@
 	. = ..()
 	for(var/i in 1 to 10)
 		var/obj/item/reagent_containers/food/snacks/hardtack/new_hardtack = new()
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_hardtack, null, TRUE, FALSE))
+		if(!atom_storage.attempt_insert(new_hardtack, override = TRUE))
 			qdel(new_hardtack)
 
 /obj/structure/closet/crate/chest/steward

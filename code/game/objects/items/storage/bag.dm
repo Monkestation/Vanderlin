@@ -3,8 +3,6 @@
 
 /obj/item/storage/bag/Initialize(mapload, ...)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.allow_quick_gather = TRUE
-	STR.allow_quick_empty = TRUE
-	STR.display_numerical_stacking = TRUE
-	STR.click_gather = TRUE
+	atom_storage.allow_quick_gather = TRUE
+	atom_storage.allow_quick_empty = TRUE
+	atom_storage.numerical_stacking = TRUE

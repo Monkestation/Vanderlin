@@ -14,7 +14,7 @@
 	experimental_inhand = FALSE
 	dropshrink = 0.7
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
-	component_type = /datum/component/storage/concrete/grid/keyring
+	storage_type = /datum/storage/keyring
 	var/list/keys = list() //Used to generate starting keys on initialization, check contents instead for actual keys
 	var/list/combined_access
 
@@ -26,7 +26,7 @@
 		stack_trace("Keyring [src] has too many keys and the list will get cut short!")
 	for(var/X as anything in keys)
 		var/obj/item/key/new_key = new X(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_key, null, TRUE, FALSE))
+		if(!atom_storage.attempt_insert(new_key, override = TRUE))
 			qdel(new_key)
 		LAZYREMOVE(keys, X)
 

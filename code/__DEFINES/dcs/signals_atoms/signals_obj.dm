@@ -23,6 +23,11 @@
 /// From base of [obj/item/afterattack_secondary()]: (atom/target, mob/user, params)
 #define COMSIG_ITEM_AFTERATTACK_SECONDARY "item_afterattack_secondary"
 
+///from base of datum/storage/handle_enter(): (datum/storage/storage)
+#define COMSIG_ITEM_STORED "item_stored"
+///from base of datum/storage/handle_exit(): (datum/storage/storage)
+#define COMSIG_ITEM_UNSTORED "item_unstored"
+
 /// From base of obj/item/attack_qdeleted(): (atom/target, mob/user, params)
 #define COMSIG_ITEM_ATTACK_QDELETED "item_attack_qdeleted"
 /// From base of datum/species/proc/spec_attacked_by: (atom/target, mob/user, params)

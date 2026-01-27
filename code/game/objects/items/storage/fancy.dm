@@ -26,11 +26,6 @@
 	/// Whether the container is open or not
 	var/is_open = FALSE
 
-/obj/item/storage/fancy/populate_contents()
-	if(!spawn_type)
-		return ..()
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_FILL_TYPE, spawn_type)
-
 /obj/item/storage/fancy/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state][is_open ? contents.len : null]"
@@ -77,9 +72,8 @@
 
 /obj/item/storage/fancy/egg_box/Initialize(mapload, ...)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 12
-	STR.set_holdable(list(/obj/item/reagent_containers/food/snacks/egg))
+	atom_storage.max_slots = 12
+	atom_storage.set_holdable(list(/obj/item/reagent_containers/food/snacks/egg))
 
 /*
  * Candle Box
@@ -100,8 +94,7 @@
 
 /obj/item/storage/fancy/candle_box/Initialize(mapload, ...)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 5
+	atom_storage.max_slots = 5
 
 /obj/item/storage/fancy/candle_box/attack_self(mob_user)
 	return
@@ -125,8 +118,7 @@
 
 /obj/item/storage/fancy/cigarettes/Initialize(mapload, ...)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.set_holdable(list(/obj/item/clothing/face/cigarette, /obj/item/lighter))
+	atom_storage.set_holdable(list(/obj/item/clothing/face/cigarette, /obj/item/lighter))
 
 /obj/item/storage/fancy/cigarettes/examine(mob/user)
 	. = ..()
@@ -139,7 +131,7 @@
 	if(!cig)
 		to_chat(user, "<span class='notice'>There are no [contents_tag]s left in the pack.</span>")
 		return
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, cig, user)
+	atom_storage.attempt_remove(cig, get_turf(user))
 	user.put_in_hands(cig)
 	contents -= cig
 	to_chat(user, "<span class='notice'>You take \a [cig] out of the pack.</span>")
@@ -181,8 +173,9 @@
 	if(target != user || !contents.len || user.mouth)
 		return ..()
 
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, cig, target)
+	atom_storage.attempt_remove(cig, get_turf(target))
 	target.equip_to_slot_if_possible(cig, ITEM_SLOT_MOUTH)
+
 	contents -= cig
 	to_chat(user, "<span class='notice'>You take \a [cig] out of the pack.</span>")
 
@@ -193,7 +186,7 @@
 	base_icon_state = "zig"
 	contents_tag = "zig"
 	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine
-	component_type = /datum/component/storage/concrete/grid/zigbox
+	storage_type = /datum/storage/zigbox
 
 /obj/item/storage/fancy/cigarettes/zig/empty
 	spawn_type = null

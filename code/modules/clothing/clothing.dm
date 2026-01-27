@@ -54,7 +54,7 @@
 	/// Trait modification, lazylist of traits to add/take away, on equipment/drop in the correct slot
 	var/list/clothing_traits
 
-	var/pocket_storage_component_path
+	var/pocket_storage_path = null
 
 	//These allow head/mask items to dynamically alter the user's hair
 	// and facial hair, checking hair_extensions.dmi and facialhair_extensions.dmi
@@ -79,24 +79,23 @@
 	var/proper_drying = FALSE
 	COOLDOWN_DECLARE(wet_stress_cd)
 
-/obj/item/clothing/Initialize()
+/obj/item/clothing/Initialize(mapload)
 	. = ..()
-	if(ispath(pocket_storage_component_path))
-		LoadComponent(pocket_storage_component_path)
+	if(ispath(pocket_storage_path))
+		create_storage(type = pocket_storage_path)
+
 	if(length(prevent_crits) || armor_class)
 		has_inspect_verb = TRUE
 
 	if(hoodtype)
 		MakeHood()
 
-
-/obj/item/clothing/Initialize(mapload, ...)
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
 	if(wetable)
 		wet = new(src)
-	return ..()
 
-/obj/item/clothing/Destroy()
+	AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
+
+/obj/item/clothing/Destroy(force)
 	user_vars_remembered = null //Oh god somebody put REFERENCES in here? not to worry, we'll clean it up
 	if(hoodtype)
 		QDEL_NULL(hood)
@@ -320,10 +319,11 @@
 	else
 		return ..()
 
-/obj/item/clothing/dropped(mob/user)
-	..()
+/obj/item/clothing/dropped(mob/user, silent)
+	. = ..()
 	if(!istype(user))
 		return
+
 	if(LAZYLEN(user_vars_remembered))
 		for(var/variable in user_vars_remembered)
 			if(variable in user.vars)

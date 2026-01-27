@@ -57,10 +57,13 @@
 	grid_width = 32
 	grid_height = 64
 
+/obj/item/weapon/scabbard/knife/Initialize(mapload)
+	. = ..()
+	create_storage(type = /datum/storage/no_interface/scabbard/knife)
+
 /obj/item/weapon/scabbard/knife/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
-	AddComponent(/datum/component/storage/concrete/scabbard/knife)
 
 /obj/item/weapon/scabbard/knife/getonmobprop(tag)
 	..()
@@ -101,10 +104,13 @@
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
 
+/obj/item/weapon/scabbard/sword/Initialize(mapload)
+	. = ..()
+	create_storage(type = /datum/storage/no_interface/scabbard/sword)
+
 /obj/item/weapon/scabbard/sword/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
-	AddComponent(/datum/component/storage/concrete/scabbard/sword)
 
 /obj/item/weapon/scabbard/sword/getonmobprop(tag)
 	. = ..()
@@ -145,10 +151,13 @@
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
 
+/obj/item/weapon/scabbard/cane/Initialize(mapload)
+	. = ..()
+	create_storage(type = /datum/storage/no_interface/scabbard/sword) // ???
+
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
-	AddComponent(/datum/component/storage/concrete/scabbard/sword)
 
 /obj/item/weapon/scabbard/cane/getonmobprop(tag)
 	. = ..()
@@ -223,10 +232,13 @@
 	associated_skill = /datum/skill/combat/shields
 	max_integrity = INTEGRITY_STANDARD
 
+/obj/item/weapon/scabbard/kazengun/Initialize(mapload)
+	. = ..()
+	create_storage(type = /datum/storage/no_interface/scabbard/kazengun)
+
 /obj/item/weapon/scabbard/kazengun/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
-	AddComponent(/datum/component/storage/concrete/scabbard/kazengun)
 
 /obj/item/weapon/scabbard/kazengun/steel
 	name = "hwang scabbard"

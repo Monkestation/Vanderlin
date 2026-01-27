@@ -157,7 +157,6 @@
 				break
 
 			if(found_seed)
-				SEND_SIGNAL(seed_source, COMSIG_TRY_STORAGE_TAKE, found_seed, get_turf(pawn), TRUE)
 				if(found_seed.forceMove(pawn))
 					controller.set_blackboard_key(BB_SIMPLE_CARRY_ITEM, found_seed)
 					pawn.visible_message(span_notice("[pawn] takes [found_seed] for planting."))

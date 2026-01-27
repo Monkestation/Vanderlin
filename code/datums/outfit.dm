@@ -217,7 +217,7 @@
 				var/slot = H.get_slot_by_item(item)
 				for(var/obj/item/weapon/scabbard/scabbard_path as anything in copied_scabbards)
 					var/obj/item/weapon/scabbard/scabbard = new scabbard_path()
-					if(SEND_SIGNAL(scabbard, COMSIG_TRY_STORAGE_INSERT, item, null, TRUE, FALSE))
+					if(scabbard.atom_storage.attempt_insert(item))
 						H.temporarilyRemoveItemFromInventory(item, TRUE)
 						H.equip_to_slot_or_del(scabbard, slot, TRUE)
 						copied_scabbards -= scabbard_path
@@ -241,7 +241,7 @@
 							if(!item || !attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
 								item = H.get_item_by_slot(ITEM_SLOT_NECK)
 								if(!item || !attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-									new_item.forceMove(get_turf(H))
+									//new_item.forceMove(get_turf(H))
 									message_admins("[type] had backpack_contents set but no room to store:[new_item]")
 
 
@@ -254,12 +254,7 @@
 	return TRUE
 
 /datum/outfit/proc/attempt_insert_with_flipping(obj/item/storage_item, obj/item/object_to_insert, mob/living/carbon/human/H, silent, force)
-	var/success = FALSE
-	success = SEND_SIGNAL(storage_item, COMSIG_TRY_STORAGE_INSERT, object_to_insert, H, silent, force)
-	if(!success)
-		object_to_insert.inventory_flip()
-		success = SEND_SIGNAL(storage_item, COMSIG_TRY_STORAGE_INSERT, object_to_insert, H, silent, force)
-	return success
+	return storage_item?.atom_storage?.attempt_insert(storage_item, object_to_insert, override = TRUE)
 
 /client/proc/test_spawn_outfits()
 	for(var/path in subtypesof(/datum/outfit))

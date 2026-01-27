@@ -26,10 +26,20 @@
 			to_chat(user, span_warning("...What?"))
 			return TRUE
 
-	var/is_right_clicking = LAZYACCESS(params2list(params), RIGHT_CLICK)
-
 	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
 		return TRUE
+
+	var/is_right_clicking = LAZYACCESS(params2list(params), RIGHT_CLICK)
+
+	// Need item interactions at some point I guess
+	if(target.atom_storage)
+		var/datum/storage/storage = target.atom_storage
+		if(is_right_clicking)
+			if(storage.insert_on_attack && storage.item_interact_insert(user, src, params))
+				return TRUE
+		else if(storage.display_contents && !storage.no_interface)
+			if(storage.open_storage(user))
+				return TRUE
 
 	var/pre_attack_result
 	if(is_right_clicking)

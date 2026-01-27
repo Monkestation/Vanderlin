@@ -5,17 +5,17 @@
 	icon = 'icons/obj/medical.dmi'
 	icon_state = "ifak"
 	w_class = WEIGHT_CLASS_SMALL
-	component_type = /datum/component/storage/concrete/grid/ifak
+	storage_type = /datum/storage/ifak
 	throwforce = 1
 	slot_flags = ITEM_SLOT_HIP
-	populate_contents = list(
-		/obj/item/reagent_containers/syringe,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/storage/fancy/pilltin/sate,
-		/obj/item/storage/fancy/pilltin/devour,
-		/obj/item/candle/yellow,
-		/obj/item/needle,
-	)
+
+/obj/item/storage/fancy/ifak/populate_contents()
+	new /obj/item/reagent_containers/syringe(src)
+	new /obj/item/reagent_containers/syringe(src)
+	new /obj/item/storage/fancy/pilltin/sate(src)
+	new /obj/item/storage/fancy/pilltin/devour(src)
+	new /obj/item/candle/yellow(src)
+	new /obj/item/needle(src)
 
 /obj/item/storage/fancy/ifak/update_icon_state()
 	. = ..()

@@ -5,7 +5,7 @@
 
 	icon = 'icons/roguetown/weapons/crucible.dmi'
 	icon_state = "crucible"
-	component_type = /datum/component/storage/concrete/grid/crucible
+	storage_type = /datum/storage/crucible
 	grid_width = 32
 	grid_height = 64
 
@@ -110,7 +110,7 @@
 		. += emissive_appearance(icon, "filling", alpha = used_alpha)
 
 /obj/item/storage/crucible/proc/melt_item(obj/item/item)
-	SEND_SIGNAL(item.loc, COMSIG_TRY_STORAGE_TAKE, item, get_turf(src), TRUE)
+	atom_storage.attempt_remove(item, get_turf(src), TRUE)
 	var/list/data = list()
 	var/datum/material/material = item.melting_material
 	var/melty = item.melt_amount

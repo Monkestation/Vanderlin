@@ -219,80 +219,10 @@
 	icon = 'icons/roguetown/mob/monster/cow.dmi'
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/tamed(mob/user)
-	..()
+	. = ..()
 	deaggroprob = 20
 	if(can_buckle)
 		AddComponent(/datum/component/riding/pig)
-
-
-/mob/living/simple_animal/hostile/retaliate/trufflepig/Life()
-	. = ..()
-	if((src.loc) && isturf(src.loc))
-		for(var/obj/item/reagent_containers/food/snacks/truffles/M in view(1,src))
-			if(Adjacent(M))
-				walk_towards(src, M, 1)
-				sleep(3)
-				visible_message("<span class='notice'>The pig devours the vulnerable truffles!</span>")
-				hangry_meter = 0
-				playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-				qdel(M)
-				break
-
-/mob/living/simple_animal/hostile/retaliate/trufflepig/attack_hand(mob/living/carbon/human/M)
-	. = ..()
-	hangry_meter += 1
-	if(hangry_meter > 9)
-		to_chat(M, "<span class='notice'>The pig squeals in anger. It's sulking and refusing to work until it gets delicious truffles.</span>")
-		playsound(src, 'sound/vo/mobs/pig/hangry.ogg', 120, TRUE, -1)
-		return
-	if(M.used_intent.type == INTENT_HELP)
-		playsound(src, pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
-		dir = pick(GLOB.cardinals)
-		step(src, dir)
-		playsound(src, 'sound/items/sniff.ogg', 60, FALSE)
-		sleep(10)
-		dir = pick(GLOB.cardinals)
-		step(src, dir)
-		playsound(src, 'sound/items/sniff.ogg', 60, FALSE)
-		sleep(10)
-		dir = pick(GLOB.cardinals)
-		playsound(src, pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
-		var/turf/t = get_turf(src)
-		trufflesearch(t, 5)
-
-/mob/living/simple_animal/hostile/retaliate/trufflepig/attackby(obj/item/O, mob/user, params)
-	if(istype(O, /obj/item/reagent_containers/food/snacks/truffles))
-		visible_message("<span class='notice'>The pig munches the truffles, looking happy.</span>")
-		hangry_meter = 0
-		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-		qdel(O)
-
-	if(istype(O, /obj/item/reagent_containers/food/snacks/toxicshrooms))
-		visible_message("<span class='notice'>The pig munches the truffles reluctantly.</span>")
-		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-		qdel(O)
-		playsound(src, 'sound/vo/mobs/pig/hangry.ogg', 100, TRUE, -1)
-		sleep(20)
-		playsound(src, 'sound/vo/mobs/pig/hangry.ogg', 100, TRUE, -1)
-		visible_message("<span class='notice'>The pig shivers.</span>")
-		sleep(10)
-		death()
-	else
-		return ..()
-
-
-//	........   Truffle Search   ................
-/mob/living/simple_animal/hostile/retaliate/trufflepig/proc/trufflesearch(turf/T, range = world.view)
-	var/list/found_stuff = list()
-	for(var/turf/open/floor/dirt/M in range(range, T))
-		if(M.hidden_truffles)
-			found_stuff += M
-	if(LAZYLEN(found_stuff))
-		for(var/turf/open/floor/dirt/M in found_stuff)
-			var/obj/effect/temp_visual/truffle_overlay/oldC = locate(/obj/effect/temp_visual/truffle_overlay) in M
-			if(oldC)
-				qdel(oldC)
-			new /obj/effect/temp_visual/truffle_overlay(M)
 
 /obj/effect/temp_visual/truffle_overlay
 	plane = FULLSCREEN_PLANE

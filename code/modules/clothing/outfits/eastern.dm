@@ -39,7 +39,7 @@
 
 /obj/item/clothing/cloak/psyaltrist/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	create_storage(type = /datum/storage/cloak)
 
 /obj/item/clothing/head/spellcasterhat
 	name = "spellsinger hat"

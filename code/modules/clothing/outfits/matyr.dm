@@ -79,15 +79,11 @@
 
 /obj/item/clothing/cloak/holysee/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	create_storage(type = /datum/storage/cloak)
 
-/obj/item/clothing/cloak/holysee/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+/obj/item/clothing/cloak/holysee/dropped(mob/user, silent)
+	. = ..()
+	atom_storage?.remove_all(get_turf(src))
 
 /obj/item/clothing/cloak/holysee/MiddleClick(mob/user)
 	overarmor = !overarmor

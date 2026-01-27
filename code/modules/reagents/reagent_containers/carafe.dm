@@ -68,7 +68,7 @@
 
 /obj/item/reagent_containers/glass/carafe/teapot/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/teapot)
+	create_storage(type = /datum/storage/teapot)
 	AddComponent(/datum/component/container_craft, subtypesof(/datum/container_craft/cooking/tea), TRUE)
 
 //this functionality is off for now, it was from before i refactored but it doesn't really fit in well with the current layout

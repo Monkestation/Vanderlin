@@ -845,38 +845,146 @@
 
 /atom/movable/screen/storage
 	name = "storage"
-	icon_state = "block"
+	icon = 'icons/hud/storage.dmi'
+	icon_state = "background"
 	screen_loc = "7,7 to 10,8"
 	plane = HUD_PLANE
+	alpha = 180
+	var/atom/movable/screen/storage_hover/hovering
 
-/atom/movable/screen/storage/Initialize(mapload, datum/hud/hud_owner, obj/item/new_master)
+/atom/movable/screen/storage/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
-	master_ref = WEAKREF(new_master)
+	hovering = new(null, hud_owner)
+
+/atom/movable/screen/storage/Destroy()
+	QDEL_NULL(hovering)
+	return ..()
 
 /atom/movable/screen/storage/Click(location, control, params)
+	var/datum/storage/active = usr.active_storage
+	if(!active)
+		return
+
+	if(!isliving(usr) || usr.incapacitated(IGNORE_GRAB))
+		return
+
+	var/obj/item/to_put = usr.get_active_held_item()
+	if(!to_put)
+		return
+
 	var/list/modifiers = params2list(params)
-	var/obj/item/master = master_ref?.resolve()
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
-		if(master)
-			var/obj/item/flipper = usr.get_active_held_item()
-			if(!flipper || (!usr.Adjacent(flipper) && !usr.DirectAccess(flipper)) || !isliving(usr) || usr.incapacitated(IGNORE_GRAB))
-				return
-			var/old_width = flipper.grid_width
-			var/old_height = flipper.grid_height
-			flipper.grid_height = old_width
-			flipper.grid_width = old_height
-			update_hovering(location, control, params)
+		if(!usr.Adjacent(to_put) && !usr.DirectAccess(to_put))
 			return
+		var/old_width = to_put.grid_width
+		var/old_height = to_put.grid_height
+		to_put.grid_height = old_width
+		to_put.grid_width = old_height
+		update_hovering(location, control, params)
+		return
 
 	if(world.time <= usr.next_move)
 		return TRUE
+
 	if(usr.incapacitated(IGNORE_GRAB))
 		return TRUE
-	if(master)
-		var/obj/item/I = usr.get_active_held_item()
-		if(I)
-			master.attackby(src, I, usr, params, TRUE)
+
+	active.attempt_insert(to_put, usr, params = params)
+
 	return TRUE
+
+/atom/movable/screen/storage/MouseEntered(location, control, params)
+	. = ..()
+	if(!usr.client)
+		return
+
+	MouseMove(location, control, params)
+
+/atom/movable/screen/storage/MouseExited(location, control, params)
+	. = ..()
+	if(!usr.client)
+		return
+
+	if(!usr.active_storage)
+		return
+
+	usr.client.screen -= hovering
+
+/atom/movable/screen/storage/MouseMove(location, control, params)
+	. = ..()
+	update_hovering(location, control, params)
+
+/atom/movable/screen/storage/proc/update_hovering(location, control, params)
+	if(!usr.client)
+		return
+
+	if(!usr.active_storage)
+		return
+
+	usr.client.screen -= hovering
+
+	var/datum/storage/active_storage = usr.active_storage
+
+	if(!isliving(usr) || usr.incapacitated(IGNORE_GRAB))
+		return
+
+	var/obj/item/held_item = usr.get_active_held_item()
+	if(!held_item)
+		return
+
+	var/list/modifiers = params2list(params)
+	var/screen_loc = LAZYACCESS(modifiers, SCREEN_LOC)
+	var/coordinates = active_storage.screen_loc_to_grid_coordinates(screen_loc)
+	if(!coordinates)
+		return
+
+	if(active_storage.can_insert(held_item, usr, FALSE))
+		hovering.color = COLOR_ASSEMBLY_GOLD
+	else
+		hovering.color = COLOR_RED_LIGHT
+
+	hovering.transform = matrix()
+
+	var/enchanted = held_item.has_enchantment(/datum/enchantment/dimensional_shrink)
+
+	var/used_gridwidth = held_item.grid_width
+	if(enchanted)
+		used_gridwidth = max(32, used_gridwidth - 32)
+
+	var/used_gridheight = held_item.grid_height
+	if(enchanted)
+		used_gridheight = max(32, used_gridheight - 32)
+
+	var/scale_x = used_gridwidth / world.icon_size
+	var/scale_y = used_gridheight / world.icon_size
+	hovering.transform = hovering.transform.Scale(scale_x, scale_y)
+
+	var/translate_x = (world.icon_size / 2) * ((used_gridwidth / world.icon_size) - 1)
+	var/translate_y = (world.icon_size / 2) * ((used_gridheight / world.icon_size) - 1)
+	hovering.transform = hovering.transform.Translate(translate_x, translate_y)
+	hovering.screen_loc = active_storage.grid_coordinates_to_screen_loc(coordinates)
+
+	usr.client.screen |= hovering
+
+/atom/movable/screen/storage_hover
+	icon = 'icons/hud/storage.dmi'
+	icon_state = "white"
+	plane = ABOVE_HUD_PLANE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	alpha = 96
+
+/atom/movable/screen/close
+	name = "close"
+	plane = ABOVE_HUD_PLANE
+	icon = 'icons/hud/storage.dmi'
+	icon_state = "close"
+
+/atom/movable/screen/close/Click(location, control, params)
+	. = ..()
+	if(!usr.active_storage)
+		return
+
+	usr.active_storage.hide_contents(usr)
 
 /atom/movable/screen/throw_catch
 	name = "throw/catch"

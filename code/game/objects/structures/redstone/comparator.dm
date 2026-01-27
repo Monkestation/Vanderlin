@@ -189,19 +189,23 @@
 /obj/structure/redstone/comparator/proc/get_storage_signal()
 	var/turf/back_turf = get_step(src, REVERSE_DIR(dir))
 
-	for(var/obj/O in back_turf)
-		var/datum/component/storage/storage_comp = O.GetComponent(/datum/component/storage)
-		if(storage_comp)
-			return calculate_storage_fullness(storage_comp, O)
+	for(var/atom/atom in back_turf)
+		if(atom.atom_storage)
+			return calculate_storage_fullness(atom)
+
 	return 0
 
-/obj/structure/redstone/comparator/proc/calculate_storage_fullness(datum/component/storage/storage_comp, obj/O)
-	var/max_capacity = storage_comp.screen_max_rows * storage_comp.screen_max_columns
+/obj/structure/redstone/comparator/proc/calculate_storage_fullness(atom/storage_atom)
+	var/datum/storage/storage = storage_atom?.atom_storage
+	if(!storage)
+		return
+
+	var/max_capacity = storage.screen_max_rows * storage.screen_max_columns
 	if(max_capacity <= 0)
 		return 0
 
 	var/total = 0
-	for(var/obj/item/item in O.contents)
+	for(var/obj/item/item in storage_atom.contents)
 		total += (item.grid_width / 32) * (item.grid_height / 32)
 
 	return round((total / max_capacity) * 15)

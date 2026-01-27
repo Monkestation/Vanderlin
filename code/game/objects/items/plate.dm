@@ -308,13 +308,13 @@
 
 /obj/item/tray/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/tray)
+	create_storage(type = /datum/storage/tray)
 
 /obj/item/tray/attack(mob/living/M, mob/living/user)
 	..()
 	// Drop all the things. All of them.
 	var/list/obj/item/oldContents = contents.Copy()
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_QUICK_EMPTY)
+	atom_storage.remove_all(user)
 
 	// Make each item scatter a bit
 	for(var/obj/item/I in oldContents)

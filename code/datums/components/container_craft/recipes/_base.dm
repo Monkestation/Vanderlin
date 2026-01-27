@@ -335,12 +335,10 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 					items_to_delete += candidate_item
 					amount_to_remove--
 
-		for(var/obj/item/item_to_delete in items_to_delete)
-			SEND_SIGNAL(crafter, COMSIG_TRY_STORAGE_TAKE, item_to_delete, get_turf(crafter))
-
 		create_item(crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, items_to_delete)
 
 		initiator.mind?.add_sleep_experience(used_skill, initiator.STAINT * 0.5)
+
 		// Remove all tracked items
 		for(var/obj/item/item_to_delete in items_to_delete)
 			qdel(item_to_delete)
@@ -398,7 +396,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 			// Calculate final quality based on ingredients, skill, and recipe
 			apply_food_quality(food_item, cooking_skill, highest_food_quality, highest_reagent_quality, average_freshness)
 
-		SEND_SIGNAL(crafter, COMSIG_TRY_STORAGE_INSERT, created_output, null, null, TRUE, TRUE)
+		crafter.atom_storage?.attempt_insert(created_output, override = TRUE)
 		after_craft(created_output, crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, removing_items)
 		SEND_SIGNAL(crafter, COMSIG_CONTAINER_CRAFT_COMPLETE, created_output)
 

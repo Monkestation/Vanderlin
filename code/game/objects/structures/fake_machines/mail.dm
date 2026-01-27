@@ -141,10 +141,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			P.mailer = sentfrom
 			P.mailedto = send2place
 			P.update_appearance()
-			P.forceMove(X.loc)
-			var/datum/component/storage/STR = X.GetComponent(/datum/component/storage)
-			STR.handle_item_insertion(P, prevent_warning=TRUE)
-			X.new_mail=TRUE
+			X.atom_storage?.attempt_insert(src, P, override = TRUE)
+			X.new_mail = TRUE
 			X.update_appearance()
 			send_ooc_note("New letter from <b>[sentfrom].</b>", name = send2place)
 			for(var/mob/living/carbon/human/H in GLOB.human_list)
@@ -616,10 +614,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	paper.mailer = sent_from
 	paper.mailedto = send_to
 	paper.update_appearance()
-	paper.forceMove(master.loc)
-
-	var/datum/component/storage/STR = master.GetComponent(/datum/component/storage)
-	STR.handle_item_insertion(paper, prevent_warning=TRUE)
+	master.atom_storage?.attempt_insert(src, paper, override = TRUE)
 	master.new_mail = TRUE
 	master.update_appearance()
 	playsound(src, 'sound/misc/mail.ogg', 100, FALSE, -1)
@@ -742,34 +737,24 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		icon_state = "mailspecial"
 	set_light(1, 1, 1, l_color = "#ff0d0d")
 
-/obj/item/fake_machine/mastermail/attack_hand(mob/user)
-	var/datum/component/storage/CP = GetComponent(/datum/component/storage)
-	if(CP)
-		if(new_mail)
-			new_mail = FALSE
-			update_appearance()
-		return TRUE
-
 /obj/item/fake_machine/mastermail/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/mailmaster)
+	create_storage(type = /datum/storage/mailmaster)
 	SSroguemachine.hermailermaster = src
 	update_appearance()
 
-/obj/item/fake_machine/mastermail/attackby(obj/item/P, mob/user, params)
-	if(istype(P, /obj/item/paper))
-		var/obj/item/paper/PA = P
-		if(!PA.mailer && !PA.mailedto && PA.cached_mailer && PA.cached_mailedto)
-			PA.mailer = PA.cached_mailer
-			PA.mailedto = PA.cached_mailedto
-			PA.cached_mailer = null
-			PA.cached_mailedto = null
-			PA.update_appearance()
-			to_chat(user, span_warning("I carefully re-seal the letter and place it back in the machine, no one will know."))
-		P.forceMove(loc)
-		var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-		STR.handle_item_insertion(P, prevent_warning=TRUE)
-	..()
+/obj/item/fake_machine/mastermail/attackby(obj/item/I, mob/user, params)
+	if(!istype(I, /obj/item/paper))
+		return ..()
+	var/obj/item/paper/PA = I
+	if(!PA.mailer && !PA.mailedto && PA.cached_mailer && PA.cached_mailedto)
+		PA.mailer = PA.cached_mailer
+		PA.mailedto = PA.cached_mailedto
+		PA.cached_mailer = null
+		PA.cached_mailedto = null
+		PA.update_appearance()
+		to_chat(user, span_warning("I carefully re-seal the letter and place it back in the machine, no one will know."))
+	atom_storage?.attempt_insert(src, PA, override = TRUE)
 
 /obj/item/fake_machine/mastermail/Destroy()
 	set_light(0)

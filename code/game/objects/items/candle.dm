@@ -80,17 +80,14 @@
 /obj/item/candle/process()
 	if(!lit)
 		return PROCESS_KILL
+
 	if(!infinite)
 		wax--
-	if(!wax)
-		var/obj/item/trash/candle/candle = new /obj/item/trash/candle(get_turf(src))
-		var/datum/component/storage/STR = loc.GetComponent(/datum/component/storage)
-		if(STR)
-			SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_INSERT, candle, null, TRUE, TRUE)
-		else
-			candle.forceMove(loc)
 
+	if(!wax)
+		new /obj/item/trash/candle(get_turf(src))
 		qdel(src)
+
 	update_appearance(UPDATE_ICON_STATE)
 	open_flame()
 

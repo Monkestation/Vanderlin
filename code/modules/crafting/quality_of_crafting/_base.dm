@@ -469,7 +469,7 @@
 
 			if(put_items_in_hand)
 				if(is_storage)
-					SEND_SIGNAL(return_loc, COMSIG_TRY_STORAGE_INSERT, container, null, TRUE, TRUE)
+					return_loc.atom_storage.attempt_insert(container, user, override = TRUE)
 				else
 					user.transferItemToLoc(container, return_loc, TRUE)
 					container.pixel_x = stored_pixel_x
@@ -549,7 +549,7 @@
 
 	if(put_items_in_hand)
 		if(is_storage)
-			SEND_SIGNAL(return_loc, COMSIG_TRY_STORAGE_INSERT, potential_tool, null, TRUE, TRUE)
+			return_loc.atom_storage.attempt_insert(potential_tool, override = TRUE)
 		else
 			user.transferItemToLoc(potential_tool, return_loc, TRUE)
 			potential_tool.pixel_x = stored_pixel_x
@@ -689,7 +689,7 @@
 				to_chat(user, "You start grabbing [item] from your bag.")
 
 				if(do_after(user, storage_use_time, item))
-					SEND_SIGNAL(item.loc, COMSIG_TRY_STORAGE_TAKE, item, user.loc, TRUE)
+					item.loc.atom_storage.attempt_remove(item, user.loc, TRUE)
 
 					if(put_items_in_hand)
 						user.put_in_active_hand(item)
@@ -952,11 +952,7 @@
 /datum/repeatable_crafting_recipe/proc/clean_up_items(list/to_delete)
 	for(var/obj/item/deleted in to_delete)
 		to_delete -= deleted
-		var/datum/component/storage/STR = deleted.GetComponent(/datum/component/storage)
-		if(STR)
-			var/list/things = STR.contents()
-			for(var/obj/item/I in things)
-				STR.remove_from_storage(I, get_turf(src))
+		deleted.atom_storage?.remove_all(get_turf(src))
 		qdel(deleted)
 
 /datum/repeatable_crafting_recipe/proc/add_skill_experience(mob/user)

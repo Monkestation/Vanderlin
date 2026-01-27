@@ -15,7 +15,7 @@
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	component_type = /datum/component/storage/concrete/grid/sack
+	storage_type = /datum/storage/sack
 
 /obj/item/storage/sack/examine(mob/user)
 	. = ..()
@@ -37,31 +37,30 @@
 /obj/item/storage/sack/mob_can_equip(mob/M, slot)
 	if(!..())
 		return FALSE
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	var/list/things = STR.contents()
-	if(length(things))
+
+	if(length(contents))
 		return FALSE
-	else
-		return TRUE
+
+	return TRUE
 
 /obj/item/storage/sack/attack_hand_secondary(mob/user, params)
+	. = ..()
+
 	if(user.get_active_held_item())
-		return ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	var/list/things = STR.contents()
-	if(!length(things))
-		return ..()
-	var/obj/item/I = pick(things)
-	STR.remove_from_storage(I, get_turf(user))
+		return
+
+	if(!length(contents))
+		return
+
+	var/obj/item/I = pick(contents)
+	atom_storage.remove_single(user, I, get_turf(user))
 	user.put_in_hands(I)
 	user.changeNext_move(CLICK_CD_MELEE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/storage/sack/update_icon_state()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	var/list/things = STR.contents()
-	if(length(things))
+	if(length(contents))
 		icon_state = "fbag"
 		w_class = WEIGHT_CLASS_BULKY
 	else
@@ -106,19 +105,20 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = NONE
 	max_integrity = 300
-	component_type = /datum/component/storage/concrete/grid/sack/meat
+	storage_type = /datum/storage/sack/meat
 
 /obj/item/storage/meatbag/attack_hand_secondary(mob/user, params)
 	. = ..()
 	if(.)
 		return
+
+	if(!length(contents))
+		return
+
 	user.changeNext_move(CLICK_CD_MELEE)
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	var/list/things = STR.contents()
-	if(length(things))
-		var/obj/item/I = pick(things)
-		STR.remove_from_storage(I, get_turf(user))
-		user.put_in_hands(I)
+	var/obj/item/I = pick(contents)
+	atom_storage.remove_single(user, I, get_turf(user))
+	user.put_in_hands(I)
 
 /obj/item/storage/meatbag/getonmobprop(tag)
 	. = ..()
@@ -156,7 +156,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = NONE
 	max_integrity = 300
-	component_type = /datum/component/storage/concrete/grid/handbasket
+	storage_type = /datum/storage/handbasket
 
 /obj/item/storage/handbasket/update_overlays()
 	. = ..()
@@ -187,14 +187,10 @@
 	. += mutable_appearance(icon, "handbasket_generic")
 
 /obj/item/storage/handbasket/attack_hand_secondary(mob/user, params)
-	if(user.get_active_held_item())
+	if(user.get_active_held_item() || !length(contents) || !atom_storage)
 		return ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	var/list/things = STR.contents()
-	if(!length(things))
-		return ..()
-	var/obj/item/I = pick(things)
-	STR.remove_from_storage(I, get_turf(user))
+	var/obj/item/I = pick(contents)
+	atom_storage.remove_single(user, I)
 	user.put_in_hands(I)
 	user.changeNext_move(CLICK_CD_MELEE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN

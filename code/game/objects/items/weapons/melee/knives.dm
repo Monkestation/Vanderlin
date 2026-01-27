@@ -204,7 +204,7 @@
 				new /obj/item/natural/fibers(get_turf(item))
 			if(istype(item, /obj/item/storage))
 				var/obj/item/storage/bag = item
-				bag.emptyStorage()
+				bag.atom_storage.remove_all(get_turf(src))
 			var/probability = max(0, 50 - (skill_level * 10))
 			if(prob(probability)) // We are dumb and we failed!
 				to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))

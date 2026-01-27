@@ -198,7 +198,7 @@
 /obj/proc/hide(h)
 	return
 
-/obj/get_dumping_location(datum/component/storage/source,mob/user)
+/obj/get_dumping_location()
 	return get_turf(src)
 
 /obj/proc/CanAStarPass(ID, to_dir, requester)

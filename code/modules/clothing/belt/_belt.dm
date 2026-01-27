@@ -20,7 +20,7 @@
 	fiber_salvage = TRUE
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	component_type = /datum/component/storage/concrete/grid/belt
+	storage_type = /datum/storage/belt
 	item_weight = 1.1
 
 /obj/item/storage/belt/suicide_act(mob/living/carbon/user)

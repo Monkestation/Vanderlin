@@ -243,19 +243,19 @@
 		if(ITEM_SLOT_BACKPACK)
 			not_handled = TRUE
 			if(beltr)
-				if(SEND_SIGNAL(beltr, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
+				if(beltr.atom_storage.attempt_insert(equipping, src, TRUE))
 					not_handled = FALSE
 			if(beltl && not_handled)
-				if(SEND_SIGNAL(beltl, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
+				if(beltl.atom_storage.attempt_insert(equipping, src, TRUE))
 					not_handled = FALSE
 			if(belt && not_handled)
-				if(SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
+				if(belt.atom_storage.attempt_insert(equipping, src, TRUE))
 					not_handled = FALSE
 			if(backr && not_handled)
-				if(SEND_SIGNAL(backr, COMSIG_TRY_STORAGE_CAN_INSERT, equipping, src, TRUE))
+				if(backr.atom_storage.attempt_insert(equipping, src, TRUE))
 					not_handled = FALSE
 			if(backl && not_handled)
-				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_CAN_INSERT, equipping, src, TRUE))
+				if(backl.atom_storage.attempt_insert(equipping, src, TRUE))
 					not_handled = FALSE
 		else
 			not_handled = TRUE
@@ -397,6 +397,7 @@
 /mob/living/carbon/human/proc/smart_equipbag(slot_id) // take most recent item out of bag or place held item in bag
 	if(incapacitated())
 		return
+
 	var/obj/item/thing = get_active_held_item()
 	var/obj/item/equipped_back = get_item_by_slot(slot_id)
 	if(!equipped_back) // We also let you equip a backpack like this
@@ -406,6 +407,7 @@
 		if(equip_to_slot_if_possible(thing, slot_id))
 			update_inv_hands()
 		return
+
 	// Since you have to take off /obj/item/storage/backpack/backpack to access the inventory we handle it differently:
 	if(istype(equipped_back, /obj/item/storage/backpack/backpack))
 		if(thing) // Check for held item, if there is one, don't let them insert it in the backpack
@@ -413,28 +415,32 @@
 			return
 		equipped_back.attack_hand(src) // If there is no held item, take off the backpack by invoking attack_hand
 		return
-	if(!SEND_SIGNAL(equipped_back, COMSIG_CONTAINS_STORAGE)) // not a storage item
+
+	if(!equipped_back.atom_storage) // not a storage item
 		if(!thing)
 			equipped_back.attack_hand(src)
 		else
 			to_chat(src, span_warning("I can't fit anything in!"))
 		return
-	if(thing) // put thing in backpack
-		if(!SEND_SIGNAL(equipped_back, COMSIG_TRY_STORAGE_INSERT, thing, src))
-			to_chat(src, span_warning("I can't fit anything in!"))
+
+	if(thing && !equipped_back?.atom_storage.attempt_insert(thing, src)) // put thing in backpack
 		return
+
 	if(!equipped_back.contents.len) // nothing to take out
 		to_chat(src, span_warning("There's nothing in your backpack to take out!"))
 		return
+
 	var/obj/item/stored = equipped_back.contents[equipped_back.contents.len]
 	if(!stored || stored.on_found(src))
 		return
+
 	stored.attack_hand(src) // take out thing from backpack
 	return
 
 /mob/living/carbon/human/proc/smart_equipbelt() // put held thing in belt or take most recent item out of belt
 	if(incapacitated(IGNORE_GRAB))
 		return
+
 	var/obj/item/thing = get_active_held_item()
 	var/obj/item/equipped_belt = get_item_by_slot(ITEM_SLOT_BELT)
 	if(!equipped_belt) // We also let you equip a belt like this
@@ -444,21 +450,23 @@
 		if(equip_to_slot_if_possible(thing, ITEM_SLOT_BELT))
 			update_inv_hands()
 		return
-	if(!SEND_SIGNAL(equipped_belt, COMSIG_CONTAINS_STORAGE)) // not a storage item
+
+	if(!equipped_belt.atom_storage) // not a storage item
 		if(!thing)
 			equipped_belt.attack_hand(src)
 		else
 			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
 		return
-	if(thing) // put thing in belt
-		if(!SEND_SIGNAL(equipped_belt, COMSIG_TRY_STORAGE_INSERT, thing, src))
-			to_chat(src, "<span class='warning'>I can't fit anything in!</span>")
+
+	if(thing && !equipped_belt?.atom_storage.attempt_insert(thing, src)) // put thing in belt
 		return
-	if(!equipped_belt.contents.len) // nothing to take out
+
+	if(!length(equipped_belt.contents)) // nothing to take out
 		to_chat(src, "<span class='warning'>There's nothing in your belt to take out!</span>")
 		return
+
 	var/obj/item/stored = equipped_belt.contents[equipped_belt.contents.len]
 	if(!stored || stored.on_found(src))
 		return
+
 	stored.attack_hand(src) // take out thing from belt
-	return

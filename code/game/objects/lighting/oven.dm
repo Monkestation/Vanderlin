@@ -13,13 +13,13 @@
 
 /obj/machinery/light/fueled/oven/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/food/cooking/oven)
+	create_storage(type = /datum/storage/food/cooking/oven)
 	AddComponent(/datum/component/container_craft, subtypesof(/datum/container_craft/oven))
 	AddComponent(/datum/component/food_burner, 2 MINUTES, TRUE, CALLBACK(src, PROC_REF(can_burn)))
 
 /obj/machinery/light/fueled/oven/attack_hand(mob/living/carbon/human/user)
 	. = ..()
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_SHOW, user, TRUE)
+	atom_storage.open_storage(user)
 
 /obj/machinery/light/fueled/oven/proc/can_burn()
 	if(on)

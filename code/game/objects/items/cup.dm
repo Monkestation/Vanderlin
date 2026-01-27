@@ -23,7 +23,7 @@
 
 /obj/item/reagent_containers/glass/cup/Initialize(mapload, vol)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cup)
+	create_storage(/datum/storage/cup)
 
 /obj/item/reagent_containers/glass/cup/wooden
 	name = "wooden cup"

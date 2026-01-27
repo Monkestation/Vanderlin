@@ -59,6 +59,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define IS_ONTOP_1 (1<<16)
 /// Are we in the overlay queue
 #define OVERLAY_QUEUED_1 (1<<17)
+// Whether or not this atom is storing contents for a disassociated storage object
+#define HAS_DISASSOCIATED_STORAGE_1 (1<<18)
 
 /// If a turf can be made dirty at roundstart. This is also used in areas.
 #define CAN_BE_DIRTY_1				(1<<2)

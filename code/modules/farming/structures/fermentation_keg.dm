@@ -176,7 +176,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	if(I.type in selected_recipe?.needed_crops)
 		produce_list |= I
 
-	if(istype(I, /obj/item/storage))
+	if(I.atom_storage)
 		produce_list |= I.contents
 		storage_list |= I.contents
 
@@ -216,7 +216,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 
 			if(G in storage_list)
 				dumps = TRUE
-				SEND_SIGNAL(G.loc, COMSIG_TRY_STORAGE_TAKE, G, get_turf(src), TRUE)
+
 			qdel(G)
 
 	for(var/obj/item/item in produce_list)
@@ -251,7 +251,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 
 			if(item in storage_list)
 				dumps = TRUE
-				SEND_SIGNAL(item.loc, COMSIG_TRY_STORAGE_TAKE, item, get_turf(src), TRUE)
+
 			qdel(item)
 
 	if(dumps)

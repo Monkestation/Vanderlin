@@ -1159,22 +1159,19 @@ GLOBAL_LIST_EMPTY(donator_races)
 				return FALSE
 			return TRUE
 		if(ITEM_SLOT_BACKPACK)
-			if(H.backr)
-				if(SEND_SIGNAL(H.backr, COMSIG_TRY_STORAGE_CAN_INSERT, I, H, TRUE))
-					return TRUE
-			if(H.backl)
-				if(SEND_SIGNAL(H.backl, COMSIG_TRY_STORAGE_CAN_INSERT, I, H, TRUE))
-					return TRUE
-			if(H.beltr)
-				if(SEND_SIGNAL(H.beltr, COMSIG_TRY_STORAGE_CAN_INSERT, I, H, TRUE))
-					return TRUE
-			if(H.beltl)
-				if(SEND_SIGNAL(H.beltl, COMSIG_TRY_STORAGE_CAN_INSERT, I, H, TRUE))
-					return TRUE
-			if(H.belt)
-				if(SEND_SIGNAL(H.belt, COMSIG_TRY_STORAGE_CAN_INSERT, I, H, TRUE))
-					return TRUE
+			if(H.backr.atom_storage?.attempt_insert(I, H, TRUE))
+				return TRUE
+			if(H.backl.atom_storage?.attempt_insert(I, H, TRUE))
+				return TRUE
+			if(H.belt.atom_storage?.attempt_insert(I, H, TRUE))
+				return TRUE
+			if(H.beltr.atom_storage?.attempt_insert(I, H, TRUE))
+				return TRUE
+			if(H.beltl.atom_storage?.attempt_insert(I, H, TRUE))
+				return TRUE
+
 			return FALSE
+
 	return FALSE //Unsupported slot
 
 /datum/species/proc/equip_delay_self_check(obj/item/I, mob/living/carbon/human/H, bypass_equip_delay_self)

@@ -227,9 +227,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_FINGERLESS "fingerless" //The limb has no fingies
 
 //item traits
-#define TRAIT_NODROP            "nodrop"
-#define TRAIT_NOEMBED			"noembed"
-#define TRAIT_NO_TELEPORT		"no-teleport" //you just can't
+#define TRAIT_NODROP "nodrop"
+/// cannot be inserted in a storage.
+#define TRAIT_NO_STORAGE_INSERT "no_storage_insert"
+#define TRAIT_NOEMBED "noembed"
+#define TRAIT_NO_TELEPORT "no-teleport" //you just can't
 #define TRAIT_HAS_CONFESSED "has_confessed"
 #define TRAIT_CONFESSED_FOR	"confessed_for"
 #define TRAIT_RECENTLY_TORTURED "recently_tortured"
@@ -365,7 +367,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EMPATH					"Empath"
 #define TRAIT_BREADY					"Battleready"
 #define TRAIT_BLINDFIGHTING 			"Sixth-Sense"
-#define TRAIT_HEARING_SENSITIVE 		"hearing_sensitive"
 #define TRAIT_MEDIUMARMOR				"Mail Training"
 #define TRAIT_HEAVYARMOR				"Plate Training"
 #define TRAIT_DODGEEXPERT              "Fast Reflexes"
@@ -614,3 +615,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 ///Turf trait for when a turf is transparent
 #define TURF_Z_TRANSPARENT_TRAIT "turf_z_transparent"
+
+//important_recursive_contents traits
+/*
+ * Used for movables that need to be updated, via COMSIG_ENTER_AREA and COMSIG_EXIT_AREA, when transitioning areas.
+ * Use [/atom/movable/proc/become_area_sensitive(trait_source)] to properly enable it. How you remove it isn't as important.
+ */
+#define TRAIT_AREA_SENSITIVE "area-sensitive"
+///every hearing sensitive atom has this trait
+#define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
+///every object that is currently the active storage of some client mob has this trait
+#define TRAIT_ACTIVE_STORAGE "active_storage"

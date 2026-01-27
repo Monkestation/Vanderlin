@@ -273,12 +273,12 @@
 		if(prev_damage == maxHealth)
 			return now_fixed
 
-/obj/item/organ/on_enter_storage(datum/component/storage/concrete/S)
+/obj/item/organ/on_enter_storage(datum/storage/atom_storage)
 	. = ..()
 	if(recursive_loc_check(src, /obj/item/storage/backpack/backpack/artibackpack))
 		organ_flags |= ORGAN_FROZEN
 
-/obj/item/organ/on_exit_storage(datum/component/storage/concrete/S)
+/obj/item/organ/on_exit_storage(datum/storage/atom_storage)
 	. = ..()
 	if(!recursive_loc_check(src, /obj/item/storage/backpack/backpack/artibackpack))
 		organ_flags &= ~ORGAN_FROZEN

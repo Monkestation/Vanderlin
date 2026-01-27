@@ -29,7 +29,7 @@
 	internal_reagents.maximum_volume = 1000
 	internal_reagents.my_atom = src
 
-	AddComponent(/datum/component/storage/concrete/grid/crucible)
+	create_storage(type = /datum/storage/crucible)
 
 	START_PROCESSING(SSobj, src)
 
@@ -55,7 +55,7 @@
 		return
 	opened = !opened
 	update_appearance(UPDATE_ICON_STATE)
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_HIDE_ALL)
+	atom_storage.close_all()
 
 /obj/structure/channel_connector/furnace/examine(mob/user)
 	. = ..()
@@ -111,7 +111,6 @@
 		update_appearance(UPDATE_OVERLAYS)
 		return
 
-	// Let the storage component handle item insertion
 	return ..()
 
 /obj/structure/channel_connector/furnace/process()
@@ -165,7 +164,7 @@
 
 /obj/structure/channel_connector/furnace/proc/melt_item(obj/item/item)
 	// Use the same logic as crucible for removing from storage
-	SEND_SIGNAL(item.loc, COMSIG_TRY_STORAGE_TAKE, item, get_turf(src), TRUE)
+	atom_storage.attempt_remove(item, get_turf(src), TRUE)
 
 	var/list/data = list()
 	data |= item.melting_material

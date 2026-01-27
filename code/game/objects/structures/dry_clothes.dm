@@ -15,44 +15,50 @@
 
 /obj/structure/dryclothes/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/drying_rack)
+	create_storage(type = /datum/storage/drying_rack)
 
-	RegisterSignal(src, COMSIG_STORAGE_ADDED, PROC_REF(on_item_stored))
-	RegisterSignal(src, COMSIG_STORAGE_REMOVED, PROC_REF(on_item_removed))
+	RegisterSignal(src, COMSIG_STORAGE_STORED_ITEM, PROC_REF(on_item_stored))
+	RegisterSignal(src, COMSIG_STORAGE_REMOVED_ITEM, PROC_REF(on_item_removed))
 
+/obj/structure/dryclothes/Destroy(force)
+	if(drying_timer)
+		deltimer(drying_timer)
 
-/obj/structure/dryclothes/Destroy()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	atom_storage.remove_all(get_turf(src))
+
 	return ..()
 
 /obj/structure/dryclothes/proc/on_item_stored(datum/source, obj/item/I)
 	if(!drying_timer && !has_wet_items)
 		// Start loop
 		drying_timer = addtimer(CALLBACK(src, PROC_REF(process_drying)), 10 SECONDS, TIMER_STOPPABLE)
-	usr.nobles_seen_servant_work()
 
+	if(!isliving(source))
+		return
+
+	var/mob/living/user = source
+	user.nobles_seen_servant_work()
 
 /obj/structure/dryclothes/proc/on_item_removed(datum/source, obj/item/I)
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(!STR)
+	if(!atom_storage)
 		return
-	if(!length(STR.contents()))
-		if(drying_timer)
-			drying_timer = null
-	usr.nobles_seen_servant_work()
+
+	if(drying_timer && !length(contents))
+		deltimer(drying_timer)
+
+	if(!isliving(source))
+		return
+
+	var/mob/living/user = source
+	user.nobles_seen_servant_work()
 
 /obj/structure/dryclothes/proc/process_drying()
-
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(!STR)
+	if(!atom_storage)
 		return
 
 	has_wet_items = FALSE
-	for(var/obj/item/clothing/C in STR.contents())
+
+	for(var/obj/item/clothing/C in contents)
 		if(!C.wetable)
 			continue
 		var/old_wet = C.wet.water_stacks
@@ -65,8 +71,9 @@
 
 		if(C.wet.water_stacks < 0)
 			has_wet_items = TRUE
+
 	// Reschedule only if we still have wet items
 	if(has_wet_items)
 		drying_timer = addtimer(CALLBACK(src, PROC_REF(process_drying)), 10 SECONDS, TIMER_STOPPABLE)
 	else
-		drying_timer = null
+		deltimer(drying_timer)

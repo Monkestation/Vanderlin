@@ -143,14 +143,11 @@
 
 /obj/item/clothing/cloak/cape/crusader/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak/lord)
+	create_storage(type = /datum/storage/cloak/lord)
 
-/obj/item/clothing/cloak/cape/crusader/dropped(mob/living/carbon/human/user)
-	..()
+/obj/item/clothing/cloak/cape/crusader/dropped(mob/user, silent)
+	. = ..()
 	if(QDELETED(src))
 		return
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+
+	atom_storage?.remove_all(get_turf(src))

@@ -430,20 +430,17 @@
 		if(equip_delay_self)
 			return
 
-	if(M.active_storage && M.active_storage.parent && SEND_SIGNAL(M.active_storage.parent, COMSIG_TRY_STORAGE_INSERT, src,M))
-		return TRUE
+	if(M.active_storage && (M.active_storage.parent == M))
+		if(M.active_storage.attempt_insert(src, M, TRUE))
+			return TRUE
 
 	var/list/obj/item/possible = list(M.get_inactive_held_item(), M.get_item_by_slot(ITEM_SLOT_BELT))
-	for(var/i in possible)
-		if(!i)
-			continue
-		var/obj/item/I = i
-		if(SEND_SIGNAL(I, COMSIG_TRY_STORAGE_INSERT, src, M))
+	for(var/obj/item/I as anything in possible)
+		if(I.atom_storage?.attempt_insert(src, M, TRUE))
 			return TRUE
 
 	to_chat(M, span_warning("I couldn't equip that."))
 	return FALSE
-
 
 /mob/verb/quick_equip()
 	set name = "quick-equip"

@@ -157,9 +157,8 @@
 		return ..()
 	var/obj/item/weapon/tongs/T = I
 	if(!T.held_item)
-		if(item_flags & IN_STORAGE)
-			if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE))
-				return ..()
+		if(item_flags & IN_STORAGE && !remove_item_from_storage(user.loc, user))
+			return ..()
 		forceMove(T)
 		T.held_item = src
 		T.hott = null

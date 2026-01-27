@@ -704,9 +704,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
 		return
 
-	if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
-		return
-
 	if(!ontable() && isturf(loc))
 		if(!do_after(user, 3 DECISECONDS, src))
 			return
@@ -718,8 +715,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		//We want the pickup animation to play even if we're moving the item between movables. Unless the mob is not located on a turf.
 		if(isturf(user.loc))
 			storage_turf = get_turf(loc)
-		if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
+		if(!loc.atom_storage.attempt_remove(src, user, TRUE))
 			return
+
 	if(QDELETED(src)) //moving it out of the storage destroyed it.
 		return
 
@@ -763,13 +761,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 /obj/item/attack_paw(mob/user)
 	if(!user)
 		return
+
 	if(anchored)
 		return
 
-	SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE)
-
 	if(throwing)
 		throwing.finalize(FALSE)
+
 	if(loc == user)
 		if(!user.temporarilyRemoveItemFromInventory(src))
 			return
@@ -1047,12 +1045,23 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		pixel_x = base_pixel_x + rand(-8,8)
 		pixel_y = base_pixel_y + rand(-8,8)
 
-
-/obj/item/proc/remove_item_from_storage(atom/newLoc) //please use this if you're going to snowflake an item out of a obj/item/storage
+/// Takes the location to move the item to, and optionally the mob doing the removing
+/// If no mob is provided, we'll pass in the location, assuming it is a mob
+/// Please use this if you're going to snowflake an item out of a obj/item/storage
+/obj/item/proc/remove_item_from_storage(atom/newLoc, mob/removing)
 	if(!newLoc)
 		return FALSE
-	if(SEND_SIGNAL(loc, COMSIG_CONTAINS_STORAGE))
-		return SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, newLoc, TRUE)
+
+	if(!removing)
+		if(ismob(newLoc))
+			removing = newLoc
+		else
+			stack_trace("Tried to remove an item and place it into [newLoc] without implicitly or explicitly passing in a mob doing the removing")
+			return
+
+	if(loc.atom_storage)
+		return loc.atom_storage.attempt_remove(src, newLoc, silent = TRUE)
+
 	return FALSE
 
 /obj/item/proc/get_belt_overlay() //Returns the icon used for overlaying the object on a belt

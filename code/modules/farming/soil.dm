@@ -135,24 +135,31 @@
 	return FALSE
 
 /obj/structure/soil/proc/try_handle_seed_planting(obj/item/attacking_item, mob/user, params)
-	var/obj/item/old_item
+	var/obj/item/neuFarm/seed/to_plant
+
 	if(istype(attacking_item, /obj/item/storage/sack))
 		var/list/seeds = list()
 		for(var/obj/item/neuFarm/seed/seed in attacking_item.contents)
 			seeds |= seed
-		old_item = attacking_item
-		if(LAZYLEN(seeds))
-			attacking_item = pick(seeds)
 
-	if(istype(attacking_item, /obj/item/neuFarm/seed)) //SLOP OBJECT PROC SHARING
-		playsound(src, pick('sound/foley/touch1.ogg','sound/foley/touch2.ogg','sound/foley/touch3.ogg'), 170, TRUE)
-		if(do_after(user, get_farming_do_time(user, 15), src))
-			if(old_item)
-				SEND_SIGNAL(old_item, COMSIG_TRY_STORAGE_TAKE, attacking_item, get_turf(user), TRUE)
-			var/obj/item/neuFarm/seed/seeds = attacking_item
-			seeds.try_plant_seed(user, src)
-		return TRUE
-	return FALSE
+		if(!length(seeds))
+			return FALSE
+
+		to_plant = pick(seeds)
+		if(!attacking_item.atom_storage?.attempt_remove(to_plant, get_turf(user)))
+			return FALSE
+	else if(istype(attacking_item, /obj/item/neuFarm/seed))
+		to_plant = attacking_item
+	else
+		return FALSE
+
+	playsound(src, pick('sound/foley/touch1.ogg','sound/foley/touch2.ogg','sound/foley/touch3.ogg'), 170, TRUE)
+	if(!do_after(user, get_farming_do_time(user, 1.5 SECONDS), src))
+		return FALSE
+
+	to_plant.try_plant_seed(user, src)
+
+	return TRUE
 
 /obj/structure/soil/proc/try_handle_uprooting(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/weapon/shovel))
@@ -182,7 +189,7 @@
 	var/water_amount = 0
 	if(istype(attacking_item, /obj/item/reagent_containers))
 		if(water >= MAX_PLANT_WATER * 0.8)
-			to_chat(user, span_warning("The soil is already wet!"))
+			to_chat(user, span_warning("The soil is alresady wet!"))
 			return TRUE
 		var/obj/item/reagent_containers/container = attacking_item
 		if(container.reagents.has_reagent(/datum/reagent/water, 15))

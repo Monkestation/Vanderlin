@@ -27,7 +27,7 @@
 
 /obj/item/clothing/cloak/forrestercloak/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	create_storage(type = /datum/storage/cloak)
 
 /obj/item/clothing/cloak/wardencloak
 	name = "warden's cloak"
@@ -43,7 +43,7 @@
 
 /obj/item/clothing/cloak/wardencloak/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	create_storage(type = /datum/storage/cloak)
 
 /obj/item/clothing/head/helmet/visored/warden
 	name = "wardens's helmet"

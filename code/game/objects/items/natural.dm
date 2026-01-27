@@ -213,12 +213,13 @@
 		else
 			height = TRUE
 			grid_width += 32
+
 	if(item_flags & IN_STORAGE)
 		var/obj/item/location = loc
-		var/datum/component/storage/storage = location.GetComponent(/datum/component/storage)
+		var/datum/storage/storage = location.atom_storage
 
-		storage.update_item(src)
-		storage.orient2hud()
+		storage.refresh_views()
+		storage.orient_to_hud()
 
 /obj/item/natural/infernalash//T1 mage summon loot
 	name = "infernal ash"

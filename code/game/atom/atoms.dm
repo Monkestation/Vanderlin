@@ -122,6 +122,9 @@
 	/// forensics datum, contains fingerprints, fibres, blood_dna and hiddenprints on this atom
 	var/datum/forensics/forensics
 
+	/// the datum handler for our contents - see create_storage() for creation method
+	var/datum/storage/atom_storage
+
 	var/xyoverride = FALSE //so we can 'face' a click catcher even though it doesn't have an x or a y
 
 	/// This means that the mouse over text will not be displayed when the mouse is over this atom
@@ -283,10 +286,13 @@
 			AA.remove_from_hud(src)
 
 	if(reagents)
-		qdel(reagents)
+		QDEL_NULL(reagents)
 
 	if(forensics)
 		QDEL_NULL(forensics)
+
+	if(atom_storage)
+		QDEL_NULL(atom_storage)
 
 	orbiters = null // The component is attached to us normaly and will be deleted elsewhere
 
@@ -729,50 +735,8 @@
 /atom/proc/narsie_act()
 	SEND_SIGNAL(src, COMSIG_ATOM_NARSIE_ACT)
 
-/**
- * Implement the behaviour for when a user click drags a storage object to your atom
- *
- * This behaviour is usually to mass transfer, but this is no longer a used proc as it just
- * calls the underyling /datum/component/storage dump act if a component exists
- *
- * TODO these should be purely component items that intercept the atom clicks higher in the
- * call chain
- */
-/atom/proc/storage_contents_dump_act(obj/item/storage/src_object, mob/user)
-	if(GetComponent(/datum/component/storage))
-		return component_storage_contents_dump_act(src_object, user)
-	return FALSE
-
-/**
- * Implement the behaviour for when a user click drags another storage item to you
- *
- * In this case we get as many of the tiems from the target items compoent storage and then
- * put everything into ourselves (or our storage component)
- *
- * TODO these should be purely component items that intercept the atom clicks higher in the
- * call chain
- */
-/atom/proc/component_storage_contents_dump_act(datum/component/storage/src_object, mob/user)
-	if(src_object.parent == src)
-		return
-	var/list/things = src_object.contents()
-	var/datum/progressbar/progress = new(user, things.len, src)
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	while(do_after(user, 1 SECONDS, src, NONE, FALSE, CALLBACK(STR, TYPE_PROC_REF(/datum/component/storage, handle_mass_item_insertion), things, src_object, user, progress)))
-		stoplag(1)
-	progress.end_progress()
-	to_chat(user, "<span class='notice'>I dump as much of [src_object.parent]'s contents [STR.insert_preposition]to [src] as I can.</span>")
-	STR.orient2hud(user)
-	STR.update_icon()
-	src_object.update_icon()
-	src_object.orient2hud(user)
-	if(user.active_storage) //refresh the HUD to show the transfered contents
-		user.active_storage.close(user)
-		user.active_storage.show_to(user)
-	return TRUE
-
 ///Get the best place to dump the items contained in the source storage item?
-/atom/proc/get_dumping_location(obj/item/storage/source,mob/user)
+/atom/proc/get_dumping_location()
 	return null
 
 /**
@@ -1376,3 +1340,40 @@
 /atom/proc/forget_alert(atom/movable/flick_visual/alert)
 	animate(alert, time = 0.5 SECONDS, alpha = 0)
 	QDEL_IN(alert, 0.5 SECONDS)
+
+/// A quick and easy way to create a storage datum for an atom
+/atom/proc/create_storage(
+	screen_max_rows,
+	screen_max_columns,
+	max_specific_storage,
+	numerical_stacking,
+	allow_quick_gather,
+	allow_quick_empty,
+	collection_mode,
+	attack_hand_interact,
+	list/canhold,
+	list/canthold,
+	type = /datum/storage,
+)
+
+	if(atom_storage)
+		QDEL_NULL(atom_storage)
+
+	atom_storage = new type(src, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, collection_mode, attack_hand_interact)
+
+	if(canhold || canthold)
+		atom_storage.set_holdable(canhold, canthold)
+
+	return atom_storage
+
+/// A quick and easy way to /clone/ a storage datum for an atom (does not copy over contents, only the datum details)
+/atom/proc/clone_storage(datum/storage/cloning)
+	if(atom_storage)
+		QDEL_NULL(atom_storage)
+
+	atom_storage = new cloning.type(src, cloning.screen_max_rows, cloning.screen_max_columns, cloning.max_specific_storage, cloning.numerical_stacking, cloning.allow_quick_gather, cloning.collection_mode, cloning.attack_hand_interact)
+
+	if(cloning.can_hold || cloning.cant_hold)
+		atom_storage.set_holdable(cloning.can_hold, cloning.cant_hold)
+
+	return atom_storage

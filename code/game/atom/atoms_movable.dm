@@ -1030,12 +1030,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 	return blocker_opinion
 
-// called when this atom is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
-/atom/movable/proc/on_exit_storage(datum/component/storage/concrete/S)
+// called when this atom is removed from a storage item.
+/atom/movable/proc/on_exit_storage(datum/storage/atom_storage)
 	return
 
-// called when this atom is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
-/atom/movable/proc/on_enter_storage(datum/component/storage/concrete/S)
+// called when this atom is added into a storage item.
+/atom/movable/proc/on_enter_storage(datum/storage/atom_storage)
 	return
 
 //called when a mob resists while inside a container that is itself inside something.
@@ -1489,6 +1489,25 @@
 /atom/movable/proc/after_pushed(new_loc, dir_pusher_to_pushed, glize_size, pusher_dir)
 	if(pusher_dir)
 		setDir(dir_pusher_to_pushed)
+
+///called when this movable becomes the parent of an atom storage that is currently being viewed by a player. uses important_recursive_contents
+/atom/movable/proc/become_active_storage(datum/storage/storage_source)
+	if(!HAS_TRAIT(src, TRAIT_ACTIVE_STORAGE))
+		for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+			LAZYADDASSOCLIST(location.important_recursive_contents, RECURSIVE_CONTENTS_ACTIVE_STORAGE, src)
+	ADD_TRAIT(src, TRAIT_ACTIVE_STORAGE, storage_source)
+
+///called when this movable's atom storage is no longer viewed by any players, unsets important_recursive_contents
+/atom/movable/proc/lose_active_storage(datum/storage/storage_source)
+	if(!HAS_TRAIT(src, TRAIT_ACTIVE_STORAGE))
+		return
+
+	REMOVE_TRAIT(src, TRAIT_ACTIVE_STORAGE, storage_source)
+	if(HAS_TRAIT(src, TRAIT_ACTIVE_STORAGE))
+		return
+
+	for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+		LAZYREMOVEASSOC(location.important_recursive_contents, RECURSIVE_CONTENTS_ACTIVE_STORAGE, src)
 
 #undef ATTACK_ANIMATION_PIXEL_DIFF
 #undef ATTACK_ANIMATION_TIME

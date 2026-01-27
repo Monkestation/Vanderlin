@@ -6,66 +6,53 @@
 	equip_sound = 'sound/blank.ogg'
 	var/empty_when_dropped = TRUE
 
-/obj/item/storage/belt/leather/dropped(mob/living/carbon/human/user)
-	..()
+/obj/item/storage/belt/leather/dropped(mob/user, silent)
+	. = ..()
 	if(QDELETED(src))
 		return
+
 	if(!empty_when_dropped)
 		return
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+
+	atom_storage?.remove_all(get_turf(src))
 
 /obj/item/storage/belt/leather/assassin // Assassin's super edgy and cool belt can carry normal items (for poison vial, lockpick).
 	empty_when_dropped = FALSE
-	component_type = /datum/component/storage/concrete/grid/belt/assassin
+	storage_type = /datum/storage/belt/assassin
 
-	populate_contents = list(
-		/obj/item/reagent_containers/glass/bottle/poison,
-		/obj/item/weapon/knife/dagger/steel/profane,
-		/obj/item/lockpick,
-	)
+/obj/item/storage/belt/leather/assassin/populate_contents()
+	. = ..()
+	new /obj/item/reagent_containers/glass/bottle/poison(src)
+	new /obj/item/weapon/knife/dagger/steel/profane(src)
+	new /obj/item/lockpick(src)
 
 //Bandit's belt starts with a simple needle and a key to their hideout.
 
-/obj/item/storage/belt/leather/bandit
-	populate_contents = list(
-		/obj/item/needle/thorn,
-		/obj/item/key/bandit,
-	)
-
+/obj/item/storage/belt/leather/bandit/populate_contents()
+	new /obj/item/needle/thorn(src)
+	new /obj/item/key/bandit(src)
 
 //Adventurer's belt start with a needle, cloth and just that, good luck buddy
 
-/obj/item/storage/belt/leather/adventurer
-	populate_contents = list(
-		/obj/item/needle/thorn,
-		/obj/item/natural/cloth,
-	)
-
+/obj/item/storage/belt/leather/adventurer/populate_contents()
+	new /obj/item/needle/thorn(src)
+	new /obj/item/natural/cloth(src)
 
 //Garrison's belt starts with a simple needle, and a key to their hideout.
 
-/obj/item/storage/belt/leather/fgarrison
-	populate_contents = list(
-		/obj/item/needle/thorn,
-		/obj/item/key/forrestgarrison,
-	)
+/obj/item/storage/belt/leather/fgarrison/populate_contents()
+	new /obj/item/needle/thorn(src)
+	new /obj/item/key/forrestgarrison(src)
 
-/obj/item/storage/belt/leather/townguard //they get their keys + dagger there
-	populate_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special,
-		/obj/item/storage/keyring/guard,
-	)
+//they get their keys + dagger there
+/obj/item/storage/belt/leather/townguard/populate_contents()
+	new /obj/item/weapon/knife/dagger/steel/special(src)
+	new /obj/item/storage/keyring/guard(src)
 
 // Bandit's belt starts with a bandage and a key to their guildhall.
-/obj/item/storage/belt/leather/mercenary
-	populate_contents = list(
-		/obj/item/natural/cloth,
-		/obj/item/key/mercenary,
-	)
+/obj/item/storage/belt/leather/mercenary/populate_contents()
+	new /obj/item/natural/cloth(src)
+	new /obj/item/key/mercenary(src)
 
 /obj/item/storage/belt/leather/mercenary/shalal
 	name = "shalal belt"
@@ -74,7 +61,6 @@
 /obj/item/storage/belt/leather/mercenary/black
 	name = "black belt"
 	icon_state = "blackbelt"
-
 
 /obj/item/storage/belt/leather/plaquegold
 	name = "plaque belt"
@@ -115,7 +101,7 @@
 	item_state = "rope"
 	color = "#b9a286"
 	salvage_result = /obj/item/rope
-	component_type = /datum/component/storage/concrete/grid/belt/cloth
+	storage_type = /datum/storage/belt/cloth
 
 /obj/item/storage/belt/leather/rope/attack_self(mob/user, params)
 	. = ..()
@@ -144,7 +130,7 @@
 	desc = "A simple cloth sash."
 	icon_state = "cloth"
 	salvage_result = /obj/item/natural/cloth
-	component_type = /datum/component/storage/concrete/grid/belt/cloth
+	storage_type = /datum/storage/belt/cloth
 
 /obj/item/storage/belt/leather/cloth/attack_self(mob/user, params)
 	. = ..()
@@ -172,88 +158,48 @@
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
 	fiber_salvage = FALSE
-	component_type = /datum/component/storage/concrete/grid/coin_pouch
+	storage_type = /datum/storage/coin_pouch
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/storage/belt/pouch/coins/mid/Initialize()
+/obj/item/storage/belt/pouch/coins/mid/populate_contents()
 	. = ..()
-	var/obj/item/coin/silver/pile/H = new(loc)
-	if(istype(H))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-			qdel(H)
-	var/obj/item/coin/copper/pile/C = new(loc)
-	if(istype(C))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, C, null, TRUE, TRUE))
-			qdel(C)
+	new /obj/item/coin/copper/pile(src)
+	new /obj/item/coin/silver/pile(src)
 
-/obj/item/storage/belt/pouch/coins/poor/Initialize()
-	. = ..()
-	var/obj/item/coin/copper/pile/H = new(loc)
-	if(istype(H))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-			qdel(H)
+/obj/item/storage/belt/pouch/coins/poor/populate_contents()
+	new /obj/item/coin/copper/pile(src)
+	new /obj/item/coin/copper/pile(src)
 	if(prob(50))
-		H = new(loc)
-		if(istype(H))
-			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-				qdel(H)
+		new /obj/item/coin/copper/pile(src)
 
-/obj/item/storage/belt/pouch/coins/rich/Initialize()
-	. = ..()
-	var/obj/item/coin/silver/pile/H = new(loc)
-	if(istype(H))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-			qdel(H)
-	H = new(loc)
-	if(istype(H))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-			qdel(H)
+/obj/item/storage/belt/pouch/coins/rich/populate_contents()
+	new /obj/item/coin/silver/pile(src)
+	new /obj/item/coin/silver/pile(src)
 	if(prob(50))
-		H = new(loc)
-		if(istype(H))
-			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-				qdel(H)
+		new /obj/item/coin/silver/pile(src)
 
-/obj/item/storage/belt/pouch/coins/veryrich/Initialize()
-	. = ..()
-	var/obj/item/coin/gold/pile/H = new(loc)
-	if(istype(H))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-			qdel(H)
-	H = new(loc)
-	if(istype(H))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-			qdel(H)
+/obj/item/storage/belt/pouch/coins/veryrich/populate_contents()
+	new /obj/item/coin/gold/pile(src)
+	new /obj/item/coin/gold/pile(src)
 	if(prob(50))
-		H = new(loc)
-		if(istype(H))
-			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-				qdel(H)
+		new /obj/item/coin/gold/pile(src)
 
-/obj/item/storage/belt/pouch/bullets
-	populate_contents = list(
-		/obj/item/ammo_casing/caseless/bullet,
-		/obj/item/ammo_casing/caseless/bullet,
-		/obj/item/ammo_casing/caseless/bullet,
-		/obj/item/ammo_casing/caseless/bullet,
-	)
+/obj/item/storage/belt/pouch/bullets/populate_contents()
+	for(var/i in 1 to 4)
+		new /obj/item/ammo_casing/caseless/bullet(src)
 
 /obj/item/storage/belt/pouch/cloth
 	name = "cloth pouch"
 	desc = "Usually used for holding small amount of coins."
 	icon_state = "clothpouch"
 	salvage_result = /obj/item/natural/cloth
-	component_type = /datum/component/storage/concrete/grid/coin_pouch/cloth
+	storage_type = /datum/storage/coin_pouch/cloth
 
 //Poison darts pouch
-/obj/item/storage/belt/pouch/pdarts
-	populate_contents = list(
-		/obj/item/ammo_casing/caseless/dart/poison,
-		/obj/item/ammo_casing/caseless/dart/poison,
-		/obj/item/ammo_casing/caseless/dart/poison,
-		/obj/item/ammo_casing/caseless/dart/poison,
-	)
+/obj/item/storage/belt/pouch/pdarts/populate_contents()
+	for(var/i in 1 to 4)
+		new /obj/item/ammo_casing/caseless/dart/poison(src)
 
 /obj/item/storage/backpack/satchel
 	name = "satchel"
@@ -268,7 +214,7 @@
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
 	alternate_worn_layer = UNDER_CLOAK_LAYER
-	component_type = /datum/component/storage/concrete/grid/satchel
+	storage_type = /datum/storage/satchel
 
 /obj/item/storage/backpack/satchel/cloth
 	name = "cloth knapsack"
@@ -276,13 +222,11 @@
 	icon_state = "clothbackpack"
 	item_state = "clothbackpack"
 	salvage_result = /obj/item/natural/cloth
-	component_type = /datum/component/storage/concrete/grid/satchel/cloth
+	storage_type = /datum/storage/satchel/cloth
 
-/obj/item/storage/backpack/satchel/heartfelt
-	populate_contents = list(
-		/obj/item/natural/feather,
-		/obj/item/paper/heartfelt,
-	)
+/obj/item/storage/backpack/satchel/heartfelt/populate_contents()
+	new /obj/item/natural/feather(src)
+	new /obj/item/paper/heartfelt(src)
 
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
@@ -317,7 +261,7 @@
 	max_integrity = 300
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	component_type = /datum/component/storage/concrete/grid/backpack
+	storage_type = /datum/storage/backpack
 
 /obj/item/storage/backpack/backpack/Initialize()
 	. = ..()
@@ -336,7 +280,7 @@
 	name = "humdrum"
 	desc = "A absurdly oversized backpack with complex bronze pipework coursing through it. It hums and vibrates constantly."
 	sewrepair = TRUE //Kobold thing, trust.
-	component_type = /datum/component/storage/concrete/grid/porter
+	storage_type = /datum/storage/porter
 
 /obj/item/storage/backpack/satchel/surgbag
 	name = "surgery bag"
@@ -344,19 +288,19 @@
 	item_state = "doctorbag"
 	icon_state = "doctorbag"
 	attack_verb = list("beats", "bludgeons")
-	populate_contents = list(
-		/obj/item/needle/blessed,
-		/obj/item/weapon/surgery/scalpel,
-		/obj/item/weapon/surgery/saw,
-		/obj/item/weapon/surgery/hemostat,
-		/obj/item/weapon/surgery/hemostat,
-		/obj/item/weapon/surgery/retractor,
-		/obj/item/weapon/surgery/bonesetter,
-		/obj/item/weapon/surgery/cautery,
-		/obj/item/natural/worms/leech/parasite,
-		/obj/item/weapon/surgery/hammer,
-	)
-	component_type = /datum/component/storage/concrete/grid/surgery_bag
+	storage_type = /datum/storage/surgery_bag
+
+/obj/item/storage/backpack/satchel/surgbag/populate_contents()
+	new /obj/item/needle/blessed(src)
+	new /obj/item/weapon/surgery/scalpel(src)
+	new /obj/item/weapon/surgery/saw(src)
+	new /obj/item/weapon/surgery/hemostat(src)
+	new /obj/item/weapon/surgery/hemostat(src)
+	new /obj/item/weapon/surgery/retractor(src)
+	new /obj/item/weapon/surgery/bonesetter(src)
+	new /obj/item/weapon/surgery/cautery(src)
+	new /obj/item/natural/worms/leech/parasite(src)
+	new /obj/item/weapon/surgery/hammer(src)
 
 /obj/item/surgeontoolspawner
 	name = "set of surgery tools"
@@ -374,28 +318,24 @@
 	new /obj/item/weapon/surgery/hammer(loc)
 	qdel(src)
 
-/obj/item/storage/backpack/satchel/surgbag/shit
-	populate_contents = list(
-		/obj/item/needle,
-		/obj/item/weapon/surgery/scalpel,
-		/obj/item/weapon/surgery/saw,
-		/obj/item/weapon/surgery/hemostat,
-		/obj/item/weapon/surgery/hemostat,
-		/obj/item/weapon/surgery/retractor,
-		/obj/item/weapon/surgery/bonesetter,
-		/obj/item/weapon/surgery/cautery,
-		/obj/item/natural/worms/leech,
-		/obj/item/natural/worms/leech,
-		/obj/item/weapon/surgery/hammer,
-		/obj/item/natural/bundle/fibers/full,
-	)
+/obj/item/storage/backpack/satchel/surgbag/shit/populate_contents()
+	new /obj/item/needle(src)
+	new /obj/item/weapon/surgery/scalpel(src)
+	new /obj/item/weapon/surgery/saw(src)
+	new /obj/item/weapon/surgery/hemostat(src)
+	new /obj/item/weapon/surgery/hemostat(src)
+	new /obj/item/weapon/surgery/retractor(src)
+	new /obj/item/weapon/surgery/bonesetter(src)
+	new /obj/item/weapon/surgery/cautery(src)
+	new /obj/item/weapon/surgery/hammer(src)
+	new /obj/item/natural/worms/leech(src)
+	new /obj/item/natural/worms/leech(src)
+	new /obj/item/natural/bundle/fibers/full(src)
 
-/obj/item/storage/backpack/satchel/musketeer
-	populate_contents = list(
-		/obj/item/weapon/knife/dagger/bayonet,
-		/obj/item/storage/belt/pouch/coins/poor,
-		/obj/item/reagent_containers/glass/bottle/aflask
-	)
+/obj/item/storage/backpack/satchel/musketeer/populate_contents()
+	new /obj/item/weapon/knife/dagger/bayonet(src)
+	new /obj/item/reagent_containers/glass/bottle/aflask(src)
+	new /obj/item/storage/belt/pouch/coins/poor(src)
 
 /obj/item/storage/belt/leather/knifebelt
 	name = "tossblade belt"
@@ -405,105 +345,63 @@
 	strip_delay = 20
 	var/max_storage = 8
 	sewrepair = TRUE
-	component_type = /datum/component/storage/concrete/grid/belt/knife_belt
+	storage_type = /datum/storage/belt/knife_belt
 	empty_when_dropped = FALSE
 
-/obj/item/storage/belt/leather/knifebelt/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
-
-	. = TRUE
-	if(length(contents) >= max_storage)
-		to_chat(user, span_warning("Your [src.name] is full!"))
-		return
-	var/turf/T = attacked_atom
-	to_chat(user, span_notice("You begin to gather the ammunition..."))
-	for(var/obj/item/weapon/knife/throwingknife/knife in T.contents)
-		if(do_after(user, 5 DECISECONDS))
-			if(!eat_knife(knife))
-				break
-
-/obj/item/storage/belt/leather/knifebelt/proc/eat_knife(obj/A)
-	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))
-		if(length(contents) < max_storage)
-			return SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, FALSE)
-
 /obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, params)
-	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))
-		if(SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, user, TRUE))
-			to_chat(usr, span_notice("I discreetly slip [A] into [src]."))
-		else
-			to_chat(loc, span_warning("Full!"))
+	if(istype(A, /obj/item/weapon/knife/throwingknife))
+		if(atom_storage.attempt_insert(A, user))
+			to_chat(user, span_notice("I discreetly slip [A] into [src]."))
 		return TRUE
 	. = ..()
 
 /obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, params)
-	if(length(contents))
-		var/list/knives = list()
-		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE_TYPE, /obj/item/weapon/knife/throwingknife, drop_location(), amount = 1, check_adjacent = TRUE, user = user, inserted = knives)
-		for(var/knife in knives)
-			if(!user.put_in_active_hand(knife))
-				break
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	. = ..()
+	if(length(contents))
+		return
+	var/list/knives = list()
+	atom_storage.remove_type(/obj/item/weapon/knife/throwingknife, get_turf(user), 1, TRUE, user, knives)
+	for(var/knife in knives)
+		if(!user.put_in_active_hand(knife))
+			break
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/storage/belt/leather/knifebelt/examine(mob/user)
 	. = ..()
 	if(length(contents))
 		. += span_notice("[length(contents)] inside.")
 
-/obj/item/storage/belt/leather/knifebelt/iron/Initialize()
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/iron/populate_contents()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/A = new(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
-			qdel(A)
+		new /obj/item/weapon/knife/throwingknife(src)
 
-/obj/item/storage/belt/leather/knifebelt/steel/Initialize()
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/steel/populate_contents()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/steel/A = new(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
-			qdel(A)
+		new /obj/item/weapon/knife/throwingknife/steel(src)
 
-/obj/item/storage/belt/leather/knifebelt/psydon/Initialize()
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/psydon/populate_contents()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/psydon/A = new(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
-			qdel(A)
+		new /obj/item/weapon/knife/throwingknife/psydon(src)
 
 /obj/item/storage/belt/leather/knifebelt/black
 	icon_state = "blackknife"
 	item_state = "blackknife"
 
-/obj/item/storage/belt/leather/knifebelt/black/iron/Initialize()
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/black/iron/populate_contents()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/A = new(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
-			qdel(A)
+		new /obj/item/weapon/knife/throwingknife(src)
 
-/obj/item/storage/belt/leather/knifebelt/black/steel/Initialize()
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/black/steel/populate_contents()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/steel/A = new(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
-			qdel(A)
+		new /obj/item/weapon/knife/throwingknife/steel(src)
 
-/obj/item/storage/belt/leather/knifebelt/black/psydon/Initialize()
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/black/psydon/populate_contents()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/psydon/A = new(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
-			qdel(A)
+		new /obj/item/weapon/knife/throwingknife/psydon(src)
 
-/obj/item/storage/belt/leather/knifebelt/black/rous/Initialize()
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/black/rous/populate_contents()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/rous/A = new(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
-			qdel(A)
+		new /obj/item/weapon/knife/throwingknife/rous(src)
 
 ///////////////////////////////////////////////
 
@@ -521,7 +419,7 @@
 	bloody_icon_state = "bodyblood"
 	anvilrepair = /datum/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
-	component_type = /datum/component/storage/concrete/grid/headhook
+	storage_type = /datum/storage/headhook
 
 /obj/item/storage/hip/headhook/bronze
 	name = "bronze head hook"
@@ -537,8 +435,7 @@
 	bloody_icon_state = "bodyblood"
 	anvilrepair = /datum/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/bronze
-	component_type = /datum/component/storage/concrete/grid/headhook/bronze
-
+	storage_type = /datum/storage/headhook/bronze
 
 /obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, params)
 	. = ..()
@@ -564,4 +461,4 @@
 	bloody_icon_state = "bodyblood"
 	anvilrepair = /datum/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
-	component_type = /datum/component/storage/concrete/grid/headhook/bronze
+	storage_type = /datum/storage/headhook/bronze

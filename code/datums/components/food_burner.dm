@@ -27,8 +27,9 @@
 	src.can_burn = can_burn
 
 	START_PROCESSING(SSprocessing, src)
+
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
-	RegisterSignal(parent, COMSIG_STORAGE_REMOVED, PROC_REF(on_item_removed))
+	RegisterSignal(parent, COMSIG_STORAGE_REMOVED_ITEM, PROC_REF(on_item_removed))
 	RegisterSignal(parent, COMSIG_CONTAINER_CRAFT_COMPLETE, PROC_REF(on_craft_complete))
 
 /**
@@ -103,13 +104,12 @@
 			show_burning_effects(food, BURN_STAGE_CRITICAL)
 
 		// Check if fully burned
-		if(burn_progress >= 1.0 && !(food in processed_items))
+		if(burn_progress >= 1.0)
 			foods_to_burn += food
 
 	// Burn any foods that have completed their progress
 	for(var/obj/item/reagent_containers/food/snacks/food in foods_to_burn)
 		burn_food(food)
-
 
 /**
  * Show visual and sound effects for a burning food item
@@ -160,6 +160,7 @@
  */
 /datum/component/food_burner/proc/burn_food(obj/item/reagent_containers/food/snacks/food)
 	if(QDELETED(food))
+		tracked_foods -= food
 		return
 
 	var/obj/container = parent
@@ -171,17 +172,17 @@
 		smoke.set_up(0, container)
 		smoke.start()
 
-	SEND_SIGNAL(container, COMSIG_TRY_STORAGE_TAKE, food, get_turf(container))
+	container.atom_storage.attempt_remove(food, get_turf(container))
+
 	// Visual and sound effects
 	playsound(T, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE)
 	container.visible_message(span_danger("[food] inside [container] has burned to a crisp!"))
 
 	// Create the burned food item
 	var/obj/item/reagent_containers/food/snacks/badrecipe/burned = new(get_turf(container))
-	SEND_SIGNAL(container, COMSIG_TRY_STORAGE_INSERT, burned, null, null, TRUE, TRUE)
+	container.atom_storage.attempt_insert(burned, override = TRUE)
 
-	// Mark the original as processed and remove from tracking
-	processed_items += food
+	// Mark the remove from tracking
 	tracked_foods -= food
 
 	// Delete the original food

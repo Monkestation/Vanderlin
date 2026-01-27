@@ -60,7 +60,7 @@
 
 /obj/item/clothing/cloak/ordinatorcape/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	create_storage(type = /datum/storage/cloak)
 
 /obj/item/clothing/cloak/absolutionistrobe
 	name = "absolver's robe"
@@ -75,4 +75,4 @@
 
 /obj/item/clothing/cloak/absolutionistrobe/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	create_storage(type = /datum/storage/cloak)

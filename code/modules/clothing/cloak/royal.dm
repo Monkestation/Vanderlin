@@ -18,15 +18,11 @@
 
 /obj/item/clothing/cloak/lordcloak/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak/lord)
+	create_storage(type = /datum/storage/cloak/lord)
 
-/obj/item/clothing/cloak/lordcloak/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+/obj/item/clothing/cloak/lordcloak/dropped(mob/user, silent)
+	. = ..()
+	atom_storage?.remove_all(get_turf(src))
 
 /obj/item/clothing/cloak/lordcloak/ladycloak
 	name = "ladylike shortcloak"

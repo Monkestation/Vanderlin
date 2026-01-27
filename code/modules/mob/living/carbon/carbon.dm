@@ -117,13 +117,6 @@
 		if(I.item_flags & SURGICAL_TOOL)
 			to_chat(user, span_warning("You're unable to perform surgery!"))
 			return TRUE
-	/*
-	for(var/datum/surgery/S in surgeries)
-		if(!(body_position != LYING_DOWN) || !S.lying_required)
-			if(S.self_operable || user != src)
-				if(S.next_step(user, user.used_intent))
-					return 1
-	*/
 	return ..()
 
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
