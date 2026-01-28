@@ -690,7 +690,7 @@
 				to_chat(user, "You start grabbing [item] from your bag.")
 
 				if(do_after(user, storage_use_time, item))
-					item.loc.atom_storage.attempt_remove(item, user.loc, TRUE)
+					item.loc.atom_storage?.remove_single(user, item, get_turf(user), silent = TRUE)
 
 					if(put_items_in_hand)
 						user.put_in_active_hand(item)

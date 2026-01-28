@@ -131,7 +131,7 @@
 	if(!cig)
 		to_chat(user, "<span class='notice'>There are no [contents_tag]s left in the pack.</span>")
 		return
-	atom_storage.attempt_remove(cig, get_turf(user))
+	atom_storage.remove_single(user, cig, get_turf(user))
 	user.put_in_hands(cig)
 	contents -= cig
 	to_chat(user, "<span class='notice'>You take \a [cig] out of the pack.</span>")

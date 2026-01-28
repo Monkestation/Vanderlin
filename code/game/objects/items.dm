@@ -715,7 +715,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		//We want the pickup animation to play even if we're moving the item between movables. Unless the mob is not located on a turf.
 		if(isturf(user.loc))
 			storage_turf = get_turf(loc)
-		if(!loc.atom_storage.attempt_remove(src, user, TRUE))
+		if(!loc.atom_storage.remove_single(user, src, get_turf(user), silent = TRUE))
 			return
 
 	if(QDELETED(src)) //moving it out of the storage destroyed it.
@@ -1060,8 +1060,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			return
 
 	if(loc.atom_storage)
-		return loc.atom_storage.attempt_remove(src, newLoc, silent = TRUE)
-
+		return loc.atom_storage.remove_single(removing, src, newLoc, silent = TRUE)
 	return FALSE
 
 /obj/item/proc/get_belt_overlay() //Returns the icon used for overlaying the object on a belt

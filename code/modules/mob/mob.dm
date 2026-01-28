@@ -1020,7 +1020,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * FORBID_TELEKINESIS_REACH - If telekinesis is forbidden to perform action from a distance (ex. canisters are blacklisted from telekinesis manipulation)
  * * ALLOW_RESTING - If resting on the floor is allowed to perform action ()
 **/
-/mob/proc/can_perform_action(atom/movable/target, action_bitflags)
+/mob/proc/can_perform_action(atom/target, action_bitflags)
 	return
 
 ///Can this mob use storage
@@ -1032,6 +1032,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * If exact match is set, then all our factions must match exactly
  */
 /atom/movable/proc/faction_check_mob(mob/target, exact_match)
+	return
 
 /mob/faction_check_mob(mob/target, exact_match)
 	if(exact_match) //if we need an exact match, we need to do some bullfuckery.

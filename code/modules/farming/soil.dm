@@ -146,7 +146,7 @@
 			return FALSE
 
 		to_plant = pick(seeds)
-		if(!attacking_item.atom_storage?.attempt_remove(to_plant, get_turf(user)))
+		if(!attacking_item.atom_storage.remove_single(user, to_plant, get_turf(user)))
 			return FALSE
 	else if(istype(attacking_item, /obj/item/neuFarm/seed))
 		to_plant = attacking_item

@@ -172,8 +172,6 @@
 		smoke.set_up(0, container)
 		smoke.start()
 
-	container.atom_storage.attempt_remove(food, get_turf(container))
-
 	// Visual and sound effects
 	playsound(T, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE)
 	container.visible_message(span_danger("[food] inside [container] has burned to a crisp!"))

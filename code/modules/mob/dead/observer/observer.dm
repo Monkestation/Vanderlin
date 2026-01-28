@@ -937,7 +937,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	client.prefs.apply_character_randomization_prefs()
 
-/mob/dead/observer/can_perform_action(atom/movable/target, action_bitflags)
+/mob/dead/observer/can_perform_action(atom/target, action_bitflags)
 	return IsAdminGhost(usr)
 
 /mob/dead/observer/is_literate()

@@ -1802,7 +1802,7 @@
 /mob/living/can_hold_items(obj/item/I)
 	return ..() && usable_hands
 
-/mob/living/can_perform_action(atom/movable/target, action_bitflags)
+/mob/living/can_perform_action(atom/target, action_bitflags)
 	if(!istype(target))
 		CRASH("Missing target arg for can_perform_action")
 
@@ -1812,12 +1812,6 @@
 	if(!(mobility_flags & MOBILITY_UI) && !(action_bitflags & ALLOW_RESTING))
 		to_chat(src, span_warning("You can't do that right now!"))
 		return FALSE
-
-	// // NEED_HANDS is already checked by MOBILITY_UI for humans so this is for silicons
-	// if((action_bitflags & NEED_HANDS))
-	// 	if(!can_hold_items(isitem(target) ? target : null)) // almost redundant if it weren't for mobs
-	// 		to_chat(src, span_warning("You don't have the physical ability to do this!"))
-	// 		return FALSE
 
 	if(!Adjacent(target) && (target.loc != src))
 		if((action_bitflags & FORBID_TELEKINESIS_REACH))
