@@ -5211,10 +5211,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"czX" = (
-/obj/structure/fake_machine/atm,
-/turf/open/floor/cobblerock,
-/area/outdoors/town)
 "cAi" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
@@ -21239,10 +21235,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/merc_guild)
-"kNt" = (
-/obj/structure/fake_machine/stockpile,
-/turf/open/floor/cobblerock,
-/area/outdoors/town)
 "kNu" = (
 /turf/open/water/cleanshallow,
 /area/indoors/soilsons)
@@ -44311,11 +44303,6 @@
 "woz" = (
 /turf/closed/wall/mineral/craftstone,
 /area/under/town/sewer)
-"woW" = (
-/obj/structure/flora/grass/bush_meagre/tundra,
-/obj/structure/flora/grass/herb/cursedrosa/spreader/large/heavy,
-/turf/open/floor/grass/cold,
-/area/outdoors/town)
 "wpd" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -105550,10 +105537,10 @@ pmI
 xjx
 rTo
 fzE
-kNt
+omp
 huA
 huA
-woW
+leA
 lGv
 kzV
 kzV
@@ -106358,7 +106345,7 @@ omp
 bQt
 rjg
 fzE
-czX
+omp
 omp
 omp
 qme
@@ -184923,7 +184910,7 @@ jiV
 jiV
 jiV
 jiV
-lvO
+eAP
 nHb
 nHb
 nHb
@@ -185727,7 +185714,7 @@ nHb
 nHb
 nHb
 jSq
-jSq
+hAa
 jSq
 hYT
 lvO
@@ -186135,7 +186122,7 @@ jSq
 jSq
 sPh
 lvO
-lvO
+eAP
 nHb
 nHb
 nHb
@@ -186537,7 +186524,7 @@ nHb
 nHb
 jSq
 jSq
-sPh
+hYT
 lvO
 lvO
 nHb
@@ -186740,7 +186727,7 @@ nHb
 jSq
 jSq
 sPh
-eAP
+lvO
 lvO
 nHb
 nHb
@@ -187143,7 +187130,7 @@ nHb
 nHb
 jSq
 jSq
-sPh
+hYT
 lvO
 lvO
 nHb
@@ -187750,7 +187737,7 @@ jSq
 jSq
 jSq
 sPh
-lvO
+eAP
 lvO
 nHb
 nHb
@@ -188555,7 +188542,7 @@ nHb
 nHb
 nHb
 jSq
-jSq
+hAa
 jSq
 sPh
 eAP
@@ -226329,7 +226316,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -226531,7 +226518,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -226733,7 +226720,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -226935,7 +226922,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -227137,7 +227124,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -227339,7 +227326,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -227541,7 +227528,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -227743,7 +227730,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
@@ -227945,7 +227932,7 @@ nHb
 nHb
 nHb
 nHb
-fnS
+nHb
 fnS
 fnS
 fnS
