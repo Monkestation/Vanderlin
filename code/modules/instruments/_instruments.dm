@@ -119,7 +119,7 @@
 			bypass_checks = TRUE
 		if(user.inspiration)
 			if(target_audience_only)
-				if(user.inspiration.check_in_audience(listener))
+				if(bypass_checks || user.inspiration.check_in_audience(listener))
 					listener.apply_status_effect(instrument_buff)
 				continue
 			else if(user.inspiration.check_in_audience(listener))
