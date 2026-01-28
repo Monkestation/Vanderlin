@@ -1085,7 +1085,7 @@
 
 /turf/open/floor/sand
 	name = "gravelly sand"
-	desc = "Dark grey gravel which has been ground smooth by water over aeons."
+	desc = "Dark grey gravel. Or ash. It's hard to tell anymore."
 	icon_state = "gravel"
 	icon = 'icons/turf/natural/soils.dmi'
 	layer = MID_TURF_LAYER

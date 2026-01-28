@@ -267,7 +267,7 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(200)
+		C.add_nausea(50)
 		C.add_stress(/datum/stress_event/rotfood)
 
 /datum/status_effect/debuff/bleeding
