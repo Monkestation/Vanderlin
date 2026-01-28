@@ -1,3 +1,4 @@
+// These storages should be no_interface, as to not use the grid. This means they can only be accessed randomly
 /datum/storage/no_interface/scabbard
 	max_slots = 1
 	rustle_sound = 'sound/foley/equip/scabbard_holster.ogg'
