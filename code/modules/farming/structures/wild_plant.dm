@@ -34,7 +34,7 @@
 	return ..()
 
 /obj/structure/wild_plant/Crossed(mob/living/carbon/human/H)
-	playsound(loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 
 /obj/structure/wild_plant/proc/try_spread()
 	var/list/dirs = GLOB.cardinals.Copy()

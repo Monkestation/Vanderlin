@@ -137,7 +137,7 @@
 	var/voice_type = null //  defines what sound pack we use. keep this null so mobs resort to their typical gender typing - preferences set this
 
 	blocks_emissive = NONE
-	var/datum/charflaw/charflaw
+	var/list/datum/quirk/quirks = list()
 
 	/// Assoc list of culinary preferences of the mob
 	var/list/culinary_preferences = list()

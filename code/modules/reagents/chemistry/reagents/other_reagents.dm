@@ -18,18 +18,15 @@
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		var/datum/blood_type/blood = L.get_blood_type()
-		if(blood?.reagent_type == type && (method == INJECT || (method == INGEST && C.dna && C.dna.species && (DRINKSBLOOD in C.dna.species.species_traits))))
-			if(!(data["blood_type"] in blood.compatible_types))
-				C.reagents.add_reagent(/datum/reagent/toxin, reac_volume * 0.5)
-			else
+		if(blood?.reagent_type == type && ((method & INJECT) || ((method & INGEST) && C.dna && C.dna.species && (DRINKSBLOOD in C.dna.species.species_traits))))
+			if((data["blood_type"] in blood.compatible_types))
 				C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 
-	if((method == INGEST) && L.clan)
+	if((method & INGEST) && L.clan)
 		L.adjust_bloodpool(reac_volume)
 		L.clan.handle_bloodsuck(BLOOD_PREFERENCE_FANCY)
-	if(method == INJECT)
+	if((method & INJECT) || (HAS_TRAIT(L, TRAIT_SANGUINE) && (method & INGEST)))
 		SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
-
 
 /datum/reagent/blood/on_merge(list/mix_data)
 	. = ..()
@@ -89,10 +86,6 @@
 
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
-
-/datum/reagent/water/gross/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method == INGEST) // Make sure you DRANK the toxic water before giving damage
-		..()
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M)
 	..()
@@ -159,20 +152,24 @@
 	O.extinguish()
 	O.acid_level = 0
 
-
 	if(istype(O, /obj/item/bin))
 		var/obj/item/bin/RB = O
 		if(!RB.kover)
 			if(RB.reagents)
 				RB.reagents.add_reagent(src.type, reac_volume)
-
 	else if(istype(O, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/RB = O
 		if(RB.reagents)
 			RB.reagents.add_reagent(src.type, reac_volume)
-
 	else if(istype(O, /obj/item/natural/cloth))
 		O.wash(CLEAN_WASH)
+	else if(istype(O, /obj/item/clothing))
+		var/obj/item/clothing/O_clothing = O
+		if(O_clothing.wetable)
+			if(!holder.has_reagent(/datum/reagent/water/gross))
+				O_clothing.wet.add_water(20, dirty = FALSE)
+			else
+				O_clothing.wet.add_water(20, dirty = TRUE)
 /*
  *	Water reaction to a mob
  */
@@ -180,9 +177,11 @@
 /datum/reagent/water/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with water can help put them out!
 	if(!istype(M))
 		return
-	if(method == TOUCH)
-		M.adjust_fire_stacks(-(reac_volume / 10))
-		M.SoakMob(FULL_BODY)
+	if(method & TOUCH)
+		var/turf/turf_check = get_turf(M)
+		if(!istype(turf_check, /turf/open/water))
+			M.adjust_fire_stacks(-(reac_volume / 10))
+			M.SoakMob(FULL_BODY)
 	return ..()
 
 
@@ -243,7 +242,7 @@
 	return ..()
 
 /datum/reagent/yuck/on_transfer(atom/A, method=TOUCH, trans_volume)
-	if(method == INGEST || !iscarbon(A))
+	if((method & INGEST) || !iscarbon(A))
 		return ..()
 
 	A.reagents.remove_reagent(type, trans_volume)
@@ -263,7 +262,7 @@
 	glass_desc = ""
 
 /datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
-	if(method == TOUCH || method == VAPOR)
+	if((method & TOUCH) || (method & VAPOR))
 		M.adjust_fire_stacks(reac_volume / 10)
 		return
 	..()

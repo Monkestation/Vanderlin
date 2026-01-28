@@ -30,7 +30,7 @@
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	playsound(src.loc, 'sound/items/smokebomb.ogg' , 50)
+	playsound(src, 'sound/items/smokebomb.ogg' , 50)
 	var/radius = 3
 	var/datum/effect_system/smoke_spread/S = new datum_to_spread
 	S.set_up(radius, T)
@@ -100,7 +100,7 @@
 		to_chat(user, span_notice("I pull the holy pin... but it doesn't release! Bring forth the Book of Armaments!"))
 		return
 	to_chat(user, span_userdanger("I pull the holy pin! Count to three!"))
-	playsound(get_turf(user), 'sound/foley/industrial/clunk.ogg', 40, FALSE, -1)
+	playsound(user, 'sound/foley/industrial/clunk.ogg', 40, FALSE, -1)
 	icon_state = "[icon_state]_armed"
 	primed = TRUE
 	START_PROCESSING(SSfastprocess, src)

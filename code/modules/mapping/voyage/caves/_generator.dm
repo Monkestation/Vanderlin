@@ -3,7 +3,7 @@
 	var/size_y = 100
 	var/datum/cave_biome/biome
 	var/turf/wall_turf = /turf/closed/mineral
-	var/turf/ravine_turf = /turf/open/transparent/openspace
+	var/turf/ravine_turf = /turf/open/openspace
 	var/turf/lava_turf = /turf/open/lava
 
 	// Cave generation parameters
@@ -294,7 +294,7 @@
 					"level" = 0
 				))
 			else
-				T.ChangeTurf(wall_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+				T.ChangeTurf(wall_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 			tiles_processed++
 			if(tiles_processed % 200 == 0)
@@ -321,7 +321,7 @@
 		var/turf/T = locate(start_x + x, start_y + y, start_z)
 		if(T)
 			var/ore_turf = lower_ore_placements[coord]
-			T.ChangeTurf(ore_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+			T.ChangeTurf(ore_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 		tiles_processed++
 		if(tiles_processed % 100 == 0)
@@ -356,7 +356,7 @@
 					"level" = 1
 				))
 			else
-				T.ChangeTurf(wall_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+				T.ChangeTurf(wall_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 			tiles_processed++
 			if(tiles_processed % 200 == 0)
@@ -383,7 +383,7 @@
 		var/turf/T = locate(start_x + x, start_y + y, start_z + 1)
 		if(T)
 			var/ore_turf = upper_ore_placements[coord]
-			T.ChangeTurf(ore_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+			T.ChangeTurf(ore_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 		tiles_processed++
 		if(tiles_processed % 100 == 0)
@@ -501,7 +501,7 @@
 					"level" = 0
 				))
 			else
-				T.ChangeTurf(wall_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+				T.ChangeTurf(wall_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 	// Generate ore veins for lower level
 	var/list/lower_wall_coords = list()
@@ -521,7 +521,7 @@
 		var/turf/T = locate(start_x + x, start_y + y, start_z)
 		if(T)
 			var/ore_turf = lower_ore_placements[coord]
-			T.ChangeTurf(ore_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+			T.ChangeTurf(ore_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 	var/list/upper_valid_tiles = list()
 	for(var/x = 0 to size_x - 1)
@@ -549,7 +549,7 @@
 					"level" = 1
 				))
 			else
-				T.ChangeTurf(wall_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+				T.ChangeTurf(wall_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 	// Generate ore veins for upper level
 	var/list/upper_wall_coords = list()
@@ -569,7 +569,7 @@
 		var/turf/T = locate(start_x + x, start_y + y, start_z + 1)
 		if(T)
 			var/ore_turf = upper_ore_placements[coord]
-			T.ChangeTurf(ore_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+			T.ChangeTurf(ore_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 	spawn_flora_poisson(upper_valid_tiles)
 	spawn_flora_poisson(lower_valid_tiles)

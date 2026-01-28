@@ -7,6 +7,7 @@
 	/// A list of all sources applying this status effect. Sources are a list of keys
 	var/list/sources = list()
 
+/// Be aware grouped status effects have the second argument as the source since duration does not matter.
 /datum/status_effect/grouped/on_creation(mob/living/new_owner, source)
 	var/datum/status_effect/grouped/existing = new_owner.has_status_effect(type)
 	if(existing)

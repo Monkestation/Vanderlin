@@ -47,11 +47,12 @@
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(I, /obj/item/kitchen/rollingpin))
 		if(isturf(loc)&& (found_table))
-			playsound(get_turf(user), 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+			playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
 			to_chat(user, span_notice("Rolling [src] into cracker dough."))
 			if(do_after(user,long_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/foodbase/hardtack_raw(loc)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.nobles_seen_servant_work()
 				qdel(src)
 		else
 			to_chat(user, span_warning("Put [src] on a table before working it!"))
@@ -95,14 +96,15 @@
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(isturf(loc)&& (found_table))
 		if(istype(I, /obj/item/kitchen/rollingpin))
-			playsound(get_turf(user), 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+			playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
 			to_chat(user, span_notice("Flattening [src]..."))
 			if(do_after(user, short_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/piedough(loc)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.nobles_seen_servant_work()
 				qdel(src)
 		if(I.get_sharpness())
-			playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
+			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
 			to_chat(user, span_notice("Cutting the dough into strips and making a prezzel..."))
 			if(do_after(user, short_cooktime, src))
 				if(user.get_skill_level(/datum/skill/craft/cooking) >= 2 || isdwarf(user))
@@ -111,7 +113,7 @@
 					new /obj/item/reagent_containers/food/snacks/foodbase/prezzel_raw(loc)
 				qdel(src)
 				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
-
+				user.nobles_seen_servant_work()
 	else
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
 
@@ -209,7 +211,7 @@
 	if(modified)
 		return TRUE
 	if(istype(I, /obj/item/reagent_containers/food/snacks/meat/salami/slice))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "[name] & salumoi"
 			desc = "[desc] A thick slice of salumoi has been added."
@@ -219,9 +221,10 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheddarslice))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "[name] & cheese"
 			desc = "[desc] Fat cheese slices has been added."
@@ -231,9 +234,10 @@
 			foodtype = GRAIN | DAIRY
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cooked/egg))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "[name] & egg"
 			add_overlay("egged")
@@ -242,9 +246,10 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/fat/salo/slice))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "[name] & salo"
 			add_overlay("salod")
@@ -253,9 +258,10 @@
 			foodtype = GRAIN | MEAT
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/butterslice))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "buttered [name]"
 			add_overlay("buttered")
@@ -264,9 +270,10 @@
 			foodtype = GRAIN | DAIRY
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "[name] & mett"
 			add_overlay("metted")
@@ -275,6 +282,7 @@
 			foodtype = GRAIN | MEAT | VEGETABLES
 			modified = TRUE
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+			user.nobles_seen_servant_work()
 			qdel(I)
 	return ..()
 
@@ -449,7 +457,8 @@
 
 /obj/item/reagent_containers/food/snacks/biscuit/good
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/biscuit/good/New()
+
+/obj/item/reagent_containers/food/snacks/biscuit/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -493,7 +502,8 @@
 /obj/item/reagent_containers/food/snacks/prezzel/good
 	name = "prezzel"
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/prezzel/good/New()
+
+/obj/item/reagent_containers/food/snacks/prezzel/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -520,7 +530,8 @@
 /obj/item/reagent_containers/food/snacks/fritter/good
 	name = "apple fritter"
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/fritter/good/New()
+
+/obj/item/reagent_containers/food/snacks/fritter/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -992,7 +1003,7 @@
 	if(modified)
 		return TRUE
 	if(istype(I, /obj/item/reagent_containers/food/snacks/butterslice))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "buttered [name]"
 			desc = "[desc] A melting pat of butter has been added."
@@ -1005,7 +1016,7 @@
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
 			qdel(I)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/spiderhoney))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "honey syruped [name]"
 			desc = "[desc] A generous serving of honey has been poured on top."
@@ -1018,7 +1029,7 @@
 			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
 			qdel(I)
 	else if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))
-		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			name = "chocolate drizzled [name]"
 			desc = "[desc] Luxurious chocolate has been drizzled on top."

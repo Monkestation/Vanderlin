@@ -17,7 +17,7 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/axesmaces = 4,
+		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/combat/wrestling = 2,
@@ -38,7 +38,7 @@
 	spawned.merctype = 9
 
 /datum/outfit/mercenary/housecarl
-	name = "Housecarl"
+	name = "Housecarl (Mercenary)"
 	head = /obj/item/clothing/head/helmet/nasal
 	shoes = /obj/item/clothing/shoes/boots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown

@@ -196,6 +196,7 @@
 		/datum/supply_pack/jewelry/silverring,
 		// Luxury goods
 		/datum/supply_pack/luxury/spectacles_golden,
+		/datum/supply_pack/luxury/spectacles_monocle,
 		// Seeds
 		/datum/supply_pack/seeds/pear,
 		/datum/supply_pack/seeds/mangosteen,

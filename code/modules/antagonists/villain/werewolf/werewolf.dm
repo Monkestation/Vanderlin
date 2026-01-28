@@ -12,15 +12,21 @@
 		"BEWARE THE BEAST!",
 		"MY LUPINE MARK!",
 	)
-	//rogue_enabled = TRUE
 	var/special_role = ROLE_WEREWOLF
-	/// Whether we are in WW form or human form
+	/// Are we currently out of our human form? Redundancy to easily check for transformation
 	var/transformed
-	/// Tracks when in the middle of either transforming into or out of WW form
-	var/transforming
-	var/untransforming
+	/// How much rage decays by while transformed
+	var/transformed_rage_decay = 5
 
 	var/wolfname = "Werevolf"
+	var/list/datum/action/werewolf_form_powers = list(
+		/datum/action/cooldown/spell/undirected/howl, \
+		/datum/action/cooldown/spell/undirected/claws, \
+		/datum/action/cooldown/spell/aoe/repulse/howl, \
+		/datum/action/cooldown/spell/woundlick, \
+		/datum/action/cooldown/spell/lunge, \
+		/datum/action/cooldown/spell/throw_target
+	)
 	COOLDOWN_DECLARE(message_cooldown)
 
 	innate_traits = list(
@@ -57,23 +63,29 @@
 	if(increase_votepwr)
 		forge_werewolf_objectives()
 	owner.current.add_spell(/datum/action/cooldown/spell/undirected/werewolf_form)
-	owner.current.RegisterSignal(owner.current, COMSIG_RAGE_BOTTOMED, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_untransform))
-	owner.current.RegisterSignal(owner.current, COMSIG_RAGE_OVERRAGE, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_transform))
+	owner.current.grant_language(/datum/language/beast)
 
-	var/datum/rage/new_rage = new
-	new_rage.grant_to(owner.current)
+	var/datum/rage/werewolf/new_rage = new
+	new_rage.grant_to_holder(owner.current)
+	RegisterSignal(owner.current, COMSIG_RAGE_BOTTOMED, PROC_REF(remove_werewolf))
+	RegisterSignal(owner.current, COMSIG_RAGE_OVERRAGE, PROC_REF(begin_transform))
 
 	wolfname = "[pick(strings("werewolf_names.json", "wolf_prefixes"))] [pick(strings("werewolf_names.json", "wolf_suffixes"))]"
 	return ..()
 
 /datum/antagonist/werewolf/on_removal()
+	remove_werewolf(forced = TRUE)
+	// owner.current should now be the original human mob, if not something is terribly wrong
 	if(!silent && owner.current)
 		to_chat(owner.current,span_danger("I am no longer a [special_role]!"))
 	owner.special_role = null
 	owner.current.remove_spell(/datum/action/cooldown/spell/undirected/werewolf_form)
-	owner.current.UnregisterSignal(owner.current, COMSIG_RAGE_BOTTOMED)
-	owner.current.UnregisterSignal(owner.current, COMSIG_RAGE_OVERRAGE)
+	owner.current.remove_language(/datum/language/beast)
 
+	UnregisterSignal(owner.current, list(COMSIG_RAGE_BOTTOMED, COMSIG_RAGE_OVERRAGE))
+	if(ishuman(owner.current))
+		var/mob/living/carbon/human/current_human = owner.current
+		QDEL_NULL(current_human.rage_datum)
 
 	return ..()
 
@@ -110,6 +122,8 @@
 
 /mob/living/carbon/human/proc/can_werewolf()
 	if(!mind)
+		return FALSE
+	if(mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/vampire))
 		return FALSE
@@ -149,7 +163,7 @@
 /mob/living/carbon/human/proc/werewolf_feed(mob/living/carbon/human/target, healing_amount = 10)
 	if(!istype(target))
 		return
-	if(src.has_status_effect(/datum/status_effect/debuff/silver_curse))
+	if(src.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
 		return
 	if(target.mind)
@@ -168,12 +182,12 @@
 
 /obj/item/clothing/armor/regenerating/skin/werewolf_skin
 	slot_flags = null
-	name = "Werevolf's skin"
+	name = "werevolf's skin"
 	desc = ""
 	icon_state = null
 	body_parts_covered = FULL_BODY
 	resistance_flags = FIRE_PROOF
-	armor = ARMOR_SCALE
+	armor = ARMOR_BRIGANDINE
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
@@ -223,7 +237,7 @@
 
 /obj/item/weapon/werewolf_claw/Initialize()
 	. = ..()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/werewolf_claw/right
 	icon_state = "claw_r"

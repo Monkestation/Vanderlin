@@ -7,8 +7,8 @@
 		return
 
 	unregister_triggers()
-	registered_signals += COMSIG_ATOM_FALL_INTERACT
-	RegisterSignal(target, COMSIG_ATOM_FALL_INTERACT, PROC_REF(on_fall))
+	registered_signals += COMSIG_MOB_FALL_IMPACT
+	RegisterSignal(target, COMSIG_MOB_FALL_IMPACT, PROC_REF(on_fall))
 
 /datum/chimeric_node/input/fall/proc/on_fall(datum/source, levels)
 	SIGNAL_HANDLER
@@ -16,6 +16,6 @@
 		return NONE
 	trigger_output((node_purity * 0.01) * tier * 3)
 
-	if(levels <= tier)
-		return FALL_INTERCEPTED
-	return NONE
+	if(levels <= tier + 1)
+		return TRUE
+	return FALSE

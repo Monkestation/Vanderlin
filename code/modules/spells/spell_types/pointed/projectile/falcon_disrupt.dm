@@ -177,8 +177,8 @@
 /obj/effect/falcon_strike_fx/proc/do_strike()
 	if(QDELETED(owner_mob))
 		owner_mob.adjustBruteLoss(10)
-		owner_mob.adjust_blindness(0.2)
-		owner_mob.Jitter(1)
+		owner_mob.adjust_temp_blindness(0.4 SECONDS)
+		owner_mob.adjust_jitter(2 SECONDS)
 		to_chat(owner_mob, span_danger("the falcon scratches your face!"))
 		playsound(src, 'sound/vo/mobs/bird/CROW_02.ogg', 70, TRUE)
 
@@ -197,7 +197,7 @@
 	if(!L)
 		return
 	falcon_fx = new /obj/effect/falcon_strike_fx(get_turf(L), L)
-	L.adjust_blurriness(4)
+	L.adjust_eye_blur(8 SECONDS)
 	L.Immobilize(2 SECONDS)
 	return TRUE
 

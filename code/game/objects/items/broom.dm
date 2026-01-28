@@ -13,7 +13,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 /obj/item/broom/apply_components()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 	AddComponent(/datum/component/two_handed, force_unwielded=2, force_wielded=4, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)))
 
 /obj/item/broom/getonmobprop(tag)
@@ -80,6 +80,7 @@
 
 	if(found_dirt)
 		playsound(user, "clothwipe", 100, TRUE)
+		user.nobles_seen_servant_work()
 
 	for(var/obj/effect/decal/cleanable/blood/O in current_item_loc)
 		add_blood_DNA(GET_ATOM_BLOOD_DNA(O))

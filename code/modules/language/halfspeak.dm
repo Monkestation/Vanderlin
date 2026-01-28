@@ -5,16 +5,15 @@
 	ask_verb = "propositions"
 	exclaim_verb = "exclaims"
 	key = "p"
-	flags = LANGUAGE_HIDE_ICON_IF_UNDERSTOOD
-	space_chance = 15
+	space_chance = 0
 	sentence_chance = 0
-	between_word_sentence_chance = 10
+	between_word_sentence_chance = 0
 	between_word_space_chance = 75
-	additional_syllable_low = -3
+	additional_syllable_low = -2
 	additional_syllable_high = 1
 	default_priority = 100
-	icon_state = "beastial"
-	spans = list(SPAN_BEAST)
+	icon_state = "halfspeak"
+	spans = list(SPAN_DWARF)
 	syllables = list("Hoo",
 "Haa",
 "Aa",

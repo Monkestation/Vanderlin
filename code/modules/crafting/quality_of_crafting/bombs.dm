@@ -2,6 +2,7 @@
 	abstract_type = /datum/repeatable_crafting_recipe/bomb
 	skillcraft = /datum/skill/craft/bombs
 	craftdiff = 2
+	minimum_skill_level = 1 // this is what locks the recipes to only bombcrafters
 	category = "Bombs"
 
 /datum/repeatable_crafting_recipe/bomb/homemade
@@ -46,7 +47,7 @@
 	requirements = list(
 		/obj/item/smokebomb = 1,
 		/obj/item/alch/herb/atropa = 1,
-		/obj/item/alch/herb/paris = 1,
+		/obj/item/alch/herb/matricaria = 1,
 	)
 
 	starting_atom = /obj/item/alch/herb/atropa
@@ -72,18 +73,22 @@
 	craftdiff = 2
 	subtypes_allowed = TRUE
 
-/datum/repeatable_crafting_recipe/bomb/pipe_bomb
-	name = "homemade pipe bomb"
+
+/datum/repeatable_crafting_recipe/bomb/homemade
+	name = "homemade bottle bomb"
 
 	requirements = list(
-		/obj/item/natural/fibers = 1,
-		/obj/item/reagent_containers/powder/blastpowder = 2,
+		/obj/item/natural/cloth = 1,
+		/obj/item/reagent_containers/food/snacks/produce/fyritius = 1,
 		/obj/item/reagent_containers/glass/bottle = 1,
 	)
+	reagent_requirements = list(
+		/datum/reagent/consumable/ethanol = 10
+	)
 
-	starting_atom = /obj/item/natural/fibers
+	starting_atom = /obj/item/natural/cloth
 	attacked_atom = /obj/item/reagent_containers/glass/bottle
-	output = /obj/item/explosive
+	output = /obj/item/explosive/bottle/homemade
 	craft_time = 1 SECONDS
 	subtypes_allowed = TRUE
 	reagent_subtypes_allowed = TRUE
@@ -151,4 +156,41 @@
 	attacked_atom = /obj/item/natural/cloth
 	starting_atom = /obj/item/reagent_containers/powder/blastpowder
 	output = /obj/item/breach_charge
+	craftdiff = 3
 	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/bomb/pipe_bomb
+	name = "pipe bomb"
+
+	requirements = list(
+		/obj/item/natural/fibers = 1,
+		/obj/item/reagent_containers/powder/blastpowder = 2,
+		/obj/item/reagent_containers/glass/bottle = 1,
+	)
+
+	starting_atom = /obj/item/natural/fibers
+	attacked_atom = /obj/item/reagent_containers/glass/bottle
+	output = /obj/item/explosive
+	craft_time = 1 SECONDS
+	subtypes_allowed = TRUE
+	reagent_subtypes_allowed = TRUE
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/bomb/canister_bomb
+	name = "canister Grenade"
+
+	requirements = list(
+		/obj/item/natural/fibers = 1,
+		/obj/item/reagent_containers/powder/blastpowder = 2,
+		/obj/item/ammo_casing/caseless/grenadeshell = 1,
+		/obj/item/ammo_casing/caseless/bullet = 4,
+	)
+
+	starting_atom = /obj/item/natural/fibers
+	attacked_atom = /obj/item/ammo_casing/caseless/grenadeshell
+	output = /obj/item/explosive/canister_bomb
+	craft_time = 11 SECONDS
+	craftdiff = 4
+	subtypes_allowed = TRUE
+	reagent_subtypes_allowed = TRUE
+

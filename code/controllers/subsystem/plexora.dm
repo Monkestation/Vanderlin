@@ -609,6 +609,35 @@ SUBSYSTEM_DEF(plexora)
 
 	client_mob.say(message, forced = TRUE)
 
+/datum/world_topic/plx_kick
+	keyword = "PLX_kick"
+	require_comms_key = TRUE
+
+/datum/world_topic/plx_kick/Run(list/input)
+	var/ckey = input["ckey"]
+	var/reason = input["reason"]
+	var/kicker = input["admin_ckey"]
+
+	if(!ckey || !kicker)
+		return list("error" = PLEXORA_ERROR_BAD_PARAM, "param" = "ckey/admin_ckey", "reason" = "missing required parameter")
+
+	var/client/client = disambiguate_client(ckey)
+
+	if(QDELETED(client))
+		return list("error" = PLEXORA_ERROR_CLIENTNOTEXIST)
+
+	// Mock admin
+	var/datum/client_interface/mockadmin = new(
+		key = kicker,
+	)
+
+	to_chat(client, span_boldannounce("You have been kicked from the server by [key_name_admin(mockadmin)]. Reason: [reason]"))
+
+	qdel(client)
+
+	log_admin("Discord: [key_name(mockadmin)] has kicked [key_name(client)] from the server! Reason: [reason]")
+	message_admins("Discord: [key_name_admin(mockadmin)] has kicked [key_name_admin(client)] from the server! Reason: [reason]")
+
 /datum/world_topic/plx_ticketaction
 	keyword = "PLX_ticketaction"
 	require_comms_key = TRUE
@@ -739,6 +768,26 @@ SUBSYSTEM_DEF(plexora)
 
 	SSblackbox.record_feedback("tally", "admin_say_relay", 1, "Asay external") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/world_topic/plx_givetriumphs
+	keyword = "PLX_givetriumphs"
+	require_comms_key = TRUE
+
+/datum/world_topic/plx_givetriumphs/Run(list/input)
+	var/ckey = input["ckey"]
+	var/amount = input["amount"]
+	var/reason = input["reason"]
+
+	if (!ckey)
+		return list("error" = PLEXORA_ERROR_MISSING_CKEY)
+
+	amount = text2num(amount)
+
+	if (!amount || amount <= 0)
+		return list("error" = PLEXORA_ERROR_BAD_PARAM, "param" = "amount", "reason" = "parameter must be a number greater than 0")
+
+	adjust_triumphs(ckey, amount, reason, counted = FALSE, silent = FALSE, override_bonus = TRUE)
+
+	return "[ckey] awarded [amount] triumphs.  They now have [SStriumphs.get_triumphs(ckey)]."
 
 #undef OLD_PLEXORA_CONFIG
 #undef AUTH_HEADER

@@ -100,7 +100,7 @@
 	..()
 	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
 	C.grant_language(/datum/language/halfling)
-	to_chat(C, "<span class='info'>I can speak Halfling with ,e before my speech.</span>")
+	to_chat(C, span_info("I can speak Halfspeak with ,p before my speech."))
 
 /datum/species/halfling/get_skin_list()
 	return sortList(list(
@@ -149,6 +149,7 @@
 
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
+	C.grant_language(/datum/language/halfling)
 
 	RegisterSignal(C, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(handle_equip))
 
@@ -160,6 +161,7 @@
 	if(QDELETED(C))
 		return
 	C.remove_language(/datum/language/common)
+	C.remove_language(/datum/language/halfling)
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	UnregisterSignal(C, COMSIG_MOB_EQUIPPED_ITEM)
 	C.remove_status_effect(/datum/status_effect/buff/free_feet)

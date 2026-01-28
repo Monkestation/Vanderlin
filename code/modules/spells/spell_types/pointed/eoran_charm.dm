@@ -71,5 +71,5 @@
 	cast_on.apply_status_effect(/datum/status_effect/debuff/mesmerised)
 	cast_on.Immobilize(40)
 	cast_on.Slowdown(15)
-	cast_on.blur_eyes(20)
+	cast_on.set_eye_blur_if_lower(40 SECONDS)
 	cast_on.emote("drool")

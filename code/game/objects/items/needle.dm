@@ -94,7 +94,7 @@
 			armor_value += I.armor.getRating(key)
 		if((armor_value == 0 && skill_level < 1) || (armor_value > 0 && skill_level < 2))
 			to_chat(user, span_warning("I should probably not be doing this..."))
-		playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
+		playsound(src, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 		var/skill_multiplied = (skill_level * 10)
 		var/sewtime = (6 SECONDS - skill_multiplied)
 		if(!do_after(user, sewtime, I))

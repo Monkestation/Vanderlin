@@ -12,7 +12,7 @@
 	if(!.)
 		return
 	//Can't convert devoted faithfuls
-	if(cast_on.has_flaw(/datum/charflaw/addiction/godfearing))
+	if(cast_on.has_quirk(/datum/quirk/vice/godfearing))
 		cast_on.say("I FOLLOW MY GOD INTO DEATH!!!")
 		return FALSE
 	return TRUE

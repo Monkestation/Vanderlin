@@ -14,6 +14,7 @@
 	avoid working with any guilds."
 	outfit = /datum/outfit/bodyguard
 	blacklisted_species = list(SPEC_ID_HALFLING)
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 
 	jobstats = list(
 		STATKEY_STR = 1,
@@ -24,9 +25,9 @@
 	skills = list(
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 2,
@@ -36,7 +37,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
 /datum/outfit/bodyguard
-	name = "Bodyguard"
+	name = "Bodyguard (Migrant Wave)"
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	neck = /obj/item/clothing/neck/coif
 	gloves = /obj/item/clothing/gloves/angle

@@ -122,8 +122,7 @@
 	var/list/all_the_turfs_were_gonna_lacerate = RANGE_TURFS(radius, A) - RANGE_TURFS(radius-1, A)
 	num_pellets = all_the_turfs_were_gonna_lacerate.len + pellet_delta
 
-	for(var/T in all_the_turfs_were_gonna_lacerate)
-		var/turf/shootat_turf = T
+	for(var/turf/shootat_turf as anything in all_the_turfs_were_gonna_lacerate)
 		INVOKE_ASYNC(src, PROC_REF(pew), shootat_turf)
 
 /**
@@ -156,8 +155,7 @@
 		else if(!(body in bodies))
 			martyrs += body // promoted from a corpse to a hero
 
-	for(var/M in martyrs)
-		var/mob/living/martyr = M
+	for(var/mob/living/martyr as anything in martyrs)
 		if(radius > 4)
 			martyr.visible_message("<b>[span_danger("[martyr] heroically covers \the [parent] with [martyr.p_their()] body, absorbing a load of the shrapnel!")]</b>", span_userdanger("You heroically cover \the [parent] with your body, absorbing a load of the shrapnel!"))
 			magnitude_absorbed += round(radius * 0.5)

@@ -100,6 +100,7 @@
 	salvage_amount = 1
 	item_weight = 3
 	max_integrity = INTEGRITY_STANDARD
+	wetable = FALSE
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BOOTS ARE INTENDED
 //KEEP THIS IN MIND
@@ -146,6 +147,7 @@
 	salvage_amount = 1
 	item_weight = 3
 	min_cold_protection_temperature = -20
+	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/furlinedanklets
 	name = "fur lined anklets"

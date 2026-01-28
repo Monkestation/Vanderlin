@@ -37,7 +37,7 @@
 	var/break_prob = clamp(60 - (skill_level * 10) + (6 - difficulty * 10), 0, 100)
 	if(prob(break_prob))
 		to_chat(user, span_notice("My \the [lockpick_used] broke!"))
-		playsound(loc, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+		playsound(src, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 		qdel(lockpick_used)
 
 	if(user.client?.prefs.showrolls)
@@ -47,7 +47,7 @@
 		lock.locked = FALSE
 		lock.tampered = TRUE
 
-	playsound(loc, 'sound/items/LPWin.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+	playsound(src, 'sound/items/LPWin.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 
 	var/amt2raise = (user.STAINT / 2) * (20 / difficulty)
 	var/boon = user.get_learning_boon(/datum/skill/misc/lockpicking)
@@ -312,7 +312,7 @@
 			var/break_prob = clamp(10 - skill_level + (6 - difficulty) * 2, 0, 100)
 			if(prob(break_prob))
 				to_chat(picker, span_notice("My \the [the_lockpick] broke!"))
-				playsound(loc, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+				playsound(src, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 				qdel(the_lockpick)
 				//one tenth of the usual boost for picking a lock
 				if(isliving(picker))
@@ -326,7 +326,7 @@
 			//break check cooldown at highest difficulty is 3 seconds, at lowest its 8
 
 		lock_angle -= 20
-		playsound(picker.loc, pick('sound/items/LPtry.ogg', 'sound/items/LPtry2.ogg'), min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+		playsound(picker, pick('sound/items/LPtry.ogg', 'sound/items/LPtry2.ogg'), min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 	if(lock_angle >= 1 && !failing && !playing_lock_sound)
 		play_turn_sound()
 		playing_lock_sound = TRUE
@@ -346,7 +346,7 @@
 	return TRUE
 
 /atom/movable/screen/movable/snap/lockpicking/proc/play_turn_sound(timerd)
-	//playsound(picker.loc, pick('sound/items/LPTurn1.ogg', 'sound/items/LPTurn2.ogg'), (100 - (15 * skill_level)) * 0.5)
+	//playsound(picker, pick('sound/items/LPTurn1.ogg', 'sound/items/LPTurn2.ogg'), (100 - (15 * skill_level)) * 0.5)
 	addtimer(CALLBACK(src, PROC_REF(turn_sound_reset)), 0.7 SECONDS) //stops the spam
 
 /atom/movable/screen/movable/snap/lockpicking/proc/turn_sound_reset()

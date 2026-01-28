@@ -48,7 +48,7 @@
 			span_warning("The ray fizzles on contact with [victim]!"),
 			span_warning("The ray fizzles on contact with me!"),
 		)
-		playsound(get_turf(victim), 'sound/magic/magic_nulled.ogg', 100)
+		playsound(victim, 'sound/magic/magic_nulled.ogg', 100)
 		qdel(active)
 		return
 	var/mob/living/carbon/human/C = owner

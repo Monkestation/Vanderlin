@@ -3,11 +3,11 @@
 /turf/open/floor/naturalstone,
 /area/template_noop)
 "c" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/template_noop)
 "j" = (
 /obj/effect/waterfall,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/template_noop)
 "o" = (
 /turf/closed/mineral,

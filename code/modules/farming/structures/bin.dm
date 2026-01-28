@@ -64,7 +64,7 @@
 			user.visible_message("<span class='warning'>[user] kicks over [src]!</span>", \
 				"<span class='warning'>I kick over [src]!</span>")
 			kover = TRUE
-			playsound(loc, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
+			playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
 			chem_splash(loc, 2, list(reagents), adminlog = TRUE)
 			var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 			if(STR)
@@ -119,7 +119,14 @@
 		user.visible_message("<span class='info'>[user] starts to wash in [src].</span>")
 	else
 		user.visible_message("<span class='info'>[user] starts to wash [to_wash] in [src].</span>")
-
+		if(istype(to_wash, /obj/item/clothing))
+			var/obj/item/clothing/clothing_item = to_wash
+			if(clothing_item.wetable)
+				if(!reagents.has_reagent(/datum/reagent/water/gross))
+					clothing_item.wet.add_water(20, dirty = FALSE, washed_properly = TRUE)
+				else
+					clothing_item.wet.add_water(20, dirty = TRUE, washed_properly = TRUE)
+		user.nobles_seen_servant_work()
 	reagents.remove_reagent(removereg, 5)
 
 	playsound(user, pick_n_take(wash), 100, FALSE)
