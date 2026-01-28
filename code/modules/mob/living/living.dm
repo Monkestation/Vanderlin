@@ -2154,7 +2154,7 @@
 			if(do_after(src, 1.2 SECONDS, over))
 				if(over.loc == src)
 					return
-				if(!storage.attempt_insert(over, holder, override = TRUE))
+				if(!storage.attempt_insert(holder, over, override = TRUE))
 					qdel(holder)
 
 	if(HAS_TRAIT(src, TRAIT_TINY) && ismob(over) && over != src)
@@ -2178,7 +2178,7 @@
 		if(do_after(src, 3 SECONDS, over))
 			if(picked.loc == src)
 				return
-			if(!picked.atom_storage.attempt_insert(src, holder, override = TRUE))
+			if(!picked.atom_storage.attempt_insert(holder, src, override = TRUE))
 				qdel(holder)
 
 /mob/living/MouseDrop_T(atom/dropping, atom/user)

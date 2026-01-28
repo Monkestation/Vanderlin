@@ -245,7 +245,7 @@
 	for(var/i in 1 to current.createditem_extra + 1)
 		new_atom = new current.created_item(get_turf(bin))
 		new_atom.update_integrity(new_atom.max_integrity, update_atom = FALSE)
-		bin.atom_storage.attempt_insert(new_atom, null, override = TRUE)
+		bin.atom_storage.attempt_insert(new_atom, override = TRUE)
 
 	visible_message(span_notice("[new_atom] falls into the hopper of [src]."))
 	anvil_recipes_to_craft -= current

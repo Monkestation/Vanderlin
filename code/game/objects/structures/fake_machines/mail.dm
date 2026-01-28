@@ -141,7 +141,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			P.mailer = sentfrom
 			P.mailedto = send2place
 			P.update_appearance()
-			X.atom_storage?.attempt_insert(src, P, override = TRUE)
+			X.atom_storage?.attempt_insert(P, override = TRUE)
 			X.new_mail = TRUE
 			X.update_appearance()
 			send_ooc_note("New letter from <b>[sentfrom].</b>", name = send2place)
@@ -614,7 +614,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	paper.mailer = sent_from
 	paper.mailedto = send_to
 	paper.update_appearance()
-	master.atom_storage?.attempt_insert(src, paper, override = TRUE)
+	master.atom_storage?.attempt_insert(paper, override = TRUE)
 	master.new_mail = TRUE
 	master.update_appearance()
 	playsound(src, 'sound/misc/mail.ogg', 100, FALSE, -1)
@@ -754,7 +754,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		PA.cached_mailedto = null
 		PA.update_appearance()
 		to_chat(user, span_warning("I carefully re-seal the letter and place it back in the machine, no one will know."))
-	atom_storage?.attempt_insert(src, PA, override = TRUE)
+	atom_storage?.attempt_insert(PA, override = TRUE)
 
 /obj/item/fake_machine/mastermail/Destroy()
 	set_light(0)
