@@ -55,23 +55,21 @@ GLOBAL_LIST_INIT(job_pack_singletons, init_jobpacks())
 			picker.equip_to_slot_or_del(new path, slot, TRUE)
 
 	if(length(pack_backpack_contents))
-		var/datum/outfit/inserter = new
 		for(var/path in pack_backpack_contents)
 			var/number = pack_backpack_contents[path]
 			if(!isnum(number)) // Default to 1
 				number = 1
 			for(var/i in 1 to number)
-				var/obj/item/new_item = new path(picker)
-				var/obj/item/item = picker.get_item_by_slot(ITEM_SLOT_BACK_L)
-				if(!item)
-					item = picker.get_item_by_slot(ITEM_SLOT_BACK_R)
-				if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-					item = picker.get_item_by_slot(ITEM_SLOT_BACK_R)
-					if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-						item = picker.get_item_by_slot(ITEM_SLOT_BELT)
-						if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-							item = picker.get_item_by_slot(ITEM_SLOT_NECK)
-							if(!item || !inserter.attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-								new_item.forceMove(get_turf(picker))
-								message_admins("[type] had pack_backpack_contents set but no room to store:[new_item]")
+				var/obj/item/new_item = new path(get_turf(picker))
 
+				var/handled = FALSE
+				for(var/slot in STORAGE_SLOT_PRIORITY)
+					var/obj/item/storage = picker.get_item_by_slot(slot)
+					if(!storage)
+						continue
+					if(storage.atom_storage?.attempt_insert(new_item, override = TRUE))
+						handled = TRUE
+						break
+
+				if(!handled)
+					message_admins("[type] had backpack_contents set but no room to store: [new_item]")

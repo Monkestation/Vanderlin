@@ -30,8 +30,8 @@
 
 /datum/storage/no_interface/boots/set_parent(atom/new_parent)
 	. = ..()
-	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(equipped_stress))
-	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(unequipped_stress))
+	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(equipped_stress), override = TRUE)
+	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(unequipped_stress), override = TRUE)
 
 /datum/storage/no_interface/boots/item_interact_insert(mob/living/user, obj/item/thing, params)
 	if(can_insert(thing, messages = TRUE))

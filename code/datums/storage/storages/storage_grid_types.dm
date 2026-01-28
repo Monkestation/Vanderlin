@@ -236,7 +236,6 @@
 	max_specific_storage = WEIGHT_CLASS_TINY
 	screen_max_rows = 2
 	screen_max_columns = 3
-	max_slots = 6
 
 /datum/storage/teapot
 	screen_max_rows = 1

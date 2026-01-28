@@ -876,10 +876,7 @@
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(!usr.Adjacent(to_put) && !usr.DirectAccess(to_put))
 			return
-		var/old_width = to_put.grid_width
-		var/old_height = to_put.grid_height
-		to_put.grid_height = old_width
-		to_put.grid_width = old_height
+		to_put.flip_grid_storage_dimensions()
 		update_hovering(location, control, params)
 		return
 
@@ -938,7 +935,7 @@
 	if(!coordinates)
 		return
 
-	if(active_storage.can_insert(held_item, usr, FALSE))
+	if(active_storage.can_insert(held_item, usr, FALSE, params = params))
 		hovering.color = COLOR_ASSEMBLY_GOLD
 	else
 		hovering.color = COLOR_RED_LIGHT
@@ -948,11 +945,11 @@
 	var/enchanted = held_item.has_enchantment(/datum/enchantment/dimensional_shrink)
 
 	var/used_gridwidth = held_item.grid_width
-	if(enchanted)
+	if(used_gridwidth > 32 && enchanted)
 		used_gridwidth = max(32, used_gridwidth - 32)
 
 	var/used_gridheight = held_item.grid_height
-	if(enchanted)
+	if(used_gridheight > 32 && enchanted)
 		used_gridheight = max(32, used_gridheight - 32)
 
 	var/scale_x = used_gridwidth / world.icon_size

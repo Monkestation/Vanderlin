@@ -64,6 +64,16 @@
 	ITEM_SLOT_HANDS,\
 )
 
+#define STORAGE_SLOT_PRIORITY list(\
+	ITEM_SLOT_BACK_L,\
+	ITEM_SLOT_BACK_R,\
+	ITEM_SLOT_BELT,\
+	ITEM_SLOT_CLOAK,\
+	ITEM_SLOT_BELT_L,\
+	ITEM_SLOT_BELT_R,\
+	ITEM_SLOT_SHOES,\
+)
+
 //Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
 //Make sure to update check_obscured_slots() if you add more.
 #define HIDEGLOVES (1<<0)

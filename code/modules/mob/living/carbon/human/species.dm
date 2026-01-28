@@ -1159,15 +1159,15 @@ GLOBAL_LIST_EMPTY(donator_races)
 				return FALSE
 			return TRUE
 		if(ITEM_SLOT_BACKPACK)
-			if(H.backr.atom_storage?.attempt_insert(I, H, TRUE))
+			if(H.backr?.atom_storage?.attempt_insert(I, H, TRUE))
 				return TRUE
-			if(H.backl.atom_storage?.attempt_insert(I, H, TRUE))
+			else if(H.backl?.atom_storage?.attempt_insert(I, H, TRUE))
 				return TRUE
-			if(H.belt.atom_storage?.attempt_insert(I, H, TRUE))
+			else if(H.belt?.atom_storage?.attempt_insert(I, H, TRUE))
 				return TRUE
-			if(H.beltr.atom_storage?.attempt_insert(I, H, TRUE))
+			else if(H.beltr?.atom_storage?.attempt_insert(I, H, TRUE))
 				return TRUE
-			if(H.beltl.atom_storage?.attempt_insert(I, H, TRUE))
+			else if(H.beltl?.atom_storage?.attempt_insert(I, H, TRUE))
 				return TRUE
 
 			return FALSE

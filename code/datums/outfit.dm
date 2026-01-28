@@ -230,20 +230,19 @@
 				if(!isnum(number))//Default to 1
 					number = 1
 				for(var/i in 1 to number)
-					var/obj/item/new_item = new path(H)
-					var/obj/item/item = H.get_item_by_slot(ITEM_SLOT_BACK_L)
-					if(!item)
-						item = H.get_item_by_slot(ITEM_SLOT_BACK_R)
-					if(!item || !attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-						item = H.get_item_by_slot(ITEM_SLOT_BACK_R)
-						if(!item || !attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-							item = H.get_item_by_slot(ITEM_SLOT_BELT)
-							if(!item || !attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-								item = H.get_item_by_slot(ITEM_SLOT_NECK)
-								if(!item || !attempt_insert_with_flipping(item, new_item, null, TRUE, TRUE))
-									//new_item.forceMove(get_turf(H))
-									message_admins("[type] had backpack_contents set but no room to store:[new_item]")
+					var/obj/item/new_item = new path(get_turf(H))
 
+					var/handled = FALSE
+					for(var/slot in STORAGE_SLOT_PRIORITY)
+						var/obj/item/storage = H.get_item_by_slot(slot)
+						if(!storage)
+							continue
+						if(storage.atom_storage?.attempt_insert(new_item, override = TRUE))
+							handled = TRUE
+							break
+
+					if(!handled)
+						message_admins("[type] had backpack_contents set but no room to store: [new_item]")
 
 	post_equip(H, visuals_only)
 
@@ -252,9 +251,6 @@
 
 	H.update_body()
 	return TRUE
-
-/datum/outfit/proc/attempt_insert_with_flipping(obj/item/storage_item, obj/item/object_to_insert, mob/living/carbon/human/H, silent, force)
-	return storage_item?.atom_storage?.attempt_insert(storage_item, object_to_insert, override = TRUE)
 
 /client/proc/test_spawn_outfits()
 	for(var/path in subtypesof(/datum/outfit))
