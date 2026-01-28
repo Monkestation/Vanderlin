@@ -8438,10 +8438,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/mineral,
 /area/under/cave)
-"eAP" = (
-/obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
-/turf/open/floor/rooftop,
-/area/outdoors/town/roofs)
 "eBu" = (
 /obj/structure/bookcase,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -13818,12 +13814,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/villagegarrison)
-"hAa" = (
-/obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
-/turf/open/floor/rooftop{
-	dir = 1
-	},
-/area/outdoors/town/roofs)
 "hAd" = (
 /obj/structure/chair/stool/crafted,
 /turf/open/floor/wood,
@@ -14786,10 +14776,6 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/dwarfin)
-"hYT" = (
-/obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
-/turf/open/floor/ruinedwood,
-/area/outdoors/town/roofs)
 "hZq" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -23026,6 +23012,10 @@
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/manor)
+"msj" = (
+/obj/structure/vine/black_briar/hvy,
+/turf/open/openspace,
+/area/under/cave)
 "msM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobble,
@@ -26166,6 +26156,12 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/manor)
+"nXF" = (
+/obj/structure/vine/black_briar/hvy,
+/turf/open/floor/rooftop{
+	dir = 1
+	},
+/area/outdoors/town/roofs)
 "nXW" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -32516,6 +32512,10 @@
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/blocks,
 /area/indoors/town/manorgate)
+"rpB" = (
+/obj/structure/vine/black_briar/hvy,
+/turf/open/floor/ruinedwood,
+/area/outdoors/town/roofs)
 "rpL" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /obj/item/clothing/shoes/boots/leather,
@@ -33220,6 +33220,10 @@
 /obj/structure/train,
 /turf/open/floor/naturalstone,
 /area/indoors/town)
+"rGA" = (
+/obj/structure/vine/black_briar/hvy,
+/turf/open/floor/rooftop,
+/area/outdoors/town/roofs)
 "rGN" = (
 /turf/open/floor/grass/red,
 /area/indoors/town/magician)
@@ -36863,10 +36867,6 @@
 "tyS" = (
 /turf/open/floor/twig,
 /area/indoors)
-"tyW" = (
-/obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
-/turf/open/floor/cobblerock,
-/area/under/cave)
 "tza" = (
 /turf/open/floor/woodturned/nosmooth/saiga,
 /area/under/town/basement)
@@ -38515,6 +38515,10 @@
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/shop)
+"uwP" = (
+/obj/structure/flora/grass/herb/cursedrosa/spreader/instant,
+/turf/open/floor/cobblerock,
+/area/indoors/town/manor)
 "uwR" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
@@ -42659,6 +42663,10 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"wEK" = (
+/obj/structure/vine/black_briar/hvy,
+/turf/open/openspace,
+/area/outdoors/town/roofs)
 "wEN" = (
 /obj/structure/table/wood/plain,
 /obj/structure/fluff/millstone,
@@ -99712,7 +99720,7 @@ gsd
 gsd
 gsd
 kOd
-gjg
+uwP
 luD
 gjg
 gjg
@@ -181937,11 +181945,11 @@ nHb
 nHb
 nHb
 sin
-hWm
-tyW
+qST
 hWm
 hWm
 qST
+hWm
 nHb
 nHb
 nHb
@@ -182138,12 +182146,12 @@ nHb
 nHb
 nHb
 nHb
-ufR
-hWm
-hWm
-hWm
-hWm
-ufR
+msj
+qST
+qST
+qST
+qST
+msj
 nHb
 nHb
 nHb
@@ -182340,12 +182348,12 @@ nHb
 nHb
 nHb
 nHb
-jiV
-jiV
-jiV
-jiV
-jiV
-lvO
+wEK
+wEK
+wEK
+wEK
+wEK
+rGA
 nHb
 nHb
 nHb
@@ -182542,12 +182550,12 @@ nHb
 nHb
 nHb
 nHb
-jiV
-jiV
-jiV
-jiV
-jiV
-eAP
+wEK
+wEK
+wEK
+wEK
+wEK
+rGA
 nHb
 nHb
 nHb
@@ -182744,12 +182752,12 @@ nHb
 nHb
 nHb
 nHb
-jiV
-jiV
-jiV
-jiV
-jiV
-lvO
+wEK
+wEK
+wEK
+wEK
+wEK
+rGA
 nHb
 nHb
 nHb
@@ -182946,12 +182954,12 @@ nHb
 nHb
 nHb
 nHb
-jiV
-jiV
-jiV
-jiV
-lvO
-lvO
+wEK
+wEK
+wEK
+wEK
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -183148,12 +183156,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -183350,12 +183358,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-hAa
-jSq
-hYT
-lvO
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -183553,11 +183561,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -183755,11 +183763,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-sPh
-lvO
-eAP
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -183957,11 +183965,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -184159,11 +184167,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-hYT
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -184361,11 +184369,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -184563,11 +184571,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -184765,11 +184773,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-hYT
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -184967,11 +184975,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -185169,11 +185177,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -185370,12 +185378,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-jSq
-sPh
-eAP
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -185572,12 +185580,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-hAa
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -185774,12 +185782,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -185976,12 +185984,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -186178,12 +186186,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-hAa
-jSq
-sPh
-eAP
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
@@ -186380,12 +186388,12 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
-jSq
-sPh
-lvO
-lvO
+nXF
+nXF
+nXF
+rpB
+rGA
+rGA
 nHb
 nHb
 nHb
