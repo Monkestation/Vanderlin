@@ -47,7 +47,7 @@
 	requirements = list(
 		/obj/item/smokebomb = 1,
 		/obj/item/alch/herb/atropa = 1,
-		/obj/item/alch/herb/matricaria = 1,
+		/obj/item/alch/herb/paris = 1,
 	)
 
 	starting_atom = /obj/item/alch/herb/atropa
@@ -136,7 +136,6 @@
 	attacked_atom = /obj/item/natural/cloth
 	starting_atom = /obj/item/reagent_containers/powder/blastpowder
 	output = /obj/item/breach_charge
-	craftdiff = 3
 	craft_time = 5 SECONDS
 
 /datum/repeatable_crafting_recipe/bomb/pipe_bomb
