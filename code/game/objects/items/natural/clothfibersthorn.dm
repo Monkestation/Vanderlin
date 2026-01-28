@@ -100,7 +100,12 @@
 	icon1step = 3
 	icon2step = 6
 
-/obj/item/natural/bundle/fibers/full/Initialize()
+/obj/item/natural/bundle/fibers/half/Initialize(mapload, ...)
+	. = ..()
+	amount = floor(maxamount / 2)
+	update_bundle()
+
+/obj/item/natural/bundle/fibers/full/Initialize(mapload, ...)
 	. = ..()
 	amount = maxamount
 	update_bundle()

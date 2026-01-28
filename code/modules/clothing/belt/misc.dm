@@ -329,7 +329,7 @@
 	new /obj/item/weapon/surgery/hammer(src)
 	new /obj/item/natural/worms/leech(src)
 	new /obj/item/natural/worms/leech(src)
-	new /obj/item/natural/bundle/fibers/full(src)
+	new /obj/item/natural/bundle/fibers/half(src)
 
 /obj/item/storage/backpack/satchel/musketeer/populate_contents()
 	new /obj/item/weapon/knife/dagger/bayonet(src)
