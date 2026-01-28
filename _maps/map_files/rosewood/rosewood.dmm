@@ -8791,7 +8791,6 @@
 /area/indoors/town/magician)
 "eqg" = (
 /obj/structure/fluff/statue/gargoyle/moss,
-/obj/machinery/light/fueled/torchholder,
 /obj/structure/vine/black_briar/hvy,
 /turf/open/floor/snow/rough,
 /area/outdoors/town)
