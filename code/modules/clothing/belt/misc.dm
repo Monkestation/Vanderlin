@@ -319,7 +319,6 @@
 	qdel(src)
 
 /obj/item/storage/backpack/satchel/surgbag/shit/populate_contents()
-	new /obj/item/needle(src)
 	new /obj/item/weapon/surgery/scalpel(src)
 	new /obj/item/weapon/surgery/saw(src)
 	new /obj/item/weapon/surgery/hemostat(src)

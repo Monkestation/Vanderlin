@@ -46,11 +46,11 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	/// Reference to action to change pick-up modes, only applicable to objs
 	VAR_PRIVATE/datum/action/item_action/storage_gather_mode/modeswitch_action
 
-	// INFINITY use used as these are legacy and aren't applicable to grids
+	// null is used as these are legacy and aren't applicable to grids
 	/// max items overall
-	var/max_slots = INFINITY
+	var/max_slots = null
 	/// max combined weight classes the storage can hold
-	var/max_total_storage = INFINITY
+	var/max_total_storage = null
 
 	/// max weight class for a single item being inserted
 	var/max_specific_storage = WEIGHT_CLASS_NORMAL
@@ -246,6 +246,17 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	if(!istype(inited))
 		return
 
+	// Grid storage can't expand more, so if there isn't space we need to handle it here
+	if(!no_interface)
+		var/coordinates = get_valid_coordinates(inited)
+		if(!add_item_to_grid(inited, coordinates))
+			var/atom/loc = real_location.drop_location()
+			if(!loc)
+				qdel(inited)
+			else
+				inited.forceMove(real_location.drop_location())
+			return
+
 	inited.item_flags |= IN_STORAGE
 	RegisterSignal(inited, COMSIG_MOUSEDROPPED_ONTO, PROC_REF(mousedrop_receive))
 
@@ -259,9 +270,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	arrived.item_flags |= IN_STORAGE
 
 	refresh_views()
-
 	arrived.on_enter_storage(src)
-
 	RegisterSignal(arrived, COMSIG_MOUSEDROPPED_ONTO, PROC_REF(mousedrop_receive))
 	SEND_SIGNAL(arrived, COMSIG_ITEM_STORED, src)
 	parent.update_appearance()
@@ -276,8 +285,10 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	gone.item_flags &= ~IN_STORAGE
 
 	remove_and_refresh(gone)
-
 	gone.on_exit_storage(src)
+	UnregisterSignal(gone, COMSIG_MOUSEDROPPED_ONTO)
+	SEND_SIGNAL(gone, COMSIG_ITEM_UNSTORED, src)
+	parent.update_appearance()
 
 /datum/storage/proc/handle_examination(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
@@ -399,14 +410,14 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			user.balloon_alert(user, "stuck on your hand!")
 		return FALSE
 
-	if(length(real_location.contents) >= max_slots)
+	if(max_slots && length(real_location.contents) >= max_slots)
 		if(messages && user && !silent_for_user)
-			user.balloon_alert(user, "no room!")
+			user.balloon_alert(user, "no space!")
 		return FALSE
 
-	if(to_insert.w_class + get_total_weight() > max_total_storage)
+	if(max_total_storage && (to_insert.w_class + get_total_weight() > max_total_storage))
 		if(messages && user && !silent_for_user)
-			user.balloon_alert(user, "no room!")
+			user.balloon_alert(user, "too heavy!")
 		return FALSE
 
 	if(user && equipped_access_flags && isitem(parent))
@@ -431,7 +442,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 
 	// this is valid if the container our location is being held in is a storage item
-	var/datum/storage/bigger_fish = parent.loc.atom_storage
+	var/datum/storage/bigger_fish = parent.loc?.atom_storage
 	if(bigger_fish && bigger_fish.max_specific_storage < max_specific_storage)
 		if(messages && user)
 			user.balloon_alert(user, "[LOWER_TEXT(parent.loc.name)] is in the way!")
@@ -445,8 +456,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 				user.balloon_alert(user, "too big!")
 			return FALSE
 
-	var/list/modifiers = params2list(params)
-	var/coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(modifiers, SCREEN_LOC))
+	var/coordinates
+	if(params)
+		coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(params2list(params), SCREEN_LOC))
+	else
+		coordinates = get_valid_coordinates(to_insert)
+
 	if(!validate_grid_coordinates(coordinates, to_insert))
 		if(messages && user)
 			user.balloon_alert(user, "no room!")
@@ -468,6 +483,22 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	for(var/obj/item/thing in real_location)
 		total_weight += thing.w_class
 	return total_weight
+
+/// Returns first set of valid coordinates for grid storage or none
+/datum/storage/proc/get_valid_coordinates(obj/item/to_insert)
+	for(var/current_y in 1 to screen_max_rows)
+		for(var/current_x in 1 to screen_max_columns)
+			var/test_coordinates = "[current_x - 1],[current_y - 1]"
+
+			if(validate_grid_coordinates(test_coordinates, to_insert))
+				return test_coordinates
+
+			// This may look strange but we try to flip and check the validity again
+			if(!to_insert.flip_grid_storage_dimensions())
+				continue
+
+			if(validate_grid_coordinates(test_coordinates, to_insert))
+				return test_coordinates
 
 /**
  * Attempts to insert an item into the storage
@@ -492,17 +523,22 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	SEND_SIGNAL(parent, COMSIG_ATOM_STORED_ITEM, to_insert, user, force)
 	SEND_SIGNAL(src, COMSIG_STORAGE_STORED_ITEM, to_insert, user, force)
 
+	if(get(real_location, /mob) != user)
+		to_insert.do_pickup_animation(real_location, user)
+
+	if(!no_interface)
+		var/coordinates
+		if(params)
+			coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(params2list(params), SCREEN_LOC))
+		else
+			coordinates = get_valid_coordinates(to_insert)
+		add_item_to_grid(to_insert, coordinates)
+
 	if(ismob(to_insert.loc))
 		var/mob/item_carrier = to_insert.loc
 		item_carrier.transferItemToLoc(to_insert, real_location) // This allows has_unequipped() to be properly called.
 	else
 		to_insert.forceMove(real_location)
-
-	if(get(real_location, /mob) != user)
-		to_insert.do_pickup_animation(real_location, user)
-
-	if(!no_interface && params)
-		add_item_to_grid(to_insert, params)
 
 	item_insertion_feedback(user, to_insert, override)
 	parent.update_appearance()
@@ -892,22 +928,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 /// Called directly from the attack chain if [insert_on_attack] is TRUE.
 /// Handles inserting an item into the storage when clicked.
-/datum/storage/proc/item_interact_insert(mob/living/user, obj/item/thing, params)
-	if(!no_interface && !grid_quick_insert(user, thing, params))
-		return FALSE
-
+/datum/storage/proc/item_interact_insert(mob/living/user, obj/item/thing)
 	return attempt_insert(thing, user)
-
-/// Determine if there's free space in the storage
-/datum/storage/proc/grid_quick_insert(mob/living/user, obj/item/thing, params)
-	for(var/current_y in 0 to screen_max_rows - 1)
-		for(var/current_x in 0 to screen_max_columns - 1)
-			var/test_coordinates = "[current_y],[current_x]"
-
-			if(validate_grid_coordinates(test_coordinates, thing))
-				return TRUE
-
-	return FALSE
 
 /// Signal handler for whenever we're attacked by a mob.
 /datum/storage/proc/on_attack(datum/source, mob/user)
@@ -1178,17 +1200,17 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			bound_underlay = get_bound_underlay(used_gridwidth, used_gridheight, enchanted)
 			stored_item.underlays += bound_underlay
 
-			var/grid_lock = LAZYACCESS(item_coordinates, stored_item)
-			screen_loc = grid_coordinates_to_screen_loc(grid_lock)
+			var/list/grid_lock = LAZYACCESS(item_coordinates, stored_item)
+			screen_loc = grid_coordinates_to_screen_loc(grid_lock[1])
 
 			screen_x = copytext(screen_loc, 1, findtext(screen_loc, ","))
 			screen_pixel_x = text2num(copytext(screen_x, findtext(screen_x, ":") + 1))
-			screen_pixel_x += (world.icon_size/2)*((used_gridwidth/world.icon_size)-1)
+			screen_pixel_x += (world.icon_size / 2) * ((used_gridwidth / world.icon_size) - 1)
 			screen_x = text2num(copytext(screen_x, 1, findtext(screen_x, ":")))
 
 			screen_y = copytext(screen_loc, findtext(screen_loc, ",") + 1)
 			screen_pixel_y = text2num(copytext(screen_y, findtext(screen_y, ":") + 1))
-			screen_pixel_y += (world.icon_size/2)*((used_gridheight/world.icon_size)-1)
+			screen_pixel_y += (world.icon_size / 2) * ((used_gridheight / world.icon_size) - 1)
 			screen_y = text2num(copytext(screen_y, 1, findtext(screen_y, ":")))
 
 			stored_item.screen_loc = "[screen_x]:[screen_pixel_x],[screen_y]:[screen_pixel_y]"
@@ -1214,17 +1236,17 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			bound_underlay = get_bound_underlay(used_gridwidth, used_gridheight, enchanted)
 			stored_item.underlays += bound_underlay
 
-			var/grid_lock = LAZYACCESS(item_coordinates, stored_item)
-			screen_loc = grid_coordinates_to_screen_loc(grid_lock)
+			var/list/grid_lock = LAZYACCESS(item_coordinates, stored_item)
+			screen_loc = grid_coordinates_to_screen_loc(grid_lock[1])
 
 			screen_x = copytext(screen_loc, 1, findtext(screen_loc, ","))
 			screen_pixel_x = text2num(copytext(screen_x, findtext(screen_x, ":") + 1))
-			screen_pixel_x += (world.icon_size/2)*((used_gridwidth/world.icon_size)-1)
+			screen_pixel_x += (world.icon_size / 2) * ((used_gridwidth / world.icon_size) - 1)
 			screen_x = text2num(copytext(screen_x, 1, findtext(screen_x, ":")))
 
 			screen_y = copytext(screen_loc, findtext(screen_loc, ",") + 1)
 			screen_pixel_y = text2num(copytext(screen_y, findtext(screen_y, ":") + 1))
-			screen_pixel_y += (world.icon_size/2)*((used_gridheight/world.icon_size)-1)
+			screen_pixel_y += (world.icon_size / 2) * ((used_gridheight / world.icon_size) - 1)
 			screen_y = text2num(copytext(screen_y, 1, findtext(screen_y, ":")))
 
 			stored_item.screen_loc = "[screen_x]:[screen_pixel_x],[screen_y]:[screen_pixel_y]"
@@ -1310,43 +1332,57 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	return "[screen_x]:[screen_pixel_x],[screen_y]:[screen_pixel_y]"
 
-/datum/storage/proc/validate_grid_coordinates(coordinates = "", obj/item/dragged_item)
-	var/enchanted = dragged_item.has_enchantment(/datum/enchantment/dimensional_shrink)
+/datum/storage/proc/validate_grid_coordinates(coordinates, obj/item/to_store)
+	if(!coordinates)
+		return FALSE
 
-	var/used_gridwidth = dragged_item.grid_width
-	if(enchanted)
-		used_gridwidth = max(32, used_gridwidth - 32)
+	// Validate starting location (bottom right)
+	var/list/x_and_y = splittext(coordinates, ",")
 
-	var/used_gridheight = dragged_item.grid_height
-	if(enchanted)
-		used_gridheight = max(32, used_gridheight - 32)
+	if(text2num(x_and_y[1]) >= screen_max_columns)
+		return FALSE
 
-	var/screen_x = copytext(coordinates, 1, findtext(coordinates, ","))
-	screen_x = text2num(copytext(screen_x, 1, findtext(screen_x, ":")))
+	if(text2num(x_and_y[2]) >= screen_max_rows)
+		return FALSE
 
-	var/screen_y = copytext(coordinates, findtext(coordinates, ",") + 1)
-	screen_y = text2num(copytext(screen_y, 1, findtext(screen_y, ":")))
+	var/list/grid_coordinates = list(coordinates)
 
-	var/validate_x = floor((used_gridwidth / world.icon_size) - 1)
-	var/validate_y = floor((used_gridheight / world.icon_size) - 1)
+	var/enchanted = to_store.has_enchantment(/datum/enchantment/dimensional_shrink)
 
-	//this loops through all possible cells in the inventory box that we could overlap when given this screen_x and screen_y
-	//and returns false on any failure
-	for(var/current_x in 0 to validate_x)
-		for(var/current_y in 0 to validate_y)
-			var/test_x = screen_x + current_x
-			var/test_y = screen_y + current_y
-			var/test_coordinates = "[test_x],[test_y]"
+	/// Validate height is in bounds and add to coordinates covered
+	var/used_grid_height = to_store.grid_height
+	if(used_grid_height > 32)
+		if(enchanted)
+			used_grid_height = max(32, used_grid_height - 32)
 
-			if(test_x >= screen_max_columns)
-				return FALSE
+		var/grid_length = used_grid_height / 32
+		if(grid_length > 1)
+			var/list/coords = splittext(coordinates, ",")
+			for(var/i in 1 to grid_length - 1)
+				var/grid_y = text2num(coords[2]) + i
+				if(grid_y >= screen_max_rows)
+					return FALSE
+				grid_coordinates += "[coords[1]],[grid_y]"
 
-			if(test_y >= screen_max_rows)
-				return FALSE
+	/// Validate width is in bounds and add to coordinates covered
+	var/used_grid_width = to_store.grid_width
+	if(used_grid_width > 32)
+		if(enchanted)
+			used_grid_width = max(32, used_grid_width - 32)
 
-			var/existing_item = grid_item_from_coordinates(test_coordinates)
-			if(existing_item && (!dragged_item || (existing_item != dragged_item)))
-				return FALSE
+		var/grid_length = used_grid_width / 32
+		if(grid_length > 1)
+			var/list/coords = splittext(coordinates, ",")
+			for(var/i in 1 to grid_length - 1)
+				var/grid_x = text2num(coords[1]) + i
+				if(grid_x >= screen_max_columns)
+					return FALSE
+				grid_coordinates += "[grid_x],[coords[2]]"
+
+	/// Validate there are no existing items
+	for(var/coord in grid_coordinates)
+		if(grid_item_from_coordinates(coord))
+			return FALSE
 
 	return TRUE
 
@@ -1419,12 +1455,46 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	return final_appearance
 
 /// Add an item to our tracked grid for grid storage
-/datum/storage/proc/add_item_to_grid(obj/item/to_store, params)
-	var/screen_loc = LAZYACCESS(params2list(params), SCREEN_LOC)
-	LAZYSET(item_coordinates, to_store, screen_loc_to_grid_coordinates(screen_loc))
+/datum/storage/proc/add_item_to_grid(obj/item/to_store, coordinates)
+	if(!coordinates)
+		stack_trace("Storage datum [src] ([parent.type]) tried to add to its grid without coordinates.")
+		return FALSE
+
+	var/list/grid_coordinates = list(coordinates)
+
+	var/enchanted = to_store.has_enchantment(/datum/enchantment/dimensional_shrink)
+
+	var/used_grid_height = to_store.grid_height
+	if(used_grid_height > 32)
+		if(enchanted)
+			used_grid_height = max(32, used_grid_height - 32)
+
+		var/grid_length = used_grid_height / 32
+		if(grid_length > 1)
+			var/list/x_and_y = splittext(coordinates, ",")
+			for(var/i in 1 to grid_length - 1)
+				grid_coordinates += "[x_and_y[1]],[text2num(x_and_y[2]) + i]"
+
+	var/used_grid_width = to_store.grid_width
+	if(used_grid_width > 32)
+		if(enchanted)
+			used_grid_width = max(32, used_grid_width - 32)
+
+		var/grid_length = used_grid_width / 32
+		if(grid_length > 1)
+			var/list/x_and_y = splittext(coordinates, ",")
+			for(var/i in 1 to grid_length - 1)
+				grid_coordinates += "[text2num(x_and_y[1]) + i],[x_and_y[2]]"
+
+	for(var/coord in grid_coordinates)
+		LAZYADDASSOCLIST(item_coordinates, to_store, coord)
+
+	refresh_views()
+
+	return TRUE
 
 /datum/storage/proc/grid_item_from_coordinates(coordinates)
 	for(var/obj/item/thing in item_coordinates)
-		var/test_coord = LAZYACCESS(item_coordinates, thing)
-		if(coordinates == test_coord)
+		var/list/existing = LAZYACCESS(item_coordinates, thing)
+		if(coordinates in existing)
 			return thing
