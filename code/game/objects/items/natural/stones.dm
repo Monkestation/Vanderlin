@@ -154,9 +154,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 /obj/item/natural/stone/on_consume(mob/living/eater)
 	if(!magic_power)
 		return
-	eater.adjust_spell_points(magic_power * 0.1)
-	eater.mana_pool?.adjust_mana(magic_power * 25)
-	to_chat(eater, span_warning("I feel magic flowing from my stomach."))
+	//eater.adjust_spell_points(magic_power * 0.1)
+	//eater.mana_pool?.adjust_mana(magic_power * 25)
+	//to_chat(eater, span_warning("I feel magic flowing from my stomach."))
 
 /*
 	This right here is stone lore,
@@ -274,18 +274,8 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		return
 	if(istype(weapon, /obj/item/natural/stone))
 		playsound(src, pick('sound/items/stonestone.ogg'), 100)
-		user.visible_message(span_info("[user] strikes the stones together."))
 		if(prob(10))
-			var/datum/effect_system/spark_spread/S = new()
-			var/turf/front = get_step(user, user.dir)
-			S.set_up(1, 1, front)
-			S.start()
-		user.changeNext_move(CLICK_CD_FAST)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(istype(weapon, /obj/item/natural/rock))
-		user.visible_message(span_info("[user] strikes the stone against the rock.</span>"))
-		playsound(src, 'sound/items/stonestone.ogg', 100)
-		if(prob(35))
+			user.visible_message(span_info("[user] strikes the stones together."))
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_step(user, user.dir)
 			S.set_up(1, 1, front)
@@ -388,10 +378,20 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
+	if(istype(weapon, /obj/item/natural/stone))
+		playsound(src, 'sound/items/stonestone.ogg', 100)
+		if(prob(35))
+			user.visible_message(span_info("[user] strikes the stone against the rock.</span>"))
+			var/datum/effect_system/spark_spread/S = new()
+			var/turf/front = get_step(user, user.dir)
+			S.set_up(1, 1, front)
+			S.start()
+		user.changeNext_move(CLICK_CD_FAST)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(istype(weapon, /obj/item/natural/rock))
 		playsound(src, pick('sound/items/stonestone.ogg'), 100)
-		user.visible_message(span_info("[user] strikes the rocks together."))
 		if(prob(10))
+			user.visible_message(span_info("[user] strikes the rocks together."))
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_step(user,user.dir)
 			S.set_up(1, 1, front)

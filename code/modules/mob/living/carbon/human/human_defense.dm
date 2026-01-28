@@ -345,6 +345,9 @@
 			return FALSE
 
 /mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+	if(HAS_TRAIT(src, TRAIT_BOMBIMMUNE))
+		return
+
 	..()
 	if (!severity)
 		return

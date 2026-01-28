@@ -137,12 +137,10 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		traits_list += GLOB.traits_by_type[trait]
 
 	for(var/trait in traits_list)
-		trait_options += "<option value='[(trait)]'>[trait]</option>"
+		trait_options += "<option value='[trait]'>[trait]</option>"
 
-	for(var/skill in skills_list)
-		var/datum/skill/skill_instance = new skill
-		skills_options += "<option value='[(skill_instance.type)]'>[skill_instance.name]</option>"
-		qdel(skill_instance)
+	for(var/datum/skill/skill_instance in skills_list)
+		skills_options += "<option value='[initial(skill_instance.type)]'>[initial(skill_instance.name)]</option>"
 
 	for(var/stat in stats_list)
 		stat_options += "<option value='[(stat)]'>[stat]</option>"
@@ -814,8 +812,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 /datum/create_wave/proc/custom_wave_manager(mob/admin)
 
 	if(!length(potential_jobs))
-		for(var/J in SSjob.joinable_occupations)
-			var/datum/job/job = J
+		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			potential_jobs += job
 		for(var/datum/job/migrant as anything in subtypesof(/datum/job/migrant))
 			if(is_abstract(migrant))
@@ -922,27 +919,21 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		dat += "[race] "
 	dat += "<h3>Languages:</h3> "
 	if(length(J.languages))
-		for(var/language in J.languages)
-			var/datum/language/L = new language
-			dat += "[L.name] "
-			qdel(L)
+		for(var/datum/language/L as anything in J.languages)
+			dat += "[initial(L.name)] "
 	else
 		dat += "Imperial (Default)"
 	dat += "<h3>Allowed Patrons:</h3><br>"
 	if(length(J.allowed_patrons))
-		for(var/patrons in J.allowed_patrons)
-			var/datum/patron/P = new patrons
-			dat += "<li>[P.name]</li>"
-			qdel(P)
+		for(var/datum/patron/P as anything in J.allowed_patrons)
+			dat += "<li>[initial(P.name)]</li>"
 	else
 		dat += "<li>All Patrons are Allowed.</li>"
 	dat += "<h3>Skills:</h3><ul>"
 	if(length(J.skills))
-		for(var/skill_path in J.skills)
-			var/level = J.skills[skill_path]
-			var/datum/skill/S = new skill_path
-			dat += "<li>[S.name] (Level [level])</li>"
-			qdel(S)
+		for(var/datum/skill/S as anything in J.skills)
+			var/level = J.skills[S]
+			dat += "<li>[initial(S.name)] (Level [level])</li>"
 	else
 		dat += "None"
 	dat += "</ul>"

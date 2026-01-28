@@ -86,8 +86,7 @@
 		if(R.i_type == i_type_choice && istype(material, R.required_item))
 			appro_recipe += R
 
-	for(var/I in appro_recipe)
-		var/datum/artificer_recipe/R = I
+	for(var/datum/artificer_recipe/R as anything in appro_recipe)
 		if(!R.required_item)
 			appro_recipe -= R
 		if(!istype(material, R.required_item))

@@ -15,7 +15,7 @@
 	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 
 /datum/enchantment/leaping/proc/on_equip(obj/item/i, mob/living/user, slot)
-	if((slot & ITEM_SLOT_HANDS) && !istype(i, /obj/item/clothing/head/mob_holder))
+	if((slot & ITEM_SLOT_HANDS) && !ismobholder(i))
 		return
 	if(active_item)
 		return

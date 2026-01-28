@@ -377,7 +377,7 @@
 
 /obj/item/reagent_containers/food/snacks/grenzelbun
 	name = "grenzelbun"
-	desc = "Originally an elven cuisine composed of mortal races flesh and bread, the classic wiener in a bun, now modified and staple food of Grenzelhoft cuisine."
+	desc = "The classic wiener in a bun, a staple food of Grenzelhoft cuisine."
 	list_reagents = list(/datum/reagent/consumable/nutriment = SAUSAGE_NUTRITION+SMALLDOUGH_NUTRITION)
 	tastes = list("savory sausage" = 1)
 	icon_state = "grenzbun"
@@ -457,7 +457,8 @@
 
 /obj/item/reagent_containers/food/snacks/biscuit/good
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/biscuit/good/New()
+
+/obj/item/reagent_containers/food/snacks/biscuit/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -501,7 +502,8 @@
 /obj/item/reagent_containers/food/snacks/prezzel/good
 	name = "prezzel"
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/prezzel/good/New()
+
+/obj/item/reagent_containers/food/snacks/prezzel/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 
@@ -528,7 +530,8 @@
 /obj/item/reagent_containers/food/snacks/fritter/good
 	name = "apple fritter"
 	eat_effect = /datum/status_effect/buff/foodbuff
-/obj/item/reagent_containers/food/snacks/fritter/good/New()
+
+/obj/item/reagent_containers/food/snacks/fritter/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 

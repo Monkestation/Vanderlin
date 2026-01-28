@@ -333,7 +333,7 @@
 
 	if(!check_rights())
 		return
-	M.revive(TRUE, TRUE)
+	M.revive(ADMIN_HEAL_ALL)
 	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
 	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
 
@@ -911,8 +911,7 @@
 
 	dat += "<table>"
 
-	for(var/j in SSjob.joinable_occupations)
-		var/datum/job/job = j
+	for(var/datum/job/job as anything in SSjob.joinable_occupations)
 		count++
 		var/J_title = html_encode(job.title)
 		var/J_opPos = html_encode(job.total_positions - (job.total_positions - job.current_positions))

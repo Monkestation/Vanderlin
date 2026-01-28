@@ -51,6 +51,8 @@
 	associated_skill = /datum/skill/combat/knives
 	sewrepair = TRUE
 	sellprice = 10
+	experimental_onback = FALSE
+	experimental_onhip = FALSE
 
 	grid_width = 32
 	grid_height = 64

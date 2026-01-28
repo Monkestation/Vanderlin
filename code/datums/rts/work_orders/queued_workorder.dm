@@ -6,7 +6,7 @@
 
 	var/turf/turf_to_break
 
-/obj/effect/visual_effect/turf_break/New(loc, ...)
+/obj/effect/visual_effect/turf_break/Initialize(mapload, ...)
 	. = ..()
 	turf_to_break = loc
 	RegisterSignal(turf_to_break, COMSIG_PARENT_QDELETING, PROC_REF(clean_up))

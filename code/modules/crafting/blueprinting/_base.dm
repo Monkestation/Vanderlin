@@ -52,7 +52,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 		if(!checking)
 			to_chat(user, "<span class='warning'>Need a ceiling above to hang this!</span>")
 			return FALSE
-		if(istype(checking, /turf/open/transparent/openspace))
+		if(istype(checking, /turf/open/openspace))
 			to_chat(user, "<span class='warning'>Need a solid ceiling above!</span>")
 			return FALSE
 

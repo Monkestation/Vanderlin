@@ -199,7 +199,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 					current_amount = recipe_crop_stocks[G.type]
 
 			// Get quality and freshness from the crop (matching cooking system)
-			var/crop_quality = max(G.recipe_quality, G.quality, 1) // Default quality
+			var/crop_quality = max(G.recipe_quality, 1) // Default quality
 			var/crop_freshness = max(0, (G.warming + G.rotprocess)) // Default freshness
 
 			// Calculate weighted average quality and freshness

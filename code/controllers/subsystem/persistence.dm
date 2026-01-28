@@ -115,8 +115,7 @@ SUBSYSTEM_DEF(persistence)
 	var/list/file_data = list()
 
 	//asert globchems done
-	for(var/randomized_type in subtypesof(/datum/chemical_reaction/randomized))
-		var/datum/chemical_reaction/randomized/R = randomized_type
+	for(var/datum/chemical_reaction/randomized/R as anything in subtypesof(/datum/chemical_reaction/randomized))
 		R = get_chemical_reaction(initial(R.id)) //ew, would be nice to add some simple tracking
 		if(R && R.persistent && R.id)
 			var/recipe_data = list()

@@ -36,8 +36,7 @@
 
 	surgeries = null
 	if(LAZYLEN(status_effects))
-		for(var/s in status_effects)
-			var/datum/status_effect/S = s
+		for(var/datum/status_effect/S as anything in status_effects)
 			if(S.on_remove_on_mob_delete) //the status effect calls on_remove when its mob is deleted
 				qdel(S)
 			else
@@ -932,19 +931,35 @@
 	update_stat()
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE, amount)
 
-//Proc used to resuscitate a mob, for full_heal see fully_heal()
-/mob/living/proc/revive(full_heal = FALSE, admin_revive = FALSE)
-	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal, admin_revive)
-	if(full_heal)
-		fully_heal(admin_revive = admin_revive)
+/**
+ * Proc used to resuscitate a mob, bringing them back to life.
+ *
+ * Note that, even if a mob cannot be revived, the healing from this proc will still be applied.
+ *
+ * Arguments
+ * * full_heal_flags - Optional. If supplied, [/mob/living/fully_heal] will be called with these flags before revival.
+ * * excess_healing - Optional. If supplied, this number will be used to apply a bit of healing to the mob. Currently, 1 "excess healing" translates to -1 oxyloss, -1 toxloss, +2 blood, -5 to all organ damage.
+ * * force_grab_ghost - We grab the ghost of the mob on revive. If TRUE, we force grab the ghost (includes suiciders). If FALSE, we do not. See [/mob/grab_ghost].
+ *
+ */
+/mob/living/proc/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
+	if(excess_healing)
+		adjustOxyLoss(-excess_healing, FALSE)
+		adjustToxLoss(-excess_healing, FALSE, TRUE)
+		updatehealth()
+
+	// grab_ghost(force_grab_ghost)
+	if(full_heal_flags)
+		fully_heal(full_heal_flags)
+
 	if(stat == DEAD && can_be_revived()) //in some cases you can't revive (e.g. no brain)
-		if(!full_heal && !admin_revive && health > HALFWAYCRITDEATH)
-			adjustOxyLoss(health - HALFWAYCRITDEATH, FALSE)
 		GLOB.dead_mob_list -= src
 		GLOB.alive_mob_list += src
 		set_suicide(FALSE)
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
 		updatehealth() //then we check if the mob should wake up.
+		// if(full_heal_flags & HEAL_ADMIN)
+		// 	get_up(TRUE)
 		update_sight()
 		clear_alert("not_enough_oxy")
 		reload_fullscreen()
@@ -956,19 +971,20 @@
 			var/mob/living/carbon/human/human = src
 			human.funeral = FALSE
 		client?.verbs -= /client/proc/descend
+		if(excess_healing)
+			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
+			log_combat(src, src, "revived")
 
-/mob/living/proc/remove_CC()
-	SetStun(0, TRUE)
-	SetKnockdown(0, TRUE)
-	SetImmobilized(0, TRUE)
-	SetParalyzed(0, TRUE)
-	SetSleeping(0, TRUE)
-	SetUnconscious(0, TRUE)
+	// else if(full_heal_flags & HEAL_ADMIN)
+	// 	updatehealth()
+	// 	get_up(TRUE)
+
+	// The signal is called after everything else so components can properly check the updated values
+	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)
 
 /mob/living/Crossed(atom/movable/AM)
 	. = ..()
-	for(var/i in get_equipped_items())
-		var/obj/item/item = i
+	for(var/obj/item/item as anything in get_equipped_items())
 		SEND_SIGNAL(item, COMSIG_ITEM_WEARERCROSSED, AM, src)
 	if(isliving(AM))
 		var/mob/living/L = AM
@@ -977,46 +993,75 @@
 			L.Knockdown(10)
 			L.Immobilize(20)
 
+/**
+ * A grand proc used whenever this mob is, quote, "fully healed".
+ * Fully healed could mean a number of things, such as "healing all the main damage types", "healing all the organs", etc
+ * So, you can pass flags to specify
+ *
+ * See [mobs.dm] for more information on the flags
+ *
+ * If you ever think "hey I'm adding something and want it to be reverted on full heal",
+ * consider handling it via signal instead of implementing it in this proc
+ */
+/mob/living/proc/fully_heal(heal_flags = HEAL_ALL)
+	SHOULD_CALL_PARENT(TRUE)
 
+	if(heal_flags & HEAL_TOX) //zero as second argument not automatically call updatehealth().
+		setToxLoss(0, FALSE, TRUE)
+	if(heal_flags & HEAL_OXY)
+		setOxyLoss(0, FALSE, TRUE)
+	if(heal_flags & HEAL_CLONE)
+		setCloneLoss(0, FALSE, TRUE)
+	if(heal_flags & HEAL_BRUTE)
+		setBruteLoss(0, FALSE, TRUE)
+	if(heal_flags & HEAL_BURN)
+		setFireLoss(0, FALSE, TRUE)
+	if(heal_flags & HEAL_STAM)
+		adjust_stamina(-maximum_stamina, internal_regen = FALSE)
 
-//proc used to completely heal a mob.
-//admin_revive = TRUE is used in other procs, for example mob/living/carbon/fully_heal()
-/mob/living/proc/fully_heal(admin_revive = FALSE)
-	restore_blood()
-	setToxLoss(0, 0) //zero as second argument not automatically call updatehealth().
-	setOxyLoss(0, 0)
-	setCloneLoss(0, 0)
-	remove_CC()
+	if(heal_flags & HEAL_ESSENTIALS)
+		set_nutrition(NUTRITION_LEVEL_FED + 50)
+		set_hydration(HYDRATION_LEVEL_HYDRATED + 50)
+
 	set_disgust(0)
-	set_nutrition(NUTRITION_LEVEL_FED + 50)
-	bodytemperature = BODYTEMP_NORMAL
-	set_blindness(0)
-	set_dizziness(0)
-	cure_nearsighted()
-	cure_blind()
 	cure_husk()
-	heal_overall_damage(INFINITY, INFINITY, null, TRUE) //heal brute and burn dmg on both organic and robotic limbs, and update health right away.
-	for(var/datum/wound/wound as anything in get_wounds())
-		if(admin_revive)
-			qdel(wound)
-		else
-			wound.heal_wound(wound.whp)
+
+	if(heal_flags & HEAL_WOUNDS)
+		for(var/datum/wound/wound as anything in get_wounds())
+			if(heal_flags & ADMIN_HEAL_ALL)
+				qdel(wound)
+			else
+				wound.heal_wound(wound.whp)
+
+	if(heal_flags & HEAL_TEMP)
+		bodytemperature = BODYTEMP_NORMAL
+	if(heal_flags & HEAL_BLOOD)
+		restore_blood()
+	if(reagents && (heal_flags & HEAL_ALL_REAGENTS))
+		for(var/addi in reagents.addiction_list)
+			reagents.remove_addiction(addi)
+		reagents.clear_reagents()
+
 	ExtinguishMob()
 	fire_stacks = 0
 	divine_fire_stacks = 0
-	dizziness = 0
+
 	stuttering = 0
 	slurring = 0
-	jitteriness = 0
 	slowdown = 0
+
+	if(heal_flags & HEAL_ADMIN)
+		suiciding = FALSE
+
+	updatehealth()
 	stop_sound_channel(CHANNEL_HEARTBEAT)
-	SEND_SIGNAL(src, COMSIG_LIVING_POST_FULLY_HEAL, admin_revive)
+	SEND_SIGNAL(src, COMSIG_LIVING_POST_FULLY_HEAL, heal_flags)
 
 //proc called by revive(), to check if we can actually ressuscitate the mob (we don't want to revive him and have him instantly die again)
 /mob/living/proc/can_be_revived()
-	. = TRUE
 	if(health <= HEALTH_THRESHOLD_DEAD)
 		return FALSE
+	return TRUE
 
 
 /mob/living/carbon/human/can_be_revived()
@@ -1106,7 +1151,7 @@
 	if(active_storage)
 		active_storage.close(src)
 
-	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss()*200/maxHealth))
+	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss() * (200/max(maxHealth, 1))))
 		makeTrail(newloc, T, old_direction)
 
 /mob/living/setDir(newdir)
@@ -1383,7 +1428,7 @@
 				var/target_zone = pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
 				attacker.apply_damage(damage, BRUTE, target_zone)
 				attacker.OffBalance(1.5 SECONDS)
-				attacker.adjust_confusion(2 SECONDS)
+				attacker.adjust_confusion(4 SECONDS)
 
 			// if("stomp")
 			// 	if(attacker.body_position != LYING_DOWN && body_position != LYING_DOWN)
@@ -1710,13 +1755,6 @@
 			who.show_inv(src)
 		else
 			src << browse(null,"window=mob[REF(who)]")
-
-/mob/living/proc/do_jitter_animation(jitteriness)
-	var/amplitude = min(4, (jitteriness/100) + 1)
-	var/pixel_x_diff = rand(-amplitude, amplitude)
-	var/pixel_y_diff = rand(-amplitude/3, amplitude/3)
-	animate(src, pixel_x = pixel_x_diff, pixel_y = pixel_y_diff , time = 2, loop = 6, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL)
-	animate(pixel_x = -pixel_x_diff , pixel_y = -pixel_y_diff , time = 2, flags = ANIMATION_RELATIVE)
 
 /mob/living/proc/get_standard_pixel_x_offset()
 	var/_x = base_pixel_x
@@ -2106,7 +2144,7 @@
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
 		if(storage)
-			var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+			var/obj/item/mob_holder/holder = new(get_turf(src), src)
 			visible_message(span_warning("[src] starts to climb into [over]."), span_warning("You start to climb into [over]."))
 			if(do_after(src, 1.2 SECONDS, over))
 				if(over.loc == src)
@@ -2130,7 +2168,7 @@
 		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
 		if(!picked)
 			return
-		var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))
 		if(do_after(src, 3 SECONDS, over))
 			if(picked.loc == src)
@@ -2156,7 +2194,7 @@
 
 
 /mob/living/proc/mob_pickup(mob/living/user)
-	var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+	var/obj/item/mob_holder/holder = new(get_turf(src), src)
 	user.visible_message(span_warning("[user] scoops up [src]!"))
 	user.put_in_hands(holder)
 
@@ -2244,7 +2282,7 @@
 		if("sleeping")
 			SetSleeping(var_value)
 		if("eye_blind")
-			set_blindness(var_value)
+			adjust_temp_blindness(var_value)
 		if("eye_damage")
 			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
 			if(E)
@@ -2537,6 +2575,8 @@
 		visible_message(span_info("[src] looks up."))
 	var/turf/ceiling = get_step_multiz(src, UP)
 	var/turf/T = get_turf(src)
+	if(isnull(ceiling)) //Can't check what isn't there
+		return
 	if(!istransparentturf(ceiling)) //There is no turf we can look through above us
 		to_chat(src, span_warning("A ceiling above my head."))
 		return

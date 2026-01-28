@@ -1,3 +1,9 @@
+#define TRANSFORMATION_DURATION 22
+/// Will be removed once the transformation is complete.
+#define TEMPORARY_TRANSFORMATION_TRAIT "temporary_transformation"
+/// Considered "permanent" since we'll be deleting the old mob and the client will be inserted into a new one (without this trait)
+#define PERMANENT_TRANSFORMATION_TRAIT "permanent_transformation"
+
 /mob/living/carbon/proc/monkeyize(tr_flags = (TR_KEEPITEMS | TR_KEEPVIRUS | TR_KEEPSTUNS | TR_KEEPREAGENTS | TR_DEFAULTMSG))
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
@@ -59,8 +65,7 @@
 
 	//re-add organs to new mob. this order prevents moving the mind to a brain at any point
 	if(tr_flags & TR_KEEPORGANS)
-		for(var/X in O.internal_organs)
-			var/obj/item/organ/I = X
+		for(var/obj/item/organ/I as anything in O.internal_organs)
 			I.Remove(O, 1)
 
 		if(mind)
@@ -82,8 +87,7 @@
 		var/obj/item/bodypart/BP = O.get_bodypart(missing_zone)
 		BP.drop_limb(1)
 		if(!(tr_flags & TR_KEEPORGANS)) //we didn't already get rid of the organs of the newly spawned mob
-			for(var/X in O.internal_organs)
-				var/obj/item/organ/G = X
+			for(var/obj/item/organ/G as anything in O.internal_organs)
 				if(BP.body_zone == check_zone(G.zone))
 					qdel(G) //we lose the organs in the missing limbs
 		qdel(BP)
@@ -192,8 +196,7 @@
 		O.updatehealth()
 
 	if(tr_flags & TR_KEEPORGANS)
-		for(var/X in O.internal_organs)
-			var/obj/item/organ/I = X
+		for(var/obj/item/organ/I as anything in O.internal_organs)
 			I.Remove(O, 1)
 
 		if(mind)
@@ -215,8 +218,7 @@
 		var/obj/item/bodypart/BP = O.get_bodypart(missing_zone)
 		BP.drop_limb(1)
 		if(!(tr_flags & TR_KEEPORGANS)) //we didn't already get rid of the organs of the newly spawned mob
-			for(var/X in O.internal_organs)
-				var/obj/item/organ/G = X
+			for(var/obj/item/organ/G as anything in O.internal_organs)
 				if(BP.body_zone == check_zone(G.zone))
 					qdel(G) //we lose the organs in the missing limbs
 		qdel(BP)
@@ -320,3 +322,7 @@
 
 	//Not in here? Must be untested!
 	return 0
+
+#undef PERMANENT_TRANSFORMATION_TRAIT
+#undef TEMPORARY_TRANSFORMATION_TRAIT
+#undef TRANSFORMATION_DURATION

@@ -414,3 +414,8 @@
 	stress_change = -2
 	desc = span_green("The servants are working well as they should.. what a great place.")
 	timer = 10 MINUTES
+
+/datum/stress_event/poohit_nice
+	stress_change = -1
+	desc = span_green("Someone gave me a good pie-ing.")
+	timer = 3 MINUTES

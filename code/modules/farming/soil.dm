@@ -368,7 +368,7 @@
 	if(plant && plant_dead)
 		plant_dead = FALSE
 		plant_health = 10.0
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 
 	// Dendor provides balanced nutrients if low
 	if(nitrogen < 30)
@@ -385,7 +385,7 @@
 	// And it grows a little!
 	if(plant)
 		if(add_growth(2 MINUTES))
-			update_icon()
+			update_appearance(UPDATE_OVERLAYS)
 
 /// adjust water
 /obj/structure/soil/proc/adjust_water(adjust_amount)
@@ -655,14 +655,14 @@
 
 	// Calculate max quality points based on total potential time
 	// Base time + production time + reasonable harvest window
-	var/total_potential_time = plant.maturation_time + plant.produce_time
+	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
 
 	var/progress_ratio = quality_points / max_quality_points
 	var/diminishing_returns = 1 - (progress_ratio * 0.8)  // Slightly reduced diminishing returns
 
 	// Accumulate quality points
-	quality_points += dt * quality_rate * 0.26 * phase_multiplier * diminishing_returns
+	quality_points += (dt / 10) * quality_rate * 0.26 * phase_multiplier * diminishing_returns
 	quality_points = min(quality_points, max_quality_points)
 
 	// Quality tier thresholds

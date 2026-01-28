@@ -13,7 +13,7 @@
 	var/current_recipe = null         // Currently viewed recipe
 	var/search_query = ""             // Current search query
 
-/obj/item/recipe_book/New()
+/obj/item/recipe_book/Initialize(mapload)
 	. = ..()
 	// Populate categories from types with custom categories
 	generate_categories()

@@ -566,7 +566,7 @@
 
 /datum/reagent/flour/on_mob_life(mob/living/carbon/M)
 	if(prob(30))
-		M.adjust_confusion(0.3 SECONDS)
+		M.adjust_confusion(6 SECONDS)
 	M.emote(pick("cough"))
 	..()
 
