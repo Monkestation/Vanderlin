@@ -1422,6 +1422,7 @@
 #include "code\datums\stock\import.dm"
 #include "code\datums\stock\stockpile.dm"
 #include "code\datums\storage\_storage.dm"
+#include "code\datums\storage\no_interface.dm"
 #include "code\datums\storage\storages\storage_grid_types.dm"
 #include "code\datums\storage\storages\storage_types.dm"
 #include "code\datums\storytellers\_base.dm"
