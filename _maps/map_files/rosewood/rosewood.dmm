@@ -5201,12 +5201,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/closed/wall/mineral/decostone/moss/blue,
 /area/outdoors/town)
-"cKT" = (
-/obj/structure/fluff/walldeco/vinez/blue,
-/obj/structure/window/openclose/reinforced,
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/tavern)
 "cKU" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
@@ -22852,7 +22846,6 @@
 /obj/structure/window/openclose/reinforced{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
@@ -102810,8 +102803,8 @@ gYK
 gYK
 omp
 lTl
-kib
-cKT
+qMy
+nYv
 oaV
 sHn
 scp
@@ -103012,7 +103005,7 @@ omp
 gYK
 omp
 omp
-sdv
+qMy
 nYv
 uoe
 uoe
