@@ -11,7 +11,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 
-/obj/item/clothing/shoes/nobleboot/apply_components()
+/obj/item/clothing/shoes/nobleboot/Initialize(mapload, ...)
 	. = ..()
 	create_storage(type = /datum/storage/no_interface/boots)
 
