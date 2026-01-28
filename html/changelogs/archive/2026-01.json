@@ -507,5 +507,26 @@
                 "bugfix": "minimun_skill_required now actually means minimun skill required."
             }
         ]
+    },
+    "2026-01-28": {
+        "realforest2001": [
+            {
+                "code_imp": "Removed unused span defines and style classes."
+            },
+            {
+                "qol": "Job restrictions now show timelock required before checking species/age etc."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "kobolds can eat walls now"
+            },
+            {
+                "rscadd": "kobolds cant eat magic rocks for spells anymore"
+            },
+            {
+                "rscadd": "you can stick kobolds in smelters now"
+            }
+        ]
     }
 }
