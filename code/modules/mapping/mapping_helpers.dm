@@ -228,3 +228,18 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 
 /obj/effect/mapping_helpers/structure/proc/payload(obj/payload)
 	return
+
+/obj/effect/mapping_helpers/sigil_placer
+	name = "Zizo Sigil Placer"
+	desc = "it builds the whole thing"
+	icon_state = "center"
+	icon = 'icons/obj/sigils.dmi'
+	layer = HIGH_SIGIL_LAYER
+	late = TRUE
+
+/obj/effect/mapping_helpers/sigil_placer/LateInitialize()
+	. = ..()
+	var/turf/open/floor/T = get_turf(src)
+	if(istype(T))
+		T.generateSigils(src, null)
+	qdel(src)

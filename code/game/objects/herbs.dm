@@ -192,7 +192,39 @@
 	herbtype = /obj/item/ore/cursedrosa
 	can_replenish = FALSE
 	resistance_flags = FIRE_PROOF
+	max_integrity = 300
+	damage_deflection = 25
+	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
 
 /obj/structure/flora/grass/herb/cursedrosa/Initialize()
 	. = ..()
 	AddComponent(/datum/component/cursedrosa, TRUE, TRUE)
+
+/obj/structure/flora/grass/herb/cursedrosa/spreader
+	var/spread_cap = 4
+	var/vine_cap = 12
+	var/grow_speed = 2
+	var/continuous_growth = TRUE
+	var/vine_type = /obj/structure/vine/black_briar
+
+/obj/structure/flora/grass/herb/cursedrosa/spreader/heavy
+	vine_type = /obj/structure/vine/black_briar/hvy
+
+/obj/structure/flora/grass/herb/cursedrosa/spreader/large
+	spread_cap = 6
+	vine_cap = 20
+
+/obj/structure/flora/grass/herb/cursedrosa/spreader/large/heavy
+	vine_type = /obj/structure/vine/black_briar/hvy
+
+/obj/structure/flora/grass/herb/cursedrosa/spreader/instant
+	grow_speed = 0
+	spread_cap = 100
+	continuous_growth = FALSE
+
+/obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy
+	vine_type = /obj/structure/vine/black_briar/hvy
+
+/obj/structure/flora/grass/herb/cursedrosa/spreader/Initialize()
+	. = ..()
+	AddComponent(/datum/component/vine_controller, vine_type, max_spread=spread_cap, max_vines=vine_cap, seconds_to_grow=grow_speed, delete_after_growing=continuous_growth)

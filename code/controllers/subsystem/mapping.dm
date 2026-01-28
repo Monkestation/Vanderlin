@@ -220,7 +220,7 @@ SUBSYSTEM_DEF(mapping)
 
 #ifndef NO_DUNGEON
 	// Load base dungeon level
-	if(config.map_name != "Voyage")
+	if(config.map_name != "Voyage" && config.map_name != "Rosewood")
 		otherZ += load_map_config("map_files/shared/dungeon")
 
 		// Load additional delve levels if multi-level dungeons are enabled

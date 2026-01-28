@@ -30,6 +30,11 @@
 	init_subtypes(/datum/vine_mutation/, vine_mutations_list)
 	if(potency != null)
 		mutativeness = potency / 10
+	if(grow_speed == 0)
+		var/attempt = 0
+		while(max_vines > length(vines) && !QDELING(src) && attempt < 100)
+			process()
+			attempt++
 
 /datum/component/vine_controller/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(endvines))
@@ -111,6 +116,11 @@
 	var/list/obj/structure/vine/queue_end = list()
 
 	for(var/obj/structure/vine/grow_vine in growth_queue)
+		if(length(vines) >= vine_cap)
+			if(delete_after_growing)
+				qdel(src)
+				return
+			break
 		if(QDELETED(grow_vine))
 			continue
 		i++
@@ -126,11 +136,6 @@
 		if(i > spread_cap)
 			break
 		spawn_spacevine_piece(grow_vine.find_spread(), grow_vine)
-		if(length(vines) >= vine_cap)
-			if(delete_after_growing)
-				qdel(src)
-				return
-			break
 		if(i > length)
 			break
 	growth_queue += queue_end

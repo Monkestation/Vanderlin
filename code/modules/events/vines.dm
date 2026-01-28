@@ -251,14 +251,17 @@
 		if(0)
 			current_state = "Light[num_state]"
 			density = FALSE
+			obj_flags &= ~(BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP)
 			set_opacity(0)
 		if(1)
 			current_state = "Med[num_state]"
 			density = FALSE
+			obj_flags &= ~(BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP)
 			set_opacity(0)
 		else
 			current_state = "Hvy[num_state]"
 			density = TRUE
+			obj_flags |= BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 			set_opacity(1)
 	icon_state = "[base_icon_state][current_state]"
 
@@ -331,13 +334,16 @@
 /obj/structure/vine/proc/find_spread()
 	var/direction = pick(GLOB.cardinals)
 	var/turf/stepturf = get_step(src,direction)
+	if(!stepturf.can_traverse_safely(src))
+		return
 	if(!stepturf.Enter(src))
+		return
+	if(locate(/obj/structure/vine, stepturf))
 		return
 	for(var/datum/vine_mutation/SM in mutations)
 		SM.on_spread(src, stepturf)
 		stepturf = get_step(src,direction) //in case turf changes, to make sure no runtimes happen
-	if(!locate(/obj/structure/vine, stepturf))
-		return stepturf
+	return stepturf
 
 /obj/structure/vine/ex_act(severity, target)
 	if(istype(target, type)) //if its agressive spread vine dont do anything
@@ -384,6 +390,16 @@
 /obj/structure/vine/black_briar/unbuckle_mob(mob/living/buckled_mob, force)
 	if(!permanent_buckle || force)
 		. = ..()
+
+/obj/structure/vine/black_briar/medium
+	icon_state = "BriarMed1"
+	energy = 1
+
+/obj/structure/vine/black_briar/hvy
+	icon_state = "BriarHvy1"
+	max_energy = 2
+	energy = 2
+	max_integrity = 1000
 
 /proc/isvineimmune(atom/A)
 	. = FALSE
