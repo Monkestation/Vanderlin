@@ -2468,17 +2468,6 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town)
-"boK" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/shadow_floor,
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14
-	},
-/turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/theatre)
 "boM" = (
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	redstone_id = "RosewoodM10"
@@ -5266,10 +5255,6 @@
 "cMr" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
 	},
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
@@ -10429,22 +10414,8 @@
 /turf/open/floor/wood,
 /area/indoors/town/manor)
 "fGJ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall";
-	pixel_y = -14
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
-	},
 /obj/effect/decal/shadow_floor{
 	dir = 8
-	},
-/obj/effect/decal/shadow_floor{
-	dir = 8;
-	pixel_x = -14;
-	pixel_y = 15
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/theatre)
@@ -10690,10 +10661,6 @@
 "fPK" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
 	},
 /turf/open/floor/sand,
 /area/indoors/town/tavern)
@@ -11010,28 +10977,9 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/rtfield/safe)
 "fYr" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall";
-	pixel_y = 0;
-	pixel_x = -9
-	},
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor{
 	dir = 8
-	},
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14;
-	pixel_x = -9
-	},
-/obj/effect/decal/shadow_floor{
-	dir = 8;
-	pixel_x = -14;
-	pixel_y = -6
 	},
 /obj/machinery/light/fueled/wallfire/candle/lamp{
 	pixel_y = 6
@@ -13632,15 +13580,8 @@
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "hvk" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/shadow_floor,
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14
-	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/theatre)
 "hvA" = (
@@ -14307,20 +14248,10 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/chapel)
 "hLs" = (
-/obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/shadow_floor{
 	dir = 5;
 	pixel_y = 32;
 	pixel_x = 32
-	},
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14;
-	pixel_x = 16
-	},
-/obj/effect/decal/shadow_floor{
-	dir = 8;
-	pixel_x = -14;
-	pixel_y = 15
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/theatre)
@@ -19112,10 +19043,6 @@
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/town)
 "kqe" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
-	dir = 1
-	},
 /obj/structure/pillory,
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -19149,15 +19076,6 @@
 	dir = 9;
 	pixel_y = 32;
 	pixel_x = -32
-	},
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14;
-	pixel_x = -16
-	},
-/obj/effect/decal/shadow_floor{
-	dir = 4;
-	pixel_x = 14;
-	pixel_y = 17
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/theatre)
@@ -19721,24 +19639,10 @@
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "kHO" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall";
-	pixel_y = 0;
-	pixel_x = 7
-	},
 /obj/effect/decal/shadow_floor{
 	dir = 4
 	},
 /obj/effect/decal/shadow_floor,
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14;
-	pixel_x = 7
-	},
 /obj/machinery/light/fueled/wallfire/candle/lamp{
 	pixel_y = 6
 	},
@@ -21038,14 +20942,7 @@
 /turf/open/floor/blocks,
 /area/indoors/town/church/inquisition)
 "lqH" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
 /obj/effect/decal/shadow_floor,
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14
-	},
 /turf/open/floor/carpet,
 /area/indoors/town/theatre)
 "lqI" = (
@@ -34213,14 +34110,6 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town/tavern)
 "sgG" = (
@@ -34503,10 +34392,6 @@
 "sqo" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -35842,10 +35727,6 @@
 "tah" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
 	},
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -37829,14 +37710,6 @@
 	},
 /obj/structure/fluff/railing/border{
 	dir = 9
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -40689,14 +40562,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "vBn" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
 /obj/effect/decal/shadow_floor,
-/obj/effect/decal/shadow_floor{
-	pixel_y = -14
-	},
 /obj/machinery/light/fueled/wallfire/candle/lamp{
 	pixel_y = 6
 	},
@@ -41297,15 +41163,6 @@
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors/villagegarrison)
 "vRO" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall";
-	pixel_y = -14
-	},
 /obj/structure/fluff/railing/border{
 	dir = 9;
 	pixel_x = -11;
@@ -41313,11 +41170,6 @@
 	},
 /obj/effect/decal/shadow_floor{
 	dir = 4
-	},
-/obj/effect/decal/shadow_floor{
-	dir = 4;
-	pixel_x = 14;
-	pixel_y = 18
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/theatre)
@@ -42820,16 +42672,6 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/snow/patchy,
 /area/outdoors/rtfield/safe)
-"wJo" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/town)
 "wJt" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/blocks/platform,
@@ -59359,7 +59201,7 @@ raf
 xcO
 hkm
 moA
-boK
+dqZ
 vNi
 dlN
 lJy
@@ -59561,7 +59403,7 @@ uGG
 uGG
 uGG
 ewT
-boK
+dqZ
 sbQ
 lJy
 lJy
@@ -60571,7 +60413,7 @@ uGG
 uGG
 uGG
 ewT
-boK
+dqZ
 sbQ
 lJy
 lJy
@@ -103579,7 +103421,7 @@ vIh
 sGg
 kVL
 dif
-wJo
+hcq
 ctm
 pmI
 huA
