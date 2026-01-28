@@ -54,8 +54,8 @@
 	output = /obj/item/clothing/face/phys/plaguebearer
 	requirements = list(/obj/item/clothing/face/phys = 1,
 				/obj/item/alch/herb/mentha = 2,
-				/obj/item/alch/herb/calendula = 1)		
-	craftdiff = 1
+				/obj/item/alch/herb/calendula = 1)
+	craftdiff = 3
 	category = "Mask"
 
 /* craftdif of 2 = APPRENTICE */
