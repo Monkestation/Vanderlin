@@ -43399,11 +43399,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"wWU" = (
-/obj/item/explosive/canister_bomb,
-/obj/item/flashlight/flare/torch/prelit,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/theatre)
 "wWW" = (
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/shop)
@@ -60096,7 +60091,7 @@ bTf
 czC
 uMv
 uGG
-wWU
+uGG
 uGG
 ewT
 lqH
@@ -102724,7 +102719,7 @@ jYk
 pmI
 omp
 omp
-ide
+omp
 omp
 pmI
 bWr
