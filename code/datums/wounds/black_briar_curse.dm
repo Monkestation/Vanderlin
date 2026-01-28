@@ -65,7 +65,7 @@
 	if(istype(other, /datum/wound/black_briar_curse))
 		if(!(src in GLOB.primordial_wounds)) //idk why someone would be using these this way but i'd prefer not to build up its infection
 			var/datum/wound/black_briar_curse/O = other
-			O.infection = min(O.infection + O.max_infection * 0.05, O.max_infection)
+			O.infection = min(O.infection + O.max_infection * 0.035, O.max_infection)
 			remove_immunity(O.owner)
 		return FALSE
 	return TRUE
@@ -113,7 +113,7 @@
 	//the pain should roughly start just a little bit after the infection is no longer hidden
 	//because we really don't wanna overshoot somehow and get an undefined number we're gonna give a .001 bump
 	woundpain = max(0, (1 - BBC_STAGE_DETECTABLE) / (1.001 + woundpain_inverse - infection_percent) - 1)
-	to_chat(owner, "[bodypart_owner.body_zone] - [round(infection / 10)] sec - [round(infection_percent * 100)]%")
+	//to_chat(owner, "[bodypart_owner.body_zone] - [round(infection / 10)] sec - [round(infection_percent * 100)]%")
 	if(infection_percent >= BBC_STAGE_DETECTABLE)
 		can_examine = TRUE // Once it's been identified, we'll always know if we have it if it goes back below hidden
 	update_appearance()
