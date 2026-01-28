@@ -334,6 +334,8 @@
 /obj/structure/vine/proc/find_spread()
 	var/direction = pick(GLOB.cardinals)
 	var/turf/stepturf = get_step(src,direction)
+	if(isopenspace(stepturf))
+		return
 	if(!stepturf.can_traverse_safely(src))
 		return
 	if(!stepturf.Enter(src))

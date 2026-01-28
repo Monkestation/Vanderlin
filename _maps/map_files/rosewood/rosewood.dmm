@@ -293,13 +293,6 @@
 	},
 /turf/open/floor/grass/cold,
 /area/outdoors/town)
-"ajv" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/sand,
-/area/indoors/town/tavern)
 "ajw" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -3604,7 +3597,6 @@
 /area/indoors/town)
 "bTf" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/bard,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/theatre)
@@ -3674,16 +3666,6 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/inquisition)
-"bVh" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/machinery/light/fueled/firebowl/firebowlb,
-/turf/open/floor/dirt/road,
-/area/under/town/basement)
 "bVk" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood,
@@ -5228,6 +5210,12 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/closed/wall/mineral/decostone/moss/blue,
 /area/outdoors/town)
+"cKT" = (
+/obj/structure/fluff/walldeco/vinez/blue,
+/obj/structure/window/openclose/reinforced,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/tavern)
 "cKU" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
@@ -5755,16 +5743,6 @@
 /obj/structure/window/stained/silver/alt,
 /turf/open/floor/blocks,
 /area/indoors/town/church/chapel)
-"cXV" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/machinery/light/fueled/firebowl/firebowlb,
-/turf/open/floor/dirt,
-/area/under/town/basement)
 "cXY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -8965,10 +8943,6 @@
 "eMR" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/tabard,
-/obj/item/weapon/polearm/spear/bronze{
-	desc = "A bronze lance designed for horse riding combat. May the ten forgive anyone on the opposite end of this lance.";
-	name = "Bronze Lance"
-	},
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
 "eMY" = (
@@ -10243,12 +10217,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"fyC" = (
-/obj/structure/chair/hotspring_bench{
-	dir = 1
-	},
-/turf/open/floor/carpet,
-/area/indoors/town/tavern)
 "fyD" = (
 /obj/structure/closet/crate/drawer,
 /obj/machinery/light/fueled/wallfire/candle/l{
@@ -10523,15 +10491,6 @@
 	},
 /turf/open/floor/church,
 /area/indoors/town/manor)
-"fHo" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	layer = 2.7;
-	pixel_x = -2;
-	pixel_y = 7
-	},
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "fHK" = (
 /obj/structure/door/window{
 	name = "barracks door"
@@ -11658,20 +11617,7 @@
 	dir = 1;
 	icon_state = "longtable_mid"
 	},
-/obj/item/paper,
 /obj/structure/mirror,
-/obj/item/candle/yellow{
-	pixel_x = 10;
-	pixel_y = 15
-	},
-/obj/item/candle/yellow/lit{
-	pixel_y = 9;
-	pixel_x = -18
-	},
-/obj/item/natural/feather{
-	pixel_y = 4;
-	pixel_x = 11
-	},
 /obj/effect/decal/shadow_floor,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/theatre)
@@ -12448,6 +12394,13 @@
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/snow,
 /area/outdoors/exposed/church)
+"gKK" = (
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = -7;
+	pixel_y = -4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "gKU" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/rtfield)
@@ -12646,12 +12599,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/orphanage)
-"gQk" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "gQo" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "RosewoodM15"
@@ -14305,6 +14252,12 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
+"hJf" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/outdoors/town)
 "hJg" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -14614,7 +14567,7 @@
 	pixel_y = 32;
 	name = "rosewood flag"
 	},
-/turf/open/openspace,
+/turf/open/floor/wood,
 /area/outdoors/town)
 "hSB" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -14855,6 +14808,12 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
+"hYv" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 8
+	},
+/turf/open/floor/sand,
+/area/outdoors/town)
 "hYE" = (
 /obj/item/fertilizer/ash,
 /turf/open/floor/ruinedwood/chevron,
@@ -15045,7 +15004,6 @@
 /obj/structure/stairs{
 	dir = 1
 	},
-/obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
 "ieh" = (
@@ -18203,10 +18161,6 @@
 "jNq" = (
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
-"jNI" = (
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/ruinedwood/turned,
-/area/indoors/town/tavern)
 "jNP" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -18544,7 +18498,6 @@
 /obj/structure/stairs{
 	dir = 1
 	},
-/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/tavern)
 "jXw" = (
@@ -18629,13 +18582,6 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
-"kap" = (
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_x = -7;
-	pixel_y = -4
-	},
-/turf/open/openspace,
-/area/indoors/town/tavern)
 "kau" = (
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/tile/bath,
@@ -19847,6 +19793,10 @@
 	},
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors/town/shop)
+"kHL" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "kHO" = (
 /obj/effect/decal/cobbleedge{
 	dir = 8;
@@ -22145,15 +22095,6 @@
 /obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/grass/cold,
 /area/outdoors/town)
-"lTq" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/cloak/tabard,
-/obj/item/weapon/polearm/spear/bronze{
-	name = "Bronze Lance";
-	desc = "A bronze lance designed for horse riding combat. May the ten forgive anyone on the opposite end of this lance."
-	},
-/turf/open/floor/cobblerock,
-/area/under/town/basement)
 "lTJ" = (
 /obj/structure/stairs{
 	dir = 1
@@ -22855,15 +22796,6 @@
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/magician)
-"mld" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/turf/open/floor/dirt,
-/area/under/town/basement)
 "mle" = (
 /obj/structure/rack,
 /obj/item/storage/sack,
@@ -23559,6 +23491,12 @@
 /obj/structure/window/stained/yellow,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
+"mDF" = (
+/obj/structure/window,
+/obj/structure/fluff/walldeco/vinez/blue,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/dirt,
+/area/indoors/town/tavern)
 "mDJ" = (
 /obj/structure/toilet,
 /obj/structure/fluff/clodpile{
@@ -23725,12 +23663,6 @@
 	},
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/town/roofs)
-"mHQ" = (
-/obj/machinery/light/fueled/wallfire{
-	pixel_y = -32
-	},
-/turf/open/floor/ruinedwood/turned,
-/area/indoors/town/tavern)
 "mIe" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -23942,10 +23874,6 @@
 	},
 /turf/open/floor/woodturned,
 /area/indoors/town)
-"mNF" = (
-/obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/ruinedwood/turned,
-/area/indoors/town/tavern)
 "mNJ" = (
 /obj/structure/fluff/walldeco/bigpainting{
 	pixel_x = 0
@@ -24784,10 +24712,6 @@
 "njP" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
-	},
-/mob/living/simple_animal/hostile/retaliate/trufflepig/male{
-	name = "Jousting Pig";
-	desc = "A large hairy pig designed for jousting in the pits"
 	},
 /turf/open/floor/dirt/road,
 /area/under/town/basement)
@@ -26335,7 +26259,7 @@
 /area/under/town/sewer)
 "nYv" = (
 /obj/structure/window/openclose/reinforced,
-/obj/structure/curtain/bounty,
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
 "nYy" = (
@@ -26443,9 +26367,6 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/landmark/start/villager{
-	dir = 4
-	},
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
 "obn" = (
@@ -27038,19 +26959,6 @@
 /obj/structure/apiary/starter,
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
-"oom" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/structure/fluff/statue/tdummy,
-/turf/open/floor/dirt,
-/area/under/town/basement)
 "oox" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/truffles,
@@ -27322,6 +27230,12 @@
 /obj/machinery/light/fueled/chand,
 /turf/open/openspace,
 /area/indoors/town/shop)
+"owe" = (
+/obj/structure/window/openclose/reinforced,
+/obj/structure/curtain/bounty,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/tavern)
 "owK" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -28698,21 +28612,6 @@
 /obj/structure/carpet,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/villagegarrison)
-"phe" = (
-/obj/structure/table/wood{
-	dir = 1;
-	icon_state = "longtable_mid"
-	},
-/obj/item/reagent_containers/powder/spice,
-/obj/item/perfume/random,
-/obj/structure/mirror,
-/obj/item/alch/herb/rosa{
-	pixel_y = 10;
-	pixel_x = 5
-	},
-/obj/effect/decal/shadow_floor,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town/theatre)
 "phi" = (
 /obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/dirt,
@@ -32123,16 +32022,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
-"qZC" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/mob/living/simple_animal/hostile/retaliate/trufflepig/male{
-	name = "Jousting Pig";
-	desc = "A large hairy pig designed for jousting in the pits"
-	},
-/turf/open/floor/dirt/road,
-/area/under/town/basement)
 "raf" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
@@ -32829,15 +32718,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/herringbone,
 /area/indoors/town)
-"rtx" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/turf/open/floor/dirt/road,
-/area/under/town/basement)
 "rtF" = (
 /obj/structure/flora/grass/bush/wall/tall/tundra,
 /obj/effect/landmark/start/vagrant{
@@ -34635,6 +34515,12 @@
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/craftstone,
 /area/under/cave)
+"snn" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/town)
 "snp" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
@@ -35340,6 +35226,11 @@
 	},
 /turf/open/floor/grass/cold,
 /area/outdoors/town)
+"sHj" = (
+/obj/structure/window,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/dirt,
+/area/indoors/town/tavern)
 "sHl" = (
 /obj/structure/flora/grass/herb/cursedrosa/spreader/instant,
 /turf/open/floor/rooftop,
@@ -35561,10 +35452,6 @@
 	},
 /obj/item/perfume/random,
 /obj/structure/mirror,
-/obj/item/candle/yellow{
-	pixel_x = -2;
-	pixel_y = 15
-	},
 /obj/effect/decal/shadow_floor,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/theatre)
@@ -37630,12 +37517,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/merc_guild)
-"tPu" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "tPw" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 32
@@ -39601,12 +39482,6 @@
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/dirt,
 /area/indoors/town/clinic_large)
-"uTG" = (
-/obj/effect/landmark/hammer/dev_text{
-	name = "Bards should get a mood buff for performing in the theater"
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/theatre)
 "uTL" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -39880,17 +39755,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/town/sewer)
-"vbe" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/structure/fluff/statue/tdummy,
-/turf/open/floor/dirt/road,
-/area/under/town/basement)
 "vbh" = (
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/carpet/green,
@@ -43535,6 +43399,11 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
+"wWU" = (
+/obj/item/explosive/canister_bomb,
+/obj/item/flashlight/flare/torch/prelit,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/theatre)
 "wWW" = (
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/shop)
@@ -44034,6 +43903,10 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood,
+/area/indoors/town/tavern)
+"xlA" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/sand,
 /area/indoors/town/tavern)
 "xlL" = (
 /obj/structure/bed/wool,
@@ -44598,6 +44471,10 @@
 	dir = 4
 	},
 /area/outdoors/town/roofs)
+"xBZ" = (
+/obj/structure/table/wood/treestump/burnt,
+/turf/open/floor/dirt,
+/area/outdoors/town)
 "xCa" = (
 /obj/structure/bars/pipe{
 	dir = 8
@@ -60214,13 +60091,13 @@ qRF
 qRF
 tuM
 wDN
-phe
+gnW
 bTf
 czC
 uMv
 uGG
+wWU
 uGG
-uTG
 ewT
 lqH
 jZD
@@ -60446,12 +60323,12 @@ rbI
 uqd
 oFc
 oFc
-oom
-bVh
-rtx
-mld
-cXV
-vbe
+vOT
+oFc
+oFc
+vOT
+vOT
+oFc
 oFc
 vOT
 uqd
@@ -61659,7 +61536,7 @@ pTt
 jyq
 bMF
 ylG
-qZC
+oHg
 vZk
 ylG
 oHg
@@ -62467,7 +62344,7 @@ uqd
 uqd
 uqd
 pTt
-lTq
+eMR
 bMF
 jyq
 eMR
@@ -100035,20 +99912,20 @@ eKH
 dcB
 wZA
 qjP
-fnl
+xlA
 uoe
 uoe
 uoe
 fnl
 uoe
+gDj
 uoe
-uoe
-uoe
+bcF
 fnl
 uoe
 rRU
-uoe
-fnl
+gDj
+kHL
 qjP
 hVe
 gYK
@@ -100239,18 +100116,18 @@ ggc
 uoe
 uoe
 gDj
-gQk
-gQk
-gQk
-gQk
-gQk
-gQk
-gQk
-gQk
-gQk
-gQk
+bcF
 gDj
-uoe
+gDj
+gDj
+bcF
+bcF
+gDj
+gDj
+gDj
+gDj
+gDj
+bcF
 elx
 wZA
 gYK
@@ -100438,24 +100315,24 @@ jnM
 its
 dcB
 hVe
-lYv
+uoe
 qjP
 wZA
-hSm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-fHo
+dif
+qbp
+dif
+hJf
+dif
+dif
+hJf
+dif
+hJf
+dif
+gDj
 uoe
-fyC
-ggc
-its
+uoe
+tlr
+gYK
 gYK
 gYK
 its
@@ -100640,25 +100517,25 @@ jnM
 dcB
 hqp
 vpG
-uoe
+bcF
 hBa
 iMS
+dif
+wTm
+wTm
+dif
 wTm
 wTm
 wTm
 wTm
+qbp
 wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-fHo
+gDj
+bcF
 uoe
-fyC
-ggc
+tlr
 its
-its
+gYK
 gYK
 gYK
 qMy
@@ -100845,21 +100722,21 @@ jyc
 eLs
 iix
 kyH
+dif
+wTm
+dif
+wTm
+dif
 wTm
 wTm
+dif
+dif
 wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-fHo
+gDj
+gDj
 uoe
-fyC
-ggc
-its
+sHj
+gYK
 gYK
 gYK
 gYK
@@ -101047,21 +100924,21 @@ jyc
 uoe
 iyZ
 pBM
+dif
+dif
 wTm
+qbp
+dif
 wTm
+dif
+dif
 wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-fHo
-uoe
-fyC
-xyo
-gzt
+dif
+gDj
+gDj
+bcF
+mDF
+gYK
 gYK
 gYK
 qMy
@@ -101250,20 +101127,20 @@ lYv
 qjP
 wZA
 hSm
+qbp
+snn
+dif
+dif
+hYv
+snn
+dif
+dif
 wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-wTm
-fHo
+gDj
 uoe
-fyC
-xyo
-wuo
+uoe
+mDF
+xBZ
 gzt
 its
 qMy
@@ -101452,15 +101329,15 @@ uoe
 uoe
 gDj
 gDj
-vtf
 gDj
 gDj
 gDj
 gDj
 gDj
-tPu
-tPu
-tPu
+gDj
+gDj
+gDj
+gDj
 gDj
 uoe
 elx
@@ -101661,10 +101538,10 @@ siK
 fwB
 fwB
 wZA
+gDj
 uoe
+bcF
 uoe
-uoe
-cTM
 tJB
 hVe
 gzt
@@ -102061,13 +101938,13 @@ vtf
 vtf
 vtf
 vtf
-kap
 vtf
 vtf
-wNp
+vtf
+vtf
 lZM
 pfl
-jNI
+pfl
 qjP
 gYK
 gYK
@@ -102263,7 +102140,7 @@ nyl
 pfl
 lZM
 bcF
-lZM
+gKK
 vtf
 vtf
 vtf
@@ -102858,7 +102735,7 @@ qbp
 qbp
 omp
 qMy
-nAR
+qMy
 qjP
 wZA
 vwq
@@ -102875,7 +102752,7 @@ uoe
 uoe
 lZM
 pfl
-mHQ
+pfl
 qjP
 qjP
 dZu
@@ -103061,7 +102938,7 @@ gYK
 omp
 lTl
 kib
-amV
+cKT
 oaV
 sHn
 scp
@@ -103076,10 +102953,10 @@ bkR
 szV
 bkR
 uoe
-mNF
+pfl
 bcF
 gWJ
-jNI
+pfl
 fxD
 xJe
 qjP
@@ -104475,7 +104352,7 @@ pmI
 omp
 pmI
 kib
-nYv
+owe
 uoe
 uoe
 scp
@@ -104693,7 +104570,7 @@ bcF
 szV
 uoe
 lZM
-ajv
+xaq
 wZA
 gbA
 vAn
