@@ -43,6 +43,7 @@
 	penfactor = AP_SWORD_THRUST
 	misscost = 5
 	item_damage_type = "stab"
+	acc_bonus = 15
 
 /datum/intent/sword/thrust/curved
 	penfactor = AP_SWORD_THRUST-2
@@ -50,9 +51,11 @@
 /datum/intent/sword/thrust/short
 	clickcd = 10
 	penfactor = AP_SWORD_THRUST+2
+	acc_bonus = 20
 
 /datum/intent/sword/thrust/rapier
 	penfactor = AP_SWORD_THRUST+5
+	acc_bonus = 20
 
 /datum/intent/sword/thrust/zwei
 	name = "thrust"
@@ -115,6 +118,7 @@
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	misscost = 4
 	item_damage_type = "slash"
+	acc_bonus = 10
 
 /datum/intent/sword/cut/long
 	reach = 2
@@ -166,6 +170,7 @@
 	name = "thrust"
 	penfactor = AP_SWORD_THRUST+10 //30 total
 	clickcd = 10
+	acc_bonus = 20
 
 /datum/intent/sword/lunge
 	name = "lunge"
@@ -179,6 +184,7 @@
 	chargetime = 5
 	no_early_release = TRUE
 	clickcd = 10
+	acc_bonus = 15
 
 /datum/intent/katana/arc
 	name = "arc slash"

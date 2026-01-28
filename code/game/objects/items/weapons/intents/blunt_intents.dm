@@ -121,6 +121,7 @@
 	damfactor = 1.2
 	penfactor = AP_FLAIL_SMASH
 	item_damage_type = "slash"
+	knockback = 1
 
 /datum/intent/flail/strike/smash/long
 	reach = 2

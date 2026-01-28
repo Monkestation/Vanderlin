@@ -2473,7 +2473,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	else
 		if(!I.force)
 			return
-		if(!I.sharpness)
+		if(user.used_intent.knockback)
 			if(!target.resting)
 				var/endurance = target.STAEND
 				var/knockback_tiles = 0

@@ -38,6 +38,8 @@
 	var/keep_looping = TRUE
 	var/damfactor = 1 //multiplied by weapon's force for damage
 	var/penfactor = 0 //see armor_penetration
+	var/knockback = 0
+	var/acc_bonus = 0
 	var/charging_slowdown = 0
 	var/warnoffset = 0
 	var/swingdelay = 0
