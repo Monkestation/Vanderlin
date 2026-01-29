@@ -453,7 +453,6 @@
 				return
 		if(!picked_pack)
 			picked_pack = pick(reals)
-			return
 
 		if(picked_pack.type)
 			previous_picked_types |= picked_pack.type
