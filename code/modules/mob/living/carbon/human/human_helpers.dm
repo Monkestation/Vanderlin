@@ -1,6 +1,7 @@
 
 /mob/living/carbon/human/proc/change_name(new_name)
 	real_name = new_name
+	update_appearance(UPDATE_NAME)
 
 /mob/living/carbon/human/check_language_hear(language)
 	var/mob/living/carbon/V = src

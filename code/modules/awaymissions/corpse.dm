@@ -3,6 +3,7 @@
 //To do: Allow corpses to appear mangled, bloody, etc. Allow customizing the bodies appearance (they're all bald and white right now).
 
 /obj/effect/mob_spawn
+	icon_state = MAP_SWITCH("", "corpse_spawner")
 	name = "Unknown"
 	density = TRUE
 	anchored = TRUE
@@ -84,8 +85,7 @@
 		M.death(1) //Kills the new mob
 
 	M.adjustOxyLoss(oxy_damage)
-	M.adjustBruteLoss(brute_damage)
-	M.adjustFireLoss(burn_damage)
+	M.take_overall_damage(brute_damage, burn_damage)
 	M.color = mob_color
 	equip(M)
 
@@ -118,16 +118,10 @@
 /obj/effect/mob_spawn/human
 	mob_type = /mob/living/carbon/human
 	//Human specific stuff.
-	var/mob_species = null		//Set to make them a mutant race such as lizard or skeleton. Uses the datum typepath instead of the ID.
+	var/list/mob_species = list(/datum/species/human/northern, /datum/species/elf/snow, /datum/species/human/halfelf) //Set to make them a mutant race such as lizard or skeleton. Uses the datum typepath instead of the ID.
 	var/datum/outfit/outfit = /datum/outfit	//If this is a path, it will be instanced in Initialize()
-	var/disable_pda = TRUE
-	var/disable_sensors = TRUE
-	//All of these only affect the ID that the outfit has placed in the ID slot
-	var/id_job = null			//Such as "Clown" or "Chef." This just determines what the ID reads as, not their access
-	var/id_access = null		//This is for access. See access.dm for which jobs give what access. Use "Captain" if you want it to be all access.
-	var/id_access_list = null	//Allows you to manually add access to an ID card.
 
-	var/husk = null
+	var/husk = FALSE
 	//these vars are for lazy mappers to override parts of the outfit
 	//these cannot be null by default, or mappers cannot set them to null if they want nothing in that slot
 	var/uniform = -1
@@ -148,6 +142,8 @@
 	var/neck = -1
 	var/backpack_contents = -1
 	var/suit_store = -1
+	assignedrole = /datum/job/unassigned
+	var/list/possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 
 	var/hairstyle
 	var/facial_hairstyle
@@ -161,12 +157,22 @@
 	return ..()
 
 /obj/effect/mob_spawn/human/equip(mob/living/carbon/human/H)
-	if(mob_species)
-		H.set_species(mob_species)
-	H.cure_husk()
-	H.underwear = "Nude"
-	H.undershirt = "Nude"
-	H.socks = "Nude"
+	if(length(possible_ages))
+		H.age = pick(possible_ages)
+	if(length(mob_species))
+		var/species = pick(mob_species)
+		H.set_species(species)
+		H.dna.species.random_character()
+		if(mob_name)
+			H.change_name(mob_name)
+	else
+		H.underwear = "Nude"
+		H.undershirt = "Nude"
+		H.socks = "Nude"
+	if(husk)
+		H.become_husk(TRAIT_GENERIC)
+	else
+		H.cure_husk()
 	if(hairstyle)
 		H.set_hair_style(hairstyle, FALSE)
 	if(facial_hairstyle)
@@ -190,6 +196,8 @@
 
 /obj/effect/mob_spawn/human/corpse/damaged
 	brute_damage = 1000
+	burn_damage = 1000
+	oxy_damage = 500
 
 /obj/effect/mob_spawn/human/corpse/delayed
 	ghost_usable = FALSE //These are just not-yet-set corpses.

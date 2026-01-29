@@ -1,5 +1,6 @@
 /datum/ai_behavior/find_aggro_targets
 	action_cooldown = 1 SECONDS
+	var/last_speak = 0
 
 /datum/ai_behavior/find_aggro_targets/get_cooldown(datum/ai_controller/cooldown_for)
 	if(cooldown_for.blackboard[BB_FIND_TARGETS_FIELD(type)])
@@ -230,10 +231,11 @@
 
 /datum/ai_behavior/find_aggro_targets/species_hostile/finish_action(datum/ai_controller/controller, succeeded, ...)
 	. = ..()
-	if(succeeded)
+	if(succeeded && world.time > last_speak + 10 SECONDS)
 		var/mob/living/pawn = controller.pawn
 		pawn.emote("rage")
 		pawn.say(pick(GLOB.species_hostile))
+		last_speak = world.time
 
 /datum/ai_behavior/find_aggro_targets/species_hostile/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
 	. = ..()
