@@ -441,6 +441,7 @@
 				continue
 			reals |= real_pack
 		if(!length(reals))
+			message_admins("ERROR: [key_name_admin(src)] failed job pack selection.")
 			return
 
 		var/datum/job_pack/picked_pack
@@ -452,8 +453,6 @@
 				return
 		if(!picked_pack)
 			picked_pack = pick(reals)
-		if(!picked_pack)
-			message_admins("ERROR: [key_name_admin(src)] failed backup job pack selection.")
 			return
 
 		if(picked_pack.type)
