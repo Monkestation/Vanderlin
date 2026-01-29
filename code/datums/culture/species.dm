@@ -51,29 +51,29 @@
 		SPEC_ID_HALF_ORC,
 	)
 
-/datum/culture/species/half_orc/shellcrest
-	name = "Shellcrest"
+// /datum/culture/species/half_orc/shellcrest
+// 	name = "Shellcrest"
 
-/datum/culture/species/half_orc/blood_axe
-	name = "Blood Axe"
+// /datum/culture/species/half_orc/blood_axe
+// 	name = "Blood Axe"
 
-/datum/culture/species/half_orc/splitjaw
-	name = "Splitjaw"
+// /datum/culture/species/half_orc/splitjaw
+// 	name = "Splitjaw"
 
-/datum/culture/species/half_orc/blackhammer
-	name = "Blackhammer"
+// /datum/culture/species/half_orc/blackhammer
+// 	name = "Blackhammer"
 
-/datum/culture/species/half_orc/skullseeker
-	name = "Skullseeker"
+// /datum/culture/species/half_orc/skullseeker
+// 	name = "Skullseeker"
 
-/datum/culture/species/half_orc/crescent_fang
-	name = "Crescent Fang"
+// /datum/culture/species/half_orc/crescent_fang
+// 	name = "Crescent Fang"
 
-/datum/culture/species/half_orc/murkwater
-	name = "Murkwater"
+// /datum/culture/species/half_orc/murkwater
+// 	name = "Murkwater"
 
-/datum/culture/species/half_orc/shatterhorn
-	name = "Shatterhorn"
+// /datum/culture/species/half_orc/shatterhorn
+// 	name = "Shatterhorn"
 
-/datum/culture/species/half_orc/spiritcrusher
-	name = "Spiritcrusher"
+// /datum/culture/species/half_orc/spiritcrusher
+// 	name = "Spiritcrusher"
