@@ -23957,6 +23957,10 @@
 	},
 /turf/open/openspace,
 /area/outdoors/town)
+"vrI" = (
+/obj/structure/fermentation_keg/random/water,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town)
 "vrV" = (
 /obj/machinery/light/fueled/oven{
 	pixel_y = 31
@@ -25630,6 +25634,14 @@
 	},
 /obj/effect/decal/borderfall{
 	dir = 1
+	},
+/obj/item/paper{
+	pixel_y = 6;
+	pixel_x = -8
+	},
+/obj/item/paper{
+	pixel_y = 9;
+	pixel_x = -14
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town)
@@ -160193,7 +160205,7 @@ fyI
 sjZ
 sjZ
 sjZ
-sjZ
+vrI
 xhU
 tap
 tap
