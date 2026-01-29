@@ -2561,12 +2561,12 @@
 "bBH" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobblerock,
@@ -18128,12 +18128,12 @@
 "kWo" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/dirt/road,
@@ -33542,12 +33542,12 @@
 "tWo" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobblerock,
@@ -33587,12 +33587,12 @@
 "tXH" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobble,
@@ -40242,7 +40242,7 @@
 "ycx" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobble,
