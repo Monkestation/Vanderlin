@@ -243,8 +243,8 @@
 		to_chat(user, "I start unearthing the stump...")
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 		if(do_after(user, 5 SECONDS))
-			user.visible_message("<span class='notice'>[user] unearths \the [src].</span>", \
-								"<span class='notice'>I unearth \the [src].</span>")
+			user.visible_message("<span_notice>[user] unearths \the [src].</span_notice>", \
+								"<span_notice>I unearth \the [src].</span_notice>")
 			if(isunburnt)
 				new stump_loot(loc) // Rewarded with an extra small log if done the right way.return
 			atom_destruction("brute")
@@ -411,13 +411,13 @@
 				if(B)
 					B = new B(user.loc)
 					user.put_in_hands(B)
-					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
+					user.visible_message("<span_notice>[user] finds [B] in [src].</span_notice>")
 					return
-			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
+			user.visible_message("<span_warning>[user] searches through [src].</span_warning>")
 			if(looty.len)
 				attack_hand(user)
 			else
-				to_chat(user, "<span class='warning'>Picked clean.</span>")
+				to_chat(user, "<span_warning>Picked clean.</span_warning>")
 
 // bush crossing
 /obj/structure/flora/grass/bush/Crossed(atom/movable/AM)
@@ -585,13 +585,13 @@
 				if(B)
 					B = new B(user.loc)
 					user.put_in_hands(B)
-					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
+					user.visible_message("<span_notice>[user] finds [B] in [src].</span_notice>")
 					return
-			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
+			user.visible_message("<span_warning>[user] searches through [src].</span_warning>")
 			if(looty3.len)
 				attack_hand(user)
 			else
-				to_chat(user, "<span class='warning'>Picked clean.</span>")
+				to_chat(user, "<span_warning>Picked clean.</span_warning>")
 
 /obj/structure/flora/shroom_tree
 	name = "shroom"
@@ -743,7 +743,7 @@
 
 		if(L.m_intent == MOVE_INTENT_RUN)
 			if(!ishuman(L))
-				to_chat(L, "<span class='warning'>I'm cut on a thorn!</span>")
+				to_chat(L, "<span_warning>I'm cut on a thorn!</span_warning>")
 				L.apply_damage(5, BRUTE)
 			else
 				var/mob/living/carbon/human/H = L
@@ -753,11 +753,11 @@
 						var/obj/item/natural/thorn/TH = new(src.loc)
 						BP.add_embedded_object(TH, silent = TRUE)
 						BP.receive_damage(10)
-						to_chat(H, "<span class='danger'>\A [TH] impales my [BP.name]!</span>")
+						to_chat(H, "<span_danger>\A [TH] impales my [BP.name]!</span_danger>")
 						L.Paralyze(10)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, "<span class='warning'>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span>")
+					to_chat(H, "<span_warning>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span_warning>")
 					BP.receive_damage(10)
 					L.Immobilize(10)
 
@@ -820,7 +820,7 @@
 			L.Immobilize(5)
 		if(L.m_intent == MOVE_INTENT_RUN)
 			if(!ishuman(L))
-				to_chat(L, "<span class='warning'>I'm cut on a thorn!</span>")
+				to_chat(L, "<span_warning>I'm cut on a thorn!</span_warning>")
 				L.apply_damage(5, BRUTE)
 				L.Immobilize(5)
 			else
@@ -831,11 +831,11 @@
 						var/obj/item/natural/thorn/TH = new(src.loc)
 						BP.add_embedded_object(TH, silent = TRUE)
 						BP.receive_damage(10)
-						to_chat(H, "<span class='danger'>\A [TH] impales my [BP.name]!</span>")
+						to_chat(H, "<span_danger>\A [TH] impales my [BP.name]!</span_danger>")
 						L.Paralyze(5)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, "<span class='warning'>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span>")
+					to_chat(H, "<span_warning>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span_warning>")
 					BP.receive_damage(10)
 
 /obj/structure/flora/grass/bush_meagre/attack_hand(mob/living/user)
