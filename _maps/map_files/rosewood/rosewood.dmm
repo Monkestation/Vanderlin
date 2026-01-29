@@ -574,10 +574,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/bath)
-"aqk" = (
-/obj/structure/grindwheel,
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "aqn" = (
 /turf/open/floor/cobblerock,
 /area/under/cavewet)
@@ -713,6 +709,10 @@
 "atx" = (
 /turf/open/floor/tile/tilerg,
 /area/indoors/town/bath)
+"atB" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobble,
+/area/indoors/town/smithy)
 "atD" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -982,9 +982,6 @@
 /obj/item/clothing/pants/tights/colored/random,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
-"azI" = (
-/turf/open/floor/grass/cold,
-/area/indoors/town/smithy)
 "azO" = (
 /obj/structure/fake_machine/atm{
 	pixel_y = 0;
@@ -1192,10 +1189,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/orphanage)
-"aGo" = (
-/obj/item/bin/water/gross,
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "aGH" = (
 /obj/structure/fluff/statue/knight,
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -1365,10 +1358,6 @@
 /obj/item/key/apartments/apartment8,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"aLh" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "aLt" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/chevron,
@@ -1811,6 +1800,12 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/shop)
+"aVB" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 1
+	},
+/turf/open/floor/carpet,
+/area/indoors/town/tavern)
 "aVD" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/naturalstone,
@@ -2395,6 +2390,13 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town)
+"boI" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town/tavern)
 "boM" = (
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	redstone_id = "RosewoodM10"
@@ -3314,6 +3316,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
+"bOJ" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/sand,
+/area/indoors/town/tavern)
 "bOK" = (
 /turf/open/floor/dirt,
 /area/outdoors/rtfield/safe)
@@ -3460,11 +3468,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "bSo" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/glass/carafe/water{
-	pixel_x = 7;
-	pixel_y = 8
-	},
+/obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "bSv" = (
@@ -3717,10 +3721,6 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/town/roofs)
-"cak" = (
-/obj/item/bin/water/gross,
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "cao" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/grown/log/tree/stick,
@@ -3978,15 +3978,11 @@
 	pixel_x = 10
 	},
 /obj/item/ore/coal{
-	pixel_y = -9;
-	pixel_x = -7
-	},
-/obj/item/ore/coal{
 	pixel_y = -5;
 	pixel_x = 2
 	},
 /obj/structure/closet/crate/chest,
-/turf/open/floor/cobble,
+/turf/open/floor/sand,
 /area/indoors/town/smithy)
 "chy" = (
 /obj/structure/fluff/statue/tdummy,
@@ -4777,6 +4773,7 @@
 /obj/structure/door,
 /obj/effect/mapping_helpers/access/keyset/town/smith,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town/smithy)
 "cES" = (
@@ -4814,10 +4811,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
-"cFy" = (
-/obj/effect/landmark/start/armorsmith,
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "cFM" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
@@ -5125,6 +5118,12 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/carpet/green,
 /area/indoors/town/bath)
+"cPq" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town/tavern)
 "cPM" = (
 /obj/structure/carpet/blue,
 /obj/structure/table/wood/fancy/blue,
@@ -5581,6 +5580,9 @@
 /obj/item/fishing/lure/dough,
 /turf/open/floor/dirt,
 /area/indoors/town/cell)
+"das" = (
+/turf/open/floor/dirt/road,
+/area/indoors/town/smithy)
 "day" = (
 /obj/structure/fluff/wallclock,
 /turf/open/floor/greenstone,
@@ -5589,6 +5591,12 @@
 /obj/structure/hotspring/border/eight,
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/town/roofs)
+"dbb" = (
+/obj/effect/decal/cleanable/debris/stone{
+	dir = 8
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town/smithy)
 "dbp" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
@@ -6103,6 +6111,10 @@
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/theatre)
+"drv" = (
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/smithy)
 "drB" = (
 /obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/dirt,
@@ -6282,7 +6294,6 @@
 /area/outdoors/town)
 "dvG" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/weapon/tongs,
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
 "dvK" = (
@@ -6587,6 +6598,13 @@
 /obj/item/storage/sack,
 /turf/open/floor/cobblerock,
 /area/indoors/soilsons)
+"dDf" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/tavern)
 "dDq" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
@@ -7023,11 +7041,6 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/orphanage)
-"dRO" = (
-/obj/structure/toilet,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/blocks/paving,
-/area/indoors/town/smithy)
 "dRP" = (
 /obj/structure/chair/wood/alt/fancy,
 /turf/open/floor/wood/nosmooth/saiga,
@@ -7126,6 +7139,12 @@
 "dVd" = (
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town/manor)
+"dVl" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "dVn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/toilet,
@@ -7446,6 +7465,14 @@
 	},
 /turf/open/openspace,
 /area/outdoors/town)
+"efw" = (
+/obj/structure/window/openclose/reinforced{
+	dir = 4
+	},
+/obj/structure/bars/alt,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/herringbone,
+/area/indoors/town/smithy)
 "efO" = (
 /obj/item/alch/ozium,
 /turf/open/floor/cobblerock,
@@ -7849,6 +7876,7 @@
 /obj/structure/window/openclose/reinforced{
 	dir = 8
 	},
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "est" = (
@@ -7889,12 +7917,6 @@
 	},
 /turf/closed/wall/mineral/decostone/moss/blue,
 /area/indoors/town/manor)
-"etY" = (
-/mob/living/simple_animal/pet/cat/cabbit{
-	name = "Tongs"
-	},
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "euf" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/cobble,
@@ -8461,17 +8483,6 @@
 /obj/structure/bars/bent,
 /turf/open/floor/hexstone,
 /area/indoors/town)
-"eLi" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/turf/open/floor/metal,
-/area/indoors/town/smithy)
 "eLm" = (
 /obj/structure/table/wood/large_new{
 	icon_state = "alt_largetable";
@@ -8576,11 +8587,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/magician)
-"eOg" = (
-/obj/structure/closet/crate/chest/old_crate,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/wood,
-/area/indoors/town/smithy)
 "eOr" = (
 /obj/structure/carpet/red,
 /turf/open/floor/ruinedwood,
@@ -9325,10 +9331,6 @@
 /obj/item/key/apartments/apartment5,
 /turf/open/floor/wood,
 /area/indoors/town/steward)
-"fjX" = (
-/obj/structure/closet/crate/chest,
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "fks" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water,
@@ -9702,6 +9704,14 @@
 	},
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/town)
+"fxq" = (
+/obj/effect/decal/cleanable/debris/wood,
+/obj/structure/table/wood/plain_alt{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/turf/open/floor/sand,
+/area/indoors/town/smithy)
 "fxt" = (
 /obj/structure/fluff/walldeco/bsmith{
 	dir = 1
@@ -9851,12 +9861,6 @@
 "fAk" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/shop)
-"fAl" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "fAr" = (
 /obj/structure/door/stone,
 /turf/open/floor/cobble,
@@ -10160,6 +10164,12 @@
 "fLA" = (
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
+"fLE" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/smithy)
 "fLK" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/tile/bfloorz,
@@ -10596,11 +10606,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/clocktower)
-"gai" = (
-/obj/structure/rack,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/metal/barograte,
-/area/indoors/town/smithy)
 "gaj" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/broom,
@@ -10625,6 +10630,12 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
+"gaD" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/carpet,
+/area/indoors/town/tavern)
 "gaH" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/darker,
@@ -10809,6 +10820,12 @@
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/eora,
 /area/outdoors/town/roofs)
+"gfU" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "gfZ" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood,
@@ -11069,6 +11086,7 @@
 	},
 /obj/structure/mirror,
 /obj/effect/decal/shadow_floor,
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/theatre)
 "gnY" = (
@@ -13062,6 +13080,7 @@
 	},
 /obj/structure/fluff/walldeco/vinez/blue,
 /obj/structure/bars/alt,
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "hxg" = (
@@ -14067,6 +14086,10 @@
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/herringbone,
 /area/indoors/town)
+"hYN" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/dirt/road,
+/area/indoors/town/smithy)
 "hYQ" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/blocks/newstone,
@@ -15133,6 +15156,15 @@
 /obj/item/bedsheet/fabric_double,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor)
+"iGh" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "iGk" = (
 /obj/structure/bars/pipe{
 	dir = 4;
@@ -15626,17 +15658,6 @@
 /obj/structure/bonepile,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town)
-"iUk" = (
-/obj/machinery/light/fueled/wallfire/candle/l{
-	pixel_x = 0;
-	pixel_y = 32
-	},
-/obj/structure/fake_machine/atm{
-	pixel_y = 0;
-	pixel_x = -32
-	},
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "iUn" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/pelt,
@@ -15738,11 +15759,12 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood,
 /area/indoors/town/manor)
-"iWn" = (
-/obj/machinery/light/fueled/hearth,
-/obj/item/reagent_containers/glass/bucket/pot,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/under/town/basement)
+"iWo" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/carpet,
+/area/indoors/town/tavern)
 "iWq" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town)
@@ -15880,16 +15902,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"iZG" = (
-/obj/effect/landmark/start/weaponsmith{
-	dir = 1
-	},
-/obj/effect/decal/carpet/square/black{
-	pixel_x = -2;
-	pixel_y = 16
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "iZQ" = (
 /obj/structure/door/viewport{
 	lockid = "house1";
@@ -15982,6 +15994,12 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
+"jdr" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/sand,
+/area/indoors/town/tavern)
 "jdE" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -16983,6 +17001,12 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/inquisition)
+"jHi" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 1
+	},
+/turf/open/floor/sand,
+/area/indoors/town/tavern)
 "jHt" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/paper,
@@ -18175,13 +18199,6 @@
 "knN" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/mountains)
-"knP" = (
-/obj/machinery/light/fueledstreet/blue{
-	dir = 1;
-	pixel_y = 18
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/town)
 "knY" = (
 /obj/structure/table/wood{
 	icon_state = "longtable_mid";
@@ -18528,10 +18545,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/soilsons)
-"kwB" = (
-/obj/structure/fluff/railing/border,
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "kwK" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt,
@@ -20447,6 +20460,10 @@
 /obj/effect/decal/cleanable/vomit/old,
 /turf/open/floor/dirt,
 /area/indoors/town/clinic_large)
+"lAA" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/tavern)
 "lAD" = (
 /obj/item/weapon/axe/iron,
 /obj/structure/rack/shelf/big{
@@ -20633,10 +20650,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/soilsons)
-"lGl" = (
-/obj/structure/closet/crate/chest/wicker,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/under/town/basement)
+"lGB" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/herringbone,
+/area/indoors/town/smithy)
 "lGM" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -20865,6 +20882,12 @@
 	},
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/manor)
+"lMF" = (
+/obj/effect/decal/cleanable/debris/stone{
+	dir = 4
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town/smithy)
 "lMG" = (
 /obj/structure/bridge_stakes{
 	dir = 1
@@ -21149,11 +21172,6 @@
 /obj/machinery/light/fueled/campfire,
 /turf/open/floor/dirt,
 /area/outdoors/rtfield)
-"lUP" = (
-/obj/structure/table/wood/counter,
-/obj/item/reagent_containers/glass/cup/wooden,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/under/town/basement)
 "lVc" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -21526,10 +21544,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/soilsons)
-"mdy" = (
-/obj/structure/table/wood/counter,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/under/town/basement)
 "mdG" = (
 /turf/open/floor/carpet/purple,
 /area/indoors/town)
@@ -22318,6 +22332,10 @@
 	},
 /turf/open/floor/woodturned,
 /area/indoors/town/steward)
+"mAF" = (
+/obj/item/weapon/axe/iron,
+/turf/open/floor/dirt,
+/area/indoors/town/smithy)
 "mAP" = (
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted,
 /turf/open/floor/ruinedwood/turned,
@@ -22381,6 +22399,12 @@
 	},
 /turf/open/floor/wood,
 /area/outdoors/town)
+"mCi" = (
+/obj/structure/window/openclose/reinforced,
+/obj/structure/bars/alt,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/blocks,
+/area/indoors/town/smithy)
 "mCk" = (
 /obj/structure/fluff/statue/scare,
 /turf/open/floor/dirt,
@@ -22471,12 +22495,6 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/garrison)
-"mEG" = (
-/obj/effect/landmark/start/armorsmith{
-	dir = 1
-	},
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "mEI" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/tile/bath,
@@ -22692,12 +22710,6 @@
 "mKL" = (
 /obj/structure/table/wood/reinforced,
 /turf/open/floor/herringbone,
-/area/indoors/town/smithy)
-"mKQ" = (
-/obj/effect/landmark/start/sapprentice{
-	dir = 4
-	},
-/turf/open/floor/cobble,
 /area/indoors/town/smithy)
 "mKY" = (
 /obj/structure/vine/black_briar/medium,
@@ -23227,6 +23239,12 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town)
+"mZr" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/sand,
+/area/indoors/town/smithy)
 "mZv" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/tile,
@@ -23960,6 +23978,12 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"ntJ" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "ntV" = (
 /obj/structure/table/wood/large/corner_alt{
 	dir = 4
@@ -24757,10 +24781,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
-"nNN" = (
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/openspace,
-/area/indoors/town/smithy)
 "nOm" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/wood,
@@ -24901,10 +24921,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/blocks,
 /area/under/town/basement)
-"nSo" = (
-/obj/structure/mannequin/male/female,
-/turf/open/floor/carpet/green,
-/area/indoors/town/smithy)
 "nSB" = (
 /obj/structure/table/wood/reinf_long,
 /obj/item/candle/yellow{
@@ -25277,9 +25293,6 @@
 /area/indoors/soilsons)
 "obw" = (
 /obj/structure/table/wood/plain_alt,
-/obj/structure/fake_machine/mail{
-	mailtag = "Armorsmith"
-	},
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "obE" = (
@@ -25628,12 +25641,6 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/river,
 /area/outdoors/river)
-"oiK" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/turf/open/floor/concrete,
-/area/indoors/town/smithy)
 "oiV" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -25918,10 +25925,6 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors/town/shop)
-"oqd" = (
-/obj/structure/fake_machine/vendor/blacksmith,
-/turf/closed/wall/mineral/craftstone,
-/area/indoors/town/smithy)
 "oqp" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/darker,
@@ -26018,6 +26021,12 @@
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/bath)
+"otd" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 1
+	},
+/turf/open/floor/wood,
+/area/outdoors/town)
 "otk" = (
 /obj/structure/closet/crate/drawer{
 	pixel_y = 8
@@ -26078,10 +26087,6 @@
 /obj/structure/vine/black_briar/hvy,
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/manorgate)
-"ovx" = (
-/obj/machinery/light/fueled/forge,
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "ovF" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -26376,9 +26381,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/rtfield/safe)
 "oEv" = (
-/obj/structure/table/wood/plain_alt,
 /obj/item/weapon/tongs,
-/obj/item/weapon/hammer/iron,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "oEF" = (
@@ -26570,6 +26573,12 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/villagegarrison)
+"oIx" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/town/smithy)
 "oIE" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/keyset/manor/general,
@@ -26703,13 +26712,6 @@
 /obj/structure/vine/black_briar/hvy,
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/steward)
-"oNK" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/weapon/tongs,
-/obj/item/weapon/hammer/iron,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "oNM" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -27078,6 +27080,7 @@
 	},
 /obj/structure/fluff/walldeco/vinez/blue,
 /obj/structure/bars/alt,
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "oXu" = (
@@ -27891,6 +27894,12 @@
 /obj/structure/kneestingers,
 /turf/open/water/cleanshallow,
 /area/under/cavewet)
+"pwz" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 1
+	},
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "pwA" = (
 /obj/item/reagent_containers/food/snacks/messenger_bird,
 /turf/open/floor/dirt,
@@ -28098,6 +28107,12 @@
 	},
 /turf/open/floor/rooftop,
 /area/outdoors/town/roofs)
+"pBL" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/tavern)
 "pBM" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/chair/wood/alt/chair_noble,
@@ -28701,10 +28716,6 @@
 /obj/effect/landmark/start/shophand,
 /turf/open/floor/churchbrick,
 /area/indoors/town/shop)
-"pSY" = (
-/obj/machinery/light/fueled/smelter,
-/turf/open/floor/metal,
-/area/indoors/town/smithy)
 "pTa" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
@@ -28997,12 +29008,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
-"qdt" = (
-/obj/effect/landmark/start/weaponsmith{
-	dir = 1
-	},
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "qdO" = (
 /obj/structure/table/wood/reinf_long,
 /turf/open/floor/tile/tilerg,
@@ -29195,6 +29200,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/manor)
+"qir" = (
+/obj/structure/window,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town)
 "qis" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -29835,10 +29844,6 @@
 /obj/structure/window,
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"qBl" = (
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/closed/wall/mineral/pipe,
-/area/under/town/sewer)
 "qBn" = (
 /obj/structure/well/fountain,
 /obj/item/clothing/head/flowercrown/rosa{
@@ -30669,7 +30674,6 @@
 /area/indoors/town/tavern)
 "qWd" = (
 /obj/structure/rack,
-/obj/item/weapon/sword/iron,
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
@@ -31182,10 +31186,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/hexstone,
 /area/indoors/town/orphanage)
-"rlr" = (
-/obj/structure/mannequin/male/decorative,
-/turf/open/floor/carpet/green,
-/area/indoors/town/smithy)
 "rlI" = (
 /obj/structure/fluff/walldeco/customflag{
 	name = "rosewood flag";
@@ -32068,6 +32068,13 @@
 "rIG" = (
 /turf/open/floor/rooftop,
 /area/indoors/town/tavern)
+"rIU" = (
+/obj/item/weapon/hammer/iron{
+	pixel_x = 12;
+	pixel_y = -4
+	},
+/turf/open/floor/cobble,
+/area/indoors/town/smithy)
 "rJf" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
@@ -33142,12 +33149,6 @@
 /obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"sox" = (
-/obj/structure/bars/passage{
-	redstone_id = "weaponsmith"
-	},
-/turf/open/floor/metal,
-/area/indoors/town/smithy)
 "soO" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -33268,6 +33269,9 @@
 /area/under/town/basement)
 "srQ" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/decal/cleanable/debris/stone{
+	dir = 8
+	},
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "ssb" = (
@@ -33529,10 +33533,6 @@
 /obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
-"szp" = (
-/obj/machinery/light/fueled/forge,
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "szy" = (
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/cobblerock,
@@ -34013,6 +34013,7 @@
 	},
 /obj/structure/mirror,
 /obj/effect/decal/shadow_floor,
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/theatre)
 "sNj" = (
@@ -34420,7 +34421,7 @@
 "sXv" = (
 /obj/machinery/anvil,
 /obj/item/weapon/hammer/iron,
-/turf/open/floor/herringbone,
+/turf/open/floor/sand,
 /area/indoors/town/smithy)
 "sXE" = (
 /obj/structure/chair/stool,
@@ -35196,6 +35197,12 @@
 /obj/effect/decal/cleanable/food/mess/rotting,
 /turf/open/floor/tile,
 /area/indoors/town/tavern)
+"tqz" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/town)
 "tqD" = (
 /obj/structure/carpet/green,
 /turf/open/floor/blocks/newstone/alt,
@@ -35311,6 +35318,12 @@
 /obj/effect/mapping_helpers/access/keyset/town/mercenary,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
+"tuz" = (
+/obj/structure/table/wood/reinforced_alter,
+/obj/structure/bars/bent,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/blocks,
+/area/indoors/town/smithy)
 "tuA" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -36045,6 +36058,14 @@
 "tQf" = (
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/manorgate)
+"tQN" = (
+/obj/structure/window/openclose/reinforced{
+	dir = 4
+	},
+/obj/structure/bars/alt,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/blocks,
+/area/indoors/town/smithy)
 "tQP" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -36498,6 +36519,10 @@
 /obj/structure/fluff/nest,
 /turf/open/floor/grass/cold,
 /area/indoors/soilsons)
+"ugE" = (
+/obj/item/weapon/pick,
+/turf/open/floor/sand,
+/area/indoors/town/smithy)
 "ugJ" = (
 /obj/structure/door/stone{
 	name = "Storage"
@@ -36625,10 +36650,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble,
 /area/indoors/town/cell)
-"ulk" = (
-/obj/structure/table/wood/plain_alt,
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "ulu" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -36775,6 +36796,10 @@
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/tile,
 /area/indoors/town)
+"uqs" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "uqy" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/cobblerock,
@@ -36847,12 +36872,6 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/naturalstone,
 /area/under/town/sewer)
-"urR" = (
-/obj/structure/fake_machine/scomm{
-	pixel_y = -32
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "urY" = (
 /obj/structure/door{
 	lockid = "house7";
@@ -37120,9 +37139,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/inquisition)
 "uyn" = (
-/obj/machinery/anvil,
-/obj/item/weapon/hammer/iron,
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "uyC" = (
@@ -37150,11 +37168,6 @@
 	dir = 1
 	},
 /area/outdoors/town)
-"uzU" = (
-/obj/machinery/light/fueled/hearth,
-/obj/item/cooking/pan,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/under/town/basement)
 "uzW" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
@@ -37369,10 +37382,6 @@
 /obj/structure/chair/stool/crafted,
 /turf/open/floor/carpet/green,
 /area/indoors/town)
-"uGf" = (
-/obj/structure/fermentation_keg/random/beer,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/under/town/basement)
 "uGG" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
@@ -37550,12 +37559,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/wood,
 /area/indoors/town/manor)
-"uLJ" = (
-/obj/structure/fluff/walldeco/bsmith{
-	dir = 1
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/town)
 "uLV" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 8
@@ -38060,12 +38063,6 @@
 /obj/structure/table/wood/treestump,
 /turf/open/floor/grass/cold,
 /area/indoors/town/magician)
-"uXb" = (
-/obj/structure/fluff/walldeco/sign/armorsmithsign{
-	pixel_y = 0
-	},
-/turf/open/floor/cobble,
-/area/outdoors/town)
 "uXg" = (
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/blocks/stonered/tiny,
@@ -38411,6 +38408,10 @@
 /obj/effect/landmark/start/minor_noble,
 /turf/open/floor/carpet/purple,
 /area/indoors/town)
+"vgm" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "vgo" = (
 /obj/structure/fluff/wallclock,
 /obj/structure/carpet/purple,
@@ -39265,13 +39266,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/rtfield/safe)
-"vEC" = (
-/obj/effect/decal/carpet/square/black{
-	pixel_x = 0;
-	pixel_y = -7
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "vEK" = (
 /turf/closed/wall/mineral/wood,
 /area/indoors/town)
@@ -40547,11 +40541,6 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/orphanage)
-"wpq" = (
-/obj/structure/rack,
-/obj/item/weapon/axe/iron,
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "wpu" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -40840,6 +40829,14 @@
 	},
 /turf/open/floor/wood,
 /area/outdoors/town)
+"wxM" = (
+/obj/structure/window/openclose/reinforced{
+	dir = 1
+	},
+/obj/structure/bars/alt,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/blocks,
+/area/indoors/town/smithy)
 "wxO" = (
 /obj/structure/bars/passage/shutter{
 	redstone_id = "merchantdock"
@@ -41318,15 +41315,14 @@
 	},
 /turf/open/floor/wood,
 /area/under/town/basement)
-"wMj" = (
-/obj/structure/fermentation_keg/random/water,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/under/town/basement)
-"wMD" = (
-/obj/structure/bars/passage{
-	redstone_id = "weaponsmith"
+"wMi" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
 	},
-/turf/open/floor/concrete,
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/wood,
 /area/indoors/town/smithy)
 "wMT" = (
 /obj/structure/flora/grass/herb/cursedrosa/spreader/large,
@@ -42938,6 +42934,12 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/soilsons)
+"xKj" = (
+/obj/effect/decal/cleanable/debris/stone{
+	dir = 4
+	},
+/turf/open/floor/cobble,
+/area/indoors/town/smithy)
 "xKp" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/dirt/road,
@@ -42992,6 +42994,12 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
+"xLL" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "xLR" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/ruinedwood/darker,
@@ -43098,6 +43106,12 @@
 	},
 /turf/open/openspace,
 /area/outdoors/town/roofs)
+"xPE" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/indoors/town/smithy)
 "xPL" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -57799,7 +57813,7 @@ ids
 qRF
 qRF
 qRF
-qBl
+wDN
 sNa
 czC
 jvz
@@ -58001,7 +58015,7 @@ qRF
 qRF
 qRF
 tuM
-qBl
+wDN
 gnW
 czC
 kwi
@@ -58203,7 +58217,7 @@ qRF
 qRF
 qRF
 tuM
-qBl
+wDN
 gnW
 bTf
 czC
@@ -63057,13 +63071,13 @@ qJl
 bhA
 cVm
 bhA
-pSY
+omd
 cWK
 bhA
-cWK
-pSY
 bhA
-cVm
+bhA
+bhA
+bhA
 bhA
 qJl
 qJl
@@ -63262,10 +63276,10 @@ mvw
 omd
 mkM
 bhA
-mkM
-omd
-mvw
-mkM
+bhA
+bhA
+bhA
+bhA
 bhA
 qJl
 qJl
@@ -63464,10 +63478,10 @@ wnP
 omd
 wnr
 bhA
-rrL
-omd
-wnP
-mkM
+bhA
+bhA
+bhA
+bhA
 bhA
 qJl
 qJl
@@ -63666,10 +63680,10 @@ mBW
 omd
 rrL
 bhA
-wnr
-omd
-eLi
-mkM
+bhA
+bhA
+bhA
+bhA
 bhA
 qJl
 qJl
@@ -63868,10 +63882,10 @@ omd
 omd
 hrT
 bhA
-hrT
-omd
-omd
-oiK
+bhA
+bhA
+bhA
+bhA
 bhA
 qJl
 qJl
@@ -64071,8 +64085,8 @@ dch
 bhA
 bhA
 bhA
-sox
-wMD
+bhA
+bhA
 bhA
 bhA
 qJl
@@ -64275,7 +64289,7 @@ wCA
 mkM
 mkM
 mkM
-gai
+vdT
 nYK
 qJl
 qJl
@@ -65081,7 +65095,7 @@ iWf
 iWf
 iWf
 iWf
-uif
+iWf
 iWf
 jqA
 nYK
@@ -65500,11 +65514,11 @@ ids
 uqd
 riN
 uqd
-uGf
-wMj
-uzU
-iWn
-lGl
+fWZ
+fWZ
+fWZ
+fWZ
+fWZ
 uqd
 sKt
 wDN
@@ -65706,7 +65720,7 @@ fWZ
 fWZ
 fWZ
 fWZ
-lGl
+fWZ
 uqd
 sKt
 wDN
@@ -66308,10 +66322,10 @@ rbI
 uqd
 qfx
 uqd
-lUP
-lUP
-mdy
-lUP
+uqd
+uqd
+uqd
+uqd
 uqd
 uqd
 utg
@@ -94575,7 +94589,7 @@ aML
 tlJ
 rdQ
 rdQ
-hjO
+qir
 hAC
 aML
 rdQ
@@ -94987,7 +95001,7 @@ omp
 omp
 omp
 omp
-hjO
+qir
 dPe
 bFq
 ndn
@@ -95187,7 +95201,7 @@ omp
 rdQ
 gzN
 aML
-hjO
+qir
 rdQ
 rdQ
 aML
@@ -96196,7 +96210,7 @@ cwC
 omp
 rdQ
 aML
-hjO
+qir
 aML
 rdQ
 yal
@@ -97832,7 +97846,7 @@ gDj
 uoe
 uoe
 bcF
-qjP
+bcF
 uoe
 gDj
 qjP
@@ -98236,10 +98250,10 @@ gDj
 bcF
 bcF
 gDj
+pwz
 gDj
 gDj
-gDj
-gDj
+uqs
 bcF
 qjP
 wZA
@@ -98428,7 +98442,7 @@ jnM
 qbp
 qbp
 hVe
-uoe
+gaD
 qjP
 wZA
 dif
@@ -98633,7 +98647,7 @@ vpG
 bcF
 hBa
 iMS
-dif
+otd
 wTm
 wTm
 dif
@@ -98839,7 +98853,7 @@ dif
 wTm
 dif
 wTm
-dif
+tqz
 wTm
 wTm
 dif
@@ -99440,13 +99454,13 @@ gYK
 qBc
 uoe
 uoe
+dVl
 gDj
 gDj
 gDj
 gDj
 gDj
-gDj
-gDj
+uqs
 gDj
 gDj
 gDj
@@ -100452,7 +100466,7 @@ dif
 mMv
 umX
 uoe
-lZM
+vgm
 pfl
 pfl
 lZM
@@ -100460,7 +100474,7 @@ nyl
 fQS
 fQS
 pfl
-lZM
+ntJ
 lZM
 tSX
 omp
@@ -100859,10 +100873,10 @@ pfl
 xaq
 lZM
 uoe
-uoe
+gaD
 bcF
 uoe
-uoe
+iWo
 lZM
 pfl
 pfl
@@ -101053,7 +101067,7 @@ qbp
 gYK
 nYv
 oaV
-sHn
+dDf
 scp
 auc
 bcF
@@ -101258,12 +101272,12 @@ uoe
 uoe
 puW
 yfA
-pfl
+cPq
 lZM
 wZA
-bcF
+jdr
 rDu
-bcF
+bOJ
 bQb
 xHK
 lKY
@@ -101466,7 +101480,7 @@ mtZ
 sHn
 bcF
 gIK
-sHn
+dDf
 rDu
 ksN
 fpO
@@ -101866,7 +101880,7 @@ bcF
 rDu
 bcF
 uoe
-rDu
+pBL
 ocE
 rDu
 kJx
@@ -102065,7 +102079,7 @@ nlU
 rDu
 rDu
 sHn
-sHn
+dDf
 uoe
 uoe
 rDu
@@ -102476,8 +102490,8 @@ vtf
 vtf
 vtf
 vtf
-rDu
-bcF
+pBL
+jHi
 rYn
 ycQ
 wZA
@@ -102872,7 +102886,7 @@ bNT
 qjP
 wZA
 cMi
-rDu
+lAA
 tah
 bcF
 bcF
@@ -102883,9 +102897,9 @@ vtf
 xaq
 rml
 uoe
-lZM
+xLL
 cgg
-cgg
+boI
 qjP
 qjP
 tJB
@@ -103077,7 +103091,7 @@ ewD
 qjP
 jDm
 kLm
-lZM
+vgm
 lZM
 vtf
 vtf
@@ -103255,7 +103269,7 @@ omp
 qbp
 pmI
 pmI
-uLJ
+omp
 bJF
 pmI
 pmI
@@ -103451,12 +103465,12 @@ pmI
 jnM
 pmI
 omp
-knP
+omp
 eIy
 eIy
+efw
 sWU
-sWU
-sWU
+efw
 sWU
 orp
 aok
@@ -103465,7 +103479,7 @@ omp
 orp
 orp
 hxa
-pES
+tQN
 pES
 pES
 eIy
@@ -103652,24 +103666,24 @@ omp
 omp
 omp
 omp
-uXb
+pmI
 eIy
-lLc
-oNK
-aLh
+cXg
+psW
+iWf
 dvG
-kwB
-nSo
-wuv
+iWf
+iEl
+wxM
 pmI
 jnM
 qbp
 mXJ
-azI
+iEl
 qWd
 fYA
 uiU
-wpq
+cXg
 psW
 eIy
 fhK
@@ -103855,25 +103869,25 @@ omp
 omp
 rMM
 orp
-iUk
 cXg
 cXg
+atB
 iWf
 iWf
-kwB
-rlr
+iWf
+iWf
 wuv
 sft
 gYK
 qbp
-mXJ
-azI
-fAl
-cXg
-cXg
+mCi
+iEl
 psW
 cXg
-fjX
+cXg
+das
+hYN
+cXg
 orp
 elv
 gYK
@@ -104059,9 +104073,9 @@ huA
 eIy
 tBk
 cXg
-etY
+oEv
 iWf
-urR
+lMF
 eIy
 orp
 orp
@@ -104072,9 +104086,9 @@ eIy
 eIy
 eIy
 vRx
-iWf
-mKQ
-cXg
+mZr
+das
+gay
 chv
 wuv
 omp
@@ -104259,12 +104273,12 @@ huA
 gzt
 gzt
 mXJ
-fjX
 cXg
-cXg
+rIU
+atB
 vlA
 iWf
-oqd
+eIy
 pmI
 buO
 huA
@@ -104274,9 +104288,9 @@ pmI
 qXD
 nxh
 tOf
-iWf
-iWf
-cXg
+das
+gay
+fxq
 bSo
 eIy
 sfm
@@ -104463,7 +104477,7 @@ gzt
 eIy
 obw
 cXg
-ulk
+cXg
 iWf
 iWf
 gqW
@@ -104474,14 +104488,14 @@ sTW
 gYK
 pmI
 qbp
-nxh
+tuz
 iWf
-iWf
+oIx
 sXv
-psW
+das
 oEv
 eIy
-pOD
+omp
 gYK
 pmI
 pmI
@@ -104663,11 +104677,11 @@ huA
 gYK
 gzt
 mXJ
-aGo
-cFy
-oHz
+psW
+eKh
+psW
+dbb
 iWf
-vEC
 gqW
 pmI
 huA
@@ -104677,10 +104691,10 @@ huA
 omp
 qbp
 nxh
-iZG
 iWf
-ovx
-qdt
+ugE
+iEl
+iEl
 lLc
 oXn
 kFm
@@ -104864,10 +104878,10 @@ gzt
 lfG
 qqA
 gzt
-eIy
-bSo
+drv
+psW
 cXg
-eKh
+oHz
 iWf
 iWf
 gqW
@@ -104878,12 +104892,12 @@ prz
 huA
 omp
 omp
-nxh
+tuz
 iWf
+lMF
 iWf
-cak
-psW
-aqk
+eTV
+cXg
 eIy
 omp
 pmI
@@ -105066,11 +105080,11 @@ huA
 huA
 gzt
 gzt
-mXJ
-szp
+mCi
+cXg
 cXg
 psW
-iWf
+lGB
 mKL
 gqW
 omp
@@ -105080,12 +105094,12 @@ omp
 qbp
 omp
 omp
-oqd
-iWf
+eIy
+gay
 uHZ
 tMZ
+iEl
 psW
-eKh
 eIy
 cwC
 pmI
@@ -105270,7 +105284,7 @@ hqp
 huA
 eIy
 uyn
-mEG
+cXg
 psW
 iWf
 mKL
@@ -105283,10 +105297,10 @@ gYK
 eIy
 eIy
 eIy
-iWf
-iWf
+iEl
+mAF
 psW
-cXg
+xKj
 dPv
 oXn
 omp
@@ -106282,7 +106296,7 @@ huA
 huA
 jnM
 bEg
-kYu
+jnM
 pmI
 gYK
 pmI
@@ -141266,7 +141280,7 @@ vtf
 qsH
 vtf
 vtf
-gDj
+uqs
 gDj
 uoe
 vup
@@ -141465,14 +141479,14 @@ iSS
 vtf
 vtf
 vtf
-qsH
-bcF
+iGh
+bOJ
 vtf
 vtf
 gDj
 vtf
 bcF
-uoe
+aVB
 qjP
 fxG
 qjP
@@ -141668,7 +141682,7 @@ vtf
 vtf
 vtf
 gDj
-gDj
+dVl
 gDj
 gDj
 uoe
@@ -142079,7 +142093,7 @@ xYS
 vtf
 vtf
 vtf
-gDj
+gfU
 uoe
 vtf
 vtf
@@ -143085,7 +143099,7 @@ hDR
 vku
 nlY
 uoe
-gDj
+pwz
 bcF
 uoe
 vup
@@ -143288,10 +143302,10 @@ vtf
 vtf
 gDj
 gDj
+iWo
 uoe
 uoe
-uoe
-gDj
+dVl
 vtf
 vtf
 vtf
@@ -144673,8 +144687,8 @@ jiV
 jiV
 jiV
 jSq
-xxd
-nNN
+gay
+dRu
 dRu
 dRu
 dRu
@@ -144875,13 +144889,13 @@ jiV
 jiV
 jiV
 jSq
-xxd
+adO
 dRu
 dRu
 dRu
 dRu
 dRu
-xxd
+adO
 lvO
 jiV
 jiV
@@ -145077,13 +145091,13 @@ jiV
 jiV
 jiV
 jSq
-wjX
+xPE
 dRu
 dRu
 dRu
 dRu
 dRu
-xxd
+adO
 jiV
 jiV
 jiV
@@ -145482,11 +145496,11 @@ jSq
 jSq
 jSq
 vea
-eOg
+aTR
 dRu
 dRu
 dRu
-adO
+xPE
 wjX
 wjX
 lvO
@@ -145689,7 +145703,7 @@ dRu
 ifZ
 fLO
 fLO
-vQf
+wMi
 cEy
 lvO
 jiV
@@ -145884,7 +145898,7 @@ lvO
 koZ
 jSq
 xxd
-dRO
+xAs
 owc
 xxd
 adO
@@ -146089,7 +146103,7 @@ xxd
 hMq
 owc
 oaq
-adO
+fLE
 jHy
 dRu
 cba
@@ -184670,11 +184684,11 @@ nHb
 nHb
 nHb
 nHb
-jSq
-jSq
+jiV
+jiV
 juW
-juW
-juW
+jiV
+jiV
 lvO
 lvO
 jiV
@@ -184875,7 +184889,7 @@ nHb
 jSq
 jSq
 juW
-juW
+jiV
 juW
 lvO
 lvO
@@ -185075,11 +185089,11 @@ nHb
 nHb
 nHb
 jSq
-jSq
-jSq
-juW
-lvO
-lvO
+jiV
+jiV
+jiV
+jiV
+jiV
 lvO
 jiV
 jiV
@@ -185278,11 +185292,11 @@ nHb
 nHb
 jSq
 jSq
-jSq
-juW
-lvO
-lvO
-lvO
+jiV
+jiV
+jiV
+jiV
+jiV
 jiV
 jiV
 jiV
@@ -185479,11 +185493,11 @@ nHb
 nHb
 nHb
 jSq
-jSq
-jSq
-juW
-lvO
-lvO
+jiV
+jiV
+jiV
+jiV
+jiV
 lvO
 jiV
 jiV
@@ -185682,9 +185696,9 @@ nHb
 nHb
 jSq
 jSq
-jSq
-vaI
-lvO
+jiV
+jiV
+jiV
 lvO
 lvO
 lvO
@@ -185884,8 +185898,8 @@ jSq
 jSq
 jSq
 jSq
-jSq
-vaI
+jiV
+jiV
 lvO
 lvO
 lvO
