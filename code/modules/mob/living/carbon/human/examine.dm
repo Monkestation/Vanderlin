@@ -155,7 +155,7 @@
 				if(!self_inspect)
 					pre_string = "I believe [m1]"
 
-				. += span_info("[pre_string] from [culture.examined_string()].")
+				. += span_info("[pre_string] from [culture.examined_string(src, user)].")
 
 		if(ishuman(user))
 			var/mob/living/carbon/human/stranger = user
