@@ -341,7 +341,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		.ui-container {
 			position: relative;
 			width: 272px;
-			height: 293px;
+			height: 315px;
 			background-image: url('Charsheet_BG.1.png');
 			background-size: cover;
 			transform: scale(3);
@@ -354,11 +354,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		.body-bg     { top: 58px;  left: 110px; width: 118px; height: 75px; background-image: url('0_body_bg.png'); }
 		.voice-bg    { top: 137px; left: 2px;   width: 107px; height: 41px; background-image: url('0_voice_bg.png'); }
 		.family-bg   { top: 137px; left: 114px; width: 86px;  height: 74px; background-image: url('0_family_bg.png'); }
-		.flavour-bg  { top: 137px; left: 201px; width: 65px;  height: 73px; background-image: url('0_flavour_bg.png'); }
+		.flavour-bg  { top: 137px; left: 201px; width: 65px;  height: 95px; background-image: url('0_flavour_bg.png'); }
 		.loadout-bg  { top: 181px; left: 3px;   width: 64px;  height: 74px; background-image: url('0_loadout_bg.png'); }
 		.triumphs-bg { top: 182px; left: 74px;  width: 37px;  height: 34px; background-image: url('0_triumphs_bg.png'); }
 		.headshot-bg { top: 213px; left: 119px; width: 76px;  height: 76px; background-image: url('headshot_bg.png'); }
-		.ooc-bg      { top: 214px; left: 201px; width: 54px;  height: 48px; background-image: url('0_ooc_bg.png'); }
+		.ooc-bg      { top: 236px; left: 201px; width: 54px;  height: 48px; background-image: url('0_ooc_bg.png'); }
 
 		.features-bg { top: 60px; left: 231px; width: 36px; height: 48px; background-image: url('0_features_bg.png'); }
 		#silhouette  { top: 3px;  left: 10px;  width: 15px; height: 28px; background-image: url('features_bodytype_f.png'); }
@@ -367,20 +367,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		.f-random    { top: 110px; left: 232px; width: 34px; height: 25px; background-image: url('features_random.png'); }
 		.f-random:hover { background-image: url('features_random_hover.png'); }
 
-		.flav-desc { top: 154px; left: 207px; width: 49px; height: 10px; background-image: url('flavour_descriptors.png'); }
+		.flav-desc { top: 174px; left: 207px; width: 49px; height: 10px; background-image: url('flavour_descriptors.png'); }
 		.flav-desc:hover { background-image: url('flavour_descriptors_hover.png'); }
-		.flav-text { top: 171px; left: 207px; width: 53px; height: 10px; background-image: url('flavour_text.png'); }
+		.flav-text { top: 192px; left: 207px; width: 53px; height: 10px; background-image: url('flavour_text.png'); }
 		.flav-text:hover { background-image: url('flavour_text_hover.png'); }
-		.flav-food { top: 188px; left: 207px; width: 45px; height: 10px; background-image: url('flavour_foodprefs.png'); }
+		.flav-food { top: 210px; left: 207px; width: 45px; height: 10px; background-image: url('flavour_foodprefs.png'); }
 		.flav-food:hover { background-image: url('flavour_foodprefs_hover.png'); }
-		.flav-prev { top: 204px; left: 215px; width: 34px; height: 10px; background-image: url('flavour_preview.png'); }
+		.flav-prev { top: 226px; left: 215px; width: 34px; height: 10px; background-image: url('flavour_preview.png'); }
 		.flav-prev:hover { background-image: url('flavour_preview_hover.png'); }
 
-		.ooc-notes { top: 230px; left: 207px; width: 41px; height: 10px; background-image: url('ooc_notes.png'); }
+		.ooc-notes { top: 252px; left: 207px; width: 41px; height: 10px; background-image: url('ooc_notes.png'); }
 		.ooc-notes:hover { background-image: url('ooc_notes_hover.png'); }
-		.ooc-extra { top: 248px; left: 207px; width: 40px; height: 10px; background-image: url('ooc_extra.png'); }
+		.ooc-extra { top: 270px; left: 207px; width: 40px; height: 10px; background-image: url('ooc_extra.png'); }
 		.ooc-extra:hover { background-image: url('ooc_extra_hover.png'); }
-		.btn-roles { top: 262px; left: 200px; width: 55px; height: 30px; background-image: url('ooc_specialroles.png'); }
+		.btn-roles { top: 284px; left: 200px; width: 55px; height: 30px; background-image: url('ooc_specialroles.png'); }
 		.btn-roles:hover { background-image: url('ooc_specialroles_hover.png'); }
 
 		.tri-shop { top: 202px; left: 75px; width: 34px; height: 26px; background-image: url('triumphs_shop.png'); }
@@ -544,6 +544,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if('loadout2' in data) updateField('char-loadout2', data.loadout2 || 'None');
 			if('loadout3' in data) updateField('char-loadout3', data.loadout3 || 'None');
 			if('triumphs' in data) updateField('char-triumphs', data.triumphs || '0');
+			if('culture' in data) updateField('char-culture', data.culture || 'None');
 
 			if('headshot' in data) updateHeadshot(data.headshot);
 			if('bespecial' in data) updateBeSpecial(data.bespecial === '1');
@@ -663,6 +664,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		<div id="char-spouse" class="clickable-text auto-shrink" style="width:73px; height:9px;">[setspouse ? setspouse : "None"]</div>
 	</div></a>
 
+	<a href='?_src_=prefs;preference=culture;task=input'><div class="sprite" style="top:150px; left:207px; width:51px; height:9px; background-image: url('flavour_culture.png');">
+		<div id="char-culture" class="clickable-text auto-shrink" style="width:51px; height:9px;">[culture ? culture.name : "None"]</div>
+	</div></a>
+
 	<a href='?_src_=prefs;preference=voicetype;task=input'><div class="sprite" style="top:154px; left:10px; width:46px; height:9px; background-image: url('voice_type.png');">
 		<div id="char-voicetype" class="clickable-text auto-shrink" style="width:46px; height:9px;">[voice_type]</div>
 	</div></a>
@@ -719,7 +724,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	winshow(user, "stonekeep_prefwin", TRUE)
 	winshow(user, "stonekeep_prefwin.character_preview_map", TRUE)
-	user << browse(dat.Join(), "window=preferences_browser;size=[816*1]x[879*1]")
+	// This should really be a browser datum
+	user << browse(dat.Join(), "window=preferences_browser;size=816x945")
 	update_preview_icon()
 	onclose(user, "stonekeep_prefwin", src)
 
@@ -784,6 +790,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		params["voice_color"] = voice_color
 	if(update_all || ("bespecial" in fields_to_update))
 		params["bespecial"] = next_special_trait ? "1" : "0"
+	if(update_all || ("culture" in fields_to_update))
+		params["culture"] = culture.name
 
 	// Use list2params as BYOND expects for browser output
 	user << output(list2params(params), "preferences_browser:updateCharacterData")
@@ -1885,6 +1893,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						UI_style = "Rogue"
 						if (parent && parent.mob && parent.mob.hud_used)
 							parent.mob.hud_used.update_ui_style(ui_style2icon(UI_style))
+
+				if("culture")
+					var/list/cultures = list()
+					for(var/culture_type in GLOB.culture_prototypes)
+						var/datum/culture/culture = GLOB.culture_prototypes[culture_type]
+						if(!culture.is_selectable(src))
+							continue
+						cultures += culture
+					var/choice = browser_input_list(user, "CHOOSE YOUR HERO'S CULTURE", "CULTURE", cultures)
+					if(!choice)
+						return
+					culture = choice
+					to_chat(user, span_notice("[culture.name]"))
+					to_chat(user, span_notice("[culture.description]"))
 		else
 			switch(href_list["preference"])
 				if ("max_chat_length")
@@ -2231,9 +2253,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		organ_eyes.old_eye_color = eye_color
 
 	character.skin_tone = skin_tone
-	if(character.culture)
-		qdel(character.culture)
-	character.culture = GLOB.culture_prototypes[culture]
+	character.culture = culture
 	character.underwear = underwear
 	character.undershirt = undershirt
 	character.detail = detail
