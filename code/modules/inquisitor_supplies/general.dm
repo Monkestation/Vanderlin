@@ -344,7 +344,7 @@
 
 /datum/inqports/equipment/crankbox
 	name = "The Crankbox"
-	item_type = /obj/structure/closet/crate/chest/inqreliquary/relic/crankbox/
+	item_type = /obj/structure/closet/crate/chest/inqreliquary/relic/crankbox
 	marquescost = 16
 	maximum = 1
 
