@@ -369,7 +369,7 @@
 		return TRUE
 
 /obj/structure/vine/black_briar
-	name = "\the black briar"
+	name = "\proper black briar"
 	desc = span_briar("Some victories come at a horrible price.")
 	icon_state = "BriarLight1"
 	base_icon_state = "Briar"

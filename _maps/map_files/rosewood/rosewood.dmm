@@ -2048,6 +2048,11 @@
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/bath)
+"bjV" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/reagent_containers/food/snacks/smallrat,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/theatre)
 "bjY" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/effect/landmark/start/villager{
@@ -2561,12 +2566,12 @@
 "bBH" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobblerock,
@@ -6031,10 +6036,6 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/inquisition)
-"dAv" = (
-/obj/structure/flora/grass/herb/rosa,
-/turf/open/floor/grass/eora,
-/area/outdoors/beach)
 "dAA" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -6597,7 +6598,7 @@
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/dwarfin)
 "dVP" = (
-/obj/structure/flora/newtree/snow,
+/obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains)
 "dWs" = (
@@ -8344,10 +8345,6 @@
 /obj/item/clothing/face/facemask/goldveil,
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/manor)
-"fcH" = (
-/obj/structure/flora/newtree/snow,
-/turf/open/floor/snow/patchy,
-/area/outdoors/beach)
 "fdz" = (
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	redstone_id = "RosewoodM9"
@@ -9377,6 +9374,13 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/smithy)
+"fLU" = (
+/obj/structure/flora/grass/herb/cursedrosa/spreader/large{
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/turf/open/floor/cobble,
+/area/outdoors/beach)
 "fMd" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/manor)
@@ -11667,10 +11671,6 @@
 "hjQ" = (
 /turf/open/water/cleanshallow,
 /area/outdoors/river)
-"hjY" = (
-/obj/structure/flora/newtree/snow,
-/turf/open/floor/grass/eora,
-/area/outdoors/beach)
 "hkm" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -15481,12 +15481,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"jxt" = (
-/obj/structure/fluff/customsign{
-	name = "Watch your step!"
-	},
-/turf/open/floor/cobble,
-/area/outdoors/beach)
 "jxL" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -18128,12 +18122,12 @@
 "kWo" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/dirt/road,
@@ -18525,6 +18519,12 @@
 /obj/structure/hotspring,
 /turf/open/floor/naturalstone,
 /area/outdoors/town/roofs)
+"lhL" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/town/roofs)
 "lic" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/instrument/guitar,
@@ -18600,13 +18600,12 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobblerock,
 /area/indoors/soilsons)
-"llb" = (
-/obj/structure/fluff/walldeco/customflag{
-	pixel_y = 32;
-	name = "rosewood flag"
+"lkG" = (
+/obj/structure/stairs{
+	dir = 8
 	},
-/turf/closed/wall/mineral/craftstone,
-/area/indoors/town/manor)
+/turf/open/floor/sand,
+/area/outdoors/town)
 "lld" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -20477,6 +20476,10 @@
 /obj/structure/vine/black_briar/hvy,
 /turf/open/openspace,
 /area/under/cave)
+"msw" = (
+/mob/living/carbon/human/species/zizombie/npc/peasant,
+/turf/open/floor/greenstone,
+/area/under/town/sewer)
 "msM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobble,
@@ -21395,6 +21398,10 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/magician)
+"mTS" = (
+/mob/living/carbon/human/species/zizombie/npc/peasant,
+/turf/open/floor/blocks/paving,
+/area/under/town/sewer)
 "mTT" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/water/sewer,
@@ -22811,10 +22818,6 @@
 	},
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/town)
-"nGC" = (
-/obj/structure/flora/grass/herb/rosa,
-/turf/open/floor/cobble,
-/area/outdoors/beach)
 "nGT" = (
 /obj/structure/fluff/signage{
 	dir = 8;
@@ -31097,6 +31100,10 @@
 /obj/structure/flora/grass/pyroclasticflowers,
 /turf/open/floor/grass/cold,
 /area/indoors/town/magician)
+"sAe" = (
+/obj/item/reagent_containers/food/snacks/smallrat,
+/turf/open/floor/cobblerock,
+/area/indoors/town)
 "sAf" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 4
@@ -31136,6 +31143,10 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
+"sCg" = (
+/obj/structure/flora/grass/herb/cursedrosa/spreader,
+/turf/open/floor/grass/eora,
+/area/outdoors/beach)
 "sCi" = (
 /obj/structure/stairs{
 	dir = 1
@@ -31668,6 +31679,10 @@
 "sRq" = (
 /turf/open/floor/plank/h,
 /area/outdoors/mountains)
+"sRv" = (
+/obj/structure/flora/grass/herb/cursedrosa/spreader,
+/turf/open/floor/snow/patchy,
+/area/outdoors/beach)
 "sRy" = (
 /obj/structure/bars,
 /turf/open/floor/cobble,
@@ -32431,10 +32446,6 @@
 /obj/effect/decal/cleanable/sigil,
 /turf/open/floor/cobble,
 /area/outdoors/town)
-"tnk" = (
-/obj/structure/flora/grass/herb/rosa,
-/turf/open/floor/snow/patchy,
-/area/outdoors/beach)
 "tnK" = (
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors/town)
@@ -33542,12 +33553,12 @@
 "tWo" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobblerock,
@@ -33587,12 +33598,12 @@
 "tXH" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobble,
@@ -36213,10 +36224,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
-"vze" = (
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/closed/wall/mineral/craftstone,
-/area/indoors/town/manor)
 "vzf" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/open/floor/cobble,
@@ -38084,7 +38091,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/orphanage)
 "wGq" = (
-/obj/structure/flora/newtree/snow,
+/obj/structure/flora/tree/burnt,
 /turf/open/floor/snow/rough,
 /area/outdoors/mountains)
 "wGS" = (
@@ -40242,7 +40249,7 @@
 "ycx" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfef);
 	outfit = /datum/outfit/npc/light_gear
 	},
 /turf/open/floor/cobble,
@@ -55342,7 +55349,7 @@ jvz
 czC
 pjf
 nqN
-raf
+bjV
 oMI
 luB
 vBn
@@ -56536,7 +56543,7 @@ cZl
 ids
 ids
 tuM
-tuM
+msw
 tuM
 tuM
 qRF
@@ -56954,7 +56961,7 @@ tuM
 mlA
 rbI
 rbI
-tuM
+msw
 tuM
 qRF
 pLa
@@ -57066,12 +57073,12 @@ rOz
 sTr
 ajb
 ajb
-ajb
-fcH
-ajb
+sRv
 ajb
 ajb
-tnk
+ajb
+ajb
+ajb
 sTr
 sTr
 sTr
@@ -57267,7 +57274,7 @@ rOz
 rOz
 rOz
 ajb
-tnk
+ajb
 kkP
 kkP
 kkP
@@ -57472,9 +57479,9 @@ ajb
 kkP
 kkP
 gci
-nGC
 gci
-kkP
+gci
+sCg
 kkP
 ajb
 sTr
@@ -57670,7 +57677,7 @@ auQ
 rOz
 rOz
 rOz
-tnk
+ajb
 kkP
 gci
 gci
@@ -57678,7 +57685,7 @@ gci
 gci
 gci
 kkP
-tnk
+ajb
 sTr
 sTr
 sTr
@@ -57875,9 +57882,9 @@ rOz
 ajb
 kkP
 gci
-jxt
 gci
-nGC
+fLU
+gci
 gci
 kkP
 ajb
@@ -58077,7 +58084,7 @@ rOz
 ajb
 kkP
 gci
-nGC
+gci
 gci
 gci
 gci
@@ -58277,12 +58284,12 @@ rOz
 rOz
 rOz
 ajb
-hjY
+sCg
 kkP
 gci
 gci
 gci
-dAv
+kkP
 kkP
 ajb
 hhK
@@ -58479,7 +58486,7 @@ rOz
 rOz
 rOz
 ajb
-tnk
+ajb
 kkP
 kkP
 kkP
@@ -58683,10 +58690,10 @@ hhK
 hhK
 ajb
 ajb
-dAv
+kkP
 kkP
 ajb
-ajb
+sRv
 ajb
 hhK
 hhK
@@ -59203,7 +59210,7 @@ rbI
 rbI
 rbI
 rbI
-ids
+mTS
 tRV
 qRF
 qRF
@@ -92342,7 +92349,7 @@ qJl
 qJl
 qJl
 qbp
-qbp
+rMM
 qbp
 qJl
 qJl
@@ -92544,7 +92551,7 @@ yal
 yal
 yal
 qbp
-qbp
+lkG
 qbp
 yal
 yal
@@ -93670,7 +93677,7 @@ qJl
 qJl
 qJl
 vvE
-vze
+gsd
 xTA
 xTA
 xTA
@@ -93872,7 +93879,7 @@ vvE
 vvE
 vvE
 vvE
-llb
+gsd
 gsd
 xTA
 xTA
@@ -94547,7 +94554,7 @@ csx
 gYK
 omp
 qbp
-pmI
+nXw
 omp
 vvB
 qJl
@@ -95346,8 +95353,8 @@ vmX
 vmX
 vmX
 czg
-biA
 lfR
+biA
 vmX
 vmX
 biA
@@ -96927,7 +96934,7 @@ doa
 ggZ
 wTm
 wTm
-wTm
+taE
 wTm
 nHb
 nHb
@@ -97735,7 +97742,7 @@ iid
 pvI
 wTm
 wTm
-wTm
+taE
 wTm
 wTm
 rMM
@@ -105014,7 +105021,7 @@ gjQ
 gjQ
 gjQ
 die
-nuT
+sAe
 nuT
 gjQ
 cwC
@@ -107649,7 +107656,7 @@ omp
 omp
 gYK
 pmI
-omp
+jlW
 omp
 omp
 gYK
@@ -132541,7 +132548,7 @@ huA
 huA
 huA
 trk
-trk
+huA
 trk
 qMy
 qMy
@@ -132743,7 +132750,7 @@ huA
 laD
 rmZ
 jiV
-jiV
+lhL
 jiV
 pSt
 laD
