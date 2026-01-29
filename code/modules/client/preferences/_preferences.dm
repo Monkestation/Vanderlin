@@ -1896,8 +1896,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 				if("culture")
 					var/list/cultures = list()
-					for(var/culture_type in GLOB.culture_prototypes)
-						var/datum/culture/culture = GLOB.culture_prototypes[culture_type]
+					for(var/culture_type in GLOB.culture_singletons)
+						var/datum/culture/culture = GLOB.culture_singletons[culture_type]
 						if(!culture.is_selectable(src))
 							continue
 						cultures += culture
