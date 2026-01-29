@@ -7164,7 +7164,8 @@
 /area/indoors/town/manor/hand)
 "gly" = (
 /obj/structure/fluff/railing/border{
-	dir = 8
+	dir = 8;
+	pixel_y = -2
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -20125,7 +20126,8 @@
 /area/indoors/town/church)
 "rGV" = (
 /obj/structure/fluff/railing/border{
-	dir = 4
+	dir = 4;
+	pixel_y = -3
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1;
