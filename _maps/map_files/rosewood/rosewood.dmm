@@ -13644,6 +13644,10 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/magician)
+"itA" = (
+/obj/effect/decal/cleanable/undeadash,
+/turf/open/floor/concrete,
+/area/indoors/town/smithy)
 "iui" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 1
@@ -22567,6 +22571,7 @@
 /obj/item/natural/clay,
 /obj/item/natural/clay,
 /obj/item/natural/clay,
+/obj/effect/gibspawner/human,
 /turf/open/floor/concrete,
 /area/indoors/town/smithy)
 "nBf" = (
@@ -26244,6 +26249,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
+"pGv" = (
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobble,
+/area/indoors/town/smithy)
 "pGR" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -31618,6 +31627,10 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
+"sQg" = (
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobblerock,
+/area/indoors/town/smithy)
 "sQM" = (
 /obj/item/natural/rock{
 	pixel_x = 13;
@@ -35593,6 +35606,10 @@
 	},
 /turf/open/floor/rooftop,
 /area/outdoors/town/roofs)
+"via" = (
+/obj/effect/decal/cleanable/undeadash,
+/turf/open/floor/herringbone,
+/area/indoors/town/smithy)
 "vib" = (
 /obj/structure/carpet/blue,
 /obj/structure/chair/wood/alt/chair_noble/red{
@@ -61184,7 +61201,7 @@ nYK
 sVX
 mkM
 mkM
-mkM
+itA
 wCA
 mkM
 mkM
@@ -61789,7 +61806,7 @@ qRF
 nYK
 iKN
 iWf
-iWf
+via
 iWf
 iWf
 iWf
@@ -62599,7 +62616,7 @@ qJl
 nYK
 gay
 tfy
-iEl
+sQg
 iEl
 dqr
 gay
@@ -101176,7 +101193,7 @@ eIy
 obw
 cXg
 cXg
-iWf
+via
 iWf
 gqW
 pmI
@@ -101780,7 +101797,7 @@ gzt
 gzt
 mCi
 cXg
-cXg
+pGv
 psW
 lGB
 mKL
@@ -104597,7 +104614,7 @@ ngp
 die
 mUH
 pmI
-omp
+qhg
 sth
 pmI
 omp
