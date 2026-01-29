@@ -26,7 +26,7 @@
 
 /area/outdoors/wilderness/outpost/vanderlin
 	name = "abandoned outpost"
-	first_time_text = "ABANDONED OUTPOST"
+	first_time_text = "Thatchwood Outpost"
 
 /area/outdoors/wilderness/outpost/salem
 	name = "salem outpost"
