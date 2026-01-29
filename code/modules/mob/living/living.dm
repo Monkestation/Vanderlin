@@ -1147,8 +1147,15 @@
 			var/mob/living/L = pulledby
 			L.set_pull_offsets(src, pulledby.grab_state)
 
-	if(active_storage?.close_on_movement)
-		active_storage.hide_contents(src)
+	var/datum/storage/active = active_storage
+	if(active)
+		if(active?.close_on_movement)
+			active.hide_contents(src)
+		else
+			var/storage_is_important_recurisve = (active.parent in important_recursive_contents?[RECURSIVE_CONTENTS_ACTIVE_STORAGE])
+			var/can_reach_active_storage = CanReach(active.parent, view_only = TRUE)
+			if(!storage_is_important_recurisve && !can_reach_active_storage)
+				active.hide_contents(src)
 
 	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss() * (200/max(maxHealth, 1))))
 		makeTrail(newloc, T, old_direction)
