@@ -60,7 +60,7 @@
 
 	var/temp_gender = null
 	var/obscure_name = FALSE
-	var/person_known = FALSE
+	var/person_known = self_inspect
 	if(!self_inspect && !isobserver(user))
 		if(name in list("Unknown", "Unknown Man", "Unknown Woman"))
 			obscure_name = TRUE
@@ -147,9 +147,10 @@
 
 			. += span_info("[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].")
 
-		if(person_known && culture)
-			if(istype(culture, /datum/culture/universal/ambiguous))
-				. += span_info("[capitalize(m1)] could be from anywhere.")
+		if(culture)
+			if(!person_known || istype(culture, /datum/culture/universal/ambiguous))
+				if(!self_inspect)
+					. += span_info("[capitalize(t_He)] could be from anywhere.")
 			else
 				var/pre_string = "[capitalize(m1)]"
 				if(!self_inspect)

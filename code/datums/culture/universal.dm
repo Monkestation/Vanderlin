@@ -48,7 +48,7 @@
 	a triumph over their dark elven once-overlords. Mighty redwoods make Hollow Dwellers proficient vertical navigators"
 
 /datum/culture/universal/crimsonlands
-	name = "Crimisonlands"
+	name = "Crimsonlands"
 	description = "Survivors, plain and simple. \
 	The harsh steppes of their nomadic peoples' homes are roaming with cannabalistic orc bands, \
 	never granting the fortune of true relaxation."

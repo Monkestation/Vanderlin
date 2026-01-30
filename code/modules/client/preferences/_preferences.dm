@@ -300,10 +300,17 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	menuoptions = list()
 	return
 
+/datum/preferences/Topic(href, href_list, hsrc)			//yeah, gotta do this I guess..
+	. = ..()
+	if(href_list["close"])
+		var/client/C = usr.client
+		if(C)
+			C.clear_character_previews()
+
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
 
-/datum/preferences/proc/ShowChoices(mob/user, tabchoice)
+/datum/preferences/proc/show_choices(mob/user, tabchoice)
 	if(!user || !user.client)
 		return
 	if(slot_randomized)
@@ -807,7 +814,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Captain", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 400, height = 620)
+/datum/preferences/proc/set_choices(mob/user, limit = 15, list/splitJobs = list("Captain", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 400, height = 620)
 	if(!SSjob)
 		return
 
@@ -822,7 +829,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		HTML += "<script type='text/javascript'>function setJobPrefRedirect(level, rank) { window.location.href='?_src_=prefs;preference=job;task=setJobLevel;level=' + level + ';text=' + encodeURIComponent(rank); return false; }</script>"
 		HTML += {"
 			<script type='text/javascript'>
-				function updateJobPreference() {
+				function update_job_preference() {
 					var data = {};
 					for(var i = 0; i < arguments.length; i++) {
 						var arg = arguments\[i\];
@@ -1092,7 +1099,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	popup.set_content(HTML)
 	popup.open(FALSE)
 
-/datum/preferences/proc/SetJobPreferenceLevel(datum/job/job, level)
+/datum/preferences/proc/set_job_preference_level(datum/job/job, level)
 	if(!job)
 		return FALSE
 	if(level == JP_HIGH)
@@ -1103,7 +1110,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	return TRUE
 
 
-/datum/preferences/proc/UpdateJobPreference(mob/user, role, desiredLvl)
+/datum/preferences/proc/update_job_preference(mob/user, role, desiredLvl)
     if(!SSjob || !length(SSjob.joinable_occupations))
         return
     var/datum/job/job = SSjob.GetJob(role)
@@ -1112,8 +1119,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
         update_menu_data(user, list("job"))
         return
     if(!isnum(desiredLvl))
-        to_chat(user, "<span class='danger'>UpdateJobPreference - desired level was not a number. Please notify coders!</span>")
-        CRASH("UpdateJobPreference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
+        to_chat(user, "<span class='danger'>update_job_preference - desired level was not a number. Please notify coders!</span>")
+        CRASH("update_job_preference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
 
     var/jpval = null
     // desiredLvl comes from the links: 1=High, 2=Medium, 3=Low, 4=NEVER
@@ -1137,7 +1144,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
                 previous_high_job = job_title
                 break
 
-    SetJobPreferenceLevel(job, jpval)
+    set_job_preference_level(job, jpval)
 
     // Send back the desiredLvl value directly since that's what JavaScript expects
     update_job_display(user, role, desiredLvl)
@@ -1148,14 +1155,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
     update_menu_data(user, list("job"))
     return 1
 
-
-
-/datum/preferences/proc/ResetJobs(mob/user, silent = FALSE)
+/datum/preferences/proc/reset_jobs(mob/user, silent = FALSE)
 	job_preferences = list()
 	if(!silent)
 		to_chat(user, "<font color='red'>Classes reset.</font>")
 	if(winget(user, "mob_occupation", "is-visible"))
-		SetChoices(user)
+		set_choices(user)
 
 
 /datum/preferences/proc/update_job_display(mob/user, job_title, pref_level)
@@ -1166,9 +1171,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	params["jobTitle"] = job_title
 	params["prefLevel"] = pref_level
 
-	user << output(list2params(params), "mob_occupation.browser:updateJobPreference")
+	user << output(list2params(params), "mob_occupation.browser:update_job_preference")
 
-/datum/preferences/proc/CaptureKeybinding(mob/user, datum/keybinding/kb, old_key)
+/datum/preferences/proc/capture_keybinding(mob/user, datum/keybinding/kb, old_key)
 	var/HTML = {"
 	<div id='focus' style="outline: 0;" tabindex=0>Keybinding: [kb.full_name]<br>[kb.description]<br><br><b>Press any key to change<br>Press ESC to clear</b></div>
 	<script>
@@ -1193,12 +1198,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	popup.open(FALSE)
 	onclose(user, "capturekeypress", src)
 
-/datum/preferences/proc/ResetPatron(mob/user, silent = FALSE)
+/datum/preferences/proc/reset_patron(mob/user, silent = FALSE)
 	selected_patron = default_patron
 	if(!silent)
 		to_chat(user, "<font color='red'>Patron reset.</font>")
 
-/datum/preferences/proc/ResetLastClass(mob/user)
+/datum/preferences/proc/reset_culture(mob/user, silent = FALSE)
+	var/datum/culture/selected = GLOB.culture_singletons[culture]
+	if(selected.is_selectable(src))
+		return
+	culture = src::culture
+	if(!silent)
+		to_chat(user, "<font color='red'>Culture reset.</font>")
+
+/datum/preferences/proc/reset_last_class(mob/user)
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
@@ -1213,7 +1226,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			user.client.prefs.lastclass = null
 			user.client.prefs.save_preferences()
 
-/datum/preferences/proc/SetKeybinds(mob/user)
+/datum/preferences/proc/set_keybinds(mob/user)
 	var/list/dat = list()
 	// Create an inverted list of keybindings -> key
 	var/list/user_binds = list()
@@ -1258,7 +1271,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 
-/datum/preferences/proc/SetAntag(mob/user)
+/datum/preferences/proc/set_antag(mob/user)
 	var/list/dat = list()
 
 	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
@@ -1289,7 +1302,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 
-/datum/preferences/proc/LorePopup(mob/user)
+/datum/preferences/proc/lore_popup(mob/user)
 	if(!user || !user.client)
 		return
 	var/list/dat = list()
@@ -1297,13 +1310,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	dat += GLOB.roleplay_readme
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
-
-/datum/preferences/Topic(href, href_list, hsrc)			//yeah, gotta do this I guess..
-	. = ..()
-	if(href_list["close"])
-		var/client/C = usr.client
-		if(C)
-			C.clear_character_previews()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -1327,19 +1333,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		switch(href_list["task"])
 			if("close")
 				user << browse(null, "window=mob_occupation")
-				ShowChoices(user,4)
+				show_choices(user,4)
 			if("reset")
-				ResetJobs(user, TRUE)
+				reset_jobs(user, TRUE)
 
 			if("triumphthing")
-				ResetLastClass(user)
+				reset_last_class(user)
 			if("nojob")
 				switch(joblessrole)
 					if(RETURNTOLOBBY)
 						joblessrole = BERANDOMJOB
 					if(BERANDOMJOB)
 						joblessrole = RETURNTOLOBBY
-				SetChoices(user)
+				set_choices(user)
 			if("tutorial")
 				if(href_list["tut"])
 					to_chat(user, "<span class='info'>* ----------------------- *</span>")
@@ -1347,13 +1353,13 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					to_chat(user, "<span class='info'>* ----------------------- *</span>")
 			if("random")
 				joblessrole = BERANDOMJOB
-				SetChoices(user)
+				set_choices(user)
 			if("setJobLevel")
 				if(SSticker.job_change_locked)
 					return 1
-				UpdateJobPreference(user, href_list["text"], text2num(href_list["level"]))
+				update_job_preference(user, href_list["text"], text2num(href_list["level"]))
 			else
-				SetChoices(user)
+				set_choices(user)
 		return 1
 	else if(href_list["preference"] == "multi")
 		if(isnewplayer(user))
@@ -1373,11 +1379,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					be_special -= be_special_type
 				else
 					be_special += be_special_type
-				SetAntag(user)
+				set_antag(user)
 			if("update")
-				SetAntag(user)
+				set_antag(user)
 			else
-				SetAntag(user)
+				set_antag(user)
 
 	else if(href_list["preference"] == "triumphs")
 		user.show_triumphs_list()
@@ -1408,18 +1414,18 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				user << browse(null, "window=keybind_setup")
 				update_menu_data(user)
 			if("update")
-				SetKeybinds(user)
+				set_keybinds(user)
 			if("keybindings_capture")
 				var/datum/keybinding/kb = GLOB.keybindings_by_name[href_list["keybinding"]]
 				var/old_key = href_list["old_key"]
-				CaptureKeybinding(user, kb, old_key)
+				capture_keybinding(user, kb, old_key)
 				return
 
 			if("keybindings_set")
 				var/kb_name = href_list["keybinding"]
 				if(!kb_name)
 					user << browse(null, "window=capturekeypress")
-					SetKeybinds(user)
+					set_keybinds(user)
 					return
 
 				var/clear_key = text2num(href_list["clear_key"])
@@ -1431,7 +1437,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 							key_bindings -= old_key
 					user << browse(null, "window=capturekeypress")
 					save_preferences()
-					SetKeybinds(user)
+					set_keybinds(user)
 					return
 
 				var/new_key = uppertext(href_list["key"])
@@ -1466,7 +1472,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				DIRECT_OUTPUT(user, browse(null, "window=capturekeypress"))
 				user.client.update_movement_keys()
 				save_preferences()
-				SetKeybinds(user)
+				set_keybinds(user)
 
 			if("keybindings_reset")
 				var/choice = browser_alert(user, "Do you really want to reset your keybindings?", "Setup keybindings", DEFAULT_INPUT_CONFIRMATIONS)
@@ -1475,9 +1481,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				hotkeys = TRUE
 				key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key)
 				user.client.update_movement_keys()
-				SetKeybinds(user)
+				set_keybinds(user)
 			else
-				SetKeybinds(user)
+				set_keybinds(user)
 		return TRUE
 
 	else if(href_list["preference"] == "toggles")
@@ -1570,7 +1576,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					var/new_age = browser_input_list(user, "SELECT YOUR HERO'S AGE", "YILS DEAD", pref_species.possible_ages, age)
 					if(new_age)
 						age = new_age
-						ResetJobs(user)
+						reset_jobs(user)
 				if ("pronouns")
 					var/list/allowed_pronouns = pref_species.allowed_pronouns
 					if(!allowed_pronouns || !length(allowed_pronouns))
@@ -1725,8 +1731,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 						//Now that we changed our species, we must verify that the mutant colour is still allowed.
 						real_name = pref_species.random_name(gender,1)
-						ResetJobs(user)
-						ResetPatron(user)
+						reset_jobs(user)
+						reset_patron(user)
+						reset_culture(user)
 						randomise_appearance_prefs(~(RANDOMIZE_SPECIES))
 						customizer_entries = list()
 						validate_customizer_entries()
@@ -1900,13 +1907,13 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/datum/culture/culture = GLOB.culture_singletons[culture_type]
 						if(!culture.is_selectable(src))
 							continue
-						cultures += culture
+						cultures[culture.name] += culture.type
 					var/choice = browser_input_list(user, "CHOOSE YOUR HERO'S CULTURE", "CULTURE", cultures)
 					if(!choice)
 						return
-					culture = choice
-					to_chat(user, span_notice("[culture.name]"))
-					to_chat(user, span_notice("[culture.description]"))
+					culture = cultures[choice]
+					to_chat(user, span_notice("[culture::name]"))
+					to_chat(user, span_notice("[culture::description]"))
 		else
 			switch(href_list["preference"])
 				if ("max_chat_length")
@@ -1920,7 +1927,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if(pickedGender && pickedGender != gender)
 						gender = pickedGender
 						real_name = real_name = pref_species.random_name(gender,1)
-						ResetJobs(user)
+						reset_jobs(user)
 						randomise_appearance_prefs(RANDOMIZE_UNDERWEAR | RANDOMIZE_HAIRSTYLE)
 						accessory = "Nothing"
 						detail = "Nothing"
@@ -2141,7 +2148,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						to_chat(user, span_warning("You are no longer a voice."))
 
 				if("loreprimer")
-					LorePopup(user)
+					lore_popup(user)
 
 				if("finished")
 					user << browse(null, "window=latechoices") //closes late choices window
@@ -2198,7 +2205,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					validate_customizer_entries()
 					reset_all_customizer_accessory_colors()
 					randomize_all_customizer_accessories()
-					ResetJobs(user)
+					reset_jobs(user)
 
 				if("tab")
 					if (href_list["tab"])
@@ -2253,7 +2260,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		organ_eyes.old_eye_color = eye_color
 
 	character.skin_tone = skin_tone
-	character.culture = culture
+	character.culture = GLOB.culture_singletons[culture]
 	character.underwear = underwear
 	character.undershirt = undershirt
 	character.detail = detail

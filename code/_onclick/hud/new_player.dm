@@ -283,7 +283,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 		return
 
 	var/datum/preferences/prefs = hud.mymob.client?.prefs
-	prefs?.LorePopup(hud.mymob)
+	prefs?.lore_popup(hud.mymob)
 
 /atom/movable/screen/lobby/button/migration
 	name = "Migration"

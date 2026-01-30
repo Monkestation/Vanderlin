@@ -271,7 +271,7 @@
 	set name = "Adjust Keybinds"
 	if(!prefs)
 		return
-	prefs.SetKeybinds(usr)
+	prefs.set_keybinds(usr)
 
 /client/verb/changefps()
 	set category = "Options"

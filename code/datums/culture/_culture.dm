@@ -33,6 +33,6 @@
 	var/list/species = list()
 
 /datum/culture/species/is_selectable(datum/preferences/prefs)
-	if(length(species) || !prefs?.pref_species)
+	if(!length(species) || !prefs?.pref_species)
 		return FALSE
 	return prefs.pref_species.id in species
