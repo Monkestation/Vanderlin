@@ -266,7 +266,7 @@
 		playsound(owner, 'sound/misc/briarcursewood.ogg', 100, FALSE, 1)
 	dying = TRUE
 
-/datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
+/datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected, silent=FALSE)
 	if(!affected)
 		return
 	var/turf/T = get_turf(affected)
@@ -289,11 +289,12 @@
 		tumor.update_appearance()
 		if(prob(25))
 			tumor.bodypart_owner?.add_embedded_object(new /obj/item/ore/cursedrosa(), TRUE)
-	playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
-	affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
 	affected.spawn_gibs(FALSE)
 	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=12, seconds_to_grow=3, delete_after_growing = TRUE)
-	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")
+	if(!silent)
+		playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
+		affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
+		message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")
 	var/obj/structure/vine/black_briar/root_vine = controller.vines[1]
 	if(istype(root_vine))
 		root_vine.permanent_buckle = TRUE

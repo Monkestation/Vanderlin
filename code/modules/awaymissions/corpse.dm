@@ -199,6 +199,21 @@
 	burn_damage = 1000
 	oxy_damage = 500
 
+/obj/effect/mob_spawn/human/corpse/damaged/briar
+
+/obj/effect/mob_spawn/human/corpse/damaged/briar/equip(mob/living/carbon/human/H)
+	. = ..()
+	var/obj/item/bodypart/ch = H.get_bodypart()
+	if(!ch)
+		return
+	var/datum/wound/black_briar_curse/chest/wound = ch.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
+	if(!wound)
+		return
+	wound.infection = wound.max_infection
+	wound.infection_percent = 1
+	wound.dying = TRUE
+	wound.die_in_agony(H, TRUE)
+
 /obj/effect/mob_spawn/human/corpse/delayed
 	ghost_usable = FALSE //These are just not-yet-set corpses.
 	instant = FALSE
