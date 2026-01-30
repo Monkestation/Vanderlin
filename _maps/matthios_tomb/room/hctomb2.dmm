@@ -329,7 +329,7 @@
 	pixel_x = 4;
 	pixel_y = 3
 	},
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "Co" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -410,7 +410,7 @@
 /area/under/tomb)
 "EP" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "Ft" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
@@ -423,7 +423,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "GC" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "GJ" = (
 /obj/effect/dungeon_directional_helper/west,

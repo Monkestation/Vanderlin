@@ -149,7 +149,7 @@
 /area/outdoors/rtfield)
 "agn" = (
 /obj/structure/table/wood/treestump,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/indoors/lich)
 "agU" = (
 /obj/structure/fluff/railing/border,
@@ -509,7 +509,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/merc_guild)
 "awv" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "aww" = (
 /turf/open/floor/ruinedwood/chevron,
@@ -4801,7 +4801,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/town/basement)
 "eCa" = (
 /obj/structure/door/violet{
@@ -5242,7 +5242,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/town/basement)
 "eYe" = (
 /obj/structure/flora/ausbushes/ppflowers,
@@ -5384,7 +5384,7 @@
 /area/outdoors/exposed/church)
 "fhg" = (
 /obj/structure/flora/tree/wise,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/rtfield/safe)
 "fix" = (
 /obj/structure/door/violet{
@@ -9572,7 +9572,7 @@
 /area/indoors/town/smithy)
 "jdw" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/rtfield/safe)
 "jdN" = (
 /obj/machinery/light/fueled/firebowl/stump,
@@ -11694,7 +11694,7 @@
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
 "kWW" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/rtfield/safe)
 "kXs" = (
 /obj/structure/stairs/stone/reddish{
@@ -12719,7 +12719,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/indoors/town/bath)
 "lWu" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/east,
@@ -13237,7 +13237,7 @@
 "mDo" = (
 /obj/effect/waterfall,
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "mDO" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -13670,7 +13670,7 @@
 /area/under/town/basement)
 "mWB" = (
 /obj/structure/table/wood/treestump/burnt,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/indoors/lich)
 "mWK" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -14069,7 +14069,7 @@
 /area/under/town/basement)
 "nmd" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "nmi" = (
 /obj/structure/fluff/walldeco/vinez/blue{
@@ -14342,7 +14342,7 @@
 /area/indoors/town/garrison)
 "nzz" = (
 /obj/effect/waterfall,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "nzC" = (
 /obj/effect/falling_leaves,
@@ -16524,7 +16524,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/town/basement)
 "pyS" = (
 /obj/structure/door/swing,
@@ -18242,7 +18242,7 @@
 "qYB" = (
 /obj/structure/flora/ausbushes/reedbush,
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "qZm" = (
 /obj/structure/hotspring/border/eleven,
@@ -21962,7 +21962,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "uGs" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/indoors/lich)
 "uGy" = (
 /obj/structure/table/wood/treestump,
@@ -22230,7 +22230,7 @@
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
 "uRz" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/rtfield/safe)
 "uRD" = (
 /obj/structure/closet/dirthole/grave,
@@ -22546,7 +22546,7 @@
 /area/indoors/town/church)
 "vkJ" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "vlv" = (
 /obj/structure/fluff/railing/wood{
@@ -23141,7 +23141,7 @@
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/town/garrison)
 "vJC" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cave)
 "vJN" = (
 /obj/structure/fluff/railing/wood{
@@ -25874,7 +25874,7 @@
 /area/indoors/town/tavern)
 "ydP" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "ydQ" = (
 /obj/structure/table/wood/plain,

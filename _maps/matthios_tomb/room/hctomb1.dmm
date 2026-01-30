@@ -493,10 +493,10 @@
 /area/under/tomb/cave)
 "BC" = (
 /obj/item/ore/gold,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave)
 "Cg" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave)
 "Ck" = (
 /obj/structure/fluff/railing/wood{
@@ -788,7 +788,7 @@
 /area/under/tomb/indoors)
 "TA" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave)
 "TZ" = (
 /turf/closed/mineral/bedrock,
@@ -895,7 +895,7 @@
 /area/under/tomb/indoors)
 "Xe" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave)
 "Xt" = (
 /obj/structure/fluff/railing/wood{

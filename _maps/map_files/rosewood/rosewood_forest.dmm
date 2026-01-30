@@ -1638,7 +1638,7 @@
 /turf/open/floor/rooftop,
 /area/outdoors/mountains)
 "IZ" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "Ji" = (
 /turf/open/floor/cobble,

@@ -3,7 +3,7 @@
 /turf/template_noop,
 /area/template_noop)
 "t" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "u" = (
 /obj/structure/wild_plant/nospread/wheat,

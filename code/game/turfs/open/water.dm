@@ -34,7 +34,7 @@
 	landsound = 'sound/foley/jumpland/waterland.ogg'
 	shine = SHINE_SHINY
 	no_over_text = FALSE
-	water_level = 2
+	var/water_height = WATER_HEIGHT_MIDDLE
 	spread_chance = 0
 	burn_power = 0
 	var/uses_level = TRUE
@@ -47,6 +47,7 @@
 	var/swimdir = FALSE
 	var/notake = FALSE // cant pick up with reagent containers
 	var/set_relationships_on_init = TRUE
+	var/open_bottom = FALSE	//if the water tile is open from below
 	// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
 	var/blocked_flow_directions = 0
 
@@ -151,10 +152,10 @@
 		icon_state = "together"
 		if(water_overlay)
 			water_overlay.color = water_reagent.color
-			water_overlay.icon_state = "bottom[water_level]"
+			water_overlay.icon_state = "bottom[water_height]"
 		if(water_top_overlay)
 			water_top_overlay.color = water_reagent.color
-			water_top_overlay.icon_state = "top[water_level]"
+			water_top_overlay.icon_state = "top[water_height]"
 		return
 	icon_state = "rock"
 
@@ -232,6 +233,11 @@
 	. = ..()
 	if(!set_relationships_on_init)
 		return
+	if(open_bottom)
+		vis_contents += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
+		icon = 'icons/turf/floors.dmi'
+		icon_state = "openspace"
+		AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
 	check_surrounding_water()
 
 /turf/open/water/process()
@@ -257,11 +263,11 @@
 	if(water_overlay)
 		water_overlay.color = water_reagent.color
 		if(uses_level)
-			water_overlay.icon_state = "bottom[water_level]"
+			water_overlay.icon_state = "bottom[water_height]"
 	if(water_top_overlay)
 		water_top_overlay.color = water_reagent.color
 		if(uses_level)
-			water_top_overlay.icon_state = "top[water_level]"
+			water_top_overlay.icon_state = "top[water_height]"
 
 /turf/open/water/add_neighborlay(dir, edgeicon, offset = FALSE)
 	var/add
@@ -310,6 +316,12 @@
 			return
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
+		if(istype(newloc, /turf/open/water))
+			var/turf/open/water/nextwater = newloc
+			if(nextwater.water_height < WATER_HEIGHT_HIGH)
+				user.movement_type &= ~FLOATING
+		else
+			user.movement_type &= ~FLOATING
 		if(water_overlay)
 			if((get_dir(src, newloc) == SOUTH))
 				water_overlay.layer = BELOW_MOB_LAYER
@@ -362,14 +374,16 @@
 			cloth.wet.add_water(20, dirty_water_turf)
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/L = AM
-		if(L.body_position == LYING_DOWN || water_level == 3)
+		if(L.body_position == LYING_DOWN || water_height >= WATER_HEIGHT_HIGH)
 			L.SoakMob(FULL_BODY, dirty_water_turf)
-		else if(water_level == 2)
+			if(open_bottom)
+				L.movement_type |= FLOATING
+		else if(water_height == WATER_HEIGHT_MIDDLE)
 			L.SoakMob(BELOW_CHEST, dirty_water_turf)
-		else if(water_level == 1)
+		else if(water_height == WATER_HEIGHT_SHALLOW)
 			L.SoakMob(FEET, dirty_water_turf)
 		if(water_overlay)
-			if(water_level > 1 && !istype(oldLoc, type))
+			if(water_height > WATER_HEIGHT_SHALLOW && !istype(oldLoc, type))
 				playsound(AM, 'sound/foley/waterenter.ogg', 100, FALSE)
 			else
 				playsound(AM, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
@@ -519,7 +533,7 @@
 	desc = "Faintly yellow colored. Suspicious."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("bathtile", "bathtileW")
-	water_level = 2
+	water_height = WATER_HEIGHT_MIDDLE
 	slowdown = 15
 	cleanliness_factor = 5
 	water_reagent = /datum/reagent/water
@@ -529,7 +543,7 @@
 	desc = "This dark water smells of dead rats."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("paving", "pavingW")
-	water_level = 1
+	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 1
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/sewer
@@ -564,6 +578,12 @@
 				BP.add_embedded_object(I, silent = TRUE)
 				return .
 
+/turf/open/water/sewer/deep
+
+/turf/open/water/sewer/deep/surface
+
+/turf/open/water/sewer/deep/bottom
+
 /datum/reagent/water/gross/sewer
 	color = "#705a43"
 
@@ -575,7 +595,7 @@
 	desc = "Weeds and algae cover the surface of the water."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("dirt", "dirtW2")
-	water_level = 2
+	water_height = WATER_HEIGHT_MIDDLE
 	slowdown = 20
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/sewer
@@ -611,15 +631,15 @@
 				BP.add_embedded_object(I, silent = TRUE)
 				return .
 
-/turf/open/water/swamp/deep
+/turf/open/water/swamp/high
 	name = "murk"
 	desc = "Deep water with several weeds and algae on the surface."
 	icon_state = MAP_SWITCH("dirt", "dirtW")
-	water_level = 3
+	water_height = WATER_HEIGHT_HIGH
 	slowdown = 20
 	swim_skill = TRUE
 
-/turf/open/water/swamp/deep/Entered(atom/movable/AM, atom/oldLoc)
+/turf/open/water/swamp/high/Entered(atom/movable/AM, atom/oldLoc)
 	. = ..()
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/living = AM
@@ -650,7 +670,7 @@
 	desc = "A heavy layer of weeds and algae cover the surface of the water."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("dirt", "dirtW3")
-	water_level = 2
+	water_height = WATER_HEIGHT_MIDDLE
 	slowdown = 15
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/marshy
@@ -660,44 +680,57 @@
 	dir = pick(GLOB.cardinals)
 	. = ..()
 
-/turf/open/water/marsh/deep
+/turf/open/water/marsh/high
 	name = "marshwater"
 	desc = "A heavy layer of weeds and algae cover the surface of the deep water."
 	icon_state = MAP_SWITCH("dirt", "dirtW4")
-	water_level = 3
+	water_height = WATER_HEIGHT_HIGH
 	slowdown = 20
 	swim_skill = TRUE
 
-/turf/open/water/cleanshallow
+/turf/open/water/clean
 	name = "water"
 	desc = "Clear and shallow water, what a blessing!"
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("rock", "rockw2")
-	water_level = 2
+	water_height = WATER_HEIGHT_MIDDLE
 	slowdown = 15
 	water_reagent = /datum/reagent/water
 
-/turf/open/water/cleanshallow/Initialize()
+/turf/open/water/clean/Initialize()
 	dir = pick(GLOB.cardinals)
 	. = ..()
 
+/turf/open/water/clean/deep
+	water_height = WATER_HEIGHT_FULL
+	open_bottom = TRUE
 
-/turf/open/water/cleanshallow/dirt
+/turf/open/water/clean/deep/surface
+	water_height = WATER_HEIGHT_HIGH
+	open_bottom = TRUE
+
+/turf/open/water/clean/deep/bottom
+	water_height = WATER_HEIGHT_FULL
+	open_bottom = FALSE
+
+/turf/open/water/clean/dirt
 	name = "water"
 	desc = "Clear and shallow water, mostly untainted by surrounding soil."
 	icon_state = MAP_SWITCH("dirt", "dirtW5")
 	cleanliness_factor = -1
 
-/turf/open/water/cleanshallow/Initialize()
-	dir = pick(GLOB.cardinals)
-	. = ..()
+/turf/open/water/clean/dirt/deep
+
+/turf/open/water/clean/dirt/deep/surface
+
+/turf/open/water/clean/dirt/deep/bottom
 
 /turf/open/water/blood
 	name = "blood"
 	desc = "A pool of sanguine liquid."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("rock", "rockb")
-	water_level = 2
+	water_height = WATER_HEIGHT_MIDDLE
 	slowdown = 15
 	cleanliness_factor = -5
 	water_reagent = /datum/reagent/blood
@@ -710,7 +743,7 @@
 	name = "water"
 	desc = "Crystal clear water! Flowing swiftly along the river."
 	icon_state = MAP_SWITCH("rock", "rivermove-dir")
-	water_level = 3
+	water_height = WATER_HEIGHT_HIGH
 	slowdown = 20
 	swim_skill = TRUE
 	swimdir = TRUE
@@ -769,6 +802,12 @@
 			else
 				A.ConveyorMove(dir)
 
+/turf/open/water/river/deep
+
+/turf/open/water/river/deep/surface
+
+/turf/open/water/river/deep/bottom
+
 /turf/open/water/river/dirt
 	icon_state = MAP_SWITCH("dirt", "rivermovealt-dir")
 	water_reagent = /datum/reagent/water/gross
@@ -795,7 +834,7 @@
 	icon_state = MAP_SWITCH("gravel", "gravelW")
 	icon = 'icons/turf/natural/liquids.dmi'
 	neighborlay_self = "edgesalt"
-	water_level = 2
+	water_height = WATER_HEIGHT_MIDDLE
 	slowdown = 2
 	swim_skill = TRUE
 	wash_in = TRUE
@@ -803,11 +842,19 @@
 	fishing_datum = /datum/fish_source/ocean
 
 /turf/open/water/ocean/deep
+
+/turf/open/water/ocean/deep/surface
+
+/turf/open/water/ocean/deep/bottom
+
+/turf/open/water/ocean/deep/bottom/fakedeep
+
+/turf/open/water/ocean/fakedeep
 	name = "salt water"
 	desc = "Deceptively deep, be careful not to find yourself this far out."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("ash", "ashW")
-	water_level = 3
+	water_height = WATER_HEIGHT_HIGH
 	slowdown = 4
 	swim_skill = TRUE
 	wash_in = TRUE

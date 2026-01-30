@@ -181,7 +181,7 @@
 /obj/structure/kneestingers{
 	icon_state = "glowshroom2"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave/wet)
 "hf" = (
 /obj/structure/fluff/railing/border{
@@ -706,7 +706,7 @@
 /turf/closed/mineral/bedrock,
 /area/under/tomb/cave)
 "zR" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave/wet)
 "zV" = (
 /turf/closed/wall/mineral/decostone/long,
@@ -1353,11 +1353,11 @@
 /area/under/tomb)
 "Ss" = (
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave/wet)
 "SE" = (
 /obj/structure/roguerock,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave/wet)
 "SH" = (
 /obj/machinery/light/fueled/smelter/great,
@@ -1367,7 +1367,7 @@
 /obj/structure/kneestingers{
 	icon_state = "glowshroom3"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave/wet)
 "Tr" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -1458,7 +1458,7 @@
 /obj/structure/kneestingers{
 	icon_state = "glowshroom_A1"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave/wet)
 "WG" = (
 /turf/open/floor/herringbone,

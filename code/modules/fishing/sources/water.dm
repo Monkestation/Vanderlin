@@ -47,5 +47,5 @@
 		/obj/item/reagent_containers/food/snacks/fish/angler = 5 MINUTES,
 	)
 	fish_source_flags = FISH_SOURCE_FLAG_EXPLOSIVE_MALUS
-	associated_safe_turfs = list(/turf/open/water/ocean/deep)
+	associated_safe_turfs = list(/turf/open/water/ocean/deep, /turf/open/water/ocean/fakedeep)
 	fishing_difficulty = FISHING_DEFAULT_DIFFICULTY + 15

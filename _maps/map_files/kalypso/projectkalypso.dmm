@@ -129,7 +129,7 @@
 	icon_state = "bush3";
 	pixel_x = 1
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "aH" = (
 /obj/structure/wild_plant/nospread/tangerine,
@@ -250,7 +250,7 @@
 /area/outdoors)
 "bx" = (
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "by" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -339,7 +339,7 @@
 /area/outdoors)
 "bR" = (
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "bS" = (
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat{
@@ -372,7 +372,7 @@
 /area/outdoors)
 "bY" = (
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/under/cave)
 "bZ" = (
 /obj/structure/hotspring/border/eight,
@@ -457,7 +457,7 @@
 /turf/open/openspace,
 /area/outdoors)
 "cn" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/under/cave)
 "cp" = (
 /obj/effect/decal/cleanable/debris/stone{
@@ -599,7 +599,7 @@
 /area/under/cave)
 "db" = (
 /obj/structure/wild_plant/nospread/manabloom,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "dd" = (
 /obj/structure/fluff/railing/wood,
@@ -950,7 +950,7 @@
 /obj/effect/landmark/hammer/dev_text{
 	name = "This puddle will dry up eventually."
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "eN" = (
 /obj/item/natural/stone{
@@ -1040,7 +1040,7 @@
 	pixel_x = 22;
 	pixel_y = -24
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "fl" = (
 /obj/structure/flora/grass{
@@ -1129,7 +1129,7 @@
 "fH" = (
 /obj/structure/flora/ausbushes/reedbush,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "fL" = (
 /obj/structure/fluff/signage{
@@ -1221,7 +1221,7 @@
 /area/outdoors)
 "gb" = (
 /obj/structure/wild_plant/nospread/oat,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "gc" = (
 /obj/effect/decal/cobblerockedge,
@@ -1283,7 +1283,7 @@
 	icon = 'icons/obj/structures/manabloomtree.dmi';
 	icon_state = "manabloomtree"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "gv" = (
 /obj/structure/stairs/stone{
@@ -1382,7 +1382,7 @@
 /area/outdoors)
 "gN" = (
 /obj/structure/fluff/walldeco/vinez/red,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "gO" = (
 /obj/structure/flora/grass/maneater/real,
@@ -1768,7 +1768,7 @@
 /obj/structure/flora/newbranch/leafless{
 	dir = 1
 	},
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors)
 "iF" = (
 /obj/structure/wild_plant/nospread/jacksberry{
@@ -1835,7 +1835,7 @@
 /area/outdoors)
 "iO" = (
 /obj/structure/fluff/railing/tall,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "iQ" = (
 /obj/effect/landmark/observer_start,
@@ -2062,7 +2062,7 @@
 /area/indoors/town)
 "kg" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/under/cave)
 "kh" = (
 /obj/structure/flora/grass/maneater,
@@ -2119,7 +2119,7 @@
 /area/outdoors)
 "ks" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "kt" = (
 /obj/item/tent_kit,
@@ -2220,7 +2220,7 @@
 /obj/structure/flora/newbranch/leafless{
 	dir = 4
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "kY" = (
 /obj/structure/flora/grass/herb/random,
@@ -2495,7 +2495,7 @@
 	pixel_x = -9;
 	pixel_y = 11
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "mf" = (
 /obj/structure/chair/bench/church/mid,
@@ -2590,7 +2590,7 @@
 /area/under/cave)
 "mG" = (
 /obj/structure/flora/sakura,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "mH" = (
 /obj/structure/flora/grass/herb/random,
@@ -2787,7 +2787,7 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "nY" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "nZ" = (
 /obj/structure/flora/grass/bush/wall/tall/bog{
@@ -2946,7 +2946,7 @@
 /obj/structure/flora/grass{
 	icon_state = "grass5"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "oF" = (
 /obj/effect/decal/cobblerockedge{
@@ -3044,7 +3044,7 @@
 /obj/structure/flora/grass/tundra{
 	icon_state = "tundragrass5"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "pd" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -3800,7 +3800,7 @@
 /area/outdoors)
 "tk" = (
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/under/cave)
 "tl" = (
 /obj/structure/flora/grass/bush_meagre{
@@ -4308,7 +4308,7 @@
 	icon_state = "tree2";
 	dir = 1
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "vT" = (
 /obj/effect/decal/cleanable/debris/wood,
@@ -4984,7 +4984,7 @@
 	icon_state = "branch-end2";
 	dir = 4
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "zs" = (
 /obj/structure/closet/crate/crafted_closet/dark,
@@ -5055,7 +5055,7 @@
 "zA" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "zB" = (
 /obj/structure/flora/grass/herb/paris{
@@ -5368,7 +5368,7 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "Bi" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "Bj" = (
 /obj/structure/window/stained/silver/alt,
@@ -5445,7 +5445,7 @@
 /area/under/cave)
 "BB" = (
 /obj/structure/flora/newbranch/leafless,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "BC" = (
 /obj/structure/stairs{
@@ -5508,7 +5508,7 @@
 /obj/structure/fluff/railing/tall{
 	dir = 6
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "BQ" = (
 /turf/open/floor/blocks/platform,
@@ -5644,7 +5644,7 @@
 	icon_state = "branch-end2";
 	dir = 1
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "CL" = (
 /obj/structure/flora/newtree{
@@ -5720,7 +5720,7 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "Dd" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors)
 "Df" = (
 /obj/structure/hotspring,
@@ -5778,7 +5778,7 @@
 "Dv" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "Dw" = (
 /obj/item/textbook/novice/mathematics{
@@ -5921,7 +5921,7 @@
 /area/outdoors)
 "Ek" = (
 /obj/structure/kneestingers,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "Eo" = (
 /obj/structure/flora/newtree,
@@ -5999,14 +5999,14 @@
 "EE" = (
 /obj/structure/flora/ausbushes/reedbush,
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "EG" = (
 /obj/structure/flora/newbranch/leafless{
 	icon_state = "branch-end2";
 	dir = 8
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "EH" = (
 /turf/open/floor/twig,
@@ -6065,7 +6065,7 @@
 	icon_state = "tree2";
 	dir = 1
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "EX" = (
 /obj/structure/flora/newtree,
@@ -6710,7 +6710,7 @@
 	icon_state = "tree2";
 	dir = 4
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "Iz" = (
 /obj/structure/wild_plant/nospread/raspberry{
@@ -6820,7 +6820,7 @@
 "Jh" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /obj/structure/fluff/walldeco/vinez,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "Jj" = (
 /obj/structure/rack/shelf/notdense,
@@ -7324,7 +7324,7 @@
 	dir = 4
 	},
 /obj/structure/flora/grass/bush_meagre,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "Ma" = (
 /obj/effect/decal/cleanable/debris/stone,
@@ -7596,7 +7596,7 @@
 /area/outdoors)
 "Nl" = (
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "Nm" = (
 /turf/open/floor/cobble,
@@ -7814,7 +7814,7 @@
 /area/outdoors)
 "Om" = (
 /obj/structure/flora/grass/herb/valeriana,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors)
 "Os" = (
 /obj/effect/decal/cobbleedge/alt{
@@ -7987,7 +7987,7 @@
 /area/outdoors)
 "Pu" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "Pv" = (
 /obj/structure/flora/grass/bush/wall/tall{
@@ -8149,7 +8149,7 @@
 	icon_state = "tree2";
 	dir = 8
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "Qj" = (
 /obj/machinery/light/fueled/lanternpost/fixed,
@@ -9182,7 +9182,7 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "VQ" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors)
 "VS" = (
 /obj/structure/flora/grass/herb/salvia,
@@ -9334,7 +9334,7 @@
 /obj/effect/waterfall{
 	pixel_y = 0
 	},
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/under/cave)
 "WL" = (
 /obj/effect/falling_sakura,
@@ -9512,7 +9512,7 @@
 /turf/closed/mineral/random/high_valuable,
 /area/under/cave)
 "XD" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/under/cave)
 "XH" = (
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat{
@@ -9554,7 +9554,7 @@
 /obj/structure/fluff/railing/tall{
 	dir = 4
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "XV" = (
 /obj/structure/flora/grass,
@@ -9749,7 +9749,7 @@
 "YT" = (
 /obj/structure/kneestingers,
 /obj/structure/kneestingers,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors)
 "YU" = (
 /obj/structure/hotspring/border/four,
@@ -9940,7 +9940,7 @@
 /area/under/cave)
 "ZW" = (
 /obj/structure/flora/grass,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors)
 "ZX" = (
 /obj/structure/wild_plant/nospread/jacksberry{

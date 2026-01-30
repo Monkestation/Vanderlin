@@ -35,7 +35,7 @@
 /turf/open/floor/dirt/ambush,
 /area/under/tomb/wilds/bog)
 "dG" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/wilds/bog)
 "dV" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -84,7 +84,7 @@
 /area/under/tomb/indoors)
 "nZ" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/wilds/bog)
 "oU" = (
 /turf/open/floor/blocks/paving/vert,

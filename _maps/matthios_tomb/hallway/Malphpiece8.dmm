@@ -31,7 +31,7 @@
 /area/under/tomb/cave)
 "jk" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "jt" = (
 /obj/structure/door/stone,
@@ -91,7 +91,7 @@
 /turf/open/floor/tile/checkeralt,
 /area/under/tomb/cave)
 "sS" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "tb" = (
 /obj/structure/fluff/walldeco/painting/castle,

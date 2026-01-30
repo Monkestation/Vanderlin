@@ -174,7 +174,7 @@
 "fE" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "fP" = (
 /obj/item/candle/yellow/lit/infinite{
@@ -212,7 +212,7 @@
 /area/under/tomb/indoors/church)
 "gw" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "gU" = (
 /obj/structure/fluff/railing/wood{
@@ -289,7 +289,7 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "jd" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "jk" = (
 /mob/living/carbon/human/species/rousman/npc,
@@ -479,7 +479,7 @@
 "px" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "pE" = (
 /turf/closed/wall/mineral/decostone,
@@ -578,7 +578,7 @@
 "uM" = (
 /obj/structure/kneestingers,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "uT" = (
 /turf/closed/wall/mineral/decostone,
@@ -795,7 +795,7 @@
 /area/under/tomb/cave)
 "FD" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "FU" = (
 /obj/structure/flora/grass/bush_meagre,

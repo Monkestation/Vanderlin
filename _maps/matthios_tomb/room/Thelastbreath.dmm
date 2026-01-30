@@ -96,7 +96,7 @@
 /area/under/tomb/indoors)
 "bP" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "bX" = (
 /obj/structure/table/stone_small,
@@ -548,12 +548,12 @@
 /area/under/tomb/indoors)
 "hC" = (
 /obj/effect/decal/cleanable/blood,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "hI" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/natural/stone,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "hK" = (
 /obj/item/book/random_book/myths,
@@ -1470,7 +1470,7 @@
 "uG" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/natural/rock,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "uL" = (
 /obj/structure/lever/hidden{
@@ -1791,7 +1791,7 @@
 /area/under/tomb)
 "zU" = (
 /obj/effect/decal/cleanable/blood/gibs/up,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "Aa" = (
 /obj/structure/rack/shelf/biggest,
@@ -2422,7 +2422,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "Iv" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "Iw" = (
 /obj/structure/flora/ausbushes/sparsegrass,
@@ -3099,7 +3099,7 @@
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/spawner/map_spawner/loot,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "So" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -3347,7 +3347,7 @@
 /area/under/tomb/indoors)
 "VF" = (
 /obj/effect/decal/cleanable/blood/gibs,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "VG" = (
 /obj/item/candle/yellow/lit/infinite{
@@ -3529,7 +3529,7 @@
 /area/under/tomb)
 "XO" = (
 /obj/effect/decal/cleanable/blood/gibs/limb,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/indoors)
 "XS" = (
 /obj/structure/bookcase/random,

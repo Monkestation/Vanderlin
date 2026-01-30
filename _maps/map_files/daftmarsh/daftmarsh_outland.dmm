@@ -1381,7 +1381,7 @@
 "nG" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/thorn_bush,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "nH" = (
 /obj/structure/stairs/stone{
@@ -1787,7 +1787,7 @@
 /area/outdoors/bog)
 "sI" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "sM" = (
 /obj/item/reagent_containers/powder/salt,
@@ -1993,7 +1993,7 @@
 /turf/open/floor/woodturned/nosmooth,
 /area/outdoors/mountains)
 "uR" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/bog)
 "uT" = (
 /obj/structure/flora/newtree,
@@ -2034,7 +2034,7 @@
 /turf/open/openspace,
 /area/under/mountains/anvil/upper)
 "vL" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "vQ" = (
 /turf/open/water/marsh,
@@ -2121,7 +2121,7 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/woods)
 "xg" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "xi" = (
 /obj/machinery/light/fueled/hearth,
@@ -2582,7 +2582,7 @@
 /turf/open/floor/dirt/road,
 /area/under/mountains/anvil/upper)
 "Cb" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/under/mountains/anvil/lower)
 "Ce" = (
 /turf/open/floor/grass,
@@ -2894,7 +2894,7 @@
 /area/under/mountains/anvil/upper)
 "Fs" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "Fu" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/bandit,
@@ -3957,7 +3957,7 @@
 /area/under/mountains/anvil/lower)
 "Qn" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/bog)
 "Qo" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
@@ -4813,7 +4813,7 @@
 /area/under/mountains/anvil/upper)
 "Zt" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "Zu" = (
 /mob/living/simple_animal/hostile/retaliate/poltergeist,

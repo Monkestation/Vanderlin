@@ -155,7 +155,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "or" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave)
 "oF" = (
 /obj/effect/dungeon_directional_helper/west,

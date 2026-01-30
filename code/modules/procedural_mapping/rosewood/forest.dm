@@ -153,9 +153,9 @@
 
 /datum/mapGeneratorModule/rwforestwater
 	clusterCheckFlags = CLUSTER_CHECK_NONE
-	allowed_turfs = list(/turf/open/water/cleanshallow,
+	allowed_turfs = list(/turf/open/water/clean,
 							/turf/open/water/swamp,
-							/turf/open/water/swamp/deep)
+							/turf/open/water/swamp/high)
 	excluded_turfs = list(/turf/open/water/river)
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 20,
 		                    /obj/structure/flora/grass/water/reeds = 30,

@@ -40,5 +40,5 @@
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 5,
 						/obj/structure/flora/grass/water/reeds = 80,
 						/obj/structure/kneestingers = 60)
-	allowed_turfs = list(/turf/open/water/swamp, /turf/open/water/swamp/deep)
+	allowed_turfs = list(/turf/open/water/swamp, /turf/open/water/swamp/high)
 	allowed_areas = list(/area/outdoors/bog)

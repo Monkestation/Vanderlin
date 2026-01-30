@@ -16,17 +16,17 @@
 /area/template_noop)
 "cp" = (
 /obj/structure/flora/grass,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/template_noop)
 "cF" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/template_noop)
 "iF" = (
 /turf/closed/mineral,
 /area/template_noop)
 "iO" = (
 /obj/effect/waterfall,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "mY" = (
 /obj/structure/flora/grass/bush_meagre,
@@ -56,7 +56,7 @@
 /area/template_noop)
 "yV" = (
 /obj/effect/lily_petal/two,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "zx" = (
 /obj/structure/flora/grass,
@@ -89,7 +89,7 @@
 /turf/open/floor/dirt,
 /area/template_noop)
 "Np" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "NC" = (
 /obj/item/soap,
@@ -114,7 +114,7 @@
 /obj/structure/fluff/statue/small{
 	name = "A Lovely Maiden"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "TD" = (
 /obj/structure/flora/grass,
@@ -135,7 +135,7 @@
 /area/template_noop)
 "YY" = (
 /obj/effect/lily_petal,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "ZR" = (
 /obj/structure/flora/grass/bush_meagre,

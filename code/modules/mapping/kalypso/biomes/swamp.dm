@@ -84,7 +84,7 @@
 	if(water_value < water_threshold)
 		// Deep water in the wettest areas
 		if(water_value < (water_threshold - 0.3) && elevation < 0.1)
-			T.ChangeTurf(/turf/open/water/marsh/deep, flags = CHANGETURF_SKIP)
+			T.ChangeTurf(/turf/open/water/marsh/high, flags = CHANGETURF_SKIP)
 		else
 			T.ChangeTurf(/turf/open/water/marsh, flags = CHANGETURF_SKIP)
 	else

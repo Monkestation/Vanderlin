@@ -172,7 +172,7 @@
 /turf/open/floor/woodturned,
 /area/indoors/town/shop)
 "ais" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/town/sewer)
 "ajf" = (
 /obj/structure/bookcase/random/myths,
@@ -3099,7 +3099,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/orphanage)
 "cHO" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/rtfield)
 "cHV" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3237,7 +3237,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/rtfield/safe)
 "cOQ" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "cPr" = (
 /obj/structure/bed/inn,
@@ -5724,7 +5724,7 @@
 "eQq" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/rtfield)
 "eQC" = (
 /obj/structure/industrial_lift/tram,
@@ -6839,7 +6839,7 @@
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/bath)
 "fWt" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/indoors/town/garrison)
 "fWw" = (
 /obj/item/bin/water,
@@ -9210,7 +9210,7 @@
 /area/indoors/town/manor)
 "ibH" = (
 /obj/structure/well/climb_up,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/town/sewer)
 "icp" = (
 /obj/structure/fluff/railing/wood{
@@ -10047,7 +10047,7 @@
 /area/under/town/basement)
 "iJe" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/rtfield)
 "iJh" = (
 /turf/open/floor/tile/bfloorz,
@@ -10755,7 +10755,7 @@
 /area/outdoors/rtfield)
 "jlW" = (
 /obj/structure/flora/grass/thorn_bush,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/rtfield)
 "jmi" = (
 /obj/structure/closet/crate/chest/old_crate,
@@ -12901,7 +12901,7 @@
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "kZl" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/under/town/sewer)
 "kZm" = (
 /obj/structure/winch{
@@ -13711,7 +13711,7 @@
 /turf/open/floor/twig,
 /area/outdoors/town)
 "lOR" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/town)
 "lPi" = (
 /obj/structure/lever/hidden/keep{
@@ -15315,7 +15315,7 @@
 	pixel_x = -16;
 	pixel_y = 0
 	},
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/town)
 "not" = (
 /obj/structure/fluff/railing/wood{
@@ -15380,7 +15380,7 @@
 /turf/open/floor/tile/masonic,
 /area/indoors/town/manor/throne)
 "nqO" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/indoors/town/church/inquisition)
 "nrc" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -18015,7 +18015,7 @@
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town)
 "pLa" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/town)
 "pLw" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -18270,7 +18270,7 @@
 /area/outdoors/town)
 "pWQ" = (
 /obj/structure/flora/grass/thorn_bush,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/town)
 "pWZ" = (
 /obj/machinery/light/fueled/lanternpost/fixed{
@@ -21877,7 +21877,7 @@
 /area/indoors/town/manor)
 "tsk" = (
 /obj/structure/kneestingers,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/town)
 "tsO" = (
 /turf/open/floor/tile/checkeralt,
@@ -22808,7 +22808,7 @@
 /area/under/town/sewer)
 "utm" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/town)
 "utA" = (
 /obj/structure/door,
@@ -23426,7 +23426,7 @@
 "uWC" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/rtfield)
 "uWP" = (
 /obj/structure/chair/wood/alt{
@@ -23932,7 +23932,7 @@
 /area/outdoors/town)
 "vsx" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/rtfield)
 "vsN" = (
 /obj/structure/bed/mediocre,
@@ -26543,7 +26543,7 @@
 /area/indoors/town/tavern)
 "xEY" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/town)
 "xFj" = (
 /obj/structure/fluff/railing/border,

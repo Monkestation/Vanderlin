@@ -13,25 +13,25 @@
 /obj/effect/waterfall{
 	pixel_y = 0
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "y" = (
 /obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/grass/cold,
 /area/template_noop)
 "A" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "B" = (
 /obj/item/alch/herb/rosa,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "E" = (
 /turf/open/openspace,
 /area/template_noop)
 "J" = (
 /obj/effect/waterfall,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "M" = (
 /obj/effect/decal/remains/human,

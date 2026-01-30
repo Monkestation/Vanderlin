@@ -210,7 +210,7 @@
 /turf/open/openspace,
 /area/under/tomb)
 "ef" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb)
 "ej" = (
 /obj/effect/decal/cleanable/debris/glass,
@@ -611,7 +611,7 @@
 /area/under/tomb)
 "ng" = (
 /obj/structure/fluff/statue/pillar,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb)
 "nu" = (
 /obj/effect/decal/cleanable/dirt,
@@ -811,7 +811,7 @@
 /area/under/tomb/indoors/church)
 "qn" = (
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb)
 "qp" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1221,7 +1221,7 @@
 	pixel_y = -3;
 	pixel_x = -5
 	},
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb)
 "zh" = (
 /obj/structure/bars/pipe{
@@ -1737,7 +1737,7 @@
 "IZ" = (
 /obj/structure/fluff/statue/pillar,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb)
 "Jg" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2252,7 +2252,7 @@
 /area/under/tomb)
 "Vl" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb)
 "Vs" = (
 /obj/effect/decal/cleanable/dirt/dust,

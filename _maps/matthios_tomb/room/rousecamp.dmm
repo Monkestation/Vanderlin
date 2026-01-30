@@ -73,7 +73,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave/lava)
 "jJ" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/lava)
 "jL" = (
 /obj/structure/bed/shit,
@@ -264,7 +264,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
 "Ib" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb/cave/lava)
 "Ie" = (
 /mob/living/carbon/human/species/rousman/ambush,
@@ -334,7 +334,7 @@
 /area/under/tomb/cave/lava)
 "TW" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/lava)
 "Uc" = (
 /obj/structure/fluff/railing/border{

@@ -19,11 +19,11 @@
 /turf/open/floor/dirt,
 /area/template_noop)
 "G" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "M" = (
 /obj/effect/waterfall,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "Q" = (
 /turf/open/floor/cobblerock,

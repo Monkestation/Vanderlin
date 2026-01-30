@@ -89,12 +89,12 @@
 		fishpicker = list(/obj/item/reagent_containers/food/snacks/fish/eel = 6,
 							/obj/item/reagent_containers/food/snacks/fish/carp = 2,
 							/obj/item/reagent_containers/food/snacks/fish/shrimp = 1)
-	else if(istype(targeted, /turf/open/water/swamp/deep))
+	else if(istype(targeted, /turf/open/water/swamp/high))
 		fishpicker = list(/obj/item/reagent_containers/food/snacks/fish/eel = 5,
 							/obj/item/reagent_containers/food/snacks/fish/carp = 3,
 							/obj/item/reagent_containers/food/snacks/fish/shrimp = 1)
 		deepmod += 1
-	else if(istype(targeted, /turf/open/water/cleanshallow))
+	else if(istype(targeted, /turf/open/water/clean))
 		fishpicker = list(/obj/item/reagent_containers/food/snacks/fish/eel = 3,
 							/obj/item/reagent_containers/food/snacks/fish/carp = 5)
 	else if(istype(targeted, /turf/open/water/river))

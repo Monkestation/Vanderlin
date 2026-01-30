@@ -532,7 +532,7 @@
 /turf/open/floor/blocks,
 /area/under/mountains/anvil/lower/building)
 "ik" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/mountains/anvil/lower/building)
 "il" = (
 /obj/structure/fluff/railing/wood,
@@ -626,7 +626,7 @@
 /area/under/mountains/anvil/lower)
 "jL" = (
 /obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/mountains/anvil/lower/building)
 "jQ" = (
 /obj/item/gear/metal/bronze,
@@ -764,7 +764,7 @@
 /area/under/mountains/anvil/lower/building)
 "md" = (
 /obj/item/weapon/sword,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/mountains/anvil/lower)
 "mf" = (
 /obj/structure/table/wood{
@@ -1051,7 +1051,7 @@
 /turf/closed/mineral/gemeralds,
 /area/under/mountains/anvil/lower/building)
 "pF" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/mountains/anvil/lower)
 "pH" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -1733,7 +1733,7 @@
 /area/under/mountains/anvil/lower)
 "AW" = (
 /mob/living/carbon/human/species/orc/tribal,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/mountains/anvil/lower/building)
 "AZ" = (
 /obj/effect/decal/cleanable/blood,

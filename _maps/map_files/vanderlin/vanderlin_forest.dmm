@@ -41,7 +41,7 @@
 /area/outdoors/woods)
 "bg" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "bh" = (
 /obj/structure/chair/bench/church/smallbench,
@@ -232,14 +232,14 @@
 "dz" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "dL" = (
 /obj/structure/table/stone_small,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "dN" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "dS" = (
 /obj/structure/table/wood/bar,
@@ -318,7 +318,7 @@
 /area/indoors/town/tavern)
 "eK" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "eM" = (
 /obj/structure/stairs/stone{
@@ -329,7 +329,7 @@
 "fl" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "fm" = (
 /obj/effect/decal/cleanable/blood/tracks,
@@ -397,7 +397,7 @@
 /area/indoors/town/shop)
 "fH" = (
 /obj/structure/flora/tree/evil,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "fJ" = (
 /obj/structure/flora/tree/wise,
@@ -439,7 +439,7 @@
 "gg" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "gk" = (
 /obj/structure/bars/cemetery,
@@ -546,7 +546,7 @@
 /area/indoors/town/shop)
 "gZ" = (
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "hf" = (
 /obj/structure/flora/grass/bush_meagre/yellow,
@@ -572,7 +572,7 @@
 	pixel_y = 3;
 	pixel_x = 0
 	},
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "hp" = (
 /obj/structure/closet/crate/coffin,
@@ -591,7 +591,7 @@
 /area/indoors/dungeon)
 "hx" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "hA" = (
 /obj/structure/bridge_stakes,
@@ -838,7 +838,7 @@
 /area/indoors/dungeon)
 "jK" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "jN" = (
 /obj/structure/fluff/railing/border{
@@ -1131,7 +1131,7 @@
 "ni" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "nj" = (
 /turf/open/floor/ruinedwood,
@@ -1248,7 +1248,7 @@
 "oM" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "oR" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -1286,7 +1286,7 @@
 /area/indoors/dungeon)
 "pu" = (
 /obj/structure/flora/tree/burnt,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "px" = (
 /obj/structure/fluff/railing/border{
@@ -1411,7 +1411,7 @@
 /area/indoors/dungeon)
 "qP" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "qQ" = (
 /obj/structure/table/wood/fancy/royalblack,
@@ -1439,7 +1439,7 @@
 "rc" = (
 /obj/structure/flora/grass/water/reeds,
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "rf" = (
 /turf/closed/wall/mineral/desert_sandstone,
@@ -1517,7 +1517,7 @@
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
 "rW" = (
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "rX" = (
 /obj/structure/trap/wall_projectile,
@@ -1822,7 +1822,7 @@
 "vx" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "vy" = (
 /obj/structure/closet/dirthole/closed/loot,
@@ -1895,7 +1895,7 @@
 "wr" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "wu" = (
 /obj/structure/fermentation_keg/random/water,
@@ -2336,7 +2336,7 @@
 "BN" = (
 /obj/structure/flora/tree/evil,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "BR" = (
 /obj/structure/flora/tree/burnt,
@@ -2492,7 +2492,7 @@
 "Dq" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "Dt" = (
 /obj/item/candle/yellow/lit/infinite{
@@ -2510,7 +2510,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "Dv" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/indoors/cave)
 "Dw" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -2660,7 +2660,7 @@
 "EA" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "EB" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -2689,7 +2689,7 @@
 /area/outdoors/mountains)
 "EQ" = (
 /obj/structure/flora/tree,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "ES" = (
 /obj/effect/decal/cleanable/blood/puddle,
@@ -2959,7 +2959,7 @@
 "HQ" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "HX" = (
 /obj/structure/stone_tile/center/cracked{
@@ -3016,7 +3016,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/woods)
 "IK" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "IL" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3026,7 +3026,7 @@
 "IM" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "IN" = (
 /obj/structure/spider/stickyweb,
@@ -3162,7 +3162,7 @@
 	pixel_y = 3;
 	pixel_x = 0
 	},
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "Ko" = (
 /obj/structure/well,
@@ -3429,7 +3429,7 @@
 "Ni" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "No" = (
 /obj/structure/flora/grass/water,
@@ -3600,7 +3600,7 @@
 /area/outdoors/mountains)
 "Ow" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "OC" = (
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -3612,7 +3612,7 @@
 "OL" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "OM" = (
 /turf/open/floor/cobblerock,
@@ -3664,7 +3664,7 @@
 "Po" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/item/carvedgem/rose/carp,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "Pp" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3720,13 +3720,13 @@
 /area/indoors/town)
 "Qd" = (
 /obj/structure/flora/tree/burnt,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "Qf" = (
 /obj/structure/bridge{
 	dir = 4
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "Qi" = (
 /obj/structure/spider/stickyweb,
@@ -3796,7 +3796,7 @@
 "QY" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/deep,
+/turf/open/water/marsh/high,
 /area/outdoors/woods)
 "Ra" = (
 /turf/closed/mineral/bedrock,
@@ -3950,7 +3950,7 @@
 /area/indoors/dungeon)
 "Tb" = (
 /obj/structure/kneestingers,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/woods)
 "Te" = (
 /obj/structure/window/openclose,
@@ -4367,7 +4367,7 @@
 /area/indoors/cave)
 "XJ" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "XM" = (
 /obj/effect/decal/cleanable/blood/tracks,
@@ -4539,7 +4539,7 @@
 /area/indoors/dungeon)
 "Zk" = (
 /obj/structure/bridge,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/woods)
 "Zl" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,

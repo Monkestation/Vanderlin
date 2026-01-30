@@ -608,7 +608,7 @@
 /area/under/tomb/indoors/magic)
 "aqA" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/under/cavewet)
 "aqN" = (
 /obj/structure/stairs/stone/church{
@@ -691,7 +691,7 @@
 	desc = "Twisted wood formed into the shape of a tree";
 	name = "Twisted Wood"
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/under/cavewet)
 "asp" = (
 /turf/open/floor/abyss_tile{
@@ -733,7 +733,7 @@
 /turf/open/floor/sand/bloodied,
 /area/under/cavewet)
 "att" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "atz" = (
 /obj/structure/fluff/walldeco/chains,
@@ -750,7 +750,7 @@
 /turf/open/water/ocean,
 /area/under/cavewet)
 "aui" = (
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/under/cavewet)
 "auj" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -820,7 +820,7 @@
 /mob/living/simple_animal/hostile/retaliate/swamp_kraken{
 	anchored = 1
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/under/cavewet)
 "avr" = (
 /obj/structure/inert_bonepile,
@@ -1151,7 +1151,7 @@
 /obj/structure/bars{
 	color = "#7D9BAE"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "aCd" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -1710,7 +1710,7 @@
 /area/under/cavewet)
 "aQG" = (
 /obj/structure/flora/kelp,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/under/cavewet)
 "aQL" = (
 /obj/structure/fluff/walldeco/church/line,
@@ -1937,7 +1937,7 @@
 /obj/structure/bars/grille{
 	color = "#7D9BAE"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/cavewet)
 "aWq" = (
 /obj/structure/flora/pillar,
@@ -2673,7 +2673,7 @@
 /area/under/cavewet)
 "bMG" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "bMN" = (
 /obj/structure/flora/pillar,
@@ -2696,7 +2696,7 @@
 /area/under/cavewet)
 "bNm" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "bNO" = (
 /obj/effect/decal/cobbleedge{
@@ -2767,7 +2767,7 @@
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "bVO" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4368,7 +4368,7 @@
 "ecq" = (
 /obj/structure/flora/grass/water/reeds,
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "eda" = (
 /obj/structure/fluff/psycross/psycrucifix/silver,
@@ -4578,7 +4578,7 @@
 "etC" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "etR" = (
 /obj/structure/bars/pipe{
@@ -5121,7 +5121,7 @@
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "fgV" = (
 /obj/structure/fluff/railing/border{
@@ -5866,7 +5866,7 @@
 "geS" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "gfA" = (
 /mob/living/simple_animal/hostile/deepone/arm{
@@ -6430,7 +6430,7 @@
 /turf/open/water/bath,
 /area/indoors/town/clocktower)
 "gPS" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "gPW" = (
 /obj/structure/fluff/railing/border,
@@ -6538,7 +6538,7 @@
 /area/indoors/town/clocktower)
 "gTM" = (
 /obj/structure/flora/driftwood,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/bog)
 "gUv" = (
 /obj/structure/flora/pillar,
@@ -6892,7 +6892,7 @@
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "hDj" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -8538,7 +8538,7 @@
 "jJi" = (
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/bog)
 "jKo" = (
 /obj/structure/stairs/stone/church{
@@ -9557,7 +9557,7 @@
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "kWs" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
@@ -9603,7 +9603,7 @@
 "kXV" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "kYq" = (
 /obj/structure/flora/tree/burnt,
@@ -9727,7 +9727,7 @@
 "lhL" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "ljF" = (
 /obj/structure/door/swing,
@@ -10017,7 +10017,7 @@
 /area/outdoors/bog)
 "lAt" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "lAX" = (
 /obj/structure/bookcase{
@@ -10078,7 +10078,7 @@
 /area/under/cavewet)
 "lGN" = (
 /obj/structure/flora/tree/burnt,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "lHb" = (
 /obj/structure/fermentation_keg{
@@ -10166,7 +10166,7 @@
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "lKv" = (
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/bog)
 "lKz" = (
 /obj/structure/fluff/psycross/psycrucifix/silver,
@@ -11000,7 +11000,7 @@
 /area/under/cavewet)
 "mYv" = (
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "mZO" = (
 /obj/effect/decal/cleanable/blood,
@@ -11382,7 +11382,7 @@
 /area/under/cavewet)
 "nCb" = (
 /obj/structure/flora/tree,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "nCr" = (
 /obj/structure/flora/grass/water/reeds,
@@ -11535,7 +11535,7 @@
 "nMh" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "nNn" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp,
@@ -12987,7 +12987,7 @@
 "pVK" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "pWF" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -13098,7 +13098,7 @@
 /area/under/cavewet)
 "qeW" = (
 /obj/structure/flora/shells,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/under/cavewet)
 "qfB" = (
 /obj/structure/flora/grass/water/reeds,
@@ -13613,7 +13613,7 @@
 "qUg" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "qVE" = (
 /obj/structure/fluff/railing/wood{
@@ -16612,7 +16612,7 @@
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "vfN" = (
 /obj/structure/flora/grass/water,
@@ -17143,7 +17143,7 @@
 "vRR" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "vSt" = (
 /obj/machinery/tanningrack,
@@ -17413,7 +17413,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 10
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/bog)
 "wlz" = (
 /obj/structure/table/stone_small{
@@ -17723,7 +17723,7 @@
 /mob/living/simple_animal/hostile/retaliate/shark{
 	faction = list("Hostile")
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/under/cavewet)
 "wNM" = (
 /obj/structure/bookcase{
@@ -17955,7 +17955,7 @@
 /area/under/cavewet)
 "xby" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/inhumen,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "xbT" = (
 /obj/structure/flora/grass/water/reeds,
@@ -18650,7 +18650,7 @@
 /area/indoors/shelter/bog)
 "xQA" = (
 /obj/effect/spawner/traveltile_spawner/vertical/vampire,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "xRp" = (
 /obj/structure/fluff/walldeco/church/line,

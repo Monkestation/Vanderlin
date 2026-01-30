@@ -1165,7 +1165,7 @@
 /obj/structure/statue/bone/rib{
 	dir = 8
 	},
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "gP" = (
 /obj/structure/table/wood/counter,
@@ -2128,7 +2128,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "mL" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "mN" = (
 /obj/structure/trap/poison,
@@ -3331,7 +3331,7 @@
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/bog)
 "tV" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/indoors/cave)
 "tW" = (
 /obj/structure/fluff/railing/border{
@@ -3839,7 +3839,7 @@
 /mob/living/simple_animal/hostile/retaliate/infernal/imp{
 	faction = list("Undead")
 	},
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/indoors/lich)
 "ww" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -5548,7 +5548,7 @@
 /area/indoors/lich)
 "FV" = (
 /obj/structure/statue/bone/rib,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "FX" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
@@ -5583,7 +5583,7 @@
 /area/indoors/lich)
 "Gg" = (
 /obj/structure/statue/bone/rib,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/indoors/lich)
 "Gh" = (
 /obj/structure/closet/crate/crafted_closet/inn,
@@ -6224,7 +6224,7 @@
 /obj/structure/statue/bone/rib{
 	dir = 8
 	},
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/indoors/lich)
 "JQ" = (
 /obj/structure/fluff/railing/wood{
@@ -7357,7 +7357,7 @@
 /area/indoors/lich)
 "QV" = (
 /obj/structure/statue/bone/skull,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/outdoors/bog)
 "QX" = (
 /obj/structure/stairs/stone{
@@ -7797,7 +7797,7 @@
 /turf/open/floor/tile,
 /area/indoors/lich)
 "TH" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/indoors/lich)
 "TI" = (
 /obj/structure/table/wood/crafted,

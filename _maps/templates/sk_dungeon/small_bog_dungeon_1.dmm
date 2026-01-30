@@ -10,7 +10,7 @@
 /area/outdoors/bog)
 "bA" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/bog)
 "cB" = (
 /obj/structure/flora/grass,
@@ -57,7 +57,7 @@
 /turf/open/floor/blocks,
 /area/outdoors/bog)
 "hB" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/bog)
 "ld" = (
 /obj/structure/bars/cemetery,
@@ -146,7 +146,7 @@
 /area/outdoors/bog)
 "wi" = (
 /obj/item/coin/copper,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/outdoors/bog)
 "wK" = (
 /obj/structure/fluff/railing/tall/palisade{

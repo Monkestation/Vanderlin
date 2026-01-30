@@ -2009,7 +2009,7 @@
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "Br" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/mountains/anvil/dungeon/lower)
 "Bw" = (
 /obj/effect/decal/cleanable/dirt/dust,

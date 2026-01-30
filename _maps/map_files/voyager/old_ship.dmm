@@ -154,7 +154,7 @@
 /turf/open/openspace,
 /area)
 "sl" = (
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area)
 "sr" = (
 /obj/structure/fluff/railing/border{

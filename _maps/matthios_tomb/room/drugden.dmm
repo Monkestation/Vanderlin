@@ -103,7 +103,7 @@
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
 "oR" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "oT" = (
 /obj/structure/door/swing,
@@ -196,7 +196,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "Be" = (
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "Cj" = (
 /obj/item/statue/steel,
@@ -225,7 +225,7 @@
 /area/under/tomb/indoors)
 "Fy" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "FC" = (
 /turf/open/floor/dirt,
@@ -350,7 +350,7 @@
 /area/under/tomb/cave/wet)
 "Yt" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/deep,
+/turf/open/water/swamp/high,
 /area/under/tomb/cave/wet)
 "Zk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,

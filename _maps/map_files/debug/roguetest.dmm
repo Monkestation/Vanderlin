@@ -1428,6 +1428,9 @@
 /obj/structure/closet/crate/miningcar,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"kf" = (
+/turf/open/water/clean/deep,
+/area/outdoors)
 "ki" = (
 /obj/structure/rotation_piece/cog{
 	dir = 4
@@ -1594,6 +1597,9 @@
 "mY" = (
 /turf/open/floor/wood,
 /area/indoors)
+"nf" = (
+/turf/open/water/clean/deep/surface,
+/area/outdoors)
 "ng" = (
 /obj/effect/waterfall,
 /turf/open/water/river,
@@ -3151,6 +3157,9 @@
 	},
 /turf/open/floor/wood,
 /area/indoors)
+"Oz" = (
+/turf/open/water/clean/deep/bottom,
+/area/outdoors)
 "OS" = (
 /obj/structure/roller{
 	dir = 1
@@ -22542,9 +22551,9 @@ ET
 FI
 DF
 DF
-QN
-Wr
-ai
+kf
+Oz
+nf
 tA
 tA
 tA
@@ -22799,9 +22808,9 @@ pW
 WL
 GO
 DF
-QN
-QN
-QN
+kf
+Oz
+nf
 tA
 tA
 tA
@@ -23056,9 +23065,9 @@ ET
 FI
 DF
 DF
-QN
-Wr
-ai
+kf
+Oz
+nf
 QN
 QN
 ai
@@ -88078,9 +88087,9 @@ ac
 ac
 ac
 ac
-ss
-ss
-ss
+kf
+kf
+kf
 ss
 ss
 ss
@@ -88335,9 +88344,9 @@ ac
 ac
 ac
 ac
-ss
-ss
-ss
+Oz
+Oz
+Oz
 ss
 ss
 ss
@@ -88592,9 +88601,9 @@ ac
 ac
 ac
 ac
-ss
-ss
-ss
+nf
+nf
+nf
 ss
 ss
 ss

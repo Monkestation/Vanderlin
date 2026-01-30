@@ -254,7 +254,7 @@
 	icon_state = "roofg";
 	dir = 4
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "bO" = (
 /obj/structure/closet/crate/coffin,
@@ -286,7 +286,7 @@
 "bY" = (
 /obj/structure/rack/shelf/notdense,
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "cb" = (
 /obj/effect/decal/cleanable/dirt,
@@ -903,7 +903,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
 "fB" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/indoors/town/church/chapel)
 "fC" = (
 /turf/open/floor/churchmarble,
@@ -2587,7 +2587,7 @@
 	icon_state = "largetable"
 	},
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "rs" = (
 /obj/structure/table/wood,
@@ -2799,7 +2799,7 @@
 /area/indoors/town/church)
 "sC" = (
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "sD" = (
 /obj/item/weapon/tongs,
@@ -3014,7 +3014,7 @@
 	density = 1;
 	opacity = 1
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "tK" = (
 /obj/structure/fluff/railing/wood{
@@ -3743,7 +3743,7 @@
 	dir = 8;
 	pixel_y = 16
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "yG" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3765,7 +3765,7 @@
 /area/ship/middeck)
 "yU" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/indoors/town/church/chapel)
 "yV" = (
 /obj/effect/landmark/events/testportal{
@@ -3786,7 +3786,7 @@
 "zd" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "ze" = (
 /obj/effect/landmark/start/innkeep{
@@ -4887,7 +4887,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "Gu" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -5202,7 +5202,7 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/nobledeck)
 "IR" = (
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "IZ" = (
 /obj/effect/landmark/start/servant{
@@ -5240,7 +5240,7 @@
 /area/ship/topdeck)
 "Jp" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/indoors/town/church/chapel)
 "Jq" = (
 /obj/structure/rack/shelf/biggest,
@@ -5437,7 +5437,7 @@
 	icon_state = "roofg";
 	dir = 4
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "KV" = (
 /obj/structure/table/wood{
@@ -5947,7 +5947,7 @@
 /obj/structure/industrial_lift/tram{
 	fake = 1
 	},
-/turf/open/water/ocean/deep,
+/turf/open/water/ocean/fakedeep,
 /area/outdoors/beach)
 "NW" = (
 /obj/structure/fluff/railing/border,
@@ -7366,7 +7366,7 @@
 /area/indoors/town/church/chapel)
 "Wd" = (
 /obj/item/soap,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/indoors/town/church/chapel)
 "We" = (
 /obj/effect/mapping_helpers/access/locker,
