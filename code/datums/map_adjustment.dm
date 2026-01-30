@@ -25,7 +25,7 @@
 	var/list/sexes_adjust
 	/// Jobs that have age adjustments /datum/job = list(AGE_CHILD, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	var/list/ages_adjust
-	// Jobs that have custom names on the map.
+	/// Jobs that have custom names on the map.
 	var/list/jobname_adjust
 	/// Migrant waves that are banned from spawning.
 	/// This doesn't handle downgraded waves so if can_roll is true on one, it needs to be added.
