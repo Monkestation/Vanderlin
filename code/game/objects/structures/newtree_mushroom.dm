@@ -88,7 +88,7 @@
 	var/glowcolour = "#f5ccb9"
 
 /obj/structure/flora/newbranch/connector/mushroom/Initialize(mapload)
-	..()
+	. = ..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newbranch/mushroom
@@ -102,7 +102,7 @@
 	var/glowcolour = "#f5ccb9"
 
 /obj/structure/flora/newbranch/mushroom/Initialize(mapload)
-	..()
+	. = ..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newleaf/corner/mushroom
@@ -115,7 +115,7 @@
 	var/glowcolour = "#f5e7b9"
 
 /obj/structure/flora/newleaf/corner/mushroom/Initialize(mapload)
-	..()
+	. = ..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /obj/structure/flora/newleaf/mushroom
@@ -128,7 +128,7 @@
 	var/glowcolour = "#f5e7b9"
 
 /obj/structure/flora/newleaf/mushroom/Initialize(mapload)
-	..()
+	. = ..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
 /*
