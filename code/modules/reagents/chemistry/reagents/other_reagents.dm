@@ -98,7 +98,7 @@
 	color = "#9673bec6"
 
 /datum/reagent/water/tainted/on_mob_life(mob/living/carbon/M)
-	..()
+	. = ..()
 	// Nobody is exempt, nobody can drink this without bad effects.
 	M.add_nausea(5)
 	// Fungal infection - spreads faster the sicker you are. Interesting potential combo mixing this and bogwater together to make a rapid-infestation mix.

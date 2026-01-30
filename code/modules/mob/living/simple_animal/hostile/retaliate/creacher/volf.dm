@@ -172,6 +172,5 @@
 	remains_type = /obj/effect/decal/remains/wolf/marrov
 
 /obj/effect/decal/remains/wolf/marrov
-
 	icon_state = "marrovbones"
 

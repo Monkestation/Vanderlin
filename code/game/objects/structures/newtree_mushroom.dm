@@ -87,7 +87,7 @@
 	num_random_icons = 0
 	var/glowcolour = "#f5ccb9"
 
-/obj/structure/flora/newbranch/connector/mushroom/New()
+/obj/structure/flora/newbranch/connector/mushroom/Initialize(mapload)
 	..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
@@ -101,7 +101,7 @@
 	num_random_icons = 2
 	var/glowcolour = "#f5ccb9"
 
-/obj/structure/flora/newbranch/mushroom/New()
+/obj/structure/flora/newbranch/mushroom/Initialize(mapload)
 	..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
@@ -114,7 +114,7 @@
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	var/glowcolour = "#f5e7b9"
 
-/obj/structure/flora/newleaf/corner/mushroom/New()
+/obj/structure/flora/newleaf/corner/mushroom/Initialize(mapload)
 	..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
@@ -127,7 +127,7 @@
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	var/glowcolour = "#f5e7b9"
 
-/obj/structure/flora/newleaf/mushroom/New()
+/obj/structure/flora/newleaf/mushroom/Initialize(mapload)
 	..()
 	set_light(1.2, 1.2, 1.2, l_color = glowcolour)
 
