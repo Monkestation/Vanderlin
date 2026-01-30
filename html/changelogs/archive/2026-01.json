@@ -528,5 +528,17 @@
                 "rscadd": "you can stick kobolds in smelters now"
             }
         ]
+    },
+    "2026-01-29": {
+        "realforest2001": [
+            {
+                "qol": "Role-Unique verbs are now all in one tab (where practical to do so)."
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes the grenzelbun description"
+            }
+        ]
     }
 }

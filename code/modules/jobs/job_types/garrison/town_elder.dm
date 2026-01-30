@@ -56,8 +56,8 @@
 	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /mob/living/carbon/human/proc/townannouncement()
-	set name = "Announcement"
-	set category = "Town Elder"
+	set name = "Elder Announcement"
+	set category = "RoleUnique"
 	if(stat)
 		return
 

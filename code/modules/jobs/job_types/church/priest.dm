@@ -113,7 +113,7 @@
 
 /mob/living/carbon/human/proc/coronate_lord()
 	set name = "Coronate"
-	set category = "Priest"
+	set category = "RoleUnique"
 	if(!mind)
 		return
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
@@ -164,7 +164,7 @@
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Excommunicate"
-	set category = "Priest"
+	set category = "RoleUnique"
 	if(stat)
 		return
 	var/inputty = input("Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner Name") as text|null
@@ -195,7 +195,7 @@
 
 /mob/living/carbon/human/proc/churchcurse()
 	set name = "Curse"
-	set category = "Priest"
+	set category = "RoleUnique"
 	if(stat)
 		return
 	var/inputty = input("Curse someone as a heretic. (curse them again to remove it)", "Sinner Name") as text|null
@@ -224,8 +224,8 @@
 				break
 
 /mob/living/carbon/human/proc/churchannouncement()
-	set name = "Announcement"
-	set category = "Priest"
+	set name = "Priest Announcement"
+	set category = "RoleUnique"
 	if(stat)
 		return
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null

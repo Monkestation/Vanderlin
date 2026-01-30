@@ -26,6 +26,9 @@ SUBSYSTEM_DEF(merchant)
 	var/list/faction_rotation_schedule = list() // When each faction becomes active
 	var/list/active_faction_traders = list()
 
+	///this is our list of created nations
+	var/list/nations = list()
+
 	/// Cache of recipe component costs to avoid recalculation
 	var/static/list/recipe_base_values = list()
 	/// Cached list of all valid bounty items (items that can be obtained through gameplay)
@@ -44,6 +47,7 @@ SUBSYSTEM_DEF(merchant)
 
 
 /datum/controller/subsystem/merchant/Initialize(timeofday)
+	setup_map_nations()
 	// Initialize recipe values and bounty cache BEFORE factions cause they use it
 	initialize_recipe_values()
 	initialize_bounty_cache()
@@ -61,6 +65,8 @@ SUBSYSTEM_DEF(merchant)
 	initialize_factions()
 	return ..()
 
+/datum/controller/subsystem/merchant/proc/setup_map_nations()
+	return //! TODO: when lore done set this up
 
 /**
  * Initializes recipe base values for ALL recipes
@@ -497,6 +503,17 @@ SUBSYSTEM_DEF(merchant)
 		if(!(pack.type in incoming_packs))
 			continue
 		pack.unlocked = TRUE
+
+/datum/controller/subsystem/merchant/proc/handle_lift_contents(obj/structure/industrial_lift/tram/platform, list/items, datum/nation/shipped_nation)
+	if(!length(nations))
+		return
+	if(shipped_nation)
+		shipped_nation.handle_import_shipment(items, platform)
+	for(var/datum/nation/other_nation in nations)
+		if(shipped_nation == other_nation)
+			continue
+		shipped_nation.handle_global_shipment(items)
+
 
 /obj/Initialize()
 	. = ..()
