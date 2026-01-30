@@ -110,3 +110,6 @@
 	#define COMPONENT_LIVING_CANCEL_LIFE_PROCESSING (1<<0)
 
 #define COMSIG_LIVING_ADJUSTED "living_damage_adjusted"
+
+#define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
+#define COMSIG_LIVING_POSTBITE_SELF "living_postbite"

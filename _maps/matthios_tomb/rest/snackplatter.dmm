@@ -57,7 +57,7 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/cave)
 "K" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "Q" = (
 /obj/effect/dungeon_directional_helper/east,

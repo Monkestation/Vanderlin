@@ -43,6 +43,7 @@
 		/datum/skill/craft/smelting = 4,
 		/datum/skill/misc/reading = 2,
 		/datum/skill/labor/mathematics = 2,
+		/datum/skill/craft/bombs = 3,
 	)
 
 /datum/job/artificer/after_spawn(mob/living/carbon/human/spawned, client/player_client)

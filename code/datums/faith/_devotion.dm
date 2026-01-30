@@ -183,7 +183,7 @@
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
-	set category = "Cleric"
+	set category = "RoleUnique"
 
 	if(!ishuman(src))
 		return
@@ -194,7 +194,7 @@
 
 /mob/living/carbon/human/proc/clericpray()
 	set name = "Give Prayer"
-	set category = "Cleric"
+	set category = "RoleUnique"
 
 	if(!ishuman(src))
 		return

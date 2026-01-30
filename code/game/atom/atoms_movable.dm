@@ -983,7 +983,7 @@
 	if(TT.target_turf && curloc)
 		if(TT.target_turf.z > curloc.z)
 			var/turf/above = GET_TURF_ABOVE(curloc)
-			if(istype(above, /turf/open/transparent/openspace))
+			if(istype(above, /turf/open/openspace))
 				forceMove(above)
 	if(spin)
 		SpinAnimation(5, 1)

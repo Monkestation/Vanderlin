@@ -264,7 +264,6 @@
 			""
 		)
 		return FALSE
-
 	node_to_graft.stored_node = null
 	qdel(node_to_graft)
 	node_to_graft = null

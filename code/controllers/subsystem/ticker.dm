@@ -438,11 +438,9 @@ SUBSYSTEM_DEF(ticker)
 			GLOB.joined_player_list += player.ckey
 			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
 			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
-				player.new_player_panel()
 				continue
 			player.create_character(destination)
-		else
-			player.new_player_panel()
+
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/collect_minds()

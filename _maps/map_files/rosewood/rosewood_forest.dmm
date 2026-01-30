@@ -165,7 +165,7 @@
 /area/indoors)
 "cN" = (
 /obj/machinery/light/fueled/torchholder/r,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "cO" = (
 /obj/effect/landmark/start/adventurerlate{
@@ -371,7 +371,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors)
 "gk" = (
 /obj/machinery/light/fueled/torchholder/l,
@@ -477,7 +477,7 @@
 /area/outdoors/mountains)
 "jy" = (
 /obj/machinery/light/fueled/torchholder/l,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "jE" = (
 /turf/open/floor/dirt,
@@ -649,7 +649,7 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/woods)
 "ng" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "no" = (
 /turf/closed/wall/mineral/stone,
@@ -732,7 +732,7 @@
 /area/outdoors/woods)
 "oQ" = (
 /obj/effect/falling_sakura,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "oS" = (
 /obj/structure/roguerock,
@@ -1053,7 +1053,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/woods)
 "vz" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/cave)
 "vE" = (
 /turf/closed/wall/mineral/craftstone,
@@ -1063,7 +1063,7 @@
 /turf/open/floor/snow,
 /area/outdoors/woods)
 "wa" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors)
 "wg" = (
 /obj/effect/decal/cleanable/blood/splatter{
@@ -1289,7 +1289,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors)
 "AN" = (
 /obj/structure/flora/hotspring_rocks/small/five,
@@ -1468,7 +1468,7 @@
 "ER" = (
 /obj/effect/falling_sakura,
 /obj/effect/falling_sakura,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "Fm" = (
 /obj/effect/landmark/start/adventurerlate{
@@ -1992,7 +1992,7 @@
 /turf/open/floor/cobble,
 /area/outdoors/woods)
 "Qk" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "Qo" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -2247,7 +2247,7 @@
 /turf/closed/wall/mineral/craftstone,
 /area/indoors)
 "VF" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/woods)
 "VI" = (
 /obj/effect/decal/cleanable/blood/tracks{

@@ -86,7 +86,7 @@
 			qdel(loaded_ammo) // I think this is a bug (?) but I don't want to deal with it rn
 		else
 			if(ismobholder(loaded_thing))
-				var/obj/item/clothing/head/mob_holder/curler = loaded_thing
+				var/obj/item/mob_holder/curler = loaded_thing
 				loaded_thing = curler.held_mob
 				qdel(curler)
 			loaded_thing.throw_at(target, blast_range, 3, force = MOVE_FORCE_OVERPOWERING)
