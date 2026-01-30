@@ -72,7 +72,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "az" = (
 /obj/structure/table/map/amber{
@@ -257,7 +257,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "by" = (
 /turf/open/floor/blocks,
@@ -294,7 +294,7 @@
 /area/indoors/town/manor/phys)
 "bM" = (
 /obj/effect/landmark/events/haunts,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/halls/e)
 "bN" = (
 /turf/open/water/river,
@@ -336,7 +336,7 @@
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "townnorthkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "bY" = (
 /obj/item/reagent_containers/glass/bottle/manapot,
@@ -472,7 +472,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "cR" = (
 /obj/structure/fluff/walldeco/church/line,
@@ -527,7 +527,7 @@
 	dir = 8;
 	pixel_y = -1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "cU" = (
 /obj/structure/toilet,
@@ -545,7 +545,7 @@
 /area/indoors/town/garrison)
 "dc" = (
 /obj/structure/industrial_lift/tram,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "dh" = (
 /obj/structure/bars/cemetery,
@@ -562,7 +562,7 @@
 	platform_code = "cargo_return_3";
 	next_path_id = "cargo_map_enter"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "do" = (
 /obj/structure/winch{
@@ -678,7 +678,7 @@
 /obj/effect/landmark/tram/queued_path/cargo_map_enter{
 	next_path_id = "point_1"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "dZ" = (
 /obj/structure/bed/wool/double,
@@ -962,7 +962,7 @@
 	pixel_x = -16;
 	pixel_y = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "ff" = (
 /obj/structure/door/weak/bolt{
@@ -1175,7 +1175,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cave)
 "gf" = (
 /obj/structure/fluff/walldeco/painting/castle,
@@ -1200,7 +1200,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "gn" = (
 /turf/open/floor/ruinedwood/spiral,
@@ -1257,7 +1257,7 @@
 /area/under/cavewet)
 "gH" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "gJ" = (
 /obj/structure/fluff/railing/border{
@@ -1373,7 +1373,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "ho" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
@@ -1392,7 +1392,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "hs" = (
 /obj/structure/rack/shelf/biggest,
@@ -1415,7 +1415,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "hv" = (
 /obj/effect/landmark/events/haunts,
@@ -1430,7 +1430,7 @@
 /turf/open/floor/cobblerock,
 /area/indoors/soilsons)
 "hx" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/tavern)
 "hy" = (
 /obj/structure/door/violet{
@@ -1449,7 +1449,7 @@
 	platform_code = "point_9";
 	next_path_id = "point_10"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "hD" = (
 /obj/structure/fermentation_keg/water,
@@ -1478,7 +1478,7 @@
 	platform_code = "cargo_return_1";
 	next_path_id = "cargo_return_2"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "hH" = (
 /obj/structure/table/wood/reinf_long,
@@ -1522,7 +1522,7 @@
 /obj/structure/floordoor/gatehatch/outer{
 	redstone_id = "townwestkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "hQ" = (
 /turf/open/floor/naturalstone,
@@ -1548,7 +1548,7 @@
 /turf/open/floor/grass/cave,
 /area/under/cave)
 "ie" = (
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/halls/e)
 "if" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -1571,7 +1571,7 @@
 /turf/open/water/swamp,
 /area/indoors/town/tavern)
 "ik" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "ip" = (
 /turf/closed/wall/mineral/stone/window,
@@ -1605,7 +1605,7 @@
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "townnorthkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "iu" = (
 /obj/item/reagent_containers/glass/mortar{
@@ -1626,7 +1626,7 @@
 /area/indoors/town/clinic_large/apothecary)
 "ix" = (
 /obj/structure/fluff/globe,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/lord_appt)
 "iB" = (
 /obj/structure/rack,
@@ -1747,13 +1747,13 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "jk" = (
 /obj/structure/floordoor{
 	redstone_id = "nite_shutter"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "jn" = (
 /obj/structure/fluff/railing/border{
@@ -1807,7 +1807,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 5
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "jC" = (
 /turf/open/floor/carpet/lord/left,
@@ -1903,7 +1903,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "km" = (
 /obj/structure/flora/shroom_tree,
@@ -1924,7 +1924,7 @@
 	dir = 4
 	},
 /obj/structure/fluff/walldeco/sign/armorsmithsign,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "kv" = (
 /turf/closed/mineral/bedrock/warm,
@@ -1934,7 +1934,7 @@
 	platform_code = "point_1";
 	next_path_id = "point_5"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "ky" = (
 /obj/structure/bookcase/random_recipes,
@@ -1979,7 +1979,7 @@
 /area/indoors/town/garrison)
 "kP" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "kS" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
@@ -2021,7 +2021,7 @@
 /area/under/cavewet)
 "li" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/halls/e)
 "lj" = (
 /obj/structure/chair/bench/church/mid{
@@ -2046,7 +2046,7 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/lord_appt)
 "lm" = (
 /obj/effect/decal/cleanable/sigil/NE,
@@ -2085,7 +2085,7 @@
 /obj/structure/floordoor/gatehatch/outer{
 	redstone_id = "townsouthkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "ly" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
@@ -2341,10 +2341,10 @@
 	platform_code = "point_6";
 	next_path_id = "point_7"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "nh" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/kitchen)
 "ni" = (
 /obj/structure/fluff/railing/border{
@@ -2354,13 +2354,13 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "nj" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/dwarfin)
 "nm" = (
 /obj/item/coin/gold/pile,
@@ -2543,7 +2543,7 @@
 /area/indoors/town/manor/feast)
 "ov" = (
 /obj/structure/fluff/clock,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/lord_appt)
 "ow" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2578,7 +2578,7 @@
 	platform_code = "point_10";
 	next_path_id = "cargo_pre_enter"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "oI" = (
 /obj/structure/gate/bars/preopen{
@@ -2688,7 +2688,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 5
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "pt" = (
 /obj/structure/stairs/stone{
@@ -2968,7 +2968,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "ri" = (
 /turf/open/floor/naturalstone,
@@ -3012,7 +3012,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "rD" = (
 /turf/closed/wall/mineral/decorstone,
@@ -3340,7 +3340,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "tI" = (
 /obj/structure/flora/shroom_tree,
@@ -3554,7 +3554,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "uL" = (
 /obj/effect/landmark/start/innkeep_son,
@@ -3823,7 +3823,7 @@
 /turf/open/floor/church/rust,
 /area/indoors/town/manor/halls/e)
 "vZ" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "wa" = (
 /obj/structure/closet/crate/crafted_closet,
@@ -3914,7 +3914,7 @@
 	platform_code = "point_5";
 	next_path_id = "point_6"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "wJ" = (
 /obj/machinery/light/fueled/wallfire{
@@ -3932,7 +3932,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "wL" = (
 /obj/structure/chair/stool,
@@ -4020,7 +4020,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "xo" = (
 /turf/open/floor/dirt/road,
@@ -4030,7 +4030,7 @@
 /turf/open/floor/dirt,
 /area/under/cave)
 "xq" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/shop)
 "xr" = (
 /obj/structure/fluff/statue/knight,
@@ -4091,7 +4091,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "xH" = (
 /turf/closed/mineral/deep,
@@ -4108,7 +4108,7 @@
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "townsouthkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "xK" = (
 /obj/structure/rack,
@@ -4211,7 +4211,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "yk" = (
 /obj/structure/table/wood/reinforced_alter,
@@ -4281,7 +4281,7 @@
 /area/indoors/town/smithy)
 "yE" = (
 /obj/effect/landmark/tram/queued_path/cargo_stop,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "yF" = (
 /obj/structure/flora/newtree/mushroom/blue,
@@ -4378,7 +4378,7 @@
 /turf/open/floor/blocks,
 /area/under/cave)
 "zf" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/steward)
 "zg" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
@@ -4588,7 +4588,7 @@
 /area/indoors/town/manor/phys)
 "Az" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/kitchen)
 "AA" = (
 /obj/structure/table/wood/large/corner{
@@ -4607,7 +4607,7 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/dwarfin)
 "AG" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls/w)
 "AH" = (
 /obj/structure/fluff/walldeco/chains,
@@ -4631,7 +4631,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "AO" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
@@ -4694,7 +4694,7 @@
 /area/indoors/town/manor/halls/s)
 "Bb" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "Bd" = (
 /obj/structure/toilet,
@@ -4711,7 +4711,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "Bk" = (
 /obj/structure/bed/inn,
@@ -5024,7 +5024,7 @@
 /obj/structure/industrial_lift/tram{
 	icon_state = "nothing"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "CO" = (
 /obj/effect/decal/carpet/kover_darkred{
@@ -5380,7 +5380,7 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/halls/e)
 "ET" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -5408,7 +5408,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 2
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Fe" = (
 /obj/machinery/printingpress,
@@ -5451,7 +5451,7 @@
 /area/indoors/town/shop)
 "Ft" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/kitchen)
 "Fu" = (
 /obj/structure/fluff/railing/border,
@@ -5461,7 +5461,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "Fy" = (
 /turf/open/floor/hexstone,
@@ -5538,7 +5538,7 @@
 /obj/effect/landmark/tram/queued_path/cargo_map_exit{
 	next_path_id = "cargo_return_1"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Ga" = (
 /turf/open/floor/cobble,
@@ -5567,7 +5567,7 @@
 /obj/effect/landmark/tram/queued_path/cargo_pre_enter{
 	next_path_id = "cargo_stop"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Gg" = (
 /obj/structure/fluff/railing/border{
@@ -5579,7 +5579,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 5
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "Gh" = (
 /obj/structure/chair/stool,
@@ -5596,7 +5596,7 @@
 /obj/structure/floordoor{
 	redstone_id = "thronegrille"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/throne)
 "Gm" = (
 /turf/open/floor/hexstone,
@@ -5696,7 +5696,7 @@
 /area/indoors/town/dwarfin)
 "GP" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "GR" = (
 /obj/structure/mirror/fancy{
@@ -6053,7 +6053,7 @@
 /obj/effect/landmark/tram/queued_path/cargo_exit{
 	next_path_id = "cargo_map_exit"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "ID" = (
 /obj/machinery/light/fueled/wallfire/candle/skull{
@@ -6110,7 +6110,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "IT" = (
 /obj/structure/fluff/railing/border{
@@ -6128,7 +6128,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "IZ" = (
 /turf/open/floor/carpet/red,
@@ -6228,7 +6228,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 2
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "JD" = (
 /obj/structure/fluff/railing/border,
@@ -6238,13 +6238,13 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "JG" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "JI" = (
 /obj/machinery/light/fueled/hearth,
@@ -6255,7 +6255,7 @@
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/manor/kitchen)
 "JK" = (
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/lord_appt)
 "JL" = (
 /obj/structure/fluff/railing/border{
@@ -6352,7 +6352,7 @@
 /area/indoors/town/manor/phys)
 "Kv" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/halls/e)
 "Ky" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -6382,7 +6382,7 @@
 	platform_code = "point_7";
 	next_path_id = "point_8"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "KG" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
@@ -6391,7 +6391,7 @@
 /obj/structure/floordoor{
 	redstone_id = "Merchant"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "KM" = (
 /obj/structure/flora/grass/bush/wall/cave,
@@ -6473,7 +6473,7 @@
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "townwestkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Le" = (
 /obj/structure/fluff/walldeco/psybanner/red{
@@ -6515,7 +6515,7 @@
 /turf/open/floor/concrete,
 /area/indoors/town/tavern)
 "Lt" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/smithy)
 "Lu" = (
 /obj/structure/fluff/railing/border/corner{
@@ -6685,7 +6685,7 @@
 /area/indoors/town/manor/halls)
 "Mv" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/tavern)
 "Mw" = (
 /obj/item/ore/coal,
@@ -6758,7 +6758,7 @@
 /turf/open/floor/dirt,
 /area/under/cave)
 "MJ" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "MK" = (
 /obj/effect/mapping_helpers/access/keyset/manor/lord,
@@ -6913,13 +6913,13 @@
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "Nt" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/magician)
 "Nv" = (
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "townsouthkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Ny" = (
 /turf/open/floor/churchrough/rust,
@@ -6951,7 +6951,7 @@
 /turf/open/floor/blocks/paving,
 /area/indoors/town/manor/heir/heir2)
 "ND" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "NE" = (
 /obj/machinery/light/fueledstreet/midlamp,
@@ -7055,7 +7055,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 2
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Oq" = (
 /obj/structure/door/weak/bolt,
@@ -7295,7 +7295,7 @@
 /turf/closed/mineral/deep,
 /area/indoors/town/manor/servant)
 "PA" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/dwarfin)
 "PC" = (
 /obj/structure/closet/crate/chest/neu_iron{
@@ -7314,7 +7314,7 @@
 	dir = 4;
 	pixel_x = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "PH" = (
 /obj/structure/gate/bars{
@@ -7339,13 +7339,13 @@
 /area/indoors/soilsons)
 "PM" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "PO" = (
 /obj/structure/industrial_lift/tram{
 	icon_state = "vertw"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "PR" = (
 /turf/closed/wall/mineral/stone,
@@ -7548,7 +7548,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Rw" = (
 /obj/structure/fake_machine/mail{
@@ -7680,7 +7680,7 @@
 /area/indoors/town/manor/throne)
 "Sv" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/indoors/town/manor/lord_appt)
 "Sy" = (
 /obj/structure/fluff/railing/wood,
@@ -7777,7 +7777,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "Tg" = (
 /obj/structure/fluff/walldeco/psybanner/red{
@@ -7826,7 +7826,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "Tx" = (
 /obj/structure/fluff/railing/border,
@@ -7853,7 +7853,7 @@
 	platform_code = "point_8";
 	next_path_id = "point_9"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "TD" = (
 /obj/structure/table/map/amber,
@@ -7970,7 +7970,7 @@
 /area/indoors/town/vault)
 "Us" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/kitchen)
 "Ut" = (
 /obj/structure/fermentation_keg/distiller,
@@ -8165,7 +8165,7 @@
 /area/under/cave)
 "VE" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/phys)
 "VF" = (
 /turf/closed/wall/mineral/stonebrick,
@@ -8186,7 +8186,7 @@
 /obj/structure/floordoor/gatehatch/outer{
 	redstone_id = "townnorthkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "VT" = (
 /obj/structure/closet/crate/crafted_closet/dark,
@@ -8199,7 +8199,7 @@
 	},
 /area/under/cave)
 "VU" = (
-/turf/open/transparent/glass,
+/turf/open/glass,
 /area/under/cave)
 "VV" = (
 /obj/structure/table/map/amber{
@@ -8278,7 +8278,7 @@
 /obj/structure/fluff/railing/border/inner{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/garrison)
 "Wi" = (
 /obj/structure/stairs/stone{
@@ -8515,7 +8515,7 @@
 /turf/open/floor/church/rust,
 /area/indoors/town/manor/throne)
 "XM" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/town/manor/halls)
 "XN" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -8590,7 +8590,7 @@
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "townwestkybraxor"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cavewet)
 "XY" = (
 /obj/item/reagent_containers/food/snacks/produce/tea,
@@ -8669,7 +8669,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "Yn" = (
 /obj/structure/bookcase/random,
@@ -8902,7 +8902,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/cave)
 "ZL" = (
 /obj/structure/plasticflaps,
