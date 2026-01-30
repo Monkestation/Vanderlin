@@ -171,11 +171,6 @@
 /obj/structure/flora/grass/water,
 /turf/open/water,
 /area/under/tomb/cave/wet)
-"fE" = (
-/obj/structure/flora/grass/water/reeds,
-/obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
-/area/under/tomb/cave/wet)
 "fP" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = -10;
@@ -210,10 +205,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
-"gw" = (
-/obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
-/area/under/tomb/cave/wet)
 "gU" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -288,9 +279,6 @@
 /obj/structure/fluff/psycross/copper,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
-"jd" = (
-/turf/open/water/swamp/high,
-/area/under/tomb/cave/wet)
 "jk" = (
 /mob/living/carbon/human/species/rousman/npc,
 /turf/open/floor/churchmarble,
@@ -335,10 +323,6 @@
 	dir = 10
 	},
 /turf/open/floor/churchmarble,
-/area/under/tomb/indoors/church)
-"kG" = (
-/obj/machinery/light/fueled/chand,
-/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "kM" = (
 /obj/structure/flora/grass,
@@ -405,6 +389,11 @@
 /obj/structure/door/violet,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/church)
+"mH" = (
+/obj/structure/kneestingers,
+/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/turf/open/water/swamp/high,
+/area/under/tomb/cave/wet)
 "mM" = (
 /obj/structure/bed/mediocre,
 /obj/structure/bed/mediocre,
@@ -476,11 +465,6 @@
 "pw" = (
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
-"px" = (
-/obj/structure/flora/grass/water,
-/obj/structure/kneestingers,
-/turf/open/water/swamp/high,
-/area/under/tomb/cave/wet)
 "pE" = (
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb/cave/wet)
@@ -500,9 +484,11 @@
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
-"qE" = (
-/turf/open/openspace,
-/area/under/tomb/indoors/church)
+"qU" = (
+/obj/structure/flora/grass/water/reeds,
+/obj/structure/flora/grass/water,
+/turf/open/water/swamp/high,
+/area/under/tomb/cave/wet)
 "qW" = (
 /obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/blood,
@@ -575,11 +561,6 @@
 /obj/structure/closet/dirthole/closed/loot,
 /turf/open/floor/grass/cold,
 /area/under/tomb)
-"uM" = (
-/obj/structure/kneestingers,
-/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/turf/open/water/swamp/high,
-/area/under/tomb/cave/wet)
 "uT" = (
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb/indoors/church)
@@ -666,6 +647,11 @@
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
 /area/under/tomb)
+"zo" = (
+/obj/structure/flora/grass/water,
+/obj/structure/kneestingers,
+/turf/open/water/swamp/high,
+/area/under/tomb/cave/wet)
 "zw" = (
 /obj/structure/rack,
 /obj/item/natural/bundle/cloth,
@@ -697,6 +683,18 @@
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)
+"AQ" = (
+/obj/structure/bars/pipe{
+	dir = 10;
+	pixel_x = 3;
+	pixel_y = 6
+	},
+/turf/open/openspace,
+/area/under/tomb)
+"AU" = (
+/obj/structure/flora/grass/water/reeds,
+/turf/open/water/swamp/high,
+/area/under/tomb/cave/wet)
 "Be" = (
 /turf/open/water/swamp,
 /area/under/tomb/cave/wet)
@@ -793,14 +791,17 @@
 /obj/item/flashlight/flare/torch,
 /turf/open/floor/woodturned/nosmooth/saiga,
 /area/under/tomb/cave)
-"FD" = (
-/obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
-/area/under/tomb/cave/wet)
+"FK" = (
+/obj/machinery/light/fueled/chand,
+/turf/open/openspace,
+/area/under/tomb/indoors/church)
 "FU" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt/road,
 /area/under/tomb/cave/wet)
+"Go" = (
+/turf/open/openspace,
+/area/under/tomb)
 "Hb" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
@@ -872,6 +873,9 @@
 "In" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/concrete,
+/area/under/tomb/indoors/church)
+"Ir" = (
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "Is" = (
 /obj/structure/fluff/railing/wood{
@@ -993,9 +997,6 @@
 "Mr" = (
 /obj/item/weapon/pick/copper,
 /turf/open/floor/dirt,
-/area/under/tomb)
-"MD" = (
-/turf/open/openspace,
 /area/under/tomb)
 "MG" = (
 /obj/structure/barricade/wooden,
@@ -1176,14 +1177,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
-"Uc" = (
-/obj/structure/bars/pipe{
-	dir = 10;
-	pixel_x = 3;
-	pixel_y = 6
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "Ui" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/reagent_containers/glass/bottle/stronghealthpot,
@@ -1253,6 +1246,10 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
+"WT" = (
+/obj/structure/flora/grass/water,
+/turf/open/water/swamp/high,
+/area/under/tomb/cave/wet)
 "Xa" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -1263,6 +1260,9 @@
 /obj/structure/closet/crate/miningcar,
 /turf/open/floor/dirt,
 /area/under/tomb)
+"Xd" = (
+/turf/open/water/swamp/high,
+/area/under/tomb/cave/wet)
 "Xl" = (
 /obj/structure/flora/ausbushes/grassybush,
 /turf/open/floor/dirt,
@@ -1743,11 +1743,11 @@ cC
 cC
 uT
 nm
-uM
-jd
-jd
-jd
-FD
+mH
+Xd
+Xd
+Xd
+WT
 Be
 dM
 dM
@@ -1812,7 +1812,7 @@ IX
 ZY
 pp
 nm
-gw
+AU
 dM
 dM
 Vd
@@ -1844,7 +1844,7 @@ vu
 pp
 pp
 nm
-px
+zo
 dM
 cq
 dM
@@ -1876,7 +1876,7 @@ yn
 AF
 df
 nm
-FD
+WT
 dM
 dM
 QP
@@ -1908,7 +1908,7 @@ yc
 KS
 nG
 nm
-jd
+Xd
 JF
 dM
 QP
@@ -1940,7 +1940,7 @@ sy
 qW
 fs
 nm
-FD
+WT
 iC
 dM
 QP
@@ -1972,7 +1972,7 @@ iP
 Pj
 pp
 nm
-fE
+qU
 EL
 JF
 QP
@@ -2004,7 +2004,7 @@ Uu
 CJ
 In
 nm
-jd
+Xd
 EO
 QP
 QP
@@ -2036,7 +2036,7 @@ JQ
 JQ
 ho
 uT
-jd
+Xd
 EO
 QP
 QP
@@ -2068,7 +2068,7 @@ Tm
 dB
 sT
 nm
-px
+zo
 Be
 QP
 QP
@@ -2100,7 +2100,7 @@ fd
 JI
 fd
 nm
-FD
+WT
 EL
 XS
 QP
@@ -2132,7 +2132,7 @@ JI
 Aa
 JI
 nm
-gw
+AU
 Be
 PT
 QP
@@ -2319,7 +2319,7 @@ zh
 kM
 KK
 KK
-MD
+Go
 KK
 KK
 KK
@@ -2348,12 +2348,12 @@ Ri
 aP
 kM
 aU
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
 KK
 KK
 Xl
@@ -2371,12 +2371,12 @@ KK
 KK
 KK
 KK
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
 aP
 NP
 Cq
@@ -2403,25 +2403,25 @@ KK
 KK
 KK
 KK
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 aP
 zh
 KK
@@ -2431,30 +2431,30 @@ KK
 do
 sK
 KK
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 kM
 KK
 "}
@@ -2463,30 +2463,30 @@ KK
 DM
 DM
 KK
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 jM
 KK
 "}
@@ -2496,29 +2496,29 @@ DM
 DM
 DM
 HL
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 nB
 KK
 "}
@@ -2528,30 +2528,30 @@ DM
 lg
 DM
 HL
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 KK
 "}
 (9,1,2) = {"
@@ -2559,31 +2559,31 @@ KK
 HL
 DM
 DM
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 KK
 "}
 (10,1,2) = {"
@@ -2591,31 +2591,31 @@ KK
 HL
 DM
 HL
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 KK
 "}
 (11,1,2) = {"
@@ -2624,13 +2624,13 @@ DM
 DM
 DM
 DM
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 uT
 uT
 cC
@@ -2646,8 +2646,8 @@ mw
 mw
 mw
 uJ
-MD
-MD
+Go
+Go
 KK
 "}
 (12,1,2) = {"
@@ -2656,13 +2656,13 @@ DM
 HL
 HL
 DM
-MD
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
+Go
 nm
 ri
 ri
@@ -2678,8 +2678,8 @@ VR
 Fe
 VR
 qx
-Uc
-MD
+AQ
+Go
 KK
 "}
 (13,1,2) = {"
@@ -2688,11 +2688,11 @@ Ep
 cR
 HL
 DM
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
 nm
 uT
 nm
@@ -2719,22 +2719,22 @@ UZ
 Mr
 Ep
 HL
-MD
-MD
-MD
-MD
-MD
-MD
+Go
+Go
+Go
+Go
+Go
+Go
 cC
 Mp
 YN
-qE
-qE
-qE
-qE
-qE
-qE
-qE
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 vM
 MG
 VI
@@ -2752,21 +2752,21 @@ Xc
 UZ
 HL
 DM
-MD
-MD
-MD
+Go
+Go
+Go
 nm
 uT
 nm
 Zv
 da
-qE
-qE
-qE
-qE
-qE
-qE
-qE
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 vM
 MG
 OO
@@ -2785,19 +2785,19 @@ oq
 DM
 DM
 HL
-MD
-MD
+Go
+Go
 cC
 pH
 YN
-qE
-qE
-qE
-qE
-qE
-qE
-qE
-qE
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 lp
 uT
 cL
@@ -2817,20 +2817,20 @@ DM
 DM
 DM
 DM
-MD
+Go
 uT
 nm
 ri
 YN
-qE
-qE
-kG
-qE
-qE
-qE
-kG
-qE
-qE
+Ir
+Ir
+FK
+Ir
+Ir
+Ir
+FK
+Ir
+Ir
 so
 cL
 VI
@@ -2849,20 +2849,20 @@ DM
 DM
 DM
 HL
-MD
+Go
 cC
 CQ
 ri
 Tz
-qE
-qE
-qE
-qE
-qE
-qE
-qE
-qE
-qE
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 Is
 MG
 MG
@@ -2880,17 +2880,17 @@ jm
 DM
 DM
 DM
-MD
+Go
 uT
 nm
 ri
 ri
 Tz
-qE
-qE
-qE
-qE
-qE
+Ir
+Ir
+Ir
+Ir
+Ir
 nm
 uT
 JQ
@@ -2911,8 +2911,8 @@ KK
 HL
 HL
 HL
-MD
-MD
+Go
+Go
 nm
 Mh
 ri
@@ -2943,8 +2943,8 @@ KK
 HL
 HL
 HL
-MD
-MD
+Go
+Go
 nm
 cP
 ri
@@ -2974,7 +2974,7 @@ pj
 KK
 HL
 HL
-MD
+Go
 mb
 NF
 uT

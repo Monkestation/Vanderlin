@@ -16,9 +16,6 @@
 "aH" = (
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
-"aX" = (
-/turf/open/openspace,
-/area/under/tomb/cave)
 "bd" = (
 /obj/structure/chair/stool,
 /mob/living/carbon/human/species/rousman/npc{
@@ -193,6 +190,10 @@
 	},
 /turf/open/floor/dirt,
 /area/under/tomb)
+"oT" = (
+/mob/living/carbon/human/species/skeleton/npc/ambush,
+/turf/open/water/swamp/high,
+/area/under/tomb/cave)
 "pr" = (
 /turf/open/floor/herringbone,
 /area/under/tomb/cave)
@@ -230,6 +231,9 @@
 	pixel_y = 5
 	},
 /turf/open/floor/naturalstone,
+/area/under/tomb/cave)
+"uZ" = (
+/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "vd" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -319,18 +323,6 @@
 /obj/structure/roguerock,
 /turf/open/floor/cobblerock,
 /area/under/tomb/cave)
-"Cj" = (
-/obj/item/ingot/gold,
-/obj/item/ingot/gold{
-	pixel_x = 8;
-	pixel_y = -4
-	},
-/obj/item/ingot/gold{
-	pixel_x = 4;
-	pixel_y = 3
-	},
-/turf/open/water/swamp/high,
-/area/under/tomb/cave)
 "Co" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
@@ -408,10 +400,6 @@
 /obj/item/natural/dirtclod,
 /turf/open/floor/dirt,
 /area/under/tomb)
-"EP" = (
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/high,
-/area/under/tomb/cave)
 "Ft" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/dirt/road,
@@ -421,9 +409,6 @@
 	icon_state = "glowshroom_A1"
 	},
 /turf/open/floor/dirt,
-/area/under/tomb/cave)
-"GC" = (
-/turf/open/water/swamp/high,
 /area/under/tomb/cave)
 "GJ" = (
 /obj/effect/dungeon_directional_helper/west,
@@ -457,6 +442,18 @@
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/dirt,
 /area/under/tomb)
+"LV" = (
+/obj/item/ingot/gold,
+/obj/item/ingot/gold{
+	pixel_x = 8;
+	pixel_y = -4
+	},
+/obj/item/ingot/gold{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/turf/open/water/swamp/high,
+/area/under/tomb/cave)
 "MV" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/spawner/map_spawner/beartrap,
@@ -544,6 +541,9 @@
 /obj/item/clothing/shirt/robe/necra,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
+"WH" = (
+/turf/open/openspace,
+/area/under/tomb/cave)
 "WI" = (
 /obj/structure/kneestingers{
 	icon_state = "glowshroom3"
@@ -1584,17 +1584,17 @@ aH
 aH
 aH
 aH
-aX
-aX
+WH
+WH
 To
 Bh
 Bh
 Nq
 Nq
 Nq
-GC
-GC
-GC
+uZ
+uZ
+uZ
 iR
 iR
 "}
@@ -1615,8 +1615,8 @@ iR
 aH
 aH
 aH
-aX
-aX
+WH
+WH
 To
 To
 CM
@@ -1625,9 +1625,9 @@ Fy
 CI
 iR
 iR
-GC
-GC
-GC
+uZ
+uZ
+uZ
 iR
 "}
 (4,1,2) = {"
@@ -1647,10 +1647,10 @@ aH
 aH
 aH
 aH
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
 To
 To
 To
@@ -1658,8 +1658,8 @@ SP
 CM
 iR
 iR
-GC
-Cj
+uZ
+LV
 iR
 "}
 (5,1,2) = {"
@@ -1678,20 +1678,20 @@ iR
 aH
 Nr
 aH
-aX
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
+WH
 CM
 CM
 CM
 Nq
 iR
 iR
-EP
+oT
 iR
 "}
 (6,1,2) = {"
@@ -1710,13 +1710,13 @@ mu
 aH
 iR
 CM
-aX
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
+WH
 aH
 CM
 CM
@@ -1744,10 +1744,10 @@ To
 CM
 iR
 iR
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
 Sk
 pr
 pr
@@ -1776,10 +1776,10 @@ iR
 To
 iR
 iR
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
 Sk
 pr
 pr
@@ -1809,8 +1809,8 @@ aH
 iR
 iR
 iR
-aX
-aX
+WH
+WH
 iR
 iR
 iR
@@ -1834,9 +1834,9 @@ iR
 iR
 iR
 iR
-aX
-aX
-aX
+WH
+WH
+WH
 aH
 iR
 iR
@@ -1863,12 +1863,12 @@ iR
 mu
 aH
 iR
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
 aH
 iR
 iR
@@ -1895,12 +1895,12 @@ aH
 aH
 vg
 iR
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
 aH
 aH
 iR
@@ -1928,23 +1928,23 @@ aH
 aH
 aH
 aH
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
 aH
 iR
 iR
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
 pr
 pr
 pr
-aX
+WH
 iR
 aH
 iR
@@ -1960,24 +1960,24 @@ CM
 CM
 aH
 aH
-aX
+WH
 aH
 aH
-aX
-aX
+WH
+WH
 vg
 aH
 iR
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
 pr
 pr
 pr
-aX
-aX
+WH
+WH
 aH
 aH
 aH
@@ -1991,26 +1991,26 @@ kh
 CM
 iR
 iR
-aX
-aX
-aX
+WH
+WH
+WH
 Xc
-aX
-aX
-aX
+WH
+WH
+WH
 iR
 iR
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
 pr
 pr
 pr
-aX
-aX
-aX
+WH
+WH
+WH
 aH
 aH
 "}
@@ -2023,27 +2023,27 @@ iR
 iR
 iR
 iR
-aX
-aX
-aX
+WH
+WH
+WH
 iR
 iR
-aX
+WH
 iR
 iR
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
 pr
 pr
 pr
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
 aH
 "}
 (17,1,2) = {"
@@ -2057,24 +2057,24 @@ vg
 aH
 aH
 aH
-aX
+WH
 iR
 iR
 iR
 iR
 iR
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
 pr
 pr
 pr
-aX
-aX
-aX
+WH
+WH
+WH
 aH
 aH
 "}
@@ -2096,16 +2096,16 @@ iR
 iR
 iR
 iR
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
 pr
 pr
 pr
-aX
-aX
+WH
+WH
 aH
 aH
 iR
@@ -2130,9 +2130,9 @@ iR
 iR
 iR
 iR
-aX
-aX
-aX
+WH
+WH
+WH
 pr
 pr
 pr
@@ -2227,8 +2227,8 @@ iR
 iR
 iR
 iR
-aX
-aX
+WH
+WH
 pr
 pr
 iR
@@ -2258,14 +2258,14 @@ Eq
 aH
 iR
 iR
-aX
-aX
-aX
+WH
+WH
+WH
 pr
 pr
 pr
 oB
-aX
+WH
 iR
 iR
 iR
@@ -2290,15 +2290,15 @@ iR
 aH
 iR
 iR
-aX
-aX
-aX
+WH
+WH
+WH
 pr
 pr
 pr
 oB
-aX
-aX
+WH
+WH
 iR
 iR
 "}
@@ -2323,14 +2323,14 @@ aH
 iR
 iR
 iR
-aX
-aX
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
+WH
+WH
 iR
 iR
 "}
@@ -2354,14 +2354,14 @@ iR
 aH
 iR
 iR
-aX
-aX
-aX
-aX
-aX
-aX
-aX
-aX
+WH
+WH
+WH
+WH
+WH
+WH
+WH
+WH
 iR
 iR
 iR
@@ -2387,11 +2387,11 @@ aH
 iR
 iR
 iR
-aX
-aX
+WH
+WH
 aH
 aH
-aX
+WH
 iR
 iR
 iR
@@ -2419,7 +2419,7 @@ aH
 Cq
 iR
 iR
-aX
+WH
 Ei
 aH
 DH

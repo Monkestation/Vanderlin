@@ -1,10 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"bc" = (
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/turf/open/openspace,
+"aE" = (
+/turf/open/water/ocean/fakedeep,
 /area)
 "bX" = (
 /obj/structure/fluff/railing/border{
@@ -50,6 +46,12 @@
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
 /turf/open/floor/carpet/purple,
 /area)
+"dy" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/openspace,
+/area)
 "eo" = (
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/ruinedwood/spiral,
@@ -59,6 +61,10 @@
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/spiral,
+/area)
+"gw" = (
+/obj/structure/fluff/statue/small,
+/turf/open/openspace,
 /area)
 "gB" = (
 /obj/structure/bed/inn/double,
@@ -74,6 +80,13 @@
 /obj/item/coin/copper/pile,
 /obj/item/weapon/knife/dagger/navaja,
 /turf/open/floor/ruinedwood/spiral,
+/area)
+"ig" = (
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
+	},
+/turf/open/openspace,
 /area)
 "ij" = (
 /obj/structure/fluff/railing/border{
@@ -92,18 +105,27 @@
 /obj/structure/fake_machine/atm,
 /turf/open/floor/ruinedwood/spiral,
 /area)
-"ko" = (
-/obj/structure/floordoor{
-	redstone_id = "droploot"
+"kk" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	icon_state = "border"
 	},
 /turf/open/openspace,
 /area)
 "lr" = (
 /turf/open/floor/ruinedwood/spiral,
 /area)
-"nF" = (
+"nR" = (
 /obj/structure/fluff/railing/border{
-	dir = 1;
+	dir = 6
+	},
+/turf/open/openspace,
+/area)
+"nT" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 4;
 	icon_state = "border"
 	},
 /turf/open/openspace,
@@ -143,18 +165,12 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area)
-"qp" = (
-/turf/open/openspace,
-/area)
-"rF" = (
+"ov" = (
 /obj/structure/fluff/railing/border{
-	dir = 8;
+	dir = 1;
 	icon_state = "border"
 	},
 /turf/open/openspace,
-/area)
-"sl" = (
-/turf/open/water/ocean/fakedeep,
 /area)
 "sr" = (
 /obj/structure/fluff/railing/border{
@@ -167,14 +183,6 @@
 	},
 /obj/item/rope/chain,
 /turf/open/floor/ruinedwood/platform,
-/area)
-"tl" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
-	},
-/turf/open/openspace,
 /area)
 "tv" = (
 /obj/structure/table/wood{
@@ -211,6 +219,17 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area)
+"uk" = (
+/obj/structure/closet/crate/chest,
+/obj/structure/floordoor{
+	redstone_id = "droploot"
+	},
+/turf/open/openspace,
+/area)
+"uu" = (
+/obj/structure/fluff/railing/border,
+/turf/open/openspace,
+/area)
 "vY" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood3"
@@ -220,6 +239,9 @@
 "xi" = (
 /obj/structure/fluff/statue/small,
 /turf/open/floor/ruinedwood/platform,
+/area)
+"xV" = (
+/turf/open/openspace,
 /area)
 "yy" = (
 /obj/structure/ladder,
@@ -250,9 +272,15 @@
 /obj/structure/fake_machine/merchantvend,
 /turf/closed/wall/mineral/wooddark,
 /area)
-"Ah" = (
+"AI" = (
+/obj/structure/floordoor{
+	redstone_id = "droploot"
+	},
+/turf/open/openspace,
+/area)
+"AM" = (
 /obj/structure/fluff/railing/border{
-	dir = 6
+	dir = 9
 	},
 /turf/open/openspace,
 /area)
@@ -277,21 +305,9 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area)
-"Gj" = (
-/obj/structure/fluff/railing/border{
-	dir = 1;
-	icon_state = "border"
-	},
+"FP" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
-	icon_state = "border"
-	},
-/turf/open/openspace,
-/area)
-"Gr" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 8;
 	icon_state = "border"
 	},
 /turf/open/openspace,
@@ -369,6 +385,13 @@
 /obj/structure/fluff/wallclock/l,
 /turf/open/floor/ruinedwood/spiral,
 /area)
+"Je" = (
+/obj/structure/fluff/railing/border{
+	dir = 5;
+	icon_state = "border"
+	},
+/turf/open/openspace,
+/area)
 "Js" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/spiral,
@@ -395,13 +418,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area)
-"Lg" = (
-/obj/structure/closet/crate/chest,
-/obj/structure/floordoor{
-	redstone_id = "droploot"
-	},
-/turf/open/openspace,
-/area)
 "Lq" = (
 /obj/structure/window,
 /obj/structure/bars,
@@ -421,10 +437,6 @@
 	dir = 4
 	},
 /area)
-"LU" = (
-/obj/structure/fluff/statue/small,
-/turf/open/openspace,
-/area)
 "Ml" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -439,6 +451,17 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area)
+"Px" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	icon_state = "border"
+	},
+/turf/open/openspace,
+/area)
 "QG" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/ruinedwood/spiral,
@@ -452,12 +475,6 @@
 	icon_state = "border"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area)
-"Sv" = (
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/turf/open/openspace,
 /area)
 "Th" = (
 /turf/open/floor/carpet/purple,
@@ -478,19 +495,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area)
-"Wo" = (
-/obj/structure/fluff/railing/border{
-	dir = 5;
-	icon_state = "border"
-	},
-/turf/open/openspace,
-/area)
-"Wu" = (
-/obj/structure/fluff/railing/border{
-	dir = 10
-	},
-/turf/open/openspace,
-/area)
 "Xk" = (
 /obj/structure/fake_machine/mail/r{
 	pixel_y = 32
@@ -502,10 +506,6 @@
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
-/area)
-"XI" = (
-/obj/structure/fluff/railing/border,
-/turf/open/openspace,
 /area)
 "XS" = (
 /turf/closed/wall/mineral/wooddark,
@@ -524,769 +524,769 @@
 /area)
 
 (1,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 "}
 (2,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 "}
 (3,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
-sl
-sl
-sl
+aE
+aE
+aE
 "}
 (4,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 XS
 XS
-sl
-sl
+aE
+aE
 "}
 (5,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 Hp
 XS
-sl
-sl
+aE
+aE
 "}
 (6,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 XS
 bX
 XS
 XS
-sl
+aE
 "}
 (7,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 Gt
 yR
 DP
 XS
-sl
+aE
 "}
 (8,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 Rx
 lr
 Rx
 XS
-sl
+aE
 "}
 (9,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 XS
 XA
 XS
 XS
-sl
+aE
 "}
 (10,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 Hb
 lr
 IJ
 XS
-sl
+aE
 "}
 (11,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 tv
 lr
 hq
 XS
-sl
+aE
 "}
 (12,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 ob
 Xk
 LE
 XS
-sl
+aE
 "}
 (13,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 XS
 gB
 XS
 XS
-sl
+aE
 "}
 (14,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 XS
 XS
 XS
-sl
-sl
+aE
+aE
 "}
 (15,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
+aE
 "}
 
 (1,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 xi
-qp
-qp
-qp
+xV
+xV
+xV
 "}
 (2,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-Ah
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+nR
 sr
-Wo
-qp
-qp
+Je
+xV
+xV
 "}
 (3,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-Ah
-tl
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+nR
+nT
 dq
-Gj
-Wo
-qp
+Px
+Je
+xV
 "}
 (4,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-XI
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+uu
 HF
 JC
 vY
-nF
-qp
+ov
+xV
 "}
 (5,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-Ah
-bc
-tl
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+nR
+FP
+nT
 Dj
 lr
 HF
-Gj
-Wo
+Px
+Je
 "}
 (6,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-XI
-Lg
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+uu
+uk
 lr
 lr
 lr
 NR
 QG
-nF
+ov
 "}
 (7,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-XI
-ko
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+uu
+AI
 ze
 ZI
 ij
 ZI
 eQ
-nF
+ov
 "}
 (8,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-Wu
-Gr
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+dy
+kk
 Tq
-rF
+ig
 og
-rF
+ig
 Ml
-nF
+ov
 "}
 (9,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-XI
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+uu
 VB
 Us
 lr
 Us
 lr
-nF
+ov
 "}
 (10,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-Wu
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+dy
 XS
 ik
 KA
 Ke
 XS
-Sv
+AM
 "}
 (11,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 XS
 iT
 lr
 lr
 XS
-qp
+xV
 "}
 (12,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 Lq
 yy
 lr
 dx
 Lq
-qp
+xV
 "}
 (13,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 Ad
 Js
 eo
 YP
 XS
-qp
+xV
 "}
 (14,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 XS
 Lq
 XS
-qp
-qp
+xV
+xV
 "}
 (15,1,2) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 
 (1,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 (2,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 (3,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 (4,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 (5,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 (6,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-LU
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+gw
+xV
+xV
+xV
 "}
 (7,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 (8,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}
 (9,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 Th
 Th
 Th
-qp
-qp
+xV
+xV
 "}
 (10,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 yF
 Th
 za
 Th
 yF
-qp
+xV
 "}
 (11,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 yF
 Th
 Th
 Th
 yF
-qp
+xV
 "}
 (12,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 yF
 LF
 yF
 yF
 yF
-qp
+xV
 "}
 (13,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 yF
 yF
 yF
 yF
 yF
-qp
+xV
 "}
 (14,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 yF
 yF
 yF
-qp
-qp
+xV
+xV
 "}
 (15,1,3) = {"
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
-qp
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
+xV
 "}

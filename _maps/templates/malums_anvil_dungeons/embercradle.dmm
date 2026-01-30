@@ -1108,6 +1108,9 @@
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/carpet,
 /area/under/mountains/anvil/dungeon)
+"pd" = (
+/turf/open/openspace,
+/area/under/mountains/anvil/dungeon)
 "pf" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/coin/gold,
@@ -1481,6 +1484,9 @@
 "tF" = (
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/naturalstone,
+/area/under/mountains/anvil/dungeon/lower)
+"tP" = (
+/turf/open/water/clean,
 /area/under/mountains/anvil/dungeon/lower)
 "tY" = (
 /obj/item/alch/bone,
@@ -1869,9 +1875,6 @@
 /obj/structure/door,
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
-"zu" = (
-/turf/open/openspace,
-/area/under/mountains/anvil/dungeon)
 "zv" = (
 /obj/structure/rack,
 /obj/item/ingot/silver,
@@ -2008,9 +2011,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
-"Br" = (
-/turf/open/water/clean,
-/area/under/mountains/anvil/dungeon/lower)
 "Bw" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /mob/living/simple_animal/hostile/retaliate/bigrat,
@@ -4291,13 +4291,13 @@ Xc
 Xc
 Vz
 ul
-Br
-Br
-Br
-Br
-Br
-Br
-Br
+tP
+tP
+tP
+tP
+tP
+tP
+tP
 ul
 Vz
 Xc
@@ -4357,13 +4357,13 @@ Xc
 Xc
 Vz
 ot
-Br
+tP
 IK
 nr
 GG
 nr
 IK
-Br
+tP
 ot
 Vz
 Xc
@@ -4423,13 +4423,13 @@ Xc
 Xc
 Vz
 Io
-Br
+tP
 vD
 vD
 vD
 vD
 vD
-Br
+tP
 Io
 Vz
 Xc
@@ -4489,13 +4489,13 @@ Xc
 Xc
 Vz
 xC
-Br
+tP
 cT
 cT
 Qk
 cT
 cT
-Br
+tP
 xC
 Vz
 Xc
@@ -4555,13 +4555,13 @@ Xc
 Xc
 Vz
 kn
-Br
+tP
 cT
 cT
 UD
 cT
 cT
-Br
+tP
 kn
 Vz
 Xc
@@ -4621,13 +4621,13 @@ Xc
 Xc
 Vz
 Io
-Br
+tP
 Tj
 Tj
 lO
 Tj
 Tj
-Br
+tP
 Io
 Vz
 Xc
@@ -4687,13 +4687,13 @@ Xc
 Xc
 Vz
 Ht
-Br
+tP
 Tj
 Tj
 HG
 Tj
 Tj
-Br
+tP
 Ht
 Vz
 Xc
@@ -4753,13 +4753,13 @@ Xc
 Xc
 Vz
 ul
-Br
+tP
 Tj
 Tj
 HG
 Tj
 Tj
-Br
+tP
 ul
 Vz
 Xc
@@ -4817,17 +4817,17 @@ Xc
 Xc
 Xc
 Xc
-Br
-Br
-Br
+tP
+tP
+tP
 Tj
 wg
 HG
 wg
 Tj
-Br
-Br
-Br
+tP
+tP
+tP
 Xc
 Xc
 Xc
@@ -5789,7 +5789,7 @@ Xc
 ag
 XJ
 XJ
-Br
+tP
 XJ
 Xc
 "}
@@ -5854,8 +5854,8 @@ Xc
 Xc
 Xc
 Nc
-Br
-Br
+tP
+tP
 XJ
 Xc
 "}
@@ -5919,8 +5919,8 @@ Xc
 Xc
 Xc
 Oi
-Br
-Br
+tP
+tP
 Ja
 XJ
 Xc
@@ -6317,7 +6317,7 @@ Xc
 Xc
 Xc
 ag
-Br
+tP
 ag
 Xc
 "}
@@ -6383,8 +6383,8 @@ Xc
 Xc
 TG
 ag
-Br
-Br
+tP
+tP
 Xc
 "}
 (38,1,1) = {"
@@ -6448,9 +6448,9 @@ Xc
 Xc
 rQ
 ag
-Br
+tP
 ag
-Br
+tP
 Xc
 "}
 (39,1,1) = {"
@@ -10243,7 +10243,7 @@ hB
 bY
 fr
 kZ
-zu
+pd
 dn
 rC
 Jd
@@ -10309,7 +10309,7 @@ Lq
 oR
 ug
 kZ
-zu
+pd
 dn
 eC
 oR
@@ -10375,7 +10375,7 @@ dl
 oR
 TS
 kZ
-zu
+pd
 dn
 EK
 Jd
@@ -10518,7 +10518,7 @@ il
 oR
 oR
 bY
-zu
+pd
 bY
 El
 EI
@@ -10584,7 +10584,7 @@ bY
 SU
 oR
 Ig
-zu
+pd
 bY
 oR
 os
@@ -10652,7 +10652,7 @@ oR
 mt
 oR
 oR
-zu
+pd
 NA
 kZ
 ZK
@@ -11120,7 +11120,7 @@ kZ
 VX
 Kl
 oR
-zu
+pd
 Bl
 jg
 kZ
