@@ -659,9 +659,9 @@
 
 /datum/status_effect/debuff/mushroomt3/proc/remove_light(mob/living/carbon/owner)
 	UnregisterSignal(owner, COMSIG_PARENT_QDELETING)
-	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj
-	if(locate(mob_light_obj) in owner)
-		qdel(mob_light_obj)
+	var/obj/mob_light = locate(/datum/light_source) in owner.light_sources
+	if(mob_light)
+		qdel(mob_light)
 
 /datum/status_effect/debuff/mushroomt3/proc/on_living_holder_deletion(mob/living/M)
 	remove_light(M)
