@@ -57,15 +57,20 @@
 	penfactor = AP_SWORD_THRUST+5
 	acc_bonus = 20
 
+/datum/intent/sword/thrust/estoc
+	name = "thrust"
+	penfactor = AP_SWORD_THRUST+10 //30 total
+	acc_bonus = 20
+
 /datum/intent/sword/thrust/zwei
 	name = "thrust"
-	reach = 1
 	chargetime = 1
 	warnie = "mobwarning"
 	swingdelay = 1
 
 /datum/intent/sword/thrust/long
 	swingdelay = 1
+	clickcd = 14
 	reach = 2
 	misscost = 10
 
@@ -166,11 +171,6 @@
 /*-----------\
 |   Special  |
 \-----------*/
-/datum/intent/sword/thrust/estoc
-	name = "thrust"
-	penfactor = AP_SWORD_THRUST+10 //30 total
-	clickcd = 10
-	acc_bonus = 20
 
 /datum/intent/sword/lunge
 	name = "lunge"
@@ -181,9 +181,7 @@
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	reach = 2
 	penfactor = AP_SWORD_THRUST+30 //50 total
-	chargetime = 5
-	no_early_release = TRUE
-	clickcd = 10
+	clickcd = 18
 	acc_bonus = 15
 
 /datum/intent/katana/arc
