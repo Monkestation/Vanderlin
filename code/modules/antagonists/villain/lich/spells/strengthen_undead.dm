@@ -17,9 +17,6 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(HAS_TRAIT(cast_on, TRAIT_ANTIMAGIC))
-		to_chat(owner, span_warning("A distortive field prevents your magic taking hold!"))
-		return FALSE
 	return isliving(cast_on)
 
 /datum/action/cooldown/spell/strengthen_undead/cast(mob/living/cast_on)
