@@ -19,9 +19,9 @@
 	var/list/slot_adjust
 	/// Jobs that have species adjustments /datum/job = list("humen")
 	var/list/species_adjust
-	/// Jobs that have gender adjustments /datum/job = list(MALE, FEMALE)
+	/// Jobs that have patron requirement adjustmetns /datum/job = list(/datum/patron/divine/astrata)
 	var/list/patron_adjust
-	// Jobs that have patron requirement adjustmetns /datum/job = list(/datum/patron/divine/astrata)
+	/// Jobs that have gender adjustments /datum/job = list(MALE, FEMALE)
 	var/list/sexes_adjust
 	/// Jobs that have age adjustments /datum/job = list(AGE_CHILD, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	var/list/ages_adjust
