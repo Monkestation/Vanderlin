@@ -12450,7 +12450,7 @@
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/outdoors/town)
+/area/indoors/town/tavern)
 "hJg" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -12734,7 +12734,7 @@
 	name = "rosewood flag"
 	},
 /turf/open/floor/wood,
-/area/outdoors/town)
+/area/indoors/town/tavern)
 "hSB" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet/royalblack,
@@ -12938,7 +12938,7 @@
 	dir = 8
 	},
 /turf/open/floor/sand,
-/area/outdoors/town)
+/area/indoors/town/tavern)
 "hYE" = (
 /obj/item/fertilizer/ash,
 /turf/open/floor/ruinedwood/chevron,
@@ -24100,12 +24100,6 @@
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/cobblerock,
 /area/indoors/town/bath)
-"otd" = (
-/obj/effect/decal/cleanable/debris/wood{
-	dir = 1
-	},
-/turf/open/floor/wood,
-/area/outdoors/town)
 "otk" = (
 /obj/structure/closet/crate/drawer{
 	pixel_y = 8
@@ -28975,7 +28969,6 @@
 /area/outdoors/town)
 "rsg" = (
 /obj/structure/rack,
-/obj/item/weapon/axe/copper,
 /obj/item/grown/log/tree/small{
 	pixel_y = -9;
 	pixel_x = 4
@@ -30471,7 +30464,7 @@
 	dir = 8
 	},
 /turf/open/floor/wood,
-/area/outdoors/town)
+/area/indoors/town/tavern)
 "snp" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt,
@@ -32335,12 +32328,6 @@
 /obj/effect/decal/cleanable/food/mess/rotting,
 /turf/open/floor/tile,
 /area/indoors/town/tavern)
-"tqz" = (
-/obj/effect/decal/cleanable/debris/wood{
-	dir = 8
-	},
-/turf/open/floor/wood,
-/area/outdoors/town)
 "tqD" = (
 /obj/structure/carpet/green,
 /turf/open/floor/blocks/newstone/alt,
@@ -37168,6 +37155,10 @@
 /obj/effect/decal/cleanable/ash,
 /turf/open/floor/sand,
 /area/indoors/town/theatre)
+"wjK" = (
+/obj/item/weapon/axe/copper,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
 "wjX" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/smithy)
@@ -94903,16 +94894,16 @@ hVe
 gaD
 qjP
 wZA
-dif
-qbp
-dif
+gDj
+bcF
+gDj
 hJf
-dif
-dif
+gDj
+gDj
 hJf
-dif
+gDj
 hJf
-dif
+gDj
 gDj
 rIG
 uoe
@@ -95105,16 +95096,16 @@ vpG
 bcF
 hBa
 iMS
-otd
-wTm
-wTm
-dif
-wTm
-wTm
-wTm
-wTm
-qbp
-wTm
+pwz
+vtf
+vtf
+gDj
+vtf
+vtf
+vtf
+vtf
+bcF
+vtf
 rIG
 bcF
 uoe
@@ -95307,16 +95298,16 @@ jyc
 uoe
 iix
 kyH
-dif
-wTm
-dif
-wTm
-tqz
-wTm
-wTm
-dif
-dif
-wTm
+gDj
+vtf
+gDj
+vtf
+dVl
+vtf
+vtf
+gDj
+gDj
+vtf
 rIG
 rIG
 uoe
@@ -95509,16 +95500,16 @@ jyc
 uoe
 iyZ
 pBM
-dif
-dif
-wTm
-qbp
-dif
-wTm
-dif
-dif
-wTm
-dif
+gDj
+gDj
+vtf
+bcF
+gDj
+vtf
+gDj
+gDj
+vtf
+gDj
 gDj
 gDj
 bcF
@@ -95712,15 +95703,15 @@ lYv
 qjP
 wZA
 hSm
-qbp
+bcF
 snn
-dif
-dif
+gDj
+gDj
 hYv
 snn
-dif
-dif
-wTm
+gDj
+gDj
+vtf
 gDj
 uoe
 uoe
@@ -107807,7 +107798,7 @@ gzt
 gYK
 oUK
 hQw
-hQw
+wjK
 gjQ
 gjQ
 mmw

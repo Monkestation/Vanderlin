@@ -162,7 +162,7 @@
 	if(length(mob_species))
 		var/species = pick(mob_species)
 		H.set_species(species)
-		H.dna.species.random_character()
+		H.dna.species.random_character(H)
 		if(mob_name)
 			H.change_name(mob_name)
 	else
