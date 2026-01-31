@@ -424,6 +424,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_TORPOR "Endless Slumber"
 #define TRAIT_SATE "SATE"
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
+#define TRAIT_NO_EXPERIENCE	"unlearning"
 
 /// applied to orphans
 #define TRAIT_ORPHAN "Orphan"
