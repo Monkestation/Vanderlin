@@ -265,6 +265,7 @@
 			prefs.toggles &= ~UI_SCALE
 			window_scaling = text2num(winget(src, null, "dpi"))
 			to_chat(src, span_notice("UI Scaling reset to native [window_scaling * 100]%. Changes take effect when opening new windows."))
+		native_say?.refresh_channels()
 
 /client/verb/keybind_menu()
 	set category = "Options"

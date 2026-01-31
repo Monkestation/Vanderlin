@@ -233,8 +233,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/ui_scale
 	/// Assoc list of culinary preferences, where the key is the type of the culinary preference, and value is food/drink typepath
 	var/list/culinary_preferences = list()
-	///this is our chat scale
-	var/chat_scale = 1
 
 	/// Whether multi-character readying is enabled
 	var/multi_char_ready = FALSE
@@ -1868,13 +1866,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						clientfps = desiredfps
 						parent.fps = desiredfps
 
-				if ("chat_scale")
-					var/desiredfps = input(user, "Choose your desired chat scale. (1 = default, 2 = doubled", "Character Preference", chat_scale)  as null|num
-					if(desiredfps > 0)
-						if (!isnull(desiredfps))
-							chat_scale = desiredfps
-						user.client?.native_say.refresh_channels()
-
 				if("ui")
 					var/pickedui = input(user, "Choose your UI style.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_styles)
 					if(pickedui)
@@ -2456,6 +2447,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/player_species = user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !(player_species in job.allowed_races)
 	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+	if(job.required_playtime_remaining(user.client))
+		var/list/lines = list()
+		for(var/t in job.exp_requirements)
+			var/needed = job.exp_requirements[t]
+			var/have = user.client.calc_exp_type(t)
+			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
+		var/text = jointext(lines, "<br>")
+
+		return make_lock_row(
+			used_name,
+			"\[TIME LOCK\]",
+			"<b>Requirements:</b><br>[text]"
+		)
 	if(fails_allowed || fails_blacklist)
 		if(!user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
 			var/list/allowed_races = job.allowed_races.Copy()
@@ -2493,19 +2497,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			used_name,
 			"\[PATRON LOCK\]",
 			"<b>Patron Needed:</b><br>[patron_text]"
-		)
-	if(job.required_playtime_remaining(user.client))
-		var/list/lines = list()
-		for(var/t in job.exp_requirements)
-			var/needed = job.exp_requirements[t]
-			var/have = user.client.calc_exp_type(t)
-			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
-		var/text = jointext(lines, "<br>")
-
-		return make_lock_row(
-			used_name,
-			"\[TIME LOCK\]",
-			"<b>Requirements:</b><br>[text]"
 		)
 	// No lock
 	return FALSE
