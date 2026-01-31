@@ -281,7 +281,7 @@
 	force = DAMAGE_CLUB + 1
 	force_wielded = DAMAGE_CLUB_WIELD + 1
 	wdefense = MEDIOCRE_PARRY
-	max_integrity = INTEGRITY_POOR - 20
+	max_integrity = INTEGRITY_POOR
 	minstr = 5
 
 	melting_material = /datum/material/copper
@@ -635,6 +635,7 @@
 	desc = "A bronze one-handed war club with a sharp end. It's been long favoured by the Elves of Heartfelt, despite its foreign origins."
 	icon_state = "elvenclub_bronze"
 	melting_material = /datum/material/bronze
+	max_integrity = INTEGRITY_STANDARD
 	melt_amount = 100
 
 /obj/item/weapon/mace/elvenclub/silver
@@ -693,6 +694,7 @@
 	icon_state = "mace_bronze"
 	desc = "A spiked bronze mace. A weapon thats seen a revival in use amidst the cataclysm in Heartfelt."
 	wbalance = DODGE_CHANCE_NORMAL
+	max_integrity = INTEGRITY_STANDARD
 	minstr = 6
 	sellprice = 25
 
@@ -702,6 +704,5 @@
 	icon_state = "shishpar_bronze"
 	wdefense = GOOD_PARRY
 	wbalance = EASY_TO_DODGE
-	max_blade_int = 105
 	max_integrity = INTEGRITY_STANDARD
 	sellprice = 25

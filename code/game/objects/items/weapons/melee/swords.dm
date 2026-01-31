@@ -1295,8 +1295,8 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
-	max_blade_int = 150
-	max_integrity = INTEGRITY_POOR + 50
+	max_blade_int = 100
+	max_integrity = INTEGRITY_STANDARD
 
 	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
@@ -1334,8 +1334,8 @@
 	force_wielded = DAMAGE_SWORD_WIELD - 5
 	throwforce = DAMAGE_SWORD - 5
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE)
-	max_blade_int = 150 // Shitty Weapon
-	max_integrity = INTEGRITY_POOR + 80
+	max_blade_int = 100 // Shitty Weapon
+	max_integrity = INTEGRITY_STANDARD
 
 	parrysound = "sword"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'

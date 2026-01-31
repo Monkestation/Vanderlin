@@ -199,23 +199,23 @@
 	name = "iron urumi"
 	icon_state = "urumi_iron"
 	force = DAMAGE_WHIP + 2
-	melting_material = /datum/material/iron
 	max_blade_int = 150
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/whip/urumi/bronze
 	name = "bronze urumi"
 	icon_state = "urumi_bronze"
 	force = DAMAGE_WHIP
-	melting_material = /datum/material/bronze
 	max_blade_int = 100
+	melting_material = /datum/material/bronze
 
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
 	icon_state = "urumi_silver"
 	force = DAMAGE_WHIP + 2
-	melting_material = /datum/material/silver
+	max_blade_int = 160
 	max_integrity = INTEGRITY_STRONG * 0.8
-	max_blade_int= 160
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()

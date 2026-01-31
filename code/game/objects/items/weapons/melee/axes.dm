@@ -427,7 +427,7 @@
 	force = DAMAGE_AXE - 5
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, MACE_STRIKE) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
 	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP, MACE_STRIKE) //Axe-equivalent to the Godendag or Grand Mace.
-	max_blade_int = 300
+	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 11
 	melting_material = /datum/material/silver
