@@ -184,6 +184,7 @@
 	force_wielded = DAMAGE_GOOD_FLAIL + 7
 	possible_item_intents = list(MATTHIOS_STRIKE)
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
+	max_integrity = INTEGRITY_STRONGEST
 	slot_flags = ITEM_SLOT_BACK
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel

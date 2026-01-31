@@ -36,7 +36,7 @@
 	attack_verb = list("slashes", "lacerates")
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	clickcd = 18
-	swingdelay = 2
+	swingdelay = 1
 	penfactor = 5
 	reach = 2
 	misscost = 7
@@ -51,7 +51,6 @@
 	attack_verb = list("cracks", "strikes") //something something dwarf fotresss
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	penfactor = 10
-	reach = 1
 	icon_state = "incrack"
 	canparry = TRUE
 	item_damage_type = "slash"

@@ -75,7 +75,7 @@
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONG * 0.8
 	melt_amount = 100
 	last_used = 0
 
@@ -167,7 +167,7 @@
 	force = DAMAGE_WHIP + 4
 	anvilrepair = /datum/skill/craft/weaponsmithing
 
-/obj/item/weapon/whip/nagaika
+/obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
 	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
 	icon_state = "nagaika"
@@ -181,6 +181,7 @@
 	desc = "A long, flexible whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
 	icon_state = "urumi_steel"
 	force = DAMAGE_WHIP + 3
+	wbalance = HARD_TO_DODGE
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
 	can_parry = TRUE
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
@@ -198,8 +199,9 @@
 /obj/item/weapon/whip/urumi/iron
 	name = "iron urumi"
 	icon_state = "urumi_iron"
-	force = DAMAGE_WHIP + 2
+	force = DAMAGE_WHIP
 	max_blade_int = 150
+	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
 
 /obj/item/weapon/whip/urumi/bronze
@@ -207,12 +209,13 @@
 	icon_state = "urumi_bronze"
 	force = DAMAGE_WHIP
 	max_blade_int = 100
+	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
 
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
 	icon_state = "urumi_silver"
-	force = DAMAGE_WHIP + 2
+	force = DAMAGE_WHIP + 1
 	max_blade_int = 160
 	max_integrity = INTEGRITY_STRONG * 0.8
 	melting_material = /datum/material/silver
