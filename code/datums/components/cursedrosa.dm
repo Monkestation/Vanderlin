@@ -32,6 +32,8 @@
 /datum/component/cursedrosa/proc/atom_crossed(source, mob/living/carbon/target)
 	if(!istype(target))
 		return
+	if(target.movement_type & (FLYING|FLOATING) || target.throwing)
+		return
 	if(HAS_TRAIT(target, TRAIT_KNEESTINGER_IMMUNITY) || HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
 		return
 	var/potential_zones = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)

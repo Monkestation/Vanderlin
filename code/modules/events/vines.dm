@@ -209,7 +209,7 @@
 	density = FALSE
 	layer = SPACEVINE_LAYER
 	mouse_opacity = MOUSE_OPACITY_OPAQUE //Clicking anywhere on the turf is good enough
-	pass_flags_self = PASSTABLE | PASSGRILLE
+	pass_flags_self = PASSTABLE | PASSGRILLE | PASSSTRUCTURE
 	max_integrity = 5
 	resistance_flags = FLAMMABLE
 	damage_deflection = 5
@@ -251,16 +251,19 @@
 		if(0)
 			current_state = "Light[num_state]"
 			density = FALSE
+			pass_flags_self |= LETPASSTHROW
 			obj_flags &= ~(BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP)
 			set_opacity(0)
 		if(1)
 			current_state = "Med[num_state]"
 			density = FALSE
+			pass_flags_self |= LETPASSTHROW
 			obj_flags &= ~(BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP)
 			set_opacity(0)
 		else
 			current_state = "Hvy[num_state]"
 			density = TRUE
+			pass_flags_self &= ~LETPASSTHROW
 			obj_flags |= BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 			set_opacity(1)
 	icon_state = "[base_icon_state][current_state]"

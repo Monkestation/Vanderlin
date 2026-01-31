@@ -172,11 +172,11 @@
 	icon_state = "wallcandleb1"
 	base_state = "wallcandleb"
 
-/obj/machinery/light/fueled/wallfire/candle/blue/extinguish()
-	return FALSE
-
-/obj/machinery/light/fueled/wallfire/candle/blue/burn_out()
-	return FALSE
+///obj/machinery/light/fueled/wallfire/candle/blue/extinguish()
+//	return FALSE
+//
+///obj/machinery/light/fueled/wallfire/candle/blue/burn_out()
+//	return FALSE
 
 /obj/machinery/light/fueled/wallfire/candle/blue/r
 	SET_BASE_PIXEL(32, 0)
