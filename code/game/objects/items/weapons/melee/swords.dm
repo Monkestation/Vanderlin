@@ -633,8 +633,9 @@
 	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
 
 /obj/item/weapon/sword/rapier/dec
-	icon_state = "decrapier"
+	name = "decorated rapier"
 	desc = "A rapier decorated with gold inlaid on its hilt. A regal weapon fit for nobility."
+	icon_state = "decrapier"
 	sellprice = 140
 
 /obj/item/weapon/sword/rapier/nimcha

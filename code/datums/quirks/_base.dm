@@ -11,7 +11,7 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 	)
 
 	for(var/datum/quirk/quirk_type as anything in subtypesof(/datum/quirk))
-		if(is_abstract(quirk_type))
+		if(IS_ABSTRACT(quirk_type))
 			continue
 
 		var/category = initial(quirk_type.quirk_category)
