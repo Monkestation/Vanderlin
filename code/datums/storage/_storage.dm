@@ -410,6 +410,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			user.balloon_alert(user, "stuck on your hand!")
 		return FALSE
 
+	if(!no_interface && grid_full())
+		if(messages && user && !silent_for_user)
+			user.balloon_alert(user, "no space!")
+		return FALSE
+
 	if(max_slots && length(real_location.contents) >= max_slots)
 		if(messages && user && !silent_for_user)
 			user.balloon_alert(user, "no space!")
@@ -456,6 +461,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 				user.balloon_alert(user, "too big!")
 			return FALSE
 
+	if(no_interface) // Don't care about grid
+		return TRUE
+
 	var/coordinates
 	if(params)
 		coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(params2list(params), SCREEN_LOC))
@@ -468,6 +476,19 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 
 	return TRUE
+
+/// Returns TRUE if the grid is full
+/datum/storage/proc/grid_full()
+	if(!length(item_coordinates))
+		return FALSE
+
+	// Item coordinates store the positions taken up by every item, if the total
+	// equals the area of the grid, we're full
+	var/total = 0
+	for(var/obj/item/stored as anything in item_coordinates)
+		total += length(item_coordinates[stored])
+
+	return total == (screen_max_columns * screen_max_rows)
 
 /// Returns a count of how many items held due to exception_hold we have
 /datum/storage/proc/get_exception_count()
@@ -1336,6 +1357,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!coordinates)
 		return FALSE
 
+	if(grid_full())
+		return FALSE
+
 	// Validate starting location (bottom right)
 	var/list/x_and_y = splittext(coordinates, ",")
 
@@ -1488,8 +1512,6 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	for(var/coord in grid_coordinates)
 		LAZYADDASSOCLIST(item_coordinates, to_store, coord)
-
-	refresh_views()
 
 	return TRUE
 

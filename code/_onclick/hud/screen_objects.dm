@@ -886,7 +886,8 @@
 	if(usr.incapacitated(IGNORE_GRAB))
 		return TRUE
 
-	active.attempt_insert(to_put, usr, params = params)
+	if(active.attempt_insert(to_put, usr, params = params))
+		active.refresh_views()
 
 	return TRUE
 
