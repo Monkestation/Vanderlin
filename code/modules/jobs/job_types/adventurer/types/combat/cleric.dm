@@ -26,6 +26,7 @@
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 3,
+		/datum/skill/combat/shields = 2,
 		/datum/skill/magic/holy = 1,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/sewing = 1,

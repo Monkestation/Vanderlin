@@ -2823,9 +2823,7 @@
 /turf/open/openspace,
 /area)
 "GO" = (
-/obj/effect/landmark/start/adventurerlate,
 /obj/machinery/light/fueled/wallfire/candle,
-/obj/effect/landmark/latejoin,
 /turf/open/floor/ruinedwood,
 /area/outdoors)
 "GU" = (
@@ -3410,6 +3408,8 @@
 	pixel_x = -6
 	},
 /obj/structure/table/vtable/v2,
+/obj/effect/spawner/map_spawner/random_lure,
+/obj/effect/spawner/map_spawner/random_lure,
 /turf/open/floor/wood,
 /area/indoors/town/manor)
 "VA" = (
