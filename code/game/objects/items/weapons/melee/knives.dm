@@ -222,7 +222,6 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_iron"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
-	melting_material = null
 	sellprice = 12
 	dropshrink = 1.0
 
