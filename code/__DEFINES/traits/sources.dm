@@ -20,7 +20,6 @@
 #define CURSED_ITEM_TRAIT "cursed-item"
 /// Granted by a "fake" holdable item
 #define ABSTRACT_ITEM_TRAIT "abstract-item"
-#define STATUS_EFFECT_TRAIT "status-effect"
 /// Granted by worn clothing
 #define CLOTHING_TRAIT "clothing"
 #define HELMET_TRAIT "helmet"
@@ -48,6 +47,14 @@
 #define LYING_DOWN_TRAIT "lying-down"
 /// trait associated to a stat value or range of
 #define STAT_TRAIT "stat"
+/// trait associated with be special effects
+#define BE_SPECIAL_TRAIT "be-special"
+/// trait associated with triumph buys
+#define TRIUMPH_TRAIT "triumph"
+/// trait assoicated with quirks
+#define QUIRK_TRAIT "quirk"
+/// trait assoicated with personal objectives
+#define OBJECTIVE_TRAIT "objective"
 
 // unique trait sources, still defines
 #define TRAIT_BESTIALSENSE "bestial-sense"

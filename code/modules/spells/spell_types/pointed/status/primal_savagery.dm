@@ -31,11 +31,11 @@
 
 /datum/status_effect/buff/primal_savagery/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_POISONBITE, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_POISONBITE, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/primal_savagery/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_POISONBITE, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_POISONBITE, TRAIT_STATUS_EFFECT(id))
 
 /atom/movable/screen/alert/status_effect/buff/primal_savagery
 	name = "Primal Savagery"

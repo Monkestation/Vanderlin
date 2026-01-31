@@ -288,14 +288,13 @@
 	to_chat(new_rat, span_userdanger("You have been reincarnated as a rat. Your adventure ends here."))
 
 	// Make the rat unable to do much
-	ADD_TRAIT(new_rat, TRAIT_PACIFISM, TRAIT_GENERIC)
-	ADD_TRAIT(new_rat, TRAIT_MUTE, TRAIT_GENERIC)
+	ADD_TRAIT(new_rat, TRAIT_PACIFISM, QUIRK_TRAIT)
+	ADD_TRAIT(new_rat, TRAIT_MUTE, QUIRK_TRAIT)
 	new_rat.melee_damage_lower = 0
 	new_rat.melee_damage_upper = 0
 	new_rat.obj_damage = 0
 	new_rat.status_flags |= GODMODE
-	ADD_TRAIT(new_rat, TRAIT_NOFIRE, TRAIT_GENERIC)
-
+	ADD_TRAIT(new_rat, TRAIT_NOFIRE, QUIRK_TRAIT)
 
 /datum/quirk/vice/weak_heart
 	name = "Weak Heart"
