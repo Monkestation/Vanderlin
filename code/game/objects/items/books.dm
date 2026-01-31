@@ -724,7 +724,7 @@
 
 		// Calculate reputation cost for out-of-stock items
 		if(!is_available && allow_reputation_purchase)
-			var/reputation_cost = calculate_reputation_cost(pack)
+			var/reputation_cost = pack.calculate_reputation_cost()
 			reputation_class = "reputation-purchase"
 			reputation_cost_text = " <span class='reputation-cost'>([reputation_cost] rep)</span>"
 
@@ -758,7 +758,7 @@
 
 			if(is_reputation_purchase)
 				item_cost *= 2 // Double mammon cost for reputation purchases
-				reputation_cost = calculate_reputation_cost(pack) * item_quantity
+				reputation_cost = pack.calculate_reputation_cost() * item_quantity
 				total_reputation_cost += reputation_cost
 
 			total_cost += item_cost
@@ -977,21 +977,6 @@
 	var/hours = round(minutes / 60)
 	return "[hours]h [minutes % 60]m"
 
-/obj/item/book/secret/ledger/proc/calculate_reputation_cost(datum/supply_pack/pack)
-	var/datum/world_faction/faction = SSmerchant.active_faction
-	if(!faction)
-		return 50
-
-	var/base_cost = pack.cost
-	var/tier = faction.get_reputation_tier()
-
-	// Base reputation cost scales with item value
-	// Higher tier = lower reputation costs (better relations = better deals)
-	var/reputation_multiplier = max(0.5, 1.5 - (tier * 0.15)) // 15% reduction per tier
-	var/reputation_cost = max(10, round(base_cost * reputation_multiplier))
-
-	return reputation_cost
-
 /obj/item/book/secret/ledger/Topic(href, href_list)
 	..()
 
@@ -1016,7 +1001,7 @@
 					to_chat(usr, "<span class='warning'>No active faction found!</span>")
 					return
 
-				var/reputation_cost = calculate_reputation_cost(pack)
+				var/reputation_cost = pack.calculate_reputation_cost()
 
 				// Check if they have enough reputation
 				if(faction.faction_reputation < reputation_cost)
@@ -1092,7 +1077,7 @@
 	var/total_reputation_cost = 0
 	for(var/datum/supply_pack/pack in cart)
 		if(pack in reputation_cart)
-			var/reputation_cost = calculate_reputation_cost(pack)
+			var/reputation_cost = pack.calculate_reputation_cost()
 			var/quantity = cart[pack]
 			total_reputation_cost += reputation_cost * quantity
 

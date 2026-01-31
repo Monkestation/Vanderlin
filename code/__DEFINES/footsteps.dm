@@ -27,6 +27,7 @@
 #define FOOTSTEP_MOB_SHOE "footstep_shoe"
 #define FOOTSTEP_MOB_HUMAN "footstep_human" //Warning: Only works on /mob/living/carbon/human
 #define FOOTSTEP_MOB_SLIME "footstep_slime"
+#define FOOTSTEP_MOB_METAL "footstep_metal"
 
 //priority defines for the footstep_override element
 #define STEP_SOUND_NO_PRIORITY 0
@@ -184,5 +185,26 @@ GLOBAL_LIST_INIT(heavyfootstep, list(
 		'sound/foley/footsteps/FTMUD (3).ogg',
 		'sound/foley/footsteps/FTMUD (4).ogg',
 		'sound/foley/footsteps/FTMUD (5).ogg'), 100, 0),
+))
+
+GLOBAL_LIST_INIT(metalfootstep, list(
+	FOOTSTEP_GENERIC_HEAVY = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
+	FOOTSTEP_WATER = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
+	FOOTSTEP_SHALLOW = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
+	FOOTSTEP_LAVA = list(list(
+		'sound/blank.ogg'), 100, 0),
+	FOOTSTEP_MUD = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
 ))
 

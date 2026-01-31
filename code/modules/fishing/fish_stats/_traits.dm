@@ -30,7 +30,14 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 	/// The probability this trait can be inherited by offsprings when both mates have it
 	var/inheritability = 50
 	/// A list of fish types and traits that they can spontaneously manifest with associated probabilities
-	var/list/spontaneous_manifest_types
+	var/list/spontaneous_manifest_types = list(
+		/obj/item/reagent_containers/food/snacks/fish/carp = 3,
+		/obj/item/reagent_containers/food/snacks/fish/clownfish = 3,
+		/obj/item/reagent_containers/food/snacks/fish/angler = 3,
+		/obj/item/reagent_containers/food/snacks/fish/eel = 3,
+		/obj/item/reagent_containers/food/snacks/fish/shrimp = 3,
+		/obj/item/reagent_containers/food/snacks/fish/swordfish = 3,
+	)
 	/// An optional whitelist of fish that can get this trait
 	var/list/fish_whitelist
 	/// Depending on the value, fish with trait will be reported as more or less difficult in the catalog.
@@ -159,8 +166,6 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 	if(light_amount > SHADOW_SPECIES_LIGHT_THRESHOLD)
 		source.damage_fish(0.5 * seconds_per_tick)
 
-
-
 /datum/fish_trait/heavy
 	name = "Demersal"
 	catalog_description = "This fish tends to stay near the waterbed."
@@ -190,7 +195,7 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 /datum/fish_trait/vegan
 	name = "Herbivore"
 	catalog_description = "This fish can only be baited with fresh produce."
-	incompatible_traits = list(/datum/fish_trait/carnivore, /datum/fish_trait/predator, /datum/fish_trait/necrophage)
+	incompatible_traits = list(/datum/fish_trait/carnivore, /datum/fish_trait/predator)
 
 /datum/fish_trait/vegan/catch_weight_mod(obj/item/fishingrod/rod, mob/fisherman, atom/location, obj/item/reagent_containers/food/snacks/fish/fish_type)
 	. = ..()
@@ -211,80 +216,6 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 	)
 	if(!is_matching_bait(rod.baited, bait_liked_identifier) || is_matching_bait(rod.baited, bait_hated_identifier))
 		.[MULTIPLICATIVE_FISHING_MOD] = 0
-
-
-/datum/fish_trait/necrophage
-	name = "Necrophage"
-	catalog_description = "This fish will eat carcasses of dead fish when hungry."
-	incompatible_traits = list(/datum/fish_trait/vegan)
-
-/datum/fish_trait/necrophage/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	RegisterSignal(fish, COMSIG_FISH_LIFE, PROC_REF(eat_dead_fishes))
-
-/datum/fish_trait/necrophage/proc/eat_dead_fishes(obj/item/reagent_containers/food/snacks/fish/source, seconds_per_tick)
-	SIGNAL_HANDLER
-	if(source.get_hunger() > 0.75 || !source.loc)
-		return
-	for(var/obj/item/reagent_containers/food/snacks/fish/victim in source.loc)
-		if(victim.status != FISH_DEAD || victim == source || HAS_TRAIT(victim, TRAIT_YUCKY_FISH))
-			continue
-		eat_fish(source, victim)
-		return
-
-/datum/fish_trait/parthenogenesis
-	name = "Parthenogenesis"
-	catalog_description = "This fish can reproduce asexually, without the need of a mate."
-	inheritability = 40
-
-/datum/fish_trait/parthenogenesis/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	ADD_TRAIT(fish, TRAIT_FISH_SELF_REPRODUCE, FISH_TRAIT_DATUM)
-
-/**
- * Useful for those species with the parthenogenesis trait if you don't want them to mate with each other,
- * or for similar shenanigans, I don't know.
- * Otherwise you could just set the stable_population to 1.
- */
-/datum/fish_trait/no_mating
-	name = "Mateless"
-	catalog_description = "This fish cannot reproduce with other fishes."
-	incompatible_traits = list(/datum/fish_trait/crossbreeder)
-
-/datum/fish_trait/no_mating/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	ADD_TRAIT(fish, TRAIT_FISH_NO_MATING, FISH_TRAIT_DATUM)
-
-///Prevent offsprings of fish with this trait from being of the same type (unless self-mating or the partner also has the trait)
-/datum/fish_trait/recessive
-	name = "Recessive"
-	catalog_description = "If crossbred, offsprings will always be of the mate species, unless it also possess the trait."
-	inheritability = 0
-
-/datum/fish_trait/no_mating/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	ADD_TRAIT(fish, TRAIT_FISH_RECESSIVE, FISH_TRAIT_DATUM)
-
-/datum/fish_trait/revival
-	name = "Self-Revival"
-	catalog_description = "This fish shows a peculiar ability of reviving itself a minute or two after death."
-
-/datum/fish_trait/revival/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	RegisterSignal(fish, COMSIG_FISH_STATUS_CHANGED, PROC_REF(check_status))
-
-/datum/fish_trait/revival/proc/check_status(obj/item/reagent_containers/food/snacks/fish/source)
-	SIGNAL_HANDLER
-	if(source.status == FISH_DEAD)
-		addtimer(CALLBACK(src, PROC_REF(revive), WEAKREF(source)), rand(1 MINUTES, 2 MINUTES))
-
-/datum/fish_trait/revival/proc/revive(datum/weakref/fish_ref)
-	var/obj/item/reagent_containers/food/snacks/fish/source = fish_ref.resolve()
-	if(QDELETED(source) || source.status != FISH_DEAD)
-		return
-	source.set_status(FISH_ALIVE)
-	var/message = span_nicegreen("[source] twitches. It's alive!")
-	source.visible_message(message)
 
 /datum/fish_trait/predator
 	name = "Predator"
@@ -321,47 +252,6 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 	. = ..()
 	ADD_TRAIT(fish, TRAIT_YUCKY_FISH, FISH_TRAIT_DATUM)
 
-/datum/fish_trait/toxin_immunity
-	name = "Toxin Immunity"
-	catalog_description = "This fish has developed an ample-spected immunity to toxins."
-
-/datum/fish_trait/toxin_immunity/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	ADD_TRAIT(fish, TRAIT_FISH_TOXIN_IMMUNE, FISH_TRAIT_DATUM)
-
-/datum/fish_trait/crossbreeder
-	name = "Crossbreeder"
-	catalog_description = "This fish's adaptive genetics allows it to crossbreed with other fish species."
-	inheritability = 40
-	incompatible_traits = list(/datum/fish_trait/no_mating)
-
-/datum/fish_trait/crossbreeder/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	ADD_TRAIT(fish, TRAIT_FISH_CROSSBREEDER, FISH_TRAIT_DATUM)
-
-/datum/fish_trait/territorial
-	name = "Territorial"
-	catalog_description = "This fish will start attacking other fish if the aquarium has five or more."
-
-/datum/fish_trait/territorial/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	RegisterSignal(fish, COMSIG_FISH_LIFE, PROC_REF(try_attack_fish))
-
-/datum/fish_trait/territorial/proc/try_attack_fish(obj/item/reagent_containers/food/snacks/fish/source, seconds_per_tick)
-	SIGNAL_HANDLER
-	if(!source.loc || !SPT_PROB(1, seconds_per_tick))
-		return
-	var/list/fishes = source.get_aquarium_fishes(TRUE, source)
-	if(length(fishes) < 5)
-		return
-	for(var/obj/item/reagent_containers/food/snacks/fish/victim as anything in source.get_aquarium_fishes(TRUE, source))
-		if(victim.status != FISH_ALIVE)
-			continue
-		source.loc.visible_message(span_warning("[source] violently [pick("whips", "bites", "attacks", "slams")] [victim]"))
-		var/damage = round(rand(4, 20) * (source.size / victim.size)) //smaller fishes take extra damage.
-		victim.damage_fish(damage)
-		return
-
 /datum/fish_trait/lubed
 	name = "Slippery"
 	catalog_description = "This fish exudes a viscous, slippery lubrificant. It's recommended not to step on it."
@@ -369,31 +259,11 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 
 /datum/fish_trait/lubed/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
 	. = ..()
-	fish.AddComponent(/datum/component/slippery, 8 SECONDS, SLIDE|GALOSHES_DONT_HELP)
-
+	fish.AddComponent(/datum/component/slippery, 1 SECONDS, SLIDE|GALOSHES_DONT_HELP)
 
 /datum/fish_trait/lubed/minigame_mod(obj/item/fishingrod/rod, mob/fisherman, datum/fishing_challenge/minigame)
 	minigame.reeling_velocity *= 1.4
 	minigame.gravity_velocity *= 1.4
-
-/datum/fish_trait/amphibious
-	name = "Amphibious"
-	catalog_description = "This fish has developed a primitive adaptation to life on both land and water."
-
-/datum/fish_trait/amphibious/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	ADD_TRAIT(fish, TRAIT_FISH_AMPHIBIOUS, FISH_TRAIT_DATUM)
-	if(fish.required_fluid_type == FISH_FLUID_AIR)
-		fish.required_fluid_type = FISH_FLUID_FRESHWATER
-
-/datum/fish_trait/mixotroph
-	name = "Mixotroph"
-	catalog_description = "This fish is capable of subsisting itself by producing its own sources of energy (food)."
-	incompatible_traits = list(/datum/fish_trait/predator, /datum/fish_trait/necrophage)
-
-/datum/fish_trait/mixotroph/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	ADD_TRAIT(fish, TRAIT_FISH_NO_HUNGER, FISH_TRAIT_DATUM)
 
 /datum/fish_trait/antigrav
 	name = "Anti-Gravity"
@@ -404,41 +274,14 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 	minigame.special_effects |= FISHING_MINIGAME_RULE_ANTIGRAV
 
 
-
-///Anxiety means the fish will die if in a location with more than 3 fish (including itself)
-///This is just barely enough to crossbreed out of anxiety, but it severely limits the potential of
-/datum/fish_trait/anxiety
-	name = "Anxiety"
-	catalog_description = "This fish tends to die of stress when forced to be around too many other fish."
-
-/datum/fish_trait/anxiety/difficulty_mod(obj/item/fishingrod/rod, mob/fisherman)
-	. = ..()
-	// Anxious fish are easier with a cloaked line.
-	if(rod.line && (rod.line.fishing_line_traits & FISHING_LINE_CLOAKED))
-		.[ADDITIVE_FISHING_MOD] -= FISH_TRAIT_MINOR_DIFFICULTY_BOOST
-
-/datum/fish_trait/anxiety/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
-	. = ..()
-	RegisterSignal(fish, COMSIG_FISH_LIFE, PROC_REF(on_fish_life))
-
-///signal sent when the anxiety fish is fed, killing it if sharing contents with too many fish.
-/datum/fish_trait/anxiety/proc/on_fish_life(obj/item/reagent_containers/food/snacks/fish/fish, seconds_per_tick)
-	SIGNAL_HANDLER
-	var/fish_tolerance = 3
-	if(!fish.loc || fish.status == FISH_DEAD)
-		return
-	for(var/obj/item/reagent_containers/food/snacks/fish/other_fish in fish.loc.contents)
-		if(fish_tolerance <= 0)
-			fish.loc.visible_message(span_warning("[fish] seems to freak out for a moment, then it stops moving..."))
-			fish.set_status(FISH_DEAD)
-			return
-		fish_tolerance -= 1
-
-
 /datum/fish_trait/camouflage
 	name = "Camouflage"
 	catalog_description = "This fish possess the ability to blend with its surroundings."
 	added_difficulty = 5
+	spontaneous_manifest_types = list(
+		/obj/item/reagent_containers/food/snacks/fish/clownfish = 15,
+		/obj/item/reagent_containers/food/snacks/fish/eel = 8,
+	)
 
 /datum/fish_trait/camouflage/minigame_mod(obj/item/fishingrod/rod, mob/fisherman, datum/fishing_challenge/minigame)
 	minigame.special_effects |= FISHING_MINIGAME_RULE_CAMO
@@ -452,7 +295,7 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 	SIGNAL_HANDLER
 	if(source.status == FISH_DEAD || source.last_move + 5 SECONDS >= world.time)
 		return
-	source.alpha = max(source.alpha - 10 * seconds_per_tick, 10)
+	source.alpha = max(source.alpha - 10 * seconds_per_tick, 60)
 
 /datum/fish_trait/camouflage/proc/reset_alpha(obj/item/reagent_containers/food/snacks/fish/source)
 	SIGNAL_HANDLER
@@ -461,3 +304,84 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 	var/init_alpha = initial(source.alpha)
 	if(init_alpha != source.alpha)
 		animate(source, alpha = init_alpha, time = 1.2 SECONDS, easing = CIRCULAR_EASING|EASE_OUT)
+
+/datum/fish_trait/prehistoric
+	name = "Living Fossil"
+	catalog_description = "An ancient species thought extinct. Extremely rare and valuable."
+	inheritability = 60
+	added_difficulty = 25
+
+/datum/fish_trait/prehistoric/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
+	. = ..()
+	fish.sellprice *= 5
+	ADD_TRAIT(fish, TRAIT_FISH_RECESSIVE, FISH_TRAIT_DATUM)
+
+/datum/fish_trait/deep_dweller
+	name = "Deep Dweller"
+	catalog_description = "This fish lives in the deepest waters and suffers in shallow light."
+
+/datum/fish_trait/deep_dweller/catch_weight_mod(obj/item/fishingrod/rod, mob/fisherman, atom/location, obj/item/reagent_containers/food/snacks/fish/fish_type)
+	. = ..()
+	var/turf/targeted = location
+	if(!targeted.can_see_sky()) // Covered/deep water
+		.[MULTIPLICATIVE_FISHING_MOD] *= 2
+	else
+		.[MULTIPLICATIVE_FISHING_MOD] *= 0.2
+
+/datum/fish_trait/deep_dweller/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
+	. = ..()
+	RegisterSignal(fish, COMSIG_FISH_LIFE, PROC_REF(check_depth))
+
+/datum/fish_trait/deep_dweller/proc/check_depth(obj/item/reagent_containers/food/snacks/fish/source, seconds_per_tick)
+	SIGNAL_HANDLER
+	if(!source.loc || !isturf(source.loc))
+		return
+	var/turf/turf = get_turf(source)
+	if(turf.can_see_sky()) // Shallow water = damage
+		source.damage_fish(1 * seconds_per_tick)
+
+/datum/fish_trait/venomous
+	name = "Venomous"
+	catalog_description = "This fish secretes toxins. Can poison other fish and handlers."
+	incompatible_traits = list(/datum/fish_trait/yucky)
+	reagents_to_add = list(/datum/reagent/toxin = 2)
+	added_difficulty = 10
+
+/datum/fish_trait/treasure_hunter
+	name = "Treasure Hunter"
+	catalog_description = "This fish collects shiny objects. May have valuables in its stomach when caught."
+	incompatible_traits = list(/datum/fish_trait/vegan)
+
+/datum/fish_trait/treasure_hunter/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
+	. = ..()
+	// When the fish is butchered/killed, small chance to drop coins or gems
+	RegisterSignal(fish, COMSIG_FISH_STATUS_CHANGED, PROC_REF(drop_treasure))
+
+/datum/fish_trait/treasure_hunter/proc/drop_treasure(obj/item/reagent_containers/food/snacks/fish/source)
+	SIGNAL_HANDLER
+	if(source.status != FISH_DEAD || !prob(15))
+		return
+	var/treasure_type = pick(/obj/item/coin/copper, /obj/item/coin/silver, /obj/item/coin/gold)
+	new treasure_type(get_turf(source))
+	source.visible_message(span_notice("Something shiny falls out of [source]!"))
+
+/datum/fish_trait/bioluminescent
+	name = "Bioluminescent"
+	catalog_description = "This fish emits a natural glow in dark waters. Easier to spot at night."
+	incompatible_traits = list(/datum/fish_trait/nocturnal, /datum/fish_trait/camouflage)
+	added_difficulty = -3
+
+/datum/fish_trait/bioluminescent/catch_weight_mod(obj/item/fishingrod/rod, mob/fisherman, atom/location, obj/item/reagent_containers/food/snacks/fish/fish_type)
+	. = ..()
+	if(HAS_TRAIT(rod, TRAIT_ROD_IGNORE_ENVIRONMENT))
+		return
+	var/turf/turf = get_turf(location)
+	var/light_amount = turf?.get_lumcount()
+	// Easier to find in darkness
+	if(light_amount < SHADOW_SPECIES_LIGHT_THRESHOLD)
+		.[MULTIPLICATIVE_FISHING_MOD] *= 1.5
+
+/datum/fish_trait/bioluminescent/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
+	. = ..()
+	fish.set_light_range(2)
+	fish.set_light_color(COLOR_CYAN)

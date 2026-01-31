@@ -614,7 +614,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/datum/asset/A as anything in subtypesof(/datum/asset))
 		if(!initial(A.cross_round_cachable))
 			continue
-		if(A == initial(A._abstract))
+		if(is_abstract(A))
 			continue
 		var/datum/asset/asset_datum = GLOB.asset_datums[A]
 		asset_datum.regenerate()
@@ -630,7 +630,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	var/cleared = 0
 	for(var/datum/asset/spritesheet_batched/A as anything in subtypesof(/datum/asset/spritesheet_batched))
-		if(A == initial(A._abstract))
+		if(is_abstract(A))
 			continue
 		fdel("[ASSET_CROSS_ROUND_SMART_CACHE_DIRECTORY]/spritesheet_cache.[initial(A.name)].json")
 		cleared++

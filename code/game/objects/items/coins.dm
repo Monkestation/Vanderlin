@@ -307,8 +307,18 @@
 			INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return
 
-	user.put_in_active_hand(new type(user.loc, 1))
-	set_quantity(quantity - 1)
+	var/spawned_type
+	if(base_type)
+		switch(base_type)
+			if(CTYPE_GOLD)
+				spawned_type = /obj/item/coin/gold
+			if(CTYPE_SILV)
+				spawned_type = /obj/item/coin/silver
+			else
+				spawned_type = /obj/item/coin/copper
+	if(spawned_type)
+		user.put_in_active_hand(new spawned_type(user.loc, 1))
+		set_quantity(quantity - 1)
 
 /obj/item/coin/attack_self(mob/living/user, params)
 	if(quantity > 1 || !base_type)
