@@ -51,7 +51,7 @@
 				spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			if(/datum/patron/inhumen/zizo)
 				spawned.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-				spawned.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
+				spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
 				spawned.grant_language(/datum/language/undead)
 				spawned.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 			if(/datum/patron/inhumen/matthios)
