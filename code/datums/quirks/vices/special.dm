@@ -326,15 +326,7 @@
 /datum/quirk/vice/tremors/on_spawn()
 	if(!owner)
 		return
-	var/mob/living/carbon/human/H = owner
-	ADD_TRAIT(H, TRAIT_TREMORS, "[type]")
 	schedule_next_tremor()
-
-/datum/quirk/vice/tremors/on_remove()
-	if(!owner)
-		return
-	var/mob/living/carbon/human/H = owner
-	REMOVE_TRAIT(H, TRAIT_TREMORS, "[type]")
 
 /datum/quirk/vice/tremors/on_life()
 	if(!owner)

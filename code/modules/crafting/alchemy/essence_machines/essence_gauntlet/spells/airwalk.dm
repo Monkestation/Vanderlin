@@ -26,12 +26,13 @@
 
 /datum/status_effect/buff/air_walking/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_HOLLOWBONES, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_HOLLOWBONES, STATUS_EFFECT_TRAIT)
+	ADD_TRAIT(owner, TRAIT_MOVE_FLYING, STATUS_EFFECT_TRAIT)
 	owner.movement_type |= FLYING
 	to_chat(owner, span_notice("You feel light as air, able to step over gaps and chasms."))
 
 /datum/status_effect/buff/air_walking/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_HOLLOWBONES, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_HOLLOWBONES, STATUS_EFFECT_TRAIT)
 	owner.movement_type &= ~FLYING
 	to_chat(owner, span_notice("Your feet return to solid ground."))
