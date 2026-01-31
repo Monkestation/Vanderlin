@@ -436,7 +436,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(isitem(parent))
 		var/obj/item/item_parent = parent
-		if(item_parent.item_flags & IN_INVENTORY)
+
+		if(user && item_parent.item_flags & IN_INVENTORY)
 			if(equipped_access_flags & STORAGE_ACCESS_NOT_WORN)
 				if(messages)
 					user.balloon_alert(user, "not while worn!")
@@ -446,6 +447,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 					if(messages)
 						user.balloon_alert(user, "need to hold!")
 				return FALSE
+
 		var/datum/storage/smaller_fish = to_insert.atom_storage
 		if(smaller_fish && !allow_big_nesting && to_insert.w_class >= item_parent.w_class)
 			if(messages && user)
