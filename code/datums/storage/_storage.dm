@@ -28,9 +28,9 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	VAR_PRIVATE/list/obj/item/item_coordinates
 
 	/// storage display object
-	VAR_PRIVATE/var/atom/movable/screen/storage/boxes
+	VAR_PRIVATE/atom/movable/screen/storage/boxes
 	/// close button object
-	VAR_PRIVATE/var/atom/movable/screen/close/closer
+	VAR_PRIVATE/atom/movable/screen/close/closer
 
 	/// Typecache of items that can be inserted into this storage.
 	/// By default, all item types can be inserted (assuming other conditions are met).
