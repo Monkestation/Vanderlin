@@ -1768,6 +1768,20 @@
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/outdoors/town/roofs)
+"aYy" = (
+/obj/effect/mob_spawn/human/corpse/damaged{
+	name = "elf light gear";
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	outfit = /datum/outfit/npc/light_gear
+	},
+/obj/effect/mob_spawn/human/corpse/damaged{
+	name = "elf light gear";
+	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
+	outfit = /datum/outfit/npc/light_gear
+	},
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "aYA" = (
 /obj/structure/door{
 	name = "Apothecary"
@@ -2051,6 +2065,10 @@
 "biA" = (
 /turf/open/floor/carpet,
 /area/indoors/town/theatre)
+"biZ" = (
+/obj/effect/decal/cleanable/undeadash,
+/turf/open/floor/carpet/lord/right,
+/area/indoors/town/manor)
 "bjT" = (
 /obj/item/clothing/face/cigarette/pipe/crafted{
 	pixel_x = -2;
@@ -2348,6 +2366,11 @@
 /obj/structure/vine/black_briar/medium,
 /turf/open/floor/sand,
 /area/indoors/town/manor)
+"bto" = (
+/obj/effect/decal/cleanable/sigil/SW,
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobble,
+/area/outdoors/town)
 "btp" = (
 /obj/structure/table/wood/reinf_long,
 /turf/open/floor/carpet/red,
@@ -2837,6 +2860,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/dwarfin)
+"bJL" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/turf/open/floor/cobble,
+/area/outdoors/town)
 "bJU" = (
 /turf/open/floor/dirt/road,
 /area/indoors/soilsons)
@@ -13289,6 +13316,10 @@
 "ihP" = (
 /turf/closed/wall/mineral/roofwall/middle,
 /area/indoors/town)
+"ihQ" = (
+/obj/effect/decal/cleanable/undeadash,
+/turf/open/floor/tile/masonic,
+/area/indoors/town/manor)
 "iid" = (
 /obj/structure/vine/black_briar/hvy,
 /turf/open/floor/cobble,
@@ -16366,6 +16397,7 @@
 	name = "beggar";
 	mob_species = list(/datum/species/human/northern,/datum/species/elf/snow,/datum/species/human/halfelf, /datum/species/dwarf/mountain, /datum/species/demihuman, /datum/species/medicator)
 	},
+/obj/effect/gibspawner/human,
 /turf/open/floor/metal/alt,
 /area/outdoors/town)
 "jWN" = (
@@ -18108,6 +18140,7 @@
 	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
+/obj/effect/gibspawner/human,
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
 "kWD" = (
@@ -22254,6 +22287,14 @@
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"ntC" = (
+/obj/effect/mob_spawn/human/corpse/damaged{
+	outfit = /datum/outfit/vagrant;
+	name = "beggar";
+	mob_species = list(/datum/species/human/northern,/datum/species/elf/snow,/datum/species/human/halfelf, /datum/species/dwarf/mountain, /datum/species/demihuman, /datum/species/medicator)
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "ntJ" = (
 /obj/effect/decal/cleanable/debris/wood{
 	dir = 8
@@ -24736,6 +24777,15 @@
 "oKU" = (
 /turf/open/water,
 /area/indoors/town/bath)
+"oKW" = (
+/obj/effect/mob_spawn/human/corpse/damaged{
+	name = "dark squire";
+	mob_species = list(/datum/species/elf/dark);
+	outfit = /datum/outfit/dark_itinerant_squire
+	},
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobble,
+/area/outdoors/town)
 "oLn" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -26093,6 +26143,15 @@
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/grass/cold,
 /area/indoors/soilsons)
+"pDQ" = (
+/obj/effect/mob_spawn/human/corpse/damaged{
+	name = "dark squire";
+	mob_species = list(/datum/species/elf/dark);
+	outfit = /datum/outfit/dark_itinerant_squire
+	},
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "pDS" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/dirt/road,
@@ -26508,6 +26567,12 @@
 /area/indoors/town/manor)
 "pPY" = (
 /obj/effect/decal/cleanable/debris/stone,
+/obj/effect/mob_spawn/human/corpse/damaged{
+	name = "dark squire";
+	mob_species = list(/datum/species/elf/dark);
+	outfit = /datum/outfit/dark_itinerant_squire
+	},
+/obj/effect/gibspawner/human,
 /turf/open/floor/sand,
 /area/indoors/villagegarrison)
 "pQa" = (
@@ -26691,6 +26756,10 @@
 	pixel_x = 9
 	},
 /turf/open/floor/carpet/red,
+/area/indoors/town/manor)
+"pWR" = (
+/obj/effect/decal/cleanable/undeadash,
+/turf/open/floor/carpet/lord/center,
 /area/indoors/town/manor)
 "pXb" = (
 /turf/open/floor/cobble,
@@ -27222,6 +27291,7 @@
 	name = "beggar";
 	mob_species = list(/datum/species/human/northern,/datum/species/elf/snow,/datum/species/human/halfelf, /datum/species/dwarf/mountain, /datum/species/demihuman, /datum/species/medicator)
 	},
+/obj/effect/gibspawner/human,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "qpU" = (
@@ -30138,6 +30208,10 @@
 /obj/structure/vine/black_briar/medium,
 /turf/closed/wall/mineral/craftstone,
 /area/under/town/basement)
+"rWP" = (
+/obj/effect/decal/cleanable/undeadash,
+/turf/open/floor/carpet/lord/left,
+/area/indoors/town/manor)
 "rXf" = (
 /obj/structure/vine/black_briar/hvy,
 /turf/open/floor/tile/masonic,
@@ -32117,7 +32191,6 @@
 	pixel_y = 6
 	},
 /obj/item/coin/copper/pile,
-/obj/item/clothing/face/cigarette/rollie/cannabis,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor)
 "tdu" = (
@@ -33572,6 +33645,7 @@
 	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
+/obj/effect/gibspawner/human,
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "tYb" = (
@@ -35290,6 +35364,14 @@
 /obj/effect/gibspawner/human,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
+"uZg" = (
+/obj/effect/mob_spawn/human/corpse/damaged{
+	outfit = /datum/outfit/guardsman/footman;
+	name = "town watch footman"
+	},
+/obj/effect/gibspawner/human,
+/turf/open/floor/sand,
+/area/indoors/villagegarrison)
 "uZj" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/dwarfin)
@@ -38247,6 +38329,10 @@
 /obj/structure/table/wood,
 /turf/open/floor/cobble,
 /area/indoors/town/garrison)
+"wNV" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/turf/open/floor/metal/alt,
+/area/outdoors/rtfield/safe)
 "wOf" = (
 /obj/structure/stairs,
 /obj/structure/fluff/railing/wood{
@@ -38835,6 +38921,15 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
+"xgf" = (
+/obj/effect/mob_spawn/human/corpse/damaged{
+	outfit = /datum/outfit/vagrant;
+	name = "beggar";
+	mob_species = list(/datum/species/human/northern,/datum/species/elf/snow,/datum/species/human/halfelf, /datum/species/dwarf/mountain, /datum/species/demihuman, /datum/species/medicator)
+	},
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobble,
+/area/outdoors/town)
 "xgs" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -40249,6 +40344,7 @@
 	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
+/obj/effect/gibspawner/human,
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "ycQ" = (
@@ -96135,7 +96231,7 @@ omp
 omp
 omp
 pmI
-nXw
+pmI
 kWo
 omp
 vGD
@@ -97580,7 +97676,7 @@ sqo
 pfl
 pfl
 xaq
-lZM
+ntC
 uoe
 gaD
 bcF
@@ -98310,7 +98406,7 @@ hKo
 vvE
 vvE
 ekZ
-dtd
+rWP
 uVu
 uVu
 dtd
@@ -99775,8 +99871,8 @@ omp
 omp
 pmI
 pmI
-sjr
-uPU
+oKW
+huA
 huA
 omp
 gYK
@@ -100399,7 +100495,7 @@ jnM
 omp
 gYK
 gYK
-omp
+rmC
 gYK
 gYK
 gYK
@@ -100575,7 +100671,7 @@ eSh
 omp
 gzt
 omp
-bBH
+aYy
 rMM
 orp
 cXg
@@ -100631,7 +100727,7 @@ gzt
 huA
 pmI
 qbp
-rmC
+pDQ
 cwC
 uZo
 eZJ
@@ -101221,7 +101317,7 @@ pmI
 pmI
 uLl
 hrN
-jVG
+bto
 omp
 sBd
 omp
@@ -101247,7 +101343,7 @@ gbo
 hep
 hep
 hep
-hep
+wNV
 uSs
 uSs
 uSs
@@ -101643,7 +101739,7 @@ dxr
 omp
 gYK
 pmI
-eZJ
+uZg
 eZJ
 eZJ
 eZJ
@@ -102230,7 +102326,7 @@ imQ
 epq
 vRw
 pmI
-pmI
+bJL
 jZq
 wTm
 wTm
@@ -102589,7 +102685,7 @@ jnM
 jnM
 jnM
 pmI
-qyN
+qbp
 pmI
 pmI
 gYK
@@ -105013,7 +105109,7 @@ nuT
 gjQ
 cwC
 pmI
-sIR
+xgf
 jnM
 jnM
 pmI
@@ -105250,7 +105346,7 @@ cwC
 omp
 omp
 pmI
-sIR
+xgf
 pmI
 cwC
 hvi
@@ -106254,7 +106350,7 @@ omp
 omp
 omp
 huA
-huA
+uPU
 gYK
 gYK
 jnM
@@ -137485,7 +137581,7 @@ pOm
 pOm
 pOm
 sNF
-pOm
+biZ
 odh
 odh
 uVu
@@ -138300,7 +138396,7 @@ ePb
 odh
 vvE
 sHm
-ePb
+ihQ
 qSZ
 xDR
 ozv
@@ -140515,7 +140611,7 @@ fMd
 vvE
 bGg
 bGg
-bGg
+pWR
 bGg
 ajb
 ajb
@@ -141740,7 +141836,7 @@ odh
 otU
 rlj
 vvE
-dtd
+rWP
 dtd
 dtd
 dtd
