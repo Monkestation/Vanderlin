@@ -143,7 +143,7 @@
 
 /obj/item/fishing/lure/no_bait/is_catchable_fish(obj/item/reagent_containers/food/snacks/fish/fish, list/fish_properties)
 	// Scares off tiny and small fish
-	if(fish.size <= FISH_SIZE_SMALL_MAX)
+	if(fish.size <= fish.average_size * 1.1)
 		return FALSE
 
 	// Catches carps, eels, shrimp, anglerfish, and clownfish

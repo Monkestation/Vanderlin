@@ -134,6 +134,7 @@
 	// Update reagent name with optional ingredients
 	if(length(found_optional_wildcards))
 		var/extra_string = " with [wording_choice] "
+		var/extra_taste = "with hints of "
 		var/first_ingredient = TRUE
 		var/list/all_used_ingredients = list()
 		for(var/wildcard_type in found_optional_wildcards)
@@ -143,10 +144,15 @@
 		for(var/obj/item/ingredient in all_used_ingredients)
 			if(first_ingredient)
 				extra_string += ingredient.name
+				extra_taste += ingredient.name
 				first_ingredient = FALSE
 			else
 				extra_string += " and [ingredient.name]"
+				extra_taste += " and [ingredient.name]"
 		found_product.name += extra_string
+		found_product.taste_description += extra_taste
+		found_product.add_data("custom_name", found_product.name)
+		found_product.add_data("custom_tastes", found_product.taste_description)
 
 	// Optionally modify reagent properties based on quality
 	apply_quality_effects_to_reagent(found_product)

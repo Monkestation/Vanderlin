@@ -55,7 +55,7 @@
 	var/cleanliness_factor = 1 //related to hygiene for washing
 
 	/// Fishing element for this specific water tile
-	var/datum/fish_source/fishing_datum = /datum/fish_source/ocean
+	var/datum/fish_source/fishing_datum = /datum/fish_source/water
 	flags_1 = CONDUCT_1
 
 /turf/open/water/proc/set_watervolume(volume)
@@ -535,6 +535,7 @@
 	barefootstep = FOOTSTEP_MUD
 	heavyfootstep = FOOTSTEP_MUD
 	cleanliness_factor = -5
+	fishing_datum = /datum/fish_source/sewer
 
 /turf/open/water/sewer/Entered(atom/movable/AM, atom/oldLoc)
 	. = ..()
@@ -578,6 +579,7 @@
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/sewer
 	cleanliness_factor = -5
+	fishing_datum = /datum/fish_source/swamp
 
 /turf/open/water/swamp/Initialize()
 	dir = pick(GLOB.cardinals)
@@ -616,6 +618,7 @@
 	water_level = 3
 	slowdown = 20
 	swim_skill = TRUE
+	fishing_datum = /datum/fish_source/swamp/deep
 
 /turf/open/water/swamp/deep/Entered(atom/movable/AM, atom/oldLoc)
 	. = ..()
@@ -653,6 +656,7 @@
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/marshy
 	cleanliness_factor = -3
+	fishing_datum = /datum/fish_source/swamp
 
 /turf/open/water/marsh/Initialize()
 	dir = pick(GLOB.cardinals)
@@ -665,6 +669,7 @@
 	water_level = 3
 	slowdown = 20
 	swim_skill = TRUE
+	fishing_datum = /datum/fish_source/swamp/deep
 
 /turf/open/water/cleanshallow
 	name = "water"
@@ -674,6 +679,7 @@
 	water_level = 2
 	slowdown = 15
 	water_reagent = /datum/reagent/water
+	fishing_datum = /datum/fish_source/cleanshallow
 
 /turf/open/water/cleanshallow/Initialize()
 	dir = pick(GLOB.cardinals)
@@ -714,6 +720,7 @@
 	swimdir = TRUE
 	set_relationships_on_init = FALSE
 	uses_level = FALSE
+	fishing_datum = /datum/fish_source/river
 	var/river_processing
 	var/river_processes = TRUE
 

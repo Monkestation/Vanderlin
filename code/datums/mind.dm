@@ -793,6 +793,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
  ** check_apprentice - do apprentices receive skill experience too?
 */
 /datum/mind/proc/add_sleep_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
+	if(HAS_TRAIT(current, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	amt *= GLOB.sleep_experience_modifier
 
 	if(current.has_quirk(/datum/quirk/boon/quick_learner))

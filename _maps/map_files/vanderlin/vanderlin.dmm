@@ -1689,7 +1689,7 @@
 /area/indoors/town/orphanage)
 "aMw" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/fishing/lure,
+/obj/effect/spawner/map_spawner/random_lure,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
 /area/indoors/town)

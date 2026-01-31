@@ -644,6 +644,8 @@
 		if(right_click)
 			if(istype(object, /obj/structure/blueprint))
 				var/obj/structure/blueprint/print = object
+				if(!print.creator)
+					return TRUE
 				if(print.creator != user && world.time < print.time_when_placed + 3 MINUTES)
 					return TRUE
 				to_chat(user, span_red("[object.name] removed."))

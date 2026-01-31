@@ -829,8 +829,6 @@ GLOBAL_LIST_EMPTY(donator_races)
 		for(var/i in inherent_factions)
 			C.faction -= i
 
-	C.remove_movespeed_modifier(MOVESPEED_ID_SPECIES)
-
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
 
 /datum/species/proc/handle_body(mob/living/carbon/human/H)
