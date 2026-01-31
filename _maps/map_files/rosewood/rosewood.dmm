@@ -6077,7 +6077,8 @@
 	mob_gender = "female";
 	patron = /datum/patron/inhumen/zizo;
 	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo
+	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	backl = null
 	},
 /turf/open/floor/wood,
 /area/indoors/town/magician)
@@ -27930,13 +27931,10 @@
 /area/outdoors/mountains)
 "qEA" = (
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/stairs/fancy/l{
+	dir = 4
+	},
 /obj/structure/vine/black_briar/hvy,
-/obj/structure/stairs/fancy/l{
-	dir = 4
-	},
-/obj/structure/stairs/fancy/l{
-	dir = 4
-	},
 /turf/open/floor/carpet/lord/right{
 	dir = 1
 	},
@@ -28231,6 +28229,10 @@
 /obj/item/plate,
 /turf/open/floor/hexstone,
 /area/indoors/town)
+"qOp" = (
+/obj/effect/decal/cleanable/undeadash,
+/turf/open/floor/sand,
+/area/under/town/basement)
 "qOw" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -38649,7 +38651,8 @@
 	mob_gender = "female";
 	patron = /datum/patron/inhumen/zizo;
 	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo
+	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	backl = null
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
@@ -101825,7 +101828,7 @@ srO
 daY
 pUF
 oFD
-oFD
+qOp
 hDB
 iUQ
 rnm
@@ -102026,7 +102029,7 @@ oFD
 oFD
 gQu
 uEy
-oFD
+qOp
 oFD
 oFD
 iUQ
