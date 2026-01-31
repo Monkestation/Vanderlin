@@ -21,9 +21,12 @@
 		to_chat(owner, span_warning("This one's biggest flaw is being dead."))
 		return FALSE
 
-	if(cast_on.charflaw && !istype(cast_on.charflaw, /datum/charflaw/noflaw) && !istype(cast_on.charflaw, /datum/charflaw/eznoflaw))
-		to_chat(owner, span_green("You discover [cast_on]'s flaw: <b>[cast_on.charflaw.name]</b>!"))
-		SEND_SIGNAL(owner, COMSIG_FLAW_FOUND, cast_on.charflaw, cast_on)
+	if(length(cast_on.quirks))
+
+		to_chat(owner, span_green("You discover [cast_on]'s flaws:"))
+		for(var/datum/quirk/vice/vice in cast_on.quirks)
+			to_chat(owner, span_green("<b>[vice.name]</b>"))
+			SEND_SIGNAL(owner, COMSIG_FLAW_FOUND, vice, cast_on)
 		return
 
 	to_chat(owner, span_warning("\The [cast_on] has no flaws! How could this be?!"))

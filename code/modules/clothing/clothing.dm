@@ -114,15 +114,24 @@
 /obj/item/clothing/get_inspect_entries(list/inspect_list)
 	. = ..()
 
+	if(armor)
+		. += "\n<u><b>DEFENSE:</b></u>\n"
+		var/list/defense_strings = list()
+		for(var/damage_key in ARMOR_LIST_DAMAGE())
+			var/rating = armor.get_rating(damage_key)
+			defense_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [armor_to_protection_class(rating)]</font>"
+		. += defense_strings.Join(" | ")
+
 	if(length(prevent_crits))
-		. += "\n<b>DEFENSE:</b>"
-		for(var/X in prevent_crits)
-			. += "\n<b>[X] damage</b>"
+		. += "\n<u><b>PREVENT CRITS:</b></u>\n"
+		. += prevent_crits.Join(" | ")
 
 	if(body_parts_covered)
-		. += "\n<b>COVERAGE:</b>"
+		. += "\n<u><b>COVERAGE:</b></u>\n"
+		var/list/parsed_zones = list()
 		for(var/zone in body_parts_covered2organ_names(body_parts_covered))
-			. += "\n<b>[parse_zone(zone)]</b>"
+			parsed_zones += "[parse_zone(zone)]"
+		. += parsed_zones.Join(" | ")
 
 	switch(armor_class)
 		if(AC_HEAVY)
@@ -327,6 +336,8 @@
 	if (!istype(user))
 		return
 	if(slot_flags & slot) //Was equipped to a valid slot for this item?
+		for(var/trait in clothing_traits)
+			ADD_CLOTHING_TRAIT(user, trait)
 		if (LAZYLEN(user_vars_to_edit))
 			for(var/variable in user_vars_to_edit)
 				if(variable in user.vars)
@@ -334,9 +345,6 @@
 					user.vv_edit_var(variable, user_vars_to_edit[variable])
 		if(wetable)
 			RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_user_move), override = TRUE)
-
-	for(var/trait in clothing_traits)
-		ADD_CLOTHING_TRAIT(user, trait)
 
 /**
  * Inserts a trait (or multiple traits) into the clothing traits list
@@ -354,6 +362,23 @@
 	if(istype(wearer) && (wearer.get_slot_by_item(src) & slot_flags))
 		for(var/new_trait in trait_or_traits)
 			ADD_CLOTHING_TRAIT(wearer, new_trait)
+
+/**
+ * Removes a trait (or multiple traits) from the clothing traits list
+ *
+ * If worn, then we will also remove the trait from the wearer as if unequipped
+ *
+ * This is so you can add clothing traits without worrying about needing to equip or unequip them to gain effects
+ */
+/obj/item/clothing/proc/detach_clothing_traits(trait_or_traits)
+	if(!islist(trait_or_traits))
+		trait_or_traits = list(trait_or_traits)
+
+	LAZYREMOVE(clothing_traits, trait_or_traits)
+	var/mob/wearer = loc
+	if(istype(wearer))
+		for(var/new_trait in trait_or_traits)
+			REMOVE_CLOTHING_TRAIT(wearer, new_trait)
 
 /obj/item/clothing/atom_break(damage_flag)
 	. = ..()
@@ -556,4 +581,3 @@ BLIND     // can't see anything
 		if(COOLDOWN_FINISHED(src, wet_stress_cd))
 			COOLDOWN_START(src, wet_stress_cd, 60 SECONDS)
 			C.add_stress(/datum/stress_event/wet_cloth)
-

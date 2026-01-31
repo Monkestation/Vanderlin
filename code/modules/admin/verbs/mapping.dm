@@ -51,7 +51,7 @@ GLOBAL_PROTECT(admin_verbs_debug_mapping)
 	desc = ""
 
 /obj/effect/debugging/marker
-	icon = 'icons/turf/areas.dmi'
+	icon = 'icons/turf/areas/areas.dmi'
 	icon_state = "yellow"
 
 /obj/effect/debugging/marker/Move()
@@ -94,8 +94,7 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 	var/dat = {"<b>Coordinate list of Active Turfs at Roundstart</b>
 	<br>Real-time Active Turfs list you can see in Air Subsystem at active_turfs var<br>"}
 
-	for(var/t in GLOB.active_turfs_startlist)
-		var/turf/T = t
+	for(var/turf/T as anything in GLOB.active_turfs_startlist)
 		dat += "[ADMIN_VERBOSEJMP(T)]\n"
 		dat += "<br>"
 

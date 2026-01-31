@@ -17,16 +17,16 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 4, //To get out of grasps slippery bastard
+		/datum/skill/combat/wrestling = 3, //To get out of grasps slippery bastard
 		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/reading = 2,
 		/datum/skill/labor/mathematics = 2,
 		//Can't expect those kobolds to not be thieves or assist with such things.
 		/datum/skill/misc/stealing = 2,
-		/datum/skill/misc/lockpicking,
+		/datum/skill/misc/lockpicking = 2,
 		//Jack of All Trade, Master of None.
 		/datum/skill/misc/sewing = 3,
 		/datum/skill/misc/medicine = 3,
@@ -36,7 +36,6 @@
 		/datum/skill/craft/tanning = 3,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/engineering = 3,
-		/datum/skill/craft/bombs = 3,
 		/datum/skill/craft/carpentry = 3,
 		/datum/skill/craft/masonry = 3,
 		/datum/skill/craft/traps = 3,
@@ -58,7 +57,7 @@
 	spawned.merctype = 9
 
 /datum/outfit/mercenary/porter
-	name = "Porter"
+	name = "Porter (Mercenary)"
 	head = /obj/item/clothing/head/articap/porter
 	armor = /obj/item/clothing/armor/leather/jacket/artijacket/porter
 	pants = /obj/item/clothing/pants/trou

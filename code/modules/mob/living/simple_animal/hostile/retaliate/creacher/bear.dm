@@ -1,3 +1,11 @@
+/datum/component/riding/direbear/Initialize()
+	. = ..()
+	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(16, 14), TEXT_SOUTH = list(12, 8), TEXT_EAST = list(7, 12), TEXT_WEST = list(14, 12)))
+	set_vehicle_dir_layer(SOUTH, OBJ_LAYER)
+	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
+	set_vehicle_dir_layer(EAST, OBJ_LAYER)
+	set_vehicle_dir_layer(WEST, OBJ_LAYER)
+
 /datum/status_effect/debuff/staggered
 	id = "staggered"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/staggered
@@ -42,7 +50,7 @@
 /datum/action/cooldown/mob_cooldown/bear_swipe/proc/do_swipe(atom/target, mob/living/L)
 	var/dist = get_dist(owner, target)
 	if(can_see(owner, target, range) && dist < range && dist <= 1)
-		playsound(owner.loc, 'sound/combat/shieldraise.ogg', 100)
+		playsound(owner, 'sound/combat/shieldraise.ogg', 100)
 		if(ismob(target))
 			var/mob/living/victim = target
 			def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_CHEST, BODY_ZONE_HEAD, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
@@ -119,10 +127,16 @@
 	aggressive = 1
 	stat_attack = UNCONSCIOUS	//You falling unconcious won't save you, little one..
 	ai_controller = /datum/ai_controller/direbear
+	can_buckle = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/direbear/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
+
+/mob/living/simple_animal/hostile/retaliate/direbear/tamed(mob/user)
+	. = ..()
+	if(can_buckle)
+		AddComponent(/datum/component/riding/direbear)
 
 /mob/living/simple_animal/hostile/retaliate/direbear/get_sound(input)
 	switch(input)

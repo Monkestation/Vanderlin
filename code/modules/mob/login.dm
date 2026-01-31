@@ -80,8 +80,7 @@
 			for(var/datum/action/A in client.player_details.player_actions)
 				A.Grant(src)
 
-		for(var/foo in client.player_details.post_login_callbacks)
-			var/datum/callback/CB = foo
+		for(var/datum/callback/CB as anything in client.player_details.post_login_callbacks)
 			CB.Invoke()
 		log_played_names(client.ckey,name,real_name)
 		auto_deadmin_on_login()

@@ -14,6 +14,12 @@
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 	max_integrity = INTEGRITY_STRONG
 
+/obj/item/clothing/wrists/bracers/ancient
+	name = "ancient vambraces"
+	desc = "Very old vambraces."
+	icon_state = "ancientbracers"
+	item_state = "ancientbracers"
+
 /obj/item/clothing/wrists/bracers/naledi
 	name = "sojourner's wrappings"
 	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. It provides more freedom of movement than the traditional steel thorns."

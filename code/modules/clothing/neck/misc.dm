@@ -17,7 +17,7 @@
 /obj/item/clothing/neck/silveramulet
 	name = "silver amulet"
 	icon_state = "amulets"
-	slot_flags = ITEM_SLOT_NECK
+	slot_flags = ITEM_SLOT_NECK | ITEM_SLOT_WRISTS // It needs this or else it is less useful than a psycross
 	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
@@ -373,15 +373,28 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
 
+/obj/item/clothing/neck/gorget/ancient
+	name = "gorget"
+	icon_state = "ancientgorget"
+	desc = "A very old gorget."
+
 /obj/item/clothing/neck/gorget/explosive
 	name = "collar of servitude"
 	icon_state = "collar_of_servitude"
 	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
 		servile and obedient under threat of its explosive potential detonating on their necks."
+	clothing_flags = null
 	var/collar_unlocked = TRUE
 	var/is_in_neck_slot = FALSE
 	var/is_going_to_boom = FALSE
-	clothing_flags = null
+
+/obj/item/clothing/neck/gorget/explosive/Initialize(mapload, ...)
+	. = ..()
+	RegisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(tries_to_unequip))
+
+/obj/item/clothing/neck/gorget/explosive/Destroy()
+	UnregisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP)
+	return ..()
 
 /obj/item/clothing/neck/gorget/explosive/examine(mob/user)
 	. = ..()
@@ -389,15 +402,6 @@
 		. += "The red gem gleams faintly, it seems to be unpowered."
 	else
 		. += "The red gem gleams intensely, piercing your gaze with its aura."
-
-/obj/item/clothing/neck/gorget/explosive/Initialize()
-	. = ..()
-
-	RegisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(tries_to_unequip))
-
-/obj/item/clothing/neck/gorget/explosive/Destroy()
-	UnregisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP)
-	return ..()
 
 /obj/item/clothing/neck/gorget/explosive/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -408,6 +412,10 @@
 		return
 
 	//this checks if its inhand, instead of neck slot
+	is_in_neck_slot = FALSE
+
+/obj/item/clothing/neck/gorget/explosive/dropped(mob/user)
+	. = ..()
 	is_in_neck_slot = FALSE
 
 /obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
@@ -424,10 +432,15 @@
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
-	if(collar_unlocked)
+
+	if(!ismob(loc))
 		return
 
-	visible_message(span_warning("The [src] resists the pull to be unlocked!"))
+	if(collar_unlocked || !is_in_neck_slot)
+		return
+
+	to_chat(loc, span_warning("The [src] resists the pull to be unlocked!"))
+
 	return COMPONENT_ITEM_BLOCK_UNEQUIP
 
 /obj/item/clothing/neck/gorget/explosive/proc/prepare_to_go_boom()

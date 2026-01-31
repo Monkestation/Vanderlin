@@ -91,24 +91,30 @@
 /atom/movable/screen/skills/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 
+	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
+		if(ishuman(usr))
+			var/mob/living/L = usr
+			var/datum/language_holder/H = L.get_language_holder()
+			H.open_language_menu(usr)
+			return
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		var/ht
 		var/mob/living/L = usr
 		to_chat(L, "*----*")
 		if(ishuman(usr))
 			var/mob/living/carbon/human/M = usr
-			if(M.charflaw)
-				to_chat(M, "<span class='info'>[M.charflaw.desc]</span>")
-				to_chat(M, "*----*")
+			for(var/datum/quirk/vice/vices in M.quirks)
+				to_chat(M, "<span class='info'>[vices.get_desc()]</span>")
+			to_chat(M, "*----*")
 			if(M.mind)
 				if(M.mind.language_holder)
-					var/finn
-					for(var/X in M.mind.language_holder.languages)
-						var/datum/language/LA = new X()
-						finn = TRUE
-						to_chat(M, "<span class='info'>[LA.name] - ,[LA.key]</span>")
-					if(!finn)
+					if(!length(M.mind.language_holder.languages))
 						to_chat(M, "<span class='warning'>I don't know any languages.</span>")
+					else
+						for(var/X in M.mind.language_holder.languages)
+							var/datum/language/LA = GLOB.language_datum_instances[X]
+							to_chat(M, "<span class='info'>[LA.name] - ,[LA.key]</span>")
 					to_chat(M, "*----*")
 		for(var/X in GLOB.roguetraits)
 			if(HAS_TRAIT(L, X))
@@ -1232,8 +1238,7 @@
 
 	if(hud.mymob.stat != DEAD && ishuman(hud.mymob))
 		var/mob/living/carbon/human/H = hud.mymob
-		for(var/X in H.bodyparts)
-			var/obj/item/bodypart/BP = X
+		for(var/obj/item/bodypart/BP as anything in H.bodyparts)
 			if(BP.body_zone in H.get_missing_limbs())
 				continue
 			if(HAS_TRAIT(H, TRAIT_NOPAIN))
@@ -1534,9 +1539,9 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/M = usr
 		if(LAZYACCESS(modifiers, LEFT_CLICK))
-			if(M.charflaw)
-				to_chat(M, "*----*")
-				to_chat(M, span_info("[M.charflaw.desc]"))
+			to_chat(M, "*----*")
+			for(var/datum/quirk/vice/vices in M.quirks)
+				to_chat(M, span_info("[vices.get_desc()]"))
 			to_chat(M, "*--------*")
 			if(!length(M.stressors))
 				to_chat(M, span_info("I'm not feeling much of anything right now."))

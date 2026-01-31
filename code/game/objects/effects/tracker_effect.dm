@@ -32,13 +32,17 @@
 	var/maxdist = 320
 	var/refresh = 1
 
-/obj/effect/tracker/New()
+/obj/effect/tracker/Initialize(mapload, ...)
 	. = ..()
+
 	absolute_X = (x * 32)
 	absolute_Y = (y * 32)
 
-	spawn(1)
-		process_step()
+	process_step()
+
+/obj/effect/tracker/Destroy(force)
+	target = null
+	return ..()
 
 /obj/effect/tracker/soul
 	name = "soul"
@@ -49,13 +53,10 @@
 	color = "red"
 
 /obj/effect/tracker/proc/process_step()
-	set waitfor = 0
-	if (QDELETED(src))
+	if(QDELETED(src))
 		return
-	if(!target)
-		target = pick(GLOB.player_list)
-		return
-	if(target.z != z)
+
+	if(!target || target.z != z)
 		qdel(src)
 		return
 
@@ -66,11 +67,7 @@
 	var/dy = target_absolute_Y - absolute_Y
 
 	var/dist = sqrt(abs(dx)**2 + abs(dy)**2)
-	if(dist > maxdist)
-		on_expire(FALSE)
-		qdel(src)
-		return
-	else if(dist < 16)
+	if(dist > maxdist || dist < 16)
 		on_expire(FALSE)
 		qdel(src)
 		return
@@ -85,47 +82,36 @@
 		absolute_X += (dx/abs(dx)) * speed
 		absolute_Y += (dy/abs(dy)) * speed
 
-
-	absolute_X += round((dx/100)*speed)
-	absolute_Y += round((dy/100)*speed)
+	absolute_X += round((dx/100) * speed)
+	absolute_Y += round((dy/100) * speed)
 
 	speed += acceleration
 
 	var/next_x = absolute_X/32
 	var/next_y = absolute_Y/32
 
-	if (density && ((x != next_x) || (y != next_y)))//changing tile, let's check for collisions if enabled
+	if(density && ((x != next_x) || (y != next_y)))//changing tile, let's check for collisions if enabled
 		var/turf/T_old = locate(x, y, z)
 		var/turf/T_new = locate(next_x, next_y, z)
-		if (!T_new.Cross(src, T_old))
-			if (Bump(T_new))
+
+		if(!T_old.CanPass(src, T_new))
+			if(Bump(T_new))
 				on_expire(TRUE)
 				qdel(src)
 				return
-		for (var/atom/A in T_new)
-			if (A == src)
-				continue
-			if (!A.Cross(src, T_old))
-				if (Bump(A))
-					on_expire(TRUE)
-					qdel(src)
-					return
 
-	if (!QDELETED(src))
-		x = next_x
-		y = next_y
+	if(QDELETED(src))
+		return
 
-	update_icon()
-	on_step()
+	x = next_x
+	y = next_y
 
-	sleep(refresh)
-	process_step()
-
-
-/obj/effect/tracker/update_icon()
-	. = ..()
 	pixel_x = absolute_X % 32
 	pixel_y = absolute_Y % 32
+
+	on_step()
+
+	addtimer(CALLBACK(src, PROC_REF(process_step)), refresh)
 
 /obj/effect/tracker/proc/on_expire(bumped_atom = FALSE)
 	return

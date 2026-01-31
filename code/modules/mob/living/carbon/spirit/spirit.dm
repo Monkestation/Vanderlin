@@ -182,6 +182,10 @@
 	for(var/mob/living/corpse in coffin)
 		if(pacify_corpse(corpse, user))
 			success = TRUE
+	for(var/mob/living/carbon/human/human_corpse in coffin)
+		if(human_corpse.funeral) /* The proc succeeds even if the corpse already received a funeral before.
+	    Coffins and graves have checks to prevent giving too much influence / devotion to Necra. */
+			success = TRUE
 	for(var/obj/item/bodypart/head/head in coffin)
 		if(!head.brainmob)
 			continue
@@ -196,18 +200,27 @@
 				success = TRUE
 	return success
 
+
+
 /// Proc that finds the client associated with a given corpse and either 1. Lets ghosts skip Underworld and return to lobby 2. Gives spirits a toll
 /proc/pacify_corpse(mob/living/corpse, mob/user)
-	if(QDELETED(corpse) || QDELETED(corpse.mind) || (corpse.stat != DEAD))
-		return FALSE
+	. = FALSE
+	if(QDELETED(corpse) || (corpse.stat != DEAD))
+		return
 	// funeral + buried will make Journey to Underworld function as return to lobby
 	if(ishuman(corpse))
 		var/mob/living/carbon/human/human_corpse = corpse
-		human_corpse.funeral = TRUE
-	corpse.mind.remove_antag_datum(/datum/antagonist/zombie)
-	var/mob/dead/observer/ghost
+		if(!human_corpse.funeral)
+			human_corpse.funeral = TRUE
+			. = TRUE
+	var/datum/mind/corpse_mind = get_mind(corpse, include_last = TRUE)
+	if(corpse_mind?.remove_antag_datum(/datum/antagonist/zombie))
+		. = TRUE
+	if(QDELETED(corpse_mind) || corpse.has_quirk(/datum/quirk/vice/hardcore))
+		return
+	var/mob/ghost
 	//Try to find a lost ghost if there is no client
-	if(!corpse.client)
+	if(!corpse.client && !corpse.has_quirk(/datum/quirk/vice/hardcore))
 		ghost = corpse.get_ghost()
 		//Try to find underworld spirit, if there is no observer ghost
 		if(!ghost)
@@ -230,7 +243,6 @@
 	if(ghost)
 		var/user_acknowledgement = user ? user.real_name : "a mysterious force"
 		to_chat(ghost, span_rose("My soul finds peace buried in consecrated ground, thanks to [user_acknowledgement]."))
-	return TRUE
 
 /mob/living/carbon/spirit/show_inv(mob/user)
 	return

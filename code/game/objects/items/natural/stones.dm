@@ -154,9 +154,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 /obj/item/natural/stone/on_consume(mob/living/eater)
 	if(!magic_power)
 		return
-	eater.adjust_spell_points(magic_power * 0.1)
-	eater.mana_pool?.adjust_mana(magic_power * 25)
-	to_chat(eater, span_warning("I feel magic flowing from my stomach."))
+	//eater.adjust_spell_points(magic_power * 0.1)
+	//eater.mana_pool?.adjust_mana(magic_power * 25)
+	//to_chat(eater, span_warning("I feel magic flowing from my stomach."))
 
 /*
 	This right here is stone lore,
@@ -273,19 +273,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	if(istype(weapon, /obj/item/natural/stone))
-		playsound(src.loc, pick('sound/items/stonestone.ogg'), 100)
-		user.visible_message(span_info("[user] strikes the stones together."))
+		playsound(src, pick('sound/items/stonestone.ogg'), 100)
 		if(prob(10))
-			var/datum/effect_system/spark_spread/S = new()
-			var/turf/front = get_step(user, user.dir)
-			S.set_up(1, 1, front)
-			S.start()
-		user.changeNext_move(CLICK_CD_FAST)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(istype(weapon, /obj/item/natural/rock))
-		user.visible_message(span_info("[user] strikes the stone against the rock.</span>"))
-		playsound(src.loc, 'sound/items/stonestone.ogg', 100)
-		if(prob(35))
+			user.visible_message(span_info("[user] strikes the stones together."))
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_step(user, user.dir)
 			S.set_up(1, 1, front)
@@ -303,7 +293,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
 			work_time *= chisel.time_multiplier
-		playsound(src.loc, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
+		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 		user.visible_message("<span class='info'>[user] begins chiseling [src] into blocks.</span>")
 		var/stone_amount = rand(1, max(round(skill_level)/2, 1))
 		if(do_after(user, work_time))
@@ -311,7 +301,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 				new /obj/item/natural/stoneblock(get_turf(src.loc))
 			if(prob(10))
 				new /obj/effect/decal/cleanable/debris/stone(get_turf(src))
-			playsound(src.loc, 'sound/foley/smash_rock.ogg', 100)
+			playsound(src, 'sound/foley/smash_rock.ogg', 100)
 			qdel(src)
 			user.mind.add_sleep_experience(/datum/skill/craft/masonry, (user.STAINT*0.2))
 		return TRUE
@@ -388,10 +378,20 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
+	if(istype(weapon, /obj/item/natural/stone))
+		playsound(src, 'sound/items/stonestone.ogg', 100)
+		if(prob(35))
+			user.visible_message(span_info("[user] strikes the stone against the rock.</span>"))
+			var/datum/effect_system/spark_spread/S = new()
+			var/turf/front = get_step(user, user.dir)
+			S.set_up(1, 1, front)
+			S.start()
+		user.changeNext_move(CLICK_CD_FAST)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(istype(weapon, /obj/item/natural/rock))
-		playsound(src.loc, pick('sound/items/stonestone.ogg'), 100)
-		user.visible_message(span_info("[user] strikes the rocks together."))
+		playsound(src, pick('sound/items/stonestone.ogg'), 100)
 		if(prob(10))
+			user.visible_message(span_info("[user] strikes the rocks together."))
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_step(user,user.dir)
 			S.set_up(1, 1, front)
@@ -408,7 +408,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
 			work_time *= chisel.time_multiplier
-		playsound(src.loc, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
+		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 		user.visible_message("<span class='info'>[user] begins chiseling a part of [src] off.</span>")
 		if(do_after(user, work_time))
 			new /obj/item/natural/stoneblock(get_turf(src.loc))

@@ -136,11 +136,13 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(!holder)
 			return
 		var/title = href_list["id"]
+		var/author = href_list["author_ckey"]
 		if(!title)
 			return
-		if(alert("Are you sure you want to delete the book '[title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
-			if(SSlibrarian.del_player_book(title))
-				message_admins("[key_name_admin(src)] has deleted player made book called: '[title]'")
+		var/real_title = url_decode(title)
+		if(alert("Are you sure you want to delete the book '[real_title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
+			if(SSlibrarian.del_player_book(title, author))
+				message_admins("[key_name_admin(src)] has deleted player made book called: '[real_title]' by [author]")
 				manage_books()
 
 	if(href_list["show_book"])
@@ -161,7 +163,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			completed_asset_jobs += asset_cache_job
 			return
 
-	if(!holder && href_list["window_id"] != "statbrowser")
+	var/atom/ref = locate(href_list["src"])
+	if(!holder && (href_list["window_id"] != "statbrowser") && !istype(ref, /datum/native_say))
 		var/mtl = CONFIG_GET(number/minute_topic_limit)
 		if (mtl)
 			var/minute = round(world.time, 1 MINUTES)
@@ -455,8 +458,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(isnull(address) || (address in localhost_addresses))
 			var/datum/admin_rank/localhost_rank = new("!localhost!", R_EVERYTHING, R_DBRANKS, R_EVERYTHING) //+EVERYTHING -DBRANKS *EVERYTHING
 			new /datum/admins(localhost_rank, ckey, 1, 1)
-	// Init patreon data, used by prefs
+	// Init donator data, used by prefs
 	patreon = new(src)
+	twitch = new(src)
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
 	prefs = GLOB.preferences_datums[ckey]
 	if(prefs)
@@ -638,7 +642,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(!ban_cache_start && SSban_cache?.query_started)
 		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(build_ban_cache), src)
 
-//	send_resources()
+	send_resources()
 
 
 	generate_clickcatcher()
@@ -1302,13 +1306,13 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		O.dir = D
 		switch(pos)
 			if(1)
-				O.screen_loc = "character_preview_map:1:2,2:-18"
+				O.screen_loc = "character_preview_map:2:4,4:-36"
 			if(2)
-				O.screen_loc = "character_preview_map:0:2,2:-18"
+				O.screen_loc = "character_preview_map:0:4,4:-36"
 			if(3)
-				O.screen_loc = "character_preview_map:1:2,0:10"
+				O.screen_loc = "character_preview_map:2:4,0:26"
 			if(4)
-				O.screen_loc = "character_preview_map:0:2,0:10"
+				O.screen_loc = "character_preview_map:0:4,0:26"
 
 /client/proc/clear_character_previews()
 	for(var/atom/movable/screen/S in char_render_holders)
@@ -1389,6 +1393,13 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(SSsounds.initialized == TRUE)
 		for(var/sound_path as anything in SSsounds.all_music_sounds)
 			src << load_resource(sound_path, -1)
+
+/client/proc/is_donator()
+	if(patreon?.has_access(ACCESS_ASSISTANT_RANK))
+		return TRUE
+	if(twitch?.has_access(ACCESS_TWITCH_SUB_TIER_1))
+		return TRUE
+	return FALSE
 
 #undef LIMITER_SIZE
 #undef CURRENT_SECOND

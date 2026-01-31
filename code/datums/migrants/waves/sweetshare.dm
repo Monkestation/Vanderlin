@@ -47,7 +47,7 @@
 	spawned.name = "[honorary] [prev_name]"
 
 /datum/outfit/sweetshare
-	name = "Candyman"
+	name = "Candyman (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	mask = /obj/item/clothing/face/spectacles/sglasses
 	gloves = /obj/item/clothing/gloves/fingerless

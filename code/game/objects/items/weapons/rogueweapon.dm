@@ -19,8 +19,8 @@
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = 200
-	wdefense = 3
+	max_integrity = INTEGRITY_STANDARD
+	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
 	embedding = list(
@@ -37,13 +37,12 @@
 /obj/item/weapon/Initialize(mapload)
 	. = ..()
 	if(!destroy_message)
-		var/yea = pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")
-		destroy_message = "<span class='warning'>[yea]</span>"
+		destroy_message = span_warning("[pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")]")
 
-	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0))
+	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/attack_hand(mob/user)
-	if(istype(user, /mob/living/carbon/human/species/werewolf)) //slop fix
+	if(is_species(user, /datum/species/werewolf)) //slop fix
 		return TRUE
 	. = ..()
 
@@ -106,3 +105,7 @@
 	else if(easy_dismember)
 		return probability * 1.5
 	return probability
+
+/obj/item/weapon/OnCrafted(dirin, mob/user)
+	. = ..()
+	update_integrity(max_integrity)

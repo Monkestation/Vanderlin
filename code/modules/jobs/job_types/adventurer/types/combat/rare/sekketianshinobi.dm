@@ -1,6 +1,7 @@
 /datum/job/advclass/combat/sekketianshinobi
 	title = "Sekketian Shinobi"
 	tutorial = "You belong to the Shinobi's of Sekket. An elusive order of Xylixian freedom fighters originating from the Queendom of Lakkari. You have dedicated yourself to uplifting the enslaved and oppressed, and hope to continue doing so in the lands you travel."
+	allowed_patrons = list(/datum/patron/divine/xylix)
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
 		SPEC_ID_HALF_ELF,\
@@ -45,12 +46,9 @@
 		TRAIT_MEDIUMARMOR, // so they can dodge wearing their mask, these guys dont actually spawn with medium armor, they have to EARN it.
 
 	)
-/datum/job/advclass/combat/sekketianshinobi/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.set_patron(/datum/patron/divine/xylix, TRUE)
 
 /datum/outfit/adventurer/sekketianshinobi
-	name = "Sekketian Shinobi"
+	name = "Sekketian Shinobi (Adventurer)"
 	head = /obj/item/clothing/head/helmet/leather/headscarf/colored/red
 	neck = /obj/item/clothing/neck/coif/cloth/colored/berryblue
 	mask = /obj/item/clothing/face/shellmask
@@ -61,7 +59,7 @@
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltr = /obj/item/weapon/mace/rungu/iron
+	beltr = /obj/item/weapon/mace/rungu
 	beltl = /obj/item/storage/belt/pouch //broke as hell!
 	wrists = /obj/item/clothing/wrists/gem/shellbracelet
 

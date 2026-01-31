@@ -46,12 +46,12 @@
 	throwforce = 20 // +2 from real brick for neat scaling
 	throw_speed = 4
 	armor_penetration = 30 // From iron tossblade
-	wdefense = 0
-	wbalance = 0
-	max_integrity = 50 // Don't parry with it lol
+	wdefense = BAD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
+	max_integrity = INTEGRITY_WORST / 2 //Not for parrying
 	slot_flags = ITEM_SLOT_MOUTH
 	obj_flags = null
 	w_class = WEIGHT_CLASS_TINY
-	possible_item_intents = list(/datum/intent/mace/strike) // Not giving it smash so it don't become competetive with conjure weapon (as a melee weapon)
+	possible_item_intents = list(MACE_STRIKE) // Not giving it smash so it don't become competetive with conjure weapon (as a melee weapon)
 	associated_skill = /datum/skill/combat/axesmaces // If it was tied to Arcane it'd be too strong
 	hitsound = list('sound/combat/hits/blunt/brick.ogg')

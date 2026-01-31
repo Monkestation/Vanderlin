@@ -20,6 +20,201 @@ window.onerror = function(msg, url, line, col, error) {
 };
 
 //Globals
+var messageQueue = {
+    messages: [],
+    processing: false,
+    batchSize: 10, // Process this many at once
+    batchDelay: 16, // ~60fps
+
+    add: function(message, flag) {
+        this.messages.push({message: message, flag: flag});
+        if (!this.processing) {
+            this.processing = true;
+            requestAnimationFrame(() => this.processBatch());
+        }
+    },
+
+    processBatch: function() {
+        if (this.messages.length === 0) {
+            this.processing = false;
+            return;
+        }
+
+        // Process up to batchSize messages
+        var batch = this.messages.splice(0, this.batchSize);
+        var fragment = document.createDocumentFragment();
+        var atBottom = this.checkIfAtBottom();
+
+        // Process all messages in batch
+        batch.forEach(item => {
+            var entry = this.createMessageElement(item.message, item.flag);
+            if (entry) {
+                fragment.appendChild(entry);
+            }
+        });
+
+        // Apply highlights BEFORE appending to DOM (more efficient)
+        if (window.highlightSystem && highlightSystem.filters && highlightSystem.filters.length > 0) {
+            this.batchHighlight(fragment);
+        }
+
+        // Apply linkify and other processing
+        var entries = Array.prototype.slice.call(fragment.children);
+        entries.forEach(function(entry) {
+            // Linkify
+            var to_linkify = entry.querySelectorAll ? entry.querySelectorAll('.linkify') : [];
+            if (typeof Node === 'undefined') {
+                for(var i = 0; i < to_linkify.length; ++i) {
+                    to_linkify[i].innerHTML = linkify_fallback(to_linkify[i].innerHTML);
+                }
+            } else {
+                for(var i = 0; i < to_linkify.length; ++i) {
+                    linkify_node(to_linkify[i]);
+                }
+            }
+
+            // Icon error handlers
+            var icons = entry.querySelectorAll ? entry.querySelectorAll('img.icon') : [];
+            for(var i = 0; i < icons.length; i++) {
+                icons[i].addEventListener('error', iconError);
+            }
+
+            // Replace regex
+            var replaceElements = entry.querySelectorAll ? entry.querySelectorAll('[replaceRegex]') : [];
+            for(var i = 0; i < replaceElements.length; i++) {
+                var selectedRegex = replaceRegexes[replaceElements[i].getAttribute('replaceRegex')];
+                if (selectedRegex) {
+                    var replacedText = replaceElements[i].innerHTML.replace(selectedRegex[0], selectedRegex[1]);
+                    replaceElements[i].innerHTML = replacedText;
+                }
+                replaceElements[i].removeAttribute('replaceRegex');
+            }
+        });
+
+        // Single DOM append for entire batch
+        $messages[0].appendChild(fragment);
+
+        // Cleanup old messages in one go
+        this.cleanupOldMessages();
+
+        // Handle scroll once
+        if (atBottom) {
+            this.scrollToBottom();
+        }
+
+        // Continue processing if more messages
+        if (this.messages.length > 0) {
+            setTimeout(() => requestAnimationFrame(() => this.processBatch()), this.batchDelay);
+        } else {
+            this.processing = false;
+        }
+    },
+
+    checkIfAtBottom: function() {
+        var bodyHeight = window.innerHeight;
+        var messagesHeight = $messages[0].scrollHeight;
+        var scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        return bodyHeight + scrollPos >= messagesHeight - opts.scrollSnapTolerance;
+    },
+
+    scrollToBottom: function() {
+        // Use RAF for smooth scroll
+        requestAnimationFrame(() => {
+            $('body,html').scrollTop($messages.outerHeight());
+        });
+    },
+
+    createMessageElement: function(message, flag) {
+        if (typeof message === 'undefined') return null;
+
+        message = byondDecode(message).trim();
+
+        var entry = document.createElement('div');
+        entry.innerHTML = message;
+        entry.className = 'entry';
+
+        opts.messageCount++;
+
+        // Apply filter efficiently
+        this.quickFilterCheck(entry);
+
+        return entry;
+    },
+
+    quickFilterCheck: function(entry) {
+        // Fast path for 'all' filter
+        if (opts.currentFilter === 'all') return;
+
+        // Cache class list as string for faster searching
+        var classStr = ' ' + entry.className + ' ';
+        var innerHTML = entry.innerHTML;
+
+        var shouldShow = classStr.indexOf(' ' + opts.currentFilter + ' ') !== -1 ||
+                        innerHTML.indexOf('class="' + opts.currentFilter) !== -1;
+
+        // Check custom tabs (optimized)
+        if (!shouldShow && opts.customTabs && opts.customTabs.length > 0) {
+            for (var i = 0; i < opts.customTabs.length; i++) {
+                var tab = opts.customTabs[i];
+                if (tab.name.toLowerCase() === opts.currentFilter) {
+                    for (var j = 0; j < tab.classes.length; j++) {
+                        if (classStr.indexOf(' ' + tab.classes[j] + ' ') !== -1 ||
+                            innerHTML.indexOf('class="' + tab.classes[j]) !== -1) {
+                            shouldShow = true;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (!shouldShow) {
+            entry.classList.add('filtered-hidden');
+            entry.style.display = 'none';
+        }
+    },
+
+    cleanupOldMessages: function() {
+        while (opts.messageCount > opts.messageLimit) {
+            var first = $messages[0].firstElementChild;
+            if (first) {
+                first.remove();
+                opts.messageCount--;
+            } else {
+                break;
+            }
+        }
+    },
+
+    batchHighlight: function(fragment) {
+        // Only highlight if filters are enabled
+        if (!highlightSystem || !highlightSystem.filters) return;
+
+        var enabledFilters = highlightSystem.filters.filter(f => f.enabled && f.term.trim());
+        if (enabledFilters.length === 0) return;
+
+        // Get entries - fragment is not yet in DOM so we need to iterate its children
+        var entries;
+        if (fragment.children) {
+            entries = Array.prototype.slice.call(fragment.children);
+        } else if (fragment.childNodes) {
+            entries = Array.prototype.filter.call(fragment.childNodes, function(node) {
+                return node.nodeType === 1; // Element nodes only
+            });
+        } else {
+            return;
+        }
+
+        // Apply highlights to each entry
+        entries.forEach(function(entry) {
+            if (entry && entry.nodeType === 1) {
+                highlightSystem.highlightElement(entry);
+            }
+        });
+    }
+};
+
 var highlightSystem = {
     filters: [], // Array of {term: string, color: string, animation: string, enabled: boolean, id: string, soundEnabled: boolean}
     animations: {
@@ -579,12 +774,18 @@ var highlightSystem = {
 
     // Recursively highlight text nodes
     highlightTextNodes: function(element, filters) {
+        // Build combined regex for all filters at once
+        var terms = filters.map(f => this.escapeRegex(f.term)).join('|');
+        if (!terms) return;
+
+        var regex = new RegExp('(' + terms + ')', 'gi');
+
+        // Use faster tree walker
         var walker = document.createTreeWalker(
             element,
             NodeFilter.SHOW_TEXT,
             {
                 acceptNode: function(node) {
-                    // Skip if parent is already highlighted or is a script/style tag
                     var parent = node.parentNode;
                     if (parent.classList && parent.classList.contains('highlight-filter')) {
                         return NodeFilter.FILTER_REJECT;
@@ -592,7 +793,14 @@ var highlightSystem = {
                     if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') {
                         return NodeFilter.FILTER_REJECT;
                     }
-                    return NodeFilter.FILTER_ACCEPT;
+                    // Quick check if text contains any terms
+                    var text = node.textContent.toLowerCase();
+                    for (var i = 0; i < filters.length; i++) {
+                        if (text.indexOf(filters[i].term) !== -1) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                    }
+                    return NodeFilter.FILTER_REJECT;
                 }
             },
             false
@@ -600,13 +808,37 @@ var highlightSystem = {
 
         var textNodes = [];
         var node;
+        var maxNodes = 100; // Safety limit
+        var count = 0;
+
         while (node = walker.nextNode()) {
             textNodes.push(node);
+            if (++count > maxNodes) break;
         }
 
-        textNodes.forEach(textNode => {
-            this.highlightTextNode(textNode, filters);
-        });
+        // Process in chunks to avoid blocking
+        if (textNodes.length > 10) {
+            this.highlightInChunks(textNodes, filters, 0);
+        } else {
+            textNodes.forEach(textNode => {
+                this.highlightTextNode(textNode, filters);
+            });
+        }
+    },
+
+    highlightInChunks: function(textNodes, filters, index) {
+        var chunkSize = 5;
+        var end = Math.min(index + chunkSize, textNodes.length);
+
+        for (var i = index; i < end; i++) {
+            this.highlightTextNode(textNodes[i], filters);
+        }
+
+        if (end < textNodes.length) {
+            requestAnimationFrame(() => {
+                this.highlightInChunks(textNodes, filters, end);
+            });
+        }
     },
 
     // Highlight matches in a single text node
@@ -1050,12 +1282,6 @@ if (document.readyState === 'loading') {
     highlightSystem.init();
 }
 
-// Integration with existing highlight system
-function enhancedHighlightTerms(element) {
-    highlightSystem.highlightElement(element);
-}
-
-
 window.status = 'Output';
 var $messages, $subOptions, $subAudio, $selectedSub, $contextMenu, $filterMessages, $last_message;
 var opts = {
@@ -1305,18 +1531,16 @@ function output(message, flag) {
         flag = '';
     }
 
-    if (flag !== 'internal')
-        opts.lastPang = Date.now();
+    if (flag !== 'internal') opts.lastPang = Date.now();
 
-    message = byondDecode(message).trim();
+    // Send to WebSocket if available
+    if (flag !== 'internal' && typeof window.WebSocketManager !== 'undefined') {
+        try {
+            var tempDiv = document.createElement('div');
+            tempDiv.innerHTML = byondDecode(message).trim();
+            var plainText = tempDiv.textContent || tempDiv.innerText || "";
 
-	 if (flag !== 'internal' && typeof window.WebSocketManager !== 'undefined') {
-        // Extract plain text for WebSocket transmission
-        var tempDiv = document.createElement('div');
-        tempDiv.innerHTML = message;
-        var plainText = tempDiv.textContent || tempDiv.innerText || "";
-
-		var payload = JSON.stringify({
+            var payload = JSON.stringify({
                 content: {
                     html: message,
                     text: plainText,
@@ -1325,112 +1549,14 @@ function output(message, flag) {
                 }
             });
 
-        // Send through WebSocket
-        window.WebSocketManager.sendMessage('chat/message', payload);
-    }
-
-
-    var filteredOut = false;
-    var atBottom = false;
-    if (!filteredOut) {
-        var bodyHeight = window.innerHeight;
-		var messagesHeight = $messages[0].scrollHeight;
-		var scrollPos = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (bodyHeight + scrollPos >= messagesHeight - opts.scrollSnapTolerance) {
-            atBottom = true;
-            if ($('#newMessages').length) {
-                $('#newMessages').remove();
-            }
-        } else {
-            if ($('#newMessages').length) {
-                var messages = $('#newMessages .number').text();
-                messages = parseInt(messages);
-                messages++;
-                $('#newMessages .number').text(messages);
-                if (messages == 2) {
-                    $('#newMessages .messageWord').append('s');
-                }
-            } else {
-                $messages.after('<a href="#" id="newMessages"><span class="number">1</span> new <span class="messageWord">message</span> <i class="icon-double-angle-down"></i></a>');
-            }
+            window.WebSocketManager.sendMessage('chat/message', payload);
+        } catch (e) {
+            console.warn('WebSocket send failed:', e);
         }
     }
 
-    opts.messageCount++;
-
-    if (opts.messageCount >= opts.messageLimit) {
-        $messages.children('div.entry:first-child').remove();
-        opts.messageCount--;
-    }
-
-    var entry = document.createElement('div');
-    entry.innerHTML = message;
-    var trimmed_message = entry.textContent || entry.innerText || "";
-
-    var handled = false;
-    if (opts.messageCombining) {
-        var lastmessages = $messages.children('div.entry:last-child').last();
-        if (lastmessages.length && $last_message && $last_message == trimmed_message) {
-            var badge = lastmessages.children('.r').last();
-            if (badge.length) {
-                badge = badge.detach();
-                badge.text(parseInt(badge.text()) + 1);
-            } else {
-                badge = $('<span/>', {'class': 'r', 'text': 2});
-            }
-            lastmessages.html(message);
-            lastmessages.find('[replaceRegex]').each(replaceRegex);
-            lastmessages.append(badge);
-            badge.animate({
-                "font-size": "0.9em"
-            }, 100, function() {
-                badge.animate({
-                    "font-size": "0.7em"
-                }, 100);
-            });
-            opts.messageCount--;
-            handled = true;
-        }
-    }
-
-    if (!handled) {
-        entry.className = 'entry';
-
-        if (filteredOut) {
-            entry.className += ' hidden';
-            entry.setAttribute('data-filter', filteredOut);
-        }
-
-        // Apply current filter to new message AFTER it's been added to DOM
-        $last_message = trimmed_message;
-        $messages[0].appendChild(entry);
-
-        // Now apply the filter - but don't interfere with existing classes
-        applyFilterToMessage(entry);
-
-        $(entry).find('[replaceRegex]').each(replaceRegex);
-        $(entry).find("img.icon").error(iconError);
-
-        var to_linkify = $(entry).find(".linkify");
-        if (typeof Node === 'undefined') {
-            for(var i = 0; i < to_linkify.length; ++i) {
-                to_linkify[i].innerHTML = linkify_fallback(to_linkify[i].innerHTML);
-            }
-        } else {
-            for(var i = 0; i < to_linkify.length; ++i) {
-                linkify_node(to_linkify[i]);
-            }
-        }
-
-         if (highlightSystem.filters && highlightSystem.filters.length > 0) {
-			enhancedHighlightTerms(entry);
-		}
-    }
-
-    if (!filteredOut && atBottom) {
-        $('body,html').scrollTop($messages.outerHeight());
-    }
+    // Add to queue instead of processing immediately
+    messageQueue.add(message, flag);
 }
 
 
@@ -1798,60 +1924,57 @@ function applyFilterToMessage(messageElement) {
 
     var shouldShow = false;
 
-    // Always show if filter is 'all'
+    // Fast path
     if (opts.currentFilter === 'all') {
         shouldShow = true;
     } else {
-        // Get classes from the message element itself
-        var classes = messageElement.className ? messageElement.className.split(' ') : [];
+        // Check cache first
+        var cacheKey = messageElement.className + messageElement.innerHTML.substring(0, 100);
+        if (filterCache.has(cacheKey)) {
+            shouldShow = filterCache.get(cacheKey);
+        } else {
+            // Compute and cache
+            var classes = messageElement.className.split(' ');
+            var innerHTML = messageElement.innerHTML;
 
-        // Also check for classes in nested elements (where the actual chat classes like 'say', 'ooc', etc. are)
-        var nestedElements = messageElement.querySelectorAll('*');
-        var allClasses = [...classes];
+            shouldShow = classes.indexOf(opts.currentFilter) !== -1 ||
+                        innerHTML.indexOf('class="' + opts.currentFilter) !== -1;
 
-        for (var i = 0; i < nestedElements.length; i++) {
-            if (nestedElements[i].className) {
-                var nestedClasses = nestedElements[i].className.split(' ');
-                allClasses = allClasses.concat(nestedClasses);
-            }
-        }
-
-        // Remove duplicates and filter out empty strings
-        allClasses = [...new Set(allClasses)].filter(cls => cls.trim() !== '');
-
-        // Check if message has the required class for built-in filters
-        if (allClasses.includes(opts.currentFilter)) {
-            shouldShow = true;
-        }
-
-        // Check custom tabs
-        if (!shouldShow && opts.customTabs && opts.customTabs.length > 0) {
-            opts.customTabs.forEach(tab => {
-                if (tab.name.toLowerCase() === opts.currentFilter.toLowerCase()) {
-                    tab.classes.forEach(cls => {
-                        if (allClasses.includes(cls)) {
-                            shouldShow = true;
+            if (!shouldShow && opts.customTabs) {
+                for (var i = 0; i < opts.customTabs.length; i++) {
+                    var tab = opts.customTabs[i];
+                    if (tab.name.toLowerCase() === opts.currentFilter) {
+                        for (var j = 0; j < tab.classes.length; j++) {
+                            if (classes.indexOf(tab.classes[j]) !== -1 ||
+                                innerHTML.indexOf('class="' + tab.classes[j]) !== -1) {
+                                shouldShow = true;
+                                break;
+                            }
                         }
-                    });
+                        break;
+                    }
                 }
-            });
+            }
+
+            // Cache result
+            filterCache.set(cacheKey, shouldShow);
         }
     }
 
-    // Apply visibility WITHOUT removing existing classes
+    // Apply visibility
     if (shouldShow) {
-        // Remove hidden class and clear display style
         messageElement.classList.remove('filtered-hidden');
         if (messageElement.style.display === 'none') {
             messageElement.style.display = '';
         }
     } else {
-        // Add our own hidden class instead of 'hidden'
         messageElement.classList.add('filtered-hidden');
         messageElement.style.display = 'none';
     }
 }
 
+
+var filterCache = new Map();
 
 function switchFilter(filterName) {
     console.log('Switching to filter:', filterName);
@@ -1861,9 +1984,17 @@ function switchFilter(filterName) {
     $('.filter-tab').removeClass('active');
     $(`.filter-tab[data-filter="${filterName.toLowerCase()}"]`).addClass('active');
 
-    // Apply filter to all messages
-    $('#messages .entry').each(function() {
-        applyFilterToMessage(this);
+    // Clear cache when switching filters
+    filterCache.clear();
+
+    // Use DocumentFragment for better performance
+    var entries = document.querySelectorAll('#messages .entry');
+
+    // Batch DOM updates
+    requestAnimationFrame(() => {
+        entries.forEach(entry => {
+            applyFilterToMessage(entry);
+        });
     });
 
     setCookie('currentFilter', filterName, 365);
@@ -2207,6 +2338,7 @@ function handleToggleClick($sub, $toggle) {
 		opts.selectedSubLoop = startSubLoop();
 	}
 }
+
 
 /*****************************************
 *

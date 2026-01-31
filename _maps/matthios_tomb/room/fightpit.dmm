@@ -546,7 +546,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "UQ" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "VC" = (
 /obj/structure/rack/shelf/big,

@@ -15,6 +15,7 @@
 
 GLOBAL_LIST_INIT(cached_building_images, list())
 
+// Places a building map template. For a single atom, use /datum/building_datum/simple instead.
 /datum/building_datum
 	var/mob/camera/strategy_controller/master
 	var/name = "Generic Name"
@@ -85,12 +86,12 @@ GLOBAL_LIST_INIT(cached_building_images, list())
 		if(resource_cost[resource])
 			has_cost = TRUE
 			break
-
-	if(has_cost && !user.resource_stockpile)
+	if(!has_cost)
+		return TRUE
+	if(!user.resource_stockpile)
 		return FALSE
-	if(has_cost)
-		if(!user.resource_stockpile?.has_resources(resource_cost))
-			return
+	if(!user.resource_stockpile?.has_resources(resource_cost))
+		return FALSE
 	return TRUE
 
 /datum/building_datum/proc/try_place_building(mob/camera/strategy_controller/user, turf/placed_turf)
@@ -165,9 +166,8 @@ GLOBAL_LIST_INIT(cached_building_images, list())
 	template.load(center_turf, TRUE)
 
 	for(var/turf/place_on as anything in template.get_affected_turfs(center_turf ,centered = TRUE))
-		for(var/obj/effect/building_node/effect in place_on.contents)
-			var/obj/effect/building_node/node = effect
-			node.on_construction(master)
+		for(var/obj/effect/building_node/effect in place_on)
+			effect.on_construction(master)
 
 	after_construction()
 	master.building_requests -= src

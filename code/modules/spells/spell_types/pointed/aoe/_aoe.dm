@@ -7,21 +7,19 @@
 /datum/action/cooldown/spell/aoe
 	/// The max amount of targets we can affect via our AOE. 0 = unlimited
 	var/max_targets = 0
+	/// Should we shuffle the targets lift after getting them via get_things_to_cast_on?
+	var/shuffle_targets_list = FALSE
 	/// The radius of the aoe.
 	var/aoe_radius = 7
-	/// If each "level" is staggered
-	var/staggered = FALSE
-	/// Amount to delay each level's cast by
-	var/stagger_delay = 2 DECISECONDS
 
 // At this point, cast_on == owner. Either works.
 /datum/action/cooldown/spell/aoe/cast(atom/cast_on)
 	. = ..()
 	// Get every atom around us to our aoe cast on
 	var/list/things_to_cast_on = get_things_to_cast_on(cast_on)
-	// If we have a target limit, shuffle it (for fariness)
-	if(max_targets > 0)
-		things_to_cast_on = shuffle(things_to_cast_on)
+	// If set, shuffle the list of things we're going to cast on to remove any existing order
+	if(shuffle_targets_list)
+		shuffle_inplace(things_to_cast_on)
 
 	if(!length(things_to_cast_on))
 		feedback(FALSE)
@@ -31,8 +29,6 @@
 
 	SEND_SIGNAL(src, COMSIG_SPELL_AOE_ON_CAST, things_to_cast_on, cast_on)
 
-	var/turf/center = get_turf(cast_on)
-
 	// Now go through and cast our spell where applicable
 	var/num_targets = 0
 	for(var/thing_to_target in things_to_cast_on)
@@ -41,14 +37,7 @@
 
 		num_targets++
 
-		if(staggered)
-			var/level = get_dist(thing_to_target, center)
-			if(level < 0)
-				level++
-			addtimer(CALLBACK(src, PROC_REF(cast_on_thing_in_aoe), thing_to_target, center), stagger_delay + (level * stagger_delay))
-			continue
-
-		if(cast_on_thing_in_aoe(thing_to_target, center))
+		if(cast_on_thing_in_aoe(thing_to_target, cast_on))
 			break
 
 /datum/action/cooldown/spell/aoe/is_valid_target(atom/cast_on)

@@ -3,8 +3,8 @@
 	desc = ""
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "tongs"
-	force = 5
-	possible_item_intents = list(/datum/intent/mace/strike)
+	force = DAMAGE_CLUB / 3
+	possible_item_intents = list(MACE_STRIKE)
 	sharpness = IS_BLUNT
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
@@ -76,7 +76,7 @@
 
 /obj/item/weapon/tongs/pre_attack(obj/item/A, mob/living/user, params)
 	if(held_item?.tong_interaction(A, user))
-		return
+		return TRUE
 
 	if(!istype(A))
 		return ..()
@@ -87,7 +87,7 @@
 			held_item = A
 			A.forceMove(src)
 			update_appearance(UPDATE_ICON_STATE)
-			return
+			return TRUE
 	return ..()
 
 /obj/item/weapon/tongs/getonmobprop(tag)
@@ -105,7 +105,7 @@
 	force = 3
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = 20
+	max_integrity = INTEGRITY_WORST / 5
 
 /atom/proc/tong_interaction(atom/target, mob/user)
 	return FALSE

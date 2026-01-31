@@ -4,12 +4,12 @@
 	faction = "Station"
 	total_positions = 2 // TWO GOONS!!
 	spawn_positions = 2
-	allowed_races = RACES_PLAYER_GRENZ
+	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF)
 	bypass_lastclass = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor2.ogg'
 	allowed_patrons = list(
 		/datum/patron/psydon
-	)
+	) // no extremist psydon because you've been brought up right
 
 	tutorial = "A student of the Oratorium in training to become a full Inquisitor. You’ve come here under the stern gaze of the Herr Präfekt to prove your wits and skill. This is your week. You’re going to take your place among the blades of Psydon."
 	selection_color = JCOLOR_INQUISITION
@@ -25,10 +25,13 @@
 	same_job_respawn_delay = 30 MINUTES
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
-	exp_types_granted  = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
 	exp_requirements = list(
 		EXP_TYPE_INQUISITION = 120
 	)
@@ -53,4 +56,4 @@
 		species.accent_language = species.get_accent(species.native_language)
 
 /datum/job/advclass/sacrestant
-	exp_types_granted  = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)

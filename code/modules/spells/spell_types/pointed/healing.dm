@@ -64,7 +64,7 @@
 	if(isliving(owner))
 		var/mob/living/living_owner = owner
 		switch(living_owner.patron?.type)
-			if(/datum/patron/psydon)
+			if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 				cast_on.visible_message(span_info("A strange stirring feeling pours from [cast_on]!"), span_notice("Sentimental thoughts drive away my pains!"))
 
 			if(/datum/patron/divine/astrata)
@@ -192,11 +192,12 @@
 					return
 				cast_on.visible_message(span_info("A choral sound comes from above and [cast_on] is healed!"), span_notice("I am bathed in healing choral hymns!"))
 	var/amount_healed = base_healing
-	
+
 	if(conditional_buff)
 		to_chat(owner, span_greentext("Channeling my patron's power is easier in these conditions!"))
 		amount_healed += situational_bonus
 
+	SEND_SIGNAL(owner, COMSIG_LIVING_HEALED_OTHER, amount_healed)
 	cast_on.adjustToxLoss(-amount_healed)
 	cast_on.adjustOxyLoss(-amount_healed)
 	cast_on.blood_volume += blood_restoration

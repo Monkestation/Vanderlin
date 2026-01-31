@@ -95,7 +95,7 @@
 
 /obj/item/reagent_containers/food/snacks/rotten/mince/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/mess/rotting/get_turf(src)
-	playsound(get_turf(src), 'sound/foley/meatslap.ogg', 100, TRUE, -1)
+	playsound(src, 'sound/foley/meatslap.ogg', 100, TRUE, -1)
 	..()
 	qdel(src)
 
@@ -157,7 +157,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "bowl"
 	fill_icon_thresholds = list(0, 30, 50, 100)
-	reagent_flags = TRANSFERABLE | AMOUNT_VISIBLE
+	reagent_flags = OPENCONTAINER
 	force = 5
 	throwforce = 5
 	amount_per_transfer_from_this = 5
@@ -262,7 +262,7 @@
 		if(particle_spewer)
 			qdel(particle_spewer)
 		update_appearance(UPDATE_OVERLAYS)
-	playsound(get_turf(src), 'sound/misc/eat.ogg', rand(30, 60), TRUE)
+	playsound(src, 'sound/misc/eat.ogg', rand(30, 60), TRUE)
 	user.visible_message(span_info("[user] eats from [src]."), \
 			span_notice("I swallow a gulp of [src]."))
 	addtimer(CALLBACK(reagents, TYPE_PROC_REF(/datum/reagents, trans_to), user, min(amount_per_transfer_from_this, 5), TRUE, TRUE, FALSE, user, FALSE, INGEST), 5 DECISECONDS)
@@ -374,7 +374,7 @@
 
 /obj/item/reagent_containers/glass/bowl/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/shreds/clay(get_turf(src))
-	playsound(get_turf(src), 'sound/foley/break_clay.ogg', 90, TRUE)
+	playsound(src, 'sound/foley/break_clay.ogg', 90, TRUE)
 	..()
 	qdel(src)
 
@@ -566,7 +566,7 @@
 
 /datum/reagent/flour/on_mob_life(mob/living/carbon/M)
 	if(prob(30))
-		M.confused = max(M.confused + 3, 0)
+		M.adjust_confusion(6 SECONDS)
 	M.emote(pick("cough"))
 	..()
 
