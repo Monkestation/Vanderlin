@@ -74,6 +74,10 @@
 	. = ..()
 	infection = min(infection, max_infection * BBC_STAGE_DETECTABLE)
 	infection_percent = min(infection_percent, BBC_STAGE_DETECTABLE)
+	if(affected.owner && HAS_TRAIT(affected.owner, TRAIT_NO_BRIAR_DEATH))
+		max_infection = 1
+		infection = 1
+		infection_percent = 1
 
 /datum/wound/black_briar_curse/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -102,7 +106,7 @@
 	. = ..()
 	// No, this will not correlate to dungeon or island waits. But it's expensive to check, so we're gonna deal with asynced rate.
 	infection = clamp(infection + (rand(20, 25) - owner.STAEND) * (SSmobs.wait * 0.1) , 0, max_infection)
-	if(length(root_network) < 2) // we can't get worse without a limb being infected
+	if(length(root_network) < 2 && !HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH)) // we can't get worse without a limb being infected
 		infection = min(infection, max_infection * BBC_STAGE_LATE - 1)
 	infection_percent = min(infection / max_infection, 1)
 
@@ -227,7 +231,7 @@
 	if(!.)
 		return
 	owner.adjust_energy((owner.STAEND - 20) * (SSmobs.wait * 0.1) * infection_percent)
-	if(infection_percent >= 1)
+	if(infection_percent >= 1 && !HAS_TRAIT(owner, TRAIT_NODEATH) && !HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH))
 		if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
 			to_chat(owner, span_briar("IT HURTS! IT HURTS!"))
 			if(prob(80))
@@ -321,6 +325,10 @@
 	if(infection_percent >= BBC_STAGE_LATE ^ insane) // this flips if these dont match up
 		owner.refresh_looping_ambience()
 		insane = !insane
+	if(insane && prob((owner.ckey ? 1 : 5)))
+		owner.emote(pick("laugh", "agony", "firescream"))
+	if(HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH))
+		return
 	if(infection_percent >= BBC_STAGE_DETECTABLE && prob(3 * infection_percent))
 		owner.set_eye_blur_if_lower(rand(3, 6) SECONDS)
 		owner.stuttering = max(owner.stuttering, 10)
@@ -332,6 +340,8 @@
 /datum/wound/black_briar_curse/arm/on_life()
 	. = ..()
 	if(!.)
+		return
+	if(HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH))
 		return
 	if(infection_percent >= BBC_STAGE_LATE ^ disabling) // if these two are synced up, we dont need to call
 		disabling = !disabling
@@ -372,7 +382,7 @@
 		other = WR?.resolve()
 		other?.too_slow = TRUE
 		var/immobilizing = HAS_TRAIT_FROM(owner, TRAIT_IMMOBILIZED, "[type]")
-		if(other?.infection_percent >= 1 && infection_percent >= 1 && !HAS_TRAIT(owner, TRAIT_NO_IMMOBILIZE))
+		if(!HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH) && other?.infection_percent >= 1 && infection_percent >= 1 && !HAS_TRAIT(owner, TRAIT_NO_IMMOBILIZE))
 			if(!immobilizing)
 				ADD_TRAIT(owner, TRAIT_IMMOBILIZED, "[type]")
 		else if(immobilizing)

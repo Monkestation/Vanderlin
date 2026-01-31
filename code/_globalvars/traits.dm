@@ -177,6 +177,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Host of the Black Briar" = TRAIT_BLACK_BRIAR,
+		"NO_BRIAR_DEATH" = TRAIT_NO_BRIAR_DEATH,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS

@@ -7,6 +7,7 @@
 	name = "Unknown"
 	density = TRUE
 	anchored = TRUE
+	var/patron = null
 	var/mob_type = null
 	var/mob_name = ""
 	var/mob_gender = null
@@ -80,10 +81,11 @@
 			mob_gender = pick(MALE, FEMALE)
 		M.gender = mob_gender
 	if(faction)
-		M.faction = list(faction)
+		M.faction |= list(faction)
 	if(death)
 		M.death(1) //Kills the new mob
-
+	if(patron)
+		M.set_patron(patron)
 	M.adjustOxyLoss(oxy_damage)
 	M.take_overall_damage(brute_damage, burn_damage)
 	M.color = mob_color
@@ -135,9 +137,16 @@
 	var/mask = -1
 	var/head = -1
 	var/belt = -1
+	var/beltl = -1
+	var/beltr = -1
+	var/ring = -1
 	var/r_pocket = -1
 	var/l_pocket = -1
 	var/back = -1
+	var/cloak = -1
+	var/backl = -1
+	var/backr = -1
+	var/shirt = -1
 	var/id = -1
 	var/neck = -1
 	var/backpack_contents = -1
@@ -182,17 +191,40 @@
 	H.update_body()
 	H.update_body_parts()
 	if(outfit)
-		var/static/list/slots = list("uniform", "r_hand", "l_hand", "suit", "shoes", "gloves", "ears", "glasses", "mask", "head", "belt", "r_pocket", "l_pocket", "back", "id", "neck", "backpack_contents", "suit_store")
+		var/static/list/slots = list("uniform", "r_hand", "l_hand", "suit", "shoes", "gloves", "ears", "glasses", "mask", "head", "belt", "r_pocket", "l_pocket", "back", "id", "neck", "backpack_contents", "suit_store", "ring", "beltl", "beltr", "backl", "backr", "cloak", "shirt")
 		for(var/slot in slots)
 			var/T = vars[slot]
 			if(!isnum(T))
 				outfit.vars[slot] = T
 		H.equipOutfit(outfit)
 
+/obj/effect/mob_spawn/human/briar
+	death = FALSE
+	faction = "briar"
+
+/obj/effect/mob_spawn/human/briar/equip(mob/living/carbon/human/H)
+	. = ..()
+	var/obj/item/bodypart/ch = H.get_bodypart()
+	if(!ch)
+		return
+	ADD_TRAIT(H, TRAIT_NO_BRIAR_DEATH, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_BLOODLOSS_IMMUNE, TRAIT_GENERIC)
+	ch.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
+	var/obj/item/organ/O = H.getorganslot(ORGAN_SLOT_TONGUE)
+	if(O)
+		qdel(O)
+	H.job = "Afflicted"
+
+
 //Instant version - use when spawning corpses during runtime
 /obj/effect/mob_spawn/human/corpse
 	roundstart = FALSE
 	instant = TRUE
+
+/obj/effect/mob_spawn/human/corpse/equip(mob/living/carbon/human/H)
+	. = ..()
+	H.setDir(pick(NORTH, SOUTH, EAST, WEST))
 
 /obj/effect/mob_spawn/human/corpse/damaged
 	brute_damage = 1000

@@ -37,6 +37,19 @@
 /obj/structure/stockpile_storage/food,
 /turf/open/floor/cobblerock,
 /area)
+"A" = (
+/obj/effect/mob_spawn/human/briar{
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
+	name = "captain";
+	assignedrole = /datum/job/captain;
+	outfit = /datum/outfit/captain;
+	r_hand = /obj/item/weapon/sword/long/exe/cloth;
+	beltl = null;
+	beltr = null;
+	ring = /obj/item/clothing/ring/gold/ravox
+	},
+/turf/open/floor/cobblerock,
+/area)
 "G" = (
 /obj/effect/landmark/start/adventurerlate,
 /obj/effect/landmark/latejoin,
@@ -362,7 +375,7 @@ u
 u
 u
 u
-u
+A
 u
 u
 u
