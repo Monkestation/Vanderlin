@@ -177,8 +177,9 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		produce_list |= I
 
 	if(I.atom_storage)
-		produce_list |= I.contents
-		storage_list |= I.contents
+		var/list/obj/item/items = I.atom_storage.return_inv()
+		produce_list |= items
+		storage_list |= items
 
 	var/dumps = FALSE
 	for(var/obj/item/reagent_containers/food/snacks/G in produce_list)
