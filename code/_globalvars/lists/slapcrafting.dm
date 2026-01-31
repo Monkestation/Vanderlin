@@ -83,7 +83,7 @@ GLOBAL_LIST_EMPTY(slapcraft_recipes)
 GLOBAL_LIST_INIT(orderless_slapcraft_recipes, init_orderless_slapcraft_recipes())
 
 /proc/init_orderless_slapcraft_recipes()
-	var/list/recipe_list = GLOB.orderless_slapcraft_recipes
+	var/list/recipe_list = list()
 	for(var/datum/type as anything in typesof(/datum/orderless_slapcraft))
 		if(IS_ABSTRACT(type))
 			continue
@@ -92,11 +92,12 @@ GLOBAL_LIST_INIT(orderless_slapcraft_recipes, init_orderless_slapcraft_recipes()
 		if(!(recipe.starting_item in recipe_list))
 			recipe_list[recipe.starting_item] = list()
 		recipe_list[recipe.starting_item] |= recipe
+	return recipe_list
 
 GLOBAL_LIST_INIT(repeatable_crafting_recipes, init_crafting_repeatable_recipes())
 
 /proc/init_crafting_repeatable_recipes()
-	var/list/recipe_list = GLOB.repeatable_crafting_recipes
+	var/list/recipe_list = list()
 	for(var/datum/type as anything in typesof(/datum/repeatable_crafting_recipe))
 		if(IS_ABSTRACT(type))
 			continue
@@ -105,3 +106,4 @@ GLOBAL_LIST_INIT(repeatable_crafting_recipes, init_crafting_repeatable_recipes()
 		if(!(recipe.starting_atom in recipe_list))
 			recipe_list[recipe.starting_atom] = list()
 		recipe_list[recipe.starting_atom] |= recipe
+	return recipe_list
