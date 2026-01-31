@@ -32,10 +32,10 @@
 			if("fatigue")
 				used = 'sound/vo/male/gen/fatigue.ogg'
 			if("firescream")
-				if(prob(5))
-					used = 'sound/vo/male/gen/firescream (4).ogg' //it burns!
-				else
-					used = list('sound/vo/male/gen/firescream (1).ogg','sound/vo/male/gen/firescream (2).ogg','sound/vo/male/gen/firescream (3).ogg')
+				//if(prob(5))
+				//	used = 'sound/vo/male/gen/firescream (4).ogg' //it burns!
+				//else
+				used = list('sound/vo/male/gen/firescream (1).ogg','sound/vo/male/gen/firescream (2).ogg','sound/vo/male/gen/firescream (3).ogg')
 			if("gag")
 				used = list('sound/vo/male/gen/gag (1).ogg','sound/vo/male/gen/gag (2).ogg','sound/vo/male/gen/gag (3).ogg')
 			if("gasp")

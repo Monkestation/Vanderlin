@@ -6038,6 +6038,22 @@
 /obj/structure/vine/black_briar,
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/magician)
+"dBT" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/effect/mob_spawn/human/briar{
+	name = "zizo knight";
+	mob_species = list(/datum/species/elf/dark);
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
+	outfit = /datum/outfit/wretch/heretic;
+	gender = "female";
+	possible_ages = list("Adult");
+	mob_gender = "female";
+	patron = /datum/patron/inhumen/zizo;
+	backr = null;
+	r_hand = /obj/item/weapon/sword/long/greatsword/zizo
+	},
+/turf/open/floor/wood,
+/area/indoors/town/magician)
 "dBV" = (
 /turf/open/floor/dirt,
 /area/indoors/town)
@@ -23908,8 +23924,8 @@
 	beltl = null;
 	beltr = null;
 	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Dame Sygiran";
-	mob_gender = "female"
+	mob_name = "Sir Guileran";
+	mob_gender = "male"
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town/roofs)
@@ -38536,6 +38552,21 @@
 "wWW" = (
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/shop)
+"wXb" = (
+/obj/effect/mob_spawn/human/briar{
+	name = "zizo knight";
+	mob_species = list(/datum/species/elf/dark);
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
+	outfit = /datum/outfit/wretch/heretic;
+	gender = "female";
+	possible_ages = list("Adult");
+	mob_gender = "female";
+	patron = /datum/patron/inhumen/zizo;
+	backr = null;
+	r_hand = /obj/item/weapon/sword/long/greatsword/zizo
+	},
+/turf/open/floor/cobble,
+/area/outdoors/town/roofs)
 "wXe" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/tile/masonic/single,
@@ -171780,7 +171811,7 @@ kZb
 kZb
 kZb
 kZb
-nZd
+dBT
 rFY
 jBy
 nLH
@@ -221485,7 +221516,7 @@ fEe
 bGn
 fEe
 uWt
-uWt
+wXb
 uWt
 uWt
 uWt
