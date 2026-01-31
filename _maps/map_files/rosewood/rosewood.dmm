@@ -5622,14 +5622,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/garrison)
-"dqw" = (
-/obj/structure/bed/wool,
-/obj/item/bedsheet/cloth,
-/obj/effect/landmark/start/villager{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town)
 "dqz" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
@@ -16156,7 +16148,8 @@
 /area/indoors/town)
 "jOI" = (
 /obj/effect/mapping_helpers/structure/breaker,
-/turf/closed/wall/window,
+/obj/structure/window,
+/turf/open/floor/cobble,
 /area/indoors/town/bath)
 "jPo" = (
 /obj/structure/fluff/walldeco/painting/castle{
@@ -19912,10 +19905,6 @@
 "mcU" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/bottle/whitewine,
-/obj/item/reagent_containers/glass/bottle/whitewine{
-	pixel_x = 8;
-	pixel_y = -5
-	},
 /obj/item/reagent_containers/glass/cup/glassware/wineglass{
 	pixel_x = 13;
 	pixel_y = 12
@@ -24354,9 +24343,6 @@
 /obj/structure/stairs{
 	dir = 4
 	},
-/obj/structure/fluff/walldeco/bigpainting/lake{
-	pixel_x = -4
-	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "owZ" = (
@@ -26161,14 +26147,6 @@
 /obj/structure/flora/grass/herb/cursedrosa/spreader/large/heavy,
 /turf/open/floor/grass/cold,
 /area/outdoors/town)
-"pEg" = (
-/obj/structure/bed/wool,
-/obj/item/bedsheet/cloth,
-/obj/effect/landmark/start/lumberjack{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town)
 "pEF" = (
 /obj/structure/chair/stool,
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -26962,9 +26940,9 @@
 	pixel_x = 2;
 	pixel_y = 12
 	},
-/obj/item/reagent_containers/glass/carafe/gold/redwine{
-	pixel_y = 4;
-	pixel_x = 11
+/obj/item/reagent_containers/glass/carafe/gold{
+	pixel_x = 9;
+	pixel_y = 4
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor)
@@ -27715,7 +27693,7 @@
 /area/outdoors/town)
 "qAS" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/glass/carafe/silver/redwine,
+/obj/item/reagent_containers/glass/carafe/silver,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town)
 "qAV" = (
@@ -30228,9 +30206,9 @@
 	pixel_x = -4;
 	pixel_y = 7
 	},
-/obj/item/reagent_containers/glass/carafe/gold/redwine{
-	pixel_y = 6;
-	pixel_x = 9
+/obj/item/reagent_containers/glass/carafe/gold{
+	pixel_x = 8;
+	pixel_y = 7
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor)
@@ -33607,11 +33585,6 @@
 	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
 	outfit = /datum/outfit/npc/light_gear
 	},
-/obj/effect/mob_spawn/human/corpse/damaged{
-	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
-	outfit = /datum/outfit/npc/light_gear
-	},
 /turf/open/floor/cobblerock,
 /area/indoors/town/clinic_large)
 "tWw" = (
@@ -33636,20 +33609,6 @@
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
-"tXH" = (
-/obj/effect/mob_spawn/human/corpse/damaged{
-	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
-	outfit = /datum/outfit/npc/light_gear
-	},
-/obj/effect/mob_spawn/human/corpse/damaged{
-	name = "elf light gear";
-	mob_species = list(/datum/species/elf/snow, /datum/species/human/halfelf);
-	outfit = /datum/outfit/npc/light_gear
-	},
-/obj/effect/gibspawner/human,
-/turf/open/floor/cobble,
-/area/outdoors/town)
 "tYb" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/cobblerock/snow,
@@ -35992,7 +35951,8 @@
 /turf/open/floor/tile,
 /area/indoors/town)
 "vpS" = (
-/turf/closed/wall/window,
+/obj/structure/window,
+/turf/open/floor/cobble,
 /area/indoors/town/bath)
 "vqa" = (
 /turf/closed/wall/mineral/craftstone,
@@ -90387,9 +90347,9 @@ aML
 aML
 rdQ
 aML
-dqw
+fnp
 bFq
-dqw
+fnp
 aML
 qJl
 qJl
@@ -91004,7 +90964,7 @@ pAI
 aML
 fyS
 bFq
-dqw
+fnp
 aML
 qJl
 qJl
@@ -92817,7 +92777,7 @@ omp
 aML
 nmy
 bFq
-pEg
+fnp
 aML
 qJl
 qJl
@@ -102889,7 +102849,7 @@ jnM
 jnM
 cwC
 pmI
-tXH
+ycx
 pmI
 omp
 jnM
