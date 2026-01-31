@@ -3642,7 +3642,7 @@
 "bIn" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/town/apothecary,
+/obj/effect/mapping_helpers/access/keyset/town/bathhouse,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "bIq" = (
@@ -4997,12 +4997,6 @@
 	dir = 5;
 	icon_state = "largetable"
 	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/indoors/town/clinic_large/apothecary)
-"cqL" = (
-/obj/structure/door,
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/town/clinic,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "cqR" = (
@@ -13737,6 +13731,12 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/manor/jester)
+"gDq" = (
+/obj/structure/door,
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/bathhouse,
+/turf/open/floor/twig,
+/area/indoors/town/clinic_large/apothecary)
 "gDO" = (
 /obj/structure/door/fancy{
 	name = "Court Physician's Room"
@@ -107158,7 +107158,7 @@ gRT
 cqF
 osm
 osm
-kMA
+gDq
 osm
 eII
 eII
@@ -107560,7 +107560,7 @@ iru
 tmo
 gRT
 neD
-cqL
+tnp
 neD
 neD
 hdv
