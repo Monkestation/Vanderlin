@@ -23,7 +23,14 @@
 #define STORAGE_SOFT_LOCKED 1
 #define STORAGE_FULLY_LOCKED 2
 
+// Access flags
 /// Must be in the user's hands to be accessed
 #define STORAGE_ACCESS_INHANDS (1<<0)
 /// Must be out of the user to be accessed
 #define STORAGE_ACCESS_NOT_WORN (1<<1)
+
+// Closure flags
+/// Close on any movement [mob/living/move()]
+#define STORAGE_CLOSE_MOVEMENT (1<<0)
+/// Close on movement when not inhand. ITEMS ONLY.
+#define STORAGE_CLOSE_MOVEMENT_WORN (1<<1)

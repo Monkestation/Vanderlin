@@ -1147,11 +1147,21 @@
 			var/mob/living/L = pulledby
 			L.set_pull_offsets(src, pulledby.grab_state)
 
-	var/datum/storage/active = active_storage
-	if(active)
-		if(active?.close_on_movement)
+	// Kinda sorry for this but oh well
+	if(active_storage)
+		var/datum/storage/active = active_storage
+		var/move_close = FALSE
+		if(active?.closure_flags & STORAGE_CLOSE_MOVEMENT)
+			move_close = TRUE
+		else if(isitem(active.parent) && active.closure_flags & STORAGE_CLOSE_MOVEMENT_WORN)
+			var/obj/item/parent_item = active.parent
+			var/inside_inventory = parent_item.item_flags & IN_INVENTORY
+			var/in_hands = !!(locate(parent_item) in held_items)
+			if(inside_inventory && !in_hands)
+				move_close = TRUE
+		if(move_close)
 			active.hide_contents(src)
-		else
+		else // Check we can reach still
 			var/storage_is_important_recurisve = (active.parent in important_recursive_contents?[RECURSIVE_CONTENTS_ACTIVE_STORAGE])
 			var/can_reach_active_storage = CanReach(active.parent, view_only = TRUE)
 			if(!storage_is_important_recurisve && !can_reach_active_storage)

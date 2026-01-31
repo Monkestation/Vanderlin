@@ -1345,12 +1345,9 @@
 /atom/proc/create_storage(
 	screen_max_rows,
 	screen_max_columns,
+	max_slots,
 	max_specific_storage,
-	numerical_stacking,
-	allow_quick_gather,
-	allow_quick_empty,
-	collection_mode,
-	attack_hand_interact,
+	max_total_storage,
 	list/canhold,
 	list/canthold,
 	type = /datum/storage,
@@ -1359,7 +1356,7 @@
 	if(atom_storage)
 		QDEL_NULL(atom_storage)
 
-	atom_storage = new type(src, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, collection_mode, attack_hand_interact)
+	atom_storage = new type(src, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 
 	if(canhold || canthold)
 		atom_storage.set_holdable(canhold, canthold)
@@ -1371,7 +1368,7 @@
 	if(atom_storage)
 		QDEL_NULL(atom_storage)
 
-	atom_storage = new cloning.type(src, cloning.screen_max_rows, cloning.screen_max_columns, cloning.max_specific_storage, cloning.numerical_stacking, cloning.allow_quick_gather, cloning.collection_mode, cloning.attack_hand_interact)
+	atom_storage = new cloning.type(src, cloning.screen_max_rows, cloning.screen_max_columns, cloning.max_specific_storage, cloning.max_slots, cloning.max_specific_storage, cloning.max_total_storage)
 
 	if(cloning.can_hold || cloning.cant_hold)
 		atom_storage.set_holdable(cloning.can_hold, cloning.cant_hold)

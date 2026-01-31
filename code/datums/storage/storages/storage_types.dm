@@ -6,15 +6,15 @@
 	quickdraw = TRUE
 	insert_preposition = "in"
 
-/datum/storage/no_interface/scabbard/knife/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/no_interface/scabbard/knife/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife))
 
-/datum/storage/no_interface/scabbard/sword/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/no_interface/scabbard/sword/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword))
 
-/datum/storage/no_interface/scabbard/kazengun/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/no_interface/scabbard/kazengun/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword/katana))
 
@@ -25,7 +25,7 @@
 	quickdraw = TRUE
 	insert_preposition = "in"
 
-/datum/storage/no_interface/boots/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/no_interface/boots/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife, /obj/item/coin, /obj/item/key))
 

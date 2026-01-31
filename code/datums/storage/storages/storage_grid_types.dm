@@ -43,7 +43,7 @@
 	insert_preposition = "on"
 	rustle_sound = 'sound/items/gems (1).ogg'
 
-/datum/storage/keyring/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/keyring/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/key))
 
@@ -51,7 +51,7 @@
 	screen_max_rows = 4
 	screen_max_columns = 4
 
-/datum/storage/belt/knife_belt/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/belt/knife_belt/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife/throwingknife))
 
@@ -89,7 +89,7 @@
 	screen_max_rows = 8
 	screen_max_columns = 4
 
-/datum/storage/bin/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/bin/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	cant_hold = typecacheof(list(/obj/item/weapon))
 
@@ -109,7 +109,7 @@
 	allow_quick_empty = TRUE
 	insert_preposition = "in"
 
-/datum/storage/sack/meat/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/sack/meat/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(
 		/obj/item/reagent_containers/food/snacks/meat,
@@ -129,7 +129,7 @@
 	allow_quick_empty = TRUE
 	insert_preposition = "in"
 
-/datum/storage/egg_basket/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/egg_basket/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/reagent_containers/food/snacks/egg))
 
@@ -137,7 +137,7 @@
 	screen_max_rows = 8
 	screen_max_columns = 5
 
-/datum/storage/magebag/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/magebag/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(
 		/obj/item/natural/infernalash,
@@ -167,7 +167,7 @@
 	allow_quick_empty = TRUE
 	insert_preposition = "in"
 
-/datum/storage/headhook/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/headhook/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(
 		/obj/item/natural/head,
@@ -228,7 +228,7 @@
 	screen_max_columns = 2
 	screen_max_rows = 3
 
-/datum/storage/kobold_storage/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/kobold_storage/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/mob_holder))
 
@@ -251,7 +251,7 @@
 	screen_max_rows = 4
 	screen_max_columns = 2
 
-/datum/storage/bucket/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/bucket/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	//the idea is as follows
 	//the bucket can hold items that you can put in, and reliably pull out without having to toss everything out
@@ -269,7 +269,7 @@
 /datum/storage/food/cooking
 	max_specific_storage = WEIGHT_CLASS_HUGE
 
-/datum/storage/food/cooking/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/food/cooking/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(
 		/obj/item/reagent_containers/food,
@@ -310,7 +310,7 @@
 	screen_max_columns = 3
 	max_slots = 3
 
-/datum/storage/pilltin/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/pilltin/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/reagent_containers/pill))
 
@@ -318,7 +318,7 @@
 	screen_max_rows = 2
 	screen_max_columns = 5
 
-/datum/storage/ifak/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/ifak/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(
 		/obj/item/weapon/surgery,
@@ -338,7 +338,7 @@
 	screen_max_rows = 8
 	screen_max_columns = 4
 
-/datum/storage/drying_rack/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/drying_rack/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/clothing))
 
@@ -347,6 +347,6 @@
 	screen_max_rows = 6
 	screen_max_columns = 1
 
-/datum/storage/tray/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/tray/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/plate))

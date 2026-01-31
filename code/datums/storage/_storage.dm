@@ -4,7 +4,6 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 /**
  * Datumized Storage
  * Eliminates the need for custom signals specifically for the storage component, and attaches a storage variable (atom_storage) to every atom.
- * The parent and real_location variables are both weakrefs, so they must be resolved before they can be used.
  * If you're looking to create custom storage type behaviors, check ../subtypes
  */
 /datum/storage
@@ -27,6 +26,11 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 
 	/// List of our stored items and coordinates to said items
 	VAR_PRIVATE/list/obj/item/item_coordinates
+
+	/// storage display object
+	VAR_PRIVATE/var/atom/movable/screen/storage/boxes
+	/// close button object
+	VAR_PRIVATE/var/atom/movable/screen/close/closer
 
 	/// Typecache of items that can be inserted into this storage.
 	/// By default, all item types can be inserted (assuming other conditions are met).
@@ -64,15 +68,15 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	/// Access flags for when we are equipped see [_DEFINES/storage.dm]
 	/// As implied by "equipped" only applicable to /obj/item parents
 	var/equipped_access_flags = NONE
-	/// Close on movement [mob/living/move()]
-	var/close_on_movement = TRUE
+	/// Flags for when we auto close see [_DEFINES/storage.dm]
+	var/closure_flags = STORAGE_CLOSE_MOVEMENT
 
-	/// should we be allowed to pickup an object by clicking it
+	/// If TRUE, we can click on items with the storage object to pick them up and insert them.
 	var/allow_quick_gather = FALSE
-	/// the mode for collection when allow_quick_gather is enabled
-	var/collection_mode = COLLECT_ONE
+	/// The mode for collection when allow_quick_gather is enabled. See [code/__DEFINES/storage.dm]
+	var/collection_mode = COLLECT_EVERYTHING
 
-	/// show we allow emptying all contents by using the storage object in hand
+	/// If TRUE, we can use-in-hand the storage object to dump all of its contents.
 	var/allow_quick_empty = FALSE
 
 	///do we insert items when clicked by them?
@@ -109,11 +113,6 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	/// instead of displaying multiple items of the same type, display them as numbered contents
 	var/numerical_stacking = FALSE
 
-	/// storage display object
-	var/atom/movable/screen/storage/boxes
-	/// close button object
-	var/atom/movable/screen/close/closer
-
 	/// maximum amount of columns a storage object can have
 	var/screen_max_columns = 3
 	var/screen_max_rows = 8
@@ -128,18 +127,16 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	var/no_interface = FALSE
 
 	/// If TRUE, shows the contents of the storage in open_storage, observers bypass
+	/// Don't set by default, change conditionally for grid storage
 	var/display_contents = TRUE
 
 /datum/storage/New(
 	atom/parent,
 	screen_max_rows = src.screen_max_rows,
 	screen_max_columns = src.screen_max_columns,
+	max_slots = src.max_slots,
 	max_specific_storage = src.max_specific_storage,
-	numerical_stacking = src.numerical_stacking,
-	allow_quick_gather = src.allow_quick_gather,
-	allow_quick_empty = src.allow_quick_empty,
-	collection_mode = src.collection_mode,
-	attack_hand_interact = src.attack_hand_interact,
+	max_total_storage = src.max_total_storage,
 )
 
 	boxes = new(null, src)
@@ -155,12 +152,9 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 
 	src.screen_max_rows = screen_max_rows
 	src.screen_max_columns = screen_max_columns
+	src.max_slots = max_slots
 	src.max_specific_storage = max_specific_storage
-	src.numerical_stacking = numerical_stacking
-	src.allow_quick_gather = allow_quick_gather
-	src.allow_quick_empty = allow_quick_empty
-	src.collection_mode = collection_mode
-	src.attack_hand_interact = attack_hand_interact
+	src.max_total_storage = max_total_storage
 
 /datum/storage/Destroy(force)
 	for(var/mob/person as anything in is_using)
@@ -308,13 +302,14 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 /datum/storage/proc/set_holdable(list/can_hold_list = null, list/cant_hold_list = null)
-	if(!islist(can_hold_list))
+	if(!isnull(can_hold_list) && !islist(can_hold_list))
 		can_hold_list = list(can_hold_list)
-
-	if(!islist(cant_hold_list))
+	if(!isnull(cant_hold_list) && !islist(cant_hold_list))
 		cant_hold_list = list(cant_hold_list)
 
-	can_hold_description = generate_hold_desc(can_hold_list)
+	if(!isnull(can_hold_list))
+		if(isnull(can_hold_description))
+			can_hold_description = generate_hold_desc(can_hold_list)
 
 	if(can_hold_list)
 		var/unique_key = can_hold_list.Join("-")
@@ -322,7 +317,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			GLOB.cached_storage_typecaches[unique_key] = typecacheof(can_hold_list)
 		can_hold = GLOB.cached_storage_typecaches[unique_key]
 
-	if(cant_hold_list != null)
+	if(!isnull(cant_hold_list))
 		var/unique_key = cant_hold_list.Join("-")
 		if(!GLOB.cached_storage_typecaches[unique_key])
 			GLOB.cached_storage_typecaches[unique_key] = typecacheof(cant_hold_list)
@@ -332,8 +327,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /datum/storage/proc/generate_hold_desc(can_hold_list)
 	var/list/desc = list()
 
-	for(var/valid_type in can_hold_list)
-		var/obj/item/valid_item = valid_type
+	for(var/obj/item/valid_item as anything in can_hold_list)
 		desc += "\a [initial(valid_item.name)]"
 
 	return "\n\t[span_notice("[desc.Join("\n\t")]")]"
@@ -425,19 +419,6 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			user.balloon_alert(user, "too heavy!")
 		return FALSE
 
-	if(user && equipped_access_flags && isitem(parent))
-		var/obj/item/item_parent = parent
-		if(item_parent.item_flags & IN_INVENTORY)
-			if(equipped_access_flags & STORAGE_ACCESS_NOT_WORN)
-				if(messages)
-					user.balloon_alert(user, "not while worn!")
-				return FALSE
-			else if(equipped_access_flags & STORAGE_ACCESS_INHANDS)
-				if(!locate(parent) in user.held_items)
-					if(messages)
-						user.balloon_alert(user, "need to hold!")
-				return FALSE
-
 	var/can_hold_it = isnull(can_hold) || is_type_in_typecache(to_insert, can_hold) || is_type_in_typecache(to_insert, exception_hold)
 	var/cant_hold_it = is_type_in_typecache(to_insert, cant_hold)
 	var/trait_says_no = HAS_TRAIT(to_insert, TRAIT_NO_STORAGE_INSERT)
@@ -455,6 +436,16 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(isitem(parent))
 		var/obj/item/item_parent = parent
+		if(item_parent.item_flags & IN_INVENTORY)
+			if(equipped_access_flags & STORAGE_ACCESS_NOT_WORN)
+				if(messages)
+					user.balloon_alert(user, "not while worn!")
+				return FALSE
+			else if(equipped_access_flags & STORAGE_ACCESS_INHANDS)
+				if(!locate(parent) in user.held_items)
+					if(messages)
+						user.balloon_alert(user, "need to hold!")
+				return FALSE
 		var/datum/storage/smaller_fish = to_insert.atom_storage
 		if(smaller_fish && !allow_big_nesting && to_insert.w_class >= item_parent.w_class)
 			if(messages && user)

@@ -5,7 +5,7 @@
 	allow_big_nesting = TRUE
 	equipped_access_flags = STORAGE_ACCESS_NOT_WORN
 
-/datum/storage/messkit/New(atom/parent, screen_max_rows, screen_max_columns, max_specific_storage, numerical_stacking, allow_quick_gather, allow_quick_empty, collection_mode, attack_hand_interact)
+/datum/storage/messkit/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 
 	set_holdable(list(/obj/item/kitchen, /obj/item/folding_table_stored, /obj/item/cooking, /obj/item/reagent_containers/food/snacks, /obj/item/reagent_containers, /obj/item/mobilestove))
