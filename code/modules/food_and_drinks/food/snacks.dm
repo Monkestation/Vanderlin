@@ -194,7 +194,7 @@ All foods are distributed among various categories. Use common sense.
 		var/obj/item/reagent_containers/NU = new become_rot_type(get_turf(loc))
 		reagents.trans_to(NU.reagents, reagents.maximum_volume)
 		if(!ismob(loc))
-			loc.atom_storage?.attempt_insert(NU, override = TRUE)
+			loc.atom_storage?.attempt_insert(NU, override = TRUE, force = STORAGE_FULLY_LOCKED) // We were inside
 		else
 			var/mob/living/holder = loc
 			holder.put_in_hands(NU)
