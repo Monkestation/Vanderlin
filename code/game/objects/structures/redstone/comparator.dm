@@ -205,7 +205,7 @@
 		return 0
 
 	var/total = 0
-	for(var/obj/item/item in storage_atom.contents)
+	for(var/obj/item/item in storage_atom.atom_storage.return_inv())
 		total += (item.grid_width / 32) * (item.grid_height / 32)
 
 	return round((total / max_capacity) * 15)
