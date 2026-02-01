@@ -4066,6 +4066,10 @@
 	},
 /turf/open/floor/tile/diamond,
 /area/delver/guild)
+"Dt" = (
+/obj/effect/portal/permanent/one_way,
+/turf/open/floor/metal/barograte,
+/area/delver/town)
 "Du" = (
 /turf/closed/wall/mineral/decorstone,
 /area/delver/town)
@@ -27588,7 +27592,7 @@ lY
 lY
 Dq
 AH
-jb
+Dt
 AH
 Fh
 lY
