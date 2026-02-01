@@ -575,19 +575,21 @@
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, rand(1,5) DECISECONDS, src))
-			if(prob(50) && looty3.len)
-				if(looty3.len == 1)
-					res_replenish3 = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty3)
+		if(do_after(L, SEARCHTIME, target = src))
+			if(!looty.len && (world.time > res_replenish))
+				loot_replenish3()
+			if(prob(50) && looty.len)
+				if(looty.len == 1)
+					res_replenish = world.time + 8 MINUTES
+				var/obj/item/B = pick_n_take(looty)
 				if(B)
 					B = new B(user.loc)
 					user.put_in_hands(B)
-					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
+					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					return
-			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
-			if(!looty3.len)
-				to_chat(user, "<span class='warning'>Picked clean.</span>")
+			user.visible_message(span_warning("[user] searches through [src]."))
+			if(!looty.len)
+				to_chat(user, span_warning("Picked clean... I should try later."))
 
 /obj/structure/flora/shroom_tree
 	name = "shroom"
