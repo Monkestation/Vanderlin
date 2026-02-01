@@ -1441,7 +1441,7 @@
 	force = DAMAGE_SWORD - 18
 	force_wielded = DAMAGE_SWORD_WIELD - 20
 	throwforce = DAMAGE_SWORD - 18
-	max_integrity = INTEGRITY_STANDARD + 40
+	max_integrity = INTEGRITY_STANDARD * 1.2
 	sellprice = 1
 	melting_material = /datum/material/tin
 

@@ -65,7 +65,7 @@
 
 /datum/intent/sword/thrust/zwei
 	name = "thrust"
-	chargetime = 1
+	clickcd = 14
 	warnie = "mobwarning"
 	swingdelay = 1
 
@@ -110,7 +110,6 @@
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
 	blade_class = BCLASS_BLUNT
 	clickcd = 14
-	charging_slowdown = 0.8
 	penfactor = AP_CLUB_STRIKE
 	swingdelay = 1
 	item_damage_type = "blunt"
@@ -140,7 +139,6 @@
 	item_damage_type = "slash"
 
 /datum/intent/sword/cut/rapier
-	chargetime = 0
 	damfactor = 0.8
 	item_damage_type = "slash"
 
@@ -184,6 +182,7 @@
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	reach = 2
+	misscost = 10
 	penfactor = AP_SWORD_THRUST+30 //50 total
 	clickcd = 18
 	acc_bonus = 15

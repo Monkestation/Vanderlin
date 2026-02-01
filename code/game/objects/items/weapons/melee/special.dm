@@ -233,6 +233,8 @@
 	penfactor = 5
 	damfactor = 1.1
 	clickcd = 10
+	misscost = 4
+	acc_bonus = 10
 	item_damage_type = "slash"
 
 /datum/intent/katar/thrust
@@ -243,8 +245,9 @@
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 30
-	chargetime = 0
+	misscost = 3
 	clickcd = 10
+	acc_bonus = 20
 	item_damage_type = "stab"
 
 /obj/item/weapon/katar

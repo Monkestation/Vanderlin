@@ -26,14 +26,12 @@
 	penfactor = AP_GREATAXE_CHOP  // Same AP as the polearm CHOP
 	clickcd = 16
 	swingdelay = 2
-	no_early_release = TRUE // Needs fo fully charge
 	damfactor = 1.2
 	misscost = 15
 
 /datum/intent/axe/chop/greataxe/doublehead //Stronger than the one bladed axe but heavier
 	penfactor = AP_GREATAXE_CHOP
 	clickcd = 18
-	no_early_release = TRUE // Needs fo fully charge
 	swingdelay = 2.5
 	damfactor = 1.3 // Stronger
 	misscost = 18 // Costs more if you miss

@@ -12,6 +12,7 @@
 	swingdelay = 1
 	clickcd = 14
 	misscost = 8
+	acc_bonus = 10
 	item_damage_type = "stab"
 
 /datum/intent/polearm/thrust/spear

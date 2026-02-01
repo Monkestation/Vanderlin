@@ -301,6 +301,7 @@
 	minstr = 2
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
+	blade_dulling = DULLING_BASHCHOP
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	sellprice = 5
@@ -702,5 +703,3 @@
 	icon_state = "shishpar_bronze"
 	wdefense = GOOD_PARRY
 	wbalance = EASY_TO_DODGE
-	max_integrity = INTEGRITY_STANDARD
-	sellprice = 25

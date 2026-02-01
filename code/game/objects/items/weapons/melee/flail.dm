@@ -119,7 +119,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(FLAIL_LNGSTRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
-	max_integrity = INTEGRITY_STRONG + 50
+	max_integrity = INTEGRITY_STRONG
 	minstr = 8
 
 	bigboy = TRUE
