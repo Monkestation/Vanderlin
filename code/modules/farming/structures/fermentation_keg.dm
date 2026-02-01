@@ -735,12 +735,12 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 
 /obj/structure/fermentation_keg/random/water/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/water, rand(99,900))
+	reagents.add_reagent(/datum/reagent/water, rand(0,200))
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/fermentation_keg/random/beer/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/consumable/ethanol/beer, rand(99,900))
+	reagents.add_reagent(/datum/reagent/consumable/ethanol/beer, rand(0,200))
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/fermentation_keg/water

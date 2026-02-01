@@ -1634,7 +1634,7 @@
 
 
 
-/obj/item/weapon/sword/sabre/hook
+	/obj/item/weapon/sword/sabre/hook
 	name = "hook sword"
 	desc = "A steel sword with a hooked design at the tip of it; perfect for disarming enemies. Its back edge is sharpened and the hilt appears to have a sharpened tip."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'

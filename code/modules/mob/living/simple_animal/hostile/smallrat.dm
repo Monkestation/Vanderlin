@@ -116,7 +116,7 @@
 		return
 	if(!isturf(loc)) //no floating out of bags
 		return
-	if(prob(5))
+	if(prob(2))
 		playsound(src, pick('sound/vo/mobs/rat/rat_life.ogg','sound/vo/mobs/rat/rat_life2.ogg','sound/vo/mobs/rat/rat_life3.ogg'), 100, TRUE, -1)
 	if(prob(75) && !dead)
 		dir = pick(GLOB.cardinals)

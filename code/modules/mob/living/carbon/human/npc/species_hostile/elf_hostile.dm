@@ -46,7 +46,7 @@
 // --- Naked ---
 
 /mob/living/carbon/human/species/elf/snow/base/unskilled/naked
-	base_strength = 8
+	base_strength = 11
 	base_speed = 14
 	base_constitution = 12
 	base_endurance = 12
@@ -90,7 +90,7 @@
 
 
 /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked
-	base_strength = 13
+	base_strength = 15
 	base_speed = 14
 	base_perception = 12
 	base_constitution = 10

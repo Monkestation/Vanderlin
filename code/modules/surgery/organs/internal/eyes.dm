@@ -142,7 +142,7 @@
 /obj/item/organ/eyes/night_vision
 	name = "shadow eyes"
 	desc = ""
-	see_in_dark = 8
+	see_in_dark = 6
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	actions_types = list(/datum/action/item_action/organ_action/use)
 	var/night_vision = TRUE
@@ -187,12 +187,11 @@
 /obj/item/organ/eyes/elf
 	name = "elf eyes"
 	desc = ""
-	see_in_dark = 4
-	lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
-
-/obj/item/organ/eyes/elf/less
 	see_in_dark = 3
 	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
+
+/obj/item/organ/eyes/elf/less
+	see_in_dark = 2
 
 /obj/item/organ/eyes/kobold
 	name = "slitted eyes" // SPRITE PLS

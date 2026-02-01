@@ -736,7 +736,7 @@
 
 	if(HAS_TRAIT(src, TRAIT_DARKVISION))
 		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
-		see_in_dark = max(see_in_dark, 6)
+		see_in_dark = max(see_in_dark, 4)
 
 	if(HAS_TRAIT(src, TRAIT_THERMAL_VISION))
 		sight |= (SEE_MOBS)
@@ -744,11 +744,11 @@
 
 	if(HAS_TRAIT(src, TRAIT_XRAY_VISION))
 		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		see_in_dark = max(see_in_dark, 8)
+		see_in_dark = max(see_in_dark, 6)
 
 	if(HAS_TRAIT(src, TRAIT_NOCSHADES))
 		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_NOCSHADES)
-		see_in_dark = max(see_in_dark, 12)
+		see_in_dark = max(see_in_dark, 8)
 		add_client_colour(/datum/client_colour/nocshaded)
 		overlay_fullscreen("inqvision", /atom/movable/screen/fullscreen/inqvision)
 	else

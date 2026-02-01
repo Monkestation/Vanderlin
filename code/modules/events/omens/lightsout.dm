@@ -25,5 +25,5 @@
 			i.extinguish()
 	if(LAZYLEN(GLOB.streetlamp_list))
 		for(var/obj/machinery/light/fueledstreet/i in GLOB.streetlamp_list)
-			i.lights_out()
+			i.lights_out(TRUE)
 	return

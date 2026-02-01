@@ -42,9 +42,7 @@
 	state_suffix = "_nozap"
 
 /obj/machinery/light/fueledstreet/proc/lights_out(permanent)
-	on = FALSE
-	update()
-	update_appearance(UPDATE_ICON_STATE)
+	seton(FALSE)
 	if(!permanent)
 		addtimer(CALLBACK(src, PROC_REF(lights_on)), 5 MINUTES)
 

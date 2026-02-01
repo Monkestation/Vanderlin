@@ -46,7 +46,7 @@
 // --- Naked ---
 
 /mob/living/carbon/human/species/elf/dark/base/unskilled/naked
-	base_strength = 8
+	base_strength = 11
 	base_speed = 14
 	base_constitution = 12
 	base_endurance = 12

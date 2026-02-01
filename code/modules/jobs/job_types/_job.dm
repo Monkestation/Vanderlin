@@ -303,11 +303,10 @@
 
 	// Ready up bonus
 	if(!spawned.islatejoin)
-		spawned.adjust_triumphs(1)
-		spawned.apply_status_effect(/datum/status_effect/buff/foodbuff)
 		spawned.hydration = 800 // Set higher hydration
 		spawned.nutrition = 800
-		to_chat(spawned, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
+		to_chat(spawned, span_purple("0 TRIUMPHS awarded."))
+		to_chat(spawned, span_briar("No one has triumphed on this dae..."))
 
 
 	var/used_title = get_informed_title(spawned)
