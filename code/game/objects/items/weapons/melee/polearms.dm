@@ -152,7 +152,6 @@
 	icon_state = "gsspear"
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	throwforce = DAMAGE_SPEAR_WIELD
-	blade_dulling = DULLING_BASH
 
 /obj/item/weapon/polearm/spear/assegai
 	name = "iron assegai"
@@ -167,7 +166,6 @@
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_steel"
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
-	blade_dulling = DULLING_BASH
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -178,7 +176,6 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
-	blade_dulling = DULLING_BASH
 	sellprice = 60
 
 /obj/item/weapon/polearm/spear/psydon/Initialize(mapload)
@@ -206,7 +203,6 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	melting_material = /datum/material/steel
-	blade_dulling = DULLING_BASH
 	melt_amount = 75
 	sellprice = 60
 
@@ -219,9 +215,9 @@
 /obj/item/weapon/polearm/spear/billhook/ji/iron
 	name = "iron dagger-ax"
 	icon_state = "ji_iron"
-	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	force_wielded = DAMAGE_SPEAR_WIELD - 2
 	max_integrity = INTEGRITY_STANDARD
-	max_blade_int = 120
+	max_blade_int = 150
 	melting_material = /datum/material/iron
 	melt_amount = 75
 
@@ -229,10 +225,9 @@
 	name = "bronze dagger-ax"
 	icon_state = "ji_bronze"
 	force_wielded = DAMAGE_SPEAR_WIELD - 3
-	max_integrity = INTEGRITY_STANDARD
-	max_blade_int = 120
+	max_integrity = INTEGRITY_POOR
+	max_blade_int = 100
 	melting_material = /datum/material/bronze
-	blade_dulling = DULLING_BASHCHOP
 	melt_amount = 75
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
@@ -293,7 +288,6 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	blade_dulling = DULLING_BASH
 
 	slot_flags = ITEM_SLOT_BACK
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'

@@ -11,7 +11,7 @@
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(MACE_STRIKE)
+	possible_item_intents = list(MACE_STRIKE, DAZE_BASH)
 	gripped_intents = list(MACE_STRIKE, MACE_SMASH, DAZE_BASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 7
@@ -28,7 +28,6 @@
 	melt_amount = 75
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
-	blade_dulling = DULLING_BASHCHOP
 	sellprice = 20
 
 	grid_height = 64
@@ -98,7 +97,7 @@
 	icon_state = "physician_cane"
 	force = DAMAGE_MACE - 3
 	force_wielded = DAMAGE_MACE - 1
-	possible_item_intents = list(MACE_STRIKE, MACE_THRUST)
+	possible_item_intents = list(MACE_STRIKE, SWORD_THRUST)
 	sellprice = 30
 
 /obj/item/weapon/mace/cane/merchant
@@ -211,7 +210,7 @@
 	icon_state = "smace"
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	blade_dulling = DULLING_BASH
+	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -221,6 +220,9 @@
 	desc = "A steel mace from the fallen east. Possesses a smoothed out head."
 	icon_state = "rungu_steel"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
+	wdefense = AVERAGE_PARRY //Due to costing less bars
+	melt_amount = 75
+	sellprice = 30
 
 /obj/item/weapon/mace/steel/shishpar
 	name = "steel shishpar"
@@ -229,15 +231,14 @@
 	force = DAMAGE_MACE + 2
 	force_wielded = DAMAGE_MACE_WIELD + 3
 	wbalance = EASY_TO_DODGE
-	wdefense = GREAT_PARRY
 	sellprice = 75
 
 //................ Spiked club ............... //
 /obj/item/weapon/mace/spiked
 	name = "spiked mace"
 	icon_state = "spikedmace"
-	force = DAMAGE_MACE + 2
-	force_wielded = DAMAGE_MACE_WIELD + 3
+	force = DAMAGE_MACE + 1
+	force_wielded = DAMAGE_MACE_WIELD + 1
 	max_integrity = INTEGRITY_STANDARD
 	melt_amount = 150
 
@@ -258,8 +259,6 @@
 	force = DAMAGE_CLUB + 3
 	force_wielded = DAMAGE_CLUB_WIELD + 2
 	wbalance = HARD_TO_DODGE
-	wdefense = MEDIOCRE_PARRY
-	max_integrity = INTEGRITY_STRONG - 50
 
 /obj/item/weapon/mace/bludgeon/getonmobprop(tag)
 	. = ..()

@@ -10,6 +10,7 @@
 	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
 	penfactor = AP_SWORD_CHOP
+	clickcd = 14
 	swingdelay = 1
 	misscost = 8
 	item_damage_type = "slash"

@@ -726,10 +726,10 @@
 	created_item = /obj/item/weapon/flail/sflail
 
 /datum/anvil_recipe/weapons/steel/grandmace
-	name = "Grand Mace (+Small Log)"
+	name = "Grand Mace (+Bar, +Small Log)"
 	recipe_name = "a Grand Mace"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/goden/steel
 	craftdiff = 3
 
