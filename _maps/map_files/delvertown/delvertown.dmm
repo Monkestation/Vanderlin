@@ -141,15 +141,12 @@
 /obj/structure/stairs{
 	dir = 1
 	},
-/obj/structure/stairs{
-	dir = 1
-	},
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = 4;
 	pixel_x = -3
 	},
-/turf/closed/basic,
+/turf/open/floor/wood,
 /area/delver/marsh)
 "be" = (
 /turf/open/floor/rooftop{
@@ -1938,12 +1935,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/delver/town)
-"nH" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
-/turf/open/floor/grass,
-/area/delver/town)
 "nI" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/naturalstone,
@@ -2275,15 +2266,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/spiral,
 /area/delver/inn)
-"qu" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
-/obj/structure/stairs/stone{
-	dir = 4
-	},
-/turf/open/floor/grass,
-/area/delver/town)
 "qv" = (
 /obj/effect/waterfall{
 	pixel_y = 0
@@ -22323,8 +22305,8 @@ fu
 fu
 fu
 bI
-nH
-qu
+eG
+eG
 eG
 Nc
 FG
