@@ -86,7 +86,6 @@
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
 	clickcd = 20
 	misscost = 8
-	no_early_release = TRUE
 	penfactor = 80
 	damfactor = 0.9
 	item_damage_type = "stab"
