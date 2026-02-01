@@ -372,6 +372,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(thing.maptext)
 		thing.maptext = ""
 
+	// Its possible that it could have underlays that got cut that weren't from us
+	thing.update_appearance(UPDATE_OVERLAYS)
+
 /**
  * Checks if an item is capable of being inserted into the storage.
  *
