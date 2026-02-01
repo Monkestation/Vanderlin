@@ -30,8 +30,7 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 		P.mailedto = "steward of roguetown"
 		P.update_appearance(UPDATE_NAME | UPDATE_ICON_STATE)
 		P.info = I
-		var/datum/storage/storage = mailer.atom_storage
-		storage.attempt_insert(P, override = TRUE)
+		mailer.atom_storage.attempt_insert(P, override = TRUE)
 		mailer.new_mail = TRUE
 		mailer.update_appearance(UPDATE_ICON_STATE)
 

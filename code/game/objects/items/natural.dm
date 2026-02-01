@@ -215,11 +215,7 @@
 			grid_width += 32
 
 	if(item_flags & IN_STORAGE)
-		var/obj/item/location = loc
-		var/datum/storage/storage = location.atom_storage
-
-		storage.refresh_views()
-		storage.orient_to_hud()
+		loc.atom_storage?.refresh_views()
 
 /obj/item/natural/infernalash//T1 mage summon loot
 	name = "infernal ash"
