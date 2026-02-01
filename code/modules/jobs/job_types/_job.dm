@@ -441,15 +441,18 @@
 				continue
 			reals |= real_pack
 		if(!length(reals))
+			message_admins("ERROR: [key_name_admin(src)] failed job pack selection.")
 			return
 
 		var/datum/job_pack/picked_pack
 		if(!client)
-			picked_pack = GLOB.job_pack_singletons[pick(reals)]
+			picked_pack = pick(reals)
 		else
-			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 20 SECONDS)
+			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 40 SECONDS)
 			if(QDELETED(src))
 				return
+		if(!picked_pack)
+			picked_pack = pick(reals)
 
 		if(picked_pack.type)
 			previous_picked_types |= picked_pack.type

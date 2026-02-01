@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 	if(GLOB.blueprint_recipes.len)
 		return
 	for(var/datum/blueprint_recipe/recipe as anything in subtypesof(/datum/blueprint_recipe))
-		if(is_abstract(recipe))
+		if(IS_ABSTRACT(recipe))
 			continue
 		GLOB.blueprint_recipes[initial(recipe.name)] = new recipe
 

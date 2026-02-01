@@ -124,7 +124,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 
 /mob/living/carbon/human/proc/assign_penance_verb()
 	set name = "Assign Penance"
-	set category = "Cleric"
+	set category = "RoleUnique"
 
 	var/list/targets = list()
 	for(var/mob/living/carbon/human/H in view(7, src))
@@ -157,7 +157,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 
 /mob/living/carbon/human/proc/absolve_penance_verb()
 	set name = "Absolve Penance"
-	set category = "Cleric"
+	set category = "RoleUnique"
 
 	var/list/penitents = list()
 	for(var/mob/living/carbon/human/H in view(7, src))
@@ -181,7 +181,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 
 /mob/living/carbon/human/proc/check_penance_verb()
 	set name = "Check Penance"
-	set category = "Cleric"
+	set category = "RoleUnique"
 
 	var/datum/penance/P = get_penance(src)
 	if(!P)

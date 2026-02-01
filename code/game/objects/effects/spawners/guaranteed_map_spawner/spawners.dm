@@ -14,9 +14,9 @@
 		/obj/item/key/steward = 1,
 		/obj/item/key/steward = 1,
 		/obj/item/key/walls = 1,
-		/obj/item/key/mnoble1 = 1,
-		/obj/item/key/mnoble2 = 1,
-		/obj/item/key/mnoble3 = 1,
+		/obj/item/key/mnoble1_blue = 1,
+		/obj/item/key/mnoble2_yellow = 1,
+		/obj/item/key/mnoble3_red = 1,
 		/obj/item/key/miner = 1,
 	)
 

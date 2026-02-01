@@ -18,11 +18,14 @@
 	minstr = 8
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	melt_amount = 75 //For the ones it paths to
 	associated_skill = /datum/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	dropshrink = 0.8
 	thrown_bclass = BCLASS_STAB
+	grid_height = 96
+	grid_width = 64
 	sellprice = 20
 
 /obj/item/weapon/polearm/Initialize()

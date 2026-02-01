@@ -2144,7 +2144,7 @@
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
 		if(storage)
-			var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+			var/obj/item/mob_holder/holder = new(get_turf(src), src)
 			visible_message(span_warning("[src] starts to climb into [over]."), span_warning("You start to climb into [over]."))
 			if(do_after(src, 1.2 SECONDS, over))
 				if(over.loc == src)
@@ -2168,7 +2168,7 @@
 		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
 		if(!picked)
 			return
-		var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))
 		if(do_after(src, 3 SECONDS, over))
 			if(picked.loc == src)
@@ -2194,7 +2194,7 @@
 
 
 /mob/living/proc/mob_pickup(mob/living/user)
-	var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+	var/obj/item/mob_holder/holder = new(get_turf(src), src)
 	user.visible_message(span_warning("[user] scoops up [src]!"))
 	user.put_in_hands(holder)
 

@@ -15,6 +15,7 @@
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	axe_cut = 10	// bonus damage to trees
+	melt_amount = 75
 	grid_height = 64
 	grid_width = 32
 
@@ -406,6 +407,8 @@
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 60
+	grid_height = 96
+	grid_width = 64
 
 /obj/item/weapon/greataxe/getonmobprop(tag)
 	. = ..()

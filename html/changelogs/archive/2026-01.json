@@ -465,5 +465,117 @@
                 "rscadd": "Flinging feces fouls foes."
             }
         ]
+    },
+    "2026-01-26": {
+        "TerraGS": [
+            {
+                "bugfix": "Looking up into nullspace no longer runtimes"
+            },
+            {
+                "refactor": "replaces the transparent turf subtype with a turf transparency element"
+            }
+        ]
+    },
+    "2026-01-27": {
+        "Neuroplasty": [
+            {
+                "bugfix": "Made herbal remedies not stress you out anymore."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "map": "medical guide moved a few tiles to its place"
+            }
+        ],
+        "Diegoflores31": [
+            {
+                "balance": "changes skill requirements of bombcrafting."
+            },
+            {
+                "balance": "removes bombcrafting from: porter , jester and plague doctor."
+            },
+            {
+                "balance": "adds bombcrafting to: artificer"
+            },
+            {
+                "bugfix": "breaching charge now can be used properly to mine."
+            },
+            {
+                "refactor": "breaching charges now use timers instead of process , reworked the logic for cinematic effect."
+            },
+            {
+                "bugfix": "minimun_skill_required now actually means minimun skill required."
+            }
+        ]
+    },
+    "2026-01-28": {
+        "realforest2001": [
+            {
+                "code_imp": "Removed unused span defines and style classes."
+            },
+            {
+                "qol": "Job restrictions now show timelock required before checking species/age etc."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "kobolds can eat walls now"
+            },
+            {
+                "rscadd": "kobolds cant eat magic rocks for spells anymore"
+            },
+            {
+                "rscadd": "you can stick kobolds in smelters now"
+            }
+        ]
+    },
+    "2026-01-29": {
+        "realforest2001": [
+            {
+                "qol": "Role-Unique verbs are now all in one tab (where practical to do so)."
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes the grenzelbun description"
+            }
+        ]
+    },
+    "2026-01-31": {
+        "dwasint": [
+            {
+                "bugfix": "roundstart coins can't be duped"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Objects that fall from above no longer show as \\\"the floor\\\"."
+            },
+            {
+                "bugfix": "Failing to pick a job subtype (such as bloodsucker wretch equipment) will no longer brick you."
+            }
+        ],
+        "ApolloVector": [
+            {
+                "balance": "Fighter Average shield skill -> Skilled shields"
+            },
+            {
+                "balance": "Cleric 0 shield skill -> Average"
+            },
+            {
+                "balance": "Zizo inhumen cleric shield skill bonus +1 instead of +2, resulting in skilled shields instead of expert"
+            },
+            {
+                "balance": "Captain Skilled shield skill -> Expert shields"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed inquisition collars getting stuck"
+            },
+            {
+                "bugfix": "Fixed asset load error"
+            }
+        ]
     }
 }

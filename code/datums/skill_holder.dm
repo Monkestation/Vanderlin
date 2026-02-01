@@ -65,6 +65,8 @@
 	return ensure_skills().get_skill_speed_modifier(skill)
 
 /mob/proc/adjust_experience(skill, amt, silent=FALSE, check_apprentice=TRUE)
+	if(HAS_TRAIT(src, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	return ensure_skills().adjust_experience(skill, amt, silent, check_apprentice)
 
 /mob/proc/get_inspirational_bonus()

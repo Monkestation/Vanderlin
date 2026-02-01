@@ -80,6 +80,9 @@
 	swingdelay = 3
 	misscost = 90
 
+/datum/intent/sword/thrust/hook
+	damfactor = 0.9
+
 /*--------------\
 | Strike intent |	Pommel strike, some AP
 \--------------*/

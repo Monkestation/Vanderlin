@@ -264,7 +264,7 @@
 	wbalance = EASY_TO_DODGE
 	gripped_intents = list(AXE_CHOP, CURVED_THRUST)
 
-/obj/item/weapon/sword/sabre/dadao/iron
+/obj/item/weapon/sword/sabre/dadao/iron //Fix this
 	name = "iron dadao"
 	icon_state = "dadao_iron"
 	melting_material = /datum/material/iron
@@ -567,8 +567,9 @@
 	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
 
 /obj/item/weapon/sword/rapier/dec
-	icon_state = "decrapier"
+	name = "decorated rapier"
 	desc = "A rapier decorated with gold inlaid on its hilt. A regal weapon fit for nobility."
+	icon_state = "decrapier"
 	sellprice = 140
 
 /obj/item/weapon/sword/rapier/nimcha
@@ -1665,9 +1666,7 @@
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 6
 	throwforce = DAMAGE_SWORD - 5
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWORD_CHOP) //Fix this I broke it
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	gripped_intents = list(/datum/intent/sword/cut/martyr, /datum/intent/sword/thrust/martyr, /datum/intent/sword/strike/martyr,/datum/intent/sword/chop/martyr)
 
 	parrysound = "bladedmedium"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'

@@ -591,6 +591,7 @@
 	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
+	wdefense = GOOD_PARRY
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
