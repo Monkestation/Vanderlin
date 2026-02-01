@@ -5397,7 +5397,7 @@
 /obj/structure/rack,
 /obj/item/clothing/armor/chainmail/iron/orc,
 /obj/item/clothing/head/helmet/orc,
-/obj/item/weapon/knife/njora/iron,
+/obj/item/weapon/knife/dagger/njora,
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/bog)
 "fwj" = (
@@ -7432,7 +7432,7 @@
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
 	},
-/obj/item/weapon/axe/nsapo,
+/obj/item/weapon/axe/steel/nsapo,
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
 	},
@@ -9810,7 +9810,6 @@
 /area/under/cavewet)
 "lge" = (
 /obj/structure/closet/crate/chest/neu_iron,
-/obj/item/weapon/sword/sabre/hwi/iron,
 /obj/item/clothing/armor/chainmail/hauberk/iron,
 /obj/structure/fake_machine/camera/right,
 /turf/open/floor/metal/alt,
@@ -13908,7 +13907,7 @@
 "rio" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/mace/rungu/iron,
+/obj/item/weapon/mace/rungu,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
 "riC" = (
@@ -14795,7 +14794,7 @@
 	dir = 8
 	},
 /obj/structure/closet/crate/chest/crate,
-/obj/item/weapon/sword/ida/iron,
+/obj/item/weapon/sword/short/iron/ida,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
 "suY" = (

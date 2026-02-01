@@ -881,7 +881,7 @@
 "ka" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
-/obj/item/weapon/axe/nsapo/iron,
+/obj/item/weapon/axe/iron/nsapo,
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
 "kf" = (
@@ -4375,7 +4375,7 @@
 /obj/item/clothing/gloves/chain/psydon,
 /obj/item/clothing/face/facemask/psydonmask,
 /obj/item/clothing/armor/cuirass/psydon,
-/obj/item/weapon/sword/ida,
+/obj/item/weapon/sword/short/ida,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "Xt" = (
