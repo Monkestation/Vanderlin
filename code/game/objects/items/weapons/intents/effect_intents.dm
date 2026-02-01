@@ -18,7 +18,6 @@
 	animname = "strike"
 	blade_class = BCLASS_BLUNT
 	hitsound = list('sound/combat/hits/blunt/daze_hit.ogg')
-	chargetime = 0
 	penfactor = 50
 	swingdelay = 6
 	damfactor = 0.5

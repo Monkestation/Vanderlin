@@ -13,7 +13,6 @@
 	wlength = WLENGTH_GREAT
 	can_parry = FALSE
 	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
-	armor_penetration = 0
 	minstr = 4
 
 	sharpness = IS_BLUNT

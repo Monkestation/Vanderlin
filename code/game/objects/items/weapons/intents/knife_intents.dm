@@ -14,6 +14,7 @@
 	swingdelay = 1
 	clickcd = 10	// between normal and fast
 	item_damage_type = "slash"
+	acc_bonus = 12
 
 /datum/intent/dagger/thrust
 	name = "stab"

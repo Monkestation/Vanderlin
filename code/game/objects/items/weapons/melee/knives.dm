@@ -296,8 +296,8 @@
 	name = "silver dagger"
 	desc = "A dagger made of fine silver, the bane of the undead."
 	icon_state = "sildagger"
-	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_blade_int = 160
+	max_integrity = INTEGRITY_STRONG * 0.8
 	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0

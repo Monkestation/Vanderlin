@@ -9,6 +9,7 @@
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
 	penfactor = AP_AXE_CHOP
 	damfactor = 1.1
+	clickcd = 14
 	swingdelay = 1
 	misscost = 6
 	item_damage_type = "slash"
