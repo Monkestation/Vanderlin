@@ -1,3 +1,5 @@
+#define SEARCHTIME 12
+
 /obj/structure/flora
 	var/num_random_icons = 0
 	layer = FLORA_LAYER
@@ -401,7 +403,9 @@
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, rand(1,5) DECISECONDS, src))
+		if(do_after(L, SEARCHTIME, target = src))
+			if(!looty.len && (world.time > res_replenish))
+				loot_replenish()
 			if(prob(50) && looty.len)
 				if(looty.len == 1)
 					res_replenish = world.time + 8 MINUTES
@@ -409,11 +413,13 @@
 				if(B)
 					B = new B(user.loc)
 					user.put_in_hands(B)
-					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
+					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					return
-			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
+			user.visible_message(span_warning("[user] searches through [src]."))
+			if(looty.len)
+				attack_hand(user)
 			if(!looty.len)
-				to_chat(user, "<span class='warning'>Picked clean.</span>")
+				to_chat(user, span_warning("Picked clean... I should try later."))
 
 // bush crossing
 /obj/structure/flora/grass/bush/Crossed(atom/movable/AM)
@@ -914,3 +920,5 @@
 	icon_state = "livebush_1"
 	base_icon_state = "livebush_"
 	num_random_icons = 3
+
+#undef SEARCHTIME
