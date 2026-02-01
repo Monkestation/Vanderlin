@@ -34,7 +34,7 @@
 	// Need item interactions at some point I guess
 	if(target.atom_storage && !user.cmode)
 		var/datum/storage/storage = target.atom_storage
-		if(storage.insert_on_attack && storage.item_interact_insert(user, src, params))
+		if(!is_right_clicking && storage.insert_on_attack && storage.item_interact_insert(user, src, params))
 			return TRUE
 		else if(storage.display_contents && !storage.no_interface)
 			if(storage.open_storage(user))
