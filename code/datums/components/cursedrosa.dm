@@ -36,7 +36,7 @@
 		return
 	if(HAS_TRAIT(target, TRAIT_KNEESTINGER_IMMUNITY) || HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
 		return
-	var/potential_zones = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+	var/potential_zones = list(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
 	if(target.body_position == LYING_DOWN)
 		potential_zones |= list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
 	attempt_infection(target, pick(potential_zones))
@@ -45,6 +45,8 @@
 	if(!istype(target))
 		return
 	if(HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
+		return
+	if(prob(65))
 		return
 	var/def_zone = (target.active_hand_index == 1 ? BODY_ZONE_L_ARM : BODY_ZONE_R_ARM)
 	attempt_infection(target, def_zone)

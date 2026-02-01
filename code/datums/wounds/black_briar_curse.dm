@@ -105,7 +105,7 @@
 		return FALSE
 	. = ..()
 	// No, this will not correlate to dungeon or island waits. But it's expensive to check, so we're gonna deal with asynced rate.
-	infection = clamp(infection + (rand(20, 25) - owner.STAEND) * (SSmobs.wait * 0.1) , 0, max_infection)
+	infection = clamp(infection + (rand(20, 24) + length(root_network) - owner.STAEND) * (SSmobs.wait * 0.1) , 0, max_infection)
 	if(length(root_network) < 2 && !HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH)) // we can't get worse without a limb being infected
 		infection = min(infection, max_infection * BBC_STAGE_LATE - 1)
 	infection_percent = min(infection / max_infection, 1)
@@ -230,7 +230,8 @@
 	. = ..()
 	if(!.)
 		return
-	owner.adjust_energy((owner.STAEND - 20) * (SSmobs.wait * 0.1) * infection_percent)
+	if(!HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH))
+		owner.adjust_energy((owner.STAEND - 20) * (SSmobs.wait * 0.1) * infection_percent)
 	if(infection_percent >= 1 && !HAS_TRAIT(owner, TRAIT_NODEATH) && !HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH))
 		if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
 			to_chat(owner, span_briar("IT HURTS! IT HURTS!"))
@@ -325,7 +326,7 @@
 	if(infection_percent >= BBC_STAGE_LATE ^ insane) // this flips if these dont match up
 		owner.refresh_looping_ambience()
 		insane = !insane
-	if(insane && prob((owner.ckey ? 1 : 5)))
+	if(insane && prob((owner.ckey ? 1 : 15)))
 		owner.emote(pick("laugh", "agony", "firescream"))
 	if(HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH))
 		return
