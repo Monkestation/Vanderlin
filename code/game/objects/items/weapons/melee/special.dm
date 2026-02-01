@@ -257,7 +257,7 @@
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
-	max_blade_int = 150
+	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 
 	gripsprite = FALSE

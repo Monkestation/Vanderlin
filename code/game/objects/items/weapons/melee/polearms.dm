@@ -424,7 +424,7 @@
 	desc = "A grand axe of northernly design, renowned for easily chopping off limbs clean with brutal strength."
 	icon_state = "bardiche"
 	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
+	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_EASY_TO_DODGE
 	possible_item_intents = list(AXE_CUT)
@@ -503,7 +503,7 @@
 	desc = "A humble spear with a bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear"
 	force = DAMAGE_SPEARPLUS
-	max_blade_int = 300
+	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/bronze
 	melt_amount = 75
