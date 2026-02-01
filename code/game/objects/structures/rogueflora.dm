@@ -11,8 +11,8 @@
 	. = ..()
 	if(num_random_icons)
 		icon_state = "[base_icon_state][rand(1, num_random_icons)]"
-//newtree
 
+//newtree
 /obj/structure/flora/tree
 	name = "old tree"
 	desc = "An old, wicked tree that not even elves could love."
@@ -295,7 +295,6 @@
 	M.reset_offsets("bed_buckle")
 
 //newbushes
-
 /obj/structure/flora/grass
 	name = "grass"
 	desc = "The kindest blades you will ever meet in this world."
@@ -337,8 +336,28 @@
 	return ..()
 
 // Grass procs
+/obj/structure/flora/grass/proc/has_searchable_loot()
+	return bushtype || guaranteed_loot || bonus_loot
+
+/obj/structure/flora/grass/attack_hand(mob/user)
+	. = ..()
+	if(!isliving(user) || !has_searchable_loot())
+		return
+	start_search_loop(user)
+
+/obj/structure/flora/grass/proc/grass_replenish_loot()
+	if(bushtype && !(bushtype in looty))
+		looty += bushtype
+
+	if(guaranteed_loot)
+		for(var/path in guaranteed_loot)
+			looty += path
+
+	if(bonus_loot && prob(BUSH_BONUS_LOOT_CHANCE))
+		looty += pick(bonus_loot)
+
 /obj/structure/flora/grass/proc/start_search_loop(mob/living/user)
-	while(TRUE)
+	while(!QDELETED(src) && !QDELETED(user))
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
 
@@ -349,7 +368,7 @@
 				to_chat(user, span_warning("Picked clean... I should try later."))
 				return
 
-		if(!do_after(user, SEARCHTIME, target = src))
+		if(!do_after(user, SEARCHTIME, target = src) || QDELETED(src) || QDELETED(user))
 			return
 
 		if(!prob(50))
@@ -367,17 +386,6 @@
 		if(!length(looty))
 			res_replenish = world.time + 8 MINUTES
 		return
-
-/obj/structure/flora/grass/proc/grass_replenish_loot()
-	if(bushtype && !(bushtype in looty))
-		looty += bushtype
-
-	if(guaranteed_loot)
-		for(var/path in guaranteed_loot)
-			looty += path
-
-	if(bonus_loot && prob(BUSH_BONUS_LOOT_CHANCE))
-		looty += pick(bonus_loot)
 
 /obj/structure/flora/grass/tundra
 	name = "tundra grass"
@@ -444,17 +452,6 @@
 					/obj/item/reagent_containers/food/snacks/produce/westleach=2))
 	grass_replenish_loot()
 	pixel_x += rand(-3,3)
-
-// normalbush looting
-/obj/structure/flora/grass/bush/attack_hand(mob/user)
-	if(!isliving(user))
-		return
-
-	var/mob/living/living_user = user
-	start_search_loop(living_user)
-
-
-
 
 // bush crossing
 /obj/structure/flora/grass/bush/Crossed(atom/movable/AM)
@@ -551,12 +548,6 @@
 	grass_replenish_loot()
 	pixel_x += rand(-3,3)
 
-// pyroflower cluster looting
-/obj/structure/flora/grass/pyroclasticflowers/attack_hand(mob/user)
-	if(!isliving(user))
-		return
-	start_search_loop(user)
-
 // swarmpweed bush
 /obj/structure/flora/grass/swampweed
 	name = "bunch of swampweed"
@@ -572,11 +563,6 @@
 		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/swampweed = 1))
 	grass_replenish_loot()
 	pixel_x += rand(-3,3)
-
-/obj/structure/flora/grass/swampweed/attack_hand(mob/user)
-	if(!isliving(user))
-		return
-	start_search_loop(user)
 
 /obj/structure/flora/shroom_tree
 	name = "shroom"
@@ -882,7 +868,6 @@
 	SET_BASE_PIXEL(-16, -1)
 	num_random_icons = 0
 	silky = TRUE
-
 
 /obj/structure/flora/grass/mushroom
 	name = "leafy mushrooms"
