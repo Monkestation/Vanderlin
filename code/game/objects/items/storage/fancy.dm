@@ -41,6 +41,13 @@
 	else
 		. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] [contents_tag]s left."
 
+/obj/item/storage/fancy/populate_contents()
+	if(!spawn_type)
+		return
+	while(!atom_storage.grid_full())
+		if(!atom_storage.attempt_insert(new spawn_type(), override = TRUE))
+			break
+
 /obj/item/storage/fancy/attack_self(mob/user, params)
 	. = ..()
 	is_open = !is_open
@@ -173,7 +180,7 @@
 	if(target != user || !contents.len || user.mouth)
 		return ..()
 
-	atom_storage.attempt_remove(cig, get_turf(target))
+	atom_storage.remove_single(user, cig, get_turf(target))
 	target.equip_to_slot_if_possible(cig, ITEM_SLOT_MOUTH)
 
 	contents -= cig
