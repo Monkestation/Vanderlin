@@ -443,11 +443,10 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 				if(messages)
 					user.balloon_alert(user, "not while worn!")
 				return FALSE
-			else if(violated_flags & STORAGE_ACCESS_INHANDS)
-				if(!(locate(parent) in user.held_items))
-					if(messages)
-						user.balloon_alert(user, "need to hold!")
-					return FALSE
+			if(violated_flags & STORAGE_ACCESS_INHANDS)
+				if(messages)
+					user.balloon_alert(user, "need to hold!")
+				return FALSE
 
 		var/datum/storage/smaller_fish = to_insert.atom_storage
 		if(smaller_fish && !allow_big_nesting && to_insert.w_class >= item_parent.w_class)
