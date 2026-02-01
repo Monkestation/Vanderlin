@@ -509,22 +509,22 @@
 	base_icon_state = "pyroflower"
 	num_random_icons = 3
 	layer = ABOVE_ALL_MOB_LAYER
-	var/list/looty2 = list()
-	var/bushtype2
-	var/res_replenish2
+	var/list/looty = list()
+	var/bushtype
+	var/res_replenish
 
 /obj/structure/flora/grass/pyroclasticflowers/Initialize()
 	. = ..()
 	if(prob(88))
-		bushtype2 = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/fyritius = 1))
+		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/fyritius = 1))
 	loot_replenish2()
 	pixel_x += rand(-3,3)
 
 /obj/structure/flora/grass/pyroclasticflowers/proc/loot_replenish2()
-	if(bushtype2)
-		looty2 += bushtype2
+	if(bushtype)
+		looty += bushtype
 	if(prob(66))
-		looty2 += /obj/item/reagent_containers/food/snacks/produce/fyritius
+		looty += /obj/item/reagent_containers/food/snacks/produce/fyritius
 
 // pyroflower cluster looting
 /obj/structure/flora/grass/pyroclasticflowers/attack_hand(mob/user)
@@ -555,22 +555,22 @@
 	icon_state = "swampweed1"
 	base_icon_state = "swampweed"
 	num_random_icons = 3
-	var/list/looty3 = list()
-	var/bushtype3
-	var/res_replenish3
+	var/list/looty = list()
+	var/bushtype
+	var/res_replenish
 
 /obj/structure/flora/grass/swampweed/Initialize()
 	. = ..()
 	if(prob(88))
-		bushtype3 = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/swampweed = 1))
+		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/swampweed = 1))
 	loot_replenish3()
 	pixel_x += rand(-3,3)
 
 /obj/structure/flora/grass/swampweed/proc/loot_replenish3()
-	if(bushtype3)
-		looty3 += bushtype3
+	if(bushtype)
+		looty += bushtype
 	if(prob(66))
-		looty3 += /obj/item/reagent_containers/food/snacks/produce/swampweed
+		looty += /obj/item/reagent_containers/food/snacks/produce/swampweed
 
 /obj/structure/flora/grass/swampweed/attack_hand(mob/user)
 	if(isliving(user))
@@ -757,7 +757,7 @@
 						L.Paralyze(10)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, span_warning("A thorn [pick(\"slices\",\"cuts\",\"nicks\")] my [BP.name]."))
+					to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
 					BP.receive_damage(10)
 					L.Immobilize(10)
 
@@ -835,7 +835,7 @@
 						L.Paralyze(5)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, span_warning("A thorn [pick(\"slices\",\"cuts\",\"nicks\")] my [BP.name]."))
+					to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
 					BP.receive_damage(10)
 
 /obj/structure/flora/grass/bush_meagre/attack_hand(mob/living/user)
