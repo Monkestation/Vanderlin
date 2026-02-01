@@ -64,6 +64,7 @@
 	ITEM_SLOT_HANDS,\
 )
 
+/// List to iterate where all potential equipped storage could be not including hands
 #define STORAGE_SLOT_PRIORITY list(\
 	ITEM_SLOT_BACK_L,\
 	ITEM_SLOT_BACK_R,\
@@ -71,6 +72,9 @@
 	ITEM_SLOT_CLOAK,\
 	ITEM_SLOT_BELT_L,\
 	ITEM_SLOT_BELT_R,\
+	ITEM_SLOT_SHIRT,\
+	ITEM_SLOT_ARMOR,\
+	ITEM_SLOT_PANTS,\
 	ITEM_SLOT_SHOES,\
 )
 

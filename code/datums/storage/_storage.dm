@@ -1355,6 +1355,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!coordinates)
 		return FALSE
 
+	// If the grid is full there is no valid position
 	if(grid_full())
 		return FALSE
 
@@ -1371,37 +1372,29 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	var/enchanted = to_store.has_enchantment(/datum/enchantment/dimensional_shrink)
 
-	/// Validate height is in bounds and add to coordinates covered
-	var/used_grid_height = to_store.grid_height
-	if(used_grid_height > 32)
-		if(enchanted)
-			used_grid_height = max(32, used_grid_height - 32)
-
-		var/grid_length = used_grid_height / 32
-		if(grid_length > 1)
-			var/list/coords = splittext(coordinates, ",")
-			for(var/i in 1 to grid_length - 1)
-				var/grid_y = text2num(coords[2]) + i
-				if(grid_y >= screen_max_rows)
-					return FALSE
-				grid_coordinates += "[coords[1]],[grid_y]"
-
-	/// Validate width is in bounds and add to coordinates covered
 	var/used_grid_width = to_store.grid_width
-	if(used_grid_width > 32)
-		if(enchanted)
-			used_grid_width = max(32, used_grid_width - 32)
+	if(enchanted)
+		used_grid_width = max(32, used_grid_width - 32)
 
-		var/grid_length = used_grid_width / 32
-		if(grid_length > 1)
-			var/list/coords = splittext(coordinates, ",")
-			for(var/i in 1 to grid_length - 1)
-				var/grid_x = text2num(coords[1]) + i
-				if(grid_x >= screen_max_columns)
-					return FALSE
-				grid_coordinates += "[grid_x],[coords[2]]"
+	var/used_grid_height = to_store.grid_height
+	if(enchanted)
+		used_grid_height = max(32, used_grid_height - 32)
 
-	/// Validate there are no existing items
+	var/number_x = used_grid_width / 32
+	var/number_y = used_grid_height / 32
+
+	// Validate coordinates and create a list for existing item checks
+	for(var/x in 0 to number_x - 1)
+		var/grid_x = text2num(x_and_y[1]) + x
+		if(grid_x >= screen_max_columns)
+			return FALSE
+		for(var/y in 0 to number_y - 1)
+			var/grid_y = text2num(x_and_y[2]) + y
+			if(grid_y >= screen_max_rows)
+				return FALSE
+			grid_coordinates |= "[grid_x],[grid_y]"
+
+	// Validate there are no existing items
 	for(var/coord in grid_coordinates)
 		if(grid_item_from_coordinates(coord))
 			return FALSE
@@ -1479,34 +1472,28 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /// Add an item to our tracked grid for grid storage
 /datum/storage/proc/add_item_to_grid(obj/item/to_store, coordinates)
 	if(!coordinates)
-		stack_trace("Storage datum [src] ([parent.type]) tried to add to its grid without coordinates.")
+		stack_trace("Storage datum [type] ([parent.type]) tried to add [to_store] ([to_store.type]) to its grid without coordinates.")
 		return FALSE
 
 	var/list/grid_coordinates = list(coordinates)
 
 	var/enchanted = to_store.has_enchantment(/datum/enchantment/dimensional_shrink)
 
-	var/used_grid_height = to_store.grid_height
-	if(used_grid_height > 32)
-		if(enchanted)
-			used_grid_height = max(32, used_grid_height - 32)
-
-		var/grid_length = used_grid_height / 32
-		if(grid_length > 1)
-			var/list/x_and_y = splittext(coordinates, ",")
-			for(var/i in 1 to grid_length - 1)
-				grid_coordinates += "[x_and_y[1]],[text2num(x_and_y[2]) + i]"
-
 	var/used_grid_width = to_store.grid_width
-	if(used_grid_width > 32)
-		if(enchanted)
-			used_grid_width = max(32, used_grid_width - 32)
+	if(enchanted)
+		used_grid_width = max(32, used_grid_width - 32)
 
-		var/grid_length = used_grid_width / 32
-		if(grid_length > 1)
-			var/list/x_and_y = splittext(coordinates, ",")
-			for(var/i in 1 to grid_length - 1)
-				grid_coordinates += "[text2num(x_and_y[1]) + i],[x_and_y[2]]"
+	var/used_grid_height = to_store.grid_height
+	if(enchanted)
+		used_grid_height = max(32, used_grid_height - 32)
+
+	var/number_x = used_grid_width / 32
+	var/number_y = used_grid_height / 32
+
+	var/list/x_and_y = splittext(coordinates, ",")
+	for(var/x in 0 to number_x - 1)
+		for(var/y in 0 to number_y - 1)
+			grid_coordinates |= "[text2num(x_and_y[1]) + x],[text2num(x_and_y[2]) + y]"
 
 	for(var/coord in grid_coordinates)
 		LAZYADDASSOCLIST(item_coordinates, to_store, coord)
