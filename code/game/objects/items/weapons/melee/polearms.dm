@@ -124,7 +124,7 @@
 	name = "spear"
 	desc = "The humble spear, use the pointy end."
 	icon_state = "spear"
-	force = DAMAGE_SPEAR
+	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR
 	possible_item_intents = list(SPEAR_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
@@ -499,9 +499,7 @@
 	name = "ancient spear"
 	desc = "A humble spear with a bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear"
-	force = DAMAGE_SPEARPLUS
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/bronze
 	melt_amount = 75
 	sellprice = 120 // A noble collector would love to get his/her hands on one of these spears
