@@ -350,3 +350,15 @@
 /datum/storage/tray/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/plate))
+
+/datum/storage/messkit
+	screen_max_rows = 2
+	screen_max_columns = 5
+	max_specific_storage = WEIGHT_CLASS_BULKY
+	allow_big_nesting = TRUE
+	equipped_access_flags = STORAGE_ACCESS_NOT_WORN
+
+/datum/storage/messkit/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+
+	set_holdable(list(/obj/item/kitchen, /obj/item/folding_table_stored, /obj/item/cooking, /obj/item/reagent_containers/food/snacks, /obj/item/reagent_containers, /obj/item/mobilestove))

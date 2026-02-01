@@ -6,3 +6,8 @@
 	no_interface = TRUE
 	quickdraw = TRUE
 
+/datum/storage/no_interface/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	if(!no_interface)
+		stack_trace("no_interface storage ([type]) has an interface, use a regular storage if you want the interface.")
+		no_interface = TRUE

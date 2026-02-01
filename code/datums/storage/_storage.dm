@@ -394,6 +394,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if((to_insert == parent) || (to_insert == real_location))
 		return FALSE
 
+	if(parent.reagents?.total_volume)
+		if(messages && user)
+			user.balloon_alert(user, "full of fluid!")
+		return FALSE
+
 	if(locked > force)
 		if(messages && user)
 			user.balloon_alert(user, "closed!")
