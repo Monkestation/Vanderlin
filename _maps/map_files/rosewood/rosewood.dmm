@@ -3288,24 +3288,6 @@
 /obj/structure/vine/black_briar/medium,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
-"cdJ" = (
-/obj/effect/mob_spawn/human/briar{
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
-	name = "captain";
-	assignedrole = /datum/job/captain;
-	outfit = /datum/outfit/captain;
-	r_hand = /obj/item/weapon/sword/sabre/hook;
-	beltl = null;
-	beltr = null;
-	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Guileran";
-	mob_gender = "male";
-	possible_ages = list("Adult");
-	backr = null;
-	l_hand = /obj/item/weapon/shield/tower/metal
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/town/roofs)
 "cdO" = (
 /obj/structure/door/green,
 /obj/effect/mapping_helpers/access/keyset/town/mercenary,
@@ -4468,7 +4450,6 @@
 	dir = 1;
 	icon_state = "borderfall"
 	},
-/obj/structure/fake_machine/musicbox/mannor,
 /obj/structure/vine/black_briar/medium,
 /turf/open/floor/tile,
 /area/indoors/town/keep)
@@ -5718,6 +5699,21 @@
 /area/outdoors/town/roofs)
 "dAD" = (
 /obj/effect/decal/cleanable/sigil/E,
+/obj/effect/mob_spawn/human/briar{
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
+	name = "captain";
+	assignedrole = /datum/job/captain;
+	outfit = /datum/outfit/captain;
+	r_hand = /obj/item/weapon/sword/sabre/hook;
+	beltl = null;
+	beltr = null;
+	ring = /obj/item/clothing/ring/gold/ravox;
+	mob_name = "Sir Guileran";
+	mob_gender = "male";
+	possible_ages = list("Adult");
+	backr = null;
+	l_hand = /obj/item/weapon/shield/tower/metal
+	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
 "dAP" = (
@@ -7368,6 +7364,20 @@
 "eyL" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
+	},
+/obj/effect/mob_spawn/human/briar{
+	name = "zizo knight";
+	mob_species = list(/datum/species/elf/dark);
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
+	outfit = /datum/outfit/wretch/heretic;
+	gender = "female";
+	possible_ages = list("Adult");
+	mob_gender = "female";
+	patron = /datum/patron/inhumen/zizo;
+	backr = null;
+	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep)
@@ -10142,6 +10152,11 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
+"gkH" = (
+/obj/effect/decal/cleanable/debris/glass,
+/obj/effect/spawner/map_spawner/loot/rare,
+/turf/open/floor/cobblerock/alt,
+/area/outdoors/town/roofs)
 "gll" = (
 /obj/item/reagent_containers/glass/cup/wooden{
 	pixel_x = 6
@@ -14061,7 +14076,6 @@
 /area/indoors/town/keep)
 "iJb" = (
 /obj/structure/bed/inn,
-/obj/item/bedsheet/fabric,
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep)
 "iJj" = (
@@ -29908,7 +29922,6 @@
 /obj/effect/decal/cleanable/debris/stone{
 	dir = 4
 	},
-/obj/structure/flora/grass/herb/cursedrosa/spreader/instant,
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
 "sHJ" = (
@@ -134966,7 +134979,7 @@ oVd
 dzC
 fIY
 oVP
-ppU
+flw
 ppU
 hyO
 eaV
@@ -216175,7 +216188,7 @@ uWt
 uWt
 rwa
 uWt
-cdJ
+rwa
 rwa
 fEe
 oVG
@@ -216572,7 +216585,7 @@ tXU
 riK
 uWt
 tXU
-uWt
+lwX
 uWt
 uWt
 uWt
@@ -216764,12 +216777,12 @@ mcp
 kuH
 mOF
 oqY
-mOF
+gkH
 mOF
 mOF
 uWt
 uWt
-kMO
+uWt
 uWt
 uWt
 uWt
@@ -219803,7 +219816,7 @@ fEe
 dal
 fEe
 uWt
-lwX
+uWt
 uWt
 uWt
 uWt
