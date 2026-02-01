@@ -16117,14 +16117,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/church,
 /area/indoors/town/church)
-"jrW" = (
-/obj/effect/decal/cleanable/dirt/cobweb{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/ladder,
-/turf/open/floor/ruinedwood/spiral,
-/area/under/town/basement)
 "jrY" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
@@ -29944,6 +29936,10 @@
 	dir = 4
 	},
 /area/outdoors/river)
+"rxf" = (
+/obj/item/key/lord,
+/turf/open/floor/cobble,
+/area/indoors/town/cell)
 "rxx" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/pants/skirt/colored/random,
@@ -33226,12 +33222,6 @@
 /obj/structure/vine/black_briar/hvy,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/gate)
-"twN" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/turf/open/floor/blocks,
-/area/under/cave)
 "twP" = (
 /obj/effect/spawner/map_spawner/loot/potion_vitals,
 /turf/open/floor/carpet/purple,
@@ -34495,6 +34485,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
+/obj/structure/vine/black_briar/hvy,
 /turf/open/floor/rooftop,
 /area/outdoors/town/roofs)
 "unX" = (
@@ -37070,7 +37061,6 @@
 /area/outdoors/town/keep)
 "vJV" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/effect/spawner/guaranteed_map_spawner/listed/cutlery,
 /obj/item/broom,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
@@ -41216,7 +41206,6 @@
 	pixel_x = 8;
 	pixel_y = 7
 	},
-/obj/item/key/lord,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep)
 "ylj" = (
@@ -56225,7 +56214,7 @@ qJl
 rda
 bhK
 wZu
-wav
+rxf
 bhK
 oRH
 aGf
@@ -102706,9 +102695,9 @@ uBv
 ngl
 aNQ
 oVd
-cXl
-dVU
-dVU
+dzC
+evu
+evu
 dVU
 vbx
 vbx
@@ -102907,10 +102896,10 @@ uBv
 qMc
 aNQ
 aNQ
-tzB
-uBv
-dVU
-dVU
+dzC
+dzC
+evu
+evu
 vbx
 iqm
 vbx
@@ -103109,9 +103098,9 @@ uBv
 qMc
 tzB
 tzB
-aNQ
-uBv
-vbx
+rjB
+dzC
+evu
 nfF
 hbx
 vbx
@@ -103311,9 +103300,9 @@ uBv
 fhU
 tzB
 aNQ
-aNQ
-uBv
-dVU
+rjB
+dzC
+evu
 dVU
 dVU
 dVU
@@ -103514,8 +103503,8 @@ akB
 aNQ
 aNQ
 aNQ
-uBv
-jVi
+dzC
+evu
 vbx
 vbx
 vbx
@@ -139453,7 +139442,7 @@ oXk
 yha
 smr
 hyb
-yha
+hyb
 yha
 jLC
 hyb
@@ -139655,7 +139644,7 @@ tNn
 unZ
 hyb
 hyb
-unZ
+hyb
 hyb
 hyb
 hyb
@@ -139856,7 +139845,7 @@ uBv
 kHj
 kHj
 hyb
-rDw
+hyb
 rDw
 kHj
 hyb
@@ -143103,11 +143092,11 @@ bqv
 rIe
 xck
 uBv
-eEi
-eEi
-eEi
-eEi
-hxr
+dkb
+lXN
+lXN
+lXN
+lXN
 jiV
 jiV
 jiV
@@ -143307,9 +143296,9 @@ dqz
 dqz
 ieX
 ieX
-eEi
-eEi
-hxr
+lXN
+lXN
+lXN
 jiV
 jiV
 jiV
@@ -143507,11 +143496,11 @@ boM
 fGi
 sDE
 kbV
-add
+kbV
 ieX
-eEi
-eEi
-hxr
+lXN
+lXN
+lXN
 jiV
 jiV
 jiV
@@ -143687,7 +143676,7 @@ qJl
 qJl
 qJl
 ieX
-add
+kbV
 kbV
 ieX
 qJl
@@ -143711,9 +143700,9 @@ iFM
 ieX
 ieX
 ieX
-eEi
-eEi
-hxr
+lXN
+lXN
+lXN
 jiV
 jiV
 jiV
@@ -143911,11 +143900,11 @@ kbV
 gnp
 kbV
 ieX
-eEi
-eEi
-eEi
-eEi
-hxr
+lXN
+lXN
+lXN
+lXN
+lXN
 jiV
 jiV
 jiV
@@ -144113,11 +144102,11 @@ kbV
 ieX
 kbV
 ieX
-eEi
-eEi
-eEi
-eEi
-hxr
+lXN
+lXN
+lXN
+lXN
+dkb
 jiV
 jiV
 jiV
@@ -144315,11 +144304,11 @@ kbV
 ieX
 kbV
 ieX
-eEi
-eEi
-eEi
-eEi
-hxr
+dkb
+dkb
+lXN
+dkb
+dkb
 jiV
 jiV
 jiV
@@ -144518,10 +144507,10 @@ kbV
 vrp
 ieX
 eEi
-eEi
-eEi
-eEi
-hxr
+dkb
+dkb
+dkb
+dkb
 jiV
 jiV
 jiV
@@ -144723,7 +144712,7 @@ eEi
 eEi
 eEi
 eEi
-vci
+dkb
 fKK
 jiV
 jiV
@@ -182699,7 +182688,7 @@ dzC
 dzC
 bkb
 krN
-krN
+fVO
 krN
 krN
 krN
@@ -183304,8 +183293,8 @@ rDw
 rDw
 kHj
 vCA
-krN
-krN
+uLF
+uLF
 lvO
 nHb
 nHb
@@ -183506,9 +183495,9 @@ uwW
 pzh
 bqL
 vCA
-krN
-krN
-lvO
+jiV
+jiV
+jiV
 nHb
 nHb
 nHb
@@ -183708,9 +183697,9 @@ dOn
 tGf
 uBv
 vCA
-krN
-krN
-nuE
+jiV
+jiV
+jiV
 nHb
 nHb
 nHb
@@ -183908,11 +183897,11 @@ ieX
 kbV
 kbV
 kbV
-jrW
+xcs
 dkb
-krN
-fVO
-nuE
+jiV
+jiV
+jiV
 nHb
 nHb
 nHb
@@ -184088,7 +184077,7 @@ qJl
 qJl
 qJl
 ieX
-add
+kbV
 kbV
 kbV
 ieX
@@ -184112,9 +184101,9 @@ ieX
 ieX
 ieX
 dkb
-krN
-krN
-nuE
+jiV
+jiV
+jiV
 nHb
 nHb
 nHb
@@ -184314,9 +184303,9 @@ kbV
 kbV
 kbV
 xAO
-krN
-krN
-lvO
+jiV
+jiV
+jiV
 nHb
 nHb
 nHb
@@ -184516,8 +184505,8 @@ kbV
 ieX
 ieX
 kJb
-krN
-krN
+jiV
+jiV
 lvO
 nHb
 nHb
@@ -184718,7 +184707,7 @@ dkb
 dkb
 dkb
 dkb
-krN
+jiV
 krN
 lvO
 nHb
@@ -184892,16 +184881,16 @@ qJl
 qJl
 qJl
 sin
-twN
-bis
-bis
-bis
-bis
-bis
-bis
-bis
-bis
-bis
+sin
+sin
+sin
+sin
+sin
+sin
+sin
+sin
+sin
+sin
 nBe
 nBe
 nBe
@@ -184909,13 +184898,13 @@ nBe
 nBe
 nBe
 nBe
+ufR
+ufR
 nBe
-nBe
-nBe
-nBe
-nBe
-nBe
-nBe
+ufR
+ufR
+ufR
+ufR
 nBe
 krN
 krN
@@ -185094,16 +185083,16 @@ qJl
 qJl
 qJl
 sin
-twN
-bis
-bis
-bis
-bis
-bis
-bis
-bis
-bis
-bis
+sin
+sin
+sin
+sin
+sin
+sin
+sin
+sin
+sin
+sin
 nBe
 aUK
 nBe
@@ -185117,7 +185106,7 @@ aUK
 nBe
 nBe
 nBe
-aUK
+nBe
 nBe
 nBe
 krN
@@ -224697,7 +224686,7 @@ qJl
 qJl
 qJl
 qJl
-qJl
+sin
 udK
 udK
 udK
@@ -224899,7 +224888,7 @@ qJl
 qJl
 qJl
 qJl
-qJl
+sin
 gIF
 gIF
 gIF
@@ -225292,9 +225281,9 @@ jsT
 jsT
 bis
 bis
-twN
-ufR
-ufR
+sin
+sin
+sin
 sin
 qJl
 qJl
@@ -225494,9 +225483,9 @@ jsT
 jsT
 jsT
 bis
-twN
-ufR
-ufR
+sin
+sin
+sin
 sin
 qJl
 qJl
