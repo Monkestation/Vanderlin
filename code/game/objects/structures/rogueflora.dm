@@ -245,8 +245,10 @@
 		to_chat(user, "I start unearthing the stump...")
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 		if(do_after(user, 5 SECONDS))
-			user.visible_message("<span class='notice'>[user] unearths \the [src].</span>", \
-								"<span class='notice'>I unearth \the [src].</span>")
+			user.visible_message(
+				span_notice("[user] unearths \the [src]."),
+				span_notice("I unearth \the [src].")
+								)
 			if(isunburnt)
 				new stump_loot(loc) // Rewarded with an extra small log if done the right way.return
 			atom_destruction("brute")
@@ -741,7 +743,7 @@
 
 		if(L.m_intent == MOVE_INTENT_RUN)
 			if(!ishuman(L))
-				to_chat(L, "<span class='warning'>I'm cut on a thorn!</span>")
+				to_chat(L, span_warning("I'm cut on a thorn!"))
 				L.apply_damage(5, BRUTE)
 			else
 				var/mob/living/carbon/human/H = L
@@ -751,11 +753,11 @@
 						var/obj/item/natural/thorn/TH = new(src.loc)
 						BP.add_embedded_object(TH, silent = TRUE)
 						BP.receive_damage(10)
-						to_chat(H, "<span class='danger'>\A [TH] impales my [BP.name]!</span>")
+						to_chat(H, span_danger("\A [TH] impales my [BP.name]!"))
 						L.Paralyze(10)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, "<span class='warning'>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span>")
+					to_chat(H, span_warning("A thorn [pick(\"slices\",\"cuts\",\"nicks\")] my [BP.name]."))
 					BP.receive_damage(10)
 					L.Immobilize(10)
 
@@ -818,7 +820,7 @@
 			L.Immobilize(5)
 		if(L.m_intent == MOVE_INTENT_RUN)
 			if(!ishuman(L))
-				to_chat(L, "<span class='warning'>I'm cut on a thorn!</span>")
+				to_chat(L, span_warning("I'm cut on a thorn!"))
 				L.apply_damage(5, BRUTE)
 				L.Immobilize(5)
 			else
@@ -829,11 +831,11 @@
 						var/obj/item/natural/thorn/TH = new(src.loc)
 						BP.add_embedded_object(TH, silent = TRUE)
 						BP.receive_damage(10)
-						to_chat(H, "<span class='danger'>\A [TH] impales my [BP.name]!</span>")
+						to_chat(H, span_danger("\A [TH] impales my [BP.name]!"))
 						L.Paralyze(5)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, "<span class='warning'>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span>")
+					to_chat(H, span_warning("A thorn [pick(\"slices\",\"cuts\",\"nicks\")] my [BP.name]."))
 					BP.receive_damage(10)
 
 /obj/structure/flora/grass/bush_meagre/attack_hand(mob/living/user)
