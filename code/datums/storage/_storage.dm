@@ -943,7 +943,10 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /// Called directly from the attack chain if [insert_on_attack] is TRUE.
 /// Handles inserting an item into the storage when clicked.
 /datum/storage/proc/item_interact_insert(mob/living/user, obj/item/thing)
-	return attempt_insert(thing, user)
+	if(attempt_insert(thing, user))
+		refresh_views() // WHY DOES IT NEED IT???
+		return TRUE
+	return FALSE
 
 /// Signal handler for whenever we're attacked by a mob.
 /datum/storage/proc/on_attack(datum/source, mob/user)
