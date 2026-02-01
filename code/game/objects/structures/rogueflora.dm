@@ -1,5 +1,8 @@
-#define SEARCHTIME 12
+#define SEARCHTIME 1.2 SECONDS
+#define BUSH_PRIMARY_LOOT_CHANCE 88
+#define BUSH_BONUS_LOOT_CHANCE 66
 
+// Base Flora
 /obj/structure/flora
 	var/num_random_icons = 0
 	layer = FLORA_LAYER
@@ -8,7 +11,6 @@
 	. = ..()
 	if(num_random_icons)
 		icon_state = "[base_icon_state][rand(1, num_random_icons)]"
-
 //newtree
 
 /obj/structure/flora/tree
@@ -312,6 +314,14 @@
 	///	for various luck based effects
 	var/luckydouble
 
+	var/list/looty = list()
+	var/res_replenish
+	var/bushtype
+
+	var/guaranteed_loot = null
+	var/bonus_loot = null
+
+
 /obj/structure/flora/grass/spark_act()
 	fire_act()
 
@@ -325,6 +335,49 @@
 	else if(prob(5))
 		new /obj/item/neuFarm/seed/mixed_seed(get_turf(src))
 	return ..()
+
+// Grass procs
+/obj/structure/flora/grass/proc/start_search_loop(mob/living/user)
+	while(TRUE)
+		user.changeNext_move(CLICK_CD_MELEE)
+		playsound(src, "plantcross", 80, FALSE, -1)
+
+		if(!length(looty))
+			if(world.time > res_replenish)
+				grass_replenish_loot()
+			else
+				to_chat(user, span_warning("Picked clean... I should try later."))
+				return
+
+		if(!do_after(user, SEARCHTIME, target = src))
+			return
+
+		if(!prob(50))
+			user.visible_message(span_warning("[user] rummages through [src]..."))
+			continue
+
+		var/obj/item/item_path = pick_n_take(looty)
+		if(!item_path)
+			return
+
+		var/obj/item/found_item = new item_path(user.loc)
+		user.put_in_hands(found_item)
+		user.visible_message(span_notice("[user] finds [found_item] in [src]."))
+
+		if(!length(looty))
+			res_replenish = world.time + 8 MINUTES
+		return
+
+/obj/structure/flora/grass/proc/grass_replenish_loot()
+	if(bushtype && !(bushtype in looty))
+		looty += bushtype
+
+	if(guaranteed_loot)
+		for(var/path in guaranteed_loot)
+			looty += path
+
+	if(bonus_loot && prob(BUSH_BONUS_LOOT_CHANCE))
+		looty += pick(bonus_loot)
 
 /obj/structure/flora/grass/tundra
 	name = "tundra grass"
@@ -375,9 +428,9 @@
 	layer = ABOVE_ALL_MOB_LAYER
 	max_integrity = 35
 	debris = list(/obj/item/natural/fibers = 1, /obj/item/grown/log/tree/stick = 1)
-	var/res_replenish
-	var/list/looty = list()
-	var/bushtype
+
+	guaranteed_loot = list(/obj/item/natural/fibers)
+	bonus_loot = list(/obj/item/natural/thorn)
 
 /obj/structure/flora/grass/bush/tundra
 	name = "tundra bush"
@@ -385,43 +438,23 @@
 
 /obj/structure/flora/grass/bush/Initialize()
 	. = ..()
-	if(prob(88))
+	if(prob(BUSH_PRIMARY_LOOT_CHANCE))
 		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry=5,
 					/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison=3,
 					/obj/item/reagent_containers/food/snacks/produce/westleach=2))
-	loot_replenish()
+	grass_replenish_loot()
 	pixel_x += rand(-3,3)
-
-/obj/structure/flora/grass/bush/proc/loot_replenish()
-	if(bushtype)
-		looty += bushtype
-	if(prob(66))
-		looty += /obj/item/natural/thorn
-	looty += /obj/item/natural/fibers
 
 // normalbush looting
 /obj/structure/flora/grass/bush/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, SEARCHTIME, target = src))
-			if(!looty.len && (world.time > res_replenish))
-				loot_replenish()
-			if(prob(50) && looty.len)
-				if(looty.len == 1)
-					res_replenish = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty)
-				if(B)
-					B = new B(user.loc)
-					user.put_in_hands(B)
-					user.visible_message(span_notice("[user] finds [B] in [src]."))
-					return
-			user.visible_message(span_warning("[user] searches through [src]."))
-			if(looty.len)
-				attack_hand(user)
-			if(!looty.len)
-				to_chat(user, span_warning("Picked clean... I should try later."))
+	if(!isliving(user))
+		return
+
+	var/mob/living/living_user = user
+	start_search_loop(living_user)
+
+
+
 
 // bush crossing
 /obj/structure/flora/grass/bush/Crossed(atom/movable/AM)
@@ -509,44 +542,20 @@
 	base_icon_state = "pyroflower"
 	num_random_icons = 3
 	layer = ABOVE_ALL_MOB_LAYER
-	var/list/looty = list()
-	var/bushtype
-	var/res_replenish
+	bonus_loot = list(/obj/item/reagent_containers/food/snacks/produce/fyritius)
 
 /obj/structure/flora/grass/pyroclasticflowers/Initialize()
 	. = ..()
-	if(prob(88))
-		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/fyritius = 1))
-	loot_replenish2()
+	if(prob(BUSH_PRIMARY_LOOT_CHANCE))
+		bushtype = /obj/item/reagent_containers/food/snacks/produce/fyritius
+	grass_replenish_loot()
 	pixel_x += rand(-3,3)
-
-/obj/structure/flora/grass/pyroclasticflowers/proc/loot_replenish2()
-	if(bushtype)
-		looty += bushtype
-	if(prob(66))
-		looty += /obj/item/reagent_containers/food/snacks/produce/fyritius
 
 // pyroflower cluster looting
 /obj/structure/flora/grass/pyroclasticflowers/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, SEARCHTIME, target = src))
-			if(!looty.len && (world.time > res_replenish))
-				loot_replenish2()
-			if(prob(50) && looty.len)
-				if(looty.len == 1)
-					res_replenish = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty)
-				if(B)
-					B = new B(user.loc)
-					user.put_in_hands(B)
-					user.visible_message(span_notice("[user] finds [B] in [src]."))
-					return
-			user.visible_message(span_warning("[user] searches through [src]."))
-			if(!looty.len)
-				to_chat(user, span_warning("Picked clean... I should try later."))
+	if(!isliving(user))
+		return
+	start_search_loop(user)
 
 // swarmpweed bush
 /obj/structure/flora/grass/swampweed
@@ -555,43 +564,19 @@
 	icon_state = "swampweed1"
 	base_icon_state = "swampweed"
 	num_random_icons = 3
-	var/list/looty = list()
-	var/bushtype
-	var/res_replenish
+	bonus_loot = list(/obj/item/reagent_containers/food/snacks/produce/swampweed)
 
 /obj/structure/flora/grass/swampweed/Initialize()
 	. = ..()
-	if(prob(88))
+	if(prob(BUSH_PRIMARY_LOOT_CHANCE))
 		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/swampweed = 1))
-	loot_replenish3()
+	grass_replenish_loot()
 	pixel_x += rand(-3,3)
 
-/obj/structure/flora/grass/swampweed/proc/loot_replenish3()
-	if(bushtype)
-		looty += bushtype
-	if(prob(66))
-		looty += /obj/item/reagent_containers/food/snacks/produce/swampweed
-
 /obj/structure/flora/grass/swampweed/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, SEARCHTIME, target = src))
-			if(!looty.len && (world.time > res_replenish))
-				loot_replenish3()
-			if(prob(50) && looty.len)
-				if(looty.len == 1)
-					res_replenish = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty)
-				if(B)
-					B = new B(user.loc)
-					user.put_in_hands(B)
-					user.visible_message(span_notice("[user] finds [B] in [src]."))
-					return
-			user.visible_message(span_warning("[user] searches through [src]."))
-			if(!looty.len)
-				to_chat(user, span_warning("Picked clean... I should try later."))
+	if(!isliving(user))
+		return
+	start_search_loop(user)
 
 /obj/structure/flora/shroom_tree
 	name = "shroom"
@@ -928,3 +913,5 @@
 	num_random_icons = 3
 
 #undef SEARCHTIME
+#undef BUSH_PRIMARY_LOOT_CHANCE
+#undef BUSH_BONUS_LOOT_CHANCE
