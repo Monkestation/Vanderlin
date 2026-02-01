@@ -8,7 +8,7 @@
 /datum/storage/backpack
 	screen_max_rows = 7
 	screen_max_columns = 4
-	equipped_access_flags = STORAGE_ACCESS_NOT_WORN
+	equipped_access_flags = STORAGE_ACCESS_INHANDS
 
 /datum/storage/cannon
 	screen_max_rows = 3
@@ -301,7 +301,7 @@
 	screen_max_rows = 8
 	screen_max_columns = 5
 	max_specific_storage = WEIGHT_CLASS_HUGE
-	equipped_access_flags = STORAGE_ACCESS_NOT_WORN
+	equipped_access_flags = STORAGE_ACCESS_INHANDS
 	allow_big_nesting = TRUE
 
 /datum/storage/pilltin

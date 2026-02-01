@@ -437,16 +437,17 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(isitem(parent))
 		var/obj/item/item_parent = parent
 
-		if(user && item_parent.item_flags & IN_INVENTORY)
-			if(equipped_access_flags & STORAGE_ACCESS_NOT_WORN)
+		if(user)
+			var/violated_flags = check_equipped_access(user)
+			if(violated_flags & STORAGE_ACCESS_NOT_WORN)
 				if(messages)
 					user.balloon_alert(user, "not while worn!")
 				return FALSE
-			else if(equipped_access_flags & STORAGE_ACCESS_INHANDS)
-				if(!locate(parent) in user.held_items)
+			else if(violated_flags & STORAGE_ACCESS_INHANDS)
+				if(!(locate(parent) in user.held_items))
 					if(messages)
 						user.balloon_alert(user, "need to hold!")
-				return FALSE
+					return FALSE
 
 		var/datum/storage/smaller_fish = to_insert.atom_storage
 		if(smaller_fish && !allow_big_nesting && to_insert.w_class >= item_parent.w_class)
@@ -469,6 +470,29 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 
 	return TRUE
+
+/// Check if access is possible based on equipped_access_flags
+/// Returns flag that is violated if any, for feedback
+/datum/storage/proc/check_equipped_access(mob/user)
+	if(!equipped_access_flags)
+		return NONE
+
+	if(!isitem(parent))
+		return NONE
+
+	var/obj/item/item_parent = parent
+
+	if(!(item_parent.item_flags & IN_INVENTORY))
+		return NONE
+
+	if(equipped_access_flags & STORAGE_ACCESS_NOT_WORN)
+		return STORAGE_ACCESS_NOT_WORN
+
+	if(equipped_access_flags & STORAGE_ACCESS_INHANDS)
+		if(!(locate(item_parent) in user.held_items))
+			return STORAGE_ACCESS_INHANDS
+
+	return NONE
 
 /// Returns TRUE if the grid is full
 /datum/storage/proc/grid_full()
@@ -708,6 +732,10 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * silent - if TRUE, we won't play any exit sounds
  */
 /datum/storage/proc/remove_single(mob/removing, obj/item/thing, atom/remove_to_loc, silent = FALSE)
+	if(check_equipped_access(removing))
+		if(!silent)
+			thing.balloon_alert(removing, "can't access!")
+		return FALSE
 	return attempt_remove(thing, remove_to_loc, silent)
 
 /**
@@ -745,6 +773,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	SIGNAL_HANDLER
 
 	if(!allow_quick_empty && !force)
+		return
+
+	if(!force && check_equipped_access(source))
 		return
 
 	remove_all(get_turf(location))
@@ -840,29 +871,32 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	SIGNAL_HANDLER
 
 	if(user.incapacitated() || !user.canUseStorage())
-		return
+		return NONE
 
 	if(istype(over_object, /atom/movable/screen/inventory/hand))
 		if(parent.loc != user || !user.can_perform_action(parent, FORBID_TELEKINESIS_REACH | ALLOW_RESTING))
-			return
+			return NONE
 
 		var/atom/movable/screen/inventory/hand/hand = over_object
 		user.putItemFromInventoryInHandIfPossible(parent, hand.held_index)
 		parent.add_fingerprint(user)
-		return
+		return COMPONENT_NO_MOUSEDROP
+
+	if(check_equipped_access(user))
+		return NONE
 
 	if(over_object == user)
 		if(!user.can_perform_action(parent, FORBID_TELEKINESIS_REACH | ALLOW_RESTING))
-			return
+			return NONE
 
 		if(isliving(parent) && user.pulling == parent)
 			var/mob/living/as_living = parent
 			if(as_living.can_be_held)
-				return
+				return NONE
 
 		parent.add_fingerprint(user)
 		INVOKE_ASYNC(src, PROC_REF(open_storage), user)
-		return
+		return COMPONENT_NO_MOUSEDROP
 
 	if(istype(over_object, /atom/movable/screen) || ismob(over_object))
 		return NONE
@@ -874,13 +908,14 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	var/atom/dump_loc = over_object.get_dumping_location()
 	if(isnull(dump_loc))
-		return
+		return NONE
 
 	/// Don't dump *onto* objects in the same storage as ourselves
 	if(over_object.loc == parent.loc && !isnull(parent.loc.atom_storage) && isnull(over_object.atom_storage))
-		return
+		return NONE
 
 	INVOKE_ASYNC(src, PROC_REF(dump_content_at), over_object, dump_loc, user)
+	return COMPONENT_NO_MOUSEDROP
 
 /**
  * Dumps all of our contents at a specific location.
@@ -987,10 +1022,16 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			parent.balloon_alert(to_show, "closed!")
 		return FALSE
 
-	if(locked)
-		if(!silent)
-			parent.balloon_alert(to_show, "closed!")
-		return FALSE
+	if(isitem(parent))
+		var/violated_flags = check_equipped_access(to_show)
+		if(violated_flags & STORAGE_ACCESS_NOT_WORN)
+			if(!silent)
+				parent.balloon_alert(to_show, "not while worn!")
+			return FALSE
+		if(violated_flags & STORAGE_ACCESS_INHANDS)
+			if(!silent)
+				parent.balloon_alert(to_show, "need to hold!")
+			return FALSE
 
 	// If we're quickdrawing boys
 	if(quickdraw && !to_show.get_active_held_item())

@@ -861,6 +861,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 // Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
 /obj/item/proc/equipped(mob/user, slot, initial = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
+
 	SEND_SIGNAL(src, COMSIG_ITEM_EQUIPPED, user, slot)
 	SEND_SIGNAL(user, COMSIG_MOB_EQUIPPED_ITEM, src, slot)
 
@@ -868,7 +869,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	for(var/datum/action/action as anything in actions)
 		give_item_action(action, user, slot)
 
+	if(atom_storage && atom_storage == user.active_storage)
+		if(atom_storage.equipped_access_flags)
+			atom_storage.hide_contents(user)
+
 	item_flags |= IN_INVENTORY
+
 	if(!initial)
 		if(equip_sound && (slot_flags & slot))
 			if(user.m_intent != MOVE_INTENT_SNEAK) // Sneaky sheathing/equipping
@@ -877,6 +883,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			if(user.is_holding(src))
 				if(user.m_intent != MOVE_INTENT_SNEAK) // Don't play a sound if we're sneaking, for assassination purposes.
 					playsound(src, pickup_sound, PICKUP_SOUND_VOLUME, ignore_walls = FALSE)
+
 	user.update_equipment_speed_mods()
 	update_transform()
 	update_appearance(UPDATE_OVERLAYS)
