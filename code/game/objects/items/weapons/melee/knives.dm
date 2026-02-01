@@ -11,8 +11,8 @@
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, DAGGER_CHOP)
-	max_blade_int = 140
-	max_integrity = INTEGRITY_STRONG
+	max_blade_int = 150
+	max_integrity = INTEGRITY_STANDARD
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	gripsprite = FALSE
@@ -54,6 +54,7 @@
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
 	melting_material = /datum/material/steel
+	max_integrity = INTEGRITY_STRONG
 	melt_amount = 75
 	sellprice = 6
 
@@ -94,7 +95,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "iscissors"
 	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, SCISSOR_SNIP)
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_POOR
 	melt_amount = 75
 
 /obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, params)
@@ -134,7 +135,7 @@
 	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
 	force = DAMAGE_DAGGER
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/steel
 
 //................ Cleaver ............... //
@@ -168,7 +169,7 @@
 	icon_state = "combatknife"
 	throwforce = DAMAGE_KNIFE + 6
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
@@ -187,7 +188,7 @@
 	name = "bronze dagger"
 	desc = "A dagger made out of bronze."
 	icon_state = "dagger_bronze"
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
 	melt_amount = 50
 	sellprice = 10
@@ -214,6 +215,7 @@
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
+	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
 
 /obj/item/weapon/knife/dagger/njora
@@ -222,7 +224,6 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_iron"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
-	melting_material = null
 	sellprice = 12
 	dropshrink = 1.0
 
@@ -233,7 +234,7 @@
 	icon_state = "sdagger"
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/steel
 
 /obj/item/weapon/knife/dagger/steel/jile
@@ -591,7 +592,7 @@
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
 	throw_speed = 4
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_WORST
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
@@ -600,7 +601,7 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/knife/throwingknife/rous
+/obj/item/weapon/knife/throwingknife/rous //Rousman exclusive item, can stay a bit better
 	name = "rous kunai"
 	desc = "A typical knife used by rous assassins. Quite effective when thrown."
 	icon_state = "rouskunai"
