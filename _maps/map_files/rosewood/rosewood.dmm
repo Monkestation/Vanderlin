@@ -1927,6 +1927,23 @@
 /obj/item/coin/silver/pile,
 /turf/open/floor/carpet/green,
 /area/indoors/town)
+"biu" = (
+/obj/effect/mob_spawn/human/briar{
+	name = "zizo knight";
+	mob_species = list(/datum/species/elf/dark);
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
+	outfit = /datum/outfit/wretch/heretic;
+	gender = "female";
+	possible_ages = list("Adult");
+	mob_gender = "female";
+	patron = /datum/patron/inhumen/zizo;
+	backr = null;
+	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	backl = null;
+	backpack_contents = null
+	},
+/turf/open/floor/sand,
+/area/indoors/town/keep)
 "biA" = (
 /turf/open/floor/carpet,
 /area/indoors/town/theatre)
@@ -15760,10 +15777,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
-"jLC" = (
-/obj/effect/landmark/events/haunts,
-/turf/open/floor/carpet/lord/left,
-/area/indoors/town/keep)
 "jMe" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -29334,12 +29347,6 @@
 "slN" = (
 /turf/open/floor/woodturned,
 /area/indoors/town/orphanage)
-"smr" = (
-/obj/structure/stairs/fancy/l{
-	dir = 1
-	},
-/turf/open/floor/carpet/lord/left,
-/area/indoors/town/keep)
 "smv" = (
 /obj/structure/chair/bench/throne,
 /turf/open/floor/carpet/lord/center,
@@ -38303,6 +38310,10 @@
 	},
 /turf/open/floor/sand,
 /area/indoors/town/theatre)
+"xVc" = (
+/obj/structure/fermentation_keg/random/water,
+/turf/open/floor/cobblerock/snow,
+/area/outdoors/town/keep)
 "xVi" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/openspace,
@@ -98824,7 +98835,7 @@ vbx
 dVU
 jVi
 qrX
-qrX
+xVc
 rRJ
 rRJ
 rRJ
@@ -136772,7 +136783,7 @@ cgu
 gHA
 fqQ
 cRx
-fqQ
+hyb
 hyb
 hyb
 hyb
@@ -136970,11 +136981,11 @@ uBv
 uBv
 oXk
 yha
-smr
 hyb
 hyb
-yha
-jLC
+hyb
+hyb
+hyb
 hyb
 hyb
 hyb
@@ -137383,7 +137394,7 @@ hyb
 hyb
 hyb
 dzC
-dzC
+biu
 dzC
 dzC
 kHj
