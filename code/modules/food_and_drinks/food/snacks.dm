@@ -190,11 +190,16 @@ All foods are distributed among various categories. Use common sense.
 		rot_away_timer = QDEL_IN_STOPPABLE(src, 15 MINUTES)
 		record_round_statistic(STATS_FOOD_ROTTED)
 		return TRUE
-	if(!ismob(loc) && loc)
-		var/obj/item/reagent_containers/NU = new become_rot_type(loc)
+	if(loc)
+		var/obj/item/reagent_containers/NU = new become_rot_type(get_turf(loc))
 		reagents.trans_to(NU.reagents, reagents.maximum_volume)
-		qdel(src)
+		if(!ismob(loc))
+			loc.atom_storage?.attempt_insert(NU, override = TRUE)
+		else
+			var/mob/living/holder = loc
+			holder.put_in_hands(NU)
 		record_round_statistic(STATS_FOOD_ROTTED)
+		qdel(src)
 		return TRUE
 	return FALSE
 
