@@ -28,7 +28,6 @@
 	var/charge_pointer = null // Simple unique charge icon
 	var/charged_pointer = null // Simple unique charged icon
 	var/clickcd = CLICK_CD_MELEE //the cd invoked clicking on stuff with this intent
-	var/recovery = 0		//RTD unable to move for this duration after an attack without becoming off balance
 	var/list/charge_invocation //list of stuff to say while charging
 	var/no_early_release = FALSE //we can't shoot off early
 	var/movement_interrupt = FALSE //we cancel charging when changing mob direction, for concentration spells
