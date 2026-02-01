@@ -29,7 +29,7 @@
 						/obj/structure/flora/grass/herb/symphitum = 8,
 						/obj/structure/flora/newtree = 10,
 						/obj/structure/table/wood/treestump = 12)
-	allowed_areas = list(/area/rogue/delver/town)
+	allowed_areas = list(/area/delver/town)
 
 /datum/mapGeneratorModule/delverplains
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -42,7 +42,7 @@
 					/obj/structure/flora/grass/herb/taraxacum = 8,
 					/obj/structure/flora/grass/herb/calendula = 8,
 					/obj/structure/flora/newtree = 8)
-	allowed_areas = list(/area/rogue/delver/plains)
+	allowed_areas = list(/area/delver/plains)
 
 /datum/mapGeneratorModule/delvermarsh
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -60,7 +60,7 @@
 						/obj/structure/flora/grass/herb/euphorbia = 8,
 						/obj/structure/flora/grass/herb/mentha = 6,
 						/obj/structure/flora/driftwood = 4)
-	allowed_areas = list(/area/rogue/delver/marsh)
+	allowed_areas = list(/area/delver/marsh)
 
 /datum/mapGeneratorModule/delverwoods
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -73,7 +73,7 @@
 						/obj/structure/flora/grass/thorn_bush = 8,
 						/obj/structure/flora/grass/herb/hypericum = 8,
 						/obj/structure/flora/grass/herb/rosa = 6)
-	allowed_areas = list(/area/rogue/delver/woods)
+	allowed_areas = list(/area/delver/woods)
 
 /datum/mapGeneratorModule/delverwater
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -90,4 +90,4 @@
 	spawnableAtoms = list(/obj/structure/flora/grass = 60,
 						/obj/structure/flora/newtree = 20,
 						/obj/structure/flora/grass/thorn_bush = 80)
-	allowed_areas = list(/area/rogue/delver/mountains)
+	allowed_areas = list(/area/delver/mountains)

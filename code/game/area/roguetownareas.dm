@@ -436,6 +436,8 @@
 	background_track = 'sound/music/area/churchnight.ogg'
 
 /area/delver
+	name = "delver"
+	icon = 'icons/turf/areas/delver.dmi'
 	delver_restrictions = TRUE
 	converted_type = /area/delver
 
