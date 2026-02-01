@@ -60,16 +60,18 @@
  * Attempt to craft all possible recipes - try normal priority first, then fallbacks
  */
 /datum/component/container_craft/proc/attempt_crafts(datum/source, mob/user)
-	var/list/stored_items = list()
 	var/atom/atom_parent = parent
-	if(!length(atom_parent.atom_storage.return_inv()))
+
+	var/list/obj/item/storage_contents = atom_parent.atom_storage.return_inv()
+	if(!length(storage_contents))
 		return
 
 	if(!istype(user))
 		user = get_mob_by_ckey(atom_parent.fingerprintslast)
 
+	var/list/stored_items = list()
 	// Build list of all items in container by type
-	for(var/obj/item/item in atom_parent.contents)
+	for(var/obj/item/item as anything in storage_contents)
 		stored_items |= item.type
 		stored_items[item.type]++
 
