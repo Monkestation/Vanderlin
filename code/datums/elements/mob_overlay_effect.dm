@@ -57,6 +57,9 @@
 		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 			return
 
+	if(isitem(target))
+		return ///this is ALOT of filters
+
 	if(isobj(target))
 		var/obj/obj = target
 		if(obj.obj_flags & IGNORE_SINK)

@@ -1,5 +1,5 @@
 /obj/item/cooking/skewer
-	force = 15
+	force = DAMAGE_DAGGER + 3
 	possible_item_intents = list(INTENT_GENERIC)
 	name = "skewer"
 	desc = ""

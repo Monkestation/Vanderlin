@@ -1,6 +1,7 @@
 /obj/item
 	var/baitpenalty = 100 // Using this as bait will incurr a penalty to fishing chance. 100 makes it useless as bait. Lower values are better, but Never make it past 10.
 	var/isbait = FALSE	// Is the item in question bait to be used?
+	var/bait_flag = NONE
 	var/list/fishloot = null
 
 /obj/item/natural/worms
@@ -17,11 +18,11 @@
 					/obj/item/reagent_containers/food/snacks/fish/angler = 1)
 	drop_sound = 'sound/foley/dropsound/food_drop.ogg'
 	bundletype = /obj/item/natural/bundle/worms
+	bait_flag = MEAT
 
 /obj/item/natural/worms/Initialize()
 	. = ..()
 	dir = rand(0,8)
-
 
 /obj/item/natural/worms/grub_silk
 	name = "silk grub"

@@ -5,7 +5,7 @@
 "ao" = (
 /obj/structure/chair/stool,
 /obj/item/fishingrod,
-/obj/item/fishing/lure,
+/obj/effect/spawner/map_spawner/random_lure,
 /turf/open/floor/ruinedwood,
 /area/under/tomb/cave)
 "aN" = (

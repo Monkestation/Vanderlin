@@ -70,8 +70,8 @@
 	item_state = "atgervi_shield"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
-	force = 15
-	throwforce = 10
+	force = DAMAGE_SHIELD + 5
+	throwforce = DAMAGE_SHIELD
 	dropshrink = 0.8
 	coverage = 80
 	attacked_sound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')

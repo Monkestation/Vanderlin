@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /proc/build_zizo_rituals()
 	. = list()
 	for(var/datum/ritual/ritual as anything in subtypesof(/datum/ritual))
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		.[ritual.name] = new ritual
 

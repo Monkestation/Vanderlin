@@ -86,6 +86,9 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 				M.reagents.add_reagent(type, amount, new_reagent.data)
 	return 1
 
+/datum/reagent/proc/add_data(data_name, data_value)
+	LAZYADDASSOC(data, data_name, data_value)
+
 /datum/reagent/proc/reaction_obj(obj/O, volume)
 	return
 
@@ -170,9 +173,9 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 // Called after add_reagents creates a new reagent.
-/datum/reagent/proc/on_new(data)
-	if(data && data["quality"])
-		recipe_quality = data["quality"]
+/datum/reagent/proc/on_new(list/incoming_data)
+	if(incoming_data && incoming_data["quality"])
+		recipe_quality = incoming_data["quality"]
 	else
 		recipe_quality = base_quality
 	recipe_quality = CLAMP(recipe_quality, 1, 4)
@@ -180,13 +183,25 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	if(!data)
 		data = list()
 	data["quality"] = recipe_quality
+	for(var/data_item in incoming_data)
+		if(data_item == "quality") //special handling for this
+			continue
+		data[data_item] = incoming_data[data_item]
+	if("custom_name" in data)
+		name = data["custom_name"]
+	if("custom_scent" in data)
+		scent_description = data["custom_scent"]
+	if("custom_tastes" in data)
+		taste_description = data["custom_tastes"]
 	return
 
 // Called when two reagents of the same are mixing.
-/datum/reagent/proc/on_merge(data, other_volume)
+/datum/reagent/proc/on_merge(list/incoming_data, other_volume)
 	SHOULD_CALL_PARENT(TRUE)
-	if(data && data["quality"])
-		var/other_quality = data["quality"]
+	if(!length(incoming_data))
+		return
+	if("quality" in incoming_data)
+		var/other_quality = incoming_data["quality"]
 
 		var/total_volume = volume + other_volume
 		var/weighted_average = ((recipe_quality * volume) + (other_quality * other_volume)) / total_volume
@@ -197,6 +212,16 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 		if(!data)
 			data = list()
 		data["quality"] = recipe_quality
+	for(var/data_item in incoming_data)
+		if(data_item == "quality") //special handling for this
+			continue
+		data[data_item] = incoming_data[data_item]
+	if("custom_name" in data)
+		name = data["custom_name"]
+	if("custom_scent" in data)
+		scent_description = data["custom_scent"]
+	if("custom_tastes" in data)
+		taste_description = data["custom_tastes"]
 	return
 
 /datum/reagent/proc/get_quality_metabolization_modifier()

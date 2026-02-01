@@ -126,7 +126,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isreagentcontainer(A) (istype(A, /obj/item/reagent_containers))
 
-#define ismobholder(A) (istype(A, /obj/item/clothing/head/mob_holder))
+#define ismobholder(A) (istype(A, /obj/item/mob_holder))
 
 #define isfuse(A) (istype(A, /obj/item/fuse))
 
