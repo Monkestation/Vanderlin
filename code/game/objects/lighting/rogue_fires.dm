@@ -406,30 +406,31 @@
 	// temperature_change = 40
 	var/heat_time = 100
 	var/obj/item/attachment = null
-	var/obj/item/reagent_containers/food/snacks/food = null
-	var/rawegg = FALSE
-
-/obj/machinery/light/fueled/hearth/Initialize()
-	. = ..()
 
 /obj/machinery/light/fueled/hearth/Destroy()
-	. = ..()
+	if(attachment)
+		attachment.forceMove(get_turf(src))
+		attachment = null
+	if(soundloop)
+		QDEL_NULL(soundloop)
+	return ..()
 
-/obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, params)
-	if(!attachment)
-		if(istype(W, /obj/item/cooking/pan) || istype(W, /obj/item/reagent_containers/glass/bucket/pot) || istype(W, /obj/item/reagent_containers/glass/carafe/teapot))
-			playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
+/obj/machinery/light/fueled/hearth/attackby(obj/item/I, mob/living/user, params)
+	if(attachment)
+		if(!attachment.atom_storage.attempt_insert(I, user))
+			attachment.update_appearance(UPDATE_ICON)
+			return ..()
+		return
 
-			if(user.transferItemToLoc(W, src, silent = TRUE))
-				attachment = W
-				update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
-			return
+	if(istype(I, /obj/item/cooking/pan) || istype(I, /obj/item/reagent_containers/glass/bucket/pot) || istype(I, /obj/item/reagent_containers/glass/carafe/teapot))
+		playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
 
-	else
-		. = attachment.attackby(W, user, params)
-		if(.)
-			return
-	. = ..()
+		if(user.transferItemToLoc(I, src, silent = TRUE))
+			attachment = I
+			update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
+		return
+
+	return ..()
 
 /obj/machinery/light/fueled/hearth/MouseDrop(mob/over, src_location, over_location, src_control, over_control, params)
 	. = ..()
@@ -439,13 +440,6 @@
 	if(attachment && over == usr && over.CanReach(src))
 		attachment.atom_storage.open_storage(over)
 
-//////////////////////////////////
-
-/obj/machinery/light/fueled/hearth/fire_act(added, maxstacks)
-	. = ..()
-	if(food)
-		playsound(src, 'sound/misc/frying.ogg', 80, FALSE, extrarange = 2)
-
 /obj/machinery/light/fueled/hearth/update_overlays()
 	. = ..()
 	if(!attachment)
@@ -454,12 +448,6 @@
 		var/obj/item/I = attachment
 		I.pixel_x = I.base_pixel_x
 		I.pixel_y = I.base_pixel_y
-		. += new /mutable_appearance(I)
-		if(!food)
-			return
-		I = food
-		I.pixel_x = I.pixel_x
-		I.pixel_y = I.pixel_y
 		. += new /mutable_appearance(I)
 
 /obj/machinery/light/fueled/hearth/attack_hand(mob/user)
@@ -471,22 +459,30 @@
 		if(!user.put_in_active_hand(attachment))
 			attachment.forceMove(user.loc)
 		attachment = null
-		update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
-	else
-		if(on)
-			var/mob/living/carbon/human/H = user
-			if(istype(H))
-				H.visible_message("<span class='info'>[H] warms \his hand over the embers.</span>")
-				if(do_after(H, 5 SECONDS, src))
-					H.adjust_bodytemperature(10)
-			return TRUE
+		update_appearance(UPDATE_ICON)
+	else if(on)
+		var/mob/living/carbon/human/H = user
+		if(istype(H))
+			H.visible_message("<span class='info'>[H] warms \his hand over the embers.</span>")
+			if(do_after(H, 5 SECONDS, src))
+				H.adjust_bodytemperature(10)
+		return TRUE
 
+/obj/machinery/light/fueled/hearth/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+
+	if(attachment)
+		if(attachment.atom_storage.open_storage(user))
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/machinery/light/fueled/hearth/process()
 	if(isopenturf(loc))
 		var/turf/open/O = loc
 		if(IS_WET_OPEN_TURF(O))
 			extinguish()
+			return PROCESS_KILL
 	if(on)
 		if(initial(fueluse) > 0)
 			if(fueluse > 0)

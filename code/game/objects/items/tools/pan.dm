@@ -25,6 +25,14 @@
 	AddComponent(/datum/component/container_craft, subtypesof(/datum/container_craft/pan))
 	AddComponent(/datum/component/food_burner, 2 MINUTES, TRUE, CALLBACK(src, PROC_REF(can_burn)))
 
+/obj/item/cooking/pan/on_enter_storage(datum/storage/atom_storage)
+	. = ..()
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/cooking/pan/on_exit_storage(datum/storage/atom_storage)
+	. = ..()
+	update_appearance(UPDATE_OVERLAYS)
+
 /obj/item/cooking/pan/examine(mob/user)
 	. = ..()
 

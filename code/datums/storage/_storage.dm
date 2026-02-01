@@ -534,9 +534,6 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(SEND_SIGNAL(parent, COMSIG_ATOM_PRE_STORED_ITEM, to_insert, user, force, messages) & BLOCK_STORAGE_INSERT)
 		return FALSE
 
-	SEND_SIGNAL(parent, COMSIG_ATOM_STORED_ITEM, to_insert, user, force)
-	SEND_SIGNAL(src, COMSIG_STORAGE_STORED_ITEM, to_insert, user, force)
-
 	if(get(real_location, /mob) != user)
 		to_insert.do_pickup_animation(real_location, user)
 
@@ -553,6 +550,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		item_carrier.transferItemToLoc(to_insert, real_location) // This allows has_unequipped() to be properly called.
 	else
 		to_insert.forceMove(real_location)
+
+	SEND_SIGNAL(parent, COMSIG_ATOM_STORED_ITEM, to_insert, user, force)
+	SEND_SIGNAL(src, COMSIG_STORAGE_STORED_ITEM, to_insert, user, force)
 
 	item_insertion_feedback(user, to_insert, override)
 	parent.update_appearance()
