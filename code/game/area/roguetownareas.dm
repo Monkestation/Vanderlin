@@ -438,6 +438,7 @@
 /area/delver
 	name = "delver"
 	icon = 'icons/turf/areas/delver.dmi'
+	icon_state = "delver"
 	delver_restrictions = TRUE
 	converted_type = /area/delver
 
