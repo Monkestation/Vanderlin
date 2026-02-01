@@ -530,19 +530,21 @@
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, rand(1,5) DECISECONDS, src))
-			if(prob(50) && looty2.len)
-				if(looty2.len == 1)
-					res_replenish2 = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty2)
+		if(do_after(L, SEARCHTIME, target = src))
+			if(!looty.len && (world.time > res_replenish))
+				loot_replenish2()
+			if(prob(50) && looty.len)
+				if(looty.len == 1)
+					res_replenish = world.time + 8 MINUTES
+				var/obj/item/B = pick_n_take(looty)
 				if(B)
 					B = new B(user.loc)
 					user.put_in_hands(B)
 					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					return
 			user.visible_message(span_warning("[user] searches through [src]."))
-			if(!looty2.len)
-				to_chat(user, span_warning("Picked clean."))
+			if(!looty.len)
+				to_chat(user, span_warning("Picked clean... I should try later."))
 
 // swarmpweed bush
 /obj/structure/flora/grass/swampweed
