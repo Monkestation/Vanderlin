@@ -139,7 +139,7 @@
 	subtypes_allowed = TRUE
 	reagent_subtypes_allowed = TRUE
 
-	/datum/repeatable_crafting_recipe/bomb/napgas
+/datum/repeatable_crafting_recipe/bomb/napgas
 	name = "Sleeping gas Bomb"
 
 	requirements = list(
