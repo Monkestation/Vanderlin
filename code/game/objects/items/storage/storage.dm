@@ -13,18 +13,10 @@
 
 	create_storage(type = storage_type)
 
-	populate_contents()
+	if(right_click_remove)
+		atom_storage.quickdraw = TRUE
 
-/obj/item/storage/attack_hand_secondary(mob/user, params)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(!right_click_remove || !length(contents))
-		return
-	var/obj/item/random = pick(contents)
-	atom_storage.remove_single(user, random)
-	user.put_in_hands(random)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	populate_contents()
 
 /obj/item/storage/get_dumping_location()
 	return src

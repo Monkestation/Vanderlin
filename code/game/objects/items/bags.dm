@@ -16,6 +16,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	storage_type = /datum/storage/sack
+	right_click_remove = TRUE
 
 /obj/item/storage/sack/examine(mob/user)
 	. = ..()
@@ -42,21 +43,6 @@
 		return FALSE
 
 	return TRUE
-
-/obj/item/storage/sack/attack_hand_secondary(mob/user, params)
-	. = ..()
-
-	if(user.get_active_held_item())
-		return
-
-	if(!length(contents))
-		return
-
-	var/obj/item/I = pick(contents)
-	atom_storage.remove_single(user, I, get_turf(user))
-	user.put_in_hands(I)
-	user.changeNext_move(CLICK_CD_MELEE)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/storage/sack/update_icon_state()
 	. = ..()

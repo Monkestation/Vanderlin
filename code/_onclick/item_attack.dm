@@ -32,13 +32,18 @@
 	var/is_right_clicking = LAZYACCESS(params2list(params), RIGHT_CLICK)
 
 	// Need item interactions at some point I guess
-	if(target.atom_storage && !user.cmode)
+	if(target.atom_storage && is_right_clicking && !user.cmode)
 		var/datum/storage/storage = target.atom_storage
-		if(!is_right_clicking && storage.insert_on_attack && storage.item_interact_insert(user, src, params))
-			return TRUE
+		if(storage.insert_on_attack)
+			storage.item_interact_insert(user, src, params)
 		else if(storage.display_contents && !storage.no_interface)
-			if(storage.open_storage(user))
-				return TRUE
+			storage.open_storage(user)
+
+		// If we were right clicking, we explictly tried to insert,
+		// cancel the chain even on failure.
+		// This sucks but storage takes precedence over most interactions,
+		// and doing otherwise looks wrong to players.
+		return TRUE
 
 	var/pre_attack_result
 	if(is_right_clicking)

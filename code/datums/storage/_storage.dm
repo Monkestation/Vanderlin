@@ -65,6 +65,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	var/attack_hand_interact = TRUE
 	/// whether or not we allow storage objects of the same size inside
 	var/allow_big_nesting = FALSE
+
 	/// Access flags for when we are equipped see [_DEFINES/storage.dm]
 	/// As implied by "equipped" only applicable to /obj/item parents
 	var/equipped_access_flags = NONE
@@ -107,7 +108,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	/// Useful to cut on chat spam without removing feedback for other players.
 	var/silent_for_user = FALSE
 
-	/// alt click takes an item out instead of opening up storage
+	/// Unarmed right click takes an item out instead of opening up storage
 	var/quickdraw = FALSE
 
 	/// instead of displaying multiple items of the same type, display them as numbered contents
@@ -180,11 +181,12 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 
 	// a few of theses should probably be on the real_location rather than the parent
 	RegisterSignal(parent, list(COMSIG_ATOM_ATTACK_PAW, COMSIG_ATOM_ATTACK_HAND), PROC_REF(on_attack))
+	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(on_attack_secondary))
 	RegisterSignal(parent, COMSIG_MOUSEDROP_ONTO, PROC_REF(on_mousedrop_onto))
 	RegisterSignal(parent, COMSIG_MOUSEDROPPED_ONTO, PROC_REF(on_mousedropped_onto))
 	RegisterSignal(parent, COMSIG_ITEM_PRE_ATTACK, PROC_REF(on_preattack))
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(mass_empty))
-	RegisterSignal(parent, list(COMSIG_ATOM_ATTACK_GHOST, COMSIG_ATOM_ATTACK_HAND_SECONDARY), PROC_REF(open_storage_on_signal))
+	RegisterSignal(parent, COMSIG_ATOM_ATTACK_GHOST, PROC_REF(open_storage_on_signal))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(close_distance))
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(update_actions))
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(handle_examination))
@@ -301,36 +303,52 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 /// ~Lemon
 GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
-/datum/storage/proc/set_holdable(list/can_hold_list = null, list/cant_hold_list = null)
-	if(!isnull(can_hold_list) && !islist(can_hold_list))
-		can_hold_list = list(can_hold_list)
-	if(!isnull(cant_hold_list) && !islist(cant_hold_list))
-		cant_hold_list = list(cant_hold_list)
+/**
+ * Sets what type of contents this storage supports
+ * Arguments
+ *
+ * * list/can_hold_list - The list of item types whitelisted in this storage rejecting everything else
+ * * list/cant_hold_list - The list of item types blacklisted in this storage accepting everything else
+ * * list/exception_hold_list - The list of items that can exceed `max_specific_storage`. It can only fit `exception_count` of such items
+ */
+/datum/storage/proc/set_holdable(list/can_hold_list, list/cant_hold_list, list/exception_hold_list)
+	can_hold = null
+	if (!isnull(can_hold_list))
+		if(!islist(can_hold_list))
+			can_hold_list = list(can_hold_list)
 
-	if(!isnull(can_hold_list))
-		if(isnull(can_hold_description))
-			can_hold_description = generate_hold_desc(can_hold_list)
-
-	if(can_hold_list)
 		var/unique_key = can_hold_list.Join("-")
 		if(!GLOB.cached_storage_typecaches[unique_key])
 			GLOB.cached_storage_typecaches[unique_key] = typecacheof(can_hold_list)
 		can_hold = GLOB.cached_storage_typecaches[unique_key]
 
+	cant_hold = null
 	if(!isnull(cant_hold_list))
+		if(!islist(cant_hold_list))
+			cant_hold_list = list(cant_hold_list)
+
 		var/unique_key = cant_hold_list.Join("-")
 		if(!GLOB.cached_storage_typecaches[unique_key])
 			GLOB.cached_storage_typecaches[unique_key] = typecacheof(cant_hold_list)
 		cant_hold = GLOB.cached_storage_typecaches[unique_key]
 
-/// Generates a description, primarily for clothing storage.
-/datum/storage/proc/generate_hold_desc(can_hold_list)
-	var/list/desc = list()
+	exception_hold = null
+	if(!isnull(exception_hold_list))
+		if(!islist(exception_hold_list))
+			exception_hold_list = list(exception_hold_list)
 
-	for(var/obj/item/valid_item as anything in can_hold_list)
-		desc += "\a [initial(valid_item.name)]"
+		var/unique_key = exception_hold_list.Join("-")
+		if(!GLOB.cached_storage_typecaches[unique_key])
+			GLOB.cached_storage_typecaches[unique_key] = typecacheof(exception_hold_list)
+		exception_hold = GLOB.cached_storage_typecaches[unique_key]
 
-	return "\n\t[span_notice("[desc.Join("\n\t")]")]"
+	if(isnull(can_hold_description))
+		can_hold_description = null
+		if(length(can_hold_list))
+			var/list/desc = list()
+			for(var/obj/item/valid_item as anything in can_hold_list)
+				desc += "\a [initial(valid_item.name)]"
+			can_hold_description = "\n\t[span_notice("[desc.Join("\n\t")]")]"
 
 /// Updates the action button for toggling collectmode.
 /datum/storage/proc/update_actions(atom/source, mob/equipper, slot)
@@ -339,8 +357,10 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!allow_quick_gather)
 		QDEL_NULL(modeswitch_action)
 		return
+
 	if(!isnull(modeswitch_action))
 		return
+
 	if(!isitem(parent))
 		return
 
@@ -376,6 +396,27 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	thing.update_appearance(UPDATE_OVERLAYS)
 
 /**
+ * Check if user can interact with the storage at all.
+ * Should be used for opening, insertion and removal if a user is present.
+ *
+ * Arguments
+ * * mob/user - the guy trying to interact
+ */
+/datum/storage/proc/can_interact(mob/user, messages = TRUE)
+	var/violated_flags = check_equipped_access(user)
+	if(violated_flags & STORAGE_ACCESS_INHANDS)
+		if(messages)
+			parent.balloon_alert(user, "need to hold!")
+		return FALSE
+
+	if(violated_flags & STORAGE_ACCESS_NOT_WORN)
+		if(messages)
+			parent.balloon_alert(user, "not when equipped!")
+		return FALSE
+
+	return TRUE
+
+/**
  * Checks if an item is capable of being inserted into the storage.
  *
  * Arguments
@@ -404,8 +445,18 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(HAS_TRAIT(to_insert, TRAIT_NODROP))
 		if(messages && user)
-			user.balloon_alert(user, "stuck on your hand!")
+			user.balloon_alert(user, "stuck on my hand!")
 		return FALSE
+
+	if(to_insert.w_class > max_specific_storage)
+		if(!is_type_in_typecache(to_insert, exception_hold))
+			if(messages && user)
+				user.balloon_alert(user, "too big!")
+			return FALSE
+		if(exception_max <= get_exception_count())
+			if(messages && user)
+				user.balloon_alert(user, "no room!")
+			return FALSE
 
 	if(!no_interface && grid_full())
 		if(messages && user && !silent_for_user)
@@ -440,16 +491,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(isitem(parent))
 		var/obj/item/item_parent = parent
 
-		if(user)
-			var/violated_flags = check_equipped_access(user)
-			if(violated_flags & STORAGE_ACCESS_NOT_WORN)
-				if(messages)
-					user.balloon_alert(user, "not while worn!")
-				return FALSE
-			if(violated_flags & STORAGE_ACCESS_INHANDS)
-				if(messages)
-					user.balloon_alert(user, "need to hold!")
-				return FALSE
+		if(user && !can_interact(user))
+			return FALSE
 
 		var/datum/storage/smaller_fish = to_insert.atom_storage
 		if(smaller_fish && !allow_big_nesting && to_insert.w_class >= item_parent.w_class)
@@ -734,11 +777,42 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * silent - if TRUE, we won't play any exit sounds
  */
 /datum/storage/proc/remove_single(mob/removing, obj/item/thing, atom/remove_to_loc, silent = FALSE)
-	if(check_equipped_access(removing))
-		if(!silent)
-			thing.balloon_alert(removing, "can't access!")
+	if(!can_interact(removing, messages = !silent))
 		return FALSE
 	return attempt_remove(thing, remove_to_loc, silent)
+
+/**
+ * Wrapper for remove_single but for a random item in storage
+ *
+ * Arguments
+ * * mob/removing - the mob doing the removing
+ * * obj/item/thing - the object we're removing
+ * * atom/remove_to_loc - where we're placing the item
+ * * silent - if TRUE, we won't play any exit sounds
+ */
+/datum/storage/proc/remove_single_random(mob/removing, atom/remove_to_loc, silent = FALSE)
+	if(!can_interact(removing, messages = !silent))
+		return FALSE
+
+	var/list/obj/item/goodies = real_location.contents
+	if(!length(goodies))
+		if(!silent)
+			parent.balloon_alert(removing, "nothing to take!")
+		return FALSE
+
+	var/obj/item/to_remove = pick(goodies)
+	if(!remove_single(removing, to_remove))
+		return FALSE
+
+	INVOKE_ASYNC(src, PROC_REF(put_in_hands_async), removing, to_remove) // Can be called from a signal
+
+	if(!silent)
+		removing.visible_message(
+			span_warning("[removing] draws [to_remove] from [parent]!"),
+			span_notice("I draw [to_remove] from [parent]."),
+		)
+
+	return TRUE
 
 /**
  * Removes only a specific type of item from our storage
@@ -777,7 +851,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!allow_quick_empty && !force)
 		return
 
-	if(!force && check_equipped_access(source))
+	if(!force && !can_interact(source))
 		return
 
 	remove_all(get_turf(location))
@@ -807,10 +881,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	SIGNAL_HANDLER
 
 	for(var/mob/user as anything in is_using)
-		if(!user.client)
-			continue
-		var/client/cuser = user.client
-		cuser.screen -= gone
+		user.client?.screen -= gone
 
 	if(gone in item_coordinates)
 		LAZYREMOVE(item_coordinates, gone)
@@ -827,7 +898,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(collection_mode == COLLECT_ONE)
 		if(thing.loc == user)
-			user.dropItemToGround(thing, silent = TRUE) //this is nessassary to update any inventory slot it is attached to
+			parent.balloon_alert(user, "not while wearing!")
+			return
 		attempt_insert(thing, user)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -866,6 +938,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	var/list/current_contents = holder.contents.Copy()
 	if(length(pick_up | current_contents) == length(current_contents))
 		return
+
 	parent.balloon_alert(user, "picked up")
 
 /// Signal handler for whenever we drag the storage somewhere.
@@ -884,7 +957,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		parent.add_fingerprint(user)
 		return COMPONENT_NO_MOUSEDROP
 
-	if(check_equipped_access(user))
+	if(!can_interact(user))
 		return NONE
 
 	if(over_object == user)
@@ -938,7 +1011,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	// Storage to storage transfer is instant
 	if(dest_object.atom_storage)
-		to_chat(user, span_notice("You dump the contents of [parent] into [dest_object]."))
+		to_chat(user, span_notice("I dump the contents of [parent] into [dest_object]."))
 
 		if(do_rustle && rustle_sound)
 			playsound(parent, rustle_sound, 50, TRUE, -5)
@@ -950,7 +1023,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return
 
 	// Storage to loc transfer requires a do_after
-	to_chat(user, span_notice("You start dumping out the contents of [parent] onto [dest_object]..."))
+	to_chat(user, span_notice("I start dumping out the contents of [parent] onto [dest_object]..."))
 	if(!do_after(user, 2 SECONDS, target = dest_object))
 		return
 
@@ -992,14 +1065,24 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!attack_hand_interact)
 		return
 
-	if(user.active_storage == src && parent.loc == user)
-		user.active_storage.hide_contents(user)
+	if(user.active_storage == src)
 		hide_contents(user)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
-	if(parent.loc == user)
+	if(!isitem(parent) || (parent.loc == user))
 		INVOKE_ASYNC(src, PROC_REF(open_storage), user)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
+
+/// Signal handler for when we're right clicked via an empty hand.
+/datum/storage/proc/on_attack_secondary(datum/source, mob/user)
+	SIGNAL_HANDLER
+
+	if(!attack_hand_interact)
+		return
+
+	if(quickdraw && !user.get_active_held_item())
+		if(remove_single_random(user))
+			return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /// Signal handler to open up the storage when we receive a signal.
 /datum/storage/proc/open_storage_on_signal(datum/source, mob/to_show)
@@ -1024,31 +1107,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			parent.balloon_alert(to_show, "closed!")
 		return FALSE
 
-	if(isitem(parent))
-		var/violated_flags = check_equipped_access(to_show)
-		if(violated_flags & STORAGE_ACCESS_NOT_WORN)
-			if(!silent)
-				parent.balloon_alert(to_show, "not while worn!")
-			return FALSE
-		if(violated_flags & STORAGE_ACCESS_INHANDS)
-			if(!silent)
-				parent.balloon_alert(to_show, "need to hold!")
-			return FALSE
-
-	// If we're quickdrawing boys
-	if(quickdraw && !to_show.get_active_held_item())
-		var/obj/item/to_remove = locate() in real_location
-		if(!to_remove)
-			return TRUE
-
-		if(remove_single(to_show, to_remove))
-			INVOKE_ASYNC(src, PROC_REF(put_in_hands_async), to_show, to_remove)
-			if(!silent)
-				to_show.visible_message(
-					span_warning("[to_show] draws [to_remove] from [parent]!"),
-					span_notice("You draw [to_remove] from [parent]."),
-				)
-			return TRUE
+	if(!can_interact(to_show))
+		return FALSE
 
 	// If nothing else, then we want to open the thing, so do that
 	if(!show_contents(to_show))

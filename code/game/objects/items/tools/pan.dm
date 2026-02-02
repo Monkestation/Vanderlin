@@ -21,7 +21,7 @@
 
 /obj/item/cooking/pan/Initialize()
 	. = ..()
-	create_storage(type = /datum/storage/food/cooking/pan)
+	create_storage(type = /datum/storage/cooking/pan)
 	AddComponent(/datum/component/container_craft, subtypesof(/datum/container_craft/pan))
 	AddComponent(/datum/component/food_burner, 2 MINUTES, TRUE, CALLBACK(src, PROC_REF(can_burn)))
 

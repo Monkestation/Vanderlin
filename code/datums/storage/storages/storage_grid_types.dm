@@ -38,8 +38,8 @@
 	max_specific_storage = WEIGHT_CLASS_SMALL
 	allow_quick_empty = TRUE
 	allow_quick_gather = TRUE
-	attack_hand_interact = FALSE
 	collection_mode = COLLECT_ONE
+	can_hold_description = "Keys"
 	insert_preposition = "on"
 	rustle_sound = 'sound/items/gems (1).ogg'
 
@@ -50,6 +50,7 @@
 /datum/storage/belt/knife_belt
 	screen_max_rows = 4
 	screen_max_columns = 4
+	can_hold_description = "Throwing knives"
 
 /datum/storage/belt/knife_belt/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
@@ -266,10 +267,10 @@
 		/obj/item/weapon/knife,//wouldn't it be cool to smuggle a knife somewhere via a bucket?
 	))
 
-/datum/storage/food/cooking
+/datum/storage/cooking
 	max_specific_storage = WEIGHT_CLASS_HUGE
 
-/datum/storage/food/cooking/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+/datum/storage/cooking/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(
 		/obj/item/reagent_containers/food,
@@ -282,17 +283,17 @@
 		/obj/item/mob_holder,
 	))
 
-/datum/storage/food/cooking/pan
+/datum/storage/cooking/pan
 	screen_max_rows = 2
 	screen_max_columns = 2
 	insert_preposition = "on"
 
-/datum/storage/food/cooking/pot
+/datum/storage/cooking/pot
 	screen_max_rows = 3
 	screen_max_columns = 3
 	insert_preposition = "in"
 
-/datum/storage/food/cooking/oven
+/datum/storage/cooking/oven
 	screen_max_rows = 2
 	screen_max_columns = 5
 	insert_preposition = "in"

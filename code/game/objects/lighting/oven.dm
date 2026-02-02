@@ -13,7 +13,7 @@
 
 /obj/machinery/light/fueled/oven/Initialize()
 	. = ..()
-	create_storage(type = /datum/storage/food/cooking/oven)
+	create_storage(type = /datum/storage/cooking/oven)
 	AddComponent(/datum/component/container_craft, subtypesof(/datum/container_craft/oven))
 	AddComponent(/datum/component/food_burner, 2 MINUTES, TRUE, CALLBACK(src, PROC_REF(can_burn)))
 
