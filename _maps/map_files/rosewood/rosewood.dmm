@@ -29357,8 +29357,9 @@
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "sln" = (
-/obj/structure/chair/wood/alt/chair3{
-	dir = 4
+/obj/item/chair/chair3{
+	pixel_x = -16;
+	pixel_y = 9
 	},
 /turf/open/floor/wood,
 /area/indoors/town/smithy)
@@ -35494,6 +35495,10 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/church/inquisition)
+"wgi" = (
+/obj/item/chair/chair3,
+/turf/open/floor/wood,
+/area/indoors/town/smithy)
 "wgB" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/openspace,
@@ -139922,7 +139927,7 @@ jiV
 jiV
 jSq
 adO
-sln
+wgi
 sln
 adO
 adO
@@ -180324,7 +180329,7 @@ nHb
 edX
 aML
 pJQ
-bFq
+lVP
 bFq
 sDR
 xGw
@@ -181333,8 +181338,8 @@ nHb
 nHb
 edX
 edX
-uGn
-own
+rMM
+rMM
 gCa
 aML
 aML
@@ -181535,8 +181540,8 @@ nHb
 nHb
 nHb
 edX
-aZC
-own
+rMM
+rMM
 jJv
 piQ
 qTk
@@ -181737,8 +181742,8 @@ qJl
 qJl
 nHb
 qJl
-dif
-dif
+own
+own
 aML
 nAw
 bFq
@@ -181940,7 +181945,7 @@ qJl
 qJl
 qJl
 own
-dif
+own
 aML
 bFq
 bFq
@@ -182141,7 +182146,7 @@ qJl
 qJl
 qJl
 yal
-dif
+own
 dif
 xxq
 bFq
@@ -182343,7 +182348,7 @@ qJl
 qJl
 qJl
 yal
-dif
+own
 own
 jJv
 frm
