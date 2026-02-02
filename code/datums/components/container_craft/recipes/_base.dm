@@ -335,6 +335,9 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 					items_to_delete += candidate_item
 					amount_to_remove--
 
+		for(var/obj/item/item_to_delete as anything in items_to_delete)
+			crafter.atom_storage.attempt_remove(item_to_delete, get_turf(crafter), TRUE, FALSE)
+
 		create_item(crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, items_to_delete)
 
 		initiator.mind?.add_sleep_experience(used_skill, initiator.STAINT * 0.5)

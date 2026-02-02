@@ -45,7 +45,7 @@
 	on_craft_failed = fail
 	on_craft_finished = success
 
-	RegisterSignal(atom_parent, COMSIG_ATOM_STORED_ITEM, PROC_REF(async_start))
+	RegisterSignal(atom_parent, COMSIG_STORAGE_CLOSED, PROC_REF(async_start))
 
 	if(temperature_listener)
 		RegisterSignal(atom_parent, COMSIG_REAGENTS_EXPOSE_TEMPERATURE, PROC_REF(async_start))
