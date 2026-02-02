@@ -24,8 +24,7 @@
 	allowed_turfs = list(/turf/open/floor/snow,
 							/turf/open/floor/snow/rough)
 	excluded_turfs = list(/turf/open/floor/snow/patchy)
-	spawnableAtoms = list(/obj/structure/flora/grass/bush/tundra = 3,
-							/obj/structure/flora/grass/bush_meagre/tundra = 14,
+	spawnableAtoms = list(/obj/structure/flora/grass/bush_meagre/tundra = 2,
 							/obj/structure/flora/grass/bush/wall/tall/tundra = 0.25,
 							/obj/structure/flora/grass/herb/random = 1,
 							/obj/structure/flora/grass/maneater = 1,
@@ -45,7 +44,7 @@
 	allowed_turfs = list(/turf/open/floor/snow,
 							/turf/open/floor/snow/rough)
 	excluded_turfs = list()
-	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 5)
+	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 1)
 	spawnableTurfs = list()
 	allowed_areas = list(/area/outdoors/basin,
 							/area/outdoors/basin/safe,
@@ -53,7 +52,7 @@
 
 /datum/mapGeneratorModule/rosewoodsnow/grass/patchy
 		allowed_turfs = list(/turf/open/floor/snow/patchy)
-		spawnableAtoms = list(/obj/structure/flora/grass/tundra = 25)
+		spawnableAtoms = list(/obj/structure/flora/grass/tundra = 1)
 
 /datum/mapGeneratorModule/rosewooddirt
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -81,7 +80,7 @@
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
-	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 10)
+	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 0.5)
 	allowed_areas = list(/area/outdoors/basin,
 							/area/outdoors/basin/safe,
 							/area/outdoors/town)
@@ -90,7 +89,7 @@
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/dirt/road)
 	excluded_turfs = list()
-	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 5,
+	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 0.5,
 							/obj/item/natural/stone = 4,
 							/obj/item/natural/rock = 1,
 							/obj/item/grown/log/tree/stick = 4)
@@ -121,7 +120,7 @@
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/grass/cold)
 	excluded_turfs = list()
-	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 50)
+	spawnableAtoms = list(/obj/structure/flora/grass/tundra = 0.5)
 	spawnableTurfs = list()
 	allowed_areas = list(/area/outdoors/basin,
 							/area/outdoors/basin/safe,

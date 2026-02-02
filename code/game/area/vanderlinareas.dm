@@ -5,9 +5,8 @@
 	icon_state = "rogue"
 	droning_index = DRONING_MOUNTAIN
 	ambient_index = AMBIENCE_GENERIC
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/outdoors/mountains/anvil/snowy
 	soundenv = 8
 	plane = INDOOR_PLANE
@@ -66,9 +65,8 @@
 	droning_index_night = DRONING_TOWN_NIGHT
 	ambient_index = AMBIENCE_BIRDS
 	ambient_index_night = AMBIENCE_GENERIC
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/indoors/shelter
 
 /area/outdoors/mountains/anvil/peak
@@ -133,8 +131,8 @@
 	droning_index = DRONING_INDOORS
 	ambient_index = AMBIENCE_GENERIC
 	background_track = 'sound/music/area/indoor.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	plane = INDOOR_PLANE
 	converted_type = /area/outdoors/mountains/anvil/snowy
 

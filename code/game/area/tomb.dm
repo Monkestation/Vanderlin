@@ -22,9 +22,8 @@
 	icon_state = "shelter"
 	droning_index = DRONING_TOWN_DAY
 	droning_index_night = DRONING_TOWN_NIGHT
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/under/tomb/indoors/magic
 	icon = 'icons/turf/areas/manor.dmi'
@@ -50,7 +49,7 @@
 	ambient_index = AMBIENCE_BIRDS
 	ambient_index_night = AMBIENCE_FOREST
 	background_track = 'sound/music/area/forest.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 
 /area/under/tomb/wilds/ambush

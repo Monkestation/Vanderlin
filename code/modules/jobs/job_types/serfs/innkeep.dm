@@ -57,8 +57,7 @@
 	cloak = /obj/item/clothing/cloak/apron/waist
 
 	backpack_contents = list(
-		/obj/item/recipe_book/cooking,
-		/obj/item/bottle_kit
+		/obj/item/recipe_book/cooking
 	)
 
 /datum/outfit/innkeep/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

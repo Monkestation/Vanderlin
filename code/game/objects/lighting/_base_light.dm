@@ -188,7 +188,7 @@
 	var/was_on = on
 	on = (s && status == LIGHT_OK)
 	if(!was_on && on)
-		addtimer(CALLBACK(src, PROC_REF(burn_out), FALSE), rand(4 MINUTES, 6 MINUTES))
+		addtimer(CALLBACK(src, PROC_REF(burn_out), FALSE), rand(6 MINUTES, 15 MINUTES))
 	update()
 
 /obj/machinery/light/deconstruct(disassembled = TRUE)

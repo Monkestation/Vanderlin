@@ -3,62 +3,50 @@
 	icon = 'icons/turf/areas/town.dmi'
 	icon_state = "indoor_town"
 	background_track = 'sound/music/area/indoor.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/outdoors/exposed/town
 
 /area/outdoors/exposed/town
 	icon_state = "town"
-	background_track = 'sound/music/area/towngen.ogg'
 	background_track_dusk = null
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/indoors/town/shop
 	name = "Shop"
 	icon_state = "shop"
-	background_track = 'sound/music/area/shop.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/shop
 
 /area/outdoors/exposed/shop
 	icon_state = "shop"
-	background_track = 'sound/music/area/shop.ogg'
 
 /area/indoors/town/bath
 	name = "Baths"
 	icon_state = "bath"
-	background_track = 'sound/music/area/bath.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/bath
 
 /area/outdoors/exposed/bath
 	icon_state = "bath"
-	background_track = 'sound/music/area/bath.ogg'
 
 /*	..................   Areas to play with the music a bit   ................... */
 /area/indoors/town/bath/redhouse // lets try something different
-	background_track = 'sound/music/area/Fulminate.ogg'
 	converted_type = /area/outdoors/exposed/bath/redhouse
 
 /area/outdoors/exposed/bath/redhouse
-	background_track = 'sound/music/area/Fulminate.ogg'
 
 /area/indoors/town/tavern/saiga
 	first_time_text = "The Drunken Saiga"
-	background_track = 'sound/music/area/Folia1490.ogg'
-	background_track_night = 'sound/music/area/LeTourdion.ogg'
 	converted_type = /area/outdoors/exposed/tavern/saiga
 
 /area/outdoors/exposed/tavern/saiga
-	background_track = 'sound/music/area/Folia1490.ogg'
-	background_track_night = 'sound/music/area/LeTourdion.ogg'
 
 /area/indoors/town/garrison
 	name = "Garrison"
 	icon_state = "garrison"
-	background_track = 'sound/music/area/manorgarri.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	background_track_dusk = null
@@ -73,7 +61,6 @@
 	icon_state = "cell"
 	ambient_index = AMBIENCE_DUNGEON
 	ambient_index_night = AMBIENCE_DUNGEON
-	background_track = 'sound/music/area/manorgarri.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/cell
@@ -83,9 +70,6 @@
 	icon_state = "tavern"
 	droning_index = DRONING_INDOORS
 	droning_index_night = DRONING_INDOORS
-	background_track = "sound/blank.ogg"
-	background_track_dusk = "sound/blank.ogg"
-	background_track_night = "sound/blank.ogg"
 	converted_type = /area/outdoors/exposed/tavern
 
 /area/outdoors/exposed/tavern
@@ -171,7 +155,6 @@
 /area/indoors/town/smithy
 	name = "Smithy"
 	icon_state = "smithy"
-	background_track = 'sound/music/area/dwarf.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	first_time_text = "The Smithy"
@@ -180,7 +163,6 @@
 /area/indoors/town/dwarfin
 	name = "makers quarter"
 	icon_state = "dwarfin"
-	background_track = 'sound/music/area/dwarf.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	first_time_text = "The Makers' Quarter"
@@ -188,7 +170,6 @@
 
 /area/outdoors/exposed/dwarf
 	icon_state = "dwarf"
-	background_track = 'sound/music/area/dwarf.ogg'
 	background_track_dusk = null
 	background_track_night = null
 
@@ -196,7 +177,6 @@
 /area/indoors/town/theatre
 	name = "theatre"
 	icon_state = "manor"
-	background_track = null
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/theatre
@@ -204,7 +184,6 @@
 /area/outdoors/exposed/theatre
 	name = "theatre"
 	icon_state = "manor"
-	background_track = null
 	background_track_dusk = null
 	background_track_night = null
 
@@ -215,9 +194,9 @@
 	name = "outdoors"
 	icon = 'icons/turf/areas/town.dmi'
 	icon_state = "town"
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track = null
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/indoors/shelter/town
 
 /area/outdoors/town/Initialize()
@@ -226,9 +205,8 @@
 
 /area/indoors/shelter/town
 	icon_state = "town"
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/outdoors/town/roofs
 	name = "roofs"
@@ -241,8 +219,8 @@
 /area/indoors/shelter/town/roofs
 	icon_state = "roofs"
 	background_track = 'sound/music/area/field.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 
 ///// UNDERGROUND AREAS //////
@@ -305,6 +283,7 @@
 // so you can teleport to the farm
 /area/indoors/soilsons
 	name = "soilsons"
+	//background_track = 'sound/music/area/Lara_Orphanage.ogg'
 
 /area/indoors/butchershop
 	name = "butcher shop"
@@ -318,6 +297,6 @@
 	icon_state = "farm"
 	soundenv = 19
 	background_track = 'sound/music/area/field.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	//background_track_dusk = 'sound/music/area/abscond.ogg'
+	//background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/indoors/shelter/basin

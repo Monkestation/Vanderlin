@@ -8,8 +8,8 @@
 	droning_index = DRONING_INDOORS
 	ambient_index = AMBIENCE_GENERIC
 	background_track = 'sound/music/area/indoor.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	plane = INDOOR_PLANE
 	converted_type = /area/outdoors
 
@@ -32,33 +32,30 @@
 	droning_index_night = DRONING_TOWN_NIGHT
 	ambient_index = AMBIENCE_BIRDS
 	ambient_index_night = AMBIENCE_GENERIC
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track = null
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/indoors/shelter
 
 /area/indoors/shelter
 	icon_state = "shelter"
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/outdoors/mountains
 	name = "mountains"
 	icon_state = "mountains"
 	droning_index = DRONING_MOUNTAIN
 	ambient_index = AMBIENCE_GENERIC
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	soundenv = 17
 	converted_type = /area/indoors/shelter/mountains
 
 /area/indoors/shelter/mountains
 	icon_state = "mountains"
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/outdoors/mountains/deception
 	name = "deception"
@@ -107,8 +104,8 @@
 				/mob/living/carbon/human/species/goblin/npc/ambush/sea = 50,
 				/mob/living/carbon/human/species/goblin/npc/ambush = 50)
 	background_track = 'sound/music/area/field.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/indoors/shelter/basin
 
 /area/outdoors/basin/Initialize()
@@ -122,13 +119,13 @@
 /area/indoors/shelter/basin
 	icon_state = "basin"
 	background_track = 'sound/music/area/field.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/indoors/shelter/woods
 	icon_state = "woods"
 	background_track = 'sound/music/area/forest.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 
 /area/outdoors/woods_safe
@@ -139,7 +136,7 @@
 	ambient_index = AMBIENCE_BIRDS
 	ambient_index_night = AMBIENCE_FOREST
 	background_track = 'sound/music/area/forest.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	soundenv = 15
 	converted_type = /area/indoors/shelter/woods
@@ -152,7 +149,7 @@
 	ambient_index = AMBIENCE_FROG
 	ambient_index_night = AMBIENCE_FOREST
 	background_track = 'sound/music/area/forest.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	converted_type = /area/indoors/shelter/woods
 
@@ -190,9 +187,8 @@
 	name = "sophia's cry"
 	icon_state = "beach"
 	droning_index = DRONING_LAKE
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/outdoors/eora
 	name = "eoran grove"
@@ -209,8 +205,8 @@
 	name = "basement"
 	icon_state = "under"
 	background_track = 'sound/music/area/towngen.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	soundenv = 8
 	plane = INDOOR_PLANE
 	converted_type = /area/outdoors/exposed
@@ -218,8 +214,8 @@
 /area/outdoors/exposed
 	icon_state = "exposed"
 	background_track = 'sound/music/area/towngen.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/under/cave
 	name = "cave"
@@ -328,8 +324,7 @@
 	name = "the ship"
 	droning_index = DRONING_LAKE
 	droning_index_night = DRONING_LAKE
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
 	background_track_night = 'sound/music/area/night.ogg'
 
 /area/outdoors/coast
@@ -337,8 +332,8 @@
 	droning_index = DRONING_LAKE
 	droning_index_night = DRONING_LAKE
 	background_track = 'sound/music/area/sargoth.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 
 ///// UNDERWORLD AREAS //////
@@ -413,9 +408,8 @@
 	name = "sophia's cry"
 	droning_index = DRONING_LAKE
 	droning_index_night = DRONING_LAKE
-	background_track = 'sound/music/area/townstreets.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 
 ///// ANTAGONIST AREAS //////  - used on centcom so you can teleport there easily. Each antag area just gets one unique type, if its outdoor use generic indoors, vice versa, to avoid clutter in area list

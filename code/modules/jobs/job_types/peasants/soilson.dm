@@ -96,7 +96,6 @@
 
 	backpack_contents = list(
 		/obj/item/recipe_book/cooking = 1,
-		/obj/item/bottle_kit = 1,
 		/obj/item/recipe_book/agriculture = 1
 	)
 

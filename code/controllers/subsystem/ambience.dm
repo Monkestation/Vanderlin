@@ -97,7 +97,7 @@ SUBSYSTEM_DEF(ambience)
 	if(is_lit)
 		if(time == "night" && background_track_night)
 			used = background_track_night
-		else if (time == "dusk" && background_track_dusk)
+		else if (time == "dawn" && background_track_dusk)
 			used = background_track_dusk
 	else if(uses_alt_droning)
 		used = safepick(alternative_droning)

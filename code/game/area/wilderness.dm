@@ -6,7 +6,7 @@
 	ambient_index = AMBIENCE_BIRDS
 	ambient_index_night = AMBIENCE_FOREST
 	background_track = 'sound/music/area/forest.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_dusk = 'sound/music/area/abscond.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	soundenv = 15
 	ambush_times = list("night","dawn","dusk","day")

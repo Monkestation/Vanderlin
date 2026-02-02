@@ -160,7 +160,7 @@
 	icon_state = "manorgate"
 	background_track = 'sound/music/area/manorgarri.ogg'
 	background_track_dusk = null
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 
 /area/outdoors/exposed/manorgarri
 	icon_state = "manorgarri"
