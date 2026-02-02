@@ -136,19 +136,20 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "chain"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
-	force = 10
+	force = DAMAGE_WHIP - 10
+	throwforce = DAMAGE_WHIP - 15
+	wdefense = MEDIOCRE_PARRY
+	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
 	blade_dulling = DULLING_BASHCHOP
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = WHIPWOOSH
-	throwforce = 5
 	w_class = WEIGHT_CLASS_SMALL
 	associated_skill = /datum/skill/combat/whipsflails
-	wdefense = 1
 	throw_speed = 1
 	throw_range = 3
 	breakouttime = 30 SECONDS
 	slipouttime = 1 MINUTES
-	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
 	melting_material = /datum/material/iron
 	melt_amount = 40
 	firefuel = null
@@ -239,8 +240,7 @@
 /obj/structure/noose/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	if(has_buckled_mobs())
-		for(var/m in buckled_mobs)
-			var/mob/living/buckled_mob = m
+		for(var/mob/living/buckled_mob as anything in buckled_mobs)
 			buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
 			to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
 			buckled_mob.adjustBruteLoss(10)
@@ -312,8 +312,7 @@
 	if(!has_buckled_mobs())
 		STOP_PROCESSING(SSobj, src)
 		return
-	for(var/m in buckled_mobs)
-		var/mob/living/buckled_mob = m
+	for(var/mob/living/buckled_mob as anything in buckled_mobs)
 		if(buckled_mob.get_bodypart("head"))
 			if(buckled_mob.stat != DEAD)
 				if(locate(/obj/structure/chair) in get_turf(src)) // So you can kick down the chair and make them hang, and stuff.

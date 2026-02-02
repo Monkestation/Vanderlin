@@ -591,7 +591,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		get_inspect_entries(inspec)
 		SEND_SIGNAL(src, COMSIG_TOPIC_INSPECT, inspec)
 
-		to_chat(usr, "[inspec.Join()]")
+		to_chat(usr, examine_block("[inspec.Join()]"))
 
 /obj/item
 	var/simpleton_price = FALSE
@@ -629,10 +629,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 //			inspec += "\n<b>ENCUMBRANCE:</b> [eweight]"
 
 	if(alt_intents)
-		inspect_list += "\n<b>ALT-GRIP</b>"
+		inspect_list += "\n<b>ALT-GRIPPABLE</b>"
 
 	if(can_parry)
-		inspect_list += "\n<b>DEFENSE:</b> [wdefense]"
+		inspect_list += "\n<b>PARRY:</b> [wdefense]"
 
 	if(max_blade_int)
 		inspect_list += "\n<b>SHARPNESS:</b> "

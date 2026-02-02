@@ -71,7 +71,7 @@
 		var/obj/item/organ/eyes/eyes = owner.getorganslot(ORGAN_SLOT_EYES)
 		if(eyes)
 			eyes.applyOrganDamage(-HEAL_BASHING_LETHAL * (level * 0.5))
-			owner.adjust_temp_blindness(-HEAL_AGGRAVATED * (level * 0.5))
+			owner.adjust_temp_blindness(-HEAL_AGGRAVATED * (level) SECONDS)
 			owner.adjust_eye_blur(-HEAL_AGGRAVATED * (level) SECONDS)
 
 	// Masquerade violation check

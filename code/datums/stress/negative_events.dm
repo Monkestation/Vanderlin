@@ -196,7 +196,7 @@
 
 /datum/stress_event/fish_monster
 	timer = 30 SECONDS
-	stress_change = 3
+	stress_change = 1
 	desc = span_boldred("<B>IT'S A HIDEOUS MONSTER!!!</B>")
 
 /datum/stress_event/fishfaceaintthatugly
@@ -745,3 +745,8 @@
 	stress_change = 1
 	desc = span_red("I ate off a dirty bowl..")
 	timer = 1 MINUTES
+
+/datum/stress_event/poohit
+	timer = 3 MINUTES
+	stress_change = 2
+	desc = span_red("I'm covered in feces! Disgusting!")

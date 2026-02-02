@@ -233,8 +233,8 @@
 
 		else if(!CHECK_BITFIELD(I.item_flags, ABSTRACT) && !HAS_TRAIT(I, TRAIT_NODROP))
 			thrown_thing = I
-			if(istype(thrown_thing, /obj/item/clothing/head/mob_holder))
-				var/obj/item/clothing/head/mob_holder/old = thrown_thing
+			if(ismobholder(thrown_thing))
+				var/obj/item/mob_holder/old = thrown_thing
 				thrown_thing = thrown_thing:held_mob
 				old.release()
 				used_sound = pick(I.swingsound)
@@ -895,27 +895,6 @@
 		overlay_fullscreen("oxy", /atom/movable/screen/fullscreen/oxy, severity)
 	else
 		clear_fullscreen("oxy")
-/*
-	//Fire and Brute damage overlay (BSSR)
-	var/hurtdamage = getBruteLoss() + getFireLoss() + damageoverlaytemp
-	if(hurtdamage)
-		var/severity = 0
-		switch(hurtdamage)
-			if(5 to 15)
-				severity = 1
-			if(15 to 30)
-				severity = 2
-			if(30 to 45)
-				severity = 3
-			if(45 to 70)
-				severity = 4
-			if(70 to 85)
-				severity = 5
-			if(85 to INFINITY)
-				severity = 6
-		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
-	else
-		clear_fullscreen("brute")*/
 
 	var/hurtdamage = ((get_complex_pain() / (STAEND * 10)) * 100) //what percent out of 100 to max pain
 	if(hurtdamage)
@@ -930,13 +909,13 @@
 				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 			if(60 to 80)
 				severity = 4
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 1)
 			if(80 to 99)
 				severity = 5
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 2)
 			if(99 to INFINITY)
 				severity = 6
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 3)
 		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")
@@ -1078,8 +1057,7 @@
 
 /mob/living/carbon/ExtinguishMob(itemz = TRUE)
 	if(itemz)
-		for(var/X in get_equipped_items())
-			var/obj/item/I = X
+		for(var/obj/item/I as anything in get_equipped_items())
 			I.acid_level = 0 //washes off the acid on our clothes
 			I.extinguish() //extinguishes our clothes
 		var/obj/item/I = get_active_held_item()
@@ -1210,8 +1188,7 @@
 			return
 		var/list/artpaths = subtypesof(/datum/martial_art)
 		var/list/artnames = list()
-		for(var/i in artpaths)
-			var/datum/martial_art/M = i
+		for(var/datum/martial_art/M as anything in artpaths)
 			artnames[initial(M.name)] = M
 		var/result = input(usr, "Choose the martial art to teach","JUDO CHOP") as null|anything in sortNames(artnames)
 		if(!usr)
@@ -1441,8 +1418,3 @@
 		to_dismember.dismember()
 		return TRUE
 	return FALSE
-
-/mob/living/carbon/proc/is_species(species)
-	if(!dna?.species)
-		return
-	return dna?.species.id == species

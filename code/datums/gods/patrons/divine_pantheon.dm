@@ -169,7 +169,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"EORA BRINGS US TOGETHER!",
 	)
 	storyteller = /datum/storyteller/xylix
-	associated_psycross = /obj/item/clothing/neck/psycross/silver/ravox
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/xylix
 
 /datum/patron/divine/pestra
 	name = PESTRA

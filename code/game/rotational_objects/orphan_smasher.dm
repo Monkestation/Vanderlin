@@ -40,7 +40,7 @@
 	LAZYINITLIST(regular_recipes)
 	if(!length(regular_recipes))
 		for(var/datum/anvil_recipe/recipe_path as anything in subtypesof(/datum/anvil_recipe))
-			if(is_abstract(recipe_path))
+			if(IS_ABSTRACT(recipe_path))
 				continue
 			regular_recipes |= new recipe_path
 

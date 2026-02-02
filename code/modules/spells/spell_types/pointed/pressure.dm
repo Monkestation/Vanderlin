@@ -29,7 +29,7 @@
 		record_round_statistic(STATS_PEOPLE_DROWNED)
 	else
 		cast_on.Slowdown(3)
-		cast_on.set_dizzy(4)
+		cast_on.set_dizzy(8 SECONDS)
 		cast_on.set_eye_blur_if_lower(20 SECONDS)
 		cast_on.emote("drown")
 	return

@@ -631,6 +631,14 @@
 	alert_type = /atom/movable/screen/alert/status_effect/bardbuff
 	duration = 50 // Sanity, so that people outside the bard buff listening area lose the buff after a few seconds
 
+// /datum/status_effect/bardicbuff/on_apply()
+// 	. = ..()
+// 	owner.add_stress(/datum/stress_event/bardicbuff)
+
+// /datum/status_effect/bardicbuff/on_remove()
+// 	. = ..()
+// 	owner.remove_stress(/datum/stress_event/bardicbuff)
+
 // SKELETON BARD BUFF ALERT
 /atom/movable/screen/alert/status_effect/bardbuff
 	name = "Musical Buff"

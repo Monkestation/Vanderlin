@@ -94,35 +94,31 @@
 
 /datum/preferences/proc/calculate_quirk_balance()
 	var/balance = STARTING_QUIRK_POINTS
-	for(var/quirk_type in quirks)
-		var/datum/quirk/Q = quirk_type
-		balance += initial(Q.point_value)
+	for(var/datum/quirk/quirk as anything in quirks)
+		balance += initial(quirk.point_value)
 	return balance
 
 /datum/preferences/proc/count_boons_in_list()
 	var/count = 0
-	for(var/quirk_type in quirks)
-		var/datum/quirk/Q = quirk_type
-		if(initial(Q.quirk_category) == QUIRK_BOON)
+	for(var/datum/quirk/quirk as anything in quirks)
+		if(initial(quirk.quirk_category) == QUIRK_BOON)
 			count++
 	return count
 
 /datum/preferences/proc/find_most_expensive_boon()
 	var/most_expensive = null
 	var/lowest_value = 0
-	for(var/quirk_type in quirks)
-		var/datum/quirk/Q = quirk_type
-		if(initial(Q.quirk_category) == QUIRK_BOON)
-			if(initial(Q.point_value) < lowest_value)
-				lowest_value = initial(Q.point_value)
-				most_expensive = quirk_type
+	for(var/datum/quirk/quirk as anything in quirks)
+		if(initial(quirk.quirk_category) == QUIRK_BOON)
+			if(initial(quirk.point_value) < lowest_value)
+				lowest_value = initial(quirk.point_value)
+				most_expensive = quirk
 	return most_expensive
 
 /datum/preferences/proc/find_first_boon()
-	for(var/quirk_type in quirks)
-		var/datum/quirk/Q = quirk_type
-		if(initial(Q.quirk_category) == QUIRK_BOON)
-			return quirk_type
+	for(var/datum/quirk/quirk in quirks)
+		if(initial(quirk.quirk_category) == QUIRK_BOON)
+			return quirk
 	return null
 
 /datum/preferences/proc/can_add_quirk(quirk_type)
@@ -367,9 +363,8 @@
 	var/dat = "<div class='quirk-list'>"
 
 	for(var/quirk_type in quirks)
-		var/datum/quirk/Q = quirk_type
-		var/datum/quirk/singleton = GLOB.quirk_singletons[quirk_type]
-		var/category = initial(Q.quirk_category)
+		var/datum/quirk/quirk = GLOB.quirk_singletons[quirk_type]
+		var/category = quirk.quirk_category
 		var/category_class = ""
 
 		switch(category)
@@ -382,18 +377,18 @@
 
 		dat += "<div class='quirk-card [category_class] selected' data-quirk='\ref[quirk_type]'>"
 		dat += "<div class='quirk-card-header'>"
-		dat += "<span class='quirk-name'>[initial(Q.name)]</span>"
-		dat += "<span class='quirk-points'>[initial(Q.point_value)] pts</span>"
+		dat += "<span class='quirk-name'>[quirk.name]</span>"
+		dat += "<span class='quirk-points'>[quirk.point_value] pts</span>"
 		dat += "</div>"
-		dat += "<div class='quirk-desc'>[singleton.get_desc(src)]</div>"
+		dat += "<div class='quirk-desc'>[quirk.get_desc(src)]</div>"
 
-		var/custom_type = initial(Q.customization_type)
-		var/list/options = singleton?.return_customization(src)
+		var/custom_type = quirk.customization_type
+		var/list/options = quirk?.return_customization(src)
 
 		if(custom_type == QUIRK_TEXT)
 			// Text input customization
-			var/label = initial(Q.customization_label)
-			var/placeholder = initial(Q.customization_placeholder)
+			var/label = quirk.customization_label
+			var/placeholder = quirk.customization_placeholder
 			var/current_value = quirk_customizations[quirk_type]
 
 			dat += "<div class='quirk-customization'>"
@@ -405,7 +400,7 @@
 
 		else if(length(options))
 			// Dropdown customization
-			var/label = initial(Q.customization_label)
+			var/label = quirk.customization_label
 			var/current_value = quirk_customizations[quirk_type]
 
 			dat += "<div class='quirk-customization'>"
@@ -416,7 +411,7 @@
 				dat += "<option value='' selected>-- Select --</option>"
 
 			for(var/option in options)
-				var/option_name = singleton.get_option_name(option)
+				var/option_name = quirk.get_option_name(option)
 				var/selected = (current_value == option) ? "selected" : ""
 				dat += "<option value='\ref[option]' [selected]>[option_name]</option>"
 

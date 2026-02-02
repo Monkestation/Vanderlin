@@ -62,7 +62,7 @@
 /datum/wound/facial/eyes/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.Stun(10)
-	affected.adjust_temp_blindness(5 SECONDS)
+	affected.adjust_temp_blindness(10 SECONDS)
 
 /datum/wound/facial/eyes/right
 	name = "right eye evisceration"

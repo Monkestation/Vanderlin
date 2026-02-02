@@ -46,8 +46,7 @@
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Psyaltrist")
 
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 
 	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,

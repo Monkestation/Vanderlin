@@ -182,6 +182,10 @@
 	for(var/mob/living/corpse in coffin)
 		if(pacify_corpse(corpse, user))
 			success = TRUE
+	for(var/mob/living/carbon/human/human_corpse in coffin)
+		if(human_corpse.funeral) /* The proc succeeds even if the corpse already received a funeral before.
+	    Coffins and graves have checks to prevent giving too much influence / devotion to Necra. */
+			success = TRUE
 	for(var/obj/item/bodypart/head/head in coffin)
 		if(!head.brainmob)
 			continue
@@ -195,6 +199,8 @@
 			if(pacify_coffin(stuffing, user, deep))
 				success = TRUE
 	return success
+
+
 
 /// Proc that finds the client associated with a given corpse and either 1. Lets ghosts skip Underworld and return to lobby 2. Gives spirits a toll
 /proc/pacify_corpse(mob/living/corpse, mob/user)

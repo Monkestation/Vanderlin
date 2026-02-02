@@ -57,7 +57,7 @@
 				var/turf/T = get_step(src, dir)
 				if(istype(T, /turf/closed/mineral/random))
 					Spread(T)
-	var/turf/open/transparent/openspace/target = GET_TURF_ABOVE(src)
+	var/turf/open/openspace/target = GET_TURF_ABOVE(src)
 	if(istype(target))
 		target.ChangeTurf(/turf/open/floor/naturalstone)
 
@@ -104,7 +104,7 @@
 		else
 			return
 	else
-		if(lastminer.stat_roll(STATKEY_LCK,2,10) && mineralType)
+		if(lastminer?.stat_roll(STATKEY_LCK,2,10) && mineralType)
 	//		to_chat(lastminer, span_notice("Bonus ducks!"))
 			new mineralType(src)
 		gets_drilled(lastminer, give_exp = FALSE)

@@ -52,7 +52,8 @@
 		if(prob(5))
 			heterochromia = TRUE
 			second_color = random_eye_color()
-	update_icon()
+
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/organ/eyes/update_overlays()
 	. = ..()

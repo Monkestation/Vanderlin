@@ -5,7 +5,7 @@
 	name = "floor"
 	desc = ""
 	icon = 'icons/turf/floors.dmi'
-	baseturfs = /turf/open/transparent/openspace
+	baseturfs = /turf/open/openspace
 	footstep = FOOTSTEP_FLOOR
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW

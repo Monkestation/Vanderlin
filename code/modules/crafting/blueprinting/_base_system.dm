@@ -621,7 +621,7 @@
 	selected_recipe = GLOB.blueprint_recipes[recipe_id]
 	build_dir = selected_recipe.default_dir
 	create_preview_appearance(selected_recipe)
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Selected blueprint: [selected_recipe.name]</span>")
 	if(selected_recipe.supports_directions)
@@ -644,6 +644,8 @@
 		if(right_click)
 			if(istype(object, /obj/structure/blueprint))
 				var/obj/structure/blueprint/print = object
+				if(!print.creator)
+					return TRUE
 				if(print.creator != user && world.time < print.time_when_placed + 3 MINUTES)
 					return TRUE
 				to_chat(user, span_red("[object.name] removed."))
@@ -761,6 +763,6 @@
 /datum/blueprint_system/proc/clear_selection()
 	selected_recipe = null
 	clear_preview()
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Blueprint selection cleared.</span>")

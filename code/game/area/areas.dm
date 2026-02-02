@@ -6,7 +6,7 @@
 /area
 	level = null
 	name = "unknown"
-	icon = 'icons/turf/areas.dmi'
+	icon = 'icons/turf/areas/areas.dmi'
 	icon_state = "unknown"
 	layer = AREA_LAYER
 	//Keeping this on the default plane, GAME_PLANE, will make area overlays fail to render on FLOOR_PLANE.
@@ -365,7 +365,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	client.screen += T
 	T.maptext = MAPTEXT_BLACKMOOR("<span class='center' style='vertical-align:top; color: #820000;\
 		text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;'>[A.first_time_text]</span>")
-	T.maptext_width = 220
+	T.maptext_width = 230
 	T.maptext_height = 209
 	T.maptext_x = 12
 	T.maptext_y = 64

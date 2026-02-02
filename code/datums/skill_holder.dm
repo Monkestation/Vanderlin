@@ -65,6 +65,8 @@
 	return ensure_skills().get_skill_speed_modifier(skill)
 
 /mob/proc/adjust_experience(skill, amt, silent=FALSE, check_apprentice=TRUE)
+	if(HAS_TRAIT(src, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	return ensure_skills().adjust_experience(skill, amt, silent, check_apprentice)
 
 /mob/proc/get_inspirational_bonus()
@@ -438,10 +440,10 @@
 		old_level = SKILL_LEVEL_NONE
 	if((isnull(old_level) && is_new_skill) || known_skills[skill_ref] == old_level)
 		return
+	SEND_SIGNAL(current, COMSIG_SKILL_RANK_INCREASED, skill_ref, known_skills[skill_ref], old_level)
 	if(silent)
 		return
 	if(known_skills[skill_ref] >= old_level)
-		SEND_SIGNAL(current, COMSIG_SKILL_RANK_INCREASED, skill_ref, known_skills[skill_ref], old_level)
 		to_chat(current, span_nicegreen("I feel like I've become more proficient at [skill_ref.name]!"))
 		record_round_statistic(STATS_SKILLS_LEARNED)
 		if(istype(skill_ref, /datum/skill/combat))

@@ -245,7 +245,7 @@
 
 /// Executes after the mob has been spawned in the map.
 /// Client might not be yet in the mob, and is thus a separate variable.
-/datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client, clear_job_stats = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
@@ -280,8 +280,10 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
-	if(!parent_job) // Prevent the advclass job from removing the parent job stats.
-		spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
+	// When we have sourced skill mods (praying, add to this as well)
+	if(clear_job_stats) // Reset for most non-advclasses
+		spawned.remove_stat_modifier(STATMOD_JOB)
+
 	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
 
 	for(var/datum/skill/skill as anything in skills)
@@ -439,15 +441,18 @@
 				continue
 			reals |= real_pack
 		if(!length(reals))
+			message_admins("ERROR: [key_name_admin(src)] failed job pack selection.")
 			return
 
 		var/datum/job_pack/picked_pack
 		if(!client)
-			picked_pack = GLOB.job_pack_singletons[pick(reals)]
+			picked_pack = pick(reals)
 		else
-			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 20 SECONDS)
+			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 40 SECONDS)
 			if(QDELETED(src))
 				return
+		if(!picked_pack)
+			picked_pack = pick(reals)
 
 		if(picked_pack.type)
 			previous_picked_types |= picked_pack.type
@@ -585,15 +590,16 @@
 /datum/job/proc/remove_spells(mob/living/equipped_human)
 	equipped_human.remove_spells(source = src)
 
-/datum/job/proc/get_informed_title(mob/mob)
+/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
 	if(mob.admin_title)
 		return mob.admin_title
 
 	if(title_override)
 		return title_override
 
-	if(mob.pronouns == SHE_HER && f_title)
-		return f_title
+	if(f_title)
+		if(ignore_pronouns && mob.gender == FEMALE || !ignore_pronouns && mob.pronouns == SHE_HER)
+			return f_title
 
 	return title
 

@@ -14,19 +14,19 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/keycontrol = "puritan"
 	var/cat_current = "1"
 	var/list/all_category = list(
-		"✤ RELIQUARY ✤",
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"RELIQUARY",
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
 	var/list/category = list(
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
-	var/list/inq_category = list("✤ RELIQUARY ✤")
+	var/list/inq_category = list("RELIQUARY")
 	var/ournum
 	var/mailtag
 	var/obfuscated = FALSE
@@ -385,14 +385,16 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 
 /obj/structure/fake_machine/mail/proc/handle_indexer(obj/item/inqarticles/indexer/indexer, mob/living/carbon/human/user)
+	var/mob/living/subject = indexer.subject?.resolve()
 	// Handle cursed blood samples
 	if(indexer.cursedblood)
 		var/is_duplicate = FALSE
 
 		if(GLOB.cursedsamples)
-			is_duplicate = check_global_list(GLOB.cursedsamples, indexer.subject.mind)
-			if(!is_duplicate)
-				add_to_global_list(GLOB.cursedsamples, indexer.subject.mind)
+			if(subject)
+				is_duplicate = check_global_list(GLOB.cursedsamples, subject.mind)
+				if(!is_duplicate)
+					add_to_global_list(GLOB.cursedsamples, subject.mind)
 
 		if(is_duplicate)
 			qdel(indexer)
@@ -400,7 +402,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			playsound(src, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 			visible_message(span_warning("[user] receives something."))
 			to_chat(user, span_notice("We've already collected a sample of their accursed blood."))
-			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
+			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer(get_turf(user))
 			user.put_in_hands(replacement)
 		else
 			var/marque_value = indexer.cursedblood * 2 + 2
@@ -413,17 +415,17 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		return
 
 	// Handle regular indexing
-	if(indexer.subject && indexer.full)
+	if(subject && indexer.full)
 		var/is_duplicate = FALSE
 		var/is_selfreport = FALSE
 
-		if(HAS_TRAIT(indexer.subject, TRAIT_INQUISITION))
+		if(HAS_TRAIT(subject, TRAIT_INQUISITION))
 			is_selfreport = TRUE
 
 		if(GLOB.indexed && !is_selfreport)
-			is_duplicate = check_global_list(GLOB.indexed, indexer.subject)
+			is_duplicate = check_global_list(GLOB.indexed, subject)
 			if(!is_duplicate)
-				add_to_global_list(GLOB.indexed, indexer.subject)
+				add_to_global_list(GLOB.indexed, subject)
 
 		if(is_duplicate || is_selfreport)
 			qdel(indexer)
@@ -436,7 +438,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			else
 				to_chat(user, span_notice("It appears we already had them INDEXED. I've been issued a replacement."))
 
-			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
+			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer(get_turf(user))
 			user.put_in_hands(replacement)
 		else
 			budget2change(2, user, "MARQUE")
@@ -488,8 +490,10 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	if(HAS_TRAIT(accusation.paired.subject, TRAIT_CABAL))
 		is_correct = TRUE
 
+	var/mob/living/subject = accusation.paired.subject?.resolve()
+
 	// Check antagonist types
-	for(var/datum/antagonist/antag in accusation.paired.subject.mind?.antag_datums)
+	for(var/datum/antagonist/antag in subject?.mind?.antag_datums)
 		switch(antag.type)
 			if(/datum/antagonist/bandit, /datum/antagonist/maniac, /datum/antagonist/assassin,
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
@@ -499,8 +503,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 				break
 
 	// Check patron types
-	if(accusation.paired.subject.patron)
-		switch(accusation.paired.subject.patron.type)
+	if(subject?.patron)
+		switch(subject?.patron.type)
 			if(/datum/patron/inhumen/matthios, /datum/patron/inhumen/zizo, /datum/patron/inhumen/graggar,
 			   /datum/patron/inhumen/baotha, /datum/patron/godless/godless, /datum/patron/godless/autotheist,
 			   /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/rashan,
@@ -508,7 +512,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 				is_correct = TRUE
 
 	// Check excommunication
-	if(accusation.paired.subject.name in GLOB.excommunicated_players)
+	if(subject?.name in GLOB.excommunicated_players)
 		is_correct = TRUE
 
 	// Check if already indexed
@@ -540,8 +544,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			to_chat(user, span_notice("They've confessed."))
 		else if(is_selfreport)
 			to_chat(user, span_notice("Why are we accusing our own? What have we come to?"))
-			visible_message(span_warning("[user] receives something."))
-			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer/
+			var/obj/item/inqarticles/indexer/replacement = new /obj/item/inqarticles/indexer(get_turf(user))
 			user.put_in_hands(replacement)
 		else
 			to_chat(user, span_notice("They've already been accused."))
@@ -790,20 +793,20 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 /obj/structure/fake_machine/mail/proc/decreaseremaining(datum/inqports/PA)
 	PA.remaining -= 1
-	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - ᛉ [PA.marquescost] ᛉ"
+	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - [PA.marquescost]"
 	if(!PA.remaining)
-		PA.name = "[initial(PA.name)] (OUT OF STOCK) - ᛉ [PA.marquescost] ᛉ"
+		PA.name = "[initial(PA.name)] (OUT OF STOCK) - [PA.marquescost]"
 	return
 
 /obj/structure/fake_machine/mail/proc/display_marquette(mob/user)
 	var/contents
-	contents = "<center>✤ ── THE ORATORIUM'S RELIQUARY ── ✤<BR>"
+	contents = "<center>  THE ORATORIUM'S RELIQUARY  <BR>"
 	contents += "ERADICATE HERESY, SO THAT PSYDONIA MAY ENDURE <BR>"
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
-		contents += "✤ ── <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a> ── ✤<BR>"
+		contents += "  <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a>  <BR>"
 	else
-		contents += "✤ ── PURITAN'S LOCK: [inqonly ? "YES":"NO"] ── ✤<BR>"
-	contents += "ᛉ <a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a>ᛉ<BR>"
+		contents += "  PURITAN'S LOCK: [inqonly ? "YES":"NO"]  <BR>"
+	contents += "<a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a><BR>"
 
 	if(cat_current == "1")
 		contents += "<BR> <table style='width: 100%' line-height: 40px;'>"
@@ -826,14 +829,12 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		contents += "<center><a href='?src=[REF(src)];changecat=1'>\[RETURN\]</a><BR><BR></center>"
 		contents += "<center>"
 		var/list/items = list()
-		for(var/pack in GLOB.inqsupplies)
-			var/datum/inqports/PA = pack
+		for(var/datum/inqports/PA as anything in GLOB.inqsupplies)
 			if(all_category[PA.category] == cat_current && PA.name)
-				items += GLOB.inqsupplies[pack]
+				items += GLOB.inqsupplies[PA]
 				if(PA.name == "Seizing Garrote" && !HAS_TRAIT(user, TRAIT_BLACKBAGGER))
-					items -= GLOB.inqsupplies[pack]
-		for(var/pack in sortNames(items, order=0))
-			var/datum/inqports/PA = pack
+					items -= GLOB.inqsupplies[PA]
+		for(var/datum/inqports/PA as anything in sortNames(items, order=0))
 			var/name = uppertext(PA.name)
 			if(inqonly && !HAS_TRAIT(user, TRAIT_PURITAN) || (PA.maximum && !PA.remaining) || inqcoins < PA.marquescost)
 				contents += "[name]<BR>"

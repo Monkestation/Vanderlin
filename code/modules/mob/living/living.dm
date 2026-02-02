@@ -36,8 +36,7 @@
 
 	surgeries = null
 	if(LAZYLEN(status_effects))
-		for(var/s in status_effects)
-			var/datum/status_effect/S = s
+		for(var/datum/status_effect/S as anything in status_effects)
 			if(S.on_remove_on_mob_delete) //the status effect calls on_remove when its mob is deleted
 				qdel(S)
 			else
@@ -985,8 +984,7 @@
 
 /mob/living/Crossed(atom/movable/AM)
 	. = ..()
-	for(var/i in get_equipped_items())
-		var/obj/item/item = i
+	for(var/obj/item/item as anything in get_equipped_items())
 		SEND_SIGNAL(item, COMSIG_ITEM_WEARERCROSSED, AM, src)
 	if(isliving(AM))
 		var/mob/living/L = AM
@@ -1430,7 +1428,7 @@
 				var/target_zone = pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
 				attacker.apply_damage(damage, BRUTE, target_zone)
 				attacker.OffBalance(1.5 SECONDS)
-				attacker.adjust_confusion(2 SECONDS)
+				attacker.adjust_confusion(4 SECONDS)
 
 			// if("stomp")
 			// 	if(attacker.body_position != LYING_DOWN && body_position != LYING_DOWN)
@@ -2146,7 +2144,7 @@
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
 		if(storage)
-			var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+			var/obj/item/mob_holder/holder = new(get_turf(src), src)
 			visible_message(span_warning("[src] starts to climb into [over]."), span_warning("You start to climb into [over]."))
 			if(do_after(src, 1.2 SECONDS, over))
 				if(over.loc == src)
@@ -2170,7 +2168,7 @@
 		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
 		if(!picked)
 			return
-		var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))
 		if(do_after(src, 3 SECONDS, over))
 			if(picked.loc == src)
@@ -2196,7 +2194,7 @@
 
 
 /mob/living/proc/mob_pickup(mob/living/user)
-	var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+	var/obj/item/mob_holder/holder = new(get_turf(src), src)
 	user.visible_message(span_warning("[user] scoops up [src]!"))
 	user.put_in_hands(holder)
 
@@ -2577,6 +2575,8 @@
 		visible_message(span_info("[src] looks up."))
 	var/turf/ceiling = get_step_multiz(src, UP)
 	var/turf/T = get_turf(src)
+	if(isnull(ceiling)) //Can't check what isn't there
+		return
 	if(!istransparentturf(ceiling)) //There is no turf we can look through above us
 		to_chat(src, span_warning("A ceiling above my head."))
 		return

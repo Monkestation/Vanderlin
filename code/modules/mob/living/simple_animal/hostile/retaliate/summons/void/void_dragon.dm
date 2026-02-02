@@ -103,8 +103,7 @@
 		return
 	var/turf/targetturf = get_turf(target)
 	var/last_dist = 0
-	for(var/t in spiral_range_turfs(4, targetturf))
-		var/turf/T = t
+	for(var/turf/T as anything in spiral_range_turfs(4, targetturf))
 		if(!T)
 			continue
 		var/dist = get_dist(targetturf, T)
@@ -745,7 +744,7 @@
 		to_chat(owner, span_warning("The void corruption burns my flesh!"))
 
 	if(corruption_stage >= 2 && prob(25))
-		owner.adjust_confusion(0.2 SECONDS)
+		owner.adjust_confusion(4 SECONDS)
 
 	if(corruption_stage >= 3 && prob(15))
 		owner.Paralyze(0.5 SECONDS)

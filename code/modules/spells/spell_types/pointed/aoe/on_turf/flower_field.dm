@@ -315,7 +315,7 @@
 	check_field_presence()
 	tick_counter++
 	L.Stun(3)
-	L.adjust_jitter(2)
+	L.adjust_jitter(4 SECONDS)
 	L.emote(pick("spin", "dance"), forced=TRUE)
 	L.emote(pick("laugh", "giggle"), forced=TRUE)
 	if (tick_counter >= 4)

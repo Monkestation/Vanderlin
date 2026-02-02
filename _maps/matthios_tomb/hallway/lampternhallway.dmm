@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /obj/structure/bars/grille,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "b" = (
 /turf/open/floor/concrete,
@@ -27,13 +27,13 @@
 /obj/structure/floordoor{
 	redstone_id = "bladedancer"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "w" = (
 /obj/structure/floordoor{
 	redstone_id = "blades"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "x" = (
 /obj/structure/bars/grille,
@@ -41,7 +41,7 @@
 	dir = 8;
 	redstone_id = "blades"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "A" = (
 /obj/effect/dungeon_directional_helper/west,
@@ -56,7 +56,7 @@
 	dir = 4;
 	redstone_id = "bladedancer"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "J" = (
 /obj/machinery/light/fueled/lanternpost/fixed,
@@ -94,7 +94,7 @@
 "Z" = (
 /obj/structure/bars/grille,
 /obj/structure/bars/grille,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 
 (1,1,1) = {"

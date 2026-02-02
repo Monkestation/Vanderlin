@@ -5,7 +5,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 /proc/init_container_crafts()
 	var/list/recipes = list()
 	for(var/datum/container_craft/craft as anything in subtypesof(/datum/container_craft))
-		if(is_abstract(craft))
+		if(IS_ABSTRACT(craft))
 			continue
 		recipes |= craft
 		recipes[craft] = new craft
@@ -79,30 +79,24 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 
 	// Check reagent requirements
 	if(length(reagent_requirements))
-		var/list/fake_reagents = reagent_requirements.Copy()
-		for(var/datum/reagent/listed_reagent as anything in crafter.reagents.reagent_list)
-			var/search_path = listed_reagent.type
-			if(!(listed_reagent.type in fake_reagents))
-				if(subtype_reagents_allowed)
-					var/reagent_found = FALSE
-					for(var/datum/reagent/reagent_requirement as anything in fake_reagents)
-						if(ispath(listed_reagent.type, reagent_requirement))
-							search_path = reagent_requirement
-							reagent_found = TRUE
-							break
-					if(!reagent_found)
-						continue
-				else
-					continue
-			var/potential_multiplier = FLOOR(listed_reagent.volume / fake_reagents[search_path], 1)
-			if(!highest_multiplier)
-				highest_multiplier = potential_multiplier
-			else if(potential_multiplier < highest_multiplier)
-				highest_multiplier = potential_multiplier
-			if(potential_multiplier > 0)
-				fake_reagents -= listed_reagent.type
-		if(length(fake_reagents))
-			return FALSE
+		for(var/reagent_type in reagent_requirements)
+			if(!crafter.reagents.has_reagent(reagent_type, reagent_requirements[reagent_type], check_subtypes = subtype_reagents_allowed))
+				return FALSE
+		// var/list/fake_reagents = reagent_requirements.Copy()
+		// var/list/available_reagents = list()
+		// for(var/datum/reagent/listed_reagent as anything in crafter.reagents.reagent_list)
+		// 	available_reagents[listed_reagent.type] = listed_reagent.volume
+
+		// for(var/required_path as anything in fake_reagents)
+		// 	var/required_amount = fake_reagents[required_path]
+		// 	for(var/path in available_reagents)
+		// 		if(subtype_reagents_allowed ? !ispath(path, required_path) : path != required_path)
+		// 			continue
+		// 		required_amount -= available_reagents[path]
+		// 		if(required_amount <= 0)
+		// 			break
+		// 	if(required_amount > 0)
+		// 		return FALSE
 
 	// Make copies to track what we're consuming
 	var/list/fake_requirements = requirements?.Copy()
@@ -207,10 +201,10 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 
 		if(length(reagent_requirements))
 			for(var/reagent as anything in reagent_requirements)
-				if(!crafter.reagents.has_reagent(reagent, reagent_requirements[reagent], check_subtypes = subtype_reagents_allowed))
+				var/datum/reagent/reagent_found = crafter.reagents.has_reagent(reagent, reagent_requirements[reagent], check_subtypes = subtype_reagents_allowed)
+				if(!reagent_found)
 					return FALSE
-				passed_reagents |= reagent
-				passed_reagents[reagent] = reagent_requirements[reagent]
+				passed_reagents[reagent_found.type] = reagent_requirements[reagent]
 
 		if(length(requirements))
 			for(var/item_type in requirements)
@@ -370,7 +364,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 			if(istype(food_item, /obj/item/reagent_containers/food/snacks))
 				var/obj/item/reagent_containers/food/snacks/F = food_item
 				total_freshness += max(0, (F.warming + F.rotprocess))
-				highest_food_quality = max(highest_food_quality, F.quality, F.recipe_quality )
+				highest_food_quality = max(highest_food_quality, F.recipe_quality )
 
 	// Check reagent qualities in the crafter container
 	if(crafter.reagents && crafter.reagents.reagent_list)

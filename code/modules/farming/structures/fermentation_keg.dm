@@ -199,7 +199,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 					current_amount = recipe_crop_stocks[G.type]
 
 			// Get quality and freshness from the crop (matching cooking system)
-			var/crop_quality = max(G.recipe_quality, G.quality, 1) // Default quality
+			var/crop_quality = max(G.recipe_quality, 1) // Default quality
 			var/crop_freshness = max(0, (G.warming + G.rotprocess)) // Default freshness
 
 			// Calculate weighted average quality and freshness
@@ -345,17 +345,16 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	addtimer(VARSET_CALLBACK(src, selecting_recipe, FALSE), 5 SECONDS)
 
 	var/list/options = list()
-	for(var/path in subtypesof(/datum/brewing_recipe))
-		if(is_abstract(path))
+	for(var/datum/brewing_recipe/path as anything in subtypesof(/datum/brewing_recipe))
+		if(IS_ABSTRACT(path))
 			continue
-		var/datum/brewing_recipe/recipe = path
-		var/datum/reagent/prereq = initial(recipe.pre_reqs)
-		if(!heated && initial(recipe.heat_required))
+		var/datum/reagent/prereq = initial(path.pre_reqs)
+		if(!heated && initial(path.heat_required))
 			continue
 		if(!prereq || (reagents.has_reagent(prereq)))
-			options[initial(recipe.name)] = recipe
+			options[initial(path.name)] = path
 
-	for(var/datum/brewing_recipe/recipe in GLOB.custom_fermentation_recipes)
+	for(var/datum/brewing_recipe/recipe as anything in GLOB.custom_fermentation_recipes)
 		var/datum/reagent/prereq = initial(recipe.pre_reqs)
 		if(!heated && initial(recipe.heat_required))
 			continue
