@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /proc/build_zizo_rituals()
 	. = list()
 	for(var/datum/ritual/ritual as anything in subtypesof(/datum/ritual))
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		.[ritual.name] = new ritual
 
@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	target.Stun(10 SECONDS)
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
-		carbon_target.adjust_silence(30)
+		carbon_target.adjust_silence(30 SECONDS)
 	qdel(src)
 
 /datum/ritual/servantry/darksunmark

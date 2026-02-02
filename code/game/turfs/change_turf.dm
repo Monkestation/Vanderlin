@@ -167,7 +167,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		if(new_baseturfs.len == 1)
 			new_baseturfs = new_baseturfs[1]
 
-		if(turf_type == /turf/open/transparent/openspace)
+		if(turf_type == /turf/open/openspace)
 			var/turf/below = GET_TURF_BELOW(src)
 			if(!below) //We are at the LOWEST z-level.
 				turf_type = /turf/open/floor/naturalstone
@@ -189,12 +189,12 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 //				var/turf/above = GET_TURF_ABOVE(src)
 //				if(above)
 //					if(istype(above, CL.above_floor))
-//						above.ChangeTurf(/turf/open/transparent/openspace, list(/turf/open/transparent/openspace), flags)
+//						above.ChangeTurf(/turf/open/openspace, list(/turf/open/openspace), flags)
 		return ChangeTurf(turf_type, new_baseturfs, flags)
 
 	var/used_type = baseturfs
 
-	if(baseturfs == /turf/open/transparent/openspace)
+	if(baseturfs == /turf/open/openspace)
 		var/turf/below = GET_TURF_BELOW(src)
 		if(!below) //We are at the LOWEST z-level.
 			used_type = /turf/open/floor/naturalstone

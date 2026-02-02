@@ -36,7 +36,7 @@
 		/obj/item/natural/fibers = 2,
 	)
 	output = /obj/item/ammo_holder/dartpouch
-	
+
 /datum/repeatable_crafting_recipe/leather/storage/bulletpouch
 	name = "bullet pouch"
 	requirements = list(
@@ -1029,3 +1029,68 @@
 	output = /obj/item/clothing/armor/leather/studded/psyaltrist
 	craftdiff = 3
 	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/leatherhood
+	name = "leather hood"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/clothing/head/roguehood/leather
+	craftdiff = 2
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/sanguinejacket
+	name = "sanguine jacket"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3
+	)
+	output = /obj/item/clothing/armor/leather/jacket/courtphysician/female
+	craftdiff = 3
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/sanguinegloves
+	name = "sanguine gloves"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2
+	)
+	output = /obj/item/clothing/gloves/leather/courtphysician
+	craftdiff = 3
+	category = "Gloves"
+
+/datum/repeatable_crafting_recipe/leather/sanguinesleeves
+	name = "sanguine sleeves"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/silk = 2,
+	)
+	output = /obj/item/clothing/gloves/leather/courtphysician/female
+	craftdiff = 3
+	category = "Gloves"
+
+/datum/repeatable_crafting_recipe/leather/sanguinecoat
+	name = "sanguine coat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3
+	)
+	output = /obj/item/clothing/armor/leather/jacket/courtphysician
+	craftdiff = 3
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/sanguineshoes
+	name = "sanguine shoes"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2
+	)
+	output = /obj/item/clothing/shoes/courtphysician
+	craftdiff = 3
+	category = "Shoes"
+
+/datum/repeatable_crafting_recipe/leather/sanguineheels
+	name = "sanguine heels"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2
+	)
+	output = /obj/item/clothing/shoes/courtphysician/female
+	craftdiff = 3
+	category = "Shoes"

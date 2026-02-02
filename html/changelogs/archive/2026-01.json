@@ -379,5 +379,203 @@
                 "rscadd": "Added some candle sprites from Azure."
             }
         ]
+    },
+    "2026-01-20": {
+        "snowyseshi": [
+            {
+                "code_imp": "athletics and climbing are now clamped to average."
+            },
+            {
+                "rscdel": "Woodland hermit background removed."
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "balance": "Daywalker migrant job rebalanced and changed (No longer a worse witch hunter)"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Coffins may now be sealed with tallow. This can consecrate them like a grave."
+            },
+            {
+                "rscadd": "Sealed coffins can be opened with daggers and knives on cut intent."
+            },
+            {
+                "rscadd": "A grave may now be double-consecrated by burying a consecrated coffin and using burial rites on the resulting grave. This makes graverobbing trigger an alarm that alerts the temple."
+            },
+            {
+                "rscadd": "Red Tallow may now be made by using viscera on normal tallow. Viscera is created by grinding sinew.\\nadd : New sprites for consecrated coffins, double-consecrated graves."
+            },
+            {
+                "code_imp": "fixes a typo in the bobcat's description."
+            }
+        ]
+    },
+    "2026-01-21": {
+        "CheffieGithub": [
+            {
+                "balance": "Black mirror can only track it's feeder or a select person for its 2 minute window."
+            },
+            {
+                "bugfix": "Fixed black mirror selection being broken."
+            }
+        ]
+    },
+    "2026-01-22": {
+        "Rockslp": [
+            {
+                "rscadd": "Added Triton to Swashbuckler Folkhero"
+            },
+            {
+                "rscdel": "Removed Harpy and Triton from Court Physician"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added hair shaving"
+            }
+        ],
+        "Bloo4420": [
+            {
+                "bugfix": "Ausbushes fluff structure integrity"
+            }
+        ],
+        "Ediblebomb": [
+            {
+                "rscadd": "Added a Swordsman Men-At-Arms subclass. They get the same equipment as Pikeman, but with a heater shield instead of a pike, skilled Swords and Shields, and marginally worse stats."
+            }
+        ]
+    },
+    "2026-01-23": {
+        "tired-wired": [
+            {
+                "rscdel": "Removed a single kobold slur."
+            }
+        ]
+    },
+    "2026-01-25": {
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new hood made out of leather to the game. The \\\"reformed thief\\\" adept subclass spawns with it by default."
+            }
+        ],
+        "TerraGS": [
+            {
+                "rscadd": "Flinging feces fouls foes."
+            }
+        ]
+    },
+    "2026-01-26": {
+        "TerraGS": [
+            {
+                "bugfix": "Looking up into nullspace no longer runtimes"
+            },
+            {
+                "refactor": "replaces the transparent turf subtype with a turf transparency element"
+            }
+        ]
+    },
+    "2026-01-27": {
+        "Neuroplasty": [
+            {
+                "bugfix": "Made herbal remedies not stress you out anymore."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "map": "medical guide moved a few tiles to its place"
+            }
+        ],
+        "Diegoflores31": [
+            {
+                "balance": "changes skill requirements of bombcrafting."
+            },
+            {
+                "balance": "removes bombcrafting from: porter , jester and plague doctor."
+            },
+            {
+                "balance": "adds bombcrafting to: artificer"
+            },
+            {
+                "bugfix": "breaching charge now can be used properly to mine."
+            },
+            {
+                "refactor": "breaching charges now use timers instead of process , reworked the logic for cinematic effect."
+            },
+            {
+                "bugfix": "minimun_skill_required now actually means minimun skill required."
+            }
+        ]
+    },
+    "2026-01-28": {
+        "realforest2001": [
+            {
+                "code_imp": "Removed unused span defines and style classes."
+            },
+            {
+                "qol": "Job restrictions now show timelock required before checking species/age etc."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "kobolds can eat walls now"
+            },
+            {
+                "rscadd": "kobolds cant eat magic rocks for spells anymore"
+            },
+            {
+                "rscadd": "you can stick kobolds in smelters now"
+            }
+        ]
+    },
+    "2026-01-29": {
+        "realforest2001": [
+            {
+                "qol": "Role-Unique verbs are now all in one tab (where practical to do so)."
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes the grenzelbun description"
+            }
+        ]
+    },
+    "2026-01-31": {
+        "dwasint": [
+            {
+                "bugfix": "roundstart coins can't be duped"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Objects that fall from above no longer show as \\\"the floor\\\"."
+            },
+            {
+                "bugfix": "Failing to pick a job subtype (such as bloodsucker wretch equipment) will no longer brick you."
+            }
+        ],
+        "ApolloVector": [
+            {
+                "balance": "Fighter Average shield skill -> Skilled shields"
+            },
+            {
+                "balance": "Cleric 0 shield skill -> Average"
+            },
+            {
+                "balance": "Zizo inhumen cleric shield skill bonus +1 instead of +2, resulting in skilled shields instead of expert"
+            },
+            {
+                "balance": "Captain Skilled shield skill -> Expert shields"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed inquisition collars getting stuck"
+            },
+            {
+                "bugfix": "Fixed asset load error"
+            }
+        ]
     }
 }

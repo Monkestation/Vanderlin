@@ -5,7 +5,7 @@
 "ao" = (
 /obj/structure/chair/stool,
 /obj/item/fishingrod,
-/obj/item/fishing/lure,
+/obj/effect/spawner/map_spawner/random_lure,
 /turf/open/floor/ruinedwood,
 /area/under/tomb/cave)
 "aN" = (
@@ -144,7 +144,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "rD" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/wilds)
 "rS" = (
 /obj/structure/fluff/railing/wood,

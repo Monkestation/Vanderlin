@@ -4,6 +4,22 @@
 	*				*
 	*===============*/
 
+///mmmm yumymumyumuymuymym
+#define DIET_KOBOLD list(\
+	/obj/item/natural/dirtclod,\
+	/obj/item/natural/stone,\
+	/obj/item/coin,\
+	/obj/item/gem,\
+)
+
+#define DIET_TURF_KOBOLD list(\
+	/turf/closed/mineral,\
+	/turf/closed/wall/mineral/stone,\
+	/turf/closed/wall/mineral/craftstone,\
+	/turf/closed/wall/mineral/decostone,\
+	/turf/closed/wall/mineral/desert_sandstone,\
+)
+
 /mob/living/carbon/human/species/kobold
 	race = /datum/species/kobold
 
@@ -97,23 +113,19 @@
 
 	COOLDOWN_DECLARE(kobold_cooldown)
 
-	var/list/can_eat = list(
-		/obj/item/natural/dirtclod,
-		/obj/item/natural/stone,
-		/obj/item/coin,
-		/obj/item/gem,
-	)
+	// Sorry for this
+	/// If we can eat turfs and items defined above
+	var/hungry_hungry_kobold = TRUE
 
 /datum/species/kobold/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
-	if(length(can_eat))
-		C.AddComponent(/datum/component/abberant_eater, can_eat)
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+	if(hungry_hungry_kobold)
+		C.AddComponent(/datum/component/abberant_eater, DIET_KOBOLD, FALSE, DIET_TURF_KOBOLD)
 	C.grant_language(/datum/language/common)
 
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	if(length(can_eat))
+	if(hungry_hungry_kobold)
 		var/datum/component/abberant_eater = GetComponent(/datum/component/abberant_eater)
 		if(abberant_eater)
 			abberant_eater.RemoveComponent()
@@ -157,3 +169,6 @@
 /datum/species/kobold/get_possible_surnames(gender = MALE)
 	var/static/list/last_names = world.file2list('strings/rt/names/dwarf/dwarmlast.txt')
 	return last_names
+
+#undef DIET_TURF_KOBOLD
+#undef DIET_KOBOLD

@@ -95,7 +95,7 @@
 /obj/structure/pottery_lathe/proc/choose_recipe(mob/user)
 	if(!length(recipes))
 		for(var/datum/pottery_recipe/recipe as anything in typesof(/datum/pottery_recipe))
-			if(is_abstract(recipe))
+			if(IS_ABSTRACT(recipe))
 				continue
 			recipes |= new recipe
 

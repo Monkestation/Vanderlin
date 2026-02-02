@@ -331,7 +331,7 @@
 		return NONE
 
 	// Flying over openspace
-	if((!on_rails || momentum >= 4) && istype(get_step(src, dir), /turf/open/transparent/openspace))
+	if((!on_rails || momentum >= 4) && istype(get_step(src, dir), /turf/open/openspace))
 		update_rail_state(FALSE) // Time to fly
 		return NONE
 

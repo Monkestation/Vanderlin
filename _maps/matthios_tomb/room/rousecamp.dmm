@@ -33,7 +33,7 @@
 /area/under/tomb/cave/lava)
 "fK" = (
 /obj/structure/flora/newtree/scorched,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "hC" = (
 /obj/structure/fluff/railing/border{
@@ -195,7 +195,7 @@
 /turf/open/floor/dirt/road,
 /area/under/tomb/cave/lava)
 "yp" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "zf" = (
 /mob/living/carbon/human/species/rousman/ambush,

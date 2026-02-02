@@ -4,18 +4,19 @@
 	There are countless pipes, cogs, and other confusing gizmos, all combined with a body of brass, steel and leather."
 	icon = 'icons/roguetown/weapons/airgun.dmi'
 	icon_state = "airgun"
-	possible_item_intents = list(/datum/intent/mace/smash)
-	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/airgun
-	slot_flags = ITEM_SLOT_BACK
-	w_class = WEIGHT_CLASS_HUGE
-	bigboy = TRUE
-	wlength = WLENGTH_LONG
-	sellprice = 250
+	force = DAMAGE_MACE-5
 	can_parry = TRUE
 	wdefense = BAD_PARRY
 	wbalance = EASY_TO_DODGE
-	force = DAMAGE_MACE - 5
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(MACE_SMASH)
+	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/airgun
+
+	slot_flags = ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_HUGE
+	bigboy = TRUE
+	sellprice = 250
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64

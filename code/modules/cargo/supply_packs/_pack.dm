@@ -65,3 +65,18 @@
 	for(var/atom in contains)
 		actual_price += SSmerchant.get_item_base_value(atom)
 	return actual_price
+
+/datum/supply_pack/proc/calculate_reputation_cost()
+	var/datum/world_faction/faction = SSmerchant.active_faction
+	if(!faction)
+		return 50
+
+	var/base_cost = cost
+	var/tier = faction.get_reputation_tier()
+
+	// Base reputation cost scales with item value
+	// Higher tier = lower reputation costs (better relations = better deals)
+	var/reputation_multiplier = max(0.5, 1.5 - (tier * 0.15)) // 15% reduction per tier
+	var/reputation_cost = max(10, round(base_cost * reputation_multiplier))
+
+	return reputation_cost

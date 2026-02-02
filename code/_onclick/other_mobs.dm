@@ -125,86 +125,69 @@
 		if(w_class < WEIGHT_CLASS_HUGE)
 			throw_at(get_ranged_target_turf(src, get_dir(user,src), 2), 2, 2, user, FALSE)
 
-/atom/proc/onbite(mob/user)
-	return
+/mob/living/proc/bite(atom/A)
+	if(SEND_SIGNAL(src, COMSIG_LIVING_PREBITE_SELF, A) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
+	var/finished_attack_chain = !A.onbite(src)
+	SEND_SIGNAL(src, COMSIG_LIVING_POSTBITE_SELF, A, finished_attack_chain)
+	return finished_attack_chain
 
-/mob/living/onbite(mob/living/carbon/human/user)
-	return
+/// Returns true to cancel further attacks doesn't call
+/atom/proc/onbite(mob/living/user)
+	. = FALSE
+	if(!istype(user))
+		return TRUE
 
-/mob/living/carbon/onbite(mob/living/carbon/human/user)
+/mob/living/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("I don't want to harm [src]!"))
-		return FALSE
-	if(user.mouth)
-		to_chat(user, span_warning("My mouth has something in it."))
-		return FALSE
-
+		return TRUE
 	var/datum/intent/bite/bitten = new()
 	if(checkdefense(bitten, user))
-		return FALSE
+		return TRUE
 
+/mob/living/carbon/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
 	if(user.pulling != src)
 		if(!lying_attack_check(user))
-			return FALSE
+			return TRUE
 
 	var/def_zone = check_zone(user.zone_selected)
 	var/obj/item/bodypart/affecting = get_bodypart(def_zone)
 	if(!affecting)
 		to_chat(user, span_warning("Nothing to bite."))
-		return
+		return TRUE
 
 	user.do_attack_animation(src, ATTACK_EFFECT_BITE, used_item = FALSE, atom_bounce = TRUE)
 	next_attack_msg.Cut()
 
-	var/nodmg = FALSE
-	var/dam2do = 10*(user.STASTR/20)
-	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
-		dam2do *= 2
-	if(!HAS_TRAIT(user, TRAIT_STRONGBITE))
-		if(!affecting.has_wound(/datum/wound/bite))
-			nodmg = TRUE
-	if(!nodmg)
-		var/armor_block = run_armor_check(user.zone_selected, "stab",blade_dulling=BCLASS_BITE)
-		if(!apply_damage(dam2do, BRUTE, def_zone, armor_block, user))
-			nodmg = TRUE
+	var/dmg = user.STASTR*0.5
+	dmg *= HAS_TRAIT(user, TRAIT_STRONGBITE) ? 2 : \
+		affecting.has_wound(/datum/wound/bite) ? 1 : 0
+	if(dmg)
+		dmg = apply_damage(dmg, BRUTE, def_zone, run_armor_check(user.zone_selected, "stab", blade_dulling=BCLASS_BITE), user)
+		if(dmg)
+			affecting.bodypart_attacked_by(BCLASS_BITE, dmg, user, user.zone_selected, crit_message = TRUE)
+			playsound(src, "smallslash", 100, TRUE, -1)
+			if(HAS_TRAIT(user, TRAIT_POISONBITE) && src.reagents)
+				var/poison = user.STACON/2
+				src.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
+				src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
+				to_chat(user, span_warning("Your fangs inject venom into [src]!"))
+		else
 			next_attack_msg += span_warning("Armor stops the damage.")
-			if(HAS_TRAIT(user, TRAIT_POISONBITE))
-				if(src.reagents)
-					var/poison = user.STACON/2
-					src.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
-					src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
-					to_chat(user, span_warning("Your fangs inject venom into [src]!"))
 
-	if(!nodmg)
-		affecting.bodypart_attacked_by(BCLASS_BITE, dam2do, user, user.zone_selected, crit_message = TRUE)
 	visible_message(span_danger("[user] bites [src]'s [parse_zone(user.zone_selected)]![next_attack_msg.Join()]"), \
 					span_userdanger("[user] bites my [parse_zone(user.zone_selected)]![next_attack_msg.Join()]"))
-
 	next_attack_msg.Cut()
 
-	var/datum/wound/caused_wound
-	if(!nodmg)
-		caused_wound = affecting.bodypart_attacked_by(BCLASS_BITE, dam2do, user, user.zone_selected, crit_message = TRUE)
-
-	if(!nodmg)
-		playsound(src, "smallslash", 100, TRUE, -1)
-		if(istype(src, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = src
-			if(user?.mind && mind)
-				if(user.dna?.species && istype(user.dna.species, /datum/species/werewolf))
-					if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
-						to_chat(user, span_warning("BLEH! [src] tastes of SILVER! My gift cannot take hold."))
-					else
-						if(caused_wound)
-							caused_wound.werewolf_infect_attempt()
-						if(prob(30))
-							user.werewolf_feed(src)
-				if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
-					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
-
 	var/obj/item/grabbing/bite/B = new()
-	user.equip_to_slot_or_del(B, ITEM_SLOT_MOUTH)
-	if(user.mouth == B)
+	if(user.equip_to_slot_or_del(B, ITEM_SLOT_MOUTH))
 		var/used_limb = src.find_used_grab_limb(user, accurate = TRUE)
 		B.name = "[src]'s [parse_zone(used_limb)]"
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(used_limb))
@@ -219,6 +202,30 @@
 		if(mind)
 			mind.attackedme[user.real_name] = world.time
 		log_combat(user, src, "bit")
+	return !dmg
+
+/mob/living/carbon/human/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
+	var/obj/item/bodypart/affecting = get_bodypart(check_zone(user.zone_selected))
+	if(!affecting)
+		return TRUE // how tf did we lose it between the carbon proc and this one
+	var/datum/wound/bite/open_wound = affecting.has_wound(/datum/wound/bite)
+	if(!open_wound)
+		return TRUE
+	if(user.mind && mind)
+		if(is_species(user, /datum/species/werewolf))
+			var/mob/living/carbon/human/H = user
+			if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+				to_chat(user, span_warning("BLEH! [src] tastes of SILVER! My gift cannot take hold."))
+			else
+				open_wound.werewolf_infect_attempt()
+				if(prob(30))
+					H.werewolf_feed(src)
+		if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
+			INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
+
 
 /mob/living/MiddleClickOn(atom/A, params)
 	..()
@@ -289,15 +296,22 @@
 					return
 				if(src.incapacitated(IGNORE_GRAB))
 					return
+				if(stat != CONSCIOUS)
+					return
 				if(is_mouth_covered())
 					to_chat(src, span_warning("My mouth is blocked."))
 					return
 				if(HAS_TRAIT(src, TRAIT_NO_BITE))
 					to_chat(src, span_warning("I can't bite."))
 					return
+				if(iscarbon(src))
+					var/mob/living/carbon/C = src
+					if(C.mouth)
+						to_chat(src, span_warning("My mouth has something in it."))
+						return
 				changeNext_move(mmb_intent.clickcd)
 				face_atom(A)
-				A.onbite(src)
+				bite(A)
 				return
 			if(INTENT_STEAL)
 				steal_action(A)

@@ -31,7 +31,7 @@
 		return (!lord_datum.ascended) ? AFFECTED_VLORD : UNAFFECTED
 	if(!vamp_datum && !wolf_datum)
 		return UNAFFECTED
-	if(wolf_datum.transformed || vamp_datum)
+	if(wolf_datum?.transformed || vamp_datum)
 		return AFFECTED
 	return UNAFFECTED
 
@@ -174,7 +174,8 @@
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane
 	name = "Silver's Bane"
-	desc = ""
+	desc = "My BANE!"
+	icon_state = "hunger4"
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane/proc/update_info(stacks, is_stunned)
 	if(is_stunned)

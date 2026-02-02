@@ -16,10 +16,11 @@
 		/datum/skill/combat/polearms = 2,
 		/datum/skill/combat/bows = 1,
 		/datum/skill/combat/crossbows = 1,
-		/datum/skill/combat/shields = 2,
+		/datum/skill/combat/shields = 3,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/reading = 1,
 	)
 
 	jobstats = list(
@@ -45,7 +46,6 @@
 		ADD_TRAIT(spawned, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 
 	spawned.adjust_skillrank(/datum/skill/misc/riding, pick(1,1,2), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/reading, pick(0,1,1), TRUE)
 
 
 /datum/outfit/adventurer/sfighter
