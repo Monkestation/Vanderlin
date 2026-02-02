@@ -813,7 +813,8 @@
 
 	var/datum/species/species = prefs.pref_species
 
-	var/job_used_id = species.job_id ? species.job_id : species.id
+	var/job_used_id = species.id_override ? species.id_override : species.id
+
 	if(length(allowed_races) && !(job_used_id in allowed_races))
 		return FALSE
 

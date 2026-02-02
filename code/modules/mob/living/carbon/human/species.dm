@@ -9,8 +9,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// Internal ID of this species used for job checks, etc.
 	var/id
 	// Since an unique ID is required, but subspecies probably should have the same restrictions
-	/// Override for jobs to use a different species for restrictions
-	var/job_id
+	/// Override for things that use species id to use instead
+	var/id_override
 	/// Override for limbs to use a different species' limbs
 	var/limbs_id
 	/// Limb icon to use to build appearance for males
@@ -479,23 +479,22 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/proc/get_spec_undies_list(gender)
 	if(!GLOB.underwear_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
+
+	var/list/used_list = GLOB.underwear_m
+	if(gender == FEMALE)
+		used_list = GLOB.underwear_f
+	else
+		used_list = GLOB.underwear_list
+
+	var/used_species_id = id_override ? id_override : id
+
 	var/list/spec_undies = list()
-	var/datum/sprite_accessory/X
-	switch(gender)
-		if(MALE)
-			for(var/O in GLOB.underwear_m)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if(id in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
-		if(FEMALE)
-			for(var/O in GLOB.underwear_f)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if(id in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
+	for(var/name in used_list)
+		var/datum/sprite_accessory/accessory = used_list[name]
+		if(!(used_species_id in accessory.specuse))
+			continue
+		spec_undies += accessory
+
 	return spec_undies
 
 /datum/species/proc/random_underwear(gender)
@@ -852,7 +851,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				limb_icon = species.limbs_icon_m
 			else
 				limb_icon = species.limbs_icon_f
-			var/mutable_appearance/bodyhair_overlay = mutable_appearance(limb_icon, "[species?.hairyness]", -BODY_LAYER)
+			var/mutable_appearance/bodyhair_overlay = mutable_appearance(limb_icon, "[species?.hairyness]", -FRONT_MUTATIONS_LAYER)
 			bodyhair_overlay.color = H.get_hair_color()
 			standing += bodyhair_overlay
 

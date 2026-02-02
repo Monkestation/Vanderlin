@@ -205,7 +205,7 @@ SUBSYSTEM_DEF(job)
 		return FALSE
 
 	var/dominated_species_check = FALSE
-	var/player_species_id_job = player_prefs.pref_species.job_id ? player_prefs.pref_species.job_id : player_prefs.pref_species.id
+	var/player_species_id_job = player_prefs.pref_species.id_override ? player_prefs.pref_species.id_override : player_prefs.pref_species.id
 
 	if(length(job.allowed_races) && !(player_species_id_job in job.allowed_races))
 		if(player.client?.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))

@@ -4,7 +4,7 @@
 /datum/species/kobold/formikrag
 	name = "Formikrag Kobold"
 	id = SPEC_ID_KOBOLD_FORMIKRAG
-	job_id = SPEC_ID_KOBOLD
+	id_override = SPEC_ID_KOBOLD
 	desc = ""
 
 	specstats_m = list(STATKEY_STR = -2, STATKEY_PER = -1, STATKEY_INT = -2, STATKEY_END = 1, STATKEY_SPD = -2)

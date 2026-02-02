@@ -404,7 +404,7 @@ SUBSYSTEM_DEF(migrants)
 	if(!player.prefs.allowed_respawn())
 		return FALSE
 
-	var/player_species_id_job = prefs.pref_species.job_id ? prefs.pref_species.job_id : prefs.pref_species.id
+	var/player_species_id_job = prefs.pref_species.id_override ? prefs.pref_species.id_override : prefs.pref_species.id
 
 	var/can_join = TRUE
 	if(length(migrant_job.allowed_races) && !(player_species_id_job in migrant_job.allowed_races))

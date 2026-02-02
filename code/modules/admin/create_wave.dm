@@ -2128,7 +2128,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			job_fail += "Lunatic restriction"
 
 		// Check allowed races
-		var/player_species_id_job = prefs.pref_species.job_id ? prefs.pref_species.job_id : prefs.pref_species.id
+		var/player_species_id_job = prefs.pref_species.id_override ? prefs.pref_species.id_override : prefs.pref_species.id
 		if(length(job_check.allowed_races) && !(player_species_id_job in job_check.allowed_races))
 			job_fail += "Wrong species (allowed: [job_check.allowed_races.Join(", ")])"
 

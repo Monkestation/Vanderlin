@@ -4,7 +4,7 @@
 /datum/species/dwarf/mountain/subterra
 	name = "Subterran Dwarf"
 	id = SPEC_ID_DWARF_SUBTERRAN
-	job_id = SPEC_ID_DWARF
+	id_override = SPEC_ID_DWARF
 	desc = "Dwarves lost to the darkest reaches of Subterra.\
 	\n\n\
 	Carvings of rock are replaced with holy tenets of caustic minerals and pools of acid, \
