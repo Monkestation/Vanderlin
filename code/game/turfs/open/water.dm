@@ -214,12 +214,12 @@
 
 /turf/open/water/Initialize()
 	. = ..()
-
-	if(!isnull(fishing_datum))
-		add_lazy_fishing(fishing_datum)
+	//NO
+	//if(!isnull(fishing_datum))
+	//	add_lazy_fishing(fishing_datum)
 
 	if(mapped)
-		if(prob(0.1))
+		if(prob(0))
 			new /obj/item/bottlemessage/ancient(src)
 	else
 		START_PROCESSING(SSobj, src)

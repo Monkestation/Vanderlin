@@ -50,7 +50,7 @@
 /area/indoors/wilderness/garrison
 	name = "garrison"
 	icon_state = "garrison"
-	background_track = 'sound/music/area/manorgarri.ogg'
+	background_track = 'sound/music/death.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	background_track_dusk = null

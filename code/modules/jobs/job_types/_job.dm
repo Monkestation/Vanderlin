@@ -305,8 +305,8 @@
 	if(!spawned.islatejoin)
 		spawned.hydration = 800 // Set higher hydration
 		spawned.nutrition = 800
-		to_chat(spawned, span_purple("0 TRIUMPHS awarded."))
-		to_chat(spawned, span_briar("No one has triumphed on this dae..."))
+		to_chat(player_client, span_purple("0 TRIUMPHS awarded."))
+		to_chat(player_client, span_briar("No one has triumphed on this dae..."))
 
 
 	var/used_title = get_informed_title(spawned)

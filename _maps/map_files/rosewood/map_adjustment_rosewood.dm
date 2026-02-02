@@ -24,6 +24,14 @@
 		/datum/job/forestguard = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	)
 
+	slot_adjust = list(
+		/datum/job/bard = 2,
+		/datum/job/monk = 7,
+		/datum/job/templar = 1,
+		/datum/job/churchling = 5,
+		/datum/job/farmer = 4
+	)
+
 	blacklist = list(
 		// Inquisition
 		/datum/job/inquisitor,
@@ -36,6 +44,37 @@
 		/datum/job/advclass/pilgrim/rare/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/preacher,
 		/datum/job/advclass/veteran/merc,
+		//event
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/hand,
+		/datum/job/prince,
+		/datum/job/captain,
+		/datum/job/steward,
+		/datum/job/courtphys,
+		/datum/job/archivist,
+		/datum/job/magician,
+		/datum/job/minor_noble,
+		/datum/job/adventurer/courtagent,
+		/datum/job/priest,
+		/datum/job/servant,
+		/datum/job/mageapprentice,
+		/datum/job/merchant,
+		/datum/job/wretch,
+		/datum/job/bandit,
+		/datum/job/royalknight,
+		/datum/job/dungeoneer,
+		/datum/job/men_at_arms,
+		/datum/job/gatemaster,
+		/datum/job/forestwarden,
+		/datum/job/forestguard,
+		/datum/job/jester,
+		/datum/job/artificer,
+		/datum/job/butler,
+		/datum/job/fisher,
+		/datum/job/grabber,
+		/datum/job/shophand,
+		/datum/job/advclass/mercenary/anthrax
 	)
 
 	migrant_blacklist = list(

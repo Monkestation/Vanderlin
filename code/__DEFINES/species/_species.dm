@@ -121,7 +121,6 @@
 	SPEC_ID_HALFLING,\
 	SPEC_ID_HARPY,\
 	SPEC_ID_TRITON,\
-	SPEC_ID_MEDICATOR,\
 )
 
 /// Species who are non-exotic to Vanderlin. These are species from foreign lands with no local pull or uncommon species. Used in miscellaneous cases, when they would not be that role.
@@ -132,14 +131,6 @@
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
 	SPEC_ID_HALFLING,\
-	SPEC_ID_DROW,\
-	SPEC_ID_HALF_DROW,\
-	SPEC_ID_TIEFLING,\
-	SPEC_ID_HARPY,\
-	SPEC_ID_TRITON,\
-	SPEC_ID_MEDICATOR,\
-	SPEC_ID_HOLLOWKIN,\
-	SPEC_ID_HALF_ORC,\
 )
 
 /// Species that lack lux. Any who have no ties to divinity anymore, whether it be their creation story or otherwise taken from them (Hollow-kin)

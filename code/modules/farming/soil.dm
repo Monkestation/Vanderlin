@@ -896,7 +896,7 @@
 	if(istype(src, /obj/structure/soil/mushmound) && plant.mound_growth)
 		growth_multiplier *= 1.2
 		nutriment_eat_multiplier *= 0.8
-	var/target_growth_time = growth_multiplier * dt
+	var/target_growth_time = growth_multiplier * dt * 0.1
 	return process_npk_growth(target_growth_time, nutriment_eat_multiplier, dt)
 
 /obj/structure/soil/proc/process_npk_growth(target_growth_time, nutriment_multiplier = 1.0, dt)

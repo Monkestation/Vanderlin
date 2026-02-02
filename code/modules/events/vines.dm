@@ -282,7 +282,7 @@
 
 /obj/structure/vine/Crossed(mob/crosser)
 	. = ..()
-	if(istype(crosser))
+	if(!istype(crosser))
 		return
 	if(crosser.movement_type & (FLYING|FLOATING) || crosser.throwing)
 		return
@@ -290,10 +290,6 @@
 	if(isliving(crosser))
 		for(var/datum/vine_mutation/SM in mutations)
 			SM.on_cross(src, crosser)
-	if(prob(23) && istype(crosser) && !isvineimmune(crosser))
-		var/mob/living/M = crosser
-		M.adjustBruteLoss(5)
-		to_chat(M, span_warning("I nick myself on the thorny vines."))
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/structure/vine/attack_hand(mob/user)

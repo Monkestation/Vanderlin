@@ -64,7 +64,7 @@
 		controller.PauseAi(0)
 		finish_action(controller, FALSE)
 		return
-	create_fish(controller, target)
+	//create_fish(controller, target)
 	finish_action(controller, TRUE)
 	return TRUE
 

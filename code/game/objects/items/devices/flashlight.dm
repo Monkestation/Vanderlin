@@ -137,7 +137,7 @@
 	var/should_self_destruct = TRUE //added for torch burnout
 	var/max_uses = 12
 	max_integrity = 40
-	fuel = 30 MINUTES
+	fuel = 10 MINUTES
 	light_depth = 0
 	light_height = 0
 	metalizer_result = /obj/item/flashlight/flare/torch/lantern
@@ -249,7 +249,7 @@
 	force = 1
 	icon_state = "mtorch"
 	light_outer_range = 6
-	fuel = 120 MINUTES
+	fuel = 15 MINUTES
 	should_self_destruct = TRUE
 	max_uses = 60
 	metalizer_result = null
@@ -270,7 +270,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	force = 1
 	on_damage = 5
-	fuel = 120 MINUTES
+	fuel = 30 MINUTES
 	should_self_destruct = FALSE
 	metalizer_result = null
 	extinguish_prob = 10
@@ -326,7 +326,6 @@
 	slot_flags = ITEM_SLOT_HIP
 	force = 1
 	on_damage = 5
-	fuel = 120 MINUTES
 	should_self_destruct = FALSE
 	extinguish_prob = 15
 	melting_material = /datum/material/copper

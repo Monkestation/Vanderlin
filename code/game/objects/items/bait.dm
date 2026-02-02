@@ -12,7 +12,7 @@
 									/mob/living/simple_animal/hostile/retaliate/goatmale = 33,
 									/mob/living/simple_animal/pet/cat/cabbit = 33,
 									/mob/living/simple_animal/hostile/retaliate/chicken = 55)
-	var/attraction_chance = 100
+	var/attraction_chance = 50
 	var/deployed = 0
 	var/deploy_speed = 10 SECONDS
 	resistance_flags = FLAMMABLE
@@ -49,7 +49,7 @@
 
 /obj/item/bait/process()
 	if(deployed)
-		if(world.time > check_counter + 10 SECONDS)
+		if(world.time > check_counter + 5 MINUTES)
 			check_counter = world.time
 			var/area/A = get_area(src)
 			if(A.outdoors)

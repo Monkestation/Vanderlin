@@ -363,7 +363,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	mind.areas_entered += A.first_time_text
 	var/atom/movable/screen/area_text/T = new()
 	client.screen += T
-	T.maptext = MAPTEXT_BLACKMOOR("<span class='center' style='vertical-align:top; color: #820000;\
+	T.maptext = MAPTEXT_BLACKMOOR("<span class='center' style='vertical-align:top; color: #381521;\
 		text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;'>[A.first_time_text]</span>")
 	T.maptext_width = 230
 	T.maptext_height = 209
