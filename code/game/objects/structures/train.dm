@@ -103,3 +103,9 @@
 	desc = "A wooden carriage to carry passengers across land without the blessings of Heartfeltian underground train infrastructure."
 	icon = 'icons/roguetown/underworld/enigma_carriage.dmi'
 	icon_state = "carriage_normal"
+
+/obj/structure/train/dinghy
+	name = "dinghy"
+	desc = "A way out of this hell..."
+	icon = 'icons/roguetown/misc/dinghy.dmi'
+	icon_state = "dinghy"

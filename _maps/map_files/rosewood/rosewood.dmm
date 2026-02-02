@@ -2411,6 +2411,12 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/cobble,
 /area/under/town/sewer)
+"bzk" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "bzm" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/hexstone,
@@ -5646,6 +5652,13 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/flashlight/flare/torch,
+/obj/item/flashlight/flare/torch,
+/obj/item/flashlight/flare/torch,
+/obj/item/flashlight/flare/torch,
+/obj/item/flashlight/flare/torch/metal,
+/obj/item/flashlight/flare/torch/metal,
 /turf/open/floor/dirt,
 /area/outdoors/town)
 "dAf" = (
@@ -12414,13 +12427,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"hLh" = (
-/obj/structure/stairs,
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/river)
 "hLj" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -14367,8 +14373,7 @@
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
-/obj/structure/stairs,
-/turf/open/floor/ruinedwood/spiral,
+/turf/open/openspace,
 /area/outdoors/mountains)
 "iUU" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -14769,6 +14774,13 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble,
 /area/under/town/basement)
+"jfL" = (
+/obj/structure/stairs,
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/closed/indestructible/wooddark,
+/area/outdoors/river)
 "jgf" = (
 /turf/closed/mineral,
 /area/indoors/town)
@@ -15042,12 +15054,7 @@
 /obj/structure/stairs{
 	dir = 8
 	},
-/obj/structure/train{
-	icon = 'icons\roguetown\misc\dinghy.dmi';
-	icon_state = "dinghy";
-	desc = "Your heart yearns to a way out of this wretched land.\n(Drag your sprite onto this to exit the round!)";
-	name = "dinghy"
-	},
+/obj/structure/train/dinghy,
 /turf/open/water,
 /area/outdoors/river)
 "jqA" = (
@@ -22215,6 +22222,13 @@
 "nQN" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/bath)
+"nQQ" = (
+/obj/structure/stairs,
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/closed/indestructible/wooddark,
+/area/outdoors/river)
 "nRa" = (
 /obj/machinery/light/fueledstreet/blue{
 	dir = 8
@@ -24068,13 +24082,6 @@
 "oVd" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep)
-"oVe" = (
-/obj/structure/stairs,
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/river)
 "oVj" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/cobble/mossy,
@@ -36173,6 +36180,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep)
+"wEa" = (
+/obj/structure/stairs,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/mountains)
 "wEb" = (
 /obj/structure/vine/black_briar/medium,
 /obj/effect/decal/cleanable/debris/glass,
@@ -73196,9 +73207,9 @@ thI
 thI
 thI
 thI
-hLh
+thI
+nQQ
 rQP
-fSE
 fSE
 fSE
 fSE
@@ -73398,9 +73409,9 @@ pCG
 pCG
 xly
 xly
-oVe
+xly
+jfL
 rQP
-fSE
 fSE
 fSE
 fSE
@@ -113598,8 +113609,8 @@ nHb
 nHb
 nHb
 nHb
-iFf
-eay
+bzk
+wEa
 eay
 eay
 eay
@@ -113801,7 +113812,7 @@ nHb
 nHb
 nHb
 iUJ
-eay
+wEa
 eay
 eay
 eay
