@@ -1149,7 +1149,7 @@
 		if(m)
 			user.say(m)
 
-/obj/item/book/bibble/attack(mob/living/M, mob/user)
+/obj/item/book/bibble/attack(mob/living/M, mob/user, list/modifiers)
 	if(is_priest_job(user.mind?.assigned_role))
 		if(!user.can_read(src))
 			return
@@ -1433,7 +1433,7 @@
 	for(var/obj/item/paper/page as anything in pages)
 		compiled_pages += "<p>[page.info]</p>\n"
 
-/obj/item/manuscript/attackby(obj/item/I, mob/living/user)
+/obj/item/manuscript/attackby(obj/item/I, mob/living/user, list/modifiers)
 	// why is a book crafting kit using the craft system, but crafting a book isn't?
 	// Well, *for some reason*, the crafting system is made in such a way
 	// as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
@@ -1684,7 +1684,7 @@ ____________End of Example*/
 	dat = "gott.json"
 	verses_file = "strings/psybibble.txt"
 
-/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user)
+/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(istype(user) && istype(user.patron, /datum/patron/psydon))
 		if(!user.can_read(src))
 			return

@@ -396,7 +396,7 @@
 	closer.screen_loc = "[screen_start_x]:[screen_pixel_x],[screen_start_y+rows]:[screen_pixel_y]"
 
 /// Signal handler for when we get attacked with secondary click by an item.
-/datum/component/storage/proc/attackby_secondary(datum/source, atom/weapon, mob/user)
+/datum/component/storage/proc/attackby_secondary(datum/source, atom/weapon, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	open_storage_on_signal(source, user)

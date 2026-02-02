@@ -27,7 +27,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 
-/obj/item/flint/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flint/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

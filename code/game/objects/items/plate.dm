@@ -310,7 +310,7 @@
 	. = ..()
 	AddComponent(/datum/component/storage/concrete/grid/tray)
 
-/obj/item/tray/attack(mob/living/M, mob/living/user)
+/obj/item/tray/attack(mob/living/M, mob/living/user, list/modifiers)
 	..()
 	// Drop all the things. All of them.
 	var/list/obj/item/oldContents = contents.Copy()

@@ -508,7 +508,7 @@
 	name = "aberrant planar binding shackles"
 	tier = 5
 
-/obj/item/rope/chain/bindingshackles/attack(mob/living/simple_animal/hostile/retaliate/captive, mob/living/user)
+/obj/item/rope/chain/bindingshackles/attack(mob/living/simple_animal/hostile/retaliate/captive, mob/living/user, list/modifiers)
 	var/list/summon_types = list(
 		/mob/living/simple_animal/hostile/retaliate/infernal/imp,
 		/mob/living/simple_animal/hostile/retaliate/infernal/hellhound,

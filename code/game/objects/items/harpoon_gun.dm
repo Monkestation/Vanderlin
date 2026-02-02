@@ -71,7 +71,7 @@
 		QDEL_NULL(zipline)
 	return ..()
 
-/obj/item/harpoon_gun/afterattack(atom/target, mob/living/user, proximity)
+/obj/item/harpoon_gun/afterattack(atom/target, mob/living/user, proximity, list/modifiers)
 	. = ..()
 
 	if(isgroundlessturf(target))

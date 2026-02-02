@@ -225,7 +225,7 @@
 			to_chat(user, span_warning("[src] has no meat to eat."))
 	..()
 
-/obj/item/bodypart/attack(mob/living/carbon/C, mob/user)
+/obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		if(HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))

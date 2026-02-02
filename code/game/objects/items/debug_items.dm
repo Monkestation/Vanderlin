@@ -12,7 +12,7 @@
 	var/datum/species/selected_species
 	var/valid_species = list()
 
-/obj/item/debug/human_spawner/afterattack(atom/target, mob/user, proximity)
+/obj/item/debug/human_spawner/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	..()
 	if(isturf(target))
 		var/mob/living/carbon/human/H = new /mob/living/carbon/human(target)

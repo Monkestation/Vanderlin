@@ -125,7 +125,7 @@
 			new /obj/structure/bell_barrier(adjacent_turf)
 */
 
-/obj/structure/stationary_bell/attackby(obj/item/used_item, mob/user)
+/obj/structure/stationary_bell/attackby(obj/item/used_item, mob/user, list/modifiers)
 	if(istype(used_item, /obj/item/weapon/mace/church))
 		if(!COOLDOWN_FINISHED(src, bell_ring))
 			return

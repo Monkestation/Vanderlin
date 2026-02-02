@@ -213,7 +213,7 @@
 		reagents.add_reagent_list(list_reagents)
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/AltClick(mob/user)
+/obj/item/reagent_containers/AltClick(mob/user, list/modifiers)
 	if(!user.Adjacent(src) || !has_variable_transfer_amount)
 		return
 	change_transfer_amount(user, FORWARD)

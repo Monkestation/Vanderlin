@@ -18,8 +18,6 @@
 		#define BUTTON_DRAGGED "drag"
 
 	/* Key Buttons */
-		/// TRUE if ctrl was held during this click action.
-		#define CTRL_CLICK "ctrl"
 		/// Used as `params[CTRL_CLICKED] == TRUE|FALSE`.
 		#define CTRL_CLICKED "ctrl"
 		/// TRUE if shift was held during this click action.

@@ -57,7 +57,7 @@
 
 	show_recipe_menu(user)
 
-/obj/machinery/light/fueled/cauldron/AltClick(mob/user)
+/obj/machinery/light/fueled/cauldron/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(!user.default_can_use_topic(src))
 		return

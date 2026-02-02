@@ -38,7 +38,7 @@
 		return TRUE
 	. = ..()
 
-/obj/item/kitchen/fork/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/kitchen/fork/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!istype(M))
 		return ..()
 

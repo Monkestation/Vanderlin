@@ -151,7 +151,7 @@
 	var/heal_oxy = 0
 
 
-/obj/item/organ/heart/cursed/attack(mob/living/carbon/human/H, mob/living/carbon/human/user, obj/target)
+/obj/item/organ/heart/cursed/attack(mob/living/carbon/human/H, mob/living/carbon/human/user, list/modifiers)
 	if(H == user && istype(H))
 		playsound(user,'sound/blank.ogg',40,TRUE)
 		user.temporarilyRemoveItemFromInventory(src, TRUE)

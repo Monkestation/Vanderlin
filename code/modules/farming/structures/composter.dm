@@ -124,7 +124,7 @@
 	. = new /obj/item/fertilizer/compost(get_turf(src))
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/composter/attackby(obj/item/attacking_item, mob/user)
+/obj/structure/composter/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_FAST)
 	if(istype(attacking_item,/obj/item/storage/sack) && length(attacking_item.contents))
 		if(get_total_compost() >= MAXIMUM_TOTAL_COMPOST)

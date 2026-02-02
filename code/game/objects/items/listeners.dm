@@ -144,7 +144,7 @@
 	return TRUE
 
 /* - REVISIT IN A FUTURE PR. ATTACHABLE LISTENERS.
-/obj/item/listeningdevice/attack(mob/living/M, mob/living/user)
+/obj/item/listeningdevice/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!active)
 		to_chat(user, span_warning("[src] is inactive.."))
 		return FALSE

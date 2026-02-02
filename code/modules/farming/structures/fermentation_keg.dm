@@ -128,7 +128,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		else
 			clear_keg()
 
-/obj/structure/fermentation_keg/AltClick(mob/user)
+/obj/structure/fermentation_keg/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(!user.Adjacent(src))
 		return
@@ -149,7 +149,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		to_chat(user, span_info("[src] begins [selected_recipe.start_verb] [selected_recipe.name]."))
 	..()
 
-/obj/structure/fermentation_keg/attackby(obj/item/I, mob/user)
+/obj/structure/fermentation_keg/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers))
 		if(brewing)
 			return

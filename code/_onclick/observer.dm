@@ -25,7 +25,6 @@
 	if(can_reenter_corpse && mind && mind.current)
 		if(clicked_atom == mind.current || (mind.current in clicked_atom))
 			reenter_corpse()
-			return
 
 /mob/dead/observer/ClickOn(atom/clicked_atom, params)
 	var/list/modifiers = params2list(params)
@@ -37,32 +36,33 @@
 		return
 
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED) && LAZYACCESS(modifiers, MIDDLE_CLICK))
-		ShiftMiddleClickOn(clicked_atom)
+		ShiftMiddleClickOn(clicked_atom, modifiers)
 		return
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED) && LAZYACCESS(modifiers, CTRL_CLICKED))
-		CtrlShiftClickOn(clicked_atom)
+		CtrlShiftClickOn(clicked_atom, modifiers)
 		return
 	if(LAZYACCESS(modifiers, MIDDLE_CLICK))
-		MiddleClickOn(clicked_atom)
+		MiddleClickOn(clicked_atom, modifiers)
 		return
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
-		ShiftClickOn(clicked_atom)
+		ShiftClickOn(clicked_atom, modifiers)
 		return
 	if(LAZYACCESS(modifiers, ALT_CLICKED))
-		AltClickNoInteract(src, clicked_atom)
+		AltClickNoInteract(src, clicked_atom, modifiers)
 		return
 	if(LAZYACCESS(modifiers, CTRL_CLICKED))
-		CtrlClickOn(clicked_atom)
+		CtrlClickOn(clicked_atom, modifiers)
 		return
 
 	if(world.time <= next_move)
 		return
+
 	// You are responsible for checking config.ghost_interaction when you override this function
 	// Not all of them require checking, see below
-	clicked_atom.attack_ghost(src)
+	clicked_atom.attack_ghost(src, modifiers)
 
 // Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
-/atom/proc/attack_ghost(mob/dead/observer/user)
+/atom/proc/attack_ghost(mob/dead/observer/user, list/modifiers)
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_GHOST, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 	if(user.client)

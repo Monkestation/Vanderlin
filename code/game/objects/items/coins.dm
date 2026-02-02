@@ -384,7 +384,7 @@
 	else
 		desc = ""
 
-/obj/item/coin/attackby(obj/item/I, mob/user)
+/obj/item/coin/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		var/obj/item/coin/G = I
 		if(item_flags & IN_STORAGE)

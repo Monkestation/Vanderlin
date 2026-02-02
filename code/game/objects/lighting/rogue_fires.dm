@@ -426,7 +426,7 @@
 			return
 
 	else
-		. = attachment.attackby(W, user, params)
+		. = attachment.attackby(W, user, modifiers)
 		if(.)
 			return
 	. = ..()

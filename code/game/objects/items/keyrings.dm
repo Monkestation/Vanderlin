@@ -171,7 +171,7 @@
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
 	return K
 
-/obj/item/lockpickring/attackby(obj/item/I, mob/user)
+/obj/item/lockpickring/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I,/obj/item/lockpick))
 		if(picks.len >= how_many_lockpicks)
 			to_chat(user, span_warning("Too many lockpicks."))

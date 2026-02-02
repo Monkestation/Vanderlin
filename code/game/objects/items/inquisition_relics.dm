@@ -304,7 +304,7 @@
 /obj/item/flashlight/flare/torch/lantern/psycenser/fire_act(added, maxstacks)
 	return
 
-/obj/item/flashlight/flare/torch/lantern/psycenser/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flashlight/flare/torch/lantern/psycenser/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()	//We smashed a guy with it turned on. Bad idea!
 	if(ismob(A) && on && (user.used_intent.type == /datum/intent/flail/strike/smash/golgotha) && user.cmode)
 		user.visible_message(span_warningbig("You see an oddly bright spark before it detonates!"))
@@ -597,7 +597,7 @@
 		else
 			working = FALSE
 
-/obj/item/inqarticles/indexer/attack(mob/living/M, mob/living/user)
+/obj/item/inqarticles/indexer/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
 		to_chat(user, span_warning("I don't know how to use this."))
@@ -873,7 +873,7 @@
 			user.visible_message(span_warning("[user] stops rethreading the [src]."))
 		return TRUE
 
-/obj/item/inqarticles/garrote/afterattack(mob/living/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/inqarticles/garrote/afterattack(mob/living/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	var/mob/living/garrote_victim = victim?.resolve()
 	if(istype(user.used_intent, /datum/intent/garrote/grab))	// Grab your target first.
@@ -1005,7 +1005,7 @@
 		if(bagging)
 			addtimer(CALLBACK(src, PROC_REF(bagsound), M), timer)
 
-/obj/item/clothing/head/inqarticles/blackbag/attack(mob/living/M, mob/living/user)
+/obj/item/clothing/head/inqarticles/blackbag/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	if(!iscarbon(M))
 		return
@@ -1280,7 +1280,7 @@
 	addtimer(CALLBACK(user, GLOBAL_PROC_REF(playsound), user, 'sound/items/blackeye.ogg', 100, FALSE), 4 SECONDS)
 	addtimer(TRAIT_CALLBACK_REMOVE(user, TRAIT_NOSSDINDICATOR, "blackmirror"), 4 SECONDS)
 
-/obj/item/inqarticles/bmirror/attack(mob/living/carbon/human/attacked, mob/living/carbon/human/user, params)
+/obj/item/inqarticles/bmirror/attack(mob/living/carbon/human/attacked, mob/living/carbon/human/user, list/modifiers)
 	if(!istype(attacked) || !istype(user))
 		return ..()
 

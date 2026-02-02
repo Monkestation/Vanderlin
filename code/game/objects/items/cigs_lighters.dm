@@ -74,14 +74,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	matchburnout()
 	. = ..()
 
-/obj/item/match/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/match/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return
 	if(lit && !burnt)
 		A.spark_act()
 
-/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!isliving(M))
 		return
 //	if(lit && M.IgniteMob())
@@ -287,7 +287,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		qdel(src)
 	. = ..()
 
-/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!istype(M))
 		return ..()
 	if(M.on_fire && !lit)
@@ -572,7 +572,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else
 		. = ..()
 
-/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(lit && M.IgniteMob())
 		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(M)] on fire with [src] at [AREACOORD(user)]")
 		log_game("[key_name(user)] set [key_name(M)] on fire with [src] at [AREACOORD(user)]")

@@ -48,12 +48,8 @@
 */
 /atom/Click(location, control, params)
 	if(flags_1 & INITIALIZED_1)
-		if(ismob(usr))
-			if(istype(usr:focus, /obj/abstract/visual_ui_element/console_input))
-				usr:focus:unfocus()
 		SEND_SIGNAL(src, COMSIG_CLICK, location, control, params, usr)
 		usr.ClickOn(src, params)
-	return
 
 /atom/DblClick(location, control, params)
 	if(flags_1 & INITIALIZED_1)
@@ -83,9 +79,10 @@
 /mob/proc/ClickOn(atom/clicked_atom, params)
 	if(world.time <= next_click)
 		return
-	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
+
+	next_click = world.time + 1
 
 	if(check_click_intercept(modifiers, clicked_atom) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
@@ -103,12 +100,15 @@
 		if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 			ShiftRightClickOn(clicked_atom, modifiers)
 			return
+
 		if(LAZYACCESS(modifiers, CTRL_CLICKED))
 			CtrlRightClickOn(clicked_atom, modifiers)
 			return
+
 		if(LAZYACCESS(modifiers, ALT_CLICKED))
 			AltRightClickOn(clicked_atom, modifiers)
 			return
+
 	if(LAZYACCESS(modifiers, MIDDLE_CLICK))
 		if(atkswinging == MIDDLE_CLICK && mmb_intent?.get_chargetime())
 			if(mmb_intent.no_early_release && client?.chargedprog < 100)
@@ -116,12 +116,15 @@
 		else
 			MiddleClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 		ShiftClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, ALT_CLICKED)) // alt and alt-gr (rightalt)
 		AltClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, CTRL_CLICKED))
 		CtrlClickOn(clicked_atom, modifiers)
 		return
@@ -132,17 +135,17 @@
 	if(next_move > world.time) // in the year 2000...
 		return
 
-	face_atom(clicked_atom)
-
 	if(!LAZYACCESS(modifiers, CLICK_CATCHER) && clicked_atom.IsObscured())
 		return
 
 	if(dir == get_dir(clicked_atom, src)) //they are behind us and we are not facing them
 		return
 
+	face_atom(clicked_atom)
+
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
-		UnarmedAttack(clicked_atom, source = src)
+		UnarmedAttack(clicked_atom, modifiers = modifiers, source = src)
 		return
 
 	if(in_throw_mode)
@@ -472,14 +475,14 @@
 	. = SEND_SIGNAL(src, COMSIG_MOB_ALTCLICKON, clicked_atom, modifiers)
 	if(. & COMSIG_MOB_CANCEL_CLICKON)
 		return
-	clicked_atom.AltClick(src)
 
-/atom/proc/AltClick(mob/user)
-	SEND_SIGNAL(src, COMSIG_CLICK_ALT, user)
-	return
+	clicked_atom.AltClick(src, modifiers)
+
+/atom/proc/AltClick(mob/user, list/modifiers)
+	SEND_SIGNAL(src, COMSIG_CLICK_ALT, user, modifiers)
 
 // Use this instead of /mob/proc/AltClickOn(atom/clicked_atom) where you only want turf content listing without additional atom alt-click interaction
-/atom/proc/AltClickNoInteract(mob/user, atom/clicked_atom)
+/atom/proc/AltClickNoInteract(mob/user, atom/clicked_atom, list/modifiers)
 	var/turf/T = get_turf(clicked_atom)
 	if(T && user.TurfAdjacent(T))
 		user.listed_turf = T
@@ -682,7 +685,7 @@
 	for(var/atom/movable/screen/eye_intent/eyet in hud_used.static_inventory)
 		eyet.update_appearance(UPDATE_ICON)
 
-/mob/proc/ShiftRightClickOn(atom/clicked_atom, params)
+/mob/proc/ShiftRightClickOn(atom/clicked_atom, list/modifiers)
 	if(mind && mind.active_uis["quake_console"])
 		if(client.holder)
 			client.holder.marked_datum = clicked_atom
@@ -690,9 +693,8 @@
 			var/obj/abstract/visual_ui_element/scrollable/console_output/output = locate(/obj/abstract/visual_ui_element/scrollable/console_output) in console.elements
 			output.add_line("MARKED: [clicked_atom]")
 
-/mob/living/ShiftRightClickOn(atom/clicked_atom, params)
+/mob/living/ShiftRightClickOn(atom/clicked_atom, list/modifiers)
 	var/turf/T = get_turf(clicked_atom)
-//	var/turf/MT = get_turf(src)
 	if(stat)
 		return
 	if(clicked_atom.Adjacent(src))

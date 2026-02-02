@@ -50,7 +50,7 @@
 	. = ..()
 	UnregisterSignal(user, COMSIG_MOVABLE_PRE_MOVE)
 
-/obj/item/broom/afterattack(atom/A, mob/user, proximity)
+/obj/item/broom/afterattack(atom/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

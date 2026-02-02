@@ -18,7 +18,7 @@
 /// From base of obj/item/attack_obj(): (/obj, /mob)
 #define COMSIG_ITEM_ATTACK_OBJ "item_attack_obj"
 
-/// From base of [obj/item/afterattack()]: (atom/target, mob/user, list/modifiers)
+/// From base of [obj/item/afterattack()]: (atom/target, mob/user, proximity_flag, list/modifiers)
 #define COMSIG_ITEM_AFTERATTACK "item_afterattack"
 /// From base of [obj/item/afterattack_secondary()]: (atom/target, mob/user, list/modifiers)
 #define COMSIG_ITEM_AFTERATTACK_SECONDARY "item_afterattack_secondary"

@@ -85,7 +85,7 @@
 	item_damage_type = "blunt"
 
 
-/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user)
+/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	if(. && heldclod && get_turf(M))
 		heldclod.forceMove(get_turf(M))
@@ -251,7 +251,7 @@
 /obj/item/burial_shroud/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity)
+/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))
@@ -329,7 +329,7 @@
 /obj/item/bodybag/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/bodybag/afterattack(atom/target, mob/user, proximity)
+/obj/item/bodybag/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))

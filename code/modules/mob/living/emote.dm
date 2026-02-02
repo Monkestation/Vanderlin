@@ -820,6 +820,7 @@
 	message = "points."
 	message_param = "points at %t."
 	restraint_check = TRUE
+
 /datum/emote/living/point/run_emote(mob/user, params, type_override, intentional)
 	message_param = initial(message_param) // reset
 	if(ishuman(user))

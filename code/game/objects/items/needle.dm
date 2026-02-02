@@ -52,7 +52,7 @@
 //	if(stringamt <= 0)
 //		qdel(src)
 
-/obj/item/needle/attack(mob/living/M, mob/user)
+/obj/item/needle/attack(mob/living/M, mob/user, list/modifiers)
 	sew_wounds(M, user)
 
 /obj/item/needle/attackby(obj/item/I, mob/user, list/modifiers)

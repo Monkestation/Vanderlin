@@ -320,7 +320,7 @@
 /obj/item/contraption/shears/hammer_action(obj/item/I, mob/user)
 	return
 
-/obj/item/contraption/shears/attack(mob/living/amputee, mob/living/user)
+/obj/item/contraption/shears/attack(mob/living/amputee, mob/living/user, list/modifiers)
 	if(!current_charge)
 		return
 

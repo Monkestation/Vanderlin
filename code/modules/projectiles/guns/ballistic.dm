@@ -263,7 +263,7 @@
 	return FALSE
 
 
-/obj/item/gun/ballistic/AltClick(mob/user)
+/obj/item/gun/ballistic/AltClick(mob/user, list/modifiers)
 	if (unique_reskin && !current_skin && user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		reskin_obj(user)
 		return

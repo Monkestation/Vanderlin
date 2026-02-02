@@ -301,7 +301,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/clothing/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/clothing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(M.on_fire)
 		if(user == M)
 			return
@@ -443,17 +443,16 @@ BLIND     // can't see anything
 		dismembered = fcopy_rsc(dismembered)
 		GLOB.dismembered_clothing_icons[index] = dismembered
 
-/obj/item/clothing/pants/AltClick(mob/user)
+/obj/item/clothing/pants/AltClick(mob/user, list/modifiers)
 	if(..())
 		return 1
 
 	if(!istype(user) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		return
+	else if(attached_accessory)
+		remove_accessory(user)
 	else
-		if(attached_accessory)
-			remove_accessory(user)
-		else
-			rolldown()
+		rolldown()
 
 /obj/item/clothing/atom_destruction(damage_flag)
 	if(damage_flag in list("acid", "fire"))

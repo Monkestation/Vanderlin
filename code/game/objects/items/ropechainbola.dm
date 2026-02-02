@@ -54,7 +54,7 @@
 			M.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
 	return ..()
 
-/obj/item/rope/attack(mob/living/carbon/C, mob/living/user)
+/obj/item/rope/attack(mob/living/carbon/C, mob/living/user, list/modifiers)
 	if(user.used_intent.type != /datum/intent/tie)
 		..()
 		return

@@ -14,7 +14,7 @@
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
 
-/obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, proximity)
+/obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/food)
 		return ..()
 

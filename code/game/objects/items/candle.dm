@@ -31,7 +31,7 @@
 	else
 		icon_state = "[base_icon_state][lit ? "_lit" : ""]"
 
-/obj/item/candle/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/candle/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

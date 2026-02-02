@@ -301,7 +301,7 @@
 		signee = user
 		update_appearance()
 
-/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user)
+/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user, list/modifiers)
 	if(sealed)
 		return
 	if(signed)

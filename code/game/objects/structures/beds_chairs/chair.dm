@@ -196,7 +196,7 @@
 /obj/item/chair/proc/smash(mob/living/user)
 	qdel(src)
 
-/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

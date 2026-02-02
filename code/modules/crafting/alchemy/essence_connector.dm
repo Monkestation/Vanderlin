@@ -87,8 +87,6 @@
 		INVOKE_ASYNC(hud, TYPE_PROC_REF(/datum/hud, show_hud), hud.hud_version)
 	return ..()
 
->>>>>>> 550799637571d96f554c84c94b628cbed63da02b
-
 /obj/item/essence_connector/proc/start_connection(obj/machinery/essence/machine, mob/user)
 	source_device = machine
 	connecting = TRUE

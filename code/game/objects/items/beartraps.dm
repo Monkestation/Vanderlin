@@ -82,7 +82,7 @@
 				return FALSE
 	..()
 
-/obj/item/restraints/legcuffs/beartrap/attackby(obj/item/W, mob/user)
+/obj/item/restraints/legcuffs/beartrap/attackby(obj/item/W, mob/user, list/modifiers)
 	if(W.force && armed)
 		user.visible_message("<span class='warning'>[user] triggers \the [src] with [W].</span>", \
 				"<span class='danger'>I trigger \the [src] with [W]!</span>")

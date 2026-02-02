@@ -306,7 +306,7 @@
 	if(spell)
 		spell_which_made_us = WEAKREF(spell)
 
-/obj/item/melee/touch_attack/attack(mob/target, mob/living/carbon/user)
+/obj/item/melee/touch_attack/attack(mob/target, mob/living/carbon/user, list/modifiers)
 	if(!iscarbon(user)) //Look ma, no hands
 		return TRUE
 	if(!(user.mobility_flags & MOBILITY_USE))

@@ -42,7 +42,7 @@
 	user.visible_message("<span class='suicide'>[user] is putting [src] close to [user.p_their()] eyes and turning it on! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (FIRELOSS)
 
-/obj/item/flashlight/attack(mob/living/carbon/M, mob/living/carbon/human/user)
+/obj/item/flashlight/attack(mob/living/carbon/M, mob/living/carbon/human/user, list/modifiers)
 	add_fingerprint(user)
 	return ..()
 
@@ -216,7 +216,7 @@
 			START_PROCESSING(SSobj, src)
 			return TRUE
 
-/obj/item/flashlight/flare/torch/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flashlight/flare/torch/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if (!proximity)
 		return
@@ -277,7 +277,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 
-/obj/item/flashlight/flare/torch/lantern/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flashlight/flare/torch/lantern/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

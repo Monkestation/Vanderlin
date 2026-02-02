@@ -361,7 +361,7 @@ All foods are distributed among various categories. Use common sense.
 /obj/item/reagent_containers/food/snacks/attack_self(mob/user, list/modifiers)
 	return
 
-/obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(user.used_intent.type != /datum/intent/food && (!(M == user) && isanimal(M)))
 		return ..()
 	if(!eatverb)
@@ -612,7 +612,7 @@ All foods are distributed among various categories. Use common sense.
 					M.emote("me", 1, "[sattisfaction_text]")
 				qdel(src)
 
-/obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/M, mob/user, proximity)
+/obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/M, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!dunkable || !proximity)
 		return

@@ -28,7 +28,7 @@
 /obj/item/melee/transforming/attack_self(mob/living/carbon/user, list/modifiers)
 	transform_weapon(user)
 
-/obj/item/melee/transforming/attack(mob/living/target, mob/living/carbon/human/user)
+/obj/item/melee/transforming/attack(mob/living/target, mob/living/carbon/human/user, list/modifiers)
 	var/nemesis_faction = FALSE
 	if(LAZYLEN(nemesis_factions))
 		for(var/F in target.faction)

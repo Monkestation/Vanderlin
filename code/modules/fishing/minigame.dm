@@ -301,7 +301,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	if(HAS_TRAIT(source, TRAIT_HANDS_BLOCKED)) //blocked, can't do stuff
 		return
 	//Doing other stuff
-	if(LAZYACCESS(modifiers, SHIFT_CLICKED) || LAZYACCESS(modifiers, CTRL_CLICK) || LAZYACCESS(modifiers, ALT_CLICKED))
+	if(LAZYACCESS(modifiers, SHIFT_CLICKED) || LAZYACCESS(modifiers, CTRL_CLICKED) || LAZYACCESS(modifiers, ALT_CLICKED))
 		return
 	//You need to be actively holding on the fishing rod to use it, unless you've the profound_fisher trait.
 	if(source.get_active_held_item() != used_rod)

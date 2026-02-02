@@ -99,7 +99,7 @@
 	if(progress >= needed_progress)
 		create_current()
 
-/obj/structure/orphan_smasher/attackby(obj/item/I, mob/living/user)
+/obj/structure/orphan_smasher/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(!working)
 		return
@@ -123,7 +123,7 @@
 	try_step(STEP_LEVER, user)
 	return TRUE
 
-/obj/structure/orphan_smasher/CtrlClick(mob/user)
+/obj/structure/orphan_smasher/CtrlClick(mob/user, list/modifiers)
 	if(!user.Adjacent(src))
 		return
 	try_step(STEP_BUTTON, user)

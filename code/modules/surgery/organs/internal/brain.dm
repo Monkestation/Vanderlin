@@ -132,7 +132,7 @@
 		else
 			. += "<span class='info'>This one is completely devoid of life.</span>"
 
-/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user)
+/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(!istype(C))
 		return ..()
 

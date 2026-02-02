@@ -67,7 +67,7 @@
 	if(drainage)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
+/obj/item/natural/worms/leech/attack(mob/living/M, mob/user, list/modifiers)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))

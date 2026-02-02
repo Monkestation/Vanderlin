@@ -181,7 +181,7 @@
 		return FALSE
 	return ..()
 
-/obj/structure/door/attackby(obj/item/I, mob/user)
+/obj/structure/door/attackby(obj/item/I, mob/user, list/modifiers)
 	if(switching_states)
 		return
 	if(I.can_lock_interact())

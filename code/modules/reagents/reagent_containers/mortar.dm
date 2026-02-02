@@ -70,13 +70,13 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 
-/obj/item/reagent_containers/glass/mortar/AltClick(mob/user)
+/obj/item/reagent_containers/glass/mortar/AltClick(mob/user, list/modifiers)
 	if(to_grind)
 		to_grind.forceMove(drop_location())
 		to_grind = null
 		to_chat(user, span_notice("I eject the item inside."))
 
-/obj/item/reagent_containers/glass/mortar/attackby(obj/item/I, mob/living/carbon/human/user)
+/obj/item/reagent_containers/glass/mortar/attackby(obj/item/I, mob/living/carbon/human/user, list/modifiers)
 	if(istype(I,/obj/item/pestle))
 		if(!to_grind)
 			if(user.try_recipes(src, I, user))

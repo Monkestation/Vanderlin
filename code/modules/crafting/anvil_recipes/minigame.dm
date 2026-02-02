@@ -104,8 +104,8 @@
 		click_list |= LEFT_CLICK
 	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		click_list |= ALT_CLICKED
-	if(LAZYACCESS(modifiers, CTRL_CLICK))
-		click_list |= CTRL_CLICK
+	if(LAZYACCESS(modifiers, CTRL_CLICKED))
+		click_list |= CTRL_CLICKED
 
 	var/good_hit = TRUE
 	if(!choice.check_click(click_list))
@@ -249,10 +249,10 @@
 			click_requirements = list(RIGHT_CLICK, ALT_CLICKED)
 			icon_state = "note-right-alt"
 		if(5)
-			click_requirements = list(LEFT_CLICK, CTRL_CLICK)
+			click_requirements = list(LEFT_CLICK, CTRL_CLICKED)
 			icon_state = "note-ctrl"
 		if(6)
-			click_requirements = list(RIGHT_CLICK, CTRL_CLICK)
+			click_requirements = list(RIGHT_CLICK, CTRL_CLICKED)
 			icon_state = "note-right-ctrl"
 
 /atom/movable/screen/hud_note/proc/check_click(list/click_modifiers)

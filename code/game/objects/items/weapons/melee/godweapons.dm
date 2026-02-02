@@ -119,7 +119,7 @@
 	. = ..()
 	AddElement(/datum/element/divine_intervention, /datum/patron/inhumen/zizo, PUNISHMENT_BURN, /datum/stress_event/divine_punishment, TRUE)
 
-/obj/item/weapon/polearm/neant/attack(mob/living/M, mob/living/user)
+/obj/item/weapon/polearm/neant/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(user.used_intent.tranged)
 		return
 	return ..()
