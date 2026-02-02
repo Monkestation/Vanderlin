@@ -201,6 +201,12 @@
 	bigboy = FALSE
 	SET_BASE_PIXEL(0, 0)
 
+/obj/item/weapon/sword/rapier/caneblade/courtphysician
+	name = "cane blade"
+	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. This one bears the visage of a vulture on its pommel."
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
+	icon_state = "doccaneblade"
+
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
 \-------*/
