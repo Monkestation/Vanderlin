@@ -80,6 +80,7 @@
 		icon_state = "navaja_o"
 		attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 		sharpness = IS_SHARP
+		playsound (user, 'sound/items/knife_open.ogg', 100, TRUE)
 	else
 		force = DAMAGE_KNIFE / 2
 		w_class = WEIGHT_CLASS_SMALL
