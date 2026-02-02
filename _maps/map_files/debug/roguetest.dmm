@@ -3161,6 +3161,9 @@
 	},
 /turf/open/floor/wood,
 /area/indoors)
+"OR" = (
+/turf/open/water/ocean/fakedeep,
+/area/outdoors)
 "OS" = (
 /obj/structure/roller{
 	dir = 1
@@ -20752,9 +20755,9 @@ WL
 FI
 WL
 QN
-QN
-ai
-QN
+OR
+OR
+OR
 tA
 tA
 tA
@@ -21009,9 +21012,9 @@ ru
 ru
 WL
 QN
-QN
-QN
-ai
+OR
+OR
+OR
 tA
 tA
 tA
@@ -21266,9 +21269,9 @@ vT
 pT
 WL
 ai
-QN
-Wr
-QN
+OR
+OR
+OR
 tA
 tA
 tA
@@ -21523,9 +21526,9 @@ FR
 ru
 WL
 ai
-QN
-QN
-ai
+OR
+OR
+OR
 tA
 tA
 tA
@@ -21780,9 +21783,9 @@ WL
 WL
 WL
 WL
-QN
-ai
-Wr
+OR
+OR
+OR
 tA
 tA
 tA
@@ -22037,9 +22040,9 @@ Rq
 WL
 mL
 mL
-QN
-Wr
-Wr
+OR
+OR
+OR
 tA
 tA
 tA
@@ -22294,9 +22297,9 @@ Ky
 WL
 mL
 pf
-QN
-ai
-QN
+vX
+rY
+Cs
 tA
 tA
 tA

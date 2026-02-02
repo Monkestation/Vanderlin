@@ -319,9 +319,9 @@
 		if(istype(newloc, /turf/open/water))
 			var/turf/open/water/nextwater = newloc
 			if(nextwater.water_height < WATER_HEIGHT_HIGH)
-				user.movement_type &= ~FLOATING
+				user.set_swimming(FALSE)
 		else
-			user.movement_type &= ~FLOATING
+			user.set_swimming(FALSE)
 		if(water_overlay)
 			if((get_dir(src, newloc) == SOUTH))
 				water_overlay.layer = BELOW_MOB_LAYER
@@ -377,7 +377,7 @@
 		if(L.body_position == LYING_DOWN || water_height >= WATER_HEIGHT_HIGH)
 			L.SoakMob(FULL_BODY, dirty_water_turf)
 			if(open_bottom)
-				L.movement_type |= FLOATING
+				L.set_swimming(TRUE)
 		else if(water_height == WATER_HEIGHT_MIDDLE)
 			L.SoakMob(BELOW_CHEST, dirty_water_turf)
 		else if(water_height == WATER_HEIGHT_SHALLOW)
@@ -702,13 +702,12 @@
 /turf/open/water/clean/deep
 	water_height = WATER_HEIGHT_FULL
 	open_bottom = TRUE
+	swim_skill = TRUE
 
 /turf/open/water/clean/deep/surface
 	water_height = WATER_HEIGHT_HIGH
-	open_bottom = TRUE
 
 /turf/open/water/clean/deep/bottom
-	water_height = WATER_HEIGHT_FULL
 	open_bottom = FALSE
 
 /turf/open/water/clean/dirt

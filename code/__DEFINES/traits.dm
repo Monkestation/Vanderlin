@@ -89,6 +89,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MOVE_VENTCRAWLING	"move_ventcrawling"
 #define TRAIT_MOVE_FLOATING		"move_floating"
 #define TRAIT_MOVE_PHASING "move_phasing"
+#define TRAIT_MOVE_SWIMMING	"move_swimming"
 /// Disables the floating animation. See above.
 #define TRAIT_NO_FLOATING_ANIM		"no-floating-animation"
 
@@ -217,6 +218,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Can swim ignoring water flow and slowdown
 #define TRAIT_GOOD_SWIM "Good Swim"
+/// Grounds the mob in deep water and pulls down z levels
+#define TRAIT_SINKING "sinking"
 ///trait determines if this mob can breed given by /datum/component/breeding
 #define TRAIT_MOB_BREEDER "mob_breeder"
 #define TRAIT_IMPERCEPTIBLE "imperceptible" // can't be perceived in any way, likely due to invisibility

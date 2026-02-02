@@ -159,7 +159,7 @@
 			if(L.throwing)
 				return ..()
 
-			if(L.movement_type & (FLYING|FLOATING)) //don't close the trap if they're flying/floating over it.
+			if(L.movement_type & (FLYING|FLOATING|SWIMMING)) //don't close the trap if they're flying/floating over it.
 				return ..()
 
 			var/def_zone = BODY_ZONE_CHEST

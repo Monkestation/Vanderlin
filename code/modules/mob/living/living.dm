@@ -3044,3 +3044,14 @@
 	if(hud_used)
 		var/atom/movable/screen/eye_intent/eyet = locate() in hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_ICON)
+
+/mob/living/proc/set_swimming(swimming)
+	if(HAS_TRAIT(src, TRAIT_SINKING))
+		return
+	if(swimming)
+		ADD_TRAIT(src, TRAIT_MOVE_SWIMMING, SUBMERGED_TRAIT)
+	else
+		REMOVE_TRAIT(src, TRAIT_MOVE_SWIMMING, SUBMERGED_TRAIT)
+
+/mob/living/proc/z_swim(dir)
+	//if(stat == DEAD || HAS_TRAIT(src, TRAIT_SINKING))
