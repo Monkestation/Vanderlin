@@ -74,7 +74,6 @@
 		/datum/job/fisher,
 		/datum/job/grabber,
 		/datum/job/shophand,
-		/datum/job/advclass/mercenary/anthrax
 	)
 
 	migrant_blacklist = list(

@@ -135,14 +135,14 @@ GLOBAL_LIST_INIT(ambience_spooky_mystical, list(
 
 /// Sound effects
 GLOBAL_LIST_INIT(ambience_assoc_sounds, list(
-	AMBIENCE_GENERIC = null,
+	AMBIENCE_GENERIC = list(),
 	AMBIENCE_CAVE = GLOB.ambience_spooky_cave,
 	AMBIENCE_FOREST = GLOB.ambience_spooky_forest,
-	AMBIENCE_DUNGEON = null,
+	AMBIENCE_DUNGEON = list(),
 	AMBIENCE_RAT = GLOB.ambience_spooky_rat,
 	AMBIENCE_FROG = GLOB.ambience_spooky_frog,
 	AMBIENCE_BIRDS = GLOB.ambience_spooky_birds,
-	AMBIENCE_MYSTICAL = null,
+	AMBIENCE_MYSTICAL = list(),
 ))
 
 /// Droning ambience
