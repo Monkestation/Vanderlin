@@ -42,7 +42,7 @@ GLOBAL_LIST_INIT(triumph_buys_by_id, init_triumph_buys_by_id())
 /proc/init_triumph_buys_by_id()
 	var/list/buys = list()
 	for(var/datum/triumph_buy/buy as anything in subtypesof(/datum/triumph_buy))
-		if(is_abstract(buy))
+		if(IS_ABSTRACT(buy))
 			continue
 		buys[buy::triumph_buy_id] = buy
 	return buys

@@ -42,7 +42,7 @@
 
 	// Faiths
 	for(var/datum/faith/faith as anything in subtypesof(/datum/faith))
-		if(is_abstract(faith))
+		if(IS_ABSTRACT(faith))
 			continue
 
 		faith = new faith()
@@ -55,7 +55,7 @@
 
 	// Patron Gods
 	for(var/datum/patron/patron as anything in subtypesof(/datum/patron))
-		if(is_abstract(patron))
+		if(IS_ABSTRACT(patron))
 			continue
 
 		patron = new patron()
