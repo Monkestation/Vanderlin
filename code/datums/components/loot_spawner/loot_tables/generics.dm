@@ -146,7 +146,7 @@
 			/obj/item/weapon/mace/bronze = 10,
 			/obj/item/weapon/polearm/spear/billhook/ji/bronze = 3,
 			/obj/item/weapon/flail/militia = 10,
-			/obj/item/weapon/mace/shishpar/bronze = 5,
+			/obj/item/weapon/mace/bronze/shishpar = 5,
 			/obj/item/weapon/whip/urumi/bronze = 2,
 			/obj/item/weapon/mace/elvenclub/bronze = 4,
 			/obj/item/weapon/axe/bronze = 10,

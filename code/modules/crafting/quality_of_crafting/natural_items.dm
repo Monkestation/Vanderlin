@@ -115,7 +115,7 @@
 	starting_atom = /obj/item/grown/log/tree/small
 	attacked_atom = /obj/item/natural/fibers
 	allow_inverse_start = TRUE
-	output = /obj/item/weapon/mace/woodclub/crafted
+	output = /obj/item/weapon/mace/woodclub
 
 /datum/repeatable_crafting_recipe/survival/woodstaff
 	name = "wood staff"

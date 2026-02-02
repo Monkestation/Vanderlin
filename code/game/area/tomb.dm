@@ -27,15 +27,18 @@
 	background_track_night = 'sound/music/area/sleeping.ogg'
 
 /area/under/tomb/indoors/magic
+	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "magician"
 	ambient_index = AMBIENCE_MYSTICAL
 	background_track = 'sound/music/area/magiciantower og mix.ogg'
 
 /area/under/tomb/indoors/royal
+	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor"
 	background_track = 'sound/music/area/manor2.ogg'
 
 /area/under/tomb/indoors/church
+	icon = 'icons/turf/areas/town.dmi'
 	icon_state = "church"
 	background_track = 'sound/music/area/churchnight.ogg'
 

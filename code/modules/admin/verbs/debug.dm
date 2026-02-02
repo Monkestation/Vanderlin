@@ -275,7 +275,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/list/jobs = subtypesof(/datum/job)
 	var/list/selection = list()
 	for(var/datum/job/job as anything in jobs)
-		if(is_abstract(job))
+		if(IS_ABSTRACT(job))
 			continue
 		selection[job.title] = job
 
@@ -318,7 +318,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/list/paths = subtypesof(/datum/outfit)
 
 	for(var/datum/outfit/O as anything in paths) //not much to initalize here but whatever
-		if(is_abstract(O))
+		if(IS_ABSTRACT(O))
 			continue
 		if(initial(O.can_be_admin_equipped))
 			outfits += O
@@ -614,7 +614,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/datum/asset/A as anything in subtypesof(/datum/asset))
 		if(!initial(A.cross_round_cachable))
 			continue
-		if(is_abstract(A))
+		if(IS_ABSTRACT(A))
 			continue
 		var/datum/asset/asset_datum = GLOB.asset_datums[A]
 		asset_datum.regenerate()
@@ -630,7 +630,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	var/cleared = 0
 	for(var/datum/asset/spritesheet_batched/A as anything in subtypesof(/datum/asset/spritesheet_batched))
-		if(is_abstract(A))
+		if(IS_ABSTRACT(A))
 			continue
 		fdel("[ASSET_CROSS_ROUND_SMART_CACHE_DIRECTORY]/spritesheet_cache.[initial(A.name)].json")
 		cleared++
