@@ -2897,7 +2897,7 @@
 /area/outdoors/mountains)
 "bQA" = (
 /obj/effect/landmark/start/orphan,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
 "bQN" = (
 /obj/effect/decal/cleanable/debris/wood{
@@ -4428,10 +4428,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/sand,
 /area/indoors/town/keep/magician)
-"cNA" = (
-/obj/effect/decal/cleanable/sigil/N,
-/turf/open/floor/sand,
-/area/indoors/town/keep)
 "cNY" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/cobble/alt,
@@ -24098,7 +24094,7 @@
 "paL" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/keyset/town/butcher,
-/turf/closed/wall/mineral/decowood,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
 "paM" = (
 /obj/structure/window/solid,
@@ -24249,7 +24245,7 @@
 "pex" = (
 /obj/effect/landmark/start/orphan,
 /obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
 "peE" = (
 /turf/closed/wall/mineral/wooddark/end,
@@ -27892,10 +27888,6 @@
 /obj/structure/chair/stool/crafted,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/villagegarrison)
-"rvE" = (
-/obj/effect/decal/cleanable/sigil,
-/turf/open/floor/sand,
-/area/indoors/town/keep)
 "rvT" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass/yel,
@@ -33718,7 +33710,7 @@
 /obj/structure/bed/hay{
 	pixel_y = 17
 	},
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
 "vlY" = (
 /obj/structure/fluff/railing/tall,
@@ -38203,7 +38195,7 @@
 "xZf" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/landmark/start/gaffer_assistant,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
 "xZh" = (
 /turf/open/floor/dirt/road,
@@ -177156,7 +177148,7 @@ hyb
 hyb
 hyb
 hyb
-dzC
+hyb
 kcE
 fKe
 ntF
@@ -177358,9 +177350,9 @@ hyb
 hyb
 hyb
 hyb
-dzC
-cNA
-rvE
+hyb
+hyb
+hyb
 dGY
 oxx
 oxx
