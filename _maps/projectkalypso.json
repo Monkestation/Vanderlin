@@ -1,0 +1,19 @@
+{
+    "map_name": "Kalypso",
+    "map_path": "map_files/kalypso",
+    "map_file": "projectkalypso.dmm",
+	"immigrant_origin": "Vanderlin",
+	"monarch_title": "Count",
+	"monarch_title_f": "Countess",
+	"traits": [
+		{"Up": true, "Turf Weather Effects": true, "Leylines": true},
+		{"Up": true, "Down": true, "Turf Weather Effects": true, "Leylines": true},
+		{"Up": true, "Down": true, "Turf Weather Effects": true, "Leylines": true},
+		{"Down": true, "Turf Weather Effects": true, "Leylines": true}
+	],
+	"other_z": [
+	],
+	"minetype": null,
+	"space_empty_levels": 0,
+	"space_ruin_levels": 0
+}

@@ -384,6 +384,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all areas of that type in the world.
 /proc/get_areas(areatype, subtypes=TRUE)
+	RETURN_TYPE(/list)
 	if(istext(areatype))
 		areatype = text2path(areatype)
 	else if(isarea(areatype))
@@ -452,7 +453,7 @@ It takes into account:
 NOTE: if your atom has non-standard bounds then this proc
 will handle it, but:
  * if the bounds are even, then there are an even amount of "middle" turfs, the one to the EAST, NORTH, or BOTH is picked
-(this may seem bad, but you're atleast as close to the center of the atom as possible, better than byond's default loc being all the way off)
+(this may seem bad, but you're at least as close to the center of the atom as possible, better than byond's default loc being all the way off)
  * if the bounds are odd, the true middle turf of the atom is returned
 
 */
@@ -500,13 +501,6 @@ will handle it, but:
 	. = bounds_dist(A, B) + sqrt((((A.pixel_x+B.pixel_x)**2) + ((A.pixel_y+B.pixel_y)**2)))
 	if(centered)
 		. += world.icon_size
-
-/proc/can_embed(obj/item/weapon)
-	if(HAS_TRAIT(weapon, TRAIT_NODROP) || HAS_TRAIT(weapon, TRAIT_NOEMBED))
-		return FALSE
-	if(!weapon.embedding?.embed_chance)
-		return FALSE
-	return TRUE
 
 /*
 Checks if that loc and dir has an item on the wall
@@ -701,6 +695,12 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 		return 1
 	if (!initial_delay)
 		initial_delay = world.tick_lag
+// Unit tests are not the normal environment. The mc can get absolutely thigh crushed, and sleeping procs running for ages is much more common
+// We don't want spurious hard deletes off this, so let's only sleep for the requested period of time here yeah?
+#ifdef UNIT_TESTS
+	sleep(initial_delay)
+	return CEILING(DS2TICKS(initial_delay), 1)
+#else
 	. = 0
 	var/i = DS2TICKS(initial_delay)
 	do
@@ -708,6 +708,7 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 		sleep(i*world.tick_lag*DELTA_CALC)
 		i *= 2
 	while (TICK_USAGE > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
+#endif
 
 #undef DELTA_CALC
 
@@ -799,9 +800,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	for(type in view(range, GLOB.dview_mob))
 
 #define FOR_DVIEW_END GLOB.dview_mob.loc = null
-
-
-#define UNTIL(X) while(!(X)) stoplag()
 
 /proc/get_mob_or_brainmob(occupant)
 	var/mob/living/mob_occupant

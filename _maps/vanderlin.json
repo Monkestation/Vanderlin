@@ -13,9 +13,9 @@
 		{"Down": true, "Turf Weather Effects": true}
 	],
 	"other_z": [
-		"_maps/map_files/vanderlin/vanderlin_forest.json",
-		"_maps/map_files/vanderlin/vanderlin_mountain.json",
-		"_maps/map_files/vanderlin/vanderlin_bog.json"
+		"map_files/vanderlin/vanderlin_forest",
+		"map_files/vanderlin/vanderlin_mountain",
+		"map_files/vanderlin/vanderlin_bog"
 	],
 	"minetype": null,
 	"space_empty_levels": 0,

@@ -21,10 +21,10 @@
 
 	subtypes_allowed = TRUE
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/meat/mince = 1,
+		/obj/item/reagent_containers/food/snacks/meat/mince/beef = 1,
 		/obj/item/reagent_containers/food/snacks/piedough = 1,
 	)
-	starting_atom = /obj/item/reagent_containers/food/snacks/meat/mince
+	starting_atom = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 	output = /obj/item/reagent_containers/food/snacks/foodbase/handpieraw/mince
 	crafting_message = "add mince to the handpie"
 

@@ -93,9 +93,11 @@
 
 #ifdef LOWMEMORYMODE
 #ifdef ABSOLUTE_MINIMUM_MODE
-#define FORCE_MAP "_maps/minimal_test.json"
+#define FORCE_MAP "minimal_test"
+#define FORCE_MAP_DIRECTORY "_maps"
 #else
-#define FORCE_MAP "_maps/roguetest.json"
+#define FORCE_MAP "roguetest"
+#define FORCE_MAP_DIRECTORY "_maps"
 #endif
 #endif
 
@@ -141,4 +143,11 @@
 #error Your version of BYOND is too out-of-date to compile this project. Go to https://secure.byond.com/download and update.
 #error You need version 515.1643 or higher
 #endif
+#endif
+
+//#define KALYPSO_PROJECT
+#if defined(KALYPSO_PROJECT)
+#define NO_DUNGEON
+#define FORCE_MAP "projectkalypso"
+#define FORCE_MAP_DIRECTORY "_maps"
 #endif

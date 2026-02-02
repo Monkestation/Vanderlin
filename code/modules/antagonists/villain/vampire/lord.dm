@@ -11,13 +11,53 @@
 	var/ascended = FALSE
 
 /datum/antagonist/vampire/lord/on_gain()
-	var/mob/living/carbon/vampire = owner.current
-	remove_job()
-	owner.current?.roll_mob_stats()
-	owner.current?.purge_combat_knowledge()
+	var/mob/living/carbon/human/vampire = owner?.current
+	if(SSmapping.config.map_name != "Voyage")
+		remove_job()
+		vampire.delete_equipment()
+		vampire.reset_and_reroll_stats()
+		vampire.purge_combat_knowledge()
+		vampire.remove_all_traits()
 	. = ..()
-	addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
+	if(SSmapping.config.map_name != "Voyage")
+		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
 	vampire.grant_undead_eyes()
+
+/datum/antagonist/vampire/proc/get_thralls()
+	if(!clan_selected)
+		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
+		return
+
+	var/list/restricted_roles = typecacheof(list(
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
+		/datum/job/monk,
+	))
+
+	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, no_antags = TRUE, restricted_roles = restricted_roles)
+	var/thralls = rand(2, 3)
+
+	candidates -= owner.current
+
+	if(!length(candidates))
+		return
+
+	for(var/i = 1 to thralls)
+		var/mob/living/carbon/human/human = pick_n_take(candidates)
+		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
+		human.mind.add_antag_datum(new_antag)
+		human.adjust_bloodpool(500)
 
 /datum/antagonist/vampire/lord/greet()
 	to_chat(owner.current, span_userdanger("I am ancient. I am the Land. And I am now awoken to trespassers upon my domain."))
@@ -37,15 +77,16 @@
 		owner.person_knows_me(MF)
 
 	var/mob/living/carbon/human/H = owner.current
-	H.equipOutfit(/datum/outfit/job/vamplord)
+	H.equipOutfit(/datum/outfit/vamplord)
 	H.set_patron(/datum/patron/godless/autotheist)
 
 	return TRUE
 
 /datum/antagonist/vampire/lord/move_to_spawnpoint()
-	owner.current.forceMove(pick(GLOB.vlord_starts))
+	if(SSmapping.config.map_name != "Voyage")
+		owner.current.forceMove(pick(GLOB.vlord_starts))
 
-/datum/outfit/job/vamplord/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/vamplord/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_skillrank(/datum/skill/magic/blood, 1, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
@@ -61,6 +102,7 @@
 	belt = /obj/item/storage/belt/leather/plaquegold
 	head  = /obj/item/clothing/head/vampire
 	beltl = /obj/item/key/vampire
+	beltr = /obj/item/storage/belt/pouch/coins/veryrich
 	cloak = /obj/item/clothing/cloak/cape/puritan
 	shoes = /obj/item/clothing/shoes/boots
 	backl = /obj/item/storage/backpack/satchel/black
@@ -98,19 +140,20 @@
 	set category = "VAMPIRE"
 
 	var/list/possible = list()
-	for(var/datum/mind/V in SSmapping.retainer.vampires)
-		if(V.special_role == "Vampire Spawn")
+	for(var/mob/living/carbon/human/member in clan?.clan_members)
+		if(member.stat != DEAD && member != src)
+			var/datum/mind/V = member.mind
 			possible[V.current.real_name] = V.current
 	for(var/datum/mind/D in SSmapping.retainer.death_knights)
 		possible[D.current.real_name] = D.current
-	var/name_choice = input(src, "Who to punish?", "PUNISHMENT") as null|anything in possible
+	var/name_choice = browser_input_list(src, "Who to punish?", "PUNISHMENT", possible)
 	if(!name_choice)
 		return
 	var/mob/living/carbon/human/choice = possible[name_choice]
 	if(!choice || QDELETED(choice))
 		return
 	var/punishmentlevels = list("Pause", "Pain", "DESTROY")
-	var/punishment = input(src, "Severity?", "PUNISHMENT") as null|anything in punishmentlevels
+	var/punishment = browser_input_list(src, "Select punishment severity.", "PUNISHMENT", punishmentlevels)
 	if(!punishment)
 		return
 	switch(punishment)

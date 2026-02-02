@@ -39,7 +39,7 @@
 			if(SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 				return TRUE
 			if(SECONDARY_ATTACK_CONTINUE_CHAIN)
-				// Normal behavior
+				EMPTY_BLOCK_GUARD // Normal behavior
 			else
 				CRASH("pre_attack_secondary must return an SECONDARY_ATTACK_* define, please consult code/__DEFINES/combat.dm")
 	else
@@ -57,7 +57,7 @@
 			if(SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 				return TRUE
 			if(SECONDARY_ATTACK_CONTINUE_CHAIN)
-				// Normal behavior
+				EMPTY_BLOCK_GUARD // Normal behavior
 			else
 				CRASH("attackby_secondary must return an SECONDARY_ATTACK_* define, please consult code/__DEFINES/combat.dm")
 	else
@@ -282,7 +282,7 @@
 		return FALSE
 	if(user.used_intent)
 		if(!user.used_intent.noaa)
-			playsound(get_turf(src), pick(swingsound), 100, FALSE, -1)
+			playsound(src, pick(swingsound), 100, FALSE, -1)
 		if(user.used_intent.no_attack) //BYE!!!
 			return TRUE
 
@@ -318,9 +318,9 @@
 					if(user.used_intent == cached_intent)
 						var/tempsound = user.used_intent.hitsound
 						if(tempsound)
-							playsound(M.loc, tempsound, get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
+							playsound(M, tempsound, get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
 						else
-							playsound(M.loc, "nodmg", get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
+							playsound(M, "nodmg", get_clamped_volume(), FALSE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
 				log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.used_intent.name)]) (DAMTYPE: [uppertext(damtype)])")
 				add_fingerprint(user)
 		if(M.d_intent == INTENT_DODGE)
@@ -363,9 +363,9 @@
 		if(user.used_intent == cached_intent)
 			var/tempsound = user.used_intent.hitsound
 			if(tempsound)
-				playsound(M.loc,  tempsound, 100, FALSE, -1)
+				playsound(M,  tempsound, 100, FALSE, -1)
 			else
-				playsound(M.loc,  "nodmg", 100, FALSE, -1)
+				playsound(M,  "nodmg", 100, FALSE, -1)
 
 	log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.used_intent.name)]) (DAMTYPE: [uppertext(damtype)])")
 	add_fingerprint(user)
@@ -591,10 +591,25 @@
 /mob/living/proc/simple_limb_hit(zone)
 	if(!zone)
 		return ""
-	if(istype(src, /mob/living/simple_animal))
-		return zone
-	else
-		return "body"
+	return "body"
+
+/mob/living/simple_animal/simple_limb_hit(zone)
+	if(!zone)
+		return ""
+	switch(zone)
+		if(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS)
+			return "head"
+		if(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND) // front legs
+			return "foreleg"
+		if(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
+			return "leg"
+		if(BODY_ZONE_PRECISE_GROIN)
+			return "tail"
+		if(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG) // back legs
+			return "leg"
+		if(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+			return "foreleg"
+	return zone
 
 /obj/item/proc/funny_attack_effects(mob/living/target, mob/living/user, nodmg)
 	return
@@ -609,7 +624,7 @@
 			next_attack_msg.Cut()
 			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
-				if(should_embed_weapon(crit_wound, I))
+				if(crit_wound?.should_embed(I))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 					simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 					src.grabbedby(user, 1, item_override = I)
@@ -636,9 +651,10 @@
 
 /mob/living/simple_animal/attacked_by(obj/item/I, mob/living/user)
 	if(I.force < force_threshold || I.damtype == STAMINA)
-		playsound(loc, 'sound/blank.ogg', I.get_clamped_volume(), TRUE, -1)
+		playsound(src, 'sound/blank.ogg', I.get_clamped_volume(), TRUE, -1)
 	else
-		return ..()
+		. = ..()
+		I.do_special_attack_effect(user, null, null, src, null)
 
 /**
  * Last proc in the [/obj/item/proc/melee_attack_chain]
@@ -665,10 +681,10 @@
 				user.do_attack_animation(target, visual_effect_icon = user.used_intent.animname, used_item = src, used_intent = user.used_intent)
 			else
 				user.do_attack_animation(get_ranged_target_turf(user, get_dir(user, target), 1), visual_effect_icon = user.used_intent.animname, used_item = src, used_intent = user.used_intent)
-			playsound(get_turf(src), pick(swingsound), 100, FALSE, -1)
+			playsound(src, pick(swingsound), 100, FALSE, -1)
 			user.aftermiss()
 		if(!proximity_flag && ismob(target) && !user.used_intent?.noaa) //this block invokes miss cost clicking on seomone who isn't adjacent to you
-			playsound(get_turf(src), pick(swingsound), 100, FALSE, -1)
+			playsound(src, pick(swingsound), 100, FALSE, -1)
 			user.aftermiss()
 
 /**
@@ -697,6 +713,11 @@
 /obj/item/proc/attack_qdeleted(atom/target, mob/user, proximity_flag, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_QDELETED, target, user, proximity_flag, modifiers)
 	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_QDELETED, target, user, proximity_flag, modifiers)
+
+/obj/item/proc/do_special_attack_effect(user, obj/item/bodypart/affecting, intent, mob/living/victim, selzone, thrown = FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	SEND_SIGNAL(victim, COMSIG_ITEM_ATTACK_EFFECT, user, affecting, intent, selzone, src)
+	SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_EFFECT, user, affecting, intent, victim, selzone)
 
 /obj/item/proc/get_clamped_volume()
 	if(w_class)

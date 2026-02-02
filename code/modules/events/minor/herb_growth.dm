@@ -7,7 +7,7 @@ GLOBAL_LIST_INIT(harvested_herbs, list())
 	weight = 5
 	max_occurrences = 8
 	min_players = 0
-	earliest_start = 25 MINUTES
+	earliest_start = 20 MINUTES
 
 	tags = list(
 		TAG_NATURE,

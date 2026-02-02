@@ -11,6 +11,84 @@
 	icon_state = "goldcirclet"
 	sellprice = VALUE_GOLD_ITEM
 
+/obj/item/clothing/head/crown/circlet/golddiadem
+	name = "gold diadem"
+	desc = "A luxurious diadem forged out of gold. Often associated with the nobility of the early Grenzelhoftian Empire."
+	icon_state = "diadem_g"
+
+/obj/item/clothing/head/crown/circlet/silverdiadem
+	name = "silver diadem"
+	desc = "A luxurious diadem forged out of silver. Often associated with the nobility of the early Grenzelhoftian Empire "
+	icon_state = "diadem_s"
+	sellprice = VALUE_SILVER_ITEM
+
+/obj/item/clothing/head/crown/circlet/silverdiadem/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/head/crown/circlet/goldheaddress
+	name = "zenarii headdress"
+	desc = "A fancy headdress made out of zenarii. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
+	icon_state = "headdress_g"
+
+/obj/item/clothing/head/crown/circlet/silverheaddress
+	name = "ziliquae headdress"
+	desc = "A fancy headdress made out of ziliquae. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
+	icon_state = "headdress_s"
+	sellprice = VALUE_SILVER_ITEM
+
+/obj/item/clothing/head/crown/circlet/silverheaddress/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/head/crown/circlet/jade
+	name = "joapstone circlet"
+	desc = "An ornate circlet carved out of joapstone."
+	icon_state = "circlet_jade"
+	sellprice = 65
+
+/obj/item/clothing/head/crown/circlet/amber
+	name = "petriamber circlet"
+	desc = "An ornate circlet carved out of petriamber."
+	icon_state = "circlet_amber"
+	sellprice = 65
+
+/obj/item/clothing/head/crown/circlet/shell
+	name = "shell circlet"
+	desc = "An ornate circlet carved out of shell."
+	icon_state = "circlet_shell"
+	sellprice = 25
+
+/obj/item/clothing/head/crown/circlet/rose
+	name = "rosellusk circlet"
+	desc = "An ornate circlet carved out of rosellusk."
+	icon_state = "circlet_rose"
+	sellprice = 30
+
+/obj/item/clothing/head/crown/circlet/turq
+	name = "ceruleabaster circlet"
+	desc = "An ornate circlet carved out of ceruleabaster."
+	icon_state = "circlet_turq"
+	sellprice = 90
+
+/obj/item/clothing/head/crown/circlet/onyxa
+	name = "onyxa circlet"
+	desc = "An ornate circlet carved out of onyxa."
+	icon_state = "circlet_onyxa"
+	sellprice = 45
+
+/obj/item/clothing/head/crown/circlet/coral
+	name = "aoetal circlet"
+	desc = "An ornate circlet carved out of aoetal."
+	icon_state = "circlet_coral"
+	sellprice = 75
+
+/obj/item/clothing/head/crown/circlet/opal
+	name = "opaloise circlet"
+	desc = "An ornate circlet carved out of opaloise."
+	icon_state = "circlet_opal"
+	sellprice = 95
+
 /obj/item/clothing/head/crown/nyle
 	name = "jewel of nyle"
 	icon_state = "nile"
@@ -53,6 +131,12 @@
 	name = "champions circlet"
 	desc = "Winner of tournaments, bask in Ravox's glory."
 	icon_state = "sparrowcrown"
+	sellprice = VALUE_GOLD_ITEM
+
+/obj/item/clothing/head/crown/hemhem
+	name = "hemhem crown"
+	desc = "A large ceremonial crown heavily associated with the Hemhem desert, located in the Queendom of Lakkari. It looks pretty heavy."
+	icon_state = "hemhem"
 	sellprice = VALUE_GOLD_ITEM
 
 /obj/item/clothing/head/crown/circlet/vision

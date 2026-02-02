@@ -7,6 +7,10 @@
 	max_occurrences = 1
 	min_players = 30
 
+	tags = list(
+		TAG_NOC,
+	)
+
 /datum/round_event_control/noc_literacy/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
 	if(!.)
@@ -35,7 +39,7 @@
 		return
 
 	var/mob/living/carbon/human/chosen_illiterate = pick(illiterate_noc_followers)
-	var/datum/objective/literacy/new_objective = new(owner = chosen_illiterate.mind)
+	var/datum/objective/personal/literacy/new_objective = new(owner = chosen_illiterate.mind)
 	chosen_illiterate.mind.add_personal_objective(new_objective)
 
 	to_chat(chosen_illiterate, span_userdanger("YOU ARE NOC'S CHOSEN!"))

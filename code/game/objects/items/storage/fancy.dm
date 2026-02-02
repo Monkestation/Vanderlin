@@ -26,9 +26,9 @@
 	/// Whether the container is open or not
 	var/is_open = FALSE
 
-/obj/item/storage/fancy/PopulateContents()
+/obj/item/storage/fancy/populate_contents()
 	if(!spawn_type)
-		return
+		return ..()
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_FILL_TYPE, spawn_type)
 
 /obj/item/storage/fancy/update_icon_state()
@@ -38,6 +38,8 @@
 /obj/item/storage/fancy/examine(mob/user)
 	. = ..()
 	if(!is_open)
+		return
+	if(!contents_tag)
 		return
 	if(length(contents) == 1)
 		. += "There is one [contents_tag] left."

@@ -8,6 +8,7 @@
 	min_players = 30
 
 	tags = list(
+		TAG_PESTRA,
 		TAG_MEDICAL,
 	)
 
@@ -44,11 +45,13 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/lux_extraction/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/lux_extraction/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE PESTRA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Pestra is curious about the divine spark! Extract lux from a living being to earn Pestra's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE PESTRA'S CHOSEN!"),
+		span_notice("Pestra is curious about the divine spark! Extract lux from a living being to earn Pestra's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/magic/cosmic_expansion.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

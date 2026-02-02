@@ -1,0 +1,20 @@
+{
+    "map_name": "Voyage",
+    "map_path": "map_files/voyager",
+	"map_file": [
+		"voyager.dmm"
+	],
+	"immigrant_origin": "Kingsfield",
+	"monarch_title": "Captain",
+	"monarch_title_f": "Captain",
+	"other_z": [
+		"map_files/voyager/island_batch",
+		"map_files/voyager/island_batch2"
+	],
+	"traits": [
+	{"Name": "The Sea", "Up": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Down": true}],
+	"minetype": null,
+	"space_empty_levels": 0,
+	"space_ruin_levels": 0,
+	"exclude_from_ci": true
+}

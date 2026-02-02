@@ -97,7 +97,7 @@
 /obj/item/ore/coal
 	name = "coal"
 	icon_state = "orecoal1"
-	firefuel = 5 MINUTES
+	firefuel = 10 MINUTES
 	smeltresult = /obj/item/ore/coal
 	sellprice = 1
 	item_weight = 7
@@ -120,7 +120,7 @@
 	desc = "Burnt lumps of wood."
 	dropshrink = 0.8
 	color = "#929292"
-	firefuel = 15 MINUTES
+	firefuel = 30 MINUTES
 	smeltresult = /obj/item/ore/coal/charcoal
 	sellprice = 1
 
@@ -137,28 +137,20 @@
 	grid_height = 32
 	melt_amount = 100
 	var/datum/anvil_recipe/currecipe
-	var/quality = SMELTERY_LEVEL_NORMAL
 
 /obj/item/ingot/examine()
 	. += ..()
 	if(currecipe)
-		. += "<span class='warning'>It is currently being worked on to become [currecipe.recipe_name].</span>"
+		. += span_warning("It is currently being worked on to become [currecipe.get_display_name()].")
 
 /obj/item/ingot/Initialize(mapload, smelt_quality)
 	. = ..()
 	if(smelt_quality)
-		quality = smelt_quality
+		recipe_quality = smelt_quality
 		smelted = TRUE
-		switch(quality)
-			if(SMELTERY_LEVEL_SPOIL)
-				name = "spoilt [name]"
-				desc += " It is practically scrap."
-			if(SMELTERY_LEVEL_POOR)
-				name = "poor-quality [name]"
-				desc += " It is of dubious quality." // EA NASSIR, WHEN I GET YOU...
-			if(SMELTERY_LEVEL_GOOD)
-				name = "good-quality [name]"
-				desc += " It is of exquisite quality."
+	var/datum/quality_calculator/metallurgy/metal_calc = new()
+	metal_calc.apply_smelt_to_ingot(src, recipe_quality, TRUE)
+	qdel(metal_calc)
 
 /obj/item/ingot/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/weapon/tongs))
@@ -172,6 +164,14 @@
 		T.held_item = src
 		T.hott = null
 		T.update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/ingot/attack_hand_secondary(mob/user, list/modifiers)
+	if(currecipe)
+		to_chat(user, span_notice("You begin canceling the recipe of [currecipe.get_display_name()]."))
+		if(do_after(user, 5 SECONDS, src, display_over_user = TRUE))
+			currecipe = null
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	. = ..()
 
 /obj/item/ingot/Destroy()
 	if(currecipe)
@@ -259,11 +259,42 @@
 	melting_material = /datum/material/steel
 	item_weight = 7.5 * STEEL_MULTIPLIER
 
+/obj/item/ingot/steelholy/
+	name = "holy steel bar"
+	desc = "This ingot of steel has been touched by Malum. It radiates heat, even when outside a forge."
+	icon_state = "ingotsteelholy"
+	melting_material = /datum/material/steel //Smelting it removes the blessing
+	sellprice = 20
+
+/obj/item/ingot/silverblessed/
+	name = "blessed silver bar"
+	desc = "This bar radiates a divine purity. Treasured by the realms and commonly found in Psydonic weaponry."
+	icon_state = "ingotsilvblessed"
+	melting_material = /datum/material/silver
+	sellprice = 100
+
+/obj/item/ingot/silverblessed/bullion
+	name = "blessed silver bullion"
+	desc = "This bar radiates a divine purity. The Psycross and the words cast into the surface denotes the Oratorium Throni Vacui as the point of its origin."
+	icon_state = "ingotsilvblessed_psy"
+	melting_material = /datum/material/silver
+	sellprice = 100
+
+
 /obj/item/ingot/blacksteel
 	name = "blacksteel bar"
-	desc = "Sacrificing the holy elements of silver for raw strength, this strange and powerful ingot's origin carries dark rumors.."
+	desc = "Sacrificing the holy elements of silver for raw strength, this strange and powerful ingot's origin carries dark rumors..."
 	icon_state = "ingotblacksteel"
 	smeltresult = /obj/item/ingot/blacksteel
 	sellprice = 90
 	melting_material = /datum/material/blacksteel
 	item_weight = 7.5 * BLACKSTEEL_MULTIPLIER
+
+/obj/item/ingot/steel_slag
+	name = "steel slag"
+	desc = "Slag containing steel, the result of blooming iron and coal."
+	icon_state = "steel_slag"
+	smeltresult = /obj/item/ingot/steel_slag
+	sellprice = 90
+	melting_material = /datum/material/steel
+	item_weight = 7.5 * STEEL_MULTIPLIER

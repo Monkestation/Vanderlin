@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	buttons = list()
 	li_cb = CALLBACK(src, PROC_REF(post_login))
 	holder.player_details.post_login_callbacks += li_cb
-	create_buttons()
+	create_buttons(c)
 	holder.screen += buttons
 	holder.click_intercept = src
 	mode.enter_mode(src)
@@ -129,18 +129,23 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 /**
  * Create the buildmode UI buttons
  */
-/datum/buildmode/proc/create_buttons()
-	modebutton = new /atom/movable/screen/buildmode/mode(src)
+/datum/buildmode/proc/create_buttons(client/client)
+	var/datum/hud/hud_used = client?.mob?.hud_used
+	modebutton = new /atom/movable/screen/buildmode/mode(null, hud_used, src)
 	buttons += modebutton
-	buttons += new /atom/movable/screen/buildmode/help(src)
-	dirbutton = new /atom/movable/screen/buildmode/bdir(src)
+	buttons += new /atom/movable/screen/buildmode/help(null, hud_used, src)
+	dirbutton = new /atom/movable/screen/buildmode/bdir(null, hud_used, src)
 	buttons += dirbutton
-
-	categorybutton = new /atom/movable/screen/buildmode/category(src)
+	categorybutton = new /atom/movable/screen/buildmode/category(null, hud_used, src)
 	buttons += categorybutton
-	buttons += new /atom/movable/screen/buildmode/quit(src)
-	build_options_grid(subtypesof(/datum/buildmode_mode), modeswitch_buttons, /atom/movable/screen/buildmode/modeswitch)
-	build_options_grid(list(SOUTH, EAST, WEST, NORTH, NORTHWEST), dirswitch_buttons, /atom/movable/screen/buildmode/dirswitch)
+
+	var/atom/movable/screen/buildmode/items/itembutton = new(null, hud_used, src)
+	buttons += itembutton
+
+	buttons += new /atom/movable/screen/buildmode/quit(null, hud_used, src)
+
+	build_options_grid(subtypesof(/datum/buildmode_mode), modeswitch_buttons, /atom/movable/screen/buildmode/modeswitch, hud_used)
+	build_options_grid(list(SOUTH, EAST, WEST, NORTH, NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST), dirswitch_buttons, /atom/movable/screen/buildmode/dirswitch, hud_used)
 	build_options_grid(list(
 		BM_CATEGORY_TURF,
 		BM_CATEGORY_OBJ,
@@ -150,7 +155,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 		BM_CATEGORY_CLOTHING,
 		BM_CATEGORY_REAGENT_CONTAINERS,
 		BM_CATEGORY_FOOD,
-	), category_buttons, /atom/movable/screen/buildmode/categoryswitch)
+	), category_buttons, /atom/movable/screen/buildmode/categoryswitch, hud_used)
 
 /**
  * Create or update the preview appearance that follows the cursor
@@ -257,6 +262,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	else
 		preview_image.pixel_x = pixel_x_offset
 		preview_image.pixel_y = pixel_y_offset
+	preview_image.dir = build_dir
 
 /**
  * Clear the current preview
@@ -373,7 +379,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	var/datum/buildmode/parent_buildmode
 	var/skip = FALSE
 
-/atom/movable/buildmode_pixel_dummy/New(loc, datum/buildmode/bm)
+/atom/movable/buildmode_pixel_dummy/Initialize(mapload, datum/buildmode/bm)
 	. = ..()
 	parent_buildmode = bm
 

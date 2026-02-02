@@ -35,15 +35,17 @@
 				// The code below finally fixes the targetting order of armor > shirt > flesh. - Foxtrot (#gundamtanaka)
 				var/obj/item/armorworn = src.get_item_by_slot(ITEM_SLOT_ARMOR) // The armor we're wearing
 				var/obj/item/shirtworn = src.get_item_by_slot(ITEM_SLOT_SHIRT) // The shirt we're wearing
-				if(bp == armorworn) // If the targeted bodypart has an armor...
+				var/armor_protection = 0 // We are going to check if the armor protects more than the shirt.
+				if(bp == armorworn && (armorworn.uses_integrity && armorworn.get_integrity() > 0) && zone2covered(def_zone, armorworn.body_parts_covered)) // If the targeted bodypart has an armor...
 					if(val > 0) // ...and it's an actual armor with armor values...
 						if(val > protection)
 							protection = val
+							armor_protection = val
 							used = armorworn // ...force us to use it above all!
 				// If we don't have armor equipped or the one we have is broken...
-				else if(bp == shirtworn && (!armorworn || (armorworn.uses_integrity && armorworn.get_integrity() <= 0) || !zone2covered(def_zone, armorworn.body_parts_covered)))
+				else if(bp == shirtworn)
 					if(val > 0) // ...and it's not just a linen shirt...
-						if(val > protection)
+						if(val > protection && val > armor_protection)
 							protection = val
 							if(skin_armor)
 								used = skin_armor
@@ -55,18 +57,27 @@
 						if(val > protection)
 							protection = val
 							used = C
+
+	var/obj/item/clothing/cloak/boiler/steam_boiler = get_item_by_slot(ITEM_SLOT_BACK_R) || get_item_by_slot(ITEM_SLOT_BACK_L)
+	if(!istype(steam_boiler))
+		steam_boiler = null
+
+	var/boiler_damage = damage / 5
+
 	if(used)
-		if(!blade_dulling)
-			blade_dulling = BCLASS_BLUNT
 		if(used.blocksound)
-			playsound(loc, get_armor_sound(used.blocksound, blade_dulling), 100)
+			playsound(src, get_armor_sound(used.blocksound, blade_dulling), 100)
 		used.take_damage(damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
+
+	if(steam_boiler && def_zone == BODY_ZONE_CHEST)
+		steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
+
 	if(physiology)
 		protection += physiology.armor.getRating(d_type)
 	return protection
 
 /// Return the armor that blocks the crit
-/mob/living/carbon/human/proc/checkcritarmor(def_zone, d_type)
+/mob/living/carbon/human/proc/check_crit_armor(def_zone, d_type)
 	if(!d_type)
 		return FALSE
 	var/obj/item/clothing/best_armor
@@ -204,7 +215,7 @@
 		blocked = TRUE
 	else if(I)
 		if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
-			if(can_embed(I) && prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+			if(I.can_embed() && prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 				//throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 				var/obj/item/bodypart/L = pick(bodyparts)
 				L.add_embedded_object(I, silent = FALSE, crit_message = TRUE)
@@ -270,12 +281,12 @@
 	if(M.used_intent.type == INTENT_DISARM) //Always drop item in hand, if no item, get stunned instead.
 		var/obj/item/I = get_active_held_item()
 		if(I && dropItemToGround(I, silent = FALSE))
-			playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
+			playsound(src, 'sound/blank.ogg', 25, TRUE, -1)
 			visible_message("<span class='danger'>[M] disarmed [src]!</span>", \
 							"<span class='danger'>[M] disarmed you!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, M)
 			to_chat(M, "<span class='danger'>I disarm [src]!</span>")
 		else if(!M.client || prob(5)) // only natural monkeys get to stun reliably, (they only do it occasionaly)
-			playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
+			playsound(src, 'sound/blank.ogg', 25, TRUE, -1)
 			if(HAS_TRAIT(src, TRAIT_FLOORED) && !IsParalyzed())
 				Paralyze(40)
 				log_combat(M, src, "pinned")
@@ -334,6 +345,9 @@
 			return FALSE
 
 /mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+	if(HAS_TRAIT(src, TRAIT_BOMBIMMUNE))
+		return
+
 	..()
 	if (!severity)
 		return
@@ -547,7 +561,7 @@
 		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
 			to_chat(src, "<span class='notice'>I attempt to remove the durathread strand from around my neck.</span>")
 			if(do_after(src, 3.5 SECONDS, src))
-				to_chat(src, "<span class='notice'>I succesfuly remove the durathread strand.</span>")
+				to_chat(src, "<span class='notice'>I successfully remove the durathread strand.</span>")
 				remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 			return
 		check_for_injuries(M)

@@ -33,18 +33,6 @@
 
 	food_type = /obj/item/reagent_containers/food/snacks/organ/heart
 
-/obj/item/organ/heart/Destroy()
-	for(var/datum/culling_duel/D in GLOB.graggar_cullings)
-		var/obj/item/organ/heart/d_challenger_heart = D.challenger_heart?.resolve()
-		var/obj/item/organ/heart/d_target_heart = D.target_heart?.resolve()
-		if(src == d_challenger_heart)
-			D.handle_heart_destroyed("challenger")
-			continue
-		else if(src == d_target_heart)
-			D.handle_heart_destroyed("target")
-			continue
-	return ..()
-
 /obj/item/organ/heart/examine(mob/user)
 	. = ..()
 	if(IsAdminGhost(user) && inscryptions)
@@ -130,7 +118,7 @@
 			H.stop_sound_channel(CHANNEL_HEARTBEAT)
 			beat = BEAT_NONE
 
-		if(H.jitteriness)
+		if(H.has_status_effect(/datum/status_effect/jitter))
 			if(H.health > HEALTH_THRESHOLD_FULLCRIT && (!beat || beat == BEAT_SLOW))
 				H.playsound_local(get_turf(H),fastbeat,40,0, channel = CHANNEL_HEARTBEAT)
 				beat = BEAT_FAST

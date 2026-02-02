@@ -4,62 +4,34 @@
 /turf/open/floor/dirt,
 /area/template_noop)
 "b" = (
-/obj/structure/irrigation_channel,
-/turf/open/floor/cobblerock,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "n" = (
-/obj/structure/closet/crate/chest/wicker{
-	pixel_y = -1;
-	pixel_x = -11
-	},
-/obj/structure/closet/crate/chest/wicker{
-	pixel_x = -29
-	},
-/obj/structure/closet/crate/chest/wicker{
-	pixel_x = -20;
-	pixel_y = 12;
-	layer = 2.91
-	},
-/turf/open/floor/dirt,
+/turf/closed/mineral,
 /area/template_noop)
 "p" = (
-/turf/closed/mineral/bedrock,
-/area/template_noop)
-"r" = (
 /obj/structure/irrigation_channel,
-/turf/open/floor/dirt,
+/obj/machinery/light/fueled/wallfire/candle/skull/r,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "u" = (
-/obj/structure/soil,
-/turf/open/floor/cobblerock,
+/obj/machinery/light/fueled/wallfire/candle/skull,
+/turf/open/floor/herringbone,
 /area/template_noop)
-"v" = (
+"D" = (
+/turf/closed/wall/mineral/underbrick,
+/area/template_noop)
+"M" = (
 /obj/structure/irrigation_channel,
-/turf/open/floor/blocks,
+/turf/open/floor/herringbone,
 /area/template_noop)
-"y" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/cobblerock,
-/area/template_noop)
-"z" = (
+"P" = (
+/obj/structure/soil,
 /obj/effect/building_node/farm,
 /turf/open/floor/dirt,
 /area/template_noop)
-"D" = (
-/turf/open/floor/dirt,
-/area/template_noop)
-"F" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/dirt,
-/area/template_noop)
-"M" = (
-/obj/structure/soil,
-/turf/open/floor/blocks,
-/area/template_noop)
-"P" = (
-/turf/open/floor/cobblerock,
-/area/template_noop)
 "Q" = (
+/obj/effect/waterfall,
 /turf/open/water,
 /area/template_noop)
 "W" = (
@@ -67,88 +39,59 @@
 /obj/effect/workspot,
 /turf/open/floor/dirt,
 /area/template_noop)
-"Z" = (
-/turf/open/floor/blocks,
-/area/template_noop)
 
 (1,1,1) = {"
-Q
-r
-r
-r
-r
 D
-y
+n
+Q
+M
+M
+M
+M
+M
+M
 "}
 (2,1,1) = {"
-P
-v
+D
+u
+M
+W
+W
+M
+W
 a
-a
-b
-Z
-P
+M
 "}
 (3,1,1) = {"
-p
-r
+b
+b
+M
+a
+P
+M
+a
 a
 M
-b
-D
-P
 "}
 (4,1,1) = {"
-p
-v
-F
-M
-r
-z
-n
-"}
-(5,1,1) = {"
-p
 b
+b
+p
+W
+a
+p
 a
 W
-r
-D
-D
-"}
-(6,1,1) = {"
-D
-r
-a
-u
-v
-Z
-Z
-"}
-(7,1,1) = {"
-D
-b
-a
-u
-r
-D
-P
-"}
-(8,1,1) = {"
-Z
-b
-M
-a
-r
-Z
 p
 "}
-(9,1,1) = {"
-F
+(5,1,1) = {"
+b
+b
 D
-Z
+b
+b
 D
+b
+b
 D
-D
-p
 "}

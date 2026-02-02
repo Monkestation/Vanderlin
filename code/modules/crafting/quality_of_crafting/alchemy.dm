@@ -5,7 +5,7 @@
 	category = "Alchemy"
 
 /datum/repeatable_crafting_recipe/alchemy/essence_connector
-	name = "Essence Connector"
+	name = "Pestran Connector"
 	output = /obj/item/essence_connector
 	requirements = list(
 		/obj/item/ingot/thaumic = 1,

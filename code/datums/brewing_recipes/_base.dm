@@ -82,7 +82,7 @@
 	// Get brewing skill for the quality calculator
 	var/brewing_skill = 0
 	if(user.mind)
-		brewing_skill = user.get_skill_level(/datum/skill/craft/cooking) || 0
+		brewing_skill = user.get_skill_level(/datum/skill/craft/cooking) + user.get_inspirational_bonus() || 0
 
 	// Create quality calculator with the calculated quality
 	var/datum/quality_calculator/brewing/brew_calc = new(
@@ -150,7 +150,7 @@
 	// Get the user's brewing skill (with cooking as fallback)
 	var/brewing_skill = 0
 	if(user.mind)
-		brewing_skill = user.get_skill_level(/datum/skill/craft/cooking) || 0
+		brewing_skill = user.get_skill_level(/datum/skill/craft/cooking) + user.get_inspirational_bonus() || 0
 
 	// Use the quality calculator to determine final quality (matching cooking system)
 	var/datum/quality_calculator/brewing/brew_calc = new(

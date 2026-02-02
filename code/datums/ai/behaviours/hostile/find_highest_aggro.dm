@@ -227,3 +227,16 @@
 	if(succeeded)
 		var/mob/living/pawn = controller.pawn
 		pawn.say(pick(GLOB.bum_aggro))
+
+/datum/ai_behavior/find_aggro_targets/species_hostile/finish_action(datum/ai_controller/controller, succeeded, ...)
+	. = ..()
+	if(succeeded)
+		var/mob/living/pawn = controller.pawn
+		pawn.emote("rage")
+		pawn.say(pick(GLOB.species_hostile))
+
+/datum/ai_behavior/find_aggro_targets/species_hostile/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
+	. = ..()
+	var/mob/living/pawn = controller.pawn
+	if(pawn)
+		pawn.cmode = FALSE

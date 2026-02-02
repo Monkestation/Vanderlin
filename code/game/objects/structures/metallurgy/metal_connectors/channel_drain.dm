@@ -79,6 +79,8 @@
 		// For automatic draining, use the most abundant metal
 		var/highest_amount = 0
 		for(var/datum/material/material as anything in channel_metal.data)
+			if(!ispath(material))
+				continue
 			if(channel.group_reagents.chem_temp >= initial(material.melting_point))
 				if(channel_metal.data[material] > highest_amount)
 					highest_amount = channel_metal.data[material]

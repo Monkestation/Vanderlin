@@ -9,12 +9,6 @@
 	valid_outputs = list(/obj/item/alch/viscera = 1)
 	bonus_chance_outputs = list(/obj/item/alch/viscera = 75)
 
-/datum/alch_grind_recipe/organs
-	picky = FALSE
-	valid_input = /obj/item/organ
-	valid_outputs = list(/obj/item/alch/viscera = 1)
-	bonus_chance_outputs = list(/obj/item/alch/viscera = 33)
-
 //Objects -> dusts
 /datum/alch_grind_recipe/crow
 	valid_input = /obj/item/reagent_containers/food/snacks/crow
@@ -28,7 +22,7 @@
 
 /datum/alch_grind_recipe/horn
 	valid_input = /obj/item/alch/horn
-	valid_outputs = list(/obj/item/alch/earthdust = 1,/obj/item/fertilizer/bone_meal = 2)
+	valid_outputs = list(/obj/item/alch/earthdust = 1, /obj/item/fertilizer/bone_meal = 2)
 	bonus_chance_outputs = list(/obj/item/alch/earthdust = 66)
 
 /datum/alch_grind_recipe/fish
@@ -36,6 +30,17 @@
 	valid_input = /obj/item/reagent_containers/food/snacks/fish
 	valid_outputs = list(/obj/item/alch/waterdust = 2) // makes fish worth buying , fisher/apothecary combo
 	bonus_chance_outputs = list(/obj/item/alch/waterdust = 25 ,/obj/item/fertilizer/bone_meal = 33)
+
+/datum/alch_grind_recipe/leech
+	picky = FALSE
+	valid_input = /obj/item/natural/worms/leech
+	valid_outputs = list(/obj/item/alch/waterdust = 1) //easy source of waterdust
+	bonus_chance_outputs = list(/obj/item/alch/waterdust = 10)
+
+/datum/alch_grind_recipe/worm
+	valid_input = /obj/item/natural/worms
+	valid_outputs = list(/obj/item/alch/earthdust = 1) //easy source of earthdust
+	bonus_chance_outputs = list(/obj/item/alch/earthdust = 10)
 
 /datum/alch_grind_recipe/swampweed
 	valid_input = /obj/item/reagent_containers/food/snacks/produce/swampweed
@@ -65,7 +70,7 @@
 /datum/alch_grind_recipe/poppy
 	valid_input = /obj/item/reagent_containers/food/snacks/produce/poppy
 	valid_outputs = list(/obj/item/reagent_containers/powder/ozium = 1)
-	bonus_chance_outputs = list(/obj/item/alch/airdust =33 ,/obj/item/alch/earthdust = 33)
+	bonus_chance_outputs = list(/obj/item/alch/airdust =33 ,/obj/item/alch/earthdust = 33, /obj/item/reagent_containers/powder/ozium = 10)
 
 /datum/alch_grind_recipe/manabloom
 	valid_input = /obj/item/reagent_containers/food/snacks/produce/manabloom
@@ -78,16 +83,10 @@
 	valid_outputs = list(/obj/item/alch/seeddust = 1)
 	bonus_chance_outputs = list(/obj/item/alch/airdust =25,/obj/item/alch/earthdust = 25)
 
-/datum/alch_grind_recipe/seedsherb
-	picky = FALSE
-	valid_input = /obj/item/neuFarm/seed
-	valid_outputs = list(/obj/item/alch/seeddust = 1)
-	bonus_chance_outputs = list(/obj/item/alch/airdust =25,/obj/item/alch/earthdust = 25)
-
 /datum/alch_grind_recipe/ozium
 	valid_input = /obj/item/reagent_containers/powder/ozium
 	valid_outputs = list(/obj/item/alch/ozium = 1)
-	bonus_chance_outputs = list(/obj/item/alch/airdust =25,/obj/item/alch/ozium = 25)
+	bonus_chance_outputs = list(/obj/item/alch/ozium = 50)
 
 //Ores -> dust
 /datum/alch_grind_recipe/gold_ore
@@ -194,4 +193,3 @@
 /datum/alch_grind_recipe/euphorbia_seed
 	valid_input = /obj/item/alch/herb/euphorbia
 	valid_outputs = list(/obj/item/neuFarm/seed/euphorbia = 1)
-

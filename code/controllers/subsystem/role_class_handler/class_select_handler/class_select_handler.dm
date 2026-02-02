@@ -1,63 +1,66 @@
-/*
-	Here we go, the class select handler
-*/
 /datum/class_select_handler
 	var/client/linked_client //the ss will link it!
-	//Well, we basically need to fill out our options
 
-/*
-	This list is organized like so
-	class_cat_alloc_attempts = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 3, etc)
-	Wherein you will have this datum attempt to roll you up 5 pilgrim category classes, and 3 adventurer class categories
-*/
+	/**
+	 *	This list is organized like so
+	 *	class_cat_alloc_attempts = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 3, etc)
+	 *	Wherein you will have this datum attempt to roll you up 5 pilgrim category classes, and 3 adventurer class categories
+	 *	This only counts towards non rare classes with roll_chance of 100 and classes with bypass_class_cat_limits = FALSE.
+	 */
 	var/list/class_cat_alloc_attempts
 
-	// Whether we bypass reqs on class cat alloc attempts
+	/// Whether we bypass reqs on class cat alloc attempts
 	var/class_cat_alloc_bypass_reqs = FALSE
 
-/*
-	This list is organized exactly like the class_cat_alloc_attempts the numbers dictate how many plusboosts we give to the category
-	class_cat_alloc_attempts = list(CTAG_PILGRIM = 3, CTAG_ADVENTURER = 2, etc)
-	If you put a number in, it will attempt to allocate it to the cat
-*/
+	/**
+	 *	This list is organized exactly like the class_cat_alloc_attempts the numbers dictate how many plusboosts we give to the category
+	 *	class_cat_alloc_attempts = list(CTAG_PILGRIM = 3, CTAG_ADVENTURER = 2, etc)
+	 *	If you put a number in, it will attempt to allocate it to the cat
+	 */
 	var/list/class_cat_plusboost_attempts
 
-/*
-	This list is organized like so
-	forced_class_additions = list(datum/advclass/filled_class)
-	Wherein the class will just be forced onto the list to be displayed
-*/
+	/**
+	 *	This list is organized like so
+	 *	forced_class_additions = list(datum/job/advclass/filled_class)
+	 *	Wherein the class will just be forced onto the list to be displayed
+	 */
 	var/list/forced_class_additions
 
-	// Whether we bypass reqs on these forced classes
+	/// Whether we bypass reqs on these forced classes
 	var/forced_class_bypass_reqs = TRUE
 
-	// If this has a number above 0 we will plusboost this many guys
+	/// If this has a number above 0 we will plusboost this many guys
 	var/forced_class_plusboost = 0
 
+	// Working Vars - aka we are using these to just do work
 
-
-
-/*
-	Working Vars - aka we are using these to just do work
-*/
-	// Special session queue classes - aka a connector to the special_session_queue
+	/// Special session queue classes - aka a connector to the special_session_queue
 	var/list/special_session_queue
 
-	// Local cache of sorted shit
-	var/list/local_sorted_class_cache = list()
+	/// Local cache of sorted shit
+	var/list/local_total_sorted_class_cache = list()
 
-	//Current class we lookin at and its boost power
-	var/datum/advclass/cur_picked_class
-	var/plus_power = 0
-	// If this is set to true we don't run some other menu updating shit in the off-chance we max out our stupid shit
+	/// Current class we lookin at
+	var/datum/job/advclass/cur_picked_class
+
+	/// If this is set to true we don't run some other menu updating shit in the off-chance we max out our stupid shit
 	var/special_selected = FALSE
 
-	// If this is set to true we display all the challenge classes
+	/// If this is set to true we display all the challenge classes
 	var/showing_combat_classes = FALSE
 
-	//classes we rolled, basically you get a datum followed by a number in here on how many times you rerolled it.
+	/// classes we rolled, basically you get a datum followed by a number in here on how many times you rerolled it.
 	var/list/rolled_classes = list()
+
+/datum/class_select_handler/Destroy()
+	if(linked_client)
+		ForceCloseMenus()
+		SSrole_class_handler.class_select_handlers -= linked_client.ckey
+	linked_client = null
+	cur_picked_class = null
+	class_cat_alloc_attempts = null
+	forced_class_additions = null
+	return ..()
 
 // The normal route for first use of this list.
 /datum/class_select_handler/proc/initial_setup()
@@ -71,96 +74,97 @@
 
 	browser_slop()
 
-/datum/class_select_handler/Destroy()
-	ForceCloseMenus() // force menus closed
-	// Cleanup anything holding references, aka these lists holding refs to class datums and the other two
-	linked_client = null
-	cur_picked_class = null
-	class_cat_alloc_attempts = null
-	forced_class_additions = null
-	. = ..()
-
 // I hope to god you have a client before you call this, cause the checks on the SS
 /datum/class_select_handler/proc/assemble_the_CLASSES()
-	var/mob/living/carbon/human/H = linked_client.mob
+	var/mob/living/carbon/human/human_mob = linked_client.mob
+
+	//Pick any class override
+	if(SSrole_class_handler.special_session_queue && SSrole_class_handler.special_session_queue[human_mob.ckey])
+		var/list/player_queue = SSrole_class_handler.special_session_queue[human_mob.ckey]
+		if(TRIUMPH_BUY_ANY_CLASS in player_queue)
+			var/datum/job/advclass/pick_everything/picker = player_queue[TRIUMPH_BUY_ANY_CLASS]
+
+			rolled_classes = list(picker = 0)
+			local_total_sorted_class_cache = list(CTAG_ALLCLASS = list(picker))
+			showing_combat_classes = FALSE
+
+			browser_slop()
+			return
 
 	// Time to sort and find our viable classes depending on what conditions we gotta deal w
-	if(class_cat_alloc_attempts && class_cat_alloc_attempts.len)
+	if(length(class_cat_alloc_attempts))
 		for(var/SORT_CAT_KEY in class_cat_alloc_attempts)
 			var/list/subsystem_ctag_list = SSrole_class_handler.sorted_class_categories[SORT_CAT_KEY]
 			var/list/local_insert_sortlist = list()
+			var/list/local_bypass_limit_insert_sortlist = list() // This is not affected by the class_cat_alloc_attempts
+			var/list/local_total_insert_sortlist = list()
 
-			if(class_cat_alloc_bypass_reqs)
-				for(var/datum/advclass/CUR_AZZ in subsystem_ctag_list)
-					if(rolled_classes[CUR_AZZ])
-						continue
-					if(is_advclass_banned(H.ckey, CUR_AZZ.name))
-						continue
-					local_insert_sortlist += CUR_AZZ
-
-			else // If we are not bypassing reqs, time to do a req check
-				for(var/datum/advclass/CUR_AZZ in subsystem_ctag_list)
-					if(rolled_classes[CUR_AZZ])
-						continue
-					if(is_advclass_banned(H.ckey, CUR_AZZ.name))
-						continue
-					if(CUR_AZZ.check_requirements(H))
+			for(var/datum/job/advclass/CUR_AZZ in subsystem_ctag_list)
+				if(rolled_classes[CUR_AZZ])
+					continue
+				if(is_advclass_banned(human_mob.ckey, CUR_AZZ.title))
+					continue
+				if(class_cat_alloc_bypass_reqs || CUR_AZZ.check_requirements(human_mob))
+					local_total_insert_sortlist += CUR_AZZ
+					if(CUR_AZZ.roll_chance < 100 || CUR_AZZ.bypass_class_cat_limits)
+						local_bypass_limit_insert_sortlist += CUR_AZZ
+					else
 						local_insert_sortlist += CUR_AZZ
 
 			// Time to do some picking, make sure we got things in the list we dealin with
-			if(local_insert_sortlist.len)
+			if(length(local_total_insert_sortlist))
 				// Make sure we aren't going to attempt to pick more than what we even have avail
-				var/job_rolls = min(class_cat_alloc_attempts[SORT_CAT_KEY], local_insert_sortlist.len)
+				var/job_rolls = min(class_cat_alloc_attempts[SORT_CAT_KEY], length(local_insert_sortlist))
 
+				var/bypass_limit_rolls = length(local_bypass_limit_insert_sortlist)
+
+				local_insert_sortlist = shuffle(local_insert_sortlist) // Shuffles to prevent the same classes every time
 				for(var/i in 1 to job_rolls)
 					rolled_classes[local_insert_sortlist[i]] = 0
+
+				if(bypass_limit_rolls)
+					for(var/i in 1 to bypass_limit_rolls)
+						rolled_classes[local_bypass_limit_insert_sortlist[i]] = 0
 
 				// We are plusboosting too
 				if(class_cat_plusboost_attempts && (SORT_CAT_KEY in class_cat_plusboost_attempts))
 					if(class_cat_plusboost_attempts[SORT_CAT_KEY])
 						for(var/i in 1 to class_cat_plusboost_attempts[SORT_CAT_KEY])
-							var/datum/advclass/boostclass = pick(local_insert_sortlist)
+							var/datum/job/advclass/boostclass = pick(local_total_insert_sortlist)
 							if(boostclass in rolled_classes)
 								rolled_classes[boostclass] += 1
 
-				local_sorted_class_cache[SORT_CAT_KEY] = local_insert_sortlist
+				local_total_sorted_class_cache[SORT_CAT_KEY] = local_total_insert_sortlist
 
 	// If we got forced class additions
-	if(forced_class_additions && forced_class_additions.len)
-		if(forced_class_bypass_reqs)
-			for(var/uninstanced_azz_types in forced_class_additions)
-				var/datum/advclass/FORCE_IT_IN = new uninstanced_azz_types
-				if(rolled_classes[FORCE_IT_IN])
-					continue
-				rolled_classes[FORCE_IT_IN] = 0
-		else
-			for(var/uninstanced_azz_types in forced_class_additions)
-				var/datum/advclass/FORCE_IT_IN = new uninstanced_azz_types
-				if(rolled_classes[FORCE_IT_IN])
-					continue
-				if(FORCE_IT_IN.check_requirements(H))
-					rolled_classes[FORCE_IT_IN] = 0
+	if(length(forced_class_additions))
+		for(var/uninstanced_azz_types in forced_class_additions)
+			var/datum/job/advclass/forced_class = SSjob.GetJobType(uninstanced_azz_types)
+			if(rolled_classes[forced_class])
+				continue
+			if(class_cat_alloc_bypass_reqs || forced_class.check_requirements(human_mob))
+				rolled_classes[forced_class] = 0
 
 		if(forced_class_plusboost)
 			for(var/i in 1 to forced_class_plusboost)
-				var/datum/advclass/boostclass = pick(rolled_classes)
+				var/datum/job/advclass/boostclass = pick(rolled_classes)
 				if(boostclass.type in forced_class_additions)
 					rolled_classes[boostclass] += 1
 
-	if(!rolled_classes.len)
+	if(!length(rolled_classes))
 		linked_client.mob.returntolobby()
 		message_admins("[linked_client.ckey] had 0 classes to select options, returned them to lobby. Please ask what class they were rolling and tell coders.")
 
 // Something is calling to tell this datum a class it rolled is currently maxed out.
 // More shitcode!
-/datum/class_select_handler/proc/rolled_class_is_full(datum/advclass/filled_class)
+/datum/class_select_handler/proc/rolled_class_is_full(datum/job/advclass/filled_class)
 	// Fun fact, if you don't remove the class that is maxed they just get new choices infinitely
 	// Also all the checks are done causing this to be called anyways
-	rolled_classes.Remove(filled_class)
+	rolled_classes -= filled_class
 
 	var/list/possible_list = list()
 	for(var/CTAG_CAT in filled_class.category_tags)
-		for(var/datum/advclass/new_age_datum in local_sorted_class_cache[CTAG_CAT])
+		for(var/datum/job/advclass/new_age_datum in local_total_sorted_class_cache[CTAG_CAT])
 			if(new_age_datum in rolled_classes)
 				continue
 			if(new_age_datum in possible_list) // In the offchance we got the datum in two cats, we don't want to cuck them by doubling up the chance to get it
@@ -218,33 +222,14 @@
 	if(!H.job)
 		return
 
-	// supposed to check for adventurer but this would break behaviour
-	if(H.job == "Drifter" && !showing_combat_classes)
-		for(var/datum/advclass/datums in rolled_classes)
-			if(!(CTAG_ADVENTURER in datums.category_tags))
-				continue
-			if((CTAG_BANDIT in datums.category_tags) && HAS_TRAIT(H, TRAIT_VILLAIN))
-				continue
+	if(!showing_combat_classes)
+		for(var/datum/job/advclass/datums in rolled_classes)
 			var/plus_str = ""
 			data += {"
 			<div class='class_bar_div'>
 				<a class='vagrant' href='byond://?src=\ref[src];class_selected=1;selected_class=\ref[datums];'>
 					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
-					[datums.name]
-					<span id='green_plussa'>[plus_str]</span>
-					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
-				</a>
-			</div>
-	"}
-
-	else if(!showing_combat_classes)
-		for(var/datum/advclass/datums in rolled_classes)
-			var/plus_str = ""
-			data += {"
-			<div class='class_bar_div'>
-				<a class='vagrant' href='byond://?src=\ref[src];class_selected=1;selected_class=\ref[datums];'>
-					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
-					[datums.name]
+					[datums.title]
 					<span id='green_plussa'>[plus_str]</span>
 					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
 				</a>
@@ -252,19 +237,19 @@
 	"}
 
 	if(special_session_queue && special_session_queue.len)
-		for(var/datum/advclass/datums in special_session_queue)
+		for(var/datum/job/advclass/datums in special_session_queue)
 			data += {"
 			<div class='class_bar_div'>
 				<a class='vagrant' href='byond://?src=\ref[src];special_selected=1;selected_special=\ref[datums];'>
 					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
-					[datums.name]
+					[datums.title]
 					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
 				</a>
 			</div>
 	"}
 
 	if(showing_combat_classes)
-		for(var/datum/advclass/datums in rolled_classes)
+		for(var/datum/job/advclass/datums in rolled_classes)
 			if(!(CTAG_PILGRIM in datums.category_tags))
 				continue
 			var/plus_str = ""
@@ -272,7 +257,7 @@
 			<div class='class_bar_div'>
 				<a class='vagrant' href='byond://?src=\ref[src];class_selected=1;selected_class=\ref[datums];'>
 					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
-					[datums.name]
+					[datums.title]
 					<span id='green_plussa'>[plus_str]</span>
 					<img class='ninetysskull' src='[SSassets.transport.get_asset_url("gragstar.gif")]' width=32 height=32>
 				</a>
@@ -296,7 +281,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta title="viewport" content="width=device-width, initial-scale=1.0">
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
 			@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
@@ -316,7 +301,7 @@
 	<body>
 		<div id="button_div">
 			<span class="title_shit">Class Name:</span>
-			<span class="post_title_shit">[cur_picked_class]</span><br>
+			<span class="post_title_shit">[cur_picked_class.title]</span><br>
 			<span class="title_shit">Description:</span>
 			<span class="post_title_shit">[cur_picked_class.tutorial]</span>
 		</div>
@@ -340,7 +325,6 @@
 
 		// shiiiiiiiiiiiiiiiiet
 		if(locvar_check in SSrole_class_handler.sorted_class_categories[CTAG_CHALLENGE])
-			plus_power = 0
 			cur_picked_class = locvar_check
 			class_select_slop()
 			return
@@ -348,17 +332,15 @@
 		// Safety check. Make sure the thing that got rammed into the href is actually in the rolled list
 		// Unless its a challenge class then everyone can jus see it via a click of the button anyways
 		if(locvar_check in rolled_classes)
-			plus_power = rolled_classes[locvar_check]	// Get the plus power too
 			cur_picked_class = locvar_check
 			class_select_slop()
 		return
 
 	if(href_list["yes_to_class_select"]) // Send the data over and wrap it up.
-		SSrole_class_handler.finish_class_handler(linked_client.mob, cur_picked_class, src, plus_power, special_selected)
+		SSrole_class_handler.finish_class_handler(linked_client.mob, cur_picked_class, src, special_selected)
 		return
 
 	if(href_list["no_to_class_select"]) // Close the selector window
-		plus_power = 0
 		cur_picked_class = null
 		linked_client << browse(null, "window=class_select_yea")
 		return

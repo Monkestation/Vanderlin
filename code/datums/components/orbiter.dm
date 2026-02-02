@@ -46,8 +46,7 @@
 		begin_orbit(arglist(args.Copy(3)))
 		return
 	// The following only happens on component transfers
-	for(var/o in newcomp.orbiter_list)
-		var/atom/movable/incoming_orbiter = o
+	for(var/atom/movable/incoming_orbiter as anything in newcomp.orbiter_list)
 		incoming_orbiter.orbiting = src
 		// It is important to transfer the signals so we don't get locked to the new orbiter component for all time
 		newcomp.UnregisterSignal(incoming_orbiter, COMSIG_MOVABLE_MOVED)
@@ -103,7 +102,8 @@
 		orbiter.glide_size = movable_parent.glide_size
 
 	orbiter.abstract_move(get_turf(parent))
-	to_chat(orbiter, span_notice("Now orbiting [parent]."))
+	if(!istype(orbiter, /mob/dead/observer/screye))
+		to_chat(orbiter, span_notice("Now orbiting [parent]."))
 
 /datum/component/orbiter/proc/end_orbit(atom/movable/orbiter, refreshing=FALSE)
 	if(!orbiter_list[orbiter])
@@ -159,8 +159,7 @@
 
 /datum/component/orbiter/proc/orbiter_glide_size_update(datum/source, target)
 	SIGNAL_HANDLER
-	for(var/orbiter in orbiter_list)
-		var/atom/movable/movable_orbiter = orbiter
+	for(var/atom/movable/movable_orbiter as anything in orbiter_list)
 		movable_orbiter.glide_size = target
 
 /////////////////////

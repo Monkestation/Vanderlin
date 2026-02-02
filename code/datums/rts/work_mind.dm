@@ -16,7 +16,14 @@
 	var/datum/work_order/current_task
 	var/turf/movement_target
 
-	var/list/worker_gear
+	var/list/worker_gear = list(
+		WORKER_SLOT_HEAD,
+		WORKER_SLOT_PANTS,
+		WORKER_SLOT_SHIRT,
+		WORKER_SLOT_SHOES,
+		WORKER_SLOT_HANDS,
+	)
+	var/list/gear_overlays = list()
 	var/list/worker_moodlets
 
 	var/datum/idle_tendancies/idle
@@ -37,15 +44,13 @@
 
 	var/datum/worker_attack_strategy/attack_mode
 
-	var/list/personality_traits = list()
-	var/mood_level = 50 // 0-100, affects work speed and decisions
-	var/experience_level = 0 // Grows over time, unlocks new behaviors
-	var/preferred_tasks = list() // Tasks this worker gravitates toward
-	var/list/learned_behaviors = list() // Behaviors this worker has learned
+	var/list/turf/patrol_points = list()
+	var/patrol_setup_active = FALSE
+	var/list/image/patrol_visual_images = list()
 
 /datum/worker_mind/New(mob/living/new_worker, mob/camera/strategy_controller/new_master)
 	. = ..()
-	idle = new /datum/idle_tendancies/dynamic
+	idle = new /datum/idle_tendancies/basic
 	master = new_master
 	worker = new_worker
 
@@ -58,17 +63,232 @@
 
 	master.add_new_worker(worker)
 	worker.made_into_controller_mob()
-	stats = new /atom/movable/screen/controller_ui/controller_ui(worker, src)
+	stats = new /atom/movable/screen/controller_ui/controller_ui(null, null, worker, src)
 	START_PROCESSING(SSstrategy_master, src)
 
-/datum/worker_mind/proc/has_learned_behavior(behavior_name)
-	return (behavior_name in learned_behaviors)
+/datum/worker_mind/Destroy(force)
+	STOP_PROCESSING(SSstrategy_master, src)
+	for(var/slot in worker_gear)
+		var/obj/gear = worker_gear?[slot]
+		if(gear)
+			qdel(gear)
+	worker_gear = null
+	worker = null
+	master = null
+	patrol_points = null
+	assigned_work = null
+	movement_target = null
+	move_back_after = null
+	if(paused_task)
+		QDEL_NULL(paused_task)
+	if(current_task)
+		QDEL_NULL(current_task)
+	if(attack_mode)
+		QDEL_NULL(attack_mode)
+	QDEL_NULL(idle)
+	QDEL_NULL(stats)
+	QDEL_LIST(patrol_visual_images)
+	return ..()
 
-/datum/worker_mind/proc/learn_behavior(behavior_name)
-	if(behavior_name in learned_behaviors)
+/datum/worker_mind/proc/get_slot_layer(slot)
+	switch(slot)
+		if(WORKER_SLOT_HEAD)
+			return HEAD_LAYER
+		if(WORKER_SLOT_PANTS)
+			return PANTS_LAYER
+		if(WORKER_SLOT_SHIRT)
+			return SHIRT_LAYER
+		if(WORKER_SLOT_SHOES)
+			return SHOES_LAYER
+		if(WORKER_SLOT_HANDS)
+			return HANDS_LAYER
+		else
+			return HANDS_LAYER // Default fallback
+
+/datum/worker_mind/proc/add_gear(obj/item/item, slot, datum/worker_gear/gear_type = /datum/worker_gear)
+	if(!slot || !worker_gear.Find(slot))
 		return FALSE
-	learned_behaviors += behavior_name
+
+	var/datum/worker_gear/old_gear = worker_gear[slot]
+
+	// Remove existing gear from slot if any
+	if(worker_gear[slot])
+		remove_gear_from_slot(slot)
+
+	// Create worker gear datum
+	var/datum/worker_gear/new_gear = new gear_type(item, slot, src)
+	worker_gear[slot] = new_gear
+	item.forceMove(worker)
+
+	// Signal gear change
+	SEND_SIGNAL(src, COMSIG_WORKER_GEAR_CHANGED, slot, old_gear, new_gear)
+
+	// Create and add overlay
+	update_gear_overlay(slot)
 	return TRUE
+
+/datum/worker_mind/proc/remove_gear_from_slot(slot)
+	if(!worker_gear[slot])
+		return FALSE
+
+	var/datum/worker_gear/old_gear = worker_gear[slot]
+	var/datum/worker_gear/gear = worker_gear[slot]
+	worker_gear[slot] = null
+	gear.item.forceMove(get_turf(worker))
+	qdel(gear)
+
+	// Signal gear removal
+	SEND_SIGNAL(src, COMSIG_WORKER_GEAR_CHANGED, slot, old_gear, null)
+
+	// Remove overlay
+	remove_gear_overlay(slot)
+	return TRUE
+
+/datum/worker_mind/proc/remove_gear(obj/item/item)
+	for(var/slot in worker_gear)
+		var/datum/worker_gear/gear = worker_gear[slot]
+		if(gear && gear.item == item)
+			remove_gear_from_slot(slot)
+			return TRUE
+	return FALSE
+
+/datum/worker_mind/proc/update_gear_overlay(slot)
+	var/datum/worker_gear/gear = worker_gear[slot]
+	if(!gear || !gear.item)
+		return
+	// Remove existing overlay for this slot
+	remove_gear_overlay(slot)
+
+	if(slot == WORKER_SLOT_HANDS && gear.item.experimental_inhand)
+		var/used_prop
+		var/list/prop
+
+		if(gear.item.altgripped)
+			used_prop = "altgrip"
+			prop = gear.item.getonmobprop(used_prop)
+
+		if(!prop && HAS_TRAIT(gear.item, TRAIT_WIELDED))
+			used_prop = "wielded"
+			prop = gear.item.getonmobprop(used_prop)
+
+		if(!prop)
+			used_prop = "gen"
+			prop = gear.item.getonmobprop(used_prop)
+
+		if(gear.item.force_reupdate_inhand)
+			if(gear.item.onprop?[used_prop])
+				prop = gear.item.onprop[used_prop]
+			else
+				LAZYSET(gear.item.onprop, used_prop, prop)
+
+		if(!prop)
+			return
+
+		var/flipsprite = TRUE
+
+		var/mutable_appearance/inhand_overlay = mutable_appearance(
+			gear.item.getmoboverlay(used_prop, prop, mirrored=flipsprite),
+			layer=get_slot_layer(slot)
+		)
+		var/mutable_appearance/behindhand_overlay = mutable_appearance(
+			gear.item.getmoboverlay(used_prop, prop, behind=TRUE, mirrored=flipsprite),
+			layer=get_slot_layer(slot) - 1 // Behind layer
+		)
+
+		inhand_overlay = center_image(inhand_overlay, gear.item.inhand_x_dimension, gear.item.inhand_y_dimension)
+		behindhand_overlay = center_image(behindhand_overlay, gear.item.inhand_x_dimension, gear.item.inhand_y_dimension)
+
+		gear_overlays[slot] = list(inhand_overlay, behindhand_overlay)
+		worker.add_overlay(inhand_overlay)
+		worker.add_overlay(behindhand_overlay)
+
+		if(gear.item.blocks_emissive != EMISSIVE_BLOCK_NONE)
+			var/mutable_appearance/emissive_front = emissive_blocker(
+				gear.item.getmoboverlay(used_prop, prop, mirrored=flipsprite),
+				layer=get_slot_layer(slot),
+				appearance_flags = NONE
+			)
+			emissive_front.pixel_y = inhand_overlay.pixel_y
+			emissive_front.pixel_x = inhand_overlay.pixel_x
+
+			var/mutable_appearance/emissive_back = emissive_blocker(
+				gear.item.getmoboverlay(used_prop, prop, behind=TRUE, mirrored=flipsprite),
+				layer=get_slot_layer(slot) - 1,
+				appearance_flags = NONE
+			)
+			emissive_back.pixel_y = behindhand_overlay.pixel_y
+			emissive_back.pixel_x = behindhand_overlay.pixel_x
+
+			worker.add_overlay(emissive_front)
+			worker.add_overlay(emissive_back)
+
+
+			gear_overlays[slot] += list(emissive_front, emissive_back)
+
+		return
+
+	var/layer = get_slot_layer(slot)
+	var/mutable_appearance/gear_overlay = gear.item.build_worn_icon(
+		age = "Adult",
+		default_layer = layer,
+		default_icon_file = get_icon_file(slot),
+		isinhands = (slot == WORKER_SLOT_HANDS)
+	)
+	if(gear_overlay)
+		gear_overlays[slot] = gear_overlay
+		worker.add_overlay(gear_overlay)
+
+
+/datum/worker_mind/proc/get_icon_file(slot)
+	switch(slot)
+		if(WORKER_SLOT_HEAD)
+			return 'icons/roguetown/clothing/onmob/head.dmi'
+		if(WORKER_SLOT_PANTS)
+			return 'icons/roguetown/clothing/onmob/pants.dmi'
+		if(WORKER_SLOT_SHIRT)
+			return 'icons/roguetown/clothing/onmob/shirts.dmi'
+		if(WORKER_SLOT_SHOES)
+			return 'icons/roguetown/clothing/onmob/feet.dmi'
+		if(WORKER_SLOT_HANDS)
+			var/obj/item/item = get_item_in_slot(WORKER_SLOT_HANDS)
+			return item.righthand_file
+
+/datum/worker_mind/proc/remove_gear_overlay(slot)
+	if(gear_overlays[slot])
+		worker.cut_overlay(gear_overlays[slot])
+		gear_overlays -= slot
+
+/datum/worker_mind/proc/update_all_gear_overlays()
+	// Clear all existing overlays
+	for(var/slot in gear_overlays)
+		worker.cut_overlay(gear_overlays[slot])
+	gear_overlays.Cut()
+
+	// Recreate all overlays
+	for(var/slot in worker_gear)
+		if(worker_gear[slot])
+			update_gear_overlay(slot)
+
+/datum/worker_mind/proc/get_gear_in_slot(slot)
+	return worker_gear[slot]
+
+/datum/worker_mind/proc/get_item_in_slot(slot)
+	var/datum/worker_gear/gear = worker_gear[slot]
+	return gear?.item
+
+/datum/worker_mind/proc/has_gear_in_slot(slot)
+	return worker_gear[slot] != null
+
+/datum/worker_mind/proc/get_total_walkspeed_modifier()
+	var/total_modifier = 0
+	for(var/slot in worker_gear)
+		var/datum/worker_gear/gear = worker_gear[slot]
+		if(gear)
+			total_modifier += gear.get_walkspeed_modifier()
+	return total_modifier
+
+/datum/worker_mind/proc/get_effective_walkspeed()
+	return walkspeed + get_total_walkspeed_modifier()
 
 /datum/worker_mind/proc/head_to_target()
 	if(!movement_target)
@@ -80,14 +300,14 @@
 	if(!length(current_path) && !worker.CanReach(movement_target))
 		enhanced_pathfinding()
 		if(!length(current_path))
-			current_task.stop_work()
+			current_task.stop_work("no path")
 	if(length(current_path) >= 3)
-		walk_to(worker, current_path[3],0,5)
+		walk_to(worker, current_path[3],0, get_effective_walkspeed())
 		current_path -= current_path[3]
 		current_path -= current_path[2]
 		current_path -= current_path[1]
 	else
-		walk_to(worker, current_path[length(current_path)],0,5)
+		walk_to(worker, current_path[length(current_path)],0, get_effective_walkspeed())
 		current_path = list()
 
 /datum/worker_mind/proc/start_task()
@@ -100,6 +320,7 @@
 	update_stat_panel()
 
 /datum/worker_mind/proc/start_idle()
+	SEND_SIGNAL(src, COMSIG_WORKER_IDLE_START, idle)
 	idle.perform_idle(master, worker)
 
 /datum/worker_mind/proc/try_restore_stamina()
@@ -124,50 +345,77 @@
 
 /datum/worker_mind/proc/set_current_task(datum/work_order/order, ...)
 	var/list/arg_list = list(worker) + args
+	var/old_task = current_task
 	current_task = new order(arglist(arg_list))
+	SEND_SIGNAL(src, COMSIG_WORKER_TASK_STARTED, current_task, old_task)
 	update_stat_panel()
 
 /datum/worker_mind/proc/finish_work(success, stamina_cost)
+	var/old_stamina = current_stamina
+	var/finished_task = current_task
 	current_stamina = max(0, current_stamina - stamina_cost)
+
+	SEND_SIGNAL(src, COMSIG_WORKER_TASK_FINISHED, finished_task, success, stamina_cost)
+	SEND_SIGNAL(src, COMSIG_WORKER_STAMINA_CHANGED, old_stamina, current_stamina, "task completion")
+
 	current_task = null
 	movement_target = null
-	paused = FALSE
+	set_paused_state(FALSE, "work finished")
 	walk(worker, 0)
 
 /datum/worker_mind/proc/stop_working()
+	var/stopped_task = current_task
 	current_task = null
 	movement_target = null
-	paused = FALSE
+	set_paused_state(FALSE, "work stopped")
+
+	if(stopped_task)
+		SEND_SIGNAL(src, COMSIG_WORKER_TASK_FAILED, stopped_task, "work stopped")
+
 	walk(worker, 0)
 
 /datum/worker_mind/proc/set_movement_target(atom/target)
+	var/old_target = movement_target
 	walk(worker, 0)
 	movement_target = target
+	SEND_SIGNAL(src, COMSIG_WORKER_MOVEMENT_SET, old_target, target)
 
-/datum/worker_mind/proc/add_gear(obj/item/gear)
-	LAZYADD(worker_gear, gear)
-	gear.forceMove(worker)
-
-/datum/worker_mind/proc/remove_gear(obj/item/gear)
-	LAZYREMOVE(worker_gear, gear)
-	gear.forceMove(get_turf(worker))
+/datum/worker_mind/proc/set_paused_state(new_state, reason = "unknown")
+	if(paused != new_state)
+		var/old_state = paused
+		paused = new_state
+		SEND_SIGNAL(src, COMSIG_WORKER_PAUSED_CHANGED, old_state, new_state, reason)
 
 /datum/worker_mind/proc/add_test_instrument()
 	var/obj/item/instrument/guitar/guitar = new(get_turf(worker))
-	add_gear(guitar)
+	add_gear(guitar, WORKER_SLOT_HANDS, /datum/worker_gear/instrument)
+
+/datum/worker_mind/proc/add_miner_gear()
+	var/obj/item/weapon/pick/pick = new(get_turf(worker))
+	add_gear(pick, WORKER_SLOT_HANDS, /datum/worker_gear/pickaxe)
+
+	var/obj/item/clothing/head/armingcap/head = new(get_turf(worker))
+	add_gear(head, WORKER_SLOT_HEAD, /datum/worker_gear/miner_cap)
+
+	var/obj/item/clothing/armor/gambeson/light/striped/armor = new(get_turf(worker))
+	add_gear(armor, WORKER_SLOT_SHIRT, /datum/worker_gear/miner_chest)
+
+	var/obj/item/clothing/pants/trou/pants = new(get_turf(worker))
+	add_gear(pants, WORKER_SLOT_PANTS, /datum/worker_gear/miner_pants)
+
+	var/obj/item/clothing/shoes/boots/leather/shoes = new(get_turf(worker))
+	add_gear(shoes, WORKER_SLOT_SHOES, /datum/worker_gear/miner_shoes)
 
 /datum/worker_mind/proc/play_testing_song()
 	if(current_task)
-		current_task.stop_work()
+		current_task.stop_work("debug stop")
 
-	for(var/obj/item/gear in worker_gear)
-		if(!istype(gear, /obj/item/instrument))
-			continue
-
+	var/datum/worker_gear/gear = get_gear_in_slot(WORKER_SLOT_HANDS)
+	if(gear && istype(gear.item, /obj/item/instrument))
 		var/list/turfs = view(6, worker)
 		shuffle_inplace(turfs)
 		for(var/turf/open/open in turfs)
-			set_current_task(/datum/work_order/play_music, open, gear)
+			set_current_task(/datum/work_order/play_music, open, gear.item)
 			break
 
 /datum/worker_mind/proc/update_stat_panel()
@@ -189,11 +437,11 @@
 	if(attack_mode)
 		if(attack_mode.current_target)
 			if(!attack_mode.can_attack_target())
-				walk_to(worker, attack_mode.current_target, 1, worker.controller_mind.walkspeed)
+				walk_to(worker, attack_mode.current_target, 1, get_effective_walkspeed())
 			return
 		else if(attack_mode.find_targets())
 			if(!attack_mode.can_attack_target())
-				walk_to(worker, attack_mode.current_target, 1, worker.controller_mind.walkspeed)
+				walk_to(worker, attack_mode.current_target, 1, get_effective_walkspeed())
 				return
 
 	if(check_paused_state())
@@ -221,85 +469,26 @@
 	paused_task = current_task
 	current_task = null
 	paused_until = world.time + duration
+	set_paused_state(TRUE, "task paused for [duration/10] seconds")
 
 /datum/worker_mind/proc/stop_chase()
 	walk(worker, 0)
 
 /datum/worker_mind/proc/suppress_attack()
+	var/old_target = attack_mode?.current_target
 	attack_mode?.lose_target()
 	stop_chase()
+	SEND_SIGNAL(src, COMSIG_WORKER_ATTACK_END, old_target, "suppressed")
 
 /datum/worker_mind/proc/apply_attack_strategy(datum/worker_attack_strategy/attack_path = /datum/worker_attack_strategy)
 	var/datum/worker_attack_strategy/new_attack = new attack_path(worker)
 	attack_mode = new_attack
-
-/datum/worker_mind/proc/check_mood_events()
-	// Check for mood-affecting events
-	if(current_stamina < 20)
-		adjust_mood(-5, "exhausted")
-
-	if(length(worker_gear))
-		adjust_mood(2, "well equipped")
-
-	// Social interactions
-	var/nearby_workers = 0
-	for(var/mob/living/other in view(3, worker))
-		if(other.controller_mind && other != worker)
-			nearby_workers++
-
-	if(has_personality("social") && nearby_workers > 0)
-		adjust_mood(3, "socializing")
-	else if(has_personality("social") && nearby_workers == 0)
-		adjust_mood(-2, "lonely")
-
-/datum/worker_mind/proc/adjust_mood(amount, reason)
-	mood_level = clamp(mood_level + amount, 0, 100)
-	if(amount > 0)
-		worker.visible_message("[worker] seems happier.")
-	else if(amount < -3)
-		worker.visible_message("[worker] looks dejected.")
-
-/datum/worker_mind/proc/has_personality(trait_name)
-	for(var/datum/personality_trait/trait in personality_traits)
-		if(trait.name == trait_name)
-			return TRUE
-	return FALSE
-
-/datum/worker_mind/proc/check_emergent_behaviors()
-	// Workers develop new behaviors based on experience
-	if(experience_level > 50 && !has_learned_behavior("leadership"))
-		if(prob(20))
-			learn_behavior("leadership")
-			worker.visible_message("[worker] has learned to coordinate with others!")
-
-	// Spontaneous tool creation
-	if(current_task && prob(5) && experience_level > 25)
-		try_improvise_tool()
-
-/datum/worker_mind/proc/try_improvise_tool()
-	// Look for materials to create simple tools
-	var/list/nearby_items = list()
-	for(var/obj/item/item in view(2, worker))
-		nearby_items += item
-
-	if(length(nearby_items) >= 2)
-		worker.visible_message("[worker] starts tinkering with nearby materials...")
-		//TODO: Worker tool support
+	SEND_SIGNAL(src, COMSIG_WORKER_ATTACK_START, attack_mode.current_target)
 
 /datum/worker_mind/proc/enhanced_pathfinding()
 	if(!movement_target)
 		return
 
-	// Workers remember and prefer certain routes
-	var/route_key = "[get_turf(worker)]-[get_turf(movement_target)]"
-	var/list/preferred_path = master.learned_routes[route_key]
-
-	if(preferred_path && prob(70))
-		current_path = preferred_path.Copy()
-	else
-		current_path = get_path_to(worker, get_turf(movement_target),
-			TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 32 + 1, 250, 1)
-
-		// Store successful routes
-		if(length(current_path))
-			master.learned_routes[route_key] = current_path.Copy()
+	current_path = get_path_to(worker, get_turf(movement_target),
+		TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 32 + 1, 250, 1)
+	SEND_SIGNAL(src, COMSIG_AI_PATH_GENERATED, current_path)

@@ -8,6 +8,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_ABYSSOR,
 		TAG_WATER,
 		TAG_NATURE,
 	)
@@ -41,14 +42,16 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/create_abyssoids/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/create_abyssoids/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
 
 	chosen_one.add_spell(/datum/action/cooldown/spell/undirected/create_abyssoid)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE ABYSSOR'S CHOSEN!"))
-	to_chat(chosen_one, span_blue("Abyssor wants everyone to remember him! Create an army of holy abyssoid leeches and distribute them among the ingrates!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE ABYSSOR'S CHOSEN!"),
+		span_blue("Abyssor wants everyone to remember him! Create an army of holy abyssoid leeches and distribute them among the ingrates!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/items/bucket_transfer (2).ogg', 100)
 
 	to_chat(chosen_one, span_notice("Abyssor grants you a power to create abyssoids from the common leeches! You will just need to pay a small blood price..."))

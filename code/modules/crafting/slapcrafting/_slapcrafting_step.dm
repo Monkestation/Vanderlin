@@ -185,6 +185,9 @@
 	if(skill_type)
 		time_to_do *=  (2 / max(1, user.get_skill_level(skill_type)))
 
+	if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
+		time_to_do *= 0.9
+
 	if(!do_after(user, time_to_do, item))
 		return FALSE
 	return TRUE

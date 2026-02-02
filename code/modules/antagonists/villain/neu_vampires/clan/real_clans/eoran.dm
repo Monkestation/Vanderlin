@@ -1,6 +1,7 @@
 
 /datum/clan_leader/eoran
 	lord_spells = list(
+		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
 		/datum/action/cooldown/spell/undirected/shapeshift/frog,
 		/datum/action/cooldown/spell/charm/vampire,

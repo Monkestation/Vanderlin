@@ -8,8 +8,8 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	invocation = "Receive Boatha's Gift!"
-	invocation_type = INVOCATION_SHOUT
+	invocation = "Receive Boatha's Gift."
+	invocation_type = INVOCATION_WHISPER
 
 	cast_range = 4
 	charge_required = FALSE

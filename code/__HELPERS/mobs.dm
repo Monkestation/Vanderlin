@@ -1,13 +1,6 @@
 /proc/random_human_blood_type()
 	var/static/list/human_blood_type_weights = list(
-		/datum/blood_type/human/o_minus = 4,
-		/datum/blood_type/human/o_plus = 36,
-		/datum/blood_type/human/a_minus = 28,
-		/datum/blood_type/human/a_plus = 3,
-		/datum/blood_type/human/b_minus = 20,
-		/datum/blood_type/human/b_plus = 1,
-		/datum/blood_type/human/ab_minus = 5,
-		/datum/blood_type/human/ab_plus = 1
+		/datum/blood_type/human = 10, //bloodtypes aren't real
 	)
 
 	return pickweight(human_blood_type_weights)
@@ -203,10 +196,6 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 	var/atom/target_loc = target?.loc
 	var/user_dir = user.dir /* V */
 
-	var/drifting = FALSE
-	if(!user.Process_Spacemove(0) && user.inertia_dir)
-		drifting = TRUE
-
 	var/holding = user.get_active_held_item()
 
 	if(!(timed_action_flags & IGNORE_SLOWDOWNS))
@@ -232,12 +221,8 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 		if(!QDELETED(progbar))
 			progbar.update(world.time - starttime)
 
-		if(drifting && !user.inertia_dir)
-			drifting = FALSE
-			user_loc = user.loc
-
 		if(QDELETED(user) \
-			|| (!(timed_action_flags & IGNORE_USER_LOC_CHANGE) && !drifting && user.loc != user_loc) \
+			|| (!(timed_action_flags & IGNORE_USER_LOC_CHANGE) && user.loc != user_loc) \
 			|| (!(timed_action_flags & IGNORE_HELD_ITEM) && user.get_active_held_item() != holding) \
 			|| (!(timed_action_flags & IGNORE_INCAPACITATED) && HAS_TRAIT(user, TRAIT_INCAPACITATED)) \
 			/* V: */ \
@@ -302,12 +287,12 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 
 /* :V */
 
-/proc/is_species(A, species_datum)
+/proc/is_species(mob/living/carbon/human/checked, species_datum)
 	. = FALSE
-	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
-		if(H.dna && istype(H.dna.species, species_datum))
-			. = TRUE
+	if(!istype(checked))
+		return
+	if(istype(checked.dna?.species, species_datum))
+		. = TRUE
 
 /proc/spawn_atom_to_turf(spawn_type, target, amount, admin_spawn=FALSE, list/extra_args)
 	var/turf/T = get_turf(target)
@@ -414,13 +399,12 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 	var/static/list/mob_spawn_nicecritters = list() // and possible friendly mobs
 
 	if(mob_spawn_meancritters.len <= 0 || mob_spawn_nicecritters.len <= 0)
-		for(var/T in typesof(/mob/living/simple_animal))
-			var/mob/living/simple_animal/SA = T
+		for(var/mob/living/simple_animal/SA as anything in typesof(/mob/living/simple_animal))
 			switch(initial(SA.gold_core_spawnable))
 				if(HOSTILE_SPAWN)
-					mob_spawn_meancritters += T
+					mob_spawn_meancritters += SA
 				if(FRIENDLY_SPAWN)
-					mob_spawn_nicecritters += T
+					mob_spawn_nicecritters += SA
 
 	var/chosen
 	if(mob_class == FRIENDLY_SPAWN)
@@ -454,3 +438,25 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 		sleep(1)
 	if(set_original_dir)
 		AM.setDir(originaldir)
+
+/**
+ * Gets the mind from a variable, whether it be a mob, or a mind itself.
+ * Also works on brains - it will try to fetch the brainmob's mind.
+ * If [include_last] is true, then it will also return last_mind for carbons if there isn't a current mind.
+ */
+/proc/get_mind(target, include_last = FALSE) as /datum/mind
+	RETURN_TYPE(/datum/mind)
+	if(istype(target, /datum/mind))
+		return target
+	else if(ismob(target))
+		var/mob/mob_target = target
+		if(!QDELETED(mob_target.mind))
+			return mob_target.mind
+		if(include_last && iscarbon(mob_target))
+			var/mob/living/carbon/carbon_target = mob_target
+			if(!QDELETED(carbon_target.last_mind))
+				return carbon_target.last_mind
+	else if(istype(target, /obj/item/organ/brain))
+		var/obj/item/organ/brain/brain = target
+		if(!QDELETED(brain.brainmob?.mind))
+			return brain.brainmob.mind

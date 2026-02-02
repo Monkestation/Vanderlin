@@ -78,7 +78,15 @@
 	if(HAS_TRAIT(src, TRAIT_DUMB))
 		msg += "[t_He] seem[p_s()] to be clumsy and unable to think.\n"
 
-	if(fire_stacks + divine_fire_stacks > 0)
+	if(on_fire)
+		msg += "[t_He] [t_is] on fire!"
+		if(isliving(user))
+			var/mob/living/liver = user
+			if(liver.has_quirk(/datum/quirk.vice/pyromaniac))
+				msg += span_boldred(" IT'S BEAUTIFUL!")
+				liver.sate_addiction(/datum/quirk.vice/pyromaniac)
+		msg += "\n"
+	else if(fire_stacks + divine_fire_stacks > 0)
 		msg += "[t_He] [t_is] covered in something flammable.\n"
 	if(fire_stacks < 0 && !on_fire)
 		msg += "[t_He] look[p_s()] a little soaked.\n"

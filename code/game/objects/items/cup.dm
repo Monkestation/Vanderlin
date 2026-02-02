@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/glass/cup
 	name = "metal cup"
-	desc = "An iron cup, it's rim gnawed upon and grimey."
+	desc = "An iron cup, its rim gnawed-upon and grimey."
 	icon = 'icons/roguetown/items/cooking.dmi'
 	icon_state = "cup_iron"
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
@@ -27,7 +27,7 @@
 
 /obj/item/reagent_containers/glass/cup/wooden
 	name = "wooden cup"
-	desc = "A wooden cup that has seen it's fair share of use and barfights."
+	desc = "A wooden cup that has seen its fair share of use and barfights."
 	icon_state = "cup_wooden"
 	resistance_flags = FLAMMABLE
 	grid_height = 32
@@ -54,7 +54,7 @@
 
 /obj/item/reagent_containers/glass/cup/golden
 	name = "golden goblet"
-	desc = "A golden gilded goblet which gleams pathetically despite it's illustrious metal."
+	desc = "A golden gilded goblet which gleams pathetically despite its illustrious metal."
 	icon_state = "cup_golden"
 	dropshrink = 0.65
 	sellprice = 50
@@ -65,12 +65,156 @@
 	icon_state = "cup_skull"
 	dropshrink = 0.8
 
+/obj/item/reagent_containers/glass/cup/teacup
+	name = "teacup"
+	desc = "A fancy tea cup made out of ceramic. Used to serve tea."
+	icon_state = "teacup"
+	volume = 25
+	dropshrink = 0.7
+	fill_icon_state = "teacup"
+	sellprice = 10
+
+/obj/item/reagent_containers/glass/cup/teacup/fancy
+	name = "fancy teacup"
+	desc = "A fancy tea cup made out of ceramic, decorated with an ornate glaze. Used to serve tea."
+	icon_state = "teacup_fancy"
+	sellprice = 20
+
+/obj/item/reagent_containers/glass/cup/jade
+	name = "joapstone cup"
+	desc = "A simple cup carved out of joapstone."
+	dropshrink = null
+	icon_state = "cup_jade"
+	fill_icon_state = "fancycup"
+	sellprice = 55
+
+/obj/item/reagent_containers/glass/cup/turq
+	name = "ceruleabaster cup"
+	desc = "A simple cup carved out of ceruleabaster."
+	dropshrink = null
+	icon_state = "cup_turq"
+	fill_icon_state = "fancycup"
+	sellprice = 80
+
+/obj/item/reagent_containers/glass/cup/amber
+	name = "petriamber cup"
+	desc = "A simple cup carved out of petriamber."
+	dropshrink = null
+	icon_state = "cup_amber"
+	fill_icon_state = "fancycup"
+	sellprice = 55
+
+/obj/item/reagent_containers/glass/cup/coral
+	name = "aoetal cup"
+	desc = "A simple cup carved out of aoetal."
+	dropshrink = null
+	icon_state = "cup_coral"
+	fill_icon_state = "fancycup"
+	sellprice = 65
+
+/obj/item/reagent_containers/glass/cup/onyxa
+	name = "onyxa cup"
+	desc = "A simple cup carved out of onyxa."
+	dropshrink = null
+	icon_state = "cup_onyxa"
+	fill_icon_state = "fancycup"
+	sellprice = 35
+
+/obj/item/reagent_containers/glass/cup/shell
+	name = "shell cup"
+	desc = "A simple cup carved out of shell."
+	dropshrink = null
+	icon_state = "cup_shell"
+	fill_icon_state = "fancycup"
+	sellprice = 15
+
+/obj/item/reagent_containers/glass/cup/opal
+	name = "opaloise cup"
+	desc = "A simple cup carved out of opaloise."
+	dropshrink = null
+	icon_state = "cup_opal"
+	fill_icon_state = "fancycup"
+	sellprice = 85
+
+/obj/item/reagent_containers/glass/cup/rose
+	name = "rosellusk cup"
+	desc = "A simple cup carved out of rosellusk."
+	dropshrink = null
+	icon_state = "cup_rose"
+	fill_icon_state = "fancycup"
+	sellprice = 20
+
+/obj/item/reagent_containers/glass/cup/jadefancy
+	name = "fancy joapstone cup"
+	desc = "A fancy cup carved out of joapstone."
+	dropshrink = null
+	icon_state = "fancycup_jade"
+	fill_icon_state = "fancycup"
+	sellprice = 65
+
+/obj/item/reagent_containers/glass/cup/turqfancy
+	name = "fancy ceruleabaster cup"
+	desc = "A fancy cup carved out of ceruleabaster."
+	dropshrink = null
+	icon_state = "fancycup_turq"
+	fill_icon_state = "fancycup"
+	sellprice = 90
+
+/obj/item/reagent_containers/glass/cup/opalfancy
+	name = "fancy opaloise cup"
+	desc = "A fancy cup carved out of opaloise."
+	dropshrink = null
+	icon_state = "fancycup_opal"
+	fill_icon_state = "fancycup"
+	sellprice = 95
+
+/obj/item/reagent_containers/glass/cup/coralfancy
+	name = "fancy aoetal cup"
+	desc = "A fancy cup carved out of aoetal."
+	dropshrink = null
+	icon_state = "fancycup_coral"
+	fill_icon_state = "fancycup"
+	sellprice = 75
+
+/obj/item/reagent_containers/glass/cup/amberfancy
+	name = "fancy petriamber cup"
+	desc = "A fancy cup carved out of petriamber."
+	dropshrink = null
+	icon_state = "fancycup_amber"
+	fill_icon_state = "fancycup"
+	sellprice = 65
+
+/obj/item/reagent_containers/glass/cup/shellfancy
+	name = "fancy shell cup"
+	desc = "A fancy cup carved out of shell."
+	dropshrink = null
+	icon_state = "fancycup_shell"
+	fill_icon_state = "fancycup"
+	sellprice = 25
+
+/obj/item/reagent_containers/glass/cup/rosefancy
+	name = "fancy rosellusk cup"
+	desc = "A fancy cup carved out of rosellusk."
+	dropshrink = null
+	icon_state = "fancycup_rose"
+	fill_icon_state = "fancycup"
+	sellprice = 30
+
+/obj/item/reagent_containers/glass/cup/onyxafancy
+	name = "fancy onyxa cup"
+	desc = "A fancy cup carved out of onyxa."
+	dropshrink = null
+	icon_state = "fancycup_onyxa"
+	fill_icon_state = "fancycup"
+	sellprice = 45
+
 /obj/item/reagent_containers/glass/cup/clay
 	name = "clay cup"
 	desc = "A cup made from fired clay."
 	icon = 'icons/obj/handmade/cup.dmi'
 	icon_state = "world"
 	dropshrink = 1
+	sellprice = 5
 
 /obj/item/reagent_containers/glass/cup/clay/set_material_information()
 	. = ..()
@@ -102,14 +246,14 @@
 
 /obj/item/reagent_containers/glass/cup/glassware
 	name = "glass cup"
-	desc = "A fancy glass cup- the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
+	desc = "A fancy glass cup; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon = 'icons/roguetown/items/glass_reagent_container.dmi'
 	icon_state = "clear_cup1"
 	reagent_flags = OPENCONTAINER
 	sellprice = VALUE_COMMON_GOODS * 2
 	dropshrink = 1
 	max_integrity = 5
-	volume = 24
+	volume = 25
 	fill_icon_thresholds = list(0, 10, 50, 100)
 	grid_width = 32
 	grid_height = 64
@@ -135,13 +279,13 @@
 
 /obj/item/reagent_containers/glass/cup/glassware/shotglass
 	name = "shot glass"
-	desc = "A fancy shot glass- the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
+	desc = "A fancy shot glass; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon_state = "clear_shotglass1"
 	sellprice = VALUE_COMMON_GOODS * 1.5
-	volume = 9
+	volume = 5 //You drink 5 units at a time, now its an ACTUAL shot.
 	grid_height = 32
 
 /obj/item/reagent_containers/glass/cup/glassware/wineglass
 	name = "wine glass"
-	desc = "A fancy wine glass- the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
+	desc = "A fancy wine glass; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon_state = "clear_wineglass1"

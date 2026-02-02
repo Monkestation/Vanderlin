@@ -6,6 +6,7 @@
 	id = SPEC_ID_DWARF
 	changesource_flags = WABBAJACK
 	native_language = "Dwarfish"
+	exotic_bloodtype = /datum/blood_type/human/dwarf
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,

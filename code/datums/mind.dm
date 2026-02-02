@@ -118,6 +118,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 	var/list/notes = list() //RTD add notes button
 
+	//assoc list of frumentarii you know of to a BOOL of if they are still frumentarii
 	var/list/cached_frumentarii = list()
 
 	var/datum/sleep_adv/sleep_adv = null
@@ -128,9 +129,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	var/has_studied = FALSE
 	/// Variable that lets the event picker see if someones getting chosen or not
 	var/picking = FALSE
-	///the bitflag our job applied
-	var/job_bitflag = NONE
-
 
 /datum/mind/New(key)
 	src.key = key
@@ -205,18 +203,19 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /// check if this mind knows X
 /datum/mind/proc/do_i_know(datum/mind/person, name)
 	if(!person && !name)
-		return
+		return FALSE
 	if(person)
 		var/mob/living/carbon/human/H = person.current
 		if(!istype(H))
 			return
 		for(var/P in known_people)
-			if(H.real_name == P)
+			if(lowertext(H.real_name) == lowertext(P))
 				return TRUE
-	if(name)
+	else if(name)
 		for(var/P in known_people)
-			if(name == P)
+			if(lowertext(name) == lowertext(P))
 				return TRUE
+	return FALSE
 
 /// we are removed from X's known people
 /datum/mind/proc/become_unknown_to(person)
@@ -386,8 +385,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /// removes all antag datums from a mind
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
-	for(var/a in antag_datums)
-		var/datum/antagonist/antag_datum_ref = a
+	for(var/datum/antagonist/antag_datum_ref as anything in antag_datums)
 		antag_datum_ref.on_removal()
 
 /**
@@ -399,8 +397,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/has_antag_datum(datum_type, check_subtypes = TRUE)
 	if(!datum_type)
 		CRASH("has_antag_datum was called without an antag datum specified!")
-	for(var/a in antag_datums)
-		var/datum/antagonist/antag_datum_ref = a
+	for(var/datum/antagonist/antag_datum_ref as anything in antag_datums)
 		if(check_subtypes && istype(antag_datum_ref, datum_type))
 			return antag_datum_ref
 		else
@@ -430,109 +427,99 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
 		to_chat(current, span_danger("Despite my creators current allegiances, my true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless my creator's body is destroyed."))
 
-/// output all memories of a mind
-/datum/mind/proc/show_memory(mob/recipient, window=1)
+/// Output all memories of a mind
+/datum/mind/proc/show_memory(mob/recipient, window = TRUE)
 	if(!recipient)
 		recipient = current
-	var/output = "<B>[current.real_name]'s Memories:</B><br>"
-	output += memory
+	var/name_display = "My"
+	if(current?.real_name)
+		name_display = "[current.real_name]'s"
 
-	if(personal_objectives.len)
-		output += "<B>Personal Objectives:</B>"
+	var/output = memory
+
+	if(ishuman(current))
+		var/mob/living/carbon/human/human_current = current
+		if(length(human_current.culinary_preferences))
+			var/favourite_food = human_current.culinary_preferences[CULINARY_FAVOURITE_FOOD]
+			var/favourite_drink = human_current.culinary_preferences[CULINARY_FAVOURITE_DRINK]
+			var/hated_food = human_current.culinary_preferences[CULINARY_HATED_FOOD]
+			var/hated_drink = human_current.culinary_preferences[CULINARY_HATED_DRINK]
+
+			if(favourite_food)
+				var/obj/item/food_instance = favourite_food
+				output += "<br><b>Favourite Food:</b> [capitalize(initial(food_instance.name))]<br>"
+			if(favourite_drink)
+				var/datum/reagent/consumable/drink_instance = favourite_drink
+				output += "<b>Favourite Drink:</b> [capitalize(initial(drink_instance.name))]<br>"
+			if(hated_food)
+				var/obj/item/hated_food_instance = hated_food
+				output += "<b>Hated Food:</b> [capitalize(initial(hated_food_instance.name))]<br>"
+			if(hated_drink)
+				var/datum/reagent/consumable/hated_drink_instance = hated_drink
+				output += "<b>Hated Drink:</b> [capitalize(initial(hated_drink_instance.name))]<br>"
+
+	var/has_personal_objectives = FALSE
+	var/personal_output = ""
+	if(length(personal_objectives))
 		var/personal_count = 1
-		for(var/datum/objective/objective in personal_objectives)
-			output += "<br><B>Personal Goal #[personal_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
+		for(var/datum/objective/personal/objective in personal_objectives)
+			if(objective.hidden)
+				continue
+			if(!has_personal_objectives)
+				has_personal_objectives = TRUE
+				personal_output += "<br><B>Personal Objectives:</B>"
+			personal_output += "<br><B>Personal Goal #[personal_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
 			personal_count++
-		output += "<br>"
+		if(has_personal_objectives)
+			personal_output += "<br>"
+
+	output += personal_output
 
 	var/list/all_objectives = list()
+	var/has_antag_objectives = FALSE
+	var/antag_output = ""
+
 	for(var/datum/antagonist/antag_datum_ref in antag_datums)
 		output += antag_datum_ref.antag_memory
 		all_objectives |= antag_datum_ref.objectives
 
-	if(all_objectives.len)
-		output += "<B>Objectives:</B>"
+	if(length(all_objectives))
 		var/antag_obj_count = 1
 		for(var/datum/objective/objective in all_objectives)
-			output += "<br><B>[objective.flavor] #[antag_obj_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
+			if(objective.hidden)
+				continue
+			if(!has_antag_objectives)
+				has_antag_objectives = TRUE
+				antag_output += "<br><B>Objectives:</B>"
+			antag_output += "<br><B>[objective.flavor] #[antag_obj_count]</B>: [objective.explanation_text][objective.completed ? " (COMPLETED)" : ""]"
 			antag_obj_count++
 
+	output += antag_output
+
 	if(window)
-		recipient << browse(output,"window=memory")
-	else if(all_objectives.len || memory || personal_objectives.len)
+		var/datum/browser/memory_browser = new(recipient, "memory", "<div align='center'>[name_display] Memory</div>", 425, 475)
+		memory_browser.set_content(output)
+		memory_browser.open()
+	else if(length(all_objectives) || length(personal_objectives) || memory)
 		to_chat(recipient, "<i>[output]</i>")
 
-/// output current targets to the player
+/// Output current targets to the player
 /datum/mind/proc/recall_targets(mob/recipient, window=1)
 	var/output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
-	for (var/mob/living/carbon in GLOB.mob_living_list) // Iterate through all mobs in the world
-		if ((carbon.real_name != recipient.real_name) && ((carbon.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))//To be on the list they must be hunted, not be the user and not be a dummy (There is a dummy that has all vices for some reason)
-			output += "<br>[carbon.real_name]"
+	for (var/mob/living/carbon in GLOB.mob_living_list)
+		if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))
+			output += "<br><b>[carbon.real_name]</b>"
 			if (carbon.job)
 				output += " - [carbon.job]"
-	output += "<br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 
-	if(window)
-		recipient << browse(output,"window=memory")
-
-/datum/mind/proc/recall_culling(mob/recipient, window=1)
-	var/output = "<B>[recipient.real_name]'s Rival:</B><br>"
-	for(var/datum/culling_duel/D in GLOB.graggar_cullings)
-		var/mob/living/carbon/human/challenger = D.challenger.resolve()
-		var/mob/living/carbon/human/target = D.target.resolve()
-		var/obj/item/organ/heart/target_heart = D.target_heart.resolve()
-		var/obj/item/organ/heart/challenger_heart = D.challenger_heart.resolve()
-		var/target_heart_location
-		var/challenger_heart_location
-
-		if(target_heart)
-			target_heart_location = target_heart.owner ? target_heart.owner.prepare_deathsight_message() : lowertext(get_area_name(target_heart))
-
-		if(challenger_heart)
-			challenger_heart_location = challenger_heart.owner ? challenger_heart.owner.prepare_deathsight_message() : lowertext(get_area_name(challenger_heart))
-
-		if(recipient == challenger)
-			if(target)
-				if(target_heart && target_heart.owner && target_heart.owner != target) // Rival is not gone but their heart is in someone else
-					output += "<br>[target.real_name], the [target.job]"
-					output += "<br>Your rival's heart beats in [target_heart.owner.real_name]'s chest in [target_heart_location]"
-					output += "<br>Retrieve and consume it to claim victory! Graggar will not forgive failure."
-				else
-					output += "<br>[target.real_name], the [target.job]"
-					output += "<br>Eat your rival's heart before they eat YOURS! Graggar will not forgive failure."
-			else if(target_heart)
-				if(target_heart.owner && target_heart.owner != recipient)
-					output += "<br>Rival's Heart"
-					output += "<br>It's currently inside [target_heart.owner.real_name]'s chest in [target_heart_location]"
-					output += "<br>Your rival's heart beats in another's chest. Retrieve and consume it to claim victory!"
-				else
-					output += "<br>Rival's Heart"
-					output += "<br>It's somewhere in the [target_heart_location]"
-					output += "<br>Your rival's heart is exposed bare! Consume it to claim victory!"
+			// Get the hunted quirk and display the reason
+			var/datum/quirk/vice/hunted/hunted_quirk = carbon.get_quirk(/datum/quirk/vice/hunted)
+			if(hunted_quirk && hunted_quirk.customization_value && hunted_quirk.customization_value != "")
+				output += "<br><i>Hunted for: [hunted_quirk.customization_value]</i>"
 			else
-				continue
+				output += "<br><i>Hunted for: Unknown reasons</i>"
 
-		else if(recipient == target)
-			if(challenger)
-				if(challenger_heart && challenger_heart.owner && challenger_heart.owner != challenger) // Rival is not gone but their heart is in someone else
-					output += "<br>[challenger.real_name], the [challenger.job]"
-					output += "<br>Your rival's heart beats in [challenger_heart.owner.real_name]'s chest in [challenger_heart_location]"
-					output += "<br>Retrieve and consume it to claim victory! Graggar will not forgive failure."
-				else
-					output += "<br>[challenger.real_name], the [challenger.job]"
-					output += "<br>Eat your rival's heart before he eat YOURS! Graggar will not forgive failure."
-			else if(challenger_heart)
-				if(challenger_heart.owner && challenger_heart.owner != recipient)
-					output += "<br>Rival's Heart"
-					output += "<br>It's currently inside [challenger_heart.owner.real_name]'s chest in [challenger_heart_location]"
-					output += "<br>Your rival's heart beats in another's chest. Retrieve and consume it to claim victory!"
-				else
-					output += "<br>Rival's Heart"
-					output += "<br>It's somewhere in the [challenger_heart_location]"
-					output += "<br>Your rival's heart is exposed bare! Consume it to claim victory!"
-			else
-				continue
-
+	output += "<br><br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 	if(window)
 		recipient << browse(output,"window=memory")
 
@@ -550,6 +537,13 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 			to_chat(usr, span_warning("Invalid antagonist ref to be removed."))
 			return
 		antag_datum_ref.admin_remove(usr)
+
+	else if(href_list["vv_antag"])
+		var/datum/antagonist/antag_datum_ref = locate(href_list["vv_antag"]) in antag_datums
+		if(!istype(antag_datum_ref))
+			to_chat(usr, span_warning("Invalid antagonist ref to view variables."))
+			return
+		usr.client.debug_variables(antag_datum_ref)
 
 	else if (href_list["memory_edit"])
 		var/new_memo = copytext(sanitize(input("Write new memory", "Memory", memory) as null|message),1,MAX_MESSAGE_LEN)
@@ -685,23 +679,41 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /// Announces only antagonist objectives
 /datum/mind/proc/announce_antagonist_objectives()
-	var/obj_count = 1
 	for(var/datum/antagonist/antag_datum_ref in antag_datums)
 		if(length(antag_datum_ref.objectives))
-			to_chat(current, span_notice("Your [antag_datum_ref.name] objectives:"))
+			var/obj_count = 1
+			var/has_visible_objectives = FALSE
+			var/objective_output = ""
+
 			for(var/datum/objective/O in antag_datum_ref.objectives)
-				O.update_explanation_text()
-				to_chat(current, "<B>[O.flavor] #[obj_count]</B>: [O.explanation_text]")
-				obj_count++
+				if(!O.hidden)
+					if(!has_visible_objectives)
+						has_visible_objectives = TRUE
+					O.update_explanation_text()
+					objective_output += "<B>[O.flavor] #[obj_count]</B>: [O.explanation_text]<br>"
+					obj_count++
+
+			if(has_visible_objectives)
+				to_chat(current, span_notice("Your [antag_datum_ref.name] objectives:"))
+				to_chat(current, objective_output)
 
 /// Announces only personal objectives
 /datum/mind/proc/announce_personal_objectives()
 	if(length(personal_objectives))
 		var/personal_count = 1
-		for(var/datum/objective/O in personal_objectives)
-			O.update_explanation_text()
-			to_chat(current, "<B>Personal Goal #[personal_count]</B>: [O.explanation_text]")
-			personal_count++
+		var/has_visible_objectives = FALSE
+		var/objective_output = ""
+
+		for(var/datum/objective/personal/O in personal_objectives)
+			if(!O.hidden)
+				if(!has_visible_objectives)
+					has_visible_objectives = TRUE
+				O.update_explanation_text()
+				objective_output += "<B>Personal Goal #[personal_count]</B>: [O.explanation_text]<br>"
+				personal_count++
+
+		if(has_visible_objectives)
+			to_chat(current, objective_output)
 
 /// Announce all objectives (both types)
 /datum/mind/proc/announce_objectives()
@@ -778,10 +790,18 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
  ** skill - associated skill
  ** amt - amount of experience to give
  ** silent - is the player notified of their skill change?
- ** check_apprentice - do apprentices recieve skill experience too?
+ ** check_apprentice - do apprentices receive skill experience too?
 */
 /datum/mind/proc/add_sleep_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
+	if(HAS_TRAIT(current, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	amt *= GLOB.sleep_experience_modifier
+
+	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+		amt *= 1.2
+
+	amt *= current.get_skill_exp_multiplier(skill)
+
 	if(check_apprentice)
 		current.adjust_apprentice_exp(skill, amt, silent)
 	if(sleep_adv.add_sleep_experience(skill, amt, silent))
@@ -790,6 +810,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/add_personal_objective(datum/objective/O)
 	if(!istype(O))
 		return FALSE
+	if(current)
+		current.apply_status_effect(/datum/status_effect/purpose)
 	personal_objectives += O
 	O.owner = src
 	return TRUE

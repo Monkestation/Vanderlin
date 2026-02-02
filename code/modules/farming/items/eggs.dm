@@ -7,13 +7,12 @@
 	filling_color = "#F0E68C"
 	foodtype = MEAT
 	grind_results = list()
-	rotprocess = 15 MINUTES
+	rotprocess = SHELFLIFE_DECENT
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/egg
 	cooktime = 20 SECONDS
-
 	var/fertile = FALSE
 
-/obj/item/reagent_containers/food/snacks/egg/New()
+/obj/item/reagent_containers/food/snacks/egg/Initialize(mapload)
 	. = ..()
 	icon_state = pick("egg","eggB")
 
@@ -21,7 +20,6 @@
 	. = ..()
 	if(.)
 		fertile = FALSE
-
 
 /obj/item/reagent_containers/food/snacks/egg/Crossed(mob/living/carbon/human/H)
 	..()

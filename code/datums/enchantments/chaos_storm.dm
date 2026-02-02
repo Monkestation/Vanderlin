@@ -12,12 +12,17 @@
 		/datum/thaumaturgical_essence/fire = 25
 	)
 
-	var/list/last_used = list()
+	var/last_used
 
-/datum/enchantment/chaos_storm/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/enchantment/chaos_storm/register_triggers(atom/item)
+	. = ..()
+	registered_signals += COMSIG_ITEM_AFTERATTACK
+	RegisterSignal(item, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hit))
+
+/datum/enchantment/chaos_storm/proc/on_hit(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
 		return
-	if(world.time < (src.last_used[source] + (10 SECONDS)))
+	if(world.time < src.last_used + 10 SECONDS)
 		return
 
 	if(isliving(target))
@@ -37,6 +42,6 @@
 				L.OffBalance(2.5 SECONDS)
 				to_chat(L, span_warning("Chaotic energy disrupts your coordination!"))
 			if(5)
-				L.confused += 2 SECONDS
+				L.adjust_confusion(2 SECONDS)
 				to_chat(L, span_warning("Chaotic energy scrambles your thoughts!"))
-	last_used[source] = world.time
+	last_used = world.time

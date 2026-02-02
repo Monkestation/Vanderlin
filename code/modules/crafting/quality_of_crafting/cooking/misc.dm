@@ -129,11 +129,11 @@
 	name = "Pestran Stick"
 
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/butter = 1,
+		/obj/item/reagent_containers/food/snacks/butterslice = 1,
 		/obj/item/grown/log/tree/stick = 1,
 	)
 	required_table = TRUE
-	attacked_atom = /obj/item/reagent_containers/food/snacks/butter
+	attacked_atom = /obj/item/reagent_containers/food/snacks/butterslice
 	starting_atom = /obj/item/grown/log/tree/stick
 	output = /obj/item/reagent_containers/food/snacks/pestranstick
 	craft_time = 5 SECONDS
@@ -218,3 +218,34 @@
 	starting_atom = /obj/item/pestle
 	attacked_atom = /obj/item/reagent_containers/glass/mortar
 
+/datum/repeatable_crafting_recipe/cooking/saltedseeds
+	name = "Salted Seeds"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/roastseeds = 3,
+		/obj/item/reagent_containers/powder/salt = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/powder/salt
+	starting_atom = /obj/item/reagent_containers/food/snacks/roastseeds
+	output = /obj/item/reagent_containers/food/snacks/roastseeds
+	output_amount = 3
+	craft_time = 8 SECONDS
+	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
+	crafting_message = "mix the salt and seeds"
+	extra_chance = 100
+
+// Redtallow can be crafted using visceras (rendered from animal sinew)
+/datum/repeatable_crafting_recipe/tallow/red
+	name = "red tallow"
+
+	requirements = list(
+		/obj/item/alch/viscera = 1,
+		/obj/item/reagent_containers/food/snacks/tallow = 1,
+	)
+
+	starting_atom = /obj/item/alch/viscera
+	attacked_atom = /obj/item/reagent_containers/food/snacks/tallow
+	output = /obj/item/reagent_containers/food/snacks/tallow/red
+	craft_time = 1 SECONDS
+	subtypes_allowed = TRUE

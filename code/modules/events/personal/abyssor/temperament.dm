@@ -8,6 +8,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_ABYSSOR,
 		TAG_WATER,
 		TAG_UNEXPECTED,
 	)
@@ -44,10 +45,10 @@
 
 	var/calm
 	if(prob(50))
-		abyssor_objective = new /datum/objective/abyssor_bath(owner = chosen_one.mind)
+		abyssor_objective = new /datum/objective/personal/abyssor_bath(owner = chosen_one.mind)
 		calm = TRUE
 	else
-		abyssor_objective = new /datum/objective/abyssor_splash(owner = chosen_one.mind)
+		abyssor_objective = new /datum/objective/personal/abyssor_splash(owner = chosen_one.mind)
 		calm = FALSE
 
 	chosen_one.mind.add_personal_objective(abyssor_objective)

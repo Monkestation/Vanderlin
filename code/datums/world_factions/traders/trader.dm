@@ -41,7 +41,7 @@
 	mob_species = /datum/species/rakshari
 
 /obj/effect/mob_spawn/human/rakshari/trader
-	outfit = /datum/outfit/job/tailor
+	outfit = /datum/outfit/tailor
 
 /mob/living/simple_animal/hostile/retaliate/trader
 	name = "Trader"

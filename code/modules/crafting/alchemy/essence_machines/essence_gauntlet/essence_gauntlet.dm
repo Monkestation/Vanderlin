@@ -1,69 +1,9 @@
-
 /obj/item/clothing/gloves/essence_gauntlet
 	name = "essence gauntlet"
-	desc = "A  gauntlet that can store alchemical essences and channel them into alchemical spells. Advanced combinations can unlock powerful effects."
+	desc = "A gauntlet that can store alchemical essences and channel them into alchemical spells. Advanced combinations can unlock powerful effects."
 	icon_state = "essence_gauntlet"
 	var/list/obj/item/essence_vial/stored_vials = list()
 	var/max_vials = 4
-	var/list/granted_spells = list() // Spells granted by stored essences
-	var/list/essence_spell_mapping = list() // Maps essence types to spell types
-	var/list/combo_spell_mapping = list() // Maps essence combinations to combo spells
-	var/list/racial_combo_mapping = list() // Maps race + essence combos to special spells
-
-/obj/item/clothing/gloves/essence_gauntlet/Initialize()
-	. = ..()
-
-	// Single essence spells
-	essence_spell_mapping = list(
-		/datum/thaumaturgical_essence/air = list(/datum/action/cooldown/spell/essence/breeze, /datum/action/cooldown/spell/essence/air_walk),
-		/datum/thaumaturgical_essence/water = list(/datum/action/cooldown/spell/essence/cleanse, /datum/action/cooldown/spell/essence/water_breathing),
-		/datum/thaumaturgical_essence/fire = list(/datum/action/cooldown/spell/essence/spark, /datum/action/cooldown/spell/essence/warmth),
-		/datum/thaumaturgical_essence/earth = list(/datum/action/cooldown/spell/essence/mend, /datum/action/cooldown/spell/essence/stone_shape),
-		/datum/thaumaturgical_essence/frost = list(/datum/action/cooldown/spell/essence/chill, /datum/action/cooldown/spell/essence/preserve),
-		/datum/thaumaturgical_essence/light = list(/datum/action/cooldown/spell/essence/illuminate, /datum/action/cooldown/spell/essence/daylight),
-		/datum/thaumaturgical_essence/motion = list(/datum/action/cooldown/spell/essence/haste, /datum/action/cooldown/spell/essence/phase_step),
-		/datum/thaumaturgical_essence/life = list(/datum/action/cooldown/spell/essence/refresh, /datum/action/cooldown/spell/essence/vigor),
-		/datum/thaumaturgical_essence/order = list(/datum/action/cooldown/spell/essence/stabilize),
-		/datum/thaumaturgical_essence/chaos = list(/datum/action/cooldown/spell/essence/randomize),
-		/datum/thaumaturgical_essence/void = list(/datum/action/cooldown/spell/essence/silence),
-		/datum/thaumaturgical_essence/poison = list(/datum/action/cooldown/spell/essence/neutralize, /datum/action/cooldown/spell/essence/detect_poison),
-		/datum/thaumaturgical_essence/crystal = list(/datum/action/cooldown/spell/essence/gem_detect),
-		/datum/thaumaturgical_essence/magic = list(/datum/action/cooldown/spell/essence/arcane_mark),
-		/datum/thaumaturgical_essence/energia = list(/datum/action/cooldown/spell/essence/energize, /datum/action/cooldown/spell/essence/power_surge),
-		/datum/thaumaturgical_essence/cycle = list(/datum/action/cooldown/spell/essence/seasonal_attune)
-	)
-
-	// Combo spells - require two different essences
-	combo_spell_mapping = list(
-		list(/datum/thaumaturgical_essence/fire, /datum/thaumaturgical_essence/air) = list(/datum/action/cooldown/spell/essence/flame_jet),
-		list(/datum/thaumaturgical_essence/water, /datum/thaumaturgical_essence/earth) = list(/datum/action/cooldown/spell/essence/mud_shape, /datum/action/cooldown/spell/essence/fertile_soil),
-		list(/datum/thaumaturgical_essence/fire, /datum/thaumaturgical_essence/earth) = list(/datum/action/cooldown/spell/essence/forge_heat),
-		list(/datum/thaumaturgical_essence/frost, /datum/thaumaturgical_essence/water) = list(/datum/action/cooldown/spell/essence/ice_bridge, /datum/action/cooldown/spell/essence/frozen_storage),
-		list(/datum/thaumaturgical_essence/light, /datum/thaumaturgical_essence/fire) = list(/datum/action/cooldown/spell/essence/brilliant_flame, /datum/action/cooldown/spell/essence/solar_focus),
-		list(/datum/thaumaturgical_essence/life, /datum/thaumaturgical_essence/water) = list(/datum/action/cooldown/spell/essence/healing_spring, /datum/action/cooldown/spell/essence/purify_water),
-		list(/datum/thaumaturgical_essence/earth, /datum/thaumaturgical_essence/crystal) = list(/datum/action/cooldown/spell/essence/gem_growth, /datum/action/cooldown/spell/essence/mineral_sense),
-		list(/datum/thaumaturgical_essence/motion, /datum/thaumaturgical_essence/air) = list(/datum/action/cooldown/spell/essence/wind_step, /datum/action/cooldown/spell/essence/aerial_dash),
-		list(/datum/thaumaturgical_essence/order, /datum/thaumaturgical_essence/light) = list(/datum/action/cooldown/spell/essence/divine_order, /datum/action/cooldown/spell/essence/sacred_geometry),
-		list(/datum/thaumaturgical_essence/chaos, /datum/thaumaturgical_essence/void) = list(/datum/action/cooldown/spell/essence/reality_shift, /datum/action/cooldown/spell/essence/probability_warp),
-		list(/datum/thaumaturgical_essence/poison, /datum/thaumaturgical_essence/water) = list(/datum/action/cooldown/spell/essence/toxic_cleanse),
-		list(/datum/thaumaturgical_essence/magic, /datum/thaumaturgical_essence/crystal) = list(/datum/action/cooldown/spell/essence/spell_crystal, /datum/action/cooldown/spell/essence/arcane_focus),
-		list(/datum/thaumaturgical_essence/energia, /datum/thaumaturgical_essence/motion) = list(/datum/action/cooldown/spell/essence/kinetic_burst, /datum/action/cooldown/spell/essence/momentum_transfer),
-		list(/datum/thaumaturgical_essence/cycle, /datum/thaumaturgical_essence/life) = list(/datum/action/cooldown/spell/essence/regeneration_cycle, /datum/action/cooldown/spell/essence/growth_acceleration)
-	)
-
-	// Racial combo spells
-	racial_combo_mapping = list(
-		"dwarf" = list(
-			list(/datum/thaumaturgical_essence/earth, /datum/thaumaturgical_essence/water) = list(/datum/action/cooldown/spell/essence/create_beer),
-			list(/datum/thaumaturgical_essence/fire, /datum/thaumaturgical_essence/earth) = list(/datum/action/cooldown/spell/essence/master_forge, /datum/action/cooldown/spell/essence/ancestral_smithing)
-		),
-		"elf" = list(
-			list(/datum/thaumaturgical_essence/life, /datum/thaumaturgical_essence/light) = list(/datum/action/cooldown/spell/essence/elven_grace)
-		),
-		"human" = list(
-			list(/datum/thaumaturgical_essence/order, /datum/thaumaturgical_essence/chaos) = list(/datum/action/cooldown/spell/essence/balanced_mind)
-		)
-	)
 
 /obj/item/clothing/gloves/essence_gauntlet/equipped(mob/user, slot)
 	. = ..()
@@ -79,6 +19,7 @@
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(!length(stored_vials))
 		to_chat(user, span_warning("[src] has no vials to remove!"))
 		return
@@ -233,74 +174,27 @@
 			available_types[vial.contained_essence.type] = TRUE
 	return available_types
 
-/obj/item/clothing/gloves/essence_gauntlet/proc/get_user_race(mob/user)
-	if(!ishuman(user))
-		return null
-	var/mob/living/carbon/human/human_user = user
-	return human_user.dna?.species?.id
-
-/obj/item/clothing/gloves/essence_gauntlet/proc/check_combo_requirements(list/required_essences, list/available_essences)
-	for(var/essence_type in required_essences)
-		if(!(essence_type in available_essences))
-			return FALSE
-	return TRUE
-
-/obj/item/clothing/gloves/essence_gauntlet/proc/update_granted_spells()
-	granted_spells = list()
-	var/list/available_essences = get_available_essence_types()
-
-	// Add single essence spells
-	for(var/obj/item/essence_vial/vial in stored_vials)
-		if(vial.contained_essence && vial.essence_amount > 0)
-			var/list/spells = essence_spell_mapping[vial.contained_essence.type]
-			if(spells)
-				for(var/spell_type in spells)
-					if(!(spell_type in granted_spells))
-						granted_spells += spell_type
-
-	// Add combo spells
-	for(var/list/combo_requirements in combo_spell_mapping)
-		if(check_combo_requirements(combo_requirements, available_essences))
-			var/list/combo_spells = combo_spell_mapping[combo_requirements]
-			for(var/spell_type in combo_spells)
-				if(!(spell_type in granted_spells))
-					granted_spells += spell_type
-
 /obj/item/clothing/gloves/essence_gauntlet/proc/grant_essence_spells(mob/user)
 	if(!isliving(user))
 		return
 
-	update_granted_spells()
-	var/mob/living/living_user = user
 	var/list/available_essences = get_available_essence_types()
-	var/user_race = get_user_race(user)
 
-	// Grant single essence and combo spells
-	for(var/datum/action/spell_type as anything in granted_spells)
-		var/datum/action/cooldown/spell/spell = new spell_type
-		spell.spell_type = SPELL_ESSENCE
-		spell.link_to(src)
-		spell.Grant(living_user)
-
-	// Grant racial combo spells
-	if(user_race && (user_race in racial_combo_mapping))
-		var/list/racial_combos = racial_combo_mapping[user_race]
-		for(var/list/combo_requirements in racial_combos)
-			if(check_combo_requirements(combo_requirements, available_essences))
-				var/list/racial_spells = racial_combos[combo_requirements]
-				for(var/datum/action/spell_type as anything in racial_spells)
-					var/datum/action/cooldown/spell/spell = new spell_type
-					spell.spell_type = SPELL_ESSENCE
-					spell.link_to(src)
-					spell.Grant(living_user)
+	for(var/datum/essence_combo/combo in GLOB.essence_combos)
+		if(combo.can_activate(available_essences, user))
+			combo.apply_effects(src, user)
 
 /obj/item/clothing/gloves/essence_gauntlet/proc/remove_essence_spells(mob/user)
 	if(!isliving(user) || !user.mind)
 		return
 
-	var/mob/living/living_user = user
+	var/list/available_essences = get_available_essence_types()
 
-	// Remove all essence-flagged spells
+	for(var/datum/essence_combo/combo in GLOB.essence_combos)
+		if(combo.can_activate(available_essences, user))
+			combo.remove_effects(src, user)
+
+	var/mob/living/living_user = user
 	living_user.remove_spells(source = src)
 
 /obj/item/clothing/gloves/essence_gauntlet/proc/essence_failure_feedback(mob/user)
@@ -312,7 +206,6 @@
 
 /obj/item/clothing/gloves/essence_gauntlet/examine(mob/user)
 	. = ..()
-
 	. += span_notice("Essence Vials ([length(stored_vials)]/[max_vials]):")
 
 	if(!length(stored_vials))
@@ -320,35 +213,38 @@
 		. += span_notice("Right-click to remove vials when available")
 		return
 
-	var/list/available_essences = get_available_essence_types()
-	var/user_race = get_user_race(user)
-
-	for(var/obj/item/essence_vial/vial in stored_vials)
+	// Show stored vials
+	for(var/i in 1 to length(stored_vials))
+		var/obj/item/essence_vial/vial = stored_vials[i]
 		if(vial.contained_essence && vial.essence_amount > 0)
-			if(!HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
-				. += span_notice("- [vial.essence_amount] units of essence smelling of [vial.contained_essence.smells_like]")
-			else
+			if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
 				. += span_notice("- [vial.essence_amount] units of [vial.contained_essence.name]")
+			else
+				. += span_notice("- [vial.essence_amount] units of essence smelling of [vial.contained_essence.smells_like]")
 		else
 			. += span_notice("- Empty vial")
 
 	. += span_notice("Right-click to remove vials")
 
-	// Show available combo spells
-	if(length(available_essences) >= 2)
-		. += span_notice("\nCombo Spells Available:")
-		var/combo_count = 0
-		for(var/list/combo_requirements in combo_spell_mapping)
-			if(check_combo_requirements(combo_requirements, available_essences))
-				combo_count++
+	// Show available combos
+	var/list/available_essences = get_available_essence_types()
+	var/combo_count = 0
+	var/non_spell_combos = list()
 
-		if(user_race && (user_race in racial_combo_mapping))
-			var/list/racial_combos = racial_combo_mapping[user_race]
-			for(var/list/combo_requirements in racial_combos)
-				if(check_combo_requirements(combo_requirements, available_essences))
-					combo_count++
+	for(var/datum/essence_combo/combo in GLOB.essence_combos)
+		if(combo.can_activate(available_essences, user))
+			combo_count++
+			if(!istype(combo, /datum/essence_combo/spell))
+				non_spell_combos += combo.name
 
-		if(combo_count > 0)
-			. += span_notice("- [combo_count] combination spell[combo_count > 1 ? "s" : ""] unlocked")
-		else
-			. += span_notice("- No combinations available with current essences")
+	if(combo_count > 0)
+		. += span_notice("\nActive Effects:")
+		if(length(non_spell_combos))
+			for(var/combo_name in non_spell_combos)
+				. += span_notice("- [combo_name]")
+
+		var/spell_combos = combo_count - length(non_spell_combos)
+		if(spell_combos > 0)
+			. += span_notice("- [spell_combos] spell effect[spell_combos > 1 ? "s" : ""] available")
+	else
+		. += span_notice("\nNo essence effects active")

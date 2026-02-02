@@ -853,5 +853,81 @@
                 "map": "added city watch lieutenant's room and office, tweaked the city watch garrison a bit"
             }
         ]
+    },
+    "2025-09-27": {
+        "Wouju": [
+            {
+                "rscadd": "Mages can pick their hats and robes upon spawning in."
+            },
+            {
+                "balance": "wretches have 2 slots instead of 3"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "spellcheck": "wine bottle description fix"
+            }
+        ]
+    },
+    "2025-09-28": {
+        "wgtjunior743": [
+            {
+                "bugfix": "Harpoon consuming steam when it is not being used."
+            },
+            {
+                "bugfix": "Harpoon being able to remove all the steam from the steamknight boiler."
+            },
+            {
+                "bugfix": "Steamknight being skilled if they picked saber, they are not expert."
+            },
+            {
+                "bugfix": "Steamknight still being expert on crossbow."
+            },
+            {
+                "bugfix": "Tieflings, Hollow-kin and medicators being able to play noble as prisoner."
+            },
+            {
+                "bugfix": "Magician Apprentices are properly locked to Noc and Zizo."
+            }
+        ],
+        "Vithelic": [
+            {
+                "admin": "Added a new smite."
+            }
+        ],
+        "Wouju": [
+            {
+                "rscadd": "You can see someone's constitution and speed, on examine. if you have high enough perception"
+            },
+            {
+                "qol": "backpacks, coifs and gorgets/bevors can't be pickpocketed. Those are strapped on too tight. Made no sense you could take off someones coif to be honest."
+            },
+            {
+                "qol": "general improvements to pickpocketing, like the target's pickpocketing skill mattering"
+            },
+            {
+                "balance": "backpacks, coifs and gorgets/bevors can't be pickpocketed. Those are strapped on too tight. Made no sense you could take off someones coif to be honest."
+            },
+            {
+                "balance": "Easier to level up pickpocketing."
+            },
+            {
+                "balance": "you can aim for a specific back/belt slot by aiming for the targets arms/legs"
+            }
+        ]
+    },
+    "2025-09-29": {
+        "wgtjunior743": [
+            {
+                "bugfix": "Sallet beings unforgeable."
+            }
+        ]
+    },
+    "2025-09-30": {
+        "Wouju": [
+            {
+                "rscadd": "Added new sprites for wizard and necromancer robes"
+            }
+        ]
     }
 }

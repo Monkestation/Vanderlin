@@ -353,7 +353,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	for(var/mob/living/carbon/human/to_be_outlawed in GLOB.player_list)
 		if(to_be_outlawed.real_name == message)
 			found = TRUE
-		if(to_be_outlawed.advjob == "Faceless One")
+		if(to_be_outlawed.job == "Faceless One")
 			say("Who? That person doesn't exist!")
 			playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 			reset_mode()
@@ -396,6 +396,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 			return
 		newtax = CLAMP(newtax, 1, 99)
 		SStreasury.tax_value = newtax / 100
+		SStreasury.untaxed_deposits = list()
 		priority_announce("The new tax in Vanderlin shall be [newtax] percent.", "[user.real_name], The Generous [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
 	reset_mode()
 
@@ -421,24 +422,27 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	var/list/possible_positions = list()
 	possible_positions += GLOB.noble_positions
 	possible_positions += GLOB.garrison_positions
-	possible_positions += GLOB.church_positions
 	possible_positions += GLOB.serf_positions
 	possible_positions += GLOB.company_positions
 	possible_positions += GLOB.peasant_positions
 	possible_positions += GLOB.apprentices_positions
+	possible_positions += GLOB.youngfolk_positions
 	possible_positions += GLOB.allmig_positions
-	possible_positions -= "Monarch"
+	possible_positions -= list("Monarch", "Innkeepers Son")
 	var/new_pos = input(user, "Select their new position", src, null) as anything in possible_positions
 	if(isnull(victim))
 		return
 
 	victim.job = new_pos
-	victim.migrant_type = null
+	victim.mind?.set_assigned_role(new_pos)
 	if(ishuman(victim))
 		var/mob/living/carbon/human/human = victim
 		if(!HAS_TRAIT(human, TRAIT_RECRUITED) && HAS_TRAIT(human, TRAIT_FOREIGNER))
 			ADD_TRAIT(human, TRAIT_RECRUITED, TRAIT_GENERIC)
-		human.advjob = new_pos
+
+	if(victim.mind?.assigned_role)
+		new_pos = victim.mind.assigned_role.get_informed_title(victim)
+
 	if(!SScommunications.can_announce(user))
 		return
 

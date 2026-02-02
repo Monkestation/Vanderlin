@@ -1,6 +1,7 @@
 /datum/action/cooldown/spell/undirected/list_target/ultimate_sacrifice
 	name = "Ultimate Sacrifice"
 	button_icon_state = "revive"
+	sound = null
 	has_visual_effects = FALSE
 	cast_range = 1
 
@@ -49,26 +50,15 @@
 	owner.say("RAVOX, I GIVE MY LIFE FOR THEIRS!", forced = "ravox_ritual")
 	owner.emote("rage", forced = TRUE)
 
-	if(!cast_on.ckey)
-		var/mob/living/carbon/spirit/underworld_spirit = cast_on.get_spirit()
-		if(underworld_spirit)
-			var/mob/dead/observer/ghost = underworld_spirit.ghostize()
-			qdel(underworld_spirit)
-			ghost.mind.transfer_to(cast_on, TRUE)
-		cast_on.grab_ghost(force = TRUE)
-
-	cast_on.revive(full_heal = TRUE, admin_revive = FALSE)
-
-	playsound(owner, 'sound/magic/churn.ogg', 100)
+	cast_on.revive(HEAL_ALL)
+	cast_on.grab_ghost(force = TRUE, grab_spirit = TRUE)
+	playsound(owner, 'sound/magic/churn.ogg', 80)
 	ADD_TRAIT(owner, TRAIT_NECRA_CURSE, "ravox_ritual")
 	owner.death()
 
 	if(owner.mind)
-		var/datum/objective/ultimate_sacrifice/objective = target
+		var/datum/objective/personal/ultimate_sacrifice/objective = target
 		if(objective && !objective.completed)
-			objective.completed = TRUE
-			owner.adjust_triumphs(objective.triumph_count)
-			adjust_storyteller_influence(RAVOX, 20)
-			objective.escalate_objective()
+			objective.complete_objective()
 
 	qdel(src)

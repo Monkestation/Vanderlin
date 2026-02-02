@@ -13,9 +13,9 @@
 		{"Down": true, "Turf Weather Effects": true, "Leylines":true}
 	],
 	"other_z": [
-		"_maps/map_files/rosewood/rosewood_forest.json",
-		"_maps/map_files/rosewood/rosewood_mountain.json",
-		"_maps/map_files/rosewood/rosewood_marsh.json"
+		"map_files/rosewood/rosewood_forest",
+		"map_files/rosewood/rosewood_mountain",
+		"map_files/rosewood/rosewood_marsh"
 	],
 	"minetype": null,
 	"space_empty_levels": 0,

@@ -18,12 +18,13 @@
 	switch(current_task)
 		if("scanning")
 			// Priority 1: Harvest ready crops
-			for(var/obj/structure/soil/soil in oview(7, pawn))
-				if(soil.produce_ready)
-					current_target = soil
-					manager.set_movement_target(controller, soil)
-					current_task = "harvesting"
-					return ACTION_STATE_CONTINUE
+			if(!istype(pawn, /mob/living/simple_animal/hostile/retaliate/fae/agriopylon))
+				for(var/obj/structure/soil/soil in oview(7, pawn))
+					if(soil.produce_ready)
+						current_target = soil
+						manager.set_movement_target(controller, soil)
+						current_task = "harvesting"
+						return ACTION_STATE_CONTINUE
 
 			// Priority 2: Remove weeds
 			for(var/obj/structure/soil/soil in oview(7, pawn))

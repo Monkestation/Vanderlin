@@ -42,7 +42,7 @@
 
 /obj/machinery/essence/reservoir/process()
 	// Handle void mode processing
-	if(void_mode && GLOB.thaumic_research && GLOB.thaumic_research.can_use_machine("resevoir_void"))
+	if(void_mode && GLOB.thaumic_research?.has_research(/datum/thaumic_research_node/resevoir_decay))
 		if(storage.get_total_stored() > 0)
 			var/total_voided = 0
 			var/remaining_void_capacity = void_rate
@@ -152,7 +152,7 @@
 	var/list/options = list()
 	options["Toggle Filter Mode ([filter_mode ? "ON" : "OFF"])"] = "toggle_filter"
 
-	if(GLOB.thaumic_research && GLOB.thaumic_research.can_use_machine("resevoir_void"))
+	if(GLOB.thaumic_research?.has_research(/datum/thaumic_research_node/resevoir_decay))
 		options["Toggle Void Mode ([void_mode ? "ON" : "OFF"])"] = "toggle_void"
 		if(void_mode)
 			options["Adjust Void Rate ([void_rate]/cycle)"] = "adjust_void"
@@ -329,7 +329,7 @@
 
 
 /obj/machinery/essence/reservoir/proc/toggle_void_mode(mob/user)
-	if(!GLOB.thaumic_research || !GLOB.thaumic_research.can_use_machine("resevoir_void"))
+	if(!GLOB.thaumic_research || !GLOB.thaumic_research.has_research(/datum/thaumic_research_node/resevoir_decay))
 		to_chat(user, span_warning("You lack the knowledge to operate this reservoir in void mode."))
 		return FALSE
 

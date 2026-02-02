@@ -1,0 +1,2 @@
+/area/rogue/@SUBTYPES : /area/@SUBTYPES{@OLD}
+/area/rogue/under/town/caverogue : /area/under/cave{@OLD}

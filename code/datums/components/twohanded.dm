@@ -16,7 +16,7 @@
 	/// The force of the item when unwielded
 	var/force_unwielded = 0
 	/// Play sound when wielded
-	var/wieldsound = FALSE
+	var/wieldsound = list('sound/combat/weaponr1.ogg','sound/combat/weaponr2.ogg')
 	/// Play sound when unwielded
 	var/unwieldsound = FALSE
 	/// Play sound on attack when wielded
@@ -25,6 +25,8 @@
 	var/require_twohands = FALSE
 	/// The icon that will be used when wielded
 	var/icon_wielded = FALSE
+	/// Do we create an offhand item when wielding? Does not affect the rest of twohanded functionality.
+	var/wield_block_offhand = TRUE
 	/// Reference to the offhand created for the item
 	var/obj/item/offhand/offhand_item = null
 	/// A callback on the parent to be called when the item is wielded
@@ -45,10 +47,11 @@
  * * force_wielded (optional) The force setting when the item is wielded, do not use with force_multiplier
  * * force_unwielded (optional) The force setting when the item is unwielded, do not use with force_multiplier
  * * icon_wielded (optional) The icon to be used when wielded
+ * * wield_blocking (optional) Is the offhand blocked?
  */
 /datum/component/two_handed/Initialize(require_twohands=FALSE, wieldsound=FALSE, unwieldsound=FALSE, attacksound=FALSE, \
 										force_multiplier=0, force_wielded=0, force_unwielded=0, icon_wielded=FALSE, \
-										datum/callback/wield_callback, datum/callback/unwield_callback)
+										datum/callback/wield_callback, datum/callback/unwield_callback, wield_block_offhand = TRUE)
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 
@@ -62,6 +65,7 @@
 	src.icon_wielded = icon_wielded
 	src.wield_callback = wield_callback
 	src.unwield_callback = unwield_callback
+	src.wield_block_offhand = wield_block_offhand
 
 	if(require_twohands)
 		ADD_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS, ABSTRACT_ITEM_TRAIT)
@@ -201,7 +205,7 @@
 	// if(sharpened_increase)
 	// 	parent_item.force += sharpened_increase
 	parent_item.name += " (wielded)"
-	parent_item.update_appearance()
+	parent_item.update_appearance(UPDATE_ICON_STATE)
 
 	if(user.get_item_by_slot(ITEM_SLOT_BACK) == parent)
 		user.update_inv_back()
@@ -214,15 +218,16 @@
 		sound_to_play = pick(sound_to_play)
 
 	if(isfile(sound_to_play))
-		playsound(parent_item.loc, sound_to_play, 50, TRUE)
+		playsound(parent_item, sound_to_play, 50, TRUE)
 
 	// Let's reserve the other hand
-	offhand_item = new(user)
-	offhand_item.name = "[parent_item.name] - offhand"
-	offhand_item.desc = "Your second grip on [parent_item]."
-	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
-	RegisterSignal(offhand_item, COMSIG_PARENT_QDELETING, PROC_REF(on_destroy))
-	user.put_in_inactive_hand(offhand_item)
+	if(wield_block_offhand)
+		offhand_item = new(user)
+		offhand_item.name = "[parent_item.name] - offhand"
+		offhand_item.desc = "Your second grip on [parent_item]."
+		RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+		RegisterSignal(offhand_item, COMSIG_PARENT_QDELETING, PROC_REF(on_destroy))
+		user.put_in_inactive_hand(offhand_item)
 
 	to_chat(user, span_notice("I wield [parent] with both hands."))
 
@@ -260,7 +265,7 @@
 		parent_item.name = "[initial(parent_item.name)]"
 
 	// Update icons
-	parent_item.update_appearance()
+	parent_item.update_appearance(UPDATE_ICON_STATE)
 
 	if(istype(user)) // tk showed that we might not have a mob here
 		if(user.get_item_by_slot(ITEM_SLOT_BACK) == parent)
@@ -281,7 +286,7 @@
 
 	// Play sound if set
 	if(unwieldsound)
-		playsound(parent_item.loc, unwieldsound, 50, TRUE)
+		playsound(parent_item, unwieldsound, 50, TRUE)
 
 	// Remove the object in the offhand
 	if(offhand_item)
@@ -297,7 +302,7 @@
 	SIGNAL_HANDLER
 	if(wielded && attacksound)
 		var/obj/item/parent_item = parent
-		playsound(parent_item.loc, attacksound, 50, TRUE)
+		playsound(parent_item, attacksound, 50, TRUE)
 
 /**
  * on_update_icon triggers on call to update parent items icon

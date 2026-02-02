@@ -8,6 +8,7 @@
 	min_players = 30
 
 	tags = list(
+		TAG_PESTRA,
 		TAG_MEDICAL,
 	)
 
@@ -44,13 +45,15 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/take_pain/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/take_pain/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
 	chosen_one.add_spell(/datum/action/cooldown/spell/transfer_pain)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE PESTRA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Pestra calls you to ease the suffering of others! Find those in pain and take their suffering upon yourself."))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE PESTRA'S CHOSEN!"),
+		span_notice("Pestra calls you to ease the suffering of others! Find those in pain and take their suffering upon yourself."),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/magic/cosmic_expansion.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

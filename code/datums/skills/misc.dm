@@ -19,7 +19,7 @@
 
 /datum/skill/misc/reading
 	name = "Reading"
-	desc = "Reading is a skill that represents your character's ability to read and write. The higher your skill in Reading, better you can read." //Placeholder description, no clue what it does besides minimum reading for signs
+	desc = "Reading is a skill that represents your character's ability to read and write. Without at least one level in Reading, you'll be totally unable to read or write, and low reading skill might make things hard to read."
 	randomable_dream_xp = FALSE
 	dreams = list(
 		"...you lick your fingers, gently flipping through the old, decaying pages... re-reading the page, your eyes widen in shock... the truth is terrible... you feel a presence behind you... and the cold blade in your throat..."
@@ -27,14 +27,14 @@
 
 /datum/skill/misc/swimming
 	name = "Swimming"
-	desc = "Swimming is a skill that represents your character's ability to swim. The higher your skill in Swimming, the faster you can swim and the less energy you'll use while swimming." //Placeholder description, no clue what it does.
+	desc = "Swimming is a skill that represents your character's ability to swim. The higher your skill in Swimming, the faster you can swim and the less energy you'll use while swimming."
 	dreams = list(
 		"...you fight the current, struggling - the lungs in your body crawling for breath... you go limp, and you let the current guide you..."
 	)
 
 /datum/skill/misc/stealing
 	name = "Pickpocketing"
-	desc = "Pickpocketing is a skill that represents your character's ability to steal from others. The higher your skill in Pickpocketing, the less likely you are to be caught."
+	desc = "Pickpocketing is a skill that represents your character's ability to steal from others. The higher your skill in Pickpocketing, the more likely you are to succeed, the less likely you are to be caught, and the more likely you are to catch people pickpocketing you."
 	dreams = list(
 		"...you sneak past a well-dressed man, stealing an elaborate dagger from his waist... when you get home and unsheathe it, you stare at his reflection on the blade..."
 	)
@@ -48,7 +48,7 @@
 
 /datum/skill/misc/lockpicking
 	name = "Lockpicking"
-	desc = "Lockpicking is a skill that represents your character's ability to pick locks. The higher your skill in Lockpicking, the faster you can pick locks and the less likely you are to break your tools." //Actually no idea if you can pick faster or not. Placeholder
+	desc = "Lockpicking is a skill that represents your character's ability to pick locks. The higher your skill in Lockpicking, the more easily you can pick locks, and the less likely you are to break your tools."
 	dreams = list(
 		"...clatter, click-... click... clack! the door opens, the glint of the iron lock is replaced with a green eye staring down a crossbow... clatter, click... click... clack...!"
 	)

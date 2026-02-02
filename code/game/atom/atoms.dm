@@ -43,7 +43,7 @@
 
 /// Last name used to calculate a color for the chatmessage overlays
 	var/chat_color_name
-	/// Last color calculated for the the chatmessage overlays
+	/// Last color calculated for the chatmessage overlays
 	var/chat_color
 	/// A luminescence-shifted value of the last color calculated for chatmessage overlays
 	var/chat_color_darkened
@@ -276,7 +276,7 @@
  * * clears overlays and priority overlays
  * * clears the light object
  */
-/atom/Destroy()
+/atom/Destroy(force)
 	if(alternate_appearances)
 		for(var/K in alternate_appearances)
 			var/datum/atom_hud/alternate_appearance/AA = alternate_appearances[K]
@@ -296,8 +296,12 @@
 	QDEL_NULL(light)
 	QDEL_NULL(ai_controller)
 
+	// We used to remove stuff from the smoothing queue here,
+	// but list removals can be REALLY costly.
+	// If this is qdeleted and the flag is unset, it'll just get skipped
+	// which is way faster.
 	if(smoothing_flags & SMOOTH_QUEUED)
-		SSicon_smooth.remove_from_queues(src)
+		smoothing_flags &= ~SMOOTH_QUEUED
 
 	return ..()
 
@@ -325,31 +329,9 @@
 	if(mover.pass_flags & pass_flags_self)
 		return TRUE
 	if(mover.throwing && (pass_flags_self & LETPASSTHROW))
-		return TRUE
+		if(!(ismob(mover) || ismobholder(mover)) || !(pass_flags_self & NOTLETPASSTHROWNMOB))
+			return TRUE
 	return !density
-
-/**
- * Is this atom currently located on centcom
- *
- * Specifically, is it on the z level and within the centcom areas
- *
- * You can also be in a shuttleshuttle during endgame transit
- *
- * Used in gamemode to identify mobs who have escaped and for some other areas of the code
- * who don't want atoms where they shouldn't be
- */
-/atom/proc/onCentCom()
-	var/turf/T = get_turf(src)
-	if(!T)
-		return FALSE
-
-	if(!is_centcom_level(T.z))//if not, don't bother
-		return FALSE
-
-	//Check for centcom itself
-	if(istype(T.loc, /area/centcom))
-		return TRUE
-
 
 /atom/proc/make_shiny(_shine = SHINE_REFLECTIVE)
 	if(total_reflection_mask)
@@ -394,10 +376,6 @@
 
 /obj/item/CheckParts(list/parts_list)
 	..()
-
-///Hook for multiz???
-/atom/proc/update_multiz(prune_on_fail = FALSE)
-	return FALSE
 
 ///Check if this atoms eye is still alive (probably)
 /atom/proc/check_eye(mob/user)
@@ -682,17 +660,7 @@
  */
 /atom/proc/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
 	SEND_SIGNAL(src, COMSIG_ATOM_HITBY, AM, skipcatch, hitpush, blocked, throwingdatum, damage_type)
-	if(density && !has_gravity(AM)) //thrown stuff bounces off dense stuff in no grav, unless the thrown stuff ends up inside what it hit(embedding, bola, etc...).
-		addtimer(CALLBACK(src, PROC_REF(hitby_react), AM), 2)
 
-/**
- * We have have actually hit the passed in atom
- *
- * Default behaviour is to move back from the item that hit us
- */
-/atom/proc/hitby_react(atom/movable/AM)
-	if(AM && isturf(AM.loc))
-		step(AM, turn(AM.dir, 180))
 
 ///Handle the atom being slipped over
 /atom/proc/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube, paralyze, force_drop)
@@ -1337,45 +1305,6 @@
 
 /atom/proc/intercept_zImpact(atom/movable/AM, levels = 1)
 	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, AM, levels)
-
-/**
- * Returns true if this atom has gravity for the passed in turf
- *
- * Sends signals COMSIG_ATOM_HAS_GRAVITY and COMSIG_TURF_HAS_GRAVITY, both can force gravity with
- * the forced gravity var
- *
- * Gravity situations:
- * * No gravity if you're not in a turf
- * * No gravity if this atom is in is a space turf
- * * Gravity if the area it's in always has gravity
- * * Gravity if there's a gravity generator on the z level
- * * Gravity if the Z level has an SSMappingTrait for ZTRAIT_GRAVITY
- * * otherwise no gravity
- */
-/atom/proc/has_gravity(turf/gravity_turf)
-	if(!isturf(gravity_turf))
-		gravity_turf = get_turf(src)
-
-	if(!gravity_turf)//no gravity in nullspace
-		return 0
-
-	//the list isnt created every time as this proc is very hot, its only accessed if anything is actually listening to the signal too
-	var/static/list/forced_gravity = list()
-	if(SEND_SIGNAL(src, COMSIG_ATOM_HAS_GRAVITY, gravity_turf, forced_gravity))
-		if(!length(forced_gravity))
-			SEND_SIGNAL(gravity_turf, COMSIG_TURF_HAS_GRAVITY, src, forced_gravity)
-
-		var/max_grav = 0
-		for(var/i in forced_gravity)//our gravity is the strongest return forced gravity we get
-			max_grav = max(max_grav, i)
-		forced_gravity.Cut()
-		//cut so we can reuse the list, this is ok since forced gravity movers are exceedingly rare compared to all other movement
-		return max_grav
-
-	var/area/turf_area = gravity_turf.loc
-	// force_no_gravity has been removed because this is Roguetown code
-	// it'd be trivial to readd if you needed it, though
-	return SSmapping.gravity_by_z_level["[gravity_turf.z]"] || turf_area.has_gravity
 
 /obj/proc/propagate_temp_change(value, weight, falloff = 0.5, max_depth = 3)
 	var/key = REF(src)

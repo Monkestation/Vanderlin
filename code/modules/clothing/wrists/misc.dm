@@ -22,6 +22,72 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/clothing/wrists/gem
+	name = "gem bracelet base"
+	desc = "timbers trunk, this isnt supposed to show up! report this immediately, TOODLES!"
+	slot_flags = ITEM_SLOT_WRISTS
+	nodismemsleeves = TRUE
+	icon = 'icons/roguetown/clothing/wrists.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gembracelet.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_gembracelet.dmi'
+	abstract_type = /obj/item/clothing/wrists/gem
+
+/obj/item/clothing/wrists/gem/jadebracelet
+	name = "joapstone bracelets"
+	desc = "A set of bracelets carved out of joapstone."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_jade"
+	sellprice = 65
+
+/obj/item/clothing/wrists/gem/turqbracelet
+	name = "ceruleabaster bracelets"
+	desc = "A set of bracelets carved out of ceruleabaster."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_turq"
+	sellprice = 90
+
+/obj/item/clothing/wrists/gem/onyxabracelet
+	name = "onyxa bracelets"
+	desc = "A set of bracelets carved out of onyxa."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_onyxa"
+	sellprice = 45
+
+/obj/item/clothing/wrists/gem/coralbracelet
+	name = "aoetal bracelets"
+	desc = "A set of bracelets carved out of aoetal."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_coral"
+	sellprice = 75
+
+/obj/item/clothing/wrists/gem/amberbracelet
+	name = "petriamber bracelets"
+	desc = "A set of bracelets carved out of petriamber."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_amber"
+	sellprice = 65
+
+/obj/item/clothing/wrists/gem/shellbracelet
+	name = "shell bracelets"
+	desc = "A set of bracelets carved out of shell."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_shell"
+	sellprice = 25
+
+/obj/item/clothing/wrists/gem/rosebracelet
+	name = "rosellusk bracelets"
+	desc = "A set of bracelets carved out of rosellusk."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_rose"
+	sellprice = 30
+
+/obj/item/clothing/wrists/gem/opalbracelet
+	name = "opaloise bracelets"
+	desc = "A set of bracelets carved out of opaloise."
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "br_opal"
+	sellprice = 95
+
 /obj/item/clothing/wrists/goldbracelet
 	name = "gold bracelets"
 	slot_flags = ITEM_SLOT_WRISTS

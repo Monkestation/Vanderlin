@@ -36,7 +36,7 @@
 		return
 	if(user.mind && isliving(user))
 		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = input(user, "What will I take?", "STASH") as null|anything in user.mind.special_items
+			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
 			if(item)
 				if(user.Adjacent(src))
 					if(user.mind.special_items[item])
@@ -241,7 +241,7 @@
 /obj/structure/table/wood/treestump/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/shovel))
 		to_chat(user, "I start unearthing the stump...")
-		playsound(loc,'sound/items/dig_shovel.ogg', 100, TRUE)
+		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 		if(do_after(user, 5 SECONDS))
 			user.visible_message("<span class='notice'>[user] unearths \the [src].</span>", \
 								"<span class='notice'>I unearth \the [src].</span>")
@@ -316,7 +316,9 @@
 	AddComponent(/datum/component/grass)
 
 /obj/structure/flora/grass/Destroy()
-	if(prob(5))
+	if(isliving(usr) && HAS_TRAIT(usr, TRAIT_SEED_FINDER))
+		new /obj/item/neuFarm/seed/mixed_seed(get_turf(src))
+	else if(prob(5))
 		new /obj/item/neuFarm/seed/mixed_seed(get_turf(src))
 	return ..()
 
@@ -353,7 +355,7 @@
 		if(L.m_intent == MOVE_INTENT_SNEAK)
 			return
 		else
-			playsound(A.loc, "plantcross", 90, FALSE, -1)
+			playsound(A, "plantcross", 90, FALSE, -1)
 			var/oldx = A.pixel_x
 			animate(A, pixel_x = oldx+1, time = 0.5)
 			animate(pixel_x = oldx-1, time = 0.5)
@@ -398,7 +400,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src.loc, "plantcross", 80, FALSE, -1)
+		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
 			if(prob(50) && looty.len)
 				if(looty.len == 1)
@@ -521,7 +523,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src.loc, "plantcross", 80, FALSE, -1)
+		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
 			if(prob(50) && looty2.len)
 				if(looty2.len == 1)
@@ -539,7 +541,7 @@
 // swarmpweed bush
 /obj/structure/flora/grass/swampweed
 	name = "bunch of swampweed"
-	desc = "a green root good for smoking."
+	desc = "A green root, good for smoking."
 	icon_state = "swampweed1"
 	base_icon_state = "swampweed"
 	num_random_icons = 3
@@ -564,7 +566,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src.loc, "plantcross", 80, FALSE, -1)
+		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(1,5) DECISECONDS, src))
 			if(prob(50) && looty3.len)
 				if(looty3.len == 1)
@@ -600,7 +602,7 @@
 		return
 	if(user.mind && isliving(user))
 		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = input(user, "What will I take?", "STASH") as null|anything in user.mind.special_items
+			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
 			if(item)
 				if(user.Adjacent(src))
 					if(user.mind.special_items[item])
@@ -688,7 +690,7 @@
 /obj/structure/flora/grass/thorn_bush/attack_hand(mob/living/user)
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
 	user.visible_message(span_noticesmall("[user] searches through [src]."))
 
@@ -797,8 +799,10 @@
 // bush crossing
 /obj/structure/flora/grass/bush_meagre/Crossed(atom/movable/AM)
 	..()
-	if(isliving(AM))
+	if(isliving(AM) && !HAS_TRAIT(AM, TRAIT_BRUSHWALK))
 		var/mob/living/L = AM
+		if(L.pulledby)
+			return
 		L.Immobilize(5)
 		if(L.m_intent == MOVE_INTENT_WALK)
 			L.Immobilize(5)
@@ -825,7 +829,7 @@
 /obj/structure/flora/grass/bush_meagre/attack_hand(mob/living/user)
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
 	prob2findgoodie = prob2findgoodie + ( user.STALUC * 2 ) + ( user.STAPER * 2 )
 	luckydouble = ( user.STALUC * 2 )
@@ -881,3 +885,32 @@
 	SET_BASE_PIXEL(-16, -1)
 	num_random_icons = 0
 	silky = TRUE
+
+
+/obj/structure/flora/grass/mushroom
+	name = "leafy mushrooms"
+	desc = "A number of mushrooms, each of which surrounds a greenish sporangium with a number of leaf-like structures."
+	icon_state = "l_mushroom_red1"
+
+/obj/structure/flora/grass/mushroom/Initialize()
+	. = ..()
+	var/shroom_color = pick("red", "green", "blue")
+	var/turf/open/floor/mushroom/turf = get_turf(src)
+	if(istype(turf))
+		shroom_color = turf.mushroom_color
+
+	icon_state = "[pick(list("l", "r", "t"))]_mushroom_[shroom_color]1"
+
+/obj/structure/flora/tree/dead_bush
+	name = "dead brush"
+	desc = "The blazing sun has killed this brush."
+	icon_state = "deadbush_1"
+	base_icon_state = "deadbush_"
+	num_random_icons = 3
+
+/obj/structure/flora/tree/dying_bush
+	name = "dying brush"
+	desc = "The blazing sun is killing this brush."
+	icon_state = "livebush_1"
+	base_icon_state = "livebush_"
+	num_random_icons = 3

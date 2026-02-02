@@ -156,7 +156,7 @@
 	if(!M)
 		return
 	var/message_to_admins = span_adminnotice("<b> [key_name(usr)] has sent ([M.name]/[M.key]):</b> to cryo. <BR>")
-	var/message_to_admin_user = span_notice(cryo_mob(M))
+	var/message_to_admin_user = span_notice(cryo_mob(M, TRUE))
 
 	to_chat(src, message_to_admin_user)
 	log_admin(message_to_admins)
@@ -433,7 +433,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!istype(M))
 		alert("Cannot revive a ghost")
 		return
-	M.revive(full_heal = TRUE, admin_revive = TRUE)
+	M.revive(ADMIN_HEAL_ALL)
 
 	log_admin("[key_name(usr)] healed / revived [key_name(M)]")
 	var/msg = "<span class='danger'>Admin [key_name_admin(usr)] healed / revived [ADMIN_LOOKUPFLW(M)]!</span>"
@@ -719,6 +719,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		ADMIN_PUNISHMENT_HUNTED,
 		ADMIN_PUNISHMENT_MEATPIE,
 		ADMIN_PUNISHMENT_GODHAND,
+		ADMIN_PUNISHMENT_FORCECOLLAR,
+		ADMIN_PUNISHMENT_PSYDON,
 	)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
@@ -739,38 +741,21 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 199, 199)
 		if(ADMIN_PUNISHMENT_GIB)
 			target.gib(FALSE)
+		if(ADMIN_PUNISHMENT_PSYDON)
+			sleep(60)
+			target.psydo_nyte()
+			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
+			sleep(20)
+			target.psydo_nyte()
+			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
+			sleep(15)
+			target.psydo_nyte()
+			target.playsound_local(target, 'sound/misc/psydong.ogg', 100, FALSE)
+			sleep(10)
+			target.gib(FALSE)
+
 		if(ADMIN_PUNISHMENT_BSA)
 			bluespace_artillery(target)
-		if(ADMIN_PUNISHMENT_SUPPLYPOD_QUICK)
-			var/target_path = input(usr,"Enter typepath of an atom you'd like to send with the pod (type \"empty\" to send an empty pod):" ,"Typepath","/obj/item/reagent_containers/food/snacks/grown/harebell") as null|text
-			var/obj/structure/closet/supplypod/centcompod/pod = new()
-			pod.damage = 40
-			pod.explosionSize = list(0,0,0,2)
-			pod.effectStun = TRUE
-			if (isnull(target_path)) //The user pressed "Cancel"
-				return
-			if (target_path != "empty")//if you didn't type empty, we want to load the pod with a delivery
-				var/delivery = text2path(target_path)
-				if(!ispath(delivery))
-					delivery = pick_closest_path(target_path)
-					if(!delivery)
-						alert("ERROR: Incorrect / improper path given.")
-						return
-				new delivery(pod)
-			new /obj/effect/DPtarget(get_turf(target), pod)
-		if(ADMIN_PUNISHMENT_SUPPLYPOD)
-			var/datum/centcom_podlauncher/plaunch  = new(usr)
-			if(!holder)
-				return
-			plaunch.specificTarget = target
-			plaunch.launchChoice = 0
-			plaunch.damageChoice = 1
-			plaunch.explosionChoice = 1
-			plaunch.temp_pod.damage = 40//bring the mother fuckin ruckus
-			plaunch.temp_pod.explosionSize = list(0,0,0,2)
-			plaunch.temp_pod.effectStun = TRUE
-			plaunch.ui_interact(usr)
-			return //We return here because punish_log() is handled by the centcom_podlauncher datum
 
 		if(ADMIN_PUNISHMENT_CBT)
 			if(!ishuman(target))
@@ -822,8 +807,66 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			if(!typepath_choice)
 				return
 			target.be_taken_with_hand_of_god(hands[typepath_choice])
+		if(ADMIN_PUNISHMENT_FORCECOLLAR)
+			if(!ishuman(target))
+				to_chat(usr, span_warning("Target must be human!"))
+				return
+			var/static/list/collar = list(
+				"Bell Collar" = /obj/item/clothing/neck/bellcollar,
+				"Leather Collar" = /obj/item/clothing/neck/leathercollar,
+			)
+			var/typepath_choice = browser_input_list(src, "Inflict Suffering", "What kind?", collar) // Hopefully just copying and pasting actual code works <3
+			if(!typepath_choice)
+				return
+			var/mob/living/carbon/human/H = target
+			if(H.wear_neck)
+				var/obj/I = H.wear_neck
+				target.dropItemToGround(I, TRUE)
+			var/typepath = collar[typepath_choice]
+			var/obj/created_collar = new typepath (get_turf(target))
+			H.equip_to_slot(created_collar, ITEM_SLOT_NECK)
+			ADD_TRAIT(created_collar, TRAIT_NODROP, "adminabuse")
+			to_chat(target, span_userdanger("A ring of darkness restrains my neck, and a collar is made manifest!"))
+			H.add_stress(/datum/stress_event/collarcurse)
 
 	punish_log(target, punishment)
+
+/client/proc/heart_attack(mob/living/carbon/target as mob)
+	set name = "Heart Attack"
+	set category = "Fun"
+	if(!check_rights(R_ADMIN) || !check_rights(R_FUN))
+		return
+
+	var/obj/item/organ/heart/heart = target.getorganslot(ORGAN_SLOT_HEART)
+	if(!heart)
+		to_chat(usr,span_warning("The target does not have a Heart!"))
+		return
+
+	var/custom_message
+	var/check = browser_alert(usr, "Do you want a custom message for the heart attack?", "Confirmation", DEFAULT_INPUT_CHOICES)
+	if(check == CHOICE_YES)
+		custom_message = browser_input_text(usr, "Write the Custom Message", "Custom Message")
+		if(!custom_message)
+			to_chat(usr, span_notice("You didn't write the custom message!"))
+			return
+
+	if(QDELETED(target))
+		return
+
+	target.visible_message(target, span_danger("[target] clutches at [target.p_their()] chest!"))
+	target.emote("breathgasp", forced = TRUE)
+	shake_camera(target, 1, 3)
+	target.set_eye_blur_if_lower(80 SECONDS)
+	var/stuffy = list("ZIZO GRABS MY WEARY HEART!","ARGH! MY HEART BEATS NO MORE!","NO... MY HEART HAS BEAT IT'S LAST!","MY HEART HAS GIVEN UP!","MY HEART BETRAYS ME!","THE METRONOME OF MY LIFE STILLS!")
+	if(custom_message)
+		to_chat(target, span_danger("[custom_message]"))
+	else
+		to_chat(target, span_danger("[pick(stuffy)]"))
+
+	punish_log(target, punishment = "Heart Attack")
+	spawn(3 SECONDS)
+		if(!QDELETED(target))
+			target.set_heartattack(TRUE)
 
 /client/proc/punish_log(whom, punishment)
 	var/msg = "[key_name_admin(usr)] punished [key_name_admin(whom)] with [punishment]."
@@ -932,3 +975,38 @@ Traitors and the like can also be revived with the previous role mostly intact.
 					if(!source)
 						return
 			REMOVE_TRAIT(D,chosen_trait,source)
+
+/client/proc/send_bird_letter(mob/M in GLOB.player_list)
+	set name = "Send Messenger Bird Letter"
+	set category = "Special"
+
+	if(!ismob(M))
+		return
+	if(!check_rights(R_ADMIN))
+		return
+
+	message_admins("[key_name_admin(src)] has started answering [ADMIN_LOOKUPFLW(M)]'s letter.")
+
+	var/msg = input("Message:", text("Letter to [M.key]")) as message|null
+	if(!msg)
+		message_admins("[key_name_admin(src)] decided not to answer [ADMIN_LOOKUPFLW(M)]'s letter.")
+		return
+
+	var/obj/item/paper/letter = new /obj/item/paper()
+	letter.clearpaper()
+	var/penned_msg = letter.parsepencode(msg, new /obj/item/natural/feather())
+	letter.info = penned_msg
+	letter.updateinfolinks()
+	letter.update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+
+	if(M.put_in_hands(letter))
+		to_chat(M, "<span class='notice'>A messenger bird drops a letter in your hand!</span>")
+	else
+		letter.loc = get_turf(M)
+		to_chat(M, "<span class='notice'>A messenger bird drops a letter at your feet!</span>")
+
+	playsound(M, 'sound/vo/mobs/bird/birdfly.ogg', 100, FALSE, -1)
+	log_admin("Letter: [key_name(usr)] -> [key_name(M)] : [msg]")
+	message_admins(span_adminnotice("Messenger Bird Letter: [key_name_admin(usr)] -> [key_name_admin(M)] : [msg]"))
+	log_game("LETTER RECEIVED: [key_name(usr)] -> [key_name(M)]: \n[msg]")
+	SSblackbox.record_feedback("tally", "admin_verb_send_messenger_bird", 1, "Messenger Bird Letter") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

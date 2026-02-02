@@ -7,7 +7,7 @@
 	bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
 					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg)
 	faction = list(FACTION_UNDEAD)
-	var/skel_outfit = /datum/outfit/job/npc/skeleton
+	var/skel_outfit = /datum/outfit/npc/skeleton
 	ambushable = FALSE
 	rot_type = null
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
@@ -44,8 +44,11 @@
 	underwear = "Nude"
 	mob_biotypes = MOB_UNDEAD
 	faction = list(FACTION_UNDEAD)
-	if(charflaw)
-		QDEL_NULL(charflaw)
+	var/turf/turf = get_turf(src)
+	if(SSterrain_generation.get_island_at_location(turf))
+		faction |= "islander"
+	if(length(quirks))
+		clear_quirks()
 	if(dna?.species)
 		dna.species.species_traits |= NOBLOOD
 		dna.species.soundpack_m = new /datum/voicepack/skeleton()
@@ -75,7 +78,7 @@
 		if(OU)
 			equipOutfit(OU)
 
-/datum/outfit/job/npc/skeleton/random/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/npc/skeleton/random/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = 6
 	H.base_speed = 10
@@ -84,7 +87,7 @@
 	H.base_intelligence = 1
 	H.recalculate_stats(FALSE)
 
-/datum/outfit/job/greater_skeleton/pre_equip(mob/living/carbon/human/H) //equipped onto Summon Greater Undead player skeletons only after the mind is added
+/datum/outfit/greater_skeleton/pre_equip(mob/living/carbon/human/H) //equipped onto Summon Greater Undead player skeletons only after the mind is added
 	..()
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	armor = /obj/item/clothing/armor/chainmail/iron
@@ -140,13 +143,13 @@
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/skeleton/npc/peasant)
+	equipOutfit(new /datum/outfit/species/skeleton/npc/peasant)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
-/datum/outfit/job/species/skeleton/npc/peasant/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/skeleton/npc/peasant/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = 6
 	H.base_speed = 8
@@ -189,13 +192,13 @@
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/skeleton/npc/random)
+	equipOutfit(new /datum/outfit/species/skeleton/npc/random)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
-/datum/outfit/job/species/skeleton/npc/random/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/skeleton/npc/random/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(prob(50))
 		wrists = /obj/item/clothing/wrists/bracers/leather
@@ -223,13 +226,13 @@
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/skeleton/npc/warrior)
+	equipOutfit(new /datum/outfit/species/skeleton/npc/warrior)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
-/datum/outfit/job/species/skeleton/npc/warrior/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/skeleton/npc/warrior/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = 10
 	H.base_speed = 7
@@ -276,7 +279,7 @@
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/skeleton/npc/warrior)
+	equipOutfit(new /datum/outfit/species/skeleton/npc/warrior)
 	d_intent = INTENT_PARRY //these ones will parry instead of dodge, making them much more dangerous
 	canparry = TRUE
 	flee_in_pain = FALSE
@@ -287,20 +290,20 @@
 	if(!mind)
 		mind = new /datum/mind(src)
 
-	adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
 
 /mob/living/carbon/human/species/skeleton/death_arena
 	should_have_aggro = FALSE
 
 /mob/living/carbon/human/species/skeleton/death_arena/after_creation()
 	..()
-	equipOutfit(new /datum/outfit/job/arena_skeleton)
+	equipOutfit(new /datum/outfit/arena_skeleton)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
 

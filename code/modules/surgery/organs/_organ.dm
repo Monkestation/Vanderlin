@@ -63,6 +63,44 @@
 /obj/item/organ/item_action_slot_check(slot,mob/user)
 	return //so we don't grant the organ's action to mobs who pick up the organ.
 
+/obj/item/organ/proc/generate_chimeric_organ(mob/living/source_mob)
+	if(!source_mob)
+		return
+	var/datum/component/chimeric_organ/organ = AddComponent(/datum/component/chimeric_organ, 3)
+	var/node_count = rand(3, 5)
+	var/list/obj/item/chimeric_node/generated_nodes = list()
+
+	for(var/i in 1 to node_count)
+		var/obj/item/chimeric_node/new_node = source_mob.generate_chimeric_node_from_mob()
+		if(!new_node)
+			continue
+
+		if(!organ.check_node_compatibility(new_node.stored_node))
+			qdel(new_node)
+			continue
+
+		generated_nodes += new_node
+
+	if(!length(generated_nodes))
+		return
+
+	for(var/obj/item/chimeric_node/node as anything in generated_nodes)
+		organ.handle_node_injection(node.node_tier, node.node_purity, node.stored_node.slot, node.stored_node, node.icon_state)
+		node.forceMove(src)
+
+	update_appearance(UPDATE_OVERLAYS)
+	return TRUE
+
+/obj/item/organ/update_overlays()
+	. = ..()
+	var/datum/component/chimeric_organ/organ = GetComponent(/datum/component/chimeric_organ)
+
+	if(!organ)
+		return
+
+	for(var/mutable_appearance/node_overlay in organ.overlay_states)
+		. += node_overlay
+
 /obj/item/organ/proc/Insert(mob/living/carbon/M, special = 0, drop_if_replaced = TRUE)
 	if(!iscarbon(M) || owner == M)
 		return
@@ -75,6 +113,7 @@
 		else
 			qdel(replaced)
 
+	SEND_SIGNAL(src, COMSIG_ORGAN_INSERTED, M)
 	owner = M
 	last_owner = M
 	M.internal_organs |= src
@@ -87,6 +126,7 @@
 
 //Special is for instant replacement like autosurgeons
 /obj/item/organ/proc/Remove(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
+	SEND_SIGNAL(src, COMSIG_ORGAN_REMOVED, M)
 	owner = null
 	if(M)
 		M.internal_organs -= src
@@ -165,8 +205,7 @@
 	if(bitecount >= bitesize)
 		record_featured_stat(FEATURED_STATS_CRIMINALS, eater)
 		record_round_statistic(STATS_ORGANS_EATEN)
-		check_culling(eater)
-		SEND_SIGNAL(eater, COMSIG_ORGAN_CONSUMED, src.type)
+		SEND_SIGNAL(eater, COMSIG_ORGAN_CONSUMED, type, organ_inside)
 	. = ..()
 	eat_effect = initial(eat_effect)
 
@@ -174,31 +213,10 @@
 	QDEL_NULL(organ_inside)
 	return ..()
 
-/obj/item/reagent_containers/food/snacks/organ/proc/check_culling(mob/living/eater)
-	return
-
 /obj/item/reagent_containers/food/snacks/organ/heart
 	name = "heart"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
 	grind_results = list(/datum/reagent/organpoison = 6)
-
-/obj/item/reagent_containers/food/snacks/organ/heart/check_culling(mob/living/eater)
-	. = ..()
-	if(!organ_inside)
-		return
-
-	for(var/datum/culling_duel/D in GLOB.graggar_cullings)
-		var/obj/item/organ/heart/d_challenger_heart = D.challenger_heart?.resolve()
-		var/obj/item/organ/heart/d_target_heart = D.target_heart?.resolve()
-		var/mob/living/carbon/human/challenger = D.challenger?.resolve()
-		var/mob/living/carbon/human/target = D.target?.resolve()
-
-		if(organ_inside == d_target_heart && eater == challenger)
-			D.process_win(winner = eater, loser = target)
-			return TRUE
-		else if(organ_inside == d_challenger_heart && eater == target)
-			D.process_win(winner = eater, loser = challenger)
-			return TRUE
 
 /obj/item/reagent_containers/food/snacks/organ/lungs
 	name = "lungs"
@@ -274,25 +292,52 @@
 /mob/living/carbon/regenerate_organs()
 	if(dna?.species)
 		dna.species.regenerate_organs(src)
+
+		// Species regenerate organs doesn't ALWAYS handle healing the organs because it's dumb
+		for(var/obj/item/organ/organ as anything in internal_organs)
+			organ.setOrganDamage(0)
+		set_heartattack(FALSE)
+
+		// heal ears after healing traits, since ears check TRAIT_DEAF trait
+		// when healing.
+		restoreEars()
+
 		return
 
+	// Default organ fixing handling
+	// May result in kinda cursed stuff for mobs which don't need these organs
+	var/obj/item/organ/lungs/lungs = getorganslot(ORGAN_SLOT_LUNGS)
+	if(!lungs)
+		lungs = new()
+		lungs.Insert(src)
+	lungs.setOrganDamage(0)
+
+	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
+	if(heart)
+		set_heartattack(FALSE)
 	else
-		if(!getorganslot(ORGAN_SLOT_LUNGS))
-			var/obj/item/organ/lungs/L = new()
-			L.Insert(src)
+		heart = new()
+		heart.Insert(src)
+	heart.setOrganDamage(0)
 
-		if(!getorganslot(ORGAN_SLOT_HEART))
-			var/obj/item/organ/heart/H = new()
-			H.Insert(src)
+	var/obj/item/organ/tongue/tongue = getorganslot(ORGAN_SLOT_TONGUE)
+	if(!tongue)
+		tongue = new()
+		tongue.Insert(src)
+	tongue.setOrganDamage(0)
 
-		if(!getorganslot(ORGAN_SLOT_TONGUE))
-			var/obj/item/organ/tongue/T = new()
-			T.Insert(src)
+	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
+	if(!eyes)
+		eyes = new()
+		eyes.Insert(src)
+	eyes.setOrganDamage(0)
 
-		if(!getorganslot(ORGAN_SLOT_EYES))
-			var/obj/item/organ/eyes/E = new()
-			E.Insert(src)
+	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+	if(!ears)
+		ears = new()
+		ears.Insert(src)
+	// ears.adjustEarDamage(-INFINITY, -INFINITY) // actually do: set_organ_damage(0) and deaf = 0
 
-		if(!getorganslot(ORGAN_SLOT_EARS))
-			var/obj/item/organ/ears/ears = new()
-			ears.Insert(src)
+	// heal ears after healing traits, since ears check TRAIT_DEAF trait
+	// when healing.
+	restoreEars()

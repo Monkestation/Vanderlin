@@ -8,7 +8,7 @@
 	min_players = 15
 
 	tags = list(
-		TAG_BATTLE,
+		TAG_RAVOX,
 	)
 
 /datum/round_event_control/ravox_combat/canSpawnEvent(players_amt, gamemode, fake_check)
@@ -40,11 +40,13 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/improve_combat/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/improve_combat/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE RAVOX'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Ravox demands you prove your might! Improve your combat skills to earn Ravox's favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE RAVOX'S CHOSEN!"),
+		span_notice("Ravox demands you prove your might! Improve your combat skills to earn Ravox's favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/vo/male/knight/rage (6).ogg', 70)
 
 	chosen_one.mind.announce_personal_objectives()

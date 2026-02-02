@@ -13,6 +13,8 @@
 	var/stress_change_per_extra_stack = 0
 	/// If this event is always hidden from checks
 	var/hidden = FALSE
+	///this is how much we affect quality in the end
+	var/quality_modifier = 0
 
 /datum/stress_event/proc/can_apply(mob/living/user)
 	return TRUE

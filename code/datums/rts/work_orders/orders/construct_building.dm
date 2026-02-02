@@ -12,7 +12,7 @@
 	building = building_source
 
 
-/datum/work_order/construct_building/stop_work()
+/datum/work_order/construct_building/stop_work(reason = "unknown")
 	. = ..()
 	building?.current_workers--
 	building = null

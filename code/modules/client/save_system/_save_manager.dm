@@ -216,7 +216,7 @@
 /datum/save_file/proc/save_to_file()
 	if(!file_path || !save_data)
 		return FALSE
-
+	log_game("SAVE: [file_path] save started.")
 	var/savefile/S = new /savefile(file_path)
 	if(!S)
 		return FALSE
@@ -406,41 +406,3 @@ GLOBAL_LIST_EMPTY(player_save_managers)
 	if(SM)
 		return SM.increment_data("economy", "coins", amount, 0)
 	return 0
-
-// Example usage:
-/*
-// Different save files for different data types:
-
-// Economy data (coins.sav)
-var/datum/save_manager/SM = get_save_manager(mob.ckey)
-SM.set_data("economy", "coins", 1000)
-SM.set_data("economy", "bank_account", 5000)
-SM.set_data("economy", "debt", 250)
-
-// Statistics data (statistics.sav)
-SM.set_data("statistics", "rounds_played", 50)
-SM.set_data("statistics", "total_deaths", 25)
-SM.set_data("statistics", "favorite_job", "Security Officer")
-
-// Achievements data (achievements.sav)
-SM.add_to_list("achievements", "unlocked", "first_death")
-SM.add_to_list("achievements", "unlocked", "security_veteran")
-SM.set_data("achievements", "points", 150)
-
-// Character data (characters.sav)
-SM.set_data("characters", "main_character", "John Doe")
-SM.add_to_list("characters", "alt_characters", "Jane Smith", 10)
-
-// Preferences data (preferences.sav)
-SM.set_data("preferences", "favorite_map", "MetaStation")
-SM.set_data("preferences", "ui_theme", "dark")
-
-// Load data:
-var/coins = SM.get_data("economy", "coins", 0)
-var/rounds = SM.get_data("statistics", "rounds_played", 0)
-var/achievements = SM.get_data("achievements", "unlocked", list())
-
-// Or use convenience functions:
-var/player_coins = get_player_coins(mob.ckey)
-add_player_coins(mob.ckey, 100)
-*/

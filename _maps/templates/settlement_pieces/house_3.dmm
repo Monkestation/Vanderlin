@@ -1,0 +1,120 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"k" = (
+/obj/structure/bed/shit,
+/turf/open/floor/dirt,
+/area/template_noop)
+"p" = (
+/turf/open/floor/dirt,
+/area/template_noop)
+"r" = (
+/obj/effect/landmark/settlement_road_node,
+/turf/template_noop,
+/area/template_noop)
+"s" = (
+/obj/structure/soil,
+/turf/template_noop,
+/area/template_noop)
+"t" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"u" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/dirt,
+/area/template_noop)
+"F" = (
+/turf/closed/wall/mineral/tent,
+/area/template_noop)
+"O" = (
+/turf/open/floor/grass/mixyel,
+/area/template_noop)
+"Q" = (
+/turf/closed/mineral/random,
+/area/template_noop)
+"R" = (
+/obj/machinery/light/fueled/campfire,
+/turf/open/floor/dirt,
+/area/template_noop)
+"X" = (
+/obj/effect/landmark/settlement_mob_spawn,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+Q
+Q
+t
+a
+a
+"}
+(2,1,1) = {"
+Q
+Q
+F
+s
+a
+"}
+(3,1,1) = {"
+F
+X
+F
+a
+a
+"}
+(4,1,1) = {"
+F
+k
+F
+a
+s
+"}
+(5,1,1) = {"
+F
+a
+r
+a
+a
+"}
+
+(1,1,2) = {"
+O
+u
+a
+a
+a
+"}
+(2,1,2) = {"
+p
+p
+O
+a
+a
+"}
+(3,1,2) = {"
+p
+p
+p
+p
+a
+"}
+(4,1,2) = {"
+p
+p
+R
+p
+a
+"}
+(5,1,2) = {"
+a
+p
+p
+a
+a
+"}

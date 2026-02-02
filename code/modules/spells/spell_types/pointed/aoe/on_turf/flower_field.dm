@@ -3,11 +3,14 @@
 	desc = "Summons a magical field of flowers using a single flower."
 	button_icon_state = "flower_field"
 
-	point_cost = 4
+	point_cost = 5
 	attunements = list(
 		/datum/attunement/earth = 0.4,
 		/datum/attunement/life = 0.3,
 	)
+
+	invocation = "May the earth bloom!"
+	invocation_type = INVOCATION_WHISPER
 
 	charge_time = 3 SECONDS
 	charge_drain = 3
@@ -17,8 +20,6 @@
 	spell_flags = SPELL_RITUOS
 	aoe_radius = 3
 	ignore_openspace = TRUE
-	staggered = TRUE
-	stagger_delay = 0.5 SECONDS
 
 	var/obj/structure/flora/field/flowers
 
@@ -51,9 +52,6 @@
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
-	animate(flower_item, alpha = 0, time = 0.5 SECONDS)
-	QDEL_IN(flower_item, 0.5 SECONDS)
-
 	if(isliving(owner))
 		var/mob/living/L = owner
 		L.apply_status_effect(/datum/status_effect/buff/flowerfield_resistance)
@@ -63,6 +61,8 @@
 		return
 	var/obj/structure/flora/field/field = new flowers(victim)
 	field.dir = pick(GLOB.cardinals)
+	for(var/mob/living/L in victim)
+		field.Crossed(L)
 
 /*-----------------\
 |  Flower Fields   |
@@ -95,7 +95,7 @@
 			return
 		if (L.m_intent == MOVE_INTENT_SNEAK)
 			return
-		playsound(src.loc, "plantcross", 90, FALSE, -1)
+		playsound(src, "plantcross", 90, FALSE, -1)
 		var/oldx = pixel_x
 		animate(src, pixel_x = oldx + 1, time = 0.5)
 		animate(pixel_x = oldx - 1, time = 0.5)
@@ -118,13 +118,21 @@
 	name = "rosa field"
 	icon_state = "rosa"
 
+/obj/structure/flora/field/rosa
+	name = "rosa field"
+	icon_state = "rosa"
+
 /obj/structure/flora/field/rosa/Crossed(atom/movable/AM)
 	. = ..()
-	if (isliving(AM))
-		var/mob/living/L = AM
-		if (HAS_TRAIT(L, TRAIT_FLOWERFIELD_IMMUNITY))
-			return
-		apply_flower_effect(L, /datum/status_effect/debuff/rosa_pacification)
+	if (!isliving(AM))
+		return
+	var/mob/living/L = AM
+	if (HAS_TRAIT(L, TRAIT_FLOWERFIELD_IMMUNITY))
+		return
+	if (!L.buckled && prob(45))
+		L.visible_message(span_danger("The rose vines entangle [L]!"), span_userdanger("Vines entangle me!"))
+		buckle_mob(L, TRUE, check_loc = FALSE)
+	apply_flower_effect(L, /datum/status_effect/debuff/rosa_pacification)
 
 // ---------------------- SALVIA FIELD ----------------------------
 /obj/structure/flora/field/salvia
@@ -151,25 +159,20 @@
 
 /obj/structure/flora/field/euphorbia/Crossed(atom/movable/AM)
 	. = ..()
-	if (!isliving(AM)) return
+	if (!isliving(AM))
+		return
 	var/mob/living/L = AM
 	if (HAS_TRAIT(L, TRAIT_FLOWERFIELD_IMMUNITY))
 		return
-	if (!L.buckled && prob(45))
-	{
-		L.visible_message(span_warning("[L] is snagged by the euphorbia field!"))
+	if (!L.buckled && prob(35))
+		L.visible_message(span_warning("The euphorbia vines entwine [L]!"))
 		if (buckle_mob(L, TRUE, check_loc = FALSE))
-		{
 			if (!HAS_TRAIT(L, TRAIT_NOPAIN))
 				L.emote("agony")
 			L.Stun(2 SECONDS)
-		}
-	}
 	if (!HAS_TRAIT(L, TRAIT_PIERCEIMMUNE))
-	{
 		L.adjustBruteLoss(10)
 		to_chat(L, span_danger("Thorns rip into you as you push through!"))
-	}
 	apply_flower_effect(L, /datum/status_effect/debuff/euphorbia_thorns)
 
 // ---------------------- CALENDULA FIELD ----------------------------
@@ -240,7 +243,8 @@
 	. = ..()
 	if(overlay_state && ismob(owner))
 		var/mob/M = owner
-		M.add_overlay(mutable_appearance('icons/effects/effects.dmi', overlay_state))
+		flower_overlay = mutable_appearance('icons/effects/effects.dmi', overlay_state)
+		M.add_overlay(flower_overlay)
 		RegisterSignal(M, COMSIG_MOVABLE_MOVED, PROC_REF(_check_flower_field))
 
 /datum/status_effect/debuff/flower_base/on_remove()
@@ -249,7 +253,11 @@
 		var/mob/M = owner
 		if (flower_overlay)
 			M.overlays -= flower_overlay
+			flower_overlay = null
 		UnregisterSignal(M, COMSIG_MOVABLE_MOVED)
+
+/datum/status_effect/debuff/flower_base/tick()
+	check_field_presence()
 
 /datum/status_effect/debuff/flower_base/proc/_check_flower_field(mob/living/L)
 	if (!field_path || !locate(field_path) in get_turf(L))
@@ -307,7 +315,7 @@
 	check_field_presence()
 	tick_counter++
 	L.Stun(3)
-	L.Jitter(2)
+	L.adjust_jitter(4 SECONDS)
 	L.emote(pick("spin", "dance"), forced=TRUE)
 	L.emote(pick("laugh", "giggle"), forced=TRUE)
 	if (tick_counter >= 4)
@@ -416,6 +424,7 @@
 /datum/status_effect/debuff/manabloom_silence/on_apply()
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_SPELLBLOCK, TRAIT_GENERIC)
 	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_GENERIC)
 
 /datum/status_effect/debuff/manabloom_silence/tick()
@@ -423,6 +432,7 @@
 
 /datum/status_effect/debuff/manabloom_silence/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_SPELLBLOCK, TRAIT_GENERIC)
 	REMOVE_TRAIT(owner, TRAIT_MUTE, TRAIT_GENERIC)
 	. = ..()
 
@@ -447,7 +457,7 @@
 	var/mob/living/M = owner
 	if (!M || M.stat != CONSCIOUS) return
 	check_field_presence()
-	M.confused = max(M.confused, 5)
+	M.set_confusion_if_lower(0.5 SECONDS)
 	if (prob(15) && !M.has_status_effect(/datum/status_effect/frost_trap))
 		M.apply_status_effect(/datum/status_effect/frost_trap)
 		M.adjustFireLoss(-8)

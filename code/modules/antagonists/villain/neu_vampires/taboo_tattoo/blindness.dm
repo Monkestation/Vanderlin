@@ -13,7 +13,6 @@
 		return
 
 	bearer.AddComponent(/datum/component/echolocation, echo_group = "psyker", echo_icon = "psyker", color_path = /datum/client_colour/psyker)
-	bearer.update_blindness()
 
 /datum/taboo_tattoo/bloodsight/remove_effects()
 	if (!bearer)
@@ -21,11 +20,10 @@
 
 	REMOVE_TRAIT(bearer, TRAIT_THERMAL_VISION, TABOO_TRAIT)
 	qdel(bearer.GetComponent(/datum/component/echolocation))
-	bearer.update_blindness()
 
 /datum/bodypart_feature/bloodsight_brand
-    name = "Bloodsight Brand"
-    feature_slot = BODYPART_FEATURE_BRAND
-    body_zone = BODY_ZONE_CHEST // Around the eyes
-    accessory_colors = "#FF4500"
-    accessory_type = /datum/sprite_accessory/brand/vampire_seal
+	name = "Bloodsight Brand"
+	feature_slot = BODYPART_FEATURE_BRAND
+	body_zone = BODY_ZONE_CHEST // Around the eyes
+	accessory_colors = "#FF4500"
+	accessory_type = /datum/sprite_accessory/brand/vampire_seal

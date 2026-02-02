@@ -1,67 +1,68 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/closed/mineral/bedrock,
+/obj/machinery/light/fueled/wallfire/candle/skull/r,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "b" = (
-/obj/structure/fluff/nest{
-	pixel_y = 24;
-	pixel_x = -16
-	},
-/turf/open/floor/dirt,
+/obj/machinery/light/fueled/wallfire/candle/skull/r,
+/obj/structure/fluff/walldeco/maidendrape,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "m" = (
-/turf/open/floor/dirt,
+/turf/closed/wall/mineral/underbrick,
 /area/template_noop)
 "z" = (
 /obj/structure/circle_protection{
 	name = null
 	},
 /obj/effect/building_node/spawning_grounds,
-/turf/open/floor/cobblerock,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "N" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/cobblerock,
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/obj/structure/fluff/walldeco/maidendrape,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "T" = (
-/turf/open/floor/blocks,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "V" = (
-/turf/open/floor/cobblerock,
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/turf/open/floor/herringbone,
 /area/template_noop)
 
 (1,1,1) = {"
+m
+m
 T
-V
-V
-a
+T
 m
 "}
 (2,1,1) = {"
+m
 N
-m
+T
+T
 V
-m
-m
 "}
 (3,1,1) = {"
-m
-m
+T
+T
 z
-m
+T
 T
 "}
 (4,1,1) = {"
-V
 m
+b
 T
-V
+T
 a
 "}
 (5,1,1) = {"
-V
-b
 m
-V
-a
+m
+T
+T
+m
 "}

@@ -17,9 +17,9 @@
 
 /datum/repeatable_crafting_recipe/reading/confessional
 	name = "confession"
-	output = /obj/item/paper/confession
+	output = /obj/item/paper/inqslip/confession
 	requires_learning = TRUE
-	blacklisted_paths = list(/obj/item/paper/confession)
+	blacklisted_paths = list(/obj/item/paper/inqslip)
 
 /datum/repeatable_crafting_recipe/reading/guide
 	name = "blank textbook"

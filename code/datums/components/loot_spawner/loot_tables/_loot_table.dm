@@ -1,35 +1,22 @@
 /*
-// Basic usage with delve level and item rarity
-var/datum/loot_table/my_table = new /datum/loot_table/basic_dungeon()
-my_table.spawn_loot(user, delve_level = 3, item_rarity = 1.5)
-
-// Just delve level (item rarity defaults to 1.0)
-my_table.spawn_loot(user, delve_level = 5)
-
-// Just item rarity (delve level defaults to 1)
-my_table.spawn_loot(user, item_rarity = 2.0)
-
-// Both parameters
-my_table.spawn_loot(user, delve_level = 4, item_rarity = 0.5)
-
 HOW THE SCALING WORKS:
 
 1. DELVE LEVEL SCALING:
-   - Quantity: Higher delves spawn more items (base_min/max * delve_quantity_scaling^(delve_level-1))
-   - Quality: Rare items (low base weight) get exponentially better odds at higher delves
-   - Items with weight 1 become much more common at delve 5 vs delve 1
-   - Items with weight 50 see minimal change between delve levels
+- Quantity: Higher delves spawn more items (base_min/max * delve_quantity_scaling^(delve_level-1))
+- Quality: Rare items (low base weight) get exponentially better odds at higher delves
+- Items with weight 1 become much more common at delve 5 vs delve 1
+- Items with weight 50 see minimal change between delve levels
 
 2. ITEM RARITY MULTIPLIER:
-   - Multiplicative with all other scaling
-   - item_rarity = 2.0 doubles all drop chances
-   - item_rarity = 0.5 halves all drop chances
-   - Works independently of delve scaling
+- Multiplicative with all other scaling
+- item_rarity = 2.0 doubles all drop chances
+- item_rarity = 0.5 halves all drop chances
+- Works independently of delve scaling
 
 3. COMBINED EFFECT:
-   - A rare item (weight 1) at delve 5 with 2.0 item rarity will be MUCH more common
-   - A common item (weight 100) sees less dramatic changes
-   - The system naturally creates better loot at higher delves while respecting player modifiers
+- A rare item (weight 1) at delve 5 with 2.0 item rarity will be MUCH more common
+- A common item (weight 100) sees less dramatic changes
+- The system naturally creates better loot at higher delves while respecting player modifiers
 
 CONFIGURATION:
 - delve_quantity_scaling: How much more loot spawns per delve level (1.5 = 50% more per level)
@@ -91,12 +78,15 @@ CONFIGURATION:
 
 	var/turf/spawn_location = looter ? get_turf(looter) : null
 
+	var/list/loot = list()
 	for(var/i = 1 to spawn_count)
 		var/atom/spawn_path = pickweight(weighted_list)
+		var/atom/movable/new_spawn = new spawn_path(spawn_location)
 		if(spawn_location)
-			var/atom/movable/new_spawn = new spawn_path(spawn_location)
 			if(istype(looter))
 				looter.put_in_active_hand(new_spawn)
+		loot += new_spawn
+	return loot
 
 /datum/loot_table/proc/return_list(mob/looter = null, delve_level = 1, item_rarity = 1.0)
 	var/list/weighted_list = list()

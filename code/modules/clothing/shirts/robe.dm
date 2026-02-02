@@ -1,5 +1,5 @@
 /obj/item/clothing/shirt/robe
-	slot_flags = ITEM_SLOT_ARMOR
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "robe"
 	desc = "A common robe, worn mostly by religious adepts."
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
@@ -30,6 +30,12 @@
 /obj/item/clothing/shirt/robe/colored/black
 	color = CLOTHING_DARK_INK
 
+/obj/item/clothing/shirt/robe/colored/red//placeholder for malum & xylix acolyte robes
+	color = CLOTHING_WINESTAIN_RED
+
+/obj/item/clothing/shirt/robe/colored/purple
+	color = CLOTHING_PLUM_PURPLE
+
 //................ Temple Robes ............... //
 
 /obj/item/clothing/shirt/robe/pestra
@@ -52,6 +58,7 @@
 	name = "sun robe"
 	desc = "The cloth of a follower of Astrata."
 	icon_state = "astratarobe"
+
 	sleeved = null
 
 /obj/item/clothing/shirt/robe/noc
@@ -60,10 +67,13 @@
 	icon_state = "nocrobe"
 	sleeved = null
 
+//someone should make sure the necromancer robe gets dwarf and child sprites
 /obj/item/clothing/shirt/robe/necromancer
 	name = "necromancer robes"
 	desc = "Eerie black garb of death."
 	icon_state = "warlock"
+	allowed_ages = ALL_AGES_LIST
+	allowed_race = SPECIES_BASE_BODY
 	sleeved = null
 
 /obj/item/clothing/shirt/robe/dendor
@@ -116,8 +126,6 @@
 	name = "wizard's robe"
 	desc = "What wizard's ensemble would be complete without robes?"
 	icon_state = "wizardrobes"
-	allowed_sex = list(MALE)
-	allowed_race = SPECIES_BASE_BODY
 	sellprice = 100
 
 /obj/item/clothing/shirt/robe/magus
@@ -139,6 +147,7 @@
 	sellprice = 30
 
 /obj/item/clothing/shirt/robe/nun
+	name = "nun habit"
 	icon_state = "nun"
 	item_state = "nun"
 	allowed_race = SPECIES_BASE_BODY
@@ -174,9 +183,6 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
 	boobed = TRUE
 	flags_inv = HIDEBOOB
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
-	allowed_sex = list(MALE, FEMALE)
 	allowed_race = SPECIES_BASE_BODY
 	color = null
 	sellprice = 100
@@ -192,9 +198,6 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/shirts.dmi'
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
-	allowed_sex = list(MALE, FEMALE)
 	toggle_icon_state = TRUE
 	armor = ARMOR_PADDED_BAD
 	max_integrity = 200
@@ -210,11 +213,11 @@
 	if(!hoodtoggled)
 		if(ishuman(src.loc))
 			var/mob/living/carbon/human/H = src.loc
-			if(slot_flags == ITEM_SLOT_ARMOR)
+			if(slot_flags & ITEM_SLOT_ARMOR)
 				if(H.wear_armor != src)
 					to_chat(H, span_warning("I should put that on first."))
 					return
-			if(slot_flags == ITEM_SLOT_CLOAK)
+			if(slot_flags & ITEM_SLOT_CLOAK)
 				if(H.cloak != src)
 					to_chat(H, span_warning("I should put that on first."))
 					return

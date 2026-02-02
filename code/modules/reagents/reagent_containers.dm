@@ -126,7 +126,7 @@
 	filling.color = mix_color_from_reagents(reagents.reagent_list)
 	filling.alpha = mix_alpha_from_reagents(reagents.reagent_list)
 
-	if(fill_icon_under_override || reagent_flags & TRANSPARENT)
+	if(fill_icon_under_override)
 		underlays.Cut()
 		underlays += filling
 	else
@@ -168,7 +168,8 @@
 
 /obj/item/reagent_containers/MiddleClick(mob/user, list/modifiers)
 	. = ..()
-	remove_label(user)
+	if(iscarbon(user))
+		remove_label(user)
 
 /obj/item/reagent_containers/proc/label_container(mob/user, label_name, label_desc)
 	if((!label_name && !label_desc) || !can_label_container)
@@ -178,7 +179,7 @@
 			to_chat(user, span_warning("\The [src] is already labelled."))
 		return
 	if(user)
-		playsound(get_turf(src), 'sound/foley/dropsound/paper_drop.ogg', 70)
+		playsound(src, 'sound/foley/dropsound/paper_drop.ogg', 70)
 		user.visible_message(span_notice("[user] applies a label to \the [src]."), span_notice("I label \the [src]."), vision_distance = 3)
 	name = label_prefix ? "[label_prefix][label_name]" : label_name
 	if(label_desc)
@@ -246,9 +247,9 @@
 		return FALSE
 	var/mob/living/carbon/C = eater
 	var/covered = ""
-	if(C.is_mouth_covered(head_only = 1))
+	if(C.is_mouth_covered(ITEM_SLOT_HEAD))
 		covered = "headgear"
-	else if(C.is_mouth_covered(mask_only = 1))
+	else if(C.is_mouth_covered(ITEM_SLOT_MASK))
 		covered = "mask"
 	if(C != user)
 		if(isturf(eater.loc))

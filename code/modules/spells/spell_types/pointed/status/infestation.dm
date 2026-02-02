@@ -15,16 +15,17 @@
 	invocation = "Rot, take them!"
 	invocation_type = INVOCATION_SHOUT
 	spell_flags = SPELL_RITUOS
-	charge_time = 1 SECONDS
-	cooldown_time = 20 SECONDS
+	charge_time = 2 SECONDS
+	cooldown_time = 60 SECONDS
 	spell_cost = 20
-
+	duration_scaling = TRUE
+	duration_modification = 5 SECONDS
 	status_effect = /datum/status_effect/debuff/infestation
 
 /datum/status_effect/debuff/infestation
 	id = "infestation"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/infestation
-	duration = 5 SECONDS
+	duration = 10 SECONDS
 	effectedstats = list(STATKEY_CON = -2)
 	var/static/mutable_appearance/rotten = mutable_appearance('icons/roguetown/mob/rotten.dmi', "rotten")
 
@@ -32,12 +33,17 @@
 	. = ..()
 	var/mob/living/target = owner
 	to_chat(owner, span_danger("I am suddenly surrounded by a cloud of bugs!"))
-	target.Jitter(20)
+	target.adjust_jitter(20 SECONDS)
 	target.add_overlay(rotten)
+	RegisterSignal(owner, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(wash_off))
 
 /datum/status_effect/debuff/infestation/on_remove()
 	. = ..()
+	UnregisterSignal(owner, COMSIG_COMPONENT_CLEAN_ACT)
 	owner.cut_overlay(rotten)
+
+/datum/status_effect/debuff/infestation/proc/wash_off()
+	qdel(src)
 
 /datum/status_effect/debuff/infestation/tick()
 	var/static/list/messages = list(
@@ -66,7 +72,7 @@
 
 	if(prob(33) && iscarbon(L))
 		var/mob/living/carbon/C = L
-		C.add_nausea(pick(10,20))
+		C.add_nausea(rand(10,20))
 		to_chat(C, span_warning(pick(messages)))
 
 /atom/movable/screen/alert/status_effect/debuff/infestation

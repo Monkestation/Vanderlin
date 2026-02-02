@@ -5,10 +5,9 @@
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_PILGRIM
-	faction = FACTION_TOWN
+	faction = FACTION_FOREIGNERS
 	total_positions = 20
 	spawn_positions = 20
-	min_pq = -20
 	banned_leprosy = FALSE
 	bypass_lastclass = TRUE
 
@@ -25,7 +24,11 @@
 
 	selection_color = "#a33096"
 
-/datum/job/pilgrim/after_spawn(mob/living/spawned, client/player_client)
-	..()
-	if(advclass_cat_rolls)
-		hugboxify_for_class_selection(spawned)
+/datum/job/advclass/pilgrim
+	abstract_type = /datum/job/advclass/pilgrim
+	category_tags = list(CTAG_PILGRIM)
+	spawn_with_torch = TRUE
+
+/datum/job/advclass/pilgrim/rare
+	abstract_type = /datum/job/advclass/pilgrim/rare
+	roll_chance = 30

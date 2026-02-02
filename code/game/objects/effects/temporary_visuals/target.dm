@@ -18,6 +18,9 @@
 /obj/effect/temp_visual/target/proc/fall(list/hit_atoms)
 	return
 
+/obj/effect/temp_visual/target/minotaur
+	duration = 1.8 SECONDS
+
 /obj/effect/temp_visual/fireball
 	name = "meteor"
 	desc = "Get out of the way!"
@@ -108,7 +111,7 @@
 
 /obj/effect/temp_visual/lightning/Initialize(mapload)
 	. = ..()
-	playsound(get_turf(src),'sound/weather/rain/thunder_1.ogg', 80, TRUE)
+	playsound(src,'sound/weather/rain/thunder_1.ogg', 80, TRUE)
 	add_overlay(emissive_appearance(icon, icon_state))
 
 /obj/effect/temp_visual/target/lightning

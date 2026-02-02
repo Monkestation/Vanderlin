@@ -231,73 +231,116 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 /client/proc/cmd_admin_dress(mob/M in GLOB.mob_list)
 	set category = "Fun"
-	set name = "Select equipment"
+	set name = "Admin Dress"
+
 	if(!(ishuman(M) || isobserver(M)))
-		alert("Invalid mob")
 		return
 
+	var/answer = browser_alert(src, "Apply an outfit or a full job? (Does not consume slots or change job)", "Admin Dress", list("Outfit", "Job", "Cancel"))
+	if(!answer || QDELETED(src))
+		return
+	switch(answer)
+		if("Job")
+			job_selector(M)
+		if("Outfit")
+			outfit_selector(M)
+		if("Cancel")
+			return
+
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Admin Dress") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/outfit_selector(mob/to_dress)
 	var/dresscode = robust_dress_shop()
 
 	if(!dresscode)
 		return
 
-	var/delete_pocket
 	var/mob/living/carbon/human/H
-	if(isobserver(M))
-		H = M.change_mob_type(/mob/living/carbon/human, null, null, TRUE)
+	if(!ishuman(to_dress))
+		H = to_dress.change_mob_type(/mob/living/carbon/human, null, null, TRUE)
 	else
-		H = M
+		H = to_dress
 
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Select Equipment") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	for (var/obj/item/I in H.get_equipped_items(delete_pocket))
+	for(var/obj/item/I in H.get_all_gear())
 		qdel(I)
+
 	if(dresscode != "Naked")
 		H.equipOutfit(dresscode)
 
-	H.regenerate_icons()
+	log_admin("[key_name(usr)] changed the outfit of [key_name(H)] to [dresscode].")
+	message_admins(span_adminnotice("[key_name_admin(usr)] changed the outfit of [ADMIN_LOOKUPFLW(H)] to [dresscode]."))
 
-	log_admin("[key_name(usr)] changed the equipment of [key_name(H)] to [dresscode].")
-	message_admins("<span class='adminnotice'>[key_name_admin(usr)] changed the equipment of [ADMIN_LOOKUPFLW(H)] to [dresscode].</span>")
+/client/proc/job_selector(mob/to_dress)
+	var/list/basejobs = list("Custom")
+	var/list/jobs = subtypesof(/datum/job)
+	var/list/selection = list()
+	for(var/datum/job/job as anything in jobs)
+		if(IS_ABSTRACT(job))
+			continue
+		selection[job.title] = job
 
-/client/proc/robust_dress_shop()
-
-	var/list/baseoutfits = list("Naked","Custom", "As Roguetown Job...")
-	var/list/outfits = list()
-	var/list/paths = subtypesof(/datum/outfit) - typesof(/datum/outfit/job)  - typesof(/datum/outfit/job)
-
-	for(var/datum/outfit/O as anything in paths) //not much to initalize here but whatever
-		if(initial(O.can_be_admin_equipped))
-			outfits[initial(O.name)] = O
-
-	var/dresscode = browser_input_list(src, "Select outfit", "Robust quick dress shop", baseoutfits + sortList(outfits))
-	if (isnull(dresscode))
+	var/datum/job/selected = browser_input_list(src, "Select Job", "Job selection", basejobs + selection)
+	if(!selected || QDELETED(src))
 		return
 
-	if (outfits[dresscode])
+	if(selected == "Custom")
+		var/list/custom_jobs = list()
+		for(var/id in GLOB.custom_jobs)
+			var/datum/job/custom_job/J = GLOB.custom_jobs[id]
+			custom_jobs[J.id] = J
+		var/selected_name = browser_input_list(src, "Select Job", "Custom Job Selector", sortList(custom_jobs))
+		if(!selected_name)
+			return
+		selected = GLOB.custom_jobs[selected_name]
+	else
+		selected = SSjob.GetJobType(selection[selected])
+		if(!istype(selected))
+			return
+
+	var/mob/living/carbon/human/dressed_human
+	if(!ishuman(to_dress))
+		dressed_human = to_dress.change_mob_type(/mob/living/carbon/human, null, null, TRUE)
+	else
+		dressed_human = to_dress
+
+	for(var/obj/item/I in dressed_human.get_all_gear())
+		qdel(I)
+
+	SSjob.EquipRank(dressed_human, selected, dressed_human.client)
+	log_admin("[key_name(src)] changed the job of [key_name(dressed_human)] to [selected].")
+	message_admins(span_adminnotice("[key_name_admin(src)] changed the job of [ADMIN_LOOKUPFLW(dressed_human)] to [selected]."))
+
+
+
+/client/proc/robust_dress_shop()
+	var/list/baseoutfits = list("Naked", "Custom")
+	var/list/outfits = list()
+	var/list/paths = subtypesof(/datum/outfit)
+
+	for(var/datum/outfit/O as anything in paths) //not much to initalize here but whatever
+		if(IS_ABSTRACT(O))
+			continue
+		if(initial(O.can_be_admin_equipped))
+			outfits += O
+
+	var/dresscode = browser_input_list(src, "Select outfit", "Robust quick dress shop", baseoutfits + sortList(outfits))
+	if(isnull(dresscode))
+		return
+
+	if(outfits[dresscode])
 		dresscode = outfits[dresscode]
 
-	if (dresscode == "Custom")
+	if(dresscode == "Custom")
 		var/list/custom_names = list()
-		for(var/datum/outfit/D in GLOB.custom_outfits)
+		for(var/id in GLOB.custom_outfits)
+			var/datum/outfit/D = GLOB.custom_outfits[id]
+			if(!D)
+				continue
 			custom_names[D.name] = D
 		var/selected_name = browser_input_list(src, "Select outfit", "Robust quick dress shop", sortList(custom_names))
 		dresscode = custom_names[selected_name]
 		if(isnull(dresscode))
 			return
-
-	if (dresscode == "As Roguetown Job...")
-		var/list/roguejob_paths = subtypesof(/datum/outfit/job)
-		var/list/roguejob_outfits = list()
-		for(var/datum/outfit/O as anything in roguejob_paths)
-			//roguetown coders are morons and didn't give ANY outfits proper fucking names
-			if(initial(O.can_be_admin_equipped))
-				roguejob_outfits["[O]"] = O
-
-		dresscode = browser_input_list(src, "Select job equipment", "Robust quick dress shop", sortList(roguejob_outfits))
-		dresscode = roguejob_outfits[dresscode]
-		if(isnull(dresscode))
-			return
-
 
 	return dresscode
 
@@ -390,8 +433,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	if(!holder)
 		return
 	var/list/names = list()
-	for(var/i in GLOB.ruin_landmarks)
-		var/obj/effect/landmark/ruin/ruin_landmark = i
+	for(var/obj/effect/landmark/ruin/ruin_landmark as anything in GLOB.ruin_landmarks)
 		var/datum/map_template/ruin/template = ruin_landmark.ruin_template
 
 		var/count = 1
@@ -572,7 +614,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/datum/asset/A as anything in subtypesof(/datum/asset))
 		if(!initial(A.cross_round_cachable))
 			continue
-		if(A == initial(A._abstract))
+		if(IS_ABSTRACT(A))
 			continue
 		var/datum/asset/asset_datum = GLOB.asset_datums[A]
 		asset_datum.regenerate()
@@ -588,8 +630,23 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	var/cleared = 0
 	for(var/datum/asset/spritesheet_batched/A as anything in subtypesof(/datum/asset/spritesheet_batched))
-		if(A == initial(A._abstract))
+		if(IS_ABSTRACT(A))
 			continue
 		fdel("[ASSET_CROSS_ROUND_SMART_CACHE_DIRECTORY]/spritesheet_cache.[initial(A.name)].json")
 		cleared++
 	to_chat(usr, "<span class='notice'>Cleared [cleared] asset\s.</span>")
+
+/client/proc/select_job_pack_debug()
+	set category = "Debug"
+	set name = "Select Jobpack"
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	var/pack = browser_input_list(usr, "Select a pack", "Job Packs", GLOB.job_pack_singletons)
+	if(!pack)
+		return
+
+	var/datum/job_pack/real_pack = GLOB.job_pack_singletons[pack]
+
+	real_pack.pick_pack(usr)

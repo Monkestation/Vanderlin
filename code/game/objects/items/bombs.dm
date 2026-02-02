@@ -1,6 +1,6 @@
 /obj/item/smokebomb
 	name = "smoke bomb"
-	desc = "A soft sphere with an alchemical mixture and a dispersion mechanism hidden inside. Any pressure will detonate it."
+	desc = "A soft sphere with an alchemical mixture and a dispersion mechanism hidden inside. Will shatter on impact."
 	icon = 'icons/obj/bombs.dmi'
 	icon_state = "smokebomb"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -10,9 +10,10 @@
 	throw_speed = 0.75
 	grid_width = 32
 	grid_height = 64
+	var/datum_to_spread = /datum/effect_system/smoke_spread
 
 /obj/item/smokebomb/attack_self(mob/user, list/modifiers)
-	..()
+	. = ..()
 	explode()
 
 /obj/item/smokebomb/ex_act()
@@ -29,14 +30,18 @@
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	playsound(src.loc, 'sound/items/smokebomb.ogg' , 50)
+	playsound(src, 'sound/items/smokebomb.ogg' , 50)
 	var/radius = 3
-	var/datum/effect_system/smoke_spread/S = new /datum/effect_system/smoke_spread
+	var/datum/effect_system/smoke_spread/S = new datum_to_spread
 	S.set_up(radius, T)
 	S.start()
 	if(prob(25))
 		new /obj/item/fertilizer/ash(T)
 	qdel(src)
+
+/obj/item/smokebomb/poison_bomb
+	name = "poison bomb"
+	datum_to_spread = /datum/effect_system/smoke_spread/poison
 
 /obj/item/holy_grenade
 	name = "\improper The Holy Hand Grenade of Antioch"
@@ -95,7 +100,7 @@
 		to_chat(user, span_notice("I pull the holy pin... but it doesn't release! Bring forth the Book of Armaments!"))
 		return
 	to_chat(user, span_userdanger("I pull the holy pin! Count to three!"))
-	playsound(get_turf(user), 'sound/foley/industrial/clunk.ogg', 40, FALSE, -1)
+	playsound(user, 'sound/foley/industrial/clunk.ogg', 40, FALSE, -1)
 	icon_state = "[icon_state]_armed"
 	primed = TRUE
 	START_PROCESSING(SSfastprocess, src)

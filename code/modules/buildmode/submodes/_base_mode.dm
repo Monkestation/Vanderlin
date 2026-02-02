@@ -5,7 +5,7 @@
 /atom/movable/screen/buildmode/categoryswitch
 	var/category_type
 
-/atom/movable/screen/buildmode/categoryswitch/New(datum/buildmode/bm, category)
+/atom/movable/screen/buildmode/categoryswitch/Initialize(mapload, datum/hud/hud_owner, datum/buildmode/build_datum, category)
 	. = ..()
 	category_type = category
 	update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)

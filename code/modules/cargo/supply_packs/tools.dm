@@ -5,12 +5,12 @@
 
 /datum/supply_pack/tools/rope
 	name = "Rope"
-	cost = 7
+	cost = 5
 	contains = /obj/item/rope
 
 /datum/supply_pack/tools/chain
 	name = "Chain"
-	cost = 11
+	cost = 25
 	contains = /obj/item/rope/chain
 
 /datum/supply_pack/tools/lockpicks
@@ -20,7 +20,7 @@
 
 /datum/supply_pack/tools/keyrings
 	name = "Keyring"
-	cost = 7
+	cost = 5
 	contains = /obj/item/storage/keyring
 
 /datum/supply_pack/tools/needle
@@ -40,27 +40,27 @@
 
 /datum/supply_pack/tools/parchment
 	name = "Parchment x5"
-	cost = 10
+	cost = 8
 	contains = list(/obj/item/paper,/obj/item/paper,/obj/item/paper,/obj/item/paper,/obj/item/paper)
 
 /datum/supply_pack/tools/flint
 	name = "Flint"
-	cost = 10
+	cost = 5
 	contains = /obj/item/flint
 
 /datum/supply_pack/tools/dyebin
 	name = "Dye Bin"
-	cost = 150
+	cost = 50
 	contains = /obj/structure/dye_bin
 
 /datum/supply_pack/tools/plough
 	name = "Plough"
-	cost = 60
+	cost = 45
 	contains = /obj/structure/plough
 
 /datum/supply_pack/tools/candles
 	name = "Candles (3)"
-	cost = 8
+	cost = 5
 	contains = list(/obj/item/candle/yellow,
 	/obj/item/candle/yellow,
 	/obj/item/candle/yellow)
@@ -72,62 +72,62 @@
 
 /datum/supply_pack/tools/pick
 	name = "Iron Pickaxe"
-	cost = 15
+	cost = 25
 	contains = /obj/item/weapon/pick
 
 /datum/supply_pack/tools/pick
-	name = "Steel Pickaxe"
-	cost = 40
+	name = "Steel Pick"
+	cost = 45
 	contains = /obj/item/weapon/pick/steel
 
 /datum/supply_pack/tools/tongs
 	name = "Tongs"
-	cost = 15
+	cost = 20
 	contains = /obj/item/weapon/tongs
 
 /datum/supply_pack/tools/hammer
 	name = "Hammer"
-	cost = 20
+	cost = 25
 	contains = /obj/item/weapon/hammer/iron
 
 /datum/supply_pack/tools/shovel
 	name = "Shovel"
-	cost = 15
+	cost = 25
 	contains = /obj/item/weapon/shovel
 
 /datum/supply_pack/tools/Sickle
 	name = "Sickle"
-	cost = 15
+	cost = 25
 	contains = /obj/item/weapon/sickle
 
 /datum/supply_pack/tools/pitchfork
 	name = "Pitchfork"
-	cost = 15
+	cost = 30
 	contains = /obj/item/weapon/pitchfork
 
 /datum/supply_pack/tools/hoe
 	name = "Hoe"
-	cost = 15
+	cost = 25
 	contains = /obj/item/weapon/hoe
 
 /datum/supply_pack/tools/thresher
 	name = "Thresher"
-	cost = 15
+	cost = 10
 	contains = /obj/item/weapon/thresher
 
 /datum/supply_pack/tools/bucket
 	name = "Bucket"
-	cost = 6
+	cost = 3
 	contains = /obj/item/reagent_containers/glass/bucket/wooden
 
 /datum/supply_pack/tools/fryingpan
 	name = "Frying Pan"
-	cost = 10
+	cost = 15
 	contains = /obj/item/cooking/pan
 
 /datum/supply_pack/tools/pot
 	name = "Cooking Pot"
-	cost = 15
+	cost = 10
 	contains = /obj/item/reagent_containers/glass/bucket/pot
 
 /datum/supply_pack/tools/wpipe
@@ -143,7 +143,7 @@
 /datum/supply_pack/tools/bait
 	name = "Fishing Grub x5"
 	cost = 20
-	contains = list(/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe,/obj/item/fishing/bait/deluxe)
+	contains = list(/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe,/obj/item/fishing/lure/deluxe)
 
 /datum/supply_pack/tools/fishingline
 	name = "Premium Fishing Line"
@@ -191,22 +191,22 @@
 
 /datum/supply_pack/tools/medical/prarml
 	name = "Left Wooden Arm"
-	cost = 15
+	cost = 20
 	contains = /obj/item/bodypart/l_arm/prosthetic/wood
 
 /datum/supply_pack/tools/medical/prarmr
 	name = "Right Wooden Arm"
-	cost = 15
+	cost = 20
 	contains = /obj/item/bodypart/r_arm/prosthetic/wood
 
 /datum/supply_pack/tools/medical/prlegl
 	name = "Pegleg Left Leg"
-	cost = 15
+	cost = 20
 	contains = /obj/item/bodypart/l_leg/prosthetic/wood
 
 /datum/supply_pack/tools/medical/prlegr
 	name = "Pegleg Right Leg"
-	cost = 15
+	cost = 20
 	contains = /obj/item/bodypart/r_leg/prosthetic/wood
 
 

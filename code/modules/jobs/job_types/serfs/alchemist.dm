@@ -11,35 +11,33 @@
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
-	outfit = /datum/outfit/job/alchemist
+	outfit = /datum/outfit/alchemist
 	give_bank_account = 12
 
-/datum/outfit/job/alchemist
-	name = "Alchemist"
-	jobtype = /datum/job/alchemist
+	jobstats = list(
+		STATKEY_INT = 3,
+		STATKEY_SPD = -1
+	)
 
-/datum/outfit/job/alchemist/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/craft/alchemy, pick(2,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-	H.change_stat(STATKEY_INT, 3)
-	H.change_stat(STATKEY_SPD, -1)
-	if(H.age == AGE_OLD)
-		H.adjust_skillrank(/datum/skill/craft/alchemy, pick(4,6), TRUE)
-//Requires a lot of sprites, so this is just a placeholder
-	if(H.gender == MALE)
-		pants = /obj/item/clothing/pants/trou
-		shoes = /obj/item/clothing/shoes/boots/leather
-		shirt = /obj/item/clothing/shirt/shortshirt
-		belt = /obj/item/storage/belt/leather
-		beltl = /obj/item/storage/belt/pouch/coins/poor
-		cloak = /obj/item/clothing/cloak/apron/brown
-	else
-		pants = /obj/item/clothing/pants/trou
-		shoes = /obj/item/clothing/shoes/boots/leather
-		shirt = /obj/item/clothing/shirt/shortshirt
-		belt = /obj/item/storage/belt/leather
-		beltl = /obj/item/storage/belt/pouch/coins/poor
-		cloak = /obj/item/clothing/cloak/apron/brown
+	skills = list(
+		/datum/skill/craft/crafting = 3,
+		/datum/skill/craft/alchemy = 2,
+		/datum/skill/misc/reading = 2
+	)
+
+
+/datum/job/alchemist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_skillrank(/datum/skill/craft/alchemy, rand(0,3), TRUE)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/craft/alchemy, rand(4,6), TRUE)
+
+/datum/outfit/alchemist
+	name = "Alchemist"
+	pants = /obj/item/clothing/pants/trou
+	shoes = /obj/item/clothing/shoes/boots/leather
+	shirt = /obj/item/clothing/shirt/shortshirt
+	belt = /obj/item/storage/belt/leather
+	beltl = /obj/item/storage/belt/pouch/coins/poor
+	cloak = /obj/item/clothing/cloak/apron/brown
 

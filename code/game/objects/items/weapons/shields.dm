@@ -4,11 +4,12 @@
 	name = ""
 	desc = ""
 	icon_state = ""
-	icon = 'icons/roguetown/weapons/32.dmi'
+	icon = 'icons/roguetown/weapons/32/shields.dmi'
 	slot_flags = ITEM_SLOT_BACK
 	flags_1 = null
-	force = 10
-	throwforce = 5
+	force = DAMAGE_SHIELD
+	throwforce = DAMAGE_SHIELD / 2
+	wdefense = ULTMATE_PARRY
 	throw_speed = 1
 	throw_range = 3
 	w_class = WEIGHT_CLASS_BULKY
@@ -20,11 +21,10 @@
 	can_parry = TRUE
 	associated_skill = /datum/skill/combat/shields
 	destroy_sound = 'sound/foley/shielddestroy.ogg'
-	wdefense = 5
 	var/coverage = 90
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
-	max_integrity = 100
+	max_integrity = INTEGRITY_WORST
 	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/fertilizer/ash
@@ -38,7 +38,7 @@
 		if(!COOLDOWN_FINISHED(src, shield_bang))
 			return
 		user.visible_message("<span class='danger'>[user] bangs [src] with [attackby_item]!</span>")
-		playsound(user.loc, 'sound/combat/shieldbang.ogg', 50, TRUE)
+		playsound(user, 'sound/combat/shieldbang.ogg', 50, TRUE)
 		COOLDOWN_START(src, shield_bang, SHIELD_BANG_COOLDOWN)
 		return
 
@@ -111,9 +111,8 @@
 	if(design_chosen)
 		return
 
-	if(!('icons/roguetown/weapons/wood_heraldry.dmi' in GLOB.IconStates_cache))
-		var/icon/icon_file = new('icons/roguetown/weapons/wood_heraldry.dmi')
-		GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'] = icon_file.IconStates()
+	if(isnull(GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi']))
+		GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'] = icon_states('icons/roguetown/weapons/wood_heraldry.dmi')
 
 	var/picked_name = browser_input_list(user, "Choose a Heraldry", "Heraldry", GLOB.IconStates_cache['icons/roguetown/weapons/wood_heraldry.dmi'])
 	if(!picked_name)
@@ -158,15 +157,12 @@
 	name = "tower shield"
 	desc = "A gigantic, iron reinforced shield that covers the entire body, a design-copy of the Aasimar shields of an era gone by."
 	icon_state = "shield_tower"
-	force = 15
-	throwforce = 10
-	throw_speed = 1
-	throw_range = 3
-	wlength = WLENGTH_NORMAL
-	wbalance = -1 // Heavy, big shield
-	resistance_flags = FLAMMABLE
-	wdefense = 6
+	force = DAMAGE_SHIELD + 5
+	throwforce = DAMAGE_SHIELD
+	wdefense = ULTMATE_PARRY + 1
+	wbalance = EASY_TO_DODGE // Heavy, big shield
 	coverage = 65
+	wlength = WLENGTH_NORMAL
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
@@ -175,6 +171,7 @@
 /obj/item/weapon/shield/tower/spidershield
 	name = "spider shield"
 	desc = "A bulky shield of spike-like lengths molten together. The motifs evoke anything but safety and protection."
+	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spidershield"
 
 /obj/item/weapon/shield/tower/getonmobprop(tag)
@@ -188,26 +185,20 @@
 
 /obj/item/weapon/shield/tower/hoplite
 	name = "ancient shield"
-	desc = "A gigantic, bronze reinforced shield that covers the entire body. An aasimar relic from an era long past."
+	desc = "A gigantic, bronze reinforced shield that covers the entire body. An Aasimar relic from an era long past."
 	icon_state = "boeotian"
-	possible_item_intents = list(/datum/intent/shield/bash/metal, /datum/intent/shield/block/metal)
-	force = 20
-	throwforce = 10
-	throw_speed = 1
-	throw_range = 3
-	wlength = WLENGTH_NORMAL
-	wbalance = -1 // Heavy, big shield
-	resistance_flags = null
-	flags_1 = CONDUCT_1
-	wdefense = 8
+	force = DAMAGE_SHIELD + 5
+	wdefense = ULTMATE_PARRY + 3
 	coverage = 75 // Rare shield from unique job, gets a tiny bit of additional coverage
+	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
+	resistance_flags = FIRE_PROOF
+	flags_1 = CONDUCT_1
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
 	blade_dulling = DULLING_BASH
-	sellprice = 150 // A noble collector would love to get their hands on one of these
 	melting_material = /datum/material/bronze
-	melt_amount = 75
+	sellprice = 150 // A noble collector would love to get their hands on one of these
 
 /obj/item/weapon/shield/tower/hoplite/getonmobprop(tag)
 	. = ..()
@@ -222,16 +213,12 @@
 	name = "kite shield"
 	desc = "A knightly, kite shaped steel shield, emblazoned with heraldry. \nBoasts superior coverage and durability, owed to its exquisite craftsmanship."
 	icon_state = "ironsh"
-	possible_item_intents = list(/datum/intent/shield/bash/metal, /datum/intent/shield/block/metal)
-	force = 20
-	throwforce = 10
-	throw_speed = 1
-	throw_range = 3
-	wlength = WLENGTH_NORMAL
-	resistance_flags = null
-	flags_1 = CONDUCT_1
-	wdefense = 7
+	force = DAMAGE_SHIELD * 2
+	wdefense = ULTMATE_PARRY + 2
 	coverage = 70
+	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
+	resistance_flags = FIRE_PROOF
+	flags_1 = CONDUCT_1
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
@@ -255,9 +242,8 @@
 	if(design_chosen)
 		return
 
-	if(!('icons/roguetown/weapons/shield_heraldry.dmi' in GLOB.IconStates_cache))
-		var/icon/icon_file = new('icons/roguetown/weapons/shield_heraldry.dmi')
-		GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi'] = icon_file.IconStates()
+	if(isnull(GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi']))
+		GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi'] = icon_states('icons/roguetown/weapons/shield_heraldry.dmi')
 
 	var/picked_name = browser_input_list(user, "Choose a Heraldry", "Heraldry", sortList(GLOB.IconStates_cache['icons/roguetown/weapons/shield_heraldry.dmi']))
 	if(!picked_name)
@@ -279,26 +265,39 @@
 
 #undef SHIELD_BANG_COOLDOWN
 
+/obj/item/weapon/shield/tower/metal/ancient
+	name = "ancient shield"
+	desc = "An ancient, knightly, kite-shaped steel shield."
+	icon_state = "ancientsh"
+
+/obj/item/weapon/shield/tower/metal/psy
+	name = "Covenant"
+	desc = "The Ordo Benetarus holds a mantra: A Psydonian endures. A Psydonian preserves themselves. A Psydonian preserves His flock. Protect them."
+	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
+	icon_state = "psyshield"
+	wdefense = ULTMATE_PARRY + 3
+	coverage = 50
+	max_integrity = INTEGRITY_STRONG
+
+/obj/item/weapon/shield/tower/metal/psy/Initialize(mapload)
+	. = ..()							//+0 force, +100 int, +1 def, make silver
+	AddComponent(/datum/component/psyblessed, TRUE, 0, FALSE, 100, 1, TRUE)
+
 /obj/item/weapon/shield/tower/buckleriron
 	name = "iron buckler"
-	desc = "A small sized iron shield, popular among mercenaries due to it's light weight and ease of mobility."
+	desc = "A small sized iron shield, popular among mercenaries due to its light weight and ease of mobility."
 	icon_state = "ironbuckler"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
-	force = 10
-	throwforce = 10
-	dropshrink = 0.75
-	throw_speed = 1
-	throw_range = 3
-	wlength = WLENGTH_NORMAL
-	wbalance = 1 // small, tiny shield
-	resistance_flags = FIRE_PROOF
-	wdefense = 4
+	force = DAMAGE_SHIELD
+	wdefense = GREAT_PARRY
+	wbalance = HARD_TO_DODGE // small, tiny shield
 	coverage = 45
+	max_integrity = INTEGRITY_STRONG - 50
+	dropshrink = 0.75
+
+	resistance_flags = FIRE_PROOF
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
-	max_integrity = INTEGRITY_STRONG - 50
-	melting_material = /datum/material/iron
-	melt_amount = 75
 
 /obj/item/weapon/shield/tower/buckleriron/getonmobprop(tag)
 	. = ..()
@@ -315,10 +314,10 @@
 	name = "heater shield"
 	desc = "A sturdy wood and leather shield. Made to not be too encumbering while still providing good protection."
 	icon_state = "heatershield"
-	force = 15
-	throwforce = 10
-	dropshrink = 0.8
+	force = DAMAGE_SHIELD + 5
+	throwforce = DAMAGE_SHIELD
 	coverage = 60
+	dropshrink = 0.8
 	attacked_sound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = INTEGRITY_STANDARD

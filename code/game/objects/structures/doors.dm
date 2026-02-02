@@ -19,6 +19,8 @@
 	lock = /datum/lock/key
 	can_add_lock = TRUE
 
+	var/omni_bolt = FALSE
+
 	/// Can people riding go through without falling off their mount
 	var/ridethrough = FALSE
 	/// If TRUE when bumped open we callback close
@@ -103,7 +105,7 @@
 	if(has_viewport)
 		. += span_info("It has a built-in viewport.")
 	if(has_bolt)
-		. += span_info("It's lock is a deadbolt.")
+		. += span_info("Its lock is a deadbolt.")
 	if(lock?.uses_key)
 		. += span_info("There is a keyhole below the handle.")
 
@@ -111,32 +113,32 @@
 	if(obj_broken || switching_states)
 		return
 	if(door_opened)
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src] shut!"), \
 			span_notice("I kick [src] shut!"))
 		force_closed()
 		return
 	if(!locked())
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src] open!"), \
 			span_notice("I kick [src] open!"))
-		force_open()
+		force_open(user)
 		return
 	if(isliving(user))
 		var/mob/living/L = user
 		if(L.STASTR < initial(kickthresh))
-			playsound(get_turf(src), pick(attacked_sound), 100)
+			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks [src]! It's not effective."), \
 			span_notice("I kick [src]! It's not effective."))
 			return
 		if((prob(L.STASTR * 0.5) || kickthresh-- == 0))
-			playsound(get_turf(src), pick(attacked_sound), 100)
+			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks open [src]!"), \
 				span_notice("I kick open [src]!"))
 			unlock()
-			force_open()
+			force_open(user)
 			return
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src]!"), \
 			span_notice("I kick [src]!"))
 
@@ -172,7 +174,7 @@
 			user.visible_message(span_warning("[user] tries the handle, but the door does not move."), \
 				span_notice("I try the handle, but the door does not move."))
 
-/obj/structure/door/pre_lock_interact(mob/user)
+/obj/structure/door/pre_lock_interact(mob/living/user)
 	if(switching_states)
 		return FALSE
 	if(door_opened)
@@ -182,7 +184,7 @@
 /obj/structure/door/attackby(obj/item/I, mob/user)
 	if(switching_states)
 		return
-	if(I.has_access())
+	if(I.can_lock_interact())
 		return (..() || attack_hand(user))
 	return ..()
 
@@ -197,7 +199,7 @@
 		if(obj_broken)
 			to_chat(user, span_warning("The bolt has nothing to latch to!"))
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(get_dir(src, user) == dir)
+		if((get_dir(src, user) == dir) || omni_bolt)
 			lock?.toggle(user)
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		to_chat(user, span_notice("I can't reach the bolt from this side."))
@@ -233,7 +235,7 @@
 				take_damage(200, BRUTE, BCLASS_BLUNT, TRUE)
 			else
 				playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
-				force_open()
+				force_open(AM)
 				user.visible_message(span_warning("[user] smashes through [src]!"))
 			return
 		if(HAS_TRAIT(user, TRAIT_ROTMAN))
@@ -242,7 +244,7 @@
 				take_damage(50, BRUTE, BCLASS_BLUNT, TRUE)
 			else
 				playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 90)
-				force_open()
+				force_open(AM)
 				user.visible_message(span_warning("The deadite smashes through [src]!"))
 			return
 		if(locked())
@@ -312,26 +314,26 @@
 	if(!M.client)
 		return FALSE
 	if(!iscarbon(M))
-		SwitchState()
+		SwitchState(user = user)
 		return FALSE
 	var/mob/living/carbon/C = M
 	if(!C.handcuffed)
 		if(C.m_intent == MOVE_INTENT_SNEAK)
-			SwitchState(TRUE)
+			SwitchState(TRUE, user)
 		else
-			SwitchState()
+			SwitchState(user = user)
 		return TRUE
 
-/obj/structure/door/proc/SwitchState(silent = FALSE)
+/obj/structure/door/proc/SwitchState(silent = FALSE, mob/user)
 	if(door_opened)
 		Close(silent)
 		return
-	Open(silent)
+	Open(silent, user)
 
-/obj/structure/door/proc/Open(silent = FALSE)
+/obj/structure/door/proc/Open(silent = FALSE, mob/user)
 	switching_states = TRUE
 	if(!silent)
-		playsound(get_turf(src), open_sound, 90)
+		playsound(src, open_sound, 90)
 	if(!windowed)
 		set_opacity(FALSE)
 	flick("[initial(icon_state)]opening",src)
@@ -345,8 +347,9 @@
 	if(close_delay > 0)
 		addtimer(CALLBACK(src, PROC_REF(Close), silent), close_delay)
 	air_update_turf(TRUE)
+	SEND_SIGNAL(src, COMSIG_DOOR_OPENED, user)
 
-/obj/structure/door/proc/force_open()
+/obj/structure/door/proc/force_open(mob/user)
 	switching_states = TRUE
 	if(!windowed)
 		set_opacity(FALSE)
@@ -356,6 +359,7 @@
 	update_appearance(UPDATE_ICON_STATE)
 	switching_states = FALSE
 	air_update_turf(TRUE)
+	SEND_SIGNAL(src, COMSIG_DOOR_OPENED, user)
 
 /obj/structure/door/proc/Close(silent = FALSE)
 	if(switching_states || !door_opened)
@@ -364,7 +368,7 @@
 		return
 	switching_states = TRUE
 	if(!silent)
-		playsound(get_turf(src), close_sound, 90)
+		playsound(src, close_sound, 90)
 	if(!windowed)
 		set_opacity(TRUE)
 	flick("[initial(icon_state)]closing", src)
@@ -464,6 +468,7 @@
 	dir = NORTH
 	lock = /datum/lock/locked
 	animate_time = 2.1 SECONDS
+	omni_bolt = TRUE
 
 /obj/structure/door/iron
 	name = "iron door"

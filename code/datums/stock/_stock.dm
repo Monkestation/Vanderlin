@@ -89,7 +89,7 @@ GLOBAL_LIST_EMPTY(cache_timestamps) // Timestamps for each cache entry
 	if(!stockpile_id)
 		return
 
-	for(var/obj/structure/stockpile_storage/storage in world)
+	for(var/obj/structure/stockpile_storage/storage in GLOB.storage_objects)
 		if(storage.storage_id == stockpile_id)
 			storage.link_stock(src)
 			// Process any pending items when new storage is linked

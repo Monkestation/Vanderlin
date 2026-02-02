@@ -5,7 +5,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	name = "bow"
 	desc = "The bow is your life; to hold it high and pull the string is to know the path of destiny."
-	icon = 'icons/roguetown/weapons/bows.dmi'
+	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "bow"
 	experimental_onhip = TRUE
 	experimental_onback = TRUE

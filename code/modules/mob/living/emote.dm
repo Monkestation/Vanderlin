@@ -19,6 +19,7 @@
 	set category = "Emotes"
 
 	emote("pray", intentional = TRUE)
+	SEND_SIGNAL(src, COMSIG_PRAYER_COMPLETED)
 
 /datum/emote/living/pray/run_emote(mob/user, params, type_override, intentional)
 	if(HAS_TRAIT(user, TRAIT_ATHEISM_CURSE))
@@ -31,7 +32,7 @@
 	var/mob/living/carbon/follower = user
 	var/datum/patron/patron = follower.patron
 
-	var/in_literal_hell = ( istype(get_area(user), /area/rogue/underworld) )
+	var/in_literal_hell = ( istype(get_area(user), /area/underworld) )
 	if(!in_literal_hell && !patron?.can_pray(follower))
 		return
 
@@ -48,10 +49,6 @@
 
 	if(SEND_SIGNAL(follower, COMSIG_CARBON_PRAY, prayer) & CARBON_PRAY_CANCEL)
 		return
-
-	if(patron.hear_prayer(follower, prayer))
-		if(follower.has_flaw(/datum/charflaw/addiction/godfearing)) //make this a fucking signal!!!!
-			follower.sate_addiction() //why is this being handled by the mob!!!! and why does this cover every addiction??
 
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
@@ -161,7 +158,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/scream/agony
@@ -427,7 +424,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/giggle
@@ -444,7 +441,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled laugh."
 
 /datum/emote/living/glare
@@ -524,7 +521,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			message = "makes a muffled hmm."
 
 /datum/emote/living/huh
@@ -580,7 +577,7 @@
 		var/mob/living/carbon/human/H = target
 		// cursed is the one being hugged
 		if(HAS_TRAIT(H, TRAIT_EORA_CURSE))
-			to_chat(H, "<span class='warning'>I feel unexplicably repelled!</span>")
+			to_chat(H, "<span class='warning'>I feel inexplicably repelled!</span>")
 			H.cursed_freak_out()
 			return
 
@@ -591,7 +588,7 @@
 	if(ishuman(target))
 		var/mob/living/carbon/H = target
 		H.add_stress(/datum/stress_event/hug)
-		playsound(target.loc, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
+		playsound(target, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
 
 		if(user.mind)
 			SEND_SIGNAL(user, COMSIG_MOB_HUGGED, H)
@@ -616,7 +613,7 @@
 		return
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		playsound(target.loc, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
+		playsound(target, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
 		if(israkshari(H))
 			if(prob(10))
 				H.emote("purr")
@@ -672,7 +669,7 @@
 
 		// cursed is the one being kissed
 		if(HAS_TRAIT(E, TRAIT_EORA_CURSE))
-			to_chat(E, "<span class='warning'>I feel unexplicably repelled!</span>")
+			to_chat(E, "<span class='warning'>I feel inexplicably repelled!</span>")
 			E.cursed_freak_out()
 
 		// anti pedophile logging
@@ -703,7 +700,7 @@
 				message_param = "kisses %t on the brow."
 			else
 				message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
-	playsound(target.loc, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
+	playsound(target, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
 	if(user.mind)
 		record_round_statistic(STATS_KISSES_MADE)
 
@@ -717,14 +714,12 @@
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/laugh/can_run_emote(mob/living/user, status_check = TRUE , intentional)
-	. = ..()
-	if(. && iscarbon(user))
-		var/mob/living/carbon/C = user
-		return !C.silent
+	return ..() && user.can_speak()
 
 /datum/emote/living/laugh/run_emote(mob/user, params, type_override, intentional, targetted)
 	. = ..()
 	if(. && user.mind)
+		record_featured_stat(FEATURED_STATS_JOKESTERS, user)
 		record_round_statistic(STATS_LAUGHS_MADE)
 
 /mob/living/carbon/human/verb/emote_laugh()
@@ -979,9 +974,9 @@
 		return
 	if(isliving(target))
 		if(user.gender == MALE)
-			playsound(target.loc, pick('sound/vo/male/gen/spit.ogg','sound/vo/male/gen/spit_floor.ogg'), 100, FALSE, -1)
+			playsound(target, pick('sound/vo/male/gen/spit.ogg','sound/vo/male/gen/spit_floor.ogg'), 100, FALSE, -1)
 		else
-			playsound(target.loc, pick('sound/vo/female/gen/spit.ogg', 'sound/vo/female/gen/spit_floor.ogg'), 100, FALSE, -1)
+			playsound(target, pick('sound/vo/female/gen/spit.ogg', 'sound/vo/female/gen/spit_floor.ogg'), 100, FALSE, -1)
 		SEND_SIGNAL(user, COMSIG_SPAT_ON, target)
 
 /datum/emote/living/slap
@@ -1031,7 +1026,7 @@
 		var/mob/living/carbon/human/H = target
 		H.flash_fullscreen("redflash3")
 		H.AdjustSleeping(-50)
-		playsound(target.loc, pick('sound/foley/slap (1).ogg','sound/foley/slap (2).ogg'), 50, FALSE, -1)
+		playsound(target, pick('sound/foley/slap (1).ogg','sound/foley/slap (2).ogg'), 50, FALSE, -1)
 
 /datum/emote/living/scream
 	key = "scream"
@@ -1086,6 +1081,17 @@
 	set name = "Shiver"
 	set category = "Emotes"
 	emote("shiver", intentional = TRUE)
+
+#define SHIVER_LOOP_DURATION (1 SECONDS)
+/datum/emote/living/shiver/run_emote(mob/living/user, params, type_override, intentional)
+	. = ..()
+
+	animate(user, pixel_w = 1, time = 0.1 SECONDS, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL)
+	for(var/i in 1 to SHIVER_LOOP_DURATION / (0.2 SECONDS)) //desired total duration divided by the iteration duration to give the necessary iteration count
+		animate(pixel_w = -2, time = 0.1 SECONDS, flags = ANIMATION_RELATIVE|ANIMATION_CONTINUE)
+		animate(pixel_w = 2, time = 0.1 SECONDS, flags = ANIMATION_RELATIVE|ANIMATION_CONTINUE)
+	animate(pixel_w = -1, time = 0.1 SECONDS, flags = ANIMATION_RELATIVE)
+#undef SHIVER_LOOP_DURATION
 
 /datum/emote/living/sigh
 	key = "sigh"
@@ -1241,9 +1247,9 @@
 /datum/emote/living/zombiemoan/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
 	if(user.gender == MALE)
-		playsound(user.loc, pick('sound/vo/mobs/zombie/idle (1).ogg','sound/vo/mobs/zombie/idle (2).ogg','sound/vo/mobs/zombie/idle (3).ogg'), 80, FALSE, -1)
+		playsound(user, pick('sound/vo/mobs/zombie/idle (1).ogg','sound/vo/mobs/zombie/idle (2).ogg','sound/vo/mobs/zombie/idle (3).ogg'), 80, FALSE, -1)
 	else
-		playsound(user.loc, pick('sound/vo/mobs/zombie/f/idle (1).ogg','sound/vo/mobs/zombie/f/idle (2).ogg','sound/vo/mobs/zombie/f/idle (3).ogg'), 80, FALSE, -1)
+		playsound(user, pick('sound/vo/mobs/zombie/f/idle (1).ogg','sound/vo/mobs/zombie/f/idle (2).ogg','sound/vo/mobs/zombie/f/idle (3).ogg'), 80, FALSE, -1)
 
 
 // ............... Y ..................

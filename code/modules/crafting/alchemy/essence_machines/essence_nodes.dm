@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(essence_nodes)
+
 /obj/structure/essence_node
 	name = "essence node"
 	desc = "A weakened point in the environment that allows access to alchemical essence. It pulses with inner energy."
@@ -20,6 +22,9 @@
 
 /obj/structure/essence_node/Initialize(mapload)
 	. = ..()
+	if(!tier && prob(10))
+		tier = 1
+
 	if(!essence_type)
 		essence_type = pick_random_essence_type()
 	switch(tier)
@@ -36,9 +41,11 @@
 	last_recharge = world.time
 	update_appearance(UPDATE_ICON)
 	START_PROCESSING(SSobj, src)
+	LAZYADD(GLOB.essence_nodes, src)
 
 /obj/structure/essence_node/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	LAZYREMOVE(GLOB.essence_nodes, src)
 	return ..()
 
 /obj/structure/essence_node/update_overlays()
@@ -163,7 +170,7 @@
 	if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
 		. += span_notice("This node generates [temp_essence.name].")
 	else
-		. += span_notice("This node generate essence smelling of [temp_essence.smells_like].")
+		. += span_notice("This node generates essence smelling of [temp_essence.smells_like].")
 
 	. += span_notice("This node generates [temp_essence.name].")
 	. += span_notice("Essence: [current_essence]/[max_essence] units")
@@ -195,7 +202,7 @@
 
 /obj/item/essence_node_portable
 	name = "essence node"
-	desc = "A large amount of essence still wrapped within it's enviormental shell. It still beats with alchemical energy."
+	desc = "A large amount of essence still wrapped within its environmental shell. It still beats with alchemical energy."
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "essence"
 	w_class = WEIGHT_CLASS_BULKY

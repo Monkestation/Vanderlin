@@ -9,7 +9,7 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 15
 
-/obj/item/clothing/neck/mercmedal/zaladian
+/obj/item/clothing/neck/mercmedal/zaladin
 	name = "desert rider chain"
 	desc = "A small, gilded neck-chain. The desert riders rose from humble beginnings as fight pit slaves. A tale now celebrated in their decorations."
 	icon_state = "goldchain"

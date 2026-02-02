@@ -3,16 +3,48 @@
 	greet_text = "Among the lofty spires of Kingsfield’s arcane academies, one school conceived a daring idea: a grand overland expedition, on foot, through untamed lands. \
 	As fortune (or folly) would have it, you have been chosen as the guiding hand and watchful protector of your eager pupils. \
 	Your task is to lead them safely across the wilds, through hardship and wonder alike, until at last the halls of learning they seek rise before you."
-	grant_lit_torch = TRUE
+	migrant_job = /datum/job/migrant/magic_teacher
+
+/datum/job/migrant/magic_teacher
+	title = "Magic School Teacher"
+	tutorial = "Among the lofty spires of Kingsfield’s arcane academies, one school conceived a daring idea: a grand overland expedition, on foot, through untamed lands. \
+	As fortune (or folly) would have it, you have been chosen as the guiding hand and watchful protector of your eager pupils. \
+	Your task is to lead them safely across the wilds, through hardship and wonder alike, until at last the halls of learning they seek rise before you."
+	outfit = /datum/outfit/magic_teacher
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONEXOTIC
-	outfit = /datum/outfit/job/magic_teacher
+	blacklisted_species = list(SPEC_ID_HALFLING)
+	allowed_patrons = list(/datum/patron/divine/noc)
+	exp_types_granted  = list(EXP_TYPE_MAGICK)
+	jobstats = list(
+		STATKEY_STR = -1,
+		STATKEY_INT = 4,
+		STATKEY_CON = -1,
+		STATKEY_SPD = -1,
+	)
 
+	skills = list(
+		/datum/skill/misc/reading = 5,
+		/datum/skill/magic/arcane = 4,
+		/datum/skill/combat/polearms = 2,
+		/datum/skill/craft/alchemy = 4,
+		/datum/skill/labor/mathematics = 3,
+	)
 
-/datum/outfit/job/magic_teacher/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+	spells = list(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
+	spell_points = 10
 
+	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
+	voicepack_m = /datum/voicepack/male/wizard
+
+/datum/job/migrant/magic_teacher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(prob(5))
+		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
+	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+
+/datum/outfit/magic_teacher
+	name = "Magic School Teacher (Migrant Wave)"
 	head = /obj/item/clothing/head/wizhat
 	backr = /obj/item/storage/backpack/satchel
 	armor = /obj/item/clothing/shirt/robe/colored/black
@@ -21,88 +53,79 @@
 	backl = /obj/item/weapon/polearm/woodstaff
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/mana_star
-	backpack_contents = list(/obj/item/book/granter/spellbook/expert = 1, /obj/item/storage/belt/pouch/coins/rich = 1)
-
-	if(H.mind)
-		H.set_patron(/datum/patron/divine/noc)
-		H.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-		H.adjust_skillrank(/datum/skill/magic/arcane, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/alchemy, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
-
-		if(prob(5)) //extremely rare
-			H.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-		else
-			H.cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
-
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			if(H.gender == MALE)
-				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
-		H.change_stat(STATKEY_STR, -1)
-		H.change_stat(STATKEY_INT, 4)
-		H.change_stat(STATKEY_CON, -1)
-		H.change_stat(STATKEY_SPD, -1)
-
-		H.adjust_spell_points(10)
-		H.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
-
+	backpack_contents = list(
+		/obj/item/book/granter/spellbook/expert = 1,
+		/obj/item/storage/belt/pouch/coins/rich = 1,
+	)
 
 /datum/migrant_role/magic_student
 	name = "Magic School Student"
 	greet_text = "When the call went out for daring pupils to join a great overland trek from Kingsfield, you eagerly volunteered, visions of adventure, discovery, and excitement dancing in your mind. \
 	Of course, the creatures that lurk along the road seem just as eager... though perhaps for very different reasons."
+	migrant_job = /datum/job/migrant/magic_student
+
+/datum/job/migrant/magic_student
+	title = "Magic School Student"
+	tutorial = "When the call went out for daring pupils to join a great overland trek from Kingsfield, you eagerly volunteered, visions of adventure, discovery, and excitement dancing in your mind. \
+	Of course, the creatures that lurk along the road seem just as eager... though perhaps for very different reasons."
+	outfit = /datum/outfit/magic_student
 	allowed_ages = list(AGE_CHILD)
 	allowed_races = RACES_PLAYER_NONEXOTIC
-	outfit = /datum/outfit/job/magic_student
+	allowed_patrons = list(/datum/patron/divine/noc)
+	exp_types_granted  = list(EXP_TYPE_MAGICK)
+	jobstats = list(
+		STATKEY_STR = -1,
+		STATKEY_INT = 3,
+		STATKEY_SPD = -2,
+	)
 
-/datum/outfit/job/magic_student/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+	skills = list(
+		/datum/skill/misc/reading = 4,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/athletics = 1,
+		/datum/skill/combat/polearms = 1,
+		/datum/skill/craft/alchemy = 3,
+		/datum/skill/labor/mathematics = 2,
+	)
 
-	if(H.gender == MALE)
-		pants = /obj/item/clothing/pants/tights/colored/random
-		shoes = /obj/item/clothing/shoes/simpleshoes
+	spells = list(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
+	spell_points = 6
+
+/datum/job/migrant/magic_student/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+
+/datum/job/migrant/magic_student/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_skillrank(/datum/skill/magic/arcane, pick(2,2,2,3), TRUE)
+	if(prob(5))
+		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
+
+/datum/outfit/magic_student
+	name = "Magic School Student (Migrant Wave)"
+	neck = /obj/item/clothing/neck/mana_star
+	belt  =	/obj/item/storage/belt/leather
+	beltl = /obj/item/book/granter/spellbook/adept
+	beltr = /obj/item/storage/magebag/apprentice
+	armor = /obj/item/clothing/shirt/robe/newmage/adept
+	backr = /obj/item/storage/backpack/satchel
+	pants = /obj/item/clothing/pants/tights/colored/random
+	shoes = /obj/item/clothing/shoes/simpleshoes
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/mid = 1,
+		/obj/item/chalk = 1,
+	)
+
+/datum/outfit/magic_student/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+
+	if(equipped_human.gender == MALE)
 		shirt = /obj/item/clothing/shirt/shortshirt
-		belt  = /obj/item/storage/belt/leather
-		beltl = /obj/item/book/granter/spellbook/adept // spoiled brats
-		beltr = /obj/item/storage/magebag/apprentice
-		armor = /obj/item/clothing/shirt/robe/newmage/adept
-		backr = /obj/item/storage/backpack/satchel
 		head = /obj/item/clothing/head/wizhat/gen
-		neck = /obj/item/clothing/neck/mana_star
 	else
-		shoes = /obj/item/clothing/shoes/simpleshoes
 		shirt = /obj/item/clothing/shirt/dress/silkdress/colored/random
-		pants = /obj/item/clothing/pants/tights/colored/random
-		belt  =	/obj/item/storage/belt/leather
-		beltl = /obj/item/book/granter/spellbook/adept // spoiled brats
-		beltr = /obj/item/storage/magebag/apprentice
-		armor = /obj/item/clothing/shirt/robe/newmage/adept
-		backr = /obj/item/storage/backpack/satchel
 		head = /obj/item/clothing/head/wizhat/witch
-		neck = /obj/item/clothing/neck/mana_star
-	if(H.mind)
-		H.set_patron(/datum/patron/divine/noc)
-		H.adjust_spell_points(6)
-		backpack_contents = list(/obj/item/storage/belt/pouch/coins/mid = 1, /obj/item/chalk = 1)
-		H.adjust_skillrank(/datum/skill/magic/arcane, pick(2,2,2,3), TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)// Focused on their studies.
-		H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)// Focused on their studies.
-		H.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)// Focused on their studies.
-		H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/alchemy, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
-		H.change_stat(STATKEY_STR, -1)
-		H.change_stat(STATKEY_INT, 3) // Smart
-		H.change_stat(STATKEY_SPD, -2)
-
-	H.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
-	if(prob(5)) //extremely rare
-		H.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	else
-		H.cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 
 /datum/migrant_wave/magic_school_expedition
 	name = "Magic School Expedition"

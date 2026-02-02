@@ -17,7 +17,7 @@
 /obj/item/clothing/neck/silveramulet
 	name = "silver amulet"
 	icon_state = "amulets"
-	slot_flags = ITEM_SLOT_NECK
+	slot_flags = ITEM_SLOT_NECK | ITEM_SLOT_WRISTS // It needs this or else it is less useful than a psycross
 	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
@@ -27,6 +27,86 @@
 /obj/item/clothing/neck/silveramulet/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/neck/jadeamulet
+	name = "joapstone amulet"
+	icon_state = "amulet_jade"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 60
+
+/obj/item/clothing/neck/turqamulet
+	name = "ceruleabaster amulet"
+	icon_state = "amulet_turq"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 85
+
+/obj/item/clothing/neck/onyxaamulet
+	name = "onyxa amulet"
+	icon_state = "amulet_onyxa"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 40
+
+/obj/item/clothing/neck/coralamulet
+	name = "aoetal amulet"
+	icon_state = "amulet_coral"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 70
+
+/obj/item/clothing/neck/amberamulet
+	name = "petriamber amulet"
+	icon_state = "amulet_amber"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 60
+
+/obj/item/clothing/neck/opalamulet
+	name = "opaloise amulet"
+	icon_state = "amulet_opal"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 90
+
+/obj/item/clothing/neck/roseamulet
+	name = "rosellusk amulet"
+	icon_state = "amulet_rose"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 25
+
+/obj/item/clothing/neck/shellamulet
+	name = "shell amulet"
+	icon_state = "amulet_shell"
+	slot_flags = ITEM_SLOT_NECK
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sellprice = 25
 
 /obj/item/clothing/neck/coif
 	name = "leather coif"
@@ -76,6 +156,10 @@
 					H.update_inv_head()
 		user.regenerate_clothes()
 
+/obj/item/clothing/neck/coif/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+
 /obj/item/clothing/neck/coif/cloth
 	name = "padded coif"
 	desc = "A simple coif made of cloth. Not very effective armor, but may soften weak blows and keeps the head and neck warm."
@@ -90,6 +174,12 @@
 	armor = ARMOR_PADDED
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = MINOR_CRITICALS
+
+/obj/item/clothing/neck/coif/cloth/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/coif/cloth/colored/berryblue
+	color = CLOTHING_BERRY_BLUE
 
 /obj/item/clothing/neck/leathercollar
 	name = "leather collar"
@@ -152,8 +242,9 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_MEDIUM
@@ -186,12 +277,18 @@
 
 	user.regenerate_clothes()
 
+/obj/item/clothing/neck/chaincoif/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+
 /obj/item/clothing/neck/chaincoif/iron
 	icon_state = "ichaincoif"
 	name = "iron chain coif"
 	desc = "A chain coif made of interwoven iron rings. Affordable protection against arrows and blades, \
 			but should be used as padding rather than relied upon as armor."
+	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
+	melt_amount = 100
 
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
@@ -219,7 +316,8 @@
 	desc = "A piece of steel plate armor meant to protect the throat and neck of its wearer against decapitation, extending the protection of armor plates."
 	icon_state = "bevor"
 	flags_inv = HIDEFACIALHAIR
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	melt_amount = 100
 	melting_material = /datum/material/steel
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
@@ -234,6 +332,10 @@
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
+
+/obj/item/clothing/neck/bevor/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/bevor/iron
 	name = "iron bevor"
@@ -266,6 +368,137 @@
 	body_parts_covered = NECK
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
+
+/obj/item/clothing/neck/gorget/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+
+/obj/item/clothing/neck/gorget/ancient
+	name = "gorget"
+	icon_state = "ancientgorget"
+	desc = "A very old gorget."
+
+/obj/item/clothing/neck/gorget/explosive
+	name = "collar of servitude"
+	icon_state = "collar_of_servitude"
+	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
+		servile and obedient under threat of its explosive potential detonating on their necks."
+	clothing_flags = null
+	var/collar_unlocked = TRUE
+	var/is_in_neck_slot = FALSE
+	var/is_going_to_boom = FALSE
+
+/obj/item/clothing/neck/gorget/explosive/Initialize(mapload, ...)
+	. = ..()
+	RegisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(tries_to_unequip))
+
+/obj/item/clothing/neck/gorget/explosive/Destroy()
+	UnregisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP)
+	return ..()
+
+/obj/item/clothing/neck/gorget/explosive/examine(mob/user)
+	. = ..()
+	if(collar_unlocked)
+		. += "The red gem gleams faintly, it seems to be unpowered."
+	else
+		. += "The red gem gleams intensely, piercing your gaze with its aura."
+
+/obj/item/clothing/neck/gorget/explosive/equipped(mob/living/carbon/human/user, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_NECK)
+		to_chat(user, span_warning("The collar tightens its hold on you. A red aura emanates from its gem, reminding you of your lowly station."))
+		collar_unlocked = FALSE
+		is_in_neck_slot = TRUE
+		return
+
+	//this checks if its inhand, instead of neck slot
+	is_in_neck_slot = FALSE
+
+/obj/item/clothing/neck/gorget/explosive/dropped(mob/user)
+	. = ..()
+	is_in_neck_slot = FALSE
+
+/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
+	. = ..()
+	if(!istype(interacted_item, /obj/item/collar_detonator))
+		return
+
+	if(!collar_unlocked)
+		collar_unlocked = TRUE
+		to_chat(user, "The red gem inset in \the [src] dims its glow, it seems to be safe to take off now!")
+	else
+		to_chat(user, "Collar is already unlocked!")
+
+
+/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
+	SIGNAL_HANDLER
+
+	if(!ismob(loc))
+		return
+
+	if(collar_unlocked || !is_in_neck_slot)
+		return
+
+	to_chat(loc, span_warning("The [src] resists the pull to be unlocked!"))
+
+	return COMPONENT_ITEM_BLOCK_UNEQUIP
+
+/obj/item/clothing/neck/gorget/explosive/proc/prepare_to_go_boom()
+	if(is_going_to_boom)
+		is_going_to_boom = FALSE
+		visible_message(span_notice("Red aura of the [src] slowly fades away."))
+		return
+
+	playsound(src, 'sound/music/musicbox_windup.ogg', 45)
+	visible_message(span_boldwarning("A red aura begins to glow heavily from the [src], it appears to be going off!"))
+	audible_message(span_boldwarning("You hear an eerie tune coming out of [src]"))
+
+	addtimer(CALLBACK(src, PROC_REF(go_boom)), 7.5 SECONDS)
+	is_going_to_boom = TRUE
+
+/obj/item/clothing/neck/gorget/explosive/proc/go_boom()
+	if(!is_in_neck_slot || !is_going_to_boom)
+		visible_message(span_notice("The red aura emanating from [src] stops!"))
+		return
+
+	explosion(src, 1, 1, 2, 3) //first one to make sure wearer is damaged heavily
+	explosion(src, 1, 0, 0, 0) //finishes the deal
+
+	if(!istype(loc, /mob/living/carbon))
+		qdel(src)
+		return
+	var/mob/living/carbon/soon_to_be_headless = loc
+	var/obj/item/bodypart/head/to_decap = soon_to_be_headless.get_bodypart(BODY_ZONE_HEAD)
+	if(to_decap)
+		to_decap.dismember(BRUTE) //its a NECK collar
+
+	qdel(src)
+
+/obj/item/collar_detonator
+	name = "collar detonator"
+	desc = "What seems to be an ordinary key at first is actually an enchanted contraption designed to \
+		detonate or unlock collar of servitudes used by the inquisition."
+	icon_state = "mazekey"
+	icon = 'icons/roguetown/items/keys.dmi'
+	w_class = WEIGHT_CLASS_TINY
+	dropshrink = 0.75
+	throwforce = 0
+	drop_sound = 'sound/items/gems (1).ogg'
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK|ITEM_SLOT_RING
+	grid_height = 64
+	grid_width = 32
+
+/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!iscarbon(target))
+		return
+
+	var/mob/living/carbon/to_bomb = target
+	var/obj/item/clothing/neck/gorget/explosive/collar = to_bomb.get_item_by_slot(ITEM_SLOT_NECK)
+	if(istype(collar))
+		collar.prepare_to_go_boom()
+	else
+		to_chat(user, span_notice("Target is not wearing a collar of servitude!"))
 
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"
@@ -317,6 +550,10 @@
 					var/mob/living/carbon/H = user
 					H.update_inv_neck()
 		user.regenerate_clothes()
+
+/obj/item/clothing/neck/highcollier/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/highcollier/iron
 	name = "iron high collier"
@@ -376,7 +613,7 @@
 		total_sellprice += I.sellprice
 		for(var/obj/item/item in I.contents)
 			total_sellprice += item.sellprice
-		to_chat(user, span_notice("The item and its contents is worth [total_sellprice] mammons."))
+		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
 
 /obj/item/clothing/neck/shalal
 	name = "desert rider medal"

@@ -4,9 +4,10 @@
 
 	weight = 12
 
-	earliest_start = 10 MINUTES
+	earliest_start = 20 MINUTES
 
 	tags = list(
+		TAG_MATTHIOS,
 		TAG_COMBAT,
-		TAG_VILLIAN,
+		TAG_VILLAIN,
 	)

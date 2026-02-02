@@ -3,11 +3,41 @@
 	greet_text = "You've been on the street for as long as you can remember. Still are, and you still will be so long as \
 	you live in this shitpit. Regrettably, the universe sought to make your life a divine comedy. Instead of begging for \
 	coin, the nobility sought it grand to give you a royal title - Ratcatcher. Please, for the love of Necra, just LET IT END!"
-	outfit = /datum/outfit/job/ratcatcher
+	migrant_job = /datum/job/migrant/ratcatcher
+
+/datum/job/migrant/ratcatcher
+	title = "Ratcatcher"
+	tutorial = "You've been on the street for as long as you can remember. Still are, and you still will be so long as \
+	you live in this shitpit. Regrettably, the universe sought to make your life a divine comedy. Instead of begging for \
+	coin, the nobility sought it grand to give you a royal title - Ratcatcher. Please, for the love of Necra, just LET IT END!"
+	outfit = /datum/outfit/ratcatcher
 	is_recognized = TRUE
 
-/datum/outfit/job/ratcatcher/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_SPD = -2,
+		STATKEY_END = 2,
+		STATKEY_CON = 1,
+		STATKEY_INT = -3,
+	)
+
+	skills = list(
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/misc/medicine = 2,
+	)
+
+	traits = list(TRAIT_STEELHEARTED)
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+
+/datum/outfit/ratcatcher
+	name = "Ratcatcher (Migrant Wave)"
 	r_hand = /obj/item/weapon/pitchfork
 	l_hand = /obj/item/flint
 	armor = /obj/item/clothing/armor/gambeson/light
@@ -20,24 +50,6 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE) // Polearm user
-		H.adjust_skillrank(/datum/skill/misc/climbing, 2)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE) // For fleeing
-		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.change_stat(STATKEY_SPD, -2)
-		H.change_stat(STATKEY_END, 2) // Polearm user
-		H.change_stat(STATKEY_CON, 1) // No dodge, shit skills. Pity point
-		H.change_stat(STATKEY_INT, -3) // IDIOT
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/migrant_wave/ratcatcher
 	name = "The Ratcatcher"

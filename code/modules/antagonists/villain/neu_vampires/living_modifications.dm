@@ -3,9 +3,14 @@
 	return !area.coven_protected
 
 /mob/living
+	var/cached_island_id = null
+	var/last_island_check = 0
+
 	var/mob/living/walk_to_target
 	var/walk_to_duration = 0
 	var/walk_to_steps_taken = 0
+
+	var/celerity_visual = FALSE
 
 	var/turf/walk_to_last_pos
 	var/list/walk_to_cached_path
@@ -47,6 +52,8 @@
 	var/datum/clan_menu_interface/clan_menu_interface
 	var/datum/clan_hierarchy_node/clan_position
 
+	var/list/stored_enchantments
+
 
 /mob/living/proc/has_bloodpool_cost(cost)
 	if(cost > bloodpool)
@@ -74,8 +81,28 @@
 		var/datum/action/clan_hierarchy/mass_command/mass_action = new()
 		mass_action.Grant(H)
 
+/mob/living/proc/set_bloodpool(newblood)
+	bloodpool = CLAMP(newblood, 0, maxbloodpool)
+	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+		hud_used?.bloodpool?.name = "Psydon's Grace: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Psydon's Grace: [bloodpool]/[maxbloodpool]"
+	else
+		hud_used?.bloodpool?.name = "Bloodpool: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Bloodpool: [bloodpool]/[maxbloodpool]"
+	hud_used?.bloodpool?.set_value((100 / (maxbloodpool / bloodpool)) / 100, 1 SECONDS)
+
 /mob/living/proc/adjust_bloodpool(adjust)
 	bloodpool = CLAMP(bloodpool + adjust, 0, maxbloodpool)
+	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+		hud_used?.bloodpool?.name = "Psydon's Grace: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Psydon's Grace: [bloodpool]/[maxbloodpool]"
+	else
+		hud_used?.bloodpool?.name = "Bloodpool: [bloodpool]"
+		hud_used?.bloodpool?.desc = "Bloodpool: [bloodpool]/[maxbloodpool]"
+	if(bloodpool <= 0)
+		hud_used?.bloodpool?.set_value(0, 1 SECONDS)
+	else
+		hud_used?.bloodpool?.set_value((100 / (maxbloodpool / bloodpool)) / 100, 1 SECONDS)
 
 /mob/living/proc/CheckEyewitness(mob/living/source, mob/attacker, range = 0, affects_source = FALSE)
 	var/actual_range = max(1, round(range*(attacker.alpha/255)))
@@ -98,8 +125,10 @@
 		return TRUE
 	return FALSE
 
+/mob/living/proc/AdjustMasquerade(value, forced = FALSE)
+	return
 
-/mob/living/carbon/human/proc/AdjustMasquerade(value, forced = FALSE)
+/mob/living/carbon/human/AdjustMasquerade(value, forced = FALSE)
 	if(!clan)
 		return
 	if (!forced)
@@ -276,7 +305,7 @@
 			to_chat(src, span_notice("You enter the horrible slumber of deathless Torpor. You will heal until you are renewed."))
 			ADD_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		heal_overall_damage(5, 5)
-		bloodpool = min(maxbloodpool * 0.25, bloodpool + 10)
+		set_bloodpool(min(maxbloodpool * 0.25, bloodpool + 10))
 	if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (total_damage <= 0 || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		to_chat(src, span_warning("You have recovered from Torpor."))
@@ -297,7 +326,7 @@
 			remove_status_effect(/datum/status_effect/debuff/thirstyt1)
 			remove_status_effect(/datum/status_effect/debuff/thirstyt2)
 			if(prob(3))
-				playsound(get_turf(src), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
+				playsound(src, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	if(bloodpool < 100 && prob(9))
 		if(last_frenzy_check + 5 MINUTES < world.time)

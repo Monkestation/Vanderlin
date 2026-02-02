@@ -9,6 +9,7 @@
 	min_players = 25
 
 	tags = list(
+		TAG_DENDOR,
 		TAG_NATURE,
 	)
 
@@ -45,13 +46,15 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/wise_trees/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/wise_trees/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
 	chosen_one.add_spell(/datum/action/cooldown/spell/transfrom_tree)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE DENDOR'S CHOSEN!"))
-	to_chat(chosen_one, span_biginfo("Dendor wants you to choose suitable trees, which are to become guardians of the forest! [new_objective.explanation_text]"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE DENDOR'S CHOSEN!"),
+		span_biginfo("Dendor wants you to choose suitable trees, which are to become guardians of the forest! [new_objective.explanation_text]"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/ambience/noises/genspooky (1).ogg', 100)
 
 	to_chat(chosen_one, span_notice("Dendor grants you the power to transform trees into guardian wise trees!"))

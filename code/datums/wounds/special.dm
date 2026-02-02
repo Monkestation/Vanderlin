@@ -62,7 +62,7 @@
 /datum/wound/facial/eyes/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.Stun(10)
-	affected.blind_eyes(5)
+	affected.adjust_temp_blindness(10 SECONDS)
 
 /datum/wound/facial/eyes/right
 	name = "right eye evisceration"
@@ -94,6 +94,7 @@
 	affected.update_fov_angles()
 
 /datum/wound/facial/eyes/right/permanent
+	show_in_book = FALSE
 	whp = null
 	woundpain = 0
 	bleed_rate = 0
@@ -129,6 +130,7 @@
 	affected.update_fov_angles()
 
 /datum/wound/facial/eyes/left/permanent
+	show_in_book = FALSE
 	whp = null
 	woundpain = 0
 	bleed_rate = 0
@@ -166,6 +168,7 @@
 			tongue_loss.forceMove(affected.drop_location())
 
 /datum/wound/facial/tongue/permanent
+	show_in_book = FALSE
 	whp = null
 	woundpain = 0
 	bleed_rate = 0

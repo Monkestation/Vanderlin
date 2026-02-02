@@ -43,7 +43,7 @@
 							stuff++
 					if(stuff)
 						to_chat(user, span_notice("I pick up the stalks with the pitchfork."))
-						W.icon_state = "pitchforkstuff"
+						W.icon_state = "[initial(W.icon_state)]stuff"
 					else
 						to_chat(user, span_warning("I'm carrying enough with the pitchfork."))
 					return
@@ -59,8 +59,8 @@
 		user.visible_message(span_notice("[user] threshes the stalks!"), \
 							span_notice("I thresh the stalks."))
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(loc,"plantcross", 100, FALSE)
-		playsound(loc,"smashlimb", 50, FALSE)
+		playsound(src,"plantcross", 100, FALSE)
+		playsound(src,"smashlimb", 50, FALSE)
 		src.thresh()
 		return
 	..()

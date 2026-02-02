@@ -145,6 +145,13 @@
 	output = /obj/item/reagent_containers/food/snacks/pie/cooked/poison
 	cooked_smell = /datum/pollutant/food/berry_pie
 
+/datum/container_craft/oven/pie/borowiki
+	name = "Borowiki Pie"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/borowiki = 1)
+	output = /obj/item/reagent_containers/food/snacks/pie/cooked/borowiki
+	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good
+	cooked_smell = /datum/pollutant/food/borowiki_pie
+
 /datum/container_craft/oven/bread
 	name = "Bread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/dough = 1)
@@ -304,3 +311,39 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/produce/coffeebeans= 1)
 	output = /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted
 	cooked_smell = null
+
+/datum/container_craft/oven/tart_base
+	name = "Baked Tart Crust"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/piebottom = 1)
+	output = /obj/item/reagent_containers/food/snacks/foodbase/tartcrust
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/pie/avocado
+	name = "Avocado Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_tart/avocado = 1)
+	output = /obj/item/reagent_containers/food/snacks/tart/cooked/avocado
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/pie/mango
+	name = "Mangga Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_tart/mango = 1)
+	output = /obj/item/reagent_containers/food/snacks/tart/cooked/mango
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/pie/mangosteen
+	name = "Mangosteen Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_tart/mangosteen = 1)
+	output = /obj/item/reagent_containers/food/snacks/tart/cooked/mangosteen
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/pie/pineapple
+	name = "Ananas Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_tart/pineapple = 1)
+	output = /obj/item/reagent_containers/food/snacks/tart/cooked/pineapple
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/pie/dragonfruit
+	name = "Piyata Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit = 1)
+	output = /obj/item/reagent_containers/food/snacks/tart/cooked/dragonfruit
+	cooked_smell = /datum/pollutant/food/pastry

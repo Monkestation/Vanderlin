@@ -1,21 +1,24 @@
-/datum/objective/torture
+/datum/objective/personal/torture
 	name = "Extract Truth Through Pain"
+	category = "Zizo's Chosen"
 	triumph_count = 3
+	immediate_effects = list("Gained an ability to torture others for information")
+	rewards = list("3 Triumphs", "Zizo grows stronger", "Zizo blesses you (+1 Strength, +1 Endurance)")
 	var/torture_count = 0
 	var/required_count = 1
 
-/datum/objective/torture/on_creation()
+/datum/objective/personal/torture/on_creation()
 	. = ..()
 	if(owner?.current)
 		RegisterSignal(owner.current, COMSIG_TORTURE_PERFORMED, PROC_REF(on_torture_performed))
 	update_explanation_text()
 
-/datum/objective/torture/Destroy()
+/datum/objective/personal/torture/Destroy()
 	if(owner?.current)
 		UnregisterSignal(owner.current, COMSIG_TORTURE_PERFORMED)
 	return ..()
 
-/datum/objective/torture/proc/on_torture_performed(datum/source, mob/living/victim)
+/datum/objective/personal/torture/proc/on_torture_performed(datum/source, mob/living/victim)
 	SIGNAL_HANDLER
 	if(completed)
 		return
@@ -24,13 +27,16 @@
 	if(torture_count >= required_count)
 		complete_objective(victim)
 
-/datum/objective/torture/proc/complete_objective(mob/living/victim)
+/datum/objective/personal/torture/complete_objective(mob/living/victim)
+	. = ..()
 	to_chat(owner.current, span_greentext("You have extracted the truth through pain, satisfying Zizo!"))
-	owner.current.adjust_triumphs(triumph_count)
-	completed = TRUE
 	adjust_storyteller_influence(ZIZO, 20)
-	escalate_objective()
 	UnregisterSignal(owner.current, COMSIG_TORTURE_PERFORMED)
 
-/datum/objective/torture/update_explanation_text()
+/datum/objective/personal/torture/reward_owner()
+	. = ..()
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_END, 1)
+
+/datum/objective/personal/torture/update_explanation_text()
 	explanation_text = "Torture someone until they beg for mercy to please Zizo!"

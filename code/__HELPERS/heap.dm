@@ -10,8 +10,8 @@
 	return !L.len
 
 /datum/Heap/proc/Insert(atom/A)
-	L.Add(A)
-	Swim(L.len)
+	L[++L.len] = A
+	Swim(length(L))
 
 /datum/Heap/proc/Pop()
 	if(!L.len)

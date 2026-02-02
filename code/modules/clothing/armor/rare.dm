@@ -5,7 +5,8 @@
 	sleeved = 'icons/roguetown/clothing/onmob/onmob_racial.dmi'
 	sleevetype = null
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
 	sellprice = VALUE_SNOWFLAKE_STEEL
@@ -63,7 +64,7 @@
 	name = "kataphractoe scaleskin"
 	desc = "Steel scales woven into armor with miniscule threads of adamantine, \
 			ensuring the wearer optimal defence with forgiving breathability. \
-			The sigil of the Zaladin Kataphractoe is embezzeled at the throat guard."
+			The sigil of the Zaladin Kataphractoe is embezeled at the throat guard."
 	icon_state = "human_spearchest"
 	allowed_race = list(SPEC_ID_HUMEN)
 	allowed_sex = list(MALE)

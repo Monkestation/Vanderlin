@@ -28,6 +28,9 @@
 			if("BRONZE")
 				zenars_to_put = budget
 				type_to_put = /obj/item/coin/copper
+			if("MARQUE")
+				zenars_to_put = budget
+				type_to_put = /obj/item/coin/inqcoin
 	else
 		var/highest_found = FALSE
 		var/zenars = floor(budget/10)

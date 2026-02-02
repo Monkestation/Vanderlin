@@ -18,8 +18,8 @@ GLOBAL_DATUM_INIT(pathfind_dude, /obj/pathfind_guy, new())
 /datum/pathfind_debug/proc/hook_client()
 	if(!owner.owner)
 		return
-	var/datum/action/innate/path_debug/jps = new
-	jps.Grant(owner.owner)
+	var/datum/action/innate/path_debug/jps/jps = new
+	jps.Grant(owner.owner.mob)
 
 /datum/action/innate/path_debug
 	var/list/image/display_images = list()
@@ -156,5 +156,5 @@ GLOBAL_DATUM_INIT(pathfind_dude, /obj/pathfind_guy, new())
 
 /datum/action/innate/path_debug/jps/run_the_path(atom/movable/middle_man)
 	middle_man.forceMove(source_turf)
-	display_turfs = get_path_to(middle_man, target_turf, max_distance, 250, min_distance)
+	display_turfs = get_path_to(middle_man, target_turf, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 30, max_distance, min_distance)
 	update_visuals()

@@ -6,10 +6,15 @@
 	max_occurrences = 2
 	min_players = 0
 	req_omen = TRUE
+	earliest_start = 60 MINUTES
 	todreq = list("dusk", "night", "dawn", "day")
-	earliest_start = 2 HOURS
-	var/last_siege = 0
 
+	tags = list(
+		TAG_RAID,
+		TAG_BATTLE,
+	)
+
+	var/last_siege = 0
 
 /datum/round_event/skellysiege
 	announceWhen	= 1

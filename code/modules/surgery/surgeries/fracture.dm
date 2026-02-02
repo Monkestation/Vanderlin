@@ -33,7 +33,7 @@
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN
-	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/set_bone/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)

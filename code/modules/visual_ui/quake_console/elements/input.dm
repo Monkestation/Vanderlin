@@ -101,7 +101,7 @@
 
 	// Input text
 	var/image/text_image = image(icon = null)
-	text_image.maptext = MAPTEXT_PIXELIFY("<span style='color:#00FF00'>>[display_text]</span>")
+	text_image.maptext = MAPTEXT_VATICANUS("<span style='color:#00FF00'>>[display_text]</span>")
 	text_image.maptext_width = 380
 	text_image.maptext_height = 32
 	text_image.maptext_x = 8

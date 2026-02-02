@@ -122,7 +122,8 @@
 
 /datum/container_craft/pan/roastseeds
 	name = "Roasted Seeds"
-	requirements = list(/obj/item/reagent_containers/food/snacks/produce/sunflower = 1)
+	crafting_time = 15 SECONDS
+	wildcard_requirements = list(/obj/item/neuFarm/seed = 1)
 	output = /obj/item/reagent_containers/food/snacks/roastseeds
 	cooked_smell = /datum/pollutant/food/roasted_seeds
 
@@ -249,7 +250,7 @@
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	cooked_smell = /datum/pollutant/food/griddlecake
 
-/datum/container_craft/pan/griddlecakeapple
+/datum/container_craft/pan/griddlecakeberry
 	name = "Jacksberry Griddlecake"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry
@@ -261,3 +262,15 @@
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry_poison
 	cooked_smell = /datum/pollutant/food/griddlecake
 	hides_from_books = TRUE
+
+/datum/container_craft/pan/fried_messenger
+	name = "Fried Messenger"
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/messenger_bird = 1)
+	output = /obj/item/reagent_containers/food/snacks/friedmessenger
+	cooked_smell = /datum/pollutant/food/fried_messenger
+
+/datum/container_craft/pan/fat_render
+	name = "Render Fat"
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/fat= 1)
+	output = /obj/item/reagent_containers/food/snacks/tallow
+	cooked_smell = /datum/pollutant/food/fried_messenger

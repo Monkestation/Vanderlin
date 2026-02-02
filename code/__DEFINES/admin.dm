@@ -68,6 +68,7 @@
 #define ADMIN_COORDJMP(src) "[src ? src.Admin_Coordinates_Readable(FALSE, TRUE) : "nonexistent location"]"
 #define ADMIN_VERBOSEJMP(src) "[src ? src.Admin_Coordinates_Readable(TRUE, TRUE) : "nonexistent location"]"
 #define ADMIN_INDIVIDUALLOG(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];individuallog=[REF(user)]'>LOGS</a>)"
+#define ADMIN_BIRD_LETTER(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];adminbirdletter=[REF(user)]'>LETTER</a>)"
 
 /atom/proc/Admin_Coordinates_Readable(area_name, admin_jump_ref)
 	var/turf/turf_at_coords = Safe_COORD_Location()
@@ -90,6 +91,7 @@
 #define ADMIN_PUNISHMENT_LIGHTNING "Lightning bolt"
 #define ADMIN_PUNISHMENT_BRAINDAMAGE "Brain damage"
 #define ADMIN_PUNISHMENT_GIB "Gib"
+#define ADMIN_PUNISHMENT_PSYDON "Zesus Psyst"
 #define ADMIN_PUNISHMENT_BSA "Bluespace Artillery Device"
 #define ADMIN_PUNISHMENT_FIREBALL "Fireball"
 #define ADMIN_PUNISHMENT_ROD "Immovable Rod"
@@ -101,6 +103,7 @@
 #define ADMIN_PUNISHMENT_HUNTED "Mark for Assassins"
 #define ADMIN_PUNISHMENT_MEATPIE "Pie-ify"
 #define ADMIN_PUNISHMENT_GODHAND "God Hand"
+#define ADMIN_PUNISHMENT_FORCECOLLAR "Force Collar"
 
 #define AHELP_ACTIVE 1
 #define AHELP_CLOSED 2
@@ -125,9 +128,6 @@
 /// Max keys that can be held down at once by a client
 #define MAX_HELD_KEYS 15
 
-#define STICKYBAN_DB_CACHE_TIME 10 SECONDS
-#define STICKYBAN_ROGUE_CHECK_TIME 5
-
 
 /// Shown to vicitm of staff of change and related effects.
 #define POLICY_POLYMORPH "polymorph"
@@ -136,3 +136,8 @@
 
 //How many things you can spawn at once with spawn verb/create panel
 #define ADMIN_SPAWN_CAP 100
+
+/// for [/proc/check_asay_links], if there are any actionable refs in the asay message, this index in the return list contains the new message text to be printed
+#define ASAY_LINK_NEW_MESSAGE_INDEX "!asay_new_message"
+/// for [/proc/check_asay_links], if there are any admin pings in the asay message, this index in the return list contains a list of admins to ping
+#define ASAY_LINK_PINGED_ADMINS_INDEX "!pinged_admins"

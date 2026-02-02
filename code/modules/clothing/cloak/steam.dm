@@ -11,7 +11,6 @@
 
 	//you can't unsmelt your boiler Sir Steam Knightus
 	smeltresult = /obj/item/ingot/bronze
-
 	var/active = FALSE
 
 /obj/item/clothing/cloak/boiler/Initialize()
@@ -76,19 +75,25 @@
 
 /obj/item/clothing/cloak/boiler/proc/power_on(mob/living/carbon/user)
 	var/obj/item/clothing/shoes/boots/armor/steam/boots = locate() in list(user.shoes)
+	var/obj/item/clothing/head/helmet/heavy/steam/helmet = locate() in list(user.head)
 	//Stops the speed debuff from the boots
 	if(boots)
 		boots.power_on(user)
+	//Remove the FOV block and gives night vision
+	if(helmet)
+		helmet.power_on(user)
 
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(try_steam_usage), override = TRUE)
 	return
 
-/obj/item/clothing/cloak/boiler/proc/power_off(mob/living/carbon/user, var/disable = FALSE, var/broken = FALSE)
+/obj/item/clothing/cloak/boiler/proc/power_off(mob/living/carbon/user, disable = FALSE, broken = FALSE)
 	var/obj/item/clothing/shoes/boots/armor/steam/boots = locate() in list(user.shoes)
+	var/obj/item/clothing/head/helmet/heavy/steam/helmet = locate() in list(user.head)
 
 	if(boots)
 		boots.power_off(user)
-
+	if(helmet)
+		helmet.power_off(user)
 	remove_status_effect(user)
 	UnregisterSignal(user, COMSIG_MOVABLE_MOVED) // stop burning steam
 	//Triggers when the player removes the boiler or any steamknight armor without turning the boiler off, penalizes them.
@@ -98,22 +103,22 @@
 		user.audible_message(span_warning("The [src.name] sputters violently before stopping."), runechat_message = TRUE)
 		var/random_loss = rand(100, 200)
 		//If they can reduce the steam, do it, if it can't it will be set to zero.
-		if(!SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, random_loss, "steam_armor"))
+		if(!SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, random_loss, "steam_armor", FALSE, FALSE))
 			SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, random_loss, "steam_armor", TRUE)
 		else
-			SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, random_loss, "steam_armor")
+			SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, random_loss, "steam_armor", FALSE, FALSE)
 
-	//Triggers when the steamknight boiler runs out of steam.
+	//Triggers when the steamknight boiler runs out of steam to move the armor.
 	if(disable)
 		active = FALSE
-		user.audible_message(span_warning("The [src.name] hisses and sputters, running completely out of steam!"), runechat_message = TRUE)
+		user.audible_message(span_warning("The [src.name] hisses and sputters, there's not enough steam to power the armor!"), runechat_message = TRUE)
 
 	//Triggers when steamknight boiler breaks while active.
 	if(broken)
 		active = FALSE
 		to_chat(user, span_warning("The [src.name] breaks!"))
 		user.audible_message(span_warning("The [src.name] sputters violently as you hear a loud crack!"), runechat_message = TRUE)
-		SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, 0.5, "steam_armor", TRUE)
+		SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, 0.5, "steam_armor", TRUE, FALSE)
 
 	return
 
@@ -125,9 +130,23 @@
 	if(src.obj_broken)
 		power_off(source, FALSE, TRUE)
 		return FALSE
+	var/steam_cost = 0.5
+	if(uses_integrity)
+		if(atom_integrity < max_integrity)
+			var/integrity = round(((atom_integrity / max_integrity) * 100), 1)
+			// steam consumption multiplier
+			switch(integrity)
+				if(90 to 100)
+					steam_cost *= 1
+				if(60 to 90)
+					steam_cost *= 1.5
+				if(30 to 60)
+					steam_cost *= 2
+				if(1 to 30)
+					steam_cost *= 3
 
-	if(!SEND_SIGNAL(source, COMSIG_ATOM_PROXY_STEAM_USE, src, 0.5, "steam_armor"))
-		//Out of steam, shut down the boiler forcibly
+	if(!SEND_SIGNAL(source, COMSIG_ATOM_PROXY_STEAM_USE, src, steam_cost, "steam_armor", FALSE, FALSE))
+		//Not enough steam to power the armor, shut down the boiler forcibly
 		power_off(source, TRUE)
 		return FALSE
 

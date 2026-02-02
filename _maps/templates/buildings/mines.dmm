@@ -3,82 +3,95 @@
 /turf/closed/mineral,
 /area/template_noop)
 "d" = (
-/obj/effect/workspot,
-/turf/closed,
-/area/template_noop)
-"p" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/blocks,
-/area/template_noop)
-"x" = (
-/obj/structure/fermentation_keg{
-	pixel_x = -4;
-	layer = 2.89
-	},
-/obj/structure/fermentation_keg{
-	pixel_x = 12
-	},
-/obj/structure/fermentation_keg{
-	pixel_y = 16;
-	pixel_x = 8;
-	layer = 2.91
-	},
-/turf/open/floor/cobblerock,
-/area/template_noop)
-"E" = (
-/turf/open/floor/dirt,
-/area/template_noop)
-"K" = (
 /obj/effect/building_node/mines,
 /obj/effect/workspot,
-/turf/closed,
+/turf/open/floor/cobblerock/alt,
+/area/template_noop)
+"p" = (
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/obj/structure/lootable_structure/stockpile/mining_cache{
+	pixel_y = 2;
+	pixel_x = -7
+	},
+/turf/open/floor/herringbone,
+/area/template_noop)
+"x" = (
+/turf/closed/wall/mineral/underbrick,
+/area/template_noop)
+"z" = (
+/turf/open/floor/dirt,
+/area/template_noop)
+"E" = (
+/obj/structure/minecart_rail{
+	dir = 1
+	},
+/turf/open/floor/herringbone,
+/area/template_noop)
+"K" = (
+/obj/structure/stairs/stone/d,
+/turf/open/floor/herringbone,
+/area/template_noop)
+"M" = (
+/turf/open/floor/cobblerock,
 /area/template_noop)
 "O" = (
-/turf/open/floor/blocks,
+/obj/structure/minecart_rail{
+	dir = 6
+	},
+/turf/open/floor/herringbone,
 /area/template_noop)
 "P" = (
-/turf/open/floor/cobblerock,
+/obj/machinery/light/fueled/wallfire/candle/skull,
+/obj/structure/minecart_rail,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "S" = (
-/obj/structure/stairs/stone/d,
-/turf/open/floor/cobblerock,
+/obj/structure/minecart_rail{
+	dir = 4
+	},
+/turf/open/floor/herringbone,
 /area/template_noop)
 "Z" = (
-/turf/closed,
+/obj/structure/lever,
+/obj/structure/lootable_structure/stockpile/mining_cache{
+	pixel_y = 15;
+	pixel_x = -3
+	},
+/turf/open/floor/herringbone,
 /area/template_noop)
 
 (1,1,1) = {"
-E
-p
+x
 a
+P
 O
 E
 "}
 (2,1,1) = {"
-E
 a
-Z
+z
+K
 S
-O
+a
 "}
 (3,1,1) = {"
 a
-a
+d
 K
 S
-P
+a
 "}
 (4,1,1) = {"
 a
-a
-d
+M
+K
 S
-x
+a
 "}
 (5,1,1) = {"
-O
 a
-a
-P
+x
+Z
+S
 p
 "}

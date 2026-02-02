@@ -57,6 +57,8 @@
 	if(!filling_metal)
 		var/list/names = list()
 		for(var/datum/material/material as anything in metal.data)
+			if(!ispath(material))
+				continue
 			if(crucible.reagents.chem_temp < initial(material.melting_point))
 				continue
 			names |= initial(material.name)
@@ -65,6 +67,8 @@
 		if(!choice)
 			return
 		for(var/datum/material/material as anything in metal.data)
+			if(!ispath(material))
+				continue
 			if(choice != initial(material.name))
 				continue
 			filling_metal = material

@@ -4,6 +4,6 @@
 
 	new_role = "Mercenary"
 	recruitment_faction = "Mercenaries"
-	recruitment_message = "Hey, %RECRUIT, you ever considered going full time?"
+	recruitment_message = "Hey, %RECRUIT, you ever considered going full-time?"
 	accept_message = "For coin and glory!"
 	refuse_message = "I refuse."

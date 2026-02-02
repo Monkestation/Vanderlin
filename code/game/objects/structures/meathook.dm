@@ -13,14 +13,15 @@
 
 	var/draining_blood = FALSE
 
-/obj/structure/meathook/attacked_by(obj/item/I, mob/living/user)
-	. = ..()
+/obj/structure/meathook/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/container = I
 		if(!container.is_open_container())
 			return
 		container.forceMove(get_turf(src))
 		to_chat(user, span_notice("You place [I] under [src]"))
+		return TRUE
+	. = ..()
 
 /obj/structure/meathook/examine(mob/user)
 	. = ..()
@@ -59,7 +60,7 @@
 	if(user.pulling != L)
 		return FALSE
 
-	playsound(get_turf(src), 'sound/foley/butcher.ogg', 25, TRUE)
+	playsound(src, 'sound/foley/butcher.ogg', 25, TRUE)
 	L.visible_message(span_danger("[user] hangs [L] on [src]!"), span_danger("[user] hangs you on [src]]!"))
 	L.forceMove(drop_location())
 	L.emote("scream")
@@ -114,21 +115,21 @@
 	L.blood_drained++
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in get_turf(src)
-	playsound(get_turf(src), 'sound/misc/bleed (3).ogg', 100, FALSE)
+	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
 		var/datum/blood_type/type = L.get_blood_type()
-		container.reagents.add_reagent(initial(type.reagent_type), 5)
+		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(L))
 	else
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in get_turf(src)
 		if(P)
 			P.blood_vol += 5
-			P.update_appearance()
+			P.update_appearance(UPDATE_ICON_STATE)
 		else
 			var/obj/effect/decal/cleanable/blood/drip/D = locate() in get_turf(src)
 			if(D)
 				D.blood_vol += 5
 				D.drips++
-				D.update_appearance()
+				D.update_appearance(UPDATE_ICON_STATE)
 			else
 				new /obj/effect/decal/cleanable/blood/drip(get_turf(src))
 

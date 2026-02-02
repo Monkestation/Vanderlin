@@ -8,6 +8,7 @@
 	min_players = 20
 
 	tags = list(
+		TAG_GRAGGAR,
 		TAG_BLOOD,
 	)
 
@@ -40,11 +41,13 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/blood_splash/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/blood_splash/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE GRAGGAR'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("There is power in blood. Splash a bucket full of blood on yourself to honor Graggar!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE GRAGGAR'S CHOSEN!"),
+		span_notice("There is power in blood. Splash a bucket full of blood on yourself to honor Graggar!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/graggar_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

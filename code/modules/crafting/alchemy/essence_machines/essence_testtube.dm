@@ -1,6 +1,6 @@
 /obj/machinery/essence/test_tube
 	name = "homonculus breeding tube"
-	desc = "A large glass tank for creating gnome homoncului."
+	desc = "A large glass tank for creating gnome homunculi."
 	icon = 'icons/roguetown/misc/splitter.dmi'
 	icon_state = "essence_tank"
 	density = TRUE
@@ -45,6 +45,8 @@
 	return storage
 
 /obj/machinery/essence/test_tube/process()
+	if(!GLOB.thaumic_research?.has_research(/datum/thaumic_research_node/machines/gnomes))
+		return
 	if(!connection_processing || !output_connections.len)
 		return
 	var/list/prioritized_connections = sort_connections_by_priority(output_connections)
@@ -86,7 +88,10 @@
 
 /obj/machinery/essence/test_tube/attack_hand(mob/living/user)
 	. = ..()
-	var/essence_amount = 200 * GLOB.thaumic_research.get_cost_reduction("life_tube")
+	if(!GLOB.thaumic_research?.has_research(/datum/thaumic_research_node/machines/gnomes))
+		to_chat(user, span_warning("I have no idea how this works."))
+		return
+	var/essence_amount = 200 * GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/gnome_efficency)
 	if(!storage.has_essence(/datum/thaumaturgical_essence/life, essence_amount))
 		to_chat(user, span_warning("The tube requires at least [essence_amount] units of life essence to begin the process."))
 		return
@@ -97,8 +102,8 @@
 	to_chat(user, span_info("You activate the breeding process. The life essence begins to swirl and coalesce..."))
 
 	gnome_progress = TRUE
-	var/sound_time = 10 SECONDS * GLOB.thaumic_research.get_speed_multiplier("test_tube")
-	var/grow_time = 30 SECONDS * GLOB.thaumic_research.get_speed_multiplier("test_tube")
+	var/sound_time = 10 SECONDS * GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/gnome_speed)
+	var/grow_time = 30 SECONDS * GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/gnome_speed)
 	addtimer(CALLBACK(src, PROC_REF(create_gnome), user), grow_time)
 	addtimer(CALLBACK(src, PROC_REF(growth_sound_feedback)), sound_time)
 	addtimer(CALLBACK(src, PROC_REF(growth_sound_feedback)), sound_time)
@@ -109,7 +114,7 @@
 		visible_message(span_notice("The essence in [src] bubbles and shifts as the homunculus develops."))
 
 /obj/machinery/essence/test_tube/proc/create_gnome(mob/living/user)
-	var/essence_amount = 200 * GLOB.thaumic_research.get_cost_reduction("life_tube")
+	var/essence_amount = 200 * GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/gnome_efficency)
 	if(!storage.has_essence(/datum/thaumaturgical_essence/life, essence_amount))
 		to_chat(user, span_warning("Insufficient life essence! The process fails..."))
 		gnome_progress = FALSE
@@ -123,7 +128,7 @@
 	// Success sounds and effects
 	visible_message(span_info("The crystalline tube glows brightly as the homunculus reaches maturity!"))
 
-	var/hat_chance = 1 - GLOB.thaumic_research.get_research_bonus("gnome_hat_chance")
+	var/hat_chance = 1 - GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/gnome_hat_chance)
 	var/mob/living/simple_animal/hostile/gnome_homunculus/gnome = new(get_turf(src))
 	gnome.tamed(user)
 	gnome.color = COLOR_PINK
@@ -202,7 +207,7 @@
 	. += span_notice("Capacity: [storage.get_total_stored()]/[storage.max_total_capacity] units")
 	. += span_notice("Available space: [storage.get_available_space()] units")
 
-	var/essence_amount = 200 * GLOB.thaumic_research.get_cost_reduction("life_tube")
+	var/essence_amount = 200 * GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/gnome_efficency)
 
 	if(gnome_progress)
 		. += span_boldnotice("A gnome homunculus is currently developing inside the tube.")

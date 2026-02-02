@@ -5,10 +5,9 @@
 	You're just some average poor bastard who thinks they'll be something someday."
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	faction = FACTION_FOREIGNERS
 	total_positions = 0
 	spawn_positions = 0
-	min_pq = -100
 	banned_leprosy = FALSE
 	bypass_lastclass = TRUE
 

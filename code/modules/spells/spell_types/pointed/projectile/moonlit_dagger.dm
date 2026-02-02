@@ -8,7 +8,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/noc)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/noc)
 
 	invocation = "Begone foul beasts!"
 	invocation_type = INVOCATION_SHOUT
@@ -43,4 +43,4 @@
 
 	if(wolf_datum?.transformed || sucker_datum)
 		target.visible_message(span_danger("\The [src] weakens [target]'s curse temporarily!"), span_userdanger("I'm hit by my BANE!"))
-		target.apply_status_effect(/datum/status_effect/debuff/silver_curse)
+		target.apply_status_effect(/datum/status_effect/debuff/silver_bane)

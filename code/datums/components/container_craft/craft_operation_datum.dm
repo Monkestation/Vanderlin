@@ -18,8 +18,8 @@
 	var/last_progress_time = 0
 	/// If the craft has been aborted
 	var/aborted = FALSE
-	/// Data for item consumption
-	var/list/stored_items
+	/// List of actual item references reserved for this craft
+	var/list/obj/item/stored_items
 	/// Callback for when craft is started
 	var/datum/callback/on_craft_start
 	/// Callback for when craft fails
@@ -48,8 +48,57 @@
 	else
 		target_time = recipe.crafting_time
 
-	// Store current inventory state
-	refresh_stored_items()
+	stored_items = list()
+
+	// Get all items already reserved by other crafts in this container
+	var/list/obj/item/reserved_items = list()
+	for(var/datum/container_craft_operation/other_craft in GLOB.active_container_crafts)
+		if(other_craft == src || other_craft.crafter != crafter)
+			continue
+		reserved_items |= other_craft.stored_items
+
+	// Determine which requirements are wildcards
+	var/list/wildcard_paths = list()
+	if(recipe.wildcard_requirements)
+		wildcard_paths |= recipe.wildcard_requirements
+	if(recipe.optional_wildcard_requirements)
+		wildcard_paths |= recipe.optional_wildcard_requirements
+
+	// Build list of all requirements
+	var/list/all_requirements = list()
+	if(length(recipe.requirements))
+		all_requirements += recipe.requirements
+	if(length(recipe.optional_requirements))
+		all_requirements += recipe.optional_requirements
+	all_requirements += wildcard_paths
+
+	// Reserve actual items from the container
+	for(var/requirement_path in all_requirements)
+		var/needed = all_requirements[requirement_path] * estimated_multiplier
+		var/reserved = 0
+		var/is_wildcard = (requirement_path in wildcard_paths)
+
+		for(var/obj/item/item in crafter.contents)
+			if(reserved >= needed)
+				break
+
+			// Skip if already reserved by another craft
+			if(item in reserved_items)
+				continue
+
+			// Check if this item matches the requirement
+			var/matches = FALSE
+			if(is_wildcard)
+				// Wildcard: accept exact type or subtypes
+				matches = ispath(item.type, requirement_path)
+			else
+				// Exact: only accept exact type match
+				matches = (item.type == requirement_path)
+
+			if(matches)
+				stored_items += item
+				reserved++
+
 	last_progress_time = world.time
 
 	START_PROCESSING(SSprocessing, src)
@@ -60,20 +109,6 @@
 
 	if(cooking_sound)
 		src.cooking_sound = new cooking_sound(get_turf(crafter), TRUE)
-
-/datum/container_craft_operation/Destroy()
-	if(cooking_sound)
-		QDEL_NULL(cooking_sound)
-	. = ..()
-
-/**
- * Refreshes the stored items list from the crafter's contents
- */
-/datum/container_craft_operation/proc/refresh_stored_items()
-	stored_items = list()
-	for(var/obj/item/item in crafter.contents)
-		stored_items |= item.type
-		stored_items[item.type]++
 
 /**
  * Process tick for crafting progress
@@ -88,10 +123,11 @@
 		abort_craft("Container or user no longer valid")
 		return
 
-	// Check if recipe requirements are still met
-	if(!recipe.requirements_still_met(crafter, stored_items))
-		abort_craft("Requirements no longer met")
-		return
+	// Check if reserved items still exist and are in the container
+	for(var/obj/item/item in stored_items)
+		if(QDELETED(item) || item.loc != crafter)
+			abort_craft("Requirements no longer met")
+			return
 
 	// Check for timeout (no progress in a while)
 	if((world.time - last_progress_time) > timeout_period)
@@ -152,4 +188,7 @@
 	GLOB.active_container_crafts -= src
 	on_craft_start = null
 	on_craft_failed = null
+	stored_items = null
+	if(cooking_sound)
+		QDEL_NULL(cooking_sound)
 	return ..()

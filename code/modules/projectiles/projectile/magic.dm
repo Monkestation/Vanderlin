@@ -31,7 +31,7 @@
 			if(L.mob_biotypes & MOB_UNDEAD) //negative energy heals the undead
 				if(L.hellbound && L.stat == DEAD)
 					return BULLET_ACT_BLOCK
-				if(L.revive(full_heal = TRUE, admin_revive = TRUE))
+				if(L.revive(ADMIN_HEAL_ALL))
 					L.grab_ghost(force = TRUE) // even suicides
 					to_chat(L, "<span class='notice'>I rise with a start, I'm undead!!!</span>")
 				else if(L.stat != DEAD)
@@ -56,7 +56,7 @@
 		else
 			if(target.hellbound && target.stat == DEAD)
 				return BULLET_ACT_BLOCK
-			if(target.revive(full_heal = TRUE, admin_revive = TRUE))
+			if(target.revive(ADMIN_HEAL_ALL))
 				target.grab_ghost(force = TRUE) // even suicides
 				to_chat(target, "<span class='notice'>I rise with a start, you're alive!!!</span>")
 			else if(target.stat != DEAD)
@@ -242,6 +242,7 @@
 	if(ismob(target))
 		var/mob/living/M = target
 		M.adjust_fire_stacks(6)
+		M.IgniteMob()
 
 	var/turf/T
 	if(isturf(target))
@@ -264,4 +265,5 @@
 			T = target
 	else
 		T = get_turf(target)
-	explosion(T, exp_devi, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire, hotspot_range = exp_hotspot, soundin = explode_sound)
+	explosion(T, 0, 0, 0, exp_flash, 0, flame_range = exp_fire, hotspot_range = exp_hotspot, soundin = explode_sound)
+	cell_explosion(T, exp_light * 5, 0.1)

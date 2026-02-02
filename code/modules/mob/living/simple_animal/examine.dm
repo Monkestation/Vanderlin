@@ -61,6 +61,14 @@
 			msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
 	//Fire/water stacks
+	if(on_fire)
+		var/fire_text = "[m1] on fire!"
+		if(isliving(user))
+			var/mob/living/liver = user
+			if(liver.has_quirk(/datum/quirk/vice/pyromaniac))
+				fire_text += span_boldred(" IT'S BEAUTIFUL!")
+				liver.sate_addiction(/datum/quirk/vice/pyromaniac)
+		msg += fire_text
 	if(fire_stacks + divine_fire_stacks > 0)
 		msg += "[m1] covered in something flammable."
 	else if(fire_stacks < 0 && !on_fire)

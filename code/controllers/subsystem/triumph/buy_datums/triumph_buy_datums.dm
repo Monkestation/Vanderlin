@@ -7,7 +7,7 @@
 	var/name = "UNNAMED TRIUMPH BUY"
 	/// Desc shown for it on the menu
 	var/desc = "NO DESCRIPTION"
- 	/// Unique ID of the triumph buy
+	/// Unique ID of the triumph buy
 	var/triumph_buy_id
 	/// Ckey of the person who bought it
 	var/ckey_of_buyer

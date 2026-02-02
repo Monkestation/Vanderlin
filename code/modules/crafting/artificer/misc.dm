@@ -155,6 +155,14 @@
 	hammers_per_item = 7
 	craftdiff = 4
 
+/datum/artificer_recipe/weapons/airgun
+	name = "Airgun (+2 Cured Leather) (+3 Bronze) (+4 Metal Gear)"
+	required_item = /obj/item/ingot/steel
+	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/airgun
+	additional_items = list(/obj/item/natural/hide/cured = 2, /obj/item/ingot/bronze = 3, /obj/item/gear/metal = 4)
+	hammers_per_item = 10
+	craftdiff = 5
+
 // --------- ARMOR -----------
 
 //should be armour not armor fight me, but most of the codebase uses american english so its armor
@@ -208,14 +216,6 @@
 	i_type = "Contraptions"
 	category = "Contraptions"
 
-/datum/artificer_recipe/contraptions/metalizer
-	name = "Wood Metalizer (+1 Wooden Cog)"
-	required_item = /obj/item/ingot/bronze
-	additional_items = list(/obj/item/gear/wood = 1)
-	created_item = /obj/item/contraption/wood_metalizer
-	hammers_per_item = 12
-	craftdiff = 4
-
 /datum/artificer_recipe/contraptions/smelter
 	name = "Portable Smelter (+1 Coal)"
 	required_item = /obj/item/ingot/bronze
@@ -263,6 +263,23 @@
 	additional_items = list(/obj/item/gear/metal = 2, /obj/item/storage/backpack/backpack)
 	hammers_per_item = 4
 	craftdiff = 5
+
+/datum/artificer_recipe/contraptions/dwarven_music_box
+	name = "Dwarven Music Box (+2 Bronze) (+2 Cogs) (+1 Amethyst)"
+	required_item = /obj/item/ingot/bronze
+	created_item = /obj/item/dmusicbox
+	additional_items = list(/obj/item/gear/metal = 2, /obj/item/ingot/bronze = 2, /obj/item/gem/amethyst = 1)
+	hammers_per_item = 10
+	craftdiff = 6
+
+/datum/artificer_recipe/contraptions/deathshell
+	name = "2x Steam Grenades"
+	hammers_per_item = 2
+	created_item = /obj/item/explosive/deathshell
+	required_item = /obj/item/ingot/bronze
+	additional_items = list(/obj/item/gear/metal = 2)
+	craftdiff = 4
+	created_amount = 2
 
 // --------- Ammo -----------
 
@@ -453,13 +470,13 @@
 /datum/artificer_recipe/psycross
 	i_type = "Psycross"
 	category = "Psycross"
+	hammers_per_item = 5
+	craftdiff = 2
 
 /datum/artificer_recipe/psycross/silver
 	name = "silver Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/gold
 	name = "golden Psycross"
@@ -470,80 +487,59 @@
 
 /datum/artificer_recipe/psycross/noc
 	name = "Noc Psycross"
-	required_item = /obj/item/natural/wood/plank
-	created_item = /obj/item/clothing/neck/psycross/noc
-	hammers_per_item = 5
-	craftdiff = 1
+	required_item = /obj/item/ingot/silver
+	created_item = /obj/item/clothing/neck/psycross/silver/noc
 
 /datum/artificer_recipe/psycross/astrata
 	name = "Astrata Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/astrata
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/dendor
 	name = "Dendor Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/dendor
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/abyssor
 	name = "Abyssor Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/abyssor
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/necra
 	name = "Necra Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/necra
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/ravox
 	name = "Ravox Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/ravox
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/xylix
 	name = "Xylix Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/xylix
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/eora
 	name = "Eora Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/eora
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/pestra
 	name = "Pestra Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/pestra
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/malum_silver
-	name = "Malum Silver Psycross"
+	name = "Malum Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/malum
-	hammers_per_item = 5
-	craftdiff = 2
 
 /datum/artificer_recipe/psycross/malum_steel
 	name = "Malum Steel Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/malum_steel
+	created_item = /obj/item/clothing/neck/psycross/silver/malum/steel
 	additional_items = list(/obj/item/ingot/steel = 1)
-	hammers_per_item = 7
 	craftdiff = 3
 
 // --------- Misc -----------

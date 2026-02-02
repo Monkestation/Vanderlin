@@ -113,6 +113,13 @@
 			return TRUE
 	return FALSE
 
+/proc/is_race_banned(ckey, race_id)
+	var/list/valid_bans = get_valid_role_bans(ckey)
+	for(var/datum/role_ban_instance/instance as anything in valid_bans)
+		if(race_id in instance.races)
+			return TRUE
+	return FALSE
+
 /proc/get_trait_bans(ckey)
 	var/list/trait_bans = list()
 	var/list/valid_bans = get_valid_role_bans(ckey)

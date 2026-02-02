@@ -79,3 +79,27 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/raisins
 	output = /obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw
 	crafting_message = "add raisins to the griddlecake"
+
+/datum/repeatable_crafting_recipe/cooking/unbaked_griddlecake/berry_poison
+	hides_from_books = TRUE
+	name = "Unbaked Berry Griddlecake"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison = 1,
+		/obj/item/reagent_containers/food/snacks/foodbase/griddlecake_raw = 1,
+	)
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison
+	output = /obj/item/reagent_containers/food/snacks/foodbase/poisonberrygriddlecake_raw
+	crafting_message = "add jacksberry to the griddlecake"
+
+/datum/repeatable_crafting_recipe/cooking/unbaked_griddlecake/raisin_poison
+	hides_from_books = TRUE
+	name = "Unbaked Raisin Griddlecake"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/raisins/poison = 1,
+		/obj/item/reagent_containers/food/snacks/foodbase/griddlecake_raw = 1,
+	)
+	starting_atom = /obj/item/reagent_containers/food/snacks/raisins/poison
+	output = /obj/item/reagent_containers/food/snacks/foodbase/poisonberrygriddlecake_raw
+	crafting_message = "add raisins to the griddlecake"

@@ -47,14 +47,13 @@
 	if(!check_conditions())
 		return stop()
 	if(oldposition && !(oldposition == get_turf(holder)))
-		if(!oldposition.has_gravity() || !nograv_required)
-			var/obj/effect/E = new effect_type(oldposition)
-			set_dir(E)
-			if(fade)
-				flick(fadetype, E)
-				E.icon_state = ""
-			if(qdel_in_time)
-				QDEL_IN(E, qdel_in_time)
+		var/obj/effect/E = new effect_type(oldposition)
+		set_dir(E)
+		if(fade)
+			flick(fadetype, E)
+			E.icon_state = ""
+		if(qdel_in_time)
+			QDEL_IN(E, qdel_in_time)
 	oldposition = get_turf(holder)
 
 /datum/effect_system/trail_follow/proc/check_conditions()

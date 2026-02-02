@@ -6,14 +6,13 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	outfit = /datum/outfit/job/bogwarden
+	outfit = /datum/outfit/bogwarden
 	display_order = 6
 	can_have_apprentices = FALSE
 
 
-/datum/outfit/job/bogwarden
+/datum/outfit/bogwarden
 	name = "Warden of the Terrorbog"
-	jobtype = /datum/job/bogwarden
 
 	pants = /obj/item/clothing/pants/tights
 	shirt = /obj/item/clothing/shirt/undershirt
@@ -29,14 +28,13 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	outfit = /datum/outfit/job/huntmaster
+	outfit = /datum/outfit/huntmaster
 	display_order = 6
 	can_have_apprentices = FALSE
 
 
-/datum/outfit/job/huntmaster
+/datum/outfit/huntmaster
 	name = "Huntmaster of the Murderwoods"
-	jobtype = /datum/job/huntmaster
 
 	pants = /obj/item/clothing/pants/tights
 	shirt = /obj/item/clothing/shirt/undershirt
@@ -51,14 +49,13 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	outfit = /datum/outfit/job/hetman
+	outfit = /datum/outfit/hetman
 	display_order = 6
 	can_have_apprentices = FALSE
 
 
-/datum/outfit/job/hetman
+/datum/outfit/hetman
 	name = "Hetman of Mount Decapitation"
-	jobtype = /datum/job/hetman
 
 	pants = /obj/item/clothing/pants/tights
 	shirt = /obj/item/clothing/shirt/undershirt

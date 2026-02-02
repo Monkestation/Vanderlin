@@ -36,8 +36,8 @@
 	default_color = "9cc2e2"
 	use_skintones = TRUE
 
-	species_traits = list(NO_UNDERWEAR, HAIR, OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WATER_BREATHING, TRAIT_GOOD_SWIM)
+	species_traits = list(NO_UNDERWEAR, HAIR, FACEHAIR, OLDGREY)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WATER_BREATHING, TRAIT_GOOD_SWIM, TRAIT_FISHFACE)
 	inherent_traits_f = list(TRAIT_STRONGBITE)
 	inherent_skills = list(
 		/datum/skill/labor/fishing = 3,
@@ -125,6 +125,7 @@
 	customizers = list(
 		/datum/customizer/organ/tail/triton,
 		/datum/customizer/bodypart_feature/hair/head/humanoid/triton,
+		/datum/customizer/bodypart_feature/hair/facial/humanoid/triton,
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 	)

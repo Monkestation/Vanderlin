@@ -11,7 +11,7 @@
 	var/currency_name = "zennies"
 	///Which types of supply packs can we use here
 	var/list/base_type = list()
-	 ///Custom items that this trader type can sell with their weights and pricing
+	///Custom items that this trader type can sell with their weights and pricing
 	///Format: item_type = list(weight, base_price, base_quantity)
 	var/list/custom_items = list()
 	///Maximum number of custom items to select for this trader

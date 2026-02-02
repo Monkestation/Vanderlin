@@ -26,6 +26,7 @@
 #define COMSIG_PROCESS_BORGCHARGER_OCCUPANT "living_charge"		//sent from borg recharge stations: (amount, repairs)
 #define COMSIG_BORG_SAFE_DECONSTRUCT "borg_safe_decon"			//sent from borg mobs to itself, for tools to catch an upcoming destroy() due to safe decon (rather than detonation)
 #define COMSIG_MOB_ACTIVE_PERCEPTION "comsig_mob_active_perception"	//sent from mob/living/proc/look_around(): (mob/living/source)
+#define COMSIG_LIVING_WOUND_GAINED "wound_gained"
 
 // Client
 /// sent when a mob/login() finishes: (client)
@@ -56,11 +57,14 @@
 ///from base of mob/living/Sleeping() (amount, ignore_canstun)
 #define COMSIG_LIVING_STATUS_SLEEP "living_sleeping"
 	#define COMPONENT_NO_STUN 1			//For all of them
+///from end of fully_heal(): (heal_flags)
+#define COMSIG_LIVING_POST_FULLY_HEAL "living_post_fully_heal"
 ///from base of /mob/living/can_track(): (mob/user)
 #define COMSIG_LIVING_CAN_TRACK "mob_cantrack"
 	#define COMPONENT_CANT_TRACK 1
 ///from base of mob/living/death(): (gibbed)
 #define COMSIG_LIVING_DEATH "living_death"
+#define COMSIG_LIVING_TRY_ENTER_AFTERLIFE "try_enter_afterlife"
 /// From /mob/living/befriend() : (mob/living/new_friend)
 #define COMSIG_LIVING_BEFRIENDED "living_befriended"
 /// From /mob/living/unfriend() : (mob/living/old_friend)
@@ -100,3 +104,12 @@
 
 /// Updating a mob's movespeed when lacking limbs. (list/modifiers)
 #define COMSIG_LIVING_LIMBLESS_MOVESPEED_UPDATE "living_get_movespeed_modifiers"
+///From living/Life(). (deltatime, times_fired)
+#define COMSIG_LIVING_LIFE "living_life"
+	/// Block the Life() proc from proceeding... this should really only be done in some really wacky situations.
+	#define COMPONENT_LIVING_CANCEL_LIFE_PROCESSING (1<<0)
+
+#define COMSIG_LIVING_ADJUSTED "living_damage_adjusted"
+
+#define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
+#define COMSIG_LIVING_POSTBITE_SELF "living_postbite"

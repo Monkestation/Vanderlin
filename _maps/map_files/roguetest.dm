@@ -1,1 +1,2 @@
-#define FORCE_MAP "_maps/roguetest.json"
+#define FORCE_MAP "roguetest"
+#define FORCE_MAP_DIRECTORY "_maps"

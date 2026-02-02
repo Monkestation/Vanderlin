@@ -12,6 +12,7 @@
 	var/list/traits
 	var/list/misc
 	var/list/curses
+	var/list/races
 
 /datum/role_ban_instance/proc/get_ban_string_list()
 	var/list/strings = list()
@@ -52,6 +53,11 @@
 		for(var/curse_ban in curses)
 			curse_string += "[curse_ban] "
 		strings += curse_string
+	if(races)
+		var/races_string = "Species: "
+		for(var/races_ban in races)
+			races_string += "[races_ban] "
+		strings += races_string
 
 	return strings
 
@@ -80,6 +86,8 @@
 		ban_data["misc"] = misc.Copy()
 	if(curses)
 		ban_data["curses"] = curses.Copy()
+	if(races)
+		ban_data["races"] = races.Copy()
 	return json
 
 /datum/role_ban_instance/proc/load_from_json_list(list/json)
@@ -111,6 +119,9 @@
 	if(ban_data["curses"])
 		var/list/data_roles = ban_data["curses"]
 		curses = data_roles.Copy()
+	if(ban_data["races"])
+		var/list/data_roles = ban_data["races"]
+		races = data_roles.Copy()
 	return TRUE
 
 /datum/role_ban_panel
@@ -128,6 +139,7 @@
 	var/list/selected_traits = list()
 	var/list/selected_misc = list()
 	var/list/selected_curses = list()
+	var/list/selected_races = list()
 
 /datum/role_ban_panel/New(datum/admins/passed_holder)
 	holder = passed_holder
@@ -171,6 +183,9 @@
 	dat += "<BR><BR><b>Applied Curses:</b> <a href='byond://?src=[REF(src)];task=add_curse'>Add</a>"
 	for(var/curse_ban in selected_curses)
 		dat += "<BR> - [curse_ban] <a href='byond://?src=[REF(src)];task=remove_curse;curse_ban=[curse_ban]'>Remove</a>"
+	dat += "<BR><BR><b>Applied Species:</b> <a href='byond://?src=[REF(src)];task=add_race'>Add</a>"
+	for(var/race_ban in selected_races)
+		dat += "<BR> - [race_ban] <a href='byond://?src=[REF(src)];task=remove_race;race_ban=[race_ban]'>Remove</a>"
 
 	var/datum/browser/popup = new(user, "role_ban_panel", "Role Ban Panel", 550, 500)
 	popup.set_content(dat.Join())
@@ -299,6 +314,14 @@
 		if("remove_curse")
 			var/to_remove = href_list["curse_ban"]
 			selected_curses -= to_remove
+		if("add_race")
+			var/selected_race_thing = browser_input_list(user, "Choose a Race", "Races", RACES_PLAYER_ALL)
+			if(!selected_race_thing)
+				return
+			selected_races |= selected_race_thing
+		if("remove_race")
+			var/to_remove = href_list["race_ban"]
+			selected_races -= to_remove
 
 		if("remove_ckey_role_ban")
 			var/ckey = href_list["ckey"]
@@ -383,6 +406,8 @@
 		instance.misc = selected_misc.Copy()
 	if(length(selected_curses))
 		instance.curses = selected_curses.Copy()
+	if(length(selected_races))
+		instance.races = selected_races.Copy()
 	var/list/ban_string = instance.get_ban_string_list()
 	var/msg = "[key_name_admin(user)] applied a ROLE BAN for ckey: [selected_ckey] \n[ban_string.Join("\n")]"
 	message_admins(msg)
@@ -403,6 +428,7 @@
 	selected_traits.Cut()
 	selected_misc.Cut()
 	selected_curses.Cut()
+	selected_races.Cut()
 
 /proc/get_all_migrant_role_names()
 	var/list/compiled = list()

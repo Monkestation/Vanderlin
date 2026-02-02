@@ -10,9 +10,32 @@
 	var/atom/movable/screen/strategy_ui/units_preview/units
 	var/atom/movable/screen/strategy_ui/ability_bar/ability
 
-	var/atom/movable/screen/strategy_ui/controller_button/one/button_one
-	var/atom/movable/screen/strategy_ui/controller_button/two/button_two
-	var/atom/movable/screen/strategy_ui/controller_button/three/button_three
+	var/atom/movable/screen/strategy_ui/controller_button/bottom/bottom
+	var/atom/movable/screen/strategy_ui/controller_button/move/move
+	var/atom/movable/screen/strategy_ui/controller_button/destroy/destroy
+
+	var/atom/movable/screen/strategy_ui/controller_button/decor/decor
+	var/atom/movable/screen/strategy_ui/controller_button/traps/traps
+	var/atom/movable/screen/strategy_ui/controller_button/builds/builds
+
+	var/atom/movable/screen/strategy_ui/controller_button/exit/exit
+
+/atom/movable/screen/strategy_ui/controller_ui/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	create_and_position_buttons(hud_owner)
+
+/atom/movable/screen/strategy_ui/controller_ui/Destroy(force)
+	QDEL_NULL(actions)
+	QDEL_NULL(stat)
+	QDEL_NULL(units)
+	QDEL_NULL(ability)
+	QDEL_NULL(bottom)
+	QDEL_NULL(move)
+	QDEL_NULL(decor)
+	QDEL_NULL(traps)
+	QDEL_NULL(builds)
+	QDEL_NULL(exit)
+	return ..()
 
 /atom/movable/screen/strategy_ui/controller_ui/vv_edit_var(var_name, var_value)
 	switch (var_name)
@@ -21,10 +44,6 @@
 			return TRUE
 
 	return ..()
-
-/atom/movable/screen/strategy_ui/controller_ui/New()
-	. = ..()
-	create_and_position_buttons()
 
 /atom/movable/screen/strategy_ui/controller_ui/proc/add_ui(client/client)
 	if(!client)
@@ -39,9 +58,13 @@
 	client.screen += stat
 	client.screen += units
 	client.screen += ability
-	client.screen += button_one
-	client.screen += button_two
-	client.screen += button_three
+	client.screen += decor
+	client.screen += traps
+	client.screen += builds
+	client.screen += bottom
+	client.screen += destroy
+	client.screen += move
+	client.screen += exit
 
 /atom/movable/screen/strategy_ui/controller_ui/proc/remove_ui(client/client)
 	if(!client)
@@ -50,18 +73,26 @@
 	client.screen -= stat
 	client.screen -= units
 	client.screen -= ability
-	client.screen -= button_one
-	client.screen -= button_two
-	client.screen -= button_three
+	client.screen -= decor
+	client.screen -= traps
+	client.screen -= builds
+	client.screen -= bottom
+	client.screen -= destroy
+	client.screen -= move
+	client.screen -= exit
 
-/atom/movable/screen/strategy_ui/controller_ui/proc/create_and_position_buttons()
-	actions = new
-	units = new
-	ability = new
-	stat = new
-	button_one = new
-	button_two = new
-	button_three = new
+/atom/movable/screen/strategy_ui/controller_ui/proc/create_and_position_buttons(datum/hud/hud_owner)
+	actions = new(null, hud_owner)
+	units = new(null, hud_owner)
+	ability = new(null, hud_owner)
+	stat = new(null, hud_owner)
+	decor = new(null, hud_owner)
+	traps = new(null, hud_owner)
+	builds = new(null, hud_owner)
+	bottom = new(null, hud_owner)
+	destroy = new(null, hud_owner)
+	move = new(null, hud_owner)
+	exit = new(null, hud_owner)
 
 	update_screen_loc()
 	update_all()
@@ -74,14 +105,19 @@
 	units.screen_loc = screen_loc
 	ability.screen_loc = screen_loc
 	stat.screen_loc = screen_loc
-	button_one.screen_loc = screen_loc
-	button_two.screen_loc = screen_loc
-	button_three.screen_loc = screen_loc
+	decor.screen_loc = screen_loc
+	traps.screen_loc = screen_loc
+	builds.screen_loc = screen_loc
+	bottom.screen_loc = screen_loc
+	destroy.screen_loc = screen_loc
+	exit.screen_loc = screen_loc
+	move.screen_loc = screen_loc
 
 /atom/movable/screen/strategy_ui/controller_ui/proc/update_all()
-
+	return
 
 /atom/movable/screen/strategy_ui/controller_ui/proc/update_text()
+	return
 
 /atom/movable/screen/strategy_ui/action
 	icon_state = "action"
@@ -103,43 +139,21 @@
 	icon_state = "button_1"
 
 	var/list/buildings
+	var/highlighted = FALSE
+	var/highlight_color
 
+/atom/movable/screen/strategy_ui/controller_button/MouseExited()
+	if(!usr.client)
+		return
 
-/atom/movable/screen/strategy_ui/controller_button/one
-	icon_state = "button_1"
-
-/atom/movable/screen/strategy_ui/controller_button/two
-	icon_state = "button_2"
-
-	buildings = list(
-		/datum/building_datum/core,
-		/datum/building_datum/farm,
-		/datum/building_datum/bar,
-		/datum/building_datum/kitchen,
-		/datum/building_datum/stockpile,
-		/datum/building_datum/lumber_yard,
-		/datum/building_datum/blacksmith,
-		/datum/building_datum/mines,
-		/datum/building_datum/spawning_grounds,
-
-	)
-
-/atom/movable/screen/strategy_ui/controller_button/three
-	icon_state = "button_3"
-
-	buildings = list(
-		/datum/building_datum/simple/flame,
-		/datum/building_datum/simple/poison,
-		/datum/building_datum/simple/chill,
-		/datum/building_datum/simple/wall_fire,
-		/datum/building_datum/simple/wall_arrow,
-		/datum/building_datum/simple/saw,
-		/datum/building_datum/simple/bomb,
-		/datum/building_datum/simple/spike,
-	)
-
-/atom/movable/screen/strategy_ui/controller_button/Click(location, control, params)
 	. = ..()
-	if(length(buildings))
-		var/mob/camera/strategy_controller/controller = usr
-		controller.building_icon.open_ui(controller, buildings)
+	color = null
+	if(highlighted)
+		color = highlight_color
+
+/atom/movable/screen/strategy_ui/controller_button/MouseEntered(location,control,params)
+	if(!usr.client)
+		return
+
+	. = ..()
+	color = "#f0efab"

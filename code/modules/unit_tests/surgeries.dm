@@ -62,7 +62,7 @@
 
 	var/mob/living/carbon/human/clothed_patient = allocate(/mob/living/carbon/human)
 	clothed_patient.get_bodypart(BODY_ZONE_CHEST).receive_damage(100, 100) // take damage before putting on clothes in case they block some of the damage
-	clothed_patient.equipOutfit(/datum/outfit/job/tester, TRUE)
+	clothed_patient.equipOutfit(/datum/outfit/tester, TRUE)
 
 	basic_brute_heal.success(user, naked_patient, BODY_ZONE_CHEST)
 	basic_brute_heal.success(user, clothed_patient, BODY_ZONE_CHEST)

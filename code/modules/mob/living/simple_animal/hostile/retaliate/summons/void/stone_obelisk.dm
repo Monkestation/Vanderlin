@@ -18,14 +18,14 @@
 /mob/living/simple_animal/hostile/retaliate/voidstoneobelisk
 	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "voidstone obelisk"
-	desc = "A construct from another age. It is marked by glowing sigils and it's material seems to absorb magic!"
+	desc = "A construct from another age. It is marked by glowing sigils, and its material seems to absorb magic!"
 	icon_state = "obelisk-combined"
 	icon_living = "obelisk-combined"
 	icon_dead = "obelisk-combined"
 	summon_primer = "You are ancient. A construct built in an age before men, a time of dragons. Your builders don't seem to be around anymore, and time has past with you in standby. How you respond, is up to you."
 	tier = 3
 
-	faction = list("abberant")
+	faction = list("aberrant")
 	emote_hear = null
 	emote_see = null
 	speed = 5
@@ -102,7 +102,7 @@
 
 /// Segments of the actual beam, these hurt if you stand in them
 /obj/effect/obeliskbeam
-	name = "abberant beam"
+	name = "aberrant beam"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "obeliskbeam_mid"
 	layer = ABOVE_MOB_LAYER

@@ -42,7 +42,17 @@
 
 	var/component_block = FALSE
 
+	/// Uses colours defined by the monarch roundstart see [lordcolor.dm]
+	var/uses_lord_coloring = FALSE
+
+	///this is a whole number converted into a multiplier
+	var/rarity_mod = 0
+
+	vis_flags = VIS_INHERIT_PLANE
+	uses_integrity = TRUE
+
 	// See /code/datums/locks
+	// Additional vars may be found in items.dm for things solely related to lock access
 
 	/**
 	 * A list of lockids for keys and locks
@@ -62,15 +72,6 @@
 	var/rattle_sound = 'sound/foley/lockrattle.ogg'
 	/// If this is currently being lockpicked
 	var/being_picked = FALSE
-
-	/// Uses colours defined by the monarch roundstart see [lordcolor.dm]
-	var/uses_lord_coloring = FALSE
-
-	///this is a whole number converted into a multiplier
-	var/rarity_mod = 0
-
-	vis_flags = VIS_INHERIT_PLANE
-	uses_integrity = TRUE
 
 /obj/vv_edit_var(vname, vval)
 	switch(vname)

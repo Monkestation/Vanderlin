@@ -28,8 +28,16 @@
 	uses_lord_coloring = LORD_PRIMARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-//THE ARMOUR VALUES OF ADVANCED AND MASTERWORK TROUSERS ARE INTENDED
-//KEEP THIS IN MIND
+/obj/item/clothing/pants/trou/leather/splint
+	name = "splint plate trousers"
+	desc = "Affordable armored pants for regular soldiers, they seem simple and their craftsmanship is solid, makes sure all stays in place with a plated codpiece."
+	icon_state = "splintlegs"
+	armor = ARMOR_MAILLE_IRON
+	max_integrity = INTEGRITY_STANDARD
+
+/obj/item/clothing/pants/trou/leather/guard
+	uses_lord_coloring = LORD_PRIMARY
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/pants/trou/leather/advanced
 	name = "hardened leather chausses"
@@ -52,9 +60,21 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor = list("blunt" = 65, "slash" = 50, "stab" = 25, "piercing" = 25,"fire" = 0, "acid" = 0)
 
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored/blue
+	color = CLOTHING_SKY_BLUE
+
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored/red
+	color = CLOTHING_ROYAL_RED
+
+/obj/item/clothing/pants/trou/leather/quiltedkilt/colored/linen
+	color = CLOTHING_LINEN
+
 /obj/item/clothing/pants/trou/leather/masterwork
 	name = "masterwork leather chausses"
-	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimible, reliable."
+	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	max_integrity = INTEGRITY_POOR + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
@@ -88,7 +108,7 @@
 
 /obj/item/clothing/pants/trou/artipants
 	name = "artificer trousers"
-	desc = "Thick leather trousers to protect from sparks or stray gear projectiles. Judging by the wear, its had plenty of use."
+	desc = "Thick leather trousers to protect from sparks or stray gear projectiles. Judging by the wear, it's had plenty of use."
 	icon_state = "artipants"
 	item_state = "artipants"
 
@@ -112,3 +132,30 @@
 	prevent_crits = MINOR_CRITICALS
 	max_integrity = INTEGRITY_STANDARD
 
+/obj/item/clothing/pants/trou/formal
+	name = "formal trousers"
+	desc = "A formal pair of formal trousers."
+	icon_state = "butlerpants"
+	item_state = "butlerpants"
+	detail_tag = "_detail"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_maids.dmi'
+	salvage_result = /obj/item/natural/cloth
+	detail_color = CLOTHING_DARK_INK
+
+/obj/item/clothing/pants/trou/formal/shorts
+	name = "trouser shorts"
+	desc = "A pair of formal trouser shorts, fit for any strapping young lad."
+	icon_state = "butlershorts"
+	item_state = "butlershorts"
+	detail_color = CLOTHING_SOOT_BLACK
+
+/obj/item/clothing/pants/trou/courtphysician
+	name = "sanguine trousers"
+	desc = "A pair of formal trousers, clean to the best of the servant's ability, but some bloodstains are impossible to rid them of"
+	icon_state = "docpants"
+	item_state = "docpants"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY

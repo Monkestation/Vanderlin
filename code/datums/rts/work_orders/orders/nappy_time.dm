@@ -20,7 +20,7 @@
 		if(!can_continue)
 			work_time_left = world.time - world_start_time
 			restore_stamina(work_time_left / starting_working_number)
-			worker.controller_mind.stop_working()
+			stop_work("interrupted")
 			return FALSE
 		work_time_left = world.time - world_start_time
 		return FALSE

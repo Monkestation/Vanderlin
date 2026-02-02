@@ -3,12 +3,17 @@
 	desc = "Create a portal to return to MY mansion"
 	has_visual_effects = FALSE
 
-	charge_required = FALSE
+	charge_required = TRUE
+	charge_time = 3 SECONDS
 	cooldown_time = 15 MINUTES
 	spell_cost = 0
 
 /datum/action/cooldown/spell/undirected/mansion_portal/cast(atom/cast_on)
 	. = ..()
+	if(SSmapping.config.map_name == "Voyage")
+		to_chat(owner, span_warning("It cannot be, Nothing happens."))
+		return
+
 	var/obj/structure/vampire/portalmaker/destination
 	for(var/obj/structure/vampire/portalmaker/P in GLOB.vampire_objects)
 		destination = P

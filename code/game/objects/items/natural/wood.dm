@@ -13,8 +13,8 @@
 	static_debris = list(/obj/item/grown/log/tree/small = 2)
 	obj_flags = CAN_BE_HIT
 	resistance_flags = FLAMMABLE
-	gripped_intents = list(/datum/intent/hit)
-	possible_item_intents = list(/datum/intent/hit)
+	gripped_intents = list(INTENT_GENERIC)
+	possible_item_intents = list(INTENT_GENERIC)
 	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
@@ -220,7 +220,7 @@
 	experimental_inhand = FALSE
 	force = 2
 	throwforce = 2
-	possible_item_intents = list(/datum/intent/stab, /datum/intent/pick)
+	possible_item_intents = list(/datum/intent/stab, PICK_INTENT)
 	firefuel = 1 MINUTES
 	blade_dulling = 0
 	max_integrity = 20
@@ -243,7 +243,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	item_state = "plank"
 	experimental_inhand = FALSE
-	firefuel = 5 MINUTES
+	firefuel = 10 MINUTES
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/fertilizer/ash
 	bundletype = /obj/item/natural/bundle/plank
@@ -255,12 +255,12 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	item_state = "plankbundle"
 	experimental_inhand = FALSE
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	desc = "Wooden planks bundled together for easy handling."
 	force = 0
 	throwforce = 0
 	maxamount = 10
-	firefuel = 30 MINUTES
+	firemod = 10 MINUTES
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_BULKY
 	spitoutmouth = FALSE
@@ -274,7 +274,7 @@
 
 /obj/item/grown/log/tree/essence
 	name = "essence of lumber"
-	desc = "A mystical essence embued with the power of Dendor. Very good source of fuel."
+	desc = "A mystical essence imbued with the power of Dendor. Very good source of fuel."
 	icon_state = "lessence"
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	static_debris = null

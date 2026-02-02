@@ -9,4 +9,5 @@
 		/datum/persistant_workorder/mine/stones,
 		/datum/persistant_workorder/mine/ores,
 		/datum/persistant_workorder/mine/coal,
+		/datum/persistant_workorder/mine/gem,
 	)

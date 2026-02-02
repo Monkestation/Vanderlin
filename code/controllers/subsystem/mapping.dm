@@ -38,9 +38,6 @@ SUBSYSTEM_DEF(mapping)
 	///list of all z level indices that form multiz connections and whether theyre linked up or down
 	///list of lists, inner lists are of the form: list("up or down link direction" = TRUE)
 	var/list/multiz_levels = list()
-	///shows the default gravity value for each z level. recalculated when gravity generators change.
-	///associative list of the form: list("[z level num]" = max generator gravity in that z level OR the gravity level trait)
-	var/list/gravity_by_z_level = list()
 	var/datum/space_level/transit
 	var/datum/space_level/empty_space
 	var/num_of_res_levels = 1
@@ -54,13 +51,13 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/PreInit()
 #ifdef FORCE_MAP
-	config = load_map_config(FORCE_MAP)
+	config = load_map_config(FORCE_MAP, FORCE_MAP_DIRECTORY)
 #else
 	config = load_map_config(error_if_missing = FALSE)
 #endif
 
 #ifdef FORCE_RANDOM_WORLD_GEN
-	config = load_map_config("_maps/kalypso.json")
+	config = load_map_config("kalypso")
 	log_world("FORCE_RANDOM_WORLD_GEN enabled - loading Kalypso only for random world generation")
 #endif
 
@@ -70,6 +67,9 @@ SUBSYSTEM_DEF(mapping)
 		if(!adjust.map_file_name)
 			continue
 		var/map = config.map_file
+		if(islist(map))
+			var/list/maps = map
+			map = maps[1]
 		if(!map)
 			break
 		if(map_adjustment)
@@ -112,12 +112,7 @@ SUBSYSTEM_DEF(mapping)
 	require_area_resort()
 	initialize_reserved_level(transit.z_value)
 	generate_z_level_linkages()
-	calculate_default_z_level_gravities()
 	return ..()
-
-/datum/controller/subsystem/mapping/proc/calculate_default_z_level_gravities()
-	for(var/z_level in 1 to length(z_list))
-		calculate_z_level_gravity(z_level)
 
 /datum/controller/subsystem/mapping/proc/generate_z_level_linkages()
 	for(var/z_level in 1 to length(z_list))
@@ -137,16 +132,6 @@ SUBSYSTEM_DEF(mapping)
 	multiz_levels[z_level] = new /list(LARGEST_Z_LEVEL_INDEX)
 	multiz_levels[z_level][Z_LEVEL_UP] = !!z_above
 	multiz_levels[z_level][Z_LEVEL_DOWN] = !!z_below
-
-/datum/controller/subsystem/mapping/proc/calculate_z_level_gravity(z_level_number)
-	if(!isnum(z_level_number) || z_level_number < 1)
-		return FALSE
-
-	var/max_gravity = 0
-
-	max_gravity = max_gravity || level_trait(z_level_number, ZTRAIT_GRAVITY) || 0//just to make sure no nulls
-	gravity_by_z_level["[z_level_number]"] = max_gravity
-	return max_gravity
 
 
 /datum/controller/subsystem/mapping/Recover()
@@ -216,36 +201,44 @@ SUBSYSTEM_DEF(mapping)
 	return parsed_maps
 
 /datum/controller/subsystem/mapping/proc/loadWorld()
+	// If any of these fail, something has gone horribly, HORRIBLY, wrong
 	var/list/FailedZs = list()
-	InitializeDefaultZLevels()
-	station_start = world.maxz + 1
 
-	#ifdef TESTING
+	// Ensure we have space_level datums for compiled-in maps
+	InitializeDefaultZLevels()
+
+	// load the station
+	station_start = world.maxz + 1
+#ifdef TESTING
 	INIT_ANNOUNCE("Loading [config.map_name]...")
-	#endif
-	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.traits, ZTRAITS_TOWN, delve = config.delve)
+#endif
+	LoadGroup(FailedZs, config.map_name, config.map_path, config.map_file, config.traits, ZTRAITS_TOWN, delve = config.delve)
+
 	var/list/otherZ = list()
 	for(var/map_json in config.other_z)
 		otherZ += load_map_config(map_json)
 
-	#ifndef NO_DUNGEON
+#ifndef NO_DUNGEON
 	// Load base dungeon level
-	otherZ += load_map_config("_maps/map_files/shared/dungeon.json")
+	if(config.map_name != "Voyage")
+		otherZ += load_map_config("map_files/shared/dungeon")
 
-	// Load additional delve levels if multi-level dungeons are enabled
-	if(SSdungeon_generator.multilevel_dungeons)
-		for(var/level = 2; level <= SSdungeon_generator.max_delve_levels; level++)
-			otherZ += load_map_config("_maps/map_files/shared/dungeon_delve[level].json")
-	#endif
+		// Load additional delve levels if multi-level dungeons are enabled
+		if(SSdungeon_generator.multilevel_dungeons)
+			for(var/level = 2; level <= SSdungeon_generator.max_delve_levels; level++)
+				otherZ += load_map_config("map_files/shared/dungeon_delve[level]")
+#endif
 
 	//For all maps
 
-	#ifndef LOWMEMORYMODE
-	otherZ += load_map_config("_maps/map_files/shared/underworld.json") // don't load underworld on lowmem
-	#endif
+#ifndef LOWMEMORYMODE
+	otherZ += load_map_config("map_files/shared/underworld") // don't load underworld on lowmem
+#endif
 
 	if(length(otherZ))
-		for(var/datum/map_config/OtherZ in otherZ)
+		for(var/datum/map_config/OtherZ as anything in otherZ)
+			if(OtherZ.defaulted)
+				continue
 			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_STATION, delve = OtherZ.delve)
 
 	if(SSdbcore.Connect())
@@ -255,28 +248,28 @@ SUBSYSTEM_DEF(mapping)
 		query_round_map_name.Execute()
 		qdel(query_round_map_name)
 
-	#ifndef LOWMEMORYMODE
+#ifndef LOWMEMORYMODE
 	// TODO: remove this when the DB is prepared for the z-levels getting reordered
 	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
 		++space_levels_so_far
 		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
-	#endif
+#endif
 
 	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
 		var/msg = "RED ALERT! The following map files failed to load: [FailedZs[1]]"
-		if(FailedZs.len > 1)
+		if(length(FailedZs) > 1)
 			for(var/I in 2 to FailedZs.len)
 				msg += ", [FailedZs[I]]"
 		msg += ". Yell at your server host!"
 		INIT_ANNOUNCE(msg)
+
 #undef INIT_ANNOUNCE
 
 	// Custom maps are removed after station loading so the map files does not persist for no reason.
-	if(config.map_path == "custom")
+	if(config.map_path == CUSTOM_MAP_PATH)
 		fdel("_maps/custom/[config.map_file]")
 		// And as the file is now removed set the next map to default.
-		next_map_config = load_map_config(default_to_van = TRUE)
-
+		next_map_config = load_default_map_config()
 
 /datum/controller/subsystem/mapping/proc/maprotate()
 	if(map_voted)
@@ -334,7 +327,7 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/changemap(datum/map_config/VM)
 	if(!VM.MakeNextMap())
-		next_map_config = load_map_config(default_to_van = TRUE)
+		next_map_config = load_default_map_config()
 		message_admins("Failed to set new map with next_map.json for [VM.map_name]! Using default as backup!")
 		return
 
@@ -529,7 +522,6 @@ SUBSYSTEM_DEF(mapping)
 	require_area_resort()
 	initialize_reserved_level(transit.z_value)
 	generate_z_level_linkages()
-	calculate_default_z_level_gravities()
 
 
 /datum/controller/subsystem/mapping/proc/generate_random_world()

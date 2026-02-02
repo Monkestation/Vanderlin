@@ -68,8 +68,8 @@
 		return COMPONENT_INCOMPATIBLE
 	if(master)
 		change_master(master)
-	boxes = new(null, src)
-	closer = new(null, src)
+	boxes = new(null, null, src)
+	closer = new(null, null, src)
 	orient2hud()
 
 	RegisterSignal(parent, COMSIG_CONTAINS_STORAGE, PROC_REF(on_check))
@@ -132,8 +132,7 @@
 /datum/component/storage/proc/generate_hold_desc(can_hold_list)
 	var/list/desc = list()
 
-	for(var/valid_type in can_hold_list)
-		var/obj/item/valid_item = valid_type
+	for(var/obj/item/valid_item as anything in can_hold_list)
 		desc += "\a [initial(valid_item.name)]"
 
 	return "\n\t<span class='notice'>[desc.Join("\n\t")]</span>"
@@ -163,8 +162,7 @@
 		return
 	. = COMPONENT_BLOCK_REACH
 	next += master.parent
-	for(var/i in master.slaves)
-		var/datum/component/storage/slave = i
+	for(var/datum/component/storage/slave as anything in master.slaves)
 		next += slave.parent
 
 /datum/component/storage/proc/on_move()
@@ -404,7 +402,7 @@
 	open_storage_on_signal(source, user)
 	return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
-/// Signal handler to open up the storage when we recieve a signal.
+/// Signal handler to open up the storage when we receive a signal.
 /datum/component/storage/proc/open_storage_on_signal(datum/source, mob/to_show)
 	SIGNAL_HANDLER
 
@@ -633,8 +631,7 @@
 	var/list/ret = list()
 	ret |= contents()
 	if(recursive)
-		for(var/i in ret.Copy())
-			var/atom/A = i
+		for(var/atom/A as anything in ret.Copy())
 			SEND_SIGNAL(A, COMSIG_TRY_STORAGE_RETURN_INVENTORY, ret, TRUE)
 	return ret
 

@@ -46,11 +46,15 @@
 		/datum/action/cooldown/spell/raise_undead,
 		/datum/action/cooldown/spell/diagnose,
 		/datum/action/cooldown/spell/eyebite,
+		/datum/action/cooldown/spell/control_undead
 	)
 
 /datum/antagonist/lich/on_gain()
 	SSmapping.retainer.liches |= owner
-	owner.current?.purge_combat_knowledge() // purge all their combat skills first
+	var/mob/living/carbon/human/lich = owner?.current
+	lich.purge_combat_knowledge() // purge all their combat skills first
+	lich.reset_and_reroll_stats()
+	lich.remove_all_traits()
 	. = ..()
 	if(iscarbon(owner.current))
 		lich_body_ref = WEAKREF(owner.current)
@@ -60,7 +64,8 @@
 	owner.special_role = name
 	move_to_spawnpoint()
 	remove_job()
-	owner.current?.roll_mob_stats()
+	lich.delete_equipment()
+	owner.current?.remove_stat_modifier(STATMOD_AGE)
 	skele_look()
 	equip_lich()
 
@@ -97,16 +102,16 @@
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 	L.faction = list(FACTION_UNDEAD)
-	if(L.charflaw)
-		QDEL_NULL(L.charflaw)
+	if(length(L.quirks))
+		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
 	L.dna.species.species_traits |= NOBLOOD
 	L.grant_undead_eyes()
 	L.skeletonize(FALSE)
-	L.equipOutfit(/datum/outfit/job/lich)
+	L.equipOutfit(/datum/outfit/lich)
 	L.set_patron(/datum/patron/inhumen/zizo)
 
-/datum/outfit/job/lich/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/helmet/skullcap/cult
 	pants = /obj/item/clothing/pants/chainlegs
@@ -152,7 +157,7 @@
 
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "LICH"), 5 SECONDS)
 
-/datum/outfit/job/lich/post_equip(mob/living/carbon/human/H)
+/datum/outfit/lich/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/antagonist/lich/lichman = H.mind.has_antag_datum(/datum/antagonist/lich)
 	for(var/i in 1 to 3)
@@ -162,7 +167,7 @@
 		H.equip_to_slot_if_possible(new_phylactery,ITEM_SLOT_BACKPACK, TRUE)
 
 /// called via COMSIG_LIVING_DEATH
-/datum/antagonist/lich/proc/on_death(/datum/source)
+/datum/antagonist/lich/proc/on_death(datum/source)
 	SIGNAL_HANDLER
 	INVOKE_ASYNC(src, PROC_REF(attempt_resurrection)) // this proc sleeps
 
@@ -217,14 +222,14 @@
 		if(ishuman(owner.current))
 			lich_mob = owner.current // current body is a human mob.
 
-	lich_mob.revive(TRUE, TRUE) // we live, yay.
+	lich_mob.revive(ADMIN_HEAL_ALL) // we live, yay.
 	owner.transfer_to(lich_mob, TRUE) // move the player back into the lich body.
 
 	lich_mob.skeletonize(FALSE)
 
 	lich_mob.faction = list(FACTION_UNDEAD)
-	if(lich_mob.charflaw)
-		QDEL_NULL(lich_mob.charflaw)
+	if(length(lich_mob.quirks))
+		lich_mob.clear_quirks()
 	lich_mob.mob_biotypes |= MOB_UNDEAD
 	lich_mob.grant_undead_eyes()
 	return TRUE

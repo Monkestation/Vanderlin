@@ -27,20 +27,20 @@
 		)
 		target.playsound_local(target, pick(funnies), vol = 100, vary = FALSE)
 
-/proc/handle_maniac_hallucinations(mob/living/target)
+/proc/handle_maniac_hallucinations(mob/living/target, modifier = 1)
 	//Chasing mob
-	if(prob(1) && prob(2))
+	if(prob(1 * modifier) && prob(2 * modifier))
 		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_mob_hallucination), target)
 	//Talking objects
-	else if(prob(4))
+	else if(prob(4 * modifier))
 		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_object_hallucination), target)
 	//Inner Thoughts..Or is it?
-	if(prob(5))
+	if(prob(5 * modifier))
 		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_blurbs_hallucination), target)
 	//Meta hallucinations
-	else if(prob(1) && prob(5))
+	else if(prob(1 * modifier) && prob(modifier * 5))
 		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_admin_bwoink_hallucination), target)
-	else if(prob(1) && prob(2))
+	else if(prob(1 * modifier) && prob(2 * modifier))
 		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_admin_ban_hallucination), target)
 
 /proc/handle_maniac_object_hallucination(mob/living/target)
@@ -199,30 +199,24 @@
 	dreamer.client?.images -= fake_floor
 
 /proc/handle_maniac_admin_bwoink_hallucination(mob/living/target)
-	var/fakemin = "Trey Liam"
-	if(length(GLOB.admin_datums))
-		var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
-		if(badmin?.owner?.key)
-			fakemin = badmin.owner.key
+	var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
+	var/fakemin = badmin?.owner?.key || "Trey Liam"
 	var/message = ""
 	message = pick_list_replacements("maniac.json", "dreamer_ahelp")
 	to_chat(target, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
-	to_chat(target, span_adminsay("Admin PM from-<b><span style='color: #0b4990;'>[fakemin]</span></b>: [message]"))
-	to_chat(target, span_adminsay("<i>Click on the administrator's name to [pick("die", "WAKE UP")].</i>"))
+	to_chat(target, span_adminsay("Admin PM from-<b><span style='color: #0000EE; text-decoration: underline;'>[fakemin]</span></b>: [message]"))
+	to_chat(target, span_adminsay("<i>Click on the administrator's name to [pick("DIE", "CRY", "RISE", "WAKE UP")].</i>"))
 	SEND_SOUND(target, sound('sound/adminhelp.ogg'))
 
 /proc/handle_maniac_admin_ban_hallucination(mob/living/target)
-	var/fakemin = "Trey Liam"
-	if(length(GLOB.admin_datums))
-		var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
-		if(badmin?.owner?.key)
-			fakemin = badmin.owner.key
+	var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
+	var/fakemin = badmin?.owner?.key || "Trey Liam"
 	var/message = ""
-	var/ban_appeal = pick("your grave", "WAKE UP WAKE UP WAKE UP")
+	var/ban_appeal = pick("your grave", "WAKE UP WAKE UP WAKE UP", "cry a river", "bed and wake up")
 	message = pick_list_replacements("maniac.json", "dreamer_ban")
 	to_chat(target, span_boldannounce("<BIG>You have been banned by [fakemin] from the server.\nReason: [message]</BIG>"))
 	to_chat(target, span_boldannounce("This is a permanent ban. The round ID is [GLOB.rogue_round_id]."))
-	to_chat(target, span_boldannounce("To appeal this ban go to <span style='color: #0099cc;'>[ban_appeal].</span>"))
+	to_chat(target, span_boldannounce("To appeal this ban go to <span style='color: #0000EE;'>[ban_appeal].</span>"))
 	to_chat(target, "<div class='connectionClosed internal'>You are either AFK, experiencing lag or the connection has closed.</div>")
 	SEND_SOUND(target, sound(null))
 
@@ -236,7 +230,7 @@
 	if(prob(0.1)) //has a chance to spawn a mob hallucination, gg to those who get the reference
 		text = pick_list_replacements("maniac.json", "dreamer_blurb_incoming")
 		show_blurb(target, duration = 3 SECONDS, message = text, fade_time = 3 SECONDS, screen_position = "CENTER, BOTTOM+1", text_alignment = "center", text_color = "white", outline_color = "black", speed = 0)
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/handle_maniac_mob_hallucination, target), rand(8 SECONDS, 15 SECONDS))
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(handle_maniac_mob_hallucination), target), rand(8 SECONDS, 15 SECONDS))
 		return
 	text = pick_list_replacements("maniac.json", "dreamer_blurb")
 	show_blurb(target, duration = 3 SECONDS, message = text, fade_time = 3 SECONDS, screen_position = screen_location, text_alignment = text_align, text_color = "white", outline_color = "black")

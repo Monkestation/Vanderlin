@@ -4,7 +4,7 @@
 
 /datum/coven/obfuscate
 	name = "Obfuscate"
-	desc = "Makes you less noticable for living and un-living beings."
+	desc = "Makes you less noticeable for living and un-living beings."
 	icon_state = "obfuscate"
 	power_type = /datum/coven_power/obfuscate
 
@@ -36,7 +36,7 @@
 			continue
 
 		//the corpses are not watching you
-		if (HAS_TRAIT(viewer, TRAIT_BLIND) || viewer.stat >= UNCONSCIOUS)
+		if (viewer.is_blind() || viewer.stat >= UNCONSCIOUS)
 			continue
 
 		to_chat(owner, span_warning("You cannot use [src] while you're being observed!"))
@@ -115,6 +115,7 @@
 
 /datum/coven_power/obfuscate/unseen_presence/activate()
 	. = ..()
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
 	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
 
@@ -122,6 +123,7 @@
 
 /datum/coven_power/obfuscate/unseen_presence/deactivate()
 	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
 	UnregisterSignal(owner, aggressive_signals)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 
@@ -287,6 +289,7 @@
 
 /datum/coven_power/obfuscate/vanish_from_the_minds_eye/activate()
 	. = ..()
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
 	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
 
@@ -300,6 +303,7 @@
 
 /datum/coven_power/obfuscate/vanish_from_the_minds_eye/deactivate()
 	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
 	UnregisterSignal(owner, aggressive_signals)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 
@@ -352,6 +356,7 @@
 	for(var/mob/living/target in oviewers(3, owner))
 		if(target.client && target.stat < UNCONSCIOUS)
 			// Add faction/ally checks here as appropriate
+			ADD_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
 			target.alpha = 10
 			cloaked_mobs += target
 			to_chat(target, span_notice("You feel a supernatural veil fall over you..."))
@@ -366,6 +371,7 @@
 
 	// Restore visibility to all cloaked mobs
 	for(var/mob/living/target in cloaked_mobs)
+		REMOVE_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
 		target.alpha = 255
 		UnregisterSignal(target, aggressive_signals)
 		if(target != owner)

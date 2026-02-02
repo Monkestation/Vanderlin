@@ -75,7 +75,7 @@
 		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
 		if(metal)
 			for(var/datum/material/material as anything in metal.data)
-				if(!istype(material))
+				if(!ispath(material))
 					continue
 				var/tag = "Molten"
 				if(internal_reagents.chem_temp < material.melting_point)

@@ -31,10 +31,22 @@
 	name = "Burned Eye (l)"
 	icon_state = "burneye_l"
 
+/datum/sprite_accessory/detail/brows
+	name = "Thick Eyebrows"
+	icon_state = "brows"
+	color_key_defaults = list(KEY_HAIR_COLOR)
+	use_static = FALSE
+
 /datum/sprite_accessory/detail/brows/dark
 	name = "Dark Eyebrows"
 	icon_state = "darkbrows"
 	color_key_defaults = list(KEY_HAIR_COLOR)
+
+/datum/sprite_accessory/detail/unibrow
+	name = "Unibrow"
+	icon_state = "unibrow"
+	color_key_defaults = list(KEY_HAIR_COLOR)
+	use_static = FALSE
 
 /datum/sprite_accessory/detail/unibrow/dark
 	name = "Dark Unibrow"
@@ -112,15 +124,3 @@
 /datum/sprite_accessory/detail/tattoo_eye_l
 	name = "Tattoo (l Eye)"
 	icon_state = "tattoo_eye_l"
-
-/datum/sprite_accessory/detail/browsz
-	name = "Thick Eyebrows"
-	icon_state = "brows"
-	color_key_defaults = list(KEY_HAIR_COLOR)
-	use_static = FALSE
-
-/datum/sprite_accessory/detail/unibrow
-	name = "Unibrow"
-	icon_state = "unibrow"
-	color_key_defaults = list(KEY_HAIR_COLOR)
-	use_static = FALSE

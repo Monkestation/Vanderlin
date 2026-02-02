@@ -1,0 +1,1 @@
+#define COMSIG_BROODMOTHER_BIOMASS_CHANGE "biomass_change"

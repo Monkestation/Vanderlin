@@ -1,6 +1,7 @@
 /obj/structure/lootable_structure
 	anchored = TRUE
 
+
 	icon = 'icons/obj/structures/lootable_objects.dmi'
 	var/empty_icon_state = ""
 	var/empty = FALSE
@@ -12,10 +13,12 @@
 	var/interacting_text = "starts sifting through"
 	var/interaction_time = 2 SECONDS
 
+	var/component_on_init = TRUE
+
 /obj/structure/lootable_structure/Initialize()
 	. = ..()
 	RegisterSignal(src, COMSIG_LOOT_SPAWNER_EMPTY, PROC_REF(update_loot))
-	if(spawned_table)
+	if(spawned_table && component_on_init)
 		AddComponent(/datum/component/loot_spawner, spawned_table, max_spawns, spawns_per_person, TRUE, interaction_time, interacting_text)
 
 /obj/structure/lootable_structure/proc/update_loot()

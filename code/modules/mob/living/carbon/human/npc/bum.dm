@@ -30,4 +30,4 @@ GLOBAL_LIST_INIT(bum_aggro, world.file2list('strings/rt/bumaggrolines.txt'))
 	job = "Beggar"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/vagrant)
+	equipOutfit(new /datum/outfit/vagrant)

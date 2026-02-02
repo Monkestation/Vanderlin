@@ -23,8 +23,8 @@
 	var/step = 0
 	var/y_step = 0
 	var/turf/spawn_turf = start_turf
-	for(var/datum/outfit/job/hair as anything in subtypesof(/datum/outfit/job))
-		if(is_abstract(hair))
+	for(var/datum/outfit/hair as anything in subtypesof(/datum/outfit))
+		if(IS_ABSTRACT(hair))
 			continue
 		step++
 		if(step > 13)

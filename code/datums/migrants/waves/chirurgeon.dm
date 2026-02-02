@@ -5,11 +5,46 @@
 	there is one truth - your hands are indeed as steady as you claim them to be. Ensure you find an employer that won't stab \
 	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
 	your competition, lest you find yourself dead and floating downstream."
-	outfit = /datum/outfit/job/chirurgeon
-	grant_lit_torch = TRUE
+	migrant_job = /datum/job/migrant/chirurgeon
 
-/datum/outfit/job/chirurgeon/pre_equip(mob/living/carbon/human/H)
-	..()
+/datum/job/migrant/chirurgeon
+	title = "Chirurgeon"
+	tutorial = "You've no acclaim to the tenures you say you have, and the history you recount is shoddy at best, and false at \
+	worst. In a trade that is rife with charlatans, you are arguably a hand-picked example amongst them; but amongst the lies \
+	there is one truth - your hands are indeed as steady as you claim them to be. Ensure you find an employer that won't stab \
+	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
+	your competition, lest you find yourself dead and floating downstream."
+	outfit = /datum/outfit/chirurgeon
+	blacklisted_species = list(SPEC_ID_HALFLING)
+
+	jobstats = list(
+		STATKEY_INT = 3,
+		STATKEY_SPD = 1,
+		STATKEY_STR = -2,
+	)
+
+	skills = list(
+		/datum/skill/combat/knives = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/misc/medicine = 3,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/craft/alchemy = 1,
+	)
+
+	traits = list(
+		TRAIT_EMPATH,
+		TRAIT_DEADNOSE,
+	)
+
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+
+/datum/outfit/chirurgeon
+	name = "Chirurgeon (Migrant Wave)"
 	mask = /obj/item/clothing/face/shepherd/clothmask
 	head = /obj/item/clothing/head/brimmed
 	cloak = /obj/item/clothing/cloak/apron/cook
@@ -24,24 +59,6 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/knife/cleaver
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
-		H.change_stat(STATKEY_INT, 3)
-		H.change_stat(STATKEY_SPD, 1)
-		H.change_stat(STATKEY_STR, -2)
-	ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_DEADNOSE, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/migrant_wave/chirurgeon
 	name = "Chirurgeon"

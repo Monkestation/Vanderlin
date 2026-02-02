@@ -7,7 +7,7 @@
 	icon_state = "woodbucket"
 	item_state = "woodbucket"
 	fill_icon_thresholds = list(0, 50, 100)
-	reagent_flags = TRANSFERABLE | AMOUNT_VISIBLE
+	reagent_flags = OPENCONTAINER
 	max_integrity = 300
 	w_class = WEIGHT_CLASS_BULKY
 	amount_per_transfer_from_this = 10
@@ -80,7 +80,7 @@
 	. = ..()
 	if(!length(recipe_list))
 		for(var/datum/container_craft/recipe as anything in subtypesof(/datum/container_craft/cooking))
-			if(!is_abstract(recipe))
+			if(!IS_ABSTRACT(recipe))
 				recipe_list += recipe
 
 	AddComponent(/datum/component/storage/concrete/grid/food/cooking/pot)
@@ -90,7 +90,6 @@
 /obj/item/reagent_containers/glass/bucket/pot/copper
 	icon_state = "pote_copper"
 	melting_material = /datum/material/copper
-	melt_amount = 80
 
 /obj/item/reagent_containers/glass/bucket/pot/stone
 	icon_state = "pote_stone"

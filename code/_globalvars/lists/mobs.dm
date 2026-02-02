@@ -1,3 +1,4 @@
+GLOBAL_LIST_EMPTY(keys_by_ckey)						//all client ckeys, and their associated keys (keys_by_ckey[ckey] -> key), isn't cleared when the client leaves the game
 GLOBAL_LIST_EMPTY(clients)							//all clients
 GLOBAL_LIST_EMPTY(admins)							//all clients whom are admins
 GLOBAL_PROTECT(admins)
@@ -45,7 +46,7 @@ GLOBAL_LIST_EMPTY(emote_list)
 
 GLOBAL_LIST_INIT(dangerous_turfs, typecacheof(list(
 	/turf/open/lava,
-	/turf/open/transparent,
+	/turf/open/openspace,
 	/turf/open/water/acid,
 	)))
 
@@ -63,8 +64,7 @@ GLOBAL_LIST_INIT(dangerous_turfs, typecacheof(list(
 		update_mob_config_movespeeds()
 
 /proc/update_mob_config_movespeeds()
-	for(var/i in GLOB.mob_list)
-		var/mob/M = i
+	for(var/mob/M as anything in GLOB.mob_list)
 		M.update_config_movespeed()
 
 /proc/init_emote_list()

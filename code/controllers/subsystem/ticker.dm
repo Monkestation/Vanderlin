@@ -2,8 +2,7 @@
 #define SS_TICKER_TRAIT "SS_Ticker"
 
 /proc/low_memory_force_start()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		player.ready = PLAYER_READY_TO_PLAY
 
 	SSticker.start_immediately = TRUE
@@ -46,9 +45,6 @@ SUBSYSTEM_DEF(ticker)
 	//376000 day
 	var/gametime_offset = 288001		//Deciseconds to add to world.time for station time.
 	var/station_time_rate_multiplier = 40		//factor of station time progressal vs real time.
-	var/time_until_vote = 135 MINUTES
-	var/last_vote_time = null
-	var/firstvote = TRUE
 
 	var/totalPlayers = 0					//used for pregame stats on statpanel
 	var/totalPlayersReady = 0				//used for pregame stats on statpanel
@@ -85,7 +81,6 @@ SUBSYSTEM_DEF(ticker)
 	var/end_party = FALSE
 	var/last_lobby = 0
 	var/reboot_anyway
-	var/round_end = FALSE
 
 	var/next_lord_check = 0
 	var/missing_lord_time = 0
@@ -103,7 +98,10 @@ SUBSYSTEM_DEF(ticker)
 		"I'm going to lose my mind if we don't get a Ruler readied up.",
 		"No. The game will not start because there is no Ruler.",
 		"What's the point of Vanderlin without a Ruler?"
-		)
+	)
+
+	/// ID of round reboot timer, if it exists
+	var/reboot_timer = null
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()
@@ -190,11 +188,11 @@ SUBSYSTEM_DEF(ticker)
 				timeLeft = max(0,start_at - world.time)
 			totalPlayers = LAZYLEN(GLOB.new_player_list)
 			totalPlayersReady = 0
-			for(var/i in GLOB.new_player_list)
-				var/mob/dead/new_player/player = i
+			for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 				if(player.ready == PLAYER_READY_TO_PLAY)
 					++totalPlayersReady
 
+			readying_update_scale_job()
 			if(start_immediately)
 				timeLeft = 0
 
@@ -244,15 +242,48 @@ SUBSYSTEM_DEF(ticker)
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
 			if(SSgamemode.roundvoteend)
 				return
-			if(firstvote)
-				if(world.time > round_start_time + time_until_vote)
-					SSvote.initiate_vote("endround", "The Gods")
-					time_until_vote = 40 MINUTES
-					last_vote_time = world.time
-					firstvote = FALSE
-				return
-			if(world.time > last_vote_time + time_until_vote)
-				SSvote.initiate_vote("endround", "The Gods")
+
+/datum/controller/subsystem/ticker/proc/readying_update_scale_job()
+
+	//Get ALL town jobs
+	var/list/town_jobs = list()
+	for(var/datum/job/J as anything in SSjob.joinable_occupations)
+		if (J.faction == FACTION_TOWN)
+			town_jobs += J.title
+
+	//Now find players who readied with HIGH preference on those town jobs
+	var/list/town_ready = list()
+
+	for(var/mob/dead/new_player/player in GLOB.player_list)
+		if(!player || !player.client)
+			continue
+
+		if(player.ready != PLAYER_READY_TO_PLAY)
+			continue
+
+		//Loop through each job the player has set to HIGH
+		for(var/job_name in player.client.prefs.job_preferences)
+			if(player.client.prefs.job_preferences[job_name] != JP_HIGH)
+				continue
+
+			//Only count if it is a town job
+			if(!(job_name in town_jobs))
+				continue
+
+			//Check job availability rules
+			if(player.client.prefs.lastclass == job_name)
+				if (player.IsJobUnavailable(job_name) != JOB_AVAILABLE)
+					continue
+
+			//Add to the list
+			town_ready += job_name
+
+	var/ready_town_count = length(town_ready)
+
+	for(var/datum/job/job_to_set in SSjob.joinable_occupations)
+		if(job_to_set.enabled && job_to_set.scales)
+			job_to_set.set_spawn_and_total_positions(ready_town_count)
+
 
 /datum/controller/subsystem/ticker/proc/checkreqroles()
 	var/list/readied_jobs = list()
@@ -274,9 +305,10 @@ SUBSYSTEM_DEF(ticker)
 							continue
 					readied_jobs.Add(V)
 
-	if(!(("Monarch" in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
-		to_chat(world, span_purple("[pick(no_ruler_lines)]"))
-		return FALSE
+	if(CONFIG_GET(flag/ruler_required))
+		if(!(("Monarch" in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
+			to_chat(world, span_purple("[pick(no_ruler_lines)]"))
+			return FALSE
 
 	job_change_locked = TRUE
 	return TRUE
@@ -331,7 +363,7 @@ SUBSYSTEM_DEF(ticker)
 	SEND_SIGNAL(src, COMSIG_TICKER_ROUND_STARTING, world.time)
 	round_start_irl = REALTIMEOFDAY
 
-	INVOKE_ASYNC(SSdbcore, /datum/controller/subsystem/dbcore/proc/SetRoundStart)
+	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore, SetRoundStart))
 
 	message_admins(span_boldnotice("Welcome to [SSmapping.config.map_name]!"))
 
@@ -378,13 +410,12 @@ SUBSYSTEM_DEF(ticker)
 	job_change_locked = FALSE
 
 	SStriumphs.fire_on_PostSetup()
-	for(var/i in GLOB.start_landmarks_list)
-		var/obj/effect/landmark/start/S = i
+	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
 		if(istype(S))							//we can not runtime here. not in this important of a proc.
 			S.after_round_start()
 		else
 			stack_trace("[S] [S.type] found in start landmarks list, which isn't a start landmark!")
-
+	SSgamemode.refresh_alive_stats(first_post_roundstart_check = TRUE)
 
 //These callbacks will fire after roundstart key transfer
 /datum/controller/subsystem/ticker/proc/OnRoundstart(datum/callback/cb)
@@ -407,16 +438,13 @@ SUBSYSTEM_DEF(ticker)
 			GLOB.joined_player_list += player.ckey
 			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
 			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
-				player.new_player_panel()
 				continue
 			player.create_character(destination)
-		else
-			player.new_player_panel()
+
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/P = i
+	for(var/mob/dead/new_player/P as anything in GLOB.new_player_list)
 		if(P.new_character && P.new_character.mind)
 			SSticker.minds += P.new_character.mind
 		CHECK_TICK
@@ -437,8 +465,7 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		var/mob/living = player.transfer_character()
 		if(living)
 			qdel(player)
@@ -605,23 +632,10 @@ SUBSYSTEM_DEF(ticker)
 
 	var/skip_delay = check_rights()
 	if(delay_end && !skip_delay)
-		to_chat(world, span_boldannounce("A game master has delayed the round end."))
+		to_chat(world, span_boldannounce("An admin has delayed the round end."))
 		return
 
-	SStriumphs.end_triumph_saving_time()
 	to_chat(world, span_boldannounce("Rebooting World in [DisplayTimeText(delay)]. [reason]"))
-
-	round_end = TRUE
-	var/start_wait = world.time
-	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2))	//don't wait forever
-	sleep(delay - (world.time - start_wait))
-
-	if(delay_end && !skip_delay)
-		to_chat(world, span_boldannounce("Reboot was cancelled by an admin."))
-		round_end = FALSE
-		return
-	if(end_string)
-		end_state = end_string
 
 	var/statspage = CONFIG_GET(string/roundstatsurl)
 	var/gamelogloc = CONFIG_GET(string/gamelogurl)
@@ -630,13 +644,34 @@ SUBSYSTEM_DEF(ticker)
 	else if(gamelogloc)
 		to_chat(world, span_info("Round logs can be located <a href=\"[gamelogloc]\">at this website!</a>"))
 
-	log_game("Rebooting World. [reason]")
+	var/start_wait = world.time
+	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2)) //don't wait forever
+	reboot_timer = addtimer(CALLBACK(src, PROC_REF(reboot_callback), reason, end_string), delay - (world.time - start_wait), TIMER_STOPPABLE)
 
-	if(end_party)
-		to_chat(world, span_boldannounce("It's over!"))
-		world.Del()
-	else
-		world.Reboot()
+/datum/controller/subsystem/ticker/proc/reboot_callback(reason, end_string)
+	if(end_string)
+		end_state = end_string
+
+	SStriumphs.end_triumph_saving_time()
+
+	log_game(span_boldannounce("Rebooting World. [reason]"))
+
+	world.Reboot()
+
+/**
+ * Deletes the current reboot timer and nulls the var
+ *
+ * Arguments:
+ * * user - the user that cancelled the reboot, may be null
+ */
+/datum/controller/subsystem/ticker/proc/cancel_reboot(mob/user)
+	if(!reboot_timer)
+		to_chat(user, span_warning("There is no pending reboot!"))
+		return FALSE
+	to_chat(world, span_boldannounce("An admin has delayed the round end."))
+	deltimer(reboot_timer)
+	reboot_timer = null
+	return TRUE
 
 /datum/controller/subsystem/ticker/Shutdown()
 	save_admin_data()

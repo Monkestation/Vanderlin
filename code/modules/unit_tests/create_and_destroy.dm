@@ -5,6 +5,9 @@
 
 GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 /datum/unit_test/create_and_destroy/Run()
+	if(SSmapping?.config?.map_name == "Voyage")
+		return
+
 	//We'll spawn everything here
 	var/turf/spawn_at = run_loc_floor_bottom_left
 

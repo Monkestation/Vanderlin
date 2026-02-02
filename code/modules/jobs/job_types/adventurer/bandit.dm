@@ -6,16 +6,13 @@
 	department_flag = OUTSIDERS
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS)
 	display_order = JDO_BANDIT
-	faction = FACTION_TOWN
+	faction = FACTION_NEUTRAL
 	total_positions = 6
 	spawn_positions = 4
-	min_pq = 4
 	antag_job = TRUE
 
-	outfit = null
-	outfit_female = null
-
 	advclass_cat_rolls = list(CTAG_BANDIT = 20)
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	is_foreigner = TRUE
 	job_reopens_slots_on_death = FALSE //no endless stream of bandits, unless the migration waves deem it so
@@ -24,11 +21,15 @@
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'
 
-/datum/job/bandit/after_spawn(mob/living/spawned, client/player_client)
-	..()
-	var/mob/living/carbon/human/H = spawned
-	var/datum/antagonist/new_antag = new /datum/antagonist/bandit()
-	H.mind.add_antag_datum(new_antag)
-	if(!H.mind)
-		return
-	H.ambushable = FALSE
+	traits = list(TRAIT_NOAMBUSH)
+
+	antag_role = /datum/antagonist/bandit
+
+	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 900
+	)
+/datum/job/advclass/bandit
+	exp_types_granted = list(EXP_TYPE_COMBAT)
+	spawn_with_torch = TRUE

@@ -61,14 +61,19 @@
 	if(QDELETED(holder))
 		clean_up(TRUE)
 		return
-	if(!refresh_skill || !holder.has_skill(refresh_skill))
+	if(refresh_count != -1 && refresh_count <= 0)
 		clean_up(TRUE)
 		return
-	if(skill_threshold && (!holder.get_skill_level(refresh_skill) > skill_threshold))
+	if(refresh_skill && !holder.has_skill(refresh_skill))
+		clean_up(TRUE)
+		return
+	if(skill_threshold && holder.get_skill_level(refresh_skill) < skill_threshold)
 		clean_up(TRUE)
 		return
 
-	to_chat(holder, span_nicegreen("A faint glow eminates from \the [parent], its enchantment is renewed!"))
+	refresh_count--
+
+	to_chat(holder, span_nicegreen("A faint glow emanates from \the [parent], its enchantment is renewed!"))
 
 	decay_timer = addtimer(CALLBACK(src, PROC_REF(try_decay)), duration, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_OVERRIDE)
 

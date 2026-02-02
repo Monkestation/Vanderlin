@@ -29,6 +29,8 @@
 /datum/ai_behavior/minotaur_melee_attack/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/minotaur/boss = controller.pawn
+	if(!boss || boss.stat != CONSCIOUS)
+		return
 	if(!istype(boss))
 		finish_action(controller, FALSE)
 		return

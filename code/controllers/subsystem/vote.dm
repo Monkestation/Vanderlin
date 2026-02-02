@@ -149,7 +149,38 @@ SUBSYSTEM_DEF(vote)
 					return
 				if(. == "Continue Playing")
 					log_game("LOG VOTE: CONTINUE PLAYING AT [REALTIMEOFDAY]")
-					GLOB.round_timer = GLOB.round_timer + (32 MINUTES)
+					//Get total vote power and continue vote power
+					var/continue_power = choices["Continue Playing"]
+					var/end_power = choices["End Round"]
+					var/total_power = continue_power + end_power
+
+					//Safety check: avoid divide by zero
+					if(total_power <= 0)
+						total_power = 1
+
+					//Calculate ratio ONLY from actual voters
+					var/ratio = continue_power / total_power
+
+					//Define min and max extension
+					var/min_time = 15 MINUTES
+					var/max_time = 30 MINUTES
+
+					//Linear scaling
+					//If ratio is 0.5 (bare minimum win), give min_time.
+					//If ratio is 0.9 or higher, give max_time.
+					//Otherwise interpolate.
+					var/clamped_ratio = ratio
+					if(clamped_ratio < 0.5)
+						clamped_ratio = 0.5
+					if(clamped_ratio > 0.9)
+						clamped_ratio = 0.9
+
+					var/scale = (clamped_ratio - 0.5) / (0.9 - 0.5)
+					var/extra_time = min_time + round((max_time - min_time) * scale)
+
+					//Apply time
+					log_game("LOG VOTE: CONTINUE PLAYING AT [REALTIMEOFDAY] WITH RATIO=[ratio], EXTRA=[extra_time]")
+					GLOB.round_timer += extra_time
 				else
 					log_game("LOG VOTE: ELSE  [REALTIMEOFDAY]")
 					log_game("LOG VOTE: ROUNDVOTEEND [REALTIMEOFDAY]")
@@ -188,8 +219,8 @@ SUBSYSTEM_DEF(vote)
 					if(H.stat != DEAD)
 						vote_power += 3
 					if(H.job)
-						var/list/list_of_powerful = list("Monarch", "Consort", "Priest", "Steward", "Hand")
-						if(H.job in list_of_powerful)
+						var/list/list_of_powerful = list(/datum/job/lord, /datum/job/consort, /datum/job/advclass/consort, /datum/job/priest, /datum/job/steward, /datum/job/hand, /datum/job/advclass/hand)
+						if(H.mind?.assigned_role && is_type_in_list(H.mind.assigned_role, list_of_powerful))
 							vote_power += 5
 						else
 							if(H.mind)

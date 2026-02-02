@@ -8,6 +8,7 @@
 	min_players = 35
 
 	tags = list(
+		TAG_EORA,
 		TAG_BOON,
 	)
 
@@ -69,13 +70,15 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/adopt_orphan/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/adopt_orphan/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
 	chosen_one.add_spell(/datum/action/cooldown/spell/adopt_child)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE EORA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Eora weeps for the orphaned children! Find an orphan and adopt them as your own child to earn her favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE EORA'S CHOSEN!"),
+		span_notice("Eora weeps for the orphaned children! Find an orphan and adopt them as your own child to earn her favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/vo/female/gen/giggle (1).ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

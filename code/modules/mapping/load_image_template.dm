@@ -108,24 +108,24 @@
 	//instanciate the first /turf
 	var/turf/T
 	if(members[first_turf_index] != /turf/template_noop)
-		var/obj/effect/returned = instance_atom_image(members[first_turf_index],members_attributes[first_turf_index],crds,no_changeturf,placeOnTop, offset_x, offset_y)
-		returned.pixel_y = returned.base_pixel_y + offset_y
-		returned.pixel_x = returned.base_pixel_x + offset_x
+		var/mutable_appearance/returned = instance_atom_image(members[first_turf_index],members_attributes[first_turf_index],crds,no_changeturf,placeOnTop, offset_x, offset_y)
+		returned.pixel_y += offset_y
+		returned.pixel_x += offset_x
 		overlay.add_overlay(returned)
 
 	if(T)
 		//if others /turf are presents, simulates the underlays piling effect
 		index = first_turf_index + 1
 		while(index <= members.len - 1) // Last item is an /area
-			var/obj/effect/returned = instance_atom_image(members[index],members_attributes[index],crds,no_changeturf,placeOnTop)
-			returned.pixel_y = returned.base_pixel_y + offset_y
-			returned.pixel_x = returned.base_pixel_x + offset_x
+			var/mutable_appearance/returned = instance_atom_image(members[index],members_attributes[index],crds,no_changeturf,placeOnTop)
+			returned.pixel_y += offset_y
+			returned.pixel_x += offset_x
 			overlay.add_overlay(returned)
 			index++
 
 	//finally instance all remainings objects/mobs
 	for(index in 1 to first_turf_index-1)
-		var/obj/effect/returned = instance_atom_image(members[index],members_attributes[index],crds,no_changeturf,placeOnTop)
+		var/mutable_appearance/returned = instance_atom_image(members[index],members_attributes[index],crds,no_changeturf,placeOnTop)
 		returned.pixel_y += offset_y
 		returned.pixel_x += offset_x
 		overlay.add_overlay(returned)
@@ -140,28 +140,43 @@
 	if(ispath(path, /turf))
 		if(placeOnTop)
 			var/mutable_appearance/MA = mutable_appearance(initial(path.icon), initial(path.icon_state), layer = TURF_LAYER, plane = ABOVE_LIGHTING_PLANE)
+
+			var/initial_flags = initial(path.smoothing_flags)
+			if(initial_flags & USES_BITMASK_SMOOTHING)
+				MA.icon_state = "[initial(path.icon_state)]-0"
+
 			if("pixel_x" in attributes)
 				MA.pixel_x = attributes["pixel_x"]
 			if("pixel_y" in attributes)
-				MA.pixel_x = attributes["pixel_y"]
+				MA.pixel_y = attributes["pixel_y"]
 			if("dir" in attributes)
 				MA.dir = attributes["dir"]
 			. = MA
 		else if(!no_changeturf)
 			var/mutable_appearance/MA = mutable_appearance(initial(path.icon), initial(path.icon_state), layer = TURF_LAYER + 0.5, plane = ABOVE_LIGHTING_PLANE)
+
+			var/initial_flags = initial(path.smoothing_flags)
+			if(initial_flags & USES_BITMASK_SMOOTHING)
+				MA.icon_state = "[initial(path.icon_state)]-0"
+
 			if("pixel_x" in attributes)
 				MA.pixel_x = attributes["pixel_x"]
 			if("pixel_y" in attributes)
-				MA.pixel_x = attributes["pixel_y"]
+				MA.pixel_y = attributes["pixel_y"]
 			if("dir" in attributes)
 				MA.dir = attributes["dir"]
 			. = MA
 		else
 			var/mutable_appearance/MA = mutable_appearance(initial(path.icon), initial(path.icon_state), layer = TURF_LAYER + 0.5, plane = ABOVE_LIGHTING_PLANE)
+
+			var/initial_flags = initial(path.smoothing_flags)
+			if(initial_flags & USES_BITMASK_SMOOTHING)
+				MA.icon_state = "[initial(path.icon_state)]-0"
+
 			if("pixel_x" in attributes)
 				MA.pixel_x = attributes["pixel_x"]
 			if("pixel_y" in attributes)
-				MA.pixel_x = attributes["pixel_y"]
+				MA.pixel_y = attributes["pixel_y"]
 			if("dir" in attributes)
 				MA.dir = attributes["dir"]
 			. = MA
@@ -170,7 +185,7 @@
 		if("pixel_x" in attributes)
 			MA.pixel_x = attributes["pixel_x"]
 		if("pixel_y" in attributes)
-			MA.pixel_x = attributes["pixel_y"]
+			MA.pixel_y = attributes["pixel_y"]
 		if("dir" in attributes)
 			MA.dir = attributes["dir"]
 		. = MA

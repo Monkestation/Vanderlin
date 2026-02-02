@@ -17,7 +17,7 @@
 /atom/movable/screen/alert/status_effect/buff/playing_music
 	name = "Playing Music"
 	desc = "Let the world hear my craft."
-	icon_state = "buff"
+	icon_state = "play_music"
 
 /datum/status_effect/buff/playing_music
 	id = "play_music"
@@ -25,6 +25,7 @@
 	var/effect_color
 	var/datum/stress_event/stress_to_apply
 	tick_interval = 10
+	duration = 5 SECONDS
 
 /datum/status_effect/buff/playing_music/on_creation(mob/living/new_owner, stress, colour)
 	stress_to_apply = stress
@@ -39,7 +40,20 @@
 			continue
 		if(!H.can_hear())
 			continue
-		if (!H.has_stress_type(stress_to_apply))
-			H.add_stress(stress_to_apply)
-			if (prob(50))
-				to_chat(H, stress_to_apply.desc)
+		H.add_stress(stress_to_apply)
+
+/obj/effect/temp_visual/songs
+	name = "songs"
+	icon = 'icons/mob/actions/bardsong_anims.dmi'
+	duration = 15
+	plane = GAME_PLANE_UPPER
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/effect/temp_visual/songs/Initialize(mapload)
+	. = ..()
+	alpha = 140
+	pixel_x = rand(-18, 18)
+	pixel_y = rand(-16, 0)
+	var/matrix/m = matrix()
+	m.Scale(0.75, 0.75)
+	transform = m

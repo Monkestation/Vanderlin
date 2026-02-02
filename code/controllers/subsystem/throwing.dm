@@ -143,7 +143,8 @@ SUBSYSTEM_DEF(throwing)
 			if(ismob(obstacle) && thrownthing.pass_flags & PASSMOB && (obstacle != actual_target))
 				continue
 			if(obstacle.pass_flags_self & LETPASSTHROW)
-				continue
+				if(!(ismob(thrownthing) || ismobholder(thrownthing)) || !(obstacle.pass_flags_self & NOTLETPASSTHROWNMOB))
+					continue
 			if (obstacle == actual_target || (obstacle.density && !(obstacle.flags_1 & ON_BORDER_1) && !(obstacle in AM.buckled_mobs)))
 				finalize(TRUE, obstacle)
 				return
@@ -155,7 +156,7 @@ SUBSYSTEM_DEF(throwing)
 	//calculate how many tiles to move, making up for any missed ticks.
 	var/tilestomove = CEILING(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
 	while (tilestomove-- > 0)
-		if ((dist_travelled >= maxrange || AM.loc == target_turf) && AM.has_gravity(AM.loc))
+		if ((dist_travelled >= maxrange || AM.loc == target_turf))
 			finalize()
 			return
 
@@ -206,11 +207,6 @@ SUBSYSTEM_DEF(throwing)
 			thrownthing.throw_impact(get_turf(thrownthing), src)  // we haven't hit something yet and we still must, let's hit the ground.
 			if(QDELETED(thrownthing)) //throw_impact can delete things, such as glasses smashing
 				return //deletion should already be handled by on_thrownthing_qdel()
-			thrownthing.newtonian_move(init_dir)
-	else
-		if(QDELETED(thrownthing)) //throw_impact can delete things, such as glasses smashing
-			return //deletion should already be handled by on_thrownthing_qdel()
-		thrownthing.newtonian_move(init_dir)
 
 	if(target)
 		thrownthing.throw_impact(target, src)
@@ -222,7 +218,7 @@ SUBSYSTEM_DEF(throwing)
 
 	if(!(thrownthing.atom_flags & Z_FALLING)) // I don't think you can zfall while thrown but hey, just in case.
 		var/turf/T = get_turf(thrownthing)
-		if(T && thrownthing.has_gravity(T))
+		if(T)
 			T.zFall(thrownthing)
 
 	if(thrownthing)

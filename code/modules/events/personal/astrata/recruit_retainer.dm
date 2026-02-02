@@ -7,6 +7,10 @@
 	max_occurrences = 1
 	min_players = 35
 
+	tags = list(
+		TAG_ASTRATA,
+	)
+
 /datum/round_event_control/retainer_recruitment/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
 	if(!.)
@@ -51,9 +55,8 @@
 		return
 
 	var/mob/living/carbon/human/noble = pick(valid_targets)
-	noble.add_spell(/datum/action/cooldown/spell/undirected/list_target/convert_role/retainer, source = src)
 
-	var/datum/objective/retainer/new_objective = new(owner = noble.mind)
+	var/datum/objective/personal/retainer/new_objective = new(owner = noble.mind)
 	noble.mind.add_personal_objective(new_objective)
 
 	to_chat(noble, span_userdanger("YOU ARE ASTRATA'S CHOSEN!"))

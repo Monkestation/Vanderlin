@@ -1,7 +1,7 @@
-#define VAMPCOST_ONE 10000
-#define VAMPCOST_TWO 12000
-#define VAMPCOST_THREE 15000
-#define VAMPCOST_FOUR 20000
+#define VAMPCOST_ONE 5000
+#define VAMPCOST_TWO 6000
+#define VAMPCOST_THREE 7500
+#define VAMPCOST_FOUR 10000
 
 /obj/structure/vampire/bloodpool
 	name = "Crimson Crucible"
@@ -225,7 +225,7 @@
 		contributors += user
 
 	to_chat(user, span_greentext("Contributed [contribution] vitae to [display_name]. ([paid_amount]/[total_cost])"))
-	make_tracker_effects(user.loc, src, 1, "soul", 3, /obj/effect/tracker/drain, 1)
+	make_tracker_effects(user.loc, bloodpool, 1, "soul", 3, /obj/effect/tracker/drain, 1)
 
 	if(paid_amount >= total_cost)
 		bloodpool.complete_project(type)
@@ -332,11 +332,13 @@
 			to_chat(user, span_danger("I AM ANCIENT, I AM THE LAND. EVEN THE SUN BOWS TO ME."))
 			lord.ascended = TRUE
 			var/list/all_subordinates = user.clan_position.get_all_subordinates()
-			for(var/mob/living/carbon/human/subordinate_body  in all_subordinates)
+			for(var/datum/clan_hierarchy_node/node as anything in all_subordinates)
+				var/mob/living/carbon/human/subordinate_body = node.assigned_member
+				if(!subordinate_body)
+					continue
 				subordinate_body.maxbloodpool += 1000
 				for(var/S in MOBSTATS)
 					subordinate_body.change_stat(S, 2)
-
 			bloodpool.available_project_types -= /datum/vampire_project/power_growth_4
 			break
 /datum/vampire_project/amulet_crafting

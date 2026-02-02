@@ -37,6 +37,11 @@
 	base_icon_state = "closetlord"
 	icon_state = "closetlord"
 
+/obj/structure/closet/crate/crafted_closet/atarms
+	lock = /datum/lock/key/atarms
+	base_icon_state = "closetdark"
+	icon_state = "closetdark"
+
 /obj/structure/closet/crate/crafted_closet/steward
 	lock = /datum/lock/key/steward
 	base_icon_state = "closetdark"

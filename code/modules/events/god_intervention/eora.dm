@@ -6,7 +6,12 @@
 	earliest_start = 15 MINUTES
 	max_occurrences = 1
 	min_players = 30
-	allowed_storytellers = list(/datum/storyteller/eora)
+	dedicated_storytellers = list(/datum/storyteller/eora)
+	allowed_storytellers = DIVINE_STORYTELLERS
+
+	tags = list(
+		TAG_EORA,
+	)
 
 /datum/round_event/eora_matchmaking/start()
 	var/list/eligible_males = list()
@@ -68,13 +73,24 @@
 		var/mob/living/carbon/human/male = pair[1]
 		var/mob/living/carbon/human/female = pair[2]
 
-		male.add_stress(/datum/stress_event/eora_matchmaking)
-		female.add_stress(/datum/stress_event/eora_matchmaking)
-
-		to_chat(male, span_rose("Eora's voice whispers in your heart - you feel an irresistible urge to finally get married..."))
-		to_chat(male, span_rose("You can choose anyone you fancy to fulfill this desire, but the name of [span_notice("[female.real_name]")], the [female.job] seems to get your heart racing for some reason..."))
+		bordered_message(male, list(
+			span_userdanger("YOU ARE EORA'S LOVEBIRD!"),
+			span_rose("Eora's voice whispers in your heart - you feel an irresistible urge to finally get married..."),
+			span_rose("You can choose anyone you fancy to fulfill this desire, but the name of [span_notice("[female.real_name]")], the [female.job] seems to get your heart racing for some reason..."),
+		))
 		male.playsound_local(male, 'sound/vo/female/gen/giggle (1).ogg', 100)
 
-		to_chat(female, span_rose("Eora's voice whispers in your heart - you feel an irresistible urge to finally get married..."))
-		to_chat(female, span_rose("You can choose anyone you fancy to fulfill this desire, but the name of [span_notice("[male.real_name]")], the [male.job] seems to get your heart racing for some reason..."))
+		var/datum/objective/personal/marry/male_marry_objective = new(owner = male.mind, lovebird_name = female.real_name, lovebird_job = female.job)
+		male.mind.add_personal_objective(male_marry_objective)
+		male.mind.announce_personal_objectives()
+
+		bordered_message(female, list(
+			span_userdanger("YOU ARE EORA'S LOVEBIRD!"),
+			span_rose("Eora's voice whispers in your heart - you feel an irresistible urge to finally get married..."),
+			span_rose("You can choose anyone you fancy to fulfill this desire, but the name of [span_notice("[male.real_name]")], the [male.job] seems to get your heart racing for some reason..."),
+		))
 		female.playsound_local(female, 'sound/vo/female/gen/giggle (1).ogg', 100)
+
+		var/datum/objective/personal/marry/female_marry_objective = new(owner = female.mind, lovebird_name = male.real_name, lovebird_job = male.job)
+		female.mind.add_personal_objective(female_marry_objective)
+		female.mind.announce_personal_objectives()

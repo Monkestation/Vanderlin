@@ -218,7 +218,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		var/mob/M = loc
 		M.update_inv_mouth()
 		M.update_inv_hands()
-		playsound(loc, 'sound/items/light_cig.ogg', 100, TRUE)
+		playsound(src, 'sound/items/light_cig.ogg', 100, TRUE)
 
 /obj/item/clothing/face/cigarette/extinguish()
 	if(!lit)
@@ -354,6 +354,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throwforce = 0
 	slot_flags = ITEM_SLOT_MOUTH
 	spitoutmouth = TRUE
+	resistance_flags = FLAMMABLE
 
 /obj/item/cigbutt/Initialize()
 	. = ..()

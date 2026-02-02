@@ -67,8 +67,8 @@
 	var/desc = "Heavy gusts of wind blanket the area, periodically knocking down anyone caught in the open."
 
 	// Sounds to play at different severities - order from lowest to highest
-	var/list/weather_sounds = list()
-	var/list/indoor_weather_sounds = list()
+	var/datum/looping_sound/weather_sounds
+	var/datum/looping_sound/indoor_weather_sounds
 
 	//Scale volume with severity - good for if you only have 1 sound
 	var/scale_vol_with_severity = FALSE
@@ -145,6 +145,7 @@
 		var/datum/looping_sound/looping_sound = currentSounds[M]
 		if(istype(looping_sound))
 			looping_sound.stop()
+			currentSounds -= M
 			qdel(looping_sound)
 	return ..()
 
@@ -206,7 +207,11 @@
 		SSParticleWeather.particleEffect.animateSeverity(severityMod())
 
 		//Wait for the last particle to fade, then qdel yourself
-		addtimer(CALLBACK(src, PROC_REF(end)), SSParticleWeather.particleEffect.lifespan + SSParticleWeather.particleEffect.fade)
+		var/wait_time = (SSParticleWeather.particleEffect.lifespan + SSParticleWeather.particleEffect.fade)
+		if(istype(wait_time, /generator)) // because this can happen
+			var/generator/wait_generator = wait_time
+			wait_time = wait_generator.Rand()
+		addtimer(CALLBACK(src, PROC_REF(end)), (SSParticleWeather.particleEffect.lifespan + SSParticleWeather.particleEffect.fade))
 
 
 
@@ -291,7 +296,7 @@
 		if(!currentSound.loop_started) //don't restart already playing sounds
 			currentSound.start()
 		return
-	var/tempSound = scale_range_pick(minSeverity, maxSeverity, severity, weather_sounds)
+	var/tempSound = weather_sounds
 	if(tempSound)
 		currentSound = new tempSound(L, FALSE, TRUE, CHANNEL_WEATHER)
 		currentSounds[L] = currentSound

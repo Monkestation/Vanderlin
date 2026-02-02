@@ -144,6 +144,11 @@
 	var/bonus_accuracy = 0 //bonus accuracy that cannot be affected by range drop off.
 	///this is basically do we ignore projectile effects?
 	var/dirty = NONE
+	/// If true directly targeted turfs can be hit
+	var/can_hit_turfs = FALSE
+
+	///projectile crit reduce chance since more dmg increases the crit chance it can get absurdly high, 0 for nothing.
+	var/reduce_crit_chance = 0
 
 /obj/projectile/proc/handle_drop()
 	return
@@ -162,7 +167,7 @@
 	fired_from = null
 	STOP_PROCESSING(SSprojectiles, src)
 	cleanup_beam_segments()
-	qdel(trajectory)
+	QDEL_NULL(trajectory)
 	return ..()
 
 /obj/projectile/proc/Range()
@@ -261,7 +266,7 @@
 			var/volume = clamp(vol_by_damage() + 20, 0, 100)
 			if(suppressed)
 				volume = 5
-			playsound(loc, hitsound_wall, volume, TRUE, -1)
+			playsound(src, hitsound_wall, volume, TRUE, -1)
 		return BULLET_ACT_HIT
 
 	var/mob/living/L = target
@@ -328,7 +333,7 @@
 	if(!trajectory && !istype(src, /obj/projectile/orbital))
 		qdel(src)
 		return FALSE
-	if(impacted[A])
+	if(LAZYACCESS(impacted, A))
 		return FALSE
 	var/datum/point/pcache = trajectory.copy_to()
 	var/turf/T = get_turf(A)
@@ -375,7 +380,7 @@
 	if(QDELETED(src) || !T || !target)
 		return
 	// 2.
-	impacted[target] = TRUE		//hash lookup > in for performance in hit-checking
+	LAZYSET(impacted, target, TRUE) //hash lookup > in for performance in hit-checking
 	// 3.
 	var/mode = prehit_pierce(target)
 	if(mode == PROJECTILE_DELETE_WITHOUT_HITTING)
@@ -451,9 +456,9 @@
 //Returns true if the target atom is on our current turf and above the right layer
 //If direct target is true it's the originally clicked target.
 /obj/projectile/proc/can_hit_target(atom/target, direct_target = FALSE, ignore_loc = FALSE)
-	if(QDELETED(target) || impacted[target])
+	if(QDELETED(target) || LAZYACCESS(impacted, target))
 		return FALSE
-	if(!ignore_loc && (loc != target.loc))
+	if(!ignore_loc && (loc != target.loc) && !(can_hit_turfs && direct_target && loc == target))
 		return FALSE
 	// if pass_flags match, pass through entirely
 	if(target.pass_flags_self & pass_flags)		// phasing
@@ -470,7 +475,7 @@
 		return TRUE
 	if(!isliving(target))
 		if(isturf(target))		// non dense turfs
-			return FALSE
+			return can_hit_turfs && direct_target
 		if(target.layer < PROJECTILE_HIT_THRESHHOLD_LAYER)
 			return FALSE
 		else if(!direct_target)		// non dense objects do not get hit unless specifically clicked
@@ -530,7 +535,7 @@
  * Used to not even attempt to Bump() or fail to Cross() anything we already hit.
  */
 /obj/projectile/CanPassThrough(atom/blocker, turf/target, blocker_opinion)
-	return impacted[blocker]? TRUE : ..()
+	return LAZYACCESS(impacted, blocker) ? TRUE : ..()
 
 /**
  * Projectile moved:
@@ -591,9 +596,6 @@
 	var/turf/current = get_turf(src)
 	var/turf/ending = return_predicted_turf_after_moves(moves, forced_angle)
 	return getline(current, ending)
-
-/obj/projectile/Process_Spacemove(movement_dir = 0)
-	return TRUE	//Bullets don't drift in space
 
 /obj/projectile/process()
 	last_process = world.time
@@ -762,7 +764,9 @@
 		else if(T != loc)
 			step_towards(src, T)
 			hitscan_last = loc
-	if(!hitscanning && !forcemoved)
+	if(QDELETED(src))
+		return
+	if(!hitscanning && !forcemoved && trajectory)
 		pixel_x = trajectory.return_px() - trajectory.mpx * trajectory_multiplier * SSprojectiles.global_iterations_per_move
 		pixel_y = trajectory.return_py() - trajectory.mpy * trajectory_multiplier * SSprojectiles.global_iterations_per_move
 		animate(src, pixel_x = trajectory.return_px(), pixel_y = trajectory.return_py(), time = 1, flags = ANIMATION_END_NOW)
@@ -795,8 +799,8 @@
 	var/turf/targloc = get_turf(target)
 	if(targloc && curloc)
 		if(targloc.z > curloc.z)
-			var/turf/above = get_step_multiz(curloc, UP)
-			if(istype(above, /turf/open/transparent/openspace))
+			var/turf/above = GET_TURF_ABOVE(curloc)
+			if(istype(above, /turf/open/openspace))
 				curloc = above
 	trajectory_ignore_forcemove = TRUE
 	forceMove(get_turf(source))

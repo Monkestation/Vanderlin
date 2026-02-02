@@ -4,7 +4,7 @@
 /datum/action/cooldown/spell/avert
 	name = "Borrowed Time"
 	desc = "Shield someone from the Undermaiden's gaze, preventing them from slipping into death for as long as your faith and fatigue may muster."
-	button_icon_state = "necra"
+	button_icon_state = "borrowtime"
 	sound = 'sound/magic/churn.ogg'
 	charge_sound = 'sound/magic/holycharging.ogg'
 	has_visual_effects = FALSE
@@ -18,6 +18,7 @@
 	invocation = "Undermaiden avert your gaze!"
 	invocation_type = INVOCATION_SHOUT
 
+	self_cast_possible = FALSE
 	charge_required = FALSE
 	cooldown_time = 3 MINUTES
 

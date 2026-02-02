@@ -7,7 +7,7 @@
 
 /datum/reagent/molten_metal/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
 	. = ..()
-	if(method == INGEST)
+	if(method & INGEST)
 		for(var/datum/material_trait/trait as anything in initial(largest_metal.traits))
 			var/datum/material_trait/new_trait = GLOB.material_traits[trait]
 			new_trait.on_consume(M, reac_volume)
@@ -21,10 +21,18 @@
 		new_trait.on_life(M)
 
 /datum/reagent/molten_metal/on_new(list/incoming_data)
+	. = ..()
 	if(!length(incoming_data))
 		return
-	if(length(data) == 1)
-		var/datum/material/material_type = incoming_data[1]
+
+	var/list/materials = list()
+	for(var/datum/material/material as anything in incoming_data)
+		if(!ispath(material))
+			continue
+		materials |= material
+
+	if(length(materials) == 1)
+		var/datum/material/material_type = materials[1]
 		name = "Molten [initial(material_type.name)]"
 	else
 		name = "Molten Metals"
@@ -40,6 +48,8 @@
 	name = "Molten Metals"
 
 	for(var/datum/material/material as anything in incoming_data)
+		if(!ispath(material))
+			continue
 		data |= material
 		data[material] += incoming_data[material]
 

@@ -23,11 +23,11 @@
 #define SLOT_SHIELD "shield"
 
 GLOBAL_LIST_INIT(gem_quality_names, list(
-	GEM_CHIPPED = "Chipped",
-	GEM_FLAWED = "Flawed",
-	GEM_REGULAR = "",
-	GEM_FLAWLESS = "Flawless",
-	GEM_PERFECT = "Perfect"
+	"Chipped", // GEM_CHIPPED
+	"Flawed", // GEM_FLAWED
+	"", // GEM_REGULAR
+	"Flawless", // GEM_FLAWLESS
+	"Perfect" // GEM_PERFECT
 ))
 
 

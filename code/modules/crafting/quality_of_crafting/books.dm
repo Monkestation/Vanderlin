@@ -4,6 +4,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	grid_width = 32
 	grid_height = 64
+	slot_flags = ITEM_SLOT_HIP
 	var/list/types = list()
 	var/open
 	var/can_spawn = TRUE
@@ -12,7 +13,7 @@
 	var/current_recipe = null         // Currently viewed recipe
 	var/search_query = ""             // Current search query
 
-/obj/item/recipe_book/New()
+/obj/item/recipe_book/Initialize(mapload)
 	. = ..()
 	// Populate categories from types with custom categories
 	generate_categories()
@@ -22,10 +23,10 @@
 
 	// Gather categories from recipes themselves
 	for(var/atom/path as anything in types)
-		if(is_abstract(path))
+		if(IS_ABSTRACT(path))
 			// Handle abstract types
 			for(var/atom/sub_path as anything in subtypesof(path))
-				if(is_abstract(sub_path))
+				if(IS_ABSTRACT(sub_path))
 					continue
 
 				var/category = get_recipe_category(sub_path)
@@ -114,6 +115,20 @@
 			temp_recipe = new path()
 			var/datum/plant_def/r = temp_recipe
 			category = r.get_family_name()
+		else if(ispath(path, /datum/surgery))
+			temp_recipe = new path()
+			var/datum/surgery/r = temp_recipe
+			category = r.category
+		else if(ispath(path, /datum/wound))
+			temp_recipe = new path()
+			var/datum/wound/r = temp_recipe
+			category = r.category
+		else if(ispath(path, /datum/chimeric_node))
+			category = "Humors"
+		else if(ispath(path, /datum/chimeric_table))
+			category = "Humor Dossier"
+		else if(ispath(path, /obj/item/reagent_containers/food/snacks/fish))
+			category = "Fish"
 
 		// Clean up our temporary instance
 		if(temp_recipe)
@@ -293,7 +308,7 @@
 
 			<div class="book-content">
 				<div class="sidebar">
-					<!-- Search box (now with live filtering) -->
+					<!-- Search box -->
 					<input type="text" class="search-box" id="searchInput"
 						placeholder="Search recipes..." value="[html_encode(search_query)]">
 
@@ -315,9 +330,9 @@
 
 	// Add recipes based on current category
 	for(var/atom/path as anything in types)
-		if(is_abstract(path))
+		if(IS_ABSTRACT(path))
 			for(var/atom/sub_path as anything in subtypesof(path))
-				if(is_abstract(sub_path))
+				if(IS_ABSTRACT(sub_path))
 					continue
 				if(ispath(sub_path, /datum/container_craft))
 					var/datum/container_craft/craft = sub_path
@@ -326,6 +341,10 @@
 				if(ispath(sub_path, /datum/repeatable_crafting_recipe))
 					var/datum/repeatable_crafting_recipe/craft = sub_path
 					if(initial(craft.hides_from_books))
+						continue
+				if(ispath(sub_path, /datum/wound))
+					var/datum/wound/wound = sub_path
+					if(!initial(wound.show_in_book))
 						continue
 
 				var/recipe_name = initial(sub_path.name)
@@ -343,15 +362,20 @@
 				// Default display style - will be changed by JS if searching
 				var/display_style = should_show ? "" : "display: none;"
 
-				// In the recipe list generation section, modify the recipe link to include essence data:
-				var/essence_data = ""
+				var/search_data = ""
 				if(ispath(sub_path, /datum/natural_precursor))
 					var/datum/natural_precursor/temp = new sub_path()
 					for(var/datum/thaumaturgical_essence/essence_type as anything in temp.essence_yields)
-						essence_data += "[initial(essence_type.name)],"
+						search_data += "[initial(essence_type.name)],"
 					qdel(temp)
 
-				html += "<a class='recipe-link' href='byond://?src=\ref[src];action=view_recipe&recipe=[sub_path]' style='[display_style]' data-essences='[essence_data]'>[recipe_name]</a>"
+				if(ispath(sub_path, /datum/surgery))
+					var/datum/surgery/temp = new sub_path()
+					for(var/datum/surgery_step/step_type as anything in temp.steps)
+						search_data += "[initial(step_type.name)],"
+					qdel(temp)
+
+				html += "<a class='recipe-link' href='byond://?src=\ref[src];action=view_recipe&recipe=[sub_path]' style='[display_style]' data-search='[search_data]'>[recipe_name]</a>"
 		else
 			var/recipe_name = initial(path.name)
 
@@ -405,7 +429,7 @@
 
 					recipeLinks.forEach(function(link) {
 						const recipeName = link.textContent.toLowerCase();
-						const essences = (link.getAttribute('data-essences') || "").toLowerCase();
+						const essences = (link.getAttribute('data-search') || "").toLowerCase();
 
 						// Check if it matches either the recipe name or any of the essences
 						const matchesQuery = query === '' ||
@@ -534,8 +558,31 @@
 		var/datum/plant_def/r = temp_recipe
 		recipe_name = initial(r.name)
 		recipe_html = get_recipe_specific_html(r, user)
-
-
+	else if(ispath(path, /datum/surgery))
+		temp_recipe = new path()
+		var/datum/surgery/r = temp_recipe
+		recipe_name = initial(r.name)
+		recipe_html = get_recipe_specific_html(r, user)
+	else if(ispath(path, /datum/wound))
+		temp_recipe = new path()
+		var/datum/wound/r = temp_recipe
+		recipe_name = initial(r.name)
+		recipe_html = get_recipe_specific_html(r, user)
+	else if(ispath(path, /datum/chimeric_node))
+		temp_recipe = new path()
+		var/datum/chimeric_node/r = temp_recipe
+		recipe_name = initial(r.name)
+		recipe_html = get_recipe_specific_html(r, user)
+	else if(ispath(path, /datum/chimeric_table))
+		temp_recipe = new path()
+		var/datum/chimeric_table/r = temp_recipe
+		recipe_name = initial(r.name)
+		recipe_html = get_recipe_specific_html(r, user)
+	else if(ispath(path, /obj/item/reagent_containers/food/snacks/fish))
+		temp_recipe = new path()
+		var/obj/item/reagent_containers/food/snacks/fish/r = temp_recipe
+		recipe_name = initial(r.name)
+		recipe_html = get_recipe_specific_html(r, user)
 	if(temp_recipe)
 		qdel(temp_recipe)
 
@@ -734,6 +781,7 @@
 		/datum/repeatable_crafting_recipe/saltfish,
 		/datum/repeatable_crafting_recipe/raisins,
 		/datum/orderless_slapcraft/food/pie,
+		/datum/orderless_slapcraft/food/tart.
 	)
 
 /obj/item/recipe_book/survival
@@ -743,6 +791,7 @@
 	base_icon_state = "book5"
 
 	types = list(
+		/obj/item/reagent_containers/food/snacks/fish,
 		/datum/repeatable_crafting_recipe/survival,
 		/datum/repeatable_crafting_recipe/cooking/soap,
 		/datum/repeatable_crafting_recipe/cooking/soap/bath,
@@ -763,7 +812,7 @@
 
 /obj/item/recipe_book/underworld
 	name = "The Smuggler’s Guide: A Treatise on Elixirs of the Guild"
-	desc = "Penned by Thorne Ashveil, Thieves Guild's Alchemist, Second Generation."
+	desc = "Penned by Thorne Ashveil, Thieves' Guild's Alchemist, Second Generation."
 	icon_state ="book4_0"
 	base_icon_state = "book4"
 	can_spawn = FALSE
@@ -898,4 +947,19 @@
 		/datum/repeatable_crafting_recipe/bee_treatment/miticide,
 		/datum/repeatable_crafting_recipe/bee_treatment/insecticide,
 		/datum/blueprint_recipe/carpentry/apiary,
+		/datum/repeatable_crafting_recipe/survival/mushmound,
+	)
+
+/obj/item/recipe_book/medical
+	name = "The Feldsher's Handbook: Field Medicine and Improvised Care"
+	desc = "Compiled by Grim the fickle."
+	icon_state ="book4_0"
+	base_icon_state = "book4"
+
+	types = list(
+		/datum/book_entry/grims_guide,
+		/datum/chimeric_table,
+		/datum/chimeric_node,
+		/datum/wound,
+		/datum/surgery,
 	)

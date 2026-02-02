@@ -19,9 +19,12 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
-/datum/antagonist/vampire/New(incoming_clan = /datum/clan/nosferatu, forced_clan = FALSE)
+
+/datum/antagonist/vampire/New(datum/clan/incoming_clan = /datum/clan/nosferatu, forced_clan = FALSE)
 	. = ..()
 	if(forced_clan)
+		if(!istype(incoming_clan))
+			incoming_clan = new incoming_clan()
 		forced = forced_clan
 		forcing_clan = incoming_clan
 	else
@@ -41,10 +44,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	SSmapping.retainer.vampires |= owner
 	move_to_spawnpoint()
 	owner.special_role = name
+	owner.current.adjust_bloodpool()
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
 		vampdude.adv_hugboxing_cancel()
+		vampdude.hud_used?.shutdown_bloodpool()
+		vampdude.hud_used?.initialize_bloodpool()
+		vampdude.hud_used?.bloodpool.set_fill_color("#510000")
 
 		if(!forced)
 			// Show clan selection interface

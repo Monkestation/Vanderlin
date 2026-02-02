@@ -34,6 +34,7 @@
 	phosphorus_requirement = 35  // Alkaloid production
 	potassium_requirement = 18
 	seed_identity = "atropa seeds"
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
 /datum/plant_def/alchemical/atropa/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	..()
@@ -142,6 +143,7 @@
 	phosphorus_requirement = 35  // Toxic compounds need P
 	potassium_requirement = 15
 	seed_identity = "paris seeds"
+	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
 /datum/plant_def/alchemical/paris/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	..()

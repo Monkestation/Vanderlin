@@ -6,6 +6,10 @@
 	var/icon/cube
 	var/can_melt = TRUE
 
+/datum/status_effect/freon/lasting
+	id = "lasting_frozen"
+	duration = STATUS_EFFECT_PERMANENT
+
 /atom/movable/screen/alert/status_effect/freon
 	name = "Frozen Solid"
 	desc = ""

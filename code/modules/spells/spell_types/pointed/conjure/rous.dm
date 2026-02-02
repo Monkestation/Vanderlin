@@ -15,6 +15,7 @@
 	charge_slowdown = 1.3
 	cooldown_time = 3 MINUTES
 	spell_cost = 30
+	associated_skill = /datum/skill/magic/druidic
 
 	summon_amount = 3
 	summon_type = list(/mob/living/simple_animal/hostile/retaliate/bigrat)

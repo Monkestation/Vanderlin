@@ -6,3 +6,5 @@
 
 	ui_icon = 'icons/roguetown/misc/structure.dmi'
 	ui_icon_state = "chestweird2"
+
+	stockpile_needed = FALSE

@@ -13,7 +13,7 @@
 /mob/living/simple_animal/hostile/retaliate/shade
 	icon = 'icons/roguetown/mob/monster/stonekeep_shade.dmi'
 	name = "shade"
-	desc = "An unquiet spirit of the dead, seeking to drag the living with them. Said to be those who could not pay their Toll to the Undermaiden's carriageman, or cursed servants of the Z-Not-To-Be-Named that are shackled to him even in death."
+	desc = "An unquiet spirit of the dead, seeking to drag the living with them. Said to be those who could not pay their Toll to the Undermaiden's carriageman, or cursed servants of the Z-Not-To-Be-Named that are shackled to her even in death."
 	icon_state = "shade_mob_a"
 	icon_living = "shade_mob_a"
 	icon_dead = null

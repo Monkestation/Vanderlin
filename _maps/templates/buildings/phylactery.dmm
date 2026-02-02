@@ -1,0 +1,28 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/open/floor/herringbone,
+/area)
+"N" = (
+/obj/structure/overlord_phylactery,
+/turf/open/floor/churchbrick,
+/area)
+"R" = (
+/obj/effect/building_node/phylactery_site,
+/turf/open/floor/herringbone,
+/area)
+
+(1,1,1) = {"
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+N
+R
+"}
+(3,1,1) = {"
+a
+a
+a
+"}

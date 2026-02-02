@@ -6,7 +6,7 @@
 	sound_effect = 'sound/combat/crit.ogg'
 	whp = 50
 	sewn_whp = 20
-	bleed_rate = 25
+	bleed_rate = ARTERY_LIMB_BLEEDRATE
 	sewn_bleed_rate = 0.2
 	clotting_threshold = null
 	sewn_clotting_threshold = null

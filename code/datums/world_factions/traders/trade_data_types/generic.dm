@@ -129,8 +129,8 @@
 		/obj/item/gem = list(20, INFINITY, ""),
 	)
 	custom_items = list(
-		/obj/item/reagent_containers/glass/bottle/glazed_teacup = list(5, 10, 6),
-		/obj/item/reagent_containers/glass/bottle/glazed_teapot = list(5, 40, 1),
+		/obj/item/reagent_containers/glass/cup/teacup/fancy = list(5, 10, 6),
+		/obj/item/reagent_containers/glass/carafe/teapot = list(5, 40, 1),
 	)
 	say_phrases = list(
 		ITEM_REJECTED_PHRASE = list(

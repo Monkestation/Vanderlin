@@ -3,11 +3,51 @@
 	greet_text = "Who can take a rainbow, wrap it in a sigh. Soak it in the sun, and make a groovy pie? The Candy Man can. \
 	Sell your product to those who should imbibe - the poor, the downtrodden, the youth. Get them hooked; stay off of your \
 	own supply. You are Baotha's strongest spice-addict."
-	outfit = /datum/outfit/job/sweetshare
-	grant_lit_torch = TRUE
+	migrant_job = /datum/job/migrant/sweetshare
 
-/datum/outfit/job/sweetshare/pre_equip(mob/living/carbon/human/H)
-	..()
+/datum/job/migrant/sweetshare
+	title = "Candyman"
+	tutorial = "Who can take a rainbow, wrap it in a sigh. Soak it in the sun, and make a groovy pie? The Candy Man can. \
+	Sell your product to those who should imbibe - the poor, the downtrodden, the youth. Get them hooked; stay off of your \
+	own supply. You are Baotha's strongest spice-addict."
+	outfit = /datum/outfit/sweetshare
+	allowed_patrons = list(/datum/patron/inhumen/baotha)
+
+	jobstats = list(
+		STATKEY_SPD = 2,
+		STATKEY_END = 2,
+		STATKEY_STR = -2,
+		STATKEY_CON = -1,
+	)
+
+	skills = list(
+		/datum/skill/combat/knives = 1,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/craft/alchemy = 3,
+		/datum/skill/misc/medicine = 2,
+		/datum/skill/misc/climbing = 4,
+	)
+
+	traits = list(TRAIT_STEELHEARTED)
+	cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
+
+/datum/job/migrant/sweetshare/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/prev_real_name = spawned.real_name
+	var/prev_name = spawned.name
+	var/honorary = "Candyman"
+	if(spawned.pronouns == SHE_HER)
+		honorary = "Candywoman"
+	spawned.real_name = "[honorary] [prev_real_name]"
+	spawned.name = "[honorary] [prev_name]"
+
+/datum/outfit/sweetshare
+	name = "Candyman (Migrant Wave)"
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	mask = /obj/item/clothing/face/spectacles/sglasses
 	gloves = /obj/item/clothing/gloves/fingerless
@@ -18,35 +58,11 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/knife/cleaver
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-	backpack_contents = list(/obj/item/reagent_containers/powder/spice = 8, /obj/item/reagent_containers/powder/ozium = 8, /obj/item/reagent_containers/powder/moondust = 8)
-
-	var/prev_real_name = H.real_name
-	var/prev_name = H.name
-	var/honorary = "Candyman"
-	if(H.gender == FEMALE)
-		honorary = "Candywoman"
-	H.real_name = "[honorary] [prev_real_name]"
-	H.name = "[honorary] [prev_name]"
-
-	if(H.mind)
-		if(H.patron != /datum/patron/inhumen/baotha)
-			H.set_patron(/datum/patron/inhumen/baotha)
-
-		H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE) // Not a fighter, enough for self-defense
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 4)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE) // For fleeing
-		H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/alchemy, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.change_stat(STATKEY_SPD, 2)
-		H.change_stat(STATKEY_END, 2)
-		H.change_stat(STATKEY_STR, -2)
-		H.change_stat(STATKEY_CON, -1)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'// Temp, song in the works
+	backpack_contents = list(
+		/obj/item/reagent_containers/powder/spice = 8,
+		/obj/item/reagent_containers/powder/ozium = 8,
+		/obj/item/reagent_containers/powder/moondust = 8,
+	)
 
 /datum/migrant_wave/sweetshare
 	name = "The Candy Man"

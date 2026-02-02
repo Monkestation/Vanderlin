@@ -1,33 +1,35 @@
-/datum/objective/coin_flip
+/datum/objective/personal/coin_flip
 	name = "Flip Coin"
+	category = "Xylix's Chosen"
 	triumph_count = 2
+	rewards = list("2 Triumphs", "Xylix grows stronger", "Xylix blesses you (+1 Fortune)")
 	var/obj/item/coin/required_coin_type = /obj/item/coin/gold
 	var/winning_side
 
-/datum/objective/coin_flip/on_creation()
+/datum/objective/personal/coin_flip/on_creation()
 	. = ..()
 	winning_side = prob(50) ? "heads" : "tails"
 	if(owner?.current)
 		RegisterSignal(owner.current, COMSIG_COIN_FLIPPED, PROC_REF(handle_coin_flip))
 	update_explanation_text()
 
-/datum/objective/coin_flip/Destroy()
+/datum/objective/personal/coin_flip/Destroy()
 	if(owner?.current)
 		UnregisterSignal(owner.current, COMSIG_COIN_FLIPPED)
 	return ..()
 
-/datum/objective/coin_flip/proc/handle_coin_flip(datum/source, mob/user, obj/item/coin/our_coin, outcome)
+/datum/objective/personal/coin_flip/proc/handle_coin_flip(datum/source, mob/user, obj/item/coin/our_coin, outcome)
 	SIGNAL_HANDLER
 
 	if(completed || !owner?.current || !istype(our_coin, required_coin_type))
 		return
 
 	if(outcome == winning_side)
-		complete_objective(TRUE, our_coin)
+		handle_coin_result(TRUE, our_coin)
 	else
-		complete_objective(FALSE, our_coin)
+		handle_coin_result(FALSE, our_coin)
 
-/datum/objective/coin_flip/proc/complete_objective(success, obj/item/coin/our_coin)
+/datum/objective/personal/coin_flip/proc/handle_coin_result(success, obj/item/coin/our_coin)
 	if(completed)
 		return
 
@@ -37,9 +39,7 @@
 
 	if(success)
 		if(prob(50))
-			to_chat(user, span_greentext("The coin landed on the winning side! You won the game and earned Xylix's favor!"))
-			user.adjust_triumphs(triumph_count)
-			adjust_storyteller_influence(XYLIX, 10)
+			complete_objective()
 		else
 			change_rules(our_coin)
 			return
@@ -48,14 +48,20 @@
 		qdel(our_coin)
 		return
 
-	completed = TRUE
-	escalate_objective()
+/datum/objective/personal/coin_flip/complete_objective()
+	. = ..()
+	to_chat(owner.current, span_greentext("The coin landed on the winning side! You won the game and earned Xylix's favor!"))
+	adjust_storyteller_influence(XYLIX, 20)
 	UnregisterSignal(owner.current, COMSIG_COIN_FLIPPED)
 
-/datum/objective/coin_flip/update_explanation_text()
+/datum/objective/personal/coin_flip/reward_owner()
+	. = ..()
+	owner.current.adjust_stat_modifier(STATMOD_XYLIX_BLESSING, STATKEY_LCK, 1)
+
+/datum/objective/personal/coin_flip/update_explanation_text()
 	explanation_text = "Xylix wants to play a game! Simply flip a [initial(required_coin_type.name)] and see if you win! Only Xylix knows the rules! Or do they?"
 
-/datum/objective/coin_flip/proc/change_rules(obj/item/coin/our_coin)
+/datum/objective/personal/coin_flip/proc/change_rules(obj/item/coin/our_coin)
 	var/list/coin_types = list(/obj/item/coin/copper, /obj/item/coin/silver, /obj/item/coin/gold) - required_coin_type
 	var/obj/item/coin/new_coin_type = pick(coin_types)
 

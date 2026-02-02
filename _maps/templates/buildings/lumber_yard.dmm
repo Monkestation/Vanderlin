@@ -1,96 +1,101 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/obj/structure/flora/shroom_tree,
-/obj/structure/soil,
-/obj/effect/workspot,
-/turf/open/floor/dirt,
+/obj/machinery/light/fueled/wallfire/candle/skull,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "k" = (
-/obj/structure/soil,
-/turf/open/floor/dirt,
+/obj/machinery/light/fueled/wallfire/candle/skull{
+	pixel_y = -32
+	},
+/turf/open/floor/herringbone,
 /area/template_noop)
 "n" = (
 /obj/effect/building_node/lumber_yard,
-/turf/open/floor/cobblerock,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "o" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/cobblerock,
+/turf/closed/wall/mineral/underbrick,
 /area/template_noop)
 "r" = (
-/turf/open/floor/blocks,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "u" = (
-/turf/open/floor/cobblerock,
+/obj/structure/table/wood/treestump/shroomstump,
+/turf/open/floor/dirt,
 /area/template_noop)
 "z" = (
-/obj/machinery/light/fueled/firebowl/stump,
+/obj/structure/flora/shroom_tree,
+/obj/effect/workspot,
 /turf/open/floor/dirt,
+/area/template_noop)
+"H" = (
+/obj/machinery/light/fueled/wallfire/candle/skull/r,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "R" = (
 /turf/open/floor/dirt,
 /area/template_noop)
 
 (1,1,1) = {"
+z
+r
+r
+k
 o
-k
-r
-k
-r
 "}
 (2,1,1) = {"
 R
-a
-R
-k
-R
+r
+r
+r
+u
 "}
 (3,1,1) = {"
 u
-k
 r
-a
-z
+r
+r
+R
 "}
 (4,1,1) = {"
-u
-k
 R
-a
-u
+r
+r
+k
+o
 "}
 (5,1,1) = {"
-R
+o
 a
 n
-k
 r
+z
 "}
 (6,1,1) = {"
-u
-k
-z
-k
-u
+r
+r
+r
+r
+R
 "}
 (7,1,1) = {"
 r
-a
-R
-k
 r
+r
+r
+R
 "}
 (8,1,1) = {"
-R
-k
-u
+o
 a
-R
+r
+H
+u
 "}
 (9,1,1) = {"
+o
+z
 R
-a
-u
-k
+o
 o
 "}

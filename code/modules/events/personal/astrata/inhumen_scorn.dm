@@ -7,6 +7,10 @@
 	max_occurrences = 1
 	min_players = 30
 
+	tags = list(
+		TAG_ASTRATA,
+	)
+
 /datum/round_event_control/inhumen_scorn/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
 	if(!.)
@@ -40,11 +44,13 @@
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)
 
-	var/datum/objective/inhumen_scorn/new_objective = new(owner = chosen_one.mind)
+	var/datum/objective/personal/inhumen_scorn/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	to_chat(chosen_one, span_userdanger("YOU ARE ASTRATA'S CHOSEN!"))
-	to_chat(chosen_one, span_notice("Astrata wishes you to insult the inhumen! Spit in the face of 2 inhumen to earn her favor!"))
+	bordered_message(chosen_one, list(
+		span_userdanger("YOU ARE ASTRATA'S CHOSEN!"),
+		span_notice("Astrata wishes you to insult the inhumen! Spit in the face of inhumen to earn her favor!"),
+	))
 	chosen_one.playsound_local(chosen_one, 'sound/magic/bless.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

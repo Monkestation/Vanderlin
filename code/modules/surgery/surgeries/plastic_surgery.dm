@@ -20,7 +20,7 @@
 	possible_locs = list(BODY_ZONE_HEAD)
 	time = 6.4 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED
-	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/reshape_face/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)

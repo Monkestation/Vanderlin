@@ -1,7 +1,7 @@
 /obj/item/key
 	name = "old key"
 	desc = "A simple key of simple uses."
-	icon_state = "iron"
+	icon_state = "brownkey"
 	icon = 'icons/roguetown/items/keys.dmi'
 	w_class = WEIGHT_CLASS_TINY
 	dropshrink = 0.75
@@ -39,7 +39,7 @@
 		if(k.access2add)
 			src.access2add = k.access2add
 			return TRUE
-	var/list/access= O.get_access()
+	var/list/access = O.get_access()
 	if(access)
 		access2add = access.Copy()
 		return TRUE
@@ -142,7 +142,7 @@
 
 /obj/item/key/clinic
 	name = "clinic key"
-	desc = "The Phyisickers key, for the Clinic doors."
+	desc = "The Physicker's key, for the Clinic doors."
 	icon_state = "mazekey"
 	lockids = list(ACCESS_CLINIC)
 
@@ -750,7 +750,7 @@
 // grenchensnacker
 /obj/item/key/porta
 	name = "strange key"
-	desc = "Was this key enchanted by a locksmith..?"
+	desc = "Was this key enchanted by a locksmith...?"
 	icon_state = "eyekey"
 	lockids = list("porta")
 
@@ -763,3 +763,22 @@
 	icon_state = "mazekey"
 	lockids = list("banditcamp")
 
+
+////// MINOR NOBLES
+/obj/item/key/mnoble1_blue
+	name = "Key of the noble house 1"
+	desc = "A very detailed steel key, has gold details and a purple gemstone on it... is for the noble house number one."
+	icon_state = "noble1"
+	lockids = list(ACCESS_NOBLE1)
+
+/obj/item/key/mnoble2_yellow
+	name = "Key of the noble house 2"
+	desc = "A very detailed steel key, has gold details and a yellow gemstone on it... is for the noble house number two."
+	icon_state = "noble2"
+	lockids = list(ACCESS_NOBLE2)
+
+/obj/item/key/mnoble3_red
+	name = "Key of the noble house 3"
+	desc = "A very detailed steel key, has gold details and a red gemstone on it... is for the noble house number three?"
+	icon_state = "noble3"
+	lockids = list(ACCESS_NOBLE3)

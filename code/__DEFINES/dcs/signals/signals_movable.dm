@@ -11,15 +11,18 @@
 
 #define COMSIG_MOB_OVERLAY_FORCE_REMOVE "mob_overlay_force_remove"
 #define COMSIG_MOB_OVERLAY_FORCE_UPDATE "mob_overlay_force_update"
-/// From base of /client/Move()
-#define COMSIG_MOB_CLIENT_PRE_LIVING_MOVE "mob_client_pre_living_move"
-	/// Should we stop the current living movement attempt
-	#define COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE COMPONENT_MOVABLE_BLOCK_PRE_MOVE
+/// From base of /client/Move(): (new_loc, direction)
+#define COMSIG_MOB_CLIENT_PRE_MOVE "mob_client_pre_move"
+	/// Should always match COMPONENT_MOVABLE_BLOCK_PRE_MOVE as these are interchangeable and used to block movement.
+	#define COMSIG_MOB_CLIENT_BLOCK_PRE_MOVE COMPONENT_MOVABLE_BLOCK_PRE_MOVE
+	/// The argument of move_args which corresponds to the loc we're moving to
+	#define MOVE_ARG_NEW_LOC 1
+	/// The arugment of move_args which dictates our movement direction
+	#define MOVE_ARG_DIRECTION 2
 /// From base of /client/Move(): (direction, old_direction)
 #define COMSIG_MOB_CLIENT_MOVED "mob_client_moved"
-///from base of atom/movable/newtonian_move(): (inertia_direction)
-#define COMSIG_MOVABLE_NEWTONIAN_MOVE "movable_newtonian_move"
-	#define COMPONENT_MOVABLE_NEWTONIAN_BLOCK (1<<0)
+
+#define COMSIG_MOB_FOOD_EAT "mob_food_ate"
 
 // /datum/element/movetype_handler signals
 /// Called when the floating anim has to be temporarily stopped and restarted later: (timer)

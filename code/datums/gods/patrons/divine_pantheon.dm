@@ -1,17 +1,39 @@
+GLOBAL_LIST_INIT(patron_sound_themes, list(
+	ASTRATA = 'sound/magic/bless.ogg',
+	NOC = 'sound/ambience/noises/mystical (4).ogg',
+	EORA = 'sound/vo/female/gen/giggle (1).ogg',
+	DENDOR = 'sound/magic/barbroar.ogg',
+	MALUM = 'sound/magic/dwarf_chant01.ogg',
+	XYLIX = 'sound/misc/gods/xylix_omen_male_female.ogg',
+	NECRA = 'sound/ambience/noises/genspooky (1).ogg',
+	ABYSSOR = 'sound/items/bucket_transfer (2).ogg',
+	RAVOX = 'sound/vo/male/knight/rage (6).ogg',
+	PESTRA = 'sound/magic/cosmic_expansion.ogg',
+	ZIZO = 'sound/misc/gods/zizo_omen.ogg',
+	GRAGGAR = 'sound/misc/gods/graggar_omen.ogg',
+	BAOTHA = 'sound/misc/gods/baotha_omen.ogg',
+	MATTHIOS = 'sound/misc/gods/matthios_omen.ogg'
+))
+
 /datum/patron/divine
 	name = null
 	associated_faith = /datum/faith/divine_pantheon
+	var/associated_psycross = /obj/item/clothing/neck/psycross
 
-/datum/patron/divine/can_pray(mob/living/follower)
+/datum/patron/divine/can_pray(mob/living/carbon/human/follower)
 	//you can pray anywhere inside a church
-	if(istype(get_area(follower), /area/rogue/indoors/town/church))
+	if(istype(get_area(follower), /area/indoors/town/church))
 		return TRUE
 
 	for(var/obj/structure/fluff/psycross/cross in view(4, get_turf(follower)))
 		if(!cross.obj_broken)
 			return TRUE
 
-	to_chat(follower, span_danger("I need a nearby Pantheon Cross for my prayers to be heard..."))
+	if(istype(follower.wear_wrists, associated_psycross) || istype(follower.wear_neck, associated_psycross) || istype(follower.get_active_held_item(), associated_psycross))
+		return TRUE
+
+
+	to_chat(follower, span_danger("I need an amulet of my patron, or a nearby Pantheon Cross, for my prayers to be heard..."))
 	return FALSE
 
 /* ----------------- */
@@ -32,6 +54,7 @@
 		"I SERVE THE GLORY OF THE SUN!",
 	)
 	storyteller = /datum/storyteller/astrata
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/astrata
 
 /datum/patron/divine/noc
 	name = NOC
@@ -49,6 +72,7 @@
 		"I SEEK THE MYSTERIES OF THE MOON!",
 	)
 	storyteller = /datum/storyteller/noc
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/noc
 
 /datum/patron/divine/dendor
 	name = DENDOR
@@ -66,6 +90,7 @@
 		"I ANSWER THE CALL OF THE WILD!",
 	)
 	storyteller = /datum/storyteller/dendor
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/dendor
 
 /datum/patron/divine/abyssor
 	name = ABYSSOR
@@ -83,6 +108,7 @@
 		"I AM DRAWN BY THE PULL OF THE TIDE!",
 	)
 	storyteller = /datum/storyteller/abyssor
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/abyssor
 
 /datum/patron/divine/necra
 	name = NECRA
@@ -100,11 +126,12 @@
 		"I FEAR NOT DEATH, MY LADY AWAITS ME!",
 	)
 	storyteller = /datum/storyteller/necra
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/necra
 
 /datum/patron/divine/ravox
 	name = RAVOX
 	domain = "God of Warfare, Justice, and Bravery"
-	desc = "Crafted from the the blade of Psydon, a champion of all who seek righteousness for themselves and others."
+	desc = "Crafted from the blade of Psydon, a champion of all who seek righteousness for themselves and others."
 	flaws = "Carelessness, Aggression, Pride"
 	worshippers = "Warriors, Sellswords, Guardsmen"
 	sins = "Cowardice, Cruelty, Stagnation"
@@ -117,10 +144,11 @@
 		"THE DRUMS OF WAR BEAT IN MY CHEST!",
 	)
 	storyteller = /datum/storyteller/ravox
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/ravox
 
 /datum/patron/divine/xylix
 	name = XYLIX
-	domain = "Diety of Trickery, Freedom, and Inspiration"
+	domain = "Deity of Trickery, Freedom, and Inspiration"
 	desc = "Crafted from the silver tongue of Psydon. Xylix is a force of change and deceit, yet allows little known of their gender let alone presence."
 	flaws = "Petulance, Deception, Gambling-Prone"
 	worshippers = "Cheats, Performers, The Hopeless"
@@ -141,6 +169,7 @@
 		"EORA BRINGS US TOGETHER!",
 	)
 	storyteller = /datum/storyteller/xylix
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/xylix
 
 /datum/patron/divine/pestra
 	name = PESTRA
@@ -158,11 +187,12 @@
 		"MY AFFLICTION IS MY TESTAMENT!",
 	)
 	storyteller = /datum/storyteller/pestra
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/pestra
 
 /datum/patron/divine/malum
 	name = MALUM
 	domain = "God of Toil, Innovation, and Creation"
-	desc = "Crafted from the hands of Psydon. He would later use his own to construct wonderous inventions."
+	desc = "Crafted from the hands of Psydon. He would later use his own to construct wondrous inventions."
 	flaws = "Obsessive, Exacting, Overbearing"
 	worshippers = "Smiths, Miners, Sculptors"
 	sins = "Cheating, Shoddy Work, Suicide"
@@ -175,6 +205,7 @@
 		"I AM AN INSTRUMENT OF CREATION!",
 	)
 	storyteller = /datum/storyteller/malum
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/malum
 
 /datum/patron/divine/eora
 	name = EORA
@@ -192,3 +223,4 @@
 		"I LOVE YOU, EVEN AS YOU TRESPASS AGAINST ME!",
 	)
 	storyteller = /datum/storyteller/eora
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/eora

@@ -110,7 +110,6 @@
 	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = -1, STATKEY_INT = 1, STATKEY_CON = 0, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
 	specstats_f = list(STATKEY_STR = 1, STATKEY_PER = -1, STATKEY_INT = 1, STATKEY_CON = 1, STATKEY_END = 1, STATKEY_SPD = 1, STATKEY_LCK = 0)
 	enflamed_icon = "widefire"
-	patreon_req = 0
 
 	body_markings = list(
 		/datum/body_marking/tonage,
@@ -168,5 +167,7 @@
 	var/static/list/last_names = world.file2list('strings/rt/names/elf/elfsnf.txt')
 	return last_names
 
-/datum/species/elf/dark/after_creation(mob/living/carbon/C)
+/datum/species/elf/dark/after_creation(mob/living/carbon/human/C)
 	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 2)
+	if(C.skin_tone == SKIN_COLOR_SNOW_ELF)
+		exotic_bloodtype = /datum/blood_type/human/cursed_elf

@@ -102,7 +102,7 @@
 	if(!flying)
 		if(!can_fly())
 			return
-		if(do_after(owner, 5 SECONDS, owner))
+		if(do_after(owner, 5 SECONDS, owner, extra_checks = CALLBACK(src, PROC_REF(can_fly))))
 			start_flying()
 		return
 	if(do_after(owner, 5 SECONDS, owner))
@@ -117,6 +117,9 @@
 		return FALSE
 	if(!isturf(flier.loc))
 		to_chat(flier, span_warning("I need space to fly!"))
+		return FALSE
+	if(flier.pulledby?.grab_state >= GRAB_AGGRESSIVE)
+		to_chat(flier, span_warning("I can't fly while being grabbed so tightly!"))
 		return FALSE
 	if(flier.body_position != STANDING_UP)
 		to_chat(flier, span_warning("I can't spread my wings!"))
@@ -235,18 +238,18 @@
 			stop_flying(owner)
 			return
 
+		var/turf/this_turf = get_turf(owner)
+		var/turf/below_turf = GET_TURF_BELOW(this_turf)
 		if(shadow)
-			if(!istransparentturf(get_turf(owner)))
+			if(!istransparentturf(this_turf))
 				shadow.alpha= 0
 			else
 				shadow.alpha = 255
 
-			var/turf/below_turf = GET_TURF_BELOW(get_turf(owner))
 			if(below_turf)
 				shadow.forceMove(below_turf)
 		else
-			var/turf/below_turf = GET_TURF_BELOW(get_turf(owner))
-			if(below_turf && istransparentturf(get_turf(owner)))
+			if(below_turf && istransparentturf(this_turf))
 				shadow = new /obj/effect/flyer_shadow(below_turf, owner)
 
 /datum/action/item_action/organ_action/use/flight/proc/check_laying(datum/source, new_pos, old_pos)

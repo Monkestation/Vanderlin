@@ -30,7 +30,6 @@
 
 	bleed_rate = min(get_bleed_rate(), 10)
 
-
 	if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume && !bleed_rate)
 		blood_volume = min(blood_volume+0.5, BLOOD_VOLUME_MAXIMUM)
 
@@ -45,14 +44,14 @@
 				apply_status_effect(/datum/status_effect/debuff/bleeding)
 			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 				if(prob(3))
-					blur_eyes(6)
+					set_eye_blur_if_lower(12 SECONDS)
 					to_chat(src, span_warning("I feel faint."))
 				remove_status_effect(/datum/status_effect/debuff/bleeding)
 				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 				apply_status_effect(/datum/status_effect/debuff/bleedingworse)
 			if(0 to BLOOD_VOLUME_BAD)
 				if(prob(3))
-					blur_eyes(6)
+					set_eye_blur_if_lower(12 SECONDS)
 					to_chat(src, span_warning("I feel faint."))
 				if(prob(3) && stat < UNCONSCIOUS)
 					Unconscious(rand(5 SECONDS,10 SECONDS))
@@ -79,11 +78,11 @@
 /mob/living/carbon/handle_blood()
 	if(HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
 		return
-	var/sigreturn = SEND_SIGNAL(src, COMSIG_CARBON_ON_HANDLE_BLOOD)
+	var/bleed_rate = get_bleed_rate()
+	var/sigreturn = SEND_SIGNAL(src, COMSIG_CARBON_ON_HANDLE_BLOOD, bleed_rate)
 	if(sigreturn & HANDLE_BLOOD_HANDLED)
 		return
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
-	var/bleed_rate = get_bleed_rate()
 	if(dna?.species)
 		if(NOBLOOD in dna.species.species_traits)
 			blood_volume = BLOOD_VOLUME_NORMAL
@@ -101,7 +100,7 @@
 
 	//Effects of bloodloss
 	if(!(sigreturn & HANDLE_BLOOD_NO_EFFECTS))
-		if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+		if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE) && stat != DEAD)
 			switch(blood_volume)
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(3))
@@ -111,14 +110,14 @@
 					apply_status_effect(/datum/status_effect/debuff/bleeding)
 				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 					if(prob(3))
-						blur_eyes(6)
+						set_eye_blur_if_lower(6 SECONDS)
 						to_chat(src, span_warning("I feel faint."))
 					remove_status_effect(/datum/status_effect/debuff/bleeding)
 					remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 					apply_status_effect(/datum/status_effect/debuff/bleedingworse)
 				if(0 to BLOOD_VOLUME_BAD)
 					if(prob(3))
-						blur_eyes(6)
+						set_eye_blur_if_lower(12 SECONDS)
 						to_chat(src, span_warning("I feel faint."))
 					if(prob(3) && stat < UNCONSCIOUS)
 						Unconscious(rand(5 SECONDS,10 SECONDS))
@@ -164,37 +163,50 @@
 		bleed_rate += bodypart.get_bleed_rate()
 	return bleed_rate
 
-//Makes a blood drop, leaking amt units of blood from the mob
+/// How much slower we'll be bleeding for every CON point. 0.1 = 10% slower.
+#define CONSTITUTION_BLEEDRATE_MOD 0.03
+
+/// Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/proc/bleed(amt)
-	if(!iscarbon(src))
-		if(!HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-			return
-	if(blood_volume)
-		blood_volume = max(blood_volume - amt, 0)
-		if(src.client)
-			record_featured_stat(FEATURED_STATS_BLEEDERS, src)
-		record_round_statistic(STATS_BLOOD_SPILT, amt / 100)
-		if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
+	if(!iscarbon(src) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return
+	if(blood_volume <= 0)
+		return
+
+	// For each CON above 10, we bleed slower.
+	// Consequently, for each CON under 10 we bleed faster.
+	var/con_modifier = 1
+	var/our_con = STACON
+	if(our_con != 10)
+		con_modifier = our_con - 10
+
+	amt -= amt * con_modifier * CONSTITUTION_BLEEDRATE_MOD
+
+	blood_volume = max(blood_volume - amt, 0)
+
+	if(client)
+		record_featured_stat(FEATURED_STATS_BLEEDERS, src)
+	record_round_statistic(STATS_BLOOD_SPILT, amt / 100)
+
+	if(amt > 0.5)
+		if(isturf(loc)) // Blood loss still happens in locker, floor stays clean
 			add_drip_floor(get_turf(src), amt)
-		var/vol2use
-		if(amt > 1)
-			vol2use = 'sound/misc/bleed (1).ogg'
-		if(amt > 2)
-			vol2use = 'sound/misc/bleed (2).ogg'
-		if(amt > 3)
-			vol2use = 'sound/misc/bleed (3).ogg'
-		if(body_position == LYING_DOWN || stat)
-			vol2use = null
-		if(vol2use)
-			playsound(get_turf(src), vol2use, 100, FALSE)
+
+		if(body_position != LYING_DOWN && !stat)
+			playsound(src, pick('sound/misc/bleed (1).ogg', 'sound/misc/bleed (2).ogg', 'sound/misc/bleed (3).ogg'), 100, FALSE)
 
 	updatehealth()
 
+	return TRUE
+
+#undef CONSTITUTION_BLEEDRATE_MOD
+
 /mob/living/carbon/human/bleed(amt)
+	if(NOBLOOD in dna?.species?.species_traits)
+		return FALSE
 	if(physiology)
 		amt *= physiology.bleed_mod
-	if(!(NOBLOOD in dna?.species?.species_traits))
-		return ..()
+	return ..()
 
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)
@@ -226,7 +238,7 @@
 
 /mob/living/proc/get_blood_type()
 	RETURN_TYPE(/datum/blood_type)
-	return GLOB.blood_types[/datum/blood_type/animal]
+	return GLOB.blood_types[animal_type] || GLOB.blood_types[/datum/blood_type/animal]
 
 /mob/living/proc/get_lux_status()
 	var/datum/blood_type/blood = get_blood_type()
@@ -234,7 +246,16 @@
 	if(has_status_effect(/datum/status_effect/debuff/lux_drained) || has_status_effect(/datum/status_effect/debuff/flaw_lux_taken))//accounts for luxless flaw
 		return LUX_DRAINED
 
+	if(has_status_effect(/datum/status_effect/debuff/tainted_lux) || has_status_effect(/datum/status_effect/debuff/received_tainted_lux) || has_status_effect(/datum/status_effect/buff/received_lux))
+		return LUX_HAS_LUX
+
 	return blood.contains_lux
+
+/mob/living/proc/get_lux_tainted_status()
+	if(HAS_TRAIT(src, TRAIT_TAINTED_LUX))
+		return TRUE
+	var/datum/blood_type/blood = get_blood_type()
+	return blood.tainted_lux
 
 /mob/living/carbon/human/get_blood_type()
 	RETURN_TYPE(/datum/blood_type)
@@ -244,7 +265,7 @@
 		return GLOB.blood_types[dna.species.exotic_bloodtype]
 	return GLOB.blood_types[dna.human_blood_type]
 
-// This is has more potential uses, and is probably faster than the old proc.
+// This has more potential uses, and is probably faster than the old proc.
 /proc/get_safe_blood(bloodtype)
 	. = list()
 	if(!bloodtype)
@@ -280,16 +301,16 @@
 
 	if(istype(T, /turf/open/water))
 		var/turf/open/water/W = T
-		if(!W.children)
+		if(!LAZYLEN(W.children))
 			W.water_reagent = blood.reagent_type // this is dumb, but it works for now
 			W.mapped = FALSE // no infinite vitae glitch
 			W.water_volume = 10
-			W.update_appearance()
+
 		return
 	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T)
 
 	splatter.transfer_mob_blood_dna(src)
-	splatter.update_appearance()
+	splatter.update_appearance(UPDATE_ICON_STATE)
 	T?.pollute_turf(/datum/pollutant/metallic_scent, 30)
 
 /mob/living/proc/add_drip_floor(turf/T, amt)
@@ -309,24 +330,29 @@
 			W.mapped = FALSE // no infinite vitae glitch
 			W.water_maximum = 10
 			W.water_volume = 10
-			W.update_appearance()
 			return
-	var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
-	if(P)
-		P.blood_vol += amt
-		P.transfer_mob_blood_dna(src)
-		P.update_appearance()
+	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
+	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
+	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
+		var/datum/blood_type/type = get_blood_type()
+		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(src))
 	else
-		var/obj/effect/decal/cleanable/blood/drip/D = locate() in T
-		if(D)
-			D.blood_vol += amt
-			D.drips++
-			D.transfer_mob_blood_dna(src)
-			D.update_appearance()
+		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
+		if(P)
+			P.blood_vol += amt
+			P.transfer_mob_blood_dna(src)
+			P.update_appearance(UPDATE_ICON_STATE)
 		else
-			var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T)
-			splatter.transfer_mob_blood_dna(src)
-			splatter.update_appearance()
+			var/obj/effect/decal/cleanable/blood/drip/D = locate() in T
+			if(D)
+				D.blood_vol += amt
+				D.drips++
+				D.transfer_mob_blood_dna(src)
+				D.update_appearance(UPDATE_ICON_STATE)
+			else
+				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T)
+				splatter.transfer_mob_blood_dna(src)
+				splatter.update_appearance(UPDATE_ICON_STATE)
 
 /mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
 	if(!(NOBLOOD in dna.species.species_traits))

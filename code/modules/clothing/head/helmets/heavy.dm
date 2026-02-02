@@ -8,7 +8,8 @@
 	equip_delay_self = 3 SECONDS
 	unequip_delay_self = 3 SECONDS
 	emote_environment = 3		// Unknown if this actually works and what it does
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET
 
 	armor = ARMOR_PLATE
@@ -27,6 +28,20 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	block2add = FOV_BEHIND
 
+/obj/item/clothing/head/helmet/heavy/psydonbarbute
+	name = "psydonian barbute"
+	desc = "A barbute styled with Psydonian Imagery."
+	icon_state = "psydonbarbute"
+	item_state = "psydonbarbute"
+	block2add = FOV_BEHIND
+
+/obj/item/clothing/head/helmet/heavy/psydonhelm
+	name ="grenzelhoftian armet"
+	desc = "Headwear commonly worn by Templars in service to the Oratorium Throni Vacui. PSYDON Endures."
+	icon_state = "psydonarmet"
+	item_state = "psydonarmet"
+	block2add = FOV_BEHIND
+
 //................ Iron Plate Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/ironplate
 	name = "iron plate helmet"
@@ -35,6 +50,7 @@
 	flags_inv = HIDEEARS
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_CHEAP_IRON_HELMET
+	block2add = FOV_BEHIND
 
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG //isn't the same as a steel helmet but is better than a skullcap, costs 2 bars and protects the mouth
@@ -58,7 +74,7 @@
 //............... Great Helm ............... //
 /obj/item/clothing/head/helmet/heavy/bucket
 	name = "great helm"
-	desc = "An immovable bulkwark of protection for the head of the faithful. Antiquated and impractical, but offering incredible defense."
+	desc = "An immovable bulwark of protection for the head of the faithful. Antiquated and impractical, but offering incredible defense."
 	icon_state = "topfhelm"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 
@@ -80,6 +96,13 @@
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
 	max_integrity = INTEGRITY_STRONGEST // steel
 	body_parts_covered = HEAD_NECK
+	block2add = FOV_BEHIND
+
+/obj/item/clothing/head/helmet/heavy/ancient
+	name = "ancient savoyard"
+	desc = "A terrifying old savoyard."
+	icon_state = "ancientsavoyard"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_BEHIND
 
 //............... Frog Helmet ............... //
@@ -145,12 +168,35 @@
 
 //............... Graggar Helmet ............... //
 
-/obj/item/clothing/head/helmet/graggar
+/obj/item/clothing/head/helmet/heavy/graggar
 	name = "vicious helmet"
 	desc = "A rugged and horrifying helmet. A violent aura emanates from it."
 	icon_state = "graggarplatehelm"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	armor = ARMOR_PLATE
+	flags_cover = HEADCOVERSEYES
+	prevent_crits = ALL_CRITICAL_HITS
+	item_weight = 5 * STEEL_MULTIPLIER
+	block2add = FOV_BEHIND
+	sellprice = 0 // See above comment
+
+//............... Baothan Helmet ............... //
+
+/obj/item/clothing/head/helmet/heavy/baotha
+	name = "willful helmet"
+	desc = "Baothan knights are an antithesis : the tiefling queen preaches self preservation at the cost of even family or friend. Choosing to embark on a quest to knightlyhood means facing peril at the forefront. \
+	Indeed, many are the upstarts who understood the folly of their journey, and either turned back to the warmth of ozium and wine or died in the process. \
+	The original wearer of this helmet is no such pushover : they do not have the might of Graggar nor the magick of Zizo, and instead rely on their wits and grit to proclaim their unicity in the face of this cold, uncaring world. \
+	It is rumoured that Baotha offers this baroque piece in person, as a reward for the knight's unflinching will in the face of sheer terror, minute after minute, hour after hour. \
+	Fashioned in steel and petals, it has no viewport, the wearer instead having their senses heightened to preternatural levels." // yes, this is a long item description, but it's the only piece of armour unique to Baotha.
+	icon_state = "baothahelm"
+	icon = 'icons/roguetown/clothing/special/baothanknight.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor64x64.dmi'
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	bloody_icon_state = "helmetblood_big"
 	armor = ARMOR_PLATE
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 5 * STEEL_MULTIPLIER
@@ -160,7 +206,7 @@
 //............... Spangenhelm ............... //
 /obj/item/clothing/head/helmet/heavy/viking
 	name = "spangenhelm"
-	desc = "A steel helmet with built in eye and nose protection, commonly used by warriors of the north."
+	desc = "A steel helmet with built-in eye and nose protection, commonly used by warriors of the north."
 	icon_state = "Spangenhelm_item"
 	item_state = "Spangenhelm_worn"
 	icon = 'icons/roguetown/clothing/special/spangenhelm_item.dmi'
@@ -239,7 +285,7 @@
 
 /obj/item/clothing/head/helmet/heavy/necked/ravox
 	name = "ravoxian helmet"
-	desc = "Headwear commonly worn by Templars in service to Ravox. It resembles an heavily adorned visored sallet."
+	desc = "Headwear commonly worn by Templars in service to Ravox. It resembles a heavily-adorned visored sallet."
 	icon_state = "ravoxhelm"
 	item_state = "ravoxhelm"
 	item_weight = 6 * IRON_MULTIPLIER
@@ -256,6 +302,14 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = list(SFX_JINGLE_BELLS))
 
+//................ Abyssor Helmet ............. //
+/obj/item/clothing/head/helmet/heavy/necked/abyssor
+	name = "abyssor helmet"
+	desc = "A great helmet crafted from bronze. The visor is slitted and ridged, evoking the gills of a great sea-beast."
+	icon_state = "abyssorhelm"
+	item_state = "abyssorhelm"
+	item_weight = 6 * IRON_MULTIPLIER
+
 //............... Sinistar (Graggar) Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/sinistar
 	name = "sinistar helmet"
@@ -268,7 +322,8 @@
 	icon_state = "sinistarhelm"
 	dropshrink = 0.9
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
-	smeltresult = /obj/item/ingot/steel
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	item_weight = 7 * IRON_MULTIPLIER
 
 /obj/item/clothing/head/helmet/heavy/decorated	// template
@@ -426,3 +481,77 @@
 			var/mob/living/carbon/H = user
 			H.update_inv_head()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm
+	name = "inquisitorial ordinator's helmet"
+	desc = "A design suggested by a Grenzelhoftian smith, inspired by an eccentric count who insisted on sleeping in a coffin. A steel casket with thin slits that allow for deceptively clear vision. The tainted will drown in the blood you bring their way, while this high helm keeps it out of your face."
+	icon_state = "ordinatorhelm"
+	item_state = "ordinatorhelm"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
+	max_integrity = 350
+	var/plumed = FALSE
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/attackby(obj/item/W, mob/living/user, params)
+	..()
+	if(istype(W, /obj/item/natural/feather))
+		user.visible_message(span_warning("[user] starts to fashion plumage using [W] for [src]."))
+		if(do_after(user, 4 SECONDS))
+			var/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/P = new /obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume(get_turf(src.loc))
+			if(user.is_holding(src))
+				user.dropItemToGround(src)
+				user.put_in_hands(P)
+			qdel(src)
+			qdel(W)
+		else
+			user.visible_message(span_warning("[user] stops fashioning plumage for [src]."))
+		return
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume
+	icon_state = "ordinatorhelmplume"
+	item_state = "ordinatorhelmplume"
+
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/attackby(obj/item/W, mob/living/user, params)
+	if(istype(W, /obj/item/natural/feather))
+		return
+
+/obj/item/clothing/head/helmet/heavy/absolver
+	name = "psydonian conical helm"
+	desc = "Its shape confounds and confuses the enemies of Psydon. Offering unfound protection in its visage, the gaze is horrific to those without understanding."
+	icon_state = "absolutionisthelm"
+	item_state = "absolutionisthelm"
+	emote_environment = 3
+	block2add = null
+	body_parts_covered = FULL_HEAD|NECK
+	max_integrity = 450 // Worst vision. Yes.
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	clothing_flags = NONE
+
+/obj/item/clothing/head/helmet/heavy/psybucket
+	name = "psydonian bucket helmet"
+	desc = "Originally just a bucket with a psycross nailed on, it proved surprisingly effective, making its way into common use for inquisitorial templars. Steel encapsulates your head, and His cross facing enemies reminds them that you will endure until they meet oblivion. Only then may you rest."
+	icon_state = "psybucket"
+	item_state = "psybucket"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
+	max_integrity = 400
+
+/obj/item/clothing/head/helmet/heavy/psysallet
+	name = "psydonian sallet"
+	desc = "A boiled leather cap, crowned with steel and veiled with His cross. Fear not - He will show you the way, and He will see your blows well-struck."
+	icon_state = "psysallet"
+	item_state = "psysallet"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	adjustable = CAN_CADJUST
+	block2add = FOV_BEHIND
+	max_integrity = 400

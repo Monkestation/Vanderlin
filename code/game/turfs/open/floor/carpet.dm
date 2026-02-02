@@ -1,6 +1,6 @@
 /turf/open/floor/carpet
 	name = "carpet"
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/carpet.dmi'
 	icon_state = "carpet"
 	flags_1 = NONE
 	landsound = 'sound/foley/jumpland/carpetland.ogg'
@@ -11,7 +11,7 @@
 
 	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_CARPET
 
-	spread_chance = 1.1
+	spread_chance = 1.8
 
 /turf/open/floor/carpet/Initialize()
 	. = ..()

@@ -22,6 +22,7 @@ LINEN BINS
 
 	var/list/dream_messages = list("white")
 	var/datum/weakref/signal_sleeper //this is our goldylocks
+	var/bed_tucked = FALSE
 
 /obj/item/bedsheet/Initialize()
 	. = ..()
@@ -77,6 +78,17 @@ LINEN BINS
 	UnregisterSignal(sleeper, COMSIG_PARENT_QDELETING)
 	signal_sleeper = null
 
+/obj/item/bedsheet/attack_hand(mob/user, params)
+	if(!bed_tucked)
+		return ..()
+	if(do_after(user, 2 SECONDS, src))
+		var/obj/structure/bed/bed = locate() in loc
+		if(bed)
+			to_chat(user, span_notice("You start to remove \the [src] from \the [bed]."))
+			bed.sheet_tucked = FALSE
+			bed.sheet_on = FALSE
+			bed_tucked = FALSE
+		return ..()
 /obj/item/bedsheet/cloth
 	desc = ""
 	icon = 'icons/roguetown/misc/structure.dmi'

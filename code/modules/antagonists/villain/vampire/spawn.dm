@@ -23,10 +23,10 @@
 
 	var/selected = input(src, "Which class was I?", "VAMPIRE SPAWN") as anything in visoptions
 
-	for(var/datum/advclass/A in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
-		if(A.name == selected)
+	for(var/datum/job/advclass/A in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
+		if(A.title == selected)
 			equipOutfit(A.outfit)
-			return
+			break
 
 /datum/antagonist/vampire/lesser/equip()
 	. = ..()

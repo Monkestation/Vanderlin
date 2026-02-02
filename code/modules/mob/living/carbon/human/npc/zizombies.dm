@@ -35,7 +35,7 @@
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/zizombie/npc/random)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/random)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
@@ -103,12 +103,12 @@
 	if(!mind)
 		mind = new /datum/mind(src)
 
-	adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 
 /mob/living/carbon/human/species/zizombie/after_creation()
 	..()
@@ -129,10 +129,13 @@
 	eyes = new /obj/item/organ/eyes/night_vision/nightmare
 	eyes.Insert(src)
 	src.underwear = "Nude"
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
+	if(length(quirks))
+		clear_quirks()
 	update_body()
 	faction = list(FACTION_UNDEAD)
+	var/turf/turf = get_turf(src)
+	if(SSterrain_generation.get_island_at_location(turf))
+		faction |= "islander"
 	name = "zizombie"
 	real_name = "zizombie"
 	mob_biotypes |= MOB_UNDEAD
@@ -158,6 +161,7 @@
 	damage_overlay_type = "human"
 	changesource_flags = WABBAJACK
 	var/raceicon = "zizombie"
+	exotic_bloodtype = /datum/blood_type/human/corrupted/zizombie
 
 /datum/species/zizombie/update_damage_overlays(mob/living/carbon/human/H)
 	return
@@ -223,13 +227,13 @@
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/zizombie/npc/peasant)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/peasant)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
-/datum/outfit/job/species/zizombie/npc/peasant/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/zizombie/npc/peasant/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = 9
 	H.base_speed = 7
@@ -265,13 +269,13 @@
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/zizombie/npc/random)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/random)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
-/datum/outfit/job/species/zizombie/npc/random/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/zizombie/npc/random/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(prob(50))
 		wrists = /obj/item/clothing/wrists/bracers/leather
@@ -304,13 +308,13 @@
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/zizombie/npc/warrior)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/warrior)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
-/datum/outfit/job/species/zizombie/npc/warrior/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/zizombie/npc/warrior/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = 10
 	H.base_speed = 7
@@ -390,13 +394,13 @@
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/zizombie/npc/militiamen)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/militiamen)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
-/datum/outfit/job/species/zizombie/npc/militiamen/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/zizombie/npc/militiamen/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = 10
 	H.base_speed = 7
@@ -468,7 +472,7 @@
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/job/species/zizombie/npc/GRENZEL)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/GRENZEL)
 	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
@@ -477,7 +481,7 @@
 
 
 
-/datum/outfit/job/species/zizombie/npc/GRENZEL/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/zizombie/npc/GRENZEL/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.base_strength = 12
 	H.base_speed = 7
@@ -523,7 +527,7 @@
 			backl = /obj/item/storage/backpack/satchel
 			wrists = /obj/item/clothing/wrists/bracers/leather
 		if(4) //zizombie Warrior
-			r_hand = /obj/item/weapon/sword/short
+			r_hand = /obj/item/weapon/sword/short/iron
 			l_hand = /obj/item/weapon/knife/dagger
 			pants = /obj/item/clothing/pants/grenzelpants
 			shoes = /obj/item/clothing/shoes/boots/armor/light

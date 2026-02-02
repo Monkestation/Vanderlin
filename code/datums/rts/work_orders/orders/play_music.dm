@@ -17,10 +17,10 @@
 	instrument.playing = TRUE
 	instrument.soundloop.mid_sounds = list(song)
 	instrument.soundloop.cursound = null
-	instrument.soundloop.start()
+	instrument.soundloop.start(worker_mob)
 	. = ..()
 
-/datum/work_order/play_music/stop_work()
+/datum/work_order/play_music/stop_work(reason = "unknown")
 	. = ..()
 	stop_music()
 

@@ -8,3 +8,18 @@
 #define MAT_VEG "Vegetable"
 #define MAT_FRUIT "Fruit"
 #define MAT_MEAT "Meat"
+#define MAT_CLOTH "Cloth"
+#define MAT_SILK "Silk"
+#define MAT_HIDE "Hide"
+#define MAT_LEATHER "Leather"
+
+#define TASK_KEY_SPEED "speed"
+#define TASK_KEY_REDUCTION "reduction"
+#define TASK_KEY_QUANTITY "quantity"
+
+
+#define WORKER_SLOT_HEAD "head"
+#define WORKER_SLOT_PANTS "pants"
+#define WORKER_SLOT_SHIRT "shirt"
+#define WORKER_SLOT_SHOES "shoes"
+#define WORKER_SLOT_HANDS "hands"

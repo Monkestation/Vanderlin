@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/troll
 	name = "troll"
-	desc = "Elven legends say these monsters were servants of Dendor tasked to guard his realm; nowadays they are sometimes found in the company of orcs."
+	desc = "Elven legends say these monsters were servants of Dendor tasked to guard his realm; nowadays, they are sometimes found in the company of orcs."
 	icon = 'icons/mob/creacher/trolls/troll.dmi'
 	icon_state = "troll"
 	icon_living = "troll"
@@ -20,6 +20,8 @@
 	move_to_delay = 7
 	vision_range = 6
 	aggro_vision_range = 6
+
+	animal_type = /datum/blood_type/troll
 
 	botched_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/strange = 1, \
 						/obj/item/natural/hide = 1)
@@ -68,6 +70,22 @@
 
 	var/range = 9
 
+/mob/living/simple_animal/hostile/retaliate/troll/slaved
+	ai_controller = /datum/ai_controller/summon
+
+/mob/living/simple_animal/hostile/retaliate/troll/slaved/Initialize()
+	. = ..()
+	var/static/list/pet_commands = list(
+				/datum/pet_command/idle,
+				/datum/pet_command/free,
+				/datum/pet_command/follow,
+				/datum/pet_command/attack,
+				/datum/pet_command/protect_owner,
+				/datum/pet_command/aggressive,
+				/datum/pet_command/calm,
+			)
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+
 /mob/living/simple_animal/hostile/retaliate/troll/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system, 10 , range)
@@ -93,45 +111,6 @@
 		adjustHealth(-rand(20,35))
 
 /mob/living/simple_animal/hostile/retaliate/troll/simple_limb_hit(zone)
-	if(!zone)
-		return ""
-	switch(zone)
-		if(BODY_ZONE_PRECISE_R_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_L_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_NOSE)
-			return "nose"
-		if(BODY_ZONE_PRECISE_MOUTH)
-			return "mouth"
-		if(BODY_ZONE_PRECISE_SKULL)
-			return "head"
-		if(BODY_ZONE_PRECISE_EARS)
-			return "head"
-		if(BODY_ZONE_PRECISE_NECK)
-			return "neck"
-		if(BODY_ZONE_PRECISE_L_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_R_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_STOMACH)
-			return "stomach"
-		if(BODY_ZONE_PRECISE_GROIN)
-			return "tail"
-		if(BODY_ZONE_HEAD)
-			return "head"
-		if(BODY_ZONE_R_LEG)
-			return "leg"
-		if(BODY_ZONE_L_LEG)
-			return "leg"
-		if(BODY_ZONE_R_ARM)
-			return "foreleg"
-		if(BODY_ZONE_L_ARM)
-			return "foreleg"
 	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/troll/proc/hide()
@@ -211,7 +190,7 @@
 	defprob = 15
 
 	//stone chucking ability
-	var/datum/action/cooldown/mob_cooldown/stone_throw/throwing_stone
+	var/datum/action/cooldown/spell/stone_throw/throwing_stone
 
 /mob/living/simple_animal/hostile/retaliate/troll/cave/Initialize()
 	. = ..()
@@ -225,7 +204,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/troll/axe
 	name = "Troll Skull-Splitter"
-	desc = "This one seems smarter than the rest... And it's axe could cut a man in two."
+	desc = "This one seems smarter than the rest... And its axe could cut a man in two."
 	icon = 'icons/mob/creacher/trolls/troll_axe.dmi'
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/strange = 2, \
 					/obj/item/natural/hide = 3, \
@@ -235,7 +214,7 @@
 	base_intents = list(/datum/intent/simple/troll_axe)
 	attack_sound = list('sound/combat/wooshes/blunt/wooshhuge (1).ogg','sound/combat/wooshes/blunt/wooshhuge (2).ogg','sound/combat/wooshes/blunt/wooshhuge (3).ogg')
 	loot = list(/obj/item/weapon/axe/iron/troll)
-	deathmessage = "As the creacher tumbles, it falls upon it's axe, snapping the handle."
+	deathmessage = "As the creacher tumbles, it falls upon its axe, snapping the handle."
 
 /datum/intent/simple/troll_axe
 	name = "troll axe"

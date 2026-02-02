@@ -109,7 +109,7 @@
 	for(var/line in lines)
 		display_text += "[line]<br>"
 
-	maptext = MAPTEXT_PIXELIFY("<span style='color:#00FF00'>[display_text]</span>")
+	maptext = MAPTEXT_VATICANUS("<span style='color:#00FF00'>[display_text]</span>")
 	maptext_width = 380
 	maptext_height = content_height
 	maptext_x = 8

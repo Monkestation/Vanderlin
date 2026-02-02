@@ -1,18 +1,19 @@
-/datum/action/cooldown/mob_cooldown/stone_throw
+/datum/action/cooldown/spell/stone_throw
 	name = "Stone Throw"
 	button_icon = 'icons/effects/effects.dmi'
 	button_icon_state = "explosion"
 	desc = "Chucks a stone at someone"
 	cooldown_time = 15 SECONDS
 	check_flags = null
+	charge_required = FALSE
 
-/datum/action/cooldown/mob_cooldown/stone_throw/Activate(atom/target)
+/datum/action/cooldown/spell/stone_throw/cast(atom/cast_on)
+	. = ..()
 	prepare_stone()
-	addtimer(CALLBACK(src, PROC_REF(chuck_stone), target), 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(chuck_stone), cast_on), 1 SECONDS)
 	StartCooldown()
-	return TRUE
 
-/datum/action/cooldown/mob_cooldown/stone_throw/proc/prepare_stone(atom/target)
+/datum/action/cooldown/spell/stone_throw/proc/prepare_stone(atom/target)
 	var/static/list/transforms
 	owner.visible_message(span_boldwarning("[owner] digs into the ground for rocks!"))
 	playsound(owner,'sound/items/dig_shovel.ogg', 100, TRUE)
@@ -33,13 +34,13 @@
 	animate(transform=transforms[3], time= 2.5 DECISECONDS)
 	animate(transform=transforms[4], time=2.5 DECISECONDS)
 
-/datum/action/cooldown/mob_cooldown/stone_throw/proc/chuck_stone(atom/target)
+/datum/action/cooldown/spell/stone_throw/proc/chuck_stone(atom/target)
 	if(!target)
 		return
 
 	owner.visible_message(span_boldwarning("[owner] chucks a huge stone rock!"))
-	playsound(owner.loc, 'sound/combat/shieldraise.ogg', 100)
+	playsound(owner, 'sound/combat/shieldraise.ogg', 100)
 	var/turf/target_turf = get_turf(target)
 	new /obj/effect/temp_visual/target/orcthrow(target_turf)
 
-/datum/action/cooldown/mob_cooldown/stone_throw/proc/post_chuck_stone()
+/datum/action/cooldown/spell/stone_throw/proc/post_chuck_stone()

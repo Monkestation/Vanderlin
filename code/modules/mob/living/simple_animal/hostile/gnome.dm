@@ -4,7 +4,7 @@
 
 /mob/living/simple_animal/hostile/gnome_homunculus
 	name = "gnome homunculus"
-	desc = "A small, industrious magical construct that resembles a tiny gnome. Its eyes glow with alchemical energy and it seems eager to help with menial tasks."
+	desc = "A small, industrious magical construct that resembles a tiny gnome. Its eyes glow with alchemical energy, and it seems eager to help with menial tasks."
 	icon = 'icons/mob/gnome2.dmi' // You'll need appropriate sprites
 	icon_state = "gnome"
 	icon_living = "gnome"

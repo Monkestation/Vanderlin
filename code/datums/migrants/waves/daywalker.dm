@@ -1,52 +1,68 @@
 /datum/migrant_role/daywalker
 	name = "Daywalker"
 	greet_text = "Some knaves are always trying to wade upstream. You witnessed your entire village be consumed by a subservient vampiric horde - the local Priest grabbed you, and brought you to a remote Monastery; ever since then you've sworn revenge against the restless dead. The Templars showed you everything you needed to know. You walk in the day, so that the undead may only walk in the night."
-	outfit = /datum/outfit/job/daywalker
-	allowed_races = list(SPEC_ID_HUMEN)
-	grant_lit_torch = TRUE
+	migrant_job = /datum/job/migrant/daywalker
 
-/datum/outfit/job/daywalker/pre_equip(mob/living/carbon/human/H)
-	..()
+/datum/job/migrant/daywalker
+	title = "Daywalker"
+	tutorial = "Some knaves are always trying to wade upstream. You witnessed your entire village be consumed by a subservient vampiric horde - the local Priest grabbed you, and brought you to a remote Monastery; ever since then you've sworn revenge against the restless dead. The Templars showed you everything you needed to know. You walk in the day, so that the undead may only walk in the night."
+	outfit = /datum/outfit/daywalker
+	allowed_races = list(SPEC_ID_HUMEN)
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
+	jobstats = list(
+		STATKEY_END = 2,
+		STATKEY_SPD = 2, //Giving speed for help with expert dodging at the cost of no added strength or constitution
+	)
+
+	skills = list(
+		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 4,
+		/datum/skill/combat/crossbows = 3,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/climbing = 5,
+		/datum/skill/misc/swimming = 4,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/misc/medicine = 2,
+		///removed firearms skill, why did they even get this?
+	)
+
+	traits = list(TRAIT_DODGEEXPERT, TRAIT_STEELHEARTED)
+	cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
+	voicepack_m = /datum/voicepack/male/knight
+
+/datum/job/migrant/daywalker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.virginity = TRUE
+	spawned.set_patron(/datum/patron/divine/astrata)
+	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+
+/datum/outfit/daywalker
+	name = "Daywalker (Migrant Wave)"
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	neck = /obj/item/clothing/neck/psycross/silver/astrata
-	gloves = /obj/item/clothing/gloves/fingerless/shadowgloves // Would give em Fingerless, but parrying with fists sounds funny as fuck
+	gloves = /obj/item/clothing/gloves/fingerless/shadowgloves
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	shirt = /obj/item/clothing/shirt/tunic/colored/black
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	shoes = /obj/item/clothing/shoes/nobleboot
-	beltl = /obj/item/flashlight/flare/torch/lantern
+	beltl = /obj/item/ammo_holder/quiver/bolt/holy
 	mask = /obj/item/clothing/face/goggles
-	beltr = /obj/item/weapon/sword/rapier
+	beltr = /obj/item/weapon/sword/silver ///Giving them something that ISNT an exact copy of the witch hunter.
 	belt = /obj/item/storage/belt/leather/steel
+	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/silver = 1,
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/rope/chain = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
+	)
 	ring = /obj/item/clothing/ring/silver
-	H.virginity = TRUE
-
-	if(H.mind)
-		if(H.patron != /datum/patron/divine/astrata)
-			H.set_patron(/datum/patron/divine/astrata)
-
-		H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE) // can you guys help me, there's so many vampires
-		H.adjust_skillrank(/datum/skill/misc/climbing, 5)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 4, TRUE) // some motherfuckers are always trying to ice skate uphill
-		H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/firearms, 2, TRUE) // Blade 3 Trinity
-		H.change_stat(STATKEY_STR, 1)
-		H.change_stat(STATKEY_CON, 1)
-		H.change_stat(STATKEY_END, 2)
-	H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	H.verbs |= /mob/living/carbon/human/proc/torture_victim //ARE YOU A FUCKING VAMPIRE?
-	H.cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
 
 /datum/migrant_wave/daywalker
 	name = "Astrata's Daywalker"
@@ -56,4 +72,4 @@
 	roles = list(
 		/datum/migrant_role/daywalker = 1,
 	)
-	greet_text = "You give the Monarch's demense a message. You tell them it's open season on all suckheads."
+	greet_text = "You give the Monarch's demesne a message. You tell them it's open season on all suckheads."

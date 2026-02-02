@@ -43,9 +43,6 @@
 /obj/effect/abstract/ex_act(severity, target)
 	return
 
-/obj/effect/abstract/has_gravity(turf/T)
-	return FALSE
-
 /obj/effect/abstract/faux_density
 	name = ""
 	desc = ""

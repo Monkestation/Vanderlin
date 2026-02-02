@@ -143,7 +143,7 @@
 // If you need to set vars on the new cell other than the basic ones
 /datum/automata_cell/explosion/proc/setup_new_cell(datum/automata_cell/explosion/E)
 	if(E.shockwave)
-		E.shockwave.alpha = E.power
+		E.shockwave.alpha = max(60, E.power * 6)
 	return
 
 /datum/automata_cell/explosion/proc/power_to_ranges(power_val)
@@ -205,7 +205,6 @@
 		var/atom/target = null
 		var/list/ranges = power_to_ranges(power)
 
-		in_turf.explosion_level = max(in_turf.explosion_level, explosion_severity)
 		INVOKE_ASYNC(in_turf, TYPE_PROC_REF(/atom, ex_act), explosion_severity, target, in_turf, ranges["devastation"], ranges["heavy"], ranges["light"], ranges["flame"])
 
 		for(var/atom/A in in_turf)
@@ -339,9 +338,9 @@ as having entered the turf.
 
 	if(initial_call) //stuff that is supposed to happen just once, calls explosion on lower and higher level
 		var/above = GET_TURF_ABOVE(epicenter)
-		if(istype(above, /turf/open/transparent/openspace))
+		if(istype(above, /turf/open/openspace))
 			cell_explosion(above, power * 0.8, falloff, falloff_shape, direction, explosion_source, initial_call = FALSE)
-		if(istype(epicenter,/turf/open/transparent/openspace))
+		if(istype(epicenter,/turf/open/openspace))
 			var/below = GET_TURF_BELOW(epicenter)
 			cell_explosion(below, power * 0.8, falloff, falloff_shape, direction, explosion_source, initial_call = FALSE)
 

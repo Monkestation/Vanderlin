@@ -74,14 +74,14 @@
  */
 /datum/action/cooldown/spell/undirected/touch/proc/create_hand(mob/living/carbon/cast_on)
 	SHOULD_CALL_PARENT(TRUE)
-
+	charges = initial(charges)
 	var/obj/item/melee/touch_attack/new_hand = new hand_path(cast_on, src)
 	if(!cast_on.put_in_hands(new_hand, del_on_fail = TRUE))
 		reset_spell_cooldown()
 		if (cast_on.usable_hands == 0)
-			to_chat(cast_on, span_warning("You dont have any usable hands!"))
+			to_chat(cast_on, span_warning("I don't have any usable hands!"))
 		else
-			to_chat(cast_on, span_warning("Your hands are full!"))
+			to_chat(cast_on, span_warning("My hands are full!"))
 		return FALSE
 
 	attached_hand = new_hand

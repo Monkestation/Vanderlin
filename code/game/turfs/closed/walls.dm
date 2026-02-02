@@ -7,7 +7,7 @@
 	icon_state = "wall"
 	explosion_block = 1
 
-	baseturfs = list(/turf/open/floor/dirt/road)
+	baseturfs = /turf/open/floor/dirt/road
 
 	smoothing_groups = SMOOTH_GROUP_CLOSED_WALL
 
@@ -40,6 +40,7 @@
 /turf/closed/wall/proc/dismantle_wall(devastated=0, explode=0)
 	playsound(src, 'sound/blank.ogg', 100, TRUE)
 	ScrapeAway()
+	QUEUE_SMOOTH_NEIGHBORS(src)
 
 /turf/closed/wall/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
 	if(target == src)
@@ -93,7 +94,6 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	feel_turf(user)
 	add_fingerprint(user)
 
 /turf/closed/wall/attackby(obj/item/W, mob/user, list/modifiers)

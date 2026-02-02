@@ -10,6 +10,7 @@
 
 /datum/clan_leader/lord
 	lord_spells = list(
+		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/shapeshift/bat,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
 		/datum/action/cooldown/spell/undirected/shapeshift/mist

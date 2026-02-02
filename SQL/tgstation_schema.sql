@@ -292,7 +292,7 @@ DROP TABLE IF EXISTS `role_time_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 
-CREATE TABLE IF NOT EXISTS `role_time_log` (
+CREATE TABLE `role_time_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ckey` varchar(32) NOT NULL,
   `job` varchar(128) NOT NULL,
@@ -325,6 +325,10 @@ CREATE TABLE `player` (
   `accountjoindate` DATE DEFAULT NULL,
   `flags` smallint(5) unsigned DEFAULT '0' NOT NULL,
   `discord_id` BIGINT(20) NULL DEFAULT NULL,
+  `twitch_rank` VARCHAR(32) NOT NULL DEFAULT '',
+  `twitch_user` VARCHAR(32) NOT NULL DEFAULT '',
+  `patreon_key` VARCHAR(32) NOT NULL DEFAULT 'None',
+  `patreon_rank` VARCHAR(32) NOT NULL DEFAULT 'None',
   PRIMARY KEY (`ckey`),
   KEY `idx_player_cid_ckey` (`computerid`,`ckey`),
   KEY `idx_player_ip_ckey` (`ip`,`ckey`)
@@ -464,43 +468,6 @@ CREATE TABLE `schema_revision` (
   `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`major`, `minor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Table structure for table `stickyban`
---
-DROP TABLE IF EXISTS `stickyban`;
-CREATE TABLE `stickyban` (
-	`ckey` VARCHAR(32) NOT NULL,
-	`reason` VARCHAR(2048) NOT NULL,
-	`banning_admin` VARCHAR(32) NOT NULL,
-	`datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`ckey`)
-) ENGINE=InnoDB;
-
---
--- Table structure for table `stickyban_matched_ckey`
---
-DROP TABLE IF EXISTS `stickyban_matched_ckey`;
-CREATE TABLE `stickyban_matched_ckey` (
-	`stickyban` VARCHAR(32) NOT NULL,
-	`matched_ckey` VARCHAR(32) NOT NULL,
-	`first_matched` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`last_matched` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	`exempt` TINYINT(1) NOT NULL DEFAULT '0',
-	PRIMARY KEY (`stickyban`, `matched_ckey`)
-) ENGINE=InnoDB;
-
---
--- Table structure for table `stickyban_matched_ip`
---
-DROP TABLE IF EXISTS `stickyban_matched_ip`;
-CREATE TABLE `stickyban_matched_ip` (
-	`stickyban` VARCHAR(32) NOT NULL,
-	`matched_ip` INT UNSIGNED NOT NULL,
-	`first_matched` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`last_matched` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`stickyban`, `matched_ip`)
-) ENGINE=InnoDB;
 
 --
 -- Table structure for table `stickyban_matched_cid`

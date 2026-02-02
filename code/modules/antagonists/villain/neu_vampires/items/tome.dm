@@ -20,17 +20,17 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 	var/list/talismans = list()
 	var/current_page = PAGE_FOREWORD
 
-/obj/item/tome/New()
-	..()
-	GLOB.arcane_tomes.Add(src)
+/obj/item/tome/Initialize(mapload)
+	. = ..()
+	GLOB.arcane_tomes |= src
+
+/obj/item/tome/Destroy()
+	GLOB.arcane_tomes -= src
+	QDEL_LIST(talismans)
+	return ..()
 
 /obj/item/tome/salt_act()
 	fire_act(1000, 200)
-
-/obj/item/tome/Destroy()
-	GLOB.arcane_tomes.Remove(src)
-	QDEL_LIST(talismans)
-	. = ..()
 
 /obj/item/tome/proc/tome_text()
 	var/page_data=null
@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 			dat += "<i>After contact was made between the planes, it was a matter of time before some people would appear who would actively seek Nar-Sie.\
 					<br><br>Either because his love of drama and chaos resonated with them, and they wanted to become his heralds, performing sacrifices for his amusement, \
 					or because they were in awe with his... \"otherworldlyness?\" People who had lived until now grounded in reality, and became quite fascinated with something mystic, yet tangible.\
-					<br><br>And of course, then came those who seeked to defy him. Either in the name of their own gods, or out of their own sense of morality, but little do those know, \
+					<br><br>And of course, then came those who sought to defy him. Either in the name of their own gods, or out of their own sense of morality, but little do those know, \
 					Nar-Sie loves them equally, and doesn't care too much from whom the blood spills.</i>"
 		if (PAGE_LORE3)
 			dat={"<div align="center"><b>Addendum III: "The geometer's calling card"</b></div><br>"}
@@ -167,7 +167,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 /obj/item/tome/attack_hand(mob/living/user)
 	if(!user.clan && state == TOME_OPEN)
 		to_chat(user, span_warning("As you reach to pick up \the [src], you feel a searing heat inside of you!") )
-		playsound(loc, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
 		user.Knockdown(5)
 		user.Stun(5)
 		flick("tome-stun", src)
@@ -187,7 +187,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 /obj/item/tome/attack_self(mob/living/user)
 	if(!user.clan)//Too dumb to live.
 		to_chat(user, span_warning("You try to peek inside \the [src], only to feel a discharge of energy and a searing heat inside of you!") )
-		playsound(loc, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
 		user.Knockdown(5)
 		user.Stun(5)
 		if (state == TOME_OPEN)

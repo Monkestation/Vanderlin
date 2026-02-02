@@ -1,9 +1,7 @@
 /datum/migrant_role/acolytes
 	name = "Acolytes"
-	greet_text = "The words of the Tens are everything to you and this is why, you are on your way to the nearby populated area to help the local church."
-	grant_lit_torch = TRUE
-	outfit = /datum/outfit/job/monk
-	allowed_races = RACES_PLAYER_NONHERETICAL
+	greet_text = "The word of the Ten is everything to you and your pilgrimage has brought to you seek the local church."
+	migrant_job = /datum/job/monk
 
 /datum/migrant_wave/acolytes
 	name = "The Holy Voyage"

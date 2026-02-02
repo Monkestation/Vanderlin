@@ -3,8 +3,8 @@
 	desc = ""
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "tongs"
-	force = 5
-	possible_item_intents = list(/datum/intent/mace/strike)
+	force = DAMAGE_CLUB / 3
+	possible_item_intents = list(MACE_STRIKE)
 	sharpness = IS_BLUNT
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
@@ -29,7 +29,7 @@
 	. = ..()
 	hott = world.time
 	update_appearance(UPDATE_ICON_STATE)
-	addtimer(CALLBACK(src, PROC_REF(make_unhot), world.time), 10 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(make_unhot), world.time), 30 SECONDS)
 
 /obj/item/weapon/tongs/update_icon_state()
 	. = ..()
@@ -76,18 +76,18 @@
 
 /obj/item/weapon/tongs/pre_attack(obj/item/A, mob/living/user, list/modifiers)
 	if(held_item?.tong_interaction(A, user))
-		return
+		return TRUE
 
 	if(!istype(A))
 		return ..()
 
-	if(A.tool_flags & TOOL_USAGE_TONGS)
+	if(A.tool_flags & TOOL_USAGE_TONGS || HAS_TRAIT(A, TRAIT_NEEDS_QUENCH))
 		if(!held_item)
 			user.visible_message("<span class='info'>[user] picks up [A] with [src].</span>")
 			held_item = A
 			A.forceMove(src)
 			update_appearance(UPDATE_ICON_STATE)
-			return
+			return TRUE
 	return ..()
 
 /obj/item/weapon/tongs/getonmobprop(tag)
@@ -105,7 +105,7 @@
 	force = 3
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = 20
+	max_integrity = INTEGRITY_WORST / 5
 
 /atom/proc/tong_interaction(atom/target, mob/user)
 	return FALSE

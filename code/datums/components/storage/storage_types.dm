@@ -15,6 +15,10 @@
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword))
 
+/datum/component/storage/concrete/scabbard/kazengun/New(list/raw_args)
+	. = ..()
+	set_holdable(list(/obj/item/weapon/sword/katana))
+
 /datum/component/storage/concrete/boots
 	max_items = 1
 	rustle_sound = 'sound/foley/equip/scabbard_holster.ogg'

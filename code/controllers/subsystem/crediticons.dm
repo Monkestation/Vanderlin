@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(credits_icons)
 
 SUBSYSTEM_DEF(crediticons)
 	name = "crediticons"
-	wait = 20
+	wait = 60
 	flags = SS_NO_INIT
 	priority = 1
 	var/list/processing = list()
@@ -15,24 +15,26 @@ SUBSYSTEM_DEF(crediticons)
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 
-	while (currentrun.len)
-		var/mob/living/carbon/human/thing = currentrun[currentrun.len]
+	while(length(currentrun))
+		var/client/client = currentrun[length(currentrun)]
 		currentrun.len--
-		if (!thing || QDELETED(thing))
-			processing -= thing
-			if (MC_TICK_CHECK)
+		if(QDELETED(client))
+			processing -= client
+			if(MC_TICK_CHECK)
 				return
 			continue
-		add_credit(thing)
-		STOP_PROCESSING(SScrediticons, thing)
+		add_credit(client)
+		STOP_PROCESSING(SScrediticons, client)
 		if(MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/crediticons/proc/add_credit(mob/living/carbon/human/actor)
-	if(!actor.mind || !actor.client)
+/datum/controller/subsystem/crediticons/proc/add_credit(client/actor_client)
+	if(!actor_client)
+		return
+	var/mob/living/carbon/human/actor = actor_client.mob
+	if(!istype(actor) || QDELETED(actor))
 		return
 	var/datum/mind/actor_mind = actor.mind
-	var/client/actor_client = actor.client
 	var/datum/job/job = actor_mind.assigned_role
 	var/datum/preferences/preferences = actor_client.prefs
 	if(!preferences)
@@ -57,9 +59,13 @@ SUBSYSTEM_DEF(crediticons)
 		return null
 
 	var/credit_name = "[target.real_name]"
+	if(target.original_name)
+		credit_name = "[target.original_name]"
 	if(target.mind.assigned_role)
 		var/datum/job/job = target.mind.assigned_role
 		var/used_title = job.get_informed_title(target)
+		if(job.parent_job)
+			used_title = job.parent_job.get_informed_title(target)
 		if(used_title)
 			credit_name = "[credit_name]\nthe [used_title]"
 

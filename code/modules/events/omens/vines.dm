@@ -7,3 +7,8 @@
 	min_players = 3
 	req_omen = TRUE
 	todreq = list("dusk", "night", "dawn", "day")
+
+	tags = list(
+		TAG_NATURE,
+		TAG_CURSE,
+	)

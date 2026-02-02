@@ -16,7 +16,7 @@
 	grow = 0.037
 
 ///these were unfortunately requested to not be smoothed. I will likely create a smooth helper version aswell though
-///the issue is they would need atleast a 2x2 to smooth proper.
+///the issue is they would need at least a 2x2 to smooth proper.
 /obj/structure/hotspring
 	abstract_type = /obj/structure/hotspring
 	name = "hot spring"
@@ -28,13 +28,11 @@
 
 	var/edge = FALSE
 
-	var/obj/effect/abstract/particle_holder/cached/particle_effect
-
 /obj/structure/hotspring/Initialize()
 	. = ..()
-	particle_effect = new(src, /particles/hotspring_steam, 6)
+	var/obj/effect/abstract/shared_particle_holder/hotspring_steam = add_shared_particles(/particles/hotspring_steam, "hotspring", pool_size = 4)
 	//render the steam over mobs and objects on the game plane
-	particle_effect.vis_flags &= ~VIS_INHERIT_PLANE
+	hotspring_steam.vis_flags &= ~VIS_INHERIT_PLANE
 
 	var/turf/turf = get_turf(src)
 	turf.turf_flags |= TURF_NO_LIQUID_SPREAD

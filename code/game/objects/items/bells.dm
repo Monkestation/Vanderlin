@@ -18,7 +18,7 @@
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, bell_ring))
 		return
-	playsound(src.loc, 'sound/misc/handbell.ogg', 50, 1)
+	playsound(src, 'sound/misc/handbell.ogg', 50, 1)
 
 	user.visible_message("<span class='notice'>[user] rings [src].</span>", span_notice("You ring [src]."))
 	for(var/mob/M in view(10, src.loc))

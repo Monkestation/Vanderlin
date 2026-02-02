@@ -23,8 +23,7 @@
 /mob/living/changeNext_move(num, hand)
 	var/mod = next_move_modifier
 	var/adj = next_move_adjust
-	for(var/i in status_effects)
-		var/datum/status_effect/S = i
+	for(var/datum/status_effect/S as anything in status_effects)
 		mod *= S.nextmove_modifier()
 		adj += S.nextmove_adjust()
 	if(!hand)
@@ -231,9 +230,11 @@
 /mob/proc/resolveAdjacentClick(atom/clicked_atom, obj/item/held_item, list/modifiers, used_hand)
 	if(!clicked_atom)
 		return
+
 	if(held_item)
 		held_item.melee_attack_chain(src, clicked_atom, modifiers)
 		return
+
 	if(ismob(clicked_atom))
 		var/adf = used_intent.clickcd
 		if(istype(rmb_intent, /datum/rmb_intent/aimed))

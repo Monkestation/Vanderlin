@@ -30,3 +30,13 @@
 
 	arg_2 = MAT_COAL
 	arg_4 = 20 SECONDS
+
+
+/datum/persistant_workorder/mine/gem
+	name = "Mine Stone"
+	ui_icon = 'icons/roguetown/items/natural.dmi'
+	ui_icon_state = "iridescent_scale"
+
+	arg_2 = MAT_GEM
+	arg_4 = 45 SECONDS
+

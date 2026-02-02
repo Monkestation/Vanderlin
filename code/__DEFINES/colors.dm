@@ -118,9 +118,6 @@
 	var/static/list/all_colors = GLOB.peasant_dyes + GLOB.noble_dyes + GLOB.royal_dyes
 	return all_colors[input]
 
-
-#define hex2num(X) text2num(X, 16)
-
 #define CM_COLOR_SAT_MIN 0.6
 #define CM_COLOR_SAT_MAX 0.7
 #define CM_COLOR_LUM_MIN 0.65

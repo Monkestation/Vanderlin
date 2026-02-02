@@ -79,27 +79,27 @@
 			var/datum/species/species = H.dna.species
 			var/list/specstat_list = (gender == FEMALE) ? species.specstats_f : species.specstats_m
 			for(var/stat in specstat_list)
-				set_stat_modifier("innate_sex", stat, specstat_list[stat])
+				set_stat_modifier(STATMOD_SEX, stat, specstat_list[stat])
 
 		switch(H.age)
 			if(AGE_CHILD)
-				set_stat_modifier("innate_age", STATKEY_STR, -2)
-				set_stat_modifier("innate_age", STATKEY_CON, -2)
-				set_stat_modifier("innate_age", STATKEY_PER, 1)
-				set_stat_modifier("innate_age", STATKEY_END, 1)
-				set_stat_modifier("innate_age", STATKEY_SPD, round(rand(1,2)))
+				set_stat_modifier(STATMOD_AGE, STATKEY_STR, -2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_CON, -2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, round(rand(1,2)))
 			// nothing for adults/immortals,
 			if(AGE_MIDDLEAGED)
-				set_stat_modifier("innate_age", STATKEY_END, 1)
-				set_stat_modifier("innate_age", STATKEY_SPD, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, -1)
 			if(AGE_OLD)
-				set_stat_modifier("innate_age", STATKEY_STR, -2)
-				set_stat_modifier("innate_age", STATKEY_PER, 2)
-				set_stat_modifier("innate_age", STATKEY_END, -1)
-				set_stat_modifier("innate_age", STATKEY_CON, -1)
-				set_stat_modifier("innate_age", STATKEY_INT, 2)
-				set_stat_modifier("innate_age", STATKEY_SPD, -1)
-				set_stat_modifier("innate_age", STATKEY_LCK, 1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_STR, -2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_END, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_CON, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_INT, 2)
+				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, -1)
+				set_stat_modifier(STATMOD_AGE, STATKEY_LCK, 1)
 
 		if(HAS_TRAIT(src, TRAIT_PUNISHMENT_CURSE))
 			change_stat(STATKEY_STR, -3)
@@ -164,6 +164,31 @@
 				modified_fortune = new_total
 				UPDATE_FORTUNE()
 
+/mob/living/proc/set_stat_modifier_list(source, stat_keys_values)
+	if(!source || !length(stat_keys_values))
+		return
+	for(var/stat_key in stat_keys_values)
+		if(!(stat_key in MOBSTATS))
+			continue
+		var/amount = stat_keys_values[stat_key]
+		if(!amount)
+			continue
+		set_stat_modifier(source, stat_key, amount)
+
+/**
+ * Set a stat key to value via a modifier at that moment
+ * * source - Stringed source key
+ * * stat_key - Stat to adjust
+ * * value - Value to adjust to
+ */
+/mob/living/proc/modifier_set_stat_to(source, stat_key, value)
+	if(!source || !stat_key || !value)
+		return
+	var/current = get_stat(stat_key)
+	if(!current)
+		return
+	set_stat_modifier(source, stat_key, value - current)
+
 /mob/living/proc/adjust_stat_modifier(source, stat_key, amount)
 	if(!source || !(stat_key in MOBSTATS) || !amount)
 		return
@@ -198,6 +223,17 @@
 		if(STATKEY_LCK)
 			modified_fortune = new_total
 			UPDATE_FORTUNE()
+
+/mob/living/proc/adjust_stat_modifier_list(source, stat_keys_values)
+	if(!source || !length(stat_keys_values))
+		return
+	for(var/stat_key in stat_keys_values)
+		if(!(stat_key in MOBSTATS))
+			continue
+		var/amount = stat_keys_values[stat_key]
+		if(!amount)
+			continue
+		adjust_stat_modifier(source, stat_key, amount)
 
 /mob/living/proc/remove_stat_modifier(source)
 	if(!source)
@@ -388,6 +424,35 @@
 	UPDATE_INTELLIGENCE()
 	UPDATE_SPEED()
 	UPDATE_FORTUNE()
+
+/mob/living/proc/reset_and_reroll_stats()
+	//Reset base stats to defaults
+	base_strength = 10
+	base_perception = 10
+	base_endurance = 10
+	base_constitution = 10
+	base_intelligence = 10
+	base_speed = 10
+	base_fortune = 10
+
+	//Clear all cached modifiers
+	modified_strength = 0
+	modified_perception = 0
+	modified_endurance = 0
+	modified_constitution = 0
+	modified_intelligence = 0
+	modified_speed = 0
+	modified_fortune = 0
+	stat_modifiers = list()
+
+	//Reset stat roll var so roll_mob_stats() will work
+	has_rolled_for_stats = FALSE
+
+	//Reroll mob stats
+	roll_mob_stats()
+
+	//recalc all modifiers to ensure final stats are up to date
+	recalculate_stats()
 
 #undef UPDATE_STRENGTH
 #undef UPDATE_PERCEPTION

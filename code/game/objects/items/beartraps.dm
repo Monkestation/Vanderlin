@@ -24,6 +24,7 @@
 	var/armed = FALSE // Is it armed?
 	var/trap_damage = 90 // How much brute damage the trap will do to its victim
 	var/used_time = 12 SECONDS // How many seconds it takes to disarm the trap
+	var/makeshift_prob = 0
 	max_integrity = 100
 	grid_width = 64
 	grid_height = 64
@@ -112,7 +113,7 @@
 
 /obj/item/restraints/legcuffs/beartrap/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is sticking [user.p_their()] head in the [src.name]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	return (BRUTELOSS)
 
 /obj/item/restraints/legcuffs/beartrap/attack_self(mob/user, list/modifiers)
@@ -123,7 +124,7 @@
 	if(ishuman(user) && !user.stat && !HAS_TRAIT(src, TRAIT_RESTRAINED))
 		var/mob/living/L = user
 		if(do_after(user, (5 SECONDS) - (L.STASTR*2), user))
-			if(prob(50 + (L.get_skill_level(/datum/skill/craft/traps) * 10))) // 100% chance to set traps properly at Master trapping
+			if(prob(50 - makeshift_prob + (L.get_skill_level(/datum/skill/craft/traps) * 10))) // 100% chance to set traps properly at Master trapping, assuming the trap isn't makeshift
 				armed = TRUE // Impossible to use in hand if it's armed
 				L.log_message("has armed the [src]!", LOG_ATTACK)
 				L.dropItemToGround(src) // We drop it instantly on the floor beneath us
@@ -131,15 +132,15 @@
 				update_appearance(UPDATE_ICON_STATE)
 				src.alpha = 80 // Set lower visibility for everyone
 				L.adjust_experience(/datum/skill/craft/traps, L.STAINT * boon, FALSE) // We learn how to set them better, little by little.
-				to_chat(user, "<span class='notice'>I arm \the [src].</span>")
+				to_chat(user, span_notice("I arm \the [src]."))
 			else
 				if(old)
-					user.visible_message("<span class='warning'>The old [src.name] breaks under stress!</span>")
-					playsound(src.loc, 'sound/foley/breaksound.ogg', 100, TRUE, -1)
+					user.visible_message(span_warning("The old [src.name] breaks under stress!"))
+					playsound(src, 'sound/foley/breaksound.ogg', 100, TRUE, -1)
 					qdel(src)
 				else
-					user.visible_message("<span class='warning'>Curses! I couldn't keep [src.name] open tight enough!</span>")
-					playsound(src.loc, 'sound/items/beartrap.ogg', 300, TRUE, -1)
+					user.visible_message(span_warning("Curses! I couldn't keep [src.name] open tight enough!"))
+					playsound(src, 'sound/items/beartrap.ogg', 300, TRUE, -1)
 					return
 
 /obj/item/restraints/legcuffs/beartrap/proc/close_trap(atom/triggerer, atom/item)
@@ -147,7 +148,7 @@
 	anchored = FALSE // Take it off the ground
 	alpha = 255
 	update_appearance(UPDATE_ICON_STATE)
-	playsound(src.loc, 'sound/items/beartrap.ogg', 300, TRUE, -1)
+	playsound(src, 'sound/items/beartrap.ogg', 300, TRUE, -1)
 	triggerer.log_message("has triggered the [src][item ? " with [item]" : ""]!", LOG_ATTACK)
 
 /obj/item/restraints/legcuffs/beartrap/Crossed(AM as mob|obj)
@@ -180,8 +181,8 @@
 					snap = FALSE
 			if(snap)
 				close_trap(L)
-				L.visible_message("<span class='danger'>[L] triggers \the [src].</span>", \
-						"<span class='danger'>I trigger \the [src]!</span>")
+				L.visible_message(span_danger("[L] triggers \the [src]."), \
+						span_danger("I trigger \the [src]!"))
 				if(L.apply_damage(trap_damage, BRUTE, def_zone, L.run_armor_check(def_zone, "stab", damage = trap_damage)))
 					L.Stun(80)
 				L.consider_ambush()
@@ -193,3 +194,9 @@
 	desc = "Curious is the trapmaker's art. Their efficacy unwitnessed by their own eyes."
 	melting_material = /datum/material/iron
 	melt_amount = 75
+
+/obj/item/restraints/legcuffs/beartrap/crafted/makeshift
+	makeshift_prob = 15 //50 - 15 = 35% chance to set up instead of flat 50%
+	trap_damage = 80 //10 less damage than the actual metal beartrap
+	name = "makeshift mantrap"
+	melting_material = null

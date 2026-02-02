@@ -112,8 +112,6 @@ GLOBAL_PROTECT(tracy_init_reason)
 
 	load_nameban()
 
-	load_crownlist()
-
 	load_bypassage()
 
 //	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
@@ -356,12 +354,10 @@ GLOBAL_PROTECT(tracy_init_reason)
 		to_chat(world, "Please be patient as the server restarts. You will be automatically reconnected in about 60 seconds.")
 		Master.Shutdown() //run SS shutdowns
 
-
 #ifdef UNIT_TESTS
 	FinishTestRun()
 	return
-#endif
-
+#else
 	if(TgsAvailable())
 		send2chat(new /datum/tgs_message_content("Round ending!"), CONFIG_GET(string/chat_announce_new_game))
 		testing("tgsavailable passed")
@@ -386,8 +382,7 @@ GLOBAL_PROTECT(tracy_init_reason)
 			shutdown_byond_tracy()
 			SSplexora._Shutdown()
 			TgsEndProcess()
-	else
-		testing("tgsavailable [TgsAvailable()]")
+			return ..()
 
 	SSplexora._Shutdown()
 	log_world("World rebooted at [time_stamp()]")
@@ -396,17 +391,27 @@ GLOBAL_PROTECT(tracy_init_reason)
 	TgsReboot() // TGS can decide to kill us right here, so it's important to do it last
 	shutdown_byond_tracy()
 	..()
+#endif
 
 /world/proc/update_status()
 	var/s = ""
-	s += "<center><a href=\"https://discord.gg/zNAGFDcQ\">"
-	s += "<big><b>Vanderlin - Now 24/7 (Hosted by Monkestation)</b></big></a><br>"
-	s += "<b>Dark Medieval Fantasy Roleplay<b><br>"
+	var/server_name = CONFIG_GET(string/servername)
+	var/server_subtitle = CONFIG_GET(string/serversubtitle)
+	var/hosted_by = CONFIG_GET(string/hostedby)
+
+	s += "<center><big><b>[server_name ? server_name : "Vanderlin (Dev)"]"
+	if (hosted_by)
+		s += " (Hosted by [hosted_by])"
+	s += "</b></big><br>"
+	if (server_subtitle)
+		s += "<b>[server_subtitle]</b><br>"
 	s += "\["
-	if(SSticker.current_state <= GAME_STATE_PREGAME)
+
+	if (SSticker.current_state <= GAME_STATE_PREGAME)
 		s += "<b>GAME STATUS:</b> IN LOBBY"
 	else
 		s += "<b>GAME STATUS:</b> PLAYING"
+
 	status = s
 	return s
 

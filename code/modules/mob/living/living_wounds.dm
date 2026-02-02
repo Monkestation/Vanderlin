@@ -84,6 +84,7 @@
 	if(!wound.apply_to_mob(src, silent, crit_message))
 		qdel(wound)
 		return
+	SEND_SIGNAL(src, COMSIG_LIVING_WOUND_GAINED, wound)
 	return wound
 
 /// Simple version for removing a wound - DO NOT CALL THIS ON CARBON MOBS!
@@ -101,7 +102,7 @@
 /// Simple version of crit rolling, attempts to do a critical hit on a mob that uses simple wounds - DO NOT CALL THIS ON CARBON MOBS, THEY HAVE BODYPARTS!
 /mob/living/proc/simple_woundcritroll(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE)
 	if(!bclass || !dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		return FALSE
+		return
 
 	var/do_crit = TRUE
 	if(user)
@@ -219,7 +220,7 @@
 
 /// Simple version for adding an embedded object - DO NOT CALL THIS ON CARBON MOBS!
 /mob/living/proc/simple_add_embedded_object(obj/item/embedder, silent = FALSE, crit_message = FALSE)
-	if(!embedder || !can_embed(embedder) || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) || HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+	if(!embedder || !embedder.can_embed() || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) || HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 		return FALSE
 	LAZYADD(simple_embedded_objects, embedder)
 	embedder.is_embedded = TRUE

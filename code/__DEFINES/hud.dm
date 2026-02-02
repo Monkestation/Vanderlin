@@ -200,6 +200,7 @@
 #define stamina_loc "WEST-1,CENTER+2"
 #define energy_loc "WEST-1:0,CENTER+4"
 #define rogueui_blood "WEST-1:6,CENTER+4:17"
+#define rogueui_vitae "WEST-5:-8,CENTER+2"
 
 #define rogueui_cmode "WEST-1:-16,CENTER+1"
 #define rogueui_def "WEST-2,NORTH-5"

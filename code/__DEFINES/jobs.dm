@@ -8,10 +8,11 @@
 #define JOB_UNAVAILABLE_SEX 7
 #define JOB_UNAVAILABLE_DEITY 8
 #define JOB_UNAVAILABLE_QUALITY 9
-#define JOB_UNAVAILABLE_PATREON 10
+#define JOB_UNAVAILABLE_DONATOR 10
 #define JOB_UNAVAILABLE_LASTCLASS 11
 #define JOB_UNAVAILABLE_ACCOUNTAGE 12
 #define JOB_UNAVAILABLE_JOB_COOLDOWN 13
+#define JOB_UNAVAILABLE_RACE_BANNED 14
 
 /* Job datum job_flags */
 /// Whether the mob is announced on arrival.
@@ -20,14 +21,34 @@
 #define JOB_SHOW_IN_CREDITS (1<<1)
 /// Whether the mob is equipped through SSjob.EquipRank() on spawn.
 #define JOB_EQUIP_RANK (1<<2)
-/// Whether the job is considered a regular crew member of the station. Equipment such as AI and cyborgs not included.
-#define JOB_CREW_MEMBER (1<<3)
 /// Whether this job can be joined through the new_player menu.
-#define JOB_NEW_PLAYER_JOINABLE (1<<4)
+#define JOB_NEW_PLAYER_JOINABLE (1<<3)
+/// Whether the job can be displayed on the actors list
+#define JOB_SHOW_IN_ACTOR_LIST (1<<4)
+
+#define ALL_FACTIONS list( \
+	FACTION_NONE, \
+	FACTION_NEUTRAL, \
+	FACTION_HOSTILE, \
+	FACTION_TOWN, \
+	FACTION_FOREIGNERS, \
+	FACTION_MIGRANTS, \
+	FACTION_UNDEAD, \
+	FACTION_PLANTS, \
+	FACTION_VINES, \
+	FACTION_CABAL, \
+	FACTION_RATS, \
+	FACTION_ORCS, \
+	FACTION_BUMS, \
+	FACTION_MATTHIOS \
+)
 
 #define FACTION_NONE		"None"
 #define FACTION_NEUTRAL		"Neutral"
+#define FACTION_HOSTILE		"Hostile"
 #define FACTION_TOWN		"Town"
+#define FACTION_FOREIGNERS  "Foreigners"
+#define FACTION_MIGRANTS  	"Migrants"
 #define FACTION_UNDEAD		"Undead"
 #define FACTION_PLANTS		"Plants"
 #define FACTION_VINES		"Vines" //Seemingly unused
@@ -46,6 +67,7 @@
 #define YOUNGFOLK		(1<<6)
 #define OUTSIDERS		(1<<7)
 #define COMPANY			(1<<8)
+#define INQUISITION 	(1<<9)
 
 #define UNDEAD			(1<<10)
 
@@ -55,7 +77,7 @@
 #define JCOLOR_SOLDIER "#b64949"
 #define JCOLOR_SERF "#669968"
 #define JCOLOR_PEASANT "#936d6c"
-
+#define JCOLOR_INQUISITION "#FF0000"
 
 // job display orders //
 
@@ -73,6 +95,7 @@
 
 #define JDO_APOTHECARY 6
 #define JDO_FELDSHER 6.1
+#define JDO_CLINICAPPRENTICE 6.2
 
 #define JDO_CAPTAIN 7
 #define JDO_VET 7.1
@@ -92,7 +115,6 @@
 #define JDO_GRAVETENDER 15
 #define JDO_CHURCHLING 15.1
 
-#define JDO_PURITAN 16
 #define JDO_SHEPHERD 17
 #define JDO_TEMPLAR 17.1
 
@@ -107,7 +129,7 @@
 #define JDO_BAPP 22
 #define JDO_ARTIFICER 23
 
-#define JDO_MASON 24
+
 
 #define JDO_BUTLER 25
 #define JDO_SERVANT 26
@@ -121,10 +143,12 @@
 #define JDO_FISHER 28.3
 #define JDO_HUNTER 28.4
 #define JDO_CARPENTER 28.6
+#define JDO_MASON 28.61
 #define JDO_CHEESEMAKER 28.7
 #define JDO_MINER 28.8
 #define JDO_MATRON 28.9
 #define JDO_GRAVEMAN 29
+
 
 #define JDO_JESTER 30
 #define JDO_BARD 30.1
@@ -145,8 +169,12 @@
 #define JDO_ORPHAN 37
 #define JDO_SOILCHILD 38
 
+#define JDO_PURITAN 40
+#define JDO_ORTHODOXIST	40.1
+#define JDO_ABSOLVER 40.2
 
 #define BITFLAG_CHURCH (1<<0)
 #define BITFLAG_ROYALTY (1<<1)
 #define BITFLAG_CONSTRUCTOR (1<<2)
 #define BITFLAG_GARRISON (1<<3)
+

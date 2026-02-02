@@ -29,7 +29,7 @@
 	plane = OPENSPACE_PLANE
 	appearance_flags = PLANE_MASTER
 
-/atom/movable/screen/plane_master/openspace/Initialize(mapload, ...)
+/atom/movable/screen/plane_master/openspace/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
 	add_filter("openspace_blur", 1, gauss_blur_filter(1))
 

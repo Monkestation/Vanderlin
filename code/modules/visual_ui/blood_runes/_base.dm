@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(blood_communion, list())
 		/obj/abstract/visual_ui_element/hoverable/draw_runes_manual,
 		/obj/abstract/visual_ui_element/hoverable/draw_runes_guided,
 		/obj/abstract/visual_ui_element/hoverable/erase_runes,
-		/obj/abstract/visual_ui_element/hoverable/movable/cultist,
+//		/obj/abstract/visual_ui_element/hoverable/movable/cultist,
 		)
 	sub_uis_to_spawn = list(
 		/datum/visual_ui/bloodcult_runes,
@@ -71,11 +71,9 @@ GLOBAL_LIST_INIT(blood_communion, list())
 	flick("rune_guide-click", src)
 	var/mob/M = get_user()
 	if (M)
-
 		var/list/available_runes = list()
 		var/i = 1
-		for(var/blood_spell in subtypesof(/datum/rune_spell))
-			var/datum/rune_spell/instance = blood_spell
+		for(var/datum/rune_spell/instance as anything in subtypesof(/datum/rune_spell))
 			if (initial(instance.secret))
 				continue
 			available_runes.Add("[initial(instance.name)] - \Roman[i]")
@@ -129,7 +127,7 @@ GLOBAL_LIST_INIT(blood_communion, list())
 		to_chat(user, span_warning("There aren't any rune words left to erase.") )
 
 //------------------------------------------------------------
-
+/*
 /obj/abstract/visual_ui_element/hoverable/movable/cultist
 	name = "Move Interface (Click and Drag)"
 	icon = 'icons/visual_ui/runes/16x32.dmi'
@@ -143,3 +141,4 @@ GLOBAL_LIST_INIT(blood_communion, list())
 
 	const_offset_y = -32
 	const_offset_x = -256
+*/

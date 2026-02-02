@@ -20,8 +20,8 @@
 	desc = "Gentle fall, la la description."
 	particleEffectType = /particles/weather/fall_leaves
 
-	weather_sounds = list(/datum/looping_sound/rain)
-	indoor_weather_sounds = list(/datum/looping_sound/indoor_rain)
+	weather_sounds = /datum/looping_sound/rain
+	indoor_weather_sounds = /datum/looping_sound/indoor_rain
 
 	minSeverity = 5
 	maxSeverity = 100

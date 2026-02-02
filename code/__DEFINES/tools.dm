@@ -1,8 +1,8 @@
 // Tool types
 #define TOOL_NONE			"none" //exclusively used for surgery validation
 #define TOOL_HAND			"hand" //exclusively used for surgery validation
-#define TOOL_SHARP			"sharp"	//exclusively used for surgery validation
-#define TOOL_HOT			"hot" //exclusively used for surgery validation
+#define TOOL_SHARP			"sharp implement"	//exclusively used for surgery validation
+#define TOOL_HOT			"hot implement" //exclusively used for surgery validation
 #define TOOL_CROWBAR 		"crowbar"
 #define TOOL_MULTITOOL 		"multitool"
 #define TOOL_SCREWDRIVER 	"screwdriver"

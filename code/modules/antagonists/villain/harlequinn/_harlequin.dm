@@ -1,18 +1,6 @@
-/datum/migrant_wave/harlequinn
-	name = "Harlequinn"
-	roles = list(
-		/datum/migrant_role/harlequinn = 1,
-	)
-	can_roll = FALSE
-
-/datum/migrant_role/harlequinn
-	name = "Harlequinn"
-	antag_datum = /datum/antagonist/harlequinn
-
-
 /datum/antagonist/harlequinn
 	name = "Harlequinn"
-	roundend_category = "harlequinn"
+	roundend_category = "Harlequinn"
 	antagpanel_category = "Harlequinn"
 	job_rank = ROLE_HARLEQUINN
 	antag_hud_name = "harlequinn"
@@ -39,7 +27,7 @@
 		return
 
 	H.unequip_everything()
-	H.equipOutfit(/datum/outfit/job/harlequin)
+	H.equipOutfit(/datum/outfit/harlequin)
 
 /datum/antagonist/harlequinn/proc/give_objectives()
 	var/list/contract_choices = list()

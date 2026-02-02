@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(storage_objects)
+
 /obj/structure/stockpile_storage
 	name = "stockpile storage"
 	desc = "A designated storage area for stockpiled goods."
@@ -13,6 +15,7 @@
 /obj/structure/stockpile_storage/Initialize(mapload)
 	. = ..()
 	REGISTER_REQUIRED_MAP_ITEM(1, INFINITY)
+	LAZYADD(GLOB.storage_objects, src)
 
 	proximity_monitor = new(src, storage_range, FALSE)
 	proximity_monitor.storage_obj = src
@@ -25,6 +28,7 @@
 
 /obj/structure/stockpile_storage/Destroy()
 	QDEL_NULL(proximity_monitor)
+	LAZYREMOVE(GLOB.storage_objects, src)
 	// Unlink from all stocks
 	for(var/datum/stock/S as anything in linked_stocks)
 		S.linked_storages -= src

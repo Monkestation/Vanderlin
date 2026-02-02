@@ -100,6 +100,17 @@
 	supports_directions = TRUE
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/stool/bar
+	name = "barstool"
+	desc = "Stool with a cloth cushion."
+	result_type = /obj/structure/chair/stool/bar
+	required_materials = list(
+		/obj/item/grown/log/tree/small = 1,
+		/obj/item/natural/cloth = 1
+	)
+	supports_directions = TRUE
+	craftdiff = 2
+
 /datum/blueprint_recipe/carpentry/loom
 	name = "loom"
 	desc = "A weaving loom for creating textiles."
@@ -142,6 +153,16 @@
 	)
 	craftdiff = 1
 
+/datum/blueprint_recipe/carpentry/psydon_wooden_cross
+	name = "wooden psycross"
+	desc = "A wooden psycross dedicated to Psydon."
+	required_materials = list(
+		/obj/item/grown/log/tree/small = 1,
+		/obj/item/grown/log/tree/stake = 3
+	)
+	result_type = /obj/structure/fluff/psycross/psydon
+	craftdiff = 1
+
 /datum/blueprint_recipe/carpentry/wooden_stairs_down
 	name = "wooden stairs (down)"
 	desc = "Wooden stairs leading downward."
@@ -154,8 +175,7 @@
 	craftdiff = 1
 
 /datum/blueprint_recipe/carpentry/wooden_stairs_down/check_craft_requirements(mob/user, turf/T, obj/structure/blueprint/blueprint)
-	var/turf/partner = get_step_multiz(get_turf(blueprint), DOWN)
-	partner = get_step(partner, turn(blueprint.blueprint_dir, 180))
+	var/turf/partner = get_step_multiz(get_turf(blueprint), turn(blueprint.blueprint_dir, 180)|DOWN)
 	if(!isopenturf(partner))
 		to_chat(user, span_warning("Need an openspace at the turf below!"))
 		return FALSE
@@ -447,16 +467,6 @@
 	)
 	craftdiff = 1
 
-/datum/blueprint_recipe/carpentry/noose
-	name = "noose"
-	desc = "hangs from the ceiling."
-	result_type = /obj/structure/noose
-	required_materials = list(
-		/obj/item/rope = 1
-	)
-	craftdiff = 1
-	requires_ceiling = TRUE
-
 /datum/blueprint_recipe/carpentry/apiary
 	name = "Apiary"
 	desc = "A home for bees."
@@ -467,3 +477,14 @@
 		/obj/item/natural/fibers = 2
 	)
 	craftdiff = 1
+
+/datum/blueprint_recipe/carpentry/dryclothes
+	name = "Clothline"
+	desc = "It can dry clothes well."
+	result_type = /obj/structure/dryclothes
+	required_materials = list(
+		/obj/item/grown/log/tree/small = 2,
+		/obj/item/rope = 2
+	)
+	craftdiff = 0
+

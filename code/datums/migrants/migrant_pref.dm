@@ -27,15 +27,16 @@
 			to_chat(prefs.parent, span_boldwarning("You are no longer in the migrant queue"))
 
 /datum/migrant_pref/proc/toggle_role_preference(role_type)
+	if(!active)
+		set_active(TRUE)
 	if(role_type in role_preferences)
 		role_preferences -= role_type
-	else
-		// Currently only allow 1 role preffed up for clarity
-		role_preferences.Cut()
-		if(SSmigrants.can_be_role(prefs.parent, role_type))
-			role_preferences += role_type
-			var/datum/migrant_role/role = MIGRANT_ROLE(role_type)
-			to_chat(prefs.parent, span_nicegreen("You have prioritized the [role.name]. This does not guarantee getting the role"))
+		return
+	role_preferences.Cut()
+	if(SSmigrants.can_be_role(prefs.parent, role_type))
+		role_preferences += role_type
+		var/datum/migrant_role/role = MIGRANT_ROLE(role_type)
+		to_chat(prefs.parent, span_nicegreen("You have prioritized the [role.name]. This does not guarantee getting the role"))
 
 /datum/migrant_pref/proc/post_spawn()
 	set_active(FALSE, TRUE)
@@ -66,6 +67,7 @@
 	else
 		var/datum/migrant_wave/wave = MIGRANT_WAVE(SSmigrants.current_wave)
 		main_dat += "<div style='text-align: center; font-weight: bold; margin-bottom: 10px;'>[wave.name]</div>"
+		main_dat += "<div style='text-align: center; margin-bottom: 10px;'>[wave.greet_text]</div>"
 
 		// Show if this wave was triumph-influenced
 		if(wave.triumph_total > 0)

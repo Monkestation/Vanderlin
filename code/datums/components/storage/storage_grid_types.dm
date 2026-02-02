@@ -221,7 +221,9 @@
 
 /datum/component/storage/concrete/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, list/modifiers, storage_click)
 	if(!storing.melting_material)
-		return FALSE
+		var/obj/item/ingot/ingot = storing.smeltresult
+		if(!ispath(ingot, /obj/item/ingot))
+			return FALSE
 	. = ..()
 
 /datum/component/storage/concrete/grid/anvil_bin
@@ -249,7 +251,7 @@
 /datum/component/storage/concrete/grid/kobold_storage/New(datum/P, ...)
 	. = ..()
 	set_holdable(list(
-		/obj/item/clothing/head/mob_holder,
+		/obj/item/mob_holder,
 		))
 
 /datum/component/storage/concrete/grid/zigbox
@@ -282,7 +284,7 @@
 		/obj/item/reagent_containers/food/snacks/fish,
 		/obj/item/natural/worms,
 		/obj/item/natural/bundle/worms,
-		/obj/item/fishing/bait,
+		/obj/item/fishing/lure,
 		/obj/item/grown/log/tree/stick,
 		/obj/item/natural/bundle/stick,
 		/obj/item/weapon/knife,//wouldn't it be cool to smuggle a knife somewhere via a bucket?
@@ -302,6 +304,8 @@
 				/obj/item/mana_battery/mana_crystal,
 				/obj/item/reagent_containers/powder,
 				/obj/item/organ,
+				/obj/item/neuFarm/seed,
+				/obj/item/mob_holder,
 				)
 			),
 		)
@@ -330,3 +334,61 @@
 	max_w_class = WEIGHT_CLASS_HUGE
 	not_while_equipped = TRUE
 	allow_big_nesting = TRUE
+
+/datum/component/storage/concrete/grid/pilltin
+	max_w_class = WEIGHT_CLASS_TINY
+	screen_max_rows = 1
+	screen_max_columns = 3
+	max_items = 3
+
+/datum/component/storage/concrete/grid/pilltin/New(datum/P, ...)
+	. = ..()
+	set_holdable(
+		typecacheof(
+			list(
+				/obj/item/reagent_containers/pill
+				)
+			)
+		)
+
+/datum/component/storage/concrete/grid/ifak
+	screen_max_rows = 2
+	screen_max_columns = 5
+	max_w_class = WEIGHT_CLASS_NORMAL
+
+/datum/component/storage/concrete/grid/ifak/New(datum/P, ...)
+	. = ..()
+	set_holdable(
+		typecacheof(
+			list(
+			/obj/item/weapon/surgery,
+			/obj/item/needle,
+			/obj/item/natural/worms/leech,
+			/obj/item/reagent_containers/lux,
+			/obj/item/natural/bundle/cloth,
+			/obj/item/natural/cloth,
+			/obj/item/reagent_containers/syringe,
+			/obj/item/reagent_containers/pill,
+			/obj/item/storage/fancy/pilltin,
+			/obj/item/candle/yellow
+			)
+		)
+	)
+
+/datum/component/storage/concrete/grid/drying_rack
+	max_w_class = WEIGHT_CLASS_HUGE
+	screen_max_rows = 8
+	screen_max_columns = 4
+
+/datum/component/storage/concrete/grid/drying_rack/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/clothing))
+
+/datum/component/storage/concrete/grid/tray
+	max_w_class = WEIGHT_CLASS_BULKY
+	screen_max_rows = 6
+	screen_max_columns = 1
+
+/datum/component/storage/concrete/grid/tray/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/plate))

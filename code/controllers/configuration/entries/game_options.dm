@@ -363,6 +363,9 @@
 /datum/config_entry/flag/save_spritesheets
 	default = FALSE
 
+/datum/config_entry/flag/ruler_required
+	config_entry_value = TRUE
+	default = TRUE
 
 /datum/config_entry/flag/starvation_death
 	default = FALSE

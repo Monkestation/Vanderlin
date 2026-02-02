@@ -12,27 +12,27 @@
 
 /datum/supply_pack/seeds/apple
 	name = "Apple"
-	cost = 4
+	cost = 10
 	contains = /obj/item/neuFarm/seed/apple
 
 /datum/supply_pack/seeds/weed
 	name = "Pipe Weed"
-	cost = 8
+	cost = 5
 	contains = /obj/item/neuFarm/seed/westleach
 
 /datum/supply_pack/seeds/sleaf
 	name = "Swamp Weed"
-	cost = 15
+	cost = 8
 	contains = /obj/item/neuFarm/seed/swampleaf
 
 /datum/supply_pack/seeds/berry
 	name = "Berry"
-	cost = 5
+	cost = 2
 	contains = /obj/item/neuFarm/seed/berry
 
 /datum/supply_pack/seeds/onion
 	name = "Onion"
-	cost = 3
+	cost = 2
 	contains = /obj/item/neuFarm/seed/onion
 
 /datum/supply_pack/seeds/cabbage
@@ -47,7 +47,7 @@
 
 /datum/supply_pack/seeds/sunflowers
 	name = "Sunflowers"
-	cost = 15
+	cost = 8
 	contains = /obj/item/neuFarm/seed/sunflower
 
 /datum/supply_pack/seeds/turnip
@@ -57,12 +57,12 @@
 
 /datum/supply_pack/seeds/pear
 	name = "Pear"
-	cost = 40
+	cost = 10
 	contains = /obj/item/neuFarm/seed/pear
 
 /datum/supply_pack/seeds/poppy
 	name = "Poppy"
-	cost = 50
+	cost = 15
 	contains = /obj/item/neuFarm/seed/poppy
 
 /datum/supply_pack/seeds/plum
@@ -72,17 +72,17 @@
 
 /datum/supply_pack/seeds/lemon
 	name = "Lemon"
-	cost = 30
+	cost = 10
 	contains = /obj/item/neuFarm/seed/lemon
 
 /datum/supply_pack/seeds/lime
 	name = "Lime"
-	cost = 30
+	cost = 10
 	contains = /obj/item/neuFarm/seed/lime
 
 /datum/supply_pack/seeds/tangerine
 	name = "Tangerine"
-	cost = 30
+	cost = 10
 	contains = /obj/item/neuFarm/seed/tangerine
 
 /datum/supply_pack/seeds/strawberry
@@ -92,15 +92,40 @@
 
 /datum/supply_pack/seeds/blackberry
 	name = "Blackberry"
-	cost = 10
+	cost = 5
 	contains = /obj/item/neuFarm/seed/blackberry
 
 /datum/supply_pack/seeds/rasberry
 	name = "Rasberry"
-	cost = 10
+	cost = 5
 	contains = /obj/item/neuFarm/seed/raspberry
 
 /datum/supply_pack/seeds/sugarcane
 	name = "Sugarcane"
-	cost = 50
+	cost = 15
 	contains = /obj/item/neuFarm/seed/sugarcane
+
+/datum/supply_pack/seeds/avocado
+	name = "Avocado"
+	cost = 10
+	contains = /obj/item/neuFarm/seed/avocado
+
+/datum/supply_pack/seeds/pineapple
+	name = "Ananas"
+	cost = 10
+	contains = /obj/item/neuFarm/seed/pineapple
+
+/datum/supply_pack/seeds/mango
+	name = "Mangga"
+	cost = 10
+	contains = /obj/item/neuFarm/seed/mango
+
+/datum/supply_pack/seeds/mangosteen
+	name = "Mangosteen"
+	cost = 10
+	contains = /obj/item/neuFarm/seed/mangosteen
+
+/datum/supply_pack/seeds/dragonfruit
+	name = "Piyata"
+	cost = 10
+	contains = /obj/item/neuFarm/seed/dragonfruit

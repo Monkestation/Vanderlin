@@ -3,7 +3,7 @@
 	tags = list(
 		TAG_COMBAT,
 		TAG_HAUNTED,
-		TAG_VILLIAN,
+		TAG_VILLAIN,
 	)
 	roundstart = TRUE
 	antag_flag = ROLE_NBEAST
@@ -11,10 +11,10 @@
 
 	weight = 12
 
-	denominator = 80
+	denominator = 40
 
 	base_antags = 1
-	maximum_antags = 2
+	maximum_antags = 1
 
 	earliest_start = 0 SECONDS
 
@@ -22,35 +22,29 @@
 	antag_datum = /datum/antagonist/vampire/lord
 
 	restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Hand",
-		"Captain",
-		"Prince",
-		"Priest",
-		"Merchant",
-		"Forest Warden",
-		"Inquisitor",
-		"Adept",
-		"Royal Knight",
-		"Templar",
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
 	)
 
 /datum/round_event/antagonist/solo/vampire
-	var/leader = FALSE
 
 /datum/round_event/antagonist/solo/vampire/add_datum_to_mind(datum/mind/antag_mind)
-	if(!leader)
-		var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
-		J?.adjust_current_positions(-1)
+	var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
+	J?.adjust_current_positions(-1)
+	if(SSmapping.config.map_name != "Voyage")
 		antag_mind.current.unequip_everything()
-		antag_mind.add_antag_datum(antag_datum)
-		leader = TRUE
-		return
-	else
-		if(!antag_mind.has_antag_datum(antag_datum))
-			var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
-			J?.adjust_current_positions(-1)
-			antag_mind.current.unequip_everything()
-			antag_mind.add_antag_datum(/datum/antagonist/vampire/lesser)
-			return
+	antag_mind.add_antag_datum(antag_datum)
+	var/datum/antagonist/vampire/lord/lord = antag_mind.has_antag_datum(/datum/antagonist/vampire/lord)
+	lord.get_thralls()
+	return

@@ -7,6 +7,7 @@
 
 	cooldown_time = 2 MINUTES
 	invocation_type = INVOCATION_NONE
+	associated_skill = /datum/skill/craft/alchemy
 	item_type = /obj/item/smokebomb/poison_bomb
 	item_duration = null
 	item_outline ="#0e5c21"

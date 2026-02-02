@@ -47,11 +47,11 @@
 
 /// Removes color tags of the text while preserving any other
 /proc/remove_color_tags(html_text)
-    var/output = html_text
-    output = replacetext(output, regex("<font\[^>\]*color=\[^>\]*>", "g"), "")
-    output = replacetext(output, "</font>", "")
-    output = replacetext(output, regex("color=\[^ >\]*", "g"), "")
-    return output
+	var/output = html_text
+	output = replacetext(output, regex("<font\[^>\]*color=\[^>\]*>", "g"), "")
+	output = replacetext(output, "</font>", "")
+	output = replacetext(output, regex("color=\[^ >\]*", "g"), "")
+	return output
 
 /**
  * Returns the text if properly formatted, or null else.

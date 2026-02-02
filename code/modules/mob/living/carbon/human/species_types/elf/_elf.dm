@@ -6,7 +6,7 @@
 	id = SPEC_ID_ELF
 	changesource_flags = WABBAJACK
 	native_language = "Elfish"
-
+	exotic_bloodtype = /datum/blood_type/human/elf
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,

@@ -14,11 +14,5 @@
 /datum/mob_affix/proc/on_death(mob/living/simple_animal/hostile/retaliate/target)
 	return
 
-/datum/mob_affix/proc/on_damaged(mob/living/simple_animal/hostile/retaliate/target, damage)
-	return
-
-/datum/mob_affix/proc/process_affix(mob/living/simple_animal/hostile/retaliate/target)
-	return
-
 /datum/mob_affix/proc/cleanup_affix(mob/living/simple_animal/hostile/retaliate/target)
 	return

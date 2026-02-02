@@ -20,7 +20,7 @@
 	for(var/I in coomer)
 //		if(!credits)
 //			return
-		_credits += new /atom/movable/screen/credit(null, I, src, coomer[I]["icon"])
+		_credits += new /atom/movable/screen/credit(null, null, I, src, coomer[I]["icon"])
 		sleep(CREDIT_SPAWN_SPEED)
 //	sleep(CREDIT_ROLL_SPEED - CREDIT_SPAWN_SPEED)
 //	verbs -= /client/proc/ClearCredits
@@ -60,7 +60,7 @@
 				animate(IR, pixel_y = 64, alpha = 0, time = 18, flags = ANIMATION_PARALLEL)
 				CR.add_overlay(IR)
 
-/atom/movable/screen/credit/Initialize(mapload, credited, client/P, icon/I)
+/atom/movable/screen/credit/Initialize(mapload, datum/hud/hud_owner, credited, client/P, icon/I)
 	. = ..()
 	icon = I
 	parent = P

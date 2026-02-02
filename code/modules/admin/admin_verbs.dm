@@ -17,6 +17,9 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/hearallasghost,
 	/client/proc/toggle_aghost_invis,
 	/client/proc/admin_ghost,
+	/client/proc/generate_bulk_codes,
+	/client/proc/generate_custom_code,
+	/client/proc/generate_codes,
 	/client/proc/ghost_up,
 	/datum/admins/proc/start_vote,
 	/datum/admins/proc/show_player_panel,
@@ -66,6 +69,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 	/client/proc/toggle_specific_triumph_buy, /*toggle whether specific triumphs can be bought*/
 	/client/proc/toggle_jobs_for_persistent, /*toggles jobs for the persistent server*/
+	/client/proc/wave_creation_tools, /*custom job manage, custom wave manage and custom outfit manage*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
 //	/datum/admins/proc/show_player_panel,	/*shows an interface for individual players, with various links (links require additional flags*/
 //	/datum/verbs/menu/Admin/verb/playerpanel,
@@ -93,7 +97,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/cmd_admin_headset_message,	/*send an message to somebody through their headset as CentCom*/
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
-	/client/proc/centcom_podlauncher,/*Open a window to launch a Supplypod and configure it or it's contents*/
 	/client/proc/check_antagonists,		/*shows all antags*/
 	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
 	/client/proc/Getmob,				/*teleports a mob to our location*/
@@ -104,6 +107,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
 	/client/proc/jumptoturf,			/*allows us to jump to a specific turf*/
 	/client/proc/spawn_in_test_area,
+	/client/proc/jump_to_test_area,
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/cmd_admin_local_narrate,	/*sends text to all mobs within view of atom*/
@@ -125,8 +129,9 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/respawn_character,
 	/client/proc/discord_id_manipulation,
 	/client/proc/ShowAllFamilies,
+	/client/proc/send_bird_letter,
 	)
-GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel, /client/proc/role_ban_panel, /client/proc/check_pq, /client/proc/adjust_pq, /client/proc/getcurrentlogs, /client/proc/getserverlogs))
+GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/role_ban_panel, /client/proc/check_pq, /client/proc/adjust_pq, /client/proc/getcurrentlogs, /client/proc/getserverlogs))
 GLOBAL_PROTECT(admin_verbs_ban)
 GLOBAL_LIST_INIT(admin_verbs_sounds, list(/client/proc/play_local_sound, /client/proc/play_sound, /client/proc/set_round_end_sound))
 GLOBAL_PROTECT(admin_verbs_sounds)
@@ -147,6 +152,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/run_particle_weather,
 	/client/proc/show_tip,
 	/client/proc/smite,
+	/client/proc/heart_attack,
 	))
 GLOBAL_PROTECT(admin_verbs_fun)
 GLOBAL_LIST_INIT(admin_verbs_spawn, list(/datum/admins/proc/spawn_atom, /datum/admins/proc/podspawn_atom, /client/proc/respawn_character, /datum/admins/proc/beaker_panel))
@@ -159,6 +165,7 @@ GLOBAL_PROTECT(admin_verbs_server)
 	/datum/admins/proc/restart,
 	/datum/admins/proc/end_round,
 	/datum/admins/proc/delay,
+	/datum/admins/proc/accelerate_or_delay_round_end,
 	/datum/admins/proc/toggleaban,
 	/client/proc/everyone_random,
 	/datum/admins/proc/toggleAI,
@@ -197,7 +204,6 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/get_dynex_range,		//*debug verbs for dynex explosions.
 	/client/proc/set_dynex_scale,
 	/client/proc/cmd_display_del_log,
-	/client/proc/outfit_manager,
 	/client/proc/debug_huds,
 	/client/proc/map_export,
 	/client/proc/map_template_load,
@@ -218,6 +224,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/debug_spell_requirements,
 	/client/proc/cmd_regenerate_asset_cache,
 	/client/proc/cmd_clear_smart_asset_cache,
+	/client/proc/select_job_pack_debug,
 )
 GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)
@@ -837,6 +844,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	var/dat = "<table style='border-collapse: separate; border-spacing: 0 10px; width: 100%;'>"
 	dat += "<tr>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Title</th>"
+	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Player Author</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Author</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Category</th>"
 	dat += "<th style='padding: 10px 15px; text-align: left; color: #c72222;'>Actions</th>"
@@ -850,11 +858,12 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 		dat += "<tr>"
 		dat += "<td style='padding: 12px 15px;'>[book["book_title"]]</td>"
+		dat += "<td style='padding: 12px 15px;'>[book["author_ckey"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["author"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["category"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>"
 		dat += "<a href='?src=[REF(src)];show_book=1;id=[url_encode(encoded_title)]' style='margin-right: 10px;'>View</a>"
-		dat += "<a href='?src=[REF(src)];delete_book=1;id=[url_encode(encoded_title)]'>Delete</a>"
+		dat += "<a href='?src=[REF(src)];delete_book=1;author_ckey=[book["author_ckey"]];id=[url_encode(encoded_title)]'>Delete</a>"
 		dat += "</td>"
 		dat += "</tr>"
 

@@ -45,6 +45,8 @@
 		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
 		if(metal)
 			for(var/datum/material/material as anything in metal.data)
+				if(!ispath(material))
+					continue
 				var/total_volume = metal.data[material]
 				var/reagent_color = initial(material.color)
 				var/tag = internal_reagents.chem_temp >= initial(material.melting_point) ? "Molten" : "Hardened"

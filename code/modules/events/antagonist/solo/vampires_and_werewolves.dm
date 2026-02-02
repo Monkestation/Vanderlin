@@ -1,37 +1,40 @@
 /datum/round_event_control/antagonist/solo/vampires_and_werewolves
 	name = "Vampires and Verevolves"
 	tags = list(
+		TAG_DENDOR,
+		TAG_GRAGGAR,
 		TAG_COMBAT,
 		TAG_HAUNTED,
-		TAG_VILLIAN,
+		TAG_VILLAIN,
 	)
 	roundstart = TRUE
 	antag_flag = ROLE_NBEAST
 	shared_occurence_type = SHARED_HIGH_THREAT
-	denominator = 80
+	denominator = 40
 
 	base_antags = 2
 	maximum_antags = 4
 
 	earliest_start = 0 SECONDS
-	min_players = 30
+	min_players = 40
 	weight = 8
 	secondary_prob = 0
 	typepath = /datum/round_event/antagonist/solo/vampires_and_werewolves
 
 	restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Hand",
-		"Captain",
-		"Prince",
-		"Priest",
-		"Merchant",
-		"Forest Warden",
-		"Inquisitor",
-		"Adept",
-		"Royal Knight",
-		"Templar",
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
 	)
 
 /datum/round_event/antagonist/solo/vampires_and_werewolves
@@ -60,7 +63,8 @@
 	if(!leader)
 		var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
 		J?.adjust_current_positions(-1)
-		antag_mind.current.unequip_everything()
+		if(SSmapping.config.map_name != "Voyage")
+			antag_mind.current.unequip_everything()
 		antag_mind.add_antag_datum(/datum/antagonist/vampire/lord)
 		leader = TRUE
 		return
@@ -68,6 +72,7 @@
 		if(!antag_mind.has_antag_datum(/datum/antagonist/vampire))
 			var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
 			J?.adjust_current_positions(-1)
-			antag_mind.current.unequip_everything()
+			if(SSmapping.config.map_name != "Voyage")
+				antag_mind.current.unequip_everything()
 			antag_mind.add_antag_datum(/datum/antagonist/vampire/lesser)
 		return

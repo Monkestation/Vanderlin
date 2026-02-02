@@ -41,7 +41,7 @@ GLOBAL_VAR(lordsecondary)
 		set_greyscale(list(GLOB.lordsecondary))
 	UnregisterSignal(SSdcs, COMSIG_LORD_COLORS_SET)
 
-/obj/item/clothing/lordcolor()
+/obj/item/lordcolor()
 	if(!get_detail_tag())
 		return ..()
 
@@ -58,7 +58,7 @@ GLOBAL_VAR(lordsecondary)
 
 	update_appearance(UPDATE_OVERLAYS)
 
-	if(ismob(loc))
+	if(ismob(loc) && isclothing(src))
 		var/mob/M = loc
 		M.update_clothing(slot_flags)
 

@@ -11,6 +11,8 @@ GLOBAL_DATUM_INIT(thaumic_research, /datum/thaumic_research_network, new())
 	// Cache all research node types for easy access
 	for(var/node_type in subtypesof(/datum/thaumic_research_node))
 		var/datum/thaumic_research_node/node = new node_type
+		if(IS_ABSTRACT(node))
+			continue
 		research_nodes[node_type] = node
 
 /datum/thaumic_research_network/proc/has_research(research_type)
@@ -22,102 +24,47 @@ GLOBAL_DATUM_INIT(thaumic_research, /datum/thaumic_research_network, new())
 	unlocked_research += research_type
 	return TRUE
 
-/datum/thaumic_research_network/proc/get_research_bonus(bonus_type)
-	var/bonus = 1.0
-	switch(bonus_type)
-		if("splitting_efficiency")
-			if(has_research(/datum/thaumic_research_node/basic_splitter))
-				bonus += 0.20
-			if(has_research(/datum/thaumic_research_node/advanced_splitter))
-				bonus += 0.40
-			if(has_research(/datum/thaumic_research_node/expert_splitter))
-				bonus += 0.60
-			if(has_research(/datum/thaumic_research_node/master_splitter))
-				bonus += 1.0
-			if(has_research(/datum/thaumic_research_node/splitter_output_four))
-				bonus += 1.50
-			if(has_research(/datum/thaumic_research_node/splitter_output_five))
-				bonus += 2.00
+/datum/thaumic_research_network/proc/get_research_bonus(bonus_category_path)
+	var/total_additive = 0
+	var/total_multiplicative = 1.0
+	var/special_bonus = 0
 
-		if("combining_output")
-			if(has_research(/datum/thaumic_research_node/combiner_output))
-				bonus += 0.30
-			if(has_research(/datum/thaumic_research_node/combiner_output_two))
-				bonus += 0.50
-			if(has_research(/datum/thaumic_research_node/combiner_output_three))
-				bonus += 0.80
-			if(has_research(/datum/thaumic_research_node/combiner_output_four))
-				bonus += 1.2
-			if(has_research(/datum/thaumic_research_node/combiner_speed_five))
-				bonus += 2
+	// Find all research in this category
+	for(var/research_type in unlocked_research)
+		var/datum/thaumic_research_node/node = research_nodes[research_type]
+		if(!node || !istype(node, bonus_category_path))
+			continue
 
-		if("gnome_hat_chance")
-			if(has_research(/datum/thaumic_research_node/gnome_mastery))
-				bonus -= 0.95 // Near-guaranteed hat spawning
+		switch(node.bonus_type)
+			if("additive")
+				total_additive += node.bonus_value
+			if("multiplicative")
+				total_multiplicative *= (1.0 - node.bonus_value)
+			if("special")
+				special_bonus = node.bonus_value
 
-	return bonus
+	// Return appropriate value based on bonus type
+	if(special_bonus > 0)
+		return special_bonus
+	else if(istype(bonus_category_path, /datum/thaumic_research_node/gnome_efficency)) //gods greatest shitcode here
+		return max(total_multiplicative, 0.05) // Cost reduction, never below 5%
+	else
+		return 1.0 + total_additive // Speed/efficiency bonuses
 
-/datum/thaumic_research_network/proc/get_cost_reduction(cost_type)
-	var/reduction = 1.0
-	switch(cost_type)
-		if("life_tube")
-			if(has_research(/datum/thaumic_research_node/gnome_efficency))
-				reduction -= 0.1
-			if(has_research(/datum/thaumic_research_node/gnome_efficeny_two))
-				reduction -= 0.2
-			if(has_research(/datum/thaumic_research_node/gnome_efficeny_three))
-				reduction -= 0.2
 
-	return max(reduction, 0.05) // Never reduce below 5% of original cost
-
-/datum/thaumic_research_network/proc/get_speed_multiplier(speed_type)
-	var/multiplier = 1.0
-	switch(speed_type)
-		if("test_tube")
-			if(has_research(/datum/thaumic_research_node/gnome_speed))
-				multiplier += 0.33
-			if(has_research(/datum/thaumic_research_node/gnome_speed_two))
-				multiplier += 0.50
-			if(has_research(/datum/thaumic_research_node/gnome_speed_three))
-				multiplier += 0.75
-
-		if("essence_splitting")
-			if(has_research(/datum/thaumic_research_node/splitter_speed))
-				multiplier += 0.40
-			if(has_research(/datum/thaumic_research_node/splitter_speed_two))
-				multiplier += 0.70
-			if(has_research(/datum/thaumic_research_node/splitter_speed_three))
-				multiplier += 1.20
-
-		if("essence_combining")
-			if(has_research(/datum/thaumic_research_node/combiner_speed))
-				multiplier += 0.35
-			if(has_research(/datum/thaumic_research_node/combiner_speed_two))
-				multiplier += 0.60
-			if(has_research(/datum/thaumic_research_node/combiner_speed_three))
-				multiplier += 1.00
-			if(has_research(/datum/thaumic_research_node/combiner_speed_four))
-				multiplier += 1.50
-			if(has_research(/datum/thaumic_research_node/combiner_speed_five))
-				multiplier += 3.00
-
-		if("transmutation_speed")
-			if(has_research(/datum/thaumic_research_node/transmutation))
-				multiplier += 0.25
-
-	return multiplier
-
-/datum/thaumic_research_network/proc/can_use_machine(machine_type)
-	switch(machine_type)
-		if("test_tube")
-			return has_research(/datum/thaumic_research_node/gnomes)
-		if("resevoir_void")
-			return has_research(/datum/thaumic_research_node/resevoir_decay)
-	return TRUE
+/datum/thaumic_research_network/proc/can_use_machine(atom/machine_type)
+	for(var/datum/thaumic_research_node/machines/node as anything in unlocked_research)
+		if(!ispath(node))
+			continue
+		if(ispath(machine_type, initial(node.machine_path)))
+			return TRUE
+	return FALSE
 
 /datum/thaumic_research_network/proc/get_available_research()
 	var/list/available = list()
-	for(var/node_type in subtypesof(/datum/thaumic_research_node))
+	for(var/datum/thaumic_research_node/node_type as anything in subtypesof(/datum/thaumic_research_node))
+		if(IS_ABSTRACT(node_type))
+			continue
 		if(node_type in unlocked_research)
 			continue
 		var/datum/thaumic_research_node/node = research_nodes[node_type]

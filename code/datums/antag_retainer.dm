@@ -9,6 +9,7 @@
 	var/list/aspirant_supporters = list()
 	var/list/bandits = list()
 	var/list/harlequins = list()
+	var/list/overlords = list()
 
 	var/cult_ascended = FALSE
 	var/head_rebel_decree = FALSE
@@ -36,11 +37,11 @@
 				if(isbrain(player)) //also technically dead
 					continue
 				if(is_in_roguetown(player))
-					var/datum/antagonist/D = player.mind.has_antag_datum(/datum/antagonist/werewolf)
+					var/datum/antagonist/D = player.mind.has_antag_datum(/datum/antagonist/werewolf, FALSE)
 					if(D && D.increase_votepwr)
 						wwoelf++
 						continue
-					D = player.mind.has_antag_datum(/datum/antagonist/vampire)
+					D = player.mind.has_antag_datum(/datum/antagonist/vampire/lord)
 					if(D && D.increase_votepwr)
 						vampyr++
 						continue

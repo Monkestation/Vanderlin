@@ -14,7 +14,7 @@
 	unique_name = TRUE
 	bodyparts = list(/obj/item/bodypart/chest/monkey, /obj/item/bodypart/head/monkey, /obj/item/bodypart/l_arm/monkey,
 					/obj/item/bodypart/r_arm/monkey, /obj/item/bodypart/r_leg/monkey, /obj/item/bodypart/l_leg/monkey)
-	hud_type = /datum/hud/monkey
+	hud_type = /datum/hud/human
 
 /mob/living/carbon/monkey/Initialize(mapload, cubespawned=FALSE, mob/spawner)
 	// verbs += /mob/living/proc/mob_sleep
@@ -96,7 +96,7 @@
 
 /mob/living/carbon/monkey/can_use_guns(obj/item/G)
 	if(G.trigger_guard == TRIGGER_GUARD_NONE)
-		to_chat(src, "<span class='warning'>I are unable to fire this!</span>")
+		to_chat(src, "<span class='warning'>I am unable to fire this!</span>")
 		return FALSE
 	return TRUE
 

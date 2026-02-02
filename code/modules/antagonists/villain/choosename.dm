@@ -20,6 +20,7 @@
 		if(possible_new_name in GLOB.chosen_names)
 			to_chat(src, span_warning("That name is taken."))
 			break
+		original_name = old_name
 		new_name = possible_new_name
 	while(FALSE)
 

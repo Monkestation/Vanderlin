@@ -8,6 +8,16 @@
 	sellprice = 10
 	experimental_onhip = TRUE
 
+// INHUMEN PSYCROSSES
+
+/obj/item/clothing/neck/psycross/zizo
+	name = "Amulet of Zizo"
+	desc = "Through power dominate, through domination rule, through Zizo become the divinity you were always meant to be."
+	icon_state = "zcross"
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
+	sellprice = 0
+	experimental_onhip = TRUE
+
 // SILVER PSYCROSS START
 
 /obj/item/clothing/neck/psycross/silver
@@ -30,8 +40,7 @@
 	icon_state = "astrata"
 	resistance_flags = FIRE_PROOF
 
-// Not silver because in old lore, Noc liked vamps. He does not here! TODO: Needs to change!
-/obj/item/clothing/neck/psycross/noc
+/obj/item/clothing/neck/psycross/silver/noc
 	name = "amulet of Noc"
 	desc = "Diligence, study, pursuit of truth and wisdom. Let nothing deter you from it."
 	icon_state = "noc"
@@ -107,14 +116,13 @@
 	icon_state = "pestra"
 	resistance_flags = FIRE_PROOF
 
-
 /obj/item/clothing/neck/psycross/silver/malum
 	name = "amulet of Malum"
 	desc = "Blessed be our works, made in His name."
 	icon_state = "malum"
 	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/malum_steel
+/obj/item/clothing/neck/psycross/silver/malum/steel
 	name = "amulet of Malum"
 	desc = "Let the tools that guide thee be thy hands."
 	icon_state = "malum_alt"
@@ -128,3 +136,9 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
+
+/obj/item/clothing/neck/psycross/silver/undivided
+	name = "amulet of the ten"
+	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
+	icon_state = "undivided"
+

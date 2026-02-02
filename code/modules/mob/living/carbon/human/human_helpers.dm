@@ -2,9 +2,6 @@
 /mob/living/carbon/human/proc/change_name(new_name)
 	real_name = new_name
 
-// /mob/living/carbon/human/restrained(ignore_grab)
-// 	. = ((wear_armor && wear_armor.breakouttime) || ..())
-
 /mob/living/carbon/human/check_language_hear(language)
 	var/mob/living/carbon/V = src
 	if(!language)
@@ -13,7 +10,7 @@
 		if(istype(wear_neck, /obj/item/clothing/neck/talkstone))
 			return TRUE
 	if(!has_language(language))
-		if(has_flaw(/datum/charflaw/paranoid))
+		if(has_quirk(/datum/quirk/vice/paranoid))
 			V.add_stress(/datum/stress_event/paratalk)
 
 /mob/living/carbon/human/canBeHandcuffed()
@@ -46,7 +43,7 @@
 	return "Unknown"
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
-/mob/living/carbon/human/proc/get_face_name(if_no_face="Unknown")
+/mob/living/carbon/human/proc/get_face_name(if_no_face = "Unknown")
 	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
 		return if_no_face
 	if( head && (head.flags_inv&HIDEFACE) )
@@ -107,7 +104,12 @@
 	if(QDELETED(src) || !ishuman(src))
 		return
 
-	var/damage = 12
+	var/damage
+	if(STASTR > 12 || STASTR < 10)
+		damage = STASTR
+	else
+		damage = 12
+
 	var/used_str = STASTR
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
@@ -115,6 +117,11 @@
 
 	if(domhand)
 		used_str = get_str_arms(used_hand)
+
+	var/obj/G = get_item_by_slot(ITEM_SLOT_GLOVES)
+	if(istype(G, /obj/item/clothing/gloves))
+		var/obj/item/clothing/gloves/GL = G
+		damage = (damage * GL.unarmed_bonus)
 
 	if(used_str >= 11)
 		damage = max(damage * (1 + ((used_str - 10) * 0.03)), 1)
@@ -150,12 +157,12 @@
 
 /// Fully randomizes everything in the character.
 // Reflect changes in [datum/preferences/proc/randomise_appearance_prefs]
-/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_patreon = TRUE)
+/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_donator = TRUE)
 	if(!dna)
 		return
 
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_patreon))]
+		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_donator))]
 		set_species(new rando_race(), FALSE)
 
 	var/datum/species/species = dna.species

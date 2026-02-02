@@ -16,12 +16,19 @@
 /atom/movable/screen/building_button/proc/update_build_state(mob/camera/strategy_controller/master)
 	if(!build_datum)
 		build_datum = new datum_path
+
+	if(build_datum.stockpile_needed && !master.resource_stockpile)
+		build_state = FALSE
+		color = COLOR_RED_LIGHT
+		return
+
 	if(!build_datum.resource_check(master))
 		build_state = FALSE
 		color = COLOR_RED_LIGHT
-	else
-		build_state = TRUE
-		color = null
+		return
+
+	build_state = TRUE
+	color = null
 
 /atom/movable/screen/building_button/Click(location, control, params)
 	. = ..()
@@ -57,9 +64,9 @@
 	for(var/atom/movable/screen/building_button/button in build_buttons)
 		button.update_build_state(processer)
 
-/atom/movable/screen/building_backdrop/New(loc, ...)
+/atom/movable/screen/building_backdrop/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
-	close = new
+	close = new(null, hud_owner)
 
 /atom/movable/screen/building_backdrop/proc/close_uis(mob/camera/strategy_controller/closer)
 	for(var/atom/movable/screen/building_button/button as anything in build_buttons)
@@ -78,6 +85,10 @@
 		if(ispath(datum, /datum/building_datum/simple))
 			var/datum/building_datum/simple/building = datum
 			var/mutable_appearance/MA = mutable_appearance(initial(building.created_atom.icon), initial(building.created_atom.icon_state), new_button.layer + 0.1, new_button.plane)
+			var/atom/created_atom = building.created_atom
+			var/initial_flags = initial(created_atom.smoothing_flags)
+			if(initial_flags & USES_BITMASK_SMOOTHING)
+				MA.icon_state = "[initial(created_atom.icon_state)]-0"
 			new_button.add_overlay(MA)
 			new_button.name = initial(building.created_atom.name)
 		else if(ispath(datum, /datum/building_datum))

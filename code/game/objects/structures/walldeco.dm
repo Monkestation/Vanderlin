@@ -396,6 +396,15 @@
 
 /obj/structure/fluff/walldeco/sign/apothecarysign/left
 	icon_state = "shopsign_apothecary_left"
+/*	..................   Tailor Sign   ................... */
+/obj/structure/fluff/walldeco/sign/tailorsign
+	name = "tailor sign"
+	icon_state = "shopsign_tailor_right"
+	plane = -1
+	SET_BASE_PIXEL(0, 16)
+
+/obj/structure/fluff/walldeco/sign/tailorsign/left
+	icon_state = "shopsign_tailor_left"
 
 /*	..................   Wall decorations   ................... */
 /obj/structure/fluff/walldeco/bath // suggestive stonework

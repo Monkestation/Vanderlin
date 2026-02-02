@@ -42,7 +42,7 @@
 		return
 	if(user.mind && isliving(user))
 		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = input(user, "What will I take?", "STASH") as null|anything in user.mind.special_items
+			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
 			if(item)
 				if(user.Adjacent(src))
 					if(user.mind.special_items[item])
@@ -57,8 +57,8 @@
 		var/mob/living/L = user
 		if(L.stat != CONSCIOUS)
 			return
-		var/turf/target = get_step_multiz(user, UP)
-		if(!istype(target, /turf/open/transparent/openspace))
+		var/turf/target = GET_TURF_ABOVE(get_turf(user))
+		if(!istype(target, /turf/open/openspace))
 			to_chat(user, "<span class='warning'>I can't climb here.</span>")
 			return
 		if(!L.can_zTravel(target, UP))
@@ -120,7 +120,7 @@
 
 /obj/structure/flora/newtree/proc/FellTree(transformation = FALSE)
 	var/turf/NT = get_turf(src)
-	var/turf/UPNT = get_step_multiz(src, UP)
+	var/turf/UPNT = GET_TURF_ABOVE(NT)
 	src.obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP //so the logs actually fall when pulled by zfall
 
 	for(var/obj/structure/flora/newtree/D in UPNT) //theoretically you'd be able to break trees through a floor but no one is building floors under a tree so this is probably fine
@@ -170,13 +170,13 @@
 				qdel(LEAF)
 
 	if(!transformation)
-		if(!istype(NT, /turf/open/transparent/openspace) && !(locate(/obj/structure/table/wood/treestump) in NT)) //if i don't add the stump check it spawns however many zlevels it goes up because of src recursion
+		if(!istype(NT, /turf/open/openspace) && !(locate(/obj/structure/table/wood/treestump) in NT)) //if i don't add the stump check it spawns however many zlevels it goes up because of src recursion
 			new /obj/structure/table/wood/treestump(NT)
 		playsound(src, 'sound/misc/treefall.ogg', 100, FALSE)
 
 /obj/structure/flora/newtree/proc/build_trees()
-	var/turf/target = get_step_multiz(src, UP)
-	if(istype(target, /turf/open/transparent/openspace))
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
+	if(istype(target, /turf/open/openspace))
 		var/obj/structure/flora/newtree/T = new(target)
 		T.icon_state = icon_state
 		T.update_appearance(UPDATE_OVERLAYS)
@@ -184,7 +184,7 @@
 /obj/structure/flora/newtree/proc/build_leafs()
 	for(var/D in GLOB.diagonals)
 		var/turf/NT = get_step(src, D)
-		if(istype(NT, /turf/open/transparent/openspace))
+		if(istype(NT, /turf/open/openspace))
 			if(!locate(/obj/structure) in NT)
 				var/obj/structure/flora/newleaf/corner/T = new(NT)
 				T.dir = D
@@ -192,9 +192,9 @@
 /obj/structure/flora/newtree/proc/build_branches()
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
-		if(istype(NT, /turf/open/transparent/openspace))
+		if(istype(NT, /turf/open/openspace))
 			var/turf/NB = get_step(NT, D)
-			if(istype(NB, /turf/open/transparent/openspace) && prob(50))//make an ending branch
+			if(istype(NB, /turf/open/openspace) && prob(50))//make an ending branch
 				if(prob(50))
 					if(!locate(/obj/structure) in NB)
 						var/obj/structure/flora/newbranch/T = new(NB)
@@ -215,7 +215,7 @@
 		else
 			if(prob(70))
 				if(isopenturf(NT))
-					if(!istype(loc, /turf/open/transparent/openspace)) //must be lowest
+					if(!istype(loc, /turf/open/openspace)) //must be lowest
 						if(!locate(/obj/structure) in NT)
 							var/obj/structure/flora/newbranch/leafless/T = new(NT)
 							T.dir = D
@@ -232,8 +232,8 @@
 	num_underlay_icons = 1
 
 /obj/structure/flora/newtree/snow/build_trees()
-	var/turf/target = get_step_multiz(src, UP)
-	if(istype(target, /turf/open/transparent/openspace))
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
+	if(istype(target, /turf/open/openspace))
 		var/obj/structure/flora/newtree/snow/T = new(target)
 		T.icon_state = icon_state
 		T.update_appearance(UPDATE_OVERLAYS)
@@ -241,7 +241,7 @@
 /obj/structure/flora/newtree/snow/build_leafs()
 	for(var/D in GLOB.diagonals)
 		var/turf/NT = get_step(src, D)
-		if(istype(NT, /turf/open/transparent/openspace))
+		if(istype(NT, /turf/open/openspace))
 			if(!locate(/obj/structure) in NT)
 				var/obj/structure/flora/newleaf/corner/snow/T = new(NT)
 				T.dir = D
@@ -249,9 +249,9 @@
 /obj/structure/flora/newtree/snow/build_branches()
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
-		if(istype(NT, /turf/open/transparent/openspace))
+		if(istype(NT, /turf/open/openspace))
 			var/turf/NB = get_step(NT, D)
-			if(istype(NB, /turf/open/transparent/openspace) && prob(50))
+			if(istype(NB, /turf/open/openspace) && prob(50))
 				if(prob(50))
 					if(!locate(/obj/structure) in NB)
 						var/obj/structure/flora/newbranch/snow/T = new(NB)
@@ -272,6 +272,51 @@
 	END SNOW
 				*/
 
+/obj/structure/flora/newtree/palm
+	icon_state = "treepalm"
+	underlay_base = "center-leaf-palm"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newtree/palm/build_trees()
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
+	if(istype(target, /turf/open/openspace))
+		var/obj/structure/flora/newtree/palm/T = new(target)
+		T.icon_state = icon_state
+		T.update_appearance(UPDATE_OVERLAYS)
+
+/obj/structure/flora/newtree/palm/build_leafs()
+	for(var/D in GLOB.diagonals)
+		var/turf/NT = get_step(src, D)
+		if(istype(NT, /turf/open/openspace))
+			if(!locate(/obj/structure) in NT)
+				var/obj/structure/flora/newleaf/corner/palm/T = new(NT)
+				T.dir = D
+
+/obj/structure/flora/newtree/palm/build_branches()
+	for(var/D in GLOB.cardinals)
+		var/turf/NT = get_step(src, D)
+		if(istype(NT, /turf/open/openspace))
+			var/turf/NB = get_step(NT, D)
+			if(istype(NB, /turf/open/openspace) && prob(50))
+				if(!locate(/obj/structure) in NT)
+					var/obj/structure/flora/newbranch/palm/TC = new(NT)
+					TC.dir = D
+			else
+				if(!locate(/obj/structure) in NT)
+					var/obj/structure/flora/newbranch/palm/TC = new(NT)
+					TC.dir = D
+
+
+/obj/structure/flora/newbranch/palm
+	icon_state = "branchpalm_end1"
+	base_icon_state = "branchpalm_end"
+	underlay_base = "center-leaf-palm"
+	num_underlay_icons = 1
+
+/obj/structure/flora/newleaf/corner/palm
+	icon_state = "edge-leaf-palm"
+	num_random_icons = 0
+
 /*
 	START BURNT
 				*/
@@ -279,14 +324,14 @@
 	name = "scorched tree"
 	desc = "A tree trunk scorched to ruin."
 	icon = 'icons/roguetown/misc/tree.dmi'
-	icon_state = "burnt"
+	icon_state = "treeburnt"
 	num_random_icons = 0
 	burnt = TRUE
 	underlay_base = null
 
 /obj/structure/flora/newtree/scorched/build_trees()
-	var/turf/target = get_step_multiz(src, UP)
-	if(istype(target, /turf/open/transparent/openspace))
+	var/turf/target = GET_TURF_ABOVE(get_turf(src))
+	if(istype(target, /turf/open/openspace))
 		new /obj/structure/flora/newtree/scorched(target)
 
 //Naught but ash remains.
@@ -296,9 +341,9 @@
 /obj/structure/flora/newtree/scorched/build_branches()
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
-		if(istype(NT, /turf/open/transparent/openspace))
+		if(istype(NT, /turf/open/openspace))
 			var/turf/NB = get_step(NT, D)
-			if(istype(NB, /turf/open/transparent/openspace) && prob(50))//make an ending branch
+			if(istype(NB, /turf/open/openspace) && prob(50))//make an ending branch
 				if(prob(50))
 					if(!locate(/obj/structure) in NB)
 						var/obj/structure/flora/newbranch/leafless/scorched/T = new(NB)
@@ -317,7 +362,7 @@
 		else
 			if(prob(70))
 				if(isopenturf(NT))
-					if(!istype(loc, /turf/open/transparent/openspace)) //must be lowest
+					if(!istype(loc, /turf/open/openspace)) //must be lowest
 						if(!locate(/obj/structure) in NT)
 							var/obj/structure/flora/newbranch/leafless/scorched/T = new(NT)
 							T.dir = D

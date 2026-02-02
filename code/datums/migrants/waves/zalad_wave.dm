@@ -1,14 +1,66 @@
 /datum/migrant_role/zalad/emir
 	name = "Zalad Emir"
 	greet_text = "An Emir hailing from the Deshret, here on business for the Mercator's Guild."
+	migrant_job = /datum/job/migrant/zalad_migration/emir
+
+/datum/job/migrant/zalad_migration/emir
+	title = "Zalad Emir"
+	tutorial = "An Emir hailing from the Deshret, here on business for the Mercator's Guild."
+	outfit = /datum/outfit/zalad_migration/emir
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_ZALADIN
-	outfit = /datum/outfit/job/zalad_migration/emir
-	grant_lit_torch = TRUE
 	is_recognized = TRUE
 
-/datum/outfit/job/zalad_migration/emir/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_INT = 1,
+		STATKEY_END = 2,
+	)
+
+	skills = list(
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/riding = 4,
+		/datum/skill/misc/reading = 4,
+		/datum/skill/misc/music = 1,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/craft/cooking = 2,
+		/datum/skill/combat/crossbows = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/labor/mathematics = 3,
+	)
+
+	spells = list(
+		/datum/action/cooldown/spell/undirected/call_bird/zalad
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR,
+		TRAIT_NOBLE,
+	)
+
+	languages = list(/datum/language/zalad)
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
+
+/datum/job/migrant/zalad_migration/emir/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/prev_real_name = spawned.real_name
+	var/prev_name = spawned.name
+	spawned.real_name = "Emir [prev_real_name]"
+	spawned.name = "Emir [prev_name]"
+
+	if(spawned.dna?.species)
+		if(spawned.dna.species.id == SPEC_ID_HUMEN)
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+		if(spawned.dna.species.id == SPEC_ID_HALF_ELF && spawned.dna.species.native_language == "Imperial")
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+
+/datum/outfit/zalad_migration/emir
+	name = "Zalad Emir (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	gloves = /obj/item/clothing/gloves/leather
 	head = /obj/item/clothing/head/crown/circlet
@@ -23,58 +75,78 @@
 	pants = /obj/item/clothing/pants/trou/leather
 	neck = /obj/item/clothing/neck/shalal/emir
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/veryrich)
-	if(H.gender == FEMALE)
+
+/datum/outfit/zalad_migration/emir/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+
+	if(equipped_human.gender == FEMALE)
 		armor = /obj/item/clothing/armor/leather/jacket/silk_coat
 		shirt = /obj/item/clothing/shirt/dress/silkdress/colored/black
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/riding, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/music, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
-		var/prev_real_name = H.real_name
-		var/prev_name = H.name
-		var/honorary = "Emir"
-		if(H.gender == FEMALE)
-			honorary = "Amirah"
-		H.real_name = "[honorary] [prev_real_name]"
-		H.name = "[honorary] [prev_name]"
-		if(!H.has_language(/datum/language/zalad))
-			H.grant_language(/datum/language/zalad)
-			to_chat(H, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
-		H.change_stat(STATKEY_INT, 1)
-		H.change_stat(STATKEY_END, 2)
-		ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-		ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-		H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
-	if(H.dna?.species)
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			H.dna.species.native_language = "Zalad"
-			H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-		if(H.dna.species.id == SPEC_ID_HALF_ELF)
-			if(H.dna.species.native_language == "Imperial")
-				H.dna.species.native_language = "Zalad"
-				H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 
 /datum/migrant_role/zalad/amirah
 	name = "Zalad Amirah"
-	greet_text = "An Amirah hailing from Deshret, here on business for the Mercator's Guild."
+	greet_text = "An Amirah hailing from Deshret, here on business for the Mercator's Guild to the Isle of the Enigma."
+	migrant_job = /datum/job/migrant/zalad_migration/amirah
+
+/datum/job/migrant/zalad_migration/amirah
+	title = "Zalad Amirah"
+	tutorial = "An Amirah hailing from Deshret, here on business for the Mercator's Guild to the Isle of the Enigma."
+	outfit = /datum/outfit/zalad_migration/amirah
 	allowed_sexes = list(FEMALE)
 	allowed_races = RACES_PLAYER_ZALADIN
-	outfit = /datum/outfit/job/zalad_migration/amirah
-	grant_lit_torch = TRUE
 	is_recognized = TRUE
 
-/datum/outfit/job/zalad_migration/amirah/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_INT = 1,
+		STATKEY_END = 2,
+	)
+
+	skills = list(
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/riding = 4,
+		/datum/skill/misc/reading = 4,
+		/datum/skill/misc/music = 1,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/craft/cooking = 2,
+		/datum/skill/combat/crossbows = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/labor/mathematics = 3,
+	)
+
+	spells = list(
+		/datum/action/cooldown/spell/undirected/call_bird/zalad
+	)
+
+	traits = list(
+		TRAIT_MEDIUMARMOR,
+		TRAIT_NOBLE,
+	)
+
+	languages = list(/datum/language/zalad)
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
+
+/datum/job/migrant/zalad_migration/amirah/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/prev_real_name = spawned.real_name
+	var/prev_name = spawned.name
+
+	spawned.real_name = "Amirah [prev_real_name]"
+	spawned.name = "Amirah [prev_name]"
+
+	if(spawned.dna?.species)
+		if(spawned.dna.species.id == SPEC_ID_HUMEN)
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+		if(spawned.dna.species.id == SPEC_ID_HALF_ELF && spawned.dna.species.native_language == "Imperial")
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+
+/datum/outfit/zalad_migration/amirah
+	name = "Zalad Amirah (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	gloves = /obj/item/clothing/gloves/leather
 	head = /obj/item/clothing/head/crown/nyle
@@ -88,85 +160,72 @@
 	shirt = /obj/item/clothing/shirt/dress/silkdress/colored/black
 	pants = /obj/item/clothing/pants/trou/leather
 	neck = /obj/item/clothing/neck/shalal/emir
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/veryrich = 1, /obj/item/reagent_containers/glass/bottle/wine = 1)
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/veryrich = 1,
+		/obj/item/reagent_containers/glass/bottle/wine = 1,
+	)
 
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/riding, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/music, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
-		var/prev_real_name = H.real_name
-		var/prev_name = H.name
-		var/honorary = "Amirah"
-		H.real_name = "[honorary] [prev_real_name]"
-		H.name = "[honorary] [prev_name]"
-		if(!H.has_language(/datum/language/zalad))
-			H.grant_language(/datum/language/zalad)
-			to_chat(H, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
-		H.change_stat(STATKEY_INT, 1)
-		H.change_stat(STATKEY_END, 2)
-		ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-		ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-		H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
-	if(H.dna?.species)
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			H.dna.species.native_language = "Zalad"
-			H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-		if(H.dna.species.id == SPEC_ID_HALF_ELF)
-			if(H.dna.species.native_language == "Imperial")
-				H.dna.species.native_language = "Zalad"
-				H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 /datum/migrant_role/zalad/furusiyya
 	name = "Furusiyya"
 	greet_text = "You are a furusiyya, pledged to the Emir and the Amirah. Make sure they come out alive of that place."
+	migrant_job = /datum/job/migrant/zalad_migration/furusiyya
+
+/datum/job/migrant/zalad_migration/furusiyya
+	title = "Furusiyya"
+	tutorial = "You are a furusiyya, pledged to the Emir and the Amirah. Make sure they come out alive of that place."
+	outfit = /datum/outfit/zalad_migration/furusiyya
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_ZALADIN
-	outfit = /datum/outfit/job/zalad_migration/furusiyya
-	grant_lit_torch = TRUE
 	is_recognized = TRUE
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
+	jobstats = list(
+		STATKEY_STR = 3,
+		STATKEY_PER = 1,
+		STATKEY_INT = 2,
+		STATKEY_CON = 2,
+		STATKEY_END = 2,
+		STATKEY_SPD = -1,
+	)
 
-/datum/outfit/job/zalad_migration/furusiyya/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/riding, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
-		H.change_stat(STATKEY_STR, 3)
-		H.change_stat(STATKEY_PER, 1)
-		H.change_stat(STATKEY_INT, 2)
-		H.change_stat(STATKEY_CON, 2)
-		H.change_stat(STATKEY_END, 2)
-		H.change_stat(STATKEY_SPD, -1)
+	skills = list(
+		/datum/skill/combat/polearms = 4,
+		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/whipsflails = 4,
+		/datum/skill/combat/axesmaces = 4,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 4,
+		/datum/skill/combat/crossbows = 3,
+		/datum/skill/combat/bows = 3,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/misc/riding = 4,
+		/datum/skill/labor/mathematics = 3,
+	)
 
-	var/randy = rand(1,5)
-	switch(randy)
-		if(1 to 2)
-			backr = /obj/item/weapon/polearm/halberd/bardiche
-		if(3 to 4)
-			backr = /obj/item/weapon/polearm/eaglebeak
-		if(5)
-			backr = /obj/item/weapon/polearm/spear/billhook
+	traits = list(
+		TRAIT_NOBLE,
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
+		TRAIT_STEELHEARTED,
+	)
 
+	languages = list(/datum/language/zalad)
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
+/datum/job/migrant/zalad_migration/furusiyya/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	if(spawned.dna?.species)
+		if(spawned.dna.species.id == SPEC_ID_HUMEN)
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+		if(spawned.dna.species.id == SPEC_ID_HALF_ELF && spawned.dna.species.native_language == "Imperial")
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+
+/datum/outfit/zalad_migration/furusiyya
+	name = "Furusiyya (Migrant Wave)"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	shoes = /obj/item/clothing/shoes/boots/rare/zaladplate
@@ -178,113 +237,149 @@
 	head = /obj/item/clothing/head/rare/zaladplate
 	wrists = /obj/item/clothing/wrists/bracers
 	neck = /obj/item/clothing/neck/chaincoif
-	if(!H.has_language(/datum/language/zalad))
-		H.grant_language(/datum/language/zalad)
-		to_chat(H, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
 
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
-	if(H.dna?.species)
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			H.dna.species.native_language = "Zalad"
-			H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-		if(H.dna.species.id == SPEC_ID_HALF_ELF)
-			if(H.dna.species.native_language == "Imperial")
-				H.dna.species.native_language = "Zalad"
-				H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
+/datum/outfit/zalad_migration/furusiyya/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+
+	var/randy = rand(1,5)
+	switch(randy)
+		if(1 to 2)
+			backr = /obj/item/weapon/polearm/halberd/bardiche
+		if(3 to 4)
+			backr = /obj/item/weapon/polearm/eaglebeak
+		if(5)
+			backr = /obj/item/weapon/polearm/spear/billhook
 
 /datum/migrant_role/zalad_guard
 	name = "Zalad Soldier"
 	greet_text = "You are a slave soldier from Deshret, sent as an escort to the emirs on a foreign land, do not fail them."
-	allowed_sexes = list(MALE,FEMALE)
-	allowed_races = RACES_PLAYER_ALL
-	outfit = /datum/outfit/job/zalad_migration/zalad_guard
-	grant_lit_torch = TRUE
+	migrant_job = /datum/job/migrant/zalad_migration/zalad_guard
 
-/datum/outfit/job/zalad_migration/zalad_guard/pre_equip(mob/living/carbon/human/H)
-	..()
+/datum/job/migrant/zalad_migration/zalad_guard
+	title = "Zalad Soldier"
+	tutorial = "You are a slave soldier from Deshret, sent as an escort to the emirs on a foreign land, do not fail them."
+	outfit = /datum/outfit/zalad_migration/zalad_guard
+	allowed_sexes = list(MALE, FEMALE)
+	allowed_races = RACES_PLAYER_ALL
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_END = 2,
+	)
+
+	skills = list(
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/climbing = 2,
+		/datum/skill/misc/sneaking = 3,
+		/datum/skill/misc/lockpicking = 1,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/bows = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/polearms = 1,
+		/datum/skill/combat/whipsflails = 1,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/athletics = 3,
+	)
+
+	traits = list(
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
+	)
+	languages = list(/datum/language/zalad)
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
+
+/datum/job/migrant/zalad_migration/zalad_guard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1), TRUE)
+
+	if(spawned.dna?.species)
+		if(spawned.dna.species.id == SPEC_ID_HUMEN)
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+		if(spawned.dna.species.id == SPEC_ID_HALF_ELF && spawned.dna.species.native_language == "Imperial")
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+
+/datum/outfit/zalad_migration/zalad_guard
+	name = "Zalad Soldier (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/shalal
 	head = /obj/item/clothing/head/helmet/sallet/zalad
 	gloves = /obj/item/clothing/gloves/angle
 	belt = /obj/item/storage/belt/leather/shalal
 	armor = /obj/item/clothing/armor/brigandine/coatplates
 	beltr = /obj/item/weapon/sword/long/rider
-	beltl= /obj/item/flashlight/flare/torch/lantern
+	beltl = /obj/item/flashlight/flare/torch/lantern
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	pants = /obj/item/clothing/pants/tights/colored/red
 	neck = /obj/item/clothing/neck/keffiyeh/colored/red
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor)
-	if(!H.has_language(/datum/language/zalad))
-		H.grant_language(/datum/language/zalad)
-		to_chat(H, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1), TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.change_stat(STATKEY_STR, 1)
-		H.change_stat(STATKEY_END, 2)
-	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
-	if(H.dna?.species)
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			H.dna.species.native_language = "Zalad"
-			H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-		if((H.dna.species.id == SPEC_ID_HALF_ELF) || (H.dna.species.id == SPEC_ID_HALF_DROW))
-			if(H.dna.species.native_language == "Imperial")
-				H.dna.species.native_language = "Zalad"
-				H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 
 /datum/migrant_role/qatil
 	name = "Qatil"
 	greet_text = "You are the Amirah's confident and most loyal protector, you shan't let them die in these wretched lands."
-	allowed_races = list(\
-		SPEC_ID_HUMEN,\
-		SPEC_ID_ELF,\
-		SPEC_ID_RAKSHARI,\
-		SPEC_ID_HALF_ELF,\
-		SPEC_ID_TIEFLING,\
-		SPEC_ID_DROW,\
-		SPEC_ID_HALF_DROW,\
+	migrant_job = /datum/job/migrant/zalad_migration/qatil
+
+/datum/job/migrant/zalad_migration/qatil
+	title = "Qatil"
+	tutorial = "You are the Amirah's confident and most loyal protector, you shan't let them die in these wretched lands."
+	outfit = /datum/outfit/zalad_migration/qatil
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
+	allowed_races = list(
+		SPEC_ID_HUMEN,
+		SPEC_ID_ELF,
+		SPEC_ID_RAKSHARI,
+		SPEC_ID_HALF_ELF,
+		SPEC_ID_TIEFLING,
+		SPEC_ID_DROW,
+		SPEC_ID_HALF_DROW,
 	)
-	outfit = /datum/outfit/job/zalad_migration/qatil
 
-/datum/outfit/job/zalad_migration/qatil/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.mind)
-		H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-		H.adjust_skillrank(/datum/skill/misc/lockpicking, 3, TRUE)
-		H.adjust_skillrank(/datum/skill/craft/traps, 1, TRUE)
-		H.change_stat(STATKEY_STR, 1)
-		H.change_stat(STATKEY_SPD, 2)
-		H.change_stat(STATKEY_END, 1)
+	jobstats = list(
+		STATKEY_STR = 1,
+		STATKEY_SPD = 2,
+		STATKEY_END = 1,
+	)
 
+	skills = list(
+		/datum/skill/combat/knives = 4,
+		/datum/skill/combat/swords = 2,
+		/datum/skill/combat/crossbows = 2,
+		/datum/skill/combat/bows = 2,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/sneaking = 4,
+		/datum/skill/misc/stealing = 2,
+		/datum/skill/misc/lockpicking = 3,
+		/datum/skill/craft/traps = 1,
+	)
+
+	traits = list(
+		TRAIT_DODGEEXPERT,
+		TRAIT_STEELHEARTED,
+	)
+	languages = list(/datum/language/zalad)
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
+
+/datum/job/migrant/zalad_migration/qatil/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	if(spawned.dna?.species)
+		if(spawned.dna.species.id == SPEC_ID_HUMEN)
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+		if(spawned.dna.species.id == SPEC_ID_HALF_ELF && spawned.dna.species.native_language == "Imperial")
+			spawned.dna.species.native_language = "Zalad"
+			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+
+/datum/outfit/zalad_migration/qatil
+	name = "Qatil (Migrant Wave)"
 	pants = /obj/item/clothing/pants/trou/leather
 	beltr = /obj/item/weapon/knife/dagger/steel/special
 	shoes = /obj/item/clothing/shoes/shalal
@@ -294,22 +389,11 @@
 	armor = /obj/item/clothing/armor/leather/splint
 	backl = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/neck/keffiyeh/colored/red
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor, /obj/item/lockpick)
-	if(!H.has_language(/datum/language/zalad))
-		H.grant_language(/datum/language/zalad)
-		to_chat(H, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor,
+		/obj/item/lockpick,
+	)
 
-	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
-	if(H.dna?.species)
-		if(H.dna.species.id == SPEC_ID_HUMEN)
-			H.dna.species.native_language = "Zalad"
-			H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-		if((H.dna.species.id == SPEC_ID_HALF_ELF) || (H.dna.species.id == SPEC_ID_HALF_DROW))
-			if(H.dna.species.native_language == "Imperial")
-				H.dna.species.native_language = "Zalad"
-				H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 /datum/migrant_wave/zalad_wave
 	name = "The Deshret Expedition"
 	max_spawns = 1
@@ -323,7 +407,7 @@
 		/datum/migrant_role/qatil = 1,
 		/datum/migrant_role/zalad_guard = 2
 	)
-	greet_text = "The Mercator Guild sent you, respected Zaladians, to seek favorable business proposal within the Kingdom of Vanderlin."
+	greet_text = "The Mercator Guild sent you, respected Zaladins, to seek favorable business proposal within the Kingdom of Vanderlin."
 
 /datum/migrant_wave/zalad_wave_down
 	name = "The Deshret Expedition"
@@ -336,4 +420,4 @@
 		/datum/migrant_role/zalad/furusiyya = 1,
 		/datum/migrant_role/qatil = 1
 	)
-	greet_text = "The Mercator Guild sent you, respected Zaladians, to seek favorable business proposal within the Kingdom of Vanderlin. Unfortunately most of your guards died on the way here."
+	greet_text = "The Mercator Guild sent you, respected Zaladins, to seek favorable business proposal within the Kingdom of Vanderlin. Unfortunately most of your guards died on the way here."

@@ -2,46 +2,46 @@
 "al" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "bh" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "bE" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "cq" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/reagent_containers/glass/cup/golden,
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "cr" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "cB" = (
 /obj/structure/fluff/walldeco/painting/queen,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "cG" = (
 /obj/structure/fluff/walldeco/painting/seraphina,
 /obj/structure/fluff/walldeco/painting/seraphina,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "cO" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "dG" = (
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "dV" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "ey" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/weapon/pitchfork/copper,
@@ -49,184 +49,184 @@
 /obj/item/clothing/face/cigarette/pipe,
 /obj/item/reagent_containers/food/snacks/produce/swampweed_dried,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "gk" = (
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "gl" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/statue/gold/loot,
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "iQ" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "kc" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/reagent_containers/glass/bottle/stronghealthpot,
 /obj/item/reagent_containers/food/snacks/cheddar/aged,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "lX" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "mh" = (
 /obj/structure/bed/shit,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nj" = (
 /obj/structure/door/stone,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "nZ" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/water/swamp/deep,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "oU" = (
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "pk" = (
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "pC" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "pK" = (
 /obj/structure/fluff/walldeco/painting/castle,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "pX" = (
 /obj/structure/chair/stool,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "pZ" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/blocks/paving/vert,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "sS" = (
 /mob/living/simple_animal/hostile/retaliate/minotaur/axe,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "th" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "ty" = (
 /obj/structure/fluff/statue/evil,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "tM" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "vT" = (
 /turf/open/water/swamp,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "wj" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "wo" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/tile/checkeralt,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "xu" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/clothing/ring/gold,
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "xQ" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "yI" = (
 /obj/structure/fluff/walldeco/painting,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "Bv" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/statue/gold,
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "CP" = (
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "CX" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "Eu" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "Hc" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "HA" = (
 /obj/structure/fluff/walldeco/painting/crown,
 /turf/closed/wall/mineral/wood,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "HM" = (
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "If" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Ik" = (
 /obj/machinery/light/fueled/torchholder/c,
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Iq" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/ore/gold,
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "Lx" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "Ly" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Mq" = (
 /obj/structure/flora/shroom_tree,
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "NI" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/indoors)
+/area/under/tomb/indoors)
 "NT" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "NY" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/ingot/gold,
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "Oa" = (
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Oc" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/clothing/face/facemask/goldmask,
@@ -242,33 +242,33 @@
 /obj/item/lockpick,
 /obj/item/lockpickring,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 "RR" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "RW" = (
 /turf/open/floor/dirt/ambush,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Tr" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Vj" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "VK" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Wx" = (
 /turf/open/floor/dirt/road,
-/area/rogue/under/tomb/wilds/bog)
+/area/under/tomb/wilds/bog)
 "Yd" = (
 /obj/structure/door/fancy,
 /turf/open/floor/carpet,
-/area/rogue/under/tomb/indoors/royal)
+/area/under/tomb/indoors/royal)
 
 (1,1,1) = {"
 cr

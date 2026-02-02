@@ -41,7 +41,7 @@
 	current_steam -= amount_used
 	return TRUE
 
-/datum/component/steam_storage/proc/try_proxy_use_steam(mob/proxy, atom/source, amount_used, id, var/emptying = FALSE, var/check_only = FALSE)
+/datum/component/steam_storage/proc/try_proxy_use_steam(mob/proxy, atom/source, amount_used, id, emptying = FALSE, var/check_only = FALSE)
 	if(tank_id && id != tank_id)
 		return FALSE
 

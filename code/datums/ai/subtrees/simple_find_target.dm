@@ -58,3 +58,8 @@
 
 	if(in_water)
 		vision_range = enhanced_vision_in_water
+
+/datum/ai_planning_subtree/aggro_find_target/species_hostile
+
+/datum/ai_planning_subtree/aggro_find_target/species_hostile/SelectBehaviors(datum/ai_controller/controller, delta_time)
+	controller.queue_behavior(/datum/ai_behavior/find_aggro_targets/species_hostile, BB_BASIC_MOB_CURRENT_TARGET, BB_TARGETTING_DATUM, BB_BASIC_MOB_CURRENT_TARGET_HIDING_LOCATION)

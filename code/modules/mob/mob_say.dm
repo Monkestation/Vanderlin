@@ -1,12 +1,13 @@
 //Speech verbs.
 
 
-/mob/verb/say_verb()
+/mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
 	set hidden = 1
 
-	var/message = input(usr, "", "say") as text|null
+	if(!message)
+		message = input(usr, "", "say") as text|null
 	// If they don't type anything just drop the message.
 	set_typing_indicator(FALSE)
 	if(!length(message))
@@ -34,7 +35,7 @@
 	say(message, bubble_type, spans, sanitize, language, ignore_spam, forced) //only living mobs actually whisper, everything else just talks
 
 ///The me emote verb
-/mob/verb/me_verb()
+/mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
 	set hidden = 1
@@ -45,7 +46,8 @@
 			to_chat(usr, "<span class='warning'>I can't use custom emotes. (LOW PQ)</span>")
 			return
 		#endif
-	var/message = input(usr, "", "me") as text|null
+	if(!message)
+		message = input(usr, "", "me") as text|null
 	// If they don't type anything just drop the message.
 	set_typing_indicator(FALSE)
 	if(!length(message))
@@ -159,18 +161,18 @@
 ///The amount of items we are looking for in the message
 #define MESSAGE_MODS_LENGTH 6
 /**
-  * Extracts and cleans message of any extenstions at the begining of the message
-  * Inserts the info into the passed list, returns the cleaned message
-  *
-  * Result can be
-  * * SAY_MODE (Things like aliens, channels that aren't channels)
-  * * MODE_WHISPER (Quiet speech)
-  * * MODE_SING (Singing)
-  * * MODE_HEADSET (Common radio channel)
-  * * RADIO_EXTENSION the extension we're using (lots of values here)
-  * * RADIO_KEY the radio key we're using, to make some things easier later (lots of values here)
-  * * LANGUAGE_EXTENSION the language we're trying to use (lots of values here)
-  */
+ * Extracts and cleans message of any extenstions at the begining of the message
+ * Inserts the info into the passed list, returns the cleaned message
+ *
+ * Result can be
+ * * SAY_MODE (Things like aliens, channels that aren't channels)
+ * * MODE_WHISPER (Quiet speech)
+ * * MODE_SING (Singing)
+ * * MODE_HEADSET (Common radio channel)
+ * * RADIO_EXTENSION the extension we're using (lots of values here)
+ * * RADIO_KEY the radio key we're using, to make some things easier later (lots of values here)
+ * * LANGUAGE_EXTENSION the language we're trying to use (lots of values here)
+ */
 /mob/proc/get_message_mods(message, list/mods)
 	for(var/I in 1 to MESSAGE_MODS_LENGTH)
 		var/key = message[1]
@@ -187,7 +189,7 @@
 			chop_to = length(key) + 2
 		else if(key == "," && !mods[LANGUAGE_EXTENSION])
 			for(var/datum/language/LD as anything in GLOB.all_languages)
-				if(initial(LD.key) == message[1 + length(message[1])])
+				if(initial(LD.key) == lowertext(message[1 + length(message[1])]))
 					if(!can_speak_in_language(LD))
 						return message
 					mods[LANGUAGE_EXTENSION] = LD

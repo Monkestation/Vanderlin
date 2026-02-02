@@ -116,6 +116,8 @@
 ///Common checks to make sure we can trigger the trap.
 /// True == Yep we good.
 /obj/structure/trap/proc/trap_check(mob/living/victim)
+	if(istype(get_area(loc), /area/overlord_lair) && ("overlord" in victim.faction))
+		return FALSE
 	if(last_trigger + time_between_triggers > world.time)
 		return FALSE
 	if(victim.controller_mind)

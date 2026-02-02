@@ -5,6 +5,7 @@
 	icon_state = "lock"
 	w_class = WEIGHT_CLASS_SMALL
 	dropshrink = 0.75
+	can_unlock = FALSE // :D
 
 /obj/item/customlock/examine()
 	. = ..()
@@ -80,6 +81,7 @@
 		to_chat(user, span_notice("You label the [name] with [holdname]."))
 
 /obj/item/customlock/finished/attackby_secondary(obj/item/I, mob/user, list/modifiers)
+	return // Keep crashing until we fix this
 
 /obj/item/customlock/finished/attack_atom(atom/attacked_atom, mob/living/user)
 	if(!isobj(attacked_atom))

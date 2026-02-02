@@ -24,18 +24,19 @@
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast
 	name = "gorefeast"
 	desc = "It is said that with this axe alone, Graggar slew a thousand men. With you, it will slay a thousand more."
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "gorefeast"
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	max_blade_int = 200
-	max_integrity = 720
-	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
-	gripped_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop/great, /datum/intent/sword/strike)
-	wdefense = GOOD_PARRY
 	force = DAMAGE_HEAVYAXE_WIELD
-	force_wielded = 35
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 5
+	wdefense = GOOD_PARRY
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SWORD_STRIKE)
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST + 220
 	minstr = 12
+	resistance_flags = FIRE_PROOF
 	sellprice = 550
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
@@ -50,7 +51,7 @@
 		user.playsound_local(user, pick('sound/misc/godweapons/gorefeast1.ogg', 'sound/misc/godweapons/gorefeast2.ogg', 'sound/misc/godweapons/gorefeast3.ogg'), 70)
 		message = pick(GOREFEAST_UNWORTHY)
 	else
-		to_chat(user, span_danger("Gorefeast begins to thump, ecstatically upon your touch on the boney shaft."))
+		to_chat(user, span_danger("Gorefeast begins to thump ecstatically upon your touch on the boney shaft."))
 		user.playsound_local(user, pick('sound/misc/godweapons/gorefeast4.ogg', 'sound/misc/godweapons/gorefeast5.ogg', 'sound/misc/godweapons/gorefeast6.ogg'), 70)
 		message = pick(GOREFEAST_WORTHY)
 	addtimer(CALLBACK(src, PROC_REF(do_message), message), 2 SECONDS)
@@ -96,22 +97,20 @@
 	name = "neant"
 	desc = "A dark scythe with a long chain, used to cut the life essence from people, or whip them into shape. The blade is an ominous purple."
 	icon_state = "neant"
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
+	force = DAMAGE_SPEARPLUS + 2
+	force_wielded = DAMAGE_SPEAR_WIELD
+	throwforce = DAMAGE_SPEAR_WIELD
+	possible_item_intents = list(SPEAR_CUT)
+	gripped_intents = list(POLEARM_CHOP, WHIP_STRIKE, NEANT_SHOOT)
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST + 220
+	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FIRE_PROOF
 	dropshrink = 0.75
-	max_blade_int = 200
-	max_integrity = 720
-	possible_item_intents = list(/datum/intent/polearm/cut)
-	gripped_intents = list(/datum/intent/polearm/chop, /datum/intent/whip, /datum/intent/shoot/neant)
 	thrown_bclass = BCLASS_CUT
-	blade_dulling = DULLING_BASHCHOP
-	wdefense = GREAT_PARRY
-	force = 20
-	force_wielded = 25
-	throwforce = 25
-	minstr = 10
 	sellprice = 550
 
 	COOLDOWN_DECLARE(fire_projectile)
@@ -148,11 +147,11 @@
 		var/obj/item/bodypart/chest/C = H.get_bodypart(BODY_ZONE_CHEST)
 		if(!C)
 			return
-		playsound(get_turf(user), 'sound/surgery/scalpel2.ogg', 70)
+		playsound(user, 'sound/surgery/scalpel2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
 			C.add_wound(/datum/wound/slash/incision)
 
-		playsound(get_turf(user), 'sound/surgery/organ2.ogg', 70)
+		playsound(user, 'sound/surgery/organ2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
 			C.add_wound(/datum/wound/fracture/chest)
 
@@ -180,7 +179,7 @@
 	PJ.firer = user
 	PJ.fired_from = src
 	PJ.original = target
-	playsound(get_turf(user),'sound/effects/neantspecial.ogg', 70)
+	playsound(user,'sound/effects/neantspecial.ogg', 70)
 
 	if(user.STAPER > 8)
 		PJ.accuracy += (user.STAPER - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
@@ -237,7 +236,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta
 	name = "turbulenta"
 	desc = "Rarely does she even care about combat, but when she does... Baotha was quite the markswoman."
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "turbulenta"
 	base_icon = "turbulenta"
 	slot_flags = ITEM_SLOT_BACK
@@ -367,14 +366,12 @@
 //┌─────────────── PLEONEXIA ───────────────┐//
 /obj/item/weapon/sword/long/pleonexia
 	icon_state = "pleonexia"
-	icon = 'icons/roguetown/weapons/godweapons.dmi'
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	name = "pleonexia"
 	desc = "A sword of legend. If they are true, then this is the blade of Matthios himself. Rumor has it, it steals space and time."
-	swingsound = BLADEWOOSH_LARGE
-	parrysound = "largeblade"
-	pickup_sound = "brandish_blade"
-	possible_item_intents = list(/datum/intent/sword/strike, /datum/intent/sword/cut)
-	gripped_intents = list(/datum/intent/sword/strike, /datum/intent/sword/chop, /datum/intent/sword/thrust,  /datum/intent/plex_dash)
+	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
+	gripped_intents = list(SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST, PLEX_BLINK)
+	max_integrity = INTEGRITY_STRONGEST + 220
 	sellprice = 550
 
 	COOLDOWN_DECLARE(pleonexia_blink)

@@ -1,3 +1,5 @@
+#define DIET_HARPY list(/obj/item/natural/worms/grub_silk, /obj/item/natural/worms) + typesof(/obj/item/neuFarm/seed)
+
 /mob/living/carbon/human/species/harpy
 	race = /datum/species/harpy
 
@@ -20,6 +22,10 @@
 	default_color = "FFFFFF"
 
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
+	inherent_traits = list(TRAIT_NOMOBSWAP)
+	inherent_skills = list(
+		/datum/skill/misc/music = 1,
+	)
 
 	use_skintones = TRUE
 	possible_ages = NORMAL_AGES_LIST_CHILD
@@ -161,7 +167,7 @@
 
 /datum/species/harpy/on_species_gain(mob/living/carbon/foreign, datum/species/old_species)
 	..()
-	foreign.AddComponent(/datum/component/abberant_eater, list(/obj/item/natural/worms/grub_silk, /obj/item/natural/worms) + typesof(/obj/item/neuFarm/seed), TRUE)
+	foreign.AddComponent(/datum/component/abberant_eater, DIET_HARPY, TRUE)
 	foreign.grant_language(/datum/language/common)
 
 /datum/species/harpy/get_skin_list()
@@ -178,3 +184,5 @@
 		"Desert" = SKIN_COLOR_DESERT, //  - (Middle-east)
 		"Crimson Lands" = SKIN_COLOR_CRIMSONLANDS, // - (Black)
 	))
+
+#undef DIET_HARPY

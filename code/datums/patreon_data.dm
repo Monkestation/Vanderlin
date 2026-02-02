@@ -1,4 +1,6 @@
 GLOBAL_LIST_INIT(contributors, load_contributors())
+GLOBAL_LIST_EMPTY(donator_data_by_key)
+GLOBAL_LIST_EMPTY(donator_data_by_ckey)
 
 /proc/load_contributors()
 	var/contribs = file("data/contributors.json")
@@ -14,7 +16,7 @@ GLOBAL_LIST_INIT(contributors, load_contributors())
 	///the stored patreon rank collected from the server
 	var/owned_rank = NO_RANK
 	///access rank in numbers
-	var/access_rank = 0
+	var/access_rank = ACCESS_NONE_RANK
 
 
 /datum/patreon_data/New(client/owner)
@@ -28,6 +30,11 @@ GLOBAL_LIST_INIT(contributors, load_contributors())
 
 	fetch_key_and_rank()
 	assign_access_rank()
+	add_to_global_list()
+
+/datum/patreon_data/proc/add_to_global_list()
+	GLOB.donator_data_by_key[owner.key] = access_rank
+	GLOB.donator_data_by_ckey[owner.ckey] = access_rank
 
 /datum/patreon_data/proc/fetch_key_and_rank()
 	if(!SSdbcore.IsConnectedCross())
@@ -69,3 +76,14 @@ GLOBAL_LIST_INIT(contributors, load_contributors())
 
 /datum/patreon_data/proc/is_donator()
 	return owned_rank && owned_rank != NO_RANK && owned_rank != UNSUBBED
+
+/proc/key_is_donator(key)
+	if(GLOB.donator_data_by_key[key])
+		return TRUE
+	return FALSE
+
+/proc/ckey_is_donator(ckey)
+	if(GLOB.donator_data_by_ckey[ckey])
+		return TRUE
+	return FALSE
+

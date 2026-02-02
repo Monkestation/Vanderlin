@@ -1,5 +1,3 @@
-GLOBAL_LIST_EMPTY(billagerspawns)
-
 GLOBAL_VAR_INIT(adventurer_hugbox_duration, 30 SECONDS)
 GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
@@ -13,13 +11,13 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK)
 	display_order = JDO_ADVENTURER
-	faction = FACTION_TOWN
+	faction = FACTION_FOREIGNERS
 	total_positions = 14
 	spawn_positions = 14
-	min_pq = 2
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
+	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = null
 	outfit_female = null
@@ -28,16 +26,35 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	advclass_cat_rolls = list(CTAG_ADVENTURER = 15)
 	is_foreigner = TRUE
 	can_have_apprentices = FALSE
+	scales = TRUE
 
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 
-/datum/job/adventurer/after_spawn(mob/living/spawned, client/player_client)
-	..()
-	if(advclass_cat_rolls)
-		hugboxify_for_class_selection(spawned)
+/datum/job/advclass/combat
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
+	spawn_with_torch = TRUE
 
-/datum/outfit/job/adventurer // Reminder message
-	var/merc_ad = "<br><font color='#855b14'><span class='bold'>If I wanted to make mammons by selling my services, or completing quests, the Mercenary guild would be a good place to start.</span></font><br>"
+/datum/job/adventurer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	to_chat(spawned, "<br><font color='#855b14'><span class='bold'>If I wanted to make mammons by selling my services, or completing quests, the Mercenary guild would be a good place to start.</span></font><br>")
 
-/datum/outfit/job/adventurer/post_equip(mob/living/carbon/human/H)
-	..()
-	to_chat(H, merc_ad)
+/datum/job/adventurer/set_spawn_and_total_positions(count)
+	// Calculate the new spawn positions
+	var/new_spawn = adventurer_slot_formula(count)
+
+	// Sync everything
+	spawn_positions = new_spawn
+	total_positions_so_far = new_spawn
+	total_positions = new_spawn
+
+	return spawn_positions
+
+/datum/job/adventurer/get_total_positions()
+	var/slots = adventurer_slot_formula(get_total_town_members())
+
+	if(slots <= total_positions_so_far)
+		slots = total_positions_so_far
+	else
+		total_positions_so_far = slots
+
+	return slots

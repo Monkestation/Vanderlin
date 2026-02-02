@@ -36,9 +36,6 @@
 	else if(href_list["ahelp_tickets"])
 		GLOB.ahelp_tickets.BrowseTickets(text2num(href_list["ahelp_tickets"]))
 
-	else if(href_list["stickyban"])
-		stickyban(href_list["stickyban"],href_list)
-
 	else if(href_list["getplaytimewindow"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -106,6 +103,7 @@
 	else if(href_list["delay_round_end"])
 		if(!check_rights(R_SERVER))
 			return
+
 		if(!SSticker.delay_end)
 			SSticker.admin_delay_notice = input(usr, "Enter a reason for delaying the round end", "Round Delay Reason") as null|text
 			if(isnull(SSticker.admin_delay_notice))
@@ -114,12 +112,19 @@
 			if(alert(usr, "Really cancel current round end delay? The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Undelay round end", "Yes", "No") != "Yes")
 				return
 			SSticker.admin_delay_notice = null
+
 		SSticker.delay_end = !SSticker.delay_end
+
 		var/reason = SSticker.delay_end ? "for reason: [SSticker.admin_delay_notice]" : "."//laziness
 		var/msg = "[SSticker.delay_end ? "delayed" : "undelayed"] the round end [reason]"
+
 		log_admin("[key_name(usr)] [msg]")
 		message_admins("[key_name_admin(usr)] [msg]")
-		if(SSticker.ready_for_reboot && !SSticker.delay_end) //we undelayed after standard reboot would occur
+
+		if(SSticker.delay_end)
+			if(SSticker.reboot_timer)
+				SSticker.cancel_reboot(usr)
+		else if(SSticker.ready_for_reboot)
 			SSticker.standard_reboot()
 
 	else if(href_list["end_round"])
@@ -472,7 +477,7 @@
 		NP.ckey = M.ckey
 		if(living)
 			if(alert(usr, "Would you like to also delete the living mob [key_name(M)]?", "Message", "Yes", "No") == "Yes")
-				log_admin("[key_name(usr)] has chosen to delete the [M] mob while sending the client to lobby.")
+				log_admin("[key_name(usr)] has chosen to delete \the [M] mob while sending the client to lobby.")
 				qdel(M)
 		else
 			qdel(M)
@@ -493,7 +498,7 @@
 			to_chat(usr, "This can only be used on instances of type /mob/living.")
 			return
 
-		L.revive(full_heal = TRUE, admin_revive = TRUE)
+		L.revive(ADMIN_HEAL_ALL)
 		message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(L)]!</span>")
 		log_admin("[key_name(usr)] healed / Revived [key_name(L)].")
 
@@ -623,6 +628,85 @@
 		to_chat(src.owner, "[special_role_description]")
 		to_chat(src.owner, ADMIN_FULLMONTY_NONAME(M))
 
+	else if(href_list["add_quirk"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		var/mob/living/carbon/human/H = locate(href_list["add_quirk"])
+		if(!ishuman(H))
+			to_chat(usr, "<span class='warning'>This can only be used on human mobs.</span>")
+			return
+
+		var/quirk_type = text2path(href_list["quirk"])
+		if(!ispath(quirk_type, /datum/quirk))
+			to_chat(usr, "<span class='warning'>Invalid quirk type.</span>")
+			return
+
+		// Check if they already have this quirk
+		if(H.has_quirk(quirk_type))
+			to_chat(usr, "<span class='warning'>[H] already has this quirk.</span>")
+			return
+
+		// Get the quirk singleton for customization check
+		var/datum/quirk/singleton = GLOB.quirk_singletons[quirk_type]
+		var/custom_value = null
+
+		// Handle customization if the quirk has options
+		if(length(singleton.customization_options))
+			var/list/options = singleton.return_customization(H.client?.prefs)
+			if(length(options))
+				var/selected = input(usr, "Select [singleton.customization_label]:", "Quirk Customization") as null|anything in options
+				if(selected)
+					custom_value = selected
+				else
+					to_chat(usr, "<span class='warning'>Quirk addition cancelled - no option selected.</span>")
+					return
+
+		// Add the quirk - this calls New() which calls on_spawn()
+		if(H.add_quirk(quirk_type, custom_value))
+			// Now trigger after_job_spawn() since the quirk is already spawned
+			var/datum/quirk/new_quirk = H.get_quirk(quirk_type)
+			if(new_quirk)
+				new_quirk.after_job_spawn()
+
+			log_admin("[key_name_admin(usr)] added quirk [initial(singleton.name)] to [key_name_admin(H)].")
+			message_admins("[key_name_admin(usr)] added quirk [initial(singleton.name)] to [key_name_admin(H)].")
+			to_chat(usr, "<span class='notice'>Added quirk [initial(singleton.name)] to [H].</span>")
+		else
+			to_chat(usr, "<span class='warning'>Failed to add quirk to [H].</span>")
+
+		show_player_panel_next(H, "quirks")
+
+	else if(href_list["remove_quirk"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		var/mob/living/carbon/human/H = locate(href_list["remove_quirk"])
+		if(!ishuman(H))
+			to_chat(usr, "<span class='warning'>This can only be used on human mobs.</span>")
+			return
+
+		var/quirk_type = text2path(href_list["quirk"])
+		if(!ispath(quirk_type, /datum/quirk))
+			to_chat(usr, "<span class='warning'>Invalid quirk type.</span>")
+			return
+
+		var/datum/quirk/Q = H.get_quirk(quirk_type)
+		if(!Q)
+			to_chat(usr, "<span class='warning'>[H] doesn't have this quirk.</span>")
+			return
+
+		var/quirk_name = initial(Q.name)
+
+		if(H.remove_quirk(quirk_type))
+			log_admin("[key_name_admin(usr)] removed quirk [quirk_name] from [key_name_admin(H)].")
+			message_admins("[key_name_admin(usr)] removed quirk [quirk_name] from [key_name_admin(H)].")
+			to_chat(usr, "<span class='notice'>Removed quirk [quirk_name] from [H].</span>")
+		else
+			to_chat(usr, "<span class='warning'>Failed to remove quirk from [H].</span>")
+
+		show_player_panel_next(H, "quirks")
+
 	else if(href_list["addjobslot"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -692,6 +776,33 @@
 				job.total_positions = job.current_positions
 				break
 
+		src.manage_free_slots()
+
+	else if(href_list["enablejob"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		var/Enable = href_list["enablejob"]
+		for(var/datum/job/job in SSjob.joinable_occupations)
+			if(job.title == Enable)
+				job.enabled = TRUE
+				job.total_positions = initial(job.total_positions)
+				job.spawn_positions = initial(job.spawn_positions)
+				break
+
+		src.manage_free_slots()
+
+	else if(href_list["disablejob"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		var/Disable = href_list["disablejob"]
+		for(var/datum/job/job in SSjob.joinable_occupations)
+			if(job.title == Disable)
+				job.enabled = FALSE
+				job.total_positions = 0
+				job.spawn_positions = 0
+				break
 		src.manage_free_slots()
 
 
@@ -787,6 +898,18 @@
 		M.change_stat(statkey, -1)
 		log_admin("[key_name_admin(usr)] decreased [key_name_admin(M)]'s [statkey].")
 		message_admins("[key_name_admin(usr)] decreased [key_name_admin(M)]'s [statkey].")
+		show_player_panel_next(M, "stats")
+
+	else if(href_list["bulk_change"])
+		var/mob/living/M = locate(href_list["bulk_change"])
+		var/statkey = href_list["stat"]
+		var/change_stat = input(usr, "Increase or Decrease this stat.", "Bulk Stat Change", 1) as num
+		if(!change_stat)
+			return
+		M.change_stat(statkey, change_stat)
+
+		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s [statkey] by [change_stat].")
+		message_admins("[key_name_admin(usr)] changed [key_name_admin(M)]'s [statkey] by [change_stat].")
 		show_player_panel_next(M, "stats")
 
 	else if(href_list["sendmob"])
@@ -1030,30 +1153,6 @@
 			log_admin("[key_name(usr)] has kicked [afkonly ? "all AFK" : "all"] clients from the lobby. [length(listkicked)] clients kicked: [strkicked ? strkicked : "--"]")
 		else
 			to_chat(usr, "You may only use this when the game is running.")
-
-	else if(href_list["create_outfit_finalize"])
-		if(!check_rights(R_ADMIN))
-			return
-		create_outfit_finalize(usr,href_list)
-	else if(href_list["load_outfit"])
-		if(!check_rights(R_ADMIN))
-			return
-		load_outfit(usr)
-	else if(href_list["create_outfit_menu"])
-		if(!check_rights(R_ADMIN))
-			return
-		create_outfit(usr)
-	else if(href_list["delete_outfit"])
-		if(!check_rights(R_ADMIN))
-			return
-		var/datum/outfit/O = locate(href_list["chosen_outfit"]) in GLOB.custom_outfits
-		delete_outfit(usr,O)
-	else if(href_list["save_outfit"])
-		if(!check_rights(R_ADMIN))
-			return
-		var/datum/outfit/O = locate(href_list["chosen_outfit"]) in GLOB.custom_outfits
-		save_outfit(usr,O)
-
 	else if(href_list["viewruntime"])
 		var/datum/error_viewer/error_viewer = locate(href_list["viewruntime"])
 		if(!istype(error_viewer))
@@ -1110,7 +1209,7 @@
 		else if(response.status_code != 200)
 			dat += "<br>Failed to connect to CentCom. Status code: [response.status_code]"
 		else
-			if(response.body == "[]")
+			if(response.body == "\[]")
 				dat += "<center><b>0 bans detected for [ckey]</b></center>"
 			else
 				bans = json_decode(response.body)
@@ -1199,7 +1298,7 @@
 			return
 
 		var/raisin = stripped_input(usr, "State a short reason for this change", "Game Master", null, null)
-		M.adjust_triumphs(amt2change, FALSE, raisin)
+		M.adjust_triumphs(amt2change, FALSE, raisin, override_bonus = TRUE)
 		message_admins("[key_name_admin(usr)] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 		log_admin("[key_name_admin(usr)] adjusted [M.key]'s triumphs by [amt2change] with [!raisin ? "no reason given" : "reason: [raisin]"].")
 
@@ -1222,30 +1321,6 @@
 		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s patron from [being_changed.patron] to [patron_to_change_to]")
 
 		being_changed.set_patron(patron_to_change_to)
-
-	else if(href_list["changeflaw"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = (locate(href_list["mob"]) in GLOB.mob_list)
-
-		if(!ishuman(M))
-			return
-
-		var/list/flawslist = GLOB.character_flaws.Copy()
-		var/flaw_to_change_to = browser_input_list(usr, "Change to what flaw?", "EVERYONE HAS A VICE", flawslist)
-
-		if(!flaw_to_change_to)
-			return
-
-		flaw_to_change_to = flawslist[flaw_to_change_to]
-
-		var/mob/living/carbon/human/being_changed = M
-
-		message_admins("[key_name_admin(usr)] changed [key_name_admin(M)]'s flaw from [being_changed.charflaw ? being_changed.charflaw : "NA"] to [flaw_to_change_to]")
-		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s flaw from [being_changed.charflaw ? being_changed.charflaw : "NA"] to [flaw_to_change_to]")
-
-		being_changed.set_flaw(flaw_to_change_to)
 
 	else if(href_list["modifycurses"])
 
@@ -1494,6 +1569,12 @@
 		var/datum/browser/noclose/popup = new(usr, "cursecheck", "", 370, 220)
 		popup.set_content(popup_window_data)
 		popup.open()
+
+	else if(href_list["adminbirdletter"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/mob/M = locate(href_list["adminbirdletter"])
+		usr.client.send_bird_letter(M)
 
 /datum/admins/proc/HandleCMode()
 	if(!check_rights(R_ADMIN))

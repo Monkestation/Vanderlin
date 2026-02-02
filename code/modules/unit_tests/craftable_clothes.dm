@@ -19,16 +19,64 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/facemask/prisoner,
 		/obj/item/clothing/head/priestmask, // unattainable
 		/obj/item/clothing/head/priesthat, // unattainable
-		/obj/item/clothing/head/mob_holder, // change this shit to not clothing, wtf.
 		/obj/item/clothing/head/leather/inqhat/vigilante, //Renegade Bullshit
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/gold/burden, // uncraftable
+		/obj/item/clothing/ring/feldsher_ring, // uncraftable
+		/obj/item/clothing/ring/apothecary_ring, // uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
 		/obj/item/clothing/head/helmet/leather/saiga, // idk what kind of recipe to make this
 		/obj/item/clothing/neck/mana_star, // todo?
+		/obj/item/clothing/neck/gorget/explosive, // Inq shop only
 		/obj/item/storage/backpack/backpack/artibackpack/porter, //Unique to Kobl
+		/obj/item/clothing/face/spectacles/inq/spawnpair, //spawn type
+		/obj/item/clothing/face/facemask/steel/confessor/lensed, //manual craft
+		/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume, //manual craft
+		/obj/item/clothing/wall_grab, ///abstract
+		/obj/item/clothing/climbing_gear, ///weird
+		/obj/item/clothing/wrists/bracers/psythorns, //inqport
+		/obj/item/clothing/cloak/psydontabard, ///they'd kill you for this
+		/obj/item/clothing/cloak/psydontabard/alt, ///same here
+		/obj/item/clothing/face/spectacles/inq, //these are powerful
+		/obj/item/clothing/armor/leather/heavy, ///abstract type
+		/obj/item/clothing/head/helmet/heavy/psydonbarbute, //buyable
+		/obj/item/clothing/head/helmet/heavy/psysallet, //buyable
+		/obj/item/clothing/head/helmet/heavy/psybucket, //buyable
+		/obj/item/clothing/head/helmet/heavy/psydonhelm, //buyable
+		/obj/item/clothing/head/helmet/heavy/ordinatorhelm, ///special item //! probably can add this at some point
+		/obj/item/clothing/head/roguehood/psydon/confessor, ///inqport
+		/obj/item/clothing/face/facemask/steel/confessor, ///inqport
+		/obj/item/clothing/neck/psycross/silver/undivided, //Not supposed to get this, not yet at the very least.
+		/obj/item/clothing/gloves/bandages/pugilist,
+		/obj/item/clothing/armor/gambeson/heavy/otavan/inq, ///inqport
+		/obj/item/clothing/armor/gambeson/heavy/otavan, ///null
+		/obj/item/clothing/armor/gambeson/heavy/inq, //inqport
+		/obj/item/clothing/armor/leather/studded,
+		/obj/item/clothing/armor/leather/jacket/leathercoat/confessor, //inqport
+		/obj/item/clothing/head/roguehood/psydon,
+		/obj/item/clothing/neck/fencerguard/inq, ///inqport
+		/obj/item/clothing/neck/fencerguard, //null
+		/obj/item/clothing/armor/cuirass/fencer, //meh
+		/obj/item/clothing/armor/cuirass/fluted, //eh
+		/obj/item/clothing/armor/medium/scale/inqcoat/armored, //upgrade
+		/obj/item/clothing/armor/brigandine/light, //basetype,
+		/obj/item/clothing/armor/plate/fluted/ornate, //basetype
+		/obj/item/clothing/armor/plate/fluted/ornate/ordinator, //inqport
+		/obj/item/clothing/armor/plate/fluted,
+		/obj/item/clothing/cloak/templar, //base type
+		/obj/item/clothing/face/antiq, //implied to be a weird heartfelt technoitem. good luck replicating this. unique to antiquarian
+		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
+		/obj/item/clothing/armor/chainmail/hauberk/ancient,// ancient is currently for vampire death knight
+		/obj/item/clothing/armor/plate/ancient,
+		/obj/item/clothing/gloves/plate/ancient,
+		/obj/item/clothing/head/helmet/heavy/ancient,
+		/obj/item/clothing/neck/gorget/ancient,
+		/obj/item/clothing/pants/platelegs/ancient,
+		/obj/item/clothing/wrists/bracers/ancient,
+
+		/obj/item/clothing/wrists/bracers/naledi //Inqstuff
 	)
 	// these don't use misc_flags = CRAFTING_TEST_EXCLUDE because we want to explicitly know which paths we are excluding.
 	/// excludes paths along with their subtypes
@@ -43,6 +91,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/cigarette, // TODO
 		/obj/item/clothing/head/takuhatsugasa,
 		/obj/item/clothing/shirt/robe/kimono, //these are mob holders only
+		/obj/item/clothing/armor/regenerating, ///uh no
+		/obj/item/clothing/head/inqarticles, //inqports
 	)
 
 	/// excludes paths that are subtypes of these types and only subtypes
@@ -62,6 +112,7 @@ abstract types are automatically excluded.
 		"goblin",
 		"rare",
 		"captain",
+		"baotha",
 		"matthios",
 		"zizo",
 		"graggar",
@@ -81,7 +132,7 @@ abstract types are automatically excluded.
 
 	// abstract typepaths and CRAFTING_TEST_EXCLUDE
 	for(var/obj/item/clothing/path as anything in clothes_list)
-		if(is_abstract(path) || (path.misc_flags & CRAFTING_TEST_EXCLUDE))
+		if(IS_ABSTRACT(path) || (path::misc_flags & CRAFTING_TEST_EXCLUDE))
 			clothes_list -= path
 
 	// paths by text, if a piece of this text is found in the typepath it's excluded

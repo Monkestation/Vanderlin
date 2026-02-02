@@ -95,7 +95,7 @@
 	SIGNAL_HANDLER
 
 	var/is_right = text2num(LAZYACCESS(modifiers, RIGHT_CLICK))
-	if(I.has_access() && source.pre_lock_interact(user))
+	if(I.can_lock_interact() && source.pre_lock_interact(user))
 		try_toggle(I, user, is_right)
 		// :( these are technically the same thing
 		return is_right ? COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN : COMPONENT_NO_AFTERATTACK

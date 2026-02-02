@@ -75,6 +75,10 @@
 #define BB_FISHBOSS_DEEP_CALL_COOLDOWN "fishboss_deep_call_cooldown"
 
 
+#define BB_KRAKEN_SUMMON "bb_kraken_summon"
+#define BB_KRAKEN_INK "bb_kraken_ink"
+#define BB_KRAKEN_WHIRLPOOL "bb_kraken_whirlpool"
+
 ///Baby-making blackboard
 ///Types of animal we can make babies with.
 #define BB_BABIES_PARTNER_TYPES "BB_babies_partner"
@@ -92,7 +96,7 @@
 #define BB_FIND_MOM_TYPES "BB_find_mom_types"
 ///list of types of mobs we must ignore
 #define BB_IGNORE_MOM_TYPES "BB_ignore_mom_types"
-F
+
 ///are we ready to breed?
 #define BB_BREED_READY "BB_breed_ready"
 ///maximum kids we can have
@@ -182,6 +186,8 @@ F
 #define BB_SHROOM_COOLDOWN "shroom_cd"
 #define BB_DRUG_COOLDOWN "drug_cd"
 
+#define BB_AGRIOPYLON_BLESS_COOLDOWN "agriopylon_bless_cooldown"
+
 #define BB_QUAKE_COOLDOWN "quake_cooldown"
 #define BB_EARTHQUAKE_COOLDOWN "earthquake_cooldown"
 
@@ -217,6 +223,7 @@ F
 #define BB_CAT_HOME "cat_home"
 /// key that holds the human we will beg
 #define BB_HUMAN_BEG_TARGET "human_beg_target"
+#define BB_BEGGING_FOOD_ITEM "item_beg_target"
 
 #define BB_CAT_KITTEN_TARGET "BB_cat_kitten_target"
 #define BB_CAT_HOLDING_FOOD "BB_cat_holding_food"

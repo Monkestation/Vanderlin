@@ -23,7 +23,6 @@
 
 /datum/coven_power/demonic/sense_the_sin/activate()
 	. = ..()
-	owner.physiology.burn_mod /= 100
 	ADD_TRAIT(owner, TRAIT_NOFIRE, VAMPIRE_TRAIT)
 	owner.color = "#884200"
 
@@ -31,7 +30,6 @@
 	. = ..()
 	owner.color = initial(owner.color)
 	REMOVE_TRAIT(owner, TRAIT_NOFIRE, VAMPIRE_TRAIT)
-	owner.physiology.burn_mod *= 100
 
 //FEAR OF THE VOID BELOW
 /mob/living/carbon/human/proc/give_demon_flight()
@@ -169,7 +167,7 @@
 			var/blood_cost = C.severity * 50 // Scale cost with severity
 			owner.maxbloodpool -= blood_cost
 			if(owner.bloodpool > owner.maxbloodpool)
-				owner.bloodpool = owner.maxbloodpool
+				owner.set_bloodpool(owner.maxbloodpool)
 
 			to_chat(owner, span_userdanger("You have condemned [target]'s entire bloodline with [C.name]!"))
 			to_chat(target, span_userdanger("A terrible curse settles upon your family line! You feel the weight of [C.name]!"))
@@ -185,6 +183,6 @@
 		return target.family_datum
 
 	// Create new heritage if none exists
-	var/datum/heritage/new_heritage = new /datum/heritage(src, "Cursed Bloodline")
+	var/datum/heritage/new_heritage = new /datum/heritage(target, "Cursed Bloodline")
 	target.family_datum = new_heritage
 	return new_heritage

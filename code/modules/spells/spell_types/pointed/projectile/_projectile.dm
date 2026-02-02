@@ -13,7 +13,7 @@
  */
 /datum/action/cooldown/spell/projectile
 	self_cast_possible = FALSE
-	experience_modifer = 0.3 // More earned when hitting a target
+	experience_modifier = 0.3 // More earned when hitting a target
 
 	/// What projectile we create when we shoot our spell.
 	var/obj/projectile/magic/projectile_type = /obj/projectile/magic/teleport
@@ -53,12 +53,7 @@
 	if(!isturf(owner.loc))
 		return FALSE
 
-	var/turf/caster_turf = get_turf(owner)
-	// Get the tile infront of the caster, based on their direction
-	var/turf/caster_front_turf = get_step(owner, owner.dir)
-
 	fire_projectile(cast_on)
-	owner.newtonian_move(get_dir(caster_front_turf, caster_turf))
 	if(current_amount <= 0)
 		unset_click_ability(owner, refund_cooldown = FALSE)
 
@@ -85,7 +80,7 @@
 	to_fire.scale = clamp(attuned_strength, 0.5, 1.5)
 	to_fire.preparePixelProjectile(target, owner)
 
-	RegisterSignal(to_fire, COMSIG_PROJECTILE_ON_HIT, PROC_REF(on_cast_hit))
+	RegisterSignal(to_fire, COMSIG_PROJECTILE_SELF_ON_HIT, PROC_REF(on_cast_hit))
 
 	if(istype(to_fire, /obj/projectile/magic))
 		var/obj/projectile/magic/magic_to_fire = to_fire

@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(all_runewords, initialize_runewords())
 /proc/initialize_runewords()
 	var/list/runewords = list()
 	for(var/datum/runeword/runeword as anything in subtypesof(/datum/runeword))
-		if(is_abstract(runeword))
+		if(IS_ABSTRACT(runeword))
 			continue
 		runewords |= runeword
 		runewords[runeword] = new runeword

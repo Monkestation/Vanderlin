@@ -1,120 +1,61 @@
-/datum/advclass
-	var/name
-	var/outfit
-	var/tutorial = "Choose me!"
-	var/list/allowed_sexes
-	var/list/allowed_races = RACES_PLAYER_ALL
-	var/list/allowed_patrons
-	var/list/allowed_ages
-	var/pickprob = 100
-	var/maximum_possible_slots = 999
-	var/total_slots_occupied = 0
-	var/min_pq = -100
-	var/cmode_music
+/**
+ * Advanced class, job subclasses
+ *
+ * Handled via class_select_handler.dm
+ */
+/datum/job/advclass
+	abstract_type = /datum/job/advclass
+	total_positions = -1 // Infinite slots unless overriden
+	/// Take on the title of the previous job, if applied through regular means
+	var/inherit_parent_title = FALSE
+	/// Chance for this advanced class to roll for each player
+	var/roll_chance = 100
+	/// What categories we are going to sort it in, handles selection
+	var/list/category_tags = null
+	/// Bypass the class_cat_alloc_attempts limits and always be rolled
+	var/bypass_class_cat_limits = FALSE
+	/// Should reset STATMOD_JOB, set to FALSE if you want to be additive to parent's stats.
+	/// Doesn't effect skills only stats.
+	var/should_reset_stats = TRUE
+	/// Should this advclass spawn with a torch?
+	var/spawn_with_torch = FALSE
 
-	var/horse = FALSE
-	var/vampcompat = TRUE
-
-	/// This class is immune to species-based swapped gender locks
-	var/immune_to_genderswap = FALSE
-
-	//What categories we are going to sort it in
-	var/list/category_tags = list(CTAG_DISABLED)
-	var/displays_adv_job = TRUE
-
-	var/apprentice_name  //Must be set to give apprentices the correct title.
-	var/is_recognized = FALSE // Shows their title even as foreigner, used for pilgrims and adventurers.
-
-
-/datum/advclass/proc/equipme(mob/living/carbon/human/H)
-	// input sleeps....
-	set waitfor = FALSE
-	if(!H)
-		return FALSE
-
-	if(outfit)
-		H.equipOutfit(outfit)
-
-	if(displays_adv_job)
-		H.advjob = "Adventurer"
-		if(name)
-			H.advjob = name
-
-	var/turf/TU = get_turf(H)
-	if(TU)
-		if(horse)
-			new horse(TU)
-	H.set_apprentice_name(apprentice_name)
-
-	if(is_recognized)
-		ADD_TRAIT(H, TRAIT_RECOGNIZED, TRAIT_GENERIC)
-/*	for(var/trait in traits_applied)
-		ADD_TRAIT(H, trait, ADVENTURER_TRAIT) */
-
-	if(CTAG_TOWNER in category_tags)
-		for(var/mob/M in GLOB.billagerspawns)
-			to_chat(M, "<span class='info'>[H.real_name] is the [name].</span>")
-		GLOB.billagerspawns -= H
-
+/datum/job/advclass/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 	// Remove the stun first, then grant us the torch.
-	for(var/datum/status_effect/incapacitating/stun/S in H.status_effects)
-		H.remove_status_effect(S)
-	post_equip(H)
+	for(var/datum/status_effect/incapacitating/stun/S in spawned.status_effects)
+		spawned.remove_status_effect(S)
 
-	apply_character_post_equipment(H)
+	if(spawn_with_torch)
+		spawned.put_in_hands(new /obj/item/flashlight/flare/torch)
 
-/datum/advclass/proc/post_equip(mob/living/carbon/human/H)
-	addtimer(CALLBACK(SScrediticons, TYPE_PROC_REF(/datum/controller/subsystem/crediticons, add_credit), H), 2 SECONDS)
-	if(cmode_music)
-		H.cmode_music = cmode_music
-	sleep(5 DECISECONDS) ///why
-	var/obj/item/flashlight/flare/torch/T = new()
-	T.spark_act()
-	H.put_in_hands(T, forced = TRUE)
+	apply_character_post_equipment(spawned)
 
-/*
-	Whoa! we are checking requirements here!
-	On the datum! Wow!
-*/
-/datum/advclass/proc/check_requirements(mob/living/carbon/human/H)
-
+/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check)
 	var/list/local_allowed_sexes = list()
 	if(length(allowed_sexes))
 		local_allowed_sexes |= allowed_sexes
 
-	if(length(local_allowed_sexes) && !(H.gender in local_allowed_sexes))
+	if(length(local_allowed_sexes) && !(to_check.gender in local_allowed_sexes))
 		return FALSE
 
-	if(length(allowed_races) && !(H.dna.species.id in allowed_races))
-		if(!(H.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
+	if((length(allowed_races) && !(to_check.dna.species.id in allowed_races)) || \
+		(length(blacklisted_species) && (to_check.dna.species.id in blacklisted_species)))
+		if(!(to_check.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
 			return FALSE
 
-	if(length(allowed_ages) && !(H.age in allowed_ages))
+	if(length(allowed_ages) && !(to_check.age in allowed_ages))
 		return FALSE
 
-	if(length(allowed_patrons) && !(H.patron.type in allowed_patrons))
+	if(length(allowed_patrons) && !(to_check.patron.type in allowed_patrons))
 		return FALSE
 
-	if(maximum_possible_slots > -1)
-		if(total_slots_occupied >= maximum_possible_slots)
+	if(!antags_can_pick && to_check.mind?.special_role)
+		return FALSE
+
+	if(total_positions > -1)
+		if(current_positions >= total_positions)
 			return FALSE
 
-	#ifdef USES_PQ
-	if(min_pq != -100) // If someone sets this we actually do the check.
-		if(!(get_playerquality(H.client.ckey) >= min_pq))
-			return FALSE
-	#endif
-
-	var/pq_prob = pickprob + max((get_playerquality(H.client.ckey))/2, 0) // Takes the base pick rate of the rare class and adds the client's pq divided by 2 or 0, whichever is higher. Allows a maximum of 65 pick probability at 100 pq
-	if(prob(pq_prob))
+	if(prob(roll_chance))
 		return TRUE
-
-// Basically the handler has a chance to plus up a class, heres a generic proc you can override to handle behavior related to it.
-// For now you just get an extra stat in everything depending on how many plusses you managed to get.
-/datum/advclass/proc/boost_by_plus_power(plus_factor, mob/living/carbon/human/H)
-	for(var/S in MOBSTATS)
-		H.change_stat(S, plus_factor)
-
-
-//Final proc in the set for really dumb shit
-///datum/advclass/proc/extra_slop_proc_ending(mob/living/carbon/human/H)

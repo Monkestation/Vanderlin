@@ -1,11 +1,11 @@
-GLOBAL_LIST_INIT(special_traits, build_special_traits())
-
 #define SPECIAL_TRAIT(trait_type) GLOB.special_traits[trait_type]
+
+GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/build_special_traits()
 	. = list()
-	for(var/type in typesof(/datum/special_trait))
-		if(is_abstract(type))
+	for(var/datum/special_trait/type as anything in typesof(/datum/special_trait))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .
@@ -41,6 +41,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return
 	// Apply the stuff if we have a job that has no adv classes
 	apply_character_post_equipment(character, player)
+	apply_loadouts(arglist(args))
 
 /proc/apply_character_post_equipment(mob/living/carbon/human/character, client/player)
 	if(!player)
@@ -59,6 +60,16 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return
 	apply_special_trait_if_able(character, player, trait_type)
 	player.prefs.next_special_trait = null
+
+/proc/apply_loadouts(mob/living/carbon/human/character, client/player)
+	if(!player)
+		player = character.client
+	if(!player?.prefs)
+		return
+	for(var/i in 1 to 3)
+		if(isnull(player.prefs.vars["loadout[i]"]))
+			continue
+		character.mind.special_items["[player.prefs.vars["loadout[i]"]:item_path:name]"] = player.prefs.vars["loadout[i]"]:item_path
 
 /proc/apply_special_trait_if_able(mob/living/carbon/human/character, client/player, trait_type)
 	if(!charactet_eligible_for_trait(character, player, trait_type))
@@ -81,24 +92,18 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/charactet_eligible_for_trait(mob/living/carbon/human/character, client/player, trait_type)
 	var/datum/special_trait/special = SPECIAL_TRAIT(trait_type)
-	var/datum/job/job
-	if(character.job)
-		job = SSjob.name_occupations[character.job]
+	var/datum/job/job = character?.mind.assigned_role
+	var/datum/job/parent_job = job?.parent_job
 	if(!isnull(special.allowed_jobs))
 		if(!job)
 			return FALSE
-		if(!(job.type in special.allowed_jobs))
+		if(!(job.type in special.allowed_jobs) && !(parent_job?.type in special.allowed_jobs))
 			return FALSE
 	if(!isnull(special.restricted_jobs) && job && (job.type in special.restricted_jobs))
 		return FALSE
-	if(!isnull(special.allowed_races) && !(character.dna.species.id in special.allowed_races))
+	if(!isnull(special.restricted_jobs) && parent_job && (parent_job.type in special.restricted_jobs))
 		return FALSE
-	if(!isnull(special.allowed_migrants))
-		if(!character.migrant_type)
-			return FALSE
-		if(!(character.migrant_type in special.allowed_migrants))
-			return FALSE
-	if(!isnull(special.restricted_migrants) && character.migrant_type && (character.migrant_type in special.restricted_migrants))
+	if(!isnull(special.allowed_races) && !(character.dna.species.id in special.allowed_races))
 		return FALSE
 	if(!isnull(special.restricted_races) && (character.dna.species.id in special.restricted_races))
 		return FALSE
@@ -108,7 +113,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return FALSE
 	if(!isnull(special.allowed_patrons) && !(character.patron.type in special.allowed_patrons))
 		return FALSE
-	if(!isnull(special.allowed_flaw) && !character.has_flaw(special.allowed_flaw))
+	if(!isnull(special.allowed_flaw) && !character.has_quirk(special.allowed_flaw))
 		return FALSE
 	if(!isnull(special.restricted_traits))
 		var/has_trait

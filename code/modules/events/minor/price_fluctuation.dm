@@ -8,8 +8,8 @@
 	earliest_start = 15 MINUTES
 
 	tags = list(
-		TAG_BOON,
 		TAG_TRADE,
+		TAG_WATER,
 	)
 
 /datum/round_event/price_fluctuation/start()

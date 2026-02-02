@@ -42,6 +42,7 @@
 
 
 /obj/effect/building_node/bar/after_construction(list/turfs)
+	. = ..()
 	for(var/turf/turf as anything in turfs)
 		for(var/obj/effect/foodspot/spot in turf.contents)
 			eating_spots |= spot

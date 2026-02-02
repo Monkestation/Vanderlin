@@ -30,7 +30,7 @@
 	breaking_turf = null
 	. = ..()
 
-/datum/work_order/break_turf/stop_work()
+/datum/work_order/break_turf/stop_work(reason = "unknown")
 	. = ..()
 	if(on_failure_datum)
 		on_failure_datum.needed_broken_turfs |= breaking_turf

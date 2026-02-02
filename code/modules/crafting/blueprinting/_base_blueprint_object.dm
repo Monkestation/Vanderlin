@@ -8,29 +8,39 @@
 	invisibility = 100 /// on_hover still triggers on no alpha objects
 	anchored = TRUE
 	density = FALSE
+	UUID_saving = TRUE
+
 	var/datum/blueprint_recipe/recipe
-	var/mob/creator
+	var/tmp/mob/creator
 	var/construction_progress = 0
 	var/max_construction_progress = 100
-	var/list/viewing_images = list() // Track images by client
+	var/tmp/list/viewing_images = list() // Track images by client
 	var/blueprint_dir = SOUTH // Direction this blueprint will be built in
 
-	var/image/cached_image
+	var/tmp/image/cached_image
 	var/stored_pixel_y = 0
 	var/stored_pixel_x = 0
 
-	var/time_when_placed
+	var/tmp/time_when_placed
 
 /obj/structure/blueprint/Initialize(mapload)
 	. = ..()
 	GLOB.active_blueprints += src
 	SSblueprints.add_new_blueprint(src)
 
+/obj/structure/blueprint/after_load()
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(setup_blueprint), 1 SECONDS))
+
 /obj/structure/blueprint/Destroy()
 	GLOB.active_blueprints -= src
 	SSblueprints.remove_blueprint(src)
 	clear_all_viewers()
 	return ..()
+
+/obj/structure/blueprint/after_load()
+	GLOB.active_blueprints |= src
+	SSblueprints.add_new_blueprint(src)
 
 /obj/structure/blueprint/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, recipe.construct_tool))
@@ -164,6 +174,7 @@
 
 /obj/structure/blueprint/proc/try_construct(mob/user, obj/item/weapon/hammer/hammer)
 	if(!recipe)
+		qdel(src)
 		return FALSE
 
 	if(!recipe.check_craft_requirements(user, get_turf(src), src))
@@ -184,7 +195,10 @@
 	to_chat(user, span_notice("You begin constructing \the [recipe.name]..."))
 
 	for(var/i = 1 to 100)
-		if(!do_after(user, recipe.build_time, target = src))
+		var/time_to_do = recipe.build_time
+		if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
+			time_to_do *= 0.9
+		if(!do_after(user, time_to_do, target = src))
 			return FALSE
 
 		if(!recipe.check_craft_requirements(user, get_turf(src), src))
@@ -244,8 +258,8 @@
 			var/atom/new_structure = new recipe.result_type(get_turf(src))
 			if(recipe.supports_directions)
 				new_structure.dir = blueprint_dir
-			new_structure.pixel_x = stored_pixel_x
-			new_structure.pixel_y = stored_pixel_y
+			new_structure.pixel_x = stored_pixel_x + new_structure.base_pixel_x
+			new_structure.pixel_y = stored_pixel_y + new_structure.base_pixel_y
 			if(!initial(recipe.edge_density) && ((abs(pixel_x) >= 14) || (abs(pixel_y) >= 14)))
 				new_structure.density = FALSE
 			new_structure.OnCrafted(final_dir, user)
@@ -259,7 +273,7 @@
 							span_notice("I [recipe.verbage] \the [recipe.name]!"))
 
 		if(recipe.craftsound)
-			playsound(get_turf(src), recipe.craftsound, 100, TRUE)
+			playsound(src, recipe.craftsound, 100, TRUE)
 
 		if(user.mind && recipe.skillcraft)
 			if(isliving(user))

@@ -22,44 +22,46 @@ Actual Adjacent procs :
 
 
 */
+
+#define ATURF 1
+#define TOTAL_COST_F 2
+#define DIST_FROM_START_G 3
+#define HEURISTIC_H 4
+#define PREV_NODE 5
+#define NODE_TURN 6
+#define BLOCKED_FROM 7  // Available directions to explore FROM this node
+
+#define ASTAR_NODE(turf, dist_from_start, heuristic, prev_node, node_turn, blocked_from) \
+	list(turf, (dist_from_start + heuristic * (1 + PF_TIEBREAKER)), dist_from_start, heuristic, prev_node, node_turn, blocked_from)
+
+#define ASTAR_UPDATE_NODE(node, new_prev, new_g, new_h, new_nt) \
+	node[PREV_NODE] = new_prev; \
+	node[DIST_FROM_START_G] = new_g; \
+	node[HEURISTIC_H] = new_h; \
+	node[TOTAL_COST_F] = new_g + new_h * (1 + PF_TIEBREAKER); \
+	node[NODE_TURN] = new_nt
+
+#define ASTAR_CLOSE_ENOUGH_TO_END(end, checking_turf, mintargetdist) \
+	(checking_turf == end || (mintargetdist && (get_dist_3d(checking_turf, end) <= mintargetdist)))
+
+#define SORT_TOTAL_COST_F(list) (list[TOTAL_COST_F])
+
 #define PF_TIEBREAKER 0.005
 #define MASK_ODD 85
 #define MASK_EVEN 170
 
-/datum/PathNode
-	var/turf/source
-	var/datum/PathNode/prevNode
-	var/f
-	var/g
-	var/h
-	var/nt
-	var/bf
+/proc/PathWeightCompare(list/a, list/b)
+	return a[TOTAL_COST_F] - b[TOTAL_COST_F]
 
-/datum/PathNode/New(s,p,pg,ph,pnt,_bf)
-	source = s
-	setp(p, pg, ph, pnt)
-	bf = _bf
+/proc/HeapPathWeightCompare(list/a, list/b)
+	return b[TOTAL_COST_F] - a[TOTAL_COST_F]
 
-/datum/PathNode/proc/setp(p,pg,ph,pnt)
-	prevNode = p
-	g = pg
-	h = ph
-	calc_f()
-	nt = pnt
-
-/datum/PathNode/proc/calc_f()
-	f = g + h*(1 + PF_TIEBREAKER)
-
-/proc/PathWeightCompare(datum/PathNode/a, datum/PathNode/b)
-	return a.f - b.f
-
-/proc/HeapPathWeightCompare(datum/PathNode/a, datum/PathNode/b)
-	return b.f - a.f
-
-/proc/get_path_to(requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+/proc/get_path_to(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/l = SSpathfinder.mobs.getfree(requester)
 	while (!l)
 		stoplag(3)
+		if(QDELETED(requester)) // check if we've stopped existing, since we slept
+			return list() // no path, we got deleted
 		l = SSpathfinder.mobs.getfree(requester)
 	var/list/path = AStar(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
 	SSpathfinder.mobs.found(l)
@@ -67,7 +69,7 @@ Actual Adjacent procs :
 		path = list()
 	return path
 
-/proc/AStar(requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+/proc/AStar(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/turf/end = get_turf(_end)
 	var/turf/start = get_turf(requester)
 	if (!start || !end)
@@ -80,70 +82,93 @@ Actual Adjacent procs :
 	if(maxnodes)
 		maxnodedepth = maxnodes
 
-	var/datum/Heap/open = new /datum/Heap(/proc/HeapPathWeightCompare)
-	var/list/openc = new()
+	var/list/open = list()  // Binary sorted list of nodes (lowest weight at end for easy Pop)
+	var/list/openc = new()  // turf -> node mapping for nodes in open list
+	var/list/closed = new()  // turf -> bitmask of blocked directions
 	var/list/path = null
-
 	var/const/ALL_DIRS = NORTH|SOUTH|EAST|WEST
-	var/datum/PathNode/cur = new /datum/PathNode(start, null, 0, start.Distance3D(end), 0, ALL_DIRS, 1)
-	open.Insert(cur)
+
+	// Create initial node
+	var/list/cur = ASTAR_NODE(start, 0, start.Distance3D(end), null, 0, ALL_DIRS)
+	var/list/insert_item = list(cur)
+	BINARY_INSERT_DEFINE_REVERSE(insert_item, open, SORT_VAR_NO_TYPE, cur, SORT_TOTAL_COST_F, COMPARE_KEY)
 	openc[start] = cur
 
-	while (requester && !open.IsEmpty() && !path)
-		cur = open.Pop()
+	while (!QDELETED(requester) && open.len && !path)
+		// Pop from end (highest priority in reverse sorted list)
+		cur = open[open.len]
+		open.len--
+
+		var/turf/cur_turf = cur[ATURF]
+		openc -= cur_turf
+		closed[cur_turf] = ALL_DIRS
 
 		// Destination check - must be exact match or valid closeenough on same Z-level
-		var/is_destination = (cur.source == end)
-
+		var/is_destination = (cur_turf == end)
 		// Only consider "close enough" if on the same Z-level
 		var/closeenough = FALSE
-		if (!check_z_levels || cur.source.z == end.z)
+		if (!check_z_levels || cur_turf.z == end.z)
 			if (mintargetdist)
-				closeenough = cur.source.Distance3D(end) <= mintargetdist
+				closeenough = cur_turf.Distance3D(end) <= mintargetdist
 			else
-				closeenough = cur.source.Distance3D(end) < 1
+				closeenough = cur_turf.Distance3D(end) < 1
 
 		if (is_destination || closeenough)
-			path = list(cur.source)
-			while (cur.prevNode)
-				cur = cur.prevNode
-				path.Add(cur.source)
+			path = list(cur_turf)
+			var/list/prev = cur[PREV_NODE]
+			while (prev)
+				path.Add(prev[ATURF])
+				prev = prev[PREV_NODE]
 			break
 
-		if(maxnodedepth && (cur.nt > maxnodedepth)) //if too many steps, don't process that path
-			cur.bf = 0
+		if(maxnodedepth && (cur[NODE_TURN] > maxnodedepth))
 			CHECK_TICK
 			continue
 
 		for(var/dir_to_check in GLOB.cardinals)
-			if(!(cur.bf & dir_to_check)) // we can't proceed in this direction
+			if(!(cur[BLOCKED_FROM] & dir_to_check))
 				continue
-			// get the turf we end up at if we move in dir_to_check; this may have special handling for multiz moves
-			var/T = get_step(cur.source, dir_to_check)
-			// when leaving a turf with stairs on it, we can change Z, so take that into account
-			// this handles both upwards and downwards moves depending on the dir
-			var/obj/structure/stairs/source_stairs = locate(/obj/structure/stairs) in cur.source
+
+			var/turf/T = get_step(cur_turf, dir_to_check)
+
+			var/obj/structure/stairs/source_stairs = locate(/obj/structure/stairs) in cur_turf
 			if(source_stairs)
 				T = source_stairs.get_transit_destination(dir_to_check)
-			if(T != exclude)
-				var/datum/PathNode/CN = openc[T]  //current checking turf
-				var/reverse = REVERSE_DIR(dir_to_check)
-				var/newg = cur.g + call(cur.source,dist)(T, requester) // add the travel distance between these two tiles to the distance so far
-				if(CN)
-				//is already in open list, check if it's a better way from the current turf
-					CN.bf &= ALL_DIRS^reverse //we have no closed, so just cut off exceed dir.00001111 ^ reverse_dir.We don't need to expand to checked turf.
-					if((newg < CN.g))
-						if(call(cur.source,adjacent)(requester, T, id))
-							CN.setp(cur,newg,CN.h,cur.nt+1)
-							open.ReSort(CN)//reorder the changed element in the list
-				else
-				//is not already in open list, so add it
-					if(call(cur.source,adjacent)(requester, T, id))
-						CN = new(T,cur,newg,call(T,dist)(end, requester),cur.nt+1, ALL_DIRS^reverse)
-						open.Insert(CN)
-						openc[T] = CN
 
-		cur.bf = 0 // Mark as processed
+			if(!T || T == exclude)
+				continue
+
+			var/reverse = REVERSE_DIR(dir_to_check)
+			if(closed[T] & reverse)
+				continue
+
+			if(!call(cur_turf, adjacent)(requester, T, id))
+				closed[T] |= reverse
+				continue
+
+			var/list/CN = openc[T]
+			var/newg = cur[DIST_FROM_START_G] + call(cur_turf, dist)(T, requester)
+
+			if(CN)
+				// Already in open list, check if this is a better path
+				if(newg < CN[DIST_FROM_START_G])
+					// Remove old instance
+					var/list/old_item = list(CN)
+					open -= old_item
+
+					// Update node
+					ASTAR_UPDATE_NODE(CN, cur, newg, CN[HEURISTIC_H], cur[NODE_TURN] + 1)
+
+					// Re-insert with new priority
+					var/list/new_item = list(CN)
+					BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
+			else
+				// Not in open list, create new node
+				CN = ASTAR_NODE(T, newg, call(T, dist)(end, requester), cur, cur[NODE_TURN] + 1, ALL_DIRS^reverse)
+				var/list/new_item = list(CN)
+				BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
+				openc[T] = CN
+
 		CHECK_TICK
 
 	if (path)
@@ -151,25 +176,30 @@ Actual Adjacent procs :
 			path.Swap(i, path.len - i + 1)
 
 	openc = null
+	closed = null
 	return path
 
-/turf/proc/reachableTurftest(requester, turf/T, ID, simulated_only = TRUE, check_z_levels = TRUE)
+/turf/proc/reachableTurftest(atom/movable/requester, turf/T, ID, simulated_only = TRUE, check_z_levels = TRUE)
 	if(!T || T.density)
 		return FALSE
-	if(!T.can_traverse_safely(requester)) // dangerous turf! lava or openspace (or others in the future)
+	if(!T.can_traverse_safely(requester))  // dangerous turf! lava or openspace (or others in the future)
 		return FALSE
+
 	var/z_distance = abs(T.z - z)
-	if(!z_distance) // standard check for same-z pathing
+	if(!z_distance)  // standard check for same-z pathing
 		return !LinkBlockedWithAccess(T, requester, ID)
-	if(z_distance != 1) // no single movement lets you move more than one z-level at a time (currently; update if this changes)
+
+	if(z_distance != 1)  // no single movement lets you move more than one z-level at a time (currently; update if this changes)
 		return FALSE
+
 	var/obj/structure/stairs/source_stairs = locate(/obj/structure/stairs) in src
-	if(T.z < z) // going down
+	if(T.z < z)  // going down
 		if(source_stairs?.get_target_loc(REVERSE_DIR(source_stairs.dir)) == T)
 			return TRUE
-	else // heading DOWN stairs was handled earlier, so now handle going UP stairs
+	else  // heading DOWN stairs was handled earlier, so now handle going UP stairs
 		if(source_stairs?.get_target_loc(source_stairs.dir) == T)
 			return TRUE
+
 	return FALSE
 
 /proc/get_dist_3d(atom/source, atom/target)
@@ -182,7 +212,7 @@ Actual Adjacent procs :
 		return 0
 	var/dx = abs(x - T.x)
 	var/dy = abs(y - T.y)
-	var/dz = abs(z - T.z) * 5 // Weight z-level differences higher
+	var/dz = abs(z - T.z) * 5  // Weight z-level differences higher
 	return (dx + dy + dz)
 
 /turf/proc/LinkBlockedWithAccess(turf/T, requester, ID)
@@ -194,7 +224,6 @@ Actual Adjacent procs :
 	for(var/obj/O in src)
 		if(!O.CanAStarPass(ID, adir, requester))
 			return TRUE
-
 	for(var/mob/living/M in T)
 		if(!M.CanPass(requester, src))
 			return TRUE
@@ -202,3 +231,14 @@ Actual Adjacent procs :
 		if(!M.CanPass(requester, src))
 			return TRUE
 	return FALSE
+
+#undef ATURF
+#undef TOTAL_COST_F
+#undef DIST_FROM_START_G
+#undef HEURISTIC_H
+#undef PREV_NODE
+#undef NODE_TURN
+#undef BLOCKED_FROM
+#undef ASTAR_NODE
+#undef ASTAR_UPDATE_NODE
+#undef ASTAR_CLOSE_ENOUGH_TO_END

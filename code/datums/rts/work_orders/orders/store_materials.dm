@@ -9,7 +9,7 @@
 /datum/work_order/store_materials/New(mob/living/new_worker, datum/work_order/type, obj/effect/building_node/resource_collector, mob/camera/strategy_controller/master)
 	. = ..()
 	if(!length(resource_collector.materials_to_store))
-		stop_work()
+		stop_work("no store requests")
 		return
 	for(var/obj/effect/building_node/stockpile/pile in master.constructed_building_nodes)
 		var/list/path = get_path_to(new_worker, get_turf(pile), TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 32 + 1, 250,1)
@@ -17,7 +17,7 @@
 			stockpile_node = pile
 			break
 	if(!stockpile_node)
-		stop_work()
+		stop_work("no stockpile")
 		return
 	name += resource_collector.name
 	grab_materials_from_node(resource_collector)
@@ -47,7 +47,7 @@
 		taking_node.materials_to_store[item] += materials_to_get[item]
 	materials_to_get = list()
 
-/datum/work_order/store_materials/stop_work()
+/datum/work_order/store_materials/stop_work(reason = "unknown")
 	. = ..()
 	if(length(materials_to_get))
 		return_materials()
@@ -63,7 +63,7 @@
 		if(!do_after(worker, work_time_left, target = work_target))
 			worker.controller_mind.paused = FALSE
 			if(!can_continue)
-				stop_work()
+				stop_work("interrupted")
 				return FALSE
 			work_time_left = world.time - world_start_time
 			return FALSE
@@ -76,7 +76,7 @@
 		if(!do_after(worker, work_time_left, target = work_target))
 			worker.controller_mind.paused = FALSE
 			if(!can_continue)
-				stop_work()
+				stop_work("interrupted")
 				return FALSE
 			work_time_left = world.time - world_start_time
 			return FALSE

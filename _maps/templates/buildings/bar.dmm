@@ -1,25 +1,9 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/open/floor/dirt,
-/area/template_noop)
-"b" = (
-/turf/open/floor/cobble,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "h" = (
 /turf/open/floor/carpet,
-/area/template_noop)
-"k" = (
-/obj/machinery/light/fueled/torchholder{
-	pixel_y = 26
-	},
-/turf/open/floor/dirt,
-/area/template_noop)
-"n" = (
-/obj/structure/table/wood{
-	icon_state = "longtable_mid"
-	},
-/obj/effect/foodspot,
-/turf/open/floor/naturalstone,
 /area/template_noop)
 "s" = (
 /obj/structure/rack/shelf/biggest,
@@ -34,58 +18,42 @@
 /turf/open/floor/carpet,
 /area/template_noop)
 "A" = (
-/turf/open/floor/blocks,
+/obj/structure/fermentation_keg/distiller,
+/turf/open/floor/twig,
 /area/template_noop)
 "B" = (
 /turf/open/floor/twig,
 /area/template_noop)
-"C" = (
-/obj/structure/table/wood{
-	dir = 1;
-	icon_state = "longtable_mid"
-	},
-/obj/effect/foodspot,
-/turf/open/floor/cobble,
-/area/template_noop)
 "D" = (
-/obj/machinery/light/fueled/torchholder{
-	pixel_y = 26
-	},
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup/wooden{
 	pixel_x = 8
 	},
 /obj/item/reagent_containers/glass/cup/wooden,
+/obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/carpet,
 /area/template_noop)
 "O" = (
-/obj/structure/table/wood{
-	dir = 1;
-	icon_state = "longtable_mid"
-	},
 /obj/effect/foodspot,
 /obj/effect/building_node/bar,
-/turf/open/floor/cobble,
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "Q" = (
-/turf/closed/wall/mineral/wood,
+/turf/closed/wall/mineral/underbrick,
 /area/template_noop)
 "S" = (
 /obj/structure/door/swing,
 /turf/open/floor/carpet,
 /area/template_noop)
 "T" = (
-/obj/structure/table/wood{
-	icon_state = "longtable"
-	},
 /obj/effect/foodspot,
-/turf/open/floor/twig,
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "U" = (
-/obj/machinery/light/fueled/torchholder{
-	pixel_y = 26
-	},
-/turf/open/floor/cobble,
+/obj/machinery/light/fueled/wallfire/candle/skull,
+/turf/open/floor/herringbone,
 /area/template_noop)
 "W" = (
 /obj/structure/fermentation_keg{
@@ -94,13 +62,7 @@
 	layer = 2.89
 	},
 /obj/structure/fermentation_keg{
-	pixel_y = 13;
-	pixel_x = 8
-	},
-/obj/structure/fermentation_keg{
-	pixel_y = 29;
-	pixel_x = -3;
-	layer = 2.91
+	pixel_x = 7
 	},
 /turf/open/floor/twig,
 /area/template_noop)
@@ -111,7 +73,7 @@ Q
 Q
 Q
 U
-A
+a
 h
 "}
 (2,1,1) = {"
@@ -120,24 +82,24 @@ D
 h
 S
 h
-b
-b
+a
+a
 "}
 (3,1,1) = {"
 Q
-s
+A
 B
 T
-A
-b
-b
+a
+a
+a
 "}
 (4,1,1) = {"
 Q
 s
 B
 O
-A
+a
 h
 a
 "}
@@ -145,26 +107,26 @@ a
 Q
 u
 B
-C
-b
-A
+T
+a
+a
 a
 "}
 (6,1,1) = {"
 Q
 W
 h
-C
-b
-A
-b
+T
+a
+a
+a
 "}
 (7,1,1) = {"
 Q
-n
-n
+T
+T
 Q
-k
+U
 h
-b
+a
 "}
