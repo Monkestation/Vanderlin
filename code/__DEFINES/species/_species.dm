@@ -11,6 +11,7 @@
 #define SPEC_ID_HALF_ORC "halforc"
 #define SPEC_ID_RAKSHARI "rakshari"
 #define SPEC_ID_KOBOLD "kobold"
+#define SPEC_ID_KOBOLD_FORMIKRAG "kobold_formikrag"
 #define SPEC_ID_HOLLOWKIN "hollowkin"
 #define SPEC_ID_HARPY "harpy"
 #define SPEC_ID_TRITON "triton"

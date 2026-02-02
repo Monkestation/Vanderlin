@@ -94,19 +94,29 @@
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 	)
+
 	COOLDOWN_DECLARE(kobold_cooldown)
+
+	var/list/can_eat = list(
+		/obj/item/natural/dirtclod,
+		/obj/item/natural/stone,
+		/obj/item/coin,
+		/obj/item/gem,
+	)
 
 /datum/species/kobold/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
-	C.AddComponent(/datum/component/abberant_eater, list(/obj/item/natural/dirtclod, /obj/item/natural/stone, /obj/item/coin, /obj/item/gem))
-
-/datum/species/kobold/on_species_gain(mob/living/carbon/C, datum/species/old_species)
-	..()
+	if(length(can_eat))
+		C.AddComponent(/datum/component/abberant_eater, can_eat)
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)
 	. = ..()
+	if(length(can_eat))
+		var/datum/component/abberant_eater = GetComponent(/datum/component/abberant_eater)
+		if(abberant_eater)
+			abberant_eater.RemoveComponent()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/common)
 

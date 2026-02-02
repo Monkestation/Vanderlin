@@ -3,6 +3,8 @@
 	var/datum/action/item_action/organ_action/use/flight/fly
 	/// What species ids get flight from these wings
 	var/list/flight_for_species
+	/// Cannot fly upwards
+	var/hover_only = FALSE
 
 /obj/item/organ/wings/flight/Destroy()
 	QDEL_NULL(fly)
@@ -14,6 +16,8 @@
 		return
 	if(QDELETED(fly))
 		fly = new(src)
+	if(hover_only)
+		fly.allows_z_rise = FALSE
 	fly.Grant(M)
 
 /obj/item/organ/wings/flight/Remove(mob/living/carbon/M, special, drop_if_replaced)
@@ -26,6 +30,12 @@
 	name = "harpy wings"
 	accessory_type = /datum/sprite_accessory/wings/large/harpyswept
 	flight_for_species = list(SPEC_ID_HARPY)
+
+/obj/item/organ/wings/flight/kobold
+	name = "kobold wings"
+	accessory_type = /datum/sprite_accessory/wings/large/harpyswept
+	flight_for_species = list(SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	hover_only = TRUE
 
 /obj/effect/flyer_shadow
 	name = "humanoid shadow"
@@ -86,8 +96,12 @@
 	button_icon_state = "flight"
 	var/active_background_icon_state = "spell1"
 
+	/// If currently flying, for feedback
 	var/flying = FALSE
+	/// Shadow for stabbing and feedback
 	var/obj/effect/flyer_shadow/shadow
+	/// If we fly upwards when starting
+	var/allows_z_rise = TRUE
 
 /datum/action/item_action/organ_action/use/flight/Destroy()
 	if(shadow)
@@ -139,13 +153,18 @@
 // Start flying normally
 /datum/action/item_action/organ_action/use/flight/proc/start_flying()
 	var/turf/turf = get_turf(owner)
-	if(owner.can_zTravel(direction = UP))
-		if(isopenspace(GET_TURF_ABOVE(turf)))
+
+	if(allows_z_rise)
+		ADD_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
+		if(isopenspace(GET_TURF_ABOVE(turf)) && owner.can_zTravel(direction = UP))
 			turf = GET_TURF_ABOVE(turf)
-	owner.movement_type |= FLYING
+	else
+		ADD_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+
 	flying = TRUE
 	to_chat(owner, span_notice("I start flying."))
 	init_signals()
+
 	if(turf != get_turf(owner))
 		var/matrix/original = owner.transform
 		var/prev_alpha = owner.alpha
@@ -156,20 +175,21 @@
 		owner.pixel_z = prev_pixel_z
 		owner.alpha = prev_alpha
 		owner.forceMove(turf)
+
 	build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 
 /datum/action/item_action/organ_action/use/flight/proc/init_signals()
 	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_damage))
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(check_movement))
 	RegisterSignal(owner, COMSIG_LIVING_SET_BODY_POSITION, PROC_REF(check_laying))
-
 	RegisterSignals(owner, SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED), PROC_REF(fall))
 
 // Stop flying normally
 /datum/action/item_action/organ_action/use/flight/proc/stop_flying()
 	var/turf/turf = get_turf(owner)
-	if(isopenspace(turf))
-		if(owner.can_zTravel(direction = DOWN))
+	// If you can't fly up you can't fly down, drop like a rock
+	if(allows_z_rise)
+		if(isopenspace(turf) && owner.can_zTravel(direction = DOWN))
 			turf = GET_TURF_BELOW(turf)
 	to_chat(owner, span_notice("I stop flying."))
 	if(turf != get_turf(owner))
@@ -187,7 +207,11 @@
 	build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 
 /datum/action/item_action/organ_action/use/flight/proc/remove_signals()
-	owner.movement_type &= ~FLYING
+	if(allows_z_rise)
+		REMOVE_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
+	else
+		REMOVE_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+
 	flying = FALSE
 
 	UnregisterSignal(owner, list(

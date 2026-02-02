@@ -3188,6 +3188,7 @@
 #include "code\modules\mob\living\carbon\human\species_types\human\human_space.dm"
 #include "code\modules\mob\living\carbon\human\species_types\human\humen.dm"
 #include "code\modules\mob\living\carbon\human\species_types\kobold\_kobold.dm"
+#include "code\modules\mob\living\carbon\human\species_types\kobold\formikrag.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\aasimar.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\halfdrow.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\halfelf.dm"
