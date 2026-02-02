@@ -574,7 +574,7 @@
 	if(!prefs)
 		return
 	prefs.chat_toggles ^= CHAT_GHOSTEARS
-//	prefs.chat_toggles ^= CHAT_GHOSTSIGHT
+	prefs.chat_toggles ^= CHAT_GHOSTSIGHT
 	prefs.chat_toggles ^= CHAT_GHOSTWHISPER
 	prefs.save_preferences()
 	if(prefs.chat_toggles & CHAT_GHOSTEARS)
