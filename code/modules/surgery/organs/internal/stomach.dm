@@ -178,6 +178,7 @@
 	return ..()
 
 /obj/item/organ/stomach/acid_spit/Insert(mob/living/carbon/M, special, drop_if_replaced)
+	. = ..()
 	if(QDELETED(spit))
 		spit = new(src)
 	spit.Grant(M)
