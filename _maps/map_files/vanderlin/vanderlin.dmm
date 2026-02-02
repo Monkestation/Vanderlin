@@ -4307,7 +4307,7 @@
 "bWW" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/town/bathhouse,
+/obj/effect/mapping_helpers/access/keyset/town/clinic,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "bXw" = (
