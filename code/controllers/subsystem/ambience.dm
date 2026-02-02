@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(ambience)
 	else if(spooky_sounds)
 		if(ambientnight && GLOB.tod == "night")
 			spooky_sounds = ambientnight
-		new_sound = pick(spooky_sounds)
+		new_sound = safepick(spooky_sounds)
 
 	if(!new_sound)
 		return
