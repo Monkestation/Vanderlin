@@ -480,17 +480,19 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(!GLOB.underwear_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
 
-	var/list/used_list = GLOB.underwear_m
-	if(gender == FEMALE)
+	var/list/used_list = GLOB.underwear_list
+	if(gender == MALE)
+		used_list = GLOB.underwear_m
+	else if(gender == FEMALE)
 		used_list = GLOB.underwear_f
-	else
-		used_list = GLOB.underwear_list
 
 	var/used_species_id = id_override ? id_override : id
 
 	var/list/spec_undies = list()
 	for(var/name in used_list)
 		var/datum/sprite_accessory/accessory = used_list[name]
+		if(!accessory.roundstart)
+			continue
 		if(!(used_species_id in accessory.specuse))
 			continue
 		spec_undies += accessory
