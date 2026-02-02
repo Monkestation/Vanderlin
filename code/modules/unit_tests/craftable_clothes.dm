@@ -132,7 +132,7 @@ abstract types are automatically excluded.
 
 	// abstract typepaths and CRAFTING_TEST_EXCLUDE
 	for(var/obj/item/clothing/path as anything in clothes_list)
-		if(is_abstract(path) || (path.misc_flags & CRAFTING_TEST_EXCLUDE))
+		if(IS_ABSTRACT(path) || (path::misc_flags & CRAFTING_TEST_EXCLUDE))
 			clothes_list -= path
 
 	// paths by text, if a piece of this text is found in the typepath it's excluded

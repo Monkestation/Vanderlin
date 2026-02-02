@@ -5,7 +5,7 @@
 /datum/test_situation/test_craft/arguements()
 	if(!length(crafting_recipes))
 		for(var/datum/repeatable_crafting_recipe/recipe as anything in subtypesof(/datum/repeatable_crafting_recipe))
-			if(is_abstract(recipe))
+			if(IS_ABSTRACT(recipe))
 				continue
 			crafting_recipes |= "[recipe]"
 	return crafting_recipes

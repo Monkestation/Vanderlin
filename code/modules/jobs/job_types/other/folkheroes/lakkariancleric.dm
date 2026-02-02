@@ -43,7 +43,7 @@
 	spawned.virginity = TRUE
 
 	var/static/list/selectable = list( \
-		"Silver Rungu" = /obj/item/weapon/mace/silver/rungu, \
+		"Silver Rungu" = /obj/item/weapon/mace/rungu/silver, \
 		"Silver Sengese" = /obj/item/weapon/sword/scimitar/sengese/silver \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "What is your weapon of choice?")

@@ -13,7 +13,7 @@
 			return weighted_nodes
 
 	for(var/datum/chimeric_node/node_type as anything in node_types)
-		if(is_abstract(node_type))
+		if(IS_ABSTRACT(node_type))
 			continue
 		var/tier = initial(node_type.tier)
 		if(tier > max_tier)

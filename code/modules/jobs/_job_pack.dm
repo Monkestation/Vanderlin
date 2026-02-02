@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(job_pack_singletons, init_jobpacks())
 /proc/init_jobpacks()
 	var/list/list = list()
 	for(var/datum/job_pack/pack as anything in typesof(/datum/job_pack))
-		if(is_abstract(pack))
+		if(IS_ABSTRACT(pack))
 			continue
 		list[pack] = new pack()
 	return list
