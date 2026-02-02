@@ -30,11 +30,20 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	else
 		default_clan = incoming_clan
 
+/datum/antagonist/vampire/outcast
+	name = "Outcast Vampire"
+	antag_hud_type = ANTAG_HUD_VAMPIRE
+	antag_hud_name = "vamplesser"
+
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
+	if(istype(examined_datum, /datum/antagonist/vampire/lords_spawn))
+		return span_boldnotice("The spawn of the firstborn.")
 	if(istype(examined_datum, /datum/antagonist/vampire))
 		return span_boldnotice("A child of Kaine.")
+	if(istype(examined_datum, /datum/antagonist/vampire/outcast))
+		return span_boldnotice("An outcast child of Kaine.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return span_boldnotice("Another deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
