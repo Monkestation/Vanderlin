@@ -25,7 +25,7 @@
 		ORGAN_SLOT_WINGS = /obj/item/organ/wings/flight/kobold,
 	)
 
-	can_eat = null
+	hungry_hungry_kobold = FALSE
 
 /datum/species/kobold/formikrag/preference_accessible(datum/preferences/prefs)
 	. = ..()
