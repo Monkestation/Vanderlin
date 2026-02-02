@@ -367,7 +367,7 @@
 		qdel(source)
 		return BEAM_CANCEL_DRAW
 
-/obj/item/fishingrod/afterattack(obj/target, mob/user, proximity_flag, list/modifiers, list/modifiers)
+/obj/item/fishingrod/afterattack(obj/target, mob/user, proximity_flag, list/modifiers)
 	if(!check_allowed_items(target,target_self=1) \
 	|| (user.used_intent.type != ROD_CAST && user.used_intent.type != ROD_AUTO) \
 	|| user.doing() \

@@ -88,7 +88,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/weapon/pick/drill/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers, list/modifiers)
+/obj/item/weapon/pick/drill/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, 5)
 
