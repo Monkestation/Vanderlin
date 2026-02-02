@@ -268,7 +268,7 @@
 #define SLIDE_ICE				(1<<3)
 #define SLIP_WHEN_CRAWLING		(1<<4) //clown planet ruin
 
-#define MAX_CHICKENS 50
+#define MAX_CHICKENS 5
 
 ///Flags used by the flags parameter of electrocute act.
 

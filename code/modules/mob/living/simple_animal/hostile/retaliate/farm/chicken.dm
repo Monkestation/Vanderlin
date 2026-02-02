@@ -131,7 +131,7 @@
 /mob/living/simple_animal/hostile/retaliate/chicken/Life()
 	..()
 	if(SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) > 0)
-		production = min(production + 1, 100)
+		production = min(production + 0.25, 100)
 
 /mob/living/simple_animal/hostile/retaliate/chicken/proc/hatch_eggs()
 	for(var/obj/item/reagent_containers/food/snacks/egg/egg in loc)
