@@ -800,7 +800,7 @@
 	if(targloc && curloc)
 		if(targloc.z > curloc.z)
 			var/turf/above = GET_TURF_ABOVE(curloc)
-			if(istype(above, /turf/open/transparent/openspace))
+			if(istype(above, /turf/open/openspace))
 				curloc = above
 	trajectory_ignore_forcemove = TRUE
 	forceMove(get_turf(source))

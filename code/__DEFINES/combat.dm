@@ -11,7 +11,30 @@
 #define STAMINA 	"stamina"
 #define BRAIN		"brain"
 
-#define MELEE_TYPES list("blunt", "slash", "stab")
+//Damage flag defines //
+// STRING HERE NEEDS TO EXACTLY MATCH VAR NAME IN /datum/armor
+/// better defined as area pressure melee
+#define BLUNT "blunt"
+/// better defined as line pressure melee
+#define SLASH "slash"
+/// better defined as point pressure melee
+#define STAB "stab"
+/// basically projectiles
+#define PIERCE "piercing"
+/// protection against burning
+#define FIRE "fire"
+/// protection against pools of acid
+#define ACID "acid"
+/// protection against magical attacks (make this adjustable via rune enchantments or something)
+#define MAGIC "magic"
+
+/// Armor values that are used for damage
+#define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
+
+/// All armors, preferable in the order as seen above
+#define ARMOR_LIST_ALL(...) list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC)
+
+#define MELEE_TYPES list(BLUNT, SLASH, STAB)
 
 //bitflag damage defines used for suicide_act
 #define BRUTELOSS 	            	(1<<0)
@@ -132,46 +155,113 @@
 
 //Weapon intents
 #define SWORD_CUT		 /datum/intent/sword/cut
+#define SHORT_CUT		 /datum/intent/sword/cut/short
+#define SWDLONG_CUT		 /datum/intent/sword/cut/long
 #define SWORD_THRUST	 /datum/intent/sword/thrust
+#define SHORT_THRUST	 /datum/intent/sword/thrust/short
+#define SWDLONG_THRUST	 /datum/intent/sword/thrust/long
+#define CURVED_THRUST	 /datum/intent/sword/thrust/curved
 #define SWORD_CHOP		 /datum/intent/sword/chop //2h swords only
+#define SWDLONG_CHOP	 /datum/intent/sword/chop/long
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
+#define SWORD_DISARM	 /datum/intent/sword/disarm
+#define POMMEL_BASH		 /datum/intent/sword/bash
 
-#define ELFSWORD_CUT		/datum/intent/sword/cut/elf
-#define ELFSWORD_THRUST		/datum/intent/sword/thrust/elf
+#define PRECISION_CUT	 /datum/intent/katana/precision_cut
+#define KATANA_CUT		 /datum/intent/katana/cut
+#define KATANA_ARC		 /datum/intent/katana/arc
+#define KATANA_ONEHAND	 /datum/intent/katana/cut/one_hand_cut
+
+#define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
+#define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define ZWEI_THRUST		 /datum/intent/sword/thrust/zwei
+#define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
+#define HOOK_THRUST		 /datum/intent/sword/thrust/hook
+#define RAPIER_CUT		 /datum/intent/sword/cut/rapier
+#define ESTOC_LUNGE 	 /datum/intent/sword/lunge
+#define ESTOC_THRUST	 /datum/intent/sword/thrust/estoc
+
 
 #define AXE_CUT				/datum/intent/axe/cut
+#define AXE_THRUST			/datum/intent/axe/thrust
 #define AXE_CHOP			/datum/intent/axe/chop
+#define AXE_GRTCHOP			/datum/intent/axe/chop/great
+#define GREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe
+#define DBLGREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe/doublehead
+#define GREATAXE_CHOP		/datum/intent/axe/chop/battle/greataxe
+#define DBLGREATAXE_CHOP	/datum/intent/axe/chop/battle/greataxe/doublehead
 
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
-#define POLEARM_BASH			/datum/intent/polearm/bash
+#define POLEARM_BASHRNG		/datum/intent/polearm/bash/ranged
+#define POLEARM_BASH		/datum/intent/polearm/bash
+#define POLEARM_CHOP		/datum/intent/polearm/chop
 #define SPEAR_CUT			/datum/intent/polearm/cut
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
+#define SCYTHE_CHOP			/datum/intent/axe/chop/scythe
+#define SCYTHE_CUT			/datum/intent/spear/cut/bardiche/scythe
+#define NAGI_CUT			/datum/intent/spear/cut/naginata
+#define NAGI_REND			/datum/intent/rend/reach
 
 #define MESSER_CHOP			/datum/intent/sword/chop/messer
 
-#define OHAXE_STRIKE		/datum/intent/axe/cut/dwarf
-#define OHAXE_THRUST		/datum/intent/axe/thrust/dwarf
-#define OHAXE_SMASH			/datum/intent/axe/smash/dwarf
-#define OHAXE_CHOP			/datum/intent/axe/chop/dwarf
-
-#define BIGSWORD_CHOP		/datum/intent/sword/chop/bigsword
-#define BIGSWORD_CUT		/datum/intent/sword/cut/bigsword
+#define GUTS_CUT			/datum/intent/sword/cut/guts
+#define GUTS_THRUST			/datum/intent/sword/thrust/guts
+#define GUTS_STRIKE			/datum/intent/sword/strike/guts
+#define GUTS_CHOP			/datum/intent/sword/chop/long/guts
 
 #define MACE_SMASH			/datum/intent/mace/smash
+#define MACE_HVYSMASH		/datum/intent/mace/smash/heavy
+#define MACE_WOODSMASH		/datum/intent/mace/smash/wood
 #define MACE_STRIKE			/datum/intent/mace/strike
+#define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
+#define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
+#define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
+#define MACE_THRUST			/datum/intent/mace/thrust
+#define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
+
+#define WARHM_THRUST		/datum/intent/mace/warhammer/stab
+#define WARHM_IMPALE		/datum/intent/mace/warhammer/impale
+
+#define FLAIL_STRIKE		/datum/intent/flail/strike
+#define FLAIL_LNGSTRIKE		/datum/intent/flail/strike/long
+#define FLAIL_SMASH			/datum/intent/flail/strike/smash
+#define FLAIL_LNGSMASH		/datum/intent/flail/strike/smash/long
+#define MATTHIOS_STRIKE		/datum/intent/flail/strike/matthiosflail
+#define MATTHIOS_SMASH		/datum/intent/flail/strike/smash/matthiosflail
+
+#define WHIP_CRACK			/datum/intent/whip/crack
+#define WHIP_STRIKE			/datum/intent/whip
+#define WHIP_MTLCRACK		/datum/intent/whip/crack/metal
+#define WHIP_CUT			/datum/intent/whip/cut
+#define WHIP_LASH			/datum/intent/whip/lash
+#define WHIP_MTLLASH		/datum/intent/whip/lash/metal
+#define CANE_LASH			/datum/intent/whip/lash/cane
 
 #define DAGGER_CUT			/datum/intent/dagger/cut
 #define DAGGER_THRUST		/datum/intent/dagger/thrust
-#define ICEPICK_STAB		/datum/intent/dagger/icepick
+#define DAGGER_CHOP			/datum/intent/dagger/chop
+#define CLEAVER_CHOP		/datum/intent/dagger/chop/cleaver
+#define SCISSOR_SNIP		/datum/intent/snip
+#define FACE_STEAL			/datum/intent/peculate
 
-#define MAUL_SMASH			/datum/intent/maul/smash
-#define MAUL_STRIKE			/datum/intent/maul/strike
+#define KNUCKLE_STRIKE		/datum/intent/knuckles/strike
+#define KNUCKLE_SMASH		/datum/intent/knuckles/smash
+#define KATAR_CUT			/datum/intent/katar/cut
+#define KATAR_THRUST		/datum/intent/katar/thrust
+
+#define NEANT_SHOOT			/datum/intent/shoot/neant
+#define PLEX_BLINK			/datum/intent/plex_dash
+#define DAZE_BASH			/datum/intent/effect/daze
 
 #define INTENT_FEED			/datum/intent/food
 
 #define DUMP_INTENT			/datum/intent/pforkdump
 #define TILL_INTENT			/datum/intent/till
+#define PICK_INTENT			/datum/intent/pick
+#define FLAIL_THRESH		/datum/intent/flailthresh
+#define SHOVEL_IRRIGATE		/datum/intent/irrigate
+#define SHOVEL_SCOOP		/datum/intent/shovelscoop
 
 #define ROD_CAST			/datum/intent/cast
 #define ROD_AUTO			/datum/intent/auto
@@ -187,7 +277,9 @@
 #define INTENT_USE			/datum/intent/use
 
 #define SHIELD_BASH		/datum/intent/shield/bash
+#define METAL_BASH		/datum/intent/shield/bash/metal
 #define SHIELD_BLOCK		/datum/intent/shield/block
+#define METAL_BLOCK			/datum/intent/shield/block/metal
 
 // animation types
 #define ATTACK_ANIMATION_BONK "bonk"

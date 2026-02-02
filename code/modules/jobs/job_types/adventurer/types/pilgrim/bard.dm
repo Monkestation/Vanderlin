@@ -41,7 +41,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 /datum/job/advclass/pilgrim/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -59,13 +59,11 @@
 		message = "Choose your instrument.",
 		title = "XYLIX"
 	)
+	spawned.inspiration = new /datum/inspiration(spawned)
 	spawned.clamped_adjust_skillrank(/datum/skill/misc/music, 4, 4, TRUE)
 
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
-
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
 
 /datum/outfit/pilgrim/bard
 	name = "Bard (Pilgrim)"

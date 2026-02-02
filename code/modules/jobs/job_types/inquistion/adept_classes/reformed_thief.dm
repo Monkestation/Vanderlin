@@ -51,7 +51,7 @@
 	name = "Reformed Thief (Adept)"
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/splint
-	head = /obj/item/clothing/head/adeptcowl
+	head = /obj/item/clothing/head/roguehood/leather
 	neck = /obj/item/clothing/neck/gorget/explosive
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backl = /obj/item/ammo_holder/quiver/arrows

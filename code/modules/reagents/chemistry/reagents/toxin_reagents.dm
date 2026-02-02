@@ -66,8 +66,8 @@
 	alpha = 225
 
 /datum/reagent/medicine/soporpot/on_mob_life(mob/living/carbon/M)
-	M.adjust_confusion(0.1 SECONDS)
-	M.adjust_dizzy(1)
+	M.adjust_confusion(2 SECONDS)
+	M.adjust_dizzy(2 SECONDS)
 	M.adjust_energy(-25)
 	if(M.stamina > 75)
 		M.adjust_drowsiness(4 SECONDS)

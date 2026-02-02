@@ -157,7 +157,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "bowl"
 	fill_icon_thresholds = list(0, 30, 50, 100)
-	reagent_flags = TRANSFERABLE | AMOUNT_VISIBLE
+	reagent_flags = OPENCONTAINER
 	force = 5
 	throwforce = 5
 	amount_per_transfer_from_this = 5
@@ -566,7 +566,7 @@
 
 /datum/reagent/flour/on_mob_life(mob/living/carbon/M)
 	if(prob(30))
-		M.adjust_confusion(0.3 SECONDS)
+		M.adjust_confusion(6 SECONDS)
 	M.emote(pick("cough"))
 	..()
 

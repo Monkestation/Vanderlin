@@ -631,7 +631,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
-			adjust_jitter(-3)
+			adjust_jitter(-6 SECONDS)
 			apply_status_effect(/datum/status_effect/buff/drunk)
 		else
 			remove_stress(/datum/stress_event/drunk)
@@ -639,15 +639,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			slurring += 1.2
 		if(drunkenness >= 41)
 			if(prob(25))
-				adjust_confusion(0.2 SECONDS)
-			set_dizzy(10)
+				adjust_confusion(4 SECONDS)
+			set_dizzy(10 SECONDS)
 
 		if(drunkenness >= 51)
 			adjustToxLoss(1)
 			if(prob(3))
-				adjust_confusion(1.5 SECONDS)
+				adjust_confusion(15 SECONDS)
 				vomit() // vomiting clears toxloss, consider this a blessing
-			set_dizzy(25)
+			set_dizzy(25 SECONDS)
 
 		if(drunkenness >= 61)
 			adjustToxLoss(1)

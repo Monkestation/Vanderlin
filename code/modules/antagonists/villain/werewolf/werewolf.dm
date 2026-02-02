@@ -123,6 +123,8 @@
 /mob/living/carbon/human/proc/can_werewolf()
 	if(!mind)
 		return FALSE
+	if(mind.has_antag_datum(/datum/antagonist/zombie))
+		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/vampire))
 		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/werewolf))
@@ -161,7 +163,7 @@
 /mob/living/carbon/human/proc/werewolf_feed(mob/living/carbon/human/target, healing_amount = 10)
 	if(!istype(target))
 		return
-	if(src.has_status_effect(/datum/status_effect/debuff/silver_curse))
+	if(src.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
 		return
 	if(target.mind)
@@ -219,7 +221,7 @@
 	max_integrity = 900
 	force = 15
 	block_chance = 0
-	wdefense = 2
+	wdefense = AVERAGE_PARRY
 	associated_skill = /datum/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = EASY_TO_DODGE

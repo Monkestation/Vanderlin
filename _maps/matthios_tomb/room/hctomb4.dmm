@@ -474,7 +474,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "sg" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "si" = (
 /obj/structure/table/wood/reinforced_alt,
@@ -625,7 +625,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "wr" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "wv" = (
 /turf/closed/wall/mineral/wooddark,
@@ -1157,7 +1157,7 @@
 /area/under/tomb)
 "Uf" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "Ul" = (
 /obj/structure/fluff/railing/border{

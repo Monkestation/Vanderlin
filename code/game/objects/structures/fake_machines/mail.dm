@@ -14,19 +14,19 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/keycontrol = "puritan"
 	var/cat_current = "1"
 	var/list/all_category = list(
-		"✤ RELIQUARY ✤",
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"RELIQUARY",
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
 	var/list/category = list(
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
-	var/list/inq_category = list("✤ RELIQUARY ✤")
+	var/list/inq_category = list("RELIQUARY")
 	var/ournum
 	var/mailtag
 	var/obfuscated = FALSE
@@ -793,20 +793,20 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 /obj/structure/fake_machine/mail/proc/decreaseremaining(datum/inqports/PA)
 	PA.remaining -= 1
-	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - ᛉ [PA.marquescost] ᛉ"
+	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - [PA.marquescost]"
 	if(!PA.remaining)
-		PA.name = "[initial(PA.name)] (OUT OF STOCK) - ᛉ [PA.marquescost] ᛉ"
+		PA.name = "[initial(PA.name)] (OUT OF STOCK) - [PA.marquescost]"
 	return
 
 /obj/structure/fake_machine/mail/proc/display_marquette(mob/user)
 	var/contents
-	contents = "<center>✤ ── THE ORATORIUM'S RELIQUARY ── ✤<BR>"
+	contents = "<center>  THE ORATORIUM'S RELIQUARY  <BR>"
 	contents += "ERADICATE HERESY, SO THAT PSYDONIA MAY ENDURE <BR>"
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
-		contents += "✤ ── <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a> ── ✤<BR>"
+		contents += "  <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a>  <BR>"
 	else
-		contents += "✤ ── PURITAN'S LOCK: [inqonly ? "YES":"NO"] ── ✤<BR>"
-	contents += "ᛉ <a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a>ᛉ<BR>"
+		contents += "  PURITAN'S LOCK: [inqonly ? "YES":"NO"]  <BR>"
+	contents += "<a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a><BR>"
 
 	if(cat_current == "1")
 		contents += "<BR> <table style='width: 100%' line-height: 40px;'>"

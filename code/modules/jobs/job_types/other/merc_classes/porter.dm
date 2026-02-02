@@ -36,7 +36,6 @@
 		/datum/skill/craft/tanning = 3,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/engineering = 3,
-		/datum/skill/craft/bombs = 3,
 		/datum/skill/craft/carpentry = 3,
 		/datum/skill/craft/masonry = 3,
 		/datum/skill/craft/traps = 3,

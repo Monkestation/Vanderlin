@@ -6,6 +6,15 @@
 	name = "thresher"
 	desc = "Crushes grain, or skulls."
 	icon_state = "thresher"
+	force = DAMAGE_WEAK_FLAIL - 7
+	force_wielded = DAMAGE_WEAK_FLAIL - 3
+	wdefense = AVERAGE_PARRY
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(MACE_STRIKE)
+	gripped_intents = list(FLAIL_THRESH, MACE_STRIKE)
+	max_integrity = INTEGRITY_POOR
+	minstr = 6
+
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
@@ -16,32 +25,24 @@
 	gripspriteonmob = TRUE
 	slot_flags = ITEM_SLOT_BACK
 	sharpness = IS_BLUNT
-	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
-	max_integrity = INTEGRITY_POOR
-	minstr = 6
 	gripsprite = TRUE
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	smeltresult = /obj/item/fertilizer/ash
 	associated_skill = /datum/skill/combat/whipsflails
-	possible_item_intents = list(MACE_STRIKE)
-	gripped_intents = list(/datum/intent/flailthresh, MACE_STRIKE)
-
-	force = DAMAGE_WEAK_FLAIL - 7
-	force_wielded = DAMAGE_WEAK_FLAIL - 3
-	wdefense = AVERAGE_PARRY
-	wlength = 66
 
 /obj/item/weapon/thresher/military
-	force = DAMAGE_WEAK_FLAIL - 5
-	force_wielded = DAMAGE_NORMAL_FLAIL + 2
-	possible_item_intents = list(MACE_STRIKE)
-	gripped_intents = list(/datum/intent/flail/strike/long, /datum/intent/flail/strike/smash/long, /datum/intent/flailthresh,)
 	name = "military flail"
 	desc = "Crushes skulls, or grain."
 	icon_state = "military"
+	force = DAMAGE_WEAK_FLAIL - 5
+	force_wielded = DAMAGE_NORMAL_FLAIL + 2
+	possible_item_intents = list(MACE_STRIKE)
+	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_THRESH,)
+
 	minstr = 7
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 75
 
 /datum/intent/flailthresh
 	name = "thresh"
@@ -127,13 +128,15 @@
 \---------*/
 
 /obj/item/weapon/sickle
-	force = DAMAGE_KNIFE
-	possible_item_intents = list(DAGGER_CUT)
 	name = "sickle"
 	desc = "Rusted blade, worn handle, symbol of toil."
 	icon_state = "sickle1"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
+	force = DAMAGE_KNIFE
+	possible_item_intents = list(DAGGER_CUT)
+	wdefense = BAD_PARRY
+
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	sharpness = IS_SHARP
@@ -141,11 +144,13 @@
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CUT
-	wdefense = BAD_PARRY
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	max_blade_int = 50
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 50
 	associated_skill = /datum/skill/combat/knives
+	grid_height = 64
+	grid_width = 64
 
 /obj/item/weapon/sickle/Initialize(mapload)
 	. = ..()
@@ -175,25 +180,26 @@
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
+	force = DAMAGE_STAFF - 5
+	force_wielded = DAMAGE_STAFF_WIELD - 8
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(POLEARM_BASH)
+	gripped_intents = list(TILL_INTENT, PICK_INTENT, POLEARM_BASH)
 	experimental_inhand = FALSE
 	experimental_onback = FALSE
 	experimental_onhip = FALSE
 	gripspriteonmob = TRUE
 
-	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	minstr = 5
 	sharpness = IS_BLUNT
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
-	smeltresult = /obj/item/ingot/iron
-	possible_item_intents = list(POLEARM_BASH)
-	gripped_intents = list(TILL_INTENT,/datum/intent/pick,POLEARM_BASH)
+	melting_material = /datum/material/iron
+	melt_amount = 75
 	associated_skill = /datum/skill/combat/polearms
 
-	force = DAMAGE_STAFF - 5
-	force_wielded = DAMAGE_STAFF_WIELD - 8
-	wdefense = MEDIOCRE_PARRY
 	wlength = 66
 	var/time_multiplier = 1
 	max_integrity = INTEGRITY_POOR
@@ -301,7 +307,7 @@
 	force_wielded = DAMAGE_STAFF_WIELD - 10
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = 100
+	max_integrity = INTEGRITY_WORST
 	time_multiplier = 2
 
 /*------------\
@@ -313,6 +319,14 @@
 	desc = "Compost, chaff, hay, it matters not."
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "pitchfork"
+	force = DAMAGE_STAFF
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	throwforce = DAMAGE_SPEAR
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH)
+	gripped_intents = list(DUMP_INTENT,POLEARM_BASH,POLEARM_THRUST)
+
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
@@ -325,18 +339,11 @@
 	blade_dulling = DULLING_BASHCHOP
 	minstr = 6
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
-	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH)
-	gripped_intents = list(DUMP_INTENT,POLEARM_BASH,POLEARM_THRUST)
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 75
 	associated_skill = /datum/skill/combat/polearms
 	thrown_bclass = BCLASS_STAB
-	throwforce = DAMAGE_SPEAR
 	max_integrity = INTEGRITY_POOR
-
-	force = DAMAGE_STAFF
-	force_wielded = DAMAGE_SPEAR_WIELD - 3
-	wdefense = MEDIOCRE_PARRY
-	wlength = WLENGTH_LONG
 
 	var/list/forked = list()
 

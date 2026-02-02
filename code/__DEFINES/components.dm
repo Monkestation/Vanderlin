@@ -85,7 +85,8 @@
 // /turf signals
 #define COMSIG_TURF_CHANGE "turf_change"						//from base of turf/ChangeTurf(): (path, list/new_baseturfs, flags, list/transferring_comps)
 #define COMSIG_TURF_HAS_GRAVITY "turf_has_gravity"				//from base of atom/has_gravity(): (atom/asker, list/forced_gravities)
-#define COMSIG_TURF_MULTIZ_NEW "turf_multiz_new"				//from base of turf/New(): (turf/source, direction)
+#define COMSIG_TURF_MULTIZ_DEL "turf_multiz_del"				//from base of turf/multiz_turf_del(): (turf/source, direction)
+#define COMSIG_TURF_MULTIZ_NEW "turf_multiz_new"				//from base of turf/multiz_turf_new: (turf/source, direction)
 
 // /mob signals
 #define COMSIG_MOB_BREAK_SNEAK "mob_break_sneak"
@@ -114,6 +115,7 @@
 #define COMSIG_MOB_UPDATE_SIGHT "mob_update_sight"				//from base of /mob/update_sight(): ()
 #define COMSIG_MOB_SAY "mob_say" // from /mob/living/say(): ()
 	#define COMPONENT_UPPERCASE_SPEECH 1
+	#define COMPONENT_SPEECH_CANCEL (1<<1)
 	// used to access COMSIG_MOB_SAY argslist
 	#define SPEECH_MESSAGE 1
 	// #define SPEECH_BUBBLE_TYPE 2
@@ -347,3 +349,13 @@
 #define COMSIG_TIPS_REMOVE "comsig_tip_remove"
 ///used incase we care about a tracker dying
 #define COMSIG_LIVING_TRACKER_REMOVED "tracker_removed"
+///used when a command is issued to someone, if they have the correct component acts on this
+#define COMSIG_PARENT_COMMAND_RECEIVED	"command_received"
+
+#define COMSIG_AUGMENT_INSTALL "augment_install"
+#define COMSIG_AUGMENT_REMOVE "augment_remove"
+#define COMSIG_AUGMENT_REPAIR "augment_repair"
+#define COMSIG_AUGMENT_GET_STABILITY "augment_get_stability"
+
+#define COMPONENT_AUGMENT_SUCCESS (1<<0)
+#define COMPONENT_AUGMENT_FAILED (1<<1)
