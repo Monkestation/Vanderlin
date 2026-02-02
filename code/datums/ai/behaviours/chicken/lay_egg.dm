@@ -4,7 +4,7 @@
 	var/mob/living/simple_animal/hostile/retaliate/chicken/living_pawn = controller.pawn
 	if(!istype(living_pawn))
 		return
-	if(living_pawn.production < 29)
+	if(living_pawn.production < 50)
 		finish_action(controller, FALSE)
 		return
 	living_pawn.visible_message(span_emote("[living_pawn] [pick(living_pawn.layMessage)]"))

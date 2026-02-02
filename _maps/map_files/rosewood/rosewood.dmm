@@ -2851,6 +2851,11 @@
 "bMF" = (
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
+"bMI" = (
+/obj/effect/decal/cleanable/sigil/E,
+/obj/effect/gibspawner/human,
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "bMJ" = (
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/bowl,
@@ -4645,6 +4650,10 @@
 "cTJ" = (
 /turf/open/openspace,
 /area/indoors/town/clinic_large)
+"cTK" = (
+/obj/effect/gibspawner/human,
+/turf/open/floor/grass/cold,
+/area/outdoors/town/keep)
 "cTM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/carpet,
@@ -32722,6 +32731,10 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/inquisition)
+"uya" = (
+/obj/effect/gibspawner/human,
+/turf/open/floor/snow,
+/area/outdoors/town/keep)
 "uyH" = (
 /obj/item/chair/chair_nobles/purple{
 	dir = 8
@@ -89973,7 +89986,7 @@ kPs
 kPs
 kPs
 bby
-fLW
+uya
 qrX
 fLW
 qrX
@@ -90372,7 +90385,7 @@ dVU
 dVU
 dVU
 dVU
-kPs
+cTK
 qKb
 qKb
 kPs
@@ -96065,7 +96078,7 @@ gzt
 omp
 huA
 wSq
-uuS
+bMI
 tkq
 omp
 bDI
@@ -96075,7 +96088,7 @@ hiD
 hiD
 hiD
 crD
-gYK
+bDN
 hiD
 hiD
 nTt

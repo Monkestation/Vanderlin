@@ -74,7 +74,7 @@
 	///do we require some food to generate milk?
 	var/require_consume_type
 	///how long does each food consumption allow us to make milk
-	var/require_consume_timer = 2 MINUTES
+	var/require_consume_timer = 30 SECONDS
 	COOLDOWN_DECLARE(require_consume_cooldown)
 
 /obj/item/udder/proc/add_features(parent, callback, reagent = /datum/reagent/consumable/milk)
