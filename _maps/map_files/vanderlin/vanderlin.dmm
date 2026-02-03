@@ -35196,7 +35196,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
 "qYv" = (
-/obj/structure/pillory,
+/obj/structure/pillory/church,
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "qYE" = (
