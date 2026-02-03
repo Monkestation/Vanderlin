@@ -1,9 +1,9 @@
 /// Admin proc to apply or remove blessings from a character
 /// Supports timed expiration, auto-removal on sleep, and dynamic flavor text injection
 /datum/admins/proc/admin_bless(mob/living/carbon/human/M in GLOB.mob_list)
-	set name = "Bless"
+	set name = "Gods: Bless"
 	set desc = "Bless or lift a blessing from a character"
-	set category = "GameMaster"
+	set category = "Special"
 
 	if(!check_rights())
 		return FALSE

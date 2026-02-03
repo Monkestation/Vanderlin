@@ -338,9 +338,9 @@
 	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
 
 /datum/admins/proc/admin_curse(mob/living/carbon/human/M in GLOB.mob_list)
-	set name = "Curse"
+	set name = "Gods: Curse"
 	set desc = "Curse or lift a curse from a character"
-	set category = "GameMaster"
+	set category = "Special"
 	if(!check_rights())
 		return FALSE
 
@@ -596,7 +596,7 @@
 
 /datum/admins/proc/announce()
 	set category = "Special"
-	set name = "Announce"
+	set name = "OOC Announcement"
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))
 		return

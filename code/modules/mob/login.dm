@@ -93,8 +93,6 @@
 
 	SEND_SIGNAL(src, COMSIG_MOB_CLIENT_LOGIN, client)
 	addtimer(CALLBACK(src, PROC_REF(send_pref_messages)), 2 SECONDS)
-	if(client.holder)
-		client.hearallasghost()
 	resend_all_uis()
 	if(client)
 		client.preload_music()

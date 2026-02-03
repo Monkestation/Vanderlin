@@ -83,7 +83,7 @@
 	frenzy_ready = FALSE
 	icon_state = "broodmother_frenzy"
 	add_filter("frenzy_rays", 20, rays_filter(size = 80, color = "#c21a03"))
-	playsound(src, 'sound/misc/gods/astrata_scream.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE, frequency = 32000)
+	playsound(src, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE, frequency = 32000)
 	animate(src, time = 0.15 SECONDS, pixel_w = rand(10, 15) * pick(1, -1), pixel_z = rand(10, 20) * pick(1, -1), transform = src.transform.Turn(rand(10, 20)), easing = BOUNCE_EASING)
 	animate(time = 0.15 SECONDS, pixel_w = -rand(10, 20) * pick(1, -1), pixel_z = rand(10, 20) * pick(1, -1), transform = initial(src.transform):Turn(-rand(10, 20)), easing = BOUNCE_EASING)
 	animate(time = 0.2 SECONDS, pixel_w = 0, pixel_z = 0, transform = initial(src.transform), easing = BOUNCE_EASING)

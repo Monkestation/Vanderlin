@@ -4,7 +4,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 	EORA = 'sound/vo/female/gen/giggle (1).ogg',
 	DENDOR = 'sound/magic/barbroar.ogg',
 	MALUM = 'sound/magic/dwarf_chant01.ogg',
-	XYLIX = 'sound/misc/gods/xylix_omen_male_female.ogg',
+	XYLIX = 'sound/misc/gods/xylix_omen.ogg',
 	NECRA = 'sound/ambience/noises/genspooky (1).ogg',
 	ABYSSOR = 'sound/items/bucket_transfer (2).ogg',
 	RAVOX = 'sound/vo/male/knight/rage (6).ogg',

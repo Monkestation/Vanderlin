@@ -129,7 +129,7 @@
 
 /client/proc/cmd_admin_world_narrate()
 	set category = "Special"
-	set name = "Global Narrate"
+	set name = "Narrate: Global"
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -166,7 +166,7 @@
 
 /client/proc/cmd_admin_direct_narrate(mob/M)
 	set category = "Special"
-	set name = "Direct Narrate"
+	set name = "Narrate: Direct"
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -191,7 +191,7 @@
 
 /client/proc/cmd_admin_local_narrate(atom/A)
 	set category = "Special"
-	set name = "Local Narrate"
+	set name = "Narrate: Local"
 
 	if(!check_rights(R_ADMIN))
 		return
