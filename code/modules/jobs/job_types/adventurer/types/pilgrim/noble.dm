@@ -3,7 +3,7 @@
 	tutorial = "The blood of a noble family runs through your veins. Perhaps you are visiting from some place far away, \
 	looking to enjoy the hospitality of the ruler. You have many mammons to your name, but with wealth comes \
 	danger, so keep your wits and tread lightly..."
-	allowed_races = RACES_PLAYER_FOREIGNNOBLE
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/pilgrim/noble
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 2

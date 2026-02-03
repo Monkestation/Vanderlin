@@ -14,7 +14,6 @@
 	job_packs = list(
 		/datum/job_pack/assassin/assassin_bard,
 		/datum/job_pack/assassin/assassin_beggar,
-		/datum/job_pack/assassin/assassin_fisher,
 		/datum/job_pack/assassin/assassin_hunter,
 		/datum/job_pack/assassin/assassin_miner,
 		/datum/job_pack/assassin/assassin_noble,
@@ -22,7 +21,6 @@
 		/datum/job_pack/assassin/assassin_carpenter,
 		/datum/job_pack/assassin/assassin_thief,
 		/datum/job_pack/assassin/assassin_ranger,
-		/datum/job_pack/assassin/assassin_servant,
 		/datum/job_pack/assassin/assassin_faceless,
 	)
 

@@ -5,7 +5,7 @@
 
 /datum/job/migrant/dark_itinerant_knight
 	title = "Zizo Knight"
-	tutorial = "You are an evil itinerant Knight, you have embarked alongside your squire on a voyage to engulf chaos within these lands."
+	tutorial = "We talked. You know what to do, don't you? Have fun, Azi."
 	outfit = /datum/outfit/dark_itinerant_knight
 	antag_role = /datum/antagonist/zizocultist/leader
 	allowed_sexes = list(FEMALE)
@@ -35,7 +35,9 @@
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/labor/mathematics = 3,
-		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/climbing = 5,
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/sneaking = 3
 	)
 
 	traits = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED)
@@ -43,11 +45,13 @@
 	cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
 
 /datum/outfit/dark_itinerant_knight
-	name = "Drow Knight"
+	name = "Zizo Knight"
 	head = /obj/item/clothing/head/helmet/heavy/zizo
+	face = /obj/item/clothing/face/shepherd/shadowmask
 	gloves = /obj/item/clothing/gloves/plate/zizo
 	pants = /obj/item/clothing/pants/platelegs/zizo
 	shirt = /obj/item/clothing/shirt/shadowshirt
+	cloak = /obj/item/clothing/cloak/half/shadowcloak/cult
 	armor = /obj/item/clothing/armor/plate/full/zizo
 	shoes = /obj/item/clothing/shoes/boots/armor/zizo
 	neck = /obj/item/clothing/neck/chaincoif
@@ -90,6 +94,7 @@
 		STATKEY_CON = 2,
 		STATKEY_INT = -1,
 		STATKEY_SPD = 1,
+		STATKEY_END = 1,
 	)
 
 	skills = list(
@@ -108,9 +113,10 @@
 	job_reopens_slots_on_death = FALSE
 	shows_in_list = FALSE
 	can_have_apprentices = FALSE
+	antag_role = /datum/antagonist/zizocultist/zizo_knight
 
 
-	traits = list(TRAIT_STEELHEARTED, TRAIT_VILLAIN)
+	traits = list(TRAIT_STEELHEARTED)
 	languages = list(/datum/language/undead)
 	cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
 
@@ -123,7 +129,6 @@
 		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, -1)
 
 		ADD_TRAIT(spawned, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
@@ -138,11 +143,9 @@
 		spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/lockpicking, 2, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 2)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, 2)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, 1)
 		ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-
 
 
 /datum/outfit/dark_itinerant_squire

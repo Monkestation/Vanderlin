@@ -8,7 +8,7 @@
 	)
 	outfit = /datum/outfit/mercenary/verderer
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 5
+	total_positions = 0
 
 	jobstats = list(
 		STATKEY_CON = 1,

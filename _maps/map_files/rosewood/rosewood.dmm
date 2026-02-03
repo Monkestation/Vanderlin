@@ -1489,6 +1489,11 @@
 /obj/item/bedsheet/pelt,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"aVw" = (
+/obj/structure/bed/shit,
+/obj/effect/landmark/start/villager,
+/turf/open/floor/naturalstone,
+/area/indoors/soilsons)
 "aVz" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -3435,6 +3440,7 @@
 "cjD" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /obj/structure/bed/shit,
+/obj/effect/landmark/start/villager,
 /turf/open/floor/naturalstone,
 /area/indoors/soilsons)
 "cjG" = (
@@ -4700,10 +4706,6 @@
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/town/basement)
-"cVm" = (
-/obj/machinery/light/fueled/smelter/great,
-/turf/open/floor/concrete,
-/area/indoors/town/smithy)
 "cVo" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
@@ -8253,6 +8255,7 @@
 	dir = 8
 	},
 /obj/structure/closet/crate/chest/neu,
+/obj/item/storage/keyring,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/shop)
 "fbe" = (
@@ -9304,13 +9307,6 @@
 "fIp" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/structure/table/wood/plain,
-/obj/item/reagent_containers/glass/bucket/wooden{
-	pixel_x = -6;
-	pixel_y = 12
-	},
-/obj/item/natural/cloth{
-	pixel_y = 2
-	},
 /turf/open/floor/cobble/alt,
 /area/indoors/town/merc_guild)
 "fIq" = (
@@ -15031,7 +15027,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/mountains)
 "joI" = (
-/obj/structure/table/vtable/v2,
+/obj/structure/fluff/statue/shisha,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
 "joY" = (
@@ -16638,10 +16634,6 @@
 	},
 /turf/open/floor/rooftop,
 /area/outdoors/town/roofs)
-"kqE" = (
-/obj/effect/landmark/start/villager,
-/turf/open/floor/naturalstone,
-/area/indoors/soilsons)
 "kqU" = (
 /obj/structure/table/wood/counter/end{
 	dir = 4
@@ -18004,12 +17996,6 @@
 	},
 /turf/open/floor/cobble,
 /area/under/cavewet)
-"lgA" = (
-/obj/effect/landmark/start/villager{
-	dir = 1
-	},
-/turf/open/floor/naturalstone,
-/area/indoors/soilsons)
 "lgN" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/merc_guild)
@@ -19256,6 +19242,14 @@
 	},
 /turf/open/openspace,
 /area/outdoors/mountains)
+"map" = (
+/obj/structure/bed/shit,
+/obj/effect/landmark/start/villager{
+	dir = 8
+	},
+/obj/machinery/light/fueled/wallfire/candle/weak/r,
+/turf/open/floor/naturalstone,
+/area/indoors/soilsons)
 "maw" = (
 /obj/structure/noose/gallows,
 /turf/open/floor/snow,
@@ -22100,10 +22094,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
-"nOO" = (
-/obj/item/storage/keyring,
-/turf/open/floor/metal/barograte,
-/area/indoors/town/shop)
 "nOQ" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/cleanshallow,
@@ -22954,12 +22944,6 @@
 "olS" = (
 /turf/open/floor/snow,
 /area/outdoors)
-"olV" = (
-/obj/effect/landmark/start/villager{
-	dir = 1
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/soilsons)
 "omd" = (
 /turf/open/floor/metal,
 /area/indoors/town/smithy)
@@ -23628,12 +23612,6 @@
 "oHl" = (
 /turf/open/floor/wood,
 /area/indoors/town/merc_guild)
-"oHq" = (
-/obj/effect/landmark/start/villager{
-	dir = 8
-	},
-/turf/open/floor/naturalstone,
-/area/indoors/soilsons)
 "oHr" = (
 /obj/structure/closet/crate/chest/crate,
 /turf/open/floor/tile,
@@ -28280,7 +28258,9 @@
 	force = 25;
 	max_integrity = 250;
 	pixel_x = -3;
-	pixel_y = 6
+	pixel_y = 6;
+	resistance_flags = 64;
+	armor_penetration = 50
 	},
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/town/roofs)
@@ -32016,6 +31996,13 @@
 /obj/item/natural/wood/plank,
 /turf/open/floor/sand,
 /area/outdoors/town)
+"uhN" = (
+/obj/structure/bed/shit,
+/obj/effect/landmark/start/villager{
+	dir = 8
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/soilsons)
 "uhQ" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -35864,12 +35851,6 @@
 /obj/item/recipe_book/carpentry,
 /turf/open/floor/woodturned/nosmooth/saiga,
 /area/under/town/basement)
-"wwW" = (
-/obj/effect/landmark/start/villager{
-	dir = 8
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/soilsons)
 "wxi" = (
 /obj/structure/chair/wood/alt{
 	dir = 1
@@ -37093,6 +37074,9 @@
 /area/outdoors/mountains)
 "xkr" = (
 /obj/structure/bed/shit,
+/obj/effect/landmark/start/villager{
+	dir = 1
+	},
 /turf/open/floor/naturalstone,
 /area/indoors/soilsons)
 "xkR" = (
@@ -37305,10 +37289,6 @@
 	dir = 4
 	},
 /turf/open/floor/carpet/lord/left,
-/area/indoors/town/keep)
-"xrK" = (
-/obj/structure/table/vtable,
-/turf/open/floor/wood,
 /area/indoors/town/keep)
 "xsb" = (
 /turf/open/floor/dirt,
@@ -57958,7 +57938,7 @@ rbI
 qJl
 qJl
 bhA
-cVm
+mkM
 bhA
 omd
 cWK
@@ -87471,7 +87451,7 @@ qJl
 qJl
 qGk
 cjD
-kqE
+pIy
 qGk
 qGk
 qGk
@@ -87672,12 +87652,12 @@ qJl
 qJl
 qJl
 qGk
-xkr
-kqE
+aVw
+pIy
 bYT
 vwx
 vwx
-lgA
+pIy
 xkr
 qGk
 qJl
@@ -87874,12 +87854,12 @@ qJl
 qJl
 qJl
 qGk
-xkr
-kqE
+aVw
+pIy
 pIy
 bYT
 bYT
-olV
+bYT
 xkr
 qGk
 qJl
@@ -88078,10 +88058,10 @@ qJl
 qGk
 qGk
 pIy
-oHq
-oHq
-wwW
-wwW
+pIy
+pIy
+bYT
+bYT
 xkr
 qGk
 qJl
@@ -88280,10 +88260,10 @@ qJl
 qJl
 qGk
 qGk
-xkr
-xkr
-xkr
-xkr
+uhN
+uhN
+map
+uhN
 qGk
 qGk
 qJl
@@ -103250,7 +103230,7 @@ pqy
 pqy
 pqy
 ijI
-nOO
+gzB
 sNW
 pmI
 cwC
@@ -175049,7 +175029,7 @@ qJl
 qJl
 qJl
 aer
-xrK
+tzB
 qzR
 hyb
 hyb

@@ -282,7 +282,7 @@
 	for(var/datum/ritual/ritual as anything in rituals_pre)
 		if(IS_ABSTRACT(ritual))
 			continue
-		if(initial(ritual.is_cultist_ritual) && !(is_zizocultist(user.mind) || is_zizolackey(user.mind))) // some rituals are cultist exclusive
+		if(initial(ritual.is_cultist_ritual)) // some rituals are cultist exclusive
 			continue
 		rituals += initial(ritual.name)
 

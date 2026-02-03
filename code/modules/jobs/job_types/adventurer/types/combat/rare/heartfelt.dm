@@ -8,7 +8,7 @@
 	allowed_races = list(SPEC_ID_HUMEN)
 	outfit = /datum/outfit/adventurer/heartfeltlord
 	total_positions = 1
-	roll_chance = 50
+	roll_chance = 0
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,

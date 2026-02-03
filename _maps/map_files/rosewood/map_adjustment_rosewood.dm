@@ -74,6 +74,10 @@
 		/datum/job/fisher,
 		/datum/job/grabber,
 		/datum/job/shophand,
+		/datum/job/advclass/pilgrim/fisher,
+		/datum/job/advclass/pilgrim/rare/crusader,
+		/datum/job/advclass/combat/heartfeltlord,
+
 	)
 
 	migrant_blacklist = list(

@@ -6,7 +6,7 @@
 	allowed_races = list(SPEC_ID_HUMEN)
 	outfit = /datum/outfit/adventurer/heartfelthand
 	total_positions = 1
-	roll_chance = 50
+	roll_chance = 0
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 1,
