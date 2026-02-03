@@ -178,7 +178,7 @@
 	name = "Wizard's Tower"
 	icon_state = "magiciantower"
 	ambient_index = AMBIENCE_MYSTICAL
-	background_track = 'sound/music/area/magiciantower.ogg'
+	//background_track = 'sound/music/area/magiciantower.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/magiciantower

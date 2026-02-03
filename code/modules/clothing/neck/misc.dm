@@ -420,7 +420,7 @@
 
 /obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
 	. = ..()
-	if(!istype(interacted_item, /obj/item/collar_detonator))
+	if(!istype(interacted_item, /obj/item/clothing/ring/collar_detonator))
 		return
 
 	if(!collar_unlocked)
@@ -474,21 +474,17 @@
 
 	qdel(src)
 
-/obj/item/collar_detonator
-	name = "collar detonator"
-	desc = "What seems to be an ordinary key at first is actually an enchanted contraption designed to \
-		detonate or unlock collar of servitudes used by the inquisition."
-	icon_state = "mazekey"
-	icon = 'icons/roguetown/items/keys.dmi'
-	w_class = WEIGHT_CLASS_TINY
-	dropshrink = 0.75
-	throwforce = 0
-	drop_sound = 'sound/items/gems (1).ogg'
-	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK|ITEM_SLOT_RING
-	grid_height = 64
-	grid_width = 32
+/obj/item/clothing/neck/gorget/explosive/zizo
+	name = "collar of obedience"
+	icon_state = "collar"
+	desc = "a collar worn by the slaves of Zizo's army. The unruly must know their place."
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/clothing/ring/collar_detonator
+	name = "collar detonator"
+	desc = "A ring bestowed upon the slavedrivers of Zizo's forces."
+	icon_state = "ring_onyx"
+
+/obj/item/clothing/ring/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
 	. = ..()
 	if(!iscarbon(target))
 		return

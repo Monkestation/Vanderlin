@@ -81,7 +81,7 @@
 	particleEffectType = /particles/weather/fog
 
 	scale_vol_with_severity = TRUE
-	weather_sounds = /datum/looping_sound/rain
+	weather_sounds = /datum/looping_sound/wind
 	indoor_weather_sounds = /datum/looping_sound/indoor_rain
 
 	weather_duration_upper = 10 MINUTES

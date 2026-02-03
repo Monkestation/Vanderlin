@@ -1,10 +1,14 @@
 //======== Regular
 
-GLOBAL_LIST_INIT(ambience_town_day, list('sound/ambience/townday.ogg'))
+GLOBAL_LIST_INIT(ambience_town_day, list(
+	'sound/ambience/townday.ogg',
+	'sound/ambience/creepywind.ogg',
+))
 GLOBAL_LIST_INIT(ambience_town_night, list(
 	'sound/ambience/townnight (1).ogg',
 	'sound/ambience/townnight (2).ogg',
 	'sound/ambience/townnight (3).ogg',
+	'sound/ambience/creepywind.ogg',
 ))
 
 GLOBAL_LIST_INIT(ambience_forest_day, list('sound/ambience/forestday.ogg'))

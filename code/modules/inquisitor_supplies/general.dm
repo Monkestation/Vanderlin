@@ -82,7 +82,7 @@
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/neck/gorget/explosive(src)
 		new /obj/item/clothing/face/facemask/silver(src) ///Silver masks added for lore reasons.
-	new /obj/item/collar_detonator(src)
+	new /obj/item/clothing/ring/collar_detonator(src)
 
 /datum/inqports/supplies/redpotions
 	name = "3 Bottles of lifeblood"

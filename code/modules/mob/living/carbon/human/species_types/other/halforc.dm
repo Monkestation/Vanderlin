@@ -103,7 +103,7 @@
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
 
-	nutrition_mod = 2 // 200% higher hunger rate. Hungry, hungry horcs
+	nutrition_mod = 3 // 200% higher hunger rate. Hungry, hungry horcs
 	hygiene_mod = 1.5
 
 /datum/species/halforc/check_roundstart_eligible()

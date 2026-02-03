@@ -132,7 +132,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/say_mod = "says"
 
 	/// Multipler for how quickly nutrition decreases
-	var/nutrition_mod = 2
+	var/nutrition_mod = 2.5
 	/// Multiplier for how quickly hygiene decreases
 	var/hygiene_mod = 1
 	/// Multipler for blood loss

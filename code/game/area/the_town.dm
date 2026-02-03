@@ -265,7 +265,7 @@
 	icon_state = "basement"
 	droning_index = DRONING_BASEMENT
 	ambient_index = AMBIENCE_DUNGEON
-	background_track = 'sound/music/area/catacombs.ogg'
+	//background_track = 'sound/music/area/catacombs.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	soundenv = 5
