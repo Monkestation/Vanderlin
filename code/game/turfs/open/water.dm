@@ -710,10 +710,26 @@
 	dir = pick(GLOB.cardinals)
 	. = ..()
 
+/turf/open/water/tainted
+	name = "water"
+	desc = "A pool of water, shimmering slightly purple."
+	icon = 'icons/turf/natural/liquids.dmi'
+	icon_state = MAP_SWITCH("rock", "rockt")
+	water_level = 2
+	slowdown = 15
+	water_reagent = /datum/reagent/water/tainted
+
+/turf/open/water/tainted/deep
+	icon_state = MAP_SWITCH("rock", "rockt2")
+	water_level = 3
+	slowdown = 20
+	swim_skill = TRUE
+
 /turf/open/water/river
 	name = "water"
 	desc = "Crystal clear water! Flowing swiftly along the river."
-	icon_state = MAP_SWITCH("rock", "rivermove-dir")
+	icon = MAP_SWITCH('icons/turf/newwater.dmi', 'icons/turf/natural/liquids.dmi')
+	icon_state = MAP_SWITCH("rock", "rivermove_rockc")
 	water_level = 3
 	slowdown = 20
 	swim_skill = TRUE
@@ -774,14 +790,21 @@
 			else
 				A.ConveyorMove(dir)
 
-/turf/open/water/river/dirt
-	icon_state = MAP_SWITCH("dirt", "rivermovealt-dir")
-	water_reagent = /datum/reagent/water/gross
-	cleanliness_factor = -5
+/turf/open/water/river/tainted
+	icon_state = MAP_SWITCH("rock", "rivermove_rockt")
+	desc = "Shimmering, cloudy water. Flowing swiftly along the river."
+	water_reagent = /datum/reagent/water/tainted
 
 /turf/open/water/river/blood
-	icon_state = MAP_SWITCH("rock", "rivermovealt2-dir")
+	icon_state = MAP_SWITCH("rock", "rivermove_rockb")
+	desc = "Bloodflow! Flowing swiftly along the vein."
 	water_reagent = /datum/reagent/blood
+	cleanliness_factor = -5
+
+/turf/open/water/river/dirt
+	icon_state = MAP_SWITCH("dirt", "rivermove_dirtg")
+	desc = "Disgusting, swampy bogwater! Flowing swiftly along the river."
+	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
 
 /turf/open/water/acid // holy SHIT

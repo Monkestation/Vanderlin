@@ -13,14 +13,20 @@
 	var/map_file_name // = "vanderlin.dmm"
 	/// Jobs that this map won't use
 	var/list/blacklist
+	/// Unique map jobs
+	var/list/whitelist
 	/// Jobs that have slots changed /datum/job = num
 	var/list/slot_adjust
 	/// Jobs that have species adjustments /datum/job = list("humen")
 	var/list/species_adjust
+	/// Jobs that have patron requirement adjustmetns /datum/job = list(/datum/patron/divine/astrata)
+	var/list/patron_adjust
 	/// Jobs that have gender adjustments /datum/job = list(MALE, FEMALE)
 	var/list/sexes_adjust
 	/// Jobs that have age adjustments /datum/job = list(AGE_CHILD, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	var/list/ages_adjust
+	/// Jobs that have custom names on the map.
+	var/list/jobname_adjust
 	/// Migrant waves that are banned from spawning.
 	/// This doesn't handle downgraded waves so if can_roll is true on one, it needs to be added.
 	/// /datum/migrant_wave = list(/datum/migrant_wave/crusade)
@@ -33,22 +39,48 @@
 
 /// called upon job datum creation. Override this proc to change.
 /datum/map_adjustment/proc/job_change()
+	// Blacklist
 	for(var/job as anything in blacklist)
 		change_job_position(job, 0)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.job_flags &= ~(JOB_NEW_PLAYER_JOINABLE)
+
+	// Whitelist
+	for(var/job as anything in whitelist)
+		var/datum/job/J = SSjob.GetJobType(job)
+		J?.job_flags &= (JOB_NEW_PLAYER_JOINABLE)
+
+	// Slot adjustment
 	for(var/job as anything in slot_adjust)
 		change_job_position(job, slot_adjust[job])
+
+	// Species adjustment
 	for(var/job as anything in species_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_races = species_adjust[job]
+
+	// Sex adjustment
 	for(var/job as anything in sexes_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_sexes = sexes_adjust[job]
+
+	// Patron adjustment
+	for(var/job as anything in patron_adjust)
+		var/datum/job/J  = SSjob.GetJobType(job)
+		J?.allowed_patrons = patron_adjust[job]
+
+	// Age adjustment
 	for(var/job as anything in ages_adjust)
 		var/datum/job/J = SSjob.GetJobType(job)
 		J?.allowed_ages = ages_adjust[job]
-	// Now migrants
+
+	// Custom job names
+	for(var/job as anything in jobname_adjust)
+		var/datum/job/J = SSjob.GetJobType(job)
+		J?.title = jobname_adjust[job]["title"]
+		J?.f_title = jobname_adjust[job]["title_fem"]
+
+	// Migrant blacklist
 	for(var/migrant as anything in migrant_blacklist)
 		var/datum/migrant_wave/W = MIGRANT_WAVE(migrant)
 		W?.can_roll = FALSE

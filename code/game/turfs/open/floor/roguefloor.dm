@@ -191,6 +191,12 @@
 	icon_state = "grass_cold"
 	neighborlay = "grass_coldedge"
 
+/turf/open/floor/grass/cave
+	name = "cave moss"
+	desc = "Hardy fronds of cave moss, tainted to survive lightlessness."
+	icon_state = "grass_cave"
+	neighborlay = "grass_caveedge"
+
 /turf/open/floor/grass/hell
 	name = "hell grass"
 	desc = "Grass, ominous and instilling uncomfort."
@@ -1059,7 +1065,7 @@
 
 /turf/open/glass
 	name = "Glass floor"
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "woodglass"
 
 	footstep = FOOTSTEP_PLATING

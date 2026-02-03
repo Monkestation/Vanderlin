@@ -148,6 +148,14 @@
 	icon_state = "border"
 	pass_crawl = FALSE
 
+/obj/structure/fluff/railing/border/inner
+	icon_state = "border_inner"
+	density = FALSE
+
+/obj/structure/fluff/railing/border/corner
+	icon_state = "border_corner"
+	density = FALSE
+
 /obj/structure/fluff/railing/tall
 	name = "wooden fence"
 	desc = "A sturdy fence of wooden planks."
@@ -219,7 +227,11 @@
 	icon_state = initial(icon_state)
 
 /obj/structure/bars/cemetery
+	icon = 'icons/roguetown/misc/fence.dmi'
 	icon_state = "cemetery"
+
+/obj/structure/bars/cemetery/vertical
+	icon_state = "cemetery_vert"
 
 /// like bars but indestructible and you cant throw through them
 /obj/structure/bars/cemetery/underworld

@@ -20,7 +20,7 @@
 	var/num_underlay_icons = 2
 	var/tree_initalized = FALSE
 
-/obj/structure/flora/newtree/Initialize()
+/obj/structure/flora/newtree/Initialize(mapload)
 	. = ..()
 	GenerateTree()
 

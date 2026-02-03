@@ -595,3 +595,87 @@
 	name = "Cursed"
 	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
 	icon_state = "debuff"
+
+/datum/status_effect/debuff/mushroomt1
+	id = "mushroomt1"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/mushroomt1
+	effectedstats = list(STATKEY_CON = -1)
+	duration = 2 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/mushroomt1
+	name = "Infested"
+	desc = "Spores have infested my body. It itches."
+	icon_state = "shroom1"
+
+/datum/status_effect/debuff/mushroomt1/on_apply()
+	. = ..()
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.add_stress(/datum/stress_event/mushroom)
+
+/datum/status_effect/debuff/mushroomt1/on_remove()
+	. = ..()
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.remove_stress(/datum/stress_event/mushroom)
+
+/datum/status_effect/debuff/mushroomt2
+	id = "mushroomt2"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/mushroomt2
+	effectedstats = list(STATKEY_CON = -1, STATKEY_END = -1)
+	duration = 2 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/mushroomt2
+	name = "Fungitis"
+	desc = "I can feel mycelium growing beneath my skin. My entire body has broken into rashes."
+	icon_state = "shroom2"
+
+/datum/status_effect/debuff/mushroomt2/on_apply()
+	. = ..()
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.add_stress(/datum/stress_event/mushroom_grown)
+
+/datum/status_effect/debuff/mushroomt2/on_remove()
+	. = ..()
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.remove_stress(/datum/stress_event/mushroom_grown)
+
+/datum/status_effect/debuff/mushroomt3
+	id = "mushroomt3"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/mushroomt3
+	effectedstats = list(STATKEY_CON = -2, STATKEY_END = -2)
+	duration = 2 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/mushroomt3
+	name = "Juffo-Wup"
+	desc = "My body is breaking out into spore-filled cysts. I am in misery."
+	icon_state = "shroom3"
+
+/datum/status_effect/debuff/mushroomt3/proc/add_light(mob/living/carbon/owner)
+	owner.mob_light(_power = 1)
+	RegisterSignal(owner, COMSIG_PARENT_QDELETING, PROC_REF(on_living_holder_deletion))
+
+/datum/status_effect/debuff/mushroomt3/proc/remove_light(mob/living/carbon/owner)
+	UnregisterSignal(owner, COMSIG_PARENT_QDELETING)
+	var/obj/mob_light = locate(/datum/light_source) in owner.light_sources
+	if(mob_light)
+		qdel(mob_light)
+
+/datum/status_effect/debuff/mushroomt3/proc/on_living_holder_deletion(mob/living/M)
+	remove_light(M)
+
+/datum/status_effect/debuff/mushroomt3/on_apply()
+	. = ..()
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		add_light(C)
+		C.add_stress(/datum/stress_event/mushroom_full)
+
+/datum/status_effect/debuff/mushroomt3/on_remove()
+	. = ..()
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		remove_light(C)
+		C.remove_stress(/datum/stress_event/mushroom_full)

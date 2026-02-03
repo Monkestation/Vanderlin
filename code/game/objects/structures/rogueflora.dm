@@ -366,6 +366,7 @@
 /obj/structure/flora/grass/bush
 	name = "bush"
 	desc = "A bush, a den for critters and treasures."
+	icon = 'icons/roguetown/misc/foliage_bush.dmi'
 	icon_state = "bush"
 	num_random_icons = 0
 	layer = ABOVE_ALL_MOB_LAYER
@@ -378,6 +379,11 @@
 /obj/structure/flora/grass/bush/tundra
 	name = "tundra bush"
 	icon_state = "bush_tundra"
+
+/obj/structure/flora/grass/bush/cave
+	name = "cave bush"
+	icon_state = "bush_cave"
+	desc = "Hardy masses of ferns which manage to survive the near-lightlessness of Subterra."
 
 /obj/structure/flora/grass/bush/Initialize()
 	. = ..()
@@ -465,6 +471,11 @@
 	name = "tundra great bush"
 	icon_state = "bushwall_tundra1"
 	base_icon_state = "bushwall_tundra"
+
+/obj/structure/flora/grass/bush/wall/cave
+	name = "great cave bush"
+	icon_state = "bushwall_cave1"
+	base_icon_state = "bushwall_cave"
 
 /obj/structure/flora/grass/bush/wall/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()

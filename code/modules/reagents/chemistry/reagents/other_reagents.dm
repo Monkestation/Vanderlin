@@ -70,7 +70,6 @@
 	results = list(/datum/reagent/water/gross = 2)
 	required_reagents = list(/datum/reagent/water/gross = 1, /datum/reagent/water = 1)
 
-
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -94,6 +93,38 @@
 	M.adjustToxLoss(1)
 	M.add_nausea(12) //Over 8 units will cause puking
 
+/datum/reagent/water/tainted
+	taste_description = "mushroom"
+	color = "#9673bec6"
+
+/datum/reagent/water/tainted/on_mob_life(mob/living/carbon/M)
+	. = ..()
+	// Nobody is exempt, nobody can drink this without bad effects.
+	M.add_nausea(5)
+	// Fungal infection - spreads faster the sicker you are. Interesting potential combo mixing this and bogwater together to make a rapid-infestation mix.
+	switch(M.nausea)
+		if(3 to 9)
+			M.apply_status_effect(/datum/status_effect/debuff/mushroomt1)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt2)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt3)
+		if(9 to 15)
+			M.apply_status_effect(/datum/status_effect/debuff/mushroomt2)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt1)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt3)
+		if(15 to 50)
+			M.apply_status_effect(/datum/status_effect/debuff/mushroomt3)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt2)
+			M.remove_status_effect(/datum/status_effect/debuff/mushroomt1)
+		if(50 to INFINITY)
+			var/mob/living/simple_animal/hostile/skeleton/mushroom/S = new(get_turf(M))
+			S.dir = M.dir
+			M.gib()
+
+/datum/chemical_reaction/taintedwaterify
+	name = "taintedwater"
+	id = /datum/reagent/water/tainted
+	results = list(/datum/reagent/water/tainted = 2)
+	required_reagents = list(/datum/reagent/water/tainted = 1, /datum/reagent/water = 1)
 
 /*
  *	Water reaction to turf
