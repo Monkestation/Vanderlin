@@ -160,7 +160,9 @@
 			return
 		held_item.attack_self(src, modifiers)
 		update_inv_hands()
-	else if(LAZYACCESS(modifiers, LEFT_CLICK) && atkswinging == LEFT_CLICK)
+		return
+
+	if(LAZYACCESS(modifiers, LEFT_CLICK) && atkswinging == LEFT_CLICK)
 		if(active_hand_index == 1)
 			used_hand = 1
 			if(next_lmove > world.time)

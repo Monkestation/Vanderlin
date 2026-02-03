@@ -166,7 +166,6 @@
 			unwield(user)
 		else if(user.is_holding(parent))
 			wield(user)
-		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /**
  * Wield the two handed item in both hands
