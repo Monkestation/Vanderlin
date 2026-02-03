@@ -54,6 +54,9 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(skills) // Laziness, move to living or have stubs
 		QDEL_NULL(skills)
 
+	if(mind.current == src)
+		mind.current = null
+
 	ghostize(can_reenter_corpse = FALSE) //False, since we're deleting it currently
 
 	return ..()

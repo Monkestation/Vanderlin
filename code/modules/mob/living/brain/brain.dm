@@ -20,12 +20,13 @@
 		ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, BRAIN_UNAIDED)
 
 /mob/living/brain/Destroy()
-	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
-		if(stat!=DEAD)	//If not dead.
-			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
-		if(mind)	//You aren't allowed to return to brains that don't exist
+	if(key)	//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
+		if(stat != DEAD) //If not dead.
+			death(1) //Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
+		if(mind) //You aren't allowed to return to brains that don't exist
 			mind.current = null
-		ghostize(drawskip=TRUE)		//Ghostize checks for key so nothing else is necessary.
+		ghostize(drawskip = TRUE)		//Ghostize checks for key so nothing else is necessary.
+	QDEL_NULL(stored_dna)
 	return ..()
 
 /mob/living/brain/proc/create_dna()
