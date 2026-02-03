@@ -378,7 +378,6 @@
 		return ui_interact(user)
 	return FALSE
 
-
 /mob/living/carbon/human/ranged_attack(atom/A, list/modifiers)
 	. = ..()
 	if(gloves)

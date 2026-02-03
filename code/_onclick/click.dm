@@ -358,7 +358,6 @@
 	if(SEND_SIGNAL(src, COMSIG_MOB_ATTACK_RANGED, clicked_atom, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
-
 /**
  * Ranged secondary attack
  *

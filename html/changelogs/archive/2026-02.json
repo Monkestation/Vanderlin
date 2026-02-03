@@ -43,5 +43,44 @@
                 "rscadd": "New Court Physician Canesword"
             }
         ]
+    },
+    "2026-02-03": {
+        "realforest2001": [
+            {
+                "qol": "Improved flight interactions. You cannot take off with a roof over your head."
+            },
+            {
+                "qol": "Stopping-Flying whilst stood directly on a turf will now be instant."
+            },
+            {
+                "sound": "Added a wingflap to taking off and landing."
+            },
+            {
+                "rscadd": "add: Made the vampire progeny tip change depending on if you can or can't rise more."
+            },
+            {
+                "rscadd": "Vampires can now tell the difference between Vampire Spawn, Vampires and Wretch Vampires on examine."
+            },
+            {
+                "code_imp": "Fixed a variable typo for clan covens."
+            },
+            {
+                "code_imp": "Removed a duplicate proc entry."
+            },
+            {
+                "image": "Added Vampire Spawn icon."
+            },
+            {
+                "bugfix": "Fixed Vampire Spawn not having their own icon as they expected."
+            },
+            {
+                "bugfix": "Fixed being able to spawn as a vampire when playing churchling."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "hollow curse ritual checks if the target is dead, hollow ritual checks if target has lux"
+            }
+        ]
     }
 }
