@@ -15,6 +15,7 @@
 #define SPEC_ID_TRITON "triton"
 #define SPEC_ID_MEDICATOR "medicator"
 #define SPEC_ID_HALFLING "halfling"
+#define SPEC_ID_AUTOMATON "automaton"
 
 #define SPEC_ID_ORC	"orc"
 #define SPEC_ID_GOBLIN	"goblin"
@@ -44,6 +45,7 @@
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
 	SPEC_ID_HALFLING,\
+	SPEC_ID_AUTOMATON, \
 )
 
 /// Species where females get underwear, no underwear for kobold, rakshari, medicator and triton, dwarves handled seperately

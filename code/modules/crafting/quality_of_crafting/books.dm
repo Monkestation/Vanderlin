@@ -23,10 +23,10 @@
 
 	// Gather categories from recipes themselves
 	for(var/atom/path as anything in types)
-		if(is_abstract(path))
+		if(IS_ABSTRACT(path))
 			// Handle abstract types
 			for(var/atom/sub_path as anything in subtypesof(path))
-				if(is_abstract(sub_path))
+				if(IS_ABSTRACT(sub_path))
 					continue
 
 				var/category = get_recipe_category(sub_path)
@@ -330,9 +330,9 @@
 
 	// Add recipes based on current category
 	for(var/atom/path as anything in types)
-		if(is_abstract(path))
+		if(IS_ABSTRACT(path))
 			for(var/atom/sub_path as anything in subtypesof(path))
-				if(is_abstract(sub_path))
+				if(IS_ABSTRACT(sub_path))
 					continue
 				if(ispath(sub_path, /datum/container_craft))
 					var/datum/container_craft/craft = sub_path

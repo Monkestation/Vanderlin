@@ -674,7 +674,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 							reputation_purchases[pack] = TRUE
 							// Calculate reputation cost
 							var/quantity = cargo_manifest.orders[pack] || 0
-							var/rep_cost = calculate_reputation_cost_for_processing(pack)
+							var/rep_cost = pack.calculate_reputation_cost()
 							total_reputation_cost += rep_cost * quantity
 
 				qdel(listed_atom)
@@ -695,7 +695,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 							if(cargo_manifest.reputation_orders[pack])
 								reputation_purchases[pack] = TRUE
 								var/quantity = cargo_manifest.orders[pack] || 0
-								var/rep_cost = calculate_reputation_cost_for_processing(pack)
+								var/rep_cost = pack.calculate_reputation_cost()
 								total_reputation_cost += rep_cost * quantity
 
 					qdel(inside)
@@ -799,21 +799,6 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		record_round_statistic(STATS_TRADE_VALUE_IMPORTED, spent_amount)
 		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_SPENT, spent_amount, 1)
 
-/datum/lift_master/tram/proc/calculate_reputation_cost_for_processing(datum/supply_pack/pack)
-	var/datum/world_faction/faction = SSmerchant.active_faction
-	if(!faction)
-		return 50
-
-	var/base_cost = pack.cost
-	var/tier = faction.get_reputation_tier()
-
-	// Base reputation cost scales with item value
-	// Higher tier = lower reputation costs (better relations = better deals)
-	var/reputation_multiplier = max(0.5, 1.5 - (tier * 0.15)) // 15% reduction per tier
-	var/reputation_cost = max(10, round(base_cost * reputation_multiplier))
-
-	return reputation_cost
-
 /datum/lift_master/tram/proc/get_valid_turfs(obj/structure/industrial_lift/tram/platform)
 	var/list/valid_turfs = list()
 	for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
@@ -906,6 +891,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			original_contents += resolved_contents
 		var/list/sold_items = list()
 		var/list/sold_count = list()
+		SSmerchant.handle_lift_contents(platform, platform.lift_load, destination) //this potentially nukes some items so its done here
 		for(var/atom/movable/listed_atom in platform.lift_load)
 			if(listed_atom in original_contents)
 				continue

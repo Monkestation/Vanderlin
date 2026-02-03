@@ -142,6 +142,22 @@
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 
+/obj/item/clothing/head/courtphysician/male
+	name = "sanguine hat"
+	desc = "A hat for keeping the splattered blood out of your face, for when your trade is required."
+	icon_state = "dochat1"
+	item_state = "dochat1"
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/head/courtphysician/female
+	name = "sanguine cap"
+	desc = "A cap for keeping the splattered blood out of your hair, for when your trade is required."
+	icon_state = "dochat2"
+	item_state = "dochat2"
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
+
 /obj/item/clothing/head/maidband
 	name = "maid headband"
 	desc = "A pleated cloth headband. It has gained widespread popularity from Valorian nobles travelling with their servants."

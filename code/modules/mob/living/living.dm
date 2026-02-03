@@ -109,23 +109,23 @@
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
 		if(levels <= 2)
 			return
+	if(movement_type & FLYING)
+		to_chat(src, span_info("You glide down to a more manageable height."))
+		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
+		return
 	var/dex_save = src.get_skill_level(/datum/skill/misc/climbing)
-	var/sneak_fall = FALSE // If we're sneaking, don't announce it to our surroundings
 	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
-			to_chat(src, "<span class='info'>My dexterity allowed me to land on my feet unscathed!</span>")
-			if(src.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
-				sneak_fall = TRUE
+			to_chat(src, span_info("My dexterity allowed me to land on my feet unscathed!"))
+			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
 			return
 	var/points
 	for(var/i in 2 to levels)
 		i++
 		points += "!"
-	if(!sneak_fall)
-		visible_message("<span class='danger'>[src] falls down[points]</span>", \
-						"<span class='danger'>I fall down[points]</span>")
-		playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
+	visible_message(span_danger("[src] falls down[points]"), span_danger("I fall down[points]"))
+	playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!isgroundlessturf(T))
 		ZImpactDamage(T, levels)
 		record_round_statistic(STATS_MOAT_FALLERS)

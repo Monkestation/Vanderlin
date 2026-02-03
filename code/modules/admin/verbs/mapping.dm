@@ -51,7 +51,7 @@ GLOBAL_PROTECT(admin_verbs_debug_mapping)
 	desc = ""
 
 /obj/effect/debugging/marker
-	icon = 'icons/turf/areas.dmi'
+	icon = 'icons/turf/areas/areas.dmi'
 	icon_state = "yellow"
 
 /obj/effect/debugging/marker/Move()
