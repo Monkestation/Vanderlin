@@ -6412,13 +6412,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/metal,
 /area/under/town/basement)
-"dYP" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_town-bog";
-	aportalid = "vanderlin-bog_town-town"
-	},
-/turf/open/floor/blocks,
-/area/under/cavewet)
 "dYW" = (
 /obj/structure/vine/black_briar/hvy,
 /turf/open/floor/ruinedwood,
@@ -15417,13 +15410,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
-"jCB" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "Howling_Rosewood";
-	aportalid = "Rosewood_Howling"
-	},
-/turf/open/floor/dirt/road,
-/area/under/cavelava)
 "jCR" = (
 /turf/open/floor/cobble,
 /area/indoors)
@@ -18991,13 +18977,6 @@
 /obj/structure/kneestingers,
 /turf/open/water/cleanshallow,
 /area/under/cavewet)
-"lPl" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "rosewood-forest-town";
-	aportalid = "rosewood-town-forest"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/basin)
 "lPL" = (
 /turf/open/floor/concrete,
 /area/under/town/basement)
@@ -81268,7 +81247,7 @@ qix
 qix
 qix
 qix
-jCB
+qix
 omR
 cee
 "}
@@ -81470,7 +81449,7 @@ qix
 qix
 qix
 qix
-jCB
+qix
 omR
 cee
 "}
@@ -81672,7 +81651,7 @@ qix
 qix
 qix
 qix
-jCB
+qix
 omR
 cee
 "}
@@ -114376,9 +114355,9 @@ qJl
 qJl
 xmD
 umM
-dYP
-dYP
-dYP
+oOl
+oOl
+oOl
 umM
 xmD
 qJl
@@ -159595,9 +159574,9 @@ pAE
 pAE
 pAE
 pAE
-lPl
-lPl
-lPl
+qym
+qym
+qym
 pAE
 pAE
 pAE
