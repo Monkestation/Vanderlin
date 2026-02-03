@@ -776,22 +776,34 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 
 .silver					{color: #c0c0c0;}
 
-/*
-@keyframes hypnocolor {
-	0%		{color: #202020;}
-	25%		{color: #4b02ac;}
-	50%		{color: #9f41f1;}
-	75%		{color: #541c9c;}
-	100%	{color: #7adbf3;}
-}
+.prayer {
+color: #f1d55b;
+font-weight: bold;
 
-.phobia			{color: #dd0000;	font-weight: bold;	animation: phobia 750ms infinite;}
-@keyframes phobia {
-	0%		{color: #f75a5a;}
-	50%		{color: #dd0000;}
-	100%	{color: #f75a5a;}
+/*Animation*/
+animation: prayer_flicker 0.5s infinite;
 }
-*/
+@keyframes prayer_flicker {
+	25% {
+		color: #f1d55b;
+		transform: translate(-2px, -1px);
+	}
+
+	50% {
+		color: #c6ad3f;
+		transform: translate(1px, -2px);
+	}
+
+	75% {
+		color: #dfc343;
+		transform: translate(-1px, 2px);
+	}
+
+	100% {
+		color: #c6ac39;
+		transform: translate(1px, 1px);
+	}
+}
 
 .connectionClosed, .fatalError {background: red;	color: white;	padding: 5px;}
 .connectionClosed.restored {background: green;}

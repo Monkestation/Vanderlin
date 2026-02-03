@@ -126,6 +126,8 @@
 #define span_artery(str) ("<span class='artery'>" + str + "</span>")
 #define span_love(str) ("<span class='love'>" + str + "</span>")
 
+#define SPAN_PRAYER(str) ("<span class='prayer'>" + str + "</span>")
+
 /* Complex Spans */
 /// Ones where span_X isn't just the class
 #define span_admin_log(str) ("<span class='admin'><span class='prefix'>ADMIN LOG: </span><span class='message linkify'>" + str + "</span></span>")

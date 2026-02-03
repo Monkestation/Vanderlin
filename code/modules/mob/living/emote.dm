@@ -42,7 +42,7 @@
 
 	/* admin stuff */
 	var/follower_ident = "[follower.key]/([follower.real_name]) (follower of [patron])"
-	message_admins("[follower_ident] [ADMIN_SM(follower)] [ADMIN_FLW(follower)] prays: [span_info(html_encode(prayer))]")
+	send_prayer(follower, follower_ident, prayer)
 	user.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
 
 	follower.whisper(prayer)
@@ -52,6 +52,15 @@
 
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
+
+/proc/send_prayer(mob/living/follower, ident_string, prayer)
+	var/message = span_admin("[span_prefix("PRAYER: ")]<span class=\"message linkify\">[ident_string] [ADMIN_SM(follower)] [ADMIN_FLW(follower)] prays: [SPAN_PRAYER(html_encode(prayer))]</span>")
+	for(var/client/admin_client in GLOB.admins)
+		if(check_rights_for(admin_client, R_ADMIN))
+			to_chat(admin_client, message)
+			if(admin_client.prefs.toggles & SOUND_PRAYERS)
+				admin_client.mob.playsound_local(admin_client, 'sound/misc/curse_lifted.ogg', 100)
+
 
 // ............... Me (custom emote) ..................
 /datum/emote/living/custom
