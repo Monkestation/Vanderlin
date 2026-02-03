@@ -57,7 +57,7 @@
 	for(var/i = 1 to thralls)
 		var/mob/living/carbon/human/human = pick_n_take(candidates)
 		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
-		human.mind.add_antag_datum(new_antag)
+		human?.mind.add_antag_datum(new_antag)
 		human.adjust_bloodpool(500)
 
 /datum/antagonist/vampire/lord/greet()
