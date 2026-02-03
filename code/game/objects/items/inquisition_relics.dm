@@ -1029,7 +1029,7 @@
 		/* if(HAS_TRAIT(user, TRAIT_BLACKBAGGER) && !M.cmode) It was too much to handle. Too cold to hold.
 			bagging = TRUE
 			bagsound(M)
-			M.transferItemToLoc(headgear, src)
+			M.dropItemToGround(headgear, TRUE)
 			M.equip_to_slot(src, SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 			bagging = FALSE
 		else*/
@@ -1037,7 +1037,7 @@
 		bagcheck(M)
 		if(do_after(user, timetobag, M))
 			bagging = FALSE
-			M.transferItemToLoc(headgear, src)
+			M.dropItemToGround(headgear, TRUE)
 			M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 		else
 			bagging = FALSE
@@ -1046,7 +1046,7 @@
 		bagcheck(M)
 		if(do_after(user, timetobag / 2, M))
 			bagging = FALSE
-			M.transferItemToLoc(headgear, src)
+			M.dropItemToGround(headgear, TRUE)
 			M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 		else
 			bagging = FALSE
