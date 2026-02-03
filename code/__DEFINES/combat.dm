@@ -312,6 +312,13 @@
 #define WLENGTH_LONG		3		//can attack chest and down from the ground. dont need to grab. swords 2h axes
 #define WLENGTH_GREAT		4		//can attack any bodypart from ground. think spears
 
+//Weapon Durability and Sharpness
+#define INTEG_PARRY_DECAY				1 //Integrity loss on parry
+#define INTEG_PARRY_DECAY_NOSHARP		5 //Integrity decay on parry for weapons with no sharpness OR for off-hand parries
+#define SHARPNESS_ONHIT_DECAY			3 //Sharpness loss on parry
+#define SHARPNESS_TIER1_THRESHOLD		0.8 // %-age threshold when damage starts to fall off, your damfactor and STR factor
+#define SHARPNESS_TIER2_THRESHOLD		0.25 // %-age threshold when damage really falls off, base damage of the weapon included.
+
 //attacktype
 #define DULLING_CUT 1
 #define DULLING_BASH 2

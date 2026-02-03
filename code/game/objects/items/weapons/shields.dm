@@ -25,7 +25,7 @@
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	max_integrity = INTEGRITY_WORST
-	blade_dulling = DULLING_BASHCHOP
+	blade_dulling = DULLING_BASH
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
