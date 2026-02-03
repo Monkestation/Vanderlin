@@ -148,3 +148,14 @@
 	icon_state = "butlershorts"
 	item_state = "butlershorts"
 	detail_color = CLOTHING_SOOT_BLACK
+
+/obj/item/clothing/pants/trou/courtphysician
+	name = "sanguine trousers"
+	desc = "A pair of formal trousers, clean to the best of the servant's ability, but some bloodstains are impossible to rid them of"
+	icon_state = "docpants"
+	item_state = "docpants"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY

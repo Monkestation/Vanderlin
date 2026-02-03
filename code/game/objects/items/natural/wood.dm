@@ -13,8 +13,8 @@
 	static_debris = list(/obj/item/grown/log/tree/small = 2)
 	obj_flags = CAN_BE_HIT
 	resistance_flags = FLAMMABLE
-	gripped_intents = list(/datum/intent/hit)
-	possible_item_intents = list(/datum/intent/hit)
+	gripped_intents = list(INTENT_GENERIC)
+	possible_item_intents = list(INTENT_GENERIC)
 	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
@@ -220,7 +220,7 @@
 	experimental_inhand = FALSE
 	force = 2
 	throwforce = 2
-	possible_item_intents = list(/datum/intent/stab, /datum/intent/pick)
+	possible_item_intents = list(/datum/intent/stab, PICK_INTENT)
 	firefuel = 1 MINUTES
 	blade_dulling = 0
 	max_integrity = 20
@@ -255,7 +255,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	item_state = "plankbundle"
 	experimental_inhand = FALSE
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	desc = "Wooden planks bundled together for easy handling."
 	force = 0
 	throwforce = 0

@@ -74,5 +74,5 @@
 			J?.adjust_current_positions(-1)
 			if(SSmapping.config.map_name != "Voyage")
 				antag_mind.current.unequip_everything()
-			antag_mind.add_antag_datum(/datum/antagonist/vampire/lesser)
+			antag_mind.add_antag_datum(/datum/antagonist/vampire/lords_spawn)
 		return

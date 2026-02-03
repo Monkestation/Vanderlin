@@ -8,16 +8,17 @@
 
 /datum/quirk/boon/backstory/New()
 	// Populate options from all backstory types
-	for(var/backstory_type in subtypesof(/datum/backstory))
-		if(is_abstract(backstory_type))
+	for(var/datum/backstory/backstory_type as anything in subtypesof(/datum/backstory))
+		if(IS_ABSTRACT(backstory_type))
 			continue
 		customization_options += backstory_type
 
 	if(!length(backstories))
-		for(var/backstory_type in subtypesof(/datum/backstory))
-			if(is_abstract(backstory_type))
+		for(var/datum/backstory/backstory_type as anything in subtypesof(/datum/backstory))
+			if(IS_ABSTRACT(backstory_type))
 				continue
-			LAZYADD(backstories, new backstory_type)
+			LAZYADD(backstories, new backstory_type())
+
 	return ..()
 
 /datum/quirk/boon/backstory/get_desc(datum/preferences/prefs)

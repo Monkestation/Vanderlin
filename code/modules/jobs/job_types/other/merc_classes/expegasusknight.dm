@@ -47,7 +47,7 @@
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/shield/tower/buckleriron
 	beltr = /obj/item/weapon/sword/long/shotel
-	beltl = /obj/item/weapon/knife/njora/steel
+	beltl = /obj/item/weapon/knife/dagger/steel/njora
 	shirt = /obj/item/clothing/armor/chainmail/iron
 	pants = /obj/item/clothing/pants/trou/leather
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1)

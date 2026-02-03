@@ -47,11 +47,11 @@
 	parent_type = /obj/item/weapon/werewolf_claw
 	name = "briar claw"
 	desc = "A volf's claw."
-	force = 15
-	wdefense = 1
+	force = DAMAGE_KATAR
+	wdefense = MEDIOCRE_PARRY
 	armor_penetration = 7
 	max_blade_int = 700
-	max_integrity = 700
+	max_integrity = INTEGRITY_STRONGEST + 200
 
 /obj/item/weapon/briar_claw/Initialize()
 	. = ..()

@@ -540,5 +540,42 @@
                 "bugfix": "Fixes the grenzelbun description"
             }
         ]
+    },
+    "2026-01-31": {
+        "dwasint": [
+            {
+                "bugfix": "roundstart coins can't be duped"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Objects that fall from above no longer show as \\\"the floor\\\"."
+            },
+            {
+                "bugfix": "Failing to pick a job subtype (such as bloodsucker wretch equipment) will no longer brick you."
+            }
+        ],
+        "ApolloVector": [
+            {
+                "balance": "Fighter Average shield skill -> Skilled shields"
+            },
+            {
+                "balance": "Cleric 0 shield skill -> Average"
+            },
+            {
+                "balance": "Zizo inhumen cleric shield skill bonus +1 instead of +2, resulting in skilled shields instead of expert"
+            },
+            {
+                "balance": "Captain Skilled shield skill -> Expert shields"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed inquisition collars getting stuck"
+            },
+            {
+                "bugfix": "Fixed asset load error"
+            }
+        ]
     }
 }
