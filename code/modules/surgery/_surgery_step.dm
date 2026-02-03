@@ -65,7 +65,7 @@
 			if(get_location_accessible(target, target_zone) || (surgery.surgery_flags & SURGERY_IGNORE_CLOTHES))
 				initiate(user, target, target_zone, tool, surgery, try_to_fail)
 			else
-				to_chat(user, span_warning("You need to expose [target]'s [target.parse_zone_with_bodypart(target_zone)] to perform surgery on it!"))
+				to_chat(user, span_warning("You need to expose [target]'s [parse_zone(target_zone)] to perform surgery on it!"))
 			return TRUE //returns TRUE so we don't stab the guy in the dick or wherever.
 
 	if(repeatable)
@@ -89,6 +89,9 @@
 
 	if(!chem_check(target))
 		user.balloon_alert(user, "missing [LOWER_TEXT(get_chem_list())]!")
+		return FALSE
+
+	if(preop(user, target, target_zone, tool, surgery) == SURGERY_STEP_FAIL)
 		return FALSE
 
 	surgery.step_in_progress = TRUE
@@ -116,14 +119,12 @@
 
 	modded_time = min(modded_time, time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)// cap modded_time at time * modifier
 
-	var/was_sleeping = (target.stat != DEAD && target.IsSleeping())
-
 	var/advance = FALSE
 	if(do_after(user, modded_time, target = target, interaction_key = interaction_key)) //If we have the hippocratic oath, we can perform one surgery on each target, otherwise we can only do one surgery in total
 		if(try_to_fail || prob(fail_prob))
 			if(failure(user, target, target_zone, tool, surgery, fail_prob))
-			play_failure_sound(user, target, target_zone, tool, surgery)
-			advance = TRUE
+				play_failure_sound(user, target, target_zone, tool, surgery)
+				advance = TRUE
 
 		else if(success(user, target, target_zone, tool, surgery))
 			play_success_sound(user, target, target_zone, tool, surgery)
@@ -166,6 +167,7 @@
 
 /datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	SEND_SIGNAL(user, COMSIG_MOB_SURGERY_STEP_SUCCESS, src, target, target_zone, tool, surgery, default_display_results)
+
 	if(default_display_results)
 		display_results(
 			user,
@@ -174,11 +176,13 @@
 			span_notice("[user] succeeds!"),
 			span_notice("[user] finishes."),
 		)
+
 	if(ishuman(user))
 		var/mob/living/carbon/human/surgeon = user
 		surgeon.add_blood_DNA(target.get_blood_dna_list(), ITEM_SLOT_GLOVES)
 	else
 		user.add_mob_blood(target)
+
 	return TRUE
 
 /datum/surgery_step/proc/play_success_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -186,6 +190,11 @@
 		return
 	playsound(get_turf(target), success_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 
+/**
+ * When fail_prob triggers, we fail.
+ *
+ * We can either cancel the next step with FALSE, or do something negative and return TRUE.
+ */
 /datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob = 0)
 	var/screwedmessage = ""
 	switch(fail_prob)
@@ -201,7 +210,9 @@
 		target,
 		span_warning("You screw up![screwedmessage]"),
 		span_warning("[user] screws up!"),
-		span_notice("[user] finishes."), TRUE) //By default the patient will notice if the wrong thing has been cut
+		span_notice("[user] finishes."),
+		target_detailed = TRUE, // By default the patient will notice if the wrong thing has been cut
+	)
 
 	return FALSE
 

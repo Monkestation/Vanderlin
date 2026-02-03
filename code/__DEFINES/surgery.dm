@@ -4,6 +4,9 @@
 #define BODYPART_ORGANIC 1
 #define BODYPART_ROBOTIC 2
 
+/// Return value when the surgery step fails :(
+#define SURGERY_STEP_FAIL -1
+
 // Flags for surgery_flags on surgery datums
 ///Will allow the surgery to bypass clothes
 #define SURGERY_IGNORE_CLOTHES (1<<0)

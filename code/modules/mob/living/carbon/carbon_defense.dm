@@ -256,47 +256,6 @@
 			I.add_mob_blood(src)
 		return TRUE //successful attack
 
-//ATTACK HAND IGNORING PARENT RETURN VALUE
-/mob/living/carbon/attack_hand(mob/living/carbon/human/user)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
-		. = TRUE
-
-	if(!lying_attack_check(user))
-		return FALSE
-
-	if(!get_bodypart(check_zone(user.zone_selected)))
-		to_chat(user, "<span class='warning'>[src] is missing that.</span>")
-		return FALSE
-
-	if(!user.cmode && (istype(user.rmb_intent, /datum/rmb_intent/weak) || istype(user.rmb_intent, /datum/rmb_intent/strong)))
-		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
-		var/list/possible_steps = list()
-		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
-			if(!surgery_step.name)
-				continue
-			if(surgery_step.can_do_step(user, src, user.zone_selected, null, user.used_intent))
-				possible_steps[surgery_step.name] = surgery_step
-		var/possible_len = length(possible_steps)
-		if(possible_len)
-			var/datum/surgery_step/done_step
-			if(possible_len > 1)
-				var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
-				if(input)
-					done_step = possible_steps[input]
-			else
-				done_step = possible_steps[possible_steps[1]]
-			if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent, try_to_fail))
-				return TRUE
-	/*
-	for(var/datum/surgery/S in surgeries)
-		if(!(mobility_flags & MOBILITY_STAND) || !S.lying_required)
-			if(user.used_intent.type == INTENT_HELP || user.used_intent.type == INTENT_DISARM)
-				if(S.next_step(user, user.used_intent))
-					return TRUE
-	*/
-	return FALSE
-
-
 /mob/living/carbon/attack_paw(mob/living/carbon/monkey/M)
 	if(M.used_intent.type == INTENT_HELP)
 		help_shake_act(M)
