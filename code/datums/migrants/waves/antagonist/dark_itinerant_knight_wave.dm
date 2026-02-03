@@ -47,7 +47,7 @@
 /datum/outfit/dark_itinerant_knight
 	name = "Zizo Knight"
 	head = /obj/item/clothing/head/helmet/heavy/zizo
-	face = /obj/item/clothing/face/shepherd/shadowmask
+	mask = /obj/item/clothing/face/shepherd/shadowmask
 	gloves = /obj/item/clothing/gloves/plate/zizo
 	pants = /obj/item/clothing/pants/platelegs/zizo
 	shirt = /obj/item/clothing/shirt/shadowshirt
