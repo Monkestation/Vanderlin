@@ -83,7 +83,7 @@
 	blade_class = BCLASS_PICK
 	attack_verb = list("picks", "impales")
 	animname = "stab"
-	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
+	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	clickcd = 20
 	misscost = 8
 	penfactor = 80
