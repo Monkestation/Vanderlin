@@ -34,5 +34,5 @@
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle4"
 
-/obj/item/trash/attack(mob/M, mob/living/user)
+/obj/item/trash/attack(mob/M, mob/living/user, list/modifiers)
 	return

@@ -48,7 +48,7 @@
 	flying_ref = null
 	return ..()
 
-/obj/effect/flyer_shadow/attackby(obj/item/I, mob/user, params)
+/obj/effect/flyer_shadow/attackby(obj/item/I, mob/user, list/modifiers)
 	var/mob/living/flying_mob = flying_ref.resolve()
 	if(QDELETED(flying_mob))
 		return

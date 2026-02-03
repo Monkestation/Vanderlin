@@ -193,7 +193,7 @@
 	update_appearance()
 
 // BANDAGING
-/obj/item/natural/cloth/attack(mob/living/M, mob/user)
+/obj/item/natural/cloth/attack(mob/living/M, mob/user, list/modifiers)
 	bandage(M, user)
 
 /obj/item/natural/cloth/proc/bandage(mob/living/M, mob/user)

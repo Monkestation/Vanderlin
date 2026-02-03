@@ -51,7 +51,7 @@
 		if(accessory_overlay)
 			. += accessory_overlay
 
-/obj/item/clothing/pants/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/pants/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!attach_accessory(I, user))
 		return ..()
 

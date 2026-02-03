@@ -67,7 +67,7 @@
 	if(drainage)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
+/obj/item/natural/worms/leech/attack(mob/living/M, mob/user, list/modifiers)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
@@ -216,7 +216,7 @@
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
-/obj/item/natural/worms/leech/parasite/attack_self(mob/user, params)
+/obj/item/natural/worms/leech/parasite/attack_self(mob/user, list/modifiers)
 	. = ..()
 	giving = !giving
 	if(giving)

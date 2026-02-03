@@ -55,7 +55,7 @@
 	var/current_tab = TAB_MAIN
 	var/compact = FALSE
 
-/obj/structure/fake_machine/steward/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/steward/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		record_round_statistic(STATS_MAMMONS_DEPOSITED, I.get_real_price())
 		SStreasury.give_money_treasury(I.get_real_price(), "NERVE MASTER deposit")

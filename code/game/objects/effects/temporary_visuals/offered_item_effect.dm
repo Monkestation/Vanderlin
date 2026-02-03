@@ -44,7 +44,7 @@
 	if(offerer)
 		offerer.stop_offering_item()
 
-/obj/effect/temp_visual/offered_item_effect/attackby(obj/item/I, mob/living/user, params)
+/obj/effect/temp_visual/offered_item_effect/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(I == offered_thing_weak_ref.resolve())
 		user.cancel_offering_item(stealthy)

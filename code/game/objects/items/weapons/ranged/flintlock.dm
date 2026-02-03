@@ -66,7 +66,7 @@
 	wound = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_hand_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -85,7 +85,7 @@
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_self_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(!wheellock)
 		return
@@ -105,7 +105,7 @@
 		wound = TRUE
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/MiddleClick(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -124,7 +124,7 @@
 			playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(!cocked)
 		return
 	if(!rammed)
@@ -170,7 +170,7 @@
 	var/obj/item/ramrod/rrod = new(src)
 	rod = rrod
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attackby(obj/item/I, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attackby(obj/item/I, mob/user, list/modifiers)
 	var/ramtime = 5.5
 	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
 
@@ -250,7 +250,7 @@
 	powdered = TRUE
 	wound = TRUE
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	atom_integrity = 0
 	atom_break()

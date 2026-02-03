@@ -177,7 +177,7 @@
 		user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
 		qdel(src)
 
-/obj/item/bodypart/MiddleClick(mob/living/user, params)
+/obj/item/bodypart/MiddleClick(mob/living/user, list/modifiers)
 	var/obj/item/held_item = user.get_active_held_item()
 	var/datum/species/S = original_owner?.dna?.species
 	if(held_item)
@@ -225,7 +225,7 @@
 			to_chat(user, span_warning("[src] has no meat to eat."))
 	..()
 
-/obj/item/bodypart/attack(mob/living/carbon/C, mob/user)
+/obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		if(HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))
@@ -241,7 +241,7 @@
 				return
 	return ..()
 
-/obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
+/obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
 	if(length(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
 		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)

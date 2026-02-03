@@ -69,7 +69,7 @@
 	return ..()
 
 
-/turf/closed/mineral/attackby(obj/item/I, mob/user, params)
+/turf/closed/mineral/attackby(obj/item/I, mob/user, list/modifiers)
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, span_warning("I don't have the dexterity to do this!"))
 		return
@@ -504,7 +504,7 @@
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "bedrock_ice")
 
-/turf/closed/mineral/bedrock/attackby(obj/item/I, mob/user, params)
+/turf/closed/mineral/bedrock/attackby(obj/item/I, mob/user, list/modifiers)
 	to_chat(user, span_warning("This is far too sturdy to be destroyed!"))
 	return FALSE
 

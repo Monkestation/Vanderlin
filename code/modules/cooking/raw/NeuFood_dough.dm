@@ -38,7 +38,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("dough" = 1)
 
-/obj/item/reagent_containers/food/snacks/dough_slice/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/dough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -87,7 +87,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/reagent_containers/food/snacks/butterdough_slice/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/butterdough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -205,7 +205,7 @@
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/breadslice
 	faretype = FARE_POOR
 
-/obj/item/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
 		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
 	if(modified)
@@ -997,7 +997,7 @@
 
 /*	.................   Griddlecake Condiments   ................... */
 
-/obj/item/reagent_containers/food/snacks/griddlecake/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/griddlecake/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
 		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
 	if(modified)

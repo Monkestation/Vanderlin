@@ -14,7 +14,7 @@
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
 
-/obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, proximity)
+/obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/food)
 		return ..()
 
@@ -26,7 +26,7 @@
 		return
 	M.apply_status_effect(/datum/status_effect/buff/oiled)
 
-/obj/item/reagent_containers/food/snacks/fat/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/fat/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	var/obj/item/reagent_containers/glass/R = I
 	if(user.mind)
@@ -370,7 +370,7 @@
 \-------*/
 
 /*	............   Churning butter   ................ */
-/obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
 		long_cooktime = (200 - ((user.get_skill_level(/datum/skill/craft/cooking))*22))
 	if(istype(I, /obj/item/kitchen/spoon))
@@ -458,7 +458,7 @@
 \-------*/
 
 /*	............   Making fresh cheese   ................ */
-/obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
 		long_cooktime = (100 - ((user.get_skill_level(/datum/skill/craft/cooking))*12))
 	if(istype(I, /obj/item/natural/cloth) && (user.used_intent.type == INTENT_USE || user.used_intent.type == INTENT_SOAK))
@@ -485,7 +485,7 @@
 	..()
 
 /*	............   Making cheese wheel   ................ */
-/obj/item/natural/cloth/attackby(obj/item/I, mob/living/user, params)
+/obj/item/natural/cloth/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese))
 		if(isturf(loc)&& (found_table))
@@ -510,7 +510,7 @@
 	grid_height = 32
 	grid_width = 96
 
-/obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
 		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
@@ -534,7 +534,7 @@
 	grid_height = 32
 	grid_width = 96
 
-/obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_two/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_two/attackby(obj/item/I, mob/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
 		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
@@ -558,7 +558,7 @@
 	grid_height = 32
 	grid_width = 96
 
-/obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_three/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_three/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
 		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))

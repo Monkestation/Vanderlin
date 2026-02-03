@@ -28,7 +28,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun/shoot_with_empty_chamber()
 	return
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/blowgun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/revolver/grenadelauncher/blowgun/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(user.usable_hands < 1)
 		return FALSE
 	if(user.client)

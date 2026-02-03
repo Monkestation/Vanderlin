@@ -21,7 +21,7 @@
 /datum/component/liquids_interaction/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_ITEM_AFTERATTACK)
 
-/datum/component/liquids_interaction/proc/AfterAttack(datum/source, atom/victim, mob/caster, proximity_flag, click_parameters)
+/datum/component/liquids_interaction/proc/AfterAttack(datum/source, atom/victim, mob/caster, proximity_flag, list/modifiers)
 	var/turf/turf_target = victim
 
 	if(!isturf(turf_target) || !turf_target.liquids)

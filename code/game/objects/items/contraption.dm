@@ -93,7 +93,7 @@
 	if(!current_charge)
 		addtimer(CALLBACK(src, PROC_REF(battery_collapse), A, user), 5)
 
-/obj/item/contraption/attackby(obj/item/I, mob/user, params)
+/obj/item/contraption/attackby(obj/item/I, mob/user, list/modifiers)
 	var/datum/effect_system/spark_spread/S = new()
 	var/turf/front = get_turf(src)
 	if(istype(I, /obj/item/gear/wood) && special_cog)
@@ -155,7 +155,7 @@
 /obj/item/contraption/proc/play_clock_sound()
 	playsound(src, 'sound/misc/clockloop.ogg', 25, TRUE)
 
-/obj/item/contraption/pre_attack(atom/A, mob/living/user, params)
+/obj/item/contraption/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!current_charge)
 		flick(off_icon, src)
 		to_chat(user, span_info("The contraption beeps! It requires \a [initial(accepted_power_source.name)]!"))
@@ -320,7 +320,7 @@
 /obj/item/contraption/shears/hammer_action(obj/item/I, mob/user)
 	return
 
-/obj/item/contraption/shears/attack(mob/living/amputee, mob/living/user)
+/obj/item/contraption/shears/attack(mob/living/amputee, mob/living/user, list/modifiers)
 	if(!current_charge)
 		return
 
@@ -390,7 +390,7 @@
 	else
 		. += span_notice("All you can make out is a bunch of gibberish.")
 
-/obj/item/contraption/linker/attack_self(mob/user, params)
+/obj/item/contraption/linker/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(user.get_skill_level(/datum/skill/craft/engineering) >= 1)
 		to_chat(user, "You wipe [src] of its stored buffer.")
@@ -460,7 +460,7 @@
 	. = ..()
 	. += span_blue("Right-Click to fold the table.")
 
-/obj/structure/table/wood/folding/attack_hand_secondary(mob/user, params)
+/obj/structure/table/wood/folding/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	user.visible_message(span_notice("[user] folds [src]."), span_notice("You fold [src]."))
 	new /obj/item/folding_table_stored(drop_location())
@@ -482,7 +482,7 @@
 	on = FALSE
 	crossfire = FALSE
 
-/obj/machinery/light/fueled/hearth/mobilestove/MiddleClick(mob/user, params)
+/obj/machinery/light/fueled/hearth/mobilestove/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -524,7 +524,7 @@
 	grid_width = 32
 	grid_height = 64
 
-/obj/item/mobilestove/attack_self(mob/user, params)
+/obj/item/mobilestove/attack_self(mob/user, list/modifiers)
 	..()
 	var/turf/T = get_turf(loc)
 	if(!isfloorturf(T))

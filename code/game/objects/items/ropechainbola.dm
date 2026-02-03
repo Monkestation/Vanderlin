@@ -54,7 +54,7 @@
 			M.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
 	return ..()
 
-/obj/item/rope/attack(mob/living/carbon/C, mob/living/user)
+/obj/item/rope/attack(mob/living/carbon/C, mob/living/user, list/modifiers)
 	if(user.used_intent.type != /datum/intent/tie)
 		..()
 		return
@@ -247,7 +247,7 @@
 			buckled_mob.Knockdown(60)
 	return ..()
 
-/obj/structure/noose/attackby(obj/item/W, mob/user, params)
+/obj/structure/noose/attackby(obj/item/W, mob/user, list/modifiers)
 	if (W.get_sharpness())
 		if(do_after(user, 1 SECONDS, src))
 			new /obj/item/rope(loc)

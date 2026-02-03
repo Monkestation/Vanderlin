@@ -55,7 +55,7 @@
 	. = ..()
 	UnregisterSignal(parent, COMSIG_MOB_ATTACK_RANGED)
 
-/datum/component/ranged_attacks/proc/fire_ranged_attack(mob/living/simple_animal/firer, atom/target, modifiers)
+/datum/component/ranged_attacks/proc/fire_ranged_attack(mob/living/simple_animal/firer, atom/target, list/modifiers)
 	SIGNAL_HANDLER
 	if(!COOLDOWN_FINISHED(src, fire_cooldown))
 		return
@@ -68,7 +68,7 @@
 		addtimer(CALLBACK(src, PROC_REF(async_fire_ranged_attack), firer, target, modifiers), i * burst_intervals)
 
 /// Actually fire the damn thing
-/datum/component/ranged_attacks/proc/async_fire_ranged_attack(mob/living/simple_animal/firer, atom/target, modifiers)
+/datum/component/ranged_attacks/proc/async_fire_ranged_attack(mob/living/simple_animal/firer, atom/target, list/modifiers)
 	firer.face_atom(target)
 	if(projectile_type)
 		firer.fire_projectile(projectile_type, target, projectile_sound)

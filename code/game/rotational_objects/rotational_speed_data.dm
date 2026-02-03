@@ -47,10 +47,8 @@
 	output = null
 	return ..()
 
-/obj/structure/MiddleClick(mob/user, params)
+/obj/structure/MiddleClick(mob/user, list/modifiers)
 	. = ..()
-	if(!user.Adjacent(src))
-		return
 	var/obj/item/contraption/linker/linker = user.get_active_held_item()
 	if(!istype(linker))
 		return
@@ -58,7 +56,6 @@
 	for(var/obj/item/rotation_contraption/item as anything in subtypesof(/obj/item/rotation_contraption))
 		if(type == initial(item.placed_type))
 			start_deconstruct(user, item)
-			return
 
 /obj/structure/proc/start_deconstruct(mob/living/user, obj/item/rotation_contraption/type)
 	user.visible_message(span_notice("[user] starts to disassemble [src]."), span_notice("You start to disassemble [src]."))

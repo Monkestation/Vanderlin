@@ -330,7 +330,7 @@
 	sleepy = 0.75
 	var/item_path = /obj/item/sleepingbag
 
-/obj/structure/bed/sleepingbag/MiddleClick(mob/user, params)
+/obj/structure/bed/sleepingbag/MiddleClick(mob/user, list/modifiers)
 	..()
 	user.visible_message("<span class='notice'>[user] begins rolling up \the [src].</span>")
 	if(do_after(user, 2 SECONDS, target = src))
@@ -356,7 +356,7 @@
 	grid_width = 96
 	var/bed_path = /obj/structure/bed/sleepingbag
 
-/obj/item/sleepingbag/attack_self(mob/user, params)
+/obj/item/sleepingbag/attack_self(mob/user, list/modifiers)
 	..()
 	var/turf/T = get_turf(loc)
 	if(!isfloorturf(T))
@@ -372,9 +372,9 @@
 		new_bedroll.color = color
 		qdel(src)
 
-/obj/item/sleepingbag/MiddleClick(mob/user, params)
+/obj/item/sleepingbag/MiddleClick(mob/user, list/modifiers)
 	. = ..()
-	attack_self(user, params)
+	attack_self(user, modifiers)
 
 /obj/item/sleepingbag/deluxe
 	name = "rolled-up deluxe bedroll"

@@ -865,7 +865,7 @@
 			var/old_height = flipper.grid_height
 			flipper.grid_height = old_width
 			flipper.grid_width = old_height
-			update_hovering(location, control, params)
+			update_hovering(location, control, modifiers)
 			return
 
 	if(world.time <= usr.next_move)
@@ -875,7 +875,7 @@
 	if(master)
 		var/obj/item/I = usr.get_active_held_item()
 		if(I)
-			master.attackby(src, I, usr, params, TRUE)
+			master.attackby(src, I, usr, modifiers, TRUE)
 	return TRUE
 
 /atom/movable/screen/throw_catch
