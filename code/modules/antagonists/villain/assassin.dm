@@ -44,7 +44,7 @@
 
 /mob/living/carbon/human/proc/who_targets() // Verb for the assassin to remember their targets.
 	set name = "Remember Targets"
-	set category = "Assassin"
+	set category = "RoleUnique"
 	if(!mind)
 		return
 	mind.recall_targets(src)

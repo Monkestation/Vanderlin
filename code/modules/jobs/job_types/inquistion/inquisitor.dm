@@ -76,7 +76,7 @@
 
 /mob/living/carbon/human/proc/torture_victim()
 	set name = "Extract Confession"
-	set category = "Inquisition"
+	set category = "RoleUnique"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
@@ -131,7 +131,7 @@
 
 /mob/living/carbon/human/proc/faith_test()
 	set name = "Test Faith"
-	set category = "Inquisition"
+	set category = "RoleUnique"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
@@ -363,7 +363,7 @@
 					if(/datum/antagonist/vampire/lord)
 						held_confession.bad_type = "THE BLOOD-LORD OF VANDERLIN"
 						held_confession.antag = initial(antag_type:name)
-					if(/datum/antagonist/vampire/lesser)
+					if(/datum/antagonist/vampire/lords_spawn)
 						held_confession.bad_type = "AN UNDERLING OF THE BLOOD-LORD"
 						held_confession.antag = initial(antag_type:name)
 					if(/datum/patron/inhumen/graggar)

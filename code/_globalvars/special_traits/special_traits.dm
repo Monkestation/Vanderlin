@@ -1,11 +1,11 @@
-GLOBAL_LIST_INIT(special_traits, build_special_traits())
-
 #define SPECIAL_TRAIT(trait_type) GLOB.special_traits[trait_type]
+
+GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/build_special_traits()
 	. = list()
-	for(var/type in typesof(/datum/special_trait))
-		if(is_abstract(type))
+	for(var/datum/special_trait/type as anything in typesof(/datum/special_trait))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .

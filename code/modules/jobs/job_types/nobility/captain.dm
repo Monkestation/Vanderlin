@@ -40,7 +40,7 @@
 		/datum/skill/combat/swords = 5,
 		/datum/skill/combat/wrestling = 4,
 		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/shields = 4,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/polearms = 2,

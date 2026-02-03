@@ -31,7 +31,7 @@
 		return (!lord_datum.ascended) ? AFFECTED_VLORD : UNAFFECTED
 	if(!vamp_datum && !wolf_datum)
 		return UNAFFECTED
-	if(wolf_datum.transformed || vamp_datum)
+	if(wolf_datum?.transformed || vamp_datum)
 		return AFFECTED
 	return UNAFFECTED
 

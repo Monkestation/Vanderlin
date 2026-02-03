@@ -895,27 +895,6 @@
 		overlay_fullscreen("oxy", /atom/movable/screen/fullscreen/oxy, severity)
 	else
 		clear_fullscreen("oxy")
-/*
-	//Fire and Brute damage overlay (BSSR)
-	var/hurtdamage = getBruteLoss() + getFireLoss() + damageoverlaytemp
-	if(hurtdamage)
-		var/severity = 0
-		switch(hurtdamage)
-			if(5 to 15)
-				severity = 1
-			if(15 to 30)
-				severity = 2
-			if(30 to 45)
-				severity = 3
-			if(45 to 70)
-				severity = 4
-			if(70 to 85)
-				severity = 5
-			if(85 to INFINITY)
-				severity = 6
-		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
-	else
-		clear_fullscreen("brute")*/
 
 	var/hurtdamage = ((get_complex_pain() / (STAEND * 10)) * 100) //what percent out of 100 to max pain
 	if(hurtdamage)
@@ -930,13 +909,13 @@
 				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 			if(60 to 80)
 				severity = 4
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 1)
 			if(80 to 99)
 				severity = 5
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 2)
 			if(99 to INFINITY)
 				severity = 6
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 3)
 		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")

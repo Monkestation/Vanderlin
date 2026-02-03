@@ -129,7 +129,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 /datum/create_wave/New()
 
 	for(var/datum/skill/skill as anything in subtypesof(/datum/skill))
-		if(is_abstract(skill))
+		if(IS_ABSTRACT(skill))
 			continue
 		skills_list += skill
 
@@ -815,7 +815,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			potential_jobs += job
 		for(var/datum/job/migrant as anything in subtypesof(/datum/job/migrant))
-			if(is_abstract(migrant))
+			if(IS_ABSTRACT(migrant))
 				continue
 			potential_jobs += new migrant
 
@@ -2331,132 +2331,69 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 	if(!init_outfit)
 		for(var/obj/item/storage/belt/belt as anything in subtypesof(/obj/item/storage/belt))
-			if(is_abstract(belt))
+			if(IS_ABSTRACT(belt))
 				continue
-			o_belt += belt
-
-		for(var/belts in o_belt)
-			o_belt_options += "<option value='[(belts)]'>[belts]</option>"
+			o_belt_options += "<option value='[belt]'>[belt::name]</option>"
 
 		for(var/obj/item/clothing/gloves/gloves as anything in subtypesof(/obj/item/clothing/gloves))
-			if(is_abstract(gloves))
+			if(IS_ABSTRACT(gloves))
 				continue
-			o_gloves += gloves
-
-		for(var/gloves in o_gloves)
-			var/obj/item/clothing/gloves/gloves_instance = new gloves
-			o_gloves_options += "<option value='[(gloves)]'>[gloves_instance.name]</option>"
-			qdel(gloves_instance)
+			o_gloves_options += "<option value='[gloves]'>[gloves::name]</option>"
 
 		for(var/obj/item/clothing/shoes/shoes as anything in subtypesof(/obj/item/clothing/shoes))
-			if(is_abstract(shoes))
+			if(IS_ABSTRACT(shoes))
 				continue
-			o_shoes += shoes
-
-		for(var/shoes in o_shoes)
-			var/obj/item/clothing/shoes/shoes_instance = new shoes
-			o_shoes_options += "<option value='[(shoes)]'>[shoes_instance.name]</option>"
-			qdel(shoes_instance)
+			o_shoes_options += "<option value='[shoes]'>[shoes::name]</option>"
 
 		for(var/obj/item/clothing/head/head as anything in subtypesof(/obj/item/clothing/head))
-			if(is_abstract(head))
+			if(IS_ABSTRACT(head))
 				continue
-			o_head += head
-
-		for(var/head in o_head)
-			var/obj/item/clothing/head/head_instance = new head
-			o_head_options += "<option value='[(head)]'>[head_instance.name]</option>"
-			qdel(head_instance)
+			o_head_options += "<option value='[head]'>[head::name]</option>"
 
 		for(var/obj/item/clothing/face/face as anything in subtypesof(/obj/item/clothing/face))
-			if(is_abstract(face))
+			if(IS_ABSTRACT(face))
 				continue
-			o_mask += face
-
-		for(var/face in o_mask)
-			var/obj/item/clothing/face/face_instance = new face
-			o_mask_options += "<option value='[(face)]'>[face_instance.name]</option>"
-			qdel(face_instance)
+			o_mask_options += "<option value='[face]'>[face::name]</option>"
 
 		for(var/obj/item/clothing/neck/neck as anything in subtypesof(/obj/item/clothing/neck))
-			if(is_abstract(neck))
+			if(IS_ABSTRACT(neck))
 				continue
-			o_neck += neck
-
-		for(var/neck in o_neck)
-			var/obj/item/clothing/neck/neck_instance = new neck
-			o_neck_options += "<option value='[(neck)]'>[neck_instance.name]</option>"
-			qdel(neck_instance)
+			o_neck_options += "<option value='[neck]'>[neck::name]</option>"
 
 		for(var/obj/item/clothing/wrists/wrists as anything in subtypesof(/obj/item/clothing/wrists))
-			if(is_abstract(wrists))
+			if(IS_ABSTRACT(wrists))
 				continue
-			o_wrists += wrists
+			o_wrists_options += "<option value='[wrists]'>[wrists::name]</option>"
 
-		for(var/wrists in o_wrists)
-			var/obj/item/clothing/wrists/wrists_instance = new wrists
-			o_wrists_options += "<option value='[(wrists)]'>[wrists_instance.name]</option>"
-
-		for(var/type in subtypesof(/obj/item/clothing/shirt) + subtypesof(/obj/item/clothing/armor))
-			if(is_abstract(type))
+		for(var/obj/item/clothing/type as anything in subtypesof(/obj/item/clothing/shirt) + subtypesof(/obj/item/clothing/armor))
+			if(IS_ABSTRACT(type))
 				continue
-			o_shirt += type
-
-		for(var/type in o_shirt)
-			var/obj/item/clothing/item_instance = new type
-			o_shirt_options += "<option value='[(type)]'>[item_instance.name]</option>"
-			qdel(item_instance)
+			o_shirt_options += "<option value='[type]'>[type::name]</option>"
 
 		for(var/obj/item/clothing/pants/pants as anything in subtypesof(/obj/item/clothing/pants))
-			if(is_abstract(pants))
+			if(IS_ABSTRACT(pants))
 				continue
-			o_pants += pants
-
-		for(var/pants in o_pants)
-			var/obj/item/clothing/pants/pants_instance = new pants
-			o_pants_options += "<option value='[(pants)]'>[pants_instance.name]</option>"
-			qdel(pants_instance)
+			o_pants_options += "<option value='[pants]'>[pants::name]</option>"
 
 		for(var/obj/item/clothing/armor/armor as anything in subtypesof(/obj/item/clothing/armor))
-			if(is_abstract(armor))
+			if(IS_ABSTRACT(armor))
 				continue
-			o_armor += armor
-
-		for(var/armor in o_armor)
-			var/obj/item/clothing/armor/armor_instance = new armor
-			o_armor_options += "<option value='[(armor)]'>[armor_instance.name]</option>"
-			qdel(armor_instance)
+			o_armor_options += "<option value='[armor]'>[armor::name]</option>"
 
 		for(var/obj/item/clothing/ring/ring as anything in subtypesof(/obj/item/clothing/ring))
-			if(is_abstract(ring))
+			if(IS_ABSTRACT(ring))
 				continue
-			o_ring += ring
-
-		for(var/ring in o_ring)
-			var/obj/item/clothing/ring/ring_instance = new ring
-			o_ring_options += "<option value='[(ring)]'>[ring_instance.name]</option>"
-			qdel(ring_instance)
+			o_ring_options += "<option value='[ring]'>[ring.name]</option>"
 
 		for(var/obj/item/weapon/scabbard/scabbard as anything in subtypesof(/obj/item/weapon/scabbard))
-			if(is_abstract(scabbard))
+			if(IS_ABSTRACT(scabbard))
 				continue
-			o_scabbards += scabbard
-
-		for(var/scabbard in o_scabbards)
-			var/obj/item/weapon/scabbard/scabbard_instance = new scabbard
-			o_scabbards_options += "<option value='[(scabbard)]'>[scabbard_instance.name]</option>"
-			qdel(scabbard_instance)
-
+			o_scabbards_options += "<option value='[scabbard]'>[scabbard::name]</option>"
 
 		for(var/obj/item/clothing/cloak/cloak as anything in subtypesof(/obj/item/clothing/cloak))
-			if(is_abstract(cloak))
+			if(IS_ABSTRACT(cloak))
 				continue
-			o_cloak += cloak
-
-		for(var/cloak in o_cloak)
-			var/obj/item/clothing/cloak/cloak_instance = new cloak
-			o_cloak_options += "<option value='[(cloak)]'>[cloak_instance.name]</option>"
-			qdel(cloak_instance)
+			o_cloak_options += "<option value='[cloak]'>[cloak::name]</option>"
 
 		var/list/excluded_item_types = list(
 			/obj/item/storage/belt,
@@ -2465,21 +2402,11 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		)
 
 		for(var/obj/item/I as anything in subtypesof(/obj/item))
-			if(is_abstract(I))
+			if(IS_ABSTRACT(I))
 				continue
-			var/skip = FALSE
-			for(var/excluded in excluded_item_types)
-				if(ispath(I, excluded))
-					skip = TRUE
-					break
-			if(skip)
+			if(is_path_in_list(I, excluded_item_types))
 				continue
-			o_items += I
-
-		for(var/i_items in o_items)
-			o_items_options += "<option value='[(i_items)]'>[i_items]</option>"
-
-		init_outfit = TRUE
+			o_items_options += "<option value='[(I)]'>[I::name]</option>"
 
 
 	var/dat = {"

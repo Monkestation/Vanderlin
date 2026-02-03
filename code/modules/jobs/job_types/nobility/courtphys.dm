@@ -11,7 +11,8 @@
 	spawn_positions = 1
 	allowed_races = RACES_PLAYER_NONHERETICAL
 	blacklisted_species = list(SPEC_ID_TRITON, SPEC_ID_HARPY)
-	outfit = /datum/outfit/courtphys
+	outfit = /datum/outfit/courtphys/male
+	outfit_female = /datum/outfit/courtphys/female
 	give_bank_account = 100
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 	spells = list(/datum/action/cooldown/spell/diagnose)
@@ -54,24 +55,30 @@
 		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
 
 /datum/outfit/courtphys
-	name = "Court Physician"
-	shoes = /obj/item/clothing/shoes/shortboots
-	shirt = /obj/item/clothing/shirt/undershirt/fancy
+	name = "Court Physician Base"
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/storage/backpack/satchel/surgbag
-	gloves = /obj/item/clothing/gloves/leather/feld
-	head = /obj/item/clothing/head/courtphysician
 	mask = /obj/item/clothing/face/courtphysician
-	neck = /obj/item/clothing/neck/courtphysician
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/storage/keyring/physician
-	beltr = /obj/item/weapon/mace/cane/courtphysician
-	armor = /obj/item/clothing/shirt/robe/courtphysician
+	beltr = /obj/item/weapon/sword/rapier/caneblade/courtphysician
 	ring = /obj/item/clothing/ring/feldsher_ring
+	scabbards = list(/obj/item/weapon/scabbard/cane/courtphysician)
 
-/datum/outfit/courtphys/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(equipped_human.gender == FEMALE)
-		pants = /obj/item/clothing/pants/skirt/colored/random
-	else
-		pants = /obj/item/clothing/pants/tights/colored/random
+/datum/outfit/courtphys/male
+	name = "Male Court Physician"
+	shoes = /obj/item/clothing/shoes/courtphysician
+	shirt = /obj/item/clothing/shirt/undershirt/courtphysician
+	pants = /obj/item/clothing/pants/trou/courtphysician
+	gloves = /obj/item/clothing/gloves/leather/courtphysician
+	head = /obj/item/clothing/head/courtphysician/male
+	armor = /obj/item/clothing/armor/leather/jacket/courtphysician
+
+/datum/outfit/courtphys/female
+	name = "Female Court Physician"
+	shoes = /obj/item/clothing/shoes/courtphysician/female
+	shirt = /obj/item/clothing/shirt/undershirt/courtphysician/female
+	pants = /obj/item/clothing/pants/skirt/courtphysician
+	gloves = /obj/item/clothing/gloves/leather/courtphysician/female
+	head = /obj/item/clothing/head/courtphysician/female
+	armor = /obj/item/clothing/armor/leather/jacket/courtphysician/female

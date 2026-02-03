@@ -280,7 +280,7 @@
 		return
 	var/list/rituals = list()
 	for(var/datum/ritual/ritual as anything in rituals_pre)
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		if(initial(ritual.is_cultist_ritual) && !(is_zizocultist(user.mind) || is_zizolackey(user.mind))) // some rituals are cultist exclusive
 			continue
