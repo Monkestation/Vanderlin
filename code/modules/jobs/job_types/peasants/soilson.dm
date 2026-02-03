@@ -15,7 +15,7 @@
 	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/farmer
 	give_bank_account = 20
@@ -129,7 +129,7 @@
 	allowed_ages = list(AGE_CHILD)
 	bypass_lastclass = TRUE
 	selection_color = "#553e01"
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/soilchild
 	give_bank_account = 10
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'

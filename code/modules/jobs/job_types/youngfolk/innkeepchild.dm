@@ -12,7 +12,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_CHILD)
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/innkeep_son
 	can_have_apprentices = FALSE

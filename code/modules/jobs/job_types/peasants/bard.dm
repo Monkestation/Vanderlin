@@ -11,7 +11,7 @@
 	total_positions = 4
 	spawn_positions = 4
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/bard
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 	exp_types_granted = list(EXP_TYPE_BARD)

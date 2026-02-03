@@ -1135,24 +1135,7 @@
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "aJK" = (
-/obj/structure/closet/crate/crafted_closet,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/item/clothing/shirt/tunic/colored/black,
-/obj/item/clothing/shirt/tunic/colored/black,
-/obj/item/clothing/pants/loincloth/colored/black,
-/obj/item/clothing/pants/loincloth/colored/black,
-/obj/item/natural/cloth{
-	pixel_x = 8;
-	pixel_y = 12
-	},
-/obj/item/natural/cloth{
-	pixel_x = -6;
-	pixel_y = 10
-	},
-/obj/item/natural/cloth{
-	pixel_y = 3;
-	pixel_x = 5
-	},
 /turf/open/floor/tile/bath,
 /area/under/town/basement)
 "aKa" = (
@@ -3358,6 +3341,7 @@
 /area/indoors/town/keep)
 "cgz" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/tile/checker,
 /area/indoors/town/vault)
 "cgE" = (
@@ -11141,6 +11125,13 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/bath)
+"gQT" = (
+/obj/effect/decal/cleanable/debris/stone{
+	dir = 4
+	},
+/obj/item/restraints/legcuffs/beartrap/armed/camouflage,
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "gQV" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/tile/masonic,
@@ -15971,6 +15962,7 @@
 "jVA" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/closet/crate/chest,
+/obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/tile/checker,
 /area/indoors/town/vault)
 "jVF" = (
@@ -18105,6 +18097,7 @@
 /area/outdoors/town)
 "lkm" = (
 /obj/structure/rack,
+/obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/cobble,
 /area/indoors/town/keep)
 "lks" = (
@@ -20042,12 +20035,6 @@
 /area/indoors/town)
 "mBW" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
 /obj/item/ore/iron,
 /obj/item/ore/iron,
 /turf/open/floor/metal,
@@ -23032,6 +23019,10 @@
 /obj/effect/landmark/start/vagrant,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"onI" = (
+/obj/item/storage/crucible/random,
+/turf/open/floor/metal,
+/area/indoors/town/smithy)
 "onU" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 1
@@ -27559,6 +27550,7 @@
 /obj/structure/closet/crate/chest,
 /obj/item/coin/silver/pile,
 /obj/item/gem,
+/obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/tile/checker,
 /area/indoors/town/vault)
 "rfK" = (
@@ -27870,10 +27862,6 @@
 /area/outdoors/exposed/church)
 "rrL" = (
 /obj/structure/rack,
-/obj/item/storage/crucible/random,
-/obj/item/storage/crucible/random,
-/obj/item/mould/ingot,
-/obj/item/mould/ingot,
 /turf/open/floor/concrete,
 /area/indoors/town/smithy)
 "rrW" = (
@@ -34322,6 +34310,10 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
+"vyU" = (
+/obj/item/mould/ingot,
+/turf/open/floor/metal,
+/area/indoors/town/smithy)
 "vzf" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/open/floor/cobble,
@@ -34545,6 +34537,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/under/town/basement)
+"vGq" = (
+/obj/item/restraints/legcuffs/beartrap/armed/camouflage,
+/turf/open/floor/sand,
+/area/indoors/town/keep)
 "vGr" = (
 /obj/structure/door/red{
 	lockid = "apartment20";
@@ -34624,6 +34620,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains)
+"vIq" = (
+/obj/item/restraints/legcuffs/beartrap/armed/camouflage,
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "vIz" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/sickle,
@@ -35652,6 +35652,7 @@
 /area/under/town/sewer)
 "wrG" = (
 /obj/structure/closet/crate/chest,
+/obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/tile/checker,
 /area/indoors/town/vault)
 "wrQ" = (
@@ -55873,7 +55874,7 @@ sWs
 sWs
 wFO
 jyq
-jDl
+gQT
 sWs
 mVM
 jOo
@@ -58363,7 +58364,7 @@ qJl
 bhA
 mkM
 wnP
-omd
+vyU
 wnr
 bhA
 bhA
@@ -58767,7 +58768,7 @@ qJl
 bhA
 bdd
 omd
-omd
+onI
 hrT
 bhA
 bhA
@@ -93254,7 +93255,7 @@ rjB
 dzC
 dzC
 dzC
-dzC
+vGq
 gsj
 dzC
 dzC
@@ -97883,7 +97884,7 @@ vDS
 ceZ
 dfm
 uIF
-jyq
+vIq
 uIF
 hqJ
 jyq
@@ -99099,7 +99100,7 @@ dVn
 dqz
 jyq
 ceZ
-jyq
+vIq
 jyq
 dqz
 uBv
@@ -100514,7 +100515,7 @@ dqz
 dqz
 rhG
 aJK
-rhG
+lTg
 dqz
 uBv
 uBv

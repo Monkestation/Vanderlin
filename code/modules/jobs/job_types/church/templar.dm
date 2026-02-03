@@ -11,7 +11,7 @@
 	spawn_positions = 2
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_TEMPLAR
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	allowed_patrons = ALL_TEMPLAR_PATRONS
 
 	outfit = /datum/outfit/templar

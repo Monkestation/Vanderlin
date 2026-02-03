@@ -9,7 +9,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/armorsmith
 	display_order = JDO_ARMORER
@@ -99,7 +99,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/weaponsmith
 	display_order = JDO_WSMITH

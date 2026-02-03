@@ -12,7 +12,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/tailor
 	give_bank_account = 25

@@ -10,7 +10,7 @@
 	spawn_positions = 12
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/miner
 	give_bank_account = 6

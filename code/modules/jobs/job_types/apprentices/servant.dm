@@ -91,14 +91,14 @@
 
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/tapster
 	give_bank_account = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/tapster
 
@@ -218,7 +218,7 @@
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = /datum/outfit/gaffer_assistant
 	exp_types_granted = list(EXP_TYPE_MERCENARY)

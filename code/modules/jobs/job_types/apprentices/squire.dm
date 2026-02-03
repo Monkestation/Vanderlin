@@ -20,7 +20,7 @@
 	exp_types_granted = list(EXP_TYPE_GARRISON)
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	allowed_ages = list(AGE_CHILD, AGE_ADULT)
+	allowed_ages = list(AGE_CHILD)
 
 	outfit = /datum/outfit/squire
 

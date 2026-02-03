@@ -11,6 +11,7 @@
 	//having said that I am gate keeping the moment felinids are in the damn game
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL) //AGE_OLD with the ring on? I say unlikely - clown
 	blacklisted_species = list(SPEC_ID_HALFLING)
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	tutorial = "Forced out of your old adventure party, you applied to the Mercenary guild. Eventually becoming \
 	the next Guild Master. Gone are the excitements of your past, today your life is engrossed with two \
@@ -62,7 +63,6 @@
 
 	traits = list(
 		TRAIT_SEEPRICES,
-		TRAIT_BURDEN,
 		TRAIT_STEELHEARTED,
 		TRAIT_OLDPARTY,
 	)
@@ -109,7 +109,4 @@
 
 /datum/outfit/gaffer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	if(!visuals_only)
-		ring = /obj/item/clothing/ring/gold/burden
-	else
-		ring = /obj/item/clothing/ring/gold
+	ring = /obj/item/clothing/ring/gold

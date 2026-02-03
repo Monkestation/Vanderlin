@@ -18,7 +18,7 @@
 	bypass_lastclass = TRUE
 	job_reopens_slots_on_death = FALSE
 
-	allowed_races = RACES_PLAYER_FOREIGNNOBLE
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/prisoner
 	give_bank_account = 173

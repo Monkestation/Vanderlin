@@ -10,7 +10,7 @@
 	spawn_positions = 4
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/carpenter
 	give_bank_account = 8
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'

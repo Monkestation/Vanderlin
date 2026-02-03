@@ -13,7 +13,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_CHILD)
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONHERETICAL
 	allowed_patrons = ALL_TEMPLE_PATRONS
 
 	outfit = /datum/outfit/churchling

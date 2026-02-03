@@ -1,7 +1,7 @@
 /datum/job/advclass/combat/rare/sentinel
 	title = "Sentinel"
 	tutorial = "Your overseers have sent you to this distant land as a scout. Your trusted steed, longbow, and spear will allow you to overcome any challenges on the road ahead."
-	allowed_races = RACES_PLAYER_ELF_ALL
+	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/adventurer/sentinel
 	total_positions = 1
 	roll_chance = 30

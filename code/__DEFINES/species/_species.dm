@@ -88,17 +88,13 @@
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
-	SPEC_ID_HALFLING,\
 	SPEC_ID_DROW,\
 	SPEC_ID_HALF_DROW,\
 	SPEC_ID_TIEFLING,\
-	SPEC_ID_HARPY,\
 	SPEC_ID_RAKSHARI,\
-	SPEC_ID_TRITON,\
-	SPEC_ID_MEDICATOR,\
 	SPEC_ID_KOBOLD,\
-	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_TRITON,\
 )
 
 /// Species not considered discriminated against in Vanderlin. Used for nobility, etc.
@@ -108,7 +104,6 @@
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
-	SPEC_ID_HALFLING,\
 )
 
 /// Species who are nonheretical to the church. Excluded species typically have an inhumen god associated, like Zizo. Used for church/faith roles.
@@ -118,9 +113,6 @@
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
-	SPEC_ID_HALFLING,\
-	SPEC_ID_HARPY,\
-	SPEC_ID_TRITON,\
 )
 
 /// Species who are non-exotic to Vanderlin. These are species from foreign lands with no local pull or uncommon species. Used in miscellaneous cases, when they would not be that role.
@@ -130,7 +122,7 @@
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
-	SPEC_ID_HALFLING,\
+	SPEC_ID_HALF_DROW,\
 )
 
 /// Species that lack lux. Any who have no ties to divinity anymore, whether it be their creation story or otherwise taken from them (Hollow-kin)
@@ -187,13 +179,6 @@
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
-	SPEC_ID_HALFLING,\
-	SPEC_ID_HALF_DROW,\
-	SPEC_ID_TIEFLING,\
-	SPEC_ID_HARPY,\
-	SPEC_ID_RAKSHARI,\
-	SPEC_ID_TRITON,\
-	SPEC_ID_MEDICATOR,\
 )
 
 /// Vanderlin royalty
@@ -228,8 +213,6 @@
 	SPEC_ID_HALF_ELF,\
 	SPEC_ID_DWARF,\
 	SPEC_ID_AASIMAR,\
-	SPEC_ID_MEDICATOR,\
-	SPEC_ID_TRITON,\
 )
 
 /// Foreigner Nobility Species - No Tiefling (you know why) or hollow-kin or medicators (too young to have nobles mayhaps)
@@ -239,14 +222,6 @@
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
-	SPEC_ID_HALFLING,\
-	SPEC_ID_DROW,\
-	SPEC_ID_HALF_DROW,\
-	SPEC_ID_HALF_ORC,\
-	SPEC_ID_HARPY,\
-	SPEC_ID_RAKSHARI,\
-	SPEC_ID_TRITON,\
-	SPEC_ID_KOBOLD,\
 )
 
 /// Nonnative species - Anything not native to Psydonia.

@@ -14,7 +14,7 @@
 	spawn_positions = 4
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 
 	outfit = null
 	outfit_female = null
