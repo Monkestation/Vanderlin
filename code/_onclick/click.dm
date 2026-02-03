@@ -96,6 +96,9 @@
 	if(curplaying)
 		curplaying.on_mouse_up()
 
+	if(next_move > world.time) // in the year 2000...
+		return
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 			ShiftRightClickOn(clicked_atom, modifiers)
@@ -132,9 +135,6 @@
 	if(incapacitated(IGNORE_RESTRAINTS|IGNORE_GRAB))
 		return
 
-	if(next_move > world.time) // in the year 2000...
-		return
-
 	if(!LAZYACCESS(modifiers, CLICK_CATCHER) && clicked_atom.IsObscured())
 		return
 
@@ -161,7 +161,9 @@
 			return
 		held_item.attack_self(src, modifiers)
 		update_inv_hands()
-	else if(LAZYACCESS(modifiers, LEFT_CLICK) && atkswinging == LEFT_CLICK)
+		return
+
+	if(LAZYACCESS(modifiers, LEFT_CLICK) && atkswinging == LEFT_CLICK)
 		if(active_hand_index == 1)
 			used_hand = 1
 			if(next_lmove > world.time)
