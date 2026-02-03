@@ -19,7 +19,7 @@
 	expected_types += /obj/structure/fake_machine/titan
 
 /datum/unit_test/required_map_items/Run()
-	if((SSmapping.config.map_name == "Kalypso") || SSmapping.config.map_name == "Roguetest")
+	if((SSmapping.config.map_name == "Kalypso") || (SSmapping.config.map_name == "Delvertown") || SSmapping.config.map_name == "Roguetest")
 		return
 	setup_expected_types()
 
