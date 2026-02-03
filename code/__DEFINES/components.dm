@@ -108,7 +108,10 @@
 #define COMSIG_MOB_APPLY_DAMGE	"mob_apply_damage"				//from base of /mob/living/proc/apply_damage(): (damage, damagetype, def_zone)
 #define COMSIG_MOB_ITEM_AFTERATTACK "mob_item_afterattack"		//from base of obj/item/afterattack(): (atom/target, mob/user, proximity_flag, click_parameters)
 #define COMSIG_MOB_ITEM_ATTACK_QDELETED "mob_item_attack_qdeleted"	//from base of obj/item/attack_qdeleted(): (atom/target, mob/user, proxiumity_flag, click_parameters)
-#define COMSIG_MOB_ATTACK_RANGED "mob_attack_ranged"			//from base of mob/RangedAttack(): (atom/A, params)
+///from base of mob/RangedAttack(): (atom/A, modifiers)
+#define COMSIG_MOB_ATTACK_RANGED "mob_attack_ranged"
+///from base of mob/ranged_secondary_attack(): (atom/target, modifiers)
+#define COMSIG_MOB_ATTACK_RANGED_SECONDARY "mob_attack_ranged_secondary"
 #define COMSIG_MOB_POSTATTACK_RANGED "mob_postattack_ranged"
 #define COMSIG_MOB_THROW "mob_throw"							//from base of /mob/throw_item(): (atom/target)
 #define COMSIG_MOB_EXAMINATE "mob_examinate"					//from base of /mob/verb/examinate(): (atom/target)

@@ -74,7 +74,7 @@
 	* mob/UnarmedAttack(atom,adjacent) - used here only when adjacent, with no item in hand; in the case of humans, checks gloves
 	* atom/attackby(item,user) - used only when adjacent
 	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
-	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
+	* mob/ranged_attack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
 /mob/proc/ClickOn(atom/clicked_atom, params)
 	if(world.time <= next_click)
@@ -145,11 +145,12 @@
 
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
-		UnarmedAttack(clicked_atom, modifiers = modifiers, source = src)
+		UnarmedAttack(clicked_atom, Adjacent(clicked_atom), modifiers, source = src)
 		return
 
 	if(in_throw_mode)
-		throw_item(clicked_atom)
+		if(throw_item(clicked_atom))
+			changeNext_move(CLICK_CD_THROW)
 		return
 
 	var/obj/item/held_item = get_active_held_item()
@@ -180,85 +181,53 @@
 					changeNext_move(adf, used_hand)
 					return
 
-	// operate three levels deep here (item in backpack in src; item in box in backpack in src, not any deeper)
-	if(!isturf(clicked_atom) && clicked_atom == loc || (clicked_atom in contents) || (clicked_atom.loc in contents) || (clicked_atom.loc && (clicked_atom.loc.loc in contents)))
-		// the above ensures adjacency
-		resolveAdjacentClick(clicked_atom, held_item, modifiers)
-		return
-
-	if(clicked_atom && ismob(clicked_atom) && CanReach(clicked_atom, held_item))
-		resolveAdjacentClick(clicked_atom, held_item, modifiers)
-		return
-
-	if(!loc.AllowClick()) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
-		return
-
-	// Allows you to click on a box's contents, if that box is on the ground, but no deeper than that
-	if(isturf(clicked_atom) || isturf(clicked_atom.loc) || (clicked_atom.loc && (isturf(clicked_atom.loc.loc) || isturf(clicked_atom.loc.loc.loc))))
-		if(CanReach(clicked_atom) || CanReach(clicked_atom, held_item))
-			if(isopenturf(clicked_atom))
-				var/turf/T = clicked_atom
-				if(used_intent.noaa)
-					resolveAdjacentClick(clicked_atom, held_item, modifiers, used_hand)
-					return
-				if(T)
-					var/list/mobs_here = list()
-					for(var/mob/M in T)
-						if(M.invisibility || M == src)
-							continue
-						mobs_here += M
-					if(length(mobs_here))
-						var/mob/target = pick(mobs_here)
-						if(target)
-							if(target.Adjacent(src))
-								resolveAdjacentClick(target, held_item, modifiers, used_hand)
-								atkswinging = null
-								return
-
-					resolveAdjacentClick(T, held_item, modifiers, used_hand)
-					return
-			else
-				resolveAdjacentClick(clicked_atom, held_item, modifiers, used_hand)
-				atkswinging = null
-				return
-		else // non-adjacent click
-			resolveRangedClick(clicked_atom, held_item, modifiers, used_hand)
+	// In direct access, skip CanReach
+	if(clicked_atom in DirectAccess())
+		if(held_item)
+			held_item.melee_attack_chain(src, clicked_atom, modifiers)
+		else
+			if(ismob(clicked_atom))
+				var/adf = used_intent.clickcd
+				if(istype(rmb_intent, /datum/rmb_intent/aimed))
+					adf = round(adf * 1.4)
+				if(istype(rmb_intent, /datum/rmb_intent/swift))
+					adf = round(adf * 0.6)
+				changeNext_move(adf)
+			UnarmedAttack(clicked_atom, TRUE, modifiers)
 			atkswinging = null
-			return
-
-	atkswinging = null
-
-//Branching path for Adjacent clicks with or without items
-//DOES NOT ACTUALLY KNOW IF YOU'RE ADJACENT, DO NOT CALL ON IT'S OWN
-/mob/proc/resolveAdjacentClick(atom/clicked_atom, obj/item/held_item, list/modifiers, used_hand)
-	if(!clicked_atom)
 		return
 
-	if(held_item)
-		held_item.melee_attack_chain(src, clicked_atom, modifiers)
+	// This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
+	if(!loc.AllowClick())
 		return
 
-	if(ismob(clicked_atom))
-		var/adf = used_intent.clickcd
-		if(istype(rmb_intent, /datum/rmb_intent/aimed))
-			adf = round(adf * 1.4)
-		if(istype(rmb_intent, /datum/rmb_intent/swift))
-			adf = round(adf * 0.6)
-		changeNext_move(adf)
-	UnarmedAttack(clicked_atom, 1, modifiers)
-
-//Branching path for Ranged clicks with or without items
-//DOES NOT ACTUALLY KNOW IF YOU'RE RANGED, DO NoT CALL ON IT'S OWN
-/mob/proc/resolveRangedClick(atom/clicked_atom, obj/item/held_item, list/modifiers, used_hand)
-	if(!clicked_atom)
+	// Adjacent or otherwise accessible
+	if(CanReach(clicked_atom, held_item))
+		if(held_item)
+			held_item.melee_attack_chain(src, clicked_atom, modifiers)
+		else
+			if(ismob(clicked_atom))
+				var/adf = used_intent.clickcd
+				if(istype(rmb_intent, /datum/rmb_intent/aimed))
+					adf = round(adf * 1.4)
+				if(istype(rmb_intent, /datum/rmb_intent/swift))
+					adf = round(adf * 0.6)
+				changeNext_move(adf)
+			UnarmedAttack(clicked_atom, TRUE, modifiers)
+		atkswinging = null
 		return
+
+	// Ranged
 	if(LAZYACCESS(modifiers, RIGHT_CLICK) && uses_intents && used_intent.rmb_ranged)
 		used_intent.rmb_ranged(clicked_atom, src) //get the message from the intent
-		return
-	if(held_item)
+	else if(held_item)
 		held_item.afterattack(clicked_atom, src, 0, modifiers) // 0: not Adjacent
+	else if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		ranged_secondary_attack(clicked_atom, modifiers)
 	else
-		RangedAttack(clicked_atom, modifiers)
+		ranged_attack(clicked_atom, modifiers)
+
+	atkswinging = null // refactor this shitty var out
 
 /mob/proc/swingbarcut()
 	client.images -= swingi
@@ -383,8 +352,20 @@
 	for things like ranged glove touches, spitting alien acid/neurotoxin,
 	animals lunging, etc.
 */
-/mob/proc/RangedAttack(atom/clicked_atom, list/modifiers)
+/mob/proc/ranged_attack(atom/clicked_atom, list/modifiers)
 	if(SEND_SIGNAL(src, COMSIG_MOB_ATTACK_RANGED, clicked_atom, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
+
+
+/**
+ * Ranged secondary attack
+ *
+ * If the same conditions are met to trigger RangedAttack but it is
+ * instead initialized via a right click, this will trigger instead.
+ * Useful for mobs that have their abilities mapped to right click.
+ */
+/mob/proc/ranged_secondary_attack(atom/target, modifiers)
+	if(SEND_SIGNAL(src, COMSIG_MOB_ATTACK_RANGED_SECONDARY, target, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
 /**

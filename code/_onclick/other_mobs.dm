@@ -379,7 +379,7 @@
 	return FALSE
 
 
-/mob/living/carbon/human/RangedAttack(atom/A, list/modifiers)
+/mob/living/carbon/human/ranged_attack(atom/A, list/modifiers)
 	. = ..()
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
