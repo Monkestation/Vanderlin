@@ -59,7 +59,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 	ghostize(can_reenter_corpse = FALSE) //False, since we're deleting it currently
 
-	return ..()
+	..()
+	return QDEL_HINT_HARDDEL
 
 /// Assigns a (c)key to this mob.
 /mob/proc/PossessByPlayer(ckey)
