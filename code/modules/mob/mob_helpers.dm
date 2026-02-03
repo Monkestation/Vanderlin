@@ -1000,10 +1000,11 @@
 		used_title = return_our_apprentice_name()
 	else if(job)
 		var/datum/job/job_datum = SSjob.GetJob(job)
-		if(!job_datum)
+		var/datum/job/used_job = job_datum.parent_job ? job_datum.parent_job : job_datum
+		if(!used_job)
 			return job
-		if(steward_check && (job_datum.department_flag == OUTSIDERS))
+		if(steward_check && (used_job.department_flag == OUTSIDERS))
 			return "Visitor"
-		used_title = job_datum.get_informed_title(src, ignore_pronouns)
+		used_title = used_job.get_informed_title(src, ignore_pronouns)
 
 	return used_title
