@@ -7,7 +7,6 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * GLOB.mob_list
  * * GLOB.dead_mob_list
  * * GLOB.alive_mob_list
- * * GLOB.all_clockwork_mobs
  * * GLOB.mob_directory
  *
  * Unsets the focus var
@@ -18,15 +17,19 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * qdels any client colours in place on this mob
  *
+ * Clears any refs to the mob inside its current location
+ *
  * Ghostizes the client attached to this mob
  *
- * Parent call
+ * If our mind still exists, clear its current var to prevent harddels
  *
- * Returns QDEL_HINT_HARDDEL (don't change this)
+ * Parent call
  */
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	if(client)
 		stack_trace("Mob with client has been deleted.")
+	else if(ckey)
+		stack_trace("Mob without client but with associated ckey, [ckey], has been deleted.")
 
 	GLOB.mob_list -= src
 	GLOB.dead_mob_list -= src
