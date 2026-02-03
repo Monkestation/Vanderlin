@@ -230,8 +230,9 @@
 /obj/structure/window/atom_break(damage_flag, silent)
 	if(!obj_broken)
 		attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
-		new /obj/item/natural/glass/shard (get_turf(src))
 		climbable = TRUE
+		if(prob(10))
+			new /obj/item/natural/glass/shard (get_turf(src))
 	..()
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)

@@ -169,7 +169,7 @@
 	. = ..()
 	if(!(flags_1 & NODECONSTRUCT_1))
 		icon_state = "[icon_state]1"
-		if(!mapload)
+		if(!mapload && prob(10))
 			new /obj/item/natural/glass/shard (get_turf(src))
 
 /obj/structure/mirror/atom_fix()
