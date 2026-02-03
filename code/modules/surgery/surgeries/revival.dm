@@ -15,18 +15,24 @@
 	skill_min = SKILL_LEVEL_EXPERT
 	skill_median = SKILL_LEVEL_MASTER
 
-/datum/surgery/revival/can_start(mob/user, mob/living/patient)
+/datum/surgery/revival/can_start(mob/user, mob/living/patient, obj/item/tool, feedback = TRUE)
 	. = ..()
 	if(!.)
 		return
 
 	if(target.stat != DEAD)
+		if(feedback)
+			patient.balloon_alert(user, "patient is still alive")
 		return FALSE
 
 	if(patient.mob_biotypes & MOB_UNDEAD)
+		if(feedback)
+			patient.balloon_alert(user, "patient defies death")
 		return FALSE
 
 	if(HAS_TRAIT(patient, TRAIT_NECRA_CURSE))
+		if(feedback)
+			patient.balloon_alert(user, "paitent's soul is trapped")
 		return FALSE
 
 /datum/surgery_step/infuse_lux

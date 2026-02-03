@@ -1,27 +1,21 @@
 /datum/surgery/fix_bone
 	name = "Bone fixing"
 
-	possible_locs = list(
-		BODY_ZONE_PRECISE_SKULL,
-		BODY_ZONE_HEAD,
-		BODY_ZONE_CHEST,
-		BODY_ZONE_PRECISE_GROIN,
-		BODY_ZONE_R_ARM,
-		BODY_ZONE_PRECISE_R_HAND,
-		BODY_ZONE_L_ARM,
-		BODY_ZONE_PRECISE_L_HAND,
-		BODY_ZONE_R_LEG,
-		BODY_ZONE_PRECISE_R_FOOT,
-		BODY_ZONE_L_LEG,
-		BODY_ZONE_PRECISE_L_FOOT,
-	)
-
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/set_bone,
 		/datum/surgery_step/cauterize,
+	)
+
+	possible_locs = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_LEG,
+		BODY_ZONE_L_LEG,
 	)
 
 	skill_min = SKILL_LEVEL_APPRENTICE

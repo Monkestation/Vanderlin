@@ -9,7 +9,14 @@
 		/datum/surgery_step/cauterize,
 	)
 
-	possible_locs = list(BODY_ZONE_CHEST)
+	possible_locs = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_LEG,
+		BODY_ZONE_L_LEG,
+	)
 
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN

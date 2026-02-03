@@ -8,17 +8,25 @@
 		/datum/surgery_step/remove_object,
 	)
 
+	possible_locs = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_LEG,
+		BODY_ZONE_L_LEG,
+	)
+
 	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_NOVICE
 
-/datum/surgery/embedded_removal/can_start(mob/user, mob/living/patient, target_zone)
+/datum/surgery/embedded_removal/can_start(mob/user, mob/living/patient, obj/item/tool, feedback = TRUE)
 	. = ..()
 	if(!.)
 		return
 
 	if(iscarbon(patient))
 		var/mob/living/carbon/carbon_patient = patient
-		var/obj/item/bodypart/part = carbon_patient.get_bodypart(target_zone)
+		var/obj/item/bodypart/part = carbon_patient.get_bodypart(user.zone_selected)
 		return !!length(part.embedded_objects)
 
 	return patient.has_embedded_objects()

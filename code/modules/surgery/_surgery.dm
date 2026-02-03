@@ -20,6 +20,8 @@
 	var/location = BODY_ZONE_CHEST
 	/// Acceptable body zones
 	var/list/possible_locs = list()
+	/// Uses precise locs
+	var/use_precise = FALSE
 	/// Acceptable mob types
 	var/list/target_mobtypes = list(/mob/living/carbon/human)
 	/// Intents that can be used to perform this surgery step
@@ -54,12 +56,16 @@
 	. = ..()
 	if(!surgery_target)
 		return
+
 	target = surgery_target
-	target.surgeries += src
+	LAZYADD(target.surgeries, src)
+
 	if(surgery_location)
 		location = surgery_location
+
 	if(!surgery_bodypart)
 		return
+
 	operated_bodypart = surgery_bodypart
 	if(targetable_wound)
 		operated_wound = operated_bodypart.has_wound(targetable_wound)
@@ -71,21 +77,78 @@
 	if(operated_wound)
 		operated_wound.attached_surgery = null
 		operated_wound = null
+
 	if(target)
-		target.surgeries -= src
+		LAZYREMOVE(target.surgeries, src)
 		if(!QDELING(target))
 			SEND_SIGNAL(target, COMSIG_MOB_SURGERY_FINISHED, type, location, operated_bodypart)
+
 	target = null
 	operated_bodypart = null
 	return ..()
 
-/datum/surgery/proc/can_start(mob/user, mob/living/patient) //FALSE to not show in list
+/datum/surgery/proc/can_start(mob/user, mob/living/patient, obj/item/tool, feedback = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 
 	var/surgery_signal = SEND_SIGNAL(user, COMSIG_SURGERY_STARTING, src, patient)
 	if(surgery_signal & COMPONENT_FORCE_SURGERY)
 		return TRUE
 	if(surgery_signal & COMPONENT_CANCEL_SURGERY)
+		return FALSE
+
+	if(!user.Adjacent(patient))
+		return FALSE
+
+	if(tool.loc != user)
+		return FALSE
+
+	if(IS_IN_INVALID_SURGICAL_POSITION(patient, src))
+		if(feedback)
+			patient.balloon_alert(user, "patient is not lying down!")
+		return FALSE
+
+	if(!is_type_in_list(patient, target_mobtypes))
+		if(feedback)
+			patient.balloon_alert(user, "can't operate on this creature!")
+		return FALSE
+
+	var/selected_zone = user.zone_selected
+
+	if(use_precise && (selected_zone in possible_locs) || !use_precise && (selected_zone in possible_locs))
+		if(feedback)
+			patient.balloon_alert(user, "can't operate there!")
+		return FALSE
+
+	for(var/datum/surgery/surgery in patient.surgeries)
+		if(surgery.location == selected_zone)
+			if(feedback)
+				patient.balloon_alert(user, "already operating there!")
+			return FALSE
+
+	var/obj/item/bodypart/affecting_limb = patient.get_bodypart(check_zone(selected_zone))
+
+	if((surgery_flags & SURGERY_REQUIRE_LIMB) && isnull(affecting_limb))
+		if(feedback)
+			patient.balloon_alert(user, "patient has no [parse_zone(selected_zone)]!")
+		return FALSE
+
+	if(isnull(affecting_limb))
+		if(surgery_flags & SURGERY_REQUIRE_LIMB)
+			if(feedback)
+				patient.balloon_alert(user, "needs a limb!")
+			return FALSE
+	else
+		if(requires_bodypart_type && !(affecting_limb.status & requires_bodypart_type))
+			if(feedback)
+				patient.balloon_alert(user, "not the right type of limb!")
+			return FALSE
+		if(targetable_wound && !affecting_limb.has_wound(targetable_wound))
+			if(feedback)
+				patient.balloon_alert(user, "no wound to operate on!")
+			return FALSE
+
+	if(!(surgery_flags & SURGERY_IGNORE_CLOTHES) && !get_location_accessible(patient, user.zone_selected))
+		patient.balloon_alert(user, "expose [patient.p_their()] [parse_zone(selected_zone)]!")
 		return FALSE
 
 	return TRUE
@@ -106,7 +169,9 @@
 	else if(!target.stat == DEAD && user.get_skill_level(skill_used) < skill_min)
 		try_to_fail = TRUE // If you don't have the skill it will fail always
 
-	var/datum/surgery_step/surgery_step = GLOB.surgery_steps[steps[status]]
+
+	var/surgery_type = steps[status]
+	var/datum/surgery_step/surgery_step = new surgery_type()
 	if(isnull(surgery_step))
 		return FALSE
 

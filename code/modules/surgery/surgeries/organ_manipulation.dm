@@ -10,7 +10,7 @@
 		/datum/surgery_step/cauterize,
 	)
 
-	possible_locs = list(BODY_ZONE_PRECISE_SKULL, BODY_ZONE_CHEST)
+	possible_locs = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
 
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_EXPERT
@@ -32,6 +32,7 @@
 		BODY_ZONE_PRECISE_STOMACH,
 		BODY_ZONE_PRECISE_GROIN,
 	)
+	use_precise = TRUE
 
 /datum/surgery_step/manipulate_organs
 	name = "Manipulate organs"

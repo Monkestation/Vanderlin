@@ -9,6 +9,7 @@
 	throwforce = DAMAGE_DAGGER
 	wdefense = GOOD_PARRY
 	wbalance = HARD_TO_DODGE
+	item_flags = parent_type::item_flags | SURGICAL_TOOL
 
 	gripsprite = FALSE
 	wlength = WLENGTH_SHORT
@@ -28,10 +29,6 @@
 
 	grid_width = 32
 	grid_height = 64
-
-/obj/item/weapon/surgery/Initialize()
-	. = ..()
-	item_flags |= SURGICAL_TOOL //let's not stab patients for fun
 
 /obj/item/weapon/surgery/scalpel
 	name = "scalpel"

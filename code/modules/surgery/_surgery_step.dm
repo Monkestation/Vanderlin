@@ -240,8 +240,8 @@
 
 	if(implements)
 		var/implement_type = tool_check(user, implement)
-		if(implement_type)
-			success_prob *= (implements[implement_type] / 100) || 1
+		if(implement_type && (implement_type in implements))
+			success_prob *= (implements[implement_type] / 100)
 
 	return success_prob
 
@@ -279,7 +279,30 @@
 	return modifier
 
 /datum/surgery_step/proc/tool_check(mob/user, obj/item/tool)
-	return TRUE
+	var/implement_type = null
+	if(!tool)
+		if(!accept_hand)
+			return null
+		return TOOL_HAND
+
+	for(var/thing in implements)
+		if(ispath(thing) && ispath(tool, thing))
+			implement_type = thing
+			break
+		if(tool.tool_behaviour == thing)
+			implement_type = thing
+			break
+		if(thing == TOOL_SHARP && tool.get_sharpness())
+			implement_type = thing
+			break
+		else if(thing == TOOL_HOT && tool.get_temperature() >= 100 + T0C)
+			implement_type = thing
+			break
+
+	if(!implement_type && accept_any_item)
+		implement_type = TOOL_NONE
+
+	return implement_type
 
 /datum/surgery_step/proc/chem_check(mob/living/target)
 	if(!length(chems_needed))

@@ -15,16 +15,6 @@
 		GLOB.species_list[S.name] = spath
 	sortTim(GLOB.species_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
-	//Surgery steps
-	for(var/path in subtypesof(/datum/surgery_step))
-		GLOB.surgery_steps += new path()
-	sortTim(GLOB.surgery_steps, GLOBAL_PROC_REF(cmp_typepaths_asc))
-
-	//Surgeries
-	for(var/path in subtypesof(/datum/surgery))
-		GLOB.surgeries_list += new path()
-	sortTim(GLOB.surgeries_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
-
 	// Keybindings
 	init_keybindings()
 

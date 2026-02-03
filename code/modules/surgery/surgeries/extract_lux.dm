@@ -16,18 +16,24 @@
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_EXPERT
 
-/datum/surgery/extract_lux/can_start(mob/user, mob/living/patient)
+/datum/surgery/extract_lux/can_start(mob/user, mob/living/patient, obj/item/tool, feedback = TRUE)
 	. = ..()
 	if(!.)
 		return FALSE
 
 	if(patient.stat == DEAD)
+		if(feedback)
+			patient.balloon_alert(user, "patient is dead")
 		return FALSE
 
 	if(patient.get_lux_status() != LUX_HAS_LUX)
+		if(feedback)
+			patient.balloon_alert(user, "patient has no lux")
 		return FALSE
 
 	if(!patient.getorganslot(ORGAN_SLOT_HEART))
+		if(feedback)
+			patient.balloon_alert(user, "paint has no heart")
 		return FALSE
 
 /datum/surgery_step/extract_lux

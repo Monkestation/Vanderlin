@@ -83,12 +83,47 @@
 	return act_result
 
 /mob/living/item_interaction(mob/living/user, obj/item/tool, list/modifiers, is_right_clicking)
-	for(var/datum/surgery/operation as anything in surgeries)
-		if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
-			continue
-		if(!(operation.surgery_flags & SURGERY_SELF_OPERABLE) && (user == src))
-			continue
-		if(operation.next_step(user, modifiers))
+	// I'm not too fond of this but we don't have drapes
+	if(length(surgeries))
+		for(var/datum/surgery/operation as anything in surgeries)
+			if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
+				continue
+			if(!(operation.surgery_flags & SURGERY_SELF_OPERABLE) && (user == src))
+				continue
+			if(operation.next_step(user, modifiers))
+				return ITEM_INTERACT_SUCCESS
+	else if(!user.cmode && istype(user.rmb_intent, /datum/rmb_intent/weak))
+		var/list/available_surgeries = list()
+		for(var/datum/surgery/operation as anything in GLOB.surgeries_list)
+			if(!operation.can_start(user, src, tool, feedback = FALSE))
+				continue
+
+			available_surgeries += operation
+
+		var/surgeries = length(available_surgeries)
+		if(surgeries)
+			var/datum/surgery/surgery
+			if(surgeries > 1)
+				surgery = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
+			else
+				surgery = available_surgeries[1]
+
+			if(!surgery || QDELETED(src) || QDELETED(user))
+				return ITEM_INTERACT_BLOCKING
+
+			if(!surgery.can_start(user, src, tool))
+				return ITEM_INTERACT_BLOCKING
+
+			var/selected_zone = user.zone_selected
+
+			var/obj/item/bodypart/affecting = get_bodypart(check_zone(selected_zone))
+
+			var/datum/surgery/procedure = new surgery.type(src, selected_zone, affecting)
+
+			balloon_alert(user, "starting \"[LOWER_TEXT(procedure.name)]\"")
+
+			procedure.next_step(user, modifiers)
+
 			return ITEM_INTERACT_SUCCESS
 
 	return ..()
