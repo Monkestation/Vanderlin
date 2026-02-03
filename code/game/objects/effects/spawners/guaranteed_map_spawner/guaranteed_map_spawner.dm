@@ -47,7 +47,7 @@
 /obj/effect/spawner/guaranteed_map_spawner/listed/parse_items()
 	if(!islist(spawned))
 		spawned = list(spawned)
-	for(var/i in 1 to spawned.len)
+	for(var/i in 1 to length(spawned))
 		var/atom/movable/typepath_to_spawn = spawned[i]
 		for(var/j in 1 to spawned[typepath_to_spawn])
 			spawn_item(typepath_to_spawn)

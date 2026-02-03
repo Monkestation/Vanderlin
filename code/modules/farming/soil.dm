@@ -71,6 +71,10 @@
 	var/quality_points = 0
 	///accellerated_growth
 	var/accellerated_growth = 0
+	/// Soil overlay icon state
+	var/tilled_overlay = "soil-tilled"
+	/// Water overlay icon state
+	var/water_overlay = "soil-overlay"
 
 	///the overlays we are adding to mobs
 	var/list/vanished
@@ -118,6 +122,7 @@
 		record_round_statistic(STATS_PLANTS_HARVESTED)
 	to_chat(user, span_notice(feedback))
 	yield_produce(modifier)
+	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
 /obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
@@ -242,12 +247,14 @@
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
 			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
 		add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
 
@@ -361,7 +368,7 @@
 	if(plant && plant_dead)
 		plant_dead = FALSE
 		plant_health = 10.0
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 
 	// Dendor provides balanced nutrients if low
 	if(nitrogen < 30)
@@ -378,7 +385,7 @@
 	// And it grows a little!
 	if(plant)
 		if(add_growth(2 MINUTES))
-			update_icon()
+			update_appearance(UPDATE_OVERLAYS)
 
 /// adjust water
 /obj/structure/soil/proc/adjust_water(adjust_amount)
@@ -450,30 +457,30 @@
 /obj/structure/soil/update_overlays()
 	. = ..()
 	if(tilled_time > 0)
-		. += "soil-tilled"
+		. += tilled_overlay
 	. += get_water_overlay()
 	. += get_nutri_overlay()
 	if(plant)
 		. += get_plant_overlay()
 	if(weeds >= MAX_PLANT_WEEDS * 0.6)
-		. += "weeds-2"
+		. += "weeds2"
 	else if (weeds >= MAX_PLANT_WEEDS * 0.3)
-		. += "weeds-1"
+		. += "weeds1"
 
 /obj/structure/soil/proc/get_water_overlay()
 	return mutable_appearance(
-		icon,\
-		"soil-overlay",\
-		color = "#000033",\
-		alpha = (100 * (water / MAX_PLANT_WATER)),\
+		icon,
+		water_overlay,
+		color = "#000033",
+		alpha = (100 * (water / MAX_PLANT_WATER)),
 	)
 
 /obj/structure/soil/proc/get_nutri_overlay()
 	return mutable_appearance(
-		icon,\
-		"soil-overlay",\
-		color = "#6d3a00",\
-		alpha = (50 * (get_total_npk() / MAX_PLANT_NUTRITION)),\
+		icon,
+		tilled_overlay,
+		color = "#6d3a00",
+		alpha = (50 * (get_total_npk() / MAX_PLANT_NUTRITION)),
 	)
 
 /obj/structure/soil/proc/get_plant_overlay()
@@ -517,7 +524,7 @@
 		if(matured)
 			. += span_info("It's fully grown but perhaps not yet ripe.")
 		else
-			. += span_info("It´s far from fully grown.")
+			. += span_info("It's far from fully grown.")
 		if(produce_ready)
 			. += span_info("It's ready for harvest.")
 	// Water feedback
@@ -648,14 +655,14 @@
 
 	// Calculate max quality points based on total potential time
 	// Base time + production time + reasonable harvest window
-	var/total_potential_time = plant.maturation_time + plant.produce_time
+	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
 
 	var/progress_ratio = quality_points / max_quality_points
 	var/diminishing_returns = 1 - (progress_ratio * 0.8)  // Slightly reduced diminishing returns
 
 	// Accumulate quality points
-	quality_points += dt * quality_rate * 0.26 * phase_multiplier * diminishing_returns
+	quality_points += (dt / 10) * quality_rate * 0.26 * phase_multiplier * diminishing_returns
 	quality_points = min(quality_points, max_quality_points)
 
 	// Quality tier thresholds
@@ -885,6 +892,10 @@
 	if(plant_health <= MAX_PLANT_HEALTH * 0.3)
 		growth_multiplier *= 0.75
 
+	// Mushrooms are more efficient in the mushroom mound
+	if(istype(src, /obj/structure/soil/mushmound) && plant.mound_growth)
+		growth_multiplier *= 1.2
+		nutriment_eat_multiplier *= 0.8
 	var/target_growth_time = growth_multiplier * dt
 	return process_npk_growth(target_growth_time, nutriment_eat_multiplier, dt)
 
@@ -1209,7 +1220,7 @@
 	var/obj/item/neuFarm/seed/seed_to_grow
 
 /obj/structure/soil/debug_soil/random/Initialize()
-	seed_to_grow = pick(subtypesof(/obj/item/neuFarm/seed) - /obj/item/neuFarm/seed/mixed_seed)
+	seed_to_grow = pick(subtypesof(/obj/item/neuFarm/seed) - /obj/item/neuFarm/seed/mixed_seed - /obj/item/neuFarm/seed/spore)
 	. = ..()
 
 /obj/structure/soil/debug_soil/Initialize()
@@ -1225,6 +1236,42 @@
 	insert_plant(GLOB.plant_defs[initial(seed_to_grow.plant_def_type)], debug_seed_genetics)
 	add_growth(plant.maturation_time)
 	add_growth(plant.produce_time)
+
+/*	..................   Mushroom Mound   ................... */
+/obj/structure/soil/mushmound
+	name = "mushroom mound"
+	desc = "A mound made of chaff and nitesoil. A suitable place to grow mushrooms and not much else."
+	icon_state = "mushmound"
+	anchored = TRUE
+	climbable = FALSE
+	climb_offset = 10
+	max_integrity = 100
+	resistance_flags = NONE
+	debris = list(/obj/item/natural/poo = 1)
+	attacked_sound = "plantcross"
+	tilled_overlay = "mushmound-tilled"
+	water_overlay = "mushmound-overlay"
+
+/obj/structure/soil/mushmound/debug_mushmound
+	var/obj/item/neuFarm/seed/seed_to_grow
+
+/obj/structure/soil/mushmound/debug_mushmound/Initialize()
+	. = ..()
+	if(!seed_to_grow)
+		return
+	var/debug_seed_genetics = initial(seed_to_grow.seed_genetics)
+	if(!debug_seed_genetics)
+		var/datum/plant_def/plant_def_instance = GLOB.plant_defs[initial(seed_to_grow.plant_def_type)]
+		debug_seed_genetics = new /datum/plant_genetics(plant_def_instance)
+	else
+		debug_seed_genetics = new debug_seed_genetics()
+	insert_plant(GLOB.plant_defs[initial(seed_to_grow.plant_def_type)], debug_seed_genetics)
+	add_growth(plant.maturation_time)
+	add_growth(plant.produce_time)
+
+/obj/structure/soil/mushmound/debug_mushmound/random/Initialize()
+	seed_to_grow = pick(subtypesof(/obj/item/neuFarm/seed/spore))
+	. = ..()
 
 #undef MAX_PLANT_HEALTH
 #undef MAX_PLANT_NUTRITION

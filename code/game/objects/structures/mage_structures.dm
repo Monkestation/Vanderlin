@@ -112,32 +112,19 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 /obj/structure/well/fountain/mana/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_fountain
 
-/obj/structure/well/fountain/mana/onbite(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
-			return
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			if(C.is_mouth_covered())
-				return
-		var/list/waterl
-		if(mana_pool.amount > 50)
-			waterl = list(/datum/reagent/medicine/manapot = 2)
-		else
-			to_chat(user, span_warning("[src] is dry."))
-			return FALSE
-		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		user.visible_message(span_info("[user] starts to drink from [src]."))
-		if(do_after(L, 2.5 SECONDS, target = src))
-			mana_pool.adjust_mana(-50)
-			waterl = list(/datum/reagent/medicine/manapot/weak = 2)
-			var/datum/reagents/reagents = new()
-			reagents.add_reagent_list(waterl)
-			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = INGEST)
-			playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
-		return
-	..()
+/obj/structure/well/fountain/mana/onbite(mob/living/user)
+	if(mana_pool.amount < 50)
+		to_chat(user, span_warning("[src] is dry."))
+		return TRUE
+	. = ..()
+
+/obj/structure/well/fountain/mana/drink_from(mob/living/user)
+	mana_pool.adjust_mana(-50)
+	var/datum/reagents/reagents = new()
+	reagents.add_reagent(/datum/reagent/medicine/manapot/weak, 2)
+	reagents.trans_to(user, reagents.total_volume, transfered_by = user, method = INGEST)
+	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
+
 
 /obj/structure/well/fountain/mana/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/reagent_containers/glass))
@@ -158,7 +145,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 			return
 	if(istype(I, /obj/item/grabbing))
 		if(mana_pool.amount < 500)
-			to_chat(user, "Their is not enough liquid mana to perform a baptism.")
+			to_chat(user, "There is not enough liquid mana to perform a baptism.")
 			return
 		var/atom/movable/grabbed = I:grabbed
 		if(!grabbed.mana_pool)
@@ -189,7 +176,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 		if(initial(fueluse) > 0)
 			if(fueluse > 0)
 				fueluse = max(fueluse - 10, 0)
-			if(fueluse == 0)//It's litterally powered by arcane lava. It's not gonna run out of fuel.
+			if(fueluse == 0)//It's literally powered by arcane lava. It's not gonna run out of fuel.
 				fueluse = 4000
 		update_appearance(UPDATE_ICON_STATE)
 
@@ -242,12 +229,12 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 			to_chat(user, span_notice("I wave a hand through the circle of rocks, and pulse my arcyne magic through it. The leyline activates!"))
 			icon_state = "leylinerupture"
 			name = "active leyline"
-			desc = "An active tear into the leyline. It gives off plenty of energy"
+			desc = "An active tear into the leyline. It gives off plenty of energy."
 			active = TRUE
 		else
 			if(guardian)
 				if(do_after(user, 60))
-					to_chat(user, span_danger("The leyline is abuzz with energy in a feedback from the [guardian]! It lashes out at me!"))
+					to_chat(user, span_danger("The leyline is abuzz with energy in a feedback from \the [guardian]! It lashes out at me!"))
 					user.electrocute_act(10)
 
 			if(prob(60) && (!guardian))
@@ -255,11 +242,11 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 					to_chat(user, span_notice("I reach out towards the active leyline, peering within- and something peers back!"))
 					sleep(2 SECONDS)
 					guardian = new /mob/living/simple_animal/hostile/retaliate/leylinelycan(src.loc, src)
-					src.visible_message(span_danger("[guardian] emerges from the leyline rupture!"))
+					src.visible_message(span_danger("\The [guardian] emerges from the leyline rupture!"))
 
 			else
 				if(do_after(user, 60))
-					to_chat(user, span_notice("I reach out towards the active leyline, and it shatters! A large, usable piece of it drops at your feet."))
+					to_chat(user, span_notice("I reach out towards the active leyline, and it shatters! A large, usable piece of it drops at my feet."))
 					new /obj/item/natural/leyline(user.loc)
 					active = FALSE
 					icon_state = "inactiveleyline"
@@ -296,7 +283,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 	qdel(src)
 
 /obj/structure/voidstoneobelisk/attack_hand(mob/living/carbon/human/user)
-	to_chat(user, span_notice("You reach out to touch the abberant obelisk..."))
+	to_chat(user, span_notice("You reach out to touch the aberrant obelisk..."))
 	if(do_after(user, 3 SECONDS, target = src))
 		user.visible_message(span_danger("[src] comes to life, archaic stone shifting into position!"))
 		sleep(2)

@@ -250,7 +250,7 @@
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	cooked_smell = /datum/pollutant/food/griddlecake
 
-/datum/container_craft/pan/griddlecakeapple
+/datum/container_craft/pan/griddlecakeberry
 	name = "Jacksberry Griddlecake"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry

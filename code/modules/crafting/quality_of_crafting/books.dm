@@ -13,7 +13,7 @@
 	var/current_recipe = null         // Currently viewed recipe
 	var/search_query = ""             // Current search query
 
-/obj/item/recipe_book/New()
+/obj/item/recipe_book/Initialize(mapload)
 	. = ..()
 	// Populate categories from types with custom categories
 	generate_categories()
@@ -23,10 +23,10 @@
 
 	// Gather categories from recipes themselves
 	for(var/atom/path as anything in types)
-		if(is_abstract(path))
+		if(IS_ABSTRACT(path))
 			// Handle abstract types
 			for(var/atom/sub_path as anything in subtypesof(path))
-				if(is_abstract(sub_path))
+				if(IS_ABSTRACT(sub_path))
 					continue
 
 				var/category = get_recipe_category(sub_path)
@@ -124,9 +124,9 @@
 			var/datum/wound/r = temp_recipe
 			category = r.category
 		else if(ispath(path, /datum/chimeric_node))
-			category = "Chimeric Node"
+			category = "Humors"
 		else if(ispath(path, /datum/chimeric_table))
-			category = "Chimeric Dossier"
+			category = "Humor Dossier"
 		else if(ispath(path, /obj/item/reagent_containers/food/snacks/fish))
 			category = "Fish"
 
@@ -330,9 +330,9 @@
 
 	// Add recipes based on current category
 	for(var/atom/path as anything in types)
-		if(is_abstract(path))
+		if(IS_ABSTRACT(path))
 			for(var/atom/sub_path as anything in subtypesof(path))
-				if(is_abstract(sub_path))
+				if(IS_ABSTRACT(sub_path))
 					continue
 				if(ispath(sub_path, /datum/container_craft))
 					var/datum/container_craft/craft = sub_path
@@ -781,6 +781,7 @@
 		/datum/repeatable_crafting_recipe/saltfish,
 		/datum/repeatable_crafting_recipe/raisins,
 		/datum/orderless_slapcraft/food/pie,
+		/datum/orderless_slapcraft/food/tart.
 	)
 
 /obj/item/recipe_book/survival
@@ -811,7 +812,7 @@
 
 /obj/item/recipe_book/underworld
 	name = "The Smuggler’s Guide: A Treatise on Elixirs of the Guild"
-	desc = "Penned by Thorne Ashveil, Thieves Guild's Alchemist, Second Generation."
+	desc = "Penned by Thorne Ashveil, Thieves' Guild's Alchemist, Second Generation."
 	icon_state ="book4_0"
 	base_icon_state = "book4"
 	can_spawn = FALSE
@@ -946,6 +947,7 @@
 		/datum/repeatable_crafting_recipe/bee_treatment/miticide,
 		/datum/repeatable_crafting_recipe/bee_treatment/insecticide,
 		/datum/blueprint_recipe/carpentry/apiary,
+		/datum/repeatable_crafting_recipe/survival/mushmound,
 	)
 
 /obj/item/recipe_book/medical

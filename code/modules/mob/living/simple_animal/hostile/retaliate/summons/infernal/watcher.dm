@@ -4,7 +4,7 @@
 	name = "infernal watcher"
 	icon_state = "watcher"
 	icon_living = "watcher"
-	summon_primer = "You are an infernal watcher, a creature of lava and rock. You have watched over the chaos of the infernal plane long enough that it was been pointless to keep count."
+	summon_primer = "You are an infernal watcher, a creature of lava and rock. You have watched over the chaos of the infernal plane long enough that it has been pointless to keep count."
 	tier = 3
 	icon_dead = "vvd"
 	gender = MALE
@@ -73,7 +73,7 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/infernal/watcher/AttackingTarget(mob/living/passed_target)
-	visible_message(span_danger("[src] emits a burst of flames from it's core!"))
+	visible_message(span_danger("[src] emits a burst of flames from its core!"))
 	for(var/t in RANGE_TURFS(1, src))
 		new /obj/effect/hotspot(t)
 	return ..()

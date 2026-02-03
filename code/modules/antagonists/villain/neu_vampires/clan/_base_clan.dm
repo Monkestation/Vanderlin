@@ -8,7 +8,7 @@ And it also helps for the character set panel
 	var/name = "Caitiff"
 	var/desc = "The clanless. The rabble. Of no importance."
 
-	var/list/clane_covens = list() //coven datums
+	var/list/clan_covens = list() //coven datums
 	var/list/restricted_covens = list()
 	var/list/common_covens = list() //Covens that you don't start with but are easier to purchase like catiff instead of non clan discs
 
@@ -115,8 +115,11 @@ And it also helps for the character set panel
 		setup_vampire_abilities(H)
 		apply_vampire_look(H)
 
+		var/datum/component/vampire_disguise/disguise_comp = H.GetComponent(/datum/component/vampire_disguise)
+		disguise_comp.apply_disguise(H)
+
 		H.playsound_local(get_turf(H), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-		for(var/datum/coven/coven as anything in clane_covens)
+		for(var/datum/coven/coven as anything in clan_covens)
 			H.give_coven(coven)
 	else
 		non_vampire_members |= H
@@ -231,6 +234,7 @@ And it also helps for the character set panel
 	H.AddComponent(/datum/component/sunlight_vulnerability)
 	H.AddComponent(/datum/component/vampire_disguise)
 
+
 /datum/clan/proc/disable_covens(mob/living/carbon/human/vampire)
 	for(var/coven as anything in vampire.covens)
 		var/datum/coven/real_coven = vampire.covens[coven]
@@ -275,7 +279,7 @@ And it also helps for the character set panel
 	if(vampire.clan_position)
 		vampire.clan_position.remove_member()
 
-	for(var/datum/coven/coven as anything in clane_covens)
+	for(var/datum/coven/coven as anything in clan_covens)
 		vampire.remove_coven(coven)
 
 	var/list/spells_to_remove = list(
@@ -381,10 +385,10 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/add_coven_to_clan(datum/coven/new_coven, give_to_all = TRUE)
-	if(new_coven in clane_covens)
+	if(new_coven in clan_covens)
 		return FALSE // Already have this coven
 
-	clane_covens += new_coven
+	clan_covens += new_coven
 
 	if(give_to_all)
 		// Give the coven to all current clan members

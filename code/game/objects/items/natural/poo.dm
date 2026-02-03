@@ -7,6 +7,18 @@
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_TINY
 
+/obj/item/natural/poo/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+	. = ..()
+	if(ishuman(hit_atom))
+		var/mob/living/carbon/human/H = hit_atom
+		playsound(H, 'sound/foley/meatslap.ogg', 100, TRUE)
+		if(HAS_TRAIT(H, TRAIT_STINKY))
+			H.add_stress(/datum/stress_event/poohit_nice)
+		else
+			H.add_stress(/datum/stress_event/poohit)
+		H.adjust_hygiene(-200)
+		qdel(src)
+
 /obj/item/natural/poo/examine(mob/user)
 	. = ..()
 	if(user.get_skill_level(/datum/skill/labor/farming) >= 3)

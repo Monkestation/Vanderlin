@@ -49,7 +49,7 @@
 	s.start()
 	new ash_type(loc)
 	visible_message(span_warning("[src] explodes!"),
-		span_hear("I hear a explosion!"))
+		span_hear("I hear an explosion!"))
 	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	qdel(src)
 
@@ -475,7 +475,7 @@
 
 /obj/item/toy/cards/deck/syndicate
 	name = "cards"
-	desc = "a pack of cards."
+	desc = "A pack of cards."
 	icon_state = "deck_syndicate_full"
 	deckstyle = "syndicate"
 	card_hitsound = 'sound/blank.ogg'

@@ -19,12 +19,6 @@ SUBSYSTEM_DEF(lighting)
 	return ..()
 	#endif
 	if(!initialized)
-		if (CONFIG_GET(flag/starlight))
-			for(var/I in GLOB.sortedAreas)
-				var/area/A = I
-				if (A.dynamic_lighting == DYNAMIC_LIGHTING_IFSTARLIGHT)
-					A.luminosity = 0
-
 		create_all_lighting_objects()
 		initialized = TRUE
 
@@ -96,15 +90,11 @@ SUBSYSTEM_DEF(lighting)
 	..()
 
 /datum/controller/subsystem/lighting/proc/create_all_lighting_objects()
-	for(var/area/A in world)
-		if(!IS_DYNAMIC_LIGHTING(A))
+	for(var/area/dynamic_area in GLOB.areas)
+		if(!IS_DYNAMIC_LIGHTING(dynamic_area))
 			continue
-
-		for(var/turf/T in A)
-
-			if(!IS_DYNAMIC_LIGHTING(T))
+		for(var/turf/contained_turf in dynamic_area.get_turfs_from_all_zlevels())
+			if(!IS_DYNAMIC_LIGHTING(contained_turf))
 				continue
-
-			new/atom/movable/lighting_object(T)
+			new/atom/movable/lighting_object(contained_turf)
 			CHECK_TICK
-		CHECK_TICK

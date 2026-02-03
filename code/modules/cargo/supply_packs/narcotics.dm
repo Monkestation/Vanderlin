@@ -21,7 +21,7 @@
 
 /datum/supply_pack/narcotics/spice
 	name = "Spice"
-	cost = 25
+	cost = 20
 	contains = /obj/item/reagent_containers/powder/spice
 
 /datum/supply_pack/narcotics/ozium
@@ -31,12 +31,12 @@
 
 /datum/supply_pack/narcotics/moondust
 	name = "Moon Dust"
-	cost = 25
+	cost = 30
 	contains = /obj/item/reagent_containers/powder/moondust
 
 /datum/supply_pack/narcotics/soap
 	name = "Herbal Soap"
-	cost = 20
+	cost = 10
 	contains = /obj/item/soap/bath
 
 /datum/supply_pack/narcotics/perfume

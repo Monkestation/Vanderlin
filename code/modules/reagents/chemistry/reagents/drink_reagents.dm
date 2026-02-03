@@ -32,13 +32,13 @@
 	glass_desc = ""
 
 /datum/reagent/consumable/coffee/overdose_process(mob/living/M)
-	M.Jitter(5)
+	M.adjust_jitter(5 SECONDS)
 	..()
 
 /datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M)
-	M.dizziness = max(0,M.dizziness-5)
-	M.drowsyness = max(0,M.drowsyness-3)
-	M.AdjustSleeping(-40)
+	M.adjust_drowsiness(-10 SECONDS)
+	M.adjust_drowsiness(-6 SECONDS)
+	M.AdjustSleeping(-4 SECONDS)
 	M.adjust_bodytemperature(2, 0, BODYTEMP_NORMAL)
 	..()
 	. = 1
@@ -102,7 +102,7 @@
 
 /datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M)
 	. = ..()
-	M.Jitter(2)
+	M.adjust_jitter(4 SECONDS)
 	if(prob(5))
 		M.heart_attack()
 

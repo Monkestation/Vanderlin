@@ -18,7 +18,6 @@ SUBSYSTEM_DEF(fake_world)
 	for(var/obj/structure/closet/fake_world/closet in fake_world_constructs)
 		closet.icon = 'icons/roguetown/misc/structure.dmi'
 		closet.icon_state = "closet"
-		closet.update_appearance(UPDATE_ICON_STATE)
 
 	for(var/obj/structure/fake_door/door in fake_world_constructs)
 		door.icon = 'icons/roguetown/misc/doors.dmi'
@@ -49,4 +48,3 @@ SUBSYSTEM_DEF(fake_world)
 	for(var/atom/movable/listed as anything in fake_world_constructs)
 		listed.icon = initial(listed.icon)
 		listed.icon_state = initial(listed.icon_state)
-		listed.update_appearance()

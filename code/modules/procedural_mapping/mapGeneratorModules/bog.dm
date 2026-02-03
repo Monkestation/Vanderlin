@@ -29,11 +29,12 @@
 							/obj/structure/flora/grass/swampweed = 30,
 							/obj/item/grown/log/tree/stick = 3,
 							/obj/structure/flora/grass/maneater/real = 2,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 1,
 							/obj/structure/innocent_bush = 1,
+							/obj/structure/wild_plant/nospread/mushroom/merkel = 0.5,
 							)
 	spawnableTurfs = list(/turf/open/water/swamp = 5)
-	allowed_areas = list(/area/rogue/outdoors/bog)
+	allowed_areas = list(/area/outdoors/bog)
 
 /datum/mapGeneratorModule/bogwater
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -42,4 +43,4 @@
 						/obj/structure/kneestingers = 60)
 	allowed_turfs = list(/turf/open/water/swamp,
 						/turf/open/water/swamp/deep)
-	allowed_areas = list(/area/rogue/outdoors/bog)
+	allowed_areas = list(/area/outdoors/bog)

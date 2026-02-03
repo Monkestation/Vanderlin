@@ -18,7 +18,7 @@
 	item_duration = 0
 
 /datum/action/cooldown/spell/undirected/conjure_item/summon_trident/miracle
-	name = "Summon Trident"
+	name = "Summon Abyssal Trident"
 	desc = "Summon a trident from Abyssor's domain."
 	button_icon_state = "lightning"
 	sound = 'sound/foley/jumpland/waterland.ogg'
@@ -46,26 +46,25 @@
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_SPEAR+2
+	force_wielded = DAMAGE_SPEAR + 2
 	throwforce = DAMAGE_SPEAR_WIELD
+	wdefense = GREAT_PARRY
+	wlength = WLENGTH_GREAT
 	possible_item_intents = list(SPEAR_THRUST, ROD_AUTO, ROD_CAST)
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, POLEARM_BASH)
+	max_blade_int = 50
+	max_integrity = INTEGRITY_WORST / 2 // not meant for long-term combat
+	minstr = 7
+
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	bigboy = TRUE
 	gripsprite = TRUE
-
 	sharpness = IS_SHARP
-	wlength = WLENGTH_GREAT
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
-	wdefense = GREAT_PARRY
 	blade_dulling = DULLING_BASHCHOP
-
-	max_blade_int = 50
-	max_integrity = INTEGRITY_WORST/2 // not meant for long-term combat
-	minstr = 7
 	dropshrink = 0.9
 	thrown_bclass = BCLASS_STAB
 
@@ -87,7 +86,7 @@
 	hook = new /obj/item/fishing/hook/abytrident(src)
 	line = new /obj/item/fishing/line/no_line(src)
 	baited = new /obj/item/fishing/lure/no_bait(src)
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/fishingrod/abyssor_trident/examine(mob/user)
 	. = ..()
@@ -143,7 +142,7 @@
 
 /obj/item/fishing/lure/no_bait/is_catchable_fish(obj/item/reagent_containers/food/snacks/fish/fish, list/fish_properties)
 	// Scares off tiny and small fish
-	if(fish.size <= FISH_SIZE_SMALL_MAX)
+	if(fish.size <= fish.average_size * 1.1)
 		return FALSE
 
 	// Catches carps, eels, shrimp, anglerfish, and clownfish

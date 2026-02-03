@@ -1,36 +1,36 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "c" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/fluff/walldeco/vinez/l,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "d" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "f" = (
 /obj/item/gem/diamond,
 /obj/structure/fluff/walldeco/vinez/offset,
 /obj/item/weapon/pick/paxe,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "i" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/closed/wall/mineral/decostone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "j" = (
 /obj/structure/fluff/walldeco/vinez/offset,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "k" = (
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "m" = (
 /obj/structure/fluff/walldeco/bigpainting,
 /obj/structure/table/vtable,
@@ -39,19 +39,19 @@
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/weapon/knife/dagger/silver,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "o" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "q" = (
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/decostone/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "t" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "v" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 8
@@ -59,50 +59,50 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "x" = (
 /turf/closed/wall/mineral/decostone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "A" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 4
 	},
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "C" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "D" = (
 /obj/structure/bars/pipe/left,
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "E" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "J" = (
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "K" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "L" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "M" = (
 /turf/closed/wall/mineral/decostone/cand,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "N" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "O" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "P" = (
 /obj/structure/table/vtable/v2,
 /obj/item/reagent_containers/glass/bottle/whitewine,
@@ -110,15 +110,15 @@
 /obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "R" = (
 /turf/open/lava,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "S" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/herringbone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Y" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/effect/landmark/chest_or_mimic,
@@ -126,11 +126,11 @@
 /obj/item/ore/gold,
 /obj/item/clothing/neck/psycross/silver/malum/steel,
 /turf/open/floor/volcanic,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Z" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/closed/wall/mineral/decostone,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 
 (1,1,1) = {"
 C

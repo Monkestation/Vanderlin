@@ -10,59 +10,73 @@
 		SPEC_ID_HUMEN,\
 		SPEC_ID_DWARF,\
 	)
-	allowed_patrons = list(/datum/patron/psydon) //You MUST have a Psydonite character to start. Just so people don't get japed into Oops Suddenly Psydon!
+	//You MUST have a Psydonite character to start. Just so people don't get japed into Oops Suddenly Psydon!
+	allowed_patrons = list(/datum/patron/psydon) // you have to keep the official church stance, no way an extremist psydonite could become inquisitor
 	tutorial = "This is the week. All your lessons have led to this moment. Your students follow you with eager steps and breathless anticipation. You’re to observe their hunt, and see if they can banish the evils haunting Psydonia, and rise up to become true inquisitors. A guide to them, a monster to others. You are the thing that goes bump in the night."
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	selection_color = JCOLOR_INQUISITION
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
-
-	outfit = /datum/outfit/job/inquisitor
+	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/adept)
+	outfit = /datum/outfit/inquisitor
 	display_order = JDO_PURITAN
 	advclass_cat_rolls = list(CTAG_PURITAN = 20)
 	give_bank_account = 30
-	min_pq = 10
 	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
-/datum/outfit/job/inquisitor
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
+	languages = list(/datum/language/oldpsydonic)
+	spells = list(
+		/datum/action/cooldown/spell/undirected/call_bird/inquisitor
+	)
+
+	exp_type = list(EXP_TYPE_INQUISITION)
+	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)
+	exp_requirements = list(
+		EXP_TYPE_INQUISITION = 900
+	)
+
+/datum/outfit/inquisitor
+	abstract_type = /datum/outfit/inquisitor
 	name = "Inquisitor"
 
-/datum/job/inquisitor/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+/datum/job/inquisitor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.grant_language(/datum/language/oldpsydonic)
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-		H.verbs |= /mob/living/carbon/human/proc/faith_test
-		H.verbs |= /mob/living/carbon/human/proc/torture_victim
-		H.verbs |= /mob/living/carbon/human/proc/view_inquisition
 
-		H.hud_used?.shutdown_bloodpool()
-		H.hud_used?.initialize_bloodpool()
-		H.hud_used?.bloodpool.set_fill_color("#dcdddb")
-		H?.hud_used?.bloodpool?.name = "Psydon's Grace: [H.bloodpool]"
-		H?.hud_used?.bloodpool?.desc = "Devotion: [H.bloodpool]/[H.maxbloodpool]"
-		H.maxbloodpool = 1000
-		var/prev_real_name = H.real_name
-		var/prev_name = H.name
-		var/honorary = "Herr Prafekt"
-		if(H.gender == FEMALE)
-			honorary = "Frau Prafekt"
-		H.real_name = "[honorary] [prev_real_name]"
-		H.name = "[honorary] [prev_name]"
+	spawned.verbs |= /mob/living/carbon/human/proc/faith_test
+	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+	spawned.verbs |= /mob/living/carbon/human/proc/view_inquisition
 
-		if(H.dna?.species.id == SPEC_ID_HUMEN)
-			H.dna.species.native_language = "Old Psydonic"
-			H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
+	spawned.hud_used?.shutdown_bloodpool()
+	spawned.hud_used?.initialize_bloodpool()
+	spawned.hud_used?.bloodpool.set_fill_color("#dcdddb")
+	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
+	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
+	spawned.maxbloodpool = 1000
+
+	var/prev_real_name = spawned.real_name
+	var/prev_name = spawned.name
+	var/honorary = "Herr Prafekt"
+	if(spawned.pronouns == SHE_HER)
+		honorary = "Frau Prafekt"
+	spawned.real_name = "[honorary] [prev_real_name]"
+	spawned.name = "[honorary] [prev_name]"
+
+	var/datum/species/species = spawned.dna?.species
+	if(!species)
+		return
+	species.native_language = "Old Psydonic"
+	species.accent_language = species.get_accent(species.native_language)
+
 ////Classic Inquisitor with a much more underground twist. Use listening devices, sneak into places to gather evidence, track down suspicious individuals. Has relatively the same utility stats as Confessor, but fulfills a different niche in terms of their combative job as the head honcho.
 
 ///The dirty, violent side of the Inquisition. Meant for confrontational, conflict-driven situations as opposed to simply sneaking around and asking questions. Templar with none of the miracles, but with all the muscles and more.
 
 /mob/living/carbon/human/proc/torture_victim()
 	set name = "Extract Confession"
-	set category = "Inquisition"
+	set category = "RoleUnique"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
@@ -117,7 +131,7 @@
 
 /mob/living/carbon/human/proc/faith_test()
 	set name = "Test Faith"
-	set category = "Inquisition"
+	set category = "RoleUnique"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
@@ -225,6 +239,10 @@
 		false_confession_chance = 100 - (STAINT + STAEND) // Low willpower = higher chance to falsely confess
 		false_confession_chance = CLAMP(false_confession_chance, 20, 80) // Between 20-80%
 
+	if(HAS_TRAIT(src, TRAIT_TORTURED))
+		false_confession_chance = 0
+		resist_chance = 0
+
 	if(!prob(resist_chance))
 		var/list/confessions = list()
 		var/datum/antag_type = null
@@ -282,11 +300,9 @@
 				if(/datum/faith/psydon)
 					if(ispath(victim_patron.type, /datum/patron/divine) && victim_patron.type != /datum/patron/divine/necra)
 						interrogator.add_stress(/datum/stress_event/torture_small_penalty)
-					else if(victim_patron.type == /datum/patron/psydon/progressive)
-						interrogator.add_stress(/datum/stress_event/torture_small_penalty)
 					else if(victim_patron.type == /datum/patron/godless/naivety)
 						interrogator.add_stress(/datum/stress_event/torture_small_penalty)
-					else if(victim_patron.type == /datum/patron/psydon)
+					else if(istype(victim_patron, /datum/patron/psydon))
 						interrogator.add_stress(/datum/stress_event/torture_large_penalty)
 
 		if(length(confessions))
@@ -347,7 +363,7 @@
 					if(/datum/antagonist/vampire/lord)
 						held_confession.bad_type = "THE BLOOD-LORD OF VANDERLIN"
 						held_confession.antag = initial(antag_type:name)
-					if(/datum/antagonist/vampire/lesser)
+					if(/datum/antagonist/vampire/lords_spawn)
 						held_confession.bad_type = "AN UNDERLING OF THE BLOOD-LORD"
 						held_confession.antag = initial(antag_type:name)
 					if(/datum/patron/inhumen/graggar)
@@ -371,6 +387,9 @@
 					if(/datum/patron/godless/rashan)
 						held_confession.bad_type = "A FOLLOWER OF A FALSE GOD"
 						held_confession.antag = "worshiper of the false god, Rashan-Kahl"
+					if(/datum/patron/godless/galadros)
+						held_confession.bad_type = "A WORSHIPPER OF THE DRACONIC"
+						held_confession.antag = "worshiper of the false god, Galadros"
 					if(/datum/patron/inhumen/baotha)
 						held_confession.bad_type = "A FOLLOWER OF THE REMORSELESS RUINER"
 						held_confession.antag = "worshiper of " + initial(antag_type:name)
@@ -392,3 +411,6 @@
 	to_chat(src, span_good("I resist the torture!"))
 	say(pick(innocent_lines), spans = list("torture"), forced = TRUE)
 	return
+
+/datum/job/advclass/puritan
+	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)

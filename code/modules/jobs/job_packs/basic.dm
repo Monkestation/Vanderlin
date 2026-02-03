@@ -6,7 +6,7 @@
 	)
 
 	pack_contents = list(
-		/obj/item/weapon/sword/long/greatsword/broadsword/psy/relic = ITEM_SLOT_HANDS,
+		/obj/item/weapon/sword/long/broadsword/psy/relic = ITEM_SLOT_HANDS,
 		/obj/item/paper/inqslip/arrival/inq = ITEM_SLOT_HANDS,
 		/obj/item/weapon/shield/tower/metal/psy = ITEM_SLOT_BACK_R,
 		/obj/item/storage/keyring/inquisitor = ITEM_SLOT_BACK_L,

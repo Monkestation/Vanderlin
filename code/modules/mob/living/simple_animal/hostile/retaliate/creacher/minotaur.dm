@@ -68,10 +68,6 @@
 	icon_living = "MinotaurFem_Axe"
 	icon_dead = "MinotaurFem_dead"
 
-/mob/living/simple_animal/hostile/retaliate/minotaur/death(gibbed)
-	..()
-	update_appearance()
-
 /mob/living/simple_animal/hostile/retaliate/minotaur/taunted(mob/user)
 	emote("aggro")
 	return
@@ -89,45 +85,6 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/minotaur/simple_limb_hit(zone)
-	if(!zone)
-		return ""
-	switch(zone)
-		if(BODY_ZONE_PRECISE_R_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_L_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_NOSE)
-			return "nose"
-		if(BODY_ZONE_PRECISE_MOUTH)
-			return "mouth"
-		if(BODY_ZONE_PRECISE_SKULL)
-			return "head"
-		if(BODY_ZONE_PRECISE_EARS)
-			return "head"
-		if(BODY_ZONE_PRECISE_NECK)
-			return "neck"
-		if(BODY_ZONE_PRECISE_L_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_R_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_STOMACH)
-			return "stomach"
-		if(BODY_ZONE_PRECISE_GROIN)
-			return "tail"
-		if(BODY_ZONE_HEAD)
-			return "head"
-		if(BODY_ZONE_R_LEG)
-			return "leg"
-		if(BODY_ZONE_L_LEG)
-			return "leg"
-		if(BODY_ZONE_R_ARM)
-			return "foreleg"
-		if(BODY_ZONE_L_ARM)
-			return "foreleg"
 	return ..()
 
 /datum/intent/simple/minotaur_unarmed
@@ -211,14 +168,14 @@
 	transform = matrix() * 0.5 // Start small
 	animate(src, alpha = 200, color = "#ff5500", transform = matrix(), time = 1 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(activate)), 1.5 SECONDS)
-	playsound(get_turf(src), 'sound/misc/bamf.ogg', 25, TRUE)
+	playsound(src, 'sound/misc/bamf.ogg', 25, TRUE)
 
 /obj/effect/temp_visual/minotaur_fury_zone/proc/activate()
 	active = TRUE
 	color = "#ff0000" // Red active color
 	alpha = 230
 	icon_state = "fire"
-	playsound(get_turf(src), 'sound/misc/bamf.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/bamf.ogg', 50, TRUE)
 
 	START_PROCESSING(SSobj, src)
 
@@ -233,7 +190,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/temp_visual/minotaur_fury_zone/process(delta_time)
+/obj/effect/temp_visual/minotaur_fury_zone/process()
 	if(!active)
 		return
 
@@ -241,7 +198,7 @@
 		if(L.faction.Find("caves"))
 			continue
 
-		L.adjustFireLoss(damage_per_tick * delta_time)
+		L.adjustFireLoss(damage_per_tick)
 
 		if(!warned && prob(50))
 			to_chat(L, "<span class='danger'>The flames sear your flesh!</span>")

@@ -168,10 +168,8 @@
 	. = ..()
 	if(slot & ITEM_SLOT_MOUTH)
 		icon_state = "rosa_mouth"
-		user.update_inv_mouth()
 	else
 		icon_state = "rosa"
-		user.update_appearance()
 
 /obj/item/alch/herb/euphorbia
 	name = "euphorbia"

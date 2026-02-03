@@ -8,7 +8,7 @@
 
 	meat = /obj/item/reagent_containers/food/snacks/meat/strange
 
-	desc = "Medicators originate from the the fetid swamps and murk within the Isle of Enigma. Their species has historically been localized around the area, \
+	desc = "Medicators originate from the fetid swamps and murk within the Isle of Enigma. Their species has historically been localized around the area, \
 	although the Brass Cataclysm of Heartfelt's fall has resulted in droves of their kind seeking refuge elsewhere. They are a newer form of sentience, with records dating back only after Zizo's ascension. \
 	\n\n\
 	Their appearance is gaunt, patches of bare skin riddled with feathers and pox scars, Medicators are a horrifying fusion of bird and men- unlike their far more appealing adversaries, the harpies. \

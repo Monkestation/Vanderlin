@@ -25,7 +25,7 @@
 		if(current_rage > 80)
 			if(prob(15) && current_phase >= 2)
 				new /obj/effect/temp_visual/minotaur_rage(get_turf(boss))
-				playsound(get_turf(boss), 'sound/misc/explode/explosionfar (1).ogg', 25, TRUE)
+				playsound(boss, 'sound/misc/explode/explosionfar (1).ogg', 25, TRUE)
 		else if(current_rage > 50)
 			if(prob(8) && current_phase >= 2)
 				new /obj/effect/temp_visual/minotaur_rage(get_turf(boss))

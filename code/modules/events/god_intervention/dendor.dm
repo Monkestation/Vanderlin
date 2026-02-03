@@ -16,19 +16,16 @@
 /datum/round_event/dendor_vines/start()
 	var/list/turfs = list() //list of all the empty floor turfs in the hallway areas
 
-	var/obj/structure/vine/SV = new()
-
-	for(var/area/rogue/outdoors/town/A as anything in GLOB.areas)
-		for(var/turf/open/F in A)
-			if(F.Enter(SV))
-				if(!istype(F, /turf/open/transparent/openspace))
-					turfs += F
-
-	qdel(SV)
+	for(var/area/outdoors/town/A in GLOB.areas)
+		for(var/turf/open/F as anything in A.get_turfs_from_all_zlevels())
+			if(F.density || isopenspace(F))
+				continue
+			turfs += F
 
 	var/maxi = is_ascendant(DENDOR) ? 25 : 15
-	for(var/i in 1 to rand(5,maxi))
-		if(turfs.len) //Pick a turf to spawn at if we can
+
+	if(length(turfs))
+		for(var/i in 1 to rand(5, maxi))
 			var/turf/T = pick_n_take(turfs)
 			message_admins("VINES at [ADMIN_VERBOSEJMP(T)]")
 			new /datum/vine_controller(T, event = src, potency = 0.1, muts = list(/datum/vine_mutation/thorns, /datum/vine_mutation/woodening)) //spawn a controller at turf
@@ -51,19 +48,16 @@
 /datum/round_event/dendor_vines_good/start()
 	var/list/turfs = list() //list of all the empty floor turfs in the hallway areas
 
-	var/obj/structure/vine/SV = new()
-
-	for(var/area/rogue/outdoors/town/A as anything in GLOB.areas)
-		for(var/turf/open/F in A)
-			if(F.Enter(SV))
-				if(!istype(F, /turf/open/transparent/openspace))
-					turfs += F
-
-	qdel(SV)
+	for(var/area/outdoors/town/A in GLOB.areas)
+		for(var/turf/open/F as anything in A.get_turfs_from_all_zlevels())
+			if(F.density || isopenspace(F))
+				continue
+			turfs += F
 
 	var/maxi = is_ascendant(DENDOR) ? 25 : 15
-	for(var/i in 1 to rand(5,maxi))
-		if(turfs.len) //Pick a turf to spawn at if we can
+
+	if(length(turfs))
+		for(var/i in 1 to rand(5, maxi))
 			var/turf/T = pick_n_take(turfs)
 			message_admins("VINES at [ADMIN_VERBOSEJMP(T)]")
 			new /datum/vine_controller(T, event = src, potency = 0.1, muts = list(/datum/vine_mutation/light, /datum/vine_mutation/healing, /datum/vine_mutation/woodening)) //spawn a controller at turf

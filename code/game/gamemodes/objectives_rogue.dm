@@ -85,7 +85,7 @@
 
 /datum/objective/werewolf/survive
 	name = "survive"
-	explanation_text = "My lycanthropia won't allow me to die, I musn't die."
+	explanation_text = "My lycanthropia won't allow me to die, I mustn't die."
 	triumph_count = 3
 
 /datum/objective/werewolf/survive/check_completion()

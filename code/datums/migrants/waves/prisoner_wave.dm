@@ -1,11 +1,11 @@
 /datum/migrant_role/gaoler
 	name = "Gaoler"
-	greet_text = "The lords of Vanderlins sent you to Heartfelt to rappatriate some prisoners that were in their prison, you are now on your way back."
+	greet_text = "The lords of Vanderlin sent you to Heartfelt to repatriate some prisoners that were in their prison, you are now on your way back."
 	migrant_job = /datum/job/migrant/gaoler
 
 /datum/job/migrant/gaoler
 	title = "Gaoler"
-	tutorial = "The lords of Vanderlins sent you to Heartfelt to rappatriate some prisoners that were in their prison, you are now on your way back."
+	tutorial = "The lords of Vanderlin sent you to Heartfelt to repatriate some prisoners that were in their prison, you are now on your way back."
 	outfit = /datum/outfit/gaoler
 	is_foreigner = FALSE
 	allowed_races = list(
@@ -31,7 +31,7 @@
 
 	skills = list(
 		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 1,
 		/datum/skill/misc/swimming = 1,
@@ -51,13 +51,14 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
 
 /datum/outfit/gaoler
-	name = "Gaoler"
+	name = "Gaoler (Migrant Wave)"
 	head = /obj/item/clothing/head/menacing
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	pants = /obj/item/clothing/pants/trou
-	shoes = /obj/item/clothing/shoes/simpleshoes
+	shoes = /obj/item/clothing/shoes/boots/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/stabard/colored/dungeon
+	armor = /obj/item/clothing/armor/cuirass/iron/rust
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/whip/antique
 	beltl = /obj/item/flashlight/flare/torch/lantern
@@ -69,12 +70,12 @@
 
 /datum/migrant_role/mig_prisoner
 	name = "Prisoner"
-	greet_text = "You had fled Vanderlin, took refuge in Heartfelt yet the lords over there caught you and thus handed you over to those who seeked you before."
+	greet_text = "You had fled Vanderlin, took refuge in Heartfelt yet the lords over there caught you and thus handed you over to those who sought you before."
 	migrant_job = /datum/job/migrant/mig_prisoner
 
 /datum/job/migrant/mig_prisoner
-	title = "Prisoner"
-	tutorial = "You had fled Vanderlin, took refuge in Heartfelt yet the lords over there caught you and thus handed you over to those who seeked you before."
+	title = "Prisoner (Migrant Wave)"
+	tutorial = "You had fled Vanderlin, took refuge in Heartfelt yet the lords over there caught you and thus handed you over to those who sought you before."
 	outfit = /datum/outfit/mig_prisoner
 	is_foreigner = FALSE
 	jobstats = list(
@@ -109,12 +110,12 @@
 
 /datum/migrant_role/prisoner_guard
 	name = "Convoy Guard"
-	greet_text = "You are apart of a convoy returning prisoners to Vanderlin. Obey the gaoler and ensure the prisoners get back to the dungeons."
+	greet_text = "You are a part of a convoy returning prisoners to Vanderlin. Obey the gaoler and ensure the prisoners get back to the dungeons."
 	migrant_job = /datum/job/migrant/mig_guard
 
 /datum/job/migrant/mig_guard
 	title = "Convoy Guard"
-	tutorial = "You are apart of a convoy returning prisoners to Vanderlin. Obey the gaoler and ensure the prisoners get back to the dungeons."
+	tutorial = "You are a part of a convoy returning prisoners to Vanderlin. Obey the gaoler and ensure the prisoners get back to the dungeons."
 	outfit = /datum/outfit/mig_guard
 	is_foreigner = FALSE
 	allowed_races = list(
@@ -140,7 +141,7 @@
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,

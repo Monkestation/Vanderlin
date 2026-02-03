@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/eoran_bloom
 	name = "Eoran Bloom"
-	desc = "Grows an eoran bud on the target."
+	desc = "Grows an Eoran bud on the target."
 	button_icon_state = "pflower"
 	sound = 'sound/magic/magnet.ogg'
 
@@ -46,7 +46,7 @@
 
 /obj/item/clothing/head/peaceflower
 	name = "eoran bud"
-	desc = "A flower of gentle petals, associated with Eora or Necra. Usually adorned as a headress or laid at graves as a symbol of love or peace."
+	desc = "A flower of gentle petals, associated with Eora or Necra. Usually adorned as a headdress or laid at graves as a symbol of love or peace."
 	icon = 'icons/roguetown/items/produce.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
 	icon_state = "peaceflower"

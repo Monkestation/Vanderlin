@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 	if(GLOB.blueprint_recipes.len)
 		return
 	for(var/datum/blueprint_recipe/recipe as anything in subtypesof(/datum/blueprint_recipe))
-		if(is_abstract(recipe))
+		if(IS_ABSTRACT(recipe))
 			continue
 		GLOB.blueprint_recipes[initial(recipe.name)] = new recipe
 
@@ -52,7 +52,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 		if(!checking)
 			to_chat(user, "<span class='warning'>Need a ceiling above to hang this!</span>")
 			return FALSE
-		if(istype(checking, /turf/open/transparent/openspace))
+		if(istype(checking, /turf/open/openspace))
 			to_chat(user, "<span class='warning'>Need a solid ceiling above!</span>")
 			return FALSE
 
@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 			to_chat(user, "<span class='warning'>There's already a light post here!</span>")
 			return FALSE
 		if(locate(/obj/machinery/light/fueledstreet) in T)
-			to_chat(user, "<span class='warning'>There's already a street light here!</span>")
+			to_chat(user, "<span class='warning'>There's already a street lamp here!</span>")
 			return FALSE
 		if(locate(/obj/structure/noose) in T)
 			to_chat(user, "<span class='warning'>There's already a noose here!</span>")

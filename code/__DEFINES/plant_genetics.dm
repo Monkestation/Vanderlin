@@ -50,3 +50,4 @@
 #define FAMILY_RUBIACEAE  10   // Coffee
 #define FAMILY_THEACEAE  11    // Tea
 #define FAMILY_FRUIT  12       // Tropical Fruits
+#define FAMILY_DIKARYA 13      // Mushrooms

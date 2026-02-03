@@ -8,7 +8,7 @@
 	var/time_spent = 0
 	var/last_check = 0
 	var/check_interval = 10 SECONDS
-	var/area/church_area = /area/rogue/indoors/town/church
+	var/area/church_area = /area/indoors/town/church
 	var/list/heard_messages = list()
 
 /datum/objective/personal/listen_whispers/on_creation()

@@ -11,14 +11,17 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
+	melt_amount = 75
+	melting_material = /datum/material/steel
 	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 100, "fire" = 0, "acid" = 0)
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 30
+	max_integrity = INTEGRITY_STRONGEST
 	abstract_type = /obj/item/clothing/shoes/boots/rare
 
 /obj/item/clothing/shoes/boots/rare/elfplate
 	name = "dark elvish plated boots"
-	desc = "Bizzarrely shaped boots of exquisite dark elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
+	desc = "Bizarrely shaped boots of exquisite dark elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
 	body_parts_covered = FEET
 	icon_state = "elfshoes"
 	item_state = "elfshoes"
@@ -29,7 +32,7 @@
 
 /obj/item/clothing/shoes/boots/rare/elfplate/welfplate
 	name = "elvish plated boots"
-	desc = "Bizzarrely shaped boots of exquisite elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
+	desc = "Bizarrely shaped boots of exquisite elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."
 	icon_state = "welfshoes"
 	item_state = "welfshoes"
 

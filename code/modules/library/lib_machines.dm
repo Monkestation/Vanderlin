@@ -39,7 +39,7 @@
 	if(istype(O, /obj/item/manuscript))
 		var/obj/item/manuscript/M = O
 		if(!M.written)
-			to_chat(user, span_notice("This manuscript is has yet to be authored and titled. You'll need to do so before uploading it."))
+			to_chat(user, span_notice("This manuscript has yet to be authored and titled. You'll need to do so before uploading it."))
 			return
 		// Prompt the user to upload the manuscript
 		var/choice = input(user, "Do you want to add the manuscript to the archive?") in list("Yes", "No")
@@ -132,7 +132,7 @@
 	printing = TRUE
 	src.icon_state = "Ppress_Printing"
 	to_chat(user, span_warning("[src] starts printing..."))
-	playsound(src.loc, 'sound/misc/ppress.ogg', 100, FALSE)
+	playsound(src, 'sound/misc/ppress.ogg', 100, FALSE)
 	// Delete the blank paper as it's consumed during printing
 	if(loaded_paper)
 		qdel(loaded_paper)

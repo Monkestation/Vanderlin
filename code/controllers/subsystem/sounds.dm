@@ -200,7 +200,7 @@ SUBSYSTEM_DEF(sounds)
 	if(!isnull(cached_length))
 		return cached_length
 
-	var/ret = RUSTG_CALL(RUST_G, "sound_len")(file_path)
+	var/ret = rustg_sound_length(file_path)
 	var/as_num = text2num(ret)
 	if(isnull(ret))
 		. = 0

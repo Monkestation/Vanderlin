@@ -1,60 +1,60 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "b" = (
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "c" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "d" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "e" = (
 /obj/machinery/light/fueled/campfire,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "f" = (
 /turf/closed/wall/mineral/wooddark,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "g" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /turf/open/floor/ruinedwood/turned,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "h" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/remains/human,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "i" = (
 /obj/effect/decal/remains/bigrat,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "j" = (
 /turf/open/floor/ruinedwood/turned,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "k" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "l" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/dirt,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "m" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "n" = (
 /obj/structure/well,
 /turf/open/floor/grass,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 "o" = (
 /turf/open/floor/ruinedwood,
-/area/rogue/outdoors/bog)
+/area/outdoors/bog)
 
 (1,1,1) = {"
 a

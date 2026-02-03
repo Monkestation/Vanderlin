@@ -52,8 +52,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		job_preferences = list() //It loaded null from nonexistant savefile field.
 
 		//Can't use SSjob here since this happens right away on login
-		for(var/job in subtypesof(/datum/job))
-			var/datum/job/J = job
+		for(var/datum/job/J as anything in subtypesof(/datum/job))
 			var/new_value
 			if(new_value)
 				job_preferences[initial(J.title)] = new_value
@@ -97,6 +96,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["oocpronouns"]		>> oocpronouns
 	S["admin_ghost_icon"]	>> admin_ghost_icon
 	S["ui_theme"]			>> ui_theme
+	S["char_theme"]			>> char_theme
 	S["lastchangelog"]		>> lastchangelog
 	S["UI_style"]			>> UI_style
 	S["hotkeys"]			>> hotkeys
@@ -138,44 +138,50 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["enable_tips"]		>> enable_tips
 	S["tip_delay"]			>> tip_delay
 	S["ui_scale"]			>> ui_scale
+	S["multi_char_ready"] >> multi_char_ready
+
+	S["multi_ready_slots"] >> multi_ready_slots
+	if(!islist(multi_ready_slots))
+		multi_ready_slots = list()
 
 	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
 
-
+	if(!char_theme)
+		char_theme = "grimshart"
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
 		update_preferences(needs_update, S)		//needs_update = savefile_version if we need an update (positive integer)
 
 	//Sanitize
-	asaycolor		= sanitize_ooccolor(sanitize_hexcolor(asaycolor, 6, 1, initial(asaycolor)))
-	ooccolor		= sanitize_ooccolor(sanitize_hexcolor(ooccolor, 6, 1, initial(ooccolor)))
-	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
-	UI_style		= sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
-	hotkeys			= sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
-	showrolls		= sanitize_integer(showrolls, 0, 1, initial(showrolls))
+	asaycolor = sanitize_ooccolor(sanitize_hexcolor(asaycolor, 6, 1, initial(asaycolor)))
+	ooccolor = sanitize_ooccolor(sanitize_hexcolor(ooccolor, 6, 1, initial(ooccolor)))
+	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
+	UI_style = sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
+	hotkeys = sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
+	showrolls = sanitize_integer(showrolls, 0, 1, initial(showrolls))
 	max_chat_length = sanitize_integer(max_chat_length, 1, CHAT_MESSAGE_MAX_LENGTH, initial(max_chat_length))
-	see_chat_non_mob	= sanitize_integer(see_chat_non_mob, 0, 1, initial(see_chat_non_mob))
-	tgui_fancy		= sanitize_integer(tgui_fancy, 0, 1, initial(tgui_fancy))
-	tgui_lock		= sanitize_integer(tgui_lock, 0, 1, initial(tgui_lock))
-	buttons_locked	= sanitize_integer(buttons_locked, 0, 1, initial(buttons_locked))
-	windowflashing	= sanitize_integer(windowflashing, 0, 1, initial(windowflashing))
-	default_slot	= sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
-	toggles			= sanitize_integer(toggles, 0, SHORT_REAL_LIMIT, initial(toggles))
+	see_chat_non_mob = sanitize_integer(see_chat_non_mob, 0, 1, initial(see_chat_non_mob))
+	tgui_fancy = sanitize_integer(tgui_fancy, 0, 1, initial(tgui_fancy))
+	tgui_lock = sanitize_integer(tgui_lock, 0, 1, initial(tgui_lock))
+	buttons_locked = sanitize_integer(buttons_locked, 0, 1, initial(buttons_locked))
+	windowflashing = sanitize_integer(windowflashing, 0, 1, initial(windowflashing))
+	default_slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
+	toggles = sanitize_integer(toggles, 0, SHORT_REAL_LIMIT, initial(toggles))
 	chat_toggles = sanitize_integer(chat_toggles, 0, SHORT_REAL_LIMIT, initial(chat_toggles))
 	toggles_maptext = sanitize_integer(toggles_maptext, 0, SHORT_REAL_LIMIT, initial(toggles_maptext))
-	clientfps		= sanitize_integer(clientfps, 0, 1000, 0)
-	parallax		= sanitize_integer(parallax, PARALLAX_INSANE, PARALLAX_DISABLE, null)
-	ambientocclusion	= sanitize_integer(ambientocclusion, 0, 1, initial(ambientocclusion))
-	auto_fit_viewport	= sanitize_integer(auto_fit_viewport, 0, 1, initial(auto_fit_viewport))
-	widescreenpref  = sanitize_integer(widescreenpref, 0, 1, initial(widescreenpref))
-	ghost_form		= sanitize_inlist(ghost_form, GLOB.ghost_forms, initial(ghost_form))
-	ghost_orbit 	= sanitize_inlist(ghost_orbit, GLOB.ghost_orbits, initial(ghost_orbit))
-	ghost_accs		= sanitize_inlist(ghost_accs, GLOB.ghost_accs_options, GHOST_ACCS_DEFAULT_OPTION)
-	ghost_others	= sanitize_inlist(ghost_others, GLOB.ghost_others_options, GHOST_OTHERS_DEFAULT_OPTION)
-	menuoptions		= SANITIZE_LIST(menuoptions)
-	be_special		= SANITIZE_LIST(be_special)
-	key_bindings 	= sanitize_islist(key_bindings, list())
+	clientfps = sanitize_integer(clientfps, 0, 1000, 0)
+	parallax = sanitize_integer(parallax, PARALLAX_INSANE, PARALLAX_DISABLE, null)
+	ambientocclusion = sanitize_integer(ambientocclusion, 0, 1, initial(ambientocclusion))
+	auto_fit_viewport = sanitize_integer(auto_fit_viewport, 0, 1, initial(auto_fit_viewport))
+	widescreenpref = sanitize_integer(widescreenpref, 0, 1, initial(widescreenpref))
+	ghost_form = sanitize_inlist(ghost_form, GLOB.ghost_forms, initial(ghost_form))
+	ghost_orbit = sanitize_inlist(ghost_orbit, GLOB.ghost_orbits, initial(ghost_orbit))
+	ghost_accs = sanitize_inlist(ghost_accs, GLOB.ghost_accs_options, GHOST_ACCS_DEFAULT_OPTION)
+	ghost_others = sanitize_inlist(ghost_others, GLOB.ghost_others_options, GHOST_OTHERS_DEFAULT_OPTION)
+	menuoptions	= SANITIZE_LIST(menuoptions)
+	be_special = SANITIZE_LIST(be_special)
+	key_bindings = sanitize_islist(key_bindings, list())
 
 	check_new_keybindings()
 
@@ -203,6 +209,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["anonymize"], anonymize)
 	WRITE_FILE(S["admin_ghost_icon"], admin_ghost_icon)
 	WRITE_FILE(S["ui_theme"], ui_theme)
+	WRITE_FILE(S["char_theme"], char_theme)
 	WRITE_FILE(S["crt"], crt)
 	WRITE_FILE(S["lastclass"], lastclass)
 	WRITE_FILE(S["mastervol"], mastervol)
@@ -242,6 +249,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["tip_delay"], tip_delay)
 	WRITE_FILE(S["ui_scale"], ui_scale)
 	WRITE_FILE(S["key_bindings"], key_bindings)
+	WRITE_FILE(S["multi_char_ready"], multi_char_ready)
+	WRITE_FILE(S["multi_ready_slots"], multi_ready_slots)
 	return TRUE
 
 /datum/preferences/proc/_load_species(S)
@@ -252,23 +261,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(newtype)
 			pref_species = new newtype
 
-/datum/preferences/proc/_load_flaw(S)
-	var/charflaw_type
-	S["charflaw"]			>> charflaw_type
-	if(charflaw_type)
-		charflaw = new charflaw_type()
-	else
-		charflaw = pick(GLOB.character_flaws)
-		charflaw = GLOB.character_flaws[charflaw]
-		charflaw = new charflaw()
-
 /datum/preferences/proc/_load_loadouts(S)
 	for(var/i in 1 to 3)
 		S["loadout[i]"]	>> vars["loadout[i]"]
 	validate_loadouts()
 
 /datum/preferences/proc/validate_loadouts()
-	if(!parent.patreon.has_access(ACCESS_ASSISTANT_RANK))
+	if(!parent.patreon.has_access(ACCESS_ASSISTANT_RANK) && !parent.twitch.has_access(ACCESS_TWITCH_SUB_TIER_1))
 		loadout1 = null
 		loadout2 = null
 		loadout3 = null
@@ -335,8 +334,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Species
 	_load_species(S)
 
-	_load_flaw(S)
-
 	_load_loadouts(S)
 
 	_load_culinary_preferences(S)
@@ -344,12 +341,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Character
 	_load_appearence(S)
 
+	load_quirks(S)
+
 	var/patron_typepath
 	S["selected_patron"] >> patron_typepath
 	if(patron_typepath)
 		selected_patron = GLOB.patronlist[patron_typepath]
-		if(!selected_patron) //failsafe
-			selected_patron = GLOB.patronlist[default_patron]
+
+	if(!selected_patron) //failsafe
+		selected_patron = GLOB.patronlist[default_patron]
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -461,7 +461,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pronouns"]		, pronouns)
 	WRITE_FILE(S["voice_type"]		, voice_type)
 	WRITE_FILE(S["species"]			, pref_species.name)
-	WRITE_FILE(S["charflaw"]			, charflaw.type)
 	WRITE_FILE(S["loadout1"]		, loadout1)
 	WRITE_FILE(S["loadout2"]		, loadout2)
 	WRITE_FILE(S["loadout3"]		, loadout3)
@@ -502,6 +501,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["descriptor_entries"] , descriptor_entries)
 	WRITE_FILE(S["custom_descriptors"] , custom_descriptors)
 
+	save_quirks(S)
 	return TRUE
 
 

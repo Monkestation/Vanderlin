@@ -24,8 +24,9 @@
 	. = 1
 
 /datum/reagent/lux/on_mob_life(mob/living/carbon/M)
-	if(M.has_flaw(/datum/charflaw/addiction/junkie))
-		M.sate_addiction()
+	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+	if(M.has_quirk(/datum/quirk/vice/junkie))
+		M.sate_addiction(/datum/quirk/vice/junkie)
 	if(M.has_status_effect(/datum/status_effect/debuff/lux_drained))
 		M.remove_status_effect(/datum/status_effect/debuff/lux_drained)
 		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, apply_status_effect), /datum/status_effect/debuff/lux_drained), 5 MINUTES)
@@ -91,12 +92,14 @@
 		if(mobber)
 			UnregisterSignal(mobber, COMSIG_LIVING_DEATH)
 
+/datum/action/cooldown/spell/pragmas_charm/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
+	return isanimal(cast_on)
+
 /datum/action/cooldown/spell/pragmas_charm/cast(mob/living/simple_animal/cast_on)
 	. = ..()
-	if(!istype(cast_on))
-		to_chat(owner, span_danger("can't charm this!"))
-		return FALSE
-
 	for(var/datum/weakref/mob_ref as anything in charmed_mobs)
 		var/mob/mob = mob_ref.resolve()
 		if(isnull(mob))
@@ -104,15 +107,15 @@
 
 	if(check_present(cast_on))
 		to_chat(owner, span_danger("already charmed!"))
-		return FALSE
+		return
 
 	if(length(charmed_mobs) >= 3)
 		to_chat(owner, span_danger("too many charmed! can only charm 3!"))
-		return FALSE
+		return
 
 	if(cast_on.is_dead())
 		to_chat(owner, span_danger("it's dead!"))
-		return FALSE
+		return
 
 	charmed_mobs += WEAKREF(cast_on)
 	RegisterSignal(cast_on, COMSIG_LIVING_DEATH, PROC_REF(on_mob_death))
@@ -152,8 +155,9 @@
 	. = 1
 
 /datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M)
-	if(M.has_flaw(/datum/charflaw/addiction/junkie))
-		M.sate_addiction()
+
+	if(M.has_quirk(/datum/quirk/vice/junkie))
+		M.sate_addiction(/datum/quirk/vice/junkie)
 	if(M.has_status_effect(/datum/status_effect/debuff/lux_drained))
 		to_chat(M, span_green("This tastes awful, it won't help me feel my soul again.."))
 	if(M.has_status_effect(/datum/status_effect/debuff/flaw_lux_taken))

@@ -21,7 +21,8 @@
 #define COMSIG_GLOB_MOB_DEATH "!mob_death"
 /// global living say plug - use sparingly: (mob/speaker , message)
 #define COMSIG_GLOB_LIVING_SAY_SPECIAL "!say_special"
-
+/// a human has entered cryo : (mob/living/carbon/human , admin)
+#define COMSIG_GLOB_HUMAN_ENTER_CRYO "!human_enter_cryo"
 /// job subsystem has spawned and equipped a new mob
 #define COMSIG_GLOB_JOB_AFTER_SPAWN "!job_after_spawn"
 /// job datum has been called to deal with the aftermath of a latejoin spawn

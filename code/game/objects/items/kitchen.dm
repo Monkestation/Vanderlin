@@ -31,7 +31,7 @@
 	return BRUTELOSS
 
 /obj/item/kitchen/fork/pre_attack(atom/A, mob/living/user, params)
-	if(istype(A, /obj/item/reagent_containers/food/snacks))
+	if(istype(A, /obj/item/reagent_containers/food/snacks) && user.used_intent.type == /datum/intent/food)
 		var/obj/item/reagent_containers/food/snacks/S = A
 		S.attack(user, user)
 		user.changeNext_move(CLICK_CD_MELEE)
@@ -51,6 +51,7 @@
 			M.reagents.add_reagent(forkload.type, 1)
 		icon_state = "fork"
 		forkload = null
+
 
 	// else if(user.zone_selected == BODY_ZONE_PRECISE_R_EYE)
 	// 	return eyestab(M,user)

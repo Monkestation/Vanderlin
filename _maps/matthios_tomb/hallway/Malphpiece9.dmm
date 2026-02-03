@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/wall/mineral/decostone/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "b" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -9,125 +9,125 @@
 /obj/effect/decal/cleanable/blood/gibs/old,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "c" = (
 /mob/living/simple_animal/hostile/retaliate/bat,
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "d" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "f" = (
 /obj/structure/fluff/walldeco/bath,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "g" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "h" = (
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "i" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "j" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "k" = (
 /turf/closed/wall/mineral/decostone/long,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "l" = (
 /obj/structure/fluff/walldeco/bath/six,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "m" = (
 /obj/structure/fluff/walldeco/bath/four,
 /turf/closed/wall/mineral/decostone/long,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "n" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "o" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "p" = (
 /obj/structure/fluff/walldeco/bath/seven,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "q" = (
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "s" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "t" = (
 /mob/living/simple_animal/hostile/retaliate/bogbug{
 	dir = 4
 	},
 /obj/item/gem/green,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "v" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "w" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "y" = (
 /obj/structure/fluff/walldeco/bath/wallrope{
 	dir = 6
 	},
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/decostone/long,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "z" = (
 /mob/living/simple_animal/hostile/retaliate/bat,
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "A" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "B" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "C" = (
 /obj/structure/healingfountain,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -137,16 +137,16 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "E" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "F" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "G" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/footprints,
@@ -154,7 +154,7 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "H" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
@@ -162,7 +162,7 @@
 /obj/effect/decal/cleanable/blood/gibs/body,
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "J" = (
 /mob/living/simple_animal/hostile/retaliate/bat,
 /obj/effect/decal/cleanable/blood/gibs/up,
@@ -171,17 +171,17 @@
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/item/weapon/sword/long/forgotten,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "K" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/center,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "L" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "M" = (
 /obj/structure/fluff/walldeco/bath/ladies,
 /obj/structure/fluff/walldeco/bath/wallrope{
@@ -189,51 +189,51 @@
 	},
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/decostone/long,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "N" = (
 /obj/structure/fluff/statue/gargoyle/moss/candles,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "O" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "P" = (
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "R" = (
 /obj/effect/decal/cleanable/vomit/old,
 /obj/effect/decal/remains/bigrat,
 /obj/item/natural/fur/rous,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "S" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/carpet/lord/right,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "T" = (
 /turf/closed/mineral/bedrock,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "V" = (
 /obj/structure/fluff/walldeco/bath/five,
 /mob/living/simple_animal/hostile/retaliate/bat,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/carpet/lord/left,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "W" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/effect/decal/cleanable/vomit/old,
 /obj/effect/decal/remains/bigrat,
 /obj/item/natural/fur/rous,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "X" = (
 /turf/closed/wall/mineral/decostone/end,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Z" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /turf/open/floor/cobble/mossy,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 
 (1,1,1) = {"
 T

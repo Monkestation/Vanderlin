@@ -27,7 +27,7 @@
 /obj/structure/closet/crate/chest/merchant
 	lock = /datum/lock/key/merchant
 
-/obj/structure/closet/crate/chest/lootbox/PopulateContents()
+/obj/structure/closet/crate/chest/lootbox/populate_contents()
 	var/list/loot = list(
 		/obj/item/storage/fancy/cigarettes/zig/empty=40,
 		/obj/item/reagent_containers/powder/spice=20,
@@ -79,10 +79,32 @@
 	close_sound = 'sound/items/book_close.ogg'
 	sellprice = 0
 
-/obj/structure/closet/crate/chest/wicker/random_soilson/PopulateContents()
+/obj/structure/closet/crate/chest/wicker/random_soilson/populate_contents()
 	for(var/i = 1 to rand(5, 8))
 		var/obj/item/neuFarm/seed/random = pick(subtypesof(/obj/item/neuFarm/seed) - /obj/item/neuFarm/seed/mixed_seed)
-		new random (src)
+		new random(src)
+
+/obj/structure/closet/crate/chest/wicker/random_bee_keeping/populate_contents()
+
+	var/static/list/spawnable = list(
+		/obj/item/neuFarm/seed/benedictus = 8, // normal honey
+		/obj/item/neuFarm/seed/valeriana = 7, // normal honey
+		/obj/item/neuFarm/seed/rosa = 7, // normal honey
+		/obj/item/neuFarm/seed/mentha = 6, // normal honey
+		/obj/item/neuFarm/seed/paris = 2, // "toxic" = toxin
+		/obj/item/neuFarm/seed/poppy = 1, // "addictive" = ozium + healing
+		/obj/item/neuFarm/seed/swampleaf = 1, // "mad" = spice + toxin
+	)
+
+	for(var/i = 1 to rand(3, 5))
+		var/obj/item/neuFarm/seed/random = pickweight(spawnable)
+		new random(src)
+
+/obj/structure/closet/crate/chest/wicker/random_mushroom/populate_contents()
+	for(var/i = 1 to rand(5,8))
+		var/obj/item/neuFarm/seed/spore/random = pick(subtypesof(/obj/item/neuFarm/seed/spore))
+		new random (get_turf(src))
+	. = ..()
 
 /obj/structure/closet/crate/chest/neu
 	name = "sturdy oak chest"
@@ -119,7 +141,7 @@
 	sellprice = 6
 
 //a chest with a corpse in it
-/obj/structure/closet/crate/chest/neu_iron/corpse/PopulateContents()
+/obj/structure/closet/crate/chest/neu_iron/corpse/populate_contents()
 	var/mob/living/carbon/human/H = new /mob/living/carbon/human/species/rousman(src)
 	H.cure_husk()
 	H.update_body()

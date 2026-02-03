@@ -175,6 +175,7 @@
 	density = TRUE
 	anchored = TRUE
 	blade_dulling = DULLING_BASHCHOP
+	pass_flags_self = PASSGRILLE|LETPASSTHROW|PASSSTRUCTURE|NOTLETPASSTHROWNMOB
 	max_integrity = 700
 	damage_deflection = 12
 	integrity_failure = 0.15
@@ -185,13 +186,16 @@
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 
 /obj/structure/bars/CanAllowThrough(atom/movable/mover, turf/target)
-	. = ..()
-	if(.)
-		return
 	if(isobserver(mover))
 		return TRUE
-	if(mover.throwing && isitem(mover))
-		return prob(66)
+	. = ..()
+	if(. && density && mover.throwing && isitem(mover))
+		var/obj/item/I = mover
+		var/chance = 100 - (I.w_class-1) * 30
+		if(isliving(I.throwing.thrower))
+			var/mob/living/L = I.throwing.thrower
+			chance += (L.STALUC - 10) * 10
+		return prob(clamp(chance, 0, 100))
 
 /obj/structure/bars/bent
 	icon_state = "barsbent"
@@ -217,6 +221,12 @@
 /obj/structure/bars/cemetery
 	icon_state = "cemetery"
 
+/// like bars but indestructible and you cant throw through them
+/obj/structure/bars/cemetery/underworld
+	pass_flags_self = PASSSTRUCTURE
+	resistance_flags = INDESTRUCTIBLE
+	max_integrity = 9999
+
 /obj/structure/bars/passage
 	icon_state = "passage0"
 	density = TRUE
@@ -238,6 +248,7 @@
 	density = TRUE
 	opacity = TRUE
 	redstone_structure = TRUE
+	pass_flags_self = PASSSTRUCTURE
 
 /obj/structure/bars/passage/shutter/redstone_triggered(mob/user)
 	if(obj_broken)
@@ -506,7 +517,7 @@
 //vampire
 /obj/structure/fluff/wallclock/vampire
 	name = "ancient clock"
-	desc = "This appears to be a clock, but a pair of red lights blink in a recess where the face ought be."
+	desc = "This appears to be a clock, but a pair of red lights blink in a recess where the face ought to be."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "wallclockvampire"
 	density = FALSE
@@ -902,12 +913,12 @@
 									amt2raise = 0
 						if(amt2raise > 0)
 							user.adjust_experience(W.associated_skill, amt2raise * boon, FALSE)
-						playsound(loc,pick('sound/combat/hits/onwood/education1.ogg','sound/combat/hits/onwood/education2.ogg','sound/combat/hits/onwood/education3.ogg'), rand(50,100), FALSE)
+						playsound(src,pick('sound/combat/hits/onwood/education1.ogg','sound/combat/hits/onwood/education2.ogg','sound/combat/hits/onwood/education3.ogg'), rand(50,100), FALSE)
 					else
 						user.visible_message("<span class='danger'>[user] trains on [src], but [src] ripostes!</span>")
 						L.AdjustKnockdown(1)
 						L.throw_at(get_step(L, get_dir(src,L)), 2, 2, L, spin = FALSE)
-						playsound(loc, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
+						playsound(src, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
 					flick(pick("p_dummy_smashed","p_dummy_smashedalt"),src)
 					return
 			else //sanity
@@ -918,7 +929,7 @@
 			user.visible_message("<span class='danger'>[user] awkwardly tries to hit \the [src] with \the [W], but \the [src] ripostes!</span>")
 			goof.AdjustKnockdown(1)
 			goof.throw_at(get_step(goof, get_dir(src,goof)), 2, 2, goof, spin = FALSE)
-			playsound(loc, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
+			playsound(src, 'sound/combat/hits/kick/stomp.ogg', 100, TRUE, -1)
 			flick(pick("p_dummy_smashed","p_dummy_smashedalt"),src)
 			return
 	..()
@@ -945,7 +956,7 @@
 	if(istype(W, objective))
 		if(user.mind)
 			if(isdarkelf(user))
-				playsound(loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+				playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 				current += 1
 				SSmapping.retainer.delf_ears += 1
 				if(current >= goal)
@@ -989,8 +1000,8 @@
 			if(B.contrib >= 80)
 				give_rewards(B, user)
 			else
-				playsound(loc,'sound/items/matidol1.ogg', 50, TRUE)
-			playsound(loc,'sound/misc/eat.ogg', rand(30, 60), TRUE)
+				playsound(src,'sound/items/matidol1.ogg', 50, TRUE)
+			playsound(src,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 			qdel(W)
 			return
 
@@ -1029,7 +1040,7 @@
 	if(offering_bandit.contrib >= 100 && offering_bandit.tri_amt < 8)
 		give_rewards(offering_bandit, user)
 	else
-		playsound(loc,'sound/items/matidol2.ogg', 50, TRUE)
+		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
 
 /obj/structure/fluff/psycross
 	name = "pantheon cross"
@@ -1120,7 +1131,7 @@
 
 /obj/structure/fluff/psycross/crafted/shrine/dendor_gote
 	name = "growing shrine to Dendor"
-	desc = "The life force of a Gote has consecrated this holy place. \n First present a poppy flower, swampweed leaf, and silk grub to craft a green sacrifice. \n Then offer a euphoriba flower, swampweed leaf, and two thorns to craft a viridian sacrifice."
+	desc = "The life force of a Gote has consecrated this holy place. \n First present a poppy flower, swampweed leaf, and silk grub to craft a green sacrifice. \n Then offer a euphorbia flower, swampweed leaf, and two thorns to craft a viridian sacrifice."
 	icon_state = "shrine_dendor_gote"
 
 /obj/structure/fluff/psycross/crafted/shrine/dendor_troll
@@ -1130,7 +1141,7 @@
 
 /obj/structure/fluff/psycross/psycrucifix
 	name = "wooden psydonic crucifix"
-	desc = "A rarely seen symbol of absolute and devoted certainty, more common in Grenzelhoft: HE yet lyves. HE yet breathes."
+	desc = "A rarely seen symbol of absolute and devoted certainty, more common in Grenzelhoft: HE yet lives. HE yet breathes."
 	icon_state = "psycruci"
 	max_integrity = 80
 
@@ -1164,7 +1175,7 @@
 		to_chat(user, span_warning("Apple must be bitten once by two different people to conduct a wedding ceremony!"))
 		return FALSE
 
-	var/in_church = istype(get_area(user), /area/rogue/indoors/town/church/chapel)
+	var/in_church = istype(get_area(user), /area/indoors/town/church/chapel)
 	var/secret_marriage = !in_church && HAS_TRAIT(user, TRAIT_SECRET_OFFICIANT)
 
 	if(!in_church && !secret_marriage)
@@ -1319,8 +1330,7 @@
 	if(generic_message && M != user)
 		to_chat(M, span_danger("[src] emits a blinding light!"))
 	if(M.flash_act())
-		var/diff = power - M.confused
-		M.confused += min(power, diff)
+		M.set_confusion_if_lower(power SECONDS)
 
 /obj/structure/fluff/psycross/psydon
 	name = "psydonian cross"
@@ -1473,4 +1483,5 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	MakeParticleEmitter(/particles/smoke/cig/big)
+	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
+	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))

@@ -13,6 +13,7 @@
 #define PINEAPPLE	(1<<12)
 #define BREAKFAST	(1<<13)
 #define CLOTH 		(1<<14)
+#define MUSHROOM    (1<<15)
 
 #define FOOD_FLAGS_IC list( \
 	"Meat", \

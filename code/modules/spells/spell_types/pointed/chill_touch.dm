@@ -1,7 +1,7 @@
 // TODO make this a projectile jesus
 /datum/action/cooldown/spell/chill_touch
 	name = "Chill Touch"
-	desc = "A skeletal hand grips your target, the targetted zone changes the effect."
+	desc = "A skeletal hand grips your target, the targeted zone changes the effect."
 	sound = 'sound/magic/whiteflame.ogg'
 	self_cast_possible = FALSE
 
@@ -11,7 +11,7 @@
 		/datum/attunement/death = 0.2,
 	)
 
-	invocation = "Be torn apart!"
+	invocation = "Death grip you!"
 	invocation_type = INVOCATION_SHOUT
 	spell_flags = SPELL_RITUOS
 	charge_time = 2 SECONDS
@@ -40,7 +40,7 @@
 
 /obj/item/chilltouch
 	name = "Skeletal Hand"
-	desc = "A ghostly, skeletal hand which moves of it's own accord."
+	desc = "A ghostly, skeletal hand which moves of its own accord."
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bounty"
 
@@ -102,16 +102,16 @@
 		switch(bodypart.name)
 			if(BODY_ZONE_HEAD) //choke
 				to_chat(target, "<span class='warning'>[target] is choked by a skeletal hand!</span>")
-				playsound(get_turf(target), pick('sound/combat/shove.ogg'), 100, FALSE, -1)
+				playsound(target, pick('sound/combat/shove.ogg'), 100, FALSE, -1)
 				target.emote("choke")
 				target.adjustOxyLoss(oxy_drain*mult*2)
 			if(BODY_ZONE_CHEST)
 				to_chat(target, "<span class='danger'>[target] is pummeled by a skeletal hand!</span>")
-				playsound(get_turf(target), pick('sound/combat/hits/punch/punch_hard (1).ogg','sound/combat/hits/punch/punch_hard (2).ogg','sound/combat/hits/punch/punch_hard (3).ogg'), 100, FALSE, -1)
+				playsound(target, pick('sound/combat/hits/punch/punch_hard (1).ogg','sound/combat/hits/punch/punch_hard (2).ogg','sound/combat/hits/punch/punch_hard (3).ogg'), 100, FALSE, -1)
 				target.adjustBruteLoss(oxy_drain*mult*3)
 			else
 				to_chat(target, "<span class='danger'>[target]'s [bodypart] is twisted by a skeletal hand!</span>")
-				playsound(get_turf(target), pick('sound/combat/hits/punch/punch (1).ogg','sound/combat/hits/punch/punch (2).ogg','sound/combat/hits/punch/punch (3).ogg'), 100, FALSE, -1)
+				playsound(target, pick('sound/combat/hits/punch/punch (1).ogg','sound/combat/hits/punch/punch (2).ogg','sound/combat/hits/punch/punch (3).ogg'), 100, FALSE, -1)
 				target.apply_damage(oxy_drain*mult*3, BRUTE, bodypart)
 				if(bodypart.can_be_disabled)
 					bodypart.update_disabled()

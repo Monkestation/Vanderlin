@@ -1,15 +1,17 @@
 /datum/migrant_role/inquisitor
 	name = "Episcopal Inquisitor"
-	greet_text = "These lands have forfeited Psydon and the Ten. You have come to restore the True faith to these people and tear out the rot festering within."
+	greet_text = "These lands have forfeited Psydon. You have come to restore the True faith to these people and tear out the rot festering within."
 	migrant_job = /datum/job/migrant/specialinquisitor
 
 /datum/job/migrant/specialinquisitor
 	title = "Episcopal Inquisitor"
-	tutorial = "These lands have forfeited Psydon and the Ten. You have come to restore the True faith to these people and tear out the rot festering within."
+	tutorial = "These lands have forfeited Psydon. You have come to restore the True faith to these people and tear out the rot festering within."
 	outfit = /datum/outfit/specialinquisitor
 	antag_role = /datum/antagonist/purishep
+	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 	allowed_races = list(SPEC_ID_HUMEN)
 	is_recognized = TRUE
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 
 	jobstats = list(
 		STATKEY_INT = 2,
@@ -23,13 +25,13 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/misc/climbing = 4,
 		/datum/skill/misc/riding = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/lockpicking = 2,
 		/datum/skill/combat/firearms = 3,
@@ -42,13 +44,16 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_NOBLE,
 		TRAIT_MEDIUMARMOR,
+		TRAIT_SILVER_BLESSED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
+		TRAIT_INQUISITION,
 	)
 
 	languages = list(/datum/language/oldpsydonic)
 
 /datum/job/migrant/specialinquisitor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.set_patron(/datum/patron/psydon)
 	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
 	spawned.verbs |= /mob/living/carbon/human/proc/faith_test
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
@@ -61,7 +66,7 @@
 	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/specialinquisitor
-	name = "Episcopal Inquisitor"
+	name = "Episcopal Inquisitor (Migrant Wave)"
 	wrists = /obj/item/clothing/neck/psycross/silver
 	neck = /obj/item/clothing/neck/bevor
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
@@ -91,8 +96,9 @@
 	tutorial = "Crusader of the true faith, you came from Grenzelhoft under the command of the Inquisitor. Obey them as they lead you to smite the heathens."
 	allowed_races = RACES_PLAYER_GRENZ
 	is_recognized = TRUE
+	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 	outfit = /datum/outfit/inquisition_crusader
-
+	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
 		STATKEY_END = 2,
 		STATKEY_CON = 2,
@@ -101,7 +107,7 @@
 
 	skills = list(
 		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 2,
 		/datum/skill/combat/knives = 2,
@@ -118,6 +124,10 @@
 	traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
+		TRAIT_SILVER_BLESSED,
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
+		TRAIT_INQUISITION,
 	)
 
 	languages = list(/datum/language/oldpsydonic)
@@ -127,13 +137,14 @@
 /datum/job/migrant/inquisition_crusader/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.gender == FEMALE)
-		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 2)
-		spawned.adjust_skillrank(/datum/skill/combat/knives, 2)
+		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 	else
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 2)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 1)
+		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
 
-	spawned.set_patron(/datum/patron/psydon)
+	if(!istype(spawned.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
+		spawned.set_patron(/datum/patron/psydon)
 
 	var/datum/species/species = spawned.dna?.species
 	if(!species)
@@ -142,7 +153,7 @@
 	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/inquisition_crusader
-	name = "Episcopal Crusader"
+	name = "Episcopal Crusader (Migrant Wave)"
 	head = /obj/item/clothing/head/helmet/heavy/crusader
 	neck = /obj/item/clothing/neck/coif/cloth
 	armor = /obj/item/clothing/armor/chainmail/hauberk
@@ -178,7 +189,7 @@
 	roles = list(
 		/datum/migrant_role/inquisitor = 1,
 		/datum/migrant_role/crusader = 4)
-	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true Gods no more. The Inquisitor will lead us to make sure of that."
+	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true God no more. The Inquisitor will lead us to make sure of that."
 
 /datum/migrant_wave/crusade_down_one
 	name = "The Holy Crusade"
@@ -188,7 +199,7 @@
 	roles = list(
 		/datum/migrant_role/inquisitor = 1,
 		/datum/migrant_role/crusader = 3)
-	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true Gods no more. The Inquisitor will lead us to make sure of that."
+	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true God no more. The Inquisitor will lead us to make sure of that."
 
 /datum/migrant_wave/crusade_down_two
 	name = "The Holy Crusade"
@@ -198,7 +209,7 @@
 	roles = list(
 		/datum/migrant_role/inquisitor = 1,
 		/datum/migrant_role/crusader = 2)
-	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true Gods no more. The Inquisitor will lead us to make sure of that."
+	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true God no more. The Inquisitor will lead us to make sure of that."
 
 /datum/migrant_wave/crusade_down_three
 	name = "The Holy Crusade"
@@ -208,7 +219,7 @@
 	roles = list(
 		/datum/migrant_role/inquisitor = 1,
 		/datum/migrant_role/crusader = 1)
-	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true Gods no more. The Inquisitor will lead us to make sure of that."
+	greet_text = "These heathens, they have forsaken the teaching of everything that is good. We shan't let them insults the true God no more. The Inquisitor will lead us to make sure of that."
 
 /datum/migrant_wave/crusade_down_four
 	name = "The One-Man Crusade"
@@ -216,4 +227,4 @@
 	can_roll = FALSE
 	roles = list(
 		/datum/migrant_role/inquisitor = 1)
-	greet_text = "These heathens, they have forsaken the teaching of everything that is good. I shan't let them insult the true Gods no more. I will make sure of that."
+	greet_text = "These heathens, they have forsaken the teaching of everything that is good. I shan't let them insult the true God no more. I will make sure of that."

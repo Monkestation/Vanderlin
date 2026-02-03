@@ -39,6 +39,8 @@
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/rakshari.dmi'
 	child_icon = 'icons/roguetown/mob/bodies/c/child-rakshari.dmi'
 
+	no_boobs = TRUE
+
 	exotic_bloodtype = /datum/blood_type/human/rakshari
 
 	offset_features_m = list(
@@ -65,17 +67,17 @@
 		OFFSET_GLOVES = list(0,0),\
 		OFFSET_WRISTS = list(0,0),\
 		OFFSET_HANDS = list(0,0),\
-		OFFSET_CLOAK = list(0,0),\
+		OFFSET_CLOAK = list(0,1),\
 		OFFSET_FACEMASK = list(0,-1),\
 		OFFSET_HEAD = list(0,-1),\
 		OFFSET_FACE = list(0,0),\
 		OFFSET_BELT = list(0,0),\
-		OFFSET_BACK = list(0,-1),\
+		OFFSET_BACK = list(0,0),\
 		OFFSET_NECK = list(0,-1),\
 		OFFSET_MOUTH = list(0,-1),\
 		OFFSET_PANTS = list(0,0),\
-		OFFSET_SHIRT = list(0,0),\
-		OFFSET_ARMOR = list(0,0),\
+		OFFSET_SHIRT = list(0,2),\
+		OFFSET_ARMOR = list(0,1),\
 		OFFSET_UNDIES = list(0,0),\
 	)
 	organs = list(
@@ -94,7 +96,7 @@
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid/rakshari,
 		/datum/customizer/bodypart_feature/hair/facial/humanoid/rakshari,
-		/datum/customizer/bodypart_feature/accessory,
+		/datum/customizer/bodypart_feature/accessory/rakshari,
 		/datum/customizer/bodypart_feature/face_detail,
 	)
 	COOLDOWN_DECLARE(cat_meow_cooldown)
@@ -137,15 +139,18 @@
 
 /datum/species/rakshari/get_skin_list()
 	return sortList(list(
-		"Oasis Rakshari" = SKIN_COLOR_PLAIN_ELF, // - (White 2)
 		"Mountain Rakshari" = SKIN_COLOR_MOUNTAIN_ELF, // - (White 3)
 		"City Rakshari" = SKIN_COLOR_COASTAL_ELF, // - (White 4)
 		"Desert Rakshari" = SKIN_COLOR_WOOD_ELF, // - (Mediterranean 1)
+		"Deep Desert Rakshari" = SKIN_COLOR_JUNGLE_ELF, // - (Latin)
+		"Oasis Rakshari" = SKIN_COLOR_HOMUNCULUS, // - (Grey-blue)
+		"Oasis Shade Rakshari" = SKIN_COLOR_NIGHTSHADE, // - (Black-blue)
+		"Quicksand Rakshari" = SKIN_COLOR_QUICKSAND, // Orange, apparently sphynx cats can be orange, who knew!
 	))
 
 /datum/species/rakshari/get_hairc_list()
 	return sortList(list(
-		"blond - pale" = "9d8d6e",
+	"blond - pale" = "9d8d6e",
 	"blond - dirty" = "88754f",
 	"blond - drywheat" = "d5ba7b",
 	"blond - strawberry" = "c69b71",
@@ -160,5 +165,8 @@
 	"black - cave" = "201616",
 	"black - rogue" = "2b201b",
 	"black - midnight" = "1d1b2b",
+
+	"orange - rust" = "bc5e35",
+	"orange - flame" = "b24c2e",
 	))
 

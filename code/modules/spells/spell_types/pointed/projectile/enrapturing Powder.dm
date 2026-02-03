@@ -35,4 +35,4 @@
 		to_chat(L, span_warning("Gah! Something.. got in my - eyes.."))
 		L.reagents.add_reagent(/datum/reagent/berrypoison, 5)
 		L.apply_status_effect(/datum/status_effect/debuff/baothadruqks)
-		L.blur_eyes(2)
+		L.set_eye_blur_if_lower(4 SECONDS)

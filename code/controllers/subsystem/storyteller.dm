@@ -231,6 +231,14 @@ SUBSYSTEM_DEF(gamemode)
 			CHRONICLE_STATS_MOST_BEAUTIFUL_PERSON,
 			CHRONICLE_STATS_UGLIEST_PERSON,
 		),
+		"Emotion" = list(
+			CHRONICLE_STATS_JOKESTER,
+			CHRONICLE_STATS_CRYBABY,
+		),
+		"Piety" = list(
+			CHRONICLE_STATS_PIOUS,
+			CHRONICLE_STATS_FOUL_MOUTH,
+		),
 	)
 
 	/// Chosen chronicle stats of the notable people, which show at the end round panel
@@ -373,7 +381,7 @@ SUBSYSTEM_DEF(gamemode)
 					"... you kneel, not knowing why... the voice behind you compels it",
 					"... a collar of roses and rust... worn by the willing"
 				),
-			/datum/antagonist/vampire/lesser = list (
+			/datum/antagonist/vampire/lords_spawn = list (
 					"... fangs bloom from cracked lips... hunger shudders through the air",
 					"... you see your reflection... it smiles with borrowed teeth",
 					"... a laugh beneath floorboards... young, broken, blood-wet"
@@ -546,53 +554,59 @@ SUBSYSTEM_DEF(gamemode)
 /// Gets candidates for antagonist roles.
 /datum/controller/subsystem/gamemode/proc/get_candidates(be_special, job_ban, observers, ready_newplayers, living_players, required_time, inherit_required_time = TRUE, midround_antag_pref, no_antags = TRUE, list/restricted_roles, list/required_roles)
 	var/list/candidates = list()
-	var/list/candidate_candidates = list() //lol
 
 	for(var/mob/player as anything in GLOB.player_list)
-		if(QDELETED(player) || player.mind?.picking)
+		if(QDELETED(player) || !player.client || !player.mind || player.mind.picking)
 			continue
+
+		if(job_ban && is_banned_from(player.ckey, list(job_ban)))
+			continue
+
+		var/checked_one_box = FALSE
+
 		if(ready_newplayers && isnewplayer(player))
 			var/mob/dead/new_player/new_player = player
-			if(new_player.ready == PLAYER_READY_TO_PLAY && new_player.mind && new_player.check_preferences())
-				candidate_candidates += player
-		else if(observers && isobserver(player))
-			candidate_candidates += player
-		else if(living_players && isliving(player))
+			if(new_player.ready != PLAYER_READY_TO_PLAY || !new_player.check_preferences())
+				continue
+			checked_one_box = TRUE
+
+		if(observers && isobserver(player))
+			checked_one_box = TRUE
+
+		if(living_players && isliving(player))
 			if(!ishuman(player))
 				continue
-			candidate_candidates += player
 
-	for(var/mob/candidate as anything in candidate_candidates)
-		if(QDELETED(candidate) || !candidate.key || !candidate.client || (!observers && !candidate.mind))
-			continue
-		if(!observers)
-			if(!ready_players && !isliving(candidate))
+			var/datum/job/tested_job = player.mind.assigned_role
+			if(tested_job.parent_job)
+				tested_job = tested_job.parent_job
+
+			if(length(restricted_roles) && is_type_in_typecache(tested_job, restricted_roles))
 				continue
-			if(no_antags && !isnull(candidate.mind.antag_datums))
+
+			if(length(required_roles) && !is_type_in_typecache(tested_job, required_roles))
+				continue
+
+			if(player.mind.special_role)
+				continue
+
+			if(be_special && !(be_special in player.client.prefs?.be_special))
+				continue
+
+			if(no_antags && length(player.mind.antag_datums))
 				var/real = FALSE
-				for(var/datum/antagonist/antag_datum as anything in candidate.mind.antag_datums)
+				for(var/datum/antagonist/antag_datum as anything in player.mind.antag_datums)
 					if(!(antag_datum.antag_flags & FLAG_FAKE_ANTAG))
 						real = TRUE
 						break
 				if(real)
 					continue
-			if(restricted_roles && (candidate.mind.assigned_role.title in restricted_roles))
-				continue
-			if(length(required_roles) && !(candidate.mind.assigned_role.title in required_roles))
-				continue
-			if(candidate.mind.special_role)
-				continue
 
-		if(be_special)
-			if(!(candidate.client.prefs) || !(be_special in candidate.client.prefs.be_special))
-				continue
+			checked_one_box = TRUE
 
-		//if(midround_antag_pref)
-			//continue
+		if(checked_one_box)
+			candidates += player
 
-		if(job_ban && is_banned_from(candidate.ckey, list(job_ban, ROLE_MANIAC)))
-			continue
-		candidates += candidate
 	return candidates
 
 /// Gets the correct popcount, returning READY people if roundstart, and active people if not.
@@ -1020,7 +1034,7 @@ SUBSYSTEM_DEF(gamemode)
 		if(GAMEMODE_PANEL_MAIN)
 			var/even = TRUE
 			dat += "<h2>Event Tracks:</h2>"
-			dat += "<font color='#888888'><i>Every track represents progression towards scheduling an event of it's severity</i></font>"
+			dat += "<font color='#888888'><i>Every track represents progression towards scheduling an event of its severity</i></font>"
 			dat += "<table align='center'; width='100%'; height='100%'; style='background-color:#13171C'>"
 			dat += "<tr style='vertical-align:top'>"
 			dat += "<td width=25%><b>Track</b></td>"
@@ -1571,8 +1585,9 @@ SUBSYSTEM_DEF(gamemode)
 					record_round_statistic(STATS_ELDERLY_POPULATION)
 				if(AGE_IMMORTAL)
 					record_round_statistic(STATS_IMMORTAL_POPULATION)
-			if(human_mob.charflaw)
-				record_featured_object_stat(FEATURED_STATS_FLAWS, human_mob.charflaw.name)
+			if(length(human_mob.quirks))
+				for(var/datum/quirk/vice/charflaw in human_mob.quirks)
+					record_featured_object_stat(FEATURED_STATS_FLAWS, charflaw.name)
 			if(human_mob.is_noble())
 				record_round_statistic(STATS_ALIVE_NOBLES)
 			if(human_mob.mind.assigned_role.title in GLOB.garrison_positions)
@@ -1585,27 +1600,25 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ILLITERATES)
 			if(HAS_TRAIT(human_mob, TRAIT_FOREIGNER))
 				record_round_statistic(STATS_FOREIGNERS)
-			if(human_mob.has_flaw(/datum/charflaw/clingy))
+			if(human_mob.has_quirk(/datum/quirk/vice/clingy))
 				record_round_statistic(STATS_CLINGY_PEOPLE)
-			if(human_mob.has_flaw(/datum/charflaw/addiction/alcoholic))
+			if(human_mob.has_quirk(/datum/quirk/vice/alcoholic))
 				record_round_statistic(STATS_ALCOHOLICS)
-			if(human_mob.has_flaw(/datum/charflaw/addiction/junkie))
+			if(human_mob.has_quirk(/datum/quirk/vice/junkie))
 				record_round_statistic(STATS_JUNKIES)
-			if(human_mob.has_flaw(/datum/charflaw/addiction/kleptomaniac))
+			if(human_mob.has_quirk(/datum/quirk/vice/kleptomaniac))
 				record_round_statistic(STATS_KLEPTOMANIACS)
-			if(human_mob.has_flaw(/datum/charflaw/greedy))
+			if(human_mob.has_quirk(/datum/quirk/vice/greedy))
 				record_round_statistic(STATS_GREEDY_PEOPLE)
-			if(human_mob.has_flaw(/datum/charflaw/hunted))
+			if(human_mob.has_quirk(/datum/quirk/vice/hunted))
 				record_round_statistic(STATS_HUNTED_PEOPLE)
 			if(HAS_TRAIT_NOT_FROM(human_mob, TRAIT_PACIFISM, "hugbox"))
 				record_round_statistic(STATS_PACIFISTS)
 			if(human_mob.family_datum && human_mob.family_member_datum)
 				var/datum/family_member/member = human_mob.family_member_datum
-				// Check if they have children (making them a parent)
 				if(member.children.len > 0)
 					record_round_statistic(STATS_PARENTS)
-				// Check if married or has children
-				if(human_mob.IsWedded() || member.children.len > 0)
+				if(human_mob.IsWedded())
 					record_round_statistic(STATS_MARRIED)
 
 			// Species
@@ -1781,6 +1794,57 @@ SUBSYSTEM_DEF(gamemode)
 	if(length(potential_passers) > 0)
 		var/mob/living/carbon/human/selected_passerby = pick(potential_passers)
 		set_chronicle_stat(CHRONICLE_STATS_RANDOM_PASSERBY, selected_passerby, "RANDOM PASSERBY", "#888888", "just happening to be here")
+
+	// Featured chronicle stats
+	var/highest_laughs = -1
+	var/highest_cries = -1
+	var/highest_prayers = -1
+	var/highest_slurs = -1
+	var/mob/living/top_jokester
+	var/mob/living/top_crybaby
+	var/mob/living/top_pious
+	var/mob/living/top_foul_mouth
+
+	for(var/stat_category in GLOB.chronicle_featured_stats)
+		var/list/category_data = GLOB.chronicle_featured_stats[stat_category]
+		for(var/datum/weakref/mob_ref in category_data)
+			var/mob/living/mob = mob_ref.resolve()
+			if(!mob || !(mob in current_valid_humans))
+				continue
+
+			var/count = category_data[mob_ref]
+
+			if(stat_category == FEATURED_STATS_JOKESTERS)
+				if(count > highest_laughs)
+					highest_laughs = count
+					top_jokester = mob
+
+			if(stat_category == FEATURED_STATS_CRYBABIES)
+				if(count > highest_cries)
+					highest_cries = count
+					top_crybaby = mob
+
+			if(stat_category == FEATURED_STATS_DEVOUT)
+				if(count > highest_prayers)
+					highest_prayers = count
+					top_pious = mob
+
+			if(stat_category == FEATURED_STATS_SPECIESISTS)
+				if(count > highest_slurs)
+					highest_slurs = count
+					top_foul_mouth = mob
+
+	if(top_jokester && highest_laughs > 1)
+		set_chronicle_stat(CHRONICLE_STATS_JOKESTER, top_jokester, "JOKESTER", "#fff89b", "[highest_laughs] laughs")
+
+	if(top_crybaby && highest_cries > 1)
+		set_chronicle_stat(CHRONICLE_STATS_CRYBABY, top_crybaby, "CRYBABY", "#8bc1ee", "[highest_cries] cries")
+
+	if(top_pious && highest_prayers > 1)
+		set_chronicle_stat(CHRONICLE_STATS_PIOUS, top_pious, "PIOUS", "#faf5c7", "[highest_prayers] prayers")
+
+	if(top_foul_mouth && highest_slurs > 1)
+		set_chronicle_stat(CHRONICLE_STATS_FOUL_MOUTH, top_foul_mouth, "FOUL MOUTH", "#e23f3f", "[highest_slurs] slurs")
 
 	pick_chronicle_stats()
 

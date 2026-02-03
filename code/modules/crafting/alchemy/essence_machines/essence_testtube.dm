@@ -1,6 +1,6 @@
 /obj/machinery/essence/test_tube
 	name = "homonculus breeding tube"
-	desc = "A large glass tank for creating gnome homoncului."
+	desc = "A large glass tank for creating gnome homunculi."
 	icon = 'icons/roguetown/misc/splitter.dmi'
 	icon_state = "essence_tank"
 	density = TRUE

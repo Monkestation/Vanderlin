@@ -124,7 +124,7 @@
  */
 /obj/item/explosive/proc/arm_grenade(mob/user, delayoverride, msg = TRUE, volume = 60)
 	log_grenade(user) //Inbuilt admin procs already handle null users
-	playsound(src.loc, 'sound/items/fuse.ogg', 100)
+	playsound(src, 'sound/items/fuse.ogg', 100)
 	if(user)
 		add_fingerprint(user)
 		if(msg)
@@ -147,7 +147,6 @@
 /obj/item/explosive/proc/detonate(mob/living/lanced_by)
 	if (dud_flags)
 		active = FALSE
-		update_appearance()
 		return FALSE
 
 	if(shrapnel_type && shrapnel_radius && !shrapnel_initialized) // add a second check for adding the component in case whatever triggered the grenade went straight to prime (badminnery for example)

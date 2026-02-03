@@ -17,8 +17,13 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak())
+		if(!C.can_speak())
 			message = "makes a noise. Tears stream down their face."
+
+/datum/emote/living/carbon/human/cry/run_emote(mob/user, params, type_override, intentional, targetted)
+	. = ..()
+	if(. && user.mind)
+		record_featured_stat(FEATURED_STATS_CRYBABIES, user)
 
 /datum/emote/living/carbon/human/eyebrow
 	key = "eyebrow"
@@ -69,6 +74,12 @@
 	key_third_person = "mumbles"
 	message = "mumbles."
 	emote_type = EMOTE_AUDIBLE
+
+/mob/living/carbon/human/verb/emote_mumble()
+	set name = "Mumble"
+	set category = "Noises"
+
+	emote("mumble", intentional = TRUE)
 
 /datum/emote/living/carbon/human/pale
 	key = "pale"

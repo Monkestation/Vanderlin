@@ -42,8 +42,8 @@ GLOBAL_LIST_INIT(mob_descriptors, build_descriptor_types())
 
 /proc/build_descriptor_types()
 	. = list()
-	for(var/type in typesof(/datum/mob_descriptor))
-		if(is_abstract(type))
+	for(var/datum/mob_descriptor/type as anything in typesof(/datum/mob_descriptor))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .
@@ -53,8 +53,8 @@ GLOBAL_LIST_INIT(descriptor_choices, build_descriptor_choices())
 
 /proc/build_descriptor_choices()
 	. = list()
-	for(var/type in typesof(/datum/descriptor_choice))
-		if(is_abstract(type))
+	for(var/datum/descriptor_choice/type as anything in typesof(/datum/descriptor_choice))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .

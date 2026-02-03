@@ -8,7 +8,7 @@
 
 /datum/keybinding/looc/down(client/user)
 	. = ..()
-	user.get_looc()
+	user.native_say.open_say_window("LOOC")
 	return TRUE
 
 /client/proc/get_looc()
@@ -61,6 +61,8 @@
 
 
 	msg = emoji_parse(msg)
+	msg = parsemarkdown_basic(msg, limited = TRUE, barebones = TRUE)
+
 	mob.log_talk("LOOC: [msg]", LOG_LOOC)
 
 	var/prefix = "LOOC"

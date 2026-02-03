@@ -25,8 +25,8 @@
 		return
 
 	//splash down, not on open spaces.
-	while(istype(epicenter, /turf/open/transparent/openspace))
-		var/turf/downcheck = get_step_multiz(epicenter, DOWN)
+	while(istype(epicenter, /turf/open/openspace))
+		var/turf/downcheck = GET_TURF_BELOW(epicenter)
 		if(downcheck)
 			epicenter = downcheck
 		else
@@ -62,8 +62,7 @@
 			for(var/turf/T in turflist)
 				if(accessible[T])
 					continue
-				for(var/thing in T.GetAtmosAdjacentTurfs(alldir = TRUE))
-					var/turf/NT = thing
+				for(var/turf/NT as anything in T.GetAtmosAdjacentTurfs(alldir = TRUE))
 					if(!(NT in accessible))
 						continue
 					if(!(get_dir(T,NT) in GLOB.cardinals))

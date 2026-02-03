@@ -128,10 +128,11 @@
 	var/full_icon = "full_heart"
 	var/empty_icon = "empty_heart"
 
-/obj/effect/overlay/happiness_overlay/New(loc, mob/living/clicker)
+/obj/effect/overlay/happiness_overlay/Initialize(mapload, mob/living/clicker)
 	. = ..()
-	if(!clicker)
-		return
+
+	if(!istype(clicker))
+		return INITIALIZE_HINT_QDEL
 
 	RegisterSignal(clicker.client, COMSIG_CLIENT_HOVER_NEW, PROC_REF(clear_view))
 	stored_client = clicker.client

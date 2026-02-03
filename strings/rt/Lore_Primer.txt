@@ -3,7 +3,7 @@
 While it's not required reading, leadership roles may find this information useful to roleplay their positions. This, or anyone else interested in playing a character with more knowledge about the setting. Not all information is available here, and some secrets still lie within item descriptions, inscriptions, or booklets- it's a primer, not a compendium. </p>
 <hr>
 <strong><span style="font-size:105%"> Some quick vocabulary/concepts important to the setting: </span></strong>
-<p><strong> Psydonia </strong> - The world Vanderlin takes place in, named after its creation god, Psydon. It is currently the year 2515 after His death. </p>
+<p><strong> Psydonia </strong> - The world Vanderlin takes place in, named after its creation god, Psydon. It is currently the year 2516, millenia after His death. </p>
 <p><strong> Faience </strong> - The continent Vanderlin takes place in. Shaped by His hand. </p>
 <p><strong> Lux </strong> - The core link of divinity a person holds; the soul. A sliver of Psydon present within each species touched at one point by divine hand. It is said that it carries the power of a single, focused miracle of life- yet its removal dooms a soul never to pass into the underworld. </p>
 <hr>
@@ -94,12 +94,13 @@ While it's not required reading, leadership roles may find this information usef
 	<details>
 		<summary><em> Points of Interest </em></summary>
 
-		<p><strong> - City Of Iwabaree </strong><br> Nestled within the northwestern jungle of The Lakkarian Strip, Owbaree is the capital city of Lakkari. Its considered to be one of the most sacred cities to Astratans within Psydonia and the wealthiest city of the Queendom. The Black Empire failed to capture it during the War of the Split Feather. Owbaree is defined by its towering temples to Astrata, complex system of canals, and its gold-crested royal palace. It has only recently opened its doors to those of the inhumen species.	</p>
+		<p><strong> - City Of Iwabaree </strong><br> Nestled within the northwestern jungle of The Lakkarian Strip, Iwabaree is the capital city of Lakkari. Its considered to be one of the most sacred cities to Astratans within Psydonia and the wealthiest city of the Queendom. The Black Empire failed to capture it during the War of the Split Feather. Iwabaree is defined by its towering temples to Astrata, complex system of canals, and its gold-crested royal palace. It has only recently opened its doors to those of the inhumen species.	</p>
 		<p><strong> - Barony Of Sakhumeti </strong><br> Referred to as the graveyard capital of Faience. Sakhumeti is an expansive yet desolate barony with a majority Necran population, which has dropped sharply ever since Zizo's ascension. Clerics and Templars are frequently sent to Sakhumeti to clear out the still-rising dead within the city's sprawling tombs.	</p>
 		<p><strong> - City Of Ei Onkara </strong><br> South of the Lakkarian capital city of Iwabaree, the coastal city of Ei Onkara serves as the trade hub of Lakkari and is considered the second-wealthiest city in the Queendom. Ei Onkara is renowned for its expansive market district, skilled goldsmiths, and vast underground catacombs, which few dare to explore. There are often intense feuds and conflicts between its majority Astratan nobility and its majority Xylixian commoner population.	</p>
 		<p><strong> - Barony of Sekket </strong><br> The eastern-most barony of the Queendom of Lakkari, nearing the Zaladin Dynasty's northern border. Desired for its proximity to gold deposits and strategic location next to the Veil of Colors. There have been many squabbles between the Queendom of Lakkari and the Zaladin Dynasty over who has the rightful claim to Sekket, as control over it has shifted multiple times throughout history. Being a majority Xylixian barony, Sekket is also home to many anti-slaver groups. The most prominent being the Shinobi's of Sekket, which runs many underground operations throughout the Zaladin Dynasty. The operations of the Shinobi's of Sekket has drastically soured the already dire relations between the two nations.	</p>
+	</details>
+	<br><br>
 </details>
-<br>
 
 
 <details>
@@ -200,7 +201,7 @@ While it's not required reading, leadership roles may find this information usef
 		<br><br>
 		Despite its richness in natural resources and trade, wealth disparity has plagued Lakkari for centuries; many join the church or military to escape poverty. It is only in recent yils that the current Kandake, Iteru of the Dunes, has started to address the issue through a series of reforms the nobility has found incredibly controversial.
 		<br><br>
-		Lakkari is known for being one of the few elven nations to have successfully resisted Grenzelhoftian imperialism. Although it lost some of its northernmost territories during the War of the Split Feather (2401-2412), the Lakkarians were able to fend off the forces of the Black Empire following their decisive victory in the battle of Mudridge with the assistance of their closest ally, the Valorian Republics. The surviving Grenzelhoftian soldiers of the battle were captured and sent to the Lakkarian capital of Owbaree, where they were publicly executed.
+		Lakkari is known for being one of the few elven nations to have successfully resisted Grenzelhoftian imperialism. Although it lost some of its northernmost territories during the War of the Split Feather (2401-2412), the Lakkarians were able to fend off the forces of the Black Empire following their decisive victory in the battle of Mudridge with the assistance of their closest ally, the Valorian Republics. The surviving Grenzelhoftian soldiers of the battle were captured and sent to the Lakkarian capital of Iwabaree, where they were publicly executed.
 		<br><br>
 	</details>
 	<details>
@@ -250,9 +251,9 @@ While it's not required reading, leadership roles may find this information usef
 	</details>
 
 	<details>
-		<summary><strong> Progressive Psydonism </strong></summary>
+		<summary><strong> Extremist Psydonism </strong></summary>
 		<br>
-		A schism within the orthodox church of Psydon, this progressive faction believes that worship is possible through The Ten. Rather than striving to cut down The Ten, progressive Psydonites instead look for signs of His will expressed through the pieces left behind.
+		A small splinter of Orthodox Psydonism, believing the nine pieces are lies and propaganda, and that Psydon lives still.
 		<br><br>
 	</details>
 
@@ -440,19 +441,30 @@ While it's not required reading, leadership roles may find this information usef
 	<em> Worship out of spite. </em>
 	<br><br>
 
+  	<details>
+		<summary><strong> Heartfeltian Horror </strong></summary>
+		<br>
+		Something stirs deep beneath the city. Rumours of a great machine, bidding the rabid automatons forth with purpose.
+		<br><br>
+	</details>
+
 	<details>
+		<summary><strong> Galadros </strong></summary>
+		<br>
+		An ancient rock wyrm of greed and gluttony with an insatiable hunger for Lux. Revered by some Kobolds as the Great Wyrm.
+		<br><br>
+		In the farthest reaches of Faience in a mountain range intraversable by all but the subterranean, generations of Kobolds have carved out his stronghold, Kruskros. There he is coiled, waiting and hungry. His size is so great his true form cannot be fully speculated. The short lifespan of the Kobold makes present knowledge scarce, and many indentured to him never leave his sanctum. Even so, his name appears in texts dating back to the time of Psydon.
+		<br><br>
+		Kobolds who fail Galadros are either fed to him or banished from Kruskros. The latter is considered a worse punishment, as most of them have developed a co-dependency that can take the rest of their lives to break. The shame of failing the Great Wyrm is greater than that of death.
+		<br><br>
+	</details>
+
+  	<details>
 		<summary><strong> Rashan-Kahl </strong></summary>
 		<br>
 		The twin-faced god of ambition and chains. Worshipped mainly by the rakshari out of in spite of The Ten.
 		<br><br>
 		Rashan represents both creation and destruction, freedom and bondage- a duality that mirrors the rakshari’s complex relationship with power. Temples to Rashan-Kahl often double as marketplaces, symbolizing the transactional nature of life.
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> Heartfeltian Horror </strong></summary>
-		<br>
-		Something stirs deep beneath the city. Rumours of a great machine, bidding the rabid automatons forth with purpose.
 		<br><br>
 	</details>
 

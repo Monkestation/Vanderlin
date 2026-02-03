@@ -36,6 +36,6 @@
 /mob/living/simple_animal/hostile/retaliate/voiddragon/red/tsere
 	name = "Tsere the Insurmountable"
 	desc = "Her scales shimmer in the blue light, her form is death, her gaze is wisdom, her wings cut all. This is Tsere... The Insurmountable."
-	faction = list("abberant")
+	faction = list("aberrant")
 	health = 4000
 	maxHealth = 4000

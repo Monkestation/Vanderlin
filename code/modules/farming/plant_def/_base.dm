@@ -30,6 +30,8 @@
 	var/seed_color
 	/// Whether the plant can grow underground
 	var/can_grow_underground = FALSE
+	/// Whether the plant can grow in mushroom mound
+	var/mound_growth = FALSE
 
 	// NPK nutrient requirements (consumed during growth)
 	var/nitrogen_requirement = 30      // For leafy growth
@@ -47,6 +49,8 @@
 	var/seed_identity = "some seeds"
 	///this is if we become seethrough or not
 	var/see_through = FALSE
+	///the honey type we build towards
+	var/obj/item/reagent_containers/food/snacks/spiderhoney/honey_type
 
 /datum/plant_def/New()
 	. = ..()
@@ -221,5 +225,7 @@
 			return "Theaceae"
 		if(FAMILY_FRUIT)
 			return "Fruit"
+		if(FAMILY_DIKARYA)
+			return "Dikarya"
 		else
 			return "Unknown"

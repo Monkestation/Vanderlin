@@ -115,6 +115,48 @@
 	detail_color = CLOTHING_ROYAL_MAJENTA
 
 // End royal clothes
+
+//Servant Clothing:
+//................ Maid Dress   ............... //
+/obj/item/clothing/shirt/dress/maid
+	name = "maid dress"
+	desc = "A dress befitting the housekeeper of a lord's staff. While not as intricate as a royal's, it is indicative of the house's status."
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_maids.dmi'
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+	boobed = TRUE
+	icon_state = "maiddress"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_DARK_INK
+
+/obj/item/clothing/shirt/dress/maid/lord
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	uses_lord_coloring = LORD_SECONDARY
+
+/obj/item/clothing/shirt/dress/maid/Initialize(mapload, ...)
+	. = ..()
+	// I fucking love pilgrims
+	AddComponent(
+		/datum/component/equipment_stress/job_specific, \
+		/datum/stress_event/maiddress, \
+		list(TRAIT_VILLAIN = null, TRAIT_NOBLE = /datum/stress_event/maiddress/noble), \
+		immune_jobs = list(/datum/job/prince, /datum/job/squire, /datum/job/advclass/pilgrim/noble, /datum/job/advclass/pilgrim/rare/zaladin, /datum/job/advclass/pilgrim/rare/grenzelhoft, /datum/job/advclass/pilgrim/rare/merchant), \
+		immune_departments = (NOBLEMEN | GARRISON | OUTSIDERS | COMPANY), \
+		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \
+		inverse = TRUE, \
+	)
+
+
+//................ Servant Gown   ............... //
+/obj/item/clothing/shirt/dress/maid/servant
+	name = "servant gown"
+	desc = "A dress worn by those of manors and noble staff. Commonly black, though some estates dye them to their house colors."
+	icon_state = "maidgown"
+	detail_color = CLOTHING_SOOT_BLACK
+
+//End Servant Clothing
+
 /obj/item/clothing/shirt/dress/gen/sexy
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "dress"

@@ -13,13 +13,14 @@ GLOBAL_VAR_INIT(lair_portal, null)
 	light_outer_range = 3
 	light_color = "#003300"
 
-/obj/structure/overlord_portal/New(loc, ...)
+/obj/structure/overlord_portal/Initialize(mapload)
 	. = ..()
 	GLOB.lair_portal = src
 
-/obj/structure/overlord_portal/Destroy()
-	. = ..()
-	GLOB.lair_portal = null
+/obj/structure/overlord_portal/Destroy(force)
+	if(GLOB.lair_portal == src)
+		GLOB.lair_portal = null
+	return ..()
 
 /obj/structure/overlord_portal/attack_hand(mob/user)
 	if(!length(overlords))

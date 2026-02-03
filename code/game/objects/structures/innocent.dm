@@ -20,13 +20,13 @@
 	qdel(src)
 
 /obj/structure/innocent_bush/Bumped(atom/movable/AM)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
 	new /mob/living/simple_animal/hostile/retaliate/troll/bog (get_turf(src))
 	qdel(src)
 
 /obj/structure/innocent_bush/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	playsound(src.loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 	sleep(4)
 	playsound(src, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
 	new /mob/living/simple_animal/hostile/retaliate/troll/bog (get_turf(src))
@@ -34,7 +34,7 @@
 
 /obj/structure/innouous_rock
 	name = "mana crystal deposit"
-	desc = "These large mana crystals deposit are known to bring fortune to miners who ventures into the deep dark depths of the world."
+	desc = "These large mana crystals deposit are known to bring fortune to miners who venture into the deep dark depths of the world."
 	icon = 'icons/mob/creacher/trolls/troll_cave.dmi'
 	icon_state = "troll_hide"
 	SET_BASE_PIXEL(-16, 0)
@@ -61,11 +61,11 @@
 
 	to_chat(user, span_notice("You carefully detach the crystals from the rock..."))
 	if(!do_after(user, 3 SECONDS, src))
-		to_chat(user, span_warning("The crystals crumbles as you try to detach it!"))
+		to_chat(user, span_warning("The crystals crumble as you try to detach it!"))
 		qdel(src)
 		return
 
-	to_chat(user, span_warning("You sucessfully detach the crystals from the rock!"))
+	to_chat(user, span_warning("You successfully detach the crystals from the rock!"))
 	for(var/i in 1 to 3)
 		new /obj/item/mana_battery/mana_crystal/standard(loc)
 	qdel(src)
@@ -80,11 +80,11 @@
 
 	to_chat(user, span_notice("You carefully detach the crystals from the rock..."))
 	if(!do_after(user, 1.5 SECONDS, src))
-		to_chat(user, span_warning("The crystals crumbles as you try to detach it!"))
+		to_chat(user, span_warning("The crystals crumble as you try to detach it!"))
 		qdel(src)
 		return
 
-	to_chat(user, span_warning("You sucessfully detach the crystals from the rock!"))
+	to_chat(user, span_warning("You successfully detach the crystals from the rock!"))
 	for(var/i in 1 to 3)
 		new /obj/item/mana_battery/mana_crystal/standard(loc)
 	qdel(src)
