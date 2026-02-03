@@ -168,7 +168,6 @@
 /datum/skill_holder/Destroy(force, ...)
 	if(current)
 		set_current(null)
-	QDEL_LIST(known_skills)
 	known_skills = null
 	skill_experience = null
 	apprentices = null
@@ -185,6 +184,8 @@
 		RegisterSignal(current, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_deleted))
 
 /datum/skill_holder/proc/on_owner_deleted()
+	SIGNAL_HANDLER
+
 	qdel(src)
 
 /**
