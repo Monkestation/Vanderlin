@@ -154,6 +154,7 @@
 /// Triggered on destroy of the component's offhand
 /datum/component/two_handed/proc/on_destroy(datum/source)
 	SIGNAL_HANDLER
+
 	offhand_item = null
 
 /// Triggered on attack self of the item containing the component
@@ -165,6 +166,7 @@
 			unwield(user)
 		else if(user.is_holding(parent))
 			wield(user)
+		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /**
  * Wield the two handed item in both hands
