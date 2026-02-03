@@ -61,10 +61,10 @@
 	if(targetted)
 		var/list/mobsadjacent = list()
 		var/mob/chosenmob
-		for(var/mob/living/target_mob in range(user, 2))
+		for(var/mob/living/target_mob in view(user, 2))
 			if(target_mob == user)
 				continue
-			if(target_mob.m_intent == MOVE_INTENT_SNEAK) // No detecting sneaky people.
+			if(target_mob.rogue_sneaking) // No detecting sneaky people.
 				continue
 			mobsadjacent += target_mob
 		if(length(mobsadjacent))
