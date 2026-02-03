@@ -5,8 +5,6 @@
 	var/dismember_blade_int = 0
 	/// Maximum blade integrity
 	var/max_blade_int = 0
-	/// Whether to randomize the blade integrity on init
-	var/randomize_blade_int_on_init = FALSE
 	/// Sharpness loss multiplier
 	var/sharpness_mod = 1
 
