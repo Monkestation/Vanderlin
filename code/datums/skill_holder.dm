@@ -1,6 +1,3 @@
-/mob
-	var/datum/skill_holder/skills
-
 /mob/proc/ensure_skills()
 	RETURN_TYPE(/datum/skill_holder)
 	if(!skills)

@@ -25,24 +25,35 @@ GLOBAL_VAR_INIT(mobids, 1)
  * Returns QDEL_HINT_HARDDEL (don't change this)
  */
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+	if(client)
+		stack_trace("Mob with client has been deleted.")
+
 	GLOB.mob_list -= src
 	GLOB.dead_mob_list -= src
 	GLOB.alive_mob_list -= src
 	GLOB.mob_directory -= tag
 	focus = null
 
+	if(length(progressbars))
+		stack_trace("[src] destroyed with elements in its progressbars list")
+		progressbars = null
+
 	for (var/alert in alerts)
 		clear_alert(alert, TRUE)
-	if(observers && observers.len)
+
+	if(length(observers))
 		for(var/mob/dead/observe as anything in observers)
 			observe.reset_perspective(null)
+
 	qdel(hud_used)
-	for(var/cc in client_colours)
-		qdel(cc)
-	client_colours = null
-	ghostize(drawskip=TRUE)
-	..()
-	return QDEL_HINT_HARDDEL
+	QDEL_LIST(client_colours)
+
+	if(skills) // Laziness, move to living or have stubs
+		QDEL_NULL(skills)
+
+	ghostize(can_reenter_corpse = FALSE) //False, since we're deleting it currently
+
+	return ..()
 
 /// Assigns a (c)key to this mob.
 /mob/proc/PossessByPlayer(ckey)

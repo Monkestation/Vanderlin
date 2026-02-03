@@ -272,3 +272,5 @@
 	var/area/ambience_tracked_area
 	/// new title given by an admin.
 	var/admin_title = null
+
+	var/datum/skill_holder/skills
