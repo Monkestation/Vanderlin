@@ -17,7 +17,7 @@
 	desc = "TBA"
 	curse = "Weakness of the soul."
 	blood_preference = BLOOD_PREFERENCE_FANCY
-	clane_covens = list(
+	clan_covens = list(
 		/datum/coven/obfuscate,
 		/datum/coven/presence,
 		/datum/coven/bloodheal

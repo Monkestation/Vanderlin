@@ -4240,7 +4240,7 @@
 	},
 /obj/item/weapon/mace/woodclub/train_sword,
 /obj/structure/rack,
-/obj/item/weapon/mace/woodclub/crafted,
+/obj/item/weapon/mace/woodclub,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "SP" = (

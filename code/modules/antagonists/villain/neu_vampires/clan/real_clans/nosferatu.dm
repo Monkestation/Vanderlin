@@ -24,7 +24,7 @@
 	curse = "Masquerade-violating appearance."
 	alt_sprite = "nosferatu"
 	leader = /datum/clan_leader/nosferatu
-	clane_covens = list(
+	clan_covens = list(
 		/datum/coven/potence,
 		/datum/coven/obfuscate,
 		/datum/coven/bloodheal

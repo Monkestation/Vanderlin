@@ -1,13 +1,13 @@
-/datum/antagonist/vampire/lesser
+/datum/antagonist/vampire/lords_spawn
 	name = "Vampire Spawn"
-	antag_hud_name = "Vspawn"
+	antag_hud_name = "vampspawn"
 	confess_lines = list(
 		"THE CRIMSON MASTER CALLS!",
 		"MY MASTER COMMANDS!",
 		"THE SUN IS THE ANATHEMA OF OUR MASTER!",
 	)
 
-/datum/antagonist/vampire/lesser/on_gain()
+/datum/antagonist/vampire/lords_spawn/on_gain()
 	. = ..()
 
 	addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, spawn_pick_class), "[type]"), 5 SECONDS)
@@ -28,7 +28,7 @@
 			equipOutfit(A.outfit)
 			break
 
-/datum/antagonist/vampire/lesser/equip()
+/datum/antagonist/vampire/lords_spawn/equip()
 	. = ..()
 
 	owner.unknow_all_people()
@@ -44,9 +44,9 @@
 
 	owner.current.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
 
-/datum/antagonist/vampire/lesser/greet()
+/datum/antagonist/vampire/lords_spawn/greet()
 	to_chat(owner.current, span_userdanger("We are awakened from our slumber, Spawn of the feared Vampire Lord."))
 	. = ..()
 
-/datum/antagonist/vampire/lesser/move_to_spawnpoint()
+/datum/antagonist/vampire/lords_spawn/move_to_spawnpoint()
 	owner.current.forceMove(pick(GLOB.vspawn_starts))
