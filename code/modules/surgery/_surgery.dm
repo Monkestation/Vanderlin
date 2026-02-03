@@ -1,26 +1,141 @@
 /datum/surgery
 	abstract_type = /datum/surgery
-	var/category = "Surgery"
 	/// Name of the surgical procedure
 	var/name = "surgery"
 	/// Description of the surgical procedure
 	var/desc = ""
-	/// Steps to be performed in order
+	/// Category for book
+	var/category = "Surgery"
+
+	/// Bitfield for flags that determine different behaviors and requirement for the surgery. See __DEFINES/surgery.dm
+	var/surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB
+	///The surgery step we're currently on, increases each time we do a step.
+	var/status = 1
+	///All steps the surgery has to do to complete.
 	var/list/steps = list()
-	/// Acceptable mob types
-	var/list/target_mobtypes = list(/mob/living/carbon/human)
+	///Boolean on whether a surgery step is currently being done, to prevent multi-surgery.
+	var/step_in_progress = FALSE
+
+	///The bodypart this specific surgery is being performed on.
+	var/location = BODY_ZONE_CHEST
 	/// Acceptable body zones
 	var/list/possible_locs = list()
-	/// Surgery available only when a bodypart is present
-	var/requires_bodypart = TRUE
-	/// Surgery available only when a bodypart is missing
-	var/requires_missing_bodypart = FALSE
-	/// Surgery not available on pseudoparts
-	var/requires_real_bodypart = FALSE
-	/// Acceptable limb statuses
+	/// Acceptable mob types
+	var/list/target_mobtypes = list(/mob/living/carbon/human)
+	/// Intents that can be used to perform this surgery step
+	var/list/possible_intents
+
+	/// Skill used to perform this surgery
+	var/datum/skill/skill_used = /datum/skill/misc/medicine
+	/// Necessary skill MINIMUM to perform this surgery, of skill_used
+	var/skill_min = SKILL_LEVEL_NOVICE
+	/// Skill median used to apply success and speed bonuses
+	var/skill_median = SKILL_LEVEL_JOURNEYMAN
+
+	///The person the surgery is being performed on. Funnily enough, it isn't always a carbon.
+	VAR_FINAL/mob/living/carbon/target
+	///The specific bodypart being operated on.
+	VAR_FINAL/obj/item/bodypart/operated_bodypart
+	///The wound datum that is being operated on.
+	VAR_FINAL/datum/wound/operated_wound
+
+	///Types of wounds this surgery can target.
+	var/datum/wound/targetable_wound = null
+	///The types of bodyparts that this surgery can have performed on it. Used for augmented surgeries.
 	var/requires_bodypart_type = BODYPART_ORGANIC
-	///will the church kill us
+
+	/// Organ being directly manipulated, used for checking if the organ is still in the body after surgery has begun
+	var/organ_to_manipulate = null
+
+	/// Will the church kill us
 	var/heretical = FALSE
+
+/datum/surgery/New(atom/surgery_target, surgery_location, surgery_bodypart)
+	. = ..()
+	if(!surgery_target)
+		return
+	target = surgery_target
+	target.surgeries += src
+	if(surgery_location)
+		location = surgery_location
+	if(!surgery_bodypart)
+		return
+	operated_bodypart = surgery_bodypart
+	if(targetable_wound)
+		operated_wound = operated_bodypart.has_wound(targetable_wound)
+		operated_wound.attached_surgery = src
+
+	SEND_SIGNAL(surgery_target, COMSIG_MOB_SURGERY_STARTED, src, surgery_location, surgery_bodypart)
+
+/datum/surgery/Destroy()
+	if(operated_wound)
+		operated_wound.attached_surgery = null
+		operated_wound = null
+	if(target)
+		target.surgeries -= src
+		if(!QDELING(target))
+			SEND_SIGNAL(target, COMSIG_MOB_SURGERY_FINISHED, type, location, operated_bodypart)
+	target = null
+	operated_bodypart = null
+	return ..()
+
+/datum/surgery/proc/can_start(mob/user, mob/living/patient) //FALSE to not show in list
+	SHOULD_CALL_PARENT(TRUE)
+
+	var/surgery_signal = SEND_SIGNAL(user, COMSIG_SURGERY_STARTING, src, patient)
+	if(surgery_signal & COMPONENT_FORCE_SURGERY)
+		return TRUE
+	if(surgery_signal & COMPONENT_CANCEL_SURGERY)
+		return FALSE
+
+	return TRUE
+
+/datum/surgery/proc/next_step(mob/living/user, modifiers)
+	if(location != user.zone_selected)
+		return FALSE
+
+	if(user.cmode)
+		return FALSE
+
+	if(step_in_progress)
+		return TRUE
+
+	var/try_to_fail = FALSE
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		try_to_fail = TRUE
+	else if(!target.stat == DEAD && user.get_skill_level(skill_used) < skill_min)
+		try_to_fail = TRUE // If you don't have the skill it will fail always
+
+	var/datum/surgery_step/surgery_step = GLOB.surgery_steps[steps[status]]
+	if(isnull(surgery_step))
+		return FALSE
+
+	var/obj/item/tool = user.get_active_held_item()
+	if(tool)
+		tool = tool.get_proxy_attacker_for(target, user)
+
+	if(surgery_step.try_op(user, target, user.zone_selected, tool, src, try_to_fail))
+		return TRUE
+
+	if(!tool)
+		return FALSE
+
+	// Just because you used the wrong tool it doesn't mean you meant to whack the patient with it
+	if((surgery_flags & SURGERY_CHECK_TOOL_BEHAVIOUR) ? tool.tool_behaviour : (tool.item_flags & SURGICAL_TOOL))
+		to_chat(user, span_warning("This step requires a different tool!"))
+		return TRUE
+
+	return FALSE
+
+/datum/surgery/proc/get_surgery_next_step()
+	if(status < length(steps))
+		var/step_type = steps[status + 1]
+		return new step_type
+	return null
+
+/datum/surgery/proc/complete(mob/surgeon)
+	SSblackbox.record_feedback("tally", "surgeries_completed", 1, type)
+	qdel(src)
 
 /datum/surgery/proc/generate_html(mob/user)
 	var/client/client = user
@@ -31,6 +146,7 @@
 
 	if(heretical)
 		desc = "<div style='color: red;'><b>HERETICAL RESEARCH</b></div>" + desc
+
 	var/html = {"
 		<!DOCTYPE html>
 		<html>
@@ -47,14 +163,30 @@
 					</div>
 	"}
 
-	if(requires_bodypart)
+	if(surgery_flags & SURGERY_REQUIRE_LIMB)
 		html += "<div class='section'><b>**Requires bodypart to be present**</b></div>"
-	if(requires_missing_bodypart)
+	else
 		html += "<div class='section'><b>**Requires bodypart to be MISSING**</b></div>"
-	if(requires_real_bodypart)
+
+	if(surgery_flags & SURGERY_REQUIRES_REAL_LIMB)
 		html += "<div class='section'><b>**Cannot be performed on prosthetics**</b></div>"
+
 	if(requires_bodypart_type && requires_bodypart_type != BODYPART_ORGANIC)
 		html += "<div class='section'><b>Can only be done on prosthetic limbs.</div>"
+
+	if(organ_to_manipulate)
+		html += "<div class='section'><b>Required Organ: [organ_to_manipulate]"
+		html += "</div>"
+
+	if(targetable_wound)
+		html += "<div class='section'><b>Required Wound: [targetable_wound::name]"
+		html += "</div>"
+
+	if(skill_used && skill_min)
+		var/datum/skill/used_skill = skill_used
+		var/skill_name = initial(used_skill.name)
+		html += "<div class='step-info'><b>Minimum Experience:</b> [SSskills.level_names[skill_min]] [skill_name]</div>"
+		html += "<div class='step-info'><b>Optimal Experience:</b> [SSskills.level_names[skill_median]] [skill_name]</div>"
 
 	if(length(steps))
 		html += "<div class='section'><h2>Procedure Steps</h2>"
@@ -97,50 +229,18 @@
 
 	if(step.accept_hand)
 		html += "<div class='step-info'><b>Can be performed with bare hands</b></div>"
+
 	if(step.accept_any_item)
 		html += "<div class='step-info'><b>Accepts any item</b></div>"
 
-	if(step.skill_used && step.skill_min)
-		var/datum/skill/used_skill = step.skill_used
-		var/skill_name = initial(used_skill.name)
-		html += "<div class='step-info'><b>Minimum Experience:</b> [SSskills.level_names[step.skill_min]] [skill_name]</div>"
-		html += "<div class='step-info'><b>Optimal Experience:</b> [SSskills.level_names[step.skill_median]] [skill_name]</div>"
-
 	if(length(step.chems_needed))
 		html += "<div class='step-info'><b>Chemicals Required:</b><br>"
-		var/chem_string = step.get_chem_string()
-		html += "[chem_string]<br>"
+		html += "[step.get_chem_list()]<br>"
 		html += "</div>"
 
-	if(length(step.required_organs))
-		html += "<div class='step-info'><b>Required Organs:</b><br>"
-		for(var/organ in step.required_organs)
-			html += "• [organ]<br>"
-		html += "</div>"
 	var/list/flags = list()
-	/*
-	if(step.surgery_flags & SURGERY_BLOODY) //this is on EVERYTHING
-		flags += "Bloody procedure"
-	*/
-	if(step.surgery_flags & SURGERY_INCISED)
-		flags += "Requires incision"
-	if(step.surgery_flags & SURGERY_RETRACTED)
-		flags += "Requires retraction"
-	if(step.surgery_flags & SURGERY_CLAMPED)
-		flags += "Requires clamping"
-	if(step.surgery_flags & SURGERY_DISLOCATED)
-		flags += "Requires dislocation"
-	if(step.surgery_flags & SURGERY_BROKEN)
-		flags += "Requires broken bodypart"
-	if(step.surgery_flags & SURGERY_DRILLED)
-		flags += "Requires drilling"
-	if(step.lying_required)
-		flags += "Patient must be lying down"
-	if(!step.self_operable)
-		flags += "Cannot self-operate"
-	if(step.ignore_clothes)
-		flags += "Ignores clothing"
-	if(step.repeating)
+
+	if(step.repeatable)
 		flags += "Repeatable until failure"
 
 	if(length(flags))

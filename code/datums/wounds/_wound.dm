@@ -97,8 +97,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Primary use is for wound application
 	var/list/associated_bclasses = list()
 
+	/// If we're operating on this wound and it gets healed, we'll nix the surgery too
+	var/datum/surgery/attached_surgery
+
 /datum/wound/Destroy(force)
-	. = ..()
 	if(bodypart_owner)
 		remove_from_bodypart()
 	else if(owner)
@@ -106,8 +108,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(werewolf_infection_timer)
 		deltimer(werewolf_infection_timer)
 		werewolf_infection_timer = null
+	QDEL_NULL(attached_surgery)
 	bodypart_owner = null
 	owner = null
+	return ..()
 
 /// Description of this wound returned to the player when a bodypart is examined and such
 /datum/wound/proc/get_visible_name(mob/user)

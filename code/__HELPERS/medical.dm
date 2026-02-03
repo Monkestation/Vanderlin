@@ -1,3 +1,9 @@
+/// Returns a string for the specified body zone. If we have a bodypart in this zone, refers to its plaintext_zone instead.
+/mob/living/proc/parse_zone_with_bodypart(zone)
+	var/obj/item/bodypart/part = get_bodypart(zone)
+
+	return parse_zone(zone)
+
 /proc/parse_zone(zone)
 	switch(zone)
 		if(BODY_ZONE_PRECISE_R_HAND)

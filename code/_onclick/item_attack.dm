@@ -2,7 +2,7 @@
  * This is the proc that handles the order of an item_attack.
  *
  * The order of procs called is:
- * * [/atom/proc/tool_act] on the target. If it returns TRUE, the chain will be stopped.
+ * * [/atom/proc/tool_act] on the target. If it returns ITEM_INTERACT_SUCCESS or ITEM_INTERACT_BLOCKING, the chain will be stopped.
  * * [/obj/item/proc/pre_attack] on src. If this returns TRUE, the chain will be stopped.
  * * [/atom/proc/attackby] on the target. If it returns TRUE, the chain will be stopped.
  * * [/obj/item/proc/afterattack]. The return value does not matter.
@@ -28,8 +28,11 @@
 
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 
-	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
+	var/item_interact_result = target.item_interaction(user, src, modifiers, is_right_clicking)
+	if(item_interact_result & ITEM_INTERACT_SUCCESS)
 		return TRUE
+	if(item_interact_result & ITEM_INTERACT_BLOCKING)
+		return FALSE
 
 	var/pre_attack_result
 	if(is_right_clicking)
@@ -168,14 +171,20 @@
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
-/obj/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(!user.cmode)
-		if(user.try_recipes(src, I, user))
+/obj/attackby(obj/item/attacking_item, mob/user, list/modifiers)
+	if(..())
+		return TRUE
+
+	if(!attacking_item.obj_flags_ignore && !(obj_flags & CAN_BE_HIT))
+		return FALSE
+
+	if(isliving(user) && !user.cmode)
+		var/mob/living/living_user = user
+		if(living_user.try_recipes(src, attacking_item))
 			user.changeNext_move(CLICK_CD_FAST)
 			return TRUE
-	if(I.obj_flags_ignore)
-		return I.attack_atom(src, user)
-	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_atom(src, user))
+
+	return attacking_item.attack_atom(src, user, modifiers)
 
 /turf/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(liquids && I.heat)
