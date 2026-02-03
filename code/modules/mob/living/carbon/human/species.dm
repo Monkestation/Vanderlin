@@ -1336,7 +1336,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	return
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(target.body_position == LYING_DOWN)
+	if(target.body_position == STANDING_UP || (target.stat == UNCONSCIOUS && target.IsSleeping()))
 		target.help_shake_act(user)
 		if(target != user)
 			log_combat(user, target, "shaken")

@@ -71,15 +71,16 @@
 	var/tmsg = "[user] fixes some of [target]'s wounds" //see above
 	var/healing_multiplier = 1
 
-	switch(user.get_skill_level(surgery.skill_used))
-		if(SKILL_LEVEL_JOURNEYMAN)
-			healing_multiplier = 1.1
-		if(SKILL_LEVEL_EXPERT)
-			healing_multiplier = 1.3
-		if(SKILL_LEVEL_MASTER)
-			healing_multiplier = 1.4
-		if(SKILL_LEVEL_LEGENDARY)
-			healing_multiplier = 1.5
+	if(surgery)
+		switch(user.get_skill_level(surgery.skill_used))
+			if(SKILL_LEVEL_JOURNEYMAN)
+				healing_multiplier = 1.1
+			if(SKILL_LEVEL_EXPERT)
+				healing_multiplier = 1.3
+			if(SKILL_LEVEL_MASTER)
+				healing_multiplier = 1.4
+			if(SKILL_LEVEL_LEGENDARY)
+				healing_multiplier = 1.5
 
 	var/urhealedamt_brute = brute_healing * healing_multiplier
 	var/urhealedamt_burn = burn_healing * healing_multiplier
