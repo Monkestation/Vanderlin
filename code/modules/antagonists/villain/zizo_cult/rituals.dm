@@ -518,19 +518,36 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(target.mind.has_antag_datum(/datum/antagonist/werewolf))
 		to_chat(target, span_warning("The curse doesn't take hold!"))
 		return
+	if(target.get_lux_status() != LUX_HAS_LUX)
+		to_chat(target, span_warning("The curse requires lux!"))
+		return
+	if(target.stat == DEAD)
+		return
 	to_chat(target, span_warning("My very being, body, soul, and mind is contorted and twisted violently into a ball of flesh and fur, until I am reshaped anew as an abomination!"))
 	addtimer(CALLBACK(src, PROC_REF(get_hollowed), target, center), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/curse/proc/get_hollowed(mob/living/victim, turf/place)
-    if(QDELETED(victim))
-        return
-    if(place != get_turf(victim))
-        return
-    if(!victim.mind)
-        return
-    var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
-    victim.mind.transfer_to(wll)
-    victim.gib()
+	if(QDELETED(victim))
+		return
+	if(place != get_turf(victim))
+		return
+	if(!victim.mind)
+		return
+	if(victim.mob_biotypes & MOB_UNDEAD)
+		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		return
+	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
+		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		return
+	if(victim.get_lux_status() != LUX_HAS_LUX)
+		to_chat(victim, span_warning("The curse requires lux!"))
+		return
+	if(victim.stat == DEAD)
+		return
+
+	var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
+	victim.mind.transfer_to(wll)
+	victim.gib()
 
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"
