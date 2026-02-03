@@ -714,22 +714,6 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_ACID_ACT, acidpwr, acid_volume)
 
 /**
- * Respond to an emag being used on our atom
- *
- * Default behaviour is to send COMSIG_ATOM_EMAG_ACT and return
- */
-/atom/proc/emag_act(mob/user)
-	SEND_SIGNAL(src, COMSIG_ATOM_EMAG_ACT, user)
-
-/**
- * Respond to narsie eating our atom
- *
- * Default behaviour is to send COMSIG_ATOM_NARSIE_ACT and return
- */
-/atom/proc/narsie_act()
-	SEND_SIGNAL(src, COMSIG_ATOM_NARSIE_ACT)
-
-/**
  * Implement the behaviour for when a user click drags a storage object to your atom
  *
  * This behaviour is usually to mass transfer, but this is no longer a used proc as it just

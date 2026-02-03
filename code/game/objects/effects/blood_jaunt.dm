@@ -113,9 +113,6 @@
 	packed = list()
 	. = ..()
 
-/obj/effect/bloodcult_jaunt/narsie_act()
-	return
-
 /obj/effect/bloodcult_jaunt/ex_act()
 	return
 

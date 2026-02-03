@@ -223,12 +223,6 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 //	show_data_huds()
 //	data_huds_on = 1
 
-/mob/dead/observer/narsie_act()
-	var/old_color = color
-	color = "#960000"
-	animate(src, color = old_color, time = 10, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 10)
-
 /mob/dead/observer/Destroy()
 	mind?.current_ghost = null
 
