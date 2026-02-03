@@ -96,6 +96,9 @@
 	if(curplaying)
 		curplaying.on_mouse_up()
 
+	if(next_move > world.time) // in the year 2000...
+		return
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 			ShiftRightClickOn(clicked_atom, modifiers)
@@ -130,9 +133,6 @@
 		return
 
 	if(incapacitated(IGNORE_RESTRAINTS|IGNORE_GRAB))
-		return
-
-	if(next_move > world.time) // in the year 2000...
 		return
 
 	if(!LAZYACCESS(modifiers, CLICK_CATCHER) && clicked_atom.IsObscured())
