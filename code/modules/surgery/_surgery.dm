@@ -114,7 +114,7 @@
 
 	var/selected_zone = user.zone_selected
 
-	if(use_precise && (selected_zone in possible_locs) || !use_precise && (selected_zone in possible_locs))
+	if((use_precise && !(selected_zone in possible_locs)) || (!use_precise && !(selected_zone in possible_locs)))
 		if(feedback)
 			patient.balloon_alert(user, "can't operate there!")
 		return FALSE

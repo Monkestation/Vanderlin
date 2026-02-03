@@ -1,6 +1,6 @@
 /*ALL DNA, SPECIES, AND GENETICS-RELATED DEFINES GO HERE*/
 
-#define CHECK_DNA_AND_SPECIES(C) if((!(C.dna)) || (!(C.dna.species))) return
+#define CHECK_DNA_AND_SPECIES(C) if(!(C.dna?.species)) return
 
 #define UI_CHANGED "ui changed"
 #define UE_CHANGED "ue changed"

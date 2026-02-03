@@ -353,46 +353,76 @@
 		// Might need re-wording.
 		to_chat(user, "<span class='alert'>There is no exposed flesh or thin material [above_neck(target_zone) ? "on [p_their()] head" : "on [p_their()] body"].</span>")
 
-/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
-	CHECK_DNA_AND_SPECIES(C)
+#define CPR_PANIC_SPEED (0.8 SECONDS)
 
-	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
-		to_chat(src, "<span class='warning'>[C.name] is dead!</span>")
+/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/target)
+	if(target == src)
 		return
-	if(is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove your mask first!</span>")
-		return 0
-	if(C.is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove [p_their()] mask first!</span>")
-		return 0
 
-	if(C.cpr_time < world.time + 30)
-		visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
-						"<span class='notice'>I try to perform CPR on [C.name]... Hold still!</span>")
-		if(!do_after(src, 3 SECONDS, C))
-			to_chat(src, "<span class='warning'>I fail to perform CPR on [C]!</span>")
-			return 0
+	var/panicking = FALSE
 
-		var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
-		var/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
+	do
+		CHECK_DNA_AND_SPECIES(target)
 
-		if(C.health > C.crit_threshold)
-			return
+		if(DOING_INTERACTION_WITH_TARGET(src, target))
+			return FALSE
 
-		src.visible_message("<span class='notice'>[src] performs CPR on [C.name]!</span>", "<span class='notice'>I perform CPR on [C.name].</span>")
-		add_stress(/datum/stress_event/perform_cpr)
-		C.cpr_time = world.time
-		log_combat(src, C, "CPRed")
+		if(target.stat == DEAD || HAS_TRAIT(target, TRAIT_FAKEDEATH))
+			balloon_alert(src, "[target.p_they()] [target.p_are()] dead!")
+			return FALSE
 
-		if(they_breathe && they_lung)
-			var/suff = min(C.getOxyLoss(), 7)
-			C.adjustOxyLoss(-suff)
-			C.updatehealth()
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air enter your lungs... It feels good...</span>")
-		else if(they_breathe && !they_lung)
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... but you don't feel any better...</span>")
+		if(is_mouth_covered())
+			balloon_alert(src, "remove your mask first!")
+			return FALSE
+
+		if(target.is_mouth_covered())
+			balloon_alert(src, "remove [target.p_their()] mask first!")
+			return FALSE
+
+		if(HAS_TRAIT(src, TRAIT_NOBREATH))
+			to_chat(src, span_warning("you can't breathe!"))
+			return FALSE
+
+		var/obj/item/organ/lungs/human_lungs = getorganslot(ORGAN_SLOT_LUNGS)
+		if(isnull(human_lungs))
+			balloon_alert(src, "you don't have lungs!")
+			return FALSE
+
+		if(human_lungs.organ_flags & ORGAN_FAILING)
+			balloon_alert(src, "your lungs are too damaged!")
+			return FALSE
+
+		visible_message(span_notice("[src] is trying to breathe air into [target.name]'s mouth!"), \
+						span_notice("I try to breathe air into [target.name]'s mouth! Hold still!"))
+
+		if (!do_after(src, delay = panicking ? CPR_PANIC_SPEED : (3 SECONDS), target = target))
+			balloon_alert(src, "I fail to perform mouth to mouth!")
+			return FALSE
+
+		if (target.health > target.crit_threshold)
+			return FALSE
+
+		visible_message(span_notice("[src] breathes air into [target.name]'s mouth!"), span_notice("I breathe air into [target.name]'s mouth."))
+
+		log_combat(src, target, "CPRed")
+
+		if (HAS_TRAIT(target, TRAIT_NOBREATH))
+			to_chat(target, span_unconscious("You feel a breath of fresh air... which is a sensation you don't recognise..."))
+		else if (!target.getorganslot(ORGAN_SLOT_LUNGS))
+			to_chat(target, span_unconscious("You feel a breath of fresh air... but you don't feel any better..."))
 		else
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... which is a sensation you don't recognise...</span>")
+			target.adjustOxyLoss(-min(target.getOxyLoss(), 7))
+			to_chat(target, span_unconscious("You feel a breath of fresh air enter your lungs... It feels good..."))
+
+		if (target.health <= target.crit_threshold)
+			if (!panicking)
+				to_chat(src, span_warning("[target] still isn't up! You try harder!"))
+			panicking = TRUE
+		else
+			panicking = FALSE
+	while (panicking)
+
+#undef CPR_PANIC_SPEED
 
 /mob/living/carbon/human/cuff_resist(obj/item/I)
 	if(..())

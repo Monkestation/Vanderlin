@@ -20,7 +20,7 @@
 	if(!.)
 		return
 
-	if(target.stat != DEAD)
+	if(patient.stat != DEAD)
 		if(feedback)
 			patient.balloon_alert(user, "patient is still alive")
 		return FALSE
