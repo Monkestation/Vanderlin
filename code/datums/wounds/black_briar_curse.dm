@@ -65,7 +65,7 @@
 	if(istype(other, /datum/wound/black_briar_curse))
 		if(!(src in GLOB.primordial_wounds)) //idk why someone would be using these this way but i'd prefer not to build up its infection
 			var/datum/wound/black_briar_curse/O = other
-			O.infection = min(O.infection + O.max_infection * 0.035, O.max_infection)
+			O.infection = min(O.infection + O.max_infection * 0.01, O.max_infection)
 			remove_immunity(O.owner)
 		return FALSE
 	return TRUE

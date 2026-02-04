@@ -19,7 +19,6 @@ GLOBAL_LIST_INIT(species_hostile, world.file2list('strings/rt/species_hostile.tx
 	set_species(/datum/species/aasimar)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
-	job = "Graggarite Aasimar"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 0

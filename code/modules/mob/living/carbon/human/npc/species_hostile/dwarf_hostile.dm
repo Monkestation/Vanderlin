@@ -15,7 +15,6 @@
 	set_species(/datum/species/dwarf/mountain)
 	AddComponent(/datum/component/ai_aggro_system)
 	set_patron(/datum/patron/inhumen/graggar, TRUE)
-	job = "Graggarite Dwarf"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 0

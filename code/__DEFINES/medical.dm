@@ -100,8 +100,8 @@
 #define ARTERY_LIMB_BLEEDRATE 25
 
 /// Black Briar
-#define BBC_TIME_MAX (60 MINUTES)
-#define BBC_TIME_MAX_LIMB BBC_TIME_MAX * 0.5
+#define BBC_TIME_MAX (75 MINUTES)
+#define BBC_TIME_MAX_LIMB BBC_TIME_MAX * 0.6
 
 /// Black Briar time ratios
 #define BBC_STAGE_LATE 	0.7
