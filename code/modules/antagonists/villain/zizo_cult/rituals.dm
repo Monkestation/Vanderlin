@@ -173,7 +173,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	icon_state = "heart-on"
 	w_class =  WEIGHT_CLASS_SMALL
 
-/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, params)
+/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
 		return
 	if(istype(target.patron, /datum/patron/inhumen/zizo))

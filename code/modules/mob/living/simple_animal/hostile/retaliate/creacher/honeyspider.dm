@@ -96,7 +96,7 @@
 
 	ADD_TRAIT(src, TRAIT_WEBWALK, TRAIT_GENERIC)
 
-/mob/living/simple_animal/hostile/retaliate/spider/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
+/mob/living/simple_animal/hostile/retaliate/spider/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(!..())
 		return
 	production += 50
@@ -268,7 +268,7 @@
 			string = "completely full"
 	. += span_notice("The nest looks [string].")
 
-/obj/structure/spider/nest/attackby(obj/item/I, mob/user, params)
+/obj/structure/spider/nest/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	disturb(user)
 

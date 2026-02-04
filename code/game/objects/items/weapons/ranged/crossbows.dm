@@ -168,8 +168,7 @@
 		cocked = FALSE
 		update_appearance(UPDATE_ICON_STATE)
 
-
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attack_self(mob/living/user)
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attack_self(mob/living/user, list/modifiers)
 	if(chambered)
 		return ..()
 
@@ -189,14 +188,14 @@
 
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attackby(obj/item/A, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attackby(obj/item/A, mob/user, list/modifiers)
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
 		if(cocked)
 			return ..()
 		to_chat(user, span_warning("I need to cock the bow first."))
 
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(user.client)
 		if(user.client.chargedprog >= 100)
 			spread = 0

@@ -73,7 +73,7 @@
 /obj/item/ammo_box/proc/can_load(mob/user)
 	return TRUE
 
-/obj/item/ammo_box/attackby(obj/item/A, mob/user, params, silent = FALSE, replace_spent = 0)
+/obj/item/ammo_box/attackby(obj/item/A, mob/user, list/modifiers, silent = FALSE, replace_spent = 0)
 	var/num_loaded = 0
 	if(!can_load(user))
 		return
@@ -100,7 +100,7 @@
 		update_appearance(UPDATE_ICON_STATE)
 	return num_loaded
 
-/obj/item/ammo_box/attack_self(mob/user, params)
+/obj/item/ammo_box/attack_self(mob/user, list/modifiers)
 	var/obj/item/ammo_casing/A = get_round()
 	if(A)
 		A.forceMove(drop_location())

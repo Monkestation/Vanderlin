@@ -32,7 +32,7 @@
 	return
 
 
-/obj/structure/fake_machine/lottery_roguetown/attackby(obj/item/coin/P, mob/living/user)
+/obj/structure/fake_machine/lottery_roguetown/attackby(obj/item/coin/P, mob/living/user, list/modifiers)
 	. = ..()
 
 	if(!istype(P))

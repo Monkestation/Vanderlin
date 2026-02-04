@@ -21,7 +21,7 @@
 				hidden_toxicshrooms = FALSE
 			return
 
-/turf/open/floor/dirt/attackby(obj/item/W, mob/user, params)
+/turf/open/floor/dirt/attackby(obj/item/W, mob/user, list/modifiers)
 	if(hidden_truffles)
 		if(istype(W, /obj/item/weapon/shovel))
 			if(user.used_intent.type == /datum/intent/shovelscoop)
@@ -260,7 +260,7 @@
 		var/turf/t = get_turf(src)
 		trufflesearch(t, 5)
 
-/mob/living/simple_animal/hostile/retaliate/trufflepig/attackby(obj/item/O, mob/user, params)
+/mob/living/simple_animal/hostile/retaliate/trufflepig/attackby(obj/item/O, mob/user, list/modifiers)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/truffles))
 		visible_message("<span class='notice'>The pig munches the truffles, looking happy.</span>")
 		hangry_meter = 0

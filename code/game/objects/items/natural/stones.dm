@@ -268,7 +268,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		to_chat(user, span_info("The [src] slips through dead fingers..."))
 		user.dropItemToGround(src, TRUE)
 
-/obj/item/natural/stone/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/item/natural/stone/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -283,7 +283,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		user.changeNext_move(CLICK_CD_FAST)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/natural/stone/attackby(obj/item/W, mob/living/user, params)
+/obj/item/natural/stone/attackby(obj/item/W, mob/living/user, list/modifiers)
 	var/list/offhand_types = typecacheof(list(/obj/item/weapon/hammer, /obj/item/natural/stone, /obj/item/natural/stoneblock))
 	var/item = user.get_inactive_held_item()
 	if(user.used_intent.type == /datum/intent/chisel && is_type_in_typecache(item, offhand_types))
@@ -373,7 +373,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 				S.set_up(1, 1, front)
 				S.start()
 
-/obj/item/natural/rock/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/item/natural/rock/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -398,7 +398,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			S.start()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/natural/rock/attackby(obj/item/W, mob/living/user, params)
+/obj/item/natural/rock/attackby(obj/item/W, mob/living/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_MELEE)
 	var/list/offhand_types = typecacheof(list(/obj/item/weapon/hammer, /obj/item/natural/stone, /obj/item/natural/stoneblock))
 	var/item = user.get_inactive_held_item()

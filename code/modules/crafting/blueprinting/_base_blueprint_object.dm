@@ -42,7 +42,7 @@
 	GLOB.active_blueprints |= src
 	SSblueprints.add_new_blueprint(src)
 
-/obj/structure/blueprint/attackby(obj/item/I, mob/user, params)
+/obj/structure/blueprint/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, recipe.construct_tool))
 		return
 	try_construct(user, I)

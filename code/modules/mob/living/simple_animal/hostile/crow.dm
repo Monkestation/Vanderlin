@@ -92,7 +92,7 @@
 		qdel(src)
 
 
-/obj/item/reagent_containers/food/snacks/crow/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/food/snacks/crow/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!dead)
 		if(isliving(user) && isturf(loc))
 			var/mob/living/L = user
