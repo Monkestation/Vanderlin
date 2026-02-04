@@ -225,21 +225,34 @@
 			to_chat(user, span_warning("[src] has no meat to eat."))
 	..()
 
-/obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
-	if(ishuman(C))
-		var/mob/living/carbon/human/H = C
-		if(HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))
-			if(!H.get_bodypart(body_zone) && !animal_origin)
-				if(H == user)
-					H.visible_message("<span class='warning'>[H] jams [src] into [H.p_their()] empty socket!</span>",\
-					"<span class='notice'>I force [src] into my empty socket, and it locks into place!</span>")
-				else
-					H.visible_message("<span class='warning'>[user] jams [src] into [H]'s empty socket!</span>",\
-					"<span class='notice'>[user] forces [src] into my empty socket, and it locks into place!</span>")
-				user.temporarilyRemoveItemFromInventory(src, TRUE)
-				attach_limb(C)
-				return
-	return ..()
+/obj/item/bodypart/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!iscarbon(interacting_with))
+		return NONE
+
+	var/mob/living/carbon/C = interacting_with
+
+	if(!HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))
+		return ITEM_INTERACT_BLOCKING
+
+	if(animal_origin)
+		return ITEM_INTERACT_BLOCKING
+
+	if(C.get_bodypart(body_zone))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!user.temporarilyRemoveItemFromInventory(src, TRUE))
+		return ITEM_INTERACT_BLOCKING
+
+	if(C == user)
+		C.visible_message("<span class='warning'>[C] jams [src] into [C.p_their()] empty socket!</span>",\
+		"<span class='notice'>I force [src] into my empty socket, and it locks into place!</span>")
+	else
+		C.visible_message("<span class='warning'>[user] jams [src] into [C]'s empty socket!</span>",\
+		"<span class='notice'>[user] forces [src] into my empty socket, and it locks into place!</span>")
+
+	attach_limb(C)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
 	if(length(contents) && I.get_sharpness() && !user.cmode)

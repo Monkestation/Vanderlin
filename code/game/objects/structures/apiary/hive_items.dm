@@ -132,30 +132,27 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/magnifying_glass/attack(mob/living/M, mob/user, list/modifiers)
-	return
+/obj/item/magnifying_glass/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!istype(interacting_with, /obj/structure/apiary))
+		return NONE
 
-/obj/item/magnifying_glass/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(!proximity)
-		return
+	var/obj/structure/apiary/A = interacting_with
 
-	if(istype(target, /obj/structure/apiary))
-		var/obj/structure/apiary/A = target
+	to_chat(user, span_notice("You carefully inspect [A]."))
 
-		to_chat(user, span_notice("You carefully inspect [A]."))
+	if(A.has_disease && A.disease)
+		to_chat(user, A.disease.get_inspection_message())
+		to_chat(user, A.disease.get_severity_description(A.disease_severity))
+	else
+		to_chat(user, span_notice("The bees appear to be healthy."))
 
-		if(A.has_disease && A.disease)
-			to_chat(user, A.disease.get_inspection_message())
-			to_chat(user, A.disease.get_severity_description(A.disease_severity))
-		else
-			to_chat(user, span_notice("The bees appear to be healthy."))
+	if(A.bee_count + A.outside_bees == 0)
+		to_chat(user, span_warning("The hive is empty!"))
+	else if(A.bee_count + A.outside_bees < 5)
+		to_chat(user, span_warning("The colony is very small."))
+	else if(A.bee_count + A.outside_bees < 15)
+		to_chat(user, span_notice("The colony is moderate in size."))
+	else
+		to_chat(user, span_notice("The colony is thriving with many bees!"))
 
-		if(A.bee_count + A.outside_bees == 0)
-			to_chat(user, span_warning("The hive is empty!"))
-		else if(A.bee_count + A.outside_bees < 5)
-			to_chat(user, span_warning("The colony is very small."))
-		else if(A.bee_count + A.outside_bees < 15)
-			to_chat(user, span_notice("The colony is moderate in size."))
-		else
-			to_chat(user, span_notice("The colony is thriving with many bees!"))
+	return ITEM_INTERACT_SUCCESS

@@ -597,28 +597,41 @@
 		else
 			working = FALSE
 
-/obj/item/inqarticles/indexer/attack(mob/living/M, mob/living/user, list/modifiers)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_INQUISITION))
+/obj/item/inqarticles/indexer/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!isliving(interacting_with))
+		return NONE
+
+	if(!HAS_TRAIT(user, TRAIT_INQUISITION))
 		to_chat(user, span_warning("I don't know how to use this."))
+		return ITEM_INTERACT_BLOCKING
+
 	if(!active)
 		to_chat(user, span_warning("It's not primed."))
-		return
-	if(HAS_TRAIT(M, TRAIT_BLOODLOSS_IMMUNE))
-		to_chat(user, span_warning("They don't have any blood to sample."))
-		return
-	if(iscarbon(M))
-		var/mob/living/carbon/C = M
-		if(NOBLOOD in C.dna.species.species_traits)
-			to_chat(user, span_warning("They don't have any blood to sample."))
-			return
+		return ITEM_INTERACT_BLOCKING
+
 	if(full)
 		to_chat(user, span_warning("It's full."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	visible_message(span_warning("[user] goes to jab [M] with [src]!"))
-	if(do_after(user, 2 SECONDS, M))
-		takeblood(M, user)
+	var/mob/living/L = interacting_with
+
+	if(HAS_TRAIT(L, TRAIT_BLOODLOSS_IMMUNE))
+		to_chat(user, span_warning("[L] has no blood to sample."))
+		return ITEM_INTERACT_BLOCKING
+	else if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		if((NOBLOOD in C.dna?.species?.species_traits))
+			to_chat(user, span_warning("They don't have any blood to sample."))
+			return ITEM_INTERACT_BLOCKING
+
+	visible_message(span_warning("[user] goes to jab [L] with [src]!"))
+
+	if(!do_after(user, 2 SECONDS, L))
+		return ITEM_INTERACT_BLOCKING
+
+	takeblood(L, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/inqarticles/tallowpot
 	name = "tallowpot"
@@ -995,8 +1008,6 @@
 /obj/item/clothing/head/inqarticles/blackbag/proc/bagsound(mob/living/M)
 	if(bagging)
 		playsound(M, pick('sound/misc/blackbag.ogg','sound/misc/blackbag2.ogg','sound/misc/blackbag3.ogg','sound/misc/blackbag4.ogg','sound/misc/blackbag5.ogg'), 100, TRUE, 4)
-	else
-		return
 
 /obj/item/clothing/head/inqarticles/blackbag/proc/bagcheck(mob/living/M)
 	var/timer = 10
@@ -1005,51 +1016,39 @@
 		if(bagging)
 			addtimer(CALLBACK(src, PROC_REF(bagsound), M), timer)
 
-/obj/item/clothing/head/inqarticles/blackbag/attack(mob/living/M, mob/living/user, list/modifiers)
-	. = ..()
-	if(!iscarbon(M))
-		return
+/obj/item/clothing/head/inqarticles/blackbag/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!iscarbon(interacting_with))
+		return NONE
+
+	var/mob/living/carbon/M = interacting_with
+
 	if(HAS_TRAIT(M, TRAIT_BAGGED))
 		to_chat(user, span_warning("They've already been bagged."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	headgear = M.get_item_by_slot(ITEM_SLOT_HEAD)
+
 	var/trained = FALSE
 	var/timetobag = 8 SECONDS
 	if(HAS_TRAIT(user, TRAIT_BLACKBAGGER))
 		trained = TRUE
 		timetobag = 4 SECONDS
+
 	user.visible_message(span_danger("[user] goes to [trained ? "expertly" : "clumsily"] black bag [M]!"))
-	/*
-	if(HAS_TRAIT(M, TRAIT_GRABIMMUNE))
-		user.visible_message(span_danger("[M] slips past [user]'s attempt to black bag them!"))
-		playsound(M, pick('sound/misc/blackbag.ogg','sound/misc/blackbag2.ogg','sound/misc/blackbag3.ogg','sound/misc/blackbag4.ogg','sound/misc/blackbag5.ogg'), 100, TRUE, 4)
-		return
-	*/
-	if(!M.stat)
-		/* if(HAS_TRAIT(user, TRAIT_BLACKBAGGER) && !M.cmode) It was too much to handle. Too cold to hold.
-			bagging = TRUE
-			bagsound(M)
-			M.transferItemToLoc(headgear, src)
-			M.equip_to_slot(src, SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
-			bagging = FALSE
-		else*/
-		bagging = TRUE
-		bagcheck(M)
-		if(do_after(user, timetobag, M))
-			bagging = FALSE
-			M.transferItemToLoc(headgear, src)
-			M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
-		else
-			bagging = FALSE
+
+	if(M.stat)
+		timetobag /= 2
+
+	bagging = TRUE
+	bagcheck(M)
+	if(do_after(user, timetobag, M))
+		bagging = FALSE
+		M.transferItemToLoc(headgear, src)
+		M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 	else
-		bagging = TRUE
-		bagcheck(M)
-		if(do_after(user, timetobag / 2, M))
-			bagging = FALSE
-			M.transferItemToLoc(headgear, src)
-			M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
-		else
-			bagging = FALSE
+		bagging = FALSE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/head/inqarticles/blackbag/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -1078,7 +1077,6 @@
 		headgear = initial(headgear)
 		playsound(user, pick('sound/misc/blackunbag.ogg'), 100, TRUE, 4)
 		user.emote("gasp", forced = TRUE)
-		return
 
 /obj/item/clothing/head/inqarticles/blackbag/getonmobprop(tag)
 	. = ..()
@@ -1280,25 +1278,27 @@
 	addtimer(CALLBACK(user, GLOBAL_PROC_REF(playsound), user, 'sound/items/blackeye.ogg', 100, FALSE), 4 SECONDS)
 	addtimer(TRAIT_CALLBACK_REMOVE(user, TRAIT_NOSSDINDICATOR, "blackmirror"), 4 SECONDS)
 
-/obj/item/inqarticles/bmirror/attack(mob/living/carbon/human/attacked, mob/living/carbon/human/user, list/modifiers)
-	if(!istype(attacked) || !istype(user))
-		return ..()
+/obj/item/inqarticles/bmirror/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!isliving(interacting_with))
+		return NONE
+
+	var/mob/living/attacked = interacting_with
 
 	if(!opened)
 		to_chat(user, span_warning("I need to open it first."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	if(feeder)
 		to_chat(user, span_warning("It's already been fed."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	if(broken)
 		to_chat(user, span_warning("It's broken."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	if(bloody)
 		to_chat(user, span_warning("The mirror is fogged over. I need to clean it with cloth before reuse."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	var/time_taken = 3 SECONDS
 
@@ -1308,16 +1308,20 @@
 		user.visible_message(span_notice("[user] goes to press [attacked] with [src]'s needle."))
 		time_taken *= 2
 
-	if(do_after(user, time_taken, attacked))
-		playsound(src, 'sound/items/blackmirror_needle.ogg', 95, FALSE, 3)
-		attacked.flash_fullscreen("redflash3")
-		attacked.adjustBruteLoss(40)
-		attacked.blood_volume = max(attacked.blood_volume - 240, 0)
-		attacked.handle_blood()
-		feeder = WEAKREF(attacked)
-		openstate = "bloody"
-		fedblood = TRUE
-		update_appearance(UPDATE_ICON_STATE)
+	if(!do_after(user, time_taken, attacked))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src, 'sound/items/blackmirror_needle.ogg', 95, FALSE, 3)
+	attacked.flash_fullscreen("redflash3")
+	attacked.adjustBruteLoss(40)
+	attacked.blood_volume = max(attacked.blood_volume - 240, 0)
+	attacked.handle_blood()
+	feeder = WEAKREF(attacked)
+	openstate = "bloody"
+	fedblood = TRUE
+	update_appearance(UPDATE_ICON_STATE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/inqarticles/bmirror/attackby(obj/item/I, mob/user, params)
 	. = ..()

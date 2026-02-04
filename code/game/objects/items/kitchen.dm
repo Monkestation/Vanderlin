@@ -23,7 +23,6 @@
 	attack_verb = list("attacked", "stabbed", "poked")
 	hitsound = 'sound/blank.ogg'
 	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 30)
-	var/datum/reagent/forkload //used to eat omelette
 
 /obj/item/kitchen/fork/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] stabs \the [src] into [user.p_their()] chest! It looks like [user.p_theyre()] trying to take a bite out of [user.p_them()]self!</span>")
@@ -37,26 +36,6 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		return TRUE
 	. = ..()
-
-/obj/item/kitchen/fork/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
-	if(!istype(M))
-		return ..()
-
-	if(forkload)
-		if(M == user)
-			M.visible_message("<span class='notice'>[user] eats a delicious forkful of food!</span>")
-			M.reagents.add_reagent(forkload.type, 1)
-		else
-			M.visible_message("<span class='notice'>[user] feeds [user] a delicious forkful of food!</span>")
-			M.reagents.add_reagent(forkload.type, 1)
-		icon_state = "fork"
-		forkload = null
-
-
-	// else if(user.zone_selected == BODY_ZONE_PRECISE_R_EYE)
-	// 	return eyestab(M,user)
-	else
-		return ..()
 
 /obj/item/kitchen/rollingpin
 	name = "rolling pin"

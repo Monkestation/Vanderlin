@@ -508,8 +508,11 @@
 	name = "aberrant planar binding shackles"
 	tier = 5
 
-/obj/item/rope/chain/bindingshackles/attack(mob/living/simple_animal/hostile/retaliate/captive, mob/living/user, list/modifiers)
-	var/list/summon_types = list(
+/obj/item/rope/chain/bindingshackles/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!istype(interacting_with, /mob/living/simple_animal/hostile/retaliate))
+		return NONE
+
+	var/static/list/summon_types = list(
 		/mob/living/simple_animal/hostile/retaliate/infernal/imp,
 		/mob/living/simple_animal/hostile/retaliate/infernal/hellhound,
 		/mob/living/simple_animal/hostile/retaliate/infernal/watcher,
@@ -523,20 +526,23 @@
 		/mob/living/simple_animal/hostile/retaliate/fae/dryad,
 		/mob/living/simple_animal/hostile/retaliate/fae/sylph,
 		/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk,
-		/mob/living/simple_animal/hostile/retaliate/voiddragon)
+		/mob/living/simple_animal/hostile/retaliate/voiddragon,
+	)
 
-	if(!(captive.type in summon_types))
+	var/mob/living/simple_animal/hostile/retaliate/captive = interacting_with
+
+	if(!is_type_in_list(interacting_with, summon_types))
 		to_chat(user, span_warning("[captive] cannot be bound by these shackles!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(captive.tier > tier)
 		to_chat(user, span_warning("[src] is not strong enough to bind [captive]!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	var/mob/living/simple_animal/hostile/retaliate/target = captive
 	target.visible_message(span_warning("[target.real_name]'s body is entangled by glowing chains..."), runechat_message = TRUE)
 
 	if(!target.ckey) //player is not inside body or has refused, poll for candidates
-
 		var/list/candidates = pollCandidatesForMob("Do you want to play as a Mage's summon?", null, null, null, 100, target, POLL_IGNORE_MAGE_SUMMON, new_players = TRUE)
 
 		// theres at least one candidate
@@ -544,18 +550,16 @@
 			var/mob/C = pick(candidates)
 			target.awaken_summon(user, C.ckey)
 			target.visible_message(span_warning("[target.real_name]'s eyes light up with an intelligence as it awakens fully on this plane."), runechat_message = TRUE)
-			custom_name(user,target)
-
-		//no candidates, raise as npc
+			custom_name(user, target)
 		else
 			to_chat(user, span_notice("The [captive] stares at you with mindless hate. The binding attempt failed to draw out its intelligence!"))
 
-		return FALSE
-	return FALSE
+	return ITEM_INTERACT_SUCCESS
 
 /mob/living/simple_animal/hostile/retaliate/proc/awaken_summon(mob/living/carbon/human/master, ckey)
 	if(!master)
 		return FALSE
+
 	if(ckey) //player
 		src.ckey = ckey
 

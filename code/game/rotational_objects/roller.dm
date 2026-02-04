@@ -214,7 +214,7 @@
 
 	connected_rollers = list()
 	build_roller_chain()
-	return TRUE
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/roller/update_appearance()
 	. = ..()
@@ -292,16 +292,6 @@
 	if(COOLDOWN_FINISHED(src, use_cooldown))
 		COOLDOWN_START(src, use_cooldown, 1 SECONDS)
 		entering_atom.Move(get_step(src, sort_direction))
-
-/obj/structure/roller/wrench_act(mob/living/user, obj/item/tool)
-	tool.play_tool_sound(src, 50)
-	setDir(turn(dir, 90))
-	to_chat(user, span_notice("You rotate [src]."))
-
-	// Rebuild connections (parent's setDir handles rotation network)
-	connected_rollers = list()
-	build_roller_chain()
-	return TRUE
 
 /obj/structure/roller/attackby(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/roller_sorter_lister))

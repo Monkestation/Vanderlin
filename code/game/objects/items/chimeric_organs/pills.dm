@@ -18,15 +18,20 @@
 /obj/item/reagent_containers/pill/attack_self(mob/user)
 	return
 
-/obj/item/reagent_containers/pill/attack(mob/M, mob/user, list/modifiers)
+/obj/item/reagent_containers/pill/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!isliving(interacting_with))
+		return NONE
+
+	var/mob/living/M = interacting_with
+
 	if(!canconsume(M, user))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
 
 	if(M == user)
 		M.visible_message("<span class='notice'>[user] attempts to [apply_method] [src].</span>")
 		if(self_delay)
 			if(!do_after(user, self_delay, M))
-				return FALSE
+				return ITEM_INTERACT_BLOCKING
 		to_chat(M, "<span class='notice'>I [apply_method] [src].</span>")
 		playsound(src, "sound/misc/pillpop.ogg", 100, TRUE)
 
@@ -34,7 +39,7 @@
 		M.visible_message("<span class='danger'>[user] attempts to force [M] to [apply_method] [src].</span>", \
 							"<span class='danger'>[user] attempts to force you to [apply_method] [src].</span>")
 		if(!do_after(user, 3 SECONDS, M))
-			return FALSE
+			return ITEM_INTERACT_BLOCKING
 		M.visible_message("<span class='danger'>[user] forces [M] to [apply_method] [src].</span>", \
 							"<span class='danger'>[user] forces you to [apply_method] [src].</span>")
 		playsound(src, "sound/misc/pillpop.ogg", 100, TRUE)
@@ -44,8 +49,10 @@
 
 	if(reagents.total_volume)
 		reagents.trans_to(M, reagents.total_volume, transfered_by = user, method = apply_type)
+
 	qdel(src)
-	return TRUE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/pill/afterattack(obj/target, mob/user, proximity, list/modifiers)
 	. = ..()

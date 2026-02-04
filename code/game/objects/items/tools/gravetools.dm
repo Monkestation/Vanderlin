@@ -85,75 +85,65 @@
 	item_damage_type = "blunt"
 
 
-/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user, list/modifiers)
-	. = ..()
-	if(. && heldclod && get_turf(M))
-		heldclod.forceMove(get_turf(M))
-		heldclod = null
-		update_appearance(UPDATE_ICON_STATE)
+/obj/item/weapon/shovel/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!isturf(interacting_with))
+		return NONE
 
-/obj/item/weapon/shovel/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
-	var/turf/T = attacked_atom
-	user.changeNext_move(user.used_intent.clickcd)
-	if(user.used_intent.type == /datum/intent/irrigate)
-		. = TRUE
-		var/obj/structure/soil/located = locate(/obj/structure/soil) in T
-		if(located)
-			to_chat(user, span_notice("[located] is in the way!"))
-			return
-		if(istype(T, /turf/open/floor/dirt))
-			var/turf/open/floor/dirt/D = T
-			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
-			if(!do_after(user, 5 SECONDS * time_multiplier, D))
-				return
-			new /obj/structure/irrigation_channel(D)
-			return TRUE
+	var/turf/turf = interacting_with
 
-	else if(user.used_intent.type == /datum/intent/shovelscoop)
-		. = TRUE
-		if(istype(T, /turf/open/floor/dirt))
-			var/obj/structure/closet/dirthole/holie = locate() in T
-			if(heldclod)
-				if(holie && holie.stage < 4)
-					holie.attackby(src, user)
-				else
-					if(istype(T, /turf/open/floor/dirt/road))
-						qdel(heldclod)
-						T.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
-					else
-						heldclod.forceMove(T)
-					heldclod = null
-					playsound(T,'sound/items/empty_shovel.ogg', 100, TRUE)
-					update_appearance(UPDATE_ICON_STATE)
-					return
-			else
-				if(holie)
-					holie.attackby(src, user)
-				else
-					if(istype(T, /turf/open/floor/dirt/road))
-						new /obj/structure/closet/dirthole(T)
-					else
-						T.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
-					heldclod = new(src)
-					playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-					update_appearance(UPDATE_ICON_STATE)
-			return
-		if(heldclod)
-			if(istype(T, /turf/open/water))
+	var/datum/intent/used_intent = user.used_intent
+
+	if(istype(used_intent, /datum/intent/shovelscoop))
+		if(!istype(turf, /turf/open/floor/dirt))
+			if(istype(turf, /turf/open/water))
 				qdel(heldclod)
 			else
-				heldclod.forceMove(T)
+				heldclod.forceMove(turf)
 			heldclod = null
-			playsound(T,'sound/items/empty_shovel.ogg', 100, TRUE)
+			playsound(turf, 'sound/items/empty_shovel.ogg', 100, TRUE)
 			update_appearance(UPDATE_ICON_STATE)
-			return
-		if(istype(T, /turf/open/floor/grass))
-			to_chat(user, "<span class='warning'>There is grass in the way.</span>")
-			return
-		return
-	return ..()
+			return ITEM_INTERACT_SUCCESS
+
+		var/obj/structure/closet/dirthole/holie = locate() in turf
+		if(!heldclod)
+			if(holie)
+				interact_with_atom(holie, user)
+			else
+				if(istype(turf, /turf/open/floor/dirt/road))
+					new /obj/structure/closet/dirthole(turf)
+				else
+					turf.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
+				heldclod = new(src)
+				playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
+				update_appearance(UPDATE_ICON_STATE)
+			return ITEM_INTERACT_SUCCESS
+
+		if(holie && holie.stage < 4)
+			holie.attackby(src, user)
+		else
+			if(istype(turf, /turf/open/floor/dirt/road))
+				qdel(heldclod)
+				turf.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
+			else
+				heldclod.forceMove(turf)
+			heldclod = null
+			playsound(turf, 'sound/items/empty_shovel.ogg', 100, TRUE)
+			update_appearance(UPDATE_ICON_STATE)
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(used_intent, /datum/intent/irrigate))
+		var/obj/structure/soil/located = locate(/obj/structure/soil) in turf
+		if(located)
+			to_chat(user, span_notice("[located] is in the way!"))
+			return ITEM_INTERACT_BLOCKING
+		if(istype(turf, /turf/open/floor/dirt))
+			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
+			if(!do_after(user, 5 SECONDS * time_multiplier, turf))
+				return ITEM_INTERACT_BLOCKING
+
+			new /obj/structure/irrigation_channel(turf)
+
+			return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/shovel/getonmobprop(tag)
 	. = ..()

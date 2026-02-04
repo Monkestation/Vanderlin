@@ -14,17 +14,29 @@
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
 
-/obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, list/modifiers)
-	if(user.used_intent.type == /datum/intent/food)
-		return ..()
+/obj/item/reagent_containers/food/snacks/fat/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!isliving(interacting_with))
+		return NONE
 
-	if(!isliving(M) || (M != user))
-		return ..()
+	if(interacting_with != user)
+		return NONE
 
-	user.visible_message("[user] starts to oil up [M]", "You start to oil up [M]")
+	if(istype(user.used_intent, /datum/intent/food))
+		return NONE
+
+	var/mob/living/M = interacting_with
+
+	user.visible_message(
+		span_warning("[user] starts to oil [user.p_them()]self up."),
+		span_warning("I start oiling myself up."),
+	)
+
 	if(!do_after(user, 5 SECONDS, M))
-		return
+		return ITEM_INTERACT_ANY_BLOCKER
+
 	M.apply_status_effect(/datum/status_effect/buff/oiled)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/fat/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)

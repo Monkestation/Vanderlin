@@ -320,46 +320,52 @@
 /obj/item/contraption/shears/hammer_action(obj/item/I, mob/user)
 	return
 
-/obj/item/contraption/shears/attack(mob/living/amputee, mob/living/user, list/modifiers)
-	if(!current_charge)
-		return
+/obj/item/contraption/shears/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!iscarbon(interacting_with))
+		return NONE
 
-	if(!iscarbon(amputee))
-		return
+	if(!current_charge)
+		to_chat(user, span_warning("[src] is out of charge!"))
+		return ITEM_INTERACT_BLOCKING
 
 	var/targeted_zone = check_zone(user.zone_selected)
 	if(targeted_zone == BODY_ZONE_CHEST || targeted_zone == BODY_ZONE_HEAD)
 		to_chat(user, span_warning("I can't amputate that!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	var/mob/living/carbon/patient = amputee
+	var/mob/living/carbon/amputee = interacting_with
 
-	if(HAS_TRAIT(patient, TRAIT_NODISMEMBER))
-		to_chat(user, span_warning("[patient]'s limbs look too sturdy to amputate."))
-		return
+	if(HAS_TRAIT(amputee, TRAIT_NODISMEMBER))
+		to_chat(user, span_warning("[amputee]'s limbs look too sturdy to amputate."))
+		return ITEM_INTERACT_BLOCKING
 
-	var/obj/item/bodypart/limb_snip_candidate
-
-	limb_snip_candidate = patient.get_bodypart(targeted_zone)
+	var/obj/item/bodypart/limb_snip_candidate = amputee.get_bodypart(targeted_zone)
 	if(!limb_snip_candidate)
-		to_chat(user, span_warning("[patient] is already missing that limb, what more do you want?"))
-		return
+		to_chat(user, span_warning("[amputee] is already missing that limb, what more do you want?"))
+		return ITEM_INTERACT_BLOCKING
 
 	var/amputation_speed_mod = 1
 
-	patient.visible_message(span_danger("[user] begins to secure [src] around [patient]'s [limb_snip_candidate.name]."), span_userdanger("[user] begins to secure [src] around your [limb_snip_candidate.name]!"))
-	playsound(patient, 'sound/misc/ratchet.ogg', 20, TRUE)
-	if(patient.stat >= UNCONSCIOUS || patient.buckled || locate(/obj/structure/table/optable) in get_turf(patient))
+	amputee.visible_message(span_danger("[user] begins to secure [src] around [amputee]'s [limb_snip_candidate.name]."), span_userdanger("[user] begins to secure [src] around your [limb_snip_candidate.name]!"))
+
+	playsound(amputee, 'sound/misc/ratchet.ogg', 20, TRUE)
+
+	if(amputee.stat >= UNCONSCIOUS || amputee.buckled || locate(/obj/structure/table/optable) in get_turf(amputee))
 		amputation_speed_mod *= 0.5
-	if(patient.stat != DEAD && (patient.has_status_effect(/datum/status_effect/jitter) || patient.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
+
+	if(amputee.stat != DEAD && (amputee.has_status_effect(/datum/status_effect/jitter) || amputee.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
 		amputation_speed_mod *= 1.5 //15*0.5*1.5=11.25
 
 	var/skill_modifier = 1.5 - (user.get_skill_level(/datum/skill/craft/engineering) / 6)
-	if(do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = patient))
-		playsound(patient, 'sound/misc/guillotine.ogg', 20, TRUE)
-		limb_snip_candidate.drop_limb()
-		user.visible_message(span_danger("[src] violently slams shut, amputating [patient]'s [limb_snip_candidate.name]."), span_notice("You amputate [patient]'s [limb_snip_candidate.name] with [src]."))
-		charge_deduction(amputee, user, 1)
+	if(!do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = amputee))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(amputee, 'sound/misc/guillotine.ogg', 20, TRUE)
+	limb_snip_candidate.drop_limb()
+	user.visible_message(span_danger("[src] violently slams shut, amputating [amputee]'s [limb_snip_candidate.name]."), span_notice("You amputate [amputee]'s [limb_snip_candidate.name] with [src]."))
+	charge_deduction(amputee, user, 1)
+
+	return ITEM_INTERACT_SUCCESS
 
 //Shamelessly stolen multitool code
 /obj/item/contraption/linker

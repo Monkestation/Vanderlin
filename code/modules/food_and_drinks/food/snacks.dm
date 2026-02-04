@@ -358,9 +358,6 @@ All foods are distributed among various categories. Use common sense.
 
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/reagent_containers/food/snacks/attack_self(mob/user, list/modifiers)
-	return
-
 /obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(user.used_intent.type != /datum/intent/food && (!(M == user) && isanimal(M)))
 		return ..()

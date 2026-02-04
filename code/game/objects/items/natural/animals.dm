@@ -266,20 +266,30 @@
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
 
-/obj/item/natural/saddle/attack(mob/living/target, mob/living/carbon/human/user, list/modifiers)
-	if(istype(target, /mob/living/simple_animal))
-		var/mob/living/simple_animal/S = target
-		if(S.can_saddle && !S.ssaddle)
-			if(!target.has_buckled_mobs())
-				user.visible_message("<span class='warning'>[user] tries to saddle [target]...</span>")
-				if(do_after(user, 4 SECONDS, target))
-					playsound(src, 'sound/foley/saddledismount.ogg', 100, FALSE)
-					user.dropItemToGround(src)
-					S.ssaddle = src
-					src.forceMove(S)
-					S.update_appearance(UPDATE_OVERLAYS)
-		return
-	..()
+/obj/item/natural/saddle/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!istype(interacting_with, /mob/living/simple_animal))
+		return NONE
+
+	var/mob/living/simple_animal/simple = interacting_with
+
+	if(!simple.can_saddle || simple.ssaddle)
+		return ITEM_INTERACT_BLOCKING
+
+	if(simple.has_buckled_mobs())
+		return ITEM_INTERACT_BLOCKING
+
+	user.visible_message(span_warning("[user] tries to saddle [simple]..."))
+
+	if(!do_after(user, 4 SECONDS, simple))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src, 'sound/foley/saddledismount.ogg', 100, FALSE)
+	user.dropItemToGround(src)
+	simple.ssaddle = src
+	forceMove(simple)
+	simple.update_appearance(UPDATE_OVERLAYS)
+
+	return ITEM_INTERACT_SUCCESS
 
 /mob/living/simple_animal/onbite(mob/living/user)
 	. = ..()

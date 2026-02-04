@@ -175,26 +175,3 @@
 /obj/structure/mirror/atom_fix()
 	. = ..()
 	icon_state = initial(icon_state)
-
-/obj/structure/mirror/deconstruct(disassembled = TRUE)
-	..()
-
-/obj/structure/mirror/welder_act(mob/living/user, obj/item/I)
-	..()
-	if(user.used_intent.type == INTENT_HARM)
-		return FALSE
-
-	if(!obj_broken)
-		return TRUE
-
-	if(!I.tool_start_check(user, amount=0))
-		return TRUE
-
-	to_chat(user, "<span class='notice'>I begin repairing [src]...</span>")
-	if(I.use_tool(src, user, 10, volume=50))
-		to_chat(user, "<span class='notice'>I repair [src].</span>")
-		atom_fix()
-		icon_state = initial(icon_state)
-		desc = initial(desc)
-
-	return TRUE

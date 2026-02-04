@@ -1149,14 +1149,20 @@
 		if(m)
 			user.say(m)
 
-/obj/item/book/bibble/attack(mob/living/M, mob/user, list/modifiers)
-	if(is_priest_job(user.mind?.assigned_role))
-		if(!user.can_read(src))
-			return
-		M.apply_status_effect(/datum/status_effect/buff/blessed)
-		user.visible_message(span_notice("[user] blesses [M]."))
-		playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
-		return
+/obj/item/book/bibble/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!isliving(interacting_with) || !is_priest_job(user.mind?.assigned_role))
+		return NONE
+
+	if(!user.can_read(src))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/M = interacting_with
+
+	M.apply_status_effect(/datum/status_effect/buff/blessed)
+	user.visible_message(span_notice("[user] blesses [M]."), span_notice("I bless [M]."))
+	playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /datum/status_effect/buff/blessed
 	id = "blessed"
@@ -1684,14 +1690,20 @@ ____________End of Example*/
 	dat = "gott.json"
 	verses_file = "strings/psybibble.txt"
 
-/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user, list/modifiers)
-	if(istype(user) && istype(user.patron, /datum/patron/psydon))
-		if(!user.can_read(src))
-			return
-		M.apply_status_effect(/datum/status_effect/buff/blessed)
-		user.visible_message(span_notice("[user] blesses [M]."))
-		playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
-		return
+/obj/item/book/bibble/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!isliving(interacting_with) || !istype(user.patron, /datum/patron/psydon))
+		return NONE
+
+	if(!user.can_read(src))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/M = interacting_with
+
+	M.apply_status_effect(/datum/status_effect/buff/blessed)
+	user.visible_message(span_notice("[user] blesses [M]."), span_notice("I bless [M]."))
+	playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /datum/status_effect/buff/blessed
 	id = "blessed"

@@ -301,31 +301,44 @@
 		signee = user
 		update_appearance()
 
-/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user, list/modifiers)
+/obj/item/paper/inqslip/interact_with_atom(atom/interacting_with, mob/living/user)
+	if(!ishuman(interacting_with))
+		return NONE
+
+	var/mob/living/M = interacting_with
+
 	if(sealed)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(signed)
 		to_chat(user, span_warning("It's already been signed."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(paired && !paired.full)
 		to_chat(user, span_warning("I should separate [paired] from [src] before signing it."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(sliptype != 2)
 		if(M != user)
 			to_chat(user, span_warning("This is meant to be signed by the holder."))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 	if(!M.get_bleed_rate())
 		to_chat(user, span_warning("It must be signed in blood."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(sliptype == 1)
 		if(signee == M)
 			attemptsign(user)
 		else
 			to_chat(user, span_warning("This slip isn't meant for me."))
+
 	else if(!sliptype)
 		attemptsign(user)
 	else
 		attemptsign(M, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/paper/inqslip/attack_self(mob/user)
 	if(!signed)
