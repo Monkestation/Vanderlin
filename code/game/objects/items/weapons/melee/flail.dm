@@ -163,7 +163,6 @@
 	slot_flags = null
 	anvilrepair = /datum/skill/craft/carpentry
 	dropshrink = 0.9
-	blade_dulling = DULLING_BASH
 	resistance_flags = FLAMMABLE
 
 /obj/item/weapon/flail/peasantwarflail/getonmobprop(tag)

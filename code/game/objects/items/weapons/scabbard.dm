@@ -6,7 +6,6 @@
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	sharpness = IS_BLUNT
-	blade_dulling = DULLING_BASHCHOP
 	wdefense = BAD_PARRY
 	max_integrity = INTEGRITY_WORST
 	possible_item_intents = list(SHIELD_BASH)

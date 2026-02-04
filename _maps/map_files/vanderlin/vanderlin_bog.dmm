@@ -16160,7 +16160,7 @@
 /area/under/cavewet)
 "utq" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/weapon/polearm/spear/steel/assegai,
+/obj/item/weapon/polearm/spear/assegai/steel,
 /obj/item/carvedgem/coral/vase{
 	pixel_x = -7;
 	pixel_y = 11

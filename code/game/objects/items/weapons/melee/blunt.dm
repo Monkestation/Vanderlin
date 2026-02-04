@@ -200,7 +200,6 @@
 	wdefense = GOOD_PARRY
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	blade_dulling = DULLING_BASH
 	sellprice = 100
 
 //................ Steel mace ............... //	Better wbalance and wdefense
@@ -301,7 +300,6 @@
 	minstr = 2
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	blade_dulling = DULLING_BASHCHOP
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	sellprice = 5
@@ -580,7 +578,6 @@
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE)
 	gripped_intents = null
-	blade_dulling = DULLING_BASH
 
 /obj/item/weapon/mace/warhammer/getonmobprop(tag)
 	if(tag)
@@ -624,7 +621,6 @@
 	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -645,7 +641,6 @@
 	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 150
@@ -663,7 +658,6 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	melt_amount = 150

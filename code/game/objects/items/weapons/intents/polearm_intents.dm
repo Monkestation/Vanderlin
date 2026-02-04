@@ -73,15 +73,14 @@
 	animname = "cut"
 	blade_class = BCLASS_CHOP
 	damfactor = 1.2
-	chargetime = 10
-	no_early_release = TRUE
+	clickcd = 16
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
-	misscost = 10
+	misscost = 8
 
 /datum/intent/rend/reach
 	name = "long rend"
-	penfactor = -100
-	misscost = 5
-	chargetime = 5
+	penfactor = AP_POLEARM_CHOP - 5
+	misscost = 10
 	reach = 2
+	clickcd = 18

@@ -502,7 +502,7 @@
 	recipe_name = "a Steel Assegai"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/polearm/spear/steel/assegai
+	created_item = /obj/item/weapon/polearm/spear/assegai/steel
 
 /datum/anvil_recipe/weapons/steel/aruval
 	name = "Steel Aruval (+2 Steel Bar)"
@@ -715,7 +715,7 @@
 	name = "Eagle's Beak (+Bar, +Small Log)"
 	recipe_name = "an Eagle's Beak"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/ingot/steel,/obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/eaglebeak
 	craftdiff = 3
 
