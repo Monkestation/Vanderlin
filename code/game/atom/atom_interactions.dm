@@ -137,7 +137,7 @@
 				return ITEM_INTERACT_BLOCKING
 
 			if(!operation.can_next_step(user, modifiers))
-				continue
+				return ITEM_INTERACT_BLOCKING
 
 			var/selected_zone = user.zone_selected
 
