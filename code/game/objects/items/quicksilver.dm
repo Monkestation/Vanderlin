@@ -25,15 +25,17 @@
 	if(miracle_use)
 		. += span_notice("Through some miraculous happenstance, there is enough for one more use.")
 
-/obj/item/quicksilver/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
-	anoint(M, user)
+/obj/item/quicksilver/attack(mob/living/carbon/human/M, mob/living/carbon/human/user, list/modifiers)
+	if(!istype(M) || !istype(user))
+		return ..()
 
-/obj/item/quicksilver/proc/anoint(mob/living/carbon/human/M, mob/living/carbon/human/user) //Time to deconvert some antagonists
 	var/inquisitor = FALSE
 	if(!user.mind)
 		return
+
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
 		inquisitor = TRUE
+
 	if(HAS_TRAIT(user, TRAIT_PACIFISM) && HAS_TRAIT(user, TRAIT_INQUISITION) && HAS_TRAIT(user, TRAIT_SILVER_BLESSED))
 		inquisitor = TRUE
 
@@ -113,13 +115,12 @@
 		if(Were.transformed == TRUE)
 			var/mob/living/carbon/human/I = M.stored_mob
 			to_chat(M, span_userdanger("THE FOUL SILVER! MY BODY RENDS ITSELF ASUNDER!"))
-			//M.werewolf_untransform()
 			Were.on_removal()
 			ADD_TRAIT(I, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 			I.emote("agony", forced = TRUE)
 			I.Stun(30)
 			I.Knockdown(30)
-			I.Jitter(30)
+			I.adjust_jitter(6 SECONDS)
 			return
 		else
 			M.flash_fullscreen("redflash3")
@@ -129,7 +130,7 @@
 			ADD_TRAIT(M, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 			M.Stun(30)
 			M.Knockdown(30)
-			M.Jitter(30)
+			M.adjust_jitter(6 SECONDS)
 			return
 
 	else if(Vamp) //We're the vampire, we can't be saved.
@@ -137,7 +138,7 @@
 		user.visible_message(span_danger("The silver poultice boils away from [M]'s brow, viscerally rejecting the divine anointment."))
 		M.Stun(30)
 		M.Knockdown(30)
-		return
+
 //A letter to give info on how to make this thing.
 /obj/item/paper/inquisition_poultice_info
 	name = "Inquisitorial Missive"

@@ -3,21 +3,6 @@
 	This file has the basic atom/movable level speech procs.
 	And the base of the send_speech() proc, which is the core of saycode.
 */
-GLOBAL_LIST_INIT(freqtospan, list(
-	"[FREQ_SCIENCE]" = "sciradio",
-	"[FREQ_MEDICAL]" = "medradio",
-	"[FREQ_ENGINEERING]" = "engradio",
-	"[FREQ_SUPPLY]" = "suppradio",
-	"[FREQ_SERVICE]" = "servradio",
-	"[FREQ_SECURITY]" = "secradio",
-	"[FREQ_COMMAND]" = "comradio",
-	"[FREQ_AI_PRIVATE]" = "aiprivradio",
-	"[FREQ_SYNDICATE]" = "syndradio",
-	"[FREQ_CENTCOM]" = "centcomradio",
-	"[FREQ_CTF_RED]" = "redteamradio",
-	"[FREQ_CTF_BLUE]" = "blueteamradio"
-	))
-
 /atom/movable/proc/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	if(!can_speak())
 		return
@@ -41,15 +26,14 @@ GLOBAL_LIST_INIT(freqtospan, list(
 			stack_trace("somehow there's a null returned from get_hearers_in_view() in send_speech!")
 			continue
 		hearing_movable.Hear(rendered, src, message_language, message, , spans, message_mods, original_message)
-
 /atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), face_name = FALSE)
 	//This proc uses text() because it is faster than appending strings. Thanks BYOND.
 	//Basic span
-	var/spanpart1 = "<span class='[radio_freq ? get_radio_span(radio_freq) : "say"]'>"
+	var/spanpart1 = "<span class='[radio_freq ? "radio" : "say"]'>"
 	//Start name span.
 	var/spanpart2 = "<span class='name'>"
 	//Radio freq/name display
-	var/freqpart = radio_freq ? "\[[get_radio_name(radio_freq)]\] " : ""
+	var/freqpart = radio_freq ? "\[[get_radio_name(radio_freq)]__~~\]~~__ " : ""
 	//Speaker name
 	var/namepart = "[speaker.GetVoice()]"
 	if(speaker.get_alt_name())
@@ -66,13 +50,29 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	//End name span.
 	var/endspanpart = "</span></span>"
 
-	//Message
-	var/messagepart = "[lang_treat(speaker, message_language, raw_message, spans, message_mods)]"
+	//Message - handle deaf trait
+	var/messagepart = raw_message
+	if(isliving(src) && HAS_TRAIT(src, TRAIT_PARTIAL_DEAF) && speaker != src)
+		var/mob/living/listener = src
+		var/distance = get_dist(listener, speaker)
+		var/is_yelling = ((SPAN_YELL in spans) || message_mods[MODE_SING])
+
+		if(distance > 2 && !is_yelling)
+			// Jumble the message for deaf people beyond 2 tiles
+			messagepart = jumble_message(raw_message)
+		else if(distance > 2 && is_yelling)
+			// Yelling can be heard but still somewhat muffled
+			messagepart = "[lang_treat(speaker, message_language, raw_message, spans, message_mods)]"
+		else
+			// Within 2 tiles, can hear normally
+			messagepart = "[lang_treat(speaker, message_language, raw_message, spans, message_mods)]"
+	else
+		messagepart = "[lang_treat(speaker, message_language, raw_message, spans, message_mods)]"
+
 	messagepart = " <span class='message'>[messagepart]</span></span>"
 
 	//Arrow
 	var/arrowpart = ""
-
 	if(istype(src,/mob/living))
 		var/turf/speakturf = get_turf(speaker)
 		var/turf/sourceturf = get_turf(src)
@@ -112,13 +112,34 @@ GLOBAL_LIST_INIT(freqtospan, list(
 				else
 					namepart = "Unknown"
 			spanpart1 = "<span class='smallyell'>"
-
 	var/languageicon = ""
 	var/datum/language/D = GLOB.language_datum_instances[message_language]
 	if(istype(D) && D.display_icon(src))
 		languageicon = "[D.get_icon()] "
-
 	return "[spanpart1][spanpart2][colorpart][freqpart][languageicon][compose_track_href(speaker, namepart)][namepart][compose_job(speaker, message_language, raw_message, radio_freq)][arrowpart][endspanpart][messagepart]"
+
+/proc/jumble_message(message)
+	var/list/words = splittext(message, " ")
+	var/list/jumbled_words = list()
+
+	for(var/word in words)
+		if(length(word) <= 2)
+			jumbled_words += word
+			continue
+
+		// Keep first and last letter, jumble the middle
+		var/first = copytext(word, 1, 2)
+		var/last = copytext(word, length(word), length(word) + 1)
+		var/middle = copytext(word, 2, length(word))
+
+		if(length(middle) > 0)
+			var/list/middle_chars = splittext(middle, "")
+			middle_chars = shuffle(middle_chars)
+			middle = jointext(middle_chars, "")
+
+		jumbled_words += "[first][middle][last]"
+
+	return jointext(jumbled_words, " ")
 
 /atom/movable/proc/compose_track_href(atom/movable/speaker, message_langs, raw_message, radio_freq)
 	return ""
@@ -182,12 +203,6 @@ GLOBAL_LIST_INIT(freqtospan, list(
 		return no_quote ? source.quoteless_say_quote(raw_message, spans, message_mods) : source.say_quote(raw_message, spans, message_mods)
 	else
 		return "makes a strange sound."
-
-/proc/get_radio_span(freq)
-	var/returntext = GLOB.freqtospan["[freq]"]
-	if(returntext)
-		return returntext
-	return "radio"
 
 /proc/get_radio_name(freq)
 	return freq

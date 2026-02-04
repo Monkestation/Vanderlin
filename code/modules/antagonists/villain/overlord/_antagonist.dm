@@ -115,8 +115,8 @@
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 	L.faction = list(FACTION_UNDEAD)
-	if(L.charflaw)
-		QDEL_NULL(L.charflaw)
+	if(length(L.quirks))
+		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
 	L.dna.species.species_traits |= NOBLOOD
 	L.grant_undead_eyes()
@@ -172,13 +172,13 @@
 		if(ishuman(owner.current))
 			overlord_mob = owner.current
 
-	overlord_mob.revive(TRUE, TRUE)
+	overlord_mob.revive(ADMIN_HEAL_ALL)
 	owner.transfer_to(overlord_mob, TRUE)
 
 	overlord_mob.skeletonize(FALSE)
 	overlord_mob.faction = list(FACTION_UNDEAD, "overlord")
-	if(overlord_mob.charflaw)
-		QDEL_NULL(overlord_mob.charflaw)
+	if(length(overlord_mob.quirks))
+		overlord_mob.clear_quirks()
 	overlord_mob.mob_biotypes |= MOB_UNDEAD
 	overlord_mob.grant_undead_eyes()
 	return TRUE

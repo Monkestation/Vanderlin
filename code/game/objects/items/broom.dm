@@ -13,7 +13,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 /obj/item/broom/apply_components()
-	AddComponent(/datum/component/walking_stick)
+	AddElement(/datum/element/walking_stick)
 	AddComponent(/datum/component/two_handed, force_unwielded=2, force_wielded=4, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)))
 
 /obj/item/broom/getonmobprop(tag)
@@ -50,7 +50,7 @@
 	. = ..()
 	UnregisterSignal(user, COMSIG_MOVABLE_PRE_MOVE)
 
-/obj/item/broom/afterattack(atom/A, mob/user, proximity)
+/obj/item/broom/afterattack(atom/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

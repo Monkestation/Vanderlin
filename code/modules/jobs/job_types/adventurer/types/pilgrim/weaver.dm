@@ -7,7 +7,7 @@
 
 	jobstats = list(
 		STATKEY_INT = 2,
-		STATKEY_SPD = 2,
+		STATKEY_SPD = 1,
 		STATKEY_PER = 1
 	)
 

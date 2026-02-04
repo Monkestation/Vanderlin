@@ -10,13 +10,13 @@
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_END = 1,
-		STATKEY_PER = 2,
+		STATKEY_PER = 1,
 	)
 
 	skills = list(
 		/datum/skill/combat/whipsflails = 2,
 		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/riding = 5, // I don't think riding skill has that big of an effect
 		/datum/skill/misc/sewing = 1,
@@ -28,7 +28,7 @@
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/bows = 3,
 		/datum/skill/labor/taming = 3,
 	)

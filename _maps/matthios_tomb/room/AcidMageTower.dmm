@@ -222,7 +222,7 @@
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors/magic)
 "jQ" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/wet)
 "ka" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
@@ -763,7 +763,7 @@
 /area/under/tomb/indoors/magic)
 "Cq" = (
 /obj/structure/forcefield,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/wet)
 "Ct" = (
 /obj/structure/table/wood,
@@ -1080,7 +1080,7 @@
 "OL" = (
 /obj/structure/forcefield,
 /obj/structure/forcefield,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/wet)
 "OM" = (
 /obj/structure/trap/shock,
@@ -1230,7 +1230,7 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/magic)
 "Te" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/magic)
 "Tf" = (
 /obj/structure/toilet,
@@ -1318,7 +1318,7 @@
 "Wi" = (
 /obj/structure/forcefield,
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/wet)
 "Wj" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,

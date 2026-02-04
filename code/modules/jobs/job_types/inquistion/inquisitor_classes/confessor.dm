@@ -14,16 +14,16 @@
 	) //4 Statline
 
 	skills = list(
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/climbing = SKILL_LEVEL_MASTER,
+		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/stealing = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/crossbows = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/crossbows = SKILL_LEVEL_JOURNEYMAN,
 	)
 
 	traits = list(
@@ -50,14 +50,14 @@
 		if("Blessed Psydonic Dagger")
 			spawned.put_in_hands(new /obj/item/weapon/knife/dagger/silver/psydon(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/knife, ITEM_SLOT_BACK_R, TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/knives, 3, 3, TRUE)
 		if("Psydonic Handmace")
 			spawned.put_in_hands(new /obj/item/weapon/mace/cudgel/psy(get_turf(spawned)), TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 3, 3, TRUE)
 		if("Psydonic Shortsword")
 			spawned.put_in_hands(new /obj/item/weapon/sword/short/psy(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BACK_R, TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 3, 3, TRUE)
 
 	// Armor/archetype selection
 	var/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
@@ -85,9 +85,9 @@
 
 	switch(boltchoice)
 		if("Bolts - Steel-Tipped")
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_L, TRUE)
+			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolts(get_turf(spawned)), ITEM_SLOT_BELT_L)
 		if("Sunderbolts - Silver-Tipped, Halved Damage")
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolt/holy, ITEM_SLOT_BELT_L, TRUE)
+			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), ITEM_SLOT_BELT_L)
 
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"

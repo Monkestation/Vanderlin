@@ -15,7 +15,7 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/swords = 2,
 	)
 
@@ -34,11 +34,11 @@
 		spawned.equip_to_appropriate_slot(shield)
 		spawned.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, -1)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 2)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, -1)
 	if(spawned.gender == MALE)
 		// Male: arcyne trident wielder
 		spawned.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/summon_trident)
@@ -64,9 +64,9 @@
 	head = /obj/item/clothing/head/helmet/winged
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	beltl = /obj/item/weapon/sword/sabre/cutlass
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(
 		/obj/item/key/mercenary,
 		/obj/item/storage/belt/pouch/coins/poor,
-		/obj/item/reagent_containers/food/snacks/fish/swordfish
 	)

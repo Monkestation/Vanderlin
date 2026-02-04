@@ -48,7 +48,7 @@
 	flying_ref = null
 	return ..()
 
-/obj/effect/flyer_shadow/attackby(obj/item/I, mob/user, params)
+/obj/effect/flyer_shadow/attackby(obj/item/I, mob/user, list/modifiers)
 	var/mob/living/flying_mob = flying_ref.resolve()
 	if(QDELETED(flying_mob))
 		return
@@ -100,20 +100,37 @@
 		to_chat(owner, "I am currently [flying ? "" : "not"] flying.")
 		return
 	if(!flying)
-		if(!can_fly())
+		if(!can_takeoff())
 			return
-		if(do_after(owner, 5 SECONDS, owner, extra_checks = CALLBACK(src, PROC_REF(can_fly))))
+		if(do_after(owner, 5 SECONDS, owner, extra_checks = CALLBACK(src, PROC_REF(can_takeoff))))
 			start_flying()
 		return
-	if(do_after(owner, 5 SECONDS, owner))
+	if(!owner.can_zTravel(direction = DOWN))
 		stop_flying()
+	else if(do_after(owner, 5 SECONDS, owner))
+		stop_flying()
+
+/datum/action/item_action/organ_action/use/flight/proc/can_takeoff()
+	if(!isliving(owner))
+		to_chat(owner, span_warning("How did you get this..."))
+		return FALSE
+	var/mob/living/flier = owner
+	if(!flier.can_zTravel(direction = UP))
+		to_chat(flier, span_warning("I need space to fly!"))
+		return FALSE
+	var/turf/above_turf = GET_TURF_ABOVE(get_turf(flier))
+	if(!isopenspace(above_turf))
+		to_chat(flier, span_warning("I need space to fly!"))
+		return FALSE
+	return can_fly()
 
 /datum/action/item_action/organ_action/use/flight/proc/can_fly()
 	if(!isliving(owner))
+		to_chat(owner, span_warning("How did you get this..."))
 		return FALSE
 	var/mob/living/flier = owner
 	if(flier.get_encumbrance() > 0.7)
-		to_chat(owner, span_warning("I am too heavy!"))
+		to_chat(flier, span_warning("I am too heavy!"))
 		return FALSE
 	if(!isturf(flier.loc))
 		to_chat(flier, span_warning("I need space to fly!"))
@@ -125,9 +142,10 @@
 		to_chat(flier, span_warning("I can't spread my wings!"))
 		return FALSE
 	if(IS_DEAD_OR_INCAP(flier))
+		to_chat(flier, span_warning("You cannot fly in this state."))
 		return FALSE
-
 	return TRUE
+
 /datum/action/item_action/organ_action/use/flight/apply_button_background(atom/movable/screen/movable/action_button/current_button)
 	if(active_background_icon_state)
 		background_icon_state = is_action_active(current_button) ? active_background_icon_state : initial(src.background_icon_state)
@@ -139,12 +157,18 @@
 // Start flying normally
 /datum/action/item_action/organ_action/use/flight/proc/start_flying()
 	var/turf/turf = get_turf(owner)
-	if(owner.can_zTravel(direction = UP))
-		if(isopenspace(GET_TURF_ABOVE(turf)))
-			turf = GET_TURF_ABOVE(turf)
+	if(!owner.can_zTravel(direction = UP)) // Repeated from can_takeoff() for safety checks.
+		to_chat(owner, span_warning("I need space to fly!"))
+		return FALSE
+	var/turf/above_turf = GET_TURF_ABOVE(turf)
+	if(!isopenspace(above_turf)) // Repeated from can_takeoff() for safety checks.
+		to_chat(owner, span_warning("I need space to fly!"))
+		return FALSE
+	turf = above_turf
 	owner.movement_type |= FLYING
 	flying = TRUE
 	to_chat(owner, span_notice("I start flying."))
+	playsound(owner, 'sound/mobs/wingflap.ogg', 75, FALSE)
 	init_signals()
 	if(turf != get_turf(owner))
 		var/matrix/original = owner.transform
@@ -172,6 +196,7 @@
 		if(owner.can_zTravel(direction = DOWN))
 			turf = GET_TURF_BELOW(turf)
 	to_chat(owner, span_notice("I stop flying."))
+	playsound(owner, 'sound/mobs/wingflap.ogg', 75, FALSE)
 	if(turf != get_turf(owner))
 		var/matrix/original = owner.transform
 		var/prev_alpha = owner.alpha
@@ -238,18 +263,18 @@
 			stop_flying(owner)
 			return
 
+		var/turf/this_turf = get_turf(owner)
+		var/turf/below_turf = GET_TURF_BELOW(this_turf)
 		if(shadow)
-			if(!istransparentturf(get_turf(owner)))
+			if(!istransparentturf(this_turf))
 				shadow.alpha= 0
 			else
 				shadow.alpha = 255
 
-			var/turf/below_turf = GET_TURF_BELOW(get_turf(owner))
 			if(below_turf)
 				shadow.forceMove(below_turf)
 		else
-			var/turf/below_turf = GET_TURF_BELOW(get_turf(owner))
-			if(below_turf && istransparentturf(get_turf(owner)))
+			if(below_turf && istransparentturf(this_turf))
 				shadow = new /obj/effect/flyer_shadow(below_turf, owner)
 
 /datum/action/item_action/organ_action/use/flight/proc/check_laying(datum/source, new_pos, old_pos)

@@ -42,7 +42,7 @@
 	UnregisterSignal(parent, COMSIG_ITEM_DROPPED)
 	return ..()
 
-/datum/component/storage/concrete/boots/attackby(datum/source, obj/item/attacking_item, mob/user, params, storage_click)
+/datum/component/storage/concrete/boots/attackby(datum/source, obj/item/attacking_item, mob/user, list/modifiers, storage_click)
 	if(isatom(parent) && can_be_inserted(attacking_item, stop_messages = TRUE))
 		var/atom/boots = parent
 		if(istype(attacking_item, /obj/item/weapon/knife) && ishuman(boots?.loc))
@@ -50,13 +50,13 @@
 			if(unlucky.shoes == parent && prob(40 - max((unlucky.STALUC * 4), 0)))
 				var/cached_aim = user.zone_selected
 				user.zone_selected = pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-				unlucky.attackby(attacking_item, user, params)
+				unlucky.attackby(attacking_item, user, modifiers)
 				to_chat(unlucky, span_danger("UNLUCKY! I've stabbed myself with [attacking_item]!"))
 				user.zone_selected = cached_aim
 
 	return ..()
 
-/datum/component/storage/concrete/boots/handle_item_insertion(obj/item/I, prevent_warning, mob/M, datum/component/storage/remote, params, storage_click)
+/datum/component/storage/concrete/boots/handle_item_insertion(obj/item/I, prevent_warning, mob/M, datum/component/storage/remote, list/modifiers, storage_click)
 	. = ..()
 	if(!.)
 		return

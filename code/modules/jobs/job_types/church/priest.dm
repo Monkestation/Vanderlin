@@ -42,8 +42,8 @@
 	skills = list(
 		/datum/skill/misc/reading = 5,
 		/datum/skill/magic/holy = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 3, //Ook's muscle priest
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/misc/athletics = 3,
@@ -54,6 +54,7 @@
 	)
 
 	languages = list(/datum/language/celestial)
+	can_have_apprentices = FALSE
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -65,6 +66,7 @@
 	spawned.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
 	spawned.verbs |= /mob/living/carbon/human/proc/churchcurse
 	spawned.verbs |= /mob/living/carbon/human/proc/churchannouncement
+	spawned.verbs += list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb)
 
 	spawned.virginity = TRUE
 
@@ -111,7 +113,7 @@
 
 /mob/living/carbon/human/proc/coronate_lord()
 	set name = "Coronate"
-	set category = "Priest"
+	set category = "RoleUnique"
 	if(!mind)
 		return
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
@@ -162,7 +164,7 @@
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Excommunicate"
-	set category = "Priest"
+	set category = "RoleUnique"
 	if(stat)
 		return
 	var/inputty = input("Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner Name") as text|null
@@ -193,7 +195,7 @@
 
 /mob/living/carbon/human/proc/churchcurse()
 	set name = "Curse"
-	set category = "Priest"
+	set category = "RoleUnique"
 	if(stat)
 		return
 	var/inputty = input("Curse someone as a heretic. (curse them again to remove it)", "Sinner Name") as text|null
@@ -222,8 +224,8 @@
 				break
 
 /mob/living/carbon/human/proc/churchannouncement()
-	set name = "Announcement"
-	set category = "Priest"
+	set name = "Priest Announcement"
+	set category = "RoleUnique"
 	if(stat)
 		return
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null

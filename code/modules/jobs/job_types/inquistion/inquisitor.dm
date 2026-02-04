@@ -24,6 +24,9 @@
 	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/inquisitor
@@ -73,7 +76,7 @@
 
 /mob/living/carbon/human/proc/torture_victim()
 	set name = "Extract Confession"
-	set category = "Inquisition"
+	set category = "RoleUnique"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
@@ -128,7 +131,7 @@
 
 /mob/living/carbon/human/proc/faith_test()
 	set name = "Test Faith"
-	set category = "Inquisition"
+	set category = "RoleUnique"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
@@ -235,6 +238,10 @@
 	if(is_innocent && !resist)
 		false_confession_chance = 100 - (STAINT + STAEND) // Low willpower = higher chance to falsely confess
 		false_confession_chance = CLAMP(false_confession_chance, 20, 80) // Between 20-80%
+
+	if(HAS_TRAIT(src, TRAIT_TORTURED))
+		false_confession_chance = 0
+		resist_chance = 0
 
 	if(!prob(resist_chance))
 		var/list/confessions = list()
@@ -356,7 +363,7 @@
 					if(/datum/antagonist/vampire/lord)
 						held_confession.bad_type = "THE BLOOD-LORD OF VANDERLIN"
 						held_confession.antag = initial(antag_type:name)
-					if(/datum/antagonist/vampire/lesser)
+					if(/datum/antagonist/vampire/lords_spawn)
 						held_confession.bad_type = "AN UNDERLING OF THE BLOOD-LORD"
 						held_confession.antag = initial(antag_type:name)
 					if(/datum/patron/inhumen/graggar)

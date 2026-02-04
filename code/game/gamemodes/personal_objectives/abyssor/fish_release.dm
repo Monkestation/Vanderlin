@@ -11,10 +11,9 @@
 /datum/objective/personal/release_fish/on_creation()
 	. = ..()
 	var/list/possible_fish = list()
-	for(var/fish_type in subtypesof(/obj/item/reagent_containers/food/snacks/fish))
-		var/obj/item/reagent_containers/food/snacks/fish/F = fish_type
+	for(var/obj/item/reagent_containers/food/snacks/fish/F as anything in subtypesof(/obj/item/reagent_containers/food/snacks/fish))
 		if(F.status != FISH_DEAD)
-			possible_fish += fish_type
+			possible_fish += F
 
 	if(length(possible_fish))
 		target_fish_type = pick(possible_fish)

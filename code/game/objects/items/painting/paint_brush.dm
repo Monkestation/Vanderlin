@@ -18,7 +18,7 @@
 	MA.color = current_color
 	. += MA
 
-/obj/item/paint_brush/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/paint_brush/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(istype(target, /obj/item/paint_palette))
 		var/merge_color = input(user, "Choose a color to blend") as anything in target:colors

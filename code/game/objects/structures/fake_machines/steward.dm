@@ -55,7 +55,7 @@
 	var/current_tab = TAB_MAIN
 	var/compact = FALSE
 
-/obj/structure/fake_machine/steward/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/steward/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		record_round_statistic(STATS_MAMMONS_DEPOSITED, I.get_real_price())
 		SStreasury.give_money_treasury(I.get_real_price(), "NERVE MASTER deposit")
@@ -337,7 +337,7 @@
 		to_chat(user, "<span class='warning'>It's locked. Of course.</span>")
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	SSassets.transport.send_assets(user?.client, list("try4_border.png", "try5.png", "slop_menustyle2.css"))
 	var/contents

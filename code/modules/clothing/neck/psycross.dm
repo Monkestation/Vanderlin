@@ -88,7 +88,7 @@
 	icon_state = "eora"
 	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/holy/eora/attack(mob/living/love_target, mob/user)
+/obj/item/clothing/neck/psycross/silver/holy/eora/attack(mob/living/love_target, mob/user, list/modifiers)
 	if(!isliving(love_target) || love_target.stat == DEAD)
 		to_chat(user, span_warning("The love potion only works on living things, sicko!"))
 		return ..()

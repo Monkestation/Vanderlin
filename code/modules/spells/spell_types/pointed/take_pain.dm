@@ -111,7 +111,7 @@
 
 			new_wound.apply_to_bodypart(BP)
 
-	playsound(get_turf(owner), 'sound/magic/heal.ogg', 50, TRUE)
+	playsound(owner, 'sound/magic/heal.ogg', 50, TRUE)
 	to_chat(owner, span_notice("You take [cast_on]'s pain upon yourself!"))
 	to_chat(cast_on, span_notice("You feel [owner] take some of your pain away!"))
 	SEND_SIGNAL(owner, COMSIG_PAIN_TRANSFERRED, pain_percentage)

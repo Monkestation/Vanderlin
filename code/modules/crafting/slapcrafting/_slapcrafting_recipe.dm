@@ -248,7 +248,7 @@
 				user.mind.add_sleep_experience(skillcraft, amt2raise, FALSE)
 
 	if(craftsound)
-		playsound(get_turf(assembly), craftsound, 100, TRUE)
+		playsound(assembly, craftsound, 100, TRUE)
 
 	assembly.being_finished = TRUE
 	var/list/results = list()

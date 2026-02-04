@@ -1,6 +1,8 @@
 ///Uses Byond's basic obstacle avoidance movement unless the target is on a z-level different to ours
 /datum/ai_movement/hybrid_pathing/gnome
 	max_path_distance = 100 //gnomes are psydon's smartest genetic freak
+	max_basic_failures = 2
+	always_advanced = TRUE
 
 /datum/ai_movement/hybrid_pathing
 	requires_processing = TRUE
@@ -16,6 +18,7 @@
 
 	var/next_resolve = 0
 	var/max_basic_failures = 3 // How many consecutive basic movement failures before switching to A*
+	var/always_advanced = FALSE
 
 /datum/ai_movement/hybrid_pathing/process(delta_time)
 	if(world.time < next_resolve)
@@ -80,7 +83,7 @@
 					continue
 
 		// Basic movement for targets on the same z-level with no existing path
-		if(end_turf?.z == movable_pawn?.z && !length(controller.movement_path) && !cliented)
+		if(end_turf?.z == movable_pawn?.z && !length(controller.movement_path) && !cliented && !always_advanced)
 			advanced = FALSE
 			var/can_move = controller.can_move()
 
@@ -190,7 +193,7 @@
 				if(!(used_ref in falling_back))
 					falling_back |= used_ref
 					falling_back[used_ref] = TRUE
-				if(get_turf(movable_pawn) == next_step || (istype(next_step, /turf/open/transparent) && get_turf(movable_pawn) == GET_TURF_BELOW(next_step)))
+				if(get_turf(movable_pawn) == next_step || (istype(next_step, /turf/open/openspace) && get_turf(movable_pawn) == GET_TURF_BELOW(next_step)))
 					controller.movement_path.Cut(1,2)
 					if(length(controller.movement_path))
 						var/turf/double_checked = controller.movement_path[1]

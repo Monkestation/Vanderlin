@@ -157,7 +157,7 @@
 /area/under/tomb/cave)
 "ie" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "iA" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -222,7 +222,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "ml" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "mz" = (
 /turf/open/floor/concrete,
@@ -267,7 +267,7 @@
 /turf/open/floor/cobblerock,
 /area/under/tomb)
 "qx" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "qY" = (
 /obj/item/weapon/knife/copper,
@@ -931,7 +931,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "YG" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "YK" = (
 /turf/closed/wall/mineral/stone/moss,

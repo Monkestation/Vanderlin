@@ -1,16 +1,14 @@
 /proc/reagentsforbeakers()
 	. = list()
-	for(var/t in subtypesof(/datum/reagent))
-		var/datum/reagent/R = t
-		. += list(list("id" = t, "text" = initial(R.name)))
+	for(var/datum/reagent/R as anything in subtypesof(/datum/reagent))
+		. += list(list("id" = R, "text" = initial(R.name)))
 
 	. = json_encode(.)
 
 /proc/beakersforbeakers()
 	. = list()
-	for(var/t in subtypesof(/obj/item/reagent_containers))
-		var/obj/item/reagent_containers/C = t
-		. += list(list("id" = t, "text" = initial(C.name), "volume" = initial(C.volume)))
+	for(var/obj/item/reagent_containers/C as anything in subtypesof(/obj/item/reagent_containers))
+		. += list(list("id" = C, "text" = initial(C.name), "volume" = initial(C.volume)))
 
 	. = json_encode(.)
 

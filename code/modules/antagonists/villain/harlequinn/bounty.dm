@@ -12,7 +12,7 @@
 	var/last_harlequin_spawn = 0
 	COOLDOWN_DECLARE(bounty_marker)
 
-/obj/structure/bounty_board/attack_hand_secondary(mob/user, params)
+/obj/structure/bounty_board/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -1788,7 +1788,7 @@
 	var/list/marked_targets = list()
 	var/max_targets = 5 // Maximum number of targets that can be marked
 
-/obj/item/bounty_marker/attack_self(mob/user, params)
+/obj/item/bounty_marker/attack_self(mob/user, list/modifiers)
 	if(!marked_targets.len)
 		to_chat(user, span_warning("No targets have been marked with this device."))
 		return
@@ -1803,7 +1803,7 @@
 		marked_targets = list()
 		return
 
-/obj/item/bounty_marker/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/bounty_marker/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!proximity_flag && get_dist(user, target) > 7)
 		return
@@ -1870,42 +1870,49 @@
 	if(!target || mammons_to_add <= 0)
 		return FALSE
 
-	var/static/list/coins_types = typecacheof(/obj/item/coin)
 	var/remaining_mammons = mammons_to_add
 
+	// First, try to add to existing coin stacks
 	for(var/obj/item/coin/existing_coin in target.contents)
-		if(coins_types[existing_coin.type] && remaining_mammons > 0)
-			var/can_add = min(remaining_mammons / existing_coin.sellprice, 999 - existing_coin.quantity) // Assuming max stack of 999
-			if(can_add > 0)
-				existing_coin.quantity += can_add
-				remaining_mammons -= can_add * existing_coin.sellprice
-				existing_coin.update_appearance(UPDATE_ICON_STATE | UPDATE_NAME | UPDATE_DESC)
+		if(!existing_coin.base_type || remaining_mammons <= 0)
+			continue
 
-	// If we still have mammons to add, create new coins
+		var/space_in_stack = 20 - existing_coin.quantity // MAX_COIN_STACK_SIZE = 20
+		if(space_in_stack <= 0)
+			continue
+
+		var/coins_to_add = min(floor(remaining_mammons / existing_coin.sellprice), space_in_stack)
+		if(coins_to_add > 0)
+			existing_coin.set_quantity(existing_coin.quantity + coins_to_add)
+			remaining_mammons -= coins_to_add * existing_coin.sellprice
+
+	// Create new coin stacks for remaining mammons
 	while(remaining_mammons > 0)
-		// Determine best coin type to create (highest value that fits)
-		var/best_coin_type = null
-		var/best_value = 0
+		var/coin_type_to_create = null
+		var/coin_value = 0
 
-		for(var/coin_type in coins_types)
-			var/obj/item/coin/temp_coin = coin_type
-			var/coin_value = initial(temp_coin.sellprice)
-			if(coin_value <= remaining_mammons && coin_value > best_value)
-				best_coin_type = coin_type
-				best_value = coin_value
+		// Determine best coin denomination
+		if(remaining_mammons >= 10)
+			coin_type_to_create = /obj/item/coin/gold
+			coin_value = 10
+		else if(remaining_mammons >= 5)
+			coin_type_to_create = /obj/item/coin/silver
+			coin_value = 5
+		else if(remaining_mammons >= 1)
+			coin_type_to_create = /obj/item/coin/copper
+			coin_value = 1
+		else
+			break // Less than 1 mammon remaining
 
-		if(!best_coin_type)
-			break // Can't create any more coins
+		var/coins_to_create = min(floor(remaining_mammons / coin_value), 20)
+		var/obj/item/coin/new_coin = new coin_type_to_create(get_turf(target), coins_to_create)
 
-		var/obj/item/coin/new_coin = new best_coin_type(get_turf(target))
 		if(ismob(target))
-			target.put_in_hand(new_coin)
+			target.put_in_hands(new_coin)
 		else
 			new_coin.forceMove(target)
-		var/quantity_to_add = min(remaining_mammons / best_value, 20) // Max stack
-		new_coin.quantity = quantity_to_add
-		remaining_mammons -= quantity_to_add * best_value
-		new_coin.update_appearance(UPDATE_ICON_STATE | UPDATE_NAME | UPDATE_DESC)
+
+		remaining_mammons -= coins_to_create * coin_value
 
 	return mammons_to_add - remaining_mammons // Return actual amount added
 

@@ -12,7 +12,7 @@
 	istrainable = TRUE // For the moment I'll allow these to be traineable until a proper way to level up bows and crossbows is coded. - Foxtrot
 	var/damfactor = 1 // Multiplier for projectile damage. Used by bows and crossbows.
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/attackby(obj/item/A, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/attackby(obj/item/A, mob/user, list/modifiers)
 	. = ..()
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
 		chamber_round()

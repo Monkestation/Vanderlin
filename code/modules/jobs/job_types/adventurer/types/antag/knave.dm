@@ -13,15 +13,15 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 3,
+		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/swords = 2,
+		/datum/skill/combat/whipsflails = 2,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/bows = 2,
+		/datum/skill/combat/crossbows = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/carpentry = 1,
 		/datum/skill/misc/reading = 1,
@@ -61,7 +61,7 @@
 			ADD_TRAIT(spawned, TRAIT_FORAGER, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/leather/volfhelm, ITEM_SLOT_HEAD, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/restraints/legcuffs/beartrap, ITEM_SLOT_BACKPACK, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/restraints/legcuffs/beartrap, ITEM_SLOT_BACKPACK, TRUE)
 

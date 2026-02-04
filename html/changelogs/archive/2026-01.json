@@ -1,0 +1,581 @@
+{
+    "2026-01-02": {
+        "aberrantQuesrist": [
+            {
+                "bugfix": "Updates the date to reflect the new year."
+            },
+            {
+                "rscadd": "New cow sprites."
+            },
+            {
+                "refactor": "Pulls the floors.dmi file apart into an easier navigable and better organized batch. QoL for spriters."
+            },
+            {
+                "rscadd": "New turf types, sands and grass."
+            },
+            {
+                "rscadd": "New sprites for sand, saltwater, and modified mosaic tiles."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "image": "new oak shield herald"
+            }
+        ],
+        "PineappleMan929": [
+            {
+                "spellcheck": "little accent thing so people spell inquisition titles right"
+            }
+        ]
+    },
+    "2026-01-03": {
+        "Syndro101": [
+            {
+                "map": "remake of the voyage ship"
+            },
+            {
+                "bugfix": "closes https://github.com/Monkestation/Vanderlin/issues/4676 and closes https://github.com/Monkestation/Vanderlin/issues/4677"
+            }
+        ],
+        "aberrantQuesrist": [
+            {
+                "map": "Cleaned up Daftmarsh, QoL updates."
+            },
+            {
+                "bugfix": "Male cows no longer have udders."
+            }
+        ]
+    },
+    "2026-01-05": {
+        "flleeppyy": [
+            {
+                "code_imp": "add new CI linter to check for unescaped brackets"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "balance": "tweaked dungeoneer's loadout, giving them knuckles and adjusting skills."
+            }
+        ],
+        "Bloo4420": [
+            {
+                "bugfix": "invisible royal truffles"
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds several new items to the patreon loadout options."
+            }
+        ],
+        "Somniworld": [
+            {
+                "balance": "Made all mage summons give the same amount of resources for their tier. For instance a sprite now drops 6 fairy dust, the same way an imp drops 6 Infernal ashes."
+            },
+            {
+                "bugfix": "Noc's Eye warded summoning matrices no longer get bricked if you try to summon something alone."
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Kobolds can be blue now."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "bugfix": "gave abyssal guard their weapon skill and removed their swordfish"
+            }
+        ]
+    },
+    "2026-01-06": {
+        "Draggeru": [
+            {
+                "map": "Updated Vanderlins map"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscdel": "Removed Royal Knight brawling subclasses"
+            },
+            {
+                "bugfix": "Removed the ability for pacifists to wrestle"
+            },
+            {
+                "bugfix": "Dungeoneer receiving two pouches"
+            }
+        ]
+    },
+    "2026-01-08": {
+        "Gigigger": [
+            {
+                "bugfix": "now Blood Pact provides DARK attunement, instead of DEATH attunement, as intended"
+            }
+        ],
+        "dwasint": [
+            {
+                "rscadd": "lotto machines"
+            }
+        ]
+    },
+    "2026-01-09": {
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new ring for the apothecaries, making it clear they can extract and manipulate lux without repercussions so long as they're not being heretics."
+            },
+            {
+                "image": "changed the way the feldsher's ring looks, to make it fit more with our visual identity."
+            },
+            {
+                "bugfix": "Werewolves got their combat mode track back."
+            }
+        ],
+        "TerraGS": [
+            {
+                "bugfix": "Female apothecary boots no longer vanish when facing east."
+            },
+            {
+                "bugfix": "Dead people no longer feel the effects of bloodloss."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the folkheroes migrants, moving certain rare adventurers into here."
+            },
+            {
+                "rscadd": "Added the Men-at-arms Axeman, a heavy armor axe role."
+            },
+            {
+                "rscadd": "Adds a tribal tattoo with 0 protection for exiled warrior that takes up the armor slot as a nerf."
+            },
+            {
+                "rscadd": "Poison resilience for Old Apothecary, huffing poisons builds up a tolerance."
+            },
+            {
+                "rscadd": "Padded Gambeson to Hedgemage, currently one of the weakest wretches."
+            },
+            {
+                "rscadd": "Leather bracers to abyssal guards."
+            },
+            {
+                "rscdel": "Removed miracles from Monk"
+            },
+            {
+                "rscdel": "Removed Men-at-arms Fencer"
+            },
+            {
+                "rscdel": "Removed harddismember from enforcer, makes them easier to balance around if they don't have a werewolf trait."
+            },
+            {
+                "balance": "Rebalances skills & stats on most classes in the game, aswell as some loadouts."
+            },
+            {
+                "balance": "Rebalances most classes that were expert to be skilled users instead, all mercenaries have lost expert weapon skills."
+            },
+            {
+                "balance": "Peasants and Serfs get a statline of +3, it was a bit all over the place. Old-party serfs get +4."
+            },
+            {
+                "balance": "Changes the tavern brawler Be Special to give lower skill levels."
+            },
+            {
+                "bugfix": "Fixed the double stat+skill input in the Court-Magos file."
+            },
+            {
+                "bugfix": "Stats being listed twice on the anthraxi male job has been fixed."
+            },
+            {
+                "code_imp": "Changed a bunch of stat values on a bunch of jobs."
+            },
+            {
+                "refactor": "Removed the donator adventurer folder and moved them either into the folkheroes folder or the rare folder."
+            }
+        ],
+        "WhataTerribleUserName": [
+            {
+                "rscadd": "Adds new face armor for Graggar Iconoclast."
+            },
+            {
+                "balance": "Changes coverage and integrity of Vicious Helm."
+            },
+            {
+                "balance": "Gives Vicious Axe alt intents."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Adjusted Gallowglass helmet, gave gallowglass and kerns, Mage blue kilts and sashes"
+            }
+        ]
+    },
+    "2026-01-12": {
+        "KevinfromHP": [
+            {
+                "rscdel": "Removed Inquisition roles from Voyager"
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscdel": "Inquisition no longer allows aasimars within their formal ranks, only aasimar adepts."
+            },
+            {
+                "rscdel": "Dwarves no longer get promoted to Prefekts, they will forever stay in hopes of a promotion."
+            }
+        ]
+    },
+    "2026-01-13": {
+        "PotatoTomahto": [
+            {
+                "refactor": "grab and garrote code refactored"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "Inquisition hidden doors"
+            },
+            {
+                "bugfix": "not being able to close hidden doors very easily."
+            },
+            {
+                "map": "Inquisition gets their own door set."
+            },
+            {
+                "code_imp": "Cleaned up hidden door/levers"
+            },
+            {
+                "refactor": "Hidden door code"
+            }
+        ]
+    },
+    "2026-01-14": {
+        "KevinfromHP": [
+            {
+                "code_imp": "MC Runtime fix"
+            }
+        ],
+        "Somniworld": [
+            {
+                "balance": "Psydonian helmets have a 180\u00b0 Field Of View"
+            }
+        ]
+    },
+    "2026-01-15": {
+        "YellowHarlequin": [
+            {
+                "image": "added streaks to hair_gradients.dmi"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed potential issues with spell channelling and death"
+            }
+        ]
+    },
+    "2026-01-16": {
+        "Rockslp": [
+            {
+                "rscdel": "Removed medium armor trait from spellmage."
+            },
+            {
+                "balance": "Reduce spell mage wrestling and strength"
+            },
+            {
+                "rscadd": "Added dreamwatcher to town elder"
+            },
+            {
+                "rscdel": "Removed dreamwatcher from town elder"
+            },
+            {
+                "rscdel": "Removes zizo from archivist options, he's one of noc's closely watched"
+            },
+            {
+                "balance": "Changes dreamwatcher stats to more alike the other archivist advclass."
+            },
+            {
+                "bugfix": "Fixed archivist dwarves running around with their belly flopping about"
+            },
+            {
+                "code_imp": "Made Archivist into an advclass"
+            },
+            {
+                "rscadd": "Gives clinic apprentice farming skill"
+            },
+            {
+                "balance": "Raises priest fist-fighting (NOT THEIR WRESTLING THOUGH!!!!)"
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "bugfix": "Values for a few stress events are now applied correctly."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "code_imp": "Moved fingerprint tracking onto bodyparts"
+            },
+            {
+                "code_imp": "Breaks the entire codebase"
+            }
+        ]
+    },
+    "2026-01-17": {
+        "TerraGS": [
+            {
+                "bugfix": "You will no longer count single coin values multiple times."
+            }
+        ],
+        "Raptorian1": [
+            {
+                "bugfix": "made mobs stop attacking each other."
+            }
+        ],
+        "Ediblebomb": [
+            {
+                "spellcheck": "Fixed two cases of \\\"the the\\\" and \\\"the 1.\\\" in bedsheet application/removal code."
+            },
+            {
+                "bugfix": "Fixed bedsheet offsets and layering."
+            },
+            {
+                "bugfix": "Fixed bedsheets having a permanent pickup delay after being applied to and removed from a bed."
+            },
+            {
+                "bugfix": "Fixed wool double beds only allowing one buckled mob."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "hardcore rat is now a small rat and can't speak"
+            }
+        ]
+    },
+    "2026-01-18": {
+        "ModDownloading": [
+            {
+                "bugfix": "Leprosy quirk stops pain just like the triumph buy one now."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fix royal knights clearing stats"
+            },
+            {
+                "bugfix": "Various fixes to human examine code."
+            },
+            {
+                "balance": "Faceless assassins can no longer be seen if they are unknown."
+            },
+            {
+                "bugfix": "Fixed jobs selectable items not always having options roundstart"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "bandage bloodloss"
+            }
+        ]
+    },
+    "2026-01-19": {
+        "tired-wired": [
+            {
+                "rscadd": "Added some candle sprites from Azure."
+            }
+        ]
+    },
+    "2026-01-20": {
+        "snowyseshi": [
+            {
+                "code_imp": "athletics and climbing are now clamped to average."
+            },
+            {
+                "rscdel": "Woodland hermit background removed."
+            }
+        ],
+        "TheMrGlasses": [
+            {
+                "balance": "Daywalker migrant job rebalanced and changed (No longer a worse witch hunter)"
+            }
+        ],
+        "Somniworld": [
+            {
+                "rscadd": "Coffins may now be sealed with tallow. This can consecrate them like a grave."
+            },
+            {
+                "rscadd": "Sealed coffins can be opened with daggers and knives on cut intent."
+            },
+            {
+                "rscadd": "A grave may now be double-consecrated by burying a consecrated coffin and using burial rites on the resulting grave. This makes graverobbing trigger an alarm that alerts the temple."
+            },
+            {
+                "rscadd": "Red Tallow may now be made by using viscera on normal tallow. Viscera is created by grinding sinew.\\nadd : New sprites for consecrated coffins, double-consecrated graves."
+            },
+            {
+                "code_imp": "fixes a typo in the bobcat's description."
+            }
+        ]
+    },
+    "2026-01-21": {
+        "CheffieGithub": [
+            {
+                "balance": "Black mirror can only track it's feeder or a select person for its 2 minute window."
+            },
+            {
+                "bugfix": "Fixed black mirror selection being broken."
+            }
+        ]
+    },
+    "2026-01-22": {
+        "Rockslp": [
+            {
+                "rscadd": "Added Triton to Swashbuckler Folkhero"
+            },
+            {
+                "rscdel": "Removed Harpy and Triton from Court Physician"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added hair shaving"
+            }
+        ],
+        "Bloo4420": [
+            {
+                "bugfix": "Ausbushes fluff structure integrity"
+            }
+        ],
+        "Ediblebomb": [
+            {
+                "rscadd": "Added a Swordsman Men-At-Arms subclass. They get the same equipment as Pikeman, but with a heater shield instead of a pike, skilled Swords and Shields, and marginally worse stats."
+            }
+        ]
+    },
+    "2026-01-23": {
+        "tired-wired": [
+            {
+                "rscdel": "Removed a single kobold slur."
+            }
+        ]
+    },
+    "2026-01-25": {
+        "Somniworld": [
+            {
+                "rscadd": "Adds a new hood made out of leather to the game. The \\\"reformed thief\\\" adept subclass spawns with it by default."
+            }
+        ],
+        "TerraGS": [
+            {
+                "rscadd": "Flinging feces fouls foes."
+            }
+        ]
+    },
+    "2026-01-26": {
+        "TerraGS": [
+            {
+                "bugfix": "Looking up into nullspace no longer runtimes"
+            },
+            {
+                "refactor": "replaces the transparent turf subtype with a turf transparency element"
+            }
+        ]
+    },
+    "2026-01-27": {
+        "Neuroplasty": [
+            {
+                "bugfix": "Made herbal remedies not stress you out anymore."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "map": "medical guide moved a few tiles to its place"
+            }
+        ],
+        "Diegoflores31": [
+            {
+                "balance": "changes skill requirements of bombcrafting."
+            },
+            {
+                "balance": "removes bombcrafting from: porter , jester and plague doctor."
+            },
+            {
+                "balance": "adds bombcrafting to: artificer"
+            },
+            {
+                "bugfix": "breaching charge now can be used properly to mine."
+            },
+            {
+                "refactor": "breaching charges now use timers instead of process , reworked the logic for cinematic effect."
+            },
+            {
+                "bugfix": "minimun_skill_required now actually means minimun skill required."
+            }
+        ]
+    },
+    "2026-01-28": {
+        "realforest2001": [
+            {
+                "code_imp": "Removed unused span defines and style classes."
+            },
+            {
+                "qol": "Job restrictions now show timelock required before checking species/age etc."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "kobolds can eat walls now"
+            },
+            {
+                "rscadd": "kobolds cant eat magic rocks for spells anymore"
+            },
+            {
+                "rscadd": "you can stick kobolds in smelters now"
+            }
+        ]
+    },
+    "2026-01-29": {
+        "realforest2001": [
+            {
+                "qol": "Role-Unique verbs are now all in one tab (where practical to do so)."
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes the grenzelbun description"
+            }
+        ]
+    },
+    "2026-01-31": {
+        "dwasint": [
+            {
+                "bugfix": "roundstart coins can't be duped"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Objects that fall from above no longer show as \\\"the floor\\\"."
+            },
+            {
+                "bugfix": "Failing to pick a job subtype (such as bloodsucker wretch equipment) will no longer brick you."
+            }
+        ],
+        "ApolloVector": [
+            {
+                "balance": "Fighter Average shield skill -> Skilled shields"
+            },
+            {
+                "balance": "Cleric 0 shield skill -> Average"
+            },
+            {
+                "balance": "Zizo inhumen cleric shield skill bonus +1 instead of +2, resulting in skilled shields instead of expert"
+            },
+            {
+                "balance": "Captain Skilled shield skill -> Expert shields"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed inquisition collars getting stuck"
+            },
+            {
+                "bugfix": "Fixed asset load error"
+            }
+        ]
+    }
+}

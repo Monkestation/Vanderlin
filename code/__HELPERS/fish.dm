@@ -8,7 +8,8 @@
 		if(FISH_BAIT_FOODTYPE)
 			if(isfood(bait))
 				return bait:foodtype & special_identifier[FISH_BAIT_VALUE]
-			return NONE
+			else
+				return bait:bait_flag & special_identifier[FISH_BAIT_VALUE]
 		if(FISH_BAIT_REAGENT)
 			return bait.reagents?.has_reagent(special_identifier[FISH_BAIT_VALUE], special_identifier[FISH_BAIT_AMOUNT], check_subtypes = TRUE)
 		else

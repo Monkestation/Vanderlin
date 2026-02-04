@@ -37,7 +37,6 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		GLOB.unlinked_dungeon_entries |= src
 	return ..()
 
-
 /obj/structure/dungeon_entry/Initialize()
 	. = ..()
 	if(dungeon_id)
@@ -72,7 +71,7 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		return
 	use(user)
 
-/obj/structure/dungeon_entry/attackby(obj/item/W, mob/user, params)
+/obj/structure/dungeon_entry/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
@@ -160,7 +159,7 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		return
 	use(user)
 
-/obj/structure/dungeon_exit/attackby(obj/item/W, mob/user, params)
+/obj/structure/dungeon_exit/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE

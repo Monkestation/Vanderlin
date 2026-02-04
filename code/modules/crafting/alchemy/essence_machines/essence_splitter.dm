@@ -13,7 +13,7 @@
 /obj/machinery/essence/splitter/Initialize()
 	. = ..()
 	storage = new /datum/essence_storage(src)
-	storage.max_total_capacity = 200
+	storage.max_total_capacity = 500
 	storage.max_essence_types = 15
 
 	if(GLOB.thaumic_research.has_research(/datum/thaumic_research_node/splitter_efficiency/five))
@@ -53,9 +53,16 @@
 		if(essence_transferred)
 			continue
 
-/obj/machinery/essence/splitter/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/splitter/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_connector))
 		return
+
+	if(GLOB.thaumic_research.has_research(/datum/thaumic_research_node/splitter_efficiency/five))
+		max_items = 8
+		storage.max_total_capacity = 800
+	else if(GLOB.thaumic_research.has_research(/datum/thaumic_research_node/splitter_efficiency/six))
+		max_items = 12
+		storage.max_total_capacity = 1200
 
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
@@ -135,7 +142,7 @@
 	to_chat(user, span_info("You place [I] into the essence splitter. ([current_items.len]/[max_items] slots used)"))
 	return TRUE
 
-/obj/machinery/essence/splitter/attack_hand(mob/user, params)
+/obj/machinery/essence/splitter/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(processing)
 		to_chat(user, span_warning("The splitter is currently processing."))
@@ -143,7 +150,7 @@
 
 	begin_bulk_splitting(user)
 
-/obj/machinery/essence/splitter/attack_hand_secondary(mob/user, params)
+/obj/machinery/essence/splitter/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

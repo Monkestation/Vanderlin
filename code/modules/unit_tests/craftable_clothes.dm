@@ -19,11 +19,11 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/facemask/prisoner,
 		/obj/item/clothing/head/priestmask, // unattainable
 		/obj/item/clothing/head/priesthat, // unattainable
-		/obj/item/clothing/head/mob_holder, // change this shit to not clothing, wtf.
 		/obj/item/clothing/head/leather/inqhat/vigilante, //Renegade Bullshit
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/gold/burden, // uncraftable
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
+		/obj/item/clothing/ring/apothecary_ring, // uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
@@ -40,7 +40,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/cloak/psydontabard, ///they'd kill you for this
 		/obj/item/clothing/cloak/psydontabard/alt, ///same here
 		/obj/item/clothing/face/spectacles/inq, //these are powerful
-		/obj/item/clothing/shirt/undershirt/easttats, ///no
 		/obj/item/clothing/armor/leather/heavy, ///abstract type
 		/obj/item/clothing/head/helmet/heavy/psydonbarbute, //buyable
 		/obj/item/clothing/head/helmet/heavy/psysallet, //buyable
@@ -133,7 +132,7 @@ abstract types are automatically excluded.
 
 	// abstract typepaths and CRAFTING_TEST_EXCLUDE
 	for(var/obj/item/clothing/path as anything in clothes_list)
-		if(is_abstract(path) || (path.misc_flags & CRAFTING_TEST_EXCLUDE))
+		if(IS_ABSTRACT(path) || (path::misc_flags & CRAFTING_TEST_EXCLUDE))
 			clothes_list -= path
 
 	// paths by text, if a piece of this text is found in the typepath it's excluded

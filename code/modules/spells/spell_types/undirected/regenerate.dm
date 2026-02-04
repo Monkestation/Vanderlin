@@ -20,8 +20,6 @@
 	. = ..()
 	cast_on.emote("agony", forced = TRUE)
 	cast_on.fully_heal()
-	cast_on.regenerate_limbs()
-	cast_on.regenerate_organs()
-	cast_on.Jitter(1)
+	cast_on.adjust_jitter(10 SECONDS)
 	cast_on.visible_message(span_notice("[cast_on]'s body painfully contorts itself back together"))
 

@@ -29,20 +29,20 @@
 		icon_state = initial(icon_state)
 	set_light_on(on)
 
-/obj/item/flashlight/attack_self(mob/user, params)
+/obj/item/flashlight/attack_self(mob/user, list/modifiers)
 	on = !on
 	update_brightness(user)
 	update_item_action_buttons()
 	return 1
 
 /obj/item/flashlight/suicide_act(mob/living/carbon/human/user)
-	if (user.eye_blind)
+	if (user.is_blind())
 		user.visible_message("<span class='suicide'>[user] is putting [src] close to [user.p_their()] eyes and turning it on... but [user.p_theyre()] blind!</span>")
 		return SHAME
 	user.visible_message("<span class='suicide'>[user] is putting [src] close to [user.p_their()] eyes and turning it on! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (FIRELOSS)
 
-/obj/item/flashlight/attack(mob/living/carbon/M, mob/living/carbon/human/user)
+/obj/item/flashlight/attack(mob/living/carbon/M, mob/living/carbon/human/user, list/modifiers)
 	add_fingerprint(user)
 	return ..()
 
@@ -97,7 +97,7 @@
 	else
 		item_state = "[initial(item_state)]"
 
-/obj/item/flashlight/flare/attack_self(mob/user, params)
+/obj/item/flashlight/flare/attack_self(mob/user, list/modifiers)
 
 	// Usual checks
 	if(!fuel)
@@ -178,7 +178,7 @@
 					return
 		fuel = max(fuel - 10, 0)
 
-/obj/item/flashlight/flare/torch/attack_self(mob/user, params)
+/obj/item/flashlight/flare/torch/attack_self(mob/user, list/modifiers)
 
 	// Usual checks
 	if(!fuel)
@@ -192,7 +192,7 @@
 		turn_off()
 
 /obj/item/flashlight/flare/torch/turn_off()
-	playsound(src.loc, 'sound/items/firesnuff.ogg', 50)
+	playsound(src, 'sound/items/firesnuff.ogg', 50)
 	STOP_PROCESSING(SSobj, src)
 	..()
 	if(ismob(loc))
@@ -205,7 +205,7 @@
 	. = ..()
 	if(fuel)
 		if(!on)
-			playsound(src.loc, 'sound/items/firelight.ogg', 100)
+			playsound(src, 'sound/items/firelight.ogg', 100)
 			on = TRUE
 			damtype = BURN
 			update_brightness()
@@ -216,7 +216,7 @@
 			START_PROCESSING(SSobj, src)
 			return TRUE
 
-/obj/item/flashlight/flare/torch/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flashlight/flare/torch/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if (!proximity)
 		return
@@ -277,7 +277,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 
-/obj/item/flashlight/flare/torch/lantern/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flashlight/flare/torch/lantern/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

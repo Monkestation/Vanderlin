@@ -111,9 +111,9 @@
 		base_icon_state = "book[rand(1,8)]"
 		icon_state = "[base_icon_state]_0"
 
-/obj/item/book/attack_self(mob/user, params)
+/obj/item/book/attack_self(mob/user, list/modifiers)
 	if(!open)
-		attack_hand_secondary(user, params)
+		attack_hand_secondary(user, modifiers)
 		return
 	if(!user.can_read(src))
 		return
@@ -124,11 +124,11 @@
 	read(user)
 	user.update_inv_hands()
 
-/obj/item/book/attack_self_secondary(mob/user, params)
+/obj/item/book/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	attack_hand_secondary(user, params)
+	attack_hand_secondary(user, modifiers)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/book/proc/read(mob/user)
@@ -164,6 +164,7 @@
 		dat += "</body></html>"
 		user << browse(dat, "window=reading;size=1000x700;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
 		onclose(user, "reading", src)
+		SEND_SIGNAL(user, COMSIG_BOOK_READ)
 	else
 		return "<span class='warning'>You're too far away to read it.</span>"
 
@@ -192,21 +193,21 @@
 			curpage += 2
 		else
 			curpage = 1
-		playsound(loc, 'sound/items/book_page.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/items/book_page.ogg', 100, TRUE, -1)
 		read(usr)
 
-/obj/item/book/attack_hand_secondary(mob/user, params)
+/obj/item/book/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	if(!open)
 		slot_flags &= ~ITEM_SLOT_HIP
 		open = TRUE
-		playsound(loc, 'sound/items/book_open.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/items/book_open.ogg', 100, FALSE, -1)
 	else
 		slot_flags |= ITEM_SLOT_HIP
 		open = FALSE
-		playsound(loc, 'sound/items/book_close.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/items/book_close.ogg', 100, FALSE, -1)
 	curpage = 1
 	update_appearance(UPDATE_ICON_STATE)
 	user.update_inv_hands()
@@ -243,7 +244,7 @@
 		if(!PA.contraband) // You can add a var to control whether to show contraband
 			types += PA
 
-/obj/item/book/secret/ledger/attack_self(mob/user, params)
+/obj/item/book/secret/ledger/attack_self(mob/user, list/modifiers)
 	. = ..()
 	current_reader = user
 	current_reader << browse(generate_html(user),"window=ledger;size=800x810")
@@ -723,7 +724,7 @@
 
 		// Calculate reputation cost for out-of-stock items
 		if(!is_available && allow_reputation_purchase)
-			var/reputation_cost = calculate_reputation_cost(pack)
+			var/reputation_cost = pack.calculate_reputation_cost()
 			reputation_class = "reputation-purchase"
 			reputation_cost_text = " <span class='reputation-cost'>([reputation_cost] rep)</span>"
 
@@ -757,7 +758,7 @@
 
 			if(is_reputation_purchase)
 				item_cost *= 2 // Double mammon cost for reputation purchases
-				reputation_cost = calculate_reputation_cost(pack) * item_quantity
+				reputation_cost = pack.calculate_reputation_cost() * item_quantity
 				total_reputation_cost += reputation_cost
 
 			total_cost += item_cost
@@ -918,13 +919,14 @@
 			var/obj/temp = new bounty_type()
 			var/bounty_name = temp.name
 			var/multiplier = faction.bounty_items[bounty_type]
+			var/base_value = SSmerchant.get_item_base_value(bounty_type)
+			var/total_value = round(base_value * multiplier)
 			var/expiration_time = faction.bounty_refresh_times[bounty_type]
 			var/time_remaining = expiration_time - world.time
 			qdel(temp)
-			html += "<li class='bounty-item'>[bounty_name] ([multiplier]x price) - <small>[time_to_text(time_remaining)]</small></li>"
+			html += "<li class='bounty-item'>[bounty_name] ([multiplier]x - [total_value] mammon) - <small>[time_to_text(time_remaining)]</small></li>"
 	else
 		html += "<li>No active bounties</li>"
-
 	html += {"
 						</ul>
 						<p style="font-size: 0.8em; color: [faction.faction_color]; margin-top: 10px;">
@@ -938,7 +940,6 @@
 						<p>Next rotation: <strong>[time_to_text(faction.next_supply_rotation - world.time)]</strong></p>
 						<h3 style="color: [faction.faction_color]; margin: 15px 0 10px 0;">Next Boat Traders:</h3>
 	"}
-
 	// Display trader information
 	if(faction.next_boat_trader_count > 0)
 		html += "<p><strong>[faction.next_boat_trader_count]</strong> traders scheduled</p>"
@@ -949,7 +950,6 @@
 		html += "</ul>"
 	else
 		html += "<p><em>No traders scheduled</em></p>"
-
 	html += {"
 					</div>
 				</div>
@@ -977,21 +977,6 @@
 	var/hours = round(minutes / 60)
 	return "[hours]h [minutes % 60]m"
 
-/obj/item/book/secret/ledger/proc/calculate_reputation_cost(datum/supply_pack/pack)
-	var/datum/world_faction/faction = SSmerchant.active_faction
-	if(!faction)
-		return 50
-
-	var/base_cost = pack.cost
-	var/tier = faction.get_reputation_tier()
-
-	// Base reputation cost scales with item value
-	// Higher tier = lower reputation costs (better relations = better deals)
-	var/reputation_multiplier = max(0.5, 1.5 - (tier * 0.15)) // 15% reduction per tier
-	var/reputation_cost = max(10, round(base_cost * reputation_multiplier))
-
-	return reputation_cost
-
 /obj/item/book/secret/ledger/Topic(href, href_list)
 	..()
 
@@ -1016,7 +1001,7 @@
 					to_chat(usr, "<span class='warning'>No active faction found!</span>")
 					return
 
-				var/reputation_cost = calculate_reputation_cost(pack)
+				var/reputation_cost = pack.calculate_reputation_cost()
 
 				// Check if they have enough reputation
 				if(faction.faction_reputation < reputation_cost)
@@ -1092,7 +1077,7 @@
 	var/total_reputation_cost = 0
 	for(var/datum/supply_pack/pack in cart)
 		if(pack in reputation_cart)
-			var/reputation_cost = calculate_reputation_cost(pack)
+			var/reputation_cost = pack.calculate_reputation_cost()
 			var/quantity = cart[pack]
 			total_reputation_cost += reputation_cost * quantity
 
@@ -1164,7 +1149,7 @@
 		if(m)
 			user.say(m)
 
-/obj/item/book/bibble/attack(mob/living/M, mob/user)
+/obj/item/book/bibble/attack(mob/living/M, mob/user, list/modifiers)
 	if(is_priest_job(user.mind?.assigned_role))
 		if(!user.can_read(src))
 			return
@@ -1219,7 +1204,7 @@
 	base_icon_state = "pellbookmimic"
 	bookfile = "xylix.json"
 
-/obj/item/book/xylix/attack_self(mob/user, params)
+/obj/item/book/xylix/attack_self(mob/user, list/modifiers)
 	user.update_inv_hands()
 	to_chat(user, "<span class='notice'>You feel laughter echo in your head.</span>")
 
@@ -1448,7 +1433,7 @@
 	for(var/obj/item/paper/page as anything in pages)
 		compiled_pages += "<p>[page.info]</p>\n"
 
-/obj/item/manuscript/attackby(obj/item/I, mob/living/user)
+/obj/item/manuscript/attackby(obj/item/I, mob/living/user, list/modifiers)
 	// why is a book crafting kit using the craft system, but crafting a book isn't?
 	// Well, *for some reason*, the crafting system is made in such a way
 	// as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
@@ -1497,7 +1482,7 @@
 	if(href_list["read"])
 		read(usr)
 
-/obj/item/manuscript/attack_self(mob/user, params)
+/obj/item/manuscript/attack_self(mob/user, list/modifiers)
 	read(user)
 
 /obj/item/manuscript/proc/read(mob/user)
@@ -1535,7 +1520,7 @@
 	onclose(user, "reading", src)
 
 
-/obj/item/manuscript/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/manuscript/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -1559,6 +1544,7 @@
 			icon_state = "paperwrite"
 			to_chat(user, "<span class='notice'>You have successfully authored and titled the manuscript.</span>")
 			var/complete = browser_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
+			SEND_SIGNAL(user, COMSIG_BOOK_WRITTEN)
 			if(complete == CHOICE_YES && compiled_pages)
 				written = TRUE
 		else
@@ -1698,7 +1684,7 @@ ____________End of Example*/
 	dat = "gott.json"
 	verses_file = "strings/psybibble.txt"
 
-/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user)
+/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(istype(user) && istype(user.patron, /datum/patron/psydon))
 		if(!user.can_read(src))
 			return

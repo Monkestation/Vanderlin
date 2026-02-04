@@ -23,7 +23,7 @@
 	. = ..()
 	check_counter = world.time
 
-/obj/item/bait/attack_self(mob/user, params)
+/obj/item/bait/attack_self(mob/user, list/modifiers)
 	. = ..()
 	user.visible_message("<span class='notice'>[user] begins deploying the bait...</span>", \
 						"<span class='notice'>I begin deploying the bait...</span>")

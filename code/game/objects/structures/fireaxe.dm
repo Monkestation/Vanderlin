@@ -21,7 +21,7 @@
 		QDEL_NULL(heirloom)
 	return ..()
 
-/obj/structure/fireaxecabinet/attackby(obj/item/I, mob/user, params)
+/obj/structure/fireaxecabinet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/sword/long/heirloom) && !heirloom)
 		var/obj/item/weapon/sword/long/heirloom/F = I
 		if(HAS_TRAIT(F, TRAIT_WIELDED))
@@ -60,15 +60,13 @@
 	dir = SOUTH
 	SET_BASE_PIXEL(0, 32)
 
-
 /obj/structure/fireaxecabinet/verb/toggle_open()
 	set name = "Open/Close"
 	set hidden = 1
 	set src in oview(1)
 
 	open = !open
-	update_appearance()
-	return
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/fireaxecabinet/unforgotten
 	name = "unforgotten blade mantle"
@@ -81,11 +79,11 @@
 	. = ..()
 	heirloom = new /obj/item/weapon/sword/long/greatsword/psydon/unforgotten
 	desc = heirloom.desc
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/fireaxecabinet/unforgotten/south
 	dir = SOUTH
-	pixel_y = 32
+	SET_BASE_PIXEL(0, 32)
 
 /obj/structure/fireaxecabinet/unforgotten/attackby(obj/item/I, mob/user, params)
 	if(open || obj_broken)
@@ -96,7 +94,7 @@
 			heirloom = F
 			to_chat(user, "<span class='notice'>I place \the [F] back in \the [src].</span>")
 			desc = F.desc
-			update_appearance()
+			update_appearance(UPDATE_ICON_STATE)
 			return
 		else if(!obj_broken)
 			desc = initial(desc)
@@ -104,12 +102,9 @@
 	else
 		return ..()
 
-/obj/structure/fireaxecabinet/unforgotten/update_icon()
+/obj/structure/fireaxecabinet/unforgotten/update_icon_state()
 	. = ..()
-	cut_overlays()
 	if(heirloom)
-		add_overlay("axe_forgotten")
-	if(!open)
-		add_overlay("unlocked")
+		icon_state = "axe_forgotten"
 	else
-		add_overlay("glass_raised")
+		icon_state = "fireaxe"

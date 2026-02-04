@@ -54,7 +54,7 @@
 		update_appearance(UPDATE_ICON_STATE)
 
 //Bows are subtype of grenadelauncher and use BOLT_TYPE_NO_BOLT code
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/attack_self(mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/attack_self(mob/living/user, list/modifiers)
 	chambered = null
 	var/num_unloaded = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(TRUE, TRUE))
@@ -65,7 +65,7 @@
 		playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(user.usable_hands < 2)
 		return FALSE
 	if(user.get_inactive_held_item())

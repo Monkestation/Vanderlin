@@ -122,8 +122,6 @@
 		zombie.dna.species.soundpack_f = soundpack_f
 	zombie.base_intents = base_intents
 	zombie.update_a_intents()
-	if(zombie.charflaw)
-		zombie.charflaw.ephemeral = FALSE
 	zombie.update_body()
 	zombie.remove_stat_modifier("[type]")
 	zombie.cmode_music = old_cmode_music
@@ -201,8 +199,6 @@
 	ambushable = zombie.ambushable
 	zombie.ambushable = FALSE
 
-	if(zombie.charflaw)
-		zombie.charflaw.ephemeral = TRUE
 	zombie.mob_biotypes |= MOB_UNDEAD
 	zombie.faction += FACTION_UNDEAD
 	zombie.faction -= FACTION_TOWN
@@ -279,7 +275,7 @@
 
 /mob/living/carbon/human/proc/zombie_seek()
 	set name = "Seek Brains"
-	set category = "ZOMBIE"
+	set category = "ZIZO"
 
 	if(!mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE

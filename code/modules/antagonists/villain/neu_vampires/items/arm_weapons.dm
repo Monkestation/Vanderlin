@@ -17,7 +17,7 @@
 	item_flags = DROPDEL
 	masquerade_violating = TRUE
 
-/obj/item/weapon/arms/gangrel/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/weapon/arms/gangrel/afterattack(atom/target, mob/living/carbon/user, proximity, list/modifiers)
 	if(!proximity)
 		return
 	if(isliving(target))

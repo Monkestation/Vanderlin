@@ -177,7 +177,7 @@
 /datum/special_trait/too_smart/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat(STATKEY_INT, 5)
 	ADD_TRAIT(character, TRAIT_BAD_MOOD, "[type]")
-	character.set_flaw(/datum/charflaw/paranoid)
+	character.add_quirk(/datum/quirk/vice/paranoid)
 
 /datum/special_trait/bookworm
 	name = "Bookworm"
@@ -314,8 +314,8 @@
 	weight = 50
 
 /datum/special_trait/tavernbrawler/on_apply(mob/living/carbon/human/character)
-	character.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 3, 4, TRUE)
-	character.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 3, 4, TRUE)
+	character.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 2, 3, TRUE)
+	character.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 2, 3, TRUE)
 	character.change_stat(STATKEY_STR, 1)
 	character.change_stat(STATKEY_END, 1)
 	character.change_stat(STATKEY_CON, 1)
@@ -472,9 +472,9 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
 
 /datum/special_trait/war_veteran/on_apply(mob/living/carbon/human/character, silent)
-	character.set_flaw(/datum/charflaw/limbloss/arm_l)
-	character.set_flaw(/datum/charflaw/noeyel)
-	character.set_flaw(/datum/charflaw/old_war_wound)
+	character.add_quirk(/datum/quirk/vice/wooden_arm_left)
+	character.add_quirk(/datum/quirk/vice/cyclops_left)
+	character.add_quirk(/datum/quirk/vice/old_war_wound)
 	character.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 	character.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
 	character.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
@@ -485,7 +485,7 @@
 	weight = 25
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
-	character.set_flaw(/datum/charflaw/addiction/maniac)
+	character.add_quirk(/datum/quirk/vice/maniac)
 	character.verbs |= /mob/living/carbon/human/proc/torture_victim
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
@@ -642,7 +642,7 @@
 	character.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	character.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+	character.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
@@ -765,7 +765,7 @@
 	name = "Devout Knight"
 	greet_text = span_notice("I am a devoted warrior of the Ten, and my equipments lie hidden in their resting place, ready to be donned when the call comes.")
 	allowed_jobs = list(/datum/job/royalknight)
-	allowed_flaw = /datum/charflaw/addiction/godfearing
+	allowed_flaw = /datum/quirk/vice/godfearing
 	allowed_patrons = ALL_TEMPLE_PATRONS
 	req_text = "Be a Royal knight, With the Flaw 'devout follower' and be a follower of the ten."
 	weight = 50
@@ -849,7 +849,7 @@
 			character.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4, TRUE)
 		if(/datum/patron/inhumen/graggar_zizo) //In case a admin decide to give them graggazo roundstart
 			psycross = /obj/item/clothing/ring/silver/toper
-			helmet = /obj/item/clothing/head/helmet/graggar
+			helmet = /obj/item/clothing/head/helmet/heavy/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			weapon = /obj/item/weapon/sword/long/judgement/evil
 		else
@@ -963,8 +963,7 @@
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
-	var/datum/inspiration/I = new /datum/inspiration(character)
-	I.grant_inspiration(character, bard_tier = BARD_T2)
+	character.inspiration = new /datum/inspiration(character)
 	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
 
 /datum/special_trait/baothan

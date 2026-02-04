@@ -53,9 +53,10 @@
 	extended = TRUE
 	if(head)
 		head.forceMove(target_turf)
-	update_icon()
-	spawn(5)
-		extending = FALSE
+
+	update_appearance(UPDATE_ICON_STATE)
+
+	addtimer(VARSET_CALLBACK(src, extending, FALSE), 0.5 SECONDS)
 
 /obj/structure/redstone/piston/proc/retract_piston()
 	if(!extended || extending)
@@ -66,9 +67,10 @@
 	extended = FALSE
 	if(head)
 		head.forceMove(get_turf(src))
-	update_icon()
-	spawn(5)
-		extending = FALSE
+
+	update_appearance(UPDATE_ICON_STATE)
+
+	addtimer(VARSET_CALLBACK(src, extending, FALSE), 0.5 SECONDS)
 
 /obj/structure/redstone/piston/proc/can_extend_to(turf/target_turf)
 	if(!target_turf)
@@ -103,20 +105,20 @@
 		M.forceMove(pull_target)
 		to_chat(M, "<span class='warning'>You are pulled by the sticky piston!</span>")
 
-/obj/structure/redstone/piston/update_icon()
+/obj/structure/redstone/piston/update_icon_state()
 	. = ..()
 	var/base_state = can_pull ? "sticky_piston" : "piston"
 	if(extended)
 		base_state += "_extended"
 	icon_state = base_state
 
-/obj/structure/redstone/piston/AltClick(mob/user)
+/obj/structure/redstone/piston/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user) || extended)
 		return
 	dir = turn(dir, 90)
 	if(head)
 		head.set_direction(dir)
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 	to_chat(user, "<span class='notice'>You rotate the [name].</span>")
 
 /obj/structure/redstone/piston/sticky

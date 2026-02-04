@@ -1,6 +1,6 @@
 //Generic system for picking up mobs.
 //Currently works for head and hands.
-/obj/item/clothing/head/mob_holder
+/obj/item/mob_holder
 	name = "bugged mob"
 	desc = ""
 	icon = null
@@ -8,30 +8,35 @@
 	grid_width = 64
 	grid_height = 96
 	sellprice = 20
+
+	slot_flags = ITEM_SLOT_HEAD
+	resistance_flags = INDESTRUCTIBLE
+	smeltresult = /obj/item/fertilizer/ash
+
 	var/mob/living/held_mob
 	var/can_head = TRUE
 	var/destroying = FALSE
 
-/obj/item/clothing/head/mob_holder/dropped(mob/user)
+/obj/item/mob_holder/dropped(mob/user)
 	. = ..()
 	if(isturf(loc))
 		qdel(src)
 
-/obj/item/clothing/head/mob_holder/Initialize(mapload, mob/living/M)
+/obj/item/mob_holder/Initialize(mapload, mob/living/M)
 	. = ..()
 	deposit(M)
 
-/obj/item/clothing/head/mob_holder/update_appearance(updates)
+/obj/item/mob_holder/update_appearance(updates)
 	. = ..()
 	update_visuals(held_mob)
 
-/obj/item/clothing/head/mob_holder/Destroy()
+/obj/item/mob_holder/Destroy()
 	destroying = TRUE
 	if(held_mob)
 		release(FALSE)
 	return ..()
 
-/obj/item/clothing/head/mob_holder/proc/deposit(mob/living/L)
+/obj/item/mob_holder/proc/deposit(mob/living/L)
 	if(!istype(L))
 		return FALSE
 	L.setDir(SOUTH)
@@ -47,19 +52,19 @@
 			enchant(enchant)
 	return TRUE
 
-/obj/item/clothing/head/mob_holder/enchant(datum/enchantment/path)
+/obj/item/mob_holder/enchant(datum/enchantment/path)
 	if(..())
 		LAZYADD(held_mob.stored_enchantments, path)
 
 
-/obj/item/clothing/head/mob_holder/attackby(obj/item/I, mob/living/user, params)
+/obj/item/mob_holder/attackby(obj/item/I, mob/living/user, list/modifiers)
 	I.attack(held_mob, user, user.zone_selected)
 
-/obj/item/clothing/head/mob_holder/proc/update_visuals(mob/living/L)
+/obj/item/mob_holder/proc/update_visuals(mob/living/L)
 	appearance = L?.appearance
 	plane = ABOVE_HUD_PLANE
 
-/obj/item/clothing/head/mob_holder/proc/release(del_on_release = TRUE)
+/obj/item/mob_holder/proc/release(del_on_release = TRUE)
 	if(!held_mob)
 		if(del_on_release && !destroying)
 			qdel(src)
@@ -77,8 +82,8 @@
 		qdel(src)
 	return TRUE
 
-/obj/item/clothing/head/mob_holder/relaymove(mob/user)
+/obj/item/mob_holder/relaymove(mob/user)
 	release()
 
-/obj/item/clothing/head/mob_holder/container_resist()
+/obj/item/mob_holder/container_resist()
 	release()

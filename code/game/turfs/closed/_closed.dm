@@ -126,7 +126,7 @@
 /turf/closed/Initialize()
 	. = ..()
 	if(above_floor)
-		var/turf/open/transparent/openspace/target = GET_TURF_ABOVE(src)
+		var/turf/open/openspace/target = GET_TURF_ABOVE(src)
 		if(istype(target))
 			target.ChangeTurf(above_floor)
 
@@ -160,16 +160,16 @@
 			if(L.stat != CONSCIOUS)
 				return
 			var/turf/target = GET_TURF_ABOVE(user_turf)
-			if(!istype(target, /turf/open/transparent/openspace))
+			if(!istype(target, /turf/open/openspace))
 				to_chat(user, "<span class='warning'>I can't climb here.</span>")
 				return
 			if(!L.can_zTravel(target, UP))
 				to_chat(user, "<span class='warning'>I can't climb there.</span>")
 				return
 			target = GET_TURF_ABOVE(src)
-			if(!target || istype(target, /turf/closed) || istype(target, /turf/open/transparent/openspace))
+			if(!target || istype(target, /turf/closed) || istype(target, /turf/open/openspace))
 				target = GET_TURF_ABOVE(user_turf)
-				if(!target || !istype(target, /turf/open/transparent/openspace))
+				if(!target || !istype(target, /turf/open/openspace))
 					to_chat(user, "<span class='warning'>I can't climb here.</span>")
 					return
 			for(var/obj/structure/F in target)
@@ -216,6 +216,13 @@
 	else
 		..()
 
+/turf/closed/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	feel_turf(user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /turf/closed/attack_ghost(mob/dead/observer/user)
 	if(!user.Adjacent(src))
 		return
@@ -223,7 +230,7 @@
 	if(!target)
 		to_chat(user, "<span class='warning'>I can't go there.</span>")
 		return
-	if(!istype(target, /turf/open/transparent/openspace))
+	if(!istype(target, /turf/open/openspace))
 		to_chat(user, "<span class='warning'>I can't go there.</span>")
 		return
 	user.forceMove(target)

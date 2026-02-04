@@ -492,12 +492,11 @@
 			In the dark corners of every room I see him. I can't sleep without a light-source.")
 			)
 		if("Bard")
+			spawned.inspiration = new /datum/inspiration(spawned)
 			spawned.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
 			spawned.change_stat(STATKEY_INT, 1)
 			spawned.change_stat(STATKEY_END, 1)
 			ADD_TRAIT(spawned, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
-			var/datum/inspiration/I = new /datum/inspiration(spawned)
-			I.grant_inspiration(spawned, bard_tier = BARD_T3)
 			to_chat(spawned,span_info("\
 			I used to be a bard, the skills never left me. I'm a silver-tongued devil!")
 			)

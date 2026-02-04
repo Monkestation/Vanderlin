@@ -11,7 +11,7 @@
 
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
 	if(volume >= 60)
-		M.reagents.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
+		M.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume = min(M.blood_volume+20, BLOOD_VOLUME_MAXIMUM)
 	var/list/wCount = M.get_wounds()
@@ -22,11 +22,6 @@
 		M.adjustFireLoss(-1.75*REM, 0)
 		M.adjustOxyLoss(-1.25, 0)
 		M.adjustCloneLoss(-1.75*REM, 0)
-	if(istype(M, /mob/living/carbon/human/species/werewolf))
-		var/mob/living/carbon/human/human = M
-		var/obj/item/clothing/werewolf_armor = human.skin_armor
-		if(werewolf_armor)
-			werewolf_armor.repair_damage(werewolf_armor.max_integrity * 0.01)
 	..()
 
 /datum/reagent/medicine/stronghealth
@@ -39,7 +34,7 @@
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
 	if(volume >= 60)
-		M.reagents.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
+		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume = min(M.blood_volume+80, BLOOD_VOLUME_MAXIMUM)
 	else
@@ -214,9 +209,9 @@
 /datum/reagent/buff/strength/on_mob_add(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
 		return ..()
-	if(M.reagents.has_reagent(/datum/reagent/buff/strength, 4))
+	if(M.has_reagent(/datum/reagent/buff/strength, 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/strengthpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/strength, M.reagents.get_reagent_amount(/datum/reagent/buff/strength))
+		M.remove_reagent(/datum/reagent/buff/strength, M.reagents.get_reagent_amount(/datum/reagent/buff/strength))
 	return ..()
 
 /datum/reagent/buff/perception
@@ -228,9 +223,9 @@
 /datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/perception), 4))
+	if(M.has_reagent((/datum/reagent/buff/perception), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/perception))
+		M.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/perception))
 	return ..()
 
 /datum/reagent/buff/intelligence
@@ -242,9 +237,9 @@
 /datum/reagent/buff/intelligence/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/intelligence), 4))
+	if(M.has_reagent((/datum/reagent/buff/intelligence), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/intelligencepot)
-		M.reagents.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
+		M.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
 	return ..()
 
 /datum/reagent/buff/constitution
@@ -256,9 +251,9 @@
 /datum/reagent/buff/constitution/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/constitution), 4))
+	if(M.has_reagent((/datum/reagent/buff/constitution), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/constitutionpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/constitution, M.reagents.get_reagent_amount(/datum/reagent/buff/constitution))
+		M.remove_reagent(/datum/reagent/buff/constitution, M.reagents.get_reagent_amount(/datum/reagent/buff/constitution))
 	return ..()
 
 /datum/reagent/buff/endurance
@@ -270,9 +265,9 @@
 /datum/reagent/buff/endurance/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/endurance), 4))
+	if(M.has_reagent((/datum/reagent/buff/endurance), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/endurancepot)
-		M.reagents.remove_reagent(/datum/reagent/buff/endurance, M.reagents.get_reagent_amount(/datum/reagent/buff/endurance))
+		M.remove_reagent(/datum/reagent/buff/endurance, M.reagents.get_reagent_amount(/datum/reagent/buff/endurance))
 	return ..()
 
 /datum/reagent/buff/speed
@@ -284,9 +279,9 @@
 /datum/reagent/buff/speed/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/speed), 4))
+	if(M.has_reagent((/datum/reagent/buff/speed), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/speedpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/speed, M.reagents.get_reagent_amount(/datum/reagent/buff/speed))
+		M.remove_reagent(/datum/reagent/buff/speed, M.reagents.get_reagent_amount(/datum/reagent/buff/speed))
 	return ..()
 
 /datum/reagent/buff/fortune
@@ -298,9 +293,9 @@
 /datum/reagent/buff/fortune/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/fortune), 4))
+	if(M.has_reagent((/datum/reagent/buff/fortune), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/fortunepot)
-		M.reagents.remove_reagent(/datum/reagent/buff/fortune, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune))
+		M.remove_reagent(/datum/reagent/buff/fortune, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune))
 	return ..()
 
 
@@ -367,7 +362,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		M.adjustToxLoss(2)
 	else
 		//it does nothing, so we can just remove it
-		M.reagents.remove_reagent(/datum/reagent/organpoison, 1)
+		M.remove_reagent(/datum/reagent/organpoison, 1)
 	return ..()
 
 /datum/reagent/stampoison

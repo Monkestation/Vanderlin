@@ -13,8 +13,7 @@
 	to_chat(c, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Throw</span>")
 	to_chat(c, "<span class='notice'>***********************************************************</span>")
 
-/datum/buildmode_mode/throwing/handle_click(client/c, params, obj/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/throwing/handle_click(client/c, list/modifiers, obj/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 

@@ -260,8 +260,7 @@
 	var/list/ids
 	if(length(channels))
 		ids = list()
-		for(var/I in channels)
-			var/datum/tgs_chat_channel/channel = I
+		for(var/datum/tgs_chat_channel/channel as anything in channels)
 			ids += channel.id
 
 	message = UpgradeDeprecatedChatMessage(message)
@@ -277,8 +276,7 @@
 
 /datum/tgs_api/v4/ChatTargetedBroadcast(datum/tgs_message_content/message, admin_only)
 	var/list/channels = list()
-	for(var/I in ChatChannelInfo())
-		var/datum/tgs_chat_channel/channel = I
+	for(var/datum/tgs_chat_channel/channel as anything in ChatChannelInfo())
 		if (!channel.is_private_channel && ((channel.is_admin_channel && admin_only) || (!channel.is_admin_channel && !admin_only)))
 			channels += channel.id
 

@@ -53,10 +53,11 @@
 	if(!spawn_instrument)
 		spawn_instrument = /obj/item/instrument/lute
 	spawned.equip_to_slot_or_del(new spawn_instrument(spawned), ITEM_SLOT_BACK_R, TRUE)
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /mob/living/carbon/human/proc/townannouncement()
-	set name = "Announcement"
-	set category = "Town Elder"
+	set name = "Elder Announcement"
+	set category = "RoleUnique"
 	if(stat)
 		return
 
@@ -89,7 +90,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 	jobstats = list(
@@ -120,8 +121,7 @@
 
 /datum/job/advclass/town_elder/mayor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/labor/mathematics, 1, TRUE)
@@ -163,7 +163,7 @@
 	skills = list(
 		/datum/skill/misc/reading = 1,
 		/datum/skill/labor/mathematics = 1,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/unarmed = 1,
@@ -245,9 +245,9 @@
 	skills = list(
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/misc/medicine = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/magic/holy = 3,
 		/datum/skill/misc/music = 4
@@ -320,8 +320,8 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/ravox)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			var/sword_skill = rand(1,3)
-			var/whip_skill = rand(1,3)
+			var/sword_skill = rand(1,2)
+			var/whip_skill = rand(1,2)
 			var/axe_skill = rand(0,1)
 			spawned.adjust_skillrank(/datum/skill/combat/swords, sword_skill, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, whip_skill, TRUE)
@@ -403,23 +403,23 @@
 
 	jobstats = list(
 		STATKEY_INT = 2,
-		STATKEY_SPD = 2,
+		STATKEY_SPD = 1,
 		STATKEY_STR = 1
 	)
 
 	skills = list(
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/combat/swords = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/sewing = 1,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/music = 6,
-		/datum/skill/misc/athletics = 4
+		/datum/skill/misc/athletics = 2
 	)
 
 	traits = list(
@@ -429,13 +429,12 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 /datum/job/advclass/town_elder/lorekeeper/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
@@ -464,59 +463,3 @@
 		/obj/item/paper/scroll = 5,
 		/obj/item/natural/feather = 1
 	)
-
-/datum/job/advclass/town_elder/dreamwatcher //Not a Magician nor an Acolyte, but something more, blessed by Noc since they were born, being capable of Visions and Feelings through dreams, they can feel the highest god influence or and get a hint about any of the active antags.
-	title = "Dreamwatcher"
-	tutorial = "Your dreams have always been vivid, filled with colors, voices, and shadows that seemed to watch. As a child, you feared them. As an adult, you began to listen. The Church speaks of Noc as the keeper of magic, but to you, he is something deeper: a silent guide whose truths are not written in scripture, but in sleep. Over time, you learned to echo those truths in your own way, through murmured lullabies, whispered verses, and songs shaped from silence. Now, as Elder of this town, you offer more than leadership. You help others find clarity in the quiet spaces of their hearts, through signs, symbols, and melodies only the soul remembers. Some call it intuition. Others call it wisdom. You know it simply as listening.(Not all your dreams are true, some may lie)"
-	outfit = /datum/outfit/town_elder/dreamwatcher
-	category_tags = list(CTAG_TOWN_ELDER)
-
-	jobstats = list(
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/music = 4
-	)
-
-	traits = list(
-		TRAIT_DREAM_WATCHER,
-		TRAIT_EMPATH
-	)
-
-/datum/job/advclass/town_elder/dreamwatcher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.patron != /datum/patron/divine/noc)
-		spawned.set_patron(/datum/patron/divine/noc, TRUE)
-
-	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
-
-/datum/outfit/town_elder/dreamwatcher
-	name = "Dreamwatcher (Town Elder)"
-	head = /obj/item/clothing/head/armingcap
-	armor = /obj/item/clothing/shirt/robe/colored/black
-	shoes = /obj/item/clothing/shoes/sandals
-	belt = /obj/item/storage/belt/leather/rope
-	beltr = /obj/item/storage/keyring/elder
-	beltl = /obj/item/flashlight/flare/torch/lantern
-	wrists = /obj/item/clothing/wrists/nocwrappings
-	neck = /obj/item/clothing/neck/psycross/silver/noc
-	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/needle = 1
-	)
-

@@ -95,7 +95,7 @@
 	for(var/I in itemstore)
 		soul.put_in_hands(new I())
 	soul.beingmoved = FALSE
-	soul.fully_heal(FALSE)
+	soul.fully_heal()
 	soul.invisibility = initial(soul.invisibility)
 	soul.status_flags &= ~GODMODE
 	soul.update_cone()
