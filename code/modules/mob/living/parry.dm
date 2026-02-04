@@ -125,11 +125,11 @@
 	var/weapon_parry = FALSE
 
 	if(mainhand && mainhand.can_parry)
-		mainhand_defense += (mind ? (get_skill_level(mainhand.associated_skill) * 20) : 20)
+		mainhand_defense += (skills ? (get_skill_level(mainhand.associated_skill) * 20) : 20)
 		mainhand_defense += (mainhand.wdefense * 10)
 
 	if(offhand && offhand.can_parry)
-		offhand_defense += (mind ? (get_skill_level(offhand.associated_skill) * 20) : 20)
+		offhand_defense += (skills ? (get_skill_level(offhand.associated_skill) * 20) : 20)
 		offhand_defense += (offhand.wdefense * 10)
 		if(istype(offhand, /obj/item/weapon/shield))
 			force_shield = TRUE
@@ -145,7 +145,7 @@
 		used_weapon = offhand
 		highest_defense += offhand_defense
 
-	var/unarmed_defense = mind ? (get_skill_level(/datum/skill/combat/unarmed) * 20) : 20
+	var/unarmed_defense = skills ? (get_skill_level(/datum/skill/combat/unarmed) * 20) : 20
 	if(highest_defense <= unarmed_defense)
 		weapon_parry = FALSE
 	else
@@ -175,7 +175,7 @@
 	else
 		defender_skill = get_skill_level(/datum/skill/combat/unarmed)
 
-	if(user.mind)
+	if(user.skills)
 		var/obj/item/master = intenty.get_master_item()
 		if(master)
 			attacker_skill = user.get_skill_level(master.associated_skill)

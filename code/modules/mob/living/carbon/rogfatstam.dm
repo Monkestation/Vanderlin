@@ -1,6 +1,6 @@
 /mob/living/proc/update_stamina() //update hud and regen after last_fatigued delay on taking
 	var/athletics_skill = 0
-	if(mind)
+	if(skills)
 		athletics_skill = get_skill_level(/datum/skill/misc/athletics)
 	maximum_stamina = (STAEND + athletics_skill) * 10 //This here is the calculation for max STAMINA / GREEN
 
@@ -24,7 +24,7 @@
 	///this is kinda weird and not at the same time for energy being tied to this,
 	/// since energy is both a magical and physical system
 	var/athletics_skill = 0
-	if(mind)
+	if(skills)
 		athletics_skill = get_skill_level(/datum/skill/misc/athletics)
 	max_energy = (STAEND + athletics_skill) * 100 // ENERGY / BLUE (Average of 1000)
 	if(cmode)

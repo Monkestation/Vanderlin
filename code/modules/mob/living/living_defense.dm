@@ -185,9 +185,9 @@
 	user.changeNext_move(CLICK_CD_GRABBING)
 	var/skill_diff = 0
 	var/combat_modifier = 1
-	if(user.mind)
+	if(user.skills)
 		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling)) //NPCs don't use this
-	if(mind)
+	if(skills)
 		skill_diff -= (get_skill_level(/datum/skill/combat/wrestling))
 
 	if(user == src)

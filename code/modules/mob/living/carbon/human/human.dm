@@ -577,7 +577,7 @@
 		. += dna.species.check_species_weakness(weapon, attacker, src)
 
 /mob/living/carbon/human/is_literate()
-	if(mind)
+	if(skills)
 		if(get_skill_level(/datum/skill/misc/reading) > 0)
 			return TRUE
 		else

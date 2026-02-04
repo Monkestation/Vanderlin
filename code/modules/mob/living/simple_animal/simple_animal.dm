@@ -781,7 +781,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(riding_datum)
 		var/time2mount = 12
 		riding_datum.vehicle_move_delay = move_to_delay
-		if(M.mind)
+		if(M.skills)
 			var/amt = M.get_skill_level(/datum/skill/misc/riding)
 			if(amt)
 				if(amt <= 3)

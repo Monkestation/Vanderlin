@@ -227,9 +227,9 @@
 	var/skill_diff = 0
 	var/combat_modifier = positioning_mod // Start with positioning
 
-	if(user.mind)
+	if(user.skills)
 		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling))
-	if(M.mind)
+	if(M.skills)
 		skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling))
 
 	if(M.surrendering)
@@ -386,7 +386,7 @@
 			user.adjust_stamina(rand(3,6) * spam_penalty)
 			var/probby = clamp((((3 + (((user.STASTR - M.STACON)/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
 			if(I)
-				if(M.mind)
+				if(M.skills)
 					if(I.associated_skill)
 						probby -= M.get_skill_level(I.associated_skill) * 5
 				if(HAS_TRAIT(I, TRAIT_WIELDED))
