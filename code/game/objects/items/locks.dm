@@ -31,7 +31,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/customlock/attackby(obj/item/I, mob/user, params)
+/obj/item/customlock/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/hammer))
 		var/input = input(user, "What would you like to set the lock ID to?", "", 0) as num
 		input = abs(input)
@@ -45,7 +45,7 @@
 		return
 	to_chat(user, span_notice("[I] twists cleanly in [src]."))
 
-/obj/item/customlock/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/customlock/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -73,14 +73,14 @@
 	desc = "A customized iron lock that is used by keys. A name can be etched in with a hammer."
 	var/holdname = ""
 
-/obj/item/customlock/finished/attackby(obj/item/I, mob/user, params)
+/obj/item/customlock/finished/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/weapon/hammer))
 		..()
 	holdname = browser_input_text(user, "What would you like to name this?", "", max_length = MAX_CHARTER_LEN)
 	if(holdname)
 		to_chat(user, span_notice("You label the [name] with [holdname]."))
 
-/obj/item/customlock/finished/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/customlock/finished/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	return // Keep crashing until we fix this
 
 /obj/item/customlock/finished/attack_atom(atom/attacked_atom, mob/living/user)

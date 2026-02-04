@@ -488,7 +488,7 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!iscarbon(target))
 		return
@@ -601,7 +601,7 @@
 	. = ..()
 	. += span_info("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, params)
+/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
 	. = ..()
 	var/total_sellprice = 0
 	if(isturf(A))

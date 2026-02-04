@@ -28,7 +28,7 @@ LINEN BINS
 	. = ..()
 	AddElement(/datum/element/bed_tuckable, 0, 0, 0)
 
-/obj/item/bedsheet/attack_self(mob/living/user, params)
+/obj/item/bedsheet/attack_self(mob/living/user, list/modifiers)
 	if(!user.CanReach(src))		//No telekenetic grabbing.
 		return
 	if(!user.resting)

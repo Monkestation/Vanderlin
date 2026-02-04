@@ -6,7 +6,7 @@
 	var/foodextracted = null
 	var/canthresh = TRUE
 
-/obj/item/natural/chaff/attack_hand_secondary(mob/user, params)
+/obj/item/natural/chaff/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -29,7 +29,7 @@
 		new /obj/item/natural/fibers(loc)
 		qdel(src)
 
-/obj/item/natural/chaff/attackby(obj/item/I, mob/living/user, params)
+/obj/item/natural/chaff/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/pitchfork))
 		if(user.used_intent.type == DUMP_INTENT)
 			var/obj/item/weapon/pitchfork/W = I

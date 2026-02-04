@@ -169,7 +169,7 @@
 	. = ..()
 	HasProximity(target)
 
-/obj/item/clothing/face/goblin_mask/attack(mob/living/M, mob/user)
+/obj/item/clothing/face/goblin_mask/attack(mob/living/M, mob/user, list/modifiers)
 	..()
 	if(user.transferItemToLoc(src, get_turf(M)))
 		Leap(M)

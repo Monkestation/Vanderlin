@@ -9,7 +9,7 @@
 	var/bundletype = null
 	var/quality = SMELTERY_LEVEL_NORMAL // To not ruin blacksmith recipes
 
-/obj/item/natural/attackby(obj/item/W, mob/living/user)
+/obj/item/natural/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/natural/bundle))
 		if(item_flags & IN_STORAGE)
 			to_chat(user, span_warning("It's hard to find [src] in my bag."))
@@ -27,7 +27,7 @@
 			return
 	return ..()
 
-/obj/item/natural/pre_attack_secondary(atom/A, mob/living/user, params)
+/obj/item/natural/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -69,7 +69,7 @@
 	var/base_width = 32
 	var/base_height = 32
 
-/obj/item/natural/bundle/attackby(obj/item/W, mob/living/user)
+/obj/item/natural/bundle/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(amount <= 0) //how did you manage to do this
 		qdel(src)
 		return
@@ -106,7 +106,7 @@
 		return
 	return ..()
 
-/obj/item/natural/bundle/attack_hand_secondary(mob/user, params)
+/obj/item/natural/bundle/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -147,7 +147,7 @@
 	. = ..()
 	. += span_notice("There are [amount] [stackname] in this bundle.")
 
-/obj/item/natural/bundle/pre_attack_secondary(atom/A, mob/living/user, params)
+/obj/item/natural/bundle/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

@@ -51,7 +51,7 @@
 	reagents.trans_to(user, reagents.total_volume, transfered_by = user, method = INGEST)
 	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
 
-/obj/structure/well/attackby(obj/item/I, mob/user, params)
+/obj/structure/well/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/glass/bucket))
 		var/obj/item/reagent_containers/glass/bucket/W = I
 		if(W.reagents.holder_full())

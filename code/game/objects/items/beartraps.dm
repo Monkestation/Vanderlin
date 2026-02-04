@@ -82,7 +82,7 @@
 				return FALSE
 	..()
 
-/obj/item/restraints/legcuffs/beartrap/attackby(obj/item/W, mob/user)
+/obj/item/restraints/legcuffs/beartrap/attackby(obj/item/W, mob/user, list/modifiers)
 	if(W.force && armed)
 		user.visible_message("<span class='warning'>[user] triggers \the [src] with [W].</span>", \
 				"<span class='danger'>I trigger \the [src] with [W]!</span>")
@@ -116,7 +116,7 @@
 	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	return (BRUTELOSS)
 
-/obj/item/restraints/legcuffs/beartrap/attack_self(mob/user, params)
+/obj/item/restraints/legcuffs/beartrap/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!ishuman(user) || user.stat != CONSCIOUS || HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
 		return

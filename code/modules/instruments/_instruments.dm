@@ -156,7 +156,7 @@
 		terminate_playing(user)
 	. = ..()
 
-/obj/item/instrument/attack_self(mob/living/user, params)
+/obj/item/instrument/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return

@@ -36,7 +36,7 @@
 	M.forceMove(get_turf(src))
 	return ..()
 
-/obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, params)
+/obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/mob/living/carbon/human/buckled = locate() in buckled_mobs
 
 	if(buckled && istype(I, /obj/item/augment_kit))
@@ -81,6 +81,7 @@
 			user.mind?.add_sleep_experience(/datum/skill/craft/engineering, user.STAINT)
 		return
 
+/obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/natural/wood/plank) || istype(I, /obj/item/ingot))
 		if(!material)
 			I.forceMove(src)
@@ -170,7 +171,7 @@
 
 	return FALSE
 
-/obj/machinery/artificer_table/attack_hand(mob/user, params)
+/obj/machinery/artificer_table/attack_hand(mob/user, list/modifiers)
 	if(!material)
 		return
 	var/obj/item/I = material

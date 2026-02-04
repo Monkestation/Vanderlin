@@ -8,7 +8,7 @@
 	max_integrity = 200
 	density = TRUE
 
-/obj/machinery/loom/attackby(obj/item/I, mob/user, params)
+/obj/machinery/loom/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/natural/bundle/fibers))
 		var/obj/item/natural/bundle/fibers/W = I
 		if(src.storedfiber + W.amount > src.maxfiber)
@@ -32,7 +32,7 @@
 			to_chat(user, "You can't add any more fiber.")
 	. = ..()
 
-/obj/machinery/loom/attack_hand_secondary(mob/user, params)
+/obj/machinery/loom/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -48,7 +48,7 @@
 
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/machinery/loom/attack_hand(mob/user, params)
+/obj/machinery/loom/attack_hand(mob/user, list/modifiers)
 	var/mob/living/weaver = user
 	var/weavetime = 2 SECONDS //time to weave a cloth, duh
 	var/skilltimemod = 0.2 SECONDS //how much each level of skill lowers the time to weave

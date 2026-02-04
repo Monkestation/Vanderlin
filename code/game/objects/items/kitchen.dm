@@ -30,7 +30,7 @@
 	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	return BRUTELOSS
 
-/obj/item/kitchen/fork/pre_attack(atom/A, mob/living/user, params)
+/obj/item/kitchen/fork/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(istype(A, /obj/item/reagent_containers/food/snacks) && user.used_intent.type == /datum/intent/food)
 		var/obj/item/reagent_containers/food/snacks/S = A
 		S.attack(user, user)
@@ -38,7 +38,7 @@
 		return TRUE
 	. = ..()
 
-/obj/item/kitchen/fork/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/kitchen/fork/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!istype(M))
 		return ..()
 

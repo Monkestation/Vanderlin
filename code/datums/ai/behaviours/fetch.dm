@@ -110,7 +110,7 @@
 		return
 
 	if(isturf(snack.loc))
-		basic_pawn.ClickOn(snack, list()) // snack attack!
+		basic_pawn.ClickOn(snack) // snack attack!
 	else if(iscarbon(snack.loc) && SPT_PROB(10, seconds_per_tick))
 		basic_pawn.manual_emote("Stares at [snack.loc]'s [snack.name] intently.")
 

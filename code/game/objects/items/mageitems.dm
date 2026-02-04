@@ -15,7 +15,7 @@
 	if(contents.len)
 		. += span_notice("[contents.len] thing[contents.len > 1 ? "s" : ""] in the pouch.")
 
-/obj/item/storage/magebag/attack_hand_secondary(mob/user, params)
+/obj/item/storage/magebag/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -88,7 +88,7 @@
 	. = ..()
 	desc += "It has [amount] uses left."
 
-/obj/item/chalk/attackby(obj/item/M, mob/user, params)
+/obj/item/chalk/attackby(obj/item/M, mob/user, list/modifiers)
 	if(istype(M,/obj/item/ore/cinnabar))
 		if(amount < 8)
 			amount = 8
@@ -96,7 +96,7 @@
 	else
 		return ..()
 
-/obj/item/chalk/attack_self(mob/living/carbon/human/user, params)
+/obj/item/chalk/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(!isarcyne(user))//We'll set up other items for other types of rune rituals
 		to_chat(user, span_cult("Nothing comes in mind to draw with the chalk."))
 		return
@@ -152,7 +152,7 @@
 	. = ..()
 	filter(type="drop_shadow", x=0, y=0, size=2, offset=1, color=rgb(128, 0, 128, 1))
 
-/obj/item/weapon/knife/dagger/silver/attackby(obj/item/M, mob/user, params)
+/obj/item/weapon/knife/dagger/silver/attackby(obj/item/M, mob/user, list/modifiers)
 	if(istype(M,/obj/item/ore/cinnabar))
 		var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
 		if(do_after(user, crafttime, target = src))
@@ -165,7 +165,7 @@
 	else
 		return ..()
 
-/obj/item/weapon/knife/dagger/silver/arcyne/attack_self(mob/living/carbon/human/user, params)
+/obj/item/weapon/knife/dagger/silver/arcyne/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(!isarcyne(user))
 		return
 	var/obj/effect/decal/cleanable/roguerune/pickrune
@@ -241,7 +241,7 @@
 	var/ready = TRUE
 	var/timing_id
 
-/obj/item/mimictrinket/attack_self(mob/living/carbon/human/user, params)
+/obj/item/mimictrinket/attack_self(mob/living/carbon/human/user, list/modifiers)
 	revert()
 
 /obj/item/mimictrinket/proc/revert()
@@ -321,7 +321,7 @@
 	var/cdtime = 30 MINUTES
 	var/ready = TRUE
 
-/obj/item/clothing/ring/arcanesigil/attack_self(mob/living/carbon/human/user, params)
+/obj/item/clothing/ring/arcanesigil/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(ready)
 		if(do_after(user, 25, target = src))
 			to_chat(user,span_notice("[src] heats up to an almost burning temperature, flooding you with overwhelming arcyne knowledge!"))
@@ -343,7 +343,7 @@
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	var/active = FALSE
 
-/obj/item/clothing/ring/shimmeringlens/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/ring/shimmeringlens/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -392,7 +392,7 @@
 	desc = "One of a pair of sending stones."
 	var/obj/item/natural/stone/sending/paired_with
 
-/obj/item/natural/stone/sending/attack_self(mob/user, params)
+/obj/item/natural/stone/sending/attack_self(mob/user, list/modifiers)
 	var/input_text = input(user, "Enter your message:", "Message")
 	if(input_text)
 		paired_with.say(input_text)
@@ -431,7 +431,7 @@
 	.=..()
 	src.filters += filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color=rgb(rand(1,255),rand(1,255),rand(1,255)))
 
-/obj/item/rope/chain/bindingshackles/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t2))
 		if(isturf(loc)&& (found_table))
@@ -450,7 +450,7 @@
 	name = "greater planar binding shackles"
 	tier = 2
 
-/obj/item/rope/chain/bindingshackles/t2/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/t2/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t3))
 		if(isturf(loc)&& (found_table))
@@ -469,7 +469,7 @@
 	name = "woven planar binding shackles"
 	tier = 3
 
-/obj/item/rope/chain/bindingshackles/t3/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/t3/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t4))
 		if(isturf(loc)&& (found_table))
@@ -488,7 +488,7 @@
 	name = "confluent planar binding shackles"
 	tier = 4
 
-/obj/item/rope/chain/bindingshackles/t4/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/t4/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t5))
 		if(isturf(loc)&& (found_table))
@@ -508,7 +508,7 @@
 	name = "aberrant planar binding shackles"
 	tier = 5
 
-/obj/item/rope/chain/bindingshackles/attack(mob/living/simple_animal/hostile/retaliate/captive, mob/living/user)
+/obj/item/rope/chain/bindingshackles/attack(mob/living/simple_animal/hostile/retaliate/captive, mob/living/user, list/modifiers)
 	var/list/summon_types = list(
 		/mob/living/simple_animal/hostile/retaliate/infernal/imp,
 		/mob/living/simple_animal/hostile/retaliate/infernal/hellhound,

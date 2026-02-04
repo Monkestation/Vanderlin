@@ -43,7 +43,7 @@
 				visible_message("<span class='warning'>[H] crushes [src] underfoot.</span>")
 				qdel(src)
 
-/obj/item/reagent_containers/food/snacks/produce/attackby(obj/item/weapon, mob/user, params)
+/obj/item/reagent_containers/food/snacks/produce/attackby(obj/item/weapon, mob/user, list/modifiers)
 	if(weapon && isturf(loc))
 		var/turf/location = get_turf(src)
 		if(seed && (user.used_intent.blade_class == BCLASS_BLUNT) && (!user.used_intent.noaa))
