@@ -5684,21 +5684,6 @@
 /area/outdoors/town/roofs)
 "dAD" = (
 /obj/effect/decal/cleanable/sigil/E,
-/obj/effect/mob_spawn/human/briar{
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
-	name = "captain";
-	assignedrole = /datum/job/captain;
-	outfit = /datum/outfit/captain;
-	r_hand = /obj/item/weapon/sword/sabre/hook;
-	beltl = null;
-	beltr = null;
-	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Giuevere";
-	mob_gender = "male";
-	possible_ages = list("Adult");
-	backr = null;
-	l_hand = /obj/item/weapon/shield/tower/metal
-	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
 "dAP" = (
@@ -18274,6 +18259,12 @@
 /area/indoors/town/tavern)
 "lrh" = (
 /obj/structure/fluff/nest,
+/obj/effect/mob_spawn/human/corpse{
+	outfit = /datum/outfit/zizo_slave;
+	mob_species = list(/datum/species/human/halfdrow);
+	backpack_contents = null;
+	backl = null
+	},
 /turf/open/floor/naturalstone,
 /area/indoors/mountains)
 "lrn" = (
@@ -29684,25 +29675,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
-"sDK" = (
-/obj/structure/vine/black_briar/medium,
-/obj/effect/mob_spawn/human/briar{
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
-	name = "captain";
-	assignedrole = /datum/job/captain;
-	outfit = /datum/outfit/captain;
-	r_hand = /obj/item/weapon/sword/sabre/hook;
-	beltl = null;
-	beltr = null;
-	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Giuevere";
-	mob_gender = "male";
-	possible_ages = list("Adult");
-	backr = null;
-	l_hand = /obj/item/weapon/shield/tower/metal
-	},
-/turf/open/floor/cobble,
-/area/outdoors/town/roofs)
 "sDR" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/key/apartments/apartment19,
@@ -29812,6 +29784,21 @@
 /obj/effect/decal/cleanable/debris/glass,
 /obj/effect/decal/cleanable/debris/stone{
 	dir = 4
+	},
+/obj/effect/mob_spawn/human/briar{
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
+	name = "captain";
+	assignedrole = /datum/job/captain;
+	outfit = /datum/outfit/captain;
+	r_hand = /obj/item/weapon/sword/sabre/hook;
+	beltl = null;
+	beltr = null;
+	ring = /obj/item/clothing/ring/gold/ravox;
+	mob_name = "Sir Giuevere";
+	mob_gender = "male";
+	possible_ages = list("Adult");
+	backr = null;
+	l_hand = /obj/item/weapon/shield/tower/metal
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
@@ -204690,7 +204677,7 @@ qJl
 qJl
 qJl
 qJl
-qJl
+phG
 phG
 qJl
 qJl
@@ -208587,7 +208574,7 @@ oho
 xtI
 jjU
 xbz
-xbz
+xtI
 xtI
 oAf
 oAf
@@ -219348,7 +219335,7 @@ uWt
 uWt
 uWt
 uWt
-sDK
+pKs
 pKs
 pKs
 uWt

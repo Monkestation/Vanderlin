@@ -76,6 +76,12 @@
 	icon_state = "shadowplate"
 	item_state = "shadowplate"
 	allowed_race = list(SPEC_ID_ELF, SPEC_ID_DROW)
+	armor_class = AC_MEDIUM
+	armor = ARMOR_PLATE
+	body_parts_covered = COVERAGE_TORSO
+	prevent_crits = ALL_EXCEPT_BLUNT
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 7 * STEEL_MULTIPLIER
 
 /obj/item/clothing/armor/cuirass/copperchest
 	name = "heart protector"

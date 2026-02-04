@@ -11,7 +11,7 @@
 
 /datum/component/cursedrosa/RegisterWithParent()
 	if(cross_trigger)
-		RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(atom_crossed))
+		RegisterSignals(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_HITBY), PROC_REF(atom_crossed))
 	if(hand_trigger)
 		RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(attack_hand))
 

@@ -123,8 +123,8 @@
 	update_appearance()
 
 /datum/wound/black_briar_curse/heal_wound(heal_amount, datum/source, full_heal = FALSE)
-	if(full_heal)
-		return ..()
+	//if(full_heal) i don't give a fuck where you healed from ZIZOID
+	//	return ..() i don't give a fuck where you healed from ZIZOID
 	if(infection_percent >= 1)
 		return FALSE
 	if(!istype(source, /datum/action/cooldown/spell/healing))
