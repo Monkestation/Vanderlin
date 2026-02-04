@@ -145,7 +145,7 @@
 #define SPAN_GOD_MATTHIOS(str) ("<span class='god_matthios'>" + str + "</span>")
 #define SPAN_GOD_BAOTHA(str) ("<span class='god_baotha'>" + str + "</span>")
 #define SPAN_GOD_GRAGGAR(str) ("<span class='god_graggar'>" + str + "</span>")
-#define SPAN_GOD_GZIZO(str) ("<span class='god_zizo'>" + str + "</span>")
+#define SPAN_GOD_ZIZO(str) ("<span class='god_zizo'>" + str + "</span>")
 #define SPAN_GOD_PSYDON(str) ("<span class='god_psydon'>" + str + "</span>")
 
 /* Complex Spans */
