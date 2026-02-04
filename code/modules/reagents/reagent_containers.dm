@@ -62,15 +62,360 @@
 	if(is_open_container())
 		GLOB.weather_act_upon_list |= src
 
+/obj/item/reagent_containers/Destroy()
+	if(is_open_container())
+		GLOB.weather_act_upon_list -= src
+	return ..()
+
 /obj/item/reagent_containers/examine(mob/user)
 	. = ..()
 	if(has_variable_transfer_amount && length(possible_transfer_amounts) > 1)
 		. += span_notice("Alt Left-click or right-click in-hand to increase or decrease its transfer amount.")
 
-/obj/item/reagent_containers/Destroy()
-	if(is_open_container())
-		GLOB.weather_act_upon_list -= src
-	return ..()
+/**
+ * Reagent container interactions clicked by
+ *
+ * Breaking eggs ?? yay?
+ *
+ * Labeling
+ *
+ * Heating
+ */
+/obj/item/reagent_containers/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/egg)) //breaking eggs
+		if(!reagents)
+			return NONE
+
+		if(reagents.holder_full())
+			to_chat(user, span_notice("[src] is full."))
+			return ITEM_INTERACT_BLOCKING
+
+		var/obj/item/reagent_containers/egg = tool
+
+		to_chat(user, span_notice("I break [egg] in [src]."))
+		egg.reagents.trans_to(src, egg.reagents.total_volume, transfered_by = user)
+		qdel(egg)
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/paper) && !istype(tool, /obj/item/paper/scroll))
+		if(try_label(user, tool))
+			return ITEM_INTERACT_SUCCESS
+
+		return ITEM_INTERACT_BLOCKING
+
+	if(!reagents)
+		return NONE
+
+	var/hotness = tool.get_temperature()
+	if(!hotness)
+		return NONE
+
+	reagents.expose_temperature(hotness)
+	to_chat(user, span_notice("I heat [name] with [tool]!"))
+
+	return ITEM_INTERACT_SUCCESS
+
+/**
+ * Reagent container interactions
+ *
+ * Splash
+ *
+ * Feeding (mobs)
+ *
+ * Pouring
+ *
+ * Filling
+ *
+ * Each one is split into its own proc
+ */
+/obj/item/reagent_containers/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!user.used_intent)
+		return NONE
+
+	if(user.used_intent.type == INTENT_GENERIC)
+		return NONE
+
+	if(!spillable)
+		return NONE
+
+	if(!reagents?.total_volume)
+		to_chat(user, span_danger("[src] is empty!"))
+		return ITEM_INTERACT_BLOCKING
+
+	if(user.used_intent.type == INTENT_SPLASH)
+		if(try_splash(user, interacting_with))
+			return ITEM_INTERACT_SUCCESS
+
+		return ITEM_INTERACT_BLOCKING
+
+	if(user.used_intent.type == INTENT_POUR)
+		if(ismob(interacting_with))
+			if(try_feed(user, interacting_with))
+				return ITEM_INTERACT_SUCCESS
+		else if(try_pour(user, interacting_with))
+			return ITEM_INTERACT_SUCCESS
+
+		return ITEM_INTERACT_BLOCKING
+
+	if(istype(user.used_intent, INTENT_FILL))
+		if(try_fill(user, interacting_with))
+			return ITEM_INTERACT_SUCCESS
+
+		return ITEM_INTERACT_BLOCKING
+
+/obj/item/reagent_containers/proc/try_splash(mob/living/user, atom/target)
+	if(!is_open_container() || !spillable)
+		return FALSE
+
+	if(!reagents?.total_volume)
+		return FALSE
+
+	var/punctuation = ismob(target) ? "!" : "."
+
+	user.changeNext_move(CLICK_CD_MELEE)
+	user.visible_message(
+		span_danger("[user] splashes the contents of [src] onto [target][punctuation]"),
+		span_danger("You splash the contents of [src] onto [target][punctuation]"),
+		ignored_mobs = target,
+	)
+
+	if (ismob(target))
+		var/mob/target_mob = target
+		target_mob.show_message(
+			span_userdanger("[user] splashes the contents of [src] onto you!"),
+			MSG_VISUAL,
+			span_userdanger("You feel drenched!"),
+		)
+		SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, target, reagents.reagent_list)
+	else if(isclosedturf(target))
+		var/turf/new_target
+		for(var/turf/new_turf as anything in get_adjacent_open_turfs(target))
+			if(new_turf.Adjacent(target, target, user))
+				new_target = new_turf
+				break
+		if(new_target)
+			target = new_target
+
+	playsound(target, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 25, TRUE)
+
+	log_combat(user, target, "splashed", reagents.get_reagent_log_string())
+
+	reagents.reaction(target, TOUCH)
+	chem_splash(target.loc, 2, list(reagents))
+
+	return TRUE
+
+/obj/item/reagent_containers/proc/try_feed(mob/living/user, mob/living/target)
+	if(!is_open_container() || !spillable)
+		return FALSE
+
+	if(!reagents?.total_volume)
+		return FALSE
+
+	if(!canconsume(target, user))
+		return FALSE
+
+	if(target != user)
+		target.visible_message(span_danger("[user] attempts to feed [target] something."), \
+					span_danger("[user] attempts to feed you something."))
+		if(!do_after(user, 3 SECONDS, target))
+			return FALSE
+
+		if(!reagents?.total_volume)
+			return FALSE
+
+		target.visible_message(span_danger("[user] feeds [target] something."), \
+					span_danger("[user] feeds you something."))
+		log_combat(user, target, "fed", reagents.log_list())
+
+	// check to see if we're a noble drinking soup
+	if(ishuman(user) && istype(src, /obj/item/reagent_containers/glass/bowl))
+		var/mob/living/carbon/human/human_user = user
+		var/obj/item/reagent_containers/glass/bowl/bowl_check = src
+		if(bowl_check.dirty)
+			human_user.add_stress(/datum/stress_event/dirty_bowl)
+		else if(istype(bowl_check.reagents, /datum/reagent/consumable/soup))
+			var/datum/reagent/consumable/soup/soup_check = bowl_check.reagents
+			soup_check.taste_mult +=1
+		if(bowl_check.reagents.get_reagent_amount(/datum/reagent/water) != bowl_check.reagents.total_volume)
+			bowl_check.usages += 1
+		if(bowl_check.usages >= bowl_check.max_usages && !bowl_check.dirty)
+			bowl_check.dirty = TRUE
+			var/datum/component/particle_spewer = bowl_check.GetComponent(/datum/component/particle_spewer/sparkle)
+			if(particle_spewer)
+				qdel(particle_spewer)
+			bowl_check.update_appearance(UPDATE_OVERLAYS)
+		if(human_user.is_noble()) // egads we're an unmannered SLOB
+			human_user.add_stress(/datum/stress_event/noble_bad_manners)
+			if(prob(25))
+				to_chat(human_user, span_red("I've got better manners than this..."))
+
+	to_chat(user, span_notice("I swallow a gulp of [src]."))
+
+	addtimer(CALLBACK(reagents, TYPE_PROC_REF(/datum/reagents, trans_to), target, min(amount_per_transfer_from_this,5), TRUE, TRUE, FALSE, user, FALSE, INGEST), 5)
+	playsound(target, pick(drinksounds), 100, TRUE)
+
+	return TRUE
+
+/obj/item/reagent_containers/proc/try_fill(mob/living/user, atom/to_fill)
+	if(!is_open_container() || !spillable)
+		return FALSE
+
+	if(!reagents?.total_volume)
+		return FALSE
+
+	if(!to_fill.is_refillable())
+		return FALSE
+
+	if(to_fill.reagents.holder_full())
+		to_chat(user, span_danger("[to_fill] is full."))
+		return FALSE
+
+	var/stealthy = user.rogue_sneaking
+
+	if(stealthy)
+		to_chat(user, span_notice("I pour [src] into [to_fill]."))
+	else
+		user.visible_message(
+			span_notice("[user] pours [src] into [to_fill]."),
+			span_notice("I pour [src] into [to_fill]."),
+		)
+
+	if(!stealthy && poursounds)
+		playsound(user, pick(poursounds), 100, TRUE)
+
+	for(var/i in 1 to 22)
+		if(!do_after(user, 8 DECISECONDS, to_fill, hidden = stealthy))
+			break
+		if(!reagents.total_volume)
+			break
+		if(to_fill.reagents.holder_full())
+			break
+		if(!reagents.trans_to(to_fill, amount_per_transfer_from_this, transfered_by = user))
+			reagents.reaction(to_fill, TOUCH, amount_per_transfer_from_this)
+
+	return TRUE
+
+/obj/item/reagent_containers/proc/try_pour(mob/living/user, atom/to_pour)
+	if(!is_open_container() || !spillable)
+		return FALSE
+
+	if(!to_pour.reagents?.total_volume)
+		return FALSE
+
+	if(!to_pour.is_drainable())
+		return FALSE
+
+	if(reagents.holder_full())
+		to_chat(user, span_danger("[src] is full."))
+		return FALSE
+
+	var/stealthy = user.rogue_sneaking
+
+	if(stealthy)
+		to_chat(user, span_notice("I fill [src] with [to_pour]."))
+	else
+		user.visible_message(
+			span_notice("[user] fills [src] with [to_pour]."),
+			span_notice("I fill [src] with [to_pour]."),
+		)
+
+	if(!stealthy && fillsounds)
+		playsound(user, pick(fillsounds), 100, TRUE)
+
+	for(var/i in 1 to 22)
+		if(!do_after(user, 8 DECISECONDS, to_pour, hidden = stealthy))
+			break
+		if(!to_pour.reagents.total_volume)
+			break
+		if(reagents.holder_full())
+			break
+		if(!to_pour.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user))
+			to_pour.reagents.reaction(src, TOUCH, amount_per_transfer_from_this)
+
+	return TRUE
+
+/obj/item/reagent_containers/proc/try_label(mob/living/user, obj/item/paper/parchment)
+	if(!can_label_container)
+		return FALSE
+
+	if(labelled)
+		to_chat(user, span_warning("\The [src] is already labelled."))
+		return FALSE
+
+	if(length(parchment.info))
+		to_chat(user, span_warning("I need a clean parchment."))
+		return FALSE
+
+	if(!user.is_literate())
+		to_chat(user, span_warning("I do not know how to write."))
+		return FALSE
+
+	var/other_hand = user.get_inactive_held_item()
+	if(!other_hand || !istype(other_hand, /obj/item/natural/feather))
+		to_chat(user, span_warning("I need a feather to write on the parchment."))
+		return FALSE
+
+	var/label_name = browser_input_text(user, "Write a name.", max_length = 32)
+	if(QDELETED(src) || QDELETED(parchment))
+		return FALSE
+
+	var/label_desc = browser_input_text(user, "Write an optional description?")
+	if(QDELETED(src) || QDELETED(parchment))
+		return FALSE
+
+	if(!label_name && !label_desc)
+		to_chat(user, span_warning("I decide not to label \the [src]."))
+		return
+
+	label_container(user, label_name, label_desc)
+
+	qdel(parchment)
+
+	return TRUE
+
+/obj/item/reagent_containers/MiddleClick(mob/user, list/modifiers)
+	. = ..()
+	if(iscarbon(user))
+		remove_label(user)
+
+/obj/item/reagent_containers/proc/label_container(mob/user, label_name, label_desc)
+	if((!label_name && !label_desc) || !can_label_container)
+		return
+	if(labelled)
+		if(user)
+			to_chat(user, span_warning("\The [src] is already labelled."))
+		return
+	if(user)
+		playsound(src, 'sound/foley/dropsound/paper_drop.ogg', 70)
+		user.visible_message(span_notice("[user] applies a label to \the [src]."), span_notice("I label \the [src]."), vision_distance = 3)
+	name = label_prefix ? "[label_prefix][label_name]" : label_name
+	if(label_desc)
+		desc += " [label_desc]"
+	labelled = TRUE
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/reagent_containers/proc/remove_label(mob/user, force)
+	if(!labelled)
+		if(user)
+			to_chat(user, span_warning("\The [src] has no label to remove."))
+		return
+	if(force || !user)
+		name = initial(name)
+		labelled = FALSE
+		return
+	if(!do_after(user, 1 SECONDS, src))
+		return
+	user.visible_message(span_warning("[user] tears the label off of \the [src]!"), span_notice("I remove the label from \the [src]."), vision_distance = 3)
+	name = initial(name)
+	if(desc != initial(desc))
+		desc = initial(desc)
+	labelled = FALSE
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/reagent_containers/proc/apply_initial_label()
+	return
 
 /obj/item/reagent_containers/weather_act_on(weather_trait, severity)
 	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, weather_act_cooldown))
@@ -135,78 +480,6 @@
 	var/datum/reagent/master = reagents.get_master_reagent()
 	if(master?.glows)
 		. += emissive_appearance(filling.icon, filling.icon_state, alpha = filling.alpha)
-
-/obj/item/reagent_containers/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(!can_label_container || !(istype(I, /obj/item/paper) && !istype(I, /obj/item/paper/scroll)))
-		return
-	if(labelled)
-		to_chat(user, span_warning("\The [src] is already labelled."))
-		return
-	var/obj/item/paper/parchment = I
-	if(length(parchment.info))
-		to_chat(user, span_warning("I need a clean parchment."))
-		return
-	if(!user.is_literate())
-		to_chat(user, span_warning("I do not know how to write."))
-		return
-	var/other_hand = user.get_inactive_held_item()
-	if(!other_hand || !istype(other_hand, /obj/item/natural/feather))
-		to_chat(user, span_warning("I need a feather to write on the parchment."))
-		return
-	var/label_name = browser_input_text(user, "Write a name.", max_length = 32)
-	if(QDELETED(src) || QDELETED(I))
-		return
-	var/label_desc = browser_input_text(user, "Write an optional description?")
-	if(QDELETED(src) || QDELETED(I))
-		return
-	if(!label_name && !label_desc)
-		to_chat(user, span_warning("I decide not to label \the [src]."))
-		return
-	label_container(user, label_name, label_desc)
-	qdel(I)
-
-/obj/item/reagent_containers/MiddleClick(mob/user, list/modifiers)
-	. = ..()
-	if(iscarbon(user))
-		remove_label(user)
-
-/obj/item/reagent_containers/proc/label_container(mob/user, label_name, label_desc)
-	if((!label_name && !label_desc) || !can_label_container)
-		return
-	if(labelled)
-		if(user)
-			to_chat(user, span_warning("\The [src] is already labelled."))
-		return
-	if(user)
-		playsound(src, 'sound/foley/dropsound/paper_drop.ogg', 70)
-		user.visible_message(span_notice("[user] applies a label to \the [src]."), span_notice("I label \the [src]."), vision_distance = 3)
-	name = label_prefix ? "[label_prefix][label_name]" : label_name
-	if(label_desc)
-		desc += " [label_desc]"
-	labelled = TRUE
-	update_appearance(UPDATE_OVERLAYS)
-
-/obj/item/reagent_containers/proc/remove_label(mob/user, force)
-	if(!labelled)
-		if(user)
-			to_chat(user, span_warning("\The [src] has no label to remove."))
-		return
-	if(force || !user)
-		name = initial(name)
-		labelled = FALSE
-		return
-	if(!do_after(user, 1 SECONDS, src))
-		return
-	user.visible_message(span_warning("[user] tears the label off of \the [src]!"), span_notice("I remove the label from \the [src]."), vision_distance = 3)
-	name = initial(name)
-	if(desc != initial(desc))
-		desc = initial(desc)
-	labelled = FALSE
-	update_appearance(UPDATE_OVERLAYS)
-
-/obj/item/reagent_containers/proc/apply_initial_label()
-	return
 
 /obj/item/reagent_containers/proc/add_initial_reagents()
 	if(list_reagents)

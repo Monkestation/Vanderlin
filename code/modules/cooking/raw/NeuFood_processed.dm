@@ -14,7 +14,7 @@
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
 
-/obj/item/reagent_containers/food/snacks/fat/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/reagent_containers/food/snacks/fat/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with))
 		return NONE
 

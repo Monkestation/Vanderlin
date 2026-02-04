@@ -20,7 +20,7 @@
 	icon_state = "girlundies"
 	gendered = FEMALE
 
-/obj/item/undies/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/undies/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!ishuman(interacting_with))
 		return NONE
 

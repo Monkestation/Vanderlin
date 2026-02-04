@@ -225,7 +225,7 @@
 			to_chat(user, span_warning("[src] has no meat to eat."))
 	..()
 
-/obj/item/bodypart/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/bodypart/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!iscarbon(interacting_with))
 		return NONE
 

@@ -153,7 +153,9 @@
 
 	return TRUE
 
-/datum/surgery/proc/next_step(mob/living/user, modifiers)
+/datum/surgery/proc/can_next_step(mob/living/user, list/modifiers)
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(location != user.zone_selected)
 		return FALSE
 
@@ -163,21 +165,39 @@
 	if(step_in_progress)
 		return TRUE
 
+	var/obj/item/tool = user.get_active_held_item()
+	if(tool)
+		tool = tool.get_proxy_attacker_for(target, user)
+
+	var/surgery_type = steps[status]
+	var/datum/surgery_step/surgery_step = new surgery_type()
+
+	if(!surgery_step)
+		return FALSE
+
+	var/tool_key = surgery_step.tool_check(user, tool)
+
+	if(!(tool_key in surgery_step.implements))
+		return FALSE
+
+	return TRUE
+
+/datum/surgery/proc/next_step(mob/living/user, list/modifiers)
+	if(!can_next_step(user, modifiers))
+		return FALSE
+
 	var/try_to_fail = FALSE
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		try_to_fail = TRUE
 	else if(!target.stat == DEAD && user.get_skill_level(skill_used) < skill_min)
 		try_to_fail = TRUE // If you don't have the skill it will fail always
 
-
-	var/surgery_type = steps[status]
-	var/datum/surgery_step/surgery_step = new surgery_type()
-	if(isnull(surgery_step))
-		return FALSE
-
 	var/obj/item/tool = user.get_active_held_item()
 	if(tool)
 		tool = tool.get_proxy_attacker_for(target, user)
+
+	var/surgery_type = steps[status]
+	var/datum/surgery_step/surgery_step = new surgery_type()
 
 	if(surgery_step.try_op(user, target, user.zone_selected, tool, src, try_to_fail))
 		return TRUE

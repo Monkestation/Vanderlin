@@ -4,15 +4,12 @@
  * Handles non-combat iteractions of a tool on this atom,
  * such as using a tool on a wall to deconstruct it,
  * or scanning someone with a health analyzer
- *
- * This can be overridden to add custom item interactions to this atom
- *
- * Do not call this directly
  */
-/atom/proc/item_interaction(mob/living/user, obj/item/tool, list/modifiers, is_right_clicking)
+/atom/proc/base_item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	SHOULD_CALL_PARENT(TRUE)
 	PROTECTED_PROC(TRUE)
 
+	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 	var/is_left_clicking = !is_right_clicking
 
 	var/early_sig_return = NONE
@@ -25,6 +22,13 @@
 
 	if(early_sig_return)
 		return early_sig_return
+
+	var/self_interaction = is_left_clicking \
+		? item_interaction(user, tool, modifiers) \
+		: item_interaction_secondary(user, tool, modifiers)
+
+	if(self_interaction)
+		return self_interaction
 
 	var/interact_return = is_left_clicking \
 		? tool.interact_with_atom(src, user) \
@@ -82,8 +86,18 @@
 
 	return act_result
 
-/mob/living/item_interaction(mob/living/user, obj/item/tool, list/modifiers, is_right_clicking)
-	// I'm not too fond of this but we don't have drapes
+/mob/living/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	// Surgery and such happens very high up in the interaction chain, before parent call
+	var/attempt_tending = item_tending(user, tool, modifiers)
+	if(attempt_tending & ITEM_INTERACT_ANY_BLOCKER)
+		return attempt_tending
+
+	return ..() | attempt_tending
+
+/// Handles any use of using a surgical tool or item on a mob to tend to them.
+/// The sole reason this is a separate proc is so carbons can tend wounds AFTER the check for surgery.
+/mob/living/proc/item_tending(mob/living/user, obj/item/tool, list/modifiers)
+	// If a surgery is happening try continue it
 	if(length(surgeries))
 		for(var/datum/surgery/operation as anything in surgeries)
 			if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
@@ -92,33 +106,44 @@
 				continue
 			if(operation.next_step(user, modifiers))
 				return ITEM_INTERACT_SUCCESS
-	else if(!user.cmode && istype(user.rmb_intent, /datum/rmb_intent/weak))
+
+		return NONE
+
+	// If a surgery isn't happening try start one
+	if(!user.cmode && istype(user.rmb_intent, /datum/rmb_intent/weak))
 		var/list/available_surgeries = list()
 		for(var/datum/surgery/operation as anything in GLOB.surgeries_list)
+			// Surgery start checks
 			if(!operation.can_start(user, src, tool, feedback = FALSE))
+				continue
+			// Mostly if the tool actually will do the surgery
+			if(!operation.can_next_step(user, modifiers))
 				continue
 
 			available_surgeries += operation
 
 		var/surgeries = length(available_surgeries)
 		if(surgeries)
-			var/datum/surgery/surgery
+			var/datum/surgery/operation
 			if(surgeries > 1)
-				surgery = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
+				operation = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
 			else
-				surgery = available_surgeries[1]
+				operation = available_surgeries[1]
 
-			if(!surgery || QDELETED(src) || QDELETED(user))
+			if(!operation || QDELETED(src) || QDELETED(user))
 				return ITEM_INTERACT_BLOCKING
 
-			if(!surgery.can_start(user, src, tool))
+			if(!operation.can_start(user, src, tool))
 				return ITEM_INTERACT_BLOCKING
+
+			if(!operation.can_next_step(user, modifiers))
+				continue
 
 			var/selected_zone = user.zone_selected
 
 			var/obj/item/bodypart/affecting = get_bodypart(check_zone(selected_zone))
 
-			var/datum/surgery/procedure = new surgery.type(src, selected_zone, affecting)
+			var/datum/surgery/procedure = new operation.type(src, selected_zone, affecting)
 
 			balloon_alert(user, "starting \"[LOWER_TEXT(procedure.name)]\"")
 
@@ -126,7 +151,28 @@
 
 			return ITEM_INTERACT_SUCCESS
 
-	return ..()
+	return NONE
+
+/**
+ * Called when this atom has an item used on it.
+ * IE, a mob is clicking on this atom with an item.
+ *
+ * Return an ITEM_INTERACT_ flag in the event the interaction was handled, to cancel further interaction code.
+ * Return NONE to allow default interaction / tool handling.
+ */
+/atom/proc/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	return NONE
+
+/**
+ * Called when this atom has an item used on it WITH RIGHT CLICK,
+ * IE, a mob is right clicking on this atom with an item.
+ * Default behavior has it run the same code as left click.
+ *
+ * Return an ITEM_INTERACT_ flag in the event the interaction was handled, to cancel further interaction code.
+ * Return NONE to allow default interaction / tool handling.
+ */
+/atom/proc/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	return item_interaction(user, tool, modifiers)
 
 /**
  * Called when this item is being used to interact with an atom,
@@ -135,7 +181,7 @@
  * Return an ITEM_INTERACT_ flag in the event the interaction was handled, to cancel further interaction code.
  * Return NONE to allow default interaction / tool handling.
  */
-/obj/item/proc/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/proc/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	return NONE
 
 /**
@@ -147,7 +193,7 @@
  * Return an ITEM_INTERACT_ flag in the event the interaction was handled, to cancel further interaction code.
  * Return NONE to allow default interaction / tool handling.
  */
-/obj/item/proc/interact_with_atom_secondary(atom/interacting_with, mob/living/user)
+/obj/item/proc/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
 	return interact_with_atom(interacting_with, user)
 
 /*

@@ -150,14 +150,20 @@
 	var/heal_burn = 0
 	var/heal_oxy = 0
 
+/obj/item/organ/heart/cursed/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
 
-/obj/item/organ/heart/cursed/attack(mob/living/carbon/human/H, mob/living/carbon/human/user, list/modifiers)
-	if(H == user && istype(H))
-		playsound(user,'sound/blank.ogg',40,TRUE)
-		user.temporarilyRemoveItemFromInventory(src, TRUE)
-		Insert(user)
-	else
-		return ..()
+	if(interacting_with != user)
+		return NONE
+
+	if(!iscarbon(interacting_with))
+		return ..() // eat it...
+
+	user.temporarilyRemoveItemFromInventory(src, TRUE)
+	Insert(user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/organ/heart/cursed/on_life()
 	if(world.time > (last_pump + pump_delay))

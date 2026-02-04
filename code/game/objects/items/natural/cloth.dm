@@ -102,7 +102,7 @@
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 
-/obj/item/natural/cloth/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/natural/cloth/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(ishuman(interacting_with))
 		if(bandage(interacting_with, user))
 			return ITEM_INTERACT_SUCCESS

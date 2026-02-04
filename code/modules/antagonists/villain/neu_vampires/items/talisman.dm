@@ -65,7 +65,7 @@
 	if (user.clan)
 		trigger(user)
 
-/obj/item/talisman/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/talisman/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!user.clan || !spell_type)
 		return NONE
 

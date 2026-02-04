@@ -266,7 +266,7 @@
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
 
-/obj/item/natural/saddle/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/natural/saddle/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!istype(interacting_with, /mob/living/simple_animal))
 		return NONE
 

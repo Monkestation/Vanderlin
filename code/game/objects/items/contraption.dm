@@ -320,7 +320,7 @@
 /obj/item/contraption/shears/hammer_action(obj/item/I, mob/user)
 	return
 
-/obj/item/contraption/shears/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/contraption/shears/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!iscarbon(interacting_with))
 		return NONE
 

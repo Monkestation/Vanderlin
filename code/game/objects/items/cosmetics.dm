@@ -60,7 +60,7 @@
 	open = !open
 	update_appearance(UPDATE_ICON)
 
-/obj/item/lipstick/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/lipstick/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!ishuman(interacting_with))
 		return NONE
 
@@ -101,7 +101,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 //you can wipe off lipstick with paper!
-/obj/item/paper/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/paper/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!ishuman(interacting_with))
 		return NONE
 

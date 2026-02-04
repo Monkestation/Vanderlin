@@ -28,7 +28,7 @@
 
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 
-	var/item_interact_result = target.item_interaction(user, src, modifiers, is_right_clicking)
+	var/item_interact_result = target.base_item_interaction(user, src, modifiers)
 	if(item_interact_result & ITEM_INTERACT_SUCCESS)
 		return TRUE
 	if(item_interact_result & ITEM_INTERACT_BLOCKING)

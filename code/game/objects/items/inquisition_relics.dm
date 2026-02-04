@@ -597,7 +597,7 @@
 		else
 			working = FALSE
 
-/obj/item/inqarticles/indexer/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/inqarticles/indexer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with))
 		return NONE
 
@@ -1016,7 +1016,7 @@
 		if(bagging)
 			addtimer(CALLBACK(src, PROC_REF(bagsound), M), timer)
 
-/obj/item/clothing/head/inqarticles/blackbag/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/clothing/head/inqarticles/blackbag/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!iscarbon(interacting_with))
 		return NONE
 
@@ -1278,7 +1278,7 @@
 	addtimer(CALLBACK(user, GLOBAL_PROC_REF(playsound), user, 'sound/items/blackeye.ogg', 100, FALSE), 4 SECONDS)
 	addtimer(TRAIT_CALLBACK_REMOVE(user, TRAIT_NOSSDINDICATOR, "blackmirror"), 4 SECONDS)
 
-/obj/item/inqarticles/bmirror/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/inqarticles/bmirror/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with))
 		return NONE
 

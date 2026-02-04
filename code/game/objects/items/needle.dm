@@ -50,7 +50,7 @@
 	stringamt = stringamt - used
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/needle/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/needle/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(isliving(interacting_with))
 		if(sew_wounds(interacting_with, user))
 			return ITEM_INTERACT_SUCCESS

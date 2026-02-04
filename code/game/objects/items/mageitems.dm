@@ -508,7 +508,7 @@
 	name = "aberrant planar binding shackles"
 	tier = 5
 
-/obj/item/rope/chain/bindingshackles/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/rope/chain/bindingshackles/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!istype(interacting_with, /mob/living/simple_animal/hostile/retaliate))
 		return NONE
 

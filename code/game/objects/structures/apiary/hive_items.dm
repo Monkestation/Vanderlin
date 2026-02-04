@@ -132,7 +132,7 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/magnifying_glass/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/magnifying_glass/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!istype(interacting_with, /obj/structure/apiary))
 		return NONE
 

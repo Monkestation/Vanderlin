@@ -123,10 +123,10 @@ All foods are distributed among various categories. Use common sense.
 		var/obj/item/master = get_master_item()
 		if(!master)
 			return
-		user.visible_message("<span class='green'>[user] beckons [M] with [master].</span>", "<span class='green'>I beckon [M] with [master].</span>", ignored_mobs = targetl)
+		user.visible_message(span_green("[user] beckons [M] with [master]."), span_green("I beckon [M] with [master]."), ignored_mobs = targetl)
 		if(M.client)
 			if(M.can_see_cone(user))
-				to_chat(M, "<span class='green'>[user] beckons me with [master].</span>")
+				to_chat(M, span_green("[user] beckons me with [master]."))
 		M.food_tempted(master, user)
 
 /obj/item/reagent_containers/food/snacks/fire_act(added, maxstacks)
@@ -358,106 +358,113 @@ All foods are distributed among various categories. Use common sense.
 
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, list/modifiers)
-	if(user.used_intent.type != /datum/intent/food && (!(M == user) && isanimal(M)))
-		return ..()
+/obj/item/reagent_containers/food/snacks/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(isanimal(interacting_with))
+		var/mob/living/simple_animal/animal = interacting_with
+		if(!animal.eat_food(src))
+			return ITEM_INTERACT_BLOCKING
+		return ITEM_INTERACT_SUCCESS
+
+	if(!iscarbon(interacting_with))
+		return NONE
+
+	if(!canconsume(interacting_with, user))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/carbon/eater = interacting_with
+
 	if(!eatverb)
-		eatverb = pick("bite","chew","nibble","gnaw","gobble","chomp")
+		eatverb = pick(list("bite", "chew", "nibble", "gnaw", "gobble", "chomp"))
 
-	if(iscarbon(M))
-		if(!canconsume(M, user))
-			return FALSE
+	var/obj/item/kitchen/fork/fork_check = user.get_active_held_item()
+	var/obj/item/plate/plate_check
 
-		var/obj/item/kitchen/fork/fork_check = user.get_active_held_item()
-		var/obj/item/plate/plate_check
+	if(istype(loc, /obj/item/plate))
+		plate_check = loc
 
-		if(istype(loc,/obj/item/plate))
-			plate_check = loc
+	if(istype(fork_check))
+		if(!plate_check)
+			if(HAS_TRAIT(eater, TRAIT_NOBLE))
+				eater.add_stress(/datum/stress_event/noble_ate_with_just_a_fork)
+		else if(plate_check.dirty)
+			eater.add_stress(/datum/stress_event/dirty_platter)
+		else if(faretype != FARE_LAVISH && !plate_check.dirty)
+			faretype += 1
+		plate_check.fork_usages +=1
+		if(plate_check.fork_usages >= plate_check.max_fork_usages && !plate_check.dirty)
+			plate_check.dirty = TRUE
+			var/datum/component/particle_spewer = plate_check.GetComponent(/datum/component/particle_spewer/sparkle)
+			if(particle_spewer)
+				qdel(particle_spewer)
+			plate_check.update_appearance(UPDATE_OVERLAYS)
 
-		if(fork_check)
-			if(!plate_check)
-				if(HAS_TRAIT(M,TRAIT_NOBLE))
-					M.add_stress(/datum/stress_event/noble_ate_with_just_a_fork)
-			else
-				if(plate_check.dirty)
-					M.add_stress(/datum/stress_event/dirty_platter)
-				else if(faretype != FARE_LAVISH && !plate_check.dirty)
-					faretype += 1
-				plate_check.fork_usages +=1
-				if(plate_check.fork_usages >= plate_check.max_fork_usages && !plate_check.dirty)
-					plate_check.dirty = TRUE
-					var/datum/component/particle_spewer = plate_check.GetComponent(/datum/component/particle_spewer/sparkle)
-					if(particle_spewer)
-						qdel(particle_spewer)
-					plate_check.update_appearance(UPDATE_OVERLAYS)
+	if(interacting_with == src)
+		switch(eater.nutrition)
+			if(NUTRITION_LEVEL_FAT to INFINITY)
+				user.visible_message(
+					span_notice("[user] forces [eater.p_them()]self to eat \the [src]."),
+					span_notice("I force myself to eat \the [src]."),
+				)
+			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_FAT)
+				user.visible_message(
+					span_notice("[user] [eatverb]s \the [src]."),
+					span_notice("I [eatverb] \the [src]."),
+				)
+			if(0 to NUTRITION_LEVEL_STARVING)
+				user.visible_message(
+					span_notice("[user] hungrily [eatverb]s \the [src], gobbling it down!"),
+					span_notice("I hungrily [eatverb] \the [src], gobbling it down!"),
+				)
+				eater.changeNext_move(CLICK_CD_MELEE * 0.5)
+	else if(eater.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
+		eater.visible_message(
+			span_warning("[user] cannot force any more of [src] down [eater]'s throat!"),
+			span_warning("[user] cannot force any more of [src] down your throat!"),
+		)
+		return ITEM_INTERACT_BLOCKING
+	else
+		eater.visible_message(
+			span_danger("[user] tries to feed [eater] [src]."),
+			span_danger("[user] tries to feed me [src]."),
+		)
+		if(!do_after(user, 3 SECONDS, eater))
+			return ITEM_INTERACT_BLOCKING
+		log_combat(user, eater, "fed", reagents.log_list())
 
-		if(M == user)								//If you're eating it myself.
-			switch(M.nutrition)
-				if(NUTRITION_LEVEL_FAT to INFINITY)
-					user.visible_message("<span class='notice'>[user] forces [M.p_them()]self to eat \the [src].</span>", "<span class='notice'>I force myself to eat \the [src].</span>")
-				if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_FAT)
-					user.visible_message("<span class='notice'>[user] [eatverb]s \the [src].</span>", "<span class='notice'>I [eatverb] \the [src].</span>")
-				if(0 to NUTRITION_LEVEL_STARVING)
-					user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
-					M.changeNext_move(CLICK_CD_MELEE * 0.5)
-		else
-			if(!isbrain(M))		//If you're feeding it to someone else.
-				if(M.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
-					M.visible_message("<span class='warning'>[user] cannot force any more of [src] down [M]'s throat!</span>", \
-										"<span class='warning'>[user] cannot force any more of [src] down your throat!</span>")
-					return FALSE
-				else
-					M.visible_message("<span class='danger'>[user] tries to feed [M] [src].</span>", \
-										"<span class='danger'>[user] tries to feed me [src].</span>")
-				if(iscarbon(M))
-					var/mob/living/carbon/C = M
-					var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
-					if(C.cmode)
-						if(!CH.grabbedby)
-							to_chat(user, "<span class='info'>[C.p_they(TRUE)] steals [C.p_their()] face from it.</span>")
-							return FALSE
-				if(!do_after(user, 3 SECONDS, M))
-					return
-				log_combat(user, M, "fed", reagents.log_list())
-			else
-				to_chat(user, "<span class='warning'>[M] doesn't seem to have a mouth!</span>")
-				return
+	if(eater.satiety > -200)
+		eater.satiety -= junkiness
 
-		if(reagents)								//Handle ingestion of the reagent.
-			if(M.satiety > -200)
-				M.satiety -= junkiness
-			playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
-			if(reagents.total_volume)
-				SEND_SIGNAL(src, COMSIG_FOOD_EATEN, M, user)
-				SEND_SIGNAL(M, COMSIG_MOB_FOOD_EAT, src)
-				var/fraction = min(bitesize / reagents.total_volume, 1)
-				var/amt2take = reagents.total_volume / (bitesize - bitecount)
-				if((bitecount >= bitesize) || (bitesize == 1))
-					amt2take = reagents.total_volume
+	playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 
-				reagents.trans_to(M, amt2take, transfered_by = user, method = INGEST)
+	SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
+	SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
 
-				if(M.has_quirk(/datum/quirk/boon/naturalist) && naturalist)
-					for(var/datum/reagent/R in reagents.reagent_list)
-						var/bonus_amount = (R.volume / reagents.total_volume) * amt2take * 0.5
-						M.reagents.add_reagent(R.type, bonus_amount)
+	on_consume(eater)
 
-				bitecount++
-				on_consume(M)
-				checkLiked(fraction, M)
-				if(bitecount >= bitesize && !QDELETED(src))
-					qdel(src)
-				return TRUE
-		playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
+	if(!reagents.total_volume)
 		qdel(src)
-		return FALSE
-	else if(isanimal(M))
-		var/mob/living/simple_animal/animal = M
-		if(animal.eat_food(src))
-			animal.eat_food_after(src)
-			return TRUE
+		return ITEM_INTERACT_SUCCESS
 
-	return ..()
+	var/fraction = min(bitesize / reagents.total_volume, 1)
+	var/amt2take = reagents.total_volume / (bitesize - bitecount)
+	if((bitecount >= bitesize) || (bitesize == 1))
+		amt2take = reagents.total_volume
+
+	reagents.trans_to(eater, amt2take, transfered_by = user, method = INGEST)
+
+	if(naturalist && eater.has_quirk(/datum/quirk/boon/naturalist))
+		for(var/datum/reagent/R in reagents.reagent_list)
+			var/bonus_amount = (R.volume / reagents.total_volume) * amt2take * 0.5
+			eater.reagents.add_reagent(R.type, bonus_amount)
+
+	bitecount++
+
+	checkLiked(fraction, eater)
+
+	if(bitecount >= bitesize && !QDELETED(src))
+		qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/examine(mob/user)
 	. = ..()
@@ -483,12 +490,12 @@ All foods are distributed among various categories. Use common sense.
 		if((slices_num <= 0 || !slices_num) || !slice_path) //is the food sliceable?
 			return FALSE
 		if(slice_bclass == BCLASS_CHOP)
-			user.visible_message("<span class='notice'>[user] chops [src]!</span>")
+			user.visible_message(span_notice("[user] chops [src]!"))
 			slice(W, user)
 			user.nobles_seen_servant_work()
 			return TRUE
 		if(slice_bclass == BCLASS_CUT)
-			user.visible_message("<span class='notice'>[user] slices [src]!</span>")
+			user.visible_message(span_notice("[user] slices [src]!"))
 			slice(W, user)
 			user.nobles_seen_servant_work()
 			return TRUE
@@ -506,7 +513,7 @@ All foods are distributed among various categories. Use common sense.
 			!(locate(/obj/structure/table/optable) in src.loc) && \
 			!(locate(/obj/item/plate) in src.loc)) \
 		)
-		to_chat(user, "<span class='warning'>I need to use a table.</span>")
+		to_chat(user, span_warning("I need to use a table."))
 		return FALSE
 
 	if(slice_sound)
@@ -615,15 +622,15 @@ All foods are distributed among various categories. Use common sense.
 		return
 	if(istype(M, /obj/item/reagent_containers/glass))	//you can dunk dunkable snacks into beakers or drinks
 		if(!M.is_drainable())
-			to_chat(user, "<span class='warning'>[M] is unable to be dunked in!</span>")
+			to_chat(user, span_warning("[M] is unable to be dunked in!"))
 			return
 		if(M.reagents.trans_to(src, dunk_amount, transfered_by = user))	//if reagents were transfered, show the message
-			to_chat(user, "<span class='notice'>I dunk \the [src] into \the [M].</span>")
+			to_chat(user, span_notice("I dunk \the [src] into \the [M]."))
 			return
 		if(!M.reagents.total_volume)
-			to_chat(user, "<span class='warning'>[M] is empty!</span>")
+			to_chat(user, span_warning("[M] is empty!"))
 		else
-			to_chat(user, "<span class='warning'>[src] is full!</span>")
+			to_chat(user, span_warning("[src] is full!"))
 
 // //////////////////////////////////////////////Store////////////////////////////////////////
 /// All the food items that can store an item inside itself, like bread or cake.
@@ -641,9 +648,9 @@ All foods are distributed among various categories. Use common sense.
 		if(!iscarbon(user))
 			return 0
 		if(contents.len >= 20)
-			to_chat(user, "<span class='warning'>[src] is full.</span>")
+			to_chat(user, span_warning("[src] is full."))
 			return 0
-		to_chat(user, "<span class='notice'>I slip [W] inside [src].</span>")
+		to_chat(user, span_notice("I slip [W] inside [src]."))
 		user.transferItemToLoc(W, src)
 		add_fingerprint(user)
 		contents += W

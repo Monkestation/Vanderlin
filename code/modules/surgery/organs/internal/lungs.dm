@@ -28,10 +28,6 @@
 		failed = FALSE
 	return
 
-/obj/item/organ/lungs/prepare_eat()
-	var/obj/S = ..()
-	return S
-
 /obj/item/organ/lungs/plasmaman
 	name = "plasma filter"
 	desc = ""

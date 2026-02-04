@@ -170,7 +170,7 @@
 		. += inserted_overlay
 		cig_position++
 
-/obj/item/storage/fancy/cigarettes/interact_with_atom(atom/interacting_with, mob/living/user)
+/obj/item/storage/fancy/cigarettes/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!ishuman(interacting_with))
 		return NONE
 
