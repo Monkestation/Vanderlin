@@ -139,10 +139,6 @@
 	if(!spillable)
 		return NONE
 
-	if(!reagents?.total_volume)
-		to_chat(user, span_danger("[src] is empty!"))
-		return ITEM_INTERACT_BLOCKING
-
 	if(user.used_intent.type == INTENT_SPLASH)
 		if(try_splash(user, interacting_with))
 			return ITEM_INTERACT_SUCCESS
@@ -169,6 +165,7 @@
 		return FALSE
 
 	if(!reagents?.total_volume)
+		to_chat(user, span_danger("[src] is empty!"))
 		return FALSE
 
 	var/punctuation = ismob(target) ? "!" : "."
@@ -180,7 +177,7 @@
 		ignored_mobs = target,
 	)
 
-	if (ismob(target))
+	if(ismob(target))
 		var/mob/target_mob = target
 		target_mob.show_message(
 			span_userdanger("[user] splashes the contents of [src] onto you!"),
@@ -202,7 +199,10 @@
 	log_combat(user, target, "splashed", reagents.get_reagent_log_string())
 
 	reagents.reaction(target, TOUCH)
-	chem_splash(target.loc, 2, list(reagents))
+
+	chem_splash(get_turf(target), 2, list(reagents))
+
+	update_appearance(UPDATE_OVERLAYS)
 
 	return TRUE
 
@@ -211,6 +211,7 @@
 		return FALSE
 
 	if(!reagents?.total_volume)
+		to_chat(user, span_danger("[src] is empty!"))
 		return FALSE
 
 	if(!canconsume(target, user))
@@ -263,6 +264,7 @@
 		return FALSE
 
 	if(!reagents?.total_volume)
+		to_chat(user, span_danger("[src] is empty!"))
 		return FALSE
 
 	if(!to_fill.is_refillable())
@@ -302,6 +304,7 @@
 		return FALSE
 
 	if(!to_pour.reagents?.total_volume)
+		to_chat(user, span_danger("[to_pour] is empty!"))
 		return FALSE
 
 	if(!to_pour.is_drainable())
