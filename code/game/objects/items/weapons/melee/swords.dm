@@ -1282,7 +1282,7 @@
 	icon_state = "terminusest"
 	name = "Terminus Est"
 
-/obj/item/weapon/sword/long/exe/cloth/attack_self_secondary(mob/user, params)
+/obj/item/weapon/sword/long/exe/cloth/attack_self_secondary(mob/user, list/modifiers)
 	// . = ..()
 	// if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 	// 	return
@@ -1607,7 +1607,7 @@
 	clickcd = 22	//Can't spam this; long delay.
 	blade_class = BCLASS_BLUNT
 
-/obj/item/weapon/sword/sabre/hook/attack(mob/living/M, mob/living/user, bodyzone_hit)
+/obj/item/weapon/sword/sabre/hook/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	var/skill_diff = 0
 	if(istype(user.used_intent, /datum/intent/sword/disarm))

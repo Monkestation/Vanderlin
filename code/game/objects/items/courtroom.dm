@@ -28,7 +28,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 
-/obj/item/gavelblock/attackby(obj/item/I, mob/user, params)
+/obj/item/gavelblock/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/gavelhammer))
 		playsound(src, 'sound/blank.ogg', 100, TRUE)
 		user.visible_message("<span class='warning'>[user] strikes [src] with [I].</span>")

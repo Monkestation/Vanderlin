@@ -52,10 +52,10 @@
 //	if(stringamt <= 0)
 //		qdel(src)
 
-/obj/item/needle/attack(mob/living/M, mob/user)
+/obj/item/needle/attack(mob/living/M, mob/user, list/modifiers)
 	sew_wounds(M, user)
 
-/obj/item/needle/attackby(obj/item/I, mob/user, params)
+/obj/item/needle/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/natural/fibers))
 		if(maxstring - stringamt < 5)
 			to_chat(user, span_warning("Not enough room for more thread!"))
@@ -70,7 +70,7 @@
 			return
 	return ..()
 
-/obj/item/needle/pre_attack(atom/A, mob/living/user, params)
+/obj/item/needle/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(isitem(A))
 		var/obj/item/I = A
 		if(!(I.obj_flags & CAN_BE_HIT) && !istype(A, /obj/item/storage)) // to preserve old attack_obj behavior

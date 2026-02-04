@@ -53,7 +53,7 @@
 	else
 		icon_state = "mbox[loaded]"
 
-/obj/item/dmusicbox/attackby(obj/item/P, mob/user, params)
+/obj/item/dmusicbox/attackby(obj/item/P, mob/user, list/modifiers)
 	if(!loaded)
 		if(istype(P, /obj/item/coin/gold))
 			loaded=TRUE
@@ -63,14 +63,14 @@
 			return
 	return ..()
 
-/obj/item/dmusicbox/attack_self_secondary(mob/user, params)
+/obj/item/dmusicbox/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	attack_hand_secondary(user, params)
+	attack_hand_secondary(user, modifiers)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/dmusicbox/attack_hand_secondary(mob/user, params)
+/obj/item/dmusicbox/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -115,7 +115,7 @@
 	loaded = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/dmusicbox/attack_self(mob/living/user, params)
+/obj/item/dmusicbox/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return

@@ -183,7 +183,7 @@
 	handle_water()
 	return ..()
 
-/turf/open/water/river/creatable/attackby(obj/item/C, mob/user, params)
+/turf/open/water/river/creatable/attackby(obj/item/C, mob/user, list/modifiers)
 	if(istype(C, /obj/item/reagent_containers/glass/bucket/wooden) && user.used_intent.type == /datum/intent/splash)
 		try_modify_water(user, C)
 		return TRUE
@@ -382,7 +382,7 @@
 						water_overlay.layer = ABOVE_MOB_LAYER
 						water_overlay.plane = GAME_PLANE_UPPER
 
-/turf/open/water/attackby(obj/item/C, mob/user, params)
+/turf/open/water/attackby(obj/item/C, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/fill)
 		if(C.reagents)
 			if(C.reagents.holder_full())
@@ -419,7 +419,7 @@
 			return
 	. = ..()
 
-/turf/open/water/attack_hand_secondary(mob/user, params)
+/turf/open/water/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -451,7 +451,7 @@
 				L.adjust_fire_stacks(-2)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, params)
+/turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

@@ -59,13 +59,13 @@
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/proc/do_message(message)
 	audible_message("Gorefeast speaks, \"[message]\"", hearing_distance = 5)
 
-/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!HAS_TRAIT(user, TRAIT_ORGAN_EATER))
 		force = 13
 		force_wielded = 23
 	return ..()
 
-/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	if(!ishuman(target))
 		return
 	if(check_zone(user.zone_selected) != BODY_ZONE_CHEST)
@@ -119,12 +119,12 @@
 	. = ..()
 	AddElement(/datum/element/divine_intervention, /datum/patron/inhumen/zizo, PUNISHMENT_BURN, /datum/stress_event/divine_punishment, TRUE)
 
-/obj/item/weapon/polearm/neant/attack(mob/living/M, mob/living/user)
+/obj/item/weapon/polearm/neant/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(user.used_intent.tranged)
 		return
 	return ..()
 
-/obj/item/weapon/polearm/neant/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/weapon/polearm/neant/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!HAS_TRAIT(user, TRAIT_CABAL) || !istype(user.patron, /datum/patron/inhumen/zizo))
 		return
@@ -313,17 +313,17 @@
 	QDEL_NULL(FUCK)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/attack_self(mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/attack_self(mob/living/user, list/modifiers)
 	if(chambered || !HAS_TRAIT(user, TRAIT_CRACKHEAD))
 		return ..()
-	FUCK.attack_self(user, params)
+	FUCK.attack_self(user, modifiers)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/dropped(mob/user, silent)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/pre_attack(atom/A, mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
@@ -380,7 +380,7 @@
 	. = ..()
 	AddElement(/datum/element/divine_intervention, /datum/patron/inhumen/matthios, PUNISHMENT_STRESS, /datum/stress_event/divine_punishment, TRUE)
 
-/obj/item/weapon/sword/long/pleonexia/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/sword/long/pleonexia/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!istype(user.used_intent, /datum/intent/plex_dash) || !HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
 		return ..()
 	. = TRUE

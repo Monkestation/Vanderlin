@@ -106,15 +106,15 @@
 
 	var/mob/living/patrol_mob = find_active_patrol_setup_mob()
 	if(patrol_mob)
-		handle_patrol_setup_click(A, params, patrol_mob)
+		handle_patrol_setup_click(A, modifiers, patrol_mob)
 		return
 
 	if(break_turf_mode)
-		handle_break_turf_click(A, params)
+		handle_break_turf_click(A, modifiers)
 		return
 
 	if(move_structure_mode)
-		handle_move_structure_click(A, params)
+		handle_move_structure_click(A, modifiers)
 		return
 
 	if(LAZYACCESS(modifiers, LEFT_CLICK) && get_turf(A))
@@ -129,7 +129,7 @@
 				held_build.clean_up()
 			return
 
-	if(LAZYACCESS(params2list(params), RIGHT_CLICK))
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if (istype(A, /obj/effect/building_node) && displayed_mob_ui)
 			var/mob/living/worker_mob = displayed_mob_ui.worker_mob
 			if(!A:override_click(src))
@@ -151,19 +151,19 @@
 				displayed_mob_ui = living.controller_mind.stats
 				open_inventory_ui(living.controller_mind)
 			displayed_mob_ui.add_ui(client)
-	. = ..()
+
+	return ..()
 
 /mob/camera/strategy_controller/proc/find_active_patrol_setup_mob()
 	if(displayed_mob_ui?.worker_mob?.controller_mind.patrol_setup_active)
 		return displayed_mob_ui.worker_mob
 	return null
 
-/mob/camera/strategy_controller/proc/handle_patrol_setup_click(atom/A, params, mob/living/target_mob)
+/mob/camera/strategy_controller/proc/handle_patrol_setup_click(atom/A, list/modifiers, mob/living/target_mob)
 	var/turf/T = get_turf(A)
 	if(!T)
 		return
 
-	var/list/modifiers = params2list(params)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 
 	if(right_click)
@@ -265,7 +265,7 @@
 	arrow.color = color
 	return arrow
 
-/mob/camera/strategy_controller/proc/handle_break_turf_click(atom/A, params)
+/mob/camera/strategy_controller/proc/handle_break_turf_click(atom/A, list/modifiers)
 	if(!isturf(A))
 		A = get_turf(A)
 
@@ -273,7 +273,6 @@
 	if(!T)
 		return
 
-	var/list/modifiers = params2list(params)
 	var/shift_held = LAZYACCESS(modifiers, SHIFT_CLICKED)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 
@@ -297,11 +296,8 @@
 		// Single turf mode
 		create_break_order_single(T)
 
-/mob/camera/strategy_controller/proc/handle_move_structure_click(atom/A, params)
-	var/list/modifiers = params2list(params)
-	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
-
-	if(right_click)
+/mob/camera/strategy_controller/proc/handle_move_structure_click(atom/A, list/modifiers)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		// Cancel selection
 		if(selected_structure)
 			selected_structure.color = null
@@ -309,17 +305,7 @@
 		to_chat(src, span_notice("Structure selection cancelled."))
 		return
 
-	if(!selected_structure)
-		// First click - select structure
-		if(isobj(A) && isstructure(A))
-			var/obj/structure/S = A
-			if(is_structure_moveable(S))
-				selected_structure = S
-				S.color = "#ffff00"  // Yellow highlight
-				to_chat(src, span_notice("Selected [S.name]. Click a destination turf to move it there."))
-			else
-				to_chat(src, span_warning("[S.name] cannot be moved."))
-	else
+	if(selected_structure)
 		// Second click - set destination
 		var/turf/dest_turf = get_turf(A)
 		if(!dest_turf)
@@ -331,6 +317,17 @@
 			selected_structure = null
 		else
 			to_chat(src, span_warning("Cannot move structure to that location."))
+		return
+
+	// First click - select structure
+	if(isobj(A) && isstructure(A))
+		var/obj/structure/S = A
+		if(is_structure_moveable(S))
+			selected_structure = S
+			S.color = "#ffff00"  // Yellow highlight
+			to_chat(src, span_notice("Selected [S.name]. Click a destination turf to move it there."))
+		else
+			to_chat(src, span_warning("[S.name] cannot be moved."))
 
 /mob/camera/strategy_controller/proc/create_break_order_single(turf/T)
 	if(!can_break_turf(T))

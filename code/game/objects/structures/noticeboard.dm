@@ -23,7 +23,7 @@
 	icon_state = "nboard0[notices]"
 
 //attaching papers!!
-/obj/structure/noticeboard/attackby(obj/item/O, mob/user, params)
+/obj/structure/noticeboard/attackby(obj/item/O, mob/user, list/modifiers)
 	if(istype(O, /obj/item/paper))
 		if(notices < 5)
 			if(!user.transferItemToLoc(O, src))

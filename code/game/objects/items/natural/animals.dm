@@ -123,7 +123,7 @@
 			name = "rotten [initial_name]"
 			rotten = TRUE
 
-/obj/item/natural/head/MiddleClick(mob/living/user, params)
+/obj/item/natural/head/MiddleClick(mob/living/user, list/modifiers)
 	var/obj/item/held_item = user.get_active_held_item()
 	if(held_item)
 		var/path_to_check = ispath(held_item) ? held_item : held_item.type
@@ -266,7 +266,7 @@
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
 
-/obj/item/natural/saddle/attack(mob/living/target, mob/living/carbon/human/user)
+/obj/item/natural/saddle/attack(mob/living/target, mob/living/carbon/human/user, list/modifiers)
 	if(istype(target, /mob/living/simple_animal))
 		var/mob/living/simple_animal/S = target
 		if(S.can_saddle && !S.ssaddle)

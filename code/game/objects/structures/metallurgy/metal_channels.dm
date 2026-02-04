@@ -238,7 +238,7 @@
 	info = null
 	group_reagents =null
 
-/obj/structure/metal_channel/attackby(obj/item/I, mob/user, params)
+/obj/structure/metal_channel/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(!istype(I, /obj/item/reagent_containers) && !istype(I, /obj/item/storage/crucible))
 		return

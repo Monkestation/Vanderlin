@@ -131,7 +131,7 @@
 	budget2change(budget)
 	set_light(0)
 
-/obj/structure/fake_machine/drugmachine/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/drugmachine/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(istype(I, /obj/item/coin/inqcoin))
 		return

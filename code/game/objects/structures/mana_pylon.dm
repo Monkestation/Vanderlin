@@ -43,7 +43,7 @@
 		MA.color = COLOR_RED
 	. += MA
 
-/obj/structure/mana_pylon/attackby(obj/item/I, mob/living/user, params)
+/obj/structure/mana_pylon/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(!istype(I, /obj/item/gem))
 		return
@@ -136,7 +136,7 @@
 		else
 			mana_pool.transfer_specific_mana(user.mana_pool, transfer_amount, decrement_budget = TRUE)
 
-/obj/structure/mana_pylon/attack_hand_secondary(mob/user, params)
+/obj/structure/mana_pylon/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

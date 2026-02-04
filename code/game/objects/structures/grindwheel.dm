@@ -8,7 +8,7 @@
 	blade_dulling = DULLING_BASH
 	max_integrity = 400
 
-/obj/structure/grindwheel/attackby(obj/item/I, mob/living/user, params)
+/obj/structure/grindwheel/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(I.max_blade_int)
 		playsound(src,'sound/foley/grindblade.ogg', 100, FALSE)
 		if(do_after(user, 4.1 SECONDS, src)) //oddly specific time

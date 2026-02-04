@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		. += span_info("You can send arrival slips, accusation slips, fully loaded INDEXERs or confessions here.")
 		. += span_info("Properly sign them. Include an INDEXER where needed. Stamp them for two additional Marques.")
 
-/obj/structure/fake_machine/mail/attack_hand_secondary(mob/user, params)
+/obj/structure/fake_machine/mail/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -162,8 +162,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		coin_loaded = FALSE
 		update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/fake_machine/mail/attackby(obj/item/P, mob/user, params)
-	// Mercenary Token Handling
+/obj/structure/fake_machine/mail/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/merctoken))
 		return handle_merctoken(P, user)
 
@@ -756,7 +755,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	SSroguemachine.hermailermaster = src
 	update_appearance()
 
-/obj/item/fake_machine/mastermail/attackby(obj/item/P, mob/user, params)
+/obj/item/fake_machine/mastermail/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/paper))
 		var/obj/item/paper/PA = P
 		if(!PA.mailer && !PA.mailedto && PA.cached_mailer && PA.cached_mailedto)

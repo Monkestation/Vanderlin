@@ -195,7 +195,7 @@
 				if(M == grabbed)
 					grabbee.unbuckle_mob(M, force = TRUE)
 
-/obj/item/grabbing/attack(mob/living/M, mob/living/user)
+/obj/item/grabbing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!valid_check() || !istype(M))
 		return FALSE
 

@@ -628,7 +628,7 @@
 	. = ..()
 	. += span_info("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, params)
+/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
 	. = ..()
 	var/total_sellprice = 0
 	if(isturf(A))

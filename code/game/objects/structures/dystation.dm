@@ -56,7 +56,7 @@
 	selectable_colors |= new_pack.selectable_colors
 	qdel(new_pack)
 
-/obj/structure/dye_bin/attackby(obj/item/I, mob/living/user)
+/obj/structure/dye_bin/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/dye_pack))
 		. = TRUE
 		var/obj/item/dye_pack/pack = I

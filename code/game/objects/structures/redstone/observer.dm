@@ -93,7 +93,7 @@
 	. = ..()
 	icon_state = pulsing ? "comparator_pulse" : "comparator"
 
-/obj/structure/redstone/observer/AltClick(mob/user)
+/obj/structure/redstone/observer/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user))
 		return
 	dir = turn(dir, 90)

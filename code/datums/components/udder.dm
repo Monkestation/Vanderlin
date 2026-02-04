@@ -44,7 +44,7 @@
 			examine_list += span_notice("[parent]'s [udder.name] is round and full.")
 
 ///signal called on parent being attacked with an item
-/datum/component/udder/proc/on_attackby(datum/source, obj/item/milking_tool, mob/user)
+/datum/component/udder/proc/on_attackby(datum/source, obj/item/milking_tool, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	var/mob/living/milked = parent

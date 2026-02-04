@@ -40,7 +40,7 @@
 				reagents.trans_to(C, 1, transfered_by = thrownthing.thrower, method = "swallow")
 				qdel(src)
 
-/obj/item/reagent_containers/powder/attack(mob/M, mob/user, def_zone)
+/obj/item/reagent_containers/powder/attack(mob/M, mob/user, list/modifiers)
 	if(!canconsume(M, user))
 		return FALSE
 	if(M == user)

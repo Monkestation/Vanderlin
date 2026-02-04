@@ -671,11 +671,6 @@
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)
 
-/mob
-	var/last_aimhchange = 0
-	var/aimheight = 11
-	var/cmode_music = 'sound/music/cmode/combat.ogg'
-
 /mob/proc/aimheight_change(input)
 	var/old_zone = zone_selected
 	if(isnum(input))

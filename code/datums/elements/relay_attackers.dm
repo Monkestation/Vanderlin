@@ -27,7 +27,7 @@
 		COMSIG_ATOM_HITBY,
 	))
 
-/datum/element/relay_attackers/proc/on_attackby(atom/target, obj/item/weapon, mob/attacker)
+/datum/element/relay_attackers/proc/on_attackby(atom/target, obj/item/weapon, mob/attacker, list/modifiers)
 	SIGNAL_HANDLER
 	if(weapon.force)
 		relay_attacker(target, attacker, weapon.force)
