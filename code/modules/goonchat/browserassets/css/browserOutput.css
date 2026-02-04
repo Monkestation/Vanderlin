@@ -836,7 +836,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 color: #f57777;
 font-weight: bold;
 
-animation: prayer_flicker 0.5s infinite;
+animation: prayer_flicker 1s infinite;
 }
 @keyframes prayer_flicker {
 	25% {
@@ -861,7 +861,7 @@ animation: prayer_flicker 0.5s infinite;
 color: #e5d569;
 font-weight: bold;
 
-animation: astrata_flicker 0.5s infinite;
+animation: astrata_flicker 1s infinite;
 }
 @keyframes astrata_flicker {
 	25% {
@@ -888,7 +888,7 @@ animation: astrata_flicker 0.5s infinite;
 color: #82a1d9;
 font-weight: bold;
 
-animation: noc_flicker 0.5s infinite;
+animation: noc_flicker 1s infinite;
 }
 @keyframes noc_flicker {
 	25% {
@@ -915,7 +915,7 @@ animation: noc_flicker 0.5s infinite;
 color: #8b2d39;
 font-weight: bold;
 
-animation: abyssor_flicker 0.5s infinite;
+animation: abyssor_flicker 1s infinite;
 }
 @keyframes abyssor_flicker {
 	25% {
@@ -942,7 +942,7 @@ animation: abyssor_flicker 0.5s infinite;
 color: #74875a;
 font-weight: bold;
 
-animation: dendor_flicker 0.5s infinite;
+animation: dendor_flicker 1s infinite;
 }
 @keyframes dendor_flicker {
 	25% {
@@ -968,7 +968,7 @@ animation: dendor_flicker 0.5s infinite;
 color: #774b44;
 font-weight: bold;
 
-animation: ravox_flicker 0.5s infinite;
+animation: ravox_flicker 1s infinite;
 }
 @keyframes ravox_flicker {
 	25% {
@@ -994,7 +994,7 @@ animation: ravox_flicker 0.5s infinite;
 color: #d39459;
 font-weight: bold;
 
-animation: malum_flicker 0.5s infinite;
+animation: malum_flicker 1s infinite;
 }
 @keyframes malum_flicker {
 	25% {
@@ -1020,7 +1020,7 @@ animation: malum_flicker 0.5s infinite;
 color: #e4bae6;
 font-weight: bold;
 
-animation: eora_flicker 0.5s infinite;
+animation: eora_flicker 1s infinite;
 }
 @keyframes eora_flicker {
 	25% {
@@ -1046,7 +1046,7 @@ animation: eora_flicker 0.5s infinite;
 color: #dfe6ba;
 font-weight: bold;
 
-animation: xylix_flicker 0.5s infinite;
+animation: xylix_flicker 1s infinite;
 }
 @keyframes xylix_flicker {
 	25% {
@@ -1072,7 +1072,7 @@ animation: xylix_flicker 0.5s infinite;
 color: #8aa01c;
 font-weight: bold;
 
-animation: pestra_flicker 0.5s infinite;
+animation: pestra_flicker 1s infinite;
 }
 @keyframes pestra_flicker {
 	25% {
@@ -1098,7 +1098,7 @@ animation: pestra_flicker 0.5s infinite;
 color: #5a53d5;
 font-weight: bold;
 
-animation: necra_flicker 0.5s infinite;
+animation: necra_flicker 1s infinite;
 }
 @keyframes necra_flicker {
 	25% {
@@ -1124,7 +1124,7 @@ animation: necra_flicker 0.5s infinite;
 color: #17181a;
 font-weight: bold;
 
-animation: matthios_flicker 0.5s infinite;
+animation: matthios_flicker 1s infinite;
 }
 @keyframes matthios_flicker {
 	25% {
@@ -1150,7 +1150,7 @@ animation: matthios_flicker 0.5s infinite;
 color: #88528d;
 font-weight: bold;
 
-animation: baotha_flicker 0.5s infinite;
+animation: baotha_flicker 1s infinite;
 }
 @keyframes baotha_flicker {
 	25% {
@@ -1176,7 +1176,7 @@ animation: baotha_flicker 0.5s infinite;
 color: #2a7b32;
 font-weight: bold;
 
-animation: graggar_flicker 0.5s infinite;
+animation: graggar_flicker 1s infinite;
 }
 @keyframes graggar_flicker {
 	25% {
@@ -1202,7 +1202,7 @@ animation: graggar_flicker 0.5s infinite;
 color: #791f3f;
 font-weight: bold;
 
-animation: zizo_flicker 0.5s infinite;
+animation: zizo_flicker 1s infinite;
 }
 @keyframes zizo_flicker {
 	25% {
@@ -1228,7 +1228,7 @@ animation: zizo_flicker 0.5s infinite;
 color: #c1dce2;
 font-weight: bold;
 
-animation: psydon_flicker 0.5s infinite;
+animation: psydon_flicker 1s infinite;
 }
 @keyframes psydon_flicker {
 	25% {

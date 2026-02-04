@@ -72,6 +72,7 @@
 					message = SPAN_GOD_LOUD(message)
 				if("Quiet")
 					message = SPAN_GOD_QUIET(message)
+			message = SPAN_PRAYER_WRAPPER(message)
 			to_chat(target, "[span_abductor("I hear a voice in my head...")] [message]")
 		else
 			message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
@@ -117,7 +118,7 @@
 			atmosphere_message = SPAN_GOD_GRAGGAR("Your heart begins to race. Blood rushes to your head. Your hands clench into a fist, a rhythmic thumping takes over your hearing. Your eyes narrow down on everything, everyone. You size them all up. There is some primal and feral urge to fight, to shout, to let loose. You can hardly keep your body from lurching forward. As you tremble with the sudden surge of adrenaline, a deep guttural laugh. He roars, a raucous, abrasive and brash voice follows.")
 		if("Zizo")
 			atmosphere_message = SPAN_GOD_ZIZO("A swirl of shadows overtake your senses, the sphere that is your mind is penetrated and swallowed whole. You are lost in the dark, engulfed and surrounded. As if entombed in a vast void of nothingness. A purple light flickers in your vision, profane, offering no comfort from the dark, however drawing your attention. The voice of a woman, sharp, conceitful, and ensnaring. Her voice is ephemeral, and ghastly. A coldness takes hold of you, bone-chilling and black as death. When she speaks, a shiver runs down your spine.")
-	return atmosphere_message
+	return SPAN_PRAYER_WRAPPER(atmosphere_message)
 
 /client/proc/cmd_admin_headset_message(mob/M in GLOB.mob_list)
 	set category = "Special"

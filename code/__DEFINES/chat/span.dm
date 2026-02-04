@@ -126,7 +126,8 @@
 #define span_artery(str) ("<span class='artery'>" + str + "</span>")
 #define span_love(str) ("<span class='love'>" + str + "</span>")
 
-
+/// Wrapper used to allow easy tracking of prayers within a chat tab.
+#define SPAN_PRAYER_WRAPPER(str) ("<span class='prayer'>" + str + "</span>")
 #define SPAN_GOD_QUIET(str) ("<span font-size:90%>" + str + "</span>")
 #define SPAN_GOD_LOUD(str) ("<span font-size:120%>" + str + "</span>")
 #define SPAN_GOD_FIRST_FEEL(str) ("<span style='display:block; font-size:130%'>" + str + "</span>")
