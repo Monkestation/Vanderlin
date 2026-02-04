@@ -488,7 +488,6 @@
 
 /obj/item/clothing/neck/gorget/explosive/zizo
 	name = "collar of obedience"
-	icon_state = "collar"
 	desc = "a collar worn by the slaves of Zizo's army. The unruly must know their place."
 
 /obj/item/clothing/ring/collar_detonator

@@ -21,7 +21,7 @@
 
 	permeability_coefficient = 0.5
 	slowdown = 0
-	strip_delay = 1 SECONDS
+	strip_delay = 2 SECONDS
 	equip_delay_self = 3 SECONDS
 
 	grid_width = 64

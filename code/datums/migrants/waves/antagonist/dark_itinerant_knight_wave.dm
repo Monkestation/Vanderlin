@@ -21,6 +21,7 @@
 	total_positions = 0
 	always_show_on_latechoices = FALSE
 	job_reopens_slots_on_death = FALSE
+	bypass_lastclass = TRUE
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -53,6 +54,16 @@
 	languages = list(/datum/language/undead)
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 
+/datum/job/migrant/dark_itinerant_knight/New()
+	. = ..()
+	for(var/X in GLOB.zizo_positions)
+		peopleiknow += X
+		peopleknowme += X
+
+/datum/job/migrant/dark_itinerant_knight/after_spawn(mob/living/carbon/human/spawned, client/player_client, clear_job_stats)
+	. = ..()
+	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+
 /datum/outfit/dark_itinerant_knight
 	name = "Zizo Knight"
 	head = /obj/item/clothing/head/helmet/heavy/zizo
@@ -66,7 +77,7 @@
 	neck = /obj/item/clothing/neck/chaincoif
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	beltr = /obj/item/weapon/whip/spiderwhip
-	belt = /obj/item/storage/belt/leather/steel
+	belt = /obj/item/storage/belt/leather/black
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/weapon/sword/long/greatsword/zizo
 	wrists = /obj/item/clothing/neck/psycross/zizo
@@ -100,6 +111,7 @@
 	total_positions = 0
 	job_flags = (JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK | JOB_SHOW_IN_CREDITS)
 	faction = list(FACTION_UNDEAD, FACTION_CABAL)
+	bypass_lastclass = TRUE
 
 	jobstats = list(
 		STATKEY_STR = 1,
@@ -125,7 +137,6 @@
 	)
 	always_show_on_latechoices = FALSE
 	job_reopens_slots_on_death = FALSE
-	shows_in_list = FALSE
 	can_have_apprentices = FALSE
 	antag_role = /datum/antagonist/zizocultist/zizo_knight
 
@@ -133,6 +144,12 @@
 	traits = list(TRAIT_STEELHEARTED, TRAIT_MEDIUMARMOR, TRAIT_DUALWIELDER)
 	languages = list(/datum/language/undead)
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+
+/datum/job/migrant/dark_itinerant_squire/New()
+	. = ..()
+	for(var/X in GLOB.zizo_positions)
+		peopleiknow += X
+		peopleknowme += X
 
 /datum/job/migrant/dark_itinerant_squire/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -162,7 +179,7 @@
 	neck = /obj/item/clothing/neck/highcollier
 	backr = /obj/item/clothing/cloak/half/shadowcloak/cult
 	cloak = /obj/item/clothing/shirt/undershirt/sash/colored/purple
-	shoes = /obj/item/clothing/shoes/courtphysician/female
+	shoes = /obj/item/clothing/shoes/courtphysician/female/zizo
 	belt = /obj/item/storage/belt/leather/black
 	pants = /obj/item/clothing/pants/platelegs/blk/event
 	backl = /obj/item/storage/backpack/satchel
@@ -193,11 +210,11 @@
 	outfit = /datum/outfit/zizo_slave
 	allowed_races = list(SPEC_ID_DROW, SPEC_ID_HALF_DROW)
 	allowed_ages = list(AGE_CHILD, AGE_ADULT, AGE_MIDDLEAGED)
-	allowed_patrons = list(/datum/patron/inhumen/zizo)
 	spawn_positions = 4
 	total_positions = 0
 	job_flags = (JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK | JOB_SHOW_IN_CREDITS)
 	faction = list(FACTION_UNDEAD, FACTION_CABAL)
+	bypass_lastclass = TRUE
 
 	jobstats = list(
 		STATKEY_PER = 1,
@@ -219,13 +236,20 @@
 	)
 	always_show_on_latechoices = FALSE
 	job_reopens_slots_on_death = FALSE
-	shows_in_list = FALSE
 	can_have_apprentices = FALSE
 	selection_color = JCOLOR_NOBLE
 	department_flag = UNDEAD
+	is_foreigner = TRUE
 
 	traits = list(TRAIT_STEELHEARTED)
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+
+/datum/job/zizo_slave/New()
+	. = ..()
+	for(var/X in GLOB.zizo_positions)
+		peopleiknow += X
+		peopleknowme += X
+
 
 /datum/job/zizo_slave/after_spawn(mob/living/carbon/human/spawned, client/player_client, clear_job_stats)
 	. = ..()
@@ -270,6 +294,7 @@
 	name = "Zizo Slave"
 	head = /obj/item/clothing/head/roguehood/colored/black
 	neck = /obj/item/clothing/neck/gorget/explosive/zizo
+	cloak = /obj/item/clothing/shirt/undershirt/sash/colored
 	shirt = /obj/item/clothing/shirt/undershirt/lowcut/zizo
 	shoes = /obj/item/clothing/shoes/gladiator
 	belt = /obj/item/storage/belt/leather/rope
@@ -285,7 +310,7 @@
 	max_spawns = 1
 	shared_wave_type = /datum/migrant_wave/evil_knight
 	downgrade_wave = /datum/migrant_wave/evil_knight_down
-	weight = 8
+	weight = 0
 	roles = list(
 		/datum/migrant_role/dark_itinerant_knight = 1,
 		/datum/migrant_role/dark_itinerant_squire = 1,
@@ -296,7 +321,7 @@
 	name = "The Unknightly journey"
 	shared_wave_type = /datum/migrant_wave/evil_knight
 	can_roll = FALSE
-	weight = 35
+	weight = 0
 	roles = list(
 		/datum/migrant_role/dark_itinerant_knight = 1,
 	)

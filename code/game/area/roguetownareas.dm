@@ -47,8 +47,6 @@
 	icon_state = "mountains"
 	droning_index = DRONING_MOUNTAIN
 	ambient_index = AMBIENCE_GENERIC
-	background_track_dusk = 'sound/music/area/abscond.ogg'
-	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	soundenv = 17
 	converted_type = /area/indoors/shelter/mountains
 

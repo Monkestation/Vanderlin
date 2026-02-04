@@ -135,7 +135,7 @@
 	color = CLOTHING_SPRING_GREEN
 
 /obj/item/clothing/shirt/undershirt/sash/colored/purple
-	color = "#800080"
+	color = "#3a003a"
 
 /obj/item/clothing/shirt/undershirt/sash/colored/red
 	color = "#6a0000"

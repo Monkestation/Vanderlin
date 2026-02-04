@@ -194,3 +194,13 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
 	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/shoes/courtphysician/female/zizo
+	name = "dark stiletto boots"
+	desc = "Worn by the domineering slave drivers of Zizo's army. In the minds of slaves, the clacking of these heels is parallel to that of a whip."
+	uses_lord_coloring = FALSE
+	color = "#b9b9b9"
+	detail_color = CLOTHING_ROYAL_PURPLE
+	armor = list("blunt" = 20, "slash" = 20, "stab" = 20,  "piercing" = 10, "fire" = 0, "acid" = 0)
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
