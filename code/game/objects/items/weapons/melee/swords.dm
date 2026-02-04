@@ -98,6 +98,21 @@
 	. = ..()						//+3 force, +100 blade int, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, 100, 50, 1, TRUE)
 
+/obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
+	name = "steel ida"
+	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
+	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
+	icon_state = "ida_steel"
+	force = DAMAGE_SHORTSWORD + 4
+	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
+
+/obj/item/weapon/sword/short/iron/ida
+	name = "iron ida"
+	desc = "A short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
+	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
+	icon_state = "ida_iron"
+	force = DAMAGE_SHORTSWORD + 2
+	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
 
 //................ Arming Sword ............... //
 /obj/item/weapon/sword/arming
@@ -120,7 +135,6 @@
 	if(icon_state == "decsword1")
 		icon_state = "decsword[rand(1,3)]"
 
-//................ Silver Sword ............... //
 /obj/item/weapon/sword/silver
 	name = "silver sword"
 	desc = "A simple silver sword with an edge that gleams in moonlight."
@@ -177,30 +191,16 @@
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 
-/obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
-	name = "steel ida"
-	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "ida_steel"
-	force = DAMAGE_SHORTSWORD + 4
-	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
-
-/obj/item/weapon/sword/short/iron/ida
-	name = "iron ida"
-	desc = "A short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "ida_iron"
-	force = DAMAGE_SHORTSWORD + 2
-	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
-
-/obj/item/weapon/sword/rapier/caneblade
-	name = "cane blade"
-	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing"
-	icon = 'icons/roguetown/weapons/32/swords.dmi'
-	icon_state = "caneblade"
-	sellprice = 100 //Gold handle
-	bigboy = FALSE
-	SET_BASE_PIXEL(0, 0)
+/obj/item/weapon/sword/stone
+	name = "stone sword"
+	desc = "A crudely made sword, wielded by savages."
+	icon_state = "stone_sword"
+	force = DAMAGE_SWORD - 6
+	force_wielded = DAMAGE_SHORTSWORD - 1
+	wdefense = AVERAGE_PARRY
+	max_blade_int = 50
+	max_integrity = INTEGRITY_WORST / 4
+	melting_material = null
 
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
@@ -579,6 +579,15 @@
 	icon_state = "nimcha"
 	dropshrink = 0.8
 	sellprice = 140 // its made with gold and steel, thats pretty valuable
+
+/obj/item/weapon/sword/rapier/caneblade
+	name = "cane blade"
+	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing"
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
+	icon_state = "caneblade"
+	sellprice = 100 //Gold handle
+	bigboy = FALSE
+	SET_BASE_PIXEL(0, 0)
 
 //................ Lord's Rapier ............... //
 /obj/item/weapon/sword/rapier/dec/lord
