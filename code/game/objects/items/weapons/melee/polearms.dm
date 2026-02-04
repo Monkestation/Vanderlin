@@ -49,7 +49,7 @@
 	icon_state = "woodstaff"
 	force =  DAMAGE_STAFF
 	force_wielded =  DAMAGE_STAFF_WIELD - 1
-	wdefense = ULTMATE_PARRY
+	wdefense = GREAT_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
@@ -123,6 +123,7 @@
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR
+	wbalance = GOOD_PARRY
 	possible_item_intents = list(SPEAR_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_BASH)
 	max_blade_int = 150
