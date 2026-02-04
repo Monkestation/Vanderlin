@@ -398,7 +398,7 @@ All foods are distributed among various categories. Use common sense.
 				qdel(particle_spewer)
 			plate_check.update_appearance(UPDATE_OVERLAYS)
 
-	if(interacting_with == src)
+	if(interacting_with == user)
 		switch(eater.nutrition)
 			if(NUTRITION_LEVEL_FAT to INFINITY)
 				user.visible_message(
@@ -441,7 +441,7 @@ All foods are distributed among various categories. Use common sense.
 
 	on_consume(eater)
 
-	if(!reagents.total_volume)
+	if(!reagents?.total_volume)
 		qdel(src)
 		return ITEM_INTERACT_SUCCESS
 
