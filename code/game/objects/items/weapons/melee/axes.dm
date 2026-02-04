@@ -5,14 +5,18 @@
 	icon = 'icons/roguetown/weapons/32/axes_picks.dmi'
 	item_state = "axe"
 	parrysound = "parrywood"
-	swingsound = BLADEWOOSH_MED
-	associated_skill = /datum/skill/combat/axesmaces
-	possible_item_intents = list(AXE_CUT)
-	gripped_intents = list(AXE_CHOP)
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_AXE_WIELD
+	wdefense = AVERAGE_PARRY
+	possible_item_intents = list(AXE_CUT, AXE_CHOP)
+	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	wlength = WLENGTH_NORMAL
 
+	parrysound = "parrywood"
+	swingsound = BLADEWOOSH_MED
+	associated_skill = /datum/skill/combat/axesmaces
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	axe_cut = 10	// bonus damage to trees
 	melt_amount = 75
@@ -29,6 +33,8 @@
 	force_wielded = DAMAGE_BAD_AXE_WIELD
 	wdefense = BAD_PARRY
 	wbalance = EASY_TO_DODGE
+	possible_item_intents = list(AXE_CUT)
+	gripped_intents = list(AXE_CHOP)
 	wlength = WLENGTH_SHORT
 	max_blade_int = 50
 	max_integrity = INTEGRITY_WORST / 2
@@ -54,11 +60,7 @@
 	name = "battle axe"
 	desc = "A masterfully constructed ax, with additional weights in the form of ornate spikes and practical edges."
 	icon_state = "battleaxe"
-	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
-	wdefense = AVERAGE_PARRY
-	possible_item_intents = list(AXE_CUT, AXE_CHOP)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 10 //meant to be a orc weapon or barbarian weapon
@@ -86,11 +88,7 @@
 	name = "iron axe"
 	desc = "Tool, weapon, loyal iron companion."
 	icon_state = "axe"
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(AXE_CUT, AXE_CHOP)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 6
@@ -146,11 +144,7 @@
 	name = "bronze axe"
 	desc = "Tool, weapon, loyal bronze companion."
 	icon_state = "axe_bronze"
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(AXE_CUT, AXE_CHOP)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 6
@@ -179,18 +173,13 @@
 	desc = "An axe forged of silver with a small psycross attached, Dendor and his foul beastmen be damned."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyaxe"
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	wdefense = AVERAGE_PARRY
-	possible_item_intents = list(AXE_CUT, AXE_CHOP)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 6
 
 	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
 	melting_material = /datum/material/silver
-	melt_amount = 75
+	melt_amount = 100
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
@@ -221,7 +210,7 @@
 	icon_state = "paxe"
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_AXE_WIELD
-	wdefense = MEDIOCRE_PARRY
+	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(AXE_CUT, PICK_INTENT)
 	gripped_intents = list(AXE_CUT, AXE_CHOP)
@@ -247,11 +236,6 @@
 	name = "steel axe"
 	desc = "A bearded steel axe revered by dwarf, humen and elf alike. Performs much better than its iron counterpart."
 	icon_state = "saxe"
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	wdefense = AVERAGE_PARRY
-	possible_item_intents = list(AXE_CUT, AXE_CHOP)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 6
@@ -356,8 +340,6 @@
 	force_wielded =	DAMAGE_BAD_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
-	possible_item_intents = list(AXE_CUT, AXE_CHOP)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	minstr = 8
