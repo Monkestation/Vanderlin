@@ -89,11 +89,11 @@
 	H.grant_language(/datum/language/undead)
 
 /datum/antagonist/zizocultist/greet()
-	to_chat(owner, span_danger("I'm a lackey to the LEADER. A new future begins."))
+	//to_chat(owner, span_danger("I'm a lackey to the LEADER. A new future begins."))
 	owner.announce_objectives()
 
 /datum/antagonist/zizocultist/leader/greet()
-	to_chat(owner, span_danger("I'm a cultist to the ALMIGHTY. They call it the UNSPEAKABLE. I require LACKEYS to make my RITUALS easier. I SHALL ASCEND."))
+	//to_chat(owner, span_danger("I'm a cultist to the ALMIGHTY. They call it the UNSPEAKABLE. I require LACKEYS to make my RITUALS easier. I SHALL ASCEND."))
 	owner.announce_objectives()
 
 /datum/antagonist/zizocultist/can_be_owned(datum/mind/new_owner)
@@ -126,8 +126,8 @@
 
 /datum/objective/zizoserve
 	name = "Serve your Leader"
-	explanation_text = "Serve your leader and ensure that they ascend."
-	team_explanation_text = "Serve your leader and ensure that they ascend."
+	explanation_text = "Serve your leader and ensure their survival."
+	team_explanation_text = "Serve your leader and ensure their survival."
 	triumph_count = 3
 
 /datum/objective/zizoserve/check_completion()

@@ -197,7 +197,7 @@
 
 	body += "<div id='skills-section'>"
 	body += "<h3>Skills</h3><ul>"
-	if(M.mind)
+	if(M.skills)
 		for(var/skill_type in SSskills.all_skills)
 			var/datum/skill/skill = GetSkillRef(skill_type)
 			if(skill in M.skills?.known_skills)

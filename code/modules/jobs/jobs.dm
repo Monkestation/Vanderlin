@@ -59,7 +59,12 @@ GLOBAL_LIST_INIT(inquisition_positions, list(
 	))
 GLOBAL_PROTECT(inquisition_positions)
 
-
+GLOBAL_LIST_INIT(zizo_positions, list(
+	/datum/job/migrant/dark_itinerant_knight::title,
+	/datum/job/migrant/dark_itinerant_squire::title,
+	/datum/job/zizo_slave::title,
+))
+GLOBAL_PROTECT(zizo_positions)
 
 GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/innkeep::title,
@@ -130,7 +135,6 @@ GLOBAL_LIST_INIT(allmig_positions, list(
 	/datum/job/mercenary::title,
 	/datum/job/bandit::title,
 	/datum/job/wretch::title,
-	/datum/job/migrant/dark_itinerant_squire::title
 	))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(

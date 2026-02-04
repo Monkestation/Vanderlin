@@ -61,7 +61,7 @@
 	color = CLOTHING_BLOOD_RED
 
 /obj/item/clothing/head/roguehood/colored/black
-	color = CLOTHING_SOOT_BLACK
+	color = CLOTHING_ASH_GREY
 
 /obj/item/clothing/head/roguehood/colored/green
 	color = CLOTHING_FOREST_GREEN

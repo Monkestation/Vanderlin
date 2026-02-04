@@ -287,9 +287,6 @@
 	configure_mind()
 
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled/proc/configure_mind()
-	if(!mind)
-		mind = new /datum/mind(src)
-
 	adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 	adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)

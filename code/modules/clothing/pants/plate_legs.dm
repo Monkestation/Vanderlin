@@ -94,6 +94,12 @@
 	item_weight = 9 * BLACKSTEEL_MULTIPLIER
 	sellprice = VALUE_SILVER_ITEM * 2
 
+/obj/item/clothing/pants/platelegs/blk/event
+	name = "darkplate legs"
+	desc = ""
+	armor = ARMOR_PLATE_BAD
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 //............... Evil Pants ............... //
 
 /obj/item/clothing/pants/platelegs/zizo

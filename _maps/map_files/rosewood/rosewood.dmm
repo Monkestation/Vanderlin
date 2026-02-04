@@ -242,7 +242,7 @@
 	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
 	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
+	outfit = /datum/outfit/adventurer/profanepaladin;
 	gender = "female";
 	possible_ages = list("Adult");
 	mob_gender = "female";
@@ -1916,7 +1916,7 @@
 	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
 	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
+	outfit = /datum/outfit/adventurer/profanepaladin;
 	gender = "female";
 	possible_ages = list("Adult");
 	mob_gender = "female";
@@ -3811,24 +3811,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"cvx" = (
-/obj/effect/mob_spawn/human/briar{
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
-	name = "captain";
-	assignedrole = /datum/job/captain;
-	outfit = /datum/outfit/captain;
-	r_hand = /obj/item/weapon/sword/sabre/hook;
-	beltl = null;
-	beltr = null;
-	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Guileran";
-	mob_gender = "male";
-	possible_ages = list("Adult");
-	backr = null;
-	l_hand = /obj/item/weapon/shield/tower/metal
-	},
-/turf/open/openspace,
-/area/indoors/town/keep)
 "cvz" = (
 /obj/effect/mob_spawn/human/briar{
 	name = "maa axeman";
@@ -4813,7 +4795,7 @@
 	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
 	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
+	outfit = /datum/outfit/adventurer/profanepaladin;
 	gender = "female";
 	possible_ages = list("Adult");
 	mob_gender = "female";
@@ -5704,7 +5686,7 @@
 	beltl = null;
 	beltr = null;
 	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Guileran";
+	mob_name = "Sir Giuevere";
 	mob_gender = "male";
 	possible_ages = list("Adult");
 	backr = null;
@@ -6413,7 +6395,6 @@
 /turf/open/floor/metal,
 /area/under/town/basement)
 "dYW" = (
-/obj/structure/vine/black_briar/hvy,
 /turf/open/floor/ruinedwood,
 /area/outdoors/town/roofs)
 "dYX" = (
@@ -7353,7 +7334,7 @@
 	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
 	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
+	outfit = /datum/outfit/adventurer/profanepaladin;
 	gender = "female";
 	possible_ages = list("Adult");
 	mob_gender = "female";
@@ -9964,6 +9945,12 @@
 	dir = 9
 	},
 /area/indoors/town/keep)
+"geQ" = (
+/obj/structure/table/wood/large/corner{
+	dir = 9
+	},
+/turf/open/floor/naturalstone,
+/area/outdoors/mountains)
 "gfd" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/grown/log/tree/small,
@@ -9994,6 +9981,12 @@
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
+"ggb" = (
+/obj/structure/table/wood/large/corner{
+	dir = 6
+	},
+/turf/open/floor/naturalstone,
+/area/outdoors/mountains)
 "ggh" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt/road,
@@ -10552,24 +10545,6 @@
 /obj/structure/bed/mediocre,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"gxE" = (
-/obj/effect/mob_spawn/human/briar{
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
-	name = "captain";
-	assignedrole = /datum/job/captain;
-	outfit = /datum/outfit/captain;
-	r_hand = /obj/item/weapon/sword/sabre/hook;
-	beltl = null;
-	beltr = null;
-	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Guileran";
-	mob_gender = "male";
-	possible_ages = list("Adult");
-	backr = null;
-	l_hand = /obj/item/weapon/shield/tower/metal
-	},
-/turf/open/floor/cobblerock/snow,
-/area/outdoors/town/roofs)
 "gxF" = (
 /obj/structure/fluff/walldeco/psybanner{
 	pixel_y = 32
@@ -11428,6 +11403,12 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"hcC" = (
+/obj/structure/door/weak/bolt{
+	name = "door"
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "hcX" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -11752,10 +11733,6 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/cobble/alt,
 /area/indoors/town/shop)
-"hmt" = (
-/obj/structure/vine/black_briar/hvy,
-/turf/open/openspace,
-/area/outdoors/town/roofs)
 "hmD" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet,
@@ -12548,6 +12525,10 @@
 /obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
 /turf/open/floor/woodturned,
 /area/indoors/town/steward)
+"hOL" = (
+/obj/structure/bed/sleepingbag,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "hPq" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
@@ -13213,6 +13194,12 @@
 	},
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains)
+"iiJ" = (
+/obj/effect/decal/remains/human{
+	desc = "You get the idea this once belonged to a child."
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "iiL" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/snow/rough,
@@ -13243,7 +13230,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/bath)
 "ikz" = (
-/turf/closed/wall/window/stained/red,
+/turf/open/floor/churchbrick,
 /area/under/cave)
 "ikA" = (
 /obj/structure/fluff/walldeco/wantedposter/l,
@@ -16920,6 +16907,13 @@
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tame/saddled,
 /turf/open/floor/dirt,
 /area/indoors/soilsons)
+"kBV" = (
+/obj/structure/bed/sleepingbag,
+/obj/effect/landmark/start/adept{
+	dir = 8
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "kCe" = (
 /obj/structure/fluff/customsign{
 	name = "BUT THERE ARE RAILINGS NOW";
@@ -17433,6 +17427,12 @@
 /obj/effect/decal/cleanable/undeadash,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/town)
+"kPl" = (
+/obj/structure/table/wood/large/corner{
+	dir = 10
+	},
+/turf/open/floor/naturalstone,
+/area/outdoors/mountains)
 "kPs" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/town/keep)
@@ -17721,10 +17721,6 @@
 /obj/item/coin/silver/pile,
 /turf/open/floor/greenstone/glyph6,
 /area/indoors/town/vault)
-"kXy" = (
-/obj/structure/flora/grass/bush/wall/tall/tundra,
-/turf/open/floor/snow,
-/area/outdoors/mountains)
 "kXB" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -17958,10 +17954,6 @@
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/grass/cold,
 /area/outdoors/town)
-"lfv" = (
-/obj/structure/flora/grass/bush_meagre/tundra,
-/turf/open/floor/snow,
-/area/outdoors/mountains)
 "lfG" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/town)
@@ -18385,7 +18377,7 @@
 	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
 	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
+	outfit = /datum/outfit/adventurer/profanepaladin;
 	gender = "female";
 	possible_ages = list("Adult");
 	mob_gender = "female";
@@ -19311,6 +19303,10 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/water/cleanshallow,
 /area/under/cave)
+"mcM" = (
+/obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
+/turf/open/floor/ruinedwood,
+/area/outdoors/town/roofs)
 "mde" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/naturalstone,
@@ -20174,7 +20170,7 @@
 	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
 	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
+	outfit = /datum/outfit/adventurer/profanepaladin;
 	gender = "female";
 	possible_ages = list("Adult");
 	mob_gender = "female";
@@ -20955,6 +20951,12 @@
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/grass/cold,
 /area/indoors/town/orphanage)
+"ned" = (
+/obj/structure/table/wood/large/corner{
+	dir = 5
+	},
+/turf/open/floor/naturalstone,
+/area/outdoors/mountains)
 "nen" = (
 /obj/effect/decal/cleanable/debris/wood,
 /obj/item/natural/wood/plank{
@@ -21907,10 +21909,6 @@
 /obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/dirt,
 /area/outdoors/town)
-"nJI" = (
-/obj/structure/flora/grass/bush/wall/tundra,
-/turf/open/floor/snow,
-/area/outdoors/mountains)
 "nJL" = (
 /obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/cobblerock/snow,
@@ -21963,6 +21961,13 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/openspace,
 /area/outdoors/mountains)
+"nLD" = (
+/obj/structure/fluff/nest,
+/obj/effect/landmark/start/nightmaiden{
+	name = "Zizo Slave"
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "nLF" = (
 /obj/structure/fluff/walldeco/psybanner/red,
 /turf/closed/wall/mineral/decorstone,
@@ -23661,6 +23666,10 @@
 /obj/item/fertilizer/ash,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
+"oKX" = (
+/obj/effect/decal/remains/bigrat,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "oKZ" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -24931,7 +24940,7 @@
 /turf/open/floor/carpet/purple,
 /area/indoors/town/tavern)
 "pCh" = (
-/obj/structure/vine/black_briar/hvy,
+/obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
 /turf/open/floor/rooftop{
 	dir = 1
 	},
@@ -29242,7 +29251,6 @@
 /area/outdoors/town)
 "som" = (
 /obj/effect/decal/cleanable/sigil/N,
-/obj/effect/landmark/start/adept,
 /turf/open/floor/naturalstone,
 /area/outdoors/mountains)
 "soO" = (
@@ -29643,6 +29651,25 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
+"sDK" = (
+/obj/structure/vine/black_briar/medium,
+/obj/effect/mob_spawn/human/briar{
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/very_skilled/naked;
+	name = "captain";
+	assignedrole = /datum/job/captain;
+	outfit = /datum/outfit/captain;
+	r_hand = /obj/item/weapon/sword/sabre/hook;
+	beltl = null;
+	beltr = null;
+	ring = /obj/item/clothing/ring/gold/ravox;
+	mob_name = "Sir Giuevere";
+	mob_gender = "male";
+	possible_ages = list("Adult");
+	backr = null;
+	l_hand = /obj/item/weapon/shield/tower/metal
+	},
+/turf/open/floor/cobble,
+/area/outdoors/town/roofs)
 "sDR" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/key/apartments/apartment19,
@@ -30550,7 +30577,7 @@
 /area/indoors/town/church/chapel)
 "tgM" = (
 /turf/closed/wall/mineral/decostone/moss/red,
-/area/under/cave)
+/area/outdoors/mountains)
 "tha" = (
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/dirt,
@@ -31007,10 +31034,6 @@
 /obj/effect/gibspawner/human/bodypartless,
 /turf/open/floor/sand,
 /area/outdoors/town)
-"txa" = (
-/obj/effect/landmark/start/adept,
-/turf/open/floor/naturalstone,
-/area/outdoors/mountains)
 "txo" = (
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/town/basement)
@@ -32008,10 +32031,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
-"uiy" = (
-/obj/effect/landmark/start/adept,
-/turf/open/floor/churchbrick,
-/area/outdoors/mountains)
 "uiN" = (
 /obj/structure/table/stone_small,
 /obj/structure/fluff/walldeco/church/line{
@@ -34745,6 +34764,12 @@
 	dir = 4
 	},
 /area/outdoors/town/roofs)
+"vNd" = (
+/obj/structure/door/weak/bolt{
+	name = "slave pen"
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "vND" = (
 /obj/item/clothing/cloak/forrestercloak/snow{
 	desc = "A cloak meant to keep one's body warm in the cold of the permafrost lands."
@@ -35657,10 +35682,6 @@
 "wsG" = (
 /turf/closed/wall/mineral/decostone/moss/blue,
 /area/indoors/town/keep)
-"wsJ" = (
-/obj/structure/flora/grass/bush/tundra,
-/turf/open/floor/snow,
-/area/outdoors/mountains)
 "wsL" = (
 /obj/structure/fluff/railing/wood{
 	pixel_x = 5;
@@ -36042,12 +36063,6 @@
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep)
-"wED" = (
-/obj/effect/landmark/start/adept{
-	dir = 1
-	},
-/turf/open/floor/churchbrick,
-/area/outdoors/mountains)
 "wEM" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/wood,
@@ -38553,6 +38568,7 @@
 "yjN" = (
 /obj/effect/decal/cleanable/sigil,
 /obj/effect/decal/remains/cabbit,
+/obj/effect/gibspawner/human,
 /turf/open/floor/churchbrick,
 /area/outdoors/mountains)
 "yjS" = (
@@ -135253,7 +135269,7 @@ jiV
 jiV
 iHR
 qGM
-qWg
+fmF
 qWg
 qWg
 gmQ
@@ -135455,7 +135471,7 @@ jiV
 jiV
 jiV
 qWg
-qWg
+fmF
 qWg
 qWg
 gcZ
@@ -135657,7 +135673,7 @@ teP
 teP
 teP
 jsq
-qWg
+fmF
 qWg
 qWg
 krB
@@ -175450,12 +175466,12 @@ nHb
 nHb
 nHb
 nHb
-hmt
-hmt
-hmt
-hmt
-hmt
-fLE
+jSq
+jiV
+jiV
+jiV
+jiV
+lvO
 nHb
 nHb
 nHb
@@ -175652,12 +175668,12 @@ nHb
 nHb
 nHb
 nHb
-hmt
-hmt
-hmt
-hmt
-hmt
-fLE
+jiV
+jSq
+jiV
+jiV
+jiV
+lvO
 nHb
 nHb
 nHb
@@ -175854,12 +175870,12 @@ nHb
 nHb
 nHb
 nHb
-hmt
-hmt
-hmt
-hmt
-hmt
-fLE
+jiV
+jiV
+jiV
+jiV
+jiV
+lvO
 nHb
 nHb
 nHb
@@ -176056,12 +176072,12 @@ nHb
 nHb
 nHb
 nHb
-hmt
-hmt
-hmt
-hmt
-fLE
-fLE
+jiV
+jiV
+jiV
+jiV
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -176258,12 +176274,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-pCh
+jSq
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -176460,12 +176476,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-pCh
+jSq
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -176663,11 +176679,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-dYW
-fLE
-fLE
+jSq
+jSq
+mcM
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -176865,11 +176881,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -177067,11 +177083,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -177269,11 +177285,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -177471,11 +177487,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -177673,11 +177689,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-dYW
-fLE
-fLE
+jSq
+jSq
+mcM
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -177875,11 +177891,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -178077,11 +178093,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -178279,11 +178295,11 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -178480,12 +178496,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-pCh
-dYW
-fLE
-fLE
+jSq
+jSq
+jSq
+mcM
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -178682,12 +178698,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-pCh
+jSq
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -178884,12 +178900,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
+jSq
+jSq
 pCh
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -179086,12 +179102,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-pCh
+jSq
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -179288,12 +179304,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-pCh
+jSq
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -179490,12 +179506,12 @@ nHb
 nHb
 nHb
 nHb
-pCh
-pCh
-pCh
+jSq
+jSq
+jSq
 dYW
-fLE
-fLE
+lvO
+lvO
 nHb
 nHb
 nHb
@@ -206881,7 +206897,7 @@ mSU
 mSU
 cfu
 mSU
-lfv
+mSU
 pAE
 qJl
 qJl
@@ -207077,13 +207093,13 @@ nHb
 nHb
 nHb
 mSU
-lfv
-wsJ
-lfv
+mSU
+mSU
+mSU
 hgB
 hgB
 mSU
-wsJ
+mSU
 rUG
 qJl
 qJl
@@ -207281,11 +207297,11 @@ nHb
 pAE
 pAE
 vrW
-wsJ
 mSU
 mSU
-lfv
-wsJ
+mSU
+mSU
+mSU
 rUG
 qJl
 qJl
@@ -207483,11 +207499,11 @@ nHb
 qJl
 qJl
 vrW
-nJI
-lfv
-lfv
-wsJ
-lfv
+mSU
+mSU
+mSU
+mSU
+mSU
 pAE
 qJl
 qJl
@@ -207685,11 +207701,11 @@ qJl
 qJl
 qJl
 vrW
-wsJ
 mSU
 mSU
-wsJ
-wsJ
+mSU
+mSU
+mSU
 rUG
 qJl
 qJl
@@ -207887,7 +207903,7 @@ qJl
 qJl
 qJl
 vra
-nJI
+mSU
 mSU
 hgB
 sAS
@@ -208089,7 +208105,7 @@ qJl
 qJl
 pAE
 xGE
-wsJ
+mSU
 sAS
 sAS
 sAS
@@ -208294,7 +208310,7 @@ sAS
 sAS
 sAS
 hgB
-wsJ
+mSU
 pAE
 qJl
 qJl
@@ -208492,11 +208508,11 @@ qJl
 qJl
 qJl
 oho
-lfv
-wsJ
+mSU
+mSU
 mSU
 hgB
-wsJ
+mSU
 rUG
 qJl
 qJl
@@ -208694,11 +208710,11 @@ qJl
 qJl
 vra
 ikz
-uiy
 xeQ
 xeQ
-iEf
-nJI
+xeQ
+hgB
+mSU
 pAE
 qJl
 qJl
@@ -208900,7 +208916,7 @@ vcX
 uxp
 aVT
 jsT
-nJI
+mSU
 vrW
 qJl
 qJl
@@ -209101,8 +209117,8 @@ cXA
 som
 yjN
 iKc
-wED
-kXy
+xeQ
+mSU
 vrW
 qJl
 qJl
@@ -209501,8 +209517,8 @@ qJl
 qJl
 qJl
 vra
-ikz
-txa
+phG
+jsT
 jsT
 wDm
 ikz
@@ -209704,9 +209720,9 @@ qJl
 qJl
 qJl
 tgM
-ikz
-ikz
-ikz
+jsT
+jsT
+jsT
 oho
 qJl
 qJl
@@ -209900,16 +209916,16 @@ qJl
 qJl
 qJl
 qJl
+nLD
+nLD
 qJl
 qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
+sRj
+jsT
+jsT
+jsT
+jsT
+jsT
 qJl
 qJl
 qJl
@@ -210101,21 +210117,21 @@ qJl
 qJl
 qJl
 qJl
+nLD
+phG
+oKX
+iiJ
 qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
+jsT
+jsT
+geQ
+kPl
+jsT
+jsT
+hcC
+phG
+phG
+phG
 qJl
 qJl
 qJl
@@ -210303,21 +210319,21 @@ qJl
 qJl
 qJl
 qJl
+nLD
+phG
+phG
+phG
+vNd
+jsT
+jsT
+ned
+ggb
+jsT
+jsT
 qJl
 qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
+phG
+phG
 qJl
 qJl
 qJl
@@ -210505,22 +210521,22 @@ qJl
 qJl
 qJl
 qJl
+phG
+phG
+iiJ
+phG
 qJl
 qJl
+jsT
+jsT
+jsT
+jsT
+jsT
 qJl
 qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
+phG
+phG
+phG
 qJl
 qJl
 qJl
@@ -210710,19 +210726,19 @@ qJl
 qJl
 qJl
 qJl
-nHb
-nHb
 qJl
 qJl
 qJl
 qJl
+phG
+phG
 qJl
 qJl
 qJl
 qJl
-qJl
-qJl
-qJl
+kBV
+hOL
+kBV
 qJl
 qJl
 qJl
@@ -210913,9 +210929,9 @@ qJl
 qJl
 nHb
 nHb
-nHb
-nHb
-nHb
+sRj
+sRj
+sRj
 qJl
 qJl
 qJl
@@ -211117,8 +211133,8 @@ nHb
 nHb
 nHb
 nHb
-nHb
-nHb
+sRj
+sRj
 qJl
 qJl
 qJl
@@ -211321,7 +211337,7 @@ nHb
 nHb
 nHb
 nHb
-nHb
+sRj
 qJl
 qJl
 qJl
@@ -217640,7 +217656,7 @@ fEe
 fEe
 fEe
 lEz
-cvx
+hyb
 hyb
 hyb
 lEz
@@ -219256,7 +219272,7 @@ uWt
 uWt
 uWt
 uWt
-pKs
+sDK
 pKs
 pKs
 uWt
@@ -219448,7 +219464,7 @@ uJW
 uJW
 uJW
 oqY
-gxE
+oqY
 oqY
 uWt
 uWt

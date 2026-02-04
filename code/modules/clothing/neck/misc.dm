@@ -380,13 +380,27 @@
 
 /obj/item/clothing/neck/gorget/explosive
 	name = "collar of servitude"
-	icon_state = "collar_of_servitude"
+	icon_state = "manabindingcollar"
 	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
 		servile and obedient under threat of its explosive potential detonating on their necks."
 	clothing_flags = null
 	var/collar_unlocked = TRUE
 	var/is_in_neck_slot = FALSE
 	var/is_going_to_boom = FALSE
+	var/is_constricting = FALSE
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = null
+	blocksound = SOFTHIT
+	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
+	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	armor = ARMOR_LEATHER_GOOD
+	max_integrity = INTEGRITY_WORST
+	prevent_crits = CUT_AND_MINOR_CRITS
+	armor_class = AC_LIGHT
+	flags_inv = null
+
 
 /obj/item/clothing/neck/gorget/explosive/Initialize(mapload, ...)
 	. = ..()
@@ -399,14 +413,14 @@
 /obj/item/clothing/neck/gorget/explosive/examine(mob/user)
 	. = ..()
 	if(collar_unlocked)
-		. += "The red gem gleams faintly, it seems to be unpowered."
+		. += "The clasp is undone."
 	else
-		. += "The red gem gleams intensely, piercing your gaze with its aura."
+		. += "The clasp is locked."
 
 /obj/item/clothing/neck/gorget/explosive/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(slot == ITEM_SLOT_NECK)
-		to_chat(user, span_warning("The collar tightens its hold on you. A red aura emanates from its gem, reminding you of your lowly station."))
+		to_chat(user, span_warning("The collar tightens its hold on you. It is a reminder that you belong to Her."))
 		collar_unlocked = FALSE
 		is_in_neck_slot = TRUE
 		return
@@ -417,6 +431,8 @@
 /obj/item/clothing/neck/gorget/explosive/dropped(mob/user)
 	. = ..()
 	is_in_neck_slot = FALSE
+	if(is_constricting)
+		toggle_constrict()
 
 /obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
 	. = ..()
@@ -425,9 +441,11 @@
 
 	if(!collar_unlocked)
 		collar_unlocked = TRUE
-		to_chat(user, "The red gem inset in \the [src] dims its glow, it seems to be safe to take off now!")
+		to_chat(user, "The clasp loosens, it seems to be safe to take off now.")
+		if(is_constricting)
+			toggle_constrict()
 	else
-		to_chat(user, "Collar is already unlocked!")
+		to_chat(user, "[src] is already unlocked!")
 
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
@@ -443,36 +461,30 @@
 
 	return COMPONENT_ITEM_BLOCK_UNEQUIP
 
-/obj/item/clothing/neck/gorget/explosive/proc/prepare_to_go_boom()
-	if(is_going_to_boom)
-		is_going_to_boom = FALSE
-		visible_message(span_notice("Red aura of the [src] slowly fades away."))
+/obj/item/clothing/neck/gorget/explosive/proc/toggle_constrict()
+	if(!iscarbon(loc) || is_constricting)
+		STOP_PROCESSING(SSobj, src)
+		is_constricting = FALSE
 		return
+	START_PROCESSING(SSobj, src)
+	loc.visible_message(span_danger("[src] starts to tighten around [loc]!"), span_userdanger("[src] tightens around my throat!"))
+	is_constricting = TRUE
+	playsound(src, 'sound/foley/noosed.ogg', 60, 1, -1)
 
-	playsound(src, 'sound/music/musicbox_windup.ogg', 45)
-	visible_message(span_boldwarning("A red aura begins to glow heavily from the [src], it appears to be going off!"))
-	audible_message(span_boldwarning("You hear an eerie tune coming out of [src]"))
-
-	addtimer(CALLBACK(src, PROC_REF(go_boom)), 7.5 SECONDS)
-	is_going_to_boom = TRUE
-
-/obj/item/clothing/neck/gorget/explosive/proc/go_boom()
-	if(!is_in_neck_slot || !is_going_to_boom)
-		visible_message(span_notice("The red aura emanating from [src] stops!"))
+/obj/item/clothing/neck/gorget/explosive/process(delta_time)
+	if(!is_constricting)
+		return PROCESS_KILL
+	if(!iscarbon(loc))
+		toggle_constrict()
 		return
-
-	explosion(src, 1, 1, 2, 3) //first one to make sure wearer is damaged heavily
-	explosion(src, 1, 0, 0, 0) //finishes the deal
-
-	if(!istype(loc, /mob/living/carbon))
-		qdel(src)
+	var/mob/living/carbon/C = loc
+	if(C.get_item_by_slot(ITEM_SLOT_NECK) != src)
+		toggle_constrict()
 		return
-	var/mob/living/carbon/soon_to_be_headless = loc
-	var/obj/item/bodypart/head/to_decap = soon_to_be_headless.get_bodypart(BODY_ZONE_HEAD)
-	if(to_decap)
-		to_decap.dismember(BRUTE) //its a NECK collar
-
-	qdel(src)
+	if(HAS_TRAIT(C, TRAIT_NOBREATH))
+		return
+	if(C.adjustOxyLoss(6 * delta_time) && prob(30))
+		C.emote("choke")
 
 /obj/item/clothing/neck/gorget/explosive/zizo
 	name = "collar of obedience"
@@ -480,21 +492,41 @@
 	desc = "a collar worn by the slaves of Zizo's army. The unruly must know their place."
 
 /obj/item/clothing/ring/collar_detonator
-	name = "collar detonator"
+	name = "ring of obedience"
 	desc = "A ring bestowed upon the slavedrivers of Zizo's forces."
 	icon_state = "ring_onyx"
 
-/obj/item/clothing/ring/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/clothing/ring/collar_detonator/examine(mob/user)
 	. = ..()
-	if(!iscarbon(target))
-		return
+	. += span_info("Right click to select constrict/unconstrict a subject.")
 
-	var/mob/living/carbon/to_bomb = target
-	var/obj/item/clothing/neck/gorget/explosive/collar = to_bomb.get_item_by_slot(ITEM_SLOT_NECK)
-	if(istype(collar))
-		collar.prepare_to_go_boom()
-	else
-		to_chat(user, span_notice("Target is not wearing a collar of servitude!"))
+/obj/item/clothing/ring/collar_detonator/attack_hand_secondary(mob/living/user, params)
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(!istype(user))
+		return
+	var/list/mob/living/carbon/slaves = list()
+	var/mob/living/carbon/chosen_mob
+	if(!istype(user.patron, /datum/patron/inhumen/zizo))
+		to_chat(user, span_warning("I don't know what this is."))
+		return
+	for(var/mob/living/carbon/C in view(user, 5))
+		if(C.rogue_sneaking)
+			continue
+		var/obj/item/clothing/neck/gorget/explosive/zizo/slave_collar = C.get_item_by_slot(ITEM_SLOT_NECK)
+		if(istype(slave_collar))
+			slaves += C
+	if(length(slaves))
+		chosen_mob = browser_input_list(user, "Punish whom?", "ZIZO", slaves, timeout = 10 SECONDS)
+	if(!istype(chosen_mob))
+		return
+	var/obj/item/clothing/neck/gorget/explosive/zizo/slave_collar = chosen_mob.get_item_by_slot(ITEM_SLOT_NECK)
+	if(!istype(slave_collar))
+		return
+	if(slave_collar.collar_unlocked)
+		to_chat(user, span_warning("[src]'s collar is unlocked. It cannot constrict."))
+		return
+	slave_collar.toggle_constrict()
+
 
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"

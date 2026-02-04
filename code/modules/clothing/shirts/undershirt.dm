@@ -66,6 +66,12 @@
 	desc = "A tunic exposing much of the shoulders and neck. Shoulders?! How scandalous..."
 	icon_state = "lowcut"
 
+/obj/item/clothing/shirt/undershirt/lowcut/zizo
+	color = CLOTHING_SOOT_BLACK
+	r_sleeve_status = SLEEVE_TORN
+	l_sleeve_status = SLEEVE_TORN
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/shirt/undershirt/fancy
 	name = "fancy tunic"
 	desc = "A button-down shirt woven from fine silks with a decorated front and cuffs."
@@ -127,6 +133,12 @@
 
 /obj/item/clothing/shirt/undershirt/sash/colored/green
 	color = CLOTHING_SPRING_GREEN
+
+/obj/item/clothing/shirt/undershirt/sash/colored/purple
+	color = "#800080"
+
+/obj/item/clothing/shirt/undershirt/sash/colored/red
+	color = "#6a0000"
 
 /obj/item/clothing/shirt/undershirt/sash/colored/random/Initialize()
 	color = pick(CLOTHING_CHALK_WHITE, CLOTHING_ROYAL_RED, CLOTHING_LINEN, CLOTHING_MAGE_ORANGE, CLOTHING_ROYAL_TEAL, CLOTHING_SWAMPWEED)

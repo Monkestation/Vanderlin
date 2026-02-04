@@ -938,6 +938,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				GLOB.youngfolk_positions,
 				GLOB.allmig_positions,
 				GLOB.inquisition_positions,
+				GLOB.zizo_positions,
 			)
 
 			var/category_index = 0
@@ -985,6 +986,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						cat_name = "Outsiders"
 					if(INQUISITION)
 						cat_name = "Inquisition"
+					if(UNDEAD)
+						cat_name = "The Dark Lady"
 
 				var/category_html = ""
 				category_html += "<fieldset class='job-category-box' style='border-color: [cat_color];' id='fieldset-[cat_name]' data-collapsed='true'>"

@@ -458,6 +458,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		GLOB.youngfolk_positions,
 		GLOB.allmig_positions,
 		GLOB.inquisition_positions,
+
 	)
 
 	for(var/list/category in omegalist)
