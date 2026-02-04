@@ -235,6 +235,7 @@
 	icon_state = "sdagger"
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
+	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/steel
 
@@ -321,12 +322,13 @@
 	// name = "profane dagger"
 	// desc = "A profane dagger made of cursed black steel. Whispers emanate from the gem on its hilt."
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, FACE_STEAL)
-	sellprice = 250
+	max_blade_int = 300
 	icon_state = "pdagger"
 	melting_material = null
 	embedding = list("embed_chance" = 0) // Embedding the cursed dagger has the potential to cause duping issues. Keep it like this unless you want to do a lot of bug hunting.
 	resistance_flags = INDESTRUCTIBLE
 	stealthy_audio = TRUE
+	sellprice = 250
 
 /obj/item/weapon/knife/dagger/steel/profane/examine(mob/user)
 	. = ..()
@@ -506,7 +508,7 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	max_integrity = INTEGRITY_WORST - 70
-	max_blade_int = 30
+	max_blade_int = 50
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	sellprice = 5
@@ -544,7 +546,7 @@
 	desc = "A knife of an older design, the copper serves decent enough."
 	icon_state = "cdagger"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
-	max_blade_int = 75
+	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/copper
 	melt_amount = 50
