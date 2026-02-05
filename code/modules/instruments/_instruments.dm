@@ -92,7 +92,7 @@
 			return PROCESS_KILL
 	user.apply_status_effect(/datum/status_effect/buff/playing_music) // Handles regular stress event in tick()
 	var/boon = user?.get_learning_boon(/datum/skill/misc/music)
-	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.3) // And gain exp
+	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.25) // And gain exp
 
 	if(!HAS_TRAIT(user, TRAIT_BARDIC_TRAINING))
 		return

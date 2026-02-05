@@ -89,5 +89,17 @@
                 "refactor": "refactored click code to pass param lists directly, report any click issues"
             }
         ]
+    },
+    "2026-02-05": {
+        "realforest2001": [
+            {
+                "bugfix": "Blowing a kiss no longer reveals sneaking people."
+            }
+        ],
+        "PotatoTomahto": [
+            {
+                "refactor": "skill levels can now be decimals"
+            }
+        ]
     }
 }

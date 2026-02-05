@@ -4,7 +4,7 @@
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/mercenary/expegasusknight
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 5
+	total_positions = 0 //Disabled because Lakkari isn't lore-approved
 
 	jobstats = list(
 		STATKEY_END = 2,

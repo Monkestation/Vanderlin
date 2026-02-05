@@ -291,7 +291,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/pegasusknighthelm
-	name = "Lakkarian Pegasus Knight Helm (+Cloth)"
+	name = "Coifed Helmet (+Cloth)"
 	recipe_name = "a pegasus knight's helmet"
 	additional_items = list(/obj/item/natural/cloth)
 	created_item = /obj/item/clothing/head/helmet/pegasusknight
@@ -338,7 +338,7 @@
 	created_item = /obj/item/clothing/head/helmet/ironpot
 
 /datum/anvil_recipe/armor/iron/lakkariancap
-	name = "Lakkarian Cap (+ Gold Bar)"
+	name = "Crowned Cap (+ Gold Bar)"
 	recipe_name = "a sturdy lakkarian cap"
 	created_item = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	additional_items = list(/obj/item/ingot/gold)

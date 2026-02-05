@@ -30,7 +30,7 @@
 	var/found_table = locate(/obj/structure/table) in (loc)
 	var/obj/item/reagent_containers/glass/R = I
 	if(user.mind)
-		long_cooktime = (90 - ((user.get_skill_level(/datum/skill/craft/cooking))*15))
+		long_cooktime = (90 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*15))
 	if(isturf(loc)&& (found_table))
 		if(!istype(R))
 			return ..()
@@ -372,7 +372,7 @@
 /*	............   Churning butter   ................ */
 /obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		long_cooktime = (200 - ((user.get_skill_level(/datum/skill/craft/cooking))*22))
+		long_cooktime = (200 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*22))
 	if(istype(I, /obj/item/kitchen/spoon))
 		if(!reagents.has_reagent(/datum/reagent/consumable/milk/salted, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/salted_gote, 15))
 			to_chat(user, span_warning(">Not enough salted milk."))
@@ -460,7 +460,7 @@
 /*	............   Making fresh cheese   ................ */
 /obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		long_cooktime = (100 - ((user.get_skill_level(/datum/skill/craft/cooking))*12))
+		long_cooktime = (100 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*12))
 	if(istype(I, /obj/item/natural/cloth) && (user.used_intent.type == INTENT_USE || user.used_intent.type == INTENT_SOAK))
 		var/milk = null
 		var/cheese = null
@@ -513,7 +513,7 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese))
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
@@ -537,7 +537,7 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_two/attackby(obj/item/I, mob/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese))
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
@@ -561,7 +561,7 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_three/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese) && icon_state != "cheesewheel_end")
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)

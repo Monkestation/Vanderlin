@@ -383,7 +383,7 @@
 	var/mob/living/living_owner = owner
 	var/new_time = charge_time
 
-	new_time -= charge_time * living_owner.get_skill_level(associated_skill) * 0.05
+	new_time -= charge_time * living_owner.get_skill_level(associated_skill, TRUE) * 0.05
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)

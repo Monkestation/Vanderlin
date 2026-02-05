@@ -42,6 +42,8 @@
 		TRAIT_MALUMFIRE
 	)
 
+	skill_multipliers = list(/datum/skill/craft/blacksmithing = 1.25, /datum/skill/craft/armorsmithing = 1.25, /datum/skill/craft/weaponsmithing = 1.25)
+
 /datum/outfit/bapprentice
 	name = "Smithy Apprentice"
 	belt = /obj/item/storage/belt/leather/rope

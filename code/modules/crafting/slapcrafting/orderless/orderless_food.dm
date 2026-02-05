@@ -9,7 +9,7 @@
 	var/highest_quality = 0
 
 /datum/orderless_slapcraft/food/get_action_time(obj/item/attacking_item, mob/user)
-	return (action_time - ((user?.get_skill_level(related_skill)) * 5))
+	return (action_time - ((user?.get_skill_level(related_skill, TRUE)) * 5))
 
 /datum/orderless_slapcraft/food/before_process_item(obj/item/attacking_item, mob/user)
 	track_ingredient_quality(attacking_item)
