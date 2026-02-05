@@ -1,7 +1,6 @@
 /obj/item/speakerinq
 	name = "secret whisperer"
 	desc = "Sweet secrets whispered so freely."
-	var/speaking = TRUE
 	sellprice = 20
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "scomite"
@@ -17,7 +16,31 @@
 	sleeved = 'icons/roguetown/clothing/onmob/neck.dmi'
 	grid_width = 32
 	grid_height = 32
+	var/speaking = FALSE
 	var/fakename = "secret whisperer"
+
+/obj/item/speakerinq/Initialize()
+	. = ..()
+	SSroguemachine.scomm_machines += src
+
+/obj/item/speakerinq/Destroy()
+	SSroguemachine.scomm_machines -= src
+	return ..()
+
+/obj/item/speakerinq/attack_self(mob/user, params)
+	. = ..()
+	user.changeNext_move(6)
+	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	speaking = !speaking
+	update_appearance(UPDATE_ICON_STATE)
+	to_chat(user, span_info("I [speaking ? "unsilence" : "silence"] the whisperer."))
+
+/obj/item/speakerinq/update_icon_state()
+	. = ..()
+	if(speaking)
+		icon_state = "[initial(icon_state)]_active"
+	else
+		icon_state = initial(icon_state)
 
 /obj/item/speakerinq/proc/repeat_message(message, atom/A, tcolor, message_language)
 	if(A == src)
@@ -45,7 +68,6 @@
 	else
 		send_speech(message, 0, src, , spans, message_language=language)
 
-
 /obj/item/speakerinq/equipped(mob/user, slot)
 	. = ..()
 	switch(slot)
@@ -54,35 +76,11 @@
 			name = fakename
 	return TRUE
 
-
 /obj/item/speakerinq/dropped(mob/user, silent)
 	. = ..()
 	name = initial(name)
 	sleeved = null
 	mob_overlay_icon = null
-
-/obj/item/speakerinq/Destroy()
-	SSroguemachine.scomm_machines -= src
-	return ..()
-
-/obj/item/speakerinq/Initialize()
-	. = ..()
-	icon_state = "scomite_active"
-	update_icon()
-	SSroguemachine.scomm_machines += src
-
-/obj/item/speakerinq/MiddleClick(mob/user)
-	if(.)
-		return
-	user.changeNext_move(6)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
-	speaking = !speaking
-	to_chat(user, span_info("I [speaking ? "unsilence" : "silence"] the whisperer."))
-	if(speaking)
-		icon_state = "[initial(icon_state)]_active"
-	else
-		icon_state = "[initial(icon_state)]"
-	update_icon()
 
 /obj/item/listeningdevice
 	name = "listener"
@@ -131,7 +129,6 @@
 	label = uppertext(trim(input, 7))
 	inqdesc = "An ever-attentive ear... [span_notice("This ear's been bent. It's labelled as [label].")]"
 	desc = inqdesc
-	return
 
 /obj/item/listeningdevice/attack_hand_secondary(mob/user, params)
 	if(!hidden)
@@ -147,7 +144,7 @@
 	return TRUE
 
 /* - REVISIT IN A FUTURE PR. ATTACHABLE LISTENERS.
-/obj/item/listeningdevice/attack(mob/living/M, mob/living/user)
+/obj/item/listeningdevice/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!active)
 		to_chat(user, span_warning("[src] is inactive.."))
 		return FALSE
@@ -163,19 +160,22 @@
 
 	..()
 */
+
 /obj/item/listeningdevice/MiddleClick(mob/user)
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(loc, 'sound/misc/bug.ogg', 50, FALSE, -1)
 	active = !active
+	to_chat(user, span_info("I [active ? "undeafen" : "deafen"] the Listener."))
+	update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/listeningdevice/update_icon_state()
+	. = ..()
 	if(active)
 		icon_state = "[initial(icon_state)]_active"
 	else
 		icon_state = initial(icon_state)
-	to_chat(user, span_info("I [active ? "undeafen" : "deafen"] the Listener."))
-	update_icon()
-	return
 
 /obj/item/listeningdevice/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, original_message)
 	if(!active)

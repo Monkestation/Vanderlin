@@ -11,7 +11,7 @@
 	var/open = FALSE
 	var/old_render = TRUE
 
-/obj/item/paper/scroll/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/paper/scroll/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
 		if(!open)
 			to_chat(user, "<span class='warning'>Open me.</span>")
@@ -34,7 +34,7 @@
 				if("onbelt")
 					return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/paper/scroll/attack_self(mob/user, params)
+/obj/item/paper/scroll/attack_self(mob/user, list/modifiers)
 	if(mailer)
 		user.visible_message("<span class='notice'>[user] opens the missive from [mailer].</span>")
 		mailer = null
@@ -42,7 +42,7 @@
 		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 		return
 	if(!open)
-		attack_hand_secondary(user, params)
+		attack_hand_secondary(user, modifiers)
 		return
 	..()
 	user.update_inv_hands()
@@ -78,10 +78,10 @@
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 
-/obj/item/paper/scroll/attack_self_secondary(mob/user, params)
-	attack_hand_secondary(user, params)
+/obj/item/paper/scroll/attack_self_secondary(mob/user, list/modifiers)
+	attack_hand_secondary(user, modifiers)
 
-/obj/item/paper/scroll/attack_hand_secondary(mob/user, params)
+/obj/item/paper/scroll/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -164,7 +164,7 @@
 	else
 		name = initial(name)
 
-/obj/item/paper/scroll/cargo/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/paper/scroll/cargo/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	if(istype(P, /obj/item/natural/feather))
 		if(user.is_literate() && open)
 			if(signedname)
@@ -218,6 +218,11 @@
 	var/waxed
 	var/sliptype = 1
 	var/obj/item/inqarticles/indexer/paired
+
+/obj/item/paper/inqslip/Destroy()
+	paired = null
+	signee = null
+	return ..()
 
 /obj/item/paper/inqslip/read(mob/user)
 	if(!user.client || !user.hud_used)
@@ -295,17 +300,15 @@
 		signed = TRUE
 		signee = user
 		update_appearance()
-	else
-		return
 
-/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user)
+/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user, list/modifiers)
 	if(sealed)
 		return
 	if(signed)
 		to_chat(user, span_warning("It's already been signed."))
 		return
 	if(paired && !paired.full)
-		to_chat(user, span_warning("I should seperate [paired] from [src] before signing it."))
+		to_chat(user, span_warning("I should separate [paired] from [src] before signing it."))
 		return
 	if(sliptype != 2)
 		if(M != user)
@@ -338,7 +341,7 @@
 		sealed = FALSE
 		update_appearance()
 
-/obj/item/paper/inqslip/attack_hand_secondary(mob/user, params)
+/obj/item/paper/inqslip/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(paired)
 		if(!user.get_active_held_item())
@@ -417,12 +420,9 @@
 			else
 				to_chat(user,  span_warning("[Q] isn't completely full."))
 
-/obj/item/paper/inqslip/attack_hand_secondary(mob/user, params)
-	. = ..()
-
 /obj/item/merctoken
 	name = "mercenary token"
-	desc = "A small, palm-fitting bound scroll - a minuature writ of commendation for a mercenary under MGE."
+	desc = "A small, palm-fitting bound scroll - a miniature writ of commendation for a mercenary under MGE."
 	icon_state = "merctoken"
 	icon = 'icons/roguetown/items/misc.dmi'
 	w_class = WEIGHT_CLASS_TINY
@@ -441,7 +441,7 @@
 	else
 		. += span_info("SIGNEE: [signee], [signeejob] of Vanderlin.")
 
-/obj/item/merctoken/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/merctoken/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
 		if(!user.can_read(src))
 			to_chat(user, span_warning("Even a reader would find these verba incomprehensible."))
@@ -465,58 +465,79 @@
 
 /obj/item/paper/scroll/frumentarii/roundstart/Initialize()
 	. = ..()
-	real_names |= GLOB.roundstart_court_agents
+	if(SSticker.current_state < GAME_STATE_PLAYING)
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(get_agents)))
+	else
+		get_agents()
+
+/obj/item/paper/scroll/frumentarii/roundstart/proc/get_agents()
+	for(var/CA in GLOB.roundstart_court_agents)
+		fingers[CA] = TRUE
+	rebuild_info()
 
 /obj/item/paper/scroll/frumentarii
 	name = "frumentarii scroll"
 	desc = "A list of the hand's fingers. Strike a candidate with this to allow them servitude. Use a writing utensil to cross out a finger."
 
-	var/list/real_names = list()
-	var/list/removed_names = list()
-	var/names = 12
+	//assoc list of TRUE and FALSE. TRUE indicates the agent is an active finger while FALSE is a severed finger
+	var/list/fingers = list()
+	var/names = 5
+	writable = FALSE
+	resistance_flags = FIRE_PROOF // let's maybe not burn this
 
-/obj/item/paper/scroll/frumentarii/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/paper/scroll/frumentarii/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
-	if(length(real_names) + length(removed_names) >= names)
-		to_chat(user, span_notice("The scroll is full"))
+	if(!user.mind)
 		return
-
+	if(!HAS_TRAIT(user, TRAIT_NOBLE))
+		return
+	if(length(fingers) >= names)
+		to_chat(user, span_notice("[src] is full"))
+		return
 	if(!isliving(target))
 		return
 	var/mob/living/attacked_target = target
-
-	if(attacked_target.real_name in real_names)
-		return
-
 	if(!attacked_target.client)
 		return
+	if(attacked_target.real_name in fingers)
+		return
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		if(H.family_datum == SSfamilytree.ruling_family)
+			to_chat(user, span_warning("I can't turn a member of the royal family into a finger."))
+			return
 
 	var/choice = input(attacked_target,"Do you wish to become one of the Hand's fingers?","Binding Contract",null) as null|anything in list("Yes", "No")
-
 	if(choice != "Yes")
 		return
 
-	real_names |= attacked_target.real_name
-	removed_names -= attacked_target.real_name
-
-	user.mind.cached_frumentarii |= attacked_target.real_name
+	fingers[attacked_target.real_name] = TRUE
+	user.mind.cached_frumentarii = fingers
 	rebuild_info()
 
-
-/obj/item/paper/scroll/frumentarii/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/paper/scroll/frumentarii/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	. = ..()
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
-		var/remove = input(user,"Who are we removing from the fingers","Binding Contract",null) as null|anything in real_names
-		if(remove)
-			real_names -= remove
-			removed_names |= remove
-
+		if(!open)
+			return
+		var/list/choices = list()
+		for(var/F in fingers)
+			if(fingers[F] == TRUE)
+				choices[F] = F
+			else
+				choices["<s>[F]</s>"] = F
+		var/choice = browser_input_list(user, "Reattach/Sever a Finger", "THE LIST", choices)
+		if(!choice || QDELETED(src) || QDELETED(user))
+			return
+		var/finger = choices[choice]
+		fingers[finger] = !fingers[finger]
+		user.mind.cached_frumentarii = fingers
+		playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
 	rebuild_info()
 
 /obj/item/paper/scroll/frumentarii/read(mob/user)
 	. = ..()
-	user.mind.cached_frumentarii |= real_names
-	user.mind.cached_frumentarii -= removed_names
+	user.mind.cached_frumentarii += fingers
 
 /obj/item/paper/scroll/frumentarii/proc/rebuild_info()
 	info = null
@@ -524,14 +545,11 @@
 	info += "<h2 style='color:#06080F;font-family:\"Segoe Script\"'>Known Agents</h2>"
 	info += "<hr/>"
 
-	if(length(real_names))
-		for(var/real_name in real_names)
-			info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[real_name]</li><br/>"
-
-	if(length(removed_names))
-		for(var/removed_name in removed_names)
-			info += "<s><li style='color:#610018;font-size:11px;font-family:\"Segoe Script\"'>[removed_name]</li></s><br/>"
-
+	for(var/F in fingers)
+		if(fingers[F])
+			info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[F]</li><br/>"
+		else
+			info += "<s><li style='color:#610018;font-size:11px;font-family:\"Segoe Script\"'>[F]</li></s><br/>"
 	info += "</div>"
 
 
@@ -540,8 +558,10 @@
 	desc = "Paper etched with the floor plans for the entire keep."
 
 /obj/item/paper/scroll/keep_plans/read(mob/user)
+	if(!user.mind)
+		return
 	to_chat(user, span_purple("<b>These look like secret passages...</b>"))
-	ADD_TRAIT(user, TRAIT_KNOWKEEPPLANS, TRAIT_GENERIC)
+	ADD_TRAIT(user.mind, TRAIT_KNOW_KEEP_DOORS, "[type]")
 	user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 
 
@@ -570,7 +590,7 @@
 	var/writers_name
 	var/faction
 
-/obj/item/paper/scroll/sell_price_changes/New(loc, list/prices, faction_name)
+/obj/item/paper/scroll/sell_price_changes/Initialize(mapload, list/prices, faction_name)
 	. = ..()
 
 	faction = faction_name

@@ -74,7 +74,7 @@
 			say("New account created.")
 			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 
-/obj/structure/fake_machine/atm/attackby(obj/item/P, mob/user, params)
+/obj/structure/fake_machine/atm/attackby(obj/item/P, mob/user, list/modifiers)
 	if(ishuman(user))
 		if(istype(P, /obj/item/coin/inqcoin))
 			return

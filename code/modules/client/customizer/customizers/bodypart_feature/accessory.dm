@@ -43,10 +43,15 @@
 	allows_disabling = TRUE
 	default_disabled = TRUE
 
+/datum/customizer/bodypart_feature/accessory/is_allowed(datum/preferences/prefs)
+	. = ..()
+	if(prefs.age == AGE_CHILD)
+		return FALSE
+
 /datum/customizer_choice/bodypart_feature/accessory
 	name = "Accessory"
 	feature_type = /datum/bodypart_feature/accessory
-	allows_accessory_color_customization = TRUE
+	allows_accessory_color_customization = FALSE
 	sprite_accessories = list(
 		/datum/sprite_accessory/accessories/nothing,
 		/datum/sprite_accessory/accessories/earrings/sil,
@@ -56,4 +61,18 @@
 		/datum/sprite_accessory/accessories/chokere,
 		/datum/sprite_accessory/accessories/eyepierce,
 		/datum/sprite_accessory/accessories/eyepierce/alt,
+	)
+
+/datum/customizer/bodypart_feature/accessory/rakshari
+	customizer_choices = list(/datum/customizer_choice/bodypart_feature/accessory/rakshari)
+
+/datum/customizer_choice/bodypart_feature/accessory/rakshari
+	name = "Accessory"
+	feature_type = /datum/bodypart_feature/accessory
+	allows_accessory_color_customization = FALSE
+	sprite_accessories = list(
+	/datum/sprite_accessory/accessories/rakshari/gilded_g,
+	/datum/sprite_accessory/accessories/rakshari/cat_earrings_g,
+	/datum/sprite_accessory/accessories/rakshari/gilded_s,
+	/datum/sprite_accessory/accessories/rakshari/cat_earrings_s,
 	)

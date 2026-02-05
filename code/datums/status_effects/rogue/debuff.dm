@@ -91,24 +91,6 @@
 	. = ..()
 	to_chat(owner, "<span class='danger'>I am starving to death! I need to eat something before it's too late!</span>")
 
-
-//SILVER DAGGER EFFECT
-
-/datum/status_effect/debuff/silver_curse
-	id = "silver_curse"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_curse
-	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
-	duration = 1 MINUTES
-
-/*	Pointless subtype, code doesnt handle it well, dont use
-/datum/status_effect/debuff/silver_curse/greater
-	duration = 10 SECONDS
-*/
-/atom/movable/screen/alert/status_effect/debuff/silver_curse
-	name = "Silver Curse"
-	desc = "My BANE!"
-	icon_state = "hunger3"
-
 /datum/status_effect/debuff/wiz
 	id = "wiz"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/wiz
@@ -345,7 +327,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/netted
 	name = "Net"
-	desc = "<span class='boldwarning'>A net was thrown on me.. how can I move?</span>\n"
+	desc = "<span class='boldwarning'>A net was thrown on me... how can I move?</span>\n"
 	icon_state = "muscles"
 
 /datum/status_effect/debuff/netted
@@ -405,18 +387,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/revive
 	name = "Revival Sickness"
-	desc = "<span class='warning'>I have returned from oblivion.. but the fatigue of death still affects me.</span>\n"
-	icon_state = "muscles"
-
-/datum/status_effect/debuff/viciousmockery
-	id = "viciousmockery"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/viciousmockery
-	duration = 1 MINUTES
-	effectedstats = list(STATKEY_STR = -2, STATKEY_SPD = -2,STATKEY_END = -2)
-
-/atom/movable/screen/alert/status_effect/debuff/viciousmockery
-	name = "Vicious Mockery"
-	desc = "<span class='warning'>THAT SPOONY BARD! ARGH!</span>\n"
+	desc = "<span class='warning'>I have returned from oblivion... but the fatigue of death still affects me.</span>\n"
 	icon_state = "muscles"
 
 /datum/status_effect/debuff/chilled
@@ -462,7 +433,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/drunk
 	name = "Eoran Wine"
-	desc = span_warning("I am intoxicated from ambromsia not meant for mortal mouths.\n")
+	desc = span_warning("I am intoxicated from ambrosia not meant for mortal mouths.\n")
 	icon_state = "drunk"
 
 /datum/status_effect/debuff/mesmerised
@@ -473,7 +444,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/mesmerised
 	name = "Mesmerised"
-	desc = span_warning("Their beauty is otherwordly..")
+	desc = span_warning("Their beauty is otherworldly...")
 	icon_state = "acid"
 
 
@@ -485,7 +456,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/call_to_slaughter
 	name = "Call to Slaughter"
-	desc = "A putrid rotting scent fills your nose as Graggar's call for slaughter rattles you to your core.."
+	desc = "A putrid rotting scent fills your nose as Graggar's call for slaughter rattles you to your core..."
 	icon_state = "call_to_slaughter"
 
 /datum/status_effect/debuff/baothadruqks
@@ -496,7 +467,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/baothadruqks
 	name = "Baothan Dust"
-	desc = span_warning("Someone blew some powders at me..\n")
+	desc = span_warning("Someone blew some powders at me...\n")
 	icon_state = "drunk"
 
 /datum/status_effect/debuff/lux_drained
@@ -613,3 +584,14 @@
 	name = "Electrified"
 	desc = "Your body is charged with unstable electricity!"
 	icon_state = "dazed"
+
+/datum/status_effect/debuff/cursed
+	id = "cursed"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/cursed
+	effectedstats = list(STATKEY_LCK = -5) // More severe so that the permanent debuff from having the perk makes it actually worth it.
+	duration = 10 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/cursed
+	name = "Cursed"
+	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
+	icon_state = "debuff"

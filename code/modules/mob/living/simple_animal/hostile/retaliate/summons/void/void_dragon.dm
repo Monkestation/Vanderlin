@@ -29,7 +29,7 @@
 	tier = 5
 	speak_emote = list("roars")
 	base_intents = list(/datum/intent/unarmed/dragonclaw)
-	faction = list("abberant")
+	faction = list("aberrant")
 	melee_damage_lower = 40
 	melee_damage_upper = 40
 	retreat_distance = 0
@@ -103,8 +103,7 @@
 		return
 	var/turf/targetturf = get_turf(target)
 	var/last_dist = 0
-	for(var/t in spiral_range_turfs(4, targetturf))
-		var/turf/T = t
+	for(var/turf/T as anything in spiral_range_turfs(4, targetturf))
 		if(!T)
 			continue
 		var/dist = get_dist(targetturf, T)
@@ -138,7 +137,7 @@
 /mob/living/simple_animal/hostile/retaliate/voiddragon/proc/summon_obelisk()
 	var/list/spawnLists = list(/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk,/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk)
 	var/reinforcement_count = 2
-	src.visible_message(span_cultbigbold("[src] summons abberant obelisks from beneath the ground."))
+	src.visible_message(span_cultbigbold("[src] summons aberrant obelisks from beneath the ground."))
 	while(reinforcement_count > 0)
 		var/list/turflist = list()
 		for(var/turf/t in RANGE_TURFS(1, src))
@@ -202,7 +201,7 @@
 	if(!target)
 		return
 
-	playsound(loc, 'sound/vo/mobs/vdragon/drgnroar.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/vo/mobs/vdragon/drgnroar.ogg', 50, TRUE, -1)
 	controller.blackboard[BB_DRAGON_SWOOPING] |= SWOOP_DAMAGEABLE
 	ADD_TRAIT(src, TRAIT_MOVE_FLYING, AI_ATTACK_TRAIT)
 	density = FALSE
@@ -258,7 +257,7 @@
 	controller.blackboard[BB_DRAGON_SWOOPING] &= ~SWOOP_INVULNERABLE
 	mouse_opacity = initial(mouse_opacity)
 	icon_state = "[initial(icon_state)]"
-	playsound(loc, 'sound/misc/meteorimpact.ogg', 200, TRUE)
+	playsound(src, 'sound/misc/meteorimpact.ogg', 200, TRUE)
 	for(var/mob/living/L in orange(1, src))
 		if(L.stat)
 			visible_message(span_warning("[src] slams down on [L], crushing [L.p_them()]!"))
@@ -300,7 +299,7 @@
 	ai_controller.PauseAi(5 SECONDS)
 	if(do_after(user, 5 SECONDS, target = src))
 		user.Beam(target,icon_state="lightning[rand(1,12)]",time=5)
-		src.visible_message(span_colossus("[src] unleashes a storm of lightning from it's maw."))
+		src.visible_message(span_colossus("[src] unleashes a storm of lightning from its maw."))
 		Bolt(user,target,30,5,user)
 		src.move_resist = initial(src.move_resist)
 
@@ -470,7 +469,7 @@
 
 	new /obj/effect/temp_visual/dragon_explosion_target(T)
 
-	playsound(get_turf(src), 'sound/magic/charging_lightning.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/charging_lightning.ogg', 100, TRUE)
 
 	addtimer(CALLBACK(src, PROC_REF(void_explosion_detonate), T), 3 SECONDS)
 
@@ -497,7 +496,7 @@
 
 	incorporeal_move = INCORPOREAL_MOVE_JAUNT
 	status_flags |= GODMODE
-	playsound(get_turf(src), 'sound/magic/ethereal_enter.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/ethereal_enter.ogg', 100, TRUE)
 	alpha = 128
 
 	var/phase_attacks = rand(3, 5)
@@ -535,7 +534,7 @@
 	status_flags &= ~GODMODE
 	alpha = initial(alpha)
 
-	playsound(get_turf(src), 'sound/magic/ethereal_exit.ogg', 100, TRUE)
+	playsound(src, 'sound/magic/ethereal_exit.ogg', 100, TRUE)
 	visible_message(span_colossus("[src] phases back into reality!"))
 
 	Stun(1 SECONDS)
@@ -729,7 +728,7 @@
 	if(world.time >= next_stage_time && corruption_stage < max_stage)
 		advance_corruption_stage()
 
-	attempt_spread()
+	spread()
 
 /datum/status_effect/void_corruption/proc/apply_damage()
 	if(QDELETED(owner) || owner.stat == DEAD)
@@ -745,7 +744,7 @@
 		to_chat(owner, span_warning("The void corruption burns my flesh!"))
 
 	if(corruption_stage >= 2 && prob(25))
-		owner.confused += 2
+		owner.adjust_confusion(4 SECONDS)
 
 	if(corruption_stage >= 3 && prob(15))
 		owner.Paralyze(0.5 SECONDS)
@@ -765,7 +764,7 @@
 	damage_tick = initial(damage_tick) * (1 - (corruption_stage * 0.2))  // Damage occurs more frequently
 	spread_chance = initial(spread_chance) + (corruption_stage * 10)     // More likely to spread
 
-/datum/status_effect/void_corruption/proc/attempt_spread()
+/datum/status_effect/void_corruption/proc/spread()
 	if(corruption_stage < 2 || !prob(spread_chance))
 		return
 

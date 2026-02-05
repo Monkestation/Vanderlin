@@ -153,9 +153,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/get_biomass_amounts()
 	return list(
-		1 = tier_1_biomass_amount,
-		2 = tier_2_biomass_amount,
-		3 = tier_3_biomass_amount,
+		tier_1_biomass_amount,
+		tier_2_biomass_amount,
+		tier_3_biomass_amount,
 		)
 
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/attempt_lay_egg(tier)
@@ -205,7 +205,7 @@
 	adjust_biomass(2, round(nutriments / 150, 0.1))
 	adjust_biomass(3, round(nutriments / 500, 0.1))
 
-/mob/living/simple_animal/hostile/retaliate/troll/broodmother/MiddleClickOn(atom/A, params) // it's so bad :sob: I'm so sorry
+/mob/living/simple_animal/hostile/retaliate/troll/broodmother/MiddleClickOn(atom/A, list/modifiers) // it's so bad :sob: I'm so sorry
 	. = ..()
 	if(isanimal(A))
 		var/mob/living/simple_animal/animal = A
@@ -244,7 +244,7 @@
 
 /obj/structure/broodmother_egg
 	name = "egg"
-	desc = "an egg..."
+	desc = "An egg..."
 	abstract_type = /obj/structure/broodmother_egg
 	icon = 'icons/obj/broodmother_32x.dmi'
 	var/hatched = FALSE

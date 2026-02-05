@@ -453,7 +453,7 @@ It takes into account:
 NOTE: if your atom has non-standard bounds then this proc
 will handle it, but:
  * if the bounds are even, then there are an even amount of "middle" turfs, the one to the EAST, NORTH, or BOTH is picked
-(this may seem bad, but you're atleast as close to the center of the atom as possible, better than byond's default loc being all the way off)
+(this may seem bad, but you're at least as close to the center of the atom as possible, better than byond's default loc being all the way off)
  * if the bounds are odd, the true middle turf of the atom is returned
 
 */
@@ -695,6 +695,12 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 		return 1
 	if (!initial_delay)
 		initial_delay = world.tick_lag
+// Unit tests are not the normal environment. The mc can get absolutely thigh crushed, and sleeping procs running for ages is much more common
+// We don't want spurious hard deletes off this, so let's only sleep for the requested period of time here yeah?
+#ifdef UNIT_TESTS
+	sleep(initial_delay)
+	return CEILING(DS2TICKS(initial_delay), 1)
+#else
 	. = 0
 	var/i = DS2TICKS(initial_delay)
 	do
@@ -702,6 +708,7 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 		sleep(i*world.tick_lag*DELTA_CALC)
 		i *= 2
 	while (TICK_USAGE > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
+#endif
 
 #undef DELTA_CALC
 

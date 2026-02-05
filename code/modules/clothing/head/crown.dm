@@ -13,12 +13,12 @@
 
 /obj/item/clothing/head/crown/circlet/golddiadem
 	name = "gold diadem"
-	desc = "A luxurious diadem forged out of gold. Diadems are often associated with the Humen boy-kings of the early Grenzelhoftian Empire."
+	desc = "A luxurious diadem forged out of gold. Often associated with the nobility of the early Grenzelhoftian Empire."
 	icon_state = "diadem_g"
 
 /obj/item/clothing/head/crown/circlet/silverdiadem
 	name = "silver diadem"
-	desc = "A luxurious diadem forged out of silver. Diadems are often associated with the Humen boy-kings of the early Grenzelhoftian Empire."
+	desc = "A luxurious diadem forged out of silver. Often associated with the nobility of the early Grenzelhoftian Empire "
 	icon_state = "diadem_s"
 	sellprice = VALUE_SILVER_ITEM
 
@@ -28,12 +28,12 @@
 
 /obj/item/clothing/head/crown/circlet/goldheaddress
 	name = "zenarii headdress"
-	desc = "a fancy headdress made out of zenarii. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
+	desc = "A fancy headdress made out of zenarii. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_g"
 
 /obj/item/clothing/head/crown/circlet/silverheaddress
 	name = "ziliquae headdress"
-	desc = "a fancy headdress made out of ziliquae. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
+	desc = "A fancy headdress made out of ziliquae. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_s"
 	sellprice = VALUE_SILVER_ITEM
 
@@ -133,11 +133,12 @@
 	icon_state = "sparrowcrown"
 	sellprice = VALUE_GOLD_ITEM
 
-/obj/item/clothing/head/crown/hemhem
+/*obj/item/clothing/head/crown/hemhem
 	name = "hemhem crown"
 	desc = "A large ceremonial crown heavily associated with the Hemhem desert, located in the Queendom of Lakkari. It looks pretty heavy."
 	icon_state = "hemhem"
 	sellprice = VALUE_GOLD_ITEM
+*/
 
 /obj/item/clothing/head/crown/circlet/vision
 	name = "mystical circlet"

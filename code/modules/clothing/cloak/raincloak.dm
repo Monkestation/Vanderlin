@@ -5,6 +5,7 @@
 	color = null
 	icon_state = "rain_cloak"
 	item_state = "rain_cloak"
+	resistance_flags = FLAMMABLE
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 //	body_parts_covered = ARMS|CHEST
@@ -17,6 +18,7 @@
 	toggle_icon_state = FALSE
 	salvage_result = /obj/item/natural/hide/cured
 	color = CLOTHING_BARK_BROWN
+	wetable = FALSE
 
 /obj/item/clothing/cloak/raincloak/Initialize(mapload, ...)
 	. = ..()
@@ -66,6 +68,7 @@
 	dynamic_hair_suffix = ""
 	edelay_type = 1 // Leaving as 1 so you get that small do_after for dramatic purposes
 	body_parts_covered = HEAD
+	resistance_flags = FLAMMABLE
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	block2add = FOV_BEHIND
 

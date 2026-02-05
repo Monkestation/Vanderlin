@@ -4,7 +4,7 @@
 	/// List of items embedded in this bodypart
 	var/list/obj/item/embedded_objects = list()
 	/// Bandage, if this ever hard dels thats fucking dumb lol
-	var/obj/item/bandage
+	var/obj/item/natural/cloth/bandage
 
 /// Checks if we have any embedded objects whatsoever
 /obj/item/bodypart/proc/has_embedded_objects()
@@ -123,6 +123,8 @@
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
 		bleed_rate += embedded.embedding.embedded_bloodloss
+	if(bandage)
+		bleed_rate *= bandage?.bandage_effectiveness
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
@@ -569,27 +571,32 @@
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage_expire()
+	var/bleed_rate = get_bleed_rate()
 	if(!bandage)
 		return FALSE
-	var/bandage_effectiveness = 0.5
+	if(!bleed_rate)
+		return FALSE
+
+	var/bandage_health = 1
 	if(istype(bandage, /obj/item/natural/cloth))
 		var/obj/item/natural/cloth/cloth = bandage
-		bandage_effectiveness = cloth.bandage_effectiveness
-	var/highest_bleed_rate = 0
-	for(var/datum/wound/wound as anything in wounds)
-		if(wound.bleed_rate < highest_bleed_rate)
-			continue
-		if(wound.is_sewn())
-			continue
-		highest_bleed_rate = wound.bleed_rate
-	for(var/obj/item/embedded as anything in embedded_objects)
-		if(!embedded.embedding.embedded_bloodloss)
-			continue
-		if(embedded.embedding.embedded_bloodloss < highest_bleed_rate)
-			continue
-		highest_bleed_rate = embedded.embedding.embedded_bloodloss
-	highest_bleed_rate = round(highest_bleed_rate, 0.1)
-	if(bandage_effectiveness < highest_bleed_rate)
+
+		if(cloth.reagents && cloth.reagents.total_volume > 0)
+			if(owner && owner.reagents)
+				for(var/datum/reagent/R in cloth.reagents.reagent_list)
+					var/amount_to_transfer = min(R.volume, R.metabolization_rate)
+					if(amount_to_transfer > 0)
+
+						R.on_bodypart_absorb(src, owner, amount_to_transfer)
+						cloth.reagents.remove_reagent(R.type, amount_to_transfer)
+
+		if(owner)
+			owner.transfer_blood_to(cloth, bleed_rate * 0.25)
+
+		cloth.bandage_health -= bleed_rate
+		bandage_health = cloth.bandage_health
+
+	if(bandage_health <= 0)
 		return bandage_expire()
 	return FALSE
 
@@ -599,7 +606,8 @@
 	if(!bandage)
 		return FALSE
 	if(owner.stat != DEAD)
-		to_chat(owner, "<span class='warning'>Blood soaks through the bandage on my [name].</span>")
+		to_chat(owner, span_warning("Blood soaks through the bandage on my [name]."))
+		bandage.bandage_effectiveness = 1
 	return bandage.add_mob_blood(owner)
 
 /obj/item/bodypart/proc/remove_bandage()

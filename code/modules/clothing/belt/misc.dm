@@ -37,6 +37,15 @@
 	)
 
 
+//Adventurer's belt start with a needle, cloth and just that, good luck buddy
+
+/obj/item/storage/belt/leather/adventurer
+	populate_contents = list(
+		/obj/item/needle/thorn,
+		/obj/item/natural/cloth,
+	)
+
+
 //Garrison's belt starts with a simple needle, and a key to their hideout.
 
 /obj/item/storage/belt/leather/fgarrison
@@ -108,12 +117,27 @@
 	salvage_result = /obj/item/rope
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
 
-/obj/item/storage/belt/leather/rope/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/rope/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
 		qdel(src)
 		user.put_in_active_hand(new salvage_result(get_turf(user)))
+
+/obj/item/storage/belt/leather/rope/dark
+	color = "#505050"
+
+/obj/item/storage/belt/leather/suspenders
+	name = "suspenders"
+	desc = "A pair of suspenders which go over the shoulders. Used for keeping one's pants in place in an admittably fashionable style."
+	icon_state = "suspenders"
+	alternate_worn_layer = ARMOR_LAYER
+
+/obj/item/storage/belt/leather/cloth_belt
+	name = "cloth belt"
+	desc = "This belt has been sewn out of cloth, as opposed to tied. Which makes it superior. Obviously."
+	icon_state = "clothsash"
+	salvage_result = /obj/item/natural/cloth
 
 /obj/item/storage/belt/leather/cloth
 	name = "cloth sash"
@@ -122,7 +146,7 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
 
-/obj/item/storage/belt/leather/cloth/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/cloth/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
@@ -266,7 +290,7 @@
 	icon_state = "osatchel"
 	item_state = "osatchel"
 
-/obj/item/storage/backpack/satchel/mule/PopulateContents()
+/obj/item/storage/backpack/satchel/mule/populate_contents()
 	for(var/i in 1 to 3)
 		switch(rand(1,4))
 			if(1)
@@ -366,6 +390,13 @@
 		/obj/item/natural/bundle/fibers/full,
 	)
 
+/obj/item/storage/backpack/satchel/musketeer
+	populate_contents = list(
+		/obj/item/weapon/knife/dagger/bayonet,
+		/obj/item/storage/belt/pouch/coins/poor,
+		/obj/item/reagent_containers/glass/bottle/aflask
+	)
+
 /obj/item/storage/belt/leather/knifebelt
 	name = "tossblade belt"
 	desc = "A many-slotted belt meant for tossblades. Little room left over."
@@ -397,7 +428,7 @@
 		if(length(contents) < max_storage)
 			return SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, FALSE)
 
-/obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, params)
+/obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, list/modifiers)
 	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))
 		if(SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, user, TRUE))
 			to_chat(usr, span_notice("I discreetly slip [A] into [src]."))
@@ -406,7 +437,7 @@
 		return TRUE
 	. = ..()
 
-/obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, params)
+/obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, list/modifiers)
 	if(length(contents))
 		var/list/knives = list()
 		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE_TYPE, /obj/item/weapon/knife/throwingknife, drop_location(), amount = 1, check_adjacent = TRUE, user = user, inserted = knives)
@@ -509,7 +540,7 @@
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
 
 
-/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, params)
+/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, list/modifiers)
 	. = ..()
 	user.visible_message("[user] tries to put [H] into [src].", "You try to put [H] into [src].")
 

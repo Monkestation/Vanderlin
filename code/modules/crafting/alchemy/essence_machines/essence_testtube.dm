@@ -1,6 +1,6 @@
 /obj/machinery/essence/test_tube
 	name = "homonculus breeding tube"
-	desc = "A large glass tank for creating gnome homoncului."
+	desc = "A large glass tank for creating gnome homunculi."
 	icon = 'icons/roguetown/misc/splitter.dmi'
 	icon_state = "essence_tank"
 	density = TRUE
@@ -141,7 +141,7 @@
 	to_chat(user, span_boldnotice("Your gnome homunculus has been successfully created!"))
 
 
-/obj/machinery/essence/test_tube/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/test_tube/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 		if(!vial.contained_essence || vial.essence_amount <= 0)

@@ -4,7 +4,7 @@
 
 /datum/coven/obfuscate
 	name = "Obfuscate"
-	desc = "Makes you less noticable for living and un-living beings."
+	desc = "Makes you less noticeable for living and un-living beings."
 	icon_state = "obfuscate"
 	power_type = /datum/coven_power/obfuscate
 
@@ -36,7 +36,7 @@
 			continue
 
 		//the corpses are not watching you
-		if (HAS_TRAIT(viewer, TRAIT_BLIND) || viewer.stat >= UNCONSCIOUS)
+		if (viewer.is_blind() || viewer.stat >= UNCONSCIOUS)
 			continue
 
 		to_chat(owner, span_warning("You cannot use [src] while you're being observed!"))

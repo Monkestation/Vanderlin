@@ -41,7 +41,7 @@
 
 /datum/forensics/New(atom/parent, fingerprints, hiddenprints, blood_DNA, fibers)
 	if(!isatom(parent))
-		stack_trace("We tried adding a forensics datum to something that isnt an atom. What the hell are you doing?")
+		stack_trace("We tried adding a forensics datum to something that isn't an atom. What the hell are you doing?")
 		qdel(src)
 		return
 
@@ -123,7 +123,10 @@
 			if(!ignoregloves)
 				human_suspect.gloves.add_fingerprint(human_suspect, ignoregloves = TRUE) //ignoregloves = TRUE to avoid infinite loop.
 				return
-		var/full_print = md5(human_suspect.dna.unique_identity)
+		var/obj/item/bodypart/hand = human_suspect.hand_bodyparts[human_suspect.active_hand_index]
+		var/full_print = hand ? hand.fingerprint : md5(human_suspect.dna.unique_identity)
+		if(!full_print) // including inorganic hands
+			return
 		LAZYSET(fingerprints, full_print, full_print)
 	return TRUE
 

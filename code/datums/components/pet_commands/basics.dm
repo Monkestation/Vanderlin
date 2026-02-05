@@ -350,7 +350,7 @@
 
 /datum/pet_command/home
 	command_name = "Set Home"
-	command_desc = "Command your pet to make the targetted area its home."
+	command_desc = "Command your pet to make the targeted area its home."
 	radial_icon = 'icons/mob/actions/actions_spells.dmi'
 	radial_icon_state = "projectile"
 	speech_commands = list("new home")

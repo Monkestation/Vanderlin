@@ -242,7 +242,7 @@
 
 	if(client && hud_used)
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_MASK) + 1]
-		inv?.update_appearance()
+		inv?.update_appearance(UPDATE_ICON_STATE)
 
 	if(wear_mask)
 		if(!(ITEM_SLOT_MASK & check_obscured_slots()))
@@ -260,7 +260,7 @@
 
 	if(client && hud_used)
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_NECK) + 1]
-		inv?.update_appearance()
+		inv?.update_appearance(UPDATE_ICON_STATE)
 
 	if(wear_neck)
 		if(!(ITEM_SLOT_NECK & check_obscured_slots()))
@@ -282,7 +282,7 @@
 
 	if(client && hud_used)
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_HEAD) + 1]
-		inv?.update_appearance()
+		inv?.update_appearance(UPDATE_ICON_STATE)
 
 	if(head)
 		if(hide_nonstandard && (head.worn_x_dimension != 32 || head.worn_y_dimension != 32))
@@ -328,7 +328,7 @@
 		for(var/hand in hud_used.hand_slots)
 			var/atom/movable/screen/inventory/hand/H = hud_used.hand_slots[hand]
 			if(H)
-				H.update_appearance()
+				H.update_appearance(UPDATE_OVERLAYS)
 
 //update whether our head item appears on our hud.
 /mob/living/carbon/proc/update_hud_head(obj/item/I)
@@ -444,17 +444,19 @@
 //produces a key based on the mob's limbs
 
 /mob/living/carbon/proc/generate_icon_render_key()
+	. = list()
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		. += "-[BP.body_zone]"
+		. += BP.body_zone
 		if(BP.animal_origin)
-			. += "-[BP.animal_origin]"
+			. += BP.animal_origin
 		if(BP.status == BODYPART_ORGANIC)
-			. += "-organic"
+			. += "organic"
 		else
-			. += "-robotic"
+			. += "robotic"
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
-		. += "-husk"
+		. += "husk"
+	return jointext(., "-")
 
 
 //change the mob's icon to the one matching its key

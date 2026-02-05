@@ -59,14 +59,14 @@
 
 /obj/item/clothing/shirt/maniac
 	name = "formal shirt"
-	desc = "TNC is the fairest company I know, atleast I think?."
+	desc = "TNC is the fairest company I know, at least I think?."
 	icon = 'icons/roguetown/maniac/clothing.dmi'
 	mob_overlay_icon = 'icons/roguetown/maniac/clothing_mob.dmi'
 	icon_state = "shirt"
 
 /obj/item/clothing/pants/tights/maniac
 	name = "formal pants"
-	desc = "TNC is the fairest company I know, atleast I think?."
+	desc = "TNC is the fairest company I know, at least I think?."
 	gender = PLURAL
 	icon = 'icons/roguetown/maniac/clothing.dmi'
 	mob_overlay_icon = 'icons/roguetown/maniac/clothing_mob.dmi'

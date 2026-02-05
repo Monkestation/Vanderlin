@@ -9,7 +9,7 @@
 		////////////////
 	///Contains admin info. Null if client is not an admin.
 	var/datum/admins/holder = null
-	///Needs to implement InterceptClickOn(user,params,atom) proc
+	///Needs to implement InterceptClickOn(user,list/modifiers,atom) proc
 	var/datum/click_intercept = null
 	///Time when the click was intercepted
 	var/click_intercept_time = 0
@@ -146,5 +146,5 @@
 	var/current_ambient_sound
 	/// Cooldowns for Real like - For Mentor
 	var/list/real_like_cooldowns  = list()
-	/// Total Real likes recieved in a round - For Mentor
+	/// Total Real likes received in a round - For Mentor
 	var/real_likes_received  = 0

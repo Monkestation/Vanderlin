@@ -42,7 +42,7 @@
 
 /// Use in fish tables to denote miss chance.
 #define FISHING_DUD "dud"
-///Used in the the hydro tray fishing spot to define a random seed reward
+///Used in the hydro tray fishing spot to define a random seed reward
 #define FISHING_RANDOM_SEED "Random seed"
 ///Used in the surgery fishing spot to define a random organ reward
 #define FISHING_RANDOM_ORGAN "Random organ"
@@ -202,7 +202,7 @@
 ///The volume of the grind results is multiplied by the fish' weight and divided by this.
 #define FISH_GRIND_RESULTS_WEIGHT_DIVISOR 500
 ///The number of fillets is multiplied by the fish' size and divided by this.
-#define FISH_FILLET_NUMBER_SIZE_DIVISOR 60
+#define FISH_FILLET_NUMBER_SIZE_DIVISOR 30
 
 ///The slowdown of the fish when carried begins at this value
 #define FISH_WEIGHT_SLOWDOWN 2100

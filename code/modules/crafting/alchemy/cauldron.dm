@@ -15,15 +15,88 @@
 	fueluse = 20 MINUTES
 	crossfire = FALSE
 
+	var/datum/alch_cauldron_recipe/selected_recipe = null
+	var/auto_repeat = FALSE
+	var/auto_pull_range = 10
+	var/pulling_essences = FALSE
+
 /obj/machinery/light/fueled/cauldron/Initialize()
 	create_reagents(500, DRAINABLE | AMOUNT_VISIBLE | REFILLABLE)
 	return ..()
 
 /obj/machinery/light/fueled/cauldron/Destroy()
 	chem_splash(loc, 2, list(reagents))
-	playsound(loc, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
+	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
 	lastuser = null
+	selected_recipe = null
 	return ..()
+
+/obj/machinery/light/fueled/cauldron/examine(mob/user)
+	. = ..()
+	if(selected_recipe)
+		. += span_info("Recipe selected: [initial(selected_recipe.recipe_name)]")
+		if(auto_repeat)
+			. += span_info("Auto-repeat is enabled. The cauldron will automatically pull essences from nearby machinery.")
+		else
+			. += span_info("Auto-repeat is disabled. Alt-click to enable automatic brewing.")
+	else
+		. += span_notice("No recipe selected. Click with empty hand to select a recipe.")
+
+	if(selected_recipe)
+		. += span_notice("Required essences:")
+		for(var/essence_type in selected_recipe.required_essences)
+			var/datum/thaumaturgical_essence/essence = new essence_type
+			var/required = selected_recipe.required_essences[essence_type]
+			var/current = essence_contents[essence_type] || 0
+			. += span_notice("  - [essence.name]: [current]/[required]")
+			qdel(essence)
+
+/obj/machinery/light/fueled/cauldron/attack_hand(mob/user)
+	if(!user.default_can_use_topic(src))
+		return
+
+	show_recipe_menu(user)
+
+/obj/machinery/light/fueled/cauldron/AltClick(mob/user, list/modifiers)
+	. = ..()
+	if(!user.default_can_use_topic(src))
+		return
+
+	if(!selected_recipe)
+		to_chat(user, span_warning("You must select a recipe first."))
+		return
+
+	auto_repeat = !auto_repeat
+	if(auto_repeat)
+		to_chat(user, span_info("Auto-repeat enabled. [src] will automatically pull essences and brew [initial(selected_recipe.recipe_name)]."))
+		if(!pulling_essences && brewing == 0)
+			attempt_auto_pull_essences()
+	else
+		to_chat(user, span_info("Auto-repeat disabled."))
+
+/obj/machinery/light/fueled/cauldron/proc/show_recipe_menu(mob/user)
+	var/list/recipes = list()
+	recipes["Clear Recipe"] = null
+
+	for(var/recipe_path in subtypesof(/datum/alch_cauldron_recipe))
+		var/datum/alch_cauldron_recipe/recipe = new recipe_path
+		recipes[initial(recipe.recipe_name)] = recipe_path
+		qdel(recipe)
+
+	var/choice = input(user, "Select a recipe for the cauldron", "Cauldron Recipe") as null|anything in recipes
+	if(!choice || !user.default_can_use_topic(src))
+		return
+
+	var/recipe_path = recipes[choice]
+	if(!recipe_path)
+		selected_recipe = null
+		auto_repeat = FALSE
+		to_chat(user, span_info("Recipe cleared."))
+		return
+
+	selected_recipe = new recipe_path
+	to_chat(user, span_info("Recipe set to: [initial(selected_recipe.recipe_name)]"))
+	to_chat(user, span_notice("Alt-click the cauldron to enable auto-repeat mode."))
 
 /obj/machinery/light/fueled/cauldron/update_overlays()
 	. = ..()
@@ -74,7 +147,7 @@
 
 	return rgb(r, g, b)
 
-/obj/machinery/light/fueled/cauldron/attackby(obj/item/I, mob/user, params)
+/obj/machinery/light/fueled/cauldron/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/essence_vial))
 		return ..()
 	var/obj/item/essence_vial/vial = I
@@ -105,6 +178,11 @@
 /obj/machinery/light/fueled/cauldron/process()
 	..()
 	if(on)
+		// Check if we should auto-pull essences
+		if(auto_repeat && selected_recipe && brewing == 0 && !pulling_essences)
+			if(!has_required_essences())
+				attempt_auto_pull_essences()
+
 		if(length(essence_contents))
 			if(brewing < 20)
 				if(src.reagents.has_reagent(/datum/reagent/water, 50))
@@ -163,8 +241,95 @@
 					playsound(src, 'sound/misc/smelter_fin.ogg', 30, FALSE)
 					update_appearance(UPDATE_OVERLAYS)
 
+					// If auto-repeat is on and we failed, try again
+					if(auto_repeat && selected_recipe)
+						attempt_auto_pull_essences()
+
+/obj/machinery/light/fueled/cauldron/proc/has_required_essences()
+	if(!selected_recipe)
+		return FALSE
+
+	for(var/essence_type in selected_recipe.required_essences)
+		var/required = selected_recipe.required_essences[essence_type]
+		var/current = essence_contents[essence_type] || 0
+		if(current < required)
+			return FALSE
+
+	return TRUE
+
+/obj/machinery/light/fueled/cauldron/proc/attempt_auto_pull_essences()
+	if(pulling_essences || !selected_recipe)
+		return
+
+	pulling_essences = TRUE
+	do_auto_pull_essences()
+	pulling_essences = FALSE
+
+/obj/machinery/light/fueled/cauldron/proc/do_auto_pull_essences()
+	for(var/essence_type in selected_recipe.required_essences)
+		var/required = selected_recipe.required_essences[essence_type]
+		var/current = essence_contents[essence_type] || 0
+		var/needed = required - current
+
+		if(needed <= 0)
+			continue
+
+		// Find nearby essence machinery with this essence type
+		var/obj/machinery/essence/reservoir/source = find_essence_source(essence_type, needed)
+		if(!source)
+			return
+
+		// Extract essence
+		if(extract_essence_from_source(source, essence_type, needed))
+			visible_message(span_info("[src] pulls essence from nearby machinery."))
+			sleep(1 SECONDS) // Small delay between pulls for visual effect
+		else
+			visible_message(span_warning("[src] failed to extract essence from machinery!"))
+			return
+
+	// All essences acquired, reset brewing
+	if(has_required_essences())
+		brewing = 0
+		update_appearance(UPDATE_OVERLAYS)
+
+/obj/machinery/light/fueled/cauldron/proc/find_essence_source(essence_type, amount_needed)
+	for(var/obj/machinery/essence/reservoir/reservoir in range(auto_pull_range, src))
+		var/datum/essence_storage/storage = reservoir.return_storage()
+		if(storage && storage.get_essence_amount(essence_type) >= amount_needed)
+			return reservoir
+
+	return null
+
+/obj/machinery/light/fueled/cauldron/proc/extract_essence_from_source(obj/machinery/essence/reservoir/source, essence_type, amount)
+	var/datum/essence_storage/storage = source.return_storage()
+	if(!storage)
+		return FALSE
+
+	var/extracted = storage.remove_essence(essence_type, amount)
+	if(extracted > 0)
+		if(essence_contents[essence_type])
+			essence_contents[essence_type] += extracted
+		else
+			essence_contents[essence_type] = extracted
+
+		// Create visual effect
+		var/turf/source_turf = get_turf(source)
+		var/turf/target_turf = get_turf(src)
+		if(source_turf && target_turf)
+			new /obj/effect/essence_orb(source_turf, src, essence_type, 1 SECONDS)
+
+		return TRUE
+
+	return FALSE
+
 /obj/machinery/light/fueled/cauldron/proc/find_matching_recipe_with_batches()
-	// This searches through all recipes to find one that matches and calculates max batches possible
+	// If we have a selected recipe, try it first
+	if(selected_recipe)
+		var/batch_count = calculate_max_batches(selected_recipe)
+		if(batch_count > 0)
+			return list("recipe" = selected_recipe, "batches" = batch_count)
+
+	// Otherwise search all recipes (for manual pouring)
 	for(var/recipe_path in subtypesof(/datum/alch_cauldron_recipe))
 		var/datum/alch_cauldron_recipe/recipe = new recipe_path
 		var/batch_count = calculate_max_batches(recipe)

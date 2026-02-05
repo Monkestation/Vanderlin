@@ -65,12 +65,15 @@ GLOBAL_LIST_INIT(astral_projections, list())
 	spell_requirements = NONE
 	charge_required = FALSE
 
-
-/datum/action/cooldown/spell/undirected/astral_return/cast(mob/living/user)
+/datum/action/cooldown/spell/undirected/astral_return/is_valid_target(atom/cast_on)
 	. = ..()
-	var/mob/living/simple_animal/hostile/retaliate/astral_projection/astral = user
-	if (istype(astral))
-		astral.death()//pretty straightforward isn't it?
+	if(!.)
+		return
+	return istype(owner, /mob/living/simple_animal/hostile/retaliate/astral_projection)
+
+/datum/action/cooldown/spell/undirected/astral_return/cast(mob/living/simple_animal/hostile/retaliate/astral_projection/astral)
+	. = ..()
+	astral.death()//pretty straightforward isn't it?
 
 /datum/action/cooldown/spell/undirected/astral_toggle
 	name = "Toggle Tangibility"
@@ -80,11 +83,14 @@ GLOBAL_LIST_INIT(astral_projections, list())
 	spell_requirements = NONE
 	charge_required = FALSE
 
-/datum/action/cooldown/spell/undirected/astral_toggle/cast(mob/living/user)
+/datum/action/cooldown/spell/undirected/astral_toggle/is_valid_target(atom/cast_on)
 	. = ..()
-	var/mob/living/simple_animal/hostile/retaliate/astral_projection/astral = user
-	if(!istype(astral))
+	if(!.)
 		return
+	return istype(owner, /mob/living/simple_animal/hostile/retaliate/astral_projection)
+
+/datum/action/cooldown/spell/undirected/astral_toggle/cast(mob/living/simple_animal/hostile/retaliate/astral_projection/astral)
+	. = ..()
 	astral.toggle_tangibility()
 	if (astral.tangibility)
 		desc = "Turn back into an invisible projection of your soul."

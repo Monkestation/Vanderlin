@@ -41,6 +41,9 @@
 
 	var/obj/effect/landmark/tram/callback_platform
 
+	///this is our destination nation
+	var/datum/nation/destination
+
 /datum/lift_master/tram/New(obj/structure/industrial_lift/tram/lift_platform)
 	. = ..()
 	horizontal_speed = lift_platform.horizontal_speed
@@ -137,7 +140,7 @@
 
 	START_PROCESSING(SStramprocess, src)
 
-/datum/lift_master/tram/process(seconds_per_tick)
+/datum/lift_master/tram/process()
 	if(!travel_distance)
 		addtimer(CALLBACK(src, PROC_REF(unlock_controls), idle_platform), 2 SECONDS)
 		if(SEND_SIGNAL(callback_platform, COMSIG_TRAM_REACHED_PLATFORM, src))

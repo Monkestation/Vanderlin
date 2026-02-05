@@ -255,8 +255,8 @@
 		var/obj/item/organ/organ = internal_organs_slot[slot]
 		organ.sellprice = 5
 	src.underwear = "Nude"
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
+	if(length(quirks))
+		clear_quirks()
 	update_body()
 	faction = list(FACTION_ORCS)
 	var/turf/turf = get_turf(src)
@@ -463,7 +463,6 @@
 	else
 		new /mob/living/carbon/human/species/goblin/npc(get_turf(src))
 	gobs++
-	update_appearance()
 	if(living_player_count() < 10)
 		maxgobs = 1
 	if(gobs < maxgobs)
@@ -475,7 +474,6 @@
 	if(spawning)
 		return
 	spawning = TRUE
-	update_appearance()
 	addtimer(CALLBACK(src, PROC_REF(creategob)), 2 SECONDS)
 
 /obj/structure/gob_portal/Destroy()

@@ -1,37 +1,37 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ab" = (
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ae" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/structure/fluff/walldeco/vinez/l,
 /obj/structure/door/violet,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ah" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/structure/door/violet,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aj" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ak" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ar" = (
 /turf/closed/wall/mineral/stone/moss,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "au" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /obj/item/reagent_containers/glass/bottle/whitewine,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aA" = (
 /obj/item/clothing/shirt/tunic/colored/blue,
 /obj/item/gem/blue,
@@ -46,38 +46,38 @@
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aG" = (
 /obj/structure/door/violet,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aH" = (
 /obj/structure/door/violet,
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aJ" = (
 /obj/structure/well,
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aL" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aN" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aP" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aQ" = (
 /obj/structure/table/vtable,
 /obj/item/clothing/gloves/rare/elfplate,
@@ -89,36 +89,36 @@
 /obj/item/clothing/neck/menears,
 /obj/item/clothing/neck/mercmedal/anthrax,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aT" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/item/instrument/flute,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aU" = (
 /obj/structure/door/violet,
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aV" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aX" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "aY" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobblerock/alt,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "cl" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "eF" = (
 /obj/structure/table/vtable/v2,
 /obj/item/reagent_containers/glass/bottle/wine/sourwine,
@@ -131,40 +131,40 @@
 /obj/item/natural/cloth,
 /obj/item/natural/cloth,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ij" = (
 /obj/structure/spider/stickyweb,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "pm" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rk" = (
 /obj/structure/fluff/statue/spider,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "rT" = (
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "ue" = (
 /obj/structure/spider/stickyweb,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "Fr" = (
 /obj/structure/chair/bench/couchablack/r,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "RZ" = (
 /obj/structure/chair/bench/couchablack,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 "UN" = (
 /obj/structure/chair/wood/alt/chair_noble,
 /turf/open/floor/churchmarble,
-/area/rogue/under/tomb/cave)
+/area/under/tomb/cave)
 
 (1,1,1) = {"
 aP

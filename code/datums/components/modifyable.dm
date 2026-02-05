@@ -103,7 +103,7 @@
 			continue
 		effect.apply_combat_effect(target, user)
 
-/datum/component/modifications/proc/on_apply_combat_effects(obj/item/source, mob/living/target, mob/living/user, proximity_flag)
+/datum/component/modifications/proc/on_apply_combat_effects(obj/item/source, mob/living/target, mob/living/user, proximity_flag, list/modifiers)
 	SIGNAL_HANDLER
 	if(!proximity_flag)
 		return

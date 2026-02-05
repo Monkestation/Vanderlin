@@ -175,9 +175,9 @@
 				var/turf/T = locate(start_x + x, start_y + y, start_z)
 				if(T)
 					if(depth_value > shallow_water_noise_threshold)
-						T.ChangeTurf(water_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+						T.ChangeTurf(water_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 					else
-						T.ChangeTurf(deep_water_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+						T.ChangeTurf(deep_water_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 		if(x % 10 == 0)
 			if(job)
@@ -217,11 +217,11 @@
 						is_beach = TRUE
 
 			if(is_beach)
-				T.ChangeTurf(biome.beach_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone, /turf/open/floor/dirt))
+				T.ChangeTurf(biome.beach_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone, /turf/open/floor/dirt))
 				beach_tiles += list(list("turf" = T, "x" = x, "y" = y, "temperature" = temperature, "moisture" = moisture, "height" = height))
 			else
 				var/turf_type = biome.select_terrain(temperature, moisture, height)
-				T.ChangeTurf(turf_type, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+				T.ChangeTurf(turf_type, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 				mainland_tiles += list(list("turf" = T, "x" = x, "y" = y, "temperature" = temperature, "moisture" = moisture, "height" = height))
 
 			if(height > 0)
@@ -320,9 +320,9 @@
 				var/turf/T = locate(start_x + x, start_y + y, start_z)
 				if(T)
 					if(depth_value > shallow_water_noise_threshold)
-						T.ChangeTurf(water_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+						T.ChangeTurf(water_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 					else
-						T.ChangeTurf(deep_water_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+						T.ChangeTurf(deep_water_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 	var/list/mainland_tiles = list()
 	var/list/beach_tiles = list()
@@ -355,11 +355,11 @@
 						is_beach = TRUE
 
 			if(is_beach)
-				T.ChangeTurf(biome.beach_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone, /turf/open/floor/dirt))
+				T.ChangeTurf(biome.beach_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone, /turf/open/floor/dirt))
 				beach_tiles += list(list("turf" = T, "x" = x, "y" = y, "temperature" = temperature, "moisture" = moisture, "height" = height))
 			else
 				var/turf_type = biome.select_terrain(temperature, moisture, height)
-				T.ChangeTurf(turf_type, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+				T.ChangeTurf(turf_type, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 				mainland_tiles += list(list("turf" = T, "x" = x, "y" = y, "temperature" = temperature, "moisture" = moisture, "height" = height))
 
 			if(height > 0)
@@ -472,7 +472,7 @@
 				if(isclosedturf(turf) || isopenspace(turf))
 					for(var/obj/structure/flora/structure in turf.contents)
 						qdel(structure)
-					for(var/mob/living/mob in turf.contents)
+					for(var/mob/living/mob in turf)
 						var/turf/step_turf = turf
 						while(isclosedturf(step_turf) || isopenspace(step_turf))
 							step_turf = get_step(step_turf, NORTH)
@@ -662,11 +662,11 @@
 		for(var/obj/structure/structure in below)
 			qdel(structure)
 
-		below.ChangeTurf(wall_turf, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+		below.ChangeTurf(wall_turf, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 		if(level == height)
 			var/turf_type = biome.select_terrain(temperature, moisture, level)
-			current.ChangeTurf(turf_type, list(/turf/open/transparent/openspace, /turf/open/floor/naturalstone))
+			current.ChangeTurf(turf_type, list(/turf/open/openspace, /turf/open/floor/naturalstone))
 
 /datum/island_generator/proc/generate_settlements_on_island(turf/bottom_left_corner, list/mainland_tiles)
 	if(!biome.settlement_generator)

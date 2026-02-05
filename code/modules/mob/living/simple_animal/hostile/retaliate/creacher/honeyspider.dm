@@ -89,13 +89,14 @@
 	gender = MALE
 	if(prob(33))
 		gender = FEMALE
-	update_appearance()
+
+	update_appearance(UPDATE_OVERLAYS)
 
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
 	ADD_TRAIT(src, TRAIT_WEBWALK, TRAIT_GENERIC)
 
-/mob/living/simple_animal/hostile/retaliate/spider/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
+/mob/living/simple_animal/hostile/retaliate/spider/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(!..())
 		return
 	production += 50
@@ -111,7 +112,7 @@
 /mob/living/simple_animal/hostile/retaliate/spider/try_tame(obj/item/O, mob/living/carbon/human/user)
 	if(!stat)
 		user.visible_message("<span class='info'>[user] hand-feeds [O] to [src].</span>", "<span class='notice'>I hand-feed [O] to [src].</span>")
-		playsound(loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
 		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
 		qdel(O)
@@ -126,7 +127,7 @@
 			realchance += 15
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming) * 20)
+				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
 			if(prob(realchance))
 				tamed(user)
 				var/boon = user.get_learning_boon(/datum/skill/labor/taming)
@@ -267,7 +268,7 @@
 			string = "completely full"
 	. += span_notice("The nest looks [string].")
 
-/obj/structure/spider/nest/attackby(obj/item/I, mob/user, params)
+/obj/structure/spider/nest/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	disturb(user)
 

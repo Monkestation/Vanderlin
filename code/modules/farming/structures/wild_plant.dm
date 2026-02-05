@@ -34,7 +34,7 @@
 	return ..()
 
 /obj/structure/wild_plant/Crossed(mob/living/carbon/human/H)
-	playsound(loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 
 /obj/structure/wild_plant/proc/try_spread()
 	var/list/dirs = GLOB.cardinals.Copy()
@@ -66,7 +66,7 @@
 	apply_farming_fatigue(user, 4)
 	add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 2)
 
-	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming)
+	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming, TRUE)
 	var/feedback = "I harvest the produce."
 	var/modifier = 0
 	var/chance_to_ruin_single = 75 - (farming_skill * 25)
@@ -226,3 +226,33 @@
 /obj/structure/wild_plant/nospread/dragonfruit
 	icon_state = "dragonfruit2"
 	plant_type = /datum/plant_def/dragonfruit
+
+/* Wild Mushrooms */
+/obj/structure/wild_plant/nospread/mushroom
+	icon = 'icons/roguetown/misc/dikaryawild.dmi'
+
+/obj/structure/wild_plant/nospread/mushroom/capillus
+	icon_state = "capillus2"
+	plant_type = /datum/plant_def/mushroom/capillus
+
+/obj/structure/wild_plant/nospread/mushroom/waddle
+	icon_state = "waddle2"
+	plant_type = /datum/plant_def/mushroom/waddle
+
+/obj/structure/wild_plant/nospread/mushroom/merkel
+	icon_state = "merkel2"
+	plant_type = /datum/plant_def/mushroom/merkel
+
+/obj/structure/wild_plant/nospread/mushroom/caveweep
+	icon_state = "caveweep2"
+	plant_type = /datum/plant_def/mushroom/caveweep
+
+/obj/structure/wild_plant/nospread/mushroom/borowiki
+	icon_state = "borowiki2"
+	plant_type = /datum/plant_def/mushroom/borowiki
+
+/* /obj/structure/wild_plant/nospread/mushroom/chanterelle // Removing for now to expand upon later
+	icon_state = "chanterelle2"
+	plant_type = /datum/plant_def/mushroom/chanterelle */
+
+

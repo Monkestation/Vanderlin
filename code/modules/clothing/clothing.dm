@@ -74,6 +74,11 @@
 	var/hoodtoggled = FALSE
 	var/adjustable = CANT_CADJUST
 
+	var/datum/wet/wet
+	var/wetable = TRUE
+	var/proper_drying = FALSE
+	COOLDOWN_DECLARE(wet_stress_cd)
+
 /obj/item/clothing/Initialize()
 	. = ..()
 	if(ispath(pocket_storage_component_path))
@@ -81,19 +86,14 @@
 	if(length(prevent_crits) || armor_class)
 		has_inspect_verb = TRUE
 
-	if(uses_lord_coloring)
-		if(GLOB.lordprimary && GLOB.lordsecondary)
-			lordcolor()
-		else
-			RegisterSignal(SSdcs, COMSIG_LORD_COLORS_SET, TYPE_PROC_REF(/obj/item/clothing, lordcolor))
-	else if(get_detail_color()) // Lord color does this
-		update_appearance(UPDATE_OVERLAYS)
-
 	if(hoodtype)
 		MakeHood()
 
+
 /obj/item/clothing/Initialize(mapload, ...)
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
+	if(wetable)
+		wet = new(src)
 	return ..()
 
 /obj/item/clothing/Destroy()
@@ -102,20 +102,36 @@
 		QDEL_NULL(hood)
 	if(uses_lord_coloring)
 		UnregisterSignal(SSdcs, COMSIG_LORD_COLORS_SET)
+	if(wetable)
+		var/mob/user = loc
+		if(istype(user))
+			UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
+		if(wet)
+			qdel(wet)
+			wet = null
 	return ..()
 
 /obj/item/clothing/get_inspect_entries(list/inspect_list)
 	. = ..()
 
+	if(armor)
+		. += "\n<u><b>DEFENSE:</b></u>\n"
+		var/list/defense_strings = list()
+		for(var/damage_key in ARMOR_LIST_DAMAGE())
+			var/rating = armor.get_rating(damage_key)
+			defense_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [armor_to_protection_class(rating)]</font>"
+		. += defense_strings.Join(" | ")
+
 	if(length(prevent_crits))
-		. += "\n<b>DEFENSE:</b>"
-		for(var/X in prevent_crits)
-			. += "\n<b>[X] damage</b>"
+		. += "\n<u><b>PREVENT CRITS:</b></u>\n"
+		. += prevent_crits.Join(" | ")
 
 	if(body_parts_covered)
-		. += "\n<b>COVERAGE:</b>"
+		. += "\n<u><b>COVERAGE:</b></u>\n"
+		var/list/parsed_zones = list()
 		for(var/zone in body_parts_covered2organ_names(body_parts_covered))
-			. += "\n<b>[parse_zone(zone)]</b>"
+			parsed_zones += "[parse_zone(zone)]"
+		. += parsed_zones.Join(" | ")
 
 	switch(armor_class)
 		if(AC_HEAVY)
@@ -132,19 +148,24 @@
 			. += span_notice("It has one torn sleeve.")
 		else
 			. += span_notice("Both its sleeves have been torn!")
+	if(wet)
+		var/list/t = wet.get_examine_text()
+		if(t)
+			for(var/line in t)
+				. += line
+	if(proper_drying)
+		desc += span_notice("\n This was properly washed and dried off, it smells good!")
 
-/obj/item/clothing/MiddleClick(mob/user, params)
+
+
+
+/obj/item/clothing/MiddleClick(mob/living/user, list/modifiers)
 	..()
-	var/mob/living/L = user
-	var/altheld //Is the user pressing alt?
-	var/list/modifiers = params2list(params)
-	if(LAZYACCESS(modifiers, ALT_CLICKED))
-		altheld = TRUE
-	if(!isliving(user))
+	if(!istype(user))
 		return
 	if(nodismemsleeves)
 		return
-	if(altheld)
+	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		if(user.zone_selected == l_sleeve_zone)
 			if(l_sleeve_status == SLEEVE_ROLLED)
 				l_sleeve_status = SLEEVE_NORMAL
@@ -182,7 +203,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(user.STASTR * 8))
 				torn_sleeve_number += 1
 				r_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -209,7 +230,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(user.STASTR * 8))
 				torn_sleeve_number += 1
 				l_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -228,9 +249,8 @@
 			else
 				user.visible_message(span_warning("[user] tries to tear [src]."))
 				return
-	if(loc == L)
-		L.regenerate_clothes()
-
+	if(loc == user)
+		user.regenerate_clothes()
 
 /obj/item/clothing/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
 	if(!..())
@@ -261,6 +281,8 @@
 		RemoveHood()
 	if(adjustable > 0)
 		ResetAdjust()
+	if(wetable)
+		UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
 
 /obj/item/clothing/MouseDrop(atom/over_object)
 	. = ..()
@@ -279,7 +301,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/clothing/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/clothing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(M.on_fire)
 		if(user == M)
 			return
@@ -308,24 +330,15 @@
 	if (!istype(user))
 		return
 	if(slot_flags & slot) //Was equipped to a valid slot for this item?
+		for(var/trait in clothing_traits)
+			ADD_CLOTHING_TRAIT(user, trait)
 		if (LAZYLEN(user_vars_to_edit))
 			for(var/variable in user_vars_to_edit)
 				if(variable in user.vars)
 					LAZYSET(user_vars_remembered, variable, user.vars[variable])
 					user.vv_edit_var(variable, user_vars_to_edit[variable])
-
-	for(var/trait in clothing_traits)
-		ADD_CLOTHING_TRAIT(user, trait)
-
-/obj/item/clothing/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
+		if(wetable)
+			RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_user_move), override = TRUE)
 
 /**
  * Inserts a trait (or multiple traits) into the clothing traits list
@@ -343,6 +356,23 @@
 	if(istype(wearer) && (wearer.get_slot_by_item(src) & slot_flags))
 		for(var/new_trait in trait_or_traits)
 			ADD_CLOTHING_TRAIT(wearer, new_trait)
+
+/**
+ * Removes a trait (or multiple traits) from the clothing traits list
+ *
+ * If worn, then we will also remove the trait from the wearer as if unequipped
+ *
+ * This is so you can add clothing traits without worrying about needing to equip or unequip them to gain effects
+ */
+/obj/item/clothing/proc/detach_clothing_traits(trait_or_traits)
+	if(!islist(trait_or_traits))
+		trait_or_traits = list(trait_or_traits)
+
+	LAZYREMOVE(clothing_traits, trait_or_traits)
+	var/mob/wearer = loc
+	if(istype(wearer))
+		for(var/new_trait in trait_or_traits)
+			REMOVE_CLOTHING_TRAIT(wearer, new_trait)
 
 /obj/item/clothing/atom_break(damage_flag)
 	. = ..()
@@ -413,17 +443,16 @@ BLIND     // can't see anything
 		dismembered = fcopy_rsc(dismembered)
 		GLOB.dismembered_clothing_icons[index] = dismembered
 
-/obj/item/clothing/pants/AltClick(mob/user)
+/obj/item/clothing/pants/AltClick(mob/user, list/modifiers)
 	if(..())
 		return 1
 
 	if(!istype(user) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		return
+	else if(attached_accessory)
+		remove_accessory(user)
 	else
-		if(attached_accessory)
-			remove_accessory(user)
-		else
-			rolldown()
+		rolldown()
 
 /obj/item/clothing/atom_destruction(damage_flag)
 	if(damage_flag in list("acid", "fire"))
@@ -444,7 +473,7 @@ BLIND     // can't see anything
 		W.connectedc = src
 		hood = W
 
-/obj/item/clothing/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/attack_hand_secondary(mob/user, list/modifiers)
 	if(hoodtype && (loc == user))
 		ToggleHood()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -467,7 +496,7 @@ BLIND     // can't see anything
 	prevent_crits = initial(prevent_crits)
 	gas_transfer_coefficient = initial(gas_transfer_coefficient)
 
-/obj/item/clothing/equipped(mob/user, slot)
+/obj/item/clothing/equipped(mob/living/carbon/user, slot)
 	if(hoodtype && !(slot & (ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK)))
 		RemoveHood()
 	if(adjustable > 0)
@@ -520,3 +549,28 @@ BLIND     // can't see anything
 				H.update_fov_angles()
 	else
 		RemoveHood()
+
+/obj/item/clothing/proc/on_user_move()
+	if(!iscarbon(loc))
+		return
+
+	var/mob/living/carbon/C = loc
+
+	if(proper_drying && !C.has_stress_type(/datum/stress_event/washed_cloth))
+		C.add_stress(/datum/stress_event/washed_cloth)
+		proper_drying = FALSE
+		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
+		if(particle_spewer)
+			particle_spewer.RemoveComponent()
+
+	if(wet.use_water(0.7))
+		if(HAS_TRAIT(C, TRAIT_NOBLE) && wet.water_stacks == 0)
+			C.add_stress(/datum/stress_event/noble_tarnished_cloth)
+
+		if(C.mind?.assigned_role == /datum/job/farmer || C.mind?.assigned_role == /datum/job/soilchild || HAS_TRAIT(C, TRAIT_LEECHIMMUNE) || istriton(C))
+			return
+
+	if(wet.water_stacks < 0)
+		if(COOLDOWN_FINISHED(src, wet_stress_cd))
+			COOLDOWN_START(src, wet_stress_cd, 60 SECONDS)
+			C.add_stress(/datum/stress_event/wet_cloth)

@@ -49,7 +49,7 @@
 
 /obj/structure/fake_machine/headeater
 	name = "head eating HAILER"
-	desc = "A machine that feeds on certain heads for coin, this itteration seems unfinished, what a sell out."
+	desc = "A machine that feeds on certain heads for coin, this iteration seems unfinished, what a sell out."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "headeater"
 	density = FALSE
@@ -62,7 +62,7 @@
 /obj/structure/fake_machine/headeater/l
 	SET_BASE_PIXEL(-32, 0)
 
-/obj/structure/fake_machine/headeater/attackby(obj/item/H, mob/user, params)
+/obj/structure/fake_machine/headeater/attackby(obj/item/H, mob/user, list/modifiers)
 	. = ..()
 	if(!istype(H, /obj/item/natural/head) && !istype(H, /obj/item/bodypart/head) && !istype(H, /obj/item/painting/lorehead))
 		to_chat(user, span_danger("It seems uninterested by the [H]"))

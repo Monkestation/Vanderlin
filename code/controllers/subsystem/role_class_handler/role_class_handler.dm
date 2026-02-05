@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(role_class_handler)
 /datum/controller/subsystem/role_class_handler/proc/build_category_lists()
 	var/list/all_classes = list()
 	for(var/datum/job/job as anything in subtypesof(/datum/job/advclass))
-		if(is_abstract(job))
+		if(IS_ABSTRACT(job))
 			continue
 		var/datum/job/real_datum = SSjob.GetJobType(job)
 		if(real_datum)
@@ -140,12 +140,13 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	if(picked_class.inherit_parent_title)
 		if(old)
-			if(H.gender == FEMALE && old.f_title)
+			if(H.pronouns == SHE_HER && old.f_title)
 				picked_class.title_override = old.f_title
 			else
 				picked_class.title_override = old.title
 
-	SSjob.EquipRank(H, picked_class, H.client)
+	SSjob.EquipRank(H, picked_class, H.client, reset_job_stats = picked_class.should_reset_stats)
+
 	apply_loadouts(H, H.client)
 
 // A dum helper to adjust the class amount, we could do it elsewhere but this will also inform any relevant class handlers open.

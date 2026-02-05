@@ -16,7 +16,7 @@
 	hitsound = list('sound/combat/hits/blunt/brick.ogg')
 	bundletype = /obj/item/natural/bundle/brick
 
-/obj/item/natural/brick/attackby(obj/item, mob/living/user)
+/obj/item/natural/brick/attackby(obj/item, mob/living/user, list/modifiers)
 	if(item_flags & IN_STORAGE)
 		return
 	. = ..()
@@ -47,6 +47,6 @@
 
 /obj/item/natural/raw_brick
 	name = "uncooked clay brick"
-	desc = "an uncooked clay brick. Still needs to be cooked in a oven."
+	desc = "An uncooked clay brick. Still needs to be cooked in an oven."
 	icon = 'icons/roguetown/items/cooking.dmi'	//It's because these are cooked via clay. Don't ask questions.
 	icon_state = "claybrickraw"

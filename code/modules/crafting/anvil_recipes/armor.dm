@@ -291,7 +291,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/pegasusknighthelm
-	name = "Lakkarian Pegasus Knight Helm (+Cloth)"
+	name = "Coifed Helmet (+Cloth)"
 	recipe_name = "a pegasus knight's helmet"
 	additional_items = list(/obj/item/natural/cloth)
 	created_item = /obj/item/clothing/head/helmet/pegasusknight
@@ -338,7 +338,7 @@
 	created_item = /obj/item/clothing/head/helmet/ironpot
 
 /datum/anvil_recipe/armor/iron/lakkariancap
-	name = "Lakkarian Cap (+ Gold Bar)"
+	name = "Crowned Cap (+ Gold Bar)"
 	recipe_name = "a sturdy lakkarian cap"
 	created_item = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	additional_items = list(/obj/item/ingot/gold)
@@ -663,6 +663,19 @@
 	craftdiff = 1
 	createditem_extra = 1
 
+
+/datum/anvil_recipe/armor/steel/gallowglass
+	name = "Gallowglass Helmet"
+	recipe_name = "Gallowglass Helm"
+	created_item = /obj/item/clothing/head/helmet/gallowglass
+	craftdiff = 1
+
+/datum/anvil_recipe/armor/steel/coppergate
+	name = "Coppergate helmet"
+	recipe_name = "coppergate helmet"
+	created_item = /obj/item/clothing/head/helmet/coppergate
+	craftdiff = 1
+
 /datum/anvil_recipe/armor/steel/helmetbuc
 	name = "Great Helm"
 	recipe_name = "a Bucket Helmet"
@@ -772,6 +785,13 @@
 	recipe_name = "a decorated bascinet"
 	additional_items = list(/obj/item/natural/cloth)
 	created_item = /obj/item/clothing/head/helmet/heavy/decorated/bascinet
+
+/datum/anvil_recipe/armor/steel/decorativecoppergate
+	name = "Decorated Coppergate helmet (+Gold)"
+	recipe_name = "decorative coppergate helmet"
+	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/clothing/head/helmet/decorativecoppergate
+	craftdiff = 1
 
 /datum/anvil_recipe/armor/steel/decoratedhelmetbucgold
 	name = "Decorated Gold-trimmed Great Helm (+Gold Bar, +Cloth)"
@@ -1183,7 +1203,7 @@
 /datum/anvil_recipe/armor/blacksteel/graggar_helm
 	name = "Vicious Helmet (+Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/graggar
+	created_item = /obj/item/clothing/head/helmet/heavy/graggar
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/elven_helm

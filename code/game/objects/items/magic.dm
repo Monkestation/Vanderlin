@@ -2,7 +2,7 @@
 
 /obj/item/scrying
 	name = "scrying orb"
-	desc = "On its glass depths, you can scry on many unsuspecting beings.."
+	desc = "On its glass depths, you can scry on many unsuspecting beings..."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scrying"
 	throw_speed = 3
@@ -28,7 +28,7 @@
 	icon_state ="scryeye"
 	cooldown = 5 MINUTES
 
-/obj/item/scrying/attack_self(mob/user, params)
+/obj/item/scrying/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(world.time < last_scry + cooldown)
 		to_chat(user, span_warning("I look into [src] but only see inky smoke. Maybe I should wait."))
@@ -84,14 +84,14 @@
 
 /////////////////////////////////////////Crystal ball ghsot vision///////////////////
 
-/obj/item/crystalball/attack_self(mob/user, params)
+/obj/item/crystalball/attack_self(mob/user, list/modifiers)
 	user.visible_message("<span class='danger'>[user] stares into [src], their eyes rolling back into their head.</span>")
 	user.ghostize(1)
 
 /*	..................   NOC Device (Fixed scrying ball)   ................... */
 /obj/structure/nocdevice
 	name = "NOC Device"
-	desc = "A intricate lunar observation machine, that allows its user to study the face of Noc in the sky, reflecting the true whereabouts of hidden beings.."
+	desc = "An intricate lunar observation machine, that allows its user to study the face of Noc in the sky, reflecting the true whereabouts of hidden beings..."
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	icon_state = "nocdevice"
 	plane = -1

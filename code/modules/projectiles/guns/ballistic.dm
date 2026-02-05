@@ -218,7 +218,7 @@
 		if (insert_magazine(user, tac_load, FALSE))
 			to_chat(user, "<span class='notice'>I perform a tactical reload on \the [src].</span>")
 		else
-			to_chat(user, "<span class='warning'>I dropped the old [magazine_wording], but the new one doesn't fit. How embarassing.</span>")
+			to_chat(user, "<span class='warning'>I dropped the old [magazine_wording], but the new one doesn't fit. How embarrassing.</span>")
 			magazine = null
 	else
 		magazine = null
@@ -231,7 +231,7 @@
 /obj/item/gun/ballistic/can_shoot()
 	return chambered
 
-/obj/item/gun/ballistic/attackby(obj/item/A, mob/user, params)
+/obj/item/gun/ballistic/attackby(obj/item/A, mob/user, list/modifiers)
 	. = ..()
 	if (.)
 		return
@@ -250,7 +250,7 @@
 			if (chambered && !chambered.BB)
 				chambered.forceMove(drop_location())
 				chambered = null
-			var/num_loaded = magazine.attackby(A, user, params, TRUE)
+			var/num_loaded = magazine.attackby(A, user, modifiers, TRUE)
 			if (num_loaded)
 				to_chat(user, "<span class='notice'>I [verbage] \a [cartridge_wording]\s on \the [src].</span>")
 				playsound(src, load_sound, load_sound_volume, load_sound_vary)
@@ -263,7 +263,7 @@
 	return FALSE
 
 
-/obj/item/gun/ballistic/AltClick(mob/user)
+/obj/item/gun/ballistic/AltClick(mob/user, list/modifiers)
 	if (unique_reskin && !current_skin && user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		reskin_obj(user)
 		return
@@ -286,7 +286,7 @@
 			bolt_locked = TRUE
 			update_appearance(UPDATE_ICON)
 
-/obj/item/gun/ballistic/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/gun/ballistic/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	prefire_empty_checks()
 	. = ..() //The gun actually firing
 	postfire_empty_checks(.)
@@ -298,7 +298,7 @@
 		return
 	return ..()
 
-/obj/item/gun/ballistic/attack_self(mob/living/user, params)
+/obj/item/gun/ballistic/attack_self(mob/living/user, list/modifiers)
 	if(!internal_magazine && magazine)
 		if(!magazine.ammo_count())
 			eject_magazine(user)

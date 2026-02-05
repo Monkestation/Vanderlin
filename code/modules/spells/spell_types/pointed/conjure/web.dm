@@ -9,6 +9,9 @@
 	cooldown_time = 60 SECONDS
 	spell_cost = 40
 
+	invocation = "Strands that bind!"
+	invocation_type = INVOCATION_WHISPER
+
 	summon_type = list(/obj/structure/spider/stickyweb)
 	summon_radius = 3
 	summon_amount = 0

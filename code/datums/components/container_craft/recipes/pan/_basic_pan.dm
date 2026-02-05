@@ -10,7 +10,7 @@
 /datum/container_craft/pan/get_real_time(atom/host, mob/user, estimated_multiplier)
 	var/real_cooking_time = crafting_time * estimated_multiplier
 	if(user.mind)
-		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking) * 0.2)
+		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking, TRUE) * 0.2)
 		real_cooking_time = round(real_cooking_time)
 	return real_cooking_time
 
@@ -250,7 +250,7 @@
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	cooked_smell = /datum/pollutant/food/griddlecake
 
-/datum/container_craft/pan/griddlecakeapple
+/datum/container_craft/pan/griddlecakeberry
 	name = "Jacksberry Griddlecake"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry

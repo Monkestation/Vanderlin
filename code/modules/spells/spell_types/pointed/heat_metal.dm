@@ -63,7 +63,7 @@
 	T.hott = tyme
 	addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 30 SECONDS)
 	T.proxy_heat(150)
-	T.update_appearance()
+	T.update_appearance(UPDATE_ICON_STATE)
 	T.visible_message("<font color='yellow'>After [owner]'s incantation, [T.held_item] inside [T] starts glowing from divine heat.</font>")
 
 /datum/action/cooldown/spell/heat_metal/proc/handle_anvil(obj/machinery/anvil/A) //Stole the code from smithing.
@@ -72,7 +72,7 @@
 		START_PROCESSING(SSmachines, A)
 	A.cool_time = 30 SECONDS
 	addtimer(VARSET_CALLBACK(A, cool_time, 10 SECONDS), 30 SECONDS)
-	A.update_appearance()
+	A.update_appearance(UPDATE_ICON_STATE)
 	A.visible_message("<font color='yellow'>After [owner]'s incantation, [A] begins to glow from divine heat.</font>")
 
 /datum/action/cooldown/spell/heat_metal/proc/handle_living_entity(mob/target)
@@ -112,7 +112,7 @@
 	target.dropItemToGround(targeteditem)
 	target.visible_message("<font color='yellow'>[target]'s [targeteditem.name] glows brightly and sears their flesh!</font>", "<font color='yellow'>Your [targeteditem.name] glows brightly, burning your hand!</font>")
 	target.emote("painscream")
-	playsound(target.loc, 'sound/misc/frying.ogg', 80, FALSE, -1)
+	playsound(target, 'sound/misc/frying.ogg', 80, FALSE, -1)
 	var/datum/effect_system/spark_spread/sparks = new()
 	sparks.set_up(1, 1, target.loc)
 	sparks.start()
@@ -149,7 +149,7 @@
 	)
 
 	target.emote("painscream")
-	playsound(target.loc, 'sound/misc/frying.ogg', 80, FALSE, -1)
+	playsound(target, 'sound/misc/frying.ogg', 80, FALSE, -1)
 	var/datum/effect_system/spark_spread/sparks = new()
 	sparks.set_up(1, 1, target.loc)
 	sparks.start()

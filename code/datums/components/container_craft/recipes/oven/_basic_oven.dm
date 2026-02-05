@@ -9,7 +9,7 @@
 /datum/container_craft/oven/get_real_time(atom/host, mob/user, estimated_multiplier)
 	var/real_cooking_time = crafting_time * estimated_multiplier
 	if(user.mind)
-		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking) * 0.2)
+		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking, TRUE) * 0.2)
 		real_cooking_time = round(real_cooking_time)
 	return real_cooking_time
 
@@ -144,6 +144,13 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/berry/poison = 1)
 	output = /obj/item/reagent_containers/food/snacks/pie/cooked/poison
 	cooked_smell = /datum/pollutant/food/berry_pie
+
+/datum/container_craft/oven/pie/borowiki
+	name = "Borowiki Pie"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/borowiki = 1)
+	output = /obj/item/reagent_containers/food/snacks/pie/cooked/borowiki
+	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/borowiki/good
+	cooked_smell = /datum/pollutant/food/borowiki_pie
 
 /datum/container_craft/oven/bread
 	name = "Bread"

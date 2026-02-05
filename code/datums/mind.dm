@@ -118,6 +118,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 	var/list/notes = list() //RTD add notes button
 
+	//assoc list of frumentarii you know of to a BOOL of if they are still frumentarii
 	var/list/cached_frumentarii = list()
 
 	var/datum/sleep_adv/sleep_adv = null
@@ -202,18 +203,19 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /// check if this mind knows X
 /datum/mind/proc/do_i_know(datum/mind/person, name)
 	if(!person && !name)
-		return
+		return FALSE
 	if(person)
 		var/mob/living/carbon/human/H = person.current
 		if(!istype(H))
 			return
 		for(var/P in known_people)
-			if(H.real_name == P)
+			if(lowertext(H.real_name) == lowertext(P))
 				return TRUE
-	if(name)
+	else if(name)
 		for(var/P in known_people)
-			if(name == P)
+			if(lowertext(name) == lowertext(P))
 				return TRUE
+	return FALSE
 
 /// we are removed from X's known people
 /datum/mind/proc/become_unknown_to(person)
@@ -298,8 +300,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		C.last_mind = src
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_martial_arts(current)
-	if(old_current.skills)
-		old_current.skills.set_current(current)
 
 	RegisterSignal(current, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
@@ -383,8 +383,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /// removes all antag datums from a mind
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
-	for(var/a in antag_datums)
-		var/datum/antagonist/antag_datum_ref = a
+	for(var/datum/antagonist/antag_datum_ref as anything in antag_datums)
 		antag_datum_ref.on_removal()
 
 /**
@@ -396,8 +395,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/has_antag_datum(datum_type, check_subtypes = TRUE)
 	if(!datum_type)
 		CRASH("has_antag_datum was called without an antag datum specified!")
-	for(var/a in antag_datums)
-		var/datum/antagonist/antag_datum_ref = a
+	for(var/datum/antagonist/antag_datum_ref as anything in antag_datums)
 		if(check_subtypes && istype(antag_datum_ref, datum_type))
 			return antag_datum_ref
 		else
@@ -506,13 +504,20 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /// Output current targets to the player
 /datum/mind/proc/recall_targets(mob/recipient, window=1)
 	var/output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
-	for (var/mob/living/carbon in GLOB.mob_living_list) // Iterate through all mobs in the world
-		if ((carbon.real_name != recipient.real_name) && ((carbon.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))//To be on the list they must be hunted, not be the user and not be a dummy (There is a dummy that has all vices for some reason)
-			output += "<br>[carbon.real_name]"
+	for (var/mob/living/carbon in GLOB.mob_living_list)
+		if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))
+			output += "<br><b>[carbon.real_name]</b>"
 			if (carbon.job)
 				output += " - [carbon.job]"
-	output += "<br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 
+			// Get the hunted quirk and display the reason
+			var/datum/quirk/vice/hunted/hunted_quirk = carbon.get_quirk(/datum/quirk/vice/hunted)
+			if(hunted_quirk && hunted_quirk.customization_value && hunted_quirk.customization_value != "")
+				output += "<br><i>Hunted for: [hunted_quirk.customization_value]</i>"
+			else
+				output += "<br><i>Hunted for: Unknown reasons</i>"
+
+	output += "<br><br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 	if(window)
 		recipient << browse(output,"window=memory")
 
@@ -530,6 +535,13 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 			to_chat(usr, span_warning("Invalid antagonist ref to be removed."))
 			return
 		antag_datum_ref.admin_remove(usr)
+
+	else if(href_list["vv_antag"])
+		var/datum/antagonist/antag_datum_ref = locate(href_list["vv_antag"]) in antag_datums
+		if(!istype(antag_datum_ref))
+			to_chat(usr, span_warning("Invalid antagonist ref to view variables."))
+			return
+		usr.client.debug_variables(antag_datum_ref)
 
 	else if (href_list["memory_edit"])
 		var/new_memo = copytext(sanitize(input("Write new memory", "Memory", memory) as null|message),1,MAX_MESSAGE_LEN)
@@ -776,10 +788,18 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
  ** skill - associated skill
  ** amt - amount of experience to give
  ** silent - is the player notified of their skill change?
- ** check_apprentice - do apprentices recieve skill experience too?
+ ** check_apprentice - do apprentices receive skill experience too?
 */
 /datum/mind/proc/add_sleep_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
+	if(HAS_TRAIT(current, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	amt *= GLOB.sleep_experience_modifier
+
+	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+		amt *= 1.2
+
+	amt *= current.get_skill_exp_multiplier(skill)
+
 	if(check_apprentice)
 		current.adjust_apprentice_exp(skill, amt, silent)
 	if(sleep_adv.add_sleep_experience(skill, amt, silent))

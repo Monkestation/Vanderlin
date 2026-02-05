@@ -10,6 +10,10 @@
 		/datum/attunement/dark = 0.6,
 	)
 
+	//https://www.youtube.com/watch?v=MfK3Ygb7Jzk
+	invocation = "Fall."
+	invocation_type = INVOCATION_SHOUT
+
 	charge_time = 2 SECONDS
 	cooldown_time = 25 SECONDS
 	spell_cost = 35

@@ -39,3 +39,10 @@ GLOBAL_VAR(string_filename_current_key)
 		GLOB.string_cache[filename] = json_load("[directory]/[filename]")
 	else
 		CRASH("file not found: [directory]/[filename]")
+
+/proc/check_strings(filename as text, key as text, directory = "strings")
+	load_strings_file(filename, directory)
+
+	if((filename in GLOB.string_cache) && (key in GLOB.string_cache[filename]))
+		return TRUE
+	return FALSE

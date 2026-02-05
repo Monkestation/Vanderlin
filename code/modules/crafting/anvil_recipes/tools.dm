@@ -108,6 +108,11 @@
 	abstract_type = /datum/anvil_recipe/tools/iron
 ///////////////////////////////////////////////
 
+/datum/anvil_recipe/tools/iron/syringe
+	name = "Infusion Syringe"
+	recipe_name = "infusion syringe"
+	created_item = /obj/item/reagent_containers/syringe
+
 /datum/anvil_recipe/tools/iron/keyring
 	name = "3x Keyrings"
 	recipe_name = "three Keyrings"
@@ -352,6 +357,13 @@
 	name = "2x Platters (silver)"
 	created_item = /obj/item/plate/silver
 	craftdiff = 2
+
+/datum/anvil_recipe/tools/silver/servantbell
+	name = "x3 Service Bells"
+	created_item = /obj/item/servant_bell
+	createditem_extra = 2
+	craftdiff = 3
+
 
 // --------- GOLD -----------
 

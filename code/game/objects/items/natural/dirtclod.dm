@@ -10,14 +10,14 @@
 	. = ..()
 	icon_state = "clod[rand(1,2)]"
 
-/obj/item/natural/dirtclod/attackby(obj/item/W, mob/user, params)
+/obj/item/natural/dirtclod/attackby(obj/item/W, mob/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/S = W
 		if(!S.heldclod && user.used_intent.type == /datum/intent/shovelscoop)
-			playsound(loc,'sound/items/dig_shovel.ogg', 100, TRUE)
+			playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 			src.forceMove(S)
 			S.heldclod = src
-			W.update_appearance()
+			W.update_appearance(UPDATE_ICON_STATE)
 			return
 	return ..()
 
@@ -40,7 +40,7 @@
 			qdel(src)
 			new /obj/structure/fluff/clodpile(T)
 
-/obj/item/natural/dirtclod/attack_self(mob/living/user, params)
+/obj/item/natural/dirtclod/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] scatters [src].</span>")
 	qdel(src)
 
@@ -58,25 +58,25 @@
 	. = ..()
 	dir = pick(GLOB.cardinals)
 
-/obj/structure/fluff/clodpile/attackby(obj/item/W, mob/user, params)
+/obj/structure/fluff/clodpile/attackby(obj/item/W, mob/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/S = W
 		if(user.used_intent.type == /datum/intent/shovelscoop)
 			if(!S.heldclod)
-				playsound(loc,'sound/items/dig_shovel.ogg', 100, TRUE)
+				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 				var/obj/item/J = new /obj/item/natural/dirtclod(S)
 				S.heldclod = J
-				W.update_appearance()
+				W.update_appearance(UPDATE_ICON_STATE)
 				dirtamt--
 				if(dirtamt <= 0)
 					qdel(src)
 				return
 			else
-				playsound(loc,'sound/items/empty_shovel.ogg', 100, TRUE)
+				playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
 				var/obj/item/I = S.heldclod
 				S.heldclod = null
 				qdel(I)
-				W.update_appearance()
+				W.update_appearance(UPDATE_ICON_STATE)
 				dirtamt++
 				if(dirtamt > 5)
 					dirtamt = 5

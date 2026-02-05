@@ -79,9 +79,9 @@
 	if(!cast_on.put_in_hands(new_hand, del_on_fail = TRUE))
 		reset_spell_cooldown()
 		if (cast_on.usable_hands == 0)
-			to_chat(cast_on, span_warning("You dont have any usable hands!"))
+			to_chat(cast_on, span_warning("I don't have any usable hands!"))
 		else
-			to_chat(cast_on, span_warning("Your hands are full!"))
+			to_chat(cast_on, span_warning("My hands are full!"))
 		return FALSE
 
 	attached_hand = new_hand
@@ -154,14 +154,13 @@
  *
  * When our hand hits an atom, we can cast do_hand_hit() on them.
  */
-/datum/action/cooldown/spell/undirected/touch/proc/on_hand_hit(datum/source, atom/victim, mob/caster, proximity_flag, click_parameters)
+/datum/action/cooldown/spell/undirected/touch/proc/on_hand_hit(datum/source, atom/victim, mob/caster, proximity_flag, list/modifiers)
 	SIGNAL_HANDLER
 	SHOULD_NOT_OVERRIDE(TRUE) // DEFINITELY don't put effects here, put them in cast_on_hand_hit
 
 	if(!proximity_flag || !can_hit_with_hand(victim, caster))
 		return
 
-	var/list/modifiers = params2list(click_parameters)
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		INVOKE_ASYNC(src, PROC_REF(do_secondary_hand_hit), source, victim, caster, modifiers)
 	else
@@ -307,7 +306,7 @@
 	if(spell)
 		spell_which_made_us = WEAKREF(spell)
 
-/obj/item/melee/touch_attack/attack(mob/target, mob/living/carbon/user)
+/obj/item/melee/touch_attack/attack(mob/target, mob/living/carbon/user, list/modifiers)
 	if(!iscarbon(user)) //Look ma, no hands
 		return TRUE
 	if(!(user.mobility_flags & MOBILITY_USE))
@@ -332,5 +331,5 @@
 	holder.temporarilyRemoveItemFromInventory(src, force = TRUE)
 	qdel(src)
 
-/obj/item/melee/touch_attack/attack_self(mob/user, params)
+/obj/item/melee/touch_attack/attack_self(mob/user, list/modifiers)
 	qdel(src)

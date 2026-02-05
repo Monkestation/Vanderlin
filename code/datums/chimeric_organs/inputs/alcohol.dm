@@ -1,6 +1,6 @@
 /datum/chimeric_node/input/reagent/alcohol
 	name = "dwarven"
-	desc = "Will trigger from any drank reagent but remove non alcoholic drinks"
+	desc = "Will trigger from any drank reagent but remove non-alcoholic drinks"
 	is_special = TRUE
 	node_purity = 100 // No delay
 	tier = 4
@@ -11,5 +11,5 @@
 		trigger_output(consumed_amount * 0.2)
 		return
 
-	hosted_carbon.reagents.remove_reagent(consumed_reagent.type, consumed_amount) // you don't get to enjoy non alcoholic drinks anymore
+	hosted_carbon.reagents.remove_reagent(consumed_reagent.type, consumed_amount) // you don't get to enjoy non-alcoholic drinks anymore
 	trigger_output(consumed_amount * 0.2)

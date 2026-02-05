@@ -230,7 +230,7 @@
 	if(prob(0.1)) //has a chance to spawn a mob hallucination, gg to those who get the reference
 		text = pick_list_replacements("maniac.json", "dreamer_blurb_incoming")
 		show_blurb(target, duration = 3 SECONDS, message = text, fade_time = 3 SECONDS, screen_position = "CENTER, BOTTOM+1", text_alignment = "center", text_color = "white", outline_color = "black", speed = 0)
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/handle_maniac_mob_hallucination, target), rand(8 SECONDS, 15 SECONDS))
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(handle_maniac_mob_hallucination), target), rand(8 SECONDS, 15 SECONDS))
 		return
 	text = pick_list_replacements("maniac.json", "dreamer_blurb")
 	show_blurb(target, duration = 3 SECONDS, message = text, fade_time = 3 SECONDS, screen_position = screen_location, text_alignment = text_align, text_color = "white", outline_color = "black")

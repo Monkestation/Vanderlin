@@ -108,11 +108,7 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 
 	AddElement(/datum/element/connect_loc, loc_connections)
 
-
 	LAZYADD(GLOB.runes, src)
-
-
-
 
 /obj/effect/blood_rune/Destroy()
 
@@ -196,7 +192,6 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 		if (2)
 			if (prob(15))
 				qdel(src)
-
 
 /obj/effect/blood_rune/update_icon(draw_up_to = 3)
 	. = ..()
@@ -329,7 +324,7 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 /obj/effect/blood_rune/attack_hand(mob/living/user)
 	trigger(user)
 
-/obj/effect/blood_rune/attackby(obj/I, mob/user)
+/obj/effect/blood_rune/attackby(obj/I, mob/user, list/modifiers)
 	..()
 	if(istype(I, /obj/item/clothing/neck/psycross))
 		to_chat(user, span_notice("You disrupt the vile magic with the deadening field of \the [I]!") )

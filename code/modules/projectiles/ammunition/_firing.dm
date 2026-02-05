@@ -1,4 +1,4 @@
-/obj/item/ammo_casing/proc/fire_casing(atom/target, mob/living/user, params, distro, quiet, zone_override, spread, atom/fired_from)
+/obj/item/ammo_casing/proc/fire_casing(atom/target, mob/living/user, modifiers, distro, quiet, zone_override, spread, atom/fired_from)
 	distro += variance
 	for (var/i = max(1, pellets), i > 0, i--)
 		var/targloc = get_turf(target)
@@ -8,7 +8,7 @@
 				spread = round((rand() - 0.5) * distro)
 			else //Smart spread
 				spread = round((i / pellets - 0.5) * distro)
-		if(!throw_proj(target, targloc, user, params, spread))
+		if(!throw_proj(target, targloc, user, modifiers, spread))
 			return 0
 		if(i > 1)
 			newshot()
@@ -38,7 +38,7 @@
 		reagents.trans_to(BB, reagents.total_volume, transfered_by = user) //For chemical darts/bullets
 		qdel(reagents)
 
-/obj/item/ammo_casing/proc/throw_proj(atom/target, turf/targloc, mob/living/user, params, spread)
+/obj/item/ammo_casing/proc/throw_proj(atom/target, turf/targloc, mob/living/user, list/modifiers, spread)
 	var/turf/curloc
 	if(user)
 		curloc = get_turf(user)
@@ -58,7 +58,7 @@
 		if(target) //if the target is right on our location we'll skip the travelling code in the proj's fire()
 			direct_target = target
 	if(!direct_target)
-		BB.preparePixelProjectile(target, isnull(user) ? src : user, params, spread)
+		BB.preparePixelProjectile(target, isnull(user) ? src : user, modifiers, spread)
 	BB.fire(null, direct_target)
 	BB = null
 	return TRUE

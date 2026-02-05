@@ -28,7 +28,7 @@
 	SIGNAL_HANDLER
 
 	// Holy weakness only triggers on entering churches
-	if (!istype(get_area(cursed_mob), /area/rogue/indoors/town/church))
+	if (!istype(get_area(cursed_mob), /area/indoors/town/church))
 		if((cursed_mob in entered))
 			entered -= cursed_mob
 		return

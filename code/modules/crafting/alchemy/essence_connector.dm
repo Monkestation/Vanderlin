@@ -1,14 +1,15 @@
 /obj/item/essence_connector
 	name = "pestran connector"
-	desc = "A oddly shaped object used to create connections between alchemical apparatus. Something under the metal squirms..."
+	desc = "A oddly shaped object used to create connections between alchemical apparatus. Can sense nearby essence nodes. Something under the metal squirms..."
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "connector"
 	w_class = WEIGHT_CLASS_SMALL
 	var/obj/machinery/essence/source_device = null
 	var/connecting = FALSE
 	slot_flags = ITEM_SLOT_HIP
+	COOLDOWN_DECLARE(next_scan)
 
-/obj/item/essence_connector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/essence_connector/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag)
 		. = ..()
 		return
@@ -23,12 +24,68 @@
 	else
 		start_connection(machine, user)
 
-/obj/item/essence_connector/attack_self(mob/user, params)
+/obj/item/essence_connector/attack_self(mob/user, list/modifiers)
 	if(connecting)
 		cancel_connection(user)
 	else
-		to_chat(user, span_info("Click and drag between devices to establish connections, or right-click to remove connections."))
+		if(!COOLDOWN_FINISHED(src, next_scan))
+			return
 
+		COOLDOWN_START(src, next_scan, 2 SECONDS)
+
+		var/obj/structure/essence_node/closest
+		var/closest_dist = INFINITY
+		for(var/obj/structure/essence_node/node as anything in GLOB.essence_nodes)
+			if(!isturf(node.loc))
+				continue
+			if(node.z != user.z)
+				continue
+			if(get_dist(user, node) > closest_dist)
+				continue
+			closest = node
+			closest_dist = get_dist(user, node)
+
+		if(!closest)
+			return
+
+		var/dir = get_dir(user, closest)
+		var/arrow_color
+
+		switch(closest_dist)
+			if(1 to 5)
+				arrow_color = COLOR_GREEN
+			if(6 to 10)
+				arrow_color = COLOR_YELLOW
+			if(11 to 15)
+				arrow_color = COLOR_ORANGE
+			else
+				arrow_color = COLOR_RED
+
+		var/datum/hud/user_hud = user.hud_used
+		if(!user_hud || !istype(user_hud, /datum/hud) || !islist(user_hud.infodisplay))
+			return
+
+		var/atom/movable/screen/multitool_arrow/arrow = new(null, user_hud)
+		arrow.color = arrow_color
+		arrow.screen_loc = "CENTER-1,CENTER-1"
+		arrow.transform = matrix(dir2angle(dir), MATRIX_ROTATE)
+
+		user_hud.infodisplay += arrow
+		user_hud.show_hud(user_hud.hud_version)
+
+		QDEL_IN(arrow, 1.5 SECONDS)
+
+/atom/movable/screen/multitool_arrow
+	icon = 'icons/effects/96x96.dmi'
+	icon_state = "multitool_arrow"
+	pixel_x = -32
+	pixel_y = -32
+
+/atom/movable/screen/multitool_arrow/Destroy()
+	if(hud)
+		hud.infodisplay -= src
+		INVOKE_ASYNC(hud, TYPE_PROC_REF(/datum/hud, show_hud), hud.hud_version)
+	return ..()
 
 /obj/item/essence_connector/proc/start_connection(obj/machinery/essence/machine, mob/user)
 	source_device = machine

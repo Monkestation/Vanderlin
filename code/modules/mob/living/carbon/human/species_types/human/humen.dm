@@ -27,9 +27,6 @@
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
-	inherent_skills = list(
-		/datum/skill/misc/reading = 1,
-	)
 
 	use_skintones = TRUE
 

@@ -44,7 +44,7 @@
 	body += "html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden;}"
 	body += "#container { display: flex; flex-direction: row; align-items: flex-start; width: 100%; overflow-x: hidden; flex-wrap: nowrap;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#left { flex: 2; padding-right: 10px; min-width: 0; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]}"
-	body += "#skills-section, #languages-section, #stats-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
+	body += "#skills-section, #quirks-section, #languages-section, #stats-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
 	body += "#right { flex: 1; border-left: 2px solid black; padding-left: 10px; max-height: 500px; overflow-y: auto; width: 250px; min-width: 250px; box-sizing: border-box; position: relative;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#right-header { display: flex; justify-content: space-around; padding: 5px; background: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-bottom: 2px solid black; position: sticky; top: 0; z-index: 10; }"
 	body += "#right-header button { flex: 1; margin: 2px; padding: 5px; cursor: pointer; font-weight: bold; border: none; background-color: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-radius: 5px; }"
@@ -58,6 +58,7 @@
 	body += "    document.getElementById('skills-section').style.display = (section === 'skills') ? 'block' : 'none';"
 	body += "    document.getElementById('languages-section').style.display = (section === 'languages') ? 'block' : 'none';"
 	body += "	 document.getElementById('stats-section').style.display = (section === 'stats') ? 'block' : 'none';"
+	body += "	 document.getElementById('quirks-section').style.display = (section === 'quirks') ? 'block' : 'none';"
 	body += "}"
 
 	body += "function refreshAndKeepSection(section) {"
@@ -118,17 +119,14 @@
 		if(isliving(M))
 			var/mob/living/living = M
 			patron = initial(living.patron.name)
-		var/flaw = ""
 		var/curse_string = ""
 		var/job = ""
 		if(ishuman(M))
 			var/mob/living/carbon/human/human_mob = M
-			flaw = human_mob.charflaw
 			curse_string = human_mob.curses.Join(", ")
 			job = human_mob?.mind.assigned_role.title
 
 		body += "<br><br>Current Patron: <a href='?_src_=holder;[HrefToken()];changepatron=add;mob=[REF(M)]'>\[[patron ? patron : "NA"]\]</a>"
-		body += "<br>Current Flaw: <a href='?_src_=holder;[HrefToken()];changeflaw=add;mob=[REF(M)]'>\[[flaw ? flaw : "NA"]\]</a>"
 		body += "<br>Current Curses: <a href='?_src_=holder;[HrefToken()];modifycurses=add;mob=[REF(M)]'>\[[curse_string ? curse_string : "NA"]\]</a>"
 		body += "<br>Current Job: <a href='?_src_=holder;[HrefToken()];setjob=add;mob=[REF(M)]'>\[[job ? job : "NA"]\]</a>"
 
@@ -193,6 +191,7 @@
 	body += "<button onclick=\"toggleSection('skills')\">Skills</button>"
 	body += "<button onclick=\"toggleSection('languages')\">Languages</button>"
 	body += "<button onclick=\"toggleSection('stats')\">Stats</button>"
+	body += "<button onclick=\"toggleSection('quirks')\">Quirks</button>"
 	body += "</div>"
 
 
@@ -201,8 +200,8 @@
 	if(M.mind)
 		for(var/skill_type in SSskills.all_skills)
 			var/datum/skill/skill = GetSkillRef(skill_type)
-			if(skill in M.skills?.known_skills)
-				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill]] "
+			if(skill_type in M.skills?.known_skills)
+				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill_type]] "
 			else
 				body += "<li>[initial(skill.name)]: 0"
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];increase_skill=[REF(M)];skill=[skill.type]'>+</a> "
@@ -260,6 +259,61 @@
 
 	body += "</ul></div>"
 
+	body += "<div id='quirks-section'>"
+	body += "<h3>Quirks</h3><ul>"
+
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+
+		// Display current quirks
+		if(length(H.quirks))
+			body += "<h4>Current Quirks:</h4><ul>"
+			for(var/datum/quirk/Q in H.quirks)
+				body += "<li>[initial(Q.name)] ([Q.point_value] pts) "
+				body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];remove_quirk=[REF(M)];quirk=[Q.type]'>Remove</a></li>"
+			body += "</ul>"
+		else
+			body += "<p><i>No quirks</i></p>"
+
+		// Add new quirk dropdown
+		body += "<h4>Add Quirk:</h4>"
+		body += "<select id='quirk-select'>"
+		body += "<option value=''>-- Select Quirk --</option>"
+
+		// Group quirks by category
+		for(var/category in list(QUIRK_BOON, QUIRK_VICE, QUIRK_PECULIARITY))
+			var/category_name = ""
+			switch(category)
+				if(QUIRK_BOON)
+					category_name = "Boons"
+				if(QUIRK_VICE)
+					category_name = "Vices"
+				if(QUIRK_PECULIARITY)
+					category_name = "Peculiarities"
+
+			body += "<optgroup label='[category_name]'>"
+			for(var/quirk_data in GLOB.quirk_points_by_type[category])
+				var/quirk_type = quirk_data["type"]
+				var/quirk_name = quirk_data["name"]
+				var/quirk_points = quirk_data["value"]
+				body += "<option value='[quirk_type]'>[quirk_name] ([quirk_points] pts)</option>"
+			body += "</optgroup>"
+
+		body += "</select>"
+		body += " <button class='skill-btn' onclick='addQuirk()'>Add</button>"
+
+		// JavaScript for adding quirks
+		body += "<script>"
+		body += "function addQuirk() {"
+		body += "    var select = document.getElementById('quirk-select');"
+		body += "    var quirkType = select.value;"
+		body += "    if(quirkType) {"
+		body += "        window.location.href = '?_src_=holder;[HrefToken()];add_quirk=[REF(M)];quirk=' + encodeURIComponent(quirkType);"
+		body += "    }"
+		body += "}"
+		body += "</script>"
+
+	body += "</ul></div>"
 
 	body += "</div>"
 	body += "</div>"
@@ -279,7 +333,7 @@
 
 	if(!check_rights())
 		return
-	M.revive(TRUE, TRUE)
+	M.revive(ADMIN_HEAL_ALL)
 	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
 	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
 
@@ -857,8 +911,7 @@
 
 	dat += "<table>"
 
-	for(var/j in SSjob.joinable_occupations)
-		var/datum/job/job = j
+	for(var/datum/job/job as anything in SSjob.joinable_occupations)
 		count++
 		var/J_title = html_encode(job.title)
 		var/J_opPos = html_encode(job.total_positions - (job.total_positions - job.current_positions))

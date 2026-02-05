@@ -8,7 +8,7 @@
 				visible_message("<span class='notice'>[M] [response_help_continuous] [src].</span>", \
 								"<span class='notice'>[M] [response_help_continuous] you.</span>", null, null, M)
 				to_chat(M, "<span class='notice'>I [response_help_simple] [src].</span>")
-				playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+				playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 			return TRUE
 
 		if(INTENT_GRAB)
@@ -24,7 +24,7 @@
 				to_chat(M, "<span class='warning'>I don't want to hurt [src]!</span>")
 				return
 			M.do_attack_animation(src, M.used_intent.animname, atom_bounce = TRUE)
-			playsound(loc, punched_sound, 25, TRUE, -1)
+			playsound(src, punched_sound, 25, TRUE, -1)
 			var/damage = M.get_punch_dmg()
 			next_attack_msg.Cut()
 			attack_threshold_check(damage)
@@ -113,7 +113,7 @@
 			to_chat(M, "<span class='warning'>I don't want to hurt [src]!</span>")
 			return
 		M.do_attack_animation(src, M.used_intent.animname, atom_bounce = TRUE)
-		playsound(loc, punched_sound, 25, TRUE, -1)
+		playsound(src, punched_sound, 25, TRUE, -1)
 		var/damage = M.get_punch_dmg()
 		next_attack_msg.Cut()
 		attack_threshold_check(damage)
@@ -137,7 +137,7 @@
 			visible_message("<span class='notice'>[M.name] [response_help_continuous] [src].</span>", \
 							"<span class='notice'>[M.name] [response_help_continuous] you.</span>", null, COMBAT_MESSAGE_RANGE, M)
 			to_chat(M, "<span class='notice'>I [response_help_simple] [src].</span>")
-			playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+			playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 
 
 /mob/living/simple_animal/attack_animal(mob/living/simple_animal/M)
@@ -164,10 +164,9 @@
 		return FALSE
 	if(user == target)
 		return FALSE
-	if(!HAS_TRAIT(user, TRAIT_GARROTED))
-		if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
-			to_chat(user, "<span class='notice'>I can't move my leg!</span>")
-			return
+	if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
+		to_chat(user, "<span class='notice'>I can't move my leg!</span>")
+		return
 	if(user.stamina >= user.maximum_stamina)
 		return FALSE
 	if(user.loc == target.loc)

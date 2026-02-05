@@ -74,6 +74,7 @@
 	dropshrink = 0.5
 	var/textper = 100
 	var/maxlen = 2000
+	var/writable = TRUE
 
 	var/cached_mailer
 	var/cached_mailedto
@@ -217,7 +218,7 @@
 /obj/item/paper/proc/reset_spamflag()
 	spam_flag = FALSE
 
-/obj/item/paper/attack_self(mob/user, params)
+/obj/item/paper/attack_self(mob/user, list/modifiers)
 	if(mailer)
 		user.visible_message("<span class='notice'>[user] opens the letter from [mailer].</span>")
 		cached_mailer = mailer
@@ -238,7 +239,7 @@
 	if(rigged && (SSevents.holidays && SSevents.holidays[APRIL_FOOLS]))
 		if(!spam_flag)
 			spam_flag = TRUE
-			playsound(loc, 'sound/blank.ogg', 50, TRUE)
+			playsound(src, 'sound/blank.ogg', 50, TRUE)
 			addtimer(CALLBACK(src, PROC_REF(reset_spamflag)), 20)
 
 /obj/item/paper/proc/addtofield(id, text, links = 0)
@@ -409,7 +410,7 @@
 			format_browse(info_links, usr)
 			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 
-/obj/item/paper/attackby(obj/item/P, mob/living/user, params)
+/obj/item/paper/attackby(obj/item/P, mob/living/user, list/modifiers)
 	if(resistance_flags & ON_FIRE)
 		return ..()
 
@@ -439,6 +440,8 @@
 		return
 
 	if(istype(P, /obj/item/natural/feather/infernal))
+		if(!writable)
+			return
 		if(trapped)
 			to_chat(user, span_warning("[src] is already trapped."))
 		else
@@ -446,6 +449,8 @@
 			trapped = TRUE
 
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
+		if(!writable)
+			return
 		if(user.is_blind())
 			to_chat(user, span_warning("I want to write on [src], but I cannot."))
 			return

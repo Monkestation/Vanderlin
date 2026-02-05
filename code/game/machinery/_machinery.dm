@@ -152,7 +152,7 @@
 	if(!(stat & BROKEN) && !(flags_1 & NODECONSTRUCT_1))
 		stat |= BROKEN
 		SEND_SIGNAL(src, COMSIG_MACHINERY_BROKEN, damage_flag)
-		update_appearance()
+		update_appearance(UPDATE_ICON)
 		return TRUE
 
 /obj/machinery/contents_explosion(severity, target)
@@ -162,7 +162,7 @@
 /obj/machinery/handle_atom_del(atom/A)
 	if(A == occupant)
 		occupant = null
-		update_appearance()
+		update_appearance(UPDATE_ICON)
 		updateUsrDialog()
 
 /obj/proc/can_be_unfasten_wrench(mob/user, silent) //if we can unwrench this object; returns SUCCESSFUL_UNFASTEN and FAILED_UNFASTEN, which are both TRUE, or CANT_UNFASTEN, which isn't.

@@ -14,7 +14,7 @@
 
 /datum/keybinding/admin/admin_say/down(client/user)
 	. = ..()
-	user.get_admin_say()
+	user.native_say?.open_say_window("Admin")
 	return TRUE
 
 /datum/keybinding/admin/admin_ghost

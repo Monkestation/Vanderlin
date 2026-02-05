@@ -177,7 +177,7 @@
 /datum/special_trait/too_smart/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat(STATKEY_INT, 5)
 	ADD_TRAIT(character, TRAIT_BAD_MOOD, "[type]")
-	character.set_flaw(/datum/charflaw/paranoid)
+	character.add_quirk(/datum/quirk/vice/paranoid)
 
 /datum/special_trait/bookworm
 	name = "Bookworm"
@@ -210,7 +210,7 @@
 	name = "Psydon's Drunkest Rider"
 	greet_text = span_notice("I ride! None of the laws shall stop me for that is Psydon's divine will!")
 	req_text = "Worship Psydon"
-	allowed_patrons = list(/datum/patron/psydon)
+	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 	weight = 100
 
 /datum/special_trait/psydons_rider/on_apply(mob/living/carbon/human/character, silent)
@@ -314,8 +314,8 @@
 	weight = 50
 
 /datum/special_trait/tavernbrawler/on_apply(mob/living/carbon/human/character)
-	character.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 3, 4, TRUE)
-	character.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 3, 4, TRUE)
+	character.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 2, 3, TRUE)
+	character.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 2, 3, TRUE)
 	character.change_stat(STATKEY_STR, 1)
 	character.change_stat(STATKEY_END, 1)
 	character.change_stat(STATKEY_CON, 1)
@@ -398,6 +398,7 @@
 
 /datum/special_trait/gourmand/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_NASTY_EATER, "[type]")
+	ADD_TRAIT(character, TRAIT_ROT_EATER, "[type]")
 
 /datum/special_trait/lucky
 	name = "Fortune's Grace"
@@ -467,13 +468,13 @@
 	name = "War Veteran"
 	greet_text = span_boldwarning("I have fought in the goblin wars.. albeit at a cost.")
 	weight = 25
-	req_text = "Be middle aged or old"
+	req_text = "Be middle-aged or old"
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
 
 /datum/special_trait/war_veteran/on_apply(mob/living/carbon/human/character, silent)
-	character.set_flaw(/datum/charflaw/limbloss/arm_l)
-	character.set_flaw(/datum/charflaw/noeyel)
-	character.set_flaw(/datum/charflaw/old_war_wound)
+	character.add_quirk(/datum/quirk/vice/wooden_arm_left)
+	character.add_quirk(/datum/quirk/vice/cyclops_left)
+	character.add_quirk(/datum/quirk/vice/old_war_wound)
 	character.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 	character.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
 	character.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
@@ -484,7 +485,7 @@
 	weight = 25
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
-	character.set_flaw(/datum/charflaw/addiction/maniac)
+	character.add_quirk(/datum/quirk/vice/maniac)
 	character.verbs |= /mob/living/carbon/human/proc/torture_victim
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
@@ -641,7 +642,7 @@
 	character.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	character.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+	character.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
@@ -664,13 +665,14 @@
 	character.adjust_skillrank(/datum/skill/combat/wrestling, 6, TRUE)
 	character.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
 	character.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	character.set_stat_modifier("[type]", STATKEY_STR, 20)
-	character.set_stat_modifier("[type]", STATKEY_CON, 20)
-	character.set_stat_modifier("[type]", STATKEY_END, 20)
+	character.base_constitution = 20
+	character.base_strength = 20
+	character.base_endurance = 20
+	character.recalculate_stats()
 
 /datum/special_trait/my_precious
 	name = "My Precious"
-	greet_text = span_notice("The ring, it's so shiny.. so valuable, I can feel it's power. It's all mine!")
+	greet_text = span_notice("The ring, it's so shiny.. so valuable, I can feel its power. It's all mine!")
 	req_text = "Be a beggar"
 	allowed_jobs = list(/datum/job/vagrant)
 	weight = 50
@@ -722,7 +724,7 @@
 
 /datum/special_trait/skeleton
 	name = "Skeleton"
-	greet_text = span_boldwarning("I was- am afflicted with a curse by a lich that left me without my flesh but i still retained controls..(This is not a antagonist role, expect to be attacked unless wearing something to cover your head.)")
+	greet_text = span_boldwarning("I was... am... afflicted with a curse by a lich that left me without my flesh, but I still retained control of myself... (This is not an antagonist role, expect to be attacked unless wearing something to cover your head.)")
 	allowed_jobs = list(/datum/job/pilgrim)
 	req_text = "Be a Pilgrim."
 	weight = 20
@@ -742,7 +744,7 @@
 
 /datum/special_trait/overcompensating
 	name = "Overcompensating"
-	greet_text = span_boldwarning("I have an enormous sword on my back, I had it crafted specially for me, it left me peniless, but now nobody will mention my small pintle!.")
+	greet_text = span_boldwarning("I have an enormous sword on my back, I had it crafted specially for me, it left me without even a zenny, but now nobody will mention my small pintle!.")
 	allowed_jobs = list(/datum/job/vagrant)
 	req_text = "Be a Beggar"
 	weight = 10
@@ -763,7 +765,7 @@
 	name = "Devout Knight"
 	greet_text = span_notice("I am a devoted warrior of the Ten, and my equipments lie hidden in their resting place, ready to be donned when the call comes.")
 	allowed_jobs = list(/datum/job/royalknight)
-	allowed_flaw = /datum/charflaw/addiction/godfearing
+	allowed_flaw = /datum/quirk/vice/godfearing
 	allowed_patrons = ALL_TEMPLE_PATRONS
 	req_text = "Be a Royal knight, With the Flaw 'devout follower' and be a follower of the ten."
 	weight = 50
@@ -776,8 +778,8 @@
 	switch(character.patron?.type)
 		if(/datum/patron/divine/astrata)
 			psycross = /obj/item/clothing/neck/psycross/silver/astrata
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/astrata
-			cloak = /obj/item/clothing/cloak/stabard/templar/astrata
+			helmet = /obj/item/clothing/head/helmet/heavy/astratahelm
+			cloak = /obj/item/clothing/cloak/templar/astratan
 			weapon = /obj/item/weapon/sword/long/exe/astrata
 			character.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
@@ -796,14 +798,14 @@
 			character.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
 		if(/datum/patron/divine/necra)
 			psycross = /obj/item/clothing/neck/psycross/silver/necra
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/necra
-			cloak = /obj/item/clothing/cloak/stabard/templar/necra
+			helmet = /obj/item/clothing/head/helmet/heavy/necrahelm
+			cloak = /obj/item/clothing/cloak/templar/necran
 			weapon = /obj/item/weapon/flail/sflail/necraflail
 			character.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 		if(/datum/patron/divine/pestra)
 			psycross = /obj/item/clothing/neck/psycross/silver/pestra
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
-			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
+			cloak = /obj/item/clothing/cloak/templar/pestran
 			weapon = /obj/item/weapon/knife/dagger/steel/pestrasickle
 			character.mind.special_items["Second Weapon"] = /obj/item/weapon/knife/dagger/steel/pestrasickle
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
@@ -820,19 +822,20 @@
 			ADD_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 		if(/datum/patron/divine/ravox)
 			psycross = /obj/item/clothing/neck/psycross/silver/ravox
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/ravox
+			helmet = /obj/item/clothing/head/helmet/heavy/ravoxhelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 			weapon = /obj/item/weapon/sword/long/ravox
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		if(/datum/patron/divine/malum)
 			psycross = /obj/item/clothing/neck/psycross/silver/malum
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
-			cloak = /obj/item/clothing/cloak/stabard/templar/malum
-			weapon = /obj/item/weapon/mace/goden/steel/malum
+			cloak = /obj/item/clothing/cloak/templar/malumite
+			weapon = /obj/item/weapon/hammer/sledgehammer/war/malum
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 			character.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
 		if(/datum/patron/divine/abyssor)
 			psycross = /obj/item/clothing/neck/psycross/silver/abyssor
+			helmet = /obj/item/clothing/head/helmet/heavy/abyssorgreathelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 			weapon = /obj/item/weapon/polearm/spear/abyssor
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
@@ -841,14 +844,18 @@
 		if(/datum/patron/divine/xylix)
 			psycross = /obj/item/clothing/neck/psycross/silver/xylix
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/xylix
-			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
+			cloak = /obj/item/clothing/cloak/templar/xylixian
 			weapon = /obj/item/weapon/whip/xylix
 			character.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4, TRUE)
 		if(/datum/patron/inhumen/graggar_zizo) //In case a admin decide to give them graggazo roundstart
 			psycross = /obj/item/clothing/ring/silver/toper
-			helmet = /obj/item/clothing/head/helmet/graggar
+			helmet = /obj/item/clothing/head/helmet/heavy/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			weapon = /obj/item/weapon/sword/long/judgement/evil
+		else
+			cloak = /obj/item/clothing/cloak/templar/undivided
+			psycross = /obj/item/clothing/neck/psycross/silver/undivided
+			weapon = /obj/item/weapon/sword/long/decorated
 	if(!character.has_language(/datum/language/celestial))
 		character.grant_language(/datum/language/celestial)
 		to_chat(character, span_info("I can speak Celestial with ,c before my speech."))
@@ -903,7 +910,7 @@
 
 /datum/special_trait/glutton
 	name = "The Glutton"
-	greet_text = span_notice("Baotha has cursed my entire bloodline, demanding that we indulge in luxuries and dine in decadance.")
+	greet_text = span_notice("Baotha has cursed my entire bloodline, demanding that we indulge in luxuries and dine in decadence.")
 	weight = 20
 	req_text = "Monarch"
 	allowed_jobs = list(/datum/job/lord)
@@ -956,6 +963,22 @@
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
-	var/datum/inspiration/I = new /datum/inspiration(character)
-	I.grant_inspiration(character, bard_tier = BARD_T2)
+	character.inspiration = new /datum/inspiration(character)
 	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
+
+/datum/special_trait/baothan
+	name = "Adored by Baotha"
+	greet_text = span_notice("Baotha adore me so much that she gave me some goodies, dope tbh.")
+	weight = 10
+	allowed_patrons = list(/datum/patron/inhumen/baotha)
+	req_text = "Have Baotha as your Patron and do not be a Iconoclast, a profane paladin or a inhumen cleric"
+	restricted_jobs = list(/datum/job/advclass/wretch/heretic, /datum/job/advclass/combat/inhumencleric, /datum/job/advclass/combat/profanepaladin)
+
+/datum/special_trait/baothan/on_apply(mob/living/carbon/human/character, silent)
+	var/holder = character.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_churching()
+		devotion.grant_to(character)
+	character.mind.special_items["Baotha's Gift"] = /obj/item/clothing/head/corruptflower
+	character.AddComponent(/datum/component/theme_music)

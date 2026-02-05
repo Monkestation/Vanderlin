@@ -16,6 +16,9 @@
 
 	var/obj/effect/skill_tracker/thieves_cant/thieves_marking
 
+/turf/closed/basic
+	baseturfs = /turf/closed/basic
+
 /turf/closed/basic/New()//Do not convert to Initialize
 	SHOULD_CALL_PARENT(FALSE)
 	//This is used to optimize the map loader
@@ -123,20 +126,20 @@
 /turf/closed/Initialize()
 	. = ..()
 	if(above_floor)
-		var/turf/open/transparent/openspace/target = get_step_multiz(src, UP)
+		var/turf/open/openspace/target = GET_TURF_ABOVE(src)
 		if(istype(target))
 			target.ChangeTurf(above_floor)
 
 /turf/closed/Destroy()
 	if(above_floor)
-		var/turf/above = get_step_multiz(src, UP)
+		var/turf/above = GET_TURF_ABOVE(src)
 		if(above)
 			if(istype(above, above_floor))
 				var/count
 				for(var/D in GLOB.cardinals)
 					var/turf/T = get_step(above, D)
 					if(T)
-						var/turf/closed/C = get_step_multiz(T, DOWN)
+						var/turf/closed/C = GET_TURF_BELOW(T)
 						if(istype(C))
 							count++
 					if(count >= 2)
@@ -151,21 +154,22 @@
 /turf/closed/attack_hand(mob/user)
 	if(wallclimb)
 		if(isliving(user))
+			var/turf/user_turf = get_turf(user)
 			var/mob/living/L = user
 			var/climbsound = 'sound/foley/climb.ogg'
 			if(L.stat != CONSCIOUS)
 				return
-			var/turf/target = get_step_multiz(user, UP)
-			if(!istype(target, /turf/open/transparent/openspace))
+			var/turf/target = GET_TURF_ABOVE(user_turf)
+			if(!istype(target, /turf/open/openspace))
 				to_chat(user, "<span class='warning'>I can't climb here.</span>")
 				return
 			if(!L.can_zTravel(target, UP))
 				to_chat(user, "<span class='warning'>I can't climb there.</span>")
 				return
-			target = get_step_multiz(src, UP)
-			if(!target || istype(target, /turf/closed) || istype(target, /turf/open/transparent/openspace))
-				target = get_step_multiz(user.loc, UP)
-				if(!target || !istype(target, /turf/open/transparent/openspace))
+			target = GET_TURF_ABOVE(src)
+			if(!target || istype(target, /turf/closed) || istype(target, /turf/open/openspace))
+				target = GET_TURF_ABOVE(user_turf)
+				if(!target || !istype(target, /turf/open/openspace))
 					to_chat(user, "<span class='warning'>I can't climb here.</span>")
 					return
 			for(var/obj/structure/F in target)
@@ -176,7 +180,7 @@
 			var/amt2raise = 0
 			var/boon = 0
 			if(L.mind)
-				var/myskill = L.get_skill_level(/datum/skill/misc/climbing)
+				var/myskill = L.get_skill_level(/datum/skill/misc/climbing, TRUE)
 				amt2raise = floor(L.STAINT/2)
 				boon = L.get_learning_boon(/datum/skill/misc/climbing)
 				var/obj/structure/table/TA = locate() in L.loc
@@ -212,14 +216,21 @@
 	else
 		..()
 
+/turf/closed/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	feel_turf(user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /turf/closed/attack_ghost(mob/dead/observer/user)
 	if(!user.Adjacent(src))
 		return
-	var/turf/target = get_step_multiz(user, UP)
+	var/turf/target = GET_TURF_ABOVE(get_turf(user))
 	if(!target)
 		to_chat(user, "<span class='warning'>I can't go there.</span>")
 		return
-	if(!istype(target, /turf/open/transparent/openspace))
+	if(!istype(target, /turf/open/openspace))
 		to_chat(user, "<span class='warning'>I can't go there.</span>")
 		return
 	user.forceMove(target)

@@ -4,7 +4,7 @@
 
 /mob/living/simple_animal/hostile/gnome_homunculus
 	name = "gnome homunculus"
-	desc = "A small, industrious magical construct that resembles a tiny gnome. Its eyes glow with alchemical energy and it seems eager to help with menial tasks."
+	desc = "A small, industrious magical construct that resembles a tiny gnome. Its eyes glow with alchemical energy, and it seems eager to help with menial tasks."
 	icon = 'icons/mob/gnome2.dmi' // You'll need appropriate sprites
 	icon_state = "gnome"
 	icon_living = "gnome"
@@ -188,7 +188,7 @@
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_EMOTION_STORE, throwingdatum?.thrower, EMOTION_SCARED, "[throwingdatum.thrower] throw thing at me!", 0)
 
-/mob/living/simple_animal/hostile/gnome_homunculus/attackby(obj/item/item, mob/living/user, params)
+/mob/living/simple_animal/hostile/gnome_homunculus/attackby(obj/item/item, mob/living/user, list/modifiers)
 	// Check what kind of item interaction this is
 	if(istype(item, /obj/item/reagent_containers/food))
 		handle_food_gift(item, user)

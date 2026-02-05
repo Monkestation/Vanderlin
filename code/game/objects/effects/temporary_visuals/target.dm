@@ -111,7 +111,7 @@
 
 /obj/effect/temp_visual/lightning/Initialize(mapload)
 	. = ..()
-	playsound(get_turf(src),'sound/weather/rain/thunder_1.ogg', 80, TRUE)
+	playsound(src,'sound/weather/rain/thunder_1.ogg', 80, TRUE)
 	add_overlay(emissive_appearance(icon, icon_state))
 
 /obj/effect/temp_visual/target/lightning

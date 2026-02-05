@@ -40,9 +40,7 @@
 	var/static/area_or_turf_fail_types = typecacheof(list(
 		))
 	// Ignore these areas and dont let people expand them. They can expand into them though
-	var/static/blacklisted_areas = typecacheof(list(
-		/area/space,
-		))
+	var/static/blacklisted_areas = typecacheof(list())
 	var/list/turfs = detect_room(get_turf(creator), area_or_turf_fail_types, BP_MAX_ROOM_SIZE*2)
 	if(!turfs)
 		to_chat(creator, "<span class='warning'>The new area must be completely airtight.</span>")
@@ -102,7 +100,7 @@
 
 	newA.reg_in_areas_in_z()
 
-	to_chat(creator, "<span class='notice'>I have created a new area, named [newA.name]. It is now weather proof, and constructing an APC will allow it to be powered.</span>")
+	to_chat(creator, "<span class='notice'>I have created a new area, named [newA.name]. It is now weatherproof, and constructing an APC will allow it to be powered.</span>")
 	return TRUE
 
 #undef BP_MAX_ROOM_SIZE

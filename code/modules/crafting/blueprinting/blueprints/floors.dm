@@ -292,7 +292,7 @@
 
 /datum/blueprint_recipe/floor/masonic
 	name = "Masonic Tile"
-	desc = "Masonic flooring made of stoneblocks."
+	desc = "Masonic flooring made of stone blocks."
 	result_type = /turf/open/floor/tile/masonic
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -338,7 +338,7 @@
 
 /datum/blueprint_recipe/floor/diamond
 	name = "Diamond Tile"
-	desc = "Luxurious diamond-pattern flooring made of stoneblocks."
+	desc = "Luxurious diamond-pattern flooring made of stone blocks."
 	result_type = /turf/open/floor/tile/diamond
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -351,7 +351,7 @@
 
 /datum/blueprint_recipe/floor/diamond_blue
 	name = "Blue Diamond Tile"
-	desc = "Elegant blue diamond-pattern flooring made of stoneblocks."
+	desc = "Elegant blue diamond-pattern flooring made of stone blocks."
 	result_type = /turf/open/floor/tile/diamond/blue
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -364,7 +364,7 @@
 
 /datum/blueprint_recipe/floor/diamond_purple
 	name = "Purple Diamond Tile"
-	desc = "Regal purple diamond-pattern flooring made of stoneblocks."
+	desc = "Regal purple diamond-pattern flooring made of stone blocks."
 	result_type = /turf/open/floor/tile/diamond/purple
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -377,8 +377,21 @@
 
 /datum/blueprint_recipe/floor/bath
 	name = "Bath Tile"
-	desc = "Clean bathroom-style tiling made of stoneblocks."
+	desc = "Clean bathroom-style tiling made of stone blocks."
 	result_type = /turf/open/floor/tile/bath
+	required_materials = list(
+		/obj/item/natural/stoneblock = 2
+	)
+	construct_tool = /obj/item/weapon/hammer
+	category = "Floors"
+	floor_object = TRUE
+	skillcraft = /datum/skill/craft/masonry
+	craftdiff = 2
+
+/datum/blueprint_recipe/floor/bath/pool
+	name = "Pool Edge Tile"
+	desc = "Clean bathroom-style tiling made of stone blocks."
+	result_type = /turf/open/floor/tile/bath/pool
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
 	)
@@ -390,7 +403,7 @@
 
 /datum/blueprint_recipe/floor/bfloorz
 	name = "Blue Floor Tile"
-	desc = "Distinctive blue flooring made of stoneblocks."
+	desc = "Distinctive blue flooring made of stone blocks."
 	result_type = /turf/open/floor/tile/bfloorz
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -403,7 +416,7 @@
 
 /datum/blueprint_recipe/floor/tilerg
 	name = "Green Tile"
-	desc = "Decorative green tiling made of stoneblocks."
+	desc = "Decorative green tiling made of stone blocks."
 	result_type = /turf/open/floor/tile/tilerg
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -416,7 +429,7 @@
 
 /datum/blueprint_recipe/floor/checker
 	name = "Checker Tile"
-	desc = "Classic checkered flooring made of stoneblocks."
+	desc = "Classic checkered flooring made of stone blocks."
 	result_type = /turf/open/floor/tile/checker
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -429,7 +442,7 @@
 
 /datum/blueprint_recipe/floor/checkeralt
 	name = "Alternative Checker Tile"
-	desc = "Alternative checkered tile pattern made of stoneblocks."
+	desc = "Alternative checkered tile pattern made of stone blocks."
 	result_type = /turf/open/floor/tile/checkeralt
 	required_materials = list(
 		/obj/item/natural/stoneblock = 2
@@ -578,6 +591,19 @@
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
 		/obj/item/natural/dirtclod = 2
+	)
+	construct_tool = /obj/item/weapon/shovel
+	category = "Floors"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/floor/grasshealthy
+	name = "Healthy Grass"
+	desc = "A bit of extra fertilizer makes the difference."
+	result_type = /turf/open/floor/grass/healthy
+	required_materials = list(
+		/obj/item/natural/fibers = 3,
+		/obj/item/neuFarm/seed = 1,
+		/obj/item/natural/dirtclod = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -908,7 +934,7 @@
 	)
 	craftdiff = 2
 	skillcraft = /datum/skill/craft/carpentry
-	result_type = /turf/open/transparent/glass
+	result_type = /turf/open/glass
 
 /datum/blueprint_recipe/floor/concrete
 	name = "Concrete Floor"

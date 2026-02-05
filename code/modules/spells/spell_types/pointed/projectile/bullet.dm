@@ -6,6 +6,9 @@
 	spell_cost = 0
 	projectile_type = /obj/projectile/bullet/reusable/bullet
 
+	invocation = "PARRY THIS!!!"
+	invocation_type = INVOCATION_SHOUT
+
 /datum/action/cooldown/spell/projectile/bullet/cast(atom/cast_on, mob/living/carbon)
 	. = ..()
 	var/turf/T = get_turf(owner)

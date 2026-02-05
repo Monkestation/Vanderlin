@@ -11,6 +11,7 @@
 	invocation_type = "shout"
 	associated_skill = /datum/skill/magic/holy
 	cooldown_time = 30 SECONDS // 60 seconds cooldown
+	button_icon_state = "ABSOLVE"
 
 /datum/action/cooldown/spell/psydonabsolve/cast(mob/living/carbon/human/H)
 	. = ..()
@@ -44,14 +45,13 @@
 			// Create visual effects
 			H.apply_status_effect(/datum/status_effect/buff/psyvived)
 			// Kill the caster
-			user.say("MY LYFE FOR YOURS! LYVE, AS DOES HE!", forced = TRUE)
+			user.say("MY LIFE FOR YOURS! LIVE, AS DOES HE!", forced = TRUE)
 			user.death()
 			// Revive the target
-			H.revive(full_heal = TRUE, admin_revive = FALSE)
-			H.adjustOxyLoss(-H.getOxyLoss())
-			H.grab_ghost(force = TRUE) // even suicides
+			H.revive(HEAL_ALL)
+			H.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 			H.emote("breathgasp")
-			H.Jitter(100)
+			H.adjust_jitter(100 SECONDS)
 			H.update_body()
 			GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]++
 			ADD_TRAIT(H, TRAIT_IWASREVIVED, "[type]")

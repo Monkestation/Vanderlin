@@ -151,8 +151,8 @@
 		return
 
 	for(var/mob/living/carbon/human/H in view(2, src))
-		if(H.has_flaw(/datum/charflaw/addiction/pyromaniac))
-			H.sate_addiction()
+		if(H.has_quirk(/datum/quirk/vice/pyromaniac))
+			H.sate_addiction(/datum/quirk/vice/pyromaniac)
 
 	perform_exposure()
 	return
@@ -194,7 +194,7 @@
 	if(SSParticleWeather.runningWeather?.target_trait == PARTICLEWEATHER_RAIN) //this does apply to indoor turfs but w/e
 		var/turf/floor= get_turf(src)
 		if(!floor?.outdoor_effect?.weatherproof)
-			modifier = 0.5
+			modifier *= 0.5
 	if(isturf(get_turf(src)))
 		var/turf/floor= get_turf(src)
 		floor.burn_power = max(0, floor.burn_power - (1 * firelevel))
@@ -205,7 +205,7 @@
 			change_firelevel(min(3, firelevel+1))
 
 		if(burn_power)
-			for(var/turf/ranged_floor in range(1, src))
+			for(var/turf/ranged_floor as anything in RANGE_TURFS(1, src))
 				var/falling = FALSE
 				if(isopenspace(ranged_floor))
 					falling = TRUE

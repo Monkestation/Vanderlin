@@ -270,7 +270,7 @@ SUBSYSTEM_DEF(spatial_grid)
 	var/cells_on_x_axis = src.cells_on_x_axis
 
 	//technically THIS list only contains lists, but inside those lists are grid cell datums and we can go without a SINGLE var init if we do this
-	var/list/datum/spatial_grid_cell/grid_level = grids_by_z_level[center_turf.z]
+	var/list/list/datum/spatial_grid_cell/grid_level = grids_by_z_level[center_turf.z]
 	switch(type)
 		if(SPATIAL_GRID_CONTENTS_TYPE_CLIENTS)
 			for(var/row in BOUNDING_BOX_MIN(center_y) to BOUNDING_BOX_MAX(center_y, cells_on_y_axis))
@@ -669,7 +669,7 @@ SUBSYSTEM_DEF(spatial_grid)
 
 	if(insert_clients)
 		var/list/turfs
-		turfs = block(locate(1,1,z), locate(world.maxx, world.maxy, z))
+		turfs = Z_TURFS(z)
 
 		for(var/client_to_insert in 0 to insert_clients)
 			var/turf/random_turf = pick(turfs)

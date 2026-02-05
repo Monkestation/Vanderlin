@@ -54,7 +54,7 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 
 	if(!is_tennite(H))
 		bordered_message(H, list(
-			span_notice("Even though you are not a tennite and won't matter in the ultimate resolution of this conflict, you may pretend to be one and use the schism to further your own goals...")
+			span_notice("Even though you are not a Tennite and won't matter in the ultimate resolution of this conflict, you may pretend to be one and use the schism to further your own goals...")
 		))
 
 /datum/tennite_schism/proc/process_winner()

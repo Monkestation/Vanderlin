@@ -8,5 +8,5 @@
 
 /obj/item/organ/neck_feature/medicator
 	name = "medicator fluff"
-	desc = "Its slimy..."
+	desc = "It's slimy..."
 	accessory_type = /datum/sprite_accessory/neck_feature/fluff/medicator

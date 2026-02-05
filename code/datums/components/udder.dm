@@ -44,7 +44,7 @@
 			examine_list += span_notice("[parent]'s [udder.name] is round and full.")
 
 ///signal called on parent being attacked with an item
-/datum/component/udder/proc/on_attackby(datum/source, obj/item/milking_tool, mob/user)
+/datum/component/udder/proc/on_attackby(datum/source, obj/item/milking_tool, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	var/mob/living/milked = parent
@@ -114,7 +114,7 @@
 	udder_mob = null
 	on_generate_callback = null
 
-/obj/item/udder/process(seconds_per_tick)
+/obj/item/udder/process()
 	if(isanimal(udder_mob))
 		var/mob/living/simple_animal/simple_animal = udder_mob
 		if(SEND_SIGNAL(simple_animal, COMSIG_MOB_RETURN_HUNGER) <= 0)

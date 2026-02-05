@@ -277,8 +277,7 @@
 
 /atom/movable/proc/onZImpact(turf/T, levels)
 	var/atom/highest = T
-	for(var/i in T.contents)
-		var/atom/A = i
+	for(var/atom/A as anything in T)
 		if(!A.density)
 			continue
 		if(isobj(A) || ismob(A))
@@ -392,14 +391,15 @@
 	. = pulledby
 	pulledby = new_pulledby
 
-/atom/movable/proc/stop_pulling(forced = TRUE)
-	if(pulling)
-		if(pulling != src)
-			pulling.set_pulledby(null)
-			var/atom/movable/old_pulling = pulling
-			pulling = null
-			SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
+/atom/movable/proc/stop_pulling(pulling_broke_free = FALSE)
 	setGrabState(GRAB_PASSIVE)
+	if(!pulling)
+		return
+	pulling.set_pulledby(null)
+	var/atom/movable/old_pulling = pulling
+	pulling = null
+	SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
+	SEND_SIGNAL(src, COMSIG_ATOM_NO_LONGER_PULLING, old_pulling)
 
 /atom/movable/proc/Move_Pulled(atom/movable/A)
 	if(!pulling)
@@ -531,55 +531,115 @@
 			lastcardinal = direct
 			. = ..()
 		else //Diagonal move, split it into cardinal moves
-			moving_diagonally = FIRST_DIAG_STEP
-			var/first_step_dir
-			// The `&& moving_diagonally` checks are so that a forceMove taking
-			// place due to a Crossed, Bumped, etc. call will interrupt
-			// the second half of the diagonal movement, or the second attempt
-			// at a first half if step() fails because we hit something.
-			if (direct & NORTH)
-				if (direct & EAST)
-					if (step(src, NORTH) && moving_diagonally)
-						first_step_dir = NORTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, EAST)
-					else if (moving_diagonally && step(src, EAST))
-						first_step_dir = EAST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, NORTH)
-				else if (direct & WEST)
-					if (step(src, NORTH) && moving_diagonally)
-						first_step_dir = NORTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, WEST)
-					else if (moving_diagonally && step(src, WEST))
-						first_step_dir = WEST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, NORTH)
-			else if (direct & SOUTH)
-				if (direct & EAST)
-					if (step(src, SOUTH) && moving_diagonally)
-						first_step_dir = SOUTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, EAST)
-					else if (moving_diagonally && step(src, EAST))
-						first_step_dir = EAST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, SOUTH)
-				else if (direct & WEST)
-					if (step(src, SOUTH) && moving_diagonally)
-						first_step_dir = SOUTH
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, WEST)
-					else if (moving_diagonally && step(src, WEST))
-						first_step_dir = WEST
-						moving_diagonally = SECOND_DIAG_STEP
-						. = step(src, SOUTH)
-			if(moving_diagonally == SECOND_DIAG_STEP)
-				if(!. && update_dir)
-					setDir(first_step_dir)
-			moving_diagonally = 0
-			return
+			if(HAS_TRAIT(src, TRAIT_BLOCKED_DIAGONAL))
+				if (direct & NORTH)
+					if (direct & EAST)
+						if(lastcardinal == NORTH)
+							direction_to_move = EAST
+							if(!step(src, EAST))
+								direction_to_move = NORTH
+								. = step(src, NORTH)
+						else if(lastcardinal == EAST)
+							direction_to_move = NORTH
+							if(!step(src, NORTH))
+								direction_to_move = EAST
+								. = step(src, EAST)
+						else
+							direction_to_move = pick(NORTH,EAST)
+							. = step(src, direction_to_move)
+					else if (direct & WEST)
+						if(lastcardinal == NORTH)
+							direction_to_move = WEST
+							if(!step(src, WEST))
+								direction_to_move = NORTH
+								. = step(src, NORTH)
+						else if(lastcardinal == WEST)
+							direction_to_move = NORTH
+							if(!step(src, NORTH))
+								direction_to_move = WEST
+								. = step(src, WEST)
+						else
+							direction_to_move = pick(NORTH,WEST)
+							. = step(src, direction_to_move)
+				else if (direct & SOUTH)
+					if (direct & EAST)
+						if(lastcardinal == SOUTH)
+							direction_to_move = EAST
+							if(!step(src, EAST))
+								direction_to_move = SOUTH
+								. = step(src, SOUTH)
+						else if(lastcardinal == EAST)
+							direction_to_move = SOUTH
+							if(!step(src, SOUTH))
+								direction_to_move = EAST
+								. = step(src, EAST)
+						else
+							direction_to_move = pick(SOUTH,EAST)
+							. = step(src, direction_to_move)
+					else if (direct & WEST)
+						if(lastcardinal == SOUTH)
+							direction_to_move = WEST
+							if(!step(src, WEST))
+								direction_to_move = SOUTH
+								. = step(src, SOUTH)
+						else if(lastcardinal == WEST)
+							direction_to_move = SOUTH
+							if(!step(src, SOUTH))
+								direction_to_move = WEST
+								. = step(src, WEST)
+						else
+							direction_to_move = pick(SOUTH,WEST)
+							. = step(src, direction_to_move)
+			else
+				moving_diagonally = FIRST_DIAG_STEP
+				var/first_step_dir
+				// The `&& moving_diagonally` checks are so that a forceMove taking
+				// place due to a Crossed, Bumped, etc. call will interrupt
+				// the second half of the diagonal movement, or the second attempt
+				// at a first half if step() fails because we hit something.
+				if (direct & NORTH)
+					if (direct & EAST)
+						if (step(src, NORTH) && moving_diagonally)
+							first_step_dir = NORTH
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, EAST)
+						else if (moving_diagonally && step(src, EAST))
+							first_step_dir = EAST
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, NORTH)
+					else if (direct & WEST)
+						if (step(src, NORTH) && moving_diagonally)
+							first_step_dir = NORTH
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, WEST)
+						else if (moving_diagonally && step(src, WEST))
+							first_step_dir = WEST
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, NORTH)
+				else if (direct & SOUTH)
+					if (direct & EAST)
+						if (step(src, SOUTH) && moving_diagonally)
+							first_step_dir = SOUTH
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, EAST)
+						else if (moving_diagonally && step(src, EAST))
+							first_step_dir = EAST
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, SOUTH)
+					else if (direct & WEST)
+						if (step(src, SOUTH) && moving_diagonally)
+							first_step_dir = SOUTH
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, WEST)
+						else if (moving_diagonally && step(src, WEST))
+							first_step_dir = WEST
+							moving_diagonally = SECOND_DIAG_STEP
+							. = step(src, SOUTH)
+				if(moving_diagonally == SECOND_DIAG_STEP)
+					if(!. && update_dir)
+						setDir(first_step_dir)
+				moving_diagonally = 0
+				return
 
 	if(!loc || (loc == oldloc && oldloc != newloc))
 		last_move = 0
@@ -719,7 +779,7 @@
 
 /**
  * `Uncross()` is a default BYOND proc that is called when something is *going*
- * to exit this atom's turf. It is prefered over `Uncrossed` when you want to
+ * to exit this atom's turf. It is preferred over `Uncrossed` when you want to
  * deny that movement, such as in the case of border objects, objects that allow
  * you to walk through them in any direction except the one they block
  * (think side windows).
@@ -758,6 +818,8 @@
 
 /atom/movable/proc/forceMove(atom/destination)
 	. = FALSE
+	if(QDELING(src))
+		CRASH("Illegal forceMove() on qdeling [type]")
 	if(destination)
 		. = doMove(destination)
 	else
@@ -922,8 +984,8 @@
 	var/turf/curloc = get_turf(src)
 	if(TT.target_turf && curloc)
 		if(TT.target_turf.z > curloc.z)
-			var/turf/above = get_step_multiz(curloc, UP)
-			if(istype(above, /turf/open/transparent/openspace))
+			var/turf/above = GET_TURF_ABOVE(curloc)
+			if(istype(above, /turf/open/openspace))
 				forceMove(above)
 	if(spin)
 		SpinAnimation(5, 1)
@@ -935,8 +997,7 @@
 	TT.tick()
 
 /atom/movable/proc/handle_buckled_mob_movement(newloc, direct, glide_size_override)
-	for(var/m in buckled_mobs)
-		var/mob/living/buckled_mob = m
+	for(var/mob/living/buckled_mob as anything in buckled_mobs)
 		if(!buckled_mob.Move(newloc, direct, glide_size_override))
 			forceMove(buckled_mob.loc)
 			last_move = buckled_mob.last_move
@@ -1354,8 +1415,10 @@
 	var/datum/language/chosen_langtype
 	var/highest_priority
 
-	for(var/lt in H.languages)
-		var/datum/language/langtype = lt
+	for(var/datum/language/langtype as anything in H.languages)
+		if(!ispath(langtype))
+			langtype = text2path(langtype)
+
 		if(!can_speak_in_language(langtype))
 			continue
 

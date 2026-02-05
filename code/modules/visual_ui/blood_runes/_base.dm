@@ -71,11 +71,9 @@ GLOBAL_LIST_INIT(blood_communion, list())
 	flick("rune_guide-click", src)
 	var/mob/M = get_user()
 	if (M)
-
 		var/list/available_runes = list()
 		var/i = 1
-		for(var/blood_spell in subtypesof(/datum/rune_spell))
-			var/datum/rune_spell/instance = blood_spell
+		for(var/datum/rune_spell/instance as anything in subtypesof(/datum/rune_spell))
 			if (initial(instance.secret))
 				continue
 			available_runes.Add("[initial(instance.name)] - \Roman[i]")
