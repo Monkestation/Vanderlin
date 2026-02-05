@@ -65,6 +65,8 @@
 
 	user.visible_message("<span class='info'>[user] extracts the seeds.</span>")
 
+	var/turf/location = get_turf(src)
+
 	new seed(location, source_genetics)
 	if(prob(90))
 		new seed(location, source_genetics)
