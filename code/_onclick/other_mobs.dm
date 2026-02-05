@@ -84,11 +84,24 @@
 
 	user.changeNext_move(CLICK_CD_MELEE)
 
-	if(user.cmode)
-		if(user.rmb_intent)
-			user.rmb_intent.special_attack(user, src)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		// Throw hands
+	if(!user.cmode)
+		if(!length(surgeries))
+			return SECONDARY_ATTACK_CONTINUE_CHAIN
+
+		var/selected_zone = user.zone_selected
+		for(var/datum/surgery/operation as anything in surgeries)
+			if(operation.location == selected_zone)
+				to_chat(user, span_notice("I stop operating on [src]'s [parse_zone(selected_zone)]."))
+				qdel(operation)
+				break
+
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(user.rmb_intent)
+		user.rmb_intent.special_attack(user, src)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	return SECONDARY_ATTACK_CALL_NORMAL // Punch
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
