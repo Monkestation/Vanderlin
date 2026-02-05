@@ -9,7 +9,7 @@
 	cookonme = TRUE
 	dir = SOUTH
 	crossfire = TRUE
-	fueluse = 0
+	fueluse = 12 MINUTES
 
 /obj/machinery/light/fueled/firebowl/attack_hand(mob/user)
 	. = ..()
@@ -124,7 +124,6 @@
 	icon_state = "wallfire1"
 	base_state = "wallfire"
 	density = FALSE
-	fueluse = 0
 	crossfire = FALSE
 	cookonme = TRUE
 	temperature_change = 30
@@ -137,8 +136,15 @@
 	crossfire = FALSE
 	cookonme = FALSE
 	SET_BASE_PIXEL(0, 32)
+	fueluse = 10 MINUTES
 	soundloop = null
 	temperature_change = 0
+
+/obj/machinery/light/fueled/wallfire/candle/Initialize(mapload)
+	if(mapload && !istype(get_area(src), /area/indoors/soilsons))
+		fueluse = 0
+	. = ..()
+
 
 /obj/machinery/light/fueled/wallfire/candle/OnCrafted(dirin, mob/user)
 	pixel_x = base_pixel_x
@@ -189,11 +195,11 @@
 	icon_state = "skullwallcandle1"
 	base_state = "skullwallcandle"
 
-/obj/machinery/light/fueled/wallfire/candle/skull/extinguish()
-	return FALSE
-
-/obj/machinery/light/fueled/wallfire/candle/skull/burn_out()
-	return FALSE
+///obj/machinery/light/fueled/wallfire/candle/skull/extinguish()
+//	return FALSE
+//
+///obj/machinery/light/fueled/wallfire/candle/skull/burn_out()
+//	return FALSE
 
 /obj/machinery/light/fueled/wallfire/candle/skull/r
 	SET_BASE_PIXEL(32, 0)
@@ -272,11 +278,23 @@
 					soundloop.start()
 				return TRUE
 
-/obj/machinery/light/fueled/torchholder/Initialize()
+/obj/machinery/light/fueled/torchholder/Initialize(mapload)
+	var/late_torchy = null
 	if(torchy)
-		torchy = new torchy(src)
-		torchy.spark_act()
+		if(!mapload || istype(get_area(src), /area/indoors/soilsons))
+			torchy = new torchy(src)
+			torchy.spark_act()
+		else if(prob(50)) // no torch
+			if(prob(35)) //unlit torch
+				late_torchy = torchy
+			torchy = null
+		else // burnt torch
+			torchy = new torchy(src)
+			torchy.fuel = 10
+			torchy.spark_act()
 	. = ..()
+	if(!torchy && late_torchy)
+		torchy = new late_torchy(src)
 
 /obj/machinery/light/fueled/torchholder/Destroy()
 	if(torchy)
@@ -376,7 +394,6 @@
 	brightness = 10
 	SET_BASE_PIXEL(-10, -10)
 	layer = 2.0
-	fueluse = 0
 	soundloop = null
 	crossfire = FALSE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
@@ -400,6 +417,7 @@
 	climb_time = 3 SECONDS
 	layer = TABLE_LAYER
 	climb_offset = 14
+	fueluse = 15 MINUTES
 	on = FALSE
 	cookonme = TRUE
 	soundloop = /datum/looping_sound/fireloop
@@ -510,7 +528,7 @@
 	layer = 2.8
 	brightness = 5
 	on = FALSE
-	fueluse = 15 MINUTES
+	fueluse = 10 MINUTES
 	bulb_colour = "#da5e21"
 	cookonme = TRUE
 	max_integrity = 30
@@ -558,7 +576,7 @@
 	brightness = 5
 	climbable = TRUE
 	on = FALSE
-	fueluse = 30 MINUTES
+	fueluse = 15 MINUTES
 	pass_flags_self = LETPASSTHROW
 	bulb_colour = "#eea96a"
 	max_integrity = 60
@@ -569,7 +587,7 @@
 	icon_state = "pyre1"
 	base_state = "pyre"
 	brightness = 10
-	fueluse = 30 MINUTES
+	fueluse = 15 MINUTES
 	layer = BELOW_MOB_LAYER
 	buckleverb = "crucifie"
 	can_buckle = 1

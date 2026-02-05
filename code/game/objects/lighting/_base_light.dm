@@ -185,10 +185,7 @@
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(s)
-	var/was_on = on
 	on = (s && status == LIGHT_OK)
-	if(!was_on && on)
-		addtimer(CALLBACK(src, PROC_REF(burn_out), FALSE), rand(6 MINUTES, 15 MINUTES))
 	update()
 
 /obj/machinery/light/deconstruct(disassembled = TRUE)

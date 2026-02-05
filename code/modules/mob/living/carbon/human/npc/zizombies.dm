@@ -394,6 +394,7 @@
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/militiamen)
 	dodgetime = 15
 	canparry = TRUE
@@ -419,21 +420,21 @@
 			wrists = /obj/item/clothing/wrists/bracers/leather
 			neck = /obj/item/clothing/neck/chaincoif
 			cloak = /obj/item/clothing/cloak/stabard/guard
-			head = /obj/item/clothing/head/helmet/kettle
+			head = /obj/item/clothing/head/helmet/kettle/iron
 		if(2) //zizombie Warrior
 			r_hand =/obj/item/weapon/polearm/spear
-			shoes = /obj/item/clothing/shoes/boots/armor/light
+			shoes =/obj/item/clothing/shoes/boots/armor/ironmaille
 			belt = /obj/item/storage/belt/leather
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 			pants = /obj/item/clothing/pants/tights/colored/vagrant
 			wrists = /obj/item/clothing/wrists/bracers/leather
-			neck = /obj/item/clothing/neck/chaincoif
+			neck = /obj/item/clothing/neck/chaincoif/iron
 			cloak = /obj/item/clothing/cloak/stabard/guard
 			head = /obj/item/clothing/head/helmet/kettle
 		if(3) //zizombie Warrior
 			r_hand =/obj/item/weapon/knife/cleaver/combat
-			shoes = /obj/item/clothing/shoes/boots/armor/light
+			shoes = /obj/item/clothing/shoes/boots/armor/light/rust
 			belt = /obj/item/storage/belt/leather
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
@@ -441,29 +442,29 @@
 			wrists = /obj/item/clothing/wrists/bracers/leather
 			neck = /obj/item/clothing/neck/chaincoif
 			cloak = /obj/item/clothing/cloak/stabard/guard
-			head = /obj/item/clothing/head/helmet/kettle
+			head = /obj/item/clothing/head/helmet/kettle/iron
 		if(4) //zizombie Warrior
 			r_hand =/obj/item/weapon/knife/hunting
-			shoes = /obj/item/clothing/shoes/boots/armor/light
+			shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 			belt = /obj/item/storage/belt/leather
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 			pants = /obj/item/clothing/pants/tights/colored/vagrant
 			wrists = /obj/item/clothing/wrists/bracers/leather
-			neck = /obj/item/clothing/neck/chaincoif
+			neck = /obj/item/clothing/neck/chaincoif/iron
 			cloak = /obj/item/clothing/cloak/stabard/guard
 			head = /obj/item/clothing/head/helmet/kettle
 		if(5) //zizombie Warrior
 			r_hand =/obj/item/weapon/axe/iron
-			shoes = /obj/item/clothing/shoes/boots/armor/light
+			shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 			belt = /obj/item/storage/belt/leather
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 			pants = /obj/item/clothing/pants/tights/colored/vagrant
 			wrists = /obj/item/clothing/wrists/bracers/leather
-			neck = /obj/item/clothing/neck/chaincoif
+			neck = /obj/item/clothing/neck/coif
 			cloak = /obj/item/clothing/cloak/stabard/guard
-			head = /obj/item/clothing/head/helmet/kettle
+			head = /obj/item/clothing/head/helmet/kettle/iron
 
 ///////////////////////////////////////////////////////////// EVENTMIN ZOMBIE GRENZELHOFT MERCENARIES
 /mob/living/carbon/human/species/zizombie/npc/GRENZEL/after_creation()

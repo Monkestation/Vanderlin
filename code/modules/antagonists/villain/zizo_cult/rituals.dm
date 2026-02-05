@@ -438,7 +438,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!target)
 		return
 	target.playsound_local(target, 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
-	target.fully_heal()
+	target.fully_heal(HEAL_DAMAGE|HEAL_WOUNDS|HEAL_BLOOD)
 	to_chat(target, span_notice("ZIZO EMPOWERS ME!"))
 
 /datum/ritual/fleshcrafting/darkeyes

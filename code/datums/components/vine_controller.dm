@@ -32,7 +32,7 @@
 		mutativeness = potency / 10
 	if(grow_speed == 0)
 		var/attempt = 0
-		while(max_vines > length(vines) && !QDELING(src) && attempt < 100)
+		while(max_vines > length(vines) && !QDELING(src) && attempt < 40)
 			process()
 			attempt++
 

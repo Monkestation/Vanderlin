@@ -81,6 +81,9 @@
 
 /obj/item/clothing/Initialize()
 	. = ..()
+	if(SSticker.current_state <= GAME_STATE_PREGAME)
+		update_integrity(max_integrity - rand(max_integrity * 0.75, 0), FALSE)
+
 	if(ispath(pocket_storage_component_path))
 		LoadComponent(pocket_storage_component_path)
 	if(length(prevent_crits) || armor_class)

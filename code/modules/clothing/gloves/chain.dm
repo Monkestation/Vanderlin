@@ -48,6 +48,8 @@
 	icon_state = "shadowgauntlets"
 	allowed_race = RACES_PLAYER_ELF_ALL
 	item_weight = 6 * STEEL_MULTIPLIER
+	max_integrity = INTEGRITY_STRONG
+	armor = ARMOR_MAILLE
 
 /obj/item/clothing/gloves/chain/vampire
 	name = "ancient ceremonial gloves"

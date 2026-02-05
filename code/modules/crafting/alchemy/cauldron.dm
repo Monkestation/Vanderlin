@@ -12,7 +12,7 @@
 	var/max_essence_types = 6
 	var/brewing = 0
 	var/datum/weakref/lastuser
-	fueluse = 20 MINUTES
+	fueluse = 10 MINUTES
 	crossfire = FALSE
 
 	var/datum/alch_cauldron_recipe/selected_recipe = null

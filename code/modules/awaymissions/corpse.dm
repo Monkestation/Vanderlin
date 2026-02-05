@@ -214,6 +214,7 @@
 	ADD_TRAIT(H, TRAIT_NOSLEEP, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
+	H.wander = TRUE
 
 	H.set_stat_modifier("[type]", STATKEY_STR, 3)
 	ch.add_wound(/datum/wound/black_briar_curse/chest, TRUE)

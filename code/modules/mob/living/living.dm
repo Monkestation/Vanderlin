@@ -1028,10 +1028,11 @@
 
 	if(heal_flags & HEAL_WOUNDS)
 		for(var/datum/wound/wound as anything in get_wounds())
-			if(heal_flags & ADMIN_HEAL_ALL)
+			if(heal_flags & HEAL_ADMIN)
 				qdel(wound)
 			else
-				wound.heal_wound(wound.whp, null, TRUE)
+				if((heal_flags & HEAL_NEGATIVE_DISEASES) || !istype(wound, /datum/wound/black_briar_curse))
+					wound.heal_wound(wound.whp, null, TRUE)
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL

@@ -233,6 +233,8 @@
 		climbable = TRUE
 		if(prob(10))
 			new /obj/item/natural/glass/shard (get_turf(src))
+		else
+			new /obj/effect/decal/cleanable/debris/glass(get_turf(src))
 	..()
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)

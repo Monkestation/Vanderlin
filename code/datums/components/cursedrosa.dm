@@ -22,11 +22,13 @@
 	var/obj/item/bodypart/affecting = target.get_bodypart(def_zone)
 	if(!affecting || affecting.status != BODYPART_ORGANIC)
 		return
-	if(target.getarmor(def_zone, "stab", 0, simulate=TRUE) - rand(ARMOR_GLOVES_LEATHER_GOOD["stab"], ARMOR_GLOVES_CHAIN["stab"] + 5) > 0)
+	if(target.getarmor(def_zone, "stab", 0, simulate=TRUE) - rand(ARMOR_LEATHER_GOOD["stab"], ARMOR_MAILLE_GOOD["stab"] + 5) >= 0)
 		return //we blocked it
-	playsound(parent, 'sound/combat/hits/hi_arrow.ogg', 20, TRUE, -4)
+	playsound(parent, 'sound/combat/hits/hi_arrow.ogg', 30, TRUE, -4)
+	if(prob(60))
+		return
 	var/wound_type = get_black_briar_wound_type(def_zone)
-	if(wound_type && (!affecting.has_wound(wound_type) || prob(30)))
+	if(wound_type && !affecting.has_wound(wound_type))
 		affecting.add_wound(wound_type, TRUE)
 
 /datum/component/cursedrosa/proc/atom_crossed(source, mob/living/carbon/target)
@@ -34,7 +36,7 @@
 		return
 	if(target.movement_type & (FLYING|FLOATING) || target.throwing)
 		return
-	if(HAS_TRAIT(target, TRAIT_KNEESTINGER_IMMUNITY) || HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
+	if(HAS_TRAIT(target, TRAIT_KNEESTINGER_IMMUNITY) || HAS_TRAIT(target, TRAIT_PIERCEIMMUNE) || HAS_TRAIT(target, TRAIT_NO_BRIAR_DEATH))
 		return
 	var/potential_zones = list(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
 	if(target.body_position == LYING_DOWN)
@@ -44,9 +46,9 @@
 /datum/component/cursedrosa/proc/attack_hand(source, mob/living/carbon/target)
 	if(!istype(target))
 		return
-	if(HAS_TRAIT(target, TRAIT_PIERCEIMMUNE))
+	if(HAS_TRAIT(target, TRAIT_PIERCEIMMUNE) || HAS_TRAIT(target, TRAIT_NO_BRIAR_DEATH))
 		return
 	if(prob(65))
 		return
-	var/def_zone = (target.active_hand_index == 1 ? BODY_ZONE_L_ARM : BODY_ZONE_R_ARM)
+	var/def_zone = (target.active_hand_index == 1 ? BODY_ZONE_PRECISE_L_HAND : BODY_ZONE_PRECISE_R_HAND)
 	attempt_infection(target, def_zone)

@@ -32,11 +32,26 @@
 	. = ..()
 	LAZYNULL(root_network)
 
+/datum/wound/black_briar_curse/get_visible_name(mob/user)
+	. = ..()
+	if(isobserver(user))
+		return
+	if(!isliving(user))
+		return
+	if(infection_percent >= BBC_STAGE_DETECTABLE)
+		return
+	var/mob/living/L = user
+	if(L.skills && L.get_skill_level(/datum/skill/misc/medicine) > 3)
+		return
+	. = null
+
 /datum/wound/black_briar_curse/has_special_infection()
 	return infection_percent >= BBC_STAGE_MID
 
-/datum/wound/black_briar_curse/get_check_name(mob/user)
-	if(can_examine || infection_percent >= BBC_STAGE_DETECTABLE)
+/datum/wound/black_briar_curse/get_check_name(mob/user, advanced)
+	if(isobserver(user))
+		return ..()
+	if(advanced || can_examine || infection_percent >= BBC_STAGE_DETECTABLE)
 		return ..()
 
 /datum/wound/black_briar_curse/can_apply_to_bodypart(obj/item/bodypart/affected)
@@ -123,8 +138,8 @@
 	update_appearance()
 
 /datum/wound/black_briar_curse/heal_wound(heal_amount, datum/source, full_heal = FALSE)
-	//if(full_heal) i don't give a fuck where you healed from ZIZOID
-	//	return ..() i don't give a fuck where you healed from ZIZOID
+	if(full_heal)
+		return ..()
 	if(infection_percent >= 1)
 		return FALSE
 	if(!istype(source, /datum/action/cooldown/spell/healing))
@@ -398,7 +413,7 @@
 			return /datum/wound/black_briar_curse/head
 		if(BODY_ZONE_CHEST)
 			return /datum/wound/black_briar_curse/chest
-		if(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+		if(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND)
 			return /datum/wound/black_briar_curse/arm
-		if(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+		if(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
 			return /datum/wound/black_briar_curse/leg

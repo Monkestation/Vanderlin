@@ -89,7 +89,11 @@
 		if(!location_accessible)
 			bodypart_status += "Obscured by clothing."
 
-		if(bandage || length(wounds))
+		var/list/wound_status = list()
+		for(var/datum/wound/wound as anything in wounds)
+			wound_status += wound.get_visible_name(user)
+		list_clear_nulls(wound_status)
+		if(bandage || length(wound_status))
 			bodypart_status += "<B>Wounds:</B>"
 			if(bandage)
 				var/usedclass = "notice"
@@ -97,8 +101,7 @@
 					usedclass = "bloody"
 				bodypart_status += "<a href='byond://?src=[owner_ref];bandage=[REF(bandage)];bandaged_limb=[REF(src)]' class='[usedclass]'>Bandaged</a>"
 			if(!bandage || observer_privilege)
-				for(var/datum/wound/wound as anything in wounds)
-					bodypart_status += wound.get_visible_name(user)
+				bodypart_status += wound_status
 
 	if(length(bodypart_status) <= 1)
 		bodypart_status += "[src] is healthy."
@@ -168,7 +171,7 @@
 	for(var/datum/wound/wound as anything in wounds)
 		if(!wound.check_name)
 			continue
-		wound_strings |= wound.get_check_name(user)
+		wound_strings |= wound.get_check_name(user, advanced)
 	wound_strings -= null
 	status += wound_strings
 

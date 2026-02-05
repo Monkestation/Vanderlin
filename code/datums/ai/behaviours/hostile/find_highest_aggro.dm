@@ -234,7 +234,7 @@
 	if(succeeded && world.time > last_speak + 10 SECONDS)
 		var/mob/living/pawn = controller.pawn
 		pawn.emote("rage")
-		pawn.say(pick(GLOB.species_hostile))
+		pawn.say(pick(GLOB.bum_aggro))
 		last_speak = world.time
 
 /datum/ai_behavior/find_aggro_targets/species_hostile/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
