@@ -82,5 +82,12 @@
                 "rscadd": "hollow curse ritual checks if the target is dead, hollow ritual checks if target has lux"
             }
         ]
+    },
+    "2026-02-04": {
+        "CheffieGithub": [
+            {
+                "refactor": "refactored click code to pass param lists directly, report any click issues"
+            }
+        ]
     }
 }

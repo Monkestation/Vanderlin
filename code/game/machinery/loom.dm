@@ -52,7 +52,7 @@
 	var/mob/living/weaver = user
 	var/weavetime = 2 SECONDS //time to weave a cloth, duh
 	var/skilltimemod = 0.2 SECONDS //how much each level of skill lowers the time to weave
-	var/skill = weaver.get_skill_level(/datum/skill/misc/sewing)
+	var/skill = weaver.get_skill_level(/datum/skill/misc/sewing, TRUE)
 	if(isliving(user) && weaver.stat == CONSCIOUS)
 		if(src.storedfiber < 2)
 			to_chat(user, "You don't have enough fiber to do this.")

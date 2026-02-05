@@ -223,7 +223,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/realchance = tame_chance
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming) * 20)
+				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
 			if(prob(realchance))
 				tamed(user)
 				var/boon = user.get_learning_boon(/datum/skill/labor/taming)

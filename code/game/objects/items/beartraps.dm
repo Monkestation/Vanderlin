@@ -55,7 +55,7 @@
 			return FALSE
 		else
 			if(C.mind)
-				used_time -= max((C.get_skill_level(/datum/skill/craft/traps) * 2 SECONDS), 2 SECONDS)
+				used_time -= max((C.get_skill_level(/datum/skill/craft/traps, TRUE) * 2 SECONDS), 2 SECONDS)
 			if(do_after(user, used_time, src))
 				armed = FALSE
 				anchored = FALSE
@@ -124,7 +124,7 @@
 	if(ishuman(user) && !user.stat && !HAS_TRAIT(src, TRAIT_RESTRAINED))
 		var/mob/living/L = user
 		if(do_after(user, (5 SECONDS) - (L.STASTR*2), user))
-			if(prob(50 - makeshift_prob + (L.get_skill_level(/datum/skill/craft/traps) * 10))) // 100% chance to set traps properly at Master trapping, assuming the trap isn't makeshift
+			if(prob(50 - makeshift_prob + (L.get_skill_level(/datum/skill/craft/traps, TRUE) * 10))) // 100% chance to set traps properly at Master trapping, assuming the trap isn't makeshift
 				armed = TRUE // Impossible to use in hand if it's armed
 				L.log_message("has armed the [src]!", LOG_ATTACK)
 				L.dropItemToGround(src) // We drop it instantly on the floor beneath us

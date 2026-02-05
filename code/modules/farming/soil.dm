@@ -95,7 +95,7 @@
 	add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 2)
 
 	return_nutrients_to_soil()
-	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming)
+	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming, TRUE)
 	var/chance_to_ruin = 50 - (farming_skill * 25)
 	if(prob(chance_to_ruin))
 		ruin_produce()

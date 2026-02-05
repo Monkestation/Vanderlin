@@ -143,7 +143,7 @@
 	if(!user || !istype(item, /obj/item/ore))
 		return
 
-	var/mining_skill = user.get_skill_level(/datum/skill/labor/mining) + user.get_inspirational_bonus()
+	var/mining_skill = user.get_skill_level(/datum/skill/labor/mining, TRUE) + user.get_inspirational_bonus()
 
 	// Base quality calculation - mainly chance-based with skill influence
 	var/base_chance = 5 // 5% chance for quality 2

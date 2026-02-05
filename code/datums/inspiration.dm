@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	. = ..()
 	src.holder = holder
 	RegisterSignal(holder, COMSIG_PARENT_QDELETING, PROC_REF(on_holder_qdel))
-	RegisterSignal(holder, COMSIG_SKILL_RANK_INCREASED, PROC_REF(on_skill_improved))
+	RegisterSignal(holder, COMSIG_SKILL_RANK_CHANGE, PROC_REF(on_skill_change))
 	holder.verbs += list(/mob/living/carbon/human/proc/setaudience, \
 		/mob/living/carbon/human/proc/clearaudience, \
 		/mob/living/carbon/human/proc/checkaudience)
@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 		/mob/living/carbon/human/proc/checkaudience, \
 		/mob/living/carbon/human/proc/picksongs)
 	holder.remove_spells(source = src)
-	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_INCREASED))
+	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_CHANGE))
 	holder = null
 	. = ..()
 
@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	SIGNAL_HANDLER
 	qdel(src)
 
-/datum/inspiration/proc/on_skill_improved(datum/source, datum/skill/skill_ref, new_level, old_level)
+/datum/inspiration/proc/on_skill_change(datum/source, datum/skill/skill_ref, new_level, old_level)
 	SIGNAL_HANDLER
 
 	if(!istype(skill_ref, /datum/skill/misc/music))
