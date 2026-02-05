@@ -94,6 +94,23 @@
 
 	return ..() | attempt_tending
 
+/mob/living/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(. == COMPONENT_CANCEL_ATTACK_CHAIN)
+		return
+
+	if(!length(surgeries))
+		return
+
+	for(var/datum/surgery/operation as anything in surgeries)
+		var/selected_zone = user.zone_selected
+		if(operation.location == selected_zone)
+			to_chat(user, span_notice("I stop operating on [src]'s [parse_zone(selected_zone)]."))
+			qdel(operation)
+			break
+
+	return COMPONENT_CANCEL_ATTACK_CHAIN
+
 /// Handles any use of using a surgical tool or item on a mob to tend to them.
 /// The sole reason this is a separate proc is so carbons can tend wounds AFTER the check for surgery.
 /mob/living/proc/item_tending(mob/living/user, obj/item/tool, list/modifiers)

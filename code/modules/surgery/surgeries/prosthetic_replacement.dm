@@ -56,6 +56,8 @@
 		span_notice("[user] begins to replace [target]'s [parse_zone(target_zone)]."),
 	)
 
+	return SURGERY_STEP_CONTINUE
+
 /datum/surgery_step/add_prosthetic/success(mob/user, mob/living/target, target_zone, obj/item/bodypart/tool, datum/intent/intent)
 	if(tool.attach_limb(target) && tool.attach_wound)
 		tool.add_wound(tool.attach_wound)
@@ -127,7 +129,7 @@
 	preop_sound = 'sound/foley/sewflesh.ogg'
 	success_sound = 'sound/items/wood_sharpen.ogg'
 
-/datum/surgery_step/remove_prosthetic/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/remove_prosthetic/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
@@ -136,7 +138,9 @@
 		span_notice("[user] begins to saw [target]'s prosthetic [parse_zone(target_zone)].")
 	)
 
-/datum/surgery_step/remove_prosthetic/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return SURGERY_STEP_CONTINUE
+
+/datum/surgery_step/remove_prosthetic/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,

@@ -50,7 +50,7 @@
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 
-/datum/surgery_step/extract_lux/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/extract_lux/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
@@ -59,7 +59,9 @@
 		span_notice("[user] begins to scrape lux from [target]'s heart."),
 	)
 
-/datum/surgery_step/extract_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return SURGERY_STEP_CONTINUE
+
+/datum/surgery_step/extract_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	target.emote("painscream")
 
 	if(target.get_lux_tainted_status() || target.has_status_effect(/datum/status_effect/debuff/tainted_lux) || target.has_status_effect(/datum/status_effect/debuff/received_tainted_lux))

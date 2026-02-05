@@ -58,21 +58,21 @@
 	. = ..()
 	implements = implements_extract + implements
 
-/datum/surgery_step/manipulate_organs/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail)
+/datum/surgery_step/manipulate_organs/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail)
 	// stupid workaround right now because eyes are a single organ in a single slot
 	if(target_zone == BODY_ZONE_PRECISE_L_EYE)
 		target_zone = BODY_ZONE_PRECISE_R_EYE
 	return ..()
 
-/datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/organ/organ_tool = tool
 	if(istype(organ_tool))
 		if(target_zone != organ_tool.zone)
 			to_chat(user, span_warning("[organ_tool] does not belong in [target]'s [parse_zone(target_zone)]!"))
-			return FALSE
+			return SURGERY_STEP_FAIL
 		else if(target.getorganslot(organ_tool.slot))
 			to_chat(user, span_warning("[target] already has [parse_organ_slot(organ_tool.slot)]!"))
-			return FALSE
+			return SURGERY_STEP_FAIL
 
 		user.select_organ_slot(organ_tool.slot)
 
@@ -84,12 +84,13 @@
 			span_notice("[user] begins to insert something into [target]'s [parse_zone(target_zone)]."),
 		)
 
-		return TRUE
+		return SURGERY_STEP_FAIL
 
 	var/list/organs = target.getorganszone(target_zone, subzones = FALSE)
 	if(!length(organs))
 		to_chat(user, span_warning("There are no removable organs in [target]'s [parse_zone(target_zone)]!"))
-		return FALSE
+		return SURGERY_STEP_FAIL
+
 	for(var/obj/item/organ/found_organ as anything in organs)
 		found_organ.on_find(user)
 		organs -= found_organ
@@ -97,11 +98,11 @@
 
 	var/selected = browser_input_list(user, "Remove which organ?", "PESTRA", sortList(organs))
 	if(QDELETED(user) || QDELETED(target) || !user.Adjacent(target) || (user.get_active_held_item() != tool))
-		return FALSE
+		return SURGERY_STEP_FAIL
 
 	var/obj/item/organ/final_organ = organs[selected]
 	if(QDELETED(final_organ))
-		return FALSE
+		return SURGERY_STEP_FAIL
 
 	user.select_organ_slot(final_organ.slot)
 
@@ -113,9 +114,9 @@
 		span_notice("[user] begins to extract something from [target]'s [parse_zone(target_zone)].")
 	)
 
-	return TRUE
+	return SURGERY_STEP_CONTINUE
 
-/datum/surgery_step/manipulate_organs/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/manipulate_organs/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/organ/organ_tool = tool
 	if(istype(organ_tool) && user.temporarilyRemoveItemFromInventory(organ_tool))
 		organ_tool.Insert(target)

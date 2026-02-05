@@ -91,8 +91,13 @@
 		user.balloon_alert(user, "missing [LOWER_TEXT(get_chem_list())]!")
 		return FALSE
 
-	if(preop(user, target, target_zone, tool, surgery) == SURGERY_STEP_FAIL)
+	var/preop_result = preop(user, target, target_zone, tool, surgery)
+	if(preop_result == SURGERY_STEP_FAIL)
 		return FALSE
+	if(preop_result == SURGERY_STEP_SKIP)
+		user.balloon_alert(user, "step already complete!")
+		advance_surgery(user, surgery)
+		return TRUE
 
 	surgery.step_in_progress = TRUE
 
@@ -131,9 +136,7 @@
 			advance = TRUE
 
 		if(advance && !repeatable)
-			surgery.status++
-			if(surgery.status > length(surgery.steps))
-				surgery.complete(user)
+			if(advance_surgery(user, surgery))
 				return
 
 	surgery.step_in_progress = FALSE
@@ -142,6 +145,15 @@
 
 #undef SURGERY_SLOWDOWN_CAP_MULTIPLIER
 
+/// Advance the current surgery to the next step, return TRUE if complete
+/datum/surgery_step/proc/advance_surgery(mob/living/user, datum/surgery/surgery)
+	surgery.status++
+	if(surgery.status > length(surgery.steps))
+		surgery.complete(user)
+		return TRUE
+	return FALSE
+
+/// Run fail checks and display pre operation results
 /datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
@@ -151,6 +163,7 @@
 		span_notice("[user] begins to perform surgery on [target]."),
 	)
 
+/// Play the pre operation sound
 /datum/surgery_step/proc/play_preop_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/sound_file_use
 	if(islist(preop_sound))
@@ -165,6 +178,7 @@
 
 	playsound(target, sound_file_use, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 
+/// When we don't fuck up the surgery
 /datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	SEND_SIGNAL(user, COMSIG_MOB_SURGERY_STEP_SUCCESS, src, target, target_zone, tool, surgery, default_display_results)
 
@@ -185,6 +199,7 @@
 
 	return TRUE
 
+// Sound when we don't fuck up
 /datum/surgery_step/proc/play_success_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!success_sound)
 		return
@@ -216,12 +231,13 @@
 
 	return FALSE
 
+/// Sound when we fuck up
 /datum/surgery_step/proc/play_failure_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!failure_sound)
 		return
 	playsound(get_turf(target), failure_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 
-//Replaces visible_message during operations so only people looking over the surgeon can see them.
+/// Replaces visible_message during operations so only people looking over the surgeon can see them.
 /datum/surgery_step/proc/display_results(mob/user, mob/living/target, self_message, detailed_message, vague_message, target_detailed = FALSE)
 	user.visible_message(detailed_message, self_message, vision_distance = 1, ignored_mobs = target_detailed ? null : target)
 	if(!target_detailed)

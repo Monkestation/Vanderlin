@@ -32,7 +32,7 @@
 
 	time = 6.4 SECONDS
 
-/datum/surgery_step/set_bone/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/set_bone/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
@@ -41,7 +41,9 @@
 		span_notice("[user] begins to set the bone in [target]'s [parse_zone(target_zone)]."),
 	)
 
-/datum/surgery_step/set_bone/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return SURGERY_STEP_CONTINUE
+
+/datum/surgery_step/set_bone/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,

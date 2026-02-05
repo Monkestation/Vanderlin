@@ -26,7 +26,7 @@
 
 	time = 6.4 SECONDS
 
-/datum/surgery_step/reshape_face/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/reshape_face/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
@@ -35,7 +35,9 @@
 		span_notice("[user] begins to make an incision in [target]'s face."),
 	)
 
-/datum/surgery_step/reshape_face/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return SURGERY_STEP_CONTINUE
+
+/datum/surgery_step/reshape_face/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 	if(bodypart?.has_wound(/datum/wound/facial/disfigurement))
 		display_results(
@@ -65,7 +67,7 @@
 
 	chosen_name = reject_bad_name(chosen_name)
 	if(!chosen_name)
-		return
+		return FALSE
 
 	var/oldname = target.real_name
 	target.real_name = chosen_name
@@ -79,7 +81,7 @@
 
 	return TRUE
 
-/datum/surgery_step/reshape_face/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+/datum/surgery_step/reshape_face/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	display_results(
 		user,
 		target,

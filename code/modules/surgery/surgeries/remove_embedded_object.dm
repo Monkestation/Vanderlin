@@ -52,6 +52,8 @@
 		span_notice("[user] looks for something in [target]'s [parse_zone(user.zone_selected)].")
 	)
 
+	return SURGERY_STEP_CONTINUE
+
 /datum/surgery_step/remove_object/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 

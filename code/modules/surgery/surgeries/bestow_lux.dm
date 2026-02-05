@@ -30,7 +30,7 @@
 	var/tainted_lux = FALSE
 	var/tainted_mob = FALSE
 
-/datum/surgery_step/bestow_lux/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/bestow_lux/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(target.get_lux_tainted_status())
 		tainted_mob = TRUE
 
@@ -49,9 +49,9 @@
 		span_notice("[user] begins to work something into [target]'s innards."),
 	)
 
-	return TRUE
+	return SURGERY_STEP_CONTINUE
 
-/datum/surgery_step/bestow_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/bestow_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(tainted_lux && !tainted_mob)
 		display_results(
 			user,
@@ -87,7 +87,7 @@
 
 	return TRUE
 
-/datum/surgery_step/bestow_lux/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+/datum/surgery_step/bestow_lux/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	display_results(
 		user,
 		target,

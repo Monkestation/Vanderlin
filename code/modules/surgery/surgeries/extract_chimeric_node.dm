@@ -29,7 +29,7 @@
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 
-/datum/surgery_step/extract_chimeric_node/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/extract_chimeric_node/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(HAS_TRAIT(target, TRAIT_NODE_EXTRACTED))
 		to_chat(user, span_warning("[target] has no humors to extract!"))
 		return SURGERY_STEP_FAIL
@@ -46,7 +46,9 @@
 		span_warning("[user] begins to extract something from [target]'s innards."),
 	)
 
-/datum/surgery_step/extract_chimeric_node/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return SURGERY_STEP_CONTINUE
+
+/datum/surgery_step/extract_chimeric_node/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	target.emote("painscream")
 
 	display_results(
@@ -71,7 +73,7 @@
 
 	return TRUE
 
-/datum/surgery_step/extract_chimeric_node/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/extract_chimeric_node/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,

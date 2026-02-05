@@ -1,13 +1,5 @@
 /datum/surgery/healing
-	name = "Basic Tending"
-
-	steps = list(
-		/datum/surgery_step/incise,
-		/datum/surgery_step/clamp,
-		/datum/surgery_step/retract,
-		/datum/surgery_step/heal,
-		/datum/surgery_step/cauterize,
-	)
+	abstract_type = /datum/surgery/healing
 
 	possible_locs = list(
 		BODY_ZONE_HEAD,
@@ -20,6 +12,41 @@
 
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
+
+/datum/surgery/healing/brute
+	name = "Tend Bruises"
+
+	steps = list(
+		/datum/surgery_step/incise,
+		/datum/surgery_step/clamp,
+		/datum/surgery_step/retract,
+		/datum/surgery_step/heal/brute,
+		/datum/surgery_step/cauterize,
+	)
+
+/datum/surgery/healing/burn
+	name = "Tend Burns"
+
+	steps = list(
+		/datum/surgery_step/incise,
+		/datum/surgery_step/clamp,
+		/datum/surgery_step/retract,
+		/datum/surgery_step/heal/burn,
+		/datum/surgery_step/cauterize,
+	)
+
+/datum/surgery/healing/burn/combo
+	name = "Tend Wounds"
+
+	steps = list(
+		/datum/surgery_step/incise,
+		/datum/surgery_step/clamp,
+		/datum/surgery_step/retract,
+		/datum/surgery_step/heal/combo,
+		/datum/surgery_step/cauterize,
+	)
+
+	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/heal
 	name = "Repair body"
@@ -47,7 +74,7 @@
 	 */
 	var/missing_hp_bonus = 0
 
-/datum/surgery_step/heal/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/heal/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/woundtype
 	if(brute_healing && burn_healing)
 		woundtype = "wounds"
@@ -65,6 +92,8 @@
 		span_notice("[user] attempts to patch some of [target]'s [woundtype]."),
 		span_notice("[user] attempts to patch some of [target]'s [woundtype]."),
 	)
+
+	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/heal/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/umsg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
@@ -87,9 +116,9 @@
 	if(missing_hp_bonus)
 		var/modifier = (target.stat != DEAD) ? 1 : 5
 		if(urhealedamt_brute)
-			urhealedamt_brute += round((target.getBruteLoss() / missing_hp_bonus * modifier), DAMAGE_PRECISION)
+			urhealedamt_brute += round((target.getBruteLoss() / (missing_hp_bonus * modifier)), DAMAGE_PRECISION)
 		if(urhealedamt_burn)
-			urhealedamt_burn += round((target.getFireLoss() / missing_hp_bonus * modifier), DAMAGE_PRECISION)
+			urhealedamt_burn += round((target.getFireLoss() / (missing_hp_bonus * modifier)), DAMAGE_PRECISION)
 
 	if(!get_location_accessible(target, target_zone))
 		urhealedamt_brute *= 0.55
@@ -111,7 +140,7 @@
 
 	return TRUE
 
-/datum/surgery_step/heal/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+/datum/surgery_step/heal/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	display_results(
 		user,
 		target,
@@ -135,13 +164,13 @@
 	return TRUE
 
 /********************BRUTE STEPS********************/
-/datum/surgery_step/heal/brute/basic
+/datum/surgery_step/heal/brute
 	name = "Tend bruises"
 	brute_healing = 10
 	missing_hp_bonus = 5
 
 /********************BURN STEPS********************/
-/datum/surgery_step/heal/burn/basic
+/datum/surgery_step/heal/burn
 	name = "Tend burns"
 	burn_healing = 10
 	missing_hp_bonus = 5

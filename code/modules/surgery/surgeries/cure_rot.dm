@@ -27,7 +27,7 @@
 	preop_sound = 'sound/surgery/cautery1.ogg'
 	success_sound = 'sound/surgery/cautery2.ogg'
 
-/datum/surgery_step/burn_rot/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/burn_rot/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
@@ -36,8 +36,10 @@
 		span_notice("[user] begins to burn the rot from [target]'s heart."),
 	)
 
+	return SURGERY_STEP_CONTINUE
+
 // most of this is copied from the Cure Rot spell
-/datum/surgery_step/burn_rot/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/burn_rot/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/burndam = 20
 
 	var/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)

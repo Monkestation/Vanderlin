@@ -47,7 +47,7 @@
 	var/tainted_lux = FALSE
 	var/tainted_mob = FALSE
 
-/datum/surgery_step/infuse_lux/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/infuse_lux/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(istype(tool, /obj/item/reagent_containers/lux_tainted))
 		tainted_lux = TRUE
 
@@ -56,13 +56,15 @@
 
 	if(tainted_mob && !tainted_lux)
 		to_chat(user, "They can only receive tainted lux!")
-		return
+		return SURGERY_STEP_FAIL
 
 	display_results(user, target,
 		span_notice("I begin to infuse [target]'s heart with [tool.name]."),
 		span_notice("[user] begins to work [tool.name] into [target]'s heart."),
 		span_notice("[user] begins to something into [target]'s innards..."),
 	)
+
+	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/infuse_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	if(!target.revive(excess_healing = 50))

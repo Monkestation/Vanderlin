@@ -30,7 +30,7 @@
 
 	time = 3.2 SECONDS
 
-/datum/surgery_step/replace_limb/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/replace_limb/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/bodypart/aug = tool
 	if(!istype(aug) || aug.status != BODYPART_ROBOTIC)
 		to_chat(user, span_warning("That's not an augment, silly!"))
@@ -53,6 +53,8 @@
 		span_notice("[user] begins to augment [target]'s [parse_zone(user.zone_selected)] with [aug]."),
 		span_notice("[user] begins to augment [target]'s [parse_zone(user.zone_selected)].")
 	)
+
+	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/replace_limb/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/bodypart/existing = target.get_bodypart(check_zone(target_zone))

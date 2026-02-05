@@ -156,24 +156,24 @@
 /datum/surgery/proc/can_next_step(mob/living/user, list/modifiers)
 	SHOULD_CALL_PARENT(TRUE)
 
-	if(location != user.zone_selected)
-		return FALSE
-
 	if(user.cmode)
 		return FALSE
 
 	if(step_in_progress)
 		return TRUE
 
-	var/obj/item/tool = user.get_active_held_item()
-	if(tool)
-		tool = tool.get_proxy_attacker_for(target, user)
+	if(!(user.zone_selected in possible_locs))
+		return FALSE
 
 	var/surgery_type = steps[status]
 	var/datum/surgery_step/surgery_step = new surgery_type()
 
 	if(!surgery_step)
 		return FALSE
+
+	var/obj/item/tool = user.get_active_held_item()
+	if(tool)
+		tool = tool.get_proxy_attacker_for(target, user)
 
 	var/tool_key = surgery_step.tool_check(user, tool)
 

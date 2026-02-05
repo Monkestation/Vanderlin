@@ -39,10 +39,10 @@
 	selected_organ = null
 	return ..()
 
-/datum/surgery_step/create_chimeric_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/create_chimeric_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	selected_organ = target.getorganslot(ORGAN_SLOT_HEART)
 	if(!selected_organ)
-		return FALSE
+		return SURGERY_STEP_FAIL
 
 	display_results(
 		user,
@@ -51,9 +51,10 @@
 		span_notice("[user] begins carving strange patterns into [target]'s exposed organ."),
 		span_notice("[user] mutters dark incantations while working on [target].")
 	)
-	return TRUE
 
-/datum/surgery_step/create_chimeric_organ/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
+	return SURGERY_STEP_CONTINUE
+
+/datum/surgery_step/create_chimeric_organ/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!selected_organ)
 		return FALSE
 
@@ -76,7 +77,7 @@
 
 	return TRUE
 
-/datum/surgery_step/create_chimeric_organ/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+/datum/surgery_step/create_chimeric_organ/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	display_results(
 		user,
 		target,
@@ -124,7 +125,7 @@
 	node_to_graft = null
 	return ..()
 
-/datum/surgery_step/graft_chimeric_node/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/graft_chimeric_node/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/held = user.get_inactive_held_item()
 	if(!istype(held, /obj/item/chimeric_node))
 		to_chat(user, span_warning("You need to hold a humor in your other hand to graft it!"))
@@ -166,9 +167,9 @@
 		span_notice("[user] performs an unholy grafting ritual on [target].")
 	)
 
-	return TRUE
+	return SURGERY_STEP_CONTINUE
 
-/datum/surgery_step/graft_chimeric_node/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/graft_chimeric_node/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!selected_organ)
 		return FALSE
 
@@ -280,7 +281,7 @@
 
 	return TRUE
 
-/datum/surgery_step/graft_chimeric_node/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+/datum/surgery_step/graft_chimeric_node/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	display_results(
 		user,
 		target,
@@ -326,7 +327,7 @@
 	selected_organ = null
 	return ..()
 
-/datum/surgery_step/repair_chimeric_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/repair_chimeric_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/list/available_organs = target.get_organs_in_zone(target_zone)
 	var/list/failed_organs = list()
 
@@ -362,7 +363,9 @@
 		span_notice("[user] begins an elaborate ritual over [target]'s corrupted organ."),
 	)
 
-/datum/surgery_step/repair_chimeric_organ/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
+	return SURGERY_STEP_CONTINUE
+
+/datum/surgery_step/repair_chimeric_organ/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!selected_organ)
 		return FALSE
 
@@ -417,7 +420,7 @@
 
 	return TRUE
 
-/datum/surgery_step/repair_chimeric_organ/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+/datum/surgery_step/repair_chimeric_organ/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	display_results(
 		user,
 		target,
