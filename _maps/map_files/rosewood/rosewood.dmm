@@ -15681,7 +15681,7 @@
 /area/indoors/town/church)
 "jJr" = (
 /obj/structure/bed/mediocre{
-	sleepy = .5
+	sleepy = 0.5
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
