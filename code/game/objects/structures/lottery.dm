@@ -67,7 +67,7 @@
 	return
 
 
-/obj/structure/fake_machine/lottery_roguetown/MiddleClick(mob/living/user, params)
+/obj/structure/fake_machine/lottery_roguetown/MiddleClick(mob/living/user, list/modifiers)
 	if(stopgambling)
 		return
 
@@ -172,7 +172,7 @@
 	stopgambling = 0
 
 
-/obj/structure/fake_machine/lottery_roguetown/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/structure/fake_machine/lottery_roguetown/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 
 	if(!ishuman(user) || stopgambling)

@@ -497,7 +497,7 @@
 	max_integrity = 350
 	var/plumed = FALSE
 
-/obj/item/clothing/head/helmet/heavy/ordinatorhelm/attackby(obj/item/W, mob/living/user, params)
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/attackby(obj/item/W, mob/living/user, list/modifiers)
 	..()
 	if(istype(W, /obj/item/natural/feather))
 		user.visible_message(span_warning("[user] starts to fashion plumage using [W] for [src]."))
@@ -516,7 +516,7 @@
 	icon_state = "ordinatorhelmplume"
 	item_state = "ordinatorhelmplume"
 
-/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/attackby(obj/item/W, mob/living/user, params)
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/natural/feather))
 		return
 

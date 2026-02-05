@@ -306,7 +306,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 
-/obj/item/clothing/head/helmet/heavy/ravoxhelm/attackby(obj/item/W, mob/living/user, params)
+/obj/item/clothing/head/helmet/heavy/ravoxhelm/attackby(obj/item/W, mob/living/user, list/modifiers)
 	..()
 	var/list/colorlist = list(
 		"PURPLE"="#865c9c",

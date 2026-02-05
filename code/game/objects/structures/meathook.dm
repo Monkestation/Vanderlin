@@ -13,7 +13,7 @@
 
 	var/draining_blood = FALSE
 
-/obj/structure/meathook/attackby(obj/item/I, mob/user, params)
+/obj/structure/meathook/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/container = I
 		if(!container.is_open_container())

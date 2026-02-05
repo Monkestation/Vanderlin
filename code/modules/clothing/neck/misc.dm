@@ -418,7 +418,7 @@
 	. = ..()
 	is_in_neck_slot = FALSE
 
-/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
+/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, list/modifiers)
 	. = ..()
 	if(!istype(interacted_item, /obj/item/collar_detonator))
 		return

@@ -104,7 +104,7 @@
 /obj/item/proc/negates_gravity()
 	return FALSE
 
-/obj/item/clothing/shoes/attackby(obj/item/I, mob/living/carbon/user, params)
+/obj/item/clothing/shoes/attackby(obj/item/I, mob/living/carbon/user, list/modifiers)
 	. = ..()
 	var/obj/item/clothing/shoes/shoes_check = locate(/obj/item/clothing/shoes) in list(user.shoes)
 	if(shoes_check)

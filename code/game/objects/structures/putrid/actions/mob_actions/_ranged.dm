@@ -41,7 +41,7 @@
 	build_all_button_icons()
 	on_who.update_icons()
 
-/datum/action/cooldown/meatvine/personal/ranged/InterceptClickOn(mob/living/user, params, atom/target)
+/datum/action/cooldown/meatvine/personal/ranged/InterceptClickOn(mob/living/user, list/modifiers, atom/target)
 	. = ..()
 	if(!.)
 		unset_click_ability(user, refund_cooldown = FALSE)
@@ -51,7 +51,6 @@
 	if(!isturf(target_turf))
 		return FALSE
 
-	var/modifiers = params2list(params)
 	user.visible_message(
 		span_danger("[user] spits [projectile_name]!"),
 		span_alertalien("You spit [projectile_name]."),

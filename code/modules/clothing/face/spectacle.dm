@@ -79,7 +79,7 @@
 			ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 			return
 
-/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, params)
+/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))
@@ -171,7 +171,7 @@
 		worn = FALSE
 
 
-/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(istype(I, /obj/item/clothing/face/spectacles/inq))
 		user.visible_message(span_warning("[user] starts to insert [I]'s lenses into [src]."))
@@ -207,7 +207,7 @@
 			user.update_sight()
 			return
 
-/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))
