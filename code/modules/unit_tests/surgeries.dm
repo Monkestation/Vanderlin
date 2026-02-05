@@ -48,11 +48,11 @@
 	var/mob/living/carbon/human/user = allocate(/mob/living/carbon/human)
 
 	// Test that tending wounds actually lowers damage
-	var/datum/surgery_step/heal/brute/basic/basic_brute_heal = new
+	var/datum/surgery_step/heal/brute/basic_brute_heal = new
 	basic_brute_heal.success(user, patient, BODY_ZONE_CHEST)
 	TEST_ASSERT(patient.getBruteLoss() < 100, "Tending brute wounds didn't lower brute damage ([patient.getBruteLoss()])")
 
-	var/datum/surgery_step/heal/burn/basic/basic_burn_heal = new
+	var/datum/surgery_step/heal/burn/basic_burn_heal = new
 	basic_burn_heal.success(user, patient, BODY_ZONE_CHEST)
 	TEST_ASSERT(patient.getFireLoss() < 100, "Tending burn wounds didn't lower burn damage ([patient.getFireLoss()])")
 
