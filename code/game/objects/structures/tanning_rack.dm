@@ -19,7 +19,7 @@
 	if(!anchored)
 		. += span_warning("It is unanchored and able to be moved.")
 
-/obj/machinery/tanningrack/attack_hand(mob/user, params)
+/obj/machinery/tanningrack/attack_hand(mob/user, list/modifiers)
 	if(hide)
 		var/obj/item/I = hide
 		hide = null
@@ -27,7 +27,7 @@
 		user.put_in_active_hand(I)
 		update_appearance(UPDATE_OVERLAYS)
 
-/obj/machinery/tanningrack/attackby(obj/item/I, mob/living/user, params)
+/obj/machinery/tanningrack/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/natural/hide) && !istype(I, /obj/item/natural/hide/cured))
 		if(!hide)
 			I.forceMove(src)
@@ -39,7 +39,7 @@
 			return
 	if((user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut) && hide)
 		if(anchored)
-			var/skill_level = user.get_skill_level(/datum/skill/craft/tanning)
+			var/skill_level = user.get_skill_level(/datum/skill/craft/tanning, TRUE)
 			var/work_time = (12 SECONDS - (skill_level * 15))
 			var/pieces_to_spawn = rand(1, min(skill_level + 1, 6)) //Random number from 1 to skill level
 			var/sound_played = FALSE

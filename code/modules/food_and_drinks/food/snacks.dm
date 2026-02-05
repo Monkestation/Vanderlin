@@ -358,10 +358,10 @@ All foods are distributed among various categories. Use common sense.
 
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/reagent_containers/food/snacks/attack_self(mob/user, params)
+/obj/item/reagent_containers/food/snacks/attack_self(mob/user, list/modifiers)
 	return
 
-/obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(user.used_intent.type != /datum/intent/food && (!(M == user) && isanimal(M)))
 		return ..()
 	if(!eatverb)
@@ -476,7 +476,7 @@ All foods are distributed among various categories. Use common sense.
 				. += "[src] was bitten multiple times!"
 
 
-/obj/item/reagent_containers/food/snacks/attackby(obj/item/W, mob/user, params)
+/obj/item/reagent_containers/food/snacks/attackby(obj/item/W, mob/user, list/modifiers)
 	. = ..()
 	if(istype(W, /obj/item/storage))
 		..() // -> item/attackby()
@@ -612,7 +612,7 @@ All foods are distributed among various categories. Use common sense.
 					M.emote("me", 1, "[sattisfaction_text]")
 				qdel(src)
 
-/obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/M, mob/user, proximity)
+/obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/M, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!dunkable || !proximity)
 		return
@@ -634,7 +634,7 @@ All foods are distributed among various categories. Use common sense.
 	w_class = WEIGHT_CLASS_NORMAL
 	var/stored_item = 0
 
-/obj/item/reagent_containers/food/snacks/store/attackby(obj/item/W, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/store/attackby(obj/item/W, mob/living/user, list/modifiers)
 	..()
 	if(W.w_class <= WEIGHT_CLASS_SMALL & !istype(W, /obj/item/reagent_containers/food/snacks)) //can't slip snacks inside, they're used for custom foods.
 		if(W.get_sharpness())

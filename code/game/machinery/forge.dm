@@ -10,7 +10,7 @@
 	climbable = TRUE
 	climb_time = 0
 
-/obj/machinery/light/fueled/forge/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/forge/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/tongs) && on)
 		var/obj/item/weapon/tongs/T = W
 		if(T.held_item)

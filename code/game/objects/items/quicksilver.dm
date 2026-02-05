@@ -25,15 +25,17 @@
 	if(miracle_use)
 		. += span_notice("Through some miraculous happenstance, there is enough for one more use.")
 
-/obj/item/quicksilver/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
-	anoint(M, user)
+/obj/item/quicksilver/attack(mob/living/carbon/human/M, mob/living/carbon/human/user, list/modifiers)
+	if(!istype(M) || !istype(user))
+		return ..()
 
-/obj/item/quicksilver/proc/anoint(mob/living/carbon/human/M, mob/living/carbon/human/user) //Time to deconvert some antagonists
 	var/inquisitor = FALSE
 	if(!user.mind)
 		return
+
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
 		inquisitor = TRUE
+
 	if(HAS_TRAIT(user, TRAIT_PACIFISM) && HAS_TRAIT(user, TRAIT_INQUISITION) && HAS_TRAIT(user, TRAIT_SILVER_BLESSED))
 		inquisitor = TRUE
 
@@ -136,7 +138,7 @@
 		user.visible_message(span_danger("The silver poultice boils away from [M]'s brow, viscerally rejecting the divine anointment."))
 		M.Stun(30)
 		M.Knockdown(30)
-		return
+
 //A letter to give info on how to make this thing.
 /obj/item/paper/inquisition_poultice_info
 	name = "Inquisitorial Missive"

@@ -818,6 +818,8 @@
 
 /atom/movable/proc/forceMove(atom/destination)
 	. = FALSE
+	if(QDELING(src))
+		CRASH("Illegal forceMove() on qdeling [type]")
 	if(destination)
 		. = doMove(destination)
 	else

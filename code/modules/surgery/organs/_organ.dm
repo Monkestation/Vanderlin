@@ -50,7 +50,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/organ/attack(mob/living/carbon/M, mob/user)
+/obj/item/organ/attack(mob/living/carbon/M, mob/user, list/modifiers)
 	if(M == user && ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(status == ORGAN_ORGANIC)

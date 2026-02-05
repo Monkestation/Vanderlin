@@ -109,23 +109,23 @@
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
 		if(levels <= 2)
 			return
+	if(movement_type & FLYING)
+		to_chat(src, span_info("You glide down to a more manageable height."))
+		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
+		return
 	var/dex_save = src.get_skill_level(/datum/skill/misc/climbing)
-	var/sneak_fall = FALSE // If we're sneaking, don't announce it to our surroundings
 	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
-			to_chat(src, "<span class='info'>My dexterity allowed me to land on my feet unscathed!</span>")
-			if(src.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
-				sneak_fall = TRUE
+			to_chat(src, span_info("My dexterity allowed me to land on my feet unscathed!"))
+			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
 			return
 	var/points
 	for(var/i in 2 to levels)
 		i++
 		points += "!"
-	if(!sneak_fall)
-		visible_message("<span class='danger'>[src] falls down[points]</span>", \
-						"<span class='danger'>I fall down[points]</span>")
-		playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
+	visible_message(span_danger("[src] falls down[points]"), span_danger("I fall down[points]"))
+	playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!isgroundlessturf(T))
 		ZImpactDamage(T, levels)
 		record_round_statistic(STATS_MOAT_FALLERS)
@@ -647,7 +647,7 @@
 	if(pulling_broke_free && ismob(pulling) && grab_state >= GRAB_AGGRESSIVE)
 		var/wrestling_cooldown_reduction = 0
 		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
-			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling)
+			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
 		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
@@ -1320,9 +1320,9 @@
 	var/my_wrestling = 0
 	var/their_wrestling = 0
 	if(mind)
-		my_wrestling = get_skill_level(/datum/skill/combat/wrestling)
+		my_wrestling = get_skill_level(/datum/skill/combat/wrestling, TRUE)
 	if(pulledby.mind)
-		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling)
+		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
 
 	var/break_chance = 15 // Base chance
 	break_chance += (my_wrestling - their_wrestling)
@@ -1373,8 +1373,8 @@
 
 	var/counter_chance = 20 // Base chance
 
-	counter_chance += get_skill_level(/datum/skill/combat/wrestling) * 4
-	counter_chance += get_skill_level(/datum/skill/combat/unarmed) * 4
+	counter_chance += get_skill_level(/datum/skill/combat/wrestling, TRUE) * 4
+	counter_chance += get_skill_level(/datum/skill/combat/unarmed, TRUE) * 4
 
 	// Stat differences
 	counter_chance += (STASTR - attacker.STASTR) * 2
@@ -1538,8 +1538,8 @@
 	// Modifier of pulledby against the resisting src
 	var/positioning_modifier = L.get_positioning_modifier(src)
 
-	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling))
-	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling))
+	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling, TRUE))
+	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling, TRUE))
 
 	if(has_status_effect(/datum/status_effect/buff/oiled))
 		var/obj/item/grabbing/grabbed = L.get_active_held_item()
@@ -2499,7 +2499,7 @@
 				continue
 			var/probby = 3 * STAPER
 			if(M.mind)
-				probby -= (M.get_skill_level(/datum/skill/misc/sneaking) * 10)
+				probby -= (M.get_skill_level(/datum/skill/misc/sneaking, TRUE) * 10)
 			probby = (max(probby, 5))
 			if(prob(probby))
 				found_ping(get_turf(M), client, "hidden")

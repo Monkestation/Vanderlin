@@ -209,7 +209,7 @@
 		remove_placed_mob(user)
 		return
 
-/obj/structure/steam_recharger/attackby(obj/item/I, mob/living/user)
+/obj/structure/steam_recharger/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(placed_atom || placed_mob)
 		return ..()
 

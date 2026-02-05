@@ -29,7 +29,7 @@
 			ammo_list += ammo
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/ammo_holder/attackby(obj/A, loc, params)
+/obj/item/ammo_holder/attackby(obj/A, loc, list/modifiers)
 	for(var/i in ammo_type)
 		if(istype(A, i))
 			if(ammo_list.len < max_storage)
@@ -52,13 +52,13 @@
 				if(istype(AR, gun_ammo))
 					ammo_list -= AR
 					contents -= AR
-					B.attackby(AR, loc, params)
+					B.attackby(AR, loc, modifiers)
 					break
 		update_appearance(UPDATE_ICON_STATE)
 		return
 	..()
 
-/obj/item/ammo_holder/attack_hand_secondary(mob/user, params)
+/obj/item/ammo_holder/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

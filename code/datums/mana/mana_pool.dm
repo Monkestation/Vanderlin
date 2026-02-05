@@ -94,6 +94,12 @@
 
 	STOP_PROCESSING(SSmagic, src)
 
+	if(parent && ismob(parent))
+		var/mob/holder = parent
+		var/datum/hud/human/hud_used = holder.hud_used
+		if(hud_used?.mana)
+			hud_used.mana.icon_state = initial(hud_used.mana.icon_state)
+
 	if (parent.mana_pool != src)
 		stack_trace("[parent].mana_pool was not [src] when src had parent registered!")
 	else

@@ -35,7 +35,7 @@
 	if(lock)
 		. += span_info("It is [locked() ? "locked" : "unlocked"].")
 
-/obj/structure/pillory/attack_hand_secondary(mob/living/user, params)
+/obj/structure/pillory/attack_hand_secondary(mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

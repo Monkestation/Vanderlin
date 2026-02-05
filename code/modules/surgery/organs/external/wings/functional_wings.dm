@@ -5,6 +5,8 @@
 	var/list/flight_for_species
 	/// Cannot fly upwards
 	var/hover_only = FALSE
+	/// Max flight time
+	var/flight_time = null
 
 /obj/item/organ/wings/flight/Destroy()
 	QDEL_NULL(fly)
@@ -18,6 +20,8 @@
 		fly = new(src)
 	if(hover_only)
 		fly.allows_z_rise = FALSE
+	if(flight_time)
+		fly.flight_time = flight_time
 	fly.Grant(M)
 
 /obj/item/organ/wings/flight/Remove(mob/living/carbon/M, special, drop_if_replaced)
@@ -36,6 +40,7 @@
 	accessory_type = /datum/sprite_accessory/wings/large/harpyswept
 	flight_for_species = list(SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 	hover_only = TRUE
+	flight_time = 5 SECONDS
 
 /obj/effect/flyer_shadow
 	name = "humanoid shadow"
@@ -58,7 +63,7 @@
 	flying_ref = null
 	return ..()
 
-/obj/effect/flyer_shadow/attackby(obj/item/I, mob/user, params)
+/obj/effect/flyer_shadow/attackby(obj/item/I, mob/user, list/modifiers)
 	var/mob/living/flying_mob = flying_ref.resolve()
 	if(QDELETED(flying_mob))
 		return
@@ -103,6 +108,11 @@
 	/// If we fly upwards when starting
 	var/allows_z_rise = TRUE
 
+	/// If the flight-time is limited, how long?
+	var/flight_time = null
+	/// Flight timer
+	var/flight_timer = null
+
 /datum/action/item_action/organ_action/use/flight/Destroy()
 	if(shadow)
 		QDEL_NULL(shadow)
@@ -114,34 +124,61 @@
 		to_chat(owner, "I am currently [flying ? "" : "not"] flying.")
 		return
 	if(!flying)
-		if(!can_fly())
+		if(!can_takeoff())
 			return
-		if(do_after(owner, 5 SECONDS, owner, extra_checks = CALLBACK(src, PROC_REF(can_fly))))
+		if(do_after(owner, 5 SECONDS, owner, extra_checks = CALLBACK(src, PROC_REF(can_takeoff))))
 			start_flying()
 		return
-	if(do_after(owner, 5 SECONDS, owner))
+	if(!owner.can_zTravel(direction = DOWN))
 		stop_flying()
+	else if(do_after(owner, 5 SECONDS, owner))
+		stop_flying()
+
+/datum/action/item_action/organ_action/use/flight/proc/can_takeoff()
+	if(!isliving(owner))
+		to_chat(owner, span_warning("How did you get this..."))
+		return FALSE
+
+	if(!owner.can_zTravel(direction = UP))
+		to_chat(owner, span_warning("I need space to fly!"))
+		return FALSE
+
+	var/turf/above_turf = GET_TURF_ABOVE(get_turf(owner))
+	if(!isopenspace(above_turf))
+		to_chat(owner, span_warning("I need space to fly!"))
+		return FALSE
+
+	return can_fly()
 
 /datum/action/item_action/organ_action/use/flight/proc/can_fly()
 	if(!isliving(owner))
+		to_chat(owner, span_warning("How did you get this..."))
 		return FALSE
+
 	var/mob/living/flier = owner
+
 	if(flier.get_encumbrance() > 0.7)
-		to_chat(owner, span_warning("I am too heavy!"))
+		to_chat(flier, span_warning("I am too heavy!"))
 		return FALSE
+
 	if(!isturf(flier.loc))
 		to_chat(flier, span_warning("I need space to fly!"))
 		return FALSE
+
 	if(flier.pulledby?.grab_state >= GRAB_AGGRESSIVE)
 		to_chat(flier, span_warning("I can't fly while being grabbed so tightly!"))
 		return FALSE
+
 	if(flier.body_position != STANDING_UP)
 		to_chat(flier, span_warning("I can't spread my wings!"))
 		return FALSE
+
 	if(IS_DEAD_OR_INCAP(flier))
+		to_chat(flier, span_warning("I cannot fly in this state!"))
 		return FALSE
 
 	return TRUE
+
 /datum/action/item_action/organ_action/use/flight/apply_button_background(atom/movable/screen/movable/action_button/current_button)
 	if(active_background_icon_state)
 		background_icon_state = is_action_active(current_button) ? active_background_icon_state : initial(src.background_icon_state)
@@ -154,15 +191,23 @@
 /datum/action/item_action/organ_action/use/flight/proc/start_flying()
 	var/turf/turf = get_turf(owner)
 
-	if(allows_z_rise)
-		ADD_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
-		if(isopenspace(GET_TURF_ABOVE(turf)) && owner.can_zTravel(direction = UP))
-			turf = GET_TURF_ABOVE(turf)
-	else
+	if(!allows_z_rise)
 		ADD_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+	else
+		ADD_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
+
+		var/turf/above_turf = GET_TURF_ABOVE(turf)
+		if(owner.can_zTravel(direction = UP) && isopenspace(above_turf))
+			turf = above_turf
+
+	if(flight_time)
+		to_chat(owner, span_notice("I can fly for around [flight_time / 10] seconds at most."))
+		flight_timer = addtimer(CALLBACK(src, PROC_REF(flight_time_out)), flight_time, TIMER_STOPPABLE)
 
 	flying = TRUE
 	to_chat(owner, span_notice("I start flying."))
+	playsound(owner, 'sound/mobs/wingflap.ogg', 75, FALSE)
+
 	init_signals()
 
 	if(turf != get_turf(owner))
@@ -191,7 +236,10 @@
 	if(allows_z_rise)
 		if(isopenspace(turf) && owner.can_zTravel(direction = DOWN))
 			turf = GET_TURF_BELOW(turf)
+
 	to_chat(owner, span_notice("I stop flying."))
+	playsound(owner, 'sound/mobs/wingflap.ogg', 75, FALSE)
+
 	if(turf != get_turf(owner))
 		var/matrix/original = owner.transform
 		var/prev_alpha = owner.alpha
@@ -204,6 +252,7 @@
 		animate(owner, transform = original, time = 1.2 SECONDS, easing = EASE_IN, flags = ANIMATION_PARALLEL)
 
 	remove_signals()
+
 	build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 
 /datum/action/item_action/organ_action/use/flight/proc/remove_signals()
@@ -211,6 +260,9 @@
 		REMOVE_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
 	else
 		REMOVE_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+
+	if(flight_timer)
+		deltimer(flight_timer)
 
 	flying = FALSE
 
@@ -229,11 +281,20 @@
 	if(shadow)
 		QDEL_NULL(shadow)
 
+/datum/action/item_action/organ_action/use/flight/proc/flight_time_out()
+	if(QDELETED(owner) || QDELETED(src))
+		return
+
+	to_chat(owner, span_userdanger("I can't fly anymore!"))
+
+	fall()
+
 // Fall out the sky like a brick, no animation
 /datum/action/item_action/organ_action/use/flight/proc/fall(datum/source)
 	SIGNAL_HANDLER
 
 	remove_signals()
+
 	build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 
 /datum/action/item_action/organ_action/use/flight/proc/check_damage(datum/source, damage, damagetype, def_zone)

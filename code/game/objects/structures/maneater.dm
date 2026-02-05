@@ -158,7 +158,7 @@
 		COOLDOWN_START(src, activity_cooldown, sleep_time)
 		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 
-/obj/structure/flora/grass/maneater/real/attackby(obj/item/W, mob/user, params)
+/obj/structure/flora/grass/maneater/real/attackby(obj/item/W, mob/user, list/modifiers)
 	. = ..()
 	if(COOLDOWN_TIMELEFT(src, activity_cooldown) < munch_time)
 		COOLDOWN_START(src, activity_cooldown, munch_time)

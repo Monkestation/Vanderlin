@@ -23,7 +23,7 @@
 	SSroguemachine.hailer = null
 	return ..()
 
-/obj/structure/fake_machine/hailer/attackby(obj/item/H, mob/user, params)
+/obj/structure/fake_machine/hailer/attackby(obj/item/H, mob/user, list/modifiers)
 	if(!HAS_TRAIT(user, TRAIT_BURDEN) && !is_gaffer_assistant_job(user.mind.assigned_role))
 		to_chat(user, span_danger("you can't feed the [src] without carrying his burden"))
 		return

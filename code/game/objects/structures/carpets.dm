@@ -67,7 +67,7 @@
 	icon2step = 8
 	var/carpet_type = /obj/structure/carpet
 
-/obj/item/natural/bundle/carpet_roll/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/natural/bundle/carpet_roll/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!isturf(target) || !proximity_flag)
 		return
@@ -107,7 +107,7 @@
 	bundletype = /obj/item/natural/bundle/carpet_roll
 	var/carpet_type = /obj/structure/carpet
 
-/obj/item/natural/carpet_fibers/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/natural/carpet_fibers/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!isturf(target) || !proximity_flag)
 		return
