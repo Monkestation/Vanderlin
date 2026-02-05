@@ -298,7 +298,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		save_preferences()
 	save_character()		//let's save this new random character so it doesn't keep generating new ones.
 	menuoptions = list()
-	return
 
 /datum/preferences/Topic(href, href_list, hsrc)			//yeah, gotta do this I guess..
 	. = ..()
@@ -672,7 +671,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	</div></a>
 
 	<a href='?_src_=prefs;preference=culture;task=input'><div class="sprite" style="top:150px; left:207px; width:51px; height:9px; background-image: url('flavour_culture.png');">
-		<div id="char-culture" class="clickable-text auto-shrink" style="width:51px; height:9px;">[culture ? culture.name : "None"]</div>
+		<div id="char-culture" class="clickable-text auto-shrink" style="width:51px; height:9px;">[culture ? culture::name : "None"]</div>
 	</div></a>
 
 	<a href='?_src_=prefs;preference=voicetype;task=input'><div class="sprite" style="top:154px; left:10px; width:46px; height:9px; background-image: url('voice_type.png');">

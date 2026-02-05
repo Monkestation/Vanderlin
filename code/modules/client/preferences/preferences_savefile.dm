@@ -76,8 +76,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 30)
 		S["voice_color"] >> voice_color
 
-	// Restructuring of skin tones
+	// Restructuring of skin tones and culture addition
 	if(current_version < 31)
+		var/datum/culture/culture = S["culture"]
+		if(!culture)
+			culture = /datum/culture/universal/ambiguous
 		var/list/assoc_skins = pref_species.get_skin_list()
 		// If current skin tone matches one of the current list, we are fine
 		for(var/skin in assoc_skins)
