@@ -50,45 +50,55 @@
 
 ///Places the ingot on the atom, this can be either a turf or a table
 /obj/item/weapon/tongs/proc/place_item_to_atom(atom/A, mob/user)
-	if(held_item?.tong_interaction(A, user))
-		return
-	if(held_item && (isturf(A) || istype(A, /obj/structure/table)))
-		held_item.forceMove(get_turf(A))
-		held_item = null
-		hott = 0
-		update_appearance(UPDATE_ICON_STATE)
-	else if(held_item)
+	if(!held_item)
+		return FALSE
+
+	if(!isturf(A) && !istype(A, /obj/structure/table))
 		to_chat(user, "<span class='warning'>Cannot place [held_item] here!</span>")
+		return FALSE
+
+	held_item.forceMove(get_turf(A))
+	held_item = null
+	hott = 0
+	update_appearance(UPDATE_ICON_STATE)
+
+	return TRUE
 
 /obj/item/weapon/tongs/attack_self(mob/user, list/modifiers)
+	. = ..()
 	place_item_to_atom(get_turf(user), user)
 
 /obj/item/weapon/tongs/dropped(mob/user)
 	. = ..()
 	place_item_to_atom(get_turf(src), user)
 
-/obj/item/weapon/tongs/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	place_item_to_atom(get_turf(A), user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+/obj/item/weapon/tongs/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(held_item)
+		if(held_item.interact_with_atom(interacting_with, user, modifiers))
+			return ITEM_INTERACT_SUCCESS
+		return ITEM_INTERACT_BLOCKING
 
-/obj/item/weapon/tongs/pre_attack(obj/item/A, mob/living/user, list/modifiers)
-	if(held_item?.tong_interaction(A, user))
-		return TRUE
+	if(!isitem(interacting_with))
+		return NONE
 
-	if(!istype(A))
-		return ..()
+	if(!isturf(interacting_with.loc))
+		return NONE
 
-	if(A.tool_flags & TOOL_USAGE_TONGS || HAS_TRAIT(A, TRAIT_NEEDS_QUENCH))
-		if(!held_item)
-			user.visible_message("<span class='info'>[user] picks up [A] with [src].</span>")
-			held_item = A
-			A.forceMove(src)
-			update_appearance(UPDATE_ICON_STATE)
-			return TRUE
-	return ..()
+	var/obj/item/item = interacting_with
+
+	if(item.tool_flags & TOOL_USAGE_TONGS || HAS_TRAIT(interacting_with, TRAIT_NEEDS_QUENCH))
+		user.visible_message("<span class='info'>[user] picks up [item] with [src].</span>")
+		held_item = item
+		item.forceMove(src)
+		update_appearance(UPDATE_ICON_STATE)
+		return ITEM_INTERACT_SUCCESS
+
+/obj/item/weapon/tongs/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!held_item)
+		return NONE
+
+	if(place_item_to_atom(interacting_with))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/tongs/getonmobprop(tag)
 	. = ..()
@@ -106,6 +116,3 @@
 	smeltresult = null
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST / 5
-
-/atom/proc/tong_interaction(atom/target, mob/user)
-	return FALSE

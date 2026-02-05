@@ -665,41 +665,43 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/proc/attempt_pickup(mob/user)
 	. = TRUE
-	var/mob/living/carbon/C = user
-	if(C.has_status_effect(/datum/status_effect/tremor_grip_loss))
-		return
 
-	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
-		return
-
-	if(resistance_flags & ON_FIRE)
-		var/can_handle_hot = FALSE
-		if(!istype(C))
-			can_handle_hot = TRUE
-		else if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
-			can_handle_hot = TRUE
-		else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
-			can_handle_hot = TRUE
-
-		if(can_handle_hot)
-			extinguish()
-			user.visible_message("<span class='warning'>[user] puts out the fire on [src].</span>")
-		else
-			user.visible_message("<span class='warning'>[user] burns [user.p_their()] hand putting out the fire on [src]!</span>")
-			extinguish()
-			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-			if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-				C.update_damage_overlays()
+	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH) && iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(!C.can_touch_burning(src))
+			to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
 			return
 
-	if(acid_level > 20 && !ismob(loc))// so we can still remove the clothes on us that have acid.
-		if(istype(C))
-			if(!C.gloves || (!(C.gloves.resistance_flags & (UNACIDABLE|ACID_PROOF))))
-				to_chat(user, "<span class='warning'>The acid on [src] burns my hand!</span>")
-				var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-				if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-					C.update_damage_overlays()
+	if(resistance_flags & ON_FIRE)
+		var/can_handle_hot = TRUE
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(!C.can_touch_burning(src))
+				can_handle_hot = FALSE
+
+		extinguish()
+
+		if(can_handle_hot)
+			user.visible_message("<span class='warning'>[user] puts out the fire on [src].</span>")
+			return
+
+		user.visible_message("<span class='warning'>[user] burns [user.p_their()] hand putting out the fire on [src]!</span>")
+		extinguish()
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))		// 5 burn damage
+				C.update_damage_overlays()
+
+		return
+
+	if(acid_level && iscarbon(user))// so we can still remove the clothes on us that have acid.
+		var/mob/living/carbon/C = user
+		if(!C.can_touch_acid(src))
+			to_chat(user, "<span class='warning'>The acid on [src] burns my hand!</span>")
+			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))
+				C.update_damage_overlays()
 
 	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
 		return

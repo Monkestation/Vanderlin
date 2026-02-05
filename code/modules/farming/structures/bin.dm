@@ -152,38 +152,39 @@
 			return TRUE
 	return FALSE
 
-/obj/item/bin/attackby(obj/item/I, mob/user, list/modifiers)
-	if(kover)
-		return ..()
+/obj/item/bin/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!reagents?.total_volume)
+		return NONE
 
-	if(istype(I, /obj/item/dye_pack))
-		var/obj/item/dye_pack/pack = I
+	if(istype(tool, /obj/item/dye_pack))
+		var/obj/item/dye_pack/pack = tool
 		user.visible_message(span_info("[user] begins to add [pack] to [src]..."))
-		if(do_after(user, 3 SECONDS, src))
-			playsound(src, "bubbles", 50, 1)
-			new /obj/structure/dye_bin(get_turf(src), pack)
-			qdel(src)
-		return
+		if(!do_after(user, 3 SECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+		playsound(src, "bubbles", 50, 1)
+		new /obj/structure/dye_bin(get_turf(src), pack)
+		qdel(src)
+		return ITEM_INTERACT_SUCCESS
 
-	if(!reagents || !reagents.maximum_volume) //trash
-		return ..()
+	if(isitem(tool))
+		var/obj/item/thing = tool
+		if(!HAS_TRAIT(thing, TRAIT_NEEDS_QUENCH))
+			return NONE
 
-	if(istype(I, /obj/item/weapon/tongs))
-		var/obj/item/weapon/tongs/T = I
-		if(T.held_item && HAS_TRAIT(T.held_item, TRAIT_NEEDS_QUENCH))
-			var/removereg = /datum/reagent/water
-			if(!reagents.has_reagent(/datum/reagent/water, 5))
-				removereg = /datum/reagent/water/gross
-				if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
-					to_chat(user, "<span class='warning'>Need more water to quench in.</span>")
-					return
-			reagents.remove_reagent(removereg, 5)
-			playsound(src,pick('sound/items/quench_barrel1.ogg','sound/items/quench_barrel2.ogg'), 100, FALSE)
-			user.visible_message("<span class='info'>[user] tempers \the [T.held_item.name] in \the [src], hot metal sizzling.</span>")
-			T.held_item.remove_quench()
-			update_appearance(UPDATE_ICON)
-			return
-	. = ..()
+		var/removereg = /datum/reagent/water
+		if(!reagents.has_reagent(/datum/reagent/water, 5))
+			removereg = /datum/reagent/water/gross
+			if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
+				to_chat(user, "<span class='warning'>Need more water to quench in.</span>")
+				return ITEM_INTERACT_BLOCKING
+
+		reagents.remove_reagent(removereg, 5)
+		playsound(src,pick('sound/items/quench_barrel1.ogg','sound/items/quench_barrel2.ogg'), 100, FALSE)
+		user.visible_message("<span class='info'>[user] tempers \the [thing] in \the [src], hot metal sizzling.</span>")
+		thing.remove_quench()
+		update_appearance(UPDATE_ICON)
+
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/bin/trash
 	name = "trash bin"

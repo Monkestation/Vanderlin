@@ -44,15 +44,23 @@
 	else
 		. += "[src] requires [UNIT_FORM_STRING(required_metal)] of Molten Metal to form.</font>"
 
-/obj/item/mould/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(!istype(I, /obj/item/storage/crucible))
-		return
+/obj/item/mould/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/storage/crucible))
+		return NONE
 
-	var/obj/item/storage/crucible/crucible = I
+	if(user.cmode)
+		return NONE
+
+	if(try_fill(user, tool))
+		user.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
+
+	return ITEM_INTERACT_BLOCKING
+
+/obj/item/mould/proc/try_fill(mob/living/user, /obj/item/storage/crucible)
 	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
 	if(!metal)
-		return
+		return FALSE
 
 	if(!filling_metal)
 		var/list/names = list()
@@ -63,9 +71,10 @@
 				continue
 			names |= initial(material.name)
 
-		var/choice = input(user, "What metal to pour?", crucible) in names
+		var/choice = browser_input_list(user, "What metal to pour?", items = names)
 		if(!choice)
-			return
+			return FALSE
+
 		for(var/datum/material/material as anything in metal.data)
 			if(!ispath(material))
 				continue
@@ -73,11 +82,11 @@
 				continue
 			filling_metal = material
 			break
+
 		if(!filling_metal)
-			return
-	else
-		if(!(filling_metal in metal.data))
-			return
+			return FALSE
+	else if(!(filling_metal in metal.data))
+		return FALSE
 
 	var/metal_amount = metal.data[filling_metal]
 	if(metal_amount > required_metal - fufilled_metal)
@@ -98,6 +107,7 @@
 	metal.data[filling_metal] -= metal_amount
 	if(!metal.data[filling_metal])
 		metal.data -= filling_metal
+
 	crucible.reagents.remove_reagent(/datum/reagent/molten_metal, metal_amount)
 	if(!QDELETED(metal))
 		metal.find_largest_metal()
@@ -107,6 +117,8 @@
 	crucible.update_appearance(UPDATE_OVERLAYS)
 	if(fufilled_metal >= required_metal)
 		start_cooling()
+
+	return TRUE
 
 /obj/item/mould/update_overlays()
 	. = ..()
