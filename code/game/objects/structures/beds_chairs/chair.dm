@@ -188,6 +188,7 @@
 	. = ..()
 	if(!proximity)
 		return
+
 	if(prob(break_chance))
 		user.visible_message("<span class='warning'>[src] is smashed to pieces!</span>")
 		if(iscarbon(target))

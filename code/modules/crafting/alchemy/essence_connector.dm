@@ -9,20 +9,18 @@
 	slot_flags = ITEM_SLOT_HIP
 	COOLDOWN_DECLARE(next_scan)
 
-/obj/item/essence_connector/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
-	if(!proximity_flag)
-		. = ..()
-		return
+/obj/item/essence_connector/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /obj/machinery/essence))
+		return NONE
 
-	var/obj/machinery/essence/machine = target
-	if(!istype(machine))
-		to_chat(user, span_warning("[target] is not an essence device."))
-		return
+	var/obj/machinery/essence/machine = interacting_with
 
 	if(connecting)
 		complete_connection(machine, user)
 	else
 		start_connection(machine, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/essence_connector/attack_self(mob/user, list/modifiers)
 	if(connecting)

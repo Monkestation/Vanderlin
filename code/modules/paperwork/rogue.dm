@@ -491,42 +491,47 @@
 /obj/item/paper/scroll/frumentarii
 	name = "frumentarii scroll"
 	desc = "A list of the hand's fingers. Strike a candidate with this to allow them servitude. Use a writing utensil to cross out a finger."
+	writable = FALSE
+	resistance_flags = FIRE_PROOF // let's maybe not burn this
 
 	//assoc list of TRUE and FALSE. TRUE indicates the agent is an active finger while FALSE is a severed finger
 	var/list/fingers = list()
 	var/names = 5
-	writable = FALSE
-	resistance_flags = FIRE_PROOF // let's maybe not burn this
 
-/obj/item/paper/scroll/frumentarii/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!user.mind)
-		return
+/obj/item/paper/scroll/frumentarii/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+
 	if(!HAS_TRAIT(user, TRAIT_NOBLE))
-		return
+		return NONE
+
+	var/mob/living/M = interacting_with
+
+	if(!M.client)
+		return NONE
+
+	if(M.real_name in fingers)
+		return ITEM_INTERACT_BLOCKING
+
 	if(length(fingers) >= names)
-		to_chat(user, span_notice("[src] is full"))
-		return
-	if(!isliving(target))
-		return
-	var/mob/living/attacked_target = target
-	if(!attacked_target.client)
-		return
-	if(attacked_target.real_name in fingers)
-		return
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+		balloon_alert(user, "too many fingers!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
 		if(H.family_datum == SSfamilytree.ruling_family)
-			to_chat(user, span_warning("I can't turn a member of the royal family into a finger."))
-			return
+			balloon_alert(user, "can't turn royalty!")
+			return ITEM_INTERACT_BLOCKING
 
-	var/choice = input(attacked_target,"Do you wish to become one of the Hand's fingers?","Binding Contract",null) as null|anything in list("Yes", "No")
-	if(choice != "Yes")
-		return
+	var/choice = browser_input_list(M, "Do you wish to become one of the Hand's fingers?", "Binding Contract", DEFAULT_INPUT_CHOICES)
+	if(choice != CHOICE_YES)
+		return ITEM_INTERACT_BLOCKING
 
-	fingers[attacked_target.real_name] = TRUE
+	fingers[M.real_name] = TRUE
 	user.mind.cached_frumentarii = fingers
 	rebuild_info()
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/paper/scroll/frumentarii/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	. = ..()

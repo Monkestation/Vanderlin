@@ -20,7 +20,23 @@
 
 /obj/item/reagent_containers/pill/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with))
-		return NONE
+		if(!dissolvable || !interacting_with.is_refillable())
+			return NONE
+
+		if(interacting_with.is_drainable() && !interacting_with.reagents.total_volume)
+			to_chat(user, "<span class='warning'>[interacting_with] is empty! There's nothing to dissolve [src] in.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		if(interacting_with.reagents.holder_full())
+			to_chat(user, "<span class='warning'>[interacting_with] is full.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		user.visible_message("<span class='warning'>[user] slips something into [interacting_with]!</span>", "<span class='notice'>I dissolve [src] in [interacting_with].</span>", null, 2)
+
+		reagents.trans_to(interacting_with, reagents.total_volume, transfered_by = user)
+		qdel(src)
+
+		return ITEM_INTERACT_SUCCESS
 
 	var/mob/living/M = interacting_with
 
@@ -54,24 +70,6 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 
 	return ITEM_INTERACT_SUCCESS
-
-/obj/item/reagent_containers/pill/afterattack(obj/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(!proximity)
-		return
-	if(!dissolvable || !target.is_refillable())
-		return
-	if(target.is_drainable() && !target.reagents.total_volume)
-		to_chat(user, "<span class='warning'>[target] is empty! There's nothing to dissolve [src] in.</span>")
-		return
-
-	if(target.reagents.holder_full())
-		to_chat(user, "<span class='warning'>[target] is full.</span>")
-		return
-
-	user.visible_message("<span class='warning'>[user] slips something into [target]!</span>", "<span class='notice'>I dissolve [src] in [target].</span>", null, 2)
-	reagents.trans_to(target, reagents.total_volume, transfered_by = user)
-	qdel(src)
 
 /obj/item/reagent_containers/pill/sate
 	name = "SATE pill"

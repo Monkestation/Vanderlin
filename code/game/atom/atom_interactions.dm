@@ -31,8 +31,8 @@
 		return self_interaction
 
 	var/interact_return = is_left_clicking \
-		? tool.interact_with_atom(src, user) \
-		: tool.interact_with_atom_secondary(src, user)
+		? tool.interact_with_atom(src, user, modifiers) \
+		: tool.interact_with_atom_secondary(src, user, modifiers)
 
 	if(interact_return)
 		return interact_return

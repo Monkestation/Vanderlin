@@ -7,39 +7,39 @@
 	var/treatment_type = "general"
 	var/treatment_strength = 30
 
-/obj/item/bee_treatment/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(!proximity)
-		return
+/obj/item/bee_treatment/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /obj/structure/apiary))
+		return NONE
 
-	if(istype(target, /obj/structure/apiary))
-		var/obj/structure/apiary/A = target
+	var/obj/structure/apiary/A = interacting_with
 
-		if(!A.has_disease)
-			to_chat(user, span_notice("The bees don't appear to need treatment."))
-			return
+	if(!A.has_disease)
+		to_chat(user, span_notice("The bees don't appear to need treatment."))
+		return ITEM_INTERACT_BLOCKING
 
-		to_chat(user, span_notice("You apply [src] to [A]."))
+	to_chat(user, span_notice("You apply [src] to [A]."))
 
-		var/effectiveness = treatment_strength
+	var/effectiveness = treatment_strength
 
-		if(A.disease && treatment_type == A.disease.name)
-			effectiveness *= 2
+	if(A.disease && treatment_type == A.disease.name)
+		effectiveness *= 2
 
-		A.treatment_progress += effectiveness
+	A.treatment_progress += effectiveness
 
-		if(A.treatment_progress >= 100)
-			A.has_disease = FALSE
-			A.disease = null
-			A.disease_severity = 0
-			A.treatment_progress = 0
-			to_chat(user, span_notice("The bees appear to be recovering!"))
-		else
-			to_chat(user, span_notice("The treatment seems to be having some effect."))
+	if(A.treatment_progress >= 100)
+		A.has_disease = FALSE
+		A.disease = null
+		A.disease_severity = 0
+		A.treatment_progress = 0
+		to_chat(user, span_notice("The bees appear to be recovering!"))
+	else
+		to_chat(user, span_notice("The treatment seems to be having some effect."))
 
-		A.agitate_bees(20, user)
+	A.agitate_bees(20, user)
 
-		qdel(src)
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/bee_treatment/antiviral
 	name = "bee antiviral"
