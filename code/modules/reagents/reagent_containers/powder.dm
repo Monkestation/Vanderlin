@@ -74,6 +74,7 @@
 		record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 		record_round_statistic(STATS_DRUGS_SNORTED)
 
+	user.changeNext_move(CLICK_CD_MELEE)
 	qdel(src)
 
 	return ITEM_INTERACT_SUCCESS

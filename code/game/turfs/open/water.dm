@@ -382,42 +382,93 @@
 						water_overlay.layer = ABOVE_MOB_LAYER
 						water_overlay.plane = GAME_PLANE_UPPER
 
-/turf/open/water/attackby(obj/item/C, mob/user, list/modifiers)
-	if(user.used_intent.type == /datum/intent/fill)
-		if(C.reagents)
-			if(C.reagents.holder_full())
-				to_chat(user, "<span class='warning'>[C] is full.</span>")
-				return
-			if(notake)
-				return
-			if(water_volume < 10)
-				return
-			if(do_after(user, 8 DECISECONDS, src))
-				user.changeNext_move(CLICK_CD_MELEE)
-				playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
-				if(!mapped && C.reagents.add_reagent(water_reagent, 10))
-					adjust_originate_watervolume(-10)
+/turf/open/water/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(user.used_intent, /datum/intent/fill))
+		if(notake)
+			return NONE
 
-				else
-					C.reagents.add_reagent(water_reagent, 100)
-				to_chat(user, "<span class='notice'>I fill [C] from [src].</span>")
-			return
-	if(user.used_intent.type == /datum/intent/food)
+		if(!tool.reagents)
+			return NONE
+
+		if(tool.reagents.holder_full())
+			to_chat(user, "<span class='warning'>[tool] is full.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		if(water_volume < 10)
+			return ITEM_INTERACT_BLOCKING
+
+		if(!do_after(user, 8 DECISECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+
+		playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
+
+		if(!mapped && tool.reagents.add_reagent(water_reagent, 10))
+			adjust_originate_watervolume(-10)
+		else
+			tool.reagents.add_reagent(water_reagent, 100)
+
+		to_chat(user, "<span class='notice'>I fill [tool] from [src].</span>")
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(user.used_intent, /datum/intent/food))
 		if(mapped)
-			return
-		if(C.reagents)
-			if(water_volume >= water_maximum)
-				to_chat(user, "<span class='warning'>\The [src] is full.</span>")
-				return
-			if(do_after(user, 8 DECISECONDS, src))
-				user.changeNext_move(CLICK_CD_MELEE)
-				playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
-				var/water_count = C.reagents.get_reagent_amount(water_reagent.type)
-				if(!mapped && C.reagents.remove_reagent(water_reagent,  C.reagents.total_volume))
-					set_watervolume(clamp(water_volume + water_count, 1, water_maximum))
-				to_chat(user, "<span class='notice'>I pour the contents of [C] into [src].</span>")
-			return
-	. = ..()
+			return NONE
+
+		if(!tool.reagents)
+			return NONE
+
+		if(water_volume >= water_maximum)
+			to_chat(user, "<span class='warning'>\The [src] is full.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		if(!do_after(user, 8 DECISECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+
+		playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
+
+		var/water_count = tool.reagents.get_reagent_amount(water_reagent.type)
+		if(!mapped && tool.reagents.remove_reagent(water_reagent,  tool.reagents.total_volume))
+			set_watervolume(clamp(water_volume + water_count, 1, water_maximum))
+
+		to_chat(user, "<span class='notice'>I pour the contents of [tool] into [src].</span>")
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		return ITEM_INTERACT_SUCCESS
+
+/turf/open/water/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!mapped && water_volume < 10)
+		return ITEM_INTERACT_BLOCKING
+
+	// This should just be reagent interactions :(
+
+	playsound(user, pick(list('sound/foley/waterwash (1).ogg', 'sound/foley/waterwash (2).ogg')), 100, FALSE)
+
+	user.visible_message("<span class='info'>[user] starts to wash [tool] in [src].</span>")
+
+	if(!do_after(user, 3 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	if(wash_in)
+		tool.wash(CLEAN_WASH)
+
+	if(istype(tool, /obj/item/clothing))
+		var/obj/item/clothing/item2wash_cloth = tool
+		if(item2wash_cloth && item2wash_cloth.wetable)
+			if(cleanliness_factor > 0)
+				item2wash_cloth.wet.add_water(20, dirty = FALSE, washed_properly = TRUE)
+			else
+				item2wash_cloth.wet.add_water(20, dirty = TRUE, washed_properly = TRUE)
+
+	user.nobles_seen_servant_work()
+
+	playsound(user, pick(list('sound/foley/waterwash (1).ogg', 'sound/foley/waterwash (2).ogg')), 100, FALSE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /turf/open/water/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -450,29 +501,6 @@
 				L.adjust_hygiene(HYGIENE_GAIN_UNCLOTHED * cleanliness_factor)
 				L.adjust_fire_stacks(-2)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-/turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(user.cmode)
-		return
-	var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
-	playsound(user, pick_n_take(wash), 100, FALSE)
-	user.visible_message("<span class='info'>[user] starts to wash [item2wash] in [src].</span>")
-	if(do_after(user, 3 SECONDS, src))
-		if(wash_in)
-			item2wash.wash(CLEAN_WASH)
-		if(istype(item2wash, /obj/item/clothing))
-			var/obj/item/clothing/item2wash_cloth = item2wash
-			if(item2wash_cloth && item2wash_cloth.wetable)
-				if(cleanliness_factor > 0)
-					item2wash_cloth.wet.add_water(20, dirty = FALSE, washed_properly = TRUE)
-				else
-					item2wash_cloth.wet.add_water(20, dirty = TRUE, washed_properly = TRUE)
-		user.nobles_seen_servant_work()
-		playsound(user, pick(wash), 100, FALSE)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/open/water/onbite(mob/living/user)
 	. = ..()

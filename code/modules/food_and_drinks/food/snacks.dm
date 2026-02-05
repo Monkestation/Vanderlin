@@ -415,7 +415,6 @@ All foods are distributed among various categories. Use common sense.
 					span_notice("[user] hungrily [eatverb]s \the [src], gobbling it down!"),
 					span_notice("I hungrily [eatverb] \the [src], gobbling it down!"),
 				)
-				eater.changeNext_move(CLICK_CD_MELEE * 0.5)
 	else if(eater.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
 		eater.visible_message(
 			span_warning("[user] cannot force any more of [src] down [eater]'s throat!"),
@@ -440,6 +439,8 @@ All foods are distributed among various categories. Use common sense.
 	SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
 
 	on_consume(eater)
+
+	user.changeNext_move(CLICK_CD_MELEE)
 
 	if(!reagents?.total_volume)
 		qdel(src)

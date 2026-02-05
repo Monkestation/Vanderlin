@@ -232,7 +232,7 @@
 	var/mob/living/carbon/C = interacting_with
 
 	if(!HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))
-		return ITEM_INTERACT_BLOCKING
+		return NONE
 
 	if(animal_origin)
 		return ITEM_INTERACT_BLOCKING

@@ -12,17 +12,17 @@
 	icon_state = "fat"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	eat_effect = /datum/status_effect/debuff/uncookedfood
-	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
+	possible_item_intents = list(/datum/intent/use)
 
 /obj/item/reagent_containers/food/snacks/fat/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with))
 		return NONE
 
 	if(interacting_with != user)
-		return NONE
+		return ..()
 
-	if(istype(user.used_intent, /datum/intent/food))
-		return NONE
+	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
+		return ..()
 
 	var/mob/living/M = interacting_with
 

@@ -39,9 +39,9 @@
 	thing.forceMove(get_turf(user))
 	user.put_in_hands(thing)
 
-	to_grind = null
-
 	balloon_alert(user, "I remove \an [to_grind].")
+
+	to_grind = null
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 

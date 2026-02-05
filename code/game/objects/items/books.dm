@@ -1690,7 +1690,7 @@ ____________End of Example*/
 	dat = "gott.json"
 	verses_file = "strings/psybibble.txt"
 
-/obj/item/book/bibble/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+/obj/item/book/bibble/psy/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with) || !istype(user.patron, /datum/patron/psydon))
 		return NONE
 

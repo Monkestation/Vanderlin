@@ -59,7 +59,6 @@
 	if(isitem(interacting_with))
 		if(sew_item(interacting_with, user))
 			return ITEM_INTERACT_SUCCESS
-		return ITEM_INTERACT_BLOCKING
 
 /obj/item/needle/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/natural/fibers))

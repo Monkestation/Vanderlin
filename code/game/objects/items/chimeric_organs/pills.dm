@@ -51,6 +51,7 @@
 		reagents.trans_to(M, reagents.total_volume, transfered_by = user, method = apply_type)
 
 	qdel(src)
+	user.changeNext_move(CLICK_CD_MELEE)
 
 	return ITEM_INTERACT_SUCCESS
 
