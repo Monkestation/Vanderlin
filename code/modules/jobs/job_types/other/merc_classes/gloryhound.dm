@@ -44,13 +44,14 @@
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	belt = /obj/item/storage/belt/leather/mercenary
 	armor = /obj/item/clothing/armor/cuirass
-	beltr = /obj/item/weapon/sword
+	beltl = /obj/item/weapon/sword
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/shield/atgervi
-	shirt = /obj/item/clothing/armor/gambeson/arming
-	pants = /obj/item/clothing/pants/chainlegs/iron
+	backr = /obj/item/weapon/shield/heater
+	shirt = /obj/item/clothing/armor/gambeson
+	pants = /obj/item/clothing/pants/trou/leather/splint
 	neck = /obj/item/clothing/neck/gorget
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/weapon/knife/hunting = 1
 	)
