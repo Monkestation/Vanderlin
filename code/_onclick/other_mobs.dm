@@ -82,8 +82,6 @@
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 
-	user.changeNext_move(CLICK_CD_MELEE)
-
 	if(!user.cmode)
 		if(!length(surgeries))
 			return SECONDARY_ATTACK_CONTINUE_CHAIN
@@ -98,6 +96,7 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(user.rmb_intent)
+		user.changeNext_move(CLICK_CD_MELEE)
 		user.rmb_intent.special_attack(user, src)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
@@ -109,17 +108,19 @@
 		return
 
 	if(user.cmode)
-		return
+		return SECONDARY_ATTACK_CALL_NORMAL // Punch
 
-	if(ishuman(src) && ishuman(user))
-		var/mob/living/carbon/human/target = src
-		var/datum/job/job = SSjob.GetJob(target.job)
-		if(length(user.return_apprentices()) >= user.return_max_apprentices())
-			return
-		if((target.age == AGE_CHILD || job?.type == /datum/job/vagrant) && target.mind && !target.is_apprentice())
-			to_chat(user, span_notice("You offer apprenticeship to [target]."))
-			user.make_apprentice(target)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(!ishuman(src) || !ishuman(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	var/mob/living/carbon/human/target = src
+	var/datum/job/job = SSjob.GetJob(target.job)
+	if(length(user.return_apprentices()) >= user.return_max_apprentices())
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if((target.age == AGE_CHILD || job?.type == /datum/job/vagrant) && target.mind && !target.is_apprentice())
+		to_chat(user, span_notice("You offer apprenticeship to [target]."))
+		user.make_apprentice(target)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
