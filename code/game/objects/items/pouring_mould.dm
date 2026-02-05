@@ -57,7 +57,7 @@
 
 	return ITEM_INTERACT_BLOCKING
 
-/obj/item/mould/proc/try_fill(mob/living/user, /obj/item/storage/crucible)
+/obj/item/mould/proc/try_fill(mob/living/user, obj/item/storage/crucible)
 	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return FALSE
