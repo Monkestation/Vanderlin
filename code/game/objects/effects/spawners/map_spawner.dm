@@ -144,6 +144,11 @@
 			new spawn_path(get_turf(src))
 		qdel(src)
 
+/obj/effect/spawner/map_spawner/loot/random
+	icon_state = "lootrandom"
+	loot_table_type = /datum/loot_table/random
+	probby = 50
+
 /obj/effect/spawner/map_spawner/loot/common
 	icon_state = "lootlow"
 	loot_table_type = /datum/loot_table/common
