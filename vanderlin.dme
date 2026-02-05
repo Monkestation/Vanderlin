@@ -1710,7 +1710,6 @@
 #include "code\game\objects\items\weaponry.dm"
 #include "code\game\objects\items\chimeric_organs\chimeric_node.dm"
 #include "code\game\objects\items\chimeric_organs\ifak.dm"
-#include "code\game\objects\items\chimeric_organs\infusion_syringe.dm"
 #include "code\game\objects\items\chimeric_organs\pills.dm"
 #include "code\game\objects\items\chimeric_organs\pilltin.dm"
 #include "code\game\objects\items\devices\devies.dm"

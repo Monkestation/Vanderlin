@@ -127,27 +127,29 @@
 	. = ..()
 	icon_state = "[initial(icon_state)][heated ? "_hot" : ""]"
 
-/obj/item/weapon/surgery/cautery/pre_attack(atom/A, mob/living/user, list/modifiers)
-	if(!istype(user.a_intent, INTENT_USE))
-		return ..()
-	var/heating = 0
-	if(istype(A, /obj/machinery/light/fueled))
-		var/obj/machinery/light/fueled/forge = A
-		if(forge.on)
-			heating = 20
-	if(heating)
+/obj/item/weapon/surgery/cautery/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(interacting_with, /obj/machinery/light/fueled))
+		return NONE
+
+	var/obj/machinery/light/fueled/forge = interacting_with
+	if(forge.on)
 		user.visible_message("<span class='info'>[user] heats [src].</span>")
-		fire_act(heating)
-		return TRUE
-	return ..()
+		fire_act()
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/surgery/cautery/fire_act(added, maxstacks)
 	. = ..()
 	if(!heated)
 		playsound(src, 'sound/items/firelight.ogg', 100, vary = TRUE)
+
 	update_heated(TRUE)
+
 	if(cool_timer)
 		deltimer(cool_timer)
+
 	cool_timer = addtimer(CALLBACK(src, PROC_REF(update_heated), FALSE), added SECONDS, TIMER_STOPPABLE)
 
 /obj/item/weapon/surgery/cautery/get_temperature()
@@ -179,20 +181,147 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
 
-/obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, list/modifiers)
-	if(!istype(user.a_intent, INTENT_USE))
-		return ..()
+/obj/item/weapon/surgery/hammer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!ishuman(interacting_with))
+		return NONE
+
 	if(user.get_skill_level(/datum/skill/misc/medicine) < 1)
-		return ..()
-	if(ishuman(A))
-		if(A == user)
-			user.visible_message("<span class='info'>[user] begins smacking themself with a small hammer.</span>")
+		return NONE
+
+	if(interacting_with == user)
+		user.visible_message("<span class='info'>[user] begins smacking themself with a small hammer.</span>")
+	else
+		user.visible_message("<span class='info'>[user] begins to smack [interacting_with] with a small hammer.</span>")
+
+	if(do_after(user, 2.5 SECONDS, interacting_with))
+		return ITEM_INTERACT_BLOCKING
+
+	interacting_with.visible_message("<span class='info'>[interacting_with] jerks their knee after the hammer strikes!</span>")
+
+	if(prob(1))
+		playsound(user, 'sound/misc/bonk.ogg', 100, FALSE, -1)
+
+	var/mob/living/carbon/human/human_target = interacting_with
+	human_target.check_for_injuries(user, additional = TRUE)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/reagent_containers/syringe
+	name = "syringe"
+	desc = "A metal implement made for the drawing and injecting of various fluids."
+	icon = 'icons/obj/medical.dmi'
+	icon_state = "syringe"
+	amount_per_transfer_from_this = 5
+	fill_icon_thresholds = list(0, 1, 5, 10, 15)
+	grid_width = 64
+	grid_height = 32
+	volume = 15
+	reagent_flags = TRANSPARENT
+
+/obj/item/reagent_containers/syringe/proc/try_syringe(atom/target, mob/user)
+	if(!target.reagents)
+		return FALSE
+
+	if(isliving(target))
+		var/mob/living/living_target = target
+		if(!living_target.can_inject())
+			return FALSE
+
+	return TRUE
+
+/obj/item/reagent_containers/syringe/interact_with_atom(atom/target, mob/living/user, list/modifiers)
+	if(!target.reagents)
+		return NONE
+
+	if(!try_syringe(target, user))
+		return ITEM_INTERACT_BLOCKING
+
+	var/contained = reagents.get_reagent_log_string()
+	log_combat(user, target, "attempted to inject", src, addition="which had [contained]")
+
+	if(!reagents.total_volume)
+		to_chat(user, span_warning("[src] is empty! Right-click to draw."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!isliving(target) && !target.is_injectable(user))
+		to_chat(user, span_warning("You cannot directly fill [target]!"))
+		return ITEM_INTERACT_BLOCKING
+
+	if(target.reagents.holder_full())
+		to_chat(user, span_notice("[target] is full."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(isliving(target))
+		var/mob/living/living_target = target
+		if(living_target != user)
+			living_target.visible_message(
+				span_danger("[user] is trying to inject [living_target]!"),
+				span_userdanger("[user] is trying to inject you!"),
+			)
+			if(!do_after(user, 4 SECONDS, living_target, extra_checks = CALLBACK(src, PROC_REF(try_syringe), living_target, user)))
+				return ITEM_INTERACT_BLOCKING
+			if(!reagents.total_volume)
+				return ITEM_INTERACT_BLOCKING
+			if(living_target.reagents.holder_full())
+				return ITEM_INTERACT_BLOCKING
+			living_target.visible_message(
+				span_danger("[user] injects [living_target] with the syringe!"),
+				span_userdanger("[user] injects you with the syringe!"),
+			)
+
+		if(living_target == user)
+			living_target.log_message("injected themselves ([contained]) with [name]", LOG_ATTACK, color="orange")
 		else
-			user.visible_message("<span class='info'>[user] begins to smack [A] with a small hammer.</span>")
-		if(do_after(user, 2.5 SECONDS, A))
-			A.visible_message("<span class='info'>[A] jerks their knee after the hammer strikes!</span>")
-			if(prob(1))
-				playsound(user, 'sound/misc/bonk.ogg', 100, FALSE, -1)
-			var/mob/living/carbon/human/human_target = A
-			human_target.check_for_injuries(user, additional = TRUE)
-	return ..()
+			log_combat(user, living_target, "injected", src, addition="which had [contained]")
+
+	if(reagents.trans_to(target, amount_per_transfer_from_this, transfered_by = user, method = INJECT))
+		to_chat(user, span_notice("You inject [amount_per_transfer_from_this] units of the solution. The syringe now contains [reagents.total_volume] units."))
+		target.update_appearance()
+		return ITEM_INTERACT_SUCCESS
+
+/obj/item/reagent_containers/syringe/interact_with_atom_secondary(atom/target, mob/living/user, list/modifiers)
+	if(!target.reagents)
+		return NONE
+
+	if(!try_syringe(target, user))
+		return ITEM_INTERACT_BLOCKING
+
+	if(reagents.holder_full())
+		to_chat(user, span_notice("[src] is full."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(isliving(target))
+		var/mob/living/living_target = target
+		var/drawn_amount = reagents.maximum_volume - reagents.total_volume
+		if(target != user)
+			target.visible_message(
+				span_danger("[user] is trying to take a blood sample from [target]!"),
+				span_userdanger("[user] is trying to take a blood sample from you!"),
+			)
+			if(!do_after(user, 4 SECONDS, target, extra_checks = CALLBACK(src, PROC_REF(try_syringe), living_target, user)))
+				return ITEM_INTERACT_BLOCKING
+			if(reagents.holder_full())
+				return ITEM_INTERACT_BLOCKING
+		if(living_target.transfer_blood_to(src, drawn_amount))
+			user.visible_message(span_notice("[user] takes a blood sample from [living_target]."))
+		else
+			to_chat(user, span_warning("You are unable to draw any blood from [living_target]!"))
+		return ITEM_INTERACT_SUCCESS
+
+	if(!target.reagents.total_volume)
+		to_chat(user, span_warning("[target] is empty!"))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!target.is_drawable(user))
+		to_chat(user, span_warning("You cannot directly remove reagents from [target]!"))
+		return ITEM_INTERACT_BLOCKING
+
+	var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user) // transfer from, transfer to - who cares?
+
+	to_chat(user, span_notice("You fill [src] with [trans] units of the solution. It now contains [reagents.total_volume] units."))
+	target.update_appearance()
+
+	return ITEM_INTERACT_SUCCESS

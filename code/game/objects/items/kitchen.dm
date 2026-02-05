@@ -29,13 +29,17 @@
 	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	return BRUTELOSS
 
-/obj/item/kitchen/fork/pre_attack(atom/A, mob/living/user, list/modifiers)
-	if(istype(A, /obj/item/reagent_containers/food/snacks) && user.used_intent.type == /datum/intent/food)
-		var/obj/item/reagent_containers/food/snacks/S = A
-		S.attack(user, user)
-		user.changeNext_move(CLICK_CD_MELEE)
-		return TRUE
-	. = ..()
+/obj/item/kitchen/fork/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(interacting_with, /obj/item/reagent_containers/food/snacks))
+		return NONE
+
+	var/obj/item/reagent_containers/food/snacks/S = interacting_with
+	S.interact_with_atom(user, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/kitchen/rollingpin
 	name = "rolling pin"
