@@ -189,7 +189,7 @@
 		return NONE
 
 	if(user.get_skill_level(/datum/skill/misc/medicine) < 1)
-		return NONE
+		return ITEM_INTERACT_BLOCKING
 
 	if(interacting_with == user)
 		user.visible_message("<span class='info'>[user] begins smacking themself with a small hammer.</span>")

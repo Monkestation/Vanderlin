@@ -56,8 +56,6 @@
 		span_notice("[user] begins to replace [target]'s [parse_zone(target_zone)]."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/add_prosthetic/success(mob/user, mob/living/target, target_zone, obj/item/bodypart/tool, datum/intent/intent)
 	if(tool.attach_limb(target) && tool.attach_wound)
 		tool.add_wound(tool.attach_wound)
@@ -137,8 +135,6 @@
 		span_notice("[user] begins to saw through the base of [target]'s prosthetic [parse_zone(target_zone)]."),
 		span_notice("[user] begins to saw [target]'s prosthetic [parse_zone(target_zone)].")
 	)
-
-	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/remove_prosthetic/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(

@@ -15,10 +15,6 @@
 	success_sound = 'sound/surgery/scalpel2.ogg'
 
 /datum/surgery_step/incise/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	var/obj/item/bodypart/gotten_part = target.get_bodypart(check_zone(target_zone))
-	if(gotten_part?.has_wound(/datum/wound/slash/incision))
-		return SURGERY_STEP_SKIP
-
 	display_results(
 		user,
 		target,
@@ -27,18 +23,18 @@
 		span_notice("[user] begins to make an incision in [target]'s [parse_zone(target_zone)].")
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/incise/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
 		target,
 		span_notice("Blood pools around the incision in [target]'s [parse_zone(target_zone)]."),
 		span_notice("Blood pools around the incision in [target]'s [parse_zone(target_zone)]."),
+		span_notice("Blood pools around the incision in [target]'s [parse_zone(target_zone)]."),
 	)
 
 	var/obj/item/bodypart/gotten_part = target.get_bodypart(check_zone(target_zone))
-	gotten_part?.add_wound(/datum/wound/slash/incision)
+	if(gotten_part && !gotten_part.has_wound(/datum/wound/slash/incision))
+		gotten_part?.add_wound(/datum/wound/slash/incision)
 
 	return TRUE
 
@@ -64,8 +60,6 @@
 		span_notice("[user] begins to clamp bleeders in [target]'s [parse_zone(target_zone)]."),
 		span_notice("[user] begins to clamp bleeders in [target]'s [parse_zone(target_zone)]."),
 	)
-
-	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/clamp/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
@@ -102,8 +96,6 @@
 		span_notice("[user] begins to retract [target]'s [parse_zone(target_zone)]."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/retract/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
@@ -135,8 +127,6 @@
 		span_notice("[user] begins to cauterize the wounds on [target]'s [parse_zone(target_zone)]."),
 		span_notice("[user] begins to cauterize the wounds on [target]'s [parse_zone(target_zone)]."),
 	)
-
-	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/cauterize/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
@@ -173,10 +163,6 @@
 	success_sound = 'sound/surgery/organ2.ogg'
 
 /datum/surgery_step/saw/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
-	if(bodypart?.has_wound(/datum/wound/fracture))
-		return SURGERY_STEP_SKIP
-
 	display_results(
 		user,
 		target,
@@ -184,8 +170,6 @@
 		span_notice("[user] begins to saw through the bone in [target]'s [parse_zone(target_zone)]."),
 		span_notice("[user] begins to saw through the bone in [target]'s [parse_zone(target_zone)]."),
 	)
-
-	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/saw/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
@@ -197,7 +181,7 @@
 	)
 
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
-	if(bodypart)
+	if(bodypart && !bodypart.has_wound(/datum/wound/fracture))
 		var/fracture_type = /datum/wound/fracture
 		//yes we ignore crit resist here because this is a proper surgical procedure, not a crit
 		switch(bodypart.body_zone)

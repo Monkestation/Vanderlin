@@ -35,8 +35,6 @@
 		span_notice("[user] begins to make an incision in [target]'s face."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/reshape_face/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 	if(bodypart?.has_wound(/datum/wound/facial/disfigurement))

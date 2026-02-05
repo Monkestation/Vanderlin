@@ -49,8 +49,6 @@
 		span_notice("[user] begins to work something into [target]'s innards."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/bestow_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(tainted_lux && !tainted_mob)
 		display_results(

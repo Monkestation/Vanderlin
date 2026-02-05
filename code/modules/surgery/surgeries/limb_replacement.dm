@@ -54,8 +54,6 @@
 		span_notice("[user] begins to augment [target]'s [parse_zone(user.zone_selected)].")
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/replace_limb/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/bodypart/existing = target.get_bodypart(check_zone(target_zone))
 	if(!existing)

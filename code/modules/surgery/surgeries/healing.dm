@@ -93,8 +93,6 @@
 		span_notice("[user] attempts to patch some of [target]'s [woundtype]."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/heal/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/umsg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
 	var/tmsg = "[user] fixes some of [target]'s wounds" //see above

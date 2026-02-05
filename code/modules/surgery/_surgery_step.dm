@@ -94,10 +94,6 @@
 	var/preop_result = preop(user, target, target_zone, tool, surgery)
 	if(preop_result == SURGERY_STEP_FAIL)
 		return FALSE
-	if(preop_result == SURGERY_STEP_SKIP)
-		user.balloon_alert(user, "step already complete!")
-		advance_surgery(user, surgery)
-		return TRUE
 
 	surgery.step_in_progress = TRUE
 

@@ -52,8 +52,6 @@
 		span_notice("[user] mutters dark incantations while working on [target].")
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/create_chimeric_organ/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!selected_organ)
 		return FALSE
@@ -166,8 +164,6 @@
 		span_notice("[user] begins grafting something grotesque into [target]'s organ."),
 		span_notice("[user] performs an unholy grafting ritual on [target].")
 	)
-
-	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/graft_chimeric_node/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!selected_organ)
@@ -362,8 +358,6 @@
 		span_notice("I begin the complex ritual to repair [target]'s failed [selected_organ]..."),
 		span_notice("[user] begins an elaborate ritual over [target]'s corrupted organ."),
 	)
-
-	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/repair_chimeric_organ/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!selected_organ)

@@ -46,8 +46,6 @@
 		span_warning("[user] begins to extract something from [target]'s innards."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/extract_chimeric_node/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	target.emote("painscream")
 

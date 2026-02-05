@@ -36,8 +36,6 @@
 		span_notice("[user] begins to burn the rot from [target]'s heart."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 // most of this is copied from the Cure Rot spell
 /datum/surgery_step/burn_rot/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/burndam = 20 - (user.get_skill_level(/datum/skill/misc/medicine, TRUE) * 3)

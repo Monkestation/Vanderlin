@@ -20,8 +20,6 @@
 	var/location = BODY_ZONE_CHEST
 	/// Acceptable body zones
 	var/list/possible_locs = list()
-	/// Uses precise locs
-	var/use_precise = FALSE
 	/// Acceptable mob types
 	var/list/target_mobtypes = list(/mob/living/carbon/human)
 	/// Intents that can be used to perform this surgery step
@@ -114,7 +112,7 @@
 
 	var/selected_zone = user.zone_selected
 
-	if((use_precise && !(selected_zone in possible_locs)) || (!use_precise && !(selected_zone in possible_locs)))
+	if(!(selected_zone in possible_locs))
 		if(feedback)
 			patient.balloon_alert(user, "can't operate there!")
 		return FALSE

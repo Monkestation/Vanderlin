@@ -150,9 +150,6 @@
 		M.update_body_parts(TRUE)
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/organ/proc/on_find(mob/living/finder)
-	return
-
 /obj/item/organ/process()
 	on_death() //Kinda hate doing it like this, but I really don't want to call process directly.
 

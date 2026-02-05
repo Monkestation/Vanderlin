@@ -64,8 +64,6 @@
 		span_notice("[user] begins to something into [target]'s innards..."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/infuse_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	if(!target.revive(excess_healing = 50))
 		return failure(user, target, target_zone, tool, surgery)

@@ -16,6 +16,8 @@
 	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery/organ_manipulation/soft
+	name = "Soft Tissue Organ manipulation"
+
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract,
@@ -30,9 +32,8 @@
 		BODY_ZONE_PRECISE_L_EYE,
 		BODY_ZONE_PRECISE_MOUTH,
 		BODY_ZONE_PRECISE_STOMACH,
-		BODY_ZONE_PRECISE_GROIN,
+		BODY_ZONE_PRECISE_EARS,
 	)
-	use_precise = TRUE
 
 /datum/surgery_step/manipulate_organs
 	name = "Manipulate organs"
@@ -86,13 +87,12 @@
 
 		return SURGERY_STEP_FAIL
 
-	var/list/organs = target.getorganszone(target_zone, subzones = FALSE)
+	var/list/organs = target.getorganszone(target_zone)
 	if(!length(organs))
 		to_chat(user, span_warning("There are no removable organs in [target]'s [parse_zone(target_zone)]!"))
 		return SURGERY_STEP_FAIL
 
 	for(var/obj/item/organ/found_organ as anything in organs)
-		found_organ.on_find(user)
 		organs -= found_organ
 		organs[found_organ.name] = found_organ
 
@@ -113,8 +113,6 @@
 		span_notice("[user] begins to extract [final_organ] from [target]'s [parse_zone(target_zone)]."),
 		span_notice("[user] begins to extract something from [target]'s [parse_zone(target_zone)].")
 	)
-
-	return SURGERY_STEP_CONTINUE
 
 /datum/surgery_step/manipulate_organs/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/organ/organ_tool = tool

@@ -59,8 +59,6 @@
 		span_notice("[user] begins to scrape lux from [target]'s heart."),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/extract_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	target.emote("painscream")
 

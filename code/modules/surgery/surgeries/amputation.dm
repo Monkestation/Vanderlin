@@ -44,8 +44,6 @@
 		span_notice("[user] begins to sever [target]'s [parse_zone(target_zone)]!"),
 	)
 
-	return SURGERY_STEP_CONTINUE
-
 /datum/surgery_step/amputate/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
 		user,
