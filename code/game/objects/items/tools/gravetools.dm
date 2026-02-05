@@ -32,27 +32,6 @@
 	grid_height = 96
 	var/time_multiplier = 1 //multipler to do_after times
 
-/obj/item/weapon/shovel/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(user.cmode)
-		return NONE
-
-	if(!istype(interacting_with, /obj/structure/snow))
-		return NONE
-
-	user.changeNext_move(CLICK_CD_MELEE)
-
-	playsound(interacting_with,'sound/items/dig_shovel.ogg', 100, TRUE)
-
-	for(var/turf/turf as anything in get_adjacent_open_turfs(interacting_with))
-		var/obj/structure/snow/snow = locate() in turf
-		snow?.update_corners()
-
-	var/turf/target_turf = get_turf(interacting_with)
-	qdel(interacting_with)
-	target_turf.snow = null //ffs
-
-	return ITEM_INTERACT_SUCCESS
-
 /obj/item/weapon/shovel/Destroy()
 	if(heldclod)
 		QDEL_NULL(heldclod)
@@ -91,6 +70,24 @@
 
 
 /obj/item/weapon/shovel/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(istype(interacting_with, /obj/structure/snow))
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		playsound(interacting_with,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+		var/turf/target_turf = get_turf(interacting_with)
+		qdel(interacting_with)
+		target_turf.snow = null //ffs
+
+		for(var/turf/turf as anything in get_adjacent_open_turfs(interacting_with))
+			var/obj/structure/snow/snow = locate() in turf
+			snow?.update_corners()
+
+		return ITEM_INTERACT_SUCCESS
+
 	if(!isturf(interacting_with))
 		return NONE
 
