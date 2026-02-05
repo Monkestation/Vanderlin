@@ -67,7 +67,9 @@
 	icon_state = "shishpar_iron"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 2
-	wdefense = GOOD_PARRY
+	minstr = 8
+
+	melt_amount = 150
 	sellprice = 35
 
 //................  Canes, my beloved. ............... //
@@ -207,9 +209,11 @@
 	name = "steel mace"
 	desc = "A well-crafted mace with a steel head. Easier to control and hits just as hard."
 	icon_state = "smace"
+	force = DAMAGE_MACE + 2
+	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -220,16 +224,18 @@
 	icon_state = "rungu_steel"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = AVERAGE_PARRY //Due to costing less bars
+	max_integrity = INTEGRITY_STRONGEST * 0.75
 	melt_amount = 75
 	sellprice = 30
 
-/obj/item/weapon/mace/steel/shishpar
+/obj/item/weapon/mace/steel/shishpar //More damage, but less versatile with bonuses
 	name = "steel shishpar"
 	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but it's capable of delivering devastating blows."
 	icon_state = "shishpar_steel"
-	force = DAMAGE_MACE + 2
 	force_wielded = DAMAGE_MACE_WIELD + 3
+	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
+	minstr = 8
 	sellprice = 75
 
 //................ Spiked club ............... //
@@ -250,14 +256,16 @@
 	max_integrity = INTEGRITY_STRONG
 
 
-//................ Iron Bludgeon ............... // Bludgeons have less force, less integrity, and worse parry than their mace counterarts, but are harder to dodge.
+//................ Iron Bludgeon ............... // Less damage, more accurate, similar to a cudgel
 /obj/item/weapon/mace/bludgeon
 	name = "iron bludgeon"
 	desc = "An iron headed club, useful for beating the dregs back into their gutters."
 	icon_state = "ibludgeon"
 	force = DAMAGE_CLUB + 3
 	force_wielded = DAMAGE_CLUB_WIELD + 2
-	wbalance = HARD_TO_DODGE
+	wbalance = VERY_HARD_TO_DODGE
+	wlength = WLENGTH_SHORT
+	minstr = 6
 
 /obj/item/weapon/mace/bludgeon/getonmobprop(tag)
 	. = ..()
@@ -317,12 +325,9 @@
 	desc = "A stubby little club favored for thwacking thieves and smart-mouthed peasant folk."
 	force = DAMAGE_CLUB
 	force_wielded = DAMAGE_CLUB_WIELD
-	possible_item_intents = list(MACE_STRIKE, DAZE_BASH)
-	gripped_intents = list(MACE_STRIKE, MACE_SMASH, DAZE_BASH)
 	wdefense = MEDIOCRE_PARRY
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
-	gripped_intents = null
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 2
 
@@ -435,7 +440,7 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/mace/goden/deepduke
+/obj/item/weapon/mace/goden/deepduke //Boss loot
 	name = "deep duke's staff"
 	desc = "A staff made of seaglass and sturdy but unusual metal, holding no power after its misled owner's death. More useful as a bashing tool than a magic focus."
 	icon = 'icons/roguetown/mob/monster/pufferboss.dmi'
@@ -448,10 +453,10 @@
 
 //................ Grand mace ............... //
 /obj/item/weapon/mace/goden/steel
-	gripped_intents = list(/datum/intent/mace/smash/heavy) // It's a 2h flanged mace, not a goedendag.
 	name = "grand mace"
 	desc = "A cast polearm, rumored to be the weapon-design used by Psydon himself."
 	icon_state = "polemace"
+	gripped_intents = list(MACE_HVYSMASH) // It's a 2h flanged mace, not a goedendag.
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST
 
@@ -477,8 +482,8 @@
 	desc = "A mighty mace which seems to be a large psycross with a handle, though no less effective at crushing the spirit and bones of the inhumen."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psymace"
-	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 11
 
 	resistance_flags = FIRE_PROOF
@@ -575,7 +580,6 @@
 	name = "iron warhammer"
 	desc = "Made to punch through armor and skull alike."
 	icon_state = "iwarhammer"
-	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE)
 	gripped_intents = null
 
@@ -595,7 +599,7 @@
 	desc = "A fine steel warhammer, makes a satisfying sound when paired with a knight's helm."
 	icon_state = "swarhammer"
 	force = DAMAGE_MACE_WIELD
-	wdefense = GREAT_PARRY
+	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	melting_material = /datum/material/steel
 	melt_amount = 150
@@ -610,6 +614,7 @@
 	force_wielded = DAMAGE_MACE_WIELD - 1
 	possible_item_intents = list(MACE_STRIKE, AXE_CUT)
 	gripped_intents = list(MACE_STRIKE, AXE_CUT, AXE_CHOP) //can't smash with this weapon.
+	max_blade_int = 150
 	minstr = 5
 	sharpness = IS_SHARP
 
@@ -621,6 +626,9 @@
 	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
+	max_blade_int = 250
+	max_integrity = INTEGRITY_STRONGEST
+
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -637,10 +645,13 @@
 	name = "regal elven war club"
 	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree. It's commonly wielded by groups of shamanist exorcists."
 	icon_state = "regalelvenclub"
-	force = DAMAGE_MACE + 1
+	force = DAMAGE_MACE
 	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 150
@@ -658,8 +669,9 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_STRONGEST * 0.8
+
+	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 45
 
@@ -673,6 +685,8 @@
 	desc = "A luxurious silver mace of Savannah Elf origin that's been reinforced and embellished with gold. It's considerably heavier compared to other maces."
 	force = DAMAGE_MACE + 2
 	wbalance = DODGE_CHANCE_NORMAL
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+
 	minstr = 8
 	sellprice = 150 // It's silver and gold.
 
@@ -686,7 +700,8 @@
 	name = "bronze mace"
 	icon_state = "mace_bronze"
 	desc = "A spiked bronze mace. A weapon thats seen a revival in use amidst the cataclysm in Heartfelt."
-	wbalance = DODGE_CHANCE_NORMAL
+	force = DAMAGE_MACE + 1
+	force_wielded = DAMAGE_MACE_WIELD + 1 //Spiked
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 6
 	sellprice = 25
@@ -695,5 +710,7 @@
 	name = "bronze shishpar"
 	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
 	icon_state = "shishpar_bronze"
-	wdefense = GOOD_PARRY
+	force = DAMAGE_MACE_WIELD + 2
+	force_wielded = DAMAGE_MACE_WIELD + 3
 	wbalance = EASY_TO_DODGE
+	minstr = 8
