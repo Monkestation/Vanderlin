@@ -480,28 +480,28 @@ All foods are distributed among various categories. Use common sense.
 				. += "[src] was bitten multiple times!"
 
 
-/obj/item/reagent_containers/food/snacks/attackby(obj/item/W, mob/user, list/modifiers)
-	. = ..()
-	if(istype(W, /obj/item/storage))
-		..() // -> item/attackby()
-		return 0
+/obj/item/reagent_containers/food/snacks/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!tool.get_sharpness() || tool.wlength != WLENGTH_SHORT)
+		return NONE
 
-	if(W.get_sharpness() && W.wlength == WLENGTH_SHORT)
-		if((slices_num <= 0 || !slices_num) || !slice_path) //is the food sliceable?
-			return FALSE
-		if(slice_bclass == BCLASS_CHOP)
-			user.visible_message(span_notice("[user] chops [src]!"))
-			slice(W, user)
-			user.nobles_seen_servant_work()
-			return TRUE
-		if(slice_bclass == BCLASS_CUT)
-			user.visible_message(span_notice("[user] slices [src]!"))
-			slice(W, user)
-			user.nobles_seen_servant_work()
-			return TRUE
-		else if(slice(W, user))
-			user.nobles_seen_servant_work()
-			return TRUE
+	if((slices_num <= 0 || !slices_num) || !slice_path) //is the food sliceable?
+		return NONE
+
+	if(slice_bclass == BCLASS_CHOP)
+		user.visible_message(span_notice("[user] chops [src]!"))
+		slice(tool, user)
+		user.nobles_seen_servant_work()
+		return ITEM_INTERACT_SUCCESS
+
+	if(slice_bclass == BCLASS_CUT)
+		user.visible_message(span_notice("[user] slices [src]!"))
+		slice(tool, user)
+		user.nobles_seen_servant_work()
+		return ITEM_INTERACT_SUCCESS
+
+	if(slice(tool, user))
+		user.nobles_seen_servant_work()
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/proc/slice(obj/item/W, mob/user)
 	if((slices_num <= 0 || !slices_num) || !slice_path) //is the food sliceable?
@@ -631,31 +631,6 @@ All foods are distributed among various categories. Use common sense.
 			to_chat(user, span_warning("[M] is empty!"))
 		else
 			to_chat(user, span_warning("[src] is full!"))
-
-// //////////////////////////////////////////////Store////////////////////////////////////////
-/// All the food items that can store an item inside itself, like bread or cake.
-/obj/item/reagent_containers/food/snacks/store
-	w_class = WEIGHT_CLASS_NORMAL
-	var/stored_item = 0
-
-/obj/item/reagent_containers/food/snacks/store/attackby(obj/item/W, mob/living/user, list/modifiers)
-	..()
-	if(W.w_class <= WEIGHT_CLASS_SMALL & !istype(W, /obj/item/reagent_containers/food/snacks)) //can't slip snacks inside, they're used for custom foods.
-		if(W.get_sharpness())
-			return 0
-		if(stored_item)
-			return 0
-		if(!iscarbon(user))
-			return 0
-		if(contents.len >= 20)
-			to_chat(user, span_warning("[src] is full."))
-			return 0
-		to_chat(user, span_notice("I slip [W] inside [src]."))
-		user.transferItemToLoc(W, src)
-		add_fingerprint(user)
-		contents += W
-		stored_item = 1
-		return 1 // no afterattack here
 
 /obj/item/reagent_containers/food/snacks/MouseDrop(atom/over)
 	var/turf/T = get_turf(src)

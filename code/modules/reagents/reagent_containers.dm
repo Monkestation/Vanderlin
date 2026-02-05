@@ -86,6 +86,9 @@
 		if(!reagents)
 			return NONE
 
+		if(!is_open_container())
+			return NONE
+
 		if(reagents.holder_full())
 			to_chat(user, span_notice("[src] is full."))
 			return ITEM_INTERACT_BLOCKING
