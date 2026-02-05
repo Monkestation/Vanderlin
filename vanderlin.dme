@@ -2900,6 +2900,7 @@
 #include "code\modules\jobs\job_types\other\merc_classes\valkyrie.dm"
 #include "code\modules\jobs\job_types\other\merc_classes\verderer.dm"
 #include "code\modules\jobs\job_types\other\merc_classes\zalad.dm"
+#include "code\modules\jobs\job_types\other\merc_classes\gloryhound.dm"
 #include "code\modules\jobs\job_types\peasants\bard.dm"
 #include "code\modules\jobs\job_types\peasants\beggar.dm"
 #include "code\modules\jobs\job_types\peasants\butcher.dm"
