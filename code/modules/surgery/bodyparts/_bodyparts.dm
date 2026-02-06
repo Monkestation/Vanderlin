@@ -178,6 +178,8 @@
 		qdel(src)
 
 /obj/item/bodypart/MiddleClick(mob/living/user, list/modifiers)
+	if(status != BODYPART_ORGANIC)
+		return ..()
 	var/obj/item/held_item = user.get_active_held_item()
 	var/datum/species/S = original_owner?.dna?.species
 	if(held_item)
@@ -193,13 +195,14 @@
 					if(3)
 						steaks = 2
 					if(4 to 5)
-						steaks = 3
+						if(prob(30))
+							steaks = 2
 					if(6)
-						steaks = 4 // the steaks have never been higher
+						steaks = 3 // the steaks have never been higher
 				var/amt2raise = user.STAINT/3
 				if(do_after(user, used_time, src))
-					var/obj/item/reagent_containers/food/snacks/meat/steak/steak
-					var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/steak
+					var/obj/item/reagent_containers/food/snacks/steak
+					var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/human
 					for(steaks, steaks>0, steaks--)
 						steak = new steak_type(get_turf(src))	//Meat depends on species.
 						if(rotted)

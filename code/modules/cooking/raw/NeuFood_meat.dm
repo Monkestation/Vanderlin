@@ -34,7 +34,9 @@
 
 /obj/item/reagent_containers/food/snacks/meat/human
 	name = "manflesh"
+	gender = PLURAL
 	foodtype = RAW | MEAT | GROSS
+	bitecount = 3
 	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 2)
 
 /*	.............   Pigflesh, strange meat, birdmeat   ................ */

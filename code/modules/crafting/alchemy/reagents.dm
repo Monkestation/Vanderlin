@@ -366,31 +366,31 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		if(istype(H))
 			H.graggometer++
 			switch(H.graggometer)
-				if(15)
+				if(0, 15)
 					to_chat(graggar_lover, span_warning("Eating kin... It's wrong..."))
-				if(30)
+				if(30, 45)
 					to_chat(graggar_lover, span_danger("Feel... strange..."))
-				if(40)
+				if(60, 75)
 					to_chat(graggar_lover, span_warning("Flesh..."))
-				if(51 to 59)
+				if(76 to 99)
 					if(prob(50))
 						to_chat(graggar_lover, span_bloody("More... More..."))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
-					bp?.lingering_pain += 10
-			if(H.graggometer == 60)
-				graggar_lover.Paralyze(10 SECONDS)
-				var/datum/dna/dna_cache = new()
-				graggar_lover.dna.copy_dna(dna_cache)
-				graggar_lover.set_species(/datum/species/halforc)
-				dna_cache.transfer_identity(graggar_lover, set_species=FALSE)
-				graggar_lover.real_name = dna_cache.real_name
-				graggar_lover.unequip_everything()
-				graggar_lover.bloody_hands += 2
-				graggar_lover.update_inv_gloves()
-				playsound(get_turf(graggar_lover), pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
-				graggar_lover.spawn_gibs(TRUE)
-				graggar_lover.emote("agony")
-				graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts as they become a half-orc!"), span_userdanger("MY SKIN BURSTS!!"))
+					bp?.lingering_pain += 5
+				if(100)
+					graggar_lover.Paralyze(10 SECONDS)
+					var/datum/dna/dna_cache = new()
+					graggar_lover.dna.copy_dna(dna_cache)
+					graggar_lover.set_species(/datum/species/halforc)
+					dna_cache.transfer_identity(graggar_lover, set_species=FALSE)
+					graggar_lover.real_name = dna_cache.real_name
+					graggar_lover.unequip_everything()
+					graggar_lover.bloody_hands += 2
+					graggar_lover.update_inv_gloves()
+					playsound(get_turf(graggar_lover), pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
+					graggar_lover.spawn_gibs(TRUE)
+					graggar_lover.emote("agony")
+					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts as they become a half-orc!"), span_userdanger("MY SKIN BURSTS!!"))
 	return ..()
 
 /datum/reagent/stampoison
