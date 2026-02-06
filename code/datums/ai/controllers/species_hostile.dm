@@ -11,18 +11,18 @@
 		BB_PET_TARGETING_DATUM = new /datum/targetting_datum/basic/not_friends(),
 
 	)
-	idle_behavior = /datum/idle_behavior/idle_random_walk
+	idle_behavior = /datum/idle_behavior/idle_random_bum
 
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/pet_planning,
 		/datum/ai_planning_subtree/generic_resist,
 		/datum/ai_planning_subtree/flee_target,
 
-		/datum/ai_planning_subtree/aggro_find_target/species_hostile,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree/species_hostile,
-
 		/datum/ai_planning_subtree/find_weapon,
 		/datum/ai_planning_subtree/equip_item,
+
+		/datum/ai_planning_subtree/aggro_find_target/species_hostile,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree/species_hostile,
 
 	)
 

@@ -44,7 +44,8 @@
 
 /mob/living/carbon/human/proc/equip_item(obj/item/I)
 	if(I.loc == src)
-		return TRUE
+		if(!isweapon(I))
+			return TRUE
 
 	if(I.anchored)
 		return FALSE
@@ -55,10 +56,12 @@
 
 	// WEAPONS
 	if(istype(I, /obj/item))
-		if(get_active_held_item())
+		if(get_active_held_item() && !equip_to_appropriate_slot(get_active_held_item()))
 			dropItemToGround(get_active_held_item())
-		if(put_in_hands(I))
-			return TRUE
+		if(I.loc == src)
+			return putItemFromInventoryInHandIfPossible(I, active_hand_index)
+		else
+			return put_in_hands(I)
 
 	return FALSE
 

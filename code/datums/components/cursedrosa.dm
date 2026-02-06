@@ -48,7 +48,5 @@
 		return
 	if(HAS_TRAIT(target, TRAIT_PIERCEIMMUNE) || HAS_TRAIT(target, TRAIT_NO_BRIAR_DEATH))
 		return
-	if(prob(65))
-		return
 	var/def_zone = (target.active_hand_index == 1 ? BODY_ZONE_PRECISE_L_HAND : BODY_ZONE_PRECISE_R_HAND)
 	attempt_infection(target, def_zone)

@@ -248,6 +248,24 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/sword/sabre/noc/royal
+	name = "Twilight Khopesh"
+	hover_color = "#6b3a4a"
+	icon_state = "nockhopesh_briar"
+	desc = "A blade kept within the Wintermare royal family for generations. Once blessed by Noc, this sabre was corrupted with the <span class='briar'>umbrosal curse</span>."
+	resistance_flags = INDESTRUCTIBLE
+	max_integrity = 1500
+	article = "the"
+	possible_item_intents = list(SWORD_CUT, SHORT_THRUST, SWORD_DISARM)
+
+/obj/item/weapon/sword/sabre/noc/royal/Initialize(mapload)
+	. = ..()
+	update_integrity(max_integrity)
+	AddComponent(/datum/component/particle_spewer/sparkle)
+	AddComponent(/datum/component/cursedrosa, FALSE, TRUE)
+	enchant(/datum/enchantment/black_briar)
+
+
 //................ Cutlass ............... //
 /obj/item/weapon/sword/sabre/cutlass
 	name = "cutlass"

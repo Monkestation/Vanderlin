@@ -12,9 +12,11 @@
 	. = ..()
 	var/obj/item/target = controller.blackboard[target_key]
 	var/mob/living/carbon/human/pawn = controller.pawn
-	if(!isturf(target.loc))
+	if(!isturf(target.loc) && target.loc != pawn)
 		finish_action(controller, FALSE, target_key)
 		return
+	if(pawn.get_active_held_item() && !pawn.get_inactive_held_item())
+		pawn.swap_hand()
 	if(pawn.equip_item(target))
 		finish_action(controller, TRUE, target_key)
 		return

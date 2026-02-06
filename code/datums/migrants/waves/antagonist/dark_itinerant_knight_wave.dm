@@ -49,6 +49,7 @@
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/swimming = 3,
 	)
+	is_recognized = TRUE
 
 	traits = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_BREADY)
 	languages = list(/datum/language/undead)
@@ -139,6 +140,7 @@
 	job_reopens_slots_on_death = FALSE
 	can_have_apprentices = FALSE
 	antag_role = /datum/antagonist/zizocultist/zizo_knight
+	is_recognized = TRUE
 
 
 	traits = list(TRAIT_STEELHEARTED, TRAIT_MEDIUMARMOR, TRAIT_DUALWIELDER)
@@ -192,7 +194,8 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel/dirk,
 		/obj/item/weapon/whip/spiderwhip,
-		/obj/item/reagent_containers/food/snacks/hardtack
+		/obj/item/reagent_containers/food/snacks/hardtack,
+		/obj/item/clothing/head/helmet/skullcap/cult
 	)
 
 /datum/outfit/zizo_remnant/equip(mob/living/carbon/human/H, visuals_only)

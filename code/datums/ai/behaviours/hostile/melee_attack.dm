@@ -262,8 +262,6 @@
 	target.adjustBruteLoss(20)
 
 /datum/ai_behavior/basic_melee_attack/species_hostile/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
-	. = ..()
-
 	var/mob/living/pawn = controller.pawn
 	//targetting datum will kill the action if not real anymore
 	var/mob/living/target = controller.blackboard[target_key]
@@ -286,3 +284,4 @@
 					weapon.attack_self(pawn)
 	if(!weapon && !offweapon)
 		pawn.d_intent = INTENT_DODGE
+	. = ..()

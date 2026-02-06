@@ -10,13 +10,12 @@
 
 	var/mob/living/living_pawn = controller.pawn
 	var/obj/item/held_item = living_pawn.get_active_held_item()
-	if(istype(held_item, /obj/item/weapon/shield))
-		living_pawn.swap_hand()
-		held_item = living_pawn.get_active_held_item()
 
-	if(held_item)
-		if(!prob(5))
-			return
+	var/need_item = (held_item == null)
+	if(HAS_TRAIT(living_pawn, TRAIT_DUALWIELDER) || istype(held_item, /obj/item/weapon/shield))
+		need_item |= (living_pawn.get_inactive_held_item() == null)
+	if(!need_item && prob(95))
+		return
 
 
 	controller.queue_behavior(/datum/ai_behavior/find_and_set/better_weapon, BB_MOB_EQUIP_TARGET, null, vision_range)

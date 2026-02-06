@@ -6,13 +6,6 @@
 /obj/structure/stockpile_storage/metal,
 /turf/open/floor/cobblerock,
 /area)
-"d" = (
-/obj/machinery/light/fueled/torchholder/hotspring{
-	pixel_y = -12;
-	pixel_x = -16
-	},
-/turf/open/floor/cobblerock,
-/area)
 "e" = (
 /obj/effect/landmark/start,
 /turf/open/floor/cobblerock,
@@ -33,23 +26,12 @@
 "u" = (
 /turf/open/floor/cobblerock,
 /area)
-"x" = (
-/obj/structure/stockpile_storage/food,
+"w" = (
+/obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/cobblerock,
 /area)
-"y" = (
-/obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
-	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
-	gender = "female";
-	possible_ages = list("Adult");
-	mob_gender = "female";
-	patron = /datum/patron/inhumen/zizo;
-	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo
-	},
+"x" = (
+/obj/structure/stockpile_storage/food,
 /turf/open/floor/cobblerock,
 /area)
 "G" = (
@@ -62,16 +44,6 @@
 /area)
 "H" = (
 /obj/effect/landmark/observer_start,
-/turf/open/floor/cobblerock,
-/area)
-"Y" = (
-/obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
-	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/wretch/heretic;
-	gender = "female"
-	},
 /turf/open/floor/cobblerock,
 /area)
 
@@ -386,7 +358,7 @@ a
 u
 u
 u
-y
+u
 u
 u
 u
@@ -500,7 +472,7 @@ t
 u
 u
 u
-u
+w
 u
 u
 u
@@ -537,7 +509,7 @@ u
 u
 u
 u
-d
+u
 u
 u
 u
@@ -609,7 +581,7 @@ u
 u
 u
 u
-Y
+u
 u
 u
 u

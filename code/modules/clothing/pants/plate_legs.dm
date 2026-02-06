@@ -99,6 +99,7 @@
 	desc = ""
 	armor = ARMOR_PLATE_BAD
 	misc_flags = CRAFTING_TEST_EXCLUDE
+	smeltresult = /obj/item/ingot/steel
 
 //............... Evil Pants ............... //
 

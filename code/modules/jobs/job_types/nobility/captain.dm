@@ -81,11 +81,12 @@
 	name = "Captain"
 	head = /obj/item/clothing/head/helmet/visored/captain
 	gloves = /obj/item/clothing/gloves/plate
+	wrists = /obj/item/clothing/wrists/bracers
 	pants = /obj/item/clothing/pants/platelegs/captain
 	armor = /obj/item/clothing/armor/brigandine/captain
-	neck = /obj/item/clothing/neck/gorget
-	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
-	shoes = /obj/item/clothing/shoes/boots
+	neck = /obj/item/clothing/neck/bevor
+	shirt = /obj/item/clothing/armor/chainmail/hauberk
+	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/shield/tower/metal
 	belt = /obj/item/storage/belt/leather/plaquesilver

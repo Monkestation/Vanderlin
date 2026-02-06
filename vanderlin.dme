@@ -1089,6 +1089,7 @@
 #include "code\datums\elements\appearance\update_icon_updates_onmob.dm"
 #include "code\datums\enchantments\_base_enchantment.dm"
 #include "code\datums\enchantments\baotha_gift.dm"
+#include "code\datums\enchantments\black_briars_curse.dm"
 #include "code\datums\enchantments\brairs_curse.dm"
 #include "code\datums\enchantments\chaos_storm.dm"
 #include "code\datums\enchantments\dimensional_shrink.dm"

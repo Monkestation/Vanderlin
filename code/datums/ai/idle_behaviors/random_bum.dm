@@ -27,7 +27,7 @@
 			return
 		living_pawn.Move(step_turf, move_dir)
 
-	if(prob(3))
-		living_pawn.say(pick(GLOB.bum_quotes))
-	if(prob(3))
-		living_pawn.emote(pick("laugh","burp","yawn","grumble","mumble","blink_r","clap"))
+	//if(prob(3))
+	//	living_pawn.say(pick(GLOB.bum_quotes))
+	//if(prob(3))
+	//	living_pawn.emote(pick("laugh","burp","yawn","grumble","mumble","blink_r","clap"))

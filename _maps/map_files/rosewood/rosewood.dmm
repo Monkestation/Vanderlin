@@ -225,18 +225,17 @@
 /area/indoors/town/clinic_large)
 "ahG" = (
 /obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/adventurer/profanepaladin;
-	gender = "female";
-	possible_ages = list("Adult");
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/skilled/naked;
+	outfit = /datum/outfit/zizo_remnant;
 	mob_gender = "female";
-	patron = /datum/patron/inhumen/zizo;
-	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	name = "zizo remnant";
+	ring = null;
+	backpack_contents = null;
 	backl = null;
-	backpack_contents = null
+	weapon_type = /obj/item/weapon/sword/sabre;
+	traits = list("Dual Wielder");
+	head = /obj/item/clothing/head/helmet/skullcap/cult
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
@@ -1916,18 +1915,17 @@
 /area/indoors/town)
 "biu" = (
 /obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/adventurer/profanepaladin;
-	gender = "female";
-	possible_ages = list("Adult");
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/skilled/naked;
+	outfit = /datum/outfit/zizo_remnant;
 	mob_gender = "female";
-	patron = /datum/patron/inhumen/zizo;
-	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	name = "zizo remnant";
+	ring = null;
+	backpack_contents = null;
 	backl = null;
-	backpack_contents = null
+	weapon_type = /obj/item/weapon/sword/sabre;
+	traits = list("Dual Wielder");
+	head = /obj/item/clothing/head/helmet/skullcap/cult
 	},
 /turf/open/floor/sand,
 /area/indoors/town/keep)
@@ -3134,10 +3132,6 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town/bath)
-"cag" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/town/roofs)
 "cao" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/grown/log/tree/stick,
@@ -3789,8 +3783,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep)
@@ -4108,9 +4101,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/sand,
 /area/indoors/town/keep)
@@ -4757,18 +4748,17 @@
 /area/indoors/town)
 "cXD" = (
 /obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/adventurer/profanepaladin;
-	gender = "female";
-	possible_ages = list("Adult");
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/skilled/naked;
+	outfit = /datum/outfit/zizo_remnant;
 	mob_gender = "female";
-	patron = /datum/patron/inhumen/zizo;
-	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	name = "zizo remnant";
+	ring = null;
+	backpack_contents = null;
 	backl = null;
-	backpack_contents = null
+	weapon_type = /obj/item/weapon/sword/sabre;
+	traits = list("Dual Wielder");
+	head = /obj/item/clothing/head/helmet/skullcap/cult
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/magician)
@@ -6882,9 +6872,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/cobble/snow,
 /area/outdoors/town/keep)
@@ -7239,18 +7227,17 @@
 	dir = 5
 	},
 /obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/adventurer/profanepaladin;
-	gender = "female";
-	possible_ages = list("Adult");
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/skilled/naked;
+	outfit = /datum/outfit/zizo_remnant;
 	mob_gender = "female";
-	patron = /datum/patron/inhumen/zizo;
-	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	name = "zizo remnant";
+	ring = null;
+	backpack_contents = null;
 	backl = null;
-	backpack_contents = null
+	weapon_type = /obj/item/weapon/sword/sabre;
+	traits = list("Dual Wielder");
+	head = /obj/item/clothing/head/helmet/skullcap/cult
 	},
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep)
@@ -9858,8 +9845,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/snow/patchy,
 /area/outdoors/town/keep)
@@ -10252,8 +10238,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/keep)
@@ -10542,8 +10527,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/keep)
@@ -11053,14 +11037,6 @@
 /area/indoors/town)
 "gYy" = (
 /turf/open/floor/cobble/snow,
-/area/outdoors/town/roofs)
-"gYC" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/turf/open/floor/rooftop{
-	dir = 8
-	},
 /area/outdoors/town/roofs)
 "gYK" = (
 /turf/open/floor/dirt,
@@ -13159,8 +13135,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/sand,
 /area/outdoors/town/keep)
@@ -14059,8 +14034,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -14979,8 +14953,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/sand,
 /area/indoors/town/keep)
@@ -18006,18 +17979,17 @@
 /area/indoors/town/orphanage)
 "lwX" = (
 /obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/adventurer/profanepaladin;
-	gender = "female";
-	possible_ages = list("Adult");
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/skilled/naked;
+	outfit = /datum/outfit/zizo_remnant;
 	mob_gender = "female";
-	patron = /datum/patron/inhumen/zizo;
-	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	name = "zizo remnant";
+	ring = null;
+	backpack_contents = null;
 	backl = null;
-	backpack_contents = null
+	weapon_type = /obj/item/weapon/sword/sabre;
+	traits = list("Dual Wielder");
+	head = /obj/item/clothing/head/helmet/skullcap/cult
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
@@ -19468,8 +19440,7 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/greataxe/steel
+	r_hand = null
 	},
 /turf/open/floor/cobble/alt,
 /area/under/town/basement)
@@ -19765,18 +19736,17 @@
 /area/indoors/shelter/town/roofs)
 "mGG" = (
 /obj/effect/mob_spawn/human/briar{
-	name = "zizo knight";
 	mob_species = list(/datum/species/elf/dark);
-	mob_type = /mob/living/carbon/human/species/elf/dark/base/very_skilled/naked;
-	outfit = /datum/outfit/adventurer/profanepaladin;
-	gender = "female";
-	possible_ages = list("Adult");
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/skilled/naked;
+	outfit = /datum/outfit/zizo_remnant;
 	mob_gender = "female";
-	patron = /datum/patron/inhumen/zizo;
-	backr = null;
-	r_hand = /obj/item/weapon/sword/long/greatsword/zizo;
+	name = "zizo remnant";
+	ring = null;
+	backpack_contents = null;
 	backl = null;
-	backpack_contents = null
+	weapon_type = /obj/item/weapon/sword/sabre;
+	traits = list("Dual Wielder");
+	head = /obj/item/clothing/head/helmet/skullcap/cult
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -21095,9 +21065,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/tile,
 /area/under/town/basement)
@@ -24649,9 +24617,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -25853,9 +25819,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep)
@@ -27602,19 +27566,6 @@
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
-"rEL" = (
-/obj/item/weapon/sword/sabre/noc{
-	name = "\the Royal Moonlight Khopesh";
-	desc = "A blade kept within the Wintermare Royal Family for generations. This blade was clearly enchanted to some extent, glittering like the stars themselves in the light.";
-	force = 25;
-	max_integrity = 250;
-	pixel_x = -3;
-	pixel_y = 6;
-	resistance_flags = 64;
-	armor_penetration = 50
-	},
-/turf/open/floor/cobblerock/alt,
-/area/outdoors/town/roofs)
 "rFo" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/churchrough,
@@ -28660,9 +28611,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/snow,
 /area/outdoors/town/keep)
@@ -28743,9 +28692,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
@@ -29139,15 +29086,17 @@
 	name = "captain";
 	assignedrole = /datum/job/captain;
 	outfit = /datum/outfit/captain;
-	r_hand = /obj/item/weapon/sword/sabre/hook;
-	beltl = null;
-	beltr = null;
+	beltl = /obj/item/weapon/sword/sabre/noc/royal;
 	ring = /obj/item/clothing/ring/gold/ravox;
 	mob_name = "Sir Giuevere";
 	mob_gender = "male";
 	possible_ages = list("Adult");
 	backr = null;
-	l_hand = /obj/item/weapon/shield/tower/metal
+	l_hand = /obj/item/weapon/shield/tower/metal;
+	traits = list("push_immunity", "Sixth-Sense", "Noble Blooded");
+	head = /obj/item/clothing/head/helmet/heavy/ravoxhelm;
+	mob_species = list(/datum/species/elf/snow);
+	neck = /obj/item/clothing/neck/bevor
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
@@ -32224,6 +32173,22 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobblerock,
 /area/outdoors/basin/safe)
+"uNs" = (
+/obj/effect/mob_spawn/human/briar{
+	mob_species = list(/datum/species/elf/dark);
+	mob_type = /mob/living/carbon/human/species/elf/dark/base/skilled/naked;
+	outfit = /datum/outfit/zizo_remnant;
+	mob_gender = "female";
+	name = "zizo remnant";
+	ring = null;
+	backpack_contents = null;
+	backl = null;
+	weapon_type = /obj/item/weapon/sword/sabre;
+	traits = list("Dual Wielder");
+	head = /obj/item/clothing/head/helmet/skullcap/cult
+	},
+/turf/open/floor/churchmarble,
+/area/indoors/town/keep)
 "uNR" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/wood,
@@ -35267,9 +35232,6 @@
 /area/indoors/town)
 "wEA" = (
 /obj/structure/fluff/railing/border,
-/obj/machinery/light/fueled/firebowl/standing{
-	layer = 4.09
-	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep)
 "wEM" = (
@@ -37139,9 +37101,7 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	backr = null;
-	r_hand = /obj/item/weapon/polearm/spear/billhook
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
@@ -138725,7 +138685,7 @@ uBv
 hyb
 hyb
 uBv
-mec
+uNs
 pgJ
 pgJ
 pgJ
@@ -180842,12 +180802,12 @@ jiV
 jiV
 jiV
 jSq
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -181044,12 +181004,12 @@ jiV
 jiV
 jiV
 jSq
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -181246,12 +181206,12 @@ jiV
 jiV
 jiV
 jSq
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -181448,12 +181408,12 @@ jiV
 jiV
 jiV
 jSq
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -181650,12 +181610,12 @@ jiV
 jiV
 jiV
 gIF
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -181852,12 +181812,12 @@ jiV
 jiV
 gIF
 vXD
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -182260,12 +182220,12 @@ dif
 wxJ
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -182462,12 +182422,12 @@ vXD
 gIF
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -182664,12 +182624,12 @@ gIF
 gIF
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -182866,12 +182826,12 @@ jSq
 gIF
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -183068,12 +183028,12 @@ jSq
 gIF
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -183270,12 +183230,12 @@ jSq
 quc
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 qJl
 qJl
@@ -183472,12 +183432,12 @@ jSq
 gIF
 dif
 vbM
-jgf
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 jiV
 qJl
@@ -183820,7 +183780,7 @@ qJl
 wdj
 qJl
 qJl
-ufR
+qJl
 qJl
 qJl
 qJl
@@ -184078,11 +184038,11 @@ jSq
 quc
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 jiV
 qJl
@@ -184280,11 +184240,11 @@ jSq
 quc
 dif
 vbM
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
 jiV
 jiV
 qJl
@@ -184482,11 +184442,11 @@ jSq
 quc
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
 jiV
 jiV
 jiV
@@ -184684,11 +184644,11 @@ jSq
 qJl
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
 jiV
 jiV
 jiV
@@ -184886,11 +184846,11 @@ yal
 yal
 dif
 dif
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
 jiV
 jiV
 jiV
@@ -185088,11 +185048,11 @@ yal
 dif
 dif
 bTx
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
 jiV
 jiV
 jiV
@@ -185290,11 +185250,11 @@ dif
 dif
 iFE
 jiV
-jgf
-jgf
-jgf
-jgf
-jgf
+qJl
+qJl
+qJl
+qJl
+qJl
 qJl
 jiV
 qJl
@@ -214896,7 +214856,7 @@ fEe
 fEe
 fsl
 tnD
-gYC
+tnD
 paE
 peS
 bQr
@@ -215704,7 +215664,7 @@ fEe
 fEe
 tDr
 xsW
-xyh
+qiA
 teL
 oxb
 bQr
@@ -216275,7 +216235,7 @@ nHb
 nHb
 nHb
 nHb
-rEL
+uJW
 uWt
 uWt
 uWt
@@ -219933,7 +219893,7 @@ krN
 bzb
 qbx
 dxJ
-cag
+xyh
 xyh
 xyh
 xyh

@@ -29,6 +29,7 @@
 	var/show_flavour = TRUE
 	var/banType = ROLE_NECRO_SKELETON
 	var/ghost_usable = TRUE
+	var/list/traits = list()
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/effect/mob_spawn/attack_ghost(mob/user)
@@ -89,6 +90,9 @@
 	M.adjustOxyLoss(oxy_damage)
 	M.take_overall_damage(brute_damage, burn_damage)
 	M.color = mob_color
+	for(var/trait in traits)
+		ADD_TRAIT(M, trait, TRAIT_GENERIC)
+
 	equip(M)
 
 	if(ckey)
@@ -151,6 +155,7 @@
 	var/neck = -1
 	var/backpack_contents = -1
 	var/suit_store = -1
+	var/weapon_type = -1
 	assignedrole = /datum/job/unassigned
 	var/list/possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 
@@ -197,6 +202,9 @@
 			if(!isnum(T))
 				outfit.vars[slot] = T
 		H.equipOutfit(outfit)
+	if(!isnum(weapon_type) && istype(H.ai_controller))
+		H.ai_controller.set_blackboard_key(BB_WEAPON_TYPE, weapon_type)
+
 
 /obj/effect/mob_spawn/human/briar
 	death = FALSE
@@ -215,15 +223,13 @@
 	ADD_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
 	H.wander = TRUE
-
 	H.set_stat_modifier("[type]", STATKEY_STR, 3)
 	ch.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
 
 	var/obj/item/organ/O = H.getorganslot(ORGAN_SLOT_TONGUE)
 	if(O)
 		qdel(O)
-	H.job = "Afflicted"
-
+	H.job = null
 
 //Instant version - use when spawning corpses during runtime
 /obj/effect/mob_spawn/human/corpse
