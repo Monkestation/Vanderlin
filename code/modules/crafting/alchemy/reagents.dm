@@ -384,7 +384,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 				graggar_lover.real_name = dna_cache.real_name
 				graggar_lover.unequip_everything()
 				graggar_lover.bloody_hands += 2
-				graggar_lover.update_inv_gloves += 2
+				graggar_lover.update_inv_gloves()
 				playsound(get_turf(graggar_lover), pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
 				graggar_lover.spawn_gibs(TRUE)
 				graggar_lover.emote("agony")
