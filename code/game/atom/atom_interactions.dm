@@ -87,6 +87,9 @@
 	return act_result
 
 /mob/living/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
+		return ..()
+
 	// Surgery and such happens very high up in the interaction chain, before parent call
 	var/attempt_tending = item_tending(user, tool, modifiers)
 	if(attempt_tending & ITEM_INTERACT_ANY_BLOCKER)
@@ -107,51 +110,53 @@
 			if(operation.next_step(user, modifiers))
 				return ITEM_INTERACT_SUCCESS
 
-		return NONE
+		return ITEM_INTERACT_BLOCKING
 
 	// If a surgery isn't happening try start one
-	if(!user.cmode && istype(user.rmb_intent, /datum/rmb_intent/weak))
-		var/list/available_surgeries = list()
-		for(var/datum/surgery/operation as anything in GLOB.surgeries_list)
-			// Surgery start checks
-			if(!operation.can_start(user, src, tool, feedback = FALSE))
-				continue
-			// Mostly if the tool actually will do the surgery
-			if(!operation.can_next_step(user, modifiers))
-				continue
 
-			available_surgeries += operation
+	var/list/available_surgeries = list()
+	for(var/datum/surgery/operation as anything in GLOB.surgeries_list)
+		if(!operation.can_next_step(user, modifiers))
+			continue
 
-		var/surgeries = length(available_surgeries)
-		if(surgeries)
-			var/datum/surgery/operation
-			if(surgeries > 1)
-				operation = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
-			else
-				operation = available_surgeries[1]
+		available_surgeries += operation
 
-			if(!operation || QDELETED(src) || QDELETED(user))
-				return ITEM_INTERACT_BLOCKING
+	var/surgeries = length(available_surgeries)
+	if(!surgeries)
+		return NONE
 
-			if(!operation.can_start(user, src, tool))
-				return ITEM_INTERACT_BLOCKING
+	var/datum/surgery/operation
+	if(surgeries > 1)
+		operation = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
+	else
+		operation = available_surgeries[1]
 
-			if(!operation.can_next_step(user, modifiers))
-				return ITEM_INTERACT_BLOCKING
+	if(!operation || QDELETED(src) || QDELETED(user))
+		return ITEM_INTERACT_BLOCKING
 
-			var/selected_zone = user.zone_selected
+	if(!user.Adjacent(src))
+		return ITEM_INTERACT_BLOCKING
 
-			var/obj/item/bodypart/affecting = get_bodypart(check_zone(selected_zone))
+	if(tool.loc != user)
+		return ITEM_INTERACT_BLOCKING
 
-			var/datum/surgery/procedure = new operation.type(src, selected_zone, affecting)
+	if(!operation.can_next_step(user, modifiers))
+		return ITEM_INTERACT_BLOCKING
 
-			balloon_alert(user, "starting \"[LOWER_TEXT(procedure.name)]\"")
+	if(!operation.can_start(user, src, tool))
+		return ITEM_INTERACT_BLOCKING
 
-			procedure.next_step(user, modifiers)
+	var/selected_zone = user.zone_selected
 
-			return ITEM_INTERACT_SUCCESS
+	var/obj/item/bodypart/affecting = get_bodypart(check_zone(selected_zone))
 
-	return NONE
+	var/datum/surgery/procedure = new operation.type(src, selected_zone, affecting)
+
+	balloon_alert(user, "starting \"[LOWER_TEXT(procedure.name)]\"")
+
+	procedure.next_step(user, modifiers)
+
+	return ITEM_INTERACT_SUCCESS
 
 /**
  * Called when this atom has an item used on it.

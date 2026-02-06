@@ -94,12 +94,6 @@
 	if(surgery_signal & COMPONENT_CANCEL_SURGERY)
 		return FALSE
 
-	if(!user.Adjacent(patient))
-		return FALSE
-
-	if(tool.loc != user)
-		return FALSE
-
 	if(IS_IN_INVALID_SURGICAL_POSITION(patient, src))
 		if(feedback)
 			patient.balloon_alert(user, "patient is not lying down!")
@@ -153,9 +147,6 @@
 
 /datum/surgery/proc/can_next_step(mob/living/user, list/modifiers)
 	SHOULD_CALL_PARENT(TRUE)
-
-	if(user.cmode)
-		return FALSE
 
 	if(step_in_progress)
 		return TRUE

@@ -3664,6 +3664,7 @@
 #include "code\modules\surgery\surgeries\chimeric_organs.dm"
 #include "code\modules\surgery\surgeries\cure_rot.dm"
 #include "code\modules\surgery\surgeries\dislocation.dm"
+#include "code\modules\surgery\surgeries\external_organs.dm"
 #include "code\modules\surgery\surgeries\extract_chimeric_node.dm"
 #include "code\modules\surgery\surgeries\extract_lux.dm"
 #include "code\modules\surgery\surgeries\fracture.dm"
