@@ -117,14 +117,15 @@
 	. = ..()
 
 /obj/item/explosive/extinguish()
-	if(active)
-		. = ..()
-		if(explode_timer)
-			deltimer(explode_timer)
-			explode_timer = null
-		icon_state = initial(icon_state)
-		active = FALSE
-		playsound(src, 'sound/items/firesnuff.ogg', 50)
+	. = ..()
+	if(!active)
+		return
+	if(explode_timer)
+		deltimer(explode_timer)
+		explode_timer = null
+	icon_state = initial(icon_state)
+	active = FALSE
+	playsound(src, 'sound/items/firesnuff.ogg', 50)
 
 /obj/item/explosive/proc/log_grenade(mob/user)
 	log_bomber(user, "has primed a", src, "for detonation", message_admins = !dud_flags)
