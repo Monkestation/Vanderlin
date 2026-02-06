@@ -23,12 +23,14 @@
 			user.add_stress(/datum/stress_event/fishface)
 
 	if(HAS_TRAIT(src, TRAIT_FISHFACE))
-		if(!self_inspect && HAS_TRAIT(user, TRAIT_FISHFACE))
-			user.add_stress(/datum/stress_event/fellow_fishface)
-		else
+		var/observer_fish = HAS_TRAIT(user, TRAIT_FISHFACE)
+		if(!self_inspect)
+			if(observer_fish)
+				user.add_stress(/datum/stress_event/fellow_fishface)
+			else if(user.age == AGE_CHILD)
+				user.add_stress(/datum/stress_event/fish_monster)
+		else if(observer_fish)
 			user.add_stress(/datum/stress_event/self_fishface)
-	else if(!self_inspect && user.age == AGE_CHILD)
-		user.add_stress(/datum/stress_event/fish_monster)
 
 	if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
 		if(self_inspect)
