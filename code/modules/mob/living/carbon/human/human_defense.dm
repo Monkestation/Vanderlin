@@ -579,6 +579,8 @@
 	var/list/examination = list("<span class='info'>ø ------------ ø")
 	var/m1
 	var/deep_examination = advanced
+	if(!deep_examination)
+		deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 	if(user == src)
 		m1 = "I am"
 		examination += "<span class='notice'>Let's see how I am doing.</span>"
@@ -587,8 +589,6 @@
 				"<span class='notice'>I check myself for injuries.</span>")
 	else if(user)
 		m1 = "[p_they(TRUE)] [p_are()]"
-		if(!deep_examination)
-			deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 		examination += "<span class='notice'>Let's see how [src] is doing.</span>"
 		if(!user.stat && !silent)
 			user.visible_message("<span class='notice'>[user] examines [src].</span>", \

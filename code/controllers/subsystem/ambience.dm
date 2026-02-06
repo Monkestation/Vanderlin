@@ -116,8 +116,7 @@ SUBSYSTEM_DEF(ambience)
 		var/mob/living/carbon/C = src
 		var/obj/item/bodypart/head/head = C.get_bodypart(BODY_ZONE_HEAD)
 		var/datum/wound/black_briar_curse/head/wound = head?.has_wound(/datum/wound/black_briar_curse/head)
-		if(wound?.infection_percent >= BBC_STAGE_LATE)
-			briar = TRUE
+		briar = wound?.insane
 
 	var/datum/component/theme_music/theme_music = src.GetComponent(/datum/component/theme_music)
 

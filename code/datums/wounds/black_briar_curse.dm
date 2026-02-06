@@ -339,7 +339,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(infection_percent >= BBC_STAGE_LATE ^ insane) // this flips if these dont match up
+	if(infection_percent >= BBC_STAGE_MID ^ insane) // this flips if these dont match up
 		owner.refresh_looping_ambience()
 		insane = !insane
 	if(insane && prob((owner.ckey ? 1 : 15)))

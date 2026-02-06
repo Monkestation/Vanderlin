@@ -358,7 +358,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 
 /datum/reagent/organpoison/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
-		M.add_nausea(8 * (1 - M.STACON / 20))
+		M.add_nausea(5 * (1 - M.STACON / 20))
 		M.adjustToxLoss(0.5)
 	if(ishuman(M) && !ishalforc(M))
 		var/mob/living/carbon/human/graggar_lover = M
@@ -366,13 +366,15 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		if(istype(H))
 			H.graggometer++
 			switch(H.graggometer)
+				if(15)
+					to_chat(graggar_lover, span_warning("Eating kin... It's wrong..."))
 				if(30)
-					to_chat(graggar_lover, span_warning("Not bad..."))
-				if(40)
 					to_chat(graggar_lover, span_danger("Feel... strange..."))
+				if(40)
+					to_chat(graggar_lover, span_warning("Flesh..."))
 				if(51 to 59)
 					if(prob(50))
-						to_chat(graggar_lover, span_bloody("FLESH, FLESH, FLESH, FLESH!!"))
+						to_chat(graggar_lover, span_bloody("More... More..."))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
 					bp?.lingering_pain += 10
 			if(H.graggometer == 60)

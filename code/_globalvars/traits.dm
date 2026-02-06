@@ -88,7 +88,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_KNOW_THIEF_DOORS" = TRAIT_KNOW_THIEF_DOORS,
 		"Blessing of Baotha" = TRAIT_CRACKHEAD,
 		"Blessing of Graggar" = TRAIT_ORGAN_EATER,
-		"Blessing of Pestra"= TRAIT_ROT_EATER,
+		"Rot Eater"= TRAIT_ROT_EATER,
 		"Blessing of Dendor" = TRAIT_KNEESTINGER_IMMUNITY,
 		"Blessing of Necra" = TRAIT_SOUL_EXAMINE,
 		"Golden Blood" = TRAIT_SEEPRICES,

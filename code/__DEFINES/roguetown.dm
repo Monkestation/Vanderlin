@@ -88,12 +88,12 @@ GLOBAL_LIST_EMPTY(accused)
 GLOBAL_LIST_EMPTY(job_respawn_delays)
 
 //stress levels. Stress starts at 0.
-#define STRESS_INSANE 7
-#define STRESS_VBAD 5
-#define STRESS_BAD 3
-#define STRESS_NEUTRAL 2
-#define STRESS_GOOD 1
-#define STRESS_VGOOD -4
+#define STRESS_INSANE 5
+#define STRESS_VBAD 3
+#define STRESS_BAD 1
+#define STRESS_NEUTRAL 0
+#define STRESS_GOOD -1
+#define STRESS_VGOOD -5
 
 /*	........   Nutrition defines   ................ */
 #define MEAL_FILLING 30

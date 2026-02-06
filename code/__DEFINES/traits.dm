@@ -363,7 +363,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HATEWOMEN				"Ladykiller"
 #define TRAIT_SEEDKNOW 				"Seed Knower"
 #define TRAIT_NOBLE					"Noble Blooded"
-#define TRAIT_EMPATH					"Empath"
+#define TRAIT_EMPATH					"Thorough Analysis"
 #define TRAIT_BREADY					"Battleready"
 #define TRAIT_BLINDFIGHTING 			"Sixth-Sense"
 #define TRAIT_HEARING_SENSITIVE 		"hearing_sensitive"

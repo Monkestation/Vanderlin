@@ -35,6 +35,7 @@
 /obj/item/reagent_containers/food/snacks/meat/human
 	name = "manflesh"
 	foodtype = RAW | MEAT | GROSS
+	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 2)
 
 /*	.............   Pigflesh, strange meat, birdmeat   ................ */
 /obj/item/reagent_containers/food/snacks/meat/fatty

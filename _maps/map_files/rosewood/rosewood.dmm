@@ -27767,7 +27767,7 @@
 	assignedrole = /datum/job/captain;
 	outfit = /datum/outfit/captain;
 	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Giuevere";
+	mob_name = "Sir Giunevere";
 	mob_gender = "male";
 	possible_ages = list("Adult");
 	backr = null;

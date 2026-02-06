@@ -118,7 +118,10 @@
 	oldstress = stress
 
 	if(stress >= STRESS_INSANE && prob(5))
-		var/text = pick_list("stress_messages.json", "insanity")
+		var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
+		var/datum/wound/black_briar_curse/head/wound = head?.has_wound(/datum/wound/black_briar_curse/head)
+
+		var/text = pick_list("stress_messages.json", wound?.insane ? "briar" : "insanity")
 		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(show_blurb), \
 			targets = src, \
 			duration = 3 SECONDS, \
@@ -126,7 +129,7 @@
 			fade_time = 3 SECONDS, \
 			screen_position = "WEST+[rand(2,13)], SOUTH+[rand(1,12)]", \
 			text_alignment = pick("left", "right", "center"), \
-			text_color = "red")
+			text_color = wound?.insane ? "#6b3a4a" : "red")
 
 /mob/living/carbon/get_stress_amount()
 	if(HAS_TRAIT(src, TRAIT_NOMOOD))

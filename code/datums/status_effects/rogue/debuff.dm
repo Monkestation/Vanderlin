@@ -199,7 +199,7 @@
 	id = "uncookedfood"
 	effectedstats = null
 	duration = 10 MINUTES
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/uncookedfood
+	alert_type = null
 
 /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 	name = "Raw Food!"
@@ -212,11 +212,11 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(75)
+		C.add_nausea(30)
 		C.add_stress(/datum/stress_event/uncookedfood)
 
 /datum/status_effect/debuff/badmeal
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/badmeal
+	alert_type = null
 	id = "badmeal"
 	effectedstats = null
 	duration = 10 MINUTES
@@ -233,17 +233,17 @@
 		C.add_stress(/datum/stress_event/badmeal)
 
 /datum/status_effect/debuff/burnedfood
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/burntmeal
 	id = "burnedfood"
 	effectedstats = null
 	duration = 10 MINUTES
+	alert_type = null
 
 /datum/status_effect/debuff/burnedfood/on_apply()
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
 		C.add_stress(/datum/stress_event/burntmeal)
-		C.add_nausea(75)
+		C.add_nausea(30)
 
 /atom/movable/screen/alert/status_effect/debuff/burntmeal
 	name = "Burnt Food!"
@@ -251,14 +251,14 @@
 	icon_state = "burntmeal"
 
 /datum/status_effect/debuff/rotfood
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/rotfood
 	id = "rotfood"
 	effectedstats = null
 	duration = 10 MINUTES
+	alert_type = null
 
 /atom/movable/screen/alert/status_effect/debuff/rotfood
 	name = "Rotten Food!"
-	desc = "<span class='warning'>MAGGOT-INFESTED BILE RISES TO MY THROAT!</span>\n"
+	desc = "<span class='warning'>I feel a maggot wriggle as I swallow...</span>\n"
 	icon_state = "burntmeal"
 
 /datum/status_effect/debuff/rotfood/on_apply()
@@ -267,7 +267,7 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(75)
+		C.add_nausea(40)
 		C.add_stress(/datum/stress_event/rotfood)
 
 /datum/status_effect/debuff/bleeding
