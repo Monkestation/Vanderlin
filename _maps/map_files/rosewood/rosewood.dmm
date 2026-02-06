@@ -15422,6 +15422,10 @@
 	},
 /turf/open/floor/cobblerock/alt,
 /area/indoors/soilsons)
+"jPf" = (
+/obj/effect/spawner/map_spawner/loot/magic,
+/turf/open/floor/cobblerock/snow,
+/area/outdoors/town/roofs)
 "jPt" = (
 /turf/open/floor/rooftop{
 	dir = 8
@@ -22505,6 +22509,10 @@
 /obj/item/storage/crucible/random,
 /turf/open/floor/metal,
 /area/indoors/town/smithy)
+"onL" = (
+/obj/effect/spawner/map_spawner/loot/magic,
+/turf/open/floor/cobble,
+/area/outdoors/town/roofs)
 "onU" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 1
@@ -25714,6 +25722,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/indoors/town/merc_guild)
+"qvo" = (
+/obj/effect/spawner/map_spawner/loot/magic,
+/turf/open/floor/grass/cold,
+/area/outdoors/town/roofs)
 "qvs" = (
 /obj/structure/flora/tree/pine{
 	icon_state = "pine1-snow"
@@ -29086,7 +29098,6 @@
 	name = "captain";
 	assignedrole = /datum/job/captain;
 	outfit = /datum/outfit/captain;
-	beltl = /obj/item/weapon/sword/sabre/noc/royal;
 	ring = /obj/item/clothing/ring/gold/ravox;
 	mob_name = "Sir Giuevere";
 	mob_gender = "male";
@@ -29096,7 +29107,10 @@
 	traits = list("push_immunity", "Sixth-Sense", "Noble Blooded");
 	head = /obj/item/clothing/head/helmet/heavy/ravoxhelm;
 	mob_species = list(/datum/species/elf/snow);
-	neck = /obj/item/clothing/neck/bevor
+	neck = /obj/item/clothing/neck/bevor;
+	beltr = /obj/item/weapon/sword/sabre/noc/royal;
+	beltl = null;
+	shoes = /obj/item/clothing/shoes/boots/armor/matthios
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
@@ -214436,7 +214450,7 @@ fEe
 uco
 fEe
 fEe
-fEe
+qvo
 msb
 msb
 msb
@@ -215073,12 +215087,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -215275,12 +215289,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -215477,12 +215491,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -215679,12 +215693,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -215881,12 +215895,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -216083,12 +216097,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -216286,11 +216300,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -216437,7 +216451,7 @@ nHb
 nHb
 erH
 erH
-uWt
+lwX
 uWt
 uWt
 uWt
@@ -216488,11 +216502,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -216690,11 +216704,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -216892,11 +216906,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -217094,11 +217108,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -217296,11 +217310,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -217498,11 +217512,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -217649,7 +217663,7 @@ nHb
 nHb
 rwa
 uWt
-uWt
+lwX
 uWt
 cDW
 rwa
@@ -217700,11 +217714,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -217902,11 +217916,11 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -218103,12 +218117,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -218257,7 +218271,7 @@ nHb
 nHb
 oqY
 oqY
-oqY
+jPf
 uJW
 uJW
 awL
@@ -218305,12 +218319,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -218507,12 +218521,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -218709,12 +218723,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -218878,7 +218892,7 @@ dal
 fEe
 uWt
 uWt
-uWt
+lwX
 uWt
 uWt
 uWt
@@ -218911,12 +218925,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb
@@ -219081,7 +219095,7 @@ oqY
 oqY
 oqY
 uWt
-uWt
+onL
 uWt
 uWt
 uWt
@@ -219113,12 +219127,12 @@ nHb
 nHb
 nHb
 nHb
-bQr
-bQr
-bQr
-bQr
-bQr
-bQr
+nHb
+nHb
+nHb
+nHb
+nHb
+nHb
 nHb
 nHb
 nHb

@@ -22,7 +22,7 @@
 	if(world.time - last_used < 5 SECONDS)
 		return
 	last_used = world.time
-	var/mob/living/carbon/targeted = user
+	var/mob/living/carbon/targeted = target
 	var/obj/item/bodypart/chest/c = targeted.get_bodypart()
 	c?.add_wound(/datum/wound/black_briar_curse/chest)
 

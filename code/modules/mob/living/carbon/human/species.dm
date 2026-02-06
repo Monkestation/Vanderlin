@@ -1698,20 +1698,20 @@ GLOBAL_LIST_EMPTY(donator_races)
 		var/mob/living/target_collateral_mob
 		var/obj/structure/table/target_table
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
-
-		target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
-		if(target_collateral_mob)
-			if(stander)
-				shove_blocked = TRUE
-		else
-			target.Move(target_shove_turf, shove_dir)
-			if(get_turf(target) == target_oldturf)
+		if(!HAS_TRAIT(target, TRAIT_PUSHIMMUNE))
+			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
+			if(target_collateral_mob)
 				if(stander)
-					target_table = locate(/obj/structure/table) in target_shove_turf.contents
 					shove_blocked = TRUE
 			else
-				if(stander && target.stamina >= target.maximum_stamina) //if you are kicked while fatigued, you are knocked down no matter what
-					target.Knockdown(100)
+				target.Move(target_shove_turf, shove_dir)
+				if(get_turf(target) == target_oldturf)
+					if(stander)
+						target_table = locate(/obj/structure/table) in target_shove_turf.contents
+						shove_blocked = TRUE
+				else
+					if(stander && target.stamina >= target.maximum_stamina) //if you are kicked while fatigued, you are knocked down no matter what
+						target.Knockdown(100)
 
 		if(shove_blocked && !target.is_shove_knockdown_blocked() && !target.buckled)
 			var/directional_blocked = FALSE

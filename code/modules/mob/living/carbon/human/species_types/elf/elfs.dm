@@ -82,8 +82,8 @@
 		OFFSET_NECK = list(0,1),\
 		OFFSET_MOUTH = list(0,2),\
 		OFFSET_PANTS = list(0,2),\
-		OFFSET_SHIRT = list(0,2),\
-		OFFSET_ARMOR = list(0,2),\
+		OFFSET_SHIRT = list(0,1),\
+		OFFSET_ARMOR = list(0,1),\
 		OFFSET_UNDIES = list(0,0),\
 	)
 
