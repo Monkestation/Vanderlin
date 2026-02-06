@@ -69,7 +69,7 @@
 
 /obj/item/explosive/Initialize()
 	. = ..()
-	addtimer(VARSET_CALLBACK(src, enable_sparking, TRUE), spark_delay)
+	addtimer(VARSET_CALLBACK(src, allow_spark, TRUE), spark_delay)
 
 /**
  * Checks for various ways to botch priming a grenade.
