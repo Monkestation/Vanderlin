@@ -159,6 +159,7 @@
 			if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
 				if(infection_percent >= BBC_STAGE_LATE && prob(30))
 					owner.emote("firescream")
+					owner.Stun(3 SECONDS)
 				else if(infection_percent >= BBC_STAGE_MID && prob(50))
 					owner.emote("agony")
 				bodypart_owner.lingering_pain += 5
@@ -256,13 +257,13 @@
 			owner.death()
 		owner.Paralyze(3 SECONDS, TRUE)
 		return
-	if(infection_percent >= BBC_STAGE_LATE)
+	if(infection_percent >= BBC_STAGE_LATE && !HAS_TRAIT(owner, TRAIT_BLACK_BRIAR))
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar2)
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
-	if(infection_percent >= BBC_STAGE_MID)
+	if(infection_percent >= BBC_STAGE_MID && !HAS_TRAIT(owner, TRAIT_BLACK_BRIAR))
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
-		if(!HAS_TRAIT(owner, TRAIT_BLACK_BRIAR) && world.time > next_limb_infection && prob(4))
+		if(world.time > next_limb_infection && prob(4))
 			var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 			uninfected_bodyparts -= root_network
 			var/mob/living/carbon/C = owner

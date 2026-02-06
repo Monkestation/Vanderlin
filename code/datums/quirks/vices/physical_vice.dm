@@ -152,7 +152,7 @@
 	REMOVE_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
 	REMOVE_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
 
-/datum/quirk/vice/black_briar
+/*/datum/quirk/vice/black_briar
 	name = "Host of the Black Briar"
 	desc = "Thorns dig into your lungs with every breath. Every exhale is painful, yet sweet. \
 	You have tasted the <span class='briar'>Black Rosa</span> of Wintermare. Sleep knowing that this will kill you one dae. \
@@ -173,7 +173,7 @@
 			ADD_TRAIT(owner, TRAIT_BLACK_BRIAR, "[type]")
 			return
 	//H.get_random_flaw()
-
+*/
 
 /datum/quirk/vice/crippled_arm
 	name = "Missing Arm"

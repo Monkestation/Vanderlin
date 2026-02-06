@@ -32,7 +32,7 @@
 	/// List of things it can conflict with
 	var/list/conflicts_with = list()
 	/// Disables this triumph from being buyable, admin only.
-	var/disabled = FALSE
+	var/disabled = TRUE
 
 /// We call this when someone buys it in the triumph shop
 /datum/triumph_buy/proc/on_buy()
