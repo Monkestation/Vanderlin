@@ -61,7 +61,6 @@
 	possible_item_intents = list(SHORT_CUT, SHORT_THRUST)
 	gripped_intents = null
 	alt_intents = null
-	max_integrity = INTEGRITY_STRONGEST
 	minstr = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 30
@@ -80,7 +79,7 @@
 	desc = "A bronze sword of shortened design and a reduced grip for single hand use."
 	icon_state = "shortsword_bronze"
 	wdefense = GOOD_PARRY
-	max_blade_int = 100
+	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/bronze
 	sellprice = 10
@@ -95,8 +94,8 @@
 	grid_height = 96
 
 /obj/item/weapon/sword/short/psy/Initialize(mapload)
-	. = ..()						//+3 force, +100 blade int, +50 int, +1 def, make silver
-	AddComponent(/datum/component/psyblessed, FALSE, 3, 100, 50, 1, TRUE)
+	. = ..()						//+2 force, +50 blade int, +50 int, +1 def, make silver
+	AddComponent(/datum/component/psyblessed, FALSE, 2, 50, 50, 1, TRUE)
 
 /obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
 	name = "steel ida"
@@ -113,6 +112,7 @@
 	icon_state = "ida_iron"
 	force = DAMAGE_SHORTSWORD + 2
 	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
+
 
 //................ Arming Sword ............... //
 /obj/item/weapon/sword/arming
@@ -139,8 +139,7 @@
 	name = "silver sword"
 	desc = "A simple silver sword with an edge that gleams in moonlight."
 	icon_state = "silversword"
-	force = DAMAGE_SWORD - 2
-	force_wielded = DAMAGE_SWORD_WIELD - 2
+	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	melting_material = /datum/material/silver
 	sellprice = 45
@@ -153,8 +152,6 @@
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
 	icon_state = "isword"
-	force = DAMAGE_SWORD - 2
-	force_wielded = DAMAGE_SWORD_WIELD - 2
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
@@ -164,8 +161,6 @@
 	name = "bronze sword"
 	desc = "A simple and reliable bronze sword."
 	icon_state = "sword_bronze"
-	force = DAMAGE_SWORD - 2
-	force_wielded = DAMAGE_SWORD_WIELD - 2
 	wdefense = GOOD_PARRY
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
@@ -184,8 +179,6 @@
 	name = "iron kaskara"
 	desc = "A sword of with a small crossguard."
 	icon_state = "kaskara_iron"
-	force = DAMAGE_SWORD - 2
-	force_wielded = DAMAGE_SWORD_WIELD - 2
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
@@ -264,23 +257,19 @@
 	wbalance = EASY_TO_DODGE
 	gripped_intents = list(AXE_CHOP, CURVED_THRUST)
 
-/obj/item/weapon/sword/sabre/dadao/iron //Fix this
+/obj/item/weapon/sword/sabre/dadao/iron
 	name = "iron dadao"
 	icon_state = "dadao_iron"
-	melting_material = /datum/material/iron
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD -1
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/sabre/dadao/bronze
 	name = "bronze dadao"
 	icon_state = "dadao_bronze"
-	melting_material = /datum/material/bronze
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD -1
-	max_blade_int = 100
+	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
+	melting_material = /datum/material/bronze
 
 //................ Shalal Sabre ............... //
 /obj/item/weapon/sword/sabre/shalal
@@ -291,6 +280,8 @@
 	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
 	parrysound = "rapier"
+	force_wielded = DAMAGE_SWORD
+	wdefense = GREAT_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST)
@@ -365,8 +356,6 @@
 	desc = "A crescent curved sword. It's popular among traveling Noccian scholars."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "khopesh_iron"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD -1
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
@@ -379,15 +368,13 @@
 	icon_state = "khopesh_steel"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
-	gripped_intents = list(SWORD_CHOP, SWORD_THRUST)
+	gripped_intents = list(AXE_CHOP, SWORD_THRUST)
 	sellprice = 45
 
 /obj/item/weapon/sword/scimitar/sengese/iron
 	name = "iron sengese"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_iron"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD -1
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
@@ -398,8 +385,8 @@
 	desc = "A curved sword made for deflecting blows. Many inexperienced swordsmen struggle to use it well due to its shape, but it's a force to be reckoned with in the hands of a master."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_steel"
-	wdefense = GOOD_PARRY
-	gripped_intents = list(SWORD_CUT, SWORD_CHOP, CURVED_THRUST)
+	wdefense = GREAT_PARRY
+	gripped_intents = list(SWORD_CUT, CURVED_THRUST)
 	alt_intents = null
 	swingsound = BLADEWOOSH_SMALL
 	minstr = 6
@@ -409,8 +396,6 @@
 	name = "bronze sengese"
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "sengese_bronze"
-	force = DAMAGE_SWORD - 1
-	force_wielded = DAMAGE_SWORD_WIELD -1
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/bronze
@@ -420,10 +405,10 @@
 	name = "silver sengese"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_silver"
-	minstr = 7
-	melting_material = /datum/material/silver
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 7
+	melting_material = /datum/material/silver
 	sellprice = 30
 
 /obj/item/weapon/sword/scimitar/sengese/silver/Initialize(mapload)
@@ -553,7 +538,6 @@
 	desc = "A highly ornate silver rapier, used more as a show of status for members of the inquisition."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyrapier"
-	wdefense = GOOD_PARRY
 	max_integrity = INTEGRITY_STRONG
 	max_blade_int = 300
 
@@ -1076,7 +1060,9 @@
 	name = "flamberge"
 	desc = "Commonly known as a flame-bladed sword, this weapon has an undulating blade. Its wave-like form distributes force better, and is less likely to break on impact."
 	icon_state = "flamberge"
+	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	wbalance = DODGE_CHANCE_NORMAL
+	melt_amount = 300
 	sellprice = 120
 
 /obj/item/weapon/sword/long/greatsword/zwei
@@ -1436,7 +1422,7 @@
 	force_wielded = 0
 	wdefense = AVERAGE_PARRY
 	gripped_intents = null
-	max_blade_int = 100
+	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 
 	melting_material = /datum/material/bronze
