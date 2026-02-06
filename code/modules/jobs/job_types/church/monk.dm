@@ -57,7 +57,7 @@
 			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
+			//ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
 			spawned.virginity = FALSE
 			spawned.adjust_skillrank(/datum/skill/misc/music, 2, TRUE)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'

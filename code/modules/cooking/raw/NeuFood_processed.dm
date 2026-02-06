@@ -127,7 +127,7 @@
 	slices_num = 4
 	bitesize = 5
 	slice_batch = FALSE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SAUSAGE_NUTRITION)
+	list_reagents = list(/datum/reagent/consumable/nutriment = MINCE_NUTRITION+SNACK_POOR)
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/salami/slice
 	tastes = list("salted meat" = 1)
 	rotprocess = null

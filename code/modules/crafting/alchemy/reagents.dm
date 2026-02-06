@@ -358,11 +358,38 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 
 /datum/reagent/organpoison/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
-		M.add_nausea(9)
-		M.adjustToxLoss(2)
-	else
-		//it does nothing, so we can just remove it
-		M.remove_reagent(/datum/reagent/organpoison, 1)
+		M.add_nausea(8 * (1 - M.STACON / 20))
+		M.adjustToxLoss(0.5)
+	if(ishuman(M) && !ishalforc(M))
+		var/mob/living/carbon/human/graggar_lover = M
+		var/obj/item/organ/heart/H = graggar_lover.getorganslot(ORGAN_SLOT_HEART)
+		if(istype(H))
+			H.graggometer++
+			switch(H.graggometer)
+				if(30)
+					to_chat(graggar_lover, span_warning("Not bad..."))
+				if(40)
+					to_chat(graggar_lover, span_danger("Feel... strange..."))
+				if(51 to 59)
+					if(prob(50))
+						to_chat(graggar_lover, span_bloody("FLESH, FLESH, FLESH, FLESH!!"))
+					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
+					bp?.lingering_pain += 7
+					graggar_lover.handle_lingering_pain()
+			if(H.graggometer == 60)
+				graggar_lover.Paralyze(10 SECONDS)
+				var/datum/dna/dna_cache = new()
+				graggar_lover.dna.copy_dna(dna_cache)
+				graggar_lover.set_species(/datum/species/halforc)
+				dna_cache.transfer_identity(graggar_lover, set_species=FALSE)
+				graggar_lover.real_name = dna_cache.real_name
+				graggar_lover.unequip_everything()
+				graggar_lover.bloody_hands += 2
+				graggar_lover.update_inv_gloves += 2
+				playsound(get_turf(graggar_lover), pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
+				graggar_lover.spawn_gibs(TRUE)
+				graggar_lover.emote("agony")
+				graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts as they become a half-orc!"), span_userdanger("MY SKIN BURSTS!!"))
 	return ..()
 
 /datum/reagent/stampoison

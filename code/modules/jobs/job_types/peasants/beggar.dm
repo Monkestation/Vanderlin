@@ -37,6 +37,8 @@
 		/datum/skill/craft/alchemy = 1
 	)
 
+	traits = list(TRAIT_NASTY_EATER)
+
 /datum/job/vagrant/New()
 	. = ..()
 	peopleknowme = list()

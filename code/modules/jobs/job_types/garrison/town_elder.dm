@@ -235,6 +235,8 @@
 	outfit = /datum/outfit/town_elder/hearth_acolyte
 	category_tags = list(CTAG_TOWN_ELDER)
 	allowed_patrons = ALL_TEMPLE_PATRONS
+	total_positions = 0
+	spawn_positions = 0
 
 	jobstats = list(
 		STATKEY_STR = 2,

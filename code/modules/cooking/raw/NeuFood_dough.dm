@@ -135,7 +135,7 @@
 	base_icon_state = "tack"
 	biting = TRUE
 	bitesize = 6
-	list_reagents = list(/datum/reagent/consumable/nutriment = DOUGH_NUTRITION)
+	list_reagents = list(/datum/reagent/consumable/nutriment = SMALLDOUGH_NUTRITION)
 	tastes = list("spelt" = 1)
 	rotprocess = null
 	faretype = FARE_POOR
@@ -307,7 +307,7 @@
 /obj/item/reagent_containers/food/snacks/stale_bread/raisin
 	icon_state = "raisinbread6"
 /obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 12)
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/berrypoison = 12)
 
 /*	.................   Raisin bread   ................... */
 /obj/item/reagent_containers/food/snacks/raisindough
@@ -338,7 +338,7 @@
 
 /obj/item/reagent_containers/food/snacks/bread/raisin/poison
 	slice_path = /obj/item/reagent_containers/food/snacks/breadslice/raisin_poison
-	list_reagents = list(/datum/reagent/consumable/nutriment = MEAL_AVERAGE, /datum/reagent/berrypoison = 6)
+	list_reagents = list(/datum/reagent/consumable/nutriment = DOUGH_NUTRITION+SNACK_DECENT, /datum/reagent/berrypoison = 6)
 	tastes = list("bread" = 1,"bitter fruit" = 1)
 	become_rot_type = /obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison
 
@@ -419,7 +419,7 @@
 	icon_state = "frybread"
 	base_icon_state = "frybread"
 	biting = TRUE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	list_reagents = list(/datum/reagent/consumable/nutriment = BREADSLICE_NUTRITION+BUTTER_NUTRITION)
 	tastes = list("crispy bread with a soft inside" = 1)
 	rotprocess = null
 	faretype = FARE_FINE

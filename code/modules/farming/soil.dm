@@ -8,22 +8,22 @@
 #define QUALITY_GOLD 3
 #define QUALITY_DIAMOND 4
 
-#define BLESSING_WEED_DECAY_RATE 10 / (1 MINUTES)
-#define WEED_GROWTH_RATE 3 / (1 MINUTES)
-#define WEED_DECAY_RATE 5 / (1 MINUTES)
-#define WEED_RESISTANCE_DECAY_RATE 20 / (1 MINUTES)
+#define BLESSING_WEED_DECAY_RATE 10 / (7 MINUTES)
+#define WEED_GROWTH_RATE 3 / (7 MINUTES)
+#define WEED_DECAY_RATE 5 / (7 MINUTES)
+#define WEED_RESISTANCE_DECAY_RATE 20 / (7 MINUTES)
 
 // These get multiplied by 0.0 to 1.0 depending on amount of weeds
-#define WEED_WATER_CONSUMPTION_RATE 5 / (1 MINUTES)
-#define WEED_NUTRITION_CONSUMPTION_RATE 2 / (1 MINUTES)
+#define WEED_WATER_CONSUMPTION_RATE 5 / (7 MINUTES)
+#define WEED_NUTRITION_CONSUMPTION_RATE 2 / (7 MINUTES)
 
-#define PLANT_REGENERATION_RATE 10 / (1 MINUTES)
-#define PLANT_DECAY_RATE 10 / (1 MINUTES)
-#define PLANT_BLESS_HEAL_RATE 20 / (1 MINUTES)
-#define PLANT_WEEDS_HARM_RATE 10 / (1 MINUTES)
+#define PLANT_REGENERATION_RATE 10 / (7 MINUTES)
+#define PLANT_DECAY_RATE 10 / (7 MINUTES)
+#define PLANT_BLESS_HEAL_RATE 20 / (7)
+#define PLANT_WEEDS_HARM_RATE 10 / (7 MINUTES)
 
-#define SOIL_WATER_DECAY_RATE 0.5 / (1 MINUTES)
-#define SOIL_NUTRIMENT_DECAY_RATE 0.5 / (1 MINUTES)
+#define SOIL_WATER_DECAY_RATE 0.5 / (7 MINUTES)
+#define SOIL_NUTRIMENT_DECAY_RATE 0.5 / (7 MINUTES)
 
 /obj/structure/soil
 	name = "soil"
@@ -383,9 +383,9 @@
 		adjust_water(max(30 - water, 0))
 
 	// And it grows a little!
-	if(plant)
-		if(add_growth(2 MINUTES))
-			update_appearance(UPDATE_OVERLAYS)
+	//if(plant)
+	//	if(add_growth(2 MINUTES))
+	//		update_appearance(UPDATE_OVERLAYS)
 
 /// adjust water
 /obj/structure/soil/proc/adjust_water(adjust_amount)
@@ -866,7 +866,7 @@
 	if(tilled_time > 0)
 		growth_multiplier *= 1.6
 	if(blessed_time > 0)
-		growth_multiplier *= 2.0
+		growth_multiplier *= 1.5
 		nutriment_eat_multiplier *= 0.4
 	if(pollination_time > 0)
 		growth_multiplier *= 1.75

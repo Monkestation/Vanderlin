@@ -44,7 +44,6 @@
 
 	traits = list(
 		TRAIT_FORAGER,
-		TRAIT_EMPATH
 	)
 
 	outfit = /datum/outfit/clinicapprentice

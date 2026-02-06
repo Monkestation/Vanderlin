@@ -27,7 +27,6 @@
 	)
 
 	traits = list(
-		TRAIT_EMPATH,
 		TRAIT_DEADNOSE
 	)
 

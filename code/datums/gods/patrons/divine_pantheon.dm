@@ -178,8 +178,8 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 	flaws = "Drunkenness, Crudeness, Irresponsibility"
 	worshippers = "The Ill and Infirm, Alchemists, Physicians"
 	sins = "´Curing´ Abnormalities, Refusing to Help Unfortunates, Groveling"
-	boons = "You may consume rotten food without being sick."
-	added_traits = list(TRAIT_ROT_EATER)
+	boons = "You can recognize someone's ailments more thoroughly."
+	added_traits = list(TRAIT_EMPATH)
 	devotion_holder = /datum/devotion/divine/pestra
 	confess_lines = list(
 		"PESTRA SOOTHES ALL ILLS!",
