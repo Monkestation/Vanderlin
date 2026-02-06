@@ -1,5 +1,5 @@
 /mob/living/carbon/human/species/zizombie
-	name = "rotten zizombie"
+	name = "rotten deadite"
 
 	icon = 'icons/roguetown/mob/monster/zizombie.dmi'
 	icon_state = "zizombie"
@@ -136,8 +136,8 @@
 	var/turf/turf = get_turf(src)
 	if(SSterrain_generation.get_island_at_location(turf))
 		faction |= "islander"
-	name = "zizombie"
-	real_name = "zizombie"
+	name = "deadite"
+	real_name = "deadite"
 	mob_biotypes |= MOB_UNDEAD
 	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
