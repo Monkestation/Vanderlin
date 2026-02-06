@@ -29,7 +29,7 @@
 	desc = "Transform a normal organ into a chimeric organ capable of accepting grafted nodes."
 	implements = list(
 		TOOL_SCALPEL = 80,
-		TOOL_SHARP = 60,
+		/obj/item = 60,
 	)
 	time = 10 SECONDS
 
@@ -38,6 +38,11 @@
 /datum/surgery_step/create_chimeric_organ/Destroy(force, ...)
 	selected_organ = null
 	return ..()
+
+/datum/surgery_step/create_chimeric_organ/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !tool.get_sharpness())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/create_chimeric_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	selected_organ = target.getorganslot(ORGAN_SLOT_HEART)
@@ -110,7 +115,7 @@
 
 	implements = list(
 		TOOL_SCALPEL = 80,
-		TOOL_SHARP = 60,
+		/obj/item = 60,
 	)
 
 	time = 8 SECONDS
@@ -122,6 +127,11 @@
 	selected_organ = null
 	node_to_graft = null
 	return ..()
+
+/datum/surgery_step/graft_chimeric_node/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !tool.get_sharpness())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/graft_chimeric_node/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/held = user.get_inactive_held_item()
@@ -312,7 +322,7 @@
 
 	implements = list(
 		TOOL_SCALPEL = 80,
-		TOOL_SHARP = 60,
+		/obj/item = 60,
 	)
 
 	time = 15 SECONDS
@@ -322,6 +332,11 @@
 /datum/surgery_step/repair_chimeric_organ/Destroy(force, ...)
 	selected_organ = null
 	return ..()
+
+/datum/surgery_step/repair_chimeric_organ/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !tool.get_sharpness())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/repair_chimeric_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/list/available_organs = target.get_organs_in_zone(target_zone)

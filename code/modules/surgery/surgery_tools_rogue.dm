@@ -131,13 +131,44 @@
 	if(user.cmode)
 		return NONE
 
-	if(!istype(interacting_with, /obj/machinery/light/fueled))
-		return NONE
+	if(istype(interacting_with, /obj/machinery/light/fueled))
+		var/obj/machinery/light/fueled/forge = interacting_with
+		if(forge.on)
+			user.visible_message("<span class='info'>[user] heats [src].</span>")
+			fire_act(10)
+			return ITEM_INTERACT_SUCCESS
 
-	var/obj/machinery/light/fueled/forge = interacting_with
-	if(forge.on)
-		user.visible_message("<span class='info'>[user] heats [src].</span>")
-		fire_act()
+	if(get_temperature() && iscarbon(interacting_with))
+		var/mob/living/carbon/C = interacting_with
+		var/obj/item/bodypart/part = C.get_bodypart(user.zone_selected)
+		if(!part || part.skeletonized)
+			balloon_alert(user, "nothing to cauterize!")
+			return ITEM_INTERACT_BLOCKING
+
+		if(!length(part.wounds))
+			balloon_alert(user, "no wounds!")
+			return ITEM_INTERACT_BLOCKING
+
+		var/on_who = "my"
+		if(user != interacting_with)
+			on_who = "[C]'s"
+
+		user.visible_message(
+			span_danger("[user] starts to cauterize [on_who] [parse_zone(user.zone_selected)]"),
+			span_userdanger("I start to cauterize [on_who] [parse_zone(user.zone_selected)]"),
+			span_userdanger("I hear flesh sizzle.")
+		)
+
+		if(!do_after(user, 3 SECONDS, C))
+			return ITEM_INTERACT_BLOCKING
+
+		for(var/datum/wound/bleeder as anything in part.wounds)
+			bleeder.cauterize_wound()
+
+		part.receive_damage(burn = 40) //painful, but the wounds go away eh?
+
+		C.emote("scream")
+
 		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/surgery/cautery/fire_act(added, maxstacks)

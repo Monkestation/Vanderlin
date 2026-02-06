@@ -32,9 +32,6 @@
 	if(tool.item_flags & (ABSTRACT | DROPDEL))
 		return FALSE
 
-	if(!isbodypart(tool))
-		return
-
 	var/obj/item/bodypart/part = tool
 
 	return part.status == required_replacement

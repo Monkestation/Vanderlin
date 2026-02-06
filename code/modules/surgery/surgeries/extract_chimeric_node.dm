@@ -20,14 +20,19 @@
 
 	implements = list(
 		TOOL_SCALPEL = 80,
-		TOOL_SHARP = 60,
-		/obj/item/kitchen/spoon = 40
+		/obj/item = 60,
+		/obj/item/kitchen/spoon = 40,
 	)
 
 	time = 10 SECONDS
 
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
+
+/datum/surgery_step/extract_chimeric_node/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !tool.get_sharpness())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/extract_chimeric_node/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(HAS_TRAIT(target, TRAIT_NODE_EXTRACTED))

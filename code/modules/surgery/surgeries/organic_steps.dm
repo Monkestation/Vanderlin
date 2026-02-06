@@ -6,13 +6,18 @@
 
 	implements = list(
 		TOOL_SCALPEL = 80,
-		TOOL_SHARP = 60,
+		/obj/item = 60,
 	)
 
 	time = 1.6 SECONDS
 
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/scalpel2.ogg'
+
+/datum/surgery_step/incise/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !tool.get_sharpness())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/incise/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
@@ -114,10 +119,13 @@
 	implements = list(
 		TOOL_CAUTERY = 100,
 		TOOL_WELDER = 70,
-		TOOL_HOT = 35,
+		/obj/item = 35,
 	)
 
 	time = 2.4 SECONDS
+
+/datum/surgery_step/cauterize/tool_check(mob/user, obj/item/tool)
+	return tool.get_temperature()
 
 /datum/surgery_step/cauterize/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
@@ -153,14 +161,19 @@
 	implements = list(
 		TOOL_SAW = 80,
 		TOOL_IMPROVISED_SAW = 65,
-		TOOL_SHOVEL = 50,
-		TOOL_SHARP = 25,
+		/obj/item/weapon/shovel = 50,
+		/obj/item = 25,
 	)
 
 	time = 5 SECONDS
 
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/organ2.ogg'
+
+/datum/surgery_step/saw/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !(tool.get_sharpness() && (tool.force >= 10)))
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/saw/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(

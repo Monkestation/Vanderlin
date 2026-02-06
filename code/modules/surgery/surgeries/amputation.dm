@@ -27,13 +27,18 @@
 		TOOL_SCALPEL = 80,
 		TOOL_SAW = 60,
 		TOOL_IMPROVISED_SAW = 50,
-		TOOL_SHARP = 40,
+		/obj/item = 40,
 	)
 
 	time = 6.4 SECONDS
 
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/organ2.ogg'
+
+/datum/surgery_step/amputate/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !(tool.get_sharpness() && (tool.force >= 10)))
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/amputate/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(

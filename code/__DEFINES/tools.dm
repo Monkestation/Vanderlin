@@ -1,8 +1,7 @@
 // Tool types
 #define TOOL_NONE			"none" //exclusively used for surgery validation
 #define TOOL_HAND			"hand" //exclusively used for surgery validation
-#define TOOL_SHARP			"sharp implement"	//exclusively used for surgery validation
-#define TOOL_HOT			"hot implement" //exclusively used for surgery validation
+
 #define TOOL_CROWBAR 		"crowbar"
 #define TOOL_MULTITOOL 		"multitool"
 #define TOOL_SCREWDRIVER 	"screwdriver"
@@ -11,7 +10,6 @@
 #define TOOL_WELDER 		"welder"
 #define TOOL_ANALYZER		"analyzer"
 #define TOOL_MINING			"mining"
-#define TOOL_SHOVEL			"shovel"
 #define TOOL_RETRACTOR	 	"retractor"
 #define TOOL_HEMOSTAT 		"hemostat"
 #define TOOL_CAUTERY 		"cautery"

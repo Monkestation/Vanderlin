@@ -39,7 +39,7 @@
 		TOOL_SCALPEL = 80,
 		TOOL_SAW = 60,
 		TOOL_IMPROVISED_SAW = 50,
-		TOOL_SHARP = 40,
+		/obj/item = 40,
 	)
 
 	time = 5 SECONDS
@@ -49,6 +49,11 @@
 /datum/surgery_step/sever_external/Destroy()
 	selected_organ = null
 	return ..()
+
+/datum/surgery_step/sever_external/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !tool.get_sharpness())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/sever_external/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/list/organs = list()

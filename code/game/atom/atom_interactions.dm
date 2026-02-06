@@ -113,9 +113,12 @@
 		return ITEM_INTERACT_BLOCKING
 
 	// If a surgery isn't happening try start one
-
 	var/list/available_surgeries = list()
 	for(var/datum/surgery/operation as anything in GLOB.surgeries_list)
+		if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
+			continue
+		if(!(operation.surgery_flags & SURGERY_SELF_OPERABLE) && (user == src))
+			continue
 		if(!operation.can_next_step(user, modifiers))
 			continue
 
@@ -126,7 +129,7 @@
 		return NONE
 
 	var/datum/surgery/operation
-	if(surgeries_count == 1)
+	if(surgeries_count > 1)
 		operation = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
 	else
 		operation = available_surgeries[1]

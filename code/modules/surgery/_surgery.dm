@@ -164,9 +164,7 @@
 	if(tool)
 		tool = tool.get_proxy_attacker_for(target, user)
 
-	var/tool_key = surgery_step.tool_check(user, tool)
-
-	if(!(tool_key in surgery_step.implements))
+	if(!surgery_step.is_implement(user, tool))
 		return FALSE
 
 	return TRUE

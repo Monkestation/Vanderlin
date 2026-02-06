@@ -19,13 +19,18 @@
 		TOOL_CAUTERY = 85,
 		/obj/item/clothing/neck/psycross = 85,
 		TOOL_WELDER = 70,
-		TOOL_HOT = 35,
+		/obj/item = 35,
 	)
 
 	time = 8 SECONDS
 
 	preop_sound = 'sound/surgery/cautery1.ogg'
 	success_sound = 'sound/surgery/cautery2.ogg'
+
+/datum/surgery_step/burn_rot/tool_check(mob/user, obj/item/tool)
+	if(implement_type != /obj/item/clothing/neck/psycross && !tool.get_temperature())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/burn_rot/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(

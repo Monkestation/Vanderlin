@@ -21,7 +21,7 @@
 	implements = list(
 		TOOL_SCALPEL = 70,
 		TOOL_WIRECUTTER = 50,
-		TOOL_SHARP = 35,
+		/obj/item = 35,
 	)
 
 	time = 6.4 SECONDS

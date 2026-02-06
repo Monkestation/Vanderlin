@@ -31,20 +31,16 @@
 	//Sound played if the step fails
 	var/failure_sound = null
 
-/datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
-	var/success = FALSE
-	if(surgery.organ_to_manipulate && !target.getorganslot(surgery.organ_to_manipulate))
-		to_chat(user, span_warning("[target] seems to be missing the organ necessary to complete this surgery!"))
-		return FALSE
-
+/// Check if this tool is valid for our implements
+/// Returns the key or null
+/datum/surgery_step/proc/is_implement(mob/living/user, obj/item/tool)
 	if(accept_hand)
 		if(!tool)
-			success = TRUE
+			return TOOL_HAND
 
 	if(accept_any_item)
 		if(tool && tool_check(user, tool))
-			success = TRUE
-
+			return /obj/item
 	else if(tool)
 		for(var/key in implements)
 			var/match = FALSE
@@ -57,10 +53,17 @@
 			if(match)
 				implement_type = key
 				if(tool_check(user, tool))
-					success = TRUE
-					break
+					return key
 
-	if(success)
+/datum/surgery_step/proc/try_op(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
+	if(surgery.organ_to_manipulate && !target.getorganslot(surgery.organ_to_manipulate))
+		to_chat(user, span_warning("[target] seems to be missing the organ necessary to complete this surgery!"))
+		return FALSE
+
+	var/implement_key = is_implement(user, tool)
+
+	if(implement_key)
+		implement_type = implement_key
 		if(target_zone == surgery.location)
 			if(get_location_accessible(target, target_zone) || (surgery.surgery_flags & SURGERY_IGNORE_CLOTHES))
 				initiate(user, target, target_zone, tool, surgery, try_to_fail)
@@ -79,8 +82,6 @@
 
 	return FALSE
 
-#define SURGERY_SLOWDOWN_CAP_MULTIPLIER 2.5 //increase to make surgery slower but fail less, and decrease to make surgery faster but fail more
-
 /datum/surgery_step/proc/initiate(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	var/interaction_key = DOAFTER_SOURCE_SURGERY
 	if(DOING_INTERACTION(user, DOAFTER_SOURCE_SURGERY))
@@ -97,28 +98,27 @@
 
 	surgery.step_in_progress = TRUE
 
-	var/base_mod = 1 * get_location_modifier(target) * get_skill_modifier(user, surgery)
+	var/overall_mod = (get_location_modifier(target) * get_skill_modifier(user, surgery))
 	var/speed_mod = 1
-	var/fail_prob = 100 - (get_success_probability(user, tool) * base_mod)
+
+	var/fail_prob = 0
+	var/implement_speed_mod = 1
+	if(implement_type)
+		var/implement_value = LAZYACCESS(implements, implement_type)
+		if(implement_value)
+			fail_prob = (100 - implement_value) / overall_mod
+			implement_speed_mod = (implement_value / 100) * overall_mod
 
 	play_preop_sound(user, target, target_zone, tool, surgery) // Here because most steps overwrite preop
 
 	if(tool)
 		speed_mod = tool.toolspeed
 
-	var/implement_speed_mod = 1
-	if(implement_type) //this means it isn't a require hand or any item step.
-		implement_speed_mod = implements[implement_type] / 100.0
-
-	speed_mod /= (base_mod * implement_speed_mod)
+	speed_mod /= implement_speed_mod
 
 	var/modded_time = time * speed_mod
 
-	fail_prob = max(0, modded_time - (time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)) //if modded_time > time * modifier, then fail_prob = modded_time - time*modifier
-
-	fail_prob = min(max(0, fail_prob), 99) // clamp fail_prob between 0 and 99
-
-	modded_time = min(modded_time, time * SURGERY_SLOWDOWN_CAP_MULTIPLIER)// cap modded_time at time * modifier
+	fail_prob = clamp(fail_prob, 0, 95)
 
 	var/advance = FALSE
 	if(do_after(user, modded_time, target = target, interaction_key = interaction_key)) //If we have the hippocratic oath, we can perform one surgery on each target, otherwise we can only do one surgery in total
@@ -138,8 +138,6 @@
 	surgery.step_in_progress = FALSE
 
 	return advance
-
-#undef SURGERY_SLOWDOWN_CAP_MULTIPLIER
 
 /// Advance the current surgery to the next step, return TRUE if complete
 /datum/surgery_step/proc/advance_surgery(mob/living/user, datum/surgery/surgery)
@@ -247,16 +245,6 @@
 				vague_message = span_notice("You feel [you_feel] as you are operated on.")
 		target.show_message(vague_message, MSG_VISUAL, span_notice("You feel [you_feel] as you are operated on."))
 
-/datum/surgery_step/proc/get_success_probability(mob/living/user, obj/item/implement)
-	var/success_prob = 100
-
-	if(implements)
-		var/implement_type = tool_check(user, implement)
-		if(implement_type && (implement_type in implements))
-			success_prob *= (implements[implement_type] / 100)
-
-	return success_prob
-
 /datum/surgery_step/proc/get_skill_modifier(mob/living/user, datum/surgery/surgery)
 	var/datum/skill/skill_used = surgery.skill_used
 	if(!skill_used)
@@ -269,10 +257,10 @@
 	if(difference == 0)
 		return 1
 
-	if(difference < 0)
+	if(difference > 0)
 		return (1 - (0.15 * difference))
 
-	if(difference > 0)
+	if(difference < 0)
 		return (1 + (0.1 * difference))
 
 	return 1
@@ -290,31 +278,9 @@
 
 	return modifier
 
+/// Check if this tool can be used using implement_type
 /datum/surgery_step/proc/tool_check(mob/user, obj/item/tool)
-	var/implement_type = null
-	if(!tool)
-		if(!accept_hand)
-			return null
-		return TOOL_HAND
-
-	for(var/thing in implements)
-		if(ispath(thing) && ispath(tool, thing))
-			implement_type = thing
-			break
-		if(tool.tool_behaviour == thing)
-			implement_type = thing
-			break
-		if(thing == TOOL_SHARP && tool.get_sharpness())
-			implement_type = thing
-			break
-		else if(thing == TOOL_HOT && tool.get_temperature() >= 100 + T0C)
-			implement_type = thing
-			break
-
-	if(!implement_type && accept_any_item)
-		implement_type = TOOL_NONE
-
-	return implement_type
+	return TRUE
 
 /datum/surgery_step/proc/chem_check(mob/living/target)
 	if(!length(chems_needed))

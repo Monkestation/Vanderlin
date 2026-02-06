@@ -41,7 +41,7 @@
 
 	implements = list(
 		TOOL_SCALPEL = 80,
-		TOOL_SHARP = 60,
+		/obj/item = 60,
 		/obj/item/kitchen/spoon = 40,
 	)
 
@@ -49,6 +49,11 @@
 
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
+
+/datum/surgery_step/extract_lux/tool_check(mob/user, obj/item/tool)
+	if(implement_type == /obj/item && !tool.get_sharpness())
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/extract_lux/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(
