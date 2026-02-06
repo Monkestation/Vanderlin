@@ -285,11 +285,11 @@
 	desc = "A small sized iron shield, popular among mercenaries due to its light weight and ease of mobility."
 	icon_state = "ironbuckler"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
-	force = DAMAGE_SHIELD
-	wdefense = GREAT_PARRY
+	force = DAMAGE_SHIELD * 1.5
+	wdefense = ULTMATE_PARRY
 	wbalance = HARD_TO_DODGE // small, tiny shield
-	coverage = 45
-	max_integrity = INTEGRITY_STRONG - 50
+	coverage = 10
+	max_integrity = INTEGRITY_STANDARD
 	dropshrink = 0.75
 
 	resistance_flags = FIRE_PROOF
