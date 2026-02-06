@@ -101,5 +101,20 @@
                 "refactor": "skill levels can now be decimals"
             }
         ]
+    },
+    "2026-02-06": {
+        "Rockslp": [
+            {
+                "rscdel": "Removed Lakkari and Kaledon"
+            },
+            {
+                "code_imp": "Changed some item descriptions to remove mentions of Lakkari and Kaledon"
+            }
+        ],
+        "Skorvy": [
+            {
+                "rscadd": "hollow-kin to guard list"
+            }
+        ]
     }
 }
