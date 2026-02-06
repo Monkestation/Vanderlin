@@ -52,7 +52,7 @@
 
 /datum/surgery_step/sever_external/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/list/organs = list()
-	for(var/obj/item/organ/cur_organ as anything in patient.getorganszone(user.zone_selected, subzones = TRUE))
+	for(var/obj/item/organ/cur_organ as anything in target.getorganszone(user.zone_selected, subzones = TRUE))
 		if(cur_organ.visible_organ || cur_organ.slot == ORGAN_SLOT_TONGUE)
 			organs += cur_organ
 
@@ -68,7 +68,7 @@
 		target,
 		span_notice("I begin to sever [selected_organ] from [target]'s [parse_zone(target_zone)]..."),
 		span_notice("[user] begins to sever [selected_organ] from [target]'s [parse_zone(target_zone)]."),
-		span_notice("[user] begins to sever something from [selected_organ]'s [parse_zone(target_zone)].").
+		span_notice("[user] begins to sever something from [selected_organ]'s [parse_zone(target_zone)]."),
 	)
 
 /datum/surgery_step/sever_external/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results)
@@ -103,7 +103,7 @@
 
 	return ..()
 
-/datum/surgery_step/sever/external/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
+/datum/surgery_step/sever_external/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)
 	if(QDELETED(selected_organ) || !selected_organ.owner != target)
 		display_results(
 			user,

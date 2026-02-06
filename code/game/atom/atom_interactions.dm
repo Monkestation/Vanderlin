@@ -121,12 +121,12 @@
 
 		available_surgeries += operation
 
-	var/surgeries = length(available_surgeries)
-	if(!surgeries)
+	var/surgeries_count = length(available_surgeries)
+	if(!surgeries_count)
 		return NONE
 
 	var/datum/surgery/operation
-	if(surgeries > 1)
+	if(surgeries_count == 1)
 		operation = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
 	else
 		operation = available_surgeries[1]
