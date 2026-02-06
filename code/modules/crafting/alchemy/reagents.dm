@@ -374,8 +374,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					if(prob(50))
 						to_chat(graggar_lover, span_bloody("FLESH, FLESH, FLESH, FLESH!!"))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
-					bp?.lingering_pain += 7
-					graggar_lover.handle_lingering_pain()
+					bp?.lingering_pain += 10
 			if(H.graggometer == 60)
 				graggar_lover.Paralyze(10 SECONDS)
 				var/datum/dna/dna_cache = new()
