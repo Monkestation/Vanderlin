@@ -1311,10 +1311,6 @@
 /obj/effect/mapping_helpers/access/keyset/church/grave,
 /turf/open/floor/cobble,
 /area/indoors/town/church)
-"aHx" = (
-/obj/item/grown/log/tree/stick,
-/turf/open/floor/naturalstone,
-/area/under/cave)
 "aHC" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/halls/w)
@@ -2127,11 +2123,6 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/shop)
-"aZb" = (
-/obj/structure/table/wood/treestump,
-/obj/item/grown/log,
-/turf/open/floor/grass,
-/area/under/cave)
 "aZf" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -3922,6 +3913,11 @@
 	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
+"bTQ" = (
+/obj/structure/table/wood/treestump,
+/obj/item/grown/log,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "bTV" = (
 /turf/open/floor/carpet/stellar,
 /area/indoors/town/keep/magician)
@@ -3937,6 +3933,9 @@
 /obj/structure/chair/stool,
 /turf/open/floor/blocks,
 /area/under/town/sewer)
+"bUt" = (
+/turf/closed/basic,
+/area/outdoors/exposed/cell)
 "bUu" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fermentation_keg/random/water,
@@ -5620,8 +5619,8 @@
 /area/indoors/town/steward)
 "cHy" = (
 /obj/effect/waterfall,
-/turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/cell)
+/turf/open/water/cleanshallow,
+/area/under/cave)
 "cHD" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 26
@@ -8030,6 +8029,10 @@
 "dNX" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/villagegarrison)
+"dOc" = (
+/obj/effect/waterfall,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "dOp" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door/violet{
@@ -10971,6 +10974,10 @@
 /obj/structure/fluff/statue/gargoyle/moss/candles,
 /turf/open/floor/cobble/mossy,
 /area/outdoors/basin)
+"fpc" = (
+/obj/structure/flora/grass/bush_meagre,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "fpG" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /turf/open/floor/metal/barograte,
@@ -14214,6 +14221,10 @@
 /obj/item/reagent_containers/food/snacks/truffles,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
+"gVf" = (
+/obj/effect/waterfall,
+/turf/closed/wall/mineral/stone/moss,
+/area/indoors/town/cell)
 "gVk" = (
 /obj/structure/fluff/psycross/psydon/metal,
 /obj/item/clothing/head/flowercrown/salvia{
@@ -14532,6 +14543,9 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
+"hdI" = (
+/turf/open/water/cleanshallow,
+/area/outdoors/exposed/cell)
 "hdJ" = (
 /obj/structure/closet/crate/drawer,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -14570,10 +14584,6 @@
 /obj/structure/composter,
 /turf/open/floor/grass,
 /area/outdoors/town)
-"heF" = (
-/obj/effect/waterfall,
-/turf/open/water/cleanshallow,
-/area/under/cave)
 "hfj" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 8
@@ -21512,10 +21522,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
-"kww" = (
-/obj/item/natural/stone,
-/turf/open/water/cleanshallow,
-/area/under/cave)
 "kwx" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/chair/bench/couch/left,
@@ -23558,6 +23564,9 @@
 /obj/structure/fake_machine/steward,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/steward)
+"lvW" = (
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "lwh" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/cobble/mossy,
@@ -24189,11 +24198,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/town/basement)
-"lMW" = (
-/obj/structure/flora/grass,
-/obj/item/grown/log/tree/stick,
-/turf/open/floor/grass,
-/area/under/cave)
 "lNe" = (
 /obj/effect/landmark/bounty_location{
 	completion_range = 5;
@@ -25461,6 +25465,10 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/water/cleanshallow/dirt,
 /area/outdoors/woods_safe)
+"muo" = (
+/obj/structure/flora/grass,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "muz" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
@@ -26319,11 +26327,6 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/herringbone,
 /area/indoors/town)
-"mMq" = (
-/obj/structure/door,
-/obj/structure/barricade/wooden/crude,
-/turf/open/floor/naturalstone,
-/area/under/cave)
 "mMB" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot{
@@ -27770,6 +27773,10 @@
 	dir = 1
 	},
 /area/indoors/town/keep/throne)
+"nvX" = (
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/cell)
 "nwb" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -30863,10 +30870,6 @@
 /obj/structure/gearbox,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/dwarfin)
-"oWa" = (
-/obj/structure/flora/grass/thorn_bush,
-/turf/open/floor/grass,
-/area/under/cave)
 "oWd" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/town)
@@ -32324,10 +32327,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/grass,
 /area/indoors/town/church/inquisition)
-"pEv" = (
-/obj/structure/flora/grass/thorn_bush,
-/turf/open/floor/dirt,
-/area/under/cave)
 "pEJ" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_x = 32
@@ -33208,6 +33207,9 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/town)
+"qct" = (
+/turf/open/floor/naturalstone,
+/area/outdoors/exposed/cell)
 "qcD" = (
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
@@ -33703,6 +33705,10 @@
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/tile,
 /area/indoors/town/clinic_large/feldsher)
+"qqk" = (
+/obj/item/natural/stone,
+/turf/open/water/cleanshallow,
+/area/outdoors/exposed/cell)
 "qqC" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -35568,6 +35574,11 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
+"rgU" = (
+/obj/item/grown/log,
+/obj/item/grown/log/tree/stick,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "rgV" = (
 /obj/structure/dungeon_entry/center/vanderlin,
 /turf/open/floor/cobble/mossy,
@@ -41531,6 +41542,10 @@
 "tZK" = (
 /turf/open/floor/blocks,
 /area/outdoors/mountains)
+"uab" = (
+/obj/item/grown/log/tree/stick,
+/turf/open/floor/naturalstone,
+/area/outdoors/exposed/cell)
 "uaD" = (
 /obj/structure/table/church{
 	dir = 1
@@ -41701,11 +41716,6 @@
 	dir = 1
 	},
 /area/indoors/town/smithy)
-"udC" = (
-/obj/item/grown/log,
-/obj/item/grown/log/tree/stick,
-/turf/open/floor/grass,
-/area/under/cave)
 "udF" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -42794,10 +42804,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
-"uEv" = (
-/obj/effect/waterfall,
-/turf/closed/mineral,
-/area/under/cave)
 "uEx" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
@@ -44988,6 +44994,11 @@
 "vAr" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/keep/magician)
+"vAB" = (
+/obj/structure/flora/grass,
+/obj/item/grown/log/tree/stick,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "vAE" = (
 /obj/structure/carpet/green,
 /turf/open/floor/wood/nosmooth,
@@ -48233,6 +48244,10 @@
 	},
 /turf/open/openspace,
 /area/outdoors/mountains)
+"wVz" = (
+/obj/effect/waterfall,
+/turf/closed/mineral,
+/area/under/cave)
 "wVN" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/river)
@@ -50193,6 +50208,10 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/steward)
+"xPX" = (
+/obj/structure/flora/grass/bush,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "xPY" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -50325,6 +50344,10 @@
 	},
 /turf/open/floor/metal,
 /area/indoors/town/keep/magician)
+"xSR" = (
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "xTa" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /obj/item/clothing/head/cookhat/chef,
@@ -69654,7 +69677,7 @@ lat
 lat
 dID
 lma
-cHy
+gVf
 gEP
 hCF
 bCK
@@ -109249,8 +109272,8 @@ dID
 qFx
 qFx
 lma
-lma
-heF
+hdI
+cHy
 qFx
 qFx
 qFx
@@ -109450,10 +109473,10 @@ hlw
 dID
 qFx
 qFx
-lma
-lma
-lma
-nNY
+hdI
+hdI
+hdI
+qct
 qFx
 qFx
 qFx
@@ -109652,10 +109675,10 @@ hlw
 dID
 lma
 lma
-lma
-lma
-lma
-aHx
+hdI
+hdI
+hdI
+uab
 qFx
 qFx
 qFx
@@ -109854,13 +109877,13 @@ hlw
 dID
 lma
 lma
-lma
-lma
+hdI
+hdI
 qFx
-aHx
-udC
-lMW
-rZq
+uab
+rgU
+vAB
+lvW
 qFx
 qFx
 qFx
@@ -110058,10 +110081,10 @@ glV
 qFx
 qFx
 qFx
-nNY
-aZb
-rZq
-pJb
+qct
+bTQ
+lvW
+xPX
 qFx
 qFx
 ido
@@ -110258,10 +110281,10 @@ hlw
 dID
 glV
 qFx
-nNY
+qFx
 bst
 bst
-bst
+bUt
 bst
 bst
 bst
@@ -110460,7 +110483,7 @@ hlw
 dID
 glV
 qFx
-nNY
+qct
 bst
 bst
 bst
@@ -110662,8 +110685,8 @@ hlw
 dID
 glV
 qFx
-nNY
-cyp
+qct
+muo
 bst
 bst
 bst
@@ -110865,7 +110888,7 @@ dID
 qFx
 qFx
 qFx
-iCc
+fpc
 bst
 bst
 bst
@@ -149649,9 +149672,9 @@ hlw
 dID
 qFx
 qFx
-qFx
-glV
-uEv
+nNY
+bst
+wVz
 qFx
 qFx
 qFx
@@ -149850,10 +149873,10 @@ hlw
 hlw
 dID
 qFx
-qFx
-glV
-glV
-glV
+nNY
+bst
+bst
+bst
 qFx
 qFx
 qFx
@@ -150052,11 +150075,11 @@ hlw
 hlw
 dID
 qFx
-qFx
-glV
-glV
-glV
-glV
+nNY
+bst
+bst
+bst
+bst
 qFx
 qFx
 qFx
@@ -150255,13 +150278,13 @@ hlw
 dID
 qFx
 glV
-glV
-glV
+bst
+bst
 qFx
-glV
-glV
-glV
-glV
+bst
+bst
+bst
+bst
 dHC
 xOx
 ido
@@ -150456,14 +150479,14 @@ hlw
 hlw
 dID
 qFx
-qFx
-qFx
-qFx
-glV
-glV
-glV
-glV
 nNY
+nNY
+qFx
+bst
+bst
+bst
+bst
+qct
 dHC
 xOx
 ido
@@ -150659,7 +150682,7 @@ hlw
 dID
 qFx
 qFx
-glV
+qct
 bst
 bst
 bst
@@ -150861,7 +150884,7 @@ hlw
 dID
 qFx
 qFx
-glV
+bst
 bst
 bst
 bst
@@ -151063,8 +151086,8 @@ hlw
 dID
 qFx
 qFx
-qFx
-glV
+qct
+bst
 bst
 bst
 bst
@@ -151266,7 +151289,7 @@ dID
 qFx
 qFx
 qFx
-glV
+bst
 bst
 bst
 bst
@@ -189851,10 +189874,10 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
+nNY
+nNY
+nNY
+nNY
 qFx
 qFx
 qFx
@@ -190050,14 +190073,14 @@ hlw
 dID
 qFx
 qFx
-qFx
-glV
-uEv
-qFx
-qFx
-qFx
-qFx
-qFx
+nNY
+bst
+dOc
+nNY
+nNY
+nNY
+nNY
+nNY
 qFx
 qFx
 qFx
@@ -190252,14 +190275,14 @@ hlw
 dID
 qFx
 qFx
-glV
-glV
-glV
+bst
+bst
+bst
 qFx
 qFx
-qFx
-qFx
-qFx
+nNY
+nNY
+nNY
 qFx
 qFx
 qFx
@@ -190454,10 +190477,10 @@ hlw
 dID
 qFx
 qFx
-glV
-glV
-glV
-glV
+bst
+bst
+bst
+bst
 qFx
 qFx
 qFx
@@ -190656,13 +190679,13 @@ hlw
 dID
 qFx
 qFx
-glV
-glV
+bst
+bst
 qFx
-glV
-glV
-glV
-glV
+bst
+bst
+bst
+bst
 qFx
 qFx
 qFx
@@ -190858,13 +190881,13 @@ hlw
 dID
 qFx
 qFx
-qFx
-qFx
-glV
-glV
-glV
-glV
-glV
+nNY
+nNY
+bst
+bst
+bst
+bst
+bst
 qFx
 qFx
 qFx
@@ -191060,7 +191083,7 @@ hlw
 dID
 qFx
 qFx
-glV
+bst
 bst
 bst
 bst
@@ -191262,7 +191285,7 @@ hlw
 dID
 qFx
 qFx
-glV
+bst
 bst
 bst
 bst
@@ -191464,8 +191487,8 @@ hlw
 dID
 qFx
 qFx
-qFx
-glV
+bst
+bst
 bst
 bst
 bst
@@ -191666,8 +191689,8 @@ hlw
 dID
 qFx
 qFx
-qFx
-glV
+qct
+bst
 bst
 bst
 bst
@@ -229644,7 +229667,7 @@ dID
 qFx
 qFx
 qFx
-lma
+hdI
 qFx
 qFx
 qFx
@@ -229845,13 +229868,13 @@ hlw
 dID
 qFx
 qFx
-lma
-lma
-lma
+hdI
+hdI
+hdI
 qFx
 qFx
-qFx
-qFx
+nNY
+nNY
 qFx
 qFx
 qFx
@@ -230047,14 +230070,14 @@ hlw
 dID
 qFx
 qFx
-kww
-kww
+qqk
+qqk
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
+nNY
+nNY
+nNY
+nNY
 qFx
 qFx
 qFx
@@ -230249,15 +230272,15 @@ hlw
 dID
 qFx
 qFx
-lma
-lma
-rZq
-oWa
-cyp
+hdI
+hdI
+lvW
+xSR
+muo
+nNY
 qFx
-qFx
-qFx
-qFx
+nNY
+nNY
 qFx
 qFx
 qFx
@@ -230450,16 +230473,16 @@ hlw
 hlw
 dID
 qFx
-hzx
-kww
+ueW
+qqk
+bst
+lvW
+lvW
+lvW
+qFx
+qFx
 glV
-rZq
-rZq
-rZq
-qFx
-qFx
-qFx
-qFx
+nNY
 qFx
 qFx
 qFx
@@ -230652,16 +230675,16 @@ hlw
 hlw
 dID
 qFx
-rZq
-glV
-glV
-glV
-hzx
-cyp
-rZq
+lvW
+bst
+bst
+bst
+ueW
+muo
+lvW
 qFx
-qFx
-qFx
+glV
+nNY
 qFx
 qFx
 qFx
@@ -230854,13 +230877,13 @@ hlw
 hlw
 dID
 qFx
-cyp
-glV
-glV
-glV
-glV
-nNY
-rZq
+muo
+bst
+bst
+bst
+bst
+qct
+lvW
 qFx
 qFx
 qFx
@@ -231056,14 +231079,14 @@ hlw
 hlw
 dID
 qFx
-hzx
-glV
-glV
-hzx
-glV
-glV
-glV
-glV
+ueW
+bst
+bst
+ueW
+bst
+bst
+bst
+bst
 qFx
 qFx
 qFx
@@ -231258,14 +231281,14 @@ hlw
 hlw
 dID
 qFx
-glm
-hzx
-pEv
-glV
-glV
-glV
-glV
-glV
+fVJ
+ueW
+nvX
+bst
+bst
+bst
+bst
+bst
 qFx
 qFx
 qFx
@@ -231461,14 +231484,14 @@ hlw
 dID
 qFx
 qFx
-glV
 bst
 bst
 bst
 bst
 bst
 bst
-nNY
+bst
+qFx
 qFx
 qFx
 qFx
@@ -231663,14 +231686,14 @@ hlw
 dID
 qFx
 qFx
-glV
 bst
 bst
 bst
 bst
 bst
 bst
-nNY
+bst
+qFx
 qFx
 fZu
 xAw
@@ -231866,14 +231889,14 @@ dID
 qFx
 qFx
 qFx
-glV
+bst
 bst
 bst
 bst
 bst
 glV
 nNY
-ssf
+qFx
 xAw
 xAw
 xAw
@@ -232068,14 +232091,14 @@ dID
 qFx
 qFx
 qFx
-glV
+bst
 bst
 bst
 bst
 bst
 glV
 nNY
-mMq
+qFx
 xAw
 izG
 izG
@@ -232274,10 +232297,10 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
 nNY
-ssf
+nNY
+nNY
+qFx
 xAw
 izG
 izG
@@ -232474,10 +232497,10 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
+nNY
+nNY
+nNY
+nNY
 qFx
 qFx
 xAw
@@ -232676,9 +232699,9 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
+nNY
+nNY
+nNY
 qFx
 qFx
 qFx
@@ -232877,12 +232900,12 @@ qFx
 qFx
 qFx
 qFx
+nNY
+nNY
+nNY
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
+nNY
 qFx
 xAw
 izG
@@ -233080,12 +233103,12 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+nNY
+nNY
+nNY
+nNY
+nNY
+nNY
 xAw
 izG
 izG
@@ -233283,11 +233306,11 @@ qFx
 qFx
 qFx
 qFx
+nNY
+nNY
 qFx
-qFx
-qFx
-qFx
-qFx
+nNY
+nNY
 xAw
 xAw
 xAw
@@ -233488,7 +233511,7 @@ qFx
 qFx
 qFx
 qFx
-qFx
+nNY
 qFx
 xAw
 xAw
