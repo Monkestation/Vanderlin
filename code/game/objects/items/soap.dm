@@ -82,6 +82,12 @@
 
 
 /obj/item/soap/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(isobj(interacting_with))
+		if(try_dissolve(interacting_with, user))
+			return ITEM_INTERACT_SKIP_TO_ATTACK
+
+		return ITEM_INTERACT_BLOCKING
+
 	if(!ishuman(interacting_with))
 		return NONE
 
@@ -162,29 +168,32 @@
 
 	return ITEM_INTERACT_SUCCESS
 
-/obj/item/soap/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/soap/proc/try_dissolve(obj/interacting_with, mob/living/user)
+	if(!interacting_with.reagents || !interacting_with.is_open_container())
+		return FALSE
 
-	var/obj/O = attacked_atom
-	var/datum/reagents/r = O.reagents
-	if(!r || !O.is_open_container())
-		return ..()
-	. = TRUE
-	if(r.total_volume >= r.maximum_volume)
+	var/datum/reagents/reagents = interacting_with.reagents
+
+	if(reagents.holder_full())
 		to_chat(user, span_warning("There's no room to add [src]."))
-		return
-	var/datum/reagent/wawa = r.get_reagent_amount(/datum/reagent/water)
+		return FALSE
+
+	var/datum/reagent/wawa = reagents.get_reagent_amount(/datum/reagent/water)
 	if(!wawa)
-		to_chat(user, span_warning("[O] needs to have water to dissolve [src]!"))
-		return
-	var/amt2Add = min(10, wawa, r.maximum_volume - r.total_volume)
-	if(do_after(user, 2 SECONDS, O))
-		var/datum/reagents/reagents = new()
-		reagents.add_reagent(/datum/reagent/soap, amt2Add)
-		reagents.trans_to(O, reagents.total_volume, transfered_by = user, method = TOUCH)
-		to_chat(user, span_info("I dissolve some of \the [name] in the water."))
-		decreaseUses(5)
+		to_chat(user, span_warning("[interacting_with] needs to have water to dissolve [src]!"))
+		return FALSE
+
+	var/amt2Add = min(10, wawa, reagents.maximum_volume - reagents.total_volume)
+
+	if(!do_after(user, 2 SECONDS, interacting_with))
+		return FALSE
+
+	reagents.add_reagent(/datum/reagent/soap, amt2Add)
+
+	to_chat(user, span_info("I dissolve some of \the [name] in the water."))
+	decreaseUses(5)
+
+	return TRUE
 
 /obj/item/soap/proc/scrub_scrub(mob/living/carbon/human/target, mob/living/carbon/user)
 	target.wash(clean_strength)

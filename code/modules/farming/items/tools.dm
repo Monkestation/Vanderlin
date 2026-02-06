@@ -259,37 +259,46 @@
 			if("onbelt")
 				return list("shrink" = 0.6,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/hoe/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
+/obj/item/weapon/hoe/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isturf(interacting_with))
+		return NONE
 
-	var/turf/T = attacked_atom
-	if(user.used_intent.type == /datum/intent/till)
-		. = TRUE
-		var/obj/structure/irrigation_channel/located = locate(/obj/structure/irrigation_channel) in T
-		if(located)
-			to_chat(user, span_notice("[located] is in the way!"))
-			return
-		user.changeNext_move(CLICK_CD_MELEE)
-		if(istype(T, /turf/open/floor/grass))
-			playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			if(do_after(user, 3 SECONDS * time_multiplier, src))
-				apply_farming_fatigue(user, 10)
-				T.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
-				playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			return
-		if(istype(T, /turf/open/floor/dirt))
-			playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			if(do_after(user, 2 SECONDS * time_multiplier, src))
-				playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-				var/obj/structure/soil/soil = get_soil_on_turf(T)
-				if(soil)
-					soil.user_till_soil(user)
-				else
-					apply_farming_fatigue(user, 8)
-					new /obj/structure/soil(T)
-			return
-	return ..()
+	if(!istype(user.used_intent, /datum/intent/till))
+		return NONE
+
+	var/turf/T = interacting_with
+
+	if(T.is_blocked_turf(TRUE))
+		balloon_alert(user, "blocked!")
+		return ITEM_INTERACT_BLOCKING
+
+	user.changeNext_move(CLICK_CD_MELEE)
+
+	if(istype(T, /turf/open/floor/grass))
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+		if(!do_after(user, 3 SECONDS * time_multiplier, src))
+			return ITEM_INTERACT_BLOCKING
+
+		apply_farming_fatigue(user, 10)
+		T.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(T, /turf/open/floor/dirt))
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+		if(!do_after(user, 2 SECONDS * time_multiplier, src))
+			return ITEM_INTERACT_BLOCKING
+
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+		var/obj/structure/soil/soil = locate() in T
+		if(soil)
+			soil.user_till_soil(user)
+		else
+			apply_farming_fatigue(user, 8)
+			new /obj/structure/soil(T)
+
+		return ITEM_INTERACT_SUCCESS
 
 /datum/intent/till
 	name = "hoe"

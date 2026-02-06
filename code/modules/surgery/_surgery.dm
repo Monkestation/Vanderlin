@@ -130,7 +130,7 @@
 				patient.balloon_alert(user, "needs a limb!")
 			return FALSE
 	else
-		if(requires_bodypart_type && (affecting_limb.status != requires_bodypart_type)
+		if(requires_bodypart_type && (affecting_limb.status != requires_bodypart_type))
 			if(feedback)
 				patient.balloon_alert(user, "not the right type of limb!")
 			return FALSE

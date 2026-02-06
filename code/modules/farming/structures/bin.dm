@@ -28,8 +28,6 @@
 	update_appearance(UPDATE_ICON)
 
 /obj/item/bin/Destroy()
-	layer = 2.8
-	icon_state = "washbin_destroy"
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	if(STR)
 		var/list/things = STR.contents()
@@ -92,27 +90,16 @@
 
 	try_wash(user, user)
 
-/obj/item/bin/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	if(user.cmode)
-		return
-
-	try_wash(weapon, user)
-
 /obj/item/bin/proc/try_wash(atom/to_wash, mob/user)
-	if(istype(to_wash, /obj/item/natural/cloth))
-		var/obj/item/item = to_wash
-		item.attack_atom(src, user)
-		return
-	if(!reagents || !reagents.maximum_volume || kover)
-		return
+	if(!reagents?.maximum_volume || kover)
+		return FALSE
+
 	var/removereg = /datum/reagent/water
 	if(!reagents.has_reagent(/datum/reagent/water, 5))
 		removereg = /datum/reagent/water/gross
 		if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
 			to_chat(user, "<span class='warning'>No water to wash these stains.</span>")
-			return
+			return FALSE
 
 	var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
 	if(to_wash == user)
@@ -141,6 +128,8 @@
 			reagents.remove_reagent(/datum/reagent/water, amount_to_dirty)
 			reagents.add_reagent(/datum/reagent/water/gross, amount_to_dirty)
 
+	return TRUE
+
 //We need to use this or the object will be put in storage instead of attacking it
 /obj/item/bin/StorageBlock(obj/item/I, mob/user)
 	if(user?.used_intent)
@@ -156,6 +145,9 @@
 	if(!reagents?.total_volume)
 		return NONE
 
+	if(user.cmode)
+		return NONE
+
 	if(istype(tool, /obj/item/dye_pack))
 		var/obj/item/dye_pack/pack = tool
 		user.visible_message(span_info("[user] begins to add [pack] to [src]..."))
@@ -169,7 +161,9 @@
 	if(isitem(tool))
 		var/obj/item/thing = tool
 		if(!HAS_TRAIT(thing, TRAIT_NEEDS_QUENCH))
-			return NONE
+			if(!try_wash(thing, user))
+				return ITEM_INTERACT_BLOCKING
+			return ITEM_INTERACT_SUCCESS
 
 		var/removereg = /datum/reagent/water
 		if(!reagents.has_reagent(/datum/reagent/water, 5))
@@ -208,4 +202,4 @@
 
 /obj/item/proc/add_quench_requirement()
 	ADD_TRAIT(src, TRAIT_NEEDS_QUENCH, "quench")
-	add_filter("heated", 1, list(type="color", color = list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1)))
+	add_filter("heated", 1, color_matrix_filter(list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1)))

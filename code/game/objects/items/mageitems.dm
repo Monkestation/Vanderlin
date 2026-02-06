@@ -255,24 +255,28 @@
 		deltimer(timing_id)
 		timing_id = null
 
-/obj/item/mimictrinket/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/mimictrinket/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isobj(interacting_with))
+		return NONE
 
-	var/obj/target = attacked_atom
-	. = TRUE
-	if(ready)
-		to_chat(user,span_notice("[src] takes the form of [target]!"))
-		oldicon = icon
-		oldicon_state = icon_state
-		olddesc = desc
-		oldname = name
-		icon = target.icon
-		icon_state = target.icon_state
-		name = target.name
-		desc = target.desc
-		ready = FALSE
-		timing_id = addtimer(CALLBACK(src, PROC_REF(revert), user), duration,TIMER_STOPPABLE) // Minus two so we play the sound and decap faster
+	if(!ready)
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/target = interacting_with
+
+	to_chat(user, span_notice("[src] takes the form of [target]!"))
+	oldicon = icon
+	oldicon_state = icon_state
+	olddesc = desc
+	oldname = name
+	icon = target.icon
+	icon_state = target.icon_state
+	name = target.name
+	desc = target.desc
+	ready = FALSE
+	timing_id = addtimer(CALLBACK(src, PROC_REF(revert)), duration, TIMER_STOPPABLE) // Minus two so we play the sound and decap faster
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/hourglass/temporal
 	name = "temporal hourglass"

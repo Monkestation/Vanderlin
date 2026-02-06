@@ -32,26 +32,33 @@
 /obj/structure
 	var/hammer_repair
 
-/obj/item/weapon/hammer/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/weapon/hammer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isobj(interacting_with))
+		return NONE
+
 	if(!isliving(user) || !user.mind || user.cmode)
-		return ..()
-	var/obj/O = attacked_atom
+		return NONE
+
+	if(!isturf(interacting_with.loc))
+		return NONE
+
+	var/obj/O = interacting_with
+
 	var/datum/mind/blacksmith_mind = user.mind
+
 	var/repair_percent = 0.025 // 2.5% Repairing per hammer smack
 	/// Repairing is MUCH better with an anvil!
 	if(locate(/obj/machinery/anvil) in O.loc)
 		repair_percent *= 2 // Double the repair amount if we're using an anvil
 
 	if(isbodypart(O))
-		. = TRUE
 		var/obj/item/bodypart/attacked_prosthetic = O
-		if(!attacked_prosthetic.anvilrepair || !isturf(attacked_prosthetic.loc))
-			return
+		if(!attacked_prosthetic.anvilrepair)
+			return ITEM_INTERACT_BLOCKING
+
 		if(attacked_prosthetic.get_integrity() >= attacked_prosthetic.max_integrity && attacked_prosthetic.brute_dam == 0 && attacked_prosthetic.burn_dam == 0 && attacked_prosthetic.wounds == null && attacked_prosthetic.bodypart_disabled == BODYPART_NOT_DISABLED) //A mouthful
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_prosthetic]."))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		if(user.get_skill_level(attacked_prosthetic.anvilrepair) <= 0)
 			if(prob(30))
@@ -62,6 +69,7 @@
 			repair_percent *= user.get_skill_level(attacked_prosthetic.anvilrepair, TRUE)
 
 		playsound(src,'sound/items/bsmith3.ogg', 100, FALSE)
+
 		if(repair_percent)
 			var/amt2raise = floor(user.STAINT * 0.25)
 			attacked_prosthetic.repair_damage(attacked_prosthetic.max_integrity * repair_percent)
@@ -77,14 +85,16 @@
 		else
 			user.visible_message(span_warning("[user] fumbles trying to repair [attacked_prosthetic]!"))
 			attacked_prosthetic.take_damage(attacked_prosthetic.max_integrity * 0.1, BRUTE, "blunt")
-		return
+		return ITEM_INTERACT_SUCCESS
 
 	if(isitem(O))
-		. = TRUE
 		var/obj/item/attacked_item = O
-		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || attacked_item.obj_broken || (attacked_item.get_integrity() >= attacked_item.max_integrity) || !isturf(attacked_item.loc))
+		if(!attacked_item.anvilrepair)
+			return NONE
+
+		if(!attacked_item.max_integrity || attacked_item.obj_broken || (attacked_item.get_integrity() >= attacked_item.max_integrity))
 			to_chat(user, span_warning("[attacked_item] cannot be repaired any further."))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		if(user.get_skill_level(attacked_item.anvilrepair) <= 0)
 			if(prob(30))
@@ -106,26 +116,28 @@
 		else
 			user.visible_message("<span class='warning'>[user] damages [attacked_item]!</span>")
 			attacked_item.take_damage(attacked_item.max_integrity * 0.1, BRUTE, "blunt")
-		return
+		return ITEM_INTERACT_SUCCESS
 
 	if(isstructure(O))
-		. = TRUE
 		var/obj/structure/attacked_structure = O
-		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity || attacked_structure.obj_broken)
+		if(!attacked_structure.hammer_repair)
+			return NONE
+
+		if(!attacked_structure.max_integrity || attacked_structure.obj_broken)
 			to_chat(user, span_warning("[attacked_structure] cannot be repaired any further."))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		if(user.get_skill_level(attacked_structure.hammer_repair) <= 0)
 			to_chat(user, span_warning("I don't know how to repair this.."))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		var/amt2raise = floor(user.STAINT * 0.25)
 		repair_percent *= user.get_skill_level(attacked_structure.hammer_repair, TRUE)
 		attacked_structure.repair_damage(attacked_structure.max_integrity * repair_percent)
 		blacksmith_mind.add_sleep_experience(attacked_structure.hammer_repair, amt2raise)
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		user.visible_message(span_info("[user] repairs [attacked_structure]!"))
-		return
-
-	return ..()
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/hammer/getonmobprop(tag)
 	. = ..()

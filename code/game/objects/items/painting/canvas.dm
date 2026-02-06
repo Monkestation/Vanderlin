@@ -101,19 +101,21 @@
 	for(var/mob/mob in showers)
 		remove_shower(mob)
 
-/obj/item/canvas/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isclosedturf(attacked_atom))
-		return ..()
+/obj/item/canvas/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isclosedturf(interacting_with))
+		return NONE
 
-	. = TRUE
-	to_chat(user, "I start mounting [src] to [attacked_atom]...")
-	if(!do_after(user, 3 SECONDS, attacked_atom))
-		return
+	to_chat(user, "I start mounting [src] to [interacting_with]...")
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return ITEM_INTERACT_BLOCKING
+
 	user.dropItemToGround(src)
-	forceMove(attacked_atom)
+	forceMove(interacting_with)
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
 	anchored = TRUE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/canvas/proc/remove_shower(mob/source)
 	showers -= source

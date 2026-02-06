@@ -180,14 +180,15 @@
 	/// The smelting result, used by the smelter or by the portable smelter
 	var/smeltresult
 
-/obj/item/contraption/wood_metalizer/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/contraption/wood_metalizer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isobj(interacting_with))
+		return NONE
 
-	var/obj/O = attacked_atom
-	. = TRUE
 	if(!current_charge)
-		return
+		return NONE
+
+	var/obj/O = interacting_with
+
 	if(!O.metalizer_result)
 		to_chat(user, span_info("The [name] refuses to function."))
 		playsound(user, 'sound/items/flint.ogg', 100, FALSE)
@@ -196,8 +197,18 @@
 		var/turf/front = get_turf(O)
 		S.set_up(1, 1, front)
 		S.start()
-		return
+		return ITEM_INTERACT_BLOCKING
+
+	flick(on_icon, src)
+	charge_deduction(O, user, 1)
+	shake_camera(user, 1, 1)
+	playsound(src, 'sound/magic/swap.ogg', 100, TRUE)
+	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 2))
+
 	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
+	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
+		misfire(O, user)
+
 	if(istype(O, /obj/structure/door)) //This is to ensure the new door will retain its lock
 		var/obj/structure/door/door = O
 		var/obj/structure/door/new_door = new door.metalizer_result(get_turf(door))
@@ -212,14 +223,8 @@
 		var/obj/I = O
 		new I.metalizer_result(get_turf(I))
 		qdel(I)
-	flick(on_icon, src)
-	charge_deduction(O, user, 1)
-	shake_camera(user, 1, 1)
-	playsound(src, 'sound/magic/swap.ogg', 100, TRUE)
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 2))
-	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
-		misfire(O, user)
-	return
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/contraption/wood_metalizer/misfire_result()
 	misfiring = TRUE
@@ -272,14 +277,15 @@
 	playsound(turf, pick('sound/combat/hits/onmetal/sheet (1).ogg', 'sound/combat/hits/onmetal/sheet (2).ogg'), 100, TRUE)
 	qdel(src)
 
-/obj/item/contraption/smelter/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/contraption/smelter/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isobj(interacting_with))
+		return NONE
 
-	var/obj/O = attacked_atom
-	. = TRUE
 	if(!current_charge)
-		return
+		return NONE
+
+	var/obj/O = interacting_with
+
 	if(!O.smeltresult)
 		to_chat(user, span_info("The [name] refuses to function."))
 		playsound(user, 'sound/items/flint.ogg', 100, FALSE)
@@ -288,13 +294,15 @@
 		var/turf/front = get_turf(O)
 		S.set_up(1, 1, front)
 		S.start()
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 3))
 	charge_deduction(O, user, 1)
 	flick(on_icon, src)
 	playsound(src, 'sound/misc/machinevomit.ogg', 50, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(smelt_part2), O, user), 5)
-	return
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/contraption/smelter/proc/smelt_part2(obj/O, mob/living/user)
 	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
@@ -304,7 +312,6 @@
 	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
 		misfire(O, user)
 	addtimer(CALLBACK(O, PROC_REF(popcorn_smelt_result), turf), 20)
-	return
 
 /obj/item/contraption/shears
 	name = "amputation shears"
