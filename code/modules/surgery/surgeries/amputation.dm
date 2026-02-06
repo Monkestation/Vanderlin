@@ -1,5 +1,6 @@
 /datum/surgery/amputation
 	name = "Amputation"
+	surgery_flags = parent_type::surgery_flags | SURGERY_REQUIRES_REAL_LIMB
 
 	steps = list(
 		/datum/surgery_step/incise,

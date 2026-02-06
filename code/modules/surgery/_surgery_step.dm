@@ -56,10 +56,6 @@
 					return key
 
 /datum/surgery_step/proc/try_op(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
-	if(surgery.organ_to_manipulate && !target.getorganslot(surgery.organ_to_manipulate))
-		to_chat(user, span_warning("[target] seems to be missing the organ necessary to complete this surgery!"))
-		return FALSE
-
 	var/implement_key = is_implement(user, tool)
 
 	if(implement_key)

@@ -1,5 +1,6 @@
 /datum/surgery/healing
 	abstract_type = /datum/surgery/healing
+	surgery_flags = SURGERY_REQUIRE_LIMB | SURGERY_IGNORE_CLOTHES
 
 	possible_locs = list(
 		BODY_ZONE_HEAD,

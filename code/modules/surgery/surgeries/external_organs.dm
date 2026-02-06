@@ -1,6 +1,7 @@
 
 /datum/surgery/remove_external_organs
 	name = "Sever External Organs"
+	surgery_flags = SURGERY_REQUIRES_REAL_LIMB | SURGERY_REQUIRE_LIMB
 
 	steps = list(
 		/datum/surgery_step/incise,

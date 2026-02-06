@@ -130,13 +130,17 @@
 				patient.balloon_alert(user, "needs a limb!")
 			return FALSE
 	else
-		if(requires_bodypart_type && !(affecting_limb.status & requires_bodypart_type))
+		if(requires_bodypart_type && (affecting_limb.status != requires_bodypart_type)
 			if(feedback)
 				patient.balloon_alert(user, "not the right type of limb!")
 			return FALSE
 		if(targetable_wound && !affecting_limb.has_wound(targetable_wound))
 			if(feedback)
 				patient.balloon_alert(user, "no wound to operate on!")
+			return FALSE
+		if(organ_to_manipulate && !target.getorganslot(organ_to_manipulate))
+			if(feedback)
+				patient.balloon_alert(user, "missing organ!")
 			return FALSE
 
 	if(!(surgery_flags & SURGERY_IGNORE_CLOTHES) && !get_location_accessible(patient, user.zone_selected))
@@ -147,9 +151,6 @@
 
 /datum/surgery/proc/can_next_step(mob/living/user, list/modifiers)
 	SHOULD_CALL_PARENT(TRUE)
-
-	if(step_in_progress)
-		return TRUE
 
 	if(!(user.zone_selected in possible_locs))
 		return FALSE
@@ -170,6 +171,9 @@
 	return TRUE
 
 /datum/surgery/proc/next_step(mob/living/user, list/modifiers)
+	if(step_in_progress)
+		return TRUE
+
 	if(!can_next_step(user, modifiers))
 		return FALSE
 
