@@ -69,8 +69,7 @@
 
 /obj/item/explosive/Initialize()
 	. = ..()
-	//rand_time = rand(det_time * 0.5, det_time)
-	addtimer(CALLBACK(src, PROC_REF(enable_sparking)), spark_delay)
+	addtimer(VARSET_CALLBACK(src, enable_sparking, TRUE), spark_delay)
 
 /**
  * Checks for various ways to botch priming a grenade.
@@ -189,6 +188,3 @@
 		else
 			new turf_debris (get_turf(src))
 			qdel(src)
-
-/obj/item/explosive/proc/enable_sparking()
-    allow_spark = TRUE
