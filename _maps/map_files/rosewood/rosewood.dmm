@@ -23559,6 +23559,7 @@
 "pKm" = (
 /obj/item/bin/water/gross,
 /obj/structure/mirror,
+/obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/greenstone,
 /area/indoors/town/orphanage)
 "pKp" = (
@@ -25224,10 +25225,6 @@
 "qMZ" = (
 /turf/open/floor/snow/patchy,
 /area/outdoors/basin/safe)
-"qNc" = (
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/closed/wall/mineral/stone,
-/area/indoors/town/orphanage)
 "qNd" = (
 /obj/item/recipe_book/cooking,
 /obj/item/recipe_book/cooking{
@@ -27767,7 +27764,7 @@
 	assignedrole = /datum/job/captain;
 	outfit = /datum/outfit/captain;
 	ring = /obj/item/clothing/ring/gold/ravox;
-	mob_name = "Sir Giunevere";
+	mob_name = "Sir Guineveire";
 	mob_gender = "male";
 	possible_ages = list("Adult");
 	backr = null;
@@ -87880,7 +87877,7 @@ gKW
 gKW
 gKW
 mRI
-qNc
+xmk
 pKm
 fKz
 fKz
