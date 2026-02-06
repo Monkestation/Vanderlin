@@ -50,6 +50,12 @@
 	var/active = FALSE
 	///How long it takes for a grenade to explode after being armed
 	var/det_time = 5 SECONDS
+	//The Randomized detonation time when armed
+	var/rand_time
+	//can this grenade be ignited by a spark?
+	var/allow_spark = FALSE
+	//how long it takes before it can be ignited by a spark
+	var/spark_delay = 2.5 SECONDS
 
 	var/turf_debris = /obj/item/natural/glass/shard
 
@@ -63,7 +69,8 @@
 
 /obj/item/explosive/Initialize()
 	. = ..()
-	det_time = rand(det_time * 0.5, det_time)
+	//rand_time = rand(det_time * 0.5, det_time)
+	addtimer(CALLBACK(src, PROC_REF(enable_sparking)), spark_delay)
 
 /**
  * Checks for various ways to botch priming a grenade.
@@ -98,6 +105,8 @@
 	. = ..()
 
 /obj/item/explosive/spark_act()
+	if (!allow_spark)
+		return
 	if (active)
 		return
 	if(usr)
@@ -108,11 +117,14 @@
 	. = ..()
 
 /obj/item/explosive/extinguish()
-	. = ..()
-	if(explode_timer)
-		deltimer(explode_timer)
-		explode_timer = null
-	icon_state = initial(icon_state)
+	if(active)
+		. = ..()
+		if(explode_timer)
+			deltimer(explode_timer)
+			explode_timer = null
+		icon_state = initial(icon_state)
+		active = FALSE
+		playsound(src, 'sound/items/firesnuff.ogg', 50)
 
 /obj/item/explosive/proc/log_grenade(mob/user)
 	log_bomber(user, "has primed a", src, "for detonation", message_admins = !dud_flags)
@@ -125,17 +137,18 @@
 /obj/item/explosive/proc/arm_grenade(mob/user, delayoverride, msg = TRUE, volume = 60)
 	log_grenade(user) //Inbuilt admin procs already handle null users
 	playsound(src, 'sound/items/fuse.ogg', 100)
+	rand_time = rand(det_time * 0.5, det_time)
 	if(user)
 		add_fingerprint(user)
 		if(msg)
-			to_chat(user, span_warning("You prime [src]! [capitalize(DisplayTimeText(det_time))]!"))
+			to_chat(user, span_warning("You prime [src]! [capitalize(DisplayTimeText(rand_time))]!"))
 	if(shrapnel_type && shrapnel_radius)
 		shrapnel_initialized = TRUE
 		AddComponent(/datum/component/pellet_cloud, projectile_type = shrapnel_type, magnitude = shrapnel_radius)
 	active = TRUE
 	icon_state = initial(icon_state) + "_active"
-	SEND_SIGNAL(src, COMSIG_GRENADE_ARMED, det_time, delayoverride)
-	explode_timer = addtimer(CALLBACK(src, PROC_REF(detonate)), isnull(delayoverride)? det_time : delayoverride)
+	SEND_SIGNAL(src, COMSIG_GRENADE_ARMED, rand_time, delayoverride)
+	explode_timer = addtimer(CALLBACK(src, PROC_REF(detonate)), isnull(delayoverride)? rand_time : delayoverride, TIMER_STOPPABLE)
 
 
 /**
@@ -175,3 +188,6 @@
 		else
 			new turf_debris (get_turf(src))
 			qdel(src)
+
+/obj/item/explosive/proc/enable_sparking()
+    allow_spark = TRUE
