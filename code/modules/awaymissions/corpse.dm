@@ -84,7 +84,7 @@
 	if(faction)
 		M.faction |= list(faction)
 	if(death)
-		M.death(1) //Kills the new mob
+		M.death() //Kills the new mob
 	if(patron)
 		M.set_patron(patron)
 	M.adjustOxyLoss(oxy_damage)

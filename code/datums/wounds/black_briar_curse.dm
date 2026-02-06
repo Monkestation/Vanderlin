@@ -12,6 +12,7 @@
 	bleed_rate = null
 	whp = null
 	mob_overlay = null
+	overlay_on_skeleton = TRUE
 
 	// the body zones this curse type targets
 	var/list/body_zones
@@ -66,8 +67,6 @@
 	if(!. || !iscarbon(affected))
 		return FALSE
 	var/mob/living/carbon/C = affected
-	if(NOBLOOD in C.dna?.species?.species_traits)
-		return FALSE
 	if(is_species(C, /datum/species/werewolf) || C.mind?.has_antag_datum(/datum/antagonist/werewolf)) // Dendor protects
 		return FALSE
 	if(C.mind?.has_antag_datum(/datum/antagonist/vampire) || C.mind?.has_antag_datum(/datum/antagonist/zombie)) // weird/gross blood = cant live in it

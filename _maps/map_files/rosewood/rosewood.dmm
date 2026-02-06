@@ -384,9 +384,7 @@
 /turf/open/floor/sand,
 /area/indoors/town/orphanage)
 "amR" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "dead3"
-	},
+/obj/structure/flora/tree/pine/dead,
 /turf/open/floor/dirt,
 /area/outdoors/town/roofs)
 "amT" = (
@@ -3523,6 +3521,10 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/turned,
 /area/under/town/basement)
+"cvg" = (
+/obj/item/grown/log/tree/stick,
+/turf/open/floor/sand,
+/area/under/town/basement)
 "cvr" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
@@ -4026,9 +4028,7 @@
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep)
 "cIZ" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "dead3"
-	},
+/obj/structure/flora/tree/pine/dead,
 /turf/open/floor/grass/cold,
 /area/outdoors/town/roofs)
 "cJb" = (
@@ -6218,6 +6218,18 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
+"efo" = (
+/obj/item/grown/log/tree/stick{
+	pixel_x = -1;
+	pixel_y = 8
+	},
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 1
+	},
+/turf/open/floor/tile/masonic{
+	dir = 1
+	},
+/area/indoors/town/keep)
 "efr" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/reagent_containers/powder/salt{
@@ -7059,6 +7071,18 @@
 /obj/machinery/light/fueledstreet/blue,
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/mountains)
+"eDx" = (
+/obj/item/grown/log/tree/stick{
+	pixel_x = -3;
+	pixel_y = -7
+	},
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 4
+	},
+/turf/open/floor/tile/masonic{
+	dir = 4
+	},
+/area/indoors/town/keep)
 "eDD" = (
 /obj/structure/stairs{
 	dir = 1
@@ -8483,12 +8507,6 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town/bath)
-"fzr" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "pine4"
-	},
-/turf/open/floor/dirt,
-/area/outdoors/town/roofs)
 "fzE" = (
 /obj/effect/decal/cobbleedge{
 	icon_state = "borderfall";
@@ -8828,12 +8846,6 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors/town/shop)
-"fJP" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "pine3-snow"
-	},
-/turf/open/floor/dirt,
-/area/outdoors/town/roofs)
 "fKc" = (
 /obj/structure/flora/grass/herb/cursedrosa/spreader/instant,
 /turf/open/floor/rooftop{
@@ -19974,9 +19986,7 @@
 /turf/open/lava/acid,
 /area/under/cave)
 "npJ" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "pine2-snow"
-	},
+/obj/structure/flora/tree/pine/dead,
 /obj/structure/flora/grass/thorn_bush,
 /obj/structure/flora/grass/tundra{
 	icon_state = "tundragrass2"
@@ -23449,12 +23459,6 @@
 /obj/item/natural/cloth,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
-"pFT" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "pine4-snow"
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/town/roofs)
 "pGd" = (
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/sand,
@@ -24610,12 +24614,6 @@
 /area/indoors/town/merc_guild)
 "qvo" = (
 /obj/effect/spawner/map_spawner/loot/magic,
-/turf/open/floor/grass/cold,
-/area/outdoors/town/roofs)
-"qvs" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "pine1-snow"
-	},
 /turf/open/floor/grass/cold,
 /area/outdoors/town/roofs)
 "qvA" = (
@@ -25859,10 +25857,8 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/merc_guild)
 "rkT" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "dead3"
-	},
 /obj/effect/gibspawner/human,
+/obj/structure/flora/tree/pine/dead,
 /turf/open/floor/grass/cold,
 /area/outdoors/town/roofs)
 "rll" = (
@@ -27048,6 +27044,14 @@
 "sey" = (
 /turf/closed/mineral,
 /area/under/cavewet)
+"seE" = (
+/obj/item/grown/log/tree/stick,
+/obj/item/grown/log/tree/small{
+	pixel_x = 7;
+	pixel_y = -8
+	},
+/turf/open/floor/sand,
+/area/indoors/town/cell)
 "sfi" = (
 /obj/item/fertilizer/ash,
 /turf/open/floor/cobblerock,
@@ -28160,6 +28164,14 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town/bath)
+"sVx" = (
+/obj/effect/decal/cleanable/debris/wood{
+	dir = 1
+	},
+/turf/open/floor/tile/masonic{
+	dir = 1
+	},
+/area/indoors/town/keep)
 "sVI" = (
 /obj/item/fertilizer/ash,
 /turf/open/floor/sand,
@@ -35533,6 +35545,10 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/hexstone,
 /area/under/town/basement)
+"xNK" = (
+/obj/item/grown/log/tree,
+/turf/open/floor/carpet/lord/right,
+/area/indoors/town/keep)
 "xNN" = (
 /obj/effect/mapping_helpers/secret_door_creator/thieves_guild{
 	redstone_id = "thieves_guild"
@@ -35618,9 +35634,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
 "xQM" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "dead3"
-	},
+/obj/structure/flora/tree/pine/dead,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town/roofs)
 "xQZ" = (
@@ -36051,12 +36065,6 @@
 	},
 /turf/open/floor/sand,
 /area/indoors/town/keep)
-"yfT" = (
-/obj/structure/flora/tree/pine{
-	icon_state = "pine1-snow"
-	},
-/turf/open/floor/dirt,
-/area/outdoors/town/roofs)
 "yfY" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -53614,7 +53622,7 @@ jyq
 sWs
 mwu
 ceZ
-mNo
+cvg
 icM
 xKq
 aZj
@@ -53816,7 +53824,7 @@ dPN
 krn
 eAx
 pIE
-bhK
+seE
 unO
 lOo
 wGn
@@ -134820,7 +134828,7 @@ kHj
 fjG
 hyb
 rDw
-kHj
+xNK
 hyb
 hyb
 hyb
@@ -135021,10 +135029,10 @@ rKb
 ipz
 cgu
 boP
+eDx
+efo
 mKR
-vsD
-mKR
-vsD
+sVx
 dzC
 dzC
 xXS
@@ -212985,7 +212993,7 @@ msb
 msb
 msb
 fEe
-qvs
+cIZ
 gAX
 bOP
 xig
@@ -213184,7 +213192,7 @@ msb
 msb
 msb
 msb
-fzr
+amR
 fEe
 fEe
 fEe
@@ -213391,7 +213399,7 @@ fEe
 fEe
 fEe
 fEe
-yfT
+amR
 msb
 msb
 msb
@@ -213585,7 +213593,7 @@ nHb
 nHb
 fEe
 msb
-pFT
+cIZ
 dbi
 dbi
 fEe
@@ -214810,7 +214818,7 @@ sHv
 rwa
 rwa
 fEe
-fEe
+jiV
 fEe
 fEe
 cIZ
@@ -215012,8 +215020,8 @@ sHv
 sHv
 rwa
 vUk
-fEe
-fEe
+jiV
+jiV
 hTU
 fEe
 ilT
@@ -215214,10 +215222,10 @@ sHv
 sHv
 pMN
 rwa
-fEe
-fEe
-fEe
-fEe
+jiV
+jiV
+jiV
+jiV
 fEe
 lEz
 hyb
@@ -215416,10 +215424,10 @@ sHv
 owG
 pMN
 ahS
-oVG
-fEe
-fEe
-fEe
+jiV
+jiV
+jiV
+jiV
 fEe
 rAi
 hyb
@@ -215618,10 +215626,10 @@ pMN
 pMN
 rwa
 rwa
-fEe
-fEe
-fEe
-fEe
+jiV
+jiV
+jiV
+jiV
 fEe
 lEz
 hyb
@@ -215822,7 +215830,7 @@ rwa
 fEe
 fEe
 rbJ
-fEe
+jiV
 kgf
 fEe
 fIY
@@ -216022,9 +216030,9 @@ uWt
 uWt
 fEe
 fEe
-pFT
-fEe
 cIZ
+fEe
+fEe
 ilT
 ilT
 roK
@@ -217045,7 +217053,7 @@ fEe
 fEe
 fEe
 fEe
-dal
+fEe
 bcH
 msb
 bcH
@@ -218031,7 +218039,7 @@ nHb
 nHb
 msb
 msb
-fJP
+amR
 rsR
 gYy
 oqY
