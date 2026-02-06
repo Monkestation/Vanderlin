@@ -192,8 +192,8 @@
 	name = "appendix"
 	icon_state = "appendix"
 	icon = 'icons/obj/surgery.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR, /datum/reagent/organpoison = 1)
-	grind_results = list(/datum/reagent/organpoison = 3)
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR, /datum/reagent/organpoison = 0.5)
+	grind_results = list(/datum/reagent/organpoison = 1)
 	foodtype = RAW | MEAT | GROSS
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	rotprocess = 5 MINUTES
@@ -215,18 +215,18 @@
 
 /obj/item/reagent_containers/food/snacks/organ/heart
 	name = "heart"
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
+	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
+	grind_results = list(/datum/reagent/organpoison = 2)
 
 /obj/item/reagent_containers/food/snacks/organ/lungs
 	name = "lungs"
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
+	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
+	grind_results = list(/datum/reagent/organpoison = 2)
 
 /obj/item/reagent_containers/food/snacks/organ/liver
 	name = "liver"
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
+	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
+	grind_results = list(/datum/reagent/organpoison = 2)
 
 ///Adjusts an organ's damage by the amount "d", up to a maximum amount, which is by default max damage
 /obj/item/organ/proc/applyOrganDamage(d, maximum = maxHealth)	//use for damaging effects

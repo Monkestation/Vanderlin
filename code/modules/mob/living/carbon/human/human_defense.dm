@@ -656,7 +656,7 @@
 
 	var/obj/item/bodypart/examined_part = get_bodypart(choice)
 	if(examined_part)
-		examination += examined_part.check_for_injuries(user, advanced)
+		examination += examined_part.check_for_injuries(user, deep_examination)
 	else
 		examination += "<span class='info'>☼ [capitalize(parse_zone(choice))]: <span class='deadsay'><B>MISSING</B></span></span>"
 	examination += "ø ------------ ø</span>"

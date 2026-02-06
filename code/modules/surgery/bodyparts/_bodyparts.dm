@@ -196,7 +196,7 @@
 						steaks = 2
 					if(4 to 5)
 						if(prob(30))
-							steaks = 2
+							steaks = 3
 					if(6)
 						steaks = 3 // the steaks have never been higher
 				var/amt2raise = user.STAINT/3
