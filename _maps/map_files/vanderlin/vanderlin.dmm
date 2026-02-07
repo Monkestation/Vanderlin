@@ -3933,9 +3933,6 @@
 /obj/structure/chair/stool,
 /turf/open/floor/blocks,
 /area/under/town/sewer)
-"bUt" = (
-/turf/closed/basic,
-/area/outdoors/exposed/cell)
 "bUu" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fermentation_keg/random/water,
@@ -110284,7 +110281,7 @@ qFx
 qFx
 bst
 bst
-bUt
+bst
 bst
 bst
 bst
