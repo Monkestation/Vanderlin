@@ -6962,10 +6962,6 @@
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/keep)
-"ewC" = (
-/obj/effect/gibspawner/human,
-/turf/open/floor/herringbone,
-/area/indoors/town/shop)
 "ewN" = (
 /obj/effect/decal/cleanable/debris/stone{
 	dir = 1
@@ -17837,10 +17833,6 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/town/garrison)
-"lKw" = (
-/obj/effect/gibspawner/human,
-/turf/open/floor/tile/masonic/single,
-/area/indoors/town/shop)
 "lKE" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/stone/moss/blue,
@@ -24481,7 +24473,6 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/obj/effect/gibspawner/human,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
 "qix" = (
@@ -24792,10 +24783,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"qsR" = (
-/obj/effect/gibspawner/human,
-/turf/open/floor/churchbrick,
-/area/indoors/town/shop)
 "qtl" = (
 /obj/structure/chair/wood/alt/chair3,
 /obj/structure/fluff/railing/border,
@@ -26629,10 +26616,6 @@
 /obj/structure/fluff/statue/knightalt/r,
 /turf/open/floor/snow/rough,
 /area/outdoors/town/keep)
-"rJk" = (
-/obj/effect/gibspawner/human,
-/turf/open/floor/cobble/alt,
-/area/indoors/town/shop)
 "rJv" = (
 /obj/effect/decal/cleanable/debris/stone{
 	dir = 8
@@ -31932,10 +31915,6 @@
 	},
 /turf/open/floor/blocks/paving,
 /area/under/town/sewer)
-"vpc" = (
-/obj/effect/gibspawner/human,
-/turf/open/floor/churchmarble,
-/area/indoors/town/shop)
 "vpl" = (
 /obj/structure/bars,
 /obj/structure/vine/black_briar/medium,
@@ -98613,7 +98592,7 @@ efv
 ndi
 jsR
 tIc
-qsR
+mIz
 tIc
 mIz
 rgO
@@ -99827,7 +99806,7 @@ pLZ
 pqy
 pqy
 pqy
-ewC
+pqy
 pqy
 pqy
 gzB
@@ -101847,7 +101826,7 @@ kRe
 iXl
 gfp
 ogN
-lKw
+wPj
 gfp
 oxR
 nPN
@@ -138619,7 +138598,7 @@ ksJ
 fAk
 hmq
 xhu
-rJk
+xhu
 ioy
 sNW
 vWl
@@ -139014,7 +138993,7 @@ jSq
 sNW
 hfz
 ksJ
-vpc
+ksJ
 pif
 ksJ
 uLV
