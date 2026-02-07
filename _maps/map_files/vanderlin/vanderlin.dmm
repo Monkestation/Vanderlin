@@ -11426,12 +11426,6 @@
 "fAl" = (
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep/halls/e)
-"fAH" = (
-/obj/effect/waterfall{
-	pixel_x = 5
-	},
-/turf/open/water/river,
-/area/under/cavewet)
 "fAR" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/open/floor/naturalstone,
@@ -18503,14 +18497,6 @@
 "iYU" = (
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
-"iYV" = (
-/obj/effect/waterfall{
-	pixel_y = 0
-	},
-/turf/open/water/river{
-	dir = 8
-	},
-/area/outdoors/river)
 "iYZ" = (
 /obj/structure/stairs{
 	dir = 8
@@ -20199,13 +20185,6 @@
 "jPn" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/church)
-"jPx" = (
-/obj/effect/waterfall,
-/obj/effect/waterfall{
-	pixel_x = 13
-	},
-/turf/open/water,
-/area/outdoors/eora)
 "jQk" = (
 /obj/structure/curtain/bounty/dir{
 	dir = 1
@@ -24879,12 +24858,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/river)
-"mbZ" = (
-/obj/effect/waterfall{
-	pixel_x = 5
-	},
-/turf/open/water/river,
-/area/under/cave)
 "mcr" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -25474,12 +25447,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep/garrison)
-"muC" = (
-/obj/effect/waterfall{
-	pixel_x = -5
-	},
-/turf/open/water/river,
-/area/under/cave)
 "muH" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/halls/s)
@@ -31131,14 +31098,6 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
 /area/outdoors/town/noble_manor/blue)
-"pcK" = (
-/obj/effect/waterfall{
-	pixel_y = 0
-	},
-/turf/open/water/river{
-	dir = 1
-	},
-/area/outdoors/river)
 "pcL" = (
 /obj/structure/fluff/wallclock,
 /turf/open/floor/metal/alt,
@@ -47143,12 +47102,6 @@
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
-"wyx" = (
-/obj/effect/waterfall{
-	pixel_x = -5
-	},
-/turf/open/water/river,
-/area/under/cavewet)
 "wyB" = (
 /obj/structure/stationary_bell{
 	name = "clock tower bell";
@@ -75895,7 +75848,7 @@ ozq
 ozq
 ozq
 ozq
-pcK
+cyz
 qFx
 qFx
 qFx
@@ -76097,7 +76050,7 @@ ozq
 ozq
 ozq
 ozq
-pcK
+cyz
 qFx
 qFx
 qFx
@@ -76299,7 +76252,7 @@ ozq
 nZm
 ozq
 ozq
-pcK
+cyz
 qFx
 qFx
 qFx
@@ -76501,7 +76454,7 @@ ozq
 ozq
 ozq
 ozq
-pcK
+cyz
 qFx
 qFx
 qFx
@@ -78921,7 +78874,7 @@ qFx
 qFx
 qFx
 qFx
-iYV
+ozq
 ozq
 qFx
 qFx
@@ -79124,7 +79077,7 @@ qFx
 qFx
 qFx
 ozq
-iYV
+ozq
 qFx
 qFx
 qFx
@@ -109470,7 +109423,7 @@ hlw
 dID
 qFx
 qFx
-hdI
+lma
 hdI
 hdI
 qct
@@ -122024,7 +121977,7 @@ qFx
 qFx
 dID
 con
-mbZ
+rVo
 rVo
 lma
 lma
@@ -122226,7 +122179,7 @@ qFx
 qFx
 dID
 con
-muC
+rVo
 rVo
 lma
 lma
@@ -149871,7 +149824,7 @@ hlw
 dID
 qFx
 nNY
-bst
+glV
 bst
 bst
 qFx
@@ -150679,7 +150632,7 @@ hlw
 dID
 qFx
 qFx
-qct
+nNY
 bst
 bst
 bst
@@ -162424,7 +162377,7 @@ dID
 dID
 dID
 uHr
-mbZ
+rVo
 glV
 glV
 glV
@@ -162626,7 +162579,7 @@ qFx
 qFx
 qFx
 uHr
-muC
+rVo
 glV
 glV
 glV
@@ -190271,8 +190224,8 @@ hlw
 hlw
 dID
 qFx
-qFx
-bst
+nNY
+qct
 bst
 bst
 qFx
@@ -191080,7 +191033,7 @@ hlw
 dID
 qFx
 qFx
-bst
+qct
 bst
 bst
 bst
@@ -203020,7 +202973,7 @@ qFx
 qFx
 fwd
 unl
-fAH
+pGM
 pGM
 nMv
 nMv
@@ -203222,7 +203175,7 @@ qFx
 qFx
 fwd
 unl
-wyx
+pGM
 pGM
 nMv
 nMv
@@ -244021,7 +243974,7 @@ hSx
 hSx
 hSx
 jvU
-jPx
+cet
 lNp
 efe
 jgi
