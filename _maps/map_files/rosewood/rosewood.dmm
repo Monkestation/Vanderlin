@@ -14311,10 +14311,6 @@
 /obj/structure/train/dinghy,
 /turf/open/water,
 /area/outdoors/river)
-"jqm" = (
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/open/openspace,
-/area/indoors/town/keep)
 "jqA" = (
 /obj/structure/stairs/stone/d,
 /turf/open/floor/concrete,
@@ -215855,7 +215851,7 @@ jiV
 jiV
 jiV
 jiV
-jqm
+hyb
 hyb
 hyb
 hyb
