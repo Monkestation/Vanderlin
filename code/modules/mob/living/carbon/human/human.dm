@@ -359,6 +359,10 @@
 	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
 		to_chat(src, "<span class='warning'>[C.name] is dead!</span>")
 		return
+	var/heal_amount = get_skill_level(/datum/skill/misc/medicine, TRUE) * 2
+	if(heal_amount == 0)
+		to_chat(src, "<span class='warning'>I don't know how to do this!</span>")
+		return 0
 	if(is_mouth_covered())
 		to_chat(src, "<span class='warning'>Remove your mask first!</span>")
 		return 0
@@ -375,6 +379,13 @@
 
 		var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
 		var/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
+		if(C.needs_heart())
+			var/obj/item/organ/heart/H = C.getorganslot(ORGAN_SLOT_HEART)
+			if(!H)
+				to_chat(src, "<span class='danger'>They don't even have a heart!</span>")
+				return 0
+			if(!H.beating && prob(heal_amount))
+				H.Restart()
 
 		if(C.health > C.crit_threshold)
 			return
@@ -383,9 +394,8 @@
 		add_stress(/datum/stress_event/perform_cpr)
 		C.cpr_time = world.time
 		log_combat(src, C, "CPRed")
-
 		if(they_breathe && they_lung)
-			var/suff = min(C.getOxyLoss(), 7)
+			var/suff = min(C.getOxyLoss(), heal_amount)
 			C.adjustOxyLoss(-suff)
 			C.updatehealth()
 			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air enter your lungs... It feels good...</span>")

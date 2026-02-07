@@ -278,6 +278,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/farmer
 	name = "Soilson"
 	icon_state = "arrow"
+	jobspawn_override = list("Soilson", "Soilchild")
 
 /obj/effect/landmark/start/beastmonger
 	name = "Butcher"

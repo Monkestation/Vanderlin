@@ -1017,6 +1017,8 @@
 		var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
 		if(B)
 			B.brain_death = FALSE
+		var/obj/item/organ/heart/H = getorgan(/obj/item/organ/heart)
+		H.beating = TRUE
 
 	if(heal_flags & HEAL_TRAUMAS)
 		cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)

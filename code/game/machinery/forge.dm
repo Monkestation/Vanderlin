@@ -6,6 +6,7 @@
 	base_state = "forge"
 	density = TRUE
 	anchored = TRUE
+	fueluse = 1
 	on = FALSE
 	climbable = TRUE
 	climb_time = 0

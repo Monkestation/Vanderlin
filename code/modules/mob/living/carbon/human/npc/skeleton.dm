@@ -18,11 +18,25 @@
 	cmode_music = 'sound/music/cmode/antag/combatskeleton.ogg'
 	var/should_have_aggro = TRUE
 
+
 /mob/living/carbon/human/species/skeleton/npc/no_equipment
 	skel_outfit = null
 
+/mob/living/carbon/human/species/skeleton/npc/after_creation()
+	. = ..()
+	configure_mind()
+
+/mob/living/carbon/human/species/skeleton/npc/proc/configure_mind()
+	adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+	adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
+
 /mob/living/carbon/human/species/skeleton/no_equipment
-	skel_outfit = null
+	skel_outfit = /datum/outfit/greater_skeleton
 
 /mob/living/carbon/human/species/skeleton/npc
 	ai_controller = /datum/ai_controller/human_npc
@@ -284,16 +298,6 @@
 	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
-	configure_mind()
-
-/mob/living/carbon/human/species/skeleton/npc/warrior/skilled/proc/configure_mind()
-	adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
 
 /mob/living/carbon/human/species/skeleton/death_arena
 	should_have_aggro = FALSE

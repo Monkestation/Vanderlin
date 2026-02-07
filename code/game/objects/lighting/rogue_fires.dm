@@ -141,7 +141,8 @@
 	temperature_change = 0
 
 /obj/machinery/light/fueled/wallfire/candle/Initialize(mapload)
-	if(mapload && !istype(get_area(src), /area/indoors/soilsons))
+	var/A = get_area(src)
+	if(mapload && !is_type_in_list(A, list(/area/indoors/soilsons, /area/outdoors/farm)))
 		fueluse = 0
 	. = ..()
 

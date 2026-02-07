@@ -1,5 +1,5 @@
 /mob/living/carbon/human/species/zizombie
-	name = "rotten deadite"
+	name = "deadite"
 
 	icon = 'icons/roguetown/mob/monster/zizombie.dmi'
 	icon_state = "zizombie"
@@ -11,6 +11,13 @@
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/kick)
 	possible_rmb_intents = list()
+
+/mob/living/carbon/human/species/zizombie/after_creation()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
+
 
 /mob/living/carbon/human/species/zizombie/npc
 	ai_controller = /datum/ai_controller/human_npc
@@ -32,9 +39,6 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	job = "Ambush zizombie"
 	AddComponent(/datum/component/combat_noise, list("rage" = 1, "scream" = 1))
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/random)
 	dodgetime = 15
 	canparry = TRUE
@@ -152,16 +156,36 @@
 //			equipOutfit(O)
 
 /datum/species/zizombie
-	name = "zizombie"
+	name = "Deadite Spawn"
 	id = SPEC_ID_ZIZOMBIE
 	species_traits = list()
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
+	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE, TRAIT_DISFIGURED)
 	nojumpsuit = 1
 	sexes = 1
 	damage_overlay_type = "human"
 	changesource_flags = WABBAJACK
 	var/raceicon = "zizombie"
+	native_language = "Zizo Chant"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/zizombie
+
+	offset_features_m = list(
+		OFFSET_RING = list(0,0),\
+		OFFSET_GLOVES = list(0,0),\
+		OFFSET_WRISTS = list(0,0),\
+		OFFSET_HANDS = list(0,0),\
+		OFFSET_CLOAK = list(0,1),\
+		OFFSET_FACEMASK = list(0,1),\
+		OFFSET_HEAD = list(0,1),\
+		OFFSET_FACE = list(0,1),\
+		OFFSET_BELT = list(0,1),\
+		OFFSET_BACK = list(0,1),\
+		OFFSET_NECK = list(0,0),\
+		OFFSET_MOUTH = list(0,0),\
+		OFFSET_PANTS = list(0,0),\
+		OFFSET_SHIRT = list(0,1),\
+		OFFSET_ARMOR = list(0,1),\
+		OFFSET_UNDIES = list(0,0),\
+	)
 
 /datum/species/zizombie/update_damage_overlays(mob/living/carbon/human/H)
 	return
@@ -198,26 +222,26 @@
 		qdel(src)
 		return
 	var/should_update = FALSE
-	if(amount > 20 MINUTES)
+	if(amount > 10 MINUTES)
 		for(var/obj/item/bodypart/B in C.bodyparts)
 			if(!B.skeletonized)
 				B.skeletonized = TRUE
 				should_update = TRUE
-	else if(amount > 12 MINUTES)
+	else if(amount > 5 MINUTES)
 		for(var/obj/item/bodypart/B in C.bodyparts)
 			if(!B.rotted)
 				B.rotted = TRUE
 				should_update = TRUE
-			if(B.rotted && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
+			if(B.rotted && amount < 9 MINUTES && !(FACTION_MATTHIOS in C.faction))
 				var/turf/open/T = C.loc
 				if(istype(T))
-					T.pollute_turf(/datum/pollutant/rot, 4)
+					T.pollute_turf(/datum/pollutant/rot, 10)
 	if(should_update)
-		if(amount > 20 MINUTES)
+		if(amount > 10 MINUTES)
 			C.update_body()
 			qdel(src)
 			return
-		else if(amount > 12 MINUTES)
+		else if(amount > 5 MINUTES)
 			C.update_body()
 
 ///////////////////////////////////////////////////////////// EVENTMIN ZIZOMBIES

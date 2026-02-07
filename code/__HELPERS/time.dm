@@ -27,6 +27,7 @@ GLOBAL_VAR_INIT(forecast, FALSE)
 GLOBAL_VAR_INIT(todoverride, FALSE)
 /// The current day of the week, range from 1-7 (Moon's Dae - Sun's Dae)
 GLOBAL_VAR_INIT(dayspassed, FALSE)
+GLOBAL_VAR_INIT(totaldayspassed, FALSE)
 
 /proc/settod()
 	var/time = station_time()
@@ -47,6 +48,7 @@ GLOBAL_VAR_INIT(dayspassed, FALSE)
 	if(GLOB.tod != oldtod)
 		if(GLOB.tod == "dawn")
 			GLOB.dayspassed++
+			GLOB.totaldayspassed++
 			if(GLOB.dayspassed == 8)
 				GLOB.dayspassed = 1
 			SStreasury.distribute_estate_incomes()
@@ -61,30 +63,23 @@ GLOBAL_VAR_INIT(dayspassed, FALSE)
 	if(!mind)
 		return
 	if(GLOB.tod == "dawn")
-		var/text_to_show
-		switch(GLOB.dayspassed)
-			if(1)
-				text_to_show = "DAWN OF THE FIRST DAE\nMOON'S DAE"
-			if(2)
-				text_to_show = "DAWN OF THE SECOND DAE\nTIW'S DAE"
-			if(3)
-				text_to_show = "DAWN OF THE THIRD DAE\nWEDDING'S DAE"
-			if(4)
-				text_to_show = "DAWN OF THE FOURTH DAE\nTHULE'S DAE"
-			if(5)
-				text_to_show = "DAWN OF THE FIFTH DAE\nFREYJA'S DAE"
-			if(6)
-				text_to_show = "DAWN OF THE SIXTH DAE\nSATURN'S DAE"
-			if(7)
-				text_to_show = "DAWN OF THE SEVENTH DAE\nSUN'S DAE"
-		if(!text_to_show)
-			return
+		var/text_to_show = "DAWN OF THE [uppertext(thtotext(GLOB.totaldayspassed + 2))] DAE\n"
+		var/t_color = "#7c5b10"
+		switch(GLOB.totaldayspassed)
+			if(1 to 2)
+				text_to_show += "SINCE THE SIEGE OF ROSEWOOD"
+			if(3 to 4)
+				t_color = "#381521"
+				text_to_show += "SINCE THE BLACK BRIAR OUTBREAK"
+			else
+				t_color = "#c70d0d"
+				text_to_show += "SINCE THE GODS ABANDONED YOU"
 		if(text_to_show in mind.areas_entered)
 			return
 		mind.areas_entered += text_to_show
 		var/atom/movable/screen/area_text/T = new()
 		client.screen += T
-		T.maptext = MAPTEXT_CENTER({"<span style='vertical-align:top;color: #7c5b10; font-size: 150%;
+		T.maptext = MAPTEXT_CENTER({"<span style='vertical-align:top;color: [t_color]; font-size: 150%; \
 					text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;'>[text_to_show]</span>"})
 		T.maptext_width = 205
 		T.maptext_height = 209

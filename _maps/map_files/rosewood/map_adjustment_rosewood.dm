@@ -29,7 +29,6 @@
 		/datum/job/monk = 7,
 		/datum/job/templar = 1,
 		/datum/job/churchling = 5,
-		/datum/job/farmer = 4
 	)
 
 	blacklist = list(

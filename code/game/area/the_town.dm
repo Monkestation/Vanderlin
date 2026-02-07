@@ -187,7 +187,6 @@
 	background_track_dusk = null
 	background_track_night = null
 
-
 ///// OUTDOORS AREAS (again, for some reason)
 
 /area/outdoors/town

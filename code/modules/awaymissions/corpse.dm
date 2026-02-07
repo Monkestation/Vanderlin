@@ -202,6 +202,7 @@
 			if(!isnum(T))
 				outfit.vars[slot] = T
 		H.equipOutfit(outfit)
+		H.regenerate_clothes()
 	if(!isnum(weapon_type) && istype(H.ai_controller))
 		H.ai_controller.set_blackboard_key(BB_WEAPON_TYPE, weapon_type)
 

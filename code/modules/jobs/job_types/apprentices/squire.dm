@@ -19,7 +19,7 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatManAtArms.ogg'
 	exp_types_granted = list(EXP_TYPE_GARRISON)
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_ELF
 	allowed_ages = list(AGE_CHILD)
 
 	outfit = /datum/outfit/squire

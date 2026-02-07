@@ -2,7 +2,7 @@
 	icon = 'icons/roguetown/misc/lighting.dmi'
 	brightness = 8
 	nightshift_allowed = FALSE
-	fueluse = 20 MINUTES
+	fueluse = 15 MINUTES
 	bulb_colour = "#f9ad80"
 	bulb_power = 1
 	var/datum/looping_sound/soundloop = null // = /datum/looping_sound/fireloop

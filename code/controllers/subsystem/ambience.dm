@@ -94,16 +94,14 @@ SUBSYSTEM_DEF(ambience)
 /area/proc/get_current_buzz(is_lit)
 	var/time = GLOB.tod
 	var/used = background_track
-	if(!is_lit && (uses_alt_droning || !used))
+	if(time == "dusk" && background_track_night)
+		used = background_track_night
+	else if (time == "dawn" && background_track_dusk)
+		used = background_track_dusk
+	if(uses_alt_droning || !used)
 		used = safepick(alternative_droning)
 		if(time == "night" && length(alternative_droning_night))
 			used = safepick(alternative_droning_night)
-	else if(is_lit)
-		if(time == "dusk" && background_track_night)
-			used = background_track_night
-		else if (time == "dawn" && background_track_dusk)
-			used = background_track_dusk
-
 	return used
 
 /// Tries to play looping ambience to the mob

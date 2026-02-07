@@ -66,6 +66,7 @@
 	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
 	if(H)
 		H.beat = BEAT_NONE
+		H.beating = FALSE
 
 	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
 		MOBTIMER_SET(src, MT_DEATHDIED)

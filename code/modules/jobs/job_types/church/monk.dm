@@ -216,3 +216,68 @@
 			neck = /obj/item/clothing/neck/psycross/silver
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/plain
+
+
+/datum/outfit/fake_monk
+	name = "Zombie Acolyte"
+	belt = /obj/item/storage/belt/leather/rope
+	beltl = /obj/item/key/church
+	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
+
+/datum/outfit/fake_monk/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	switch(pick(ALL_TEMPLE_PATRONS))
+		if(/datum/patron/divine/astrata)
+			head = /obj/item/clothing/head/roguehood/astrata
+			wrists = /obj/item/clothing/wrists/wrappings
+			shoes = /obj/item/clothing/shoes/sandals
+			armor = /obj/item/clothing/shirt/robe/astrata
+		if(/datum/patron/divine/necra)
+			head = /obj/item/clothing/head/padded/deathshroud
+			shoes = /obj/item/clothing/shoes/boots
+			pants = /obj/item/clothing/pants/trou/leather/mourning
+			armor = /obj/item/clothing/shirt/robe/necra
+			if(equipped_human.age == AGE_OLD)
+				l_hand = /obj/item/weapon/mace/cane/necran
+			else
+				backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
+		if(/datum/patron/divine/eora)
+			mask = /obj/item/clothing/face/operavisage
+			shoes = /obj/item/clothing/shoes/sandals
+			armor = /obj/item/clothing/shirt/robe/eora
+		if(/datum/patron/divine/noc)
+			head = /obj/item/clothing/head/roguehood/nochood
+			wrists = /obj/item/clothing/wrists/nocwrappings
+			shoes = /obj/item/clothing/shoes/sandals
+			armor = /obj/item/clothing/shirt/robe/noc
+		if(/datum/patron/divine/pestra)
+			head = /obj/item/clothing/head/padded/pestra
+			shoes = /obj/item/clothing/shoes/sandals
+			armor = /obj/item/clothing/shirt/robe/pestra
+		if(/datum/patron/divine/dendor)
+			head = /obj/item/clothing/head/padded/briarthorns
+			shoes = /obj/item/clothing/shoes/sandals
+			armor = /obj/item/clothing/shirt/robe/dendor
+		if(/datum/patron/divine/abyssor)
+			head = /obj/item/clothing/head/padded/abyssor
+			shoes = /obj/item/clothing/shoes/boots
+			armor = /obj/item/clothing/shirt/robe/abyssor
+		if(/datum/patron/divine/ravox)
+			head = /obj/item/clothing/head/helmet/leather/headscarf
+			shoes = /obj/item/clothing/shoes/boots
+			shirt = /obj/item/clothing/armor/gambeson/light
+			armor = /obj/item/clothing/armor/leather
+			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
+		if(/datum/patron/divine/xylix)
+			head = /obj/item/clothing/head/roguehood/colored/random
+			shoes = /obj/item/clothing/shoes/boots
+			armor = /obj/item/clothing/shirt/robe/colored/purple
+		if(/datum/patron/divine/malum)
+			head = /obj/item/clothing/head/headband/colored/red
+			shoes = /obj/item/clothing/shoes/boots
+			armor = /obj/item/clothing/shirt/robe/colored/red
+			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
+		else
+			head = /obj/item/clothing/head/roguehood/colored/random
+			shoes = /obj/item/clothing/shoes/boots
+			armor = /obj/item/clothing/shirt/robe/colored/plain

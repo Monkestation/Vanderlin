@@ -154,7 +154,7 @@
 	lose_text = span_notice("My throat stops itching.")
 
 /datum/brain_trauma/mild/sick_cough/on_life()
-	if(prob(6) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
+	if(owner.getorganslot(ORGAN_SLOT_LUNGS) && prob(6) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
 		owner.emote("sickcough", forced = TRUE)
 		if(prob(12))
 			to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))

@@ -42,9 +42,8 @@
 
 	var/mob/living/carbon/C = parent
 	var/is_zombie
-	if(C.mind)
-		if(C.mind.has_antag_datum(/datum/antagonist/zombie))
-			is_zombie = TRUE
+	if(C.mind?.has_antag_datum(/datum/antagonist/zombie))
+		is_zombie = TRUE
 	if(!is_zombie)
 		if(C.stat != DEAD)
 			qdel(src)
@@ -67,13 +66,13 @@
 	for(var/obj/item/bodypart/B in C.bodyparts)
 		if(!B.skeletonized && B.is_organic_limb())
 			if(!B.rotted)
-				if(amount > 25 MINUTES)
+				if(amount > 20 MINUTES)
 					B.rotted = TRUE
 					findonerotten = TRUE
 					shouldupdate = TRUE
 					C.change_stat(STATKEY_CON, -8)
 			else
-				if(amount > 45 MINUTES)
+				if(amount > 30 MINUTES)
 					if(!is_zombie)
 						B.skeletonize()
 						if(C.dna && C.dna.species)
@@ -84,8 +83,8 @@
 					findonerotten = TRUE
 	if(findonerotten)
 		var/turf/open/T = C.loc
-		if(istype(T) && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
-			T.pollute_turf(/datum/pollutant/rot, 9)
+		if(istype(T) && amount < 18 MINUTES && !(FACTION_MATTHIOS in C.faction))
+			T.pollute_turf(/datum/pollutant/rot, 14)
 			if(soundloop && soundloop.stopped && !is_zombie)
 				soundloop.start()
 		else

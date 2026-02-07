@@ -90,7 +90,7 @@
 /datum/outfit/dark_itinerant_knight/equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	H.underwear = "Femleotard"
-	H.underwear_color = COLOR_SILVER
+	H.underwear_color = CLOTHING_ASH_GREY
 
 /datum/migrant_role/dark_itinerant_squire
 	name = "Underling Squire"
@@ -103,7 +103,7 @@
 	\nAll you served beside are now gone or worse and all you served against share a similar fate. The Tundra is silent with nothing but an eerie wind, will you fall silent next, or will you survive among the ashes?"
 	outfit = /datum/outfit/zizo_remnant
 	allowed_sexes = list(FEMALE)
-	allowed_races = list(SPEC_ID_DROW, SPEC_ID_HALF_DROW)
+	allowed_races = list(SPEC_ID_DROW)
 	allowed_ages = list(AGE_ADULT)
 	department_flag = UNDEAD
 	selection_color = JCOLOR_NOBLE
@@ -201,7 +201,7 @@
 /datum/outfit/zizo_remnant/equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	H.underwear = "Femleotard"
-	H.underwear_color = COLOR_SILVER
+	H.underwear_color = CLOTHING_ASH_GREY
 
 /datum/job/zizo_slave
 	title = "Zizo Slave"
