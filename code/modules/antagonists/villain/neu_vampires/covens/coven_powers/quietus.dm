@@ -160,7 +160,7 @@
 	icon_state = "grabbing_greyscale"
 	color = COLOR_RED_LIGHT
 
-/obj/item/melee/touch_attack/quietus/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/melee/touch_attack/quietus/afterattack(atom/target, mob/living/carbon/user, proximity, list/modifiers)
 	if(!proximity)
 		return
 	if(isliving(target))

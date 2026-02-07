@@ -188,7 +188,7 @@
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_EMOTION_STORE, throwingdatum?.thrower, EMOTION_SCARED, "[throwingdatum.thrower] throw thing at me!", 0)
 
-/mob/living/simple_animal/hostile/gnome_homunculus/attackby(obj/item/item, mob/living/user, params)
+/mob/living/simple_animal/hostile/gnome_homunculus/attackby(obj/item/item, mob/living/user, list/modifiers)
 	// Check what kind of item interaction this is
 	if(istype(item, /obj/item/reagent_containers/food))
 		handle_food_gift(item, user)

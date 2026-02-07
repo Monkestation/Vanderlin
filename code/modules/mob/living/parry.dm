@@ -107,7 +107,7 @@
 	if(!istype(shield))
 		return 0
 
-	var/shield_skill = max(1, get_skill_level(/datum/skill/combat/shields))
+	var/shield_skill = max(1, get_skill_level(/datum/skill/combat/shields, TRUE))
 
 	return shield.wdefense * shield_skill * 2
 /**
@@ -125,11 +125,11 @@
 	var/weapon_parry = FALSE
 
 	if(mainhand && mainhand.can_parry)
-		mainhand_defense += (mind ? (get_skill_level(mainhand.associated_skill) * 20) : 20)
+		mainhand_defense += (mind ? (get_skill_level(mainhand.associated_skill, TRUE) * 20) : 20)
 		mainhand_defense += (mainhand.wdefense * 10)
 
 	if(offhand && offhand.can_parry)
-		offhand_defense += (mind ? (get_skill_level(offhand.associated_skill) * 20) : 20)
+		offhand_defense += (mind ? (get_skill_level(offhand.associated_skill, TRUE) * 20) : 20)
 		offhand_defense += (offhand.wdefense * 10)
 		if(istype(offhand, /obj/item/weapon/shield))
 			force_shield = TRUE
@@ -145,7 +145,7 @@
 		used_weapon = offhand
 		highest_defense += offhand_defense
 
-	var/unarmed_defense = mind ? (get_skill_level(/datum/skill/combat/unarmed) * 20) : 20
+	var/unarmed_defense = mind ? (get_skill_level(/datum/skill/combat/unarmed, TRUE) * 20) : 20
 	if(highest_defense <= unarmed_defense)
 		weapon_parry = FALSE
 	else
@@ -154,7 +154,7 @@
 	return list(
 		"used_weapon" = used_weapon,
 		"weapon_parry" = weapon_parry,
-		"defense_bonus" = weapon_parry ? highest_defense : (get_skill_level(/datum/skill/combat/unarmed) * 20)
+		"defense_bonus" = weapon_parry ? highest_defense : (get_skill_level(/datum/skill/combat/unarmed, TRUE) * 20)
 	)
 
 /**
@@ -171,20 +171,20 @@
 	var/skill_modifier = 0
 
 	if(weapon_parry)
-		defender_skill = get_skill_level(used_weapon.associated_skill)
+		defender_skill = get_skill_level(used_weapon.associated_skill, TRUE)
 	else
-		defender_skill = get_skill_level(/datum/skill/combat/unarmed)
+		defender_skill = get_skill_level(/datum/skill/combat/unarmed, TRUE)
 
 	if(user.mind)
 		var/obj/item/master = intenty.get_master_item()
 		if(master)
-			attacker_skill = user.get_skill_level(master.associated_skill)
+			attacker_skill = user.get_skill_level(master.associated_skill, TRUE)
 			skill_modifier -= (attacker_skill * 20)
 
 			if(master.wbalance > 0 && user.STASPD > src.STASPD)
 				skill_modifier -= ((user.STASPD - src.STASPD) * 10)
 		else
-			attacker_skill = user.get_skill_level(/datum/skill/combat/unarmed)
+			attacker_skill = user.get_skill_level(/datum/skill/combat/unarmed, TRUE)
 			skill_modifier -= (attacker_skill * 20)
 
 

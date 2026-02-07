@@ -67,7 +67,7 @@
 	if(drainage)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
+/obj/item/natural/worms/leech/attack(mob/living/M, mob/user, list/modifiers)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
@@ -80,7 +80,7 @@
 		if(completely_silent)
 			used_time = 0
 		else
-			used_time = (7 SECONDS - (H.get_skill_level(/datum/skill/misc/medicine) * 1 SECONDS))/2
+			used_time = (7 SECONDS - (H.get_skill_level(/datum/skill/misc/medicine, TRUE) * 1 SECONDS))/2
 		if(!do_after(user, used_time, H))
 			return
 		if(!H)
@@ -216,7 +216,7 @@
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
-/obj/item/natural/worms/leech/parasite/attack_self(mob/user, params)
+/obj/item/natural/worms/leech/parasite/attack_self(mob/user, list/modifiers)
 	. = ..()
 	giving = !giving
 	if(giving)

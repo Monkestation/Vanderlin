@@ -177,7 +177,7 @@
 	. = ..()
 	icon_state = "stunmace[on]"
 
-/obj/item/weapon/mace/stunmace/attack_self(mob/user, params)
+/obj/item/weapon/mace/stunmace/attack_self(mob/user, list/modifiers)
 	if(on)
 		on = FALSE
 	else

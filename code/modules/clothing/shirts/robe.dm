@@ -271,7 +271,7 @@
 	hoodtype = /obj/item/clothing/head/hooded/magehood/adept
 
 
-/obj/item/clothing/shirt/robe/newmage/adept/MiddleClick(mob/user, params)
+/obj/item/clothing/shirt/robe/newmage/adept/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!do_after(user, 20, target = user))
 		return
@@ -308,7 +308,7 @@
 	item_state = "sorcerer-red"
 	hoodtype = /obj/item/clothing/head/hooded/magehood/sorcerer
 
-/obj/item/clothing/shirt/robe/newmage/sorcerer/MiddleClick(mob/user, params)
+/obj/item/clothing/shirt/robe/newmage/sorcerer/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!do_after(user, 20, target = user))
 		return
@@ -346,7 +346,7 @@
 	sleevetype = "shirt"
 	hoodtype = null
 
-/obj/item/clothing/shirt/robe/newmage/warlock/MiddleClick(mob/user, params)
+/obj/item/clothing/shirt/robe/newmage/warlock/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!do_after(user, 20, target = user))
 		return

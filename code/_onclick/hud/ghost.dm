@@ -15,8 +15,8 @@
 
 /atom/movable/screen/ghost/orbit/rogue/Click(location, control, params)
 	var/mob/dead/observer/G = usr
-	var/paramslist = params2list(params)
-	if(paramslist["right"]) // screen objects don't do the normal Click() stuff so we'll cheat
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK)) // screen objects don't do the normal Click() stuff so we'll cheat
 		if(G.client?.holder)
 			G.follow()
 	else

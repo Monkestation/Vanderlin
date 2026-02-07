@@ -73,7 +73,7 @@
 			qdel(essence)
 
 
-/obj/machinery/essence/combiner/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/combiner/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 		if(!vial.contained_essence || vial.essence_amount <= 0)
@@ -155,7 +155,7 @@
 		return TRUE
 	..()
 
-/obj/machinery/essence/combiner/attack_hand(mob/user, params)
+/obj/machinery/essence/combiner/attack_hand(mob/user, list/modifiers)
 	if(processing)
 		to_chat(user, span_warning("The combiner is currently processing."))
 		return

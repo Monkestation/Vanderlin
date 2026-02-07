@@ -200,8 +200,8 @@
 	if(M.mind)
 		for(var/skill_type in SSskills.all_skills)
 			var/datum/skill/skill = GetSkillRef(skill_type)
-			if(skill in M.skills?.known_skills)
-				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill]] "
+			if(skill_type in M.skills?.known_skills)
+				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill_type]] "
 			else
 				body += "<li>[initial(skill.name)]: 0"
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];increase_skill=[REF(M)];skill=[skill.type]'>+</a> "

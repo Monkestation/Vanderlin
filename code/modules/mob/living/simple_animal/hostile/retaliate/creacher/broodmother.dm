@@ -205,7 +205,7 @@
 	adjust_biomass(2, round(nutriments / 150, 0.1))
 	adjust_biomass(3, round(nutriments / 500, 0.1))
 
-/mob/living/simple_animal/hostile/retaliate/troll/broodmother/MiddleClickOn(atom/A, params) // it's so bad :sob: I'm so sorry
+/mob/living/simple_animal/hostile/retaliate/troll/broodmother/MiddleClickOn(atom/A, list/modifiers) // it's so bad :sob: I'm so sorry
 	. = ..()
 	if(isanimal(A))
 		var/mob/living/simple_animal/animal = A

@@ -9,7 +9,7 @@
 	)
 	outfit = /datum/outfit/mercenary/gallowglass
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 2
+	total_positions = 0 //Kaledon isn't in
 	cmode_music = 'sound/music/cmode/Combat_Dwarf.ogg'
 
 	jobstats = list(

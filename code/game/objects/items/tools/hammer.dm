@@ -59,7 +59,7 @@
 			else
 				repair_percent = 0
 		else
-			repair_percent *= user.get_skill_level(attacked_prosthetic.anvilrepair)
+			repair_percent *= user.get_skill_level(attacked_prosthetic.anvilrepair, TRUE)
 
 		playsound(src,'sound/items/bsmith3.ogg', 100, FALSE)
 		if(repair_percent)
@@ -92,7 +92,7 @@
 			else
 				repair_percent = 0
 		else
-			repair_percent *= user.get_skill_level(attacked_item.anvilrepair)
+			repair_percent *= user.get_skill_level(attacked_item.anvilrepair, TRUE)
 
 		playsound(src,'sound/items/bsmithfail.ogg', 40, FALSE)
 		if(repair_percent)
@@ -118,7 +118,7 @@
 			to_chat(user, span_warning("I don't know how to repair this.."))
 			return
 		var/amt2raise = floor(user.STAINT * 0.25)
-		repair_percent *= user.get_skill_level(attacked_structure.hammer_repair)
+		repair_percent *= user.get_skill_level(attacked_structure.hammer_repair, TRUE)
 		attacked_structure.repair_damage(attacked_structure.max_integrity * repair_percent)
 		blacksmith_mind.add_sleep_experience(attacked_structure.hammer_repair, amt2raise)
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)

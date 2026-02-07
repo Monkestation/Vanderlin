@@ -6,7 +6,7 @@
 	var/foodextracted = null
 	var/canthresh = TRUE
 
-/obj/item/natural/chaff/attack_hand_secondary(mob/user, params)
+/obj/item/natural/chaff/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -29,7 +29,7 @@
 		new /obj/item/natural/fibers(loc)
 		qdel(src)
 
-/obj/item/natural/chaff/attackby(obj/item/I, mob/living/user, params)
+/obj/item/natural/chaff/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/pitchfork))
 		if(user.used_intent.type == DUMP_INTENT)
 			var/obj/item/weapon/pitchfork/W = I
@@ -49,7 +49,7 @@
 					return
 
 	if(istype(I, /obj/item/weapon/mace/woodclub))//reused some commented out code
-		var/statboost = user.STASTR*3 + (user?.get_skill_level(/datum/skill/labor/farming)*5) //a person with no skill and 10 strength will thresh about a third of the stalks on average
+		var/statboost = user.STASTR*3 + (user?.get_skill_level(/datum/skill/labor/farming, TRUE)*5) //a person with no skill and 10 strength will thresh about a third of the stalks on average
 		var/threshchance = clamp(statboost, 20, 100)
 		for(var/obj/item/natural/chaff/C in get_turf(src))
 			if(C == src)//so it doesnt delete itself and stop the loop

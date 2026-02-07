@@ -57,7 +57,7 @@
 
 	show_recipe_menu(user)
 
-/obj/machinery/light/fueled/cauldron/AltClick(mob/user)
+/obj/machinery/light/fueled/cauldron/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(!user.default_can_use_topic(src))
 		return
@@ -147,7 +147,7 @@
 
 	return rgb(r, g, b)
 
-/obj/machinery/light/fueled/cauldron/attackby(obj/item/I, mob/user, params)
+/obj/machinery/light/fueled/cauldron/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/essence_vial))
 		return ..()
 	var/obj/item/essence_vial/vial = I

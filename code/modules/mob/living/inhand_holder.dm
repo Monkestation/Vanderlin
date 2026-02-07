@@ -57,7 +57,7 @@
 		LAZYADD(held_mob.stored_enchantments, path)
 
 
-/obj/item/mob_holder/attackby(obj/item/I, mob/living/user, params)
+/obj/item/mob_holder/attackby(obj/item/I, mob/living/user, list/modifiers)
 	I.attack(held_mob, user, user.zone_selected)
 
 /obj/item/mob_holder/proc/update_visuals(mob/living/L)
