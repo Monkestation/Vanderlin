@@ -24,7 +24,7 @@
 	///do we explode on impact?
 	var/impact_explode = FALSE
 	///odds we fail on ignite
-	var/prob2fail = 5
+	var/prob2fail = 0
 
 	/// Bitfields which prevent the grenade from detonating if set. Includes ([GRENADE_DUD]|[GRENADE_USED])
 	var/dud_flags = NONE
