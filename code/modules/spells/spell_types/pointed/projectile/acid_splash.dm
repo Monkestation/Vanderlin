@@ -35,9 +35,9 @@
 /datum/action/cooldown/spell/projectile/acid_splash/organ
 	name = "Acid Spray"
 	desc = "Vomit up acid against a foe, at great risk to yourself."
-	sound = null
+	sound = 'sound/vo/vomit.ogg'
+	charge_sound = null
 
-	invocation = null
 	invocation_type = INVOCATION_EMOTE
 	invocation = span_userdanger("<b>%CASTER</b> belches acid!")
 	invocation_self_message = span_danger("I spit acid!")
@@ -49,7 +49,7 @@
 
 	has_visual_effects = FALSE
 
-	// Times cast without a failure
+	/// Times cast without a failure
 	var/sucessive_uses = 0
 
 /datum/action/cooldown/spell/projectile/acid_splash/organ/before_cast(atom/cast_on)
@@ -58,6 +58,7 @@
 		return
 
 	if(prob(10 + (sucessive_uses * 5)))
+		sucessive_uses = 0
 		owner.visible_message(span_warning("[owner] chokes on their own acid!"), span_userdanger("I choke on acid! it burns!"))
 		owner.emote("gags", forced = TRUE)
 		owner.take_damage(15, TOX)
