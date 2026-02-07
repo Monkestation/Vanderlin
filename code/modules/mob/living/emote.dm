@@ -54,6 +54,8 @@
 
 /proc/send_prayer(mob/living/follower, prayer, patron_name)
 	var/ident_string = "[follower.key]/([follower.real_name]) (follower of [patron_name])"
+	if(follower.has_quirk(/datum/quirk/vice/godfearing))
+		ident_string += "[SPAN_GOD_GENERIC("(GODFEARING)")]"
 	/// Usually I hate not using spans properly, but in this case it's going to make my life easier.
 	var/lowercase_god = "generic"
 	if(patron_name in COLORFUL_PATRONS)
