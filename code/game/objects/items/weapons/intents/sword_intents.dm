@@ -160,12 +160,10 @@
 	blade_class = BCLASS_CUT
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
-	damfactor = 1.1
-	misscost = 10
+	misscost = 8
 	swingdelay = 0.5
 
 /datum/intent/katana/cut/one_hand_cut
-	damfactor = 1
 	misscost = 4
 	swingdelay = 0
 
@@ -192,13 +190,12 @@
 	icon_state = "inarc"
 	attack_verb = list("sweeps", "arcs")
 	animname = "cut"
-	blade_class = BCLASS_CUT
+	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
-	reach = 2
 	swingdelay = 1.5
-	chargetime = 1.2
-	misscost = 20
+	clickcd = 14
+	misscost = 14
 
 /datum/intent/katana/precision_cut
 	name = "precision cut"
@@ -214,6 +211,5 @@
 	swingdelay = 3
 	chargetime = 3
 	chargedrain = 1
-	misscost = 25
+	misscost = 18
 	charging_slowdown = 1
-	clickcd = 15

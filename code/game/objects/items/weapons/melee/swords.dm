@@ -1492,8 +1492,7 @@
 	name = "samjeongdo"
 	desc = "A gold-stained with cloud patterns on the groove. One of a kind."
 	icon_state = "eastsword3"
-	force = DAMAGE_SWORD + 5
-	force_wielded = DAMAGE_SWORD_WIELD + 5
+	force = DAMAGE_SWORD + 3
 	wdefense = GREAT_PARRY
 
 /obj/item/weapon/sword/sabre/hook
