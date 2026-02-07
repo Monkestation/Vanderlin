@@ -95,7 +95,6 @@
 	if (active)
 		return
 	if(usr)
-		//if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
 		arm_grenade(usr)
 	else
 		arm_grenade(null)
@@ -107,7 +106,6 @@
 	if (active)
 		return
 	if(usr)
-		//if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
 		arm_grenade(usr)
 	else
 		arm_grenade(null)
@@ -157,7 +155,7 @@
  */
 /obj/item/explosive/proc/detonate(mob/living/lanced_by)
 	if(usr)
-		if(botch_check(usr))
+		if(botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
 			extinguish()
 			visible_message(span_warning("The [src] fizzles out!"))
 			return FALSE
