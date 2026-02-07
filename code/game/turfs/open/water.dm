@@ -327,7 +327,7 @@
 				if(get_dir(src, newloc) == dir)
 					return
 			if(user.mind && !user.buckled)
-				var/drained = max(15 - (user.get_skill_level(/datum/skill/misc/swimming) * 5), 1)
+				var/drained = max(15 - (user.get_skill_level(/datum/skill/misc/swimming, TRUE) * 5), 1)
 //				drained += (user.checkwornweight()*2)
 				drained += user.get_encumbrance() * 50
 				if(!user.adjust_stamina(drained))
@@ -508,7 +508,7 @@
 		return 0
 	var/returned = slowdown
 	if(user.mind && swim_skill)
-		returned = returned - (user.get_skill_level(/datum/skill/misc/swimming))
+		returned = returned - (user.get_skill_level(/datum/skill/misc/swimming, TRUE))
 	return returned
 
 /*	..................   Bath & Pool   ................... */

@@ -22,23 +22,6 @@
 		if(SKILL_LEVEL_LEGENDARY)
 			return 35
 
-/datum/skill/combat/proc/get_skill_dodge_drain(level) //added parry drain/neg in parries and dodges
-	switch(level)
-		if(SKILL_LEVEL_NONE)
-			return 30
-		if(SKILL_LEVEL_NOVICE)
-			return 60
-		if(SKILL_LEVEL_APPRENTICE)
-			return 90
-		if(SKILL_LEVEL_JOURNEYMAN)
-			return 120
-		if(SKILL_LEVEL_EXPERT)
-			return 180
-		if(SKILL_LEVEL_MASTER)
-			return 240
-		if(SKILL_LEVEL_LEGENDARY)
-			return 300
-
 /datum/skill/combat/knives
 	name = "Knife-fighting"
 	desc = "Knife-fighting is a skill that represents your character's ability to fight with knives and short blades. The higher your skill in Knife-fighting, the more accurate you'll be with knives and the better you'll be at parrying with them."

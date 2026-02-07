@@ -98,7 +98,7 @@
 		to_chat(user, "<span class='info'>\The [src]'s mechanism is already wound!</span>")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	var/windtime = 3.5
-	windtime = windtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
+	windtime = windtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
 	if(do_after(user, windtime SECONDS, src) && !wound)
 		to_chat(user, "<span class='info'>I wind \the [src]'s mechanism.</span>")
 		playsound(src, 'sound/foley/winding.ogg', 100, FALSE)
@@ -149,7 +149,7 @@
 			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
 			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 		BB.damage = BB.damage * damage_mult // 80 * 1.5 = 130 of damage.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
+		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3) //+3 accuracy per level in firearms
 	playsound(src, 'sound/combat/Ranged/muskclick.ogg', 100, FALSE)
 	cocked = FALSE
 	rammed = FALSE
@@ -172,7 +172,7 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attackby(obj/item/I, mob/user, list/modifiers)
 	var/ramtime = 5.5
-	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
+	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
 
 	// Check if the item used is a ramrod
 	if(istype(I, /obj/item/ramrod))
@@ -400,7 +400,7 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attackby(obj/item/I, mob/user, params)
 	var/ramtime = 5.5
-	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
+	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(istype(H.get_active_held_item(), /obj/item/weapon/knife/dagger/bayonet))

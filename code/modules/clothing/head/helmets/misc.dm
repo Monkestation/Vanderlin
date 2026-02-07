@@ -185,8 +185,8 @@
 	item_weight = 5.5 * IRON_MULTIPLIER
 
 /obj/item/clothing/head/helmet/ironpot/lakkariancap
-	name = "lakkarian crowned cap"
-	desc = "a crimson red iron cap decorated with gold trims and embellishments. The design of this Lakkarian helmet hasn't changed in centuries."
+	name = "embellished crowned cap"
+	desc = "A crimson red iron cap decorated with gold trims and embellishments."
 	icon_state = "lakkaricap"
 	item_state = "lakkaricap"
 	sellprice = 50

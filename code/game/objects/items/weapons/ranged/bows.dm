@@ -93,7 +93,7 @@
 			if(user.STAPER > 10) // Every point over 10 PER adds 10% damage
 				BB.damage = BB.damage * (user.STAPER / 10)
 		BB.damage *= damfactor // Apply bow's inherent damage multiplier regardless of PER
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
+		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows, TRUE) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
 	. = ..()
 	if(.)
 		if(istype(user) && user.mind)
@@ -141,7 +141,7 @@
 		var/newtime = 0
 		//skill block
 		newtime = newtime + 10
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows) * (10/6))
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (10/6))
 		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
 		newtime = newtime + 10
 		newtime = newtime - (master.STASTR * (10/20))
@@ -181,7 +181,7 @@
 		var/newtime = 0
 		//skill block
 		newtime = newtime + 10
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows) * (10/6))
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (10/6))
 		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
 		newtime = newtime + 10
 		newtime = newtime - (master.STASTR * (10/20))

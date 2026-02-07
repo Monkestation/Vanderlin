@@ -62,7 +62,7 @@
 			return
 		else
 			to_chat(user, "I begin threading the needle with additional fibers...")
-			if(do_after(user, 6 SECONDS - user.get_skill_level(/datum/skill/misc/sewing), I))
+			if(do_after(user, 6 SECONDS - user.get_skill_level(/datum/skill/misc/sewing, TRUE), I))
 				stringamt += 5
 				to_chat(user, "I replenish the needle's thread!")
 				qdel(I)

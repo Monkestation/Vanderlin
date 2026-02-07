@@ -1149,7 +1149,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/lakkarijupon
-	name = "lakkarian jupon"
+	name = "robed jupon"
 	output = /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	requirements = list(/obj/item/natural/cloth = 4,
 				/obj/item/natural/fibers = 2,

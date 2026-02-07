@@ -28,7 +28,7 @@
 
 /obj/item/grown/log/tree/attacked_by(obj/item/I, mob/living/user) //This serves to reward woodcutting
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -64,7 +64,7 @@
 		return
 
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber_alt)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)

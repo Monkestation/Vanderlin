@@ -354,7 +354,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 
 	if(!QDELETED(user) && user.mind && start_time && !(special_effects & FISHING_MINIGAME_RULE_NO_EXP))
 		var/seconds_spent = (world.time - start_time) * 0.1
-		var/extra_exp_malus = user.get_skill_level(/datum/skill/labor/fishing) - difficulty * 0.1
+		var/extra_exp_malus = user.get_skill_level(/datum/skill/labor/fishing, TRUE) - difficulty * 0.1
 		if(extra_exp_malus > 0)
 			experience_multiplier /= (1 + extra_exp_malus * EXPERIENCE_MALUS_MULT)
 		if(auto_handling)
