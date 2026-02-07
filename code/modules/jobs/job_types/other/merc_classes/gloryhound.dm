@@ -15,10 +15,10 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/polearms = 1,
 		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/axesmaces = 2, //for bashing people with a cudgel
+		/datum/skill/combat/riding = 2, 
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/craft/crafting = 1,
