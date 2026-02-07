@@ -595,6 +595,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 		var/used_neworgan = FALSE
 		new_organ = new new_organ()
+		new_organ.build_colors_for_accessory(color_key_source_list_from_carbon(organ_holder))
+
 		var/should_have = new_organ.get_availability(src, organ_holder)
 
 		// Check for an existing organ, and if there is one check to see if we should remove it
@@ -731,7 +733,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(C.hud_used)
 		C.hud_used.update_locked_slots()
 
-	if(ishuman(C))
+	if(ishuman(C) && !pref_load)
 		random_character(C)
 	else
 		regenerate_organs(C, old_species, pref_load = pref_load)
