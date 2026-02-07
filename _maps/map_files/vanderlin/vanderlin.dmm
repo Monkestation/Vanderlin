@@ -46672,7 +46672,7 @@
 /obj/structure/closet/dirthole/closed/loot,
 /obj/item/rope/chain,
 /obj/structure/gravemarker,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/outdoors/exposed/cell)
 "woQ" = (
 /obj/structure/minecart_rail{
