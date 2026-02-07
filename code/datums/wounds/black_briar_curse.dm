@@ -321,9 +321,11 @@
 		root_vine.dir = affected.dir
 		root_vine.buckle_mob(affected, TRUE)
 	var/obj/item/organ/brain/brain = affected.getorgan(/obj/item/organ/brain)
+	var/obj/item/organ/heart/heart = affected.getorgan(/obj/item/organ/heart)
 	var/obj/item/organ/eyes/eyes = affected.getorganslot(ORGAN_SLOT_EYES)
 	var/obj/item/organ/lungs/lungs = affected.getorganslot(ORGAN_SLOT_LUNGS)
 	brain?.brain_death = TRUE
+	heart?.beating = TRUE
 	if(eyes)
 		qdel(eyes)
 	if(lungs)

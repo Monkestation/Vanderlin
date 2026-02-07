@@ -13416,8 +13416,7 @@
 "iNb" = (
 /obj/effect/mob_spawn/human/corpse/damaged{
 	outfit = /datum/outfit/fake_monk;
-	name = "dead acolyte";
-	mob_type = s
+	name = "dead acolyte"
 	},
 /turf/open/floor/sand,
 /area/indoors/town/church/chapel)
