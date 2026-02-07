@@ -44,7 +44,6 @@
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	belt = /obj/item/storage/belt/leather/mercenary
 	armor = /obj/item/clothing/armor/cuirass
-	beltl = /obj/item/weapon/sword
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/shield/heater
 	shirt = /obj/item/clothing/armor/gambeson
@@ -55,3 +54,11 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/hunting = 1
 	)
+
+/datum/outfit/mercenary/gloryhound/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	if(equipped_human.dna?.species?.id == SPEC_ID_KOBOLD)
+		beltl = /obj/item/weapon/sword/short //kobolds get a short sword due to their lack of strength
+	else
+		beltl = /obj/item/weapon/sword
+
+	. = ..()
