@@ -21,7 +21,7 @@
 		QDEL_NULL(heirloom)
 	return ..()
 
-/obj/structure/fireaxecabinet/attackby(obj/item/I, mob/user, params)
+/obj/structure/fireaxecabinet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/sword/long/heirloom) && !heirloom)
 		var/obj/item/weapon/sword/long/heirloom/F = I
 		if(HAS_TRAIT(F, TRAIT_WIELDED))

@@ -155,13 +155,11 @@
 	client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
 	build_all_button_icons()
 
-/datum/action/coven/proc/handle_click(mob/source, atom/target, click_parameters)
+/datum/action/coven/proc/handle_click(mob/source, atom/target, list/modifiers)
 	SIGNAL_HANDLER
 
-	var/list/modifiers = params2list(click_parameters)
-
 	//ensure we actually need a target, or cancel on right click
-	if (!targeting || modifiers["right"])
+	if (!targeting || LAZYACCESS(modifiers, RIGHT_CLICK))
 		end_targeting()
 		return
 
@@ -187,11 +185,10 @@
 /atom/movable/screen/movable/action_button/Click(location, control, params)
 	if(istype(linked_action, /datum/action/coven))
 		var/list/modifiers = params2list(params)
-
 		//increase on right click, decrease on shift right click
-		if(LAZYACCESS(modifiers, "right"))
+		if(LAZYACCESS(modifiers, RIGHT_CLICK))
 			var/datum/action/coven/coven = linked_action
-			if (LAZYACCESS(modifiers, "alt"))
+			if (LAZYACCESS(modifiers, ALT_CLICKED))
 				coven.switch_level(-1)
 			else
 				coven.switch_level(1)

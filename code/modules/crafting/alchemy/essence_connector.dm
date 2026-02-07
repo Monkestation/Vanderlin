@@ -9,7 +9,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	COOLDOWN_DECLARE(next_scan)
 
-/obj/item/essence_connector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/essence_connector/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag)
 		. = ..()
 		return
@@ -24,7 +24,7 @@
 	else
 		start_connection(machine, user)
 
-/obj/item/essence_connector/attack_self(mob/user, params)
+/obj/item/essence_connector/attack_self(mob/user, list/modifiers)
 	if(connecting)
 		cancel_connection(user)
 	else
@@ -86,7 +86,6 @@
 		hud.infodisplay -= src
 		INVOKE_ASYNC(hud, TYPE_PROC_REF(/datum/hud, show_hud), hud.hud_version)
 	return ..()
-
 
 /obj/item/essence_connector/proc/start_connection(obj/machinery/essence/machine, mob/user)
 	source_device = machine

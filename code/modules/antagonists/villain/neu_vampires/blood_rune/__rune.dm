@@ -324,7 +324,7 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 /obj/effect/blood_rune/attack_hand(mob/living/user)
 	trigger(user)
 
-/obj/effect/blood_rune/attackby(obj/I, mob/user)
+/obj/effect/blood_rune/attackby(obj/I, mob/user, list/modifiers)
 	..()
 	if(istype(I, /obj/item/clothing/neck/psycross))
 		to_chat(user, span_notice("You disrupt the vile magic with the deadening field of \the [I]!") )

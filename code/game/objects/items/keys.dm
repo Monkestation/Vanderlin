@@ -55,7 +55,7 @@
 	if(access2add)
 		. += span_info("It has been marked with [access2add[1]], but has not been finished.")
 
-/obj/item/key/custom/attackby(obj/item/I, mob/user, params)
+/obj/item/key/custom/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/weapon/hammer))
 		return ..()
 	if(lockids)
@@ -72,7 +72,7 @@
 	to_chat(user, span_notice("You set the key ID to [input]."))
 	access2add = list("[input]")
 
-/obj/item/key/custom/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/key/custom/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

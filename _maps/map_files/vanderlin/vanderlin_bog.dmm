@@ -16842,7 +16842,6 @@
 "vsS" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/clothing/face/lordmask/naledi,
-/obj/item/clothing/head/crown/hemhem,
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
 "vtP" = (

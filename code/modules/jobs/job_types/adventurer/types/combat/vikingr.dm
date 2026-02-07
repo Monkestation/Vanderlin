@@ -5,6 +5,7 @@
 	outfit = /datum/outfit/adventurer/vikingr
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
+	total_positions = 0 //Kaledon isn't in
 
 /datum/outfit/adventurer/vikingr/pre_equip(mob/living/carbon/human/H)
 	..()

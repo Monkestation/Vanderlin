@@ -270,5 +270,17 @@
 
 	/// A ref of the area we're taking our ambient loop from.
 	var/area/ambience_tracked_area
+
+	var/obj/effect/spell_rune/spell_rune
+	var/datum/intent/curplaying
+	var/accent = ACCENT_DEFAULT
+	var/cmode_timer
+	var/monitor_key
+
+	var/last_aimhchange = 0
+	var/aimheight = 11
+	var/cmode_music = 'sound/music/cmode/combat.ogg'
+
 	/// new title given by an admin.
 	var/admin_title = null
+

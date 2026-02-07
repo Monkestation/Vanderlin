@@ -4,7 +4,7 @@
 
 	Otherwise pretty standard.
 */
-/mob/living/carbon/UnarmedAttack(atom/A, proximity, params, atom/source)
+/mob/living/carbon/UnarmedAttack(atom/A, proximity, list/modifiers, atom/source)
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		return FALSE
 
@@ -45,10 +45,10 @@
 		if(L.checkmiss(src))
 			return TRUE
 		if(!L.checkdefense(used_intent, src))
-			if(LAZYACCESS(params2list(params), RIGHT_CLICK))
-				if(L.attack_hand_secondary(src, params) != SECONDARY_ATTACK_CALL_NORMAL)
+			if(LAZYACCESS(modifiers, RIGHT_CLICK))
+				if(L.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 					return TRUE
-			L.attack_hand(src, params)
+			L.attack_hand(src, modifiers)
 		return TRUE
 	var/item_skip = FALSE
 	if(isitem(A))
@@ -72,12 +72,12 @@
 					visible_message(span_warning("[src] pushes [AM]."))
 				changeNext_move(CLICK_CD_MELEE)
 				return TRUE
-	if(LAZYACCESS(params2list(params), RIGHT_CLICK))
-		if(A.attack_hand_secondary(src, params) != SECONDARY_ATTACK_CALL_NORMAL)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		if(A.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 			return TRUE
-	A.attack_hand(src, params)
+	A.attack_hand(src, modifiers)
 
-/mob/living/attack_hand_secondary(mob/user, params)
+/mob/living/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -89,9 +89,8 @@
 			user.rmb_intent.special_attack(user, src)
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		// Throw hands
-		return
 
-/mob/living/carbon/human/attack_hand_secondary(mob/user, params)
+/mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -109,7 +108,7 @@
 			user.make_apprentice(target)
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/turf/attack_hand_secondary(mob/user, params)
+/turf/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	user.changeNext_move(CLICK_CD_MELEE)
 	user.face_atom(src)
@@ -227,12 +226,12 @@
 			INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
 
 
-/mob/living/MiddleClickOn(atom/A, params)
+/mob/living/MiddleClickOn(atom/A, list/modifiers)
 	..()
 	if(!mmb_intent)
 		if(!A.Adjacent(src))
 			return
-		A.MiddleClick(src, params)
+		A.MiddleClick(src, modifiers)
 	else
 		switch(mmb_intent.type)
 			if(INTENT_KICK)
@@ -317,19 +316,19 @@
 				steal_action(A)
 
 //Return TRUE to cancel other attack hand effects that respect it.
-/atom/proc/attack_hand(mob/user, params)
+/atom/proc/attack_hand(mob/user, list/modifiers)
 	. = FALSE
 	if(!(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND))
 		add_fingerprint(user)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user, params) & COMPONENT_CANCEL_ATTACK_CHAIN)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		. |= TRUE
 	if(interaction_flags_atom & INTERACT_ATOM_ATTACK_HAND)
 		. |= _try_interact(user)
 
 /// When the user uses their hand on an item while holding right-click
 /// Returns a SECONDARY_ATTACK_* value.
-/atom/proc/attack_hand_secondary(mob/user, params)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, params) & COMPONENT_CANCEL_ATTACK_CHAIN)
+/atom/proc/attack_hand_secondary(mob/user, list/modifiers)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return SECONDARY_ATTACK_CALL_NORMAL
 
@@ -380,7 +379,7 @@
 	return FALSE
 
 
-/mob/living/carbon/human/RangedAttack(atom/A, mouseparams)
+/mob/living/carbon/human/RangedAttack(atom/A, list/modifiers)
 	. = ..()
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
@@ -602,7 +601,7 @@
 /*
 	Animals & All Unspecified
 */
-/mob/living/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
+/mob/living/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(!isliving(A))
 		if(used_intent.type == INTENT_GRAB)
 			var/obj/structure/AM = A
@@ -628,7 +627,7 @@
 /*
 	Monkeys
 */
-/mob/living/carbon/monkey/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
+/mob/living/carbon/monkey/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		if(a_intent != INTENT_HARM || is_muzzled())
 			return
@@ -663,37 +662,34 @@
 	Brain
 */
 
-/mob/living/brain/UnarmedAttack(atom/A, proximity_flag, params, atom/source)//Stops runtimes due to attack_animal being the default
+/mob/living/brain/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)//Stops runtimes due to attack_animal being the default
 	return
 
 /*
 	Simple animals
 */
 
-/mob/living/simple_animal/UnarmedAttack(atom/A, proximity, params, atom/source)
+/mob/living/simple_animal/UnarmedAttack(atom/A, proximity, list/modifiers, atom/source)
 	if(!dextrous)
 		return ..()
 	if(!ismob(A))
-		A.attack_hand(src)
+		A.attack_hand(src, modifiers)
 		update_inv_hands()
-
 
 /*
 	Hostile animals
 */
 
-/mob/living/simple_animal/hostile/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
+/mob/living/simple_animal/hostile/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	target = A
 	if(dextrous && !ismob(A))
 		..()
 	else
 		AttackingTarget(A)
 
-
-
 /*
 	New Players:
 	Have no reason to click on anything at all.
 */
-/mob/dead/new_player/ClickOn()
+/mob/dead/new_player/ClickOn(atom/clicked_atom, params)
 	return

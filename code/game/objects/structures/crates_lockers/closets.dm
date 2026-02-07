@@ -210,7 +210,7 @@
 		bust_open()
 	. = ..()
 
-/obj/structure/closet/attackby(obj/item/I, mob/user, params)
+/obj/structure/closet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(user in src)
 		return TRUE
 	if(tool_interact(I, user))

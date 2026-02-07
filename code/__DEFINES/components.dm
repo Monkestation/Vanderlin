@@ -328,11 +328,11 @@
 #define COMSIG_OBSERVABLE_CHANGE "comsig_observable_change"
 ///sent to targets during the process_hit proc of projectiles
 #define COMSIG_PELLET_CLOUD_INIT "pellet_cloud_init"
-///called in /obj/item/gun/process_fire (user, target, params, zone_override)
+///called in /obj/item/gun/process_fire (user, target, modifiers, zone_override)
 #define COMSIG_GRENADE_DETONATE "grenade_prime"
 //called from many places in grenade code (armed_by, nade, det_time, delayoverride)
 #define COMSIG_MOB_GRENADE_ARMED "grenade_mob_armed"
-///called in /obj/item/gun/process_fire (user, target, params, zone_override)
+///called in /obj/item/gun/process_fire (user, target, modifiers, zone_override)
 #define COMSIG_GRENADE_ARMED "grenade_armed"
 
 #define COMSIG_MOB_HEALTHHUD_UPDATE "update_healthhud"

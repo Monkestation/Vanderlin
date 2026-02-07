@@ -32,7 +32,7 @@
 	grid_height = 96
 	var/time_multiplier = 1 //multipler to do_after times
 
-/obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(user.used_intent.type != /datum/intent/shovelscoop)
 		return
@@ -85,7 +85,7 @@
 	item_damage_type = "blunt"
 
 
-/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user)
+/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	if(. && heldclod && get_turf(M))
 		heldclod.forceMove(get_turf(M))
@@ -248,10 +248,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	var/unfoldedbag_path = /obj/structure/closet/burial_shroud
 
-/obj/item/burial_shroud/attack_self(mob/user, params)
+/obj/item/burial_shroud/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity)
+/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))
@@ -326,10 +326,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	var/unfoldedbag_path = /obj/structure/closet/body_bag
 
-/obj/item/bodybag/attack_self(mob/user, params)
+/obj/item/bodybag/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/bodybag/afterattack(atom/target, mob/user, proximity)
+/obj/item/bodybag/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))

@@ -19,7 +19,7 @@
 	fueluse = 30 MINUTES
 	crossfire = FALSE
 
-/obj/machinery/light/fueled/smelter/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/smelter/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/tongs))
 		if(!actively_smelting) // Prevents an exp gain exploit. - Foxtrot
 			var/obj/item/weapon/tongs/T = W
@@ -113,7 +113,7 @@
 	return ..()
 
 // Gaining experience from just retrieving bars with your hands would be a hard-to-patch exploit.
-/obj/machinery/light/fueled/smelter/attack_hand(mob/user, params)
+/obj/machinery/light/fueled/smelter/attack_hand(mob/user, list/modifiers)
 	if(on)
 		to_chat(user, "<span class='warning'>It's too hot to retrieve bars with your hands.</span>")
 		return

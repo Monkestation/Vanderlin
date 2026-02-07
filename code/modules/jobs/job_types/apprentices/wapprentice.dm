@@ -50,6 +50,8 @@
 		/datum/skill/combat/polearms = 2
 	)
 
+	skill_multipliers = list(/datum/skill/magic/arcane = 1.25)
+
 /datum/job/mageapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_ADULT)
