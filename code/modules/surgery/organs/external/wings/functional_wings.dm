@@ -121,60 +121,53 @@
 /datum/action/item_action/organ_action/use/flight/do_effect(trigger_flags)
 	. = ..()
 	if(trigger_flags & TRIGGER_SECONDARY_ACTION)
-		to_chat(owner, "I am currently [flying ? "" : "not"] flying.")
+		owner.balloon_alert(owner, "[flying ? "" : "not"] flying.")
 		return
+
 	if(!flying)
 		if(!can_takeoff())
 			return
 		if(do_after(owner, 5 SECONDS, owner, extra_checks = CALLBACK(src, PROC_REF(can_takeoff))))
 			start_flying()
 		return
+
 	if(!owner.can_zTravel(direction = DOWN))
 		stop_flying()
-	else if(do_after(owner, 5 SECONDS, owner))
+	else if(do_after(owner, 1 SECONDS, owner))
 		stop_flying()
 
 /datum/action/item_action/organ_action/use/flight/proc/can_takeoff()
 	if(!isliving(owner))
-		to_chat(owner, span_warning("How did you get this..."))
 		return FALSE
 
-	if(!owner.can_zTravel(direction = UP))
-		to_chat(owner, span_warning("I need space to fly!"))
-		return FALSE
-
+	// Only stop flight if there is somewhere to go
+	// This is so you can fly on the top Z level
 	var/turf/above_turf = GET_TURF_ABOVE(get_turf(owner))
-	if(!isopenspace(above_turf))
-		to_chat(owner, span_warning("I need space to fly!"))
+	if(above_turf && (!isopenspace(above_turf) || !owner.can_zTravel(direction = UP)))
+		owner.balloon_alert(owner, "can't fly up!")
 		return FALSE
 
 	return can_fly()
 
 /datum/action/item_action/organ_action/use/flight/proc/can_fly()
 	if(!isliving(owner))
-		to_chat(owner, span_warning("How did you get this..."))
 		return FALSE
 
 	var/mob/living/flier = owner
 
 	if(flier.get_encumbrance() > 0.7)
-		to_chat(flier, span_warning("I am too heavy!"))
+		owner.balloon_alert(owner, "too heavy!")
 		return FALSE
 
-	if(!isturf(flier.loc))
-		to_chat(flier, span_warning("I need space to fly!"))
+	if(!isturf(flier.loc) || flier.body_position != STANDING_UP)
+		owner.balloon_alert(owner, "can't my spread wings!")
 		return FALSE
 
-	if(flier.pulledby?.grab_state >= GRAB_AGGRESSIVE)
-		to_chat(flier, span_warning("I can't fly while being grabbed so tightly!"))
+	if(flier.incapacitated())
+		owner.balloon_alert(owner, "incapacitated!")
 		return FALSE
 
-	if(flier.body_position != STANDING_UP)
-		to_chat(flier, span_warning("I can't spread my wings!"))
-		return FALSE
-
-	if(IS_DEAD_OR_INCAP(flier))
-		to_chat(flier, span_warning("I cannot fly in this state!"))
+	if(flier.stat < CONSCIOUS)
 		return FALSE
 
 	return TRUE
