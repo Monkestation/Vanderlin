@@ -156,6 +156,8 @@
 		if(isliving(AM))
 			var/mob/living/L = AM
 			var/snap = TRUE
+			if(HAS_TRAIT(L, TRAIT_NO_BRIAR_DEATH))
+				return ..()
 			if(L.throwing)
 				return ..()
 

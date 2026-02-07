@@ -3631,7 +3631,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep)
@@ -3948,7 +3951,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/sand,
 /area/indoors/town/keep)
@@ -6614,7 +6620,9 @@
 /obj/effect/mob_spawn/human/corpse/damaged/briar{
 	outfit = /datum/outfit/servant;
 	name = "servant";
-	possible_ages = list("Child", "Adult")
+	possible_ages = list("Child", "Adult");
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -6679,7 +6687,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/cobble/snow,
 /area/outdoors/town/keep)
@@ -9637,7 +9648,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/snow/patchy,
 /area/outdoors/town/keep)
@@ -10042,7 +10056,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/keep)
@@ -10319,7 +10336,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/keep)
@@ -11872,6 +11892,16 @@
 /obj/structure/table/wood/plain,
 /turf/open/floor/cobble,
 /area/indoors/soilsons)
+"hOr" = (
+/obj/effect/mob_spawn/human/corpse/damaged/briar{
+	outfit = /datum/outfit/watchman/ranger;
+	name = "maa archer";
+	backl = null;
+	backpack_contents = null;
+	beltl = null
+	},
+/turf/open/floor/wood,
+/area/indoors/town/steward)
 "hOJ" = (
 /obj/structure/flora/grass/herb/cursedrosa/spreader/instant/heavy,
 /turf/open/floor/woodturned,
@@ -12734,7 +12764,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/sand,
 /area/outdoors/town/keep)
@@ -13619,7 +13652,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -14375,7 +14411,6 @@
 /obj/item/reagent_containers/food/snacks/meat/poultry,
 /obj/item/reagent_containers/food/snacks/meat/fatty,
 /obj/item/reagent_containers/food/snacks/meat/fatty,
-/obj/item/reagent_containers/food/snacks/meat/fatty,
 /obj/item/reagent_containers/food/snacks/egg,
 /turf/open/floor/blocks/newstone,
 /area/under/town/basement)
@@ -14521,7 +14556,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/sand,
 /area/indoors/town/keep)
@@ -14664,8 +14702,6 @@
 /area/indoors/town/keep)
 "jEr" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/reagent_containers/food/snacks/produce/fruit/mango,
-/obj/item/reagent_containers/food/snacks/produce/fruit/blackberry,
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple,
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple,
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple,
@@ -14774,7 +14810,9 @@
 /obj/effect/mob_spawn/human/corpse/damaged/briar{
 	outfit = /datum/outfit/servant;
 	name = "servant";
-	possible_ages = list("Child", "Adult")
+	possible_ages = list("Child", "Adult");
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/blocks/newstone,
 /area/under/town/basement)
@@ -18755,7 +18793,10 @@
 	name = "maa axeman";
 	outfit = /datum/outfit/watchman/axeman;
 	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
-	r_hand = null
+	r_hand = null;
+	beltl = null;
+	backl = null;
+	backpack_contents = null
 	},
 /turf/open/floor/cobble/alt,
 /area/under/town/basement)
@@ -20338,7 +20379,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/tile,
 /area/under/town/basement)
@@ -21138,8 +21182,8 @@
 /obj/structure/door/violet{
 	name = "Meeting Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep)
 "nXN" = (
@@ -22538,13 +22582,10 @@
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32;
 	name = "rosewood flag"
 	},
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep)
 "oQf" = (
@@ -23389,7 +23430,6 @@
 "psK" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep)
 "psW" = (
@@ -23776,7 +23816,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -24856,11 +24899,6 @@
 /obj/item/ore/cursedrosa,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato{
-	pixel_x = 5;
-	pixel_y = -3
-	},
 /turf/open/floor/blocks/newstone/alt,
 /area/under/town/basement)
 "quR" = (
@@ -24912,6 +24950,13 @@
 /area/indoors/town/church)
 "qwt" = (
 /obj/effect/decal/cleanable/sigil/SE,
+/obj/effect/mob_spawn/human/corpse/damaged/briar{
+	outfit = /datum/outfit/watchman/ranger;
+	name = "maa archer";
+	backl = null;
+	backpack_contents = null;
+	beltl = null
+	},
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
 "qwH" = (
@@ -24969,7 +25014,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep)
@@ -25016,7 +25064,10 @@
 "qza" = (
 /obj/effect/mob_spawn/human/corpse/damaged/briar{
 	outfit = /datum/outfit/watchman/ranger;
-	name = "maa archer"
+	name = "maa archer";
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/keep)
@@ -25340,6 +25391,14 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town)
+"qIP" = (
+/obj/effect/decal/cleanable/debris/glass,
+/obj/item/key/atarms{
+	pixel_y = 7;
+	pixel_x = 11
+	},
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "qIT" = (
 /turf/open/floor/dirt,
 /area/under/cavelava)
@@ -27555,7 +27614,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/snow,
 /area/outdoors/town/keep)
@@ -27622,7 +27684,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
@@ -28002,6 +28067,7 @@
 /area/indoors/town/tavern)
 "sIu" = (
 /obj/effect/spawner/map_spawner/loot/medium,
+/obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/sand,
 /area/indoors/town/keep)
 "sIK" = (
@@ -29829,11 +29895,13 @@
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "tVo" = (
-/obj/effect/mob_spawn/human/corpse/damaged{
+/obj/effect/mob_spawn/human/corpse/damaged/briar{
 	outfit = /datum/outfit/watchman/ranger;
-	name = "maa archer"
+	name = "maa archer";
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
-/obj/effect/gibspawner/human,
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
 "tVq" = (
@@ -33365,6 +33433,16 @@
 /obj/structure/bars,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/gate)
+"wkz" = (
+/obj/effect/mob_spawn/human/corpse/damaged/briar{
+	outfit = /datum/outfit/watchman/ranger;
+	name = "maa archer";
+	backl = null;
+	backpack_contents = null;
+	beltl = null
+	},
+/turf/open/floor/cobble,
+/area/outdoors/town/roofs)
 "wkC" = (
 /obj/structure/flora/grass/bush/tundra,
 /turf/open/floor/dirt,
@@ -34558,15 +34636,6 @@
 /area/outdoors/farm)
 "wZf" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/key/atarms,
-/obj/item/key/atarms{
-	pixel_y = 4;
-	pixel_x = -10
-	},
-/obj/item/key/atarms{
-	pixel_y = 7;
-	pixel_x = 11
-	},
 /turf/open/floor/woodturned,
 /area/indoors/town/keep)
 "wZp" = (
@@ -35781,7 +35850,10 @@
 /obj/effect/mob_spawn/human/briar{
 	name = "maa pikeman";
 	outfit = /datum/outfit/watchman/pikeman;
-	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked
+	mob_type = /mob/living/carbon/human/species/elf/snow/base/skilled/naked;
+	backl = null;
+	backpack_contents = null;
+	beltl = null
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
@@ -55093,7 +55165,7 @@ dkb
 dkb
 dkb
 uqd
-jyq
+vIq
 ceZ
 krn
 rda
@@ -94484,7 +94556,7 @@ hqJ
 jyq
 dkb
 aZj
-gFH
+qIP
 lXN
 lXN
 lXN
@@ -132905,7 +132977,7 @@ qWg
 qWg
 plO
 fmF
-fmF
+hOr
 jiV
 jiV
 jiV
@@ -214469,7 +214541,7 @@ gkH
 mOF
 mOF
 uWt
-uWt
+wkz
 uWt
 uWt
 uWt
