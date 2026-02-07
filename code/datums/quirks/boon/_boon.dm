@@ -249,58 +249,58 @@
 		return
 	REMOVE_TRAIT(owner, TRAIT_FORAGER, "[type]")
 
-/datum/quirk/boon/always_prepared
-	name = "Always Prepared"
-	desc = "You start with a cart, lantern, and tent. You're ready for anything."
-	point_value = -6
-	preview_render = FALSE
-	incompatible_quirks = list(
-		/datum/quirk/vice/rough_start,
-	)
-	customization_label = "With or Without Cart"
-	customization_options = list(
-		"With Cart",
-		"Without Cart"
-	)
-
-	var/obj/item/flashlight/flare/torch/lantern/L
-	var/obj/item/tent_kit/tent
-
-/datum/quirk/boon/always_prepared/on_spawn()
-	if(!owner)
-		return
-	if(!customization_value)
-		customization_value = "Without Cart"
-
-
-	var/turf/T = get_turf(owner)
-
-	if(customization_value == "With Cart")
-		L = new(T)
-		tent = new(T)
-		var/obj/structure/handcart/cart = new(T)
-		cart.put_in(null, L)
-		cart.put_in(null, tent)
-
-	to_chat(owner, span_notice("Your equipment is ready. You're well prepared for the journey ahead."))
-
-/datum/quirk/boon/always_prepared/after_job_spawn(datum/job/job)
-	if(customization_value == "Without Cart") // we run this shit back incase jobs changed stuff
-		var/turf/T = get_turf(owner)
-		L = new(T)
-		tent = new(T)
-		if(!owner.equip_to_appropriate_slot(L) || isturf(L.loc)) //missing a limb can cause phantom success procs
-			for(var/obj/item/storage/storage in owner.contents)
-				if(storage)
-					if(SEND_SIGNAL(storage, COMSIG_TRY_STORAGE_INSERT, L, null))
-						break
-		if(!owner.equip_to_appropriate_slot(tent)|| isturf(tent.loc))
-			for(var/obj/item/storage/storage in owner.contents)
-				if(storage)
-					if(SEND_SIGNAL(storage, COMSIG_TRY_STORAGE_INSERT, tent, null))
-						break
-	L = null
-	tent = null
+///datum/quirk/boon/always_prepared
+//	name = "Always Prepared"
+//	desc = "You start with a cart, lantern, and tent. You're ready for anything."
+//	point_value = -6
+//	preview_render = FALSE
+//	incompatible_quirks = list(
+//		/datum/quirk/vice/rough_start,
+//	)
+//	customization_label = "With or Without Cart"
+//	customization_options = list(
+//		"With Cart",
+//		"Without Cart"
+//	)
+//
+//	var/obj/item/flashlight/flare/torch/lantern/L
+//	var/obj/item/tent_kit/tent
+//
+///datum/quirk/boon/always_prepared/on_spawn()
+//	if(!owner)
+//		return
+//	if(!customization_value)
+//		customization_value = "Without Cart"
+//
+//
+//	var/turf/T = get_turf(owner)
+//
+//	if(customization_value == "With Cart")
+//		L = new(T)
+//		tent = new(T)
+//		var/obj/structure/handcart/cart = new(T)
+//		cart.put_in(null, L)
+//		cart.put_in(null, tent)
+//
+//	to_chat(owner, span_notice("Your equipment is ready. You're well prepared for the journey ahead."))
+//
+///datum/quirk/boon/always_prepared/after_job_spawn(datum/job/job)
+//	if(customization_value == "Without Cart") // we run this shit back incase jobs changed stuff
+//		var/turf/T = get_turf(owner)
+//		L = new(T)
+//		tent = new(T)
+//		if(!owner.equip_to_appropriate_slot(L) || isturf(L.loc)) //missing a limb can cause phantom success procs
+//			for(var/obj/item/storage/storage in owner.contents)
+//				if(storage)
+//					if(SEND_SIGNAL(storage, COMSIG_TRY_STORAGE_INSERT, L, null))
+//						break
+//		if(!owner.equip_to_appropriate_slot(tent)|| isturf(tent.loc))
+//			for(var/obj/item/storage/storage in owner.contents)
+//				if(storage)
+//					if(SEND_SIGNAL(storage, COMSIG_TRY_STORAGE_INSERT, tent, null))
+//						break
+//	L = null
+//	tent = null
 
 /datum/quirk/boon/rider
 	name = "Experienced Rider"

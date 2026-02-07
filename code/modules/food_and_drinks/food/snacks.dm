@@ -440,10 +440,10 @@ All foods are distributed among various categories. Use common sense.
 
 				reagents.trans_to(M, amt2take, transfered_by = user, method = INGEST)
 
-				if(M.has_quirk(/datum/quirk/boon/naturalist) && naturalist)
-					for(var/datum/reagent/R in reagents.reagent_list)
-						var/bonus_amount = (R.volume / reagents.total_volume) * amt2take * 0.5
-						M.reagents.add_reagent(R.type, bonus_amount)
+				//if(M.has_quirk(/datum/quirk/boon/naturalist) && naturalist)
+				//	for(var/datum/reagent/R in reagents.reagent_list)
+				//		var/bonus_amount = (R.volume / reagents.total_volume) * amt2take * 0.5
+				//		M.reagents.add_reagent(R.type, bonus_amount)
 
 				bitecount++
 				on_consume(M)
