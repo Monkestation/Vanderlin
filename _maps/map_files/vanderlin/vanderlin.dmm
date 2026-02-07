@@ -15570,6 +15570,10 @@
 	},
 /turf/open/floor/metal,
 /area/indoors/town/keep/magician)
+"hEl" = (
+/obj/structure/fluff/clodpile,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "hEo" = (
 /turf/open/floor/carpet/lord/corner{
 	dir = 8
@@ -46664,6 +46668,12 @@
 /obj/structure/mannequin/male/female,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/shop)
+"woK" = (
+/obj/structure/closet/dirthole/closed/loot,
+/obj/item/rope/chain,
+/obj/structure/gravemarker,
+/turf/open/floor/grass,
+/area/outdoors/exposed/cell)
 "woQ" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -150025,7 +150035,7 @@ hlw
 hlw
 dID
 qFx
-nNY
+glV
 bst
 bst
 bst
@@ -151042,7 +151052,7 @@ bst
 bst
 bst
 bst
-nNY
+fuC
 ido
 ido
 xOx
@@ -189827,7 +189837,7 @@ qFx
 nNY
 nNY
 nNY
-nNY
+lKn
 qFx
 qFx
 qFx
@@ -190230,7 +190240,7 @@ bst
 bst
 qFx
 qFx
-nNY
+lKn
 nNY
 nNY
 qFx
@@ -229824,7 +229834,7 @@ hdI
 qFx
 qFx
 nNY
-nNY
+kJi
 qFx
 qFx
 qFx
@@ -230631,10 +230641,10 @@ bst
 bst
 ueW
 muo
-lvW
+woK
 qFx
 glV
-nNY
+kJi
 qFx
 qFx
 qFx
@@ -230833,7 +230843,7 @@ bst
 bst
 bst
 qct
-lvW
+hEl
 qFx
 qFx
 qFx
@@ -232247,8 +232257,8 @@ qFx
 qFx
 qFx
 qFx
-nNY
-nNY
+fuC
+fuC
 nNY
 qFx
 xAw
@@ -232447,9 +232457,9 @@ qFx
 qFx
 qFx
 qFx
+lKn
 nNY
-nNY
-nNY
+fuC
 nNY
 qFx
 qFx
@@ -233055,7 +233065,7 @@ qFx
 qFx
 nNY
 nNY
-nNY
+lKn
 nNY
 nNY
 nNY
