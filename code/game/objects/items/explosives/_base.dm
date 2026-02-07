@@ -50,9 +50,7 @@
 	var/active = FALSE
 	///How long it takes for a grenade to explode after being armed
 	var/det_time = 5 SECONDS
-	//The Randomized detonation time when armed
-	var/rand_time
-	//can this grenade be ignited by a spark?
+	//can this grenade currently be ignited by a spark?
 	var/allow_spark = FALSE
 	//how long it takes before it can be ignited by a spark
 	var/spark_delay = 2.5 SECONDS
@@ -97,8 +95,8 @@
 	if (active)
 		return
 	if(usr)
-		if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
-			arm_grenade(usr)
+		//if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
+		arm_grenade(usr)
 	else
 		arm_grenade(null)
 	. = ..()
@@ -109,8 +107,8 @@
 	if (active)
 		return
 	if(usr)
-		if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
-			arm_grenade(usr)
+		//if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
+		arm_grenade(usr)
 	else
 		arm_grenade(null)
 	. = ..()
@@ -137,7 +135,7 @@
 /obj/item/explosive/proc/arm_grenade(mob/user, delayoverride, msg = TRUE, volume = 60)
 	log_grenade(user) //Inbuilt admin procs already handle null users
 	playsound(src, 'sound/items/fuse.ogg', 100)
-	rand_time = rand(det_time * 0.5, det_time)
+	var/rand_time = rand(det_time * 0.5, det_time)
 	if(user)
 		add_fingerprint(user)
 		if(msg)
@@ -158,6 +156,11 @@
  * * lanced_by- If this grenade was detonated by an elance, we need to pass that along with the COMSIG_GRENADE_DETONATE signal for pellet clouds
  */
 /obj/item/explosive/proc/detonate(mob/living/lanced_by)
+	if(usr)
+		if(botch_check(usr))
+			extinguish()
+			visible_message(span_warning("The [src] fizzles out!"))
+			return FALSE
 	if (dud_flags)
 		active = FALSE
 		return FALSE
