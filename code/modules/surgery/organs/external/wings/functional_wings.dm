@@ -37,7 +37,7 @@
 
 /obj/item/organ/wings/flight/kobold
 	name = "kobold wings"
-	accessory_type = /datum/sprite_accessory/wings/large/harpyswept
+	accessory_type = /datum/sprite_accessory/wings/kobold
 	flight_for_species = list(SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 	hover_only = TRUE
 	flight_time = 5 SECONDS

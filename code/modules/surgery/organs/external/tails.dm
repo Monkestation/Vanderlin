@@ -65,6 +65,9 @@
 	name = "small lizard tail"
 	accessory_type = /datum/sprite_accessory/tail/kobold
 
+/obj/item/organ/tail/kobold/round
+	accessory_type = /datum/sprite_accessory/tail/kobold/round
+
 /obj/item/organ/tail/triton
 	name = "triton bell"
 	accessory_type = /datum/sprite_accessory/tail/triton
