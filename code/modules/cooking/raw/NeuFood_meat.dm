@@ -36,7 +36,7 @@
 	name = "manflesh"
 	gender = PLURAL
 	foodtype = RAW | MEAT | GROSS
-	bitecount = 3
+	bitesize = 3
 	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 1)
 

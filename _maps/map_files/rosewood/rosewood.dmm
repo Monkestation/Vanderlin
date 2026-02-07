@@ -16000,14 +16000,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/mountains)
-"kCe" = (
-/obj/structure/fluff/customsign{
-	name = "BUT THERE ARE RAILINGS NOW";
-	desc = "A super useful sign noting to watch your step before you fall!";
-	pixel_y = 27
-	},
-/turf/open/floor/greenstone,
-/area/under/town/sewer)
 "kCN" = (
 /obj/structure/fluff/railing/tall{
 	dir = 8
@@ -61355,7 +61347,7 @@ rbI
 rbI
 rbI
 rbI
-kCe
+tuM
 qRF
 tuM
 wDN
