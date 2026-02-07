@@ -365,7 +365,7 @@
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "igreataxe"
 	force = DAMAGE_AXE
-	force_wielded = DAMAGE_HEAVYAXE_WIELD - 5
+	force_wielded = DAMAGE_HEAVYAXE_WIELD - 2
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_GREAT
