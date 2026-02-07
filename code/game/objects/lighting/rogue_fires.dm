@@ -140,13 +140,6 @@
 	soundloop = null
 	temperature_change = 0
 
-/obj/machinery/light/fueled/wallfire/candle/Initialize(mapload)
-	var/A = get_area(src)
-	if(mapload && !is_type_in_list(A, list(/area/indoors/soilsons, /area/outdoors/farm)))
-		fueluse = 0
-	. = ..()
-
-
 /obj/machinery/light/fueled/wallfire/candle/OnCrafted(dirin, mob/user)
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
@@ -261,10 +254,10 @@
 	icon_state = base_state
 
 /obj/machinery/light/fueled/torchholder/seton(s)
-	. = ..()
 	if(!torchy || torchy.fuel <= 0)
 		on = FALSE
-		set_light_on(on)
+	set_light_on(on)
+	. = ..()
 
 /obj/machinery/light/fueled/torchholder/fire_act(added, maxstacks)
 	if(torchy)
@@ -282,7 +275,7 @@
 /obj/machinery/light/fueled/torchholder/Initialize(mapload)
 	var/late_torchy = null
 	if(torchy)
-		if(!mapload || istype(get_area(src), /area/indoors/soilsons))
+		if(!mapload || is_type_in_list(get_area(src), list(/area/indoors/soilsons, /area/outdoors/farm)))
 			torchy = new torchy(src)
 			torchy.spark_act()
 		else if(prob(50)) // no torch
@@ -291,8 +284,8 @@
 			torchy = null
 		else // burnt torch
 			torchy = new torchy(src)
-			torchy.fuel = 10
-			torchy.spark_act()
+			torchy.fuel = 0
+			torchy.icon_state = "torch-empty"
 	. = ..()
 	if(!torchy && late_torchy)
 		torchy = new late_torchy(src)
@@ -588,7 +581,7 @@
 	icon_state = "pyre1"
 	base_state = "pyre"
 	brightness = 10
-	fueluse = 15 MINUTES
+	fueluse = 10 MINUTES
 	layer = BELOW_MOB_LAYER
 	buckleverb = "crucifie"
 	can_buckle = 1

@@ -162,6 +162,7 @@
 	icon_state = "stonelantern1"
 	base_state = "stonelantern"
 	shows_empty = FALSE
+	torchy = /obj/item/flashlight/flare/torch/metal
 
 /obj/machinery/light/fueled/torchholder/hotspring/standing
 	name = "standing stone lantern"

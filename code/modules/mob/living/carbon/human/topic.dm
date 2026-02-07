@@ -144,11 +144,12 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 	return message
 
 /mob/living/carbon/check_heartbeat(mob/user)
-	. = ..()
 	var/list/message = list()
 	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
 	if(istype(H) && H.beating)
 		message += "<B>The heart is still beating.</B>"
+		if(isobserver(user) && stat >= DEAD)
+			message += "<B>But they are still dead.</B>"
 	else
 		message += "<B>No heartbeat...</B>"
 	var/list/soul_message = soul_examine(user)

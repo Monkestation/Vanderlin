@@ -87,7 +87,7 @@ GLOBAL_VAR_INIT(totaldayspassed, FALSE)
 		T.maptext_y = -120
 		playsound_local(src, 'sound/misc/newday.ogg', 60, FALSE)
 		animate(T, alpha = 255, time = 10, easing = EASE_IN)
-		addtimer(CALLBACK(src, PROC_REF(clear_area_text), T), 35)
+		addtimer(CALLBACK(src, PROC_REF(clear_area_text), T), 50)
 	else if(GLOB.tod == "day")
 		playsound_local(src, 'sound/misc/midday.ogg', 100, FALSE)
 	else if(GLOB.tod == "night")

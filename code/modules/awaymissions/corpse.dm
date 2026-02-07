@@ -83,8 +83,6 @@
 		M.gender = mob_gender
 	if(faction)
 		M.faction |= list(faction)
-	if(death)
-		M.death() //Kills the new mob
 	if(patron)
 		M.set_patron(patron)
 	M.adjustOxyLoss(oxy_damage)
@@ -92,9 +90,9 @@
 	M.color = mob_color
 	for(var/trait in traits)
 		ADD_TRAIT(M, trait, TRAIT_GENERIC)
-
 	equip(M)
-
+	if(death)
+		M.death() //Kills the new mob
 	if(ckey)
 		M.ckey = ckey
 		if(show_flavour)
@@ -205,6 +203,9 @@
 		H.regenerate_clothes()
 	if(!isnum(weapon_type) && istype(H.ai_controller))
 		H.ai_controller.set_blackboard_key(BB_WEAPON_TYPE, weapon_type)
+	if(death)
+		var/obj/item/organ/heart/heart = H.getorganslot(ORGAN_SLOT_HEART)
+		heart?.beating = FALSE
 
 
 /obj/effect/mob_spawn/human/briar

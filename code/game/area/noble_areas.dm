@@ -4,24 +4,19 @@
 	name = "Manor"
 	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor"
-	background_track = 'sound/music/death.ogg'
+	background_track = 'sound/music/area/dungeon_01.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/manorgarri
 
 /area/indoors/town/keep/Initialize()
 	. = ..()
-	first_time_text = "THE KEEP OF [uppertext(SSmapping.config.map_name)]"
+	first_time_text = "ROSEWOOD KEEP RUINS"
 
 /area/outdoors/town/keep
 	name = "Keep Grounds"
 	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor_out"
-
-/area/outdoors/town/keep/Initialize()
-	. = ..()
-	first_time_text = "[uppertext(SSmapping.config.map_name)] KEEP GROUNDS"
-
 
 /area/indoors/town/keep/throne
 	name = "Throne Room"
@@ -178,7 +173,7 @@
 	name = "Wizard's Tower"
 	icon_state = "magiciantower"
 	ambient_index = AMBIENCE_MYSTICAL
-	//background_track = 'sound/music/area/magiciantower.ogg'
+	background_track = 'sound/music/area/dungeon_01.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/magiciantower

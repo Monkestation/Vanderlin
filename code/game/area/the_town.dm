@@ -78,20 +78,14 @@
 /area/indoors/town/church
 	name = "church"
 	icon_state = "church"
-	background_track = 'sound/music/area/church.ogg'
-	background_track_dusk = null
-	background_track_night = 'sound/music/area/churchnight.ogg'
 	converted_type = /area/outdoors/exposed/church
 
 /area/outdoors/exposed/church
 	icon_state = "church"
-	background_track = 'sound/music/area/church.ogg'
-	background_track_dusk = null
-	background_track_night = 'sound/music/area/churchnight.ogg'
 
 /area/indoors/town/church/chapel
 	icon_state = "chapel"
-	first_time_text = "THE HOUSE OF THE TEN"
+	first_time_text = "THE RUINS OF THE TEN"
 
 /area/indoors/town/church/inquisition
 	name = "inquisition"
@@ -193,7 +187,7 @@
 	name = "outdoors"
 	icon = 'icons/turf/areas/town.dmi'
 	icon_state = "town"
-	background_track = null
+	background_track = 'sound/music/area/field.ogg'
 	background_track_dusk = 'sound/music/area/abscond.ogg'
 	background_track_night = 'sound/music/area/abscond_reversed.ogg'
 	converted_type = /area/indoors/shelter/town
@@ -269,6 +263,8 @@
 	background_track_night = null
 	soundenv = 5
 	converted_type = /area/outdoors/exposed/under/basement
+
+/area/under/town/basement/inn
 
 /area/outdoors/exposed/under/basement
 	icon_state = "basement"
