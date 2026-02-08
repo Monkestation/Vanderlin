@@ -75,7 +75,7 @@
 	rigged = DICE_BASICALLY_RIGGED
 	rigged_value = outcome
 
-/obj/item/dice/attack_self_secondary(mob/user, params)
+/obj/item/dice/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -83,7 +83,7 @@
 		INVOKE_ASYNC(src, PROC_REF(rig_dice), user)
 		return TRUE
 
-/obj/item/dice/attack_hand_secondary(mob/user, params)
+/obj/item/dice/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -197,7 +197,7 @@
 	AddElement(/datum/element/update_icon_blocker)
 	return ..()
 
-/obj/item/dice/attack_self(mob/user, params)
+/obj/item/dice/attack_self(mob/user, list/modifiers)
 	diceroll(user, TRUE)
 
 /obj/item/dice/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)

@@ -136,7 +136,7 @@
 	budget2change(budget)
 	set_light(0)
 
-/obj/structure/fake_machine/merchantvend/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/merchantvend/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		var/money = I.get_real_price()
 		budget += money

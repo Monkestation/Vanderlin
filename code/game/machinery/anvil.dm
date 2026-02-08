@@ -29,7 +29,7 @@
 		return hingot.attack_hand_secondary(user, modifiers)
 	. = ..()
 
-/obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/anvil/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/tongs))
 		var/obj/item/weapon/tongs/T = W
 		if(smithing)
@@ -242,7 +242,7 @@
 
 	return FALSE
 
-/obj/machinery/anvil/attack_hand(mob/living/user, params)
+/obj/machinery/anvil/attack_hand(mob/user, list/modifiers)
 	if(smithing)
 		to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
 		return

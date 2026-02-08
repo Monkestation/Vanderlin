@@ -124,7 +124,7 @@
 	W.setDir(old_dir)
 	return W
 
-/turf/open/floor/attackby(obj/item/C, mob/user, params)
+/turf/open/floor/attackby(obj/item/C, mob/user, list/modifiers)
 	if(!C || !user)
 		return 1
 	if(..())

@@ -343,7 +343,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
-/obj/structure/activator/attackby(obj/item/I, mob/user, params)
+/obj/structure/activator/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!containment && (istype(I, /obj/item/gun/ballistic/revolver/grenadelauncher) || istype(I, /obj/item/explosive/bottle) || istype(I, /obj/item/flint)))
 		if(!user.transferItemToLoc(I, src))
 			return ..()

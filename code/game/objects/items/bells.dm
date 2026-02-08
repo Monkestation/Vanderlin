@@ -14,7 +14,7 @@
 	hitsound = 'sound/items/bsmith1.ogg'
 	COOLDOWN_DECLARE(bell_ring)
 
-/obj/item/handheld_bell/attack_self(mob/user, params)
+/obj/item/handheld_bell/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, bell_ring))
 		return
@@ -125,7 +125,7 @@
 			new /obj/structure/bell_barrier(adjacent_turf)
 */
 
-/obj/structure/stationary_bell/attackby(obj/item/used_item, mob/user)
+/obj/structure/stationary_bell/attackby(obj/item/used_item, mob/user, list/modifiers)
 	if(istype(used_item, /obj/item/weapon/mace/church))
 		if(!COOLDOWN_FINISHED(src, bell_ring))
 			return

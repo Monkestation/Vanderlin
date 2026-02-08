@@ -647,7 +647,7 @@
 	if(pulling_broke_free && ismob(pulling) && grab_state >= GRAB_AGGRESSIVE)
 		var/wrestling_cooldown_reduction = 0
 		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
-			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling)
+			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
 		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
@@ -1320,9 +1320,9 @@
 	var/my_wrestling = 0
 	var/their_wrestling = 0
 	if(mind)
-		my_wrestling = get_skill_level(/datum/skill/combat/wrestling)
+		my_wrestling = get_skill_level(/datum/skill/combat/wrestling, TRUE)
 	if(pulledby.mind)
-		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling)
+		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
 
 	var/break_chance = 15 // Base chance
 	break_chance += (my_wrestling - their_wrestling)
@@ -1373,8 +1373,8 @@
 
 	var/counter_chance = 20 // Base chance
 
-	counter_chance += get_skill_level(/datum/skill/combat/wrestling) * 4
-	counter_chance += get_skill_level(/datum/skill/combat/unarmed) * 4
+	counter_chance += get_skill_level(/datum/skill/combat/wrestling, TRUE) * 4
+	counter_chance += get_skill_level(/datum/skill/combat/unarmed, TRUE) * 4
 
 	// Stat differences
 	counter_chance += (STASTR - attacker.STASTR) * 2
@@ -1538,8 +1538,8 @@
 	// Modifier of pulledby against the resisting src
 	var/positioning_modifier = L.get_positioning_modifier(src)
 
-	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling))
-	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling))
+	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling, TRUE))
+	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling, TRUE))
 
 	if(has_status_effect(/datum/status_effect/buff/oiled))
 		var/obj/item/grabbing/grabbed = L.get_active_held_item()
@@ -2499,7 +2499,7 @@
 				continue
 			var/probby = 3 * STAPER
 			if(M.mind)
-				probby -= (M.get_skill_level(/datum/skill/misc/sneaking) * 10)
+				probby -= (M.get_skill_level(/datum/skill/misc/sneaking, TRUE) * 10)
 			probby = (max(probby, 5))
 			if(prob(probby))
 				found_ping(get_turf(M), client, "hidden")

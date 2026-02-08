@@ -9,7 +9,7 @@
 	grid_width = 64
 	COOLDOWN_DECLARE(sound_horn)
 
-/obj/item/signal_horn/attack_self(mob/living/user, params)
+/obj/item/signal_horn/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, sound_horn))
 		to_chat(user, span_warning("[src] is not ready to be used yet!"))

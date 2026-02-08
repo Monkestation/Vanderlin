@@ -130,7 +130,7 @@
 	. = ..()
 	icon_state = "[initial(icon_state)][heated ? "_hot" : ""]"
 
-/obj/item/weapon/surgery/cautery/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/surgery/cautery/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
 	var/heating = 0
@@ -182,8 +182,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
 
-
-/obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
 	if(user.get_skill_level(/datum/skill/misc/medicine) < 1)

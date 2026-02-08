@@ -94,14 +94,14 @@ SUBSYSTEM_DEF(treasury)
 		*/
 		amt_to_generate = amt_to_generate - (amt_to_generate * queens_tax)
 		amt_to_generate = round(amt_to_generate)
-		give_money_treasury(amt_to_generate, "Wealth Horde")
+		give_money_treasury(amt_to_generate, "Wealth Hoard")
 		force_set_round_statistic(STATS_REGULAR_VAULT_INCOME, amt_to_generate)
 		record_round_statistic(STATS_VAULT_TOTAL_REVENUE, amt_to_generate)
 		for(var/mob/living/carbon/human/X in GLOB.human_list)
 			if(!X.mind)
 				continue
 			if(is_lord_job(X.mind.assigned_role) || is_consort_job(X.mind.assigned_role) || is_steward_job(X.mind.assigned_role))
-				send_ooc_note("Income from wealth horde: +[amt_to_generate]", name = X.real_name)
+				send_ooc_note("Income from wealth hoard: +[amt_to_generate]", name = X.real_name)
 				return
 
 /*

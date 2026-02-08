@@ -218,7 +218,7 @@
 /obj/item/paper/proc/reset_spamflag()
 	spam_flag = FALSE
 
-/obj/item/paper/attack_self(mob/user, params)
+/obj/item/paper/attack_self(mob/user, list/modifiers)
 	if(mailer)
 		user.visible_message("<span class='notice'>[user] opens the letter from [mailer].</span>")
 		cached_mailer = mailer
@@ -410,7 +410,7 @@
 			format_browse(info_links, usr)
 			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 
-/obj/item/paper/attackby(obj/item/P, mob/living/user, params)
+/obj/item/paper/attackby(obj/item/P, mob/living/user, list/modifiers)
 	if(resistance_flags & ON_FIRE)
 		return ..()
 

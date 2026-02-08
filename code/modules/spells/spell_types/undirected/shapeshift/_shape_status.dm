@@ -38,8 +38,7 @@
 	owner.gender = caster_mob.gender
 	if(!keep_skills)
 		stored_skill_holder = caster_mob.ensure_skills()
-		stored_skill_holder.current = null
-		caster_mob.skills = null
+		stored_skill_holder.set_current(null)
 	owner.regenerate_icons()
 	caster_mob.mind?.transfer_to(owner)
 	caster_mob.forceMove(owner)
@@ -106,6 +105,7 @@
 	owner.mind?.transfer_to(caster_mob)
 
 	if(!keep_skills)
+		caster_mob.skills?.set_current(null)
 		stored_skill_holder.set_current(caster_mob)
 		stored_skill_holder = null
 
@@ -274,6 +274,3 @@
 		return
 
 	restore_caster(TRUE)
-
-/datum/status_effect/shapechange_mob/die_with_form/werewolf
-	id = "werewolf_shapeshift_die_with_form"

@@ -8,6 +8,7 @@
 #define SKILL_LEVEL_MASTER 5 //master
 #define SKILL_LEVEL_LEGENDARY 6 //legendary
 
+#define SKILL_EXP_NONE 0
 #define SKILL_EXP_NOVICE 100
 #define SKILL_EXP_APPRENTICE 250
 #define SKILL_EXP_JOURNEYMAN 500

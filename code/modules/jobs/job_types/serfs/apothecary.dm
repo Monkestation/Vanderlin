@@ -13,7 +13,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	trainable_skills = list(/datum/skill/craft/alchemy)
+	trainable_skills = list(/datum/skill/craft/alchemy = 0.1)
 	max_apprentices = 2
 	apprentice_name = "Apothecary-in-training"
 	can_have_apprentices = TRUE

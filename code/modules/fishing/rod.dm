@@ -100,13 +100,13 @@
 	icon_state = "auto"
 	no_attack = TRUE
 
-/obj/item/fishingrod/attack_self(mob/user, params)
+/obj/item/fishingrod/attack_self(mob/user, list/modifiers)
 	if(user.doing())
 		user.stop_all_doing()
 	else
 		..()
 
-/obj/item/fishingrod/attackby(obj/item/I, mob/user, params)
+/obj/item/fishingrod/attackby(obj/item/I, mob/user, list/modifiers)
 	if(baited && reel && hook && line)
 		return ..()
 
@@ -154,7 +154,7 @@
 					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/fishingrod/attack_hand_secondary(mob/user, params)
+/obj/item/fishingrod/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -266,7 +266,7 @@
 		return
 
 	playsound(src, SFX_REEL, 50, vary = FALSE)
-	var/time = (0.8 - round(user.get_skill_level(/datum/skill/labor/fishing) * 0.04, 0.1)) SECONDS * bait_speed_mult
+	var/time = (0.8 - round(user.get_skill_level(/datum/skill/labor/fishing, TRUE) * 0.04, 0.1)) SECONDS * bait_speed_mult
 	if(!do_after(user, time, currently_hooked, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE, extra_checks = CALLBACK(src, PROC_REF(fishing_line_check))))
 		return
 	// nothing after this point should sleep (fingers crossed)
@@ -367,7 +367,7 @@
 		qdel(source)
 		return BEAM_CANCEL_DRAW
 
-/obj/item/fishingrod/afterattack(obj/target, mob/user, proximity, params)
+/obj/item/fishingrod/afterattack(obj/target, mob/user, proximity_flag, list/modifiers)
 	if(!check_allowed_items(target,target_self=1) \
 	|| (user.used_intent.type != ROD_CAST && user.used_intent.type != ROD_AUTO) \
 	|| user.doing() \

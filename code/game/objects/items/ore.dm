@@ -152,7 +152,7 @@
 	metal_calc.apply_smelt_to_ingot(src, recipe_quality, TRUE)
 	qdel(metal_calc)
 
-/obj/item/ingot/attackby(obj/item/I, mob/user, params)
+/obj/item/ingot/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/weapon/tongs))
 		return ..()
 	var/obj/item/weapon/tongs/T = I
