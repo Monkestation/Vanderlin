@@ -451,9 +451,11 @@
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
 
-	if(!ismob(loc))
+	if(!isliving(loc))
 		return
-
+	var/mob/living/L = loc
+	if(L.stat == DEAD)
+		return
 	if(collar_unlocked || !is_in_neck_slot)
 		return
 
@@ -497,7 +499,7 @@
 
 /obj/item/clothing/ring/collar_detonator/examine(mob/user)
 	. = ..()
-	. += span_info("Right click to select constrict/unconstrict a subject.")
+	. += span_info("Right click to select a subject constrict/unconstrict.")
 
 /obj/item/clothing/ring/collar_detonator/attack_hand_secondary(mob/living/user, params)
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN

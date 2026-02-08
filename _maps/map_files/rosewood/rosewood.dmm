@@ -2594,7 +2594,7 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep)
 "bKz" = (
-/obj/machinery/light/fueled/firebowl/stump,
+/obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/churchbrick,
 /area/indoors/lich)
 "bKB" = (
@@ -2902,6 +2902,10 @@
 	dir = 1
 	},
 /area/outdoors/river)
+"bVa" = (
+/obj/machinery/light/fueled/firebowl/blackfire,
+/turf/open/floor/naturalstone,
+/area/indoors/lich)
 "bVA" = (
 /obj/structure/fluff/clock,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -12327,12 +12331,6 @@
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/bath)
-"ibY" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/openspace,
-/area/outdoors/town)
 "ich" = (
 /turf/open/floor/carpet/red,
 /area/indoors/town/merc_guild)
@@ -16678,6 +16676,13 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/town/bath)
+"kUn" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/turf/open/openspace,
+/area/outdoors/town/roofs)
 "kUq" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/villagegarrison)
@@ -29897,6 +29902,10 @@
 	dir = 1
 	},
 /area/indoors/town/keep)
+"tZs" = (
+/obj/effect/landmark/latejoin,
+/turf/open/floor/snow,
+/area/outdoors/mountains)
 "tZF" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32;
@@ -30075,6 +30084,10 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/soilsons)
+"uhO" = (
+/mob/living/carbon/human/species/human/northern/base/skilled/medium_gear,
+/turf/open/openspace,
+/area/outdoors/town/roofs)
 "uhQ" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -30095,6 +30108,7 @@
 /obj/item/reagent_containers/food/snacks/meat/fatty,
 /obj/item/reagent_containers/powder/salt,
 /obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/powder/salt,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/soilsons)
 "uif" = (
@@ -33679,6 +33693,9 @@
 	pixel_y = -3
 	},
 /obj/item/rope/chain,
+/obj/item/clothing/neck/gorget/explosive/zizo,
+/obj/item/clothing/neck/gorget/explosive/zizo,
+/obj/item/clothing/neck/gorget/explosive/zizo,
 /turf/open/floor/naturalstone,
 /area/indoors/lich)
 "wwf" = (
@@ -33959,6 +33976,14 @@
 "wGg" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/orphanage)
+"wGl" = (
+/obj/structure/fluff/customsign{
+	name = "Kevin's OOC note";
+	max_integrity = 1;
+	desc = "Please do not leave the slaves in their pen this round thx, destroy this after reading"
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/lich)
 "wGn" = (
 /obj/structure/bars,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -95644,7 +95669,7 @@ vDS
 hKz
 jKB
 qMc
-vIq
+fSQ
 qMc
 ipz
 fSQ
@@ -96055,7 +96080,7 @@ htl
 fSQ
 hKz
 hKz
-fSQ
+vIq
 htl
 hKz
 hra
@@ -101438,7 +101463,7 @@ xMU
 xMU
 eWA
 ofc
-kmU
+ulw
 onb
 xEz
 cdm
@@ -133284,10 +133309,10 @@ pMN
 vwo
 vwo
 pMN
-wTm
-wTm
-wTm
-fJq
+jiV
+jiV
+jiV
+kUn
 mQu
 dif
 wsL
@@ -133487,10 +133512,10 @@ vwo
 vwo
 msb
 vwo
-wTm
-wTm
-wTm
-ibY
+jiV
+jiV
+jiV
+ixa
 flj
 flj
 oNM
@@ -133689,8 +133714,8 @@ pMN
 vwo
 msb
 pMN
-csx
-wTm
+mDq
+jiV
 jiV
 jiV
 jiV
@@ -136111,8 +136136,8 @@ msb
 vwo
 vwo
 pMN
-msb
-kFk
+aTN
+vwo
 jiV
 jiV
 jiV
@@ -142629,7 +142654,7 @@ jiV
 jiV
 jiV
 phG
-kLH
+phG
 qJl
 qJl
 qJl
@@ -143434,7 +143459,7 @@ jiV
 jiV
 jiV
 jiV
-jiV
+uhO
 jiV
 jiV
 qJl
@@ -144441,7 +144466,7 @@ sRb
 juW
 qJl
 phG
-phG
+kLH
 phG
 qJl
 jiV
@@ -185255,7 +185280,7 @@ qJl
 qJl
 qJl
 qJl
-mSU
+tZs
 mSU
 nHb
 nHb
@@ -207706,7 +207731,7 @@ fKO
 ovB
 ovB
 ovB
-eyK
+bVa
 xbz
 xbz
 xbz
@@ -207917,7 +207942,7 @@ hcC
 xbz
 xbz
 xbz
-ovB
+bVa
 ovB
 qJl
 qJl
@@ -208118,7 +208143,7 @@ xbz
 ovB
 ovB
 xbz
-xbz
+wGl
 xbz
 ovB
 qJl
@@ -215016,7 +215041,7 @@ nHb
 nHb
 erH
 erH
-lwX
+uWt
 uWt
 uWt
 uWt

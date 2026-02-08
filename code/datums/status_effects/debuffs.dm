@@ -449,7 +449,7 @@
 	id = "fake_virus"
 	duration = 1800//3 minutes
 	status_type = STATUS_EFFECT_REPLACE
-	tick_interval = 1
+	tick_interval = 10
 	alert_type = null
 	var/msg_stage = 0//so you dont get the most intense messages immediately
 
@@ -464,22 +464,22 @@
 				"<span class='warning'>[pick("You feel dizzy.", "Your head spins.")]</span>",
 				"<span notice='warning'>[pick("You swallow excess mucus.", "You lightly cough.")]</span>",
 				"<span class='warning'>[pick("Your head hurts.", "Your mind blanks for a moment.")]</span>",
-				"<span class='warning'>[pick("Your throat hurts.", "You clear my throat.")]</span>")
+				"<span class='warning'>[pick("Your throat hurts.", "You clear your throat.")]</span>")
 		if(301 to 600)
 			if(prob(2))
 				fake_msg = pick("<span class='warning'>[pick("Your head hurts a lot.", "Your head pounds incessantly.")]</span>",
 				"<span class='warning'>[pick("Your windpipe feels like a straw.", "Your breathing becomes tremendously difficult.")]</span>",
-				"<span class='warning'>I feel very [pick("dizzy","woozy","faint")].</span>",
-				"<span class='warning'>[pick("You hear a ringing in my ear.", "Your ears pop.")]</span>",
-				"<span class='warning'>I nod off for a moment.</span>")
+				"<span class='warning'>I feel [pick("dizzy","woozy","faint")].</span>",
+				"<span class='warning'>[pick("You hear a ringing in your ear.", "Your ears pop.")]</span>",
+				"<span class='warning'>You nod off for a moment.</span>")
 		else
 			if(prob(3))
 				if(prob(50))// coin flip to throw a message or an emote
-					fake_msg = pick("<span class='danger'>[pick("Your head hurts!", "You feel a burning knife inside my brain!", "A wave of pain fills my head!")]</span>",
+					fake_msg = pick("<span class='danger'>[pick("Your head hurts!", "You feel a burning knife inside your brain!", "A wave of pain fills your head!")]</span>",
 					"<span class='danger'>[pick("Your lungs hurt!", "It hurts to breathe!")]</span>",
 					"<span class='warning'>[pick("You feel nauseated.", "You feel like you're going to throw up!")]</span>")
 				else
-					fake_emote = pick("sickcough", "cough", "sniff", "sneeze")
+					fake_emote = pick("sickcough")
 
 	if(fake_emote)
 		owner.emote(fake_emote)

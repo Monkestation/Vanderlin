@@ -33,7 +33,8 @@
 				/datum/status_effect/buff/darkvision, \
 				/datum/status_effect/buff/haste, \
 				/datum/status_effect/buff/calm, \
-				/datum/status_effect/buff/barbrage)
+				/datum/status_effect/buff/barbrage, \
+				STATUS_EFFECT_FAKE_VIRUS)
 		if("Mending")
 			var/mending_amount = input("Choose Lifeblood Amount") as null|anything in list(5, 10, 15, 20, 25, 30)
 			if(!mending_amount)
@@ -76,7 +77,8 @@
 		message_admins(span_notice("Admin [key_name_admin(usr)] blessed [key_name_admin(M)] with [blessing_path]! Duration: [duration_choice]."))
 		log_admin("[key_name(usr)] blessed [key_name(M)] with [blessing_path] for [duration_choice].")
 
-		M.playsound_local(get_turf(M), 'sound/magic/bless.ogg', 100, FALSE)
+		if(blessing_path != STATUS_EFFECT_FAKE_VIRUS)
+			M.playsound_local(get_turf(M), 'sound/magic/bless.ogg', 100, FALSE)
 
 		var/flavor_text = get_patron_blessing_text(M, blessing_path)
 		if(flavor_text)
@@ -88,9 +90,9 @@
 
 		if(until_sleep)
 			M.start_blessing_sleep_monitor(blessing_path)
-
-		var/alert_desc = flavor_text ? span_nicegreen("[flavor_text]") : span_nicegreen("A divine force blesses you!")
-		M.modify_blessing_alert_desc(blessing_path, alert_desc)
+		if(blessing_path != STATUS_EFFECT_FAKE_VIRUS)
+			var/alert_desc = flavor_text ? span_nicegreen("[flavor_text]") : span_nicegreen("A divine force blesses you!")
+			M.modify_blessing_alert_desc(blessing_path, alert_desc)
 
 		return TRUE
 

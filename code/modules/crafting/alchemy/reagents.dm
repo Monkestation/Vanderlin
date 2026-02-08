@@ -390,6 +390,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					graggar_lover.spawn_gibs(TRUE)
 					graggar_lover.emote("agony")
 					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts as they become a half-orc!"), span_userdanger("MY SKIN BURSTS!!"))
+					message_admins("[graggar_lover] just became a half-orc from a [dna_cache.species?.name]! [ADMIN_FLW(graggar_lover)]")
 	return ..()
 
 /datum/reagent/stampoison

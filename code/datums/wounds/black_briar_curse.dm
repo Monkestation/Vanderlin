@@ -119,10 +119,29 @@
 		return FALSE
 	. = ..()
 	// No, this will not correlate to dungeon or island waits. But it's expensive to check, so we're gonna deal with asynced rate.
-	infection = clamp(infection + (rand(20, 24) + length(root_network) - owner.STAEND) * (SSmobs.wait * 0.1) , 0, max_infection)
-	if(length(root_network) < 2 && !HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH)) // we can't get worse without a limb being infected
-		infection = min(infection, max_infection * BBC_STAGE_LATE - 1)
+	infection = clamp(infection + (rand(20, 23) + length(root_network) - owner.STACON) * (SSmobs.wait * 0.1) , 0, max_infection)
 	infection_percent = min(infection / max_infection, 1)
+	if(!HAS_TRAIT(owner, TRAIT_NO_BRIAR_DEATH) && istype(src, /datum/wound/black_briar_curse/chest))
+		if(infection_percent >= BBC_STAGE_LATE)
+			var/mob/living/carbon/C = owner
+			var/organic_bodyparts = 0
+			for(var/obj/item/bodypart/BP in C.bodyparts)
+				if(BP.status == BODYPART_ORGANIC)
+					organic_bodyparts++
+			if(organic_bodyparts > 2)
+				var/required_infection = BBC_STAGE_MID
+				if(infection_percent >= 1)
+					required_infection = BBC_STAGE_LATE
+				var/requirements_met = 0
+				for(var/datum/weakref/wr in root_network)
+					var/datum/wound/black_briar_curse/tumor = wr.resolve()
+					if(!tumor || tumor == src)
+						continue
+					if(tumor.infection_percent >= required_infection)
+						requirements_met++
+				if(requirements_met < 2)
+					infection = min(infection, max_infection * (required_infection == BBC_STAGE_MID ? BBC_STAGE_LATE : 1) - 1)
+					infection_percent = min(infection / max_infection, 1)
 
 	//basically what we're doing is forcing a multiplicative inverse function to actually land where we want it to on the max pain.
 	//so we take the inverse of the function and run our pain against it, which is the second number, and that is our offset from 1
@@ -262,7 +281,7 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
 	if(infection_percent >= BBC_STAGE_MID && !HAS_TRAIT(owner, TRAIT_BLACK_BRIAR))
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
-		if(world.time > next_limb_infection && prob(4))
+		if(world.time > next_limb_infection && prob(1))
 			var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 			uninfected_bodyparts -= root_network
 			var/mob/living/carbon/C = owner

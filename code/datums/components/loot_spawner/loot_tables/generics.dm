@@ -8,6 +8,7 @@
 			/obj/item/rope = 5,
 			/obj/item/soap = 5,
 			/obj/item/sleepingbag = 1,
+			/obj/item/tent_kit = 0.25,
 			/obj/item/reagent_containers/powder/ozium = 3,
 			/obj/item/reagent_containers/powder/moondust = 3,
 			/obj/item/reagent_containers/powder/moondust_purest = 1,

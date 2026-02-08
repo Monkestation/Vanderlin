@@ -22,6 +22,13 @@
 	always_show_on_latechoices = FALSE
 	job_reopens_slots_on_death = FALSE
 	bypass_lastclass = TRUE
+	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 1200,
+		EXP_TYPE_LEADERSHIP = 600,
+		EXP_TYPE_COMBAT = 300,
+	)
+
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -141,6 +148,11 @@
 	can_have_apprentices = FALSE
 	antag_role = /datum/antagonist/zizocultist/zizo_knight
 	is_recognized = TRUE
+	exp_types_granted = list(EXP_TYPE_COMBAT)
+	exp_requirements = list(
+		EXP_TYPE_LIVING = 1000,
+		EXP_TYPE_COMBAT = 300,
+	)
 
 
 	traits = list(TRAIT_STEELHEARTED, TRAIT_MEDIUMARMOR, TRAIT_DUALWIELDER)
