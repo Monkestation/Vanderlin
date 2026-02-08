@@ -60,7 +60,7 @@
 	var/lowercase_god = "generic"
 	if(patron_name in COLORFUL_PATRONS)
 		lowercase_god = ckey(patron_name)//Getting the game to correctly pull this has been the biggest pain in the butt.
-	var/message = SPAN_PRAYER_WRAPPER(span_admin("[span_prefix("PRAYER: ")][ident_string] [ADMIN_SM(follower)] [ADMIN_FLW(follower)] prays: <span class='god_[lowercase_god]'>[html_encode(prayer)]</span>"))
+	var/message = SPAN_PRAYER_WRAPPER(span_admin("[span_prefix("PRAYER: ")][ident_string] [ADMIN_SM(follower)] [ADMIN_NRT(follower)] [ADMIN_FLW(follower)] prays: <span class='god_[lowercase_god]'>[html_encode(prayer)]</span>"))
 	for(var/client/admin_client in GLOB.admins)
 		if(check_rights_for(admin_client, R_ADMIN))
 			to_chat(admin_client, message)
