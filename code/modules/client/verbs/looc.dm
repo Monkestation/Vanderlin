@@ -76,8 +76,6 @@
 		mobs += mob_client
 		if(mob_client in GLOB.admins)
 			added_text += " ([mob.ckey]) <A href='?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>\[MUTE\]</font></a>"
-		if(isobserver(hear_mob))
-			continue //Also handled later.
 
 		if(mob_client.prefs.chat_toggles & CHAT_OOC)
 			to_chat(mob_client, "<font color='["#6699CC"]'><b><span class='prefix'>LOOC:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>")
