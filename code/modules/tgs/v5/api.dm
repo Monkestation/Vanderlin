@@ -302,7 +302,7 @@
 		TGS_WARNING_LOG("Interop version too low for triggering deployments!")
 		return FALSE
 
-	var response = Bridge(DMAPI5_BRIDGE_COMMAND_DEPLOY)
+	var/response = Bridge(DMAPI5_BRIDGE_COMMAND_DEPLOY)
 	if(!response)
 		return FALSE
 	return TRUE
