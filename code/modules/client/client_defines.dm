@@ -108,9 +108,6 @@
 	///Used for limiting the rate of clicks sends by the client to avoid abuse
 	var/list/clicklimiter
 
-	///goonchat chatoutput of the client
-	var/datum/chatOutput/chatOutput
-
 	///lazy list of all credit object bound to this client
 	var/list/credits = list()
 
@@ -163,3 +160,9 @@
 
 	/// Datum for storing turf contents on stat panel
 	var/datum/object_window_info/obj_window = null
+
+	var/list/sent_assets = list() // List of all asset filenames sent to this client by the asset cache, along with their assoicated md5s
+	var/list/completed_asset_jobs = list() /// List of all completed blocking send jobs awaiting acknowledgement by send_asset
+
+	var/last_asset_job = 0 /// Last asset send job id.
+	var/last_completed_asset_job = 0

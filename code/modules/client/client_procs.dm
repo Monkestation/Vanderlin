@@ -54,32 +54,28 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	var/asset_cache_job
 	if(href_list["asset_cache_confirm_arrival"])
 		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
-		//because we skip the limiter, we have to make sure this is a valid arrival and not somebody tricking us
-		//	into letting append to a list without limit.
-		if (asset_cache_job > 0 && asset_cache_job <= last_asset_job && !(asset_cache_job in completed_asset_jobs))
-			completed_asset_jobs += asset_cache_job
+		if(!asset_cache_job)
 			return
 
 	var/atom/ref = locate(href_list["src"])
-	if(!holder && (href_list["window_id"] != "statbrowser") && !istype(ref, /datum/native_say))
-		var/mtl = CONFIG_GET(number/minute_topic_limit)
-		if (mtl)
-			var/minute = round(world.time, 1 MINUTES)
-			if (!topiclimiter)
-				topiclimiter = new(LIMITER_SIZE)
-			if (minute != topiclimiter[CURRENT_MINUTE])
-				topiclimiter[CURRENT_MINUTE] = minute
-				topiclimiter[MINUTE_COUNT] = 0
-			topiclimiter[MINUTE_COUNT] += 1
-			if (topiclimiter[MINUTE_COUNT] > mtl)
-				var/msg = "Your previous action was ignored because you've done too many in a minute."
-				if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
-					topiclimiter[ADMINSWARNED_AT] = minute
-					msg += " Administrators have been informed."
-					log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-					message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-				to_chat(src, span_danger("[msg]"))
-				return
+	var/mtl = CONFIG_GET(number/minute_topic_limit)
+	if(!holder && mtl && !istype(ref, /datum/native_say))
+		var/minute = round(world.time, 1 MINUTES)
+		if (!topiclimiter)
+			topiclimiter = new(LIMITER_SIZE)
+		if (minute != topiclimiter[CURRENT_MINUTE])
+			topiclimiter[CURRENT_MINUTE] = minute
+			topiclimiter[MINUTE_COUNT] = 0
+		topiclimiter[MINUTE_COUNT] += 1
+		if (topiclimiter[MINUTE_COUNT] > mtl)
+			var/msg = "Your previous action was ignored because you've done too many in a minute."
+			if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
+				topiclimiter[ADMINSWARNED_AT] = minute
+				msg += " Administrators have been informed."
+				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
+				message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
+			to_chat(src, span_danger("[msg]"))
+			return
 
 		var/stl = CONFIG_GET(number/second_topic_limit)
 		if (stl)
@@ -98,6 +94,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(tgui_Topic(href_list))
 		return
 
+	if(href_list["reload_tguipanel"])
+		nuke_chat()
+
 	if(href_list["reload_statbrowser"])
 		stat_panel.reinitialize()
 
@@ -109,6 +108,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
 		to_chat(src, "<span class='danger'>An error has been detected in how my client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
 		src << browse("...", "window=asset_cache_browser")
+
+	if(href_list["asset_cache_preload_data"])
+		asset_cache_preload_data(href_list["asset_cache_preload_data"])
+		return
 
 	// Keypress passthrough
 	if(href_list["__keydown"])
@@ -272,8 +275,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			return
 		if("vars")
 			return view_var_Topic(href,href_list,hsrc)
-		if("chat")
-			return chatOutput.Topic(href, href_list)
 
 	switch(href_list["action"])
 		if("openLink")
@@ -436,10 +437,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	stat_panel = new(src, "statbrowser")
 	stat_panel.subscribe(src, PROC_REF(on_stat_panel_message))
 
-	chatOutput = new /datum/chatOutput(src)
-	spawn(5) // Goonchat does some non-instant checks in start()
-		chatOutput.start()
-
 	GLOB.ahelp_tickets.ClientLogin(src)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
 	//Admin Authorisation
@@ -485,6 +482,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	fps = prefs.clientfps
+
+	// Instantiate tgui panel
+	tgui_panel = new(src, "browseroutput")
 
 	if(fexists(roundend_report_file()))
 		add_verb(src, /client/proc/show_previous_roundend_report)
@@ -570,7 +570,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	)
 	addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
 
-//	chatOutput.start() // Starts the chat
+	// Initalize tgui panel
+	tgui_panel.initialize()
+
 	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
 
 	if(alert_mob_dupe_login)
@@ -684,8 +686,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 
 
-//	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
-//		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
+	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
+		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
 	update_ambience_pref()
 
@@ -768,6 +770,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	GLOB.clients -= src
 	GLOB.directory -= ckey
+
+	QDEL_NULL(tgui_panel)
 
 	log_access("Logout: [key_name(src)]")
 	GLOB.ahelp_tickets.ClientLogout(src)

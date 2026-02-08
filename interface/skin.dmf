@@ -102,54 +102,59 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = #000000
-		saved-params = "pos;size"
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		is-pane = true
+	elem "legacy_output_selector"
+		type = CHILD
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		saved-params = "splitter"
+		left = "output_legacy"
+		is-vert = false
+
+window "output_legacy"
+	elem "output_legacy"
+		type = MAIN
+		pos = 0,0
+		size = 640x480
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		is-pane = true
+	elem "output"
+		type = OUTPUT
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		is-default = true
+		saved-params = "max-lines"
+		style = ".system {color:#FF0000;}"
+		enable-http-images = true
+
+window "output_browser"
+	elem "output_browser"
+		type = MAIN
+		pos = 0,0
+		size = 640x480
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = none
+		saved-params = "pos;size;is-minimized;is-maximized"
 		is-pane = true
 	elem "browseroutput"
 		type = BROWSER
 		pos = 0,0
-		size = 635x440
+		size = 640,480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = #000000
-		is-visible = false
-		is-disabled = true
+		background-color = none
 		saved-params = ""
-	elem "output"
-		type = OUTPUT
-		pos = 0,0
-		size = 635x440
-		anchor1 = 0,0
-		anchor2 = 100,100
-		background-color = #000000
-		is-default = true
-		saved-params = "max-lines"
-		enable-http-images = true
-		max-lines = 200
-	elem "input"
-		type = INPUT
-		pos = 0,445
-		size = 600x25
-		anchor1 = 0,100
-		anchor2 = 100,100
-		font-size = 12
-		text-color = #ad9eb4
-		background-color = #000000
-		is-default = true
-		border = sunken
-		saved-params = "command"
-	elem "saybutton"
-		type = BUTTON
-		pos = 600,445
-		size = 40x25
-		anchor1 = 100,100
-		anchor2 = -1,-1
-		border = line
-		saved-params = "is-checked"
-		text = "Say"
-		command = ".winset \"saybutton.is-checked=true ? input.command=\"!say \\\"\" : input.command=\"\"saybutton.is-checked=true ? mebutton.is-checked=false\"\"saybutton.is-checked=true ? oocbutton.is-checked=false\""
-		is-flat = true
-		button-type = pushbox
+
 window "statwindow"
 	elem "statwindow"
 		type = MAIN
