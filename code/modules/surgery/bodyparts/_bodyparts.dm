@@ -202,7 +202,7 @@
 				var/amt2raise = user.STAINT/3
 				if(do_after(user, used_time, src))
 					var/obj/item/reagent_containers/food/snacks/steak
-					var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/human
+					var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/steak/human
 					for(steaks, steaks>0, steaks--)
 						steak = new steak_type(get_turf(src))	//Meat depends on species.
 						if(rotted)

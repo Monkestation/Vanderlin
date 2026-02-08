@@ -216,7 +216,7 @@
 
 /datum/container_craft/pan/frysteak
 	name = "Fry Steak"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/frysteak
 	cooked_smell = /datum/pollutant/food/fried_meat
 

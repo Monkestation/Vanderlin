@@ -571,6 +571,7 @@ All foods are distributed among various categories. Use common sense.
 // initialize_cooked_food() is called when microwaving the food
 /obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(obj/item/reagent_containers/food/snacks/S, cooking_efficiency = 1)
 	if(reagents)
+		reagents.remove_reagent(/datum/reagent/consumable/nutriment, reagents.get_reagent_amount(/datum/reagent/consumable/nutriment), TRUE)
 		reagents.trans_to(S, reagents.total_volume)
 	if(S.bonus_reagents && S.bonus_reagents.len)
 		for(var/r_id in S.bonus_reagents)
@@ -671,7 +672,7 @@ All foods are distributed among various categories. Use common sense.
 	name = "burned mess"
 	desc = ""
 	icon_state = "badrecipe"
-	list_reagents = list(/datum/reagent/toxin/bad_food = 30)
+	list_reagents = list(/datum/reagent/toxin/bad_food = 10, /datum/reagent/consumable/nutriment = SNACK_POOR)
 	filling_color = "#8B4513"
 	faretype = FARE_IMPOVERISHED
 	foodtype = GROSS

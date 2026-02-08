@@ -21,13 +21,15 @@
 		soundloop = new soundloop(src, FALSE)
 		soundloop.start()
 	GLOB.fires_list += src
+	var/turn_on = TRUE
 	if(fueluse > 0)
-		if(mapload && !is_type_in_list(get_area(src), list(/area/indoors/soilsons, /area/outdoors/farm, /area/under/town/basement/inn)))
-			fueluse = 0
+		if(mapload && !is_type_in_list(get_area(src), list(/area/indoors/soilsons, /area/outdoors/farm, /area/under/town/basement/inn, /area/underworld, /area/indoors/lich)))
+			fueluse = prob(50) ? 0 : round(fueluse * rand() * 0.12)
+			turn_on = FALSE
 		else
 			fueluse = fueluse - (rand(fueluse*0.1,fueluse*0.3))
 	update_appearance(UPDATE_ICON_STATE)
-	seton(TRUE)
+	seton(turn_on)
 
 	. = ..()
 

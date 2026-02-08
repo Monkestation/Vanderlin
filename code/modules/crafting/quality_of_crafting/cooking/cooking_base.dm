@@ -67,6 +67,7 @@
 	abstract_type = /datum/repeatable_crafting_recipe/cooking
 	skillcraft = /datum/skill/craft/cooking
 	var/quality_modifier = 1.0  // Base modifier for recipe quality
+	var/transfer_reagents = TRUE
 
 /datum/repeatable_crafting_recipe/cooking/create_outputs(list/to_delete, mob/user)
 	var/list/outputs = list()
@@ -74,6 +75,7 @@
 	var/ingredient_count = 0
 	var/highest_quality = 0
 
+	var/datum/reagents/R = new(500)
 	// Calculate average freshness and find highest quality ingredient
 	for(var/obj/item/reagent_containers/food_item in to_delete)
 		if(istype(food_item, /obj/item/reagent_containers/food/snacks) || istype(food_item, /obj/item/grown))
@@ -84,6 +86,10 @@
 				var/obj/item/reagent_containers/food/snacks/F = food_item
 				total_freshness += max(0, (F.warming + F.rotprocess))
 				highest_quality = max(highest_quality, F.recipe_quality)
+				if(F.reagents && transfer_reagents)
+					F.reagents.remove_reagent(/datum/reagent/consumable/nutriment, F.reagents.get_reagent_amount(/datum/reagent/consumable/nutriment), TRUE)
+					F.reagents.trans_to(R, F.reagents.total_volume)
+
 
 	// Calculate average freshness
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
@@ -91,6 +97,7 @@
 	// Get the user's cooking skill
 	var/cooking_skill = user.get_skill_level(/datum/skill/craft/cooking) + user.get_inspirational_bonus()
 
+	var/reagent_vol = R.total_volume
 	// Create output items
 	for(var/spawn_count = 1 to output_amount)
 		var/obj/item/reagent_containers/food/snacks/new_item = new output(get_turf(user))
@@ -112,6 +119,8 @@
 				parts += listed
 			new_item.CheckParts(parts)
 
+		if(transfer_reagents)
+			R.trans_to(new_item, reagent_vol / output_amount, no_react = TRUE)
 		new_item.OnCrafted(user.dir, user)
 
 		outputs += new_item

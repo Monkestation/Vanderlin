@@ -42,6 +42,7 @@
 		/obj/item/reagent_containers/food/snacks/meat/steak = 1,
 		/obj/item/reagent_containers/powder/salt = 1
 	)
+	subtypes_allowed = TRUE
 	attacked_atom = /obj/machinery/tanningrack
 
 	craft_time = 1.5 SECONDS

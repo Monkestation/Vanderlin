@@ -116,7 +116,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/datum/blood_type/exotic_bloodtype
 
 	/// What meat do we get from butchering this species?
-	var/meat = /obj/item/reagent_containers/food/snacks/meat/human
+	var/meat = /obj/item/reagent_containers/food/snacks/meat/steak/human
 	/// Food we (SHOULD) get a mood buff from
 	var/liked_food = NONE
 	/// Food we (SHOULD) get a mood debuff from

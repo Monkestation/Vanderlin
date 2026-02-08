@@ -32,13 +32,22 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 	slice_bclass = BCLASS_CHOP
 
-/obj/item/reagent_containers/food/snacks/meat/human
+/obj/item/reagent_containers/food/snacks/meat/steak/human
 	name = "manflesh"
 	gender = PLURAL
 	foodtype = RAW | MEAT | GROSS
 	bitesize = 3
 	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
-	grind_results = list(/datum/reagent/organpoison = 1)
+	grind_results = list(/datum/reagent/organpoison = 2)
+
+/obj/item/reagent_containers/food/snacks/meat/steak/human/on_consume(mob/living/eater)
+	if(HAS_TRAIT(eater, TRAIT_ORGAN_EATER) && eat_effect != /datum/status_effect/debuff/rotfood)
+		eat_effect = /datum/status_effect/buff/foodbuff
+	if(bitecount >= bitesize)
+		record_featured_stat(FEATURED_STATS_CRIMINALS, eater)
+		record_round_statistic(STATS_ORGANS_EATEN)
+	. = ..()
+	eat_effect = initial(eat_effect)
 
 /*	.............   Pigflesh, strange meat, birdmeat   ................ */
 /obj/item/reagent_containers/food/snacks/meat/fatty

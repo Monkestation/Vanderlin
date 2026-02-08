@@ -224,9 +224,17 @@
 	ADD_TRAIT(H, TRAIT_NOSLEEP, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
-	H.wander = TRUE
-	H.set_stat_modifier("[type]", STATKEY_STR, 3)
 	ch.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/polearms, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/swords, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/wrestling, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/unarmed, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/knives, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/misc/athletics, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/axesmaces, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/whipsflails, -2, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/shields, -2, TRUE)
+	H.wander = TRUE
 
 	var/obj/item/organ/O = H.getorganslot(ORGAN_SLOT_TONGUE)
 	if(O)

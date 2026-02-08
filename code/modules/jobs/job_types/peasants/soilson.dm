@@ -10,8 +10,8 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_SOILSON
 	faction = FACTION_TOWN
-	total_positions = 8
-	spawn_positions = 8
+	total_positions = 12
+	spawn_positions = 12
 	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 

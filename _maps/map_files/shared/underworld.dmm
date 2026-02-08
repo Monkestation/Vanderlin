@@ -9,7 +9,8 @@
 "dF" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = 0;
-	pixel_x = -32
+	pixel_x = -32;
+	fueluse = 0
 	},
 /turf/open/floor/churchrough,
 /area/underworld)
@@ -18,7 +19,9 @@
 /turf/open/floor/church,
 /area/underworld)
 "mn" = (
-/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	fueluse = 0
+	},
 /turf/open/floor/underworld/arena,
 /area/underworld)
 "ol" = (
@@ -54,7 +57,9 @@
 /turf/open/floor/underworld/road,
 /area)
 "uo" = (
-/obj/machinery/light/fueled/firebowl/standing/blue,
+/obj/machinery/light/fueled/firebowl/standing/blue{
+	fueluse = 0
+	},
 /turf/open/floor/underworld/arena,
 /area/underworld)
 "vt" = (
@@ -62,13 +67,16 @@
 /turf/open/floor/churchrough,
 /area/underworld)
 "vI" = (
-/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	fueluse = 0
+	},
 /turf/open/floor/church,
 /area/underworld)
 "wY" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
-	pixel_y = 0
+	pixel_y = 0;
+	fueluse = 0
 	},
 /turf/open/floor/churchrough,
 /area/underworld)
@@ -118,7 +126,8 @@
 "Cn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = 0;
-	pixel_x = -32
+	pixel_x = -32;
+	fueluse = 0
 	},
 /turf/open/floor/church,
 /area/underworld)
@@ -138,13 +147,16 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
-	pixel_y = 0
+	pixel_y = 0;
+	fueluse = 0
 	},
 /turf/open/floor/church,
 /area/underworld)
 "Ea" = (
 /obj/structure/rack/underworld,
-/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	fueluse = 0
+	},
 /turf/open/floor/churchrough,
 /area/underworld)
 "EV" = (
@@ -164,7 +176,8 @@
 "Ip" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 32;
-	pixel_y = 0
+	pixel_y = 0;
+	fueluse = 0
 	},
 /turf/open/floor/church,
 /area/underworld)
@@ -173,7 +186,9 @@
 /turf/open/floor/churchrough,
 /area/underworld)
 "IP" = (
-/obj/machinery/light/fueled/firebowl/standing/blue,
+/obj/machinery/light/fueled/firebowl/standing/blue{
+	fueluse = 0
+	},
 /turf/open/floor/churchrough,
 /area/underworld)
 "Jx" = (
@@ -181,7 +196,9 @@
 /turf/open/floor/underworld/road,
 /area/underworld)
 "Kf" = (
-/obj/machinery/light/fueled/firebowl/standing/blue,
+/obj/machinery/light/fueled/firebowl/standing/blue{
+	fueluse = 0
+	},
 /turf/open/floor/church,
 /area/underworld)
 "KU" = (
@@ -196,7 +213,8 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = 0;
-	pixel_x = -32
+	pixel_x = -32;
+	fueluse = 0
 	},
 /turf/open/floor/church,
 /area/underworld)
@@ -235,11 +253,15 @@
 /turf/open/floor/church,
 /area/underworld)
 "RL" = (
-/obj/machinery/light/fueled/firebowl/standing/blue,
+/obj/machinery/light/fueled/firebowl/standing/blue{
+	fueluse = 0
+	},
 /turf/open/floor/churchmarble,
 /area/underworld)
 "Sp" = (
-/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	fueluse = 0
+	},
 /turf/open/floor/churchmarble,
 /area/underworld)
 "Tb" = (
@@ -248,7 +270,8 @@
 /area/underworld)
 "Td" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
-	pixel_y = -32
+	pixel_y = -32;
+	fueluse = 0
 	},
 /turf/open/floor/underworld/arena,
 /area/underworld)
@@ -261,7 +284,9 @@
 /area/underworld)
 "TB" = (
 /obj/structure/flora/tree/underworld,
-/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	fueluse = 0
+	},
 /turf/open/floor/underworld/arena,
 /area/underworld)
 "TM" = (

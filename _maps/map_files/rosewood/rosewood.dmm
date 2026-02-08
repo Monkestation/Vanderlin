@@ -561,7 +561,7 @@
 /turf/open/water/river{
 	dir = 8
 	},
-/area/indoors/mountains)
+/area/outdoors/mountains)
 "apR" = (
 /obj/structure/chair/bench/church/smallbench{
 	dir = 8
@@ -1467,7 +1467,7 @@
 "aVT" = (
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "aVX" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -2170,7 +2170,7 @@
 "bwb" = (
 /obj/structure/fluff/psycross/zizocross,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "bwK" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /obj/structure/fluff/walldeco/church/line{
@@ -2596,7 +2596,7 @@
 "bKz" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "bKB" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/darker,
@@ -5506,7 +5506,7 @@
 	dir = 6
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "dCI" = (
 /obj/effect/decal/cleanable/debris/wood{
 	dir = 4
@@ -5555,7 +5555,7 @@
 "dFl" = (
 /obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "dFw" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/cobble,
@@ -7038,7 +7038,7 @@
 "eyK" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "eyL" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -9032,7 +9032,7 @@
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "fKS" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32;
@@ -10908,7 +10908,7 @@
 	name = "door"
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "hcE" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/snow,
@@ -11915,7 +11915,7 @@
 	name = "Zizo Knight"
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "hPp" = (
 /obj/effect/decal/shadow_floor{
 	dir = 9
@@ -12541,7 +12541,7 @@
 	desc = "You get the idea this once belonged to a child."
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "iiL" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/snow/rough,
@@ -12711,7 +12711,7 @@
 /area/indoors/town/steward)
 "ioZ" = (
 /turf/closed/wall/mineral/decostone/moss/red,
-/area/under/cave)
+/area/indoors/lich)
 "ipj" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -13285,7 +13285,7 @@
 	dir = 9
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "iIu" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/merc_guild)
@@ -13339,7 +13339,7 @@
 "iKc" = (
 /obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "iKt" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/snow/rough,
@@ -14133,7 +14133,7 @@
 /area/indoors/town/church/chapel)
 "jjU" = (
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "jkp" = (
 /obj/item/weapon/shovel/small,
 /obj/structure/vine/black_briar/medium,
@@ -15154,7 +15154,7 @@
 "jWx" = (
 /obj/structure/bars,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "jWG" = (
 /obj/effect/landmark/latejoin,
 /turf/open/floor/naturalstone,
@@ -15409,7 +15409,7 @@
 "kfs" = (
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "kfA" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/hexstone,
@@ -16031,7 +16031,7 @@
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "kCN" = (
 /obj/structure/fluff/railing/tall{
 	dir = 8
@@ -17300,7 +17300,7 @@
 	backl = null
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "lrn" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/reagent_containers/glass/cup/silver,
@@ -17929,7 +17929,7 @@
 "lNg" = (
 /obj/structure/bars,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "lNI" = (
 /obj/structure/table/wood,
 /turf/open/floor/dirt/road,
@@ -18615,6 +18615,9 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/water/cleanshallow,
 /area/under/town/sewer)
+"mqs" = (
+/turf/closed/wall/mineral/decostone/moss/red/cand,
+/area/indoors/lich)
 "mqy" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/river{
@@ -20766,7 +20769,7 @@
 	name = "Zizo Slave"
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "nLO" = (
 /obj/structure/table/wood/reinforced_alt,
 /obj/item/natural/feather,
@@ -21332,9 +21335,6 @@
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
-"ocI" = (
-/turf/closed/mineral,
-/area/indoors/mountains)
 "ocU" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/bowl{
@@ -21465,10 +21465,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/cobble,
 /area/indoors/town/clocktower)
-"oho" = (
-/obj/structure/fluff/walldeco/vinez/red,
-/turf/closed/wall/mineral/decostone/moss/red,
-/area/under/cave)
 "ohw" = (
 /turf/closed/wall/mineral/stone/window,
 /area/indoors/town/clocktower)
@@ -21762,7 +21758,7 @@
 /obj/item/flashlight/flare/torch,
 /obj/item/flashlight/flare/torch,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "oqp" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/darker,
@@ -21887,6 +21883,9 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
+"ovB" = (
+/turf/closed/mineral,
+/area/indoors/lich)
 "ovE" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
@@ -22073,7 +22072,7 @@
 "oAf" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/decostone/moss/red,
-/area/indoors/mountains)
+/area/indoors/lich)
 "oAi" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/plate,
@@ -22373,7 +22372,7 @@
 "oKX" = (
 /obj/effect/decal/remains/bigrat,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "oKZ" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -27490,7 +27489,7 @@
 "som" = (
 /obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "soO" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -27961,7 +27960,7 @@
 	possible_ages = list("Adult");
 	backr = null;
 	l_hand = /obj/item/weapon/shield/tower/metal;
-	traits = list("push_immunity", "Sixth-Sense", "Noble Blooded", "hard_dismember", "no_limb_disable");
+	traits = list("push_immunity", "Noble Blooded", "no_limb_disable");
 	head = /obj/item/clothing/head/helmet/heavy/ravoxhelm;
 	mob_species = list(/datum/species/elf/snow);
 	neck = /obj/item/clothing/neck/bevor;
@@ -28504,7 +28503,7 @@
 "sYB" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "sYE" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/cobble,
@@ -29193,9 +29192,6 @@
 /obj/effect/spawner/map_spawner/loot/random,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"tzg" = (
-/turf/open/water/river,
-/area/indoors/mountains)
 "tzp" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/decorstone,
@@ -30625,7 +30621,7 @@
 "uxp" = (
 /obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "uxL" = (
 /obj/effect/waterfall{
 	pixel_y = 21
@@ -31498,7 +31494,7 @@
 /obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/remains/human,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "vda" = (
 /obj/item/book/random_book{
 	pixel_x = -4;
@@ -31606,7 +31602,7 @@
 "vfM" = (
 /obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "vgr" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
@@ -32443,7 +32439,7 @@
 "vFb" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/decostone/moss/red,
-/area/indoors/mountains)
+/area/indoors/lich)
 "vFc" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -32735,7 +32731,7 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "vND" = (
 /obj/item/clothing/cloak/forrestercloak/snow{
 	desc = "A cloak meant to keep one's body warm in the cold of the permafrost lands."
@@ -32932,7 +32928,7 @@
 "vUl" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "vUm" = (
 /turf/open/water/marsh,
 /area/outdoors/basin)
@@ -33684,7 +33680,7 @@
 	},
 /obj/item/rope/chain,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "wwf" = (
 /obj/item/reagent_containers/food/snacks/rotten/meat{
 	pixel_x = 10;
@@ -33877,7 +33873,7 @@
 	desc = "You get the idea this once belonged to a child."
 	},
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "wDD" = (
 /obj/structure/closet/crate/chest,
 /turf/open/floor/ruinedwood/darker,
@@ -34218,7 +34214,7 @@
 	dir = 10
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "wNJ" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/churchmarble,
@@ -34604,7 +34600,7 @@
 /area/indoors/town/orphanage)
 "xbz" = (
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "xbB" = (
 /obj/item/grown/log/tree/small,
 /obj/item/grown/log/tree/small,
@@ -35134,9 +35130,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/bath)
-"xtI" = (
-/turf/closed/wall/mineral/decostone/moss/red,
-/area/indoors/mountains)
 "xug" = (
 /obj/machinery/light/fueledstreet/blue/wall{
 	pixel_y = -6;
@@ -35206,7 +35199,7 @@
 	dir = 5
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "xwM" = (
 /obj/effect/gibspawner/human,
 /turf/open/floor/dirt/road,
@@ -35479,7 +35472,7 @@
 "xEs" = (
 /obj/machinery/light/fueled/campfire,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "xEy" = (
 /obj/structure/rack,
 /obj/item/weapon/mace/woodclub,
@@ -36294,7 +36287,7 @@
 "ygk" = (
 /obj/effect/gibspawner/human,
 /turf/open/floor/naturalstone,
-/area/indoors/mountains)
+/area/indoors/lich)
 "ygm" = (
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/dirt/road,
@@ -36362,7 +36355,7 @@
 /obj/effect/decal/remains/cabbit,
 /obj/effect/gibspawner/human,
 /turf/open/floor/churchbrick,
-/area/indoors/mountains)
+/area/indoors/lich)
 "yjS" = (
 /obj/item/natural/stoneblock{
 	pixel_x = 7;
@@ -205899,7 +205892,7 @@ qJl
 xGE
 mSU
 sAS
-tzg
+sAS
 app
 yal
 yal
@@ -206101,8 +206094,8 @@ eho
 sAS
 sAS
 app
-ocI
-ocI
+sRj
+sRj
 qJl
 qJl
 qJl
@@ -206299,12 +206292,12 @@ qJl
 qJl
 ioZ
 ioZ
-oho
-xtI
+vFb
+ioZ
 jjU
 xbz
-xtI
-xtI
+ioZ
+ioZ
 oAf
 oAf
 oAf
@@ -206499,7 +206492,7 @@ nHb
 nHb
 qJl
 qJl
-vra
+mqs
 bKz
 jjU
 jjU
@@ -206510,7 +206503,7 @@ jWx
 vUl
 jjU
 jjU
-vra
+mqs
 qJl
 qJl
 qJl
@@ -206701,7 +206694,7 @@ qJl
 qJl
 qJl
 qJl
-oho
+vFb
 jjU
 jjU
 vcX
@@ -207105,7 +207098,7 @@ qJl
 qJl
 qJl
 qJl
-oho
+vFb
 jjU
 jjU
 vfM
@@ -207307,7 +207300,7 @@ qJl
 qJl
 qJl
 qJl
-vra
+mqs
 bKz
 xbz
 jjU
@@ -207318,7 +207311,7 @@ lNg
 jjU
 xbz
 sYB
-vra
+mqs
 qJl
 qJl
 qJl
@@ -207510,16 +207503,16 @@ qJl
 qJl
 qJl
 ioZ
-xtI
-xtI
+ioZ
+ioZ
 xbz
 xbz
 xbz
 vFb
-xtI
-xtI
+ioZ
+ioZ
 oAf
-xtI
+ioZ
 ioZ
 qJl
 qJl
@@ -207706,24 +207699,24 @@ qJl
 qJl
 qJl
 qJl
-qJl
+ovB
 fKO
 fKO
 fKO
-qJl
-qJl
-ocI
+ovB
+ovB
+ovB
 eyK
 xbz
 xbz
 xbz
 eyK
-ocI
-ocI
+ovB
+ovB
 oql
 wvZ
-qJl
-qJl
+ovB
+ovB
 qJl
 qJl
 qJl
@@ -207913,7 +207906,7 @@ xbz
 xbz
 oKX
 iiJ
-qJl
+ovB
 xbz
 xbz
 xbz
@@ -207924,8 +207917,8 @@ hcC
 xbz
 xbz
 xbz
-qJl
-qJl
+ovB
+ovB
 qJl
 qJl
 qJl
@@ -208122,12 +208115,12 @@ xbz
 xbz
 xbz
 xbz
-ocI
-qJl
+ovB
+ovB
 xbz
 xbz
 xbz
-qJl
+ovB
 qJl
 qJl
 qJl
@@ -208317,19 +208310,19 @@ xbz
 xEs
 iiJ
 xbz
-qJl
-ocI
+ovB
+ovB
 xbz
 iIb
 wNE
 xbz
 xbz
-ocI
-qJl
+ovB
+ovB
 xbz
 xbz
 xbz
-qJl
+ovB
 qJl
 qJl
 qJl
@@ -208514,24 +208507,24 @@ qJl
 qJl
 qJl
 qJl
-qJl
+ovB
 xbz
 xbz
 xbz
-qJl
-qJl
-ocI
+ovB
+ovB
+ovB
 xbz
 xwt
 dCz
 xbz
-ocI
-ocI
-qJl
+ovB
+ovB
+ovB
 kBV
 hOL
 kBV
-qJl
+ovB
 qJl
 qJl
 qJl
@@ -208721,19 +208714,19 @@ qJl
 qJl
 qJl
 qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
-qJl
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
+ovB
 qJl
 qJl
 qJl
