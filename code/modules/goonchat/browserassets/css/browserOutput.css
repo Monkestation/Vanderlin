@@ -1128,19 +1128,19 @@ animation: matthios_flicker 1s infinite;
 }
 @keyframes matthios_flicker {
 	25% {
-		color: #17181a;
+		color: #313338;
 	}
 
 	50% {
-		color: #24272c;
+		color: #2f3033;
 	}
 
 	75% {
-		color: #272829;
+		color: #434750;
 	}
 
 	100% {
-		color: #313338;
+		color: #52545a;
 	}
 }
 /* ##### END ##### */
