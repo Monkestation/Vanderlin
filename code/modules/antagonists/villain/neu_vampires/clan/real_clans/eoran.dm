@@ -38,7 +38,7 @@
 		TRAIT_LIMBATTACHMENT,
 		)
 
-	clane_covens = list(
+	clan_covens = list(
 		/datum/coven/auspex,
 		/datum/coven/presence,
 		/datum/coven/bloodheal,

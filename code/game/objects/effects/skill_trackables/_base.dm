@@ -90,7 +90,7 @@
 
 		var/competence = user.STAPER
 		if(user.mind)
-			competence += 2 * user.get_skill_level(reveal_skill)
+			competence += 2 * user.get_skill_level(reveal_skill, TRUE)
 
 		if(competence >= diff)
 			success = TRUE
@@ -112,7 +112,7 @@
 		//diff += round((world.time - creation_time) / (60 SECONDS), 1)
 		var/competence = user.STAPER / 2
 		if(user.mind)
-			competence += 5 * user.get_skill_level(reveal_skill) //Skill is much more relevant for analysis.
+			competence += 5 * user.get_skill_level(reveal_skill, TRUE) //Skill is much more relevant for analysis.
 		switch(competence - diff)
 			if(18 to INFINITY)
 				analysis_result = ANALYSIS_PERFECT

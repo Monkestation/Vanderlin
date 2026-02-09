@@ -381,7 +381,7 @@ SUBSYSTEM_DEF(gamemode)
 					"... you kneel, not knowing why... the voice behind you compels it",
 					"... a collar of roses and rust... worn by the willing"
 				),
-			/datum/antagonist/vampire/lesser = list (
+			/datum/antagonist/vampire/lords_spawn = list (
 					"... fangs bloom from cracked lips... hunger shudders through the air",
 					"... you see your reflection... it smiles with borrowed teeth",
 					"... a laugh beneath floorboards... young, broken, blood-wet"

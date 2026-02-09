@@ -83,7 +83,7 @@
 		icon_state = "bookcase"
 	return ..()
 
-/obj/structure/bookcase/attackby(obj/item/I, mob/user, params)
+/obj/structure/bookcase/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(!is_type_in_list(I, allowed_books))
 		return

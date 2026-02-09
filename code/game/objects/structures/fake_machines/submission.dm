@@ -73,12 +73,12 @@
 	popup.set_content(contents)
 	popup.open()
 
-/obj/structure/fake_machine/submission/attackby(obj/item/P, mob/user, params)
+/obj/structure/fake_machine/submission/attackby(obj/item/P, mob/user, list/modifiers)
 	if(ishuman(user))
 		attemptsell(P, user, TRUE, TRUE)
 		return TRUE
 
-/obj/structure/fake_machine/submission/attack_hand_secondary(mob/user, params)
+/obj/structure/fake_machine/submission/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -104,7 +104,7 @@ GLOBAL_VAR(feeding_hole_reset_timer)
 	density = FALSE
 	SET_BASE_PIXEL(0, 32)
 
-/obj/structure/feedinghole/attackby(obj/item/P, mob/user, params)
+/obj/structure/feedinghole/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/reagent_containers/food/snacks/produce/grain/wheat))
 		qdel(P)
 /*		if(!GLOB.feeding_hole_reset_timer || world.time > GLOB.feeding_hole_reset_timer)

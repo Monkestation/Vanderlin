@@ -289,7 +289,7 @@
 		if("Play fair")
 			rigged_outcome = 0
 
-/obj/item/coin/attack_self_secondary(mob/user, params)
+/obj/item/coin/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -297,7 +297,7 @@
 		INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return TRUE
 
-/obj/item/coin/attack_hand_secondary(mob/user, params)
+/obj/item/coin/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -307,10 +307,22 @@
 			INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return
 
-	user.put_in_active_hand(new type(user.loc, 1))
-	set_quantity(quantity - 1)
+	var/spawned_type
+	if(base_type)
+		switch(base_type)
+			if(CTYPE_GOLD)
+				spawned_type = /obj/item/coin/gold
+			if(CTYPE_SILV)
+				spawned_type = /obj/item/coin/silver
+			if(CTYPE_INQU)
+				spawned_type = /obj/item/coin/inqcoin
+			else
+				spawned_type = /obj/item/coin/copper
+	if(spawned_type)
+		user.put_in_active_hand(new spawned_type(user.loc, 1))
+		set_quantity(quantity - 1)
 
-/obj/item/coin/attack_self(mob/living/user, params)
+/obj/item/coin/attack_self(mob/living/user, list/modifiers)
 	if(quantity > 1 || !base_type)
 		return
 	if(!COOLDOWN_FINISHED(src, flip_cd))
@@ -374,7 +386,7 @@
 	else
 		desc = ""
 
-/obj/item/coin/attackby(obj/item/I, mob/user)
+/obj/item/coin/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		var/obj/item/coin/G = I
 		if(item_flags & IN_STORAGE)

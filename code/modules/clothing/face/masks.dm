@@ -440,10 +440,10 @@
 /obj/item/clothing/face/courtphysician
 	name = "court physican's mask"
 	desc = "Similar to a feldsher's mask, this one is made with actual bone! Don't ask whose."
-	icon_state = "courtmask"
-	item_state = "courtmask"
+	icon_state = "docmask"
+	item_state = "docmask"
 	resistance_flags = FLAMMABLE
-	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	sewrepair = TRUE

@@ -39,7 +39,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 ///Say verb
 /mob/dead/new_player/say_verb(message as text)
 	set name = "Say"
-	set category = "IC"
+	set category = "IC.Speech"
 	set hidden = 1
 
 	if(message)

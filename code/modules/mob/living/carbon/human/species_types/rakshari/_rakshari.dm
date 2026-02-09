@@ -106,8 +106,8 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/zalad)
-	C.verbs += 	/mob/living/carbon/human/species/rakshari/verb/emote_meow
-	C.verbs += 	/mob/living/carbon/human/species/rakshari/verb/emote_purr
+	add_verb(C, /mob/living/carbon/human/species/rakshari/verb/emote_meow)
+	add_verb(C, /mob/living/carbon/human/species/rakshari/verb/emote_purr)
 	to_chat(C, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
 
 /datum/species/rakshari/check_roundstart_eligible()

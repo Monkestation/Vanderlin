@@ -96,7 +96,7 @@ Reel teleports the attached atom to the grabbed turf.
 				stat += (user.STASTR - 10) * 2
 		else
 			stat = 0
-		stat += (user.get_skill_level(/datum/skill/craft/engineering)) * 5	//And finally their Engineering level.
+		stat += (user.get_skill_level(/datum/skill/craft/engineering, TRUE)) * 5	//And finally their Engineering level.
 		stat = clamp(stat, 10, 70)	//Clamp to a very loud second just in case you're a superhuman engineer
 		if(!isloading)
 			user.visible_message(span_info("[user] begins cranking the [src]..."))
@@ -232,7 +232,7 @@ Reel teleports the attached atom to the grabbed turf.
 					O.atom_break()
 		LAZYCLEARLIST(obj_to_destroy)
 
-/obj/item/grapplinghook/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/grapplinghook/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(istype(user.used_intent, /datum/intent/grapple))	//First step, grappling onto a tile. Spawns an indicator on it.
 		if(is_loaded && istype(target, /turf/))
 			var/turf/T = target

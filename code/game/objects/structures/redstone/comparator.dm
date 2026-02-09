@@ -234,8 +234,9 @@
 	on_power_changed() // Recalculate
 	update_appearance(UPDATE_ICON | UPDATE_OVERLAYS)
 
-/obj/structure/redstone/comparator/AltClick(mob/user)
-	if(!Adjacent(user)) return
+/obj/structure/redstone/comparator/AltClick(mob/user, list/modifiers)
+	if(!Adjacent(user))
+		return
 	dir = turn(dir, 90)
 	to_chat(user, "<span class='notice'>You rotate the [name].</span>")
 	schedule_network_update()

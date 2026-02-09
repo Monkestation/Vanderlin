@@ -160,6 +160,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOLIMBDISABLE		"no_limb_disable"
 #define TRAIT_EASYLIMBDISABLE	"easy_limb_disable"
 #define TRAIT_TOXINLOVER		"toxinlover"
+#define TRAIT_NO_EXPERIENCE		"unlearning"
 #define TRAIT_NOBREATH			"no_breath"
 #define TRAIT_HOLY				"holy"
 #define TRAIT_NOCRITDAMAGE		"no_crit"
@@ -614,3 +615,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 ///Turf trait for when a turf is transparent
 #define TURF_Z_TRANSPARENT_TRAIT "turf_z_transparent"
+
+/// This mob should never close UI even if it doesn't have a client
+#define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"

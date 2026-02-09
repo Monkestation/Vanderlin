@@ -1,0 +1,1 @@
+{"author":"Casperclone1","delete-after":true,"changes":[{"bugfix":"Fixed explosives not being extinguished in water"},{"bugfix":"Crafting explosives should no longer explode when making them, such as deathshells"},{"balance":"deathshells have a 25% to not explode when ignited as the original PR wanted them to have a drawback for being cheaply produced"}]}

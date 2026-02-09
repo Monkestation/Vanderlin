@@ -64,7 +64,7 @@
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()

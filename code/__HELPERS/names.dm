@@ -10,21 +10,6 @@
 		tempname += random_capital_letter()
 	return tempname
 
-GLOBAL_VAR(command_name)
-/proc/command_name()
-	if (GLOB.command_name)
-		return GLOB.command_name
-
-	var/name = "Divine Pantheon"
-
-	GLOB.command_name = name
-	return name
-
-/proc/change_command_name(name)
-	GLOB.command_name = name
-
-	return name
-
 /proc/station_name()
 	if(!GLOB.station_name)
 		var/newname

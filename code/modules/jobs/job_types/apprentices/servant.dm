@@ -136,7 +136,7 @@
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/recipe_book/cooking = 1, TRUE)
+	backpack_contents = list(/obj/item/recipe_book/cooking = 1)
 	neck = /obj/item/key/tavern
 
 /datum/outfit/tapster/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

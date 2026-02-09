@@ -27,7 +27,7 @@
 		return
 
 	// Calculate actual time based on butchery skill
-	var/skill_modifier = 1 - (owner.get_skill_level(/datum/skill/labor/butchering) * 0.1) // 10% reduction per skill level
+	var/skill_modifier = 1 - (owner.get_skill_level(/datum/skill/labor/butchering, TRUE) * 0.1) // 10% reduction per skill level
 	var/actual_time = max(extraction_time * skill_modifier, 7.5 SECONDS) // Minimum 7.5 seconds
 
 	owner.visible_message(span_warning("[owner] reaches for [cast_on]'s chest, chanting incoherently..."), \

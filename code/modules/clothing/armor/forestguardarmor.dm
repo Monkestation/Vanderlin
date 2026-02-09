@@ -78,7 +78,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "skullmet_volf"
 
-/obj/item/clothing/head/helmet/medium/decorated/skullmet/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/head/helmet/medium/decorated/skullmet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

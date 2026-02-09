@@ -90,7 +90,7 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 /obj/structure/essence_node/proc/can_be_extracted()
 	return TRUE
 
-/obj/structure/essence_node/attackby(obj/item/I, mob/user)
+/obj/structure/essence_node/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 

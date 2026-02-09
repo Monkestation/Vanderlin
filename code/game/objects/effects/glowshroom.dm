@@ -42,7 +42,7 @@
 						L.throwing.finalize(FALSE)
 	. = ..()
 
-/obj/structure/kneestingers/attackby(obj/item/W, mob/user, params)
+/obj/structure/kneestingers/attackby(obj/item/W, mob/user, list/modifiers)
 	if(isliving(user) && W && user.z == z)
 		if(W.flags_1 & CONDUCT_1)
 			var/mob/living/L = user

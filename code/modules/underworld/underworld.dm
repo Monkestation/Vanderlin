@@ -1,7 +1,7 @@
 // Verbs
 /mob/verb/returntolobby()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 
 	GLOB.actors_list -= mobid // admin removed - get him outta here.
@@ -29,7 +29,7 @@
 		qdel(M)
 		return
 
-	client?.verbs -= /client/proc/descend
+	add_verb(src, /client/proc/descend)
 	M.key = key
 	qdel(src)
 	return
@@ -71,7 +71,7 @@
 		to_chat(user, "<br><font color=purple><span class='bold'>HANDS EXCHANGE PAY, BE ON YOUR WAY</span></font>")
 		user << sound(pick('sound/misc/carriage1.ogg', 'sound/misc/carriage2.ogg', 'sound/misc/carriage3.ogg', 'sound/misc/carriage4.ogg'), 0, 0 ,0, 50)
 
-/obj/structure/underworld/carriageman/attackby(obj/item/W, mob/living/user)
+/obj/structure/underworld/carriageman/attackby(obj/item/W, mob/living/user, list/modifiers)
 	var/mob/living/carbon/spirit/ghost = user
 	if(istype(W, /obj/item/underworld/coin))
 		if(!ghost.paid)

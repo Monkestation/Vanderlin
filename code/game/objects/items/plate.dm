@@ -29,7 +29,7 @@
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/plate/attackby(obj/item/I, mob/living/carbon/user, params)
+/obj/item/plate/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!length(contents) && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
 		if(dirty)
 			var/obj/item/natural/cloth/cloth_check = I
@@ -67,10 +67,10 @@
 		to_chat(user, span_notice("[src] can't fit more items!"))
 		return
 
-	var/list/modifiers = params2list(params)
 	//Center the icon where the user clicked.
 	if(!LAZYACCESS(modifiers, ICON_X) || !LAZYACCESS(modifiers, ICON_Y))
 		return
+
 	if(user.transferItemToLoc(I, src, silent = FALSE))
 		I.pixel_x = I.base_pixel_x + clamp(text2num(LAZYACCESS(modifiers, ICON_X)) - 16, -max_x_offset, max_x_offset)
 		I.pixel_y = I.base_pixel_x + min(text2num(LAZYACCESS(modifiers, ICON_Y)) + placement_offset, max_height_offset)
@@ -79,7 +79,7 @@
 	else
 		return ..()
 
-/obj/item/plate/pre_attack(atom/A, mob/living/user, params)
+/obj/item/plate/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!iscarbon(A))
 		return
 	if(!contents.len)
@@ -145,7 +145,7 @@
 		scattered_item.pixel_y = scattered_item.base_pixel_y + scatter_vector[2]
 		scattered_item.throw_impact(hit_atom, throwingdatum)
 
-/obj/item/plate/attack_self(mob/user, params)
+/obj/item/plate/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(contents.len) // If the tray isn't empty
 		for(var/obj/item/scattered_item as anything in contents)
@@ -310,7 +310,7 @@
 	. = ..()
 	AddComponent(/datum/component/storage/concrete/grid/tray)
 
-/obj/item/tray/attack(mob/living/M, mob/living/user)
+/obj/item/tray/attack(mob/living/M, mob/living/user, list/modifiers)
 	..()
 	// Drop all the things. All of them.
 	var/list/obj/item/oldContents = contents.Copy()

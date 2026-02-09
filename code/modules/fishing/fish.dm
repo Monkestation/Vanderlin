@@ -26,7 +26,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	obj_flags = CAN_BE_HIT
 	max_integrity = 50
 	sellprice = 10
-	dropshrink = 0.6
 	slices_num = 1
 	slice_bclass = BCLASS_CHOP
 	faretype = FARE_IMPOVERISHED //incase someone decides to eat raw fish
@@ -146,6 +145,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	var/suicide_slap_text = "*SLAP!*"
 
 	var/time_passed_on_safe_turf = 0
+
+	var/matrix/base_transform
 
 /obj/item/reagent_containers/food/snacks/fish/proc/generate_html(mob/user)
 	var/client/client = user
@@ -346,6 +347,10 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 		apply_traits() //Make sure traits are applied before size and weight.
 		update_size_and_weight()
 
+/obj/item/reagent_containers/food/snacks/fish/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
 /obj/item/reagent_containers/food/snacks/fish/proc/released(atom/location, mob/living/user)
 	playsound(location, 'sound/effects/splash.ogg', 50)
 	SEND_SIGNAL(location, COMSIG_FISH_RELEASED_INTO, src, user)
@@ -480,15 +485,49 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
  * Mainly used to determinate the size and weight of caught fish.
  */
 /obj/item/reagent_containers/food/snacks/fish/proc/randomize_size_and_weight(base_size = average_size, base_weight = average_weight, deviation = weight_size_deviation, update = TRUE)
-	var/size_deviation = 0.2 * base_size
+	var/size_deviation = 0.4 * base_size
 	temp_size = round(clamp(gaussian(base_size, size_deviation), average_size * 1/MAX_FISH_DEVIATION_COEFF, average_size * MAX_FISH_DEVIATION_COEFF))
-
-	var/weight_deviation = 0.2 * base_weight
+	var/weight_deviation = 0.4 * base_weight
 	temp_weight = round(clamp(gaussian(base_weight, weight_deviation), average_weight * 1/MAX_FISH_DEVIATION_COEFF, average_weight * MAX_FISH_DEVIATION_COEFF))
-
 	set_max_size_and_weight(temp_size, temp_weight)
 	if(update)
 		update_size_and_weight(temp_size, temp_weight)
+
+	var/size_ratio = temp_size / average_size
+	var/weight_ratio = temp_weight / average_weight
+
+	// Average the two ratios to get overall deviation
+	var/deviation_score = (abs(size_ratio - 1.0) + abs(weight_ratio - 1.0)) / 2
+
+	// Convert deviation to quality (1-4)
+	// Small deviation (close to average) = quality 1
+	// Large deviation (exceptional fish) = quality 4
+	var/fish_quality = 1
+	if(deviation_score >= 0.6) // Very exceptional (near max/min bounds)
+		fish_quality = 4
+	else if(deviation_score >= 0.4) // Notable deviation
+		fish_quality = 3
+	else if(deviation_score >= 0.2) // Moderate deviation
+		fish_quality = 2
+	else // Close to average
+		fish_quality = 1
+
+	// Scale the visual size based on actual size/weight vs average
+	// Use average of size and weight ratios for balanced scaling
+	var/scale_ratio = (size_ratio + weight_ratio) / 2
+
+	// Clamp between 0.5x and 2.0x for reasonable visual range
+	// A tiny fish (0.5x average) = 0.75 scale
+	// A normal fish (1.0x average) = 1.0 scale
+	// A huge fish (2.0x average) = 1.5 scale
+	var/visual_scale = clamp(0.5 + (scale_ratio * 0.5), 0.5, 2.0)
+
+	// Store the base scale for use in animations
+	base_transform = matrix()
+	base_transform.Scale(visual_scale)
+	transform = base_transform
+
+	set_quality(fish_quality)
 
 ///Set the maximum size and weight a fish can reach from base size and weight args if they have't been set already.
 /obj/item/reagent_containers/food/snacks/fish/proc/set_max_size_and_weight(base_size, base_weight)
@@ -567,8 +606,11 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 	update_fish_force()
 
-	slices_num = max(round(slices_num * size / FISH_FILLET_NUMBER_SIZE_DIVISOR, 1), 1)
+	slices_num = max(round(size / average_size * initial(slices_num), 1), 1)
 	sellprice = initial(sellprice) * (1 + (max(FLOOR(weight/average_weight, 0.1), 0.1) - 1))
+
+	if((/datum/fish_trait/prehistoric in fish_traits))
+		sellprice *= 5
 	fish_flags &= ~FISH_FLAG_UPDATING_SIZE_AND_WEIGHT
 
 ///Reset weapon-related variables of this items and recalculates those values based on the fish weight and size.
@@ -677,6 +719,15 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	apply_traits()
 
 /obj/item/reagent_containers/food/snacks/fish/proc/apply_traits()
+	var/list/potential_spontaneous_traits = GLOB.spontaneous_fish_traits[type]
+	for(var/trait_type in potential_spontaneous_traits)
+		if(!prob(potential_spontaneous_traits[trait_type]))
+			continue
+		var/datum/fish_trait/trait = GLOB.fish_traits[trait_type]
+		if(length(fish_traits & trait.incompatible_traits))
+			continue
+		fish_traits |= trait_type
+
 	for(var/fish_trait_type in fish_traits)
 		var/datum/fish_trait/trait = GLOB.fish_traits[fish_trait_type]
 		trait.apply_to_fish(src)
@@ -947,16 +998,20 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /// This flopping animation played while the fish is alive.
 /obj/item/reagent_containers/food/snacks/fish/proc/flop_animation()
 	var/pause_between = PAUSE_BETWEEN_PHASES + rand(1, 5) //randomized a bit so fish are not in sync
+
+	// Use base_transform if it exists, otherwise use matrix()
+	var/matrix/base_matrix = base_transform || matrix()
+
 	animate(src, time = pause_between, loop = -1)
 	//move nose down and up
 	for(var/_ in 1 to FLOP_COUNT)
-		var/matrix/up_matrix = matrix()
+		var/matrix/up_matrix = matrix(base_matrix)
 		up_matrix.Turn(FLOP_DEGREE)
-		var/matrix/down_matrix = matrix()
+		var/matrix/down_matrix = matrix(base_matrix)
 		down_matrix.Turn(-FLOP_DEGREE)
 		animate(transform = down_matrix, time = FLOP_SINGLE_MOVE_TIME, loop = -1)
 		animate(transform = up_matrix, time = FLOP_SINGLE_MOVE_TIME, loop = -1)
-		animate(transform = matrix(), time = FLOP_SINGLE_MOVE_TIME, loop = -1, easing = BOUNCE_EASING | EASE_IN)
+		animate(transform = base_matrix, time = FLOP_SINGLE_MOVE_TIME, loop = -1, easing = BOUNCE_EASING | EASE_IN)
 		animate(time = PAUSE_BETWEEN_FLOPS, loop = -1)
 	//bounce up and down
 	animate(time = pause_between, loop = -1, flags = ANIMATION_PARALLEL)
@@ -988,7 +1043,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/stop_flopping()
 	if(HAS_TRAIT(src, TRAIT_FISH_FLOPPING))
 		REMOVE_TRAIT(src, TRAIT_FISH_FLOPPING, TRAIT_GENERIC)
-		animate(src, transform = matrix()) //stop animation
+		// Return to base scaled transform instead of default matrix()
+		animate(src, transform = base_transform || matrix())
 
 /// Refreshes flopping animation after temporary animation finishes
 /obj/item/reagent_containers/food/snacks/fish/proc/on_temp_animation(datum/source, animation_duration)
@@ -1111,7 +1167,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	desc = "A common freshwater fish with large scales."
 	icon_state = "carp"
 	fish_id = "carp"
-	average_size = 60
+	average_size = 90
 	average_weight = 2000
 	required_fluid_type = FISH_FLUID_FRESHWATER
 	fishing_difficulty_modifier = 5
@@ -1123,7 +1179,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	desc = "A small, brightly colored tropical fish."
 	icon_state = "clownfish"
 	fish_id = "clownfish"
-	average_size = 15
+	average_size = 60
 	average_weight = 200
 	required_fluid_type = FISH_FLUID_SALTWATER
 	required_temperature_min = 24
@@ -1138,6 +1194,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 			FISH_BAIT_VALUE = MEAT,
 		),
 	)
+	fish_traits = list(/datum/fish_trait/camouflage, /datum/fish_trait/picky_eater)
 
 /obj/item/reagent_containers/food/snacks/fish/angler
 	name = "anglerfish"
@@ -1158,7 +1215,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 			FISH_BAIT_VALUE = MEAT,
 		),
 	)
-	fish_traits = list(/datum/fish_trait/predator, /datum/fish_trait/heavy)
+	fish_traits = list(/datum/fish_trait/predator, /datum/fish_trait/heavy, /datum/fish_trait/nocturnal, /datum/fish_trait/carnivore)
 
 /obj/item/reagent_containers/food/snacks/fish/eel
 	name = "eel"
@@ -1198,6 +1255,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 			FISH_BAIT_VALUE = VEGETABLES,
 		),
 	)
+	fish_traits = list(/datum/fish_trait/vegan, /datum/fish_trait/yucky)
 
 /obj/item/reagent_containers/food/snacks/fryfish
 	icon = 'icons/roguetown/misc/fish.dmi'
@@ -1209,7 +1267,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	desc = "Abyssor's bounty, make sure to eat the eyes!"
 	icon_state = "carpcooked"
 	foodtype = MEAT
-	dropshrink = 0.6
 
 /obj/item/reagent_containers/food/snacks/fryfish/carp
 	name = "cooked carp"
@@ -1253,10 +1310,10 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 /*	.................   Chocolate Fish   ................... */
 
-/obj/item/reagent_containers/food/snacks/fryfish/carp/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/fryfish/carp/attackby(obj/item/I, mob/living/user, list/modifiers)
 	..()
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(isturf(loc)&& (found_table))
 		if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))
@@ -1277,5 +1334,4 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	tastes = list("a horrible clash of salty fish and sweet chocolate" = 1)
 	faretype = FARE_IMPOVERISHED
 	rotprocess = null
-	dropshrink = 0.6
 	eat_effect = /datum/status_effect/buff/foodbuff

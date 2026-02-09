@@ -59,8 +59,9 @@
  * * user the person doing the cleaning
  * * clean_target set this to false if the target should not be washed and if experience should not be awarded to the user
  */
-/datum/component/cleaner/proc/on_afterattack(datum/source, atom/target, mob/user, proximity_flag)
+/datum/component/cleaner/proc/on_afterattack(datum/source, atom/target, mob/user, proximity_flag, list/modifiers)
 	SIGNAL_HANDLER
+
 	if(!proximity_flag)
 		return
 	var/clean_target

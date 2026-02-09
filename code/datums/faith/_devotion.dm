@@ -54,7 +54,7 @@
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
 		grant_miracle(miracle)
-	holder_mob.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
+	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
 
@@ -82,7 +82,7 @@
 	if(holder_mob)
 		holder_mob.cleric = null
 		holder_mob.remove_spells(source = src)
-		holder_mob.verbs -= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
+		remove_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 		for(var/trait as anything in traits)
 			REMOVE_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	holder_mob = null
@@ -183,7 +183,7 @@
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	if(!ishuman(src))
 		return
@@ -194,7 +194,7 @@
 
 /mob/living/carbon/human/proc/clericpray()
 	set name = "Give Prayer"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	if(!ishuman(src))
 		return

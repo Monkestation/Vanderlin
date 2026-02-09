@@ -44,14 +44,14 @@
 	colors -= remove_color
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/paint_palette/attack_hand_secondary(mob/user, params)
+/obj/item/paint_palette/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	remove_color(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/paint_palette/attack_self(mob/user, params)
+/obj/item/paint_palette/attack_self(mob/user, list/modifiers)
 	. = ..()
 	add_color(user)
 

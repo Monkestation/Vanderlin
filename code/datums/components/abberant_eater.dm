@@ -42,6 +42,7 @@
 
 	playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
 	SEND_SIGNAL(source, COMSIG_FOOD_EATEN, M, user)
+	SEND_SIGNAL(user, COMSIG_MOB_FOOD_EAT, source)
 	source.on_consume(user)
 	qdel(source)
 	return TRUE

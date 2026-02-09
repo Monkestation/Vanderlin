@@ -233,7 +233,7 @@
 					to_chat(user, span_info("- [essence.name]"))
 					qdel(essence)
 
-/obj/machinery/essence/reservoir/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/reservoir/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 		if(!vial.contained_essence || vial.essence_amount <= 0)

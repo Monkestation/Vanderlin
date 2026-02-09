@@ -117,7 +117,7 @@
 	salvage_result = /obj/item/rope
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
 
-/obj/item/storage/belt/leather/rope/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/rope/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
@@ -146,7 +146,7 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
 
-/obj/item/storage/belt/leather/cloth/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/cloth/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
@@ -428,7 +428,7 @@
 		if(length(contents) < max_storage)
 			return SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, FALSE)
 
-/obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, params)
+/obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, list/modifiers)
 	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))
 		if(SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, user, TRUE))
 			to_chat(usr, span_notice("I discreetly slip [A] into [src]."))
@@ -437,7 +437,7 @@
 		return TRUE
 	. = ..()
 
-/obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, params)
+/obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, list/modifiers)
 	if(length(contents))
 		var/list/knives = list()
 		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE_TYPE, /obj/item/weapon/knife/throwingknife, drop_location(), amount = 1, check_adjacent = TRUE, user = user, inserted = knives)
@@ -540,7 +540,7 @@
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
 
 
-/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, params)
+/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, list/modifiers)
 	. = ..()
 	user.visible_message("[user] tries to put [H] into [src].", "You try to put [H] into [src].")
 
