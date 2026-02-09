@@ -20,6 +20,9 @@
 	settlements, live just like their unscarred kin. Yet still remembering their old tenets, \
 	they may never see Pestra the same."
 
+	custom_id = SPEC_ID_DWARF // this is stupid
+	custom_clothes = TRUE
+
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_ACID_IMMUNE)
 
 /datum/species/dwarf/mountain/subterra/after_creation(mob/living/carbon/C)
@@ -27,6 +30,10 @@
 
 	if(!istype(C.patron, /datum/patron/alternate/wurm))
 		return
+
+	if(SSticker.current_state < GAME_STATE_PLAYING && length(GLOB.jarosite_starts))
+		var/turf/place = pick(GLOB.jarosite_starts) // Lord forgive my sins
+		SSticker.OnRoundstart(CALLBACK(C, TYPE_PROC_REF(/atom/movable, forceMove), place))
 
 /datum/species/dwarf/mountain/subterra/preference_accessible(datum/preferences/prefs)
 	. = ..()
