@@ -92,6 +92,9 @@
 	enable_client_mobs_in_contents(client)
 
 	SEND_SIGNAL(src, COMSIG_MOB_CLIENT_LOGIN, client)
+
+	client.init_verbs()
+
 	addtimer(CALLBACK(src, PROC_REF(send_pref_messages)), 2 SECONDS)
 	resend_all_uis()
 	if(client)
