@@ -277,11 +277,11 @@
 
 	forceMove(new_turf)
 
-/mob/camera/bombard_eye/MiddleClickOn(atom/A)
+/mob/camera/bombard_eye/MiddleClickOn(atom/A, list/modifiers)
 	if(linked_bombard)
 		linked_bombard.toggle_projectile_type()
 
-/mob/camera/bombard_eye/AltClickOn(atom/A)
+/mob/camera/bombard_eye/AltClickOn(atom/A, list/modifiers)
 	if(linked_bombard)
 		linked_bombard.toggle_projectile_type()
 
@@ -291,11 +291,11 @@
 
 	var/list/modifiers = params2list(params)
 
-	if(modifiers["alt"] || modifiers["middle"])
+	if(LAZYACCESS(modifiers, ALT_CLICKED) || LAZYACCESS(modifiers, MIDDLE_CLICK))
 		linked_bombard.toggle_projectile_type()
 		return
 
-	if(modifiers["shift"] || modifiers["ctrl"])
+	if(LAZYACCESS(modifiers, SHIFT_CLICKED) || LAZYACCESS(modifiers, CTRL_CLICKED))
 		return ..()
 
 	var/turf/target = get_turf(A)
@@ -411,7 +411,7 @@
 /obj/effect/bombard_zone/neurotoxin/apply_effect(mob/living/carbon/C)
 	C.adjustOxyLoss(3)
 	C.adjust_eye_blur(4 SECONDS)
-	
+
 	if(prob(10))
 		C.apply_damage(2, TOX)
 

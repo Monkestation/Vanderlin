@@ -37,7 +37,7 @@
 
 /datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/townannouncement
+	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
 	var/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
@@ -56,8 +56,8 @@
 	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /mob/living/carbon/human/proc/townannouncement()
-	set name = "Announcement"
-	set category = "Town Elder"
+	set name = "Elder Announcement"
+	set category = "RoleUnique.Elder"
 	if(stat)
 		return
 

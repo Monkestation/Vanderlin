@@ -117,6 +117,9 @@
 	/// Supports (/datum/skill/bar = list(value, clamp)).
 	var/list/skills
 
+	/// Associative list of skill - base multiplier to set for skill_holder
+	var/list/skill_multipliers = list()
+
 	/// Innate spells that get removed when the job is removed
 	var/list/spells
 
@@ -293,6 +296,9 @@
 		else
 			spawned.adjust_skillrank(skill, amount_or_list, TRUE)
 
+	for(var/skill_type in skill_multipliers)
+		spawned.set_skill_exp_multiplier(skill_type, skill_multipliers[skill_type])
+
 	for(var/X in peopleknowme)
 		for(var/datum/mind/MF in get_minds(X))
 			spawned.mind.person_knows_me(MF)
@@ -441,15 +447,16 @@
 				continue
 			reals |= real_pack
 		if(!length(reals))
+			message_admins("ERROR: [key_name_admin(src)] failed job pack selection.")
 			return
 
 		var/datum/job_pack/picked_pack
-		if(!client)
-			picked_pack = GLOB.job_pack_singletons[pick(reals)]
-		else
-			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 20 SECONDS)
+		if(client)
+			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 40 SECONDS)
 			if(QDELETED(src))
 				return
+		if(!picked_pack)
+			picked_pack = pick(reals)
 
 		if(picked_pack.type)
 			previous_picked_types |= picked_pack.type

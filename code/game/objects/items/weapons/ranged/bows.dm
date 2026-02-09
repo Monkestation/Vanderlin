@@ -54,7 +54,7 @@
 		update_appearance(UPDATE_ICON_STATE)
 
 //Bows are subtype of grenadelauncher and use BOLT_TYPE_NO_BOLT code
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/attack_self(mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/attack_self(mob/living/user, list/modifiers)
 	chambered = null
 	var/num_unloaded = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(TRUE, TRUE))
@@ -65,7 +65,7 @@
 		playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(user.usable_hands < 2)
 		return FALSE
 	if(user.get_inactive_held_item())
@@ -93,7 +93,7 @@
 			if(user.STAPER > 10) // Every point over 10 PER adds 10% damage
 				BB.damage = BB.damage * (user.STAPER / 10)
 		BB.damage *= damfactor // Apply bow's inherent damage multiplier regardless of PER
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
+		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows, TRUE) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
 	. = ..()
 	if(.)
 		if(istype(user) && user.mind)
@@ -141,7 +141,7 @@
 		var/newtime = 0
 		//skill block
 		newtime = newtime + 10
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows) * (10/6))
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (10/6))
 		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
 		newtime = newtime + 10
 		newtime = newtime - (master.STASTR * (10/20))
@@ -181,7 +181,7 @@
 		var/newtime = 0
 		//skill block
 		newtime = newtime + 10
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows) * (10/6))
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (10/6))
 		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
 		newtime = newtime + 10
 		newtime = newtime - (master.STASTR * (10/20))

@@ -345,8 +345,8 @@
 
 	return TRUE
 
-/datum/action/cooldown/spell/InterceptClickOn(mob/living/clicker, params, atom/click_target)
-	if(!LAZYACCESS(params2list(params), MIDDLE_CLICK))
+/datum/action/cooldown/spell/InterceptClickOn(mob/living/clicker, list/modifiers, atom/click_target)
+	if(!LAZYACCESS(modifiers, MIDDLE_CLICK))
 		return
 
 	if(charge_required && !charged)
@@ -362,7 +362,7 @@
 			// If we didn't find a human, we settle for any living at all
 			aim_assist_target = locate(/mob/living) in click_target
 
-	return ..(clicker, params, aim_assist_target || click_target)
+	return ..(clicker, modifiers, aim_assist_target || click_target)
 
 // Where the cast chain starts
 /datum/action/cooldown/spell/PreActivate(atom/target)
@@ -383,7 +383,7 @@
 	var/mob/living/living_owner = owner
 	var/new_time = charge_time
 
-	new_time -= charge_time * living_owner.get_skill_level(associated_skill) * 0.05
+	new_time -= charge_time * living_owner.get_skill_level(associated_skill, TRUE) * 0.05
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)
@@ -1106,12 +1106,11 @@
 	// At this point we DO care about the _target value
 	if(isnull(location) || istype(_target, /atom/movable/screen)) //Clicking on a screen object.
 		_target = parse_caught_click_modifiers(modifiers, get_turf(source.eye), source)
-		params = list2params(modifiers)
 		if(!_target)
 			CRASH("Failed to get the turf under clickcatcher")
 
 	// Call this directly to do all the relevant checks and aim assist
-	InterceptClickOn(owner, params, _target)
+	InterceptClickOn(owner, modifiers, _target)
 	source.click_intercept_time = 0
 
 /datum/action/cooldown/spell/proc/signal_cancel()

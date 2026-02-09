@@ -8,13 +8,12 @@
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	experimental_inhand = FALSE
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
 	can_parry = FALSE
 	force = 0
 	minstr = 0
 	wbalance = 0
-	wdefense = 0
 	throwforce = 0
 	throw_range = 4
 	blade_dulling = DULLING_BASH
@@ -93,7 +92,7 @@
 			return PROCESS_KILL
 	user.apply_status_effect(/datum/status_effect/buff/playing_music) // Handles regular stress event in tick()
 	var/boon = user?.get_learning_boon(/datum/skill/misc/music)
-	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.3) // And gain exp
+	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.25) // And gain exp
 
 	if(!HAS_TRAIT(user, TRAIT_BARDIC_TRAINING))
 		return
@@ -119,7 +118,7 @@
 			bypass_checks = TRUE
 		if(user.inspiration)
 			if(target_audience_only)
-				if(user.inspiration.check_in_audience(listener))
+				if(bypass_checks || user.inspiration.check_in_audience(listener))
 					listener.apply_status_effect(instrument_buff)
 				continue
 			else if(user.inspiration.check_in_audience(listener))
@@ -157,7 +156,7 @@
 		terminate_playing(user)
 	. = ..()
 
-/obj/item/instrument/attack_self(mob/living/user, params)
+/obj/item/instrument/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -279,7 +278,7 @@
 /obj/item/instrument/lute
 	name = "lute"
 	desc = "The favored instrument of Eora, made of wood and simple string."
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
 	force = 5
 	icon_state = "lute"
 	item_state = "lute"
@@ -314,7 +313,7 @@
 /obj/item/instrument/guitar
 	name = "guitar"
 	desc = "A corrupted lute, a heritage instrument of Tiefling pedigree."
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
 	icon_state = "guitar"
 	item_state = "guitar"
 	song_list = list(

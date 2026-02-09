@@ -110,7 +110,7 @@
 /obj/machinery/light/fueled/spark_act()
 	fire_act()
 
-/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(cookonme)
 		if(istype(W, /obj/item/reagent_containers/food/snacks))
 			if(istype(W, /obj/item/reagent_containers/food/snacks/egg))
@@ -264,3 +264,11 @@
 	if(!can_damage)
 		return
 	. = ..()
+
+/obj/machinery/light/fueled/process()
+	. = ..()
+	if(on && length(contents)) // burn kobolds in ovens and smelters
+		for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
+			holder.held_mob?.adjust_fire_stacks(5)
+			holder.held_mob?.IgniteMob()
+			holder.update_appearance()

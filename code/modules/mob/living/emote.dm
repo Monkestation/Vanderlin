@@ -16,7 +16,7 @@
 
 /mob/living/carbon/human/verb/emote_pray()
 	set name = "Pray"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 
 	emote("pray", intentional = TRUE)
 	SEND_SIGNAL(src, COMSIG_PRAYER_COMPLETED)
@@ -41,8 +41,7 @@
 		return
 
 	/* admin stuff */
-	var/follower_ident = "[follower.key]/([follower.real_name]) (follower of [patron])"
-	message_admins("[follower_ident] [ADMIN_SM(follower)] [ADMIN_FLW(follower)] prays: [span_info(html_encode(prayer))]")
+	send_prayer(follower, prayer, patron.name)
 	user.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
 
 	follower.whisper(prayer)
@@ -52,6 +51,22 @@
 
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
+
+/proc/send_prayer(mob/living/follower, prayer, patron_name)
+	var/ident_string = "[follower.key]/([follower.real_name]) (follower of [patron_name])"
+	if(follower.has_quirk(/datum/quirk/vice/godfearing))
+		ident_string += "[SPAN_GOD_GENERIC("(GODFEARING)")]"
+	/// Usually I hate not using spans properly, but in this case it's going to make my life easier.
+	var/lowercase_god = "generic"
+	if(patron_name in COLORFUL_PATRONS)
+		lowercase_god = ckey(patron_name)//Getting the game to correctly pull this has been the biggest pain in the butt.
+	var/message = SPAN_PRAYER_WRAPPER(span_admin("[span_prefix("PRAYER: ")][ident_string] [ADMIN_SM(follower)] [ADMIN_NRT(follower)] [ADMIN_FLW(follower)] prays: <span class='god_[lowercase_god]'>[html_encode(prayer)]</span>"))
+	for(var/client/admin_client in GLOB.admins)
+		if(check_rights_for(admin_client, R_ADMIN))
+			to_chat(admin_client, message)
+			if(admin_client.prefs.toggles & SOUND_PRAYERS)
+				admin_client.mob.playsound_local(admin_client, 'sound/misc/yeoldebwoink.ogg', 100)
+
 
 // ............... Me (custom emote) ..................
 /datum/emote/living/custom
@@ -152,7 +167,7 @@
 	emote_type = EMOTE_AUDIBLE
 /mob/living/carbon/human/verb/emote_attnwhistle()
 	set name = "Attnwhistle"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("attnwhistle", intentional = TRUE)
 /datum/emote/living/attnwhistle/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
@@ -196,7 +211,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_bow()
 	set name = "Bow"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("bow", intentional = TRUE)
 
 /datum/emote/living/burp
@@ -208,7 +223,7 @@
 
 /mob/living/carbon/human/verb/emote_burp()
 	set name = "Burp"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("burp", intentional = TRUE)
 
 
@@ -222,7 +237,7 @@
 
 /mob/living/carbon/human/verb/emote_chuckle()
 	set name = "Chuckle"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("chuckle", intentional = TRUE)
 
 /datum/emote/living/choke
@@ -233,7 +248,7 @@
 	ignore_silent = TRUE
 /mob/living/carbon/human/verb/emote_choke()
 	set name = "Choke"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("choke", intentional = TRUE)
 
 /datum/emote/living/cross
@@ -244,7 +259,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_crossarms()
 	set name = "Crossarms"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("crossarms", intentional = TRUE)
 
 /datum/emote/living/collapse
@@ -274,7 +289,7 @@
 
 /mob/living/carbon/human/verb/emote_cough()
 	set name = "Cough"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("cough", intentional = TRUE)
 
 /datum/emote/living/clearthroat
@@ -286,7 +301,7 @@
 
 /mob/living/carbon/human/verb/emote_clearthroat()
 	set name = "Clearthroat"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("clearthroat", intentional = TRUE)
 
 // ............... D ..................
@@ -298,7 +313,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_dance()
 	set name = "Dance"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("dance", intentional = TRUE)
 
 /datum/emote/living/death
@@ -337,7 +352,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_drool()
 	set name = "Drool"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("drool", intentional = TRUE)
 
 /datum/emote/living/drown
@@ -360,10 +375,12 @@
 	key_third_person = "faints"
 	message = "faints."
 	emote_type = EMOTE_VISIBLE
+
 /mob/living/carbon/human/verb/emote_faint()
 	set name = "Faint"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("faint", intentional = TRUE)
+
 /datum/emote/living/faint/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
 	if(. && iscarbon(user))
@@ -387,7 +404,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_frown()
 	set name = "Frown"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("frown", intentional = TRUE)
 
 /datum/emote/living/scream/firescream
@@ -405,7 +422,7 @@
 	ignore_silent = TRUE
 /mob/living/carbon/human/verb/emote_gag()
 	set name = "Gag"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("gag", intentional = TRUE)
 
 /datum/emote/living/gasp
@@ -416,7 +433,7 @@
 	stat_allowed = UNCONSCIOUS
 /mob/living/carbon/human/verb/emote_gasp()
 	set name = "Gasp"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("gasp", intentional = TRUE)
 /datum/emote/living/gasp/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
@@ -433,7 +450,7 @@
 	emote_type = EMOTE_AUDIBLE
 /mob/living/carbon/human/verb/emote_giggle()
 	set name = "Giggle"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("giggle", intentional = TRUE)
 /datum/emote/living/giggle/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
@@ -450,7 +467,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_glare()
 	set name = "Glare"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("glare", intentional = TRUE)
 
 /datum/emote/living/grin
@@ -461,7 +478,7 @@
 
 /mob/living/carbon/human/verb/emote_grin()
 	set name = "Grin"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("grin", intentional = TRUE)
 
 /datum/emote/living/groan
@@ -473,7 +490,7 @@
 
 /mob/living/carbon/human/verb/emote_groan()
 	set name = "Groan"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("groan", intentional = TRUE)
 
 /datum/emote/living/grimace
@@ -483,7 +500,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_grimace()
 	set name = "Grimace"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("grimace", intentional = TRUE)
 
 /datum/emote/living/groin
@@ -513,7 +530,7 @@
 	emote_type = EMOTE_AUDIBLE
 /mob/living/carbon/human/verb/emote_hmm()
 	set name = "Hmm"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("hmm", intentional = TRUE)
 /datum/emote/living/hmm/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
@@ -531,7 +548,7 @@
 
 /mob/living/carbon/human/verb/emote_huh()
 	set name = "Huh"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("huh", intentional = TRUE)
 
 /datum/emote/living/hum
@@ -543,7 +560,7 @@
 
 /mob/living/carbon/human/verb/emote_hum()
 	set name = "Hum"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("hum", intentional = TRUE)
 
 /datum/emote/living/hug
@@ -556,7 +573,7 @@
 
 /mob/living/carbon/human/verb/emote_hug()
 	set name = "Hug"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("hug", intentional = TRUE, targetted = TRUE)
 
 /datum/emote/living/hug/can_run_emote(mob/living/user, status_check = TRUE , intentional)
@@ -602,7 +619,7 @@
 
 /mob/living/carbon/human/verb/emote_headpat()
 	set name = "Headpat"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("headpat", intentional = TRUE, targetted = TRUE)
 
 /datum/emote/living/headpat/adjacentaction(mob/user, mob/target)
@@ -653,7 +670,7 @@
 
 /mob/living/carbon/human/verb/emote_kiss()
 	set name = "Kiss"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("kiss", intentional = TRUE, targetted = TRUE)
 
 /datum/emote/living/kiss/adjacentaction(mob/user, mob/target)
@@ -722,7 +739,7 @@
 
 /mob/living/carbon/human/verb/emote_laugh()
 	set name = "Laugh"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("laugh", intentional = TRUE)
 
 /datum/emote/living/leap
@@ -785,7 +802,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_nod()
 	set name = "Nod"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("nod", intentional = TRUE)
 
 // ............... O ..................
@@ -809,7 +826,7 @@
 
 /mob/living/carbon/human/verb/emote_pinch()
 	set name = "Pinch"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("pinch", intentional = TRUE, targetted = TRUE)
 
 /datum/emote/living/point
@@ -818,6 +835,7 @@
 	message = "points."
 	message_param = "points at %t."
 	restraint_check = TRUE
+
 /datum/emote/living/point/run_emote(mob/user, params, type_override, intentional)
 	message_param = initial(message_param) // reset
 	if(ishuman(user))
@@ -848,7 +866,7 @@
 /mob/living/carbon/human/verb/emote_preen()
 	set hidden = TRUE
 	set name = "Preen"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("preen", intentional = TRUE)
 
 /datum/emote/living/preen/can_run_emote(mob/living/user, status_check = TRUE , intentional)
@@ -939,7 +957,7 @@
 
 /mob/living/carbon/human/verb/emote_rage()
 	set name = "Rage"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("rage", intentional = TRUE)
 
 // ............... S ..................
@@ -952,7 +970,7 @@
 
 /mob/living/carbon/human/verb/emote_spit()
 	set name = "Spit"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("spit", intentional = TRUE, targetted = TRUE)
 
 /datum/emote/living/spit/run_emote(mob/user, params, type_override, intentional)
@@ -1013,7 +1031,7 @@
 	..()
 /mob/living/carbon/human/verb/emote_slap()
 	set name = "Slap"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("slap", intentional = TRUE, targetted = TRUE)
 
 /datum/emote/living/slap/adjacentaction(mob/user, mob/target)
@@ -1036,7 +1054,7 @@
 
 /mob/living/carbon/human/verb/emote_scream()
 	set name = "Scream"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("scream", intentional = TRUE)
 
 /datum/emote/living/scream/can_run_emote(mob/living/user, status_check = TRUE , intentional)
@@ -1067,7 +1085,7 @@
 
 /mob/living/carbon/human/verb/emote_shakehead()
 	set name = "Shakehead"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("shakehead", intentional = TRUE)
 
 /datum/emote/living/shiver
@@ -1077,7 +1095,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_shiver()
 	set name = "Shiver"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("shiver", intentional = TRUE)
 
 #define SHIVER_LOOP_DURATION (1 SECONDS)
@@ -1100,7 +1118,7 @@
 
 /mob/living/carbon/human/verb/emote_sigh()
 	set name = "Sigh"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("sigh", intentional = TRUE)
 
 /datum/emote/living/snore
@@ -1142,7 +1160,7 @@
 
 /mob/living/carbon/human/verb/emote_shh()
 	set name = "Shh"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("shh", intentional = TRUE)
 
 /datum/emote/living/smug
@@ -1163,7 +1181,7 @@
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_smile()
 	set name = "Smile"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 	emote("smile", intentional = TRUE)
 
 /datum/emote/living/sneeze
@@ -1216,7 +1234,7 @@
 
 /mob/living/carbon/human/verb/emote_whimper()
 	set name = "Whimper"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("whimper", intentional = TRUE)
 
 /datum/emote/living/whistle
@@ -1228,7 +1246,7 @@
 
 /mob/living/carbon/human/verb/emote_whistle()
 	set name = "Whistle"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("whistle", intentional = TRUE)
 
 /datum/emote/living/wsmile
@@ -1260,7 +1278,7 @@
 
 /mob/living/carbon/human/verb/emote_yawn()
 	set name = "Yawn"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("yawn", intentional = TRUE)
 
 // ............... Help ..................

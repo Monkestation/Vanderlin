@@ -2,7 +2,11 @@
 	var/name = "???"
 	var/desc = "???"
 
+	var/trade_icon = 'icons/effects/effects.dmi'
+	var/trade_icon_state = "explosion"
 	var/datum/nation/papa
+	///if this is true its basically a node on some other tree
+	var/global_request = FALSE
 
 	///these are the trades we need to do prior to this one before we can work on this
 	var/list/required_trades
@@ -30,7 +34,9 @@
 		current_imports = target_imports
 		papa.complete_trade(src)
 
-/datum/trade/proc/return_valid_count(list/items)
+/datum/trade/proc/return_valid_count(list/items, only_global)
+	if(only_global && !global_request)
+		return
 	var/count = 0
 	for(var/atom/atom in items)
 		if(atom.type in required_trades)

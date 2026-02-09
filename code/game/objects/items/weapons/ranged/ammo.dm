@@ -23,11 +23,11 @@
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "bolt"
 	projectile_type = /obj/projectile/bullet/reusable/bolt
-	possible_item_intents = list(/datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_THRUST)
 	caliber = "regbolt"
 	dropshrink = 0.8
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	embedding = list("embedded_pain_multiplier" = 3, "embedded_fall_chance" = 0)
 	firing_effect_type = null
 
@@ -138,7 +138,7 @@
 	abstract_type = /obj/item/ammo_casing/caseless/bolt/vial
 	max_integrity = 10
 	possible_item_intents = list(/datum/intent/hit)
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	var/datum/reagent/reagent
 
 /obj/item/ammo_casing/caseless/bolt/vial/Initialize(mapload, ...)
@@ -198,7 +198,7 @@
 	icon_state = "bolt_water"
 	projectile_type = /obj/projectile/bullet/reusable/bolt/water
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 
 /obj/item/ammo_casing/caseless/bolt/water/Initialize(mapload, ...)
 	. = ..()
@@ -231,13 +231,13 @@
 	name = "sunderbolt"
 	desc = "A silver-tipped bolt, containing a small vial of holy water. Though it inflicts lesser wounds on living flesh, it exceeds when employed against the unholy; a snap and a crack, followed by a fiery surprise. </br>'One baptism for the remission of sins.'"
 	projectile_type = /obj/projectile/bullet/reusable/bolt/holy
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	caliber = "regbolt"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "bolt_holywater"
 	dropshrink = 0.6
 	max_integrity = 10
-	force = 10
+	force = DAMAGE_KNIFE
 /obj/item/ammo_casing/caseless/bolt/holy/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/water/blessed, 5)
@@ -270,9 +270,9 @@
 	caliber = "arrow"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow"
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	dropshrink = 0.8
-	possible_item_intents = list(/datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_THRUST)
 	max_integrity = 20
 	embedding = list("embedded_pain_multiplier" = 3, "embedded_fall_chance" = 0)
 	firing_effect_type = null
@@ -363,7 +363,7 @@
 	projectile_type = /obj/projectile/bullet/reusable/arrow/pyro
 	icon_state = "arrow_pyroclastic"
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 
 /obj/item/ammo_casing/caseless/arrow/pyro/Initialize(mapload, ...)
 	. = ..()
@@ -399,7 +399,7 @@
 	abstract_type = /obj/item/ammo_casing/caseless/arrow/vial
 	max_integrity = 10
 	possible_item_intents = list(/datum/intent/hit)
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 	var/datum/reagent/reagent
 
 /obj/item/ammo_casing/caseless/arrow/vial/Initialize(mapload, ...)
@@ -459,7 +459,7 @@
 	icon_state = "arrow_water"
 	projectile_type = /obj/projectile/bullet/reusable/arrow/water
 	max_integrity = 10
-	force = DAMAGE_KNIFE-2
+	force = DAMAGE_KNIFE - 2
 
 /obj/item/ammo_casing/caseless/arrow/water/Initialize(mapload, ...)
 	. = ..()
@@ -548,8 +548,8 @@
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "musketball"
 	dropshrink = 0.5
-	possible_item_intents = list(/datum/intent/use)
-	force = 3
+	possible_item_intents = list(INTENT_USE)
+	force = DAMAGE_KNIFE - 7
 
 //................ Cannon Ball ............... //
 /obj/projectile/bullet/reusable/cannonball
@@ -593,11 +593,11 @@
 	icon_state = "cannonball"
 	projectile_type = /obj/projectile/bullet/reusable/cannonball
 	caliber = "cannoball"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	max_integrity = 1
 	randomspread = 0
 	variance = 0
-	force = 10
+	force = DAMAGE_KNIFE
 	item_weight = 70
 	grid_width = 96
 	grid_height = 96
@@ -625,7 +625,7 @@
 	caliber = "dart"
 	dropshrink = 0.9
 	max_integrity = 10
-	force = DAMAGE_KNIFE/2
+	force = DAMAGE_KNIFE / 2
 	firing_effect_type = null
 
 /obj/item/ammo_casing/caseless/dart/Initialize(mapload, ...)

@@ -17,7 +17,7 @@
 	return (1 / get_farming_effort_multiplier(user))
 
 /proc/get_farming_effort_multiplier(mob/user, factor = 2)
-	return (10 + (user.get_skill_level(/datum/skill/labor/farming) * factor)) * 0.1
+	return (10 + (user.get_skill_level(/datum/skill/labor/farming, TRUE) * factor)) * 0.1
 
 /proc/get_farming_do_time(mob/user, time)
 	return time / get_farming_effort_multiplier(user, 3)

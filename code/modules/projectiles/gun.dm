@@ -77,7 +77,7 @@
 						"<span class='danger'>I shoot [src]!</span>", \
 						COMBAT_MESSAGE_RANGE)
 
-/obj/item/gun/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/gun/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!target)
 		return
@@ -98,25 +98,25 @@
 
 //	if(flag)
 //		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-//			handle_suicide(user, target, params)
+//			handle_suicide(user, target, modifiers)
 //			return
 
 	if(!can_shoot()) //Just because you can pull the trigger doesn't mean it can shoot.
 		shoot_with_empty_chamber(user)
 		return
 
-	return process_fire(target, user, TRUE, click_parameters, null, 0)
+	return process_fire(target, user, TRUE, modifiers, null, 0)
 
 
 /obj/item/gun/proc/recharge_newshot()
 	return
 
 
-/obj/item/gun/proc/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/proc/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(user)
-		SEND_SIGNAL(user, COMSIG_MOB_FIRED_GUN, src, target, params, zone_override)
+		SEND_SIGNAL(user, COMSIG_MOB_FIRED_GUN, src, target, modifiers, zone_override)
 
-	SEND_SIGNAL(src, COMSIG_GUN_FIRED, user, target, params, zone_override)
+	SEND_SIGNAL(src, COMSIG_GUN_FIRED, user, target, modifiers, zone_override)
 
 	add_fingerprint(user)
 
@@ -133,7 +133,7 @@
 				return
 		sprd = round((rand() - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
 		before_firing(target,user)
-		if(!chambered.fire_casing(target, user, params, , FALSE, zone_override, sprd, src))
+		if(!chambered.fire_casing(target, user, modifiers, , FALSE, zone_override, sprd, src))
 			shoot_with_empty_chamber(user)
 			return
 		else
@@ -150,13 +150,13 @@
 	return TRUE
 
 
-/obj/item/gun/attackby(obj/item/I, mob/user, params)
+/obj/item/gun/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!user.used_intent.tranged)
 		return ..()
 	else
 		return ..()
 
-/obj/item/gun/proc/handle_suicide(mob/living/carbon/human/user, mob/living/carbon/human/target, params, bypass_timer)
+/obj/item/gun/proc/handle_suicide(mob/living/carbon/human/user, mob/living/carbon/human/target, list/modifiers, bypass_timer)
 	if(!ishuman(user) || !ishuman(target))
 		return
 
@@ -180,7 +180,7 @@
 	if(chambered && chambered.BB)
 		chambered.BB.damage *= 5
 
-	process_fire(target, user, TRUE, params, BODY_ZONE_HEAD)
+	process_fire(target, user, TRUE, modifiers, BODY_ZONE_HEAD)
 
 //Happens before the actual projectile creation
 /obj/item/gun/proc/before_firing(atom/target,mob/user)

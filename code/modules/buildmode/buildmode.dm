@@ -317,20 +317,19 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
  * @param {atom} object - The object clicked on
  * @return {bool} - Whether the click was handled
  */
-/datum/buildmode/proc/InterceptClickOn(mob/user, params, atom/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode/proc/InterceptClickOn(mob/user, list/modifiers, atom/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 
 	if(selected_item && !istype(mode, /datum/buildmode_mode/advanced))
 		if(left_click)
-			place_object(get_turf(object), user, params)
+			place_object(get_turf(object), user, modifiers)
 			return TRUE
 
 		if(right_click)
 			clear_selection()
 			return TRUE
-	return mode.handle_click(user.client, params, object)
+	return mode.handle_click(user.client, modifiers, object)
 
 /**
  * New buildmode category button

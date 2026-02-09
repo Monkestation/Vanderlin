@@ -806,14 +806,14 @@
 	gender = FEMALE
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
 
-/datum/sprite_accessory/hair/head/lakkaricut
-	name = "Lakkari Cut"
+/datum/sprite_accessory/hair/head/ruffled
+	name = "Ruffled"
 	icon_state = "lakkaricut"
 	gender = FEMALE
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
 
-/datum/sprite_accessory/hair/head/lakkaribun
-	name = "Lakkari Bun"
+/datum/sprite_accessory/hair/head/highbun
+	name = "High Bun"
 	icon_state = "lakkaribun"
 	gender = FEMALE
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)

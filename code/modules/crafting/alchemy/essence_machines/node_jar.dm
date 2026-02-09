@@ -50,7 +50,7 @@
 	)
 	. += emissive_appearance(contained_node.icon, contained_node.icon_state, alpha = contained_node.alpha)
 
-/obj/item/essence_node_jar/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/essence_node_jar/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag)
 		. = ..()
 		return

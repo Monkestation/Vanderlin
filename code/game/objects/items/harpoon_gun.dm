@@ -71,7 +71,7 @@
 		QDEL_NULL(zipline)
 	return ..()
 
-/obj/item/harpoon_gun/afterattack(atom/target, mob/living/user, proximity)
+/obj/item/harpoon_gun/afterattack(atom/target, mob/living/user, proximity, list/modifiers)
 	. = ..()
 
 	if(isgroundlessturf(target))
@@ -173,7 +173,7 @@
 	RegisterSignal(user, COMSIG_MOVABLE_PRE_THROW, PROC_REF(apply_throw_traits))
 	stored_launch = target
 
-/obj/item/harpoon_gun/attack_hand_secondary(mob/user, params)
+/obj/item/harpoon_gun/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -186,7 +186,7 @@
 		leash_target = null
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/harpoon_gun/attack_self(mob/user, params)
+/obj/item/harpoon_gun/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(leashed)
 		user.visible_message(span_danger("[user] starts to reel in [src]."), span_danger("You start to reel in [src]."))

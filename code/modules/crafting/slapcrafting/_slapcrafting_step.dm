@@ -183,7 +183,7 @@
 /// Proc to perform handling a do_after, return FALSE if it failed, TRUE if succeeded.
 /datum/slapcraft_step/proc/perform_do_after(mob/living/user, obj/item/item, obj/item/slapcraft_assembly/assembly, time_to_do)
 	if(skill_type)
-		time_to_do *=  (2 / max(1, user.get_skill_level(skill_type)))
+		time_to_do *=  (2 / max(1, user.get_skill_level(skill_type, TRUE)))
 
 	if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
 		time_to_do *= 0.9

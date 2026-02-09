@@ -17,6 +17,10 @@
 	 */
 	var/gc_destroyed
 
+	/// Open uis owned by this datum
+	/// Lazy, since this case is semi rare
+	var/list/open_uis
+
 	/// Active timers with this datum as the target
 	var/list/active_timers
 	/// Status traits attached to this datum
@@ -272,10 +276,6 @@
 		return
 	SEND_SIGNAL(source, COMSIG_CD_RESET(index), S_TIMER_COOLDOWN_TIMELEFT(source, index))
 	TIMER_COOLDOWN_END(source, index)
-
-/// Returns whether a type is an abstract type.
-/proc/is_abstract(datum/datum_type)
-	return (initial(datum_type.abstract_type) == datum_type)
 
 /// Return text from this proc to provide extra context to hard deletes that happen to it
 /// Optional, you should use this for cases where replication is difficult and extra context is required

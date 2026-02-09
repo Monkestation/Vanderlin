@@ -88,7 +88,7 @@ SUBSYSTEM_DEF(events)
 
 /client/proc/forceEvent()
 	set name = "Trigger Event"
-	set category = "Fun"
+	set category = "GameMaster.Interactions"
 	if(!holder ||!check_rights(R_FUN))
 		return
 	holder.forceEvent(usr)
@@ -98,7 +98,7 @@ SUBSYSTEM_DEF(events)
 
 /client/proc/forceGamemode()
 	set name = "Open Gamemode Panel"
-	set category = "Fun"
+	set category = "GameMaster.Fun"
 	if(!holder ||!check_rights(R_FUN))
 		return
 	holder.forceGamemode(usr)

@@ -3,21 +3,6 @@
 	This file has the basic atom/movable level speech procs.
 	And the base of the send_speech() proc, which is the core of saycode.
 */
-GLOBAL_LIST_INIT(freqtospan, list(
-	"[FREQ_SCIENCE]" = "sciradio",
-	"[FREQ_MEDICAL]" = "medradio",
-	"[FREQ_ENGINEERING]" = "engradio",
-	"[FREQ_SUPPLY]" = "suppradio",
-	"[FREQ_SERVICE]" = "servradio",
-	"[FREQ_SECURITY]" = "secradio",
-	"[FREQ_COMMAND]" = "comradio",
-	"[FREQ_AI_PRIVATE]" = "aiprivradio",
-	"[FREQ_SYNDICATE]" = "syndradio",
-	"[FREQ_CENTCOM]" = "centcomradio",
-	"[FREQ_CTF_RED]" = "redteamradio",
-	"[FREQ_CTF_BLUE]" = "blueteamradio"
-	))
-
 /atom/movable/proc/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	if(!can_speak())
 		return
@@ -44,7 +29,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 /atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), face_name = FALSE)
 	//This proc uses text() because it is faster than appending strings. Thanks BYOND.
 	//Basic span
-	var/spanpart1 = "<span class='[radio_freq ? get_radio_span(radio_freq) : "say"]'>"
+	var/spanpart1 = "<span class='[radio_freq ? "radio" : "say"]'>"
 	//Start name span.
 	var/spanpart2 = "<span class='name'>"
 	//Radio freq/name display
@@ -218,12 +203,6 @@ GLOBAL_LIST_INIT(freqtospan, list(
 		return no_quote ? source.quoteless_say_quote(raw_message, spans, message_mods) : source.say_quote(raw_message, spans, message_mods)
 	else
 		return "makes a strange sound."
-
-/proc/get_radio_span(freq)
-	var/returntext = GLOB.freqtospan["[freq]"]
-	if(returntext)
-		return returntext
-	return "radio"
 
 /proc/get_radio_name(freq)
 	return freq

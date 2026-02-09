@@ -1,6 +1,6 @@
 /obj/item/weapon/pick
-	force = 16
-	possible_item_intents = list(/datum/intent/pick)
+	force = DAMAGE_PICK
+	possible_item_intents = list(PICK_INTENT)
 	name = "pick"
 	desc = ""
 	icon_state = "pick"
@@ -27,15 +27,11 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/weapon/pick/copper
-	force = 13
-	possible_item_intents = list(/datum/intent/pick)
 	name = "copper pick"
 	desc = ""
 	icon_state = "cpick"
 	icon = 'icons/roguetown/weapons/tools.dmi'
-	sharpness = IS_BLUNT
-	wlength = 10
-	slot_flags = ITEM_SLOT_HIP
+	force = DAMAGE_PICK - 3
 	toolspeed = 3
 	pickmult = 0.8 // Worse pick
 	associated_skill = /datum/skill/combat/axesmaces
@@ -45,11 +41,10 @@
 /obj/item/weapon/pick/steel
 	name = "steel pick"
 	desc = "With a reinforced handle and sturdy shaft, this is a superior tool for delving in the darkness."
-	force = 19
 	icon_state = "steelpick"
-	possible_item_intents = list(/datum/intent/pick)
-	gripped_intents = list(/datum/intent/pick)
-	max_integrity = 600
+	force = DAMAGE_PICK + 3
+	gripped_intents = list(PICK_INTENT)
+	max_integrity = INTEGRITY_STRONGEST + 100
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	pickmult = 1.2
@@ -57,11 +52,10 @@
 /obj/item/weapon/pick/stone
 	name = "stone pick"
 	desc = "Stone versus sharp stone, who wins?"
-	force = 10
 	icon_state = "stonepick"
-	possible_item_intents = list(/datum/intent/pick)
-	gripped_intents = list(/datum/intent/pick)
-	max_integrity = 250
+	force = DAMAGE_PICK - 6
+	gripped_intents = list(PICK_INTENT)
+	max_integrity = INTEGRITY_STANDARD + 50
 	anvilrepair = null
 	melting_material = null
 	pickmult = 0.7 // Worse pick
@@ -69,12 +63,12 @@
 /obj/item/weapon/pick/drill
 	name = "clockwork drill"
 	desc = "A wonderfully complex work of engineering capable of shredding walls in seconds as opposed to hours."
-	force_wielded = 30
+	force_wielded = DAMAGE_HEAVYCLUB_WIELD
 	icon_state = "drill"
 	lefthand_file = 'icons/mob/inhands/weapons/hammers_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/hammers_righthand.dmi'
 	item_state = "drill"
-	possible_item_intents = list(/datum/intent/mace/smash)
+	possible_item_intents = list(MACE_SMASH)
 	gripped_intents = list(/datum/intent/drill)
 	experimental_inhand = FALSE
 	experimental_onback = FALSE
@@ -94,7 +88,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/weapon/pick/drill/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/weapon/pick/drill/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, 5)
 

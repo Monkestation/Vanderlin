@@ -38,12 +38,12 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("dough" = 1)
 
-/obj/item/reagent_containers/food/snacks/dough_slice/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/dough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(I, /obj/item/kitchen/rollingpin))
 		if(isturf(loc)&& (found_table))
@@ -87,12 +87,12 @@
 	rotprocess = SHELFLIFE_EXTREME
 	w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/reagent_containers/food/snacks/butterdough_slice/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/butterdough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(isturf(loc)&& (found_table))
 		if(istype(I, /obj/item/kitchen/rollingpin))
@@ -205,9 +205,9 @@
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/breadslice
 	faretype = FARE_POOR
 
-/obj/item/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(modified)
 		return TRUE
 	if(istype(I, /obj/item/reagent_containers/food/snacks/meat/salami/slice))
@@ -377,7 +377,7 @@
 
 /obj/item/reagent_containers/food/snacks/grenzelbun
 	name = "grenzelbun"
-	desc = "Originally an elven cuisine composed of mortal races flesh and bread, the classic wiener in a bun, now modified and staple food of Grenzelhoft cuisine."
+	desc = "The classic wiener in a bun, a staple food of Grenzelhoft cuisine."
 	list_reagents = list(/datum/reagent/consumable/nutriment = SAUSAGE_NUTRITION+SMALLDOUGH_NUTRITION)
 	tastes = list("savory sausage" = 1)
 	icon_state = "grenzbun"
@@ -997,9 +997,9 @@
 
 /*	.................   Griddlecake Condiments   ................... */
 
-/obj/item/reagent_containers/food/snacks/griddlecake/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/griddlecake/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(modified)
 		return TRUE
 	if(istype(I, /obj/item/reagent_containers/food/snacks/butterslice))

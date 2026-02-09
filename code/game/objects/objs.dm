@@ -269,7 +269,7 @@
 	if(unique_reskin && !current_skin)
 		. += "<span class='notice'>Alt-click it to reskin it.</span>"
 
-/obj/AltClick(mob/user)
+/obj/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(unique_reskin && !current_skin && user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		reskin_obj(user)

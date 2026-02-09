@@ -30,7 +30,7 @@
 			dice_list -= dice
 			add_dice(new dice())
 
-/obj/item/dice_cup/attackby(obj/item/I, mob/living/user, params)
+/obj/item/dice_cup/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(!istype(I, /obj/item/dice))
 		return ..()
 	if(length(dice_list) >= max_dice)
@@ -56,7 +56,7 @@
 	user.put_in_hands(die)
 	return die
 
-/obj/item/dice_cup/attack_hand_secondary(mob/user, params)
+/obj/item/dice_cup/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -70,7 +70,7 @@
 		to_chat(user, span_notice("No dice."))//heh
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/dice_cup/attack_self(mob/user, params)
+/obj/item/dice_cup/attack_self(mob/user, list/modifiers)
 	if(!length(dice_list))
 		to_chat(user, span_warning("There are no dice to roll!"))
 		return
@@ -103,7 +103,7 @@
 	if(which_one)
 		INVOKE_ASYNC(which_one, TYPE_PROC_REF(/obj/item/dice, rig_dice), user)
 
-/obj/item/dice_cup/attack_self_secondary(mob/user, params)
+/obj/item/dice_cup/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

@@ -117,6 +117,8 @@
 		</html>"}
 
 /datum/browser/proc/open(use_onclose = TRUE)
+	if(!user)
+		return
 	if(isnull(window_id))	//null check because this can potentially nuke goonchat
 		stack_trace("Browser [title] tried to open with a null ID")
 		to_chat(user, "<span class='danger'>The [title] browser you tried to open failed a sanity check! Please report this on github!</span>")
@@ -130,9 +132,9 @@
 		window_size = "size=[width * scaling]x[height * scaling];"
 	var/datum/asset/simple/namespaced/common/common_asset = get_asset_datum(/datum/asset/simple/namespaced/common)
 	common_asset.send(user)
-	if (stylesheets.len)
+	if(length(stylesheets))
 		SSassets.transport.send_assets(user, stylesheets)
-	if (scripts.len)
+	if(length(scripts))
 		SSassets.transport.send_assets(user, scripts)
 	user << browse(build_page(), "window=[window_id];[window_size][window_options]")
 	if (use_onclose)

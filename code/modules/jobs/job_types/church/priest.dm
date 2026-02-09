@@ -62,11 +62,11 @@
 		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 
-	spawned.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	spawned.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	spawned.verbs |= /mob/living/carbon/human/proc/churchcurse
-	spawned.verbs |= /mob/living/carbon/human/proc/churchannouncement
-	spawned.verbs += list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb)
+	add_verb(spawned, /mob/living/carbon/human/proc/coronate_lord)
+	add_verb(spawned, /mob/living/carbon/human/proc/churchexcommunicate)
+	add_verb(spawned, /mob/living/carbon/human/proc/churchcurse)
+	add_verb(spawned, /mob/living/carbon/human/proc/churchannouncement)
+	add_verb(spawned, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
 
 	spawned.virginity = TRUE
 
@@ -113,7 +113,7 @@
 
 /mob/living/carbon/human/proc/coronate_lord()
 	set name = "Coronate"
-	set category = "Priest"
+	set category = "RoleUnique.Divine"
 	if(!mind)
 		return
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
@@ -164,7 +164,7 @@
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Excommunicate"
-	set category = "Priest"
+	set category = "RoleUnique.Divine"
 	if(stat)
 		return
 	var/inputty = input("Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner Name") as text|null
@@ -195,7 +195,7 @@
 
 /mob/living/carbon/human/proc/churchcurse()
 	set name = "Curse"
-	set category = "Priest"
+	set category = "RoleUnique.Divine"
 	if(stat)
 		return
 	var/inputty = input("Curse someone as a heretic. (curse them again to remove it)", "Sinner Name") as text|null
@@ -224,8 +224,8 @@
 				break
 
 /mob/living/carbon/human/proc/churchannouncement()
-	set name = "Announcement"
-	set category = "Priest"
+	set name = "Priest Announcement"
+	set category = "RoleUnique.Divine"
 	if(stat)
 		return
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null

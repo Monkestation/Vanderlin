@@ -66,4 +66,4 @@
 
 	var/area/underworld/underworld = get_area(spawn_loc)
 	underworld.Entered(O, null)
-	verbs -= /client/proc/descend
+	add_verb(src, /client/proc/descend)

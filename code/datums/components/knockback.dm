@@ -20,7 +20,7 @@
 /datum/component/knockback/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_ITEM_AFTERATTACK, COMSIG_HOSTILE_ATTACKINGTARGET, COMSIG_PROJECTILE_ON_HIT))
 
-/datum/component/knockback/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/component/knockback/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag)
 		return
 	do_knockback(target, user, get_dir(source, target))
