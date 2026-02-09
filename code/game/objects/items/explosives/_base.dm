@@ -154,8 +154,8 @@
  * * lanced_by- If this grenade was detonated by an elance, we need to pass that along with the COMSIG_GRENADE_DETONATE signal for pellet clouds
  */
 /obj/item/explosive/proc/detonate(mob/living/lanced_by)
-	if(usr)
-		if(botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
+	if(lanced_by)
+		if(botch_check(lanced_by)) // if they botch the prime, it'll be handled in botch_check
 			extinguish()
 			visible_message(span_warning("The [src] fizzles out!"))
 			return FALSE
