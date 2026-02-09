@@ -417,6 +417,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	mind.current.ckey = ckey(key)
 	return TRUE
 
+/*
 /mob/dead/observer/returntolobby(modifier as num)
 	set name = "{RETURN TO LOBBY}"
 	set category = "Preferences.Options"
@@ -461,7 +462,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	M.key = key
 //	M.Login()	//wat
 	return
-
+*/
 
 /mob/dead/observer/verb/stay_dead()
 	set category = "Spirit"

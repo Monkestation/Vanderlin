@@ -1,4 +1,5 @@
 // Verbs
+/*
 /mob/verb/returntolobby()
 	set name = "{RETURN TO LOBBY}"
 	set category = "Preferences.Options"
@@ -33,6 +34,7 @@
 	M.key = key
 	qdel(src)
 	return
+*/
 
 // shit that eventually will need moved elsewhere
 /obj/item/flashlight/flare/torch/lantern/shrunken
