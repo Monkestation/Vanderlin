@@ -792,6 +792,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Possess!"
 	set desc= "Take over the body of a mindless creature!"
 
+	if(!check_rights(R_ADMIN))
+		return FALSE
 	var/list/possessible = list()
 	for(var/mob/living/L in GLOB.alive_mob_list)
 		if(istype(L,/mob/living/carbon/human/dummy) || !get_turf(L)) //Haha no.
