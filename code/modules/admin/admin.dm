@@ -636,7 +636,7 @@
 	return
 
 /datum/admins/proc/toggleooc()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle OOC"
 	toggle_ooc()
@@ -646,7 +646,7 @@
 
 
 /datum/admins/proc/togglelooc()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle LOOC"
 	toggle_looc()
@@ -655,7 +655,7 @@
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle LOOC", "[GLOB.ooc_allowed ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleoocdead()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle Dead OOC"
 	toggle_dooc()

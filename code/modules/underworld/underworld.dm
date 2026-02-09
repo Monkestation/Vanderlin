@@ -1,7 +1,7 @@
 // Verbs
 /mob/verb/returntolobby()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 
 	GLOB.actors_list -= mobid // admin removed - get him outta here.

@@ -40,7 +40,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Global Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/change_music_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeMusicPower"
 
 	if(prefs)
@@ -69,7 +69,7 @@
 
 
 /client/verb/show_rolls()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ShowRolls"
 
 	if(prefs)
@@ -81,7 +81,7 @@
 			to_chat(src, "ShowRolls Disabled")
 
 /client/verb/change_master_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeVolPower"
 
 	if(prefs)
@@ -202,7 +202,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/stop_sounds()
-	set category = "Debug"
+	set category = "GameMaster.Sound"
 	set name = "Stop All Playing Sounds"
 	if(!src.holder)
 		return

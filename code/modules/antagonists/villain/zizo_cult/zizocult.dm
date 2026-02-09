@@ -185,7 +185,7 @@
 
 /mob/living/carbon/human/proc/praise()
 	set name = "Praise the Dark Lady!"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -196,7 +196,7 @@
 
 /mob/living/carbon/human/proc/communicate()
 	set name = "Communicate with Cult"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -426,7 +426,7 @@
 
 /mob/living/carbon/human/proc/draw_sigil()
 	set name = "Draw Sigil"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
 		return
 
@@ -446,7 +446,7 @@
 
 /mob/living/carbon/human/proc/release_minion()
 	set name = "Release Lackey"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	var/list/mob/living/carbon/human/possible = list()
 	for(var/datum/mind/V in SSmapping.retainer.cultists)

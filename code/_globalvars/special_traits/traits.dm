@@ -952,7 +952,7 @@
 
 /mob/living/carbon/human/proc/emote_burp_loud()
 	set name = "Gluttonous Burp"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("burploud", intentional = TRUE)
 

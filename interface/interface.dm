@@ -73,7 +73,7 @@
 /client/verb/reportissue()
 	set name = "Report a bug"
 	set desc = "Report a bug"
-	set category = "OOC"
+	set category = "OOC.Links"
 
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(!githuburl)
@@ -205,7 +205,7 @@
 
 /client/verb/set_fixed()
 	set name = "IconSize"
-	set category = "Options"
+	set category = "Preferences.Options"
 
 	if(winget(src, "mapwindow.map", "icon-size") == "64")
 		to_chat(src, "Stretch-to-fit... OK")
@@ -216,7 +216,7 @@
 
 /client/verb/set_stretch()
 	set name = "IconScaling"
-	set category = "Options"
+	set category = "Preferences.Options"
 	if(prefs)
 		if(prefs.crt == TRUE)
 			to_chat(src, "CRT mode is on.")
@@ -230,7 +230,7 @@
 		winset(src, "mapwindow.map", "zoom-mode=normal")
 
 /client/verb/crtmode()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ToggleCRT"
 	if(!prefs)
 		return
@@ -251,7 +251,7 @@
 
 /client/verb/ui_scaling()
 	set name = "UI Scaling"
-	set category = "Options"
+	set category = "Preferences.Options"
 	if(prefs)
 		var/current_scaling = window_scaling * 100
 		var/new_scaling = input(usr, "Enter UI Scaling (Your current scaling is [current_scaling]%). Cancel to reset to native scaling.", "New UI Scaling", window_scaling * 100) as null|num
@@ -268,14 +268,14 @@
 		native_say?.refresh_channels()
 
 /client/verb/keybind_menu()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "Adjust Keybinds"
 	if(!prefs)
 		return
 	prefs.SetKeybinds(usr)
 
 /client/verb/changefps()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ChangeFPS"
 	if(!prefs)
 		return

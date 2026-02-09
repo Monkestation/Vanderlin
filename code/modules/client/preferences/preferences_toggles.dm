@@ -14,7 +14,7 @@
 
 /datum/verbs/menu/Settings/verb/setup_character()
 	set name = "Game Preferences"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set desc = ""
 	set hidden = 1
 	usr.client.prefs.current_tab = 1
@@ -23,7 +23,7 @@
 
 /client/verb/setup_character()
 	set name = "Game Preferences"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set desc = ""
 	if(prefs)
 		usr.client.prefs.current_tab = 1
@@ -31,7 +31,7 @@
 
 /client/verb/toggle_fullscreen()
 	set name = "ToggleFullscreen"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set desc = ""
 	if(prefs)
 		prefs.toggles ^= TOGGLE_FULLSCREEN
@@ -39,7 +39,7 @@
 
 /client/verb/stop_sounds_rogue()
 	set name = "StopSounds"
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set desc = ""
 	if(mob)
 		SEND_SOUND(mob, sound(null))
@@ -151,7 +151,7 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/Settings/Ghost, togglemidroundantag)()
 /*
 TOGGLE_CHECKBOX(/datum/verbs/menu/Settings/Sound, toggletitlemusic)()
 	set name = "LobbyMusic"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set desc = ""
 	set hidden = 1
 	usr.client.prefs.toggles ^= SOUND_LOBBY
@@ -255,7 +255,7 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/Settings/Sound, toggle_announcement_sound)()
 
 /datum/verbs/menu/Settings/Sound/verb/stop_client_sounds()
 	set name = "Stop Sounds"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set desc = ""
 	SEND_SOUND(usr, sound(null))
 	var/client/C = usr.client

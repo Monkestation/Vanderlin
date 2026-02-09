@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/setaudience()
 	set name = "Audience Choice"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -119,7 +119,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/clearaudience()
 	set name = "Clear Audience"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 	if(!inspiration)
 		return
 	if(has_status_effect(/datum/status_effect/stacking/playing_inspiration)) // cant clear while playing
@@ -130,7 +130,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/checkaudience()
 	set name = "Check Audience"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -144,7 +144,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/picksongs()
 	set name = "Fill Songbook"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return

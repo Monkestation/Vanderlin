@@ -100,6 +100,8 @@ GLOBAL_LIST_EMPTY(asset_datums)
 			continue
 		if (legacy)
 			ACI.legacy = TRUE
+		if (keep_local_name)
+			ACI.keep_local_name = keep_local_name
 		assets[asset_name] = ACI
 
 /datum/asset/simple/send(client)

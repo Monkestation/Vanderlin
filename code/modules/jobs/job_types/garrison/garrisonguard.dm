@@ -200,5 +200,5 @@
 
 /mob/proc/haltyell()
 	set name = "HALT!"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("haltyell")
