@@ -387,12 +387,10 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set name = "Right-click Menu"
 	if(!holder)
 		return
-	if(show_popup_menus == FALSE)
-		show_popup_menus = TRUE
-		log_admin("[key_name(usr)] toggled context menu ON.")
-	else
-		show_popup_menus = FALSE
-		log_admin("[key_name(usr)] toggled context menu OFF.")
+	show_popup_menus = !show_popup_menus
+
+	to_chat(usr, "toggled context menu [show_popup_menus ? "ON" : "OFF"].")
+	log_admin("[key_name(usr)] toggled context menu [show_popup_menus ? "ON" : "OFF"].")
 
 /client/proc/toggle_aghost_invis()
 	set category = "GameMaster"
