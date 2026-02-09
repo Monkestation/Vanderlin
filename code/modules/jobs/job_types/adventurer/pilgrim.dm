@@ -28,6 +28,7 @@
 	abstract_type = /datum/job/advclass/pilgrim
 	category_tags = list(CTAG_PILGRIM)
 	spawn_with_torch = TRUE
+	department_flag = OUTSIDERS
 
 /datum/job/advclass/pilgrim/rare
 	abstract_type = /datum/job/advclass/pilgrim/rare

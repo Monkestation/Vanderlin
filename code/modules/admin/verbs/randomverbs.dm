@@ -19,33 +19,106 @@
 	admin_ticket_log(M, msg)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Drop Everything") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_subtle_message(mob/M in GLOB.mob_list)
+/client/proc/cmd_admin_subtle_message(mob/target in GLOB.mob_list)
 	set category = "Special"
 	set name = "Subtle Message"
 
-	if(!ismob(M))
-		return
+	if(!ismob(target))
+		return FALSE
 	if(!check_rights(R_ADMIN))
-		return
+		return FALSE
+	var/mob/user = usr
+	var/message
 
-	message_admins("[key_name_admin(src)] has started answering [ADMIN_LOOKUPFLW(M)]'s prayer.")
-	var/msg = input("Message:", text("Subtle PM to [M.key]")) as text|null
+	message_admins("[key_name_admin(user)] has started talking into [ADMIN_LOOKUPFLW(target)]'s head.")
+	var/option = alert(user, "What type of SubtlePM do you want?", "Type", "Voice", "Specific God")
+	switch(option)
+		if("Voice")
+			message = input("Message:", text("Subtle PM to [target.key]")) as text|null
+			if(!message)
+				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
+				return FALSE
+			to_chat(target, span_big("[span_abductor("I hear a voice in my head...")] [span_mind_control(message)]"))
 
-	if(!msg)
-		message_admins("[key_name_admin(src)] decided not to answer [ADMIN_LOOKUPFLW(M)]'s prayer")
-		return
-	if(usr)
-		if (usr.client)
-			if(usr.client.holder)
-				SEND_SOUND(usr.client, 'sound/misc/yeoldebwoink.ogg')
-				M.playsound_local(soundin = 'sound/misc/yeoldebwoink.ogg', vol = 100)
-				to_chat(M, span_big("[span_abductor("I hear a voice in my head...")] [span_mind_control(msg)]"))
+		if("Specific God")
+			var/list/god_options = list("Generic")
+			var/chosen_god
+			var/volume = "Normal"
+			var/first_time_message
+			for(var/patron in COLORFUL_PATRONS)
+				if(patron in god_options)
+					continue
+				god_options += patron
+			chosen_god = browser_input_list(user, "Which god?", "God", god_options, "CANCEL", 20 SECONDS)
+			if(!chosen_god || (chosen_god == "CANCEL"))
+				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
+				return FALSE
 
-	log_admin("SubtlePM: [key_name(usr)] -> [key_name(M)] : [msg]")
-	msg = "<span class='adminnotice'><b> SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] :</b> [msg]</span>"
-	message_admins(msg)
-	admin_ticket_log(M, msg)
+			var/first_time = alert(user, "Send a god unique 'feelings' message first?", "Atmosphere", "Yes", "No")
+			if(first_time == "Yes")
+				first_time_message = get_god_atmosphere_message(chosen_god)
+			volume = alert(user, "How loud (big) should your message be?", "Volume", "Normal", "Loud", "Quiet")
+			message = input(user, "What will [chosen_god] say?", "Speak for [chosen_god]") as text|null
+			if(!message)
+				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
+				return FALSE
+
+			if(first_time && first_time_message)
+				to_chat(target, SPAN_GOD_FIRST_FEEL(first_time_message))
+				message_admins("<span class='adminnotice'><b> SubtleMessage: [key_name_admin(user)] -> [key_name_admin(target)] :</b> [first_time_message]</span>")
+			message = "<span class='god_[ckey(chosen_god)]'>[message]</span>"
+			switch(volume)
+				if("Loud")
+					message = SPAN_GOD_LOUD(message)
+				if("Quiet")
+					message = SPAN_GOD_QUIET(message)
+			message = SPAN_PRAYER_WRAPPER(message)
+			to_chat(target, "[span_abductor("I hear a voice in my head...")] [message]")
+		else
+			message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
+			return FALSE
+
+	SEND_SOUND(user.client, 'sound/misc/yeoldebwoink.ogg')
+	target.playsound_local(soundin = 'sound/misc/yeoldebwoink.ogg', vol = 100)
+
+	log_admin("SubtlePM: [key_name(user)] -> [key_name(target)] : [message]")
+	message = "<span class='adminnotice'><b> SubtleMessage: [key_name_admin(user)] -> [key_name_admin(target)] :</b> [message]</span>"
+	message_admins(message)
+	admin_ticket_log(target, message)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Subtle Message") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/proc/get_god_atmosphere_message(chosen_god)
+	var/atmosphere_message
+	switch(chosen_god)
+		if("Astrata")
+			atmosphere_message = SPAN_GOD_ASTRATA("Your body feels warm… it’s as if the sun itself were beaming against your skull… amidst this sensation, the voice of a woman, authoritative, radiant, demanding absolute attention, brands itself in your head.")
+		if("Noc")
+			atmosphere_message = SPAN_GOD_NOC("Symbols dance in the corner of your vision. For a moment, you are enlightened.. Your mind is imprinted with runes. You are able to decipher the voice of a man. Formal, contemplative, perhaps a little haughty even.")
+		if("Abyssor")
+			atmosphere_message = SPAN_GOD_ABYSSOR("The rumbling of clouds, the crashing of waves, the smell of salt. You are flooded with a sensation that you could only describe as being lost at sea… the crackling lightning above gives way to a voice. Disgruntled, weary and drowned, the words that you can make out are spoken in a gruff tone.")
+		if("Dendor")
+			atmosphere_message = SPAN_GOD_DENDOR("The chatter and sounds around you fade into an ambience… Your ears pick up wolves growling, chirping of birds… even the faintest movements of the trees swaying with the wind. A peaceful meditation, violently interrupted several loud thuds. The rustling of the leaves speak in a gravelly voice. Indignant and brittle, as if on the verge of snapping like a twig.")
+		if("Ravox")
+			atmosphere_message = SPAN_GOD_RAVOX("A sudden rush of righteousness usurps your emotions, the clashing of blades, the symphony of steel on steel. But just abruptly, it fades into a harsh pain of faded glory. As if nostalgia had plunged it dagger into your chest. With a hoarse, mournful yet solemn tone, Justice speaks to you.")
+		if("Malum")
+			atmosphere_message = SPAN_GOD_MALUM("Your perspective abruptly shifts on the world. Every wall, every gate, even the pavement you’d walk onto clicks to you. The whole world is a big puzzle, a feat of engineering to the inspired mind. Your mind races with ideas, striking you with plan after plan. A loud sizzle snaps you out of this trance, someone speaks to you in a tempered, detached voice, with few words. Direct, and to the point, as if preoccupied with something.")
+		if("Eora")
+			atmosphere_message = SPAN_GOD_EORA("All manner of troubles seem to evaporate. Everyone, everything around you appeals to have grown softer, more docile. A comfort akin to a mother tucking in her child, your worries are hushed away for now. Amidst this dreamy state, a soft-spoken, appeasing voice cradles your mind. Her tone is compassionate, as if she were right there with you.")
+		if("Xylix")
+			atmosphere_message = SPAN_GOD_XYLIX("Life is so comical… the drama you will cause will be astronomical! Wouldn’t you just love a show, you should’ve been laughing five minutes ago! The air is light and witty, you begin to truly enjoy this city… Ambiguous is this voice… festive,whimsical, and carefree.. The peak of free choice!")
+		if("Pestra")
+			atmosphere_message = SPAN_GOD_PESTRA("The body works in curious ways, in fact, have you ever truly taken a moment to question it? A balance of humors, substances flow through the veins, alchemical agents to modify the parameters of your biology. Yet ponder more, if you were to delve into this, you’d at least need a notebook and a few samples to compare. Pensive, hypercritical, and apathetic, she speaks as if this were an examination.")
+		if("Necra")
+			atmosphere_message = SPAN_GOD_NECRA("Remember you must die. All things will come to an end. It is a grim thought, but not without its merits. In fact, it brings some peace knowing there is a place to look forward to. It is a cold thought, like the breeze of autumn after a long summer. Stillness is in the air. Silence and Serenity. The disembodied voice that follows does not break this silence, it harmonizes with it.  Sedative, ancient, and steady, her message to you is in whispers")
+		if("Matthios")
+			atmosphere_message = SPAN_GOD_MATTHIOS("A distant coin rolls. You hear it inching every closer to you… until you can only focus on it. It rolls down the split of your mind using the groves within your brain as a path until it stops with a sharp clink. Ideations of wealth beyond measure, yours for the taking, only disturbed by the chuckling of a man. He speaks with many pauses… a trial of your patience, with taunting chuckles between every phrase. Cunning and almost condescending, his breathy voice pings your ears.")
+		if("Baotha")
+			atmosphere_message = SPAN_GOD_BAOTHA("You feel a sudden drain on your body, it is soothing… as if your troubles have been uplifted, replaced by an ever-sweet ecstasy. All the world seems colorful, vibrant, exciting. You must experience it all, you must live in the moment and relish all it has to offer you. A feminine, honey voice woman hums in your mind. She sounds silvery, and singsong, an addicting melody like a siren.")
+		if("Graggar")
+			atmosphere_message = SPAN_GOD_GRAGGAR("Your heart begins to race. Blood rushes to your head. Your hands clench into a fist, a rhythmic thumping takes over your hearing. Your eyes narrow down on everything, everyone. You size them all up. There is some primal and feral urge to fight, to shout, to let loose. You can hardly keep your body from lurching forward. As you tremble with the sudden surge of adrenaline, a deep guttural laugh. He roars, a raucous, abrasive and brash voice follows.")
+		if("Zizo")
+			atmosphere_message = SPAN_GOD_ZIZO("A swirl of shadows overtake your senses, the sphere that is your mind is penetrated and swallowed whole. You are lost in the dark, engulfed and surrounded. As if entombed in a vast void of nothingness. A purple light flickers in your vision, profane, offering no comfort from the dark, however drawing your attention. The voice of a woman, sharp, conceitful, and ensnaring. Her voice is ephemeral, and ghastly. A coldness takes hold of you, bone-chilling and black as death. When she speaks, a shiver runs down your spine.")
+	return SPAN_PRAYER_WRAPPER(atmosphere_message)
 
 /client/proc/cmd_admin_headset_message(mob/M in GLOB.mob_list)
 	set category = "Special"
@@ -129,7 +202,7 @@
 
 /client/proc/cmd_admin_world_narrate()
 	set category = "Special"
-	set name = "Global Narrate"
+	set name = "Narrate: Global"
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -166,7 +239,7 @@
 
 /client/proc/cmd_admin_direct_narrate(mob/M)
 	set category = "Special"
-	set name = "Direct Narrate"
+	set name = "Narrate: Direct"
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -191,7 +264,7 @@
 
 /client/proc/cmd_admin_local_narrate(atom/A)
 	set category = "Special"
-	set name = "Local Narrate"
+	set name = "Narrate: Local"
 
 	if(!check_rights(R_ADMIN))
 		return

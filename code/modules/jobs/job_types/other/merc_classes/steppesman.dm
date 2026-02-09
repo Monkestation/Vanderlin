@@ -8,9 +8,10 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
 	jobstats = list(
-		STATKEY_STR = 2,
+		STATKEY_STR = 1,
 		STATKEY_END = 1,
 		STATKEY_PER = 1,
+		STATKEY_SPD = 1,
 	)
 
 	skills = list(
@@ -34,8 +35,8 @@
 	)
 
 	traits = list(
-        TRAIT_MEDIUMARMOR,
-        TRAIT_DUALWIELDER,
+		TRAIT_DUALWIELDER,
+		TRAIT_DODGEEXPERT,
 	)
 
 /datum/job/advclass/mercenary/steppesman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -55,8 +56,8 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
 	backr = /obj/item/storage/backpack/satchel
-	armor = /obj/item/clothing/armor/medium/scale/steppe
-	head = /obj/item/clothing/head/helmet/bascinet/steppe
+	armor = /obj/item/clothing/armor/leather/hide/steppe
+	head = /obj/item/clothing/head/papakha
 	mask = /obj/item/clothing/face/facemask/steel/steppe
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(
