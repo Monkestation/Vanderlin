@@ -317,6 +317,8 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 	for(var/mob/living/carbon/person in view(1, inviter))
 		if(!person.mind || mind.do_i_know(person.mind))
 			continue
+		if(person == inviter)
+			continue
 		mobs += person
 
 	if(!LAZYLEN(mobs))
