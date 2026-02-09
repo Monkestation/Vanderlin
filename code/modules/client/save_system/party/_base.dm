@@ -313,10 +313,12 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 // Not really sure where is best to put this, so it can go in here for now.
 /mob/living/carbon/proc/make_acquaintance()
 	var/mob/living/carbon/inviter = usr
-	var/list/mobs = view(1, inviter)
-	for(var/mob/living/carbon/person in mobs)
+	var/list/mobs = list()
+	for(var/mob/living/carbon/person in view(1, inviter))
 		if(!person.mind || mind.do_i_know(person.mind))
-			mobs -= person
+			continue
+		mobs += person
+
 	if(!LAZYLEN(mobs))
 		return FALSE
 
