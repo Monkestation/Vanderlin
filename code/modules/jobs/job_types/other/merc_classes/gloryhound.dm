@@ -56,9 +56,8 @@
 	)
 
 /datum/outfit/mercenary/gloryhound/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	if(equipped_human.dna?.species?.id == SPEC_ID_KOBOLD)
+	. = ..()
+	if(iskobold(equipped_human)
 		beltl = /obj/item/weapon/sword/short //kobolds get a short sword due to their lack of strength
 	else
 		beltl = /obj/item/weapon/sword
-
-	. = ..()
