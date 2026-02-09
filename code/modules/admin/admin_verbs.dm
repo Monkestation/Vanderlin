@@ -389,7 +389,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		return
 	show_popup_menus = !show_popup_menus
 
-	to_chat(usr, "toggled context menu [show_popup_menus ? "ON" : "OFF"].")
+	to_chat(usr, span_notice("Toggled context menu [show_popup_menus ? "ON" : "OFF"]."))
 	log_admin("[key_name(usr)] toggled context menu [show_popup_menus ? "ON" : "OFF"].")
 
 /client/proc/toggle_aghost_invis()
