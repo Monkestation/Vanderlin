@@ -137,5 +137,95 @@
                 "balance": "rebalanced steppesman mercenary"
             }
         ]
+    },
+    "2026-02-10": {
+        "realforest2001": [
+            {
+                "server": "TGS DMAPI updated to 7.4.0 / 5.11.0"
+            },
+            {
+                "bugfix": "Fixed Blood Rites being selectable when they don't function."
+            },
+            {
+                "bugfix": "Fixed Vampire Lord, VL and Werewolf, and Werewolf triggering on Voyage."
+            },
+            {
+                "bugfix": "Fixes Marques turning into zennies."
+            },
+            {
+                "bugfix": "Fixes the duplicate description of the leather coat."
+            },
+            {
+                "bugfix": "Fixed Wretch Bloodsuckers not getting the right antag datum."
+            },
+            {
+                "bugfix": "Fixed church roles not being able to unlock/lock the pillory they have."
+            },
+            {
+                "bugfix": "Fixed the Inquisition black bag eating head gear."
+            },
+            {
+                "admin": "Hearing Speech, Whispers and seeing Emotes as aghost are now independent buttons and save through rounds."
+            },
+            {
+                "admin": "Making an announcement from the gods can now be \\\"tested\\\" without sending to the whole server."
+            },
+            {
+                "admin": "Astrata, Xylix, Zizo, Graggar, Matthios and Baotha omen sounds can now be used in announcements."
+            },
+            {
+                "admin": "Moved some verbs around to be easier to find and work out what they are."
+            },
+            {
+                "admin": "LOOC will now be distinct if relayed via admin powers vs local hearing. (R) LOOC."
+            },
+            {
+                "admin": "Ahelps are now in red for the chat window, this was prior intended for part of the message but wasn't being applied."
+            },
+            {
+                "admin": "Added an audio cue and distinct chat format for prayers."
+            },
+            {
+                "admin": "Rebuilt Subtle Message to allow for easy messages from the gods."
+            },
+            {
+                "admin": "Added thematic pre-messages for the main 14 gods, courtesy of Vispectra."
+            },
+            {
+                "admin": "Added logging for pickpocketing."
+            },
+            {
+                "admin": "Added logging for vampire transfix."
+            },
+            {
+                "admin": "Added a feedback message for toggling the context menu."
+            }
+        ],
+        "Bloo4420": [
+            {
+                "map": "Modified Vanderlin apothecary door access"
+            }
+        ],
+        "Casperclone1": [
+            {
+                "bugfix": "Fixed explosives not being extinguished in water"
+            },
+            {
+                "bugfix": "Crafting explosives should no longer explode when making them, such as deathshells"
+            },
+            {
+                "balance": "deathshells have a 25% to not explode when ignited as the original PR wanted them to have a drawback for being cheaply produced"
+            }
+        ],
+        "PotatoTomahto": [
+            {
+                "rscdel": "You can see see types without the trait, trait gives crop information"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Gloryhound Mercenary class"
+            }
+        ]
     }
 }

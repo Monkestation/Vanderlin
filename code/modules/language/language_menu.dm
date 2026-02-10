@@ -8,13 +8,13 @@
 	language_holder = null
 	return ..()
 
-// /datum/language_menu/interact(mob/user)
-// 	if(!user || !user.client)
-// 		return
+/datum/language_menu/ui_interact(mob/user)
+	if(!user || !user.client)
+		return
 
-// 	var/datum/browser/popup = new(user, "language_menu", "Language Menu", 700, 600)
-// 	popup.set_content(get_html(user))
-// 	popup.open()
+	var/datum/browser/popup = new(user, "language_menu", "Language Menu", 700, 600)
+	popup.set_content(get_html(user))
+	popup.open()
 
 /datum/language_menu/proc/get_html(mob/user)
 	var/atom/movable/AM = language_holder.get_atom()
