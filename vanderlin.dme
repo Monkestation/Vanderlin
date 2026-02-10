@@ -3414,6 +3414,7 @@
 #include "code\modules\reagents\reagent_containers\bottles\_bottle.dm"
 #include "code\modules\reagents\reagent_containers\bottles\alchemy.dm"
 #include "code\modules\reagents\reagent_containers\bottles\beverages.dm"
+#include "code\modules\relays\relays.dm"
 #include "code\modules\screen_alerts\blurb.dm"
 #include "code\modules\screen_alerts\screen_text.dm"
 #include "code\modules\spatial_grid\cell_tracking.dm"
