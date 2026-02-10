@@ -1370,14 +1370,14 @@
 		if(LAZYACCESS(modifiers, LEFT_CLICK))
 			user_mob.check_for_injuries(user_mob)
 			to_chat(user_mob, "I am [user_mob.get_encumbrance() * 100]% encumbered.")
-		if(LAZYACCESS(modifiers, MIDDLE_CLICK))
+		if(LAZYACCESS(modifiers, RIGHT_CLICK))
 			if(!user_mob.mind)
 				return
 			if(length(user_mob.mind.known_people))
 				user_mob.mind.display_known_people(user_mob)
 			else
 				to_chat(user_mob, "<span class='warning'>I don't know anyone.</span>")
-		if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		if(LAZYACCESS(modifiers, MIDDLE_CLICK))
 			if(!user_mob.mind)
 				return
 			user_mob.make_acquaintance()
