@@ -116,7 +116,7 @@
 /datum/language_holder/proc/open_language_menu(mob/user)
 	if(!language_menu)
 		language_menu = new(src)
-	// language_menu.interact(user)
+	language_menu.ui_interact(user)
 
 /datum/language_holder/proc/get_atom()
 	if(ismovableatom(owner))

@@ -41,6 +41,11 @@ SUBSYSTEM_DEF(statpanels)
 			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)",
 		)
 
+		if(SSgamemode.roundvoteend)
+			var/total_time = world.time - SSticker.round_start_time
+			var/round_end_time = (SSgamemode.round_ends_at - GLOB.round_timer) - total_time
+			global_data += "Roundend: [DisplayTimeText(round_end_time, 1)]"
+
 		if(SSticker.reboot_timer)
 			var/reboot_time = timeleft(SSticker.reboot_timer)
 			if(reboot_time)
