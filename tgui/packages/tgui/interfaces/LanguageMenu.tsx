@@ -46,7 +46,7 @@ const LangSpeakIcon = (props: LanguagePropsPassRest) => {
     <Icon
       name="comment"
       color={
-        language.can_speak ? 'average' : 'grey'
+        language.can_speak ? 'good' : 'grey'
       }
       {...rest}
     />
