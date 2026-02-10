@@ -76,8 +76,8 @@
 			if((is_admin || isobserver(AM)) && language_datum)
 				language_holder.remove_language(language_datum)
 				if(is_admin)
-					message_admins("[key_name_admin(user)] removed the [language_name] language to [key_name_admin(AM)].")
-					log_admin("[key_name(user)] removed the language [language_name] to [key_name(AM)].")
+					message_admins("[key_name_admin(user)] removed the [language_name] language from [key_name_admin(AM)].")
+					log_admin("[key_name(user)] removed the language [language_name] from [key_name(AM)].")
 				. = TRUE
 		if("toggle_omnitongue")
 			if(is_admin || isobserver(AM))
@@ -86,12 +86,3 @@
 					message_admins("[key_name_admin(user)] [language_holder.omnitongue ? "enabled" : "disabled"] the ability to speak all languages (that they know) of [key_name_admin(AM)].")
 					log_admin("[key_name(user)] [language_holder.omnitongue ? "enabled" : "disabled"] the ability to speak all languages (that_they know) of [key_name(AM)].")
 				. = TRUE
-
-/proc/cmp_language_data(list/a, list/b)
-	var/a_speak = a["can_speak"] ? 1 : 0
-	var/b_speak = b["can_speak"] ? 1 : 0
-
-	if(a_speak != b_speak)
-		return b_speak - a_speak
-
-	return sorttext(a["name"], b["name"])

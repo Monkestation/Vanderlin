@@ -1,0 +1,23 @@
+// Based on the generic browser UI, red and black mostly
+
+.theme-grim:root{
+  // Base
+  --color-base: #060606;
+  --color-primary: #ae3636;
+  --color-text: #9c807d;
+
+  --font-size: 14px;
+  --line-height: 170%;
+
+  // Background
+  .Layout__content {
+    background-image: none;
+  }
+
+  // Components
+  --section-separator-color: #9c807d;
+
+  --button-background-default: #791717;
+  --button-background-selected: #ae3636;
+
+}
