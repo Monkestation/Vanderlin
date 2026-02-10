@@ -126,6 +126,6 @@
 	return "WEREVOLF"
 
 /datum/species/werewolf/check_species_weakness(obj/item, mob/living/attacker, mob/living/parent)
-	if(parent.has_status_effect(/datum/status_effect/debuff/silver_curse))
+	if(parent.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		return 0.75
 	return 0

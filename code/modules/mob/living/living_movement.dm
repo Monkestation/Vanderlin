@@ -122,12 +122,11 @@
 /mob/living/can_safely_descend(turf/target)
 	target = GET_TURF_BELOW(target)
 	var/flags = NONE
-	for(var/i in target.contents)
-		var/atom/thing = i
+	for(var/atom/thing as anything in target)
 		flags |= thing.intercept_zImpact(src, 1)
 		if(flags & FALL_STOP_INTERCEPTING)
 			break
-	for(var/obj/structure/stairs/S in target.contents)
+	for(var/obj/structure/stairs/S in target)
 		return TRUE
 	if(flags & FALL_INTERCEPTED)
 		return TRUE
@@ -142,12 +141,13 @@
 	var/light_amount = T?.get_lumcount()
 	var/used_time = DEFAULT_MOB_SNEAK_TIME
 	var/light_threshold = rogue_sneaking_light_threshold
-	light_threshold += (get_skill_level(/datum/skill/misc/sneaking) / 200)
+	var/sneak_skill_level = get_skill_level(/datum/skill/misc/sneaking, TRUE)
+	light_threshold += (sneak_skill_level / 200)
 
 	if(rogue_sneaking) //If sneaking, check if they should be revealed
 		if((stat > SOFT_CRIT) || IsSleeping() || !MOBTIMER_FINISHED(src, MT_FOUNDSNEAK, 30 SECONDS) || !T || reset || (m_intent != MOVE_INTENT_SNEAK) || light_amount >= light_threshold)
 			used_time /= 2
-			used_time += (get_skill_level(/datum/skill/misc/sneaking) * 2.5) //sneak skill makes you reveal slower but not as drastic as disappearing speed
+			used_time += (sneak_skill_level * 2.5) //sneak skill makes you reveal slower but not as drastic as disappearing speed
 			animate(src, alpha = initial(alpha), time =	used_time, flags = ANIMATION_PARALLEL)
 			spawn(used_time) regenerate_icons()
 			rogue_sneaking = FALSE
@@ -155,7 +155,7 @@
 
 	else //not currently sneaking, check if we can sneak
 		if(light_amount < light_threshold && m_intent == MOVE_INTENT_SNEAK)
-			used_time = max(used_time - (get_skill_level(/datum/skill/misc/sneaking) * 5), 0)
+			used_time = max(used_time - (sneak_skill_level * 5), 0)
 			animate(src, alpha = 0, time = used_time, flags = ANIMATION_PARALLEL)
 			spawn(used_time + 5) regenerate_icons()
 			rogue_sneaking = TRUE

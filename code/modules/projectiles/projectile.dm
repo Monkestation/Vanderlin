@@ -794,26 +794,26 @@
 		homing_offset_y = -homing_offset_y
 
 //Spread is FORCED!
-/obj/projectile/proc/preparePixelProjectile(atom/target, atom/source, params, spread = 0)
+/obj/projectile/proc/preparePixelProjectile(atom/target, atom/source, list/modifiers, spread = 0)
 	var/turf/curloc = get_turf(source)
 	var/turf/targloc = get_turf(target)
 	if(targloc && curloc)
 		if(targloc.z > curloc.z)
 			var/turf/above = GET_TURF_ABOVE(curloc)
-			if(istype(above, /turf/open/transparent/openspace))
+			if(istype(above, /turf/open/openspace))
 				curloc = above
 	trajectory_ignore_forcemove = TRUE
 	forceMove(get_turf(source))
 	trajectory_ignore_forcemove = FALSE
 	starting = get_turf(source)
 	original = target
-	if(targloc || !params)
+	if(targloc || !modifiers)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x
 		setAngle(get_angle(src, targloc) + spread)
 
-	if(isliving(source) && params)
-		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, params)
+	if(isliving(source) && modifiers)
+		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, modifiers)
 		p_x = calculated[2]
 		p_y = calculated[3]
 
@@ -826,11 +826,10 @@
 		stack_trace("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
 		qdel(src)
 
-/proc/calculate_projectile_angle_and_pixel_offsets(mob/user, params)
+/proc/calculate_projectile_angle_and_pixel_offsets(mob/user, list/modifiers)
 	var/p_x = 0
 	var/p_y = 0
 	var/angle = 0
-	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, ICON_X))
 		p_x = text2num(LAZYACCESS(modifiers, ICON_X))
 	if(LAZYACCESS(modifiers, ICON_Y))

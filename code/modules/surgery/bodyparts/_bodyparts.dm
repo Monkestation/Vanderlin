@@ -158,22 +158,26 @@
 	else
 		return list(/datum/intent/grab/move, /datum/intent/grab/shove)
 
-/obj/item/bodypart/onbite(mob/living/carbon/human/user)
-	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || istype(user.dna.species, /datum/species/werewolf))
-		if(user.has_status_effect(/datum/status_effect/debuff/silver_curse))
-			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
-			return
-		if(do_after(user, 5 SECONDS, src))
-			user.visible_message("<span class='warning'>[user] consumes [src]!</span>",\
-							"<span class='notice'>I consume [src]!</span>")
-			playsound(user, pick(dismemsound), 100, FALSE, -1)
-			new /obj/effect/gibspawner/generic(get_turf(src), user)
-			user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
-			qdel(src)
+/obj/item/bodypart/onbite(mob/living/user)
+	. = ..()
+	if(!.)
 		return
-	return ..()
+	if(status != BODYPART_ORGANIC)
+		return TRUE
+	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || is_species(/datum/species/werewolf))
+		if(user.has_status_effect(/datum/status_effect/debuff/silver_bane))
+			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
+			return TRUE
+		if(!do_after(user, 5 SECONDS, src))
+			return TRUE
+		user.visible_message(span_warning("[user] consumes [src]!"),\
+						span_notice("I consume [src]!"))
+		playsound(user, pick(dismemsound), 100, FALSE, -1)
+		new /obj/effect/gibspawner/generic(get_turf(src), user)
+		user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
+		qdel(src)
 
-/obj/item/bodypart/MiddleClick(mob/living/user, params)
+/obj/item/bodypart/MiddleClick(mob/living/user, list/modifiers)
 	var/obj/item/held_item = user.get_active_held_item()
 	var/datum/species/S = original_owner?.dna?.species
 	if(held_item)
@@ -181,7 +185,7 @@
 			if(!skeletonized)
 				var/used_time = 21 SECONDS
 				if(user.mind)
-					used_time -= (user.get_skill_level(/datum/skill/labor/butchering) * 3 SECONDS)
+					used_time -= (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 3 SECONDS)
 				visible_message("[user] begins to butcher \the [src].")
 				playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
 				var/steaks = 1
@@ -221,7 +225,7 @@
 			to_chat(user, span_warning("[src] has no meat to eat."))
 	..()
 
-/obj/item/bodypart/attack(mob/living/carbon/C, mob/user)
+/obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		if(HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))
@@ -237,7 +241,7 @@
 				return
 	return ..()
 
-/obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
+/obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
 	if(length(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
 		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)

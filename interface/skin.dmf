@@ -161,8 +161,8 @@ window "statwindow"
 		background-color = #000000
 		saved-params = "pos;size"
 		is-pane = true
-	elem "stat"
-		type = INFO
+	elem "statbrowser"
+		type = BROWSER
 		pos = 0,0
 		size = 640x480
 		anchor1 = 0,0
@@ -172,7 +172,7 @@ window "statwindow"
 		font-style = "6"
 		text-color = #d6dbd5
 		background-color = #000000
-		is-default = true
+		is-visible = false
 		saved-params = ""
 		highlight-color = #f9bb00
 		tab-text-color = #d6dbd5

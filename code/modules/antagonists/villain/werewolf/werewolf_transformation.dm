@@ -66,7 +66,7 @@
 
 	// Actual transformation step
 	var/mob/living/carbon/human/species/werewolf/new_werewolf = generate_werewolf(human_user)
-	new_werewolf.apply_status_effect(/datum/status_effect/shapechange_mob/die_with_form/werewolf, human_user, FALSE)
+	new_werewolf.apply_status_effect(/datum/status_effect/shapechange_mob/die_with_form, human_user, FALSE)
 	new_werewolf.dna?.species.after_creation(new_werewolf) // funny accented werewolf
 	new_werewolf.set_patron(human_user.patron)
 	human_user.rage_datum.grant_to_secondary(new_werewolf)
@@ -78,12 +78,13 @@
 	new_werewolf.adjustOxyLoss(human_user.getOxyLoss() / 2)
 	new_werewolf.adjustCloneLoss(human_user.getCloneLoss() / 2)
 	new_werewolf.blood_volume = human_user.blood_volume
-	human_user.fully_heal(HEAL_DAMAGE|HEAL_BLOOD|HEAL_WOUNDS)
+	human_user.fully_heal(HEAL_DAMAGE|HEAL_BLOOD|HEAL_WOUNDS|HEAL_RESTRAINTS)
 
 	playsound(new_werewolf, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	new_werewolf.playsound_local(get_turf(new_werewolf), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
 	to_chat(new_werewolf, span_userdanger("I transform into a horrible beast!"))
 	new_werewolf.emote("rage")
+	new_werewolf.spawn_gibs(FALSE)
 
 	transformed = TRUE
 	RegisterSignal(new_werewolf, COMSIG_LIVING_UNSHAPESHIFTED, PROC_REF(werewolf_untransform))
@@ -121,7 +122,7 @@
 		return
 	if(!forced && HAS_TRAIT(werewolf_user, TRAIT_NO_TRANSFORM))
 		return
-	werewolf_user.remove_status_effect(/datum/status_effect/shapechange_mob/die_with_form/werewolf)
+	werewolf_user.remove_status_effect(/datum/status_effect/shapechange_mob/die_with_form)
 
 /// Called with COMSIG_LIVING_UNSHAPESHIFTED signal
 /datum/antagonist/werewolf/proc/werewolf_untransform(mob/living/status_owner, mob/living/status_caster_mob)
@@ -131,7 +132,6 @@
 	for(var/obj/item/dropped_item in werewolf_user)
 		werewolf_user.dropItemToGround(dropped_item, silent = TRUE)
 	var/mob/living/carbon/human/caster_mob = status_caster_mob
-	werewolf_user.spawn_gibs(FALSE)
 	INVOKE_ASYNC(werewolf_user, TYPE_PROC_REF(/mob, emote), "scream")
 
 	to_chat(caster_mob, span_userdanger("The beast within returns to slumber."))

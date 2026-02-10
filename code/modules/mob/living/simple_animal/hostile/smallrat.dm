@@ -15,30 +15,33 @@
 	sellprice = 0
 	rotprocess = null
 
-/obj/item/reagent_containers/food/snacks/smallrat/onbite(mob/living/carbon/human/user)
-	if(loc == user)
-		if(user.clan)
-			if(do_after(user, 3 DECISECONDS, src))
-				user.visible_message("<span class='warning'>[user] drinks from [src]!</span>",\
-				"<span class='warning'>I drink from [src].</span>")
-				playsound(user, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
-
-				user.adjust_bloodpool(50)
-				var/blood_handle = BLOOD_PREFERENCE_RATS
-				if(dead)
-					blood_handle |= BLOOD_PREFERENCE_DEAD
-				else
-					blood_handle |= BLOOD_PREFERENCE_LIVING
-				user.clan.handle_bloodsuck(user, blood_handle)
-				playsound(user, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
-				if(dead)
-					qdel(src)
-					return
-				icon_state = "srat1"
-				rotprocess = SHELFLIFE_SHORT
-				dead = TRUE
-			return
-	return ..()
+/obj/item/reagent_containers/food/snacks/smallrat/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
+	if(loc != user)
+		return TRUE
+	if(!user.clan)
+		return TRUE
+	if(!do_after(user, 3 DECISECONDS, src))
+		return TRUE
+	user.visible_message(span_warning("[user] drinks from [src]!"),\
+	span_warning("I drink from [src]."))
+	playsound(user, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
+	user.adjust_bloodpool(50)
+	var/blood_handle = BLOOD_PREFERENCE_RATS
+	if(dead)
+		blood_handle |= BLOOD_PREFERENCE_DEAD
+	else
+		blood_handle |= BLOOD_PREFERENCE_LIVING
+	user.clan.handle_bloodsuck(user, blood_handle)
+	playsound(user, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
+	if(dead)
+		qdel(src)
+		return TRUE
+	icon_state = "srat1"
+	rotprocess = SHELFLIFE_SHORT
+	dead = TRUE
 
 /obj/item/reagent_containers/food/snacks/friedrat
 	name = "fried rat"
@@ -143,7 +146,7 @@
 		return 1
 	return ..()
 
-/obj/item/reagent_containers/food/snacks/smallrat/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/food/snacks/smallrat/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!dead)
 		if(isliving(user))
 			var/mob/living/L = user

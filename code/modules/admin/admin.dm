@@ -14,7 +14,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(mob/M in GLOB.mob_list)
-	set category = "GameMaster"
+	set category = "Admin.Admin"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -200,8 +200,8 @@
 	if(M.mind)
 		for(var/skill_type in SSskills.all_skills)
 			var/datum/skill/skill = GetSkillRef(skill_type)
-			if(skill in M.skills?.known_skills)
-				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill]] "
+			if(skill_type in M.skills?.known_skills)
+				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill_type]] "
 			else
 				body += "<li>[initial(skill.name)]: 0"
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];increase_skill=[REF(M)];skill=[skill.type]'>+</a> "
@@ -329,7 +329,7 @@
 /datum/admins/proc/admin_heal(mob/living/M in GLOB.mob_list)
 	set name = "Heal Mob"
 	set desc = "Heal a mob to full health"
-	set category = "GameMaster"
+	set category = "Admin.Admin"
 
 	if(!check_rights())
 		return
@@ -337,10 +337,24 @@
 	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
 	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
 
+/datum/admins/proc/prompt_subclass(mob/living/mob in GLOB.mob_list)
+	set name = "Trigger Subclass Menu"
+	set desc = "Triggers the subclass menu of a mob."
+	set category = "Admin.Admin"
+
+	if(!check_rights())
+		return
+	if(tgui_alert(usr, "This will trigger a no adv class restriction triumph if the player has bought it.", "Confirm", list("Proceed", "Cancel")) != "Proceed")
+		return FALSE
+
+	SSrole_class_handler.setup_class_handler(mob)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] triggered the subclass menu on [key_name_admin(mob)]!</span>")
+	log_admin("[key_name(usr)] triggered the subclass menu on [key_name(mob)].")
+
 /datum/admins/proc/admin_curse(mob/living/carbon/human/M in GLOB.mob_list)
 	set name = "Curse"
 	set desc = "Curse or lift a curse from a character"
-	set category = "GameMaster"
+	set category = "GameMaster.Gods"
 	if(!check_rights())
 		return FALSE
 
@@ -402,7 +416,7 @@
 /datum/admins/proc/admin_sleep(mob/living/M in GLOB.mob_list)
 	set name = "Toggle Sleeping"
 	set desc = "Toggle a mob's sleeping state"
-	set category = "GameMaster"
+	set category = "Admin.Admin"
 
 	if(!check_rights())
 		return
@@ -419,7 +433,7 @@
 /datum/admins/proc/start_vote()
 	set name = "Start Vote"
 	set desc = "Start a vote"
-	set category = "Server"
+	set category = "GameMaster.Fun"
 
 	if(!check_rights(R_POLL))
 		to_chat(usr, "<span class='warning'>You do not have the rights to start a vote.</span>")
@@ -527,7 +541,7 @@
 #define HARDEST_RESTART "Hardest Restart (No actions, just reboot)"
 #define TGS_RESTART "Server Restart (Kill and restart DD)"
 /datum/admins/proc/restart()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set name = "Reboot World"
 	set desc = "Restarts the world immediately"
 	if(!check_rights(R_SERVER))
@@ -580,7 +594,7 @@
 #undef TGS_RESTART
 
 /datum/admins/proc/end_round()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set name = "End Round"
 	set desc = ""
 
@@ -595,8 +609,8 @@
 
 
 /datum/admins/proc/announce()
-	set category = "Special"
-	set name = "Announce"
+	set category = "GameMaster"
+	set name = "OOC Announcement"
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))
 		return
@@ -613,7 +627,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Announce") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/set_admin_notice()
-	set category = "Special"
+	set category = "GameMaster"
 	set name = "Set Admin Notice"
 	set desc ="Set an announcement that appears to everyone who joins the server. Only lasts this round"
 	if(!check_rights(0))
@@ -636,7 +650,7 @@
 	return
 
 /datum/admins/proc/toggleooc()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle OOC"
 	toggle_ooc()
@@ -646,7 +660,7 @@
 
 
 /datum/admins/proc/togglelooc()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle LOOC"
 	toggle_looc()
@@ -655,7 +669,7 @@
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle LOOC", "[GLOB.ooc_allowed ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleoocdead()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle Dead OOC"
 	toggle_dooc()
@@ -665,7 +679,7 @@
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Dead OOC", "[GLOB.dooc_allowed ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/startnow()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="Start the round RIGHT NOW"
 	set name="Start Now"
 	if(SSticker.current_state == GAME_STATE_PREGAME || SSticker.current_state == GAME_STATE_STARTUP)
@@ -685,7 +699,7 @@
 	return 0
 
 /datum/admins/proc/toggleenter()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="People can't enter"
 	set name="Toggle Entering"
 	GLOB.enter_allowed = !( GLOB.enter_allowed )
@@ -728,7 +742,7 @@
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Respawn", "[!new_nores ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/delay()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="Delay the game start"
 	set name="Delay pre-game"
 
@@ -748,7 +762,7 @@
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Delay Game Start") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/accelerate_or_delay_round_end()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="Delay / Accelerate the round ending or vote time"
 	set name="Delay / Accelerate the round ending or vote time"
 
@@ -788,21 +802,10 @@
 				SSgamemode.round_ends_at += number
 				SSblackbox.record_feedback("tally", "admin_verb", 1, "Time until round ends triggered.")
 
-/datum/admins/proc/unprison(mob/M in GLOB.mob_list)
-	set category = "Admin"
-	set name = "Unprison"
-	if (is_centcom_level(M.z))
-		SSjob.SendToLateJoin(M)
-		message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]")
-		log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
-	else
-		alert("[M.name] is not prisoned.")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Unprison") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
 /datum/admins/proc/spawn_atom(object as text)
-	set category = "Debug"
+	set category = "Debug.Spawn"
 	set desc = ""
 	set name = "Spawn"
 
@@ -832,7 +835,7 @@
 	return initial(chosen.name)
 
 /datum/admins/proc/podspawn_atom(object as text)
-	set category = "Debug"
+	set category = "Debug.Spawn"
 	set desc = ""
 	set name = "Podspawn"
 
@@ -856,7 +859,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Podspawn Atom") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/show_traitor_panel(mob/M in GLOB.mob_list)
-	set category = "Admin"
+	set category = "GameMaster.Antags"
 	set desc = ""
 	set name = "Show Traitor Panel"
 
@@ -869,20 +872,6 @@
 
 	M.mind.traitor_panel()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Traitor Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-
-/datum/admins/proc/toggletintedweldhelmets()
-	set category = "Debug"
-	set desc="Reduces view range when wearing welding helmets"
-	set name="Toggle tinted welding helmes"
-	GLOB.tinted_weldhelh = !( GLOB.tinted_weldhelh )
-	if (GLOB.tinted_weldhelh)
-		to_chat(world, "<B>The tinted_weldhelh has been enabled!</B>")
-	else
-		to_chat(world, "<B>The tinted_weldhelh has been disabled!</B>")
-	log_admin("[key_name(usr)] toggled tinted_weldhelh.")
-	message_admins("[key_name_admin(usr)] toggled tinted_weldhelh.")
-	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Tinted Welding Helmets", "[GLOB.tinted_weldhelh ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleguests()
 	set category = "Server"
@@ -911,8 +900,7 @@
 
 	dat += "<table>"
 
-	for(var/j in SSjob.joinable_occupations)
-		var/datum/job/job = j
+	for(var/datum/job/job as anything in SSjob.joinable_occupations)
 		count++
 		var/J_title = html_encode(job.title)
 		var/J_opPos = html_encode(job.total_positions - (job.total_positions - job.current_positions))
@@ -1025,7 +1013,7 @@
 	H.returntolobby()
 
 /client/proc/spawn_liquid()
-	set category = "GameMaster"
+	set category = "Debug.Spawn"
 	set name = "Spawn Liquid"
 	set desc = "Spawns an amount of chosen liquid at your current location."
 
@@ -1059,7 +1047,7 @@
 
 /client/proc/remove_liquid()
 	set name = "Remove Liquids"
-	set category = "GameMaster"
+	set category = "GameMaster.Fun"
 	set desc = "Fixes air in specified radius."
 	var/turf/epicenter = get_turf(mob)
 
@@ -1081,7 +1069,7 @@
 	mob.hud_used?.plane_masters_update()
 
 /client/proc/spawn_pollution()
-	set category = "GameMaster"
+	set category = "Debug.Spawn"
 	set name = "Spawn Pollution"
 	set desc = "Spawns an amount of chosen pollutant at your current location."
 
@@ -1098,7 +1086,7 @@
 	log_admin("[key_name(usr)] spawned pollution at [epicenter.loc] ([choice] - [amount_choice]).")
 
 /datum/admins/proc/anoint_priest(mob/living/carbon/human/M in GLOB.human_list)
-	set category = "GameMaster"
+	set category = "GameMaster.Interactions"
 	set name = "Anoint New Priest"
 	set desc = "Choose a new priest. The previous one will be excommunicated."
 
@@ -1126,10 +1114,10 @@
 			HL.job = "Ex-Priest"
 
 
-			HL.verbs -= /mob/living/carbon/human/proc/coronate_lord
-			HL.verbs -= /mob/living/carbon/human/proc/churchexcommunicate
-			HL.verbs -= /mob/living/carbon/human/proc/churchcurse
-			HL.verbs -= /mob/living/carbon/human/proc/churchannouncement
+			remove_verb(HL, /mob/living/carbon/human/proc/coronate_lord)
+			remove_verb(HL, /mob/living/carbon/human/proc/churchexcommunicate)
+			remove_verb(HL, /mob/living/carbon/human/proc/churchcurse)
+			remove_verb(HL, /mob/living/carbon/human/proc/churchannouncement)
 			priest_job?.remove_spells(HL)
 			GLOB.excommunicated_players |= HL.real_name
 			HL.cleric?.excommunicate()
@@ -1143,10 +1131,10 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_priest()
 		devotion.grant_to(M)
-	M.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	M.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	M.verbs |= /mob/living/carbon/human/proc/churchcurse
-	M.verbs |= /mob/living/carbon/human/proc/churchannouncement
+	add_verb(M, /mob/living/carbon/human/proc/coronate_lord)
+	add_verb(M, /mob/living/carbon/human/proc/churchexcommunicate)
+	add_verb(M, /mob/living/carbon/human/proc/churchcurse)
+	add_verb(M, /mob/living/carbon/human/proc/churchannouncement)
 	removeomen(OMEN_NOPRIEST)
 	priority_announce("Astrata has anointed [M.real_name] as the new head of the Church of the Ten!", title = "Astrata Shines!", sound = 'sound/misc/bell.ogg')
 
@@ -1171,7 +1159,7 @@
 		QDEL_NULL(user.client.holder.path_debug)
 
 /datum/admins/proc/give_all_triumphs()
-	set category = "GameMaster"
+	set category = "GameMaster.Triumphs"
 	set desc = "Triumph Giver"
 	set name = "Give All Triumphs"
 

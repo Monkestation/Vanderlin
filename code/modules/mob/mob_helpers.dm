@@ -395,8 +395,7 @@
 /proc/findname(msg)
 	if(!istext(msg))
 		msg = "[msg]"
-	for(var/i in GLOB.mob_list)
-		var/mob/M = i
+	for(var/mob/M as anything in GLOB.mob_list)
 		if(M.real_name == msg)
 			return M
 	return 0
@@ -671,11 +670,6 @@
 
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)
-
-/mob
-	var/last_aimhchange = 0
-	var/aimheight = 11
-	var/cmode_music = 'sound/music/cmode/combat.ogg'
 
 /mob/proc/aimheight_change(input)
 	var/old_zone = zone_selected
@@ -995,14 +989,17 @@
 /mob/proc/can_see_reagents()
 	return stat == DEAD || has_unlimited_silicon_privilege //Dead guys and silicons can always see reagents
 
-/mob/living/carbon/human/proc/get_role_title(ignore_pronouns = FALSE)
+/mob/living/carbon/human/proc/get_role_title(ignore_pronouns = FALSE, steward_check = FALSE)
 	var/used_title
 	if(is_apprentice())
 		used_title = return_our_apprentice_name()
 	else if(job)
-		var/datum/job/J = SSjob.GetJob(job)
-		if(!J)
+		var/datum/job/job_datum = SSjob.GetJob(job)
+		var/datum/job/used_job = job_datum.parent_job ? job_datum.parent_job : job_datum
+		if(!used_job)
 			return job
-		used_title = J.get_informed_title(src, ignore_pronouns)
+		if(steward_check && (used_job.department_flag == OUTSIDERS))
+			return "Visitor"
+		used_title = used_job.get_informed_title(src, ignore_pronouns)
 
 	return used_title

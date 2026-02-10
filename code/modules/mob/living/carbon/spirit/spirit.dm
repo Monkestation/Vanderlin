@@ -42,8 +42,8 @@
 
 /mob/living/carbon/spirit/Initialize(mapload, cubespawned=FALSE, mob/spawner)
 //	coin_upkeep()	costly and not needed with the give_patron_toll failsafe if maze is drained
-	// verbs += /mob/living/proc/mob_sleep
-	verbs += /mob/living/proc/lay_down
+	// add_verb(src, /mob/living/proc/mob_sleep)
+	add_verb(src, /mob/living/proc/lay_down)
 	ADD_TRAIT(src, TRAIT_PACIFISM, "status effects")
 	var/first_part = pick("Sorrowful", "Forlorn", "Regretful", "Piteous", "Rueful", "Dejected", "Desolate", "Mournful", "Melancholic", "Woeful")
 	var/second_part = pick("Wanderer", "Traveler", "Pilgrim", "Vagabond", "Nomad", "Wayfarer", "Spirit", "Specter", "Wraith", "Phantom")
@@ -104,18 +104,10 @@
 			slow += (health_deficiency / 25)
 	add_movespeed_modifier(MOVESPEED_ID_MONKEY_HEALTH_SPEEDMOD, TRUE, 100, override = TRUE, multiplicative_slowdown = slow)
 
-/mob/living/carbon/spirit/Stat()
-	..()
-	if(!client)
-		return
-	if(statpanel("Status"))
-		stat(null, "Intent: [a_intent]")
-		stat(null, "Move Mode: [m_intent]")
-	return
 
 /mob/living/carbon/spirit/returntolobby()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 
 	if(key)
@@ -145,6 +137,7 @@
 	M.key = key
 	qdel(src)
 	return
+
 
 /*/mob/living/carbon/spirit/attack_animal(mob/living/simple_animal/M)
 	if(beingmoved)
@@ -182,6 +175,10 @@
 	for(var/mob/living/corpse in coffin)
 		if(pacify_corpse(corpse, user))
 			success = TRUE
+	for(var/mob/living/carbon/human/human_corpse in coffin)
+		if(human_corpse.funeral) /* The proc succeeds even if the corpse already received a funeral before.
+	    Coffins and graves have checks to prevent giving too much influence / devotion to Necra. */
+			success = TRUE
 	for(var/obj/item/bodypart/head/head in coffin)
 		if(!head.brainmob)
 			continue
@@ -195,6 +192,8 @@
 			if(pacify_coffin(stuffing, user, deep))
 				success = TRUE
 	return success
+
+
 
 /// Proc that finds the client associated with a given corpse and either 1. Lets ghosts skip Underworld and return to lobby 2. Gives spirits a toll
 /proc/pacify_corpse(mob/living/corpse, mob/user)

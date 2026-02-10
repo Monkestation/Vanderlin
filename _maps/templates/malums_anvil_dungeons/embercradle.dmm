@@ -1870,7 +1870,7 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "zu" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "zv" = (
 /obj/structure/rack,

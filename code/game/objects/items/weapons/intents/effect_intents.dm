@@ -35,11 +35,11 @@
 
 /datum/status_effect/debuff/dazed/on_apply()
 	. = ..()
-	owner.set_dizzy(5)
+	owner.set_dizzy(15 SECONDS)
 
 /datum/status_effect/debuff/dazed/refresh(mob/living/new_owner, duration_override, ...)
 	. = ..()
-	owner.set_dizzy(5)
+	owner.set_dizzy(15 SECONDS)
 
 /atom/movable/screen/alert/status_effect/debuff/dazed
 	name = "Dazed"

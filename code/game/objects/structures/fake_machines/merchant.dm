@@ -136,7 +136,7 @@
 	budget2change(budget)
 	set_light(0)
 
-/obj/structure/fake_machine/merchantvend/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/merchantvend/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		var/money = I.get_real_price()
 		budget += money
@@ -180,8 +180,7 @@
 			var/obj/item/packitem = picked_pack.contains
 			new packitem(get_turf(usr))
 		else
-			for(var/in_pack in picked_pack.contains)
-				var/obj/item/packitem = in_pack
+			for(var/obj/item/packitem as anything in picked_pack.contains)
 				new packitem(get_turf(usr))
 		qdel(picked_pack)
 	if(href_list["change"])

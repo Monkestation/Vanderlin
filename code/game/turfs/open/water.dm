@@ -55,7 +55,7 @@
 	var/cleanliness_factor = 1 //related to hygiene for washing
 
 	/// Fishing element for this specific water tile
-	var/datum/fish_source/fishing_datum = /datum/fish_source/ocean
+	var/datum/fish_source/fishing_datum = /datum/fish_source/water
 	flags_1 = CONDUCT_1
 
 /turf/open/water/proc/set_watervolume(volume)
@@ -133,7 +133,7 @@
 	mapped = FALSE
 	river_processes = FALSE
 	icon_state = "together"
-	baseturfs = /turf/open/transparent/openspace
+	baseturfs = /turf/open/openspace
 
 /turf/open/water/river/handle_water()
 	if(water_volume < 10)
@@ -183,7 +183,7 @@
 	handle_water()
 	return ..()
 
-/turf/open/water/river/creatable/attackby(obj/item/C, mob/user, params)
+/turf/open/water/river/creatable/attackby(obj/item/C, mob/user, list/modifiers)
 	if(istype(C, /obj/item/reagent_containers/glass/bucket/wooden) && user.used_intent.type == /datum/intent/splash)
 		try_modify_water(user, C)
 		return TRUE
@@ -327,7 +327,7 @@
 				if(get_dir(src, newloc) == dir)
 					return
 			if(user.mind && !user.buckled)
-				var/drained = max(15 - (user.get_skill_level(/datum/skill/misc/swimming) * 5), 1)
+				var/drained = max(15 - (user.get_skill_level(/datum/skill/misc/swimming, TRUE) * 5), 1)
 //				drained += (user.checkwornweight()*2)
 				drained += user.get_encumbrance() * 50
 				if(!user.adjust_stamina(drained))
@@ -382,7 +382,7 @@
 						water_overlay.layer = ABOVE_MOB_LAYER
 						water_overlay.plane = GAME_PLANE_UPPER
 
-/turf/open/water/attackby(obj/item/C, mob/user, params)
+/turf/open/water/attackby(obj/item/C, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/fill)
 		if(C.reagents)
 			if(C.reagents.holder_full())
@@ -419,7 +419,7 @@
 			return
 	. = ..()
 
-/turf/open/water/attack_hand_secondary(mob/user, params)
+/turf/open/water/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -451,7 +451,7 @@
 				L.adjust_fire_stacks(-2)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, params)
+/turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -474,25 +474,23 @@
 		playsound(user, pick(wash), 100, FALSE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/turf/open/water/onbite(mob/user)
+/turf/open/water/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
 	if(water_volume < 10)
-		return
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
-			return
-		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		user.visible_message("<span class='info'>[user] starts to drink from [src].</span>")
-		if(do_after(L, 2.5 SECONDS, src))
-			var/datum/reagents/reagents = new()
-			reagents.add_reagent(water_reagent, 2)
-			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = INGEST)
-			if(!mapped)
-				adjust_originate_watervolume(-2)
-
-			playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
-		return
-	..()
+		return TRUE
+	playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+	user.visible_message(span_info("[user] starts to drink from [src]."))
+	if(!do_after(user, 2.5 SECONDS, src))
+		return TRUE
+	var/datum/reagents/reagents = new()
+	reagents.add_reagent(water_reagent, 2)
+	reagents.trans_to(user, reagents.total_volume, transfered_by = user, method = INGEST)
+	if(!mapped)
+		adjust_originate_watervolume(-2)
+	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
+	return TRUE
 
 /turf/open/water/Destroy()
 	. = ..()
@@ -510,7 +508,7 @@
 		return 0
 	var/returned = slowdown
 	if(user.mind && swim_skill)
-		returned = returned - (user.get_skill_level(/datum/skill/misc/swimming))
+		returned = returned - (user.get_skill_level(/datum/skill/misc/swimming, TRUE))
 	return returned
 
 /*	..................   Bath & Pool   ................... */
@@ -537,6 +535,7 @@
 	barefootstep = FOOTSTEP_MUD
 	heavyfootstep = FOOTSTEP_MUD
 	cleanliness_factor = -5
+	fishing_datum = /datum/fish_source/sewer
 
 /turf/open/water/sewer/Entered(atom/movable/AM, atom/oldLoc)
 	. = ..()
@@ -580,6 +579,7 @@
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/sewer
 	cleanliness_factor = -5
+	fishing_datum = /datum/fish_source/swamp
 
 /turf/open/water/swamp/Initialize()
 	dir = pick(GLOB.cardinals)
@@ -618,6 +618,7 @@
 	water_level = 3
 	slowdown = 20
 	swim_skill = TRUE
+	fishing_datum = /datum/fish_source/swamp/deep
 
 /turf/open/water/swamp/deep/Entered(atom/movable/AM, atom/oldLoc)
 	. = ..()
@@ -655,6 +656,7 @@
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/marshy
 	cleanliness_factor = -3
+	fishing_datum = /datum/fish_source/swamp
 
 /turf/open/water/marsh/Initialize()
 	dir = pick(GLOB.cardinals)
@@ -667,6 +669,7 @@
 	water_level = 3
 	slowdown = 20
 	swim_skill = TRUE
+	fishing_datum = /datum/fish_source/swamp/deep
 
 /turf/open/water/cleanshallow
 	name = "water"
@@ -676,6 +679,7 @@
 	water_level = 2
 	slowdown = 15
 	water_reagent = /datum/reagent/water
+	fishing_datum = /datum/fish_source/cleanshallow
 
 /turf/open/water/cleanshallow/Initialize()
 	dir = pick(GLOB.cardinals)
@@ -716,6 +720,7 @@
 	swimdir = TRUE
 	set_relationships_on_init = FALSE
 	uses_level = FALSE
+	fishing_datum = /datum/fish_source/river
 	var/river_processing
 	var/river_processes = TRUE
 

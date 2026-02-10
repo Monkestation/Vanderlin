@@ -12,7 +12,7 @@
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
-	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/dendor,/datum/patron/inhumen/graggar, /datum/patron/godless, /datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/naivety, /datum/patron/godless/rashan, /datum/patron/godless/galadros)
+	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/dendor,/datum/patron/inhumen/graggar, /datum/patron/godless/godless, /datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/naivety, /datum/patron/godless/rashan, /datum/patron/godless/galadros)
 
 	jobstats = list(
 		STATKEY_STR = 3,
@@ -50,41 +50,35 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/barbrage
 	)
-
 /datum/job/advclass/combat/barbarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(istype(spawned.beltr, /obj/item/weapon/sword/iron))
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	else if(istype(spawned.beltr, /obj/item/weapon/mace/woodclub) || istype(spawned.beltr, /obj/item/weapon/axe/iron))
-		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	var/static/list/selectableweapon = list(
+		"Axe" = /obj/item/weapon/axe/iron,
+		"Mace" = /obj/item/weapon/mace/spiked,
+		"Sword" = /obj/item/weapon/sword/iron,
+		"Club" = /obj/item/weapon/mace/woodclub
+	)
+
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "BARBARIAN")
+	if(!choice)
+		return
+
+	switch(choice)
+		if("Axe")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 3, TRUE)
+		if("Mace")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 3, TRUE)
+		if("Sword")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
+		if("Club")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 3, TRUE)
 
 /datum/outfit/adventurer/barbarian
 	name = "Barbarian (Adventurer)"
+	head = /obj/item/clothing/head/helmet/horned
+	backl = /obj/item/storage/backpack/satchel
+	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	belt = /obj/item/storage/belt/leather
 	shoes = /obj/item/clothing/shoes/boots/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
-	beltr = /obj/item/weapon/sword/iron  // Default weapon
 
-/datum/outfit/adventurer/barbarian/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(prob(50))
-		backr = /obj/item/storage/backpack/satchel
-
-	var/armortype = pickweight(list("Cloak" = 5, "Hide" = 3, "Helmet" = 2))
-	var/weapontype = pickweight(list("Sword" = 4, "Club" = 3, "Axe" = 2))
-
-	switch(armortype)
-		if("Cloak")
-			cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
-		if("Hide")
-			armor = /obj/item/clothing/armor/leather/hide
-		if("Helmet")
-			head = /obj/item/clothing/head/helmet/horned
-
-	switch(weapontype)
-		if("Sword")
-			beltr = /obj/item/weapon/sword/iron
-		if("Club")
-			beltr = /obj/item/weapon/mace/woodclub
-		if("Axe")
-			beltr = /obj/item/weapon/axe/iron

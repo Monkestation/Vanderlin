@@ -24,17 +24,16 @@
 	var/list/partial_languages = language_holder.get_partially_understood_languages()
 
 	var/list/language_data = list()
-	for(var/ld in GLOB.all_languages)
-		var/datum/language/LD = ld
-		var/result = language_holder.has_language(ld)
-		var/partial_understanding = partial_languages[ld] || 0
+	for(var/datum/language/LD as anything in GLOB.all_languages)
+		var/result = language_holder.has_language(LD)
+		var/partial_understanding = partial_languages[LD] || 0
 
 		// Only show if we know it, understand it partially, or we're admin
 		if(!result && !partial_understanding && !is_admin)
 			continue
 
 		var/list/lang_info = list()
-		lang_info["type"] = ld
+		lang_info["type"] = LD
 		lang_info["name"] = initial(LD.name)
 		lang_info["desc"] = initial(LD.desc)
 		lang_info["key"] = initial(LD.key)
@@ -305,9 +304,7 @@
 	var/atom/movable/AM = language_holder.get_atom()
 	var/language_name = href_list["language_name"]
 	var/datum/language/language_datum
-
-	for(var/ld in GLOB.all_languages)
-		var/datum/language/LD = ld
+	for(var/datum/language/LD as anything in GLOB.all_languages)
 		if(language_name == initial(LD.name))
 			language_datum = LD
 			break
@@ -319,7 +316,7 @@
 			if(language_datum && AM)
 				if(AM.could_speak_in_language(language_datum) && language_holder.has_language(language_datum))
 					language_holder.selected_default_language = language_datum
-					ui_interact(user)
+					//interact(user)
 
 		if("grant_language")
 			if((is_admin || isobserver(AM)) && language_datum)
@@ -327,7 +324,7 @@
 				if(is_admin)
 					message_admins("[key_name_admin(user)] granted the [language_name] language to [key_name_admin(AM)].")
 					log_admin("[key_name(user)] granted the language [language_name] to [key_name(AM)].")
-				ui_interact(user)
+				//interact(user)
 
 		if("remove_language")
 			if((is_admin || isobserver(AM)) && language_datum)
@@ -335,7 +332,7 @@
 				if(is_admin)
 					message_admins("[key_name_admin(user)] removed the [language_name] language from [key_name_admin(AM)].")
 					log_admin("[key_name(user)] removed the language [language_name] from [key_name(AM)].")
-				ui_interact(user)
+				//interact(user)
 
 		if("toggle_omnitongue")
 			if(is_admin || isobserver(AM))
@@ -343,7 +340,7 @@
 				if(is_admin)
 					message_admins("[key_name_admin(user)] [language_holder.omnitongue ? "enabled" : "disabled"] the ability to speak all languages (that they know) of [key_name_admin(AM)].")
 					log_admin("[key_name(user)] [language_holder.omnitongue ? "enabled" : "disabled"] the ability to speak all languages (that they know) of [key_name(AM)].")
-				ui_interact(user)
+				//interact(user)
 
 	return TRUE
 

@@ -12,7 +12,7 @@
 	var/usage_prompt
 	resistance_flags = FIRE_PROOF
 
-/obj/item/gem_device/attack_self(mob/living/user, params)
+/obj/item/gem_device/attack_self(mob/living/user, list/modifiers)
 	var/alert = alert(user, "Do I want to use this? \n[usage_prompt]", "Enchanted Gem", "Yes", "No")
 	if(alert != "Yes")
 		return

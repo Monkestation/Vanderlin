@@ -8,16 +8,17 @@
 
 /datum/quirk/boon/backstory/New()
 	// Populate options from all backstory types
-	for(var/backstory_type in subtypesof(/datum/backstory))
-		if(is_abstract(backstory_type))
+	for(var/datum/backstory/backstory_type as anything in subtypesof(/datum/backstory))
+		if(IS_ABSTRACT(backstory_type))
 			continue
 		customization_options += backstory_type
 
 	if(!length(backstories))
-		for(var/backstory_type in subtypesof(/datum/backstory))
-			if(is_abstract(backstory_type))
+		for(var/datum/backstory/backstory_type as anything in subtypesof(/datum/backstory))
+			if(IS_ABSTRACT(backstory_type))
 				continue
-			LAZYADD(backstories, new backstory_type)
+			LAZYADD(backstories, new backstory_type())
+
 	return ..()
 
 /datum/quirk/boon/backstory/get_desc(datum/preferences/prefs)
@@ -221,6 +222,18 @@
 	granted_skill = /datum/skill/combat/firearms
 	stat_penalty = STATKEY_PER
 
+/datum/backstory/combat/athlete // under "combat" so they get clamped as well
+	name = "Former Athlete"
+	desc = "You competed in games, testing strength and endurance."
+	granted_skill = /datum/skill/misc/athletics
+	stat_penalty = STATKEY_INT
+
+/datum/backstory/combat/acrobat
+	name = "Retired Acrobat"
+	desc = "You performed daring feats, climbing and leaping."
+	granted_skill = /datum/skill/misc/climbing
+	stat_penalty = STATKEY_INT
+
 /datum/backstory/craft
 	abstract_type = /datum/backstory/craft
 	desc = "A crafting-focused background."
@@ -365,12 +378,6 @@
 	granted_skill = /datum/skill/misc/sneaking
 	stat_penalty = STATKEY_END
 
-/datum/backstory/misc/acrobat
-	name = "Retired Acrobat"
-	desc = "You performed daring feats, climbing and leaping."
-	granted_skill = /datum/skill/misc/climbing
-	stat_penalty = STATKEY_INT
-
 /datum/backstory/misc/locksmith
 	name = "Former Locksmith"
 	desc = "You worked with locks, both making and picking them."
@@ -413,12 +420,6 @@
 	granted_skill = /datum/skill/labor/mathematics
 	stat_penalty = STATKEY_CON
 
-/datum/backstory/misc/athlete
-	name = "Former Athlete"
-	desc = "You competed in games, testing strength and endurance."
-	granted_skill = /datum/skill/misc/athletics
-	stat_penalty = STATKEY_INT
-
 /datum/backstory/magic
 	abstract_type = /datum/backstory/magic
 	desc = "A magical background."
@@ -429,8 +430,3 @@
 	name = "Former Acolyte"
 	desc = "You studied in a temple, learning divine miracles."
 	granted_skill = /datum/skill/magic/holy
-
-/datum/backstory/magic/druid
-	name = "Woodland Hermit"
-	desc = "You lived in the wilds, learning nature's tricks."
-	granted_skill = /datum/skill/magic/druidic

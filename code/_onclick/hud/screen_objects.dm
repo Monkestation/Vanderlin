@@ -109,13 +109,12 @@
 			to_chat(M, "*----*")
 			if(M.mind)
 				if(M.mind.language_holder)
-					var/finn
-					for(var/X in M.mind.language_holder.languages)
-						var/datum/language/LA = new X()
-						finn = TRUE
-						to_chat(M, "<span class='info'>[LA.name] - ,[LA.key]</span>")
-					if(!finn)
+					if(!length(M.mind.language_holder.languages))
 						to_chat(M, "<span class='warning'>I don't know any languages.</span>")
+					else
+						for(var/X in M.mind.language_holder.languages)
+							var/datum/language/LA = GLOB.language_datum_instances[X]
+							to_chat(M, "<span class='info'>[LA.name] - ,[LA.key]</span>")
 					to_chat(M, "*----*")
 		for(var/X in GLOB.roguetraits)
 			if(HAS_TRAIT(L, X))
@@ -866,7 +865,7 @@
 			var/old_height = flipper.grid_height
 			flipper.grid_height = old_width
 			flipper.grid_width = old_height
-			update_hovering(location, control, params)
+			update_hovering(location, control, modifiers)
 			return
 
 	if(world.time <= usr.next_move)
@@ -876,7 +875,7 @@
 	if(master)
 		var/obj/item/I = usr.get_active_held_item()
 		if(I)
-			master.attackby(src, I, usr, params, TRUE)
+			master.attackby(src, I, usr, modifiers, TRUE)
 	return TRUE
 
 /atom/movable/screen/throw_catch
@@ -1239,9 +1238,9 @@
 
 	if(hud.mymob.stat != DEAD && ishuman(hud.mymob))
 		var/mob/living/carbon/human/H = hud.mymob
-		for(var/X in H.bodyparts)
-			var/obj/item/bodypart/BP = X
-			if(BP.body_zone in H.get_missing_limbs())
+		var/list/missing_bodyparts_zones = H.get_missing_limbs()
+		for(var/obj/item/bodypart/BP as anything in H.bodyparts)
+			if(BP.body_zone in missing_bodyparts_zones)
 				continue
 			if(HAS_TRAIT(H, TRAIT_NOPAIN))
 				var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]")
@@ -1258,7 +1257,7 @@
 			. += limby
 			if(BP.get_bleed_rate())
 				. += mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
-		for(var/X in H.get_missing_limbs())
+		for(var/X in missing_bodyparts_zones)
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[X]") //missing limb
 			limby.color = "#2f002f"
 			. += limby

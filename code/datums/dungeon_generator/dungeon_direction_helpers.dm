@@ -10,6 +10,8 @@
 
 	var/top = FALSE
 
+INITIALIZE_IMMEDIATE(/obj/effect/dungeon_directional_helper)
+
 /obj/effect/dungeon_directional_helper/Initialize(mapload, ...)
 	. = ..()
 	var/turf/opposite_turf = get_step(get_turf(src), dir)

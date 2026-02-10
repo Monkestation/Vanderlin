@@ -82,7 +82,7 @@
 /obj/structure/bars/pipe{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "bI" = (
 /obj/structure/flora/grass/water/reeds,
@@ -296,7 +296,7 @@
 	},
 /area/under/tomb/sewer)
 "go" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "gp" = (
 /obj/structure/fluff/walldeco/vinez/l,
@@ -459,7 +459,7 @@
 /area/under/tomb/indoors)
 "iW" = (
 /obj/structure/fluff/walldeco/bigpainting,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "iY" = (
 /mob/living/carbon/human/species/rousman/ambush,
@@ -476,7 +476,7 @@
 /turf/open/floor/church,
 /area/under/tomb/indoors)
 "jn" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "jr" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -570,7 +570,7 @@
 /area/under/tomb/indoors)
 "lz" = (
 /obj/structure/bars/pipe,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "lH" = (
 /obj/effect/decal/cleanable/blood,
@@ -688,13 +688,13 @@
 /obj/structure/bars/pipe{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "pc" = (
 /obj/structure/bars/pipe{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "pf" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -745,7 +745,7 @@
 	dir = 10
 	},
 /obj/effect/spawner/map_spawner/loot,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "qd" = (
 /obj/structure/table/wood/reinforced_alt,
@@ -769,7 +769,7 @@
 	},
 /obj/effect/spawner/map_spawner/loot,
 /obj/effect/waterfall,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "qT" = (
 /obj/structure/fluff/railing/border{
@@ -1018,13 +1018,13 @@
 /area/under/tomb/indoors/royal)
 "uX" = (
 /obj/effect/waterfall,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "uY" = (
 /obj/structure/bars/pipe{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "vb" = (
 /obj/structure/closet/crate/crafted_closet/lord,
@@ -1438,7 +1438,7 @@
 	dir = 5
 	},
 /obj/effect/spawner/map_spawner/loot,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "DG" = (
 /obj/structure/flora/grass/water,
@@ -1451,7 +1451,7 @@
 /obj/structure/bars/pipe{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "DM" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -1668,7 +1668,7 @@
 /obj/structure/bars/pipe{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "IR" = (
 /obj/item/reagent_containers/glass/bottle,
@@ -2148,7 +2148,7 @@
 	dir = 4
 	},
 /obj/effect/waterfall,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "VA" = (
 /turf/open/floor/tile/kitchen,
@@ -2264,7 +2264,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/royal)
 "Yz" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "YB" = (
 /obj/structure/table/wood,

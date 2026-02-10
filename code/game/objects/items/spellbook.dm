@@ -104,24 +104,24 @@
 					return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 
-/obj/item/book/granter/spellbook/attack_self(mob/user, params)
+/obj/item/book/granter/spellbook/attack_self(mob/user, list/modifiers)
 	if(!open)
-		attack_hand_secondary(user, params)
+		attack_hand_secondary(user, modifiers)
 		return
 	..()
 	user.update_inv_hands()
 
-/obj/item/book/granter/spellbook/attack_self_secondary(mob/user, params)
+/obj/item/book/granter/spellbook/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	attack_hand_secondary(user, params)
+	attack_hand_secondary(user, modifiers)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/book/granter/spellbook/read(mob/user)
 	return FALSE
 
-/obj/item/book/granter/spellbook/attack_hand_secondary(mob/user, params)
+/obj/item/book/granter/spellbook/attack_hand_secondary(mob/user, list/modifiers)
 	if(!picked)
 		var/list/designlist = list("green", "yellow", "brown")
 		var/mob/living/carbon/human/gamer = user
@@ -166,7 +166,7 @@
 		return
 	user.mind?.has_studied = TRUE
 	var/mob/living/reader = user
-	var/qualityoflearn = (reader.STAINT*2 + (user.get_skill_level(/datum/skill/misc/reading)* 5) + (user.get_skill_level(/datum/skill/magic/arcane)*5))
+	var/qualityoflearn = (reader.STAINT*2 + (user.get_skill_level(/datum/skill/misc/reading, TRUE)* 5) + (user.get_skill_level(/datum/skill/magic/arcane, TRUE)*5))
 	if(reader.has_status_effect(/datum/status_effect/buff/weed))
 		to_chat(user, span_smallgreen("Swampweed truly does open one's third eye to the secrets of the arcyne..."))
 		qualityoflearn += 10
@@ -187,10 +187,7 @@
 			qualityoflearn = min(qualityoflearn, 15)
 	if (born_of_rock)
 		// the rock tomes are a *lot* easier to make, so we make them worse by them reducing your chances by 20%
-		qualityoflearn *= 1.2
-
-	if(iskobold(user) && !born_of_rock)
-		qualityoflearn *= 0.1
+		qualityoflearn *= 0.8
 
 	user.visible_message(span_warning("[user] is filled with arcyne energy! You witness [user.p_their()] body convulse and spark brightly."), \
 	span_notice("Noc blesses me. I have been granted knowledge and wisdom beyond my years, this tome's mysteries unveiled one at a time."))
@@ -215,7 +212,7 @@
 	var/mob/living/gamer = user
 	gamer.electrocute_act(5, src)
 
-/obj/item/book/granter/spellbook/attack(mob/living/M, mob/living/carbon/human/user)
+/obj/item/book/granter/spellbook/attack(mob/living/M, mob/living/carbon/human/user, list/modifiers)
 	if (M.stat != DEAD)
 		if(user == M)
 			to_chat(user, span_warning("I'm already chained to this tome!"))
@@ -298,11 +295,11 @@
 	icon_state = "spellbook_unfinished"
 	desc = "A fully bound tome of scroll paper. It's lacking a certain arcyne energy."
 
-/obj/item/natural/hide/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/natural/hide/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/paper/scroll))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I add the first few pages to the leather cover..."))
@@ -314,11 +311,11 @@
 	else
 		return ..()
 
-/obj/item/spellbook_unfinished/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/spellbook_unfinished/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/paper/scroll))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				if(pages_left > 0)
 					playsound(src, 'sound/items/book_page.ogg', 100, TRUE)
@@ -339,14 +336,14 @@
 	else
 		return ..()
 
-/obj/item/spellbook_unfinished/pre_arcyne/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/spellbook_unfinished/pre_arcyne/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/gem/amethyst))
 		user.visible_message(span_notice("I run my arcyne energy into the crystal. Its artificial lattices pulse and then fall dormant. It must not be strong enough to make a spellbook with!"))
 		return
 	if(istype(P, /obj/item/gem/violet))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				if(isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -363,7 +360,7 @@
 			to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
 	if(istype(P, /obj/item/gem))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				if(isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -382,7 +379,7 @@
 		var/obj/item/natural/stone/the_rock = P
 		if (the_rock.magic_power)
 			if(isturf(loc) && (found_table))
-				var/crafttime = ((130 - the_rock.magic_power) - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+				var/crafttime = ((130 - the_rock.magic_power) - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 				if(do_after(user, crafttime, target = src))
 					if (isarcyne(user))
 						playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -447,7 +444,7 @@
 			return ..()
 	else if (istype(P, /obj/item/natural/melded/t1))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -466,7 +463,7 @@
 		return ..()
 	else if (istype(P, /obj/item/natural/melded/t2))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -484,7 +481,7 @@
 					qdel(P)
 	else if (istype(P, /obj/item/natural/melded/t3))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -502,7 +499,7 @@
 					qdel(P)
 	else if (istype(P, /obj/item/natural/melded/t4))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -549,12 +546,12 @@
 
 
 
-/obj/item/book/granter/spellbook/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/book/granter/spellbook/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	if(istype(P, /obj/item/gem))
 		if(!stored_gem)
 			if(isarcyne(user))
 				var/obj/item/gem/gem = P
-				var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+				var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
 				if(do_after(user, crafttime, target = src))
 					playsound(src, 'sound/magic/glass.ogg', 100, TRUE)
 					to_chat(user, span_notice("Running my arcyne energy through this crystal, I imbue the tome with my natural essence, attuning it to my state of mind..."))

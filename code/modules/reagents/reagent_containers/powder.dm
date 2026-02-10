@@ -40,7 +40,7 @@
 				reagents.trans_to(C, 1, transfered_by = thrownthing.thrower, method = "swallow")
 				qdel(src)
 
-/obj/item/reagent_containers/powder/attack(mob/M, mob/user, def_zone)
+/obj/item/reagent_containers/powder/attack(mob/M, mob/user, list/modifiers)
 	if(!canconsume(M, user))
 		return FALSE
 	if(M == user)
@@ -97,7 +97,7 @@
 
 /datum/reagent/druqks/on_mob_life(mob/living/carbon/M)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	M.set_drugginess(30)
+	M.set_drugginess(30 SECONDS)
 	M.apply_status_effect(/datum/status_effect/buff/druqks)
 	if(prob(5))
 		if(M.gender == FEMALE)
@@ -110,7 +110,7 @@
 
 /datum/reagent/druqks/on_mob_metabolize(mob/living/M)
 	M.overlay_fullscreen("druqk", /atom/movable/screen/fullscreen/druqks)
-	M.set_drugginess(30)
+	M.set_drugginess(30 SECONDS)
 	if(M.client)
 		ADD_TRAIT(M, TRAIT_DRUQK, "based")
 		M.refresh_looping_ambience()

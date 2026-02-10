@@ -655,18 +655,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .binarysay a			{color: #00ff00;}
 .binarysay a:active, .binarysay a:visited {color: #88ff88;}
 .radio					{color: #1ecc43;}
-.sciradio				{color: #c68cfa;}
-.comradio				{color: #5177ff;}
-.secradio				{color: #dd3535;}
-.medradio				{color: #57b8f0;}
-.engradio				{color: #f37746;}
-.suppradio				{color: #b88646;}
-.servradio				{color: #6ca729;}
-.syndradio				{color: #8f4a4b;}
-.centcomradio			{color: #2681a5;}
-.aiprivradio			{color: #d65d95;}
-.redteamradio			{color: #ff4444;}
-.blueteamradio			{color: #3434fd;}
 
 
 .yell					{font-weight: bold;}
@@ -701,7 +689,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .adminnotice			{color: #6685f5;}
 .adminannouncebig		{color: #6685f5;	font-style: bold;	font-size: 200%}
 .adminannounce			{color: #6685f5;	font-style: bold;	font-size: 120%}
-.adminhelp				{color: #ff0000;	font-weight: bold;}
+.adminhelp				{color: #ff0000;	font-weight: bold;	font-size: 120%}
 .unconscious			{color: #c9c1ba;	font-weight: bold;}
 .suicide				{color: #ff5050;	font-style: italic;}
 .green					{color: #80b077;}
@@ -715,7 +703,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .lightpurple			{color: #967aaf;}
 .nicegreen				{color: #9bccd0;}
 .cult					{color: #960000;}
-.cultlarge				{color: #960000;	font-weight: bold;	font-size: 3;}
 .cultsmall				{color: #960000;	font-size: 75%;}
 .narsie					{color: #960000;	font-weight: bold;	font-size: 12;}
 .narsiesmall			{color: #960000;	font-weight: bold;	font-size: 6;}
@@ -723,34 +710,20 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .hierophant				{color: #660099;	font-weight: bold;	font-style: italic;}
 .hierophant_warning		{color: #660099;	font-style: italic;}
 .purple					{color: #5e2d79;}
-.holoparasite			{color: #35333a;}
 .beautifulmasc			{color: #083eab;}
 .beautifulfem			{color: #d70a74;}
 .beautifulnb			{color: #9656c9;}
-
-.revennotice			{color: #1d2953;}
-.revenboldnotice		{color: #1d2953;	font-weight: bold;}
-.revenbignotice			{color: #1d2953;	font-weight: bold;	font-size: 3;}
-.revenminor				{color: #823abb}
-.revenwarning			{color: #760fbb;	font-style: italic;}
-.revendanger			{color: #760fbb;	font-weight: bold;	font-size: 3;}
-
-.deconversion_message	{color: #5000A0;	font-size: 3;	font-style: italic;}
 
 .ghostalert				{color: #5c00e6;	font-style: italic;	font-weight: bold;}
 
 .alien					{color: #543354;}
 .noticealien			{color: #00c000;}
 .alertalien				{color: #00c000;	font-weight: bold;}
-.changeling				{color: #800080;	font-style: italic;}
-
-.spider					{color: #4d004d;}
 
 .interface				{color: #DA00DA;}
 
 .sans					{font-family: "Comic Sans MS", cursive, sans-serif;}
 .papyrus				{font-family: "Papyrus", cursive, sans-serif;}
-.robot					{font-family: "Courier New", cursive, sans-serif;}
 
 .human 					{font-family: "Honoka Mincho", "Pterra";}
 .elf					{font-family: "Dauphin", cursive, "Pterra";}
@@ -788,14 +761,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .memoedit				{text-align: center;	font-size: 2;}
 .abductor				{color: #800080;	font-style: italic;}
 .mind_control			{color: #A00D6F;	font-size: 3;	font-weight: bold;	font-style: italic;}
-.slime					{color: #00CED1;}
 .drone					{color: #848482;}
-.monkey					{color: #975032;}
-.swarmer				{color: #2C75FF;}
-.resonate				{color: #298F85;}
-
-.monkeyhive				{color: #774704;}
-.monkeylead				{color: #774704;	font-size: 2;}
 
 .dead					{color: #b280df;}
 .bloody					{color: #cc0f0f;}
@@ -809,23 +775,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .love_extreme					{color: #d146f5;	font-size: 75%;}
 
 .silver					{color: #c0c0c0;}
-
-/*
-@keyframes hypnocolor {
-	0%		{color: #202020;}
-	25%		{color: #4b02ac;}
-	50%		{color: #9f41f1;}
-	75%		{color: #541c9c;}
-	100%	{color: #7adbf3;}
-}
-
-.phobia			{color: #dd0000;	font-weight: bold;	animation: phobia 750ms infinite;}
-@keyframes phobia {
-	0%		{color: #f75a5a;}
-	50%		{color: #dd0000;}
-	100%	{color: #f75a5a;}
-}
-*/
 
 .connectionClosed, .fatalError {background: red;	color: white;	padding: 5px;}
 .connectionClosed.restored {background: green;}
@@ -880,3 +829,422 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 	opacity: 1;
 }
 
+
+/* ############################### PRAYERS ############################### */
+
+.god_generic {
+color: #f57777;
+font-weight: bold;
+
+animation: prayer_flicker 1s infinite;
+}
+@keyframes prayer_flicker {
+	25% {
+		color: #f57777;
+	}
+
+	50% {
+		color: #e46262;
+	}
+
+	75% {
+		color: #e68888;
+	}
+
+	100% {
+		color: #f35e5e;
+	}
+}
+
+/* ##### ASTRATA ##### */
+.god_astrata {
+color: #e5d569;
+font-weight: bold;
+
+animation: astrata_flicker 1s infinite;
+}
+@keyframes astrata_flicker {
+	25% {
+		color: #e5d569;
+	}
+
+	50% {
+		color: #b1a34b;
+	}
+
+	75% {
+		color: #e6d048;
+	}
+
+	100% {
+		color: #ad9f44;
+	}
+}
+/* ##### END ##### */
+
+
+/* ##### NOC ##### */
+.god_noc {
+color: #82a1d9;
+font-weight: bold;
+
+animation: noc_flicker 1s infinite;
+}
+@keyframes noc_flicker {
+	25% {
+		color: #82a1d9;
+	}
+
+	50% {
+		color: #6180b9;
+	}
+
+	75% {
+		color: #687997;
+	}
+
+	100% {
+		color: #739eec;
+	}
+}
+/* ##### END ##### */
+
+
+/* ##### ABYSSOR ##### */
+.god_abyssor {
+color: #8b2d39;
+font-weight: bold;
+
+animation: abyssor_flicker 1s infinite;
+}
+@keyframes abyssor_flicker {
+	25% {
+		color: #8b2d39;
+	}
+
+	50% {
+		color: #64262f;
+	}
+
+	75% {
+		color: #c04152;
+	}
+
+	100% {
+		color: #b62b3d;
+	}
+}
+/* ##### END ##### */
+
+
+/* ##### DENDOR ##### */
+.god_dendor {
+color: #74875a;
+font-weight: bold;
+
+animation: dendor_flicker 1s infinite;
+}
+@keyframes dendor_flicker {
+	25% {
+		color: #74875a;
+	}
+
+	50% {
+		color: #86a35c;
+	}
+
+	75% {
+		color: #5c6d43;
+	}
+
+	100% {
+		color: #7e8b6b;
+	}
+}
+/* ##### END ##### */
+
+/* ##### RAVOX ##### */
+.god_ravox {
+color: #774b44;
+font-weight: bold;
+
+animation: ravox_flicker 1s infinite;
+}
+@keyframes ravox_flicker {
+	25% {
+		color: #774b44;
+	}
+
+	50% {
+		color: #8a4c42;
+	}
+
+	75% {
+		color: #ad6c62;
+	}
+
+	100% {
+		color: #5f443f;
+	}
+}
+/* ##### END ##### */
+
+/* ##### MALUM ##### */
+.god_malum {
+color: #d39459;
+font-weight: bold;
+
+animation: malum_flicker 1s infinite;
+}
+@keyframes malum_flicker {
+	25% {
+		color: #d39459;
+	}
+
+	50% {
+		color: #b87b42;
+	}
+
+	75% {
+		color: #e7ac74;
+	}
+
+	100% {
+		color: #a7794f;
+	}
+}
+/* ##### END ##### */
+
+/* ##### EORA ##### */
+.god_eora {
+color: #e4bae6;
+font-weight: bold;
+
+animation: eora_flicker 1s infinite;
+}
+@keyframes eora_flicker {
+	25% {
+		color: #e4bae6;
+	}
+
+	50% {
+		color: #edb2f0;
+	}
+
+	75% {
+		color: #bf8ec2;
+	}
+
+	100% {
+		color: #c0a6c2;
+	}
+}
+/* ##### END ##### */
+
+/* ##### XYLIX ##### */
+.god_xylix {
+color: #dfe6ba;
+font-weight: bold;
+
+animation: xylix_flicker 1s infinite;
+}
+@keyframes xylix_flicker {
+	25% {
+		color: #dfe6ba;
+	}
+
+	50% {
+		color: #c7d192;
+	}
+
+	75% {
+		color: #a4ac7f;
+	}
+
+	100% {
+		color: #bdc2a6;
+	}
+}
+/* ##### END ##### */
+
+/* ##### PESTRA ##### */
+.god_pestra {
+color: #8aa01c;
+font-weight: bold;
+
+animation: pestra_flicker 1s infinite;
+}
+@keyframes pestra_flicker {
+	25% {
+		color: #8aa01c;
+	}
+
+	50% {
+		color: #a0bb19;
+	}
+
+	75% {
+		color: #768a14;
+	}
+
+	100% {
+		color: #8da126;
+	}
+}
+/* ##### END ##### */
+
+/* ##### NECRA ##### */
+.god_necra {
+color: #5a53d5;
+font-weight: bold;
+
+animation: necra_flicker 1s infinite;
+}
+@keyframes necra_flicker {
+	25% {
+		color: #5a53d5;
+	}
+
+	50% {
+		color: #5e59be;
+	}
+
+	75% {
+		color: #433eaf;
+	}
+
+	100% {
+		color: #524ae4;
+	}
+}
+/* ##### END ##### */
+
+/* ##### MATTHIOS ##### */
+.god_matthios {
+color: #17181a;
+font-weight: bold;
+
+animation: matthios_flicker 1s infinite;
+}
+@keyframes matthios_flicker {
+	25% {
+		color: #313338;
+	}
+
+	50% {
+		color: #2f3033;
+	}
+
+	75% {
+		color: #434750;
+	}
+
+	100% {
+		color: #52545a;
+	}
+}
+/* ##### END ##### */
+
+/* ##### BAOTHA ##### */
+.god_baotha {
+color: #88528d;
+font-weight: bold;
+
+animation: baotha_flicker 1s infinite;
+}
+@keyframes baotha_flicker {
+	25% {
+		color: #88528d;
+	}
+
+	50% {
+		color: #9d59a3;
+	}
+
+	75% {
+		color: #76427a;
+	}
+
+	100% {
+		color: #936197;
+	}
+}
+/* ##### END ##### */
+
+/* ##### GRAGGAR ##### */
+.god_graggar {
+color: #2a7b32;
+font-weight: bold;
+
+animation: graggar_flicker 1s infinite;
+}
+@keyframes graggar_flicker {
+	25% {
+		color: #2a7b32;
+	}
+
+	50% {
+		color: #298532;
+	}
+
+	75% {
+		color: #226e2a;
+	}
+
+	100% {
+		color: #2a6930;
+	}
+}
+/* ##### END ##### */
+
+/* ##### ZIZO ##### */
+.god_zizo {
+color: #791f3f;
+font-weight: bold;
+
+animation: zizo_flicker 1s infinite;
+}
+@keyframes zizo_flicker {
+	25% {
+		color: #791f3f;
+	}
+
+	50% {
+		color: #8a1d43;
+	}
+
+	75% {
+		color: #631832;
+	}
+
+	100% {
+		color: #7c2745;
+	}
+}
+/* ##### END ##### */
+
+/* ##### PSYDON ##### */
+.god_psydon {
+color: #c1dce2;
+font-weight: bold;
+
+animation: psydon_flicker 1s infinite;
+}
+@keyframes psydon_flicker {
+	25% {
+		color: #c1dce2;
+	}
+
+	50% {
+		color: #b4dfe9;
+	}
+
+	75% {
+		color: #a2c2c9;
+	}
+
+	100% {
+		color: #beced1;
+	}
+}
+/* ##### END ##### */

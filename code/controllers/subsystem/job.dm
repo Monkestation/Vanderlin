@@ -284,9 +284,8 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/DivideOccupations(list/required_jobs)
 	JobDebug("Running DO")
 
-	// Get the players who are ready
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	//Get the players who are ready
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		if(player.ready == PLAYER_READY_TO_PLAY && player.check_preferences() && player.mind && is_unassigned_job(player.mind.assigned_role))
 			unassigned += player
 			// Cache multi-ready characters if enabled
@@ -658,6 +657,9 @@ SUBSYSTEM_DEF(job)
 /// Gives the player the stuff they should have with their rank
 /datum/controller/subsystem/job/proc/EquipRank(mob/living/equipping, datum/job/job, client/player_client, reset_job_stats = TRUE)
 	equipping.job = job.title
+	equipping.job_type = job.type
+	if(job.parent_job)
+		equipping.job_type = job.parent_job.type
 
 	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
 
@@ -719,8 +721,7 @@ SUBSYSTEM_DEF(job)
 		var/never = 0 //never
 		var/banned = 0 //banned
 		var/young = 0 //account too young
-		for(var/i in GLOB.new_player_list)
-			var/mob/dead/new_player/player = i
+		for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 			if(!(player.ready == PLAYER_READY_TO_PLAY && player.mind && !player.mind.assigned_role))
 				continue //This player is not ready
 			if(is_role_banned(player.ckey, job.title) || QDELETED(player))

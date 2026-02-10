@@ -36,8 +36,7 @@
 
 	surgeries = null
 	if(LAZYLEN(status_effects))
-		for(var/s in status_effects)
-			var/datum/status_effect/S = s
+		for(var/datum/status_effect/S as anything in status_effects)
 			if(S.on_remove_on_mob_delete) //the status effect calls on_remove when its mob is deleted
 				qdel(S)
 			else
@@ -110,23 +109,23 @@
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
 		if(levels <= 2)
 			return
+	if(movement_type & FLYING)
+		to_chat(src, span_info("You glide down to a more manageable height."))
+		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
+		return
 	var/dex_save = src.get_skill_level(/datum/skill/misc/climbing)
-	var/sneak_fall = FALSE // If we're sneaking, don't announce it to our surroundings
 	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
-			to_chat(src, "<span class='info'>My dexterity allowed me to land on my feet unscathed!</span>")
-			if(src.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
-				sneak_fall = TRUE
+			to_chat(src, span_info("My dexterity allowed me to land on my feet unscathed!"))
+			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
 			return
 	var/points
 	for(var/i in 2 to levels)
 		i++
 		points += "!"
-	if(!sneak_fall)
-		visible_message("<span class='danger'>[src] falls down[points]</span>", \
-						"<span class='danger'>I fall down[points]</span>")
-		playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
+	visible_message(span_danger("[src] falls down[points]"), span_danger("I fall down[points]"))
+	playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!isgroundlessturf(T))
 		ZImpactDamage(T, levels)
 		record_round_statistic(STATS_MOAT_FALLERS)
@@ -648,7 +647,7 @@
 	if(pulling_broke_free && ismob(pulling) && grab_state >= GRAB_AGGRESSIVE)
 		var/wrestling_cooldown_reduction = 0
 		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
-			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling)
+			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
 		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
@@ -665,7 +664,7 @@
 
 /mob/living/verb/stop_pulling1()
 	set name = "Stop Pulling"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	stop_pulling()
 
@@ -742,7 +741,7 @@
 
 /mob/living/proc/mob_sleep()
 	set name = "Sleep"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	if(IsSleeping())
 		to_chat(src, "<span class='warning'>I am already sleeping!</span>")
@@ -756,7 +755,7 @@
 
 /mob/living/proc/lay_down()
 	set name = "Lay down"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	if(stat)
 		return
@@ -768,7 +767,7 @@
 
 /mob/living/proc/stand_up()
 	set name = "Stand up"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	if(stat)
 		return
@@ -790,7 +789,7 @@
 
 /mob/living/verb/toggle_rest_verb()
 	set name = "Rest"
-	set category = "IC"
+	set category = "IC.Interaction"
 
 	toggle_rest()
 
@@ -971,7 +970,6 @@
 		if(ishuman(src))
 			var/mob/living/carbon/human/human = src
 			human.funeral = FALSE
-		client?.verbs -= /client/proc/descend
 		if(excess_healing)
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
 			log_combat(src, src, "revived")
@@ -985,8 +983,7 @@
 
 /mob/living/Crossed(atom/movable/AM)
 	. = ..()
-	for(var/i in get_equipped_items())
-		var/obj/item/item = i
+	for(var/obj/item/item as anything in get_equipped_items())
 		SEND_SIGNAL(item, COMSIG_ITEM_WEARERCROSSED, AM, src)
 	if(isliving(AM))
 		var/mob/living/L = AM
@@ -1213,7 +1210,7 @@
 
 /mob/living/verb/resist()
 	set name = "Resist"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(execute_resist)))
 
@@ -1251,13 +1248,13 @@
 
 /mob/living/carbon/human/verb/ic_pray()
 	set name = "Prayer"
-	set category = "IC"
+	set category = "IC.Interaction"
 
 	emote("pray", intentional = TRUE)
 
 /mob/living/verb/submit()
 	set name = "Yield"
-	set category = "IC"
+	set category = "IC.Interaction"
 
 	if(surrendering)
 		return
@@ -1322,9 +1319,9 @@
 	var/my_wrestling = 0
 	var/their_wrestling = 0
 	if(mind)
-		my_wrestling = get_skill_level(/datum/skill/combat/wrestling)
+		my_wrestling = get_skill_level(/datum/skill/combat/wrestling, TRUE)
 	if(pulledby.mind)
-		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling)
+		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
 
 	var/break_chance = 15 // Base chance
 	break_chance += (my_wrestling - their_wrestling)
@@ -1375,8 +1372,8 @@
 
 	var/counter_chance = 20 // Base chance
 
-	counter_chance += get_skill_level(/datum/skill/combat/wrestling) * 4
-	counter_chance += get_skill_level(/datum/skill/combat/unarmed) * 4
+	counter_chance += get_skill_level(/datum/skill/combat/wrestling, TRUE) * 4
+	counter_chance += get_skill_level(/datum/skill/combat/unarmed, TRUE) * 4
 
 	// Stat differences
 	counter_chance += (STASTR - attacker.STASTR) * 2
@@ -1430,7 +1427,7 @@
 				var/target_zone = pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
 				attacker.apply_damage(damage, BRUTE, target_zone)
 				attacker.OffBalance(1.5 SECONDS)
-				attacker.adjust_confusion(2 SECONDS)
+				attacker.adjust_confusion(4 SECONDS)
 
 			// if("stomp")
 			// 	if(attacker.body_position != LYING_DOWN && body_position != LYING_DOWN)
@@ -1540,8 +1537,8 @@
 	// Modifier of pulledby against the resisting src
 	var/positioning_modifier = L.get_positioning_modifier(src)
 
-	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling))
-	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling))
+	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling, TRUE))
+	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling, TRUE))
 
 	if(has_status_effect(/datum/status_effect/buff/oiled))
 		var/obj/item/grabbing/grabbed = L.get_active_held_item()
@@ -2146,7 +2143,7 @@
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
 		if(storage)
-			var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+			var/obj/item/mob_holder/holder = new(get_turf(src), src)
 			visible_message(span_warning("[src] starts to climb into [over]."), span_warning("You start to climb into [over]."))
 			if(do_after(src, 1.2 SECONDS, over))
 				if(over.loc == src)
@@ -2170,7 +2167,7 @@
 		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
 		if(!picked)
 			return
-		var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))
 		if(do_after(src, 3 SECONDS, over))
 			if(picked.loc == src)
@@ -2196,7 +2193,7 @@
 
 
 /mob/living/proc/mob_pickup(mob/living/user)
-	var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src)
+	var/obj/item/mob_holder/holder = new(get_turf(src), src)
 	user.visible_message(span_warning("[user] scoops up [src]!"))
 	user.put_in_hands(holder)
 
@@ -2501,7 +2498,7 @@
 				continue
 			var/probby = 3 * STAPER
 			if(M.mind)
-				probby -= (M.get_skill_level(/datum/skill/misc/sneaking) * 10)
+				probby -= (M.get_skill_level(/datum/skill/misc/sneaking, TRUE) * 10)
 			probby = (max(probby, 5))
 			if(prob(probby))
 				found_ping(get_turf(M), client, "hidden")
@@ -2577,6 +2574,8 @@
 		visible_message(span_info("[src] looks up."))
 	var/turf/ceiling = get_step_multiz(src, UP)
 	var/turf/T = get_turf(src)
+	if(isnull(ceiling)) //Can't check what isn't there
+		return
 	if(!istransparentturf(ceiling)) //There is no turf we can look through above us
 		to_chat(src, span_warning("A ceiling above my head."))
 		return

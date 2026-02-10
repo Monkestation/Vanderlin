@@ -96,7 +96,7 @@
 
 	ADD_TRAIT(src, TRAIT_WEBWALK, TRAIT_GENERIC)
 
-/mob/living/simple_animal/hostile/retaliate/spider/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
+/mob/living/simple_animal/hostile/retaliate/spider/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(!..())
 		return
 	production += 50
@@ -127,7 +127,7 @@
 			realchance += 15
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming) * 20)
+				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
 			if(prob(realchance))
 				tamed(user)
 				var/boon = user.get_learning_boon(/datum/skill/labor/taming)
@@ -268,7 +268,7 @@
 			string = "completely full"
 	. += span_notice("The nest looks [string].")
 
-/obj/structure/spider/nest/attackby(obj/item/I, mob/user, params)
+/obj/structure/spider/nest/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	disturb(user)
 

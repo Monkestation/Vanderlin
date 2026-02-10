@@ -157,7 +157,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "bowl"
 	fill_icon_thresholds = list(0, 30, 50, 100)
-	reagent_flags = TRANSFERABLE | AMOUNT_VISIBLE
+	reagent_flags = OPENCONTAINER
 	force = 5
 	throwforce = 5
 	amount_per_transfer_from_this = 5
@@ -213,7 +213,7 @@
 		. += filling
 		. += mutable_appearance(icon, "steam")
 
-/obj/item/reagent_containers/glass/bowl/attackby(obj/item/I, mob/user, params) // lets you eat with a spoon from a bowl
+/obj/item/reagent_containers/glass/bowl/attackby(obj/item/I, mob/user, list/modifiers) // lets you eat with a spoon from a bowl
 	if(reagents.total_volume == 0 && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
 		if(dirty)
 			var/obj/item/natural/cloth/cloth_check = I
@@ -566,7 +566,7 @@
 
 /datum/reagent/flour/on_mob_life(mob/living/carbon/M)
 	if(prob(30))
-		M.adjust_confusion(0.3 SECONDS)
+		M.adjust_confusion(6 SECONDS)
 	M.emote(pick("cough"))
 	..()
 
@@ -575,7 +575,7 @@
 	..()
 	qdel(src)
 
-/obj/item/reagent_containers/powder/flour/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/powder/flour/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	var/found_table = locate(/obj/structure/table) in (loc)
 	var/obj/item/reagent_containers/glass/R = I
@@ -598,7 +598,7 @@
 
 /obj/item/reagent_containers/powder/flour/attack_hand(mob/living/user)
 	if(water_added)
-		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking))*5))
+		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*5))
 		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			var/obj/item/reagent_containers/food/snacks/dough_base/base = new /obj/item/reagent_containers/food/snacks/dough_base(get_turf(src))

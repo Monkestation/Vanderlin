@@ -1,5 +1,5 @@
 /client/proc/map_export()
-	set category = "Debug"
+	set category = "Debug.Mapping Custom"
 	set name = "Map Export"
 	set desc = "Select a part of the map by coordinates and download it."
 

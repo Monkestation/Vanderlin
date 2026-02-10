@@ -41,8 +41,9 @@
 
 /datum/rage/werewolf/update_rage(amount)
 	if(amount > 0)
-		if(secondary_mob?.has_status_effect(/datum/status_effect/debuff/silver_bane) || holder_mob?.has_status_effect(/datum/status_effect/debuff/silver_bane))
-			amount *= 0.5
+		var/mob/active_mob = secondary_mob || holder_mob
+		if(active_mob?.has_status_effect(/datum/status_effect/debuff/silver_bane))
+			amount *= 0.25
 	. = ..(amount)
 
 /datum/rage/werewolf/upon_tier_change(new_rage_tier, old_rage_tier)

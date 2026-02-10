@@ -473,7 +473,7 @@
 		if("Guard")
 			spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 			spawned.change_stat(STATKEY_INT, -1)
-			spawned.verbs |= /mob/proc/haltyell
+			add_verb(spawned, /mob/proc/haltyell)
 			to_chat(spawned,span_info("\
 			I was once part of a town militia. I'm used to apprehending unsavory sorts.")
 			)
@@ -492,12 +492,11 @@
 			In the dark corners of every room I see him. I can't sleep without a light-source.")
 			)
 		if("Bard")
+			spawned.inspiration = new /datum/inspiration(spawned)
 			spawned.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
 			spawned.change_stat(STATKEY_INT, 1)
 			spawned.change_stat(STATKEY_END, 1)
 			ADD_TRAIT(spawned, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
-			var/datum/inspiration/I = new /datum/inspiration(spawned)
-			I.grant_inspiration(spawned, bard_tier = BARD_T3)
 			to_chat(spawned,span_info("\
 			I used to be a bard, the skills never left me. I'm a silver-tongued devil!")
 			)
@@ -538,7 +537,7 @@
 		if("Torturer")
 			spawned.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 			spawned.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
-			spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+			add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 			spawned.change_stat(STATKEY_INT, -1)
 			to_chat(spawned,span_info("\
 			I like to collect teeth. Torturing people was once my livelihood.")

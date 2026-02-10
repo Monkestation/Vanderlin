@@ -47,7 +47,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter)
 "o" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/shelter)
 "p" = (
 /obj/item/reagent_containers/food/snacks/smallrat,

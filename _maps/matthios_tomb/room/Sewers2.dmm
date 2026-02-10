@@ -53,20 +53,20 @@
 /turf/open/floor/concrete,
 /area/under/tomb/sewer)
 "aV" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "aW" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
 /area/under/tomb/sewer)
 "aZ" = (
 /obj/structure/fluff/walldeco/chains,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "es" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/structure/bars/pipe,
 /obj/structure/bars/pipe,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "kX" = (
 /obj/structure/bars/pipe,
@@ -103,7 +103,7 @@
 /area/under/tomb/sewer)
 "Yf" = (
 /obj/structure/bars/pipe,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 
 (1,1,1) = {"

@@ -126,7 +126,7 @@
 /turf/closed/Initialize()
 	. = ..()
 	if(above_floor)
-		var/turf/open/transparent/openspace/target = GET_TURF_ABOVE(src)
+		var/turf/open/openspace/target = GET_TURF_ABOVE(src)
 		if(istype(target))
 			target.ChangeTurf(above_floor)
 
@@ -160,16 +160,16 @@
 			if(L.stat != CONSCIOUS)
 				return
 			var/turf/target = GET_TURF_ABOVE(user_turf)
-			if(!istype(target, /turf/open/transparent/openspace))
+			if(!istype(target, /turf/open/openspace))
 				to_chat(user, "<span class='warning'>I can't climb here.</span>")
 				return
 			if(!L.can_zTravel(target, UP))
 				to_chat(user, "<span class='warning'>I can't climb there.</span>")
 				return
 			target = GET_TURF_ABOVE(src)
-			if(!target || istype(target, /turf/closed) || istype(target, /turf/open/transparent/openspace))
+			if(!target || istype(target, /turf/closed) || istype(target, /turf/open/openspace))
 				target = GET_TURF_ABOVE(user_turf)
-				if(!target || !istype(target, /turf/open/transparent/openspace))
+				if(!target || !istype(target, /turf/open/openspace))
 					to_chat(user, "<span class='warning'>I can't climb here.</span>")
 					return
 			for(var/obj/structure/F in target)
@@ -180,7 +180,7 @@
 			var/amt2raise = 0
 			var/boon = 0
 			if(L.mind)
-				var/myskill = L.get_skill_level(/datum/skill/misc/climbing)
+				var/myskill = L.get_skill_level(/datum/skill/misc/climbing, TRUE)
 				amt2raise = floor(L.STAINT/2)
 				boon = L.get_learning_boon(/datum/skill/misc/climbing)
 				var/obj/structure/table/TA = locate() in L.loc
@@ -230,7 +230,7 @@
 	if(!target)
 		to_chat(user, "<span class='warning'>I can't go there.</span>")
 		return
-	if(!istype(target, /turf/open/transparent/openspace))
+	if(!istype(target, /turf/open/openspace))
 		to_chat(user, "<span class='warning'>I can't go there.</span>")
 		return
 	user.forceMove(target)

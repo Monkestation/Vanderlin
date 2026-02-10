@@ -45,6 +45,6 @@
 		span_userdanger("YOU ARE XYLIX'S CHOSEN!"),
 		span_notice("Xylix demands entertainment! Viciously mock [new_objective.required_count] nobles to prove your wit and earn Xylix's favor!"),
 	))
-	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen_male_female.ogg', 100)
+	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

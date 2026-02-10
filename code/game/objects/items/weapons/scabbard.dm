@@ -39,15 +39,13 @@
 	name = "knife sheath"
 	desc = "A slingable sheath made of leather, meant to host surprises of smaller sizes."
 	icon_state = "sheath"
-
 	force = DAMAGE_KNIFE - 7
 	throwforce = DAMAGE_KNIFE - 7
+	wdefense = MEDIOCRE_PARRY
+	wbalance = HARD_TO_DODGE
+	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK|ITEM_SLOT_WRISTS|ITEM_SLOT_NECK
-
-	wdefense = MEDIOCRE_PARRY
-	wlength = WLENGTH_SHORT
-	wbalance = HARD_TO_DODGE
 	associated_skill = /datum/skill/combat/knives
 	sewrepair = TRUE
 	sellprice = 10
@@ -77,29 +75,27 @@
 /obj/item/weapon/scabbard/knife/noble
 	name = "silver decorated knife sheath"
 	desc = "A slingable sheath made of leather, enamored with elaborate silver decorations, often seen on the hips of nobles"
-	sellprice = 50
 	icon_state = "nsheath"
+	sellprice = 50
 
 /obj/item/weapon/scabbard/knife/royal
 	name = "gold decorated knife sheath"
 	desc = "A slingable sheath made of leather, enamored with exquisite golden decorations, often seen on the hips of royalty"
-	sellprice = 100
 	icon_state = "rsheath"
+	sellprice = 100
 
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."
 	icon_state = "scabbard"
-
 	force = DAMAGE_SWORD - 15
 	force_wielded = DAMAGE_SWORD - 15
-	sellprice = 10
-	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
-
 	wdefense = GREAT_PARRY
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
+	sellprice = 10
 
 /obj/item/weapon/scabbard/sword/apply_components()
 	. = ..()
@@ -121,20 +117,19 @@
 /obj/item/weapon/scabbard/sword/noble
 	name = "silver decorated scabbard"
 	desc = "A scabbard designed to hold a sword. This one is decorated on a silver platter."
-	sellprice = 50
 	icon_state = "nscabbard"
+	sellprice = 50
 
 /obj/item/weapon/scabbard/sword/royal
 	name = "gold decorated scabbard"
 	desc = "A scabbard designed to hold a sword. This one is lined with golden fittings, fit for a royal."
-	sellprice = 100
 	icon_state = "rscabbard"
+	sellprice = 100
 
 /obj/item/weapon/scabbard/cane
 	name = "fancy cane"
 	desc = "A polished, dark wooden cane, decorated with gold and silver. Often carried by nobility, even those without a limp, simply to flaunt their wealth to the peasantry. This one contains a concealed blade!"
 	icon_state = "canesheath"
-
 	force = DAMAGE_MACE - 4
 	force_wielded = DAMAGE_MACE - 2
 	wdefense = MEDIOCRE_PARRY
@@ -144,6 +139,11 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
+
+/obj/item/weapon/scabbard/cane/courtphysician
+	name = "fancy cane"
+	desc = "A decorated cane bearing the visage of a vulture."
+	icon_state = "doccanesheath"
 
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
@@ -208,20 +208,19 @@
 
 
 /obj/item/weapon/scabbard/kazengun
-	name = "simple kazengun scabbard"
+	name = "simple eastern scabbard"
 	desc = "A piece of steel lined with wood. Great for batting away blows."
-	sellprice = 100
 	icon_state = "kazscab"
 	item_state = "kazscab"
 	force = DAMAGE_SWORD - 15
 	force_wielded = DAMAGE_SWORD - 15
-	sellprice = 10
-	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	wdefense = GREAT_PARRY
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/shields
 	max_integrity = INTEGRITY_STANDARD
+	sellprice = 10
 
 /obj/item/weapon/scabbard/kazengun/apply_components()
 	. = ..()

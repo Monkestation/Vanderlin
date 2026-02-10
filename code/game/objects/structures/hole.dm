@@ -1,3 +1,7 @@
+// These defines determine the level of consecration a grave has received. This helps determine the consequences of graverobbing.
+#define NOT_CONSECRATED 0
+#define CONSECRATED 1
+#define DOUBLY_CONSECRATED 2
 
 /obj/structure/closet/dirthole
 	name = "hole"
@@ -17,6 +21,8 @@
 	alternative_icon_handling = TRUE
 	var/stage = 1
 	var/faildirt = 0
+	var/is_consecrated = NOT_CONSECRATED // Has the "burial rites" miracle been used on this grave. 0 = No consecration. 1 = Simple consecration (you get cursed by Necra) 2 and above = Double consecration (you get cursed, and the clergy is alerted.)
+
 
 /obj/structure/closet/dirthole/Initialize()
 	var/turf/open/floor/dirt/T = loc
@@ -106,7 +112,7 @@
 					playsound(W, 'sound/foley/waterenter.ogg', 100, FALSE)
 					QDEL_NULL(src)
 
-/obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(istype(attacking_item, /obj/item/grown/log/tree/stick))
 		if(locate(/obj/structure/gravemarker) in get_turf(src))
 			to_chat(user, "<span class='warning'>This grave is already hallowed.</span>")
@@ -194,32 +200,56 @@
 			stage = 3
 			climb_offset = 0
 			open()
-			for(var/obj/structure/gravemarker/G in loc)
-				record_featured_stat(FEATURED_STATS_CRIMINALS, user)
-				record_round_statistic(STATS_GRAVES_ROBBED)
-				qdel(G)
-				if(isliving(user))
-					var/mob/living/L = user
-					if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
-						to_chat(user, "<span class='warning'>Necra turns a blind eye to my deeds.</span>")
-					else
-						to_chat(user, "<span class='warning'>Necra shuns my blasphemous deeds, I am cursed!</span>")
-						L.apply_status_effect(/datum/status_effect/debuff/cursed)
-				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+			switch(is_consecrated) // this is where we handle folks being cursed by Necra for graverobbing.
+				if(NOT_CONSECRATED) // not consecrated, proceed
+					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
+						qdel(G)
+					return
+
+				if(CONSECRATED) // consecrated, if you're not necran clergy or a treasure hunter, you get cursed.
+					if(ishuman(user))
+						var/mob/living/L = user
+						if(L.patron?.type != /datum/patron/divine/necra) // non-necran get tagged as graverobbers in EOR stats.
+							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+							record_round_statistic(STATS_GRAVES_ROBBED)
+						if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
+							to_chat(user, span_warning("Necra turns a blind eye to my deeds."))
+						else // the part where she curses you.
+							to_chat(user, span_warning("Necra shuns my blasphemous deeds!"))
+							L.apply_status_effect(/datum/status_effect/debuff/cursed)
+					SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
+						qdel(G)
+
+				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
+					if(ishuman(user))
+						var/mob/living/carbon/human/L = user
+						var/robbery_location = get_area_name(src)
+						if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
+							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+							record_round_statistic(STATS_GRAVES_ROBBED)
+							to_chat(user, span_warning("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
+							L.apply_status_effect(/datum/status_effect/debuff/cursed)
+							for (var/mob/living/player in GLOB.player_list)
+								if (player.stat == DEAD || isbrain(player))
+									continue
+								// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
+								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/undertaker))
+									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a twice-consecrated grave is being robbed in [robbery_location], this cannot go unpunished!"))
+						else
+							if(HAS_TRAIT(L, TRAIT_GRAVEROBBER)) // this typically means you're a gravetender or cleric
+								to_chat(user, span_info("I speak the hallowed words of Necra, and she releases her grip over my soul.."))
+							else // Even Necrans get minorly cursed, but it's miles better than losing your lux or your arm
+								to_chat(user, span_warning("I mutter Necra's hallowed rites, and although my devotion is recognized, my trespass remains great, I am cursed!"))
+								L.apply_status_effect(/datum/status_effect/debuff/cursed)
+					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
+						qdel(G)
 		stage_update()
 		attacking_shovel.heldclod = new(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
+		is_consecrated = NOT_CONSECRATED // remove consecration levels
 
-/datum/status_effect/debuff/cursed
-	id = "cursed"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/cursed
-	effectedstats = list(STATKEY_LCK = -5) // More severe so that the permanent debuff from having the perk makes it actually worth it.
-	duration = 10 MINUTES
 
-/atom/movable/screen/alert/status_effect/debuff/cursed
-	name = "Cursed"
-	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
-	icon_state = "debuff"
 
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)
 	var/turf/T = get_turf(src)
@@ -274,9 +304,6 @@
 		if((A.stat) && (istype(A, /mob/living/carbon/human)))
 			var/mob/living/carbon/human/B = A
 			B.buried = TRUE
-	for(var/obj/structure/closet/crate/coffin/C in contents)
-		for(var/mob/living/carbon/human/D in C.contents)
-			D.buried = TRUE
 	opened = FALSE
 	return TRUE
 
@@ -352,3 +379,8 @@
 			to_chat(user, "<span class='warning'>I'm trapped!</span>")
 		return
 	container_resist(user)
+
+
+#undef NOT_CONSECRATED
+#undef CONSECRATED
+#undef DOUBLY_CONSECRATED

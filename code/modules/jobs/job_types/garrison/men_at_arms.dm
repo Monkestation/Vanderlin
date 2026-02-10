@@ -33,7 +33,7 @@
 
 /datum/job/men_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/watchman
 	name = "Men-at-arms Base"
@@ -207,3 +207,52 @@
 		if("Crossbow")
 			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 			backr = /obj/item/ammo_holder/quiver/bolts
+
+/datum/job/advclass/menatarms/watchman_swordsman
+	title = "Swordsman Men-At-Arms"
+	tutorial = "You once warded the town, beating the poor and killing the senseless. \
+	Now you get to stare at them in the eyes, watching as they bleed, \
+	exanguinated personally by one of the Monarch's best. \
+	You are poor, and your belly is yet full."
+	outfit = /datum/outfit/watchman/swordsman
+	category_tags = list(CTAG_MENATARMS)
+
+	jobstats = list(
+		STATKEY_STR = 2,
+		STATKEY_END = 1,
+		STATKEY_CON = 1,
+	)
+
+	skills = list(
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 3,
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/misc/reading = 1,
+		/datum/skill/craft/crafting = 1
+	)
+
+	traits = list(
+		TRAIT_KNOWBANDITS,
+		TRAIT_MEDIUMARMOR
+	)
+
+/datum/outfit/watchman/swordsman
+	name = "Swordsman Men-At-Arms"
+	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
+	armor = /obj/item/clothing/armor/chainmail/hauberk
+	shirt = /obj/item/clothing/armor/gambeson/arming
+	neck = /obj/item/clothing/neck/bevor
+	gloves = /obj/item/clothing/gloves/leather
+	beltr = /obj/item/weapon/sword/arming
+	backr = /obj/item/weapon/shield/heater
+	backl = /obj/item/storage/backpack/satchel
+	scabbards = list(/obj/item/weapon/scabbard/sword)
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)

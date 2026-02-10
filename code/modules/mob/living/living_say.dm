@@ -137,6 +137,8 @@
 	var/sigreturn = SEND_SIGNAL(src, COMSIG_MOB_SAY, args)
 	if (sigreturn & COMPONENT_UPPERCASE_SPEECH)
 		message = uppertext(message)
+	if((sigreturn & COMPONENT_SPEECH_CANCEL) && !forced)
+		return
 	if(!message)
 		return
 

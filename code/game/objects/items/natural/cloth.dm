@@ -50,7 +50,7 @@
 /obj/item/natural/cloth/proc/on_pre_clean(datum/cleaning_source, atom/atom_to_clean, mob/living/cleaner)
 	if(cleaner?.used_intent?.type != INTENT_USE || ismob(atom_to_clean) || !check_allowed_items(atom_to_clean))
 		return DO_NOT_CLEAN
-	if(istype(atom_to_clean, /turf/open/water) || istype(atom_to_clean, /turf/open/transparent) || istype(atom_to_clean, /obj/item/plate) || istype(atom_to_clean, /obj/item/reagent_containers/glass/bowl) || istype(atom_to_clean, /obj/item/clothing/shoes))
+	if(istype(atom_to_clean, /turf/open/water) || istype(atom_to_clean, /turf/open/openspace) || istype(atom_to_clean, /obj/item/plate) || istype(atom_to_clean, /obj/item/reagent_containers/glass/bowl) || istype(atom_to_clean, /obj/item/clothing/shoes))
 		return DO_NOT_CLEAN
 	if(cleaner.client && ((atom_to_clean in cleaner.client.screen) && !cleaner.is_holding(atom_to_clean)))
 		to_chat(cleaner, span_warning("I need to take \the [atom_to_clean] off before cleaning it!"))
@@ -193,7 +193,7 @@
 	update_appearance()
 
 // BANDAGING
-/obj/item/natural/cloth/attack(mob/living/M, mob/user)
+/obj/item/natural/cloth/attack(mob/living/M, mob/user, list/modifiers)
 	bandage(M, user)
 
 /obj/item/natural/cloth/proc/bandage(mob/living/M, mob/user)
@@ -208,7 +208,7 @@
 	if(affecting.bandage)
 		to_chat(user, "<span class='warning'>There is already a bandage.</span>")
 		return
-	var/used_time = bandage_speed * (1 - (H.get_skill_level(/datum/skill/misc/medicine) * 0.15))
+	var/used_time = bandage_speed * (1 - (H.get_skill_level(/datum/skill/misc/medicine, TRUE) * 0.15))
 	playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 	if(!do_after(user, used_time, M))
 		return

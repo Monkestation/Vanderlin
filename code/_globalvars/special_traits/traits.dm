@@ -486,7 +486,7 @@
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
 	character.add_quirk(/datum/quirk/vice/maniac)
-	character.verbs |= /mob/living/carbon/human/proc/torture_victim
+	add_verb(character, /mob/living/carbon/human/proc/torture_victim)
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
 //negative
@@ -933,7 +933,7 @@
 	character.update_transform()
 	character.RemoveElement(/datum/element/footstep, character.footstep_type, 1, -6)
 	character.AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
-	character.verbs |= /mob/living/carbon/human/proc/emote_burp_loud
+	add_verb(character, /mob/living/carbon/human/proc/emote_burp_loud)
 	var/datum/voicepack/glutton/sound_m = new()
 	var/datum/voicepack/glutton/sound_f = new()
 	sound_m.parent_datum = character.dna.species.soundpack_m
@@ -952,7 +952,7 @@
 
 /mob/living/carbon/human/proc/emote_burp_loud()
 	set name = "Gluttonous Burp"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("burploud", intentional = TRUE)
 
@@ -963,8 +963,7 @@
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
-	var/datum/inspiration/I = new /datum/inspiration(character)
-	I.grant_inspiration(character, bard_tier = BARD_T2)
+	character.inspiration = new /datum/inspiration(character)
 	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
 
 /datum/special_trait/baothan

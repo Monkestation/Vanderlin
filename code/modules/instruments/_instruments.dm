@@ -8,13 +8,12 @@
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	experimental_inhand = FALSE
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
 	can_parry = FALSE
 	force = 0
 	minstr = 0
 	wbalance = 0
-	wdefense = 0
 	throwforce = 0
 	throw_range = 4
 	blade_dulling = DULLING_BASH
@@ -28,10 +27,11 @@
 	var/list/song_list = list()
 	var/playing = FALSE
 	var/instrument_buff
-	var/dynamic_icon
 	var/icon_prefix
 	/// Instrument is in some other holder such as an organ or item.
 	var/not_held
+	/// Should the instrument only buff the owner's inspiration audience?
+	var/target_audience_only = FALSE
 
 /datum/looping_sound/instrument
 	mid_length = 2400
@@ -92,33 +92,40 @@
 			return PROCESS_KILL
 	user.apply_status_effect(/datum/status_effect/buff/playing_music) // Handles regular stress event in tick()
 	var/boon = user?.get_learning_boon(/datum/skill/misc/music)
-	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.2) // And gain exp
+	user?.adjust_experience(/datum/skill/misc/music, ceil((user.STAINT*0.2) * boon) * 0.25) // And gain exp
 
 	if(!HAS_TRAIT(user, TRAIT_BARDIC_TRAINING))
 		return
 
-	for(var/obj/structure/soil/soil in view(7, source))
+	for(var/obj/structure/soil/soil in view(5, source))
 		var/distance = max(1, get_dist(source, soil))
 		soil.process_npk_growth(round(2 / distance, 0.1))
-
-	for(var/mob/living/carbon/L in hearers(7, source))
-		if(!L.client)
-			continue
-		if(!L.can_hear()) // Only good people who can hear music will get buffed
-			continue
-		if((L.mob_biotypes & MOB_UNDEAD) && !(user.mob_biotypes & MOB_UNDEAD))
-			continue
-		L.add_stress(/datum/stress_event/bardicbuff)
-		if(!instrument_buff)
-			continue
-		if(L.mind?.has_antag_datum(/datum/antagonist))
-			if(!L.mind?.isactuallygood())
-				continue
-		L.apply_status_effect(instrument_buff)
 
 	for(var/obj/item/reagent_containers/food/snacks/smallrat/I in view(4, user))
 		if(I.loc != user)
 			step_towards(I, user)
+
+	if(!instrument_buff)
+		return
+
+	for(var/mob/living/carbon/listener in hearers(5, source))
+		if(!listener.client)
+			continue
+		if(!listener.can_hear()) // Only good people who can hear music will get buffed
+			continue
+		var/bypass_checks = FALSE
+		if(user == listener)
+			bypass_checks = TRUE
+		if(user.inspiration)
+			if(target_audience_only)
+				if(bypass_checks || user.inspiration.check_in_audience(listener))
+					listener.apply_status_effect(instrument_buff)
+				continue
+			else if(user.inspiration.check_in_audience(listener))
+				bypass_checks = TRUE
+		if(!bypass_checks && !user.faction_check_mob(listener))
+			continue
+		listener.apply_status_effect(instrument_buff)
 
 /obj/item/instrument/proc/terminate_playing(mob/living/user)
 	playing = FALSE
@@ -126,9 +133,10 @@
 	if(istype(user))
 		user.remove_status_effect(/datum/status_effect/buff/playing_music)
 	instrument_buff = null
+	target_audience_only = initial(target_audience_only)
 	if(soundloop)
 		soundloop.stop()
-	if(dynamic_icon)
+	if(icon_prefix)
 		lower_from_mouth()
 	// Prevents an exploit
 	for(var/mob/living/L in hearers(7, loc))
@@ -148,7 +156,7 @@
 		terminate_playing(user)
 	. = ..()
 
-/obj/item/instrument/attack_self(mob/living/user, params)
+/obj/item/instrument/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -245,9 +253,19 @@
 	soundloop.start()
 	user.apply_status_effect(/datum/status_effect/buff/playing_music, stress_event, note_color)
 	record_round_statistic(STATS_SONGS_PLAYED)
-	if(dynamic_icon)
+	if(icon_prefix)
 		lift_to_mouth()
 	START_PROCESSING(SSprocessing, src)
+
+/obj/item/instrument/attack_self_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/human_user = user
+	if(!human_user.inspiration)
+		return
+	target_audience_only = !target_audience_only
+	to_chat(user, span_notice("[target_audience_only ? "You will now play only for your audience." : "You will now play for everyone nearby."]"))
 
 /obj/item/instrument/proc/lift_to_mouth()
 	icon_state = "[icon_prefix]_play"
@@ -260,7 +278,7 @@
 /obj/item/instrument/lute
 	name = "lute"
 	desc = "The favored instrument of Eora, made of wood and simple string."
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
 	force = 5
 	icon_state = "lute"
 	item_state = "lute"
@@ -295,7 +313,7 @@
 /obj/item/instrument/guitar
 	name = "guitar"
 	desc = "A corrupted lute, a heritage instrument of Tiefling pedigree."
-	possible_item_intents = list(/datum/intent/mace/strike/wood)
+	possible_item_intents = list(MACE_WDSTRIKE)
 	icon_state = "guitar"
 	item_state = "guitar"
 	song_list = list(
@@ -348,7 +366,6 @@
 	desc = "A cacophonous wind-instrument, played primarily by humens all around Psydonia."
 	icon_state = "flute"
 	icon_prefix = "flute" // used for inhands switch
-	dynamic_icon = TRUE // used for inhands switch
 	dropshrink = 0.6
 	w_class = WEIGHT_CLASS_SMALL
 	song_list = list(

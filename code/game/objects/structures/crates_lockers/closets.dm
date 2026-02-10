@@ -210,7 +210,7 @@
 		bust_open()
 	. = ..()
 
-/obj/structure/closet/attackby(obj/item/I, mob/user, params)
+/obj/structure/closet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(user in src)
 		return TRUE
 	if(tool_interact(I, user))
@@ -346,3 +346,14 @@
 	INVOKE_ASYNC(src, PROC_REF(open))
 
 #undef LOCKER_FULL
+
+/// Proc that searches inside an atom, specifically for sanctified coffins.
+/obj/structure/closet/proc/check_double_consecration(obj/structure/closet/dirthole/closed/grave_to_consecrate, mob/user)
+	var/double_consecrated = FALSE
+	if(!grave_to_consecrate)
+		return FALSE
+// If the grave contains a sanctified casket, mark the tomb as doubly-sanctified. This will make anyone trying to graverob regret it.
+	for(var/obj/structure/closet/crate/coffin/coffin in grave_to_consecrate.contents)
+		if (coffin.consecrated)
+			double_consecrated = TRUE
+	return double_consecrated

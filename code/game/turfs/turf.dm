@@ -11,7 +11,7 @@
 	// A list will be created in initialization that figures out the baseturf's baseturf etc.
 	// In the case of a list it is sorted from bottom layer to top.
 	// This shouldn't be modified directly, use the helper procs.
-	var/list/baseturfs = /turf/open/transparent/openspace
+	var/list/baseturfs = /turf/open/openspace
 
 	var/temperature = 293.15
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
@@ -95,11 +95,9 @@
 	var/turf/T = GET_TURF_ABOVE(src)
 	if(T)
 		T.multiz_turf_new(src, DOWN)
-		SEND_SIGNAL(T, COMSIG_TURF_MULTIZ_NEW, src, DOWN)
 	T = GET_TURF_BELOW(src)
 	if(T)
 		T.multiz_turf_new(src, UP)
-		SEND_SIGNAL(T, COMSIG_TURF_MULTIZ_NEW, src, UP)
 	if(!mapload)
 		reassess_stack()
 
@@ -165,9 +163,11 @@
 	user.Move_Pulled(src)
 
 /turf/proc/multiz_turf_del(turf/T, dir)
+	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_DEL, T, dir)
 	reassess_stack()
 
 /turf/proc/multiz_turf_new(turf/T, dir)
+	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_NEW, T, dir)
 	reassess_stack()
 
 
@@ -249,47 +249,48 @@
 /turf/proc/zAirOut(direction, turf/source)
 	return FALSE
 
-/turf/proc/zImpact(atom/movable/A, levels = 1, turf/prev_turf)
-	if(levels == 1 && A.ai_controller)
+/turf/proc/zImpact(atom/movable/falling_atom, levels = 1, turf/prev_turf)
+	if(levels == 1 && falling_atom.ai_controller)
 		for(var/obj/structure/stairs/S in contents)
 			return FALSE
 
 	var/flags = NONE
-	var/mov_name = A.name
-	flags |= SEND_SIGNAL(A, COMSIG_ATOM_FALL_INTERACT, levels)
+	var/mov_name = falling_atom.name
+	flags |= SEND_SIGNAL(falling_atom, COMSIG_ATOM_FALL_INTERACT, levels)
 	for(var/atom/thing as anything in contents)
-		flags |= thing.intercept_zImpact(A, levels)
+		flags |= thing.intercept_zImpact(falling_atom, levels)
 		if(flags & FALL_STOP_INTERCEPTING)
 			break
 	if(prev_turf && !(flags & FALL_NO_MESSAGE))
-		prev_turf.visible_message("<span class='danger'>\The [mov_name] falls through [prev_turf]!</span>")
+		prev_turf.visible_message(span_danger("\The [mov_name] falls through [prev_turf]!"))
 	if(flags & FALL_INTERCEPTED)
 		return
-	if(zFall(A, ++levels))
+	if(zFall(falling_atom, ++levels))
 		return FALSE
-	if(isliving(A))
-		var/mob/living/O = A
-		var/dex_save = O.get_skill_level(/datum/skill/misc/climbing)
-		if(dex_save >= 5)
-			if(O.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
-				O.visible_message("<span class='danger'>[A] gracefully lands on top of [src]!</span>")
-		else
-			A.visible_message("<span class='danger'>[A] crashes into [src]!</span>")
-			if(A.fall_damage())
-				for(var/mob/living/M in contents)
-					visible_message("<span class='danger'>\The [src] falls on \the [M.name]!</span>")
-					M.Stun(1)
-					M.take_overall_damage(A.fall_damage()*2)
-	if(A.fall_damage())
-		for(var/mob/living/M in contents)
-			visible_message("<span class='danger'>\The [src] falls on \the [M.name]!</span>")
-			M.Stun(1)
-			M.take_overall_damage(A.fall_damage()*2)
-	A.onZImpact(src, levels)
-	if(isobj(A))
-		var/obj/O = A
-		for(var/mob/living/mob in O.contents)
-			O.on_fall_impact(mob, levels * 0.75)
+	if(isliving(falling_atom))
+		var/mob/living/falling_mob = falling_atom
+		if(!((falling_mob.movement_type & FLYING) && isopenspace(src)))
+			var/dex_save = falling_mob.get_skill_level(/datum/skill/misc/climbing)
+			if(dex_save >= 5)
+				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
+					falling_mob.visible_message("<span class='danger'>[falling_mob] gracefully lands on top of [src]!</span>")
+			else
+				falling_mob.visible_message("<span class='danger'>[falling_mob] crashes into [src]!</span>")
+				if(falling_mob.fall_damage())
+					for(var/mob/living/crumpled_mob in contents)
+						visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
+						crumpled_mob.Stun(1)
+						crumpled_mob.take_overall_damage(falling_mob.fall_damage()*2)
+	if(falling_atom.fall_damage())
+		for(var/mob/living/crumpled_mob in contents)
+			visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
+			crumpled_mob.Stun(1)
+			crumpled_mob.take_overall_damage(falling_atom.fall_damage()*2)
+	falling_atom.onZImpact(src, levels)
+	if(isobj(falling_atom))
+		var/obj/falling_obj = falling_atom
+		for(var/mob/living/mob in falling_obj.contents)
+			falling_obj.on_fall_impact(mob, levels * 0.75)
 
 	return TRUE
 
@@ -628,19 +629,18 @@
 	if (iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(C.reagents)
-			clear_reagents_to_vomit_pool(C,V)
+			C.clear_reagents_to_vomit_pool(V)
 
-/proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V, purge = FALSE)
-	var/obj/item/organ/stomach/belly = M.getorganslot(ORGAN_SLOT_STOMACH)
+/mob/living/carbon/proc/clear_reagents_to_vomit_pool(obj/effect/decal/cleanable/vomit/V, purge = FALSE)
+	var/obj/item/organ/stomach/belly = getorganslot(ORGAN_SLOT_STOMACH)
 	if(!belly)
 		return
 	var/chemicals_lost = belly.reagents.total_volume * 0.1
 	if(purge)
 		chemicals_lost = belly.reagents.total_volume * 0.67 //For detoxification surgery, we're manually pumping the stomach out of chemcials, so it's far more efficient.
-	belly.reagents.trans_to(V, chemicals_lost, transfered_by = M)
+	belly.reagents.trans_to(V, chemicals_lost, transfered_by = src)
 	//clear the stomach of anything even not food
-	for(var/bile in belly.reagents.reagent_list)
-		var/datum/reagent/reagent = bile
+	for(var/datum/reagent/reagent as anything in belly.reagents.reagent_list)
 		belly.reagents.remove_reagent(reagent.type, min(reagent.volume, 10))
 
 //Whatever happens after high temperature fire dies out or thermite reaction works.

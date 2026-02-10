@@ -250,8 +250,7 @@
 
 		// Wound-specific pain (can be higher intensity)
 		var/wound_pain = 0
-		for(var/W in BP.wounds)
-			var/datum/wound/WO = W
+		for(var/datum/wound/WO as anything in BP.wounds)
 			if(WO.woundpain > 0)
 				wound_pain += WO.woundpain
 
@@ -632,7 +631,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
-			adjust_jitter(-3)
+			adjust_jitter(-6 SECONDS)
 			apply_status_effect(/datum/status_effect/buff/drunk)
 		else
 			remove_stress(/datum/stress_event/drunk)
@@ -640,15 +639,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			slurring += 1.2
 		if(drunkenness >= 41)
 			if(prob(25))
-				adjust_confusion(0.2 SECONDS)
-			set_dizzy(10)
+				adjust_confusion(4 SECONDS)
+			set_dizzy(10 SECONDS)
 
 		if(drunkenness >= 51)
 			adjustToxLoss(1)
 			if(prob(3))
-				adjust_confusion(1.5 SECONDS)
+				adjust_confusion(15 SECONDS)
 				vomit() // vomiting clears toxloss, consider this a blessing
-			set_dizzy(25)
+			set_dizzy(25 SECONDS)
 
 		if(drunkenness >= 61)
 			adjustToxLoss(1)
@@ -698,10 +697,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(!belly) //nothing to see here if we do not have a stomach
 		return fullness
 
-	for(var/bile in belly.reagents.reagent_list)
-		var/datum/reagent/bits = bile
+	for(var/datum/reagent/bits as anything in belly.reagents.reagent_list)
 		if(istype(bits, /datum/reagent/consumable))
-			var/datum/reagent/consumable/goodbit = bile
+			var/datum/reagent/consumable/goodbit = bits
 			fullness += goodbit.nutriment_factor * goodbit.volume / goodbit.metabolization_rate
 			continue
 		fullness += 0.6 * bits.volume / bits.metabolization_rate //not food takes up space
@@ -812,8 +810,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 ////////////////
 
 /mob/living/carbon/proc/handle_brain_damage()
-	for(var/T in get_traumas())
-		var/datum/brain_trauma/BT = T
+	for(var/datum/brain_trauma/BT as anything in get_traumas())
 		BT.on_life()
 
 /////////////////////////////////////

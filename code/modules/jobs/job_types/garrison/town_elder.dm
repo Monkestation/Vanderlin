@@ -37,7 +37,7 @@
 
 /datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/townannouncement
+	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
 	var/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
@@ -56,8 +56,8 @@
 	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /mob/living/carbon/human/proc/townannouncement()
-	set name = "Announcement"
-	set category = "Town Elder"
+	set name = "Elder Announcement"
+	set category = "RoleUnique.Elder"
 	if(stat)
 		return
 
@@ -90,7 +90,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 	jobstats = list(
@@ -121,8 +121,7 @@
 
 /datum/job/advclass/town_elder/mayor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/labor/mathematics, 1, TRUE)
@@ -430,13 +429,12 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 /datum/job/advclass/town_elder/lorekeeper/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)

@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /proc/build_zizo_rituals()
 	. = list()
 	for(var/datum/ritual/ritual as anything in subtypesof(/datum/ritual))
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		.[ritual.name] = new ritual
 
@@ -173,7 +173,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	icon_state = "heart-on"
 	w_class =  WEIGHT_CLASS_SMALL
 
-/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, params)
+/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
 		return
 	if(istype(target.patron, /datum/patron/inhumen/zizo))
@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	target.Stun(10 SECONDS)
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
-		carbon_target.adjust_silence(30)
+		carbon_target.adjust_silence(30 SECONDS)
 	qdel(src)
 
 /datum/ritual/servantry/darksunmark
@@ -518,19 +518,36 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(target.mind.has_antag_datum(/datum/antagonist/werewolf))
 		to_chat(target, span_warning("The curse doesn't take hold!"))
 		return
+	if(target.get_lux_status() != LUX_HAS_LUX)
+		to_chat(target, span_warning("The curse requires lux!"))
+		return
+	if(target.stat == DEAD)
+		return
 	to_chat(target, span_warning("My very being, body, soul, and mind is contorted and twisted violently into a ball of flesh and fur, until I am reshaped anew as an abomination!"))
 	addtimer(CALLBACK(src, PROC_REF(get_hollowed), target, center), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/curse/proc/get_hollowed(mob/living/victim, turf/place)
-    if(QDELETED(victim))
-        return
-    if(place != get_turf(victim))
-        return
-    if(!victim.mind)
-        return
-    var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
-    victim.mind.transfer_to(wll)
-    victim.gib()
+	if(QDELETED(victim))
+		return
+	if(place != get_turf(victim))
+		return
+	if(!victim.mind)
+		return
+	if(victim.mob_biotypes & MOB_UNDEAD)
+		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		return
+	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
+		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		return
+	if(victim.get_lux_status() != LUX_HAS_LUX)
+		to_chat(victim, span_warning("The curse requires lux!"))
+		return
+	if(victim.stat == DEAD)
+		return
+
+	var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
+	victim.mind.transfer_to(wll)
+	victim.gib()
 
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"
@@ -682,7 +699,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/mob/living/trl = new /mob/living/simple_animal/hostile/retaliate/blood/ascended(center)
 	cultist.mind?.transfer_to(trl)
 	cultist.gib()
-	priority_announce("The sky blackens, a dark day for Psydonia.", "Ascension", 'sound/misc/gods/astrata_scream.ogg')
+	priority_announce("The sky blackens, a dark day for Psydonia.", "Ascension", 'sound/misc/gods/astrata_omen.ogg')
 	for(var/mob/living/carbon/human/V in GLOB.human_list)
 		if(V.mind in SSmapping.retainer.cultists)
 			V.add_stress(/datum/stress_event/lovezizo)

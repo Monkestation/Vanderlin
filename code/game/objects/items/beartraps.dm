@@ -55,7 +55,7 @@
 			return FALSE
 		else
 			if(C.mind)
-				used_time -= max((C.get_skill_level(/datum/skill/craft/traps) * 2 SECONDS), 2 SECONDS)
+				used_time -= max((C.get_skill_level(/datum/skill/craft/traps, TRUE) * 2 SECONDS), 2 SECONDS)
 			if(do_after(user, used_time, src))
 				armed = FALSE
 				anchored = FALSE
@@ -82,7 +82,7 @@
 				return FALSE
 	..()
 
-/obj/item/restraints/legcuffs/beartrap/attackby(obj/item/W, mob/user)
+/obj/item/restraints/legcuffs/beartrap/attackby(obj/item/W, mob/user, list/modifiers)
 	if(W.force && armed)
 		user.visible_message("<span class='warning'>[user] triggers \the [src] with [W].</span>", \
 				"<span class='danger'>I trigger \the [src] with [W]!</span>")
@@ -116,7 +116,7 @@
 	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	return (BRUTELOSS)
 
-/obj/item/restraints/legcuffs/beartrap/attack_self(mob/user, params)
+/obj/item/restraints/legcuffs/beartrap/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!ishuman(user) || user.stat != CONSCIOUS || HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
 		return
@@ -124,7 +124,7 @@
 	if(ishuman(user) && !user.stat && !HAS_TRAIT(src, TRAIT_RESTRAINED))
 		var/mob/living/L = user
 		if(do_after(user, (5 SECONDS) - (L.STASTR*2), user))
-			if(prob(50 - makeshift_prob + (L.get_skill_level(/datum/skill/craft/traps) * 10))) // 100% chance to set traps properly at Master trapping, assuming the trap isn't makeshift
+			if(prob(50 - makeshift_prob + (L.get_skill_level(/datum/skill/craft/traps, TRUE) * 10))) // 100% chance to set traps properly at Master trapping, assuming the trap isn't makeshift
 				armed = TRUE // Impossible to use in hand if it's armed
 				L.log_message("has armed the [src]!", LOG_ATTACK)
 				L.dropItemToGround(src) // We drop it instantly on the floor beneath us

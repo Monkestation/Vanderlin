@@ -317,7 +317,7 @@
 		torchy.turn_off()
 	..()
 
-/obj/machinery/light/fueled/torchholder/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/torchholder/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/flashlight/flare/torch))
 		var/obj/item/flashlight/flare/torch/LR = W
 		if(torchy)
@@ -403,7 +403,7 @@
 	on = FALSE
 	cookonme = TRUE
 	soundloop = /datum/looping_sound/fireloop
-	temperature_change = 40
+	// temperature_change = 40
 	var/heat_time = 100
 	var/obj/item/attachment = null
 	var/obj/item/reagent_containers/food/snacks/food = null
@@ -415,7 +415,7 @@
 /obj/machinery/light/fueled/hearth/Destroy()
 	. = ..()
 
-/obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(!attachment)
 		if(istype(W, /obj/item/cooking/pan) || istype(W, /obj/item/reagent_containers/glass/bucket/pot) || istype(W, /obj/item/reagent_containers/glass/carafe/teapot))
 			playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
@@ -426,11 +426,9 @@
 			return
 
 	else
-		if(istype(W, /obj/item/reagent_containers/glass/bowl))
-			to_chat(user, "<span class='notice'>Remove the pot from the hearth first.</span>")
+		. = attachment.attackby(W, user, modifiers)
+		if(.)
 			return
-		else
-			SEND_SIGNAL(attachment, COMSIG_TRY_STORAGE_INSERT, W, user, null, FALSE)
 	. = ..()
 
 /obj/machinery/light/fueled/hearth/MouseDrop(mob/over, src_location, over_location, src_control, over_control, params)

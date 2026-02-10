@@ -19,10 +19,17 @@
 
 /obj/machinery/anvil/examine(mob/user)
 	. = ..()
-	if(hingot && hott)
-		. += "<span class='warning'>[hingot] is too hot to touch.</span>"
+	if(hingot)
+		. += hingot.examine()
+		if(hott)
+			. += "<span class='warning'>[hingot] is too hot to touch.</span>"
 
-/obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
+	if(hingot)
+		return hingot.attack_hand_secondary(user, modifiers)
+	. = ..()
+
+/obj/machinery/anvil/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/tongs))
 		var/obj/item/weapon/tongs/T = W
 		if(smithing)
@@ -188,12 +195,12 @@
 		return
 
 	var/list/valid_types = list()
-	for(var/datum/anvil_recipe/R in GLOB.anvil_recipes)
-		if(is_abstract(R.type))
+	for(var/datum/anvil_recipe/R as anything in GLOB.anvil_recipes)
+		if(IS_ABSTRACT(R))
 			continue
 
 		if(has_world_trait(/datum/world_trait/delver))
-			if(!has_recipe_unlocked(user.key, R.type))
+			if(!has_recipe_unlocked(user.key, R))
 				continue
 
 		if(istype(hingot, R.req_bar))
@@ -212,25 +219,21 @@
 		return
 
 	var/list/appro_recipe = list()
-	for(var/datum/anvil_recipe/R in GLOB.anvil_recipes)
-		if(is_abstract(R.type))
+	for(var/datum/anvil_recipe/R as anything in GLOB.anvil_recipes)
+		if(IS_ABSTRACT(R))
 			continue
-		if(R.i_type == i_type_choice && istype(hingot, R.req_bar))
+		if(R.i_type == i_type_choice && istype(hingot, R::req_bar))
 			appro_recipe += R
 
-	for(var/I in appro_recipe)
-		var/datum/anvil_recipe/R = I
-		if(!R.req_bar)
+	for(var/datum/anvil_recipe/R as anything in appro_recipe)
+		if(!R::req_bar)
 			appro_recipe -= R
-		if(!istype(hingot, R.req_bar))
+		if(!istype(hingot, R::req_bar))
 			appro_recipe -= R
 
 	if(length(appro_recipe))
 		var/datum/chosen_recipe
-		if(length(appro_recipe) == 1)
-			chosen_recipe = appro_recipe[1]
-		else
-			chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
+		chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
 		if(!hingot.currecipe && chosen_recipe)
 			hingot.currecipe = new chosen_recipe.type(hingot)
 			hingot.currecipe.material_quality += hingot.recipe_quality
@@ -239,7 +242,7 @@
 
 	return FALSE
 
-/obj/machinery/anvil/attack_hand(mob/living/user, params)
+/obj/machinery/anvil/attack_hand(mob/user, list/modifiers)
 	if(smithing)
 		to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
 		return

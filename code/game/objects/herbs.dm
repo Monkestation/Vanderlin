@@ -4,11 +4,9 @@
 	icon = 'icons/roguetown/misc/herbfoliage.dmi'
 	icon_state = "spritemeplz"
 	num_random_icons = 0
-	var/res_replenish
 	max_integrity = 10
 	climbable = FALSE
 	dir = SOUTH
-	var/list/looty = list()
 	var/herbtype
 	var/obj/effect/skill_tracker/alchemy_plants/alchemy_effect
 	var/obj/item/reagent_containers/food/snacks/spiderhoney/honey/honey_type

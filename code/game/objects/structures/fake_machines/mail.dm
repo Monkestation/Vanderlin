@@ -14,19 +14,19 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/keycontrol = "puritan"
 	var/cat_current = "1"
 	var/list/all_category = list(
-		"✤ RELIQUARY ✤",
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"RELIQUARY",
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
 	var/list/category = list(
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
-	var/list/inq_category = list("✤ RELIQUARY ✤")
+	var/list/inq_category = list("RELIQUARY")
 	var/ournum
 	var/mailtag
 	var/obfuscated = FALSE
@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		. += span_info("You can send arrival slips, accusation slips, fully loaded INDEXERs or confessions here.")
 		. += span_info("Properly sign them. Include an INDEXER where needed. Stamp them for two additional Marques.")
 
-/obj/structure/fake_machine/mail/attack_hand_secondary(mob/user, params)
+/obj/structure/fake_machine/mail/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -162,8 +162,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		coin_loaded = FALSE
 		update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/fake_machine/mail/attackby(obj/item/P, mob/user, params)
-	// Mercenary Token Handling
+/obj/structure/fake_machine/mail/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/merctoken))
 		return handle_merctoken(P, user)
 
@@ -498,7 +497,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			if(/datum/antagonist/bandit, /datum/antagonist/maniac, /datum/antagonist/assassin,
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
 			   /datum/antagonist/werewolf, /datum/antagonist/werewolf/lesser,
-			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lesser)
+			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn)
 				is_correct = TRUE
 				break
 
@@ -756,7 +755,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	SSroguemachine.hermailermaster = src
 	update_appearance()
 
-/obj/item/fake_machine/mastermail/attackby(obj/item/P, mob/user, params)
+/obj/item/fake_machine/mastermail/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/paper))
 		var/obj/item/paper/PA = P
 		if(!PA.mailer && !PA.mailedto && PA.cached_mailer && PA.cached_mailedto)
@@ -793,20 +792,20 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 /obj/structure/fake_machine/mail/proc/decreaseremaining(datum/inqports/PA)
 	PA.remaining -= 1
-	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - ᛉ [PA.marquescost] ᛉ"
+	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - [PA.marquescost]"
 	if(!PA.remaining)
-		PA.name = "[initial(PA.name)] (OUT OF STOCK) - ᛉ [PA.marquescost] ᛉ"
+		PA.name = "[initial(PA.name)] (OUT OF STOCK) - [PA.marquescost]"
 	return
 
 /obj/structure/fake_machine/mail/proc/display_marquette(mob/user)
 	var/contents
-	contents = "<center>✤ ── THE ORATORIUM'S RELIQUARY ── ✤<BR>"
+	contents = "<center>  THE ORATORIUM'S RELIQUARY  <BR>"
 	contents += "ERADICATE HERESY, SO THAT PSYDONIA MAY ENDURE <BR>"
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
-		contents += "✤ ── <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a> ── ✤<BR>"
+		contents += "  <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a>  <BR>"
 	else
-		contents += "✤ ── PURITAN'S LOCK: [inqonly ? "YES":"NO"] ── ✤<BR>"
-	contents += "ᛉ <a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a>ᛉ<BR>"
+		contents += "  PURITAN'S LOCK: [inqonly ? "YES":"NO"]  <BR>"
+	contents += "<a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a><BR>"
 
 	if(cat_current == "1")
 		contents += "<BR> <table style='width: 100%' line-height: 40px;'>"
@@ -829,14 +828,12 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		contents += "<center><a href='?src=[REF(src)];changecat=1'>\[RETURN\]</a><BR><BR></center>"
 		contents += "<center>"
 		var/list/items = list()
-		for(var/pack in GLOB.inqsupplies)
-			var/datum/inqports/PA = pack
+		for(var/datum/inqports/PA as anything in GLOB.inqsupplies)
 			if(all_category[PA.category] == cat_current && PA.name)
-				items += GLOB.inqsupplies[pack]
+				items += GLOB.inqsupplies[PA]
 				if(PA.name == "Seizing Garrote" && !HAS_TRAIT(user, TRAIT_BLACKBAGGER))
-					items -= GLOB.inqsupplies[pack]
-		for(var/pack in sortNames(items, order=0))
-			var/datum/inqports/PA = pack
+					items -= GLOB.inqsupplies[PA]
+		for(var/datum/inqports/PA as anything in sortNames(items, order=0))
 			var/name = uppertext(PA.name)
 			if(inqonly && !HAS_TRAIT(user, TRAIT_PURITAN) || (PA.maximum && !PA.remaining) || inqcoins < PA.marquescost)
 				contents += "[name]<BR>"

@@ -380,8 +380,9 @@
 	H.apply_status_effect(/datum/status_effect/tremor_grip_loss)
 
 	// Shake the screen slightly for immersion
-	animate(H.client, pixel_x = rand(-2, 2), pixel_y = rand(-2, 2), time = 2)
-	addtimer(CALLBACK(src, PROC_REF(reset_screen_shake), H), 2)
+	if(H.client)
+		animate(H.client, pixel_x = rand(-2, 2), pixel_y = rand(-2, 2), time = 2)
+		addtimer(CALLBACK(src, PROC_REF(reset_screen_shake), H), 2)
 
 /datum/quirk/vice/tremors/proc/reset_screen_shake(mob/living/carbon/human/H)
 	if(H?.client)

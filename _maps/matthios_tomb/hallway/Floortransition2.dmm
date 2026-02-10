@@ -45,7 +45,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "R" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area)
 
 (1,1,1) = {"
