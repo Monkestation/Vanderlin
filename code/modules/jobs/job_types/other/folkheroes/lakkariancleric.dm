@@ -78,3 +78,5 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/reagent_containers/food/snacks/hardtack = 1
 	)
+
+// TOUCHING THIS ALL LATER, THERES ALOT I NEED TO DO W THIS CLASS

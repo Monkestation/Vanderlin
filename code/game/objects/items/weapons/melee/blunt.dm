@@ -47,7 +47,7 @@
 
 /obj/item/weapon/mace/rungu
 	name = "iron rungu"
-	desc = "An iron from the fallen east. Possesses a smoothed out head."
+	desc = "An iron mace from the southern reaches of Faience, it has a rounded head."
 	icon_state = "rungu_iron"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 
@@ -218,7 +218,7 @@
 
 /obj/item/weapon/mace/steel/rungu
 	name = "steel rungu"
-	desc = "A steel mace from the fallen east. Possesses a smoothed out head."
+	desc = "A steel mace from the southern reaches of Faience. It has a rounded head."
 	icon_state = "rungu_steel"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 
@@ -653,7 +653,7 @@
 
 /obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"
-	desc = "A silver mace from the fallen east. Made to fight nite-creachers."
+	desc = "A silver mace with a rounded head. Made to fight nite-creachers."
 	icon_state = "rungu_silver"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = GOOD_PARRY

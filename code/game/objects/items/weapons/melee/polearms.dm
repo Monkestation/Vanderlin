@@ -155,7 +155,7 @@
 
 /obj/item/weapon/polearm/spear/assegai
 	name = "iron assegai"
-	desc = "A long spear originating from the east."
+	desc = "A long spear originating from the Queendom of Lakkari. A common weapon for Lakkarian infantrymen"
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "assegai_iron"
 	throwforce = DAMAGE_SPEAR_WIELD

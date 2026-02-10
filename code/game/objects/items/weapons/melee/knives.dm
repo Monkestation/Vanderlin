@@ -215,7 +215,7 @@
 
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
-	desc = "A curved iron dagger from the fallen east."
+	desc = "A curved iron dagger from the Queendom of Lakkari. Before Zizo's ascension, nobles were commonly buried with them."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
 	dropshrink = 1.0
@@ -230,7 +230,7 @@
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
-	desc = "A broad iron dagger from the fallen east. Popular amongst the elves."
+	desc = "A broad iron dagger from the Queendom of Lakkari. It decorates the banners of the nation's most impoverished families."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_iron"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
@@ -249,7 +249,7 @@
 
 /obj/item/weapon/knife/dagger/steel/jile
 	name = "steel jile"
-	desc = "A curved steel dagger from the fallen east."
+	desc = "A curved iron dagger from the Queendom of Lakkari. Before Zizo's ascension, nobles were commonly buried with them."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_steel"
 	sellprice = 20
@@ -257,7 +257,7 @@
 
 /obj/item/weapon/knife/dagger/steel/njora
 	name = "steel seme"
-	desc = "A broad steel dagger from the fallen east. Popular amongst elves."
+	desc = "A broad steel dagger from the Queendom of Lakkari. It decorates the banners of the nation's most impoverished families."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_steel"
 	wbalance = HARD_TO_DODGE

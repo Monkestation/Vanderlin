@@ -89,15 +89,15 @@ While it's not required reading, leadership roles may find this information usef
 		</details>
 	<br>
 
-	<p><strong>  The Lakkarian Strip </strong><em> - "The diverse stretch of resource-rich rainforests and dunes currently ruled over by the Queendom of Lakkari, the second largest elven territory of Faience."	</em></p>
+	<p><strong> The Lakkarian Strip </strong><em> - "A diverse stretch of land consisting of fertile floodplains, iron-rich dunes, and lush rainforests. A vast network of ancient underground tombs spans throughout the strip. Its exact origins are lost to time."	</em></p>
 
 	<details>
 		<summary><em> Points of Interest </em></summary>
 
-		<p><strong> - City Of Iwabaree </strong><br> Nestled within the northwestern jungle of The Lakkarian Strip, Iwabaree is the capital city of Lakkari. Its considered to be one of the most sacred cities to Astratans within Psydonia and the wealthiest city of the Queendom. The Black Empire failed to capture it during the War of the Split Feather. Iwabaree is defined by its towering temples to Astrata, complex system of canals, and its gold-crested royal palace. It has only recently opened its doors to those of the inhumen species.	</p>
-		<p><strong> - Barony Of Sakhumeti </strong><br> Referred to as the graveyard capital of Faience. Sakhumeti is an expansive yet desolate barony with a majority Necran population, which has dropped sharply ever since Zizo's ascension. Clerics and Templars are frequently sent to Sakhumeti to clear out the still-rising dead within the city's sprawling tombs.	</p>
-		<p><strong> - City Of Ei Onkara </strong><br> South of the Lakkarian capital city of Iwabaree, the coastal city of Ei Onkara serves as the trade hub of Lakkari and is considered the second-wealthiest city in the Queendom. Ei Onkara is renowned for its expansive market district, skilled goldsmiths, and vast underground catacombs, which few dare to explore. There are often intense feuds and conflicts between its majority Astratan nobility and its majority Xylixian commoner population.	</p>
-		<p><strong> - Barony of Sekket </strong><br> The eastern-most barony of the Queendom of Lakkari, nearing the Zaladin Dynasty's northern border. Desired for its proximity to gold deposits and strategic location next to the Veil of Colors. There have been many squabbles between the Queendom of Lakkari and the Zaladin Dynasty over who has the rightful claim to Sekket, as control over it has shifted multiple times throughout history. Being a majority Xylixian barony, Sekket is also home to many anti-slaver groups. The most prominent being the Shinobi's of Sekket, which runs many underground operations throughout the Zaladin Dynasty. The operations of the Shinobi's of Sekket has drastically soured the already dire relations between the two nations.	</p>
+		<p><strong> - Iwabaree, commonly referred to as “The Hollowed Labryinth”, is an entirely indoor city that thrives within the Mother Baobab - serving as the host for all Baobab trees that sprout and flourish in the arid eastern regions of the Queendom. Iwabaree has become a symbol of hope for Lakkarians, following its recent reclamation from the hordes of the undead after a seven-yil-long siege campaign. Iwabaree currently serves as the base of operations for the bands of foreign mercenaries and Lakkarian templars leading the reclamation effort. Though many are concerned it won't be for the longterm, the Mother Baobab’s water reservoirs have been mysteriously depleting at a concerning rate. prompting strict water rationing. Iwabaree also currently lacks a reliable source of income, as the woodshaping industry just begun to recover with its reclamation. Supplies to the reclamation parties are often meager. Iwabaree is also famous for its pegasus knights - for it is here where the first of them took flight centuries ago, and it was the royal battalion of the Sisters of the Sky who turned the tide of the siege in Lakkari’s favor.		</p>
+		<p><strong> - City Of Sakhumeti </strong><br> The (former) ancient capital of the Queendom of Lakkari. Referred to as “Necra’s Cradle” by her devotees, Sakhumeti is considered the tomb capital of the known world and one of the earliest cities to be established within the southernmost regions of Faience. It is here that the Lakkarian nobility trace their lineage to, and where the once squabbling elven tribes of the Lakkarian Strip united under a single banner thousands of yils ago. Since Zizo’s ascension, not a living soul dwells within the city, as it now operates under a cabal of ancient liches attempting to conquer the rest of the Queendom in Her Name. Having long sustained the Queendom of  Lakkari with its proximity to various ceruleabaster and gold deposits, its loss devastated the nation, and very few of its nobility survived.  	</p>
+		<p><strong> - City Of Ei Onkara </strong><br> The coastal trade city of Ei Onkara is known for its extensive system of canals, bustling market district, and its emerging textile industry. Ei Onkara serves as the economic hub of the nation. It's been designated to be the impromptu capital of the Queendom until Sakhumeti is reclaimed from the legions of undead. The city is amidst a housing crisis as it struggles to provide sufficient living space for the eastern refugees of Sakhumeti and arriving foreign mercenaries coming to “help reclaim” the nation from the hordes of undead. Many live in shantytown settlements within the thick rainforests that surround the city, just outside the safety of its towering adobe walls. Resentment stirs between the Necran refugees and Xylixian denizens of the inner city, who have openly denounced the Xylixians' forceful laundering of various tomb artifacts to other nations to recuperate the loss of income provided by Sakhumeti’s inaccessible gold mines.	</p>
+		<p><strong> - Hill-home of Sekket </strong><br> Jokingly considered to be the “Dwarven Hold of the Elven Realm”, Sekket is a sizeable barony (or hill-home, as some dwarves say) located just on the border between the Queendom of Lakkari and the Southern Dwarven Confederacy. A hostile debate between the two nations on who has the rightful claim to the barony defines its muddied, conflict-ridden history. Much of its population consists of dwelven outcasts, who are ostracized by their parent cultures and struggle to find a place for themselves outside of the barony. Another small-scale war between the Queendom of Lakkari and the Southern Dwarven Confederacy was only prevented by the rise of undead spilling out from the Queendom's labyrinthine tunneling tomb complex, some of which crossed the dwarven border. The event has sprouted an unusual, tense alliance between the two nations that has lasted for the last hundreds of yils. Each has sworn to assist the other in returning their undead to Necra’s embrace.	</p>
 	</details>
 	<br><br>
 </details>
@@ -195,15 +195,16 @@ While it's not required reading, leadership roles may find this information usef
 	<details>
 		<summary><strong> QUEENDOM OF LAKKARI </strong></summary>
 		<br>
-		<em> The Gilded Pschent of the South, The Scourge of the Psydonites, The Land of Tombs and Feathers </em>
+		<em> The Gilded Pschent of the South, The Land of the Feather, Necra's Quilt </em>
 		<br><br>
-		Considered to be the second largest elven power and second elven territory to be (sometimes) marked on humen maps, Lakkari is an elven queendom known for its diverse and defensive landscape and intense devotion to Astrata, Necra, and Xylix. Lush tropical rainforests and vast rivers run through the western and northern reaches of the nation, while the east and south are defined by the red dunes of the Hemhem desert, rich in iron and speckled with oases. Even further south are the Veil of Colors. A long ridge of colorful mountains rich in ceruleabaster and gold that acts as a natural border from the Zaladin Dynasty.
+		Considered the second largest (recognized) elven territory within Faience, the Queendom of Lakkari is an ancient, matriarchal monarchy that stretches across the southernmost reaches of the continent. Lush tropical rainforests and vast rivers run through the western reaches of the Queendom, while the east and south are defined by the swirling red dunes of the Hemhem desert, rich in iron and speckled with oases. The Veil of Colors, a vibrant mountain range rich in deposits of gold and ceruleabaster, acts as a natural northern border separating them from the Zaladin Dynasty, their biggest trade competitor.
 		<br><br>
-		Despite its richness in natural resources and trade, wealth disparity has plagued Lakkari for centuries; many join the church or military to escape poverty. It is only in recent yils that the current Kandake, Iteru of the Dunes, has started to address the issue through a series of reforms the nobility has found incredibly controversial.
+		Despite its historic wealth, the Queendom has found itself amidst an economic crisis after losing its capital city, Sakhumeti, to hordes of rampaging undead spilling out of its ancestral tombs. Lakkari is barely kept afloat by its developing textile industry and controversial exports of valuable ancient Necran artifacts to other nations. Worry festers over whether or not the Queendom can continue to afford bringing in foreign mercenaries for its reclamation efforts.
 		<br><br>
-		Lakkari is known for being one of the few elven nations to have successfully resisted Grenzelhoftian imperialism. Although it lost some of its northernmost territories during the War of the Split Feather (2401-2412), the Lakkarians were able to fend off the forces of the Black Empire following their decisive victory in the battle of Mudridge with the assistance of their closest ally, the Valorian Republics. The surviving Grenzelhoftian soldiers of the battle were captured and sent to the Lakkarian capital of Iwabaree, where they were publicly executed.
+		Lakkarians value freedom, craftsmanship, and their ancestors, who are honored and worshipped alongside Necra, Xylix, and Malum. It is customary for Lakkarians, regardless of gender, to carry a pegasi feather and the armament of their family's banner on their person.
 		<br><br>
 	</details>
+
 	<details>
 		<summary><strong> DWARVEN CONFEDERACY </strong></summary>
 		<br>
@@ -734,24 +735,6 @@ While it's not required reading, leadership roles may find this information usef
 		<summary><strong> Dark Elven Empire Conquered - 2104 </strong></summary>
 		<br>
 		Amidst the chaos of the deadite calamity, Zizo led an organized assault within the caverns of Subterra. The dark elven empire was subjugated in entirety, their Ravoxian ways violently crushed in favour of Zizo's matriarchy. Most elders and leaders were slaughtered, leaving the once respected and revered culture now a feared husk of what it once stood for.
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> The Red Dune Massacre - 2401 </strong></summary>
-		<br>
-		A devastating massacre carried out by Psydonite settlers and extremists from The Black Empire at St. Samiyas Convent, a northern Lakkarian convent near the Grenzelhoftian border. The abbess of the convent, alongside a countless number of her churchlings and acolytes, were mercilessly slain for reasons that Lakkarian scholars have long struggled to determine.
-		<br><br>
-		Iteru of the Dunes, Lakkari's Kandake, swiftly denounced this act of aggression and declared war on The Black Empire.
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> The War of the Split Feather - 2401-2412 </strong></summary>
-		<br>
-		The horrific eleven yil long war between the Queendom of Lakkari and the Grenzelhoftian Impirate. The Queendom of Lakkari sustained heavy losses, losing most of its northernmost territories, but ultimately won the war after a series of close and decisive victories in the Lakkarian rainforest following the Battle of Mudridge in 2411.
-		<br><br>
-		Having overstretched their supply lines into the Lakkarian rainforests (which they struggled to navigate) and facing relentless ambushes from both indigenous jungle elf tribes and the Lakkarian military, the Black Empire ultimately decided to pull back out of the rainforest and prioritize establishing control over the rebellious territories they already took in the north.
 		<br><br>
 	</details>
 

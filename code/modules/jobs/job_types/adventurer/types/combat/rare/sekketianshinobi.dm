@@ -1,6 +1,6 @@
 /datum/job/advclass/combat/sekketianshinobi
-	title = "Sekketian Shinobi"
-	tutorial = "You belong to the Shinobi's of Sekket. An elusive order of Xylixian freedom fighters originating from the Queendom of Lakkari. You have dedicated yourself to uplifting the enslaved and oppressed, and hope to continue doing so in the lands you travel."
+	title = "Desert Shinobi"
+	tutorial = "You belong to the Shinobi of the Dunes. An elusive order of Xylixian freedom fighters originating from the Zaladin Dynasty. You have dedicated yourself to uplifting the enslaved and oppressed, and hope to continue doing so in the lands you travel."
 	allowed_patrons = list(/datum/patron/divine/xylix)
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
@@ -9,7 +9,9 @@
 		SPEC_ID_DROW,\
 		SPEC_ID_ELF,\
 		SPEC_ID_HALF_DROW,\
-	) // excluding harpies because their weak as hell, excluding rakshari, hollowkin, and kobolds because they have no lux, which is incredibly taboo in lakkarian society/culture, half orcs are excluded as well becausee theyll be too damn strong
+		SPEC_ID_RAKSHARI,\
+		SPEC_ID_HOLLOWKIN,\
+	)
 	total_positions = 2
 	roll_chance = 30
 	category_tags = list(CTAG_ADVENTURER)
@@ -48,7 +50,7 @@
 	)
 
 /datum/outfit/adventurer/sekketianshinobi
-	name = "Sekketian Shinobi (Adventurer)"
+	name = "Desert Shinobi (Adventurer)"
 	head = /obj/item/clothing/head/helmet/leather/headscarf/colored/red
 	neck = /obj/item/clothing/neck/coif/cloth/colored/berryblue
 	mask = /obj/item/clothing/face/shellmask

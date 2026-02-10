@@ -178,7 +178,7 @@
 
 /obj/item/weapon/sword/short/ida
 	name = "steel ida"
-	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
+	desc = "A steel short sword with a leaf-shaped blade. Associated with the commonfolk of the Queendom of Lakkari."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_steel"
 	wdefense = GOOD_PARRY
@@ -187,7 +187,7 @@
 
 /obj/item/weapon/sword/short/iron/ida
 	name = "iron ida"
-	desc = "A short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
+	desc = "A short sword with a leaf-shaped blade. Associated with commonfolk of the Queendom of Lakkari."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_iron"
 	sellprice = 20
@@ -550,7 +550,7 @@
 
 /obj/item/weapon/sword/rapier/nimcha
 	name = "nimcha"
-	desc = "An embellished swift sword from the east."
+	desc = "An embellished swift sword originating from the Queendom of Lakkari. Its most associated with the Queendom's Kandake, Iteru of the dunes."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "nimcha"
 	wbalance = HARD_TO_DODGE
@@ -652,7 +652,7 @@
 	name = "steel shotel"
 	icon_state = "shotel_steel"
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
-	desc = "A long, crescent curved blade."
+	desc = "A long, crescent curved blade. The weapon of choice for Lakkarian pegasus knights."
 	possible_item_intents = list(SWDLONG_CUT, SWDLONG_CHOP)
 	gripped_intents = list(SWDLONG_CUT, SHOTEL_CHOP)
 
