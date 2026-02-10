@@ -36,9 +36,5 @@ GLOBAL_VAR(relay_config)
 
 	var/quickname = relay["quickname"]
 
-	to_chat_immediate(
-		target = src,
-		html = boxed_message(span_info(span_big("Connecting you to [quickname]\nIf nothing happens, try manually connecting to the relay ([address]), or the RELAY may be down!"))),
-		type = MESSAGE_TYPE_INFO,
-	)
+	to_chat_immediate(boxed_message(span_info(span_big("Connecting you to [quickname]\nIf nothing happens, try manually connecting to the relay ([address]), or the RELAY may be down!"))))
 	src << link(address)
