@@ -257,6 +257,7 @@
 			"key" = window_key,
 			"size" = window_size,
 			"fancy" = user.client.prefs.tgui_fancy,
+			"locked" = user.client.prefs.tgui_lock,
 			"theme" = "grim",
 			"scale" = TRUE,
 		),

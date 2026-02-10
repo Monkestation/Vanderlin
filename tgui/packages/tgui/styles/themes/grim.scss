@@ -26,6 +26,8 @@
   --color-average: hsl(32, 65%, 35%);
   --color-bad: hsl(0, 52%, 26%);
 
+  --color-border-primary: var(--color-primary);
+
   // Title
   .TitleBar {
     &__title {
@@ -46,7 +48,7 @@
   // Components
   --section-separator-color: #9c807d;
 
-  --color-border-primary: #ae3636;
+
 
   --button-color-transparent: hsl(from var(--color-text) h s l / 0.);
   --button-background-default: #791717;
