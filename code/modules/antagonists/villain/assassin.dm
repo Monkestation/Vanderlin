@@ -28,7 +28,7 @@
 	ass.cmode_music = 'sound/music/cmode/antag/CombatAssassin.ogg'
 	add_verb(ass, /mob/living/carbon/human/proc/who_targets) // wtf
 	ass.set_patron(/datum/patron/inhumen/graggar, TRUE)
-	var/old_knife_skill = asst.get_skill_level(/datum/skill/combat/knives, TRUE)
+	var/old_knife_skill = ass.get_skill_level(/datum/skill/combat/knives, TRUE)
 	var/old_sneak_skill = ass.get_skill_level(/datum/skill/misc/sneaking, TRUE)
 	if(old_knife_skill < 4) // If the assassined player has less than 4 knife skill, get them to 4.
 		ass.adjust_skillrank(/datum/skill/combat/knives, 4 - old_knife_skill, TRUE)
@@ -40,7 +40,7 @@
 	owner.special_items["Profane Dagger"] = yea // Assigned assassins can get their special dagger from right clicking certain objects.
 	owner.special_items["Profane Razor"] = wah //the mistakes of coders past trickle down to me here, so shitty var names persist
 	owner.special_items["Lock Pick"] = gah
-	to_chat*ass, "<span class='danger'>I've blended in well up until this point, but it's time for the Hunted of Graggar to perish. I have tools hidden away in case I am captured or need to infiltrate a compound without weapons.</span>")
+	to_chat(ass, "<span class='danger'>I've blended in well up until this point, but it's time for the Hunted of Graggar to perish. I have tools hidden away in case I am captured or need to infiltrate a compound without weapons.</span>")
 	return ..()
 
 /mob/living/carbon/human/proc/who_targets() // Verb for the assassin to remember their targets.
