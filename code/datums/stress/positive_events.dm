@@ -60,7 +60,7 @@
 
 /datum/stress_event/triumph
 	timer = 60 MINUTES
-	stress_change = -10
+	stress_change = -5
 	desc = span_green("I remember a TRIUMPH.")
 
 /datum/stress_event/drunk
