@@ -87,7 +87,7 @@ GLOBAL_LIST_INIT(culture_singletons, init_culture_singletons())
 /proc/init_culture_singletons()
 	var/list/culture_list = list()
 	for(var/datum/culture/culture as anything in subtypesof(/datum/culture))
-		if(is_abstract(culture))
+		if(IS_ABSTRACT(culture))
 			continue
 		culture_list[culture] = new culture()
 	return culture_list
