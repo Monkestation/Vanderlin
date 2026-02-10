@@ -348,8 +348,8 @@
 		return FALSE
 
 	SSrole_class_handler.setup_class_handler(mob)
-	message_admins("<span class='danger'>Admin [key_name_admin(usr)] triggered the subclass menu on [key_name_admin(M)]!</span>")
-	log_admin("[key_name(usr)] triggered the subclass menu on [key_name(M)].")
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] triggered the subclass menu on [key_name_admin(mobM)]!</span>")
+	log_admin("[key_name(usr)] triggered the subclass menu on [key_name(mob)].")
 
 /datum/admins/proc/admin_curse(mob/living/carbon/human/M in GLOB.mob_list)
 	set name = "Curse"
