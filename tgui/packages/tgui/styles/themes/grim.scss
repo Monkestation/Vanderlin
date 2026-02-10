@@ -15,9 +15,31 @@
   --font-family: 'Pterra';
   --line-height: 170%;
 
+  --color-good: hsl(94, 60%, 21%);
+  --color-average: hsl(32, 65%, 35%);
+  --color-bad: hsl(0, 52%, 26%);
+
   // Components
   --section-separator-color: #9c807d;
 
+  --color-border-primary: #ae3636;
+
+  --button-color-transparent: hsl(from var(--color-text) h s l / 0.);
   --button-background-default: #791717;
   --button-background-selected: #ae3636;
+
+  .Button {
+    transition: all 0.5s;
+    --color-text: #ae3636;
+  }
+
+  .Button--color--transparent {
+    --button-background-hover: #7b5353;
+    --button-background-active: #7b5353;
+    --button-background-disabled: transparent;
+  }
+
+  .Button--color--transparent.Button--disabled {
+    --button-color: #5e5959;
+  }
 }
