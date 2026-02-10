@@ -8,26 +8,6 @@
 	manual_activation = TRUE
 	allow_multiple_buys = FALSE
 
-/datum/triumph_buy/pick_any_class/on_buy()
-	. = ..()
-
-	//if(!SSrole_class_handler.special_session_queue[ckey_of_buyer])
-	//	SSrole_class_handler.special_session_queue[ckey_of_buyer] = list()
-	//
-	//var/datum/job/advclass/pick_everything/turbo_slop
-	//if(!SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id])
-	//	turbo_slop = new()
-	//	turbo_slop.total_positions = 1
-	//	SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id] = turbo_slop
-	//else
-	//	turbo_slop = SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id]
-	//	turbo_slop.total_positions += 1
-
-///datum/triumph_buy/pick_any_class/on_removal()
-//	. = ..()
-//	if(SSrole_class_handler.special_session_queue[ckey_of_buyer])
-//		SSrole_class_handler.special_session_queue[ckey_of_buyer].Remove(triumph_buy_id)
-
 /datum/triumph_buy/pick_any_class/all_classes
 	name = "No Advanced Class Restrictions"
 	desc = "Get a single run of any advanced class from ANY job! You must join as any job that has advanced classes to begin with. WARNING: THIS CAN EASILY BREAK AND ADMINS ARE NOT OBLIGED TO FIX YOUR CHARACTER."
