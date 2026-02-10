@@ -1,6 +1,6 @@
 /datum/triumph_buy/pick_any_class
 	name = "Random Advanced Class Options"
-	desc = "Get a single run of 4 random advanced classes from any job! You must join as any job that has advanced classes to begin with. WARNING: THIS CAN EASILY BREAK AND ADMINS ARE NOT OBLIGED TO FIX YOUR CHARACTER."
+	desc = "Get a single run of 4 random advanced classes from any job! You must join as any job that has advanced classes to begin with. High ranking positions are ineligible. THIS CAN EASILY BREAK AND ADMINS ARE NOT OBLIGED TO FIX YOUR CHARACTER, ESPECIALLY IF IT IS A PAIN IN THE ASS."
 	triumph_buy_id = TRIUMPH_BUY_ANY_CLASS
 	triumph_cost = 20
 	category = TRIUMPH_CAT_CHARACTER
@@ -10,7 +10,7 @@
 
 /datum/triumph_buy/pick_any_class/all_classes
 	name = "No Advanced Class Restrictions"
-	desc = "Get a single run of any advanced class from ANY job! You must join as any job that has advanced classes to begin with. WARNING: THIS CAN EASILY BREAK AND ADMINS ARE NOT OBLIGED TO FIX YOUR CHARACTER."
+	desc = "Get a single run of any advanced class from ANY job! Subject to standard variant restrictions and policy."
 	triumph_buy_id = TRIUMPH_BUY_ANY_CLASS_ALL
 	triumph_cost = 60
 	conflicts_with = list(/datum/triumph_buy/pick_any_class)
