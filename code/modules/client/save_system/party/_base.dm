@@ -314,7 +314,7 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 /mob/living/carbon/proc/make_acquaintance()
 	var/mob/living/carbon/inviter = usr
 	var/list/mobs = list()
-	for(var/mob/living/carbon/person in view(1, inviter))
+	for(var/mob/living/carbon/person in view(2, inviter))
 		if(!person.mind || mind.do_i_know(person.mind))
 			continue
 		if(person == inviter)
