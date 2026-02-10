@@ -205,7 +205,7 @@ export const LanguageMenu = (props) => {
       title="Language Menu"
       width={admin_mode ? 700 : 500}
       height={Math.min(
-        shown_languages.length * 25 + (admin_mode ? 145 : 120),
+        shown_languages.length * 25 + (admin_mode ? 145 : 100),
         600,
       )}
     >
