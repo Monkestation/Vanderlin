@@ -30,7 +30,6 @@
 		qdel(M)
 		return
 
-	add_verb(src, /client/proc/descend)
 	M.key = key
 	qdel(src)
 	return
