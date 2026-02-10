@@ -74,7 +74,7 @@
 			to_chat(src, span_warning("Graggar's influence is currently preventing me from fleeing to the Underworld!"))
 			return FALSE
 
-	var/answer = tgui_alert(src, "Begin the long walk in the Underworld to your judgement?", "JUDGEMENT", DEFAULT_INPUT_CONFIRMATIONS)
+	var/answer = tgui_alert(src, "Begin the long walk in the Underworld to your judgement?", "JUDGEMENT", DEFAULT_INPUT_CHOICES)
 	if(!answer || QDELETED(src))
 		return FALSE
 	if(answer == CHOICE_NO)
