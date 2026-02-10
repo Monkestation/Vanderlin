@@ -15,5 +15,5 @@ GLOBAL_DATUM_INIT(language_menu_state, /datum/ui_state/language_menu, new)
 		. = UI_INTERACTIVE
 	else if(istype(src_object, /datum/language_menu))
 		var/datum/language_menu/my_languages = src_object
-		if(my_languages.language_holder.owner == user)
+		if(my_languages.language_holder.get_atom() == user)
 			. = UI_INTERACTIVE
