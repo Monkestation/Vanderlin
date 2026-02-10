@@ -197,7 +197,7 @@
 		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		cooldown = world.time
 
-/obj/item/toy/cards/deck/ui_interact(mob/user)
+/obj/item/toy/cards/deck/interact(mob/user)
 	. = ..()
 	var/dat = "The deck has<BR>"
 	for(var/t in cards)
@@ -286,7 +286,7 @@
 	user.set_machine(src)
 	interact(user)
 
-/obj/item/toy/cards/cardhand/ui_interact(mob/user)
+/obj/item/toy/cards/cardhand/interact(mob/user)
 	. = ..()
 	var/dat = "You have:<BR>"
 	for(var/t in currenthand)

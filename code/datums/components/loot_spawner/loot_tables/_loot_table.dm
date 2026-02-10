@@ -498,7 +498,7 @@ CONFIGURATION:
 
 /client/proc/debug_loot_tables()
 	set name = "Debug Loot Tables"
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set desc = "Select and debug loot tables"
 
 	var/mob/living/user = mob

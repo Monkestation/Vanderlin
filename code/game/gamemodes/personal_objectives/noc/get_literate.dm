@@ -7,11 +7,11 @@
 /datum/objective/personal/literacy/on_creation()
 	. = ..()
 	if(owner?.current)
-		RegisterSignal(owner.current, COMSIG_SKILL_RANK_INCREASED, PROC_REF(on_skill_increased))
+		RegisterSignal(owner.current, COMSIG_SKILL_RANK_CHANGE, PROC_REF(on_skill_increased))
 	update_explanation_text()
 
 /datum/objective/personal/literacy/Destroy()
-	UnregisterSignal(owner.current, COMSIG_SKILL_RANK_INCREASED)
+	UnregisterSignal(owner.current, COMSIG_SKILL_RANK_CHANGE)
 	return ..()
 
 /datum/objective/personal/literacy/proc/on_skill_increased(datum/source, datum/skill/skill_ref, new_level, old_level)
@@ -26,7 +26,7 @@
 	. = ..()
 	to_chat(owner.current, span_greentext("You've learned to read, completing Noc's objective!"))
 	adjust_storyteller_influence(NOC, 20)
-	UnregisterSignal(owner.current, COMSIG_SKILL_RANK_INCREASED)
+	UnregisterSignal(owner.current, COMSIG_SKILL_RANK_CHANGE)
 
 /datum/objective/personal/literacy/reward_owner()
 	. = ..()

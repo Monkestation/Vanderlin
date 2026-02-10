@@ -51,7 +51,7 @@
 
 /obj/item/clothing/pants/trou/leather/quiltedkilt //close enough!
 	name = "quilted kilt"
-	desc = "A sturdy quilted kilt, commonly worn by Lakkarian soldiers or worn casually by Lakkarian commoners."
+	desc = "A sturdy quilted kilt."
 	icon_state = "lakkarikilt"
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL

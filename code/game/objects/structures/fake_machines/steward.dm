@@ -386,7 +386,7 @@
 			for(var/mob/living/carbon/human/A in SStreasury.bank_accounts)
 				if(ishuman(A))
 					var/mob/living/carbon/human/tmp = A
-					contents += "[tmp.real_name] ([tmp.get_role_title()]) - [SStreasury.bank_accounts[A]]m<BR>"
+					contents += "[tmp.real_name] ([tmp.get_role_title(steward_check = TRUE)]) - [SStreasury.bank_accounts[A]]m<BR>"
 				else
 					contents += "[A.real_name] - [SStreasury.bank_accounts[A]]m<BR>"
 				contents += "<a href='byond://?src=\ref[src];givemoney=\ref[A]'>\[Give Money\]</a> <a href='byond://?src=\ref[src];fineaccount=\ref[A]'>\[Fine Account\]</a><BR><BR>"

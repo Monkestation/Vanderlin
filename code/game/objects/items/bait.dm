@@ -27,7 +27,7 @@
 	. = ..()
 	user.visible_message("<span class='notice'>[user] begins deploying the bait...</span>", \
 						"<span class='notice'>I begin deploying the bait...</span>")
-	if(do_after(user, deploy_speed * (1/(user.get_skill_level(/datum/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
+	if(do_after(user, deploy_speed * (1/(user.get_skill_level(/datum/skill/craft/traps, TRUE) + 1)), src)) //rogtodo hunting skill
 		user.dropItemToGround(src, TRUE)
 		START_PROCESSING(SSobj, src)
 		name = "bait"
@@ -38,7 +38,7 @@
 	if(deployed)
 		user.visible_message("<span class='notice'>[user] begins gathering up the bait...</span>", \
 							"<span class='notice'>I begin gathering up the bait...</span>")
-		if(do_after(user, deploy_speed * (1/(user.get_skill_level(/datum/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
+		if(do_after(user, deploy_speed * (1/(user.get_skill_level(/datum/skill/craft/traps, TRUE) + 1)), src)) //rogtodo hunting skill
 			STOP_PROCESSING(SSobj, src)
 			name = initial(name)
 			deployed = 0

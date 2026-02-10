@@ -197,7 +197,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 		return
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering)
+	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
 	if(istype(O, /obj/structure/door)) //This is to ensure the new door will retain its lock
 		var/obj/structure/door/door = O
 		var/obj/structure/door/new_door = new door.metalizer_result(get_turf(door))
@@ -297,7 +297,7 @@
 	return
 
 /obj/item/contraption/smelter/proc/smelt_part2(obj/O, mob/living/user)
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering)
+	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
 	var/turf/turf = get_turf(O)
 	playsound(O, pick('sound/combat/hits/burn (1).ogg','sound/combat/hits/burn (2).ogg'), 100)
 	O.moveToNullspace()
@@ -354,7 +354,7 @@
 	if(patient.stat != DEAD && (patient.has_status_effect(/datum/status_effect/jitter) || patient.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
 		amputation_speed_mod *= 1.5 //15*0.5*1.5=11.25
 
-	var/skill_modifier = 1.5 - (user.get_skill_level(/datum/skill/craft/engineering) / 6)
+	var/skill_modifier = 1.5 - (user.get_skill_level(/datum/skill/craft/engineering, TRUE) / 6)
 	if(do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = patient))
 		playsound(patient, 'sound/misc/guillotine.ogg', 20, TRUE)
 		limb_snip_candidate.drop_limb()
