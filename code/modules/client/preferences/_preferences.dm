@@ -795,7 +795,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(update_all || ("bespecial" in fields_to_update))
 		params["bespecial"] = next_special_trait ? "1" : "0"
 	if(update_all || ("culture" in fields_to_update))
-		params["culture"] = culture.name
+		params["culture"] = culture::name
 
 	// Use list2params as BYOND expects for browser output
 	user << output(list2params(params), "preferences_browser:updateCharacterData")
