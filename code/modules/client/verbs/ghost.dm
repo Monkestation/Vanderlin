@@ -24,6 +24,13 @@
 	if(can_enter_underworld())
 		enter_underworld()
 
+/mob/dead/observer/verb/dead_to_underworld()
+	set name = "Journey to the Underworld"
+	set category = "Spirit"
+
+	if(can_enter_underworld())
+		enter_underworld()
+
 /mob/proc/enter_underworld()
 	// Check if the player's job is hiv+
 	var/datum/job/target_job = mind?.assigned_role
