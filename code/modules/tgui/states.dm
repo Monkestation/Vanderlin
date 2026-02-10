@@ -1,8 +1,10 @@
-/**
- * tgui states
+/*!
+ * Base state and helpers for states. Just does some sanity checks,
+ * implement a proper state for in-depth checks.
  *
- * Base state and helpers for states. Just does some sanity checks, implement a state for in-depth checks.
- **/
+ * Copyright (c) 2020 Aleksej Komarov
+ * SPDX-License-Identifier: MIT
+ */
 
 /**
  * public
@@ -13,7 +15,7 @@
  * required state datum/ui_state The state to check.
  *
  * return UI_state The state of the UI.
- **/
+ */
 /datum/proc/ui_status(mob/user, datum/ui_state/state)
 	var/src_object = ui_host(user)
 	. = UI_CLOSE
@@ -21,14 +23,11 @@
 		return
 
 	if(isobserver(user))
-		// If they turn on ghost AI control, admins can always interact.
-		if(IsAdminGhost(user))
-			. = max(., UI_INTERACTIVE)
-
 		// Regular ghosts can always at least view if in range.
-		var/clientviewlist = getviewsize(user.client.view)
-		if(get_dist(src_object, user) < max(clientviewlist[1],clientviewlist[2]))
-			. = max(., UI_UPDATE)
+		if(user.client)
+			var/clientviewlist = getviewsize(user.client.view)
+			if(get_dist(src_object, user) < max(clientviewlist[1], clientviewlist[2]))
+				. = max(., UI_UPDATE)
 
 	// Check if the state allows interaction
 	var/result = state.can_use_topic(src_object, user)
@@ -44,9 +43,10 @@
  * required user mob The mob who opened/is using the UI.
  *
  * return UI_state The state of the UI.
- **/
+ */
 /datum/ui_state/proc/can_use_topic(src_object, mob/user)
-	return UI_CLOSE // Don't allow interaction by default.
+	// Don't allow interaction by default.
+	return UI_CLOSE
 
 /**
  * public
@@ -54,35 +54,23 @@
  * Standard interaction/sanity checks. Different mob types may have overrides.
  *
  * return UI_state The state of the UI.
- **/
+ */
 /mob/proc/shared_ui_interaction(src_object)
-	if(!client) // Close UIs if mindless.
+	// Close UIs if mindless.
+	if(!client && !HAS_TRAIT(src, TRAIT_PRESERVE_UI_WITHOUT_CLIENT))
 		return UI_CLOSE
-	else if(stat) // Disable UIs if unconcious.
+	// Disable UIs if unconscious.
+	else if(stat)
 		return UI_DISABLED
-	else if(incapacitated(IGNORE_GRAB)) // Update UIs if incapicitated but concious.
+	// Update UIs if incapicitated but conscious.
+	else if(incapacitated(IGNORE_GRAB))
 		return UI_UPDATE
 	return UI_INTERACTIVE
 
-/mob/living/shared_ui_interaction(src_object)
+/mob/living/shared_ui_interaction(atom/src_object)
 	. = ..()
-	if(!(mobility_flags & MOBILITY_UI) && . == UI_INTERACTIVE)
+	if(!(mobility_flags & MOBILITY_UI) && !(src_object.interaction_flags_atom & INTERACT_ATOM_IGNORE_MOBILITY) && . == UI_INTERACTIVE)
 		return UI_UPDATE
-
-/**
- * public
- *
- * Check the distance for a living mob.
- * Really only used for checks outside the context of a mob.
- * Otherwise, use shared_living_ui_distance().
- *
- * required src_object The object which owns the UI.
- * required user mob The mob who opened/is using the UI.
- *
- * return UI_state The state of the UI.
- **/
-/atom/proc/contents_ui_distance(src_object, mob/living/user)
-	return user.shared_living_ui_distance(src_object) // Just call this mob's check.
 
 /**
  * public
@@ -92,19 +80,20 @@
  * required src_object atom/movable The object which owns the UI.
  *
  * return UI_state The state of the UI.
- **/
-/mob/living/proc/shared_living_ui_distance(atom/movable/src_object)
-	if(!(src_object in view(src))) // If the object is obscured, close it.
+ */
+/mob/living/proc/shared_living_ui_distance(atom/movable/src_object, viewcheck = TRUE, allow_tk = TRUE)
+	// If the object is obscured, close it.
+	if(viewcheck && !(src_object in view(src)))
 		return UI_CLOSE
-
 	var/dist = get_dist(src_object, src)
-	if(dist <= 1) // Open and interact if 1-0 tiles away.
+	// Open and interact if 1-0 tiles away.
+	if(dist <= 1)
 		return UI_INTERACTIVE
-	else if(dist <= 2) // View only if 2-3 tiles away.
+	// View only if 2-3 tiles away.
+	else if(dist <= 2)
 		return UI_UPDATE
-	else if(dist <= 5) // Disable if 5 tiles away.
+	// Disable if 5 tiles away.
+	else if(dist <= 5)
 		return UI_DISABLED
-	return UI_CLOSE // Otherwise, we got nothing.
-
-/mob/living/carbon/human/shared_living_ui_distance(atom/movable/src_object)
-	return ..()
+	// Otherwise, we got nothing.
+	return UI_CLOSE

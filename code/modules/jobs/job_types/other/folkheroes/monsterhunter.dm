@@ -38,7 +38,7 @@
 
 /datum/job/advclass/combat/puritan/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 
 
 /datum/outfit/folkhero/puritan

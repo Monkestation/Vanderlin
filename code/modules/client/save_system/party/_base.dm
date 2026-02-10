@@ -93,7 +93,7 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 
 /mob/living/carbon/verb/create_party_verb()
 	set name = "Create Party"
-	set category = "IC"
+	set category = "IC.Party"
 	set desc = "Create a new party"
 
 	if(!src.ckey)
@@ -113,7 +113,7 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 
 /mob/living/carbon/verb/leave_party_verb()
 	set name = "Leave Party"
-	set category = "IC"
+	set category = "IC.Party"
 	set desc = "Leave your current party"
 
 	if(!current_party)
@@ -125,7 +125,7 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 
 /mob/living/carbon/verb/invite_to_party()
 	set name = "Invite to Party"
-	set category = "IC"
+	set category = "IC.Party"
 	set desc = "Invite someone to your party"
 
 	var/mob/living/carbon/inviter = usr

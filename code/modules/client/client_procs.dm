@@ -50,6 +50,78 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return
 #endif
 
+	// asset_cache
+	var/asset_cache_job
+	if(href_list["asset_cache_confirm_arrival"])
+		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
+		//because we skip the limiter, we have to make sure this is a valid arrival and not somebody tricking us
+		//	into letting append to a list without limit.
+		if (asset_cache_job > 0 && asset_cache_job <= last_asset_job && !(asset_cache_job in completed_asset_jobs))
+			completed_asset_jobs += asset_cache_job
+			return
+
+	var/atom/ref = locate(href_list["src"])
+	if(!holder && (href_list["window_id"] != "statbrowser") && !istype(ref, /datum/native_say))
+		var/mtl = CONFIG_GET(number/minute_topic_limit)
+		if (mtl)
+			var/minute = round(world.time, 1 MINUTES)
+			if (!topiclimiter)
+				topiclimiter = new(LIMITER_SIZE)
+			if (minute != topiclimiter[CURRENT_MINUTE])
+				topiclimiter[CURRENT_MINUTE] = minute
+				topiclimiter[MINUTE_COUNT] = 0
+			topiclimiter[MINUTE_COUNT] += 1
+			if (topiclimiter[MINUTE_COUNT] > mtl)
+				var/msg = "Your previous action was ignored because you've done too many in a minute."
+				if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
+					topiclimiter[ADMINSWARNED_AT] = minute
+					msg += " Administrators have been informed."
+					log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
+					message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
+				to_chat(src, span_danger("[msg]"))
+				return
+
+		var/stl = CONFIG_GET(number/second_topic_limit)
+		if (stl)
+			var/second = round(world.time, 1 SECONDS)
+			if (!topiclimiter)
+				topiclimiter = new(LIMITER_SIZE)
+			if (second != topiclimiter[CURRENT_SECOND])
+				topiclimiter[CURRENT_SECOND] = second
+				topiclimiter[SECOND_COUNT] = 0
+			topiclimiter[SECOND_COUNT] += 1
+			if (topiclimiter[SECOND_COUNT] > stl)
+				to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
+				return
+
+	// Tgui Topic middleware
+	if(tgui_Topic(href_list))
+		return
+
+	if(href_list["reload_statbrowser"])
+		stat_panel.reinitialize()
+
+	//Logs all hrefs, except chat pings
+	if(!(href_list["_src_"] == "chat" && href_list["proc"] == "ping" && LAZYLEN(href_list) == 2))
+		log_href("[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
+
+	//byond bug ID:2256651
+	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
+		to_chat(src, "<span class='danger'>An error has been detected in how my client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
+		src << browse("...", "window=asset_cache_browser")
+
+	// Keypress passthrough
+	if(href_list["__keydown"])
+		var/keycode = browser_keycode_to_byond(href_list["__keydown"])
+		if(keycode)
+			keyDown(keycode)
+		return
+	if(href_list["__keyup"])
+		var/keycode = browser_keycode_to_byond(href_list["__keyup"])
+		if(keycode)
+			keyUp(keycode)
+		return
+
 	// ANSWER SCHIZOHELP
 	if(href_list["schizohelp"])
 		var/datum/schizohelp/schizo = locate(href_list["schizohelp"])
@@ -152,71 +224,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(!title)
 			return
 		show_book_content(title)
-
-	// asset_cache
-	var/asset_cache_job
-	if(href_list["asset_cache_confirm_arrival"])
-		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
-		//because we skip the limiter, we have to make sure this is a valid arrival and not somebody tricking us
-		//	into letting append to a list without limit.
-		if (asset_cache_job > 0 && asset_cache_job <= last_asset_job && !(asset_cache_job in completed_asset_jobs))
-			completed_asset_jobs += asset_cache_job
-			return
-
-	var/atom/ref = locate(href_list["src"])
-	if(!holder && (href_list["window_id"] != "statbrowser") && !istype(ref, /datum/native_say))
-		var/mtl = CONFIG_GET(number/minute_topic_limit)
-		if (mtl)
-			var/minute = round(world.time, 1 MINUTES)
-			if (!topiclimiter)
-				topiclimiter = new(LIMITER_SIZE)
-			if (minute != topiclimiter[CURRENT_MINUTE])
-				topiclimiter[CURRENT_MINUTE] = minute
-				topiclimiter[MINUTE_COUNT] = 0
-			topiclimiter[MINUTE_COUNT] += 1
-			if (topiclimiter[MINUTE_COUNT] > mtl)
-				var/msg = "Your previous action was ignored because you've done too many in a minute."
-				if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
-					topiclimiter[ADMINSWARNED_AT] = minute
-					msg += " Administrators have been informed."
-					log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-					message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-				to_chat(src, span_danger("[msg]"))
-				return
-
-		var/stl = CONFIG_GET(number/second_topic_limit)
-		if (stl)
-			var/second = round(world.time, 1 SECONDS)
-			if (!topiclimiter)
-				topiclimiter = new(LIMITER_SIZE)
-			if (second != topiclimiter[CURRENT_SECOND])
-				topiclimiter[CURRENT_SECOND] = second
-				topiclimiter[SECOND_COUNT] = 0
-			topiclimiter[SECOND_COUNT] += 1
-			if (topiclimiter[SECOND_COUNT] > stl)
-				to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
-				return
-
-	//Logs all hrefs, except chat pings
-	if(!(href_list["_src_"] == "chat" && href_list["proc"] == "ping" && LAZYLEN(href_list) == 2))
-		log_href("[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
-
-	//byond bug ID:2256651
-	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
-		to_chat(src, "<span class='danger'>An error has been detected in how my client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
-		src << browse("...", "window=asset_cache_browser")
-
-	// Keypress passthrough
-	if(href_list["__keydown"])
-		var/keycode = browser_keycode_to_byond(href_list["__keydown"])
-		if(keycode)
-			keyDown(keycode)
-		return
-	if(href_list["__keyup"])
-		var/keycode = browser_keycode_to_byond(href_list["__keyup"])
-		if(keycode)
-			keyUp(keycode)
-		return
 
 	// Admin PM
 	if(href_list["priv_msg"])
@@ -353,18 +360,18 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return 0
 	return 1
 /*
- * Call back proc that should be checked in all paths where a client can send messages
- *
- * Handles checking for duplicate messages and people sending messages too fast
- *
- * The first checks are if you're sending too fast, this is defined as sending
- * SPAM_TRIGGER_AUTOMUTE messages in
- * 5 seconds, this will start supressing my messages,
- * if you send 2* that limit, you also get muted
- *
- * The second checks for the same duplicate message too many times and mutes
- * you for it
- */
+* Call back proc that should be checked in all paths where a client can send messages
+*
+* Handles checking for duplicate messages and people sending messages too fast
+*
+* The first checks are if you're sending too fast, this is defined as sending
+* SPAM_TRIGGER_AUTOMUTE messages in
+* 5 seconds, this will start supressing my messages,
+* if you send 2* that limit, you also get muted
+*
+* The second checks for the same duplicate message too many times and mutes
+* you for it
+*/
 /client/proc/handle_spam_prevention(message, mute_type)
 
 	//Increment message count
@@ -426,6 +433,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	GLOB.keys_by_ckey[ckey] = key
 	GLOB.directory[ckey] = src
 
+	stat_panel = new(src, "statbrowser")
+	stat_panel.subscribe(src, PROC_REF(on_stat_panel_message))
+
 	chatOutput = new /datum/chatOutput(src)
 	spawn(5) // Goonchat does some non-instant checks in start()
 		chatOutput.start()
@@ -440,7 +450,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		holder.owner = src
 		connecting_admin = TRUE
 	else if(GLOB.deadmins[ckey])
-		verbs += /client/proc/readmin
+		add_verb(src, /client/proc/readmin)
 		connecting_admin = TRUE
 	if(CONFIG_GET(flag/autoadmin))
 		if(!GLOB.admin_datums[ckey])
@@ -477,7 +487,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	fps = prefs.clientfps
 
 	if(fexists(roundend_report_file()))
-		verbs += /client/proc/show_previous_roundend_report
+		add_verb(src, /client/proc/show_previous_roundend_report)
 
 	var/full_version = "[byond_version].[byond_build ? byond_build : "xxx"]"
 	log_access("Login: [key_name(src)] from [address ? address : "localhost"]-[computer_id] || BYOND v[full_version]")
@@ -551,6 +561,14 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(SSinput.initialized)
 		set_macros()
 		update_movement_keys()
+
+	// Initialize stat panel
+	stat_panel.initialize(
+		inline_html = file("html/statbrowser.html"),
+		inline_js = file("html/statbrowser.js"),
+		inline_css = file("html/statbrowser.css"),
+	)
+	addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
 
 //	chatOutput.start() // Starts the chat
 	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
@@ -756,6 +774,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	if(length(credits))
 		QDEL_LIST(credits)
+
+	if(obj_window)
+		QDEL_NULL(obj_window)
 
 	if(player_details)
 		player_details.achievements.save()
@@ -1186,9 +1207,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 /client/proc/add_verbs_from_config()
 	if(CONFIG_GET(flag/see_own_notes))
-		verbs += /client/proc/self_notes
+		add_verb(src, /client/proc/self_notes)
 	if(CONFIG_GET(flag/use_exp_tracking))
-		verbs += /client/proc/self_playtime
+		add_verb(src, /client/proc/self_playtime)
 
 
 #undef UPLOAD_LIMIT
@@ -1400,6 +1421,50 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(twitch?.has_access(ACCESS_TWITCH_SUB_TIER_1))
 		return TRUE
 	return FALSE
+
+/client/proc/check_panel_loaded()
+	if(stat_panel.is_ready())
+		return
+	to_chat(src, span_userdanger("Statpanel failed to load, click <a href='byond://?src=[REF(src)];reload_statbrowser=1'>here</a> to reload the panel "))
+
+/// compiles a full list of verbs and sends it to the browser
+/client/proc/init_verbs()
+	if(IsAdminAdvancedProcCall())
+		return
+	var/list/verblist = list()
+	var/list/verbstoprocess = verbs.Copy()
+	if(mob)
+		verbstoprocess += mob.verbs
+		for(var/atom/movable/thing as anything in mob.contents)
+			verbstoprocess += thing.verbs
+	panel_tabs.Cut() // panel_tabs get reset in init_verbs on JS side anyway
+	for(var/procpath/verb_to_init as anything in verbstoprocess)
+		if(!verb_to_init)
+			continue
+		if(verb_to_init.hidden)
+			continue
+		if(!istext(verb_to_init.category))
+			continue
+		panel_tabs |= verb_to_init.category
+		verblist[++verblist.len] = list(verb_to_init.category, verb_to_init.name)
+	src.stat_panel.send_message("init_verbs", list(panel_tabs = panel_tabs, verblist = verblist))
+
+/**
+ * Handles incoming messages from the stat-panel TGUI.
+ */
+/client/proc/on_stat_panel_message(type, payload)
+	switch(type)
+		if("Update-Verbs")
+			init_verbs()
+		if("Remove-Tabs")
+			panel_tabs -= payload["tab"]
+		if("Send-Tabs")
+			panel_tabs |= payload["tab"]
+		if("Reset-Tabs")
+			panel_tabs = list()
+		if("Set-Tab")
+			stat_tab = payload["tab"]
+			SSstatpanels.immediate_send_stat_data(src)
 
 #undef LIMITER_SIZE
 #undef CURRENT_SECOND

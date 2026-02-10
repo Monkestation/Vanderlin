@@ -64,6 +64,8 @@
 		fdel("data/spritesheets/[name]_[size_id].png")
 	sizes = list()
 	to_generate = list()
+	cached_serialized_url_mappings = null
+	cached_serialized_url_mappings_transport_type = null
 	fully_generated = FALSE
 	var/old_load = load_immediately
 	load_immediately = TRUE

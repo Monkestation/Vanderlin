@@ -126,6 +126,29 @@
 #define span_artery(str) ("<span class='artery'>" + str + "</span>")
 #define span_love(str) ("<span class='love'>" + str + "</span>")
 
+/// Wrapper used to allow easy tracking of prayers within a chat tab.
+#define SPAN_PRAYER_WRAPPER(str) ("<span class='prayer'>" + str + "</span>")
+#define SPAN_GOD_QUIET(str) ("<span font-size:90%>" + str + "</span>")
+#define SPAN_GOD_LOUD(str) ("<span font-size:120%>" + str + "</span>")
+#define SPAN_GOD_FIRST_FEEL(str) ("<span style='display:block; font-size:130%'>" + str + "</span>")
+
+#define SPAN_GOD_GENERIC(str) ("<span class='god_generic'>" + str + "</span>")
+#define SPAN_GOD_ASTRATA(str) ("<span class='god_astrata'>" + str + "</span>")
+#define SPAN_GOD_NOC(str) ("<span class='god_noc'>" + str + "</span>")
+#define SPAN_GOD_ABYSSOR(str) ("<span class='god_abyssor'>" + str + "</span>")
+#define SPAN_GOD_DENDOR(str) ("<span class='god_dendor'>" + str + "</span>")
+#define SPAN_GOD_RAVOX(str) ("<span class='god_ravox'>" + str + "</span>")
+#define SPAN_GOD_MALUM(str) ("<span class='god_malum'>" + str + "</span>")
+#define SPAN_GOD_EORA(str) ("<span class='god_eora'>" + str + "</span>")
+#define SPAN_GOD_XYLIX(str) ("<span class='god_xylix'>" + str + "</span>")
+#define SPAN_GOD_PESTRA(str) ("<span class='god_pestra'>" + str + "</span>")
+#define SPAN_GOD_NECRA(str) ("<span class='god_necra'>" + str + "</span>")
+#define SPAN_GOD_MATTHIOS(str) ("<span class='god_matthios'>" + str + "</span>")
+#define SPAN_GOD_BAOTHA(str) ("<span class='god_baotha'>" + str + "</span>")
+#define SPAN_GOD_GRAGGAR(str) ("<span class='god_graggar'>" + str + "</span>")
+#define SPAN_GOD_ZIZO(str) ("<span class='god_zizo'>" + str + "</span>")
+#define SPAN_GOD_PSYDON(str) ("<span class='god_psydon'>" + str + "</span>")
+
 /* Complex Spans */
 /// Ones where span_X isn't just the class
 #define span_admin_log(str) ("<span class='admin'><span class='prefix'>ADMIN LOG: </span><span class='message linkify'>" + str + "</span></span>")

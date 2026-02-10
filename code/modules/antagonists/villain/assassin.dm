@@ -58,7 +58,7 @@
 	if(!user)
 		return
 	var/mob/living/carbon/human/H = user
-	H.verbs |= /mob/living/carbon/human/proc/who_targets
+	add_verb(H, /mob/living/carbon/human/proc/who_targets)
 
 /datum/antagonist/assassin/roundend_report()
 	var/traitorwin = FALSE

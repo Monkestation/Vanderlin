@@ -210,7 +210,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	TRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
 	TRAIT_HATEWOMEN = "Double damage against female mobs.",
-	TRAIT_SEEDKNOW = span_info("I know which seeds grow which crops."),
+	TRAIT_SEEDKNOW = span_info("I am intimately aware of seed properties."),
 	TRAIT_NOBLE = span_blue("I'm of noble blood."),
 	TRAIT_EMPATH = "I can notice when people are stressed.",
 	TRAIT_BREADY = "Defensive stance does not passively fatigue me.",

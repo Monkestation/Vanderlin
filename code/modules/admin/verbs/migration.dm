@@ -1,5 +1,5 @@
 /client/proc/toggle_migrations()
-	set category = "GameMaster"
+	set category = "GameMaster.Interactions"
 	set name = "Toggle Migrations"
 	if(!check_rights(R_ADMIN))
 		return FALSE

@@ -3650,7 +3650,7 @@
 /turf/open/water/bath,
 /area/ship/middeck)
 "xL" = (
-/obj/structure/pillory,
+/obj/structure/pillory/church,
 /obj/effect/decal/carpet/square/black{
 	pixel_y = -8
 	},
