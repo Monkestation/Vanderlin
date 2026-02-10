@@ -14,7 +14,7 @@
 	default_priority = 80
 	default_priority = 80
 	icon_state = "celestial"
-	spans = list(SPAN_SAND)
+	spans = list(SPAN_CELESTIAL)
 	syllables = list("ak",
 "al",
 "am",

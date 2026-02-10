@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Pterra';
+  src: url('~fonts/pterra.ttf');
+}
+
 // Based on the generic browser UI, red and black mostly
 
 .theme-grim:root{
@@ -7,17 +12,12 @@
   --color-text: #9c807d;
 
   --font-size: 14px;
+  --font-family: 'Pterra';
   --line-height: 170%;
-
-  // Background
-  .Layout__content {
-    background-image: none;
-  }
 
   // Components
   --section-separator-color: #9c807d;
 
   --button-background-default: #791717;
   --button-background-selected: #ae3636;
-
 }
