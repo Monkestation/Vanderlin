@@ -257,6 +257,8 @@
 			"key" = window_key,
 			"size" = window_size,
 			"fancy" = user.client.prefs.tgui_fancy,
+			"theme" = "grim",
+			"scale" = TRUE,
 		),
 		"client" = list(
 			"ckey" = user.client.ckey,
