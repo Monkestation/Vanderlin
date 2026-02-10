@@ -174,15 +174,6 @@ While it's not required reading, leadership roles may find this information usef
 	<br><br>
 
 	<details>
-		<summary><strong> KALEDON </strong></summary>
-		<br>
-		<em> Too fast, too soon. </em>
-		<br><br>
-		<span style="display:block; color:#17181a"> Certainly not awaiting writing. You should definitely not poke Cocokailey to provide a description to the author of this primer, who is eagerly awaiting something to include. ^v^ </span>
-		<br><br>
-	</details>
-
-	<details>
 		<summary><strong> VALORIAN RUPUBLIAS </strong></summary>
 		<br>
 		<em> The Freestates, Vineyards of Valoria, The Lords of Coin </em>
