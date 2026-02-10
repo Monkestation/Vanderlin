@@ -1,5 +1,6 @@
 // Verbs
-/mob/verb/returntolobby()
+
+/mob/proc/returntolobby()
 	set name = "{RETURN TO LOBBY}"
 	set category = "Preferences.Options"
 	set hidden = 1
@@ -29,10 +30,10 @@
 		qdel(M)
 		return
 
-	add_verb(src, /client/proc/descend)
 	M.key = key
 	qdel(src)
 	return
+
 
 // shit that eventually will need moved elsewhere
 /obj/item/flashlight/flare/torch/lantern/shrunken
