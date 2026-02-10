@@ -690,6 +690,14 @@ SUBSYSTEM_DEF(job)
 	var/mob/living/carbon/human/equipping_human = equipping
 	for(var/datum/quirk/quirk in equipping_human.quirks)
 		quirk.after_job_spawn(job)
+		// Ready up bonus
+	if(!equipping.islatejoin)
+		equipping.adjust_triumphs(1)
+		equipping.apply_status_effect(/datum/status_effect/buff/foodbuff)
+		equipping.hydration = 800 // Set higher hydration
+		equipping.nutrition = 800
+		to_chat(equipping, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
+
 
 /datum/job/proc/greet(mob/player)
 	//! TODO: Refactor this out... Look at how TG handles job greetings or implement our own method

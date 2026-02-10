@@ -31,7 +31,7 @@
 
 	apply_character_post_equipment(spawned)
 
-/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check)
+/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check, ignore_extras=FALSE)
 	var/list/local_allowed_sexes = list()
 	if(length(allowed_sexes))
 		local_allowed_sexes |= allowed_sexes
@@ -53,9 +53,10 @@
 	if(!antags_can_pick && to_check.mind?.special_role)
 		return FALSE
 
-	if(total_positions > -1)
-		if(current_positions >= total_positions)
+	if(!ignore_extras)
+		if(total_positions > -1)
+			if(current_positions >= total_positions)
+				return FALSE
+		if(!prob(roll_chance))
 			return FALSE
-
-	if(prob(roll_chance))
-		return TRUE
+	return TRUE

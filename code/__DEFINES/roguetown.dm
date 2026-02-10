@@ -148,7 +148,6 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_FORGARRISON	"CAT_FORGARRISON"
 #define CTAG_ADEPT			"CAT_ADEPT" // Used for Adept class selection
 #define CTAG_SQUIRE 		"CAT_SQUIRE" // Squire Love, Classes, as above.
-#define CTAG_MAGIE			"CAT_MAGIE" //for Mage Associate
 #define CTAG_HEIR			"CAT_HEIR"
 #define CTAG_HAND			"CAT_HAND"			// Hand class - Handles Hand class selector
 #define CTAG_CONSORT 		"CAT_CONSORT" 		// Consort classes
@@ -157,18 +156,28 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_ROYALKNIGHT	"CAT_ROYAL_KNIGHT"
 #define CTAG_ARCHIVIST		"CAT_ARCHIVIST"
 #define CTAG_MENATARMS		"CAT_MENATARMS"
-#define CTAG_SERVANT		"CAT_SERVANT" 		// Servant class - 4 type of servant to fill in someplace.
 #define CTAG_GATEMASTER		"CAT_GATEMASTER"
 #define CTAG_WRETCH			"CAT_WRETCH"
 #define CTAG_INQUISITION	"CAT_INQUISITION"	// For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
 
+#define ANY_CLASS_CTAGS list(\
+	CTAG_PILGRIM, \
+	CTAG_ADVENTURER, \
+	CTAG_TOWNER, \
+	CTAG_MERCENARY, \
+	CTAG_GARRISON, \
+	CTAG_FORGARRISON, \
+	CTAG_MENATARMS, \
+)
+
 // Character category and its buys
 #define TRIUMPH_CAT_CHARACTER "CHARACTER"
 
 #define TRIUMPH_BUY_RACE_ALL "race_all"
 #define TRIUMPH_BUY_ANY_CLASS "pick_any"
+#define TRIUMPH_BUY_ANY_CLASS_ALL "pick_any_all"
 #define TRIUMPH_BUY_ADOPTION "adoption"
 #define TRIUMPH_BUY_FART "fart"
 #define TRIUMPH_BUY_SECRET_OFFICIANT "secret_officiant"

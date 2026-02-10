@@ -4,7 +4,7 @@
 	able to handle almost every single task there is to do on a fief."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/farmermaster
-	total_positions = 1
+	total_positions = 0
 	roll_chance = 0
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	apprentice_name = "Handyman"
