@@ -66,7 +66,3 @@
 
 // Bought triumph buys category
 #define TRIUMPH_CAT_ACTIVE_DATUMS "BOUGHT"
-
-#define TRIUMP_KEY_SEASON "triumph_wipe_season"
-#define TRIUMP_KEY_AMOUNT "triumph_count"
-#define TRIUMP_KEY_SEASONAL_BUYS "seasonal_triump_buys"

@@ -1,3 +1,10 @@
+#define TRIUMPH_KEY_SEASON "triumph_wipe_season"
+#define TRIUMPH_KEY_AMOUNT "triumph_count"
+#define TRIUMPH_KEY_SEASONAL_BUYS "seasonal_triumph_buys"
+
+#define TRIUMPH_SEASON_NUM "current_season_name"
+#define TRIUMPH_SEASON_NAME "current_wipe_season"
+
 /*
 	A fun fact is that it is important to note triumph procs all used key, whilas player quality likes to use ckey
 	It doesn't help that the params to insert a json key in both are just key to go with byond clients having a ckey and key
@@ -18,21 +25,30 @@
 
 // To note any triumph files that try to be loaded in at a lower number than current wipe season get wiped.
 // Also we have to handle this here cause the triumphs ss might get loaded too late to handle clients joining fast enough
-GLOBAL_VAR_INIT(triumph_wipe_season, get_triumph_wipe_season())
+GLOBAL_VAR_INIT(triumph_wipe_season, get_triumph_season())
 
-/proc/get_triumph_wipe_season()
+/proc/get_triumph_season()
 	var/json_file = file("data/triumph_wipe_season.json")
 
 	var/current_wipe_season = 1
 
 	if(!fexists(json_file))
-		WRITE_FILE(json_file, json_encode(list("current_wipe_season" = current_wipe_season), JSON_PRETTY_PRINT))
+		WRITE_FILE(json_file, json_encode(list(TRIUMPH_SEASON_NAME = current_wipe_season), JSON_PRETTY_PRINT))
 		return current_wipe_season
 
 	var/list/json = json_decode(file2text(json_file))
-	current_wipe_season = json["current_wipe_season"]
+	return json[TRIUMPH_SEASON_NUM]
 
-	return current_wipe_season
+GLOBAL_VAR_INIT(triumph_wipe_name, get_triumph_season_name())
+
+/proc/get_triumph_season_name()
+	var/json_file = file("data/triumph_wipe_season.json")
+
+	if(!fexists(json_file))
+		return
+
+	var/list/json = json_decode(file2text(json_file))
+	return json[TRIUMPH_SEASON_NAME]
 
 /// List of triumph buy id to typepath
 GLOBAL_LIST_INIT(triumph_buys_by_id, init_triumph_buys_by_id())
@@ -305,10 +321,11 @@ SUBSYSTEM_DEF(triumphs)
 		return 0
 
 	var/list/existing_data = json_decode(file2text(target_file))
-	if(GLOB.triumph_wipe_season != existing_data[TRIUMP_KEY_SEASON])
+	if(GLOB.triumph_wipe_season != existing_data[TRIUMPH_KEY_SEASON])
+		write_save(target_file, list(TRIUMPH_KEY_SEASON = GLOB.triumph_wipe_season))
 		return 0
 
-	triumph_amount_cache[target_ckey] = existing_data[TRIUMP_KEY_AMOUNT]
+	triumph_amount_cache[target_ckey] = existing_data[TRIUMPH_KEY_AMOUNT]
 	return floor(triumph_amount_cache[target_ckey])
 
 /// Write triumphs to player save
@@ -323,7 +340,7 @@ SUBSYSTEM_DEF(triumphs)
 
 	var/list/existing_data = json_decode(file2text(target_file))
 
-	existing_data[TRIUMP_KEY_AMOUNT] = amount
+	existing_data[TRIUMPH_KEY_AMOUNT] = amount
 
 	write_save(target_file, existing_data)
 
@@ -340,7 +357,7 @@ SUBSYSTEM_DEF(triumphs)
 	log_game("TRIUMPHS: [target_ckey] received [amt] triumph\s. They have a total of [triumph_amount_cache[target_ckey]] triumph\s now. Checked with cache.")
 
 /// Returns a list of triumph buy types
-/datum/controller/subsystem/triumphs/proc/get_seasonal_triump_buys(target_ckey)
+/datum/controller/subsystem/triumphs/proc/get_seasonal_triumph_buys(target_ckey)
 	if(!target_ckey)
 		return
 
@@ -352,7 +369,7 @@ SUBSYSTEM_DEF(triumphs)
 
 	var/list/data = json_decode(file2text(target_file))
 
-	var/list/buy_ids = data[TRIUMP_KEY_SEASONAL_BUYS]
+	var/list/buy_ids = data[TRIUMPH_KEY_SEASONAL_BUYS]
 
 	if(!length(buy_ids))
 		return
@@ -402,10 +419,10 @@ SUBSYSTEM_DEF(triumphs)
 
 	var/list/data = json_decode(file2text(target_file))
 
-	if(!LAZYACCESS(data, TRIUMP_KEY_SEASONAL_BUYS))
-		data[TRIUMP_KEY_SEASONAL_BUYS] = list()
+	if(!LAZYACCESS(data, TRIUMPH_KEY_SEASONAL_BUYS))
+		data[TRIUMPH_KEY_SEASONAL_BUYS] = list()
 
-	data[TRIUMP_KEY_SEASONAL_BUYS][triumph_buy_id] = seasonal_time_stamp()
+	data[TRIUMPH_KEY_SEASONAL_BUYS][triumph_buy_id] = seasonal_time_stamp()
 
 	write_save(target_file, data)
 
@@ -421,10 +438,10 @@ SUBSYSTEM_DEF(triumphs)
 		return
 
 	var/list/data = json_decode(file2text(target_file))
-	if(!LAZYACCESS(data, TRIUMP_KEY_SEASONAL_BUYS))
+	if(!LAZYACCESS(data, TRIUMPH_KEY_SEASONAL_BUYS))
 		return
 
-	data[TRIUMP_KEY_SEASONAL_BUYS] -= triumph_buy_id
+	data[TRIUMPH_KEY_SEASONAL_BUYS] -= triumph_buy_id
 
 	write_save(target_file, data)
 
@@ -438,7 +455,7 @@ SUBSYSTEM_DEF(triumphs)
 	if(activated_seasonal_ckeys[ckey_index])
 		return
 
-	var/list/triumph_types = get_seasonal_triump_buys(ckey_index)
+	var/list/triumph_types = get_seasonal_triumph_buys(ckey_index)
 
 	if(!length(triumph_types))
 		return
@@ -465,19 +482,25 @@ SUBSYSTEM_DEF(triumphs)
 
 	log_game("TRIUMPHS: [target_ckey] was wiped of all triumphs!")
 
-/// Clears the leaderboard of all entries, keeping the current season and player's triumphs
-/datum/controller/subsystem/triumphs/proc/reset_leaderboard()
+/// Wipe the entire list and adjust the season up by 1 too so anyone behind gets wiped if they rejoin later
+/datum/controller/subsystem/triumphs/proc/start_new_season(new_season_name)
+	GLOB.triumph_wipe_season += 1
+	GLOB.triumph_wipe_name = new_season_name
+
+	triumph_amount_cache = list()
 	triumph_leaderboard = list()
 
-/// Wipe the entire list and adjust the season up by 1 too so anyone behind gets wiped if they rejoin later
-/datum/controller/subsystem/triumphs/proc/start_new_season()
-	triumph_amount_cache = list()
+	for(var/client/client as anything in GLOB.clients)
+		var/client_key = client.ckey
+		if(client_key)
+			wipe_target_triumphs(client_key)
 
-	reset_leaderboard()
+	var/list/data = list(
+		TRIUMPH_SEASON_NUM = GLOB.triumph_wipe_season,
+		TRIUMPH_SEASON_NAME = new_season_name,
+	)
 
-	GLOB.triumph_wipe_season += 1
-
-	write_save(file("data/triumph_wipe_season.json"), list("current_wipe_season" = GLOB.triumph_wipe_season))
+	write_save(file("data/triumph_wipe_season.json"), data)
 
 /// Inititalise fields for a ckey or reset them to defaults
 /datum/controller/subsystem/triumphs/proc/reset_or_create_data(target_ckey)
@@ -489,9 +512,9 @@ SUBSYSTEM_DEF(triumphs)
 	var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json")
 
 	var/list/data = list(
-		TRIUMP_KEY_SEASON = GLOB.triumph_wipe_season,
-		TRIUMP_KEY_AMOUNT = 0,
-		TRIUMP_KEY_SEASONAL_BUYS = list(),
+		TRIUMPH_KEY_SEASON = GLOB.triumph_wipe_season,
+		TRIUMPH_KEY_AMOUNT = 0,
+		TRIUMPH_KEY_SEASONAL_BUYS = list(),
 	)
 
 	write_save(target_file, data)
@@ -509,7 +532,7 @@ SUBSYSTEM_DEF(triumphs)
 		return
 
 	var/list/data = json_decode(file2text(target_file))
-	data[TRIUMP_KEY_AMOUNT] = 0
+	data[TRIUMPH_KEY_AMOUNT] = 0
 
 	write_save(target_file, data)
 
@@ -519,7 +542,8 @@ SUBSYSTEM_DEF(triumphs)
 
 /// Displays leaderboard browser popup
 /datum/controller/subsystem/triumphs/proc/show_triumph_leaderboard(client/C)
-	var/webpage = "<div style='text-align:center'>Current Season: [GLOB.triumph_wipe_season || 1]</div>"
+	var/season_name = GLOB.triumph_wipe_name ? GLOB.triumph_wipe_name : GLOB.triumph_wipe_season
+	var/webpage = "<div style='text-align:center'>Current Season: [season_name]</div>"
 	webpage += "<hr>"
 
 	if(length(triumph_leaderboard))
@@ -600,3 +624,9 @@ SUBSYSTEM_DEF(triumphs)
 	for(var/datum/triumph_buy/owned in to_refund)
 		var/client/C = GLOB.directory[owned.ckey_of_buyer] // check if player is online
 		attempt_to_unbuy_triumph_condition(C, owned, "ADMIN DISABLE", TRUE)
+
+#undef TRIUMPH_KEY_SEASON
+#undef TRIUMPH_KEY_AMOUNT
+#undef TRIUMPH_KEY_SEASONAL_BUYS
+#undef TRIUMPH_SEASON_NUM
+#undef TRIUMPH_SEASON_NAME
