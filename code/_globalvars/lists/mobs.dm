@@ -80,3 +80,14 @@ GLOBAL_LIST_INIT(dangerous_turfs, typecacheof(list(
 			.[E.key_third_person] = list(E)
 		else
 			.[E.key_third_person] |= E
+
+/// Cultures can't be interacted with so we only ever need as many datums as exist
+GLOBAL_LIST_INIT(culture_singletons, init_culture_singletons())
+
+/proc/init_culture_singletons()
+	var/list/culture_list = list()
+	for(var/datum/culture/culture as anything in subtypesof(/datum/culture))
+		if(IS_ABSTRACT(culture))
+			continue
+		culture_list[culture] = new culture()
+	return culture_list

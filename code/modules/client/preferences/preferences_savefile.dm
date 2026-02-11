@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX 31
+#define SAVEFILE_VERSION_MAX 32
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -30,8 +30,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(savefile_version < SAVEFILE_VERSION_MIN)
 		S.dir.Cut()
 		return -2
+
 	if(savefile_version < SAVEFILE_VERSION_MAX)
 		return savefile_version
+
 	return -1
 
 //should these procs get fairly long
@@ -56,9 +58,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			var/new_value
 			if(new_value)
 				job_preferences[initial(J.title)] = new_value
+
 	if(current_version < 24)
 		if (!(underwear in GLOB.underwear_list))
 			underwear = "Nude"
+
 	if(current_version < 25)
 		randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
 		if(S["name_is_always_random"] == 1)
@@ -71,15 +75,27 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 30)
 		S["voice_color"] >> voice_color
 
+	// Restructuring of skin tones and culture addition
 	if(current_version < 31)
+		var/datum/culture/culture = S["culture"]
+		if(!culture)
+			culture = /datum/culture/universal/ambiguous
+			WRITE_FILE(S["culture"], culture)
+
+		var/list/assoc_skins = pref_species.get_skin_list()
+		// If current skin tone matches one of the current list, we are fine
+		for(var/skin in assoc_skins)
+			if(skin_tone != assoc_skins[skin]) // otherwise its gambling time
+				skin_tone = pick_assoc(assoc_skins)
+				break
+
+	if(current_version < 32)
 		var/species_name = S["species"]
 		for(var/species_id in GLOB.species_list)
-			var/species_type = GLOB.species_list[species_id]
-			var/datum/species/species = new species_type()
-			if(species.name == species_name)
-				pref_species = new species.type()
-				WRITE_FILE(S["species"], species.id)
-				break
+			var/datum/species/species_type = GLOB.species_list[species_id]
+			if(species_type::name == species_name)
+				pref_species = new species_type()
+				WRITE_FILE(S["species"], pref_species.id)
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
@@ -302,6 +318,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["eye_color"] >> eye_color
 	S["voice_color"] >> voice_color
 	S["skin_tone"] >> skin_tone
+	S["culture"] >> culture
 	S["underwear"] >> underwear
 	S["accessory"] >> accessory
 	S["detail"] >> detail
@@ -458,6 +475,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["eye_color"], eye_color)
 	WRITE_FILE(S["voice_color"], voice_color)
 	WRITE_FILE(S["skin_tone"], skin_tone)
+	WRITE_FILE(S["culture"], culture)
 	WRITE_FILE(S["underwear"], underwear)
 	WRITE_FILE(S["underwear_color"], underwear_color)
 	WRITE_FILE(S["undershirt"], undershirt)

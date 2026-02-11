@@ -362,6 +362,9 @@
 		if(!T.activated)
 			T.on_after_spawn(spawned)
 
+	if(spawned.culture)
+		spawned.culture.on_after_spawn(spawned)
+
 	if(length(advclass_cat_rolls))
 		spawned.hugboxify_for_class_selection()
 

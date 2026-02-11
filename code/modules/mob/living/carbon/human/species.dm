@@ -191,7 +191,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/use_skintones = FALSE
 
 	/// Wording for skin tone on examine and on character setup
-	var/skin_tone_wording = "Skin Tone"
+	var/skin_tone_wording = "Ancestry"
 
 	/// List of bodypart features of this species
 	var/list/bodypart_features
