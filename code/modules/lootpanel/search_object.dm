@@ -50,7 +50,7 @@
 	return
 #endif
 
-	icon = text_ref(item.icon)
+	icon = "[item.icon]"
 	icon_state = item.icon_state
 
 /datum/search_object/Destroy(force)
