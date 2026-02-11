@@ -1,6 +1,7 @@
 /datum/triumph_buy/seasonal/subspecies
 	abstract_type = /datum/triumph_buy/seasonal/subspecies
 	triumph_cost = 200
+	disabled = TRUE
 
 /datum/triumph_buy/seasonal/subspecies/subterran_dwarf
 	name = "Subterran Dwarf"

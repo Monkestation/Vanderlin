@@ -21,14 +21,12 @@
 GLOBAL_VAR_INIT(triumph_wipe_season, get_triumph_wipe_season())
 
 /proc/get_triumph_wipe_season()
-	var/current_wipe_season
 	var/json_file = file("data/triumph_wipe_season.json")
 
+	var/current_wipe_season = 1
+
 	if(!fexists(json_file))
-		var/list/uhh_ohhh = list("current_wipe_season" = 1)
-		current_wipe_season = 1
-		fdel(json_file)
-		WRITE_FILE(json_file, json_encode(uhh_ohhh, JSON_PRETTY_PRINT))
+		WRITE_FILE(json_file, json_encode(list("current_wipe_season" = current_wipe_season), JSON_PRETTY_PRINT))
 		return current_wipe_season
 
 	var/list/json = json_decode(file2text(json_file))
@@ -362,17 +360,35 @@ SUBSYSTEM_DEF(triumphs)
 	var/list/returned_types = list()
 
 	for(var/id in buy_ids)
-		var/bought_at = buy_ids[id]
-		var/current_season = GLOB.triumph_wipe_season
 		var/datum/triumph_buy/seasonal/triumph_type = GLOB.triumph_buys_by_id[id]
 
-		if(!triumph_type || ((current_season - bought_at) >= triumph_type::seasons_max))
+		if(!triumph_type || check_seasonal_expiry(triumph_type, buy_ids[id]))
 			remove_seasonal_triumph_buy(target_ckey, id)
 			continue
 
 		returned_types += triumph_type
 
 	return returned_types
+
+/// Check timestamps to see if we expired
+/datum/controller/subsystem/triumphs/proc/check_seasonal_expiry(datum/triumph_buy/seasonal/triumph_type, loaded_timestamp)
+	var/current_timestamp = seasonal_time_stamp()
+	var/current_time_num = text2num(splittext(current_timestamp, ":")[1])
+	var/current_season = GLOB.triumph_wipe_season
+
+	var/loaded_time_num = text2num(splittext(loaded_timestamp, ":")[1])
+	var/loaded_season = text2num(splittext(loaded_timestamp, ":")[2])
+
+	if((current_season - loaded_season) >= triumph_type::seasons_max)
+		if(loaded_time_num >= current_time_num)
+			return TRUE
+
+	return FALSE
+
+/// Timestamp of the date with no spacing
+/// text2num will give a direct result in size comparison to check if its expired
+/datum/controller/subsystem/triumphs/proc/seasonal_time_stamp(include_season = TRUE)
+	return "[time2text(world.timeofday, "YYMMDD")]:[GLOB.triumph_wipe_season]"
 
 /// Add a seasonal buy via id, it will be retrived and activated for this ckey on client init
 /datum/controller/subsystem/triumphs/proc/add_seasonal_triumph_buy(target_ckey, triumph_buy_id)
@@ -389,7 +405,7 @@ SUBSYSTEM_DEF(triumphs)
 	if(!LAZYACCESS(data, TRIUMP_KEY_SEASONAL_BUYS))
 		data[TRIUMP_KEY_SEASONAL_BUYS] = list()
 
-	data[TRIUMP_KEY_SEASONAL_BUYS][triumph_buy_id] = GLOB.triumph_wipe_season
+	data[TRIUMP_KEY_SEASONAL_BUYS][triumph_buy_id] = seasonal_time_stamp()
 
 	write_save(target_file, data)
 
@@ -456,15 +472,12 @@ SUBSYSTEM_DEF(triumphs)
 /// Wipe the entire list and adjust the season up by 1 too so anyone behind gets wiped if they rejoin later
 /datum/controller/subsystem/triumphs/proc/start_new_season()
 	triumph_amount_cache = list()
-	reset_leaderboard()
 
-	var/target_file = file("data/triumph_wipe_season.json")
+	reset_leaderboard()
 
 	GLOB.triumph_wipe_season += 1
 
-	var/list/wipe_season = list("current_wipe_season" = GLOB.triumph_wipe_season)
-
-	write_save(target_file, wipe_season)
+	write_save(file("data/triumph_wipe_season.json"), list("current_wipe_season" = GLOB.triumph_wipe_season))
 
 /// Inititalise fields for a ckey or reset them to defaults
 /datum/controller/subsystem/triumphs/proc/reset_or_create_data(target_ckey)
@@ -474,8 +487,6 @@ SUBSYSTEM_DEF(triumphs)
 	triumph_amount_cache[target_ckey] = 0
 
 	var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json")
-	if(fexists(target_file))
-		fdel(target_file)
 
 	var/list/data = list(
 		TRIUMP_KEY_SEASON = GLOB.triumph_wipe_season,
