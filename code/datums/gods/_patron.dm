@@ -51,13 +51,13 @@ GLOBAL_LIST_EMPTY(prayers)
 	for(var/trait in added_traits)
 		ADD_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
-		pious.verbs |= verb
+		add_verb(pious, verb)
 
 /datum/patron/proc/on_remove(mob/living/pious)
 	for(var/trait in added_traits)
 		REMOVE_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
-		pious.verbs -= verb
+		remove_verb(pious, verb)
 
 /* -----PRAYERS----- */
 

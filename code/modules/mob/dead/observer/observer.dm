@@ -137,8 +137,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 /mob/dead/observer/Initialize()
 	set_invisibility(GLOB.observer_default_invisibility)
 
-	verbs += list(
-		/mob/dead/observer/proc/tray_view)
+	add_verb(src, /mob/dead/observer/proc/tray_view)
 
 	if(icon_state in GLOB.ghost_forms_with_directions_list)
 		ghostimage_default = image(src.icon,src,src.icon_state + "")
@@ -200,8 +199,8 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	real_name = name
 
 	if(!fun_verbs)
-		verbs -= /mob/dead/observer/verb/boo
-		verbs -= /mob/dead/observer/verb/possess
+		add_verb(src, /mob/dead/observer/verb/boo)
+		add_verb(src, /mob/dead/observer/verb/possess)
 
 	GLOB.dead_mob_list += src
 
@@ -215,7 +214,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 	if(!istype(src, /mob/dead/observer/rogue/arcaneeye))
 		if(!istype(src, /mob/dead/observer/screye))
-			client?.verbs += GLOB.ghost_verbs
+			add_verb(src, GLOB.ghost_verbs)
 			to_chat(src, span_danger("Click the <b>SKULL</b> on the left of your HUD to respawn."))
 
 	grant_all_languages()
@@ -418,9 +417,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	mind.current.ckey = ckey(key)
 	return TRUE
 
+
 /mob/dead/observer/returntolobby(modifier as num)
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 	if (CONFIG_GET(flag/norespawn))
 		return
@@ -458,7 +458,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		qdel(M)
 		return
 
-	client?.verbs -= /client/proc/descend
 	M.key = key
 //	M.Login()	//wat
 	return
@@ -792,6 +791,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Possess!"
 	set desc= "Take over the body of a mindless creature!"
 
+	if(!check_rights(R_ADMIN))
+		return FALSE
 	var/list/possessible = list()
 	for(var/mob/living/L in GLOB.alive_mob_list)
 		if(istype(L,/mob/living/carbon/human/dummy) || !get_turf(L)) //Haha no.
@@ -954,11 +955,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ghostimage_simple.icon_state = icon_state
 		if("fun_verbs")
 			if(fun_verbs)
-				verbs += /mob/dead/observer/verb/boo
-				verbs += /mob/dead/observer/verb/possess
+				add_verb(src, /mob/dead/observer/verb/boo)
+				add_verb(src, /mob/dead/observer/verb/possess)
 			else
-				verbs -= /mob/dead/observer/verb/boo
-				verbs -= /mob/dead/observer/verb/possess
+				add_verb(src, /mob/dead/observer/verb/boo)
+				add_verb(src, /mob/dead/observer/verb/possess)
 
 /mob/dead/observer/reset_perspective(atom/A)
 	if(client)

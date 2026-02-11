@@ -82,7 +82,7 @@
 			msg += " - RSN: [reason]"
 
 /client/proc/check_pq()
-	set category = "GameMaster"
+	set category = "GameMaster.Triumphs"
 	set name = "CheckPQ"
 	if(!holder)
 		return
@@ -144,7 +144,7 @@
 	popup.open()
 
 /client/proc/stop_restart()
-	set category = "GameMaster"
+	set category = "Server.Round Control"
 	set name = "Stop Restart"
 	if(!holder)
 		return
@@ -152,7 +152,7 @@
 	message_admins("[usr] stopped the 15 minute reboot after a successful vote.")
 
 /client/proc/adjust_pq()
-	set category = "GameMaster"
+	set category = "GameMaster.Triumphs"
 	set name = "AdjustPQ"
 	if(!holder)
 		return
