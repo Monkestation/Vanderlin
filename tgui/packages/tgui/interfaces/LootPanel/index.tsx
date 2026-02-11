@@ -39,7 +39,7 @@ export function LootPanel(props) {
   const [searchText, setSearchText] = useState('');
 
   const headerHeight = 40;
-  const itemHeight = 46;
+  const itemHeight = 47;
   const minHeight = headerHeight + itemHeight;
   const maxHeight = headerHeight + itemHeight * 10;
   const height: number = clamp(
