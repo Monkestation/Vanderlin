@@ -2,7 +2,7 @@
 GLOBAL_VAR(relay_config)
 
 /client/verb/go2relay()
-	set category = "OOC"
+	set category = "OOC.Relay"
 	set name = "Internet Routing Relays"
 
 	if(is_localhost())
