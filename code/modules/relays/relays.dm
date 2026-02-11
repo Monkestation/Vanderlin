@@ -21,7 +21,7 @@ GLOBAL_VAR(relay_config)
 		names += name
 		name_to_relay[name] = relay
 
-	var/choice = browser_input_list(src,	"Which relay do you wish to use? Relays can help improve ping for some users.",	"Relay Select",	names)
+	var/choice = browser_input_list(src, "Which relay do you wish to use? Relays can help improve ping for some users.", "Relay Select", names)
 	if(!choice)
 		to_chat(src, span_notice("You didn't select a relay."))
 		return
