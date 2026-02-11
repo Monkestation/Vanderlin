@@ -425,6 +425,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SATE "SATE"
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
 #define TRAIT_NO_EXPERIENCE	"unlearning"
+/// This mob should never close UI even if it doesn't have a client
+#define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
 
 /// applied to orphans
 #define TRAIT_ORPHAN "Orphan"
