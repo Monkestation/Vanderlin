@@ -1466,6 +1466,14 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			stat_tab = payload["tab"]
 			SSstatpanels.immediate_send_stat_data(src)
 
+/client/proc/is_localhost()
+	var/static/localhost_addresses = list(
+		"127.0.0.1",
+		"::1",
+		null,
+	)
+	return address in localhost_addresses
+
 #undef LIMITER_SIZE
 #undef CURRENT_SECOND
 #undef SECOND_COUNT
