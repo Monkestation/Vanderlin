@@ -509,11 +509,9 @@
 	clicked_atom.AltRightClick(src, modifiers)
 
 /atom/proc/AltRightClick(mob/user, list/modifiers)
-//	SEND_SIGNAL(src, COMSIG_CLICK_ALT, user, modifiers)
 	var/turf/T = get_turf(src)
-	if(T && (isturf(loc) || isturf(src)) && user.TurfAdjacent(T))
-		user.listed_turf = T
-		user.client.statpanel = T.name
+	if(T && (isturf(loc) || isturf(src)) && user.TurfAdjacent(T) && !HAS_TRAIT(user, TRAIT_MOVE_VENTCRAWLING))
+		user.set_listed_turf(T)
 
 /mob/proc/CtrlRightClickOn(atom/clicked_atom, list/modifiers)
 	pointed(clicked_atom)

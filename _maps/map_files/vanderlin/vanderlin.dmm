@@ -3450,12 +3450,6 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/grass/mixyel,
 /area/indoors/town/church/chapel)
-"bIn" = (
-/obj/structure/door,
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/town/apothecary,
-/turf/open/floor/cobblerock,
-/area/outdoors/town)
 "bIq" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -9206,10 +9200,6 @@
 /obj/item/weapon/knife/cleaver,
 /turf/open/floor/tile/checkeralt,
 /area/indoors/town/tavern)
-"evf" = (
-/obj/effect/landmark/start/blacksmith,
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "evs" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble/alt,
@@ -11003,6 +10993,17 @@
 	},
 /turf/open/water/bath,
 /area/indoors/town/keep/lord_appt)
+"fqK" = (
+/obj/machinery/light/fueled/wallfire/candle/l{
+	pixel_x = -32;
+	pixel_y = 21
+	},
+/obj/structure/bed/wool,
+/obj/effect/landmark/start/blacksmith{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/town/smithy)
 "fro" = (
 /obj/structure/grindwheel,
 /turf/open/floor/dirt,
@@ -12843,17 +12844,6 @@
 /obj/item/kitchen/fork,
 /turf/open/floor/wood,
 /area/indoors/town)
-"gki" = (
-/obj/machinery/light/fueled/wallfire/candle/l{
-	pixel_x = -32;
-	pixel_y = 21
-	},
-/obj/structure/bed/wool,
-/obj/effect/landmark/start/blacksmith{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/alt,
-/area/indoors/town/smithy)
 "gky" = (
 /obj/structure/table/wood/reinforced,
 /obj/structure/bars/bent,
@@ -15932,12 +15922,6 @@
 	},
 /turf/open/floor/dirt,
 /area/under/cave)
-"hOI" = (
-/obj/effect/landmark/start/blacksmith{
-	dir = 4
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "hOM" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -17473,17 +17457,6 @@
 /obj/item/weapon/whip/urumi/iron,
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town/shop)
-"iAk" = (
-/obj/machinery/light/fueled/wallfire/candle/r{
-	pixel_x = 32;
-	pixel_y = 24
-	},
-/obj/structure/bed/wool,
-/obj/effect/landmark/start/blacksmith{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/alt,
-/area/indoors/town/smithy)
 "iAl" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -19350,17 +19323,6 @@
 /obj/item/bedsheet/double_pelt,
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
-"jtN" = (
-/obj/machinery/light/fueled/wallfire/candle/l{
-	pixel_x = -32;
-	pixel_y = 21
-	},
-/obj/structure/bed/wool,
-/obj/effect/landmark/start/blacksmith{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/alt,
-/area/indoors/town/smithy)
 "juk" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -22380,17 +22342,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/dirt/road,
 /area/outdoors/town/noble_manor/blue)
-"kVn" = (
-/obj/machinery/light/fueled/wallfire/candle/r{
-	pixel_x = 32;
-	pixel_y = 24
-	},
-/obj/structure/bed/wool,
-/obj/effect/landmark/start/blacksmith{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/alt,
-/area/indoors/town/smithy)
 "kVw" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/paper/scroll,
@@ -23470,6 +23421,17 @@
 "luO" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church)
+"luR" = (
+/obj/machinery/light/fueled/wallfire/candle/r{
+	pixel_x = 32;
+	pixel_y = 24
+	},
+/obj/structure/bed/wool,
+/obj/effect/landmark/start/blacksmith{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/town/smithy)
 "luY" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
@@ -25048,6 +25010,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/town)
+"mhY" = (
+/obj/structure/pillory/church,
+/turf/open/floor/churchrough,
+/area/indoors/town/church/chapel)
 "mis" = (
 /obj/item/coin/silver/pile,
 /obj/structure/fluff/railing/border{
@@ -26246,6 +26212,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
+"mLx" = (
+/obj/effect/landmark/start/blacksmith,
+/turf/open/floor/cobble,
+/area/indoors/town/smithy)
 "mLy" = (
 /obj/structure/roguerock,
 /turf/open/floor/dirt,
@@ -27530,6 +27500,12 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town/shop)
+"noF" = (
+/obj/effect/landmark/start/blacksmith{
+	dir = 4
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town/smithy)
 "noJ" = (
 /obj/structure/fermentation_keg,
 /obj/machinery/light/fueled/torchholder/r,
@@ -30460,6 +30436,12 @@
 /obj/structure/water_pipe,
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town/roofs)
+"oKO" = (
+/obj/structure/door,
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/bathhouse,
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "oLb" = (
 /obj/structure/rack/shelf/biggest,
 /obj/structure/fluff/nest,
@@ -35217,10 +35199,6 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
-"qYv" = (
-/obj/structure/pillory,
-/turf/open/floor/churchrough,
-/area/indoors/town/church/chapel)
 "qYE" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -36729,6 +36707,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/garrison)
+"rMt" = (
+/obj/structure/door,
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/bathhouse,
+/turf/open/floor/twig,
+/area/indoors/town/clinic_large/apothecary)
 "rMu" = (
 /obj/structure/chair/stool{
 	dir = 1
@@ -106077,7 +106061,7 @@ mFi
 kYR
 kYR
 caG
-bIn
+oKO
 caG
 caG
 nsU
@@ -107897,7 +107881,7 @@ gRT
 cqF
 osm
 osm
-kMA
+rMt
 osm
 eII
 eII
@@ -112552,7 +112536,7 @@ hZn
 czz
 tni
 gjf
-evf
+mLx
 mNY
 mWB
 mWB
@@ -112761,7 +112745,7 @@ mWB
 hCp
 qCW
 hCp
-hOI
+noF
 mWB
 gjf
 gjf
@@ -152352,7 +152336,7 @@ mVa
 gxj
 pAu
 sIT
-jtN
+fqK
 jfx
 iyb
 jyt
@@ -152756,7 +152740,7 @@ bYD
 gxj
 wfv
 sIT
-kVn
+luR
 wqE
 nce
 cyv
@@ -166061,7 +166045,7 @@ lgf
 bLT
 jqG
 mkW
-qYv
+mhY
 vCF
 jCo
 cwj

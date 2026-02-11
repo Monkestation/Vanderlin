@@ -817,27 +817,6 @@
 
 		usr.client.smite(H)
 
-	else if(href_list["CentComReply"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["CentComReply"])
-		usr.client.admin_headset_message(M, RADIO_CHANNEL_CENTCOM)
-
-	else if(href_list["SyndicateReply"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["SyndicateReply"])
-		usr.client.admin_headset_message(M, RADIO_CHANNEL_SYNDICATE)
-
-	else if(href_list["HeadsetMessage"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["HeadsetMessage"])
-		usr.client.admin_headset_message(M)
-
 	else if(href_list["jumpto"])
 		if(!isobserver(usr) && !check_rights(R_ADMIN))
 			return

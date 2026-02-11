@@ -57,7 +57,7 @@
 	for(var/i = 1 to thralls)
 		var/mob/living/carbon/human/human = pick_n_take(candidates)
 		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
-		human.mind.add_antag_datum(new_antag)
+		human?.mind.add_antag_datum(new_antag)
 		human.adjust_bloodpool(500)
 
 /datum/antagonist/vampire/lord/greet()
@@ -114,7 +114,7 @@
 // NEW VERBS
 /mob/living/carbon/human/proc/demand_submission()
 	set name = "Demand Submission"
-	set category = "VAMPIRE"
+	set category = "RoleUnique.Vampire"
 	if(SSmapping.retainer.king_submitted)
 		to_chat(src, span_warning("I am already the Master of [SSmapping.config.map_name]."))
 		return
@@ -138,7 +138,7 @@
 
 /mob/living/carbon/human/proc/punish_spawn()
 	set name = "Punish Minion"
-	set category = "VAMPIRE"
+	set category = "RoleUnique.Vampire"
 
 	var/list/possible = list()
 	for(var/mob/living/carbon/human/member in clan?.clan_members)

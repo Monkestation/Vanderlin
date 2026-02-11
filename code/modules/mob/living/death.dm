@@ -104,7 +104,6 @@ GLOBAL_LIST_EMPTY(last_words)
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom/movable/screen/gameover, Fade), TRUE), 100)
 		remove_client_colour(/datum/client_colour/monochrome/death)
 		add_client_colour(/datum/client_colour/monochrome/death)
-		client?.verbs |= /client/proc/descend
 		if(last_words)
 			GLOB.last_words |= last_words
 
