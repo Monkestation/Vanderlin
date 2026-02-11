@@ -1,0 +1,2 @@
+/obj/item/reagent_containers/food/snacks/meat/human : /obj/item/reagent_containers/food/snacks/meat/steak/human
+/obj/item/reagent_containers/food/snacks/toxicshrooms : /obj/item/reagent_containers/food/snacks/truffles/toxic

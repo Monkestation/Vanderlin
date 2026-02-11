@@ -7,6 +7,7 @@
 	force = 0
 	throwforce = 0
 	faretype = FARE_POOR
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_SLOP)
 	var/list/pipe_reagents = list()
 	var/seed
 	var/bitesize_mod = 0
@@ -118,7 +119,6 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	slot_flags = ITEM_SLOT_HEAD
 	worn_x_dimension = 64
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	worn_y_dimension = 64
 	rotprocess = SHELFLIFE_DECENT
 	sellprice = 0 // spoil too quickly to export
@@ -254,18 +254,13 @@
 	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/examine(mob/user)
-	var/farminglvl = user.get_skill_level(/datum/skill/labor/farming)
 	. = ..()
-	// Foragers can always detect if p berry is safe or poisoned
-	if(HAS_TRAIT(user, TRAIT_FORAGER))
+	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
+	if(!can_tell)
+		can_tell = user.skills ? user.get_skill_level(/datum/skill/labor/farming) : FALSE
+	if(can_tell)
 		if(poisonous)
 			. += span_warning("This berry looks suspicious. I sense it might be poisoned.")
-		else
-			. += span_notice("This berry looks safe to eat.")
-	// Non-Foragers with high farming skill can detect poisoned berries
-	else if(farminglvl >= 3)
-		if(poisonous)
-			. += span_warning("These berries appear to be poisonous.</span>")
 		else
 			. += span_notice("This berry looks safe to eat.")
 
@@ -357,7 +352,7 @@
 	filling_color = "#fdfaca"
 	bitesize = 1
 	foodtype = VEGETABLES
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_SLOP)
 	chopping_sound = TRUE
 	rotprocess = SHELFLIFE_LONG
 
@@ -385,7 +380,7 @@
 	eat_effect = null
 	foodtype = VEGETABLES
 	chopping_sound = TRUE
-	list_reagents = list(/datum/reagent/consumable/nutriment = 3)
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	bitesize = 1
 	rotprocess = null
 
@@ -670,7 +665,6 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 
@@ -684,7 +678,6 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 

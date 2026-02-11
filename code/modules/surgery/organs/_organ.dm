@@ -33,7 +33,7 @@
 	dropshrink = 0.85
 
 	/// What food typepath should be used when eaten
-	var/food_type = /obj/item/reagent_containers/food/snacks/organ
+	var/food_type = /obj/item/reagent_containers/food/snacks/meat/organ
 	/// Original owner of the organ, the one who had it inside them last
 	var/mob/living/carbon/last_owner = null
 
@@ -175,7 +175,7 @@
 		. += span_warning("[src] is starting to look discolored.")
 
 /obj/item/organ/proc/prepare_eat(mob/living/carbon/human/user)
-	var/obj/item/reagent_containers/food/snacks/organ/S = new food_type()
+	var/obj/item/reagent_containers/food/snacks/meat/organ/S = new food_type()
 	S.name = name
 	S.desc = desc
 	S.icon = icon
@@ -187,46 +187,6 @@
 		S.eat_effect = /datum/status_effect/debuff/rotfood
 	S.rotprocess = S.rotprocess * ((high_threshold - damage) / high_threshold)
 	return S
-
-/obj/item/reagent_containers/food/snacks/organ
-	name = "appendix"
-	icon_state = "appendix"
-	icon = 'icons/obj/surgery.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR, /datum/reagent/organpoison = 1)
-	grind_results = list(/datum/reagent/organpoison = 3)
-	foodtype = RAW | MEAT | GROSS
-	eat_effect = /datum/status_effect/debuff/uncookedfood
-	rotprocess = 5 MINUTES
-	var/obj/item/organ/organ_inside
-
-/obj/item/reagent_containers/food/snacks/organ/on_consume(mob/living/eater)
-	if(HAS_TRAIT(eater, TRAIT_ORGAN_EATER) && eat_effect != /datum/status_effect/debuff/rotfood)
-		eat_effect = /datum/status_effect/buff/foodbuff
-	if(bitecount >= bitesize)
-		record_featured_stat(FEATURED_STATS_CRIMINALS, eater)
-		record_round_statistic(STATS_ORGANS_EATEN)
-		SEND_SIGNAL(eater, COMSIG_ORGAN_CONSUMED, type, organ_inside)
-	. = ..()
-	eat_effect = initial(eat_effect)
-
-/obj/item/reagent_containers/food/snacks/organ/Destroy()
-	QDEL_NULL(organ_inside)
-	return ..()
-
-/obj/item/reagent_containers/food/snacks/organ/heart
-	name = "heart"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
-
-/obj/item/reagent_containers/food/snacks/organ/lungs
-	name = "lungs"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
-
-/obj/item/reagent_containers/food/snacks/organ/liver
-	name = "liver"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
 
 ///Adjusts an organ's damage by the amount "d", up to a maximum amount, which is by default max damage
 /obj/item/organ/proc/applyOrganDamage(d, maximum = maxHealth)	//use for damaging effects

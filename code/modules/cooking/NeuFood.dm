@@ -57,7 +57,7 @@
 	icon_state = "meat"
 
 /obj/item/reagent_containers/food/snacks/rotten/bacon
-	name = "rotten pigflesh"
+	name = "rotten flesh"
 	icon_state = "pigflesh"
 
 /obj/item/reagent_containers/food/snacks/rotten/sausage

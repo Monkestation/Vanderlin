@@ -64,6 +64,7 @@
 	swap_female_clothes = TRUE
 	swap_male_clothes = TRUE
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/mince/fish = 2)
 	exotic_bloodtype = /datum/blood_type/human/triton
 	enflamed_icon = "widefire"
 

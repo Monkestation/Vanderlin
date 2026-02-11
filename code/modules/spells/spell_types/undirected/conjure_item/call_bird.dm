@@ -90,7 +90,7 @@
 	desc = "A small bird, used by nobles to send messages beyond the borders of this city. It has a small pouch on its leg for carrying notes."
 	icon_state = "messenger"
 	icon = 'icons/roguetown/mob/monster/messenger.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
 	foodtype = RAW
 	verb_say = "squeaks"
 	verb_yell = "squeaks"

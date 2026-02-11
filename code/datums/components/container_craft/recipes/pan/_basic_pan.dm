@@ -53,14 +53,8 @@
 
 /datum/container_craft/pan/truffle
 	name = "Fried Truffles"
-	requirements = list(/obj/item/reagent_containers/food/snacks/truffles = 1)
+	wildcard_requirements =  list(/obj/item/reagent_containers/food/snacks/truffles = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/truffle
-	cooked_smell = /datum/pollutant/food/truffles
-
-/datum/container_craft/pan/truffle/toxic
-	hides_from_books = TRUE
-	requirements = list(/obj/item/reagent_containers/food/snacks/toxicshrooms = 1)
-	output = /obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
 	cooked_smell = /datum/pollutant/food/truffles
 
 /datum/container_craft/pan/fish
@@ -216,7 +210,7 @@
 
 /datum/container_craft/pan/frysteak
 	name = "Fry Steak"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/frysteak
 	cooked_smell = /datum/pollutant/food/fried_meat
 
@@ -255,13 +249,6 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	cooked_smell = /datum/pollutant/food/griddlecake
-
-/datum/container_craft/pan/griddlecakepoisonberry
-	name = "Jacksberry Griddlecake"
-	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/poisonberrygriddlecake_raw = 1)
-	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry_poison
-	cooked_smell = /datum/pollutant/food/griddlecake
-	hides_from_books = TRUE
 
 /datum/container_craft/pan/fried_messenger
 	name = "Fried Messenger"

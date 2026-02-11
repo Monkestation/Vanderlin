@@ -569,23 +569,21 @@ All foods are distributed among various categories. Use common sense.
 	add_overlay(filling)
 
 // initialize_cooked_food() is called when microwaving the food
-/obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(obj/item/reagent_containers/food/snacks/S, cooking_efficiency = 1)
-	if(reagents)
-		reagents.trans_to(S, reagents.total_volume)
-	if(S.bonus_reagents && S.bonus_reagents.len)
-		for(var/r_id in S.bonus_reagents)
-			var/amount = S.bonus_reagents[r_id] * cooking_efficiency
-			if(r_id == /datum/reagent/consumable/nutriment || r_id == /datum/reagent/consumable/nutriment/vitamin)
+/obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(list/obj/item/reagent_containers/food/snacks/outputs, cooking_efficiency = 1)
+	for(var/obj/item/reagent_containers/food/snacks/S in outputs)
+		if(reagents)
+			for(var/datum/reagent/R in reagents.reagent_list)
+				if(istype(R, /datum/reagent/consumable/nutriment))
+					continue
+				reagents.trans_id_to(S, R.type, R.volume / outputs.len)
+			for(var/r_id in bonus_reagents)
+				var/amount = bonus_reagents[r_id] * cooking_efficiency / outputs.len
 				S.reagents.add_reagent(r_id, amount)
-			else
-				S.reagents.add_reagent(r_id, amount)
-
-	if(transfers_tastes)
-		S.foodtype |= foodtype
-		S.tastes |= tastes
-
-	S.filling_color = filling_color
-	S.update_snack_overlays(src)
+		if(transfers_tastes)
+			S.foodtype |= foodtype
+			S.tastes |= tastes
+		S.filling_color = filling_color
+		S.update_snack_overlays(src)
 
 /obj/item/reagent_containers/food/snacks/proc/changefood(path, mob/living/eater)
 	if(!path || !eater)
@@ -671,7 +669,7 @@ All foods are distributed among various categories. Use common sense.
 	name = "burned mess"
 	desc = ""
 	icon_state = "badrecipe"
-	list_reagents = list(/datum/reagent/toxin/bad_food = 30)
+	list_reagents = list(/datum/reagent/toxin/bad_food = 10, /datum/reagent/consumable/nutriment = SNACK_POOR)
 	filling_color = "#8B4513"
 	faretype = FARE_IMPOVERISHED
 	foodtype = GROSS

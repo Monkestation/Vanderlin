@@ -30,14 +30,15 @@
 
 	return ..()
 
-/datum/dna/proc/transfer_identity(mob/living/carbon/destination, update_prints)
+/datum/dna/proc/transfer_identity(mob/living/carbon/destination, set_species=TRUE)
 	if(!istype(destination))
 		return
 	destination.dna.unique_enzymes = unique_enzymes
 	destination.dna.unique_identity = unique_identity
 	destination.dna.human_blood_type = human_blood_type
 	destination.dna.organ_dna = organ_dna
-	destination.set_species(species.type, icon_update=0)
+	if(set_species)
+		destination.set_species(species.type, icon_update=0)
 	destination.dna.body_markings = deepCopyList(body_markings)
 	destination.dna.features = features.Copy()
 	destination.dna.real_name = real_name

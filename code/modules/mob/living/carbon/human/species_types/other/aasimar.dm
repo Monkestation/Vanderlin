@@ -85,7 +85,7 @@
 
 	enflamed_icon = "widefire"
 
-	meat = /obj/item/natural/stone
+	meat = list(/obj/item/natural/stone = 1)
 
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,

@@ -744,7 +744,7 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 	)
 	init_types = list(
 		/obj/item/reagent_containers/food/snacks/meat/steak,
-		/obj/item/reagent_containers/food/snacks/meat/human,
+		/obj/item/reagent_containers/food/snacks/meat/steak/human,
 		/obj/item/reagent_containers/food/snacks/meat/fatty,
 		/obj/item/reagent_containers/food/snacks/meat/strange,
 		/obj/item/reagent_containers/food/snacks/meat/poultry,
