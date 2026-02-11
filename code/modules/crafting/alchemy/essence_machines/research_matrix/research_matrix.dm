@@ -24,7 +24,7 @@
 	current_user = null
 	return ..()
 
-/obj/machinery/essence/research_matrix/attack_hand(mob/user, params)
+/obj/machinery/essence/research_matrix/attack_hand(mob/user, list/modifiers)
 	current_user = WEAKREF(user)
 	open_research_interface(user)
 
@@ -49,7 +49,7 @@
 
 	return TRUE
 
-/obj/machinery/essence/research_matrix/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/research_matrix/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_connector))
 		return ..()
 

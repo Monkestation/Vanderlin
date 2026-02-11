@@ -304,7 +304,7 @@
 /obj/item/flashlight/flare/torch/lantern/psycenser/fire_act(added, maxstacks)
 	return
 
-/obj/item/flashlight/flare/torch/lantern/psycenser/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flashlight/flare/torch/lantern/psycenser/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()	//We smashed a guy with it turned on. Bad idea!
 	if(ismob(A) && on && (user.used_intent.type == /datum/intent/flail/strike/smash/golgotha) && user.cmode)
 		user.visible_message(span_warningbig("You see an oddly bright spark before it detonates!"))
@@ -586,7 +586,7 @@
 					cursedblood = 3
 				if(M.mind.has_antag_datum(/datum/antagonist/werewolf/lesser, FALSE))
 					cursedblood = 2
-				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lesser, FALSE))
+				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lords_spawn, FALSE))
 					cursedblood = 1
 				if(M.mind.has_antag_datum(/datum/antagonist/vampire, FALSE))
 					cursedblood = 2
@@ -597,7 +597,7 @@
 		else
 			working = FALSE
 
-/obj/item/inqarticles/indexer/attack(mob/living/M, mob/living/user)
+/obj/item/inqarticles/indexer/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
 		to_chat(user, span_warning("I don't know how to use this."))
@@ -873,7 +873,7 @@
 			user.visible_message(span_warning("[user] stops rethreading the [src]."))
 		return TRUE
 
-/obj/item/inqarticles/garrote/afterattack(mob/living/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/inqarticles/garrote/afterattack(mob/living/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	var/mob/living/garrote_victim = victim?.resolve()
 	if(istype(user.used_intent, /datum/intent/garrote/grab))	// Grab your target first.
@@ -990,7 +990,6 @@
 	grid_height = 64
 	var/worn = FALSE
 	var/bagging = FALSE
-	var/headgear
 
 /obj/item/clothing/head/inqarticles/blackbag/proc/bagsound(mob/living/M)
 	if(bagging)
@@ -1005,49 +1004,49 @@
 		if(bagging)
 			addtimer(CALLBACK(src, PROC_REF(bagsound), M), timer)
 
-/obj/item/clothing/head/inqarticles/blackbag/attack(mob/living/M, mob/living/user)
+/obj/item/clothing/head/inqarticles/blackbag/attack(mob/living/target, mob/living/user, list/modifiers)
 	. = ..()
-	if(!iscarbon(M))
+	if(!iscarbon(target))
 		return
-	if(HAS_TRAIT(M, TRAIT_BAGGED))
+	if(HAS_TRAIT(target, TRAIT_BAGGED))
 		to_chat(user, span_warning("They've already been bagged."))
 		return
-	headgear = M.get_item_by_slot(ITEM_SLOT_HEAD)
+	var/obj/item/headgear = target.get_item_by_slot(ITEM_SLOT_HEAD)
 	var/trained = FALSE
 	var/timetobag = 8 SECONDS
 	if(HAS_TRAIT(user, TRAIT_BLACKBAGGER))
 		trained = TRUE
 		timetobag = 4 SECONDS
-	user.visible_message(span_danger("[user] goes to [trained ? "expertly" : "clumsily"] black bag [M]!"))
+	user.visible_message(span_danger("[user] goes to [trained ? "expertly" : "clumsily"] black bag [target]!"))
 	/*
-	if(HAS_TRAIT(M, TRAIT_GRABIMMUNE))
-		user.visible_message(span_danger("[M] slips past [user]'s attempt to black bag them!"))
-		playsound(M, pick('sound/misc/blackbag.ogg','sound/misc/blackbag2.ogg','sound/misc/blackbag3.ogg','sound/misc/blackbag4.ogg','sound/misc/blackbag5.ogg'), 100, TRUE, 4)
+	if(HAS_TRAIT(target, TRAIT_GRABIMMUNE))
+		user.visible_message(span_danger("[target] slips past [user]'s attempt to black bag them!"))
+		playsound(target, pick('sound/misc/blackbag.ogg','sound/misc/blackbag2.ogg','sound/misc/blackbag3.ogg','sound/misc/blackbag4.ogg','sound/misc/blackbag5.ogg'), 100, TRUE, 4)
 		return
 	*/
-	if(!M.stat)
+	if(!target.stat)
 		/* if(HAS_TRAIT(user, TRAIT_BLACKBAGGER) && !M.cmode) It was too much to handle. Too cold to hold.
 			bagging = TRUE
-			bagsound(M)
-			M.transferItemToLoc(headgear, src)
-			M.equip_to_slot(src, SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
+			bagsound(target)
+			headgear.doStrip(user, target)
+			target.equip_to_slot(src, SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 			bagging = FALSE
 		else*/
 		bagging = TRUE
-		bagcheck(M)
-		if(do_after(user, timetobag, M))
+		bagcheck(target)
+		if(do_after(user, timetobag, target))
 			bagging = FALSE
-			M.transferItemToLoc(headgear, src)
-			M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
+			headgear.doStrip(user, target)
+			target.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 		else
 			bagging = FALSE
 	else
 		bagging = TRUE
-		bagcheck(M)
-		if(do_after(user, timetobag / 2, M))
+		bagcheck(target)
+		if(do_after(user, timetobag / 2, target))
 			bagging = FALSE
-			M.transferItemToLoc(headgear, src)
-			M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
+			headgear.doStrip(user, target)
+			target.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 		else
 			bagging = FALSE
 
@@ -1068,14 +1067,6 @@
 		worn = FALSE
 		update_integrity(max_integrity)
 		REMOVE_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
-		user.equip_to_slot(headgear, ITEM_SLOT_HEAD)
-		var/list/datum/wound/w_List = user.get_wounds()
-		if(w_List.len)
-			for(var/datum/wound/targetwound in w_List)
-				if (istype(targetwound, /datum/wound/dismemberment))
-					user.dropItemToGround(headgear)
-					return
-		headgear = initial(headgear)
 		playsound(user, pick('sound/misc/blackunbag.ogg'), 100, TRUE, 4)
 		user.emote("gasp", forced = TRUE)
 		return
@@ -1280,7 +1271,7 @@
 	addtimer(CALLBACK(user, GLOBAL_PROC_REF(playsound), user, 'sound/items/blackeye.ogg', 100, FALSE), 4 SECONDS)
 	addtimer(TRAIT_CALLBACK_REMOVE(user, TRAIT_NOSSDINDICATOR, "blackmirror"), 4 SECONDS)
 
-/obj/item/inqarticles/bmirror/attack(mob/living/carbon/human/attacked, mob/living/carbon/human/user, params)
+/obj/item/inqarticles/bmirror/attack(mob/living/carbon/human/attacked, mob/living/carbon/human/user, list/modifiers)
 	if(!istype(attacked) || !istype(user))
 		return ..()
 

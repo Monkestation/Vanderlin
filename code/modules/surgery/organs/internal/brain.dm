@@ -81,7 +81,7 @@
 		L.mind.transfer_to(brainmob)
 //	to_chat(brainmob, "<span class='notice'>I feel slightly disoriented. That's normal when you're just a brain.</span>")
 
-/obj/item/organ/brain/attackby(obj/item/O, mob/user, params)
+/obj/item/organ/brain/attackby(obj/item/O, mob/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_MELEE)
 
 	if((organ_flags & ORGAN_FAILING) && O.is_drainable()) //attempt to heal the brain
@@ -132,7 +132,7 @@
 		else
 			. += "<span class='info'>This one is completely devoid of life.</span>"
 
-/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user)
+/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(!istype(C))
 		return ..()
 

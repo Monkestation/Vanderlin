@@ -10,7 +10,7 @@
 	. = ..()
 	icon_state = "clod[rand(1,2)]"
 
-/obj/item/natural/dirtclod/attackby(obj/item/W, mob/user, params)
+/obj/item/natural/dirtclod/attackby(obj/item/W, mob/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/S = W
 		if(!S.heldclod && user.used_intent.type == /datum/intent/shovelscoop)
@@ -40,7 +40,7 @@
 			qdel(src)
 			new /obj/structure/fluff/clodpile(T)
 
-/obj/item/natural/dirtclod/attack_self(mob/living/user, params)
+/obj/item/natural/dirtclod/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] scatters [src].</span>")
 	qdel(src)
 
@@ -58,7 +58,7 @@
 	. = ..()
 	dir = pick(GLOB.cardinals)
 
-/obj/structure/fluff/clodpile/attackby(obj/item/W, mob/user, params)
+/obj/structure/fluff/clodpile/attackby(obj/item/W, mob/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/S = W
 		if(user.used_intent.type == /datum/intent/shovelscoop)

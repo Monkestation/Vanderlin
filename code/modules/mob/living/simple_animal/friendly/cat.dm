@@ -59,7 +59,7 @@
 	if(prob(50))
 		gender = FEMALE
 	AddElement(/datum/element/ai_retaliate)
-	verbs += /mob/living/proc/lay_down
+	add_verb(src, /mob/living/proc/lay_down)
 	AddComponent(\
 			/datum/component/breed,\
 			list(/mob/living/simple_animal/pet/cat),\

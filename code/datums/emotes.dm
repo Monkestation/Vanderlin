@@ -61,9 +61,12 @@
 	if(targetted)
 		var/list/mobsadjacent = list()
 		var/mob/chosenmob
-		for(var/mob/living/M in range(user, 2))
-			if(M != user)
-				mobsadjacent += M
+		for(var/mob/living/target_mob in view(user, 2))
+			if(target_mob == user)
+				continue
+			if(target_mob.rogue_sneaking) // No detecting sneaky people.
+				continue
+			mobsadjacent += target_mob
 		if(length(mobsadjacent))
 			chosenmob = browser_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
 		if(istype(chosenmob))

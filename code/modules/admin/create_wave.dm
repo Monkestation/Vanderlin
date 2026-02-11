@@ -2365,10 +2365,10 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				continue
 			o_wrists_options += "<option value='[wrists]'>[wrists::name]</option>"
 
-		for(var/obj/item/clothing/type as anything in subtypesof(/obj/item/clothing/shirt) + subtypesof(/obj/item/clothing/armor))
-			if(IS_ABSTRACT(type))
+		for(var/obj/item/clothing/shirt as anything in subtypesof(/obj/item/clothing/shirt) + subtypesof(/obj/item/clothing/armor))
+			if(IS_ABSTRACT(shirt))
 				continue
-			o_shirt_options += "<option value='[type]'>[type::name]</option>"
+			o_shirt_options += "<option value='[shirt]'>[shirt::name]</option>"
 
 		for(var/obj/item/clothing/pants/pants as anything in subtypesof(/obj/item/clothing/pants))
 			if(IS_ABSTRACT(pants))

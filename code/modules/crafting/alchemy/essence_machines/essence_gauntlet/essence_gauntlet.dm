@@ -14,7 +14,7 @@
 	. = ..()
 	remove_essence_spells(user)
 
-/obj/item/clothing/gloves/essence_gauntlet/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/gloves/essence_gauntlet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -74,7 +74,7 @@
 /obj/item/clothing/gloves/essence_gauntlet/proc/check_gauntlet_validity(mob/user)
 	return user && src.loc == user
 
-/obj/item/clothing/gloves/essence_gauntlet/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/gloves/essence_gauntlet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 		if(!vial.contained_essence || vial.essence_amount <= 0)
@@ -165,6 +165,8 @@
 			return /datum/thaumaturgical_essence/light
 		if(/datum/attunement/life)
 			return /datum/thaumaturgical_essence/life
+		if(/datum/attunement/polymorph)
+			return /datum/thaumaturgical_essence/chaos
 	return null
 
 /obj/item/clothing/gloves/essence_gauntlet/proc/get_available_essence_types()

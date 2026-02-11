@@ -116,8 +116,8 @@
 	weight = 100
 
 /datum/special_trait/beautiful/on_apply(mob/living/carbon/human/character, silent)
-	REMOVE_TRAIT(character, TRAIT_UGLY, TRAIT_GENERIC)
-	REMOVE_TRAIT(character, TRAIT_FISHFACE, TRAIT_GENERIC)
+	REMOVE_TRAIT(character, TRAIT_UGLY, BE_SPECIAL_TRAIT)
+	REMOVE_TRAIT(character, TRAIT_FISHFACE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_BEAUTIFUL, "[type]")
 
 //positive
@@ -486,7 +486,7 @@
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
 	character.add_quirk(/datum/quirk/vice/maniac)
-	character.verbs |= /mob/living/carbon/human/proc/torture_victim
+	add_verb(character, /mob/living/carbon/human/proc/torture_victim)
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
 //negative
@@ -505,7 +505,7 @@
 
 /datum/special_trait/ugly/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_UGLY, "[type]")
-	REMOVE_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+	REMOVE_TRAIT(character, TRAIT_BEAUTIFUL, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/nopouch
 	name = "No Pouch"
@@ -788,7 +788,7 @@
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
 			weapon = /obj/item/weapon/sword/sabre/noc
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			ADD_TRAIT(character, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+			ADD_TRAIT(character, TRAIT_DUALWIELDER, BE_SPECIAL_TRAIT)
 		if(/datum/patron/divine/dendor)
 			psycross = /obj/item/clothing/neck/psycross/silver/dendor
 			helmet = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
@@ -809,7 +809,7 @@
 			weapon = /obj/item/weapon/knife/dagger/steel/pestrasickle
 			character.mind.special_items["Second Weapon"] = /obj/item/weapon/knife/dagger/steel/pestrasickle
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			ADD_TRAIT(character, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+			ADD_TRAIT(character, TRAIT_DUALWIELDER, BE_SPECIAL_TRAIT)
 			character.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
 			character.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
 		if(/datum/patron/divine/eora)
@@ -819,7 +819,7 @@
 			weapon = /obj/item/weapon/sword/rapier/eora
 			character.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 			character.mind.special_items["Eora's Gift"] = /obj/item/clothing/head/flowercrown/rosa
-			ADD_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(character, TRAIT_BEAUTIFUL, BE_SPECIAL_TRAIT)
 		if(/datum/patron/divine/ravox)
 			psycross = /obj/item/clothing/neck/psycross/silver/ravox
 			helmet = /obj/item/clothing/head/helmet/heavy/ravoxhelm
@@ -884,8 +884,8 @@
 	weight = 25
 
 /datum/special_trait/smelly/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_STINKY, TRAIT_GENERIC)
-	ADD_TRAIT(character, TRAIT_DEADNOSE, TRAIT_GENERIC)
+	ADD_TRAIT(character, TRAIT_STINKY, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_DEADNOSE, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/keenears
 	name = "Keen Ears"
@@ -933,7 +933,7 @@
 	character.update_transform()
 	character.RemoveElement(/datum/element/footstep, character.footstep_type, 1, -6)
 	character.AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
-	character.verbs |= /mob/living/carbon/human/proc/emote_burp_loud
+	add_verb(character, /mob/living/carbon/human/proc/emote_burp_loud)
 	var/datum/voicepack/glutton/sound_m = new()
 	var/datum/voicepack/glutton/sound_f = new()
 	sound_m.parent_datum = character.dna.species.soundpack_m
@@ -952,7 +952,7 @@
 
 /mob/living/carbon/human/proc/emote_burp_loud()
 	set name = "Gluttonous Burp"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("burploud", intentional = TRUE)
 
@@ -962,7 +962,7 @@
 	weight = 50
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, BE_SPECIAL_TRAIT)
 	character.inspiration = new /datum/inspiration(character)
 	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
 

@@ -94,7 +94,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		if(!I)
 			return
 
-		var/time_to_unbandage = 5 SECONDS * (1 - (usr.get_skill_level(/datum/skill/misc/medicine) * 0.15))
+		var/time_to_unbandage = 5 SECONDS * (1 - (usr.get_skill_level(/datum/skill/misc/medicine, TRUE) * 0.15))
 		if(usr == src)
 			usr.visible_message(span_warning("[usr] starts unbandaging [usr.p_their()] [L.name]."),span_warning("I start unbandaging [L.name]..."))
 		else

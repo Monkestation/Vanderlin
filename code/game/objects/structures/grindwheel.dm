@@ -8,7 +8,7 @@
 	blade_dulling = DULLING_BASH
 	max_integrity = 400
 
-/obj/structure/grindwheel/attackby(obj/item/I, mob/living/user, params)
+/obj/structure/grindwheel/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(I.max_blade_int)
 		playsound(src,'sound/foley/grindblade.ogg', 100, FALSE)
 		if(do_after(user, 4.1 SECONDS, src)) //oddly specific time
@@ -19,7 +19,7 @@
 		return
 	if(!has_world_trait(/datum/world_trait/delver))
 		if(istype(I, /obj/item/grown/log/tree/small))
-			var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+			var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
 			var/wood_time = (4 SECONDS - (skill_level * 5))
 			playsound(src, pick('sound/misc/slide_wood (2).ogg', 'sound/misc/slide_wood (1).ogg'), 100, FALSE)
 			if(do_after(user, wood_time, src))

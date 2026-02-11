@@ -38,7 +38,7 @@
 			new buildstacktype(loc,buildstackamount)
 	..()
 
-/obj/structure/toilet/attackby(obj/item/I, mob/living/user, params)
+/obj/structure/toilet/attackby(obj/item/I, mob/living/user, list/modifiers)
 	add_fingerprint(user)
 	if(I.tool_behaviour == TOOL_CROWBAR)
 		to_chat(user, "<span class='notice'>I start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]...</span>")

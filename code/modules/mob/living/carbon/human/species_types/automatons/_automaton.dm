@@ -194,7 +194,7 @@
 	for(var/datum/action/action as anything in actions)
 		C.add_spell(action)
 
-	C.verbs += given_voices
+	add_verb(C, given_voices)
 	C.add_movespeed_modifier("automaton", multiplicative_slowdown = 0.9)
 
 /datum/species/automaton/on_species_loss(mob/living/carbon/C)

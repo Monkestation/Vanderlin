@@ -13,7 +13,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	trainable_skills = list(/datum/skill/misc/medicine)
+	trainable_skills = list(/datum/skill/misc/medicine = 0.1)
 	max_apprentices = 2
 	apprentice_name = "Feldsher-in-training"
 	can_have_apprentices = TRUE

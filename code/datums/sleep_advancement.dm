@@ -508,7 +508,7 @@
 	var/list/all_possible = list(
 		/datum/antagonist/vampire/lord,
 		/datum/antagonist/vampire,
-		/datum/antagonist/vampire/lesser,
+		/datum/antagonist/vampire/lords_spawn,
 		/datum/antagonist/lich,
 		/datum/antagonist/werewolf,
 		/datum/antagonist/werewolf/lesser,

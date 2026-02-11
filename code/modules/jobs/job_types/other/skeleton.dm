@@ -114,8 +114,8 @@
 		spawned.dna.species.native_language = "Zizo Chant"
 		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
-	spawned.verbs |= /mob/living/carbon/human/proc/praise
-	spawned.verbs |= /mob/living/carbon/human/proc/communicate
+	add_verb(spawned, /mob/living/carbon/human/proc/praise)
+	add_verb(spawned, /mob/living/carbon/human/proc/communicate)
 
 
 /* BASIC SKELETON OUTFIT */

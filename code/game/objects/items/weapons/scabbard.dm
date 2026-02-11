@@ -140,6 +140,11 @@
 	anvilrepair = /datum/skill/craft/carpentry
 	associated_skill = /datum/skill/combat/swords
 
+/obj/item/weapon/scabbard/cane/courtphysician
+	name = "fancy cane"
+	desc = "A decorated cane bearing the visage of a vulture."
+	icon_state = "doccanesheath"
+
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)

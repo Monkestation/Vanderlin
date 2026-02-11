@@ -61,7 +61,7 @@
 			mob.apply_damage(damage_on_contact, BRUTE)
 			to_chat(mob, "<span class='danger'>Coral shard fly into you!</span>")
 
-/obj/structure/coral_formation/attackby(obj/item/W, mob/user, params)
+/obj/structure/coral_formation/attackby(obj/item/W, mob/user, list/modifiers)
 	. = ..()
 	health -= W.force
 	if(health <= 0)
