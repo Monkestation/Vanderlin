@@ -22688,6 +22688,12 @@
 /obj/effect/mapping_helpers/access/keyset/town/tailor,
 /turf/open/floor/wood,
 /area/indoors/town)
+"tPX" = (
+/obj/structure/fluff/walldeco/sign/tailorsign{
+	pixel_y = 0
+	},
+/turf/open/openspace,
+/area/outdoors/town)
 "tPY" = (
 /obj/structure/table/wood/plain_alt,
 /obj/structure/fluff/millstone,
@@ -26608,6 +26614,12 @@
 "xux" = (
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep/throne)
+"xuJ" = (
+/obj/structure/fluff/walldeco/sign/tailorsign{
+	pixel_y = -8
+	},
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/town)
 "xuQ" = (
 /obj/item/gem/green,
 /turf/open/floor/tile/checker,
@@ -122838,7 +122850,7 @@ iHi
 sQG
 hjR
 jXg
-jXg
+tPX
 jXg
 jXg
 jXg
@@ -125270,7 +125282,7 @@ mlk
 uwM
 uwM
 rnL
-mlk
+xuJ
 oQv
 iHi
 dcH
