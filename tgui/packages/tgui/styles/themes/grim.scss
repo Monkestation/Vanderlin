@@ -48,15 +48,13 @@
   // Components
   --section-separator-color: #9c807d;
 
-
-
-  --button-color-transparent: hsl(from var(--color-text) h s l / 0.);
+  --button-color-transparent: hsl(from var(--color-text) h s l / 0.8);
   --button-background-default: #791717;
-  --button-background-selected: #ae3636;
+  --button-background-selected: var(--color-primary);
 
   .Button {
-    transition: all 0.5s;
-    --color-text: #ae3636;
+    transition: all 0.3s;
+    --color-text: var(--color-primary);
   }
 
   .Button--color--transparent {
