@@ -37,9 +37,6 @@
 		return ..()
 
 /obj/structure/noticeboard/interact(mob/user)
-	ui_interact(user)
-
-/obj/structure/noticeboard/ui_interact(mob/user)
 	. = ..()
 	var/auth = TRUE
 	var/dat = "<B>[name]</B><BR>"

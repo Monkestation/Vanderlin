@@ -1,7 +1,8 @@
 // Verbs
-/mob/verb/returntolobby()
+
+/mob/proc/returntolobby()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 
 	GLOB.actors_list -= mobid // admin removed - get him outta here.
@@ -29,10 +30,10 @@
 		qdel(M)
 		return
 
-	client?.verbs -= /client/proc/descend
 	M.key = key
 	qdel(src)
 	return
+
 
 // shit that eventually will need moved elsewhere
 /obj/item/flashlight/flare/torch/lantern/shrunken

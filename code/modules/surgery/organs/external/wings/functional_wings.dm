@@ -244,11 +244,10 @@
 		animate(owner, pixel_z = prev_pixel_z, alpha = prev_alpha, time = 1.2 SECONDS, easing = EASE_IN, flags = ANIMATION_PARALLEL)
 		animate(owner, transform = original, time = 1.2 SECONDS, easing = EASE_IN, flags = ANIMATION_PARALLEL)
 
-	remove_signals()
-
+	cancel_flight()
 	build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 
-/datum/action/item_action/organ_action/use/flight/proc/remove_signals()
+/datum/action/item_action/organ_action/use/flight/proc/cancel_flight()
 	if(allows_z_rise)
 		REMOVE_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
 	else
@@ -286,7 +285,7 @@
 /datum/action/item_action/organ_action/use/flight/proc/fall(datum/source)
 	SIGNAL_HANDLER
 
-	remove_signals()
+	cancel_flight()
 
 	build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 

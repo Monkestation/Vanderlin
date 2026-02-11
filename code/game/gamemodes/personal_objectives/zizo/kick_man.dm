@@ -33,7 +33,7 @@
 
 /datum/objective/personal/kick_groin/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, OBJECTIVE_TRAIT)
 	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_STR, 1)
 
 /datum/objective/personal/kick_groin/update_explanation_text()

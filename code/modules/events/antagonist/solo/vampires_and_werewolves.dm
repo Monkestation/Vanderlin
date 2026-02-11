@@ -37,6 +37,11 @@
 		/datum/job/templar,
 	)
 
+/datum/round_event_control/antagonist/solo/vampires_and_werewolves/valid_for_map()
+	if(SSmapping.config.map_name != "Voyage")
+		return TRUE
+	return FALSE
+
 /datum/round_event/antagonist/solo/vampires_and_werewolves
 	var/leader = FALSE
 
