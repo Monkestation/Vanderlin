@@ -68,6 +68,26 @@
 	// This is approximate since we randomized on spawn
 	H.adjust_stat_modifier(STATMOD_QUIRK, STATKEY_INT, 3)
 
+/datum/quirk/peculiarity/ugly
+	name = "Ugly"
+	desc = "Your appearance turns heads... in all the wrong ways. With features ranging from unsightly to grotesque, you likely have yet to find anyone impressed with your looks."
+
+/datum/quirk/peculiarity/ugly/on_spawn()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+
+	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+	REMOVE_TRAIT(H, TRAIT_FISHFACE, TRAIT_GENERIC)
+
+	ADD_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
+
+/datum/quirk/peculiarity/ugly/on_remove()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+	REMOVE_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
+
 /datum/quirk/peculiarity/virgin
 	name = "Virgin"
 	desc = "YOU... ARE MAIDENLESS!! you never were good with women... or men, whether cause you are a awkward freak, or religous reasons, or simply plain unlucky, your blood remains untainted and pure."

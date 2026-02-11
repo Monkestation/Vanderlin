@@ -165,6 +165,8 @@
 			return /datum/thaumaturgical_essence/light
 		if(/datum/attunement/life)
 			return /datum/thaumaturgical_essence/life
+		if(/datum/attunement/polymorph)
+			return /datum/thaumaturgical_essence/chaos
 	return null
 
 /obj/item/clothing/gloves/essence_gauntlet/proc/get_available_essence_types()

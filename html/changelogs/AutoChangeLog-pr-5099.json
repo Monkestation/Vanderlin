@@ -1,1 +1,0 @@
-{"author":"PatapoIIIa","delete-after":true,"changes":[{"refactor":"unified grass and bush foraging logic into a shared search loop"},{"code_imp":"removed recursive do_after usage from bush interactions"},{"bugfix":"prevented repeated loot duplication during bush replenishment"},{"qol":"standardized loot generation across bush, swampweed, and pyroclastic flowers"}]}

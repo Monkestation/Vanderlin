@@ -38,9 +38,6 @@
 	name = "Cyclops (R)"
 	desc = "I lost my right eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_right/on_spawn()
 	if(!ishuman(owner))
@@ -59,9 +56,6 @@
 	name = "Cyclops (L)"
 	desc = "I lost my left eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_left/on_spawn()
 	if(!ishuman(owner))

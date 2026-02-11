@@ -906,7 +906,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	src << browse(dat, "window=reading;size=800x600;can_close=1;can_minimize=1;can_maximize=1;can_resize=1;border=0")
 
 /client/proc/manage_paintings()
-	set category = "Admin.Admin"
+	set category = "GameMaster.Interactions"
 	set name = "Manage Paintings"
 	if(!holder)
 		return

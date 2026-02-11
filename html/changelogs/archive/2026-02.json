@@ -227,5 +227,61 @@
                 "rscadd": "Gloryhound Mercenary class"
             }
         ]
+    },
+    "2026-02-11": {
+        "realforest2001": [
+            {
+                "bugfix": "People no longer have buttons they shouldn't."
+            },
+            {
+                "admin": "Admins can now force the subclass menu to trigger for players."
+            }
+        ],
+        "Siro": [
+            {
+                "rscadd": "Adds hair: Bedhead v4, Blunt Bangs and its alternate, Cornrows, Cornrows 2, Cornrow Braid, Cornrow Bun, Cornrow Tail, Hornet, and Viper."
+            }
+        ],
+        "flleeppyy": [
+            {
+                "rscadd": "Added relay chooser (Named \\\"Internet Routing Relays\\\" at the top of the window) ported from IrisStation"
+            }
+        ],
+        "PatapoIIIa": [
+            {
+                "refactor": "unified grass and bush foraging logic into a shared search loop"
+            },
+            {
+                "code_imp": "removed recursive do_after usage from bush interactions"
+            },
+            {
+                "bugfix": "prevented repeated loot duplication during bush replenishment"
+            },
+            {
+                "qol": "standardized loot generation across bush, swampweed, and pyroclastic flowers"
+            }
+        ],
+        "Ordosian": [
+            {
+                "image": "Updated Volf sprites and color variants."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed lack of PER on the stat panel."
+            },
+            {
+                "bugfix": "Alt click turf menu allows allow interaction"
+            },
+            {
+                "bugfix": "Fix assassin verb spam"
+            },
+            {
+                "bugfix": "Re-enable language menu"
+            },
+            {
+                "rscadd": "Round end timer to stat panel."
+            }
+        ]
     }
 }
