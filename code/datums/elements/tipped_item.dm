@@ -26,7 +26,7 @@
 	. = ..()
 	UnregisterSignal(source, list(COMSIG_PARENT_EXAMINE, COMSIG_ITEM_ATTACK_OBJ, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_SPEC_ATTACKEDBY))
 
-/datum/element/tipped_item/proc/check_dip(obj/item/dipper, obj/item/reagent_containers/attacked_container, mob/living/attacker, params)
+/datum/element/tipped_item/proc/check_dip(obj/item/dipper, obj/item/reagent_containers/attacked_container, mob/living/attacker, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(QDELETED(attacked_container) || !istype(attacked_container))

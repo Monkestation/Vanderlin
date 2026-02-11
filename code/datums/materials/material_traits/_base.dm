@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(material_traits, generate_material_traits())
 /proc/generate_material_traits()
 	var/list/material_traits = list()
 	for(var/datum/material_trait/trait as anything in typesof(/datum/material_trait))
-		if(is_abstract(trait))
+		if(IS_ABSTRACT(trait))
 			continue
 		material_traits |= trait
 		material_traits[trait] = new trait

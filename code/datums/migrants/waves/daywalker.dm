@@ -10,14 +10,13 @@
 	allowed_races = list(SPEC_ID_HUMEN)
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 1,
 		STATKEY_END = 2,
+		STATKEY_SPD = 2, //Giving speed for help with expert dodging at the cost of no added strength or constitution
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 3,
+		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/knives = 2,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 4,
 		/datum/skill/combat/crossbows = 3,
@@ -28,7 +27,7 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/medicine = 2,
-		/datum/skill/combat/firearms = 2,
+		///removed firearms skill, why did they even get this?
 	)
 
 	traits = list(TRAIT_DODGEEXPERT, TRAIT_STEELHEARTED)
@@ -39,7 +38,7 @@
 	. = ..()
 	spawned.virginity = TRUE
 	spawned.set_patron(/datum/patron/divine/astrata)
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 
 /datum/outfit/daywalker
 	name = "Daywalker (Migrant Wave)"
@@ -50,11 +49,19 @@
 	shirt = /obj/item/clothing/shirt/tunic/colored/black
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	shoes = /obj/item/clothing/shoes/nobleboot
-	beltl = /obj/item/flashlight/flare/torch/lantern
+	beltl = /obj/item/ammo_holder/quiver/bolt/holy
 	mask = /obj/item/clothing/face/goggles
-	beltr = /obj/item/weapon/sword/rapier
+	beltr = /obj/item/weapon/sword/silver ///Giving them something that ISNT an exact copy of the witch hunter.
 	belt = /obj/item/storage/belt/leather/steel
+	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/silver = 1,
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/rope/chain = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
+	)
 	ring = /obj/item/clothing/ring/silver
 
 /datum/migrant_wave/daywalker

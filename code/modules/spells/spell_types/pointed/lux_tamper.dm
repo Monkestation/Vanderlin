@@ -58,7 +58,7 @@
 
 	// Visual effects
 	user.visible_message(span_danger("[user] shoulders [H]'s wounds!"))
-	playsound(get_turf(user), 'sound/magic/psydonbleeds.ogg', 50, TRUE)
+	playsound(user, 'sound/magic/psydonbleeds.ogg', 50, TRUE)
 
 	new /obj/effect/temp_visual/psyheal_rogue(get_turf(H), "#487e97")
 	new /obj/effect/temp_visual/psyheal_rogue(get_turf(H), "#487e97")

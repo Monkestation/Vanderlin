@@ -328,7 +328,7 @@
 		detail_tag = "_detail"
 		user.visible_message(span_warning("[user] adds [W] to [src]."))
 		user.transferItemToLoc(W, src, FALSE, FALSE)
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 		if(loc == user && ishuman(user))
 			var/mob/living/carbon/H = user
 			H.update_inv_head()

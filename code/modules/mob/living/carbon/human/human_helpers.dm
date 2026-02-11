@@ -2,9 +2,6 @@
 /mob/living/carbon/human/proc/change_name(new_name)
 	real_name = new_name
 
-// /mob/living/carbon/human/restrained(ignore_grab)
-// 	. = ((wear_armor && wear_armor.breakouttime) || ..())
-
 /mob/living/carbon/human/check_language_hear(language)
 	var/mob/living/carbon/V = src
 	if(!language)
@@ -13,7 +10,7 @@
 		if(istype(wear_neck, /obj/item/clothing/neck/talkstone))
 			return TRUE
 	if(!has_language(language))
-		if(has_flaw(/datum/charflaw/paranoid))
+		if(has_quirk(/datum/quirk/vice/paranoid))
 			V.add_stress(/datum/stress_event/paratalk)
 
 /mob/living/carbon/human/canBeHandcuffed()
@@ -46,7 +43,7 @@
 	return "Unknown"
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
-/mob/living/carbon/human/proc/get_face_name(if_no_face="Unknown")
+/mob/living/carbon/human/proc/get_face_name(if_no_face = "Unknown")
 	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
 		return if_no_face
 	if( head && (head.flags_inv&HIDEFACE) )

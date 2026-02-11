@@ -309,7 +309,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		if(sewing?.stringamt < 1 || QDELETED(src) || QDELETED(owner) || QDELETED(doctor) || QDELETED(sewing))
 			return FALSE
 
-		playsound(owner.loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
+		playsound(owner, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 
 		if(!do_after(doctor, 5 SECONDS, owner))
 			return FALSE
@@ -327,7 +327,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!doctor || QDELETED(src))
 		return FALSE
 
-	var/healing_power = (doctor.get_skill_level(/datum/skill/misc/medicine) + 1) * 12.5
+	var/healing_power = (doctor.get_skill_level(/datum/skill/misc/medicine, TRUE) + 1) * 12.5
 	var/was_completed = FALSE
 
 	var/mob/living/patient = owner
@@ -346,7 +346,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/extra_text
 
 	if(was_completed)
-		extra_text = " Closing it."
+		extra_text = " The wound closes."
 
 	if(patient == doctor)
 		doctor.visible_message(span_notice("[doctor] sews \a [name] on [doctor.p_them()]self.[extra_text]"), span_notice("I stitch \a [name] on [affecting ? "my [affecting]" : "myself"].[extra_text]"))
@@ -638,7 +638,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	// BUT only effects value reduction not sewing progress
 	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
 	// Reduces the upgrade values by this percentage, can never fully deplete the said values
-	var/healing_power = 0.03 * healing_multiplier * ((doctor.get_skill_level(/datum/skill/misc/medicine) + 1) * 1.4) // Vibe numbers...
+	var/healing_power = 0.03 * healing_multiplier * ((doctor.get_skill_level(/datum/skill/misc/medicine, TRUE) + 1) * 1.4) // Vibe numbers...
 
 	downgrade(healing_power)
 

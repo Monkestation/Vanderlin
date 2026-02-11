@@ -114,7 +114,7 @@
 		return
 
 	zombie.cut_overlay(rotflies)
-	zombie.verbs -= /mob/living/carbon/human/proc/zombie_seek
+	remove_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
 	zombie.mind?.special_role = special_role
 	zombie.ambushable = ambushable
 	if(zombie.dna?.species)
@@ -122,8 +122,6 @@
 		zombie.dna.species.soundpack_f = soundpack_f
 	zombie.base_intents = base_intents
 	zombie.update_a_intents()
-	if(zombie.charflaw)
-		zombie.charflaw.ephemeral = FALSE
 	zombie.update_body()
 	zombie.remove_stat_modifier("[type]")
 	zombie.cmode_music = old_cmode_music
@@ -201,13 +199,11 @@
 	ambushable = zombie.ambushable
 	zombie.ambushable = FALSE
 
-	if(zombie.charflaw)
-		zombie.charflaw.ephemeral = TRUE
 	zombie.mob_biotypes |= MOB_UNDEAD
 	zombie.faction += FACTION_UNDEAD
 	zombie.faction -= FACTION_TOWN
 	zombie.faction -= FACTION_NEUTRAL
-	zombie.verbs |= /mob/living/carbon/human/proc/zombie_seek
+	add_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		if(!zombie_part.rotted && !zombie_part.skeletonized)
 			zombie_part.rotted = TRUE
@@ -279,7 +275,7 @@
 
 /mob/living/carbon/human/proc/zombie_seek()
 	set name = "Seek Brains"
-	set category = "ZOMBIE"
+	set category = "RoleUnique.Zizo"
 
 	if(!mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE

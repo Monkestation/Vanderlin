@@ -28,7 +28,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "L" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "Q" = (
 /turf/closed/wall/mineral/tent,

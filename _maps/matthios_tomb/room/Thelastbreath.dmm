@@ -490,7 +490,7 @@
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
 "gS" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "gU" = (
 /obj/structure/door/stone,
@@ -718,7 +718,7 @@
 /turf/open/floor/church,
 /area/under/tomb/indoors/church)
 "jI" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "jR" = (
 /obj/structure/door/stone,
@@ -1321,7 +1321,7 @@
 /obj/structure/floordoor/gatehatch/outer{
 	redstone_id = "trap1"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "sJ" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -1465,7 +1465,7 @@
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "trap1"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "uG" = (
 /obj/effect/decal/cleanable/blood,
@@ -1519,7 +1519,7 @@
 	redstone_id = "trap1"
 	},
 /mob/living/carbon/human/species/rousman/ambush,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "vk" = (
 /obj/structure/closet/crate/chest/gold,
@@ -1577,7 +1577,7 @@
 /obj/effect/waterfall/acid{
 	pixel_y = 32
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "wg" = (
 /obj/structure/floordoor/gatehatch/outer{
@@ -1587,7 +1587,7 @@
 	redstone_id = "trap1"
 	},
 /mob/living/carbon/human/species/rousman/ambush,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "wy" = (
 /obj/structure/chair/bench/couchablack,
@@ -2050,7 +2050,7 @@
 	redstone_id = "trap1"
 	},
 /mob/living/carbon/human/species/rousman/ambush,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "Ea" = (
 /obj/item/reagent_containers/food/snacks/badrecipe,
@@ -3505,7 +3505,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "Xz" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "XA" = (
 /turf/closed/wall/mineral/tent,

@@ -15,7 +15,7 @@
 	anchored = FALSE
 
 //Adding canvases
-/obj/structure/easel/attackby(obj/item/I, mob/user, params)
+/obj/structure/easel/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/canvas))
 		var/obj/item/canvas/C = I
 		user.dropItemToGround(C)

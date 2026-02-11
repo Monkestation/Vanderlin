@@ -8,7 +8,7 @@
 
 	has_visual_effects = FALSE
 	charge_required = FALSE
-	experience_modifer = 0
+	experience_modifier = 0
 
 	attunements = list(
 		/datum/attunement/light = 0.3,
@@ -71,7 +71,7 @@
 		return
 	if(!bird_called)
 		bird_called = TRUE
-		playsound(get_turf(cast_on), 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
+		playsound(cast_on, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
 		owned_bird = new(get_turf(cast_on))
 		owned_bird.source_spell = WEAKREF(src)
 		cast_on.put_in_hands(owned_bird)
@@ -81,7 +81,7 @@
 		owner.add_stress(/datum/stress_event/dead_bird)
 		return
 	bird_called = FALSE
-	playsound(get_turf(owned_bird), 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
+	playsound(owned_bird, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
 	owned_bird.visible_message(span_notice("The messenger bird flies away!"))
 	owned_bird = null
 

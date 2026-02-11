@@ -23,7 +23,7 @@
 	experimental_onhip = TRUE
 	sellprice = 1
 
-/obj/item/reagent_containers/glass/alchemical/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/alchemical/attackby(obj/item/I, mob/user, list/modifiers)
 	if(reagents.total_volume)
 		return
 	if(closed)
@@ -36,7 +36,7 @@
 	if(closed)
 		. += mutable_appearance(icon, "vial_cork")
 
-/obj/item/reagent_containers/glass/alchemical/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/alchemical/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -52,7 +52,7 @@
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		to_chat(user, span_notice("You thumb off the cork from [src]."))
-		playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		spillable = TRUE
 		desc += "The cork appears to be off."
 	update_appearance(UPDATE_OVERLAYS)

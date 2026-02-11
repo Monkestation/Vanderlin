@@ -4,7 +4,7 @@
 	faction = "Station"
 	total_positions = 2 // TWO GOONS!!
 	spawn_positions = 2
-	allowed_races = RACES_PLAYER_GRENZ
+	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF)
 	bypass_lastclass = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor2.ogg'
 	allowed_patrons = list(
@@ -25,6 +25,9 @@
 	same_job_respawn_delay = 30 MINUTES
 	antag_role = /datum/antagonist/purishep
 
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
@@ -36,9 +39,9 @@
 /datum/job/orthodoxist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
-	spawned.verbs |= /mob/living/carbon/human/proc/faith_test
-	spawned.verbs |= /mob/living/carbon/human/proc/view_inquisition
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
+	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
+	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)
 
 	spawned.hud_used?.shutdown_bloodpool()
 	spawned.hud_used?.initialize_bloodpool()

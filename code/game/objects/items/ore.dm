@@ -141,7 +141,7 @@
 /obj/item/ingot/examine()
 	. += ..()
 	if(currecipe)
-		. += "<span class='warning'>It is currently being worked on to become [currecipe.recipe_name].</span>"
+		. += span_warning("It is currently being worked on to become [currecipe.get_display_name()].")
 
 /obj/item/ingot/Initialize(mapload, smelt_quality)
 	. = ..()
@@ -152,7 +152,7 @@
 	metal_calc.apply_smelt_to_ingot(src, recipe_quality, TRUE)
 	qdel(metal_calc)
 
-/obj/item/ingot/attackby(obj/item/I, mob/user, params)
+/obj/item/ingot/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/weapon/tongs))
 		return ..()
 	var/obj/item/weapon/tongs/T = I
@@ -164,6 +164,14 @@
 		T.held_item = src
 		T.hott = null
 		T.update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/ingot/attack_hand_secondary(mob/user, list/modifiers)
+	if(currecipe)
+		to_chat(user, span_notice("You begin canceling the recipe of [currecipe.get_display_name()]."))
+		if(do_after(user, 5 SECONDS, src, display_over_user = TRUE))
+			currecipe = null
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	. = ..()
 
 /obj/item/ingot/Destroy()
 	if(currecipe)

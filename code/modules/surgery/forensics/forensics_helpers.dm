@@ -119,3 +119,13 @@
  */
 /atom/proc/transfer_fibers_to(atom/transfer_to)
 	transfer_to.add_fiber_list(GET_ATOM_FIBRES(src))
+
+/*
+ * Reset the fingerprints on all the bodyparts of a mob.
+ */
+/mob/living/proc/reset_limb_fingerprints()
+	return
+
+/mob/living/carbon/reset_limb_fingerprints()
+	for(var/obj/item/bodypart/L in bodyparts)
+		L.reset_fingerprint()

@@ -25,13 +25,13 @@
 	if(!ishuman(target) || !target.mind)
 		return UNAFFECTED
 	var/datum/antagonist/vampire/vamp_datum = target.mind.has_antag_datum(/datum/antagonist/vampire)
-	var/datum/antagonist/werewolf/wolf_datum = target.mind.has_antag_datum(/datum/antagonist/werewolf)
+	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)
 	if(istype(vamp_datum, /datum/antagonist/vampire/lord))
 		var/datum/antagonist/vampire/lord/lord_datum = vamp_datum
 		return (!lord_datum.ascended) ? AFFECTED_VLORD : UNAFFECTED
 	if(!vamp_datum && !wolf_datum)
 		return UNAFFECTED
-	if(HAS_TRAIT(target, TRAIT_WEREWOLF_RAGE) || vamp_datum)
+	if(wolf_datum?.transformed || vamp_datum)
 		return AFFECTED
 	return UNAFFECTED
 
@@ -109,10 +109,9 @@
 	. = ..()
 	stacks = 1
 	update_alert()
-	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
-	if(wolf_datum)
+	if(owner.stat != DEAD && IS_WEREWOLF(owner))
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 	return TRUE
 
 /datum/status_effect/debuff/silver_bane/on_remove()
@@ -134,10 +133,9 @@
 		trigger_stun()
 	else
 		update_alert()
-	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
-	if(wolf_datum)
+	if(owner.stat != DEAD && IS_WEREWOLF(owner))
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 
 /datum/status_effect/debuff/silver_bane/proc/trigger_stun()
 	if(!owner || is_stunned)
@@ -176,7 +174,8 @@
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane
 	name = "Silver's Bane"
-	desc = ""
+	desc = "My BANE!"
+	icon_state = "hunger4"
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane/proc/update_info(stacks, is_stunned)
 	if(is_stunned)

@@ -38,11 +38,11 @@
 			new buildstacktype(loc,buildstackamount)
 	..()
 
-/obj/structure/toilet/attackby(obj/item/I, mob/living/user, params)
+/obj/structure/toilet/attackby(obj/item/I, mob/living/user, list/modifiers)
 	add_fingerprint(user)
 	if(I.tool_behaviour == TOOL_CROWBAR)
 		to_chat(user, "<span class='notice'>I start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]...</span>")
-		playsound(loc, 'sound/blank.ogg', 50, TRUE)
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		if(I.use_tool(src, user, 30))
 			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>I [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "<span class='hear'>I hear grinding porcelain.</span>")
 			cistern = !cistern

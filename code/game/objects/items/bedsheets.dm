@@ -28,7 +28,7 @@ LINEN BINS
 	. = ..()
 	AddElement(/datum/element/bed_tuckable, 0, 0, 0)
 
-/obj/item/bedsheet/attack_self(mob/living/user, params)
+/obj/item/bedsheet/attack_self(mob/living/user, list/modifiers)
 	if(!user.CanReach(src))		//No telekenetic grabbing.
 		return
 	if(!user.resting)
@@ -81,12 +81,13 @@ LINEN BINS
 /obj/item/bedsheet/attack_hand(mob/user, params)
 	if(!bed_tucked)
 		return ..()
-	to_chat(user, span_notice("You start to remove the [src] from the [bed_tucked]."))
 	if(do_after(user, 2 SECONDS, src))
 		var/obj/structure/bed/bed = locate() in loc
 		if(bed)
+			to_chat(user, span_notice("You start to remove \the [src] from \the [bed]."))
 			bed.sheet_tucked = FALSE
 			bed.sheet_on = FALSE
+			bed_tucked = FALSE
 		return ..()
 /obj/item/bedsheet/cloth
 	desc = ""

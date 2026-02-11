@@ -34,7 +34,7 @@
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_PER = 1,
-		STATKEY_INT = 3,
+		STATKEY_INT = 1,
 		STATKEY_END = 3,
 		STATKEY_SPD = 1
 	)
@@ -74,7 +74,7 @@
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
 
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/forestwarden
 	name = "Forest Warden"

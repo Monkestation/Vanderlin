@@ -71,7 +71,7 @@
 /obj/structure/vampire/portal/Initialize()
 	. = ..()
 	set_light(3, 2, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
-	playsound(loc, 'sound/misc/portalopen.ogg', 100, FALSE, pressure_affected = FALSE)
+	playsound(src, 'sound/misc/portalopen.ogg', 100, FALSE, pressure_affected = FALSE)
 
 	addtimer(CALLBACK(src, PROC_REF(delete)), 60 SECONDS)
 
@@ -83,7 +83,7 @@
 	. = ..()
 	if(isliving(AM))
 		for(var/obj/effect/landmark/vteleport/dest in GLOB.landmarks_list)
-			playsound(loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
+			playsound(src, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
 			AM.forceMove(dest.loc)
 			break
 
@@ -136,7 +136,7 @@
 	return ..()
 
 /* DISABLED FOR NOW
-/obj/item/clothing/neck/portalamulet/attack_self(mob/user, params)
+/obj/item/clothing/neck/portalamulet/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(alert(user, "Create a portal?", "PORTAL GEM", "Yes", "No") == "Yes")
 		uses -= 1

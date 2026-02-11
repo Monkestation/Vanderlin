@@ -12,8 +12,7 @@
 	to_chat(c, "<span class='notice'>change the direction of built objects.</span>")
 	to_chat(c, "<span class='notice'>***********************************************************</span>")
 
-/datum/buildmode_mode/basic/handle_click(client/c, params, obj/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/basic/handle_click(client/c, list/modifiers, obj/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 	var/ctrl_click = LAZYACCESS(modifiers, CTRL_CLICKED)

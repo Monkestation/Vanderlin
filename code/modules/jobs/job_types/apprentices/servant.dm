@@ -47,6 +47,9 @@
 	. = ..()
 	spawned.adjust_skillrank(/datum/skill/craft/crafting, pick(0,0,1), TRUE)
 	spawned.adjust_skillrank(/datum/skill/misc/music, pick(0,1,1), TRUE)
+	if(spawned.age == AGE_OLD)
+		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 
 /datum/outfit/servant
 	name = "Servant"
@@ -133,7 +136,7 @@
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/recipe_book/cooking = 1, TRUE)
+	backpack_contents = list(/obj/item/recipe_book/cooking = 1)
 	neck = /obj/item/key/tavern
 
 /datum/outfit/tapster/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

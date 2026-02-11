@@ -26,7 +26,7 @@
 			var/mob/living/L = target
 			var/damage = rand(gator_pawn.melee_damage_lower, gator_pawn.melee_damage_upper) + ambush_damage_bonus
 			L.apply_damage(damage, BRUTE, "chest")
-			playsound(get_turf(gator_pawn), pick(gator_pawn.attack_sound), 50, TRUE)
+			playsound(gator_pawn, pick(gator_pawn.attack_sound), 50, TRUE)
 
 		controller.set_blackboard_key(BB_GATOR_AMBUSH_COOLDOWN, world.time + 30 SECONDS)
 		controller.set_blackboard_key(BB_GATOR_IN_WATER, FALSE)

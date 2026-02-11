@@ -113,31 +113,6 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/wall
 	icon_state = "leverwall0"
 
-/obj/structure/lever/hidden
-	icon = null
-
-	//the perception DC to use this
-	var/hidden_dc = 10
-
-/obj/structure/lever/hidden/proc/feel_button(mob/living/user, ignore_dc = FALSE)
-	if(!isliving(user))
-		return
-	var/mob/living/L = user
-	// they're trained at this
-	var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
-	if(L.STAPER + bonuses >= hidden_dc || ignore_dc)
-		L.changeNext_move(CLICK_CD_MELEE)
-		user.visible_message(span_danger("[user] presses a hidden button."), span_notice("I push a hidden button."))
-		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
-		for(var/obj/structure/structure in redstone_attached)
-			INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
-		trigger_wire_network(user)
-		toggled = !toggled
-		playsound(src, 'sound/foley/lever.ogg', 100, extrarange = 3)
-
-/obj/structure/lever/hidden/onkick(mob/user) // nice try
-	return FALSE
-
 /obj/structure/lever/wall/attack_hand(mob/user)
 	. = ..()
 	icon_state = "leverwall[toggled]"
@@ -145,6 +120,52 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/wall/onkick(mob/user)
 	. = ..()
 	icon_state = "leverwall[toggled]"
+
+/obj/structure/lever/hidden
+	name = "hidden lever"
+	desc = "If you can see this... how?"
+	icon = null
+	//the perception DC to use this
+	var/hidden_dc = 10
+	//ignore the DC's with a trait
+	var/accessor_trait
+
+/obj/structure/lever/hidden/proc/feel_button(mob/living/user, ignore_dc = FALSE)
+	if(!isliving(user))
+		return
+	var/mob/living/L = user
+	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
+		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
+		if(L.STAPER + bonuses < hidden_dc)
+			return // nothing here!
+	L.changeNext_move(CLICK_CD_MELEE)
+	user.visible_message(span_danger("[user] presses a hidden button."), span_notice("I push a hidden button."))
+	user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
+	for(var/obj/structure/structure in redstone_attached)
+		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
+	trigger_wire_network(user)
+	toggled = !toggled
+	playsound(src, 'sound/foley/lever.ogg', 50)
+
+/obj/structure/lever/hidden/onkick(mob/user) // nice try
+	return FALSE
+
+/obj/structure/lever/hidden/IsObscured()
+	. = ..()
+	if(!icon)
+		return TRUE
+
+/obj/structure/lever/hidden/keep
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_KEEP_DOORS
+
+/obj/structure/lever/hidden/inquisition
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_INQUISITION_DOORS
+
+/obj/structure/lever/hidden/thieves_guild
+	hidden_dc = 13
+	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 
 /obj/structure/repeater
 	name = "repeater"
@@ -169,23 +190,23 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		to_chat(user, span_warning("I have no idea how to use [src]!"))
 		return
 	if(user.used_intent.type == INTENT_HARM)
-		playsound(loc, 'sound/combat/hits/punch/punch (1).ogg', 100, FALSE, -1)
+		playsound(src, 'sound/combat/hits/punch/punch (1).ogg', 100, FALSE, -1)
 		sleep(1)
 		switch(mode)
 			if(0)
 				mode = 1
 				say("Mode: REPEATER 5 TIMES")
-				playsound(loc, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 			if(1)
 				mode = 2
 				say("Mode: REPEATER RANDOM")
-				playsound(loc, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 			if(2)
 				mode = 0
 				say("Mode: INDEFINITE, DANGEROUS")
-				playsound(loc, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 		return
-	playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
 	linked_thing = null
 	var/list/structures = list()
 	for(var/obj/structure/adjc in get_step(src, dir).contents)
@@ -194,10 +215,10 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		structures += adjc
 	var/input = browser_input_list(user, "Choose structure to link", "REPEATER", structures)
 	if(input)
-		playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
 		if(istype(linked_thing, /obj/structure/repeater))
 			say("BZZZZZZZZ!!!")
-			playsound(loc, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+			playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 			sleep(10)
 			explosion(src, light_impact_range = 1, flame_range = 2, smoke = TRUE, soundin = pick('sound/misc/explode/bottlebomb (1).ogg','sound/misc/explode/bottlebomb (2).ogg'))
 			qdel(src)
@@ -278,7 +299,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/pressure_plate/attack_hand(mob/user)
 	. = ..()
 	if(user.used_intent.type == INTENT_HARM)
-		playsound(loc, 'sound/combat/hits/punch/punch (1).ogg', 100, FALSE, -1)
+		playsound(src, 'sound/combat/hits/punch/punch (1).ogg', 100, FALSE, -1)
 		triggerplate()
 		anchored = !anchored
 
@@ -309,7 +330,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 
 /obj/structure/activator/attack_hand(mob/user)
 	. = ..()
-	playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
 	sleep(7)
 	if(containment)
 		playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
@@ -322,7 +343,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
 
-/obj/structure/activator/attackby(obj/item/I, mob/user, params)
+/obj/structure/activator/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!containment && (istype(I, /obj/item/gun/ballistic/revolver/grenadelauncher) || istype(I, /obj/item/explosive/bottle) || istype(I, /obj/item/flint)))
 		if(!user.transferItemToLoc(I, src))
 			return ..()

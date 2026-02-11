@@ -40,7 +40,7 @@
 		/datum/skill/combat/swords = 5,
 		/datum/skill/combat/wrestling = 4,
 		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/shields = 4,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/polearms = 2,
@@ -71,7 +71,7 @@
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
 
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()

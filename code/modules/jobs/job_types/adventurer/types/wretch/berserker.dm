@@ -17,7 +17,7 @@
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/craft/tanning = 2,
@@ -51,7 +51,7 @@
 		"Sword" = /obj/item/weapon/sword/arming
 	)
 
-	var/choice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Specialisation", title = "BERSERKER")
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "BERSERKER")
 	if(!choice)
 		return
 

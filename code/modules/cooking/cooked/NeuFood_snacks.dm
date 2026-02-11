@@ -35,7 +35,7 @@
 	faretype = FARE_NEUTRAL
 	modified = TRUE
 	rotprocess = SHELFLIFE_DECENT
-	bitesize = 5
+	bitesize = 4
 
 /obj/item/reagent_containers/food/snacks/cooked/frysteak_onion
 	name = "frysteak and onions"
@@ -53,9 +53,9 @@
 	rotprocess = SHELFLIFE_DECENT
 	bitesize = 5
 
-/obj/item/reagent_containers/food/snacks/cooked/frysteak/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/cooked/frysteak/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(modified)
 		return TRUE
 	if(bitecount >0)
@@ -68,7 +68,7 @@
 			return TRUE
 		mill.icon_state = "peppermill_grind"
 		to_chat(user, "You start rubbing the steak with black pepper.")
-		playsound(get_turf(user), 'sound/foley/peppermill.ogg', 100, TRUE, -1)
+		playsound(user, 'sound/foley/peppermill.ogg', 100, TRUE, -1)
 		if(do_after(user, 3 SECONDS, src))
 			if(!mill.reagents.has_reagent(/datum/reagent/consumable/blackpepper, 1))
 				to_chat(user, "There's not enough black pepper to make anything with.")
@@ -406,10 +406,10 @@
 	faretype = FARE_FINE
 	portable = FALSE
 
-/obj/item/reagent_containers/food/snacks/cooked/roastchicken/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/food/snacks/cooked/roastchicken/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/obj/item/reagent_containers/peppermill/mill = I
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(modified)
 		return TRUE
 	if(bitecount >0)
@@ -421,7 +421,7 @@
 			return TRUE
 		mill.icon_state = "peppermill_grind"
 		to_chat(user, "You start rubbing the bird roast with black pepper.")
-		playsound(get_turf(user), 'sound/foley/peppermill.ogg', 100, TRUE, -1)
+		playsound(user, 'sound/foley/peppermill.ogg', 100, TRUE, -1)
 		if(do_after(user,3 SECONDS, src))
 			if(!mill.reagents.has_reagent(/datum/reagent/consumable/blackpepper, 1))
 				to_chat(user, "There's not enough black pepper to make anything with.")

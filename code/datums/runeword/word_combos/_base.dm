@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(all_runewords, initialize_runewords())
 /proc/initialize_runewords()
 	var/list/runewords = list()
 	for(var/datum/runeword/runeword as anything in subtypesof(/datum/runeword))
-		if(is_abstract(runeword))
+		if(IS_ABSTRACT(runeword))
 			continue
 		runewords |= runeword
 		runewords[runeword] = new runeword
@@ -56,7 +56,7 @@ GLOBAL_LIST_INIT(all_runewords, initialize_runewords())
 
 	UnregisterSignal(attached_item, COMSIG_ITEM_AFTERATTACK)
 
-/datum/runeword/proc/handle_afterattack(obj/item/source, atom/target, mob/living/user, proximity_flag, click_parameters)
+/datum/runeword/proc/handle_afterattack(obj/item/source, atom/target, mob/living/user, proximity_flag, list/modifiers)
 	if(!proximity_flag || !isliving(target) || !isliving(user))
 		return
 

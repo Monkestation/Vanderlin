@@ -20,12 +20,13 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 3,
+		/datum/skill/combat/shields = 2,
 		/datum/skill/magic/holy = 1,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/sewing = 1,
@@ -58,6 +59,7 @@
 			if(/datum/patron/divine/necra)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 				ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
+				ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 			if(/datum/patron/divine/eora)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 				spawned.virginity = FALSE
@@ -96,7 +98,7 @@
 		"Great axe" = /obj/item/weapon/polearm/halberd/bardiche/woodcutter,
 	)
 
-	var/weaponchoice = spawned.select_equippable(spawned, selectableweapon, message = "Choose Your Specialisation", title = "Warrior of the ten!")
+	var/weaponchoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "Warrior of the ten!")
 	if(!weaponchoice)
 		return
 

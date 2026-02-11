@@ -18,16 +18,16 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/axesmaces = 4,
+		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/whipsflails = 3,
 		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/shields = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/athletics = 3,
@@ -54,7 +54,7 @@
 			STATKEY_SPD = 1,
 		)
 		spawned.adjust_stat_modifier_list(STATMOD_JOB, old_stats)
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/serjeant_at_arms
 	name = "Serjeant-at-Arms (Migrant Wave)"
@@ -96,7 +96,7 @@
 
 	skills = list(
 		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/bows = 4,
+		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
@@ -162,7 +162,7 @@
 	skills = list(
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 4,
+		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/swimming = 3,
@@ -228,7 +228,7 @@
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
@@ -244,7 +244,7 @@
 
 /datum/job/migrant/footman_bannerman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/footman_bannerman
 	name = "Bannermen Footman (Migrant Wave)"
@@ -284,7 +284,7 @@
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
@@ -299,7 +299,7 @@
 
 /datum/job/migrant/pikeman_bannerman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/pikeman_bannerman
 	name = "Bannermen Pikeman (Migrant Wave)"

@@ -53,24 +53,24 @@
 	else
 		icon_state = "mbox[loaded]"
 
-/obj/item/dmusicbox/attackby(obj/item/P, mob/user, params)
+/obj/item/dmusicbox/attackby(obj/item/P, mob/user, list/modifiers)
 	if(!loaded)
 		if(istype(P, /obj/item/coin/gold))
 			loaded=TRUE
 			qdel(P)
 			update_appearance(UPDATE_ICON_STATE)
-			playsound(loc, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+			playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
 			return
 	return ..()
 
-/obj/item/dmusicbox/attack_self_secondary(mob/user, params)
+/obj/item/dmusicbox/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	attack_hand_secondary(user, params)
+	attack_hand_secondary(user, modifiers)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/dmusicbox/attack_hand_secondary(mob/user, params)
+/obj/item/dmusicbox/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -89,7 +89,7 @@
 	if(!loaded)
 		say("A GOLD COIN FOR A CAROL!")
 		return
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/infile = input(user, "CHOOSE A NEW SONG", src) as null|file
 
 	if(!infile)
@@ -115,12 +115,12 @@
 	loaded = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/dmusicbox/attack_self(mob/living/user, params)
+/obj/item/dmusicbox/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	if(!playing)
 		if(curfile)
 			playing = TRUE

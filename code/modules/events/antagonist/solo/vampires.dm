@@ -37,6 +37,11 @@
 		/datum/job/templar,
 	)
 
+/datum/round_event_control/antagonist/solo/vampires/valid_for_map()
+	if(SSmapping.config.map_name != "Voyage")
+		return TRUE
+	return FALSE
+
 /datum/round_event/antagonist/solo/vampire
 
 /datum/round_event/antagonist/solo/vampire/add_datum_to_mind(datum/mind/antag_mind)

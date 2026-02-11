@@ -36,6 +36,7 @@
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/misc/athletics = 1,
 		/datum/skill/craft/crafting = 2,
+		/datum/skill/labor/farming = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/alchemy = 2,
 		/datum/skill/misc/medicine = 2
@@ -51,6 +52,8 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	exp_types_granted  = list(EXP_TYPE_MEDICAL)
+
+	skill_multipliers = list(/datum/skill/misc/medicine = 1.25, /datum/skill/craft/alchemy = 1.25)
 
 /datum/job/clinicapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

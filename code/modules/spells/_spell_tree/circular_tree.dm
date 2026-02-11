@@ -123,7 +123,7 @@
 	is_passive = TRUE
 
 /datum/spell_node/blood_pact/on_node_buy(mob/user)
-	user.mana_pool?.adjust_attunement(/datum/attunement/death, 0.12)
+	user.mana_pool?.adjust_attunement(/datum/attunement/dark, 0.12)
 	user.mana_pool?.adjust_attunement(/datum/attunement/blood, 0.12)
 	to_chat(user, span_notice("Dark power flows through your lifeblood."))
 

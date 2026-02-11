@@ -12,7 +12,7 @@
 	category = "Structure"
 
 /datum/slapcraft_recipe/carpentry/structure/check_craft_requirements(mob/user, turf/T)
-	if(istype(T,/turf/open/transparent/openspace))
+	if(istype(T,/turf/open/openspace))
 		return FALSE
 	if(istype(T, /turf/open/water))
 		return FALSE
@@ -43,7 +43,7 @@
 	category = "Structure"
 
 /datum/slapcraft_recipe/masonry/structure/check_craft_requirements(mob/user, turf/T)
-	if(istype(T,/turf/open/transparent/openspace))
+	if(istype(T,/turf/open/openspace))
 		return FALSE
 	if(istype(T, /turf/open/water))
 		return FALSE
@@ -73,7 +73,7 @@
 	category = "Structure"
 
 /datum/slapcraft_recipe/engineering/structure/check_craft_requirements(mob/user, turf/T)
-	if(istype(T,/turf/open/transparent/openspace))
+	if(istype(T,/turf/open/openspace))
 		return FALSE
 	if(istype(T, /turf/open/water))
 		return FALSE

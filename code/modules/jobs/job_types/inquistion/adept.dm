@@ -21,9 +21,13 @@
 	can_have_apprentices = FALSE
 	is_foreigner = TRUE
 
+
 	job_bitflag = BITFLAG_CHURCH
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
 	antag_role = /datum/antagonist/purishep
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	languages = list(/datum/language/oldpsydonic)
 
 /datum/outfit/adept // Base outfit for Adepts, before loadouts
@@ -38,9 +42,9 @@
 /datum/job/advclass/adept/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", -10, "Reformed Thief")
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
-	spawned.verbs |= /mob/living/carbon/human/proc/faith_test
-	spawned.verbs |= /mob/living/carbon/human/proc/view_inquisition
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
+	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
+	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)
 
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
 

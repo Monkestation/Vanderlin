@@ -50,11 +50,14 @@
 		base_icon_state = initial(icon_state)
 	update_appearance(UPDATE_ICON_STATE)
 
+/*
 /obj/structure/closet/get_save_vars()
 	. = ..()
+	spawn_contents = list()
 	for(var/obj/item/item in contents)
 		LAZYADD(spawn_contents, item.type)
 	. += NAMEOF(src, spawn_contents)
+*/
 
 /obj/structure/closet/Initialize(mapload)
 	if(length(spawn_contents))
@@ -128,7 +131,7 @@
 	if(user)
 		if(!can_open(user))
 			return
-	playsound(loc, open_sound, open_sound_volume, FALSE, -3)
+	playsound(src, open_sound, open_sound_volume, FALSE, -3)
 	opened = TRUE
 	if(!dense_when_open)
 		density = FALSE
@@ -185,7 +188,7 @@
 		if(!can_close(user))
 			return FALSE
 	take_contents()
-	playsound(loc, close_sound, close_sound_volume, FALSE, -3)
+	playsound(src, close_sound, close_sound_volume, FALSE, -3)
 	opened = FALSE
 	density = TRUE
 	update_appearance(UPDATE_ICON_STATE)
@@ -207,7 +210,7 @@
 		bust_open()
 	. = ..()
 
-/obj/structure/closet/attackby(obj/item/I, mob/user, params)
+/obj/structure/closet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(user in src)
 		return TRUE
 	if(tool_interact(I, user))
@@ -343,3 +346,14 @@
 	INVOKE_ASYNC(src, PROC_REF(open))
 
 #undef LOCKER_FULL
+
+/// Proc that searches inside an atom, specifically for sanctified coffins.
+/obj/structure/closet/proc/check_double_consecration(obj/structure/closet/dirthole/closed/grave_to_consecrate, mob/user)
+	var/double_consecrated = FALSE
+	if(!grave_to_consecrate)
+		return FALSE
+// If the grave contains a sanctified casket, mark the tomb as doubly-sanctified. This will make anyone trying to graverob regret it.
+	for(var/obj/structure/closet/crate/coffin/coffin in grave_to_consecrate.contents)
+		if (coffin.consecrated)
+			double_consecrated = TRUE
+	return double_consecrated

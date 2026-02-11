@@ -73,7 +73,8 @@
 		if(buckle_prevents_pull)
 			M.pulledby.stop_pulling()
 		else if(isliving(M.pulledby))
-			M.reset_offsets("pulledby")
+			var/mob/living/living_mob = M.pulledby
+			living_mob.reset_pull_offsets(M, TRUE)
 
 	if(!check_loc && M.loc != loc)
 		M.forceMove(loc)

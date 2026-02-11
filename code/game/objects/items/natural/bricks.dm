@@ -16,7 +16,7 @@
 	hitsound = list('sound/combat/hits/blunt/brick.ogg')
 	bundletype = /obj/item/natural/bundle/brick
 
-/obj/item/natural/brick/attackby(obj/item, mob/living/user)
+/obj/item/natural/brick/attackby(obj/item, mob/living/user, list/modifiers)
 	if(item_flags & IN_STORAGE)
 		return
 	. = ..()

@@ -286,7 +286,7 @@
 			if("meat" in bumper.faction)
 				continue
 
-			if(prob(bumper.get_skill_level(/datum/skill/misc/athletics) * 15))
+			if(prob(bumper.get_skill_level(/datum/skill/misc/athletics, TRUE) * 15))
 				return
 
 			// Calculate knockback direction (away from structure)

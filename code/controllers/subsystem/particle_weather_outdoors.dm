@@ -60,24 +60,18 @@ SUBSYSTEM_DEF(outdoor_effects)
 		new /datum/time_of_day/dusk(),
 		new /datum/time_of_day/midnight()
 	)
-	var/list/turf_weather_affectable_z_levels = list()
+	var/alist/turf_weather_affectable_z_levels = alist()
 	var/next_day = FALSE // Resets when station_time is less than the next start time.
-
-/datum/controller/subsystem/outdoor_effects/proc/fullPlonk()
-	var/list/z_list = SSmapping.levels_by_trait(ZTRAIT_STATION)
-	z_list |= SSmapping.levels_by_trait(ZTRAIT_CENTCOM)
-	z_list -= SSmapping.levels_by_trait(ZTRAIT_IGNORE_WEATHER_TRAIT)
-	for (var/z in z_list)
-		for (var/turf/T in block(locate(1,1,z), locate(world.maxx,world.maxy,z)))
-			GLOB.SUNLIGHT_QUEUE_WORK += T
 
 /datum/controller/subsystem/outdoor_effects/Initialize(timeofday)
 	#ifdef FORCE_RANDOM_WORLD_GEN
 	return ..()
 	#endif
 	if(!initialized)
-		turf_weather_affectable_z_levels = SSmapping.levels_by_trait(ZTRAIT_WEATHER_STUFF)
-		turf_weather_affectable_z_levels -= SSmapping.levels_by_trait(ZTRAIT_IGNORE_WEATHER_TRAIT)
+		for(var/zlevel in SSmapping.levels_by_trait(ZTRAIT_WEATHER_STUFF))
+			if(SSmapping.level_trait(zlevel, ZTRAIT_IGNORE_WEATHER_TRAIT))
+				continue
+			turf_weather_affectable_z_levels[zlevel] = TRUE
 		get_time_of_day()
 		InitializeTurfs()
 		initialized = TRUE
@@ -89,15 +83,14 @@ SUBSYSTEM_DEF(outdoor_effects)
 	return ..()
 
 /datum/controller/subsystem/outdoor_effects/proc/InitializeTurfs(list/targets)
-	var/list/z_list = SSmapping.levels_by_trait(ZTRAIT_STATION)
-	z_list |= SSmapping.levels_by_trait(ZTRAIT_CENTCOM)
-	z_list -= SSmapping.levels_by_trait(ZTRAIT_IGNORE_WEATHER_TRAIT)
-	for (var/z in z_list)
-		init_z_turfs(z)
-
-/datum/controller/subsystem/outdoor_effects/proc/init_z_turfs(z)
-	for (var/turf/T in block(locate(1,1,z), locate(world.maxx,world.maxy,z)))
-		GLOB.SUNLIGHT_QUEUE_WORK += T
+	for(var/z in SSmapping.levels_by_trait(ZTRAIT_STATION))
+		if(SSmapping.level_trait(z, ZTRAIT_IGNORE_WEATHER_TRAIT))
+			continue
+		GLOB.SUNLIGHT_QUEUE_WORK += Z_TURFS(z)
+	for(var/z in SSmapping.levels_by_trait(ZTRAIT_CENTCOM))
+		if(SSmapping.level_trait(z, ZTRAIT_IGNORE_WEATHER_TRAIT))
+			continue
+		GLOB.SUNLIGHT_QUEUE_WORK += Z_TURFS(z)
 
 /datum/controller/subsystem/outdoor_effects/proc/check_cycle()
 	if(!next_step_datum)
@@ -169,7 +162,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 	for(i in 1 to length(GLOB.SUNLIGHT_QUEUE_WORK))
 		var/turf/T = GLOB.SUNLIGHT_QUEUE_WORK[i]
 		if(T)
-			T.get_sky_and_weather_states()
+			T.update_sky_and_weather_states()
 			if(T.outdoor_effect)
 				// this may be causing some trivial GC fails for outdoor_effect
 				// but that doesn't seem to cause much of a performance impact in my testing
@@ -206,14 +199,16 @@ SUBSYSTEM_DEF(outdoor_effects)
 	if(!init_tick_checks)
 		MC_SPLIT_TICK
 
+	// this list can get REALLY LONG so we do this to avoid list copies
 	for (i in 1 to length(GLOB.SUNLIGHT_QUEUE_CORNER))
 		var/turf/T = GLOB.SUNLIGHT_QUEUE_CORNER[i]
+		T.turf_flags &= ~TURF_SUNLIGHT_QUEUED
 		var/atom/movable/outdoor_effect/U = T.outdoor_effect
 
 		/* if we haven't initialized but we are affected, create new and check state */
 		if(!U)
 			T.outdoor_effect = new /atom/movable/outdoor_effect(T)
-			T.get_sky_and_weather_states()
+			T.update_sky_and_weather_states()
 			U = T.outdoor_effect
 
 			/* in case we aren't indoor somehow, wack us into the proc queue, we will be skipped on next indoor check */

@@ -4,18 +4,19 @@
 	There are countless pipes, cogs, and other confusing gizmos, all combined with a body of brass, steel and leather."
 	icon = 'icons/roguetown/weapons/airgun.dmi'
 	icon_state = "airgun"
-	possible_item_intents = list(/datum/intent/mace/smash)
-	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/airgun
-	slot_flags = ITEM_SLOT_BACK
-	w_class = WEIGHT_CLASS_HUGE
-	bigboy = TRUE
-	wlength = WLENGTH_LONG
-	sellprice = 250
+	force = DAMAGE_MACE-5
 	can_parry = TRUE
 	wdefense = BAD_PARRY
 	wbalance = EASY_TO_DODGE
-	force = DAMAGE_MACE - 5
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(MACE_SMASH)
+	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/airgun
+
+	slot_flags = ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_HUGE
+	bigboy = TRUE
+	sellprice = 250
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -51,7 +52,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering) * 3)
+		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering, TRUE) * 3)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
@@ -71,7 +72,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering) * 3)
+		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering, TRUE) * 3)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
@@ -131,7 +132,7 @@
 			num_unloaded++
 		if(num_unloaded)
 			to_chat(user, span_notice("I remove [(num_unloaded == 1) ? "the" : "[num_unloaded]"] [cartridge_wording]\s from [src]."))
-			playsound(src.loc, 'sound/foley/industrial/loadout.ogg', 100, FALSE)
+			playsound(src, 'sound/foley/industrial/loadout.ogg', 100, FALSE)
 			update_appearance(UPDATE_ICON)
 		else
 			to_chat(user, span_warning("[src] is empty!"))
@@ -152,7 +153,7 @@
 	if(!choice || choice == "cancel")
 		return
 	var/use_time = 4 //how much time the player needs to crank a knob, pull a lever, etc. in seconds
-	use_time = use_time - (user.get_skill_level(/datum/skill/craft/engineering) / 2)
+	use_time = use_time - (user.get_skill_level(/datum/skill/craft/engineering, TRUE) / 2)
 	switch(choice)
 		if("Increase Pressure")
 			if(pressure_to_use < maximum_pressure)
@@ -160,7 +161,7 @@
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the knob clockwise, increasing the pressure for the airgun to use."))
 					pressure_to_use++
-					playsound(src.loc, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
 			else
 				to_chat(user, span_warning("I try to turn the knob clockwise, but that's as far as it will go."))
 		if("Decrease Pressure")
@@ -169,7 +170,7 @@
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the knob counter-clockwise, decreasing the pressure for the airgun to use."))
 					pressure_to_use--
-					playsound(src.loc, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/pneumaticpress.ogg', 100, FALSE)
 			else
 				to_chat(user, span_warning("I try to turn the knob counter-clockwise, but that's as far as it will go."))
 		if("Loading Chamber")
@@ -177,39 +178,39 @@
 				to_chat(user, span_info("I begin to close the loading chamber..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I close the loading chamber."))
-					playsound(src.loc, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
 					loading_chamber = FALSE
 			else
 				to_chat(user, span_info("I begin to open the loading chamber..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I open the loading chamber."))
-					playsound(src.loc, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/industrial/toggle.ogg', 100, FALSE)
 					loading_chamber = TRUE
 		if("Hand Crank")
 			if(cranked)
 				to_chat(user, span_info("I begin to turn the crank counter-clockwise..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the crank counter-clockwise, decompressing the spring."))
-					playsound(src.loc, 'sound/foley/winding.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/winding.ogg', 100, FALSE)
 					cranked = FALSE
 			else
 				to_chat(user, span_info("I begin to turn the crank clockwise..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I turn the crank clockwise, compressing the spring."))
-					playsound(src.loc, 'sound/foley/winding.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/winding.ogg', 100, FALSE)
 					cranked = TRUE
 		if("Steam Lever")
 			if(steam_lever)
 				to_chat(user, span_info("I begin to pull the steam lever down..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I pull the steam lever down, disabling the flow of steam."))
-					playsound(src.loc, 'sound/foley/lock.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/lock.ogg', 100, FALSE)
 					steam_lever = FALSE
 			else
 				to_chat(user, span_info("I begin to pull the steam lever up..."))
 				if(do_after(user, use_time SECONDS, src))
 					to_chat(user, span_info("I pull the steam lever up, enabling the flow of steam."))
-					playsound(src.loc, 'sound/foley/lock.ogg', 100, FALSE)
+					playsound(src, 'sound/foley/lock.ogg', 100, FALSE)
 					steam_lever = TRUE
 	update_appearance(UPDATE_ICON_STATE)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -227,7 +228,7 @@
 		spread = 0
 	if(!(cranked) || !(steam_lever) || (loading_chamber))
 		to_chat(user, span_warning("[src] refuses to fire!"))
-		playsound(src.loc, 'sound/foley/industrial/pneumatichiss.ogg', 100, FALSE)
+		playsound(src, 'sound/foley/industrial/pneumatichiss.ogg', 100, FALSE)
 		return FALSE
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
 		var/obj/projectile/BB = CB.BB
@@ -246,7 +247,7 @@
 		if(user.STAPER > 10)
 			BB.accuracy += (user.STAPER - 10) * 2 //each point of perception above 10 increases standard accuracy by 2.
 			BB.bonus_accuracy += (user.STAPER - 10) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/craft/engineering) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
+		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/craft/engineering, TRUE) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
 	SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, pressure_to_use * 100, "airgun")
 	. = ..()
 	cranked = FALSE

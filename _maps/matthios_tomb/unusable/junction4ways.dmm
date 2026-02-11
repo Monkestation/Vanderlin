@@ -3,7 +3,7 @@
 /turf/closed/mineral/bedrock,
 /area/under/tomb/cave)
 "m" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "C" = (
 /turf/open/floor/naturalstone,

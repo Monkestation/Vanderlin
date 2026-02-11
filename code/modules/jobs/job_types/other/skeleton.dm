@@ -52,8 +52,8 @@
 	spawned.grant_undead_eyes()
 	spawned.ambushable = FALSE
 	spawned.underwear = "Nude"
-	if(spawned.charflaw)
-		QDEL_NULL(spawned.charflaw)
+	if(length(spawned.quirks))
+		spawned.clear_quirks()
 	spawned.update_body()
 	spawned.mob_biotypes = MOB_UNDEAD
 	spawned.faction = list(FACTION_UNDEAD)
@@ -80,7 +80,6 @@
 	spawned.real_name = "skeleton"
 	spawned.remove_all_languages()
 	spawned.grant_language(/datum/language/hellspeak)
-	spawned.silent = TRUE
 
 	// Randomized stats
 	spawned.base_strength = rand(8,12)
@@ -115,8 +114,8 @@
 		spawned.dna.species.native_language = "Zizo Chant"
 		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
-	spawned.verbs |= /mob/living/carbon/human/proc/praise
-	spawned.verbs |= /mob/living/carbon/human/proc/communicate
+	add_verb(spawned, /mob/living/carbon/human/proc/praise)
+	add_verb(spawned, /mob/living/carbon/human/proc/communicate)
 
 
 /* BASIC SKELETON OUTFIT */
@@ -148,7 +147,7 @@
 		armor = /obj/item/clothing/armor/cuirass/iron/rust
 
 	// Randomized headgear
-	switch(pick(1,9))
+	switch(rand(1,9))
 		if (1) head = /obj/item/clothing/head/helmet/kettle
 		if (2) head = /obj/item/clothing/head/helmet/winged
 		if (3) head = /obj/item/clothing/head/helmet/leather/conical
@@ -164,7 +163,7 @@
 		backr = /obj/item/weapon/shield/wood
 
 	// Randomized weapons
-	switch(pick(1,6))
+	switch(rand(1,6))
 		if (1)
 			var/obj/item/weapon/sword/short/iron/P = new()
 			equipped_human.put_in_hands(P, forced = TRUE)

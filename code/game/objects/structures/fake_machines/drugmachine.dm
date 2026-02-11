@@ -90,7 +90,7 @@
 				E.budget2change(budgie)
 				budgie = 0
 		if(play_sound)
-			playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+			playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 
 
 ///PURITY 2.0///
@@ -131,7 +131,7 @@
 	budget2change(budget)
 	set_light(0)
 
-/obj/structure/fake_machine/drugmachine/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/drugmachine/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(istype(I, /obj/item/coin/inqcoin))
 		return
@@ -140,7 +140,7 @@
 		budget += money
 		qdel(I)
 		to_chat(user, span_info("I put [money] mammon in [src]."))
-		playsound(get_turf(src), 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
 		return attack_hand(user)
 
 /obj/structure/fake_machine/drugmachine/Topic(href, href_list)
@@ -202,10 +202,10 @@
 		switch(select)
 			if("Enable Paying Taxes")
 				upgrade_flags &= ~UPGRADE_NOTAX
-				playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 			if("Stop Paying Taxes")
 				upgrade_flags |= UPGRADE_NOTAX
-				playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+				playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	return attack_hand(usr)
 
 /obj/structure/fake_machine/drugmachine/attack_hand(mob/living/user)
@@ -218,7 +218,7 @@
 		to_chat(user, "<span class='warning'>It's locked. Of course.</span>")
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	var/contents
 	contents = "<center>PURITY - In the pursuit of pleasure.<BR>"

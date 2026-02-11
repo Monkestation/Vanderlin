@@ -20,7 +20,7 @@
 GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 	/turf/open/lava,
 	/turf/open/water,
-	/turf/open/transparent/openspace
+	/turf/open/openspace
 	)))
 
 #define isclient(A) istype(A, /client)
@@ -31,7 +31,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isopenturf(A) (istype(A, /turf/open))
 
-#define isopenspace(A) (istype(A, /turf/open/transparent/openspace))
+#define isopenspace(A) (istype(A, /turf/open/openspace))
 
 #define isindestructiblefloor(A) (istype(A, /turf/open/indestructible))
 
@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
 
-#define istransparentturf(A) (istype(A, /turf/open/transparent) || istype(A, /turf/closed/transparent))
+#define istransparentturf(A) (HAS_TRAIT(A, TURF_Z_TRANSPARENT_TRAIT))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
@@ -126,7 +126,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isreagentcontainer(A) (istype(A, /obj/item/reagent_containers))
 
-#define ismobholder(A) (istype(A, /obj/item/clothing/head/mob_holder))
+#define ismobholder(A) (istype(A, /obj/item/mob_holder))
 
 #define isfuse(A) (istype(A, /obj/item/fuse))
 
@@ -186,6 +186,7 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 	#define is_adept_job(job_type) (istype(job_type, /datum/job/adept))
 // Serfs
 	#define is_gaffer_job(job_type) (istype(job_type, /datum/job/gaffer))
+	#define is_apothecary_job(job_type) (istype(job_type, /datum/job/apothecary))
 // Peasantry
 	#define is_jester_job(job_type) (istype(job_type, /datum/job/jester))
 	#define is_adventurer_job(job_type) (istype(job_type, /datum/job/advclass/adventurer))

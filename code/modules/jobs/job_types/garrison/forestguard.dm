@@ -37,7 +37,7 @@
 
 /datum/job/forestguard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
@@ -84,10 +84,10 @@
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/whipsflails = 4,
+		/datum/skill/combat/whipsflails = 3,
 		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/shields = 3,
 		/datum/skill/combat/bows = 1,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3
@@ -139,7 +139,7 @@
 		/datum/skill/craft/carpentry = 1,
 		/datum/skill/misc/sewing = 2,
 		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/bows = 4,
+		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/knives = 3,
 		/datum/skill/combat/axesmaces = 1,
@@ -195,7 +195,7 @@
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 4
+		/datum/skill/combat/axesmaces = 3
 	)
 
 	traits = list(
@@ -266,7 +266,7 @@
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, rand(-1, 1))
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_LCK, rand(-4, 4))
 
-	spawned.verbs |= /mob/proc/haltyellorphan
+	add_verb(spawned, /mob/proc/haltyellorphan)
 
 /datum/outfit/forestguard/ruffian
 	name = "Forest Ruffian"
@@ -285,5 +285,5 @@
 
 /mob/proc/haltyellorphan()
 	set name = "HALT!"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("haltyellorphan")

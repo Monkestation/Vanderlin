@@ -4,7 +4,7 @@
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/mercenary/expegasusknight
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 5
+	total_positions = 0 //Disabled because Lakkari isn't lore-approved
 
 	jobstats = list(
 		STATKEY_END = 2,
@@ -19,9 +19,9 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/misc/sneaking = 1,
 		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/medicine = 1,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/shields = 3,
 		/datum/skill/misc/reading = 2,
 		/datum/skill/misc/riding = 3
@@ -47,7 +47,7 @@
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/shield/tower/buckleriron
 	beltr = /obj/item/weapon/sword/long/shotel
-	beltl = /obj/item/weapon/knife/njora/steel
+	beltl = /obj/item/weapon/knife/dagger/steel/njora
 	shirt = /obj/item/clothing/armor/chainmail/iron
 	pants = /obj/item/clothing/pants/trou/leather
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1)

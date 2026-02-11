@@ -11,19 +11,19 @@
 	overdose_threshold = 30
 
 /datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/M)
-	M.set_drugginess(30)
+	M.set_drugginess(30 SECONDS)
 	if(prob(5))
 		if(M.gender == FEMALE)
 			M.emote(pick("twitch_s","giggle"))
 		else
 			M.emote(pick("twitch_s","chuckle"))
-	if(M.has_flaw(/datum/charflaw/addiction/smoker))
-		M.sate_addiction()
+	if(M.has_quirk(/datum/quirk/vice/smoker))
+		M.sate_addiction(/datum/quirk/vice/smoker)
 	..()
 
 /datum/reagent/drug/space_drugs/on_mob_metabolize(mob/living/M)
 	..()
-	M.set_drugginess(30)
+	M.set_drugginess(30 SECONDS)
 	M.apply_status_effect(/datum/status_effect/buff/weed)
 	M.overlay_fullscreen("weedsm", /atom/movable/screen/fullscreen/weedsm)
 
@@ -76,8 +76,8 @@
 	..()
 
 /datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M)
-	if(M.has_flaw(/datum/charflaw/addiction/smoker))
-		M.sate_addiction()
+	if(M.has_quirk(/datum/quirk/vice/smoker))
+		M.sate_addiction(/datum/quirk/vice/smoker)
 	..()
 	. = 1
 

@@ -163,24 +163,3 @@
 /datum/species/dwarf/mountain/get_possible_surnames(gender = MALE)
 	var/static/list/last_names = world.file2list('strings/rt/names/dwarf/dwarmlast.txt')
 	return last_names
-
-/*------------------\
-| Poison Resistance |
-\------------------*/
-
-/*
-To make this work poison on_mob_life needs to have the dwarf modifier in it. Relevant when adding new ones.
-The more specialized/expensive poison the less effect the resistance.
-
-For common natural poisons (berrypoison) = effect reduced by 2/3, half nausea
-For manufactured poisones = effect reduced by half or so
-
-Note: Its not meant to protect against every dangerous/bad reagent, its supposed to be just poisons, making it meaningful against most common reagent hazards but not full protection.
-
-/datum/reagent/toxin/whateverpoison/on_mob_life(mob/living/carbon/M)
-	if(isdwarf(M))
-		M.adjustToxLoss(2, 0)
-	else
-		M.adjustToxLoss(5, 0)
-
-*/

@@ -245,8 +245,9 @@
 
 /datum/reagent/medicine/herbal/valeriana_draught/on_mob_life(mob/living/carbon/M)
 	var/datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
-	if(drowsiness?.duration < sleep_power)
-		M.adjust_drowsiness_up_to(10 SECONDS, 60 SECONDS)
+	if(istype(drowsiness))
+		if(drowsiness?.duration < sleep_power)
+			M.adjust_drowsiness_up_to(10 SECONDS, 60 SECONDS)
 	M.adjust_stamina(2)
 	. = ..()
 
@@ -425,7 +426,7 @@
 	M.adjustToxLoss(3)
 	if(prob(20))
 		M.set_eye_blur_if_lower(10 SECONDS)
-		M.confused = max(M.confused, 5)
+		M.set_confusion_if_lower(0.5 SECONDS)
 	. = ..()
 
 /datum/reagent/poison/herbal/atropa_concentrate/overdose_process(mob/living/carbon/M)
@@ -542,35 +543,35 @@
 
 /datum/stress_event/herbal_calm
 	desc = "I feel deeply relaxed and at peace."
-	stress_change = 3
+	stress_change = -3
 	timer = 10 MINUTES
 
 /datum/stress_event/herbal_vigor
 	desc = "I feel energized and vigorous!"
-	stress_change = 2
+	stress_change = -2
 	timer = 15 MINUTES
 
 /datum/stress_event/herbal_wellness
 	desc = "I feel wonderfully healthy and restored."
-	stress_change = 4
+	stress_change = -4
 	timer = 20 MINUTES
 
 /datum/stress_event/herbal_focus
 	desc = "My mind is sharp and focused."
-	stress_change = 2
+	stress_change = -2
 	timer = 12 MINUTES
 
 /datum/stress_event/pleasant_scent
 	desc = "I smell wonderful!"
-	stress_change = 1
+	stress_change = -1
 	timer = 30 MINUTES
 
 /datum/stress_event/mystical_boost
 	desc = "I feel in tune with mystical forces."
-	stress_change = 3
+	stress_change = -3
 	timer = 15 MINUTES
 
 /datum/stress_event/battle_stim
 	desc = "I feel ready for battle!"
-	stress_change = 2
+	stress_change = -2
 	timer = 10 MINUTES

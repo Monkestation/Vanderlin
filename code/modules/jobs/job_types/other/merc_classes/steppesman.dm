@@ -8,15 +8,16 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
 	jobstats = list(
-		STATKEY_STR = 2,
+		STATKEY_STR = 1,
 		STATKEY_END = 1,
-		STATKEY_PER = 2,
+		STATKEY_PER = 1,
+		STATKEY_SPD = 1,
 	)
 
 	skills = list(
 		/datum/skill/combat/whipsflails = 2,
 		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/riding = 5, // I don't think riding skill has that big of an effect
 		/datum/skill/misc/sewing = 1,
@@ -28,14 +29,14 @@
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/bows = 3,
 		/datum/skill/labor/taming = 3,
 	)
 
 	traits = list(
-        TRAIT_MEDIUMARMOR,
-        TRAIT_DUALWIELDER,
+		TRAIT_DUALWIELDER,
+		TRAIT_DODGEEXPERT,
 	)
 
 /datum/job/advclass/mercenary/steppesman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -55,8 +56,8 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
 	backr = /obj/item/storage/backpack/satchel
-	armor = /obj/item/clothing/armor/medium/scale/steppe
-	head = /obj/item/clothing/head/helmet/bascinet/steppe
+	armor = /obj/item/clothing/armor/leather/hide/steppe
+	head = /obj/item/clothing/head/papakha
 	mask = /obj/item/clothing/face/facemask/steel/steppe
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(

@@ -376,7 +376,7 @@
 			var content = "<div class='tooltip-name'>" + name + "</div>";
 			content += "<div class='tooltip-desc'>" + desc + "</div>";
 			content += "<div class='tooltip-materials'>Build with: " + initiateItem + "<br>";
-			if (materialsJson && materialsJson !== '[]') {
+			if (materialsJson && materialsJson !== '\[]') {
 				try {
 					var materials = JSON.parse(materialsJson);
 					content += "<div class='tooltip-materials'>Materials:<br>";
@@ -389,7 +389,7 @@
 				}
 			}
 
-			if (featuresJson && featuresJson !== '[]') {
+			if (featuresJson && featuresJson !== '\[]') {
 				try {
 					var features = JSON.parse(featuresJson);
 					content += "<div class='tooltip-features'>Features: " + features.join(', ') + "</div>";
@@ -621,14 +621,13 @@
 	selected_recipe = GLOB.blueprint_recipes[recipe_id]
 	build_dir = selected_recipe.default_dir
 	create_preview_appearance(selected_recipe)
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Selected blueprint: [selected_recipe.name]</span>")
 	if(selected_recipe.supports_directions)
 		to_chat(holder.mob, "<span class='info'>This blueprint can be rotated using the direction button.</span>")
 
-/datum/blueprint_system/proc/InterceptClickOn(mob/user, params, atom/object)
-	var/list/modifiers = params2list(params)
+/datum/blueprint_system/proc/InterceptClickOn(mob/user, list/modifiers, atom/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 
@@ -644,6 +643,8 @@
 		if(right_click)
 			if(istype(object, /obj/structure/blueprint))
 				var/obj/structure/blueprint/print = object
+				if(!print.creator)
+					return TRUE
 				if(print.creator != user && world.time < print.time_when_placed + 3 MINUTES)
 					return TRUE
 				to_chat(user, span_red("[object.name] removed."))
@@ -761,6 +762,6 @@
 /datum/blueprint_system/proc/clear_selection()
 	selected_recipe = null
 	clear_preview()
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Blueprint selection cleared.</span>")

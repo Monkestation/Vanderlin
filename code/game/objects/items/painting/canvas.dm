@@ -64,7 +64,7 @@
 		to_chat(user, "I unmount [src].")
 		user.put_in_hands(src)
 
-/obj/item/canvas/attack_hand_secondary(mob/user, params)
+/obj/item/canvas/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -75,11 +75,12 @@
 	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/canvas/attackby(obj/item/I, mob/living/user, params)
+/obj/item/canvas/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(istype(I, /obj/item/natural/feather))
 		author = browser_input_text(user, "Who's the author of this painting?", "NAME YOURSELF", max_length = MAX_NAME_LEN)
 		author_ckey = user.ckey
+		SEND_SIGNAL(user, COMSIG_ART_CREATED)
 		title = browser_input_text(user, "What's the title of this painting?", "NAME YOUR MASTERPIECE", max_length = MAX_CHARTER_LEN)
 		if(title)
 			name = title
@@ -132,6 +133,7 @@
 	overlay_to_index["[x][y]"] = MA
 	current_overlays++
 	if(current_overlays > 150)
+		cut_overlay(overlays[1]) //fucking emissives
 		icon = usr.client.RenderIcon(src)
 		current_overlays = 0
 		cut_overlays()

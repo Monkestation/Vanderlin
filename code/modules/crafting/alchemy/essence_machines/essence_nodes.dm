@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(essence_nodes)
+
 /obj/structure/essence_node
 	name = "essence node"
 	desc = "A weakened point in the environment that allows access to alchemical essence. It pulses with inner energy."
@@ -20,6 +22,9 @@
 
 /obj/structure/essence_node/Initialize(mapload)
 	. = ..()
+	if(!tier && prob(10))
+		tier = 1
+
 	if(!essence_type)
 		essence_type = pick_random_essence_type()
 	switch(tier)
@@ -36,9 +41,11 @@
 	last_recharge = world.time
 	update_appearance(UPDATE_ICON)
 	START_PROCESSING(SSobj, src)
+	LAZYADD(GLOB.essence_nodes, src)
 
 /obj/structure/essence_node/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	LAZYREMOVE(GLOB.essence_nodes, src)
 	return ..()
 
 /obj/structure/essence_node/update_overlays()
@@ -83,7 +90,7 @@
 /obj/structure/essence_node/proc/can_be_extracted()
 	return TRUE
 
-/obj/structure/essence_node/attackby(obj/item/I, mob/user)
+/obj/structure/essence_node/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 

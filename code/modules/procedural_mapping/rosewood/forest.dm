@@ -31,7 +31,7 @@
 							/turf/open/floor/snow/patchy = 15,
 							/turf/open/floor/grass/cold = 5,
 							/turf/open/floor/dirt = 5)
-	allowed_areas = list(/area/outdoors/woods,
+	allowed_areas = list(/area/outdoors/wilderness,
 							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestturfs/dirt
@@ -54,7 +54,7 @@
 							/obj/structure/flora/grass/bush_meagre/tundra = 14,
 							/obj/structure/flora/grass/bush/wall/tall/tundra = 0.25,
 							/obj/structure/flora/grass/herb/random = 3,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 1,
 							/obj/structure/flora/grass/pyroclasticflowers = 1,
 							/obj/structure/flora/grass/maneater = 1,
 							/obj/structure/flora/grass/maneater/real = 0.1,
@@ -63,7 +63,7 @@
 							/obj/item/natural/stone = 2,
 							/obj/item/natural/rock = 4,
 							/obj/item/grown/log/tree/stick = 6)
-	allowed_areas = list(/area/outdoors/woods,
+	allowed_areas = list(/area/outdoors/wilderness,
 							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestsnow/grass
@@ -85,7 +85,7 @@
 							/obj/structure/flora/grass/bush_meagre/tundra = 14,
 							/obj/structure/flora/grass/bush/wall/tall/tundra = 0.25,
 							/obj/structure/flora/grass/herb/random = 7,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 1,
 							/obj/structure/flora/grass/maneater = 1,
 							/obj/structure/flora/grass/pyroclasticflowers = 1,
 							/obj/structure/chair/bench/ancientlog = 5,
@@ -93,7 +93,7 @@
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 2,
 							/obj/item/grown/log/tree/stick = 8)
-	allowed_areas = list(/area/outdoors/woods,
+	allowed_areas = list(/area/outdoors/wilderness,
 							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestgrass/grass
@@ -108,14 +108,14 @@
 							/obj/structure/flora/grass/bush_meagre = 14,
 							/obj/structure/flora/grass/bush/wall/tall = 0.25,
 							/obj/structure/flora/grass = 80,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 1,
 							/obj/structure/flora/grass/herb/random = 1,
 							/obj/structure/flora/grass/maneater = 1,
 							/obj/structure/flora/grass/pyroclasticflowers = 1,
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 2,
 							/obj/item/grown/log/tree/stick = 8)
-	allowed_areas = list(/area/outdoors/woods,
+	allowed_areas = list(/area/outdoors/wilderness,
 							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestdirt
@@ -135,7 +135,7 @@
 							/obj/item/grown/log/tree/stick = 8,
 							/obj/structure/closet/dirthole/closed/loot= 1,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0.5)
-	allowed_areas = list(/area/outdoors/woods,
+	allowed_areas = list(/area/outdoors/wilderness,
 							/area/outdoors/woods_safe)
 
 /datum/mapGeneratorModule/rwforestdirt/grass
@@ -161,6 +161,6 @@
 		                    /obj/structure/flora/grass/water/reeds = 30,
 	                        /obj/structure/kneestingers = 20,
 							/obj/structure/roguerock = 5)
-	allowed_areas = list(/area/outdoors/woods,
+	allowed_areas = list(/area/outdoors/wilderness,
 							/area/outdoors/woods_safe,
 							/area/under/cave)
