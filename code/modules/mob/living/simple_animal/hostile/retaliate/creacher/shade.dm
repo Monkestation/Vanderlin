@@ -97,7 +97,7 @@
 /*
 * Shades are supprisingly flammable
 */
-/mob/living/simple_animal/hostile/retaliate/shade/attackby(obj/item/O, mob/user, params)  //Marker -Agouri
+/mob/living/simple_animal/hostile/retaliate/shade/attackby(obj/item/O, mob/user, list/modifiers)  //Marker -Agouri
 	if(istype(O, /obj/item/flashlight/flare))
 		fire_act(3,3)
 		return

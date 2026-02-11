@@ -81,7 +81,7 @@
 	qdel(src)
 
 
-/obj/item/soap/attack(mob/living/carbon/human/target, mob/living/carbon/user)
+/obj/item/soap/attack(mob/living/carbon/human/target, mob/living/carbon/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_MELEE)
 
 	if(ishuman(target) && user.zone_selected == BODY_ZONE_PRECISE_MOUTH)

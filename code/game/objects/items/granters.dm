@@ -41,7 +41,7 @@
 	. = ..()
 	reading = FALSE
 
-/obj/item/book/granter/attack_self(mob/user, params)
+/obj/item/book/granter/attack_self(mob/user, list/modifiers)
 	if(user.mind?.has_studied == TRUE)
 		to_chat(user, span_notice("I struggle to study my arcane notes more. Perhaps a good rest would help."))
 		return FALSE

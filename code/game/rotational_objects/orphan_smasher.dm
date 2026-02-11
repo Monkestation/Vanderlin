@@ -40,7 +40,7 @@
 	LAZYINITLIST(regular_recipes)
 	if(!length(regular_recipes))
 		for(var/datum/anvil_recipe/recipe_path as anything in subtypesof(/datum/anvil_recipe))
-			if(is_abstract(recipe_path))
+			if(IS_ABSTRACT(recipe_path))
 				continue
 			regular_recipes |= new recipe_path
 
@@ -99,7 +99,7 @@
 	if(progress >= needed_progress)
 		create_current()
 
-/obj/structure/orphan_smasher/attackby(obj/item/I, mob/living/user)
+/obj/structure/orphan_smasher/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(!working)
 		return
@@ -119,19 +119,17 @@
 	bloodied = TRUE
 	update_animation_effect()
 
-/obj/structure/orphan_smasher/MiddleClick(mob/user, params)
-	if(!user.Adjacent(src))
-		return
+/obj/structure/orphan_smasher/MiddleClick(mob/user, list/modifiers)
 	try_step(STEP_LEVER, user)
 	return TRUE
 
-/obj/structure/orphan_smasher/CtrlClick(mob/user)
+/obj/structure/orphan_smasher/CtrlClick(mob/user, list/modifiers)
 	if(!user.Adjacent(src))
 		return
 	try_step(STEP_BUTTON, user)
 	return TRUE
 
-/obj/structure/orphan_smasher/attack_hand_secondary(mob/user, params)
+/obj/structure/orphan_smasher/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -341,7 +339,7 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/structure/material_bin/attack_hand_secondary(mob/user, params)
+/obj/structure/material_bin/attack_hand_secondary(mob/user, list/modifiers)
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user.visible_message(span_danger("[user] starts to [opened ? "close" : "open"] [src]."), span_danger("You start to [opened ? "close" : "open"] [src]."))
 	if(!do_after(user, 2.5 SECONDS, src))

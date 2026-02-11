@@ -44,7 +44,7 @@
 			index = spawned.real_name
 		S.name = "veteran cloak ([index])"
 
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/job/advclass/veteran

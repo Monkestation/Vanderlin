@@ -79,7 +79,7 @@
 		playsound(src, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 	return TRUE
 
-/obj/structure/handcart/attackby(obj/item/I, mob/user, params)
+/obj/structure/handcart/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/gear/wood))
 		var/obj/item/gear/wood/cog = I
 		if(cog.cart_capacity <= maximum_capacity)
@@ -228,7 +228,7 @@
 	if(M)
 		. += M
 
-/obj/structure/handcart/attack_hand_secondary(mob/user, params)
+/obj/structure/handcart/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

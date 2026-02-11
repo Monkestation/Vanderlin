@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	name = "Vampire"
 	roundend_category = "Vampires"
 	antagpanel_category = "Vampire"
+	show_name_in_check_antagonists = TRUE
 	job_rank = ROLE_VAMPIRE
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "vamp"
@@ -30,11 +31,20 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	else
 		default_clan = incoming_clan
 
+/datum/antagonist/vampire/outcast
+	name = "Outcast Vampire"
+	antag_hud_type = ANTAG_HUD_VAMPIRE
+	antag_hud_name = "vamplesser"
+
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
+	if(istype(examined_datum, /datum/antagonist/vampire/lords_spawn))
+		return span_boldnotice("The spawn of the firstborn.")
 	if(istype(examined_datum, /datum/antagonist/vampire))
 		return span_boldnotice("A child of Kaine.")
+	if(istype(examined_datum, /datum/antagonist/vampire/outcast))
+		return span_boldnotice("An outcast child of Kaine.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return span_boldnotice("Another deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
@@ -150,7 +160,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	// Create a custom clan instance
 	var/datum/clan/custom/new_clan = new /datum/clan/custom()
 	new_clan.name = custom_clan_name
-	new_clan.clane_covens = selected_covens.Copy()
+	new_clan.clan_covens = selected_covens.Copy()
 
 	// Apply the custom clan
 	vampdude.set_clan_direct(new_clan)

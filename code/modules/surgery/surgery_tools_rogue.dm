@@ -5,19 +5,19 @@
 	item_state = "bone_dagger"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+	force = DAMAGE_DAGGER
+	throwforce = DAMAGE_DAGGER
+	wdefense = GOOD_PARRY
+	wbalance = HARD_TO_DODGE
+
 	gripsprite = FALSE
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_SMALL
-	force = 12
-	throwforce = 12
-	wdefense = 3
-	wbalance = 1
 	max_blade_int = 100
-	max_integrity = 175
+	max_integrity = INTEGRITY_POOR + 25
 	thrown_bclass = BCLASS_CUT
 	associated_skill = /datum/skill/combat/knives
 	anvilrepair = /datum/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 25 //it takes 2 iron bars to make 8 surgical tools, 240/8 = 30, -5 because I reckon some is lost during the process
 	embedding = list(
@@ -37,7 +37,7 @@
 	name = "scalpel"
 	desc = "A tool used to carve precisely into the flesh of the sickly."
 	icon_state = "scalpel"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
@@ -48,16 +48,16 @@
 	name = "saw"
 	desc = "A tool used to carve through bone."
 	icon_state = "bonesaw"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
+	force = DAMAGE_DAGGER + 2
+	throwforce = DAMAGE_KNIFE - 3
+	wdefense = BAD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
+	armor_penetration = 0
+	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	force = 14
-	throwforce = 7
-	armor_penetration = 0
-	wdefense = BAD_PARRY
-	wbalance = DODGE_CHANCE_NORMAL
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_CHOP
 	tool_behaviour = TOOL_SAW
@@ -66,7 +66,7 @@
 	name = "forceps"
 	desc = "A tool used to clamp down on soft tissue."
 	icon_state = "forceps"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
@@ -78,13 +78,11 @@
 	name = "speculum"
 	desc = "A tool used to spread tissue open for surgical access."
 	icon_state = "speculum"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	wdefense = 3
-	wbalance = 1
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
 	tool_behaviour = TOOL_RETRACTOR
@@ -94,7 +92,7 @@
 	name = "bone-setter"
 	desc = "A tool used to manipulate joints and bones."
 	icon_state = "bonesetter"
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
@@ -106,14 +104,14 @@
 	name = "cautery iron"
 	desc = "A tool used to cauterize wounds. Heat it up before use."
 	icon_state = "cauteryiron"
-	possible_item_intents = list(/datum/intent/use, /datum/intent/mace/strike, /datum/intent/mace/smash)
+	force = DAMAGE_MACE - 2
+	throwforce = DAMAGE_MACE - 2
+	wbalance = EASY_TO_DODGE
+	possible_item_intents = list(INTENT_USE, MACE_STRIKE, MACE_SMASH)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
-	force = 18
-	throwforce = 18
-	wdefense = 3
-	wbalance = -1
+
 	associated_skill = /datum/skill/combat/axesmaces
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
@@ -132,8 +130,8 @@
 	. = ..()
 	icon_state = "[initial(icon_state)][heated ? "_hot" : ""]"
 
-/obj/item/weapon/surgery/cautery/pre_attack(atom/A, mob/living/user, params)
-	if(!istype(user.a_intent, /datum/intent/use))
+/obj/item/weapon/surgery/cautery/pre_attack(atom/A, mob/living/user, list/modifiers)
+	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
 	var/heating = 0
 	if(istype(A, /obj/machinery/light/fueled))
@@ -172,22 +170,20 @@
 	name = "examination hammer"
 	desc = "A small hammer used to check a patient's reactions and diagnose their condition."
 	icon_state = "kneehammer"
-	possible_item_intents = list(/datum/intent/use, /datum/intent/mace/strike, /datum/intent/mace/smash)
+	force = DAMAGE_CLUB - 5
+	throwforce = DAMAGE_CLUB - 7
+	wbalance = EASY_TO_DODGE
+	possible_item_intents = list(INTENT_USE, MACE_STRIKE, MACE_SMASH)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
-	force = 10
-	throwforce = 8
-	wdefense = 3
-	wbalance = -1
 	associated_skill = /datum/skill/combat/axesmaces
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
 
-
-/obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, params)
-	if(!istype(user.a_intent, /datum/intent/use))
+/obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, list/modifiers)
+	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
 	if(user.get_skill_level(/datum/skill/misc/medicine) < 1)
 		return ..()

@@ -300,8 +300,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		C.last_mind = src
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_martial_arts(current)
-	if(old_current.skills)
-		old_current.skills.set_current(current)
 
 	RegisterSignal(current, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)

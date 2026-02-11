@@ -173,7 +173,7 @@
 	else if(card_num == 0)
 		icon_state = "deck_[deckstyle]_empty"
 
-/obj/item/toy/cards/deck/attack_self(mob/user, params)
+/obj/item/toy/cards/deck/attack_self(mob/user, list/modifiers)
 	if(cooldown < world.time - 50)
 		if(HAS_TRAIT(user, TRAIT_BLACKLEG))
 			var/outcome = alert(user, "How do you want to shuffle the deck?","XYLIX","False Shuffle","Force Top Card","Play fair")
@@ -197,7 +197,7 @@
 		playsound(src, 'sound/blank.ogg', 50, TRUE)
 		cooldown = world.time
 
-/obj/item/toy/cards/deck/ui_interact(mob/user)
+/obj/item/toy/cards/deck/interact(mob/user)
 	. = ..()
 	var/dat = "The deck has<BR>"
 	for(var/t in cards)
@@ -224,7 +224,7 @@
 		cardUser << browse(null, "window=deck")
 		return
 
-/obj/item/toy/cards/deck/attackby(obj/item/I, mob/living/user, params)
+/obj/item/toy/cards/deck/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/toy/cards/singlecard))
 		var/obj/item/toy/cards/singlecard/SC = I
 		if(SC.parentdeck == src)
@@ -282,11 +282,11 @@
 	var/choice = null
 
 
-/obj/item/toy/cards/cardhand/attack_self(mob/user, params)
+/obj/item/toy/cards/cardhand/attack_self(mob/user, list/modifiers)
 	user.set_machine(src)
 	interact(user)
 
-/obj/item/toy/cards/cardhand/ui_interact(mob/user)
+/obj/item/toy/cards/cardhand/interact(mob/user)
 	. = ..()
 	var/dat = "You have:<BR>"
 	for(var/t in currenthand)
@@ -337,7 +337,7 @@
 				cardUser << browse(null, "window=cardhand")
 		return
 
-/obj/item/toy/cards/cardhand/attackby(obj/item/toy/cards/singlecard/C, mob/living/user, params)
+/obj/item/toy/cards/cardhand/attackby(obj/item/toy/cards/singlecard/C, mob/living/user, list/modifiers)
 	if(istype(C))
 		if(C.parentdeck == parentdeck)
 			currenthand += C.cardname
@@ -411,7 +411,7 @@
 		name = "card"
 		pixel_x = base_pixel_x - 5
 
-/obj/item/toy/cards/singlecard/attackby(obj/item/I, mob/living/user, params)
+/obj/item/toy/cards/singlecard/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/toy/cards/singlecard/))
 		var/obj/item/toy/cards/singlecard/C = I
 		if(C.parentdeck == parentdeck)
@@ -446,7 +446,7 @@
 	else
 		return ..()
 
-/obj/item/toy/cards/singlecard/attack_self(mob/living/carbon/human/user, params)
+/obj/item/toy/cards/singlecard/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(!ishuman(user) || !(user.mobility_flags & MOBILITY_USE))
 		return
 	Flip()

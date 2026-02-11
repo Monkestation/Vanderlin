@@ -203,6 +203,7 @@
 	SPEC_ID_RAKSHARI,\
 	SPEC_ID_TRITON,\
 	SPEC_ID_MEDICATOR,\
+	SPEC_ID_HOLLOWKIN,\
 )
 
 /// Vanderlin royalty

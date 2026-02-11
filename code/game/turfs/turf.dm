@@ -269,20 +269,21 @@
 		return FALSE
 	if(isliving(falling_atom))
 		var/mob/living/falling_mob = falling_atom
-		var/dex_save = falling_mob.get_skill_level(/datum/skill/misc/climbing)
-		if(dex_save >= 5)
-			if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
-				falling_mob.visible_message(span_danger("[falling_mob] gracefully lands on top of [src]!"))
-		else
-			falling_mob.visible_message(span_danger("[falling_mob] crashes into [src]!"))
-			if(falling_mob.fall_damage())
-				for(var/mob/living/crumpled_mob in contents)
-					visible_message(span_danger("\The [falling_mob] falls on \the [crumpled_mob.name]!"))
-					crumpled_mob.Stun(1)
-					crumpled_mob.take_overall_damage(falling_mob.fall_damage()*2)
+		if(!((falling_mob.movement_type & FLYING) && isopenspace(src)))
+			var/dex_save = falling_mob.get_skill_level(/datum/skill/misc/climbing)
+			if(dex_save >= 5)
+				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
+					falling_mob.visible_message("<span class='danger'>[falling_mob] gracefully lands on top of [src]!</span>")
+			else
+				falling_mob.visible_message("<span class='danger'>[falling_mob] crashes into [src]!</span>")
+				if(falling_mob.fall_damage())
+					for(var/mob/living/crumpled_mob in contents)
+						visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
+						crumpled_mob.Stun(1)
+						crumpled_mob.take_overall_damage(falling_mob.fall_damage()*2)
 	if(falling_atom.fall_damage())
 		for(var/mob/living/crumpled_mob in contents)
-			visible_message(span_danger("\The [falling_atom] falls on \the [crumpled_mob.name]!"))
+			visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
 			crumpled_mob.Stun(1)
 			crumpled_mob.take_overall_damage(falling_atom.fall_damage()*2)
 	falling_atom.onZImpact(src, levels)

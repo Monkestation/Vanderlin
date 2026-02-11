@@ -55,12 +55,12 @@
 		colored_overlay.color = colour
 		. += colored_overlay
 
-/obj/item/lipstick/attack_self(mob/user, params)
+/obj/item/lipstick/attack_self(mob/user, list/modifiers)
 	to_chat(user, "<span class='notice'>I twist \the [src] [open ? "closed" : "open"].</span>")
 	open = !open
 	update_appearance(UPDATE_ICON)
 
-/obj/item/lipstick/attack(mob/M, mob/user)
+/obj/item/lipstick/attack(mob/M, mob/user, list/modifiers)
 	if(!open)
 		return
 
@@ -94,7 +94,7 @@
 		to_chat(user, "<span class='warning'>Where are the lips on that?</span>")
 
 //you can wipe off lipstick with paper!
-/obj/item/paper/attack(mob/M, mob/user)
+/obj/item/paper/attack(mob/M, mob/user, list/modifiers)
 	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 		if(!ismob(M))
 			return

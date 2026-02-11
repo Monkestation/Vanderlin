@@ -486,7 +486,7 @@
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
 	character.add_quirk(/datum/quirk/vice/maniac)
-	character.verbs |= /mob/living/carbon/human/proc/torture_victim
+	add_verb(character, /mob/living/carbon/human/proc/torture_victim)
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
 //negative
@@ -933,7 +933,7 @@
 	character.update_transform()
 	character.RemoveElement(/datum/element/footstep, character.footstep_type, 1, -6)
 	character.AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
-	character.verbs |= /mob/living/carbon/human/proc/emote_burp_loud
+	add_verb(character, /mob/living/carbon/human/proc/emote_burp_loud)
 	var/datum/voicepack/glutton/sound_m = new()
 	var/datum/voicepack/glutton/sound_f = new()
 	sound_m.parent_datum = character.dna.species.soundpack_m
@@ -952,7 +952,7 @@
 
 /mob/living/carbon/human/proc/emote_burp_loud()
 	set name = "Gluttonous Burp"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("burploud", intentional = TRUE)
 

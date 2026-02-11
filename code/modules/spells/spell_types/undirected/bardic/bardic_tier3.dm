@@ -120,7 +120,7 @@
 /datum/action/cooldown/spell/undirected/song/rejuvenation_song
 	name = "Healing Hymn"
 	desc = "Recuperate your audience bodies with a melody! Refills health slowly over time."
-	invocation = "%All ye weary and burdened, rest in the healing divine..."
+	invocation = "%All ye weary and burdened, may the divine bless..."
 	button_icon_state = "melody_t3_base"
 	background_icon_state = "melody_t3_base"
 	spell_cost = 60

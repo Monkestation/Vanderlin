@@ -8,7 +8,7 @@
 	. = ..()
 	if(!length(spell_types))
 		for(var/datum/spell_node/node in subtypesof(/datum/spell_node))
-			if(is_abstract(node))
+			if(IS_ABSTRACT(node))
 				continue
 			if(initial(node.is_passive))
 				continue

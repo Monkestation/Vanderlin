@@ -80,7 +80,7 @@
 	. = ..()
 	if(!length(recipe_list))
 		for(var/datum/container_craft/recipe as anything in subtypesof(/datum/container_craft/cooking))
-			if(!is_abstract(recipe))
+			if(!IS_ABSTRACT(recipe))
 				recipe_list += recipe
 
 	AddComponent(/datum/component/storage/concrete/grid/food/cooking/pot)

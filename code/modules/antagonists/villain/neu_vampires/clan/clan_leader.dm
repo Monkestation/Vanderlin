@@ -32,7 +32,7 @@
 
 	// Add lord verbs
 	for(var/verb_path in lord_verbs)
-		H.verbs |= verb_path
+		add_verb(H, verb_path)
 
 	// Add lord traits
 	for(var/trait in lord_traits)
@@ -52,7 +52,7 @@
 			spell_instance.Remove(H)
 
 	for(var/verb_path in lord_verbs)
-		H.verbs -= verb_path
+		remove_verb(H, verb_path)
 
 	for(var/trait in lord_traits)
 		REMOVE_TRAIT(H, trait, "lord_component")
