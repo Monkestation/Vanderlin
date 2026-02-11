@@ -283,4 +283,3 @@
 
 	/// new title given by an admin.
 	var/admin_title = null
-

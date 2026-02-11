@@ -719,7 +719,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(byond_version >= 516) // Enable 516 compat browser storage mechanisms
 		winset(src, null, "browser-options=byondstorage,find,devtools")
 
-	//fullscreen()
+	loot_panel = new(src)
 
 	view_size = new(src, getScreenSize())
 	view_size.resetFormat()
@@ -775,8 +775,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(length(credits))
 		QDEL_LIST(credits)
 
-	if(obj_window)
-		QDEL_NULL(obj_window)
+	QDEL_NULL(loot_panel)
 
 	if(player_details)
 		player_details.achievements.save()
