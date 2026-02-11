@@ -76,7 +76,7 @@
 	set_light(1, 1, 1, l_color = lighting_color)
 	. += mutable_appearance(icon, filled_overlay)
 
-/obj/structure/fake_machine/vendor/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/vendor/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		if(!lock_check())
 			to_chat(user, span_notice("There is no lock on \the [src]! It is not ready to sell!"))
@@ -90,7 +90,7 @@
 		return
 	return ..()
 
-/obj/structure/fake_machine/vendor/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/structure/fake_machine/vendor/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -351,7 +351,7 @@
 /obj/structure/fake_machine/vendor/centcom/attack_hand(mob/living/user)
 	return
 
-/obj/structure/fake_machine/vendor/centcom/attackby(obj/item/P, mob/user, params)
+/obj/structure/fake_machine/vendor/centcom/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/coin))
 		if(!cachey[user])
 			cachey[user] = list()

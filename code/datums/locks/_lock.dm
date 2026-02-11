@@ -81,15 +81,15 @@
 	if(tampered)
 		examine_list += span_notice("[source] has been tampered with.")
 
-/datum/lock/key/proc/key_act_left(obj/source, obj/item/I, mob/living/user, params)
+/datum/lock/key/proc/key_act_left(obj/source, obj/item/I, mob/living/user, list/modifiers)
 	SIGNAL_HANDLER
 
-	return attack_wrap(source, I, user, params2list(params))
+	return attack_wrap(source, I, user, modifiers)
 
-/datum/lock/key/proc/key_act_right(obj/source, obj/item/I, mob/living/user, params)
+/datum/lock/key/proc/key_act_right(obj/source, obj/item/I, mob/living/user, list/modifiers)
 	SIGNAL_HANDLER
 
-	return attack_wrap(source, I, user, params2list(params))
+	return attack_wrap(source, I, user, modifiers)
 
 /datum/lock/key/proc/attack_wrap(obj/source, obj/item/I, mob/living/user, list/modifiers)
 	SIGNAL_HANDLER

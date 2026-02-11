@@ -195,7 +195,7 @@
 				if(M == grabbed)
 					grabbee.unbuckle_mob(M, force = TRUE)
 
-/obj/item/grabbing/attack(mob/living/M, mob/living/user)
+/obj/item/grabbing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!valid_check() || !istype(M))
 		return FALSE
 
@@ -228,9 +228,9 @@
 	var/combat_modifier = positioning_mod // Start with positioning
 
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling, TRUE))
 	if(M.mind)
-		skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling, TRUE))
 
 	if(M.surrendering)
 		combat_modifier *= 2
@@ -388,7 +388,7 @@
 			if(I)
 				if(M.mind)
 					if(I.associated_skill)
-						probby -= M.get_skill_level(I.associated_skill) * 5
+						probby -= M.get_skill_level(I.associated_skill, TRUE) * 5
 				if(HAS_TRAIT(I, TRAIT_WIELDED))
 					probby -= 20
 				if(prob(probby))

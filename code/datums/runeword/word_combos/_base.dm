@@ -56,7 +56,7 @@ GLOBAL_LIST_INIT(all_runewords, initialize_runewords())
 
 	UnregisterSignal(attached_item, COMSIG_ITEM_AFTERATTACK)
 
-/datum/runeword/proc/handle_afterattack(obj/item/source, atom/target, mob/living/user, proximity_flag, click_parameters)
+/datum/runeword/proc/handle_afterattack(obj/item/source, atom/target, mob/living/user, proximity_flag, list/modifiers)
 	if(!proximity_flag || !isliving(target) || !isliving(user))
 		return
 

@@ -316,7 +316,7 @@
 			if(language_datum && AM)
 				if(AM.could_speak_in_language(language_datum) && language_holder.has_language(language_datum))
 					language_holder.selected_default_language = language_datum
-					ui_interact(user)
+					//interact(user)
 
 		if("grant_language")
 			if((is_admin || isobserver(AM)) && language_datum)
@@ -324,7 +324,7 @@
 				if(is_admin)
 					message_admins("[key_name_admin(user)] granted the [language_name] language to [key_name_admin(AM)].")
 					log_admin("[key_name(user)] granted the language [language_name] to [key_name(AM)].")
-				ui_interact(user)
+				//interact(user)
 
 		if("remove_language")
 			if((is_admin || isobserver(AM)) && language_datum)
@@ -332,7 +332,7 @@
 				if(is_admin)
 					message_admins("[key_name_admin(user)] removed the [language_name] language from [key_name_admin(AM)].")
 					log_admin("[key_name(user)] removed the language [language_name] from [key_name(AM)].")
-				ui_interact(user)
+				//interact(user)
 
 		if("toggle_omnitongue")
 			if(is_admin || isobserver(AM))
@@ -340,7 +340,7 @@
 				if(is_admin)
 					message_admins("[key_name_admin(user)] [language_holder.omnitongue ? "enabled" : "disabled"] the ability to speak all languages (that they know) of [key_name_admin(AM)].")
 					log_admin("[key_name(user)] [language_holder.omnitongue ? "enabled" : "disabled"] the ability to speak all languages (that they know) of [key_name(AM)].")
-				ui_interact(user)
+				//interact(user)
 
 	return TRUE
 

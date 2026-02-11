@@ -140,7 +140,7 @@
 	. = ..()
 	user << browse(null,"window=recipe")
 
-/obj/item/recipe_book/attack_self(mob/user, params)
+/obj/item/recipe_book/attack_self(mob/user, list/modifiers)
 	. = ..()
 	user << browse(generate_html(user),"window=recipe;size=800x810")
 

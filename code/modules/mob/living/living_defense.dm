@@ -186,9 +186,9 @@
 	var/skill_diff = 0
 	var/combat_modifier = 1
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling)) //NPCs don't use this
+		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling, TRUE)) //NPCs don't use this
 	if(mind)
-		skill_diff -= (get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff -= (get_skill_level(/datum/skill/combat/wrestling, TRUE))
 
 	if(user == src)
 		instant = TRUE

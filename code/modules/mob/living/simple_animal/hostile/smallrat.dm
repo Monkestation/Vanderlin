@@ -146,7 +146,7 @@
 		return 1
 	return ..()
 
-/obj/item/reagent_containers/food/snacks/smallrat/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/food/snacks/smallrat/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!dead)
 		if(isliving(user))
 			var/mob/living/L = user

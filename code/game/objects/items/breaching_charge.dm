@@ -22,7 +22,7 @@
 	var/exp_flash = 5
 	var/explode_sound = 'sound/misc/explode/bomb.ogg'
 
-/obj/item/breach_charge/afterattack(atom/movable/bomb_target, mob/user, flag)
+/obj/item/breach_charge/afterattack(atom/movable/bomb_target, mob/user, flag, list/modifiers)
 	. = ..()
 
 	if(!flag)

@@ -317,7 +317,7 @@
 		torchy.turn_off()
 	..()
 
-/obj/machinery/light/fueled/torchholder/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/torchholder/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/flashlight/flare/torch))
 		var/obj/item/flashlight/flare/torch/LR = W
 		if(torchy)
@@ -415,7 +415,7 @@
 /obj/machinery/light/fueled/hearth/Destroy()
 	. = ..()
 
-/obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(!attachment)
 		if(istype(W, /obj/item/cooking/pan) || istype(W, /obj/item/reagent_containers/glass/bucket/pot) || istype(W, /obj/item/reagent_containers/glass/carafe/teapot))
 			playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
@@ -426,7 +426,7 @@
 			return
 
 	else
-		. = attachment.attackby(W, user, params)
+		. = attachment.attackby(W, user, modifiers)
 		if(.)
 			return
 	. = ..()

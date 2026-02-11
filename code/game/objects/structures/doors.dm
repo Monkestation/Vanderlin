@@ -181,14 +181,14 @@
 		return FALSE
 	return ..()
 
-/obj/structure/door/attackby(obj/item/I, mob/user)
+/obj/structure/door/attackby(obj/item/I, mob/user, list/modifiers)
 	if(switching_states)
 		return
 	if(I.can_lock_interact())
 		return (..() || attack_hand(user))
 	return ..()
 
-/obj/structure/door/attack_hand_secondary(mob/user, params)
+/obj/structure/door/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

@@ -188,11 +188,6 @@
 	var/list/banned_edits = list(NAMEOF(src, entries_by_type), NAMEOF(src, entries), NAMEOF(src, directory))
 	return !(var_name in banned_edits) && ..()
 
-/datum/controller/configuration/stat_entry()
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Edit", src)
-	stat("[name]:", statclick)
-
 /datum/controller/configuration/proc/Get(entry_type)
 	var/datum/config_entry/E = entry_type
 	if(IS_ABSTRACT(E))

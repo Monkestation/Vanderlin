@@ -123,7 +123,7 @@
 /obj/structure/ladder/attack_paw(mob/user)
 	return use(user)
 
-/obj/structure/ladder/attackby(obj/item/W, mob/user, params)
+/obj/structure/ladder/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE

@@ -7,7 +7,7 @@
 	var/treatment_type = "general"
 	var/treatment_strength = 30
 
-/obj/item/bee_treatment/afterattack(atom/target, mob/user, proximity)
+/obj/item/bee_treatment/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return
@@ -132,10 +132,10 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/magnifying_glass/attack(mob/living/M, mob/user)
+/obj/item/magnifying_glass/attack(mob/living/M, mob/user, list/modifiers)
 	return
 
-/obj/item/magnifying_glass/afterattack(atom/target, mob/user, proximity)
+/obj/item/magnifying_glass/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

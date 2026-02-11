@@ -98,12 +98,24 @@
 	max_integrity = INTEGRITY_WORST
 	melt_amount = 75
 
-/obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, params)
+/datum/intent/snip // The salvaging intent! Used only for the scissors for now!
+	name = "snip"
+	icon_state = "insnip"
+	chargetime = 0
+	noaa = TRUE
+	candodge = FALSE
+	canparry = FALSE
+	misscost = 0
+	no_attack = TRUE
+	releasedrain = 0
+	blade_class = BCLASS_PUNCH
+
+/obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/snip && isitem(A))
 		var/obj/item/item = A
 		if(item.sewrepair && item.salvage_result) // We can only salvage objects which can be sewn!
 			. = TRUE
-			var/skill_level = user.get_skill_level(/datum/skill/misc/sewing)
+			var/skill_level = user.get_skill_level(/datum/skill/misc/sewing, TRUE)
 			var/salvage_time = (7 SECONDS - (skill_level * 10))
 			if(!do_after(user, salvage_time, A))
 				return
@@ -361,7 +373,7 @@
 //			H.visible_message("profane dagger whispers, \"[message]\"")
 			to_chat(M, "profane dagger whispers, \"[message]\"")
 
-/obj/item/weapon/knife/dagger/steel/profane/pre_attack(mob/living/carbon/human/target, mob/living/user = usr, params)
+/obj/item/weapon/knife/dagger/steel/profane/pre_attack(mob/living/carbon/human/target, mob/living/user, list/modifiers)
 	if(!istype(target))
 		return FALSE
 	if(target.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // Check to see if the dagger will do 20 damage or 14
@@ -370,7 +382,7 @@
 		force = DAMAGE_DAGGER + 2
 	return FALSE
 
-/obj/item/weapon/knife/dagger/steel/profane/afterattack(mob/living/carbon/human/target, mob/living/user = usr, proximity)
+/obj/item/weapon/knife/dagger/steel/profane/afterattack(mob/living/carbon/human/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!ishuman(target))
 		return

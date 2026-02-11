@@ -184,7 +184,7 @@
 		addtimer(CALLBACK(src, PROC_REF(return_action)), 3 SECONDS)
 */
 
-/mob/living/simple_animal/hostile/retaliate/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
+/mob/living/simple_animal/hostile/retaliate/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	. = ..()
 	if(!is_type_in_list(A, food_type))
 		return

@@ -1,7 +1,7 @@
 /client/proc/jumptoarea()
 	set name = "Jump to Area"
 	set desc = ""
-	set category = "GameMaster"
+	set category = "Admin.Jump"
 
 	if(!holder)
 		return
@@ -28,7 +28,7 @@
 
 /client/proc/jumptoturf(turf/T in world)
 	set name = "Jump to Turf"
-	set category = "Admin"
+	set category = "Admin.Jump"
 
 	if(!holder)
 		return
@@ -40,7 +40,7 @@
 	return
 
 /client/proc/jumptomob()
-	set category = "GameMaster"
+	set category = "Admin.Jump"
 	set name = "Jump to Mob"
 
 	if(!holder)
@@ -68,7 +68,7 @@
 		to_chat(A, span_warning("This mob is not located in the game world."))
 
 /client/proc/jumptocoord(tx as num, ty as num, tz as num)
-	set category = "Admin"
+	set category = "Admin.Jump"
 	set name = "Jump to Coordinate"
 
 	if(!holder)
@@ -82,7 +82,7 @@
 	message_admins("[key_name_admin(usr)] jumped to coordinates [tx], [ty], [tz]")
 
 /client/proc/jumptokey()
-	set category = "GameMaster"
+	set category = "Admin.Jump"
 	set name = "Jump to Key"
 
 	if(!holder)
@@ -107,7 +107,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Jump To Key") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/Getmob()
-	set category = "Admin"
+	set category = "Admin.Admin"
 	set name = "Get Mob"
 	set desc = ""
 
@@ -145,7 +145,7 @@
 	return ..()
 
 /client/proc/Getkey()
-	set category = "Admin"
+	set category = "Admin.Admin"
 	set name = "Get Key"
 	set desc = ""
 
@@ -176,7 +176,7 @@
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Get Key") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/sendmob()
-	set category = "Admin"
+	set category = "Admin.Jump"
 	set name = "Send Mob"
 
 	if(!holder)
@@ -211,7 +211,7 @@
 /client/proc/spawn_in_test_area()
 	set name = "Spawn in Test Area"
 	set desc = ""
-	set category = "GameMaster"
+	set category = "Admin.Jump"
 
 	if(!holder)
 		return
@@ -231,7 +231,7 @@
 /client/proc/jump_to_test_area()
 	set name = "Jump to Test Area"
 	set desc = ""
-	set category = "GameMaster"
+	set category = "Admin.Jump"
 
 	if(!holder)
 		return

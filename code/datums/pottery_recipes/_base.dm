@@ -21,7 +21,7 @@
 /datum/pottery_recipe/proc/get_delay(mob/user, rotations_per_minute)
 	rotations_per_minute = max(1, rotations_per_minute)
 	var/time = step_to_time[1]
-	var/skill_level = max(1, user?.get_skill_level(skill))
+	var/skill_level = max(1, user?.get_skill_level(skill, TRUE))
 
 	if(rotations_per_minute < speed_sweetspot)
 		time *= ((speed_sweetspot / rotations_per_minute) * 0.25)
@@ -38,7 +38,7 @@
 	return TRUE
 
 /datum/pottery_recipe/proc/update_step(mob/living/user, rotations_per_minute)
-	var/skill_level = max(0, user?.get_skill_level(skill))
+	var/skill_level = max(0, user?.get_skill_level(skill, TRUE))
 	var/success_chance = 25 * ((skill_level - difficulty) + 1)
 	success_chance = clamp(success_chance, 5, 95) // No reason to block pottery with lower skills, just make it not worth the time.
 
