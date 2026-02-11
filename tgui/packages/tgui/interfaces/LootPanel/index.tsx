@@ -38,8 +38,8 @@ export function LootPanel(props) {
   const [grouping, setGrouping] = useState(true);
   const [searchText, setSearchText] = useState('');
 
-  const headerHeight = 38;
-  const itemHeight = 38;
+  const headerHeight = 40;
+  const itemHeight = 46;
   const minHeight = headerHeight + itemHeight;
   const maxHeight = headerHeight + itemHeight * 10;
   const height: number = clamp(
@@ -52,7 +52,7 @@ export function LootPanel(props) {
 
   return (
     <Window
-      width={300}
+      width={330}
       height={height}
       buttons={
         <Stack align="center">
