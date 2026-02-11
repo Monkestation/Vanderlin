@@ -42,7 +42,7 @@
 
 /datum/objective/personal/hoard_mammons/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_SEEPRICES, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_SEEPRICES, OBJECTIVE_TRAIT)
 	owner.current.adjust_stat_modifier(STATMOD_MATTHIOS_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/hoard_mammons/update_explanation_text()

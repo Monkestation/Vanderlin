@@ -337,6 +337,20 @@
 	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
 	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
 
+/datum/admins/proc/prompt_subclass(mob/living/mob in GLOB.mob_list)
+	set name = "Trigger Subclass Menu"
+	set desc = "Triggers the subclass menu of a mob."
+	set category = "Admin.Admin"
+
+	if(!check_rights())
+		return
+	if(tgui_alert(usr, "This will trigger a no adv class restriction triumph if the player has bought it.", "Confirm", list("Proceed", "Cancel")) != "Proceed")
+		return FALSE
+
+	SSrole_class_handler.setup_class_handler(mob)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] triggered the subclass menu on [key_name_admin(mob)]!</span>")
+	log_admin("[key_name(usr)] triggered the subclass menu on [key_name(mob)].")
+
 /datum/admins/proc/admin_curse(mob/living/carbon/human/M in GLOB.mob_list)
 	set name = "Curse"
 	set desc = "Curse or lift a curse from a character"

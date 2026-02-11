@@ -116,8 +116,8 @@
 	weight = 100
 
 /datum/special_trait/beautiful/on_apply(mob/living/carbon/human/character, silent)
-	REMOVE_TRAIT(character, TRAIT_UGLY, TRAIT_GENERIC)
-	REMOVE_TRAIT(character, TRAIT_FISHFACE, TRAIT_GENERIC)
+	REMOVE_TRAIT(character, TRAIT_UGLY, BE_SPECIAL_TRAIT)
+	REMOVE_TRAIT(character, TRAIT_FISHFACE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_BEAUTIFUL, "[type]")
 
 //positive
@@ -505,7 +505,7 @@
 
 /datum/special_trait/ugly/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_UGLY, "[type]")
-	REMOVE_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+	REMOVE_TRAIT(character, TRAIT_BEAUTIFUL, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/nopouch
 	name = "No Pouch"
@@ -781,8 +781,8 @@
 	weight = 25
 
 /datum/special_trait/smelly/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_STINKY, TRAIT_GENERIC)
-	ADD_TRAIT(character, TRAIT_DEADNOSE, TRAIT_GENERIC)
+	ADD_TRAIT(character, TRAIT_STINKY, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_DEADNOSE, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/keenears
 	name = "Keen Ears"
@@ -859,7 +859,7 @@
 	weight = 50
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
+	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, BE_SPECIAL_TRAIT)
 	character.inspiration = new /datum/inspiration(character)
 	character.adjust_skillrank(/datum/skill/misc/music, 4, TRUE)
 

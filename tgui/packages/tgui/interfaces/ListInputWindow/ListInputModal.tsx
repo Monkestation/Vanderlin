@@ -9,7 +9,7 @@ import {
   KEY_Z,
 } from 'tgui-core/keycodes';
 
-import { InputButtons } from './_common/InputButtons';
+import { InputButtons } from '../_common/InputButtons';
 
 type ListInputModalProps = {
   items: string[];
