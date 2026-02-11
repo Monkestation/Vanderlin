@@ -44,6 +44,7 @@
 	user << browse_rsc('html/character_ui/dusty/family/spouse_pref.png', "spouse_pref.png")
 	// Flavour
 	user << browse_rsc('html/character_ui/dusty/flavour/0_flavour_bg.png', "0_flavour_bg.png")
+	user << browse_rsc('html/character_ui/dusty/flavour/flavour_culture.png', "flavour_culture.png")
 	user << browse_rsc('html/character_ui/dusty/flavour/flavour_descriptors.png', "flavour_descriptors.png")
 	user << browse_rsc('html/character_ui/dusty/flavour/flavour_descriptors_hover.png', "flavour_descriptors_hover.png")
 	user << browse_rsc('html/character_ui/dusty/flavour/flavour_text.png', "flavour_text.png")
@@ -136,6 +137,7 @@
 	user << browse_rsc('html/character_ui/grimshart/family/spouse_pref.png', "spouse_pref.png")
 	// Flavour
 	user << browse_rsc('html/character_ui/grimshart/flavour/0_flavour_bg.png', "0_flavour_bg.png")
+	user << browse_rsc('html/character_ui/grimshart/flavour/flavour_culture.png', "flavour_culture.png")
 	user << browse_rsc('html/character_ui/grimshart/flavour/flavour_descriptors.png', "flavour_descriptors.png")
 	user << browse_rsc('html/character_ui/grimshart/flavour/flavour_descriptors_hover.png', "flavour_descriptors_hover.png")
 	user << browse_rsc('html/character_ui/grimshart/flavour/flavour_text.png', "flavour_text.png")
@@ -228,6 +230,7 @@
 	user << browse_rsc('html/character_ui/parchment/family/spouse_pref.png', "spouse_pref.png")
 	// Flavour
 	user << browse_rsc('html/character_ui/parchment/flavour/0_flavour_bg.png', "0_flavour_bg.png")
+	user << browse_rsc('html/character_ui/parchment/flavour/flavour_culture.png', "flavour_culture.png")
 	user << browse_rsc('html/character_ui/parchment/flavour/flavour_descriptors.png', "flavour_descriptors.png")
 	user << browse_rsc('html/character_ui/parchment/flavour/flavour_descriptors_hover.png', "flavour_descriptors_hover.png")
 	user << browse_rsc('html/character_ui/parchment/flavour/flavour_text.png', "flavour_text.png")
@@ -320,6 +323,7 @@
 	user << browse_rsc('html/character_ui/paper/family/spouse_pref.png', "spouse_pref.png")
 	// Flavour
 	user << browse_rsc('html/character_ui/paper/flavour/0_flavour_bg.png', "0_flavour_bg.png")
+	user << browse_rsc('html/character_ui/paper/flavour/flavour_culture.png', "flavour_culture.png")
 	user << browse_rsc('html/character_ui/paper/flavour/flavour_descriptors.png', "flavour_descriptors.png")
 	user << browse_rsc('html/character_ui/paper/flavour/flavour_descriptors_hover.png', "flavour_descriptors_hover.png")
 	user << browse_rsc('html/character_ui/paper/flavour/flavour_text.png', "flavour_text.png")

@@ -1335,11 +1335,13 @@
 /* Language procs */
 /atom/movable/proc/get_language_holder(shadow=TRUE)
 	RETURN_TYPE(/datum/language_holder)
-	if(language_holder)
-		return language_holder
-	else
+	if(QDELING(src))
+		CRASH("get_language_holder() called on a QDELing atom, \
+			this will try to re-instantiate the language holder that's about to be deleted, which is bad.")
+
+	if(!language_holder)
 		language_holder = new initial_language_holder(src)
-		return language_holder
+	return language_holder
 
 /atom/movable/proc/grant_language(datum/language/dt, body = FALSE)
 	var/datum/language_holder/H = get_language_holder(!body)
