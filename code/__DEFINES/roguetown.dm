@@ -5,6 +5,9 @@
 #define ALL_PROFANE_PATRONS 	list(/datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 #define ALL_ICONOCLAST_PATRONS  list(/datum/patron/psydon, /datum/patron/psydon/extremist, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 
+/// Currently same as ALL_ICONOCLAST_PATRONS, but in text format because byond sucks and won't read things properly.
+#define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha")
+
 GLOBAL_LIST_INIT(curse_names, list())
 
 #define TEN_CURSES list(\
@@ -136,97 +139,33 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 	Currently used for classes, I could have used these for drifters tho
 */
 
-#define CTAG_ALLCLASS		"CAT_ALLCLASS"		// jus a define for allclass to not deal with actively typing strings
-#define CTAG_PILGRIM 		"CAT_PILGRIM"  		// Pilgrim classes
-#define CTAG_ADVENTURER 	"CAT_ADVENTURER"  	// Adventurer classes
-#define CTAG_TOWNER 		"CAT_TOWNER"  		// Villager class - Villagers can use it
-#define CTAG_ANTAG 			"CAT_ANTAG"  		// Antag class - results in an antag
-#define CTAG_BANDIT			"CAT_BANDIT"		// Bandit class - Tied to the bandit antag really	<- Disabled; bandits got stuck with class selection
-#define CTAG_CHALLENGE 		"CAT_CHALLENGE"  	// Challenge class - Meant to be free for everyone
-#define CTAG_MERCENARY		"CAT_MERCENARY"
-#define CTAG_GARRISON		"CAT_GARRISON"
-#define CTAG_FORGARRISON	"CAT_FORGARRISON"
-#define CTAG_ADEPT			"CAT_ADEPT" // Used for Adept class selection
-#define CTAG_SQUIRE 		"CAT_SQUIRE" // Squire Love, Classes, as above.
-#define CTAG_MAGIE			"CAT_MAGIE" //for Mage Associate
-#define CTAG_HEIR			"CAT_HEIR"
-#define CTAG_HAND			"CAT_HAND"			// Hand class - Handles Hand class selector
-#define CTAG_CONSORT 		"CAT_CONSORT" 		// Consort classes
-#define CTAG_VETERAN		"CAT_VETERAN"		// Veteran class - Handles Veteran class selector
-#define CTAG_TOWN_ELDER		"CAT_TOWN_ELDER"		// Town Elder class - Handles Town Elder class selector
-#define CTAG_ROYALKNIGHT	"CAT_ROYAL_KNIGHT"
-#define CTAG_ARCHIVIST		"CAT_ARCHIVIST"
-#define CTAG_MENATARMS		"CAT_MENATARMS"
-#define CTAG_SERVANT		"CAT_SERVANT" 		// Servant class - 4 type of servant to fill in someplace.
-#define CTAG_GATEMASTER		"CAT_GATEMASTER"
-#define CTAG_WRETCH			"CAT_WRETCH"
-#define CTAG_INQUISITION	"CAT_INQUISITION"	// For Orthodoxist subclasses
+#define CTAG_ALLCLASS "CAT_ALLCLASS" // just a define for allclass to not deal with actively typing strings
+#define CTAG_PILGRIM "CAT_PILGRIM"  // Pilgrim classes
+#define CTAG_ADVENTURER "CAT_ADVENTURER" // Adventurer classes
+#define CTAG_TOWNER "CAT_TOWNER" // Villager class - Villagers can use it
+#define CTAG_ANTAG "CAT_ANTAG" // Antag class - results in an antag
+#define CTAG_BANDIT	"CAT_BANDIT" // Bandit class - Tied to the bandit antag really	<- Disabled; bandits got stuck with class selection
+#define CTAG_CHALLENGE "CAT_CHALLENGE" // Challenge class - Meant to be free for everyone
+#define CTAG_MERCENARY "CAT_MERCENARY"
+#define CTAG_GARRISON "CAT_GARRISON"
+#define CTAG_FORGARRISON "CAT_FORGARRISON"
+#define CTAG_ADEPT "CAT_ADEPT" // Used for Adept class selection
+#define CTAG_SQUIRE "CAT_SQUIRE" // Squire Love, Classes, as above.
+#define CTAG_MAGIE "CAT_MAGIE" //for Mage Associate
+#define CTAG_HEIR "CAT_HEIR"
+#define CTAG_HAND "CAT_HAND" // Hand class - Handles Hand class selector
+#define CTAG_CONSORT "CAT_CONSORT" // Consort classes
+#define CTAG_VETERAN "CAT_VETERAN" // Veteran class - Handles Veteran class selector
+#define CTAG_TOWN_ELDER "CAT_TOWN_ELDER" // Town Elder class - Handles Town Elder class selector
+#define CTAG_ROYALKNIGHT "CAT_ROYAL_KNIGHT"
+#define CTAG_ARCHIVIST "CAT_ARCHIVIST"
+#define CTAG_MENATARMS "CAT_MENATARMS"
+#define CTAG_SERVANT "CAT_SERVANT" // Servant class - 4 type of servant to fill in someplace.
+#define CTAG_GATEMASTER "CAT_GATEMASTER"
+#define CTAG_WRETCH "CAT_WRETCH"
+#define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
-
-// Character category and its buys
-#define TRIUMPH_CAT_CHARACTER "CHARACTER"
-
-#define TRIUMPH_BUY_RACE_ALL "race_all"
-#define TRIUMPH_BUY_ANY_CLASS "pick_any"
-#define TRIUMPH_BUY_ADOPTION "adoption"
-#define TRIUMPH_BUY_FART "fart"
-#define TRIUMPH_BUY_SECRET_OFFICIANT "secret_officiant"
-
-// Character category and its buys
-#define TRIUMPH_CAT_CHALLENGES "CHALLENGES"
-
-#define TRIUMPH_BUY_LEPROSY "leprosy"
-#define TRIUMPH_BUY_CURSE "curse"
-
-// Storyteller category and its buys
-#define TRIUMPH_CAT_STORYTELLER "STORYTELLER"
-
-#define TRIUMPH_BUY_ASTRATA_INFLUENCE "astrata_influence"
-#define TRIUMPH_BUY_NOC_INFLUENCE "noc_influence"
-#define TRIUMPH_BUY_RAVOX_INFLUENCE "ravox_influence"
-#define TRIUMPH_BUY_ABYSSOR_INFLUENCE "abyssor_influence"
-#define TRIUMPH_BUY_XYLIX_INFLUENCE "xylix_influence"
-#define TRIUMPH_BUY_NECRA_INFLUENCE "necra_influence"
-#define TRIUMPH_BUY_PESTRA_INFLUENCE "pestra_influence"
-#define TRIUMPH_BUY_MALUM_INFLUENCE "malum_influence"
-#define TRIUMPH_BUY_EORA_INFLUENCE "eora_influence"
-#define TRIUMPH_BUY_DENDOR_INFLUENCE "dendor_influence"
-#define TRIUMPH_BUY_ZIZO_INFLUENCE "zizo_influence"
-#define TRIUMPH_BUY_BAOTHA_INFLUENCE "baotha_influence"
-#define TRIUMPH_BUY_GRAGGAR_INFLUENCE "graggar_influence"
-#define TRIUMPH_BUY_MATTHIOS_INFLUENCE "matthios_influence"
-
-#define TRIUMPH_BUY_MATTHIOS_INFLUENCE_REDUCTION "matthios_influence_reduction"
-#define TRIUMPH_BUY_GRAGGAR_INFLUENCE_REDUCTION "graggar_influence_reduction"
-#define TRIUMPH_BUY_BAOTHA_INFLUENCE_REDUCTION "baotha_influence_reduction"
-#define TRIUMPH_BUY_ZIZO_INFLUENCE_REDUCTION "zizo_influence_reduction"
-#define TRIUMPH_BUY_DENDOR_INFLUENCE_REDUCTION "dendor_influence_reduction"
-#define TRIUMPH_BUY_EORA_INFLUENCE_REDUCTION "eora_influence_reduction"
-#define TRIUMPH_BUY_MALUM_INFLUENCE_REDUCTION "malum_influence_reduction"
-#define TRIUMPH_BUY_PESTRA_INFLUENCE_REDUCTION "pestra_influence_reduction"
-#define TRIUMPH_BUY_NECRA_INFLUENCE_REDUCTION "necra_influence_reduction"
-#define TRIUMPH_BUY_XYLIX_INFLUENCE_REDUCTION "xylix_influence_reduction"
-#define TRIUMPH_BUY_ABYSSOR_INFLUENCE_REDUCTION "abyssor_influence_reduction"
-#define TRIUMPH_BUY_RAVOX_INFLUENCE_REDUCTION "ravox_influence_reduction"
-#define TRIUMPH_BUY_NOC_INFLUENCE_REDUCTION "noc_influence_reduction"
-#define TRIUMPH_BUY_ASTRATA_INFLUENCE_REDUCTION "astrata_influence_reduction"
-
-// Misc category and its buys
-#define TRIUMPH_CAT_MISC "MISC"
-
-#define TRIUMPH_BUY_PSYDON_FAVOURITE "psydon_favourite"
-
-// Misc category and its buys
-#define TRIUMPH_CAT_COMMUNAL "COMMUNAL"
-
-#define TRIUMPH_BUY_PSYDON_RETIREMENT "psydon_retirement"
-#define TRIUMPH_BUY_ORPHANAGE_RENOVATION "orphanage_renovation"
-#define TRIUMPH_BUY_LONGER_WEEK "longer_week"
-#define TRIUMPH_BUY_EXOTIC_TASTES "exotic_tastes"
-
-// Bought triumph buys category
-#define TRIUMPH_CAT_ACTIVE_DATUMS "BOUGHT"
 
 // .............. SELLPRICE/VALUE DEFINES ..................... //
 // Basicallly material cost + work cost will be the value from now on. Needs work to value these things in comparison but its a simple way to get some consistency to it

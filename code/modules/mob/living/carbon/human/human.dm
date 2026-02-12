@@ -121,6 +121,7 @@
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+	culture = new()
 
 	. = ..()
 
@@ -131,6 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
+	QDEL_NULL(culture)
 	GLOB.human_list -= src
 	return ..()
 
@@ -183,7 +185,7 @@
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
 	if(clan)
-		. += "Vitae: [bloodpool]"
+		. += "VITAE: [bloodpool]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)

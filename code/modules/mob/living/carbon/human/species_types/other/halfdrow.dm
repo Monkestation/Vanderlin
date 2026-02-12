@@ -24,7 +24,6 @@
 	\n\
 	THIS IS A DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
 
-	skin_tone_wording = "Half-Drow Identity"
 	default_color = "FFFFFF"
 
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
@@ -117,7 +116,7 @@
 
 /datum/species/human/halfdrow/get_skin_list()
 	return sortList(list(
-		"Zizo-Cursed" = SKIN_COLOR_ZIZO_CURSED, // - (Pale)
+		"Zizo-Cursed" = SKIN_COLOR_ICECAP, // - (Pale)
 		"Parasite-Taineted" = SKIN_COLOUR_PARASITE_TAINTED, // - (Light purple)
 		"Mushroom-Minded" = SKIN_COLOR_MUSHROOM_MINDED, // - (Mid purple)
 		"Cave-Attuned" = SKIN_COLOR_CAVE_ATTUNED, // - (Deep purple)
@@ -127,31 +126,30 @@
 
 /datum/species/human/halfdrow/get_hairc_list()
 	return sortList(list(
-	"black - oil" = "181a1d",
-	"black - cave" = "201616",
-	"black - rogue" = "2b201b",
-	"black - midnight" = "1d1b2b",
+		"black - oil" = "181a1d",
+		"black - cave" = "201616",
+		"black - rogue" = "2b201b",
+		"black - midnight" = "1d1b2b",
 
-	"brown - mud" = "362e25",
-	"brown - oats" = "584a3b",
-	"brown - grain" = "58433b",
-	"brown - soil" = "48322a",
+		"brown - mud" = "362e25",
+		"brown - oats" = "584a3b",
+		"brown - grain" = "58433b",
+		"brown - soil" = "48322a",
 
-	"red - berry" = "b23434",
-	"red - wine" = "82534c",
-	"red - sunset" = "82462b",
-	"red - blood" = "822b2b",
-	"red - maroon" = "612929",
+		"red - berry" = "b23434",
+		"red - wine" = "82534c",
+		"red - sunset" = "82462b",
+		"red - blood" = "822b2b",
+		"red - maroon" = "612929",
 
-	"blond - pale" = "9d8d6e",
-	"blond - dirty" = "88754f",
-	"blond - drywheat" = "d5ba7b",
-	"blond - strawberry" = "c69b71",
+		"blond - pale" = "9d8d6e",
+		"blond - dirty" = "88754f",
+		"blond - drywheat" = "d5ba7b",
+		"blond - strawberry" = "c69b71",
 
-	"white - ice" = "f4f4f4",
-	"white - cavedew" = "dee9ed",
-	"white - spiderweb" = "f4f4f4"
-
+		"white - ice" = "f4f4f4",
+		"white - cavedew" = "dee9ed",
+		"white - spiderweb" = "f4f4f4"
 	))
 
 /datum/species/human/halfdrow/get_possible_names(gender = MALE)
@@ -172,8 +170,9 @@
 		C.dna.species.native_language = C.accent
 	C.dna.species.accent_language = C.dna.species.get_accent(C.dna.species.native_language, 2)
 
-	if(C.skin_tone == SKIN_COLOR_ZIZO_CURSED)
+	if(C.skin_tone == SKIN_COLOR_ICECAP)
 		exotic_bloodtype = /datum/blood_type/human/cursed_elf
+
 	C.grant_language(/datum/language/elvish)
 	to_chat(C, "<span class='info'>I can speak Elvish with ,e before my speech.</span>")
 

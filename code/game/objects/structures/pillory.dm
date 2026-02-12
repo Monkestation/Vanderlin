@@ -17,11 +17,23 @@
 	var/latched = FALSE
 	var/base_icon = "pillory_single"
 
+/obj/structure/pillory/church
+	desc = "To keep the heretics locked!"
+	lock = /datum/lock/key/pillory/church
+
 /obj/structure/pillory/double
 	icon_state = "pillory_double"
 	base_icon = "pillory_double"
 
 /obj/structure/pillory/reinforced
+	icon_state = "pillory_reinforced"
+	base_icon = "pillory_reinforced"
+
+/obj/structure/pillory/church/double
+	icon_state = "pillory_double"
+	base_icon = "pillory_double"
+
+/obj/structure/pillory/church/reinforced
 	icon_state = "pillory_reinforced"
 	base_icon = "pillory_reinforced"
 

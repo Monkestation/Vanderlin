@@ -5,7 +5,7 @@
 	allowed_patrons = list(/datum/patron/divine/astrata)
 	outfit = /datum/outfit/folkhero/lakkariancleric
 	category_tags = list(CTAG_FOLKHEROES)
-	total_positions = 2
+	total_positions = 0 //Lakkari disabled
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 

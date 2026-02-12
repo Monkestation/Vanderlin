@@ -14,7 +14,9 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/remove_liquid,
 	/client/proc/adjust_pq,
 	/client/proc/stop_restart,
-	/client/proc/hearallasghost,
+	/client/proc/ghostears,
+	/client/proc/ghostwhispers,
+	/client/proc/ghosteyes,
 	/client/proc/toggle_aghost_invis,
 	/client/proc/admin_ghost,
 	/client/proc/generate_bulk_codes,
@@ -24,6 +26,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/datum/admins/proc/start_vote,
 	/datum/admins/proc/show_player_panel,
 	/datum/admins/proc/admin_heal,
+	/datum/admins/proc/prompt_subclass,
 	/datum/admins/proc/admin_bless,
 	/datum/admins/proc/admin_curse,
 	/datum/admins/proc/admin_sleep,
@@ -87,7 +90,9 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/change_skill_exp_modifier, /*Tweaks experience gain*/
 	/client/proc/toggle_aghost_invis, /* lets us choose whether our in-game mob goes visible when we aghost (off by default) */
 	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
-	/client/proc/hearallasghost,
+	/client/proc/ghostears,
+	/client/proc/ghostwhispers,
+	/client/proc/ghosteyes,
 	/client/proc/ghost_up,
 	/client/proc/ghost_down,
 	/client/proc/toggle_view_range,		/*changes how far we can see*/
@@ -110,6 +115,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/cmd_admin_local_narrate,	/*sends text to all mobs within view of atom*/
+	/client/proc/cmd_admin_create_announcement,
 	/client/proc/cmd_admin_check_player_exp, /* shows players by playtime */
 	/client/proc/toggle_combo_hud, // toggle display of the combination pizza antag and taco sci/med/eng hud
 	/client/proc/toggle_AI_interact, /*toggle admin ability to interact with machines as an AI*/
@@ -171,7 +177,8 @@ GLOBAL_PROTECT(admin_verbs_server)
 	/client/proc/adminchangemap,
 	/client/proc/panicbunker,
 	/client/proc/toggle_hub,
-	/client/proc/toggle_cdn
+	/client/proc/toggle_cdn,
+	/client/proc/end_triumph_season,
 	)
 GLOBAL_LIST_INIT(admin_verbs_debug, world.AVerbsDebug())
 GLOBAL_PROTECT(admin_verbs_debug)
@@ -256,6 +263,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/get_dynex_range,
 	/client/proc/get_dynex_power,
 	/client/proc/set_dynex_scale,
+	/client/proc/cmd_admin_create_announcement,
 	/client/proc/object_say,
 	/client/proc/toggle_random_events,
 	/datum/admins/proc/startnow,
@@ -376,12 +384,10 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set name = "Right-click Menu"
 	if(!holder)
 		return
-	if(show_popup_menus == FALSE)
-		show_popup_menus = TRUE
-		log_admin("[key_name(usr)] toggled context menu ON.")
-	else
-		show_popup_menus = FALSE
-		log_admin("[key_name(usr)] toggled context menu OFF.")
+	show_popup_menus = !show_popup_menus
+
+	to_chat(usr, span_notice("Toggled context menu [show_popup_menus ? "ON" : "OFF"]."))
+	log_admin("[key_name(usr)] toggled context menu [show_popup_menus ? "ON" : "OFF"].")
 
 /client/proc/toggle_aghost_invis()
 	set category = "Admin.Ghost"
@@ -567,7 +573,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stealth Mode") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/drop_bomb()
-	set category = "GameMaster"
+	set category = "GameMaster.Fun"
 	set name = "Drop Bomb"
 	set desc = ""
 
@@ -609,7 +615,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Drop Bomb") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/drop_dynex_bomb()
-	set category = "GameMaster"
+	set category = "GameMaster.Fun"
 	set name = "Drop DynEx Bomb"
 	set desc = ""
 
@@ -622,7 +628,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Drop Dynamic Bomb") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/get_dynex_range()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Get DynEx Range"
 	set desc = ""
 
@@ -633,7 +639,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	to_chat(usr, "Estimated Explosive Range: (Devastation: [round(range*0.25)], Heavy: [round(range*0.5)], Light: [round(range)])")
 
 /client/proc/get_dynex_power()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Get DynEx Power"
 	set desc = ""
 
@@ -644,7 +650,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	to_chat(usr, "Estimated Explosive Power: [power]")
 
 /client/proc/set_dynex_scale()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Set DynEx Scale"
 	set desc = ""
 
@@ -723,7 +729,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/object_say(obj/O in world)
 	set category = "GameMaster.Interactions"
-	set name = "OSay"
+	set name = "ObjectSay"
 	set desc = ""
 	var/message = input(usr, "What do you want the message to be?", "Make Sound") as text | null
 	if(!message)
@@ -901,7 +907,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	src << browse(dat, "window=reading;size=800x600;can_close=1;can_minimize=1;can_maximize=1;can_resize=1;border=0")
 
 /client/proc/manage_paintings()
-	set category = "Admin.Admin"
+	set category = "GameMaster.Interactions"
 	set name = "Manage Paintings"
 	if(!holder)
 		return

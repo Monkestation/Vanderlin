@@ -1,6 +1,6 @@
 // This code handles different species in the game.
-GLOBAL_LIST_EMPTY(roundstart_races)
-GLOBAL_LIST_EMPTY(donator_races)
+GLOBAL_LIST_EMPTY(roundstart_species)
+
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -8,6 +8,9 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/desc
 	/// Internal ID of this species used for job checks, etc.
 	var/id
+	// Since an unique ID is required, but subspecies probably should have the same restrictions
+	/// Override for things that use species id to use instead
+	var/id_override
 	/// Override for limbs to use a different species' limbs
 	var/limbs_id
 	/// Limb icon to use to build appearance for males
@@ -188,7 +191,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/use_skintones = FALSE
 
 	/// Wording for skin tone on examine and on character setup
-	var/skin_tone_wording = "Skin Tone"
+	var/skin_tone_wording = "Ancestry"
 
 	/// List of bodypart features of this species
 	var/list/bodypart_features
@@ -440,32 +443,12 @@ GLOBAL_LIST_EMPTY(donator_races)
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	return TRUE
 
-/proc/generate_selectable_species()
-	for(var/I as anything in subtypesof(/datum/species))
-		var/datum/species/S = new I
-		if(!S.check_roundstart_eligible())
-			continue
-		GLOB.roundstart_races += S.name
-		if(S.donator_req)
-			GLOB.donator_races += S.name
-		qdel(S)
-	if(!LAZYLEN(GLOB.roundstart_races))
-		GLOB.roundstart_races += "Humen" // GLOB.species_list uses name and should probably be refactored
-	sortTim(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
-
-/proc/get_selectable_species(donator = TRUE)
-	if(!LAZYLEN(GLOB.roundstart_races))
-		generate_selectable_species()
-	var/list/species = GLOB.roundstart_races.Copy()
-	if(!donator)
-		species -= GLOB.donator_races
-	return species
-
 /datum/species/proc/check_roundstart_eligible()
 	return FALSE
-//	if(id in (CONFIG_GET(keyed_list/roundstart_races)))
-//		return TRUE
-//	return FALSE
+
+// Remove when preference datums
+/datum/species/proc/preference_accessible(datum/preferences/prefs)
+	return TRUE
 
 /datum/species/proc/get_possible_names(gender = MALE) as /list
 	SHOULD_CALL_PARENT(FALSE)
@@ -496,23 +479,24 @@ GLOBAL_LIST_EMPTY(donator_races)
 /datum/species/proc/get_spec_undies_list(gender)
 	if(!GLOB.underwear_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
+
+	var/list/used_list = GLOB.underwear_list
+	if(gender == MALE)
+		used_list = GLOB.underwear_m
+	else if(gender == FEMALE)
+		used_list = GLOB.underwear_f
+
+	var/used_species_id = id_override ? id_override : id
+
 	var/list/spec_undies = list()
-	var/datum/sprite_accessory/X
-	switch(gender)
-		if(MALE)
-			for(var/O in GLOB.underwear_m)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if(id in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
-		if(FEMALE)
-			for(var/O in GLOB.underwear_f)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if(id in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
+	for(var/name in used_list)
+		var/datum/sprite_accessory/accessory = used_list[name]
+		if(!accessory.roundstart)
+			continue
+		if(!(used_species_id in accessory.specuse))
+			continue
+		spec_undies += accessory
+
 	return spec_undies
 
 /datum/species/proc/random_underwear(gender)
@@ -553,87 +537,104 @@ GLOBAL_LIST_EMPTY(donator_races)
 /datum/species/proc/qualifies_for_rank(rank, list/features)
 	return 1
 
-//Will regenerate missing organs
-/datum/species/proc/regenerate_organs(mob/living/carbon/C, datum/species/old_species, replace_current=TRUE, list/excluded_zones, datum/preferences/pref_load)
+/**
+ * Corrects organs in a carbon, removing ones it doesn't need and adding ones it does.
+ *
+ * Takes all organ slots, removes organs a species should not have, adds organs a species should have.
+ * can use replace_current to refresh all organs, creating an entirely new set.
+ *
+ * Arguments:
+ * * organ_holder - carbon, the owner of the species datum AKA whoever we're regenerating organs in
+ * * old_species - datum, used when regenerate organs is called in a switching species to remove old mutant organs.
+ * * replace_current - boolean, forces all old organs to get deleted whether or not they pass the species' ability to keep that organ
+ * * excluded_zones - list, add zone defines to block organs inside of the zones from getting handled. see headless mutation for an example
+ * * visual_only - boolean, only load organs that change how the species looks. Do not use for normal gameplay stuff
+ * * replace_missing - Whether or not to replace missing organs
+ * * pref_lod - pref organ dna (why the fuck do we need this)
+ */
+/datum/species/proc/regenerate_organs(
+	mob/living/carbon/organ_holder,
+	datum/species/old_species,
+	replace_current = TRUE,
+	list/excluded_zones,
+	visual_only = FALSE,
+	replace_missing = TRUE,
+	datum/preferences/pref_load
+)
 	/// Add DNA and create organs from prefs
 	if(pref_load)
 		/// Clear the dna
-		C.dna.organ_dna = list()
+		organ_holder.dna.organ_dna = list()
 		var/list/organ_dna_list = pref_load.get_organ_dna_list()
 		for(var/organ_slot in organ_dna_list)
-			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+			organ_holder.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
 
-	//what should be put in if there is no mutantorgan (brains handled seperately)
-	var/list/slot_mutantorgans = organs
+	for(var/slot in GLOB.all_organ_slots)
+		var/obj/item/organ/existing_organ = organ_holder.getorganslot(slot)
+		var/obj/item/organ/new_organ = organs[slot]
+		var/old_organ_type = old_species?.organs[slot]
 
-	var/list/slots_to_iterate = list()
-	for(var/slot in C.dna.organ_dna)
-		slots_to_iterate |= slot
-	for(var/slot in slot_mutantorgans)
-		if(!is_organ_slot_allowed(C, slot))
+		// if we have an extra organ that before changing that the species didnt have, remove it
+		if(!new_organ)
+			if(existing_organ && (old_organ_type == existing_organ.type || replace_current))
+				existing_organ.Remove(organ_holder)
+				qdel(existing_organ)
 			continue
-		slots_to_iterate |= slot
 
-	// Remove the organs from the slots they should have nothing in
-	for(var/obj/item/organ/organ in C.internal_organs)
-		if(organ.slot in slots_to_iterate)
+		if(existing_organ)
+			// we dont want to remove organs that were not from the old species (such as from freak surgery or prosthetics)
+			if(existing_organ.type != old_organ_type && !replace_current)
+				continue
+
+			if(existing_organ.type == new_organ)
+				var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
+				organ_dna?.imprint_organ(existing_organ)
+				pref_load?.customize_organ(existing_organ)
+				continue // we don't want to remove organs that are the same as the new one
+
+		if(visual_only && (!initial(new_organ.accessory_type) && !initial(new_organ.visible_organ)))
 			continue
-		organ.Remove(C, TRUE)
-		QDEL_NULL(organ)
-	var/list/source_key_list = color_key_source_list_from_carbon(C)
-	for(var/slot in slots_to_iterate)
-		var/obj/item/organ/oldorgan = C.getorganslot(slot) //used in removing
-		var/obj/item/organ/neworgan
-
-		if(C.dna.organ_dna[slot])
-			var/datum/organ_dna/organ_dna = C.dna.organ_dna[slot]
-			if(organ_dna.can_create_organ())
-				neworgan = organ_dna.create_organ(species = src)
-				if(slot_mutantorgans[slot])
-					if(!istype(neworgan, slot_mutantorgans[slot]))
-						var/new_type = slot_mutantorgans[slot]
-						neworgan = new new_type()
-						organ_dna.imprint_organ(neworgan)
-				if(pref_load)
-					pref_load.customize_organ(neworgan)
-		else
-			var/new_type = slot_mutantorgans[slot]
-			if(new_type)
-				neworgan = new new_type()
-				neworgan.build_colors_for_accessory(source_key_list)
 
 		var/used_neworgan = FALSE
-		var/should_have
-		if(neworgan)
-			should_have = neworgan.get_availability(src)
-		else
-			should_have = TRUE
 
-		if(oldorgan && (!should_have || replace_current) && !(oldorgan.zone in excluded_zones))
+		var/used_dna = FALSE
+		var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
+		if(organ_dna?.can_create_organ())
+			new_organ = organ_dna.create_organ(species = src)
+			pref_load?.customize_organ(new_organ)
+			used_dna = TRUE
+
+		if(!used_dna)
+			new_organ = new new_organ()
+			new_organ.build_colors_for_accessory(color_key_source_list_from_carbon(organ_holder))
+
+		var/should_have = new_organ.get_availability(src, organ_holder)
+
+		// Check for an existing organ, and if there is one check to see if we should remove it
+		var/health_pct = 1
+		var/remove_existing = !isnull(existing_organ) && !(existing_organ.zone in excluded_zones)
+		if(remove_existing)
+			health_pct = (existing_organ.maxHealth - existing_organ.damage) / existing_organ.maxHealth
 			if(slot == ORGAN_SLOT_BRAIN)
-				var/obj/item/organ/brain/brain = oldorgan
-				if(!brain.decoy_override)//"Just keep it if it's fake" - confucius, probably
-					brain.Remove(C,TRUE, TRUE) //brain argument used so it doesn't cause any... sudden death.
-					QDEL_NULL(brain)
-					oldorgan = null //now deleted
+				var/obj/item/organ/brain/existing_brain = existing_organ
+				existing_brain.before_organ_replacement(new_organ)
+				existing_brain.Remove(organ_holder, special = TRUE, no_id_transfer = TRUE)
 			else
-				oldorgan.Remove(C,TRUE)
-				QDEL_NULL(oldorgan) //we cannot just tab this out because we need to skip the deleting if it is a decoy brain.
+				existing_organ.before_organ_replacement(new_organ)
+				existing_organ.Remove(organ_holder, special = TRUE)
 
+			QDEL_NULL(existing_organ)
 
-		if(oldorgan)
-			oldorgan.setOrganDamage(0)
-		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
+		if(isnull(existing_organ) && should_have && !(new_organ.zone in excluded_zones) && organ_holder.get_bodypart(deprecise_zone(new_organ.zone)) && (replace_missing || remove_existing))
 			used_neworgan = TRUE
-			if(neworgan)
-				neworgan.Insert(C, TRUE, FALSE)
+			new_organ.setOrganDamage(new_organ.maxHealth * (1 - health_pct))
+			new_organ.Insert(organ_holder, special = TRUE)
 
 		if(!used_neworgan)
-			if(neworgan)
-				qdel(neworgan)
-		else if (!C.dna.organ_dna[slot] && neworgan)
-			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
-			C.dna.organ_dna[slot] = new_dna
+			QDEL_NULL(new_organ)
+		else if(!organ_holder.dna.organ_dna[slot])
+			var/datum/organ_dna/new_dna = new_organ.create_organ_dna()
+			organ_holder.dna.organ_dna[slot] = new_dna
 
 /datum/species/proc/is_organ_slot_allowed(mob/living/carbon/human/human, organ_slot)
 	return TRUE
@@ -746,12 +747,12 @@ GLOBAL_LIST_EMPTY(donator_races)
 	if(C.hud_used)
 		C.hud_used.update_locked_slots()
 
-	if(ishuman(C))
+	if(ishuman(C) && !pref_load)
 		random_character(C)
+	else
+		regenerate_organs(C, old_species, pref_load = pref_load)
 
 	C.mob_biotypes = inherent_biotypes
-
-	regenerate_organs(C,old_species, pref_load=pref_load)
 
 	if(exotic_bloodtype && C.dna.human_blood_type != exotic_bloodtype)
 		C.dna.human_blood_type = exotic_bloodtype
@@ -868,7 +869,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 				limb_icon = species.limbs_icon_m
 			else
 				limb_icon = species.limbs_icon_f
-			var/mutable_appearance/bodyhair_overlay = mutable_appearance(limb_icon, "[species?.hairyness]", -BODY_LAYER)
+			var/mutable_appearance/bodyhair_overlay = mutable_appearance(limb_icon, "[species?.hairyness]", -FRONT_MUTATIONS_LAYER)
 			bodyhair_overlay.color = H.get_hair_color()
 			standing += bodyhair_overlay
 

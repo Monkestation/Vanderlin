@@ -438,7 +438,7 @@
 		wounded.chronic_pain_type = pick(CHRONIC_OLD_FRACTURE, CHRONIC_SCAR_TISSUE, CHRONIC_NERVE_DAMAGE)
 		wounded.brute_dam += rand(3, 8)
 		var/wound_location = wounded.name
-		var/wound_desc = pick("shrapnel wound", "old arrow wound", "deep scar", "poorly healed fracture")
+		var/wound_desc = pick("shrapnel wound", "arrow wound", "deep scar", "poorly healed fracture")
 		to_chat(H, span_warning("You feel the familiar ache of your old [wound_desc] in your [wound_location]."))
 
 /datum/quirk/vice/old_war_wound/on_life(mob/living/user)

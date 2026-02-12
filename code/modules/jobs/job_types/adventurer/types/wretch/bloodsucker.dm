@@ -17,7 +17,7 @@
 /datum/job/advclass/wretch/bloodsucker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.mind)
-		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(/datum/clan/caitiff, TRUE)
+		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire/outcast(/datum/clan/caitiff, TRUE)
 		spawned.mind.add_antag_datum(new_antag)
 
 	spawned.grant_undead_eyes()
@@ -280,7 +280,7 @@
 
 	pack_backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/mid = 1,
-		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/clothing/face/shepherd/rag = 1
 	)
 

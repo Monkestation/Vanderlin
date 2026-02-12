@@ -1,5 +1,5 @@
 /client/proc/Debug2()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Debug-Game"
 	if(!check_rights(R_DEBUG))
 		return
@@ -107,7 +107,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Give Control To Player") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_areatest(on_station)
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Test Areas"
 
 	var/list/dat = list()
@@ -220,12 +220,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 
 /client/proc/cmd_admin_areatest_station()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Test Areas (STATION Z)"
 	cmd_admin_areatest(TRUE)
 
 /client/proc/cmd_admin_areatest_all()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Test Areas (ALL)"
 	cmd_admin_areatest(FALSE)
 
@@ -345,7 +345,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	return dresscode
 
 /client/proc/cmd_debug_mob_lists()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Debug Mob Lists"
 	set desc = ""
 
@@ -366,7 +366,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			to_chat(usr, jointext(GLOB.joined_player_list,","))
 
 /client/proc/cmd_display_del_log()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Display del() Log"
 	set desc = ""
 
@@ -404,21 +404,21 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	usr << browse(dellog.Join(), "window=dellog")
 
 /client/proc/cmd_display_overlay_log()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Display overlay Log"
 	set desc = ""
 
 	render_stats(SSoverlays.stats, src)
 
 /client/proc/cmd_display_init_log()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Display Initialize() Log"
 	set desc = ""
 
 	usr << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
 
 /client/proc/debug_huds(i as num)
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Debug HUDs"
 	set desc = ""
 
@@ -473,7 +473,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(src)] [SSachievements.hub_enabled ? "disabled" : "enabled"] the medal hub lockout.")
 
 /client/proc/view_runtimes()
-	set category = "Debug"
+	set category = "Debug.Core"
 	set name = "View Runtimes"
 	set desc = ""
 
@@ -496,7 +496,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(src)] pumped a random event.")
 
 /client/proc/start_line_profiling()
-	set category = "Profile"
+	set category = "Debug.Profiler"
 	set name = "Start Line Profiling"
 	set desc = ""
 
@@ -507,7 +507,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(src)] started line by line profiling.")
 
 /client/proc/stop_line_profiling()
-	set category = "Profile"
+	set category = "Debug.Profiler"
 	set name = "Stops Line Profiling"
 	set desc = ""
 
@@ -518,7 +518,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(src)] stopped line by line profiling.")
 
 /client/proc/show_line_profiling()
-	set category = "Profile"
+	set category = "Debug.Profiler"
 	set name = "Show Line Profiling"
 	set desc = ""
 

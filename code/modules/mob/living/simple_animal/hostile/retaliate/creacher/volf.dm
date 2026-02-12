@@ -89,6 +89,11 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
+	var/color = pick("brown", "black", "white")
+	icon_state = "volf_[color]"
+	icon_living = "volf_[color]"
+	icon_dead = "volf_[color]_dead"
+
 	gender = MALE
 	if(prob(33))
 		gender = FEMALE
@@ -103,7 +108,7 @@
 	. = ..()
 	if(stat == DEAD)
 		return
-	. += emissive_appearance(icon, "vve")
+	. += emissive_appearance(icon, "volf_eyes")
 
 /mob/living/simple_animal/hostile/retaliate/wolf/get_sound(input)
 	switch(input)

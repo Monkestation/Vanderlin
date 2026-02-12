@@ -967,10 +967,11 @@
 		. = TRUE
 		if(mind)
 			mind.remove_antag_datum(/datum/antagonist/zombie)
+
 		if(ishuman(src))
 			var/mob/living/carbon/human/human = src
 			human.funeral = FALSE
-		add_verb(src, /client/proc/descend)
+
 		if(excess_healing)
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
 			log_combat(src, src, "revived")

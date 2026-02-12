@@ -45,17 +45,17 @@ type Props = Partial<{
   PropsWithChildren;
 
 export function Window(props: Props) {
+  const { config, suspended, debug } = useBackend();
+
   const {
     canClose = true,
-    theme,
+    theme = config.window?.theme,
     title,
     children,
     buttons,
     width,
     height,
   } = props;
-
-  const { config, suspended, debug } = useBackend();
 
   const [isReadyToRender, setIsReadyToRender] = useState(false);
 

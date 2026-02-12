@@ -23,12 +23,14 @@
 			user.add_stress(/datum/stress_event/fishface)
 
 	if(HAS_TRAIT(src, TRAIT_FISHFACE))
-		if(!self_inspect && HAS_TRAIT(user, TRAIT_FISHFACE))
-			user.add_stress(/datum/stress_event/fellow_fishface)
-		else
+		var/observer_fish = HAS_TRAIT(user, TRAIT_FISHFACE)
+		if(!self_inspect)
+			if(observer_fish)
+				user.add_stress(/datum/stress_event/fellow_fishface)
+			else if(user.age == AGE_CHILD)
+				user.add_stress(/datum/stress_event/fish_monster)
+		else if(observer_fish)
 			user.add_stress(/datum/stress_event/self_fishface)
-	else if(!self_inspect && user.age == AGE_CHILD)
-		user.add_stress(/datum/stress_event/fish_monster)
 
 	if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
 		if(self_inspect)
@@ -60,7 +62,7 @@
 
 	var/temp_gender = null
 	var/obscure_name = FALSE
-	var/person_known = FALSE
+	var/person_known = self_inspect
 	if(!self_inspect && !isobserver(user))
 		if(name in list("Unknown", "Unknown Man", "Unknown Woman"))
 			obscure_name = TRUE
@@ -141,10 +143,22 @@
 			if(skin_tone)
 				//AGGHHHHH this is stupid
 				for(var/tone in skin_tones)
-					if(src.skin_tone == skin_tones[tone])
+					if(skin_tone == skin_tones[tone])
 						skin_tone_seen = lowertext(tone)
 						break
-			. += "<span class='info'>[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].</span>"
+
+			. += span_info("[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].")
+
+		if(culture)
+			if(!person_known || istype(culture, /datum/culture/universal/ambiguous))
+				if(!self_inspect)
+					. += span_info("[capitalize(t_He)] could be from anywhere.")
+			else
+				var/pre_string = "[capitalize(m1)]"
+				if(!self_inspect)
+					pre_string = "I believe [m1]"
+
+				. += span_info("[pre_string] from [culture.examined_string(src, user)].")
 
 		if(ishuman(user))
 			var/mob/living/carbon/human/stranger = user
@@ -208,13 +222,13 @@
 			if(HAS_TRAIT(src, TRAIT_THIEVESGUILD) && HAS_TRAIT(user, TRAIT_THIEVESGUILD))
 				. += span_green("A member of the Thieves' Guild.")
 
-			if((HAS_TRAIT(src, TRAIT_CABAL) && HAS_TRAIT(user, TRAIT_CABAL)) || (src.patron?.type == /datum/patron/inhumen/zizo && HAS_TRAIT(user, TRAIT_CABAL)))
+			if((HAS_TRAIT(src, TRAIT_CABAL) && HAS_TRAIT(user, TRAIT_CABAL)) || (patron?.type == /datum/patron/inhumen/zizo && HAS_TRAIT(user, TRAIT_CABAL)))
 				. += span_purple("A fellow seeker of Her ascension.")
 
 			if(HAS_TRAIT(user, TRAIT_ROYALSERVANT))
 				if(length(culinary_preferences) && family_datum == SSfamilytree.ruling_family)
-					var/obj/item/reagent_containers/food/snacks/fav_food = src.culinary_preferences[CULINARY_FAVOURITE_FOOD]
-					var/datum/reagent/consumable/fav_drink = src.culinary_preferences[CULINARY_FAVOURITE_DRINK]
+					var/obj/item/reagent_containers/food/snacks/fav_food = culinary_preferences[CULINARY_FAVOURITE_FOOD]
+					var/datum/reagent/consumable/fav_drink = culinary_preferences[CULINARY_FAVOURITE_DRINK]
 					if(fav_food)
 						if(fav_drink)
 							. += span_notice("Their favourites are [fav_food.name] and [fav_drink.name].")
@@ -222,8 +236,8 @@
 							. += span_notice("Their favourite is [fav_food.name].")
 					else if(fav_drink)
 						. += span_notice("Their favourite is [fav_drink.name].")
-					var/obj/item/reagent_containers/food/snacks/hated_food = src.culinary_preferences[CULINARY_HATED_FOOD]
-					var/datum/reagent/consumable/hated_drink = src.culinary_preferences[CULINARY_HATED_DRINK]
+					var/obj/item/reagent_containers/food/snacks/hated_food = culinary_preferences[CULINARY_HATED_FOOD]
+					var/datum/reagent/consumable/hated_drink = culinary_preferences[CULINARY_HATED_DRINK]
 					if(hated_food)
 						if(hated_drink)
 							. += span_notice("They hate [hated_food.name] and [hated_drink.name].")

@@ -116,6 +116,7 @@
 	var/flush_queue = window.send_asset(get_asset_datum(/datum/asset/simple/namespaced/fontawesome))
 	flush_queue |= window.send_asset(get_asset_datum(/datum/asset/simple/namespaced/tgfont))
 	flush_queue |= window.send_asset(get_asset_datum(/datum/asset/simple/roguefonts))
+
 	flush_queue |= window.send_asset(get_asset_datum(/datum/asset/json/icon_ref_map))
 
 	for(var/datum/asset/asset in src_object.ui_assets(user))
@@ -258,6 +259,9 @@
 			"key" = window_key,
 			"size" = window_size,
 			"fancy" = user.client.prefs.tgui_fancy,
+			"locked" = user.client.prefs.tgui_lock,
+			"theme" = "grim",
+			"scale" = TRUE,
 		),
 		"client" = list(
 			"ckey" = user.client.ckey,

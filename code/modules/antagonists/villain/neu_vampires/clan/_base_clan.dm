@@ -291,6 +291,9 @@ And it also helps for the character set panel
 		if(spell_instance)
 			spell_instance.Remove(vampire)
 
+	remove_verb(vampire, /mob/living/carbon/human/proc/disguise_button)
+	remove_verb(vampire, /mob/living/carbon/human/proc/vampire_telepathy)
+
 	if(vampire == clan_leader)
 		leader.remove_leader(vampire)
 		clan_leader = null

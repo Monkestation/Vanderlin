@@ -560,11 +560,14 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * Only works if flag/norespawn is allowed in config
  */
+
+// Removed for the moment
+/*
 /mob/verb/abandon_mob()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Preferences.Options"
+	set category = "Preferences.Admin"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_ADMIN))
 		return
 	if (CONFIG_GET(flag/norespawn))
 		return
@@ -594,6 +597,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	M.key = key
 //	M.Login()	//wat
 	return
+*/
 
 
 /**

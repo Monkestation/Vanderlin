@@ -44,10 +44,9 @@ export const ColorPickerModal: React.FC<ColorPickerModalProps> = () => {
 
   return (
     <Window
-      height={message ? 465 : 430}
+      height={message ? 530 : 500}
       title={title}
-      width={700}
-      theme="generic"
+      width={820}
     >
       {!!timeout && <Loader value={timeout} />}
       <Window.Content>

@@ -16,7 +16,7 @@
 	from doing this unless you absolutely know what you are doing, and have defined a
 	conversion in savefile.dm
 */
-/proc/init_sprite_accessory_subtypes(prototype, list/L, list/male, list/female,roundstart = FALSE, female_same = FALSE)//Roundstart argument builds a specific list for roundstart parts where some parts may be locked
+/proc/init_sprite_accessory_subtypes(prototype, list/L, list/male, list/female, roundstart = FALSE, female_same = FALSE)//Roundstart argument builds a specific list for roundstart parts where some parts may be locked
 	if(!istype(L))
 		L = list()
 	if(!istype(male))
@@ -24,29 +24,26 @@
 	if(!istype(female))
 		female = list()
 
-	for(var/path in subtypesof(prototype))
-		if(roundstart)
-			var/datum/sprite_accessory/P = path
-			if(initial(P.locked))
-				continue
-		var/datum/sprite_accessory/D = new path()
+	for(var/datum/sprite_accessory/accessory as anything in subtypesof(prototype))
+		if(IS_ABSTRACT(accessory))
+			continue
 
-		if(D.icon_state)
-			L[D.name] = D
+		accessory = new accessory()
+
+		if(roundstart && accessory.locked)
+			continue
+
+		L[accessory.name] = accessory
+
+		if(accessory.gender == MALE)
+			male[accessory.name] = accessory
+			if(female_same)
+				female[accessory.name] = accessory
+		else if(accessory.gender == FEMALE)
+			female[accessory.name] = accessory
 		else
-			L += D.name
-
-		switch(D.gender)
-			if(MALE)
-				male += D.name
-				if(female_same)
-					female += D.name
-			if(FEMALE)
-				female += D.name
-			else
-				male += D.name
-				female += D.name
-	return L
+			male[accessory.name] = accessory
+			female[accessory.name] = accessory
 
 /datum/sprite_accessory
 	var/use_static		//determines if the accessory will be skipped by color preferences

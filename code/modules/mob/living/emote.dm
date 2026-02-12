@@ -41,8 +41,7 @@
 		return
 
 	/* admin stuff */
-	var/follower_ident = "[follower.key]/([follower.real_name]) (follower of [patron])"
-	message_admins("[follower_ident] [ADMIN_SM(follower)] [ADMIN_FLW(follower)] prays: [span_info(html_encode(prayer))]")
+	send_prayer(follower, prayer, patron.name)
 	user.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
 
 	follower.whisper(prayer)
@@ -52,6 +51,22 @@
 
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
+
+/proc/send_prayer(mob/living/follower, prayer, patron_name)
+	var/ident_string = "[follower.key]/([follower.real_name]) (follower of [patron_name])"
+	if(follower.has_quirk(/datum/quirk/vice/godfearing))
+		ident_string += "[SPAN_GOD_GENERIC("(GODFEARING)")]"
+	/// Usually I hate not using spans properly, but in this case it's going to make my life easier.
+	var/lowercase_god = "generic"
+	if(patron_name in COLORFUL_PATRONS)
+		lowercase_god = ckey(patron_name)//Getting the game to correctly pull this has been the biggest pain in the butt.
+	var/message = SPAN_PRAYER_WRAPPER(span_admin("[span_prefix("PRAYER: ")][ident_string] [ADMIN_SM(follower)] [ADMIN_NRT(follower)] [ADMIN_FLW(follower)] prays: <span class='god_[lowercase_god]'>[html_encode(prayer)]</span>"))
+	for(var/client/admin_client in GLOB.admins)
+		if(check_rights_for(admin_client, R_ADMIN))
+			to_chat(admin_client, message)
+			if(admin_client.prefs.toggles & SOUND_PRAYERS)
+				admin_client.mob.playsound_local(admin_client, 'sound/misc/yeoldebwoink.ogg', 100)
+
 
 // ............... Me (custom emote) ..................
 /datum/emote/living/custom

@@ -98,7 +98,8 @@ SUBSYSTEM_DEF(events)
 
 /client/proc/forceGamemode()
 	set name = "Open Gamemode Panel"
-	set category = "GameMaster"
+	set category = "GameMaster.Fun"
+
 	if(!holder ||!check_rights(R_FUN))
 		return
 	holder.forceGamemode(usr)

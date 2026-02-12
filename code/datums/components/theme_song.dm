@@ -95,7 +95,7 @@
 
 /mob/proc/toggle_custom_music()
 	set name = "Toggle Theme Music"
-	set category = "Music"
+	set category = "IC.Music"
 
 	var/datum/component/theme_music/theme = src.GetComponent(/datum/component/theme_music)
 	if(theme)
@@ -106,7 +106,7 @@
 
 /mob/proc/set_custom_music()
 	set name = "Set Custom Music"
-	set category = "Music"
+	set category = "IC.Music"
 
 	var/datum/component/theme_music/theme = src.GetComponent(/datum/component/theme_music)
 	if(theme)

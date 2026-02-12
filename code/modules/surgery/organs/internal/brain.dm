@@ -332,5 +332,16 @@
 	else
 		owner.remove_stress(/datum/stress_event/brain_damage)
 
+/obj/item/organ/brain/before_organ_replacement(obj/item/organ/replacement)
+	. = ..()
+	var/obj/item/organ/brain/replacement_brain = replacement
+	if(!istype(replacement_brain))
+		return
+
+	// Transfer over traumas as well
+	for(var/datum/brain_trauma/trauma as anything in traumas)
+		cure_trauma_type(trauma)
+		replacement_brain.gain_trauma_type(trauma)
+
 /obj/item/organ/brain/smooth
 	icon_state = "brain-smooth"

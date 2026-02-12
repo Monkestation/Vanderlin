@@ -144,7 +144,7 @@
 	popup.open()
 
 /client/proc/stop_restart()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set name = "Stop Restart"
 	if(!holder)
 		return

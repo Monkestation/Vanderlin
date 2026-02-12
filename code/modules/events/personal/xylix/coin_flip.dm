@@ -49,6 +49,6 @@
 		span_userdanger("YOU ARE XYLIX'S CHOSEN!"),
 		span_notice("Xylix challenges you to a game! Simply flip a zenar and let fate decide your reward! Win the game, and Xylix's favor is yours. Lose, and your zenar is forfeit!"),
 	))
-	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen_male_female.ogg', 100)
+	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()
