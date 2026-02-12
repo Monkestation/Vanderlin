@@ -113,7 +113,7 @@
 
 /datum/customizer_choice/organ/ears/demihuman
 	name = "Hollow-Kin Ears"
-	organ_type = /obj/item/organ/ears
+	organ_type = /obj/item/organ/ears/anthro
 	generic_random_pick = TRUE
 	allows_accessory_color_customization = TRUE
 	sprite_accessories = list(

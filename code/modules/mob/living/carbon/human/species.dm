@@ -590,6 +590,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
 				organ_dna?.imprint_organ(existing_organ)
 				pref_load?.customize_organ(existing_organ)
+				existing_organ.update_accessory_colors()
 				continue // we don't want to remove organs that are the same as the new one
 
 		if(visual_only && (!initial(new_organ.accessory_type) && !initial(new_organ.visible_organ)))
@@ -600,9 +601,12 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/used_dna = FALSE
 		var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
 		if(organ_dna?.can_create_organ())
-			new_organ = organ_dna.create_organ(species = src)
-			pref_load?.customize_organ(new_organ)
-			used_dna = TRUE
+			var/obj/item/organ/dna_organ = organ_dna.create_organ(species = src)
+			if(dna_organ.type == new_organ)
+				new_organ = dna_organ
+				pref_load?.customize_organ(new_organ)
+				new_organ.update_accessory_colors()
+				used_dna = TRUE
 
 		if(!used_dna)
 			new_organ = new new_organ()

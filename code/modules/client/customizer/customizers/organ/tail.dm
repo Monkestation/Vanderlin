@@ -29,7 +29,7 @@
 
 /datum/customizer_choice/organ/tail/demihuman
 	name = "Hollow-Kin Tail"
-	organ_type = /obj/item/organ/tail
+	organ_type = /obj/item/organ/tail/demihuman
 	generic_random_pick = TRUE
 	allows_accessory_color_customization = TRUE
 	sprite_accessories = list(
