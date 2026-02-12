@@ -31,17 +31,16 @@
 	else
 		ADD_TRAIT(target, TRAIT_MOVE_SWIMMING, ELEMENT_TRAIT(type))
 
-/datum/element/submerged/proc/check_sinking(datum/target)
+/datum/element/submerged/proc/check_sinking(mob/living/target)
 	SIGNAL_HANDLER
-	var/mob/living/mob_target = target
-	if(mob_target.get_encumbrance() >= (HAS_TRAIT(mob_target, TRAIT_GOOD_SWIM) ? 0.4 : 0.3))
-		ADD_TRAIT(mob_target, TRAIT_SINKING, ELEMENT_TRAIT(type))
-		handle_swim(mob_target, FALSE)
-		handle_sinking(mob_target)
-		to_chat(mob_target, span_warning("The weight you bear pulls you down."))
+	if(target.get_encumbrance() >= (HAS_TRAIT(target, TRAIT_GOOD_SWIM) ? 0.4 : 0.3))
+		ADD_TRAIT(target, TRAIT_SINKING, ELEMENT_TRAIT(type))
+		handle_swim(target, FALSE)
+		handle_sinking(target)
+		to_chat(target, span_warning("The weight you bear pulls you down."))
 	else
-		REMOVE_TRAIT(mob_target, TRAIT_SINKING, ELEMENT_TRAIT(type))
-		handle_swim(mob_target, TRUE)
+		REMOVE_TRAIT(target, TRAIT_SINKING, ELEMENT_TRAIT(type))
+		handle_swim(target, TRUE)
 
 /datum/element/submerged/proc/handle_sinking(mob/living/target)
 	if(!HAS_TRAIT(target, TRAIT_SINKING))
