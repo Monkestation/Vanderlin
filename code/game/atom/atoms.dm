@@ -520,6 +520,22 @@
 							full_reagents += "[lowertext(R.name)]"
 					if(length(full_reagents))
 						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
+	//Water depth
+	if(istype(src, /turf/open/water))
+		var/turf/open/water/atom_water = src
+		if(atom_water.water_volume >= 10)
+			if(atom_water.fake_bottomless)
+				. += span_notice("I can't see the bottom...")
+			else if(atom_water.water_height < WATER_HEIGHT_FULL)
+				var/depth_message
+				switch(atom_water.water_height)
+					if(WATER_HEIGHT_ANKLE)
+						depth_message = "ankle high."
+					if(WATER_HEIGHT_SHALLOW)
+						depth_message = "about waist high."
+					if(WATER_HEIGHT_DEEP)
+						depth_message = "rather deep."
+				. += span_notice("It looks [depth_message]")
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 
 /**

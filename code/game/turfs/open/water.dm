@@ -50,7 +50,7 @@
 	var/set_relationships_on_init = TRUE
 	var/open_bottom = FALSE	//if the water tile is open from below
 	var/fake_bottomless = FALSE //for letting tiles act like deep water without an open bottom
-	var/skip_bottom_check = FALSE
+	var/skip_bottom_check = FALSE //for tiles that should always have a closed bottom
 	// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
 	var/blocked_flow_directions = 0
 
@@ -230,9 +230,10 @@
 
 	if(!skip_bottom_check)
 		var/turf/open/water/below = GET_TURF_BELOW(src)
-		if(istype(below) && below.water_height == WATER_HEIGHT_FULL)
+		if(istype(below) && below.water_height == WATER_HEIGHT_FULL && below.water_reagent == water_reagent)
 			open_bottom = TRUE
 			water_height = WATER_HEIGHT_DEEP
+			swim_skill = TRUE
 
 	if(!isnull(fishing_datum))
 		add_lazy_fishing(fishing_datum)
@@ -343,6 +344,7 @@
 					user.RemoveElement(/datum/element/submerged)
 			else
 				user.RemoveElement(/datum/element/submerged)
+			user.adjust_experience(/datum/skill/misc/swimming, (user.STAINT * 0.4))
 		if(water_overlay)
 			if((get_dir(src, newloc) == SOUTH))
 				water_overlay.layer = BELOW_MOB_LAYER
@@ -363,7 +365,7 @@
 				var/drained = max(15 - (user.get_skill_level(/datum/skill/misc/swimming, TRUE) * 5), 1)
 //				drained += (user.checkwornweight()*2)
 				drained += user.get_encumbrance() * 50
-				if(!user.adjust_stamina(drained))
+				if(!(water_height == WATER_HEIGHT_FULL ? user.adjust_stamina(drained, "drown") : user.adjust_stamina(drained)))
 					user.Immobilize(30)
 					addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
 
@@ -744,7 +746,7 @@
 
 /turf/open/water/clean
 	name = "water"
-	desc = "Clear and shallow water, what a blessing!"
+	desc = "Crystal clear water, what a blessing!"
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("rock", "rockw2")
 	water_height = WATER_HEIGHT_SHALLOW
@@ -757,18 +759,16 @@
 	. = ..()
 
 /turf/open/water/clean/under
-	desc = "Clear, deep water. A beautiful sight."
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
 
 /turf/open/water/clean/dirt
 	name = "water"
-	desc = "Clear and shallow water, mostly untainted by surrounding soil."
+	desc = "Fairly water, mostly untainted by surrounding soil."
 	icon_state = MAP_SWITCH("dirt", "dirtW5")
 	cleanliness_factor = -1
 
 /turf/open/water/clean/dirt/under
-	desc = "Clear and deep water, mostly untainted by surrounding soil."
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
 
@@ -879,7 +879,7 @@
 
 /turf/open/water/ocean
 	name = "salt water"
-	desc = "The waves lap at the coast, hungry to swallow the land. Doesn't look too deep."
+	desc = "The waves lap at the coast, hungry to swallow the land."
 	icon_state = MAP_SWITCH("gravel", "gravelW")
 	icon = 'icons/turf/natural/liquids.dmi'
 	neighborlay_self = "edgesalt"

@@ -216,11 +216,13 @@
 		if(W.water_height < WATER_HEIGHT_SHALLOW)
 			return
 		else if(W.water_height == WATER_HEIGHT_FULL && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
-			if(stamina < 70)
-				adjust_stamina(10 - get_skill_level(/datum/skill/misc/swimming), "drown")
+			var/swimdrain = max(10 - get_skill_level(/datum/skill/misc/swimming), 1)
+			if(swimdrain < maximum_stamina - stamina)
+				adjust_stamina(swimdrain, "drown")
 				adjustOxyLoss(2)
 			else
 				adjustOxyLoss(drown_damage)
+				emote("drown")
 	if(is_laying && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
 		adjustOxyLoss(drown_damage)
 		if(stat == DEAD && client)
