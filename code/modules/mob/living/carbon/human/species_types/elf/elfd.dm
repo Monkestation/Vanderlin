@@ -142,20 +142,19 @@
 		"Jackpoison" = SKIN_COLOR_JACKPOISON, // - (Grey-purple)
 		"Homunculus" = SKIN_COLOR_HOMUNCULUS, // - (Grey-blue)
 		"Arachnid Ichor" = SKIN_COLOR_ARACHNID_ICHOR, // - (Black-blue)
-		"Zizo Descendant" = SKIN_COLOR_SNOW_ELF, // - (Pale white)
+		"Zizo Descendant" = SKIN_COLOR_ICECAP, // - (Pale white)
 		"Gloomhaven" = SKIN_COLOR_GLOOMHAVEN, // - (Pink)
 	))
 
 /datum/species/elf/dark/get_hairc_list()
 	return sortList(list(
-	"black - oil" = "181a1d",
-	"black - cave" = "201616",
-	"black - rogue" = "2b201b",
-	"black - midnight" = "1d1b2b",
+		"black - oil" = "181a1d",
+		"black - cave" = "201616",
+		"black - rogue" = "2b201b",
+		"black - midnight" = "1d1b2b",
 
-	"white - cavedew" = "dee9ed",
-	"white - spiderweb" = "f4f4f4"
-
+		"white - cavedew" = "dee9ed",
+		"white - spiderweb" = "f4f4f4"
 	))
 
 /datum/species/elf/dark/get_possible_names(gender = MALE)
@@ -169,5 +168,5 @@
 
 /datum/species/elf/dark/after_creation(mob/living/carbon/human/C)
 	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 2)
-	if(C.skin_tone == SKIN_COLOR_SNOW_ELF)
+	if(C.skin_tone == SKIN_COLOR_ICECAP)
 		exotic_bloodtype = /datum/blood_type/human/cursed_elf
