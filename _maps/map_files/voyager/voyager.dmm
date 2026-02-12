@@ -815,7 +815,7 @@
 /turf/open/floor/metal/barograte,
 /area/ship/middeck)
 "fp" = (
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "fr" = (
 /obj/effect/decal/cobbleedge{
@@ -2628,7 +2628,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "rM" = (
 /obj/structure/table/wood{
@@ -2758,7 +2758,7 @@
 /area/ship/middeck)
 "sx" = (
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "sz" = (
 /obj/structure/fake_machine/mail{
@@ -3118,7 +3118,7 @@
 "us" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "uu" = (
 /obj/structure/ladder,
@@ -4022,7 +4022,7 @@
 "Ar" = (
 /obj/structure/rack/shelf/notdense,
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "As" = (
 /obj/structure/chair/bench/couch/left/lord_primary,
@@ -5055,7 +5055,7 @@
 	icon_state = "roofg";
 	dir = 4
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "GZ" = (
 /obj/structure/bed/shit,
@@ -5732,7 +5732,7 @@
 	dir = 8;
 	pixel_y = 16
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "Mg" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -5895,7 +5895,7 @@
 /obj/structure/industrial_lift/tram{
 	fake = 1
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "Nf" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -6375,7 +6375,7 @@
 	density = 1;
 	opacity = 1
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "Qo" = (
 /turf/open/floor/blocks/newstone/alt,
@@ -7389,7 +7389,7 @@
 	icon_state = "roofg";
 	dir = 4
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "VX" = (
 /obj/effect/decal/cleanable/dirt,
@@ -7577,7 +7577,7 @@
 	icon_state = "largetable"
 	},
 /obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "Xi" = (
 /obj/structure/roguetent/preopen{

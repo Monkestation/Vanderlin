@@ -2924,7 +2924,7 @@
 /mob/living/simple_animal/hostile/retaliate/shark{
 	faction = list("Hostile")
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/under/cavewet)
 "cju" = (
 /turf/open/floor/carpet/royalblack,
@@ -3421,7 +3421,7 @@
 /area/ship/topdeck)
 "cRO" = (
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "cSa" = (
 /obj/structure/stairs/stone/church{
@@ -4334,7 +4334,7 @@
 "eaK" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "eaL" = (
 /obj/structure/fluff/walldeco/church/line,
@@ -5006,7 +5006,7 @@
 /area/indoors/town/magician)
 "feK" = (
 /obj/effect/spawner/traveltile_spawner/vertical/vampire,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "feY" = (
 /obj/structure/flora/pillar,
@@ -5087,7 +5087,7 @@
 /area/indoors/shelter/bog)
 "fia" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "fic" = (
 /obj/structure/fluff/statue/psy{
@@ -5216,7 +5216,7 @@
 /area/under/cavewet)
 "ftQ" = (
 /obj/structure/flora/kelp,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/under/cavewet)
 "fuc" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
@@ -5588,7 +5588,7 @@
 "fOV" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "fQP" = (
 /obj/structure/bars/pipe{
@@ -6042,7 +6042,7 @@
 /area/indoors/town/clocktower)
 "gmN" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/inhumen,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "gmS" = (
 /obj/structure/rack/underworld{
@@ -6388,7 +6388,7 @@
 "gOG" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "gOT" = (
 /obj/structure/fluff/railing/stonehedge{
@@ -6731,7 +6731,7 @@
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "hpc" = (
 /obj/item/reagent_containers/food/snacks/fish/swordfish,
@@ -6843,7 +6843,7 @@
 "hyx" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "hyH" = (
 /obj/structure/flora/driftwood,
@@ -6985,7 +6985,7 @@
 "hJQ" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "hKd" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -7372,7 +7372,7 @@
 /area/indoors/shelter/bog)
 "ipu" = (
 /obj/structure/flora/shells,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/under/cavewet)
 "ipL" = (
 /obj/structure/table/stone_small{
@@ -8289,7 +8289,7 @@
 /area/under/cavewet)
 "jpZ" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/under/cavewet)
 "jqN" = (
 /mob/living/simple_animal/hostile/retaliate/direbear{
@@ -8984,7 +8984,7 @@
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/town/clocktower)
 "kmx" = (
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/under/cavewet)
 "knc" = (
 /obj/structure/fluff/nest,
@@ -9181,7 +9181,7 @@
 /area/outdoors/bog)
 "kwT" = (
 /obj/structure/flora/driftwood,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/bog)
 "kxm" = (
 /obj/structure/closet/crate/chest/crate,
@@ -9739,7 +9739,7 @@
 "liV" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "ljF" = (
 /obj/structure/door/swing,
@@ -10046,7 +10046,7 @@
 	},
 /area/under/cavewet)
 "lAg" = (
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/bog)
 "lAl" = (
 /turf/open/floor/ruinedwood/turned/darker,
@@ -10213,7 +10213,7 @@
 "lLH" = (
 /obj/structure/flora/grass/water/reeds,
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "lMw" = (
 /mob/living/simple_animal/hostile/deepone{
@@ -11094,7 +11094,7 @@
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "nhj" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -11534,13 +11534,13 @@
 	desc = "Twisted wood formed into the shape of a tree";
 	name = "Twisted Wood"
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/under/cavewet)
 "nMZ" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "nNn" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp,
@@ -11553,7 +11553,7 @@
 /area/indoors/shelter/bog)
 "nOs" = (
 /obj/structure/flora/tree/burnt,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "nPg" = (
 /obj/structure/table/wood/crafted,
@@ -12210,7 +12210,7 @@
 /obj/effect/decal/shadow_floor{
 	dir = 10
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/bog)
 "oEC" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -12479,7 +12479,7 @@
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "pfh" = (
 /obj/structure/stairs/stone{
@@ -12773,7 +12773,7 @@
 /area/under/cavewet)
 "pAg" = (
 /obj/structure/flora/tree,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "pAk" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
@@ -13269,7 +13269,7 @@
 /area/outdoors/bog)
 "qrq" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "qru" = (
 /obj/structure/flora/tree,
@@ -15443,7 +15443,7 @@
 /mob/living/simple_animal/hostile/retaliate/swamp_kraken{
 	anchored = 1
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/under/cavewet)
 "tCh" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -15571,7 +15571,7 @@
 /area/under/cavewet)
 "tKc" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "tNa" = (
 /obj/structure/bed/hay,
@@ -15845,7 +15845,7 @@
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "ufw" = (
 /obj/structure/carpet/blue,
@@ -16016,7 +16016,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clocktower)
 "upX" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "uqz" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -16718,7 +16718,7 @@
 "vmn" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "vnT" = (
 /obj/item/natural/stone,
@@ -17503,7 +17503,7 @@
 "wtA" = (
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/bog)
 "wuD" = (
 /obj/structure/fluff/walldeco/church/line,
@@ -17887,7 +17887,7 @@
 "wXO" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "wYs" = (
 /obj/structure/bars,

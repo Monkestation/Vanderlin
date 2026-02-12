@@ -42,5 +42,5 @@
 						/obj/structure/flora/grass/water/reeds = 80,
 						/obj/structure/kneestingers = 60)
 	allowed_turfs = list(/turf/open/water/swamp,
-						/turf/open/water/swamp/high)
+						/turf/open/water/swamp/deep)
 	allowed_areas = list(/area/outdoors/bog)

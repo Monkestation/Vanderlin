@@ -5309,7 +5309,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/smithy)
 "cyx" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/town/sewer)
 "cyz" = (
 /turf/open/water/river{
@@ -7297,7 +7297,7 @@
 "dsu" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/town/sewer)
 "dsC" = (
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -10383,7 +10383,7 @@
 /turf/open/openspace,
 /area/indoors/town/church/inquisition)
 "eWD" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/rtfield)
 "eWH" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -14503,7 +14503,7 @@
 /area/outdoors/town)
 "hag" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "hal" = (
 /obj/machinery/light/fueled/wallfire/candle,
@@ -18343,7 +18343,7 @@
 "iWY" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "iXh" = (
 /obj/structure/flora/grass/bush,
@@ -20465,7 +20465,7 @@
 /area/indoors/town/tavern)
 "jXf" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "jXi" = (
 /obj/structure/window/openclose/reinforced,
@@ -20538,7 +20538,7 @@
 /area/under/town/basement)
 "jZd" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/town/sewer)
 "jZi" = (
 /obj/item/natural/rock,
@@ -21440,7 +21440,7 @@
 /obj/structure/stairs{
 	dir = 4
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/town)
 "kvG" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -22083,7 +22083,7 @@
 	pixel_x = 1;
 	pixel_y = 7
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/town)
 "kKL" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
@@ -28548,7 +28548,7 @@
 /obj/structure/stairs{
 	dir = 8
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/town)
 "nQM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
@@ -31705,7 +31705,7 @@
 "prs" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "prv" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -32453,7 +32453,7 @@
 	pixel_x = 1;
 	pixel_y = 7
 	},
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/town)
 "pJy" = (
 /obj/structure/fermentation_keg,
@@ -38631,7 +38631,7 @@
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "sLp" = (
 /obj/structure/closet/crate/crafted_closet,
@@ -42592,7 +42592,7 @@
 /turf/open/floor/dirt,
 /area/indoors/town/church)
 "uFx" = (
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "uFN" = (
 /obj/structure/stairs/stone/church{
@@ -43639,7 +43639,7 @@
 /area/indoors/town/dwarfin)
 "vcE" = (
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/town/sewer)
 "vcL" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
@@ -43784,7 +43784,7 @@
 "vfx" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/town/sewer)
 "vfJ" = (
 /obj/machinery/light/fueled/torchholder{
@@ -43815,7 +43815,7 @@
 "vhf" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "vhu" = (
 /obj/effect/decal/cobbleedge/alt,
@@ -45292,7 +45292,7 @@
 /area/outdoors/town)
 "vRF" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/ocean/fakedeep,
+/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "vRK" = (
 /turf/open/floor/ruinedwood/chevron,

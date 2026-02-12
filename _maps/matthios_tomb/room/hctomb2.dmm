@@ -192,7 +192,7 @@
 /area/under/tomb)
 "oT" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave)
 "pr" = (
 /turf/open/floor/herringbone,
@@ -233,7 +233,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "uZ" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave)
 "vd" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -452,7 +452,7 @@
 	pixel_x = 4;
 	pixel_y = 3
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave)
 "MV" = (
 /obj/effect/decal/cleanable/blood/old,

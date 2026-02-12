@@ -81,7 +81,7 @@
 /area/under/tomb/cave/lava)
 "ku" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/lava)
 "kG" = (
 /obj/structure/fluff/railing/border{
@@ -195,7 +195,7 @@
 /turf/open/floor/cobblerock,
 /area/under/tomb/cave/lava)
 "vP" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/lava)
 "wr" = (
 /obj/effect/dungeon_directional_helper/south,

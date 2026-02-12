@@ -174,7 +174,7 @@
 /turf/open/floor/blocks/platform,
 /area/outdoors)
 "aL" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/under/cave)
 "aM" = (
 /obj/structure/wild_plant/nospread/turnip{
@@ -515,7 +515,7 @@
 "cA" = (
 /obj/structure/flora/ausbushes/reedbush,
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "cE" = (
 /obj/structure/flora/newtree{
@@ -657,7 +657,7 @@
 "du" = (
 /obj/structure/kneestingers,
 /obj/structure/kneestingers,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "dx" = (
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
@@ -1004,7 +1004,7 @@
 /area/outdoors)
 "fh" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "fj" = (
 /obj/structure/minecart_rail{
@@ -3588,7 +3588,7 @@
 /area/indoors/town)
 "sn" = (
 /obj/structure/kneestingers,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "so" = (
 /obj/structure/flora/newbranch/leafless{
@@ -3859,7 +3859,7 @@
 "tQ" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "tS" = (
 /obj/structure/wild_plant/nospread/blackberry{
@@ -5176,7 +5176,7 @@
 "Ax" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "Ay" = (
 /obj/structure/flora/grass/herb/urtica,
@@ -7824,7 +7824,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors)
 "OI" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors)
 "OK" = (
 /obj/structure/flora/newtree{
@@ -7836,7 +7836,7 @@
 /area/outdoors)
 "OL" = (
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "OM" = (
 /obj/structure/fluff/railing/stonehedge{
@@ -7955,7 +7955,7 @@
 "Pn" = (
 /obj/structure/flora/ausbushes/reedbush,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "Pp" = (
 /obj/structure/stairs/stone{
@@ -8282,7 +8282,7 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "QY" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors)
 "QZ" = (
 /turf/open/water/river{
@@ -9919,7 +9919,7 @@
 /obj/effect/waterfall{
 	pixel_y = 0
 	},
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/under/cave)
 "ZU" = (
 /obj/item/natural/wood/plank{

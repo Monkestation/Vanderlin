@@ -4,11 +4,11 @@
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/spawner/map_spawner/loot,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "ah" = (
 /obj/effect/decal/cleanable/blood/gibs/limb,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "ai" = (
 /obj/structure/table/optable,
@@ -1205,7 +1205,7 @@
 "qy" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/natural/stone,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "qz" = (
 /obj/structure/fluff/statue/tdummy,
@@ -1462,7 +1462,7 @@
 "ug" = (
 /obj/effect/decal/cleanable/blood,
 /obj/item/natural/rock,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "ul" = (
 /obj/structure/chair/bench/couchablack/r,
@@ -1997,7 +1997,7 @@
 /area/under/tomb)
 "CG" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "CR" = (
 /obj/structure/fluff/wallclock,
@@ -2041,7 +2041,7 @@
 /area/under/tomb/indoors/church)
 "DN" = (
 /obj/effect/decal/cleanable/blood/gibs/up,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "DO" = (
 /obj/item/reagent_containers/glass/cup/skull,
@@ -2707,7 +2707,7 @@
 /turf/open/floor/church,
 /area/under/tomb/indoors)
 "Ms" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "Mt" = (
 /obj/structure/fluff/railing/border{
@@ -2870,7 +2870,7 @@
 /area/under/tomb/indoors)
 "OH" = (
 /obj/effect/decal/cleanable/blood/gibs,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "OI" = (
 /obj/item/natural/rock,
@@ -2940,7 +2940,7 @@
 /area/under/tomb/indoors)
 "Qo" = (
 /obj/effect/decal/cleanable/blood,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "Qp" = (
 /obj/structure/door/stone,

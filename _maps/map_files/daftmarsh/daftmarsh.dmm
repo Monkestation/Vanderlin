@@ -192,7 +192,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/butchershop)
 "akC" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/town)
 "akD" = (
 /obj/machinery/light/fueled/lanternpost/fixed,
@@ -416,7 +416,7 @@
 /area/under/town/basement)
 "avj" = (
 /obj/structure/kneestingers,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/town)
 "avs" = (
 /turf/open/floor/rooftop/green{
@@ -2317,7 +2317,7 @@
 /area/indoors/town/manor)
 "bZR" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/rtfield)
 "bZT" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -4029,7 +4029,7 @@
 /turf/open/water/bath,
 /area/indoors/town/church/inquisition)
 "dyG" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/rtfield)
 "dyH" = (
 /turf/closed/wall/mineral/decorstone,
@@ -7645,7 +7645,7 @@
 	pixel_x = -16;
 	pixel_y = 0
 	},
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/town)
 "gFL" = (
 /obj/structure/flora/grass/water,
@@ -10192,7 +10192,7 @@
 /area/indoors/town/church)
 "iQs" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/town)
 "iQz" = (
 /obj/structure/table/wood{
@@ -12938,7 +12938,7 @@
 "lbd" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/rtfield)
 "lbj" = (
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
@@ -14462,7 +14462,7 @@
 /turf/open/openspace,
 /area/indoors/town/church/chapel)
 "mwv" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/indoors/town/garrison)
 "mwY" = (
 /turf/open/floor/dirt/road,
@@ -15764,7 +15764,7 @@
 /area/under/town/sewer)
 "nGE" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/rtfield)
 "nGH" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
@@ -19779,7 +19779,7 @@
 /area/indoors/town/shop)
 "rmZ" = (
 /obj/structure/flora/grass/thorn_bush,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/rtfield)
 "rnC" = (
 /obj/structure/roguerock{
@@ -21662,7 +21662,7 @@
 /area/indoors/town/church)
 "tig" = (
 /obj/structure/flora/grass/thorn_bush,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/town)
 "tiu" = (
 /obj/effect/landmark/bounty_location{
@@ -22732,7 +22732,7 @@
 "ugr" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/rtfield)
 "ugF" = (
 /obj/structure/stairs/stone{
@@ -25879,7 +25879,7 @@
 /area/indoors/town/orphanage)
 "wWa" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/town)
 "wWA" = (
 /obj/structure/fluff/walldeco/gear,

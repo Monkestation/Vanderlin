@@ -904,7 +904,7 @@
 /turf/open/floor/grass,
 /area/outdoors/woods)
 "iD" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/bog)
 "iJ" = (
 /obj/machinery/light/fueled/firebowl/stump,
@@ -1351,7 +1351,7 @@
 /area/under/mountains/anvil/lower)
 "nb" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/bog)
 "nf" = (
 /obj/structure/flora/grass/herb/euphrasia,
@@ -1562,7 +1562,7 @@
 /area/under/mountains/anvil/lower)
 "pP" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "pQ" = (
 /obj/structure/fluff/railing/wood{
@@ -1651,7 +1651,7 @@
 /turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
 "qP" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/under/mountains/anvil/lower)
 "qQ" = (
 /obj/structure/chair/wood/alt{
@@ -2005,7 +2005,7 @@
 /area/under/mountains/anvil/lower)
 "us" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "uA" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
@@ -2110,7 +2110,7 @@
 "wC" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/thorn_bush,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "wD" = (
 /turf/open/openspace,
@@ -2950,7 +2950,7 @@
 /area/under/cave)
 "FH" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "FK" = (
 /obj/structure/table/wood/plain,
@@ -4074,7 +4074,7 @@
 /turf/closed/mineral,
 /area/outdoors/woods)
 "Rx" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "RD" = (
 /obj/structure/fluff/railing/tall/palisade,
@@ -4264,7 +4264,7 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/woods)
 "Tc" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "Td" = (
 /obj/structure/fluff/railing/border{

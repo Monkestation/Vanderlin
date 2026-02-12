@@ -38,7 +38,7 @@ block( \
 #define TURF_SUNLIGHT_QUEUED (1<<5)
 
 //water_height defines
-#define WATER_HEIGHT_SHALLOW 1
-#define WATER_HEIGHT_MIDDLE 2
-#define WATER_HEIGHT_HIGH 3
+#define WATER_HEIGHT_ANKLE 1
+#define WATER_HEIGHT_SHALLOW 2
+#define WATER_HEIGHT_DEEP 3
 #define WATER_HEIGHT_FULL 4

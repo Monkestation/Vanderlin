@@ -768,7 +768,7 @@
 /turf/open/floor/twig,
 /area/indoors/town/tavern)
 "jl" = (
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "jm" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -1615,7 +1615,7 @@
 "tB" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "tG" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
@@ -1804,7 +1804,7 @@
 "vA" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "vC" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2173,7 +2173,7 @@
 /area/indoors/town/tavern)
 "Ad" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "Af" = (
 /obj/structure/window/openclose{
@@ -2986,7 +2986,7 @@
 "Iy" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "Iz" = (
 /turf/open/floor/dirt/road,
@@ -3095,7 +3095,7 @@
 	pixel_y = 3;
 	pixel_x = 0
 	},
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "JB" = (
 /obj/structure/flora/grass/bush,
@@ -3323,7 +3323,7 @@
 /area/indoors/dungeon)
 "Me" = (
 /obj/structure/flora/tree/evil,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "Mf" = (
 /obj/structure/fluff/railing/wood,
@@ -3427,7 +3427,7 @@
 /area/outdoors/woods)
 "Nu" = (
 /obj/structure/flora/tree/burnt,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "NA" = (
 /obj/effect/mapping_helpers/access/locker,
@@ -3494,7 +3494,7 @@
 /area/indoors/town/garrison)
 "Oa" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "Oc" = (
 /obj/structure/chair/stool,
@@ -3595,7 +3595,7 @@
 /area/indoors/town)
 "OF" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "OG" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -3763,7 +3763,7 @@
 "QP" = (
 /obj/structure/flora/grass/water/reeds,
 /mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "QU" = (
 /obj/structure/window/openclose,
@@ -3945,12 +3945,12 @@
 "Tf" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "Tj" = (
 /obj/structure/flora/tree/evil,
 /obj/structure/flora/grass/water,
-/turf/open/water/marsh/high,
+/turf/open/water/marsh/deep,
 /area/outdoors/woods)
 "Tl" = (
 /obj/structure/stairs/stone,

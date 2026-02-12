@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "bp" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "cy" = (
 /obj/effect/decal/cleanable/sigil/NE,
@@ -253,7 +253,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "IY" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave)
 "JE" = (
 /turf/closed/wall/mineral/decowood/vert,
@@ -288,7 +288,7 @@
 /area/under/tomb/indoors)
 "MS" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave)
 "Nh" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -350,7 +350,7 @@
 /area/under/tomb/indoors)
 "Zb" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "Zk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,

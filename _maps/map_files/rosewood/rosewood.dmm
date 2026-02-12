@@ -18024,7 +18024,7 @@
 /area/indoors/town)
 "iWv" = (
 /obj/structure/flora/tree,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/rtfield)
 "iWz" = (
 /obj/structure/rack/shelf/biggest,
@@ -48850,7 +48850,7 @@
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
 "yav" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/rtfield)
 "yaw" = (
 /obj/structure/table/wood/plain_alt,

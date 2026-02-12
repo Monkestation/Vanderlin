@@ -291,3 +291,39 @@
 	full_name = "View Pet Commands"
 	description = "Hold down to see all the commands you can give your pets!"
 	keybind_signal = COMSIG_KB_LIVING_VIEW_PET_COMMANDS
+
+/datum/keybinding/living/swim_up
+	hotkey_keys = list("ShiftR")
+	name = "swim_up"
+	full_name = "Swim Up"
+	description = "Attempt to swim upwards"
+	var/lastrest = 0
+
+/datum/keybinding/living/swim_up/down(client/user)
+	. = ..()
+	var/mob/living/L = user.mob
+	var/restmod = (1 DECISECONDS * L.get_skill_level(/datum/skill/misc/swimming)) + (1 SECONDS * HAS_TRAIT(L, TRAIT_GOOD_SWIM))
+	if(!lastrest || world.time > lastrest + (2 SECONDS - restmod))
+		L.zSwim(UP)
+		lastrest = world.time
+		return TRUE
+	else
+		return FALSE
+
+/datum/keybinding/living/swim_down
+	hotkey_keys = list("ShiftV")
+	name = "swim_down"
+	full_name = "Swim Down"
+	description = "Attempt to swim downwards"
+	var/lastrest = 0
+
+/datum/keybinding/living/swim_down/down(client/user)
+	. = ..()
+	var/mob/living/L = user.mob
+	var/restmod = (1 DECISECONDS * L.get_skill_level(/datum/skill/misc/swimming)) + (1 SECONDS * HAS_TRAIT(L, TRAIT_GOOD_SWIM))
+	if(!lastrest || world.time > lastrest + (2 SECONDS - restmod))
+		L.zSwim(DOWN)
+		lastrest = world.time
+		return TRUE
+	else
+		return FALSE

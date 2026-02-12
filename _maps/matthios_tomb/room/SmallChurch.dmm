@@ -392,7 +392,7 @@
 "mH" = (
 /obj/structure/kneestingers,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "mM" = (
 /obj/structure/bed/mediocre,
@@ -487,7 +487,7 @@
 "qU" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "qW" = (
 /obj/effect/decal/cleanable/sigil/E,
@@ -650,7 +650,7 @@
 "zo" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "zw" = (
 /obj/structure/rack,
@@ -693,7 +693,7 @@
 /area/under/tomb)
 "AU" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "Be" = (
 /turf/open/water/swamp,
@@ -1248,7 +1248,7 @@
 /area/under/tomb/indoors/church)
 "WT" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "Xa" = (
 /obj/structure/fluff/railing/border{
@@ -1261,7 +1261,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb)
 "Xd" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "Xl" = (
 /obj/structure/flora/ausbushes/grassybush,

@@ -612,7 +612,7 @@
 		to_chat(src, "<span class='notice'>I move down.</span>")
 
 ///Move a mob between z levels, if it's valid to move z's on this turf
-/mob/proc/zMove(dir, feedback = FALSE)
+/mob/proc/zMove(dir, feedback = FALSE, swimming = FALSE)
 	if(dir != UP && dir != DOWN)
 		return FALSE
 	var/turf/target = get_step_multiz(src, dir)
@@ -620,7 +620,7 @@
 		if(feedback)
 			to_chat(src, "<span class='warning'>There's nothing in that direction!</span>")
 		return FALSE
-	if(!canZMove(dir, target))
+	if(!canZMove(dir, target, swimming))
 		if(feedback)
 			to_chat(src, "<span class='warning'>I couldn't move there!</span>")
 		return FALSE

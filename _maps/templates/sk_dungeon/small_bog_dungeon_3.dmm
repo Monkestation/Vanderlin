@@ -124,7 +124,7 @@
 /turf/open/floor/blocks,
 /area/outdoors/bog)
 "N" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "O" = (
 /obj/structure/closet/crate/coffin,
@@ -169,7 +169,7 @@
 /area/outdoors/bog)
 "Z" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 
 (1,1,1) = {"

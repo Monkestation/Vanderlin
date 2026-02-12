@@ -2255,7 +2255,7 @@
 	layer = 2
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "lG" = (
 /obj/structure/flora/ausbushes/ywflowers,
@@ -2301,7 +2301,7 @@
 	dir = 1;
 	icon_state = "borderfall"
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "lT" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
@@ -3029,7 +3029,7 @@
 	icon_state = "borderfall"
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "qO" = (
 /turf/open/floor/cobble,
@@ -3083,7 +3083,7 @@
 	dir = 1;
 	icon_state = "borderfall"
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "qZ" = (
 /obj/structure/table/wood{
@@ -3104,7 +3104,7 @@
 /area/outdoors/bog/inhumen_camp)
 "rb" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "rf" = (
 /obj/item/clothing/neck/mercator,
@@ -3435,7 +3435,7 @@
 /area/indoors/vampire_manor)
 "tg" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "ti" = (
 /obj/structure/table/wood/large/corner_new{
@@ -4281,11 +4281,11 @@
 /obj/structure/roguerock{
 	icon_state = "rock4"
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "zb" = (
 /obj/structure/roguerock,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "zc" = (
 /obj/structure/rack/shelf/biggest,
@@ -4480,7 +4480,7 @@
 /obj/structure/fluff/railing/border{
 	layer = 2
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "As" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
@@ -5369,7 +5369,7 @@
 /obj/structure/roguerock{
 	icon_state = "rock3"
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "GZ" = (
 /obj/structure/fluff/statue/pillar,
@@ -5871,7 +5871,7 @@
 /area/indoors/vampire_manor)
 "JY" = (
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "Kb" = (
 /obj/structure/vampire/bloodpool{
@@ -7039,7 +7039,7 @@
 /obj/structure/fluff/railing/border{
 	layer = 2
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "Sh" = (
 /obj/structure/bars,
@@ -7093,7 +7093,7 @@
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
 "Sv" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/indoors/lich)
 "Sy" = (
 /obj/structure/flora/tree,
@@ -7991,7 +7991,7 @@
 /area/indoors/vampire_manor)
 "Yo" = (
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "Yq" = (
 /obj/structure/closet/crate/crafted_closet,
@@ -8251,7 +8251,7 @@
 /turf/open/floor/carpet/lord/left,
 /area/indoors/lich)
 "ZP" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "ZR" = (
 /obj/structure/fluff/statue/knight/interior/r,

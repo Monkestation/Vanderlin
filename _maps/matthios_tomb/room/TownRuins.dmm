@@ -415,7 +415,7 @@
 "iA" = (
 /obj/structure/fluff/statue/pillar,
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb)
 "iO" = (
 /turf/open/floor/cobble,
@@ -525,7 +525,7 @@
 	pixel_y = -3;
 	pixel_x = -5
 	},
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb)
 "lh" = (
 /obj/structure/door,
@@ -1270,7 +1270,7 @@
 /area/under/tomb)
 "Am" = (
 /obj/structure/fluff/statue/pillar,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb)
 "At" = (
 /obj/structure/stairs{
@@ -1721,7 +1721,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "JD" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb)
 "JE" = (
 /turf/closed/wall/mineral/stone,
@@ -2035,7 +2035,7 @@
 /area/under/tomb/indoors)
 "QC" = (
 /obj/structure/kneestingers,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb)
 "QJ" = (
 /obj/structure/fluff/statue/pillar,
@@ -2073,7 +2073,7 @@
 /area/under/tomb)
 "Rp" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/under/tomb)
 "Rq" = (
 /obj/structure/kneestingers,

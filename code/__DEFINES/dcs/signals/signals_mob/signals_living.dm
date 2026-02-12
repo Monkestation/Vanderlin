@@ -113,3 +113,5 @@
 
 #define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
 #define COMSIG_LIVING_POSTBITE_SELF "living_postbite"
+/// From /mob/living/proc/set_swimming(): (swimming)
+#define COMSIG_LIVING_SWIM	"living_swim"

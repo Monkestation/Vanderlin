@@ -13544,7 +13544,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/rtfield/safe)
 "mON" = (
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/indoors/lich)
 "mOU" = (
 /obj/structure/fluff/railing/border,
@@ -21035,7 +21035,7 @@
 /area/indoors/town/manor)
 "tFu" = (
 /obj/structure/table/wood/treestump,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/indoors/lich)
 "tFN" = (
 /obj/structure/fluff/walldeco/customflag{
@@ -25828,7 +25828,7 @@
 /area/outdoors/rtfield/safe)
 "ybF" = (
 /obj/structure/table/wood/treestump/burnt,
-/turf/open/water/swamp/high,
+/turf/open/water/swamp/deep,
 /area/indoors/lich)
 "ybG" = (
 /obj/structure/fluff/walldeco/customflag{
