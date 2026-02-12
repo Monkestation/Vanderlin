@@ -1408,9 +1408,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"jv" = (
-/turf/open/water/clean/deep,
-/area/outdoors)
 "jC" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/yel,
@@ -1420,9 +1417,6 @@
 /obj/item/bedsheet/pelt,
 /turf/open/floor/carpet,
 /area/indoors)
-"jL" = (
-/turf/open/water/ocean/fakedeep,
-/area/outdoors)
 "jV" = (
 /obj/structure/rotation_piece,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -1675,9 +1669,6 @@
 /obj/structure/rotation_piece,
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"oX" = (
-/turf/open/water/clean/deep/surface,
-/area/outdoors)
 "pc" = (
 /turf/open/floor/cobblerock,
 /area/indoors)
@@ -2458,9 +2449,6 @@
 	dir = 4
 	},
 /turf/open/floor/grass/yel,
-/area/outdoors)
-"Cb" = (
-/turf/open/water/clean/deep/bottom,
 /area/outdoors)
 "CA" = (
 /obj/structure/stairs/d{
@@ -20755,9 +20743,9 @@ nL
 iW
 nL
 QN
-jL
-jL
-jL
+QN
+ai
+QN
 tA
 tA
 tA
@@ -21012,9 +21000,9 @@ Ry
 Ry
 nL
 QN
-jL
-jL
-jL
+QN
+QN
+ai
 tA
 tA
 tA
@@ -21269,9 +21257,9 @@ ku
 IJ
 nL
 ai
-jL
-jL
-jL
+QN
+Wr
+QN
 tA
 tA
 tA
@@ -21526,9 +21514,9 @@ Uf
 Ry
 nL
 ai
-jL
-jL
-jL
+QN
+QN
+ai
 tA
 tA
 tA
@@ -21783,9 +21771,9 @@ nL
 nL
 nL
 nL
-jL
-jL
-jL
+QN
+ai
+Wr
 tA
 tA
 tA
@@ -22040,9 +22028,9 @@ RI
 nL
 mL
 mL
-jL
-jL
-jL
+QN
+Wr
+Wr
 tA
 tA
 tA
@@ -22297,9 +22285,9 @@ CA
 nL
 mL
 pf
-jv
-Cb
-oX
+QN
+ai
+QN
 tA
 tA
 tA
@@ -22554,9 +22542,9 @@ CT
 iW
 DF
 DF
-jv
-Cb
-oX
+QN
+Wr
+ai
 tA
 tA
 tA
@@ -22811,9 +22799,9 @@ Fd
 nL
 Yu
 DF
-jv
-Cb
-oX
+QN
+QN
+QN
 tA
 tA
 tA
@@ -23068,9 +23056,9 @@ CT
 iW
 DF
 DF
-jv
-Cb
-oX
+QN
+Wr
+ai
 QN
 QN
 ai
@@ -88090,9 +88078,9 @@ ac
 ac
 ac
 ac
-jv
-jv
-jv
+ss
+ss
+ss
 ss
 ss
 ss
@@ -88347,9 +88335,9 @@ ac
 ac
 ac
 ac
-Cb
-Cb
-Cb
+ss
+ss
+ss
 ss
 ss
 ss
@@ -88604,9 +88592,9 @@ ac
 ac
 ac
 ac
-oX
-oX
-oX
+ss
+ss
+ss
 ss
 ss
 ss
