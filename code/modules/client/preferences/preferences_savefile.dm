@@ -368,6 +368,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	load_quirks(S)
 
+	if(!culture)
+		culture = src::culture
+
 	var/patron_typepath
 	S["selected_patron"] >> patron_typepath
 	if(patron_typepath)

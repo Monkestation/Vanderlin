@@ -586,15 +586,24 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			if(existing_organ.type != old_organ_type && !replace_current)
 				continue
 
-			// we don't want to remove organs that are the same as the new one
 			if(existing_organ.type == new_organ)
-				continue
+				var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
+				organ_dna?.imprint_organ(existing_organ)
+				continue // we don't want to remove organs that are the same as the new one
 
 		if(visual_only && (!initial(new_organ.accessory_type) && !initial(new_organ.visible_organ)))
 			continue
 
 		var/used_neworgan = FALSE
-		new_organ = new new_organ()
+		var/used_dna = FALSE
+		var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
+		if(organ_dna?.can_create_organ())
+			new_organ = organ_dna.create_organ(species = src)
+			used_dna = TRUE
+
+		if(!used_dna)
+			new_organ = new new_organ()
+
 		new_organ.build_colors_for_accessory(color_key_source_list_from_carbon(organ_holder))
 
 		var/should_have = new_organ.get_availability(src, organ_holder)
@@ -621,6 +630,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 		if(!used_neworgan)
 			QDEL_NULL(new_organ)
+		else if(!organ_holder.dna.organ_dna[slot])
+			var/datum/organ_dna/new_dna = new_organ.create_organ_dna()
+			organ_holder.dna.organ_dna[slot] = new_dna
 
 /datum/species/proc/is_organ_slot_allowed(mob/living/carbon/human/human, organ_slot)
 	return TRUE
