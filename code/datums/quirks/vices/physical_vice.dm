@@ -38,9 +38,6 @@
 	name = "Cyclops (R)"
 	desc = "I lost my right eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_right/on_spawn()
 	if(!ishuman(owner))
@@ -59,9 +56,6 @@
 	name = "Cyclops (L)"
 	desc = "I lost my left eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_left/on_spawn()
 	if(!ishuman(owner))
@@ -131,8 +125,8 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	ADD_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_LEPROSY, QUIRK_TRAIT)
+	ADD_TRAIT(H, TRAIT_NOPAIN, QUIRK_TRAIT)
 
 	// Equip iron mask - remove existing mask if present
 	if(H.wear_mask)
@@ -149,8 +143,8 @@
 	var/mob/living/carbon/human/H = owner
 
 	// Remove traits when quirk is removed
-	REMOVE_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
-	REMOVE_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
+	REMOVE_TRAIT(H, TRAIT_LEPROSY, QUIRK_TRAIT)
+	REMOVE_TRAIT(H, TRAIT_NOPAIN, QUIRK_TRAIT)
 
 /datum/quirk/vice/crippled_arm
 	name = "Missing Arm"

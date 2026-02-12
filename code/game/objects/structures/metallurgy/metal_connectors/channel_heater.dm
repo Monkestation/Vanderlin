@@ -52,7 +52,7 @@
 				var/tag = internal_reagents.chem_temp >= initial(material.melting_point) ? "Molten" : "Hardened"
 				. += "Contains [total_volume] units of <font color=[reagent_color]>[tag] [initial(material.name)]</font>"
 
-/obj/structure/channel_connector/heater/attackby(obj/item/I, mob/living/user, params)
+/obj/structure/channel_connector/heater/attackby(obj/item/I, mob/living/user, list/modifiers)
 	// Fuel the heater
 	if(I.firefuel > 0)
 		if(fuel_left >= max_fuel)

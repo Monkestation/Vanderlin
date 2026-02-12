@@ -31,7 +31,7 @@
 	else
 		icon_state = "[base_icon_state][lit ? "_lit" : ""]"
 
-/obj/item/candle/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/candle/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return
@@ -94,7 +94,7 @@
 	update_appearance(UPDATE_ICON_STATE)
 	open_flame()
 
-/obj/item/candle/attack_self(mob/user, params)
+/obj/item/candle/attack_self(mob/user, list/modifiers)
 	if(put_out_candle())
 		user.visible_message("<span class='notice'>[user] snuffs [src].</span>")
 

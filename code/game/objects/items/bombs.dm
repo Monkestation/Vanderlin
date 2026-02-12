@@ -12,7 +12,7 @@
 	grid_height = 64
 	var/datum_to_spread = /datum/effect_system/smoke_spread
 
-/obj/item/smokebomb/attack(mob/living/M, mob/living/user, params)
+/obj/item/smokebomb/attack_self(mob/user, list/modifiers)
 	. = ..()
 	explode()
 
@@ -94,7 +94,7 @@
 			return
 		scripture_wanted = scripture_required[scripture_heard++]
 
-/obj/item/holy_grenade/attack_self(mob/user, params)
+/obj/item/holy_grenade/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(scripture_heard < length(scripture_required))
 		to_chat(user, span_notice("I pull the holy pin... but it doesn't release! Bring forth the Book of Armaments!"))

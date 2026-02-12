@@ -54,7 +54,7 @@
 			STATKEY_SPD = 1,
 		)
 		spawned.adjust_stat_modifier_list(STATMOD_JOB, old_stats)
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/serjeant_at_arms
 	name = "Serjeant-at-Arms (Migrant Wave)"
@@ -244,7 +244,7 @@
 
 /datum/job/migrant/footman_bannerman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/footman_bannerman
 	name = "Bannermen Footman (Migrant Wave)"
@@ -299,7 +299,7 @@
 
 /datum/job/migrant/pikeman_bannerman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/pikeman_bannerman
 	name = "Bannermen Pikeman (Migrant Wave)"

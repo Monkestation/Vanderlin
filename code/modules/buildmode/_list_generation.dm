@@ -42,7 +42,7 @@
 
 	if(!length(filtered_types))
 		for(var/obj/O as anything in obj_types)
-			if(is_abstract(O))
+			if(IS_ABSTRACT(O))
 				continue
 			if(ispath(O, /obj/item))
 				continue

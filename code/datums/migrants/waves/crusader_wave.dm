@@ -54,8 +54,8 @@
 
 /datum/job/migrant/specialinquisitor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
-	spawned.verbs |= /mob/living/carbon/human/proc/faith_test
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
+	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
 	spawned.add_spell(/datum/action/cooldown/spell/undirected/call_bird/inquisitor)
 

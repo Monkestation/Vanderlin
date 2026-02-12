@@ -13,8 +13,8 @@
 	static_debris = list(/obj/item/grown/log/tree/small = 2)
 	obj_flags = CAN_BE_HIT
 	resistance_flags = FLAMMABLE
-	gripped_intents = list(/datum/intent/hit)
-	possible_item_intents = list(/datum/intent/hit)
+	gripped_intents = list(INTENT_GENERIC)
+	possible_item_intents = list(INTENT_GENERIC)
 	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
@@ -28,7 +28,7 @@
 
 /obj/item/grown/log/tree/attacked_by(obj/item/I, mob/living/user) //This serves to reward woodcutting
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -58,13 +58,13 @@
 	. = ..()
 
 
-/obj/item/grown/log/tree/attackby_secondary(obj/item/I, mob/living/user, params)
+/obj/item/grown/log/tree/attackby_secondary(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber_alt)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -180,12 +180,12 @@
 				L.update_sneak_invis(TRUE)
 			L.consider_ambush()
 
-/obj/item/grown/log/tree/stick/attack_self(mob/living/user, params)
+/obj/item/grown/log/tree/stick/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] snaps [src].</span>")
 	playsound(user,'sound/items/seedextract.ogg', 100, FALSE)
 	qdel(src)
 
-/obj/item/grown/log/tree/stick/attackby(obj/item/I, mob/living/user, params)
+/obj/item/grown/log/tree/stick/attackby(obj/item/I, mob/living/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(istype(I, /obj/item/natural/bundle/stick))
 		var/obj/item/natural/bundle/stick/B = I
@@ -197,7 +197,7 @@
 		return
 	return ..()
 
-/obj/item/grown/log/tree/stick/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/grown/log/tree/stick/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -220,7 +220,7 @@
 	experimental_inhand = FALSE
 	force = 2
 	throwforce = 2
-	possible_item_intents = list(/datum/intent/stab, /datum/intent/pick)
+	possible_item_intents = list(/datum/intent/stab, PICK_INTENT)
 	firefuel = 1 MINUTES
 	blade_dulling = 0
 	max_integrity = 20
@@ -255,7 +255,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	item_state = "plankbundle"
 	experimental_inhand = FALSE
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	desc = "Wooden planks bundled together for easy handling."
 	force = 0
 	throwforce = 0

@@ -566,25 +566,51 @@
 		eyet.update_appearance(UPDATE_ICON)
 	playsound_local(src, 'sound/misc/click.ogg', 100)
 
-/client/proc/hearallasghost()
-	set category = "GameMaster"
-	set name = "HearAllAsAdmin"
+/client/proc/ghostears()
+	set category = "Admin.Ghost"
+	set name = "Hear Speech"
 	if(!holder)
 		return
 	if(!prefs)
 		return
 	prefs.chat_toggles ^= CHAT_GHOSTEARS
-//	prefs.chat_toggles ^= CHAT_GHOSTSIGHT
-	prefs.chat_toggles ^= CHAT_GHOSTWHISPER
 	prefs.save_preferences()
 	if(prefs.chat_toggles & CHAT_GHOSTEARS)
-		to_chat(src, "<span class='notice'>I will hear all now.</span>")
+		to_chat(src, span_info("I will hear all now."))
 	else
-		to_chat(src, "<span class='info'>I will hear like a mortal.</span>")
+		to_chat(src, span_info("I will hear like a mortal."))
+
+/client/proc/ghostwhispers()
+	set category = "Admin.Ghost"
+	set name = "Hear Whispers"
+	if(!holder)
+		return
+	if(!prefs)
+		return
+	prefs.chat_toggles ^= CHAT_GHOSTWHISPER
+	prefs.save_preferences()
+	if(prefs.chat_toggles & CHAT_GHOSTWHISPER)
+		to_chat(src, span_info("I will hear all whispers now."))
+	else
+		to_chat(src, span_info("I will hear like a mortal."))
+
+/client/proc/ghosteyes()
+	set category = "Admin.Ghost"
+	set name = "See Emotes"
+	if(!holder)
+		return
+	if(!prefs)
+		return
+	prefs.chat_toggles ^= CHAT_GHOSTSIGHT
+	prefs.save_preferences()
+	if(prefs.chat_toggles & CHAT_GHOSTSIGHT)
+		to_chat(src, span_info("I will see all whispers now."))
+	else
+		to_chat(src, span_info("I will see like a mortal."))
 
 
 /client/proc/ghost_up()
-	set category = "GameMaster"
+	set category = "Admin.Ghost"
 	set name = "GhostUp"
 	if(!holder)
 		return
@@ -593,7 +619,7 @@
 		mob.ghost_up()
 
 /client/proc/ghost_down()
-	set category = "GameMaster"
+	set category = "Admin.Ghost"
 	set name = "GhostDown"
 	if(!holder)
 		return

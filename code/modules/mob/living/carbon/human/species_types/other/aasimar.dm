@@ -148,23 +148,23 @@
 
 /datum/species/aasimar/get_hairc_list()
 	return sortList(list(
-	"black - oil" = "181a1d",
-	"black - cave" = "201616",
-	"black - rogue" = "2b201b",
-	"black - midnight" = "1d1b2b",
+		"black - oil" = "181a1d",
+		"black - cave" = "201616",
+		"black - rogue" = "2b201b",
+		"black - midnight" = "1d1b2b",
 
-	"white - silver" = "d3d9e3",
-	"white - alabaster" = "fffffc",
-	"white - skies" = "a1b4d4",
+		"white - silver" = "d3d9e3",
+		"white - alabaster" = "fffffc",
+		"white - skies" = "a1b4d4",
 
-	"yellow - sunlight" = "f3f797",
-	"blond - strawberry" = "c69b71",
-	"blond - pale" = "9d8d6e",
+		"yellow - sunlight" = "f3f797",
+		"blond - strawberry" = "c69b71",
+		"blond - pale" = "9d8d6e",
 
-	"red - flame" = "ab4637",
-	"red - sunset" = "bf6821",
-	"red - blood" = "822b2b",
-	"red - maroon" = "612929"
+		"red - flame" = "ab4637",
+		"red - sunset" = "bf6821",
+		"red - blood" = "822b2b",
+		"red - maroon" = "612929"
 	))
 
 /datum/species/aasimar/get_possible_names(gender = FALSE)

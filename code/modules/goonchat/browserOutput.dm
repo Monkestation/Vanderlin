@@ -1,3 +1,4 @@
+
 #define MAX_COOKIE_LENGTH 5
 
 /*********************************
@@ -230,6 +231,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 /datum/chatOutput/proc/debug(error)
 	log_world("\[[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]\] Client: [(src.owner.key ? src.owner.key : src.owner)] triggered JS error: [error]")
 
+/*
 //Global chat procs
 /proc/to_chat_immediate(target, message, handle_whitespace = TRUE)
 	if(!target || !message)
@@ -289,7 +291,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 		to_chat_immediate(target, message, handle_whitespace)
 		return
 	SSchat.queue(target, message, handle_whitespace)
-
+*/
 /datum/chatOutput/proc/swaptolightmode() //Dark mode light mode stuff. Yell at KMC if this breaks! (See darkmode.dm for documentation)
 	owner.force_white_theme()
 
@@ -297,3 +299,4 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 	owner.force_dark_theme()
 
 #undef MAX_COOKIE_LENGTH
+

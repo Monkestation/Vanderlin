@@ -221,7 +221,7 @@
 	max_integrity = 900
 	force = 15
 	block_chance = 0
-	wdefense = 2
+	wdefense = AVERAGE_PARRY
 	associated_skill = /datum/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = EASY_TO_DODGE

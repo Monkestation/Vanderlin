@@ -252,6 +252,32 @@
 	body_parts_covered = COVERAGE_SHIRT
 	uses_lord_coloring = LORD_PRIMARY
 
+/obj/item/clothing/armor/leather/jacket/courtphysician
+	name = "sanguine coat"
+	desc = "A padded coat made of a leather, perhaps this may keep the bloodstains away."
+	icon_state = "doccoat"
+	item_state = "doccoat"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	boobed = FALSE
+	uses_lord_coloring = LORD_PRIMARY
+	alternate_worn_layer = 19
+
+/obj/item/clothing/armor/leather/jacket/courtphysician/female
+	name = "sanguine jacket"
+	desc = "An elegant jacket made of silk and padded with leather on the inside. It would be a shame to dirty this, but it is inevitable."
+	icon_state = "docjacket"
+	item_state = "docjacket"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	boobed = FALSE
+	uses_lord_coloring = LORD_PRIMARY
+	alternate_worn_layer = 19
+
 /obj/item/clothing/armor/leather/jacket/leathercoat
 	name = "leather coat"
 	desc = "A tan and purple leather coat."
@@ -289,7 +315,7 @@
 
 /obj/item/clothing/armor/leather/jacket/leathercoat/duelcoat
 	name = "black leather coat"
-	desc = "A stylish coat worn by Duelists of Valoria. Light and flexible, it doesn't impede the complex movements they are known for, seems to be quite padded.A stylish coat worn by the Duelists of Valoria. Light and flexible, it doesn't impede the complex movements they are known for, Seems to be well-padded."
+	desc = "A stylish coat worn by the Duelists of Valoria. Light and flexible, it doesn't impede the complex movements they are known for, Seems to be well-padded."
 	icon_state = "bwleathercoat"
 	boobed = TRUE
 	armor = ARMOR_LEATHER_GOOD

@@ -9,7 +9,7 @@
 	)
 	outfit = /datum/outfit/mercenary/kern
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 4
+	total_positions = 0
 	cmode_music = 'sound/music/cmode/Combat_Dwarf.ogg'
 
 	jobstats = list(

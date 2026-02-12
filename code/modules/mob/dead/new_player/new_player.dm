@@ -39,7 +39,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 ///Say verb
 /mob/dead/new_player/say_verb(message as text)
 	set name = "Say"
-	set category = "IC"
+	set category = "IC.Speech"
 	set hidden = 1
 
 	if(message)
@@ -144,15 +144,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		relevant_cap = max(hpc, epc)
 
 	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src, 4)
+		client.prefs.show_choices(src, 4)
 		return 1
 
 	if(href_list["show_options"])
-		client.prefs.ShowChoices(src, 1)
+		client.prefs.show_choices(src, 1)
 		return 1
 
 	if(href_list["show_keybinds"])
-		client.prefs.ShowChoices(src, 3)
+		client.prefs.show_choices(src, 3)
 		return 1
 
 	if(href_list["ready"])

@@ -11,7 +11,7 @@
 	var/open = FALSE
 	var/old_render = TRUE
 
-/obj/item/paper/scroll/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/paper/scroll/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
 		if(!open)
 			to_chat(user, "<span class='warning'>Open me.</span>")
@@ -34,7 +34,7 @@
 				if("onbelt")
 					return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/paper/scroll/attack_self(mob/user, params)
+/obj/item/paper/scroll/attack_self(mob/user, list/modifiers)
 	if(mailer)
 		user.visible_message("<span class='notice'>[user] opens the missive from [mailer].</span>")
 		mailer = null
@@ -42,7 +42,7 @@
 		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 		return
 	if(!open)
-		attack_hand_secondary(user, params)
+		attack_hand_secondary(user, modifiers)
 		return
 	..()
 	user.update_inv_hands()
@@ -78,10 +78,10 @@
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
 
-/obj/item/paper/scroll/attack_self_secondary(mob/user, params)
-	attack_hand_secondary(user, params)
+/obj/item/paper/scroll/attack_self_secondary(mob/user, list/modifiers)
+	attack_hand_secondary(user, modifiers)
 
-/obj/item/paper/scroll/attack_hand_secondary(mob/user, params)
+/obj/item/paper/scroll/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -164,7 +164,7 @@
 	else
 		name = initial(name)
 
-/obj/item/paper/scroll/cargo/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/paper/scroll/cargo/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	if(istype(P, /obj/item/natural/feather))
 		if(user.is_literate() && open)
 			if(signedname)
@@ -221,6 +221,7 @@
 
 /obj/item/paper/inqslip/Destroy()
 	paired = null
+	signee = null
 	return ..()
 
 /obj/item/paper/inqslip/read(mob/user)
@@ -299,10 +300,8 @@
 		signed = TRUE
 		signee = user
 		update_appearance()
-	else
-		return
 
-/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user)
+/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user, list/modifiers)
 	if(sealed)
 		return
 	if(signed)
@@ -342,7 +341,7 @@
 		sealed = FALSE
 		update_appearance()
 
-/obj/item/paper/inqslip/attack_hand_secondary(mob/user, params)
+/obj/item/paper/inqslip/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(paired)
 		if(!user.get_active_held_item())
@@ -421,9 +420,6 @@
 			else
 				to_chat(user,  span_warning("[Q] isn't completely full."))
 
-/obj/item/paper/inqslip/attack_hand_secondary(mob/user, params)
-	. = ..()
-
 /obj/item/merctoken
 	name = "mercenary token"
 	desc = "A small, palm-fitting bound scroll - a miniature writ of commendation for a mercenary under MGE."
@@ -445,7 +441,7 @@
 	else
 		. += span_info("SIGNEE: [signee], [signeejob] of Vanderlin.")
 
-/obj/item/merctoken/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/merctoken/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
 		if(!user.can_read(src))
 			to_chat(user, span_warning("Even a reader would find these verba incomprehensible."))
@@ -489,7 +485,7 @@
 	writable = FALSE
 	resistance_flags = FIRE_PROOF // let's maybe not burn this
 
-/obj/item/paper/scroll/frumentarii/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/paper/scroll/frumentarii/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!user.mind)
 		return
@@ -519,7 +515,7 @@
 	user.mind.cached_frumentarii = fingers
 	rebuild_info()
 
-/obj/item/paper/scroll/frumentarii/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/paper/scroll/frumentarii/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	. = ..()
 	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
 		if(!open)

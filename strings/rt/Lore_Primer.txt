@@ -88,18 +88,6 @@ While it's not required reading, leadership roles may find this information usef
 		<p><strong> - Zizo's Claw Marquisate </strong><br> Located below Amber Hollow, marking the farthest West reach of Subterran caverns. Serves as a forward operations base for dark elven forces and slaves as they prepare yet another attempt at breaching the surface.  </p>
 		</details>
 	<br>
-
-	<p><strong>  The Lakkarian Strip </strong><em> - "The diverse stretch of resource-rich rainforests and dunes currently ruled over by the Queendom of Lakkari, the second largest elven territory of Faience."	</em></p>
-
-	<details>
-		<summary><em> Points of Interest </em></summary>
-
-		<p><strong> - City Of Iwabaree </strong><br> Nestled within the northwestern jungle of The Lakkarian Strip, Iwabaree is the capital city of Lakkari. Its considered to be one of the most sacred cities to Astratans within Psydonia and the wealthiest city of the Queendom. The Black Empire failed to capture it during the War of the Split Feather. Iwabaree is defined by its towering temples to Astrata, complex system of canals, and its gold-crested royal palace. It has only recently opened its doors to those of the inhumen species.	</p>
-		<p><strong> - Barony Of Sakhumeti </strong><br> Referred to as the graveyard capital of Faience. Sakhumeti is an expansive yet desolate barony with a majority Necran population, which has dropped sharply ever since Zizo's ascension. Clerics and Templars are frequently sent to Sakhumeti to clear out the still-rising dead within the city's sprawling tombs.	</p>
-		<p><strong> - City Of Ei Onkara </strong><br> South of the Lakkarian capital city of Iwabaree, the coastal city of Ei Onkara serves as the trade hub of Lakkari and is considered the second-wealthiest city in the Queendom. Ei Onkara is renowned for its expansive market district, skilled goldsmiths, and vast underground catacombs, which few dare to explore. There are often intense feuds and conflicts between its majority Astratan nobility and its majority Xylixian commoner population.	</p>
-		<p><strong> - Barony of Sekket </strong><br> The eastern-most barony of the Queendom of Lakkari, nearing the Zaladin Dynasty's northern border. Desired for its proximity to gold deposits and strategic location next to the Veil of Colors. There have been many squabbles between the Queendom of Lakkari and the Zaladin Dynasty over who has the rightful claim to Sekket, as control over it has shifted multiple times throughout history. Being a majority Xylixian barony, Sekket is also home to many anti-slaver groups. The most prominent being the Shinobi's of Sekket, which runs many underground operations throughout the Zaladin Dynasty. The operations of the Shinobi's of Sekket has drastically soured the already dire relations between the two nations.	</p>
-	</details>
-	<br><br>
 </details>
 
 
@@ -174,15 +162,6 @@ While it's not required reading, leadership roles may find this information usef
 	<br><br>
 
 	<details>
-		<summary><strong> KALEDON </strong></summary>
-		<br>
-		<em> Too fast, too soon. </em>
-		<br><br>
-		<span style="display:block; color:#17181a"> Certainly not awaiting writing. You should definitely not poke Cocokailey to provide a description to the author of this primer, who is eagerly awaiting something to include. ^v^ </span>
-		<br><br>
-	</details>
-
-	<details>
 		<summary><strong> VALORIAN RUPUBLIAS </strong></summary>
 		<br>
 		<em> The Freestates, Vineyards of Valoria, The Lords of Coin </em>
@@ -190,18 +169,6 @@ While it's not required reading, leadership roles may find this information usef
 		Valoria is a land of constant strife, bickering city-states with a number of conflicting interests. Yet they bear some pride of their lands, banding together to repel the invading Grenzelhoft Empire out of shared desire for freedom. With conflict comes innovation; the Valorian lands developed pride in their revolution of blade combat strategy and stance. Largely followers of Ravox, they value honour and duels as an expression of status.
 		<br><br>
 		Valoria is renown for their alcohol exports and trade, seconding only Zaladin as most-sought goods.
-		<br><br>
-	</details>
-	<details>
-		<summary><strong> QUEENDOM OF LAKKARI </strong></summary>
-		<br>
-		<em> The Gilded Pschent of the South, The Scourge of the Psydonites, The Land of Tombs and Feathers </em>
-		<br><br>
-		Considered to be the second largest elven power and second elven territory to be (sometimes) marked on humen maps, Lakkari is an elven queendom known for its diverse and defensive landscape and intense devotion to Astrata, Necra, and Xylix. Lush tropical rainforests and vast rivers run through the western and northern reaches of the nation, while the east and south are defined by the red dunes of the Hemhem desert, rich in iron and speckled with oases. Even further south are the Veil of Colors. A long ridge of colorful mountains rich in ceruleabaster and gold that acts as a natural border from the Zaladin Dynasty.
-		<br><br>
-		Despite its richness in natural resources and trade, wealth disparity has plagued Lakkari for centuries; many join the church or military to escape poverty. It is only in recent yils that the current Kandake, Iteru of the Dunes, has started to address the issue through a series of reforms the nobility has found incredibly controversial.
-		<br><br>
-		Lakkari is known for being one of the few elven nations to have successfully resisted Grenzelhoftian imperialism. Although it lost some of its northernmost territories during the War of the Split Feather (2401-2412), the Lakkarians were able to fend off the forces of the Black Empire following their decisive victory in the battle of Mudridge with the assistance of their closest ally, the Valorian Republics. The surviving Grenzelhoftian soldiers of the battle were captured and sent to the Lakkarian capital of Iwabaree, where they were publicly executed.
 		<br><br>
 	</details>
 	<details>
@@ -734,24 +701,6 @@ While it's not required reading, leadership roles may find this information usef
 		<summary><strong> Dark Elven Empire Conquered - 2104 </strong></summary>
 		<br>
 		Amidst the chaos of the deadite calamity, Zizo led an organized assault within the caverns of Subterra. The dark elven empire was subjugated in entirety, their Ravoxian ways violently crushed in favour of Zizo's matriarchy. Most elders and leaders were slaughtered, leaving the once respected and revered culture now a feared husk of what it once stood for.
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> The Red Dune Massacre - 2401 </strong></summary>
-		<br>
-		A devastating massacre carried out by Psydonite settlers and extremists from The Black Empire at St. Samiyas Convent, a northern Lakkarian convent near the Grenzelhoftian border. The abbess of the convent, alongside a countless number of her churchlings and acolytes, were mercilessly slain for reasons that Lakkarian scholars have long struggled to determine.
-		<br><br>
-		Iteru of the Dunes, Lakkari's Kandake, swiftly denounced this act of aggression and declared war on The Black Empire.
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> The War of the Split Feather - 2401-2412 </strong></summary>
-		<br>
-		The horrific eleven yil long war between the Queendom of Lakkari and the Grenzelhoftian Impirate. The Queendom of Lakkari sustained heavy losses, losing most of its northernmost territories, but ultimately won the war after a series of close and decisive victories in the Lakkarian rainforest following the Battle of Mudridge in 2411.
-		<br><br>
-		Having overstretched their supply lines into the Lakkarian rainforests (which they struggled to navigate) and facing relentless ambushes from both indigenous jungle elf tribes and the Lakkarian military, the Black Empire ultimately decided to pull back out of the rainforest and prioritize establishing control over the rebellious territories they already took in the north.
 		<br><br>
 	</details>
 
