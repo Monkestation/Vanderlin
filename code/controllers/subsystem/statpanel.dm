@@ -23,7 +23,7 @@ SUBSYSTEM_DEF(statpanels)
 		var/datum/map_config/cached = SSmapping.next_map_config
 
 		if(isnull(SSmapping.config))
-			global_data = list("Loading")=
+			global_data = list("Loading")
 		else
 			global_data = list("Map: [SSmapping.config.map_name]")
 
