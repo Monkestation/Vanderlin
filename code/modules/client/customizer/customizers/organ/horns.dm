@@ -68,7 +68,7 @@
 
 /datum/customizer_choice/organ/horns/demihuman
 	name = "Horns"
-	organ_type = /obj/item/organ/horns/demihuman
+	organ_type = /obj/item/organ/horns
 	sprite_accessories = list(
 		/datum/sprite_accessory/horns/simple,
 		/datum/sprite_accessory/horns/short,
