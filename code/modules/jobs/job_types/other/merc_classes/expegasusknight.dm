@@ -1,10 +1,10 @@
 /datum/job/advclass/mercenary/expegasusknight
 	title = "Ex-Pegasus Knight"
-	tutorial = "A former pegasus knight hailing from the southern Elven nation of Lakkari. Once a graceful warrior that ruled the skies, now a traveling sellsword that rules the streets, doing Faience's dirtiest work."
+	tutorial = "A former pegasus knight hailing from the Queendom of Lakkari. Once a graceful warrior that ruled the skies, now a traveling sellsword that rules the streets, doing Faience's dirtiest work."
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/mercenary/expegasusknight
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 0 //Disabled because Lakkari isn't lore-approved
+	total_positions = 3
 
 	jobstats = list(
 		STATKEY_END = 2,
@@ -50,4 +50,7 @@
 	beltl = /obj/item/weapon/knife/dagger/steel/njora
 	shirt = /obj/item/clothing/armor/chainmail/iron
 	pants = /obj/item/clothing/pants/trou/leather
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1)
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor = 1
+		/obj/item/natural/feather = 1 //Lakkarians carry feathers
+	)

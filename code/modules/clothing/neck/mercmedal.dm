@@ -56,5 +56,5 @@
 
 /obj/item/clothing/neck/mercmedal/goldfeather
 	name = "golden feather charm"
-	desc = "a palm-sized charm consisting of four golden feathers."
+	desc = "a palm-sized charm consisting of four golden feathers. The medal bestowed upon pegasus knights who helped liberate the City of Iwabaree."
 	icon_state = "goldfeather"

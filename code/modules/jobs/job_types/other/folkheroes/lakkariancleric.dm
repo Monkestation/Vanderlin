@@ -1,11 +1,10 @@
 /datum/job/advclass/combat/lakkariancleric // terra was here! <3
 	title = "Lakkarian Cleric"
-	tutorial = "A cleric belonging to the Order of the Southern Sun. After years of martial training and rigorous theological study, your abbess has deemed you worthy of a grand task. You will root out the corruption spread by The Four across Faience, and deliver the gospel of the glorious Sun Queen."
-	allowed_races = RACES_PLAYER_ELF
-	allowed_patrons = list(/datum/patron/divine/astrata)
+	tutorial = "A cleric hailing from the Queendom of Lakkari. Your life as a humble clergymember wass upended by the onslaught of undead. and have since traveled across the world to return the restless dead back into Necra's embrace."
+	allowed_patrons = list(/datum/patron/divine/necra) // xylixians and malumites soon
 	outfit = /datum/outfit/folkhero/lakkariancleric
 	category_tags = list(CTAG_FOLKHEROES)
-	total_positions = 0 //Lakkari disabled
+	total_positions = 2
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
@@ -46,7 +45,7 @@
 		"Silver Rungu" = /obj/item/weapon/mace/rungu/silver, \
 		"Silver Sengese" = /obj/item/weapon/sword/scimitar/sengese/silver \
 	)
-	var/choice = spawned.select_equippable(player_client, selectable, message = "What is your weapon of choice?")
+	var/choice = spawned.select_equippable(player_client, selectable, message = "What armament decorated your family banner?")
 	if(!choice)
 		return
 
@@ -68,7 +67,7 @@
 	armor = /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	gloves = /obj/item/clothing/gloves/leather
-	wrists = /obj/item/clothing/neck/psycross/silver/astrata
+	wrists = /obj/item/clothing/neck/psycross/silver/necra
 	pants = /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/blue
 	shoes = /obj/item/clothing/shoes/boots/leather
 	neck = /obj/item/clothing/neck/coif/cloth // price to pay for being a speedy class, less neck protection
@@ -77,6 +76,7 @@
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/reagent_containers/food/snacks/hardtack = 1
+		/obj/item/natural/feather = 1 // Lakkarians carry feathers
 	)
 
-// TOUCHING THIS ALL LATER, THERES ALOT I NEED TO DO W THIS CLASS
+// THERES ALOT THAT STILL NEEDS TO BE DONE ABOUT THIS CLASS.
