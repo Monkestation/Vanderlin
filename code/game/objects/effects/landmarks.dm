@@ -519,9 +519,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	GLOB.emergencyresponseteamspawn += loc
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/start
-
-
 //generic event spawns
 /obj/effect/landmark/event_spawn
 	name = "generic event spawn"
