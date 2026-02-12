@@ -28,7 +28,7 @@
 /datum/species/dwarf/mountain/subterra/after_creation(mob/living/carbon/C)
 	. = ..()
 
-	if(!istype(C.patron, /datum/patron/alternate/wurm))
+	if(!C.mind || !istype(C.patron, /datum/patron/alternate/wurm))
 		return
 
 	if(SSticker.current_state < GAME_STATE_PLAYING && length(GLOB.jarosite_starts))
