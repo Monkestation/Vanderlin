@@ -51,6 +51,6 @@
 	shirt = /obj/item/clothing/armor/chainmail/iron
 	pants = /obj/item/clothing/pants/trou/leather
 	backpack_contents = list(
-		/obj/item/storage/belt/pouch/coins/poor = 1
-		/obj/item/natural/feather = 1 //Lakkarians carry feathers
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/natural/feather = 1,
 	)

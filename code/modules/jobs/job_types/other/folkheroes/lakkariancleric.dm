@@ -1,7 +1,7 @@
 /datum/job/advclass/combat/lakkariancleric // terra was here! <3
 	title = "Lakkarian Cleric"
 	tutorial = "A cleric hailing from the Queendom of Lakkari. Your life as a humble clergymember wass upended by the onslaught of undead. and have since traveled across the world to return the restless dead back into Necra's embrace."
-	allowed_patrons = list(/datum/patron/divine/necra) // xylixians and malumites soon
+	allowed_patrons = list(/datum/patron/divine/necra) // xylixians and malumites soon. theres alot i need to do still
 	outfit = /datum/outfit/folkhero/lakkariancleric
 	category_tags = list(CTAG_FOLKHEROES)
 	total_positions = 2
@@ -75,8 +75,6 @@
 	backr = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/reagent_containers/food/snacks/hardtack = 1
-		/obj/item/natural/feather = 1 // Lakkarians carry feathers
+		/obj/item/reagent_containers/food/snacks/hardtack = 1,
+		/obj/item/natural/feather = 1, // Lakkarians carry feathers
 	)
-
-// THERES ALOT THAT STILL NEEDS TO BE DONE ABOUT THIS CLASS.
