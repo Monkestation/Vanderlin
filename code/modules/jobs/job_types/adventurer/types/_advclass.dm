@@ -31,8 +31,11 @@
 
 	apply_character_post_equipment(spawned)
 
-/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check, ignore_extras=FALSE)
+/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check, check_positions=TRUE)
 	if(!prob(roll_chance))
+		return FALSE
+
+	if(check_positions && total_positions > -1 && current_positions >= total_positions)
 		return FALSE
 
 	var/datum/preferences/player_prefs = to_check.client.prefs
@@ -52,11 +55,5 @@
 	if(!antags_can_pick && to_check.mind?.special_role)
 		return FALSE
 
-	if(!ignore_extras)
-		if(total_positions > -1)
-			if(current_positions >= total_positions)
-				return FALSE
-		if(!prob(roll_chance))
-			return FALSE
 
 	return TRUE

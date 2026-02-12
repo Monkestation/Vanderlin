@@ -49,9 +49,7 @@
 			continue
 		if(!length(class_check.category_tags & ANY_CLASS_CTAGS))
 			continue
-		if(!prob(roll_chance))
-			continue
-		if(!class_check.check_requirements(spawned, TRUE))
+		if(!class_check.check_requirements(spawned, FALSE))
 			continue
 		chosen_classes[class_check.title] = class_check
 
