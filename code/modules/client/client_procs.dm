@@ -580,9 +580,11 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
 
-	if(alert_mob_dupe_login)
-		spawn()
-			alert(mob, "You have logged in already with another key this round, please log out of this one NOW or risk being banned!")
+	if(alert_mob_dupe_login && !holder)
+		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
+		spawn(0.5 SECONDS) //needs to run during world init, do not convert to add timer
+			alert(mob, dupe_login_message) //players get banned if they don't see this message, do not convert to tgui_alert (or even tg_alert) please.
+			to_chat_immediate(mob, span_danger(dupe_login_message))
 
 	connection_time = world.time
 	connection_realtime = world.realtime
@@ -669,7 +671,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	send_resources()
 
-
 	generate_clickcatcher()
 	apply_clickcatcher()
 
@@ -685,7 +686,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	if(CONFIG_GET(flag/autoconvert_notes))
 		convert_notes_sql(ckey)
-
 
 	to_chat(src, get_message_output("message", ckey))
 
@@ -718,10 +718,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		var/datum/verbs/menu/menuitem = GLOB.menulist[thing]
 		if (menuitem)
 			menuitem.Load_checked(src)
-
-
-	if(byond_version >= 516) // Enable 516 compat browser storage mechanisms
-		winset(src, null, "browser-options=byondstorage,find,devtools")
 
 	loot_panel = new(src)
 
