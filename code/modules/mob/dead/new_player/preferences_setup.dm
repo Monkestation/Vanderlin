@@ -2,7 +2,7 @@
 // Reflect changes in [mob/living/carbon/human/proc/randomize_human_appearance]
 /datum/preferences/proc/randomise_appearance_prefs(randomise_flags = ALL, include_donator = FALSE)
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/list/species = list()
+		var/list/species_list = list()
 		for(var/species_id in GLOB.roundstart_species)
 			var/species_type = GLOB.species_list[species_id]
 
@@ -10,9 +10,9 @@
 			if(!species.preference_accessible(src))
 				continue
 
-			species += species.type
+			species_list += species.type
 
-		var/rando_race = pick(species)
+		var/rando_race = pick(species_list)
 		pref_species = new rando_race()
 
 	if(NOEYESPRITES in pref_species.species_traits)
