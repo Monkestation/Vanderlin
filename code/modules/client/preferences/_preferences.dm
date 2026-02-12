@@ -2197,11 +2197,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if(choice)
 						choice = choices[choice]
 						if(!load_character(choice))
-							randomise_appearance_prefs(include_donator = donator)
+							randomise_appearance_prefs()
 							save_character()
 
 				if("randomiseappearanceprefs")
-					randomise_appearance_prefs(include_donator = donator)
+					randomise_appearance_prefs()
 					customizer_entries = list()
 					validate_customizer_entries()
 					reset_all_customizer_accessory_colors()
