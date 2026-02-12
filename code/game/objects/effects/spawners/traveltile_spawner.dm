@@ -90,6 +90,12 @@
 /obj/effect/spawner/traveltile_spawner/vertical/inhumen
 	travel_tile = /obj/structure/fluff/traveltile/to_inhumen_tribe
 
+/obj/effect/spawner/traveltile_spawner/horizontal/jarosite
+	travel_tile = /obj/structure/fluff/traveltile/to_acid_caves
+
+/obj/effect/spawner/traveltile_spawner/vertical/jarosite
+	travel_tile = /obj/structure/fluff/traveltile/to_acid_caves
+
 /*	..................   Traveltiles   ................... */ // these are the ones on centcom, where the actual lair is, to reduce varedits onmap
 /obj/structure/fluff/traveltile/exit_bandit		// must NOT be a traveltile/bandit child, because that one has a check for banditcamp trait. People should always be able to leave the camp.
 	aportalid = "banditin"
@@ -119,7 +125,6 @@
 	aportalid = "inhumenin"
 	aportalgoesto = "inhumenexit"
 
-
 /obj/structure/fluff/traveltile/to_inhumen_tribe
 	name = "to the Deep Bog"
 	aportalid = "inhumenexit"
@@ -127,4 +132,15 @@
 	required_trait = TRAIT_INHUMENCAMP
 	can_gain_with_sight = FALSE
 	can_gain_by_walking = FALSE
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/to_acid_caves
+	name = "to the Acid Caves"
+	aportalid = "acid_out"
+	aportalgoesto = "acid_in"
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/from_acid_caves
+	aportalid = "acid_in"
+	aportalgoesto = "acid_out"
 	check_other_side = TRUE

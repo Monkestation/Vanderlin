@@ -1313,43 +1313,44 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
  *
  * Filters out certain overlays from the copy, depending on their planes
  * Prevents stuff like lighting from being copied to the new appearance
+ *
+ * Arguments
+ * * appearance_to_copy - thing we are taking looks from
+ * * recursion - recursion depth
  */
-/proc/copy_appearance_filter_overlays(appearance_to_copy) as /mutable_appearance
+/proc/copy_appearance_filter_overlays(appearance_to_copy, recursion = 0) as /mutable_appearance
 	RETURN_TYPE(/mutable_appearance)
 	var/mutable_appearance/copy = new(appearance_to_copy)
 	var/static/list/plane_whitelist = list(FLOAT_PLANE, GAME_PLANE, FLOOR_PLANE)
 
-	copy.overlays = recursively_filter_emissive_blockers(copy.overlays, plane_whitelist)
-	copy.underlays = recursively_filter_emissive_blockers(copy.underlays, plane_whitelist)
+	/// Ideally we'd have knowledge what we're removing but i'd have to be done on target appearance retrieval
+	var/list/overlays_to_keep = list()
+	for(var/mutable_appearance/special_overlay as anything in copy.overlays)
+		if(isnull(special_overlay))
+			continue
+		var/mutable_appearance/real = new()
+		real.appearance = special_overlay
+		if(real.plane in plane_whitelist)
+			if(recursion)
+				overlays_to_keep += .(real, recursion - 1)
+			else
+				overlays_to_keep += real
+	copy.overlays = overlays_to_keep
+
+	var/list/underlays_to_keep = list()
+	for(var/mutable_appearance/special_underlay as anything in copy.underlays)
+		if(isnull(special_underlay))
+			continue
+		var/mutable_appearance/real = new()
+		real.appearance = special_underlay
+		if(real.plane in plane_whitelist)
+			if(recursion)
+				underlays_to_keep += .(real, recursion - 1)
+			else
+				underlays_to_keep += real
+	copy.underlays = underlays_to_keep
 
 	return copy
-
-/proc/recursively_filter_emissive_blockers(list/input_list, list/plane_whitelist)
-	var/list/filtered_list = list()
-
-	for(var/mutable_appearance/overlay_item as anything in input_list)
-		if(isnull(overlay_item))
-			continue
-
-		var/mutable_appearance/real = new()
-		real.appearance = overlay_item
-
-		// Skip emissive blockers
-		if(is_emissive_blocker(real))
-			continue
-
-		// Skip non-whitelisted planes
-		if(!(real.plane in plane_whitelist))
-			continue
-
-		if(length(real.overlays))
-			real.overlays = recursively_filter_emissive_blockers(real.overlays, plane_whitelist)
-		if(length(real.underlays))
-			real.underlays = recursively_filter_emissive_blockers(real.underlays, plane_whitelist)
-
-		filtered_list += real
-
-	return filtered_list
 
 /proc/is_emissive_blocker(mutable_appearance/MA)
 	if(MA.plane == EMISSIVE_PLANE)

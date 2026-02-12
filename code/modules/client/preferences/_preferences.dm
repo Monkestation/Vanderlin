@@ -287,7 +287,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	//we couldn't load character data so just randomize the character appearance + name
 	randomise_appearance_prefs(include_donator = donator)		//let's create a random character then - rather than a fat, bald and naked man.
 	if(!selected_patron)
-		selected_patron = GLOB.patronlist[default_patron]
+		selected_patron = GLOB.patron_list[default_patron]
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
 	if(isclient(C))
 		C.update_movement_keys()
@@ -319,7 +319,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 /datum/preferences/proc/build_and_show_menu(mob/user)
 	var/list/dat = list()
-	var/datum/faith/selected_faith = GLOB.faithlist[selected_patron.associated_faith]
+	var/datum/faith/selected_faith = GLOB.faith_list[selected_patron.associated_faith]
 	var/datum/job/high_job
 	for(var/job_type in job_preferences)
 		if(job_preferences[job_type] != JP_HIGH)
@@ -737,7 +737,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(!winexists(user, "preferences_browser"))
 		return
 
-	var/datum/faith/selected_faith = GLOB.faithlist[selected_patron.associated_faith]
+	var/datum/faith/selected_faith = GLOB.faith_list[selected_patron.associated_faith]
 	var/datum/job/high_job
 	for(var/job_type in job_preferences)
 		if(job_preferences[job_type] != JP_HIGH)
@@ -1612,9 +1612,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						to_chat(user, span_warning("Your character will now vocalize with a [lowertext(voice_type)] affect."))
 				if("faith")
 					var/list/faiths_named = list()
-					for(var/path as anything in GLOB.preference_faiths)
-						var/datum/faith/faith = GLOB.faithlist[path]
-						if(!faith.name)
+					for(var/datum/faith/faith as anything in GLOB.faith_list)
+						faith = GLOB.faith_list[faith]
+						if(!faith.preference_accessible(src))
 							continue
 						faiths_named["\The [faith.name]"] = faith
 					var/faith_input = browser_input_list(user, "SELECT YOUR HERO'S BELIEF", "PUPPETS ON STRINGS", faiths_named, "\The [selected_patron.associated_faith::name]")
@@ -1622,30 +1622,30 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
 						to_chat(user, "<font color='purple'>Background: [faith.desc]</font>")
-						selected_patron = GLOB.preference_patrons[faith.godhead] || GLOB.preference_patrons[pick(GLOB.patrons_by_faith[faith_input])]
+						selected_patron = GLOB.patron_list[faith.godhead] || GLOB.patron_list[pick(GLOB.patrons_by_faith[faith.type])]
 
 				if("patron")
 					var/list/patrons_named = list()
-					for(var/path as anything in GLOB.patrons_by_faith[selected_patron.associated_faith || initial(default_patron.associated_faith)])
-						var/datum/patron/patron = GLOB.preference_patrons[path]
-						if(!patron.name)
+					for(var/datum/patron/patron as anything in GLOB.patrons_by_faith[selected_patron.associated_faith || initial(default_patron.associated_faith)])
+						patron = GLOB.patron_list[patron]
+						if(!patron.preference_accessible(src))
 							continue
-						if(patron.allowed_races)
-							if(!(user.client.prefs.pref_species.id in patron.allowed_races))
-								continue
 						var/pref_name = patron.display_name ? patron.display_name : patron.name
 						patrons_named[pref_name] = patron
-					var/datum/faith/current_faith = GLOB.faithlist[selected_patron.associated_faith] || GLOB.faithlist[initial(default_patron.associated_faith)]
-					var/god_input = browser_input_list(user, "SELECT YOUR HERO'S PATRON GOD", uppertext("\The [current_faith.name]"), patrons_named, selected_patron)
-					if(god_input)
-						selected_patron = patrons_named[god_input]
-						to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
-						to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
-						to_chat(user, "<font color='purple'>Background: [selected_patron.desc]</font>")
-						to_chat(user, "<font color='purple'>Flawed aspects: [selected_patron.flaws]</font>")
-						to_chat(user, "<font color='purple'>Likely Worshippers: [selected_patron.worshippers]</font>")
-						to_chat(user, "<font color='red'>Considers these to be Sins: [selected_patron.sins]</font>")
-						to_chat(user, "<font color='white'>Blessed with boon(s): [selected_patron.boons]</font>")
+
+					if(length(patrons_named))
+						var/datum/faith/current_faith = GLOB.faith_list[selected_patron.associated_faith] || GLOB.faith_list[initial(default_patron.associated_faith)]
+						var/god_input = browser_input_list(user, "SELECT YOUR HERO'S PATRON GOD", uppertext("\The [current_faith.name]"), patrons_named, selected_patron)
+						if(god_input)
+							selected_patron = patrons_named[god_input]
+
+					to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
+					to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
+					to_chat(user, "<font color='purple'>Background: [selected_patron.desc]</font>")
+					to_chat(user, "<font color='purple'>Flawed aspects: [selected_patron.flaws]</font>")
+					to_chat(user, "<font color='purple'>Likely Worshippers: [selected_patron.worshippers]</font>")
+					to_chat(user, "<font color='red'>Considers these to be Sins: [selected_patron.sins]</font>")
+					to_chat(user, "<font color='white'>Blessed with boon(s): [selected_patron.boons]</font>")
 
 				if("voice")
 					var/new_voice = input(user, "SELECT YOUR HERO'S VOICE COLOR", "THE THROAT","#"+voice_color) as color|null
@@ -1708,12 +1708,23 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 				if("species")
 					selected_accent = ACCENT_DEFAULT
-					var/list/selectable = get_selectable_species(donator)
+
+					var/list/selectable = list()
+					for(var/species_id in GLOB.roundstart_species)
+						var/species_type = GLOB.species_list[species_id]
+
+						var/datum/species/species = new species_type()
+						if(!species.preference_accessible(src))
+							continue
+
+						selectable[species.name] = species.type
+
 					var/result = browser_input_list(user, "SELECT YOUR HERO'S PEOPLE:", "VANDERLIN FAUNA", selectable, pref_species)
 
 					if(result)
-						var/species = GLOB.species_list[result]
-						pref_species = new species
+						var/species_type = selectable[result]
+
+						pref_species = new species_type()
 
 						to_chat(user, "<em>[pref_species.name]</em>")
 						if(pref_species.desc)
@@ -2208,8 +2219,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 /// Sanitization checks to be performed before using these preferences.
 /datum/preferences/proc/sanitize_chosen_prefs()
-	if(!(pref_species.name in get_selectable_species(donator)))
+	if(!pref_species || !pref_species.preference_accessible(src))
 		pref_species = new /datum/species/human/northern
+		customizer_entries = list()
+		validate_customizer_entries()
 		save_character()
 
 	if(CONFIG_GET(flag/humans_need_surnames) && (pref_species.id == SPEC_ID_HUMEN))

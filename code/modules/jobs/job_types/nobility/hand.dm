@@ -159,7 +159,7 @@
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/weapon/knife/dagger/steel/stiletto = 1,
 		/obj/item/storage/keyring/hand = 1,
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1

@@ -308,3 +308,46 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 		qdel(element)
 
 	party_hud_elements = list()
+
+
+// Not really sure where is best to put this, so it can go in here for now.
+/mob/living/carbon/proc/make_acquaintance()
+	var/mob/living/carbon/inviter = usr
+	var/list/mobs = list()
+	for(var/mob/living/carbon/person in view(2, inviter))
+		if(!person.mind || mind.do_i_know(person.mind))
+			continue
+		if(person == inviter)
+			continue
+		mobs += person
+
+	if(!LAZYLEN(mobs))
+		return FALSE
+
+	var/mob/living/carbon/invitee = browser_input_list(inviter, "Choose a target to add.", "Acquaintance", mobs)
+	if(!invitee)
+		return FALSE
+
+	if(!invitee.ckey || !invitee.mind)
+		to_chat(inviter, "<span class='warning'>This person is unable to become your acquaintance!</span>")
+		return FALSE
+
+	if(cmode)
+		to_chat(inviter, "<span class='warning'>You cannot do this during combat!</span>")
+		return FALSE
+	if(invitee.cmode)
+		to_chat(inviter, "<span class='warning'>This person is too busy at this time. Try again later.</span>")
+		return FALSE
+
+	var/invitee_choice = alert(invitee, "[src.real_name] wishes to make become an acquaintance, do you agree?", "Become Acquaintances", "Yes", "No")
+	if(!(invitee_choice == "Yes"))
+		return FALSE
+
+	// Sanity check
+	if(!mind)
+		return FALSE
+
+	to_chat(inviter, "<span class='notice'>You are now acquaintances with [invitee.real_name]!</span>")
+	to_chat(invitee, "<span class='notice'>You are now acquaintances with [inviter.real_name]!</span>")
+	mind.share_identities(invitee.mind)
+	return TRUE

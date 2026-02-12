@@ -162,8 +162,8 @@
 		return
 
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_donator))]
-		set_species(new rando_race(), FALSE)
+		var/rando_race = GLOB.species_list[pick(GLOB.roundstart_species)]
+		set_species(rando_race, FALSE)
 
 	var/datum/species/species = dna.species
 

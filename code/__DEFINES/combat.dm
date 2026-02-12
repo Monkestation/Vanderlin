@@ -244,6 +244,8 @@
 #define CLEAVER_CHOP		/datum/intent/dagger/chop/cleaver
 #define SCISSOR_SNIP		/datum/intent/snip
 #define FACE_STEAL			/datum/intent/peculate
+#define STILETTO_CUT		/datum/intent/dagger/cut/stiletto
+#define STILETTO_THRUST		/datum/intent/dagger/thrust/stiletto
 
 #define KNUCKLE_STRIKE		/datum/intent/knuckles/strike
 #define KNUCKLE_SMASH		/datum/intent/knuckles/smash

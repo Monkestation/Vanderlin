@@ -139,29 +139,31 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 	Currently used for classes, I could have used these for drifters tho
 */
 
-#define CTAG_ALLCLASS		"CAT_ALLCLASS"		// jus a define for allclass to not deal with actively typing strings
-#define CTAG_PILGRIM 		"CAT_PILGRIM"  		// Pilgrim classes
-#define CTAG_ADVENTURER 	"CAT_ADVENTURER"  	// Adventurer classes
-#define CTAG_TOWNER 		"CAT_TOWNER"  		// Villager class - Villagers can use it
-#define CTAG_ANTAG 			"CAT_ANTAG"  		// Antag class - results in an antag
-#define CTAG_BANDIT			"CAT_BANDIT"		// Bandit class - Tied to the bandit antag really	<- Disabled; bandits got stuck with class selection
-#define CTAG_CHALLENGE 		"CAT_CHALLENGE"  	// Challenge class - Meant to be free for everyone
-#define CTAG_MERCENARY		"CAT_MERCENARY"
-#define CTAG_GARRISON		"CAT_GARRISON"
-#define CTAG_FORGARRISON	"CAT_FORGARRISON"
-#define CTAG_ADEPT			"CAT_ADEPT" // Used for Adept class selection
-#define CTAG_SQUIRE 		"CAT_SQUIRE" // Squire Love, Classes, as above.
-#define CTAG_HEIR			"CAT_HEIR"
-#define CTAG_HAND			"CAT_HAND"			// Hand class - Handles Hand class selector
-#define CTAG_CONSORT 		"CAT_CONSORT" 		// Consort classes
-#define CTAG_VETERAN		"CAT_VETERAN"		// Veteran class - Handles Veteran class selector
-#define CTAG_TOWN_ELDER		"CAT_TOWN_ELDER"		// Town Elder class - Handles Town Elder class selector
-#define CTAG_ROYALKNIGHT	"CAT_ROYAL_KNIGHT"
-#define CTAG_ARCHIVIST		"CAT_ARCHIVIST"
-#define CTAG_MENATARMS		"CAT_MENATARMS"
-#define CTAG_GATEMASTER		"CAT_GATEMASTER"
-#define CTAG_WRETCH			"CAT_WRETCH"
-#define CTAG_INQUISITION	"CAT_INQUISITION"	// For Orthodoxist subclasses
+#define CTAG_ALLCLASS "CAT_ALLCLASS" // just a define for allclass to not deal with actively typing strings
+#define CTAG_PILGRIM "CAT_PILGRIM"  // Pilgrim classes
+#define CTAG_ADVENTURER "CAT_ADVENTURER" // Adventurer classes
+#define CTAG_TOWNER "CAT_TOWNER" // Villager class - Villagers can use it
+#define CTAG_ANTAG "CAT_ANTAG" // Antag class - results in an antag
+#define CTAG_BANDIT	"CAT_BANDIT" // Bandit class - Tied to the bandit antag really	<- Disabled; bandits got stuck with class selection
+#define CTAG_CHALLENGE "CAT_CHALLENGE" // Challenge class - Meant to be free for everyone
+#define CTAG_MERCENARY "CAT_MERCENARY"
+#define CTAG_GARRISON "CAT_GARRISON"
+#define CTAG_FORGARRISON "CAT_FORGARRISON"
+#define CTAG_ADEPT "CAT_ADEPT" // Used for Adept class selection
+#define CTAG_SQUIRE "CAT_SQUIRE" // Squire Love, Classes, as above.
+#define CTAG_MAGIE "CAT_MAGIE" //for Mage Associate
+#define CTAG_HEIR "CAT_HEIR"
+#define CTAG_HAND "CAT_HAND" // Hand class - Handles Hand class selector
+#define CTAG_CONSORT "CAT_CONSORT" // Consort classes
+#define CTAG_VETERAN "CAT_VETERAN" // Veteran class - Handles Veteran class selector
+#define CTAG_TOWN_ELDER "CAT_TOWN_ELDER" // Town Elder class - Handles Town Elder class selector
+#define CTAG_ROYALKNIGHT "CAT_ROYAL_KNIGHT"
+#define CTAG_ARCHIVIST "CAT_ARCHIVIST"
+#define CTAG_MENATARMS "CAT_MENATARMS"
+#define CTAG_SERVANT "CAT_SERVANT" // Servant class - 4 type of servant to fill in someplace.
+#define CTAG_GATEMASTER "CAT_GATEMASTER"
+#define CTAG_WRETCH "CAT_WRETCH"
+#define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
 
