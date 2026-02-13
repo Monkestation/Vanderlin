@@ -13,16 +13,16 @@
 // Template
 /obj/item/reagent_containers/food/snacks/meat
 	eat_effect = /datum/status_effect/debuff/uncookedfood
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION)
 	icon_state = "meat"
 	slice_batch = TRUE // so it takes more time, changed from FALSE
 	filling_color = "#8f433a"
 	bitesize = 3
 	rotprocess = SHELFLIFE_SHORT
 	chopping_sound = TRUE
-	foodtype = RAW | MEAT
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/meat
+	nutrition = RAWMEAT_NUTRITION
+	foodtype = RAW | MEAT
 	var/cannibalism = FALSE
 	var/list/cannibalism_for = list()
 	tastes = list("meat" = 1)
@@ -67,6 +67,7 @@
 	name = "plucked bird"
 	icon_state = "poultry"
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet
+	nutrition = RAWMEAT_NUTRITION * 2
 	slices_num = 2
 	slice_sound = TRUE
 	ingredient_size = 4
@@ -78,6 +79,7 @@
 	ingredient_size = 2
 	slices_num = 2
 	slice_bclass = BCLASS_CHOP
+	nutrition = RAWMEAT_NUTRITION
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/poultry
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/chickenleg
 
@@ -101,15 +103,16 @@
 	gender = PLURAL
 	foodtype = RAW | MEAT | GROSS
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison/human = 1)
+	list_reagents = list(/datum/reagent/organpoison/human = 1)
 	grind_results = list(/datum/reagent/organpoison/human = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
 
 /obj/item/reagent_containers/food/snacks/meat/fatty/dwarf
 	name = "fatty manflesh" // porky
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison/human = 1)
+	list_reagents = list(/datum/reagent/organpoison/human = 1)
 	grind_results = list(/datum/reagent/organpoison/human = 2)
+	nutrition = RAWMEAT_NUTRITION
 	foodtype = RAW | MEAT | GROSS
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
@@ -117,14 +120,16 @@
 /obj/item/reagent_containers/food/snacks/meat/fatty/kobold
 	name = "raw wyrmflesh"
 	foodtype = RAW | MEAT | GROSS
+	list_reagents = list(/datum/reagent/organpoison/kobold = 1)
+	grind_results = list(/datum/reagent/organpoison/kobold = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBALISM_KOBOLD
-	tastes = list("gamey meat" = 1, "crunch" = 1, "ash" = 1)
+	tastes = list("gamey meat" = 1, "crunchy bits" = 1, "ash" = 1)
 	transfers_tastes = TRUE
 
 /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/harpy
 	name = "harpy cutlet"
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison/human = 1)
+	list_reagents = list(/datum/reagent/organpoison/human = 1)
 	grind_results = list(/datum/reagent/organpoison/human = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
@@ -133,7 +138,7 @@
 	name = "deepflesh"
 	icon_state = "fishfillet"
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison/human = 1)
+	list_reagents = list(/datum/reagent/organpoison/human = 1)
 	grind_results = list(/datum/reagent/organpoison/human = 2)
 	slices_num = 2
 	become_rot_type = null
@@ -144,7 +149,7 @@
 	name = "foul manflesh"
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison/human = 1)
+	list_reagents = list(/datum/reagent/organpoison/human = 1)
 	grind_results = list(/datum/reagent/organpoison/human = 2)
 
 
@@ -152,8 +157,9 @@
 	name = "appendix"
 	icon_state = "appendix"
 	icon = 'icons/obj/surgery.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR, /datum/reagent/organpoison = 0.5)
+	list_reagents = list(/datum/reagent/organpoison = 0.5)
 	grind_results = list(/datum/reagent/organpoison = 1)
+	nutrition = MINCE_NUTRITION
 	foodtype = RAW | MEAT | GROSS
 	rotprocess = SHELFLIFE_TINY
 	cannibalism = TRUE
@@ -171,25 +177,28 @@
 
 /obj/item/reagent_containers/food/snacks/meat/organ/heart
 	name = "heart"
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
+	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
+	nutrition = RAWMEAT_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 	name = "lungs"
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
+	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
+	nutrition = RAWMEAT_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/meat/organ/liver
 	name = "liver"
-	list_reagents = list(/datum/reagent/consumable/nutriment = RAWMEAT_NUTRITION, /datum/reagent/organpoison = 1)
+	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
+	nutrition = RAWMEAT_NUTRITION
 
 /*	........   Cooked food template   ................ */ // No choppping double cooking etc prefixed
 /obj/item/reagent_containers/food/snacks/cooked
 	name = "cooked meat"
 	desc = ""
 	icon_state = "frysteak"
-	list_reagents = list(/datum/reagent/consumable/nutriment = COOKED_MEAT_NUTRITION)
+	nutrition = COOKED_MEAT_NUTRITION
 	rotprocess = SHELFLIFE_DECENT
 	filling_color = "#8f433a"
 	foodtype = MEAT
@@ -209,6 +218,7 @@
 	filling_color = "#8a0000"
 	rotprocess = SHELFLIFE_TINY
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/mince
+	nutrition = MINCE_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/meat/mince/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/mess(get_turf(src))
@@ -226,7 +236,7 @@
 	eat_effect = null
 	foodtype = MEAT
 	rotprocess = SHELFLIFE_DECENT
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	color = "#a0655f"
 
 /obj/item/reagent_containers/food/snacks/meat/mince/fish
@@ -238,7 +248,7 @@
 	eat_effect = null
 	foodtype = MEAT
 	rotprocess = SHELFLIFE_DECENT
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	color = "#a0655f"
 
 /obj/item/reagent_containers/food/snacks/meat/mince/poultry
@@ -250,7 +260,7 @@
 	eat_effect = null
 	foodtype = MEAT
 	rotprocess = SHELFLIFE_DECENT
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	color = "#a0655f"
 
 /*	..................   METT   ................... */
@@ -258,9 +268,9 @@
 	name = "grenzel mett"
 	desc = "A popular topping for bread in Grenzelhoft, while simply bizarre to people from Vanderlin."
 	icon_state = "mett_minced"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_NUTRITIOUS)
 	bitesize = 3
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett/slice
+	nutrition = MINCE_NUTRITION + VEGGIE_NUTRITION
 	slices_num = 3
 	slice_batch = TRUE
 	slice_sound = TRUE
@@ -274,7 +284,7 @@
 	bitesize = 1
 	slices_num = FALSE
 	slice_path = FALSE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = (MINCE_NUTRITION + VEGGIE_NUTRITION) / 3
 
 /*	..................   Sausage & Wiener   ................... */
 /obj/item/reagent_containers/food/snacks/meat/sausage
@@ -282,11 +292,13 @@
 	icon_state = "raw_wiener"
 	ingredient_size = 1
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/sausage
+	nutrition = RAWMEAT_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/meat/wiener
 	name = "raw wiener"
 	icon_state = "raw_wiener"
 	ingredient_size = 1
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/sausage
+	nutrition = FATTYMEAT_NUTRITION
 
 

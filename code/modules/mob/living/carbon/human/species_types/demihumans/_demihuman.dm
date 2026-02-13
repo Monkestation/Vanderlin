@@ -49,7 +49,7 @@
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'
 
-	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/steak = 1)
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1, /obj/item/natural/fur = 0.5)
 	exotic_bloodtype = /datum/blood_type/human/demihuman
 
 	offset_features_m = list(

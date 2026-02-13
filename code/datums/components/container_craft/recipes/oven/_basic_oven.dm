@@ -70,7 +70,7 @@
 
 /datum/container_craft/oven/roastbird
 	name = "Roast Bird"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/roastchicken
 	cooked_smell = /datum/pollutant/food/fried_chicken
 
@@ -136,13 +136,6 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/berry = 1)
 	output = /obj/item/reagent_containers/food/snacks/pie/cooked/berry
 	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/berry/good
-	cooked_smell = /datum/pollutant/food/berry_pie
-
-/datum/container_craft/oven/pie/poisonberry
-	hides_from_books = TRUE
-	name = "Poison Berry Pie"
-	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/berry/poison = 1)
-	output = /obj/item/reagent_containers/food/snacks/pie/cooked/poison
 	cooked_smell = /datum/pollutant/food/berry_pie
 
 /datum/container_craft/oven/pie/borowiki
@@ -220,14 +213,6 @@
 	output = /obj/item/reagent_containers/food/snacks/strawbycake_cooked
 	cooked_smell = /datum/pollutant/food/strawberry_cake
 
-/datum/container_craft/oven/poisoncheesecake
-	hides_from_books = TRUE
-	category = "Cakes"
-	name = "Baked Poison Cheesecake"
-	requirements = list(/obj/item/reagent_containers/food/snacks/chescake_poison_ready= 1)
-	output = /obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked
-	cooked_smell = /datum/pollutant/food/cheese_cake
-
 /datum/container_craft/oven/cheesecake
 	category = "Cakes"
 	name = "Baked Cheesecake"
@@ -268,13 +253,6 @@
 	output = /obj/item/reagent_containers/food/snacks/biscuit/good
 	cooked_smell = /datum/pollutant/food/biscuit
 
-/datum/container_craft/oven/biscuitpoison
-	hides_from_books = TRUE
-	name = "Baked Biscuit"
-	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/biscuitpoison_raw= 1)
-	output = /obj/item/reagent_containers/food/snacks/biscuit_poison
-	cooked_smell = /datum/pollutant/food/biscuit
-
 /datum/container_craft/oven/cheesebun
 	name = "Baked Cheese Bun"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/cheesebun_raw= 1)
@@ -285,13 +263,6 @@
 	name = "Raisin Bread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/raisindough= 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/raisin
-	cooked_smell = /datum/pollutant/food/raisin_bread
-
-/datum/container_craft/oven/raisin_breadpoison
-	hides_from_books = TRUE
-	name = "Raisin Bread"
-	requirements = list(/obj/item/reagent_containers/food/snacks/raisindough_poison= 1)
-	output = /obj/item/reagent_containers/food/snacks/bread/raisin/poison
 	cooked_smell = /datum/pollutant/food/raisin_bread
 
 /datum/container_craft/oven/toast

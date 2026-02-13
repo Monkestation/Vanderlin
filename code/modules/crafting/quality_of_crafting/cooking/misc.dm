@@ -103,7 +103,7 @@
 	attacked_atom = /obj/item/reagent_containers/food/snacks/meat/mince
 	starting_atom = /obj/item/reagent_containers/food/snacks/fat
 	allow_inverse_start = TRUE
-	output = /obj/item/reagent_containers/food/snacks/meat/sausage
+	output = /obj/item/reagent_containers/food/snacks/meat/wiener
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "stuff a wiener"

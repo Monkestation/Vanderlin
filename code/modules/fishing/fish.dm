@@ -29,7 +29,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	slices_num = 1
 	slice_bclass = BCLASS_CHOP
 	faretype = FARE_IMPOVERISHED //incase someone decides to eat raw fish
-	list_reagents = list(/datum/reagent/consumable/nutriment = 3)
+	nutrition = RAWMEAT_NUTRITION
+	bitecount = 3
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2)
@@ -1260,7 +1261,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fryfish
 	icon = 'icons/roguetown/misc/fish.dmi'
 	trash = null
-	list_reagents = list(/datum/reagent/consumable/nutriment = 10)
+	nutrition = RAWMEAT_NUTRITION * DRIED_MOD
 	tastes = list("fish" = 1)
 	name = "cooked fish"
 	faretype = FARE_POOR

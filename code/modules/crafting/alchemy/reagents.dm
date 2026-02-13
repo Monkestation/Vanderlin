@@ -409,7 +409,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	name = "Humen Organ Poison"
 	cannibalism_pool = SPECIES_CANNIBAL_MEN
 
-/datum/reagent/organpoison/organpoison/kobold
+/datum/reagent/organpoison/kobold
 	name = "Kobold Organ Poison"
 	cannibalism_pool = SPECIES_CANNIBALISM_KOBOLD
 

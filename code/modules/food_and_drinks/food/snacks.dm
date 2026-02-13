@@ -40,7 +40,8 @@ All foods are distributed among various categories. Use common sense.
 	grind_results = list() //To let them be ground up to transfer their reagents
 	possible_item_intents = list(/datum/intent/food)
 	foodtype = GRAIN
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
+	list_reagents = list()
+	var/nutrition = 1
 	w_class = WEIGHT_CLASS_SMALL
 	var/transfers_tastes = FALSE
 	var/bitesize = 3 // how many times you need to bite to consume it fully
@@ -242,10 +243,9 @@ All foods are distributed among various categories. Use common sense.
 	if(list_reagents)
 		for(var/rid in list_reagents)
 			var/amount = list_reagents[rid]
-			if(rid == /datum/reagent/consumable/nutriment || rid == /datum/reagent/consumable/nutriment/vitamin)
-				reagents.add_reagent(rid, amount, tastes.Copy())
-			else
-				reagents.add_reagent(rid, amount)
+			reagents.add_reagent(rid, amount)
+	if(nutrition)
+		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? tastes : null)
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)
 	if(!eater)
@@ -669,7 +669,8 @@ All foods are distributed among various categories. Use common sense.
 	name = "burned mess"
 	desc = ""
 	icon_state = "badrecipe"
-	list_reagents = list(/datum/reagent/toxin/bad_food = 10, /datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = SNACK_POOR
+	list_reagents = list(/datum/reagent/toxin/bad_food = 10)
 	filling_color = "#8B4513"
 	faretype = FARE_IMPOVERISHED
 	foodtype = GROSS

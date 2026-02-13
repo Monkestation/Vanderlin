@@ -46,7 +46,7 @@
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_SLOP)
+	nutrition = VEGGIE_NUTRITION
 	color = "#ab7d6f"
 	tastes = list("mushroom" = 1)
 	sellprice = 30
@@ -66,8 +66,8 @@
 			. += span_notice("This truffle looks safe to eat.")
 
 /obj/item/reagent_containers/food/snacks/truffles/toxic
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_SLOP, /datum/reagent/berrypoison/shroom = 4)
-	grind_results = list(/datum/reagent/berrypoison/shroom = 5)
+	list_reagents = list(/datum/reagent/berrypoison/shroom = 4)
+	grind_results = list(/datum/reagent/berrypoison/shroom = 8)
 	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/cooked/truffle
@@ -76,7 +76,7 @@
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
 	eat_effect = /datum/status_effect/buff/foodbuff
-	list_reagents = list(/datum/reagent/consumable/nutriment = FRYVEGGIE_NUTRITION+1)
+	nutrition = COOKED_VEGGIE_NUTRITION+1
 	color = "#835b4f"
 	tastes = list("delicious truffles" = 2)
 	biting = TRUE

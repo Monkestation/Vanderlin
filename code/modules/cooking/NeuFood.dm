@@ -11,7 +11,7 @@
 \---------------*/
 
 /obj/item/reagent_containers/food/snacks/foodbase // root item for uncooked food thats disgusting when raw
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = SNACK_VPOOR
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	do_random_pixel_offset = FALSE // disables the random placement on creation for this object
 

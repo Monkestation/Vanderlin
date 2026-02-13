@@ -100,7 +100,7 @@
 		ORGAN_SLOT_WINGS = /obj/item/organ/wings/flight/harpy,
 	)
 
-	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/harpy = 2,)
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/harpy = 1)
 
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,

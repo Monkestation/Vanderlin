@@ -86,8 +86,6 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define istriton(A) (is_species(A, /datum/species/triton))
 #define ishalfling(A) (is_species(A, /datum/species/halfling))
 
-
-
 #define isgoblin(A) (is_species(A, /datum/species/goblin))
 #define isorc(A) (is_species(A, /datum/species/orc))
 //more carbon mobs

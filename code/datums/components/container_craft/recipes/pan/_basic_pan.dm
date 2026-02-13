@@ -192,19 +192,19 @@
 
 /datum/container_craft/pan/frybird
 	name = "Fry Bird"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/frybird
 	cooked_smell = /datum/pollutant/food/fried_chicken
 
 /datum/container_craft/pan/strange
 	name = "Fried Strange Meat"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/strange = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/strange = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/strange
 	cooked_smell = /datum/pollutant/food/fried_meat
 
 /datum/container_craft/pan/ham
 	name = "Ham"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/fatty = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/fatty = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/ham
 	cooked_smell = /datum/pollutant/food/bacon
 

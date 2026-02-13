@@ -56,6 +56,7 @@
 #include "code\__DEFINES\configuration.dm"
 #include "code\__DEFINES\construction.dm"
 #include "code\__DEFINES\contracts.dm"
+#include "code\__DEFINES\cooking.dm"
 #include "code\__DEFINES\cooldowns.dm"
 #include "code\__DEFINES\coven.dm"
 #include "code\__DEFINES\cult.dm"
