@@ -344,7 +344,7 @@
 					user.RemoveElement(/datum/element/submerged)
 			else
 				user.RemoveElement(/datum/element/submerged)
-			user.adjust_experience(/datum/skill/misc/swimming, (user.STAINT * 0.4))
+			user.adjust_experience(/datum/skill/misc/swimming, (user.STAINT * 0.3))
 		if(water_overlay)
 			if((get_dir(src, newloc) == SOUTH))
 				water_overlay.layer = BELOW_MOB_LAYER
@@ -633,6 +633,7 @@
 				return .
 
 /turf/open/water/sewer/under
+	icon_state = MAP_SWITCH("paving", "pavinggwf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
 
@@ -759,6 +760,7 @@
 	. = ..()
 
 /turf/open/water/clean/under
+	icon_state = MAP_SWITCH("rock", "rockcwf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
 
@@ -769,6 +771,7 @@
 	cleanliness_factor = -1
 
 /turf/open/water/clean/dirt/under
+	icon_state = MAP_SWITCH("dirt", "dirtcwf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
 
@@ -851,6 +854,7 @@
 				A.ConveyorMove(dir)
 
 /turf/open/water/river/under
+	icon_state = MAP_SWITCH("rock", "rivermoveF-dir")
 	water_height = WATER_HEIGHT_FULL
 	uses_height = TRUE
 
@@ -859,6 +863,11 @@
 	icon_state = MAP_SWITCH("dirt", "rivermovealt-dir")
 	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
+
+/turf/open/water/river/dirt/under
+	icon_state = MAP_SWITCH("dirt", "rivermovealtF-dir")
+	water_height = WATER_HEIGHT_FULL
+	uses_height = TRUE
 
 /turf/open/water/river/blood
 	name = "blood"
@@ -892,6 +901,7 @@
 
 /turf/open/water/ocean/under
 	desc = "Deceptively deep, be careful not to find yourself this far out."
+	icon_state = MAP_SWITCH("gravel", "gravelswf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
 
@@ -909,6 +919,7 @@
 	fishing_datum = /datum/fish_source/ocean/deep
 
 /turf/open/water/ocean/abyss/under
+	icon_state = MAP_SWITCH("ash", "ashswf")
 	water_height = WATER_HEIGHT_FULL
 
 /datum/reagent/water/salty
