@@ -2490,7 +2490,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			to_chat(user, "[loadout.description]")
 
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
-	var/player_species = user.client.prefs.pref_species.id
+	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !(player_species in job.allowed_races)
 	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
 	if(job.required_playtime_remaining(user.client))
