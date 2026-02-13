@@ -3634,7 +3634,7 @@
 /area/indoors/cave)
 "vq" = (
 /obj/structure/table/wood/counter,
-/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
+/obj/item/reagent_containers/food/snacks/bread/raisin,
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
 "vr" = (

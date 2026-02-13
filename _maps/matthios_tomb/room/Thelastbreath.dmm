@@ -2493,7 +2493,7 @@
 /area/under/tomb/cave/lava)
 "Js" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
+/obj/item/reagent_containers/food/snacks/bread/raisin,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
 "Ju" = (

@@ -1110,7 +1110,7 @@
 "mF" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/light/fueled/oven/west,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison{
+/obj/item/reagent_containers/food/snacks/breadslice/raisin{
 	pixel_x = 6;
 	pixel_y = 1
 	},
@@ -1346,7 +1346,7 @@
 /area/outdoors/wilderness)
 "pS" = (
 /obj/structure/table/wood/plain,
-/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
+/obj/item/reagent_containers/food/snacks/bread/raisin,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/shop)
 "qa" = (
@@ -2290,11 +2290,11 @@
 "Bq" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/wood/plain,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison{
+/obj/item/reagent_containers/food/snacks/breadslice/raisin{
 	pixel_x = -5;
 	pixel_y = -5
 	},
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison{
+/obj/item/reagent_containers/food/snacks/breadslice/raisin{
 	pixel_x = 5;
 	pixel_y = 3
 	},
@@ -2634,7 +2634,7 @@
 /area/outdoors/wilderness)
 "En" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/food/snacks/biscuit_poison,
+/obj/item/reagent_containers/food/snacks/biscuit,
 /obj/item/natural/feather/infernal{
 	pixel_x = -5;
 	pixel_y = 9
@@ -3352,7 +3352,7 @@
 /area/indoors/cave)
 "My" = (
 /obj/structure/table/wood/plain,
-/obj/item/reagent_containers/food/snacks/griddlecake/berry_poison,
+/obj/item/reagent_containers/food/snacks/griddlecake/berry,
 /obj/structure/fluff/walldeco/maidendrape,
 /obj/effect/decal/carpet/kover_black{
 	dir = 8;

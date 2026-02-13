@@ -3651,7 +3651,7 @@
 /area/under/tomb/indoors/magic)
 "NQ" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
+/obj/item/reagent_containers/food/snacks/bread/raisin,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
 "NT" = (
