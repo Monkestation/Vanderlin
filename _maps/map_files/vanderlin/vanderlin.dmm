@@ -50543,7 +50543,7 @@
 	pixel_x = 4;
 	pixel_y = 6
 	},
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison{
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin{
 	pixel_x = 5;
 	pixel_y = 13
 	},

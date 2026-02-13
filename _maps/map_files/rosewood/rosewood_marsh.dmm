@@ -4356,14 +4356,14 @@
 /area/indoors/lich)
 "zs" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin,
 /turf/open/floor/tile/kitchen,
 /area/indoors/mountains)
 "zu" = (
 /obj/structure/table/wood/plain_alt,
 /obj/structure/fluff/millstone,
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin,
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
 "zv" = (

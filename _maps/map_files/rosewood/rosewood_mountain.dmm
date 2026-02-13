@@ -3105,7 +3105,7 @@
 /area/under/mountains/anvil/dungeon/lower)
 "zo" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin,
 /turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
 "zq" = (
