@@ -140,6 +140,7 @@ function HorizontalButtons(props: ButtonDisplayProps) {
         <Stack.Item grow={large_buttons ? 1 : undefined} key={index}>
           <Button
             fluid={!!large_buttons}
+            color="transparent"
             minWidth={5}
             onClick={() => act('choose', { choice: button })}
             overflowX="hidden"
@@ -181,6 +182,7 @@ function VerticalButtons(props: ButtonDisplayProps) {
           m={0}
         >
           <Button
+            color="transparent"
             fluid
             minWidth={20}
             onClick={() => act('choose', { choice: button })}
