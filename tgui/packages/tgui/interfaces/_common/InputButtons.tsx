@@ -38,7 +38,7 @@ export const InputButtons = (props: InputButtonsProps) => {
 
   const submitButton = (
     <Button
-      color="good"
+      color="transparent"
       disabled={disabled}
       fluid={!!large_buttons}
       height={!!large_buttons && 2}
@@ -56,7 +56,7 @@ export const InputButtons = (props: InputButtonsProps) => {
   );
   const cancelButton = (
     <Button
-      color="bad"
+      color="transparent"
       fluid={!!large_buttons}
       height={!!large_buttons && 2}
       onClick={on_cancel_actual}

@@ -37,6 +37,9 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
+"az" = (
+/turf/open/lava/acid,
+/area/under/cave)
 "aA" = (
 /obj/structure/fluff/signage{
 	name = "Rosewood - North West";
@@ -238,6 +241,10 @@
 /obj/effect/decal/cleanable/ash,
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
+"em" = (
+/obj/effect/spawner/traveltile_spawner/horizontal/jarosite,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "ey" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 8
@@ -399,8 +406,7 @@
 /area/outdoors/wilderness)
 "hb" = (
 /obj/structure/stairs{
-	dir = 4;
-	icon_state = "stairs"
+	dir = 4
 	},
 /turf/open/floor/snow/patchy,
 /area/outdoors/wilderness)
@@ -428,7 +434,6 @@
 "hQ" = (
 /obj/structure/fluff/statue/astrata/bling{
 	pixel_x = -17;
-	pixel_y = 0;
 	name = "Statue of NOC!?!?!?!?!?";
 	desc = "Blinged out Noc Here"
 	},
@@ -765,8 +770,7 @@
 /area/outdoors/wilderness)
 "qi" = (
 /obj/structure/stairs/stone{
-	dir = 1;
-	icon_state = "stonestairs"
+	dir = 1
 	},
 /turf/open/floor/cobble,
 /area/outdoors/wilderness)
@@ -921,8 +925,7 @@
 /area/outdoors/wilderness)
 "tO" = (
 /obj/structure/fluff/railing/wood{
-	dir = 8;
-	icon_state = "woodrailing"
+	dir = 8
 	},
 /turf/open/floor/ruinedwood,
 /area/outdoors/wilderness)
@@ -1002,13 +1005,16 @@
 "vl" = (
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
+"vt" = (
+/obj/effect/spawner/traveltile_spawner/vertical/jarosite,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "vE" = (
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/mountains)
 "vP" = (
 /obj/structure/stairs{
-	dir = 4;
-	icon_state = "stairs"
+	dir = 4
 	},
 /turf/open/floor/ruinedwood,
 /area/outdoors/wilderness)
@@ -1169,8 +1175,7 @@
 /area/outdoors/wilderness)
 "yZ" = (
 /obj/structure/stairs/stone{
-	dir = 4;
-	icon_state = "stonestairs"
+	dir = 4
 	},
 /turf/open/floor/cobble,
 /area/outdoors/wilderness)
@@ -1229,8 +1234,7 @@
 /area/indoors)
 "Ao" = (
 /obj/structure/fluff/railing/wood{
-	dir = 8;
-	icon_state = "woodrailing"
+	dir = 8
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/cold,
@@ -1465,8 +1469,7 @@
 /area/outdoors/mountains)
 "Gs" = (
 /obj/structure/stairs/stone{
-	dir = 1;
-	icon_state = "stonestairs"
+	dir = 1
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness)
@@ -1579,8 +1582,7 @@
 /area/outdoors/wilderness)
 "Ii" = (
 /obj/structure/stairs{
-	dir = 4;
-	icon_state = "stairs"
+	dir = 4
 	},
 /turf/open/floor/snow,
 /area/outdoors/wilderness)
@@ -1771,8 +1773,7 @@
 /area/outdoors/wilderness)
 "Mk" = (
 /obj/structure/stairs/stone{
-	dir = 4;
-	icon_state = "stonestairs"
+	dir = 4
 	},
 /turf/open/floor/herringbone,
 /area/indoors)
@@ -1813,8 +1814,7 @@
 	desc = "This totally isn't pink...";
 	icon_state = "manabloomtree";
 	icon = 'icons/obj/structures/manabloomtree.dmi';
-	pixel_x = -39;
-	pixel_y = 0
+	pixel_x = -39
 	},
 /turf/open/floor/snow/rough,
 /area/outdoors/wilderness)
@@ -2128,7 +2128,6 @@
 /area/outdoors/wilderness)
 "TO" = (
 /obj/item/candle/yellow/lit/infinite{
-	pixel_x = 0;
 	pixel_y = -1
 	},
 /obj/item/candle/yellow/lit/infinite{
@@ -2328,8 +2327,7 @@
 /area/outdoors/wilderness)
 "Xv" = (
 /obj/structure/fluff/railing/wood{
-	dir = 8;
-	icon_state = "woodrailing"
+	dir = 8
 	},
 /obj/item/natural/worms{
 	name = "A Fishy Worm";
@@ -2347,8 +2345,7 @@
 	desc = "This totally isn't pink...";
 	icon_state = "manabloomtree";
 	icon = 'icons/obj/structures/manabloomtree.dmi';
-	pixel_x = -39;
-	pixel_y = 0
+	pixel_x = -39
 	},
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
@@ -93191,9 +93188,9 @@ qH
 qH
 qH
 qH
-qH
-qH
-qH
+Wr
+vt
+Wr
 qH
 qH
 qH
@@ -93393,11 +93390,11 @@ qH
 qH
 qH
 qH
-qH
-qH
-qH
-qH
-qH
+Wr
+Wr
+Wr
+Wr
+bj
 qH
 qH
 qH
@@ -93594,13 +93591,13 @@ qH
 qH
 qH
 qH
-qH
-qH
-qH
-qH
-qH
-qH
-qH
+az
+Wr
+Wr
+Wr
+Wr
+bj
+bj
 qH
 qH
 cQ
@@ -93795,13 +93792,13 @@ qH
 qH
 qH
 qH
-qH
-qH
-qH
-qH
-qH
-qH
-qH
+az
+az
+az
+Wr
+Wr
+Wr
+bj
 qH
 qH
 qH
@@ -93997,10 +93994,10 @@ qH
 qH
 qH
 qH
-qH
-qH
-qH
-qH
+az
+az
+az
+az
 qH
 qH
 qH
@@ -94200,8 +94197,8 @@ qH
 qH
 qH
 qH
-qH
-qH
+az
+az
 qH
 qH
 qH
@@ -104253,7 +104250,7 @@ qH
 qH
 qH
 qH
-qH
+az
 qH
 qH
 qH
@@ -104453,10 +104450,10 @@ EE
 EE
 qH
 qH
-qH
-qH
-qH
-qH
+az
+az
+az
+az
 qH
 qH
 qH
@@ -104654,11 +104651,11 @@ EE
 EE
 EE
 EE
-qH
-qH
-qH
-qH
-qH
+Wr
+Wr
+Wr
+Wr
+Wr
 qH
 qH
 qH
@@ -104857,10 +104854,10 @@ EE
 uL
 EE
 qH
-qH
-qH
-qH
-qH
+Wr
+Wr
+Wr
+em
 qH
 qH
 qH
@@ -105059,10 +105056,10 @@ EE
 EE
 EE
 qH
-qH
-qH
-qH
-qH
+az
+az
+Wr
+Wr
 qH
 qH
 qH
@@ -105261,9 +105258,9 @@ EE
 EE
 EE
 qH
-qH
-qH
-qH
+az
+az
+az
 qH
 qH
 qH
@@ -105464,9 +105461,9 @@ EE
 qH
 qH
 qH
-qH
-qH
-qH
+az
+az
+az
 qH
 qH
 qH

@@ -440,7 +440,6 @@ SUBSYSTEM_DEF(ticker)
 			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
 				continue
 			player.create_character(destination)
-
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/collect_minds()

@@ -94,7 +94,7 @@
 	cloak = /obj/item/clothing/cloak/matron
 
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel = 1,
+		/obj/item/weapon/knife/dagger/steel/stiletto = 1,
 		/obj/item/key/matron = 1
 	)
 
