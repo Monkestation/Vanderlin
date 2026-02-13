@@ -25,8 +25,6 @@
 	. = ..()
 	create_reagents(1000)
 
-
-
 /obj/item/organ/stomach/on_life()
 	. = ..()
 
@@ -170,6 +168,26 @@
 
 /obj/item/organ/stomach/ethereal/proc/adjust_charge(amount)
 	crystal_charge = CLAMP(crystal_charge + amount, ETHEREAL_CHARGE_NONE, ETHEREAL_CHARGE_FULL)
+
+/obj/item/organ/stomach/acid_spit
+	var/datum/action/cooldown/spell/projectile/acid_splash/organ/spit
+
+/obj/item/organ/stomach/acid_spit/Destroy(force)
+	if(spit)
+		QDEL_NULL(spit)
+	return ..()
+
+/obj/item/organ/stomach/acid_spit/Insert(mob/living/carbon/M, special, drop_if_replaced)
+	. = ..()
+	if(QDELETED(spit))
+		spit = new(src)
+	spit.Grant(M)
+
+/obj/item/organ/stomach/acid_spit/Remove(mob/living/carbon/M, special, drop_if_replaced)
+	. = ..()
+	if(QDELETED(spit))
+		return
+	spit.Remove(M)
 
 /obj/item/organ/guts // relatively unimportant, just fluff :)
 	name = "guts"

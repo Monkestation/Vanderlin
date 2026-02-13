@@ -923,6 +923,15 @@
 	. = ..()
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
+/obj/item/weapon/sword/long/psydon/relic
+	name = "Rememberance"
+	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and rememberance of Psydon's sacrifice."
+
+/obj/item/weapon/sword/long/psydon/relic/Initialize(mapload)
+	. = ..()
+	//Pre-blessed, +5 force +100 Blade int, +100 int, +1 def, make it silver
+	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 1, TRUE)
+
 /obj/item/weapon/sword/long/decorated
 	name = "decorated silver longsword"
 	desc = "A finely crafted silver longsword with a decorated golden hilt."

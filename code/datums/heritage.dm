@@ -559,6 +559,7 @@
 
 	AddFamilyIcon(person)
 	LateJoinAddToUI(person)
+	LearnFamilyIdentites(person)
 
 	return new_member
 
@@ -584,6 +585,16 @@
 	to_chat(person, span_notice("You have been added to the [housename] family."))
 	InheritCurses(new_member)
 	return new_member
+
+/// Automatically learn the identity of anyone in your family.
+/datum/heritage/proc/LearnFamilyIdentites(mob/living/carbon/human/new_member)
+	for(var/datum/family_member/existing in members)
+		var/mob/living/carbon/human/family_member = existing.person
+		if(family_member == new_member)
+			continue
+		if(!new_member.mind || !family_member.mind)
+			continue
+		new_member.mind.share_identities(family_member.mind)
 
 /datum/heritage/proc/MarryMembers(datum/family_member/person1, datum/family_member/person2)
 	if(!person1 || !person2)

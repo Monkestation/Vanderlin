@@ -182,20 +182,19 @@
 	if(!ishuman(user) || !ishuman(source))
 		return
 
-	var/mob/living/carbon/human/H = source
+	var/mob/living/carbon/human/source_mob = source
 	var/mob/living/carbon/human/examiner = user
 
-	if(!examiner.mind || !H.mind)
+	if(!examiner.mind || !source_mob.mind)
 		return
 
 	// Folk heroes are recognized by others
 	if(prob(80)) // 80% chance people recognize them
-		examine_list += span_notice("You recognize [H.real_name], the folk hero!")
+		examine_list += span_notice("You recognize [source_mob.real_name], the folk hero!")
 
 		// Add them to known people if not already known
-		if(!examiner.mind.do_i_know(H.mind))
-			examiner.mind.i_know_person(H.mind)
-			H.mind.i_know_person(examiner.mind)
+		if(!examiner.mind.do_i_know(source_mob.mind))
+			examiner.mind.share_identities(source_mob.mind)
 
 /datum/quirk/boon/quick_hands
 	name = "Quick Hands"

@@ -483,15 +483,8 @@
 /atom/proc/AltClick(mob/user, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_CLICK_ALT, user, modifiers)
 
-// Use this instead of /mob/proc/AltClickOn(atom/clicked_atom) where you only want turf content listing without additional atom alt-click interaction
-/atom/proc/AltClickNoInteract(mob/user, atom/clicked_atom, list/modifiers)
-	var/turf/T = get_turf(clicked_atom)
-	if(T && user.TurfAdjacent(T))
-		user.listed_turf = T
-		user.client.statpanel = T.name
-
-/mob/proc/TurfAdjacent(turf/T)
-	return T.Adjacent(src)
+/mob/proc/TurfAdjacent(turf/tile)
+	return tile.Adjacent(src)
 
 /*
 	Control+Shift click
@@ -509,9 +502,35 @@
 	clicked_atom.AltRightClick(src, modifiers)
 
 /atom/proc/AltRightClick(mob/user, list/modifiers)
-	var/turf/T = get_turf(src)
-	if(T && (isturf(loc) || isturf(src)) && user.TurfAdjacent(T) && !HAS_TRAIT(user, TRAIT_MOVE_VENTCRAWLING))
-		user.set_listed_turf(T)
+	if(!user.can_interact_with(src))
+		return FALSE
+
+	if(HAS_TRAIT(src, TRAIT_ALT_CLICK_BLOCKER) && !isobserver(user))
+		return TRUE
+
+	var/turf/tile = get_turf(src)
+	if(isnull(tile))
+		return FALSE
+
+	if(!isturf(loc) && !isturf(src))
+		return FALSE
+
+	if(!user.TurfAdjacent(tile))
+		return FALSE
+
+	var/datum/lootpanel/panel = user.client?.loot_panel
+	if(isnull(panel))
+		return FALSE
+
+	/// No loot panel if it's on our person
+	if(isobj(src) && iscarbon(user))
+		var/mob/living/carbon/carbon_user = user
+		if(src in carbon_user.get_all_gear())
+			to_chat(carbon_user, span_warning("You can't search for this item, it's already in your inventory! Take it off first."))
+			return
+
+	panel.open(tile)
+	return TRUE
 
 /mob/proc/CtrlRightClickOn(atom/clicked_atom, list/modifiers)
 	pointed(clicked_atom)
