@@ -6,3 +6,7 @@
 /obj/item/reagent_containers/food/snacks/bread/raisin/poison : /obj/item/reagent_containers/food/snacks/bread/raisin{@OLD}
 /obj/item/reagent_containers/food/snacks/biscuit_poison : /obj/item/reagent_containers/food/snacks/biscuit{@OLD}
 /obj/item/reagent_containers/food/snacks/griddlecake/berry_poison : /obj/item/reagent_containers/food/snacks/griddlecake/berry{@OLD}
+/obj/item/reagent_containers/food/snacks/raisins/poison : /obj/item/reagent_containers/food/snacks/raisins{@OLD}
+/obj/item/reagent_containers/food/snacks/cheesecake_poison_slice : /obj/item/reagent_containers/food/snacks/cheesecake_slice{@OLD}
+/obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked : /obj/item/reagent_containers/food/snacks/cheesecake_cooked{@OLD}
+/obj/item/reagent_containers/food/snacks/chescake_poison_ready : /obj/item/reagent_containers/food/snacks/chescake_ready{@OLD}

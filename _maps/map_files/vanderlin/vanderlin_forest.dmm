@@ -2394,7 +2394,7 @@
 /area/indoors/dungeon)
 "Ct" = (
 /obj/structure/table/wood/plain,
-/obj/item/reagent_containers/food/snacks/cheesecake_poison_slice,
+/obj/item/reagent_containers/food/snacks/cheesecake_slice,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)

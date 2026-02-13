@@ -680,6 +680,11 @@
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + RAISIN_NUTRITION + CHEESE_NUTRITION
 
+/obj/item/reagent_containers/food/snacks/chescake_ready/Initialize(mapload)
+	if(mapload & prob(25))
+		list_reagents |= list(/datum/reagent/berrypoison = 5)
+	. = ..()
+
 /obj/item/reagent_containers/food/snacks/cheesecake_cooked
 	name = "cheesecake"
 	desc = "Humenity's favored creation."
@@ -697,6 +702,11 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
 
+/obj/item/reagent_containers/food/snacks/cheesecake_cooked/Initialize(mapload)
+	if(mapload & prob(25))
+		list_reagents |= list(/datum/reagent/berrypoison = 5)
+	. = ..()
+
 /obj/item/reagent_containers/food/snacks/cheesecake_slice
 	name = "cheesecake slice"
 	icon_state = "cheesecake_slice"
@@ -712,6 +722,11 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
+
+/obj/item/reagent_containers/food/snacks/cheesecake_slice/Initialize(mapload)
+	if(mapload & prob(25))
+		list_reagents |= list(/datum/reagent/berrypoison = 5)
+	. = ..()
 
 /*	.................   STRAWBERRY CAKE   ................... */
 

@@ -14394,10 +14394,10 @@
 "nnd" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/obj/item/reagent_containers/food/snacks/raisins/poison,
-/obj/item/reagent_containers/food/snacks/raisins/poison,
-/obj/item/reagent_containers/food/snacks/raisins/poison,
-/obj/item/reagent_containers/food/snacks/raisins/poison,
+/obj/item/reagent_containers/food/snacks/raisins,
+/obj/item/reagent_containers/food/snacks/raisins,
+/obj/item/reagent_containers/food/snacks/raisins,
+/obj/item/reagent_containers/food/snacks/raisins,
 /turf/open/floor/ruinedwood,
 /area/under/town/basement)
 "nnz" = (
