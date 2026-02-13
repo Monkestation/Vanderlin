@@ -671,7 +671,7 @@
 	icon_state = "cheese_slice"
 	bitesize = 1
 	dropshrink = 0.8
-	list_reagents = CHEESE_NUTRITION
+	nutrition =  = CHEESE_NUTRITION
 	foodtype = DAIRY
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("cheese" = 1)
@@ -724,7 +724,6 @@
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
 	tastes = list("unflavored gelatine" = 1)
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	w_class = WEIGHT_CLASS_NORMAL

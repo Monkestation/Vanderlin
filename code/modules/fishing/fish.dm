@@ -1331,8 +1331,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	desc = "Plundered Grenzelhoftian chocolate drizzled over fish, this abomination is a delicacy to dark elves. In this case the eyeless cave fish has been substituted for a carp."
 	icon_state = "chocolatecarp"
 	bitesize = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
 	tastes = list("a horrible clash of salty fish and sweet chocolate" = 1)
 	faretype = FARE_IMPOVERISHED
 	rotprocess = null
+	nutrition = CHOCCY_NUTRITION + RAWMEAT_NUTRITION*COOK_MOD
 	eat_effect = /datum/status_effect/buff/foodbuff
