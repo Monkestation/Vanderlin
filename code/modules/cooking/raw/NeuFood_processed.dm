@@ -671,7 +671,7 @@
 	icon_state = "cheese_slice"
 	bitesize = 1
 	dropshrink = 0.8
-	nutrition =  = CHEESE_NUTRITION
+	nutrition = CHEESE_NUTRITION
 	foodtype = DAIRY
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("cheese" = 1)

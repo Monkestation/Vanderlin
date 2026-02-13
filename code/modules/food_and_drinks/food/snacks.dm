@@ -238,14 +238,9 @@ All foods are distributed among various categories. Use common sense.
 			burn()
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
-	if(!LAZYLEN(tastes))
-		return ..()
-	if(list_reagents)
-		for(var/rid in list_reagents)
-			var/amount = list_reagents[rid]
-			reagents.add_reagent(rid, amount)
 	if(nutrition)
 		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? tastes : null)
+	..()
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)
 	if(!eater)
