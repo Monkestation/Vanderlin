@@ -10,3 +10,6 @@
 /obj/item/reagent_containers/food/snacks/cheesecake_poison_slice : /obj/item/reagent_containers/food/snacks/cheesecake_slice{@OLD}
 /obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked : /obj/item/reagent_containers/food/snacks/cheesecake_cooked{@OLD}
 /obj/item/reagent_containers/food/snacks/chescake_poison_ready : /obj/item/reagent_containers/food/snacks/chescake_ready{@OLD}
+/obj/item/reagent_containers/food/snacks/pie/cooked/poison : /obj/item/reagent_containers/food/snacks/pie/cooked/berry{@OLD}
+/obj/item/reagent_containers/food/snacks/pie/cooked/poison/good : /obj/item/reagent_containers/food/snacks/pie/cooked/berry/good{@OLD}
+/obj/item/reagent_containers/food/snacks/pieslice/good/poison : /obj/item/reagent_containers/food/snacks/pieslice/good/berry{@OLD}
