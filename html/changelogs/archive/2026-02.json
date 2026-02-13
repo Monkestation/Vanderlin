@@ -283,5 +283,47 @@
                 "rscadd": "Round end timer to stat panel."
             }
         ]
+    },
+    "2026-02-12": {
+        "realforest2001": [
+            {
+                "bugfix": "Fixes missing time references on the statpanel."
+            },
+            {
+                "admin": "Moved Manage Paintings to GameMaster tab."
+            },
+            {
+                "bugfix": "Fixed a missing reference in returning to lobby."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "rscadd": "The Packmule quirk, costs 8 points and lets you start with a Backpack."
+            },
+            {
+                "rscadd": "The Ugly quirk, costs nothing and makes you ugly."
+            },
+            {
+                "rscdel": "The Night Vision quirk, as it did nothing due to how the lighting system works."
+            }
+        ],
+        "TerraGS": [
+            {
+                "qol": "Using a wood or copper hammer on an artificer table won't generate sparks."
+            }
+        ],
+        "Teoti4001": [
+            {
+                "rscadd": "Polymorph attunement can be suplimented with Chaos essence in the essence gauntlet"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Language menu TGUI"
+            },
+            {
+                "rscadd": "Added culture customisation, seperated it from skin colours where applicable."
+            }
+        ]
     }
 }

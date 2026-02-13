@@ -1,0 +1,1 @@
+{"author":"snowyseshi","delete-after":true,"changes":[{"image":"added astratan cross and golden astratan cross"},{"code_imp":"moved psycross and astratan cross to structure.dm and make them use crafting instead of carpentry"}]}

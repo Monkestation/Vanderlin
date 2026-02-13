@@ -1101,6 +1101,19 @@
 	break_sound = null
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 
+/obj/structure/fluff/psycross/astrata
+	name = "astratan cross"
+	icon_state = "astratancross"
+	desc = "A towering monument to Astrata. Those who stand beneath it feel the warmth of her light."
+	break_sound = null
+	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
+
+/obj/structure/fluff/psycross/astrata/gold
+	name = "astratan cross"
+	icon_state = "astratancross_g"
+	break_sound = null
+	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
+
 /obj/structure/fluff/psycross/zizocross
 	name = "inverted cross"
 	desc = "An unholy symbol. Blasphemy for most, reverence for few."
