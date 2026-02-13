@@ -1,7 +1,7 @@
 /obj/item/reagent_containers/food/snacks/meat/human : /obj/item/reagent_containers/food/snacks/meat/steak/human
 /obj/item/reagent_containers/food/snacks/toxicshrooms : /obj/item/reagent_containers/food/snacks/truffles/toxic
 /obj/item/reagent_containers/food/snacks/organ : /obj/item/reagent_containers/food/snacks/meat/organ
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison : /obj/item/reagent_containers/food/snacks/breadslice
+/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison : /obj/item/reagent_containers/food/snacks/breadslice/raisin
 /obj/item/reagent_containers/food/snacks/bread/raisin/poison : /obj/item/reagent_containers/food/snacks/bread/raisin
 /obj/item/reagent_containers/food/snacks/biscuit_poison : /obj/item/reagent_containers/food/snacks/biscuit
 /obj/item/reagent_containers/food/snacks/griddlecake/berry_poison : /obj/item/reagent_containers/food/snacks/griddlecake/berry
