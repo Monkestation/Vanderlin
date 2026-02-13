@@ -82,7 +82,7 @@
 	name = "Nutriment"
 	description = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	reagent_state = SOLID
-	nutriment_factor = 30 //EVERY 1 NUTRIMENT RESTORES 30 NUTRITION
+	nutriment_factor = 35 //EVERY 1 NUTRIMENT RESTORES 35 NUTRITION
 	color = "#664330" // rgb: 102, 67, 48
 
 	var/brute_heal = 0
