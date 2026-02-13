@@ -325,5 +325,73 @@
                 "rscadd": "Added culture customisation, seperated it from skin colours where applicable."
             }
         ]
+    },
+    "2026-02-13": {
+        "realforest2001": [
+            {
+                "rscadd": "Added the ability to make people your acquaintance, adding them to your list of known people."
+            },
+            {
+                "rscadd": "You now automatically know people who are in your family."
+            },
+            {
+                "code_imp": "Cleaned up the who-knows-who code."
+            },
+            {
+                "rscadd": "Middle click on the health heart is now used when next to someone to share identities. Right click is still used to check who you know."
+            },
+            {
+                "rscadd": "Added the Stiletto dagger."
+            },
+            {
+                "rscadd": "Added the decorated dagger to Monarch."
+            }
+        ],
+        "Cheffie, Absolucy, jlsnow301, Bisar, MTandi": [
+            {
+                "rscadd": "Added a loot window for alt-clicking tiles."
+            },
+            {
+                "rscdel": "Removed the item browser from the stat panel."
+            }
+        ],
+        "Wrench-1": [
+            {
+                "rscadd": "Remembrance, a Psydonian Longsword Relic for Ordinator and Inspector"
+            },
+            {
+                "rscdel": "Removed the Forgotten Blade from being able to be selected by Ordinator and Inspector"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "image": "added astratan cross and golden astratan cross"
+            },
+            {
+                "code_imp": "moved psycross and astratan cross to structure.dm and make them use crafting instead of carpentry"
+            }
+        ],
+        "Casperclone1": [
+            {
+                "bugfix": "Fixed Kobold not having a accent"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed tgui-byond passthrough"
+            },
+            {
+                "rscadd": "Seasonal triumph buys, which last for exactly how long a season lasts, they will stay on your account until the time you bought it + the wipe time. I.e. 3 months exactly if a season was 3 months."
+            },
+            {
+                "rscadd": "Added subterran dwarf triumph buy."
+            },
+            {
+                "rscadd": "Added formikrag kobold triumph buy."
+            },
+            {
+                "rscadd": "These Triumph buys will be disabled until the next season."
+            }
+        ]
     }
 }

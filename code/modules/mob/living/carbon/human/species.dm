@@ -537,104 +537,87 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/proc/qualifies_for_rank(rank, list/features)
 	return 1
 
-/**
- * Corrects organs in a carbon, removing ones it doesn't need and adding ones it does.
- *
- * Takes all organ slots, removes organs a species should not have, adds organs a species should have.
- * can use replace_current to refresh all organs, creating an entirely new set.
- *
- * Arguments:
- * * organ_holder - carbon, the owner of the species datum AKA whoever we're regenerating organs in
- * * old_species - datum, used when regenerate organs is called in a switching species to remove old mutant organs.
- * * replace_current - boolean, forces all old organs to get deleted whether or not they pass the species' ability to keep that organ
- * * excluded_zones - list, add zone defines to block organs inside of the zones from getting handled. see headless mutation for an example
- * * visual_only - boolean, only load organs that change how the species looks. Do not use for normal gameplay stuff
- * * replace_missing - Whether or not to replace missing organs
- * * pref_lod - pref organ dna (why the fuck do we need this)
- */
-/datum/species/proc/regenerate_organs(
-	mob/living/carbon/organ_holder,
-	datum/species/old_species,
-	replace_current = TRUE,
-	list/excluded_zones,
-	visual_only = FALSE,
-	replace_missing = TRUE,
-	datum/preferences/pref_load
-)
+//Will regenerate missing organs
+/datum/species/proc/regenerate_organs(mob/living/carbon/C, datum/species/old_species, replace_current=TRUE, list/excluded_zones, datum/preferences/pref_load)
 	/// Add DNA and create organs from prefs
 	if(pref_load)
 		/// Clear the dna
-		organ_holder.dna.organ_dna = list()
+		C.dna.organ_dna = list()
 		var/list/organ_dna_list = pref_load.get_organ_dna_list()
 		for(var/organ_slot in organ_dna_list)
-			organ_holder.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
 
-	for(var/slot in GLOB.all_organ_slots)
-		var/obj/item/organ/existing_organ = organ_holder.getorganslot(slot)
-		var/obj/item/organ/new_organ = organs[slot]
-		var/old_organ_type = old_species?.organs[slot]
+	//what should be put in if there is no mutantorgan (brains handled seperately)
+	var/list/slot_mutantorgans = organs
 
-		// if we have an extra organ that before changing that the species didnt have, remove it
-		if(!new_organ)
-			if(existing_organ && (old_organ_type == existing_organ.type || replace_current))
-				existing_organ.Remove(organ_holder)
-				qdel(existing_organ)
+	var/list/slots_to_iterate = list()
+	for(var/slot in C.dna.organ_dna)
+		slots_to_iterate |= slot
+	for(var/slot in slot_mutantorgans)
+		if(!is_organ_slot_allowed(C, slot))
 			continue
+		slots_to_iterate |= slot
 
-		if(existing_organ)
-			// we dont want to remove organs that were not from the old species (such as from freak surgery or prosthetics)
-			if(existing_organ.type != old_organ_type && !replace_current)
-				continue
-
-			if(existing_organ.type == new_organ)
-				var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
-				organ_dna?.imprint_organ(existing_organ)
-				pref_load?.customize_organ(existing_organ)
-				continue // we don't want to remove organs that are the same as the new one
-
-		if(visual_only && (!initial(new_organ.accessory_type) && !initial(new_organ.visible_organ)))
+	// Remove the organs from the slots they should have nothing in
+	for(var/obj/item/organ/organ in C.internal_organs)
+		if(organ.slot in slots_to_iterate)
 			continue
+		organ.Remove(C, TRUE)
+		QDEL_NULL(organ)
+	var/list/source_key_list = color_key_source_list_from_carbon(C)
+	for(var/slot in slots_to_iterate)
+		var/obj/item/organ/oldorgan = C.getorganslot(slot) //used in removing
+		var/obj/item/organ/neworgan
+
+		if(C.dna.organ_dna[slot])
+			var/datum/organ_dna/organ_dna = C.dna.organ_dna[slot]
+			if(organ_dna.can_create_organ())
+				neworgan = organ_dna.create_organ(species = src)
+				if(slot_mutantorgans[slot])
+					if(!istype(neworgan, slot_mutantorgans[slot]))
+						var/new_type = slot_mutantorgans[slot]
+						neworgan = new new_type()
+						organ_dna.imprint_organ(neworgan)
+				if(pref_load)
+					pref_load.customize_organ(neworgan)
+		else
+			var/new_type = slot_mutantorgans[slot]
+			if(new_type)
+				neworgan = new new_type()
+				neworgan.build_colors_for_accessory(source_key_list)
 
 		var/used_neworgan = FALSE
+		var/should_have
+		if(neworgan)
+			should_have = neworgan.get_availability(src)
+		else
+			should_have = TRUE
 
-		var/used_dna = FALSE
-		var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
-		if(organ_dna?.can_create_organ())
-			new_organ = organ_dna.create_organ(species = src)
-			pref_load?.customize_organ(new_organ)
-			used_dna = TRUE
-
-		if(!used_dna)
-			new_organ = new new_organ()
-			new_organ.build_colors_for_accessory(color_key_source_list_from_carbon(organ_holder))
-
-		var/should_have = new_organ.get_availability(src, organ_holder)
-
-		// Check for an existing organ, and if there is one check to see if we should remove it
-		var/health_pct = 1
-		var/remove_existing = !isnull(existing_organ) && !(existing_organ.zone in excluded_zones)
-		if(remove_existing)
-			health_pct = (existing_organ.maxHealth - existing_organ.damage) / existing_organ.maxHealth
+		if(oldorgan && (!should_have || replace_current) && !(oldorgan.zone in excluded_zones))
 			if(slot == ORGAN_SLOT_BRAIN)
-				var/obj/item/organ/brain/existing_brain = existing_organ
-				existing_brain.before_organ_replacement(new_organ)
-				existing_brain.Remove(organ_holder, special = TRUE, no_id_transfer = TRUE)
+				var/obj/item/organ/brain/brain = oldorgan
+				if(!brain.decoy_override)//"Just keep it if it's fake" - confucius, probably
+					brain.Remove(C,TRUE, TRUE) //brain argument used so it doesn't cause any... sudden death.
+					QDEL_NULL(brain)
+					oldorgan = null //now deleted
 			else
-				existing_organ.before_organ_replacement(new_organ)
-				existing_organ.Remove(organ_holder, special = TRUE)
+				oldorgan.Remove(C,TRUE)
+				QDEL_NULL(oldorgan) //we cannot just tab this out because we need to skip the deleting if it is a decoy brain.
 
-			QDEL_NULL(existing_organ)
 
-		if(isnull(existing_organ) && should_have && !(new_organ.zone in excluded_zones) && organ_holder.get_bodypart(deprecise_zone(new_organ.zone)) && (replace_missing || remove_existing))
+		if(oldorgan)
+			oldorgan.setOrganDamage(0)
+		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
 			used_neworgan = TRUE
-			new_organ.setOrganDamage(new_organ.maxHealth * (1 - health_pct))
-			new_organ.Insert(organ_holder, special = TRUE)
+			if(neworgan)
+				neworgan.Insert(C, TRUE, FALSE)
 
 		if(!used_neworgan)
-			QDEL_NULL(new_organ)
-		else if(!organ_holder.dna.organ_dna[slot])
-			var/datum/organ_dna/new_dna = new_organ.create_organ_dna()
-			organ_holder.dna.organ_dna[slot] = new_dna
+			if(neworgan)
+				qdel(neworgan)
+		else if (!C.dna.organ_dna[slot] && neworgan)
+			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
+			C.dna.organ_dna[slot] = new_dna
 
 /datum/species/proc/is_organ_slot_allowed(mob/living/carbon/human/human, organ_slot)
 	return TRUE

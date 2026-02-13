@@ -74,3 +74,4 @@
 	default_choice = /datum/customizer_choice/organ/eyes/humanoid
 
 /datum/customizer_choice/organ/eyes/humanoid
+	organ_type = /obj/item/organ/eyes
