@@ -725,7 +725,7 @@
 
 /obj/item/reagent_containers/food/snacks/cheesecake_slice/Initialize(mapload)
 	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
+		list_reagents |= list(/datum/reagent/berrypoison = 1)
 	. = ..()
 
 /*	.................   STRAWBERRY CAKE   ................... */
