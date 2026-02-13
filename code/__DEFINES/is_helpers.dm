@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
 
-#define istransparentturf(A) (HAS_TRAIT(A, TURF_Z_TRANSPARENT_TRAIT))
+#define istransparentturf(A) (HAS_TRAIT(A, TRAIT_Z_TRANSPARENT))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
@@ -70,6 +70,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 //RT species
 #define ishumannorthern(A) (is_species(A, /datum/species/human/northern))
 #define isdwarfmountain(A) (is_species(A, /datum/species/dwarf/mountain))
+#define isdwarfjarosite(A) (is_species(A, /datum/species/dwarf/jarosite))
 #define isdarkelf(A) (is_species(A, /datum/species/elf/dark))
 #define issnowelf(A) (is_species(A, /datum/species/elf/snow))
 #define ishalfelf(A) (is_species(A, /datum/species/human/halfelf))
@@ -84,6 +85,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ismedicator(A) (is_species(A, /datum/species/medicator))
 #define istriton(A) (is_species(A, /datum/species/triton))
 #define ishalfling(A) (is_species(A, /datum/species/halfling))
+
 
 //more carbon mobs
 #define ismonkey(A) (istype(A, /mob/living/carbon/monkey))

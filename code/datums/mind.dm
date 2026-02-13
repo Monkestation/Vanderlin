@@ -158,47 +158,55 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		if(is_role)
 			. += M
 
-/// proc that adds us to their lists, and they are added to ours
-/datum/mind/proc/i_know_person(person)
-	if(!person)
+/// Gives our identity to a target mind, and gives theirs to us.
+/datum/mind/proc/share_identities(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
 		return
-	if(person == src)
+	if(target_mind == src)
 		return
-	var/datum/mind/M = person
-	if(ishuman(M.current))
-		var/mob/living/carbon/human/H = M.current
-		if(!known_people[H.real_name])
-			known_people[H.real_name] = list()
-		known_people[H.real_name]["VCOLOR"] = H.voice_color
-		var/used_title = H.get_role_title()
+
+	learn_target_identity(target_mind)
+	give_source_identity(target_mind)
+
+/// Learn the identity of a target mind (and their mob).
+/datum/mind/proc/learn_target_identity(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
+		return
+	if(target_mind == src)
+		return
+	if(ishuman(target_mind.current))
+		var/mob/living/carbon/human/target_mob = target_mind.current
+		if(!known_people[target_mob.real_name])
+			known_people[target_mob.real_name] = list()
+		known_people[target_mob.real_name]["VCOLOR"] = target_mob.voice_color
+		var/used_title = target_mob.get_role_title()
 		if(!used_title)
 			used_title = "Unknown"
-		known_people[H.real_name]["FJOB"] = used_title
-		known_people[H.real_name]["FGENDER"] = H.gender
-		known_people[H.real_name]["FAGE"] = H.age
+		known_people[target_mob.real_name]["FJOB"] = used_title
+		known_people[target_mob.real_name]["FGENDER"] = target_mob.gender
+		known_people[target_mob.real_name]["FAGE"] = target_mob.age
 
-/// we are added to their lists, they are added to ours
-/datum/mind/proc/person_knows_me(person)
-	if(!person)
+/// Give the identity of source mind (and mob) to target mind.
+/datum/mind/proc/give_source_identity(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
 		return
-	if(person == src)
+	if(target_mind == src)
 		return
-	var/datum/mind/M = person
-	if(M.known_people)
+	if(target_mind.known_people)
 		if(ishuman(current))
-			var/mob/living/carbon/human/H = current
-			if(!M.known_people[H.real_name])
-				M.known_people[H.real_name] = list()
-			M.known_people[H.real_name]["VCOLOR"] = H.voice_color
+			var/mob/living/carbon/human/source_mob = current
+			if(!target_mind.known_people[source_mob.real_name])
+				target_mind.known_people[source_mob.real_name] = list()
+			target_mind.known_people[source_mob.real_name]["VCOLOR"] = source_mob.voice_color
 			var/used_title
-			if(H.job)
-				var/datum/job/job = SSjob.GetJob(H.job)
-				used_title = job.get_informed_title(H)
+			if(source_mob.job)
+				var/datum/job/job = SSjob.GetJob(source_mob.job)
+				used_title = job.get_informed_title(source_mob)
 			if(!used_title)
 				used_title = "Unknown"
-			M.known_people[H.real_name]["FJOB"] = used_title
-			M.known_people[H.real_name]["FGENDER"] = H.gender
-			M.known_people[H.real_name]["FAGE"] = H.age
+			target_mind.known_people[source_mob.real_name]["FJOB"] = used_title
+			target_mind.known_people[source_mob.real_name]["FGENDER"] = source_mob.gender
+			target_mind.known_people[source_mob.real_name]["FAGE"] = source_mob.age
 
 /// check if this mind knows X
 /datum/mind/proc/do_i_know(datum/mind/person, name)
@@ -218,7 +226,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	return FALSE
 
 /// we are removed from X's known people
-/datum/mind/proc/become_unknown_to(person)
+/datum/mind/proc/forget_source_identity(person)
 	if(!person)
 		return
 	if(person == src)
@@ -229,8 +237,10 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		if(M.known_people[H.real_name])
 			M.known_people[H.real_name] = null
 
-/// removes all known people from your known_people list
-/datum/mind/proc/unknow_all_people()
+/// Removes everyone from known list, and clears you from theirs.
+/datum/mind/proc/forget_and_be_forgotten()
+	for(var/datum/mind/found_mind in get_minds())
+		forget_source_identity(found_mind)
 	known_people = list()
 
 /// show known people to the player

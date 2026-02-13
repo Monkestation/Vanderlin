@@ -19,8 +19,8 @@
 @include meta.load-css('./interfaces/AlertModal.scss');
 @include meta.load-css('./interfaces/Changelog.scss');
 @include meta.load-css('./interfaces/ColorPicker.scss');
-@include meta.load-css('./interfaces/ListInput.scss');
 @include meta.load-css('./interfaces/HotKeysHelp.scss');
+@include meta.load-css('./interfaces/ListInput.scss');
 @include meta.load-css('./interfaces/Orbit.scss');
 
 // Layouts
@@ -30,11 +30,12 @@
 @include meta.load-css('./layouts/TitleBar.scss');
 @include meta.load-css('./layouts/Window.scss');
 
+// Themes
+@include meta.load-css('./themes/grim.scss');
+
 @include meta.load-css('~highlight.js/scss/a11y-dark.scss');
 
-// NT Theme
 .Layout__content {
-  background-image: url('tgui-core/assets/bg-neutral.svg');
   background-size: 70% 70%;
   background-position: center;
   background-repeat: no-repeat;

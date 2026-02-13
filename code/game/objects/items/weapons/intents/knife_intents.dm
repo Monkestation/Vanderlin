@@ -16,6 +16,9 @@
 	item_damage_type = "slash"
 	acc_bonus = 12
 
+/datum/intent/dagger/cut/stiletto
+	penfactor = 5
+
 /datum/intent/dagger/thrust
 	name = "stab"
 	icon_state = "instab"
@@ -27,6 +30,9 @@
 	clickcd = CLICK_CD_FAST
 	swingdelay = 1
 	item_damage_type = "stab"
+
+/datum/intent/dagger/thrust/stiletto
+	penfactor = 35
 
 /datum/intent/peculate
 	name = "peculate"

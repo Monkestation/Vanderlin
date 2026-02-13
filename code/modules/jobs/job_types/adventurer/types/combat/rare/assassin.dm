@@ -88,7 +88,7 @@
 		/obj/item/clothing/armor/leather/vest = ITEM_SLOT_ARMOR,
 		/obj/item/clothing/cloak/raincloak/colored/red = ITEM_SLOT_CLOAK,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
-		/obj/item/weapon/knife/dagger/steel/special = ITEM_SLOT_BELT_R,
+		/obj/item/weapon/knife/dagger/steel/stiletto = ITEM_SLOT_BELT_R,
 		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_BELT_L,
 	)
 
@@ -296,7 +296,7 @@
 		picker.equip_to_slot_or_del(cloak, ITEM_SLOT_CLOAK, TRUE)
 		var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/backr = new()
 		picker.equip_to_slot_or_del(backr, ITEM_SLOT_BACK_R, TRUE)
-		var/obj/item/weapon/knife/dagger/steel/special/beltr = new()
+		var/obj/item/weapon/knife/dagger/steel/stiletto/beltr = new()
 		picker.equip_to_slot_or_del(beltr, ITEM_SLOT_BELT_R, TRUE)
 		var/obj/item/ammo_holder/quiver/arrows/beltl = new()
 		picker.equip_to_slot_or_del(beltl, ITEM_SLOT_BELT_L, TRUE)
@@ -518,7 +518,7 @@
 		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_BELT_L,
-		/obj/item/weapon/knife/dagger/steel = ITEM_SLOT_BELT_R,
+		/obj/item/weapon/knife/dagger/steel/stiletto = ITEM_SLOT_BELT_R,
 		/obj/item/clothing/cloak/faceless = ITEM_SLOT_CLOAK,
 		/obj/item/clothing/shirt/undershirt/colored/black = ITEM_SLOT_SHIRT,
 		/obj/item/clothing/face/lordmask/faceless = ITEM_SLOT_MASK,

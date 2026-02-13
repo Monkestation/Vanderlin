@@ -250,7 +250,8 @@
 
 	var/mobid = 0 //incremented on spawn
 
-	var/cmode = 0
+	/// Combat Mode
+	var/cmode = FALSE
 	var/d_intent = INTENT_DODGE
 	var/islatejoin = FALSE
 
@@ -283,4 +284,3 @@
 
 	/// new title given by an admin.
 	var/admin_title = null
-
