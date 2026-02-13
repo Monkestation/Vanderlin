@@ -1,0 +1,69 @@
+@font-face {
+  font-family: 'Pterra';
+  src: url('~fonts/pterra.ttf');
+}
+
+@font-face {
+  font-family: 'Blackmoor LET';
+  src: url('~fonts/blackmoor.ttf');
+}
+
+// Based on the generic browser UI, red and black mostly
+
+.theme-grim:root{
+  // Base
+  --color-base: #060606;
+  --color-primary: #ae3636;
+  --color-text: #9c807d;
+
+  --titlebar-text: #cbbab8;
+
+  --font-size: 14px;
+  --font-family: 'Pterra';
+  --line-height: 170%;
+
+  --color-good: hsl(94, 60%, 21%);
+  --color-average: hsl(32, 65%, 35%);
+  --color-bad: hsl(0, 52%, 26%);
+
+  --color-border-primary: var(--color-primary);
+
+  // Title
+  .TitleBar {
+    &__title {
+      font-size: 1.4em;
+      font-weight: bold;
+      font-family: 'Blackmoor LET';
+    }
+    &__KitchenSink {
+      background-color: hsl(
+        from var(--color-primary) h s calc(l - var(--adjust-hover))
+      );
+      &:hover {
+        background-color: var(--color-primary) !important;
+      }
+    }
+  }
+
+  // Components
+  --section-separator-color: #9c807d;
+
+  --button-color-transparent: hsl(from var(--color-text) h s l / 0.8);
+  --button-background-default: #791717;
+  --button-background-selected: var(--color-primary);
+
+  .Button {
+    transition: all 0.3s;
+    --color-text: var(--color-primary);
+  }
+
+  .Button--color--transparent {
+    --button-background-hover: #7b5353;
+    --button-background-active: #7b5353;
+    --button-background-disabled: transparent;
+  }
+
+  .Button--color--transparent.Button--disabled {
+    --button-color: #5e5959;
+  }
+}

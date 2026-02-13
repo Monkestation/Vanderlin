@@ -129,30 +129,29 @@
 
 /datum/species/dwarf/mountain/get_hairc_list()
 	return sortList(list(
-	"black - oil" = "181a1d",
-	"black - cave" = "201616",
-	"black - rogue" = "2b201b",
-	"black - midnight" = "1d1b2b",
+		"black - oil" = "181a1d",
+		"black - cave" = "201616",
+		"black - rogue" = "2b201b",
+		"black - midnight" = "1d1b2b",
 
-	"blond - pale" = "9d8d6e",
-	"blond - dirty" = "88754f",
-	"blond - drywheat" = "d5ba7b",
-	"blond - strawberry" = "c69b71",
+		"blond - pale" = "9d8d6e",
+		"blond - dirty" = "88754f",
+		"blond - drywheat" = "d5ba7b",
+		"blond - strawberry" = "c69b71",
 
-	"brown - mud" = "362e25",
-	"brown - oats" = "7a4e1e",
-	"brown - grain" = "58433b",
-	"brown - soil" = "48322a",
-	"brown - bark" = "2d1300",
+		"brown - mud" = "362e25",
+		"brown - oats" = "7a4e1e",
+		"brown - grain" = "58433b",
+		"brown - soil" = "48322a",
+		"brown - bark" = "2d1300",
 
-	"red - berry" = "b23434",
-	"red - wine" = "b87f77",
-	"red - sunset" = "bf6821",
-	"red - blood" = "822b2b",
-	"red - maroon" = "612929",
+		"red - berry" = "b23434",
+		"red - wine" = "b87f77",
+		"red - sunset" = "bf6821",
+		"red - blood" = "822b2b",
+		"red - maroon" = "612929",
 
-	"white - withered" = "#7c828a"
-
+		"white - withered" = "7c828a"
 	))
 
 /datum/species/dwarf/mountain/get_possible_names(gender = MALE)

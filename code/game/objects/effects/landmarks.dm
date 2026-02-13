@@ -461,6 +461,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	. = ..()
 	GLOB.delf_starts += loc
 
+/obj/effect/landmark/start/jarosite
+	name = "jarosite"
+	icon = 'icons/mob/landmarks.dmi'
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/jarosite/Initialize()
+	. = ..()
+	GLOB.jarosite_starts += loc
+
 // Must be immediate because players will
 // join before SSatom initializes everything.
 INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
@@ -509,7 +518,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	..()
 	GLOB.emergencyresponseteamspawn += loc
 	return INITIALIZE_HINT_QDEL
-
 
 //generic event spawns
 /obj/effect/landmark/event_spawn

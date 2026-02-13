@@ -311,6 +311,13 @@
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/decap
 
+/area/under/cavelava/acid
+	name = "cavelava"
+	icon_state = "cavelava"
+	first_time_text = null
+	ambush_types = null
+	converted_type = null
+
 /area/outdoors/exposed/decap
 	icon_state = "decap"
 	background_track = 'sound/music/area/decap.ogg'

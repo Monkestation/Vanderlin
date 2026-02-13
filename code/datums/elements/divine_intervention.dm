@@ -10,7 +10,7 @@
 	. = ..()
 	if(!istype(target))
 		return ELEMENT_INCOMPATIBLE
-	src.patron = GLOB.patronlist[patron]
+	src.patron = GLOB.patron_list[patron]
 	src.allows_pantheon = allows_pantheon
 	src.stress_event = stress_event
 	src.sets_alight = sets_alight

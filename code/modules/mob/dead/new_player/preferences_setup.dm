@@ -2,7 +2,17 @@
 // Reflect changes in [mob/living/carbon/human/proc/randomize_human_appearance]
 /datum/preferences/proc/randomise_appearance_prefs(randomise_flags = ALL, include_donator = FALSE)
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_donator))]
+		var/list/species_list = list()
+		for(var/species_id in GLOB.roundstart_species)
+			var/species_type = GLOB.species_list[species_id]
+
+			var/datum/species/species = new species_type()
+			if(!species.preference_accessible(src))
+				continue
+
+			species_list += species.type
+
+		var/rando_race = pick(species_list)
 		pref_species = new rando_race()
 
 	if(NOEYESPRITES in pref_species.species_traits)
@@ -121,8 +131,8 @@
 	accessory = "Nothing"
 
 /datum/preferences/proc/random_species()
-	var/random_species_type = GLOB.species_list[pick(get_selectable_species(donator))]
-	pref_species = new random_species_type
+	var/rando_race = GLOB.species_list[pick(GLOB.roundstart_species)]
+	pref_species = new rando_race()
 	if(randomise[RANDOM_NAME])
 		real_name = pref_species.random_name(gender, TRUE)
 
@@ -152,9 +162,3 @@
 
 	parent.show_character_previews(new /mutable_appearance(mannequin))
 	unset_busy_human_dummy(DUMMY_HUMAN_SLOT_PREFERENCES)
-
-
-/datum/preferences/proc/spec_check()
-	if(!(pref_species.name in get_selectable_species(donator)))
-		return FALSE
-	return TRUE

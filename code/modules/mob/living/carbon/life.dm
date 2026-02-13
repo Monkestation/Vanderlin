@@ -828,7 +828,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /mob/living/carbon/proc/needs_heart()
 	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
 		return FALSE
-	if(dna && dna.species && (NOBLOOD in dna.species.species_traits)) //not all carbons have species!
+	if(NOBLOOD in dna?.species?.species_traits) //not all carbons have species!
 		return FALSE
 	return TRUE
 

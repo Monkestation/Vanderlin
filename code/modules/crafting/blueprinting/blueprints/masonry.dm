@@ -161,12 +161,3 @@
 	)
 	supports_directions = TRUE
 	craftdiff = 0
-
-/datum/blueprint_recipe/carpentry/psydon_metal_cross
-	name = "metal psycross"
-	desc = "A metal psycross dedicated to Psydon."
-	required_materials = list(
-		/obj/item/ingot/iron = 3,
-	)
-	result_type = /obj/structure/fluff/psycross/psydon/metal
-	craftdiff = 1
