@@ -39,6 +39,10 @@
 /obj/structure/fake_machine/hailerboard/r,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"bd" = (
+/obj/effect/spawner/traveltile_spawner/horizontal/jarosite,
+/turf/open/floor/naturalstone,
+/area/outdoors/mountains)
 "bg" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/marsh/deep,
@@ -115,8 +119,7 @@
 /area/outdoors/wilderness)
 "bU" = (
 /obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
+	dir = 4
 	},
 /obj/item/candle/infinite{
 	pixel_x = 6;
@@ -305,10 +308,7 @@
 /area/indoors/wilderness/garrison)
 "eD" = (
 /obj/effect/decal/cleanable/sigil/S,
-/turf/open/floor/grass{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/turf/open/floor/grass,
 /area/outdoors/wilderness)
 "eE" = (
 /obj/structure/chair/bench/ancientlog,
@@ -576,8 +576,7 @@
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall";
-	pixel_y = 3;
-	pixel_x = 0
+	pixel_y = 3
 	},
 /turf/open/water/cleanshallow/dirt,
 /area/outdoors/wilderness)
@@ -661,12 +660,10 @@
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall";
-	pixel_y = 3;
-	pixel_x = 0
+	pixel_y = 3
 	},
 /obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
+	dir = 4
 	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
@@ -838,8 +835,7 @@
 	dir = 10
 	},
 /obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
+	dir = 4
 	},
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -852,8 +848,7 @@
 /area/outdoors/wilderness)
 "jN" = (
 /obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
+	dir = 4
 	},
 /turf/open/floor/tile,
 /area/indoors/dungeon)
@@ -907,8 +902,7 @@
 /area/outdoors/wilderness)
 "km" = (
 /obj/structure/window/openclose{
-	dir = 1;
-	icon_state = "woodwindowdir"
+	dir = 1
 	},
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned/alt,
@@ -957,8 +951,7 @@
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall";
-	pixel_y = 3;
-	pixel_x = 0
+	pixel_y = 3
 	},
 /obj/structure/table/stone_small,
 /turf/open/floor/cobblerock,
@@ -1298,8 +1291,7 @@
 /area/outdoors/wilderness)
 "px" = (
 /obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
+	dir = 4
 	},
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -1513,7 +1505,6 @@
 "rE" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/walldeco/bath/wallrope{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /turf/open/floor/herringbone,
@@ -1527,6 +1518,9 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"rV" = (
+/turf/open/lava/acid,
+/area/outdoors/mountains)
 "rW" = (
 /turf/open/water/marsh/deep,
 /area/outdoors/wilderness)
@@ -1540,12 +1534,8 @@
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
 "sa" = (
+/obj/structure/bed/hay,
 /obj/structure/bed/hay{
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/structure/bed/hay{
-	pixel_x = 0;
 	pixel_y = 14
 	},
 /turf/open/floor/cobble,
@@ -1692,8 +1682,7 @@
 /area/indoors/cave)
 "uj" = (
 /obj/structure/fluff/railing/border{
-	dir = 4;
-	icon_state = "border"
+	dir = 4
 	},
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
@@ -1970,7 +1959,6 @@
 "xd" = (
 /obj/structure/fluff/walldeco/stone{
 	icon_state = "walldec6";
-	pixel_x = 0;
 	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -2074,7 +2062,6 @@
 	pixel_y = -8
 	},
 /obj/structure/fluff/walldeco/bath/wallrope{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /turf/open/floor/herringbone,
@@ -2109,8 +2096,7 @@
 /area/outdoors/wilderness/outpost/vanderlin)
 "yM" = (
 /obj/structure/fluff/railing/border{
-	dir = 5;
-	icon_state = "border"
+	dir = 5
 	},
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/dungeon)
@@ -2136,7 +2122,6 @@
 "zf" = (
 /obj/structure/table/wood/fancy,
 /obj/item/carvedgem/rose/statue{
-	pixel_x = 0;
 	pixel_y = 12;
 	name = "Carving of Ravox";
 	sellprice = 100;
@@ -2368,8 +2353,7 @@
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall";
-	pixel_y = 3;
-	pixel_x = 0
+	pixel_y = 3
 	},
 /obj/structure/closet/burial_shroud,
 /turf/open/floor/herringbone,
@@ -2576,8 +2560,7 @@
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall";
-	pixel_y = 3;
-	pixel_x = 0
+	pixel_y = 3
 	},
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -2614,21 +2597,16 @@
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall";
-	pixel_y = 3;
-	pixel_x = 0
+	pixel_y = 3
 	},
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "DX" = (
 /obj/structure/bed/hay{
-	pixel_x = 0;
 	pixel_y = 14
 	},
-/obj/structure/bed/hay{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/obj/structure/bed/hay,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "Ed" = (
@@ -2725,7 +2703,6 @@
 /obj/structure/fluff/signage{
 	dir = 1;
 	name = "Thatchwood- North";
-	pixel_x = 0;
 	pixel_y = 6
 	},
 /obj/structure/fluff/signage{
@@ -2886,7 +2863,6 @@
 "Gp" = (
 /obj/structure/fluff/walldeco/stone{
 	icon_state = "walldec6";
-	pixel_x = 0;
 	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -2902,8 +2878,7 @@
 /area/indoors/wilderness/shop)
 "GB" = (
 /obj/structure/fluff/railing/border{
-	dir = 5;
-	icon_state = "border"
+	dir = 5
 	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
@@ -2988,7 +2963,6 @@
 /area/outdoors/wilderness)
 "HX" = (
 /obj/structure/stone_tile/center/cracked{
-	pixel_x = 0;
 	pixel_y = -1
 	},
 /obj/structure/stone_tile/surrounding/cracked{
@@ -3114,10 +3088,7 @@
 /area/indoors/wilderness/shop)
 "Jm" = (
 /obj/effect/decal/cleanable/sigil/NW,
-/turf/open/floor/dirt{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "Jn" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
@@ -3184,8 +3155,7 @@
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall";
-	pixel_y = 3;
-	pixel_x = 0
+	pixel_y = 3
 	},
 /turf/open/water/marsh/deep,
 /area/outdoors/wilderness)
@@ -3284,7 +3254,6 @@
 	pixel_y = 5
 	},
 /obj/effect/decal/carpet/kover_darkred{
-	pixel_x = 0;
 	pixel_y = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -3861,8 +3830,7 @@
 "Rh" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/carafe/teapot/silver{
-	pixel_x = -3;
-	pixel_y = 0
+	pixel_x = -3
 	},
 /obj/item/reagent_containers/glass/cup/rosefancy{
 	pixel_x = 9;
@@ -4010,7 +3978,6 @@
 "Tn" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/statue/astrata/bling{
-	pixel_x = -16;
 	pixel_y = 25
 	},
 /obj/item/reagent_containers/glass/bowl/amber,
@@ -4173,8 +4140,7 @@
 	pixel_y = -10
 	},
 /obj/item/candle/yellow/lit/infinite{
-	pixel_x = 10;
-	pixel_y = 0
+	pixel_x = 10
 	},
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
@@ -4192,7 +4158,6 @@
 "UZ" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/structure/fluff/walldeco/bath/wallrope{
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/structure/fluff/walldeco/maidendrape,
@@ -4236,8 +4201,7 @@
 /area/indoors/wilderness/tavern)
 "VJ" = (
 /obj/structure/window/openclose{
-	dir = 4;
-	icon_state = "woodwindowdir"
+	dir = 4
 	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/wilderness)
@@ -4506,9 +4470,7 @@
 	pixel_y = 11
 	},
 /obj/structure/fluff/signage{
-	name = "Vanderlin - East";
-	pixel_x = 0;
-	pixel_y = 0
+	name = "Vanderlin - East"
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
@@ -4605,6 +4567,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/garrison)
+"ZA" = (
+/obj/effect/spawner/traveltile_spawner/vertical/jarosite,
+/turf/open/floor/naturalstone,
+/area/indoors/cave)
 "ZB" = (
 /obj/structure/table/church/m,
 /obj/item/carvedgem/amber/sun,
@@ -40481,9 +40447,9 @@ YM
 Uj
 Uj
 Uj
-Uj
-Uj
-Uj
+ID
+ZA
+ID
 Uj
 Uj
 Uj
@@ -40683,9 +40649,9 @@ YM
 Uj
 Uj
 Uj
-Uj
-Uj
-Uj
+ID
+ID
+ID
 ID
 ID
 ID
@@ -79563,7 +79529,7 @@ Mi
 Mi
 Mi
 Mi
-Gi
+lC
 Gi
 Gi
 Gi
@@ -79764,8 +79730,8 @@ Mi
 Mi
 Mi
 Mi
-Gi
-Gi
+lC
+lC
 Gi
 Gi
 Gi
@@ -79967,9 +79933,9 @@ Mi
 Mi
 Gi
 Gi
-Gi
-Gi
-Gi
+lC
+lC
+lC
 Gi
 Gi
 Gi
@@ -80169,9 +80135,9 @@ Mi
 Mi
 Gi
 Gi
-Gi
-Gi
-Gi
+lC
+lC
+bd
 Gi
 Gi
 Gi
@@ -80371,9 +80337,9 @@ Mi
 Gi
 Gi
 Gi
-Gi
-Gi
-Gi
+rV
+lC
+lC
 Gi
 Gi
 Gi
@@ -80573,9 +80539,9 @@ Gi
 Gi
 Gi
 Gi
-Gi
-Gi
-Gi
+rV
+rV
+rV
 Gi
 Gi
 Gi
@@ -80776,8 +80742,8 @@ Gi
 Gi
 Gi
 Gi
-Gi
-Gi
+rV
+rV
 Gi
 Gi
 Gi

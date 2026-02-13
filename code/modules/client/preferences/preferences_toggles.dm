@@ -18,7 +18,7 @@
 	set desc = ""
 	set hidden = 1
 	usr.client.prefs.current_tab = 1
-	usr.client.prefs.ShowChoices(usr)
+	usr.client.prefs.show_choices(usr)
 #endif
 
 /client/verb/setup_character()
@@ -27,7 +27,7 @@
 	set desc = ""
 	if(prefs)
 		usr.client.prefs.current_tab = 1
-		usr.client.prefs.ShowChoices(usr, 4)
+		usr.client.prefs.show_choices(usr, 4)
 
 /client/verb/toggle_fullscreen()
 	set name = "ToggleFullscreen"

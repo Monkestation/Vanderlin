@@ -10,10 +10,15 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/undershirt, GLOB.undershirt_list, GLOB.undershirt_m, GLOB.undershirt_f)
 
 	//Species
-	for(var/spath in subtypesof(/datum/species))
-		var/datum/species/S = new spath()
-		GLOB.species_list[S.name] = spath
-	sortTim(GLOB.species_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
+	for(var/datum/species/species as anything in subtypesof(/datum/species))
+		species = new species()
+		GLOB.species_list[species.id] = species.type
+
+		if(species.check_roundstart_eligible())
+			GLOB.roundstart_species += species.id
+
+	sortTim(GLOB.species_list, GLOBAL_PROC_REF(cmp_text_dsc))
+	sortTim(GLOB.roundstart_species, GLOBAL_PROC_REF(cmp_text_dsc))
 
 	//Surgery steps
 	for(var/path in subtypesof(/datum/surgery_step))
@@ -36,26 +41,30 @@
 	GLOB.emote_list = init_emote_list()
 
 	// Faiths
-	for(var/path in subtypesof(/datum/faith))
-		var/datum/faith/faith = new path()
-		GLOB.faithlist[path] = faith
-		if(faith.preference_accessible)
-			GLOB.preference_faiths[path] = faith
+	for(var/datum/faith/faith as anything in subtypesof(/datum/faith))
+		if(IS_ABSTRACT(faith))
+			continue
+
+		faith = new faith()
+		GLOB.faith_list[faith.type] = faith
 
 	// Inquisition Hermes list
-	for (var/path in subtypesof(/datum/inqports))
+	for(var/path in subtypesof(/datum/inqports)) // Why is this here
 		var/datum/inqports/inqports = new path()
 		GLOB.inqsupplies[path] = inqports
 
 	// Patron Gods
-	for(var/path in subtypesof(/datum/patron))
-		var/datum/patron/patron = new path()
-		GLOB.patronlist[path] = patron
-		if(!patron.preference_accessible)
+	for(var/datum/patron/patron as anything in subtypesof(/datum/patron))
+		if(IS_ABSTRACT(patron))
 			continue
+
+		patron = new patron()
+
+		GLOB.patron_list[patron.type] = patron
+
 		LAZYINITLIST(GLOB.patrons_by_faith[patron.associated_faith])
-		GLOB.patrons_by_faith[patron.associated_faith][path] = patron
-		GLOB.preference_patrons[path] = patron
+
+		GLOB.patrons_by_faith[patron.associated_faith][patron.type] = patron
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.

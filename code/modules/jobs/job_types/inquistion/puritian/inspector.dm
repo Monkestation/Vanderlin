@@ -49,7 +49,7 @@
 		"Retribution (Rapier)",
 		"Daybreak (Whip)",
 		"Sanctum (Halberd)",
-		"The Forgotten Blade",
+		"Remembrance (Long Sword)",
 	)
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR RELIQUARY PIECE.", "WIELD THEM IN HIS NAME.", gear)
 	switch(weapon_choice)
@@ -70,8 +70,8 @@
 			if(spawned.age == AGE_OLD)
 				spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 				spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1) //So they don't have a 33% chance if being unable to wield their weapon.
-		if("The Forgotten Blade")
-			spawned.put_in_hands(new /obj/item/weapon/sword/long/forgotten(spawned), TRUE)
+		if("Remembrance (Long Sword)")
+			spawned.put_in_hands(new /obj/item/weapon/sword/long/psydon/relic(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 			if(spawned.age == AGE_OLD)
 				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)

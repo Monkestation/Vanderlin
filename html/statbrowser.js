@@ -30,8 +30,6 @@ var verbs = [["", ""]]; // list with a list inside
 var tickets = [];
 var sdql2 = [];
 var permanent_tabs = []; // tabs that won't be cleared by wipes
-var turfcontents = [];
-var turfname = "";
 var imageRetryDelay = 500;
 var imageRetryLimit = 50;
 var menu = document.getElementById("menu");
@@ -250,8 +248,6 @@ function tab_change(tab) {
     draw_tickets();
   } else if (tab == "SDQL2") {
     draw_sdql2();
-  } else if (tab == turfname) {
-    draw_listedturf();
   } else {
     statcontentdiv.textContext = "Loading...";
   }
@@ -432,92 +428,6 @@ function remove_sdql2() {
     if (current_tab == "SDQL2") tab_change("Status");
   }
   checkStatusTab();
-}
-
-function iconError(e) {
-  if (current_tab != turfname) {
-    return;
-  }
-  setTimeout(function () {
-    var node = e.target;
-    var current_attempts = Number(node.getAttribute("data-attempts")) || 0;
-    if (current_attempts > imageRetryLimit) {
-      return;
-    }
-    var src = node.src;
-    node.src = null;
-    node.src = src + "#" + current_attempts;
-    node.setAttribute("data-attempts", current_attempts + 1);
-    draw_listedturf();
-  }, imageRetryDelay);
-}
-
-function draw_listedturf() {
-  statcontentdiv.textContent = "";
-  var table = document.createElement("table");
-  for (var i = 0; i < turfcontents.length; i++) {
-    var part = turfcontents[i];
-    var clickfunc = (function (part) {
-      // The outer function is used to close over a fresh "part" variable,
-      // rather than every onmousedown getting the "part" of the last entry.
-      return function (e) {
-        e.preventDefault();
-        clickcatcher = "byond://?src=" + part[1];
-        switch (e.button) {
-          case 1:
-            clickcatcher += ";statpanel_item_click=middle";
-            break;
-          case 2:
-            clickcatcher += ";statpanel_item_click=right";
-            break;
-          default:
-            clickcatcher += ";statpanel_item_click=left";
-        }
-        if (e.shiftKey) {
-          clickcatcher += ";statpanel_item_shiftclick=1";
-        }
-        if (e.ctrlKey) {
-          clickcatcher += ";statpanel_item_ctrlclick=1";
-        }
-        if (e.altKey) {
-          clickcatcher += ";statpanel_item_altclick=1";
-        }
-        window.location.href = clickcatcher;
-      };
-    })(part);
-    if (storedimages[part[1]] == null && part[2]) {
-      var img = document.createElement("img");
-      img.src = part[2];
-      img.id = part[1];
-      storedimages[part[1]] = part[2];
-      img.onerror = iconError;
-      img.onmousedown = clickfunc;
-      table.appendChild(img);
-    } else {
-      var img = document.createElement("img");
-      img.onerror = iconError;
-      img.onmousedown = clickfunc;
-      img.src = storedimages[part[1]];
-      img.id = part[1];
-      table.appendChild(img);
-    }
-    var b = document.createElement("div");
-    var clickcatcher = "";
-    b.className = "link";
-    b.onmousedown = clickfunc;
-    b.textContent = part[0];
-    table.appendChild(b);
-    table.appendChild(document.createElement("br"));
-  }
-  document.getElementById("statcontent").appendChild(table);
-}
-
-function remove_listedturf() {
-  removePermanentTab(turfname);
-  checkStatusTab();
-  if (current_tab == turfname) {
-    tab_change("Status");
-  }
 }
 
 function remove_mc() {
@@ -897,25 +807,11 @@ Byond.subscribeTo("create_debug", function () {
   }
 });
 
-Byond.subscribeTo("create_listedturf", function (TN) {
-  remove_listedturf(); // remove the last one if we had one
-  turfname = TN;
-  addPermanentTab(turfname);
-  tab_change(turfname);
-});
-
 Byond.subscribeTo("remove_admin_tabs", function () {
   href_token = null;
   remove_mc();
   remove_tickets();
   remove_sdql2();
-});
-
-Byond.subscribeTo("update_listedturf", function (TC) {
-  turfcontents = TC;
-  if (current_tab == turfname) {
-    draw_listedturf();
-  }
 });
 
 Byond.subscribeTo("update_split_admin_tabs", function (status) {
@@ -959,8 +855,6 @@ Byond.subscribeTo("update_tickets", function (T) {
     draw_tickets();
   }
 });
-
-Byond.subscribeTo("remove_listedturf", remove_listedturf);
 
 Byond.subscribeTo("remove_sdql2", remove_sdql2);
 

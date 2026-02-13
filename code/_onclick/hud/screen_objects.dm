@@ -1366,17 +1366,21 @@
 /atom/movable/screen/healths/blood/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(ishuman(usr))
-		var/mob/living/carbon/human/H = usr
+		var/mob/living/carbon/human/user_mob = usr
 		if(LAZYACCESS(modifiers, LEFT_CLICK))
-			H.check_for_injuries(H)
-			to_chat(H, "I am [H.get_encumbrance() * 100]% encumbered.")
+			user_mob.check_for_injuries(user_mob)
+			to_chat(user_mob, "I am [user_mob.get_encumbrance() * 100]% encumbered.")
 		if(LAZYACCESS(modifiers, RIGHT_CLICK))
-			if(!H.mind)
+			if(!user_mob.mind)
 				return
-			if(length(H.mind.known_people))
-				H.mind.display_known_people(H)
+			if(length(user_mob.mind.known_people))
+				user_mob.mind.display_known_people(user_mob)
 			else
-				to_chat(H, "<span class='warning'>I don't know anyone.</span>")
+				to_chat(user_mob, "<span class='warning'>I don't know anyone.</span>")
+		if(LAZYACCESS(modifiers, MIDDLE_CLICK))
+			if(!user_mob.mind)
+				return
+			user_mob.make_acquaintance()
 
 /atom/movable/screen/splash
 	icon = 'icons/blank_title.png'
