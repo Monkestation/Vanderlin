@@ -10,7 +10,7 @@
 
 /datum/triumph_buy/pick_any_class/all_classes
 	name = "No Advanced Class Restrictions"
-	desc = "Get a single run of any advanced class from ANY job! Subject to standard variant restrictions and policy."
+	desc = "Get a single run of any advanced class from ALL the options! Subject to standard variant restrictions and policy."
 	triumph_buy_id = TRIUMPH_BUY_ANY_CLASS_ALL
 	triumph_cost = 60
 	conflicts_with = list(/datum/triumph_buy/pick_any_class)
@@ -34,26 +34,27 @@
 
 /datum/job/advclass/pick_everything/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/list/possible_classes = shuffle(LAZYCOPY(SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS]))
+	var/list/possible_classes = LAZYCOPY(SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
+	var/max_choices = possible_classes.len
+	if(!all_classes)
+		possible_classes = shuffle(possible_classes)
+		max_choices = 4
 	var/list/chosen_classes = list()
-	var/max_choices = all_classes ? possible_classes.len : 4
 	var/i = 0
 	while(chosen_classes.len < max_choices && i < possible_classes.len)
 		i++
 		var/datum/job/advclass/class_check = possible_classes[i]
-		if(!length(class_check.category_tags))
+		if(!length(class_check.category_tags & ANY_CLASS_CTAGS))
+			continue
+		if(class_check.triumph_blacklisted)
 			continue
 		if(class_check.total_positions == 0)
 			continue
 		if(class_check.antag_role || class_check.parent_job?.antag_role)
 			continue
-		if(!length(class_check.category_tags & ANY_CLASS_CTAGS))
+		if(!class_check.check_requirements(spawned, FALSE))
 			continue
-		if(!prob(roll_chance))
-			continue
-		if(!class_check.check_requirements(spawned, TRUE))
-			continue
-		chosen_classes[class_check.title] = class_check
+		chosen_classes[class_check.title] = class_check.type
 
 	if(!length(chosen_classes))
 		spawned.returntolobby()
@@ -61,6 +62,7 @@
 		to_chat(player_client, span_danger("You had 0 advanced class selections for some reason. Admins were informed. This is likely a bug."))
 		return
 
-	var/chosen_title = browser_input_list(spawned, "What is my class?", "Adventure", chosen_classes, timeout = 45 SECONDS)
-	var/datum/job/advclass/class = chosen_classes[chosen_title] || pick_assoc(chosen_classes)
+	var/chosen_title = browser_input_list(spawned, "What is my class?", "Adventure", chosen_classes, timeout = 1 MINUTES) || pick(chosen_classes)
+	var/class_type = chosen_classes[chosen_title]
+	var/datum/job/advclass/class = new class_type()
 	SSjob.EquipRank(spawned, class, player_client)
