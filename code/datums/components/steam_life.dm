@@ -46,13 +46,13 @@
 	host.hud_used?.bloodpool?.name = "Steam"
 	host.hud_used?.bloodpool?.desc = "Charge: [steam_charge]/[max_steam_charge]"
 	if(steam_charge <= 0)
-		host.remove_shared_particles("steam")
-		needs_particles = TRUE
+		// host.remove_shared_particles("steam")
+		// needs_particles = TRUE
 		host?.hud_used?.bloodpool?.set_value(0, 1 SECONDS)
 	else
-		if(needs_particles)
-			host.add_shared_particles(/particles/smoke/cig/big/steam, "steam")
-			needs_particles = FALSE
+		// if(needs_particles)
+		// 	host.add_shared_particles(/particles/smoke/cig/big/steam, "steam")
+		// 	needs_particles = FALSE
 		host?.hud_used?.bloodpool?.set_value((100 / (max_steam_charge / steam_charge)) / 100, 1 SECONDS)
 
 /datum/component/steam_life/proc/recharge_steam(datum/source, steam_amount)
