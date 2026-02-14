@@ -161,5 +161,5 @@
 	///A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [/atom/proc/examine_more] instead of [/atom/proc/examine] on them when examining
 	var/list/recent_examines
 
-	/// Datum for storing turf contents on stat panel
-	var/datum/object_window_info/obj_window = null
+	/// Loot panel for the client
+	var/datum/lootpanel/loot_panel

@@ -8,7 +8,7 @@
 /datum/objective/personal/marriage_broker/on_creation()
 	. = ..()
 	if(owner?.current)
-		ADD_TRAIT(owner.current, TRAIT_SECRET_OFFICIANT, TRAIT_GENERIC)
+		ADD_TRAIT(owner.current, TRAIT_SECRET_OFFICIANT, OBJECTIVE_TRAIT)
 		owner.current.add_spell(/datum/action/cooldown/spell/detect_singles)
 	RegisterSignal(SSdcs, COMSIG_GLOBAL_MARRIAGE, PROC_REF(on_global_marriage))
 	update_explanation_text()

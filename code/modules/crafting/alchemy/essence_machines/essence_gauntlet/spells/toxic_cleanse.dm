@@ -31,9 +31,9 @@
 
 /datum/status_effect/buff/toxin_immunity/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_TOXINLOVER, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_TOXINLOVER, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("Toxins cannot harm you!"))
 
 /datum/status_effect/buff/toxin_immunity/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_TOXINLOVER, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_TOXINLOVER, TRAIT_STATUS_EFFECT(id))

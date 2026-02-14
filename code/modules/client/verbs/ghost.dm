@@ -72,7 +72,7 @@
 		return FALSE
 
 	if(isliving(src))
-		var/mob/living/live_one
+		var/mob/living/live_one = src
 		if(live_one.has_quirk(/datum/quirk/vice/hardcore))
 			SEND_SIGNAL(live_one, COMSIG_LIVING_TRY_ENTER_AFTERLIFE)
 			return FALSE
