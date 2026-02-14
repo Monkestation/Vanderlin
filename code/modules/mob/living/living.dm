@@ -1625,6 +1625,7 @@
 						span_warning("I struggle against [L]'s grasp![shitte]"), null, null)
 		playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
 		pulledby.Immobilize(rand(1, 3))
+		Immobilize(3)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST_GRAB, src, pulledby, moving_resist, .)
 
