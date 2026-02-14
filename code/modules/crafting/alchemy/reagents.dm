@@ -370,6 +370,8 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 /datum/reagent/organpoison/on_mob_life(mob/living/carbon/M)
 	if(!(M.dna?.species?.id in cannibalism_pool))
 		return ..()
+	if(HAS_TRAIT(M, TRAIT_NOHUNGER))
+		return ..()
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.add_nausea(10 * (1 - M.STACON / 20))
 		M.adjustToxLoss(0.5)
