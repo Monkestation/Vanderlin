@@ -337,6 +337,12 @@
 	recipe_name = "a golden circlet"
 	created_item = /obj/item/clothing/head/crown/circlet
 
+/datum/anvil_recipe/valuables/gold/Hemhem
+	name = "Hemhem Crown (+ Cloth)"
+	recipe_name = "a hemhem crown"
+	additional_items = list(/obj/item/na/cloth)
+	created_item = /obj/item/clothing/head/crown/hemhem
+
 /datum/anvil_recipe/valuables/gold/rings
 	name = "3x Gold Rings"
 	recipe_name = "three Rings" // For the Elven kings under the sky...
