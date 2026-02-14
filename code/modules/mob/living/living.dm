@@ -645,8 +645,8 @@
 
 /mob/living/stop_pulling(pulling_broke_free = FALSE)
 	if(pulling_broke_free && ismob(pulling))
-		var/wrestling_cooldown_reduction = 0.2 SECONDS * get_skill_level(/datum/skill/combat/wrestling, TRUE)
-		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
+		var/wrestling_cooldown_reduction = 0.1 SECONDS * get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 1 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
 		if(grabber_item.grabbed == pulling)
