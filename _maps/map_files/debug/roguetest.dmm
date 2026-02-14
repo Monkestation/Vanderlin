@@ -1108,11 +1108,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
-"dZ" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/armor/plate/iron/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "ef" = (
 /obj/structure/hotspring/border/five,
 /obj/structure/flora/hotspring_rocks{
@@ -1348,8 +1343,7 @@
 /area/indoors/town/keep)
 "jb" = (
 /obj/structure/carpet/red,
-/obj/item/clothing/head/helmet/bascinet/atgervi/gronn,
-/turf/open/floor/blocks,
+/turf/open/floor/tile,
 /area/indoors/town/keep)
 "ji" = (
 /obj/structure/hotspring/border/three,
@@ -1427,11 +1421,6 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"kA" = (
-/obj/structure/carpet/purple,
-/obj/item/clothing/armor/leather/heavy/atgervi,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "kF" = (
 /obj/structure/roller{
 	dir = 1
@@ -1482,11 +1471,6 @@
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/outdoors)
-"lu" = (
-/obj/structure/carpet/purple,
-/obj/item/clothing/armor/leather/heavy/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "lM" = (
 /obj/structure/stairs{
 	dir = 8
@@ -1532,11 +1516,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors)
-"mt" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/pants/platelegs/iron/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "mx" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -1601,11 +1580,6 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"of" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "ol" = (
 /obj/structure/door/fancy,
 /turf/open/floor/blocks,
@@ -1737,11 +1711,6 @@
 /mob/living/simple_animal/hostile/retaliate/cow,
 /turf/open/floor/cobblerock,
 /area/outdoors)
-"rg" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/pants/trou/leather/splint/iron/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "rj" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -1775,10 +1744,6 @@
 	icon_state = "largetable"
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/keep)
-"rG" = (
-/obj/structure/carpet/red,
-/turf/open/floor/tile,
 /area/indoors/town/keep)
 "rN" = (
 /obj/structure/redstone/dust,
@@ -2073,10 +2038,6 @@
 /obj/structure/bridge_stakes,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"xY" = (
-/obj/item/clothing/gloves/plate/iron/gronn,
-/turf/open/floor/tile,
-/area/indoors/town/keep)
 "ya" = (
 /obj/machinery/essence/splitter,
 /obj/structure/table/vtable,
@@ -2442,11 +2403,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
-"AV" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/head/helmet/heavy/bucket/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "Be" = (
 /obj/structure/floordoor,
 /turf/open/floor/cobblerock,
@@ -2496,16 +2452,6 @@
 	},
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/keep)
-"Cr" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/armor/brigandine/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
-"CA" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/gloves/angle/gronnfur,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "CO" = (
 /obj/effect/landmark/observer_start,
 /turf/open/floor/cobblerock,
@@ -2515,11 +2461,6 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Dj" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/pants/trou/leather/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "Dl" = (
 /obj/structure/dungeon_exit{
 	delve_level = 2
@@ -2637,11 +2578,6 @@
 "Fy" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors)
-"FF" = (
-/obj/structure/carpet/purple,
-/obj/item/clothing/gloves/chain/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "FN" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass/yel,
@@ -2867,11 +2803,6 @@
 	pixel_y = 1
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/keep)
-"JD" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/head/helmet/leather/shaman_hood,
-/turf/open/floor/blocks,
 /area/indoors/town/keep)
 "JF" = (
 /obj/structure/chair/bench/couch/right{
@@ -3119,11 +3050,6 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Qk" = (
-/obj/structure/carpet/purple,
-/obj/item/clothing/gloves/angle/gronn,
-/turf/open/floor/blocks,
-/area/indoors/town/keep)
 "QA" = (
 /obj/structure/water_pipe,
 /obj/structure/sprinkler,
@@ -3607,11 +3533,6 @@
 	pixel_y = 0
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/keep)
-"Zf" = (
-/obj/structure/carpet/red,
-/obj/item/clothing/shoes/boots/armor/iron/gronn,
-/turf/open/floor/blocks,
 /area/indoors/town/keep)
 "Zm" = (
 /obj/machinery/light/fueled/wallfire/candle,
@@ -22094,8 +22015,8 @@ se
 se
 Zm
 yi
-Qk
-CA
+QC
+yi
 Dt
 se
 zT
@@ -22350,13 +22271,13 @@ se
 GB
 BJ
 yi
+yi
+QC
+yi
 jb
-lu
-Dj
-rG
 Nr
 Dt
-xY
+Dt
 Dt
 Nr
 SV
@@ -22612,10 +22533,10 @@ QC
 QC
 yi
 yi
-AV
-dZ
-mt
-Zf
+yi
+yi
+yi
+yi
 yi
 yi
 ol
@@ -22870,7 +22791,7 @@ QC
 QC
 QC
 QC
-FF
+QC
 QC
 QC
 QC
@@ -23126,9 +23047,9 @@ QC
 QC
 yi
 yi
-of
-Cr
-rg
+yi
+yi
+yi
 yi
 yi
 yi
@@ -23380,8 +23301,8 @@ Jr
 yi
 yi
 QC
-CA
-rG
+yi
+jb
 dP
 Dt
 Dt
@@ -23635,8 +23556,8 @@ Lp
 se
 se
 Zm
-JD
-kA
+yi
+QC
 yi
 Dt
 se
