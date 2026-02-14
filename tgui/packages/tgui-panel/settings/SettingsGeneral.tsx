@@ -26,7 +26,7 @@ export function SettingsGeneral(props) {
   return (
     <Section>
       <LabeledList>
-        <LabeledList.Item label="Theme">
+        {/* <LabeledList.Item label="Theme">
           {THEMES.map((THEME) => (
             <Button
               key={THEME}
@@ -41,8 +41,8 @@ export function SettingsGeneral(props) {
               {capitalize(THEME)}
             </Button>
           ))}
-        </LabeledList.Item>
-        <LabeledList.Item label="UI sizes">
+        </LabeledList.Item> */}
+        {/* <LabeledList.Item label="UI sizes">
           <Stack>
             <Stack.Item>
               <Button
@@ -64,7 +64,7 @@ export function SettingsGeneral(props) {
               </Button>
             </Stack.Item>
           </Stack>
-        </LabeledList.Item>
+        </LabeledList.Item> */}
         <LabeledList.Item label="Font style">
           <Stack.Item>
             {!freeFont ? (
