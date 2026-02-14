@@ -50,10 +50,16 @@
 
   // Components
   --button-color: hsl(0, 7%, 76%);
-  --button-background-selected: hsl(from var(--color-primary) h 100 l);
+  --button-background-selected: hsl(0, 53%, 45%);
 
   --tab-color-selected: hsl(0, 63%, 51%);
 
+  --notice-box-color: hsl(0, 7%, 76%);
+
+  --section-title-color: hsl(0, 7%, 76%);
+
+  --input-color: hsl(0, 7%, 76%);
   --input-background: var(--color-base);
+
   --base-gradient-spread: 0;
 }

@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Pterra';
+  src: url('interface/fonts/pterra.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Blackmoor LET';
+  src: url('interface/fonts/blackmoor.ttf') format('truetype');
+}
+
 .light:root {
   --color-base: #ffffff;
   --scrollbar-base: #f2f2f2;
@@ -10,7 +20,7 @@ body {
 }
 
 body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Pterra;
   font-size: 12px;
   margin: 0 !important;
   padding: 0 !important;
@@ -73,12 +83,13 @@ img {
 }
 
 .button {
+  font-family: Blackmoor LET;
   display: inline-table;
   cursor: pointer;
   user-select: none;
   -ms-user-select: none; /* Remove after Byond 516 */
   text-align: center;
-  font-size: 1em;
+  font-size: 1.1em;
   min-width: 2.9em;
   padding: 0.5em 0.5em 0.4em;
   background-color: transparent;
