@@ -13,6 +13,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	base_intents = list(INTENT_STEAL, INTENT_HELP, INTENT_DISARM, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/jump)
 	possible_rmb_intents = list()
 	bloodpool = 200
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1, /obj/item/natural/fur/rous = 0.5)
 
 /mob/living/carbon/human/species/rousman/Initialize()
 	. = ..()
