@@ -3634,7 +3634,7 @@
 /area/indoors/cave)
 "vq" = (
 /obj/structure/table/wood/counter,
-/obj/item/reagent_containers/food/snacks/bread/raisin,
+/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
 "vr" = (
@@ -4356,14 +4356,14 @@
 /area/indoors/lich)
 "zs" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin,
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
 /turf/open/floor/tile/kitchen,
 /area/indoors/mountains)
 "zu" = (
 /obj/structure/table/wood/plain_alt,
 /obj/structure/fluff/millstone,
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin,
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
 "zv" = (
@@ -5193,7 +5193,7 @@
 /area/indoors/mountains)
 "DN" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/cheesecake_cooked,
+/obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "DO" = (

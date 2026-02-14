@@ -10776,11 +10776,11 @@
 /area/indoors/town/clocktower)
 "jVK" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
 /turf/open/floor/ruinedwood,
 /area/under/town/basement)
 "jWj" = (
@@ -14394,10 +14394,10 @@
 "nnd" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
+/obj/item/reagent_containers/food/snacks/raisins/poison,
+/obj/item/reagent_containers/food/snacks/raisins/poison,
+/obj/item/reagent_containers/food/snacks/raisins/poison,
+/obj/item/reagent_containers/food/snacks/raisins/poison,
 /turf/open/floor/ruinedwood,
 /area/under/town/basement)
 "nnz" = (
@@ -19991,11 +19991,11 @@
 /area/indoors/town)
 "sqy" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
-/obj/item/reagent_containers/food/snacks/griddlecake/berry,
-/obj/item/reagent_containers/food/snacks/biscuit,
-/obj/item/reagent_containers/food/snacks/biscuit,
-/obj/item/reagent_containers/food/snacks/biscuit,
-/obj/item/reagent_containers/food/snacks/biscuit,
+/obj/item/reagent_containers/food/snacks/griddlecake/berry_poison,
+/obj/item/reagent_containers/food/snacks/biscuit_poison,
+/obj/item/reagent_containers/food/snacks/biscuit_poison,
+/obj/item/reagent_containers/food/snacks/biscuit_poison,
+/obj/item/reagent_containers/food/snacks/biscuit_poison,
 /obj/structure/trap/shock,
 /turf/open/water/blood,
 /area/under/town/basement)

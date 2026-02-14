@@ -601,7 +601,7 @@
 /area/under/tomb/indoors/magic)
 "vH" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/food/snacks/bread/raisin,
+/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors/magic)
 "vK" = (

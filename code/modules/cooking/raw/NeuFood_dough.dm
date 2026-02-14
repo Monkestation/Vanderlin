@@ -340,11 +340,6 @@
 	foodtype = GRAIN | RAW | FRUIT
 	tastes = list("dough" = 1, "dried fruit" = 1)
 
-/obj/item/reagent_containers/food/snacks/raisindough/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
-
 /obj/item/reagent_containers/food/snacks/bread/raisin
 	name = "raisin loaf"
 	desc = "Bread with raisins has a sweet taste and is both filling and preserves well."
@@ -359,11 +354,6 @@
 	foodtype = GRAIN | FRUIT
 	tastes = list("bread" = 1,"dried fruit" = 1)
 
-/obj/item/reagent_containers/food/snacks/bread/raisin/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
-
 /obj/item/reagent_containers/food/snacks/breadslice/raisin
 	name = "raisinbread slice"
 	icon_state = "raisinbread_slice"
@@ -373,11 +363,6 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | FRUIT
 	tastes = list("bread" = 1,"dried fruit" = 1)
-
-/obj/item/reagent_containers/food/snacks/breadslice/raisin/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 1)
-	. = ..()
 
 /*-----------\
 | Bread buns |
@@ -480,11 +465,6 @@
 	foodtype = GRAIN | DAIRY | FRUIT | RAW
 	faretype = FARE_IMPOVERISHED
 
-/obj/item/reagent_containers/food/snacks/foodbase/biscuit_raw/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
-
 /obj/item/reagent_containers/food/snacks/foodbase/biscuit_raw/good
 
 /obj/item/reagent_containers/food/snacks/biscuit
@@ -498,11 +478,6 @@
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + RAISIN_NUTRITION) * COOK_MOD * DRIED_MOD
 	rotprocess = SHELFLIFE_EXTREME
-
-/obj/item/reagent_containers/food/snacks/biscuit/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
 
 /obj/item/reagent_containers/food/snacks/biscuit/good
 	eat_effect = /datum/status_effect/buff/foodbuff
@@ -680,11 +655,6 @@
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + RAISIN_NUTRITION + CHEESE_NUTRITION
 
-/obj/item/reagent_containers/food/snacks/chescake_ready/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
-
 /obj/item/reagent_containers/food/snacks/cheesecake_cooked
 	name = "cheesecake"
 	desc = "Humenity's favored creation."
@@ -702,11 +672,6 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
 
-/obj/item/reagent_containers/food/snacks/cheesecake_cooked/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
-
 /obj/item/reagent_containers/food/snacks/cheesecake_slice
 	name = "cheesecake slice"
 	icon_state = "cheesecake_slice"
@@ -722,11 +687,6 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
-
-/obj/item/reagent_containers/food/snacks/cheesecake_slice/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 1)
-	. = ..()
 
 /*	.................   STRAWBERRY CAKE   ................... */
 
@@ -1048,11 +1008,6 @@
 	foodtype = GRAIN | DAIRY | RAW | EGG | FRUIT
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + RAISIN_NUTRITION
 
-/obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
-
 /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	name = "jacksberry griddlecake"
 	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
@@ -1064,11 +1019,6 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = GRAIN | DAIRY | EGG | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + RAISIN_NUTRITION) * COOK_MOD
-
-/obj/item/reagent_containers/food/snacks/griddlecake/berry/Initialize(mapload)
-	if(mapload & prob(25))
-		list_reagents |= list(/datum/reagent/berrypoison = 5)
-	. = ..()
 
 /*	.................   Griddlecake Condiments   ................... */
 
