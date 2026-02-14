@@ -1509,6 +1509,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(user.loc == target.loc)
 		return FALSE
 	else
+		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(target, ATTACK_EFFECT_DISARM, used_item = FALSE, atom_bounce = TRUE)
 		playsound(target, 'sound/combat/shove.ogg', 100, TRUE, -1)
 
@@ -1526,6 +1527,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 		if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10), 0, 95)))//check if we actually shove them
 			//Thank you based whoneedsspace
+			qdel(user.check_arm_grabbed(user.active_hand_index))
 			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
 			if(target_collateral_mob)
 				shove_blocked = TRUE
@@ -1536,7 +1538,6 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	//				target_disposal_bin = locate(/obj/machinery/disposal/bin) in target_shove_turf.contents
 					if(target_table)
 						shove_blocked = TRUE
-			qdel(user.check_arm_grabbed(user.active_hand_index))
 
 /*		if(target.IsKnockdown() && !target.IsParalyzed())
 			target.Paralyze(SHOVE_CHAIN_PARALYZE)
