@@ -340,7 +340,7 @@
 /datum/anvil_recipe/valuables/gold/Hemhem
 	name = "Hemhem Crown (+ Cloth)"
 	recipe_name = "a hemhem crown"
-	additional_items = list(/obj/item/na/cloth)
+	additional_items = list(/obj/item/natural/cloth)
 	created_item = /obj/item/clothing/head/crown/hemhem
 
 /datum/anvil_recipe/valuables/gold/rings
