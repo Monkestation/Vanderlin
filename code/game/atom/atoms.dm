@@ -1382,7 +1382,6 @@
 	. = ..()
 	if(!usr?.client)
 		return
-
 	var/client/usr_client = usr.client
 	var/list/paramslist = list()
 

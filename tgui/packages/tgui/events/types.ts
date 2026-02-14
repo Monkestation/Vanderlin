@@ -19,6 +19,7 @@ type TguiWindow = {
   fancy: BinaryIO;
   key: string;
   locked: BinaryIO;
+  theme: string;
   scale: BinaryIO;
   size: [number, number];
 };

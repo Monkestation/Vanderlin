@@ -25,8 +25,6 @@
 	ascended = FALSE
 
 /datum/clan_leader/proc/make_new_leader(mob/living/carbon/human/H)
-	ADD_TRAIT(H, TRAIT_CLAN_LEADER, "clan")
-
 	// Add lord spells
 	for(var/spell_type in lord_spells)
 		var/datum/action/new_action = new spell_type(H.mind)
@@ -48,7 +46,6 @@
 		vamp_datum.antag_hud_name = "vamplord"
 
 /datum/clan_leader/proc/remove_leader(mob/living/carbon/human/H)
-	REMOVE_TRAIT(H, TRAIT_CLAN_LEADER, "clan")
 	for(var/spell_type in lord_spells)
 		var/datum/action/spell_instance = locate(spell_type) in H.actions
 		if(spell_instance)

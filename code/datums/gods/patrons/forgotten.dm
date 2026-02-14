@@ -7,13 +7,14 @@
 	worshippers = "Grenzelhoftians, Inquisitors, Heroes"
 	sins = "Apostasy, Demon Worship, Betraying thy Father"
 	boons = "None. His power is divided."
+
 	associated_faith = /datum/faith/psydon
+
 	confess_lines = list(
 		"THERE IS ONLY ONE TRUE GOD!",
 		"THE SUCCESSORS HALT HIS RETURN!",
 		"PSYDON WILL RETURN!",
 	)
-	profane_words = list()
 
 /datum/patron/psydon/can_pray(mob/living/carbon/human/follower)
 	//We just kind of assume the follower is a human here

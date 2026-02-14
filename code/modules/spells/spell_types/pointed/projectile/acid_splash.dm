@@ -32,6 +32,43 @@
 
 	projectile_type = /obj/projectile/magic/acidsplash/quietus
 
+/datum/action/cooldown/spell/projectile/acid_splash/organ
+	name = "Acid Spray"
+	desc = "Vomit up acid against a foe, at great risk to yourself."
+	sound = 'sound/vo/vomit.ogg'
+	charge_sound = null
+
+	invocation_type = INVOCATION_EMOTE
+	invocation = span_userdanger("<b>%CASTER</b> belches acid!")
+	invocation_self_message = span_danger("I spit acid!")
+	spell_flags = NONE
+
+	charge_time = 2 SECONDS
+	cooldown_time = 1 MINUTES
+	spell_type = SPELL_STAMINA
+
+	has_visual_effects = FALSE
+
+	/// Times cast without a failure
+	var/sucessive_uses = 0
+
+/datum/action/cooldown/spell/projectile/acid_splash/organ/before_cast(atom/cast_on)
+	. = ..()
+	if(. & SPELL_CANCEL_CAST)
+		return
+
+	if(prob(10 + (sucessive_uses * 5)))
+		sucessive_uses = 0
+		owner.visible_message(span_warning("[owner] chokes on their own acid!"), span_userdanger("I choke on acid! it burns!"))
+		owner.emote("gags", forced = TRUE)
+		owner.take_damage(15, TOX)
+		if(isliving(owner))
+			var/mob/living/living_owner = owner
+			living_owner.take_overall_damage(burn = 10)
+			living_owner.apply_status_effect(/datum/status_effect/debuff/acidsplash)
+		StartCooldown()
+		return . | SPELL_CANCEL_CAST
+
 /obj/projectile/magic/acidsplash
 	name = "acid bubble"
 	icon_state = "acid_splash"
@@ -55,7 +92,7 @@
 		new /obj/effect/temp_visual/acidsplash5e(turf)
 		for(var/mob/living/L in turf)
 			if(!L.can_block_magic(MAGIC_RESISTANCE))
-				L.apply_status_effect(/datum/status_effect/debuff/acidsplash, strength_modifier)
+				L.apply_status_effect(/datum/status_effect/debuff/acidsplash, null, strength_modifier)
 
 /datum/status_effect/debuff/acidsplash
 	id = "acid splash"

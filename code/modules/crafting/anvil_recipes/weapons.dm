@@ -679,6 +679,14 @@
 	createditem_extra = 1
 	craftdiff = 1
 
+/datum/anvil_recipe/weapons/steel/stiletto
+	name = "2x Steel Stilettos"
+	recipe_name = "a couple Daggers"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/knife/dagger/steel/stiletto
+	createditem_extra = 1
+	craftdiff = 1
+
 /datum/anvil_recipe/weapons/steel/decsaber
 	name = "Decorated Sabre (+Gold Bar)"
 	recipe_name = "a Decorated Sabre"

@@ -67,19 +67,15 @@
 /datum/antagonist/vampire/lord/equip()
 	. = ..()
 
-	owner.unknow_all_people()
-	for(var/datum/mind/MF in get_minds())
-		owner.become_unknown_to(MF)
-	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
-		owner.i_know_person(MF)
-		owner.person_knows_me(MF)
-	for(var/datum/mind/MF in get_minds("Death Knight"))
-		owner.i_know_person(MF)
-		owner.person_knows_me(MF)
+	owner.forget_and_be_forgotten()
+	for(var/datum/mind/found_mind in get_minds("Vampire Spawn"))
+		owner.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Death Knight"))
+		owner.share_identities(found_mind)
 
-	var/mob/living/carbon/human/H = owner.current
-	H.equipOutfit(/datum/outfit/vamplord)
-	H.set_patron(/datum/patron/godless/autotheist)
+	var/mob/living/carbon/human/source_mob = owner.current
+	source_mob.equipOutfit(/datum/outfit/vamplord)
+	source_mob.set_patron(/datum/patron/godless/autotheist)
 
 	return TRUE
 

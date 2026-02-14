@@ -34,7 +34,7 @@
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 
-/obj/item/storage/sack/mob_can_equip(mob/M, slot)
+/obj/item/storage/sack/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
