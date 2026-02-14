@@ -206,8 +206,8 @@
 		spam_penalty = 1 + (C.grab_fatigue * 0.15)
 		C.add_grab_fatigue(1)
 	// Check for mutual grab breaking first
-	if(M.mutual_grab_break())
-		return FALSE
+	// if(M.mutual_grab_break())
+	// 	return FALSE
 
 	if(M != grabbed)
 		if(!istype(limb_grabbed, /obj/item/bodypart/head))

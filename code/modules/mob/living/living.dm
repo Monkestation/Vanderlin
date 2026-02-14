@@ -1219,7 +1219,6 @@
 	if(!can_resist() || surrendering)
 		return
 
-	changeNext_move(CLICK_CD_RESIST)
 
 	if(atkswinging)
 		stop_attack(FALSE)
@@ -1230,6 +1229,8 @@
 		log_combat(src, pulledby, "resisted grab")
 		resist_grab()
 		return
+
+	changeNext_move(CLICK_CD_RESIST)
 
 	//unbuckling yourself
 	if(buckled && last_special <= world.time)
