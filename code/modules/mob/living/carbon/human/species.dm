@@ -1683,7 +1683,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 
 		if(target.pulling && target.grab_state < GRAB_AGGRESSIVE)
-			target.stop_pulling()
+			target.stop_pulling(TRUE)
 
 		var/turf/target_oldturf = target.loc
 		var/shove_dir = get_dir(user.loc, target_oldturf)
