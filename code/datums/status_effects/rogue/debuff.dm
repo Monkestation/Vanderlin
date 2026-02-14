@@ -198,8 +198,8 @@
 /datum/status_effect/debuff/uncookedfood
 	id = "uncookedfood"
 	effectedstats = null
-	duration = 10 MINUTES
-	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 	name = "Raw Food!"
@@ -216,10 +216,11 @@
 		C.add_stress(/datum/stress_event/uncookedfood)
 
 /datum/status_effect/debuff/badmeal
-	alert_type = null
 	id = "badmeal"
 	effectedstats = null
-	duration = 10 MINUTES
+	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/badmeal
 	name = "Foul Food!"
@@ -235,8 +236,9 @@
 /datum/status_effect/debuff/burnedfood
 	id = "burnedfood"
 	effectedstats = null
-	duration = 10 MINUTES
 	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /datum/status_effect/debuff/burnedfood/on_apply()
 	. = ..()
@@ -253,8 +255,9 @@
 /datum/status_effect/debuff/rotfood
 	id = "rotfood"
 	effectedstats = null
-	duration = 10 MINUTES
 	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/rotfood
 	name = "Rotten Food!"
@@ -267,7 +270,7 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(40)
+		C.add_nausea(50)
 		C.add_stress(/datum/stress_event/rotfood)
 
 /datum/status_effect/debuff/bleeding

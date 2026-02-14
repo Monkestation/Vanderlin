@@ -184,6 +184,7 @@ All foods are distributed among various categories. Use common sense.
 		add_overlay(rotflies)
 		name = "rotten [initial(name)]"
 		eat_effect = /datum/status_effect/debuff/rotfood
+		reagents.add_reagent(/datum/reagent/yuck, 5)
 		slices_num = 0
 		slice_path = null
 		cooktime = 0
