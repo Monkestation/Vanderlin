@@ -750,3 +750,8 @@
 	timer = 3 MINUTES
 	stress_change = 2
 	desc = span_red("I'm covered in feces! Disgusting!")
+
+/datum/stress_event/shamanhoodlost
+	stress_change = 3
+	desc = span_boldred("I have lost my hood! My faith wavers without it. I feel ashamed.")
+	timer = 999 MINUTES
