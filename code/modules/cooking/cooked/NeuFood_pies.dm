@@ -176,6 +176,9 @@
 	filling_color = "#394da5"
 	nutrition = BERRYPIE_NUTRITION * COOK_MOD * SLICED_MOD
 
+/obj/item/reagent_containers/food/snacks/pieslice/good/berry/poison
+	list_reagents = list(/datum/reagent/berrypoison = 3)
+
 /obj/item/reagent_containers/food/snacks/pieslice/good/apple
 	filling_color = "#eca48c"
 	nutrition = FRUITPIE_NUTRITION * COOK_MOD * SLICED_MOD
@@ -252,6 +255,9 @@
 	tastes = list("butterdough" = 1, "berries" = 1)
 	filling_color = "#394da5"
 	nutrition = BERRYPIE_NUTRITION * COOK_MOD
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison
+	list_reagents = list(/datum/reagent/berrypoison = 12)
 
 /obj/item/reagent_containers/food/snacks/pie/cooked/berry/good
 	eat_effect = /datum/status_effect/buff/foodbuff

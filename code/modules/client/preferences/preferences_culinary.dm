@@ -427,6 +427,16 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/smallrat/dead,
 		/obj/item/reagent_containers/food/snacks/messenger_bird,
 		/obj/item/reagent_containers/food/snacks/messenger_bird/dead,
+		/obj/item/reagent_containers/food/snacks/griddlecake/berry/poison,
+		/obj/item/reagent_containers/food/snacks/biscuit/poison,
+		/obj/item/reagent_containers/food/snacks/chescake_ready/poison,
+		/obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison,
+		/obj/item/reagent_containers/food/snacks/cheesecake_slice/poison,
+		/obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison,
+		/obj/item/reagent_containers/food/snacks/pieslice/good/berry/poison,
+		/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
+		/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
+		/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
 	)
 
 	var/list/slice_paths = list()

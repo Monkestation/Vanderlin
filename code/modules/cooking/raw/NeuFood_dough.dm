@@ -326,6 +326,9 @@
 	foodtype = GRAIN | FRUIT
 	nutrition = BREAD_NUTRITION * 0.5 + RAISIN_NUTRITION
 
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
+
 /*	.................   Raisin bread   ................... */
 /obj/item/reagent_containers/food/snacks/raisindough
 	name = "dough of raisins"
@@ -354,6 +357,9 @@
 	foodtype = GRAIN | FRUIT
 	tastes = list("bread" = 1,"dried fruit" = 1)
 
+/obj/item/reagent_containers/food/snacks/bread/raisin/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
+
 /obj/item/reagent_containers/food/snacks/breadslice/raisin
 	name = "raisinbread slice"
 	icon_state = "raisinbread_slice"
@@ -363,6 +369,9 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | FRUIT
 	tastes = list("bread" = 1,"dried fruit" = 1)
+
+/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
 
 /*-----------\
 | Bread buns |
@@ -486,6 +495,9 @@
 /obj/item/reagent_containers/food/snacks/biscuit/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
+
+/obj/item/reagent_containers/food/snacks/biscuit/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
 
 /*	.................   Prezzel   ................... */
 /obj/item/reagent_containers/food/snacks/foodbase/prezzel_raw
@@ -655,6 +667,9 @@
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + RAISIN_NUTRITION + CHEESE_NUTRITION
 
+/obj/item/reagent_containers/food/snacks/chescake_ready/poison
+	list_reagents = list(/datum/reagent/berrypoison = 6)
+
 /obj/item/reagent_containers/food/snacks/cheesecake_cooked
 	name = "cheesecake"
 	desc = "Humenity's favored creation."
@@ -672,6 +687,9 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
 
+/obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison
+	list_reagents = list(/datum/reagent/berrypoison = 10)
+
 /obj/item/reagent_containers/food/snacks/cheesecake_slice
 	name = "cheesecake slice"
 	icon_state = "cheesecake_slice"
@@ -687,6 +705,9 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
+
+/obj/item/reagent_containers/food/snacks/cheesecake_slice/poison
+	list_reagents = list(/datum/reagent/berrypoison = 1.25)
 
 /*	.................   STRAWBERRY CAKE   ................... */
 
@@ -1019,6 +1040,9 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = GRAIN | DAIRY | EGG | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + RAISIN_NUTRITION) * COOK_MOD
+
+/obj/item/reagent_containers/food/snacks/griddlecake/berry/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
 
 /*	.................   Griddlecake Condiments   ................... */
 

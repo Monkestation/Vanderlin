@@ -273,6 +273,9 @@
 			M.reagents.trans_to(src, M.reagents.total_volume)
 		qdel(M)
 
+/obj/item/reagent_containers/food/snacks/raisins/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
+
 // -------------- STRAWBERRY -----------------
 
 /obj/item/reagent_containers/food/snacks/strawberry_dried
