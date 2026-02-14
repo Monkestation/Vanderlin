@@ -1523,13 +1523,13 @@
 		to_chat(src, span_warning("I'm restrained!"))
 		return
 
-	if(!MOBTIMER_FINISHED(pulledby, MT_RESIST_GRAB, 2 SECONDS))
-		return
-
 	// Passive grabs without cmode can be instantly broken and do not block movement
 	if(pulledby.grab_state == GRAB_PASSIVE && !pulledby.cmode)
 		pulledby.stop_pulling()
 		return FALSE
+
+	if(!MOBTIMER_FINISHED(pulledby, MT_RESIST_GRAB, 2 SECONDS))
+		return
 
 	var/wrestling_diff = 0
 	var/resist_chance = BASE_GRAB_RESIST_CHANCE

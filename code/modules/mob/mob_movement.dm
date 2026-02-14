@@ -232,10 +232,9 @@
 					to_chat(src, span_warning("I'm restrained! I can't move!"))
 					return TRUE
 			// END 3: we can move freely.
-		// Passive grabs with no cmode does not stop movement
-		else if(mob_puller.grab_state > GRAB_PASSIVE || mob_puller.cmode)
+		else
 			var/mob/living/living_mob = mob
-			if(mob_puller.grab_state == GRAB_PASSIVE)
+			if(mob_puller.grab_state == GRAB_PASSIVE && mob_puller.cmode)
 				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STATKEY_STR, STATKEY_CON)*10), 0, 95)))
 					COOLDOWN_START(src, move_delay, 1 SECONDS)
 					to_chat(src, span_warning("I'm restrained! I can't move!"))
