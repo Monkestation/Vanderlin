@@ -67,24 +67,11 @@ export const MESSAGE_TYPES: MessageType[] = [
     selector: '.say, .emote',
   },
   {
-    type: MESSAGE_TYPE_RADIO,
-    name: 'Radio',
-    description: 'All departments of radio messages',
-    selector:
-      '.alert, .minorannounce, .syndradio, .centcomradio, .aiprivradio, .comradio, .secradio, .gangradio, .engradio, .medradio, .sciradio, .suppradio, .servradio, .radio, .deptradio, .binarysay, .resonate, .abductor, .alien, .changeling',
-  },
-  {
-    type: MESSAGE_TYPE_ENTERTAINMENT,
-    name: 'Entertainment',
-    description: 'Entertainment and newscaster broadcasts',
-    selector: '.enteradio, .newscaster',
-  },
-  {
     type: MESSAGE_TYPE_INFO,
     name: 'Info',
     description: 'Non-urgent messages from the game and items',
     selector:
-      '.notice:not(.pm), .adminnotice, .info, .sinister, .cult, .infoplain, .announce, .hear, .smallnotice, .holoparasite, .boldnotice',
+      '.notice:not(.pm), .adminnotice, .info, .sinister, .cult, .infoplain, .announce, .hear, .smallnotice, .boldnotice',
   },
   {
     type: MESSAGE_TYPE_WARNING,
@@ -93,12 +80,12 @@ export const MESSAGE_TYPES: MessageType[] = [
     selector:
       '.warning:not(.pm), .critical, .userdanger, .italics, .alertsyndie, .warningplain',
   },
-  {
-    type: MESSAGE_TYPE_DEADCHAT,
-    name: 'Deadchat',
-    description: 'All of deadchat',
-    selector: '.deadsay, .ghostalert',
-  },
+  // {
+  //   type: MESSAGE_TYPE_DEADCHAT,
+  //   name: 'Deadchat',
+  //   description: 'All of deadchat',
+  //   selector: '.deadsay, .ghostalert',
+  // },
   {
     type: MESSAGE_TYPE_OOC,
     name: 'OOC',
@@ -115,7 +102,7 @@ export const MESSAGE_TYPES: MessageType[] = [
     type: MESSAGE_TYPE_COMBAT,
     name: 'Combat Log',
     description: 'Urist McTraitor has stabbed you with a knife!',
-    selector: '.danger',
+    selector: '.danger, .userdanger, .crit, .warning',
   },
   {
     type: MESSAGE_TYPE_UNKNOWN,
@@ -131,13 +118,6 @@ export const MESSAGE_TYPES: MessageType[] = [
     admin: true,
   },
   {
-    type: MESSAGE_TYPE_MODCHAT,
-    name: 'Mod Chat',
-    description: 'MSAY messages',
-    selector: '.mod_channel',
-    admin: true,
-  },
-  {
     type: MESSAGE_TYPE_PRAYER,
     name: 'Prayers',
     description: 'Prayers from players',
@@ -147,7 +127,7 @@ export const MESSAGE_TYPES: MessageType[] = [
     type: MESSAGE_TYPE_ADMINLOG,
     name: 'Admin Log',
     description: 'ADMIN LOG: Urist McAdmin has jumped to coordinates X, Y, Z',
-    selector: '.log_message',
+    selector: '.admin',
     admin: true,
   },
   {
