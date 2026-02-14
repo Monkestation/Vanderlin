@@ -644,11 +644,9 @@
 		stop_pulling()
 
 /mob/living/stop_pulling(pulling_broke_free = FALSE)
-	if(pulling_broke_free && ismob(pulling) && grab_state >= GRAB_AGGRESSIVE)
-		var/wrestling_cooldown_reduction = 0
-		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
-			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
-		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
+	if(pulling_broke_free && ismob(pulling))
+		var/wrestling_cooldown_reduction = 0.2 SECONDS * get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
 		if(grabber_item.grabbed == pulling)
@@ -1528,7 +1526,10 @@
 	if(!MOBTIMER_FINISHED(pulledby, MT_RESIST_GRAB, 2 SECONDS))
 		return
 
-	SEND_SIGNAL(src, COMSIG_LIVING_RESIST_GRAB, src, pulledby, moving_resist)
+	// Passive grabs without cmode can be instantly broken and do not block movement
+	if(pulledby.grab_state == GRAB_PASSIVE && !pulledby.cmode)
+		pulledby.stop_pulling()
+		return FALSE
 
 	var/wrestling_diff = 0
 	var/resist_chance = BASE_GRAB_RESIST_CHANCE
