@@ -23,9 +23,11 @@
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/meat
 	nutrition = RAWMEAT_NUTRITION
 	foodtype = RAW | MEAT
+	faretype = FARE_IMPOVERISHED
 	var/cannibalism = FALSE
 	var/list/cannibalism_for = list()
 	tastes = list("meat" = 1)
+	gender = PLURAL
 
 /obj/item/reagent_containers/food/snacks/meat/on_consume(mob/living/eater)
 	var/reset_eat_effect = FALSE
@@ -154,11 +156,12 @@
 
 
 /obj/item/reagent_containers/food/snacks/meat/organ
-	name = "appendix"
-	icon_state = "appendix"
+	name = "organ"
+	icon_state = "guts"
 	icon = 'icons/obj/surgery.dmi'
 	list_reagents = list(/datum/reagent/organpoison = 0.5)
 	grind_results = list(/datum/reagent/organpoison = 1)
+	gender = NEUTER
 	nutrition = MINCE_NUTRITION
 	foodtype = RAW | MEAT | GROSS
 	rotprocess = SHELFLIFE_TINY
@@ -177,18 +180,21 @@
 
 /obj/item/reagent_containers/food/snacks/meat/organ/heart
 	name = "heart"
+	icon_state = "heart"
 	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
 	nutrition = RAWMEAT_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 	name = "lungs"
+	icon_state = "lungs"
 	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
 	nutrition = RAWMEAT_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/meat/organ/liver
 	name = "liver"
+	icon_state = "liver"
 	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
 	nutrition = RAWMEAT_NUTRITION
