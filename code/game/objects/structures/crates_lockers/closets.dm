@@ -13,6 +13,8 @@
 
 	var/icon_door = null
 	var/icon_door_override = FALSE //override to have open overlay use icon different to its base's
+	/// true whenever someone with the strong pull component is dragging this, preventing opening
+	var/strong_grab = FALSE
 	var/secure = FALSE //secure locker or not, also used if overriding a non-secure locker with a secure door overlay to add fancy lights
 	var/opened = FALSE
 	var/welded = FALSE
@@ -96,10 +98,17 @@
 	if(wall_mounted)
 		return TRUE
 
-/obj/structure/closet/proc/can_open(mob/living/user)
+/obj/structure/closet/proc/can_open(mob/living/user, force = FALSE)
+	if(force)
+		return TRUE
 	if(welded || locked())
 		if(user)
-			to_chat(user, "<span class='warning'>Locked.</span>" )
+			to_chat(user, span_warning("Locked."))
+		return FALSE
+	//MONKESTATION EDIT START - Allow a strong grabber to open their own pulled closet
+	if(strong_grab && pulledby != user)
+		if(user)
+			to_chat(user, span_danger("[pulledby] has an incredibly strong grip on [src], preventing it from opening."))
 		return FALSE
 	return TRUE
 
