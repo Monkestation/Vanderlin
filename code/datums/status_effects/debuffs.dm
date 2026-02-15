@@ -487,3 +487,41 @@
 		to_chat(owner, fake_msg)
 
 	msg_stage++
+
+/// Prevent clicks for the duration of the ability
+/datum/status_effect/debuff/clickcd
+	id = "clickcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/clickcd
+	duration = 3 SECONDS
+
+/datum/status_effect/debuff/clickcd/on_creation(mob/living/new_owner, duration_override, ...)
+	new_owner.changeNext_move(duration)
+	return ..()
+
+/atom/movable/screen/alert/status_effect/debuff/clickcd
+	name = "Action Delayed"
+	desc = "I cannot take another action."
+	icon_state = "clickcd"
+
+/datum/status_effect/debuff/clashcd
+	id = "clashcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/clashcd
+	duration = 30 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/clashcd
+	name = "Riposte / Guard Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "guardcd"
+
+/datum/status_effect/debuff/exposed
+	id = "exposed"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/exposed
+	duration = 10 SECONDS
+	// mob_effect_icon = 'icons/mob/mob_effects.dmi'
+	// mob_effect_icon_state = "eff_exposed"
+	// mob_effect_layer = MOB_EFFECT_LAYER_EXPOSED
+
+/atom/movable/screen/alert/status_effect/debuff/exposed
+	name = "Exposed"
+	desc = "My defenses are exposed. I can be hit through my parry and dodge!"
+	icon_state = "exposed"

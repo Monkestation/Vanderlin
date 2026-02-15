@@ -1348,6 +1348,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	wdefense -= 1
 	user.update_a_intents()
 
+/obj/item/proc/is_wielded()
+	var/datum/component/two_handed/two_handed = GetComponent(/datum/component/two_handed)
+	return two_handed?.wielded
+
 /obj/item/proc/toggle_altgrip(mob/user, override_state)
 	if(!alt_intents)
 		return

@@ -2393,6 +2393,7 @@
 #include "code\modules\clothing\wrists\_wrist.dm"
 #include "code\modules\clothing\wrists\bracer.dm"
 #include "code\modules\clothing\wrists\misc.dm"
+#include "code\modules\combat\clash.dm"
 #include "code\modules\cooking\NeuFood.dm"
 #include "code\modules\cooking\Teas_and_Brews.dm"
 #include "code\modules\cooking\cooked\NeuFood_pies.dm"

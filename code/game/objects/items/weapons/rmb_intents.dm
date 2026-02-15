@@ -113,6 +113,31 @@
 	icon_state = "rmbdef"
 	def_bonus = 10
 
+/datum/rmb_intent/riposte/special_attack(mob/living/user, atom/target)
+	if(user.has_status_effect(/datum/status_effect/buff/clash))
+		return
+
+	if(user.has_status_effect(/datum/status_effect/debuff/clashcd))
+		return
+
+	// if(user.has_status_effect(/datum/status_effect/buff/clash/limbguard))
+	// 	return
+
+	if(!user.get_active_held_item()) //Nothing in our hand to Guard with.
+		return
+
+	if(user.incapacitated()) //Not usable while grabs are in play.
+		return
+
+	if(user.IsImmobilized() || user.IsOffBalanced()) //Not usable while we're offbalanced or immobilized
+		return
+
+	if(user.m_intent == MOVE_INTENT_RUN)
+		to_chat(user, span_warning("I can't focus on this while running."))
+		return
+
+	user.apply_status_effect(/datum/status_effect/buff/clash)
+
 /datum/rmb_intent/guard
 	name = "guarde"
 	desc = "(RMB WHILE DEFENSE IS ACTIVE) Raise your weapon, ready to attack any creature who moves onto the space you are guarding."
