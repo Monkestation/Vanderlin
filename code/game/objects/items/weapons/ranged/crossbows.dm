@@ -129,8 +129,8 @@
 	if(master && chargetime)
 		var/newtime = chargetime
 		//skill block
-		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3.5)
+		newtime = newtime + 28
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/firearms, TRUE) * 7.5)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
