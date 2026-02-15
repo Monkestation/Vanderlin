@@ -134,7 +134,7 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/hellspeak)
-	C.AddComponent(/datum/component/malaguero, 2, 1, 60 SECONDS)
+	C.AddComponent(/datum/component/malaguero, 2, 1, 30 SECONDS)
 
 /datum/species/tieberian/after_creation(mob/living/carbon/C)
 	. = ..()

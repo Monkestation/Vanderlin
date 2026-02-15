@@ -752,7 +752,7 @@
 	desc = span_red("I'm covered in feces! Disgusting!")
 
 /datum/stress_event/malaguero
-	timer = 4 MINUTES
+	timer = 3 MINUTES
 	stress_change = 2
 	max_stacks = 3
 	stress_change_per_extra_stack = 1

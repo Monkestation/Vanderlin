@@ -3,7 +3,7 @@
 	var/stress_range = 1
 
 	COOLDOWN_DECLARE(pulse)
-	var/pulse_cooldown = 60 SECONDS
+	var/pulse_cooldown = 30 SECONDS
 
 
 /datum/component/malaguero/Initialize(range, stress_scaling, cooldown)
