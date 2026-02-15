@@ -255,7 +255,7 @@
 	owner.apply_status_effect(/datum/status_effect/debuff/clashcd)
 
 /datum/status_effect/buff/clash/tick()
-	if(!owner.get_active_held_item() || !(owner.mobility_flags & MOBILITY_STAND))
+	if(!owner.get_active_held_item() || !(owner.mobility_flags & MOBILITY_STAND) || owner.is_blind())
 		owner.bad_guard()
 
 /datum/status_effect/buff/clash/proc/attacked_item(mob/living/assailant, mob/living/victim, obj/item/weapon)
@@ -265,12 +265,12 @@
 		return
 
 	if(!weapon)
-		qdel(src)
+		cancel_clash()
 		return
 
 	var/weapon_range = victim.used_intent?.reach
 	if(get_dist(victim, assailant) > weapon_range)
-		qdel(src) // If we are getting stabbed by a spear, we can't clash unless we can match
+		cancel_clash() // If we are getting stabbed by a spear, we can't clash unless we can match
 		return
 
 	// Attacker has Guard / Clash active, and is hitting us who doesn't. Cheesing a 'free' hit with a defensive buff is a no-no. You get punished.
