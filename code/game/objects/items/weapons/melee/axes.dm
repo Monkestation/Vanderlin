@@ -222,6 +222,7 @@
 	associated_skill = /datum/skill/combat/axesmaces
 	melting_material = /datum/material/steel
 	melt_amount = 175
+	sharpness = IS_SHARP
 	resistance_flags = FIRE_PROOF
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	swingsound = BLADEWOOSH_MED
