@@ -212,7 +212,7 @@
 /datum/stress_event/tieb
 	timer = 30 SECONDS
 	stress_change = 1
-	desc = "<span class='red'>Helldweller... better stay away.</span>"
+	desc = "<span class='red'>Helldweller... harbingers of misfortune.</span>"
 
 /datum/stress_event/horc
 	timer = 30 SECONDS
@@ -750,3 +750,27 @@
 	timer = 3 MINUTES
 	stress_change = 2
 	desc = span_red("I'm covered in feces! Disgusting!")
+
+/datum/stress_event/malaguero
+	timer = 3 MINUTES
+	stress_change = 2
+	max_stacks = 3
+	stress_change_per_extra_stack = 1
+	quality_modifier = -2
+
+/datum/stress_event/malaguero/on_apply(mob/living/user)
+	. = ..()
+	if(istiefling(user))
+		quality_modifier = 0
+
+/datum/stress_event/malaguero/get_desc(mob/living/user)
+	if(istiefling(user))
+		span_red("I feel the malaguero of another.")
+
+/datum/stress_event/malaguero/can_show(mob/living/user)
+	return istiefling(user)
+
+/datum/stress_event/malaguero/get_stress(mob/living/user)
+	. = ..()
+	if(istiefling(user))
+		. /= 2

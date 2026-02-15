@@ -127,7 +127,7 @@
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	if(hungry_hungry_kobold)
-		var/datum/component/abberant_eater = GetComponent(/datum/component/abberant_eater)
+		var/datum/component/abberant_eater = C.GetComponent(/datum/component/abberant_eater)
 		if(abberant_eater)
 			abberant_eater.RemoveComponent()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
