@@ -184,13 +184,6 @@
 /area/flick_overlay_view(mutable_appearance/display, duration)
 	return
 
-/proc/flick_overlay_view(image/I, atom/target, duration) //wrapper for the above, flicks to everyone who can see the target atom
-	var/list/viewing = list()
-	for(var/mob/M as anything in viewers(target))
-		if(M.client)
-			viewing += M.client
-	flick_overlay(I, viewing, duration)
-
 /proc/get_active_player_count(alive_check = 0, afk_check = 0, human_check = 0)
 	// Get active players who are playing in the round
 	var/active_players = 0

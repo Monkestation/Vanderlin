@@ -13,11 +13,11 @@
  * * sound - If set, play this when we show the icon.
  * * can_see_cb - Callback to test if someone can see and hear even if not public.
  */
-/mob/living/proc/show_overhead_indicator(icon, icon_state, duration, layer = ABOVE_ALL_MOB_LAYER, y_offset = 12, public = FALSE, sound = null, datum/callback/can_see_cb = null)
+/mob/living/proc/show_overhead_indicator(icon, icon_state, duration, layer = ABOVE_ALL_MOB_LAYER, plane = FLOAT_PLANE, y_offset = 12, public = FALSE, sound = null, datum/callback/can_see_cb = null)
 	if(!icon_exists_or_scream(icon, icon_state))
 		return
 
-	var/mutable_appearance/appearance = mutable_appearance(icon, icon_state, layer, appearance_flags = RESET_COLOR)
+	var/mutable_appearance/appearance = mutable_appearance(icon, icon_state, layer, plane, appearance_flags = RESET_COLOR)
 	appearance.pixel_y = y_offset
 
 	if(public && sound)

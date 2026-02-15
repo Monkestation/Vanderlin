@@ -1423,7 +1423,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(!istype(loc, /turf))
 			return
 		source = loc
-	var/image/pickup_animation = image(icon = src, layer = layer + 0.1)
+	var/mutable_appearance/pickup_animation = mutable_appearance(icon, icon_state, layer = layer + 0.1)
 	pickup_animation.plane = GAME_PLANE
 	pickup_animation.transform.Scale(0.75)
 	pickup_animation.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA

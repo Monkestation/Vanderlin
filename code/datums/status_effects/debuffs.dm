@@ -517,9 +517,7 @@
 	id = "exposed"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/exposed
 	duration = 10 SECONDS
-	// mob_effect_icon = 'icons/mob/mob_effects.dmi'
-	// mob_effect_icon_state = "eff_exposed"
-	// mob_effect_layer = MOB_EFFECT_LAYER_EXPOSED
+	mob_overlay_icon_state = "eff_exposed"
 
 /atom/movable/screen/alert/status_effect/debuff/exposed
 	name = "Exposed"
