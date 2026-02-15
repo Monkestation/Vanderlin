@@ -115,6 +115,14 @@
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
 	allowed_patrons = ALL_GRONNIC_PATRONS //Subvariant of the 'ALL_INHUMEN_PATRONS' tag, with Abyssor and Dendor as situational additions. Do not add any more to this, no matter what.
+	jobstats = list(
+		STATKEY_WIL = 3, //People see big numbers and start shitting their pants, but their weighted stats are 7 and it's limited to one, singular slot. This is fine.
+		STATKEY_STR = 3, //TO WIELD THE MAUL. THEY CAN'T USE ANY OTHER WEAPON TYPE BUT MACES ANYWAY.
+		STATKEY_INT = 2,
+		STATKEY_CON = 3,
+		STATKEY_PER = -1, //CAN'T SEE SHIT OUTTA THIS THING!!
+		STATKEY_SPD = -3 //SLOW AND UNWIELDY
+	)
 	skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
@@ -133,11 +141,6 @@
 
 /datum/outfit/job/mercenary/gronnheavy/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.change_stat(STATKEY_STR, 3)
-	H.change_stat(STATKEY_INT, 2)
-	H.change_stat(STATKEY_CON, 3)
-	H.change_stat(STATKEY_PER, -1) //CAN'T SEE SHIT OUTTA THIS THING!!
-	H.change_stat(STATKEY_SPD, -3) //SLOW AND UNWIELDY
 	H.dna.species.soundpack_m = new /datum/voicepack/male/evil() //It's fucking cool okay
 	shoes = /obj/item/clothing/shoes/boots/armor/iron/gronn
 	head = /obj/item/clothing/head/helmet/heavy/bucket/gronn
