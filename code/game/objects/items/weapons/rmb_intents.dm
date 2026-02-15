@@ -80,9 +80,93 @@
 
 /datum/rmb_intent/feint
 	name = "feint"
-	desc = "(RMB WHILE DEFENSE IS ACTIVE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard. Useless against someone who is dodging."
+	desc = "(RMB WHILE IN COMBAT MODE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard.."
 	icon_state = "rmbfeint"
 	def_bonus = 10
+	var/feintdur = 7.5 SECONDS
+
+/datum/rmb_intent/feint/special_attack(mob/living/user, atom/target)
+	if(!isliving(target))
+		return
+
+	if(!user)
+		return
+
+	if(user.incapacitated())
+		return
+
+	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
+		return
+
+	var/mob/living/defender = target
+
+	user.visible_message(
+		span_danger("[user] feints an attack at [defender]!"),
+		span_userdanger("I feint an attack at [defender]!"),
+	)
+
+	var/perc = 50
+	var/ourskill = 0
+	var/theirskill = 0
+	var/skill_factor = 0
+
+	var/obj/item/attacker_item = user.get_active_held_item()
+	if(attacker_item?.associated_skill)
+		ourskill = user.get_skill_level(attacker_item.associated_skill)
+
+	var/obj/item/defender_item = defender.get_active_held_item()
+	if(defender_item?.associated_skill)
+		theirskill = defender.get_skill_level(defender_item.associated_skill)
+
+	perc += (ourskill - theirskill) * 12 //skill is of the essence
+	perc += (user.STAINT - defender.STAINT) * 8 //but it's also mostly a mindgame
+	perc += (user.STASPD - defender.STASPD) * 3 //yet a speedy feint is hard to counter
+	perc += (user.STAPER - defender.STAPER) * 3 //a good eye helps
+
+	skill_factor = (ourskill - theirskill) / 2
+
+	var/special_message
+	var/cooldown_override
+
+	if(defender.has_status_effect(/datum/status_effect/debuff/exposed))
+		perc = 0
+
+	if(defender.has_status_effect(/datum/status_effect/debuff/feinted))
+		perc = 0
+		special_message = span_warning("Too soon! They were expecting it!")
+
+	if(defender.is_blind() || !defender.can_see_cone(user))
+		perc = 0
+		cooldown_override = 5 SECONDS
+		special_message = span_warning("They need to see me for me to feint them!")
+
+	perc = CLAMP(perc, 0, 90)
+
+	if(!prob(perc))
+		playsound(user, 'sound/combat/feint.ogg', 100, TRUE)
+		if(user.client?.prefs.showrolls)
+			to_chat(user, span_warning("[defender.p_they(TRUE)] did not fall for my feint... [perc]%"))
+		user.apply_status_effect(/datum/status_effect/debuff/feintcd)
+		if(special_message)
+			to_chat(user, special_message)
+		return
+
+	if(defender.has_status_effect(/datum/status_effect/buff/clash))
+		defender.remove_status_effect(/datum/status_effect/buff/clash)
+		defender.balloon_alert(user, "guard interrupted!")
+
+	defender.apply_status_effect(/datum/status_effect/debuff/exposed, feintdur)
+	defender.apply_status_effect(/datum/status_effect/debuff/clickcd, max(1.5 SECONDS + skill_factor, 2.5 SECONDS))
+	defender.apply_status_effect(/datum/status_effect/debuff/feinted, cooldown_override)
+	defender.Immobilize(0.5 SECONDS)
+	defender.adjust_stamina(defender.stamina * 0.1)
+	defender.Slowdown(2)
+
+	user.apply_status_effect(/datum/status_effect/debuff/feintcd, cooldown_override)
+
+	to_chat(user, span_notice("[defender.p_they(TRUE)] fell for my feint attack!"))
+	to_chat(defender, span_danger("I fall for [user.p_their()] feint attack!"))
+	playsound(user, 'sound/combat/riposte.ogg', 100, TRUE)
 
 /datum/status_effect/debuff/feinted
 	id = "nofeint"
