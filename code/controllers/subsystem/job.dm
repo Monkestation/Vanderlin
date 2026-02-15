@@ -699,6 +699,21 @@ SUBSYSTEM_DEF(job)
 	var/mob/living/carbon/human/equipping_human = equipping
 	for(var/datum/quirk/quirk in equipping_human.quirks)
 		quirk.after_job_spawn(job)
+	// Ready up bonus
+	if(!equipping.islatejoin)
+		equipping.apply_status_effect(/datum/status_effect/buff/foodbuff)
+		equipping.hydration = 800 // Set higher hydration
+		equipping.nutrition = 800
+		var/triumphs = 1
+		if(is_lord_job(job)) //monarch bonus
+			to_chat(player_client, span_notice("Heavy is the weight of the crown. But you have the resolve to wear it high. In this, you TRIUMPH."))
+			triumphs++
+			if(length(GLOB.clients) < LOWPOP_THRESHOLD) // every 5 players below lowpop racks the monarch another triumph
+				triumphs += ceil((LOWPOP_THRESHOLD - length(GLOB.clients)) / 5)
+		else
+			to_chat(player_client, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
+		player_client.adjust_triumphs(triumphs)
+
 
 /datum/job/proc/greet(mob/player)
 	//! TODO: Refactor this out... Look at how TG handles job greetings or implement our own method
