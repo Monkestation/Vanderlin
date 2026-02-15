@@ -2,18 +2,21 @@
 	id = "clash"
 	duration = 6 SECONDS
 	alert_type = /atom/movable/screen/alert/status_effect/buff/clash
-	/// Refence to the overlay to remove it
+	/// Reference to the overlay to remove it
 	var/mutable_appearance/clash_overlay
 
 	/// Signals that cancel the clash
 	var/static/list/interrupt_signals = list(
-		COMSIG_ATOM_BULLET_ACT,
-		COMSIG_ATOM_HITBY,
+		COMSIG_ATOM_BULLET_ACT, // Any projectile
+		COMSIG_ATOM_HITBY, // Thrown items
+		COMSIG_MOB_SWAPPING_HANDS, // Swapping and twohanding
 	)
 
 	/// Signals that punish the owner and cancel the clash
 	var/static/list/punishmment_signals = list(
-		COMSIG_MOB_SPELL_ACTIVATED,
+		COMSIG_MOB_SPELL_ACTIVATED, // Trying to cast
+		COMSIG_PRE_SPECIAL_MIDDLE, // Before: kick/bite/jump/etc
+		COMSIG_MOB_FIRED_GUN, // Shooting a gun (We can clash with them)
 	)
 
 /datum/status_effect/buff/clash/on_creation(mob/living/new_owner, duration_override, ...)
@@ -38,6 +41,7 @@
 /datum/status_effect/buff/clash/on_remove()
 	. = ..()
 	if(!owner)
+		clash_overlay = null
 		return
 
 	UnregisterSignal(owner, COMSIG_MOB_ITEM_ATTACK)
