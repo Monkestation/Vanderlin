@@ -234,7 +234,7 @@
 		A.MiddleClick(src, modifiers)
 		return
 
-	SEND_SIGNAL(src, COMSIG_PRE_SPECIAL_MIDDLE, A)
+	SEND_SIGNAL(src, COMSIG_MOB_PRE_SPECIAL_MIDDLE, A)
 
 	switch(mmb_intent.type)
 		if(INTENT_KICK)

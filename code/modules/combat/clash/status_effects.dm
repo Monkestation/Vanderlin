@@ -21,7 +21,7 @@
 	/// Signals that punish the owner and cancel the clash
 	var/static/list/punishmment_signals = list(
 		COMSIG_MOB_SPELL_ACTIVATED, // Trying to cast
-		COMSIG_PRE_SPECIAL_MIDDLE, // Before: kick/bite/jump/etc
+		COMSIG_MOB_PRE_SPECIAL_MIDDLE, // Before: kick/bite/jump/etc
 		COMSIG_MOB_FIRED_GUN, // Shooting a gun (We can clash with them)
 	)
 
