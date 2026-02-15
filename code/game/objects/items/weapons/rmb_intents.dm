@@ -77,7 +77,7 @@
 	skill_factor = (ourskill - theirskill) / 2
 
 	var/special_message
-	var/cooldown_override
+	var/cooldown_override = 30 SECONDS + feintdur
 
 	if(defender.has_status_effect(/datum/status_effect/debuff/exposed))
 		perc = 0
@@ -118,29 +118,6 @@
 	to_chat(user, span_notice("[defender.p_they(TRUE)] fell for my feint attack!"))
 	to_chat(defender, span_danger("I fall for [user.p_their()] feint attack!"))
 	playsound(user, 'sound/combat/riposte.ogg', 100, TRUE)
-
-/datum/status_effect/debuff/feinted
-	id = "nofeint"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/feinted
-	duration = 50
-
-/atom/movable/screen/alert/status_effect/debuff/feinted
-	name = "Feinted"
-	desc = span_boldwarning("I have been tricked, and cannot defend myself!") + "\n"
-	icon_state = "muscles"
-
-/datum/status_effect/debuff/feintcd
-	id = "feintcd"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/feintcd
-	duration = 100
-
-/atom/movable/screen/alert/status_effect/debuff/feintcd
-	name = "Feint Cooldown"
-	desc = span_warning("I have feinted recently, my opponents will be wary.") + "\n"
-
-/datum/status_effect/debuff/riposted
-	id = "riposted"
-	duration = 30
 
 /datum/rmb_intent/riposte
 	name = "defend"
