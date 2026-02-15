@@ -566,7 +566,7 @@ All foods are distributed among various categories. Use common sense.
 
 // initialize_cooked_food() is called when microwaving the food
 /obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(list/obj/item/reagent_containers/food/snacks/outputs, cooking_efficiency = 1)
-	if(istype(outputs, obj/item/reagent_containers/food/snacks))
+	if(istype(outputs, /obj/item/reagent_containers/food/snacks))
 		outputs = list(outputs)
 	for(var/obj/item/reagent_containers/food/snacks/S in outputs)
 		if(reagents)
