@@ -375,7 +375,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.add_nausea(10 * (1 - M.STACON / 20))
 		M.adjustToxLoss(0.5)
-	if(ishuman(M) && !ishalforc(M) && !isgoblin(M))
+	if(ishuman(M) && !ishalforc(M))
 		var/mob/living/carbon/human/graggar_lover = M
 		var/obj/item/organ/heart/H = graggar_lover.getorganslot(ORGAN_SLOT_HEART)
 		if(istype(H))
@@ -390,21 +390,31 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 						to_chat(graggar_lover, span_bloody("More... More..."))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
 					bp?.lingering_pain += 10
-					bp?.bodypart_attacked_by(BCLASS_BLUNT, 10, null, BODY_ZONE_CHEST, crit_message = FALSE, reduce_crit = 10)
+					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12, null, BODY_ZONE_CHEST, crit_message = FALSE, reduce_crit = 10)
+					M.do_jitter_animation(100)
 				if(60)
-					graggar_lover.Paralyze(10 SECONDS)
+					M.do_jitter_animation(150)
+					M.adjust_jitter(20 SECONDS)
+					graggar_lover.Paralyze(10 SECONDS, TRUE)
+					graggar_lover.unequip_everything()
 					var/datum/dna/dna_cache = new()
 					graggar_lover.dna.copy_dna(dna_cache)
-					graggar_lover.set_species(iskobold(M) ? /datum/species/goblin : /datum/species/halforc)
-					dna_cache.transfer_identity(graggar_lover, FALSE)
+					var/species = /datum/species/halforc
+					//if(ishalforc(M)) // when this works it can be used
+					//	species = /datum/species/orc
+					//else if(iskobold(M))
+					//	species = /datum/species/goblin
+					graggar_lover.set_species(species)
+					if(ishalforc(graggar_lover))
+						dna_cache.transfer_identity(graggar_lover, FALSE)
 					graggar_lover.real_name = dna_cache.real_name
-					graggar_lover.unequip_everything()
-					graggar_lover.bloody_hands += 2
+					graggar_lover.bloody_hands++
 					graggar_lover.update_inv_gloves()
 					playsound(get_turf(graggar_lover), pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
 					graggar_lover.spawn_gibs(TRUE)
 					graggar_lover.emote("agony")
 					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts!"), span_userdanger("MY SKIN BURSTS!!"))
+					H.graggometer = 0
 	return ..()
 
 /datum/reagent/organpoison/human
