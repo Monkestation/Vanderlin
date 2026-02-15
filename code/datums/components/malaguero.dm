@@ -26,18 +26,18 @@
 		return
 	var/harbinger_stress = harbinger.get_stress_amount()
 	var/stress = 0
-	if(harbinger_stress < STRESS_NEUTRAL)
-		if(harbinger_stress <= STRESS_GOOD)
-			stress--
-		if(harbinger_stress <= STRESS_VGOOD)
-			stress--
-	else if(harbinger_stress > STRESS_NEUTRAL)
-		if(harbinger_stress >= STRESS_BAD)
-			stress++
-		if(harbinger_stress >= STRESS_VBAD)
-			stress++
-		if(harbinger_stress >= STRESS_INSANE)
-			stress++
+	switch(harbinger_stress)
+		if(STRESS_VGOOD)
+			stress = -2
+		if(STRESS_VGOOD+1 to STRESS_BAD-1)
+			stress = -1
+		if(STRESS_BAD to STRESS_VBAD-1)
+			stress = 1
+		if(STRESS_VBAD to STRESS_INSANE-1)
+			stress = 2
+		if(STRESS_INSANE to INFINITY)
+			stress = 3
+
 	var/range = max(0, base_range + (stress * stress_range))
 	for(var/mob/living/carbon/afflicted in view(get_turf(harbinger), range))
 		if(afflicted == harbinger)

@@ -752,7 +752,7 @@
 	desc = span_red("I'm covered in feces! Disgusting!")
 
 /datum/stress_event/malaguero
-	timer = 3 MINUTES
+	timer = 1 MINUTES
 	stress_change = 2
 	max_stacks = 3
 	stress_change_per_extra_stack = 1
@@ -761,6 +761,7 @@
 /datum/stress_event/malaguero/on_apply(mob/living/user)
 	. = ..()
 	if(istiefling(user))
+		max_stacks = 1
 		quality_modifier = 0
 
 /datum/stress_event/malaguero/get_desc(mob/living/user)
@@ -771,6 +772,6 @@
 	return istiefling(user)
 
 /datum/stress_event/malaguero/get_stress(mob/living/user)
-	. = ..()
 	if(istiefling(user))
-		. = 1
+		return 1
+	return ..()
