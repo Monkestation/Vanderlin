@@ -278,12 +278,25 @@
 		assailant.bad_guard(span_suicide("I tried to strike while focused on defense whole! It drains me!"), cheesy = TRUE)
 		return
 
+	if(victim.dir == REVERSE_DIR(get_dir(victim, assailant)))
+		cancel_clash() // Attacked from behind
+		return
+
 	victim.process_clash(assailant)
 
 	return COMPONENT_NO_ATTACK
 
 /datum/status_effect/buff/clash/proc/attacked_hand(mob/living/assailant, mob/living/victim)
 	SIGNAL_HANDLER
+
+	// Attacker has Guard / Clash active, and is hitting us who doesn't. Cheesing a 'free' hit with a defensive buff is a no-no. You get punished.
+	if(assailant.has_status_effect(/datum/status_effect/buff/clash) && !victim.has_status_effect(/datum/status_effect/buff/clash))
+		assailant.bad_guard(span_suicide("I tried to strike while focused on defense whole! It drains me!"), cheesy = TRUE)
+		return
+
+	if(victim.dir == REVERSE_DIR(get_dir(victim, assailant)))
+		cancel_clash() // Attacked from behind
+		return
 
 	victim.process_clash(assailant)
 
