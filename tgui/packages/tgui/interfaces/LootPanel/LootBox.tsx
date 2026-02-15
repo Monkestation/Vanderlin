@@ -38,14 +38,14 @@ export function LootBox(props: Props) {
       p={0}
       fluid
       color="transparent"
-      onClick={(event) => {
+      onClick={(event) =>
         act('grab', {
           alt: event.altKey,
           ctrl: event.ctrlKey,
           ref: item.ref,
           shift: event.shiftKey,
-        });
-      }}
+        })
+      }
       onAuxClick={(event) => {
         event.preventDefault();
         act('grab', {
