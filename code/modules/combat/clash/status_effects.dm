@@ -10,6 +10,12 @@
 		COMSIG_ATOM_BULLET_ACT, // Any projectile
 		COMSIG_ATOM_HITBY, // Thrown items
 		COMSIG_MOB_SWAPPING_HANDS, // Swapping and twohanding
+		COMSIG_MOB_KICKED, // getting kicked
+		SIGNAL_ADDTRAIT(TRAIT_KNOCKEDOUT),
+		SIGNAL_ADDTRAIT(TRAIT_INCAPACITATED),
+		SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED),
+		SIGNAL_ADDTRAIT(TRAIT_FLOORED),
+		SIGNAL_ADDTRAIT(TRAIT_PACIFISM),
 	)
 
 	/// Signals that punish the owner and cancel the clash
@@ -56,7 +62,10 @@
 	owner.apply_status_effect(/datum/status_effect/debuff/clashcd)
 
 /datum/status_effect/buff/clash/tick()
-	if(!owner.get_active_held_item() || !(owner.mobility_flags & MOBILITY_STAND) || owner.is_blind())
+	if(QDELETED(src))
+		return
+
+	if(!owner.get_active_held_item() || owner.is_blind())
 		owner.bad_guard()
 
 /datum/status_effect/buff/clash/proc/attacked_item(mob/living/assailant, mob/living/victim, obj/item/weapon)
