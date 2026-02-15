@@ -18,7 +18,7 @@
 		/datum/skill/craft/cooking = 1,
 	)
 	traits = list(TRAIT_MEDIUMARMOR)
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 2
 

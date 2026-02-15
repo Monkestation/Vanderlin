@@ -78,13 +78,15 @@
 		/datum/language/dwarvish,
 		/datum/language/deepspeak,
 		/datum/language/zalad,
-		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()
 	if(!customization_value || !ispath(customization_value, /datum/language))
+		return
+	if(!(customization_value in customization_options))
 		return
 
 	if(ishuman(owner))

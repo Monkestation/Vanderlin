@@ -290,34 +290,36 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 ///////////
 
 /datum/species/proc/get_accent(language, variant = 0)
-	if(language == "Old Psydonic")
-		return strings("accents/grenz_replacement.json", "grenz")
-	if(language == "Zalad")
-		return strings("accents/zalad_replacement.json", "arabic")
-	if(language == "Imperial")
-		return
-	if(language == "Elfish" && variant == 1)
-		return strings("accents/russian_replacement.json", "russian")
-	if(language == "Elfish" && variant == 2)
-		return strings("accents/french_replacement.json", "french")
-	if(language == "Dwarfish")
-		return strings("accents/dwarf_replacement.json", "dwarf")
-	if(language == "Infernal")
-		return strings("accents/spanish_replacement.json", "spanish")
-	if(language == "Celestial")
-		return
-	if(language == "Orcish")
-		return strings("accents/halforc_replacement.json", "halforc")
-	if(language == "Halfling")
-		return strings("accents/halfling_replacement.json", "halfling")
-	if(language == "Gutter")
-		return strings("accents/kobold_replacement.json", "kobold")
-	if(language == "Deepspeak")
-		return strings("accents/triton_replacement.json", "triton")
-	if(language == "Pirate")
-		return strings("accents/pirate_replacement.json", "pirate")
-	if(language == "Zizo Chant")
-		return
+	switch(language)
+		if("Old Psydonic", "Psydonic")
+			return strings("accents/grenz_replacement.json", "grenz")
+		if("Zalad")
+			return strings("accents/zalad_replacement.json", "arabic")
+		if("Imperial")
+			return
+		if("Elfish")
+			if(variant == 1)
+				return strings("accents/russian_replacement.json", "russian")
+			else
+				return strings("accents/french_replacement.json", "french")
+		if("Dwarfish")
+			return strings("accents/dwarf_replacement.json", "dwarf")
+		if("Infernal")
+			return strings("accents/spanish_replacement.json", "spanish")
+		if("Celestial")
+			return
+		if("Orcish")
+			return strings("accents/halforc_replacement.json", "halforc")
+		if("Halfling")
+			return strings("accents/halfling_replacement.json", "halfling")
+		if("Gutter")
+			return strings("accents/kobold_replacement.json", "kobold")
+		if("Deepspeak")
+			return strings("accents/triton_replacement.json", "triton")
+		if("Pirate")
+			return strings("accents/pirate_replacement.json", "pirate")
+		if("Zizo Chant")
+			return
 	return
 
 /datum/species/proc/handle_speech(datum/source, list/speech_args)
@@ -407,12 +409,18 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				/datum/language/zalad = "Zalad",
 				/datum/language/deepspeak = "Deepspeak",
 				/datum/language/oldpsydonic = "Old Psydonic",
+				/datum/language/newpsydonic = "Psydonic",
 				/datum/language/undead = "Zizo Chant"
 			)
 
 			if (language in language_map)
 				language_check = language_map[language]
-			if(nativelang != language_check || special_accent)
+			var/unaccented = FALSE
+			if(((language_check == "Psydonic") && (nativelang == "Old Psydonic")) || ((language_check == "Old Psydonic") && (nativelang == "Psydonic")))
+				unaccented = TRUE
+			else if(nativelang == language_check)
+				unaccented = TRUE
+			if(!unaccented || special_accent)
 				if(species_accent)
 					for(var/key in species_accent)
 						var/value = species_accent[key]

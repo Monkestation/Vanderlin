@@ -26,7 +26,7 @@
 
 /datum/job/advclass/pilgrim/wanderer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/datum/language/language = pickweight(list(/datum/language/orcish = 1, /datum/language/celestial = 1, /datum/language/hellspeak = 1, /datum/language/dwarvish = 1, /datum/language/elvish = 1, /datum/language/oldpsydonic = 1, /datum/language/zalad = 1))
+	var/datum/language/language = pickweight(list(/datum/language/orcish = 1, /datum/language/celestial = 1, /datum/language/hellspeak = 1, /datum/language/dwarvish = 1, /datum/language/elvish = 1, /datum/language/newpsydonic = 1, /datum/language/zalad = 1))
 	spawned.grant_language(language)
 	to_chat(spawned, span_notice("I learned the tongue of [initial(language.name)] through my travels."))
 

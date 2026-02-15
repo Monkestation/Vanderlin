@@ -78,6 +78,14 @@
 	craftdiff = 3
 	category = "Cloak"
 
+/datum/repeatable_crafting_recipe/sewing/weaving/pantheoncloak
+	name = "pantheon cloak"
+	output = /obj/item/clothing/cloak/pantheon
+	requirements = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/silk = 1)
+	craftdiff = 3
+	category = "Cloak"
+
 /datum/repeatable_crafting_recipe/sewing/weaving/feld_hood
 	name = "hood (feldsher)"
 	output = /obj/item/clothing/head/roguehood/feld

@@ -45,6 +45,7 @@ GLOBAL_PROTECT(garrison_positions)
 
 GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
+	/datum/job/gmtemplar::title,
 	/datum/job/monk::title,
 	/datum/job/undertaker::title,
 	/datum/job/templar::title,
