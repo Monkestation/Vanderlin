@@ -15,7 +15,7 @@
 
 /datum/container_craft/oven/after_craft(atom/created_output, obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	for(var/obj/item/reagent_containers/food/snacks/item in removing_items)
-		item.initialize_cooked_food(created_output, 1)
+		item.initialize_cooked_food(list(created_output), 1)
 
 /datum/container_craft/oven/try_craft(obj/item/crafter, list/pathed_items, mob/initiator, datum/callback/on_craft_start, datum/callback/on_craft_failed)
 	if(!istype(crafter.loc, /obj/machinery/light/fueled/oven) && !istype(crafter, /obj/machinery/light/fueled/oven))

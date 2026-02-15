@@ -217,7 +217,7 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/heating_act(atom/A)
 	var/obj/item/result = new /obj/item/reagent_containers/food/snacks/badrecipe(A)
-	initialize_cooked_food(result, 1)
+	initialize_cooked_food(list(result), 1)
 	return result
 
 /obj/item/proc/burning(input as num)
@@ -566,6 +566,8 @@ All foods are distributed among various categories. Use common sense.
 
 // initialize_cooked_food() is called when microwaving the food
 /obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(list/obj/item/reagent_containers/food/snacks/outputs, cooking_efficiency = 1)
+	if(istype(outputs, obj/item/reagent_containers/food/snacks))
+		outputs = list(outputs)
 	for(var/obj/item/reagent_containers/food/snacks/S in outputs)
 		if(reagents)
 			for(var/datum/reagent/R in reagents.reagent_list)
