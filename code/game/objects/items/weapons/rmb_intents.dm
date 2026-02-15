@@ -5,56 +5,7 @@
 	var/def_bonus = 0
 
 /datum/rmb_intent/proc/special_attack(mob/living/user, atom/target)
-	if(!isliving(target))
-		return
-	if(!user)
-		return
-	if(user.incapacitated(IGNORE_GRAB))
-		return
-	var/mob/living/L = target
-	user.changeNext_move(CLICK_CD_FAST)
-	playsound(user, 'sound/combat/feint.ogg', 100, TRUE)
-	user.visible_message(span_danger("[user] feints an attack at [target]!"))
-	var/perc = 50
-	if(user.mind)
-		var/obj/item/I = user.get_active_held_item()
-		var/ourskill = 0
-		var/theirskill = 0
-		if(I)
-			if(I.associated_skill)
-				ourskill = user.get_skill_level(I.associated_skill, TRUE)
-			if(L.mind)
-				I = L.get_active_held_item()
-				if(I?.associated_skill)
-					theirskill = L.get_skill_level(I.associated_skill, TRUE)
-		perc += (ourskill - theirskill) * 15 	//skill is of the essence
-		perc += (user.STAINT - L.STAINT) * 10	//but it's also mostly a mindgame
-		perc += (user.STASPD - L.STASPD) * 5 	//yet a speedy feint is hard to counter
-		perc += (user.STAPER - L.STAPER) * 5 	//a good eye helps
-	if(!user.cmode)
-		perc = 0
-	if(L.has_status_effect(/datum/status_effect/debuff/feinted))
-		perc = 0
-	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
-		perc -= rand(10,30)
-	user.apply_status_effect(/datum/status_effect/debuff/feintcd)
-	perc = CLAMP(perc, 0, 90) //no zero risk superfeinting
-	if(prob(perc)) //feint intent increases the immobilize duration significantly
-		if(istype(user.rmb_intent, /datum/rmb_intent/feint))
-			L.apply_status_effect(/datum/status_effect/debuff/feinted)
-			L.changeNext_move(10)
-			L.Immobilize(15)
-			to_chat(user, span_notice("[L] fell for my feint attack!"))
-			to_chat(L, span_danger("I fall for [user]'s feint attack!"))
-		else
-			L.apply_status_effect(/datum/status_effect/debuff/feinted)
-			L.changeNext_move(4)
-			L.Immobilize(5)
-			to_chat(user, span_notice("[L] fell for my feint attack!"))
-			to_chat(L, span_danger("I fall for [user]'s feint attack!"))
-	else
-		if(user.client?.prefs.showrolls)
-			to_chat(user, span_warning("[L] did not fall for my feint... [perc]%"))
+	return
 
 /datum/rmb_intent/aimed
 	name = "aimed"
@@ -92,7 +43,7 @@
 	if(!user)
 		return
 
-	if(user.incapacitated())
+	if(user.incapacitated(IGNORE_GRAB))
 		return
 
 	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
