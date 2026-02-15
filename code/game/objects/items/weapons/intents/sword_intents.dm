@@ -126,7 +126,7 @@
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	misscost = 4
 	item_damage_type = "slash"
-	acc_bonus = 10
+	acc_bonus = 12
 
 /datum/intent/sword/cut/long
 	reach = 2

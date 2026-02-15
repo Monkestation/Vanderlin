@@ -13,6 +13,7 @@
 	swingdelay = 1
 	misscost = 6
 	item_damage_type = "slash"
+	acc_bonus = 10
 
 /datum/intent/axe/chop/great//Used for the polearm category axes
 	penfactor = AP_HEAVYAXE_CHOP
@@ -47,6 +48,7 @@
 	penfactor = AP_AXE_CUT
 	misscost = 5
 	item_damage_type = "slash"
+	acc_bonus = 12
 
 /datum/intent/axe/cut/greataxe //Decent to cut as well
 	reach = 1

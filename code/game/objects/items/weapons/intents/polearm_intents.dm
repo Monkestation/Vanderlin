@@ -12,7 +12,7 @@
 	swingdelay = 1
 	clickcd = 14
 	misscost = 8
-	acc_bonus = 10
+	acc_bonus = 12
 	item_damage_type = "stab"
 
 /datum/intent/polearm/thrust/spear
@@ -64,6 +64,7 @@
 	misscost = 12
 	warnie = "mobwarning"
 	item_damage_type = "slash"
+	acc_bonus = 10
 
 // POLEARM REND INTENTS //
 /datum/intent/rend

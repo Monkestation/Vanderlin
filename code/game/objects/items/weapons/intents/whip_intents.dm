@@ -12,6 +12,7 @@
 	icon_state = "inlash"
 	canparry = FALSE //Has reach and can't be parried, but needs to be charged and punishes misses.
 	item_damage_type = "slash"
+	acc_bonus = 10
 
 /datum/intent/whip/lash/metal
 	clickcd = 18
@@ -54,6 +55,7 @@
 	icon_state = "incrack"
 	canparry = TRUE
 	item_damage_type = "slash"
+	acc_bonus = 12
 
 /datum/intent/whip/crack/metal
 	penfactor = 20

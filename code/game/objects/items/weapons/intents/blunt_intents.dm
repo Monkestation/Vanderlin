@@ -38,6 +38,7 @@
 	icon_state = "insmash"
 	misscost = 10
 	item_damage_type = "blunt"
+	acc_bonus = 10
 
 /datum/intent/mace/smash/wood
 	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
@@ -64,6 +65,7 @@
 	swingdelay = 1
 	misscost = 15
 	item_damage_type = "stab"
+	acc_bonus = 12
 
 /datum/intent/mace/warhammer/stab
 	name = "thrust"
@@ -76,6 +78,7 @@
 	damfactor = 0.8
 	misscost = 5
 	item_damage_type = "stab"
+	acc_bonus = 12
 
 /datum/intent/mace/warhammer/impale
 	name = "impale"
@@ -89,6 +92,7 @@
 	penfactor = 80
 	damfactor = 0.9
 	item_damage_type = "stab"
+	acc_bonus = 12
 
 // FLAIL DERIVING INTENTS //
 
@@ -102,6 +106,7 @@
 	attack_verb = list("strikes", "hits")
 	penfactor = AP_FLAIL_STRIKE
 	item_damage_type = "slash"
+	acc_bonus = 12
 
 /datum/intent/flail/strike/long
 	reach = 2
