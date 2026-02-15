@@ -773,4 +773,4 @@
 /datum/stress_event/malaguero/get_stress(mob/living/user)
 	. = ..()
 	if(istiefling(user))
-		. /= 2
+		. = 1
