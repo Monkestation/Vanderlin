@@ -75,7 +75,6 @@
 		return
 
 	if(!weapon)
-		cancel_clash()
 		return
 
 	var/weapon_range = victim.used_intent?.reach
