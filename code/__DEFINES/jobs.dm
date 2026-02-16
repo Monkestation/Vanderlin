@@ -125,8 +125,7 @@
 
 #define JDO_TAILOR 19
 
-#define JDO_ARMORER 20
-#define JDO_WSMITH 21
+#define JDO_BLACKSMITH 21
 #define JDO_BAPP 22
 #define JDO_ARTIFICER 23
 

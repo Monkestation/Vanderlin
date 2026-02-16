@@ -11626,7 +11626,7 @@
 	pixel_x = 15;
 	pixel_y = 5
 	},
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
@@ -23381,7 +23381,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/river)
 "vDu" = (
-/obj/effect/landmark/start/armorsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 8
 	},
 /obj/structure/bed/wool/double,

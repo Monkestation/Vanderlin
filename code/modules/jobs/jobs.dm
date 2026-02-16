@@ -64,8 +64,7 @@ GLOBAL_PROTECT(inquisition_positions)
 
 GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/innkeep::title,
-	/datum/job/armorsmith::title,
-	/datum/job/weaponsmith::title,
+	/datum/job/blacksmith::title,
 	/datum/job/tailor::title,
 	/datum/job/alchemist::title,
 	/datum/job/artificer::title,

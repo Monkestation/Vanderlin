@@ -400,5 +400,67 @@
                 "rscadd": "Enabled triumph subspecies triumph buys. Get grinding."
             }
         ]
+    },
+    "2026-02-15": {
+        "KevinfromHP": [
+            {
+                "rscadd": "Monarchs receive bonus triumphs roundstart with lowpop."
+            },
+            {
+                "refactor": "Reworked the Advclass triumph buy because the special queue was actually nonsense. Why the hell was it used"
+            },
+            {
+                "balance": "Rebalanced advanced class restriction triumph buy"
+            },
+            {
+                "balance": "Nerfed Remembering a Triumph"
+            },
+            {
+                "rscdel": "Disabled Species Triumph Buy"
+            }
+        ],
+        "Ordosian": [
+            {
+                "bugfix": "fixed Trident sprite."
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added new psydonic, a grenzel language"
+            },
+            {
+                "rscdel": "Removed old psydonic from most non-inquisition roles"
+            }
+        ],
+        "MrTCo1": [
+            {
+                "rscadd": "Grandmaster Templar"
+            },
+            {
+                "rscadd": "Grandmaster Weapons"
+            },
+            {
+                "rscadd": "Templaric Order lore blurb in the Primer (Aberra Approved)"
+            }
+        ]
+    },
+    "2026-02-16": {
+        "Rockslp": [
+            {
+                "rscadd": "Blacksmith"
+            },
+            {
+                "rscdel": "Removed weapon & armorsmith."
+            },
+            {
+                "balance": "Blacksmiths have a chance at legendary skills, 5%"
+            },
+            {
+                "map": "Armorsmith+weaponsmith spawns replaced with blacksmith spawns."
+            },
+            {
+                "code_imp": "Armorsmith & Weaponsmith code changed."
+            }
+        ]
     }
 }

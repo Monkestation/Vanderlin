@@ -167,6 +167,16 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
 
+#define ANY_CLASS_CTAGS list(\
+	CTAG_PILGRIM, \
+	CTAG_ADVENTURER, \
+	CTAG_TOWNER, \
+	CTAG_MERCENARY, \
+	CTAG_GARRISON, \
+	CTAG_FORGARRISON, \
+	CTAG_MENATARMS, \
+)
+
 // .............. SELLPRICE/VALUE DEFINES ..................... //
 // Basicallly material cost + work cost will be the value from now on. Needs work to value these things in comparison but its a simple way to get some consistency to it
 // The material cost, work cost and bonus value should mostly be a under the hood thing so its easy to parse. Adjusting them will obviously affect end user costs.
