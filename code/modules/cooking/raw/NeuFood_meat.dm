@@ -13,7 +13,8 @@
 // Template
 /obj/item/reagent_containers/food/snacks/meat
 	eat_effect = /datum/status_effect/debuff/uncookedfood
-	icon_state = "meat"
+	name = "bugged meat"
+	icon_state = "bad_mapper"
 	slice_batch = TRUE // so it takes more time, changed from FALSE
 	filling_color = "#8f433a"
 	bitesize = 3
@@ -46,6 +47,7 @@
 /obj/item/reagent_containers/food/snacks/meat/steak
 	ingredient_size = 2
 	name = "raw meat"
+	icon_state = "meat"
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 	slice_bclass = BCLASS_CHOP
