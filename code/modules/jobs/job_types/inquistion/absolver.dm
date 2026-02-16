@@ -62,7 +62,7 @@
 		/datum/skill/magic/holy = 2, // they need this so Psydon's Grace works
 	)
 
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/oldpsydonic, /datum/language/newpsydonic)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
 	exp_types_granted = list(EXP_TYPE_INQUISITION)

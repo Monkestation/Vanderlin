@@ -262,6 +262,7 @@
 	character.grant_language(/datum/language/celestial)
 	character.grant_language(/datum/language/orcish)
 	character.grant_language(/datum/language/deepspeak)
+	character.grant_language(/datum/language/newpsydonic)
 	character.grant_language(/datum/language/oldpsydonic)
 	character.grant_language(/datum/language/zalad)
 	character.grant_language(/datum/language/thievescant)
@@ -284,7 +285,7 @@
 		if(4)
 			character.grant_language(/datum/language/zalad)
 		if(5)
-			character.grant_language(/datum/language/oldpsydonic)
+			character.grant_language(/datum/language/newpsydonic)
 		if(6)
 			character.grant_language(/datum/language/hellspeak)
 		if(7)
@@ -304,6 +305,7 @@
 	character.grant_language(/datum/language/celestial)
 	character.grant_language(/datum/language/orcish)
 	character.grant_language(/datum/language/deepspeak)
+	character.grant_language(/datum/language/newpsydonic)
 	character.grant_language(/datum/language/oldpsydonic)
 	character.grant_language(/datum/language/zalad)
 	character.grant_language(/datum/language/thievescant)
@@ -355,7 +357,7 @@
 	weight = 10
 	allowed_patrons = list(/datum/patron/divine/malum)
 	req_text = "Worship Malum, must be a carpenter, elder, smith, artificer or miner."
-	allowed_jobs = list(/datum/job/carpenter, /datum/job/armorsmith, /datum/job/weaponsmith, /datum/job/artificer, /datum/job/bapprentice, /datum/job/miner, /datum/job/town_elder) // no combat roles
+	allowed_jobs = list(/datum/job/carpenter, /datum/job/blacksmith, /datum/job/artificer, /datum/job/bapprentice, /datum/job/miner, /datum/job/town_elder) // no combat roles
 
 /datum/special_trait/burdened/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_MALUMFIRE, "[type]")
@@ -760,109 +762,6 @@
 	QDEL_NULL(character.backr)
 	QDEL_NULL(character.head)
 	character.equip_to_slot_or_del(new /obj/item/weapon/sword/long/greatsword/gutsclaymore(character), ITEM_SLOT_BACK_R)
-
-/datum/special_trait/devoutknight
-	name = "Devout Knight"
-	greet_text = span_notice("I am a devoted warrior of the Ten, and my equipments lie hidden in their resting place, ready to be donned when the call comes.")
-	allowed_jobs = list(/datum/job/royalknight)
-	allowed_flaw = /datum/quirk/vice/godfearing
-	allowed_patrons = ALL_TEMPLE_PATRONS
-	req_text = "Be a Royal knight, With the Flaw 'devout follower' and be a follower of the ten."
-	weight = 50
-
-/datum/special_trait/devoutknight/on_apply(mob/living/carbon/human/character, silent)
-	var/helmet = /obj/item/clothing/head/helmet/heavy/necked
-	var/cloak = /obj/item/clothing/cloak/tabard/crusader/tief
-	var/psycross = /obj/item/clothing/neck/psycross/g
-	var/weapon = /obj/item/weapon/sword/long/judgement
-	switch(character.patron?.type)
-		if(/datum/patron/divine/astrata)
-			psycross = /obj/item/clothing/neck/psycross/silver/astrata
-			helmet = /obj/item/clothing/head/helmet/heavy/astratahelm
-			cloak = /obj/item/clothing/cloak/templar/astratan
-			weapon = /obj/item/weapon/sword/long/exe/astrata
-			character.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
-		if(/datum/patron/divine/noc)
-			psycross = /obj/item/clothing/neck/psycross/silver/noc
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/noc
-			cloak = /obj/item/clothing/cloak/stabard/templar/noc
-			weapon = /obj/item/weapon/sword/sabre/noc
-			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			ADD_TRAIT(character, TRAIT_DUALWIELDER, BE_SPECIAL_TRAIT)
-		if(/datum/patron/divine/dendor)
-			psycross = /obj/item/clothing/neck/psycross/silver/dendor
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
-			cloak = /obj/item/clothing/cloak/stabard/templar/dendor
-			weapon = /obj/item/weapon/polearm/halberd/bardiche/dendor
-			character.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
-			character.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
-		if(/datum/patron/divine/necra)
-			psycross = /obj/item/clothing/neck/psycross/silver/necra
-			helmet = /obj/item/clothing/head/helmet/heavy/necrahelm
-			cloak = /obj/item/clothing/cloak/templar/necran
-			weapon = /obj/item/weapon/flail/sflail/necraflail
-			character.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
-		if(/datum/patron/divine/pestra)
-			psycross = /obj/item/clothing/neck/psycross/silver/pestra
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
-			cloak = /obj/item/clothing/cloak/templar/pestran
-			weapon = /obj/item/weapon/knife/dagger/steel/pestrasickle
-			character.mind.special_items["Second Weapon"] = /obj/item/weapon/knife/dagger/steel/pestrasickle
-			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			ADD_TRAIT(character, TRAIT_DUALWIELDER, BE_SPECIAL_TRAIT)
-			character.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
-			character.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
-		if(/datum/patron/divine/eora)
-			helmet = /obj/item/clothing/head/helmet/sallet/eoran
-			psycross = /obj/item/clothing/neck/psycross/silver/eora
-			cloak = /obj/item/clothing/cloak/stabard/templar/eora
-			weapon = /obj/item/weapon/sword/rapier/eora
-			character.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
-			character.mind.special_items["Eora's Gift"] = /obj/item/clothing/head/flowercrown/rosa
-			ADD_TRAIT(character, TRAIT_BEAUTIFUL, BE_SPECIAL_TRAIT)
-		if(/datum/patron/divine/ravox)
-			psycross = /obj/item/clothing/neck/psycross/silver/ravox
-			helmet = /obj/item/clothing/head/helmet/heavy/ravoxhelm
-			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
-			weapon = /obj/item/weapon/sword/long/ravox
-			character.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
-		if(/datum/patron/divine/malum)
-			psycross = /obj/item/clothing/neck/psycross/silver/malum
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
-			cloak = /obj/item/clothing/cloak/templar/malumite
-			weapon = /obj/item/weapon/hammer/sledgehammer/war/malum
-			character.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
-			character.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 4, 4, TRUE)
-		if(/datum/patron/divine/abyssor)
-			psycross = /obj/item/clothing/neck/psycross/silver/abyssor
-			helmet = /obj/item/clothing/head/helmet/heavy/abyssorgreathelm
-			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
-			weapon = /obj/item/weapon/polearm/spear/abyssor
-			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-			character.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-			character.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
-		if(/datum/patron/divine/xylix)
-			psycross = /obj/item/clothing/neck/psycross/silver/xylix
-			helmet = /obj/item/clothing/head/helmet/heavy/necked/xylix
-			cloak = /obj/item/clothing/cloak/templar/xylixian
-			weapon = /obj/item/weapon/whip/xylix
-			character.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4, TRUE)
-		if(/datum/patron/inhumen/graggar_zizo) //In case a admin decide to give them graggazo roundstart
-			psycross = /obj/item/clothing/ring/silver/toper
-			helmet = /obj/item/clothing/head/helmet/heavy/graggar
-			cloak = /obj/item/clothing/cloak/graggar
-			weapon = /obj/item/weapon/sword/long/judgement/evil
-		else
-			cloak = /obj/item/clothing/cloak/templar/undivided
-			psycross = /obj/item/clothing/neck/psycross/silver/undivided
-			weapon = /obj/item/weapon/sword/long/decorated
-	if(!character.has_language(/datum/language/celestial))
-		character.grant_language(/datum/language/celestial)
-		to_chat(character, span_info("I can speak Celestial with ,c before my speech."))
-	character.mind.special_items["Weapon"] = weapon
-	character.mind.special_items["Tabard"] = cloak
-	character.mind.special_items["Psycross"] = psycross
-	character.mind.special_items["Helmet"] = helmet
 
 /datum/special_trait/meow
 	name = "Meow"

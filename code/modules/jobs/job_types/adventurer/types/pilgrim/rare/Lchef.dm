@@ -5,7 +5,7 @@
 	Now you find yourself approaching Vanderlin... perhaps this will be a perfect location to prepare your next great feast?"
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/masterchef
-	total_positions = 1
+	total_positions = 0
 	roll_chance = 0
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	apprentice_name = "Chef Apprentice"

@@ -325,5 +325,142 @@
                 "rscadd": "Added culture customisation, seperated it from skin colours where applicable."
             }
         ]
+    },
+    "2026-02-13": {
+        "realforest2001": [
+            {
+                "rscadd": "Added the ability to make people your acquaintance, adding them to your list of known people."
+            },
+            {
+                "rscadd": "You now automatically know people who are in your family."
+            },
+            {
+                "code_imp": "Cleaned up the who-knows-who code."
+            },
+            {
+                "rscadd": "Middle click on the health heart is now used when next to someone to share identities. Right click is still used to check who you know."
+            },
+            {
+                "rscadd": "Added the Stiletto dagger."
+            },
+            {
+                "rscadd": "Added the decorated dagger to Monarch."
+            }
+        ],
+        "Cheffie, Absolucy, jlsnow301, Bisar, MTandi": [
+            {
+                "rscadd": "Added a loot window for alt-clicking tiles."
+            },
+            {
+                "rscdel": "Removed the item browser from the stat panel."
+            }
+        ],
+        "Wrench-1": [
+            {
+                "rscadd": "Remembrance, a Psydonian Longsword Relic for Ordinator and Inspector"
+            },
+            {
+                "rscdel": "Removed the Forgotten Blade from being able to be selected by Ordinator and Inspector"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "image": "added astratan cross and golden astratan cross"
+            },
+            {
+                "code_imp": "moved psycross and astratan cross to structure.dm and make them use crafting instead of carpentry"
+            }
+        ],
+        "Casperclone1": [
+            {
+                "bugfix": "Fixed Kobold not having a accent"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed tgui-byond passthrough"
+            },
+            {
+                "rscadd": "Seasonal triumph buys, which last for exactly how long a season lasts, they will stay on your account until the time you bought it + the wipe time. I.e. 3 months exactly if a season was 3 months."
+            },
+            {
+                "rscadd": "Added subterran dwarf triumph buy."
+            },
+            {
+                "rscadd": "Added formikrag kobold triumph buy."
+            },
+            {
+                "rscadd": "These Triumph buys will be disabled until the next season."
+            }
+        ]
+    },
+    "2026-02-14": {
+        "CheffieGithub": [
+            {
+                "rscadd": "Enabled triumph subspecies triumph buys. Get grinding."
+            }
+        ]
+    },
+    "2026-02-15": {
+        "KevinfromHP": [
+            {
+                "rscadd": "Monarchs receive bonus triumphs roundstart with lowpop."
+            },
+            {
+                "refactor": "Reworked the Advclass triumph buy because the special queue was actually nonsense. Why the hell was it used"
+            },
+            {
+                "balance": "Rebalanced advanced class restriction triumph buy"
+            },
+            {
+                "balance": "Nerfed Remembering a Triumph"
+            },
+            {
+                "rscdel": "Disabled Species Triumph Buy"
+            }
+        ],
+        "Ordosian": [
+            {
+                "bugfix": "fixed Trident sprite."
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added new psydonic, a grenzel language"
+            },
+            {
+                "rscdel": "Removed old psydonic from most non-inquisition roles"
+            }
+        ],
+        "MrTCo1": [
+            {
+                "rscadd": "Grandmaster Templar"
+            },
+            {
+                "rscadd": "Grandmaster Weapons"
+            },
+            {
+                "rscadd": "Templaric Order lore blurb in the Primer (Aberra Approved)"
+            }
+        ]
+    },
+    "2026-02-16": {
+        "Rockslp": [
+            {
+                "rscadd": "Blacksmith"
+            },
+            {
+                "rscdel": "Removed weapon & armorsmith."
+            },
+            {
+                "balance": "Blacksmiths have a chance at legendary skills, 5%"
+            },
+            {
+                "map": "Armorsmith+weaponsmith spawns replaced with blacksmith spawns."
+            },
+            {
+                "code_imp": "Armorsmith & Weaponsmith code changed."
+            }
+        ]
     }
 }
