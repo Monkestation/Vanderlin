@@ -173,7 +173,7 @@
 	biting = TRUE
 	bitesize = 6
 
-	nutrition = SMALLDOUGH_NUTRITION*COOK_MOD*DRIED_MOD
+	nutrition = (SMALLDOUGH_NUTRITION+1)*COOK_MOD*DRIED_MOD
 	faretype = FARE_POOR
 	rotprocess = 0
 	foodtype = GRAIN
