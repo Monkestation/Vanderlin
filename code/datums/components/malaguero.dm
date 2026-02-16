@@ -1,10 +1,11 @@
 /datum/component/malaguero
+	/// Base range of our pulse
 	var/base_range = 2
+	/// Ranged added / removed per level of stress
 	var/stress_range = 1
-
-	COOLDOWN_DECLARE(pulse)
+	/// Cooldown time for the pulse
 	var/pulse_cooldown = 30 SECONDS
-
+	COOLDOWN_DECLARE(pulse)
 
 /datum/component/malaguero/Initialize(range, stress_scaling, cooldown)
 	if(!iscarbon(parent))
@@ -24,26 +25,24 @@
 	SIGNAL_HANDLER
 	if(!COOLDOWN_FINISHED(src, pulse))
 		return
+	COOLDOWN_START(src, pulse, pulse_cooldown)
 	var/harbinger_stress = harbinger.get_stress_amount()
 	var/stress = 0
 	switch(harbinger_stress)
-		if(STRESS_VGOOD)
-			stress = -2
-		if(STRESS_VGOOD+1 to STRESS_BAD-1)
-			stress = -1
-		if(STRESS_BAD to STRESS_VBAD-1)
-			stress = 1
-		if(STRESS_VBAD to STRESS_INSANE-1)
-			stress = 2
 		if(STRESS_INSANE to INFINITY)
 			stress = 3
-
-	var/range = max(0, base_range + (stress * stress_range))
-	for(var/mob/living/carbon/afflicted in view(get_turf(harbinger), range))
+		if(STRESS_VBAD to STRESS_INSANE)
+			stress = 2
+		if(STRESS_BAD to STRESS_VBAD)
+			stress = 1
+		if(STRESS_VGOOD to STRESS_GOOD)
+			stress = -1
+		if(-INFINITY to STRESS_VGOOD)
+			stress = -2
+	var/range = base_range + (stress * stress_range)
+	if(range <= 0)
+		return
+	for(var/mob/afflicted as anything in viewers(harbinger, range))
 		if(afflicted == harbinger)
 			continue
 		afflicted.add_stress(/datum/stress_event/malaguero)
-	COOLDOWN_START(src, pulse, pulse_cooldown)
-
-
-
