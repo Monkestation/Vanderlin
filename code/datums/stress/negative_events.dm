@@ -343,7 +343,7 @@
 /datum/stress_event/saw_wonder
 	stress_change = 4
 	desc = span_boldred("<B>I have seen something nightmarish, and I fear for my life!</B>")
-	timer = 15 MINUTES
+	timer = 7.5 MINUTES
 
 /datum/stress_event/saw_wonder/on_apply(mob/living/user)
 	. = ..()
