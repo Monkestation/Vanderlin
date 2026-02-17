@@ -762,6 +762,7 @@
 	. = ..()
 	if(istiefling(user))
 		max_stacks = 1
+		stress_change = 0
 		quality_modifier = 0
 
 /datum/stress_event/malaguero/get_desc(mob/living/user)
@@ -770,8 +771,3 @@
 
 /datum/stress_event/malaguero/can_show(mob/living/user)
 	return istiefling(user)
-
-/datum/stress_event/malaguero/get_stress(mob/living/user)
-	if(istiefling(user))
-		return 1
-	return ..()
