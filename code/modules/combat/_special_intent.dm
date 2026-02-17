@@ -88,6 +88,10 @@
 	else
 		target = null
 
+	if(range && !user.Adjacent(target)) // We got called from resolveRangedClick
+		if(get_dist(user, target) > range)
+			return FALSE
+
 	process_attack(user, parent, target)
 
 	return TRUE
