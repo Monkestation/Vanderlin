@@ -21,16 +21,17 @@
 	power_off(user)
 	. = ..()
 
-/obj/item/clothing/cloak/boiler/attack_hand_secondary(mob/living/user, params)
-	..()
+/obj/item/clothing/cloak/boiler/attack_hand_secondary(mob/living/user, list/modifiers)
+	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	//Engineering skill check
 	var/skill_level = user.get_skill_level(/datum/skill/craft/engineering)
 	if(skill_level <= 2)
 		to_chat(user, span_warning("I don't know how to operate [src]!"))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return
 
 	//Full steam armor check
 	var/list/equipped_types = list()
@@ -43,11 +44,11 @@
 
 	if(length(equipped_types) != length(GLOB.steam_armor))
 		to_chat(user, span_warning("You must be wearing the full steam armor set to operate the [src]..."))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return
 
-	if(src.obj_broken)
-		to_chat(user, span_warning("The [src.name] is broken!"))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(obj_broken)
+		to_chat(user, span_warning("The [src] is broken!"))
+		return
 
 	//Toggle on/off
 	var/windtime = 5
@@ -55,22 +56,22 @@
 
 	var/toggling_on = !active
 
-	if(do_after(user, windtime SECONDS, src))
-		if(toggling_on)
-			if(!SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, 0.5, "steam_armor", FALSE, TRUE))
-				to_chat(user, span_warning("The [src.name] is out of steam!"))
-				return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-			active = TRUE
-			power_on(user)
-			apply_status_effect(user)
-			to_chat(user, span_info("You activate [src], steam hisses as the armor comes to life!"))
-			user.audible_message(span_info("The [src.name] rumbles and lets out a hiss of pressurized steam!"), runechat_message = TRUE)
-		else
-			active = FALSE
-			power_off(user)
-			to_chat(user, span_info("You power down [src], the steam quiets."))
-			user.audible_message(span_info("The [src.name] sputters and hisses, coming to a stop."), runechat_message = TRUE)
-
+	if(!do_after(user, windtime SECONDS, src))
+		return
+	if(toggling_on)
+		if(!SEND_SIGNAL(user, COMSIG_ATOM_PROXY_STEAM_USE, src, 0.5, "steam_armor", FALSE, TRUE))
+			to_chat(user, span_warning("The [src.name] is out of steam!"))
+			return
+		active = TRUE
+		power_on(user)
+		apply_status_effect(user)
+		to_chat(user, span_info("You activate [src], steam hisses as the armor comes to life!"))
+		user.audible_message(span_info("The [src] rumbles and lets out a hiss of pressurized steam!"), runechat_message = TRUE)
+	else
+		active = FALSE
+		power_off(user)
+		to_chat(user, span_info("You power down [src], the steam quiets."))
+		user.audible_message(span_info("The [src] sputters and hisses, coming to a stop."), runechat_message = TRUE)
 
 /obj/item/clothing/cloak/boiler/proc/power_on(mob/living/carbon/user)
 	var/obj/item/clothing/shoes/boots/armor/steam/boots = locate() in list(user.shoes)

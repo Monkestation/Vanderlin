@@ -360,7 +360,7 @@
 		retaliate(L)
 	return ..()
 
-/mob/living/carbon/monkey/attackby(obj/item/W, mob/user, params)
+/mob/living/carbon/monkey/attackby(obj/item/W, mob/user, list/modifiers)
 	..()
 	if((W.force) && (!target) && (W.damtype != STAMINA) )
 		retaliate(user)

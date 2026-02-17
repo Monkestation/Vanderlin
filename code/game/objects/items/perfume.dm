@@ -35,7 +35,7 @@
 	else
 		. += "It is empty."
 
-/obj/item/perfume/afterattack(atom/target, mob/user, proximity_flag)
+/obj/item/perfume/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(.)
 		return

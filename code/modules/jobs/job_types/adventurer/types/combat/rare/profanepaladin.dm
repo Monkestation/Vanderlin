@@ -9,6 +9,7 @@
 	allowed_patrons = ALL_PROFANE_PATRONS
 	exp_type = list(EXP_TYPE_ADVENTURER, EXP_TYPE_LIVING, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
+	triumph_blacklisted = TRUE
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,

@@ -61,7 +61,7 @@
 	to_chat(user, "<span class='info'>I [speaking ? "unmute" : "mute"] the SCOM.</span>")
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/fake_machine/scomm/attack_hand_secondary(mob/user, params)
+/obj/structure/fake_machine/scomm/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -193,7 +193,7 @@
 	return ..()
 
 //wip
-/obj/item/scomstone/attack_hand_secondary(mob/user, params)
+/obj/item/scomstone/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -206,7 +206,7 @@
 		for(var/obj/item/scomstone/S in SSroguemachine.scomm_machines)
 			S.repeat_message(input_text)
 
-/obj/item/scomstone/MiddleClick(mob/user)
+/obj/item/scomstone/MiddleClick(mob/user, list/modifiers)
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)

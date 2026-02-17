@@ -7,7 +7,6 @@ SUBSYSTEM_DEF(chat)
 
 	var/list/payload = list()
 
-
 /datum/controller/subsystem/chat/fire()
 	for(var/client/C as anything in payload)
 		C << output(payload[C], "browseroutput:output")
@@ -15,7 +14,6 @@ SUBSYSTEM_DEF(chat)
 
 		if(MC_TICK_CHECK)
 			return
-
 
 /datum/controller/subsystem/chat/proc/queue(target, message, handle_whitespace = TRUE)
 	if(!target || !message)
@@ -78,3 +76,64 @@ SUBSYSTEM_DEF(chat)
 			return
 
 		payload[C] += twiceEncoded
+
+
+//Global chat procs
+/proc/to_chat_immediate(target, message, handle_whitespace = TRUE)
+	if(!target || !message)
+		return
+
+	if(target == world)
+		target = GLOB.clients
+
+	var/original_message = message
+	if(handle_whitespace)
+		message = replacetext(message, "\n", "<br>")
+		message = replacetext(message, "\t", "[FOURSPACES][FOURSPACES]") //EIGHT SPACES IN TOTAL!!
+
+	if(islist(target))
+		// Do the double-encoding outside the loop to save nanoseconds
+		var/twiceEncoded = url_encode(url_encode(message))
+		for(var/I in target)
+			var/client/C = CLIENT_FROM_VAR(I) //Grab us a client if possible
+
+			if (!C)
+				continue
+
+			//Send it to the old style output window.
+			SEND_TEXT(C, original_message)
+
+			if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
+				continue
+
+			if(!C.chatOutput.loaded)
+				//Client still loading, put their messages in a queue
+				C.chatOutput.messageQueue += message
+				continue
+
+			C << output(twiceEncoded, "browseroutput:output")
+	else
+		var/client/C = CLIENT_FROM_VAR(target) //Grab us a client if possible
+
+		if (!C)
+			return
+
+		//Send it to the old style output window.
+		SEND_TEXT(C, original_message)
+
+		if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
+			return
+
+		if(!C.chatOutput.loaded)
+			//Client still loading, put their messages in a queue
+			C.chatOutput.messageQueue += message
+			return
+
+		// url_encode it TWICE, this way any UTF-8 characters are able to be decoded by the Javascript.
+		C << output(url_encode(url_encode(message)), "browseroutput:output")
+
+/proc/to_chat(target, message, handle_whitespace = TRUE)
+	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
+		to_chat_immediate(target, message, handle_whitespace)
+		return
+	SSchat.queue(target, message, handle_whitespace)

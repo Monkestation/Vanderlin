@@ -26,3 +26,6 @@
 #define CHAT_SPELLING_EXCEPTIONS list(\
 										"'",\
 										)
+
+/// Adds a generic box around whatever message you're sending in chat. Really makes things stand out.
+#define boxed_message(str) ("<div class='boxed_message'>" + str + "</div>")

@@ -98,12 +98,24 @@
 	max_integrity = INTEGRITY_WORST
 	melt_amount = 75
 
-/obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, params)
+/datum/intent/snip // The salvaging intent! Used only for the scissors for now!
+	name = "snip"
+	icon_state = "insnip"
+	chargetime = 0
+	noaa = TRUE
+	candodge = FALSE
+	canparry = FALSE
+	misscost = 0
+	no_attack = TRUE
+	releasedrain = 0
+	blade_class = BCLASS_PUNCH
+
+/obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/snip && isitem(A))
 		var/obj/item/item = A
 		if(item.sewrepair && item.salvage_result) // We can only salvage objects which can be sewn!
 			. = TRUE
-			var/skill_level = user.get_skill_level(/datum/skill/misc/sewing)
+			var/skill_level = user.get_skill_level(/datum/skill/misc/sewing, TRUE)
 			var/salvage_time = (7 SECONDS - (skill_level * 10))
 			if(!do_after(user, salvage_time, A))
 				return
@@ -257,6 +269,18 @@
 	icon_state = "sdaggeralt"
 	desc = "A dagger of refined steel, and even more refined appearance."
 
+/obj/item/weapon/knife/dagger/steel/royal
+	name = "decorated dagger"
+	icon_state = "gsdagger"
+	desc = "A dagger of refined steel with lavish gold decoration, even in the hands of most nobles it is considered overly decadent."
+
+/obj/item/weapon/knife/dagger/steel/stiletto
+	name = "stiletto"
+	desc = "A needle thin dagger made of refined steel, the favored weapon of assassins and angry nobles."
+	icon_state = "stiletto"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
+	melt_amount = 45
+
 /obj/item/weapon/knife/hunting/kukri
 	name = "steel kukri"
 	icon_state = "kukri_steel"
@@ -271,6 +295,18 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "pestrasickle"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
+
+/obj/item/weapon/knife/dagger/steel/hand
+	name = "Fervor"
+	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
+	icon_state = "sdaggerhand"
+	sellprice = 200
+
+/obj/item/weapon/knife/dagger/steel/hand/parry
+	name = "Apathy"
+	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
+	wdefense = GOOD_PARRY
+	icon_state = "spdaggerhand"
 
 //................ Fanged dagger ............... //
 /obj/item/weapon/knife/dagger/steel/dirk
@@ -361,7 +397,7 @@
 //			H.visible_message("profane dagger whispers, \"[message]\"")
 			to_chat(M, "profane dagger whispers, \"[message]\"")
 
-/obj/item/weapon/knife/dagger/steel/profane/pre_attack(mob/living/carbon/human/target, mob/living/user = usr, params)
+/obj/item/weapon/knife/dagger/steel/profane/pre_attack(mob/living/carbon/human/target, mob/living/user, list/modifiers)
 	if(!istype(target))
 		return FALSE
 	if(target.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // Check to see if the dagger will do 20 damage or 14
@@ -370,7 +406,7 @@
 		force = DAMAGE_DAGGER + 2
 	return FALSE
 
-/obj/item/weapon/knife/dagger/steel/profane/afterattack(mob/living/carbon/human/target, mob/living/user = usr, proximity)
+/obj/item/weapon/knife/dagger/steel/profane/afterattack(mob/living/carbon/human/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!ishuman(target))
 		return

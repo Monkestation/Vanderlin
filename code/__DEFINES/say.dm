@@ -66,14 +66,14 @@
 #define SPAN_ELF "elf"
 #define SPAN_OLDPSYDONIC "oldpsydonic"
 #define SPAN_ZALAD "zalad"
-#define SPAN_SAND "sandspeak"
+#define SPAN_CELESTIAL "celestial"
 #define SPAN_DELF "delf"
 #define SPAN_HELL "hellspeak"
 #define SPAN_ORC "orc"
-#define SPAN_OTAVAN "otavan"
 #define SPAN_BEAST "beast"
 #define SPAN_DEEPSPEAK "deepspeak"
 #define SPAN_UNDEAD "undead"
+
 //bitflag #defines for return value of the radio() proc.
 #define ITALICS 1
 #define REDUCE_RANGE 2

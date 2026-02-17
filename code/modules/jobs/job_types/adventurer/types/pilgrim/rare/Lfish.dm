@@ -4,7 +4,7 @@
 	no matter the body of water. They have learned to thrive off the gifts of Abyssor, not simply survive."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/fishermaster
-	total_positions = 1
+	total_positions = 0
 	roll_chance = 0
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	apprentice_name = "Fisher Apprentice"

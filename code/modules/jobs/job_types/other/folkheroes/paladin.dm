@@ -49,7 +49,7 @@
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
 			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
-			spawned.grant_language(/datum/language/oldpsydonic)
+			spawned.grant_language(/datum/language/newpsydonic)
 			ADD_TRAIT(spawned, TRAIT_PSYDONIAN_GRIT, TRAIT_GENERIC)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'

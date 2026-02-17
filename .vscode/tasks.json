@@ -6,12 +6,36 @@
             "dme": "vanderlin.dme",
             "problemMatcher": ["$dreammaker"],
             "group": "build",
-            "label": "dm: build - vanderlin.dme"
+            "label": "Build Byond"
         },
 
         {
             "type": "process",
-            "command": "tools/build/build",
+            "command": "tools/build/build.sh",
+            "windows": {
+                "command": ".\\tools\\build\\build.bat"
+            },
+            "options": {
+                "env": {
+                    "DM_EXE": "${config:dreammaker.byondPath}"
+                }
+            },
+            "problemMatcher": [
+                "$dreammaker",
+                "$tsc",
+                "$eslint-stylish"
+            ],
+            "group": {
+                "kind": "build",
+				"isDefault": true
+            },
+            "dependsOn": "dm: reparse",
+            "label": "Build All"
+        },
+
+        {
+            "type": "process",
+            "command": "tools/build/build.sh",
             "args": ["-DLOWMEMORYMODE"],
             "windows": {
                 "command": ".\\tools\\build\\build.bat",
@@ -36,7 +60,7 @@
 
         {
             "type": "process",
-            "command": "tools/build/build",
+            "command": "tools/build/build.sh",
             "args": ["-DLOWMEMORYMODE", "-DNO_DUNGEON"],
             "windows": {
                 "command": ".\\tools\\build\\build.bat",
@@ -60,7 +84,7 @@
         },
         {
             "type": "process",
-            "command": "tools/build/build",
+            "command": "tools/build/build.sh",
             "args": ["-DLOWMEMORYMODE", "-DNO_DUNGEON", "-DABSOLUTE_MINIMUM_MODE"],
             "windows": {
                 "command": ".\\tools\\build\\build.bat",
@@ -84,7 +108,7 @@
         },
         {
             "type": "process",
-            "command": "tools/build/build",
+            "command": "tools/build/build.sh",
             "args": ["-DUNIT_TESTS"],
             "windows": {
                 "command": ".\\tools\\build\\build.bat",

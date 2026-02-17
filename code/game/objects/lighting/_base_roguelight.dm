@@ -110,7 +110,7 @@
 /obj/machinery/light/fueled/spark_act()
 	fire_act()
 
-/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(cookonme)
 		if(istype(W, /obj/item/reagent_containers/food/snacks))
 			if(istype(W, /obj/item/reagent_containers/food/snacks/egg))

@@ -71,7 +71,7 @@
 /obj/item/clothing/accessory/proc/on_uniform_dropped(obj/item/clothing/pants/U, user)
 	return
 
-/obj/item/clothing/accessory/AltClick(mob/user)
+/obj/item/clothing/accessory/AltClick(mob/user, list/modifiers)
 	if(istype(user) && user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		if(initial(above_suit))
 			above_suit = !above_suit

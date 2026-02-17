@@ -865,7 +865,7 @@
 			var/old_height = flipper.grid_height
 			flipper.grid_height = old_width
 			flipper.grid_width = old_height
-			update_hovering(location, control, params)
+			update_hovering(location, control, modifiers)
 			return
 
 	if(world.time <= usr.next_move)
@@ -875,7 +875,7 @@
 	if(master)
 		var/obj/item/I = usr.get_active_held_item()
 		if(I)
-			master.attackby(src, I, usr, params, TRUE)
+			master.attackby(src, I, usr, modifiers, TRUE)
 	return TRUE
 
 /atom/movable/screen/throw_catch
@@ -1238,8 +1238,9 @@
 
 	if(hud.mymob.stat != DEAD && ishuman(hud.mymob))
 		var/mob/living/carbon/human/H = hud.mymob
+		var/list/missing_bodyparts_zones = H.get_missing_limbs()
 		for(var/obj/item/bodypart/BP as anything in H.bodyparts)
-			if(BP.body_zone in H.get_missing_limbs())
+			if(BP.body_zone in missing_bodyparts_zones)
 				continue
 			if(HAS_TRAIT(H, TRAIT_NOPAIN))
 				var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]")
@@ -1256,7 +1257,7 @@
 			. += limby
 			if(BP.get_bleed_rate())
 				. += mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
-		for(var/X in H.get_missing_limbs())
+		for(var/X in missing_bodyparts_zones)
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[X]") //missing limb
 			limby.color = "#2f002f"
 			. += limby
@@ -1365,17 +1366,21 @@
 /atom/movable/screen/healths/blood/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(ishuman(usr))
-		var/mob/living/carbon/human/H = usr
+		var/mob/living/carbon/human/user_mob = usr
 		if(LAZYACCESS(modifiers, LEFT_CLICK))
-			H.check_for_injuries(H)
-			to_chat(H, "I am [H.get_encumbrance() * 100]% encumbered.")
+			user_mob.check_for_injuries(user_mob)
+			to_chat(user_mob, "I am [user_mob.get_encumbrance() * 100]% encumbered.")
 		if(LAZYACCESS(modifiers, RIGHT_CLICK))
-			if(!H.mind)
+			if(!user_mob.mind)
 				return
-			if(length(H.mind.known_people))
-				H.mind.display_known_people(H)
+			if(length(user_mob.mind.known_people))
+				user_mob.mind.display_known_people(user_mob)
 			else
-				to_chat(H, "<span class='warning'>I don't know anyone.</span>")
+				to_chat(user_mob, "<span class='warning'>I don't know anyone.</span>")
+		if(LAZYACCESS(modifiers, MIDDLE_CLICK))
+			if(!user_mob.mind)
+				return
+			user_mob.make_acquaintance()
 
 /atom/movable/screen/splash
 	icon = 'icons/blank_title.png'

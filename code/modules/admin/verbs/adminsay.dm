@@ -1,5 +1,5 @@
 /client/proc/cmd_admin_say(msg as text)
-    set category = "GameMaster"
+    set category = "Admin.Admin"
     set name = "Asay"
     set hidden = 0
     if(!check_rights(0))

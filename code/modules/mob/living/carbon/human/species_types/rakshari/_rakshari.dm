@@ -23,7 +23,6 @@
 	\n\n\
 	THIS IS A DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK."
 
-	skin_tone_wording = "Tribal Identity"
 	use_skintones = TRUE
 	default_color = "FFFFFF"
 
@@ -106,8 +105,8 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/zalad)
-	C.verbs += 	/mob/living/carbon/human/species/rakshari/verb/emote_meow
-	C.verbs += 	/mob/living/carbon/human/species/rakshari/verb/emote_purr
+	add_verb(C, /mob/living/carbon/human/species/rakshari/verb/emote_meow)
+	add_verb(C, /mob/living/carbon/human/species/rakshari/verb/emote_purr)
 	to_chat(C, "<span class='info'>I can speak Zalad with ,z before my speech.</span>")
 
 /datum/species/rakshari/check_roundstart_eligible()
@@ -139,13 +138,13 @@
 
 /datum/species/rakshari/get_skin_list()
 	return sortList(list(
-		"Mountain Rakshari" = SKIN_COLOR_MOUNTAIN_ELF, // - (White 3)
-		"City Rakshari" = SKIN_COLOR_COASTAL_ELF, // - (White 4)
-		"Desert Rakshari" = SKIN_COLOR_WOOD_ELF, // - (Mediterranean 1)
-		"Deep Desert Rakshari" = SKIN_COLOR_JUNGLE_ELF, // - (Latin)
-		"Oasis Rakshari" = SKIN_COLOR_HOMUNCULUS, // - (Grey-blue)
-		"Oasis Shade Rakshari" = SKIN_COLOR_NIGHTSHADE, // - (Black-blue)
-		"Quicksand Rakshari" = SKIN_COLOR_QUICKSAND, // Orange, apparently sphynx cats can be orange, who knew!
+		"Mountains" = SKIN_COLOR_CONTINENTAL, // - (White 3)
+		"City" = SKIN_COLOR_TEMPERATE, // - (White 4)
+		"Desert" = SKIN_COLOR_SUBTROPICAL, // - (Mediterranean 1)
+		"Deep Desert" = SKIN_COLOR_TROPICALWET, // - (Latin)
+		"Oasis" = SKIN_COLOR_HOMUNCULUS, // - (Grey-blue)
+		"Oasis Shade" = SKIN_COLOR_NIGHTSHADE, // - (Black-blue)
+		"Quicksand" = SKIN_COLOR_QUICKSAND, // Orange, apparently sphynx cats can be orange, who knew!
 	))
 
 /datum/species/rakshari/get_hairc_list()

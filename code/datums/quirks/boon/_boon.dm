@@ -10,30 +10,6 @@
 		/datum/quirk/vice/bad_sight
 	)
 
-/datum/quirk/boon/night_vision
-	name = "Night Vision"
-	desc = "You can see better in darkness than most. Perhaps you have elf blood, or maybe you just spent too many nights as a watchman."
-	point_value = -4
-	incompatible_quirks = list(
-		/datum/quirk/vice/bad_sight,
-		/datum/quirk/vice/cyclops_left,
-		/datum/quirk/vice/cyclops_right
-	)
-
-/datum/quirk/boon/night_vision/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
-	H.update_sight()
-
-/datum/quirk/boon/night_vision/on_remove()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.lighting_alpha = initial(H.lighting_alpha)
-	H.update_sight()
-
 /datum/quirk/boon/light_footed
 	name = "Light Footed"
 	desc = "You move with grace and agility. Your steps are quieter then most."
@@ -102,13 +78,15 @@
 		/datum/language/dwarvish,
 		/datum/language/deepspeak,
 		/datum/language/zalad,
-		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()
 	if(!customization_value || !ispath(customization_value, /datum/language))
+		return
+	if(!(customization_value in customization_options))
 		return
 
 	if(ishuman(owner))
@@ -206,20 +184,19 @@
 	if(!ishuman(user) || !ishuman(source))
 		return
 
-	var/mob/living/carbon/human/H = source
+	var/mob/living/carbon/human/source_mob = source
 	var/mob/living/carbon/human/examiner = user
 
-	if(!examiner.mind || !H.mind)
+	if(!examiner.mind || !source_mob.mind)
 		return
 
 	// Folk heroes are recognized by others
 	if(prob(80)) // 80% chance people recognize them
-		examine_list += span_notice("You recognize [H.real_name], the folk hero!")
+		examine_list += span_notice("You recognize [source_mob.real_name], the folk hero!")
 
 		// Add them to known people if not already known
-		if(!examiner.mind.do_i_know(H.mind))
-			examiner.mind.i_know_person(H.mind)
-			H.mind.i_know_person(examiner.mind)
+		if(!examiner.mind.do_i_know(source_mob.mind))
+			examiner.mind.share_identities(source_mob.mind)
 
 /datum/quirk/boon/quick_hands
 	name = "Quick Hands"
@@ -301,6 +278,24 @@
 						break
 	L = null
 	tent = null
+
+/datum/quirk/boon/packmule
+	name = "Packmule"
+	desc = "There's no such thing as having too much storage! You start with a backpack."
+	point_value = -8
+	preview_render = FALSE
+
+	var/obj/item/storage/backpack/B
+
+/datum/quirk/boon/packmule/after_job_spawn(datum/job/job)
+	var/turf/T = get_turf(owner)
+	B = new(T)
+	if(!owner.equip_to_appropriate_slot(B) || isturf(B.loc)) //missing a limb can cause phantom success procs
+		for(var/obj/item/storage/storage in owner.contents)
+			if(storage)
+				if(SEND_SIGNAL(storage, COMSIG_TRY_STORAGE_INSERT, B, null))
+					break
+	B = null
 
 /datum/quirk/boon/rider
 	name = "Experienced Rider"

@@ -207,6 +207,11 @@
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "doccaneblade"
 
+/obj/item/weapon/sword/rapier/caneblade/hand
+	name = "cane blade"
+	desc = "A steel blade with a silver handle, intended to be concealed inside of a cane. This one bears a rontz on its pommel."
+	icon_state = "staffblade"
+
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
 \-------*/
@@ -923,6 +928,15 @@
 	. = ..()
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
+/obj/item/weapon/sword/long/psydon/relic
+	name = "Rememberance"
+	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and rememberance of Psydon's sacrifice."
+
+/obj/item/weapon/sword/long/psydon/relic/Initialize(mapload)
+	. = ..()
+	//Pre-blessed, +5 force +100 Blade int, +100 int, +1 def, make it silver
+	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 1, TRUE)
+
 /obj/item/weapon/sword/long/decorated
 	name = "decorated silver longsword"
 	desc = "A finely crafted silver longsword with a decorated golden hilt."
@@ -1282,7 +1296,7 @@
 	icon_state = "terminusest"
 	name = "Terminus Est"
 
-/obj/item/weapon/sword/long/exe/cloth/attack_self_secondary(mob/user, params)
+/obj/item/weapon/sword/long/exe/cloth/attack_self_secondary(mob/user, list/modifiers)
 	// . = ..()
 	// if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 	// 	return
@@ -1607,7 +1621,7 @@
 	clickcd = 22	//Can't spam this; long delay.
 	blade_class = BCLASS_BLUNT
 
-/obj/item/weapon/sword/sabre/hook/attack(mob/living/M, mob/living/user, bodyzone_hit)
+/obj/item/weapon/sword/sabre/hook/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	var/skill_diff = 0
 	if(istype(user.used_intent, /datum/intent/sword/disarm))
@@ -1620,15 +1634,15 @@
 			else
 				I = M.get_inactive_held_item()
 		if(user.mind)
-			skill_diff += (user.get_skill_level(/datum/skill/combat/swords))	//You check your sword skill
+			skill_diff += (user.get_skill_level(/datum/skill/combat/swords, TRUE))	//You check your sword skill
 		if(M.mind)
-			skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling))	//They check their wrestling skill to stop the weapon from being pulled.
+			skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling, TRUE))	//They check their wrestling skill to stop the weapon from being pulled.
 		user.adjust_stamina(-rand(3,8))
 		var/probby = clamp((((3 + (((user.STASTR - M.STASTR)/4) + skill_diff)) * 10)), 5, 95)
 		if(I)
 			if(M.mind)
 				if(I.associated_skill)
-					probby -= M.get_skill_level(I.associated_skill) * 5
+					probby -= M.get_skill_level(I.associated_skill, TRUE) * 5
 			var/obj/item/mainhand = user.get_active_held_item()
 			var/obj/item/offhand = user.get_inactive_held_item()
 			if(HAS_TRAIT(src, TRAIT_DUALWIELDER) && istype(offhand, mainhand))

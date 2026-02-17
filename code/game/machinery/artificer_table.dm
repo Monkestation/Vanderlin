@@ -36,7 +36,7 @@
 	M.forceMove(get_turf(src))
 	return ..()
 
-/obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, params)
+/obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/mob/living/carbon/human/buckled = locate() in buckled_mobs
 
 	if(buckled && istype(I, /obj/item/augment_kit))
@@ -81,6 +81,7 @@
 			user.mind?.add_sleep_experience(/datum/skill/craft/engineering, user.STAINT)
 		return
 
+/obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/natural/wood/plank) || istype(I, /obj/item/ingot))
 		if(!material)
 			I.forceMove(src)
@@ -89,6 +90,7 @@
 			return
 
 	if(istype(I, /obj/item/weapon/hammer))
+		var/obj/item/weapon/hammer/H = I
 		user.changeNext_move(CLICK_CD_RAPID)
 		if(!material)
 			return
@@ -98,10 +100,11 @@
 		if(material.artrecipe.hammered || material.artrecipe.progress == 100)
 			playsound(src,'sound/combat/hits/onmetal/sheet (2).ogg', 100, TRUE)
 			shake_camera(user, 1, 1)
-		var/datum/effect_system/spark_spread/S = new()
-		var/turf/front = get_turf(src)
-		S.set_up(1, 1, front)
-		S.start()
+		if(!H.no_spark)	//wood and copper hammers don't spark
+			var/datum/effect_system/spark_spread/S = new()
+			var/turf/front = get_turf(src)
+			S.set_up(1, 1, front)
+			S.start()
 		var/skill = user.get_skill_level(material.artrecipe.appro_skill)
 		if(material.artrecipe.progress == 100)
 			for(var/i in 1 to material.artrecipe.created_amount)
@@ -170,7 +173,7 @@
 
 	return FALSE
 
-/obj/machinery/artificer_table/attack_hand(mob/user, params)
+/obj/machinery/artificer_table/attack_hand(mob/user, list/modifiers)
 	if(!material)
 		return
 	var/obj/item/I = material

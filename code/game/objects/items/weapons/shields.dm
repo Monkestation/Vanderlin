@@ -33,7 +33,7 @@
 	var/design_chosen
 
 // Shield banging
-/obj/item/weapon/shield/attackby(obj/item/attackby_item, mob/user, params)
+/obj/item/weapon/shield/attackby(obj/item/attackby_item, mob/user, list/modifiers)
 	if(istype(attackby_item, /obj/item/weapon) && !istype(attackby_item, /obj/item/weapon/hammer))
 		if(!COOLDOWN_FINISHED(src, shield_bang))
 			return
@@ -61,7 +61,7 @@
 				return 1
 	return 0
 
-/obj/item/weapon/shield/attack_hand_secondary(mob/user, params)
+/obj/item/weapon/shield/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

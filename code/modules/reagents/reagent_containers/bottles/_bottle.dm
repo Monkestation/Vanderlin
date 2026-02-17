@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(desc != initial(desc))
 		fancy = initial(fancy)
 
-/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/paper/scroll))
 		if(reagents?.total_volume)
 			to_chat(user, span_notice("I cannot put a message in [src] while it is full!"))
@@ -79,7 +79,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(closed)
 		. += "[icon_state]cork"
 
-/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -174,7 +174,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	contained = pp
 	pp.info = pick(GLOB.wisdoms)
 
-/obj/item/bottlemessage/attack_self_secondary(mob/user, params)
+/obj/item/bottlemessage/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -220,7 +220,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	icon_state = "clear_vial1"
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)

@@ -256,7 +256,7 @@
 	var/bloodiness = 20
 	var/dirt_amt = 3
 
-/turf/open/floor/dirt/attack_hand_secondary(mob/user, params)
+/turf/open/floor/dirt/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -357,7 +357,7 @@
 	slowdown = 0
 	path_weight = 10
 
-/turf/open/floor/dirt/road/attack_hand_secondary(mob/user, params)
+/turf/open/floor/dirt/road/attack_hand_secondary(mob/user, list/modifiers)
 	return
 
 /turf/open/floor/dirt/atom_destruction(damage_flag)

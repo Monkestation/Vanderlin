@@ -36,13 +36,13 @@
 
 /datum/status_effect/buff/guidance/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_GUIDANCE, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_GUIDANCE, TRAIT_STATUS_EFFECT(id))
 	var/mob/living/target = owner
 	target.add_overlay(guided)
 
 /datum/status_effect/buff/guidance/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_GUIDANCE, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_GUIDANCE, TRAIT_STATUS_EFFECT(id))
 	var/mob/living/target = owner
 	target.cut_overlay(guided)
 

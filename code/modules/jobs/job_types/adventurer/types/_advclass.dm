@@ -19,6 +19,8 @@
 	var/should_reset_stats = TRUE
 	/// Should this advclass spawn with a torch?
 	var/spawn_with_torch = FALSE
+	/// Can we not be purchased with the advclass triumph buys? if the CTAGS bar it then this isn't necessary
+	var/triumph_blacklisted = FALSE
 
 /datum/job/advclass/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -31,18 +33,19 @@
 
 	apply_character_post_equipment(spawned)
 
-/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check)
-	var/list/local_allowed_sexes = list()
-	if(length(allowed_sexes))
-		local_allowed_sexes |= allowed_sexes
-
-	if(length(local_allowed_sexes) && !(to_check.gender in local_allowed_sexes))
+/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check, check_slots=TRUE)
+	if(!prob(roll_chance))
+		return FALSE
+	if(check_slots && total_positions > -1 && current_positions >= total_positions)
 		return FALSE
 
-	if((length(allowed_races) && !(to_check.dna.species.id in allowed_races)) || \
-		(length(blacklisted_species) && (to_check.dna.species.id in blacklisted_species)))
-		if(!(to_check.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
-			return FALSE
+	var/datum/preferences/player_prefs = to_check.client.prefs
+
+	if(length(allowed_sexes) && !(to_check.gender in allowed_sexes))
+		return FALSE
+
+	if(!to_check.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL) && !prefs_species_check(player_prefs))
+		return FALSE
 
 	if(length(allowed_ages) && !(to_check.age in allowed_ages))
 		return FALSE
@@ -52,10 +55,4 @@
 
 	if(!antags_can_pick && to_check.mind?.special_role)
 		return FALSE
-
-	if(total_positions > -1)
-		if(current_positions >= total_positions)
-			return FALSE
-
-	if(prob(roll_chance))
-		return TRUE
+	return TRUE
