@@ -209,6 +209,9 @@
 /mob/living/attackby_secondary(obj/item/weapon, mob/living/user, list/modifiers)
 	. = ..()
 
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+
 	if(user.cmode)
 		// Normal attackby updates click cooldown, so we have to make up for it
 		var/result = weapon.attack_secondary(src, user, modifiers)

@@ -222,7 +222,7 @@
 
 	user.apply_status_effect(/datum/status_effect/debuff/specialcd, used_cooldown)
 
-/// So we have this ranged attack, so we can't just attack something.
+/// So we have this ranged/area attack, so we can't just attack something.
 /// We might also want to do things differently to our weapon...
 /// Can not crit but can pen armour.
 /datum/special_intent/proc/apply_generic_weapon_damage(
