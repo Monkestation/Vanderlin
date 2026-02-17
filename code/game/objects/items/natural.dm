@@ -230,7 +230,7 @@
 	var/pile = null
 	var/clod_type = null
 
-/obj/item/natural/clod/attackby(obj/item/W, mob/user, params)
+/obj/item/natural/clod/attackby(obj/item/W, mob/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/S = W
 		if(!S.heldclod && user.used_intent.type == /datum/intent/shovelscoop)
