@@ -188,6 +188,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Recognized" = TRAIT_RECOGNIZED,
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
+		"Graceless" = TRAIT_UNPARRYING,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -219,7 +220,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_NOBLE_POWER = span_blue("I am recognised by the crown as a noble."),
 	TRAIT_EMPATH = "I can notice when people are stressed.",
 	TRAIT_BREADY = "Defensive stance does not passively fatigue me.",
-	TRAIT_UNDODGING = span_danger("I am unable to dodge, the only way I could avoid a blow would be by blocking or parrying it."),
+	TRAIT_UNDODGING = span_danger("I am unable to dodge."),
+	TRAIT_UNPARRYING = span_danger("I am unable to block and parry attacks."),
 	TRAIT_BLINDFIGHTING = span_info("I have an incredible sense of awareness, allowing me to parry even when I can't see it coming."),
 	TRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
 	TRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
