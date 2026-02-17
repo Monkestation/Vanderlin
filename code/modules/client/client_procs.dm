@@ -674,6 +674,13 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	generate_clickcatcher()
 	apply_clickcatcher()
 
+	if(prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
+		to_chat(src, span_info("You have unread updates in the changelog."))
+		if(CONFIG_GET(flag/aggressive_changelog))
+			changelog()
+		else
+			winset(src, "infobuttons.changelog", "font-style=bold")
+
 	if(prefs.toggles & TOGGLE_FULLSCREEN)
 		toggle_fullscreeny(TRUE)
 	else
@@ -1460,7 +1467,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			continue
 		panel_tabs |= verb_to_init.category
 		verblist[++verblist.len] = list(verb_to_init.category, verb_to_init.name)
-	src.stat_panel.send_message("init_verbs", list(panel_tabs = panel_tabs, verblist = verblist))
+	stat_panel.send_message("init_verbs", list(panel_tabs = panel_tabs, verblist = verblist))
 
 /**
  * Handles incoming messages from the stat-panel TGUI.
