@@ -3,15 +3,30 @@
 	var/desc = ""
 	var/icon_state = ""
 	var/def_bonus = 0
+	/// Whether the rclick will try to get turfs as target.
+	var/target_turf = FALSE
+
+/datum/rmb_intent/proc/get_target(atom/initial_target)
+	if(target_turf)
+		return get_turf(initial_target)
+
+	if(ismob(initial_target))
+		return initial_target
+
+	for(var/mob/living/potential in get_turf(initial_target))
+		return potential
 
 /datum/rmb_intent/proc/special_attack(mob/living/user, atom/target)
-	if(!isliving(target))
-		return
 	if(!user)
-		return
+		return FALSE
+
 	if(user.incapacitated(IGNORE_GRAB))
-		return
-	var/mob/living/L = target
+		return FALSE
+
+	var/mob/living/L = get_target(target)
+	if(!istype(L))
+		return FALSE
+
 	user.changeNext_move(CLICK_CD_FAST)
 	playsound(user, 'sound/combat/feint.ogg', 100, TRUE)
 	user.visible_message(span_danger("[user] feints an attack at [target]!"))
@@ -55,6 +70,8 @@
 	else
 		if(user.client?.prefs.showrolls)
 			to_chat(user, span_warning("[L] did not fall for my feint... [perc]%"))
+
+	return TRUE
 
 /datum/rmb_intent/aimed
 	name = "aimed"
