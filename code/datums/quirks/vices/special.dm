@@ -156,6 +156,7 @@
 		/datum/species/triton,
 		/datum/species/rakshari,
 		/datum/species/kobold,
+		/datum/species/automaton,
 		/datum/oratorium,
 		"Nobles",
 	)
