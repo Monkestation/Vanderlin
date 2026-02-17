@@ -4,7 +4,7 @@
 
 	pre_icon_state = "trap"
 	post_icon_state = "sweep_fx"
-	post_sound = 'sound/combat/sidesweep_hit.ogg'
+	//post_sound = 'sound/combat/sidesweep_hit.ogg'
 
 	stamina_cost = 25
 
@@ -46,4 +46,4 @@
 		if(victim.body_position == LYING_DOWN)
 			continue
 		// victim.apply_status_effect(/datum/status_effect/debuff/exposed, 5 SECONDS)
-		apply_generic_weapon_damage(victim, damage, parent.damage_type, target_zone, damage_class = BCLASS_CUT)
+		apply_generic_weapon_damage(user, parent, victim, damage, parent.damage_type, target_zone, damage_class = BCLASS_CUT)

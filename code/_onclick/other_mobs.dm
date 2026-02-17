@@ -58,7 +58,6 @@
 
 		return TRUE
 
-	var/item_skip = FALSE
 	if(isitem(A))
 		var/obj/item/I = A
 		if(I.w_class >= WEIGHT_CLASS_GIGANTIC)

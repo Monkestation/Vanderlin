@@ -84,6 +84,37 @@
 	desc = "Your attacks have increased strength and have increased force but use more stamina. Higher chance for certain critical hits. Intentionally fails surgery steps. Reduced dodge bonus."
 	icon_state = "rmbstrong"
 	def_bonus = -20
+	target_turf = TRUE
+
+/datum/rmb_intent/strong/special_attack(mob/living/user, atom/target)
+	if(!user)
+		return FALSE
+
+	if(user.incapacitated(IGNORE_GRAB))
+		return FALSE
+
+	var/turf/T = get_target(target)
+	if(!istype(T))
+		return FALSE
+
+	var/obj/item/weapon/held_weapon = user.get_active_held_item()
+
+	if(!istype(held_weapon) || !held_weapon.weapon_special)
+		return FALSE
+
+	var/datum/special_intent/special = held_weapon.weapon_special
+
+	if(!special.deploy(user, held_weapon, target))
+		return FALSE // Invalid starting args somehow
+
+	special.apply_cost(user)
+
+	user.changeNext_move(CLICK_CD_MELEE)
+
+	return TRUE
+
+/obj/item/weapon/sword/sweeper
+	weapon_special = /datum/special_intent/side_sweep
 
 /datum/rmb_intent/swift
 	name = "swift"

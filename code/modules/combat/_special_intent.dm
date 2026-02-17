@@ -76,17 +76,21 @@
  */
 /datum/special_intent/proc/deploy(mob/living/user, obj/item/parent, atom/target)
 	if(!isliving(user) && !isitem(parent))
-		CRASH("Special intent [type] called without living user and item parent.")
+		stack_trace("Special intent [type] called without living user and item parent.")
+		return FALSE
 
 	if(use_clickloc)
 		if(!isturf(target))
 			target = get_turf(target)
 		if(!target)
-			CRASH("Special intent with clickloc called on something that has no valid turf. Potentially used at the map's edge?")
+			stack_trace("Special intent with clickloc called on something that has no valid turf. Potentially used at the map's edge?")
+			return FALSE
 	else
 		target = null
 
 	process_attack(user, parent, target)
+
+	return TRUE
 
 /// Apply the stamina cost of the special
 /datum/special_intent/proc/apply_cost(mob/living/user)
@@ -110,7 +114,7 @@
 
 	start_attack(user, parent, affected)
 
-	start_cooldown()
+	start_cooldown(user)
 
 /// Do stuff before creating the grid
 /datum/special_intent/proc/pre_creation(mob/living/user, obj/item/parent, turf/target)
