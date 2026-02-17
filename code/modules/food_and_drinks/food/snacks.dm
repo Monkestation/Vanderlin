@@ -240,7 +240,7 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(nutrition)
-		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? tastes : null)
+		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
 	..()
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)
@@ -587,7 +587,7 @@ All foods are distributed among various categories. Use common sense.
 	if(!path || !eater)
 		return
 	var/turf/T = get_turf(eater)
-	if(eater.dropItemToGround(src))
+	if(!QDELETED(src) && eater.dropItemToGround(src))
 		qdel(src)
 	var/obj/item/I = new path(T)
 	eater.put_in_active_hand(I, ignore_animation = TRUE)

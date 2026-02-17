@@ -51,7 +51,6 @@
 	tastes = list("mushroom" = 1)
 	sellprice = 30
 	rotprocess = null
-	biting = TRUE
 	var/poisonous = FALSE
 
 /obj/item/reagent_containers/food/snacks/truffles/examine(mob/user)

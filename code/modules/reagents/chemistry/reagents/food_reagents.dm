@@ -106,31 +106,33 @@
 
 	// if data isn't an associative list, this has some WEIRD side effects
 	// TODO probably check for assoc list?
-
-	data = counterlist_normalise(supplied_data)
+	for(var/list/list_data in supplied_data)
+		supplied_data[list_data] = counterlist_normalise(list_data)
 
 /datum/reagent/consumable/nutriment/on_merge(list/newdata, newvolume)
 	. = ..()
-	if(!islist(newdata) || !newdata.len)
+	if(!islist(newdata))
+		return
+	if(!islist(newdata["tastes"]) || !length(newdata["tastes"]))
 		return
 
 	// data for nutriment is one or more (flavour -> ratio)
 	// where all the ratio values adds up to 1
 
 	var/list/taste_amounts = list()
-	if(data)
-		taste_amounts = data.Copy()
+	var/list/taste_data = data?["tastes"]
+	if(!length(taste_data))
+		taste_amounts = taste_data.Copy()
 
 	counterlist_scale(taste_amounts, volume)
 
-	var/list/other_taste_amounts = newdata.Copy()
+	var/list/new_taste_data = newdata["tastes"]
+	var/list/other_taste_amounts = new_taste_data.Copy()
+
 	counterlist_scale(other_taste_amounts, newvolume)
-
 	counterlist_combine(taste_amounts, other_taste_amounts)
-
 	counterlist_normalise(taste_amounts)
-
-	data = taste_amounts
+	LAZYSET(data, "tastes", taste_amounts)
 
 /datum/reagent/consumable/nutriment/vitamin
 	name = "Vitamin"
