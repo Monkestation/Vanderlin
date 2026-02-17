@@ -51,9 +51,6 @@
 	///If the datum is using multi-timed turfs, only the FIRST one's adjacency is checked ONCE.
 	var/respect_adjacency = TRUE
 
-	/// Timer ID
-	var/current_timer = null
-
 // **** EXTERNAL PROCS
 
 // these are called by other things
