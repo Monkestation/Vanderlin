@@ -67,7 +67,10 @@
 /datum/rage/werewolf/proc/on_stress_added(datum/source, datum/stress_event/new_stress)
 	SIGNAL_HANDLER
 
-	if(!holder_mob || holder_mob.stat >= DEAD)
+	if(holder_mob.stat >= UNCONSCIOUS)
+		return
+
+	if(holder_mob.has_status_effect(/datum/status_effect/debuff/barbfalter/werewolf_untransform))
 		return
 
 	var/new_stress_amount = new_stress.get_stress(holder_mob)
@@ -82,6 +85,12 @@
 
 /datum/rage/werewolf/proc/upon_attacked(mob/living/attacked, mob/living/carbon/human/attacker, damage)
 	SIGNAL_HANDLER
+
+	if(holder_mob.stat >= UNCONSCIOUS)
+		return
+
+	if(holder_mob.has_status_effect(/datum/status_effect/debuff/barbfalter/werewolf_untransform))
+		return
 
 	var/base_rage = max(1, damage / 2)
 	var/rage_multiplier = max(stress_rage_multiplier, 1)
