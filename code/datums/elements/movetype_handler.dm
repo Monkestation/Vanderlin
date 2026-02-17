@@ -38,7 +38,7 @@
 	RegisterSignal(movable_target, SIGNAL_REMOVETRAIT(TRAIT_NO_FLOATING_ANIM), PROC_REF(on_no_floating_anim_trait_loss))
 	attached_atoms[movable_target] = TRUE
 
-	if(movable_target.movement_type & (FLOATING|FLYING|SWIMMING) && !HAS_TRAIT(movable_target, TRAIT_NO_FLOATING_ANIM))
+	if(movable_target.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND) && !HAS_TRAIT(movable_target, TRAIT_NO_FLOATING_ANIM))
 		DO_FLOATING_ANIM(movable_target)
 
 /datum/element/movetype_handler/Detach(datum/source)
@@ -62,7 +62,7 @@
 		return
 	var/old_state = source.movement_type
 	source.movement_type |= flag
-	if(!(old_state & (FLOATING|FLYING|SWIMMING)) && (source.movement_type & (FLOATING|FLYING|SWIMMING)) && !HAS_TRAIT(source, TRAIT_NO_FLOATING_ANIM))
+	if(!(old_state & (MOVETYPE_NOT_TOUCHING_GROUND)) && (source.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND)) && !HAS_TRAIT(source, TRAIT_NO_FLOATING_ANIM))
 		DO_FLOATING_ANIM(source)
 	SEND_SIGNAL(source, COMSIG_MOVETYPE_FLAG_ENABLED, flag, old_state)
 
@@ -74,7 +74,7 @@
 		return
 	var/old_state = source.movement_type
 	source.movement_type &= ~flag
-	if((old_state & (FLOATING|FLYING|SWIMMING)) && !(source.movement_type & (FLOATING|FLYING|SWIMMING)))
+	if((old_state & (MOVETYPE_NOT_TOUCHING_GROUND)) && !(source.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND)))
 		STOP_FLOATING_ANIM(source)
 	SEND_SIGNAL(source, COMSIG_MOVETYPE_FLAG_DISABLED, flag, old_state)
 
@@ -86,7 +86,7 @@
 /// Called when the TRAIT_NO_FLOATING_ANIM trait is removed from the mob. Restarts the bobbing animation.
 /datum/element/movetype_handler/proc/on_no_floating_anim_trait_loss(atom/movable/source, trait)
 	SIGNAL_HANDLER
-	if(source.movement_type & (FLOATING|FLYING|SWIMMING))
+	if(source.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND))
 		DO_FLOATING_ANIM(source)
 
 #undef DO_FLOATING_ANIM

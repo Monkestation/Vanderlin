@@ -36,22 +36,29 @@
 	no_over_text = FALSE
 	spread_chance = 0
 	burn_power = 0
-	var/uses_height = TRUE	//if we use water_height to pick the overlay
-	// Determines depth based behavior and which overlays to apply. Heights in order are ANKLE, SHALLOW, DEEP, FULL.
+	/// if we use water_height to pick the overlay
+	var/uses_height = TRUE
+	/// Determines depth based behavior and which overlays to apply. Heights in order are ANKLE, SHALLOW, DEEP, FULL.
 	var/water_height = WATER_HEIGHT_SHALLOW
 	var/datum/reagent/water_reagent = /datum/reagent/water
-	var/mapped = TRUE // infinite source of water
-	var/water_volume = 100 // 100 is 1 bucket. Minimum of 10 to count as a water tile
+	/// infinite source of water
+	var/mapped = TRUE
+	/// 100 is 1 bucket. Minimum of 10 to count as a water tile
+	var/water_volume = 100
 	var/water_maximum = 10000 //this is since water is stored in the originate
 	var/wash_in = TRUE
 	var/swim_skill = FALSE
 	var/swimdir = FALSE
-	var/notake = FALSE // cant pick up with reagent containers
+	/// cant pick up with reagent containers
+	var/notake = FALSE
 	var/set_relationships_on_init = TRUE
-	var/open_bottom = FALSE	//if the water tile is open from below
-	var/fake_bottomless = FALSE //for letting tiles act like deep water without an open bottom
-	var/skip_bottom_check = FALSE //for tiles that should always have a closed bottom
-	// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
+	/// if the water tile is open from below
+	var/open_bottom = FALSE
+	/// for letting tiles act like deep water without an open bottom
+	var/fake_bottomless = FALSE
+	/// for tiles that should always have a closed bottom
+	var/skip_bottom_check = FALSE
+	/// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
 	var/blocked_flow_directions = 0
 
 	var/cached_use = 0
@@ -252,11 +259,26 @@
 	. = ..()
 	if(open_bottom)
 		vis_contents += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
-		icon = 'icons/turf/floors.dmi'
 		icon_state = "openspace"
 		AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
 	if(set_relationships_on_init)
 		check_surrounding_water()
+
+/turf/open/water/examine(mob/user)
+	. = ..()
+	if(water_volume >= 10)
+		if(fake_bottomless)
+			. += span_notice("I can't see the bottom...")
+		else if(water_height < WATER_HEIGHT_FULL)
+			var/depth_message
+			switch(water_height)
+				if(WATER_HEIGHT_ANKLE)
+					depth_message = "ankle deep."
+				if(WATER_HEIGHT_SHALLOW)
+					depth_message = "about waist high."
+				if(WATER_HEIGHT_DEEP)
+					depth_message = "rather deep."
+			. += span_notice("It looks [depth_message]")
 
 /turf/open/water/process()
 	if(cached_use)
