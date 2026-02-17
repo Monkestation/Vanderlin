@@ -161,11 +161,6 @@
 	if(!length(turfs))
 		return
 
-	for(var/turf/affected as anything in turfs)
-		var/obj/effect/temp_visual/duration_setting/effect = new(affected, attack_delay)
-		effect.icon = icon
-		effect.icon_state = pre_icon_state
-
 	pre_delay(user, parent, turfs)
 
 	if(!use_doafter)
@@ -177,8 +172,13 @@
 /datum/special_intent/proc/pre_delay(mob/living/user, obj/item/parent, list/turfs)
 	SHOULD_CALL_PARENT(TRUE)
 
-	if(pre_icon_state)
-		playsound(user, pre_icon_state, 100, TRUE)
+	for(var/turf/affected as anything in turfs)
+		var/obj/effect/temp_visual/duration_setting/effect = new(affected, attack_delay)
+		effect.icon = icon
+		effect.icon_state = pre_icon_state
+
+	if(pre_sound)
+		playsound(user, pre_sound, 100, TRUE)
 
 /// This is called immediately after the delay of the intent.
 /// It performs any needed adjacency checks and will try to draw the "post" visuals on any valid turfs.
@@ -241,11 +241,9 @@
 	else
 		var/mob/living/carbon/human/human_victim = victim
 		var/obj/item/bodypart/affecting = human_victim.get_bodypart(damage_zone)
-		if(!affecting)
-			return
 		var/armor_block = human_victim.run_armor_check(damage_zone, damage_type, damage = damage)
 		if(human_victim.apply_damage(damage, damage_type, affecting, armor_block))
-			affecting.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE)
+			affecting?.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE)
 			message += "<b> It pierces through to their flesh!</b>"
 			playsound(human_victim, weapon.hitsound, 80, TRUE)
 
