@@ -32,7 +32,7 @@
 	/// The main place where we can draw out the pattern. Every tile entry is a list with two numbers.
 	/// The origin (0,0) is one step forward from the dir the owner is facing.
 	/// This can be modified, though it's best be done before _draw_grid().
-	var/list/tile_coordinates
+	var/list/tile_coordinates = null
 
 	/// Whether to have the howner pass through a doafter for the delay rather than it being on every turf.
 	/// Default code here does not allow for dir switching during the do after.
@@ -102,6 +102,8 @@
 	if(user.ckey)
 		user.log_message(span_danger("Used the Special [name] on [key_name(target)]."), LOG_ATTACK)
 
+	pre_creation(user, parent, target)
+
 	var/list/turf/affected = build_affected_turfs(user, target)
 
 	after_creation(user, parent, affected)
@@ -109,6 +111,10 @@
 	start_attack(user, parent, affected)
 
 	start_cooldown()
+
+/// Do stuff before creating the grid
+/datum/special_intent/proc/pre_creation(mob/living/user, obj/item/parent, turf/target)
+	return
 
 /// Use our [tile_coordinates] to return a list of affected turfs
 /datum/special_intent/proc/build_affected_turfs(mob/living/user, turf/start_override)
@@ -145,6 +151,8 @@
 
 /// Start the attack, executing it after the delay
 /datum/special_intent/proc/start_attack(mob/living/user, obj/item/parent, list/turfs)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
 	if(!length(turfs))
 		return
 
