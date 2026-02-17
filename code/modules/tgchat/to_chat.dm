@@ -7,17 +7,7 @@
  * Circumvents the message queue and sends the message
  * to the recipient (target) as soon as possible.
  */
-/proc/to_chat_immediate(
-	target,
-	html,
-	type = null,
-	text = null,
-	avoid_highlighting = FALSE,
-	// FIXME: These flags are now pointless and have no effect
-	handle_whitespace = TRUE,
-	trailing_newline = TRUE,
-	confidential = FALSE
-)
+/proc/to_chat_immediate(target, html, type = null, text = null, avoid_highlighting = FALSE)
 	// Useful where the integer 0 is the entire message. Use case is enabling to_chat(target, some_boolean) while preventing to_chat(target, "")
 	html = "[html]"
 	text = "[text]"
@@ -32,10 +22,14 @@
 
 	// Build a message
 	var/message = list()
-	if(type) message["type"] = type
-	if(text) message["text"] = text
-	if(html) message["html"] = html
-	if(avoid_highlighting) message["avoidHighlighting"] = avoid_highlighting
+	if(type)
+		message["type"] = type
+	if(text)
+		message["text"] = text
+	if(html)
+		message["html"] = html
+	if(avoid_highlighting)
+		message["avoidHighlighting"] = avoid_highlighting
 
 	// send it immediately
 	SSchat.send_immediate(target, message)
@@ -50,17 +44,7 @@
  *     html = "You have found <strong>[object]</strong>")
  * ```
  */
-/proc/to_chat(
-	target,
-	html,
-	type = null,
-	text = null,
-	avoid_highlighting = FALSE,
-	// FIXME: These flags are now pointless and have no effect
-	handle_whitespace = TRUE,
-	trailing_newline = TRUE,
-	confidential = FALSE
-)
+/proc/to_chat(target, html, type = null, text = null, avoid_highlighting = FALSE)
 	if(isnull(Master) || !SSchat?.initialized)
 		to_chat_immediate(target, html, type, text, avoid_highlighting)
 		return
@@ -78,8 +62,13 @@
 
 	// Build a message
 	var/message = list()
-	if(type) message["type"] = type
-	if(text) message["text"] = text
-	if(html) message["html"] = html
-	if(avoid_highlighting) message["avoidHighlighting"] = avoid_highlighting
+	if(type)
+		message["type"] = type
+	if(text)
+		message["text"] = text
+	if(html)
+		message["html"] = html
+	if(avoid_highlighting)
+		message["avoidHighlighting"] = avoid_highlighting
+
 	SSchat.queue(target, message)

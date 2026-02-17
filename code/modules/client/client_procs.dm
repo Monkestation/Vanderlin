@@ -719,6 +719,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if (menuitem)
 			menuitem.Load_checked(src)
 
+	if(byond_version >= 516) // byondstorage handled by tgui
+		winset(src, null, "browser-options=find,devtools")
+
 	loot_panel = new(src)
 
 	view_size = new(src, getScreenSize())
