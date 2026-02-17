@@ -35,10 +35,7 @@
 	species_traits = list(
 		NO_UNDERWEAR,
 		NOTRANSSTING,
-		TRAIT_NOFALLDAMAGE1,
-		TRAIT_RESISTCOLD,
-		TRAIT_RESISTHEAT,
-		TRAIT_NOBREATH
+		NOBLOOD
 	)
 	inherent_traits = list(
 		TRAIT_NOMOOD,
@@ -47,7 +44,11 @@
 		TRAIT_EASYLIMBDISABLE,
 		TRAIT_NOSTAMINA,
 		TRAIT_EASYDISMEMBER,
-		TRAIT_LIMBATTACHMENT
+		TRAIT_LIMBATTACHMENT,
+		TRAIT_NOFALLDAMAGE1,
+		TRAIT_RESISTCOLD,
+		TRAIT_RESISTHEAT,
+		TRAIT_NOBREATH,
 	)
 
 	specstats_m = list(
@@ -101,7 +102,7 @@
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
-
+/*
 	var/list/actions = list(
 		/datum/action/manage_voice_actions
 	)
@@ -178,23 +179,23 @@
 		/mob/living/carbon/human/proc/voice_yes,
 		/mob/living/carbon/human/proc/voice_yourboneswillneverbefound,
 		/mob/living/carbon/human/proc/voice_yourluxwillbemine,
-	)
+	)*/
 
 /datum/species/automaton/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
-	C.AddComponent(/datum/component/abberant_eater, list(/obj/item/ore/coal, /obj/item/grown/log/tree))
-	C.AddComponent(/datum/component/steam_life)
-	C.AddComponent(/datum/component/command_follower)
-	C.AddElement(/datum/element/footstep, FOOTSTEP_MOB_METAL, 1, -2)
-	C.AddComponent(/datum/component/augmentable)
+	//C.AddComponent(/datum/component/abberant_eater, list(/obj/item/ore/coal, /obj/item/grown/log/tree))
+	//C.AddComponent(/datum/component/steam_life)
+	//C.AddComponent(/datum/component/command_follower)
+	//C.AddElement(/datum/element/footstep, FOOTSTEP_MOB_METAL, 1, -2)
+	//C.AddComponent(/datum/component/augmentable)
 
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 
-	for(var/datum/action/action as anything in actions)
-		C.add_spell(action)
+	//for(var/datum/action/action as anything in actions)
+	//	C.add_spell(action)
 
-	add_verb(C, given_voices)
+	//add_verb(C, given_voices)
 	C.add_movespeed_modifier("automaton", multiplicative_slowdown = 0.9)
 
 /datum/species/automaton/on_species_loss(mob/living/carbon/C)
