@@ -93,6 +93,9 @@
 	if(user.incapacitated(IGNORE_GRAB))
 		return FALSE
 
+	if(user.has_status_effect(/datum/status_effect/debuff/specialcd))
+		return FALSE
+
 	var/turf/T = get_target(target)
 	if(!istype(T))
 		return FALSE
