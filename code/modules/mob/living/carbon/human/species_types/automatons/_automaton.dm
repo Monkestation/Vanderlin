@@ -183,8 +183,8 @@
 
 /datum/species/automaton/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
-	//C.AddComponent(/datum/component/abberant_eater, list(/obj/item/ore/coal, /obj/item/grown/log/tree))
-	//C.AddComponent(/datum/component/steam_life)
+	C.AddComponent(/datum/component/abberant_eater, list(/obj/item/ore/coal, /obj/item/grown/log/tree))
+	C.AddComponent(/datum/component/steam_life)
 	//C.AddElement(/datum/element/footstep, FOOTSTEP_MOB_METAL, 1, -2)//Doesn't need
 	C.AddComponent(/datum/component/augmentable)
 
