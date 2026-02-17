@@ -256,5 +256,3 @@
 		span_warning(message),
 		span_userdanger("I'm struck by [name]!"),
 	)
-
-
