@@ -31,7 +31,7 @@
 
 	/// The main place where we can draw out the pattern. Every tile entry is a list with two numbers.
 	/// The origin (0,0) is one step forward from the dir the owner is facing.
-	/// This can be modified, though it's best be done before _draw_grid().
+	/// This can be modified, though it's best be done before [build_affected_turfs].
 	var/list/tile_coordinates = null
 
 	/// Whether to have the howner pass through a doafter for the delay rather than it being on every turf.
@@ -51,19 +51,26 @@
 	///If the datum is using multi-timed turfs, only the FIRST one's adjacency is checked ONCE.
 	var/respect_adjacency = TRUE
 
+	/// The only reference we will hold, and only if [respect_adjacency] is TRUE
+	/// If the users loc isn't this when we end, they moved.
+	var/turf/starting_loc = null
+
+/datum/special_intent/Destroy(force, ...)
+	starting_loc = null
+	return ..()
+
 // **** EXTERNAL PROCS
 
 // these are called by other things
 
 /// Get a nice examine string for this special
 /datum/special_intent/proc/get_examine()
-	var/str = "<details><summary><b>SPECIAL:</b> [name]</summary>"
-	str += "<i>[desc]</i>"
+	var/str = "<details><summary><b>SPECIAL:</b> [span_tooltip("This ability can be used by right clicking while in STRONG stance.", name)]</summary>"
+	str += "[desc]"
 	if(range)
-		str += "\n<i>Max Range: ["\Roman [range]"]"
+		str += "\nMax Range: ["\Roman [range]"]"
 	if(stamina_cost)
-		str += "\n<i>Stamina Cost: [stamina_cost]"
-	str +="\n<i><font size = 1>This ability can be used by right clicking while in STRONG stance.</font></i></details>"
+		str += "\nStamina Drain: [stamina_cost]"
 	return str
 
 /**
@@ -84,6 +91,9 @@
 			return FALSE
 	else
 		target = null
+
+	if(respect_adjacency)
+		starting_loc = get_turf(user)
 
 	if(range && !user.Adjacent(target)) // We got called from resolveRangedClick
 		if(get_dist(user, target) > range)
@@ -193,11 +203,10 @@
 		user.balloon_alert(user, "dropped weapon!")
 		return
 
-	if(respect_adjacency)
-		for(var/turf/affected as anything in turfs)
-			if(!user.TurfAdjacent(affected))
-				user.balloon_alert(user, "too far!")
-				return
+	if(starting_loc && get_turf(user) != starting_loc)
+		starting_loc = null
+		user.balloon_alert(user, "moved!")
+		return
 
 	for(var/turf/affected as anything in turfs)
 		if(post_icon_state)
