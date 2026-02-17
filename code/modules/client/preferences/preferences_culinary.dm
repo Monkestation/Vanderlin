@@ -389,7 +389,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/dough_slice,
 		/obj/item/reagent_containers/food/snacks/butterdough,
 		/obj/item/reagent_containers/food/snacks/butterdough_slice,
-		/obj/item/reagent_containers/food/snacks/meat/wiener,
+		/obj/item/reagent_containers/food/snacks/meat/sausage/wiener,
 		/obj/item/reagent_containers/food/snacks/meat/sausage,
 		/obj/item/reagent_containers/food/snacks/meat/fatty,
 		/obj/item/reagent_containers/food/snacks/rotten/sausage,

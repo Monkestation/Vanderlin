@@ -162,7 +162,7 @@
 
 /datum/container_craft/pan/wiener
 	name = "Fried Wiener"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/wiener = 1)
+	requirements = list(/obj/item/reagent_containers/food/snacks/meat/sausage/wiener = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener
 	cooked_smell = /datum/pollutant/food/sausage
 

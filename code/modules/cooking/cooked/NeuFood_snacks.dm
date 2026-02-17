@@ -306,6 +306,8 @@
 
 /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener // wiener meant to be made from beef or maybe mince + bacon, luxury sausage, not implemented yet
 	name = "wiener"
+	nutrition = COOKED_FATTYMEAT_NUTRITION
+
 /*	.............   Sausages on sticks   ................ */
 /obj/item/reagent_containers/food/snacks/cooked/sausage_sticked
 	name = "sausage onna stick"

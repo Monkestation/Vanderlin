@@ -302,11 +302,8 @@
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/sausage
 	nutrition = RAWMEAT_NUTRITION
 
-/obj/item/reagent_containers/food/snacks/meat/wiener
+/obj/item/reagent_containers/food/snacks/meat/sausage/wiener
 	name = "raw wiener"
-	icon_state = "raw_wiener"
-	ingredient_size = 1
-	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/sausage
 	nutrition = FATTYMEAT_NUTRITION
 
 

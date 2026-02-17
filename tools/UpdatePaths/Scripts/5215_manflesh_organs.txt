@@ -10,3 +10,4 @@
 /obj/item/reagent_containers/food/snacks/pie/cooked/poison : /obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison{@OLD}
 /obj/item/reagent_containers/food/snacks/pie/cooked/poison/good : /obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison{@OLD}
 /obj/item/reagent_containers/food/snacks/pieslice/good/poison : /obj/item/reagent_containers/food/snacks/pieslice/good/berry/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/meat/sausage/wiener : /obj/item/reagent_containers/food/snacks/meat/sausage/wiener{@OLD}
