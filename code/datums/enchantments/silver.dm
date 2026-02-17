@@ -100,7 +100,7 @@
 /datum/status_effect/debuff/silver_bane
 	id = "silver_bane"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_bane
-	duration = 30 SECONDS
+	duration = 15 SECONDS
 	tick_interval = -1 // No ticking needed
 	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
 	var/stacks = 0
