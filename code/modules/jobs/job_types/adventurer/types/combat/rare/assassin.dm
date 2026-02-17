@@ -8,7 +8,6 @@
 	inherit_parent_title = TRUE //this prevents advjob from being set back to "Assassin" in equipme
 	antags_can_pick = FALSE //Assassins are antagonists by default, so they can't be chosen if you're already an antagonist.
 	antag_role = /datum/antagonist/assassin
-	triumph_blacklisted = TRUE
 
 	pack_title = "Assassin Disguises"
 	pack_message = "Choose your cover identity"
