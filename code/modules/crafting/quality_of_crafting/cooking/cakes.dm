@@ -1,40 +1,4 @@
 
-/datum/repeatable_crafting_recipe/cooking/chescake_poison
-	hides_from_books = TRUE
-	category = "Cakes"
-	name = "Cheesecake Base"
-
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison = 1,
-		/obj/item/reagent_containers/food/snacks/cake = 1,
-	)
-	attacked_atom = /obj/item/reagent_containers/food/snacks/cake
-	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison
-	output = /obj/item/reagent_containers/food/snacks/chescake_poison
-	required_table = TRUE
-	craft_time = 6 SECONDS
-	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
-	crafting_message = "add some juicy fruit filling"
-	extra_chance = 100
-
-/datum/repeatable_crafting_recipe/cooking/chescake_poison_raisan
-	hides_from_books = TRUE
-	category = "Cakes"
-	name = "Berry Cheesecake Base"
-
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/raisins/poison = 1,
-		/obj/item/reagent_containers/food/snacks/cake = 1,
-	)
-	attacked_atom = /obj/item/reagent_containers/food/snacks/cake
-	starting_atom = /obj/item/reagent_containers/food/snacks/raisins/poison
-	output = /obj/item/reagent_containers/food/snacks/chescake_poison
-	required_table = TRUE
-	craft_time = 6 SECONDS
-	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
-	crafting_message = "add some juicy fruit filling"
-	extra_chance = 100
-
 /datum/repeatable_crafting_recipe/cooking/chescake
 	category = "Cakes"
 	name = "Raisin Cheesecake Base"
@@ -43,6 +7,7 @@
 		/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry = 1,
 		/obj/item/reagent_containers/food/snacks/cake = 1,
 	)
+	subtypes_allowed = TRUE
 	attacked_atom = /obj/item/reagent_containers/food/snacks/cake
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry
 	output = /obj/item/reagent_containers/food/snacks/chescake
@@ -168,24 +133,6 @@
 	attacked_atom = /obj/item/reagent_containers/food/snacks/chescake
 	starting_atom = /obj/item/reagent_containers/food/snacks/cheese
 	output = /obj/item/reagent_containers/food/snacks/chescake_ready
-	craft_time = 9 SECONDS
-	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
-	crafting_message = "spread fresh cheese on the cake"
-	extra_chance = 100
-
-/datum/repeatable_crafting_recipe/cooking/unbaked_cheesecake_poison
-	hides_from_books = TRUE
-	category = "Cakes"
-	name = "Unbaked Cheesecake"
-
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/cheese = 1,
-		/obj/item/reagent_containers/food/snacks/chescake_poison = 1,
-	)
-	required_table = TRUE
-	attacked_atom = /obj/item/reagent_containers/food/snacks/chescake_poison
-	starting_atom = /obj/item/reagent_containers/food/snacks/cheese
-	output = /obj/item/reagent_containers/food/snacks/chescake_poison_ready
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "spread fresh cheese on the cake"

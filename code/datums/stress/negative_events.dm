@@ -136,7 +136,7 @@
 /datum/stress_event/rotfood
 	timer = 2 MINUTES
 	stress_change = 4
-	desc = "<span class='red'>YUCK! MAGGOTS!</span>"
+	desc = "<span class='necrosis'>I felt a maggot wriggle as I swallowed...</span>"
 
 /datum/stress_event/psycurselight
 	timer = 1 MINUTES

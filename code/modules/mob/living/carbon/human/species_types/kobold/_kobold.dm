@@ -62,6 +62,7 @@
 	soundpack_f = /datum/voicepack/male/kobold
 
 	exotic_bloodtype = /datum/blood_type/human/kobold
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/fatty/kobold = 1)
 
 	custom_id = "dwarf"
 	custom_clothes = TRUE

@@ -19,6 +19,7 @@
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/sneaking = 1,
 	)
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/pieslice/good/apple = 0.05)
 
 	use_skintones = TRUE
 
