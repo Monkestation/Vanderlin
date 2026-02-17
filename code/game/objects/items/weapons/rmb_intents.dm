@@ -113,9 +113,6 @@
 
 	return TRUE
 
-/obj/item/weapon/sword/sweeper
-	weapon_special = /datum/special_intent/side_sweep
-
 /datum/rmb_intent/swift
 	name = "swift"
 	desc = "Your attacks have less recovery time but are less accurate and have reduced strength."
