@@ -217,8 +217,7 @@
 	if(caster_mob.stat != DEAD)
 		caster_mob.revive(HEAL_DAMAGE|HEAL_BLOOD)
 
-		// var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
-		var/damage_to_apply = owner.getBruteLoss()
+		var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
 		caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE, spread_damage = TRUE)
 
 	if(iscarbon(owner))
