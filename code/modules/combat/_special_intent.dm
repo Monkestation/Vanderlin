@@ -255,7 +255,7 @@
 		var/obj/item/bodypart/affecting = human_victim.get_bodypart(damage_zone)
 		var/armor_block = human_victim.run_armor_check(damage_zone, damage_type, damage = damage)
 		if(human_victim.apply_damage(damage, damage_type, affecting, armor_block))
-			affecting?.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE)
+			affecting?.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE, reduce_crit = 100)
 			message += "<b> It pierces through to their flesh!</b>"
 			playsound(human_victim, weapon.hitsound, 80, TRUE)
 
