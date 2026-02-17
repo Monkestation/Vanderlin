@@ -41,7 +41,7 @@ function setupApp() {
   Byond.subscribe((type, payload) => bus.dispatch({ type, payload }));
 
   // Unhide the panel
-  Byond.winset('output_selector.legacy_output_selector', {
+  Byond.winset('outputwindow.legacy_output_selector', {
     left: 'output_browser',
   });
 
