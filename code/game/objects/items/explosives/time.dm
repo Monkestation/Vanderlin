@@ -1,5 +1,5 @@
 /obj/item/explosive/time_bomb
-	name = "Time Bomb"
+	name = "time bomb"
 	desc = "Three canister bombs tied together with a long fuse, perfect for hiding in elven luggage. The length of the fuse should provide around 5 minutes of time before detonation."
 	icon_state = "timebomb"
 	icon = 'icons/obj/bombs.dmi'
