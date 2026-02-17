@@ -4,7 +4,7 @@
 	rage_change_on_life = -0.5
 	/// Base rage gain multiplier from stress
 	var/stress_rage_multiplier = 0.1
-	rage_thresholds = list(
+	rage_thresholds = alist(
 		WW_RAGE_LOW = list(),
 		WW_RAGE_MEDIUM = list(),
 		WW_RAGE_HIGH = list(),
@@ -49,9 +49,9 @@
 /datum/rage/werewolf/upon_tier_change(new_rage_tier, old_rage_tier)
 	. = ..()
 	var/active_mob = secondary_mob || holder_mob
-	if(new_rage_tier && rage_thresholds["[new_rage_tier]"])
+	if(new_rage_tier && rage_thresholds[new_rage_tier])
 		// Notify player of tier change
-		switch("[new_rage_tier]")
+		switch(new_rage_tier)
 			if(WW_RAGE_LOW)
 				to_chat(active_mob, span_notice("My rage begins to build..."))
 			if(WW_RAGE_MEDIUM)
