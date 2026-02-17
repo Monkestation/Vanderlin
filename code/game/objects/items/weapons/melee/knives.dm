@@ -296,6 +296,18 @@
 	icon_state = "pestrasickle"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 
+/obj/item/weapon/knife/dagger/steel/hand
+	name = "Fervor"
+	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
+	icon_state = "sdaggerhand"
+	sellprice = 200
+
+/obj/item/weapon/knife/dagger/steel/hand/parry
+	name = "Apathy"
+	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
+	wdefense = GOOD_PARRY
+	icon_state = "spdaggerhand"
+
 //................ Fanged dagger ............... //
 /obj/item/weapon/knife/dagger/steel/dirk
 	name = "fanged dagger"

@@ -888,7 +888,7 @@
 				continue
 
 			if(istype(R, /datum/reagent/consumable/nutriment))
-				var/list/taste_data = R.data
+				var/list/taste_data = R.data["tastes"]
 				for(var/taste in taste_data)
 					var/ratio = taste_data[taste]
 					var/amount = ratio * R.taste_mult * R.volume

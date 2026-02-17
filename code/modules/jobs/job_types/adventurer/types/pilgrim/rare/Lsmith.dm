@@ -7,7 +7,7 @@
 		SPEC_ID_DWARF,\
 	)
 	outfit = /datum/outfit/pilgrim/masterblacksmith
-	total_positions = 1
+	total_positions = 0
 	roll_chance = 0
 	category_tags = list(CTAG_PILGRIM)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'

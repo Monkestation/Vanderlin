@@ -9,7 +9,6 @@
 	blacklist = list(
 		/datum/job/orphan,
 		/datum/job/artificer,
-		/datum/job/armorsmith,
 		/datum/job/carpenter,
 		/datum/job/gaffer,
 		/datum/job/matron,
@@ -46,4 +45,5 @@
 	slot_adjust = list(
 		/datum/job/farmer = 1000,
 		/datum/job/miner = 1000,
+		/datum/job/blacksmith = -1,
 	)

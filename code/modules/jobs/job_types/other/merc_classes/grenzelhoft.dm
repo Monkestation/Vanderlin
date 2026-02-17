@@ -18,7 +18,7 @@
 		/datum/skill/craft/cooking = 1,
 	)
 	traits = list(TRAIT_MEDIUMARMOR)
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 2
 
@@ -48,7 +48,7 @@
 	if(H.dna?.species.id == SPEC_ID_HUMEN)
 		H.dna.species.native_language = "Old Psydonic"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-	var/weapons = list("Zweihander", "Musket",)
+	var/weapons = list("Zweihander", "Musket", "Halberd")
 	var/weapon_choice = input(H,"CHOOSE YOUR WEAPON.", "GO EARN SOME COIN.") as anything in weapons
 	switch(weapon_choice)
 		if("Zweihander")
@@ -68,3 +68,11 @@
 			H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 			if(H.age == AGE_OLD)
 				H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+		if("Halberd")
+			H.equip_to_slot_or_del(new /obj/item/weapon/polearm/halberd, ITEM_SLOT_BACK_R, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel, ITEM_SLOT_BACK_L, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/storage/belt/pouch/coins/poor, ITEM_SLOT_BELT_R, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
+			H.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // same as zwei
+			H.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,3), TRUE) // same as zwei
+			H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)

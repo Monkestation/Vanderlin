@@ -5,7 +5,7 @@
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/pilgrim/grandmastermason
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
-	total_positions = 1
+	total_positions = 0
 	roll_chance = 0
 	apprentice_name = "Mason Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'

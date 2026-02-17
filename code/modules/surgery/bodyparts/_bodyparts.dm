@@ -52,6 +52,7 @@
 	var/animal_origin = 0 //for nonhuman bodypart (e.g. monkey)
 	var/dismemberable = 1 //whether it can be dismembered with a weapon.
 	// var/disableable = 1
+	var/food_type = null
 
 	var/px_x = 0
 	var/px_y = 0
@@ -178,51 +179,39 @@
 		qdel(src)
 
 /obj/item/bodypart/MiddleClick(mob/living/user, list/modifiers)
+	if(status != BODYPART_ORGANIC)
+		return ..()
+	if(skeletonized || !length(food_type))
+		to_chat(user, span_warning("[src] has no meat to eat."))
+		return
 	var/obj/item/held_item = user.get_active_held_item()
-	var/datum/species/S = original_owner?.dna?.species
-	if(held_item)
-		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
-			if(!skeletonized)
-				var/used_time = 21 SECONDS
-				if(user.mind)
-					used_time -= (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 3 SECONDS)
-				visible_message("[user] begins to butcher \the [src].")
-				playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-				var/steaks = 1
-				switch(user.get_skill_level(/datum/skill/labor/butchering))
-					if(3)
-						steaks = 2
-					if(4 to 5)
-						steaks = 3
-					if(6)
-						steaks = 4 // the steaks have never been higher
-				var/amt2raise = user.STAINT/3
-				if(do_after(user, used_time, src))
-					var/obj/item/reagent_containers/food/snacks/meat/steak/steak
-					var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/steak
-					for(steaks, steaks>0, steaks--)
-						steak = new steak_type(get_turf(src))	//Meat depends on species.
-						if(rotted)
-							steak.become_rotten()
-					new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-					user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
-					qdel(src)
-			else
-				to_chat(user, span_warning("[src] has no meat to butcher."))
-	else if(isanimal(user))
-		if(!skeletonized)
-			visible_message("[user] begins to eat \the [src].")
-			playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-			if(do_after(user, 3 SECONDS, src))
-				var/obj/item/reagent_containers/food/snacks/meat/steak/steak
-				var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/steak
-				steak = new steak_type(get_turf(src))	//Meat depends on species.
-				if(rotted)
-					steak.become_rotten()
-				new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-				qdel(src)
-		else
-			to_chat(user, span_warning("[src] has no meat to eat."))
+	if(isanimal(user))
+		visible_message("[user] begins to eat \the [src].")
+		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
+		if(!do_after(user, 5 SECONDS, src))
+			return
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+		qdel(src)
+		return
+	else if(held_item?.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+		var/used_time = 21 SECONDS
+		if(user.skills)
+			used_time -= (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 3 SECONDS)
+		visible_message("[user] begins to butcher \the [src].")
+		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
+		if(!do_after(user, used_time, src))
+			return
+		var/drops = 1 + round(lerp(0, 3, user.get_skill_level(/datum/skill/labor/butchering, TRUE) / SKILL_LEVEL_LEGENDARY))
+		var/amt2raise = user.STAINT/3
+		for(var/i in 1 to drops)
+			var/choose_type = pickweight(food_type)
+			var/obj/item/reagent_containers/food/snacks/food = new choose_type(get_turf(src))
+			if(rotted)
+				food.become_rotten()
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+		user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
+		qdel(src)
+		return
 	..()
 
 /obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
@@ -442,6 +431,8 @@
 		return
 	if(owner?.dna?.unique_identity)
 		fingerprint = md5(owner.dna.unique_identity)
+	if(owner?.dna?.species)
+		food_type = owner.dna.species.meat
 
 ///Proc to change the value of the `owner` variable and react to the event of its change.
 /obj/item/bodypart/proc/set_owner(mob/living/carbon/new_owner)

@@ -98,42 +98,6 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define STRESS_GOOD 1
 #define STRESS_VGOOD -4
 
-/*	........   Nutrition defines   ................ */
-#define MEAL_FILLING 30
-#define MEAL_GOOD 24
-#define MEAL_AVERAGE 18
-#define MEAL_MEAGRE 15
-#define SNACK_CHUNKY 12
-#define SNACK_NUTRITIOUS 9
-#define SNACK_DECENT 6
-#define SNACK_POOR 3
-
-
-#define MEATPIE_NUTRITION (MINCE_NUTRITION * 3) + BUTTERDOUGH_NUTRITION
-#define FRUITPIE_NUTRITION (SNACK_POOR * 3) + BUTTERDOUGH_NUTRITION
-#define BREADSLICE_NUTRITION SNACK_POOR
-#define DOUGH_NUTRITION BREADSLICE_NUTRITION * 6
-#define SMALLDOUGH_NUTRITION (MEAL_MEAGRE / 2)
-#define BUTTERDOUGH_NUTRITION DOUGH_NUTRITION + BUTTER_NUTRITION
-#define BUTTERDOUGHSLICE_NUTRITION (BUTTERDOUGH_NUTRITION / 2)
-#define BUTTER_NUTRITION SNACK_POOR
-#define RAWMEAT_NUTRITION SNACK_DECENT
-#define COOKED_MEAT_NUTRITION SNACK_NUTRITIOUS
-#define MINCE_NUTRITION SNACK_DECENT
-#define SAUSAGE_NUTRITION MINCE_NUTRITION + COOKED_FAT_NUTRITION
-#define CHEESE_NUTRITION SNACK_DECENT
-#define EGG_NUTRITION SNACK_DECENT
-#define FRYVEGGIE_NUTRITION SNACK_POOR
-#define COOKED_FAT_NUTRITION SNACK_DECENT
-
-/*	........   Rotting Food defines   ................ */
-#define SHELFLIFE_EXTREME 90 MINUTES
-#define SHELFLIFE_LONG 50 MINUTES
-#define SHELFLIFE_DECENT 30 MINUTES
-#define SHELFLIFE_SHORT 20 MINUTES
-#define SHELFLIFE_TINY 12 MINUTES
-#define SHELFLIFE_MINISCULE 5 MINUTES
-
 /*
 	Formerly bitflags, now we are strings
 	Currently used for classes, I could have used these for drifters tho
@@ -166,6 +130,16 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
+
+#define ANY_CLASS_CTAGS list(\
+	CTAG_PILGRIM, \
+	CTAG_ADVENTURER, \
+	CTAG_TOWNER, \
+	CTAG_MERCENARY, \
+	CTAG_GARRISON, \
+	CTAG_FORGARRISON, \
+	CTAG_MENATARMS, \
+)
 
 // .............. SELLPRICE/VALUE DEFINES ..................... //
 // Basicallly material cost + work cost will be the value from now on. Needs work to value these things in comparison but its a simple way to get some consistency to it
