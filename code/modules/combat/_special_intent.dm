@@ -87,7 +87,7 @@
 		if(!isturf(target))
 			target = get_turf(target)
 		if(!target)
-			stack_trace("Special intent with clickloc called on something that has no valid turf. Potentially used at the map's edge?")
+			stack_trace("Special intent [type] with clickloc called on something that has no valid turf.")
 			return FALSE
 	else
 		target = null
@@ -186,6 +186,7 @@
 		var/obj/effect/temp_visual/duration_setting/effect = new(affected, attack_delay)
 		effect.icon = icon
 		effect.icon_state = pre_icon_state
+		effect.plane = GAME_PLANE_FOV_HIDDEN
 
 	if(pre_sound)
 		playsound(user, pre_sound, 100, TRUE)
@@ -213,6 +214,8 @@
 			var/obj/effect/temp_visual/duration_setting/effect = new(affected, fade_delay)
 			effect.icon = icon
 			effect.icon_state = post_icon_state
+			effect.plane = GAME_PLANE_FOV_HIDDEN
+
 		apply_hit(user, parent, affected)
 
 	if(post_sound)
