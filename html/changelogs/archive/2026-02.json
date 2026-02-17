@@ -462,5 +462,33 @@
                 "code_imp": "Armorsmith & Weaponsmith code changed."
             }
         ]
+    },
+    "2026-02-17": {
+        "MrTCo1": [
+            {
+                "rscadd": "Fervor and Apathy daggers to Spymaster Hand"
+            },
+            {
+                "rscadd": "Noble Undercoat to Spymaster and Advisor Hand"
+            },
+            {
+                "rscadd": "Wrist bracer knife sheath"
+            }
+        ],
+        "Ordosian": [
+            {
+                "bugfix": "Fixed Lantern offsets"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Grenzel mercs can spawn with a halberd"
+            }
+        ],
+        "7erracotta": [
+            {
+                "rscadd": "Added new hairstyles"
+            }
+        ]
     }
 }
