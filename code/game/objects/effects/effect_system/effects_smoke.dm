@@ -191,7 +191,7 @@
 			M.emote("cough")
 			if(prob(20))
 				to_chat(M, span_warning("The gas makes you incredibly tired, you think you might pass out..."))
-			return 1
+			return TRUE
 
 
 /datum/effect_system/smoke_spread/napgas

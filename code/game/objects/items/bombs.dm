@@ -123,5 +123,5 @@
 	lose_hearing_sensitivity()
 
 /obj/item/smokebomb/napgas
-	name = "Sleeping bomb"
+	name = "sleeping bomb"
 	datum_to_spread = /datum/effect_system/smoke_spread/napgas
