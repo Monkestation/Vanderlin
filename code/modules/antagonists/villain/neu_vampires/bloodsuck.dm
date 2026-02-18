@@ -92,13 +92,14 @@
 		// if someone adds kool aid as a blood type then blood_data here might need some work
 		holder.add_reagent(victim_blood.reagent_type, blood_to_drink, blood_data, no_react = TRUE)
 		holder.trans_to(src, holder.total_volume, transfered_by=src, method = INGEST)
-	else
-		if(used_vitae > 0)
-			adjust_bloodpool(used_vitae)
-			clan?.handle_bloodsuck(src, blood_data["preferences"])
+	else if(used_vitae > 0)
+		adjust_bloodpool(used_vitae)
+		clan?.handle_bloodsuck(src, blood_data["preferences"])
 
 	if(used_vitae > 0)
-		victim.adjust_bloodpool(VVictim ? -used_vitae * 2 : -used_vitae) //twice the loss
+		if(human_victim && human_victim.client)
+			used_vitae *= 0.5
+		victim.adjust_bloodpool(-used_vitae)
 	var/bloodloss =  min(victim.blood_volume, drink_amt * blood_purity)
 	victim.blood_volume -= bloodloss
 	victim.handle_blood()

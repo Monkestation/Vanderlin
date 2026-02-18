@@ -299,7 +299,8 @@
 						. += examine_friend_or_foe_append
 
 		if(user.mind?.has_antag_datum(/datum/antagonist/vampire))
-			. += span_userdanger("Blood Volume: [blood_volume]")
+			. += span_bloody("Blood Volume: [blood_volume]")
+			. += span_bloody("Vitae: [bloodpool]")
 
 		if(HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
 			var/atom/item = get_most_expensive()

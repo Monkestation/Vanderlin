@@ -97,6 +97,11 @@
 	if(!(sigreturn & HANDLE_BLOOD_NO_NUTRITION_DRAIN))
 		if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume && !bleed_rate)
 			blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5)
+		if(stat != DEAD && client && !(mind?.has_antag_datum(/datum/antagonist/vampire) || mind?.has_antag_datum(/datum/antagonist/zombie)))
+			if(bloodpool < initial(bloodpool))
+				set_bloodpool(clamp(bloodpool + 0.5, 0, min(initial(bloodpool), maxbloodpool)))
+			if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+				adjust_bloodpool(3)
 
 	//Effects of bloodloss
 	if(!(sigreturn & HANDLE_BLOOD_NO_EFFECTS))
