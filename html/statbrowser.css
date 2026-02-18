@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Pterra';
-  src: url('interface/fonts/pterra.ttf') format('truetype');
+  src: url('pterra.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Blackmoor LET';
-  src: url('interface/fonts/blackmoor.ttf') format('truetype');
+  src: url('blackmoor.ttf') format('truetype');
 }
 
 .light:root {

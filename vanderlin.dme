@@ -449,7 +449,6 @@
 #include "code\controllers\subsystem\moods.dm"
 #include "code\controllers\subsystem\mouse_entered.dm"
 #include "code\controllers\subsystem\nightshift.dm"
-#include "code\controllers\subsystem\obj_tab_items.dm"
 #include "code\controllers\subsystem\overlays.dm"
 #include "code\controllers\subsystem\overwatch.dm"
 #include "code\controllers\subsystem\painting.dm"
