@@ -767,7 +767,8 @@
 
 /datum/stress_event/malaguero/get_desc(mob/living/user)
 	if(istiefling(user))
-		span_red("I feel the malaguero of another.")
+		return span_red("I feel the malaguero of another.")
+	return ..()
 
 /datum/stress_event/malaguero/can_show(mob/living/user)
 	return istiefling(user)
