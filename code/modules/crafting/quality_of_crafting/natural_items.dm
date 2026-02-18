@@ -156,6 +156,17 @@
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/knife/stone
 
+/datum/repeatable_crafting_recipe/survival/stone_sword
+	name = "stone sword"
+	requirements = list (
+		/obj/item/natural/rock = 1,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+
+	starting_atom = /obj/item/weapon/knife
+	attacked_atom = /obj/item/natural/rock
+	output = /obj/item/weapon/sword/stone
+
 /datum/repeatable_crafting_recipe/survival/stone_hoe
 	name = "stone hoe"
 	requirements = list(

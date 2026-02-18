@@ -757,6 +757,8 @@
 	max_stacks = 3
 	stress_change_per_extra_stack = 1
 	quality_modifier = -2
+	hidden = TRUE
+	desc = span_red("I feel the malaguero of another.")
 
 /datum/stress_event/malaguero/on_apply(mob/living/user)
 	. = ..()
@@ -765,9 +767,5 @@
 		stress_change = 0
 		quality_modifier = 0
 
-/datum/stress_event/malaguero/get_desc(mob/living/user)
-	if(istiefling(user))
-		span_red("I feel the malaguero of another.")
-
 /datum/stress_event/malaguero/can_show(mob/living/user)
-	return istiefling(user)
+	return istiefling(user) || ..()
