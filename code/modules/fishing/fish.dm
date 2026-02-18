@@ -30,7 +30,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	slice_bclass = BCLASS_CHOP
 	faretype = FARE_IMPOVERISHED //incase someone decides to eat raw fish
 	nutrition = RAWMEAT_NUTRITION
-	bitecount = 3
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2)

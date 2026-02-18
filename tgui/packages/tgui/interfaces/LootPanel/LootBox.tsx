@@ -46,6 +46,13 @@ export function LootBox(props: Props) {
           shift: event.shiftKey,
         })
       }
+      onAuxClick={(event) => {
+        event.preventDefault();
+        act('grab', {
+          middle: true,
+          ref: item.ref,
+        });
+      }}
       onContextMenu={(event) => {
         event.preventDefault();
         act('grab', {
