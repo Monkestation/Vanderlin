@@ -71,7 +71,7 @@
 					if(victim.stat != DEAD && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
 						victim.SetUnconscious(50 SECONDS)
 						to_chat(src, "<span class='warning'>Your victim faints from the excessive draining.</span>")
-				if(victim.bloodpool <= 150 && clan_position?.can_assign_positions && !victim.clan && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
+				if(victim.mind && victim.bloodpool <= 150 && clan_position?.can_assign_positions && !victim.clan && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
 					if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
 						to_chat(src, span_warning("I decide [victim] is unworthy."))
 					else
