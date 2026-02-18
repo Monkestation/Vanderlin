@@ -116,6 +116,7 @@
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
+	tool_behaviour = TOOL_CAUTERY
 	/// Timer to cool down
 	var/cool_timer
 	/// Whether or not we are heated up
