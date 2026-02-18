@@ -52,7 +52,6 @@ export function LootBox(props: Props) {
         act('grab', {
           middle: event.button === 1,
           right: event.button === 2,
-
           ref: item.ref,
         });
       }}
