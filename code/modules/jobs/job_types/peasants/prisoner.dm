@@ -2,7 +2,7 @@
 	title = "Prisoner"
 	tutorial = "For a crime, or false allegation; as a hostage against another, \
 	or held for ransom: your fate until this day has been ill-starred save its first. \
-	You are of noble birth. Perhaps your story, which none but you recall, \
+	Perhaps your story, which none but you recall, \
 	will move some pity from callous hearts or promises of riches parole your release. \
 	Maybe your old associates conspire now to release you in a daring rescue. \
 	Yet it is far surer that your tears will rust this cursed mask \
