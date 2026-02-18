@@ -91,12 +91,12 @@
 		var/datum/stress_event/last_event = (length(stressors) ? stressors[length(stressors)] : null)
 		var/event_type = last_event?.type
 
-		if(last_event?.desc)
-			var/desc = last_event.get_desc()
+		var/desc = last_event?.get_desc(src)
+		if(desc && last_event.can_show(src))
 			event = islist(desc) ? jointext(desc, " ") : desc
 
 		if(stress > oldstress)
-			if(event && last_event.stress_change > 0)
+			if(event && last_event.get_stress(src) > 0)
 				if(last_announced_event_type != event_type)
 					to_chat(src, "[event] [span_red(" I gain STRESS.")]")
 					last_announced_event_type = event_type
