@@ -244,7 +244,7 @@
 
 /obj/item/natural/clod/Moved(oldLoc, dir)
 	..()
-	if(isturf(loc))
+	if((!throwing || throwing.target_turf == loc) && isturf(loc) && oldLoc != loc)
 		var/turf/T = loc
 		for(var/obj/structure/fluff/clodpile/C in T)
 			if(C == pile)
