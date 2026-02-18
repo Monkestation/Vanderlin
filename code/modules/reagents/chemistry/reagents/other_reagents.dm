@@ -39,9 +39,11 @@
 		L.adjust_hydration(vitae * 0.1)
 		L.adjust_bloodpool(vitae)
 		L.clan.handle_bloodsuck(L, data["preferences"])
+
 	var/mob/living/carbon/C = L
 	if(istype(C) && (NOBLOOD in C.dna?.species?.species_traits))
 		return
+
 	var/datum/blood_type/blood = L.get_blood_type()
 	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
 	if(method & INJECT)
