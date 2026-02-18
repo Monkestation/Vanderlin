@@ -35,7 +35,7 @@
 			if(user.used_intent.type == /datum/intent/shovelscoop)
 				playsound(src,'sound/items/dig_shovel.ogg', 70, TRUE)
 				if(do_after(user, 3 SECONDS, src))
-					new /obj/item/reagent_containers/food/snacks/toxicshrooms(get_turf(src))
+					new /obj/item/reagent_containers/food/snacks/truffles/toxic(get_turf(src))
 					hidden_toxicshrooms = FALSE
 				return TRUE
 	return ..()
@@ -46,12 +46,28 @@
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
+	nutrition = VEGGIE_NUTRITION
 	color = "#ab7d6f"
 	tastes = list("mushroom" = 1)
 	sellprice = 30
 	rotprocess = null
-	biting = TRUE
+	var/poisonous = FALSE
+
+/obj/item/reagent_containers/food/snacks/truffles/examine(mob/user)
+	. = ..()
+	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
+	if(!can_tell)
+		can_tell = user.skills ? user.get_skill_level(/datum/skill/labor/farming) : FALSE
+	if(can_tell)
+		if(poisonous)
+			. += span_warning("This truffle looks suspicious. I sense it might be poisoned.")
+		else
+			. += span_notice("This truffle looks safe to eat.")
+
+/obj/item/reagent_containers/food/snacks/truffles/toxic
+	list_reagents = list(/datum/reagent/berrypoison/shroom = 4)
+	grind_results = list(/datum/reagent/berrypoison/shroom = 8)
+	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/cooked/truffle
 	name = "cooked truffles"
@@ -59,30 +75,11 @@
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
 	eat_effect = /datum/status_effect/buff/foodbuff
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = COOKED_VEGGIE_NUTRITION+1
 	color = "#835b4f"
 	tastes = list("delicious truffles" = 2)
 	biting = TRUE
 
-/obj/item/reagent_containers/food/snacks/toxicshrooms
-	name = "truffles"
-	icon = 'icons/roguetown/items/produce.dmi'
-	icon_state = "mushroom1_full"
-	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 5)
-	color = "#ab7d6f"
-	tastes = list("mushroom" = 1)
-	biting = TRUE
-
-/obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
-	name = "cooked truffles"
-	icon = 'icons/roguetown/items/produce.dmi'
-	icon_state = "mushroom1_full"
-	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 6)
-	color = "#835b4f"
-	tastes = list("off-putting" = 2)
-	biting = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/female
 	gender = FEMALE
@@ -267,7 +264,7 @@
 		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		qdel(O)
 
-	if(istype(O, /obj/item/reagent_containers/food/snacks/toxicshrooms))
+	if(istype(O, /obj/item/reagent_containers/food/snacks/truffles/toxic))
 		visible_message("<span class='notice'>The pig munches the truffles reluctantly.</span>")
 		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		qdel(O)

@@ -217,6 +217,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/templar
 	name = "Templar"
+	jobspawn_override = list("Grandmaster Templar", "Templar") // Temp until I can map in the spawn
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/gmtemplar
+	name = "Grandmaster Templar"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/nightman
@@ -247,12 +252,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Archivist"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/weaponsmith
-	name = "Weaponsmith"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/armorsmith
-	name = "Armorer"
+/obj/effect/landmark/start/blacksmith
+	name = "Blacksmith"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/tailor

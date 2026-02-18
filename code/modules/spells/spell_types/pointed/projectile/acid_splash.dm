@@ -38,6 +38,8 @@
 	sound = 'sound/vo/vomit.ogg'
 	charge_sound = null
 
+	associated_skill = null
+
 	invocation_type = INVOCATION_EMOTE
 	invocation = span_userdanger("<b>%CASTER</b> belches acid!")
 	invocation_self_message = span_danger("I spit acid!")
@@ -46,6 +48,7 @@
 	charge_time = 2 SECONDS
 	cooldown_time = 1 MINUTES
 	spell_type = SPELL_STAMINA
+	spell_cost = 40
 
 	has_visual_effects = FALSE
 

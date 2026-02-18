@@ -5553,7 +5553,7 @@
 	},
 /area/indoors/town)
 "cFy" = (
-/obj/effect/landmark/start/armorsmith,
+/obj/effect/landmark/start/blacksmith,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "cFM" = (
@@ -18690,7 +18690,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "iZG" = (
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 1
 	},
 /obj/effect/decal/carpet/square/black{
@@ -25796,7 +25796,7 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/garrison)
 "mEG" = (
-/obj/effect/landmark/start/armorsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 1
 	},
 /turf/open/floor/cobble,
@@ -33265,7 +33265,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
 "qdt" = (
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 1
 	},
 /turf/open/floor/cobble,
@@ -37093,7 +37093,7 @@
 /turf/open/floor/hexstone,
 /area/under/town/basement)
 "rVF" = (
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
@@ -48058,7 +48058,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/garrison)
 "xtN" = (
-/obj/effect/landmark/start/armorsmith,
+/obj/effect/landmark/start/blacksmith,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/smithy)
 "xtU" = (

@@ -190,6 +190,7 @@
 	changesource_flags = WABBAJACK
 	var/raceicon = "orc"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/orc
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
 
 /datum/species/orc/update_damage_overlays(mob/living/carbon/human/H)
 	return

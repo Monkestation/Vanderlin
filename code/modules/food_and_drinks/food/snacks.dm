@@ -40,7 +40,8 @@ All foods are distributed among various categories. Use common sense.
 	grind_results = list() //To let them be ground up to transfer their reagents
 	possible_item_intents = list(/datum/intent/food)
 	foodtype = GRAIN
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
+	list_reagents = list()
+	var/nutrition = 1
 	w_class = WEIGHT_CLASS_SMALL
 	var/transfers_tastes = FALSE
 	var/bitesize = 3 // how many times you need to bite to consume it fully
@@ -183,6 +184,7 @@ All foods are distributed among various categories. Use common sense.
 		add_overlay(rotflies)
 		name = "rotten [initial(name)]"
 		eat_effect = /datum/status_effect/debuff/rotfood
+		reagents.add_reagent(/datum/reagent/yuck, 5)
 		slices_num = 0
 		slice_path = null
 		cooktime = 0
@@ -215,7 +217,7 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/heating_act(atom/A)
 	var/obj/item/result = new /obj/item/reagent_containers/food/snacks/badrecipe(A)
-	initialize_cooked_food(result, 1)
+	initialize_cooked_food(list(result), 1)
 	return result
 
 /obj/item/proc/burning(input as num)
@@ -237,15 +239,9 @@ All foods are distributed among various categories. Use common sense.
 			burn()
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
-	if(!LAZYLEN(tastes))
-		return ..()
-	if(list_reagents)
-		for(var/rid in list_reagents)
-			var/amount = list_reagents[rid]
-			if(rid == /datum/reagent/consumable/nutriment || rid == /datum/reagent/consumable/nutriment/vitamin)
-				reagents.add_reagent(rid, amount, tastes.Copy())
-			else
-				reagents.add_reagent(rid, amount)
+	if(nutrition)
+		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
+	..()
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)
 	if(!eater)
@@ -569,29 +565,29 @@ All foods are distributed among various categories. Use common sense.
 	add_overlay(filling)
 
 // initialize_cooked_food() is called when microwaving the food
-/obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(obj/item/reagent_containers/food/snacks/S, cooking_efficiency = 1)
-	if(reagents)
-		reagents.trans_to(S, reagents.total_volume)
-	if(S.bonus_reagents && S.bonus_reagents.len)
-		for(var/r_id in S.bonus_reagents)
-			var/amount = S.bonus_reagents[r_id] * cooking_efficiency
-			if(r_id == /datum/reagent/consumable/nutriment || r_id == /datum/reagent/consumable/nutriment/vitamin)
+/obj/item/reagent_containers/food/snacks/proc/initialize_cooked_food(list/obj/item/reagent_containers/food/snacks/outputs, cooking_efficiency = 1)
+	if(istype(outputs, /obj/item/reagent_containers/food/snacks))
+		outputs = list(outputs)
+	for(var/obj/item/reagent_containers/food/snacks/S in outputs)
+		if(reagents)
+			for(var/datum/reagent/R in reagents.reagent_list)
+				if(istype(R, /datum/reagent/consumable/nutriment))
+					continue
+				reagents.trans_id_to(S, R.type, R.volume / outputs.len)
+			for(var/r_id in bonus_reagents)
+				var/amount = bonus_reagents[r_id] * cooking_efficiency / outputs.len
 				S.reagents.add_reagent(r_id, amount)
-			else
-				S.reagents.add_reagent(r_id, amount)
-
-	if(transfers_tastes)
-		S.foodtype |= foodtype
-		S.tastes |= tastes
-
-	S.filling_color = filling_color
-	S.update_snack_overlays(src)
+		if(transfers_tastes)
+			S.foodtype |= foodtype
+			S.tastes |= tastes
+		S.filling_color = filling_color
+		S.update_snack_overlays(src)
 
 /obj/item/reagent_containers/food/snacks/proc/changefood(path, mob/living/eater)
 	if(!path || !eater)
 		return
 	var/turf/T = get_turf(eater)
-	if(eater.dropItemToGround(src))
+	if(!QDELETED(src) && eater.dropItemToGround(src))
 		qdel(src)
 	var/obj/item/I = new path(T)
 	eater.put_in_active_hand(I, ignore_animation = TRUE)
@@ -671,7 +667,8 @@ All foods are distributed among various categories. Use common sense.
 	name = "burned mess"
 	desc = ""
 	icon_state = "badrecipe"
-	list_reagents = list(/datum/reagent/toxin/bad_food = 30)
+	nutrition = SNACK_POOR
+	list_reagents = list(/datum/reagent/toxin/bad_food = 10)
 	filling_color = "#8B4513"
 	faretype = FARE_IMPOVERISHED
 	foodtype = GROSS

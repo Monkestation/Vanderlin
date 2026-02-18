@@ -15,6 +15,9 @@
 		)
 		scared.playsound_local(scared, pick(spookies), vol = 100, vary = FALSE)
 	icon_state = "hall[rand(1, 9)]"
+	if(prob(5))
+		icon_state = "squidward" // thank you spongebob
+		scared.remove_stress(/datum/stress_event/saw_wonder)
 	animate(src, alpha = 255, time = fade_in, easing = BOUNCE_EASING | EASE_IN | EASE_OUT)
 	animate(time = duration, easing = BOUNCE_EASING | EASE_IN | EASE_OUT)
 	animate(alpha = 0, time = fade_out, easing = LINEAR_EASING)

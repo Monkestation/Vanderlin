@@ -62,25 +62,21 @@
 	return TRUE
 
 /mob/living/carbon/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum, damage_type = "blunt")
-	if(!skipcatch)	//ugly, but easy
-		if(can_catch_item())
-			if(istype(AM, /obj/item))
-				if(!istype(AM, /obj/item/net))
-					var/obj/item/I = AM
-					if(isturf(I.loc))
-						I.attack_hand(src)
-						if(get_active_held_item() == I) //if our attack_hand() picks up the item...
-							visible_message("<span class='warning'>[src] catches [I]!</span>", \
-											"<span class='danger'>I catch [I] in mid-air!</span>")
-							throw_mode_off()
-							return 1
-				else
-					var/obj/item/net/N
-					visible_message("<span class='warning'>[src] tries to catch \the [N] but gets snared by it!</span>", \
-									"<span class='danger'>Why did I even try to do this...?</span>") // Hahaha dumbass!!!
-					throw_mode_off()
-					N.ensnare(src)
-					return
+	if(!skipcatch && can_catch_item() && isitem(AM) && isturf(AM.loc))	//ugly, but easy
+		if(istype(AM, /obj/item/rope/net))
+			var/obj/item/rope/net/N = AM
+			visible_message(span_warning("[src] tries to catch [N] but gets snared by it!"), \
+							span_danger("Why did I try to catch it??")) // Hahaha dumbass!!!
+			throw_mode_off()
+			N.ensnare(src)
+			return
+		var/obj/item/I = AM
+		I.attack_hand(src)
+		if(get_active_held_item() == I) //if our attack_hand() picks up the item...
+			visible_message(span_warning("[src] catches [I]!"), \
+							span_danger("I catch [I] in mid-air!"))
+			throw_mode_off()
+			return 1
 	..()
 
 
