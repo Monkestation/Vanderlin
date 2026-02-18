@@ -48,15 +48,11 @@ export function LootBox(props: Props) {
       }
       onAuxClick={(event) => {
         event.preventDefault();
+        console.log(event.button);
         act('grab', {
-          middle: true,
-          ref: item.ref,
-        });
-      }}
-      onContextMenu={(event) => {
-        event.preventDefault();
-        act('grab', {
-          right: true,
+          middle: event.button === 1,
+          right: event.button === 2,
+
           ref: item.ref,
         });
       }}
