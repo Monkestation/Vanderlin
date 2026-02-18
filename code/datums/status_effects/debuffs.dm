@@ -4,6 +4,8 @@
 	tick_interval = 0
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = null
+	remove_on_fullheal = TRUE
+	heal_flag_necessary = HEAL_CC_STATUS
 	var/needs_update_stat = FALSE
 
 /datum/status_effect/incapacitating/on_creation(mob/living/new_owner, duration_override, ...)
@@ -314,7 +316,6 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	duration = 300
 	tick_interval = 10
-	examine_text = "<span class='warning'>SUBJECTPRONOUN seems slow and unfocused.</span>"
 	var/stun = TRUE
 	alert_type = /atom/movable/screen/alert/status_effect/trance
 
@@ -323,10 +324,13 @@
 	desc = ""
 	icon_state = "high"
 
+/datum/status_effect/trance/get_examine_text()
+	return span_warning("They seem slow and unfocused.")
+
 /datum/status_effect/trance/tick()
 	if(stun)
 		owner.Stun(6 SECONDS, TRUE)
-	owner.dizziness = 20
+	owner.set_dizzy(20 SECONDS)
 
 /datum/status_effect/trance/on_apply()
 	. = ..()
@@ -347,7 +351,7 @@
 	. = ..()
 	UnregisterSignal(owner, COMSIG_MOVABLE_HEAR)
 	REMOVE_TRAIT(owner, TRAIT_MUTE, "trance")
-	owner.dizziness = 0
+	owner.set_dizzy(0)
 	owner.remove_client_colour(/datum/client_colour/monochrome/trance)
 	to_chat(owner, "<span class='warning'>I snap out of my trance!</span>")
 
@@ -483,13 +487,3 @@
 		to_chat(owner, fake_msg)
 
 	msg_stage++
-
-/atom/movable/screen/alert/status_effect/grab_counter_cd
-	name = "Grab counter"
-	desc = span_boldwarning("I have tried to counter the grab of someone!")
-	icon_state = "muscles"
-
-/datum/status_effect/grab_counter_cd
-	id = "grab_counter_cd"
-	alert_type = /atom/movable/screen/alert/status_effect/grab_counter_cd
-	duration = 60

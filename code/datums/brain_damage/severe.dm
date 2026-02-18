@@ -135,14 +135,15 @@
 	var/sleep_chance = 1
 	if(owner.m_intent == MOVE_INTENT_RUN)
 		sleep_chance += 2
-	if(owner.drowsyness)
+	var/drowsy = !!owner.has_status_effect(/datum/status_effect/drowsiness)
+	if(drowsy)
 		sleep_chance += 3
 	if(prob(sleep_chance))
 		to_chat(owner, "<span class='warning'>I fall asleep.</span>")
 		owner.Sleeping(60)
-	else if(!owner.drowsyness && prob(sleep_chance * 2))
+	else if(!drowsy && prob(sleep_chance * 2))
 		to_chat(owner, "<span class='warning'>I feel tired...</span>")
-		owner.drowsyness += 10
+		owner.adjust_drowsiness(20 SECONDS)
 
 /datum/brain_trauma/severe/monophobia
 	name = "Monophobia"
@@ -169,12 +170,13 @@
 		stress = max(stress - 4, 0)
 
 /datum/brain_trauma/severe/monophobia/proc/check_alone()
-	if(HAS_TRAIT(owner, TRAIT_BLIND))
-		return TRUE
-	for(var/mob/M in oview(owner, 7))
-		if(!isliving(M)) //ghosts ain't people
+	var/check_radius = 7
+	if(owner.is_blind())
+		check_radius = 1
+	for(var/mob/mob in oview(owner, check_radius))
+		if(!isliving(mob)) //ghosts ain't people
 			continue
-		if((istype(M, /mob/living/simple_animal/pet)) || M.ckey)
+		if(istype(mob, /mob/living/simple_animal/pet) || mob.ckey)
 			return FALSE
 	return TRUE
 
@@ -193,14 +195,14 @@
 		if(2)
 			if(!high_stress)
 				to_chat(owner, "<span class='warning'>I can't stop shaking...</span>")
-				owner.dizziness += 20
-				owner.confused += 20
-				owner.Jitter(20)
+				owner.adjust_dizzy(20 SECONDS)
+				owner.adjust_confusion(20 SECONDS)
+				owner.adjust_jitter(20 SECONDS)
 			else
 				to_chat(owner, "<span class='warning'>I feel weak and scared! If only you weren't alone...</span>")
-				owner.dizziness += 20
-				owner.confused += 20
-				owner.Jitter(20)
+				owner.adjust_dizzy(20 SECONDS)
+				owner.adjust_confusion(20 SECONDS)
+				owner.adjust_jitter(20 SECONDS)
 
 		if(3, 4)
 			if(!high_stress)

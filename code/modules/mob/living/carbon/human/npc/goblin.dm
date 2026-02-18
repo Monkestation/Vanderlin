@@ -156,6 +156,7 @@
 	changesource_flags = WABBAJACK
 	var/raceicon = "goblin"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/goblin
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
 
 /datum/species/goblin/regenerate_icons(mob/living/carbon/human/H)
 	H.icon_state = ""
@@ -255,8 +256,8 @@
 		var/obj/item/organ/organ = internal_organs_slot[slot]
 		organ.sellprice = 5
 	src.underwear = "Nude"
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
+	if(length(quirks))
+		clear_quirks()
 	update_body()
 	faction = list(FACTION_ORCS)
 	var/turf/turf = get_turf(src)

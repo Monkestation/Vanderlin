@@ -55,19 +55,19 @@
 	if(obj_broken)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	listening = !listening
 	speaking = !speaking
 	to_chat(user, "<span class='info'>I [speaking ? "unmute" : "mute"] the SCOM.</span>")
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/fake_machine/scomm/attack_hand_secondary(mob/user, params)
+/obj/structure/fake_machine/scomm/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	var/contents
 	var/datum/job/lord/ruler_job = SSjob.GetJobType(/datum/job/lord)
@@ -114,7 +114,7 @@
 	if(tcolor)
 		voicecolor_override = tcolor
 	if(speaking && message)
-		playsound(loc, 'sound/vo/mobs/rat/rat_life.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/vo/mobs/rat/rat_life.ogg', 100, TRUE, -1)
 		say(message, language = message_language)
 	voicecolor_override = null
 
@@ -193,7 +193,7 @@
 	return ..()
 
 //wip
-/obj/item/scomstone/attack_hand_secondary(mob/user, params)
+/obj/item/scomstone/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -206,11 +206,11 @@
 		for(var/obj/item/scomstone/S in SSroguemachine.scomm_machines)
 			S.repeat_message(input_text)
 
-/obj/item/scomstone/MiddleClick(mob/user)
+/obj/item/scomstone/MiddleClick(mob/user, list/modifiers)
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	listening = !listening
 	speaking = !speaking
 	to_chat(user, "<span class='info'>I [speaking ? "unmute" : "mute"] the scomstone.</span>")
@@ -231,7 +231,7 @@
 	if(tcolor)
 		voicecolor_override = tcolor
 	if(speaking && message)
-		playsound(loc, 'sound/misc/scom.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/misc/scom.ogg', 100, TRUE, -1)
 		say(message, language = message_language)
 	voicecolor_override = null
 

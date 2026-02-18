@@ -165,7 +165,7 @@
 /area/under/tomb/indoors)
 "dx" = (
 /obj/structure/fluff/walldeco/vinez/r,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "dy" = (
 /obj/structure/closet/crate/chest/neu,
@@ -207,7 +207,7 @@
 /area/under/tomb/indoors/church)
 "dY" = (
 /obj/structure/fluff/walldeco/vinez/l,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "ef" = (
 /turf/open/water/swamp/deep,
@@ -408,7 +408,7 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "iI" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "iO" = (
 /turf/open/floor/cobble,
@@ -455,7 +455,7 @@
 /turf/open/floor/ruinedwood/turned,
 /area/under/tomb)
 "jB" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "jN" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -1044,7 +1044,7 @@
 	pixel_y = -1;
 	layer = 2.81
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "uw" = (
 /obj/structure/flora/grass/herb/atropa,
@@ -1107,7 +1107,7 @@
 	dir = 4;
 	pixel_x = -8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "vV" = (
 /turf/closed/wall/mineral/wooddark,
@@ -1149,7 +1149,7 @@
 /area/under/tomb/indoors)
 "wK" = (
 /obj/effect/decal/cleanable/debris/glass,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "wU" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1180,7 +1180,7 @@
 	pixel_y = -17;
 	layer = 2.81
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "xS" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1227,7 +1227,7 @@
 /obj/structure/bars/pipe{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "zo" = (
 /turf/closed/wall/mineral/decostone,
@@ -1279,7 +1279,7 @@
 	pixel_y = -17;
 	layer = 2.81
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "At" = (
 /obj/structure/stairs{
@@ -1406,7 +1406,7 @@
 /obj/structure/bars/pipe{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Dk" = (
 /obj/effect/decal/cleanable/debris/glass,
@@ -1641,7 +1641,7 @@
 	dir = 1;
 	pixel_y = -8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Hg" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
@@ -1720,14 +1720,14 @@
 	pixel_x = 1;
 	pixel_y = -1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "IC" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood,
 /area/under/tomb)
 "IG" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "IU" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1864,7 +1864,7 @@
 /obj/structure/bars/pipe{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Mc" = (
 /obj/structure/closet/crate/chest/crate,
@@ -1879,7 +1879,7 @@
 /area/under/tomb/indoors)
 "Mt" = (
 /obj/structure/bars/pipe,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Mx" = (
 /obj/structure/door/fancy,
@@ -1966,7 +1966,7 @@
 	dir = 6;
 	pixel_x = -9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "NY" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2323,7 +2323,7 @@
 /area/under/tomb/indoors/church)
 "WA" = (
 /obj/structure/bars,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "WQ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2433,7 +2433,7 @@
 	dir = 5;
 	pixel_y = -17
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Yv" = (
 /obj/structure/bars,

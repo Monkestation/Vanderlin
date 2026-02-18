@@ -301,7 +301,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	if(HAS_TRAIT(source, TRAIT_HANDS_BLOCKED)) //blocked, can't do stuff
 		return
 	//Doing other stuff
-	if(LAZYACCESS(modifiers, SHIFT_CLICKED) || LAZYACCESS(modifiers, CTRL_CLICK) || LAZYACCESS(modifiers, ALT_CLICKED))
+	if(LAZYACCESS(modifiers, SHIFT_CLICKED) || LAZYACCESS(modifiers, CTRL_CLICKED) || LAZYACCESS(modifiers, ALT_CLICKED))
 		return
 	//You need to be actively holding on the fishing rod to use it, unless you've the profound_fisher trait.
 	if(source.get_active_held_item() != used_rod)
@@ -354,7 +354,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 
 	if(!QDELETED(user) && user.mind && start_time && !(special_effects & FISHING_MINIGAME_RULE_NO_EXP))
 		var/seconds_spent = (world.time - start_time) * 0.1
-		var/extra_exp_malus = user.get_skill_level(/datum/skill/labor/fishing) - difficulty * 0.1
+		var/extra_exp_malus = user.get_skill_level(/datum/skill/labor/fishing, TRUE) - difficulty * 0.1
 		if(extra_exp_malus > 0)
 			experience_multiplier /= (1 + extra_exp_malus * EXPERIENCE_MALUS_MULT)
 		if(auto_handling)
@@ -815,14 +815,14 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 /atom/movable/screen/hud_bait/Initialize(mapload, datum/hud/hud_owner, datum/fishing_challenge/challenge)
 	. = ..()
 	if(!challenge || challenge.bait_pixel_height == MINIGAME_BAIT_HEIGHT)
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 		return
 
 	adjust_to_difficulty(challenge)
 
 /atom/movable/screen/hud_bait/proc/adjust_to_difficulty(datum/fishing_challenge/challenge)
 	cur_height = challenge.bait_pixel_height
-	update_icon()
+	update_appearance(UPDATE_OVERLAYS)
 
 /atom/movable/screen/hud_bait/update_overlays()
 	. = ..()

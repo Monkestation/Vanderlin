@@ -1,5 +1,5 @@
 /client/proc/play_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -40,7 +40,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Global Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/change_music_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeMusicPower"
 
 	if(prefs)
@@ -69,7 +69,7 @@
 
 
 /client/verb/show_rolls()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ShowRolls"
 
 	if(prefs)
@@ -81,7 +81,7 @@
 			to_chat(src, "ShowRolls Disabled")
 
 /client/verb/change_master_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeVolPower"
 
 	if(prefs)
@@ -96,18 +96,18 @@
 		mob.update_channel_volume(CHANNEL_AMBIENCE, prefs.mastervol)
 
 /client/proc/play_local_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Local Sound"
 	if(!check_rights(R_SOUND))
 		return
 
 	log_admin("[key_name(src)] played a local sound [S]")
 	message_admins("[key_name_admin(src)] played a local sound [S]")
-	playsound(get_turf(src.mob), S, 50, FALSE, FALSE)
+	playsound(src.mob, S, 50, FALSE, FALSE)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_web_sound()
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Internet Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -177,8 +177,7 @@
 			to_chat(src, "<span class='warning'>The media provider returned a content URL that isn't using the HTTP or HTTPS protocol</span>")
 			return
 		if(web_sound_url || stop_web_sounds)
-			for(var/m in GLOB.player_list)
-				var/mob/M = m
+			for(var/mob/M as anything in GLOB.player_list)
 				var/client/C = M.client
 				if((C.prefs.toggles & SOUND_MIDI) && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
 					if(!stop_web_sounds)
@@ -189,7 +188,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
 /client/proc/set_round_end_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Set Round End Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -201,7 +200,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/stop_sounds()
-	set category = "Debug"
+	set category = "GameMaster.Sound"
 	set name = "Stop All Playing Sounds"
 	if(!src.holder)
 		return

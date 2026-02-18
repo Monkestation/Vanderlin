@@ -61,86 +61,70 @@
 			break
 
 
-GLOBAL_LIST_INIT(skin_tones, sortList(list(
-	"skin1" = "ffe0d1",
-	"skin2" = "fcccb3",
-	"skin3" = "e8b59b"
+GLOBAL_LIST_INIT(skin_tones, sortList(
+	list(
+		"Ice Cap" = SKIN_COLOR_ICECAP, // - (Pale)
+		"Arctic" = SKIN_COLOR_ARCTIC, // - (White 1)
+		"Tundra" = SKIN_COLOR_TUNDRA, // - (White 2)
+		"Continental" = SKIN_COLOR_CONTINENTAL, // - (White 3)
+		"Temperate" = SKIN_COLOR_TEMPERATE, // - (White 4)
+		"Coastal" = SKIN_COLOR_COASTAL, // - (Latin)
+		"Subtropical" = SKIN_COLOR_SUBTROPICAL, // - (Mediterranean)
+		"Tropical Dry" = SKIN_COLOR_TROPICALDRY, // - (Mediterranean 2)
+		"Tropical Wet" = SKIN_COLOR_TROPICALWET, // - (Latin 2)
+		"Desert" = SKIN_COLOR_DESERT, //  - (Middle-east 1)
+		"Oasis" = SKIN_COLOR_OASIS, // - (Middle-east 2)
+		"Steppe" = SKIN_COLOR_CRIMSONLANDS, // - (Black)
+		"Volcanic" = SKIN_COLOR_VOLCANIC, // - Melanesian
+		"Island" = SKIN_COLOR_ISLAND, // - Polynesian
+		"Taiga" = SKIN_COLOR_TAIGA, // - Native American 1
+		"Swamp" = SKIN_COLOR_SWAMP, // - Native American 2
 	)))
 
 /proc/random_skin_tone()
 	return GLOB.skin_tones[pick(GLOB.skin_tones)]
 
-GLOBAL_LIST_INIT(haircolor, sortList(list(
-	"black" = "#0a0707",
-	"brown" = "#362e25",
-	"blonde" = "#dfc999",
-	"red" = "#a34332"
-	)))
+GLOBAL_LIST_INIT(haircolor, sortList(
+	list(
+		"blond - pale" = "9d8d6e",
+		"blond - dirty" = "88754f",
+		"blond - drywheat" = "d5ba7b",
+		"blond - strawberry" = "c69b71",
 
+		"brown - mud" = "362e25",
+		"brown - oats" = "584a3b",
+		"brown - grain" = "58433b",
+		"brown - soil" = "48322a",
+		"brown - bark" = "2d1300",
+
+		"black - oil" = "181a1d",
+		"black - cave" = "201616",
+		"black - rogue" = "2b201b",
+		"black - midnight" = "1d1b2b",
+
+		"red - berry" = "b23434",
+		"red - wine" = "82534c",
+		"red - sunset" = "82462b",
+		"red - blood" = "822b2b",
+		"red - maroon" = "612929",
+
+		"orange - rust" = "bc5e35"
+	)))
 
 /proc/random_haircolor()
 	return GLOB.haircolor[pick(GLOB.haircolor)]
 
-GLOBAL_LIST_INIT(oldhc, sortList(list(
-	"pale - golden" = "f0eab6",
-	"pale - dust" = "ded0af",
-	"gray - decay" = "6a6a6a",
-	"gray - silvered" = "687371",
-	"gray - elderly" = "9e9e9e",
-	"gray - ashen" = "404040",
-	"white - ancient" = "c9c9c9",
-	"white - mythic" = "f4f4f4"
+GLOBAL_LIST_INIT(oldhc, sortList(
+	list(
+		"pale - golden" = "f0eab6",
+		"pale - dust" = "ded0af",
+		"gray - decay" = "6a6a6a",
+		"gray - silvered" = "687371",
+		"gray - elderly" = "9e9e9e",
+		"gray - ashen" = "404040",
+		"white - ancient" = "c9c9c9",
+		"white - mythic" = "f4f4f4"
 	)))
-
-/proc/skintone2hex(skin_tone)
-	. = 0
-	switch(skin_tone)
-		if("caucasian1")
-			. = "ffe0d1"
-		if("caucasian2")
-			. = "fcccb3"
-		if("caucasian3")
-			. = "e8b59b"
-		if("latino")
-			. = "d9ae96"
-		if("mediterranean")
-			. = "c79b8b"
-		if("asian1")
-			. = "ffdeb3"
-		if("asian2")
-			. = "e3ba84"
-		if("arab")
-			. = "c4915e"
-		if("indian")
-			. = "b87840"
-		if("african1")
-			. = "754523"
-		if("african2")
-			. = "471c18"
-		if("albino")
-			. = "fff4e6"
-		if("orange")
-			. = "ffc905"
-		if("skin1")
-			. = "ffe0d1"
-		if("skin2")
-			. = "fcccb3"
-		if("skin3")
-			. = "e8b59b"
-
-/proc/haircolor2hex(haircolor)
-	. = 0
-	switch(haircolor)
-		if("cave black")
-			. = "#0a0707"
-		if("mud brown")
-			. = "#362e25"
-		if("pale blonde")
-			. = "#dfc999"
-		if("dusk red")
-			. = "#a34332"
-		if("decay grey")
-			. = "#6a6a6a"
 
 //some additional checks as a callback for for do_afters that want to break on losing health or on the mob taking action
 /mob/proc/break_do_after_checks(list/checked_health, check_clicks)
@@ -287,12 +271,12 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 
 /* :V */
 
-/proc/is_species(A, species_datum)
+/proc/is_species(mob/living/carbon/human/checked, species_datum)
 	. = FALSE
-	if(ishuman(A))
-		var/mob/living/carbon/human/H = A
-		if(H.dna && istype(H.dna.species, species_datum))
-			. = TRUE
+	if(!istype(checked))
+		return
+	if(istype(checked.dna?.species, species_datum))
+		. = TRUE
 
 /proc/spawn_atom_to_turf(spawn_type, target, amount, admin_spawn=FALSE, list/extra_args)
 	var/turf/T = get_turf(target)
@@ -399,13 +383,12 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 	var/static/list/mob_spawn_nicecritters = list() // and possible friendly mobs
 
 	if(mob_spawn_meancritters.len <= 0 || mob_spawn_nicecritters.len <= 0)
-		for(var/T in typesof(/mob/living/simple_animal))
-			var/mob/living/simple_animal/SA = T
+		for(var/mob/living/simple_animal/SA as anything in typesof(/mob/living/simple_animal))
 			switch(initial(SA.gold_core_spawnable))
 				if(HOSTILE_SPAWN)
-					mob_spawn_meancritters += T
+					mob_spawn_meancritters += SA
 				if(FRIENDLY_SPAWN)
-					mob_spawn_nicecritters += T
+					mob_spawn_nicecritters += SA
 
 	var/chosen
 	if(mob_class == FRIENDLY_SPAWN)
@@ -414,19 +397,6 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 		chosen = pick(mob_spawn_meancritters)
 	var/mob/living/simple_animal/C = new chosen(spawn_location)
 	return C
-
-/proc/passtable_on(target, source)
-	var/mob/living/L = target
-	if (!HAS_TRAIT(L, TRAIT_PASSTABLE) && L.pass_flags & PASSTABLE)
-		ADD_TRAIT(L, TRAIT_PASSTABLE, INNATE_TRAIT)
-	ADD_TRAIT(L, TRAIT_PASSTABLE, source)
-	L.pass_flags |= PASSTABLE
-
-/proc/passtable_off(target, source)
-	var/mob/living/L = target
-	REMOVE_TRAIT(L, TRAIT_PASSTABLE, source)
-	if(!HAS_TRAIT(L, TRAIT_PASSTABLE))
-		L.pass_flags &= ~PASSTABLE
 
 /proc/dance_rotate(atom/movable/AM, datum/callback/callperrotate, set_original_dir=FALSE)
 	set waitfor = FALSE
@@ -439,3 +409,25 @@ GLOBAL_LIST_INIT(oldhc, sortList(list(
 		sleep(1)
 	if(set_original_dir)
 		AM.setDir(originaldir)
+
+/**
+ * Gets the mind from a variable, whether it be a mob, or a mind itself.
+ * Also works on brains - it will try to fetch the brainmob's mind.
+ * If [include_last] is true, then it will also return last_mind for carbons if there isn't a current mind.
+ */
+/proc/get_mind(target, include_last = FALSE) as /datum/mind
+	RETURN_TYPE(/datum/mind)
+	if(istype(target, /datum/mind))
+		return target
+	else if(ismob(target))
+		var/mob/mob_target = target
+		if(!QDELETED(mob_target.mind))
+			return mob_target.mind
+		if(include_last && iscarbon(mob_target))
+			var/mob/living/carbon/carbon_target = mob_target
+			if(!QDELETED(carbon_target.last_mind))
+				return carbon_target.last_mind
+	else if(istype(target, /obj/item/organ/brain))
+		var/obj/item/organ/brain/brain = target
+		if(!QDELETED(brain.brainmob?.mind))
+			return brain.brainmob.mind

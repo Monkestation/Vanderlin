@@ -144,6 +144,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	changesource_flags = WABBAJACK
 	var/raceicon = "rousman"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/rousman
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1, /obj/item/natural/fur/rous = 0.5)
 
 /datum/species/rousman/update_damage_overlays(mob/living/carbon/human/H)
 	return
@@ -221,8 +222,8 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	eyes = new /obj/item/organ/eyes/night_vision/nightmare
 	eyes.Insert(src)
 	src.underwear = "Nude"
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
+	if(length(quirks))
+		clear_quirks()
 	update_body()
 	faction = list(FACTION_RATS)
 	var/turf/turf = get_turf(src)

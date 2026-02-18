@@ -149,14 +149,14 @@
 		to_chat(user, span_info("I change my mind..."))
 		return
 	user.visible_message(span_info("[user] presses a button on \the [src]."),span_info("I press a button on \the [src]."))
-	playsound(loc, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
+	playsound(src, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
 
 	if(button_selection=="Stop/Start")
 		toggle_music()
 
 	if(button_selection=="Change Song")
 		var/songlists_selection = input(user, "Which song list?", "\The [src]") as null | anything in list("CHILL"=MUSIC_TAVCAT_CHILL, "FUCK"=MUSIC_TAVCAT_FUCK, "PARTY"=MUSIC_TAVCAT_PARTY, "SCUM"=MUSIC_TAVCAT_SCUM, "DAMN"=MUSIC_TAVCAT_DAMN, "MISC"=MUSIC_TAVCAT_MISC)
-		playsound(loc, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
+		playsound(src, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
 		user.visible_message(span_info("[user] presses a button on \the [src]."),span_info("I press a button on \the [src]."))
 		var/chosen_songlists_selection = null
 		if(songlists_selection=="CHILL")
@@ -177,7 +177,7 @@
 		if(!song_selection)
 			to_chat(user, span_info("I change my mind..."))
 			return
-		playsound(loc, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
+		playsound(src, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
 		user.visible_message(span_info("[user] presses a button on \the [src]."),span_info("I press a button on \the [src]."))
 		curfile = chosen_songlists_selection[song_selection]
 		stop_playing()
@@ -190,7 +190,7 @@
 		if(!volume_selection)
 			to_chat(user, span_info("I change my mind..."))
 			return
-		playsound(loc, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
+		playsound(src, pick('sound/misc/keyboard_select (1).ogg','sound/misc/keyboard_select (2).ogg','sound/misc/keyboard_select (3).ogg','sound/misc/keyboard_select (4).ogg'), 100, FALSE, -1)
 		user.visible_message(span_info("[user] presses a button on \the [src]."),span_info("I press a button on \the [src]."))
 		volume_selection = clamp(volume_selection, 1, 100)
 		if(curvol<volume_selection)
@@ -198,7 +198,7 @@
 		else
 			to_chat(user, span_info("I make \the [src] quieter."))
 		curvol = volume_selection
-		playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
+		playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 		stop_playing()
 		start_playing()
 

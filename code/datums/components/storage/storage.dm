@@ -132,8 +132,7 @@
 /datum/component/storage/proc/generate_hold_desc(can_hold_list)
 	var/list/desc = list()
 
-	for(var/valid_type in can_hold_list)
-		var/obj/item/valid_item = valid_type
+	for(var/obj/item/valid_item as anything in can_hold_list)
 		desc += "\a [initial(valid_item.name)]"
 
 	return "\n\t<span class='notice'>[desc.Join("\n\t")]</span>"
@@ -163,8 +162,7 @@
 		return
 	. = COMPONENT_BLOCK_REACH
 	next += master.parent
-	for(var/i in master.slaves)
-		var/datum/component/storage/slave = i
+	for(var/datum/component/storage/slave as anything in master.slaves)
 		next += slave.parent
 
 /datum/component/storage/proc/on_move()
@@ -182,7 +180,7 @@
 	if((M.get_active_held_item() == parent) && allow_quick_empty)
 		quick_empty(M)
 
-/datum/component/storage/proc/preattack_intercept(datum/source, obj/O, mob/M, params)
+/datum/component/storage/proc/preattack_intercept(datum/source, obj/O, mob/M, list/modifiers)
 	if(!isitem(O) || !click_gather || SEND_SIGNAL(O, COMSIG_CONTAINS_STORAGE))
 		return FALSE
 	. = COMPONENT_NO_ATTACK
@@ -398,7 +396,7 @@
 	closer.screen_loc = "[screen_start_x]:[screen_pixel_x],[screen_start_y+rows]:[screen_pixel_y]"
 
 /// Signal handler for when we get attacked with secondary click by an item.
-/datum/component/storage/proc/attackby_secondary(datum/source, atom/weapon, mob/user)
+/datum/component/storage/proc/attackby_secondary(datum/source, atom/weapon, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	open_storage_on_signal(source, user)
@@ -620,21 +618,20 @@
 	return FALSE
 
 //This proc is called when you want to place an item into the storage item
-/datum/component/storage/proc/attackby(datum/source, obj/item/attacking_item, mob/user, params, storage_click = FALSE)
+/datum/component/storage/proc/attackby(datum/source, obj/item/attacking_item, mob/user, modifiers, storage_click = FALSE)
 	. = TRUE //no afterattack
-	if(!can_be_inserted(attacking_item, FALSE, user, params = params, storage_click = storage_click))
+	if(!can_be_inserted(attacking_item, FALSE, user, modifiers = modifiers, storage_click = storage_click))
 		var/atom/real_location = real_location()
 		if(LAZYLEN(real_location.contents) >= max_items) //don't use items on the backpack if they don't fit
 			return TRUE
 		return FALSE
-	return handle_item_insertion(attacking_item, FALSE, user, params = params, storage_click = storage_click)
+	return handle_item_insertion(attacking_item, FALSE, user, modifiers = modifiers, storage_click = storage_click)
 
 /datum/component/storage/proc/return_inv(recursive)
 	var/list/ret = list()
 	ret |= contents()
 	if(recursive)
-		for(var/i in ret.Copy())
-			var/atom/A = i
+		for(var/atom/A as anything in ret.Copy())
 			SEND_SIGNAL(A, COMSIG_TRY_STORAGE_RETURN_INVENTORY, ret, TRUE)
 	return ret
 

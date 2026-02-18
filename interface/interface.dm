@@ -2,7 +2,7 @@
 /client/verb/wiki(query as text)
 	set name = "Wiki"
 	set desc = ""
-	set category = "OOC"
+	set category = "OOC.Links"
 	var/wikiurl = CONFIG_GET(string/wikiurl)
 	if(wikiurl)
 		if(query)
@@ -30,7 +30,7 @@
 /client/verb/rules()
 	set name = "Rules"
 	set desc = ""
-	set category = "OOC"
+	set category = "OOC.Links"
 	var/rulesurl = CONFIG_GET(string/rulesurl)
 	if(rulesurl)
 		if(alert("This will open the rules in your browser. Are you sure?",,"Yes","No")!="Yes")
@@ -43,7 +43,7 @@
 /client/verb/github()
 	set name = "Github"
 	set desc = ""
-	set category = "OOC"
+	set category = "OOC.Links"
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(githuburl)
 		if(browser_alert(src, "This will open the Github repository in your browser. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
@@ -73,7 +73,7 @@
 /client/verb/reportissue()
 	set name = "Report a bug"
 	set desc = "Report a bug"
-	set category = "OOC"
+	set category = "OOC.Links"
 
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(!githuburl)
@@ -175,7 +175,7 @@
 /client/verb/list_test_merges()
 	set name = "List Test Merges"
 	set desc = "See active Test Merges"
-	set category = "OOC"
+	set category = "OOC.Links"
 
 	var/testmerge_text = GLOB.revdata.GetTestMergeInfo()
 
@@ -205,7 +205,7 @@
 
 /client/verb/set_fixed()
 	set name = "IconSize"
-	set category = "Options"
+	set category = "Preferences.Options"
 
 	if(winget(src, "mapwindow.map", "icon-size") == "64")
 		to_chat(src, "Stretch-to-fit... OK")
@@ -216,7 +216,7 @@
 
 /client/verb/set_stretch()
 	set name = "IconScaling"
-	set category = "Options"
+	set category = "Preferences.Options"
 	if(prefs)
 		if(prefs.crt == TRUE)
 			to_chat(src, "CRT mode is on.")
@@ -230,7 +230,7 @@
 		winset(src, "mapwindow.map", "zoom-mode=normal")
 
 /client/verb/crtmode()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ToggleCRT"
 	if(!prefs)
 		return
@@ -251,7 +251,7 @@
 
 /client/verb/ui_scaling()
 	set name = "UI Scaling"
-	set category = "Options"
+	set category = "Preferences.Options"
 	if(prefs)
 		var/current_scaling = window_scaling * 100
 		var/new_scaling = input(usr, "Enter UI Scaling (Your current scaling is [current_scaling]%). Cancel to reset to native scaling.", "New UI Scaling", window_scaling * 100) as null|num
@@ -265,16 +265,17 @@
 			prefs.toggles &= ~UI_SCALE
 			window_scaling = text2num(winget(src, null, "dpi"))
 			to_chat(src, span_notice("UI Scaling reset to native [window_scaling * 100]%. Changes take effect when opening new windows."))
+		native_say?.refresh_channels()
 
 /client/verb/keybind_menu()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "Adjust Keybinds"
 	if(!prefs)
 		return
-	prefs.SetKeybinds(usr)
+	prefs.set_keybinds(usr)
 
 /client/verb/changefps()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ChangeFPS"
 	if(!prefs)
 		return
@@ -286,7 +287,7 @@
 
 /client/verb/changelog()
 	set name = "Changelog"
-	set category = "OOC"
+	set category = "OOC.Links"
 
 	if(!GLOB.changelog_browser)
 		GLOB.changelog_browser = new /datum/changelog()
@@ -301,7 +302,7 @@
 
 /client/verb/do_rp_prompt()
 	set name = "Lore Primer"
-	set category = "OOC"
+	set category = "OOC.Links"
 	var/list/dat = list()
 	dat += GLOB.roleplay_readme
 	if(dat)

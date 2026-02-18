@@ -138,6 +138,7 @@ GLOBAL_VAR(antag_prototypes)
 		else //Show removal and current one
 			priority_sections |= antag_category
 			antag_header_parts += "<span class='bad'>[current_antag.name]</span>"
+			antag_header_parts += "<a href='byond://?src=[REF(src)];vv_antag=[REF(current_antag)]'>View Variables</a>"
 			antag_header_parts += "<a href='byond://?src=[REF(src)];remove_antag=[REF(current_antag)]'>Remove</a>"
 
 

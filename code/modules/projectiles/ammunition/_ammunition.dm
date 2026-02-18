@@ -42,7 +42,7 @@
 	if(!BB)
 		BB = new projectile_type(src, src)
 
-/obj/item/ammo_casing/attackby(obj/item/I, mob/user, params)
+/obj/item/ammo_casing/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/ammo_box))
 		var/obj/item/ammo_box/box = I
 		if(isturf(loc))

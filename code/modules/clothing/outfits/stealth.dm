@@ -12,7 +12,7 @@
 
 /obj/item/clothing/climbing_gear/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
-	playsound(loc, 'sound/items/garrotegrab.ogg', 100, TRUE)
+	playsound(src, 'sound/items/garrotegrab.ogg', 100, TRUE)
 
 /obj/item/clothing/wall_grab
 	name = "wall"

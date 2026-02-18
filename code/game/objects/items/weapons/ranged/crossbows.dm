@@ -60,7 +60,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + basetime
-		newtime = newtime - (mob.get_skill_level(/datum/skill/combat/crossbows) * 4.25) // minus 4.25 per skill point
+		newtime = newtime - (mob.get_skill_level(/datum/skill/combat/crossbows, TRUE) * 4.25) // minus 4.25 per skill point
 		newtime = newtime - ((mob.STAPER)) // minus 1 per perception
 		if(newtime > 1)
 			return newtime
@@ -84,7 +84,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + basetime
-		newtime = newtime - (mob.get_skill_level(/datum/skill/combat/crossbows) * 20)
+		newtime = newtime - (mob.get_skill_level(/datum/skill/combat/crossbows, TRUE) * 20)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - ((mob.STAPER)*1.5)
@@ -116,7 +116,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/firearms) * 3.5)
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3.5)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
@@ -132,7 +132,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/firearms) * 3.5)
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3.5)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
@@ -152,7 +152,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/crossbows) * 3)
+		newtime = newtime - (master.get_skill_level(/datum/skill/combat/crossbows, TRUE) * 3)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
@@ -164,41 +164,38 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/shoot_with_empty_chamber()
 	if(cocked)
-		playsound(src.loc, 'sound/combat/Ranged/crossbow-small-shot-02.ogg', 100, FALSE)
+		playsound(src, 'sound/combat/Ranged/crossbow-small-shot-02.ogg', 100, FALSE)
 		cocked = FALSE
 		update_appearance(UPDATE_ICON_STATE)
 
-
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attack_self(mob/living/user)
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attack_self(mob/living/user, list/modifiers)
 	if(chambered)
-		..()
-	else
-		if(!cocked)
-			to_chat(user, span_info("I step on the stirrup and use all my might..."))
-			if(!movingreload)
-				if(do_after(user, reloadtime - user.STASTR, target = user))
-					playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
-					cocked = TRUE
-			else
-				if(do_after(user, reloadtime - user.STASTR, user, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_USER_DIR_CHANGE)))
-					playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
-					cocked = TRUE
-		else
-			to_chat(user, span_warning("I carefully de-cock the crossbow."))
-			cocked = FALSE
-	update_icon()
+		return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attackby(obj/item/A, mob/user, params)
+	if(!cocked)
+		to_chat(user, span_info("I step on the stirrup and use all my might..."))
+		if(!movingreload)
+			if(do_after(user, reloadtime - user.STASTR, target = user))
+				playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
+				cocked = TRUE
+		else
+			if(do_after(user, reloadtime - user.STASTR, user, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_USER_DIR_CHANGE)))
+				playsound(user, 'sound/combat/Ranged/crossbow_medium_reload-01.ogg', 100, FALSE)
+				cocked = TRUE
+	else
+		to_chat(user, span_warning("I carefully de-cock the crossbow."))
+		cocked = FALSE
+
+	update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/attackby(obj/item/A, mob/user, list/modifiers)
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
 		if(cocked)
-			if((loc == user) && (user.get_inactive_held_item() != src))
-				return
-			..()
-		else
-			to_chat(user, span_warning("I need to cock the bow first."))
+			return ..()
+		to_chat(user, span_warning("I need to cock the bow first."))
 
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(user.client)
 		if(user.client.chargedprog >= 100)
 			spread = 0
@@ -217,7 +214,7 @@
 			if(user.STAPER > 10)
 				BB.damage = BB.damage * (user.STAPER / 10)
 		BB.damage *= damfactor // Apply damfactor multiplier regardless of PER.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/crossbows) * 3) //+3 accuracy per level in crossbows
+		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/crossbows, TRUE) * 3) //+3 accuracy per level in crossbows
 	cocked = FALSE
 	. = ..()
 	if(.)

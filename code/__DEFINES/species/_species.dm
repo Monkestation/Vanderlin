@@ -1,6 +1,7 @@
 #define SPEC_ID_HUMAN_SPACE "space_human"
 #define SPEC_ID_HUMEN "human"
 #define SPEC_ID_DWARF "dwarf"
+#define SPEC_ID_DWARF_SUBTERRAN "dwarf_subterran"
 #define SPEC_ID_AASIMAR "aasimar"
 #define SPEC_ID_ELF "elf"
 #define SPEC_ID_HALF_ELF "halfelf"
@@ -10,11 +11,13 @@
 #define SPEC_ID_HALF_ORC "halforc"
 #define SPEC_ID_RAKSHARI "rakshari"
 #define SPEC_ID_KOBOLD "kobold"
+#define SPEC_ID_KOBOLD_FORMIKRAG "kobold_formikrag"
 #define SPEC_ID_HOLLOWKIN "hollowkin"
 #define SPEC_ID_HARPY "harpy"
 #define SPEC_ID_TRITON "triton"
 #define SPEC_ID_MEDICATOR "medicator"
 #define SPEC_ID_HALFLING "halfling"
+#define SPEC_ID_AUTOMATON "automaton"
 
 #define SPEC_ID_ORC	"orc"
 #define SPEC_ID_GOBLIN	"goblin"
@@ -25,6 +28,7 @@
 #define ALL_RACES_LIST list(\
 	SPEC_ID_HUMEN,\
 	SPEC_ID_DWARF,\
+	SPEC_ID_DWARF_SUBTERRAN,\
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
@@ -36,6 +40,7 @@
 	SPEC_ID_TRITON,\
 	SPEC_ID_MEDICATOR,\
 	SPEC_ID_KOBOLD,\
+	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
 	SPEC_ID_ORC,\
@@ -44,6 +49,7 @@
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
 	SPEC_ID_HALFLING,\
+	SPEC_ID_AUTOMATON, \
 )
 
 /// Species where females get underwear, no underwear for kobold, rakshari, medicator and triton, dwarves handled seperately
@@ -83,6 +89,7 @@
 #define RACES_PLAYER_ALL list(\
 	SPEC_ID_HUMEN,\
 	SPEC_ID_DWARF,\
+	SPEC_ID_DWARF_SUBTERRAN,\
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
@@ -95,6 +102,7 @@
 	SPEC_ID_TRITON,\
 	SPEC_ID_MEDICATOR,\
 	SPEC_ID_KOBOLD,\
+	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
 )
@@ -126,6 +134,7 @@
 #define RACES_PLAYER_NONEXOTIC list(\
 	SPEC_ID_HUMEN,\
 	SPEC_ID_DWARF,\
+	SPEC_ID_DWARF_SUBTERRAN,\
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
@@ -143,6 +152,7 @@
 /// Species that lack lux. Any who have no ties to divinity anymore, whether it be their creation story or otherwise taken from them (Hollow-kin)
 #define RACES_PLAYER_LUXLESS list(\
 	SPEC_ID_KOBOLD,\
+	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_RAKSHARI,\
 	SPEC_ID_HUMAN_SPACE,\
@@ -201,6 +211,7 @@
 	SPEC_ID_RAKSHARI,\
 	SPEC_ID_TRITON,\
 	SPEC_ID_MEDICATOR,\
+	SPEC_ID_HOLLOWKIN,\
 )
 
 /// Vanderlin royalty
@@ -291,4 +302,29 @@
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
 	SPEC_ID_ZIZOMBIE,\
+)
+
+
+/// Used to tag meats. Eating certain meat as of these races as another race in this list is cannibalism
+#define SPECIES_CANNIBAL_MEN list(\
+	SPEC_ID_HUMEN,\
+	SPEC_ID_DWARF,\
+	SPEC_ID_AASIMAR,\
+	SPEC_ID_ELF,\
+	SPEC_ID_HALF_ELF,\
+	SPEC_ID_DROW,\
+	SPEC_ID_HALF_DROW,\
+	SPEC_ID_TIEFLING,\
+	SPEC_ID_HARPY,\
+	SPEC_ID_TRITON,\
+	SPEC_ID_MEDICATOR,\
+	SPEC_ID_HALF_ORC,\
+	SPEC_ID_ROUSMAN,\
+	SPEC_ID_ZIZOMBIE,\
+	SPEC_ID_HUMAN_SPACE,\
+	SPEC_ID_HALFLING,\
+)
+
+#define SPECIES_CANNIBALISM_KOBOLD list(\
+	SPEC_ID_KOBOLD,\
 )

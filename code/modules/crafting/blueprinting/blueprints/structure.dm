@@ -145,6 +145,21 @@
 
 	skillcraft = /datum/skill/craft/masonry
 
+
+/datum/blueprint_recipe/structure/noose
+	name = "Noose"
+	desc = "Hangs from the ceiling."
+	result_type = /obj/structure/noose
+	required_materials = list(
+		/obj/item/rope = 1
+	)
+	construct_tool = /obj/item/rope
+	verbage = "tie"
+	verbage_tp = "ties"
+	category = "Structures"
+	requires_ceiling = TRUE
+
+
 /datum/blueprint_recipe/structure/pottery_lathe
 	name = "Potter Lathe"
 	desc = "A lathe for creating pottery."
@@ -205,3 +220,36 @@
 	check_adjacent_wall = TRUE
 	supports_directions = TRUE
 	place_on_wall = TRUE
+
+/datum/blueprint_recipe/structure/psydon_metal_cross
+	name = "metal psycross"
+	desc = "A metal psycross dedicated to Psydon."
+	required_materials = list(
+		/obj/item/ingot/iron = 3,
+	)
+	result_type = /obj/structure/fluff/psycross/psydon/metal
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/skill/craft/crafting
+	craftdiff = 3
+
+/datum/blueprint_recipe/structure/astrata_cross
+	name = "astrata cross"
+	desc = "A metal psycross dedicated to Astrata."
+	required_materials = list(
+		/obj/item/ingot/iron = 3,
+	)
+	result_type = /obj/structure/fluff/psycross/astrata
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/skill/craft/crafting
+	craftdiff = 3
+
+/datum/blueprint_recipe/structure/astrata_cross_gold
+	name = "golden astrata cross"
+	desc = "A golden psycross dedicated to Astrata."
+	required_materials = list(
+		/obj/item/ingot/gold = 3,
+	)
+	result_type = /obj/structure/fluff/psycross/astrata/gold
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/skill/craft/crafting
+	craftdiff = 3

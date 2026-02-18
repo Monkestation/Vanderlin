@@ -8,7 +8,7 @@
 
 	has_visual_effects = FALSE
 	charge_required = FALSE
-	experience_modifer = 0
+	experience_modifier = 0
 
 	attunements = list(
 		/datum/attunement/light = 0.3,
@@ -23,6 +23,7 @@
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/grenzel
+	name = "Call Imperial Messenger"
 	destinations = list(
 		"My family" = "their family",
 		"Grenzelhoft Imperiate" = "the Grenzelhoft Imperiate",
@@ -30,18 +31,21 @@
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/priest
+	name = "Call Holy Messenger"
 	destinations = list(
 		"The Archbishop" = "the Archbishop",
 		"Cancel" = "cancel",
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/zalad
+	name = "Call Guild Messenger"
 	destinations = list(
 		"The Mercator Guild" = "the Mercator Guild",
 		"Cancel" = "cancel",
 	)
 
 /datum/action/cooldown/spell/undirected/call_bird/inquisitor
+	name = "Call Inquisitorial Messenger"
 	destinations = list(
 		"Holy Bishop of the Inquisition" = "the Holy Bishop of the Inquisition",
 		"Cancel" = "cancel",
@@ -67,7 +71,7 @@
 		return
 	if(!bird_called)
 		bird_called = TRUE
-		playsound(get_turf(cast_on), 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
+		playsound(cast_on, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
 		owned_bird = new(get_turf(cast_on))
 		owned_bird.source_spell = WEAKREF(src)
 		cast_on.put_in_hands(owned_bird)
@@ -77,7 +81,7 @@
 		owner.add_stress(/datum/stress_event/dead_bird)
 		return
 	bird_called = FALSE
-	playsound(get_turf(owned_bird), 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
+	playsound(owned_bird, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
 	owned_bird.visible_message(span_notice("The messenger bird flies away!"))
 	owned_bird = null
 
@@ -86,8 +90,8 @@
 	desc = "A small bird, used by nobles to send messages beyond the borders of this city. It has a small pouch on its leg for carrying notes."
 	icon_state = "messenger"
 	icon = 'icons/roguetown/mob/monster/messenger.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
-	foodtype = RAW
+	nutrition = MINCE_NUTRITION
+	foodtype = RAW | MEAT
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	obj_flags = CAN_BE_HIT
@@ -105,7 +109,7 @@
 	desc = "A fried messenger bird. Poor thing."
 	icon_state = "fcrow"
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("burnt flesh" = 1)
 	eat_effect = null

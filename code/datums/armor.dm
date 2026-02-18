@@ -70,3 +70,70 @@
 	tag = ARMORID // update tag in case armor values were edited
 
 #undef ARMORID
+
+/// Gets the rating of armor for the specified rating
+/datum/armor/proc/get_rating(rating) as num
+	// its not that I dont trust coders, its just that I don't trust coders
+	if(!(rating in ARMOR_LIST_ALL()))
+		CRASH("Attempted to get a rating '[rating]' that doesnt exist")
+	return vars[rating]
+
+/**
+ * Returns the client readable name of an armor type
+ *
+ * Arguments:
+ * * armor_type - The type to convert
+ */
+/proc/armor_to_protection_name(armor_type)
+	switch(armor_type)
+		if(BLUNT)
+			return "BLUNT"
+		if(SLASH)
+			return "SLASH"
+		if(STAB)
+			return "STAB"
+		if(PIERCE)
+			return "PIERCING"
+		if(FIRE)
+			return "FIRE"
+		if(ACID)
+			return "ACID"
+		if(MAGIC)
+			return "MAGIC"
+	CRASH("Unknown armor type '[armor_type]'")
+
+/**
+ * Arguments:
+ * * armor_value - Number we're converting
+ */
+/proc/armor_to_color(armor_value)
+	if(armor_value >= 100)
+		return "#1F3FBF"
+	if(armor_value >= 75)
+		return "#00FF00"
+	if(armor_value >= 50)
+		return "#7CFF7C"
+	if(armor_value >= 25)
+		return "#fffb00"
+	if(armor_value > 0)
+		return "#ff8800"
+	else
+		return "#FF0000"
+
+/**
+ * Arguments:
+ * * armor_value - Number we're converting
+ */
+/proc/armor_to_protection_class(armor_value)
+	if(armor_value >= 100)
+		return "(IMMUNE)"
+	if(armor_value >= 75)
+		return "(RESISTANT)"
+	if(armor_value >= 50)
+		return "(ENDURED)"
+	if(armor_value >= 25)
+		return "(NORMAL)"
+	if(armor_value > 0)
+		return "(WEAK)"
+	else
+		return "(VULNERABLE)"

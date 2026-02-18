@@ -103,7 +103,7 @@
 	attacked_atom = /obj/item/reagent_containers/food/snacks/meat/mince
 	starting_atom = /obj/item/reagent_containers/food/snacks/fat
 	allow_inverse_start = TRUE
-	output = /obj/item/reagent_containers/food/snacks/meat/sausage
+	output = /obj/item/reagent_containers/food/snacks/meat/sausage/wiener
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "stuff a wiener"
@@ -187,23 +187,6 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	extra_chance = 100
 
-/datum/repeatable_crafting_recipe/cooking/royal_truffle_toxic
-	hides_from_books = TRUE
-	name = "Royal Truffles"
-
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/cooked/ham = 1,
-		/obj/item/reagent_containers/food/snacks/cooked/truffle_toxic = 1,
-	)
-	required_table = TRUE
-	attacked_atom = /obj/item/reagent_containers/food/snacks/cooked/ham
-	starting_atom = /obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
-	allow_inverse_start = TRUE
-	output = /obj/item/reagent_containers/food/snacks/cooked/royal_truffle/toxin
-	craft_time = 2 SECONDS
-	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
-	extra_chance = 100
-
 /datum/repeatable_crafting_recipe/cooking/herbs
 	name = "herbs and spices"
 	tool_usage = list(
@@ -234,3 +217,18 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "mix the salt and seeds"
 	extra_chance = 100
+
+// Redtallow can be crafted using visceras (rendered from animal sinew)
+/datum/repeatable_crafting_recipe/tallow/red
+	name = "red tallow"
+
+	requirements = list(
+		/obj/item/alch/viscera = 1,
+		/obj/item/reagent_containers/food/snacks/tallow = 1,
+	)
+
+	starting_atom = /obj/item/alch/viscera
+	attacked_atom = /obj/item/reagent_containers/food/snacks/tallow
+	output = /obj/item/reagent_containers/food/snacks/tallow/red
+	craft_time = 1 SECONDS
+	subtypes_allowed = TRUE

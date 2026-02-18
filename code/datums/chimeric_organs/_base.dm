@@ -13,7 +13,7 @@
 			return weighted_nodes
 
 	for(var/datum/chimeric_node/node_type as anything in node_types)
-		if(is_abstract(node_type))
+		if(IS_ABSTRACT(node_type))
 			continue
 		var/tier = initial(node_type.tier)
 		if(tier > max_tier)
@@ -73,42 +73,6 @@
 			return FALSE
 
 	return TRUE
-
-/datum/chimeric_node/proc/try_consume_blood(datum/component/blood_stability/blood_stab, delta_time)
-	var/blood_needed = base_blood_cost * delta_time
-
-	for(var/blood_type in preferred_blood_types)
-		var/adjusted_cost = blood_needed * (1 - preferred_blood_bonus)
-		if(blood_stab.consume_stability(blood_type, adjusted_cost))
-			return TRUE
-
-	if(length(compatible_blood_types))
-		for(var/blood_type in compatible_blood_types)
-			if(blood_stab.consume_stability(blood_type, blood_needed))
-				return TRUE
-	else
-		for(var/blood_type in blood_stab.blood_stability)
-			if(blood_type in incompatible_blood_types)
-				continue
-			if(blood_stab.consume_stability(blood_type, blood_needed))
-				return TRUE
-
-	for(var/blood_type in incompatible_blood_types)
-		var/adjusted_cost = blood_needed * (1 + incompatible_blood_penalty)
-		if(blood_stab.consume_stability(blood_type, adjusted_cost))
-			damage_from_incompatible_blood()
-			return TRUE
-
-	return FALSE
-
-/datum/chimeric_node/proc/damage_from_incompatible_blood()
-	if(!hosted_carbon)
-		return
-
-	if(prob(10))
-		to_chat(hosted_carbon, span_danger("Your grafted flesh rejects the incompatible blood!"))
-		attached_organ.applyOrganDamage(1)
-
 
 /datum/chimeric_node/proc/setup()
 	return

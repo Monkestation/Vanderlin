@@ -57,7 +57,7 @@
 				var/turf/T = get_step(src, dir)
 				if(istype(T, /turf/closed/mineral/random))
 					Spread(T)
-	var/turf/open/transparent/openspace/target = GET_TURF_ABOVE(src)
+	var/turf/open/openspace/target = GET_TURF_ABOVE(src)
 	if(istype(target))
 		target.ChangeTurf(/turf/open/floor/naturalstone)
 
@@ -69,7 +69,7 @@
 	return ..()
 
 
-/turf/closed/mineral/attackby(obj/item/I, mob/user, params)
+/turf/closed/mineral/attackby(obj/item/I, mob/user, list/modifiers)
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, span_warning("I don't have the dexterity to do this!"))
 		return
@@ -104,7 +104,7 @@
 		else
 			return
 	else
-		if(lastminer.stat_roll(STATKEY_LCK,2,10) && mineralType)
+		if(lastminer?.stat_roll(STATKEY_LCK,2,10) && mineralType)
 	//		to_chat(lastminer, span_notice("Bonus ducks!"))
 			new mineralType(src)
 		gets_drilled(lastminer, give_exp = FALSE)
@@ -143,7 +143,7 @@
 	if(!user || !istype(item, /obj/item/ore))
 		return
 
-	var/mining_skill = user.get_skill_level(/datum/skill/labor/mining) + user.get_inspirational_bonus()
+	var/mining_skill = user.get_skill_level(/datum/skill/labor/mining, TRUE) + user.get_inspirational_bonus()
 
 	// Base quality calculation - mainly chance-based with skill influence
 	var/base_chance = 5 // 5% chance for quality 2
@@ -504,7 +504,7 @@
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "bedrock_ice")
 
-/turf/closed/mineral/bedrock/attackby(obj/item/I, mob/user, params)
+/turf/closed/mineral/bedrock/attackby(obj/item/I, mob/user, list/modifiers)
 	to_chat(user, span_warning("This is far too sturdy to be destroyed!"))
 	return FALSE
 

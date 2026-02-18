@@ -761,8 +761,8 @@ GLOBAL_PROTECT(no_child_icons)
 		return
 
 	if(client && hud_used)
-		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_GLOVES) + 1]
-		inv?.update_icon()
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_MASK) + 1]
+		inv?.update_appearance(UPDATE_ICON)
 
 	if(wear_mask)
 		update_hud_wear_mask(wear_mask)

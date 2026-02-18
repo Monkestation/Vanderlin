@@ -64,10 +64,6 @@
 	var/next_lmove = null
 	var/used_hand = 1
 
-	/// Is the mob blind
-	var/eye_blind = 0		//Carbon
-	/// Does the mob have blurry sight
-	var/eye_blurry = 0		//Carbon
 	/// What is the mobs real name (name is overridden for disguises etc)
 	var/real_name = null
 
@@ -85,12 +81,6 @@
 
 	/// Default body temperature
 	var/bodytemperature = BODYTEMP_NORMAL	//310.15K / 98.6F
-	/// Drowsyness level of the mob
-	var/drowsyness = 0//Carbon
-	/// Dizziness level of the mob
-	var/dizziness = 0//Carbon
-	/// Jitteryness level of the mob
-	var/jitteriness = 0//Carbon
 	/// Hunger level of the mob
 	var/nutrition = NUTRITION_LEVEL_START_MIN // randomised in Initialize
 	var/hydration = HYDRATION_LEVEL_START_MIN
@@ -161,6 +151,7 @@
 
 	/// What job does this mob have
 	var/job = null//Living
+	var/datum/job/job_type
 
 	/// A list of factions that this mob is currently in, for hostile mob targetting, amongst other things
 	var/list/faction = list(FACTION_NEUTRAL)
@@ -259,7 +250,8 @@
 
 	var/mobid = 0 //incremented on spawn
 
-	var/cmode = 0
+	/// Combat Mode
+	var/cmode = FALSE
 	var/d_intent = INTENT_DODGE
 	var/islatejoin = FALSE
 
@@ -279,5 +271,16 @@
 
 	/// A ref of the area we're taking our ambient loop from.
 	var/area/ambience_tracked_area
+
+	var/obj/effect/spell_rune/spell_rune
+	var/datum/intent/curplaying
+	var/accent = ACCENT_DEFAULT
+	var/cmode_timer
+	var/monitor_key
+
+	var/last_aimhchange = 0
+	var/aimheight = 11
+	var/cmode_music = 'sound/music/cmode/combat.ogg'
+
 	/// new title given by an admin.
 	var/admin_title = null

@@ -277,8 +277,7 @@
 
 /atom/movable/proc/onZImpact(turf/T, levels)
 	var/atom/highest = T
-	for(var/i in T.contents)
-		var/atom/A = i
+	for(var/atom/A as anything in T)
 		if(!A.density)
 			continue
 		if(isobj(A) || ismob(A))
@@ -392,14 +391,15 @@
 	. = pulledby
 	pulledby = new_pulledby
 
-/atom/movable/proc/stop_pulling(forced = TRUE)
-	if(pulling)
-		if(pulling != src)
-			pulling.set_pulledby(null)
-			var/atom/movable/old_pulling = pulling
-			pulling = null
-			SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
+/atom/movable/proc/stop_pulling(pulling_broke_free = FALSE)
 	setGrabState(GRAB_PASSIVE)
+	if(!pulling)
+		return
+	pulling.set_pulledby(null)
+	var/atom/movable/old_pulling = pulling
+	pulling = null
+	SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
+	SEND_SIGNAL(src, COMSIG_ATOM_NO_LONGER_PULLING, old_pulling)
 
 /atom/movable/proc/Move_Pulled(atom/movable/A)
 	if(!pulling)
@@ -818,6 +818,8 @@
 
 /atom/movable/proc/forceMove(atom/destination)
 	. = FALSE
+	if(QDELING(src))
+		CRASH("Illegal forceMove() on qdeling [type]")
 	if(destination)
 		. = doMove(destination)
 	else
@@ -983,7 +985,7 @@
 	if(TT.target_turf && curloc)
 		if(TT.target_turf.z > curloc.z)
 			var/turf/above = GET_TURF_ABOVE(curloc)
-			if(istype(above, /turf/open/transparent/openspace))
+			if(istype(above, /turf/open/openspace))
 				forceMove(above)
 	if(spin)
 		SpinAnimation(5, 1)
@@ -995,8 +997,7 @@
 	TT.tick()
 
 /atom/movable/proc/handle_buckled_mob_movement(newloc, direct, glide_size_override)
-	for(var/m in buckled_mobs)
-		var/mob/living/buckled_mob = m
+	for(var/mob/living/buckled_mob as anything in buckled_mobs)
 		if(!buckled_mob.Move(newloc, direct, glide_size_override))
 			forceMove(buckled_mob.loc)
 			last_move = buckled_mob.last_move
@@ -1334,11 +1335,13 @@
 /* Language procs */
 /atom/movable/proc/get_language_holder(shadow=TRUE)
 	RETURN_TYPE(/datum/language_holder)
-	if(language_holder)
-		return language_holder
-	else
+	if(QDELING(src))
+		CRASH("get_language_holder() called on a QDELing atom, \
+			this will try to re-instantiate the language holder that's about to be deleted, which is bad.")
+
+	if(!language_holder)
 		language_holder = new initial_language_holder(src)
-		return language_holder
+	return language_holder
 
 /atom/movable/proc/grant_language(datum/language/dt, body = FALSE)
 	var/datum/language_holder/H = get_language_holder(!body)
@@ -1414,10 +1417,10 @@
 	var/datum/language/chosen_langtype
 	var/highest_priority
 
-	for(var/lt in H.languages)
-		var/datum/language/langtype = lt
+	for(var/datum/language/langtype as anything in H.languages)
 		if(!ispath(langtype))
 			langtype = text2path(langtype)
+
 		if(!can_speak_in_language(langtype))
 			continue
 

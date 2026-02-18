@@ -36,7 +36,7 @@
 
 /datum/objective/personal/sniff_drugs/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_RECOGNIZE_ADDICTS, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_RECOGNIZE_ADDICTS, OBJECTIVE_TRAIT)
 	owner.current.adjust_stat_modifier(STATMOD_BAOTHA_BLESSING, STATKEY_LCK, 1)
 
 /datum/objective/personal/sniff_drugs/update_explanation_text()

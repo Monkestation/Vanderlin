@@ -1397,7 +1397,7 @@
 
 /client/proc/recipe_tree_debug_menu()
 	set name = "Recipe Tree Debug Menu"
-	set category = "Debug"
+	set category = "Debug.Debug"
 
 	var/html = {"
 	<html>

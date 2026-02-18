@@ -4,7 +4,7 @@
 	curse = "Fear of the Religion."
 	blood_preference = BLOOD_PREFERENCE_EUPHORIC
 	blood_disgust = BLOOD_PREFERENCE_HOLY
-	clane_covens = list(
+	clan_covens = list(
 		/datum/coven/obfuscate,
 		/datum/coven/presence,
 		/datum/coven/demonic,

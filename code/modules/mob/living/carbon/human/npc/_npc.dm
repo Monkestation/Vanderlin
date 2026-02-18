@@ -136,10 +136,10 @@
 	if(target.mind)
 		if(target.has_status_effect(/datum/status_effect/invisibility))
 			// we're invisible as per the spell effect, so use the highest of our arcane magic (or holy) skill instead of our sneaking
-			sneak_bonus = (max(target.get_skill_level(/datum/skill/magic/arcane), target.get_skill_level(/datum/skill/magic/holy)) * 10)
+			sneak_bonus = (max(target.get_skill_level(/datum/skill/magic/arcane, TRUE), target.get_skill_level(/datum/skill/magic/holy, TRUE)) * 10)
 			probby -= 20 // also just a fat lump of extra difficulty for the npc since spells are hard, you know?
 		else
-			sneak_bonus = (target.get_skill_level(/datum/skill/misc/sneaking) * 5)
+			sneak_bonus = (target.get_skill_level(/datum/skill/misc/sneaking, TRUE) * 5)
 		probby -= sneak_bonus
 
 	probby += 100 * target.get_encumbrance()

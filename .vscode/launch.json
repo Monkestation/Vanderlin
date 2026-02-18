@@ -5,7 +5,14 @@
             "type": "byond",
             "request": "launch",
             "name": "Launch DreamSeeker",
-            "preLaunchTask": "dm: build - ${command:CurrentDME}",
+            "preLaunchTask": "Build All",
+            "dmb": "${workspaceFolder}/${command:CurrentDMB}"
+        },
+        {
+            "type": "byond",
+            "request": "launch",
+            "name": "Launch DreamSeeker (Native)",
+            "preLaunchTask": "Build Byond",
             "dmb": "${workspaceFolder}/${command:CurrentDMB}"
         },
         {

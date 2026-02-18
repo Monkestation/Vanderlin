@@ -6,7 +6,7 @@
 	id = "medicator"
 	changesource_flags = WABBAJACK
 
-	meat = /obj/item/reagent_containers/food/snacks/meat/strange
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
 
 	desc = "Medicators originate from the fetid swamps and murk within the Isle of Enigma. Their species has historically been localized around the area, \
 	although the Brass Cataclysm of Heartfelt's fall has resulted in droves of their kind seeking refuge elsewhere. They are a newer form of sentience, with records dating back only after Zizo's ascension. \

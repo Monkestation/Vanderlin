@@ -271,8 +271,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 
 	exposure = FALSE
 	slippery = FALSE
-	for(var/reagent_type in reagents.reagent_list)
-		var/datum/reagent/pulled_reagent = reagent_type
+	for(var/datum/reagent/pulled_reagent as anything in reagents.reagent_list)
 		var/amount = pulled_reagent.volume / length(members)
 		if(!amount)
 			continue
@@ -542,8 +541,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 	var/alpha_divisor = 1
 
 	var/glowy = FALSE
-	for(var/r in reagents.reagent_list)
-		var/datum/reagent/R = r
+	for(var/datum/reagent/R as anything in reagents.reagent_list)
 		alpha_setting += max((R.opacity * R.volume), 1)
 		alpha_divisor += max((1 * R.volume), 1)
 		if(R.glows)
@@ -707,8 +705,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 
 /datum/liquid_group/proc/check_adjacency(turf/member)
 	var/adjacent_liquid = 0
-	for(var/tur in member.atmos_adjacent_turfs)
-		var/turf/adjacent_turf = tur
+	for(var/turf/adjacent_turf as anything in member.atmos_adjacent_turfs)
 		if(!QDELETED(adjacent_turf.liquids))
 			if(adjacent_turf.liquids.liquid_group == member.liquids.liquid_group)
 				adjacent_liquid++

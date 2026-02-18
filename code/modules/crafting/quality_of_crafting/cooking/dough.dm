@@ -44,28 +44,13 @@
 	crafting_message = "knead butter into the dough"
 	extra_chance = 100
 
-/datum/repeatable_crafting_recipe/cooking/raisin_dough_poison
-	hides_from_books = TRUE
-	name = "Raisin Dough"
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/dough = 1,
-		/obj/item/reagent_containers/food/snacks/raisins/poison = 1,
-	)
-	starting_atom = /obj/item/reagent_containers/food/snacks/raisins/poison
-	attacked_atom = /obj/item/reagent_containers/food/snacks/dough
-	output = /obj/item/reagent_containers/food/snacks/raisindough_poison
-	required_table = TRUE
-	craft_time = 5 SECONDS
-	crafting_sound = 'sound/foley/kneading.ogg'
-	crafting_message = "knead the dough and adding raisins"
-	extra_chance = 100
-
 /datum/repeatable_crafting_recipe/cooking/raisin_dough
 	name = "Raisin Dough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/dough = 1,
 		/obj/item/reagent_containers/food/snacks/raisins = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom = /obj/item/reagent_containers/food/snacks/raisins
 	attacked_atom = /obj/item/reagent_containers/food/snacks/dough
 	output = /obj/item/reagent_containers/food/snacks/raisindough

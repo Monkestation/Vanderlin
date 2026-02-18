@@ -3,7 +3,7 @@
 	desc = "The clanless, an outcast from vampire society. Fortunately for you the curse of kain is not strong enough for you to combust in daylight."
 	blood_preference = null
 	blood_disgust = BLOOD_PREFERENCE_KIN
-	clane_covens = list(
+	clan_covens = list(
 		/datum/coven/auspex,
 		/datum/coven/obfuscate,
 		/datum/coven/bloodheal

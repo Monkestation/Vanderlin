@@ -22,7 +22,9 @@
 		/datum/attunement/aeromancy = 0.4,
 	)
 
-	/// The max throw range of the repulsioon.
+	/// The minimum throw range of the replusion
+	var/min_throw = 3
+	/// The max throw range of the repulsion.
 	var/max_throw = 3
 	/// A visual effect to be spawned on people who are thrown away.
 	var/obj/effect/sparkle_path = /obj/effect/temp_visual/kinetic_blast
@@ -38,14 +40,11 @@
 		if(victim_mob.can_block_magic(antimagic_flags))
 			return
 
-	var/turf/throwtarget = get_edge_target_turf(caster, get_dir(caster, get_step_away(victim, caster)))
-	var/dist_from_caster = get_dist(victim, caster)
-
 	if(sparkle_path)
 		// Created sparkles will disappear on their own
 		new sparkle_path(get_turf(victim), get_dir(caster, victim))
 
-	if(dist_from_caster == 0)
+	if(get_dist(victim, caster) == 0)
 		if(isliving(victim))
 			var/mob/living/victim_living = victim
 			victim_living.Paralyze(5 SECONDS)
@@ -58,12 +57,17 @@
 		victim_living.Paralyze(3 SECONDS)
 		to_chat(victim, span_userdanger("You're thrown back by [caster]!"))
 
+	throw_victim(victim, caster)
+
+/datum/action/cooldown/spell/aoe/repulse/proc/throw_victim(atom/movable/victim, atom/caster)
+	var/turf/throwtarget = get_edge_target_turf(caster, get_dir(caster, get_step_away(victim, caster)))
+	var/dist_from_caster = get_dist(victim, caster)
 	// So stuff gets tossed around at the same time.
 	victim.safe_throw_at(
-		throwtarget,
-		((clamp((max_throw - (clamp(dist_from_caster - 2, 0, dist_from_caster))), 3, max_throw))),
-		1,
-		caster,
+		target = throwtarget,
+		range = clamp((max_throw - (clamp(dist_from_caster - 2, 0, dist_from_caster))), min_throw, max_throw),
+		speed = 1,
+		thrower = caster,
 		force = repulse_force
 	)
 
@@ -86,5 +90,5 @@
 
 /datum/action/cooldown/spell/aoe/repulse/dragon/cast(atom/target)
 	. = ..()
-	playsound(get_turf(owner), 'sound/combat/hits/punch/punch_hard (3).ogg', 80, TRUE, TRUE)
+	playsound(owner, 'sound/combat/hits/punch/punch_hard (3).ogg', 80, TRUE, TRUE)
 	owner.spin(6, 1)

@@ -1,8 +1,7 @@
 /datum/patron/inhumen
-	name = null
+	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
 
-	profane_words = list()
 	confess_lines = list(
 		"PSYDON AND HIS CHILDREN ARE THE DEMIURGE!",
 		"THE TEN ARE WORTHLESS COWARDS!",
@@ -106,7 +105,9 @@
 		"NONE OF THIS IS REAL!",
 		"WHO AM I WORSHIPPING?!"
 	)
-	preference_accessible = FALSE
+
+/datum/patron/inhumen/graggar_zizo/preference_accessible(datum/preferences/prefs)
+	return FALSE
 
 /datum/patron/inhumen/graggar_zizo/can_pray(mob/living/follower)
 	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)

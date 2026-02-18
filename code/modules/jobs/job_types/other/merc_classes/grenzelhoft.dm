@@ -8,8 +8,8 @@
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/misc/athletics = 4,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/misc/athletics = 3,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/swords = 2,
 		/datum/skill/combat/whipsflails = 1,
@@ -18,13 +18,14 @@
 		/datum/skill/craft/cooking = 1,
 	)
 	traits = list(TRAIT_MEDIUMARMOR)
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 2
 
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/outfit/mercenary/grenzelhoft
+	name = "Grenzelhoft (Mercenary)"
 	neck = /obj/item/clothing/neck/chaincoif
 	pants = /obj/item/clothing/pants/grenzelpants
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
@@ -47,7 +48,7 @@
 	if(H.dna?.species.id == SPEC_ID_HUMEN)
 		H.dna.species.native_language = "Old Psydonic"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
-	var/weapons = list("Zweihander", "Musket",)
+	var/weapons = list("Zweihander", "Musket", "Halberd")
 	var/weapon_choice = input(H,"CHOOSE YOUR WEAPON.", "GO EARN SOME COIN.") as anything in weapons
 	switch(weapon_choice)
 		if("Zweihander")
@@ -57,13 +58,21 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
 			H.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // They need this to roll at least min STR for the Zwei.
 			H.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,3), TRUE) // Equal chance between skilled and average, can use a cudgel to beat less dangerous targets into submission
-			H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		if("Musket")
 			H.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket, ITEM_SLOT_BACK_R, TRUE)
-			H.equip_to_slot_or_del(new /obj/item/ammo_holder/bullet, ITEM_SLOT_BELT_R, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/ammo_holder/bullet/bullets, ITEM_SLOT_BELT_R, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel/musketeer, ITEM_SLOT_BACK_L, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/weapon/sword/sabre/dec, ITEM_SLOT_BELT_L, TRUE)
-			H.adjust_skillrank(/datum/skill/combat/firearms, 4, TRUE)
-			H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+			H.adjust_skillrank(/datum/skill/combat/firearms, 3, TRUE)
+			H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 			if(H.age == AGE_OLD)
 				H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+		if("Halberd")
+			H.equip_to_slot_or_del(new /obj/item/weapon/polearm/halberd, ITEM_SLOT_BACK_R, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel, ITEM_SLOT_BACK_L, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/storage/belt/pouch/coins/poor, ITEM_SLOT_BELT_R, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
+			H.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // same as zwei
+			H.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,3), TRUE) // same as zwei
+			H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)

@@ -4,6 +4,17 @@ Try to keep this in sync with __DEFINES/traits.dm
 quirks have it's own panel so we don't need them here.
 */
 GLOBAL_LIST_INIT(traits_by_type, list(
+	/atom = list(
+		"TRAIT_ALT_CLICK_BLOCKER" = TRAIT_ALT_CLICK_BLOCKER,
+	),
+	/atom/movable = list(
+		"TRAIT_MOVE_GROUND" = TRAIT_MOVE_GROUND,
+		"TRAIT_MOVE_FLYING" = TRAIT_MOVE_FLYING,
+		"TRAIT_MOVE_VENTCRAWLING" = TRAIT_MOVE_VENTCRAWLING,
+		"TRAIT_MOVE_FLOATING" = TRAIT_MOVE_FLOATING,
+		"TRAIT_MOVE_PHASING" = TRAIT_MOVE_PHASING,
+		"TRAIT_SHAKY_SPEECH" = TRAIT_SHAKY_SPEECH,
+	),
 	/mob = list(
 		"TRAIT_KNOCKEDOUT" = TRAIT_KNOCKEDOUT,
 		"TRAIT_IMMOBILIZED" = TRAIT_IMMOBILIZED,
@@ -11,11 +22,9 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_HANDS_BLOCKED" = TRAIT_HANDS_BLOCKED,
 		"TRAIT_RESTRAINED" = TRAIT_RESTRAINED,
 		"TRAIT_INCAPACITATED" = TRAIT_INCAPACITATED,
-		"TRAIT_BLIND" = TRAIT_BLIND,
 		"TRAIT_MUTE" = TRAIT_MUTE,
 		"TRAIT_EMOTEMUTE " = TRAIT_EMOTEMUTE,
 		"TRAIT_DEAF" = TRAIT_DEAF,
-		"TRAIT_NEARSIGHT" = TRAIT_NEARSIGHT,
 		"TRAIT_HUSK" = TRAIT_HUSK,
 		"TRAIT_DUMB" = TRAIT_DUMB,
 		"TRAIT_MONKEYLIKE" = TRAIT_MONKEYLIKE,
@@ -24,6 +33,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_IGNOREDAMAGESLOWDOWN" = TRAIT_IGNOREDAMAGESLOWDOWN,
 		"TRAIT_DEATHCOMA" = TRAIT_DEATHCOMA,
 		"TRAIT_FAKEDEATH" = TRAIT_FAKEDEATH,
+		"TRAIT_NEARSIGHTED_CORRECTED" = TRAIT_NEARSIGHTED_CORRECTED,
 		"TRAIT_NO_TRANSFORM" = TRAIT_NO_TRANSFORM,
 		"TRAIT_STUNIMMUNE" = TRAIT_STUNIMMUNE,
 		"TRAIT_SLEEPIMMUNE" = TRAIT_SLEEPIMMUNE,
@@ -35,6 +45,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_RESISTCOLD" = TRAIT_RESISTCOLD,
 		"TRAIT_RESISTHIGHPRESSURE" = TRAIT_RESISTHIGHPRESSURE,
 		"TRAIT_RESISTLOWPRESSURE" = TRAIT_RESISTLOWPRESSURE,
+		"TRAIT_BOMBIMMUNE" = TRAIT_BOMBIMMUNE,
 		"TRAIT_RADIMMUNE" = TRAIT_RADIMMUNE,
 		"TRAIT_PIERCEIMMUNE" = TRAIT_PIERCEIMMUNE,
 		"TRAIT_NODISMEMBER" = TRAIT_NODISMEMBER,
@@ -69,13 +80,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NOMOBSWAP" = TRAIT_NOMOBSWAP,
 		"TRAIT_XRAY_VISION" = TRAIT_XRAY_VISION,
 		"TRAIT_THERMAL_VISION" = TRAIT_THERMAL_VISION,
-		"TRAIT_ABDUCTOR_TRAINING" = TRAIT_ABDUCTOR_TRAINING,
-		"TRAIT_ABDUCTOR_SCIENTIST_TRAINING" = TRAIT_ABDUCTOR_SCIENTIST_TRAINING,
 		"TRAIT_SURGEON" = TRAIT_SURGEON,
 		"TRAIT_STRONG_GRABBER" = TRAIT_STRONG_GRABBER,
 		"TRAIT_MAGIC_CHOKE" = TRAIT_MAGIC_CHOKE,
 		"TRAIT_SOOTHED_THROAT" = TRAIT_SOOTHED_THROAT,
-		"TRAIT_LAW_ENFORCEMENT_METABOLISM" = TRAIT_LAW_ENFORCEMENT_METABOLISM,
 		"TRAIT_ALWAYS_CLEAN" = TRAIT_ALWAYS_CLEAN,
 		"TRAIT_BOOZE_SLIDER" = TRAIT_BOOZE_SLIDER,
 		"TRAIT_UNINTELLIGIBLE_SPEECH" = TRAIT_UNINTELLIGIBLE_SPEECH,
@@ -83,6 +91,9 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_FINGERPRINT_PASSTHROUGH" = TRAIT_FINGERPRINT_PASSTHROUGH,
 		"TRAIT_SOUND_DEBUGGED" = TRAIT_SOUND_DEBUGGED,
 		//Rogue Traits Past here
+		"TRAIT_KNOW_KEEP_DOORS" = TRAIT_KNOW_KEEP_DOORS,
+		"TRAIT_KNOW_INQUISITION_DOORS" = TRAIT_KNOW_INQUISITION_DOORS,
+		"TRAIT_KNOW_THIEF_DOORS" = TRAIT_KNOW_THIEF_DOORS,
 		"Blessing of Baotha" = TRAIT_CRACKHEAD,
 		"Blessing of Graggar" = TRAIT_ORGAN_EATER,
 		"Blessing of Pestra"= TRAIT_ROT_EATER,
@@ -173,27 +184,19 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Recruited" = TRAIT_RECRUITED,
 		"Recognized" = TRAIT_RECOGNIZED,
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
-		"Unyielding" = TRAIT_UNDODGING,
+		"Inflexible" = TRAIT_UNDODGING,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
-		),
+	),
 	/obj/item = list(
 		"TRAIT_NODROP" = TRAIT_NODROP,
 		"TRAIT_NO_TELEPORT" = TRAIT_NO_TELEPORT,
 		"TRAIT_WIELDED" = TRAIT_WIELDED,
 		"TRAIT_NEEDS_TWO_HANDS" = TRAIT_NEEDS_TWO_HANDS,
 		"TRAIT_HARD_TO_STEAL" = TRAIT_HARD_TO_STEAL,
-		),
-	/atom/movable = list(
-		"TRAIT_MOVE_GROUND" = TRAIT_MOVE_GROUND,
-		"TRAIT_MOVE_FLYING" = TRAIT_MOVE_FLYING,
-		"TRAIT_MOVE_VENTCRAWLING" = TRAIT_MOVE_VENTCRAWLING,
-		"TRAIT_MOVE_FLOATING" = TRAIT_MOVE_FLOATING,
-		"TRAIT_MOVE_PHASING" = TRAIT_MOVE_PHASING,
-		"TRAIT_SHAKY_SPEECH" = TRAIT_SHAKY_SPEECH,
-		),
-	))
+	),
+))
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_WEBWALK = "I can move freely between webs.",
@@ -208,7 +211,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	TRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
 	TRAIT_HATEWOMEN = "Double damage against female mobs.",
-	TRAIT_SEEDKNOW = span_info("I know which seeds grow which crops."),
+	TRAIT_SEEDKNOW = span_info("I am intimately aware of seed properties."),
 	TRAIT_NOBLE = span_blue("I'm of noble blood."),
 	TRAIT_EMPATH = "I can notice when people are stressed.",
 	TRAIT_BREADY = "Defensive stance does not passively fatigue me.",
@@ -289,7 +292,6 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_RECOGNIZED = span_notice("These people recognize me, my renown has spread from my homeland to this very place."),
 	TRAIT_EARGRAB = span_info("I can keep a tight grip on the ear of unruly children."),
 	TRAIT_KITTEN_MOM = span_info("Kittens love you, they see you are a parent."),
-	TRAIT_INSPIRING_MUSICIAN = span_info("The flow of battle dances to my song!"),
 	TRAIT_FACELESS = span_danger("I am faceless. I am shunned. The others will recognise me for what I am. If I give them the chance."),
 	TRAIT_FLOWERFIELD_IMMUNITY = span_info("I am immune to the effects of flower fields."),
 	TRAIT_SECRET_OFFICIANT = span_love("I am able to conduct secret wedding ceremonies outside of the church. Love cannot be stopped!"),
@@ -304,9 +306,10 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_PSYDONIAN_GRIT = span_info("I can shrug off my wounds and maintain composure under duress. My own mortality is proof that I LIVE, as too does HE."),
 	TRAIT_BLACKBAGGER = span_info("I've been trained to properly abduct individuals through the use of seizing garrotes and blackbags."),
 	TRAIT_NOCSHADES = span_info("The lens I look through allows me to see in the dark clear as dae, at the cost of greater vision."),
-	TRAIT_LYCANRESILENCE = span_info("Dendor's fury flows through my veins, my wounds regenerate over time..."),
+	TRAIT_WOUNDREGEN = span_info("My wounds and bones mend on their own, my bleeding clots quickly.."),
 	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
+	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

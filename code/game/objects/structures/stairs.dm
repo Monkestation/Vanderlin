@@ -1,4 +1,4 @@
-// stairs require /turf/open/transparent/openspace as the tile above them to work
+// stairs require /turf/open/openspace as the tile above them to work
 // multiple stair objects can be chained together; the Z level transition will happen on the final stair object in the chain
 
 /obj/structure/stairs
@@ -80,8 +80,8 @@
 
 /obj/structure/stairs/stone/d/OnCrafted(dirin, mob/user)
 	SHOULD_CALL_PARENT(FALSE)
-	dir = turn(dirin, 180)
-	var/turf/partner = get_step_multiz(src, dirin|DOWN)
+	dir = dirin
+	var/turf/partner = get_step_multiz(src, turn(dir, 180)|DOWN)
 	if(isopenturf(partner))
 		var/obj/structure/stairs/stairs = locate() in partner
 		if(!stairs)

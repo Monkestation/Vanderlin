@@ -50,16 +50,8 @@
 	owner.say("RAVOX, I GIVE MY LIFE FOR THEIRS!", forced = "ravox_ritual")
 	owner.emote("rage", forced = TRUE)
 
-	if(!cast_on.ckey)
-		var/mob/living/carbon/spirit/underworld_spirit = cast_on.get_spirit()
-		if(underworld_spirit)
-			var/mob/dead/observer/ghost = underworld_spirit.ghostize()
-			qdel(underworld_spirit)
-			ghost.mind.transfer_to(cast_on, TRUE)
-		cast_on.grab_ghost(force = TRUE)
-
-	cast_on.revive(full_heal = TRUE, admin_revive = FALSE)
-
+	cast_on.revive(HEAL_ALL)
+	cast_on.grab_ghost(force = TRUE, grab_spirit = TRUE)
 	playsound(owner, 'sound/magic/churn.ogg', 80)
 	ADD_TRAIT(owner, TRAIT_NECRA_CURSE, "ravox_ritual")
 	owner.death()

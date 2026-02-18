@@ -14,35 +14,29 @@
 	no_over_text = FALSE
 
 /atom/movable/screen/ghost/orbit/rogue/Click(location, control, params)
-	var/mob/dead/observer/G = usr
-	var/paramslist = params2list(params)
-	if(paramslist["right"]) // screen objects don't do the normal Click() stuff so we'll cheat
-		if(G.client?.holder)
-			G.follow()
+	var/mob/dead/observer/ghost = usr
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK)) // screen objects don't do the normal Click() stuff so we'll cheat
+		if(ghost.client?.holder)
+			ghost.follow()
 	else
-		if(G.isinhell)
+		if(ghost.isinhell)
 			return
-		if(G.client)
-			if(G.client.holder)
-				if(istype(G, /mob/dead/observer/rogue/arcaneeye))
+		if(ghost.client)
+			if(ghost.client.holder)
+				if(istype(ghost, /mob/dead/observer/rogue/arcaneeye))
 					return
-				if(istype(G, /mob/dead/observer/profane)) // Souls trapped by a dagger can return to lobby if they want
+				if(istype(ghost, /mob/dead/observer/profane)) // Souls trapped by a dagger can return to lobby if they want
 					if(alert("Return to the lobby?", "", "Yes", "No") == "Yes")
-						G.returntolobby()
-				G.client.descend()
+						ghost.returntolobby()
+				ghost.descend_to_underworld()
 				return
 
 		if(has_world_trait(/datum/world_trait/skeleton_siege) || has_world_trait(/datum/world_trait/rousman_siege) || has_world_trait(/datum/world_trait/goblin_siege))
-			G.returntolobby()
-		G.client.descend()
-/*		if(world.time < G.ghostize_time + RESPAWNTIME)
-			var/ttime = round((G.ghostize_time + RESPAWNTIME - world.time) / 10)
-			var/list/thingsz = list("My connection to the world is still too strong.",\
-			"I'm not ready to leave...", "I'm not ready to travel with Charon.",\
-			"Don't make me leave!", "No... Not yet!", "Please, don't make me go yet...",\
-			"The shores are calling me but I cannot go...","My soul isn't ready yet...")
-			to_chat(G, "<span class='warning'>[pick(thingsz)] ([ttime])</span>")
-			return */ //Disabling this since the underworld will exist
+			ghost.returntolobby()
+			return
+
+		ghost.descend_to_underworld()
 
 /datum/hud/ghost/New(mob/owner)
 	..()

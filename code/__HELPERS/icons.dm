@@ -715,7 +715,7 @@ world
 /proc/getFlatIcon(image/appearance, defdir, deficon, defstate, defblend, start = TRUE, no_anim = FALSE)
 	// Loop through the underlays, then overlays, sorting them into the layers list
 	#define PROCESS_OVERLAYS_OR_UNDERLAYS(flat, process, base_layer) \
-		for (var/i in 1 to process.len) { \
+		for (var/i in 1 to length(process)) { \
 			var/image/current = process[i]; \
 			if (!current) { \
 				continue; \
@@ -730,7 +730,7 @@ world
 				} \
 				current_layer = base_layer + appearance.layer + current_layer / 1000; \
 			} \
-			for (var/index_to_compare_to in 1 to layers.len) { \
+			for (var/index_to_compare_to in 1 to length(layers)) { \
 				var/compare_to = layers[index_to_compare_to]; \
 				if (current_layer < layers[compare_to]) { \
 					layers.Insert(index_to_compare_to, current); \
@@ -741,9 +741,10 @@ world
 		}
 
 	var/static/icon/flat_template = icon('icons/blanks/32x32.dmi', "nothing")
+	var/icon/flat = icon(flat_template)
 
 	if(!appearance || appearance.alpha <= 0)
-		return icon(flat_template)
+		return flat
 
 	if(start)
 		if(!defdir)
@@ -761,33 +762,36 @@ world
 
 	var/render_icon = curicon
 
-	if (render_icon)
-		var/curstates = icon_states(curicon)
-		if(!(curstate in curstates))
-			if ("" in curstates)
+	if(render_icon)
+		if(!icon_exists(curicon, curstate))
+			if(icon_exists(curicon, ""))
 				curstate = ""
 			else
 				render_icon = FALSE
 
 	var/base_icon_dir //We'll use this to get the icon state to display if not null BUT NOT pass it to overlays as the dir we have
 
-	//Try to remove/optimize this section ASAP, CPU hog.
-	//Determines if there's directionals.
-	if(render_icon && curdir != SOUTH)
-		if (
-			!length(icon_states(icon(curicon, curstate, NORTH))) \
-			&& !length(icon_states(icon(curicon, curstate, EAST))) \
-			&& !length(icon_states(icon(curicon, curstate, WEST))) \
-		)
-			base_icon_dir = SOUTH
+	if(render_icon)
+		//Try to remove/optimize this section if you can, it's a CPU hog.
+		//Determines if there're directionals.
+		if (curdir != SOUTH)
+			// icon states either have 1, 4 or 8 dirs. We only have to check
+			// one of NORTH, EAST or WEST to know that this isn't a 1-dir icon_state since they just have SOUTH.
+			if(!length(icon_states(icon(curicon, curstate, NORTH))))
+				base_icon_dir = SOUTH
+
+		var/list/icon_dimensions = get_icon_dimensions(curicon)
+		var/icon_width = icon_dimensions["width"]
+		var/icon_height = icon_dimensions["height"]
+		if(icon_width != 32 || icon_height != 32)
+			flat.Scale(icon_width, icon_height)
 
 	if(!base_icon_dir)
 		base_icon_dir = curdir
 
 	var/curblend = appearance.blend_mode || defblend
 
-	if(appearance.overlays.len || appearance.underlays.len)
-		var/icon/flat = icon(flat_template)
+	if(length(appearance.overlays) || length(appearance.underlays))
 		// Layers will be a sorted list of icons/overlays, based on the order in which they are displayed
 		var/list/layers = list()
 		var/image/copy
@@ -972,11 +976,9 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 // Pick a random animal instead of the icon, and use that instead
 /proc/getRandomAnimalImage(atom/A)
 	if(!GLOB.friendly_animal_types.len)
-		for(var/T in typesof(/mob/living/simple_animal))
-			var/mob/living/simple_animal/SA = T
+		for(var/mob/living/simple_animal/SA as anything in typesof(/mob/living/simple_animal))
 			if(initial(SA.gold_core_spawnable) == FRIENDLY_SPAWN)
 				GLOB.friendly_animal_types += SA
-
 
 	var/mob/living/simple_animal/SA = pick(GLOB.friendly_animal_types)
 
@@ -1311,43 +1313,44 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
  *
  * Filters out certain overlays from the copy, depending on their planes
  * Prevents stuff like lighting from being copied to the new appearance
+ *
+ * Arguments
+ * * appearance_to_copy - thing we are taking looks from
+ * * recursion - recursion depth
  */
-/proc/copy_appearance_filter_overlays(appearance_to_copy) as /mutable_appearance
+/proc/copy_appearance_filter_overlays(appearance_to_copy, recursion = 0) as /mutable_appearance
 	RETURN_TYPE(/mutable_appearance)
 	var/mutable_appearance/copy = new(appearance_to_copy)
 	var/static/list/plane_whitelist = list(FLOAT_PLANE, GAME_PLANE, FLOOR_PLANE)
 
-	copy.overlays = recursively_filter_emissive_blockers(copy.overlays, plane_whitelist)
-	copy.underlays = recursively_filter_emissive_blockers(copy.underlays, plane_whitelist)
+	/// Ideally we'd have knowledge what we're removing but i'd have to be done on target appearance retrieval
+	var/list/overlays_to_keep = list()
+	for(var/mutable_appearance/special_overlay as anything in copy.overlays)
+		if(isnull(special_overlay))
+			continue
+		var/mutable_appearance/real = new()
+		real.appearance = special_overlay
+		if(real.plane in plane_whitelist)
+			if(recursion)
+				overlays_to_keep += .(real, recursion - 1)
+			else
+				overlays_to_keep += real
+	copy.overlays = overlays_to_keep
+
+	var/list/underlays_to_keep = list()
+	for(var/mutable_appearance/special_underlay as anything in copy.underlays)
+		if(isnull(special_underlay))
+			continue
+		var/mutable_appearance/real = new()
+		real.appearance = special_underlay
+		if(real.plane in plane_whitelist)
+			if(recursion)
+				underlays_to_keep += .(real, recursion - 1)
+			else
+				underlays_to_keep += real
+	copy.underlays = underlays_to_keep
 
 	return copy
-
-/proc/recursively_filter_emissive_blockers(list/input_list, list/plane_whitelist)
-	var/list/filtered_list = list()
-
-	for(var/mutable_appearance/overlay_item as anything in input_list)
-		if(isnull(overlay_item))
-			continue
-
-		var/mutable_appearance/real = new()
-		real.appearance = overlay_item
-
-		// Skip emissive blockers
-		if(is_emissive_blocker(real))
-			continue
-
-		// Skip non-whitelisted planes
-		if(!(real.plane in plane_whitelist))
-			continue
-
-		if(length(real.overlays))
-			real.overlays = recursively_filter_emissive_blockers(real.overlays, plane_whitelist)
-		if(length(real.underlays))
-			real.underlays = recursively_filter_emissive_blockers(real.underlays, plane_whitelist)
-
-		filtered_list += real
-
-	return filtered_list
 
 /proc/is_emissive_blocker(mutable_appearance/MA)
 	if(MA.plane == EMISSIVE_PLANE)
@@ -1394,7 +1397,7 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
 	return "<img class='icon [extra_classes]' src='\ref[container]' style='image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor'>"
 
 //Costlier version of icon2html() that uses getFlatIcon() to account for overlays, underlays, etc. Use with extreme moderation, ESPECIALLY on mobs.
-/proc/costly_icon2html(thing, target)
+/proc/costly_icon2html(thing, target, sourceonly = FALSE)
 	if (!thing)
 		return
 
@@ -1402,7 +1405,7 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
 		return icon2html(thing, target)
 
 	var/icon/I = getFlatIcon(thing)
-	return icon2html(I, target)
+	return icon2html(I, target, sourceonly = sourceonly)
 
 /**
  * Center's an image.

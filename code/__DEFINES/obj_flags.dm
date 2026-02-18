@@ -49,6 +49,8 @@
 #define SNUG_FIT               (1<<11) //Prevents knock-off from things like hat-throwing.
 #define ANTI_TINFOIL_MANEUVER   (1<<12) //Hats with negative effects when worn (i.e the tinfoil hat).
 #define CANT_SLEEP_IN			(1<<13) //Makes you unable to sleep with this on
+/// Clothes that block speech (i.e the muzzle). Can be applied to any clothing piece.
+#define BLOCKS_SPEECH (1<<14)
 
 // flags for misc_flags on /obj/item/clothing
 

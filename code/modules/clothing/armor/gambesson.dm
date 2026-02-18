@@ -57,8 +57,8 @@
 	color = CLOTHING_DARK_INK
 
 /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
-	name = "lakkarian jupon"
-	desc = "a thick, quilted jupon with an iron heart protector. A part of the standard traveling uniform for Lakkarian clerics. It's great for the southern desert's heat and northern tundra's cold."
+	name = "robed jupon"
+	desc = "A thick, quilted jupon with an iron heart protector. It's great for the southern desert's heat and northern tundra's cold."
 	icon_state = "lakkarijupon"
 	max_integrity = INTEGRITY_STRONG
 	r_sleeve_status = SLEEVE_NORMAL
@@ -84,6 +84,22 @@
 	armor = ARMOR_PADDED_GOOD
 	icon = 'icons/roguetown/clothing/special/steward.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/steward.dmi'
+
+/obj/item/clothing/armor/gambeson/hand
+	name = "noble undercoat"
+	desc = "A thick undercoat with polished golden buttons."
+	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	icon_state = "handgambeson"
+	item_state = "handgambeson"
+	armor = ARMOR_PADDED_GOOD
+	icon = 'icons/roguetown/clothing/special/hand.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	detail_tag = "_detail"
+	detail_color = CLOTHING_BERRY_BLUE
+
+/obj/item/clothing/armor/gambeson/hand/spy
+	detail_color = CLOTHING_ROYAL_PURPLE
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 //................ Padded Dress ............... //
 /obj/item/clothing/armor/gambeson/heavy/dress

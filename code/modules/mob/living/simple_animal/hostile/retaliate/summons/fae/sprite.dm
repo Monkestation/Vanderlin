@@ -58,6 +58,6 @@
 
 /mob/living/simple_animal/hostile/retaliate/fae/sprite/death(gibbed)
 	var/turf/deathspot = get_turf(src)
-	for(var/i in 1 to 3)
+	for(var/i in 1 to 6)
 		new /obj/item/natural/fairydust(deathspot)
 	return ..()

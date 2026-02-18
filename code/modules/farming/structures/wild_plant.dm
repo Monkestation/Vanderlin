@@ -34,7 +34,7 @@
 	return ..()
 
 /obj/structure/wild_plant/Crossed(mob/living/carbon/human/H)
-	playsound(loc, "plantcross", 80, FALSE, -1)
+	playsound(src, "plantcross", 80, FALSE, -1)
 
 /obj/structure/wild_plant/proc/try_spread()
 	var/list/dirs = GLOB.cardinals.Copy()
@@ -66,7 +66,7 @@
 	apply_farming_fatigue(user, 4)
 	add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 2)
 
-	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming)
+	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming, TRUE)
 	var/feedback = "I harvest the produce."
 	var/modifier = 0
 	var/chance_to_ruin_single = 75 - (farming_skill * 25)

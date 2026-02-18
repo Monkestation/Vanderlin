@@ -318,7 +318,7 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-#define HUNGER_FACTOR		0.15	//factor at which mob nutrition decreases
+#define HUNGER_FACTOR		0.2	//factor at which mob nutrition decreases
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
@@ -333,6 +333,9 @@
 #define FLASH_PROTECTION_WELDER 2
 
 #define HUMAN_FIRE_STACK_ICON_NUM	5
+
+#define GRAB_PIXEL_SHIFT_PASSIVE 6
+#define GRAB_PIXEL_SHIFT_AGGRESSIVE 12
 
 #define PULL_PRONE_SLOWDOWN 2
 #define HUMAN_CARRY_SLOWDOWN 0

@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	 *	Snowflake lists:
 	 *		CTAG_ALLCLASS = list(every single class datum that exists outside of the parent)
 	 */
-	var/list/sorted_class_categories = list()
+	var/list/list/sorted_class_categories = list()
 
 	/// Whether bandits have been injected in the game
 	var/bandits_in_round = FALSE
@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(role_class_handler)
 /datum/controller/subsystem/role_class_handler/proc/build_category_lists()
 	var/list/all_classes = list()
 	for(var/datum/job/job as anything in subtypesof(/datum/job/advclass))
-		if(is_abstract(job))
+		if(IS_ABSTRACT(job))
 			continue
 		var/datum/job/real_datum = SSjob.GetJobType(job)
 		if(real_datum)
@@ -81,9 +81,6 @@ SUBSYSTEM_DEF(role_class_handler)
 	if(!H)
 		CRASH("setup_class_handler was called without a passed mob in args!")
 
-	if(H.client.has_triumph_buy(TRIUMPH_BUY_ANY_CLASS))
-		H.client.activate_triumph_buy(TRIUMPH_BUY_ANY_CLASS)
-
 	// insure they somehow aren't closing the datum they got and opening a new one w rolls
 	var/datum/class_select_handler/class_select = class_select_handlers[H.client.ckey]
 	if(class_select)
@@ -103,6 +100,13 @@ SUBSYSTEM_DEF(role_class_handler)
 		var/datum/job/job_datum = SSjob.GetJob(H.job)
 		if(length(job_datum.advclass_cat_rolls))
 			class_select.class_cat_alloc_attempts = job_datum.advclass_cat_rolls
+		if(length(job_datum.advclass_cat_rolls & ANY_CLASS_CTAGS))
+			if(H.client.has_triumph_buy(TRIUMPH_BUY_ANY_CLASS_ALL, TRUE))
+				LAZYADD(class_select.forced_class_additions, /datum/job/advclass/pick_everything/all)
+				H.client.activate_triumph_buy(TRIUMPH_BUY_ANY_CLASS)
+			else if(H.client.has_triumph_buy(TRIUMPH_BUY_ANY_CLASS, TRUE))
+				LAZYADD(class_select.forced_class_additions, /datum/job/advclass/pick_everything)
+				H.client.activate_triumph_buy(TRIUMPH_BUY_ANY_CLASS_ALL)
 
 	if(used_key in special_session_queue)
 		class_select.special_session_queue = list()
@@ -145,7 +149,8 @@ SUBSYSTEM_DEF(role_class_handler)
 			else
 				picked_class.title_override = old.title
 
-	SSjob.EquipRank(H, picked_class, H.client)
+	SSjob.EquipRank(H, picked_class, H.client, reset_job_stats = picked_class.should_reset_stats)
+
 	apply_loadouts(H, H.client)
 
 // A dum helper to adjust the class amount, we could do it elsewhere but this will also inform any relevant class handlers open.

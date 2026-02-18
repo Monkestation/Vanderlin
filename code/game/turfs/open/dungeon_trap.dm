@@ -62,25 +62,22 @@
 	target.zImpact(A, levels, src)
 	return TRUE
 
-/turf/open/dungeon_trap/proc/get_dungeon_tile()
+/proc/get_dungeon_tile()
 	//this z is pulled from the first made dungeon marker which should be on the bottom floor. if it's not, this'll need to be reworked
 	if(SSdungeon_generator.dungeon_z == -1)
 		return
 	var/list/dungeon_turfs = Z_TURFS(SSdungeon_generator.dungeon_z + 1)
 	var/turf/open/chosen_turf
 	while(!chosen_turf && length(dungeon_turfs))
-		var/turf/T = pick(dungeon_turfs)
-		if(istype(T, /turf/open))
+		var/turf/T = pick_n_take(dungeon_turfs)
+		if(isopenturf(T))
 			chosen_turf = T
-		else if(istype(T, /turf/closed/dungeon_void)) // lets you fall through to the bottom level in some places
-			var/turf/dT = get_open_turf_in_dir(T, DOWN)
-			chosen_turf = dT
-
-		for(var/obj/O in chosen_turf?.contents)
-			if(istype(O, /obj/structure))
-				var/obj/structure/S = O
-				if(S.density > 0 && !S.climbable) // keeps you from landing inside bars or something
-					dungeon_turfs = null
-					break
-		dungeon_turfs -= T
+		// no chosen_turf this step so don't bother with the parts after this
+		if(isclosedturf(chosen_turf) || isopenspace(chosen_turf)) // don't put us in walls or falls
+			continue
+		// check if our chosen_turf actually works
+		for(var/obj/structure/struct in chosen_turf)
+			if(struct.density && !struct.climbable) // keeps you from landing inside bars or something
+				chosen_turf = null // ineligible
+				break
 	return chosen_turf

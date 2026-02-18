@@ -1,4 +1,3 @@
-
 /datum/component/chimeric_organ
 	///list of attached nodes to the organ split into their node types
 	var/list/inputs = list()
@@ -22,8 +21,9 @@
 	var/tier_modifier = 0
 	///how much purity should be modified when a new node is added
 	var/purity_modifier = 0
-	///stability cost when adding new nodes
-	var/node_injection_cost = 10
+
+	///Total blood requirement for this organ to function
+	var/list/blood_requirements = list()
 
 	///is the organ currently processing
 	var/processing = FALSE
@@ -32,6 +32,7 @@
 	///this is our failed %
 	var/failed_precent = 0
 	COOLDOWN_DECLARE(last_fail_message)
+	COOLDOWN_DECLARE(last_fail)
 
 /datum/component/chimeric_organ/Initialize(maximum_tier_difference = 1)
 	. = ..()
@@ -51,6 +52,7 @@
 	stop_processing()
 	cleanup_nodes()
 	organ_owner = null
+	blood_requirements = null
 	. = ..()
 
 /datum/component/chimeric_organ/proc/cleanup_nodes()
@@ -122,89 +124,85 @@
 
 	var/datum/component/blood_stability/blood_stab = organ_owner.GetComponent(/datum/component/blood_stability)
 	if(!blood_stab)
-		trigger_organ_failure("no blood stability component", 100)
+		trigger_organ_failure("no blood stability component", 100, TRUE)
 		return
 
-	for(var/datum/chimeric_node/input/input_node as anything in inputs)
-		if(!input_node.try_consume_blood(blood_stab, 1))
-			trigger_organ_failure("lacks suitable thaumiel blood", 2)
-			return
+	// Check if we meet all blood requirements
+	if(!check_blood_requirements(blood_stab))
+		trigger_organ_failure("insufficient blood stored", 2)
+		return
 
-	for(var/datum/chimeric_node/output/output_node as anything in outputs)
-		if(!output_node.try_consume_blood(blood_stab, 1))
-			trigger_organ_failure("lacks suitable thaumiel blood", 2)
-			return
+	// Organ is functioning properly
 	failed_precent = max(failed_precent - 1, 0)
+
+/datum/component/chimeric_organ/proc/check_blood_requirements(datum/component/blood_stability/blood_stab)
+	if(HAS_TRAIT(organ_owner, TRAIT_SATE))
+		return TRUE
+
+	for(var/blood_type in blood_requirements)
+		var/required_amount = blood_requirements[blood_type]
+		if(!blood_stab.has_blood_amount(blood_type, required_amount))
+			return FALSE
+	return TRUE
 
 /datum/component/chimeric_organ/proc/force_trigger()
 	var/datum/component/blood_stability/blood_stab = organ_owner.GetComponent(/datum/component/blood_stability)
 	if(!blood_stab)
-		trigger_organ_failure("no blood stability component", 100)
+		trigger_organ_failure("no blood stability component", 100, TRUE)
+		return
+
+	if(!check_blood_requirements(blood_stab))
+		trigger_organ_failure("insufficient blood stored", 2)
 		return
 
 	for(var/datum/chimeric_node/input/input_node as anything in inputs)
-		if(!input_node.try_consume_blood(blood_stab, 1))
-			trigger_organ_failure("lacks suitable thaumiel blood", 2)
-			return
 		input_node.trigger_output(1)
 
-	for(var/datum/chimeric_node/output/output_node as anything in outputs)
-		if(!output_node.try_consume_blood(blood_stab, 1))
-			trigger_organ_failure("lacks suitable thaumiel blood", 2)
-			return
+/datum/component/chimeric_organ/proc/calculate_node_blood_cost(tier, purity)
+	// Formula: 20 * tier + (purity * 0.5)
+	return (20 * tier) + (purity * 0.5)
 
-/datum/component/chimeric_organ/proc/get_available_blood_for_node(datum/component/blood_stability/blood_stab, datum/chimeric_node/node)
-	var/available_blood = 0
+/datum/component/chimeric_organ/proc/add_node_blood_requirement(datum/chimeric_node/node, tier, purity)
+	var/cost = calculate_node_blood_cost(tier, purity)
 
+	// Add cost to preferred blood types
 	for(var/blood_type in node.preferred_blood_types)
-		if(blood_stab.blood_stability[blood_type])
-			available_blood += blood_stab.blood_stability[blood_type]
+		if(!blood_requirements[blood_type])
+			blood_requirements[blood_type] = 0
+		blood_requirements[blood_type] += cost
 
-	if(length(node.compatible_blood_types))
-		for(var/blood_type in node.compatible_blood_types)
-			if(blood_stab.blood_stability[blood_type])
-				available_blood += blood_stab.blood_stability[blood_type]
-	else
-		for(var/blood_type in blood_stab.blood_stability)
-			if(blood_type in node.incompatible_blood_types)
-				continue
-			available_blood += blood_stab.blood_stability[blood_type]
-
-	return available_blood
-
-/datum/component/chimeric_organ/proc/get_available_blood_for_organ(datum/component/blood_stability/blood_stab)
-	var/available_blood = 0
-	var/list/usable_blood_types = list()
-
-	for(var/datum/chimeric_node/node as anything in (inputs + outputs))
-		for(var/blood_type in node.preferred_blood_types)
-			usable_blood_types[blood_type] = TRUE
-
+	// If no preferred types, use compatible or any non-incompatible
+	if(!length(node.preferred_blood_types))
 		if(length(node.compatible_blood_types))
-			for(var/blood_type in node.compatible_blood_types)
-				usable_blood_types[blood_type] = TRUE
+			var/blood_type = pick(node.compatible_blood_types)
+			if(!blood_requirements[blood_type])
+				blood_requirements[blood_type] = 0
+			blood_requirements[blood_type] += cost
 		else
-			for(var/blood_type in blood_stab.blood_stability)
-				if(blood_type in node.incompatible_blood_types)
-					continue
-				usable_blood_types[blood_type] = TRUE
+			// Pick the first available blood type in storage that isn't incompatible
+			var/datum/component/blood_stability/blood_stab = organ_owner?.GetComponent(/datum/component/blood_stability)
+			if(blood_stab)
+				for(var/blood_type in blood_stab.blood_storage)
+					if(blood_type in node.incompatible_blood_types)
+						continue
+					if(!blood_requirements[blood_type])
+						blood_requirements[blood_type] = 0
+					blood_requirements[blood_type] += cost
+					break
 
-	for(var/blood_type in usable_blood_types)
-		if(blood_stab.blood_stability[blood_type])
-			available_blood += blood_stab.blood_stability[blood_type]
-
-	return available_blood
-
-/datum/component/chimeric_organ/proc/trigger_organ_failure(reason, amount)
+/datum/component/chimeric_organ/proc/trigger_organ_failure(reason, amount, bypass)
 	if(failed)
 		return
+	if(!COOLDOWN_FINISHED(src, last_fail) && !bypass)
+		return
+	COOLDOWN_START(src, last_fail, 15 SECONDS)
 	failed_precent += amount
 	if(failed_precent < 100)
 		if(COOLDOWN_FINISHED(src, last_fail_message))
 			to_chat(organ_owner, span_danger("Your [parent] is starting to fail because it [reason]!"))
 			organ_owner.emote("painscream")
 			COOLDOWN_START(src, last_fail_message, 30 SECONDS)
-		organ_owner.adjustToxLoss(5)
+		organ_owner.adjustToxLoss(1)
 		return
 
 	failed = TRUE
@@ -246,13 +244,8 @@
 
 	overlay_states += node_overlay
 
-	if(organ_owner)
-		var/datum/component/blood_stability/blood_stab = organ_owner.GetComponent(/datum/component/blood_stability)
-		if(blood_stab && blood_stab.get_total_stability() < node_injection_cost)
-			trigger_failure(injected_node, FALSE, "insufficient blood stability")
-			return
-		if(blood_stab)
-			consume_any_blood(blood_stab, node_injection_cost)
+	var/final_tier = tier + tier_modifier
+	var/final_purity = min(purity + purity_modifier, 100)
 
 	switch(slot)
 		if(INPUT_NODE)
@@ -261,10 +254,13 @@
 				trigger_failure(failed_type = injected_input, special_failure = TRUE)
 				return
 
-			injected_input.node_purity = min(purity + purity_modifier, 100)
-			injected_input.tier = tier + tier_modifier
+			injected_input.node_purity = final_purity
+			injected_input.tier = final_tier
 			injected_input.attached_organ = parent
 			injected_input.setup()
+
+			// Add blood requirement for this node
+			add_node_blood_requirement(injected_input, final_tier, final_purity)
 
 			handle_input_injection(injected_input)
 
@@ -272,33 +268,40 @@
 				injected_input.hosted_carbon = organ_owner
 				injected_input.register_triggers(organ_owner)
 
+				// Check if requirements are still met
+				var/datum/component/blood_stability/blood_stab = organ_owner.GetComponent(/datum/component/blood_stability)
+				if(blood_stab && !check_blood_requirements(blood_stab))
+					to_chat(organ_owner, span_warning("Your [parent] now requires more blood to function properly!"))
+
 		if(OUTPUT_NODE)
 			var/datum/chimeric_node/output/injected_output = injected_node
 			if(injected_output.is_special && ((injected_output in outputs) || (injected_output in partnerless_outputs)))
 				trigger_failure(failed_type = injected_output, special_failure = TRUE)
 				return
 
-			injected_output.node_purity = min(purity + purity_modifier, 100)
-			injected_output.tier = tier + tier_modifier
+			injected_output.node_purity = final_purity
+			injected_output.tier = final_tier
 			injected_output.attached_organ = parent
 			injected_output.setup()
+
+			// Add blood requirement for this node
+			add_node_blood_requirement(injected_output, final_tier, final_purity)
 
 			handle_output_injection(injected_output)
 
 			if(organ_owner)
 				injected_output.hosted_carbon = organ_owner
 
+				// Check if requirements are still met
+				var/datum/component/blood_stability/blood_stab = organ_owner.GetComponent(/datum/component/blood_stability)
+				if(blood_stab && !check_blood_requirements(blood_stab))
+					to_chat(organ_owner, span_warning("Your [parent] now requires more blood to function properly!"))
+
 		if(SPECIAL_NODE)
 			var/datum/chimeric_node/special/injected_special = injected_node
 			injected_special.setup()
 			handle_special_injection(injected_special)
 	return TRUE
-
-/datum/component/chimeric_organ/proc/consume_any_blood(datum/component/blood_stability/blood_stab, amount)
-	for(var/blood_type in blood_stab.blood_stability)
-		if(blood_stab.consume_stability(blood_type, amount))
-			return TRUE
-	return FALSE
 
 /datum/component/chimeric_organ/proc/trigger_failure(failed_type, special_failure = TRUE, reason)
 	return

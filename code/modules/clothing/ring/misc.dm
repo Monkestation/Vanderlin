@@ -134,7 +134,7 @@
 	var/activate_sound
 	abstract_type = /obj/item/clothing/ring/active
 
-/obj/item/clothing/ring/active/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/ring/active/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -388,7 +388,7 @@
 
 
 /obj/item/clothing/ring/dragon_ring
-	name = "Dragon Ring"
+	name = "dragon ring"
 	icon_state = "ring_g" // supposed to have it's own sprite but I'm lazy asf
 	desc = "Carrying the likeness of a dragon, this glorious ring hums with a subtle energy."
 	sellprice = 666
@@ -438,9 +438,9 @@
 	if(tallowed)
 		if(alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", "YES", "NO") != "NO")
 			tallowed = FALSE
-			update_icon()
+			update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/clothing/ring/signet/update_icon()
+/obj/item/clothing/ring/signet/update_icon_state()
 	. = ..()
 	if(tallowed)
 		icon_state = "[icon_state]_stamp"
@@ -452,4 +452,23 @@
 /obj/item/clothing/ring/feldsher_ring
 	name = "feldsher's ring"
 	icon_state = "ring_feldsher"
-	desc = "A hallowed copper ring, ritualistically forged by Pestran clergymen upon the graduation of a feldsher. \n It bears a vulture skull, whose beak is crooked, and the copper was blessed with Pestra's rot: it will corrode in time, yet never lose its resilience. \n Although the wearer may not have Pestra as her patron, this ring is proof of Her blessing. This allows the feldsher to extract and manipulate Lux, so long as they follow Her teachings"
+	desc = "A hallowed copper ring, ritualistically forged by Pestran clergymen upon the graduation of a feldsher. \
+	\n This ring is proof of Pestra's blessing, in turn allowing the feldsher to extract and manipulate Lux so long as they follow Her teachings"
+
+// ................... The Apothecary's ring .......................
+
+/obj/item/clothing/ring/apothecary_ring
+	name = "apothecary's ring"
+	icon_state = "ring_apothecary"
+	desc = "" // the description is handled upon examine.
+
+
+/obj/item/clothing/ring/apothecary_ring/examine(mob/user)
+	. = ..()
+	if(is_apothecary_job(user.mind.assigned_role))
+		. += span_info("A hefty bloody made out of thaumic iron, proof of my successful graduation. \
+		It doesn't get any easier to wear with time, but at least it proves I'm a confirmed alchemist \
+		and can legally manipulate lux, so long as I follow Pestra's teachings.")
+	else
+		. += "An uncomfortably heavy ring of thaumic iron. Specifically made for apothecaries upon graduation. \n \
+		This gives them the right to both extract and manipulate lux, so long as they follow Pestra's teachings."

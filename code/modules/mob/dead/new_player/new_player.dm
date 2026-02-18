@@ -39,7 +39,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 ///Say verb
 /mob/dead/new_player/say_verb(message as text)
 	set name = "Say"
-	set category = "IC"
+	set category = "IC.Speech"
 	set hidden = 1
 
 	if(message)
@@ -74,7 +74,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 			"selected_patron" = client.prefs.selected_patron,
 			"job_preferences" = client.prefs.job_preferences?.Copy(),
 			"features" = client.prefs.features?.Copy(),
-			"charflaw" = client.prefs.charflaw,
+			"quirks" = client.prefs.quirks?.Copy(),
+			"quirk_customizations" = client.prefs.quirk_customizations?.Copy(),
 			"skin_tone" = client.prefs.skin_tone,
 			"eye_color" = client.prefs.eye_color,
 			"underwear" = client.prefs.underwear,
@@ -108,7 +109,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	P.selected_patron = char_data["selected_patron"]
 	P.job_preferences = char_data["job_preferences"]
 	P.features = char_data["features"]
-	P.charflaw = char_data["charflaw"]
+	P.quirks = char_data["quirks"]
+	P.quirk_customizations = char_data["quirk_customizations"]
 	P.skin_tone = char_data["skin_tone"]
 	P.eye_color = char_data["eye_color"]
 	P.underwear = char_data["underwear"]
@@ -124,12 +126,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	P.default_slot = char_data["slot"]
 	multi_ready_index = index
 	return TRUE
-
-/mob/dead/new_player/proc/new_player_panel()
-	if(!SSassets.initialized)
-		sleep(0.5 SECONDS)
-		new_player_panel()
-		return
 
 /mob/dead/new_player/Topic(href, href_list[])
 	if(src != usr)
@@ -148,15 +144,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		relevant_cap = max(hpc, epc)
 
 	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src, 4)
+		client.prefs.show_choices(src, 4)
 		return 1
 
 	if(href_list["show_options"])
-		client.prefs.ShowChoices(src, 1)
+		client.prefs.show_choices(src, 1)
 		return 1
 
 	if(href_list["show_keybinds"])
-		client.prefs.ShowChoices(src, 3)
+		client.prefs.show_choices(src, 3)
 		return 1
 
 	if(href_list["ready"])
@@ -174,7 +170,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(href_list["refresh"])
 		winshow(src, "stonekeep_prefwin", FALSE)
 		src << browse(null, "window=preferences_browser")
-		new_player_panel()
 
 	if(client && client.prefs.is_active_migrant())
 		to_chat(usr, span_boldwarning("You are in the migrant queue."))
@@ -231,8 +226,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
-	else if(!href_list["late_join"])
-		new_player_panel()
 
 	if(href_list["showpoll"])
 		handle_player_polling()
@@ -257,7 +250,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(QDELETED(src) || !src.client || this_is_like_playing_right != "Yes")
 		ready = PLAYER_NOT_READY
 		src << browse(null, "window=playersetup") //closes the player setup window
-		new_player_panel()
 		return FALSE
 
 	var/mob/dead/observer/observer = new()
@@ -322,7 +314,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 //used for latejoining
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
+	if(QDELETED(src))
+		return JOB_UNAVAILABLE_GENERIC
+
 	var/datum/job/job = SSjob.GetJob(rank)
+	var/datum/preferences/player_prefs = client.prefs
 	//TODO: This fucking sucks.
 
 	if(is_skeleton_knight_job(job)) //has to be first because it's a subtype of skeleton
@@ -358,39 +354,47 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
 		return JOB_UNAVAILABLE_SLOTFULL
+
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
+
 	if(CONFIG_GET(flag/usewhitelist))
 		if(job.whitelist_req && (!client.whitelisted()))
 			return JOB_UNAVAILABLE_GENERIC
 
 	if(is_role_banned(client.ckey, job.title))
 		return JOB_UNAVAILABLE_BANNED
-	if(is_race_banned(client.ckey, client.prefs.pref_species.id))
+
+	if(is_race_banned(client.ckey, player_prefs.pref_species.id))
 		return JOB_UNAVAILABLE_RACE_BANNED
+
 	if(job.banned_leprosy && is_misc_banned(client.ckey, BAN_MISC_LEPROSY))
 		return JOB_UNAVAILABLE_BANNED
+
 	if(job.banned_lunatic && is_misc_banned(client.ckey, BAN_MISC_LUNATIC))
 		return JOB_UNAVAILABLE_BANNED
 
-	if(QDELETED(src))
-		return JOB_UNAVAILABLE_GENERIC
 	if(!job.player_old_enough(client))
 		return JOB_UNAVAILABLE_ACCOUNTAGE
+
 	if(job.required_playtime_remaining(client))
 		return JOB_UNAVAILABLE_PLAYTIME
+
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
-	if((length(job.allowed_races) && !(client.prefs.pref_species.id in job.allowed_races)) || \
-		(length(job.blacklisted_species) && (client.prefs.pref_species.id in job.blacklisted_species)))
-		if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
-			return JOB_UNAVAILABLE_RACE
-	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
+
+	if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL) && !job.prefs_species_check(player_prefs))
+		return JOB_UNAVAILABLE_RACE
+
+	if(length(job.allowed_sexes) && !(player_prefs.gender in job.allowed_sexes))
 		return JOB_UNAVAILABLE_SEX
-	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
+
+	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 		return JOB_UNAVAILABLE_AGE
-	if((client.prefs.lastclass == job.title) && !job.bypass_lastclass)
+
+	if((player_prefs.lastclass == job.title) && !job.bypass_lastclass)
 		return JOB_UNAVAILABLE_LASTCLASS
+
 	return JOB_AVAILABLE
 
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
@@ -578,24 +582,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player/Move()
 	return 0
-
-
-/mob/dead/new_player/proc/close_spawn_windows()
-
-	src << browse(null, "window=latechoices") //closes late choices window
-	src << browse(null, "window=playersetup") //closes the player setup window
-	src << browse(null, "window=preferences") //closes job selection
-	src << browse(null, "window=mob_occupation")
-	src << browse(null, "window=latechoices") //closes late job selection
-	src << browse(null, "window=culinary_customization")
-	src << browse(null, "window=food_selection")
-	src << browse(null, "window=drink_selection")
-
-	SStriumphs.remove_triumph_buy_menu(client)
-
-	winshow(src, "stonekeep_prefwin", FALSE)
-	src << browse(null, "window=preferences_browser")
-	src << browse(null, "window=lobby_window")
 
 // Used to make sure that a player has a valid job preference setup, used to knock players out of eligibility for anything if their prefs don't make sense.
 // A "valid job preference setup" in this situation means at least having one job set to low, or not having "return to lobby" enabled

@@ -28,36 +28,36 @@
 		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
 		return
 
-	var/list/restricted_roles = list(
-		"Monarch",
-		"Consort",
-		"Hand",
-		"Captain",
-		"Prince",
-		"Priest",
-		"Merchant",
-		"Forest Warden",
-		"Inquisitor",
-		"Absolver",
-		"Confessor",
-		"Sacrestants",
-		"Adept",
-		"Royal Knight",
-		"Templar",
-		"Assassin",
-	)
+	var/list/restricted_roles = typecacheof(list(
+		/datum/job/lord,
+		/datum/job/consort,
+		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
+		/datum/job/monk,
+		/datum/job/churchling,
+	))
 
-	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, restricted_roles = restricted_roles)
+	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, no_antags = TRUE, restricted_roles = restricted_roles)
 	var/thralls = rand(2, 3)
 
 	candidates -= owner.current
 
+	if(!length(candidates))
+		return
+
 	for(var/i = 1 to thralls)
-		if(!length(candidates))
-			return
 		var/mob/living/carbon/human/human = pick_n_take(candidates)
 		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
-		human.mind.add_antag_datum(new_antag)
+		human?.mind.add_antag_datum(new_antag)
 		human.adjust_bloodpool(500)
 
 /datum/antagonist/vampire/lord/greet()
@@ -67,19 +67,15 @@
 /datum/antagonist/vampire/lord/equip()
 	. = ..()
 
-	owner.unknow_all_people()
-	for(var/datum/mind/MF in get_minds())
-		owner.become_unknown_to(MF)
-	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
-		owner.i_know_person(MF)
-		owner.person_knows_me(MF)
-	for(var/datum/mind/MF in get_minds("Death Knight"))
-		owner.i_know_person(MF)
-		owner.person_knows_me(MF)
+	owner.forget_and_be_forgotten()
+	for(var/datum/mind/found_mind in get_minds("Vampire Spawn"))
+		owner.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Death Knight"))
+		owner.share_identities(found_mind)
 
-	var/mob/living/carbon/human/H = owner.current
-	H.equipOutfit(/datum/outfit/vamplord)
-	H.set_patron(/datum/patron/godless/autotheist)
+	var/mob/living/carbon/human/source_mob = owner.current
+	source_mob.equipOutfit(/datum/outfit/vamplord)
+	source_mob.set_patron(/datum/patron/godless/autotheist)
 
 	return TRUE
 
@@ -114,7 +110,7 @@
 // NEW VERBS
 /mob/living/carbon/human/proc/demand_submission()
 	set name = "Demand Submission"
-	set category = "VAMPIRE"
+	set category = "RoleUnique.Vampire"
 	if(SSmapping.retainer.king_submitted)
 		to_chat(src, span_warning("I am already the Master of [SSmapping.config.map_name]."))
 		return
@@ -138,7 +134,7 @@
 
 /mob/living/carbon/human/proc/punish_spawn()
 	set name = "Punish Minion"
-	set category = "VAMPIRE"
+	set category = "RoleUnique.Vampire"
 
 	var/list/possible = list()
 	for(var/mob/living/carbon/human/member in clan?.clan_members)

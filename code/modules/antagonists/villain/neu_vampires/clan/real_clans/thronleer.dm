@@ -18,7 +18,7 @@
 	curse = "Weakness of the soul."
 	blood_preference = BLOOD_PREFERENCE_FANCY | BLOOD_PREFERENCE_EUPHORIC | BLOOD_PREFERENCE_HOLY
 	blood_disgust = BLOOD_PREFERENCE_RATS
-	clane_covens = list(
+	clan_covens = list(
 		/datum/coven/obfuscate,
 		/datum/coven/presence,
 		/datum/coven/bloodheal

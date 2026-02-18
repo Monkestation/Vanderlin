@@ -61,9 +61,12 @@
 	if(targetted)
 		var/list/mobsadjacent = list()
 		var/mob/chosenmob
-		for(var/mob/living/M in range(user, 2))
-			if(M != user)
-				mobsadjacent += M
+		for(var/mob/living/target_mob in view(user, 2))
+			if(target_mob == user)
+				continue
+			if(target_mob.rogue_sneaking) // No detecting sneaky people.
+				continue
+			mobsadjacent += target_mob
 		if(length(mobsadjacent))
 			chosenmob = browser_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
 		if(istype(chosenmob))
@@ -157,7 +160,7 @@
 			var/modifier
 			if(H.age == AGE_OLD)
 				modifier = "old"
-			if(!ignore_silent && (H.silent || !H.can_speak())|| (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
+			if(!ignore_silent && !H.can_speak() || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
 				modifier = "silenced"
 			if(user.gender == FEMALE && H.dna.species.soundpack_f)
 				possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
@@ -204,7 +207,7 @@
 	. = message
 	if(message_muffled && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.can_speak_vocal())
+		if(!C.can_speak_vocal())
 			. = message_muffled
 		if(!muzzle_ignore && C.mouth?.muteinmouth && emote_type == EMOTE_AUDIBLE)
 			. = message_muffled

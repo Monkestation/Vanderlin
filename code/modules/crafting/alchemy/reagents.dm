@@ -11,7 +11,7 @@
 
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
 	if(volume >= 60)
-		M.reagents.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
+		M.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume = min(M.blood_volume+20, BLOOD_VOLUME_MAXIMUM)
 	var/list/wCount = M.get_wounds()
@@ -22,11 +22,6 @@
 		M.adjustFireLoss(-1.75*REM, 0)
 		M.adjustOxyLoss(-1.25, 0)
 		M.adjustCloneLoss(-1.75*REM, 0)
-	if(istype(M, /mob/living/carbon/human/species/werewolf))
-		var/mob/living/carbon/human/human = M
-		var/obj/item/clothing/werewolf_armor = human.skin_armor
-		if(werewolf_armor)
-			werewolf_armor.repair_damage(werewolf_armor.max_integrity * 0.01)
 	..()
 
 /datum/reagent/medicine/stronghealth
@@ -39,7 +34,7 @@
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
 	if(volume >= 60)
-		M.reagents.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
+		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
 		M.blood_volume = min(M.blood_volume+80, BLOOD_VOLUME_MAXIMUM)
 	else
@@ -214,9 +209,9 @@
 /datum/reagent/buff/strength/on_mob_add(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
 		return ..()
-	if(M.reagents.has_reagent(/datum/reagent/buff/strength, 4))
+	if(M.has_reagent(/datum/reagent/buff/strength, 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/strengthpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/strength, M.reagents.get_reagent_amount(/datum/reagent/buff/strength))
+		M.remove_reagent(/datum/reagent/buff/strength, M.reagents.get_reagent_amount(/datum/reagent/buff/strength))
 	return ..()
 
 /datum/reagent/buff/perception
@@ -228,9 +223,9 @@
 /datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/perception), 4))
+	if(M.has_reagent((/datum/reagent/buff/perception), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/perception))
+		M.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/perception))
 	return ..()
 
 /datum/reagent/buff/intelligence
@@ -242,9 +237,9 @@
 /datum/reagent/buff/intelligence/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/intelligence), 4))
+	if(M.has_reagent((/datum/reagent/buff/intelligence), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/intelligencepot)
-		M.reagents.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
+		M.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
 	return ..()
 
 /datum/reagent/buff/constitution
@@ -256,9 +251,9 @@
 /datum/reagent/buff/constitution/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/constitution), 4))
+	if(M.has_reagent((/datum/reagent/buff/constitution), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/constitutionpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/constitution, M.reagents.get_reagent_amount(/datum/reagent/buff/constitution))
+		M.remove_reagent(/datum/reagent/buff/constitution, M.reagents.get_reagent_amount(/datum/reagent/buff/constitution))
 	return ..()
 
 /datum/reagent/buff/endurance
@@ -270,9 +265,9 @@
 /datum/reagent/buff/endurance/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/endurance), 4))
+	if(M.has_reagent((/datum/reagent/buff/endurance), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/endurancepot)
-		M.reagents.remove_reagent(/datum/reagent/buff/endurance, M.reagents.get_reagent_amount(/datum/reagent/buff/endurance))
+		M.remove_reagent(/datum/reagent/buff/endurance, M.reagents.get_reagent_amount(/datum/reagent/buff/endurance))
 	return ..()
 
 /datum/reagent/buff/speed
@@ -284,9 +279,9 @@
 /datum/reagent/buff/speed/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/speed), 4))
+	if(M.has_reagent((/datum/reagent/buff/speed), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/speedpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/speed, M.reagents.get_reagent_amount(/datum/reagent/buff/speed))
+		M.remove_reagent(/datum/reagent/buff/speed, M.reagents.get_reagent_amount(/datum/reagent/buff/speed))
 	return ..()
 
 /datum/reagent/buff/fortune
@@ -298,9 +293,9 @@
 /datum/reagent/buff/fortune/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/fortune), 4))
+	if(M.has_reagent((/datum/reagent/buff/fortune), 4))
 		M.apply_status_effect(/datum/status_effect/buff/alch/fortunepot)
-		M.reagents.remove_reagent(/datum/reagent/buff/fortune, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune))
+		M.remove_reagent(/datum/reagent/buff/fortune, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune))
 	return ..()
 
 
@@ -319,16 +314,26 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	taste_description = "bitterness"
 	scent_description = "charcoal"
 	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	var/naus = 3
+	var/tox = 2
 
 /datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M)
 	if(volume > 0.09)
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
-			M.add_nausea(1)
-			M.adjustToxLoss(0.5)
+			M.add_nausea(tox/3)
+			M.adjustToxLoss(tox/4)
 		else
-			M.add_nausea(3) // so one berry or one dose (one clunk of extracted poison, 5u) will make you really sick and a hair away from crit.
-			M.adjustToxLoss(2)
+			M.add_nausea(naus)
+			M.adjustToxLoss(tox)
 	return ..()
+
+/datum/reagent/berrypoison/shroom
+	name = "Mushroom Poison"
+	color = "#5647e0"
+	taste_description = "acidity"
+	scent_description = "acrid earthiness"
+	naus = 5
+	tox = 2.5
 
 
 /datum/reagent/strongpoison		// Strong poison, meant to be somewhat difficult to produce using alchemy or spawned with select antags. Designed to kill in one full dose (5u) better drink antidote fast
@@ -360,15 +365,65 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	taste_description = "sour meat"
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	var/list/cannibalism_pool = ALL_RACES_LIST
 
 /datum/reagent/organpoison/on_mob_life(mob/living/carbon/M)
+	if(!(M.dna?.species?.id in cannibalism_pool))
+		return ..()
+	if(HAS_TRAIT(M, TRAIT_NOHUNGER))
+		return ..()
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
-		M.add_nausea(9)
-		M.adjustToxLoss(2)
-	else
-		//it does nothing, so we can just remove it
-		M.reagents.remove_reagent(/datum/reagent/organpoison, 1)
+		M.add_nausea(10 * (1 - M.STACON / 20))
+		M.adjustToxLoss(0.5)
+	if(ishuman(M) && !ishalforc(M))
+		var/mob/living/carbon/human/graggar_lover = M
+		var/obj/item/organ/heart/H = graggar_lover.getorganslot(ORGAN_SLOT_HEART)
+		if(istype(H))
+			H.graggometer++
+			switch(H.graggometer)
+				if(15, 30)
+					to_chat(graggar_lover, span_warning("Feel... strange..."))
+				if(45)
+					to_chat(graggar_lover, span_bloody("Flesh...bone..."))
+				if(50 to 59)
+					if(prob(30))
+						to_chat(graggar_lover, span_bloody("More... More..."))
+					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
+					bp?.lingering_pain += 10
+					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12, null, BODY_ZONE_CHEST, crit_message = FALSE, reduce_crit = 10)
+					M.do_jitter_animation(100)
+				if(60)
+					M.do_jitter_animation(150)
+					M.adjust_jitter(20 SECONDS)
+					graggar_lover.Paralyze(10 SECONDS, TRUE)
+					graggar_lover.unequip_everything()
+					var/datum/dna/dna_cache = new()
+					graggar_lover.dna.copy_dna(dna_cache)
+					var/species = /datum/species/halforc
+					//if(ishalforc(M)) // when this works it can be used
+					//	species = /datum/species/orc
+					//else if(iskobold(M))
+					//	species = /datum/species/goblin
+					graggar_lover.set_species(species)
+					if(ishalforc(graggar_lover))
+						dna_cache.transfer_identity(graggar_lover, FALSE)
+					graggar_lover.real_name = dna_cache.real_name
+					graggar_lover.bloody_hands++
+					graggar_lover.update_inv_gloves()
+					playsound(get_turf(graggar_lover), pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
+					graggar_lover.spawn_gibs(TRUE)
+					graggar_lover.emote("agony")
+					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts!"), span_userdanger("MY SKIN BURSTS!!"))
+					H.graggometer = 0
 	return ..()
+
+/datum/reagent/organpoison/human
+	name = "Humen Organ Poison"
+	cannibalism_pool = SPECIES_CANNIBAL_MEN
+
+/datum/reagent/organpoison/kobold
+	name = "Kobold Organ Poison"
+	cannibalism_pool = SPECIES_CANNIBALISM_KOBOLD
 
 /datum/reagent/stampoison
 	name = "Stamina Poison"

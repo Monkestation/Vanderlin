@@ -117,6 +117,9 @@
 	/// Supports (/datum/skill/bar = list(value, clamp)).
 	var/list/skills
 
+	/// Associative list of skill - base multiplier to set for skill_holder
+	var/list/skill_multipliers = list()
+
 	/// Innate spells that get removed when the job is removed
 	var/list/spells
 
@@ -166,7 +169,7 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/datum/charflaw/forced_flaw
+	var/datum/quirk/forced_flaw
 
 	var/shows_in_list = TRUE
 
@@ -245,7 +248,7 @@
 
 /// Executes after the mob has been spawned in the map.
 /// Client might not be yet in the mob, and is thus a separate variable.
-/datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client, clear_job_stats = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
@@ -262,7 +265,8 @@
 		ADD_TRAIT(spawned, trait, JOB_TRAIT)
 
 	for(var/datum/language/to_learn as anything in languages)
-		spawned.grant_language(to_learn)
+		if(!spawned.has_language(to_learn))
+			spawned.grant_language(to_learn)
 
 	if(is_foreigner)
 		ADD_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
@@ -279,7 +283,10 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
-	spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
+	// When we have sourced skill mods (praying, add to this as well)
+	if(clear_job_stats) // Reset for most non-advclasses
+		spawned.remove_stat_modifier(STATMOD_JOB)
+
 	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
 
 	for(var/datum/skill/skill as anything in skills)
@@ -289,22 +296,16 @@
 		else
 			spawned.adjust_skillrank(skill, amount_or_list, TRUE)
 
+	for(var/skill_type in skill_multipliers)
+		spawned.set_skill_exp_multiplier(skill_type, skill_multipliers[skill_type])
+
 	for(var/X in peopleknowme)
-		for(var/datum/mind/MF in get_minds(X))
-			spawned.mind.person_knows_me(MF)
+		for(var/datum/mind/found_mind in get_minds(X))
+			spawned.mind.give_source_identity(found_mind)
 
 	for(var/X in peopleiknow)
-		for(var/datum/mind/MF in get_minds(X))
-			spawned.mind.i_know_person(MF)
-
-	// Ready up bonus
-	if(!spawned.islatejoin)
-		spawned.adjust_triumphs(1)
-		spawned.apply_status_effect(/datum/status_effect/buff/foodbuff)
-		spawned.hydration = 800 // Set higher hydration
-		spawned.nutrition = 800
-		to_chat(spawned, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
-
+		for(var/datum/mind/found_mind in get_minds(X))
+			spawned.mind.learn_target_identity(found_mind)
 
 	var/used_title = get_informed_title(spawned)
 	if(spawned.islatejoin && (job_flags & JOB_ANNOUNCE_ARRIVAL)) //to be moved somewhere more appropriate
@@ -332,10 +333,7 @@
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
-		spawned.set_flaw(forced_flaw)
-
-	if(spawned.charflaw)
-		spawned.charflaw.after_spawn(spawned, player_client)
+		spawned.add_quirk(forced_flaw)
 
 	if(antag_role && spawned.mind)
 		spawned.mind.add_antag_datum(antag_role)
@@ -354,6 +352,9 @@
 	for(var/datum/triumph_buy/T in owned_triumph_buys)
 		if(!T.activated)
 			T.on_after_spawn(spawned)
+
+	if(spawned.culture)
+		spawned.culture.on_after_spawn(spawned)
 
 	if(length(advclass_cat_rolls))
 		spawned.hugboxify_for_class_selection()
@@ -384,11 +385,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patronlist)
+	for(var/god in GLOB.patron_list)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patronlist[god]
+		var/datum/patron/P = GLOB.patron_list[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -440,17 +441,19 @@
 				continue
 			reals |= real_pack
 		if(!length(reals))
+			message_admins("ERROR: [key_name_admin(src)] failed job pack selection.")
 			return
 
 		var/datum/job_pack/picked_pack
-		if(!client)
-			picked_pack = GLOB.job_pack_singletons[pick(reals)]
-		else
-			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 20 SECONDS)
+		if(client)
+			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 40 SECONDS)
 			if(QDELETED(src))
 				return
+		if(!picked_pack)
+			picked_pack = pick(reals)
 
-		previous_picked_types |= picked_pack.type
+		if(picked_pack.type)
+			previous_picked_types |= picked_pack.type
 
 		picked_pack.pick_pack(src)
 
@@ -585,15 +588,16 @@
 /datum/job/proc/remove_spells(mob/living/equipped_human)
 	equipped_human.remove_spells(source = src)
 
-/datum/job/proc/get_informed_title(mob/mob)
+/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
 	if(mob.admin_title)
 		return mob.admin_title
 
 	if(title_override)
 		return title_override
 
-	if(mob.pronouns == SHE_HER && f_title)
-		return f_title
+	if(f_title)
+		if(ignore_pronouns && mob.gender == FEMALE || !ignore_pronouns && mob.pronouns == SHE_HER)
+			return f_title
 
 	return title
 
@@ -797,5 +801,28 @@
 		else
 			outfit = data["outfit"]
 
+
+	return TRUE
+
+/// Multi check using prefs for reuse, remove when datum/preference is a thing
+/datum/job/proc/prefs_species_check(datum/preferences/prefs)
+	if(!prefs)
+		return FALSE
+
+	var/datum/species/species = prefs.pref_species
+
+	var/job_used_id = species.id_override ? species.id_override : species.id
+
+	if(length(allowed_races) && !(job_used_id in allowed_races))
+		return FALSE
+
+	if(length(blacklisted_species) && (job_used_id in blacklisted_species))
+		return FALSE
+
+	// Subterran dwarves can only be outsiders if they follow the wurm
+	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(prefs.selected_patron, /datum/patron/alternate/wurm))
+		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
+		if(!(tested.department_flag & OUTSIDERS))
+			return FALSE
 
 	return TRUE

@@ -176,9 +176,15 @@
 
 	return master
 
-/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = null, show_message = TRUE, round_robin = FALSE, list/ignored_reagents)
+/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = null, show_message = TRUE, round_robin = FALSE, ignore_stomach = FALSE, list/ignored_reagents)
 	//if preserve_data=0, the reagents data will be lost. Usefull if you use data for some strange stuff and don't want it to be transferred.
 	//if round_robin=TRUE, so transfer 5 from 15 water, 15 sugar and 15 plasma becomes 10, 15, 15 instead of 13.3333, 13.3333 13.3333. Good if you hate floating point errors
+	if(isliving(target) && transfered_by != target)
+		for(var/datum/reagent/reagent_type as anything in reagent_list)
+			if(istype(reagent_type, /datum/reagent/medicine))
+				SEND_SIGNAL(transfered_by, COMSIG_LIVING_MEDICINE_APPLIED)
+				break
+
 	//ignored_reagents will not factor it into the total volume of the solution. It calculates as if they did not exist.
 	var/list/cached_reagents = reagent_list
 	if(!target || !total_volume)
@@ -192,10 +198,19 @@
 		R = target
 		target_atom = R.my_atom
 	else
-		if(!target.reagents)
+		if(!ignore_stomach && (method & INGEST) && istype(target, /mob/living/carbon))
+			var/mob/living/carbon/eater = target
+			var/obj/item/organ/stomach/belly = eater.getorganslot(ORGAN_SLOT_STOMACH)
+			if(!belly)
+				eater.expel_ingested(my_atom, amount)
+				return
+			R = belly.reagents
+			target_atom = belly
+		else if(!target.reagents)
 			return
-		R = target.reagents
-		target_atom = target
+		else
+			R = target.reagents
+			target_atom = target
 
 	var/used_volume = src.total_volume
 	for(var/datum/reagent/T as anything in cached_reagents)
@@ -214,7 +229,10 @@
 				trans_data = copy_data(T)
 			R.add_reagent(T.type, transfer_amount * multiplier, trans_data, chem_temp, no_react = 1) //we only handle reaction after every reagent has been transfered.
 			if(method)
-				R.react_single(T, target_atom, method, part, show_message)
+				if(istype(target_atom, /obj/item/organ))
+					R.react_single(T, target, method, part, show_message)
+				else
+					R.react_single(T, target_atom, method, part, show_message)
 				T.on_transfer(target_atom, method, transfer_amount * multiplier)
 			remove_reagent(T.type, transfer_amount)
 			transfer_log[T.type] = transfer_amount
@@ -234,7 +252,10 @@
 			R.add_reagent(T.type, transfer_amount * multiplier, trans_data, chem_temp, no_react = 1)
 			to_transfer = max(to_transfer - transfer_amount , 0)
 			if(method)
-				R.react_single(T, target_atom, method, transfer_amount, show_message)
+				if(istype(target_atom, /obj/item/organ))
+					R.react_single(T, target, method, transfer_amount, show_message)
+				else
+					R.react_single(T, target_atom, method, transfer_amount, show_message)
 				T.on_transfer(target_atom, method, transfer_amount * multiplier)
 			remove_reagent(T.type, transfer_amount)
 			transfer_log[T.type] = transfer_amount
@@ -468,8 +489,7 @@
 		if(possible_reactions.len)
 			var/datum/chemical_reaction/selected_reaction = possible_reactions[1]
 			//select the reaction with the most extreme temperature requirements
-			for(var/V in possible_reactions)
-				var/datum/chemical_reaction/competitor = V
+			for(var/datum/chemical_reaction/competitor as anything in possible_reactions)
 				if(selected_reaction.is_cold_recipe) //if there are no recipe conflicts, everything in possible_reactions will have this same value for is_cold_reaction. warranty void if assumption not met.
 					if(competitor.required_temp <= selected_reaction.required_temp)
 						selected_reaction = competitor
@@ -495,7 +515,7 @@
 			if(cached_my_atom)
 				if(!ismob(cached_my_atom)) // No bubbling mobs
 					if(selected_reaction.mix_sound)
-						playsound(get_turf(cached_my_atom), selected_reaction.mix_sound, 80, TRUE)
+						playsound(cached_my_atom, selected_reaction.mix_sound, 80, TRUE)
 
 					if(selected_reaction.mix_message)
 						for(var/mob/M in seen)
@@ -511,16 +531,14 @@
 
 /datum/reagents/proc/isolate_reagent(reagent)
 	var/list/cached_reagents = reagent_list
-	for(var/_reagent in cached_reagents)
-		var/datum/reagent/R = _reagent
+	for(var/datum/reagent/R as anything in cached_reagents)
 		if(R.type != reagent)
 			del_reagent(R.type)
 			update_total()
 
 /datum/reagents/proc/del_reagent(reagent)
 	var/list/cached_reagents = reagent_list
-	for(var/_reagent in cached_reagents)
-		var/datum/reagent/R = _reagent
+	for(var/datum/reagent/R as anything in cached_reagents)
 		if(R.type == reagent)
 			if(my_atom && isliving(my_atom))
 				var/mob/living/M = my_atom
@@ -540,7 +558,7 @@
 	var/list/cached_reagents = reagent_list
 	total_volume = 0
 	for(var/datum/reagent/R as anything in cached_reagents)
-		if(R.volume < 0.1)
+		if(R.volume < 0.05)
 			del_reagent(R.type)
 		else
 			total_volume += R.volume
@@ -559,7 +577,7 @@
 	var/react_type
 	if(isliving(A))
 		react_type = "LIVING"
-		if(method == INGEST)
+		if(method & INGEST)
 			var/mob/living/L = A
 			L.taste(src)
 	else if(isturf(A))
@@ -573,7 +591,7 @@
 		switch(react_type)
 			if("LIVING")
 				var/touch_protection = 0
-				if(method == VAPOR)
+				if(method & VAPOR)
 					var/mob/living/L = A
 					touch_protection = L.get_permeability_protection()
 				R.reaction_mob(A, method, R.volume * volume_modifier, show_message, touch_protection)
@@ -586,7 +604,7 @@
 	var/react_type
 	if(isliving(A))
 		react_type = "LIVING"
-		if(method == INGEST)
+		if(method & INGEST)
 			var/mob/living/L = A
 			L.taste(src)
 	else if(isturf(A))
@@ -598,7 +616,7 @@
 	switch(react_type)
 		if("LIVING")
 			var/touch_protection = 0
-			if(method == VAPOR)
+			if(method & VAPOR)
 				var/mob/living/L = A
 				touch_protection = L.get_permeability_protection()
 			R.reaction_mob(A, method, R.volume * volume_modifier, show_message, touch_protection)
@@ -756,8 +774,7 @@
 
 /datum/reagents/proc/get_reagent_amount(reagent)
 	var/list/cached_reagents = reagent_list
-	for(var/_reagent in cached_reagents)
-		var/datum/reagent/R = _reagent
+	for(var/datum/reagent/R as anything in cached_reagents)
 		if (R.type == reagent)
 			return round(R.volume, CHEMICAL_QUANTISATION_LEVEL)
 
@@ -876,7 +893,7 @@
 				continue
 
 			if(istype(R, /datum/reagent/consumable/nutriment))
-				var/list/taste_data = R.data
+				var/list/taste_data = R.data["tastes"]
 				for(var/taste in taste_data)
 					var/ratio = taste_data[taste]
 					var/amount = ratio * R.taste_mult * R.volume

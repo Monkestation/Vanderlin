@@ -160,7 +160,7 @@
 			kitten.ai_controller?.ai_interact(food)
 
 		// Make a meow sound
-		//playsound(get_turf(cat_pawn), pick('sound/vo/mobs/cat/meow1.ogg', 'sound/vo/mobs/cat/meow2.ogg'), 50, TRUE, -1)
+		//playsound(cat_pawn, pick('sound/vo/mobs/cat/meow1.ogg', 'sound/vo/mobs/cat/meow2.ogg'), 50, TRUE, -1)
 
 		// Clear the food reference
 		controller.clear_blackboard_key(food_key)
