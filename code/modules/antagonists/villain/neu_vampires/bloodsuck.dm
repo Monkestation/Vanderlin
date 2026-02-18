@@ -118,7 +118,7 @@
 	if(!istype(VDrinker))
 		return
 	ADD_TRAIT(src, "choosing", INNATE_TRAIT)
-	if(browser_alert(src, "Would you like to rise as a vampire spawn? Warning: you will die shall you reject.", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO", timeout = 8 SECONDS)
+	if(browser_alert(src, "Would you like to rise as a vampire spawn? Warning: you will die shall you reject.", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND"), timeout = 8 SECONDS) != "MAKE IT SO")
 		REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
 		to_chat(sire, span_danger("Your victim twitches, yet the curse fails to take over. As if something otherworldly intervenes..."))
 		death()
