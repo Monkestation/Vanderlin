@@ -57,21 +57,19 @@
 					used_vitae = 150
 					if(victim.bloodpool < used_vitae)
 						used_vitae = victim.bloodpool // We assume they're left with 250 vitae or less, so we take it all
-						to_chat(src, "<span class='warning'>...But alas, only leftovers...</span>")
-				else
-					if(victim.clan && clan)
-						AdjustMasquerade(-1)
-						message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
-						log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
-						to_chat(src, span_danger("I have... Consumed my kindred!"))
-						victim.death()
-						victim.adjustBruteLoss(-50, TRUE)
-						victim.adjustFireLoss(-50, TRUE)
-						return 0
-					if(victim.stat != DEAD && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
-						victim.SetUnconscious(50 SECONDS)
-						to_chat(src, "<span class='warning'>Your victim faints from the excessive draining.</span>")
-				if(victim.mind && victim.bloodpool <= 150 && clan_position?.can_assign_positions && !victim.clan && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
+						to_chat(src, span_warning("...But alas, only leftovers..."))
+				else if(victim.clan && clan)
+					AdjustMasquerade(-1)
+					message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
+					log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
+					to_chat(src, span_danger("I have... Consumed my kindred!"))
+					victim.death()
+					victim.adjustBruteLoss(-50, TRUE)
+					victim.adjustFireLoss(-50, TRUE)
+					return 0
+				if(victim.mind && victim.bloodpool <= 150 && victim.blood_volume <= BLOOD_VOLUME_SURVIVE && clan_position?.can_assign_positions && !victim.clan && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
+					victim.SetUnconscious(15 SECONDS)
+					to_chat(src, span_warning("Your victim faints from the excessive draining."))
 					if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
 						to_chat(src, span_warning("I decide [victim] is unworthy."))
 					else
@@ -120,7 +118,7 @@
 	if(!istype(VDrinker))
 		return
 	ADD_TRAIT(src, "choosing", INNATE_TRAIT)
-	if(browser_alert(src, "Would you like to rise as a vampire spawn? Warning: you will die shall you reject.", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
+	if(browser_alert(src, "Would you like to rise as a vampire spawn? Warning: you will die shall you reject.", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO", timeout = 8 SECONDS)
 		REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
 		to_chat(sire, span_danger("Your victim twitches, yet the curse fails to take over. As if something otherworldly intervenes..."))
 		death()
@@ -130,5 +128,5 @@
 	visible_message(span_red("[src] rises as a new spawn!"))
 	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(sire.clan, TRUE)
 	mind.add_antag_datum(new_antag)
+	revive()
 	adjust_bloodpool(500)
-	fully_heal()
