@@ -53,7 +53,7 @@
 	. = ..()
 	var/prisonertype = "Commoner" //If you're Tiefling, Hollowkin, or Medicator, this is your only option.
 	if((spawned.dna.species.id != SPEC_ID_TIEFLING) && (spawned.dna.species.id != SPEC_ID_HOLLOWKIN) && (spawned.dna.species.id != SPEC_ID_MEDICATOR))
-		prisonertype = browser_input_list(H, "What kind of prisoner are you?", "Filthy Criminal", list("Noble", "Commoner"))
+		prisonertype = browser_input_list(spawned, "What kind of prisoner are you?", "Filthy Criminal", list("Noble", "Commoner"))
 	if(prisonertype == "Noble")
 		SStreasury.create_bank_account(spawned, 173)
 		spawned.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
