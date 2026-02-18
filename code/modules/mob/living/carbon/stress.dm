@@ -187,6 +187,7 @@
 	for(var/stress_type in events_to_remove)
 		var/datum/stress_event/stress_event = has_stress_type(stress_type)
 		if(stress_event)
+			stress_event.on_remove(src)
 			adjust_stress(-1 * stress_event.get_stress())
 			stressors -= stress_event
 			qdel(stress_event)

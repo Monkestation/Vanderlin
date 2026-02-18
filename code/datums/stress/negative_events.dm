@@ -343,8 +343,19 @@
 /datum/stress_event/saw_wonder
 	stress_change = 4
 	desc = span_boldred("<B>I have seen something nightmarish, and I fear for my life!</B>")
-	timer = 999 MINUTES
+	timer = 7.5 MINUTES
 
+/datum/stress_event/saw_wonder/on_apply(mob/living/user)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/scared = user
+		scared.add_curse(/datum/curse/schizophrenic)
+
+/datum/stress_event/saw_wonder/on_remove(mob/living/user)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/scared = user
+		scared.remove_curse(/datum/curse/schizophrenic)
 
 /datum/stress_event/confessed
 	stress_change = 3
