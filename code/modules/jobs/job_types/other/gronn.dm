@@ -1,3 +1,4 @@
+//the mooks
 /datum/job/advclass/mercenary/gronn
 	title = "Gronnic Privateer"
 	tutorial = "You are one of many upstarts from Gronn, who sailed from the coastal capital of Danheim to the southern beaches of Azuria in search of a more... honest means of profit than the Sea Raiders of infamy."
@@ -104,6 +105,7 @@
 
 	H.merctype = 1
 
+//the scary mook
 /datum/job/advclass/mercenary/gronnheavy
 	title = "Fjall Járnklæddur"
 	tutorial = "Even within Fjall, few bear witness to the Horned Visages of the Járnklæddur; Ironclad warriors who stand against the undead armies that rise out of the 'Red Blizzard'. Those who do not have the blessing of the Iskarn Shamans within the Northern Empty oft-seek the protection of the Járnklæddur, despite their steep costs."
@@ -161,4 +163,81 @@
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/weapon/scabbard/knife = 1
 		)
+	H.merctype = 1
+
+//the special mooks
+/datum/job/advclass/mercenary/shamanaaa
+	title = "!!!!Atgervi Shaman"
+	tutorial = "You are a Shaman of the Fjall, The Northern Empty. Shamans are savage combatants who commune with the Ecclesical Beast Gods through ritualistic violence, rather than idle prayer."
+	outfit = /datum/outfit/job/roguetown/mercenary/atgervishaman
+	allowed_sexes = list(MALE, FEMALE)
+	allowed_races = RACES_PLAYER_ALL
+	allowed_patrons = ALL_GRONNIC_PATRONS
+	languages = list(/datum/language/gronnic)
+	cmode_music = 'sound/music/combat_shaman2.ogg'
+	traits = list(TRAIT_STRONGBITE, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_NOPAINSTUN)
+	jobstats = list(
+		STATKEY_STR = 3,
+		STATKEY_CON = 2,
+		STATKEY_SPD = 1,
+		STATKEY_INT = -1,
+		STATKEY_PER = -1
+	)
+	skills = list(
+		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/sneaking = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
+		/datum/skill/craft/tanning = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/magic/holy = SKILL_LEVEL_JOURNEYMAN,
+	)
+
+/datum/outfit/job/roguetown/mercenary/atgervishaman/pre_equip(mob/living/carbon/human/H)
+	..()
+	H.mind?.current.faction += "[H.name]_faction"
+	H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
+
+	head = /obj/item/clothing/head/helmet/leather/shaman_hood
+	gloves = /obj/item/clothing/gloves/angle/gronnfur
+	armor = /obj/item/clothing/armor/leather/heavy/atgervi
+	shirt = /obj/item/clothing/shirt/undershirt
+	pants = /obj/item/clothing/pants/trou/leather/atgervi
+	wrists = /obj/item/clothing/wrists/bracers
+	shoes = /obj/item/clothing/shoes/boots/leather/atgervi
+	backr = /obj/item/storage/backpack/satchel/black
+	belt = /obj/item/storage/belt/leather
+	neck = /obj/item/storage/belt/pouch/coins/poor
+	beltl = /obj/item/flashlight/flare/torch
+	H.put_in_hands(new /obj/item/weapon/handclaw/gronn)
+
+	switch(H.patron?.type)
+		if(/datum/patron/inhumen/zizo)
+			neck = /obj/item/clothing/neck/psycross/inhumen/gronn
+		if(/datum/patron/inhumen/graggar)
+			neck = /obj/item/clothing/neck/psycross/inhumen/graggar/gronn
+		if(/datum/patron/inhumen/matthios)
+			neck = /obj/item/clothing/neck/psycross/inhumen/matthios/gronn
+		if(/datum/patron/inhumen/baotha)
+			neck = /obj/item/clothing/neck/psycross/inhumen/baothagronn
+		if(/datum/patron/divine/abyssor)
+			neck = /obj/item/clothing/neck/psycross/abyssor/gronn
+		if(/datum/patron/divine/dendor)
+			neck = /obj/item/clothing/neck/psycross/dendor/gronn
+		else
+			neck = /obj/item/clothing/neck/psycross/inhumen/gronn/special //Failsafe. Gives a specially-fluffed version of Zizo's talisman, which can be reinterpreted as needed.
+
+	var/datum/devotion/cleric = new /datum/devotion(H, H.patron)
+	cleric.grant_to(H)
+	cleric.make_shaman()//Capped to T2 miracles.
+
+	backpack_contents = list(
+		/obj/item/key/mercenary = 1,
+		/obj/item/weapon/knife/hunting = 1,
+		/obj/item/weapon/scabbard/knife = 1,
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		)
+
 	H.merctype = 1
