@@ -48,7 +48,6 @@ export function LootBox(props: Props) {
       }
       onAuxClick={(event) => {
         event.preventDefault();
-        console.log(event.button);
         act('grab', {
           middle: event.button === 1,
           right: event.button === 2,
