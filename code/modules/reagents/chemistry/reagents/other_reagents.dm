@@ -10,7 +10,7 @@
 	glass_name = "glass of tomato juice"
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
-	var/toxicity = 0.8 // how toxic will this be to digest to people who cannot drink it
+	var/toxicity = 0.7 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
 	name = "Tiefling Blood"
@@ -31,39 +31,34 @@
 
 /datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
 	. = ..()
-	if(method == INJECT || (HAS_TRAIT(L, TRAIT_SANGUINE) && method == INGEST))
-		SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
+	if(!(. && method & (INJECT|INGEST)))
+		return
+	SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
 	if(L.clan && data["vitae"] > 0)
 		var/vitae = reac_volume * data["vitae"]
 		L.adjust_hydration(vitae * 0.1)
 		L.adjust_bloodpool(vitae)
 		L.clan.handle_bloodsuck(L, data["preferences"])
-
-	//only carbons who have injected/injested past this point
-	if(!iscarbon(L) || !(method == INJECT || method == INGEST))
-		return
 	var/mob/living/carbon/C = L
-	if(C.dna?.species && (NOBLOOD in C.dna.species.species_traits))
+	if(istype(C) && (NOBLOOD in C.dna?.species?.species_traits))
 		return
 	var/datum/blood_type/blood = L.get_blood_type()
-	var/compatible = ispath(blood?.reagent_type, type) || (data["blood_type"] in blood?.compatible_types)
-	// /datum/reagent/blood/tiefling, /datum/reagent/blood = TRUE
-	// /datum/reagent/blood
-	if(method == INJECT && compatible) //we're compatible so add the blood
+	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
+	if(method & INJECT)
 		L.blood_volume = min(L.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 		return
-	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
-	if(method == INGEST && (toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) && (compatible || HAS_TRAIT(L, TRAIT_NASTY_EATER)))))
-		if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
-			L.adjust_hydration(reac_volume * 0.2)
-		if(L.blood_volume < BLOOD_VOLUME_NORMAL)
-			L.blood_volume = min(L.blood_volume + reac_volume * 0.2 , BLOOD_VOLUME_NORMAL)
-		return
-	var/tox = toxicity * reac_volume
-	if(HAS_TRAIT(L, TRAIT_POISON_RESILIENCE))
-		tox *= 0.5
-	L.adjustToxLoss(tox)
-	C.add_nausea(tox * 2)
+	if(method & INGEST)
+		if(toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) || HAS_TRAIT(L, TRAIT_NASTY_EATER)))
+			if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
+				L.adjust_hydration(reac_volume * 0.2)
+			if(L.blood_volume < BLOOD_VOLUME_NORMAL)
+				L.blood_volume = min(L.blood_volume + reac_volume * 0.2 , BLOOD_VOLUME_NORMAL)
+			return
+		var/tox = toxicity * reac_volume
+		if(HAS_TRAIT(L, TRAIT_POISON_RESILIENCE))
+			tox *= 0.5
+		L.adjustToxLoss(tox)
+		C.add_nausea(tox * 2)
 
 /datum/reagent/blood/on_merge(list/mix_data, other_volume)
 	. = ..()
