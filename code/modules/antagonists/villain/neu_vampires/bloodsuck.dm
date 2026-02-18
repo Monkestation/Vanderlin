@@ -81,7 +81,7 @@
 	if(ingest && reagents.total_volume < reagents.maximum_volume)
 		var/ingesting_volume = min(reagents.maximum_volume - reagents.total_volume, drink_amt)
 		if(victim.reagents.total_volume)
-			var/list/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood)
+			var/list/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/nutriment)
 			var/trans_volume = victim.reagents.total_volume
 			for(var/reagent_type in blacklisted_reagents)
 				trans_volume -= victim.reagents.get_reagent_amount(reagent_type)
