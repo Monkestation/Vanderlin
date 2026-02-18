@@ -12,7 +12,6 @@
 	experimental_onback = TRUE
 	experimental_onhip = TRUE
 	smeltresult = /obj/item/ingot/copper
-	time_multiplier = 0.5
 	item_weight = 852 GRAMS
 
 /obj/item/weapon/sickle/copper

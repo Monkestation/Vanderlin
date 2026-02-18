@@ -10,8 +10,23 @@ SUBSYSTEM_DEF(skills)
 	///Dictionary of skill.type || skill ref
 	var/list/all_skills = list()
 	///Static assoc list of levels (ints) - strings
-	var/list/level_names = list(span_info("Weak"), span_info("Average"), span_biginfo("Skilled"), span_biginfo("Expert"), "<B>Master</B>", span_greentext("Legendary"))//This list is already in the right order, due to indexing
-
+	var/list/level_names = list(
+		span_info("Weak"), \
+		span_info("Average"), \
+		span_biginfo("Skilled"), \
+		span_biginfo("Expert"), \
+		"<B>Master</B>", \
+		span_greentext("Legendary"))//This list is already in the right order, due to indexing
+	/// All level plain names without span
+	var/static/alist/level_names_plain = alist(
+		SKILL_LEVEL_NONE = "None",
+		SKILL_LEVEL_NOVICE = "Weak",
+		SKILL_LEVEL_APPRENTICE = "Average",
+		SKILL_LEVEL_JOURNEYMAN = "Skilled",
+		SKILL_LEVEL_EXPERT = "Expert",
+		SKILL_LEVEL_MASTER = "Master",
+		SKILL_LEVEL_LEGENDARY = "Legendary",
+	)
 
 /datum/controller/subsystem/skills/Initialize(timeofday)
 	InitializeSkills()

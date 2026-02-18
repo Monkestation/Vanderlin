@@ -100,7 +100,7 @@
 	if(amount_to_drain <= 0)
 		return
 
-	var/drain_quality = channel_metal.recipe_quality
+	var/drain_quality = channel_metal.get_recipe_quality()
 
 	if(target_mould.fufilled_metal > 0)
 		target_mould.total_quality_points += amount_to_drain * drain_quality

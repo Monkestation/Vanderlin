@@ -26,7 +26,6 @@
 	melt_amount = 50
 	melting_material = /datum/material/steel
 	item_weight = 212 GRAMS
-	var/time_multiplier = 1
 
 /datum/intent/chisel
 	name = "chisel"
@@ -42,7 +41,7 @@
 /obj/item/weapon/chisel/iron
 	name = "iron chisel"
 	smeltresult = /obj/item/ingot/iron
-	time_multiplier = 1.1
+	toolspeed = 1.1
 
 /obj/item/weapon/chisel/bronze
 	name = "bronze chisel"

@@ -10,6 +10,7 @@
 	glass_name = "glass of tomato juice"
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
+	penetrates_skin = NONE
 	var/toxicity = 0.7 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
@@ -218,7 +219,7 @@
 	for(var/atom/movable/thing as anything in T.contents)
 		if(ismob(thing))
 			var/mob/M = thing
-			reaction_mob(M, reac_volume)
+			expose_mob(M, reac_volume)
 		else if(isobj(thing))
 			var/obj/O = thing
 			reaction_obj(O, reac_volume)
@@ -253,7 +254,7 @@
  *	Water reaction to a mob
  */
 
-/datum/reagent/water/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with water can help put them out!
+/datum/reagent/water/expose_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with water can help put them out!
 	if(!istype(M))
 		return
 	if(method & TOUCH)

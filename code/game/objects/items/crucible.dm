@@ -29,7 +29,7 @@
 /obj/item/storage/crucible/examine(mob/user)
 	. = ..()
 	if(crucible_temperature)
-		. += "The crucible is around [crucible_temperature - 271.3]C"
+		. += "The crucible is around [crucible_temperature - T0C]C"
 	if(length(melting_pot))
 		for(var/obj/item/atom in melting_pot)
 			var/datum/material/material = atom.melting_material
@@ -37,7 +37,9 @@
 	var/datum/reagent/molten_metal/metal = reagents.get_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
-	for(var/datum/material/material in metal.data)
+	for(var/datum/material/material as anything in metal.data)
+		if(!ispath(material))
+			continue
 		var/tag = "Molten"
 		if(reagents.chem_temp < material.melting_point)
 			tag = "Hardened"
@@ -152,7 +154,6 @@
 		/datum/material/copper = 18,
 		/datum/material/tin = 2
 	)
-	var/temperature = 1500
 	crucible_temperature = 1500
 
 /obj/item/storage/crucible/test_crucible/Initialize()

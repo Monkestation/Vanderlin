@@ -25,7 +25,7 @@
 			H.adjust_hydration(hydration_factor * actual_metabolized  * efficiency)
 	return ..()
 
-/datum/reagent/consumable/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
+/datum/reagent/consumable/expose_mob(mob/living/M, method=TOUCH, reac_volume)
 	if ((method & INGEST) && ishuman(M))
 		var/mob/living/carbon/human/HM = M
 
@@ -133,6 +133,9 @@
 	counterlist_combine(taste_amounts, other_taste_amounts)
 	counterlist_normalise(taste_amounts)
 	LAZYSET(data, "tastes", taste_amounts)
+
+/datum/reagent/consumable/nutriment/get_taste_description(mob/living/taster)
+	return data["tastes"]
 
 /datum/reagent/consumable/nutriment/vitamin
 	name = "Vitamin"

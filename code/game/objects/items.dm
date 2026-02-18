@@ -109,7 +109,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/list/attack_verb //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/list/species_exception = null	// list() of species types, if a species cannot put items in a certain slot, but species type is in list, it will be able to wear that item
 
-	var/mob/thrownby = null
+	///A weakref to the mob who threw the item
+	var/datum/weakref/thrownby = null //I cannot verbally describe how much I hate this var
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER //the icon to indicate this object is being dragged
 
@@ -122,6 +123,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/sharpness = IS_BLUNT
 
 	var/tool_behaviour = NONE
+	///How fast does the tool work
 	var/toolspeed = 1
 
 	/// Organ storage component requires this
@@ -239,8 +241,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/last_used = 0
 
-	// Boolean sanity var for smelteries to avoid runtimes. Is this is a bar smelted through ore for exp gain?
-	var/smelted = FALSE
 	// Can this be used against a training dummy to learn skills? Prevents dumb exploits.
 	var/istrainable = FALSE
 
@@ -273,8 +273,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/melt_amount = 0
 	///our current in progress slapcraft
 	var/datum/orderless_slapcraft/in_progress_slapcraft
-	///these are flags of what tools can interact with this atom useful to stop hard coding interactions
-	var/tool_flags = NONE
 
 	var/list/attunement_values
 	///this is in KG
@@ -284,6 +282,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	/// Artificers Recipe
 	var/datum/artificer_recipe/artrecipe
+	/// Current anvil/forging recipe
+	var/datum/anvil_recipe/currecipe
 
 	/// angle of the icon, these are used for attack animations
 	var/icon_angle = 50 // most of our icons are angled
@@ -300,6 +300,89 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
 	var/toggle_state
+
+/obj/item/proc/set_quality(quality)
+	recipe_quality = quality
+
+/obj/item/update_overlays()
+	. = ..()
+	//details tags for items/clothes
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		. += pic
+
+/**
+ * Handles adding components to the item. Added in Initialize()
+ *
+ * Added as a seperate proc to allow for specific behavior
+ */
+/obj/item/proc/apply_components()
+	if(force_wielded || gripped_intents)
+		var/wielded_force = force_wielded ? force_wielded : force
+		AddComponent(/datum/component/two_handed, force_unwielded = force, force_wielded = wielded_force, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)), wield_block_offhand = wield_block)
+
+/obj/item/proc/get_detail_tag() //this is for extra layers on clothes or items
+	return detail_tag
+
+/obj/item/proc/get_detail_color() //this is for extra layers on clothes or items
+	return detail_color
+
+/// Handles sprite changes and decals
+/obj/item/proc/update_transform()
+	transform = null
+	if(dropshrink)
+		if(isturf(loc))
+			var/matrix/M = matrix()
+			M.Scale(dropshrink,dropshrink)
+			transform = M
+	if(ismob(loc))
+		if(altgripped)
+			if(gripsprite)
+				icon_state = "[initial(icon_state)]1"
+				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+				if(B)
+					B.remove()
+					B.generate_appearance()
+					B.apply()
+			return
+		if(HAS_TRAIT(src, TRAIT_WIELDED))
+			if(gripsprite)
+				icon_state = "[initial(icon_state)]1"
+				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+				if(B)
+					B.remove()
+					B.generate_appearance()
+					B.apply()
+			if(toggle_state)
+				icon_state = "[toggle_state]1" // Stupid thing needed for Grandmaster/Martyr weapons, if theres a better way to accomplish this tell me. I'm stupid.
+			if(gripspriteonmob)
+				item_state = "[initial(icon_state)]_wield"
+				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+				if(B)
+					B.remove()
+					B.generate_appearance()
+					B.apply()
+			return
+		if(gripsprite)
+			if(toggle_state) // See above comment
+				icon_state ="[toggle_state]"
+			else
+				icon_state = initial(icon_state)
+			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+			if(B)
+				B.remove()
+				B.generate_appearance()
+				B.apply()
+		if(gripspriteonmob)
+			item_state = initial(icon_state)
+			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+			if(B)
+				B.remove()
+				B.generate_appearance()
+				B.apply()
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
@@ -420,6 +503,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			embedded_mob.simple_remove_embedded_object(src)
 	if(artrecipe)
 		QDEL_NULL(artrecipe)
+	if(currecipe)
+		QDEL_NULL(currecipe)
 	if(istype(loc, /obj/machinery/artificer_table))
 		var/obj/machinery/artificer_table/A = loc
 		A.material = null
@@ -683,7 +768,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 
 	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
+		to_chat(user, span_warning("[src] is too hot to handle with your hands!"))
 		return
 
 	if(resistance_flags & ON_FIRE)
@@ -1086,7 +1171,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return hit_atom.hitby(src, 0, itempush, throwingdatum=throwingdatum, damage_type = src.damage_type)
 
 /obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
-	thrownby = thrower
+	if(HAS_TRAIT(src, TRAIT_NODROP))
+		return
+	thrownby = WEAKREF(thrower)
 	callback = CALLBACK(src, PROC_REF(after_throw), callback) //replace their callback with our own
 	. = ..(target, range, speed, thrower, spin, diagonals_first, callback, force)
 
@@ -1585,6 +1672,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/examine(mob/user)
 	. = ..()
+	if(currecipe)
+		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	if(!get_precursor_data(src))
 		return
 	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/alchemy) : 60

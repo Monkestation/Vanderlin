@@ -197,9 +197,7 @@
 ///Called when TRAIT_CRATEMOVER is removed from the mob.
 /mob/living/proc/on_cratemover_trait_loss(datum/source)
 	SIGNAL_HANDLER
-	var/datum/component/strongpull = GetComponent(/datum/component/strong_pull)
-	if(strongpull)
-		strongpull.RemoveComponent()
+	qdel(GetComponent(/datum/component/strong_pull))
 
 ///From [element/movetype_handler/on_movement_type_trait_gain()]
 /mob/living/proc/on_movement_type_flag_enabled(datum/source, trait)

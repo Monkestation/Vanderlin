@@ -2,10 +2,11 @@
 	name = "Molten "
 
 	metabolization_rate = REAGENTS_METABOLISM * 4
+	base_recipe_quality = SMELTERY_QUALITY_NORMAL
 
 	var/datum/material/largest_metal
 
-/datum/reagent/molten_metal/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
+/datum/reagent/molten_metal/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
 	. = ..()
 	if(method & INGEST)
 		for(var/datum/material_trait/trait as anything in initial(largest_metal.traits))

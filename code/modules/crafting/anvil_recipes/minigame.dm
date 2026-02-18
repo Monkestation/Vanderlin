@@ -1,3 +1,6 @@
+#define BASE_NUMBER_NOTES 5
+#define EASY_DIFFICULTY_THRESHOLD 3
+
 /datum/anvil_challenge
 	var/start_time
 	var/completed = FALSE
@@ -8,7 +11,9 @@
 	var/atom/movable/screen/anvil_hud/anvil_hud
 	var/datum/anvil_recipe/selected_recipe
 	var/obj/machinery/anvil/host_anvil
+	/// Scale from 1 to 7. Higher difficulty results in faster notes and harder-to-click notes
 	var/difficulty = 1
+	/// Scale from 0 to 100 based on accuracy.
 	var/success = 100
 	var/off_time = 0
 	var/notes_left = 0
@@ -23,14 +28,12 @@
 	src.user = user
 	selected_recipe = end_product_recipe
 
-	var/user_skill = GET_MOB_SKILL_VALUE_OLD(user, end_product_recipe.appro_skill)
-	if(user_skill < end_product_recipe.craftdiff)
-		difficulty_modifier *= 2
-
-	difficulty = difficulty_modifier
-	notes_left = max(5, round(difficulty_modifier * 2))
+	var/recipe_difficulty = selected_recipe.craftdiff + difficulty_modifier
+	notes_left = BASE_NUMBER_NOTES + recipe_difficulty
 	total_notes = notes_left
 
+	// If skill level matches recipe difficulty, minigame by default should only contain easy notes
+	difficulty = clamp(ceil(recipe_difficulty - user.get_skill_level(selected_recipe.appro_skill) + EASY_DIFFICULTY_THRESHOLD + difficulty_modifier), 1, 7)
 	if(isdwarf(user) && difficulty > 1)
 		difficulty--
 
@@ -98,10 +101,12 @@
 	var/list/modifiers = params2list(params)
 
 	var/list/click_list = list()
-	if(LAZYACCESS(modifiers, RIGHT_CLICK))
-		click_list |= RIGHT_CLICK
 	if(LAZYACCESS(modifiers, LEFT_CLICK))
 		click_list |= LEFT_CLICK
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		click_list |= RIGHT_CLICK
+	if(LAZYACCESS(modifiers, MIDDLE_CLICK))
+		click_list |= MIDDLE_CLICK
 	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		click_list |= ALT_CLICKED
 	if(LAZYACCESS(modifiers, CTRL_CLICKED))
@@ -115,7 +120,6 @@
 		if((REALTIMEOFDAY > lower_range) && (REALTIMEOFDAY < upper_range))
 			anvil_presses -= anvil_presses[choice]
 			user.balloon_alert(user, "Great Hit!")
-			playsound(host_anvil, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 			// for(var/mob/player as anything in GLOB.player_list)
 			// 	if(!is_in_zweb(player.z, host_anvil.z))
@@ -127,7 +131,6 @@
 			// 		if(dist < 7)
 			// 			continue
 			// 		player.playsound_local(player_turf, null, 100, 1, get_rand_frequency(), falloff_exponent = 5, S = far_smith_sound)
-
 
 		else
 			if(REALTIMEOFDAY > anvil_presses[choice] + 0.2 SECONDS + average_ping)
@@ -142,6 +145,7 @@
 	anvil_presses -= choice
 	note_pixels_moved -= choice
 	anvil_hud.pop_note(choice, good_hit)
+	playsound(host_anvil, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 	if(!length(anvil_presses))
 		if(!notes_left)
 			end_minigame()
@@ -178,16 +182,14 @@
 	host_anvil.smithing = FALSE
 
 	if(completed)
-		var/smithlevel = GET_MOB_SKILL_VALUE_OLD(user, selected_recipe.appro_skill)
 		if(host_anvil.always_perfect)
-			failed_notes = 0
-			off_time = 0
 			success = 100
+		else
+			// Calculate quality score based on performance
+			success = min(max(0, round(success - ((100 * (failed_notes / total_notes)) + 1 * (off_time * 2)))), \
+				100)
 
-		// Calculate quality score based on performance
-		success = max(smithlevel * 5, round(success - ((100 * (failed_notes / total_notes)) + 1 * (off_time * 2)) +((smithlevel * 5) - 15)))
-
-		host_anvil.process_minigame_result(success, user, (failed_notes == total_notes))
+		host_anvil.process_minigame_result(success, user)
 
 	host_anvil = null
 
@@ -233,9 +235,10 @@
 	var/timer
 
 /atom/movable/screen/hud_note/proc/generate_click_type(difficulty)
-	difficulty = min(6, difficulty)
+	difficulty = min(7, difficulty)
 
 	switch(rand(1,difficulty))
+		// EASY NOTES
 		if(1)
 			click_requirements = list(LEFT_CLICK)
 			icon_state = "note"
@@ -243,15 +246,19 @@
 			click_requirements = list(RIGHT_CLICK)
 			icon_state = "note-right"
 		if(3)
+			click_requirements = list(MIDDLE_CLICK)
+			icon_state = "note-middle"
+		// HARD NOTES
+		if(4)
 			click_requirements = list(LEFT_CLICK, ALT_CLICKED)
 			icon_state = "note-alt"
-		if(4)
+		if(5)
 			click_requirements = list(RIGHT_CLICK, ALT_CLICKED)
 			icon_state = "note-right-alt"
-		if(5)
+		if(6)
 			click_requirements = list(LEFT_CLICK, CTRL_CLICKED)
 			icon_state = "note-ctrl"
-		if(6)
+		if(7)
 			click_requirements = list(RIGHT_CLICK, CTRL_CLICKED)
 			icon_state = "note-right-ctrl"
 
@@ -265,3 +272,6 @@
 		if(!length(copied_checks))
 			return TRUE
 	return FALSE
+
+#undef BASE_NUMBER_NOTES
+#undef EASY_DIFFICULTY_THRESHOLD

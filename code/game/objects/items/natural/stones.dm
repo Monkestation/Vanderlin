@@ -298,7 +298,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		var/work_time = (4 SECONDS - (skill_level * 5))
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
-			work_time *= chisel.time_multiplier
+			work_time *= chisel.toolspeed
 		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 		user.visible_message("<span class='info'>[user] begins chiseling [src] into blocks.</span>")
 		var/stone_amount = rand(1, max(round(skill_level)/2, 1))
@@ -414,7 +414,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		var/work_time = (10 SECONDS - (skill_level * 5))
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
-			work_time *= chisel.time_multiplier
+			work_time *= chisel.toolspeed
 		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 		user.visible_message("<span class='info'>[user] begins chiseling a part of [src] off.</span>")
 		if(do_after(user, work_time))

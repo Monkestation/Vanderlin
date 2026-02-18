@@ -484,9 +484,7 @@ All foods are distributed among various categories. Use common sense.
 				plate_check.fork_usages +=1
 				if(plate_check.fork_usages >= plate_check.max_fork_usages && !plate_check.dirty)
 					plate_check.dirty = TRUE
-					var/datum/component/particle_spewer = plate_check.GetComponent(/datum/component/particle_spewer/sparkle)
-					if(particle_spewer)
-						qdel(particle_spewer)
+					qdel(plate_check.GetComponent(/datum/component/particle_spewer/sparkle/turf_only))
 					plate_check.update_appearance(UPDATE_OVERLAYS)
 
 		if(M == user)

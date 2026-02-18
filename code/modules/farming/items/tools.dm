@@ -204,7 +204,6 @@
 	associated_skill = /datum/attribute/skill/combat/polearms
 
 	wlength = 66
-	var/time_multiplier = 1
 	max_integrity = INTEGRITY_POOR
 	item_weight = 912 GRAMS
 
@@ -277,14 +276,14 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(istype(T, /turf/open/floor/grass))
 			playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			if(do_after(user, 3 SECONDS * time_multiplier, src))
+			if(do_after(user, 3 SECONDS * toolspeed, src))
 				apply_farming_fatigue(user, 10)
 				T.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
 				playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
 			return
 		if(istype(T, /turf/open/floor/dirt))
 			playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			if(do_after(user, 2 SECONDS * time_multiplier, src))
+			if(do_after(user, 2 SECONDS * toolspeed, src))
 				playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
 				var/obj/structure/soil/soil = get_soil_on_turf(T)
 				if(soil)
@@ -312,7 +311,6 @@
 	smeltresult = null
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST
-	time_multiplier = 2
 	item_weight = 742 GRAMS
 
 /*------------\

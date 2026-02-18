@@ -600,7 +600,7 @@
 				if(method & VAPOR)
 					var/mob/living/L = A
 					touch_protection = L.get_permeability_protection()
-				R.reaction_mob(A, method, R.volume * volume_modifier, show_message, touch_protection)
+				R.expose_mob(A, method, R.volume * volume_modifier, show_message, touch_protection)
 			if("TURF")
 				R.reaction_turf(A, R.volume * volume_modifier, show_message)
 			if("OBJ")
@@ -625,7 +625,7 @@
 			if(method & VAPOR)
 				var/mob/living/L = A
 				touch_protection = L.get_permeability_protection()
-			R.reaction_mob(A, method, R.volume * volume_modifier, show_message, touch_protection)
+			R.expose_mob(A, method, R.volume * volume_modifier, show_message, touch_protection)
 		if("TURF")
 			R.reaction_turf(A, R.volume * volume_modifier, show_message)
 		if("OBJ")
@@ -889,31 +889,21 @@
 					out += "[scent_desc]"
 	return english_list(out, "something")
 
-/datum/reagents/proc/generate_taste_message(minimum_percent=15)
+/datum/reagents/proc/generate_taste_message(mob/living/taster, minimum_percent=15)
 	// the lower the minimum percent, the more sensitive the message is.
 	var/list/out = list()
 	var/list/tastes = list() //descriptor = strength
 	if(minimum_percent <= 100)
-		for(var/datum/reagent/R in reagent_list)
-			if(!R.taste_mult)
+		for(var/datum/reagent/reagent as anything in reagent_list)
+			if(!reagent.taste_mult)
 				continue
 
-			if(istype(R, /datum/reagent/consumable/nutriment))
-				var/list/taste_data = LAZYACCESS(R.data, "tastes")
-				for(var/taste in taste_data)
-					var/ratio = taste_data[taste]
-					var/amount = ratio * R.taste_mult * R.volume
-					if(taste in tastes)
-						tastes[taste] += amount
-					else
-						tastes[taste] = amount
-			else
-				var/taste_desc = R.taste_description
-				var/taste_amount = R.volume * R.taste_mult
-				if(taste_desc in tastes)
-					tastes[taste_desc] += taste_amount
+			var/list/taste_data = reagent.get_taste_description(taster)
+			for(var/taste in taste_data)
+				if(taste in tastes)
+					tastes[taste] += taste_data[taste] * reagent.volume * reagent.taste_mult
 				else
-					tastes[taste_desc] = taste_amount
+					tastes[taste] = taste_data[taste] * reagent.volume * reagent.taste_mult
 		//deal with percentages
 		// TODO it would be great if we could sort these from strong to weak
 		var/total_taste = counterlist_sum(tastes)
@@ -922,17 +912,17 @@
 				var/percent = tastes[taste_desc]/total_taste * 100
 				if(percent < minimum_percent)
 					continue
-				var/intensity_desc = ""
+				var/intensity_desc = "a hint of"
 				if(percent > minimum_percent * 2 || percent == 100)
 					intensity_desc = ""
 				else if(percent > minimum_percent * 3)
-					intensity_desc = ""
+					intensity_desc = "the strong flavor of"
 				if(intensity_desc != "")
 					out += "[intensity_desc] [taste_desc]"
 				else
 					out += "[taste_desc]"
 
-	return english_list(out, "something")
+	return english_list(out, "something indescribable")
 
 /datum/reagents/proc/expose_temperature(temperature, coeff=0.02)
 	if(istype(my_atom,/obj/item/reagent_containers))

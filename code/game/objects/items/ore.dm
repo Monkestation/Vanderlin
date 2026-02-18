@@ -7,25 +7,22 @@
 	grid_width = 32
 	grid_height = 32
 	melt_amount = 120
+	recipe_quality = SMELTERY_QUALITY_NORMAL
 	var/atom/mill_result // What this ore becomes when milled
-	var/mill_yield_bonus = 0 // Extra yield from milling
 
 /obj/item/ore/set_quality(quality)
 	. = ..()
 	// Quality affects melt amount
 	var/quality_multiplier = 1.0
 	switch(recipe_quality)
-		if(2)
+		if(SMELTERY_QUALITY_GOOD)
 			quality_multiplier = 1.15
-		if(3)
+		if(SMELTERY_QUALITY_GREAT)
 			quality_multiplier = 1.3
-		if(4)
-			quality_multiplier = 1.5
+		if(SMELTERY_QUALITY_EXCELLENT)
+			quality_multiplier = 1.45
 
 	melt_amount = round(initial(melt_amount) * quality_multiplier)
-
-	// Update mill yield bonus
-	mill_yield_bonus = (recipe_quality - 1) * 0.2
 
 /obj/item/ore/gold
 	name = "raw gold"
@@ -190,49 +187,35 @@
 	grid_width = 64
 	grid_height = 32
 	melt_amount = 100
-	var/datum/anvil_recipe/currecipe
+	recipe_quality = SMELTERY_QUALITY_NORMAL
 
 /obj/item/ingot/examine()
 	. += ..()
-	if(currecipe)
-		. += span_warning("It is currently being worked on to become [currecipe.get_display_name()].")
 
 /obj/item/ingot/Initialize(mapload, smelt_quality)
 	. = ..()
 	if(smelt_quality)
 		recipe_quality = smelt_quality
-		smelted = TRUE
-	var/datum/quality_calculator/metallurgy/metal_calc = new()
-	metal_calc.apply_smelt_to_ingot(src, recipe_quality, TRUE)
-	qdel(metal_calc)
+		set_quality(recipe_quality)
 
-/obj/item/ingot/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!istype(I, /obj/item/weapon/tongs))
-		return ..()
-	var/obj/item/weapon/tongs/T = I
-	if(!T.held_item)
-		if(item_flags & IN_STORAGE)
-			if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE))
-				return ..()
-		forceMove(T)
-		T.held_item = src
-		T.hott = null
-		T.update_appearance(UPDATE_ICON_STATE)
+/obj/item/ingot/set_quality(quality)
+	. = ..()
+	var/datum/quality_calculator/metallurgy/metal_calc = new()
+	metal_calc.apply_quality_to_item(src, TRUE, recipe_quality)
+	qdel(metal_calc)
 
 /obj/item/ingot/attack_hand_secondary(mob/user, list/modifiers)
 	if(currecipe)
-		to_chat(user, span_notice("You begin canceling the recipe of [currecipe.get_display_name()]."))
+		to_chat(user, span_notice("You begin canceling the recipe of \the [currecipe.name]."))
 		if(do_after(user, 5 SECONDS, src, display_over_user = TRUE))
-			currecipe = null
+			QDEL_NULL(currecipe)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	. = ..()
 
 /obj/item/ingot/Destroy()
-	if(currecipe)
-		QDEL_NULL(currecipe)
 	if(istype(loc, /obj/machinery/anvil))
 		var/obj/machinery/anvil/A = loc
-		A.hingot = null
+		A.working_material = null
 		A.update_appearance(UPDATE_OVERLAYS)
 	return ..()
 

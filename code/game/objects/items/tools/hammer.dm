@@ -19,18 +19,7 @@
 	grid_width = 32
 	grid_height = 64
 	item_weight = 1.24 KILOGRAMS
-	var/time_multiplier = 1
 	var/no_spark = FALSE	//for hammers that shouldn't make sparks on impact
-
-/obj/proc/unbreak()
-	return
-
-/atom/proc/onanvil()
-	if(!isturf(src.loc))
-		return FALSE
-	for(var/obj/machinery/anvil/T in src.loc)
-		return TRUE
-	return FALSE
 
 /obj/structure
 	var/hammer_repair
@@ -182,7 +171,7 @@
 	icon_state = "hammer_s"
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	time_multiplier = 0.8
+	toolspeed = 0.8
 	melt_amount = 50
 	melting_material = /datum/material/steel
 
@@ -197,7 +186,7 @@
 	experimental_onback = FALSE
 	smeltresult = /obj/item/fertilizer/ash
 	max_integrity = INTEGRITY_WORST
-	time_multiplier = 1.2
+	toolspeed = 1.2
 	no_spark = TRUE
 	item_weight = 654 GRAMS
 
@@ -218,7 +207,7 @@
 	force = DAMAGE_HAMMER - 2
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/copper
-	time_multiplier = 1.1
+	toolspeed = 1.1
 	no_spark = TRUE
 	item_weight = 1.12 KILOGRAMS
 
@@ -260,7 +249,7 @@
 	force_wielded = DAMAGE_HAMMER_WIELD + 10
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
-	time_multiplier = 1.5 //it's for crushing skulls not nails
+	toolspeed = 1.5 //it's for crushing skulls not nails
 	item_weight = 8.4 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer/war/malum

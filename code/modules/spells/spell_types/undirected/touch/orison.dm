@@ -216,7 +216,7 @@
 			if (upd)
 				M.update_damage_overlays()
 
-/datum/reagent/water/blessed/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
+/datum/reagent/water/blessed/expose_mob(mob/living/M, method=TOUCH, reac_volume)
 	if (!istype(M))
 		return ..()
 

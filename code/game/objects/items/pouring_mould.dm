@@ -84,7 +84,7 @@
 	if(metal_amount > required_metal - fufilled_metal)
 		metal_amount = required_metal - fufilled_metal
 
-	var/pour_quality = metal.recipe_quality
+	var/pour_quality = metal.get_recipe_quality()
 
 	// Update weighted average quality
 	if(fufilled_metal > 0)
@@ -144,11 +144,8 @@
 
 		if(average_quality > 0)
 			var/datum/quality_calculator/metallurgy/metal_calc = new(
-				base_qual = 0,
 				mat_qual = average_quality, // Use the stored weighted average quality
 				skill_qual = 1, // Could add blacksmithing skill here but I'd need to track from start of the process
-				perf_qual = 0,
-				diff_mod = 0,
 				components = 1
 			)
 			metal_calc.apply_quality_to_item(new_item, TRUE)
@@ -187,11 +184,8 @@
 
 	if(average_quality > 0)
 		var/datum/quality_calculator/metallurgy/metal_calc = new(
-			base_qual = 0,
 			mat_qual = average_quality,
 			skill_qual = 1,
-			perf_qual = 0,
-			diff_mod = 0,
 			components = 1
 		)
 		metal_calc.apply_quality_to_item(new_item, TRUE)

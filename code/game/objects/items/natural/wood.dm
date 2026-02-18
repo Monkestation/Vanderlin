@@ -19,7 +19,6 @@
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
 	item_weight = 2.4 KILOGRAMS
-	var/quality = SMELTERY_LEVEL_NORMAL // For it not to ruin recipes that need it
 	var/lumber = /obj/item/grown/log/tree/small //These are solely for lumberjack calculations
 	var/lumber_alt
 	var/lumber_amount = 1

@@ -33,7 +33,7 @@
 	color = "#8228A0"
 	toxpwr = 3
 
-/datum/reagent/toxin/plasma/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with plasma is stronger than fuel!
+/datum/reagent/toxin/plasma/expose_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with plasma is stronger than fuel!
 	if((method & TOUCH) || (method & VAPOR))
 		M.adjust_fire_stacks(reac_volume / 5)
 		return
@@ -157,7 +157,8 @@
 	taste_description = "acid"
 	self_consuming = TRUE
 
-/datum/reagent/toxin/acid/reaction_mob(mob/living/carbon/C, method=TOUCH, reac_volume)
+/datum/reagent/toxin/acid/expose_mob(mob/living/carbon/C, method=TOUCH, reac_volume)
+	. = ..()
 	if(!istype(C))
 		return
 	reac_volume = round(reac_volume,0.1)
