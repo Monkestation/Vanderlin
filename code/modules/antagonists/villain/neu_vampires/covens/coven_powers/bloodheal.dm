@@ -52,6 +52,7 @@
 
 	// Heal different damage types
 	owner.heal_overall_damage(bashing_lethal_heal, aggravated_heal)
+	owner.adjustToxLoss(-HEAL_AGGRAVATED * level * 0.5)
 
 	// Heal wounds (only at higher levels)
 	if(length(owner.get_wounds()) && level >= 3)
