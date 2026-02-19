@@ -517,5 +517,65 @@
                 "bugfix": "Fixed packmule quirk"
             }
         ]
+    },
+    "2026-02-19": {
+        "realforest2001": [
+            {
+                "bugfix": "Automaton no longer lags everyone to death."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed no difference between right and middle mouse on the loot panel"
+            },
+            {
+                "bugfix": "Fixed the loot panel not allowing middle clicks"
+            }
+        ],
+        "Rockslp": [
+            {
+                "balance": "Exiled Warrior now gets eastern tattoo defenses."
+            },
+            {
+                "rscdel": "Removes some largely unused intents."
+            },
+            {
+                "qol": "Makes combat easier for laggy players by changing charge to clickcd on many melee weapons."
+            },
+            {
+                "balance": "Rebalances weapons & intents."
+            },
+            {
+                "bugfix": "Fixes various weapon issues."
+            },
+            {
+                "code_imp": "Some weapon define changes on values and intents, along with slight armor protection value changes."
+            },
+            {
+                "rscdel": "You can no longer de-skeletonize people by cauterizing them."
+            },
+            {
+                "balance": "You can no longer use a wooden psycross to cauterize people, it is wood. Silver still works."
+            },
+            {
+                "bugfix": "Makes it so the cautery actually gets the cauterization bonus."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscdel": "Reverted changes made to existing triumph buys"
+            },
+            {
+                "bugfix": "Fixed some things regarding when stress tries to display"
+            },
+            {
+                "bugfix": "fish was bit 0 times!!! 0!!!"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "sound": "Adds a new theme for the Forest Garrison, with the previous theme being relegated to the Dendorite theme."
+            }
+        ]
     }
 }
