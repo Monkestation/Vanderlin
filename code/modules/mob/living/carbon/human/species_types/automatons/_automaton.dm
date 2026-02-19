@@ -19,7 +19,7 @@
 	default_color = "B87333"
 
 	changesource_flags = WABBAJACK
-
+	meat = list()
 	no_equip = list(
 		ITEM_SLOT_SHIRT,
 		ITEM_SLOT_MASK,
@@ -35,10 +35,7 @@
 	species_traits = list(
 		NO_UNDERWEAR,
 		NOTRANSSTING,
-		TRAIT_NOFALLDAMAGE1,
-		TRAIT_RESISTCOLD,
-		TRAIT_RESISTHEAT,
-		TRAIT_NOBREATH
+		NOBLOOD
 	)
 	inherent_traits = list(
 		TRAIT_NOMOOD,
@@ -47,7 +44,11 @@
 		TRAIT_EASYLIMBDISABLE,
 		TRAIT_NOSTAMINA,
 		TRAIT_EASYDISMEMBER,
-		TRAIT_LIMBATTACHMENT
+		TRAIT_LIMBATTACHMENT,
+		TRAIT_NOFALLDAMAGE1,
+		TRAIT_RESISTCOLD,
+		TRAIT_RESISTHEAT,
+		TRAIT_NOBREATH,
 	)
 
 	specstats_m = list(
@@ -106,86 +107,11 @@
 		/datum/action/manage_voice_actions
 	)
 
-	//lol
-	var/static/list/given_voices = list(
-		/mob/living/carbon/human/proc/voice_abyssorpraise,
-		/mob/living/carbon/human/proc/voice_againsttime,
-		/mob/living/carbon/human/proc/voice_astratapraise,
-		/mob/living/carbon/human/proc/voice_atonce,
-		/mob/living/carbon/human/proc/voice_awaitingorders,
-		/mob/living/carbon/human/proc/voice_beholdthemight,
-		/mob/living/carbon/human/proc/voice_building,
-		/mob/living/carbon/human/proc/voice_burn,
-		/mob/living/carbon/human/proc/voice_cataclysm,
-		/mob/living/carbon/human/proc/voice_combatmodeengaged,
-		/mob/living/carbon/human/proc/voice_commandreceived,
-		/mob/living/carbon/human/proc/voice_crownsdecree,
-		/mob/living/carbon/human/proc/voice_damagereceived,
-		/mob/living/carbon/human/proc/voice_deathcomes,
-		/mob/living/carbon/human/proc/voice_dendorpraise,
-		/mob/living/carbon/human/proc/voice_destroying,
-		/mob/living/carbon/human/proc/voice_dreamlesspause,
-		/mob/living/carbon/human/proc/voice_elfdetected,
-		/mob/living/carbon/human/proc/voice_eorapraise,
-		/mob/living/carbon/human/proc/voice_eorapraise2,
-		/mob/living/carbon/human/proc/voice_error,
-		/mob/living/carbon/human/proc/voice_everymovementispain,
-		/mob/living/carbon/human/proc/voice_executingorders,
-		/mob/living/carbon/human/proc/voice_fleshyields,
-		/mob/living/carbon/human/proc/voice_fleshyieldsrare,
-		/mob/living/carbon/human/proc/voice_forceauthorized,
-		/mob/living/carbon/human/proc/voice_fuellow,
-		/mob/living/carbon/human/proc/voice_hahaha,
-		/mob/living/carbon/human/proc/voice_hail,
-		/mob/living/carbon/human/proc/voice_halt,
-		/mob/living/carbon/human/proc/voice_heatsignatureacquired,
-		/mob/living/carbon/human/proc/voice_help,
-		/mob/living/carbon/human/proc/voice_helpme,
-		/mob/living/carbon/human/proc/voice_iamnotalive,
-		/mob/living/carbon/human/proc/voice_iamthechildrenofman,
-		/mob/living/carbon/human/proc/voice_icannotcomply,
-		/mob/living/carbon/human/proc/voice_identityauthorized,
-		/mob/living/carbon/human/proc/voice_ihatewomen,
-		/mob/living/carbon/human/proc/voice_ilovemen,
-		/mob/living/carbon/human/proc/voice_ironwithin,
-		/mob/living/carbon/human/proc/voice_iwillcomply,
-		/mob/living/carbon/human/proc/voice_jesterdetected,
-		/mob/living/carbon/human/proc/voice_kill,
-		/mob/living/carbon/human/proc/voice_malumpraise,
-		/mob/living/carbon/human/proc/voice_movingtolocation,
-		/mob/living/carbon/human/proc/voice_myliege,
-		/mob/living/carbon/human/proc/voice_mysouliscaged,
-		/mob/living/carbon/human/proc/voice_necrapraise,
-		/mob/living/carbon/human/proc/voice_no,
-		/mob/living/carbon/human/proc/voice_nocpraise,
-		/mob/living/carbon/human/proc/voice_nowomenallowed,
-		/mob/living/carbon/human/proc/voice_obnoxiouslylongscream,
-		/mob/living/carbon/human/proc/voice_ohshitsoldiergrenadeoorah,
-		/mob/living/carbon/human/proc/voice_organicpresencedetected,
-		/mob/living/carbon/human/proc/voice_pestrapraise,
-		/mob/living/carbon/human/proc/voice_psydonlives,
-		/mob/living/carbon/human/proc/voice_ravoxpraise,
-		/mob/living/carbon/human/proc/voice_schmelfdetected,
-		/mob/living/carbon/human/proc/voice_silenceorganic,
-		/mob/living/carbon/human/proc/voice_statuscritical,
-		/mob/living/carbon/human/proc/voice_statuscritical2,
-		/mob/living/carbon/human/proc/voice_tobones,
-		/mob/living/carbon/human/proc/voice_warning,
-		/mob/living/carbon/human/proc/voice_wecannotexpectgod,
-		/mob/living/carbon/human/proc/voice_womandetected,
-		/mob/living/carbon/human/proc/voice_wrenchbones,
-		/mob/living/carbon/human/proc/voice_xylixpraise,
-		/mob/living/carbon/human/proc/voice_yes,
-		/mob/living/carbon/human/proc/voice_yourboneswillneverbefound,
-		/mob/living/carbon/human/proc/voice_yourluxwillbemine,
-	)
-
 /datum/species/automaton/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
 	C.AddComponent(/datum/component/abberant_eater, list(/obj/item/ore/coal, /obj/item/grown/log/tree))
 	C.AddComponent(/datum/component/steam_life)
 	C.AddComponent(/datum/component/command_follower)
-	C.AddElement(/datum/element/footstep, FOOTSTEP_MOB_METAL, 1, -2)
 	C.AddComponent(/datum/component/augmentable)
 
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
@@ -194,7 +120,6 @@
 	for(var/datum/action/action as anything in actions)
 		C.add_spell(action)
 
-	add_verb(C, given_voices)
 	C.add_movespeed_modifier("automaton", multiplicative_slowdown = 0.9)
 
 /datum/species/automaton/on_species_loss(mob/living/carbon/C)

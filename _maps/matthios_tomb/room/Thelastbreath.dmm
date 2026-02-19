@@ -1,26 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aa" = (
-/obj/effect/decal/cleanable/blood/gibs/down,
-/obj/effect/decal/cleanable/blood/gibs,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
-"ah" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "ai" = (
 /obj/structure/table/optable,
 /obj/structure/curtain,
 /turf/open/floor/hexstone,
-/area/under/tomb/indoors)
-"ak" = (
-/obj/structure/floordoor/gatehatch/outer{
-	redstone_id = "trap1"
-	},
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/openspace,
 /area/under/tomb/indoors)
 "am" = (
 /turf/open/floor/church,
@@ -46,13 +28,6 @@
 /obj/structure/bars,
 /turf/open/floor/cobble,
 /area/under/tomb)
-"aA" = (
-/obj/structure/floordoor/gatehatch/inner{
-	redstone_id = "trap1"
-	},
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/openspace,
-/area/under/tomb/indoors)
 "aC" = (
 /obj/structure/door/stone,
 /obj/effect/decal/cleanable/blood/tracks,
@@ -84,12 +59,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
-"bh" = (
-/obj/effect/waterfall/acid{
-	pixel_y = 32
-	},
-/turf/open/openspace,
-/area/under/tomb/cave/lava)
 "bj" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decostone,
@@ -125,6 +94,10 @@
 /obj/structure/trap/chill,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
+"bP" = (
+/obj/effect/decal/cleanable/blood/gibs/core,
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
 "bX" = (
 /obj/structure/table/stone_small,
 /obj/item/reagent_containers/food/snacks/rotten/chickenleg,
@@ -159,9 +132,6 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/under/tomb)
-"cr" = (
-/turf/open/openspace,
 /area/under/tomb)
 "cs" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -519,6 +489,9 @@
 /obj/structure/bookcase/random,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
+"gS" = (
+/turf/open/openspace,
+/area/under/tomb/indoors)
 "gU" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -573,6 +546,15 @@
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors)
+"hC" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
+"hI" = (
+/obj/effect/decal/cleanable/blood,
+/obj/item/natural/stone,
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
 "hK" = (
 /obj/item/book/random_book/myths,
 /turf/open/floor/cobblerock,
@@ -596,16 +578,6 @@
 "ib" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/tile/kitchen,
-/area/under/tomb/indoors)
-"id" = (
-/obj/structure/floordoor/gatehatch/outer{
-	redstone_id = "trap1"
-	},
-/obj/structure/kybraxor{
-	redstone_id = "trap1"
-	},
-/mob/living/carbon/human/species/rousman/ambush,
-/turf/open/openspace,
 /area/under/tomb/indoors)
 "ie" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -745,6 +717,9 @@
 /obj/item/natural/glass/shard,
 /turf/open/floor/church,
 /area/under/tomb/indoors/church)
+"jI" = (
+/turf/open/openspace,
+/area/under/tomb)
 "jR" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -1202,11 +1177,6 @@
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass,
 /area/under/tomb)
-"qy" = (
-/obj/effect/decal/cleanable/blood,
-/obj/item/natural/stone,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "qz" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/hexstone,
@@ -1347,6 +1317,12 @@
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
+"sG" = (
+/obj/structure/floordoor/gatehatch/outer{
+	redstone_id = "trap1"
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors)
 "sJ" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobblerock,
@@ -1459,11 +1435,6 @@
 /obj/item/clothing/neck/psycross/silver,
 /turf/open/floor/cobble,
 /area/under/tomb)
-"ug" = (
-/obj/effect/decal/cleanable/blood,
-/obj/item/natural/rock,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "ul" = (
 /obj/structure/chair/bench/couchablack/r,
 /turf/open/floor/carpet/purple,
@@ -1489,6 +1460,17 @@
 /obj/structure/door/stone,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/church,
+/area/under/tomb/indoors)
+"uy" = (
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "trap1"
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors)
+"uG" = (
+/obj/effect/decal/cleanable/blood,
+/obj/item/natural/rock,
+/turf/open/water/swamp/deep,
 /area/under/tomb/indoors)
 "uL" = (
 /obj/structure/lever/hidden{
@@ -1531,6 +1513,13 @@
 /area/under/tomb)
 "vh" = (
 /turf/open/floor/cobblerock,
+/area/under/tomb/indoors)
+"vi" = (
+/obj/structure/floordoor/gatehatch/inner{
+	redstone_id = "trap1"
+	},
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "vk" = (
 /obj/structure/closet/crate/chest/gold,
@@ -1584,9 +1573,22 @@
 /obj/item/candle/yellow/lit/infinite,
 /turf/open/floor/church,
 /area/under/tomb/indoors/church)
-"wc" = (
+"we" = (
+/obj/effect/waterfall/acid{
+	pixel_y = 32
+	},
 /turf/open/openspace,
 /area/under/tomb/cave/lava)
+"wg" = (
+/obj/structure/floordoor/gatehatch/outer{
+	redstone_id = "trap1"
+	},
+/obj/structure/kybraxor{
+	redstone_id = "trap1"
+	},
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/openspace,
+/area/under/tomb/indoors)
 "wy" = (
 /obj/structure/chair/bench/couchablack,
 /obj/item/reagent_containers/glass/cup/golden,
@@ -1697,9 +1699,6 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
-"yw" = (
-/turf/open/openspace,
-/area/under/tomb/indoors)
 "yC" = (
 /turf/open/floor/carpet/purple,
 /area/under/tomb/indoors)
@@ -1790,6 +1789,10 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/grass,
 /area/under/tomb)
+"zU" = (
+/obj/effect/decal/cleanable/blood/gibs/up,
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
 "Aa" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/grown/log/tree/stick,
@@ -1861,12 +1864,6 @@
 "AG" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/hexstone,
-/area/under/tomb/indoors)
-"AK" = (
-/obj/structure/floordoor/gatehatch/outer{
-	redstone_id = "trap1"
-	},
-/turf/open/openspace,
 /area/under/tomb/indoors)
 "AU" = (
 /obj/structure/trap/wall_projectile,
@@ -1995,10 +1992,6 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
 /area/under/tomb)
-"CG" = (
-/obj/effect/decal/cleanable/blood/gibs/core,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "CR" = (
 /obj/structure/fluff/wallclock,
 /turf/closed/wall/mineral/decostone,
@@ -2039,10 +2032,6 @@
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb/indoors/church)
-"DN" = (
-/obj/effect/decal/cleanable/blood/gibs/up,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "DO" = (
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/churchbrick,
@@ -2056,6 +2045,13 @@
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
+"DY" = (
+/obj/structure/floordoor/gatehatch/outer{
+	redstone_id = "trap1"
+	},
+/mob/living/carbon/human/species/rousman/ambush,
+/turf/open/openspace,
+/area/under/tomb/indoors)
 "Ea" = (
 /obj/item/reagent_containers/food/snacks/badrecipe,
 /obj/effect/decal/cleanable/blood,
@@ -2425,6 +2421,9 @@
 "Ir" = (
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
+"Iv" = (
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
 "Iw" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/fullgrass,
@@ -2706,9 +2705,6 @@
 "Mi" = (
 /turf/open/floor/church,
 /area/under/tomb/indoors)
-"Ms" = (
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "Mt" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -2868,10 +2864,6 @@
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
-"OH" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "OI" = (
 /obj/item/natural/rock,
 /obj/effect/decal/cleanable/blood,
@@ -2938,10 +2930,6 @@
 	},
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb/indoors)
-"Qo" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/water/swamp/deep,
-/area/under/tomb/indoors)
 "Qp" = (
 /obj/structure/door/stone,
 /turf/open/floor/cobble,
@@ -2984,6 +2972,11 @@
 /obj/item/natural/stone,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/royal)
+"QV" = (
+/obj/structure/table/stone_small,
+/obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison,
+/turf/open/floor/tile/kitchen,
+/area/under/tomb/indoors)
 "Rb" = (
 /obj/structure/lever/hidden{
 	redstone_id = "L7"
@@ -3005,11 +2998,6 @@
 "Rm" = (
 /obj/structure/roguetent/preopen,
 /turf/open/floor/tile,
-/area/under/tomb/indoors)
-"Rn" = (
-/obj/structure/table/stone_small,
-/obj/item/reagent_containers/food/snacks/pie/cooked/poison,
-/turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
 "Rr" = (
 /obj/effect/decal/cleanable/blood,
@@ -3106,6 +3094,13 @@
 /obj/item/gem/green,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors/church)
+"Sn" = (
+/obj/effect/decal/cleanable/blood/gibs/down,
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/spawner/map_spawner/loot,
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
 "So" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/bookcase,
@@ -3350,6 +3345,10 @@
 /obj/effect/decal/cleanable/food/pie_smudge,
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
+"VF" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
 "VG" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_y = 6
@@ -3391,12 +3390,6 @@
 /obj/structure/table/stone_small,
 /obj/item/reagent_containers/food/snacks/rotten/bacon,
 /turf/open/floor/tile/kitchen,
-/area/under/tomb/indoors)
-"Wc" = (
-/obj/structure/floordoor/gatehatch/inner{
-	redstone_id = "trap1"
-	},
-/turf/open/openspace,
 /area/under/tomb/indoors)
 "Wd" = (
 /obj/structure/bookcase,
@@ -3511,6 +3504,9 @@
 /obj/structure/trap/spike,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
+"Xz" = (
+/turf/open/openspace,
+/area/under/tomb/cave/lava)
 "XA" = (
 /turf/closed/wall/mineral/tent,
 /area/under/tomb/indoors)
@@ -3531,6 +3527,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/tomb)
+"XO" = (
+/obj/effect/decal/cleanable/blood/gibs/limb,
+/turf/open/water/swamp/deep,
+/area/under/tomb/indoors)
 "XS" = (
 /obj/structure/bookcase/random,
 /obj/structure/spider/stickyweb/solo,
@@ -4484,7 +4484,7 @@ JO
 Sd
 YH
 YH
-Rn
+QV
 GY
 Ir
 WU
@@ -4636,9 +4636,9 @@ tB
 Mi
 Mi
 rc
-ah
-ug
-OH
+XO
+uG
+VF
 rc
 hU
 Mi
@@ -4683,9 +4683,9 @@ gG
 dK
 bg
 nL
-qy
-aa
-Ms
+hI
+Sn
+Iv
 nL
 bg
 Pw
@@ -4730,9 +4730,9 @@ Ly
 yI
 ES
 nL
-CG
-Qo
-DN
+bP
+hC
+zU
 nL
 bg
 mh
@@ -5870,10 +5870,10 @@ Zq
 hr
 Qr
 Qr
-wc
+Xz
 Qr
 Qr
-wc
+Xz
 Qr
 Qr
 Qr
@@ -5917,15 +5917,15 @@ Zq
 hr
 Qr
 Qr
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 nw
 Qr
 Qr
@@ -5962,21 +5962,21 @@ Zq
 Zq
 Zq
 hr
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 Qr
 Qr
-wc
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 Qr
 "}
 (5,1,2) = {"
@@ -5999,30 +5999,30 @@ La
 hr
 Zq
 Sb
-yw
+gS
 hr
 hr
 hr
 hr
 hr
-yw
+gS
 CT
 Zq
 hr
-wc
-wc
-wc
-wc
-bh
+Xz
+Xz
+Xz
+Xz
+we
 Qr
 Qr
-wc
-wc
-wc
-bh
-wc
-wc
-wc
+Xz
+Xz
+Xz
+we
+Xz
+Xz
+Xz
 Qr
 Qr
 "}
@@ -6046,30 +6046,30 @@ La
 hr
 Zq
 Sb
-yw
+gS
 hr
 Hz
 Hz
 Hz
 hr
-yw
+gS
 CT
 Zq
 hr
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 nw
-wc
-wc
+Xz
+Xz
 nw
 Qr
 "}
@@ -6107,15 +6107,15 @@ Wt
 Wt
 VJ
 Pp
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 nw
 nw
 Qr
@@ -6144,7 +6144,7 @@ xD
 ef
 Ir
 Xi
-yw
+gS
 Ir
 Qk
 Gb
@@ -6154,15 +6154,15 @@ gl
 Hu
 Kl
 VJ
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
 Qr
 nw
-wc
-wc
-wc
+Xz
+Xz
+Xz
 Qr
 nw
 Qr
@@ -6189,9 +6189,9 @@ HK
 mE
 ob
 ef
-yw
-yw
-yw
+gS
+gS
+gS
 Ir
 Uy
 hh
@@ -6202,14 +6202,14 @@ Kl
 Kl
 Wt
 Jq
-wc
-wc
+Xz
+Xz
 Qr
 nw
 nw
 nw
-wc
-wc
+Xz
+Xz
 nw
 nw
 Qr
@@ -6237,8 +6237,8 @@ mE
 ob
 ef
 Ir
-yw
-yw
+gS
+gS
 Ir
 hr
 Aa
@@ -6249,14 +6249,14 @@ Aa
 Kl
 VJ
 Jq
-wc
-wc
+Xz
+Xz
 nw
 nw
 Qr
 nw
-wc
-wc
+Xz
+Xz
 Qr
 Qr
 Qr
@@ -6285,7 +6285,7 @@ ob
 JB
 Ir
 Ir
-yw
+gS
 Ir
 Pp
 Pp
@@ -6296,15 +6296,15 @@ hr
 EY
 Pp
 Jq
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 Qr
 Qr
 "}
@@ -6330,9 +6330,9 @@ Aj
 Bz
 Bz
 ef
-yw
-yw
-yw
+gS
+gS
+gS
 Ir
 Pp
 PR
@@ -6343,15 +6343,15 @@ Fg
 PR
 Ia
 Jq
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 Qr
 Qr
 "}
@@ -6389,15 +6389,15 @@ PR
 PR
 PR
 Ia
-wc
-wc
-wc
-bh
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+we
+Xz
+Xz
+Xz
+Xz
+Xz
 Qr
 Qr
 Qr
@@ -6426,7 +6426,7 @@ ob
 ob
 ob
 ef
-yw
+gS
 Da
 PR
 PR
@@ -6436,14 +6436,14 @@ ej
 FI
 Zh
 Ia
-wc
+Xz
 Qr
-wc
-wc
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
+Xz
+Xz
 Qr
 Qr
 Qr
@@ -6473,7 +6473,7 @@ mE
 Mv
 ob
 ef
-yw
+gS
 Da
 PR
 xy
@@ -6483,12 +6483,12 @@ nh
 PR
 BR
 hr
-wc
-wc
-wc
-wc
+Xz
+Xz
+Xz
+Xz
 Qr
-wc
+Xz
 Qr
 Qr
 Qr
@@ -6520,7 +6520,7 @@ mE
 ZJ
 ob
 ef
-yw
+gS
 Da
 xy
 PR
@@ -6530,8 +6530,8 @@ PR
 Fg
 PR
 hr
-wc
-wc
+Xz
+Xz
 Qr
 Qr
 Qr
@@ -6577,7 +6577,7 @@ PR
 gg
 PR
 hr
-wc
+Xz
 Qr
 Qr
 Qr
@@ -6689,8 +6689,8 @@ hr
 Zq
 Zq
 Zq
-yw
-yw
+gS
+gS
 NZ
 Yz
 mE
@@ -6724,8 +6724,8 @@ Lr
 Lr
 ed
 pO
-cr
-cr
+jI
+jI
 ve
 ve
 ve
@@ -6752,9 +6752,9 @@ mE
 mE
 MI
 NZ
-ak
-Wc
-id
+DY
+uy
+wg
 hr
 Yi
 ed
@@ -6799,9 +6799,9 @@ mE
 mE
 ob
 NZ
-AK
-aA
-ak
+sG
+vi
+DY
 tF
 ed
 ed
@@ -6846,9 +6846,9 @@ mE
 mE
 ob
 NZ
-ak
-Wc
-ak
+DY
+uy
+DY
 hr
 lW
 ed
@@ -6971,8 +6971,8 @@ hr
 Zq
 Zq
 Zq
-yw
-yw
+gS
+gS
 NZ
 SF
 mE
@@ -7006,8 +7006,8 @@ qP
 Pp
 uN
 pO
-cr
-cr
+jI
+jI
 ve
 ve
 ve
@@ -7040,9 +7040,9 @@ zR
 RK
 zR
 bj
-cr
-cr
-cr
+jI
+jI
+jI
 pO
 tC
 Gf
@@ -7348,9 +7348,9 @@ Fa
 Fa
 Et
 Et
-cr
-cr
-cr
+jI
+jI
+jI
 Et
 Et
 Et
@@ -7394,16 +7394,16 @@ Fa
 Fa
 Fa
 Et
-cr
-cr
-cr
-cr
-cr
-cr
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
+jI
+jI
+jI
+jI
+jI
+jI
 Et
 Et
 Et
@@ -7441,16 +7441,16 @@ Fa
 Fa
 Fa
 Et
-cr
-cr
-cr
-cr
-cr
-cr
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
+jI
+jI
+jI
+jI
+jI
+jI
 Et
 Et
 Et
@@ -7488,18 +7488,18 @@ Fa
 Fa
 Et
 Et
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
 Ty
 WW
 OP
-cr
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
+jI
 Et
 Lt
 yj
@@ -7534,18 +7534,18 @@ hr
 Fa
 Fa
 Et
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
 WW
 nc
 Ty
 WW
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
 Et
 Et
 xd
@@ -7581,18 +7581,18 @@ hr
 Fa
 Et
 Et
-cr
-cr
-cr
+jI
+jI
+jI
 OP
 WW
 ep
 ep
-cr
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
+jI
 Et
 Pp
 Pp
@@ -7628,29 +7628,29 @@ hr
 Fa
 Et
 Et
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
 WW
 Ty
 WW
-cr
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
+jI
 Et
 Pp
 Zq
 Sb
-yw
+gS
 hr
 Hz
 Hz
 Hz
 hr
-yw
+gS
 CT
 Zq
 hr
@@ -7676,28 +7676,28 @@ Fa
 Fa
 Et
 pn
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
 ep
 OP
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
 pn
 Et
 Pp
 Zq
 Sb
-yw
+gS
 hr
 hr
 hr
 hr
 hr
-yw
+gS
 CT
 Zq
 hr
@@ -7724,14 +7724,14 @@ Fa
 Fa
 pn
 Et
-cr
-cr
-cr
-cr
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
+jI
+jI
+jI
+jI
 pn
 Et
 Fa
@@ -7773,11 +7773,11 @@ Fa
 Et
 Et
 Et
-cr
-cr
-cr
-cr
-cr
+jI
+jI
+jI
+jI
+jI
 Et
 Et
 Fa
@@ -7821,7 +7821,7 @@ Fa
 Fa
 Et
 Et
-cr
+jI
 Et
 Et
 Et

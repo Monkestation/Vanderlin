@@ -144,6 +144,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	changesource_flags = WABBAJACK
 	var/raceicon = "rousman"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/rousman
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1, /obj/item/natural/fur/rous = 0.5)
 
 /datum/species/rousman/update_damage_overlays(mob/living/carbon/human/H)
 	return

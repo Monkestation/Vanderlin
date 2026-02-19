@@ -196,7 +196,10 @@
 				for(var/datum/triumph_buy/conflict_check in SStriumphs.active_triumph_buy_queue)
 					if(current_check.type in conflict_check.conflicts_with)
 						string = "<td class='triumph_filler_cells'><a class='triumph_text_buy' href='byond://?src=\ref[src];handle_buy_button=\ref[current_check];'><span class='strikethru_back'>CONFLICT</span></a></td>"
-
+			if(!current_check.allow_multiple_buys && linked_client?.has_triumph_buy(current_check.triumph_buy_id))
+				string = "<td class='triumph_buy_wrapper'><a class='triumph_text_buy' href='byond://?src=\ref[src];handle_buy_button=\ref[current_check];'>PURCHASED</a></td>"
+			if(current_check.disabled)
+				string = "<td class='triumph_buy_wrapper'><a class='triumph_text_buy' href='byond://?src=\ref[src];handle_buy_button=\ref[current_check];'><span class='strikethru_back'>DISABLED</span></a></td>"
 			data += string
 			data += "</tr>"
 

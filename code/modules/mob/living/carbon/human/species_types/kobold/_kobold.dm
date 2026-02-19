@@ -62,6 +62,7 @@
 	soundpack_f = /datum/voicepack/male/kobold
 
 	exotic_bloodtype = /datum/blood_type/human/kobold
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/fatty/kobold = 1)
 
 	custom_id = "dwarf"
 	custom_clothes = TRUE
@@ -127,7 +128,7 @@
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	if(hungry_hungry_kobold)
-		var/datum/component/abberant_eater = GetComponent(/datum/component/abberant_eater)
+		var/datum/component/abberant_eater = C.GetComponent(/datum/component/abberant_eater)
 		if(abberant_eater)
 			abberant_eater.RemoveComponent()
 	UnregisterSignal(C, COMSIG_MOB_SAY)

@@ -438,6 +438,10 @@
 	// If this weapon has no user and is somehow attacking you just return default.
 	if(!istype(user))
 		return newforce
+
+	var/dullness_ratio
+	if(I.max_blade_int && I.sharpness != IS_BLUNT)
+		dullness_ratio = I.blade_int / I.max_blade_int
 	var/cont = FALSE
 	var/used_str = user.STASTR
 	if(iscarbon(user))
@@ -467,6 +471,12 @@
 			// For each level of potence user gains 0.5 STR, at 5 Potence their STR buff is 2.5
 	if(used_str >= 11)
 		newforce = newforce + (newforce * ((used_str - 10) * 0.1))
+		if(dullness_ratio && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
+			if(dullness_ratio <= SHARPNESS_TIER2_THRESHOLD)
+				used_str = 0
+			else if(dullness_ratio < SHARPNESS_TIER1_THRESHOLD)
+				var/strlerp = (dullness_ratio - SHARPNESS_TIER2_THRESHOLD) / (SHARPNESS_TIER1_THRESHOLD - SHARPNESS_TIER2_THRESHOLD)
+				used_str *= strlerp
 	else if(used_str <= 9)
 		newforce = newforce - (newforce * ((10 - used_str) * 0.1))
 
@@ -575,6 +585,13 @@
 	* flag. This is alot.
 	*/
 	newforce = (newforce * user.used_intent.damfactor) * dullfactor
+	if(user.used_intent.damfactor && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
+		if(dullness_ratio <= SHARPNESS_TIER2_THRESHOLD)
+			newforce = 0
+		else if(dullness_ratio <= SHARPNESS_TIER1_THRESHOLD)
+			var/damflerp = (dullness_ratio - SHARPNESS_TIER2_THRESHOLD) / (SHARPNESS_TIER1_THRESHOLD - SHARPNESS_TIER2_THRESHOLD)
+			newforce *= damflerp
+			newforce = round(newforce)
 	if(user.used_intent.get_chargetime() && user.client?.chargedprog < 100)
 		newforce = newforce * round(user.client?.chargedprog / 100, 0.1)
 	// newforce = round(newforce, 1)
@@ -586,6 +603,12 @@
 	newforce = round(newforce,1)
 	//This is returning the maximum of the arguments meaning this is to prevent negative values.
 	newforce = max(newforce, 1)
+	if(dullness_ratio)
+		if(dullness_ratio < SHARPNESS_TIER2_THRESHOLD && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
+			var/lerpratio = LERP(0, SHARPNESS_TIER2_THRESHOLD, (dullness_ratio / SHARPNESS_TIER2_THRESHOLD))
+			if(prob(33))
+				to_chat(user, span_info("The blade is dull..."))
+			newforce *= (lerpratio * 2)
 	return newforce
 
 /mob/living/proc/simple_limb_hit(zone)
