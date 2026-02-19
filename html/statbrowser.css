@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: 'Blackmoor LET';
-  src: url('blackmoor.ttf') format('truetype');
+  src: url('BlackmoorLET.ttf') format('truetype');
 }
 
 .light:root {
@@ -91,7 +91,7 @@ img {
 }
 
 .button {
-  font-family: Blackmoor LET;
+  font-family: "Blackmoor LET", Pterra;
   display: inline-table;
   cursor: pointer;
   user-select: none;

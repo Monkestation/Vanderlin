@@ -8,57 +8,57 @@
 
 @font-face {
   font-family: 'Pterra';
-  src: url('~fonts/pterra.ttf');
+  src: url('~fonts/pterra.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Blackmoor LET';
-  src: url('~fonts/blackmoor.ttf');
+  src: url('~fonts/BlackmoorLET.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Underwater Love';
-  src: url('~fonts/languages/deepspeak.ttf');
+  src: url('~fonts/languages/deepspeak.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Dauphin';
-  src: url('~fonts/languages/elf.ttf');
+  src: url('~fonts/languages/Dauphinn.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Thief by The Riddler';
-  src: url('~fonts/languages/orc.ttf');
+  src: url('~fonts/languages/orc.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'MasonAlternate';
-  src: url('~fonts/languages/dwarf.ttf');
+  src: url('~fonts/languages/dwarf.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Breitkopf Fraktur';
-  src: url('~fonts/languages/oldpsydonic.ttf');
+  src: url('~fonts/languages/oldpsydonic.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Byzantine';
-  src: url('~fonts/languages/zalad.ttf');
+  src: url('~fonts/languages/zalad.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Arabolical';
-  src: url('~fonts/languages/celestial.ttf');
+  src: url('~fonts/languages/celestial.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Nosfer';
-  src: url('~fonts/languages/undead.ttf');
+  src: url('~fonts/languages/undead.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Xaphan';
-  src: url('~fonts/languages/hell.ttf');
+  src: url('~fonts/languages/hell.ttf') format('truetype');
 }
 
 html,
@@ -717,7 +717,7 @@ h2.alert {
 }
 
 .elf {
-  font-family: Dauphin, cursive, Pterra;
+  font-family: Dauphin, Pterra;
 }
 
 .dwarf {
@@ -733,12 +733,25 @@ h2.alert {
   font-size: 110%
 }
 
-.beast {
+.beast,
+.orc {
   font-family: "Thief by The Riddler", Pterra;
 }
 
 .deepspeak {
   font-family: "Underwater Love", Pterra;
+}
+
+.zalad {
+  font-family: Byzantine, Pterra;
+}
+
+.undead {
+  font-family: Nosfer, Pterra;
+}
+
+.oldpsydonic {
+  font-family: "Breitkopf Fraktur", Pterra;
 }
 
 .torture {
