@@ -2247,6 +2247,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		return
 	character.age = age
 	character.gender = gender
+	character.set_patron(selected_patron)
 	character.set_species(pref_species.type, icon_update = FALSE, pref_load = src)
 	if(real_name in GLOB.chosen_names)
 		character.real_name = pref_species.random_name(gender)
@@ -2283,7 +2284,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	character.domhand = domhand
 	character.voice_color = voice_color
-	character.set_patron(selected_patron)
 	character.familytree_pref = family
 	character.gender_choice_pref = gender_choice
 	character.setspouse = setspouse

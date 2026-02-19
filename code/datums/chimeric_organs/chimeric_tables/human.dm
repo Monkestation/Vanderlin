@@ -277,3 +277,53 @@
 	node_tier = 1
 	node_purity_min = 30
 	node_purity_max = 45
+
+/// Let's go gambling
+/datum/chimeric_table/random
+	abstract_type = /datum/chimeric_table/random
+
+	var/input_blacklist = list()
+	var/max_inputs = 5
+
+	var/output_blacklist = list()
+	var/max_outputs = 6
+
+/datum/chimeric_table/random/New()
+	. = ..()
+
+	for(var/datum/chimeric_node/input/input as anything in subtypesof(/datum/chimeric_node/input))
+		if(IS_ABSTRACT(input))
+			continue
+		if(input in input_blacklist)
+			continue
+		if(length(input_nodes) >= max_inputs)
+			break
+		input_nodes[input] = rand(1, 20)
+
+	for(var/datum/chimeric_node/output/output as anything in subtypesof(/datum/chimeric_node/output))
+		if(IS_ABSTRACT(output))
+			continue
+		if(output in output_blacklist)
+			continue
+		if(length(output_nodes) >= max_outputs)
+			break
+		output_nodes[output] = rand(1, 20)
+
+/datum/chimeric_table/random/subterran_dwarf
+	name = "Jarosite Dwarf"
+
+	compatible_blood_types = list(
+		/datum/blood_type/human/dwarf/subterra,
+	)
+
+	preferred_blood_types = list(
+		/datum/blood_type/human/dwarf/subterra,
+	)
+
+	max_inputs = 3
+	max_outputs = 2
+
+	base_blood_cost = 0.3
+	node_tier = 1
+	node_purity_min = 30
+	node_purity_max = 45
