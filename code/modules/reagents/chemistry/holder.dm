@@ -772,10 +772,10 @@
 					return FALSE
 	return FALSE
 
-/datum/reagents/proc/get_reagent_amount(reagent)
+/datum/reagents/proc/get_reagent_amount(reagent, strict = TRUE)
 	var/list/cached_reagents = reagent_list
 	for(var/datum/reagent/R as anything in cached_reagents)
-		if (R.type == reagent)
+		if (strict ? R.type == reagent : istype(R, reagent))
 			return round(R.volume, CHEMICAL_QUANTISATION_LEVEL)
 
 	return 0

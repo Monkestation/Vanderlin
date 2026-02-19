@@ -97,7 +97,7 @@
 	if(!(sigreturn & HANDLE_BLOOD_NO_NUTRITION_DRAIN))
 		if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume && !bleed_rate)
 			blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5)
-		if(stat != DEAD && client && !(mind?.has_antag_datum(/datum/antagonist/vampire) || mind?.has_antag_datum(/datum/antagonist/zombie)))
+		if(stat != DEAD && client && !(mob_biotypes & MOB_UNDEAD) && !(mind?.has_antag_datum(/datum/antagonist/vampire) || mind?.has_antag_datum(/datum/antagonist/zombie)))
 			if(bloodpool < initial(bloodpool))
 				set_bloodpool(clamp(bloodpool + 0.5, 0, min(initial(bloodpool), maxbloodpool)))
 			if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
@@ -336,12 +336,33 @@
 			W.water_maximum = 10
 			W.water_volume = 10
 			return
+
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
+
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		var/datum/blood_type/type = get_blood_type()
-		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(src))
-	else
+		var/total_blood = blood_volume + amt // our presumed blood before we called this.
+		var/blood_purity = 1 // what % of the amt are we actually taking as blood?
+		var/volume_transferred = min(amt, container.reagents.maximum_volume - container.reagents.total_volume) // the volume of our transfer
+		if(reagents.total_volume)
+			var/list/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup)
+			var/impurity_volume = reagents.total_volume
+			for(var/reagent_type in blacklisted_reagents)
+				impurity_volume -= reagents.get_reagent_amount(reagent_type, FALSE)
+			if(impurity_volume > 0)
+				blood_purity = total_blood / (total_blood + impurity_volume)
+				reagents.trans_to(container, volume_transferred * BLOODLETTING_MULT * (1 - blood_purity),transfered_by=src, ignored_reagents=blacklisted_reagents)
+		var/blood_transferred = min(total_blood, volume_transferred * blood_purity) // how much of the drip is straight up blood, final value
+		var/vitae_transferred = min(blood_transferred, bloodpool)
+
+		var/list/blood_data = blood.get_blood_data(src)
+		blood_data["vitae"] = vitae_transferred / blood_transferred // dividing here because it's the richness per reagent unit
+		container.reagents.add_reagent(blood.reagent_type, blood_transferred, data = blood_data)
+		if(vitae_transferred)
+			adjust_bloodpool(-vitae_transferred)
+		amt -= volume_transferred
+
+	if(amt > 0.5)
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
 		if(P)
 			P.blood_vol += amt

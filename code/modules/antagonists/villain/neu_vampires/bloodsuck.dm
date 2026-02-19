@@ -79,13 +79,13 @@
 	if(ingest && reagents.total_volume < reagents.maximum_volume)
 		var/ingesting_volume = min(reagents.maximum_volume - reagents.total_volume, drink_amt)
 		if(victim.reagents.total_volume)
-			var/list/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment)
+			var/list/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup)
 			var/trans_volume = victim.reagents.total_volume
-			for(var/reagent_type in blacklisted_reagents)
-				trans_volume -= victim.reagents.get_reagent_amount(reagent_type)
+			for(var/reagent_type in list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup))
+				trans_volume -= victim.reagents.get_reagent_amount(reagent_type, FALSE)
 			if(trans_volume > 0)
 				blood_purity = victim.blood_volume / (victim.blood_volume + trans_volume)
-				victim.reagents.trans_to(src, ingesting_volume * (1 - blood_purity), 1, transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
+				victim.reagents.trans_to(src, ingesting_volume * BLOODLETTING_MULT * (1 - blood_purity), transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
 		var/blood_to_drink = min(victim.blood_volume, ingesting_volume * blood_purity)
 		blood_data?["vitae"] = used_vitae / blood_to_drink
 		var/datum/reagents/holder = new(maximum = blood_to_drink)
