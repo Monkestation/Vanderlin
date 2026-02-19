@@ -148,6 +148,7 @@
 
 // Helmet Selection (Royal Knight Exclusive)
 /datum/job/advclass/royalknight/knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 	var/static/list/selectablehelmets = list(
 		"hounskull" = /obj/item/clothing/head/helmet/visored/hounskull,
 		"Bastion Helmet" = /obj/item/clothing/head/helmet/heavy/necked,
@@ -155,7 +156,7 @@
 		"Knight Helmet" = /obj/item/clothing/head/helmet/visored/knight,
 		"Decorated Knight Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/knight,
 		"Visored Sallet" = /obj/item/clothing/head/helmet/visored/sallet,
-		"Decored Golden Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/golden,
+		"Decorated Golden Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/golden,
 	)
 
 	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
