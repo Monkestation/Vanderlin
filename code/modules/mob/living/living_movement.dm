@@ -132,9 +132,13 @@
 			return
 		if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 			return
+		if(!COOLDOWN_FINISHED(src, cd_zswim))
+			return
 		if(dir == UP && HAS_TRAIT(src, TRAIT_SINKING))
 			to_chat(src, span_warning("You are sinking and cannot surface!"))
 		else if(zMove(dir, FALSE, TRUE))
+			var/zswim_time = 2 SECONDS - ((1 DECISECONDS * get_skill_level(/datum/skill/misc/swimming)) + (1 SECONDS * HAS_TRAIT(src, TRAIT_GOOD_SWIM)))
+			COOLDOWN_START(src, cd_zswim, zswim_time)
 			if(dir == UP)
 				to_chat(src, span_notice("You swim upward."))
 			else

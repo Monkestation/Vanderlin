@@ -395,7 +395,15 @@
 	..()
 	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg','sound/foley/water_land3.ogg'), 100, FALSE)
 
+/turf/open/water/can_zFall(atom/movable/A, levels = 1, turf/target)
+    if(!zPassOut(A, DOWN, target) || !target.zPassIn(A, DOWN, src))
+        return FALSE
+    if(!open_bottom)
+        return FALSE
+    return HAS_TRAIT(A, TRAIT_SINKING)
+
 /turf/open/water/Entered(atom/movable/AM, atom/oldLoc)
+	. = ..()
 	for(var/obj/structure/S in src)
 		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 			return
@@ -440,8 +448,6 @@
 					if(AM.loc == src)
 						water_overlay.layer = ABOVE_MOB_LAYER
 						water_overlay.plane = GAME_PLANE_UPPER
-	//parent call last so TRAIT_SUBMERGED can be added before can_zFall is called
-	. = ..()
 
 /turf/open/water/attackby(obj/item/C, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/fill)
@@ -602,6 +608,9 @@
 		return TRUE
 	return FALSE
 
+/turf/open/water/zImpact(atom/movable/falling_atom, levels, turf/prev_turf)
+	return FALSE
+
 /*	..................   Bath & Pool   ................... */
 /turf/open/water/bath
 	name = "water"
@@ -658,6 +667,7 @@
 	icon_state = MAP_SWITCH("paving", "pavinggwf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
+	shine = SHINE_MATTE
 
 /datum/reagent/water/gross/sewer
 	color = "#705a43"
@@ -785,6 +795,7 @@
 	icon_state = MAP_SWITCH("rock", "rockcwf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
+	shine = SHINE_MATTE
 
 /turf/open/water/clean/dirt
 	name = "water"
@@ -796,6 +807,7 @@
 	icon_state = MAP_SWITCH("dirt", "dirtcwf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
+	shine = SHINE_MATTE
 
 /turf/open/water/blood
 	name = "blood"
@@ -879,6 +891,7 @@
 	icon_state = MAP_SWITCH("rock", "rivermoveF-dir")
 	water_height = WATER_HEIGHT_FULL
 	uses_height = TRUE
+	shine = SHINE_MATTE
 
 /turf/open/water/river/dirt
 	desc = "Murky water, flowing swiftly along the river."
@@ -890,6 +903,7 @@
 	icon_state = MAP_SWITCH("dirt", "rivermovealtF-dir")
 	water_height = WATER_HEIGHT_FULL
 	uses_height = TRUE
+	shine = SHINE_MATTE
 
 /turf/open/water/river/blood
 	name = "blood"
@@ -926,6 +940,7 @@
 	icon_state = MAP_SWITCH("gravel", "gravelswf")
 	water_height = WATER_HEIGHT_FULL
 	swim_skill = TRUE
+	shine = SHINE_MATTE
 
 /turf/open/water/ocean/abyss
 	name = "salt water"
@@ -943,6 +958,7 @@
 /turf/open/water/ocean/abyss/under
 	icon_state = MAP_SWITCH("ash", "ashswf")
 	water_height = WATER_HEIGHT_FULL
+	shine = SHINE_MATTE
 
 /datum/reagent/water/salty
 	taste_description = "salt"
