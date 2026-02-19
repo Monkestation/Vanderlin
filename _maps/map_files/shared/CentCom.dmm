@@ -257,6 +257,12 @@
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
 /area)
+"aP" = (
+/obj/machinery/light/fueled/torchholder{
+	pixel_y = 32
+	},
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "aQ" = (
 /obj/item/weapon/pick,
 /obj/item/weapon/pick,
@@ -2119,6 +2125,12 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /turf/open/floor/tile/kitchen,
 /area/indoors/bandit_lair)
+"kD" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 8
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "kF" = (
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/dirt/road,
@@ -6703,6 +6715,12 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"PR" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 1
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "PT" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/clothing/armor/chainmail/iron/orc,
@@ -17565,7 +17583,7 @@ ag
 NW
 NW
 NW
-vK
+kD
 vK
 NW
 NW
@@ -18351,7 +18369,7 @@ XB
 vK
 vK
 vK
-vK
+PR
 NW
 NW
 NW
@@ -18859,7 +18877,7 @@ ag
 ag
 NW
 NW
-fJ
+aP
 fJ
 vK
 VZ
@@ -19258,7 +19276,7 @@ XB
 XB
 XB
 vK
-vK
+kD
 vK
 NW
 NW
@@ -20165,7 +20183,7 @@ NW
 NW
 fJ
 vK
-vK
+kD
 NW
 vK
 NW
