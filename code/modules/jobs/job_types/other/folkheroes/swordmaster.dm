@@ -28,7 +28,7 @@
 		TRAIT_HEAVYARMOR,
 	)
 
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 
 /datum/job/advclass/combat/swordmaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -2405,7 +2405,7 @@
 /area/indoors/town/tavern)
 "bVq" = (
 /obj/structure/bed/wool,
-/obj/effect/landmark/start/armorsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 1
 	},
 /turf/open/floor/wood,
@@ -3953,7 +3953,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/orphanage)
 "dji" = (
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -16576,7 +16576,7 @@
 /area/indoors/town/keep/halls/w)
 "onL" = (
 /obj/structure/bed/wool,
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 8
 	},
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -17089,7 +17089,7 @@
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "oPl" = (
-/obj/effect/landmark/start/armorsmith,
+/obj/effect/landmark/start/blacksmith,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
 "oPv" = (
@@ -20077,7 +20077,7 @@
 /turf/open/water/river/dirt,
 /area/under/town/sewer)
 "rAD" = (
-/obj/effect/landmark/start/weaponsmith{
+/obj/effect/landmark/start/blacksmith{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,

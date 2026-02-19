@@ -2996,7 +2996,7 @@
 /area/under/tomb/indoors)
 "Rn" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/food/snacks/pie/cooked/poison,
+/obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
 "Rr" = (

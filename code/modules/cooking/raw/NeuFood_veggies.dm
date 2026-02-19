@@ -7,6 +7,7 @@
 
 /obj/item/reagent_containers/food/snacks/veg
 	faretype = FARE_POOR
+	nutrition = VEGGIE_NUTRITION
 
 /*	..................   Onion slice   ................... */
 /obj/item/reagent_containers/food/snacks/veg/onion_sliced
@@ -32,7 +33,7 @@
 
 /*	..................		Roasted seeds		................... */
 /obj/item/reagent_containers/food/snacks/roastseeds
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR - 1)
+	nutrition = BERRY_NUTRITION * COOK_MOD
 	tastes = list("roasted seeds" = 1)
 	name = "roasted seeds"
 	desc = "Treats for both rats and humens."
@@ -41,12 +42,11 @@
 	color = "#e5b175"
 	foodtype = VEGETABLES
 	rotprocess = null
-	eat_effect = /datum/status_effect/buff/foodbuff
 	faretype = FARE_POOR
 
 /*	..................		Salted seeds		................... */
 /obj/item/reagent_containers/food/snacks/saltseeds
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition =  (BERRY_NUTRITION+1) * COOK_MOD
 	tastes = list("salted roasted seeds" = 1)
 	name = "salted roasted seeds"
 	desc = "Too salty for rats, delectable for humens."

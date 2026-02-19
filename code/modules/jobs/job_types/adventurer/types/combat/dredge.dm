@@ -124,9 +124,9 @@
 			spawned.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-			if(!spawned.has_language(/datum/language/oldpsydonic))
-				spawned.grant_language(/datum/language/oldpsydonic)
-				to_chat(spawned, "<span class='info'>I can speak Old Psydonic with ,m before my speech.</span>")
+			if(!spawned.has_language(/datum/language/newpsydonic))
+				spawned.grant_language(/datum/language/newpsydonic)
+				to_chat(spawned, "<span class='info'>I can speak New Psydonic with ,n before my speech.</span>")
 			if(!istype(spawned.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
 				spawned.set_patron(/datum/patron/psydon, TRUE)
 			to_chat(spawned,span_info("\

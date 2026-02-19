@@ -22,7 +22,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	give_bank_account = 30
 	can_have_apprentices = FALSE
-	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 
 	outfit = /datum/outfit/forestguard
 	advclass_cat_rolls = list(CTAG_FORGARRISON = 20)
