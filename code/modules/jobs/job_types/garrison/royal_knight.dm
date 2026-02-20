@@ -115,7 +115,6 @@
 		if(!spawned.equip_to_appropriate_slot(shield))
 			qdel(shield)
 
-
 /datum/outfit/royalknight
 	name = "Royal Knight Base"
 	neck = /obj/item/clothing/neck/chaincoif
