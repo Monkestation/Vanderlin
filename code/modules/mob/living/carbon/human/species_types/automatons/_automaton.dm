@@ -1,6 +1,7 @@
 /mob/living/carbon/human/species/automaton
 	race = /datum/species/automaton
 	footstep_type = FOOTSTEP_MOB_METAL
+	job = "Automaton"
 
 /datum/species/automaton
 	name = "Automaton"
