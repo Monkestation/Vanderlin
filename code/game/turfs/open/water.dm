@@ -809,7 +809,7 @@
 
 /turf/open/water/clean/dirt
 	name = "water"
-	desc = "Fairly water, mostly untainted by surrounding soil."
+	desc = "Fairly clear water, mostly untainted by surrounding soil."
 	icon_state = MAP_SWITCH("dirt", "dirtW5")
 	cleanliness_factor = -1
 
