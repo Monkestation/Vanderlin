@@ -138,7 +138,6 @@
 	outfit = /datum/outfit/royalknight/knight
 	category_tags = list(CTAG_ROYALKNIGHT)
 
-
 /datum/outfit/royalknight/knight
 	name = "Royal Knight"
 	armor = /obj/item/clothing/armor/plate/full
