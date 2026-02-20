@@ -307,7 +307,7 @@
 			W.water_volume = 10
 
 		return
-	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T)
+	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T, blood.color)
 
 	splatter.transfer_mob_blood_dna(src)
 	splatter.update_appearance(UPDATE_ICON_STATE)
@@ -334,8 +334,7 @@
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		var/datum/blood_type/type = get_blood_type()
-		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(src))
+		container.reagents.add_reagent(initial(blood.reagent_type), 5, data = blood.get_blood_data(src))
 	else
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
 		if(P)
@@ -350,7 +349,7 @@
 				D.transfer_mob_blood_dna(src)
 				D.update_appearance(UPDATE_ICON_STATE)
 			else
-				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T)
+				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T, blood.color)
 				splatter.transfer_mob_blood_dna(src)
 				splatter.update_appearance(UPDATE_ICON_STATE)
 

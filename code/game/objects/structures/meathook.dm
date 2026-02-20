@@ -111,12 +111,12 @@
 		STOP_PROCESSING(SSmachines, src)
 		return
 	L.blood_drained++
+	var/datum/blood_type/bloodtype = L.get_blood_type()
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in get_turf(src)
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		var/datum/blood_type/type = L.get_blood_type()
-		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(L))
+		container.reagents.add_reagent(initial(bloodtype.reagent_type), 5, data = bloodtype.get_blood_data(L))
 	else
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in get_turf(src)
 		if(P)
@@ -129,7 +129,7 @@
 				D.drips++
 				D.update_appearance(UPDATE_ICON_STATE)
 			else
-				new /obj/effect/decal/cleanable/blood/drip(get_turf(src))
+				new /obj/effect/decal/cleanable/blood/drip(get_turf(src), bloodtype.color)
 
 /obj/structure/meathook/proc/release_mob(mob/living/M)
 	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
