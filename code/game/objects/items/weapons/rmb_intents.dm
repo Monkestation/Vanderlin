@@ -124,11 +124,6 @@
 	desc = "Your attacks have less recovery time but are less accurate and have reduced strength."
 	icon_state = "rmbswift"
 
-/datum/rmb_intent/special
-	name = "special"
-	desc = "(RMB WHILE DEFENSE IS ACTIVE) A special attack that depends on the type of weapon you are using."
-	icon_state = "rmbspecial"
-
 /datum/rmb_intent/feint
 	name = "feint"
 	desc = "(RMB WHILE DEFENSE IS ACTIVE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard. Useless against someone who is dodging."
