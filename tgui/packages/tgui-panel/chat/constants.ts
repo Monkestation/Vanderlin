@@ -78,14 +78,14 @@ export const MESSAGE_TYPES: MessageType[] = [
     name: 'Warnings',
     description: 'Urgent messages from the game and items',
     selector:
-      '.warning:not(.pm), .critical, .userdanger, .italics, .alertsyndie, .warningplain',
+      '.warning:not(.pm), .critical, .warning, .italics, .alertsyndie, .warningplain',
   },
-  // {
-  //   type: MESSAGE_TYPE_DEADCHAT,
-  //   name: 'Deadchat',
-  //   description: 'All of deadchat',
-  //   selector: '.deadsay, .ghostalert',
-  // },
+  {
+    type: MESSAGE_TYPE_DEADCHAT,
+    name: 'Deadchat',
+    description: 'All of deadchat',
+    selector: '.deadsay, .ghostalert',
+  },
   {
     type: MESSAGE_TYPE_OOC,
     name: 'OOC',
@@ -102,7 +102,7 @@ export const MESSAGE_TYPES: MessageType[] = [
     type: MESSAGE_TYPE_COMBAT,
     name: 'Combat Log',
     description: 'Urist McTraitor has stabbed you with a knife!',
-    selector: '.danger, .userdanger, .crit, .warning',
+    selector: '.danger, .userdanger, .crit',
   },
   {
     type: MESSAGE_TYPE_UNKNOWN,
@@ -121,6 +121,7 @@ export const MESSAGE_TYPES: MessageType[] = [
     type: MESSAGE_TYPE_PRAYER,
     name: 'Prayers',
     description: 'Prayers from players',
+    selector: '.prayer',
     admin: true,
   },
   {

@@ -1658,3 +1658,41 @@ $border-width-px: $border-width * 1px;
 	}
 }
 /* ##### END ##### */
+
+.highlight-bounce {
+  animation: bounce 2s infinite;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-3px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+.highlight-slide {
+  background: linear-gradient(90deg, transparent 30%, var(--highlight-color, #ffdd44) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: slide 2s infinite;
+  border-radius: 3px;
+}
+
+@keyframes slide {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
