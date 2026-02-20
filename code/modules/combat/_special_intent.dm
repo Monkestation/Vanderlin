@@ -7,6 +7,12 @@
 	var/desc = "bad coders"
 	var/icon = 'icons/effects/effects.dmi'
 
+	/// The main place where we can draw out the pattern. Every tile entry is a list with two numbers.
+	/// The origin (0,0) is one step forward from the dir the owner is facing.
+	/// This can be modified, though it's best be done before [build_affected_turfs].
+	/// A third list value can be specified for a custom delay.
+	var/list/tile_coordinates = null
+
 	/// State to show before the attack
 	var/pre_icon_state = "blip"
 	/// Sound to play before the attack
@@ -28,11 +34,6 @@
 
 	/// Base cooldown time of the special, success OR failure
 	var/cooldown = 30 SECONDS
-
-	/// The main place where we can draw out the pattern. Every tile entry is a list with two numbers.
-	/// The origin (0,0) is one step forward from the dir the owner is facing.
-	/// This can be modified, though it's best be done before [build_affected_turfs].
-	var/list/tile_coordinates = null
 
 	/// Whether to have the howner pass through a doafter for the delay rather than it being on every turf.
 	/// Default code here does not allow for dir switching during the do after.
@@ -112,7 +113,7 @@
 
 ///Main pipeline. Note that _delay() calls post_delay() after a timer.
 /datum/special_intent/proc/process_attack(mob/living/user, obj/item/parent, turf/target)
-	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_OVERRIDE(TRUE)
 
 	if(user.ckey)
 		user.log_message(span_danger("Used the Special [name] on [key_name(target)]."), LOG_ATTACK)
@@ -121,13 +122,15 @@
 
 	var/list/turf/affected = build_affected_turfs(user, target)
 
-	after_creation(user, parent, affected)
+	start_cooldown(user)
+
+	if(!after_creation(user, parent, affected))
+		return
 
 	start_attack(user, parent, affected)
 
-	start_cooldown(user)
-
 /// Do stuff before creating the grid
+/// Change temporary values and coordinates here
 /datum/special_intent/proc/pre_creation(mob/living/user, obj/item/parent, turf/target)
 	return
 
@@ -136,9 +139,10 @@
 	var/turf/origin = start_override ? start_override : get_step(user, user.dir)
 
 	var/list/turf/affected_turfs = list()
-	for(var/list/coords in tile_coordinates)
-		var/coord_x = coords[1]
-		var/coord_y = coords[2]
+	for(var/list/values in tile_coordinates)
+		var/coord_x = values[1]
+		var/coord_y = values[2]
+		var/delay = values[3]
 
 		if(respect_dir)
 			switch(user.dir)
@@ -156,13 +160,14 @@
 
 		var/turf/affected = locate(origin.x + coord_x, origin.y + coord_y, origin.z)
 		if(affected && !affected.is_blocked_turf(TRUE))
-			affected_turfs += affected
+			affected_turfs[affected] = delay
 
 	return affected_turfs
 
 /// Called after the affected turfs are processed.
+/// Return FALSE to cancel the attack
 /datum/special_intent/proc/after_creation(mob/living/user, obj/item/parent, list/turfs)
-	return
+	return TRUE
 
 /// Start the attack, executing it after the delay
 /datum/special_intent/proc/start_attack(mob/living/user, obj/item/parent, list/turfs)
@@ -195,7 +200,7 @@
 /// It performs any needed adjacency checks and will try to draw the "post" visuals on any valid turfs.
 /// It calls apply_hit() after where most of the logic for any on-hit effects should go.
 /datum/special_intent/proc/post_delay(mob/living/user, obj/item/parent, list/turfs)
-	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_OVERRIDE(TRUE)
 
 	if(QDELETED(user) || QDELETED(parent))
 		return
@@ -210,16 +215,29 @@
 		return
 
 	for(var/turf/affected as anything in turfs)
-		if(post_icon_state)
-			var/obj/effect/temp_visual/duration_setting/effect = new(affected, fade_delay)
-			effect.icon = icon
-			effect.icon_state = post_icon_state
-			effect.plane = GAME_PLANE_FOV_HIDDEN
-
-		apply_hit(user, parent, affected)
+		var/delay = turfs[affected]
+		if(delay)
+			addtimer(CALLBACK(src, PROC_REF(post_delay_apply), user, parent, affected), delay)
+		else
+			post_delay_apply(user, parent, affected)
 
 	if(post_sound)
 		playsound(user, post_sound, 100, TRUE)
+
+/// Apply individual tile effects
+/datum/special_intent/proc/post_delay_apply(mob/living/user, obj/item/parent, turf/target)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if(QDELETED(parent) || QDELETED(user))
+		return // Incredibly unlikely an open turf will change
+
+	if(post_icon_state)
+		var/obj/effect/temp_visual/duration_setting/effect = new(target, fade_delay)
+		effect.icon = icon
+		effect.icon_state = post_icon_state
+		effect.plane = GAME_PLANE_FOV_HIDDEN
+
+	apply_hit(user, parent, target)
 
 /// Main proc where stuff should happen. This is called immediately after the post_delay of the intent.
 /datum/special_intent/proc/apply_hit(mob/living/user, obj/item/parent, turf/target)
