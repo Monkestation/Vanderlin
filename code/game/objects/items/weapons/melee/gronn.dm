@@ -79,7 +79,7 @@
 	max_integrity = 200
 
 
-/obj/item/rogueweapon/handclaw/getonmobprop(tag)
+/obj/item/weapon/handclaw/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -161,8 +161,52 @@
 /datum/intent/claw/rend/steel
 	damfactor = 3
 
-/datum/intent/peculate
-	name = "peculate"
-	hitsound = null
-	desc = "Thieve the appearance of another."
-	icon_state = "peculate"
+//Mauls. Woe. Most characters will not be able to engage with this, beyond hobbling.
+//Why? The unique strength lockout. The minimum strength is not a suggestion.
+/obj/item/weapon/mace/maul
+	force_wielded = DAMAGE_HEAVYCLUB_WIELD - 3 //-3 compared to grand mace(steel goden). Better intents.
+	possible_item_intents = list(/datum/intent/mace/strike)
+	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze, /datum/intent/effect/hobble)
+	name = "maul"
+	desc = "Who would need something this large? It looks like it was made for tearing down walls, rather than men."
+	icon_state = "sledge"
+	icon = 'icons/roguetown/weapons/blunt64.dmi'
+	wlength = WLENGTH_LONG
+	swingsound = BLUNTWOOSH_HUGE
+	slot_flags = null //No.
+	minstr = 14
+	wdefense = 3
+	pixel_y = -16
+	pixel_x = -16
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	dropshrink = 0.6
+	bigboy = TRUE
+	gripsprite = TRUE
+
+//Intents for the mauls.
+/datum/intent/effect/hobble
+	name = "hobbling strike"
+	desc = "A heavy strike aimed at the legs to cripple movement."
+	icon_state = "incrack"//Temp. Just so it's easy to differentiate.
+	attack_verb = list("hobbles")
+	animname = "strike"
+	hitsound = list('sound/combat/hits/blunt/shovel_hit3.ogg')
+	swingdelay = 6
+	damfactor = 0.8
+	penfactor = AP_CLUB_STRIKE
+	clickcd = CLICK_CD_RESIST
+	item_damage_type = "blunt"
+	intent_effect = /datum/status_effect/debuff/hobbled
+	target_parts = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG) //Intentionally leaving out feet. If you know, you know.
+
+/datum/status_effect/debuff/hobbled
+	id = "hobbled"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/hobbled
+	effectedstats = list(STATKEY_SPD = -2)
+	duration = 8 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/hobbled
+	name = "Hobbled"
+	desc = "You've been struck in the leg! The force has left you staggered!"
+	icon_state = "dazed"

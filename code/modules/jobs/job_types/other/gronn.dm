@@ -148,11 +148,11 @@
 	head = /obj/item/clothing/head/helmet/heavy/bucket/gronn
 	gloves = /obj/item/clothing/gloves/plate/iron/gronn
 	armor = /obj/item/clothing/armor/plate/iron/gronn
-	cloak = /obj/item/clothing/cloak/volfmantle			//Aura farming.
+	cloak = /obj/item/clothing/cloak/volfmantle	//Aura farming.
 	wrists = /obj/item/clothing/wrists/bracers/iron //Weakspot.
 	pants = /obj/item/clothing/pants/platelegs/iron/gronn
-	r_hand = /obj/item/weapon/mace/steel
-	neck = /obj/item/clothing/neck/bevor/iron //Their weakspot. Go replace it if you're a chud I guess
+	r_hand = /obj/item/weapon/mace/maul
+	neck = /obj/item/clothing/neck/bevor/iron
 	backl = /obj/item/storage/backpack/satchel/black
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/belt/pouch/coins/poor
@@ -167,7 +167,7 @@
 
 //the special mooks
 /datum/job/advclass/mercenary/shamanaaa
-	title = "!!!!Atgervi Shaman"
+	title = "Atgervi Shaman"
 	tutorial = "You are a Shaman of the Fjall, The Northern Empty. Shamans are savage combatants who commune with the Ecclesical Beast Gods through ritualistic violence, rather than idle prayer."
 	outfit = /datum/outfit/job/roguetown/mercenary/atgervishaman
 	allowed_sexes = list(MALE, FEMALE)
