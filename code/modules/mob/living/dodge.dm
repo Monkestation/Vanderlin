@@ -21,6 +21,9 @@
 	if(has_status_effect(/datum/status_effect/debuff/exposed))
 		return FALSE
 
+	if(has_status_effect(/datum/status_effect/debuff/vulnerable))
+		return FALSE
+
 	if(world.time < last_dodge + dodgetime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
 

@@ -521,8 +521,19 @@
 
 /atom/movable/screen/alert/status_effect/debuff/exposed
 	name = "Exposed"
-	desc = "My defenses are exposed. I can be hit through my parry and dodge!"
+	desc = "My defenses are completely exposed. I can be hit through my parry and dodge to great effect!"
 	icon_state = "exposed"
+
+/datum/status_effect/debuff/vulnerable
+	id = "vulnerable"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/vulnerable
+	duration = 10 SECONDS
+	mob_overlay_icon_state = "eff_vulnerable"
+
+/atom/movable/screen/alert/status_effect/debuff/vulnerable
+	name = "Vulnerable"
+	desc = "A mistake. I can be hit through my parry and dodge to a lighter effect!"
+	icon_state = "vulnerable"
 
 /datum/status_effect/debuff/feinted
 	id = "feinted"

@@ -77,10 +77,14 @@
 	desc = "(RMB WHILE IN COMBAT MODE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard.."
 	icon_state = "rmbfeint"
 	def_bonus = 10
-	var/feintdur = 7.5 SECONDS
+	/// Duration of the feint expose / vulnerable effect
+	var/feint_duration = 7.5 SECONDS
 
 /datum/rmb_intent/feint/special_attack(mob/living/user, atom/target)
 	if(!user)
+		return FALSE
+
+	if(user == target)
 		return FALSE
 
 	if(user.incapacitated(IGNORE_GRAB))
@@ -119,14 +123,11 @@
 	skill_factor = (ourskill - theirskill) / 2
 
 	var/special_message
-	var/cooldown_override = 30 SECONDS + feintdur
+	var/cooldown_override = 20 SECONDS
 
-	if(defender.has_status_effect(/datum/status_effect/debuff/exposed))
+	if(defender.has_status_effect(/datum/status_effect/debuff/exposed) || \
+		defender.has_status_effect(/datum/status_effect/debuff/vulnerable))
 		perc = 0
-
-	if(defender.has_status_effect(/datum/status_effect/debuff/feinted))
-		perc = 0
-		special_message = span_warning("Too soon! They were expecting it!")
 
 	if(defender.is_blind() || !defender.can_see_cone(user))
 		perc = 0
@@ -148,13 +149,15 @@
 		defender.remove_status_effect(/datum/status_effect/buff/clash)
 		defender.balloon_alert(user, "guard interrupted!")
 
-	defender.apply_status_effect(/datum/status_effect/debuff/exposed, feintdur)
+	var/effect_to_apply = defender.mind ? /datum/status_effect/debuff/vulnerable : /datum/status_effect/debuff/exposed
+
+	defender.apply_status_effect(effect_to_apply, feint_duration)
 	defender.apply_status_effect(/datum/status_effect/debuff/clickcd, max(1.5 SECONDS + skill_factor, 2.5 SECONDS))
-	defender.apply_status_effect(/datum/status_effect/debuff/feinted, cooldown_override)
 	defender.Immobilize(0.5 SECONDS)
 	defender.adjust_stamina(defender.stamina * 0.1)
 	defender.Slowdown(2)
 
+	user.changeNext_move(CLICK_CD_FAST)	//We don't want the feint effect to be popped instantly.
 	user.apply_status_effect(/datum/status_effect/debuff/feintcd, cooldown_override)
 
 	to_chat(user, span_notice("[defender.p_they(TRUE)] fell for my feint attack!"))
