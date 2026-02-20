@@ -158,7 +158,6 @@
 
 	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
 
-
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"
 	tutorial = "The pinnacle of Vanderlin's steam technology. \
