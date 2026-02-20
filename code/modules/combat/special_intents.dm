@@ -47,7 +47,7 @@
 			continue
 		if(victim.body_position == LYING_DOWN)
 			continue
-		// victim.apply_status_effect(/datum/status_effect/debuff/exposed, 5 SECONDS)
+		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 5 SECONDS)
 		apply_generic_weapon_damage(user, parent, victim, damage, SLASH, target_zone, damage_class = BCLASS_CUT)
 
 /datum/special_intent/shin_swipe
