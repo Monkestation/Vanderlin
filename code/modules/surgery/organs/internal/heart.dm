@@ -31,7 +31,9 @@
 	/// List of Maniac datums that have inscribed on this heart
 	var/maniacs = list()
 
-	food_type = /obj/item/reagent_containers/food/snacks/organ/heart
+	var/graggometer = 0
+
+	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/heart
 
 /obj/item/organ/heart/examine(mob/user)
 	. = ..()
@@ -94,7 +96,7 @@
 	return 1
 
 /obj/item/organ/heart/prepare_eat(mob/living/carbon/human/user)
-	var/obj/item/reagent_containers/food/snacks/organ/S = ..()
+	var/obj/item/reagent_containers/food/snacks/meat/organ/S = ..()
 	S.icon_state = "heart-off"
 	var/nothing = FALSE
 	if(!nothing)

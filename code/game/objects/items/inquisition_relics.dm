@@ -1003,7 +1003,6 @@
 	grid_height = 64
 	var/worn = FALSE
 	var/bagging = FALSE
-	var/headgear
 
 /obj/item/clothing/head/inqarticles/blackbag/proc/bagsound(mob/living/M)
 	if(bagging)
@@ -1067,14 +1066,6 @@
 		worn = FALSE
 		update_integrity(max_integrity)
 		REMOVE_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
-		user.equip_to_slot(headgear, ITEM_SLOT_HEAD)
-		var/list/datum/wound/w_List = user.get_wounds()
-		if(w_List.len)
-			for(var/datum/wound/targetwound in w_List)
-				if (istype(targetwound, /datum/wound/dismemberment))
-					user.dropItemToGround(headgear)
-					return
-		headgear = initial(headgear)
 		playsound(user, pick('sound/misc/blackunbag.ogg'), 100, TRUE, 4)
 		user.emote("gasp", forced = TRUE)
 

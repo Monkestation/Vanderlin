@@ -90,6 +90,7 @@
 			return
 
 	if(istype(I, /obj/item/weapon/hammer))
+		var/obj/item/weapon/hammer/H = I
 		user.changeNext_move(CLICK_CD_RAPID)
 		if(!material)
 			return
@@ -99,10 +100,11 @@
 		if(material.artrecipe.hammered || material.artrecipe.progress == 100)
 			playsound(src,'sound/combat/hits/onmetal/sheet (2).ogg', 100, TRUE)
 			shake_camera(user, 1, 1)
-		var/datum/effect_system/spark_spread/S = new()
-		var/turf/front = get_turf(src)
-		S.set_up(1, 1, front)
-		S.start()
+		if(!H.no_spark)	//wood and copper hammers don't spark
+			var/datum/effect_system/spark_spread/S = new()
+			var/turf/front = get_turf(src)
+			S.set_up(1, 1, front)
+			S.start()
 		var/skill = user.get_skill_level(material.artrecipe.appro_skill)
 		if(material.artrecipe.progress == 100)
 			for(var/i in 1 to material.artrecipe.created_amount)

@@ -44,7 +44,7 @@
 			index = spawned.real_name
 		S.name = "veteran cloak ([index])"
 
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/job/advclass/veteran
@@ -309,7 +309,7 @@
 		TRAIT_STEELHEARTED
 	)
 
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/job/advclass/veteran/merc/after_spawn(mob/living/carbon/human/spawned, client/player_client)

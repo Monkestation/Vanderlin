@@ -290,6 +290,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
 
+	var/toggle_state // Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
+
 /obj/item/proc/set_quality(quality)
 	recipe_quality = clamp(quality, 0, 4)
 	update_appearance(UPDATE_OVERLAYS)
@@ -365,6 +367,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 					B.remove()
 					B.generate_appearance()
 					B.apply()
+			if(toggle_state)
+				icon_state = "[toggle_state]1" // Stupid thing needed for Grandmaster/Martyr weapons, if theres a better way to accomplish this tell me. I'm stupid.
 			if(gripspriteonmob)
 				item_state = "[initial(icon_state)]_wield"
 				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
@@ -374,7 +378,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 					B.apply()
 			return
 		if(gripsprite)
-			icon_state = initial(icon_state)
+			if(toggle_state) // See above comment
+				icon_state ="[toggle_state]"
+			else
+				icon_state = initial(icon_state)
 			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
 			if(B)
 				B.remove()
@@ -454,8 +461,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		max_blade_int = 0
 		blade_int = 0
 
-	if(max_blade_int && !blade_int) //set blade integrity to randomized 60% to 100% if not already set
+	//Randomizes blade sharpness on initialize to between 60-100%
+	if(max_blade_int && !blade_int)
 		blade_int = max_blade_int + rand(-(max_blade_int * 0.4), 0)
+
 
 	if(!pixel_x && !pixel_y && !bigboy)
 		pixel_x = rand(-5,5)

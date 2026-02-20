@@ -37,7 +37,7 @@
 
 /datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/townannouncement
+	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
 	var/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
@@ -57,7 +57,7 @@
 
 /mob/living/carbon/human/proc/townannouncement()
 	set name = "Elder Announcement"
-	set category = "RoleUnique"
+	set category = "RoleUnique.Elder"
 	if(stat)
 		return
 
@@ -313,7 +313,7 @@
 			spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
 			spawned.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
 			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)
-			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/abyssor)
 			spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 			spawned.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)

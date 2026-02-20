@@ -199,58 +199,22 @@
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
 	..()
 
-/// Improvised reagent that induces vomiting. Created by dipping a dead mouse in welder fluid.
 /datum/reagent/yuck
-	name = "Organic Slurry"
+	name = "Rot"
 	description = "A mixture of various colors of fluid. Induces vomiting."
 	glass_name = "glass of ...yuck!"
 	glass_desc = ""
 	color = "#545000"
-	taste_description = "insides"
+	taste_description = "rot"
 	taste_mult = 4
 	can_synth = FALSE
-	metabolization_rate = 0.4 * REAGENTS_METABOLISM
-	var/yuck_cycle = 0 //! The `current_cycle` when puking starts.
+	metabolization_rate = REAGENTS_METABOLISM * 0.3
 
-/datum/reagent/yuck/on_mob_add(mob/living/L)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER)) //they can't puke
-		holder.del_reagent(type)
-
-#define YUCK_PUKE_CYCLES 3 		// every X cycle is a puke
-#define YUCK_PUKES_TO_STUN 3 	// hit this amount of pukes in a row to start stunning
 /datum/reagent/yuck/on_mob_life(mob/living/carbon/C)
-	if(!yuck_cycle)
-		if(prob(8))
-			var/dread = pick("Something is moving in my stomach...", \
-				"A wet growl echoes from my stomach...", \
-				"For a moment you feel like my surroundings are moving, but it's my stomach...")
-			to_chat(C, "<span class='danger'>[dread]</span>")
-			yuck_cycle = current_cycle
-	else
-		var/yuck_cycles = current_cycle - yuck_cycle
-		if(yuck_cycles % YUCK_PUKE_CYCLES == 0)
-			if(yuck_cycles >= YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN)
-				holder.remove_reagent(type, 5)
-			C.vomit(rand(14, 26), stun = yuck_cycles >= YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN)
-	if(holder)
+	if(HAS_TRAIT(C, TRAIT_NOHUNGER) || HAS_TRAIT(C, TRAIT_NASTY_EATER) || HAS_TRAIT(C, TRAIT_ROT_EATER)) //they can't puke
 		return ..()
-#undef YUCK_PUKE_CYCLES
-#undef YUCK_PUKES_TO_STUN
-
-/datum/reagent/yuck/on_mob_end_metabolize(mob/living/L)
-	yuck_cycle = 0 // reset vomiting
+	C.add_nausea(HAS_TRAIT(C, TRAIT_DEADNOSE) ? 2.5 : 5)
 	return ..()
-
-/datum/reagent/yuck/on_transfer(atom/A, method=TOUCH, trans_volume)
-	if((method & INGEST) || !iscarbon(A))
-		return ..()
-
-	A.reagents.remove_reagent(type, trans_volume)
-	A.reagents.add_reagent(/datum/reagent/fuel, trans_volume * 0.75)
-	A.reagents.add_reagent(/datum/reagent/water, trans_volume * 0.25)
-
-	return ..()
-
 
 /datum/reagent/fuel
 	name = "Lighter fuel"

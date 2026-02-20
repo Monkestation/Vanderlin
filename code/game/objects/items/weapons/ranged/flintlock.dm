@@ -25,7 +25,7 @@
 	drop_sound = 'sound/foley/gun_drop.ogg'
 	dropshrink = 0.7
 	associated_skill = /datum/skill/combat/firearms
-	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, INTENT_GENERIC)
+	possible_item_intents = list(/datum/intent/shoot/puffer, /datum/intent/shoot/puffer/arc, INTENT_GENERIC)
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/musk
 	gripped_intents = null
 	slot_flags = ITEM_SLOT_HIP
@@ -384,7 +384,7 @@
 			bayonet_affixed = FALSE
 			possible_item_intents -= SPEAR_THRUST
 			gripped_intents -= POLEARM_THRUST
-			sharpness = IS_BLUNT
+			sharpness = IS_SHARP
 			bayonet.max_blade_int = max_blade_int
 			bayonet.blade_int = blade_int
 			max_blade_int = 0
@@ -428,7 +428,7 @@
 /obj/item/weapon/knife/dagger/bayonet
 	name = "bayonet"
 	force = 10
-	max_blade_int = 100
+	max_blade_int = 150
 	var/spread = 2
 
 /obj/item/ramrod/musket

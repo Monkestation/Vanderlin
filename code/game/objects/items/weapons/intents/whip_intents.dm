@@ -4,19 +4,19 @@
 	blade_class = BCLASS_LASHING
 	attack_verb = list("lashes", "whips")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	chargetime = 5
-	recovery = 5
+	swingdelay = 2
+	clickcd = 14
 	penfactor = 5
 	reach = 2
 	misscost = 7
 	icon_state = "inlash"
 	canparry = FALSE //Has reach and can't be parried, but needs to be charged and punishes misses.
 	item_damage_type = "slash"
+	acc_bonus = 10
 
 /datum/intent/whip/lash/metal
-	chargetime = 10
+	clickcd = 18
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	recovery = 5
 	penfactor = 15
 
 /datum/intent/whip/lash/cane
@@ -36,8 +36,8 @@
 	blade_class = BCLASS_CUT
 	attack_verb = list("slashes", "lacerates")
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
-	chargetime = 5
-	recovery = 5
+	clickcd = 18
+	swingdelay = 1
 	penfactor = 5
 	reach = 2
 	misscost = 7
@@ -51,13 +51,11 @@
 	blade_class = BCLASS_BLUNT
 	attack_verb = list("cracks", "strikes") //something something dwarf fotresss
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	chargetime = 0
-	recovery = 5
 	penfactor = 10
-	reach = 1
 	icon_state = "incrack"
 	canparry = TRUE
 	item_damage_type = "slash"
+	acc_bonus = 12
 
 /datum/intent/whip/crack/metal
 	penfactor = 20

@@ -8,8 +8,8 @@
 	icon_state = "shovel"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
-	force = DAMAGE_STAFF - 5
-	force_wielded = DAMAGE_STAFF_WIELD - 3
+	force = DAMAGE_CLUB - 5
+	force_wielded = DAMAGE_CLUB_WIELD - 2
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SHOVEL_STRIKE)
@@ -27,7 +27,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	associated_skill = /datum/skill/combat/polearms
-	max_blade_int = 50
+	max_blade_int = 100
 	grid_width = 32
 	grid_height = 96
 	var/time_multiplier = 1 //multipler to do_after times

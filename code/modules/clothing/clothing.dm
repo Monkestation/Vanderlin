@@ -252,23 +252,34 @@
 	if(loc == user)
 		user.regenerate_clothes()
 
-/obj/item/clothing/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
+/obj/item/clothing/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
-	if(slot_flags & slot)
-		if(M.gender in allowed_sex)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(H.dna)
-					if(!(H.age in allowed_ages))
-						return FALSE
-					if(H.dna.species.id in allowed_race)
-						return TRUE
-					else
-						return FALSE
-			return TRUE
-		else
-			return FALSE
+
+	if(!(slot_flags & slot))
+		return FALSE
+
+	if(!(M.gender in allowed_sex))
+		return FALSE
+
+	if(!ishuman(M))
+		return FALSE
+
+	var/mob/living/carbon/human/H = M
+
+	if(!(H.age in allowed_ages))
+		return FALSE
+
+	var/datum/species/species = H.dna?.species
+	if(!species)
+		return FALSE
+
+	var/used_species_id = species.id_override ? species.id_override : species.id
+
+	if(!(used_species_id in allowed_race))
+		return FALSE
+
+	return TRUE
 
 /obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
 	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)

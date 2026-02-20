@@ -2034,15 +2034,19 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 			if(is_role_banned(C.ckey, job_check.title))
 				continue
+
 			if(job_check.banned_leprosy && is_misc_banned(C.ckey, BAN_MISC_LEPROSY))
 				continue
+
 			if(job_check.banned_lunatic && is_misc_banned(C.ckey, BAN_MISC_LUNATIC))
 				continue
 
-			if(length(job_check.allowed_races) && !(prefs.pref_species.id in job_check.allowed_races))
+			if(!job_check.prefs_species_check(prefs))
 				continue
+
 			if(length(job_check.allowed_sexes) && !(prefs.gender in job_check.allowed_sexes))
 				continue
+
 			if(length(job_check.allowed_ages) && !(prefs.age in job_check.allowed_ages))
 				continue
 
@@ -2116,14 +2120,20 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		// Check role bans
 		if(is_role_banned(player.ckey, job_check.title))
 			job_fail += "You are banned from this role"
+
 		if(job_check.banned_leprosy && is_misc_banned(player.ckey, BAN_MISC_LEPROSY))
 			job_fail += "Leprosy restriction"
+
 		if(job_check.banned_lunatic && is_misc_banned(player.ckey, BAN_MISC_LUNATIC))
 			job_fail += "Lunatic restriction"
 
 		// Check allowed races
-		if(length(job_check.allowed_races) && !(prefs.pref_species.id in job_check.allowed_races))
+		var/player_species_id_job = prefs.pref_species.id_override ? prefs.pref_species.id_override : prefs.pref_species.id
+		if(length(job_check.allowed_races) && !(player_species_id_job in job_check.allowed_races))
 			job_fail += "Wrong species (allowed: [job_check.allowed_races.Join(", ")])"
+
+		if(length(job_check.blacklisted_species) && (player_species_id_job in job_check.blacklisted_species))
+			job_fail += "Wrong species (disallowed: [job_check.blacklisted_species.Join(", ")])"
 
 		// Check allowed sexes
 		if(length(job_check.allowed_sexes) && !(prefs.gender in job_check.allowed_sexes))

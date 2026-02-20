@@ -114,6 +114,9 @@
 #define GAMEMODE_PANEL_MAIN "Main"
 #define GAMEMODE_PANEL_VARIABLES "Variables"
 
+/// The concrete number for what is considered "lowpop" on Vanderlin
+#define LOWPOP_THRESHOLD 35
+
 #define MUNDANE_POINT_THRESHOLD 20
 #define MODERATE_POINT_THRESHOLD 35
 #define MAJOR_POINT_THRESHOLD 70

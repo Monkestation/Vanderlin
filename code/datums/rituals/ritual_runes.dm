@@ -743,7 +743,7 @@ GLOBAL_LIST(teleport_runes)
 
 /obj/effect/decal/cleanable/roguerune/arcyne/summoning/Destroy()
 	if(summoning)
-		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, TRAIT_GENERIC)	//can't kill while planar bound.
+		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, MAGIC_TRAIT)	//can't kill while planar bound.
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE
@@ -760,7 +760,7 @@ GLOBAL_LIST(teleport_runes)
 		do_invoke_glow()
 		sleep(20)
 		animate(summoned_mob, color = null,time = 5)
-		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, TRAIT_GENERIC)	//can't kill while planar bound.
+		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, MAGIC_TRAIT)	//can't kill while planar bound.
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE

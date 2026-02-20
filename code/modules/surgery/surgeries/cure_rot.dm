@@ -18,7 +18,7 @@
 
 	implements = list(
 		TOOL_CAUTERY = 85,
-		/obj/item/clothing/neck/psycross = 85,
+		/obj/item/clothing/neck/psycross/silver = 85,
 		TOOL_WELDER = 70,
 		/obj/item = 35,
 	)

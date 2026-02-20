@@ -3,8 +3,8 @@
 	desc = ""
 	icon_state = "srat"
 	icon = 'icons/roguetown/mob/monster/rat.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
-	foodtype = RAW
+	nutrition = MINCE_NUTRITION
+	foodtype = RAW | MEAT
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	pass_flags = PASSDOORS
@@ -47,7 +47,7 @@
 	name = "fried rat"
 	icon_state = "cookedrat"
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("burnt flesh" = 1)
 	rotprocess = SHELFLIFE_SHORT

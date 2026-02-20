@@ -25,18 +25,13 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	src.holder = holder
 	RegisterSignal(holder, COMSIG_PARENT_QDELETING, PROC_REF(on_holder_qdel))
 	RegisterSignal(holder, COMSIG_SKILL_RANK_CHANGE, PROC_REF(on_skill_change))
-	holder.verbs += list(/mob/living/carbon/human/proc/setaudience, \
-		/mob/living/carbon/human/proc/clearaudience, \
-		/mob/living/carbon/human/proc/checkaudience)
+	add_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience))
 	set_inspiration_tier(bard_tier_override)
 
 /datum/inspiration/Destroy(force)
 	if(ishuman(holder))
 		holder.inspiration = null
-	holder.verbs -= list(/mob/living/carbon/human/proc/setaudience, \
-		/mob/living/carbon/human/proc/clearaudience, \
-		/mob/living/carbon/human/proc/checkaudience, \
-		/mob/living/carbon/human/proc/picksongs)
+	remove_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience, /mob/living/carbon/human/proc/picksongs))
 	holder.remove_spells(source = src)
 	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_CHANGE))
 	holder = null
@@ -93,7 +88,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	current_tier = target_tier
 	maxaudience = 2 * current_tier
 	if(length(available_song_tiers))
-		holder.verbs |= /mob/living/carbon/human/proc/picksongs
+		add_verb(holder, /mob/living/carbon/human/proc/picksongs)
 
 /**
  * MOB VERBS FOR INSPIRATION
@@ -101,7 +96,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/setaudience()
 	set name = "Audience Choice"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -124,7 +119,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/clearaudience()
 	set name = "Clear Audience"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 	if(!inspiration)
 		return
 	if(has_status_effect(/datum/status_effect/stacking/playing_inspiration)) // cant clear while playing
@@ -135,7 +130,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/checkaudience()
 	set name = "Check Audience"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -149,7 +144,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/picksongs()
 	set name = "Fill Songbook"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -184,4 +179,4 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	add_spell(item, source = inspiration)
 	inspiration.available_song_tiers -= chosensongtier
 	if(!length(inspiration.available_song_tiers))
-		verbs -= /mob/living/carbon/human/proc/picksongs
+		add_verb(src, /mob/living/carbon/human/proc/picksongs)
