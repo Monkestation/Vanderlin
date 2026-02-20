@@ -67,7 +67,7 @@
 					victim.adjustBruteLoss(-50, TRUE)
 					victim.adjustFireLoss(-50, TRUE)
 					return 0
-				if(victim.mind && victim.bloodpool <= 150 && victim.blood_volume <= BLOOD_VOLUME_SURVIVE && clan_position?.can_assign_positions && !victim.clan && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
+				if(victim.mind && victim.bloodpool <= 150 && victim.blood_volume <= BLOOD_VOLUME_BAD && clan_position?.can_assign_positions && !victim.clan && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
 					victim.SetUnconscious(15 SECONDS)
 					to_chat(src, span_warning("Your victim faints from the excessive draining."))
 					if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
@@ -85,7 +85,7 @@
 				trans_volume -= victim.reagents.get_reagent_amount(reagent_type, FALSE)
 			if(trans_volume > 0)
 				blood_purity = victim.blood_volume / (victim.blood_volume + trans_volume)
-				victim.reagents.trans_to(src, ingesting_volume * BLOODLETTING_MULT * (1 - blood_purity), transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
+				victim.reagents.trans_to(src, ingesting_volume * (1 - blood_purity), transfered_by=src, method=INGEST, ignored_reagents=blacklisted_reagents)
 		var/blood_to_drink = min(victim.blood_volume, ingesting_volume * blood_purity)
 		blood_data?["vitae"] = used_vitae / blood_to_drink
 		var/datum/reagents/holder = new(maximum = blood_to_drink)
