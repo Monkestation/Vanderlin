@@ -3276,6 +3276,7 @@
 #include "code\modules\mob\living\carbon\human\voicepacks\other\lich.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\other\orc.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\other\rousman.dm"
+#include "code\modules\mob\living\carbon\human\voicepacks\other\silent.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\other\skeleton.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\other\werewolf.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\other\zombie.dm"
