@@ -82,6 +82,10 @@
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/automaton.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/m/automaton.dmi'
 
+	soundpack_m = null
+	soundpack_f = null
+
+
 	enflamed_icon = "widefire"
 
 	exotic_bloodtype = /datum/blood_type/oil
