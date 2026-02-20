@@ -136,7 +136,7 @@
 /datum/stress_event/rotfood
 	timer = 2 MINUTES
 	stress_change = 4
-	desc = "<span class='red'>YUCK! MAGGOTS!</span>"
+	desc = "<span class='necrosis'>I felt a maggot wriggle as I swallowed...</span>"
 
 /datum/stress_event/psycurselight
 	timer = 1 MINUTES
@@ -212,7 +212,7 @@
 /datum/stress_event/tieb
 	timer = 30 SECONDS
 	stress_change = 1
-	desc = "<span class='red'>Helldweller... better stay away.</span>"
+	desc = "<span class='red'>Helldweller... harbingers of misfortune.</span>"
 
 /datum/stress_event/horc
 	timer = 30 SECONDS
@@ -343,8 +343,19 @@
 /datum/stress_event/saw_wonder
 	stress_change = 4
 	desc = span_boldred("<B>I have seen something nightmarish, and I fear for my life!</B>")
-	timer = 999 MINUTES
+	timer = 7.5 MINUTES
 
+/datum/stress_event/saw_wonder/on_apply(mob/living/user)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/scared = user
+		scared.add_curse(/datum/curse/schizophrenic)
+
+/datum/stress_event/saw_wonder/on_remove(mob/living/user)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/scared = user
+		scared.remove_curse(/datum/curse/schizophrenic)
 
 /datum/stress_event/confessed
 	stress_change = 3
@@ -750,3 +761,22 @@
 	timer = 3 MINUTES
 	stress_change = 2
 	desc = span_red("I'm covered in feces! Disgusting!")
+
+/datum/stress_event/malaguero
+	timer = 1 MINUTES
+	stress_change = 2
+	max_stacks = 3
+	stress_change_per_extra_stack = 1
+	quality_modifier = -2
+	hidden = TRUE
+	desc = span_red("I feel the malaguero of another.")
+
+/datum/stress_event/malaguero/on_apply(mob/living/user)
+	. = ..()
+	if(istiefling(user))
+		max_stacks = 1
+		stress_change = 0
+		quality_modifier = 0
+
+/datum/stress_event/malaguero/can_show(mob/living/user)
+	return istiefling(user) || ..()

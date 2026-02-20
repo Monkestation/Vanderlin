@@ -461,8 +461,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		max_blade_int = 0
 		blade_int = 0
 
-	if(max_blade_int && !blade_int) //set blade integrity to randomized 60% to 100% if not already set
+	//Randomizes blade sharpness on initialize to between 60-100%
+	if(max_blade_int && !blade_int)
 		blade_int = max_blade_int + rand(-(max_blade_int * 0.4), 0)
+
 
 	if(!pixel_x && !pixel_y && !bigboy)
 		pixel_x = rand(-5,5)

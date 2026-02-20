@@ -40,6 +40,7 @@
 
 	no_boobs = TRUE
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1)
 	exotic_bloodtype = /datum/blood_type/human/rakshari
 
 	offset_features_m = list(

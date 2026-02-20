@@ -10776,11 +10776,11 @@
 /area/indoors/town/clocktower)
 "jVK" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
+/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
 /turf/open/floor/ruinedwood,
 /area/under/town/basement)
 "jWj" = (
@@ -19991,11 +19991,11 @@
 /area/indoors/town)
 "sqy" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
-/obj/item/reagent_containers/food/snacks/griddlecake/berry_poison,
-/obj/item/reagent_containers/food/snacks/biscuit_poison,
-/obj/item/reagent_containers/food/snacks/biscuit_poison,
-/obj/item/reagent_containers/food/snacks/biscuit_poison,
-/obj/item/reagent_containers/food/snacks/biscuit_poison,
+/obj/item/reagent_containers/food/snacks/griddlecake/berry/poison,
+/obj/item/reagent_containers/food/snacks/biscuit/poison,
+/obj/item/reagent_containers/food/snacks/biscuit/poison,
+/obj/item/reagent_containers/food/snacks/biscuit/poison,
+/obj/item/reagent_containers/food/snacks/biscuit/poison,
 /obj/structure/trap/shock,
 /turf/open/water/blood,
 /area/under/town/basement)

@@ -256,6 +256,7 @@
 		/datum/quirk/vice/lost_keys,
 		/datum/quirk/boon/always_prepared,
 	)
+	preview_render = FALSE
 
 /datum/quirk/vice/rough_start/on_spawn()
 	if(!owner || !ishuman(owner))
@@ -303,6 +304,7 @@
 	incompatible_quirks = list(
 		/datum/quirk/vice/rough_start,
 	)
+	preview_render = FALSE
 
 /datum/quirk/vice/lost_keys/on_spawn()
 	if(!owner || !ishuman(owner))

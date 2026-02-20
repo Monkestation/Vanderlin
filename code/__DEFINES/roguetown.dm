@@ -98,42 +98,6 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define STRESS_GOOD 1
 #define STRESS_VGOOD -4
 
-/*	........   Nutrition defines   ................ */
-#define MEAL_FILLING 30
-#define MEAL_GOOD 24
-#define MEAL_AVERAGE 18
-#define MEAL_MEAGRE 15
-#define SNACK_CHUNKY 12
-#define SNACK_NUTRITIOUS 9
-#define SNACK_DECENT 6
-#define SNACK_POOR 3
-
-
-#define MEATPIE_NUTRITION (MINCE_NUTRITION * 3) + BUTTERDOUGH_NUTRITION
-#define FRUITPIE_NUTRITION (SNACK_POOR * 3) + BUTTERDOUGH_NUTRITION
-#define BREADSLICE_NUTRITION SNACK_POOR
-#define DOUGH_NUTRITION BREADSLICE_NUTRITION * 6
-#define SMALLDOUGH_NUTRITION (MEAL_MEAGRE / 2)
-#define BUTTERDOUGH_NUTRITION DOUGH_NUTRITION + BUTTER_NUTRITION
-#define BUTTERDOUGHSLICE_NUTRITION (BUTTERDOUGH_NUTRITION / 2)
-#define BUTTER_NUTRITION SNACK_POOR
-#define RAWMEAT_NUTRITION SNACK_DECENT
-#define COOKED_MEAT_NUTRITION SNACK_NUTRITIOUS
-#define MINCE_NUTRITION SNACK_DECENT
-#define SAUSAGE_NUTRITION MINCE_NUTRITION + COOKED_FAT_NUTRITION
-#define CHEESE_NUTRITION SNACK_DECENT
-#define EGG_NUTRITION SNACK_DECENT
-#define FRYVEGGIE_NUTRITION SNACK_POOR
-#define COOKED_FAT_NUTRITION SNACK_DECENT
-
-/*	........   Rotting Food defines   ................ */
-#define SHELFLIFE_EXTREME 90 MINUTES
-#define SHELFLIFE_LONG 50 MINUTES
-#define SHELFLIFE_DECENT 30 MINUTES
-#define SHELFLIFE_SHORT 20 MINUTES
-#define SHELFLIFE_TINY 12 MINUTES
-#define SHELFLIFE_MINISCULE 5 MINUTES
-
 /*
 	Formerly bitflags, now we are strings
 	Currently used for classes, I could have used these for drifters tho
@@ -166,16 +130,6 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
-
-#define ANY_CLASS_CTAGS list(\
-	CTAG_PILGRIM, \
-	CTAG_ADVENTURER, \
-	CTAG_TOWNER, \
-	CTAG_MERCENARY, \
-	CTAG_GARRISON, \
-	CTAG_FORGARRISON, \
-	CTAG_MENATARMS, \
-)
 
 // .............. SELLPRICE/VALUE DEFINES ..................... //
 // Basicallly material cost + work cost will be the value from now on. Needs work to value these things in comparison but its a simple way to get some consistency to it
@@ -329,17 +283,17 @@ Thing can move up or down an armor class by significant changes to coverage & cr
 #define ARMOR_WEAK			list("blunt" = 10, "slash" = 10, "stab" = 10, "piercing" = 5, "fire" = 0, "acid" = 0)
 
 #define ARMOR_PADDED_BAD	list("blunt" = 15, "slash" = 15, "stab" = 15, "piercing" = 15, "fire" = 0, "acid" = 0)
-#define ARMOR_PADDED		list("blunt" = 25, "slash" = 25, "stab" = 25, "piercing" = 30, "fire" = 0, "acid" = 0)
-#define ARMOR_PADDED_GOOD	list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 35, "fire" = 0, "acid" = 0)
+#define ARMOR_PADDED		list("blunt" = 35, "slash" = 25, "stab" = 25, "piercing" = 30, "fire" = 0, "acid" = 0)
+#define ARMOR_PADDED_GOOD	list("blunt" = 45, "slash" = 30, "stab" = 30, "piercing" = 35, "fire" = 0, "acid" = 0)
 
 #define ARMOR_LEATHER_BAD	list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
 #define ARMOR_LEATHER		list("blunt" = 35, "slash" = 35, "stab" = 35, "piercing" = 15, "fire" = 0, "acid" = 0)
 #define	ARMOR_LEATHER_GOOD	list("blunt" = 40, "slash" = 40, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
 
 // Medium AC
-#define ARMOR_MAILLE_IRON	list("blunt" = 45, "slash" = 45, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
-#define ARMOR_MAILLE		list("blunt" = 55, "slash" = 55, "stab" = 55, "piercing" = 40, "fire" = 0, "acid" = 0)
-#define ARMOR_MAILLE_GOOD	list("blunt" = 60, "slash" = 60, "stab" = 60, "piercing" = 45, "fire" = 0, "acid" = 0)
+#define ARMOR_MAILLE_IRON	list("blunt" = 30, "slash" = 45, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
+#define ARMOR_MAILLE		list("blunt" = 45, "slash" = 55, "stab" = 55, "piercing" = 40, "fire" = 0, "acid" = 0)
+#define ARMOR_MAILLE_GOOD	list("blunt" = 55, "slash" = 60, "stab" = 60, "piercing" = 45, "fire" = 0, "acid" = 0)
 #define ARMOR_SCALE			list("blunt" = 65, "slash" = 65, "stab" = 65, "piercing" = 65, "fire" = 0, "acid" = 0)
 #define ARMOR_BRIGANDINE	list("blunt" = 70, "slash" = 70, "stab" = 70, "piercing" = 50, "fire" = 0, "acid" = 0)
 

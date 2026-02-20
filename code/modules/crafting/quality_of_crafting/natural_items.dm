@@ -43,6 +43,19 @@
 	output = /obj/item/rope
 	crafting_message = "starts to braid some fibers"
 
+/datum/repeatable_crafting_recipe/survival/net
+	name = "rope net"
+	requirements = list(
+		/obj/item/rope = 2
+	)
+
+	starting_atom = /obj/item/rope
+	attacked_atom = /obj/item/rope
+	output = /obj/item/rope/net
+	crafting_message = "starts to braid some rope"
+	skillcraft = /datum/skill/craft/traps
+	craftdiff = 1
+
 /datum/repeatable_crafting_recipe/survival/woodenbucket
 	name = "wooden bucket"
 	requirements = list(
@@ -155,6 +168,17 @@
 	starting_atom = /obj/item/grown/log/tree/stick
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/knife/stone
+
+/datum/repeatable_crafting_recipe/survival/stone_sword
+	name = "stone sword"
+	requirements = list (
+		/obj/item/natural/rock = 1,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+
+	starting_atom = /obj/item/weapon/knife
+	attacked_atom = /obj/item/natural/rock
+	output = /obj/item/weapon/sword/stone
 
 /datum/repeatable_crafting_recipe/survival/stone_hoe
 	name = "stone hoe"

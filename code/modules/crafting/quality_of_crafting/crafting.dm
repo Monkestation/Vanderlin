@@ -597,7 +597,7 @@
 	blacklisted_paths = subtypesof(/obj/item/rope)
 
 /datum/repeatable_crafting_recipe/crafting/bigflail
-	name = "great militia flail"
+	name = "great studded flail"
 	requirements = list(
 		/obj/item/weapon/thresher= 1,
 		/obj/item/rope/chain = 1,

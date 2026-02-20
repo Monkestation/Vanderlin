@@ -6227,7 +6227,7 @@
 	pixel_x = 6;
 	pixel_y = 7
 	},
-/obj/item/reagent_containers/food/snacks/griddlecake/berry_poison{
+/obj/item/reagent_containers/food/snacks/griddlecake/berry/poison{
 	pixel_x = -5;
 	pixel_y = 6
 	},
@@ -37656,7 +37656,7 @@
 /obj/machinery/light/fueled/torchholder/metal_torch{
 	pixel_y = 32
 	},
-/obj/item/reagent_containers/food/snacks/biscuit_poison{
+/obj/item/reagent_containers/food/snacks/biscuit/poison{
 	pixel_x = 2;
 	pixel_y = 13
 	},
@@ -40107,7 +40107,7 @@
 	pixel_x = -4;
 	pixel_y = 8
 	},
-/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison{
+/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison{
 	pixel_x = -4;
 	pixel_y = 10
 	},

@@ -27,7 +27,7 @@
 	SSroguemachine.scomm_machines -= src
 	return ..()
 
-/obj/item/speakerinq/attack_self(mob/user, params)
+/obj/item/speakerinq/attack_self(mob/user, list/modifiers)
 	. = ..()
 	user.changeNext_move(6)
 	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
@@ -130,7 +130,7 @@
 	inqdesc = "An ever-attentive ear... [span_notice("This ear's been bent. It's labelled as [label].")]"
 	desc = inqdesc
 
-/obj/item/listeningdevice/attack_hand_secondary(mob/user, params)
+/obj/item/listeningdevice/attack_hand_secondary(mob/user, list/modifiers)
 	if(!hidden)
 		alpha = 30
 		name = "thing"

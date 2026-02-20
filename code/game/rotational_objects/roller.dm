@@ -303,7 +303,7 @@
 	build_roller_chain()
 	return TRUE
 
-/obj/structure/roller/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/roller/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(istype(attacking_item, /obj/item/roller_sorter_lister))
 		var/obj/structure/roller_sorter/new_sorter = new(get_turf(src))
 		new_sorter.parent_roller = src

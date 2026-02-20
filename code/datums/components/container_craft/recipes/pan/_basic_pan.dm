@@ -20,7 +20,7 @@
 		created_output.AddComponent(/datum/component/temporary_pollution_emission, cooked_smell, 20, 5 MINUTES)
 
 	for(var/obj/item/reagent_containers/food/snacks/item in removing_items)
-		item.initialize_cooked_food(created_output, 1)
+		item.initialize_cooked_food(list(created_output), 1)
 
 /datum/container_craft/pan/try_craft(obj/item/crafter, list/pathed_items, mob/initiator, datum/callback/on_craft_start, datum/callback/on_craft_failed)
 	if(!istype(crafter.loc, /obj/machinery/light/fueled))
@@ -53,14 +53,8 @@
 
 /datum/container_craft/pan/truffle
 	name = "Fried Truffles"
-	requirements = list(/obj/item/reagent_containers/food/snacks/truffles = 1)
+	wildcard_requirements =  list(/obj/item/reagent_containers/food/snacks/truffles = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/truffle
-	cooked_smell = /datum/pollutant/food/truffles
-
-/datum/container_craft/pan/truffle/toxic
-	hides_from_books = TRUE
-	requirements = list(/obj/item/reagent_containers/food/snacks/toxicshrooms = 1)
-	output = /obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
 	cooked_smell = /datum/pollutant/food/truffles
 
 /datum/container_craft/pan/fish
@@ -168,7 +162,7 @@
 
 /datum/container_craft/pan/wiener
 	name = "Fried Wiener"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/wiener = 1)
+	requirements = list(/obj/item/reagent_containers/food/snacks/meat/sausage/wiener = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener
 	cooked_smell = /datum/pollutant/food/sausage
 
@@ -198,25 +192,25 @@
 
 /datum/container_craft/pan/frybird
 	name = "Fry Bird"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/frybird
 	cooked_smell = /datum/pollutant/food/fried_chicken
 
 /datum/container_craft/pan/strange
 	name = "Fried Strange Meat"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/strange = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/strange = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/strange
 	cooked_smell = /datum/pollutant/food/fried_meat
 
 /datum/container_craft/pan/ham
 	name = "Ham"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/fatty = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/fatty = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/ham
 	cooked_smell = /datum/pollutant/food/bacon
 
 /datum/container_craft/pan/frysteak
 	name = "Fry Steak"
-	requirements = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1)
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/frysteak
 	cooked_smell = /datum/pollutant/food/fried_meat
 
@@ -255,13 +249,6 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	cooked_smell = /datum/pollutant/food/griddlecake
-
-/datum/container_craft/pan/griddlecakepoisonberry
-	name = "Jacksberry Griddlecake"
-	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/poisonberrygriddlecake_raw = 1)
-	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry_poison
-	cooked_smell = /datum/pollutant/food/griddlecake
-	hides_from_books = TRUE
 
 /datum/container_craft/pan/fried_messenger
 	name = "Fried Messenger"

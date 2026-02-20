@@ -374,6 +374,9 @@ SUBSYSTEM_DEF(job)
 					var/list/char_data = player.multi_ready_characters[char_idx]
 					var/list/char_job_prefs = char_data["job_preferences"]
 
+					if(!length(char_job_prefs))
+						continue
+
 					// Apply this character temporarily for eligibility checks
 					player.apply_multi_ready_character(char_idx)
 

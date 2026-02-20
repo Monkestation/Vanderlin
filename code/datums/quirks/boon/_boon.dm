@@ -285,17 +285,10 @@
 	point_value = -8
 	preview_render = FALSE
 
-	var/obj/item/storage/backpack/B
-
 /datum/quirk/boon/packmule/after_job_spawn(datum/job/job)
-	var/turf/T = get_turf(owner)
-	B = new(T)
-	if(!owner.equip_to_appropriate_slot(B) || isturf(B.loc)) //missing a limb can cause phantom success procs
-		for(var/obj/item/storage/storage in owner.contents)
-			if(storage)
-				if(SEND_SIGNAL(storage, COMSIG_TRY_STORAGE_INSERT, B, null))
-					break
-	B = null
+	var/obj/item/storage/backpack/backpack/pack = new(get_turf(owner))
+	if(!owner.equip_to_appropriate_slot(pack))
+		owner.put_in_hands(pack)
 
 /datum/quirk/boon/rider
 	name = "Experienced Rider"

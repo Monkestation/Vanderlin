@@ -452,9 +452,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 
 	//Validate job prefs
-	for(var/j in job_preferences)
-		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
-			job_preferences -= j
+	if(!job_preferences)
+		job_preferences = list()
+	else
+		for(var/j in job_preferences)
+			if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
+				job_preferences -= j
 
 	S["customizer_entries"] >> customizer_entries
 	validate_customizer_entries()

@@ -55,7 +55,7 @@
 			if(/datum/patron/divine/astrata)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 			if(/datum/patron/divine/dendor)
-				spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+				spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 			if(/datum/patron/divine/necra)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 				ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
