@@ -2,7 +2,7 @@
 	race = /datum/species/dwarf/mountain/subterra
 
 /datum/species/dwarf/mountain/subterra
-	name = "Subterran Dwarf"
+	name = "Jarosite Dwarf"
 	id = SPEC_ID_DWARF_SUBTERRAN
 	id_override = SPEC_ID_DWARF
 	desc = "Dwarves lost to the darkest reaches of Subterra.\

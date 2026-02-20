@@ -1054,6 +1054,12 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/helmet/visored/silver
 
+/datum/anvil_recipe/armor/silver/armet
+	name = "Silver Armet (+Steel Bar x2)"
+	recipe_name = "a silver bascinet"
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/visored/silver/armet
+
 /datum/anvil_recipe/armor/silver/plateleg
 	name = "Silver Plate Chausses (+Steel Bar x2)"
 	recipe_name = "a pair of Silver Plate Chausses"
@@ -1065,6 +1071,20 @@
 	recipe_name = "a Full-Plate Silver Armor"
 	additional_items = list(/obj/item/ingot/silver, /obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/plate/full/silver
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/silver/gauntlet
+	name = "Silver Gauntlets"
+	recipe_name = "a pair of Silver Gauntlets"
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/clothing/gloves/plate/silver
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/silver/boots
+	name = "Silver Boots"
+	recipe_name = "a pair of Silver Boots"
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/clothing/shoes/boots/armor/silver
 	craftdiff = 4
 
 //////////////////////////////////////////////////////////////////////////////////////////////

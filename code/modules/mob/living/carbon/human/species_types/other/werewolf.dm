@@ -67,6 +67,8 @@
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/steak = 3)
+
 	changesource_flags = WABBAJACK
 	bleed_mod = 0.6
 	pain_mod = 0.2

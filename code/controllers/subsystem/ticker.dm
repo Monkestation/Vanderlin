@@ -156,7 +156,7 @@ SUBSYSTEM_DEF(ticker)
 		music -= S
 
 	if(isemptylist(music))
-		music = world.file2list(ROUND_START_MUSIC_LIST, "\n")
+		music = file2list(ROUND_START_MUSIC_LIST, "\n")
 		login_music = pick(music)
 	else
 		login_music = "[global.config.directory]/title_music/sounds/[pick(music)]"
@@ -487,8 +487,8 @@ SUBSYSTEM_DEF(ticker)
 	if(selected_tip)
 		m = selected_tip
 	else
-		var/list/randomtips = world.file2list("strings/tips.txt")
-//		var/list/memetips = world.file2list("strings/sillytips.txt")
+		var/list/randomtips = file2list("strings/tips.txt")
+//		var/list/memetips = file2list("strings/sillytips.txt")
 //		if(randomtips.len && prob(95))
 		m = pick(randomtips)
 //		else if(memetips.len)

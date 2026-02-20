@@ -22,8 +22,6 @@
 	\n\n\
 	THIS IS AN <I>EXTREMELY</I> DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
 
-	skin_tone_wording = "Clan"
-
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_STINKY)
 
@@ -73,7 +71,7 @@
 	enflamed_icon = "widefire"
 
 	exotic_bloodtype = /datum/blood_type/human/horc
-	meat = /obj/item/reagent_containers/food/snacks/meat/strange
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/strange = 0.5)
 
 	customizers = list(
 		/datum/customizer/organ/ears/halforc,
@@ -156,8 +154,8 @@
 	))
 
 /datum/species/halforc/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/other/halforcm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/other/halforcf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/other/halforcm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/other/halforcf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/halforc/get_possible_surnames(gender = MALE)

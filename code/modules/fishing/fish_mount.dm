@@ -50,7 +50,7 @@
 	mounted_fish?.forceMove(loc)
 	. = ..()
 
-/obj/structure/fish_mount/attackby(obj/item/item, mob/user, params)
+/obj/structure/fish_mount/attackby(obj/item/item, mob/user, list/modifiers)
 	if(!isfish(item))
 		return ..()
 	if(mounted_fish)

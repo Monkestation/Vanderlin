@@ -34,7 +34,7 @@
 	UnregisterSignal(H, COMSIG_MOB_ITEM_ATTACK)
 	to_chat(H, span_notice("The C.C.M.S implant's connection to your motor systems fades."))
 
-/datum/augment/special/dualwield/proc/on_item_attack(datum/source, mob/target, mob/user, params, obj/item/weapon)
+/datum/augment/special/dualwield/proc/on_item_attack(datum/source, mob/target, mob/user, list/modifiers, obj/item/weapon)
 	SIGNAL_HANDLER
 
 	var/mob/living/carbon/human/H = source
