@@ -1025,7 +1025,7 @@
 		to_chat(user, span_warning("They've already been bagged."))
 		return ITEM_INTERACT_BLOCKING
 
-	headgear = M.get_item_by_slot(ITEM_SLOT_HEAD)
+	var/obj/item/headgear = M.get_item_by_slot(ITEM_SLOT_HEAD)
 
 	var/trained = FALSE
 	var/timetobag = 8 SECONDS
