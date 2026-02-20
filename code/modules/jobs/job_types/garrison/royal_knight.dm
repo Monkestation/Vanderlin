@@ -148,7 +148,7 @@
 /datum/job/advclass/royalknight/knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/selectablehelmets = list(
-		"hounskull" = /obj/item/clothing/head/helmet/visored/hounskull,
+		"Hounskull" = /obj/item/clothing/head/helmet/visored/hounskull,
 		"Bastion Helmet" = /obj/item/clothing/head/helmet/heavy/necked,
 		"Royal Knight Helmet" = /obj/item/clothing/head/helmet/visored/royalknight,
 		"Knight Helmet" = /obj/item/clothing/head/helmet/visored/knight,
