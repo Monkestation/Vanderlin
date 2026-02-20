@@ -149,7 +149,6 @@
 	. = ..()
 	var/static/list/selectablehelmets = list(
 		"Hounskull" = /obj/item/clothing/head/helmet/visored/hounskull,
-		"Bastion Helmet" = /obj/item/clothing/head/helmet/heavy/necked,
 		"Royal Knight Helmet" = /obj/item/clothing/head/helmet/visored/royalknight,
 		"Knight Helmet" = /obj/item/clothing/head/helmet/visored/knight,
 		"Decorated Knight Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/knight,
