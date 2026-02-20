@@ -604,7 +604,7 @@
 	//This is returning the maximum of the arguments meaning this is to prevent negative values.
 	newforce = max(newforce, 1)
 	if(dullness_ratio)
-		if(dullness_ratio < SHARPNESS_TIER2_THRESHOLD)
+		if(dullness_ratio < SHARPNESS_TIER2_THRESHOLD && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
 			var/lerpratio = LERP(0, SHARPNESS_TIER2_THRESHOLD, (dullness_ratio / SHARPNESS_TIER2_THRESHOLD))
 			if(prob(33))
 				to_chat(user, span_info("The blade is dull..."))
