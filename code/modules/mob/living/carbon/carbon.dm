@@ -437,9 +437,8 @@
 	visible_message(span_danger("[src] manages to [cuff_break ? "break" : "remove"] [I]!"))
 	to_chat(src, span_notice("You successfully [cuff_break ? "break" : "remove"] [I]."))
 
-	if(istype(I, /obj/item/net))
-		if(has_status_effect(/datum/status_effect/debuff/netted))
-			remove_status_effect(/datum/status_effect/debuff/netted)
+	if(istype(I, /obj/item/rope/net))
+		remove_status_effect(/datum/status_effect/debuff/netted)
 
 	if(cuff_break)
 		. = !((I == handcuffed) || (I == legcuffed))

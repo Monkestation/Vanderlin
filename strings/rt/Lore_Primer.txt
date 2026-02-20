@@ -677,7 +677,14 @@ While it's not required reading, leadership roles may find this information usef
 	<details>
 		<summary><strong> Graggar, The First Greenskin - 2053 </strong></summary>
 		<br>
-		As knaves and brigands descended upon the ruins of Baotha's lands, one warlord gained quick notoriety and power above them all. Graggar, feared by follower and foe alike for his habit of consuming the flesh of his fallen opponents, tore his way through the steppes and forests North of Zaladin, pillaging, destroying, and consuming in endless destruction and gluttony. None were surprised when his exterior grew as monstrous as interior. With feast after feast, conquest after conquest, the first orc's battle cries were soon heard by the heavens themselves, marking him the third mortal to reach ascendance.
+		As knaves and brigands descended upon the ruins of Baotha's lands, one warlord gained quick notoriety and power above them all. Graggar, feared by follower and foe alike for his habit of consuming the flesh of his fallen opponents, tore his way through the steppes and forests North of Zaladin, pillaging, destroying, and consuming in endless destruction and gluttony. None were surprised when his exterior grew as monstrous as interior. With feast after feast, conquest after conquest, the first orc made himself known to all, particularly the Church, who would respond in kind to his wanton violence.
+		<br><br>
+	</details>
+
+	<details>
+		<summary><strong> The Tragedy of Saint Altierre - 2053 </strong></summary>
+		<br>
+		Shortly after Baotha's ascension, the Church of the Ten had finally narrowed down the requirements of Mortal Ascension, pinpointing the warlord Graggar as the next mortal to achieve Divinity. In response to this, the Church ordered out the founder of the Templaric Order and the greatest combatant among their ranks, Altierre of Ravox, to lead a crusade of the finest hundred templars of the Order to fight Graggar and prevent his ascension. As the two sides met and quickly devolved into combat, the two commanders engaged eachother in battle and mortally wound eachother, leading to Graggar performing his mightiest act and punching a hole through Altierre's chest, ripping her heart out and consuming it, <b>along with her Lux</b>. While Graggar was a month or two away from ascension in his current form, Altierre had been blessed by multiple gods of the Pantheon in their effort to stifle Graggar, leading to her Lux holding more divinity than any other at the time, which backfired as Graggar consumed it, marking himself as the Third Ascendant and First Orc. After this, Altierre's mangled body would be recovered and her name etched into history as a Saint of Ravox.
 		<br><br>
 	</details>
 

@@ -14,6 +14,7 @@
 		/datum/language/dwarvish,
 		/datum/language/elvish,
 		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,

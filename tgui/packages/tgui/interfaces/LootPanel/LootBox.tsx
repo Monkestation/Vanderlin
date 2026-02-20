@@ -42,16 +42,23 @@ export function LootBox(props: Props) {
         act('grab', {
           alt: event.altKey,
           ctrl: event.ctrlKey,
-          ref: item.ref,
           shift: event.shiftKey,
+          ref: item.ref,
         })
       }
-      onContextMenu={(event) => {
+      onAuxClick={(event) => {
         event.preventDefault();
         act('grab', {
-          right: true,
+          middle: event.button === 1,
+          right: event.button === 2,
+          alt: event.altKey,
+          ctrl: event.ctrlKey,
+          shift: event.shiftKey,
           ref: item.ref,
         });
+      }}
+      onContextMenu={(event) => {
+        event.preventDefault();
       }}
     >
       <Stack>

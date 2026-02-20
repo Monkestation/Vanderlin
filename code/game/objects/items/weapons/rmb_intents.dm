@@ -3,6 +3,18 @@
 	var/desc = ""
 	var/icon_state = ""
 	var/def_bonus = 0
+	/// Whether the rclick will try to get turfs as target.
+	var/target_turf = FALSE
+
+/datum/rmb_intent/proc/get_target(atom/initial_target)
+	if(target_turf)
+		return get_turf(initial_target)
+
+	if(ismob(initial_target))
+		return initial_target
+
+	for(var/mob/living/potential in get_turf(initial_target))
+		return potential
 
 /datum/rmb_intent/proc/special_attack(mob/living/user, atom/target)
 	return
@@ -18,6 +30,37 @@
 	desc = "Your attacks have increased strength and have increased force but use more stamina. Higher chance for certain critical hits. Intentionally fails surgery steps. Reduced dodge bonus."
 	icon_state = "rmbstrong"
 	def_bonus = -20
+	target_turf = TRUE
+
+/datum/rmb_intent/strong/special_attack(mob/living/user, atom/target)
+	if(!user)
+		return FALSE
+
+	if(user.incapacitated(IGNORE_GRAB))
+		return FALSE
+
+	if(user.has_status_effect(/datum/status_effect/debuff/specialcd))
+		return FALSE
+
+	var/turf/T = get_target(target)
+	if(!istype(T))
+		return FALSE
+
+	var/obj/item/weapon/held_weapon = user.get_active_held_item()
+
+	if(!istype(held_weapon) || !held_weapon.weapon_special)
+		return FALSE
+
+	var/datum/special_intent/special = held_weapon.weapon_special
+
+	if(!special.deploy(user, held_weapon, target))
+		return FALSE // Invalid starting args somehow
+
+	special.apply_cost(user)
+
+	user.changeNext_move(CLICK_CD_MELEE)
+
+	return TRUE
 
 /datum/rmb_intent/swift
 	name = "swift"
@@ -37,19 +80,18 @@
 	var/feintdur = 7.5 SECONDS
 
 /datum/rmb_intent/feint/special_attack(mob/living/user, atom/target)
-	if(!isliving(target))
-		return
-
 	if(!user)
-		return
+		return FALSE
 
 	if(user.incapacitated(IGNORE_GRAB))
-		return
+		return FALSE
 
 	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
-		return
+		return FALSE
 
-	var/mob/living/defender = target
+	var/mob/living/defender = get_target(target)
+	if(!istype(defender))
+		return FALSE
 
 	user.visible_message(
 		span_danger("[user] feints an attack at [defender]!"),
@@ -118,6 +160,8 @@
 	to_chat(user, span_notice("[defender.p_they(TRUE)] fell for my feint attack!"))
 	to_chat(defender, span_danger("I fall for [user.p_their()] feint attack!"))
 	playsound(user, 'sound/combat/riposte.ogg', 100, TRUE)
+
+	return TRUE
 
 /datum/rmb_intent/riposte
 	name = "defend"
