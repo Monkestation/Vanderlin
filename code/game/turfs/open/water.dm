@@ -486,6 +486,15 @@
 			return
 	. = ..()
 
+/turf/open/water/attack_hand(mob/user)
+	if(isliving(user))
+		var/mob/living/L = user
+		if(get_turf(L) != src)
+			return
+		if(L.stat != CONSCIOUS)
+			return
+		L.zSwim(UP)
+
 /turf/open/water/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -495,27 +504,30 @@
 	var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
 	if(isliving(user))
 		var/mob/living/L = user
-		user.visible_message("<span class='info'>[user] starts to wash in [src].</span>")
-		if(do_after(L, 3 SECONDS, src))
-			if(wash_in)
-				user.wash(CLEAN_WASH)
-			var/datum/reagents/reagents = new()
-			reagents.add_reagent(water_reagent, 4)
-			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = TOUCH)
-			if(!mapped)
-				adjust_originate_watervolume(-2)
-			playsound(user, pick(wash), 100, FALSE)
+		if(get_turf(L) == src && open_bottom)
+			L.zSwim(DOWN)
+		else
+			user.visible_message("<span class='info'>[user] starts to wash in [src].</span>")
+			if(do_after(L, 3 SECONDS, src))
+				if(wash_in)
+					user.wash(CLEAN_WASH)
+				var/datum/reagents/reagents = new()
+				reagents.add_reagent(water_reagent, 4)
+				reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = TOUCH)
+				if(!mapped)
+					adjust_originate_watervolume(-2)
+				playsound(user, pick(wash), 100, FALSE)
 
-			L.ExtinguishMob()
-			//handle hygiene and clean off alcohol
-			var/list/equipped_items = L.get_equipped_items()
-			if(length(equipped_items) > 0)
-				to_chat(user, span_notice("I could probably clean myself faster if I weren't wearing clothes..."))
-				L.adjust_hygiene(HYGIENE_GAIN_CLOTHED * cleanliness_factor)
-				L.adjust_fire_stacks(-4)
-			else
-				L.adjust_hygiene(HYGIENE_GAIN_UNCLOTHED * cleanliness_factor)
-				L.adjust_fire_stacks(-2)
+				L.ExtinguishMob()
+				//handle hygiene and clean off alcohol
+				var/list/equipped_items = L.get_equipped_items()
+				if(length(equipped_items) > 0)
+					to_chat(user, span_notice("I could probably clean myself faster if I weren't wearing clothes..."))
+					L.adjust_hygiene(HYGIENE_GAIN_CLOTHED * cleanliness_factor)
+					L.adjust_fire_stacks(-4)
+				else
+					L.adjust_hygiene(HYGIENE_GAIN_UNCLOTHED * cleanliness_factor)
+					L.adjust_fire_stacks(-2)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, list/modifiers)
@@ -593,8 +605,6 @@
 
 /turf/open/water/zPassOut(atom/movable/A, direction, turf/destination)
 	if(A.anchored && !isprojectile(A))
-		return FALSE
-	if(HAS_TRAIT(A, "hooked"))
 		return FALSE
 	if(direction == DOWN && open_bottom)
 		for(var/obj/O in contents)

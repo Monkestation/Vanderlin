@@ -273,9 +273,6 @@
 		if(isopenspace(below))
 			return TRUE
 
-	if(HAS_TRAIT(src, TRAIT_SUBMERGED))
-		return FALSE
-
 	return !(movement_type & FLYING) && !throwing
 
 /atom/movable/proc/onZImpact(turf/T, levels)
