@@ -20,6 +20,9 @@
 	if(!user)
 		return FALSE
 
+	if(!user.Adjacent(target))
+		return FALSE
+
 	if(user.incapacitated(IGNORE_GRAB))
 		return FALSE
 
