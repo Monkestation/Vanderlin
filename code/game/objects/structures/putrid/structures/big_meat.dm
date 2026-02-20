@@ -57,7 +57,7 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 	evolving_mob.client?.eye = picker
 	picker.show_evolution_options()
 
-/obj/structure/meatvine/papameat/attackby(obj/item/I, mob/user, list/modifiers)
+/obj/structure/meatvine/papameat/attackby(obj/item/I, mob/user, params)
 	if(!master)
 		return ..()
 

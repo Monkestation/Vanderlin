@@ -216,7 +216,7 @@
 	else
 		..()
 
-/turf/closed/attack_hand_secondary(mob/user, list/modifiers)
+/turf/closed/attack_hand_secondary(mob/user, params)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

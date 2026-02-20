@@ -115,10 +115,10 @@
 			return TRUE
 	return ..()
 
-/obj/item/natural/cloth/attack_self(mob/user, list/modifiers)
+/obj/item/natural/cloth/attack_self(mob/user, params)
 	wring_cloth(user.loc, user)
 
-/obj/item/natural/cloth/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/natural/cloth/attack_hand_secondary(mob/user, params)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

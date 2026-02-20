@@ -172,7 +172,7 @@
 	stopgambling = 0
 
 
-/obj/structure/fake_machine/lottery_roguetown/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
+/obj/structure/fake_machine/lottery_roguetown/attackby_secondary(obj/item/weapon, mob/user, params)
 	. = ..()
 
 	if(!ishuman(user) || stopgambling)
