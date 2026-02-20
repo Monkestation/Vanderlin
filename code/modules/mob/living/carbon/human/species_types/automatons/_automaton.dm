@@ -51,6 +51,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
 		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_TOXIMMUNE,
 		TRAIT_FEARLESS
 	)
@@ -76,7 +77,7 @@
 
 	allowed_pronouns = PRONOUNS_LIST_IT_ONLY
 
-	possible_ages = ALL_AGES_LIST
+	possible_ages = list(AGE_IMMORTAL)
 	use_skintones = TRUE
 
 	native_language = "Common"
