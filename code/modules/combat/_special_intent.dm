@@ -52,6 +52,9 @@
 	///If the datum is using multi-timed turfs, only the FIRST one's adjacency is checked ONCE.
 	var/respect_adjacency = TRUE
 
+	/// Check for presence on the starting tile instead of adjacency
+	var/check_starting_loc = TRUE
+
 	/// The only reference we will hold, and only if [respect_adjacency] is TRUE
 	/// If the users loc isn't this when we end, they moved.
 	var/turf/starting_loc = null
@@ -162,10 +165,11 @@
 					coord_x = coord_y
 					coord_y = -temp
 
-		// Note we intentionally don't support duplicate coordinates
 		var/turf/affected = locate(origin.x + coord_x, origin.y + coord_y, origin.z)
 		if(affected && !affected.is_blocked_turf(TRUE))
-			affected_turfs[affected] = delay
+			// Map each turf to a list of delays on it
+			// This allows for multiple effects on the same turf without duplicate turf entries
+			LAZYADDASSOCLIST(affected_turfs, affected, delay)
 
 	return affected_turfs
 
@@ -197,11 +201,12 @@
 		user.apply_status_effect(/datum/status_effect/debuff/clickcd, attack_delay)
 
 	for(var/turf/affected as anything in turfs)
-		var/delay = attack_delay + LAZYACCESS(turfs, affected)
-		var/obj/effect/temp_visual/duration_setting/effect = new(affected, delay)
-		effect.icon = icon
-		effect.icon_state = pre_icon_state
-		effect.plane = GAME_PLANE_FOV_HIDDEN
+		for(var/delay in turfs[affected])
+			var/duration = attack_delay + delay
+			var/obj/effect/temp_visual/duration_setting/effect = new(affected, duration)
+			effect.icon = icon
+			effect.icon_state = pre_icon_state
+			effect.plane = GAME_PLANE_FOV_HIDDEN
 
 	if(pre_sound)
 		playsound(user, pre_sound, 100, TRUE)
@@ -219,17 +224,22 @@
 		user.balloon_alert(user, "dropped weapon!")
 		return
 
-	if(starting_loc && get_turf(user) != starting_loc)
-		starting_loc = null
-		user.balloon_alert(user, "moved!")
-		return
+	if(starting_loc)
+		if(check_starting_loc && get_turf(user) != starting_loc)
+			starting_loc = null
+			user.balloon_alert(user, "moved!")
+			return
+		else if(!user.TurfAdjacent(starting_loc))
+			starting_loc = null
+			user.balloon_alert(user, "too far!")
+			return
 
 	for(var/turf/affected as anything in turfs)
-		var/delay = turfs[affected]
-		if(delay)
-			addtimer(CALLBACK(src, PROC_REF(post_delay_apply), user, parent, affected), delay)
-		else
-			post_delay_apply(user, parent, affected)
+		for(var/delay in turfs[affected])
+			if(isnum(delay))
+				addtimer(CALLBACK(src, PROC_REF(post_delay_apply), user, parent, affected), delay)
+			else
+				post_delay_apply(user, parent, affected)
 
 	if(post_sound)
 		playsound(user, post_sound, 100, TRUE)

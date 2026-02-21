@@ -158,7 +158,7 @@
 		else
 			victim.OffBalance(5 SECONDS)
 
-		apply_generic_weapon_damage(user, parent, victim, 80, BLUNT, BODY_ZONE_CHEST, BCLASS_BLUNT)
+		apply_generic_weapon_damage(user, parent, victim, parent.force * 2, BLUNT, BODY_ZONE_CHEST, BCLASS_BLUNT)
 
 /datum/special_intent/flail_sweep
 	name = "Flail Sweep"
@@ -196,7 +196,7 @@
 		victim.safe_throw_at(throw_target, rand(1, 2), 1, user, force = MOVE_FORCE_STRONG)
 		victim.Immobilize(1 SECONDS)
 		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
-		apply_generic_weapon_damage(user, parent, victim, parent.force, STAB, BODY_ZONE_CHEST, BCLASS_STAB)
+		apply_generic_weapon_damage(user, parent, victim, parent.force * 1.5, STAB, BODY_ZONE_CHEST, BCLASS_STAB)
 
 #define GREAT_OUTER_DELAY 0.7 SECONDS
 
@@ -245,7 +245,7 @@
 			continue
 		if(victim.body_position == LYING_DOWN)
 			continue
-		apply_generic_weapon_damage(user, parent, victim, parent.force, SLASH, BODY_ZONE_CHEST, BCLASS_CUT)
+		apply_generic_weapon_damage(user, parent, victim, parent.force * 1.5, SLASH, BODY_ZONE_CHEST, BCLASS_CUT)
 
 #undef GREAT_OUTER_DELAY
 
@@ -273,7 +273,7 @@
 	var/damage = 20
 
 /datum/special_intent/axe_swing/pre_creation(mob/living/user, obj/item/parent, turf/target)
-	damage = (parent.force * (user.STASTR / 10)) + 15
+	damage = (parent.force * (user.STASTR / 10)) + 10
 
 	if(user.used_hand == 1)	//We mirror it if it's the left arm.
 		tile_coordinates += AXE_SWING_GRID_MIRROR
@@ -295,7 +295,7 @@
 
 /datum/special_intent/backstep
 	name = "Backstep"
-	desc = "A defensive used to quickly gain distance, shoving back any pursuer backwards, slowing and exposing them."
+	desc = "A defensive attack used to quickly gain distance, shoving back any pursuer backwards, slowing and exposing them."
 
 	tile_coordinates = SPECIAL_ATTACK_SWIPE
 
@@ -308,6 +308,8 @@
 
 	attack_delay = 0.5 SECONDS
 	cooldown = 15 SECONDS
+
+	check_starting_loc = FALSE
 
 	var/push_dir
 
@@ -405,6 +407,27 @@
 		victim.Immobilize(3 SECONDS)
 
 	playsound(target, 'sound/combat/sp_whip_hit.ogg', 100, TRUE)
+
+/datum/special_intent/triple_stab
+	name = "Triple Stab"
+	desc = "Stab for the chest three times in quick succession."
+
+	tile_coordinates = list(list(0, 0), list(0, 0, 0.3 SECONDS), list(0, 0, 0.6 SECONDS))
+
+	pre_icon_state = "trap"
+	post_icon_state = "stab"
+
+	stamina_cost = 30
+
+	attack_delay = 0.4 SECONDS
+	cooldown = 20 SECONDS
+
+/datum/special_intent/triple_stab/apply_hit(mob/living/user, obj/item/parent, turf/target)
+	var/mob/living/victim = locate() in target // Only one
+	if(!victim || victim == user)
+		return
+
+	apply_generic_weapon_damage(user, parent, victim, parent.force * 0.6, STAB, BODY_ZONE_CHEST, BCLASS_STAB)
 
 #undef SPECIAL_ATTACK_SINGLE
 #undef SPECIAL_ATTACK_SWIPE

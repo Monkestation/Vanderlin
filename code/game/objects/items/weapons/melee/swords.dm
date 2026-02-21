@@ -121,6 +121,8 @@
 	icon_state = "sword1"
 	sellprice = 30
 
+	weapon_special = /datum/special_intent/shin_swipe
+
 /obj/item/weapon/sword/arming/Initialize()
 	. = ..()
 	if(icon_state == "sword1")
@@ -470,6 +472,8 @@
 	SET_BASE_PIXEL(-16, -16)
 	dropshrink = 0.8
 
+	weapon_special = /datum/special_intent/piercing_lunge
+
 /obj/item/weapon/sword/rapier/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -673,6 +677,8 @@
 	sellprice = 60
 	grid_height = 96
 	grid_width = 64
+
+	weapon_special = /datum/special_intent/side_sweep
 
 /obj/item/weapon/sword/long/shotel
 	name = "steel shotel"
@@ -988,6 +994,8 @@
 	swingsound = BLADEWOOSH_HUGE
 	slot_flags = ITEM_SLOT_BACK
 	sellprice = 90
+
+	weapon_special = /datum/special_intent/greatsword_swing
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
 	. = ..()
