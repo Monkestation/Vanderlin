@@ -8,9 +8,7 @@
 	RegisterSignal(parent, COMSIG_ATOM_GET_EXAMINE_NAME, PROC_REF(get_examine_name))
 
 /datum/component/decal/blood/generate_appearance(_icon, _icon_state, _dir, _layer, _color)
-	var/imported_color = _color
-	if(!imported_color)
-		imported_color = COLOR_BLOOD
+	var/imported_color = _color || COLOR_BLOOD
 
 	var/obj/item/I = parent
 	if(I.bigboy)
