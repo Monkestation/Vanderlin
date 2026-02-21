@@ -25,28 +25,27 @@
 	no_early_release = TRUE
 
 /obj/item/weapon/handclaw
-	slot_flags = ITEM_SLOT_HIP
 	name = "Iron Hound Claws"
 	desc = "A pair of heavily curved claws, styled after beasts of the wilds for rending bare flesh, \
 			A show of the continual worship and veneration of beasts of strength in Gronn."
-	icon_state = "ironclaws"
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
-	wdefense = 5
+	icon_state = "ironclaws"
+	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	force = 30
+	throwforce = 12
+	thrown_bclass = BCLASS_CUT
+	wdefense = ULTMATE_PARRY
+	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(/datum/intent/claw/cut/iron, /datum/intent/claw/lunge/iron, /datum/intent/claw/rend)
 	wbalance = DODGE_CHANCE_NORMAL
 	max_blade_int = 300
-	max_integrity = 200
-	gripsprite = FALSE
-	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
-	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
-	swingsound = BLADEWOOSH_SMALL
-	wlength = WLENGTH_NORMAL
+	max_integrity = INTEGRITY_STANDARD
+
 	w_class = WEIGHT_CLASS_NORMAL
+	slot_flags = ITEM_SLOT_HIP
+	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	associated_skill = /datum/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	throwforce = 12
-	thrown_bclass = BCLASS_CUT
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
 	grid_height = 96
