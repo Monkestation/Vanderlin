@@ -35,6 +35,8 @@
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/templar,
+		/datum/job/gmtemplar,
+		/datum/job/advclass/combat/assassin,
 	)
 
 /datum/round_event_control/antagonist/solo/vampires_and_werewolves/valid_for_map()

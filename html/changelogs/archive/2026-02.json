@@ -577,5 +577,17 @@
                 "sound": "Adds a new theme for the Forest Garrison, with the previous theme being relegated to the Dendorite theme."
             }
         ]
+    },
+    "2026-02-20": {
+        "KevinfromHP": [
+            {
+                "qol": "Tweaked Tend Wound Surgeries so clinic apprentices can do then"
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes a bug causing blunt intent to be affected by sharpness if the weapon had sharpness."
+            }
+        ]
     }
 }

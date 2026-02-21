@@ -33,18 +33,20 @@
 	// Find a valid dodge turf
 	var/turf/turfy = find_dodge_turf(dirry)
 
-	if(do_dodge(user, turfy, can_dodge_see))
-		flash_fullscreen("blackflash2")
-		user.aftermiss()
-		var/attacking_item = user.get_active_held_item()
-		if(!(!src.mind || !user.mind))
-			log_defense(src, user, "dodged", attacking_atom = attacking_item,
-					   addition = "(INTENT:[uppertext(user.used_intent.name)])")
+	if(!do_dodge(user, turfy, can_dodge_see))
+		return FALSE
 
-		if(src.client)
-			record_round_statistic(STATS_DODGES)
-		return TRUE
-	return FALSE
+	flash_fullscreen("blackflash2")
+	user.aftermiss()
+	var/attacking_item = user.get_active_held_item()
+	if(!(!src.mind || !user.mind))
+		log_defense(src, user, "dodged", attacking_atom = attacking_item,
+					addition = "(INTENT:[uppertext(user.used_intent.name)])")
+
+	if(client)
+		record_round_statistic(STATS_DODGES)
+
+	return TRUE
 
 /**
  * Handles dodge attempts by the mob

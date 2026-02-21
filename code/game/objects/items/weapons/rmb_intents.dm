@@ -67,11 +67,6 @@
 	desc = "Your attacks have less recovery time but are less accurate and have reduced strength."
 	icon_state = "rmbswift"
 
-/datum/rmb_intent/special
-	name = "special"
-	desc = "(RMB WHILE DEFENSE IS ACTIVE) A special attack that depends on the type of weapon you are using."
-	icon_state = "rmbspecial"
-
 /datum/rmb_intent/feint
 	name = "feint"
 	desc = "(RMB WHILE IN COMBAT MODE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard.."
@@ -97,6 +92,13 @@
 	if(!istype(defender))
 		return FALSE
 
+	var/obj/item/attacker_item = user.get_active_held_item()
+	if(!attacker_item && !user.Adjacent(target))
+		return FALSE
+
+	if(get_dist(user, target) > user.used_intent?.reach)
+		return FALSE
+
 	user.visible_message(
 		span_danger("[user] feints an attack at [defender]!"),
 		span_userdanger("I feint an attack at [defender]!"),
@@ -107,7 +109,7 @@
 	var/theirskill = 0
 	var/skill_factor = 0
 
-	var/obj/item/attacker_item = user.get_active_held_item()
+
 	if(attacker_item?.associated_skill)
 		ourskill = user.get_skill_level(attacker_item.associated_skill)
 
@@ -178,9 +180,6 @@
 
 	if(user.has_status_effect(/datum/status_effect/debuff/clashcd))
 		return
-
-	// if(user.has_status_effect(/datum/status_effect/buff/clash/limbguard))
-	// 	return
 
 	if(!user.get_active_held_item()) //Nothing in our hand to Guard with.
 		return
