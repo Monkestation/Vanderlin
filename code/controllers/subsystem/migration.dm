@@ -404,13 +404,15 @@ SUBSYSTEM_DEF(migrants)
 	if(!player.prefs.allowed_respawn())
 		return FALSE
 
+	var/player_species_id_job = prefs.pref_species.id_override ? prefs.pref_species.id_override : prefs.pref_species.id
+
 	var/can_join = TRUE
-	if(length(migrant_job.allowed_races) && !(prefs.pref_species.id in migrant_job.allowed_races))
+	if(length(migrant_job.allowed_races) && !(player_species_id_job in migrant_job.allowed_races))
 		if(!(player.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
 			to_chat(player, span_warning("Wrong species. Your prioritized role only allows [migrant_job.allowed_races.Join(", ")]."))
 			can_join = FALSE
 
-	if(length(migrant_job.blacklisted_species) && (prefs.pref_species.id in migrant_job.blacklisted_species))
+	if(length(migrant_job.blacklisted_species) && (player_species_id_job in migrant_job.blacklisted_species))
 		if(!(player.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
 			to_chat(player, span_warning("Wrong species. Your prioritized role disallows [migrant_job.blacklisted_species.Join(", ")]."))
 			can_join = FALSE
@@ -655,7 +657,7 @@ SUBSYSTEM_DEF(migrants)
 	return migrants
 
 /client/proc/admin_force_next_migrant_wave()
-	set category = "GameMaster"
+	set category = "GameMaster.Interactions"
 	set name = "Force Migrant Wave"
 	if(!holder)
 		return

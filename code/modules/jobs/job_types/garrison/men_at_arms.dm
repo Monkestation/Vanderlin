@@ -33,7 +33,7 @@
 
 /datum/job/men_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/watchman
 	name = "Men-at-arms Base"

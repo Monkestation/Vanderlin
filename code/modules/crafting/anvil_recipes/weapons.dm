@@ -236,8 +236,8 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/iron/greataxe
-	name = "Greataxe (+Bar x2), (+Small log)"
-	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/iron, /obj/item/ingot/iron)
+	name = "Greataxe (+Bar, +Small log)"
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/iron,)
 	recipe_name = "a Greataxe with a single blade."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe
@@ -474,7 +474,7 @@
 	recipe_name = "a Iron Claymore"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/iron)
-	created_item = /obj/item/weapon/sword/long/greatsword/ironclaymore
+	created_item = /obj/item/weapon/sword/long/greatsword/claymore/iron
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/iron/elvenclub
@@ -502,7 +502,7 @@
 	recipe_name = "a Steel Assegai"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/polearm/spear/steel/assegai
+	created_item = /obj/item/weapon/polearm/spear/assegai/steel
 
 /datum/anvil_recipe/weapons/steel/aruval
 	name = "Steel Aruval (+2 Steel Bar)"
@@ -558,16 +558,16 @@
 	created_item = /obj/item/weapon/axe/steel
 
 /datum/anvil_recipe/weapons/steel/greataxe
-	name = "Greataxe (+Bar x2), (+Small log)"
-	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel, /obj/item/ingot/steel)
+	name = "Greataxe (+Bar, +Small log)"
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
 	recipe_name = "a Greataxe with a single blade."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe/steel
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/steel/doubleheaded_greataxe
-	name = "Double-headed Greataxe (+Bar x3), (+Small log)"
-	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
+	name = "Double-headed Greataxe (+Bar x2), (+Small log)"
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	recipe_name = "a Greataxe with two blades."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe/steel/doublehead
@@ -612,7 +612,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/weapons/steel/battleaxe
-	name = "Battle Axe (+Bar x2)"
+	name = "Battle Axe (+Bar)"
 	recipe_name = "a Battle Axe"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel)
@@ -679,6 +679,14 @@
 	createditem_extra = 1
 	craftdiff = 1
 
+/datum/anvil_recipe/weapons/steel/stiletto
+	name = "2x Steel Stilettos"
+	recipe_name = "a couple Daggers"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/knife/dagger/steel/stiletto
+	createditem_extra = 1
+	craftdiff = 1
+
 /datum/anvil_recipe/weapons/steel/decsaber
 	name = "Decorated Sabre (+Gold Bar)"
 	recipe_name = "a Decorated Sabre"
@@ -715,7 +723,7 @@
 	name = "Eagle's Beak (+Bar, +Small Log)"
 	recipe_name = "an Eagle's Beak"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/ingot/steel,/obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/eaglebeak
 	craftdiff = 3
 
@@ -726,10 +734,10 @@
 	created_item = /obj/item/weapon/flail/sflail
 
 /datum/anvil_recipe/weapons/steel/grandmace
-	name = "Grand Mace (+Small Log)"
+	name = "Grand Mace (+Bar, +Small Log)"
 	recipe_name = "a Grand Mace"
 	appro_skill = /datum/skill/craft/weaponsmithing
-	additional_items = list(/obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/goden/steel
 	craftdiff = 3
 
@@ -754,7 +762,7 @@
 	recipe_name = "a Steel Claymore"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/weapon/sword/long/greatsword/steelclaymore
+	created_item = /obj/item/weapon/sword/long/greatsword/claymore
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/silver/noble_sword_scabbard
@@ -884,9 +892,10 @@
 	created_item = /obj/item/weapon/sword/scimitar/falchion
 
 /datum/anvil_recipe/weapons/steel/elvenclub
-	name = "Steel Elven Warclub"
+	name = "Steel Elven Warclub (+Bar)"
 	recipe_name = "a Steel Elven Warclub"
 	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/elvenclub/steel
 
 // --------- SILVER ------------  Harder to craft, does less damage and has less durability than steel, but banes undead.
@@ -1066,7 +1075,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/atgervi_axe
-	name = "Bearded axe"
+	name = "Bearded axe (+1 Small log)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/axe/steel/atgervi

@@ -78,7 +78,7 @@ LINEN BINS
 	UnregisterSignal(sleeper, COMSIG_PARENT_QDELETING)
 	signal_sleeper = null
 
-/obj/item/bedsheet/attack_hand(mob/user, params)
+/obj/item/bedsheet/attack_hand(mob/user, list/modifiers)
 	if(!bed_tucked)
 		return ..()
 	if(do_after(user, 2 SECONDS, src))

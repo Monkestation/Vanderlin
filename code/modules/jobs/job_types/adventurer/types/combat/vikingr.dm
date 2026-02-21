@@ -50,7 +50,7 @@
 			head = /obj/item/clothing/head/helmet/nasal
 			beltl = /obj/item/weapon/sword/iron
 		if("Claymore")
-			backr = /obj/item/weapon/sword/long/greatsword/ironclaymore
+			backr = /obj/item/weapon/sword/long/greatsword/claymore/iron
 			beltl = /obj/item/weapon/axe/iron
 			beltr = /obj/item/storage/belt/pouch/coins/poor
 			head = /obj/item/clothing/head/helmet/nasal

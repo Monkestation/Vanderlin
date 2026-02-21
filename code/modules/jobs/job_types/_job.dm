@@ -300,21 +300,12 @@
 		spawned.set_skill_exp_multiplier(skill_type, skill_multipliers[skill_type])
 
 	for(var/X in peopleknowme)
-		for(var/datum/mind/MF in get_minds(X))
-			spawned.mind.person_knows_me(MF)
+		for(var/datum/mind/found_mind in get_minds(X))
+			spawned.mind.give_source_identity(found_mind)
 
 	for(var/X in peopleiknow)
-		for(var/datum/mind/MF in get_minds(X))
-			spawned.mind.i_know_person(MF)
-
-	// Ready up bonus
-	if(!spawned.islatejoin)
-		spawned.adjust_triumphs(1)
-		spawned.apply_status_effect(/datum/status_effect/buff/foodbuff)
-		spawned.hydration = 800 // Set higher hydration
-		spawned.nutrition = 800
-		to_chat(spawned, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
-
+		for(var/datum/mind/found_mind in get_minds(X))
+			spawned.mind.learn_target_identity(found_mind)
 
 	var/used_title = get_informed_title(spawned)
 	if(spawned.islatejoin && (job_flags & JOB_ANNOUNCE_ARRIVAL)) //to be moved somewhere more appropriate
@@ -362,6 +353,9 @@
 		if(!T.activated)
 			T.on_after_spawn(spawned)
 
+	if(spawned.culture)
+		spawned.culture.on_after_spawn(spawned)
+
 	if(length(advclass_cat_rolls))
 		spawned.hugboxify_for_class_selection()
 
@@ -391,11 +385,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patronlist)
+	for(var/god in GLOB.patron_list)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patronlist[god]
+		var/datum/patron/P = GLOB.patron_list[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -807,5 +801,28 @@
 		else
 			outfit = data["outfit"]
 
+
+	return TRUE
+
+/// Multi check using prefs for reuse, remove when datum/preference is a thing
+/datum/job/proc/prefs_species_check(datum/preferences/prefs)
+	if(!prefs)
+		return FALSE
+
+	var/datum/species/species = prefs.pref_species
+
+	var/job_used_id = species.id_override ? species.id_override : species.id
+
+	if(length(allowed_races) && !(job_used_id in allowed_races))
+		return FALSE
+
+	if(length(blacklisted_species) && (job_used_id in blacklisted_species))
+		return FALSE
+
+	// Subterran dwarves can only be outsiders if they follow the wurm
+	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(prefs.selected_patron, /datum/patron/alternate/wurm))
+		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
+		if(!(tested.department_flag & OUTSIDERS))
+			return FALSE
 
 	return TRUE

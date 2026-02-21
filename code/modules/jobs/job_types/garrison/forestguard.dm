@@ -22,7 +22,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	give_bank_account = 30
 	can_have_apprentices = FALSE
-	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 
 	outfit = /datum/outfit/forestguard
 	advclass_cat_rolls = list(CTAG_FORGARRISON = 20)
@@ -37,7 +37,7 @@
 
 /datum/job/forestguard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
@@ -266,7 +266,7 @@
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, rand(-1, 1))
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_LCK, rand(-4, 4))
 
-	spawned.verbs |= /mob/proc/haltyellorphan
+	add_verb(spawned, /mob/proc/haltyellorphan)
 
 /datum/outfit/forestguard/ruffian
 	name = "Forest Ruffian"
@@ -285,5 +285,5 @@
 
 /mob/proc/haltyellorphan()
 	set name = "HALT!"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("haltyellorphan")

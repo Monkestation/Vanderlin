@@ -108,8 +108,7 @@
 					to_chat(user, ("You can't possibily make it shine more."))
 
 /mob/living/carbon/human/Initialize()
-	// verbs += /mob/living/proc/mob_sleep
-	verbs += /mob/living/proc/lay_down
+	add_verb(src, /mob/living/proc/lay_down)
 
 	//initialize limbs first
 	create_bodyparts()
@@ -122,6 +121,7 @@
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+	culture = new()
 
 	. = ..()
 
@@ -132,6 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
+	QDEL_NULL(culture)
 	GLOB.human_list -= src
 	return ..()
 
@@ -181,15 +182,10 @@
 	dna.initialize_dna()
 	reset_limb_fingerprints()
 
-/mob/living/carbon/human/Stat()
-	..()
-	if(!client)
-		return
-	if(mind)
-		if(clan)
-			if(statpanel("Stats"))
-				stat("Vitae:",bloodpool)
-	return
+/mob/living/carbon/human/get_status_tab_items()
+	. = ..()
+	if(clan)
+		. += "VITAE: [bloodpool]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)

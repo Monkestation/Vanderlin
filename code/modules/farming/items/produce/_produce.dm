@@ -7,6 +7,7 @@
 	force = 0
 	throwforce = 0
 	faretype = FARE_POOR
+	nutrition = SNACK_VPOOR
 	var/list/pipe_reagents = list()
 	var/seed
 	var/bitesize_mod = 0
@@ -15,18 +16,26 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit
 	name = "fruit"
 	naturalist = TRUE
+	nutrition = FRUIT_NUTRITION
+	foodtype = FRUIT
 
 /obj/item/reagent_containers/food/snacks/produce/vegetable
 	name = "vegetable"
 	naturalist = TRUE
+	nutrition = VEGGIE_NUTRITION
+	foodtype = VEGETABLES
 
 /obj/item/reagent_containers/food/snacks/produce/grain
 	name = "grain"
 	naturalist = TRUE
+	nutrition = FLOUR_NUTRITION
+	foodtype = GRAIN
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom
 	name = "mushroom"
 	naturalist = TRUE
+	nutrition = VEGGIE_NUTRITION
+	foodtype = MUSHROOM
 
 /obj/item/reagent_containers/food/snacks/produce/Initialize(mapload)
 	. = ..()
@@ -74,7 +83,6 @@
 	gender = PLURAL
 	filling_color = "#F0E68C"
 	bitesize_mod = 2
-	foodtype = GRAIN
 	tastes = list("wheat" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
 	dropshrink = 0.9
@@ -94,7 +102,6 @@
 	gender = PLURAL
 	filling_color = "#b1d179"
 	bitesize_mod = 2
-	foodtype = GRAIN
 	tastes = list("oat" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
 
@@ -111,14 +118,12 @@
 	desc = "The humble apple. A sweet and nutritious fruit."
 	icon_state = "apple"
 	bitesize = 3
-	foodtype = FRUIT
 	tastes = list("apple" = 1)
 	trash = /obj/item/trash/applecore
 	faretype = FARE_POOR
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	slot_flags = ITEM_SLOT_HEAD
 	worn_x_dimension = 64
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	worn_y_dimension = 64
 	rotprocess = SHELFLIFE_DECENT
 	sellprice = 0 // spoil too quickly to export
@@ -164,9 +169,9 @@
 	tastes = list("strawberry" = 1)
 	faretype = FARE_NEUTRAL
 	bitesize = 5
-	list_reagents = list(/datum/reagent/consumable/nutriment = 0.5)
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
+	nutrition = BERRY_NUTRITION
 
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/raspberry
@@ -177,10 +182,10 @@
 	tastes = list("raspberry" = 1)
 	faretype = FARE_NEUTRAL
 	bitesize = 5
-	list_reagents = list(/datum/reagent/consumable/nutriment = 0.5)
 	dropshrink = 0.75
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
+	nutrition = BERRY_NUTRITION
 
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/blackberry
@@ -191,10 +196,10 @@
 	tastes = list("blackberry" = 1)
 	faretype = FARE_NEUTRAL
 	bitesize = 5
-	list_reagents = list(/datum/reagent/consumable/nutriment = 0.5)
 	dropshrink = 0.75
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
+	nutrition = BERRY_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry
 	name = "jacksberries"
@@ -204,12 +209,12 @@
 	tastes = list("berry" = 1)
 	faretype = FARE_POOR
 	bitesize = 5
-	list_reagents = list(/datum/reagent/consumable/nutriment = 0.5)
 	dropshrink = 0.75
 	var/color_index = "good"
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
 	var/poisonous = FALSE
+	nutrition = BERRY_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/Initialize()
 	. = ..()
@@ -254,18 +259,13 @@
 	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/examine(mob/user)
-	var/farminglvl = user.get_skill_level(/datum/skill/labor/farming)
 	. = ..()
-	// Foragers can always detect if p berry is safe or poisoned
-	if(HAS_TRAIT(user, TRAIT_FORAGER))
+	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
+	if(!can_tell)
+		can_tell = user.skills ? user.get_skill_level(/datum/skill/labor/farming) : FALSE
+	if(can_tell)
 		if(poisonous)
 			. += span_warning("This berry looks suspicious. I sense it might be poisoned.")
-		else
-			. += span_notice("This berry looks safe to eat.")
-	// Non-Foragers with high farming skill can detect poisoned berries
-	else if(farminglvl >= 3)
-		if(poisonous)
-			. += span_warning("These berries appear to be poisonous.</span>")
 		else
 			. += span_notice("This berry looks safe to eat.")
 
@@ -278,7 +278,8 @@
 	filling_color = "#008000"
 	bitesize_mod = 1
 	foodtype = VEGETABLES
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 1)
+	nutrition = SNACK_WORST
+	list_reagents = list(/datum/reagent/berrypoison = 1)
 	tastes = list("sweet" = 1,"bitterness" = 1)
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
@@ -290,8 +291,9 @@
 	desc = "A dried weed that can be smoked to induce a relaxed state."
 	icon_state = "swampweedd"
 	dry = TRUE
+	nutrition = SNACK_WORST
 	pipe_reagents = list(/datum/reagent/drug/space_drugs = 30)
-	list_reagents = list(/datum/reagent/drug/space_drugs = 2,/datum/reagent/consumable/nutriment = 1)
+	list_reagents = list(/datum/reagent/drug/space_drugs = 2)
 	grind_results = list(/datum/reagent/drug/space_drugs = 5)
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = null
@@ -308,7 +310,8 @@
 	bitesize_mod = 1
 	foodtype = VEGETABLES
 	tastes = list("sweet" = 1,"bitterness" = 1)
-	list_reagents = list(/datum/reagent/drug/nicotine = 2, /datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 2)
+	nutrition = SNACK_WORST
+	list_reagents = list(/datum/reagent/drug/nicotine = 2, /datum/reagent/berrypoison = 2)
 	grind_results = list(/datum/reagent/drug/nicotine = 5)
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
@@ -322,10 +325,11 @@
 	dry = TRUE
 	pipe_reagents = list(/datum/reagent/drug/nicotine = 30)
 	eat_effect = /datum/status_effect/debuff/badmeal
-	list_reagents = list(/datum/reagent/drug/nicotine = 5, /datum/reagent/consumable/nutriment = 1)
+	list_reagents = list(/datum/reagent/drug/nicotine = 5)
 	grind_results = list(/datum/reagent/drug/nicotine = 10)
 	rotprocess = null
 	sellprice = 1
+	nutrition = SNACK_WORST
 
 
 /*	..................   Cabbage   ................... */
@@ -336,9 +340,7 @@
 	icon_state = "cabbage"
 	tastes = list("cabbage" = 1)
 	filling_color = "#88c8a0"
-	bitesize = 1
-	foodtype = VEGETABLES
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
+	bitesize = 2
 	rotprocess = SHELFLIFE_LONG
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced
@@ -355,9 +357,7 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/onion_sliced
 	tastes = list("onion" = 1)
 	filling_color = "#fdfaca"
-	bitesize = 1
-	foodtype = VEGETABLES
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
+	bitesize = 2
 	chopping_sound = TRUE
 	rotprocess = SHELFLIFE_LONG
 
@@ -383,10 +383,8 @@
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/potato_sliced
 	eat_effect = null
-	foodtype = VEGETABLES
 	chopping_sound = TRUE
-	list_reagents = list(/datum/reagent/consumable/nutriment = 3)
-	bitesize = 1
+	bitesize = 2
 	rotprocess = null
 
 /*	..................  Pear   ................... */ // for cider or eating raw
@@ -396,7 +394,6 @@
 	desc = "Too sweet for many, a favored treat for little ones. Dwarves do love them."
 	icon_state = "pear"
 	bitesize = 2
-	foodtype = FRUIT
 	tastes = list("pear" = 1)
 	rotprocess = SHELFLIFE_DECENT
 
@@ -406,7 +403,6 @@
 	desc = "A sleep alternative for those determined enough."
 	icon_state = "lemon"
 	bitesize = 2
-	foodtype = FRUIT
 	tastes = list("lemon" = 1)
 	rotprocess = SHELFLIFE_DECENT
 
@@ -416,7 +412,6 @@
 	desc = "Along with its other citrus cousins, limes are well-loved by sailors and seafolk for their ability to keep and stave off scurvy."
 	icon_state = "lime"
 	bitesize = 2
-	foodtype = FRUIT
 	tastes = list("lime" = 1)
 	rotprocess = SHELFLIFE_DECENT
 
@@ -426,7 +421,6 @@
 	desc = "A citrus fruit loved by kids for its peelablity and more mild sweetness compared to limes and lemons."
 	icon_state = "tangerine"
 	bitesize = 2
-	foodtype = FRUIT
 	tastes = list("tangerine" = 1)
 	rotprocess = SHELFLIFE_DECENT
 
@@ -436,7 +430,6 @@
 	desc = "A fruit with a large seed in the middle. Its blossoms are enjoyed in the spring, and its fruits in the summer."
 	icon_state = "plum"
 	bitesize = 2
-	foodtype = FRUIT
 	tastes = list("plum" = 1)
 	rotprocess = SHELFLIFE_DECENT
 
@@ -447,7 +440,6 @@
 	icon_state = "mango"
 	bitesize = 2
 	dropshrink = 0.8
-	foodtype = FRUIT
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/mango_half
 	chopping_sound = TRUE
@@ -461,7 +453,6 @@
 	icon_state = "mangosteen"
 	bitesize = 2
 	dropshrink = 0.8
-	foodtype = FRUIT
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/mangosteen_opened
 	chopping_sound = TRUE
@@ -475,7 +466,6 @@
 	icon_state = "avocado"
 	bitesize = 2
 	dropshrink = 0.9
-	foodtype = FRUIT
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/avocado_half
 	chopping_sound = TRUE
@@ -489,7 +479,6 @@
 	icon_state = "dragonfruit"
 	bitesize = 2
 	dropshrink = 0.7
-	foodtype = FRUIT
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/dragonfruit_half
 	chopping_sound = TRUE
@@ -503,7 +492,7 @@
 	icon_state = "pineapple"
 	bitesize = 2
 	dropshrink = 0.9
-	foodtype = FRUIT
+	foodtype = FRUIT | PINEAPPLE
 	slices_num = 4
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/pineapple_slice
 	chopping_sound = TRUE
@@ -521,7 +510,6 @@
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/turnip_sliced
 	foodtype = VEGETABLES
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	chopping_sound = TRUE
 	dropshrink = 0.9
 	rotprocess = SHELFLIFE_EXTREME
@@ -538,7 +526,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 0)
+	nutrition = 0
 	dropshrink = 0.8
 	rotprocess = null
 
@@ -553,9 +541,11 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/sugar = 5)
+	list_reagents = list(/datum/reagent/consumable/sugar = 5)
+	nutrition = SUGAR_NUTRITION
 	dropshrink = 0.8
 	rotprocess = null
+	foodtype = SUGAR
 	mill_result = /obj/item/reagent_containers/food/snacks/sugar
 
 /obj/item/reagent_containers/food/snacks/sugar
@@ -564,7 +554,9 @@
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "salt"
 	tastes = list("sweet" = 1)
+	foodtype = SUGAR
 	list_reagents = list(/datum/reagent/consumable/sugar = 15)
+	nutrition = SUGAR_NUTRITION
 
 /*	..................   Fyritius Flower   ................... */ // some sort of funni fire flowers. Dunno just moving them here for consistency.
 /obj/item/reagent_containers/food/snacks/produce/fyritius
@@ -574,7 +566,8 @@
 	icon_state = "fyritius"
 	tastes = list("tastes like a burning coal and fire" = 1)
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/toxin/fyritiusnectar = 5)
+	list_reagents = list(/datum/reagent/toxin/fyritiusnectar = 5)
+	nutrition = 0
 	dropshrink = 0.8
 	rotprocess = null
 	w_class = WEIGHT_CLASS_TINY
@@ -603,7 +596,7 @@
 	filling_color = "#ff3300"
 	tastes = list("tastes like a burning coal and fire and blood" = 1)
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/toxin/fyritiusnectar = 5)
+	list_reagents = list(/datum/reagent/toxin/fyritiusnectar = 5)
 	rotprocess = SHELFLIFE_TINY
 
 /obj/item/reagent_containers/food/snacks/produce/fyritius/bloodied/become_rotten()
@@ -622,7 +615,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 0)
+	nutrition = 0
 	dropshrink = 0.5
 	rotprocess = null
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
@@ -641,7 +634,8 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 0, /datum/reagent/berrypoison = 1)
+	nutrition = 0
+	list_reagents = list(/datum/reagent/berrypoison/shroom = 5)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_EXTREME
 	eat_effect = /datum/status_effect/debuff/badmeal
@@ -656,7 +650,6 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 
@@ -670,7 +663,6 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 
@@ -684,7 +676,6 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 
@@ -698,7 +689,6 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 

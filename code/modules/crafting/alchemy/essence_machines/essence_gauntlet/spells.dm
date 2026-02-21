@@ -409,13 +409,13 @@
 /datum/status_effect/buff/momentum_boost/on_apply()
 	. = ..()
 	owner.add_movespeed_modifier("momentum", multiplicative_slowdown = -0.4)
-	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("Kinetic energy surges through you!"))
 
 /datum/status_effect/buff/momentum_boost/on_remove()
 	. = ..()
 	owner.remove_movespeed_modifier("momentum")
-	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/regeneration_cycle
 	id = "regeneration_cycle"

@@ -644,13 +644,9 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	for(var/datum/controller/subsystem/ss in subsystems) //this is incase a runlevel error occurs, we don't want random shit being left queued up since if a queue ends up half parsed.
 		ss.state = SS_IDLE
 
-
-/datum/controller/master/stat_entry()
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
-
-	stat("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%))")
-	stat("Master Controller:", statclick.update("(TickRate:[Master.processing]) (Iteration:[Master.iteration])"))
+/datum/controller/master/stat_entry(msg)
+	msg = "(TickRate:[Master.processing]) (Iteration:[Master.iteration]) (TickLimit: [round(Master.current_ticklimit, 0.1)])"
+	return msg
 
 /datum/controller/master/StartLoadingMap()
 	//disallow more than one map to load at once, multithreading it will just cause race conditions

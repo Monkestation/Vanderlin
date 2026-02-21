@@ -90,8 +90,8 @@
 	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, ROUNDSTART_TRAIT)
 	ai_controller?.set_ai_status(AI_STATUS_OFF)
 	if(client)
-		client.verbs |= /client/proc/lobbyooc
-		client.verbs |= /client/proc/view_stats
+		add_verb(client, /client/proc/lobbyooc)
+		add_verb(client, /client/proc/view_stats)
 		client.show_game_over()
 
 /mob/living/do_game_over()
@@ -101,7 +101,7 @@
 	ADD_TRAIT(src, TRAIT_MUTE, TRAIT_GENERIC)
 	walk(src, 0) //stops them mid pathing even if they're stunimmune
 	if(client)
-		client.verbs |= /client/proc/commendsomeone
+		add_verb(client, /client/proc/commendsomeone)
 
 /client/proc/show_game_over()
 	var/atom/movable/screen/splash/credits/S = new(null, null, src, FALSE, FALSE)
@@ -343,7 +343,7 @@
 	if(!previous)
 		var/list/report_parts = list(personal_report(C), GLOB.common_report)
 		content = report_parts.Join()
-		C.verbs -= /client/proc/show_previous_roundend_report
+		remove_verb(C, /client/proc/show_previous_roundend_report)
 		fdel(filename)
 		text2file(content, filename)
 	else

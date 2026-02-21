@@ -32,7 +32,7 @@
 
 	possible_ages = NORMAL_AGES_LIST
 
-	skin_tone_wording = "Tribal Identity"
+	skin_tone_wording = "Spawn"
 	default_color = "9cc2e2"
 	use_skintones = TRUE
 
@@ -64,6 +64,7 @@
 	swap_female_clothes = TRUE
 	swap_male_clothes = TRUE
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/triton = 1)
 	exotic_bloodtype = /datum/blood_type/human/triton
 	enflamed_icon = "widefire"
 

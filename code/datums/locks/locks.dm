@@ -59,3 +59,6 @@
 ///// Multiple key locks
 /datum/lock/key/pillory
 	lockid_list = list(ACCESS_GARRISON, ACCESS_FOREST, ACCESS_AT_ARMS, ACCESS_DUNGEON)
+
+/datum/lock/key/pillory/church
+	lockid_list = list(ACCESS_CHURCH, ACCESS_PRIEST)

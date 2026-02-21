@@ -24,7 +24,7 @@
 	///do we explode on impact?
 	var/impact_explode = FALSE
 	///odds we fail on ignite
-	var/prob2fail = 5
+	var/prob2fail = 0
 
 	/// Bitfields which prevent the grenade from detonating if set. Includes ([GRENADE_DUD]|[GRENADE_USED])
 	var/dud_flags = NONE
@@ -50,6 +50,10 @@
 	var/active = FALSE
 	///How long it takes for a grenade to explode after being armed
 	var/det_time = 5 SECONDS
+	//can this grenade currently be ignited by a spark?
+	var/allow_spark = FALSE
+	//how long it takes before it can be ignited by a spark
+	var/spark_delay = 2.5 SECONDS
 
 	var/turf_debris = /obj/item/natural/glass/shard
 
@@ -63,7 +67,7 @@
 
 /obj/item/explosive/Initialize()
 	. = ..()
-	det_time = rand(det_time * 0.5, det_time)
+	addtimer(VARSET_CALLBACK(src, allow_spark, TRUE), spark_delay)
 
 /**
  * Checks for various ways to botch priming a grenade.
@@ -91,28 +95,32 @@
 	if (active)
 		return
 	if(usr)
-		if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
-			arm_grenade(usr)
+		arm_grenade(usr)
 	else
 		arm_grenade(null)
 	. = ..()
 
 /obj/item/explosive/spark_act()
+	if (!allow_spark)
+		return
 	if (active)
 		return
 	if(usr)
-		if(!botch_check(usr)) // if they botch the prime, it'll be handled in botch_check
-			arm_grenade(usr)
+		arm_grenade(usr)
 	else
 		arm_grenade(null)
 	. = ..()
 
 /obj/item/explosive/extinguish()
 	. = ..()
+	if(!active)
+		return
 	if(explode_timer)
 		deltimer(explode_timer)
 		explode_timer = null
 	icon_state = initial(icon_state)
+	active = FALSE
+	playsound(src, 'sound/items/firesnuff.ogg', 50)
 
 /obj/item/explosive/proc/log_grenade(mob/user)
 	log_bomber(user, "has primed a", src, "for detonation", message_admins = !dud_flags)
@@ -125,17 +133,18 @@
 /obj/item/explosive/proc/arm_grenade(mob/user, delayoverride, msg = TRUE, volume = 60)
 	log_grenade(user) //Inbuilt admin procs already handle null users
 	playsound(src, 'sound/items/fuse.ogg', 100)
+	var/rand_time = rand(det_time * 0.5, det_time)
 	if(user)
 		add_fingerprint(user)
 		if(msg)
-			to_chat(user, span_warning("You prime [src]! [capitalize(DisplayTimeText(det_time))]!"))
+			to_chat(user, span_warning("You prime [src]! [capitalize(DisplayTimeText(rand_time))]!"))
 	if(shrapnel_type && shrapnel_radius)
 		shrapnel_initialized = TRUE
 		AddComponent(/datum/component/pellet_cloud, projectile_type = shrapnel_type, magnitude = shrapnel_radius)
 	active = TRUE
 	icon_state = initial(icon_state) + "_active"
-	SEND_SIGNAL(src, COMSIG_GRENADE_ARMED, det_time, delayoverride)
-	explode_timer = addtimer(CALLBACK(src, PROC_REF(detonate)), isnull(delayoverride)? det_time : delayoverride)
+	SEND_SIGNAL(src, COMSIG_GRENADE_ARMED, rand_time, delayoverride)
+	explode_timer = addtimer(CALLBACK(src, PROC_REF(detonate)), isnull(delayoverride)? rand_time : delayoverride, TIMER_STOPPABLE)
 
 
 /**
@@ -145,6 +154,11 @@
  * * lanced_by- If this grenade was detonated by an elance, we need to pass that along with the COMSIG_GRENADE_DETONATE signal for pellet clouds
  */
 /obj/item/explosive/proc/detonate(mob/living/lanced_by)
+	if(lanced_by)
+		if(botch_check(lanced_by)) // if they botch the prime, it'll be handled in botch_check
+			extinguish()
+			visible_message(span_warning("The [src] fizzles out!"))
+			return FALSE
 	if (dud_flags)
 		active = FALSE
 		return FALSE

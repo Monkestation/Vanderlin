@@ -128,7 +128,7 @@
 	reagent_state = LIQUID
 	color = "#d6d6d8"
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
-	toxpwr = 0.5
+	toxpwr = 0.25
 	taste_description = "bad cooking"
 
 

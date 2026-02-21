@@ -14,6 +14,7 @@
 #define BREAKFAST	(1<<13)
 #define CLOTH 		(1<<14)
 #define MUSHROOM    (1<<15)
+#define EGG			(1<<16)
 
 #define FOOD_FLAGS_IC list( \
 	"Meat", \
@@ -31,6 +32,7 @@
 	"Pineapples", \
 	"Breakfast food", \
 	"Clothing", \
+	"Eggs", \
 )
 
 #define DRINK_NICE	1

@@ -39,7 +39,7 @@
 	LAZYADDASSOC(skills, /datum/skill/misc/stealing, pick(3,4))
 	LAZYADDASSOC(skills, /datum/skill/misc/lockpicking, pick(2,2,3,3,4))
 	LAZYADDASSOC(skills, /datum/skill/misc/climbing, pick(4,4,4,4,5))
-	spawned.verbs |= /mob/living/carbon/human/proc/ventriloquate
+	add_verb(spawned, /mob/living/carbon/human/proc/ventriloquate)
 
 /datum/outfit/jestertroupe
 	name = "Buffoon (Migrant Wave)"
