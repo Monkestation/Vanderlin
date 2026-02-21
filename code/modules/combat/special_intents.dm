@@ -1,6 +1,6 @@
 // Defines for common attack types
 /// Single turf only
-#define SPECIAL_ATTACK_SINGLE (list(0, 0))
+#define SPECIAL_ATTACK_SINGLE (list(list(0, 0)))
 /// First three turfs directly in front
 #define SPECIAL_ATTACK_SWIPE (list(list(0, 0), list(1, 0), list(-1, 0)))
 /// Two turfs in front
