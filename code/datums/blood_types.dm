@@ -1,5 +1,6 @@
 GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys(/datum/blood_type))
 
+#define VITAE / BLOOD_VOLUME_NORMAL
 
 /**
  * Blood Types
@@ -24,6 +25,8 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	var/tainted_lux = FALSE
 	///the chimeric table we pull from when creating chimeric nodes based on this blood
 	var/datum/chimeric_table/used_table
+	/// The vitae richness per unit of blood
+	var/vitae = 0
 
 /datum/blood_type/New()
 	. = ..()
@@ -44,21 +47,27 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	blood_data["real_name"] = sampled_from.real_name
 	blood_data["factions"] = sampled_from.faction
 
-	blood_data["preferences"] |= (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
-	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_SLEEPING
-	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/zombie))
-		blood_data["preferences"] &= ~BLOOD_PREFERENCE_LIVING
-		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD
-	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD|BLOOD_PREFERENCE_KIN
-		blood_data["preferences"]  &= ~BLOOD_PREFERENCE_LIVING
-	if(HAS_TRAIT(sampled_from, TRAIT_NOBLE))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_FANCY
-	if(HAS_TRAIT(sampled_from, TRAIT_SILVER_BLESSED))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_EUPHORIC
+	blood_data["preferences"] = get_blood_prefs(sampled_from)
+	blood_data["vitae"] = vitae
+	if(blood_data["ckey"]) // double from players
+		blood_data["vitae"] *= 2
 
 	return blood_data
+
+/datum/blood_type/proc/get_blood_prefs(mob/living/sampled_from)
+	. = (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
+	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
+		. |= BLOOD_PREFERENCE_SLEEPING
+	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/zombie))
+		. &= ~BLOOD_PREFERENCE_LIVING
+		. |= BLOOD_PREFERENCE_DEAD
+	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))
+		. |= BLOOD_PREFERENCE_DEAD|BLOOD_PREFERENCE_KIN
+		. &= ~BLOOD_PREFERENCE_LIVING
+	if(HAS_TRAIT(sampled_from, TRAIT_NOBLE))
+		. |= BLOOD_PREFERENCE_FANCY
+	if(HAS_TRAIT(sampled_from, TRAIT_SILVER_BLESSED))
+		. |= BLOOD_PREFERENCE_EUPHORIC
 
 /**
  * Used to handle any unique facets of blood spawned of this blood type
@@ -75,6 +84,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	name = "Human"
 	contains_lux = TRUE
 	used_table = /datum/chimeric_table/human
+	vitae = 1500 VITAE
 
 /datum/blood_type/human/get_blood_data(mob/living/carbon/human/sampled_from)
 	if(!istype(sampled_from) || isnull(sampled_from.dna))
@@ -99,24 +109,21 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	blood_data["features"] = sampled_from.dna.features
 	blood_data["factions"] = sampled_from.faction
 
-	blood_data["preferences"] |= (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
-	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_SLEEPING
-	if(M?.has_antag_datum(/datum/antagonist/zombie))
-		blood_data["preferences"] &= ~BLOOD_PREFERENCE_LIVING
-		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD
-	if(M?.has_antag_datum(/datum/antagonist/vampire))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_DEAD|BLOOD_PREFERENCE_KIN
-		blood_data["preferences"]  &= ~BLOOD_PREFERENCE_LIVING
-	if(HAS_TRAIT(sampled_from, TRAIT_NOBLE))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_FANCY
-	if(HAS_TRAIT(sampled_from, TRAIT_SILVER_BLESSED))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_EUPHORIC
-	if(sampled_from.cleric && istype(sampled_from.patron, /datum/patron/divine))
-		blood_data["preferences"] |= BLOOD_PREFERENCE_HOLY
+	blood_data["preferences"] = get_blood_prefs(sampled_from)
+	blood_data["vitae"] = vitae
+	if(blood_data["ckey"]) // double from players
+		blood_data["vitae"] *= 2
 
 	return blood_data
 
+/datum/blood_type/human/get_blood_prefs(mob/living/carbon/human/sampled_from)
+	. = ..()
+	if(!istype(sampled_from))
+		return
+	if(sampled_from.cleric && istype(sampled_from.patron, /datum/patron/divine))
+		. |= BLOOD_PREFERENCE_HOLY
+	if(sampled_from.virginity)
+		. |= BLOOD_PREFERENCE_VIRGIN
 
 /datum/blood_type/human/tiefling
 	name = "Tiefling"
@@ -202,25 +209,39 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 /datum/blood_type/human/corrupted/goblin
 	name = "Goblin"
 	used_table = /datum/chimeric_table/goblin
+	vitae = 500 VITAE
 
 /datum/blood_type/human/corrupted/orc
 	name = "Orc"
 	used_table = /datum/chimeric_table/orc
+	vitae = 1250 VITAE
 
 /datum/blood_type/human/corrupted/rousman
 	name = "Rousman"
 	used_table = /datum/chimeric_table/rousman
+	vitae = 500 VITAE
 
-/datum/blood_type/human/corrupted/rousman/get_blood_data(mob/living/carbon/human/sampled_from)
-	var/list/blood_data = ..()
-	if(blood_data)
-		blood_data["preferences"] |= BLOOD_PREFERENCE_RATS
+/datum/blood_type/human/corrupted/rousman/get_blood_prefs(mob/living/carbon/human/sampled_from)
+	. = ..()
+	if(!istype(sampled_from))
+		return
+	. |= BLOOD_PREFERENCE_RATS
 
 /datum/blood_type/human/corrupted/zizombie
 	name = "Zizombie"
 	reagent_type = /datum/reagent/blood/putrid
+	vitae = 1000 VITAE
+
+/datum/blood_type/human/corrupted/zizombie/get_blood_prefs(mob/living/carbon/human/sampled_from)
+	. = ..()
+	if(!istype(sampled_from))
+		return
+	. |= BLOOD_PREFERENCE_DEAD
+	. &= ~BLOOD_PREFERENCE_DEAD
 
 /datum/blood_type/putrid
 	name = "Putrid"
 	reagent_type = /datum/reagent/blood/putrid
 	used_table = /datum/chimeric_table/putrid
+
+#undef VITAE

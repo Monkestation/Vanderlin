@@ -35,10 +35,9 @@
 		return
 	SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
 	if(L.clan && data["vitae"] > 0)
-		var/vitae = reac_volume * data["vitae"]
-		L.adjust_hydration(vitae * 0.1)
+		var/vitae = L.clan.handle_bloodsuck(L, data["preferences"], reac_volume * data["vitae"])
 		L.adjust_bloodpool(vitae)
-		L.clan.handle_bloodsuck(L, data["preferences"])
+		L.adjust_hydration(vitae * 0.1)
 
 	var/mob/living/carbon/C = L
 	if(istype(C) && (NOBLOOD in C.dna?.species?.species_traits))

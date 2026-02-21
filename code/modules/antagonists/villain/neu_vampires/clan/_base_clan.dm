@@ -73,15 +73,18 @@ And it also helps for the character set panel
 /datum/clan/proc/get_blood_preference_string()
 	return "any blood"
 
-/datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types)
+/datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types, vitae)
 	var/wanted_blood = (blood_types & blood_preference)
 	var/unwanted_blood = (blood_types & blood_disgust)
 
 	if(wanted_blood && !unwanted_blood)
 		drinker.apply_status_effect(/datum/status_effect/debuff/blood_preference)
+		vitae *= 1.5
 	if(unwanted_blood && !wanted_blood)
+		vitae *= 0.5
 		drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
 		to_chat(drinker, span_warning("This blood tastes revolting to you!"))
+	return vitae
 
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
@@ -347,6 +350,7 @@ And it also helps for the character set panel
 /datum/clan/proc/setup_vampire_abilities(mob/living/carbon/human/H)
 	add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 	add_verb(H, /mob/living/carbon/human/proc/vampire_telepathy)
+	add_verb(H, /mob/living/carbon/human/proc/sire_spawn)
 
 
 	H.cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'

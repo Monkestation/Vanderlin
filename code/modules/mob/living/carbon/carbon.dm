@@ -1011,8 +1011,7 @@
 		// regenerate_organs(regenerate_existing = (heal_flags & HEAL_REFRESH_ORGANS))
 		regenerate_organs()
 		var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
-		if(B)
-			B.brain_death = FALSE
+		B?.brain_death = FALSE
 
 	if(heal_flags & HEAL_TRAUMAS)
 		cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)

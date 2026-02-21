@@ -185,7 +185,7 @@
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
 	if(clan)
-		. += "VITAE: [bloodpool]"
+		. += "VITAE: [round(bloodpool)]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
