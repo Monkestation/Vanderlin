@@ -32,4 +32,5 @@
 	)
 /datum/job/advclass/bandit
 	exp_types_granted = list(EXP_TYPE_COMBAT)
-
+	spawn_with_torch = TRUE
+	department_flag = OUTSIDERS

@@ -37,7 +37,7 @@
 		TRAIT_FOREIGNER,
 	)
 
-	languages = list(/datum/language/otavan)
+	languages = list(/datum/language/oldpsydonic)
 
 /datum/job/advclass/sacrestant/confessor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -85,9 +85,9 @@
 
 	switch(boltchoice)
 		if("Bolts - Steel-Tipped")
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_L, TRUE)
+			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolts(get_turf(spawned)), ITEM_SLOT_BELT_L)
 		if("Sunderbolts - Silver-Tipped, Halved Damage")
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolt/holy, ITEM_SLOT_BELT_L, TRUE)
+			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), ITEM_SLOT_BELT_L)
 
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"

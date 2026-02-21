@@ -32,7 +32,7 @@
 	return
 
 
-/obj/structure/fake_machine/lottery_roguetown/attackby(obj/item/coin/P, mob/living/user)
+/obj/structure/fake_machine/lottery_roguetown/attackby(obj/item/coin/P, mob/living/user, list/modifiers)
 	. = ..()
 
 	if(!istype(P))
@@ -172,7 +172,7 @@
 	stopgambling = 0
 
 
-/obj/structure/fake_machine/lottery_roguetown/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/structure/fake_machine/lottery_roguetown/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 
 	if(!ishuman(user) || stopgambling)

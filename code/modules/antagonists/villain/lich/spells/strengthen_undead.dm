@@ -21,6 +21,9 @@
 
 /datum/action/cooldown/spell/strengthen_undead/cast(mob/living/cast_on)
 	. = ..()
+	if(cast_on.can_block_magic(antimagic_flags))
+		to_chat(owner, span_warning("A distortive field prevents your magic taking hold!"))
+		return
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		var/obj/item/bodypart/affecting = cast_on.get_bodypart(check_zone(owner.zone_selected))
 		if(affecting)

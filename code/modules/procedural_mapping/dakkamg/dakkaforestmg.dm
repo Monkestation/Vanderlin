@@ -26,7 +26,7 @@
 							/obj/structure/flora/grass/maneater/real=0)
 	spawnableTurfs = list(/turf/open/floor/dirt/road=80,
 						/turf/open/water/swamp=25)
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 
 /datum/mapGeneratorModule/dforestroad
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -38,13 +38,13 @@
 	allowed_turfs = list(/turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableTurfs = list(/turf/open/floor/grass = 200)
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 
 /datum/mapGeneratorModule/dforestgrass
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	allowed_turfs = list(/turf/open/floor/grass)
 	excluded_turfs = list()
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 	spawnableAtoms = list(/obj/structure/flora/tree = 0,
 							/obj/structure/flora/grass/bush_meagre = 6,
 							/obj/structure/flora/grass = 120,
@@ -60,7 +60,7 @@
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	allowed_turfs = list(/turf/open/water/cleanshallow)
 	excluded_turfs = list()
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 20,
 	                        /obj/structure/flora/grass/water/reeds = 30,
 	                        /obj/structure/kneestingers = 55)

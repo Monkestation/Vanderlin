@@ -377,10 +377,6 @@
 /obj/item/CheckParts(list/parts_list)
 	..()
 
-///Hook for multiz???
-/atom/proc/update_multiz(prune_on_fail = FALSE)
-	return FALSE
-
 ///Check if this atoms eye is still alive (probably)
 /atom/proc/check_eye(mob/user)
 	return
@@ -1380,3 +1376,33 @@
 /atom/proc/forget_alert(atom/movable/flick_visual/alert)
 	animate(alert, time = 0.5 SECONDS, alpha = 0)
 	QDEL_IN(alert, 0.5 SECONDS)
+
+///Passes Stat Browser Panel clicks to the game and calls client click on an atom
+/atom/Topic(href, list/href_list)
+	. = ..()
+	if(!usr?.client)
+		return
+	var/client/usr_client = usr.client
+	var/list/paramslist = list()
+
+	if(href_list["statpanel_item_click"])
+		switch(href_list["statpanel_item_click"])
+			if("left")
+				paramslist[LEFT_CLICK] = "1"
+			if("right")
+				paramslist[RIGHT_CLICK] = "1"
+			if("middle")
+				paramslist[MIDDLE_CLICK] = "1"
+			else
+				return
+
+		if(href_list["statpanel_item_shiftclick"])
+			paramslist[SHIFT_CLICKED] = "1"
+		if(href_list["statpanel_item_ctrlclick"])
+			paramslist[CTRL_CLICKED] = "1"
+		if(href_list["statpanel_item_altclick"])
+			paramslist[ALT_CLICKED] = "1"
+
+		var/mouseparams = list2params(paramslist)
+		usr_client.Click(src, loc, null, mouseparams)
+		return TRUE

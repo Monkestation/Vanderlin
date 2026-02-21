@@ -51,12 +51,9 @@
 /mob/proc/get_skill_parry_modifier(skill)
 	return ensure_skills().get_skill_parry_modifier(skill)
 
-/mob/proc/get_skill_dodge_drain(skill)
-	return ensure_skills().get_skill_dodge_drain(skill)
-
 /// Get the current level of the skill
-/mob/proc/get_skill_level(skill)
-	return ensure_skills().get_skill_level(skill)
+/mob/proc/get_skill_level(skill, return_decimal)
+	return ensure_skills().get_skill_level(skill, return_decimal)
 
 /mob/proc/has_skill(skill)
 	return ensure_skills().has_skill(skill)
@@ -65,6 +62,8 @@
 	return ensure_skills().get_skill_speed_modifier(skill)
 
 /mob/proc/adjust_experience(skill, amt, silent=FALSE, check_apprentice=TRUE)
+	if(HAS_TRAIT(src, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	return ensure_skills().adjust_experience(skill, amt, silent, check_apprentice)
 
 /mob/proc/get_inspirational_bonus()
@@ -79,7 +78,7 @@
 /**
  * adjusts the skill level
  * Vars:
- ** skill - associated skill to change
+ ** skill - associated skill type to change
  ** amt - how much to change the skill
  ** silent - wether the player will be notified about their skill change or not
 */
@@ -140,11 +139,11 @@
 /datum/skill_holder
 	///our current host
 	var/mob/living/current
-	///Assoc list of skills - level
+	///Assoc list of skill typepath - level. Levels can be decimals rounded to the nearest 0.1
 	var/list/known_skills = list()
-	///Assoc list of skills - exp
+	///Assoc list of skill typepath - exp
 	var/list/skill_experience = list()
-	///assoc list of skill - multiplier
+	///assoc list of skill typepath - base multiplier
 	var/list/exp_multiplier = list()
 	/// is this mind an apprentice of someone?
 	var/apprentice = FALSE
@@ -153,19 +152,32 @@
 	var/apprentice_name
 
 	var/list/apprentices = list()
+	/// Associative list of skill typepath - additive multiplier to apprentice xp gain
 	var/list/apprentice_training_skills = list()
 	var/our_apprentice_name
 
 /datum/skill_holder/New()
 	. = ..()
 	for(var/datum/skill/skill as anything in SSskills.all_skills)
-		if(!(skill in skill_experience))
-			skill_experience |= skill
-			skill_experience[skill] = 0
+		skill_experience |= skill
+		skill_experience[skill] = 0
+
+/datum/skill_holder/Destroy(force, ...)
+	set_current(null)
+	. = ..()
 
 /datum/skill_holder/proc/set_current(mob/incoming)
+	if(current)
+		UnregisterSignal(current, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF)
+		current.skills = null
 	current = incoming
-	incoming.skills = src
+	if(current)
+		current.skills = src
+		RegisterSignal(current, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, PROC_REF(upon_mind_transfer))
+
+/datum/skill_holder/proc/upon_mind_transfer(mob/living/source_old_mob, mob/living/new_mob)
+	SIGNAL_HANDLER
+	set_current(new_mob)
 
 /**
  * Offer apprenticeship to a youngling
@@ -183,12 +195,12 @@
 		return
 
 	var/choice = input(youngling, "Do you wish to become [current.name]'s apprentice?") as anything in list("Yes", "No")
-	if(choice != "Yes")
-		to_chat(current, span_warning("[youngling] has rejected your apprenticeship!"))
-		return
 	if(length(apprentices) >= max_apprentices)
 		return
 	if(current.stat >= UNCONSCIOUS || youngling.stat >= UNCONSCIOUS)
+		return
+	if(choice != "Yes")
+		to_chat(current, span_warning("[youngling] has rejected your apprenticeship!"))
 		return
 	apprentices |= WEAKREF(youngling)
 	youngling.ensure_skills().apprentice = TRUE
@@ -203,18 +215,19 @@
 
 /datum/skill_holder/proc/print_levels(user)
 	var/list/shown_skills = list()
-	for(var/i in known_skills)
-		if(known_skills[i]) //Do we actually have a level in this?
-			shown_skills += i
+	for(var/skill_type in known_skills)
+		var/skill_level_rounded = floor(known_skills[skill_type])
+		if(skill_level_rounded) //Do we actually have a level in this?
+			shown_skills[GetSkillRef(skill_type)] = skill_level_rounded
 	if(!length(shown_skills))
 		to_chat(user, span_warning("I don't have any skills."))
 		return
 	var/msg = ""
 	msg += span_info("*---------*\n")
 	for(var/datum/skill/skill_ref as anything in shown_skills)
-		var/skill_level = SSskills.level_names[known_skills[skill_ref]]
+		var/skill_level_name = SSskills.level_names[shown_skills[skill_ref]]
 		var/skill_link = "<a href='byond://?src=[REF(skill_ref)];action=examine'>?</a>"
-		msg += "[skill_ref] - [skill_level] [skill_link]\n"
+		msg += "[skill_ref] - [skill_level_name] [skill_link]\n"
 	to_chat(user, msg)
 
 /**
@@ -223,143 +236,128 @@
  ** skill - associated skill
 */
 /datum/skill_holder/proc/get_learning_boon(skill)
-	var/mob/living/carbon/human/H = current
-	if(!istype(H))
-		return 1
 	var/boon = 1 // Can't teach an old dog new tricks. Most old jobs start with higher skill too.
-	if(H.age == AGE_OLD)
-		boon = 0.8
-	else if(H.age == AGE_CHILD)
-		boon = 1.1
-	boon += get_skill_level(skill) / 10
-	if(HAS_TRAIT(H, TRAIT_TUTELAGE)) //5% boost for being a good teacher
+	boon += get_skill_level(skill) / 20
+	if(HAS_TRAIT(current, TRAIT_TUTELAGE)) //5% boost for being a good teacher
 		boon += 0.05
+	if(!ishuman(current))
+		return boon
+	var/mob/living/carbon/human/H = current
+	if(H.age == AGE_OLD)
+		boon -= 0.2
+	else if(H.age == AGE_CHILD)
+		boon += 0.2
 	return boon
 
 /**
  * Gets the parry modifier of the associated weapon skill
  * Vars:
- ** skill - the skill
+ ** skill - the skill typepath
 */
 /datum/skill_holder/proc/get_skill_parry_modifier(skill)
 	var/datum/skill/combat/skill_ref = GetSkillRef(skill)
-	return skill_ref.get_skill_parry_modifier(known_skills[skill_ref] || SKILL_LEVEL_NONE)
-
-///idk what this does, it's unused.
-/datum/skill_holder/proc/get_skill_dodge_drain(skill)
-	var/datum/skill/combat/skill_ref = GetSkillRef(skill)
-	return skill_ref.get_skill_dodge_drain(known_skills[skill_ref] || SKILL_LEVEL_NONE)
+	return skill_ref.get_skill_parry_modifier(known_skills[skill] || SKILL_LEVEL_NONE)
 
 /**
  * Gets the skill level of a mind
  * Vars:
- ** skill - the skill
+ ** skill - the skill typepath
 */
-/datum/skill_holder/proc/get_skill_level(skill)
-	var/datum/skill/skill_ref = GetSkillRef(skill)
-	if(!(skill_ref in known_skills))
+/datum/skill_holder/proc/get_skill_level(skill, return_decimal)
+	if(!GetSkillRef(skill))
+		// CRASH("get_skill_level was called without a skill argument!")
 		return SKILL_LEVEL_NONE
-	return known_skills[skill_ref] || SKILL_LEVEL_NONE
+	if(!has_skill(skill))
+		return SKILL_LEVEL_NONE
+	return return_decimal ? known_skills[skill] : floor(known_skills[skill])
 
 /**
  * Returns boolean for presence of skill
  * Vars:
- ** skill - the skill
+ ** skill - the skill reference or typepath
  */
 /datum/skill_holder/proc/has_skill(skill)
-	var/datum/skill/skill_ref = GetSkillRef(skill)
-	if(!(skill_ref in known_skills))
+	if(istype(skill, /datum/skill))
+		var/datum/skill/skill_ref = skill
+		skill = skill_ref.type
+	if(!(skill in known_skills))
 		return FALSE
 	return TRUE
 
 /**
  * Gets the skill's singleton and returns the result of its get_skill_speed_modifier
  * Vars:
- ** skill - the skill
+ ** skill - the skill typepath
 */
 /datum/skill_holder/proc/get_skill_speed_modifier(skill)
 	var/datum/skill/skill_ref = GetSkillRef(skill)
-	return skill_ref.get_skill_speed_modifier(known_skills[skill_ref] || SKILL_LEVEL_NONE)
+	return skill_ref.get_skill_speed_modifier(known_skills[skill] || SKILL_LEVEL_NONE)
 
 /**
- * adjusts experience
+ * Adjusts experience. Sends COMSIG_SKILL_RANK_CHANGE as well as records round statistics.
  * Vars:
- ** skill - associated skill
+ ** skill - associated skill typepath
  ** amt - amount of experience to grant
  ** silent - wether the player will be notified about their skill change or not
  ** check_apprentice - wether or not to give experience to your apprentice as well
 */
 /datum/skill_holder/proc/adjust_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
+	var/datum/skill/skill_ref = GetSkillRef(skill)
+	if(!skill_ref)
+		return
+
 	amt *= GLOB.adjust_experience_modifier
-
-	if(current.has_quirk(/datum/quirk/boon/quick_learner))
-		amt *= 1.2
-
 	amt *= current.get_skill_exp_multiplier(skill)
 
-	var/datum/skill/skill_ref = GetSkillRef(skill)
-	skill_experience[skill_ref] = max(0, skill_experience[skill_ref] + amt)
-	var/old_level = get_skill_level(skill)
-	switch(skill_experience[skill_ref])
+	skill_experience[skill] = max(0, skill_experience[skill] + amt)
+	var/old_level_rounded = get_skill_level(skill)
+	var/had_skill_before = has_skill(skill)
+	switch(skill_experience[skill])
 		if(SKILL_EXP_LEGENDARY to INFINITY)
-			known_skills[skill_ref] = SKILL_LEVEL_LEGENDARY
+			known_skills[skill] = SKILL_LEVEL_LEGENDARY
 		if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
-			known_skills[skill_ref] = SKILL_LEVEL_MASTER
+			known_skills[skill] = SKILL_LEVEL_MASTER + round((skill_experience[skill] - SKILL_EXP_MASTER) / (SKILL_EXP_LEGENDARY - SKILL_EXP_MASTER), 0.1)
 		if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
-			known_skills[skill_ref] = SKILL_LEVEL_EXPERT
+			known_skills[skill] = SKILL_LEVEL_EXPERT + round((skill_experience[skill] - SKILL_EXP_EXPERT) / (SKILL_EXP_MASTER - SKILL_EXP_EXPERT), 0.1)
 		if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
-			known_skills[skill_ref] = SKILL_LEVEL_JOURNEYMAN
+			known_skills[skill] = SKILL_LEVEL_JOURNEYMAN + round((skill_experience[skill] - SKILL_EXP_JOURNEYMAN) / (SKILL_EXP_EXPERT - SKILL_EXP_JOURNEYMAN), 0.1)
 		if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
-			known_skills[skill_ref] = SKILL_LEVEL_APPRENTICE
+			known_skills[skill] = SKILL_LEVEL_APPRENTICE + round((skill_experience[skill] - SKILL_EXP_APPRENTICE) / (SKILL_EXP_JOURNEYMAN - SKILL_EXP_APPRENTICE), 0.1)
 		if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
-			known_skills[skill_ref] = SKILL_LEVEL_NOVICE
-		if(0 to SKILL_EXP_NOVICE)
-			known_skills[skill_ref] = SKILL_LEVEL_NONE
+			known_skills[skill] = SKILL_LEVEL_NOVICE + round((skill_experience[skill] - SKILL_EXP_NOVICE) / (SKILL_EXP_APPRENTICE - SKILL_EXP_NOVICE), 0.1)
+		if(SKILL_EXP_NONE to SKILL_EXP_NOVICE)
+			known_skills[skill] = SKILL_LEVEL_NONE + round((skill_experience[skill] - SKILL_EXP_NONE) / (SKILL_EXP_NOVICE - SKILL_EXP_NONE), 0.1)
 
-	if(length(apprentices) && check_apprentice)
-		for(var/datum/weakref/apprentice_ref as anything in apprentices)
-			var/mob/living/apprentice = apprentice_ref.resolve()
-			if(!istype(apprentice))
-				continue
-			if(!(apprentice in view(7, current)))
-				continue
-			var/multiplier = 0
-			if((skill in apprentice_training_skills))
-				multiplier = apprentice_training_skills[skill]
-			if(apprentice.get_skill_level(skill) <= (get_skill_level(skill) - 1))
-				multiplier += 0.25 //this means a base 35% of your xp is also given to nearby apprentices plus skill modifiers.
-			var/apprentice_amt = amt * 0.1 + multiplier
-			if(apprentice.adjust_experience(skill, apprentice_amt, FALSE, FALSE))
-				current.add_stress(/datum/stress_event/apprentice_making_me_proud)
+	if(check_apprentice)
+		adjust_apprentice_exp(skill, amt, silent)
 
-	var/is_new_skill = !(skill_ref in known_skills)
-	if(isnull(old_level) && !is_new_skill)
-		old_level = SKILL_LEVEL_NONE
-	if((isnull(old_level) && is_new_skill) || known_skills[skill_ref] == old_level)
+	var/new_level_rounded = get_skill_level(skill)
+	if(had_skill_before && old_level_rounded == new_level_rounded)
 		return
+	// This occurs when adding a new skill to known_skills at SKILL_LEVEL_NONE
+	if(old_level_rounded == SKILL_LEVEL_NONE && new_level_rounded == SKILL_LEVEL_NONE)
+		return
+	SEND_SIGNAL(current, COMSIG_SKILL_RANK_CHANGE, skill_ref, new_level_rounded, old_level_rounded)
+	// Give spellpoints if the skill is arcane
+	if(skill == /datum/skill/magic/arcane && new_level_rounded > old_level_rounded)
+		current?.adjust_spell_points(new_level_rounded - old_level_rounded)
 	if(silent)
 		return
-	if(known_skills[skill_ref] >= old_level)
-		if(known_skills[skill_ref] > old_level)
-			SEND_SIGNAL(current, COMSIG_SKILL_RANK_INCREASED, skill_ref, known_skills[skill_ref], old_level)
-			to_chat(current, span_nicegreen("My proficiency in [skill_ref.name] grows to [SSskills.level_names[known_skills[skill_ref]]]!"))
-			skill_ref.skill_level_effect(known_skills[skill_ref], src)
-			record_round_statistic(STATS_SKILLS_LEARNED)
-			if(istype(skill_ref, /datum/skill/combat))
-				record_round_statistic(STATS_COMBAT_SKILLS)
-			if(istype(skill_ref, /datum/skill/craft))
-				record_round_statistic(STATS_CRAFT_SKILLS)
-			if(skill == /datum/skill/misc/reading && old_level == SKILL_LEVEL_NONE && current.is_literate())
-				record_round_statistic(STATS_LITERACY_TAUGHT)
-		if(skill == /datum/skill/magic/arcane)
-			current?.adjust_spell_points(1)
-
-		return TRUE
+	if(new_level_rounded >= old_level_rounded)
+		to_chat(current, span_nicegreen("My proficiency in [skill_ref.name] grows to [SSskills.level_names[new_level_rounded]]!"))
+		record_round_statistic(STATS_SKILLS_LEARNED)
+		if(ispath(skill, /datum/skill/combat))
+			record_round_statistic(STATS_COMBAT_SKILLS)
+		if(ispath(skill, /datum/skill/craft))
+			record_round_statistic(STATS_CRAFT_SKILLS)
+		if(skill == /datum/skill/misc/reading && old_level_rounded == SKILL_LEVEL_NONE && current.is_literate())
+			record_round_statistic(STATS_LITERACY_TAUGHT)
 	else
-		to_chat(current, span_warning("My [skill_ref.name] has weakened to [SSskills.level_names[known_skills[skill_ref]]]!"))
+		var/new_level_name = new_level_rounded ? SSskills.level_names[new_level_rounded] : span_info("None")
+		to_chat(current, span_warning("My [skill_ref.name] has weakened to [new_level_name]!"))
 
 /**
- * adjusts the skill level
+ * Adjusts the skill level. Essentially a convenient way to call adjust_experience(check_apprentice = FALSE)
  * Vars:
  ** skill - associated skill to change
  ** amt - how much to change the skill
@@ -368,91 +366,41 @@
 /datum/skill_holder/proc/adjust_skillrank(skill, amt, silent = FALSE)
 	if(!amt)
 		return
-	if(!skill)
+	if(!GetSkillRef(skill))
 		CRASH("adjust_skillrank was called without a specified skill!")
 	/// The skill we are changing
-	var/datum/skill/skill_ref = GetSkillRef(skill)
+	var/old_level = get_skill_level(skill, TRUE)
+	var/target_level = clamp(old_level + amt, SKILL_LEVEL_NONE, SKILL_LEVEL_LEGENDARY)
+	if(has_skill(skill) && old_level == target_level)
+		return
 	/// How much experience the mob gets at the end
-	var/amt2gain = 0
-	// Give spellpoints if the skill is arcane
-	if(skill == /datum/skill/magic/arcane)
-		current?.adjust_spell_points(amt)
-	if(amt > 0)
-		for(var/i in 1 to amt)
-			switch(skill_experience[skill_ref])
-				if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
-					amt2gain = SKILL_EXP_LEGENDARY-skill_experience[skill_ref]
-				if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
-					amt2gain = SKILL_EXP_MASTER-skill_experience[skill_ref]
-				if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
-					amt2gain = SKILL_EXP_EXPERT-skill_experience[skill_ref]
-				if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
-					amt2gain = SKILL_EXP_JOURNEYMAN-skill_experience[skill_ref]
-				if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
-					amt2gain = SKILL_EXP_APPRENTICE-skill_experience[skill_ref]
-				if(0 to SKILL_EXP_NOVICE)
-					amt2gain = SKILL_EXP_NOVICE-skill_experience[skill_ref] + 1
-			if(!skill_experience[skill_ref])
-				amt2gain = SKILL_EXP_NOVICE+1
-			skill_experience[skill_ref] = max(0, skill_experience[skill_ref] + amt2gain) //Prevent going below 0
-	if(amt < 0)
-		var/flipped_amt = -amt
-		for(var/i in 1 to flipped_amt)
-			switch(skill_experience[skill_ref])
-				if(SKILL_EXP_LEGENDARY)
-					amt2gain = SKILL_EXP_MASTER
-				if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY-1)
-					amt2gain = SKILL_EXP_EXPERT
-				if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER-1)
-					amt2gain = SKILL_EXP_JOURNEYMAN
-				if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT -1)
-					amt2gain = SKILL_EXP_APPRENTICE
-				if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN-1)
-					amt2gain = SKILL_EXP_NOVICE
-				if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE-1)
-					amt2gain = 1
-				if(0 to SKILL_EXP_NOVICE)
-					amt2gain = 1
-			if(!skill_experience[skill_ref])
-				amt2gain = 1
-			skill_experience[skill_ref] = amt2gain //Prevent going below 0
+	var/experience_change = 0
+	var/current_experience = skill_experience[skill]
 
-	var/old_level = known_skills[skill_ref]
-	switch(skill_experience[skill_ref])
-		if(SKILL_EXP_LEGENDARY to INFINITY)
-			known_skills[skill_ref] = SKILL_LEVEL_LEGENDARY
-		if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
-			known_skills[skill_ref] = SKILL_LEVEL_MASTER
-		if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
-			known_skills[skill_ref] = SKILL_LEVEL_EXPERT
-		if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
-			known_skills[skill_ref] = SKILL_LEVEL_JOURNEYMAN
-		if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
-			known_skills[skill_ref] = SKILL_LEVEL_APPRENTICE
-		if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
-			known_skills[skill_ref] = SKILL_LEVEL_NOVICE
-		if(0 to SKILL_EXP_NOVICE)
-			known_skills[skill_ref] = SKILL_LEVEL_NONE
-	var/is_new_skill = !(skill_ref in known_skills)
-	if(isnull(old_level) && !is_new_skill)
-		old_level = SKILL_LEVEL_NONE
-	if((isnull(old_level) && is_new_skill) || known_skills[skill_ref] == old_level)
-		return
-	if(silent)
-		return
-	if(known_skills[skill_ref] >= old_level)
-		SEND_SIGNAL(current, COMSIG_SKILL_RANK_INCREASED, skill_ref, known_skills[skill_ref], old_level)
-		to_chat(current, span_nicegreen("I feel like I've become more proficient at [skill_ref.name]!"))
-		record_round_statistic(STATS_SKILLS_LEARNED)
-		if(istype(skill_ref, /datum/skill/combat))
-			record_round_statistic(STATS_COMBAT_SKILLS)
-		if(istype(skill_ref, /datum/skill/craft))
-			record_round_statistic(STATS_CRAFT_SKILLS)
-		if(skill == /datum/skill/misc/reading && old_level == SKILL_LEVEL_NONE && current.is_literate())
-			record_round_statistic(STATS_LITERACY_TAUGHT)
-	else
-		to_chat(current, span_warning("I feel like I've become worse at [skill_ref.name]!"))
+	var/remainder = target_level %% 1 // See DM documentation on why %% is used instead of %
+	switch(target_level)
+		if(SKILL_LEVEL_LEGENDARY to INFINITY)
+			experience_change = SKILL_EXP_LEGENDARY - current_experience
+		if(SKILL_LEVEL_MASTER to SKILL_LEVEL_LEGENDARY)
+			experience_change = SKILL_EXP_MASTER - current_experience
+			experience_change += (SKILL_EXP_LEGENDARY - SKILL_EXP_MASTER) * remainder
+		if(SKILL_LEVEL_EXPERT to SKILL_LEVEL_MASTER)
+			experience_change = SKILL_EXP_EXPERT - current_experience
+			experience_change += (SKILL_EXP_MASTER - SKILL_EXP_EXPERT) * remainder
+		if(SKILL_LEVEL_JOURNEYMAN to SKILL_LEVEL_EXPERT)
+			experience_change = SKILL_EXP_JOURNEYMAN - current_experience
+			experience_change += (SKILL_EXP_EXPERT - SKILL_EXP_JOURNEYMAN) * remainder
+		if(SKILL_LEVEL_APPRENTICE to SKILL_LEVEL_JOURNEYMAN)
+			experience_change = SKILL_EXP_APPRENTICE - current_experience
+			experience_change += (SKILL_EXP_JOURNEYMAN - SKILL_EXP_APPRENTICE) * remainder
+		if(SKILL_LEVEL_NOVICE to SKILL_LEVEL_APPRENTICE)
+			experience_change = SKILL_EXP_NOVICE - current_experience
+			experience_change += (SKILL_EXP_APPRENTICE - SKILL_EXP_NOVICE) * remainder
+		if(SKILL_LEVEL_NONE to SKILL_LEVEL_NOVICE)
+			experience_change = SKILL_EXP_NONE - current_experience
+			experience_change += (SKILL_EXP_NOVICE - SKILL_EXP_NONE) * remainder
 
+	adjust_experience(skill, experience_change, silent, check_apprentice = FALSE)
 
 /**
  * increases the skill level up to a certain maximum
@@ -462,7 +410,7 @@
  ** max - maximum amount up to which the skill will be changed
 */
 /datum/skill_holder/proc/clamped_adjust_skillrank(skill, amt, max, silent)
-	var/skill_difference = max - get_skill_level(skill)
+	var/skill_difference = max - get_skill_level(skill, TRUE)
 	if(skill_difference <= 0)
 		return
 	var/amount_to_adjust_by = min(skill_difference, amt)  // Changed max to amt
@@ -479,7 +427,7 @@
 	if(!skill)
 		CRASH("set_skillrank was called without a skill argument!")
 
-	var/skill_difference = level - get_skill_level(skill)
+	var/skill_difference = level - get_skill_level(skill, TRUE)
 	adjust_skillrank(skill, skill_difference, silent)
 
 /**
@@ -489,96 +437,101 @@
 */
 /datum/skill_holder/proc/purge_all_skills(silent = TRUE)
 	known_skills = list()
-	skill_experience = list()
-	for(var/datum/skill/skill as anything in SSskills.all_skills)
-		if(!(skill in skill_experience))
-			skill_experience |= skill
-			skill_experience[skill] = 0
+	for(var/skill in skill_experience)
+		skill_experience[skill] = 0
 	if(!silent)
 		to_chat(current, span_boldwarning("I forget all my skills!"))
 
-
-
 /datum/skill_holder/proc/adjust_apprentice_exp(skill, amt, silent)
-	if(length(apprentices))
-		for(var/datum/weakref/apprentice_ref as anything in apprentices)
-			var/mob/living/apprentice = apprentice_ref.resolve()
-			if(!istype(apprentice))
-				continue
-			if(!(apprentice in view(7, current)))
-				continue
-			var/multiplier = 0
-			if((skill in apprentice_training_skills))
-				multiplier = apprentice_training_skills[skill]
-			if(apprentice.get_skill_level(skill) <= (get_skill_level(skill) - 1))
-				multiplier += 0.25 //this means a base 35% of your xp is also given to nearby apprentices plus skill modifiers.
-			if(ishuman(current))
-				var/mob/living/carbon/human/H = current
-				if(HAS_TRAIT(H, TRAIT_TUTELAGE)) //Base 50% of your xp is given to nearby apprentice
-					multiplier += 0.15
-			var/apprentice_amt = amt * 0.1 + multiplier
-			if(apprentice.mind.add_sleep_experience(skill, apprentice_amt, FALSE, FALSE))
-				current.add_stress(/datum/stress_event/apprentice_making_me_proud)
-				SEND_SIGNAL(current, COMSIG_TAUGHT_APPRENTICE)
+	if(!length(apprentices))
+		return
+
+	var/multiplier = 0
+	if(HAS_TRAIT(current, TRAIT_TUTELAGE)) //Base 50% of your xp is given to nearby apprentice
+		multiplier += 0.15
+	var/tutor_skill_level = get_skill_level(skill)
+	var/list/surroundings = view(7, current)
+	var/taught_apprentice = FALSE
+	for(var/datum/weakref/apprentice_ref as anything in apprentices)
+		var/mob/living/apprentice = apprentice_ref.resolve()
+		if(!istype(apprentice))
+			continue
+		if(!(apprentice in surroundings))
+			continue
+		if(skill in apprentice_training_skills)
+			multiplier += apprentice_training_skills[skill]
+		if(apprentice.get_skill_level(skill) < tutor_skill_level)
+			multiplier += 0.25 //this means a base 35% of your xp is also given to nearby apprentices plus skill modifiers.
+		var/apprentice_amt = amt * (0.1 + multiplier)
+		if(apprentice.mind.add_sleep_experience(skill, apprentice_amt, FALSE, FALSE))
+			taught_apprentice = TRUE
+			SEND_SIGNAL(current, COMSIG_TAUGHT_APPRENTICE, apprentice, skill, apprentice_amt)
+
+	if(taught_apprentice)
+		current.add_stress(/datum/stress_event/apprentice_making_me_proud)
 
 /**
  * Get the experience multiplier for a specific skill
  * Vars:
- ** skill - the skill to check
+ ** skill - the skill typepath to check
  * Returns: The multiplier (default 1.0 if none set)
  */
 /datum/skill_holder/proc/get_skill_exp_multiplier(skill)
-	var/datum/skill/skill_ref = GetSkillRef(skill)
-	if(skill_ref in exp_multiplier)
-		return exp_multiplier[skill_ref]
-	return 1.0
+	if(!GetSkillRef(skill))
+		CRASH("adjust_skillrank was called without a specified skill!")
+
+	var/base_multiplier = 1.0
+	if(exp_multiplier[skill])
+		base_multiplier = exp_multiplier[skill]
+
+	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+		base_multiplier += 0.2
+
+	return base_multiplier
 
 /**
  * Set the experience multiplier for a specific skill
  * Vars:
- ** skill - the skill to modify
+ ** skill - the skill typepath to modify
  ** multiplier - the multiplier value (1.0 = normal, 2.0 = double xp, 0.5 = half xp)
  */
 /datum/skill_holder/proc/set_skill_exp_multiplier(skill, multiplier)
-	if(!skill)
+	if(!GetSkillRef(skill))
 		CRASH("set_skill_exp_multiplier was called without a skill argument!")
 
-	var/datum/skill/skill_ref = GetSkillRef(skill)
-	exp_multiplier[skill_ref] = max(0, multiplier) // Prevent negative multipliers
+	exp_multiplier[skill] = max(0, multiplier) // Prevent negative multipliers
 	return multiplier
 
 /**
  * Adjust the experience multiplier for a specific skill by an amount
  * Vars:
- ** skill - the skill to modify
+ ** skill - the skill typepath to modify
  ** amount - how much to adjust the multiplier by (can be negative)
  */
 /datum/skill_holder/proc/adjust_skill_exp_multiplier(skill, amount)
-	if(!skill)
+	if(!GetSkillRef(skill))
 		CRASH("adjust_skill_exp_multiplier was called without a skill argument!")
 
-	var/datum/skill/skill_ref = GetSkillRef(skill)
-	var/current_multiplier = get_skill_exp_multiplier(skill_ref)
+	var/current_multiplier = get_skill_exp_multiplier(skill)
 	var/new_multiplier = max(0, current_multiplier + amount) // Prevent negative multipliers
-	exp_multiplier[skill_ref] = new_multiplier
+	exp_multiplier[skill] = new_multiplier
 	return new_multiplier
 
 /**
  * Remove the experience multiplier for a specific skill (resets to default 1.0)
  * Vars:
- ** skill - the skill to reset
+ ** skill - the skill typepath to reset
  */
 /datum/skill_holder/proc/remove_skill_exp_multiplier(skill)
-	if(!skill)
+	if(!GetSkillRef(skill))
 		CRASH("remove_skill_exp_multiplier was called without a skill argument!")
 
-	var/datum/skill/skill_ref = GetSkillRef(skill)
-	exp_multiplier -= skill_ref
+	exp_multiplier -= skill
 	return TRUE
 
 /**
  * Get all skills that have custom multipliers set
- * Returns: Associative list of skill_ref = multiplier
+ * Returns: Associative list of skill = multiplier
  */
 /datum/skill_holder/proc/get_all_skill_multipliers()
 	return exp_multiplier.Copy()

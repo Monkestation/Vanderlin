@@ -15,7 +15,7 @@
 	current = new field_type(src, range_to_use, FALSE)
 	current.recalculate_field(full_recalc = TRUE)
 
-/obj/item/multitool/light_debug/attack_self(mob/user, params)
+/obj/item/multitool/light_debug/attack_self(mob/user, list/modifiers)
 	operating = !operating
 	to_chat(user, span_notice("You turn [src] [operating? "on":"off"]."))
 	if(!istype(current) && operating)

@@ -104,8 +104,8 @@
 		click_list |= LEFT_CLICK
 	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		click_list |= ALT_CLICKED
-	if(LAZYACCESS(modifiers, CTRL_CLICK))
-		click_list |= CTRL_CLICK
+	if(LAZYACCESS(modifiers, CTRL_CLICKED))
+		click_list |= CTRL_CLICKED
 
 	var/good_hit = TRUE
 	if(!choice.check_click(click_list))
@@ -150,6 +150,9 @@
 	return TRUE
 
 /datum/anvil_challenge/process(seconds_per_tick)
+	if(!user.Adjacent(host_anvil))
+		end_minigame(FALSE)
+		return
 	for(var/note in anvil_presses)
 		if(anvil_presses[note] + 0.6 SECONDS > REALTIMEOFDAY)
 			continue
@@ -162,16 +165,7 @@
 			else
 				generate_anvil_beats()
 
-/datum/anvil_challenge/proc/end_minigame()
-	var/smithlevel = user.get_skill_level(selected_recipe.appro_skill)
-	if(host_anvil.always_perfect)
-		failed_notes = 0
-		off_time = 0
-		success = 100
-
-	// Calculate quality score based on performance
-	success = max(smithlevel * 5, round(success - ((100 * (failed_notes / total_notes)) + 1 * (off_time * 2)) +((smithlevel * 5) - 15)))
-
+/datum/anvil_challenge/proc/end_minigame(completed = TRUE)
 	UnregisterSignal(user.client, COMSIG_CLIENT_CLICK_DIRTY)
 	user.client.show_popup_menus = had_context
 	STOP_PROCESSING(SSanvil, src)
@@ -182,7 +176,19 @@
 	user.client?.screen -= anvil_hud
 	QDEL_NULL(anvil_hud)
 	host_anvil.smithing = FALSE
-	host_anvil.process_minigame_result(success, user, (failed_notes == total_notes))
+
+	if(completed)
+		var/smithlevel = user.get_skill_level(selected_recipe.appro_skill)
+		if(host_anvil.always_perfect)
+			failed_notes = 0
+			off_time = 0
+			success = 100
+
+		// Calculate quality score based on performance
+		success = max(smithlevel * 5, round(success - ((100 * (failed_notes / total_notes)) + 1 * (off_time * 2)) +((smithlevel * 5) - 15)))
+
+		host_anvil.process_minigame_result(success, user, (failed_notes == total_notes))
+
 	host_anvil = null
 
 /atom/movable/screen/anvil_hud
@@ -243,10 +249,10 @@
 			click_requirements = list(RIGHT_CLICK, ALT_CLICKED)
 			icon_state = "note-right-alt"
 		if(5)
-			click_requirements = list(LEFT_CLICK, CTRL_CLICK)
+			click_requirements = list(LEFT_CLICK, CTRL_CLICKED)
 			icon_state = "note-ctrl"
 		if(6)
-			click_requirements = list(RIGHT_CLICK, CTRL_CLICK)
+			click_requirements = list(RIGHT_CLICK, CTRL_CLICKED)
 			icon_state = "note-right-ctrl"
 
 /atom/movable/screen/hud_note/proc/check_click(list/click_modifiers)

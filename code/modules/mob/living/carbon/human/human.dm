@@ -1,5 +1,5 @@
-/mob/living/carbon/human/MiddleClick(mob/user, params)
-	..()
+/mob/living/carbon/human/MiddleClick(mob/user, list/modifiers)
+	. = ..()
 	if(!user)
 		return
 	var/obj/item/held_item = user.get_active_held_item()
@@ -14,7 +14,18 @@
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/artery/neck)
-	else
+
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+			if(user == src)
+				user.visible_message(span_danger("[user] starts to shave [user.p_their()] hair with [held_item].</span>"))
+			else
+				user.visible_message(span_danger("[user] starts to shave [src]'s hair with [held_item].</span>"))
+			if(do_after(user, 10 SECONDS, src))
+				set_hair_style(/datum/sprite_accessory/hair/head/bald)
+				update_body()
+
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
@@ -28,7 +39,7 @@
 						has_stubble = FALSE
 						update_body()
 					else
-						held_item.melee_attack_chain(user, src, params)
+						held_item.melee_attack_chain(user, src, modifiers)
 				else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
 					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
 					if(user == src)
@@ -44,7 +55,7 @@
 								var/mob/living/carbon/V = src
 								V.add_stress(/datum/stress_event/dwarfshaved)
 					else
-						held_item.melee_attack_chain(user, src, params)
+						held_item.melee_attack_chain(user, src, modifiers)
 		else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_R_FOOT || user.zone_selected == BODY_ZONE_PRECISE_L_FOOT))
 			var/obj/item/clothing/shoes/shoes_check
 			var/mob/living/carbon/target
@@ -97,8 +108,7 @@
 					to_chat(user, ("You can't possibily make it shine more."))
 
 /mob/living/carbon/human/Initialize()
-	// verbs += /mob/living/proc/mob_sleep
-	verbs += /mob/living/proc/lay_down
+	add_verb(src, /mob/living/proc/lay_down)
 
 	//initialize limbs first
 	create_bodyparts()
@@ -111,6 +121,7 @@
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+	culture = new()
 
 	. = ..()
 
@@ -121,6 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
+	QDEL_NULL(culture)
 	GLOB.human_list -= src
 	return ..()
 
@@ -170,15 +182,10 @@
 	dna.initialize_dna()
 	reset_limb_fingerprints()
 
-/mob/living/carbon/human/Stat()
-	..()
-	if(!client)
-		return
-	if(mind)
-		if(clan)
-			if(statpanel("Stats"))
-				stat("Vitae:",bloodpool)
-	return
+/mob/living/carbon/human/get_status_tab_items()
+	. = ..()
+	if(clan)
+		. += "VITAE: [bloodpool]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)

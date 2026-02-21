@@ -82,11 +82,11 @@
 
 /datum/status_effect/buff/druqks/baotha/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_CRACKHEAD, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_CRACKHEAD, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/druqks/baotha/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_CRACKHEAD, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_CRACKHEAD, TRAIT_STATUS_EFFECT(id))
 	owner.visible_message("[owner]'s eyes appear to return to normal.")
 
 /atom/movable/screen/alert/status_effect/buff/druqks
@@ -105,11 +105,11 @@
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
 		C.add_stress(/datum/stress_event/ozium)
-	ADD_TRAIT(owner, TRAIT_NOPAIN, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_NOPAIN, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/ozium/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_NOPAIN, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_NOPAIN, TRAIT_STATUS_EFFECT(id))
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stress_event/ozium)
@@ -189,12 +189,12 @@
 /datum/status_effect/buff/featherfall/on_apply()
 	. = ..()
 	to_chat(owner, span_warning("I feel lighter."))
-	ADD_TRAIT(owner, TRAIT_NOFALLDAMAGE1, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_NOFALLDAMAGE1, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/featherfall/on_remove()
 	. = ..()
 	to_chat(owner, span_warning("The feeling of lightness fades."))
-	REMOVE_TRAIT(owner, TRAIT_NOFALLDAMAGE1, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_NOFALLDAMAGE1, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/darkvision
 	id = "darkvision"
@@ -212,13 +212,13 @@
 	var/obj/item/organ/eyes/eyes = H.getorgan(/obj/item/organ/eyes)
 	if (!eyes || eyes.lighting_alpha)
 		return
-	ADD_TRAIT(owner, TRAIT_DARKVISION, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_DARKVISION, TRAIT_STATUS_EFFECT(id))
 	owner.update_sight()
 
 /datum/status_effect/buff/darkvision/on_remove()
 	. = ..()
 	to_chat(owner, span_warning("Darkness shrouds your senses once more."))
-	REMOVE_TRAIT(owner, TRAIT_DARKVISION, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_DARKVISION, TRAIT_STATUS_EFFECT(id))
 	owner.update_sight()
 
 /atom/movable/screen/alert/status_effect/buff/haste
@@ -573,13 +573,13 @@
 	if (!filter)
 		owner.add_filter(CRANKBOX_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 200, "size" = 1))
 	to_chat(owner, span_warning("I feel the wailing box distorting magicks around me!"))
-	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/churnerprotection/on_remove()
 	. = ..()
 	to_chat(owner, span_warning("The wailing box's protection fades..."))
 	owner.remove_filter(CRANKBOX_FILTER)
-	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 
 #undef CRANKBOX_FILTER
 
@@ -596,13 +596,13 @@
 
 /datum/status_effect/buff/churnernegative/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_warning("I feel as if my connection to the Arcyne disappears entirely. The air feels still..."))
 	owner.visible_message("[owner]'s arcyne aura seems to fade.")
 
 /datum/status_effect/buff/churnernegative/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_warning("I feel my connection to the arcyne surround me once more."))
 	owner.visible_message("[owner]'s arcyne aura seems to return once more.")
 
@@ -630,6 +630,14 @@
 	status_type = STATUS_EFFECT_REFRESH
 	alert_type = /atom/movable/screen/alert/status_effect/bardbuff
 	duration = 50 // Sanity, so that people outside the bard buff listening area lose the buff after a few seconds
+
+// /datum/status_effect/bardicbuff/on_apply()
+// 	. = ..()
+// 	owner.add_stress(/datum/stress_event/bardicbuff)
+
+// /datum/status_effect/bardicbuff/on_remove()
+// 	. = ..()
+// 	owner.remove_stress(/datum/stress_event/bardicbuff)
 
 // SKELETON BARD BUFF ALERT
 /atom/movable/screen/alert/status_effect/bardbuff

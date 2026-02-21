@@ -81,7 +81,7 @@
 		L.mind.transfer_to(brainmob)
 //	to_chat(brainmob, "<span class='notice'>I feel slightly disoriented. That's normal when you're just a brain.</span>")
 
-/obj/item/organ/brain/attackby(obj/item/O, mob/user, params)
+/obj/item/organ/brain/attackby(obj/item/O, mob/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_MELEE)
 
 	if((organ_flags & ORGAN_FAILING) && O.is_drainable()) //attempt to heal the brain
@@ -132,7 +132,7 @@
 		else
 			. += "<span class='info'>This one is completely devoid of life.</span>"
 
-/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user)
+/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(!istype(C))
 		return ..()
 
@@ -331,6 +331,17 @@
 		owner.add_stress(/datum/stress_event/brain_damage)
 	else
 		owner.remove_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/before_organ_replacement(obj/item/organ/replacement)
+	. = ..()
+	var/obj/item/organ/brain/replacement_brain = replacement
+	if(!istype(replacement_brain))
+		return
+
+	// Transfer over traumas as well
+	for(var/datum/brain_trauma/trauma as anything in traumas)
+		cure_trauma_type(trauma)
+		replacement_brain.gain_trauma_type(trauma)
 
 /obj/item/organ/brain/smooth
 	icon_state = "brain-smooth"

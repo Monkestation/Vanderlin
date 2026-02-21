@@ -25,7 +25,7 @@
 	drop_sound = 'sound/foley/gun_drop.ogg'
 	dropshrink = 0.7
 	associated_skill = /datum/skill/combat/firearms
-	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, INTENT_GENERIC)
+	possible_item_intents = list(/datum/intent/shoot/puffer, /datum/intent/shoot/puffer/arc, INTENT_GENERIC)
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/musk
 	gripped_intents = null
 	slot_flags = ITEM_SLOT_HIP
@@ -66,7 +66,7 @@
 	wound = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_hand_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -85,7 +85,7 @@
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_self_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(!wheellock)
 		return
@@ -98,14 +98,14 @@
 		to_chat(user, "<span class='info'>\The [src]'s mechanism is already wound!</span>")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	var/windtime = 3.5
-	windtime = windtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
+	windtime = windtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
 	if(do_after(user, windtime SECONDS, src) && !wound)
 		to_chat(user, "<span class='info'>I wind \the [src]'s mechanism.</span>")
 		playsound(src, 'sound/foley/winding.ogg', 100, FALSE)
 		wound = TRUE
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/MiddleClick(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -124,7 +124,7 @@
 			playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(!cocked)
 		return
 	if(!rammed)
@@ -149,7 +149,7 @@
 			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
 			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 		BB.damage = BB.damage * damage_mult // 80 * 1.5 = 130 of damage.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
+		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3) //+3 accuracy per level in firearms
 	playsound(src, 'sound/combat/Ranged/muskclick.ogg', 100, FALSE)
 	cocked = FALSE
 	rammed = FALSE
@@ -170,9 +170,9 @@
 	var/obj/item/ramrod/rrod = new(src)
 	rod = rrod
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attackby(obj/item/I, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attackby(obj/item/I, mob/user, list/modifiers)
 	var/ramtime = 5.5
-	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
+	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
 
 	// Check if the item used is a ramrod
 	if(istype(I, /obj/item/ramrod))
@@ -250,7 +250,7 @@
 	powdered = TRUE
 	wound = TRUE
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	atom_integrity = 0
 	atom_break()
@@ -377,14 +377,14 @@
 					"eastabove" = 0,
 					"westabove" = 0)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attack_self_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attack_self_secondary(mob/user, list/modifiers)
 	if(bayonet)
 		if(do_after(user, 2 SECONDS, src))
 			user.put_in_hands(bayonet)
 			bayonet_affixed = FALSE
 			possible_item_intents -= SPEAR_THRUST
 			gripped_intents -= POLEARM_THRUST
-			sharpness = IS_BLUNT
+			sharpness = IS_SHARP
 			bayonet.max_blade_int = max_blade_int
 			bayonet.blade_int = blade_int
 			max_blade_int = 0
@@ -398,9 +398,9 @@
 		update_appearance(UPDATE_ICON_STATE)
 	..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attackby(obj/item/I, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attackby(obj/item/I, mob/user, list/modifiers)
 	var/ramtime = 5.5
-	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms) / 2)
+	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(istype(H.get_active_held_item(), /obj/item/weapon/knife/dagger/bayonet))
@@ -428,7 +428,7 @@
 /obj/item/weapon/knife/dagger/bayonet
 	name = "bayonet"
 	force = 10
-	max_blade_int = 100
+	max_blade_int = 150
 	var/spread = 2
 
 /obj/item/ramrod/musket

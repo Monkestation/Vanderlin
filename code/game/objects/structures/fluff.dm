@@ -387,7 +387,7 @@
 	soundloop.start()
 	attacked_sound = initial(attacked_sound)
 
-/obj/structure/fluff/clock/attack_hand_secondary(mob/user, params)
+/obj/structure/fluff/clock/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -601,7 +601,7 @@
 		else
 			. += "It says \"[wrotesign]\"."
 
-/obj/structure/fluff/customsign/attackby(obj/item/W, mob/user, params)
+/obj/structure/fluff/customsign/attackby(obj/item/W, mob/user, list/modifiers)
 	if(!user.cmode)
 		if(!user.is_literate())
 			to_chat(user, "<span class='warning'>I don't know any verba.</span>")
@@ -641,7 +641,7 @@
 		P.handle_drop()
 		return BULLET_ACT_HIT
 
-/obj/structure/fluff/statue/attack_hand_secondary(mob/user, params)
+/obj/structure/fluff/statue/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -878,7 +878,7 @@
 	icon_state = "p_dummy"
 	icon = 'icons/roguetown/misc/structure.dmi'
 
-/obj/structure/fluff/statue/tdummy/attackby(obj/item/W, mob/user, params)
+/obj/structure/fluff/statue/tdummy/attackby(obj/item/W, mob/user, list/modifiers)
 	if(!user.cmode)
 		if(W.istrainable) // Prevents using dumb shit to train with. With temporary exceptions...
 			if(W.associated_skill)
@@ -952,7 +952,7 @@
 	if(isdarkelf(user))
 		say("BRING ME [goal - current] EARS. I HUNGER.",language = /datum/language/elvish)
 
-/obj/structure/fluff/statue/spider/attackby(obj/item/W, mob/user, params)
+/obj/structure/fluff/statue/spider/attackby(obj/item/W, mob/user, list/modifiers)
 	if(istype(W, objective))
 		if(user.mind)
 			if(isdarkelf(user))
@@ -977,7 +977,7 @@
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
 
-/obj/structure/fluff/statue/evil/attackby(obj/item/W, mob/user, params)
+/obj/structure/fluff/statue/evil/attackby(obj/item/W, mob/user, list/modifiers)
 	if(user.mind)
 		var/datum/antagonist/bandit/B = user.mind.has_antag_datum(/datum/antagonist/bandit)
 		if(B)
@@ -1101,6 +1101,19 @@
 	break_sound = null
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 
+/obj/structure/fluff/psycross/astrata
+	name = "astratan cross"
+	icon_state = "astratancross"
+	desc = "A towering monument to Astrata. Those who stand beneath it feel the warmth of her light."
+	break_sound = null
+	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
+
+/obj/structure/fluff/psycross/astrata/gold
+	name = "astratan cross"
+	icon_state = "astratancross_g"
+	break_sound = null
+	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
+
 /obj/structure/fluff/psycross/zizocross
 	name = "inverted cross"
 	desc = "An unholy symbol. Blasphemy for most, reverence for few."
@@ -1158,7 +1171,7 @@
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 	max_integrity = 450
 
-/obj/structure/fluff/psycross/attackby(obj/item/W, mob/living/carbon/human/user, params)
+/obj/structure/fluff/psycross/attackby(obj/item/W, mob/living/carbon/human/user, list/modifiers)
 	if(!user.mind)
 		return ..()
 
@@ -1483,5 +1496,5 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 6)
+	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))

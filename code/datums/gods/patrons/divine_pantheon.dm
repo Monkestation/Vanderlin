@@ -4,7 +4,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 	EORA = 'sound/vo/female/gen/giggle (1).ogg',
 	DENDOR = 'sound/magic/barbroar.ogg',
 	MALUM = 'sound/magic/dwarf_chant01.ogg',
-	XYLIX = 'sound/misc/gods/xylix_omen_male_female.ogg',
+	XYLIX = 'sound/misc/gods/xylix_omen.ogg',
 	NECRA = 'sound/ambience/noises/genspooky (1).ogg',
 	ABYSSOR = 'sound/items/bucket_transfer (2).ogg',
 	RAVOX = 'sound/vo/male/knight/rage (6).ogg',
@@ -16,8 +16,9 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 ))
 
 /datum/patron/divine
-	name = null
+	abstract_type = /datum/patron/divine
 	associated_faith = /datum/faith/divine_pantheon
+	profane_words = list("zizo", "cock", "dick", "fuck", "shit", "pussy", "cuck", "cunt", "asshole")
 	var/associated_psycross = /obj/item/clothing/neck/psycross
 
 /datum/patron/divine/can_pray(mob/living/carbon/human/follower)
@@ -169,7 +170,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"EORA BRINGS US TOGETHER!",
 	)
 	storyteller = /datum/storyteller/xylix
-	associated_psycross = /obj/item/clothing/neck/psycross/silver/ravox
+	associated_psycross = /obj/item/clothing/neck/psycross/silver/xylix
 
 /datum/patron/divine/pestra
 	name = PESTRA
@@ -188,6 +189,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 	)
 	storyteller = /datum/storyteller/pestra
 	associated_psycross = /obj/item/clothing/neck/psycross/silver/pestra
+
+/datum/patron/divine/pestra/preference_accessible(datum/preferences/prefs)
+	. = ..()
+	if(!.)
+		return
+
+	// These guys believe in a wurm, not pestra. They won't accept pestra as not being a giant acid wurm.
+	return prefs.pref_species.id != SPEC_ID_DWARF_SUBTERRAN
 
 /datum/patron/divine/malum
 	name = MALUM

@@ -221,3 +221,6 @@
 	</html>
 	"}
 	return html
+
+/datum/anvil_recipe/proc/get_display_name()
+	return recipe_name || name

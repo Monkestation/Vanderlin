@@ -153,9 +153,9 @@
 
 /datum/status_effect/good_music/tick()
 	if(owner.can_hear())
-		owner.adjust_dizzy(-2)
-		owner.adjust_jitter(-2)
-		owner.adjust_confusion(-0.1 SECONDS)
+		owner.adjust_dizzy(-4 SECONDS)
+		owner.adjust_jitter(-4 SECONDS)
+		owner.adjust_confusion(-1 SECONDS)
 		owner.add_stress(/datum/stress_event/goodmusic)
 
 /atom/movable/screen/alert/status_effect/regenerative_core
@@ -188,7 +188,7 @@
 
 /datum/status_effect/antimagic/on_apply()
 	owner.visible_message("<span class='notice'>[owner] is coated with a dull aura!</span>")
-	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 	//glowing wings overlay
 	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	return ..()
@@ -198,5 +198,5 @@
 
 /datum/status_effect/antimagic/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 	owner.visible_message("<span class='warning'>[owner]'s dull aura fades away...</span>")

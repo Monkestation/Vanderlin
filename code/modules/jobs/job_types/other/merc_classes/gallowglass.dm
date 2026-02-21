@@ -9,7 +9,7 @@
 	)
 	outfit = /datum/outfit/mercenary/gallowglass
 	category_tags = list(CTAG_MERCENARY)
-	total_positions = 2
+	total_positions = 0 //Kaledon isn't in
 	cmode_music = 'sound/music/cmode/Combat_Dwarf.ogg'
 
 	jobstats = list(
@@ -47,5 +47,5 @@
 	beltl = /obj/item/weapon/mace/cudgel
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
 	pants = /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
-	backl = /obj/item/weapon/sword/long/greatsword/steelclaymore
+	backl = /obj/item/weapon/sword/long/greatsword/claymore
 	backr = /obj/item/storage/backpack/satchel

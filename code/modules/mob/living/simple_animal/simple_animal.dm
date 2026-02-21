@@ -202,12 +202,12 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	return ..()
 
-/mob/living/simple_animal/attackby(obj/item/O, mob/user, params)
+/mob/living/simple_animal/attackby(obj/item/O, mob/user, list/modifiers)
 	if(!is_type_in_list(O, food_type))
 		return ..()
 	else
 		if(try_tame(O, user))
-			SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY, O, user, params) // for udder functionality
+			SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY, O, user, modifiers) // for udder functionality
 			return TRUE
 	. = ..()
 
@@ -223,7 +223,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/realchance = tame_chance
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming) * 20)
+				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
 			if(prob(realchance))
 				tamed(user)
 				var/boon = user.get_learning_boon(/datum/skill/labor/taming)
@@ -377,7 +377,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/proc/handle_temperature_damage()
 	return
 
-/mob/living/simple_animal/MiddleClick(mob/living/user, params)
+/mob/living/simple_animal/MiddleClick(mob/living/user, list/modifiers)
 	if(stat == DEAD)
 		var/obj/item/held_item = user.get_active_held_item()
 		if(held_item)
@@ -580,13 +580,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(speed == 0)
 		remove_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE)
 	add_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE, 100, multiplicative_slowdown = speed, override = TRUE)
-
-/mob/living/simple_animal/Stat()
-	..()
-	return //RTCHANGE
-/* 	if(statpanel("Status"))
-		stat(null, "Health: [round((health / maxHealth) * 100)]%")
-		return 1 */
 
 /mob/living/simple_animal/proc/drop_loot()
 	if(loot.len)
@@ -808,7 +801,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/hostile
 	var/do_footstep = FALSE
 
-/mob/living/simple_animal/hostile/RangedAttack(atom/A, params) //Player firing
+/mob/living/simple_animal/hostile/RangedAttack(atom/A, list/modifiers) //Player firing
 	if(!ai_controller && ranged && ranged_cooldown <= world.time)
 		target = A
 		OpenFire(A)

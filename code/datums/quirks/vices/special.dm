@@ -288,14 +288,13 @@
 	to_chat(new_rat, span_userdanger("You have been reincarnated as a rat. Your adventure ends here."))
 
 	// Make the rat unable to do much
-	ADD_TRAIT(new_rat, TRAIT_PACIFISM, TRAIT_GENERIC)
-	ADD_TRAIT(new_rat, TRAIT_MUTE, TRAIT_GENERIC)
+	ADD_TRAIT(new_rat, TRAIT_PACIFISM, QUIRK_TRAIT)
+	ADD_TRAIT(new_rat, TRAIT_MUTE, QUIRK_TRAIT)
 	new_rat.melee_damage_lower = 0
 	new_rat.melee_damage_upper = 0
 	new_rat.obj_damage = 0
 	new_rat.status_flags |= GODMODE
-	ADD_TRAIT(new_rat, TRAIT_NOFIRE, TRAIT_GENERIC)
-
+	ADD_TRAIT(new_rat, TRAIT_NOFIRE, QUIRK_TRAIT)
 
 /datum/quirk/vice/weak_heart
 	name = "Weak Heart"
@@ -326,15 +325,7 @@
 /datum/quirk/vice/tremors/on_spawn()
 	if(!owner)
 		return
-	var/mob/living/carbon/human/H = owner
-	ADD_TRAIT(H, TRAIT_TREMORS, "[type]")
 	schedule_next_tremor()
-
-/datum/quirk/vice/tremors/on_remove()
-	if(!owner)
-		return
-	var/mob/living/carbon/human/H = owner
-	REMOVE_TRAIT(H, TRAIT_TREMORS, "[type]")
 
 /datum/quirk/vice/tremors/on_life()
 	if(!owner)
@@ -380,8 +371,9 @@
 	H.apply_status_effect(/datum/status_effect/tremor_grip_loss)
 
 	// Shake the screen slightly for immersion
-	animate(H.client, pixel_x = rand(-2, 2), pixel_y = rand(-2, 2), time = 2)
-	addtimer(CALLBACK(src, PROC_REF(reset_screen_shake), H), 2)
+	if(H.client)
+		animate(H.client, pixel_x = rand(-2, 2), pixel_y = rand(-2, 2), time = 2)
+		addtimer(CALLBACK(src, PROC_REF(reset_screen_shake), H), 2)
 
 /datum/quirk/vice/tremors/proc/reset_screen_shake(mob/living/carbon/human/H)
 	if(H?.client)

@@ -4,6 +4,17 @@ Try to keep this in sync with __DEFINES/traits.dm
 quirks have it's own panel so we don't need them here.
 */
 GLOBAL_LIST_INIT(traits_by_type, list(
+	/atom = list(
+		"TRAIT_ALT_CLICK_BLOCKER" = TRAIT_ALT_CLICK_BLOCKER,
+	),
+	/atom/movable = list(
+		"TRAIT_MOVE_GROUND" = TRAIT_MOVE_GROUND,
+		"TRAIT_MOVE_FLYING" = TRAIT_MOVE_FLYING,
+		"TRAIT_MOVE_VENTCRAWLING" = TRAIT_MOVE_VENTCRAWLING,
+		"TRAIT_MOVE_FLOATING" = TRAIT_MOVE_FLOATING,
+		"TRAIT_MOVE_PHASING" = TRAIT_MOVE_PHASING,
+		"TRAIT_SHAKY_SPEECH" = TRAIT_SHAKY_SPEECH,
+	),
 	/mob = list(
 		"TRAIT_KNOCKEDOUT" = TRAIT_KNOCKEDOUT,
 		"TRAIT_IMMOBILIZED" = TRAIT_IMMOBILIZED,
@@ -69,13 +80,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NOMOBSWAP" = TRAIT_NOMOBSWAP,
 		"TRAIT_XRAY_VISION" = TRAIT_XRAY_VISION,
 		"TRAIT_THERMAL_VISION" = TRAIT_THERMAL_VISION,
-		"TRAIT_ABDUCTOR_TRAINING" = TRAIT_ABDUCTOR_TRAINING,
-		"TRAIT_ABDUCTOR_SCIENTIST_TRAINING" = TRAIT_ABDUCTOR_SCIENTIST_TRAINING,
 		"TRAIT_SURGEON" = TRAIT_SURGEON,
 		"TRAIT_STRONG_GRABBER" = TRAIT_STRONG_GRABBER,
 		"TRAIT_MAGIC_CHOKE" = TRAIT_MAGIC_CHOKE,
 		"TRAIT_SOOTHED_THROAT" = TRAIT_SOOTHED_THROAT,
-		"TRAIT_LAW_ENFORCEMENT_METABOLISM" = TRAIT_LAW_ENFORCEMENT_METABOLISM,
 		"TRAIT_ALWAYS_CLEAN" = TRAIT_ALWAYS_CLEAN,
 		"TRAIT_BOOZE_SLIDER" = TRAIT_BOOZE_SLIDER,
 		"TRAIT_UNINTELLIGIBLE_SPEECH" = TRAIT_UNINTELLIGIBLE_SPEECH,
@@ -179,23 +187,15 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
-		),
+	),
 	/obj/item = list(
 		"TRAIT_NODROP" = TRAIT_NODROP,
 		"TRAIT_NO_TELEPORT" = TRAIT_NO_TELEPORT,
 		"TRAIT_WIELDED" = TRAIT_WIELDED,
 		"TRAIT_NEEDS_TWO_HANDS" = TRAIT_NEEDS_TWO_HANDS,
 		"TRAIT_HARD_TO_STEAL" = TRAIT_HARD_TO_STEAL,
-		),
-	/atom/movable = list(
-		"TRAIT_MOVE_GROUND" = TRAIT_MOVE_GROUND,
-		"TRAIT_MOVE_FLYING" = TRAIT_MOVE_FLYING,
-		"TRAIT_MOVE_VENTCRAWLING" = TRAIT_MOVE_VENTCRAWLING,
-		"TRAIT_MOVE_FLOATING" = TRAIT_MOVE_FLOATING,
-		"TRAIT_MOVE_PHASING" = TRAIT_MOVE_PHASING,
-		"TRAIT_SHAKY_SPEECH" = TRAIT_SHAKY_SPEECH,
-		),
-	))
+	),
+))
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_WEBWALK = "I can move freely between webs.",
@@ -210,7 +210,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	TRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
 	TRAIT_HATEWOMEN = "Double damage against female mobs.",
-	TRAIT_SEEDKNOW = span_info("I know which seeds grow which crops."),
+	TRAIT_SEEDKNOW = span_info("I am intimately aware of seed properties."),
 	TRAIT_NOBLE = span_blue("I'm of noble blood."),
 	TRAIT_EMPATH = "I can notice when people are stressed.",
 	TRAIT_BREADY = "Defensive stance does not passively fatigue me.",
@@ -291,7 +291,6 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_RECOGNIZED = span_notice("These people recognize me, my renown has spread from my homeland to this very place."),
 	TRAIT_EARGRAB = span_info("I can keep a tight grip on the ear of unruly children."),
 	TRAIT_KITTEN_MOM = span_info("Kittens love you, they see you are a parent."),
-	TRAIT_INSPIRING_MUSICIAN = span_info("The flow of battle dances to my song!"),
 	TRAIT_FACELESS = span_danger("I am faceless. I am shunned. The others will recognise me for what I am. If I give them the chance."),
 	TRAIT_FLOWERFIELD_IMMUNITY = span_info("I am immune to the effects of flower fields."),
 	TRAIT_SECRET_OFFICIANT = span_love("I am able to conduct secret wedding ceremonies outside of the church. Love cannot be stopped!"),

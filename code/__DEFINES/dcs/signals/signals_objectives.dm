@@ -8,11 +8,11 @@
 #define COMSIG_DRUG_SNIFFED "drug_sniffed"
 /// from base of /mob/living/MiddleClickOn() (victim)
 #define COMSIG_ITEM_STOLEN "item_stolen"
-/// from base of adjust_skillrank() (skill_type, new_rank)
-#define COMSIG_SKILL_RANK_INCREASED "skill_rank_increased"
+/// from base of adjust_skillrank() (skill_reference, new_rank, old_rank)
+#define COMSIG_SKILL_RANK_CHANGE "skill_rank_increased"
 /// from base of /atom/proc/OnCrafted() (user, craft_path)
 #define COMSIG_ITEM_CRAFTED "item_crafted"
-/// from base of /obj/item/reagent_containers/food/snacks/organ/on_consume() (organ_type, obj/item/organ/organ_inside)
+/// from base of /obj/item/reagent_containers/food/snacks/meat/organ/on_consume() (organ_type, obj/item/organ/organ_inside)
 #define COMSIG_ORGAN_CONSUMED "organ_consumed"
 /// from base of /mob/living/carbon/human/proc/torture_victim() (mob/living/torturer, mob/living/victim)
 #define COMSIG_TORTURE_PERFORMED "torture_performed"

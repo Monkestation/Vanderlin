@@ -744,7 +744,7 @@
 		to_chat(owner, span_warning("The void corruption burns my flesh!"))
 
 	if(corruption_stage >= 2 && prob(25))
-		owner.adjust_confusion(0.2 SECONDS)
+		owner.adjust_confusion(4 SECONDS)
 
 	if(corruption_stage >= 3 && prob(15))
 		owner.Paralyze(0.5 SECONDS)

@@ -256,7 +256,7 @@
 	var/bloodiness = 20
 	var/dirt_amt = 3
 
-/turf/open/floor/dirt/attack_hand_secondary(mob/user, params)
+/turf/open/floor/dirt/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -357,7 +357,7 @@
 	slowdown = 0
 	path_weight = 10
 
-/turf/open/floor/dirt/road/attack_hand_secondary(mob/user, params)
+/turf/open/floor/dirt/road/attack_hand_secondary(mob/user, list/modifiers)
 	return
 
 /turf/open/floor/dirt/atom_destruction(damage_flag)
@@ -1057,7 +1057,7 @@
 	attacked_sound = list('sound/combat/hits/onstone/wallhit.ogg', 'sound/combat/hits/onstone/wallhit2.ogg', 'sound/combat/hits/onstone/wallhit3.ogg')
 
 
-/turf/open/transparent/glass
+/turf/open/glass
 	name = "Glass floor"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "woodglass"

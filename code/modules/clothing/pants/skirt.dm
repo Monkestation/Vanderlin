@@ -28,7 +28,7 @@
 
 /obj/item/clothing/pants/skirt/patkilt
 	name = "patterned kilt"
-	desc = "A thick skirt of Kaledonian origin."
+	desc = "A thick padded skirt."
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/pants.dmi'
 	icon_state = "patkilt"
 	item_state = "patkilt"
@@ -51,3 +51,16 @@
 
 /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
 	color = CLOTHING_MAGE_BLUE
+
+/obj/item/clothing/pants/skirt/courtphysician
+	name = "sanguine skirt"
+	desc = "An elegant velvet skirt that does you no good when running to someones aid."
+	icon_state = "docskirt"
+	item_state = "docskirt"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
+	color = null // Why do skirts have colors by default im going to hurt someone
+	alternate_worn_layer = SHIRT_LAYER

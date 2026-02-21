@@ -43,25 +43,14 @@
 
 /obj/item/neuFarm/seed/examine(mob/user)
 	. = ..()
-	var/show_real_identity = FALSE
-	if(isliving(user))
-		var/mob/living/living = user
-		// Seed knowers, know the seeds (druids and such)
-		if(HAS_TRAIT(living, TRAIT_SEEDKNOW))
-			show_real_identity = TRUE
-		// Journeyman farmers know them too
-		else if(living.get_skill_level(/datum/skill/labor/farming) >= 2)
-			show_real_identity = TRUE
-	else
-		show_real_identity = TRUE
-	if(show_real_identity)
-		var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
-		if(plant_def_instance)
-			var/examine_name = "[plant_def_instance.seed_identity]"
-			var/datum/plant_genetics/seed_genetics_instance = seed_genetics
-			if(seed_genetics_instance.seed_identity_modifier)
-				examine_name = "[seed_genetics_instance.seed_identity_modifier] " + examine_name
-			. += span_notice("I can tell these are [examine_name].")
+	var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
+	if(plant_def_instance)
+		var/examine_name = "[plant_def_instance.seed_identity]"
+		var/datum/plant_genetics/seed_genetics_instance = seed_genetics
+		if(seed_genetics_instance.seed_identity_modifier)
+			examine_name = "[seed_genetics_instance.seed_identity_modifier] " + examine_name
+		. += span_info("I can tell these are [examine_name].")
+		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || user.get_skill_level(/datum/skill/labor/farming) >= 2)
 			. += plant_def_instance.get_examine_details()
 
 /obj/item/neuFarm/seed/attack_atom(atom/attacked_atom, mob/living/user)

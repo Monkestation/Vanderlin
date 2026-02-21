@@ -71,6 +71,11 @@
 	descriptor = SCENT_DESC_SMELL
 	scent = "smoke"
 
+/datum/pollutant/smoke/thicc
+	thickness = 2
+	name = "gunpowder"
+	scent = "sulfurous"
+
 /datum/pollutant/fragrance
 	smell_intensity = 2
 	pollutant_flags = POLLUTANT_SMELL

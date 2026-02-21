@@ -1,0 +1,47 @@
+/**
+ * Copyright (c) 2020 Aleksej Komarov
+ * SPDX-License-Identifier: MIT
+ */
+
+@use 'sass:meta';
+@use 'base';
+@use '~tgui-core/styles';
+
+// Core styles
+@include meta.load-css('./reset.scss');
+@include meta.load-css('./css-variables.scss');
+
+// Tgui core bulk imports
+@include meta.load-css('~tgui-core/styles/all-atomic.scss');
+@include meta.load-css('~tgui-core/styles/all-themes.scss');
+
+// Interfaces
+@include meta.load-css('./interfaces/AlertModal.scss');
+@include meta.load-css('./interfaces/Changelog.scss');
+@include meta.load-css('./interfaces/ColorPicker.scss');
+@include meta.load-css('./interfaces/HotKeysHelp.scss');
+@include meta.load-css('./interfaces/ListInput.scss');
+@include meta.load-css('./interfaces/Orbit.scss');
+
+// Layouts
+@include meta.load-css('./layouts/Layout.scss');
+@include meta.load-css('./layouts/NtosHeader.scss');
+@include meta.load-css('./layouts/NtosWindow.scss');
+@include meta.load-css('./layouts/TitleBar.scss');
+@include meta.load-css('./layouts/Window.scss');
+
+// Themes
+@include meta.load-css('./themes/grim.scss');
+
+@include meta.load-css('~highlight.js/scss/a11y-dark.scss');
+
+.Layout__content {
+  background-size: 70% 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+// A default, in case someone uses the vp() function outside of a <Window>
+:root {
+  --scaling-amount: 1;
+}

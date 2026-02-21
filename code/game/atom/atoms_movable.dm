@@ -818,6 +818,8 @@
 
 /atom/movable/proc/forceMove(atom/destination)
 	. = FALSE
+	if(QDELING(src))
+		CRASH("Illegal forceMove() on qdeling [type]")
 	if(destination)
 		. = doMove(destination)
 	else
@@ -983,7 +985,7 @@
 	if(TT.target_turf && curloc)
 		if(TT.target_turf.z > curloc.z)
 			var/turf/above = GET_TURF_ABOVE(curloc)
-			if(istype(above, /turf/open/transparent/openspace))
+			if(istype(above, /turf/open/openspace))
 				forceMove(above)
 	if(spin)
 		SpinAnimation(5, 1)
@@ -1333,11 +1335,13 @@
 /* Language procs */
 /atom/movable/proc/get_language_holder(shadow=TRUE)
 	RETURN_TYPE(/datum/language_holder)
-	if(language_holder)
-		return language_holder
-	else
+	if(QDELING(src))
+		CRASH("get_language_holder() called on a QDELing atom, \
+			this will try to re-instantiate the language holder that's about to be deleted, which is bad.")
+
+	if(!language_holder)
 		language_holder = new initial_language_holder(src)
-		return language_holder
+	return language_holder
 
 /atom/movable/proc/grant_language(datum/language/dt, body = FALSE)
 	var/datum/language_holder/H = get_language_holder(!body)

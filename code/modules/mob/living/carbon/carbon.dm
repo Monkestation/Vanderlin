@@ -94,7 +94,7 @@
 	else
 		mode() // Activate held item
 
-/mob/living/attackby(obj/item/I, mob/user, params)
+/mob/living/carbon/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!user.cmode && (istype(user.rmb_intent, /datum/rmb_intent/weak) || istype(user.rmb_intent, /datum/rmb_intent/strong)))
 		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
 		var/list/possible_steps = list()
@@ -117,13 +117,7 @@
 		if(I.item_flags & SURGICAL_TOOL)
 			to_chat(user, span_warning("You're unable to perform surgery!"))
 			return TRUE
-	/*
-	for(var/datum/surgery/S in surgeries)
-		if(!(body_position != LYING_DOWN) || !S.lying_required)
-			if(S.self_operable || user != src)
-				if(S.next_step(user, user.used_intent))
-					return 1
-	*/
+
 	return ..()
 
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
@@ -178,7 +172,6 @@
 
 /mob/proc/throw_item(atom/target, offhand = FALSE)
 	SEND_SIGNAL(src, COMSIG_MOB_THROW, target)
-	return
 
 /mob/living/carbon/throw_item(atom/target, offhand = FALSE)
 	. = ..()
@@ -233,8 +226,8 @@
 
 		else if(!CHECK_BITFIELD(I.item_flags, ABSTRACT) && !HAS_TRAIT(I, TRAIT_NODROP))
 			thrown_thing = I
-			if(istype(thrown_thing, /obj/item/clothing/head/mob_holder))
-				var/obj/item/clothing/head/mob_holder/old = thrown_thing
+			if(ismobholder(thrown_thing))
+				var/obj/item/mob_holder/old = thrown_thing
 				thrown_thing = thrown_thing:held_mob
 				old.release()
 				used_sound = pick(I.swingsound)
@@ -444,9 +437,8 @@
 	visible_message(span_danger("[src] manages to [cuff_break ? "break" : "remove"] [I]!"))
 	to_chat(src, span_notice("You successfully [cuff_break ? "break" : "remove"] [I]."))
 
-	if(istype(I, /obj/item/net))
-		if(has_status_effect(/datum/status_effect/debuff/netted))
-			remove_status_effect(/datum/status_effect/debuff/netted)
+	if(istype(I, /obj/item/rope/net))
+		remove_status_effect(/datum/status_effect/debuff/netted)
 
 	if(cuff_break)
 		. = !((I == handcuffed) || (I == legcuffed))
@@ -508,18 +500,15 @@
 			used = 1
 		return used
 
-/mob/living/Stat()
-	..()
-	if(!client)
-		return
-	if(statpanel("Stats"))
-		stat("STR: \Roman[STASTR]")
-		stat("PER: \Roman[STAPER]")
-		stat("INT: \Roman[STAINT]")
-		stat("CON: \Roman[STACON]")
-		stat("END: \Roman[STAEND]")
-		stat("SPD: \Roman[STASPD]")
-		stat("PATRON: [uppertext(patron)]")
+/mob/living/get_status_tab_items()
+	. = ..()
+	. += "STR: \Roman[STASTR]"
+	. += "PER: \Roman[STAPER]"
+	. += "INT: \Roman[STAINT]"
+	. += "CON: \Roman[STACON]"
+	. += "END: \Roman[STAEND]"
+	. += "SPD: \Roman[STASPD]"
+	. += "PATRON: [uppertext(patron.name)]"
 
 /mob/living/carbon/attack_ui(slot)
 	if(!has_hand_for_held_index(active_hand_index))
@@ -895,27 +884,6 @@
 		overlay_fullscreen("oxy", /atom/movable/screen/fullscreen/oxy, severity)
 	else
 		clear_fullscreen("oxy")
-/*
-	//Fire and Brute damage overlay (BSSR)
-	var/hurtdamage = getBruteLoss() + getFireLoss() + damageoverlaytemp
-	if(hurtdamage)
-		var/severity = 0
-		switch(hurtdamage)
-			if(5 to 15)
-				severity = 1
-			if(15 to 30)
-				severity = 2
-			if(30 to 45)
-				severity = 3
-			if(45 to 70)
-				severity = 4
-			if(70 to 85)
-				severity = 5
-			if(85 to INFINITY)
-				severity = 6
-		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
-	else
-		clear_fullscreen("brute")*/
 
 	var/hurtdamage = ((get_complex_pain() / (STAEND * 10)) * 100) //what percent out of 100 to max pain
 	if(hurtdamage)
@@ -930,13 +898,13 @@
 				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 			if(60 to 80)
 				severity = 4
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 1)
 			if(80 to 99)
 				severity = 5
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 2)
 			if(99 to INFINITY)
 				severity = 6
-				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash, 3)
 		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")

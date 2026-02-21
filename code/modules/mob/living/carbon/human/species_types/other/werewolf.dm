@@ -67,6 +67,8 @@
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/steak = 3)
+
 	changesource_flags = WABBAJACK
 	bleed_mod = 0.6
 	pain_mod = 0.2
@@ -126,6 +128,6 @@
 	return "WEREVOLF"
 
 /datum/species/werewolf/check_species_weakness(obj/item, mob/living/attacker, mob/living/parent)
-	if(parent.has_status_effect(/datum/status_effect/debuff/silver_curse))
+	if(parent.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		return 0.75
 	return 0

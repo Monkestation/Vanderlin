@@ -34,4 +34,4 @@
 		bordered_message(human_mob, list(
 			span_biginfo("You have caught Xylix's attention and you can feel your fortune changing... Whether you'll laugh or weep about it later... well, that's part of the fun!")
 		))
-		human_mob.playsound_local(human_mob, 'sound/misc/gods/xylix_omen_male_female.ogg', 100)
+		human_mob.playsound_local(human_mob, 'sound/misc/gods/xylix_omen.ogg', 100)

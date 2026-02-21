@@ -50,7 +50,7 @@
 	icon_state = "headscarf"
 	color = CLOTHING_BARK_BROWN
 	sellprice = VALUE_LEATHER_HELMET/2
-	armor = ARMOR_PADDED
+	armor = ARMOR_PADDED_BAD
 	body_parts_covered = HEAD|HAIR
 	prevent_crits =  MINOR_CRITICALS
 	max_integrity = INTEGRITY_POOR
@@ -122,7 +122,7 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 	return ..()
 
-/obj/item/clothing/head/helmet/leather/minershelm/attack_self(mob/living/user, params)
+/obj/item/clothing/head/helmet/leather/minershelm/attack_self(mob/living/user, list/modifiers)
 	toggle_helmet_light(user)
 
 /obj/item/clothing/head/helmet/leather/minershelm/proc/toggle_helmet_light(mob/living/user)

@@ -31,7 +31,7 @@
 	if(recipe.can_disassemble)
 		. += span_boldnotice("Right click to disassemble this back into components.")
 
-/obj/item/slapcraft_assembly/attackby(obj/item/item, mob/user, params)
+/obj/item/slapcraft_assembly/attackby(obj/item/item, mob/user, list/modifiers)
 	// Get the next step
 	var/datum/slapcraft_step/next_step = recipe.next_suitable_step(user, item, step_states)
 	if(!next_step)
@@ -50,7 +50,7 @@
 		component_overlay.overlays = component.overlays
 		. += component_overlay
 
-/obj/item/slapcraft_assembly/attack_hand_secondary(mob/user, params)
+/obj/item/slapcraft_assembly/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

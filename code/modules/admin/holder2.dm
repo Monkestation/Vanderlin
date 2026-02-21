@@ -94,7 +94,7 @@ GLOBAL_PROTECT(href_token)
 	var/client/C
 	if ((C = owner) || (C = GLOB.directory[target]))
 		disassociate()
-		C.verbs += /client/proc/readmin
+		add_verb(C, /client/proc/readmin)
 	QDEL_NULL(path_debug)
 	C?.native_say?.refresh_channels()
 
@@ -116,7 +116,8 @@ GLOBAL_PROTECT(href_token)
 		owner = C
 		owner.holder = src
 		owner.add_admin_verbs()	//TODO <--- todo what? the proc clearly exists and works since its the backbone to our entire admin system
-		owner.verbs -= /client/proc/readmin
+		remove_verb(owner, /client/proc/readmin)
+		add_verb(owner, /client/proc/deadmin)
 		GLOB.admins |= C
 		if(!deadmined)
 			C?.native_say?.refresh_channels()
@@ -213,3 +214,11 @@ you will have to do something like if(client.rights & R_ADMIN) myself.
 /proc/HrefTokenFormField(forceGlobal = FALSE)
 	return "<input type='hidden' name='admin_token' value='[RawHrefToken(forceGlobal)]'>"
 
+/datum/admins/proc/get_message_prefix()
+	if(CONFIG_GET(flag/asay_simple_titles))
+		return rank?.name
+	if(ckey(rank.name) in GLOB.admin_categories[ADMIN_CATEGORY_ADMIN])
+		return "ADMIN"
+	if(ckey(rank.name) in GLOB.admin_categories[ADMIN_CATEGORY_MAINT])
+		return "MAINT"
+	return "STAFF"

@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 	if(GLOB.blueprint_recipes.len)
 		return
 	for(var/datum/blueprint_recipe/recipe as anything in subtypesof(/datum/blueprint_recipe))
-		if(is_abstract(recipe))
+		if(IS_ABSTRACT(recipe))
 			continue
 		GLOB.blueprint_recipes[initial(recipe.name)] = new recipe
 
@@ -52,7 +52,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 		if(!checking)
 			to_chat(user, "<span class='warning'>Need a ceiling above to hang this!</span>")
 			return FALSE
-		if(istype(checking, /turf/open/transparent/openspace))
+		if(istype(checking, /turf/open/openspace))
 			to_chat(user, "<span class='warning'>Need a solid ceiling above!</span>")
 			return FALSE
 

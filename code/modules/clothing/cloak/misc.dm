@@ -292,8 +292,8 @@
 	allowed_race = SPECIES_BASE_BODY
 
 /obj/item/clothing/cloak/pegasusknight
-	name = "pegasus knight tabard"
-	desc = "A quilted tabard worn by Lakkarian pegasus knights."
+	name = "checkered tabard"
+	desc = "A quilted checkered tabard."
 	icon_state = "lakkaritabard"
 	item_state = "lakkaritabard"
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
@@ -305,5 +305,13 @@
 	desc = "A loose garment that is usually draped across ones upper body. No one's quite sure of its cultural origin."
 	icon_state = "poncho"
 	item_state = "poncho"
+	boobed = FALSE
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/pantheon
+	name = "pantheon cloak"
+	desc = "A divine blue cloak with shimmering gold sewn in, it represents the ten in their whole. Typically worn by High Templars of the Ten"
+	icon_state = "seecloak"
+	item_state = "seecloak"
 	boobed = FALSE
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'

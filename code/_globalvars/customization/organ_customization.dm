@@ -1,18 +1,20 @@
 GLOBAL_LIST_INIT(customizer_choices, build_customizer_choices())
-GLOBAL_LIST_INIT(customizers, build_customizers())
+
 
 /proc/build_customizer_choices()
 	. = list()
-	for(var/type in typesof(/datum/customizer_choice))
-		if(is_abstract(type))
+	for(var/datum/customizer_choice/type as anything in typesof(/datum/customizer_choice))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .
 
+GLOBAL_LIST_INIT(customizers, build_customizers())
+
 /proc/build_customizers()
 	. = list()
-	for(var/type in typesof(/datum/customizer))
-		if(is_abstract(type))
+	for(var/datum/customizer/type as anything in typesof(/datum/customizer))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .

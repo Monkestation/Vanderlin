@@ -24,7 +24,7 @@
 	current_user = null
 	return ..()
 
-/obj/machinery/essence/research_matrix/attack_hand(mob/user, params)
+/obj/machinery/essence/research_matrix/attack_hand(mob/user, list/modifiers)
 	current_user = WEAKREF(user)
 	open_research_interface(user)
 
@@ -49,7 +49,7 @@
 
 	return TRUE
 
-/obj/machinery/essence/research_matrix/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/research_matrix/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_connector))
 		return ..()
 
@@ -121,7 +121,7 @@
 
 	for(var/datum/thaumic_research_node/node_type as anything in subtypesof(/datum/thaumic_research_node))
 		var/datum/thaumic_research_node/temp_node = new node_type
-		if(is_abstract(temp_node.type))
+		if(IS_ABSTRACT(node_type))
 			continue
 		if(selected_research.type in temp_node.prerequisites)
 			for(var/prereq in temp_node.prerequisites)
@@ -594,9 +594,11 @@
 	var/list/available_research = GLOB.thaumic_research.get_available_research()
 
 	for(var/datum/thaumic_research_node/node_type as anything in subtypesof(/datum/thaumic_research_node))
-		var/datum/thaumic_research_node/node = new node_type
-		if(is_abstract(node.type))
+		if(IS_ABSTRACT(node_type))
 			continue
+
+		var/datum/thaumic_research_node/node = new node_type
+
 		var/is_unlocked = GLOB.thaumic_research.has_research(node_type)
 		var/is_available = (node_type in available_research)
 		var/is_selected = (matrix.selected_research && matrix.selected_research.type == node_type)
@@ -649,16 +651,19 @@
 
 	var/list/node_positions = list()
 	for(var/datum/thaumic_research_node/node_type as anything in subtypesof(/datum/thaumic_research_node))
-		var/datum/thaumic_research_node/temp_node = new node_type
-		if(is_abstract(temp_node.type))
+		if(IS_ABSTRACT(node_type))
 			continue
+
+		var/datum/thaumic_research_node/temp_node = new node_type
+
 		node_positions[node_type] = list("x" = temp_node.node_x, "y" = temp_node.node_y)
 		qdel(temp_node)
 
 	for(var/datum/thaumic_research_node/node_type as anything in subtypesof(/datum/thaumic_research_node))
-		var/datum/thaumic_research_node/node = new node_type
-		if(is_abstract(node.type))
+		if(IS_ABSTRACT(node_type))
 			continue
+
+		var/datum/thaumic_research_node/node = new node_type
 
 		// Draw connections FROM prerequisites TO this node
 		for(var/prereq_type in node.prerequisites)

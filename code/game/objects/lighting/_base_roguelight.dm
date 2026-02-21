@@ -110,7 +110,7 @@
 /obj/machinery/light/fueled/spark_act()
 	fire_act()
 
-/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(cookonme)
 		if(istype(W, /obj/item/reagent_containers/food/snacks))
 			if(istype(W, /obj/item/reagent_containers/food/snacks/egg))
@@ -183,16 +183,16 @@
 							else if(chosen_recipe.output)
 								result = new chosen_recipe.output(get_turf(user))
 
-								if(istype(result, /obj/item/reagent_containers/food/snacks))
-									var/obj/item/reagent_containers/food/snacks/food_result = result
-									var/skill_modifier = 1.0
-									var/skill_level = user.get_skill_level(chosen_recipe.used_skill)
+								// if(istype(result, /obj/item/reagent_containers/food/snacks))
+								// 	var/obj/item/reagent_containers/food/snacks/food_result = result
+								// 	var/skill_modifier = 1.0
+								// 	var/skill_level = user.get_skill_level(chosen_recipe.used_skill)
 
-									if(skill_level)
-										skill_modifier += (skill_level * 0.2) // Increase quality by 20% per skill level
+								// 	if(skill_level)
+								// 		skill_modifier += (skill_level * 0.2) // Increase quality by 20% per skill level
 
-									// Apply the recipe's quality modifier alongside skill
-									food_result.quality = food_result.quality * skill_modifier * chosen_recipe.quality_modifier
+								// 	// Apply the recipe's quality modifier alongside skill
+								// 	food_result.quality = food_result.quality * skill_modifier * chosen_recipe.quality_modifier
 
 								user.dropItemToGround(W, TRUE)
 								qdel(W)
@@ -264,3 +264,11 @@
 	if(!can_damage)
 		return
 	. = ..()
+
+/obj/machinery/light/fueled/process()
+	. = ..()
+	if(on && length(contents)) // burn kobolds in ovens and smelters
+		for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
+			holder.held_mob?.adjust_fire_stacks(5)
+			holder.held_mob?.IgniteMob()
+			holder.update_appearance()

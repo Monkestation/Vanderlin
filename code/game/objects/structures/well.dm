@@ -35,22 +35,23 @@
 	layer = BELOW_MOB_LAYER
 	layer = -0.1
 
-/obj/structure/well/fountain/onbite(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
-			return
-		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		user.visible_message(span_info("[user] starts to drink from [src]."))
-		if(do_after(L, 2.5 SECONDS, src))
-			var/datum/reagents/reagents = new()
-			reagents.add_reagent_list(list(/datum/reagent/water/gross = 2))
-			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = INGEST)
-			playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
+/obj/structure/well/fountain/onbite(mob/living/user)
+	. = ..()
+	if(.)
 		return
-	..()
+	playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+	user.visible_message(span_info("[user] starts to drink from [src]."))
+	if(do_after(user, 2.5 SECONDS, src))
+		drink_from(user)
+	return TRUE
 
-/obj/structure/well/attackby(obj/item/I, mob/user, params)
+/obj/structure/well/fountain/proc/drink_from(mob/living/user)
+	var/datum/reagents/reagents = new()
+	reagents.add_reagent(/datum/reagent/water/gross, 2)
+	reagents.trans_to(user, reagents.total_volume, transfered_by = user, method = INGEST)
+	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
+
+/obj/structure/well/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/glass/bucket))
 		var/obj/item/reagent_containers/glass/bucket/W = I
 		if(W.reagents.holder_full())

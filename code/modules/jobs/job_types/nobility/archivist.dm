@@ -33,6 +33,7 @@
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
+		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,
 		/datum/language/deepspeak

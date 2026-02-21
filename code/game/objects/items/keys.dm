@@ -55,7 +55,7 @@
 	if(access2add)
 		. += span_info("It has been marked with [access2add[1]], but has not been finished.")
 
-/obj/item/key/custom/attackby(obj/item/I, mob/user, params)
+/obj/item/key/custom/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/weapon/hammer))
 		return ..()
 	if(lockids)
@@ -72,7 +72,7 @@
 	to_chat(user, span_notice("You set the key ID to [input]."))
 	access2add = list("[input]")
 
-/obj/item/key/custom/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/key/custom/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -765,20 +765,20 @@
 
 
 ////// MINOR NOBLES
-/obj/item/key/mnoble1
+/obj/item/key/mnoble1_blue
 	name = "Key of the noble house 1"
 	desc = "A very detailed steel key, has gold details and a purple gemstone on it... is for the noble house number one."
 	icon_state = "noble1"
-	lockids = list("nobles1")
+	lockids = list(ACCESS_NOBLE1)
 
-/obj/item/key/mnoble2
+/obj/item/key/mnoble2_yellow
 	name = "Key of the noble house 2"
 	desc = "A very detailed steel key, has gold details and a yellow gemstone on it... is for the noble house number two."
 	icon_state = "noble2"
-	lockids = list("nobles2")
+	lockids = list(ACCESS_NOBLE2)
 
-/obj/item/key/mnoble3
+/obj/item/key/mnoble3_red
 	name = "Key of the noble house 3"
 	desc = "A very detailed steel key, has gold details and a red gemstone on it... is for the noble house number three?"
 	icon_state = "noble3"
-	lockids = list("nobles3")
+	lockids = list(ACCESS_NOBLE3)

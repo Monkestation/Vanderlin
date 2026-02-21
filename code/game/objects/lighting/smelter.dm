@@ -19,7 +19,7 @@
 	fueluse = 30 MINUTES
 	crossfire = FALSE
 
-/obj/machinery/light/fueled/smelter/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/smelter/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/tongs))
 		if(!actively_smelting) // Prevents an exp gain exploit. - Foxtrot
 			var/obj/item/weapon/tongs/T = W
@@ -113,7 +113,7 @@
 	return ..()
 
 // Gaining experience from just retrieving bars with your hands would be a hard-to-patch exploit.
-/obj/machinery/light/fueled/smelter/attack_hand(mob/user, params)
+/obj/machinery/light/fueled/smelter/attack_hand(mob/user, list/modifiers)
 	if(on)
 		to_chat(user, "<span class='warning'>It's too hot to retrieve bars with your hands.</span>")
 		return
@@ -131,24 +131,26 @@
 	..()
 	if(maxore > 1)
 		return
-	if(on)
-		if(ore.len)
-			if(cooking < 20)
-				cooking++
-				playsound(src,'sound/misc/smelter_sound.ogg', 50, FALSE)
-				actively_smelting = TRUE
-			else
-				if(cooking == 20)
-					for(var/obj/item/I in ore)
-						if(I.smeltresult)
-							var/obj/item/R = new I.smeltresult(src, ore[I])
-							ore -= I
-							ore += R
-							qdel(I)
-					playsound(src,'sound/misc/smelter_fin.ogg', 100, FALSE)
-					visible_message("<span class='notice'>\The [src] finished smelting.</span>")
-					cooking = 21
-					actively_smelting = FALSE
+	if(!on)
+		return
+	if(!length(ore))
+		return
+	if(cooking < 20)
+		cooking++
+		playsound(src,'sound/misc/smelter_sound.ogg', 50, FALSE)
+		actively_smelting = TRUE
+		return
+	if(cooking == 20)
+		for(var/obj/item/I in ore)
+			if(I.smeltresult)
+				var/obj/item/R = new I.smeltresult(src, ore[I])
+				ore -= I
+				ore += R
+				qdel(I)
+		playsound(src,'sound/misc/smelter_fin.ogg', 100, FALSE)
+		visible_message(span_notice("[src] finished smelting."))
+		cooking = 21
+		actively_smelting = FALSE
 
 /obj/machinery/light/fueled/smelter/burn_out()
 	cooking = 0

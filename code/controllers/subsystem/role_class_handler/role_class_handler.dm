@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(role_class_handler)
 /datum/controller/subsystem/role_class_handler/proc/build_category_lists()
 	var/list/all_classes = list()
 	for(var/datum/job/job as anything in subtypesof(/datum/job/advclass))
-		if(is_abstract(job))
+		if(IS_ABSTRACT(job))
 			continue
 		var/datum/job/real_datum = SSjob.GetJobType(job)
 		if(real_datum)

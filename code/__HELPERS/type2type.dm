@@ -10,7 +10,7 @@
 
 //Splits the text of a file at seperator and returns them in a list.
 //returns an empty list if the file doesn't exist
-/world/proc/file2list(filename, seperator="\n", trim = TRUE)
+/proc/file2list(filename, seperator="\n", trim = TRUE)
 	if (trim)
 		return splittext(trim(file2text(filename)),seperator)
 	return splittext(file2text(filename),seperator)
@@ -282,7 +282,7 @@
 	if(bpc & CHEST)
 		covered_parts |= list(BODY_ZONE_CHEST)
 	if(bpc & GROIN)
-		covered_parts |= list(BODY_ZONE_CHEST)
+		covered_parts |= list(BODY_ZONE_PRECISE_GROIN)
 	if(bpc & VITALS)
 		covered_parts |= list(BODY_ZONE_PRECISE_STOMACH)
 

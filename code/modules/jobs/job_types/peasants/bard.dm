@@ -18,7 +18,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 	jobstats = list(
@@ -40,7 +40,7 @@
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/stealing = 1,
 		/datum/skill/misc/lockpicking = 1,
-		/datum/skill/misc/music = 4,
+		/datum/skill/misc/music = 4.1,
 		/datum/skill/misc/athletics = 2
 	)
 
@@ -64,8 +64,7 @@
 		message = "Choose your instrument.",
 		title = "XYLIX"
 	)
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
+	spawned.inspiration = new /datum/inspiration(spawned)
 	spawned.clamped_adjust_skillrank(/datum/skill/misc/music, 4, 4, TRUE) //Due to Harpy's innate music skill giving them legendary
 
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)

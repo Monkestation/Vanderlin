@@ -114,15 +114,24 @@
 /obj/item/clothing/get_inspect_entries(list/inspect_list)
 	. = ..()
 
+	if(armor)
+		. += "\n<u><b>DEFENSE:</b></u>\n"
+		var/list/defense_strings = list()
+		for(var/damage_key in ARMOR_LIST_DAMAGE())
+			var/rating = armor.get_rating(damage_key)
+			defense_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [armor_to_protection_class(rating)]</font>"
+		. += defense_strings.Join(" | ")
+
 	if(length(prevent_crits))
-		. += "\n<b>DEFENSE:</b>"
-		for(var/X in prevent_crits)
-			. += "\n<b>[X] damage</b>"
+		. += "\n<u><b>PREVENT CRITS:</b></u>\n"
+		. += prevent_crits.Join(" | ")
 
 	if(body_parts_covered)
-		. += "\n<b>COVERAGE:</b>"
+		. += "\n<u><b>COVERAGE:</b></u>\n"
+		var/list/parsed_zones = list()
 		for(var/zone in body_parts_covered2organ_names(body_parts_covered))
-			. += "\n<b>[parse_zone(zone)]</b>"
+			parsed_zones += "[parse_zone(zone)]"
+		. += parsed_zones.Join(" | ")
 
 	switch(armor_class)
 		if(AC_HEAVY)
@@ -150,18 +159,13 @@
 
 
 
-/obj/item/clothing/MiddleClick(mob/user, params)
+/obj/item/clothing/MiddleClick(mob/living/user, list/modifiers)
 	..()
-	var/mob/living/L = user
-	var/altheld //Is the user pressing alt?
-	var/list/modifiers = params2list(params)
-	if(LAZYACCESS(modifiers, ALT_CLICKED))
-		altheld = TRUE
-	if(!isliving(user))
+	if(!istype(user))
 		return
 	if(nodismemsleeves)
 		return
-	if(altheld)
+	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		if(user.zone_selected == l_sleeve_zone)
 			if(l_sleeve_status == SLEEVE_ROLLED)
 				l_sleeve_status = SLEEVE_NORMAL
@@ -199,7 +203,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(user.STASTR * 8))
 				torn_sleeve_number += 1
 				r_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -226,7 +230,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(user.STASTR * 8))
 				torn_sleeve_number += 1
 				l_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -245,27 +249,37 @@
 			else
 				user.visible_message(span_warning("[user] tries to tear [src]."))
 				return
-	if(loc == L)
-		L.regenerate_clothes()
+	if(loc == user)
+		user.regenerate_clothes()
 
-
-/obj/item/clothing/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
+/obj/item/clothing/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
-	if(slot_flags & slot)
-		if(M.gender in allowed_sex)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(H.dna)
-					if(!(H.age in allowed_ages))
-						return FALSE
-					if(H.dna.species.id in allowed_race)
-						return TRUE
-					else
-						return FALSE
-			return TRUE
-		else
-			return FALSE
+
+	if(!(slot_flags & slot))
+		return FALSE
+
+	if(!(M.gender in allowed_sex))
+		return FALSE
+
+	if(!ishuman(M))
+		return FALSE
+
+	var/mob/living/carbon/human/H = M
+
+	if(!(H.age in allowed_ages))
+		return FALSE
+
+	var/datum/species/species = H.dna?.species
+	if(!species)
+		return FALSE
+
+	var/used_species_id = species.id_override ? species.id_override : species.id
+
+	if(!(used_species_id in allowed_race))
+		return FALSE
+
+	return TRUE
 
 /obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
 	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)
@@ -298,7 +312,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/clothing/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/clothing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(M.on_fire)
 		if(user == M)
 			return
@@ -440,17 +454,16 @@ BLIND     // can't see anything
 		dismembered = fcopy_rsc(dismembered)
 		GLOB.dismembered_clothing_icons[index] = dismembered
 
-/obj/item/clothing/pants/AltClick(mob/user)
+/obj/item/clothing/pants/AltClick(mob/user, list/modifiers)
 	if(..())
 		return 1
 
 	if(!istype(user) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		return
+	else if(attached_accessory)
+		remove_accessory(user)
 	else
-		if(attached_accessory)
-			remove_accessory(user)
-		else
-			rolldown()
+		rolldown()
 
 /obj/item/clothing/atom_destruction(damage_flag)
 	if(damage_flag in list("acid", "fire"))
@@ -471,7 +484,7 @@ BLIND     // can't see anything
 		W.connectedc = src
 		hood = W
 
-/obj/item/clothing/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/attack_hand_secondary(mob/user, list/modifiers)
 	if(hoodtype && (loc == user))
 		ToggleHood()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -572,4 +585,3 @@ BLIND     // can't see anything
 		if(COOLDOWN_FINISHED(src, wet_stress_cd))
 			COOLDOWN_START(src, wet_stress_cd, 60 SECONDS)
 			C.add_stress(/datum/stress_event/wet_cloth)
-

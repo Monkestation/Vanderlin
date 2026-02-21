@@ -82,11 +82,6 @@
 	overlay_state = "fill_berry"
 	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/berry
 
-/datum/orderless_slapcraft/food/pie/berry/step_process(mob/user, obj/item/attacking_item)
-	. = ..()
-	if(istype(attacking_item, /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison))
-		output_item = /obj/item/reagent_containers/food/snacks/raw_pie/berry/poison
-
 /datum/orderless_slapcraft/food/pie/meat
 	name = "Unbaked Meat Pie"
 	requirements = list(

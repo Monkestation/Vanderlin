@@ -52,7 +52,7 @@
 		. += span_notice("Use on a commoner to bind their mind to the bell.")
 		. += span_notice("Right click with an open hand to relinquish servants.")
 
-/obj/item/servant_bell/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/servant_bell/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, nearby_ring_bell) || !is_bell_proficient(user) || !ishuman(target))
 		return
@@ -77,7 +77,7 @@
 			to_chat(user, span_noticesmall("I bind [H] to [src]."))
 	COOLDOWN_START(src, nearby_ring_bell, nearby_cooldown)
 
-/obj/item/servant_bell/attack_hand_secondary(mob/user, params)
+/obj/item/servant_bell/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
