@@ -1528,3 +1528,11 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
+
+/obj/item/atom_break(damage_flag, silent)
+	. = ..()
+
+	if(!ismob(loc))
+		return
+
+	balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))

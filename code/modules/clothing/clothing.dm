@@ -585,3 +585,34 @@ BLIND     // can't see anything
 		if(COOLDOWN_FINISHED(src, wet_stress_cd))
 			COOLDOWN_START(src, wet_stress_cd, 60 SECONDS)
 			C.add_stress(/datum/stress_event/wet_cloth)
+
+/obj/item/clothing/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
+	. = ..()
+	if(!. || !ismob(loc))
+		return
+
+	var/damage_dealt = .
+
+	var/max_int = max_integrity - (max_integrity * integrity_failure)
+	var/cur_int = max(atom_integrity - (max_integrity * integrity_failure), 0)
+	var/old_int = min(damage_dealt + cur_int, max_integrity)
+
+	var/ratio = cur_int / max_int
+	var/ratio_old = old_int / max_int
+
+	var/text
+	var/sound
+
+	if(ratio <= 0.75 && ratio_old > 0.75)
+		text = "Armor <br><font color = '#8aaa4d'>marred</font>"
+		sound = 'sound/combat/armor_degrade1.ogg'
+	if(ratio <= 0.5 && ratio_old > 0.5)
+		text = "Armor <br><font color = '#d4d36c'>damaged</font>"
+		sound = 'sound/combat/armor_degrade2.ogg'
+	if(ratio <= 0.25 && ratio_old > 0.25)
+		text = "Armor <br><font color = '#a8705a'>sundered</font>"
+		sound = 'sound/combat/armor_degrade3.ogg'
+
+	if(text)
+		playsound(src, sound, 100, TRUE)
+		balloon_alert_to_viewers(text, balloon_flag = DISABLE_BALLOON_COMBAT)
