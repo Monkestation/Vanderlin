@@ -2102,7 +2102,7 @@
 /obj/structure/stairs{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -4402,7 +4402,7 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/bath)
 "cgt" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -6315,7 +6315,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/merc_guild)
 "cWD" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -7436,7 +7436,7 @@
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -9498,7 +9498,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/steward)
 "eFK" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -11434,7 +11434,7 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "fBt" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -11758,7 +11758,7 @@
 	},
 /area/under/cavewet)
 "fJQ" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -20349,7 +20349,7 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
 "jUk" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -26037,7 +26037,7 @@
 /turf/open/floor/woodturned/nosmooth,
 /area/indoors/town/keep/knight)
 "mHH" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -28795,7 +28795,7 @@
 	},
 /area/outdoors/river)
 "nZP" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -32050,7 +32050,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "pAn" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -33124,7 +33124,7 @@
 /turf/open/floor/dirt,
 /area/under/cave)
 "qav" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -42955,7 +42955,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
 "uIW" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -46678,7 +46678,7 @@
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
 "wpC" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -49289,7 +49289,7 @@
 	pixel_x = -1;
 	pixel_y = 6
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},

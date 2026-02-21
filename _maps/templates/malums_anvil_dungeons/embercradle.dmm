@@ -782,7 +782,7 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "lv" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -1050,7 +1050,7 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/dungeon/lower)
 "oH" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -1885,7 +1885,7 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "zQ" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -3456,7 +3456,7 @@
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
 "Ui" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -3883,7 +3883,7 @@
 /turf/closed/wall/mineral/stonebrick,
 /area/under/mountains/anvil/dungeon)
 "Zk" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},

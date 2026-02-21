@@ -1808,7 +1808,7 @@
 /turf/open/floor/wood,
 /area/indoors)
 "iw" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -2293,7 +2293,7 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 8;
 	icon_state = "borderfall"
 	},
@@ -2305,7 +2305,7 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -3037,7 +3037,7 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -3092,7 +3092,7 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -3981,7 +3981,7 @@
 /turf/open/floor/wood,
 /area/indoors)
 "wl" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 4;
 	icon_state = "borderfall"
 	},

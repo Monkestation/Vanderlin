@@ -1387,7 +1387,7 @@
 /turf/open/floor/church/purple,
 /area/indoors/lich)
 "hS" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 8;
 	icon_state = "borderfall"
 	},
@@ -5743,7 +5743,7 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
 "GZ" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 4;
 	icon_state = "borderfall"
 	},
@@ -7992,7 +7992,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
 "UQ" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 8;
 	icon_state = "borderfall"
 	},

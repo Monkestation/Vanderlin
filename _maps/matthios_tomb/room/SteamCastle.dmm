@@ -1050,7 +1050,7 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
 "lQ" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	icon_state = "borderfall";
 	dir = 1
 	},
@@ -1761,7 +1761,7 @@
 /turf/open/openspace,
 /area/under/tomb)
 "um" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	icon_state = "borderfall";
 	dir = 1
 	},
@@ -1886,7 +1886,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "vR" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	icon_state = "borderfall";
 	dir = 1
 	},
@@ -2681,7 +2681,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
 "Dc" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	icon_state = "borderfall";
 	dir = 1
 	},
@@ -3738,7 +3738,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/wilds)
 "OR" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	icon_state = "borderfall";
 	dir = 1
 	},

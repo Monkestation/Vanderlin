@@ -12,7 +12,7 @@
 	icon_state = "border"
 	},
 /obj/structure/fluff/railing/border,
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -344,7 +344,7 @@
 	icon_state = "border"
 	},
 /obj/structure/fluff/railing/border,
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},

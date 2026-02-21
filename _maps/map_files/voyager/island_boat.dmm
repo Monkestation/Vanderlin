@@ -67,7 +67,7 @@
 /turf/template_noop,
 /area/template_noop)
 "v" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	icon_state = "borderfall"
 	},
 /obj/structure/fluff/railing/wood,
@@ -81,7 +81,7 @@
 /turf/template_noop,
 /area/template_noop)
 "z" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -102,7 +102,7 @@
 /turf/template_noop,
 /area/template_noop)
 "G" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
@@ -113,7 +113,7 @@
 /turf/open/floor/twig,
 /area/template_noop)
 "L" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	icon_state = "borderfall"
 	},
 /obj/structure/fluff/railing/wood,
@@ -121,7 +121,7 @@
 /turf/open/floor/hay,
 /area/template_noop)
 "N" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
 	icon_state = "borderfall"
 	},
