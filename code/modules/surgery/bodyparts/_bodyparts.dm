@@ -652,10 +652,7 @@
 					brute_image.color = owner.get_blood_type().color
 				. += brute_image
 			if(burnstate)
-				var/image/burn_image = image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]_[icon_gender]", -DAMAGE_LAYER, image_dir)
-				if(owner)
-					burn_image.color = owner.get_blood_type().color
-				. += burn_image
+				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]_[icon_gender]", -DAMAGE_LAYER, image_dir)
 
 	var/mutable_appearance/limb = mutable_appearance(layer = -BODYPARTS_LAYER)
 	if(wound_icon_state)

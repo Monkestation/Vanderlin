@@ -117,11 +117,6 @@
 	random_icon_states = list("gibbl1", "gibbl2", "gibbl3", "gibbl4", "gibbl5")
 	var/drips = 1
 
-/obj/effect/decal/cleanable/blood/splatter/New(loc, new_color)
-	. = ..()
-	if(new_color)
-		color = new_color
-
 /obj/effect/decal/cleanable/blood/splatter/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
 		var/obj/effect/decal/cleanable/blood/splatter/previous = C
