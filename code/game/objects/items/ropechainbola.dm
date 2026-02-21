@@ -103,7 +103,7 @@
 		if(target.handcuffed)
 			return
 
-		if(!user.temporarilyRemoveItemFromInventory(src) )
+		if(user && !user.temporarilyRemoveItemFromInventory(src) )
 			return
 
 		var/obj/item/cuffs = src
@@ -112,12 +112,12 @@
 		target.set_handcuffed(cuffs)
 
 		target.update_handcuffed()
-		return
+		return TRUE
 	else
 		if(target.legcuffed)
 			return
 
-		if(!user.temporarilyRemoveItemFromInventory(src) )
+		if(user && !user.temporarilyRemoveItemFromInventory(src))
 			return
 
 		var/obj/item/cuffs = src
@@ -128,7 +128,7 @@
 		target.add_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, multiplicative_slowdown = legcuff_multiplicative_slowdown)
 
 		target.update_inv_legcuffed()
-		return
+		return TRUE
 
 /obj/item/rope/chain
 	name = "chain"
@@ -139,7 +139,7 @@
 	force = DAMAGE_WHIP - 10
 	throwforce = DAMAGE_WHIP - 15
 	wdefense = MEDIOCRE_PARRY
-	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
+	possible_item_intents = list(/datum/intent/tie, WHIP_LASH)
 	blade_dulling = DULLING_BASHCHOP
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	parrysound = list('sound/combat/parry/parrygen.ogg')
@@ -155,59 +155,46 @@
 	firefuel = null
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 
-/datum/intent/whip
-	name = "strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("whips", "strikes", "smacks")
-	penfactor = 40
-	chargetime = 5
-
 /obj/item/rope/net
 	name = "rope net"
 	desc = "A rope mesh of designed to slow a person down."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "net"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
-	force = 10
-	throwforce = 5
 	w_class = WEIGHT_CLASS_SMALL
 	icon_state = "net"
+	throw_speed = 1.5
 	breakouttime = 3.5 SECONDS //easy to apply, easy to break out of
 	gender = NEUTER
-	var/knockdown = 0
+	var/knockdown = 2 SECONDS
+	legcuff_multiplicative_slowdown = 2
 
-/obj/item/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
-	if(!..())
-		return
-	playsound(src,'sound/blank.ogg', 75, TRUE)
+/obj/item/rope/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
+	. = ..()
+	if(.)
+		playsound(src,'sound/combat/wooshes/flail_swing.ogg', 75, TRUE)
 
-/obj/item/net/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/obj/item/rope/net/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(..() || !iscarbon(hit_atom))//if it gets caught or the target can't be cuffed,
 		return//abort
-	ensnare(hit_atom)
+	if(prob(100 * (throwingdatum?.thrower?.get_skill_level(/datum/skill/craft/traps, TRUE) || 1) / 3))
+		ensnare(hit_atom)
 
-/obj/item/net/proc/ensnare(mob/living/carbon/C)
-	if(!C.legcuffed && C.num_legs >= 2)
-		visible_message("<span class='danger'>\The [src] ensnares [C]!</span>")
-		C.legcuffed = src
-		forceMove(C)
-		C.update_inv_legcuffed()
+/obj/item/rope/net/proc/ensnare(mob/living/carbon/C)
+	if(C.num_legs >= 2 && apply_cuffs(C, leg = TRUE))
+		C.visible_message(span_danger("[src] ensnares [C]!"), span_userdanger("[src] entraps you!!"))
 		SSblackbox.record_feedback("tally", "handcuffs", 1, type)
-		to_chat(C, "<span class='danger'>\The [src] entraps you!</span>")
-		//C.Knockdown(knockdown)
 		C.apply_status_effect(/datum/status_effect/debuff/netted)
-		playsound(src, 'sound/blank.ogg', 50, TRUE)
+		playsound(src, 'sound/combat/hits/nodmg (2).ogg', 100, TRUE)
+		if(MOVE_INTENT_RUN && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
+			C.Knockdown(knockdown)
 
 // Failsafe in case the item somehow ends up being destroyed
-/obj/item/net/Destroy()
+/obj/item/rope/net/Destroy()
 	if(iscarbon(loc))
 		var/mob/living/carbon/M = loc
 		if(M.legcuffed == src)
-			M.legcuffed = null
-			M.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
-			M.update_inv_legcuffed()
-			if(M.has_status_effect(/datum/status_effect/debuff/netted))
-				M.remove_status_effect(/datum/status_effect/debuff/netted)
+			M.remove_status_effect(/datum/status_effect/debuff/netted)
 	return ..()
 
 /obj/structure/noose

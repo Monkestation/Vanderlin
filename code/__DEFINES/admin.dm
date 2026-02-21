@@ -142,3 +142,35 @@
 #define ASAY_LINK_NEW_MESSAGE_INDEX "!asay_new_message"
 /// for [/proc/check_asay_links], if there are any admin pings in the asay message, this index in the return list contains a list of admins to ping
 #define ASAY_LINK_PINGED_ADMINS_INDEX "!pinged_admins"
+
+GLOBAL_LIST_INIT(admin_categories, build_admin_categories())
+
+#define ADMIN_CATEGORY_ADMIN "ADMIN"
+#define ADMIN_CATEGORY_MAINT "MAINT"
+
+/proc/build_admin_categories()
+	var/list/final_build = list()
+
+	var/list/lines = file2list("config/rank_categories.txt")
+	for(var/line in lines)
+		if(!length(line))
+			continue
+		if(copytext(line,1,2) == "#")
+			continue
+
+		//Split the line at every "-"
+		var/list/List = splittext(line, "-")
+		if(!length(List))
+			continue
+
+		var/rank = List[1]
+		var/list/categories = List.Copy(2)
+		for(var/category in categories)
+			var/clean_cat = uppertext(ckey(category))
+
+			if(!(clean_cat in final_build))
+				final_build[clean_cat] = list()
+
+			final_build[clean_cat] += ckey(rank)
+
+	return final_build

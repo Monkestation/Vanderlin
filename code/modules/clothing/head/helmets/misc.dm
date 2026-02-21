@@ -551,6 +551,15 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/clothing/head/helmet/visored/silver/armet
+	name = "silver armet"
+	desc = "A finely forged silver armet, with adjustable visor to protect the face."
+	icon_state = "silverarmet"
+
+/obj/item/clothing/head/helmet/visored/silver/armet/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 //............... Feldshers Cage ............... //
 /obj/item/clothing/head/helmet/feld
 	name = "feldsher's cage"

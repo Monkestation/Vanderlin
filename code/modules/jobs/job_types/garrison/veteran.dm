@@ -309,7 +309,7 @@
 		TRAIT_STEELHEARTED
 	)
 
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/job/advclass/veteran/merc/after_spawn(mob/living/carbon/human/spawned, client/player_client)

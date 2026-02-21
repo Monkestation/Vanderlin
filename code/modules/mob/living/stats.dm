@@ -111,12 +111,6 @@
 			H.voice_color = "c71d76"
 			set_eye_color(H, "#c71d76", "#c71d76")
 
-		if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
-			change_stat(STATKEY_LCK, 1)
-
-		if(HAS_TRAIT(src, TRAIT_UGLY))
-			change_stat(STATKEY_LCK, -1)
-
 	has_rolled_for_stats = TRUE
 	return TRUE
 

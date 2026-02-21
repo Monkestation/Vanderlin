@@ -134,6 +134,7 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/hellspeak)
+	C.AddComponent(/datum/component/malaguero, 2, 1, 30 SECONDS)
 
 /datum/species/tieberian/after_creation(mob/living/carbon/C)
 	. = ..()
@@ -143,6 +144,9 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/hellspeak)
+	var/datum/component/bad_luck = C.GetComponent(/datum/component/malaguero)
+	if(bad_luck)
+		bad_luck.RemoveComponent()
 
 /datum/species/tieberian/qualifies_for_rank(rank, list/features)
 	return TRUE
@@ -190,11 +194,11 @@
 	return hair_colors
 
 /datum/species/tieberian/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/other/tiefm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/male_names = file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/other/tiefm.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/tieberian/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/other/tieflast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/other/tieflast.txt')
 	return last_names
 

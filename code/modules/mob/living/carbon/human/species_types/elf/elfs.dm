@@ -149,12 +149,12 @@
 	))
 
 /datum/species/elf/snow/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/elf/elfwm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/elf/elfwf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/elf/elfwm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/elf/elfwf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/elf/snow/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/elf/elfwlast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/elf/elfwlast.txt')
 	return last_names
 
 /datum/species/elf/snow/after_creation(mob/living/carbon/C)

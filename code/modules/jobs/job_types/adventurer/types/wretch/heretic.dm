@@ -98,7 +98,7 @@
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
-			spawned.grant_language(/datum/language/oldpsydonic)
+			spawned.grant_language(/datum/language/newpsydonic)
 		else
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
