@@ -488,6 +488,21 @@
 
 	msg_stage++
 
+/// Prevent clicks for the "duration" of the status
+/datum/status_effect/debuff/clickcd
+	id = "clickcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/clickcd
+	duration = 3 SECONDS
+
+/datum/status_effect/debuff/clickcd/on_creation(mob/living/new_owner, duration_override, ...)
+	new_owner.changeNext_move(duration)
+	return ..()
+
+/atom/movable/screen/alert/status_effect/debuff/clickcd
+	name = "Action Delayed"
+	desc = "I cannot take another action."
+	icon_state = "clickcd"
+
 /// Prevents use of weapon special attacks
 /datum/status_effect/debuff/specialcd
 	id = "specialcd"
@@ -501,7 +516,7 @@
 	icon_state = "specialcd"
 
 /datum/status_effect/debuff/exposed
-	id = "nofeint"
+	id = "exposed"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/exposed
 	duration = 10 SECONDS
 	mob_overlay_icon_state = "eff_exposed"
@@ -517,7 +532,6 @@
 	duration = 5 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/feinted
-
 	name = "Feinted"
 	desc = span_boldwarning("I've been feinted. It won't happen again so soon.")
 	icon_state = "feinted"
