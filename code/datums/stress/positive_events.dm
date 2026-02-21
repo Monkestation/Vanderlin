@@ -59,7 +59,7 @@
 	desc = span_green("I feel soothed.")
 
 /datum/stress_event/triumph
-	timer = 60 MINUTES
+	timer = 7 MINUTES
 	stress_change = -5
 	desc = span_green("I remember a TRIUMPH.")
 
@@ -148,9 +148,9 @@
 	desc = span_green("This music is divine.")
 
 /datum/stress_event/beautiful
-	timer = 2 MINUTES
-	stress_change = -2
-	desc = span_green("Their face is a work of art!")
+	timer = 1 MINUTES
+	stress_change = -1
+	desc = span_green("There is beauty in this world.")
 
 /datum/stress_event/self_fishface
 	timer = 2 MINUTES

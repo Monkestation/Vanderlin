@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
+GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player
 	flags_1 = NONE
@@ -102,6 +102,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		return FALSE
 
 	var/datum/preferences/P = client.prefs
+	// 0 Validation on any of this
 	P.real_name = char_data["real_name"]
 	P.gender = char_data["gender"]
 	P.age = char_data["age"]
@@ -125,6 +126,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 	P.default_slot = char_data["slot"]
 	multi_ready_index = index
+
+	if(!P.job_preferences)
+		P.job_preferences = list()
+
 	return TRUE
 
 /mob/dead/new_player/Topic(href, href_list[])

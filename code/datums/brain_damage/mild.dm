@@ -152,7 +152,7 @@
 	gain_text = "<span class='warning'>I lose my grasp on complex words.</span>"
 	lose_text = "<span class='notice'>I feel my vocabulary returning to normal again.</span>"
 
-	var/static/list/common_words = world.file2list("strings/1000_most_common.txt")
+	var/static/list/common_words = file2list("strings/1000_most_common.txt")
 
 /datum/brain_trauma/mild/expressive_aphasia/handle_speech(datum/source, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]

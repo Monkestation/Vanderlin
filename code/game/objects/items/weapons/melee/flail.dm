@@ -1,7 +1,7 @@
 /* FLAILS - Zero wdefense, can´t parry, best AP
 ==========================================================*/
 /obj/item/weapon/flail
-	name = "military flail"
+	name = "iron flail"
 	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
@@ -119,7 +119,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(FLAIL_LNGSTRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
-	max_integrity = INTEGRITY_STRONG + 50
+	max_integrity = INTEGRITY_STRONG
 	minstr = 8
 
 	bigboy = TRUE
@@ -163,7 +163,6 @@
 	slot_flags = null
 	anvilrepair = /datum/skill/craft/carpentry
 	dropshrink = 0.9
-	blade_dulling = DULLING_BASH
 	resistance_flags = FLAMMABLE
 
 /obj/item/weapon/flail/peasantwarflail/getonmobprop(tag)
@@ -184,8 +183,8 @@
 	force_wielded = DAMAGE_GOOD_FLAIL + 7
 	possible_item_intents = list(MATTHIOS_STRIKE)
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
+	max_integrity = INTEGRITY_STRONGEST
 	slot_flags = ITEM_SLOT_BACK
-	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel
 	melt_amount = 150

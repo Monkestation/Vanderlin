@@ -23,7 +23,7 @@
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED
-	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
 	success_sound = 'sound/surgery/retractor2.ogg'
 	failure_sound = 'sound/surgery/organ2.ogg'
@@ -60,16 +60,7 @@
 /datum/surgery_step/heal/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/umsg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
 	var/tmsg = "[user] fixes some of [target]'s wounds" //see above
-	var/healing_multiplier = 1
-	switch(user.get_skill_level(skill_used))
-		if(SKILL_LEVEL_JOURNEYMAN)
-			healing_multiplier = 1.1
-		if(SKILL_LEVEL_EXPERT)
-			healing_multiplier = 1.3
-		if(SKILL_LEVEL_MASTER)
-			healing_multiplier = 1.4
-		if(SKILL_LEVEL_LEGENDARY)
-			healing_multiplier = 1.5
+	var/healing_multiplier = 0.7 + user.get_skill_level(skill_used, TRUE) * 0.1
 	var/urhealedamt_brute = brutehealing * healing_multiplier
 	var/urhealedamt_burn = burnhealing * healing_multiplier
 	if(missinghpbonus)
