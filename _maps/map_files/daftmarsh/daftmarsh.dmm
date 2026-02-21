@@ -3856,13 +3856,6 @@
 "dcH" = (
 /turf/open/floor/wood,
 /area/outdoors/town)
-"ddo" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/water/marsh,
-/area/under/town/sewer)
 "ddz" = (
 /turf/open/floor/carpet/lord/right,
 /area/under/town/sewer)
@@ -4354,13 +4347,6 @@
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/water/marsh,
 /area/outdoors/town)
-"dCZ" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/hexstone,
-/area/under/town/sewer)
 "dDi" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/access/keyset/town/artificer,
@@ -4672,6 +4658,13 @@
 	},
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
+"dSH" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/floor/tile/bfloorz,
+/area/under/town/sewer)
 "dSL" = (
 /obj/structure/closet/crate/chest,
 /obj/item/rope/chain,
@@ -9003,6 +8996,13 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"hIa" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/floor/hexstone,
+/area/under/town/sewer)
 "hIi" = (
 /turf/open/floor/greenstone,
 /area/indoors/town/clocktower)
@@ -11680,6 +11680,10 @@
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/dwarfin)
+"kba" = (
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/grass/yel,
+/area/outdoors/town)
 "kbm" = (
 /obj/structure/window/openclose{
 	dir = 8
@@ -17150,10 +17154,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"oUe" = (
-/obj/structure/fluff/clodpile,
-/turf/open/floor/dirt,
-/area/outdoors/town)
 "oUl" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -18010,13 +18010,6 @@
 "pIw" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
-"pIE" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/tile/bfloorz,
-/area/under/town/sewer)
 "pJd" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "Maybe turn this into a run-down farm. Would be more interesting than nothing."
@@ -21273,6 +21266,13 @@
 /obj/structure/closet/crate/chest/crate,
 /turf/open/floor/twig,
 /area/outdoors/town)
+"sGT" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/water/marsh,
+/area/under/town/sewer)
 "sHj" = (
 /obj/structure/fake_machine/mail{
 	mailtag = "Wizard tower"
@@ -22753,6 +22753,10 @@
 	},
 /turf/open/water/bath,
 /area/indoors/town/church/inquisition)
+"tTL" = (
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/dirt,
+/area/outdoors/town)
 "tTS" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large)
@@ -24120,10 +24124,6 @@
 "vsp" = (
 /obj/structure/stairs,
 /turf/open/floor/cobblerock,
-/area/outdoors/town)
-"vst" = (
-/obj/structure/fluff/clodpile,
-/turf/open/floor/grass/yel,
 /area/outdoors/town)
 "vsN" = (
 /obj/structure/bed/mediocre,
@@ -44610,7 +44610,7 @@ jEJ
 htS
 ikl
 haR
-pIE
+dSH
 htS
 afY
 hUL
@@ -44812,7 +44812,7 @@ jEJ
 htS
 dXn
 jvj
-dCZ
+hIa
 uDq
 fmw
 swM
@@ -45014,7 +45014,7 @@ jEJ
 htS
 hsM
 mJM
-dCZ
+hIa
 fmw
 raW
 htS
@@ -45822,7 +45822,7 @@ vZs
 htS
 fxH
 haR
-pIE
+dSH
 agw
 raW
 htS
@@ -46024,7 +46024,7 @@ vZs
 jEJ
 haR
 haR
-ddo
+sGT
 lGi
 iDZ
 iDZ
@@ -46226,7 +46226,7 @@ vZs
 htS
 haR
 haR
-ddo
+sGT
 htS
 afY
 hUL
@@ -92902,7 +92902,7 @@ bJI
 bJI
 bJI
 ebf
-oUe
+tTL
 bJI
 iqp
 iqp
@@ -95728,7 +95728,7 @@ ftQ
 ftQ
 iqp
 iqp
-oUe
+tTL
 ePk
 ePk
 ePk
@@ -96541,7 +96541,7 @@ hHl
 ePk
 vYG
 bJI
-vst
+kba
 bJI
 iqp
 stl
@@ -98152,7 +98152,7 @@ oab
 oab
 iqp
 bJI
-oUe
+tTL
 iqp
 iqp
 eRF

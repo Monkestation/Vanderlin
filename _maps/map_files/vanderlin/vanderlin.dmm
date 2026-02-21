@@ -462,6 +462,14 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/exposed/church)
+"alG" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/water_vent,
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "alR" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
@@ -2098,25 +2106,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
-"aYX" = (
-/obj/structure/stairs{
-	dir = 1
-	},
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	pixel_x = -24
-	},
-/obj/structure/fluff/railing/border{
-	dir = 5;
-	pixel_x = -24;
-	pixel_y = -24
-	},
-/turf/open/floor/concrete,
-/area/indoors/town)
 "aZa" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 8
@@ -4401,17 +4390,6 @@
 /obj/structure/fluff/steamvent,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/bath)
-"cgt" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/machinery/light/fueled/lanternpost/fixed{
-	pixel_x = -2;
-	pixel_y = 5
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "cgC" = (
 /obj/structure/door/green,
 /turf/open/floor/wood,
@@ -6314,21 +6292,6 @@
 "cWu" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/town/merc_guild)
-"cWD" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/water_vent,
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/machinery/light/fueled/lanternpost/fixed{
-	dir = 1;
-	pixel_y = 10
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "cWN" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -6881,6 +6844,17 @@
 /obj/structure/chair/stool,
 /turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
+"dlN" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	pixel_x = -2;
+	pixel_y = 5
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "dlV" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/fluff/railing/wood{
@@ -7431,17 +7405,6 @@
 "dzP" = (
 /turf/open/water/bath,
 /area/indoors/town/noble_manor/red)
-"dzW" = (
-/obj/machinery/light/fueled/lanternpost/fixed{
-	pixel_x = -5;
-	pixel_y = 6
-	},
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "dAl" = (
 /obj/structure/rack,
 /obj/item/clothing/shoes/boots,
@@ -8182,6 +8145,20 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile,
 /area/indoors/town/keep/halls/e)
+"dTO" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/theatre)
 "dTP" = (
 /obj/structure/pillory,
 /obj/effect/decal/borderfall{
@@ -9497,18 +9474,6 @@
 /obj/effect/decal/cobbleedge,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/steward)
-"eFK" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/buysign{
-	name = "Vanderlin Train Station";
-	pixel_x = 1;
-	pixel_y = 3
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "eFN" = (
 /obj/structure/closet/crate/chest/crate,
 /turf/open/floor/metal/barograte,
@@ -10274,10 +10239,6 @@
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
-"eXD" = (
-/obj/structure/fluff/clodpile,
-/turf/open/floor/grass/yel,
-/area/outdoors/exposed/church)
 "eXI" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/bin/water/gross,
@@ -11433,21 +11394,6 @@
 "fBg" = (
 /turf/open/floor/cobble,
 /area/under/town/basement)
-"fBt" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/machinery/light/fueled/lanternpost/fixed{
-	dir = 1;
-	pixel_x = -6;
-	pixel_y = 8
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "fBC" = (
 /obj/structure/chair/hotspring_bench/right{
 	dir = 1
@@ -11757,20 +11703,6 @@
 	dir = 8
 	},
 /area/under/cavewet)
-"fJQ" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/stairs{
-	dir = 8
-	},
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 6
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town/theatre)
 "fJW" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -16310,6 +16242,13 @@
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
+"hYa" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "hYb" = (
 /obj/effect/decal/carpet{
 	pixel_x = 16;
@@ -18876,6 +18815,11 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
+"jiF" = (
+/obj/structure/table/wood/plain,
+/obj/item/natural/clod/dirt,
+/turf/open/floor/cobble,
+/area/under/dungeon)
 "jiO" = (
 /obj/item/bin/water,
 /turf/open/floor/tile/bath,
@@ -20144,6 +20088,18 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
+"jOc" = (
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1;
+	pixel_x = -1;
+	pixel_y = 6
+	},
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "jOj" = (
 /obj/structure/handcart{
 	dir = 4
@@ -20348,13 +20304,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"jUk" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/closed/mineral,
-/area/under/cave)
 "jUl" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/undershirt/lowcut,
@@ -22783,6 +22732,17 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/town/garrison)
+"ldG" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/buysign{
+	name = "Vanderlin Train Station";
+	pixel_y = 5
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "ldI" = (
 /obj/item/natural/stone,
 /turf/open/floor/cobblerock,
@@ -26036,21 +25996,6 @@
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/woodturned/nosmooth,
 /area/indoors/town/keep/knight)
-"mHH" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	pixel_x = -24
-	},
-/obj/machinery/light/fueled/lanternpost/fixed{
-	pixel_x = 7;
-	pixel_y = 9
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "mHR" = (
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/throne)
@@ -28794,17 +28739,6 @@
 	dir = 8
 	},
 /area/outdoors/river)
-"nZP" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/buysign{
-	name = "Vanderlin Train Station";
-	pixel_y = 5
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "oaa" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -29133,6 +29067,20 @@
 /obj/effect/mapping_helpers/access/keyset/manor/lord,
 /turf/open/floor/blocks,
 /area/under/town/basement)
+"ojY" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/stairs{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/theatre)
 "okh" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -30299,6 +30247,21 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/town)
+"oHJ" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1;
+	pixel_x = -6;
+	pixel_y = 8
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "oHO" = (
 /obj/structure/bars,
 /turf/open/water/sewer,
@@ -30317,6 +30280,21 @@
 /obj/item/coin/copper/pile,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
+"oIj" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/water_vent,
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1;
+	pixel_y = 10
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "oIk" = (
 /obj/structure/table/wood/reinforced_alter,
 /obj/item/clothing/face/cigarette/pipe/westman,
@@ -31118,6 +31096,25 @@
 /obj/structure/fluff/wallclock,
 /turf/open/floor/metal/alt,
 /area/indoors/town/keep/gate)
+"pcO" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	pixel_x = -24
+	},
+/obj/structure/fluff/railing/border{
+	dir = 5;
+	pixel_x = -24;
+	pixel_y = -24
+	},
+/turf/open/floor/concrete,
+/area/indoors/town)
 "pcP" = (
 /turf/open/water/ocean,
 /area/outdoors/town/noble_manor/yellow)
@@ -32049,20 +32046,6 @@
 /obj/item/clothing/face/cigarette/pipe/westman,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"pAn" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/stairs{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 10
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town/theatre)
 "pAu" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/clothing/shoes/boots/leather,
@@ -33123,13 +33106,6 @@
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt,
 /area/under/cave)
-"qav" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/metal/barograte,
-/area/indoors/town)
 "qaH" = (
 /obj/structure/barricade/wooden/crude,
 /turf/open/openspace,
@@ -33185,6 +33161,23 @@
 "qcM" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/servant)
+"qcS" = (
+/obj/structure/table/wood/plain,
+/obj/item/kitchen/fork/iron{
+	pixel_x = -11;
+	pixel_y = 1
+	},
+/obj/item/natural/clod/dirt,
+/obj/item/plate{
+	pixel_x = 4;
+	pixel_y = 6
+	},
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison{
+	pixel_x = 5;
+	pixel_y = 13
+	},
+/turf/open/floor/cobble,
+/area/indoors/dungeon)
 "qdy" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -33562,6 +33555,13 @@
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"qmH" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/closed/mineral,
+/area/under/cave)
 "qmT" = (
 /obj/structure/fluff/statue/knight/interior{
 	layer = 4.2
@@ -36296,11 +36296,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/openspace,
 /area/indoors/town/keep/magician)
-"rBJ" = (
-/obj/structure/table/wood/plain,
-/obj/item/natural/dirtclod,
-/turf/open/floor/cobble,
-/area/under/dungeon)
 "rBO" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 4
@@ -40842,6 +40837,21 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
+"tJJ" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	pixel_x = -24
+	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	pixel_x = 7;
+	pixel_y = 9
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "tKa" = (
 /obj/structure/rack/shelf{
 	pixel_x = 32;
@@ -41255,6 +41265,10 @@
 /obj/item/clothing/face/facemask,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
+"tRr" = (
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/grass/yel,
+/area/outdoors/exposed/church)
 "tRs" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/landmark/latejoin,
@@ -41400,6 +41414,17 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/twig,
 /area/indoors/town/church/inquisition)
+"tWJ" = (
+/obj/machinery/light/fueled/lanternpost/fixed{
+	pixel_x = -5;
+	pixel_y = 6
+	},
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "tWQ" = (
 /obj/structure/bars,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -42954,14 +42979,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
-"uIW" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/water_vent,
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "uIZ" = (
 /obj/structure/curtain/bounty/dir{
 	dir = 1
@@ -43382,6 +43399,13 @@
 	},
 /turf/open/openspace,
 /area/outdoors/river)
+"uSe" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/floor/metal/barograte,
+/area/indoors/town)
 "uSf" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/openspace,
@@ -46677,13 +46701,6 @@
 "wpf" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
-"wpC" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "wpH" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -46797,6 +46814,18 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"wtc" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/buysign{
+	name = "Vanderlin Train Station";
+	pixel_x = 1;
+	pixel_y = 3
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town)
 "wtd" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -49283,18 +49312,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
-"xuL" = (
-/obj/machinery/light/fueled/lanternpost/fixed{
-	dir = 1;
-	pixel_x = -1;
-	pixel_y = 6
-	},
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town)
 "xuM" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 26
@@ -50480,23 +50497,6 @@
 "yaw" = (
 /turf/closed/wall/mineral/wooddark,
 /area/under/cavewet)
-"yaB" = (
-/obj/structure/table/wood/plain,
-/obj/item/kitchen/fork/iron{
-	pixel_x = -11;
-	pixel_y = 1
-	},
-/obj/item/natural/dirtclod,
-/obj/item/plate{
-	pixel_x = 4;
-	pixel_y = 6
-	},
-/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison{
-	pixel_x = 5;
-	pixel_y = 13
-	},
-/turf/open/floor/cobble,
-/area/indoors/dungeon)
 "yaX" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cave)
@@ -73203,7 +73203,7 @@ kQk
 vHN
 iXi
 vHN
-cgt
+dlN
 hvD
 dZO
 dZO
@@ -73405,7 +73405,7 @@ kQk
 vHN
 iXi
 vHN
-wpC
+hYa
 pKj
 pKj
 pKj
@@ -73607,7 +73607,7 @@ kQk
 vHN
 iXi
 vHN
-qav
+uSe
 avE
 avE
 wwO
@@ -73809,7 +73809,7 @@ kQk
 vHN
 wlG
 vHN
-xuL
+jOc
 pKj
 pKj
 pKj
@@ -74011,7 +74011,7 @@ kQk
 vHN
 iXi
 vHN
-dzW
+tWJ
 pKj
 pKj
 ifB
@@ -74213,7 +74213,7 @@ qnc
 vHN
 boC
 vHN
-uIW
+alG
 pKj
 tBC
 pKj
@@ -74415,7 +74415,7 @@ kQk
 vHN
 iXi
 vHN
-aYX
+pcO
 pKj
 arn
 pKj
@@ -75021,7 +75021,7 @@ qnc
 vHN
 syd
 vHN
-uIW
+alG
 pKj
 bkC
 pKj
@@ -75223,7 +75223,7 @@ kQk
 vHN
 uQs
 vHN
-eFK
+wtc
 pKj
 arn
 pKj
@@ -75425,7 +75425,7 @@ kQk
 vHN
 cHg
 vHN
-fBt
+oHJ
 xby
 iss
 pKj
@@ -76435,7 +76435,7 @@ kQk
 vHN
 dkU
 vHN
-mHH
+tJJ
 jsW
 pKj
 ifB
@@ -76637,7 +76637,7 @@ kQk
 vHN
 iXi
 vHN
-nZP
+ldG
 pKj
 eFN
 eFN
@@ -76839,7 +76839,7 @@ qnc
 vHN
 iXi
 vHN
-uIW
+alG
 pKj
 pKj
 pKj
@@ -77647,7 +77647,7 @@ qnc
 vHN
 iXi
 vHN
-cWD
+oIj
 umU
 umU
 umU
@@ -100603,7 +100603,7 @@ kst
 oox
 aWh
 tOV
-jUk
+qmH
 qFx
 qFx
 qFx
@@ -100805,7 +100805,7 @@ hvk
 nRQ
 nRQ
 tOV
-jUk
+qmH
 qFx
 qFx
 qFx
@@ -103119,7 +103119,7 @@ dID
 hPy
 cTy
 uGo
-rBJ
+jiF
 oRE
 qzA
 alT
@@ -117211,7 +117211,7 @@ lfz
 jOb
 siH
 pjQ
-pAn
+dTO
 sLd
 bQr
 bQr
@@ -118221,7 +118221,7 @@ lfz
 jOb
 siH
 ete
-fJQ
+ojY
 sLd
 uyo
 uyo
@@ -123860,7 +123860,7 @@ oSl
 oSl
 iKJ
 qVo
-eXD
+tRr
 oUP
 oUP
 oUP
@@ -143928,7 +143928,7 @@ iNw
 lKh
 bAc
 gHa
-yaB
+qcS
 fWu
 fdD
 bAc

@@ -1807,22 +1807,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
 /area/indoors)
-"iw" = (
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9;
-	pixel_x = 26;
-	pixel_y = 2
-	},
-/obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/floor/naturalstone,
-/area/outdoors/bog/inhumen_camp)
 "ix" = (
 /obj/structure/bed/wool,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
@@ -1853,6 +1837,22 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"iI" = (
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9;
+	pixel_x = 26;
+	pixel_y = 2
+	},
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/turf/open/floor/naturalstone,
+/area/outdoors/bog/inhumen_camp)
 "iK" = (
 /obj/structure/table/wood{
 	dir = 5;
@@ -2288,29 +2288,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"lO" = (
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	pixel_x = -24
-	},
-/obj/effect/decal/borderfall{
-	dir = 8;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/cobbleedge/alt,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
-"lS" = (
-/obj/structure/kneestingers,
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/inhumen_camp)
 "lT" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/church,
@@ -2548,6 +2525,17 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/twig,
 /area/indoors/lich)
+"nE" = (
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/turf/open/water/swamp/deep,
+/area/outdoors/bog/inhumen_camp)
 "nG" = (
 /obj/structure/fluff/statue/evil,
 /obj/machinery/light/fueled/firebowl/standing/blue,
@@ -3033,17 +3021,6 @@
 	},
 /turf/open/floor/carpet/lord/right,
 /area/indoors/lich)
-"qM" = (
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/inhumen_camp)
 "qO" = (
 /turf/open/floor/cobble,
 /area/indoors)
@@ -3081,6 +3058,10 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
+"qU" = (
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "qV" = (
 /obj/structure/fluff/walldeco/bigpainting,
 /obj/structure/bookcase,
@@ -3088,16 +3069,6 @@
 /obj/item/book/tales1,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"qY" = (
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/effect/decal/borderfall{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/inhumen_camp)
 "qZ" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -3980,18 +3951,6 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/wood,
 /area/indoors)
-"wl" = (
-/obj/effect/decal/borderfall{
-	dir = 4;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8;
-	pixel_x = 24
-	},
-/obj/effect/decal/cobbleedge/alt,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "ws" = (
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/dirt,
@@ -4430,6 +4389,17 @@
 "zP" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
+"zQ" = (
+/obj/structure/kneestingers,
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "zS" = (
 /obj/structure/flora/tree/evil,
@@ -5407,10 +5377,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"GS" = (
-/obj/structure/fluff/clodpile,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "GV" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/herringbone,
@@ -5963,6 +5929,18 @@
 /obj/machinery/light/fueled/wallfire,
 /turf/closed/wall/mineral/decostone/long,
 /area/indoors/lich)
+"Kl" = (
+/obj/effect/decal/borderfall{
+	dir = 4;
+	icon_state = "borderfall"
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/effect/decal/cobbleedge/alt,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "Kn" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
@@ -6859,6 +6837,18 @@
 	},
 /turf/open/floor/church,
 /area/indoors/lich)
+"QM" = (
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	pixel_x = -24
+	},
+/obj/effect/decal/borderfall{
+	dir = 8;
+	icon_state = "borderfall"
+	},
+/obj/effect/decal/cobbleedge/alt,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "QN" = (
 /obj/structure/door/iron/bars{
 	lockid = "banditcamp"
@@ -6875,6 +6865,16 @@
 "QS" = (
 /obj/effect/decal/cobbleedge,
 /turf/open/water/blood,
+/area/outdoors/bog/inhumen_camp)
+"QU" = (
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/effect/decal/borderfall{
+	dir = 1;
+	icon_state = "borderfall"
+	},
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "QV" = (
 /obj/structure/flora/grass/water,
@@ -9649,7 +9649,7 @@ jW
 QZ
 jW
 Sq
-GS
+qU
 Ek
 UX
 xt
@@ -19558,7 +19558,7 @@ sA
 KH
 np
 SD
-wl
+Kl
 Zt
 mX
 mX
@@ -19818,7 +19818,7 @@ np
 np
 AP
 mR
-lO
+QM
 mX
 Ri
 Aj
@@ -20719,7 +20719,7 @@ lB
 WZ
 yn
 WZ
-qM
+nE
 ZP
 ZP
 gY
@@ -20849,7 +20849,7 @@ Sg
 WZ
 yn
 WZ
-qY
+QU
 Yo
 JY
 ZP
@@ -20979,7 +20979,7 @@ Aq
 WZ
 yn
 WZ
-qY
+QU
 rb
 ZP
 tg
@@ -21109,7 +21109,7 @@ Aq
 WZ
 yn
 WZ
-lS
+zQ
 ZP
 GY
 ZP
@@ -21499,7 +21499,7 @@ QK
 ZX
 Vy
 ZX
-iw
+iI
 VB
 VB
 VB

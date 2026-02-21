@@ -6,7 +6,7 @@
 
 ///mmmm yumymumyumuymuymym
 #define DIET_KOBOLD list(\
-	/obj/item/natural/dirtclod,\
+	/obj/item/natural/clod,\
 	/obj/item/natural/stone,\
 	/obj/item/coin,\
 	/obj/item/gem,\

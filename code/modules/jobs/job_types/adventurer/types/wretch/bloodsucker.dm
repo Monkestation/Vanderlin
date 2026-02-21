@@ -1,4 +1,4 @@
-/datum/job/advclass/wretch/bloodsucker
+/*/datum/job/advclass/wretch/bloodsucker
 	title = "Bloodsucker"
 	tutorial = "You have recently been embraced as a vampire. You do not know whom your sire is, strange urges, unnatural strength, a thirst you can barely control. You were outed as a monster and are now on the run"
 	allowed_sexes = list(MALE, FEMALE)
@@ -289,4 +289,4 @@
 
 /datum/job_pack/bloodsucker_vagrant/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
-	picker.cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
+	picker.cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg' */

@@ -589,5 +589,48 @@
                 "bugfix": "Fixes a bug causing blunt intent to be affected by sharpness if the weapon had sharpness."
             }
         ]
+    },
+    "2026-02-21": {
+        "CheffieGithub": [
+            {
+                "rscadd": "Added more feedback to feinting"
+            }
+        ],
+        "TerraGS": [
+            {
+                "rscadd": "Adds sand. Dig it up with a shovel or your hand. Melt it into glass. Just keep it out of your eyes."
+            },
+            {
+                "qol": "Shovels can drop their load into sacks."
+            },
+            {
+                "image": "Adds icons for sand item and sand pile along with associated shovel icons."
+            },
+            {
+                "refactor": "Moved generic behavior out of dirtclod into new parent objects for clod and clodpile."
+            }
+        ],
+        "realforest2001": [
+            {
+                "code_imp": "Changed file2list from a world proc into global proc."
+            },
+            {
+                "admin": "Changed prefix during messages and asay depending on rank title."
+            },
+            {
+                "code_imp": "Added backend support for the above."
+            },
+            {
+                "admin": "Added a config setting to allow prefixes to use direct rank names."
+            },
+            {
+                "bugfix": "Fixed Templar Grandmaster being selected for major antags."
+            }
+        ],
+        "MrTCo1": [
+            {
+                "rscdel": "Wretch Vampire"
+            }
+        ]
     }
 }
