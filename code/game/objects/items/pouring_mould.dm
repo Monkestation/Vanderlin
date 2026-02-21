@@ -165,6 +165,7 @@
 	cooling_progress = 0
 	average_quality = 0
 	average_skill = 0
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/mould/ingot
 	name = "ingot mould"

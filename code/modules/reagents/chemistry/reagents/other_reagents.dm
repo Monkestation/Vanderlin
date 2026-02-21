@@ -30,24 +30,24 @@
 		data["preferences"] &= ~(BLOOD_PREFERENCE_LIVING|BLOOD_PREFERENCE_SLEEPING)
 	. = ..()
 
-/datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
+/datum/reagent/blood/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
 	. = ..()
-	if(method & TOUCH)
-		L.adjust_germ_level(GERM_PER_UNIT_BLOOD * reac_volume * 0.1)
+	if(methods & TOUCH)
+		exposed_mob.adjust_germ_level(GERM_PER_UNIT_BLOOD * reac_volume * 0.1)
 
-	if(!(. && method & (INJECT|INGEST)))
+	if(!(. && (methods & (INJECT|INGEST))))
 		return
-	SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
-	var/datum/dna/L_dna = L.has_dna()
-	var/drinking_self = L_dna?.unique_enzymes && L_dna.unique_enzymes == data["blood_DNA"]
+	SEND_SIGNAL(exposed_mob, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
+	var/datum/dna/exposed_mob_dna = exposed_mob.has_dna()
+	var/drinking_self = exposed_mob_dna?.unique_enzymes && exposed_mob_dna.unique_enzymes == data["blood_DNA"]
 	//if the dna matches, you're drinking your own blood freak.
-	if(!drinking_self && L.clan && data["vitae"] > 0)
-		var/vitae = L.clan.handle_bloodsuck(L, data["preferences"], reac_volume * data["vitae"])
-		L.adjust_bloodpool(vitae)
-		L.adjust_hydration(vitae * 0.1)
+	if(!drinking_self && exposed_mob.clan && data["vitae"] > 0)
+		var/vitae = exposed_mob.clan.handle_bloodsuck(exposed_mob, data["preferences"], reac_volume * data["vitae"])
+		exposed_mob.adjust_bloodpool(vitae)
+		exposed_mob.adjust_hydration(vitae * 0.1)
 
-	var/mob/living/carbon/C = L
-	if(istype(C) && (NOBLOOD in C.dna?.species?.species_traits))
+	var/mob/living/carbon/exposed_carbon = exposed_mob
+	if(istype(exposed_carbon) && (NOBLOOD in exposed_carbon.dna?.species?.species_traits))
 		return
 	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
 	if(method & INJECT)
@@ -65,18 +65,19 @@
 				L.adjust_bloodvolume(reac_volume * 0.2)
 			return
 		var/tox = toxicity * reac_volume
-		if(HAS_TRAIT(L, TRAIT_POISON_RESILIENCE))
+		if(HAS_TRAIT(exposed_carbon, TRAIT_POISON_RESILIENCE))
 			tox *= 0.5
-		L.adjustToxLoss(tox)
-		C.add_nausea(tox * 2)
+		exposed_mob.adjustToxLoss(tox)
+		exposed_carbon.add_nausea(tox * 2)
 
 /datum/reagent/blood/on_merge(list/mix_data, other_volume)
 	. = ..()
-	data["vitae"] = (data["vitae"] * volume + (mix_data?["vitae"] || 0) * other_volume) / (volume + other_volume) // weighted average of both vitae
-	data["preferences"] |= mix_data?["preferences"] // i have no idea how to effectively deal with this issue, this is gonna get weird sometimes.
-	if(mix_data && data["blood_DNA"] != mix_data["blood_DNA"])
-		data["cloneable"] = 0 //On mix, consider the genetic sampling unviable for pod cloning if the DNA sample doesn't match.
-	return 1
+	if(mix_data)
+		data["vitae"] = (data["vitae"] * volume + (mix_data?["vitae"] || 0) * other_volume) / (volume + other_volume) // weighted average of both vitae
+		data["preferences"] |= mix_data?["preferences"] // i have no idea how to effectively deal with this issue, this is gonna get weird sometimes.
+		if(mix_data && data["blood_DNA"] != mix_data["blood_DNA"])
+			data["cloneable"] = 0 //On mix, consider the genetic sampling unviable for pod cloning if the DNA sample doesn't match.
+	return TRUE
 
 /datum/reagent/blood/reaction_turf(turf/T, reac_volume)//splash the blood all over the place
 	if(!istype(T))

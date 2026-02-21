@@ -71,8 +71,6 @@
 	numberofhits++
 	accumulated_quality += quality_score
 	var/skill_level_to_add = user.get_skill_level(appro_skill)
-	if(!HAS_TRAIT(user, TRAIT_MALUMFIRE)) // Lesser quality for self-learned non-professional smiths by trade
-		skill_level_to_add *= 0.85
 	skill_quality += skill_level_to_add
 
 	var/progress_to_add = 100
@@ -118,7 +116,7 @@
 	needed_item = null
 	return TRUE
 
-/datum/anvil_recipe/proc/handle_creation(obj/item/recipe_output, obj/item/initial_material)
+/datum/anvil_recipe/proc/handle_creation(atom/output_location, mob/user)
 	var/datum/quality_calculator/blacksmithing/quality_calc = new(
 		mat_qual = material_quality,
 		skill_qual = skill_quality,
@@ -128,8 +126,12 @@
 		mini_play = numberofhits
 	)
 
-	quality_calc.apply_quality_to_item(recipe_output, TRUE)
-	recipe_output.add_quench_requirement("recipe_creation", 60 SECONDS)
+	for(var/i in 1 to output_amount)
+		var/obj/item/output_item = new created_item(output_location)
+		output_item.OnCrafted(user.dir, user)
+		quality_calc.apply_quality_to_item(output_item, TRUE)
+		output_item.add_quench_requirement("recipe_creation", 60 SECONDS)
+
 	qdel(quality_calc)
 
 /datum/anvil_recipe/proc/get_display_name()

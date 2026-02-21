@@ -53,11 +53,14 @@
 			. = TRUE
 			user.changeNext_move(CLICK_CD_MELEE)
 			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
-				to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
-				return
+				if(working_material.currecipe)
+					to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
+				else
+					return working_material.attackby(attacking_item, user, modifiers)
+
 			if(!working_material.currecipe)
 				if(!choose_recipe(user))
-					return
+					return working_material.attackby(attacking_item, user, modifiers)
 			if(!working_material.currecipe.is_recipe_available(user))
 				return
 			// Start the minigame instead of direct hammering
@@ -160,10 +163,7 @@
 	record_featured_stat(FEATURED_STATS_SMITHS, user)
 	record_featured_object_stat(FEATURED_STATS_FORGED_ITEMS, initial(output_item_path.name))
 
-	for(var/i in 1 to recipe.output_amount)
-		var/obj/item/output_item = new output_item_path(loc)
-		output_item.OnCrafted(user.dir, user)
-		recipe.handle_creation(output_item, working_material)
+	recipe.handle_creation(loc, user)
 
 	user?.visible_message(span_info("[user] finishes crafting \the [initial(output_item_path.name)]!"))
 	qdel(working_material)

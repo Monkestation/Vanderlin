@@ -114,5 +114,5 @@
 
 /datum/quality_calculator/cooking/track_item_creation(obj/item/target, final_quality)
 	// Track masterworks if enabled (quality 4)
-	if(final_quality >= 4)
+	if(final_quality >= COOK_QUALITY_VERYGOOD)
 		record_round_statistic(STATS_MASTERWORKS_FORGED, 1) // TODO! Make this an actual unique type

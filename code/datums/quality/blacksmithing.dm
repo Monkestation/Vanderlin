@@ -32,10 +32,10 @@
 // smithing scales from -10 to 10 (0 is regular)
 // Tier differences are between 2 and 3 (for positive ones)
 /datum/quality_calculator/blacksmithing/calculate_final_quality()
-	var/avg_skill = floor(skill_quality / minigame_plays)
+	var/avg_skill = skill_quality / minigame_plays
 	avg_skill = min(avg_skill + skill_randomization, SKILL_LEVEL_LEGENDARY) // just a healthy amount of randomization
 	var/avg_material = floor(material_quality / num_components)
-	var/avg_performance = floor(performance_quality / minigame_plays)
+	var/avg_performance = performance_quality / minigame_plays
 
 	/* Explanations for factors and their scaling
 	* Skill (MAJOR): Essentially the base quality for each skill level
@@ -46,7 +46,7 @@
 	var/skill_component = (avg_skill / 6) * (-BLACKSMITH_QUALITY_SPOILED + BLACKSMITH_QUALITY_FLAWLESS)
 	var/material_component = ((avg_material - SMELTERY_QUALITY_NORMAL) / SMELTERY_QUALITY_NORMAL) * 6
 	var/performance_component = (avg_performance / 100) * 3
-	var/difficulty_penalty = difficulty_modifier * 0.25
+	var/difficulty_penalty = difficulty_modifier * 0.3
 
 	var/final_quality = skill_component + material_component + performance_component - difficulty_penalty
 	final_quality += BLACKSMITH_QUALITY_SPOILED

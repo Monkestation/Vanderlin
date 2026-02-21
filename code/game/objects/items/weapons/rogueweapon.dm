@@ -40,10 +40,7 @@
 
 /obj/item/weapon/equipped(mob/user, slot, initial)
 	. = ..()
-	if(initial)
-		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
-
-	if(randomize_blade_int)
+	if(initial && randomize_blade_int)
 		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)

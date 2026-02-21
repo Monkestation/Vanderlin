@@ -71,7 +71,7 @@
 		contained_items -= retrieved_item
 		. = TRUE
 
-	if(tongs_used)
+	if(tongs_used && !tongs_used.held_item)
 		for(var/obj/item/storage/crucible/crucible in contents)
 			user.visible_message("[user] starts removing a crucible from [src]!", "You start removing a crucible from [src].")
 			if(!do_after(user, 1.5 SECONDS, src))
@@ -117,7 +117,7 @@
 	smelting_item.forceMove(src)
 	contained_items[smelting_item] = SMELTERY_QUALITY_SPOIL
 	var/smelter_exp = user?.get_skill_level(/datum/skill/craft/blacksmithing, TRUE) // 0 to 6
-	contained_items[smelting_item] = min(SMELTERY_QUALITY_EXCELLENT, floor(rand(smelter_exp*15 + 10, max(30, smelter_exp*25))/25) + SMELTERY_QUALITY_SPOIL) // Math explained below
+	contained_items[smelting_item] = clamp(floor(rand(smelter_exp*15 + 10, max(30, smelter_exp*25))/SMELTING_DENOMINATOR), SMELTERY_QUALITY_SPOIL, SMELTERY_QUALITY_EXCELLENT) // Math explained below
 	/*
 	RANDOMLY PICKED NUMBER ACCORDING TO SMELTER SKILL:
 		NO SKILL: 		between 10 and 30
@@ -128,7 +128,7 @@
 		MASTER: 		between 85 and 125
 		LEGENDARY: 		between 100 and 150
 
-	PICKED NUMBER GETS DIVIDED BY 25 AND ROUNDED DOWN TO CLOSEST INTEGER, +1.
+	PICKED NUMBER GETS DIVIDED BY SMELTING_DENOMINATOR AND ROUNDED DOWN TO CLOSEST INTEGER.
 	RESULT DETERMINES QUALITY OF BAR. SEE code/__DEFINES/qualities.dm
 		1 = SPOILED
 		2 = POOR

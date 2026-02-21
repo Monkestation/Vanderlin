@@ -17,6 +17,8 @@
 #define SMELTERY_QUALITY_GREAT 5
 #define SMELTERY_QUALITY_EXCELLENT 6
 
+#define SMELTING_DENOMINATOR 21
+
 //Food and reagent qualities for cooking
 #define COOK_QUALITY_NORMAL 1
 #define COOK_QUALITY_NICE 2

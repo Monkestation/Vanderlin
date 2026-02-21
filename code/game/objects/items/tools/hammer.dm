@@ -29,16 +29,17 @@
 		return ..()
 	if(!isliving(user) || !user.mind || user.cmode)
 		return ..()
-	var/obj/O = attacked_atom
 	var/datum/mind/blacksmith_mind = user.mind
-	var/repair_percent = 0.025 // 2.5% Repairing per hammer smack
+	var/repair_percent = 0.05 // 5% Repairing per hammer smack
 	/// Repairing is MUCH better with an anvil!
-	if(locate(/obj/machinery/anvil) in O.loc)
-		repair_percent *= 2 // Double the repair amount if we're using an anvil
+	if(locate(/obj/machinery/anvil) in attacked_atom.loc)
+		repair_percent *= 1.5
+	if(HAS_TRAIT(attacked_atom, TRAIT_NEEDS_QUENCH))
+		repair_percent *= 1.5
 
-	if(isbodypart(O))
+	if(isbodypart(attacked_atom))
 		. = TRUE
-		var/obj/item/bodypart/attacked_prosthetic = O
+		var/obj/item/bodypart/attacked_prosthetic = attacked_atom
 		if(!attacked_prosthetic.anvilrepair || !isturf(attacked_prosthetic.loc))
 			return
 		if(attacked_prosthetic.get_integrity() >= attacked_prosthetic.max_integrity && attacked_prosthetic.brute_dam == 0 && attacked_prosthetic.burn_dam == 0 && attacked_prosthetic.wounds == null && attacked_prosthetic.bodypart_disabled == BODYPART_NOT_DISABLED) //A mouthful
@@ -71,7 +72,7 @@
 			attacked_prosthetic.take_damage(attacked_prosthetic.max_integrity * 0.1, BRUTE, "blunt")
 		return
 
-	if(isitem(O))
+	if(isitem(attacked_atom))
 		. = TRUE
 		var/obj/item/attacked_item = O
 		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || !isturf(attacked_item.loc))
@@ -131,9 +132,9 @@
 		playsound(src, 'sound/items/bsmithfail.ogg', 40, FALSE)
 		return
 
-	if(isstructure(O))
+	if(isstructure(attacked_atom))
 		. = TRUE
-		var/obj/structure/attacked_structure = O
+		var/obj/structure/attacked_structure = attacked_atom
 		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity || attacked_structure.obj_broken)
 			to_chat(user, span_warning("[attacked_structure] cannot be repaired any further."))
 			return

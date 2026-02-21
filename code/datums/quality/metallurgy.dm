@@ -47,10 +47,10 @@
 		EXPERT: 		between 70 and 100
 		MASTER: 		between 85 and 125
 		LEGENDARY: 		between 100 and 150
-	PICKED NUMBER GETS DIVIDED BY 25, +1.
+	PICKED NUMBER GETS DIVIDED BY SMELTING_DENOMINATOR.
 	*/
-	var/skill_factor = (rand(skill_quality*15 + 10, max(30, skill_quality*25)) / 25) + SMELTERY_QUALITY_SPOIL
-	var/material_factor = (material_quality - SMELTERY_QUALITY_SPOIL) * 0.6 // SMELTERY_QUALITY_EXCELLENT material gives +3
+	var/skill_factor = (rand(skill_quality*15 + 10, max(30, skill_quality*25)) / SMELTING_DENOMINATOR)
+	var/material_factor = (material_quality - SMELTERY_QUALITY_SPOIL) * 0.5
 
 	var/final_quality = floor(material_factor + skill_factor)
 

@@ -196,13 +196,9 @@
 	. = ..()
 	if(smelt_quality)
 		recipe_quality = smelt_quality
-		set_quality(recipe_quality)
-
-/obj/item/ingot/set_quality(quality)
-	. = ..()
-	var/datum/quality_calculator/metallurgy/metal_calc = new()
-	metal_calc.apply_quality_to_item(src, TRUE, recipe_quality)
-	qdel(metal_calc)
+		var/datum/quality_calculator/metallurgy/metal_calc = new()
+		metal_calc.apply_quality_to_item(src, TRUE, recipe_quality)
+		qdel(metal_calc)
 
 /obj/item/ingot/attack_hand_secondary(mob/user, list/modifiers)
 	if(currecipe)
