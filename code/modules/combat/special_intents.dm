@@ -138,8 +138,7 @@
 	attack_delay = 0.7 SECONDS
 	cooldown = 25 SECONDS
 
-/datum/special_intent/ground_smash/pre_creation(mob/living/user, obj/item/parent, turf/target)
-	user.Immobilize(1.1 SECONDS)
+	immobilize_user = TRUE
 
 /datum/special_intent/ground_smash/apply_hit(mob/living/user, obj/item/parent, turf/target)
 	for(var/mob/living/victim in target)
@@ -175,9 +174,7 @@
 	attack_delay = 0.7 SECONDS
 	cooldown = 25 SECONDS
 
-/datum/special_intent/flail_sweep/pre_creation(mob/living/user, obj/item/parent, turf/target)
-	user.Immobilize(attack_delay)
-	user.apply_status_effect(/datum/status_effect/debuff/clickcd, attack_delay)
+	immobilize_user = TRUE
 
 /datum/special_intent/flail_sweep/build_affected_turfs(mob/living/user, turf/start_override)
 	var/list/affected = list()
@@ -201,6 +198,57 @@
 		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
 		apply_generic_weapon_damage(user, parent, victim, parent.force, STAB, BODY_ZONE_CHEST, BCLASS_STAB)
 
+#define GREAT_OUTER_DELAY 0.7 SECONDS
+
+/datum/special_intent/greatsword_swing
+	name = "Great Swing"
+	desc = "Swing your greatsword all around you in a ring of Judgement."
+
+	tile_coordinates = list(
+		list(0, 0),
+		list(1, 0),
+		list(1, -1),
+		list(1, -2),
+		list(0, -2),
+		list(-1, -2),
+		list(-1, -1),
+		list(-1, 0),
+		list(0, 1, GREAT_OUTER_DELAY),
+		list(1, 1, GREAT_OUTER_DELAY),
+		list(-1, 1, GREAT_OUTER_DELAY),
+		list(1, -3, GREAT_OUTER_DELAY),
+		list(0, -3, GREAT_OUTER_DELAY),
+		list(-1, -3, GREAT_OUTER_DELAY),
+		list(-2, 0, GREAT_OUTER_DELAY),
+		list(-2, -1, GREAT_OUTER_DELAY),
+		list(-2, -2, GREAT_OUTER_DELAY),
+		list(2, 0, GREAT_OUTER_DELAY),
+		list(2, -1, GREAT_OUTER_DELAY),
+		list(2, -2, GREAT_OUTER_DELAY),
+	)
+
+	pre_icon_state = "fx_trap_long"
+	pre_sound = 'sound/combat/rend_hit.ogg'
+	post_icon_state = "sweep_fx"
+	post_sound = 'sound/combat/wooshes/bladed/wooshlarge (3).ogg'
+
+	stamina_cost = 35
+
+	attack_delay = 0.7 SECONDS
+	cooldown = 30 SECONDS
+
+	immobilize_user = TRUE
+
+/datum/special_intent/greatsword_swing/apply_hit(mob/living/user, obj/item/parent, turf/target)
+	for(var/mob/living/victim in target)
+		if(victim == user)
+			continue
+		if(victim.body_position == LYING_DOWN)
+			continue
+		apply_generic_weapon_damage(user, parent, victim, parent.force, SLASH, BODY_ZONE_CHEST, BCLASS_CUT)
+
+#undef GREAT_OUTER_DELAY
+
 #define AXE_SWING_GRID_DEFAULT 	list(list(-1,0), list(0,0, 0.2 SECONDS), list(1,0, 0.4 SECONDS))
 #define AXE_SWING_GRID_MIRROR	list(list(-1,0, 0.4 SECONDS), list(0,0, 0.2 SECONDS), list(1,0))
 
@@ -220,18 +268,17 @@
 	attack_delay = 0.5 SECONDS
 	cooldown = 25 SECONDS
 
+	immobilize_user = TRUE
+
 	var/damage = 20
 
 /datum/special_intent/axe_swing/pre_creation(mob/living/user, obj/item/parent, turf/target)
-	damage = parent.force * (user.STASTR / 10) + 15
+	damage = (parent.force * (user.STASTR / 10)) + 15
 
 	if(user.used_hand == 1)	//We mirror it if it's the left arm.
 		tile_coordinates += AXE_SWING_GRID_MIRROR
 	else
 		tile_coordinates += AXE_SWING_GRID_DEFAULT //Initial() doesn't work with lists so we copy paste the original
-
-	user.Immobilize(0.9 SECONDS)
-	user.apply_status_effect(/datum/status_effect/debuff/clickcd, 0.9 SECONDS)
 
 /datum/special_intent/axe_swing/apply_hit(mob/living/user, obj/item/parent, turf/target)
 	for(var/mob/living/victim in target)

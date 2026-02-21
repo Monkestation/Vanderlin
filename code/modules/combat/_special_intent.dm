@@ -56,6 +56,10 @@
 	/// If the users loc isn't this when we end, they moved.
 	var/turf/starting_loc = null
 
+	/// If true we do various things to prevent the user from moving or clicking in [start_attack]
+	/// At that point we know that there are target turfs
+	var/immobilize_user = FALSE
+
 /datum/special_intent/Destroy(force, ...)
 	starting_loc = null
 	return ..()
@@ -158,6 +162,7 @@
 					coord_x = coord_y
 					coord_y = -temp
 
+		// Note we intentionally don't support duplicate coordinates
 		var/turf/affected = locate(origin.x + coord_x, origin.y + coord_y, origin.z)
 		if(affected && !affected.is_blocked_turf(TRUE))
 			affected_turfs[affected] = delay
@@ -187,8 +192,13 @@
 /datum/special_intent/proc/pre_delay(mob/living/user, obj/item/parent, list/turfs)
 	SHOULD_CALL_PARENT(TRUE)
 
+	if(immobilize_user)
+		user.Immobilize(attack_delay)
+		user.apply_status_effect(/datum/status_effect/debuff/clickcd, attack_delay)
+
 	for(var/turf/affected as anything in turfs)
-		var/obj/effect/temp_visual/duration_setting/effect = new(affected, attack_delay)
+		var/delay = attack_delay + LAZYACCESS(turfs, affected)
+		var/obj/effect/temp_visual/duration_setting/effect = new(affected, delay)
 		effect.icon = icon
 		effect.icon_state = pre_icon_state
 		effect.plane = GAME_PLANE_FOV_HIDDEN
