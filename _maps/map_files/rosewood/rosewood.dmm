@@ -2193,6 +2193,11 @@
 "bbP" = (
 /turf/open/water/swamp/deep,
 /area/outdoors/basin)
+"bck" = (
+/obj/structure/toilet,
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "bcv" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/steward)
@@ -5552,10 +5557,6 @@
 	dir = 4
 	},
 /area/indoors/town)
-"cFy" = (
-/obj/effect/landmark/start/blacksmith,
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "cFM" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
@@ -12196,6 +12197,10 @@
 "fTm" = (
 /turf/open/floor/naturalstone,
 /area/under/town/sewer)
+"fTG" = (
+/obj/effect/landmark/start/blacksmith,
+/turf/open/floor/blocks,
+/area/indoors/town/smithy)
 "fTI" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven/east,
@@ -13330,14 +13335,6 @@
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
-"gsQ" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/natural/dirtclod,
-/obj/machinery/light/fueled/wallfire/candle/l{
-	pixel_x = 32
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town/orphanage)
 "gsU" = (
 /obj/item/paint_palette{
 	pixel_x = -8;
@@ -18689,16 +18686,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"iZG" = (
-/obj/effect/landmark/start/blacksmith{
-	dir = 1
-	},
-/obj/effect/decal/carpet/square/black{
-	pixel_x = -2;
-	pixel_y = 16
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
 "iZK" = (
 /turf/open/floor/cobble,
 /area/outdoors/town/noble_manor/blue)
@@ -19833,6 +19820,10 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
+"jFd" = (
+/obj/effect/landmark/start/blacksmith,
+/turf/open/floor/ruinedwood,
+/area/indoors/town/smithy)
 "jFk" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 8
@@ -25407,6 +25398,16 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/herringbone,
 /area/under/town/basement)
+"mrS" = (
+/obj/effect/landmark/start/blacksmith{
+	dir = 1
+	},
+/obj/effect/decal/carpet/square/black{
+	pixel_x = -2;
+	pixel_y = 16
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town/smithy)
 "mrV" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "RosewoodM22"
@@ -25767,14 +25768,6 @@
 /obj/structure/window/stained/yellow,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
-"mDJ" = (
-/obj/structure/toilet,
-/obj/structure/fluff/clodpile{
-	pixel_y = 7;
-	name = "nitesoil pile"
-	},
-/turf/open/floor/greenstone,
-/area/under/town/basement)
 "mDY" = (
 /turf/open/floor/cobblerock,
 /area/under/town/sewer)
@@ -25795,12 +25788,6 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/garrison)
-"mEG" = (
-/obj/effect/landmark/start/blacksmith{
-	dir = 1
-	},
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "mEI" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/tile/bath,
@@ -28869,6 +28856,12 @@
 	},
 /turf/open/floor/wood,
 /area/outdoors/town)
+"nXW" = (
+/obj/effect/landmark/start/blacksmith{
+	dir = 1
+	},
+/turf/open/floor/cobble,
+/area/indoors/town/smithy)
 "nXY" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/paper{
@@ -29912,6 +29905,12 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/town/keep)
+"osa" = (
+/obj/effect/landmark/start/blacksmith{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood,
+/area/indoors/town/smithy)
 "osO" = (
 /obj/structure/fluff/signage{
 	dir = 8;
@@ -33264,12 +33263,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
-"qdt" = (
-/obj/effect/landmark/start/blacksmith{
-	dir = 1
-	},
-/turf/open/floor/cobble,
-/area/indoors/town/smithy)
 "qdO" = (
 /obj/structure/table/wood/reinf_long,
 /turf/open/floor/tile/tilerg,
@@ -33653,6 +33646,14 @@
 /obj/machinery/light/fueled/wallfire/big_fireplace,
 /turf/closed/wall/mineral/stonebrick/reddish,
 /area/indoors/town/shop)
+"qqR" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/natural/clod/dirt,
+/obj/machinery/light/fueled/wallfire/candle/l{
+	pixel_x = 32
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/orphanage)
 "qrd" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/natural/cloth,
@@ -37092,12 +37093,6 @@
 /obj/structure/bookcase,
 /turf/open/floor/hexstone,
 /area/under/town/basement)
-"rVF" = (
-/obj/effect/landmark/start/blacksmith{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood,
-/area/indoors/town/smithy)
 "rVS" = (
 /obj/machinery/light/fueledstreet/blue/wall,
 /turf/open/floor/cobblerock,
@@ -48057,10 +48052,6 @@
 /obj/machinery/light/fueled/torchholder,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/garrison)
-"xtN" = (
-/obj/effect/landmark/start/blacksmith,
-/turf/open/floor/ruinedwood,
-/area/indoors/town/smithy)
 "xtU" = (
 /obj/structure/table/wood/plain,
 /obj/item/weapon/knife/villager{
@@ -63035,7 +63026,7 @@ qJl
 qJl
 dkb
 stl
-mDJ
+bck
 aNm
 dkb
 jyq
@@ -63578,7 +63569,7 @@ xmk
 xmk
 xmk
 jnV
-gsQ
+qqR
 jnV
 eFH
 jnV
@@ -71791,11 +71782,11 @@ ojJ
 wDN
 qJl
 nYK
-xtN
+jFd
 dqr
 dqr
 dqr
-rVF
+osa
 nYK
 tuM
 qRF
@@ -110570,7 +110561,7 @@ qqA
 gzt
 mXJ
 aGo
-cFy
+fTG
 oHz
 iWf
 vEC
@@ -110583,10 +110574,10 @@ pmI
 omp
 omp
 nxh
-iZG
+mrS
 iWf
 ovx
-qdt
+nXW
 lLc
 oXn
 kFm
@@ -111176,7 +111167,7 @@ gzt
 its
 eIy
 uyn
-mEG
+nXW
 psW
 iWf
 mKL

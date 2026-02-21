@@ -58,23 +58,28 @@
 
 		return TRUE
 
+	var/item_skip = FALSE
 	if(isitem(A))
 		var/obj/item/I = A
-		if(I.w_class >= WEIGHT_CLASS_GIGANTIC)
-			if(used_intent.type == INTENT_GRAB)
-				if(istype(I) && !I.anchored)
-					start_pulling(A) //add params to grab bodyparts based on loc
-					return TRUE
-			else if(used_intent.type == INTENT_DISARM)
-				if(istype(I) && !I.anchored)
-					var/jadded = max(100-(STASTR*10),5)
-					if(adjust_stamina(jadded))
-						visible_message(span_info("[src] pushes [I]."))
-						PushAM(I, MOVE_FORCE_STRONG)
-					else
-						visible_message(span_warning("[src] pushes [I]."))
-					changeNext_move(CLICK_CD_MELEE)
-					return TRUE
+		if(I.w_class < WEIGHT_CLASS_GIGANTIC)
+			item_skip = TRUE
+
+	if(!item_skip && ismovable(A))
+		var/atom/movable/thing = A
+		if(istype(used_intent, INTENT_GRAB))
+			if(!thing.anchored)
+				start_pulling(thing) //add params to grab bodyparts based on loc
+				return TRUE
+
+		if(istype(used_intent, INTENT_DISARM))
+			if(!thing.anchored)
+				var/stam_loss = max(100 - (STASTR * 10), 5)
+				visible_message(span_info("[src] pushes [thing]."), span_info("I push [thing]."))
+				if(adjust_stamina(stam_loss))
+					PushAM(thing, MOVE_FORCE_STRONG)
+
+				changeNext_move(CLICK_CD_MELEE)
+				return TRUE
 
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(A.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)

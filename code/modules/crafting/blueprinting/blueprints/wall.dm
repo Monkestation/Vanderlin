@@ -168,7 +168,7 @@
 	result_type = /turf/closed/wall/mineral/decowood
 	required_materials = list(
 		/obj/item/grown/log/tree/stick = 3,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/knife
 	category = "Walls"
@@ -180,7 +180,7 @@
 	result_type = /turf/closed/wall/mineral/decowood/vert
 	required_materials = list(
 		/obj/item/grown/log/tree/stick = 3,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/hammer
 	category = "Walls"
