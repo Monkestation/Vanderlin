@@ -36,7 +36,7 @@
 	accept_hand = TRUE
 	implements = list(
 		/obj/item/organ = 80,
-		/obj/item/reagent_containers/food/snacks/organ = 0,
+		/obj/item/reagent_containers/food/snacks/meat/organ = 0,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
@@ -74,7 +74,7 @@
 	return ..()
 
 /datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	if(istype(tool, /obj/item/reagent_containers/food/snacks/organ))
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/meat/organ))
 		to_chat(user, "<span class='warning'>[tool] was bitten by someone! It's too damaged to use!</span>")
 		return FALSE
 

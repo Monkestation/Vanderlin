@@ -2,7 +2,12 @@
 Remember to update _globalvars/traits.dm if you're adding/removing/renaming traits.
 */
 
-// ************* movable traits
+// ************* atom traits
+
+/// Prevents the affected atom from opening a loot window via alt click. See atom/AltClick()
+#define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
+
+// ************* atom movable traits
 
 /// Is runechat for this atom/movable currently disabled, regardless of prefs or anything?
 #define TRAIT_RUNECHAT_HIDDEN "runechat_hidden"

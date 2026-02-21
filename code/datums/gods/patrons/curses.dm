@@ -125,6 +125,7 @@
 	name = "Schizophrenic"
 	description = "I can see and hear things others cannot."
 	trait = TRAIT_SCHIZO_FLAW
+	var/atom/movable/screen/fullscreen/maniac/hallucinations
 
 /datum/curse/graggar
 	name = "Graggar's Curse"
@@ -225,8 +226,18 @@
 		//handle_maniac_floors(owner)
 		handle_maniac_walls(owner)
 
+/datum/curse/schizophrenic/on_gain(mob/living/carbon/human/owner)
+	. = ..()
+	hallucinations = owner.overlay_fullscreen("maniac", /atom/movable/screen/fullscreen/maniac)
+
+/datum/curse/schizophrenic/on_loss(mob/living/carbon/human/owner)
+	. = ..()
+	hallucinations = null
+
 /datum/curse/schizophrenic/on_life(mob/living/carbon/human/owner)
 	. = ..()
+	if(prob(1))
+		INVOKE_ASYNC(owner, GLOBAL_PROC_REF(handle_maniac_visions), owner, hallucinations)
 	if(prob(0.5))
 		INVOKE_ASYNC(owner, GLOBAL_PROC_REF(handle_maniac_mob_hallucination), owner)
 	else if(prob(2))

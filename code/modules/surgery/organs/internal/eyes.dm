@@ -197,6 +197,8 @@
 /obj/item/organ/eyes/kobold
 	name = "slitted eyes" // SPRITE PLS
 	accessory_type = /datum/sprite_accessory/eyes/humanoid/kobold
+	see_in_dark = 3
+	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
 
 /obj/item/organ/eyes/triton
 	name = "dead fish eyes"

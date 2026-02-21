@@ -197,6 +197,9 @@
 	if(!picker.has_language(/datum/language/oldpsydonic))
 		picker.grant_language(/datum/language/oldpsydonic)
 
+	if(!picker.has_language(/datum/language/newpsydonic))
+		picker.grant_language(/datum/language/newpsydonic)
+
 	if(picker.dna?.species.id == SPEC_ID_HUMEN)
 		picker.dna.species.native_language = "Old Psydonic"
 		picker.dna.species.accent_language = picker.dna.species.get_accent(picker.dna.species.native_language)
@@ -280,7 +283,7 @@
 
 	pack_backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/mid = 1,
-		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/clothing/face/shepherd/rag = 1
 	)
 

@@ -34,10 +34,10 @@
 		TRAIT_NOBLE
 	)
 
-/datum/outfit/hand
+/*/datum/outfit/hand
 	name = "Hand"
 	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
-	belt = /obj/item/storage/belt/leather/steel
+	belt = /obj/item/storage/belt/leather/steel*/
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -108,8 +108,10 @@
 	)
 	armor = /obj/item/clothing/armor/leather/jacket/handjacket
 	pants = /obj/item/clothing/pants/tights/colored/black
+	belt = /obj/item/storage/belt/leather/steel
 	beltr = /obj/item/weapon/sword/rapier/dec
 	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
+	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
 
 /datum/job/advclass/hand/spymaster
 	title = "Spymaster"
@@ -152,14 +154,18 @@
 
 /datum/outfit/hand/spymaster
 	name = "Spymaster (Hand)"
-	shirt = /obj/item/clothing/armor/gambeson/shadowrobe
+	shirt = /obj/item/clothing/armor/gambeson/hand/spy
 	cloak = /obj/item/clothing/cloak/half/shadowcloak
 	gloves = /obj/item/clothing/gloves/fingerless/shadowgloves
 	mask = /obj/item/clothing/face/shepherd/shadowmask
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backr = /obj/item/storage/backpack/satchel/black
+	wrists = /obj/item/weapon/scabbard/knife/hand
+	belt = /obj/item/storage/belt/leather/black
+	beltl =  /obj/item/weapon/knife/dagger/steel/hand
+	beltr = /obj/item/weapon/knife/dagger/steel/hand/parry
+	shoes = /obj/item/clothing/shoes/boots
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1,
 		/obj/item/storage/keyring/hand = 1,
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
@@ -224,5 +230,9 @@
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
 	)
-	armor = /obj/item/clothing/armor/leather/jacket/hand
+	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
+	shoes = /obj/item/clothing/shoes/boots
+	belt = /obj/item/storage/belt/leather/black
+	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
+	scabbards = list(/obj/item/weapon/scabbard/cane/hand)

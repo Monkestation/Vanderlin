@@ -28,53 +28,58 @@
 	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
 	if(proximity && istype(G) && G.Touch(A,1))
 		return TRUE
+
 	//This signal is needed to prevent gloves of the north star + hulk.
 	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
+
 	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity)
+
 	var/rmb_stam_penalty = 1
 	if(istype(rmb_intent, /datum/rmb_intent/strong) || istype(rmb_intent, /datum/rmb_intent/swift))
 		rmb_stam_penalty = 1.5	//Uses a modifer instead of a flat addition, less than weapons no matter what rn. 50% extra stam cost basically.
+
 	if(isliving(A))
 		var/mob/living/L = A
 		if(!used_intent.noaa)
 			playsound(src, pick(GLOB.unarmed_swingmiss), 100, FALSE)
-//			src.emote("attackgrunt")
+
 		var/intent_drain = used_intent.get_releasedrain()
 		adjust_stamina(ceil(intent_drain * rmb_stam_penalty))
+
 		if(L.checkmiss(src))
 			return TRUE
+
 		if(!L.checkdefense(used_intent, src))
 			if(LAZYACCESS(modifiers, RIGHT_CLICK))
 				if(L.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 					return TRUE
 			L.attack_hand(src, modifiers)
+
 		return TRUE
-	var/item_skip = FALSE
+
 	if(isitem(A))
 		var/obj/item/I = A
-		if(I.w_class < WEIGHT_CLASS_GIGANTIC)
-			item_skip = TRUE
-	if(!item_skip)
-		if(used_intent.type == INTENT_GRAB)
-			var/obj/AM = A
-			if(istype(AM) && !AM.anchored)
-				start_pulling(A) //add params to grab bodyparts based on loc
-				return TRUE
-		if(used_intent.type == INTENT_DISARM)
-			var/obj/AM = A
-			if(istype(AM) && !AM.anchored)
-				var/jadded = max(100-(STASTR*10),5)
-				if(adjust_stamina(jadded))
-					visible_message(span_info("[src] pushes [AM]."))
-					PushAM(AM, MOVE_FORCE_STRONG)
-				else
-					visible_message(span_warning("[src] pushes [AM]."))
-				changeNext_move(CLICK_CD_MELEE)
-				return TRUE
+		if(I.w_class >= WEIGHT_CLASS_GIGANTIC)
+			if(used_intent.type == INTENT_GRAB)
+				if(istype(I) && !I.anchored)
+					start_pulling(A) //add params to grab bodyparts based on loc
+					return TRUE
+			else if(used_intent.type == INTENT_DISARM)
+				if(istype(I) && !I.anchored)
+					var/jadded = max(100-(STASTR*10),5)
+					if(adjust_stamina(jadded))
+						visible_message(span_info("[src] pushes [I]."))
+						PushAM(I, MOVE_FORCE_STRONG)
+					else
+						visible_message(span_warning("[src] pushes [I]."))
+					changeNext_move(CLICK_CD_MELEE)
+					return TRUE
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(A.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 			return TRUE
+
 	A.attack_hand(src, modifiers)
 
 /mob/living/attack_hand_secondary(mob/user, list/modifiers)
@@ -83,12 +88,6 @@
 		return
 
 	user.changeNext_move(CLICK_CD_MELEE)
-
-	if(user.cmode)
-		if(user.rmb_intent)
-			user.rmb_intent.special_attack(user, src)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		// Throw hands
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -107,14 +106,6 @@
 			to_chat(user, span_notice("You offer apprenticeship to [target]."))
 			user.make_apprentice(target)
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-/turf/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	user.changeNext_move(CLICK_CD_MELEE)
-	user.face_atom(src)
-	if(user.cmode)
-		if(user.rmb_intent)
-			user.rmb_intent.special_attack(user, src)
 
 /atom/proc/onkick(mob/user)
 	return
@@ -330,6 +321,11 @@
 /atom/proc/attack_hand_secondary(mob/user, list/modifiers)
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(user.cmode)
+		if(user.rmb_intent?.special_attack(user, src))
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 //Return a non FALSE value to cancel whatever called this from propagating, if it respects it.

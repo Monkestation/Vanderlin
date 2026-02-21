@@ -25,7 +25,6 @@
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	max_integrity = INTEGRITY_WORST
-	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
@@ -196,7 +195,6 @@
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
-	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/bronze
 	sellprice = 150 // A noble collector would love to get their hands on one of these
 
@@ -222,7 +220,6 @@
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
-	blade_dulling = DULLING_BASH
 	sellprice = 30
 	melting_material = /datum/material/steel
 	melt_amount = 90
@@ -288,11 +285,11 @@
 	desc = "A small sized iron shield, popular among mercenaries due to its light weight and ease of mobility."
 	icon_state = "ironbuckler"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
-	force = DAMAGE_SHIELD
-	wdefense = GREAT_PARRY
+	force = DAMAGE_SHIELD * 1.5
+	wdefense = ULTMATE_PARRY
 	wbalance = HARD_TO_DODGE // small, tiny shield
-	coverage = 45
-	max_integrity = INTEGRITY_STRONG - 50
+	coverage = 10
+	max_integrity = INTEGRITY_STANDARD
 	dropshrink = 0.75
 
 	resistance_flags = FIRE_PROOF
