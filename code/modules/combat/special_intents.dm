@@ -145,10 +145,11 @@
 	for(var/mob/living/victim in target)
 		if(victim == user)
 			continue
+
 		var/victim_dir = get_dir(victim, user)
 		var/throw_dir = turn(victim_dir, pick(90, 270))
-		var/turf/target = get_ranged_target_turf(victim, throw_dir, rand(1, 3))
-		victim.safe_throw_at(target, rand(1, 3), 1, user, force = MOVE_FORCE_STRONG)
+		var/turf/turf_target = get_ranged_target_turf(victim, throw_dir, rand(1, 3))
+		victim.safe_throw_at(turf_target, rand(1, 3), 1, user, force = MOVE_FORCE_STRONG)
 
 		victim.Slowdown(5)
 		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 2.5 SECONDS)
@@ -286,7 +287,7 @@
 		victim.Slowdown(5)
 
 		var/turf/throw_target = get_edge_target_turf(user, push_dir)
-		victim.safe_throw_at(target, 1, 1, user, force = MOVE_FORCE_EXTREMELY_STRONG)
+		victim.safe_throw_at(throw_target, 1, 1, user, force = MOVE_FORCE_EXTREMELY_STRONG)
 		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 4.5 SECONDS)
 
 		apply_generic_weapon_damage(user, parent, victim, parent.force, BLUNT, BODY_ZONE_CHEST, BCLASS_BLUNT)
