@@ -292,8 +292,8 @@
 	allowed_race = SPECIES_BASE_BODY
 
 /obj/item/clothing/cloak/pegasusknight
-	name = "checkered tabard"
-	desc = "A quilted checkered tabard."
+	name = "pegasus knight tabard"
+	desc = "A quilted checkered tabard that is typically worn by pegasus knights."
 	icon_state = "lakkaritabard"
 	item_state = "lakkaritabard"
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
