@@ -1,0 +1,1 @@
+{"author":"Ordosian","delete-after":true,"changes":[{"bugfix":"Guard command on Automaton is now 5 tiles instead of 3."},{"bugfix":"Follow command removed. Use Custom command instead."}]}

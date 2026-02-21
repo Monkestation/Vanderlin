@@ -1,6 +1,7 @@
 /mob/living/carbon/human/species/automaton
 	race = /datum/species/automaton
 	footstep_type = FOOTSTEP_MOB_METAL
+	job = "Automaton"
 
 /datum/species/automaton
 	name = "Automaton"
@@ -49,6 +50,11 @@
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTHEAT,
 		TRAIT_NOBREATH,
+		TRAIT_NOPAIN,
+		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
+		TRAIT_TOXIMMUNE,
+		TRAIT_FEARLESS
 	)
 
 	specstats_m = list(
@@ -72,13 +78,17 @@
 
 	allowed_pronouns = PRONOUNS_LIST_IT_ONLY
 
-	possible_ages = ALL_AGES_LIST
+	possible_ages = list(AGE_IMMORTAL)
 	use_skintones = TRUE
 
 	native_language = "Common"
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/automaton.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/m/automaton.dmi'
+
+	soundpack_m = /datum/voicepack/silent/m
+	soundpack_f = /datum/voicepack/silent/f
+
 
 	enflamed_icon = "widefire"
 

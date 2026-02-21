@@ -100,7 +100,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/airgun/shoot_with_empty_chamber(mob/user)
 		to_chat(user, span_warning("[src] has nothing to fire!"))
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attackby(obj/item/A, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attackby(obj/item/A, mob/user, list/modifiers)
 	if((istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing)))
 		if(!(user.is_holding(src)))
 			to_chat(user, span_warning("I need to hold \the [src] to load it!"))
@@ -113,7 +113,7 @@
 			return
 	. = ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_self(mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_self(mob/living/user, list/modifiers)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
@@ -139,7 +139,7 @@
 		return
 	. = ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_hand_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

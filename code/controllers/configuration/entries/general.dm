@@ -93,6 +93,8 @@
 
 /datum/config_entry/flag/allow_admin_asaycolor //Allows admins with relevant permissions to have a personalized asay color
 
+/datum/config_entry/flag/asay_simple_titles	// Use admin rank names as titles in asay/PMs
+
 /datum/config_entry/flag/allow_vote_restart	// allow votes to restart
 
 /datum/config_entry/flag/allow_vote_mode	// allow votes to change mode

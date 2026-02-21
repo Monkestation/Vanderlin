@@ -38,7 +38,7 @@
 		/datum/follower_command/protect,
 		/datum/follower_command/kill,
 		/datum/follower_command/guard_position,
-		/datum/follower_command/follow,
+	//	/datum/follower_command/follow,
 	)
 
 /datum/component/command_follower/Initialize(list/command_typepaths = list())
