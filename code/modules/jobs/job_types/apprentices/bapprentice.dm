@@ -50,6 +50,7 @@
 	name = JOB_SMITHY_APP
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/key/blacksmith
+	beltl = /obj/item/weapon/hammer/iron
 	backr = /obj/item/storage/backpack/satchel
 
 /datum/outfit/bapprentice/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

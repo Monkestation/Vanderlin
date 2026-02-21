@@ -24,6 +24,6 @@
 			return TRUE
 	if(istype(attacking_item, /obj/item/storage/crucible))
 		user.visible_message("<span class='info'>[user] places [attacking_item] onto [src].</span>")
-		attacking_item.forceMove(get_turf(src))
+		user.transferItemToLoc(attacking_item, get_turf(src), silent = TRUE)
 		return TRUE
 	return ..()

@@ -47,7 +47,7 @@
 		var/reagent_color = initial(material.color)
 		. += "It contains [UNIT_FORM_STRING(total_volume)] of <font color=[reagent_color]> [tag] [initial(material.name)].</font>"
 
-/obj/item/storage/crucible/process()
+/obj/item/storage/crucible/process(delta_time)
 	var/obj/machinery/light/fueled/smelter/smelter = loc
 	var/obj/machinery/light/fueled/light = locate(/obj/machinery/light/fueled) in get_turf(src)
 	if(istype(smelter) && smelter?.on)
@@ -77,13 +77,9 @@
 		if(crucible_temperature < initial(material.melting_point))
 			melting_pot -= item
 			continue
-		melting_pot |= item
-		melting_pot[item] += 5
+		melting_pot[item] += 5 * delta_time
 		if(melting_pot[item] >= melty)
 			melt_item(item)
-
-	if(reagents?.total_volume)
-		update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/storage/crucible/get_temperature()
 	return crucible_temperature
@@ -122,11 +118,10 @@
 		material = initial(ingot.melting_material)
 		melty = 100
 
-	data |= material
 	data[material] = melty
 
 	// Get quality from the item
-	var/item_quality = 1
+	var/item_quality = SMELTERY_QUALITY_NORMAL
 	if(istype(item, /obj/item/ore))
 		var/obj/item/ore/ore_item = item
 		item_quality = ore_item.recipe_quality
@@ -142,7 +137,10 @@
 	reagents.add_reagent(/datum/reagent/molten_metal, melty, data, crucible_temperature)
 	melting_pot -= item
 	qdel(item)
+
+/obj/item/storage/crucible/on_reagent_change(changetype)
 	update_appearance(UPDATE_OVERLAYS)
+	return NONE
 
 /obj/item/storage/crucible/random/Initialize()
 	. = ..()
@@ -158,8 +156,10 @@
 
 /obj/item/storage/crucible/test_crucible/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/molten_metal, 20, data = material_data_to_add, reagtemp = 4000)
-	update_appearance(UPDATE_OVERLAYS)
+	var/total_volume = 0
+	for(var/i in material_data_to_add)
+		total_volume += material_data_to_add[i]
+	reagents.add_reagent(/datum/reagent/molten_metal, total_volume, data = material_data_to_add, reagtemp = 4000)
 
 /obj/item/storage/crucible/test_crucible/bar
 	material_data_to_add = list(

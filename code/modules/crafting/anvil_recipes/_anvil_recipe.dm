@@ -37,6 +37,8 @@
 
 /datum/anvil_recipe/New(datum/P, ...)
 	parent = P
+	if(parent)
+		process_parent(parent)
 	. = ..()
 
 /datum/anvil_recipe/Destroy(force, ...)
@@ -45,6 +47,10 @@
 	required_material = null
 	created_item = null
 	return ..()
+
+/datum/anvil_recipe/proc/process_parent(parent)
+	if(isitem(parent))
+		material_quality += parent:recipe_quality
 
 /datum/anvil_recipe/proc/can_advance(mob/user)
 	if(progress == 100)

@@ -79,7 +79,7 @@
 
 	// Apply skill cap and absolute maximum
 	var/skill_cap = 1 + brewing_skill
-	return min(4, min(skill_cap, final_quality))
+	return min(COOK_QUALITY_VERYGOOD, min(skill_cap, final_quality))
 
 /datum/quality_calculator/brewing/apply_quality_to_item(obj/item/reagent_containers/glass/bottle/bottle, track_creation)
 	if(!istype(bottle))

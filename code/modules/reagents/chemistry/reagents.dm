@@ -76,7 +76,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	holder = null
 
 /// Applies this reagent to a [/mob/living]
-/datum/reagent/proc/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume, show_message = TRUE, touch_protection = 0)
+/datum/reagent/proc/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume, show_message = TRUE, touch_protection = 0)
 	SHOULD_CALL_PARENT(TRUE)
 
 	if((methods & penetrates_skin) && exposed_mob.reagents) //smoke, foam, spray
@@ -164,9 +164,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 // Called after add_reagents creates a new reagent.
 /datum/reagent/proc/on_new(list/incoming_data)
 	if(incoming_data)
-		LAZYINITLIST(data)
-		for(var/data_item in incoming_data)
-			data[data_item] = incoming_data[data_item]
+		data = incoming_data
 
 		if(!("quality" in data))
 			data["quality"] = base_recipe_quality
@@ -177,29 +175,16 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 		if("custom_tastes" in data)
 			taste_description = data["custom_tastes"]
 
-// Called when two reagents of the same are mixing.
+/// Called when two reagents of the same are mixing. Reminder that incoming_data is not automatically assigned to data here.
 /datum/reagent/proc/on_merge(list/incoming_data, other_volume)
 	SHOULD_CALL_PARENT(TRUE)
-	if(!length(incoming_data))
-		return
-	LAZYINITLIST(data)
-	for(var/data_item in incoming_data)
-		if(data_item == "quality") //special handling for this
-			var/current_quality = get_recipe_quality()
-			var/other_quality = incoming_data[data_item]
+	if(incoming_data && incoming_data["quality"]) //special handling for this
+		LAZYINITLIST(data)
+		var/current_quality = get_recipe_quality()
+		var/other_quality = incoming_data["quality"]
 
-			var/weighted_average = LERP(current_quality, other_quality, other_volume / (volume + other_volume))
-			data[data_item] = weighted_average
-		else
-			data[data_item] = incoming_data[data_item]
-
-	if("custom_name" in data)
-		name = data["custom_name"]
-	if("custom_scent" in data)
-		scent_description = data["custom_scent"]
-	if("custom_tastes" in data)
-		taste_description = data["custom_tastes"]
-	return
+		var/weighted_average = LERP(current_quality, other_quality, other_volume / volume)
+		data["quality"] = weighted_average
 
 /datum/reagent/proc/on_update(atom/A)
 	return

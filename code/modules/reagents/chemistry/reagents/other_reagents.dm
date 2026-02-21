@@ -254,15 +254,15 @@
  *	Water reaction to a mob
  */
 
-/datum/reagent/water/expose_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with water can help put them out!
-	if(!istype(M))
+/datum/reagent/water/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)//Splashing people with water can help put them out!
+	if(!istype(exposed_mob))
 		return
-	if(method & TOUCH)
-		var/turf/turf_check = get_turf(M)
+	if(methods & TOUCH)
+		var/turf/turf_check = get_turf(exposed_mob)
 		if(!istype(turf_check, /turf/open/water))
-			M.adjust_fire_stacks(-(reac_volume / 10))
-			M.SoakMob(FULL_BODY)
-		M.adjust_germ_level(-reac_volume * sanitization * 0.1)
+			exposed_mob.adjust_fire_stacks(-(reac_volume / 10))
+			exposed_mob.SoakMob(FULL_BODY)
+		exposed_mob.adjust_germ_level(-reac_volume * sanitization * 0.1)
 	return ..()
 
 

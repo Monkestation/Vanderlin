@@ -120,7 +120,7 @@
 	var/final_quality = cook_calc.calculate_final_quality()
 	qdel(cook_calc)
 
-	return CLAMP(final_quality, 1, 4)
+	return CLAMP(final_quality, COOK_QUALITY_NORMAL, COOK_QUALITY_VERYGOOD)
 
 /datum/container_craft/cooking/after_craft(atom/created_output, obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	. = ..()

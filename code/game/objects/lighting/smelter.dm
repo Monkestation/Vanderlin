@@ -73,7 +73,7 @@
 
 	if(tongs_used)
 		for(var/obj/item/storage/crucible/crucible in contents)
-			user.visible_message("[user] starts removing a crucible from [src]!", "You start removing a crucible from [src]!")
+			user.visible_message("[user] starts removing a crucible from [src]!", "You start removing a crucible from [src].")
 			if(!do_after(user, 1.5 SECONDS, src))
 				return
 			tongs_used.set_held_item(crucible)
@@ -117,10 +117,7 @@
 	smelting_item.forceMove(src)
 	contained_items[smelting_item] = SMELTERY_QUALITY_SPOIL
 	var/smelter_exp = user?.get_skill_level(/datum/skill/craft/blacksmithing, TRUE) // 0 to 6
-	if(smelter_exp < 6)
-		contained_items[smelting_item] = min(SMELTERY_QUALITY_EXCELLENT, floor(rand(smelter_exp*15 + 10, max(30, smelter_exp*25))/25)+1) // Math explained below
-	else
-		contained_items[smelting_item] = SMELTERY_QUALITY_EXCELLENT // Guarantees a return of 6 no matter how extra experience past 3000 you have.
+	contained_items[smelting_item] = min(SMELTERY_QUALITY_EXCELLENT, floor(rand(smelter_exp*15 + 10, max(30, smelter_exp*25))/25) + SMELTERY_QUALITY_SPOIL) // Math explained below
 	/*
 	RANDOMLY PICKED NUMBER ACCORDING TO SMELTER SKILL:
 		NO SKILL: 		between 10 and 30

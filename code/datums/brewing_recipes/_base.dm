@@ -163,4 +163,5 @@
 	var/final_quality = brew_calc.calculate_final_quality()
 	qdel(brew_calc)
 
-	return CLAMP(final_quality, 1, 4)
+	return CLAMP(final_quality, COOK_QUALITY_NORMAL, COOK_QUALITY_VERYGOOD)
+

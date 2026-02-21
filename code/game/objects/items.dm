@@ -288,7 +288,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	/// angle of the icon, these are used for attack animations
 	var/icon_angle = 50 // most of our icons are angled
 	///the processing quality we have
-	var/recipe_quality = 1
+	var/recipe_quality
 
 	// Lock related
 

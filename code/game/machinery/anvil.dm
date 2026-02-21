@@ -214,7 +214,6 @@
 	chosen_recipe = final_recipe_list[chosen_recipe]
 	if(!working_material.currecipe && chosen_recipe)
 		working_material.currecipe = new chosen_recipe.type(working_material)
-		working_material.currecipe.material_quality += working_material.recipe_quality
 		return TRUE
 
 /obj/machinery/anvil/proc/set_working_material(obj/item/new_material)

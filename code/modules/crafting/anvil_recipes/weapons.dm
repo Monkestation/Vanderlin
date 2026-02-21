@@ -46,7 +46,7 @@
 	created_item = /obj/item/weapon/mace/bludgeon/copper
 
 /datum/anvil_recipe/weapons/copper/cdagger
-	name = "x2 Copper Daggers"
+	name = "Copper Daggers"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/knife/copper
 	output_amount = 2
@@ -226,7 +226,7 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/iron/dagger_iron
-	name = "Dagger x2"
+	name = "Dagger"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/knife/dagger
 	output_amount = 2
@@ -497,7 +497,6 @@
 /datum/anvil_recipe/weapons/steel/greataxe
 	name = "Greataxe (+Bar, +Small log)"
 	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
-	recipe_name = "a Greataxe with a single blade."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe/steel
 	craftdiff = 4
@@ -505,7 +504,6 @@
 /datum/anvil_recipe/weapons/steel/doubleheaded_greataxe
 	name = "Double-headed Greataxe (+Bar x2), (+Small log)"
 	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel, /obj/item/ingot/steel)
-	recipe_name = "a Greataxe with two blades."
 	appro_skill = /datum/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/greataxe/steel/doublehead
 	craftdiff = 5
@@ -545,7 +543,6 @@
 
 /datum/anvil_recipe/weapons/steel/battleaxe
 	name = "Battle Axe (+Bar)"
-	recipe_name = "a Battle Axe"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/weapon/axe/battle
@@ -651,7 +648,6 @@
 
 /datum/anvil_recipe/weapons/steel/grandmace
 	name = "Grand Mace (+Bar, +Small Log)"
-	recipe_name = "a Grand Mace"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/goden/steel
@@ -792,7 +788,6 @@
 
 /datum/anvil_recipe/weapons/steel/elvenclub
 	name = "Steel Elven Warclub (+Bar)"
-	recipe_name = "a Steel Elven Warclub"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/elvenclub/steel
@@ -956,7 +951,7 @@
 
 /datum/anvil_recipe/weapons/atgervi_axe
 	name = "Bearded axe (+1 Small log)"
-	req_bar = /obj/item/ingot/steel
+	required_material = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/axe/steel/atgervi
 	craftdiff = 3

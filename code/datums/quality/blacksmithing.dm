@@ -16,12 +16,14 @@
 	var/performance_quality = 0
 	var/difficulty_modifier = 0
 	var/minigame_plays = 0
+	var/skill_randomization = 0
 
 /datum/quality_calculator/blacksmithing/New(mat_qual = 0, skill_qual = 0, components = 1, reagent_qual = 0, perf_qual = 0, diff_mod = 0, mini_play = 1)
 	..()
 	performance_quality = perf_qual
 	difficulty_modifier = diff_mod
 	minigame_plays = mini_play
+	skill_randomization = rand(0, 0.5) // just a healthy amount of randomization
 
 // REMINDERS:
 // skill ranges from 0 to 6
@@ -31,7 +33,7 @@
 // Tier differences are between 2 and 3 (for positive ones)
 /datum/quality_calculator/blacksmithing/calculate_final_quality()
 	var/avg_skill = floor(skill_quality / minigame_plays)
-	avg_skill = min(avg_skill + rand(0, 0.5), 6) // just a healthy amount of randomization
+	avg_skill = min(avg_skill + skill_randomization, SKILL_LEVEL_LEGENDARY) // just a healthy amount of randomization
 	var/avg_material = floor(material_quality / num_components)
 	var/avg_performance = floor(performance_quality / minigame_plays)
 
@@ -42,9 +44,9 @@
 	* Difficulty (MINOR) : Makes harder recipes have lower qualities in general
 	*/
 	var/skill_component = (avg_skill / 6) * (-BLACKSMITH_QUALITY_SPOILED + BLACKSMITH_QUALITY_FLAWLESS)
-	var/material_component = ((avg_material - 3) / 3) * 6
+	var/material_component = ((avg_material - SMELTERY_QUALITY_NORMAL) / SMELTERY_QUALITY_NORMAL) * 6
 	var/performance_component = (avg_performance / 100) * 3
-	var/difficulty_penalty = difficulty_modifier * 0.2
+	var/difficulty_penalty = difficulty_modifier * 0.25
 
 	var/final_quality = skill_component + material_component + performance_component - difficulty_penalty
 	final_quality += BLACKSMITH_QUALITY_SPOILED
@@ -102,15 +104,9 @@
 		var/obj/item/restraints/legcuffs/beartrap/B = target
 		B.trap_damage *= modifier
 
-	// Clothing/Armor
-	// else if(istype(target, /obj/item/clothing))
-	// 	var/obj/item/clothing/C = target
-	// 	if(C.integrity_failure)
-	// 		C.integrity_failure /= modifier
-		// if(C.armor)
-		// 	C.armor = C.armor.multiplymodifyAllRatings(modifier)
-		// if(C.equip_delay_self)
-		// 	C.equip_delay_self *= modifier
+	// In order to preserve material quality information for smelting
+	var/avg_material = floor(material_quality / num_components)
+	target.set_quality(avg_material)
 
 /datum/quality_calculator/blacksmithing/track_item_creation(obj/item/target, final_quality)
 	// Track masterworks if enabled

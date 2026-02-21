@@ -6,7 +6,7 @@
 	resistance_flags = FIRE_PROOF
 	grid_width = 32
 	grid_height = 32
-	melt_amount = 120
+	melt_amount = 100
 	recipe_quality = SMELTERY_QUALITY_NORMAL
 	var/atom/mill_result // What this ore becomes when milled
 

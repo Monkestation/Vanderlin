@@ -6,12 +6,12 @@
 
 	var/datum/material/largest_metal
 
-/datum/reagent/molten_metal/expose_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
+/datum/reagent/molten_metal/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume, show_message = TRUE, touch_protection = 0)
 	. = ..()
-	if(method & INGEST)
+	if(methods & INGEST)
 		for(var/datum/material_trait/trait as anything in initial(largest_metal.traits))
 			var/datum/material_trait/new_trait = GLOB.material_traits[trait]
-			new_trait.on_consume(M, reac_volume)
+			new_trait.on_consume(exposed_mob, reac_volume)
 
 /datum/reagent/molten_metal/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
@@ -26,27 +26,12 @@
 	if(!length(incoming_data))
 		return
 
-	var/list/materials = list()
-	for(var/datum/material/material as anything in incoming_data)
-		if(!ispath(material))
-			continue
-		materials |= material
-
-	if(length(materials) == 1)
-		var/datum/material/material_type = materials[1]
-		name = "Molten [initial(material_type.name)]"
-	else
-		name = "Molten Metals"
-
-	data = incoming_data
 	try_metal_merge()
-	find_largest_metal()
 
 /datum/reagent/molten_metal/on_merge(list/incoming_data)
 	. = ..()
 	if(!length(incoming_data))
 		return
-	name = "Molten Metals"
 
 	for(var/datum/material/material as anything in incoming_data)
 		if(!ispath(material))
@@ -55,15 +40,13 @@
 		data[material] += incoming_data[material]
 
 	try_metal_merge()
-	find_largest_metal()
 
 /datum/reagent/molten_metal/on_temp_change(chem_temp)
 	. = ..()
 	if(!chem_temp)
 		return
-	try_metal_merge()
-	find_largest_metal()
 
+	try_metal_merge()
 
 /datum/reagent/molten_metal/proc/try_metal_merge()
 	for(var/datum/molten_recipe/recipe as anything in GLOB.molten_recipes)
@@ -80,14 +63,20 @@
 			data |= material
 			data[material] += recipe.output[material] * multiplier
 
-	if(length(data) == 1)
-		var/datum/material/material_type = data[1]
-		name = "Molten [initial(material_type.name)]"
+	var/name_found = FALSE
+	for(var/datum/material/material_type as anything in data)
+		if(!ispath(material_type))
+			continue
+		if(!name_found)
+			name = "Molten [initial(material_type.name)]"
+			name_found = TRUE
+		else
+			name = "Molten Metals"
+			break
 
 	find_largest_metal()
 
 /datum/reagent/molten_metal/proc/find_largest_metal()
-
 	var/largest
 	for(var/datum/material/material as anything in data)
 		if(!ispath(material))

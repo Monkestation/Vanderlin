@@ -85,7 +85,7 @@
 
 	// Apply skill cap and absolute maximum
 	var/skill_cap = 1 + cooking_skill
-	return min(4, min(skill_cap, final_quality))
+	return min(COOK_QUALITY_VERYGOOD, min(skill_cap, final_quality))
 
 /datum/quality_calculator/cooking/apply_quality_to_item(obj/item/reagent_containers/food/snacks/food_item, track_creation)
 	if(!istype(food_item))
