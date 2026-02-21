@@ -53,13 +53,16 @@
 	// Heal different damage types
 	owner.heal_overall_damage(bashing_lethal_heal, aggravated_heal)
 	owner.adjustToxLoss(-aggravated_heal * 0.5)
+	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
+		owner.blood_volume = min(owner.blood_volume + 10 * level, BLOOD_VOLUME_NORMAL)
 
 	// Heal wounds (only at higher levels)
-	if(length(owner.get_wounds()) && level >= 3)
+	if(length(owner.get_wounds()))
 		var/wounds_to_heal = min(1, length(owner.get_wounds()))
 		for(var/i in 1 to wounds_to_heal)
 			var/datum/wound/wound = owner.get_wounds()[i]
-			wound.heal_wound(500 * level)
+			if(wound.severity <= level)
+				wound.heal_wound(bashing_lethal_heal)
 
 	// Brain damage healing (only at higher levels)
 	if(level >= 4)

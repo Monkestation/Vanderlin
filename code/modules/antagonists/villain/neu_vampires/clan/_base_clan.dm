@@ -5,7 +5,7 @@ This datum stores a declarative description of clans, in order to make an instan
 And it also helps for the character set panel
 */
 /datum/clan
-	var/name = "Caitiff"
+	var/name = "Base Clan"
 	var/desc = "The clanless. The rabble. Of no importance."
 
 	var/list/clan_covens = list() //coven datums
@@ -29,7 +29,7 @@ And it also helps for the character set panel
 		TRAIT_LIMBATTACHMENT,
 	)
 
-	var/blood_preference = BLOOD_PREFERENCE_FANCY | BLOOD_PREFERENCE_HOLY | BLOOD_PREFERENCE_EUPHORIC
+	var/blood_preference = null
 	var/blood_disgust = BLOOD_PREFERENCE_RATS
 
 	var/list/disliked_clans = list()
@@ -107,6 +107,7 @@ And it also helps for the character set panel
 		H.has_reflection = FALSE
 		H.cut_overlay(H.reflective_icon)
 		H.mob_biotypes = MOB_UNDEAD
+		H.physiology?.bleed_mod /= 2
 
 		if(alt_sprite)
 			if (!alt_sprite_greyscale)
@@ -276,6 +277,7 @@ And it also helps for the character set panel
 	vampire.has_reflection = TRUE
 	vampire.create_reflection()
 	vampire.update_reflection()
+	vampire.physiology?.bleed_mod *= 2
 
 	clan_members -= vampire
 

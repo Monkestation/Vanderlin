@@ -1,9 +1,9 @@
 /datum/reagent/blood
 	// vitae is not the actual amount of vitae in the blood, it's a multiplier for how much vitae is in each unit of blood.
-	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"preferences"=BLOOD_PREFERENCE_DEAD, "vitae"=0)
+	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"preferences"=null, "vitae"=0)
 	name = "Blood"
 	color = COLOR_BLOOD
-	metabolization_rate = 5 //fast rate so it disappears fast.
+	metabolization_rate = 20 //SUPER fast
 	taste_description = "iron"
 	taste_mult = 1.3
 	glass_icon_state = "glass_red"
@@ -34,7 +34,10 @@
 	if(!(. && method & (INJECT|INGEST)))
 		return
 	SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
-	if(L.clan && data["vitae"] > 0)
+	var/datum/dna/L_dna = L.has_dna()
+	var/drinking_self = L_dna?.unique_enzymes && L_dna.unique_enzymes == data["blood_DNA"]
+	//if the dna matches, you're drinking your own blood freak.
+	if(!drinking_self && L.clan && data["vitae"] > 0)
 		var/vitae = L.clan.handle_bloodsuck(L, data["preferences"], reac_volume * data["vitae"])
 		L.adjust_bloodpool(vitae)
 		L.adjust_hydration(vitae * 0.1)
@@ -47,7 +50,7 @@
 		L.blood_volume = min(L.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 		return
 	if(method & INGEST)
-		if(toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) || HAS_TRAIT(L, TRAIT_NASTY_EATER)))
+		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) || HAS_TRAIT(L, TRAIT_NASTY_EATER))))
 			if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
 				L.adjust_hydration(reac_volume * 0.2)
 			if(L.blood_volume < BLOOD_VOLUME_NORMAL)

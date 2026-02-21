@@ -26,7 +26,6 @@
 	leader = /datum/clan_leader/thronleer
 
 /datum/clan/thronleer/get_blood_preference_string()
-	//return "prepared blood" we dont have this yet...
 	return "aristocrats, silver-blessed, and the holy"
 
 /datum/clan/thronleer/get_downside_string()

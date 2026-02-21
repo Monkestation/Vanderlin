@@ -49,9 +49,8 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 	blood_data["preferences"] = get_blood_prefs(sampled_from)
 	blood_data["vitae"] = vitae
-	if(blood_data["ckey"]) // double from players
+	if(blood_data["ckey"] && !(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))) // double from players, vamps give half vitae though
 		blood_data["vitae"] *= 2
-
 	return blood_data
 
 /datum/blood_type/proc/get_blood_prefs(mob/living/sampled_from)
@@ -111,7 +110,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 	blood_data["preferences"] = get_blood_prefs(sampled_from)
 	blood_data["vitae"] = vitae
-	if(blood_data["ckey"]) // double from players
+	if(blood_data["ckey"] && !(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))) // double from players, vamps give half vitae though
 		blood_data["vitae"] *= 2
 
 	return blood_data

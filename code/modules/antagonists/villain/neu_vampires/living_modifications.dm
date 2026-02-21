@@ -295,7 +295,6 @@
 
 	// Handle low bloodpool effects
 	handle_bloodpool_effects()
-	blood_volume = BLOOD_VOLUME_SAFE
 
 	// Coffin regeneration
 	var/total_damage = getBruteLoss() + getFireLoss()

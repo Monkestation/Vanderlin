@@ -17,20 +17,20 @@
 		return
 	var/mob/living/carbon/human/victim = bite.grabbed
 	if(!(victim.ckey || ckey(victim.last_mind?.key)))
-		to_chat(src, span_warning("[victim.p_theyre()] too simple to be sired."))
+		to_chat(src, span_warning("[victim.p_theyre(TRUE)] too simple to be sired."))
 		return
 	if(HAS_TRAIT(victim, "offered_vampirism"))
-		to_chat(src, span_warning("[victim.p_theyve()] already been offered a blessing."))
+		to_chat(src, span_warning("[victim.p_theyve(TRUE)] already been offered a blessing."))
 		return
 	var/obj/item/organ/brain/victim_brain = victim.getorgan(/obj/item/organ/brain)
 	if(!victim_brain)
-		to_chat(src, span_warning("[victim.p_their()] brain is gone."))
+		to_chat(src, span_warning("[victim.p_their(TRUE)] brain is gone."))
 		return
 	if(victim_brain.brain_death)
-		to_chat(src, span_warning("[victim.p_their()] brain is too damaged."))
+		to_chat(src, span_warning("[victim.p_their(TRUE)] brain is too damaged."))
 		return
 	if(victim.blood_volume > BLOOD_VOLUME_BAD)
-		to_chat(src, span_warning("[victim.p_their()] blood is not thin enough to sire [victim.p_them()]."))
+		to_chat(src, span_warning("[victim.p_their(TRUE)] blood is not thin enough to sire [victim.p_them()]."))
 		return
 	var/datum/antagonist/zombie/Z = victim.mind.has_antag_datum(/datum/antagonist/zombie)
 	if(Z?.revived)
@@ -42,7 +42,7 @@
 		to_chat(src, span_warning("[victim] tastes of beast. [victim.p_they()] will not sire."))
 		return
 	if(stat == DEAD && (world.time - victim.timeofdeath) > 4 MINUTES)
-		to_chat(src, span_warning("[victim.p_their()] body has gone stiff. Too far gone to sire."))
+		to_chat(src, span_warning("[victim.p_their(TRUE)] body has gone stiff. Too far gone to sire."))
 		return
 	if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
 		to_chat(src, span_warning("I decide [victim] is unworthy."))

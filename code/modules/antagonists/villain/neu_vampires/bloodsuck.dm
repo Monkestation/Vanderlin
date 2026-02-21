@@ -73,9 +73,11 @@
 	return drink_amt
 
 /mob/living/carbon/human/proc/vampire_conversion_prompt(mob/living/carbon/sire)
-	var/datum/antagonist/vampire/VDrinker = sire?.mind?.has_antag_datum(/datum/antagonist/vampire)
-	if(!istype(VDrinker))
+	if(HAS_TRAIT(src, "offered_vampirism"))
+		return // my testing allowed to double up the prompts, so just incase
+	if(!istype(sire?.mind?.has_antag_datum(/datum/antagonist/vampire), /datum/antagonist/vampire) || !sire.clan)
 		return
+	//we've confirmed a sire by this point
 	var/mob/client_victim = src
 	if(!client_victim.client)
 		client_victim = get_ghost(FALSE, TRUE)
@@ -95,14 +97,12 @@
 		var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
 		B?.brain_death = TRUE
 		death()
-		if(!QDELETED(sire))
-			sire.adjust_bloodpool(500)
+		if(!QDELETED(sire)) // sire coulda gibbed or some shit
 			to_chat(sire, span_warning("[src] has refused your blessing."))
 		return
 	grab_ghost(TRUE, TRUE)
-	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS), 100, TRUE)
+	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS), 500, TRUE)
 	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
 	set_bloodpool(500)
-	if(!QDELETED(sire))
-		visible_message(span_danger("Some dark energy begins to flow from [sire] into [src]..."))
+	visible_message(span_danger("Some dark energy begins to flow into [src]..."))
 	visible_message(span_red("[src] rises as a new spawn!"))

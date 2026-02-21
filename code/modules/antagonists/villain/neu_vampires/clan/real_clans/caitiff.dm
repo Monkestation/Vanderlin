@@ -10,8 +10,14 @@
     )
 	force_VL_if_clan_is_empty = FALSE
 	selectable_by_vampires = FALSE
+	//lmaoooooo
 	clane_traits = list(
-		TRAIT_BLOODDRINKER
+		TRAIT_STRONGBITE,
+		TRAIT_BLOODDRINKER,
+		TRAIT_STEELHEARTED,
+		TRAIT_VAMP_DREAMS,
+		TRAIT_DARKVISION,
+		TRAIT_NOBREATH,
 	)
 
 /datum/clan/caitiff/apply_clan_components(mob/living/carbon/human/H)
