@@ -111,6 +111,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .undead					{font-family: "FriskyVampire", Pterra;}
 .orc					{font-family: "Thief by The Riddler", Pterra;}
 .otavan					{font-family: "Notredame", Pterra; font-size: 200%;}
+.gronnic				{font-family: "Jorvik Informal", Pterra;}
 .beast					{font-family: "Thief by The Riddler", Pterra;}
 .deepspeak				{font-family: "Underwater Love", Pterra;}
 
