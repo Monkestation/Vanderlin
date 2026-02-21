@@ -140,9 +140,9 @@
 
 	var/list/turf/affected_turfs = list()
 	for(var/list/values in tile_coordinates)
-		var/coord_x = values[1]
-		var/coord_y = values[2]
-		var/delay = values[3]
+		var/coord_x = LAZYACCESS(values, 1)
+		var/coord_y = LAZYACCESS(values, 2)
+		var/delay = LAZYACCESS(values, 3)
 
 		if(respect_dir)
 			switch(user.dir)
