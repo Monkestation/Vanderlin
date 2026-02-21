@@ -71,7 +71,7 @@ function createButton(name, command) {
 
   button.id = command;
   button.textContent = name;
-  button.className = "button";
+  button.className = "top-item";
   button.style.order = name.charCodeAt(0);
 
   button.onclick = function () {

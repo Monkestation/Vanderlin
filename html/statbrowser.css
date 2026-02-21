@@ -3,11 +3,6 @@
   src: url('pterra.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: 'Blackmoor LET';
-  src: url('BlackmoorLET.ttf') format('truetype');
-}
-
 .light:root {
   --color-base: #ffffff;
   --scrollbar-base: #f2f2f2;
@@ -55,6 +50,8 @@ img {
 
 #topbar {
   display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.25em 0.25em 0;
@@ -91,7 +88,6 @@ img {
 }
 
 .button {
-  font-family: "Blackmoor LET", Pterra;
   display: inline-table;
   cursor: pointer;
   user-select: none;
@@ -116,6 +112,24 @@ img {
   background-color: #dfdfdf;
   color: black;
   border-bottom-color: #000000;
+}
+
+.top-item {
+  cursor: pointer;
+  display: inline-table;
+  user-select: none;
+  -ms-user-select: none; /* Remove after Byond 516 */
+  text-align: center;
+  font-size: 0.9em;
+  width: 100%;
+  padding: 0.5em 0.5em 0.4em;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0.25em;
+}
+
+.top-item:hover {
+  background-color: #ececec;
 }
 
 .statcontent {
@@ -270,7 +284,8 @@ body.dark {
   color: hsl(0, 12%, 54%);
 }
 
-.dark .button:hover {
+.dark .button:hover,
+.dark .top-item:hover {
   background-color: hsl(0, 2%, 26%);
 }
 
