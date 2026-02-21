@@ -138,10 +138,11 @@
 					playsound(T,'sound/items/empty_shovel.ogg', 100, TRUE)
 					update_appearance(UPDATE_ICON_STATE)
 					return
-			else
+			else if(!heldclod)
 				if(istype(T, /turf/open/floor/dirt/road) || istype(T, /turf/open/floor/dirt))
 					if(holie)
 						holie.attackby(src, user)
+						return
 					else
 						if(istype(T, /turf/open/floor/dirt/road))
 							new /obj/structure/closet/dirthole(T)
@@ -150,11 +151,12 @@
 						heldclod = new /obj/item/natural/clod/dirt(src)
 						playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
 						update_appearance(UPDATE_ICON_STATE)
+						return
 				else
 					heldclod = new /obj/item/natural/clod/sand(src)
 					playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
 					update_appearance(UPDATE_ICON_STATE)
-			return
+					return
 		if(heldclod)
 			if(istype(T, /turf/open/water))
 				qdel(heldclod)
