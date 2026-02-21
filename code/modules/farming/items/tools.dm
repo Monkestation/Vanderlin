@@ -32,7 +32,7 @@
 	associated_skill = /datum/skill/combat/whipsflails
 
 /obj/item/weapon/thresher/military
-	name = "military flail"
+	name = "studded flail"
 	desc = "Crushes skulls, or grain."
 	icon_state = "military"
 	force = DAMAGE_WEAK_FLAIL - 5
@@ -322,7 +322,7 @@
 	force = DAMAGE_STAFF
 	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	throwforce = DAMAGE_SPEAR
-	wdefense = MEDIOCRE_PARRY
+	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH)
 	gripped_intents = list(DUMP_INTENT,POLEARM_BASH,POLEARM_THRUST)

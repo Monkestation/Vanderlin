@@ -520,6 +520,15 @@ SUBSYSTEM_DEF(triumphs)
 
 	write_save(target_file, data)
 
+/datum/controller/subsystem/triumphs/proc/reset_all_data()
+	for(var/client/client as anything in GLOB.clients)
+		var/client_key = client?.ckey
+		if(client_key)
+			reset_or_create_data(client_key)
+
+	for(var/ckey in triumph_amount_cache)
+		reset_or_create_data(ckey)
+
 /datum/controller/subsystem/triumphs/proc/reset_triumphs(target_ckey)
 	if(!target_ckey)
 		return
@@ -536,6 +545,15 @@ SUBSYSTEM_DEF(triumphs)
 	data[TRIUMPH_KEY_AMOUNT] = 0
 
 	write_save(target_file, data)
+
+/datum/controller/subsystem/triumphs/proc/reset_all_triumphs()
+	for(var/client/client as anything in GLOB.clients)
+		var/client_key = client?.ckey
+		if(client_key)
+			wipe_target_triumphs(client_key)
+
+	for(var/ckey in triumph_amount_cache)
+		wipe_target_triumphs(ckey)
 
 /*
 	TRIUMPH LEADERBOARD

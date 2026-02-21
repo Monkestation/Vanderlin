@@ -38,7 +38,7 @@
 	Never ask them their opinions of Grenzelhoft."
 
 /datum/culture/universal/grenzelhoft
-	name = "Grenzelholf"
+	name = "Grenzelhoft"
 	description = "Known for their mighty weiners, meals, and talented jesters. \
 	Potentially some of the most grim, bigoted people one could ever meet. Never ask them their opinions of Wintermare."
 
