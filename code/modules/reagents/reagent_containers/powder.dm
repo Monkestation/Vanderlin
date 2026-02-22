@@ -339,12 +339,12 @@
 	..()
 
 /obj/item/reagent_containers/powder/flashpowder/proc/boom()
-	turf/target_turf = get_turf(src)
-	exp_devi = 0
-	exp_heavy = 0
-	exp_light = 1
-	exp_flash = 10
-	explode_sound = 'sound/misc/explode/bomb.ogg'
+	var/turf/target_turf = get_turf(src)
+	var/exp_devi = 0
+	var/exp_heavy = 0
+	var/exp_light = 1
+	var/exp_flash = 10
+	var/explode_sound = 'sound/misc/explode/bomb.ogg'
 	explosion(target_turf, exp_devi, exp_heavy, exp_light, exp_flash, soundin = explode_sound)
 
 	qdel(src)
