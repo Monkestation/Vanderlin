@@ -16,7 +16,7 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 	"Dendor Praise" = list("text" = "DENDOR BE PRAISED", "file" = 'sound/vo/automaton/dendorpraise.ogg'),
 	"Destroying" = list("text" = "DESTROYING", "file" = 'sound/vo/automaton/destroying.ogg'),
 	"Dreamless Pause" = list("text" = "ENTERING DREAMLESS PAUSE", "file" = 'sound/vo/automaton/dreamlesspause.ogg'),
-	"Elf Detected" = list("text" = "ELF DETECTED", "file" = 'sound/vo/automaton/elfdetected.ogg'),
+	//"Elf Detected" = list("text" = "ELF DETECTED", "file" = 'sound/vo/automaton/elfdetected.ogg'),
 	"Eora Praise" = list("text" = "EORA WATCHES OVER US", "file" = 'sound/vo/automaton/eorapraise.ogg'),
 	"Eora Praise 2" = list("text" = "IN EORA'S NAME", "file" = 'sound/vo/automaton/eorapraise2.ogg'),
 	"Error" = list("text" = "ERROR", "file" = 'sound/vo/automaton/error.ogg'),
@@ -36,8 +36,8 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 	"I Am The Children Of Man" = list("text" = "I AM THE CHILDREN OF MAN", "file" = 'sound/vo/automaton/iamthechildrenofman.ogg'),
 	"I Cannot Comply" = list("text" = "I CANNOT COMPLY", "file" = 'sound/vo/automaton/icannotcomply.ogg'),
 	"Identity Authorized" = list("text" = "IDENTITY AUTHORIZED", "file" = 'sound/vo/automaton/identityauthorized.ogg'),
-	"I Hate Women" = list("text" = "I HATE WOMEN", "file" = 'sound/vo/automaton/ihatewomen.ogg'),
-	"I Love Men" = list("text" = "I LOVE MEN", "file" = 'sound/vo/automaton/ilovemen.ogg'),
+	//"I Hate Women" = list("text" = "I HATE WOMEN", "file" = 'sound/vo/automaton/ihatewomen.ogg'),
+	//"I Love Men" = list("text" = "I LOVE MEN", "file" = 'sound/vo/automaton/ilovemen.ogg'),
 	"Iron Within" = list("text" = "IRON WITHIN", "file" = 'sound/vo/automaton/ironwithin.ogg'),
 	"I Will Comply" = list("text" = "I WILL COMPLY", "file" = 'sound/vo/automaton/iwillcomply.ogg'),
 	"Jester Detected" = list("text" = "JESTER DETECTED", "file" = 'sound/vo/automaton/jesterdetected.ogg'),
@@ -49,36 +49,38 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 	"Necra Praise" = list("text" = "NECRA BE PRAISED", "file" = 'sound/vo/automaton/necrapraise.ogg'),
 	"No" = list("text" = "NO", "file" = 'sound/vo/automaton/No.ogg'),
 	"Noc Praise" = list("text" = "NOC BE PRAISED", "file" = 'sound/vo/automaton/nocpraise.ogg'),
-	"No Women Allowed" = list("text" = "NO WOMEN ALLOWED", "file" = 'sound/vo/automaton/nowomenallowed.ogg'),
-	"Obnoxiously Long Scream" = list("text" = "AAAAAAAAAAAAAAAAAAHHHHH", "file" = 'sound/vo/automaton/obnoxiouslylongscream.ogg'),
-	"Oh Shit Soldier Grenade" = list("text" = "OH SHIT SOLDIER GRENADE OORAH", "file" = 'sound/vo/automaton/OHSHITSOLDIERGRENADEOORAH.ogg'),
+	//"No Women Allowed" = list("text" = "NO WOMEN ALLOWED", "file" = 'sound/vo/automaton/nowomenallowed.ogg'),
+	//"Obnoxiously Long Scream" = list("text" = "AAAAAAAAAAAAAAAAAAHHHHH", "file" = 'sound/vo/automaton/obnoxiouslylongscream.ogg'),
+	//"Oh Shit Soldier Grenade" = list("text" = "OH SHIT SOLDIER GRENADE OORAH", "file" = 'sound/vo/automaton/OHSHITSOLDIERGRENADEOORAH.ogg'),
 	"Organic Presence Detected" = list("text" = "ORGANIC PRESENCE DETECTED", "file" = 'sound/vo/automaton/organicpresencedetected.ogg'),
 	"Pestra Praise" = list("text" = "PESTRA BE PRAISED", "file" = 'sound/vo/automaton/pestrapraise.ogg'),
 	"Psydon Lives" = list("text" = "PSYDON LIVES", "file" = 'sound/vo/automaton/PSYDONLIVES.ogg'),
 	"Ravox Praise" = list("text" = "RAVOX BE PRAISED", "file" = 'sound/vo/automaton/ravoxpraise.ogg'),
-	"Schmelf Detected" = list("text" = "SCHMELF DETECTED", "file" = 'sound/vo/automaton/schmelfdetected.ogg'),
+	//"Schmelf Detected" = list("text" = "SCHMELF DETECTED", "file" = 'sound/vo/automaton/schmelfdetected.ogg'),
 	"Silence Organic" = list("text" = "SILENCE, ORGANIC", "file" = 'sound/vo/automaton/silenceorganic.ogg'),
 	"Status Critical" = list("text" = "STATUS CRITICAL", "file" = 'sound/vo/automaton/statuscritical.ogg'),
 	"Status Critical 2" = list("text" = "CRITICAL SYSTEM FAILURE", "file" = 'sound/vo/automaton/statuscritical2.ogg'),
 	"To Bones" = list("text" = "TO BONES", "file" = 'sound/vo/automaton/tobones.ogg'),
 	"Warning" = list("text" = "WARNING", "file" = 'sound/vo/automaton/warning.ogg'),
 	"We Cannot Expect God" = list("text" = "WE CANNOT EXPECT GOD TO DO ALL THE WORK", "file" = 'sound/vo/automaton/wecannotexpectgodtodoallthework.ogg'),
-	"Woman Detected" = list("text" = "WOMAN DETECTED", "file" = 'sound/vo/automaton/womandetected.ogg'),
+	//"Woman Detected" = list("text" = "WOMAN DETECTED", "file" = 'sound/vo/automaton/womandetected.ogg'),
 	"Wrench Bones" = list("text" = "WRENCH BONES", "file" = 'sound/vo/automaton/wrenchbones.ogg'),
 	"Xylix Praise" = list("text" = "XYLIX BE PRAISED", "file" = 'sound/vo/automaton/xylixpraise.ogg'),
 	"Yes" = list("text" = "YES", "file" = 'sound/vo/automaton/Yes.ogg'),
 	"Your Bones Will Never Be Found" = list("text" = "YOUR BONES WILL NEVER BE FOUND", "file" = 'sound/vo/automaton/yourboneswillneverbefound.ogg'),
-	"Your Lux Will Be Mine" = list("text" = "YOUR LUX WILL BE MINE", "file" = 'sound/vo/automaton/yourluxwillbemine.ogg')
+	//"Your Lux Will Be Mine" = list("text" = "YOUR LUX WILL BE MINE", "file" = 'sound/vo/automaton/yourluxwillbemine.ogg')
 ))
 
-/datum/action/automaton_voice
+/datum/action/cooldown/automaton_voice
 	name = "Voice Line"
 	desc = "Play an automaton voice line"
 	button_icon_state = "voice"
 	check_flags = AB_CHECK_CONSCIOUS
 	var/voice_line_key = null
+	cooldown_time = 2 SECONDS
+	shared_cooldown = MOB_SHARED_COOLDOWN_1
 
-/datum/action/automaton_voice/New(Target, key)
+/datum/action/cooldown/automaton_voice/New(Target, key)
 	..()
 	if(key)
 		voice_line_key = key
@@ -87,7 +89,7 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 			name = key
 			desc = "Play: [voice_data["text"]]"
 
-/datum/action/automaton_voice/Trigger(trigger_flags)
+/datum/action/cooldown/automaton_voice/Trigger(trigger_flags)
 	if(!ishuman(owner))
 		return
 
@@ -126,13 +128,13 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 		return
 
 	// Check if action already exists
-	for(var/datum/action/automaton_voice/AVA in H.actions)
+	for(var/datum/action/cooldown/automaton_voice/AVA in H.actions)
 		if(AVA.voice_line_key == choice)
 			AVA.Remove(H)
 			to_chat(H, span_notice("Removed '[choice]' from quick actions."))
 			return
 
 	// Create new action
-	var/datum/action/automaton_voice/new_action = new(H, choice)
+	var/datum/action/cooldown/automaton_voice/new_action = new(H, choice)
 	new_action.Grant(H)
 	to_chat(H, span_notice("Added '[choice]' to quick actions."))

@@ -6,7 +6,19 @@
  * @return TRUE if parry successful, FALSE otherwise
  */
 /mob/living/proc/attempt_parry(datum/intent/intenty, mob/living/user, prob2defend)
-	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS) || (pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) || (pulling && grab_state >= GRAB_AGGRESSIVE) ||  (world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte)) || has_status_effect(/datum/status_effect/debuff/feinted) || has_status_effect(/datum/status_effect/debuff/riposted) || (intenty && !intenty.canparry))
+	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS))
+		return FALSE
+
+	if(intenty && !intenty.canparry)
+		return FALSE
+
+	if(incapacitated())
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		return FALSE
+
+	if(world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
 
 	last_parry = world.time

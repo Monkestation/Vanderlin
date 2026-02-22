@@ -271,13 +271,13 @@
 /datum/repeatable_crafting_recipe/survival/clay
 	name = "clay lump"
 	requirements = list(
-		/obj/item/natural/dirtclod= 3,
+		/obj/item/natural/clod/dirt= 3,
 	)
 	reagent_requirements = list(
 		/datum/reagent/water = 10
 	)
-	attacked_atom = /obj/item/natural/dirtclod
-	starting_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
+	starting_atom = /obj/item/natural/clod/dirt
 	output = /obj/item/natural/clay
 
 /datum/repeatable_crafting_recipe/survival/wicker_basket

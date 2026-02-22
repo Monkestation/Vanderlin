@@ -1144,7 +1144,7 @@
 	if(in_range(user, src) || isobserver(user))
 		user.changeNext_move(CLICK_CD_MELEE)
 		var/m
-		var/list/verses = world.file2list(verses_file)
+		var/list/verses = file2list(verses_file)
 		m = pick(verses)
 		if(m)
 			user.say(m)

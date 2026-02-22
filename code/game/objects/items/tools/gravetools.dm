@@ -23,7 +23,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
-	var/obj/item/natural/dirtclod/heldclod
+	var/obj/item/natural/clod/heldclod
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	associated_skill = /datum/skill/combat/polearms
@@ -46,7 +46,7 @@
 
 /obj/item/weapon/shovel/update_icon_state()
 	. = ..()
-	icon_state = "[heldclod ? "dirt" : ""][initial(icon_state)]"
+	icon_state = "[heldclod ? "[heldclod.clod_type]" : ""][initial(icon_state)]"
 
 /datum/intent/shovelscoop
 	name = "scoop"
@@ -96,7 +96,7 @@
 	var/datum/intent/used_intent = user.used_intent
 
 	if(istype(used_intent, /datum/intent/shovelscoop))
-		if(!istype(turf, /turf/open/floor/dirt))
+		if(!istype(turf, /turf/open/floor/dirt) && !istype(turf, /turf/open/floor/sand))
 			if(istype(turf, /turf/open/water))
 				qdel(heldclod)
 			else
@@ -110,6 +110,10 @@
 		if(!heldclod)
 			if(holie)
 				interact_with_atom(holie, user)
+			else if(istype(turf, /turf/open/floor/sand))
+				new /obj/item/natural/clod/sand(src)
+				playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
+				update_appearance(UPDATE_ICON_STATE)
 			else
 				if(istype(turf, /turf/open/floor/dirt/road))
 					new /obj/structure/closet/dirthole(turf)

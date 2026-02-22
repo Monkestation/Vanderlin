@@ -194,11 +194,11 @@
 	return hair_colors
 
 /datum/species/tieberian/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/other/tiefm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/male_names = file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/other/tiefm.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/tieberian/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/other/tieflast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/other/tieflast.txt')
 	return last_names
 
